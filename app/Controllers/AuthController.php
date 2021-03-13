@@ -181,7 +181,17 @@ class AuthController extends \MainController
             Base::addMsg('E-mail или пароль не верен', 'error');
             redirect('/login');
         } else {
-            $_SESSION['account'] = $userInfo;
+            
+            $user = [
+                'user_id'   => $userInfo['id'],
+                'login'     => $userInfo['login'],
+                'email'     => $userInfo['email'],
+                'name'      => $userInfo['name'],
+                'login'     => $userInfo['login'],
+                'avatar'    => $userInfo['avatar'],
+            ];
+            
+            $_SESSION['account'] = $user;
             redirect('/');
         }
       

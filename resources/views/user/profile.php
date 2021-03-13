@@ -13,7 +13,7 @@
 
             <br>
 
-            <label class="required">Присоединился::</label>
+            <label class="required">Присоединился:</label>
             <span class="d"><?= $data['created_at']; ?></span>
 
             <br>

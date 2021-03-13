@@ -1,6 +1,6 @@
 <?php $user = Request::getSession('account') ?? []; 
-    if(!empty($user['id'])) {
-         $usr['id'] = $user['id'];
+    if(!empty($user['user_id'])) {
+         $usr['id']    = $user['user_id'];
          $usr['login'] = $user['login'];
     } else {
         $usr['id'] = '0';

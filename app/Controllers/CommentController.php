@@ -74,7 +74,7 @@ class CommentController extends \MainController
         
         // id того, кто отвечает
         $account = Request::getSession('account');
-        $my_id = $account['id'];
+        $my_id = $account['user_id'];
         
         // записываем покммент
         CommentModel::commentAdd($post_id, $ip, $comm_id, $comment, $my_id);
@@ -96,8 +96,8 @@ class CommentController extends \MainController
         // id того, кто госует за комментарий
         $user = Request::getSession('account') ?? [];
         
-        if(!empty($user['id'])) {
-             $user_id = $user['id'];
+        if(!empty($user['user_id'])) {
+             $user_id = $user['user_id'];
         } else {
             $user_id = 0;
         }

@@ -95,18 +95,15 @@ header {
     margin-bottom: 10px;
 }
 footer {
-	clear: both;
 	color: #999;
-	overflow: hidden;
-	margin-top: 10px;
-    padding: 10px 0;
-
+	padding: 0 0 10px 0;
+    float: right;
 }
-.menu-footer a {
+footer a {
 	color: #999;
     padding-right: 0.75em;
 }
-.menu-footer a:hover {
+footer a:hover {
 	color: #666;
 }
 
@@ -218,7 +215,9 @@ header .wrap {
 
 /* Пагинация */
 .pagination {
-    margin-top: 20px;
+    margin: 10px;
+    float: left;
+    clear: both;
 }
 .pagination a {
     padding: 0 3px;
@@ -476,6 +475,7 @@ ol.comment-telo.three {
 }
 ol.comment-telo {
     list-style: none;
+    padding-left: 23px;
 }
 .comm-telo {
     margin-left: 40px;

@@ -28,7 +28,7 @@ class VotesCommController extends \MainController
 
         // id того, кто госует за комментарий
         $account = Request::getSession('account');
-        $user_id = $account['id'];
+        $user_id = $account['user_id'];
         
         // Информация об комментарии
         $comm_info = VotesCommentModel::infoComm($comm_id);

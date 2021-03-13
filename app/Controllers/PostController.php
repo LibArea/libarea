@@ -178,8 +178,8 @@ class PostController extends \MainController
         $comm = CommentModel::getCommentsPost($post['post_id']);
          
         $user = Request::getSession('account') ?? []; 
-        if(!empty($user['id'])) {
-            $usr['id'] = $user['id'];
+        if(!empty($user['user_id'])) {
+            $usr['id'] = $user['user_id'];
         } else {
             $usr['id'] = 0;
         }
@@ -191,8 +191,8 @@ class PostController extends \MainController
                 $row['avatar']  = 'noavatar.png';
             } 
  
-            $row['comment_on']    = $row['comment_on'];  
-            $row['avatar']        = $row['avatar'];
+            $row['comment_on'] = $row['comment_on'];  
+            $row['avatar']     = $row['avatar'];
             $row['content']    = $Parsedown->text($row['comment_content']);
             $row['date']       = Base::ru_date($row['comment_date']);
             $row['after']      = $row['comment_after'];
@@ -252,13 +252,13 @@ class PostController extends \MainController
             $row['title']   = $row['post_title'];
             $row['slug']    = $row['post_slug'];
             $row['date']    = Base::ru_date($row['post_date']);
-            $result[$ind] = $row;
+            $result[$ind]   = $row;
          
         }
  
         $data = [
-         'posts'     => $result,
-         'title'    => 'Посты   ' . $login,
+         'posts'    => $result,
+         'title'    => 'Посты ' . $login,
          'msg'      => Base::getMsg(),
         ]; 
         
@@ -300,7 +300,7 @@ class PostController extends \MainController
         
         // id того, кто добавляет пост
         $account = Request::getSession('account');
-        $post_user_id = $account['id'];
+        $post_user_id = $account['user_id'];
         
         // Проверяем длину title
         if (strlen($post_title) < 6 || strlen($post_title) > 320)
@@ -342,22 +342,22 @@ class PostController extends \MainController
     public function editPost() 
     {
         if(!Request::getSession('account')) {
-            redirect('/');
+           redirect('/');
         } 
         
-        $post_id    = Request::get('id');
+        $post_id = Request::get('id');
         
         // Получим пост
         $post = PostModel::getPostId($post_id); 
-        
+         
         if(!$post){
             redirect('/');
         }
         
         $account = Request::getSession('account');
-        
+ 
         // Редактировать может только автор
-        if ($post['post_user_id'] != $account['id']) {
+        if ($post['post_user_id'] != $account['user_id']) {
             redirect('/');
         }
         
@@ -365,7 +365,7 @@ class PostController extends \MainController
             'title'      => 'Изменить пост',
             'id'         => $post_id,
             'title_post' => $post['post_title'],
-            'content'    => $_POST['post_content'], // не фильтруем
+            'content'    => $post['post_content'], // не фильтруем
             'tag'        => TagModel::getTagPost($post_id),
             'msg'        => Base::getMsg(),
         ];
