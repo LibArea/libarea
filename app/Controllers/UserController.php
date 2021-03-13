@@ -98,6 +98,12 @@ class UserController extends \MainController
           Base::addMsg('Имя должно быть от 3 до ~ 10 символов', 'error');
           redirect('/users/setting');
         }
+        
+        if (strlen($about) > 450)
+        {
+          Base::addMsg('О себе должно быть меньше символов', 'error');
+          redirect('/users/setting');
+        }
    
         $account = Request::getSession('account'); 
         $login   = $account['login'];

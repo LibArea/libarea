@@ -15,7 +15,7 @@ define("HLEB_PARAMETERS_FOR_DB", [
         "mysql:host=127.0.0.1",
        // "port=3360",
         "dbname=emlog",
-        "charset=utf8",
+        "charset=utf8mb4", // таблица и база в этой кодировки.
         "user" => "root",
         "pass" => ""
     ],

@@ -124,7 +124,7 @@ class AuthController extends \MainController
             redirect('/register');
         }
 
-        if (strlen($password) < 8 || strlen($password) > 24)
+        if (strlen($password) < 8 || strlen($password) > 124)
         {
             Base::addMsg('Длина пароля должна быть от 8 до 24 знаков', 'error');
             redirect('/register');
@@ -132,7 +132,7 @@ class AuthController extends \MainController
 
         $user = UserModel::createUser($login,$email,$password);
 
-        redirect('/');
+        redirect('/login');
 
     }
 

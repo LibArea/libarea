@@ -13,24 +13,16 @@
          
                 </div>
                 <div class="boxline">
-                    <label for="name">Имя</label>
-                    <input type="text" name="name" id="name">
-         
-                </div>
-                <div class="boxline">
                     <label for="email">Email</label>
                     <input type="text" name="email" id="email">
-         
                 </div>
                 <div class="boxline">
                     <label for="password">Пароль</label>
                     <input type="password" name="password" id="password">
-         
                 </div>
                  <div class="boxline">
                     <label for="password_confirm">Повторите пароль</label>
                     <input type="password" name="password_confirm" id="password_confirm">
-         
                 </div>                    
                 <div class="boxline">
                     <div class="boxline">

@@ -2,10 +2,6 @@
     <section>
         <div class="wrap">
 
-         <div class="right"><center> <br> <img src="/svg/logo.svg" width="100" height="100" class="hl-block" alt="HL">
-            <br><small> <span class="mlogout"> Микрофреймворк HLEB</span>
-            <br><a href="/admin">админка (открыта)</a></small></center> </div>
-        
             <?php if (!$usr['id'] > 0) { ?>
                 <h1 class="top banner">Сайт в стадии разработке. Читать - <a href="/info/about">о нас</a>...</h1> 
             <?php } ?>    
@@ -20,34 +16,35 @@
                             <div data-id="<?= $post['post_id']; ?>" class="post-up-id"></div>
                             <div class="score"><?= $post['post_votes']; ?></div>
                         </div>
-                    
-                        <a class="u-url" href="/posts/<?= $post['post_slug']; ?>">
-                            <h3 class="titl"><?= $post['post_title']; ?></h3>
-                        </a>
-                        
-                        <?php foreach ($post['tags'] as  $tag) { ?>                
-                            <a class="tag tag_<?= $tag['tags_tip'] ?>" href="/t/<?= $tag['tags_slug']; ?>" title="<?= $tag['tags_name']; ?>">
-                                <?= $tag['tags_name']; ?>
+                        <div class="post-body">
+                            <a class="u-url" href="/posts/<?= $post['post_slug']; ?>">
+                                <h3 class="titl"><?= $post['post_title']; ?></h3>
                             </a>
-                        <?php } ?>
-                        
-                        <div class="footer">
-                            <img class="ava" src="/images/user/small/<?= $post['avatar']; ?>">
-                            <span class="user"> 
-                                <a href="/u/<?= $post['login']; ?>">
-                                    <?= $post['login']; ?>
-                                </a> 
-                            </span>
-                            <span class="date"> 
-                               <?= $post['date'] ?>
-                            </span>
-                            <?php if($post['num_comments'] !=0) { ?> 
-                                <span class="otst"> | </span>
-                                <a class="u-url" href="/posts/<?= $post['post_slug']; ?>">
-                                   <?= $post['num_comments']; ?>  <?= $post['post_comments']; ?>  
+                            
+                            <?php foreach ($post['tags'] as  $tag) { ?>                
+                                <a class="tag tag_<?= $tag['tags_tip'] ?>" href="/t/<?= $tag['tags_slug']; ?>" title="<?= $tag['tags_name']; ?>">
+                                    <?= $tag['tags_name']; ?>
                                 </a>
                             <?php } ?>
-                        </div>       
+                            
+                            <div class="footer">
+                                <img class="ava" src="/images/user/small/<?= $post['avatar']; ?>">
+                                <span class="user"> 
+                                    <a href="/u/<?= $post['login']; ?>">
+                                        <?= $post['login']; ?>
+                                    </a> 
+                                </span>
+                                <span class="date"> 
+                                   <?= $post['date'] ?>
+                                </span>
+                                <?php if($post['num_comments'] !=0) { ?> 
+                                    <span class="otst"> | </span>
+                                    <a class="u-url" href="/posts/<?= $post['post_slug']; ?>">
+                                       <?= $post['num_comments']; ?>  <?= $post['post_comments']; ?>  
+                                    </a>
+                                <?php } ?>
+                            </div>
+                        </div>                        
                     </div>
                 <?php } ?>
                 
@@ -69,9 +66,22 @@
 
             <?php } ?>
             </div>
-        
-            
-            
+           
+            <?php if($data['latest_comments']) { ?>
+                <div class="sidebar">
+                    <?php foreach ($data['latest_comments'] as  $comm) { ?>
+                        <div class="sb-telo">
+                            <div class="sb-date">
+                                <img class="ava" src="/images/user/small/<?= $comm['comment_avatar']; ?>">
+                                <?= $comm['comment_date']; ?>
+                            </div> 
+                            <a href="/posts/<?= $comm['post_slug']; ?>#comm_<?= $comm['comment_id']; ?>">
+                                <?= $comm['comment_content']; ?>...  
+                            </a>
+                       </div>
+                    <?php } ?>
+                </div>
+            <?php } ?>
         </div>
     <section>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

@@ -1,7 +1,6 @@
 <?php
 namespace App\Models;
 use XdORM\XD;
- 
 
 class CommentModel extends \MainModel
 {
@@ -62,6 +61,20 @@ class CommentModel extends \MainModel
 
         return true; 
 
+    }
+    
+    // Последние 5 комментариев
+    public static function latestComments() 
+    {
+        $q = XD::select('*')->from(['comments']);
+        $query = $q->leftJoin(['posts'])->on(['post_id'], '=', ['comment_post_id'])
+                 ->leftJoin(['users'])->on(['id'], '=', ['comment_user_id'])
+                 ->orderBy(['comment_id'])->desc()->limit(5);
+
+
+        $result = $query->getSelect();
+
+        return $result;   
     }
     
 }

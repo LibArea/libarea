@@ -1,7 +1,13 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 <section>
     <div class="wrap">
+        <div class="right"><center> <br> <img src="/svg/logo.svg" width="100" height="100" class="hl-block" alt="HL">
+            <br><small> <span class="mlogout"> Микрофреймворк HLEB</span>
+            <br><a href="/admin">админка (открыта)</a></small></center> </div>
+        
         <h1>О нас</h1>
+        
+        
         <div class="telo">
             <b>Задача 1</b> — изучить <a rel="nofollow noreferrer" target="_blank" href="https://phphleb.ru/"><i>PHP Микрофреймворк HLEB</i></a>: routes, get / post, ajax, csrf и т.д.
               <br><br>
