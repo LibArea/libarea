@@ -57,7 +57,9 @@ code {
 .telo.detail .post a, .comm-telo-body a {
 	text-decoration: underline;
 }
-
+.telo.detail {
+    margin-left: 5px;
+}
 blockquote {
     font-style: italic;
     margin: 0.25em 0 0 0.5em;
@@ -102,7 +104,7 @@ footer {
 }
 .menu-footer a {
 	color: #999;
-    padding-left: 0.75em;
+    padding-right: 0.75em;
 }
 .menu-footer a:hover {
 	color: #666;
@@ -112,17 +114,52 @@ footer {
     max-width: 1010px;
     margin-right: auto;
     margin-left: auto;
-    padding: 0 8px;
+    padding: 0 3px;
 }
 header .wrap {
 	display: flex;
-	width: calc(100% - 16px);
+	width: calc(100% - 6px);
 }
 
 .telo {
+    width: 75%;
     max-width: 750px;
+    float: left;
+}
+.sidebar {
+    width: 25%;
+    float: right;
+    margin: 10px 0;
 }
 
+.sb-telo {
+    margin-bottom: 15px;
+    border-left: 3px solid #a1a8ae;
+    margin-left: 20px;
+}
+
+.sb-telo .ava {
+    border-radius: 8px;
+    height: 16px;
+    margin-bottom: 2px;
+    margin-right: 2px;
+    vertical-align: middle;
+    width: 16px;
+}
+.sb-date {
+  margin-left: 20px; 
+    font-size: 13px;
+    color: #888;  
+}
+.sb-telo a {
+    color: #333;
+    font-size: 13px;
+    margin-left: 20px;
+    display: block;
+}
+.sb-telo a:hover {
+    color: #666;
+}
 .title, .menu  {
     margin-top: 8px;
 }
@@ -235,7 +272,7 @@ textarea:disabled {
 	background-color: #f0f0f0;
 }
 .telo textarea {
-    width: 100%;
+    width: 95%;
 }
 
 input[type="submit"]:focus,
@@ -345,6 +382,9 @@ input.form-about {width: 250px;}
 }
 
 /* Посты */
+.post-body {
+    margin-left: 40px;
+}
 .detail .post img {
     max-width: 600px;
 }
@@ -400,9 +440,10 @@ a.tag {
 	vertical-align: text-top;
     text-transform: lowercase;
 }
+
 a.tag_2 {
-	background-color: #ddebf9;
-	border-color: #b2ccf0;
+    background-color: #f9ddde;
+    border-color: #f0b2b8;
 }
 a.tag_3 {
 	background-color: #eee;
@@ -599,6 +640,8 @@ ol.comment-telo {
     .no-mob {
        display: none;
     }
+    .telo, .sidebar {width: 98%;}
+    .sb-telo {margin-left: 0;}
 }
 @media screen and (max-width: 610px) {
     div.box label, div.boxline label {
