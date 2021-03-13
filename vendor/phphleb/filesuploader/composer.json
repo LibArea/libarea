@@ -1,0 +1,17 @@
+{
+    "name": "phphleb/filesuploader",
+    "description": "Simple and reliable file downloader",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Foma Tuturov",
+            "email": "fomiash@yandex.ru"
+        }
+    ],
+    "require": {
+        "php": "^7.0.0"
+    },
+    "minimum-stability": "dev"
+
+}

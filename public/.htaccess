@@ -1,0 +1,21 @@
+AddDefaultCharset UTF-8
+<IfModule mod_headers.c>
+   Header always edit Set-Cookie ^(.*)$ $1;HttpOnly;Secure
+</IfModule>
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+          Options +FollowSymLinks -MultiViews -Indexes
+    </IfModule>
+    RewriteEngine on
+    #Switch to single sign-on
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>
+#Set caching on image files
+<ifModule mod_expires.c>
+    ExpiresActive On
+    AddType image/x-icon .ico
+    ExpiresByType image/x-icon "access plus 1 day"
+    ExpiresByType image/svg "access plus 1 hour"
+</ifModule>

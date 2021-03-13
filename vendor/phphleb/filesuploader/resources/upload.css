@@ -1,0 +1,76 @@
+.fu-main-form{
+    font-family: sans-serif;
+    font-size: 11px;
+    position: relative;
+    max-width: 600px;
+    background: #d5d5d5;
+    margin: 0 auto;
+    padding: 15px;
+    border: 1px solid black;
+}
+.fu-over-upload-block{
+    margin:0;
+    min-height: 30px;
+    border: 3px dashed #5c7d95;
+    padding-top: 15px;
+}
+.fu-main-form ol {
+    padding-left: 0;
+}
+.fu-main-form li, div > p {
+    background: #eee;
+    display: flex;
+    justify-content: stretch;
+    margin-top: 10px;
+    list-style-type: none;
+    border: 1px solid black;
+}
+.fu-main-form img {
+    height: 64px;
+}
+.fu-main-form p {
+    line-height: 32px;
+    padding-left: 10px;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+.fu-over-btn button {
+    height: auto;
+    cursor: pointer;
+    white-space: nowrap;
+    background-color: #20a530;
+    padding: 6px;
+    min-width: 100px;
+    border: 1px solid black;
+    border-radius: 3px;
+}
+.fu-over-btn button:hover {
+    background-color: #1d902b;
+    color: white;
+}
+.fu-over-btn button:active {
+    background-color: #1ea72f;
+    color: white;
+}
+#fu-image_uploads{
+    position:absolute;
+    top: 15px;
+    left: 15px;
+    width: calc(100% - 32px);
+    opacity: 0;
+    cursor: pointer;
+    height: 60px;
+}
+fu-red{
+    color: #d4220b;
+}
+.fu-disabled-btn, .fu-disabled-btn:hover{
+    background-color: #d7d7d7!important;
+    color: grey!important;
+    cursor: auto!important;
+}
+.fu-over-block{
+    padding: 5px;
+    background-color: #bed7e2;
+    text-align: center;
+}

@@ -1,0 +1,622 @@
+html {
+    height: 100%;
+    overflow-y:scroll;
+}
+body {
+    line-height: 1.46;
+    font-family: Helvetica Neue, Arial, sans-serif;
+    font-size: 0.95em;
+    color: #333;
+    min-height: 100%;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+a {
+	color: #2562dc;
+	cursor: pointer;
+    text-decoration: none;
+}
+a:hover, a:focus{
+    color:#3474f4;
+}
+.right {
+    float:right;
+}
+h1 {
+    font-weight: 300;
+    margin: 0 0 20px 0;
+}
+pre code {
+    background: #272822;
+    color: #fff;
+    padding: 2px 14px 2px 10px;
+    border-radius: 3px;
+    display: inline-block;
+}
+h1.top {
+    padding: 0 0 0 17px;
+    margin-bottom: 15px;
+}
+h1.top.banner {
+    font-size: 13px;
+    color: #717171;    
+}
+code {
+    color: #b63e56;
+    background: #f5f2f0;
+    padding: 1px 4px;
+}
+.telo.detail .post a, .comm-telo-body a {
+	text-decoration: underline;
+}
+
+blockquote {
+    font-style: italic;
+    margin: 0.25em 0 0 0.5em;
+    padding: 0 0 0 1em;
+    border-left: 2px solid gray;
+}
+
+.logo {
+    background: #f56400;
+    float: left;
+    width: 26px;
+    height: 26px;
+    padding: 1px;
+    margin: 0 11px 0 6px;
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+.logo:hover, .logo:focus {
+    color: #fff;
+}
+
+header {
+    height: 45px;
+    width: 100%;
+    z-index: 10;
+    display: flex;
+    margin-bottom: 10px;
+}
+footer {
+	clear: both;
+	color: #999;
+	overflow: hidden;
+	margin-top: 10px;
+    padding: 10px 0;
+
+}
+.menu-footer a {
+	color: #999;
+    padding-left: 0.75em;
+}
+.menu-footer a:hover {
+	color: #666;
+}
+
+.wrap {
+    max-width: 1010px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 0 8px;
+}
+header .wrap {
+	display: flex;
+	width: calc(100% - 16px);
+}
+
+.telo {
+    max-width: 750px;
+}
+
+.title, .menu  {
+    margin-top: 8px;
+}
+.menu-left  {
+    margin-top: 3px;
+}
+
+.menu-left ul > li {
+    float: left;
+    margin-right: 20px;
+}
+.menu  {
+    position: relative;
+    margin-left: auto;
+    align-items: center;
+}
+.menu ul, .menu-left ul{
+    text-align: center;
+    margin: 0 0 0 5px;
+    list-style: none;
+}
+.menu ul > li {
+    float: left;
+    margin-left: 20px;
+}
+.menu .md-icon {
+    margin-top: 2px;
+}
+.menu-lf {
+	margin-left: 20px;
+}
+.nav a {
+    color: #717171;
+}
+.nav a:hover {
+    color: #555;
+}
+.nav.active > a {
+    color: #333;
+}
+.nav .avatar {
+    display: flex;
+}
+.nav .ava img {
+    width: 21px;
+    height: 21px;
+    margin-left: 8px;
+    border-radius: 50%;
+}
+.nav a span{
+    display: inline-block;
+}
+.mlogout {
+    color: #717171;
+}
+
+/* Пагинация */
+.pagination {
+    margin-top: 20px;
+}
+.pagination a {
+    padding: 0 3px;
+    color: #888;
+}
+.pagination a:hover {
+    color: #666;
+}
+.pagination .page {
+    color: #f28500; 
+    padding: 0 3px;    
+}
+
+/* Формы */
+input,
+button,
+select,
+textarea {
+	color: #555;
+	background-color: white;
+	padding: 3px 5px;
+}
+textarea {
+	resize: vertical;
+}
+input[type="text"],
+input[type="search"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+textarea {
+	border: 1px solid #ccc;
+}
+input:focus, textarea:focus {
+	outline-style: solid;
+	outline-width: 2px;
+}
+input[type="checkbox"] {
+	margin-top: 0.5em;
+}
+select {
+	border: 1px solid #ccc;
+}
+input:focus,
+textarea:focus {
+	border-color: #888;
+	color: #303030;
+	outline: 0;
+}
+textarea:disabled {
+	background-color: #f0f0f0;
+}
+.telo textarea {
+    width: 100%;
+}
+
+input[type="submit"]:focus,
+button:focus {
+	border-color: #888;
+	outline: 1px solid #888;
+}
+
+/* these must be separate */
+::-webkit-input-placeholder {
+	color: #aaa;
+	font-style: italic;
+}
+:-moz-placeholder {
+	color: #aaa;
+	font-style: italic;
+}
+
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"],
+div.select2-choices {
+	display: inline-block;
+	padding: 2px 10px 2px 10px;
+	line-height: 18px;
+	color: #333333;
+	text-align: center;
+	background-color: #fafafa;
+	border: 1px solid #ccc;
+	border-bottom-color: #bbb;
+	cursor: pointer;
+}
+button:first-child,
+input[type="button"]:first-child,
+input[type="reset"]:first-child,
+input[type="submit"]:first-child {
+	margin-left: 0;
+}
+button:hover,
+input[type="button"]:hover,
+input[type="reset"]:hover,
+input[type="submit"]:hover {
+	color: #333333;
+	text-decoration: none;
+	background-color: #e6e6e6;
+}
+
+select {
+	margin-top: 3px;
+	min-width: 100px;
+}
+select:focus {
+	border-color: rgba(160,160,160,.8);
+	color: #303030;
+	outline: 0;
+}
+select::-moz-focus-inner {
+	border: 0;
+	outline: 0;
+}
+
+input:disabled,
+button:disabled {
+	background-color: #e9e9e9;
+	color: gray;
+}
+
+input:disabled {background: #f1f1f1;}
+input.form-about {width: 250px;}
+
+.box textarea {
+    margin-bottom: 4px;
+    width: 300px;
+}
+.box.create input.add {
+   width: 300px;
+}
+
+.head {
+    font-size: 21px;
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.md-icon {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: #666;
+    vertical-align: middle;
+}
+
+.nav.create .md-icon {
+    stroke: #f56400;
+}
+/* Диалог */
+.alert-danger {
+   color: #e83e8c;
+}
+.alert-success {
+   color: #339900;
+}
+.errors > ul > li {
+    color: #e83e8c;
+}
+
+/* Посты */
+.detail .post img {
+    max-width: 600px;
+}
+.post-telo {
+    margin-bottom: 12px;
+}
+.u-url .titl {
+    margin-bottom: 2px;
+    font-size: 16px;
+    display: inline;
+    margin-right: 4px;
+}
+.titl {
+    margin-bottom: 0px;
+}
+.post {
+
+}
+.date {
+    color: #717171;
+    text-transform: lowercase;
+    margin: 0 5px;
+}
+.footer a, .footer {
+    font-size: 13px;
+    color: #717171;
+}
+.footer a:hover {
+    color: #555;
+}
+.footer .ava {
+    border-radius: 8px;
+    height: 16px;
+    margin-bottom: 2px;
+    margin-right: 2px;
+    vertical-align: middle;
+    width: 16px;
+}
+.footer .user {
+
+}
+
+/* Теги */
+a.tag {
+	background-color: #fffcd7;
+	border: 1px solid #d5d458;
+	border-radius: 5px;
+	color: #555 !important;
+	font-size: 8pt;
+	margin-left: 0.25em;
+	padding: 0px 0.4em 1px 0.4em;
+	text-decoration: none;
+	vertical-align: text-top;
+    text-transform: lowercase;
+}
+a.tag_2 {
+	background-color: #ddebf9;
+	border-color: #b2ccf0;
+}
+a.tag_3 {
+	background-color: #eee;
+	border-color: #c8c8c8;
+}
+.tag-des {
+    margin-left:10px;
+}
+
+/* Комментарии */
+.authorpost {
+    color: #f8a853;
+}
+.comments_subtree:target {
+    -webkit-background-clip: content-box;
+    background-clip: content-box;
+    background-color: lightyellow;
+}
+.block-comments {
+  margin: 0 0 20px 0;
+}
+ol.comment-telo.one {
+    padding: 0;
+}
+ol.comment-telo.two {
+   margin-left: 25px;
+}
+ol.comment-telo.three {
+   margin-left: 50px;
+}
+ol.comment-telo {
+    list-style: none;
+}
+.comm-telo {
+    margin-left: 40px;
+    margin-right: 40px;
+}
+.comm-telo-body{
+    max-width: 750px;
+}
+.telo.comments .cm_add_link {
+    margin-left: 40px;
+}
+.comm-telo-body p {
+    margin: 5px 0;
+}
+.comm-header a, .comm-header {
+    font-size: 13px;
+    color: #888;
+}
+.comm-header a:hover {
+    color: #666;
+}
+.comm-header .ava {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+.comm-header .user {
+    margin: 0 5px;
+}
+.comments .voters {
+    margin-top: 3px;
+}
+.comments .comm-telo {
+    padding: 3px 0 0 0;
+}
+.otst {
+  margin: 0 1px;
+}
+.cm_addentry {
+    margin-left: 40px;
+}
+.addcomm {
+    color: #888;
+    font-size: 13px;
+}
+
+/* Profile */
+.avatar-user .md-icon {
+    width: 104px;
+    height: 104px;
+    fill: none;
+    stroke: #d3d3d3;
+    vertical-align: middle;
+    margin-top: 4px;
+}
+.gravatar {
+    border: 2px solid #fff;
+    border-radius: 100% 100%;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+    float: right;
+    height: 100px;
+    width: 100px;
+}
+.gravatar img {
+    border-radius: 50px;
+    height: 100px;
+    width: 100px;
+}
+
+.box .boxline {
+    clear: both;
+    margin-bottom: 0.5em;
+}
+.box label, .box .label_holder {
+    display: block;
+    float: left;
+    margin-bottom: 4px;
+}
+.box.wide label {
+    width: 12em;
+}
+.box label.required {
+    font-weight: bold;
+}
+.box label {
+    width: 7em;
+    line-height: 2em;
+    vertical-align: middle;
+}
+.box label, .box span, .box select, .box br {
+    line-height: 2em;
+}
+.box label {
+    display: block;
+    float: left;
+    margin-bottom: 4px;
+}
+.box br {
+    clear: left;
+}
+
+/* Изображаем смену цвета */
+.dark {
+    background: #333;
+    color: #fff;
+}
+.dark a {
+    color: #fff;
+}
+.dark a:hover {
+    color: #eee;
+}
+.dark header, .dark header a {
+    color: #eee;
+}
+.dark footer, .dark footer a, .na {
+    color: #999;
+}
+.dark .menu .md-icon {
+    stroke: #eee;
+}
+
+/* голосование */
+.voters {
+    float: left;
+    margin-top: 4px;
+    width: 40px;
+}
+ div.voters .comm-up-id, div.voters .post-up-id {
+    border-bottom-width: 11px;
+}
+.voters .comm-up-id, .voters .post-up-id {
+    border-color: transparent transparent #bbb transparent;
+    border-style: solid;
+    border-width: 6px;
+    width: 0px;
+    height: 0;
+    margin-bottom: 0px;
+    margin-left: 14px;
+    padding: 0;
+    display: block;
+}
+.voters .comm-up-id:hover, .voters .post-up-id:hover {
+    border-color: transparent transparent #f56400 transparent;
+}
+.voters .score {
+    color: #aaa;
+    font-size: 9pt;
+    margin-top: 1px;
+    margin-bottom: -3px;
+    text-align: center;
+}
+.voters.active .comm-up-id, .voters.active .score {
+    border-color: transparent transparent #ac130d transparent;
+    color: #ac130d;
+}
+
+ 
+
+@media screen and (max-width: 720px) {
+    .no-mob {
+       display: none;
+    }
+}
+@media screen and (max-width: 610px) {
+    div.box label, div.boxline label {
+        display: block;
+        width: 100% !important;
+    }
+    .box label {
+        margin-bottom: 0;
+    }
+    .no-mob-two {
+       display: none;
+    }
+}
+
+.msg {
+    background: #fcf8e4;
+    padding: 0 8px;
+    font-size: 14px;
+    color: green;
+    margin-bottom: 12px;
+}
