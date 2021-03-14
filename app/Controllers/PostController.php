@@ -159,12 +159,21 @@ class PostController extends \MainController
             $post['avatar'] = 'noavatar.png';
         }
   
+        // Выводить или нет? Что дает просмотр даты изменения?
+        // Учитывать ли изменение в сортировки и в оповещение в будущем...
+        if($post['post_date'] != $post['edit_date']) {
+            $post['edit_date'] = $post['edit_date'];
+        } else {
+            $post['edit_date'] = NULL;
+        }
+  
         $data_post = [
             'id'            => $post['post_id'],
             'title'         => $post['post_title'], 
             'content'       => $Parsedown->text($post['post_content']),
-            'post_user_id'         => $post['post_user_id'],
+            'post_user_id'  => $post['post_user_id'],
             'date'          => Base::ru_date($post['post_date']),
+            'edit_date'     => Base::ru_date($post['edit_date']),
             'slug'          => $post['post_slug'],
             'login'         => $post['login'],
             'avatar'        => $post['avatar'],
@@ -338,7 +347,7 @@ class PostController extends \MainController
         redirect('/');   
     }
     
-    // Редактирование поста
+    // Показ формы поста для редактирование
     public function editPost() 
     {
         if(!Request::getSession('account')) {
@@ -364,13 +373,61 @@ class PostController extends \MainController
         $data = [
             'title'      => 'Изменить пост',
             'id'         => $post_id,
-            'title_post' => $post['post_title'],
-            'content'    => $post['post_content'], // не фильтруем
+            'title_post' => htmlspecialchars($post['post_title']),
+            'content'    => $post['post_content'],
             'tag'        => TagModel::getTagPost($post_id),
             'msg'        => Base::getMsg(),
         ];
         
         return view("post/edit", ['data' => $data]);
+        
+    }
+    
+    // Запись при редактирование
+    public function editPostRecording() 
+    {
+        
+        if(!Request::getSession('account')) {
+           redirect('/');
+        } 
+        
+        $post_id       = Request::getPost('post_id');
+        $post_title    = Request::getPost('post_title');
+        $post_content  = Request::getPost('post_content');
+        
+        // Получим пост
+        $post = PostModel::getPostId($post_id); 
+         
+        if(!$post){
+            redirect('/');
+        }
+        
+        $account = Request::getSession('account');
+ 
+        // Редактировать может только автор
+        if ($post['post_user_id'] != $account['user_id']) {
+            redirect('/');
+        }
+        
+        // Проверяем длину title
+        if (strlen($post_title) < 6 || strlen($post_title) > 320)
+        {
+            Base::addMsg('Длина заголовка должна быть от 6 до 320 знаков', 'error');
+            redirect('/post/edit/' .$post_id);
+            return true;
+        }
+        
+        // Проверяем длину тела
+        if (strlen($post_content) < 6 || strlen($post_content) > 2500)
+        {
+            Base::addMsg('Длина заголовка должна быть от 6 до 2520 знаков', 'error');
+            redirect('/post/edit/' .$post_id);
+            return true;
+        }
+        
+        PostModel::editPost($post_id, $post_title, $post_content);
+        
+        redirect('/posts/' . $post['post_slug']);
         
     }
     

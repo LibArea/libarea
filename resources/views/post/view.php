@@ -3,25 +3,26 @@
     <div class="wrap">
 
         <div class="telo detail">
-            <h1 class="titl"><?php echo $data['post']['title']; ?></h1>
+            <h1 class="titl"><?= $data['post']['title']; ?></h1>
             <div class="footer">
-                <img class="ava" src="/images/user/small/<?php echo $data['post']['avatar']; ?>">
+                <img class="ava" src="/images/user/small/<?= $data['post']['avatar']; ?>">
                 <span class="user"> 
-                    <a href="/u/<?php echo $data['post']['login']; ?>"><?php echo $data['post']['login']; ?></a> 
+                    <a href="/u/<?= $data['post']['login']; ?>"><?= $data['post']['login']; ?></a> 
                 </span>
                 <span class="date"> 
-                    <?php echo $data['post']['date']; ?>
+                    <?= $data['post']['date']; ?>
+                    <?php if($data['post']['edit_date']) { ?> (изм. <?= $data['post']['edit_date']; ?>) <?php } ?>
                 </span>
                 <span class="date"> 
                     <?php foreach ($data['post']['tags'] as  $tag) { ?>                
-                        <a class="tag tag_<?php echo $tag['tags_tip']; ?>" href="/t/<?php echo $tag['tags_slug']; ?>" title="<?php echo $tag['tags_slug']; ?>">
-                        <?php echo $tag['tags_slug']; ?>
+                        <a class="tag tag_<?= $tag['tags_tip']; ?>" href="/t/<?= $tag['tags_slug']; ?>" title="<?= $tag['tags_name']; ?>">
+                        <?= $tag['tags_name']; ?>
                         </a>
                     <?php } ?>
                 </span>
                 <?php if($usr['login'] == $data['post']['login']) { ?>
                     <span class="date">
-                       &nbsp; <a href="/post/edit/<?php echo $data['post']['id']; ?>">
+                       &nbsp; <a href="/post/edit/<?= $data['post']['id']; ?>">
                             <svg class="md-icon moon">
                                 <use xlink:href="/svg/icons.svg#edit"></use>
                             </svg>
@@ -30,7 +31,7 @@
                 <?php } ?> 
             </div>   
             <div class="post">
-                <?php echo $data['post']['content']; ?> 
+                <?= $data['post']['content']; ?> 
             </div> 
 
             <?php if ($usr['id'] > 0) { ?>
@@ -38,7 +39,7 @@
             <?= csrf_field() ?>
                 <textarea rows="5" placeholder="Напишите, что нибудь..." name="comment" id="comment"></textarea>
                 <div> 
-                    <input type="hidden" name="post_id" id="post_id" value="<?php echo $data['post']['id']; ?>">
+                    <input type="hidden" name="post_id" id="post_id" value="<?= $data['post']['id']; ?>">
                     <input type="hidden" name="comm_id" id="comm_id" value="0">
                     <input type="submit" name="commit" value="Комментарий" class="comment-post">
                 </div> 
@@ -54,7 +55,7 @@
  
         <?php if (!empty($data['comments'])) { ?>
             <div class="telo comments">
-                <h2><?php echo $data['post']['num_comments'] ?> <?php echo $data['post']['post_comments'] ?></h2>
+                <h2><?= $data['post']['num_comments'] ?> <?= $data['post']['post_comments'] ?></h2>
                 
                 <?php foreach ($data['comments'] as  $comm) { ?>
                 <div class="block-comments">
@@ -64,23 +65,23 @@
                            <?php if ($comm['comm_vote_status'] || $usr['id'] == $comm['comment_user_id']) { ?>
                                 <div class="voters active">
                                     <div class="comm-up-id"></div>
-                                    <div class="score"><?php echo $comm['comment_votes']; ?></div>
+                                    <div class="score"><?= $comm['comment_votes']; ?></div>
                                 </div>
                             <?php } else { ?>
-                                <div id="up<?php echo $comm['comment_id']; ?>" class="voters">
-                                    <div data-id="<?php echo $comm['comment_id']; ?>" class="comm-up-id"></div>
+                                <div id="up<?= $comm['comment_id']; ?>" class="voters">
+                                    <div data-id="<?= $comm['comment_id']; ?>" class="comm-up-id"></div>
                                     <div class="score"><?= $comm['comment_votes']; ?></div>
                                 </div>
                             <?php } ?>
 
                             <div class="comm-telo">
                                 <div class="comm-header">
-                                    <img class="ava" src="/images/user/small/<?php echo $comm['avatar'] ?>">
+                                    <img class="ava" src="/images/user/small/<?= $comm['avatar'] ?>">
                                     <span class="user"> 
-                                        <a href="/u/<?php echo $comm['login']; ?>"><?php echo $comm['login']; ?></a> 
+                                        <a href="/u/<?= $comm['login']; ?>"><?= $comm['login']; ?></a> 
                                     </span> 
                                     <span class="date">  
-                                       <?php echo $comm['date']; ?>
+                                       <?= $comm['date']; ?>
                                     </span>
                                     <span class="date">  
                                         <?php if ($data['post']['post_user_id'] == $comm['comment_user_id']) { ?><span class="authorpost">&#x21af;</span> <?php } ?>
@@ -95,14 +96,14 @@
                                     <?php } ?> 
                                 </div>
                                 <div class="comm-telo-body">
-                                    <?php echo $comm['content'] ?> 
+                                    <?= $comm['content'] ?> 
                                 </div>
                             </div>
                             <span id="cm_add_link<?php $comm['comment_id']; ?>" class="cm_add_link">
-                                <a data-post_id="<?php echo $data['post']['id']; ?>" data-id="<?php echo $comm['comment_id']; ?>" class="addcomm">Ответить</a>
+                                <a data-post_id="<?= $data['post']['id']; ?>" data-id="<?= $comm['comment_id']; ?>" class="addcomm">Ответить</a>
                             </span>
 
-                            <div id="cm_addentry<?php echo $comm['comment_id']; ?>" class="reply"></div> 
+                            <div id="cm_addentry<?= $comm['comment_id']; ?>" class="reply"></div> 
                         
                         </li>
                     </ol>

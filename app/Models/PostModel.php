@@ -125,4 +125,14 @@ class PostModel extends \MainModel
       
     }
     
+    // Редактирование поста
+    public static function editPost($post_id, $post_title, $post_content)
+    {
+        $edit_date = date("Y-m-d H:i:s");
+       
+        XD::update(['posts'])->set(['post_title'], '=', $post_title, ',', ['edit_date'], '=', $edit_date, ',', ['post_content'], '=', $post_content)
+        ->where(['post_id'], '=', $post_id)->run();
+ 
+        return true;
+    }
 }

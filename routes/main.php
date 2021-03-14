@@ -63,6 +63,7 @@ Route::get('/post/add')->controller('PostController@addPost');
 Route::type('post')->protect()->get('/post/create')->controller('PostController@createPost');
 // Редактирование поста
 Route::get('/post/edit/{id}')->controller('PostController@editPost');
+Route::type('post')->protect()->get('/post/editpost/{id}')->controller('PostController@editPostRecording');
 
 // Пагинация и главная страница
 Route::get('/{page?}')->controller('PostController');
