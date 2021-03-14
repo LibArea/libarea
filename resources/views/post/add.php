@@ -2,6 +2,10 @@
 <section>
     <div class="wrap">
 
+        <link rel="stylesheet" href="/css/select2.css">
+        <script src="/js/select2.min.js"></script>
+        <script src="/js/post.js"></script>
+
         <h2><?php echo $data['title']; ?></h2>
 
         <div class="box create">

@@ -337,5 +337,25 @@ class Base
             return $gram_num_record;
     }
     
+    # Регистрация информации о пользователе
+    protected function loginCookie($Key, $uid, $login, $role)
+    {
+        $loginTime = time();
+
+        setcookie('dev_login', $login, $loginTime + 604800, '/');
+
+        $loginEncode = $this->secret->encrypt(json_encode(array(
+            $uid,
+
+            $login,
+
+            $role,
+
+            $loginTime
+        )), $Key);
+
+        setcookie('dev_secure', $loginEncode, $loginTime + 604800, '/');
+    } 
+    
     
 }

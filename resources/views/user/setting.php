@@ -6,7 +6,7 @@
         
         <img alt="Профиль" src="/images/user/<?php echo $data['avatar']; ?>">
          
-        <div class="box wide">
+        <div class="box setting">
             <form action="/users/setting/edit" method="post" enctype="multipart/form-data">
             <?php csrf_field(); ?>
                 <div class="boxline">

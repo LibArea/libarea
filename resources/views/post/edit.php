@@ -2,8 +2,9 @@
 <section>
     <div class="wrap">
 
-        <link rel="stylesheet" href="/assets/css/select2.css">
-        <script src="/assets/js/select2.min.js"></script>
+        <link rel="stylesheet" href="/css/select2.css">
+        <script src="/js/select2.min.js"></script>
+        <script src="/js/post.js"></script>
 
         <h2><?php echo $data['title']; ?></h2>
 
@@ -39,16 +40,6 @@
             </form>
         </div>
 
-        <script>
-            $(".js-example-placeholder-multiple").select2({
-                    tags: true,
-                    tokenSeparators: [',', ' '],
-                    placeholder: {
-                    text: 'Выберите теги'
-                }
-            });
-        </script>
-        
     </div>
 </section>
 <?php include TEMPLATE_DIR . '/footer.php'; ?> 

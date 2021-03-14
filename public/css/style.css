@@ -343,11 +343,17 @@ button:disabled {
 input:disabled {background: #f1f1f1;}
 input.form-about {width: 250px;}
 
-.box textarea {
+/* Редактирование и добавление поста */
+.box.create textarea {
     margin-bottom: 4px;
-    width: 300px;
+    width: 75%;
+    height: 124px;
 }
 .box.create input.add {
+   width: 75%;
+}
+
+.box.setting textarea, .box.setting input {
    width: 300px;
 }
 
@@ -450,6 +456,14 @@ a.tag_3 {
 }
 .tag-des {
     margin-left:10px;
+}
+.tag-bg {
+    background: #f0f0df;
+    color: #333;
+    font-size: 13px;
+    width: 180px;
+    padding: 5px;
+    text-align: center;
 }
 
 /* Комментарии */

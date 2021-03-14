@@ -53,10 +53,12 @@ class TagController extends \MainController
             if(!$row['avatar'] ) {
                 $row['avatar']  = 'noavatar.png';
             }  
-            $row['avatar']     = $row['avatar'];
-            $row['post_votes'] = $row['post_votes'];
-            $row['date']       = $row['post_date'];
-            $result[$ind]      = $row;
+            $row['avatar']        = $row['avatar'];
+            $row['post_votes']    = $row['post_votes'];
+            $row['date']          = $row['post_date'];
+            $row['num_comments']  = $row['post_comments']; 
+            $row['post_comments'] = Base::ru_num('comm', $row['post_comments']);
+            $result[$ind]         = $row;
          
         }  
 
