@@ -100,11 +100,11 @@ footer {
     float: right;
 }
 footer a {
-	color: #999;
+	color: #666;
     padding-right: 0.75em;
 }
 footer a:hover {
-	color: #666;
+	color: #999;
 }
 
 .wrap {

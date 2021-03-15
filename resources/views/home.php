@@ -6,6 +6,7 @@
         <?php } ?>    
     
         <div class="telo">
+        
         <?php if (!empty($data['posts'])) { ?>
       
             <?php foreach ($data['posts'] as  $post) { ?>
@@ -17,17 +18,17 @@
                     </div>
                     <div class="post-body">
                         <a class="u-url" href="/posts/<?= $post['post_slug']; ?>">
-                            <h3 class="titl"><?= $post['post_title']; ?></h3>
+                            <h2 class="titl"><?= $post['post_title']; ?></h2>
                         </a>
-                        
+                   
                         <?php foreach ($post['tags'] as  $tag) { ?>                
                             <a class="tag tag_<?= $tag['tags_tip'] ?>" href="/t/<?= $tag['tags_slug']; ?>" title="<?= $tag['tags_name']; ?>">
                                 <?= $tag['tags_name']; ?>
                             </a>
                         <?php } ?>
-                        
+                       
                         <div class="footer">
-                            <img class="ava" src="/images/user/small/<?= $post['avatar']; ?>">
+                            <img class="ava" alt="<?= $post['login']; ?>" src="/images/user/small/<?= $post['avatar']; ?>">
                             <span class="user"> 
                                 <a href="/u/<?= $post['login']; ?>">
                                     <?= $post['login']; ?>
@@ -47,7 +48,6 @@
                 </div>
             <?php } ?>
             
-         
         <?php } else { ?>
 
             <h3>Нет постов</h3>
@@ -61,8 +61,8 @@
             <div class="sidebar no-mob">
                 <?php foreach ($data['latest_comments'] as  $comm) { ?>
                     <div class="sb-telo">
-                        <div class="sb-date">
-                            <img class="ava" src="/images/user/small/<?= $comm['comment_avatar']; ?>">
+                        <div class="sb-date"> 
+                            <img class="ava" alt="<?= $comm['login']; ?>" src="/images/user/small/<?= $comm['comment_avatar']; ?>">
                             <?= $comm['comment_date']; ?>
                         </div> 
                         <a href="/posts/<?= $comm['post_slug']; ?>#comm_<?= $comm['comment_id']; ?>">
