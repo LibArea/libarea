@@ -20,27 +20,8 @@ class PostController extends \MainController
             $page = 1;
         }
 
-        if (!$page) {
-            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
-            hl_preliminary_exit();
-        }
-        
-        // Разное поведение для ленты и отображение постов в зависимости от auth и выбора feed ленты
-        // Возможно выбирать feed ленту (которая отличается отписками на тегов)
-        if (!Request::getSession('account')) {
-            $pagesCount = PostModel::getPostAllCount(); 
-            $posts      = PostModel::getPostAll($page);
-        } else {
-            // Получаем все теги отписанные участником
-            $account    = Request::getSession('account');
-            $tags_user  = TagModel::getTagsUser($account['user_id']);
-            
-            $pagesCount = PostModel::getPostFeedCount(); 
-            $posts      = PostModel::getPostFeed($page, $tags_user);
-        }
-        
-        // print_r($posts);
-        // exit;
+        $pagesCount = PostModel::getPostAllCount(); 
+        $posts      = PostModel::getPostAll($page);
         
         $result = Array();
         foreach($posts as $ind => $row){
@@ -48,7 +29,7 @@ class PostController extends \MainController
             if(!$row['avatar'] ) {
                 $row['avatar'] = 'noavatar.png';
             } 
-            //$row['tags']          =
+ 
             $row['tags']          = TagModel::getTagPost($row['post_id']);
             $row['avatar']        = $row['avatar'];
             $row['title']         = $row['post_title'];

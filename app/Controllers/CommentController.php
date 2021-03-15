@@ -32,7 +32,6 @@ class CommentController extends \MainController
          
         }
     
-
         $data = [
             'comments' => $result,
             'title' => 'Комментарии',
@@ -41,9 +40,7 @@ class CommentController extends \MainController
  
         return view("comment/all", ['data' => $data]);
         
-        
     }
-
 
     // Добавление комментария
     public function create()
@@ -76,7 +73,7 @@ class CommentController extends \MainController
         $account = Request::getSession('account');
         $my_id = $account['user_id'];
         
-        // записываем покммент
+        // Записываем покммент
         CommentModel::commentAdd($post_id, $ip, $comm_id, $comment, $my_id);
         
         // Пересчитываем количество комментариев для поста + 1
@@ -86,7 +83,7 @@ class CommentController extends \MainController
 
     }
 
-   // Покажем форму ответа
+    // Покажем форму ответа
     public function addform()
 	{
      
@@ -99,10 +96,9 @@ class CommentController extends \MainController
         if(!empty($user['user_id'])) {
              $user_id = $user['user_id'];
         } else {
-            $user_id = 0;
+            $user_id  = 0;
         }
         
-     
         $data = [
             'comm_id' => $id,
             'post_id' => $post_id,
@@ -113,7 +109,7 @@ class CommentController extends \MainController
         return view("comment/addform", ['data' => $data]);
     }
 
-
+    // Комментарии участника
     public function userComments()
     {
         
@@ -145,18 +141,17 @@ class CommentController extends \MainController
          
         }
         
- 
         $data = [
-            'comments' => $result,
-            'title' => 'Комментарии ' . $login,
-            'msg'      => Base::getMsg(),
+            'comments'  => $result,
+            'title'     => 'Комментарии ' . $login,
+            'msg'       => Base::getMsg(),
         ]; 
         
         return view("comment/commuser", ['data' => $data]);
          
     }
 
-    //  comment_del 0/1 
+    // Удаление комментария 0/1 
     public function delete($id)
     {
 

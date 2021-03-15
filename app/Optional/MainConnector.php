@@ -25,7 +25,7 @@ class MainConnector implements Connector
             "Parsedown" => "vendor/parsedown/Parsedown.php",
             "Base" => "app/Base.php",
             "DB" => "database/DB.php",
-            "Phphleb\Debugpan\DPanel" => "vendor/phphleb/debugpan/DPanel.php",
+          //  "Phphleb\Debugpan\DPanel" => "vendor/phphleb/debugpan/DPanel.php",
             "XdORM\XD" => "vendor/phphleb/xdorm/XD.php",
             // ... //
         ];

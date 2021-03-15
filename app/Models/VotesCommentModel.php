@@ -8,7 +8,7 @@ class VotesCommentModel extends \MainModel
 {
 
     // Информация по комментарию по его id
-     public static function infoComm($comm_id) {
+    public static function infoComm($comm_id) {
 
          $q = XD::select('*')->from(['comments']);
          $query = $q->where(['comment_id'], '=', $comm_id);

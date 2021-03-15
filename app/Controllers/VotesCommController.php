@@ -38,17 +38,12 @@ class VotesCommController extends \MainController
            return false;
         }    
                       
-        //Проверяем, голосовал ли пользователь за комментарий
+        // Проверяем, голосовал ли пользователь за комментарий
         $userup = VotesCommentModel::getVoteStatus($comm_info['comment_id'], $user_id);   
         
         if($userup == 1) {
             
             // далее удаление строки в таблице голосования за комментарии
-            // $db      = \Config\Database::connect();
-            // $builder = $db->table('votes_comm');
-            // $builder->where('votes_comm_item_id', $comm_info->comment_id);
-            // $builder->where('votes_comm_user_id', $user_id);
-            // $builder->delete();
             // далее уменьшаем на -1 количество комментариев в самом комментарии
             // см. код ниже. А пока:
             

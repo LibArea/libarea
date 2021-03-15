@@ -12,18 +12,6 @@ class TagController extends \MainController
     public function index()
     {
 
-
-       /* $result = Array();
-        foreach($query->getResult()as $ind => $row){
-
-            $row->name        = $row->tags_name;
-            $row->slug        = $row->tags_slug;
-            $row->description = $row->tags_description;
-            $row->tip         = $row->tags_tip;
-            $result[$ind]          = $row;
-         
-        } */
-
         $data = [
             'tags'  => TagModel::getTagHome(),
             'title' => 'Теги сайта',
@@ -62,12 +50,23 @@ class TagController extends \MainController
          
         }  
 
-
+        // Отписан участник от тега или нет
+        if(Request::getSession('account')) {
+            
+            $user = Request::getSession('account');
+            $tag_hide = TagModel::getMyTagHide($result[0]['tags_id'], $user['user_id']);
+            
+        } else {
+             $tag_hide = NULL;
+             
+        }
+        
         $data = [
-            'posts' => $result,
-            'tag'   => $tag,
-            'title' => 'Посты по тегу',
-            'msg'   => Base::getMsg(),
+            'posts'    => $result,
+            'tag'      => $tag,
+            'tag_hide' => $tag_hide,
+            'title'    => 'Посты по тегу',
+            'msg'      => Base::getMsg(),
         ];
 
  
@@ -85,6 +84,25 @@ class TagController extends \MainController
         ]; 
  
         return view("tag/formatag", ['data' => $data]);
+        
+    }
+    
+    // Отписка тегов
+    public function hide()
+    {
+
+        if (!Request::getSession('account'))
+        {
+            return false;
+        } else {
+            $account = Request::getSession('account');
+        } 
+        
+        $tag_id = Request::get('id'); 
+        
+        TagModel::TagHide($tag_id, $account['user_id']);
+        
+        return true;
         
     }
 

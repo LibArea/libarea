@@ -50,6 +50,9 @@ Route::get('/comments')->controller('CommentController');
 Route::get('/tags')->controller('TagController');
 Route::get('/t/{tag}')->controller('TagController@tagPosts')->where(['tag' => '[A-Za-z0-9]+']);
 
+// Подписываемся, отписываемся на тег
+Route::type('post')->get('/tags/hide/{id}')->controller('TagController@hide')->where(['id' => '[0-9]+']);
+
 // Голосуем за комментарии
 Route::type('post')->get('/votes/{id}')->controller('VotesCommController@votes')->where(['id' => '[0-9]+']);
  
@@ -66,4 +69,4 @@ Route::get('/post/edit/{id}')->controller('PostController@editPost');
 Route::type('post')->protect()->get('/post/editpost/{id}')->controller('PostController@editPostRecording');
 
 // Пагинация и главная страница
-Route::get('/{page?}')->controller('PostController');
+Route::get('/{page?}')->protect()->controller('PostController')->where(['page' => '[0-9]+']);
