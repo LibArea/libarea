@@ -46,12 +46,12 @@ Route::get('/newest/{login}')->controller('PostController@userPosts')->where(['l
 // Все комментарии
 Route::get('/comments')->controller('CommentController');
 
-// Теги
-Route::get('/tags')->controller('TagController');
-Route::get('/t/{tag}')->controller('TagController@tagPosts')->where(['tag' => '[A-Za-z0-9]+']);
+// Пространства
+Route::get('/space')->controller('SpaceController');
+Route::get('/s/{space}')->controller('SpaceController@spacePosts')->where(['space' => '[A-Za-z0-9]+']);
 
 // Подписываемся, отписываемся на тег
-Route::type('post')->get('/tags/hide/{id}')->controller('TagController@hide')->where(['id' => '[0-9]+']);
+Route::type('post')->get('/space/hide/{id}')->controller('SpaceController@hide')->where(['id' => '[0-9]+']);
 
 // Голосуем за комментарии
 Route::type('post')->get('/votes/{id}')->controller('VotesCommController@votes')->where(['id' => '[0-9]+']);

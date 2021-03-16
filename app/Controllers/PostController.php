@@ -3,7 +3,7 @@
 namespace App\Controllers;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\PostModel;
-use App\Models\TagModel;
+use App\Models\SpaceModel;
 use App\Models\CommentModel;
 use App\Models\VotesCommentModel;
 use Base;
@@ -25,22 +25,18 @@ class PostController extends \MainController
             hl_preliminary_exit();
         }
         
-        // Разное поведение для ленты и отображение постов в зависимости от auth и выбора feed ленты
-        // Возможно выбирать feed ленту (которая отличается отписками на тегов)
-        if (!Request::getSession('account')) {
-            $pagesCount = PostModel::getPostAllCount(); 
-            $posts      = PostModel::getPostAll($page);
-        } else {
+        if(Request::getSession('account')){
             // Получаем все теги отписанные участником
             $account    = Request::getSession('account');
-            $tags_user  = TagModel::getTagsUser($account['user_id']);
-            
-            $pagesCount = PostModel::getPostFeedCount(); 
-            $posts      = PostModel::getPostFeed($page, $tags_user);
+            $space_user = SpaceModel::getSpaceUser($account['user_id']);
+            $user_id = $account['user_id'];
+        } else {
+            $space_user = [];
+            $user_id = 0;
         }
-        
-        // print_r($posts);
-        // exit;
+            
+        $pagesCount = PostModel::getPostHomeCount($space_user); 
+        $posts      = PostModel::getPostHome($page, $space_user);
         
         $result = Array();
         foreach($posts as $ind => $row){
@@ -48,8 +44,6 @@ class PostController extends \MainController
             if(!$row['avatar'] ) {
                 $row['avatar'] = 'noavatar.png';
             } 
-            //$row['tags']          =
-            $row['tags']          = TagModel::getTagPost($row['post_id']);
             $row['avatar']        = $row['avatar'];
             $row['title']         = $row['post_title'];
             $row['slug']          = $row['post_slug']; 
@@ -61,6 +55,8 @@ class PostController extends \MainController
         }  
 
         $latest_comments = CommentModel::latestComments();
+        
+        $space_hide      = SpaceModel::getSpaceUser($user_id);
         
         $result_comm = Array();
         foreach($latest_comments as $ind => $row){
@@ -79,6 +75,7 @@ class PostController extends \MainController
         $data = [
             'title'            => 'Посты - главная страница сайта',
             'posts'            => $result,
+            'space_hide'       => $space_hide,
             'latest_comments'  => $result_comm,
             'msg'              => Base::getMsg(),
             'pagesCount'       => $pagesCount,
@@ -100,7 +97,6 @@ class PostController extends \MainController
                 $row['avatar'] = 'noavatar.png';
             } 
  
-            $row['tags']          = TagModel::getTagPost($row['post_id']);
             $row['avatar']        = $row['avatar'];
             $row['title']         = $row['post_title'];
             $row['slug']          = $row['post_slug'];
@@ -112,10 +108,11 @@ class PostController extends \MainController
         }  
 
        $data = [
-         'title'     => 'Все посты',
+         'title'            => 'Все посты',
          'latest_comments'  => 0,
-         'posts'     => $result,
-         'msg'       => Base::getMsg(),
+         'space_hide'       => 0,
+         'posts'            => $result,
+         'msg'              => Base::getMsg(),
        ];
 
         return view("home", ['data' => $data]);
@@ -133,7 +130,6 @@ class PostController extends \MainController
                 $row['avatar'] = 'noavatar.png';
             } 
  
-            $row['tags']          = TagModel::getTagPost($row['post_id']);
             $row['avatar']        = $row['avatar'];
             $row['title']         = $row['post_title'];
             $row['slug']          = $row['post_slug'];
@@ -145,11 +141,12 @@ class PostController extends \MainController
         }  
 
        $data = [
-         'title'      => 'Все посты',
+         'title'            => 'Все посты',
          'latest_comments'  => 0,
-         'posts'      => $result,
-         'pagesCount' => 0,
-         'msg'        => Base::getMsg(),
+         'space_hide'       => 0,
+         'posts'            => $result,
+         'pagesCount'       => 0,
+         'msg'              => Base::getMsg(),
        ];
 
         return view("home", ['data' => $data]);
@@ -196,9 +193,11 @@ class PostController extends \MainController
             'slug'          => $post['post_slug'],
             'login'         => $post['login'],
             'avatar'        => $post['avatar'],
-            'num_comments'  => $post['post_comments'],            
+            'num_comments'  => $post['post_comments'],   
+            'space_tip'     => $post['space_tip'],
+            'space_slug'    => $post['space_slug'],
+            'space_name'    => $post['space_name'],            
             'post_comments' => Base::ru_num('comm', $post['post_comments']), 
-            'tags'          => TagModel::getTagPost($post['post_id']), 
             
         ];
         
@@ -275,7 +274,6 @@ class PostController extends \MainController
                 $row['avatar']  = 'noavatar.png';
             } 
  
-            $row['tags']    = TagModel::getTagPost($row['post_id']);
             $row['avatar']  = $row['avatar'];
             $row['title']   = $row['post_title'];
             $row['slug']    = $row['post_slug'];
@@ -324,7 +322,7 @@ class PostController extends \MainController
         $post_ip_int = Request::getRemoteAddress();
         
         // Получаем id тега
-        $tag_id = (int)Request::getPost('tag');
+        $space_id = (int)Request::getPost('space');
         
         // id того, кто добавляет пост
         $account = Request::getSession('account');
@@ -347,7 +345,7 @@ class PostController extends \MainController
         }
         
         // Проверяем выбор тега
-        if ($tag_id == '')
+        if ($space_id == '')
         {
             Base::addMsg('Выберите тег', 'error');
             redirect('/post/add/');
@@ -357,12 +355,9 @@ class PostController extends \MainController
         // Получаем SEO поста
         $post_slug = Base::seo($post_title); 
         
-        // Записываем пост и возвращаем id добавленного поста
-        $post_last_id = PostModel::AddPost($post_title, $post_content, $post_slug, $post_ip_int, $post_user_id);
+        // Записываем пост
+        PostModel::AddPost($post_title, $post_content, $post_slug, $post_ip_int, $post_user_id, $space_id);
         
-        // Добавляем теги
-        TagModel::TagsAddPosts($tag_id, $post_last_id);
-    
         redirect('/');   
     }
     
@@ -394,7 +389,9 @@ class PostController extends \MainController
             'id'         => $post_id,
             'title_post' => htmlspecialchars($post['post_title']),
             'content'    => $post['post_content'],
-            'tag'        => TagModel::getTagPost($post_id),
+            'space_tip'     => $post['space_tip'],
+            'space_slug'    => $post['space_slug'],
+            'space_name'    => $post['space_name'],  
             'msg'        => Base::getMsg(),
         ];
         

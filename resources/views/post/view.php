@@ -1,7 +1,6 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 <section>
     <div class="wrap">
-
         <div class="telo detail">
             <h1 class="titl"><?= $data['post']['title']; ?></h1>
             <div class="footer">
@@ -14,11 +13,9 @@
                     <?php if($data['post']['edit_date']) { ?> (изм. <?= $data['post']['edit_date']; ?>) <?php } ?>
                 </span>
                 <span class="date"> 
-                    <?php foreach ($data['post']['tags'] as  $tag) { ?>                
-                        <a class="tag tag_<?= $tag['tags_tip']; ?>" href="/t/<?= $tag['tags_slug']; ?>" title="<?= $tag['tags_name']; ?>">
-                        <?= $tag['tags_name']; ?>
-                        </a>
-                    <?php } ?>
+                    <a class="space space_<?= $data['post']['space_tip'] ?>" href="/s/<?= $data['post']['space_slug']; ?>" title="<?= $data['post']['space_name']; ?>">
+                        <?= $data['post']['space_name']; ?>
+                    </a>
                 </span>
                 <?php if($usr['login'] == $data['post']['login']) { ?>
                     <span class="date">

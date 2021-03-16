@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost
--- Время создания: Мар 13 2021 г., 16:05
+-- Время создания: Мар 16 2021 г., 15:26
 -- Версия сервера: 8.0.23-0ubuntu0.20.04.1
 -- Версия PHP: 7.4.3
 
@@ -38,7 +38,8 @@ CREATE TABLE `auth_logins` (
   `date` datetime NOT NULL,
   `successfull` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
+ 
+-- --------------------------------------------------------
 
 --
 -- Структура таблицы `auth_tokens`
@@ -52,6 +53,7 @@ CREATE TABLE `auth_tokens` (
   `expires` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
 
 --
 -- Структура таблицы `comments`
@@ -73,7 +75,6 @@ CREATE TABLE `comments` (
   `comment_del` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-
 --
 -- Структура таблицы `posts`
 --
@@ -82,9 +83,7 @@ CREATE TABLE `posts` (
   `post_id` int UNSIGNED NOT NULL,
   `post_title` varchar(250) NOT NULL,
   `post_slug` varchar(128) NOT NULL,
-  `post_cat_id` varchar(128) DEFAULT NULL,
-  `post_blog_id` int DEFAULT NULL,
-  `post_src` enum('web','api','mobile','phone') NOT NULL DEFAULT 'web',
+  `post_space_id` int NOT NULL DEFAULT '0',
   `post_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `edit_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `post_user_id` int UNSIGNED NOT NULL,
@@ -99,38 +98,49 @@ CREATE TABLE `posts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Структура таблицы `taggings`
+-- Дамп данных таблицы `posts`
 --
 
-CREATE TABLE `taggings` (
-  `taggings_id` int NOT NULL,
-  `taggings_tag_id` int NOT NULL,
-  `taggings_post_id` int NOT NULL
+INSERT INTO `posts` (`post_id`, `post_title`, `post_slug`, `post_space_id`, `post_date`, `edit_date`, `post_user_id`, `post_visible`, `post_ip_int`, `post_votes`, `post_karma`, `post_comments`, `post_content`, `post_top`, `post_is_delete`) VALUES
+(1, 'Муха села на варенье, Вот и всё стихотворенье...', 'muha-stih', 1, '2021-02-28 12:08:09', '2021-03-05 10:05:25', 1, 'all', NULL, 0, 0, 0, '> \"Нет не всё!\" - сказала Муха,\r\n\r\n> Почесала себе брюхо,\r\n\r\n> Свесив с блюдца две ноги,\r\n\r\n> Мне сказала:\"Погоди!\r\n\r\n> Прежде чем сесть на варенье,\r\n\r\n> Я прочла стихотворенье,\r\n\r\n> Неизвестного поэта,\r\n\r\n> Написавшего про это.\r\n\r\n\r\n## Заголовок\r\n\r\nЧто-то в модели много кода:\r\n\r\n```\r\n$db = \\Config\\Database::connect();\r\n$builder = $db->table(\'Posts AS a\');\r\n$builder->select(\'a.*, b.id, b.nickname, b.avatar\');\r\n$builder->join(\"users AS b\", \"b.id = a.post_user_id\");\r\n$builder->where(\'a.post_slug\', $slug);\r\n$builder->orderBy(\'a.post_id\', \'DESC\');\r\n```\r\n\r\nВот. Это первый пост.', 0, 0),
+(2, 'Второй пост...', 'vtoroi-post', 2, '2021-02-28 12:15:58', '2021-03-05 10:05:25', 2, 'all', NULL, 0, 0, 0, 'Не будет тут про муху. Просто второй пост.\r\n\r\n> в лесу родилась ёлка, зеленая была...', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `space`
+--
+
+CREATE TABLE `space` (
+  `space_id` int NOT NULL,
+  `space_name` varchar(250) NOT NULL,
+  `space_slug` varchar(128) NOT NULL,
+  `space_description` varchar(250) NOT NULL,
+  `space_category_id` int NOT NULL DEFAULT '1',
+  `space_tip` int NOT NULL DEFAULT '1',
+  `space_permit_users` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-
 --
--- Структура таблицы `tags`
---
-
-CREATE TABLE `tags` (
-  `tags_id` int NOT NULL,
-  `tags_name` varchar(250) NOT NULL,
-  `tags_slug` varchar(128) NOT NULL,
-  `tags_description` varchar(250) NOT NULL,
-  `tags_category_id` int NOT NULL DEFAULT '1',
-  `tags_tip` int NOT NULL DEFAULT '1',
-  `tags_permit_users` int NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Дамп данных таблицы `tags`
+-- Дамп данных таблицы `space`
 --
 
-INSERT INTO `tags` (`tags_id`, `tags_name`, `tags_slug`, `tags_description`, `tags_category_id`, `tags_tip`, `tags_permit_users`) VALUES
+INSERT INTO `space` (`space_id`, `space_name`, `space_slug`, `space_description`, `space_category_id`, `space_tip`, `space_permit_users`) VALUES
 (1, 'cms', 'cms', 'Системы управления сайтами...', 0, 1, 0),
 (2, 'Вопросы', 'qa', 'Вопросы и ответы', 0, 2, 0),
 (3, 'флуд', 'flud', 'Просто обычные разговоры', 0, 3, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `space_hidden`
+--
+
+CREATE TABLE `space_hidden` (
+  `hidden_id` int NOT NULL,
+  `hidden_space_id` int NOT NULL,
+  `hidden_user_id` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -194,6 +204,8 @@ CREATE TABLE `votes_comm` (
   `votes_comm_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+
+
 --
 -- Индексы сохранённых таблиц
 --
@@ -229,16 +241,16 @@ ALTER TABLE `posts`
   ADD KEY `post_user_id` (`post_user_id`,`post_date`);
 
 --
--- Индексы таблицы `taggings`
+-- Индексы таблицы `space`
 --
-ALTER TABLE `taggings`
-  ADD PRIMARY KEY (`taggings_id`);
+ALTER TABLE `space`
+  ADD PRIMARY KEY (`space_id`);
 
 --
--- Индексы таблицы `tags`
+-- Индексы таблицы `space_hidden`
 --
-ALTER TABLE `tags`
-  ADD PRIMARY KEY (`tags_id`);
+ALTER TABLE `space_hidden`
+  ADD PRIMARY KEY (`hidden_id`);
 
 --
 -- Индексы таблицы `users`
@@ -269,13 +281,13 @@ ALTER TABLE `votes_comm`
 -- AUTO_INCREMENT для таблицы `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `auth_tokens`
 --
 ALTER TABLE `auth_tokens`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `comments`
@@ -287,19 +299,19 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT для таблицы `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `post_id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `post_id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT для таблицы `taggings`
+-- AUTO_INCREMENT для таблицы `space`
 --
-ALTER TABLE `taggings`
-  MODIFY `taggings_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+ALTER TABLE `space`
+  MODIFY `space_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT для таблицы `tags`
+-- AUTO_INCREMENT для таблицы `space_hidden`
 --
-ALTER TABLE `tags`
-  MODIFY `tags_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `space_hidden`
+  MODIFY `hidden_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT для таблицы `users`

@@ -1,33 +1,33 @@
 <?php
 
 namespace App\Controllers;
-use App\Models\TagModel;
+use App\Models\SpaceModel;
 use Hleb\Constructor\Handlers\Request;
 use Base;
 
-class TagController extends \MainController
+class SpaceController extends \MainController
 {
 
-    // Все теги сайта
+    // Все пространства сайта
     public function index()
     {
 
         $data = [
-            'tags'  => TagModel::getTagHome(),
-            'title' => 'Теги сайта',
+            'space'  => SpaceModel::getSpaceHome(),
+            'title' => 'Пространства сайта',
             'msg'   => Base::getMsg(),
         ];
 
-        return view("tag/all", ['data' => $data]);
+        return view("space/all", ['data' => $data]);
     }
 
-    // Посты по тегу
-    public function tagPosts()
+    // Посты по пространству
+    public function SpacePosts()
     {
  
-        $tag = Request::get('tag');
+        $space = Request::get('space');
  
-        $posts = TagModel::getTagPosts($tag);
+        $posts = SpaceModel::getSpacePosts($space);
  
         // Покажем 404
         if(!$posts) {
@@ -54,36 +54,35 @@ class TagController extends \MainController
         if(Request::getSession('account')) {
             
             $user = Request::getSession('account');
-            $tag_hide = TagModel::getMyTagHide($result[0]['tags_id'], $user['user_id']);
+            $space_hide = SpaceModel::getMySpaceHide($result[0]['space_id'], $user['user_id']);
             
         } else {
-             $tag_hide = NULL;
+             $space_hide = NULL;
              
         }
         
         $data = [
-            'posts'    => $result,
-            'tag'      => $tag,
-            'tag_hide' => $tag_hide,
-            'title'    => 'Посты по тегу',
-            'msg'      => Base::getMsg(),
+            'posts'      => $result,
+            'space'      => $space,
+            'space_hide' => $space_hide,
+            'title'      => 'Пространство',
+            'msg'        => Base::getMsg(),
         ];
 
- 
-        return view("tag/tagposts", ['data' => $data]);
+        return view("space/spaceposts", ['data' => $data]);
         
     }
 
     // Изменение тега
-    public function tagForma()
+    public function spaceForma()
     {
         
         $data = [
-            'tags' => TagModel::getTagsHome(),
+            'space' => SpaceModel::getSpaceHome(),
             'msg'   => Base::getMsg(),
         ]; 
  
-        return view("tag/formatag", ['data' => $data]);
+        return view("space/formaspace", ['data' => $data]);
         
     }
     
@@ -98,9 +97,9 @@ class TagController extends \MainController
             $account = Request::getSession('account');
         } 
         
-        $tag_id = Request::get('id'); 
+        $space_id = Request::get('id'); 
         
-        TagModel::TagHide($tag_id, $account['user_id']);
+        SpaceModel::SpaceHide($space_id, $account['user_id']);
         
         return true;
         

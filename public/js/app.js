@@ -13,12 +13,12 @@ $(function(){
     });
 
     // подписка на блог
-    $(document).on("click", ".hide-tag-id", function(){      
-        var tag_id  = $(this).data('id');  
+    $(document).on("click", ".hide-space-id", function(){      
+        var space_id  = $(this).data('id');  
         $.ajax({
-            url: '/tags/hide/' + tag_id,
+            url: '/space/hide/' + space_id,
             type: 'POST',
-            data: {tag_id: tag_id},
+            data: {space_id: space_id},
         }).done(function(data) {
             location.reload();
            // $('#up' + tag_id + '.voters').addClass('active');

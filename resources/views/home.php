@@ -6,56 +6,64 @@
         <?php } ?>    
     
         <div class="telo">
-        
-        <?php if (!empty($data['posts'])) { ?>
-      
-            <?php foreach ($data['posts'] as  $post) { ?>
-                <div class="post-telo">
-                
-                    <div id="vot<?= $post['post_id']; ?>" class="voters">
-                        <div data-id="<?= $post['post_id']; ?>" class="post-up-id"></div>
-                        <div class="score"><?= $post['post_votes']; ?></div>
-                    </div>
-                    <div class="post-body">
-                        <a class="u-url" href="/posts/<?= $post['post_slug']; ?>">
-                            <h2 class="titl"><?= $post['post_title']; ?></h2>
-                        </a>
-                   
-                        <?php foreach ($post['tags'] as  $tag) { ?>                
-                            <a class="tag tag_<?= $tag['tags_tip'] ?>" href="/t/<?= $tag['tags_slug']; ?>" title="<?= $tag['tags_name']; ?>">
-                                <?= $tag['tags_name']; ?>
-                            </a>
-                        <?php } ?>
-                       
-                        <div class="footer">
-                            <img class="ava" alt="<?= $post['login']; ?>" src="/images/user/small/<?= $post['avatar']; ?>">
-                            <span class="user"> 
-                                <a href="/u/<?= $post['login']; ?>">
-                                    <?= $post['login']; ?>
-                                </a> 
-                            </span>
-                            <span class="date"> 
-                               <?= $post['date'] ?>
-                            </span>
-                            <?php if($post['num_comments'] !=0) { ?> 
-                                <span class="otst"> | </span>
-                                <a class="u-url" href="/posts/<?= $post['post_slug']; ?>">
-                                   <?= $post['num_comments']; ?>  <?= $post['post_comments']; ?>  
-                                </a>
-                            <?php } ?>
+            <?php if (!empty($data['posts'])) { ?>
+          
+                <?php foreach ($data['posts'] as  $post) { ?>
+                    <div class="post-telo">
+                    
+                        <div id="vot<?= $post['post_id']; ?>" class="voters">
+                            <div data-id="<?= $post['post_id']; ?>" class="post-up-id"></div>
+                            <div class="score"><?= $post['post_votes']; ?></div>
                         </div>
-                    </div>                        
-                </div>
+                        <div class="post-body">
+                            <a class="u-url" href="/posts/<?= $post['post_slug']; ?>">
+                                <h2 class="titl"><?= $post['post_title']; ?></h2>
+                            </a>
+                       
+                            <a class="space space_<?= $post['space_tip'] ?>" href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
+                                <?= $post['space_name']; ?>
+                            </a>
+                            
+                            <div class="footer">
+                                <img class="ava" alt="<?= $post['login']; ?>" src="/images/user/small/<?= $post['avatar']; ?>">
+                                <span class="user"> 
+                                    <a href="/u/<?= $post['login']; ?>">
+                                        <?= $post['login']; ?>
+                                    </a> 
+                                </span>
+                                <span class="date"> 
+                                   <?= $post['date'] ?>
+                                </span>
+                                <?php if($post['num_comments'] !=0) { ?> 
+                                    <span class="otst"> | </span>
+                                    <a class="u-url" href="/posts/<?= $post['post_slug']; ?>">
+                                       <?= $post['num_comments']; ?>  <?= $post['post_comments']; ?>  
+                                    </a>
+                                <?php } ?>
+                            </div>
+                        </div>                        
+                    </div>
+                <?php } ?>
+                
+            <?php } else { ?>
+
+                <h3>Нет постов</h3>
+
+                <p>К сожалению постов нет...</p>
+
             <?php } ?>
-            
-        <?php } else { ?>
-
-            <h3>Нет постов</h3>
-
-            <p>К сожалению постов нет...</p>
-
-        <?php } ?>
         </div>
+       
+        <?php if($data['space_hide']) { ?>
+            <div class="sidebar no-mob">
+                <h3>Отписан</h3>  
+                <?php foreach ($data['space_hide'] as  $hide) { ?>
+                    <a class="space space_<?= $hide['space_tip'] ?>" href="/s/<?= $hide['space_slug']; ?>" title="<?= $hide['space_name']; ?>">
+                        <?= $hide['space_name']; ?>
+                    </a>
+                <?php } ?>
+            </div>
+        <?php } ?>
        
         <?php if($data['latest_comments']) { ?>
             <div class="sidebar no-mob">

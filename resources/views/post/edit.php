@@ -2,10 +2,6 @@
 <section>
     <div class="wrap">
 
-        <link rel="stylesheet" href="/css/select2.css">
-        <script src="/js/select2.min.js"></script>
-        <script src="/js/post.js"></script>
-
         <h2><?= $data['title']; ?></h2>
 
          <div class="box create">
@@ -21,19 +17,11 @@
                 </div>
                 
                 <div class="boxline">  
-                    <label for="post_content">Теги</label>
-                    <select name="tag" class="js-example-placeholder-multiple js-states form-control" multiple="multiple">
-                        <?php foreach ($data['tag'] as  $tag ) { ?>
-                            <option selected="selected" name="tag" value="<?= $tag['tags_id']; ?>">
-                                <?= $tag['tags_name']; ?>
-                            </option>
-                        <?php } ?>
-                    </select>
-                      <br>  Теги не работают, показан изначальный выбор.<br> 
+                    <label for="post_content">Пространство</label>
+                       <b> <?= $data['space_name'] ?></b>
+                      <br><small>  Изменение пространства пока не работают.</small> <br> 
                         
-                        1- cms,  
-                        2 - вопросы, 
-                        3 - флуд 
+                     
                 </div>
                 <input type="hidden" name="post_id" id="post_id" value="<?= $data['id']; ?>">
                 <input type="submit" name="submit" value="Изменить" />

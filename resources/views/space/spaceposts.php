@@ -1,11 +1,25 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 <section>
     <div class="wrap">
-        <div class="right tag-bg no-mob"><?= $data['posts'][0]['tags_description']; ?></div>
-        <h1><?= $data['title']; ?>:   <?= $data['tag']; ?></h1>
+        <div class="right">
+            <div class="space-bg no-mob">
+                <?= $data['posts'][0]['space_description']; ?>
+            </div>
+             
+            <?php if($usr['id'] > 0) { ?> 
+                <div> <br> <center>
+                    <?php if($data['space_hide'] == 1) { ?> 
+                        <div data-id="<?= $data['posts'][0]['space_id']; ?>" class="hide-space-id add-space">Подписаться</div>
+                    <?php } else { ?> 
+                        <div data-id="<?= $data['posts'][0]['space_id']; ?>" class="hide-space-id no-space">Отписаться</div>
+                    <?php } ?>  </center>
+                </div>  
+            <?php } ?>    
+                        
+        </div>
         
+        <h1><?= $data['title']; ?>:   <?= $data['space']; ?></h1>
  
-        
         <div class="telo comments">
             <?php if (!empty($data['posts'])) { ?>
          
@@ -40,7 +54,7 @@
 
                 <h3>Нет постов (в разработке)</h3>
 
-                <p>К сожалению поcтов по данному тегу нет...</p>
+                <p>К сожалению поcтов по данному пространству нет...</p>
 
             <?php } ?>
         </div> 

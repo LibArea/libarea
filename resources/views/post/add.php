@@ -2,10 +2,6 @@
 <section>
     <div class="wrap">
 
-        <link rel="stylesheet" href="/css/select2.css">
-        <script src="/js/select2.min.js"></script>
-        <script src="/js/post.js"></script>
-
         <h2><?php echo $data['title']; ?></h2>
 
         <div class="box create">
@@ -21,10 +17,10 @@
                 </div>
                 
                 <div class="boxline">
-                    <label for="post_content">Теги</label>
-                    <input type="radio" name="tag" value="1" > cms
-                    <input type="radio" name="tag" value="2" > вопросы
-                    <input type="radio" name="tag" value="3" > флуд
+                    <label for="post_content">Пространство</label>
+                    <input type="radio" name="space" value="1" > cms
+                    <input type="radio" name="space" value="2" > вопросы
+                    <input type="radio" name="space" value="3" > флуд
                 </div>
                 
                 

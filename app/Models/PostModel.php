@@ -8,91 +8,76 @@ use Base;
 
 class PostModel extends \MainModel
 {
-    // Посты на главной без авторизации
-    public static function getPostAll($page)
-    {
- 
-        $offset = ($page-1) * 10; 
 
-        $q = XD::select('*')->from(['posts']);
-        $query = $q->leftJoin(['users'])->on(['users.id'], '=', ['post_user_id'])->orderBy(['post_id'])
-                   ->desc()->limit(10)->offset($offset);
-
-        $result = $query->getSelect();
-
-        return $result;
-
-    }
-    
-    public static function getPostAllCount()
-    {
-     
-        $query= XD::select(['post_id'])->from(['posts'])->getSelect();
-        $result = ceil(count($query) / 10);
-
-        return $result;
-
-    }
-    
-    // Посты на главной после авторизации 
+    // Посты на главной 
     // $page - страницы
     // $tags_user - список id отписанных тегов
-    public static function getPostFeed($page, $tags_user)
+    public static function getPostHome($page, $space_user)
     {
- 
+          
         $result = Array();
-        foreach($tags_user as $ind => $row){
-            $result[$ind] = $row['hidden_tag_id'];
-        }    
-        $string = implode(',', $result);
+        foreach($space_user as $ind => $row){
+            $result[$ind] = $row['hidden_space_id'];
+        } 
         
-        // print_r($string); toString
-        //WHERE tags_id NOT IN(2,... теги)
+        if($result) {
+            $string = implode(',', $result);
+        } else {
+            $string = 0;
+        }        
+        
         $offset = ($page-1) * 10; 
-        $num = 10;
-        
-        // SELECT * FROM `posts` LEFT JOIN `users` ON `users`.`id` = `post_user_id` ORDER BY `post_id` DESC LIMIT ? OFFSET ?
-       /*  $q = XD::select('*')->from(['posts']);
-        $query = $q->leftJoin(['users'])->on(['users.id'], '=', ['post_user_id'])->orderBy(['post_id'])
-                   ->desc()->limit(10)->offset($offset);
 
-        $result = $query->toString(); */ 
+        $sql = "SELECT p.post_id, p.post_title, p.post_slug, p.post_user_id, p.post_space_id, p.post_comments, p.post_date, p.post_votes,
+                u.id, u.login, u.avatar,
+                s.space_id, s.space_slug, s.space_name, space_tip
+                fROM posts as p
+                INNER JOIN users as u ON u.id = p.post_user_id
+                INNER JOIN space as s ON s.space_id = p.post_space_id
+                WHERE p.post_space_id NOT IN(".$string.")
+                ORDER BY p.post_id DESC LIMIT 10 OFFSET ".$offset." ";
+                        
         
-// https://toxu.ru/t/rabochij-post-po-sajtu/14527
-$sql = "select p.post_id, p.post_title, p.post_slug, p.post_date, p.post_comments, p.post_votes,
-               u.id, u.login, u.avatar, 
-               t.taggings_post_id, t.taggings_tag_id,
-               tg.tags_id, tg.tags_slug
-               from posts as p
-
-            LEFT JOIN users as u ON u.id = p.post_user_id 
-            LEFT JOIN taggings as t ON p.post_id = t.taggings_post_id
-            LEFT JOIN tags as tg ON tg.tags_id = t.taggings_post_id
-
-            ORDER BY p.post_id DESC LIMIT 10 OFFSET ".$offset." ";
+        $result = DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
         
-        $result = DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
         return $result;
 
     }
     
-    public static function getPostFeedCount()
+    public static function getPostHomeCount($space_user)
     {
      
-        $query= XD::select(['post_id'])->from(['posts'])->getSelect();
+        $result = Array();
+        foreach($space_user as $ind => $row){
+            $result[$ind] = $row['hidden_space_id'];
+        }    
+        if($result) {
+            $string = implode(',', $result);
+        } else {
+            $string = 0;
+        }     
+     
+        $sql = "SELECT p.post_id, p.post_space_id, s.space_id
+                fROM posts as p
+                INNER JOIN space as s ON s.space_id = p.post_space_id
+                WHERE p.post_space_id NOT IN(".$string.") ";
+
+        $query = DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
         $result = ceil(count($query) / 10);
 
         return $result;
 
     }
 
- 
+
     // TOP посты на главной 
     public static function getPostTop()
     {
 
         $q = XD::select('*')->from(['posts']);
-        $query = $q->leftJoin(['users'])->on(['users.id'], '=', ['post_user_id'])->orderBy(['post_comments'])->desc();
+        $query = $q->leftJoin(['users'])->on(['users.id'], '=', ['post_user_id'])
+                ->leftJoin(['space'])->on(['space_id'], '=', ['post_space_id'])
+                ->orderBy(['post_comments'])->desc();
 
         $result = $query->getSelect();
 
@@ -106,6 +91,7 @@ $sql = "select p.post_id, p.post_title, p.post_slug, p.post_date, p.post_comment
 
         $q = XD::select('*')->from(['posts']);
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['post_user_id'])
+                 ->leftJoin(['space'])->on(['space_id'], '=', ['post_space_id'])
                  ->where(['post_slug'], '=', $slug);
         
         $result = $query->getSelectOne();
@@ -143,7 +129,7 @@ $sql = "select p.post_id, p.post_title, p.post_slug, p.post_date, p.post_comment
     
     
     // Проверка на дубликаты uri и запись поста
-    public static function addPost($post_title, $post_content, $post_slug, $post_ip_int, $post_user_id)
+    public static function addPost($post_title, $post_content, $post_slug, $post_ip_int, $post_user_id, $space_id)
     {
        
         // Проверить пост на повтор slug (переделать)
@@ -156,12 +142,9 @@ $sql = "select p.post_id, p.post_title, p.post_slug, p.post_date, p.post_comment
         }
        
         // toString  строковая заменя для проверки
-        XD::insertInto(['posts'], '(', ['post_title'], ',', ['post_content'], ',', ['post_slug'], ',', ['post_ip_int'], ',', ['post_user_id'], ')')->values( '(', XD::setList([$post_title, $post_content, $post_slug, $post_ip_int, $post_user_id]), ')' )->run();
-       
-        // Попучим последний id поста
-        $post_id = XD::select()->last_insert_id('()')->getSelectValue(); // SELECT LAST_INSERT_ID();
-       
-        return $post_id; 
+        XD::insertInto(['posts'], '(', ['post_title'], ',', ['post_content'], ',', ['post_slug'], ',', ['post_ip_int'], ',', ['post_user_id'],',', ['post_space_id'], ')')->values( '(', XD::setList([$post_title, $post_content, $post_slug, $post_ip_int, $post_user_id, $space_id]), ')' )->run();
+
+        return true; 
        
     } 
     
@@ -170,7 +153,7 @@ $sql = "select p.post_id, p.post_title, p.post_slug, p.post_date, p.post_comment
     {
       
         $q = XD::select('*')->from(['posts']);
-        $query = $q->where(['post_id'], '=', $id);
+        $query = $q->leftJoin(['space'])->on(['space_id'], '=', ['post_space_id'])->where(['post_id'], '=', $id);
         $result = $query->getSelectOne();
        
         return $result;

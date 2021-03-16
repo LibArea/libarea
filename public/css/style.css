@@ -128,7 +128,11 @@ header .wrap {
     float: right;
     margin: 10px 0;
 }
-
+.sidebar h3 {
+    text-transform: uppercase;
+    font-size:11px;
+    margin: 2px 0;
+}
 .sb-telo {
     margin-bottom: 15px;
     border-left: 3px solid #a1a8ae;
@@ -433,7 +437,7 @@ input.form-about {width: 250px;}
 }
 
 /* Теги */
-a.tag {
+a.space {
 	background-color: #fffcd7;
 	border: 1px solid #d5d458;
 	border-radius: 5px;
@@ -446,25 +450,43 @@ a.tag {
     text-transform: lowercase;
 }
 
-a.tag_2 {
+a.space_2 {
     background-color: #f9ddde;
     border-color: #f0b2b8;
 }
-a.tag_3 {
+a.space_3 {
 	background-color: #eee;
 	border-color: #c8c8c8;
 }
-.tag-des {
+.space-des {
     margin-left:10px;
 }
-.tag-bg {
-    background: #f0f0df;
-    color: #333;
+.space-bg {
+    border-left: 1px solid #09c;
+    color: #666;
     font-size: 13px;
     width: 180px;
     padding: 5px;
     text-align: center;
 }
+
+.add-space {
+    background: #f0f0df;
+    color: #666;
+    font-size: 13px;
+    width: 180px;
+    padding: 5px;
+    text-align: center; 
+}
+.no-space {
+    background: #f3f3f3;
+    color: #666;
+    font-size: 13px;
+    width: 180px;
+    padding: 5px;
+    text-align: center;
+}
+
 
 /* Комментарии */
 .authorpost {
