@@ -68,5 +68,14 @@ Route::type('post')->protect()->get('/post/create')->controller('PostController@
 Route::get('/post/edit/{id}')->controller('PostController@editPost');
 Route::type('post')->protect()->get('/post/editpost/{id}')->controller('PostController@editPostRecording');
 
+// Личные сообщения 
+Route::get('/messages')->controller('MessagesController');  
+Route::type('post')->protect()->get('/messages/send')->controller('MessagesController@send');
+Route::get('/messages/read/{id}')->controller('MessagesController@dialog')->where(['id' => '[0-9]+']); 
+Route::get('/u/{login}/messages')->controller('MessagesController@profilMessages')->where(['login' => '[A-Za-z0-9]+']); 
+
+// Уведомления 
+Route::get('/notifications')->controller('NotificationsController'); 
+
 // Пагинация и главная страница
 Route::get('/{page?}')->protect()->controller('PostController')->where(['page' => '[0-9]+']);

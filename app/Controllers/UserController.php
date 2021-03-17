@@ -58,11 +58,10 @@ class UserController extends \MainController
     function settingPage()
     {
         
-        if(!Request::getSession('account')) {
+        if(!$account = Request::getSession('account')) {
             redirect('/');
         }
       
-        $account = Request::getSession('account'); 
         $user = UserModel::getUserLogin($account['login']);
         
         if(!$user['avatar']) {
@@ -86,7 +85,7 @@ class UserController extends \MainController
     function settingEdit ()
     {
         
-        if(!Request::getSession('account')) {
+        if(!$account = Request::getSession('account')) {
             redirect('/');
         }  
         
@@ -105,7 +104,6 @@ class UserController extends \MainController
           redirect('/users/setting');
         }
    
-        $account = Request::getSession('account'); 
         $login   = $account['login'];
        
         UserModel::editProfile($login, $name, $about);

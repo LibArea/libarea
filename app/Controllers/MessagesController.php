@@ -21,22 +21,21 @@ class MessagesController extends \MainController
         if ($messages_dialog = MessagesModel::getMessages($user_id))
 		{
           
-			$messages_total_rows = MessagesModel::getMessagesTotal($user_id);
- 
-			foreach ($messages_dialog as $val)
-			{
-             	$dialog_ids = $val['id'];
-			} 
+            $messages_total_rows = MessagesModel::getMessagesTotal($user_id);
+
+            foreach ($messages_dialog as $val)
+            {
+                $dialog_ids = $val['id'];
+            } 
             
 		} else {
             $dialog_ids = 0;
         }
         
-
-		if ($dialog_ids)
-		{
-			$last_message = MessagesModel::getLastMessages($dialog_ids);
-		}
+        if ($dialog_ids)
+        {
+            $last_message = MessagesModel::getLastMessages($dialog_ids);
+        }
 
 	    if ($messages_dialog)
 		{
@@ -45,22 +44,23 @@ class MessagesController extends \MainController
 			foreach ($messages_dialog as $ind => $row)
 			{
                
-				if ($row['recipient_uid'] == $user_id) // Принимающий  AND $row['recipient_count']
-				{
-              
-         			$row['unread']   = $row['recipient_unread'];
+                if ($row['recipient_uid'] == $user_id) // Принимающий  AND $row['recipient_count']
+                {
+
+                    $row['unread']   = $row['recipient_unread'];
                     $row['count']    = $row['recipient_count'];
                     $row['msg_user'] = UserModel::getUserId($row['sender_uid']);
-					
-				}
-				else if ($row['sender_uid'] == $user_id) // Отправляющий  AND $row['sender_count']
-				{
- 
-					$row['unread']   = $row['sender_unread'];
-				    $row['count']    = $row['sender_count'];
+
+                }
+                else if ($row['sender_uid'] == $user_id) // Отправляющий  AND $row['sender_count']
+                {
+
+                    $row['unread']   = $row['sender_unread'];
+                    $row['count']    = $row['sender_count'];
                     $row['msg_user'] = UserModel::getUserId($row['sender_uid']);
-				} 
- 
+                
+                } 
+
                 $result[$ind]         = $row;
              
 			}
@@ -69,9 +69,9 @@ class MessagesController extends \MainController
         }
 
 		$data = [
-          'title'    => 'Личные сообщения',
-          'messages' => $result,
-          'msg'      => Base::getMsg(),
+            'title'    => 'Личные сообщения',
+            'messages' => $result,
+            'msg'      => Base::getMsg(),
         ];
         
         return view("messages/index", ['data' => $data]);
@@ -85,20 +85,20 @@ class MessagesController extends \MainController
         }
         
         $user_id = $account['user_id'];
-        
+
         $id  = Request::get('id');
-         
+
         if (!$dialog = MessagesModel::getDialogById($id))
-		{
-			Base::addMsg('Указанного диалога не существует', 'error');
+        {
+            Base::addMsg('Указанного диалога не существует', 'error');
             redirect('/messages');
-		}
-        
+        }
+
         if ($dialog['recipient_uid'] != $user_id AND $dialog['sender_uid'] != $user_id)
-		{
-			Base::addMsg('Указанного темы не существует', 'error');
+        {
+            Base::addMsg('Указанного темы не существует', 'error');
             redirect('/messages');
-		}
+        }
         
         // обновляем просмотры и т.д.
         MessagesModel::setMessageRead($id, $user_id);
@@ -115,30 +115,28 @@ class MessagesController extends \MainController
 				$recipient_user = UserModel::getUserId($dialog['recipient_uid']);
 			}
  
-			foreach ($list as $key => $val)
-			{
-				if ($dialog['sender_uid'] == $user_id AND $val['sender_remove'])
-				{
-					unset($list[$key]);
-				}
-				else if ($dialog['sender_uid'] != $user_id AND $val['recipient_remove'])
-				{
-					unset($list[$key]);
-				}
-				else
-				{
+            foreach ($list as $key => $val)
+            {
+                if ($dialog['sender_uid'] == $user_id AND $val['sender_remove'])
+                {
+                    unset($list[$key]);
+                }
+                else if ($dialog['sender_uid'] != $user_id AND $val['recipient_remove'])
+                {
+                    unset($list[$key]);
                     
-					$list[$key]['message'] =  $val['message'];
-					$list[$key]['login'] = $recipient_user['login'];
-				}
-			}
+                } else {
+                    $list[$key]['message'] =  $val['message'];
+                    $list[$key]['login'] = $recipient_user['login'];
+                }
+            }
 		}
         
-		$data = [
-          'title'          => 'Диалог',
-          'list'           => $list,  
-          'recipient_user' => $recipient_user,
-          'msg'            => Base::getMsg(),
+        $data = [
+            'title'          => 'Диалог',
+            'list'           => $list,  
+            'recipient_user' => $recipient_user,
+            'msg'            => Base::getMsg(),
         ];
 
         return view("messages/dialog", ['data' => $data]);
@@ -154,34 +152,32 @@ class MessagesController extends \MainController
         }
 
         $sender_uid = $account['user_id'];
-        
+
         $message = Request::getPost('message');
         $recipient_uid = Request::getPost('recipient');
-        
+
         // Введите содержание сообщения
-        
+
         if ($message == '')
         {
             Base::addMsg('Введите содержание сообщения', 'error');
             redirect('/register');
         }
-        
-        
-        // Это пользователь не существует
-        
+
+        // Этого пользователь не существует (добавить)
+
         if ($recipient_uid == $sender_uid)
-		{
-			Base::addMsg('Себе отправлять сообщение нельзя', 'error');
+        {
+            Base::addMsg('Себе отправлять сообщение нельзя', 'error');
             redirect('/messages');
-		}
-        
-        
+        }
+
         MessagesModel::SendMessage($sender_uid, $recipient_uid, $message);
-        
+
         redirect('/messages');
     }
     
-    
+    // Форма отправки из профиля
     public function  profilMessages()
     {
         
@@ -198,11 +194,10 @@ class MessagesController extends \MainController
             redirect('/');
         }    
         
-       
         $data = [
-          'title'          => 'Отправить сообщение ' . $login,
-          'recipient_uid'  => $user['id'],
-          'msg'            => Base::getMsg(),
+            'title'          => 'Отправить сообщение ' . $login,
+            'recipient_uid'  => $user['id'],
+            'msg'            => Base::getMsg(),
         ];
 
         return view("messages/useraddmessages", ['data' => $data]);

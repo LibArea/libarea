@@ -25,9 +25,8 @@ class PostController extends \MainController
             hl_preliminary_exit();
         }
         
-        if(Request::getSession('account')){
+        if($account = Request::getSession('account')){
             // Получаем все теги отписанные участником
-            $account    = Request::getSession('account');
             $space_user = SpaceModel::getSpaceUser($account['user_id']);
             $user_id = $account['user_id'];
         } else {
@@ -309,7 +308,7 @@ class PostController extends \MainController
     public function createPost()
     {
         // Авторизировались или нет
-        if (!Request::getSession('account'))
+        if (!$account = Request::getSession('account'))
         {
             return false;
         }  
@@ -325,7 +324,6 @@ class PostController extends \MainController
         $space_id = (int)Request::getPost('space');
         
         // id того, кто добавляет пост
-        $account = Request::getSession('account');
         $post_user_id = $account['user_id'];
         
         // Проверяем длину title
@@ -364,7 +362,7 @@ class PostController extends \MainController
     // Показ формы поста для редактирование
     public function editPost() 
     {
-        if(!Request::getSession('account')) {
+        if(!$account = Request::getSession('account')) {
            redirect('/');
         } 
         
@@ -377,8 +375,6 @@ class PostController extends \MainController
             redirect('/');
         }
         
-        $account = Request::getSession('account');
- 
         // Редактировать может только автор
         if ($post['post_user_id'] != $account['user_id']) {
             redirect('/');
@@ -403,7 +399,7 @@ class PostController extends \MainController
     public function editPostRecording() 
     {
         
-        if(!Request::getSession('account')) {
+        if(!$account = Request::getSession('account')) {
            redirect('/');
         } 
         
@@ -418,8 +414,6 @@ class PostController extends \MainController
             redirect('/');
         }
         
-        $account = Request::getSession('account');
- 
         // Редактировать может только автор
         if ($post['post_user_id'] != $account['user_id']) {
             redirect('/');
