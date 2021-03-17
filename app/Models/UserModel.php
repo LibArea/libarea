@@ -21,12 +21,27 @@ class UserModel extends \MainModel
     }
 
     // Получение информации по логину
-    public static function getUser($login)
+    public static function getUserLogin($login)
     {
 
         $query = XD::select(['id', 'login', 'name', 'email', 'avatar', 'about', 'created_at'])
                 ->from(['users'])
                 ->where(['login'], '=', $login);
+
+        $result = $query->getSelectOne();
+
+        return $result;
+
+    }
+    
+    
+    // Получение информации по id
+    public static function getUserId($id)
+    {
+
+        $query = XD::select(['id', 'login', 'name', 'email', 'avatar', 'about', 'created_at'])
+                ->from(['users'])
+                ->where(['id'], '=', $id);
 
         $result = $query->getSelectOne();
 
@@ -39,11 +54,11 @@ class UserModel extends \MainModel
     {
         
         $params = [
-           'login'    => $login,
-           'email'    => $email,
-           'password' => password_hash($password, PASSWORD_BCRYPT),
-           'activated'=>'1',
-           'role'=>'1'
+           'login'     => $login,
+           'email'     => $email,
+           'password'  => password_hash($password, PASSWORD_BCRYPT),
+           'activated' =>'1', // ввести почту и инвайт 
+           'role'      =>'2'  // 1 админ
         ];
 
         $sql = "INSERT INTO users(login, email, password, activated, role) VALUES(:login, :email,:password,:activated,:role)";

@@ -57,7 +57,7 @@ code {
 .telo.detail .post a, .comm-telo-body a {
 	text-decoration: underline;
 }
-.telo.detail {
+.telo.profile, .telo.info {
     margin-left: 5px;
 }
 blockquote {
@@ -559,6 +559,22 @@ ol.comment-telo {
     font-size: 13px;
 }
 
+/* ЛС */
+
+.messages {
+    margin: 0 15px;
+}
+.messages textarea.mess {
+    width: 100%;
+}
+.msg-telo {
+   margin: 10px; 
+   padding: 10px;
+}
+.msg-telo.active {
+   background-color: lightyellow;
+}
+
 /* Profile */
 .avatar-user .md-icon {
     width: 104px;
@@ -633,6 +649,10 @@ ol.comment-telo {
 }
 .dark .menu .md-icon {
     stroke: #eee;
+}
+.about {
+ max-width: 360px;
+ display: inline-block;   
 }
 
 /* голосование */

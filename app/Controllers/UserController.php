@@ -25,7 +25,7 @@ class UserController extends \MainController
     {
 
         $login = Request::get('login');
-        $user  = UserModel::getUser($login);
+        $user  = UserModel::getUserLogin($login);
 
         // Покажем 404
         if(!$user) {
@@ -63,7 +63,7 @@ class UserController extends \MainController
         }
       
         $account = Request::getSession('account'); 
-        $user = UserModel::getUser($account['login']);
+        $user = UserModel::getUserLogin($account['login']);
         
         if(!$user['avatar']) {
             $user['avatar'] = 'noavatar.png';

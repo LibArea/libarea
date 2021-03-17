@@ -1,12 +1,22 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
     <section>
     <div class="wrap">
-        <div class="telo detail">
+        <div class="profile">
             <div class="gravatar">
                 <img src="/images/user/<?= $data['avatar']; ?>">
             </div>
 
-            <h1><?= $data['login']; ?> / <?= $data['name']; ?></h1>
+            <h1>
+                <?= $data['login']; ?> 
+            
+                <?php if($data['name']) { ?> / <?= $data['name']; ?><?php } ?>
+            
+                <?php if($usr['id'] > 0) { ?>   
+                        <?php if($usr['login'] != $data['login']) { ?>
+                            <small> - <a href="/u/<?= $data['login']; ?>/messages">Отправить сообщение</a></small>
+                        <?php } ?>
+                <?php } ?>
+            </h1>
 
             <div class="box wide">
                 <label class="required">Профиль:</label>

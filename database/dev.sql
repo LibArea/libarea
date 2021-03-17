@@ -159,7 +159,7 @@ CREATE TABLE `users` (
   `activated` tinyint(1) NOT NULL,
   `activate_token` varchar(250) DEFAULT NULL,
   `activate_expire` varchar(250) DEFAULT NULL,
-  `role` int NOT NULL,
+  `role` int NOT NULL COMMENT 'По умолчанию 2 (1 - админ)',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `deleted_at` tinyint(1) DEFAULT '0',
@@ -167,7 +167,7 @@ CREATE TABLE `users` (
   `about` varchar(255) DEFAULT NULL,
   `rating` int NOT NULL DEFAULT '0',
   `status` varchar(250) DEFAULT NULL,
-  `my_blog` int DEFAULT NULL,
+  `my_post` int DEFAULT NULL COMMENT 'Пост выведенный в профиль',
   `post_profile` int NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -175,7 +175,7 @@ CREATE TABLE `users` (
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`id`, `login`, `name`, `email`, `password`, `reset_token`, `reset_expire`, `activated`, `activate_token`, `activate_expire`, `role`, `created_at`, `updated_at`, `deleted_at`, `avatar`, `about`, `rating`, `status`, `my_blog`, `post_profile`) VALUES
+INSERT INTO `users` (`id`, `login`, `name`, `email`, `password`, `reset_token`, `reset_expire`, `activated`, `activate_token`, `activate_expire`, `role`, `created_at`, `updated_at`, `deleted_at`, `avatar`, `about`, `rating`, `status`, `my_post`, `post_profile`) VALUES
 (1, 'AdreS', 'Олег', 'ss@sdf.ru', '$2y$10$oR5VZ.zk7IN/og70gQq/f.0Sb.GQJ33VZHIES4pyIpU3W2vF6aiaW', '', NULL, 1, NULL, NULL, 1, '2021-03-08 21:37:04', '2021-03-08 21:37:04', 0, '', 'Тестовый аккаунт', 0, '', 0, 0);
 
 -- --------------------------------------------------------
@@ -204,6 +204,66 @@ CREATE TABLE `votes_comm` (
   `votes_comm_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+
+CREATE TABLE `messages` (
+  `id` int(11) NOT NULL,
+  `uid` int(11) DEFAULT NULL COMMENT 'Отправитель',
+  `dialog_id` int(11) DEFAULT NULL,
+  `message` text DEFAULT NULL,
+  `add_time` timestamp NOT NULL DEFAULT current_timestamp(),
+  `sender_remove` tinyint(1) DEFAULT 0,
+  `recipient_remove` tinyint(1) DEFAULT 0,
+  `receipt` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+CREATE TABLE `messages_dialog` (
+  `id` int(11) NOT NULL,
+  `sender_uid` int(11) DEFAULT NULL COMMENT 'Отправитель',
+  `sender_unread` int(11) DEFAULT NULL COMMENT 'Отправитель, 0 непрочитано',
+  `recipient_uid` int(11) DEFAULT NULL COMMENT 'Получатель',
+  `recipient_unread` int(11) DEFAULT NULL COMMENT 'Получатель, 0 непрочитано',
+  `add_time` timestamp NOT NULL DEFAULT current_timestamp(),
+  `update_time` timestamp NOT NULL DEFAULT current_timestamp(),
+  `sender_count` int(11) DEFAULT NULL COMMENT 'Отправитель кол.',
+  `recipient_count` int(11) DEFAULT NULL COMMENT 'Получатель кол.'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+--
+-- Индексы таблицы `messages`
+--
+ALTER TABLE `messages`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `dialog_id` (`dialog_id`),
+  ADD KEY `uid` (`uid`),
+  ADD KEY `add_time` (`add_time`),
+  ADD KEY `sender_remove` (`sender_remove`),
+  ADD KEY `recipient_remove` (`recipient_remove`),
+  ADD KEY `sender_receipt` (`receipt`);
+
+--
+-- Индексы таблицы `messages_dialog`
+--
+ALTER TABLE `messages_dialog`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `recipient_uid` (`recipient_uid`),
+  ADD KEY `sender_uid` (`sender_uid`),
+  ADD KEY `update_time` (`update_time`),
+  ADD KEY `add_time` (`add_time`);
+
+
+--
+-- AUTO_INCREMENT для таблицы `messages`
+--
+ALTER TABLE `messages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+--
+-- AUTO_INCREMENT для таблицы `messages_dialog`
+--
+ALTER TABLE `messages_dialog`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 
 --
