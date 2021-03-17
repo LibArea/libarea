@@ -6,6 +6,8 @@ use DB;
 
 class UserModel extends \MainModel
 {
+    
+    // Страница участников
     public static function getUsersAll()
     {
 
@@ -18,6 +20,7 @@ class UserModel extends \MainModel
 
     }
 
+    // Получение информации по логину
     public static function getUser($login)
     {
 
@@ -25,14 +28,16 @@ class UserModel extends \MainModel
                 ->from(['users'])
                 ->where(['login'], '=', $login);
 
-        $result = $query->getSelectOne(); // Получение одной строки в именованный массив.
+        $result = $query->getSelectOne();
 
         return $result;
 
     }
 
+    // Создание участника
     public static function createUser($login,$email,$password)
     {
+        
         $params = [
            'login'    => $login,
            'email'    => $email,
@@ -44,6 +49,7 @@ class UserModel extends \MainModel
         $sql = "INSERT INTO users(login, email, password, activated, role) VALUES(:login, :email,:password,:activated,:role)";
         DB::run($sql,$params);
         return true;
+        
     }
 
     public static function getUserInfo($data) 
@@ -53,7 +59,7 @@ class UserModel extends \MainModel
              ->from(['users'])
              ->where(['email'], '=', $data);
 
-        $result = $query->getSelectOne(); // Получение одной строки в именованный массив.
+        $result = $query->getSelectOne();
 
         return $result;
 
@@ -70,6 +76,7 @@ class UserModel extends \MainModel
         $result = count($query->getSelect());
 
         return $result;
+        
     } 
     
     // Количество комментариев на странице профиля
@@ -82,6 +89,7 @@ class UserModel extends \MainModel
        
         $result = count($query->getSelect());
         return $result;
+        
     }
     
     // Проверка Логина на дубликаты
@@ -97,6 +105,7 @@ class UserModel extends \MainModel
         }
         
         return true;
+        
     }
     
     // Проверка Email на дубликаты
@@ -112,6 +121,7 @@ class UserModel extends \MainModel
         }
         
         return true;
+        
     }
     
     
@@ -122,6 +132,7 @@ class UserModel extends \MainModel
         XD::update(['users'])->set(['name'], '=', $name, ',', ['about'], '=', $about)->where(['login'], '=', $login)->run();
  
         return true;
+        
     }
     
     

@@ -1,32 +1,33 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 <section>
     <div class="wrap">
+        <div class="telo detail">
+            <h1><?= $data['title']; ?></h1>
+            <p>Cимвол (∞) используется для обозначения разделов сайта: ∞ cms, ∞ флуд, ∞ вопросы и т.д.</p>
+            <div class="telo space">
+                <?php if (!empty($data['space'])) { ?>
+              
+                    <?php foreach ($data['space'] as  $space) { ?>  
+                        <div class="space-telo">
+                            <span class="date"> 
+                             ∞  <a title="<?= $space['space_name']; ?>" class="space space_<?= $space['space_tip']; ?>" href="/s/<?= $space['space_slug']; ?>">
+                                    <?= $space['space_name']; ?>
+                                </a> 
+                            </span> 
+                            <span class="date space-des">  
+                                <?= $space['space_description']; ?>    
+                            </span>
+                        </div>
+                    <?php } ?>
 
-        <h1><?php echo $data['title']; ?></h1>
+                <?php } else { ?>
 
-        <div class="telo space">
-            <?php if (!empty($data['space'])) { ?>
-          
-                <?php foreach ($data['space'] as  $space) { ?>  
-                    <div class="space-telo">
-                        <span class="date"> 
-                            <a title="<?php echo $space['spcae_name']; ?>" class="space space_<?php echo $space['space_tip']; ?>" href="/s/<?php echo $space['space_slug']; ?>">
-                                <?php echo $space['space_name']; ?>
-                            </a> 
-                        </span> 
-                        <span class="date space-des">  
-                            <?php echo $space['space_description']; ?>    
-                        </span>
-                    </div>
+                    <h3>Нет тегов</h3>
+
+                    <p>К сожалению тегов нет...</p>
+
                 <?php } ?>
-
-            <?php } else { ?>
-
-                <h3>Нет тегов</h3>
-
-                <p>К сожалению тегов нет...</p>
-
-            <?php } ?>
+            </div>
         </div>
     </div>
 </section>

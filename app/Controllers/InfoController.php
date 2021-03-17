@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers;
+use App\Models\InfoModel;
 use Base;
 
 class InfoController extends \MainController
@@ -20,9 +21,18 @@ class InfoController extends \MainController
     public function stats()
 	{
 
+        $user_num      = InfoModel::getUsersNumAll();
+        $post_num      = InfoModel::getPostsNumAll();
+        $comm_num      = InfoModel::getCommentsNumAll();
+        $vote_comm_num = InfoModel::getCommentsVoteNumAll();
+        
 		$data = [
-          'title' => 'Статистика',
-          'msg'   => Base::getMsg(),
+          'title'         => 'Статистика',
+          'user_num'      => $user_num,
+          'post_num'      => $post_num,
+          'comm_num'      => $comm_num,
+          'vote_comm_num' => $vote_comm_num,
+          'msg'           => Base::getMsg(),
         ];
 
         return view('info/stats', ['data' => $data]);

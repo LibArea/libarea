@@ -90,7 +90,6 @@ class CommentController extends \MainController
         $id = (int)Request::getPost('comm_id');
         $post_id = (int)Request::getPost('post_id');
          
-        // id того, кто госует за комментарий
         $user = Request::getSession('account') ?? [];
         
         if(!empty($user['user_id'])) {

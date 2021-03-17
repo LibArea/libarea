@@ -45,6 +45,9 @@
                     </li>
                     <li class="nav no-mob-two">
                         <a title="Все комментарии" class="comments" href="/comments">Комментарии</a>
+                    </li>  
+                    <li class="nav no-mob-two">
+                        <a title="Пространства" class="sp" href="/space">∞</a>
                     </li>
                 </ul>
             </div>
