@@ -159,7 +159,12 @@ class PostController extends \MainController
     {
 
         $uid = Request::getSession('account') ?? []; 
-
+        if(!empty($uid['user_id'])) {
+            $uid   = $uid['user_id'];
+        } else {
+            $uid   = 0;
+        }
+        
         $Parsedown = new Parsedown(); 
         $Parsedown->setSafeMode(true); // безопасность
         
@@ -222,7 +227,7 @@ class PostController extends \MainController
             $row['date']       = Base::ru_date($row['comment_date']);
             $row['after']      = $row['comment_after'];
             $row['del']        = $row['comment_del'];
-            $row['comm_vote_status'] = VotesCommentModel::getVoteStatus($row['comment_id'], $uid['user_id']);
+            $row['comm_vote_status'] = VotesCommentModel::getVoteStatus($row['comment_id'], $uid);
             $result[$ind]    = $row;
          
         }
