@@ -4,6 +4,7 @@ namespace App\Controllers;
 use Base;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\UserModel;
+use App\Models\PostModel;
 
 class UserController extends \MainController
 {
@@ -34,6 +35,8 @@ class UserController extends \MainController
             hl_preliminary_exit();
         }
 
+        $post = PostModel::getPostProfile($user['my_post']);
+
         if(!$user['avatar']) {
                 $user['avatar'] = 'noavatar.png';
         }
@@ -45,6 +48,8 @@ class UserController extends \MainController
           'name'          => $user['name'],
           'about'         => $user['about'],
           'avatar'        => $user['avatar'],
+          'my_post'       => $user['my_post'],
+          'post'          => $post,
           'created_at'    => Base::ru_date($user['created_at']),
           'post_num_user' => UserModel::getUsersPostsNum($user['id']),
           'comm_num_user' => UserModel::getUsersCommentsNum($user['id']),

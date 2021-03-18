@@ -24,7 +24,7 @@ class UserModel extends \MainModel
     public static function getUserLogin($login)
     {
 
-        $query = XD::select(['id', 'login', 'name', 'email', 'avatar', 'about', 'created_at'])
+        $query = XD::select(['id', 'login', 'name', 'email', 'avatar', 'about', 'created_at', 'my_post'])
                 ->from(['users'])
                 ->where(['login'], '=', $login);
 

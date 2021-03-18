@@ -5,28 +5,19 @@ use App\Models\NotificationsModel;
 class Base
 {
 
-    // Возвращает uid участника
-    public static function getUid(){
-
-        $user = Request::getSession('account') ?? []; 
-        if(!empty($user['user_id'])) {
-            $id    = $user['user_id'];
-            $login = $user['login'];
-            $notif = NotificationsModel::usersNotification($id);
-        } else {
-            $id    = 0;
-            $login = 0;
-            $notif = 0;
+    /** @return array|bool */
+    public static function getUid() {
+        $user = Request::getSession('account') ?? [];
+        $uid = [];
+        if (!empty($user['user_id'])) {
+            $uid['id'] = $user['user_id'];
+            $uid['login'] = $user['login'] ?? 'undefined'; 
+            $uid['notif'] = NotificationsModel::usersNotification($uid['id']);            
+            return $uid;
         }
-        
-        $uid = [
-          'id'    => $id,
-          'login' => $login,
-          'notif' => $notif,
-        ];
-        
-        return $uid;
+        return false;
     }
+ 
 
     // Возвращает массив сообщений
     public static function getMsg(){

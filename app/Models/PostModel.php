@@ -69,7 +69,6 @@ class PostModel extends \MainModel
 
     }
 
-
     // TOP посты на главной 
     public static function getPostTop()
     {
@@ -128,7 +127,6 @@ class PostModel extends \MainModel
         
     }
     
-    
     // Проверка на дубликаты uri и запись поста
     public static function addPost($post_title, $post_content, $post_slug, $post_ip_int, $post_user_id, $space_id)
     {
@@ -170,5 +168,26 @@ class PostModel extends \MainModel
         ->where(['post_id'], '=', $post_id)->run();
  
         return true;
+    }
+    
+    // Выбранный пост в профиль участника
+    public static function getPostProfile($my_post)
+    {
+
+        if(!$my_post){ $my_post = 0; }  
+          
+        $sql = "SELECT p.post_id, p.post_title, p.post_slug, p.post_user_id, p.post_space_id, p.post_comments, p.post_date, p.post_votes,
+                u.id, u.login, u.avatar,
+                s.space_id, s.space_slug, s.space_name, space_tip
+                fROM posts as p
+                INNER JOIN users as u ON u.id = p.post_user_id
+                INNER JOIN space as s ON s.space_id = p.post_space_id
+                WHERE p.post_id = ".$my_post." ";
+                        
+        
+        $result = DB::run($sql)->fetch(PDO::FETCH_ASSOC); 
+
+        return $result;
+
     }
 }

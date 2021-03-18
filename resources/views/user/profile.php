@@ -11,9 +11,13 @@
             
                 <?php if($data['name']) { ?> / <?= $data['name']; ?><?php } ?>
             
-                <?php if($data['uid']['id'] > 0) { ?>   
-                        <?php if($data['uid']['login'] != $data['login']) { ?>
-                            <small> - <a href="/u/<?= $data['login']; ?>/messages">Отправить сообщение</a></small>
+                <?php if($data['uid']) { ?>   
+                        <?php if($data['uid']['login'] != $data['login']) { ?> &nbsp; 
+                            <a href="/u/<?= $data['login']; ?>/messages">
+                                <svg class="md-icon">
+                                    <use xlink:href="/svg/icons.svg#mail"></use>
+                                </svg>
+                            </a> 
                         <?php } ?>
                 <?php } ?>
             </h1>
@@ -55,7 +59,46 @@
                         Загадка...
                     <?php } ?>
                 </span>
+                <br>
+                
+                <?php if($data['my_post'] != 0) { ?>
+                    <h4>Избранный пост:</h4>
 
+                    <div class="post-telo">
+                        <div id="vot<?= $data['post']['post_id']; ?>" class="voters">
+                            <div data-id="<?= $data['post']['post_id']; ?>" class="post-up-id"></div>
+                            <div class="score"><?= $data['post']['post_votes']; ?></div>
+                        </div>
+                        <div class="post-body">
+                            <a class="u-url" href="/posts/<?= $data['post']['post_slug']; ?>">
+                                <h2 class="titl"><?= $data['post']['post_title']; ?></h2>
+                            </a>
+                       
+                            <a class="space space_<?= $data['post']['space_tip'] ?>" href="/s/<?= $post['space_slug']; ?>" title="<?= $data['post']['space_name']; ?>">
+                                <?= $data['post']['space_name']; ?>
+                            </a>
+                            
+                            <div class="footer">
+                                <img class="ava" alt="<?= $data['post']['login']; ?>" src="/images/user/small/<?= $data['post']['avatar']; ?>">
+                                <span class="user"> 
+                                    <a href="/u/<?= $data['post']['login']; ?>">
+                                        <?= $data['post']['login']; ?>
+                                    </a> 
+                                </span>
+                                <span class="date"> 
+                                   <?= $data['post']['post_date'] ?>
+                                </span>
+                                <?php if($data['post']['post_comments'] !=0) { ?> 
+                                    <span class="otst"> | </span>
+                                    <a class="u-url" href="/posts/<?= $data['post']['post_slug']; ?>">
+                                       <?= $data['post']['post_comments']; ?>   комментариев
+                                    </a>
+                                <?php } ?>
+                            </div>
+                        </div>                        
+                    </div>
+                <br>   
+                <?php } ?>
             </div>
         </div>    
     </div>

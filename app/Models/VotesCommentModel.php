@@ -20,7 +20,7 @@ class VotesCommentModel extends \MainModel
     // Проверяем, голосовал ли пользователь за комментарий
     public static function getVoteStatus($comm_id, $uid)
 	{
-    
+
         $q = XD::select('*')->from(['votes_comm']);
         $query = $q->where(['votes_comm_item_id'], '=', $comm_id)->and(['votes_comm_user_id'], '=', $uid); 
           

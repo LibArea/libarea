@@ -13,7 +13,7 @@
        
        <link rel="icon" href="/favicon.ico">
 
-        <?php if($data['uid']['id'] > 0) { ?>  
+        <?php if($data['uid']) { ?>  
             <script src="/js/app.js"></script>
         <?php } ?> 
     </head>
@@ -52,7 +52,7 @@
                         </svg>
                     </span>
                 </li>
-                <?php if($data['uid']['id'] > 0) { ?> 
+                <?php if($data['uid']) { ?> 
                     <li class="nav create">  
                         <a class="nav" href="/post/add">  
                             <svg class="md-icon">

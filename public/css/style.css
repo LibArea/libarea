@@ -562,6 +562,20 @@ ol.comment-telo {
     font-size: 13px;
 }
 
+.comments_subtree {
+    position: relative;
+}
+.com-line {
+    position: absolute;
+    left: 20px;
+    border-left: 1px dotted #bbb;
+    top: 37px;
+    bottom: 0;
+}
+.com-line.no-line {
+    border-left-color: transparent;
+}
+
 /* ЛС */
 .red {
     color: #f56400;
