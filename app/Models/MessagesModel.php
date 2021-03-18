@@ -2,6 +2,7 @@
 
 namespace App\Models;
 use XdORM\XD;
+use App\Models\NotificationsModel;
 
 class MessagesModel extends \MainModel
 {
@@ -74,8 +75,8 @@ class MessagesModel extends \MainModel
             
 		}
         
-        // будем хранить в профиле? Или в системе оповещения?
-		// UserModel::update_inbox_unread($uid);
+        // uid получателя и индификатор события
+        NotificationsModel::updateMessagesUnread($uid, $dialog_id);
 
 		return true;
 	}
@@ -154,7 +155,7 @@ class MessagesModel extends \MainModel
         
         XD::insertInto(['messages'], '(', ['dialog_id'], ',', ['message'], ',', ['uid'], ')')->values( '(', XD::setList([$messages_dialog_id, $message, $sender_uid]), ')' )->run();
  
-		self::updateDialogCount($messages_dialog_id, $sender_uid);
+		// self::updateDialogCount($messages_dialog_id, $sender_uid);
 
         /* Где хранить будем изменение и пересчет?
 		   UserModel::updateInboxUnread($recipient_uid);
@@ -163,7 +164,11 @@ class MessagesModel extends \MainModel
 		{
 			// Отправим на E-mail, потом, если он захочет, возможно...
 		} */
+           
 
+        $type = 1; // Личные сообщения        
+        NotificationsModel::send($sender_uid, $recipient_uid, $type, $messages_dialog_id, 1);
+ 
 		return $message_id;
         
     }

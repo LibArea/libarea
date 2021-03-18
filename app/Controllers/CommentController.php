@@ -34,8 +34,9 @@ class CommentController extends \MainController
     
         $data = [
             'comments' => $result,
-            'title' => 'Комментарии',
+            'title'    => 'Комментарии',
             'msg'      => Base::getMsg(),
+            'uid'      => Base::getUid(),
         ]; 
  
         return view("comment/all", ['data' => $data]);
@@ -103,6 +104,7 @@ class CommentController extends \MainController
             'post_id' => $post_id,
             'user_id' => $user_id,
             'msg'     => Base::getMsg(),
+            'uid'     => Base::getUid(),
         ]; 
         
         return view("comment/addform", ['data' => $data]);
@@ -144,6 +146,7 @@ class CommentController extends \MainController
             'comments'  => $result,
             'title'     => 'Комментарии ' . $login,
             'msg'       => Base::getMsg(),
+            'uid'       => Base::getUid(),
         ]; 
         
         return view("comment/commuser", ['data' => $data]);

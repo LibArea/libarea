@@ -1,7 +1,7 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
     <div class="wrap">
 
-        <?php if (!$usr['id'] > 0) { ?>
+        <?php if (!$data['uid'] > 0) { ?>
             <h1 class="top banner">Сайт в стадии разработке. Читать - <a href="/info/about">о нас</a>...</h1> 
         <?php } ?>    
     

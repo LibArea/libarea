@@ -13,6 +13,7 @@ class InfoController extends \MainController
 		$data = [
           'title' => 'Информация',
           'msg'   => Base::getMsg(),
+          'uid'   => Base::getUid(),
         ];
 
          return view("info/index", ['data' => $data]);
@@ -33,6 +34,7 @@ class InfoController extends \MainController
           'comm_num'      => $comm_num,
           'vote_comm_num' => $vote_comm_num,
           'msg'           => Base::getMsg(),
+          'uid'           => Base::getUid(),
         ];
 
         return view('info/stats', ['data' => $data]);
@@ -45,6 +47,7 @@ class InfoController extends \MainController
 		$data = [
           'title' => 'Правила сайта',
           'msg'   => Base::getMsg(),
+          'uid'   => Base::getUid(),
         ];
 
         return view('info/rules', ['data' => $data]);
@@ -58,6 +61,7 @@ class InfoController extends \MainController
 		$data = [
           'title' => 'О нас',
           'msg'   => Base::getMsg(),
+          'uid'   => Base::getUid(),
         ];
 
         return view('info/about', ['data' => $data]);
@@ -70,6 +74,7 @@ class InfoController extends \MainController
 		$data = [
           'title' => 'Политика конфиденциальности',
           'msg'   => Base::getMsg(),
+          'uid'   => Base::getUid(),
         ];
 
         return view('info/privacy', ['data' => $data]);

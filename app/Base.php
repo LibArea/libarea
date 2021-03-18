@@ -1,7 +1,32 @@
 <?php
 
+use App\Models\NotificationsModel;
+
 class Base
 {
+
+    // Возвращает uid участника
+    public static function getUid(){
+
+        $user = Request::getSession('account') ?? []; 
+        if(!empty($user['user_id'])) {
+            $id    = $user['user_id'];
+            $login = $user['login'];
+            $notif = NotificationsModel::usersNotification($id);
+        } else {
+            $id    = 0;
+            $login = 0;
+            $notif = 0;
+        }
+        
+        $uid = [
+          'id'    => $id,
+          'login' => $login,
+          'notif' => $notif,
+        ];
+        
+        return $uid;
+    }
 
     // Возвращает массив сообщений
     public static function getMsg(){

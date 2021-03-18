@@ -21,6 +21,7 @@ class AuthController extends \MainController
         $data = [
           'title' => 'Регистрация',
           'msg'   => Base::getMsg(),
+          'uid'   => Base::getUid(),
         ];
 
         return view('/auth/register', ['data' => $data]);    
@@ -147,6 +148,7 @@ class AuthController extends \MainController
          $data = [
           'title' => 'Вход',
           'msg'   => Base::getMsg(),
+          'uid'   => Base::getUid(),
         ];
 
         return view('/auth/login', ['data' => $data]);

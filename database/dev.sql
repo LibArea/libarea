@@ -267,8 +267,50 @@ ALTER TABLE `messages_dialog`
 
 
 --
--- Индексы сохранённых таблиц
+-- Таблица уведомления
 --
+
+CREATE TABLE `notification` (
+  `notification_id` int(11) NOT NULL,
+  `sender_uid` int(11) DEFAULT NULL COMMENT 'Отправитель',
+  `recipient_uid` int(11) DEFAULT '0' COMMENT 'Получает ID',
+  `action_type` int(4) DEFAULT NULL COMMENT 'Тип оповещения',
+  `connection_type` int(11) DEFAULT NULL COMMENT 'Данные источника',
+  `add_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `read_flag` tinyint(1) DEFAULT '0' COMMENT 'Состояние прочтения',
+  `is_del` tinyint(1) UNSIGNED DEFAULT '0' COMMENT 'Стоит ли удалять'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE `notification`
+  ADD PRIMARY KEY (`notification_id`),
+  ADD KEY `recipient_read_flag` (`recipient_uid`,`read_flag`),
+  ADD KEY `sender_uid` (`sender_uid`),
+  ADD KEY `action_type` (`action_type`),
+  ADD KEY `add_time` (`add_time`);
+  
+
+ALTER TABLE `notification`
+  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;  
+
+ 
+
+
+--
+-- Таблицы `users_notification_setting`
+--
+
+CREATE TABLE `users_notification_setting` (
+  `notice_setting_id` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `data` text COMMENT 'Информация'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE `users_notification_setting`
+  ADD PRIMARY KEY (`notice_setting_id`),
+  ADD KEY `uid` (`uid`);
+
+ALTER TABLE `users_notification_setting`
+  MODIFY `notice_setting_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- Индексы таблицы `auth_logins`

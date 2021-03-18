@@ -1,7 +1,7 @@
 <ol class="comment-telo<?php if ($comm['level'] == 0) { ?> one<?php } ?><?php if ($comm['level'] == 2) { ?> two<?php } ?><?php if ($comm['level'] > 2) { ?> three<?php } ?>"> 
     <li class="comments_subtree" id="comm_<?= $comm['comment_id']; ?>">
 
-       <?php if ($comm['comm_vote_status'] || $usr['id'] == $comm['comment_user_id']) { ?>
+       <?php if ($comm['comm_vote_status'] || $data['uid']['id'] == $comm['comment_user_id']) { ?>
             <div class="voters active">
                 <div class="comm-up-id"></div>
                 <div class="score"><?= $comm['comment_votes']; ?></div>

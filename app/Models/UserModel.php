@@ -139,7 +139,6 @@ class UserModel extends \MainModel
         
     }
     
-    
     // Редактирование профиля
     public static function editProfile($login, $name, $about)
     {
@@ -150,5 +149,16 @@ class UserModel extends \MainModel
         
     }
     
+    // Настройка оповещений
+    public static function getNotificationSettingByUid($uid)
+    {
+        return true;
+    }  
+    
+    // Прочитан или нет
+    public static function updateNotificationUnread($uid)
+    {
+        return true;
+    }
     
 }

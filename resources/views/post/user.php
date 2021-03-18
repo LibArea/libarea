@@ -22,11 +22,9 @@
                             <h3 class="titl"><?php echo $post['title']; ?></h3>
                         </a>
                         
-                        <?php foreach ($post['tags'] as  $tag ): ?>                
-                            <a class="tag tag_<?php echo $tag['tags_tip']; ?>" href="/t/<?php echo $tag['tags_slug']; ?>" title="<?php echo $tag['tags_name']; ?>">
-                                <?php echo $tag['tags_name']; ?>
-                            </a>
-                        <?php endforeach; ?>
+                        <a class="space space_<?= $post['space_tip'] ?>" href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
+                            <?= $post['space_name']; ?>
+                        </a>
                         
                         <div class="footer">
                             <img class="ava" src="/images/user/small/<?php echo $post['avatar']; ?>">

@@ -15,6 +15,7 @@ class UserController extends \MainController
           'title' => 'Все участники',
           'users' => UserModel::getUsersAll(),
           'msg'   => Base::getMsg(),
+          'uid'   => Base::getUid(),
         ];
 
         return view('/user/all', ['data' => $data]);
@@ -48,6 +49,7 @@ class UserController extends \MainController
           'post_num_user' => UserModel::getUsersPostsNum($user['id']),
           'comm_num_user' => UserModel::getUsersCommentsNum($user['id']),
           'msg'           => Base::getMsg(),
+          'uid'           => Base::getUid(),
         ];
 
         return view('/user/profile', ['data' => $data]);
@@ -76,6 +78,7 @@ class UserController extends \MainController
           'about'  => $user['about'],
           'email'  => $user['email'],
           'msg'    => Base::getMsg(),
+          'uid'    => Base::getUid(),
         ];
 
         return view('/user/setting', ['data' => $data]);

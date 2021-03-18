@@ -1,12 +1,3 @@
-<?php $user = Request::getSession('account') ?? []; 
-    if(!empty($user['user_id'])) {
-         $usr['id']    = $user['user_id'];
-         $usr['login'] = $user['login'];
-    } else {
-        $usr['id'] = '0';
-        $usr['login'] = '0';
-    }
-?>
 <!DOCTYPE html>
 <html lang="ru">
     <head>
@@ -22,7 +13,7 @@
        
        <link rel="icon" href="/favicon.ico">
 
-        <?php if($usr['id'] > 0) { ?>  
+        <?php if($data['uid']['id'] > 0) { ?>  
             <script src="/js/app.js"></script>
         <?php } ?> 
     </head>
@@ -61,14 +52,23 @@
                         </svg>
                     </span>
                 </li>
-                <?php if($usr['id'] > 0) { ?> 
+                <?php if($data['uid']['id'] > 0) { ?> 
                     <li class="nav create">  
                         <a class="nav" href="/post/add">  
                             <svg class="md-icon">
                                 <use xlink:href="/svg/icons.svg#plus"></use>
                             </svg> 
                         </a>
-                    </li>                  
+                    </li>   
+                <?php if($data['uid']['notif']) { ?> 
+                    <li class="nav notif">  
+                        <a class="nav" href="/notifications">  
+                            <svg class="md-icon">
+                                <use xlink:href="/svg/icons.svg#mail"></use>
+                            </svg> 
+                        </a>
+                    </li>  
+                <?php } ?>    
                     <li class="nav">
                         <a href="/users/setting">
                             <svg class="md-icon">
@@ -77,8 +77,8 @@
                         </a>
                     </li>
                     <li class="nav">
-                        <a class="logout" href="/u/<?php echo $usr['login']; ?>">
-                            <?php echo $usr['login']; ?>
+                        <a class="logout" href="/u/<?= $data['uid']['login']; ?>">
+                            <?= $data['uid']['login']; ?>
                         </a>
                     </li>
                      <li class="nav">

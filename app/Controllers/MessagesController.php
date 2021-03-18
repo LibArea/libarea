@@ -72,6 +72,7 @@ class MessagesController extends \MainController
             'title'    => 'Личные сообщения',
             'messages' => $result,
             'msg'      => Base::getMsg(),
+            'uid'      => Base::getUid(),
         ];
         
         return view("messages/index", ['data' => $data]);
@@ -137,6 +138,7 @@ class MessagesController extends \MainController
             'list'           => $list,  
             'recipient_user' => $recipient_user,
             'msg'            => Base::getMsg(),
+            'uid'            => Base::getUid(),
         ];
 
         return view("messages/dialog", ['data' => $data]);
@@ -198,6 +200,7 @@ class MessagesController extends \MainController
             'title'          => 'Отправить сообщение ' . $login,
             'recipient_uid'  => $user['id'],
             'msg'            => Base::getMsg(),
+            'uid'            => Base::getUid(),
         ];
 
         return view("messages/useraddmessages", ['data' => $data]);

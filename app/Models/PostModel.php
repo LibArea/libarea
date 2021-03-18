@@ -106,7 +106,8 @@ class PostModel extends \MainModel
         
         $q = XD::select('*')->from(['posts']);
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['post_user_id'])
-                 ->where(['login'], '=', $login);
+                ->leftJoin(['space'])->on(['space_id'], '=', ['post_space_id'])
+                ->where(['login'], '=', $login);
   
         $result = $query->getSelect();
 

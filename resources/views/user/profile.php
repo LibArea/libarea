@@ -11,8 +11,8 @@
             
                 <?php if($data['name']) { ?> / <?= $data['name']; ?><?php } ?>
             
-                <?php if($usr['id'] > 0) { ?>   
-                        <?php if($usr['login'] != $data['login']) { ?>
+                <?php if($data['uid']['id'] > 0) { ?>   
+                        <?php if($data['uid']['login'] != $data['login']) { ?>
                             <small> - <a href="/u/<?= $data['login']; ?>/messages">Отправить сообщение</a></small>
                         <?php } ?>
                 <?php } ?>

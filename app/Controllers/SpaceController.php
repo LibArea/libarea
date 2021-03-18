@@ -13,9 +13,10 @@ class SpaceController extends \MainController
     {
 
         $data = [
-            'space'  => SpaceModel::getSpaceHome(),
             'title' => 'Пространства сайта',
+            'space' => SpaceModel::getSpaceHome(),
             'msg'   => Base::getMsg(),
+            'uid'   => Base::getUid(),
         ];
 
         return view("space/all", ['data' => $data]);
@@ -62,22 +63,24 @@ class SpaceController extends \MainController
         }
         
         $data = [
+            'title'      => 'Пространство',
             'posts'      => $result,
             'space'      => $space,
             'space_hide' => $space_hide,
-            'title'      => 'Пространство',
             'msg'        => Base::getMsg(),
+            'uid'   => Base::getUid(),
         ];
 
         return view("space/spaceposts", ['data' => $data]);
         
     }
 
-    // Изменение тега
+    // Изменение пространства
     public function spaceForma()
     {
         
         $data = [
+            'title' => 'Изменение пространства',
             'space' => SpaceModel::getSpaceHome(),
             'msg'   => Base::getMsg(),
         ]; 

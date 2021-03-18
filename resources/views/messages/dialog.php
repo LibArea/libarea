@@ -2,7 +2,7 @@
 <section>
     <div class="wrap">  
         <div class="messages dialog">
-            <a class="right" href="/messages">Все сообщения</a>
+        <h1><a href="/messages">Все сообщения</a> / <?= $data['title']; ?> </h1>
             
             <form action="/messages/send" method="post">
             <?= csrf_field() ?>
@@ -19,13 +19,12 @@
 			</form>
        
               
-            <ul>
             <?php if ($data['list']) { ?>
                 <?php foreach($data['list'] AS $key => $val) { ?>
               
-                    <div <?php if ($val['uid'] == $usr['id']) { ?> class="active"<?php } ?>>
+                    <div <?php if ($val['uid'] == $data['uid']['id']) { ?> class="active"<?php } ?>>
                         <div class="msg-telo">
-                            <?php if ($val['uid'] == $usr['id']) { ?>
+                            <?php if ($val['uid'] == $data['uid']['id']) { ?>
                                 Я | <?php echo $val['add_time']; ?>
                             <?php } else { ?>
                                 <a href="/u/<?= $val['login']; ?>">
@@ -37,7 +36,7 @@
                             <?= $val['message']; ?>
                             
                             <div class="footer">
-                                <?php if ($val['receipt'] AND $val['uid'] == $usr['id']) { ?> 
+                                <?php if ($val['receipt'] AND $val['uid'] == $data['uid']['id']) { ?> 
                             
                                   Было прочитанно - (<?= $val['receipt']; ?>)
                     
@@ -50,9 +49,8 @@
                     
                 <?php } ?>
             <?php } ?>
-            </ul>
-     
-                           
+    
+        </div>                  
     </div>
 </section>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

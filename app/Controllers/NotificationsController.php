@@ -17,18 +17,15 @@ class NotificationsController extends \MainController
             redirect('/');
         }  
         
-        $user_id = $account['user_id'];
+        $user_uid = $account['user_id'];
         
-        $list = NotificationsModel::listNotification($user_id);
-        
-		if (!$list AND $user_info['notification_unread'] != 0)
-		{
-			// updateNotificationUnread($user_id);
-		}
+        $list = NotificationsModel::listNotification($user_uid);
         
         $data = [
             'title' => 'Уведомления',
+            'list'  => $list,
             'msg'   => Base::getMsg(),
+            'uid'   => Base::getUid(),
         ];
 
         return view("notification/index", ['data' => $data]);

@@ -28,10 +28,10 @@ class PostController extends \MainController
         if($account = Request::getSession('account')){
             // Получаем все теги отписанные участником
             $space_user = SpaceModel::getSpaceUser($account['user_id']);
-            $user_id = $account['user_id'];
+            $user_id    = $account['user_id'];
         } else {
             $space_user = [];
-            $user_id = 0;
+            $user_id    = 0;
         }
             
         $pagesCount = PostModel::getPostHomeCount($space_user); 
@@ -72,11 +72,12 @@ class PostController extends \MainController
         }
 
         $data = [
-            'title'            => 'Посты - главная страница сайта',
+            'title'            => 'Посты - главная страница сайта', 
             'posts'            => $result,
             'space_hide'       => $space_hide,
             'latest_comments'  => $result_comm,
             'msg'              => Base::getMsg(),
+            'uid'              => Base::getUid(),
             'pagesCount'       => $pagesCount,
             'pNum'             => $page,
         ];
@@ -112,6 +113,7 @@ class PostController extends \MainController
          'space_hide'       => 0,
          'posts'            => $result,
          'msg'              => Base::getMsg(),
+         'uid'              => Base::getUid(),
        ];
 
         return view("home", ['data' => $data]);
@@ -146,6 +148,7 @@ class PostController extends \MainController
          'posts'            => $result,
          'pagesCount'       => 0,
          'msg'              => Base::getMsg(),
+         'uid'              => Base::getUid(),
        ];
 
         return view("home", ['data' => $data]);
@@ -154,6 +157,8 @@ class PostController extends \MainController
     // Полный пост
     public function view()
     {
+
+        $uid = Request::getSession('account') ?? []; 
 
         $Parsedown = new Parsedown(); 
         $Parsedown->setSafeMode(true); // безопасность
@@ -181,7 +186,8 @@ class PostController extends \MainController
         } else {
             $post['edit_date'] = NULL;
         }
-  
+        
+        // Перечислим пока все, чтобы знать необходимые...
         $data_post = [
             'id'            => $post['post_id'],
             'title'         => $post['post_title'], 
@@ -202,14 +208,7 @@ class PostController extends \MainController
         
         // Получим комментарии
         $comm = CommentModel::getCommentsPost($post['post_id']);
-         
-        $user = Request::getSession('account') ?? []; 
-        if(!empty($user['user_id'])) {
-            $usr['id'] = $user['user_id'];
-        } else {
-            $usr['id'] = 0;
-        }
-         
+ 
         $result = Array();
         foreach($comm as $ind => $row){
             
@@ -223,7 +222,7 @@ class PostController extends \MainController
             $row['date']       = Base::ru_date($row['comment_date']);
             $row['after']      = $row['comment_after'];
             $row['del']        = $row['comment_del'];
-            $row['comm_vote_status'] = VotesCommentModel::getVoteStatus($row['comment_id'], $usr['id']);
+            $row['comm_vote_status'] = VotesCommentModel::getVoteStatus($row['comment_id'], $uid['user_id']);
             $result[$ind]    = $row;
          
         }
@@ -233,6 +232,7 @@ class PostController extends \MainController
          'comments' => $this->buildTree(0, 0, $result),
          'title'    => $data_post['title'],
          'msg'      => Base::getMsg(),
+         'uid'      => Base::getUid(),
         ]; 
         
         return view("post/view", ['data' => $data]);
@@ -285,6 +285,7 @@ class PostController extends \MainController
          'posts'    => $result,
          'title'    => 'Посты ' . $login,
          'msg'      => Base::getMsg(),
+         'uid'      => Base::getUid(),
         ]; 
         
         return view("post/user", ['data' => $data]);
@@ -298,6 +299,7 @@ class PostController extends \MainController
         $data = [
             'title'    => 'Добавить пост',
             'msg'      => Base::getMsg(),
+            'uid'      => Base::getUid(),
         ];   
        
         return view("post/add", ['data' => $data]);
@@ -385,10 +387,11 @@ class PostController extends \MainController
             'id'         => $post_id,
             'title_post' => htmlspecialchars($post['post_title']),
             'content'    => $post['post_content'],
-            'space_tip'     => $post['space_tip'],
-            'space_slug'    => $post['space_slug'],
-            'space_name'    => $post['space_name'],  
+            'space_tip'  => $post['space_tip'],
+            'space_slug' => $post['space_slug'],
+            'space_name' => $post['space_name'],  
             'msg'        => Base::getMsg(),
+            'uid'        => Base::getUid(),
         ];
         
         return view("post/edit", ['data' => $data]);

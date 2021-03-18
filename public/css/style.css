@@ -377,6 +377,9 @@ input.form-about {width: 250px;}
 }
 
 .nav.create .md-icon {
+    stroke: #09c;
+}
+.nav.notif .md-icon {
     stroke: #f56400;
 }
 /* Диалог */
@@ -560,7 +563,12 @@ ol.comment-telo {
 }
 
 /* ЛС */
-
+.red {
+    color: #f56400;
+}
+.fl.active .md-icon {
+    stroke: #f56400;
+} 
 .messages {
     margin: 0 15px;
 }
@@ -574,6 +582,8 @@ ol.comment-telo {
 .msg-telo.active {
    background-color: lightyellow;
 }
+
+ 
 
 /* Profile */
 .avatar-user .md-icon {
