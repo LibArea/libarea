@@ -6,7 +6,7 @@
                 <?= $data['posts'][0]['space_description']; ?>
             </div>
              
-            <?php if($data['uid']) { ?> 
+            <?php if(!empty($data['uid']['id'])) { ?>  
                 <div> <br> <center>
                     <?php if($data['space_hide'] == 1) { ?> 
                         <div data-id="<?= $data['posts'][0]['space_id']; ?>" class="hide-space-id add-space">Подписаться</div>

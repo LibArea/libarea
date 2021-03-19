@@ -178,7 +178,6 @@ header .wrap {
     align-items: center;
 }
 .menu ul, .menu-left ul{
-    text-align: center;
     margin: 0 0 0 5px;
     list-style: none;
 }
@@ -216,6 +215,43 @@ header .wrap {
 .mlogout {
     color: #717171;
 }
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 140px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    right: 6px;
+    top: 23px;
+    padding: 2px 4px 4px 4px;
+    border-radius: 3px;
+}
+.dropdown-menu.fast {
+    display: block;
+}
+
+.dropdown-menu a {
+    color: #333;
+    font-size: 14px;
+    display: block;
+    padding: 8px 9px 1px 6px;
+    font-size:15px;
+}
+.dropdown-menu a:hover {
+    color: #666;
+}
+.dropdown-menu a span.ti-angle-down:hover {
+    color:#333;
+}
+hr {
+    border: none;
+    color: #ddd;
+    clear: both;
+    background-color: #ddd;
+    height: 1px;
+}
+
 
 /* Пагинация */
 .pagination {
@@ -741,3 +777,5 @@ ol.comment-telo {
     color: green;
     margin-bottom: 12px;
 }
+
+ 

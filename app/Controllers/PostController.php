@@ -140,12 +140,29 @@ class PostController extends \MainController
             $result[$ind]         = $row;
          
         }  
-
+        
+        $latest_comments = CommentModel::latestComments();
+        
+        $result_comm = Array();
+        foreach($latest_comments as $ind => $row){
+            
+            if(!$row['avatar'] ) {
+                $row['avatar'] = 'noavatar.png';
+            } 
+   
+            $row['comment_avatar']     = $row['avatar'];
+            $row['comment_content']    = htmlspecialchars(mb_substr($row['comment_content'],0,81, 'utf-8'));  
+            $row['comment_date']       = Base::ru_date($row['comment_date']);
+            $result_comm[$ind]         = $row;
+         
+        }
+        
        $data = [
          'title'            => 'Все посты',
          'latest_comments'  => 0,
          'space_hide'       => 0,
          'posts'            => $result,
+         'latest_comments'  => $result_comm,
          'pagesCount'       => 0,
          'msg'              => Base::getMsg(),
          'uid'              => Base::getUid(),

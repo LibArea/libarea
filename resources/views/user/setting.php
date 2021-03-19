@@ -5,7 +5,7 @@
         <a class="right" href="/u/<?php echo $data['login']; ?>">Посмотреть профиль</a>
         
         <img alt="Профиль" src="/images/user/<?php echo $data['avatar']; ?>">
-         
+        <br>  <a class="edit-ava" href="/users/setting/ava">изменить</a><br>
         <div class="box setting">
             <form action="/users/setting/edit" method="post" enctype="multipart/form-data">
             <?php csrf_field(); ?>
@@ -27,10 +27,7 @@
                     <label for="about">О себе</label>
                     <textarea type="text" class="form-about" name="about" id="about"><?php echo $data['about']; ?></textarea>
                 </div>
-                <div class="boxline">
-                    <input id="fileInput" name="image" accept="image/*" type="file" />
-                </div>
-                
+               
                 <div class="boxline">
                     <input type="hidden" name="nickname" id="nickname" value="">
                     <button type="submit" class="btn btn-primary">Изменить</button>

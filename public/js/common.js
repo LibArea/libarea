@@ -48,7 +48,14 @@ $(document).on('click', '#toggledark', function() {
      // document.querySelector('#toggledark span').innerHTML = icons.sun;
     }
 });
- 
+// Show hide popover
+$(document).on("click", ".dropbtn", function(){       
+    $('.dropdown-menu').addClass('fast');
+    
+    $('body, .dropbtn a').click(function () {
+        $('.dropdown-menu').removeClass('fast');
+    });
+});
 // TODO: move to util
 function getCookie(cname) {
     var name = cname + "=";
@@ -64,3 +71,4 @@ function getCookie(cname) {
     }
     return "";
 }
+ 

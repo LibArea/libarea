@@ -11,7 +11,7 @@
             
                 <?php if($data['name']) { ?> / <?= $data['name']; ?><?php } ?>
             
-                <?php if($data['uid']) { ?>   
+                <?php if(!empty($data['uid']['id'])) { ?>   
                         <?php if($data['uid']['login'] != $data['login']) { ?> &nbsp; 
                             <a href="/u/<?= $data['login']; ?>/messages">
                                 <svg class="md-icon">
@@ -74,7 +74,7 @@
                                 <h2 class="titl"><?= $data['post']['post_title']; ?></h2>
                             </a>
                        
-                            <a class="space space_<?= $data['post']['space_tip'] ?>" href="/s/<?= $post['space_slug']; ?>" title="<?= $data['post']['space_name']; ?>">
+                            <a class="space space_<?= $data['post']['space_tip'] ?>" href="/s/<?= $data['post']['space_slug']; ?>" title="<?= $data['post']['space_name']; ?>">
                                 <?= $data['post']['space_name']; ?>
                             </a>
                             

@@ -13,7 +13,7 @@
        
        <link rel="icon" href="/favicon.ico">
 
-        <?php if($data['uid']) { ?>  
+        <?php if(!empty($data['uid']['id'])) { ?>
             <script src="/js/app.js"></script>
         <?php } ?> 
     </head>
@@ -52,7 +52,7 @@
                         </svg>
                     </span>
                 </li>
-                <?php if($data['uid']) { ?> 
+                <?php if(!empty($data['uid']['id'])) { ?> 
                     <li class="nav create">  
                         <a class="nav" href="/post/add">  
                             <svg class="md-icon">
@@ -60,33 +60,55 @@
                             </svg> 
                         </a>
                     </li>   
-                <?php if($data['uid']['notif']) { ?> 
-                    <li class="nav notif">  
-                        <a class="nav" href="/notifications">  
+                    <?php if($data['uid']['notif']) { ?> 
+                        <li class="nav notif">  
+                            <a class="nav" href="/notifications">  
+                                <svg class="md-icon">
+                                    <use xlink:href="/svg/icons.svg#mail"></use>
+                                </svg> 
+                            </a>
+                        </li>  
+                    <?php } ?>    
+                    <li class="dropbtn nav">
+                        <a class="b-my" href="#" title=""><span><?= $data['uid']['login']; ?></span>  
                             <svg class="md-icon">
-                                <use xlink:href="/svg/icons.svg#mail"></use>
-                            </svg> 
+                                <use xlink:href="/svg/icons.svg#chevrons-down"></use>
+                            </svg>  
                         </a>
-                    </li>  
-                <?php } ?>    
-                    <li class="nav">
-                        <a href="/users/setting">
-                            <svg class="md-icon">
-                                <use xlink:href="/svg/icons.svg#settings"></use>
-                            </svg>
-                        </a>
-                    </li>
-                    <li class="nav">
-                        <a class="logout" href="/u/<?= $data['uid']['login']; ?>">
-                            <?= $data['uid']['login']; ?>
-                        </a>
-                    </li>
-                     <li class="nav">
-                        <a class="logout" href="/logout/">
-                            <svg class="md-icon">
-                                <use xlink:href="/svg/icons.svg#arrow-bar-to-right"></use>
-                            </svg>
-                        </a>
+                        <span class="dropdown-menu">
+                            <span class="st"></span>
+                            <a href="/u/<?= $data['uid']['login']; ?>">
+                                <svg class="md-icon">
+                                    <use xlink:href="/svg/icons.svg#user"></use>
+                                </svg> 
+                                Профиль
+                            </a>
+                            <a href="/users/setting">
+                                <svg class="md-icon">
+                                    <use xlink:href="/svg/icons.svg#settings"></use>
+                                </svg> 
+                                Настройки
+                            </a>
+                            <a href="/threads/<?= $data['uid']['login']; ?>"> 
+                                <svg class="md-icon">
+                                    <use xlink:href="/svg/icons.svg#devices"></use>
+                                </svg> 
+                                Мои ответы 
+                            </a>
+                            <a href="/admin" target="_black">
+                                <svg class="md-icon">
+                                    <use xlink:href="/svg/icons.svg#ad"></use>
+                                </svg>   
+                                Админка                    
+                            </a>
+                            <hr>   
+                            <a href="/logout" class="logout" target="_self" title="Выход">
+                                <svg class="md-icon">
+                                    <use xlink:href="/svg/icons.svg#arrow-bar-to-right"></use>
+                                </svg> 
+                                Выход
+                            </a>
+                        </span>
                     </li>
                 <?php } else { ?> 
                     <li class="nav">
