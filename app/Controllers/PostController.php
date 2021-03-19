@@ -202,6 +202,7 @@ class PostController extends \MainController
             'edit_date'     => Base::ru_date($post['edit_date']),
             'slug'          => $post['post_slug'],
             'login'         => $post['login'],
+            'my_post'       => $post['my_post'],
             'avatar'        => $post['avatar'],
             'num_comments'  => $post['post_comments'],   
             'space_tip'     => $post['space_tip'],
@@ -446,6 +447,30 @@ class PostController extends \MainController
         PostModel::editPost($post_id, $post_title, $post_content);
         
         redirect('/posts/' . $post['post_slug']);
+        
+    }
+    
+    // Размещение своего поста у себя в профиле
+    public function addPostProf()
+    {
+        
+        if(!$account = Request::getSession('account')) {
+           return true;
+        } 
+        
+        $post_id = Request::getPost('post_id');
+        
+        // Получим пост
+        $post = PostModel::getPostId($post_id); 
+        
+        // Это делать может только может только автор
+        if ($post['post_user_id'] != $account['user_id']) {
+            return true;
+        }
+        
+        PostModel::addPostProfile($post_id, $account['user_id']);
+       
+        return true;
         
     }
     

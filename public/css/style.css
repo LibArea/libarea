@@ -57,7 +57,7 @@ code {
 .telo.detail .post a, .comm-telo-body a {
 	text-decoration: underline;
 }
-.telo.profile, .telo.info {
+.telo.profile, .telo.info, .telo.detail_post{
     margin-left: 5px;
 }
 blockquote {

@@ -12,7 +12,7 @@ $(function(){
         });
     });
 
-    // подписка на блог
+    // Подписка на блог
     $(document).on("click", ".hide-space-id", function(){      
         var space_id  = $(this).data('id');  
         $.ajax({
@@ -21,8 +21,20 @@ $(function(){
             data: {space_id: space_id},
         }).done(function(data) {
             location.reload();
-           // $('#up' + tag_id + '.voters').addClass('active');
-            //$('#up' + tag_id).find('.score').html('+');
         });
     }); 
+    
+    // Добавить пост в профиль
+    $(document).on("click", ".user-mypost", function(){  
+        var post_id = $(this).data('post'); 
+        var opt     = $(this).data('opt');
+        $.ajax({
+            url: '/post/addpostprof/' + post_id,
+            type: 'POST',
+            data: {post_id: post_id},
+        }).done(function(data) {
+           $('.user-mypost').find('.mu_post').html('+ в профиле');
+        });
+    });
+    
 });

@@ -1,7 +1,7 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 <section>
     <div class="wrap">
-        <div class="telo detail">
+        <div class="telo detail_post">
             <h1 class="titl"><?= $data['post']['title']; ?></h1>
             <div class="footer">
                 <img class="ava" src="/images/user/small/<?= $data['post']['avatar']; ?>">
@@ -28,6 +28,13 @@
                                 </svg>
                             </a>
                         </span>
+                        <?php if($data['post']['my_post'] == $data['post']['id']) { ?>
+                                <span class="mu_post">+ в профиле</span>
+                        <?php } else { ?> 
+                            <a class="user-mypost" data-opt="1" data-post="<?= $data['post']['id']; ?>">
+                                <span class="mu_post">В профиль</span>
+                            </a>
+                        <?php } ?> 
                     <?php } ?> 
                 <?php } ?>
             </div>   

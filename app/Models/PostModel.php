@@ -190,4 +190,15 @@ class PostModel extends \MainModel
         return $result;
 
     }
+    
+    // Добавить пост в профиль
+    public static function addPostProfile($post_id, $uid)
+    {
+
+        XD::update(['users'])->set(['my_post'], '=', $post_id)
+        ->where(['id'], '=', $uid)->run();
+ 
+        return true;
+    }
+    
 }
