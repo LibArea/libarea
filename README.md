@@ -24,7 +24,16 @@ https://my.areadev.ru
 
 Это тестовая версия!
 
+Идеи, минимализм, дизайна был взят из того, что мне нравится:
 
-### MIT License
+
+* https://news.ycombinator.com/
+* https://lobste.rs/
+* https://meta.discourse.org/
+* https://discuss.flarum.org/
+
+...
+
+#### MIT License
 
 https://github.com/Toxu-ru/AreaDev/blob/main/LICENSE
