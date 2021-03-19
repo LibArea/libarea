@@ -68,6 +68,9 @@ Route::type('post')->protect()->get('/post/create')->controller('PostController@
 Route::get('/post/edit/{id}')->controller('PostController@editPost');
 Route::type('post')->protect()->get('/post/editpost/{id}')->controller('PostController@editPostRecording');
 
+// Помещаем свой пост в профиль
+Route::type('post')->get('/post/addpostprof/{id}')->controller('PostController@addPostProf')->where(['id' => '[0-9]+']);
+
 // Личные сообщения 
 Route::get('/messages')->controller('MessagesController');  
 Route::type('post')->protect()->get('/messages/send')->controller('MessagesController@send');
