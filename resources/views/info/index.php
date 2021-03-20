@@ -3,14 +3,14 @@
     <div class="wrap">
         <h1>Информация</h1>
 
-        
+      
         <p>Сайт работает на <a rel="nofollow noreferrer" target="_blank" href="https://phphleb.ru/">Микрофреймворке HLEB</a></p>
         
         <img src="/svg/logo.svg" width="200" height="200" class="hl-block" alt="HL">
         
         <p><b>HLEB</b> — это PHP-фреймворк с очень маленьким размером, созданный для разработчиков, которым нужен простой и элегантный инструментарий для создания полнофункциональных веб-приложений.</p>
          
-        <p>На GitHub: <a rel="nofollow noreferrer" target="_blank" href="https://github.com/phphleb/hleb">PHP Micro-Framework HLEB </a></p>
+        <p><i>HLEB на GitHub:</i> <a rel="nofollow noreferrer" target="_blank" href="https://github.com/phphleb/hleb">PHP Micro-Framework HLEB </a></p>
       
         --------
       
@@ -25,7 +25,7 @@
         <pre><code>app/Controllers/InfoControllers.php</code></pre> 
         
          <br> 
-         AreaDev на GitHub: <a rel="nofollow noreferrer" target="_blank" href="https://github.com/Toxu-ru/AreaDev">AreaDev</a>
+         <i>AreaDev на GitHub:</i> <a rel="nofollow noreferrer" target="_blank" href="https://github.com/Toxu-ru/AreaDev">AreaDev</a>
         
     </div>
 </section>

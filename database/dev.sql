@@ -157,8 +157,8 @@ CREATE TABLE `users` (
   `reset_token` varchar(250) DEFAULT NULL,
   `reset_expire` datetime DEFAULT NULL,
   `activated` tinyint(1) NOT NULL,
-  `activate_token` varchar(250) DEFAULT NULL,
-  `activate_expire` varchar(250) DEFAULT NULL,
+  `reg_ip` bigint(12) DEFAULT NULL,
+  `last_ip` bigint(12) DEFAULT NULL,
   `role` int NOT NULL COMMENT 'По умолчанию 2 (1 - админ)',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -167,16 +167,16 @@ CREATE TABLE `users` (
   `about` varchar(255) DEFAULT NULL,
   `rating` int NOT NULL DEFAULT '0',
   `status` varchar(250) DEFAULT NULL,
-  `my_post` int DEFAULT NULL COMMENT 'Пост выведенный в профиль',
-  `post_profile` int NOT NULL DEFAULT '0'
+  `my_post` int DEFAULT NULL COMMENT 'Пост выведенный в профиль'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 --
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`id`, `login`, `name`, `email`, `password`, `reset_token`, `reset_expire`, `activated`, `activate_token`, `activate_expire`, `role`, `created_at`, `updated_at`, `deleted_at`, `avatar`, `about`, `rating`, `status`, `my_post`, `post_profile`) VALUES
-(1, 'AdreS', 'Олег', 'ss@sdf.ru', '$2y$10$oR5VZ.zk7IN/og70gQq/f.0Sb.GQJ33VZHIES4pyIpU3W2vF6aiaW', '', NULL, 1, NULL, NULL, 1, '2021-03-08 21:37:04', '2021-03-08 21:37:04', 0, '', 'Тестовый аккаунт', 0, '', 0, 0);
+INSERT INTO `users` (`id`, `login`, `name`, `email`, `password`, `reset_token`, `reset_expire`, `activated`, `reg_ip`, `last_ip`, `role`, `created_at`, `updated_at`, `deleted_at`, `avatar`, `about`, `rating`, `status`, `my_post`) VALUES
+(1, 'AdreS', 'Олег', 'ss@sdf.ru', '$2y$10$oR5VZ.zk7IN/og70gQq/f.0Sb.GQJ33VZHIES4pyIpU3W2vF6aiaW', '', NULL, 1, NULL, NULL, 1, '2021-03-08 21:37:04', '2021-03-08 21:37:04', 0, '', 'Тестовый аккаунт', 0, '', 0);
 
 -- --------------------------------------------------------
 

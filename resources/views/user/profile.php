@@ -11,8 +11,8 @@
             
                 <?php if($data['name']) { ?> / <?= $data['name']; ?><?php } ?>
             
-                <?php if(!empty($data['uid']['id'])) { ?>   
-                        <?php if($data['uid']['login'] != $data['login']) { ?> &nbsp; 
+                <?php if($uid['id']) { ?>   
+                        <?php if($uid['login'] != $data['login']) { ?> &nbsp; 
                             <a href="/u/<?= $data['login']; ?>/messages">
                                 <svg class="md-icon">
                                     <use xlink:href="/svg/icons.svg#mail"></use>

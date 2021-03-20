@@ -18,13 +18,13 @@ class AuthController extends \MainController
            redirect('/');
         } 
     
+        $uid  = Base::getUid();
         $data = [
-          'title' => 'Регистрация',
-          'msg'   => Base::getMsg(),
-          'uid'   => Base::getUid(),
+            'title'       => 'Регистрация | AreaDev',
+            'description' => 'Страница регистрации на сайте AreaDev',
         ];
 
-        return view('/auth/register', ['data' => $data]);    
+        return view('/auth/register', ['data' => $data, 'uid' => $uid]);    
    
     }
 
@@ -125,7 +125,7 @@ class AuthController extends \MainController
             redirect('/register');
         }
 
-        if (strlen($password) < 8 || strlen($password) > 124)
+        if (Base::getStrlen($password) < 8 || Base::getStrlen($password) > 24)
         {
             Base::addMsg('Длина пароля должна быть от 8 до 24 знаков', 'error');
             redirect('/register');
@@ -144,14 +144,14 @@ class AuthController extends \MainController
         if(Request::getSession('account')) {
           redirect('/');
         }
-
-         $data = [
-          'title' => 'Вход',
-          'msg'   => Base::getMsg(),
-          'uid'   => Base::getUid(),
+        
+        $uid  = Base::getUid();
+        $data = [
+            'title' => 'Вход | Авторизация',
+            'description' => 'Авторизация на сайте AreaDev',
         ];
 
-        return view('/auth/login', ['data' => $data]);
+        return view('/auth/login', ['data' => $data, 'uid' => $uid]);
 
     }
 
@@ -165,11 +165,6 @@ class AuthController extends \MainController
         if (!$this->checkEmail($email)) {
            Base::addMsg('Недопустимый email', 'error');
            redirect('/login');
-        }
-
-        if (strlen($password) < 8 || strlen($password) > 24) {
-            Base::addMsg('Длина пароля должна быть от 8 до 24 знаков', 'error');
-            redirect('/login');
         }
 
         $userInfo = UserModel::getUserInfo($email);
@@ -205,6 +200,22 @@ class AuthController extends \MainController
        session_destroy();
        // Возможно, что нужно очистить все или некоторые cookies
        redirect('/');
+    }
+
+    public function recoverPage () 
+    {
+        if(Request::getSession('account')) {
+          redirect('/');
+        }
+        
+        $uid  = Base::getUid();
+        $data = [
+            'title'       => 'Восстановление пароля',
+            'description' => 'Страница восстановление пароля на сайте AreaDev',
+        ];
+
+        return view('/auth/recover', ['data' => $data, 'uid' => $uid]);
+ 
     }
 
     // Длина строки

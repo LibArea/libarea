@@ -463,7 +463,7 @@ input.form-about {width: 250px;}
 .footer a:hover {
     color: #555;
 }
-.footer .ava {
+.footer .ava, .mini.ava {
     border-radius: 8px;
     height: 16px;
     margin-bottom: 2px;
@@ -657,10 +657,12 @@ ol.comment-telo {
     height: 100px;
     width: 100px;
 }
-
+.telo-profile, .telo-post {
+    margin-left: 5px;
+}
 .box .boxline {
     clear: both;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.9em;
 }
 .box label, .box .label_holder {
     display: block;
@@ -675,11 +677,7 @@ ol.comment-telo {
 }
 .box label {
     width: 7em;
-    line-height: 2em;
     vertical-align: middle;
-}
-.box label, .box span, .box select, .box br {
-    line-height: 2em;
 }
 .box label {
     display: block;
@@ -749,6 +747,37 @@ ol.comment-telo {
     border-color: transparent transparent #ac130d transparent;
     color: #ac130d;
 }
+
+/* Горизонтальное меню */
+.nav-tabs {
+    position: relative;
+    z-index: 1;
+    height: 63px;
+    margin: 0;
+    padding: 0 0 10px 0;
+    list-style: none;
+    color: #667d99;
+}
+.nav-tabs > li {
+    margin: 0 10px 0 0;
+    font-size: 14px;
+    float: left;
+}
+.nav-tabs > li > a {
+    line-height: 30px;
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+}
+.nav-tabs > li.active span {
+    line-height: 30px;
+    padding: 10px 15px;
+    font-size: 14px;
+    border-bottom: 2px solid #f56400;
+    color: #717171;
+}
+
 
 @media screen and (max-width: 720px) {
     .no-mob {

@@ -31,15 +31,15 @@ class CommentController extends \MainController
             $result[$ind] = $row;
          
         }
-    
+        
+        $uid  = Base::getUid();
         $data = [
-            'comments' => $result,
-            'title'    => 'Комментарии',
-            'msg'      => Base::getMsg(),
-            'uid'      => Base::getUid(),
+            'title'       => 'Все комментарии на AreaDev',
+            'description' => 'Все комментарии на сайте AreaDev в порядке очередности',
+            'comments'    => $result,
         ]; 
  
-        return view("comment/all", ['data' => $data]);
+        return view("comment/all", ['data' => $data, 'uid' => $uid]);
         
     }
 
@@ -71,8 +71,8 @@ class CommentController extends \MainController
         $ip        = Request::getRemoteAddress();      // ip отвечающего 
         
         // id того, кто отвечает
-        $account = Request::getSession('account');
-        $my_id = $account['user_id'];
+        $account   = Request::getSession('account');
+        $my_id     = $account['user_id'];
         
         // Записываем покммент
         CommentModel::commentAdd($post_id, $ip, $comm_id, $comment, $my_id);
@@ -99,15 +99,16 @@ class CommentController extends \MainController
             $user_id  = 0;
         }
         
+        $uid  = Base::getUid();
         $data = [
-            'comm_id' => $id,
-            'post_id' => $post_id,
-            'user_id' => $user_id,
-            'msg'     => Base::getMsg(),
-            'uid'     => Base::getUid(),
+            'title'       => 'Форма ответа',
+            'description' => 'Форма ответа...',
+            'comm_id'     => $id,
+            'post_id'     => $post_id,
+            'user_id'     => $user_id,
         ]; 
         
-        return view("comment/addform", ['data' => $data]);
+        return view("comment/addform", ['data' => $data, 'uid' => $uid]);
     }
 
     // Комментарии участника
@@ -142,14 +143,14 @@ class CommentController extends \MainController
          
         }
         
+        $uid  = Base::getUid();
         $data = [
-            'comments'  => $result,
-            'title'     => 'Комментарии ' . $login,
-            'msg'       => Base::getMsg(),
-            'uid'       => Base::getUid(),
+            'title'       => 'Комментарии ' . $login,
+            'description' => 'Страница комментариев учасника ' . $login,
+            'comments'    => $result,
         ]; 
         
-        return view("comment/commuser", ['data' => $data]);
+        return view("comment/commuser", ['data' => $data, 'uid' => $uid]);
          
     }
 

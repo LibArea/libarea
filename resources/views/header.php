@@ -5,17 +5,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
-        <title><?php echo $data['title']; ?></title>
-
+        <title><?= $data['title']; ?></title>
+        <meta name = "description" content = "<?= $data['description']; ?>" />
         <link rel="stylesheet" href="/css/style.css">
-        <script src="/js/jquery.min.js"></script>
-        <script src="/js/common.js"></script>
-       
-       <link rel="icon" href="/favicon.ico">
-
-        <?php if(!empty($data['uid']['id'])) { ?>
-            <script src="/js/app.js"></script>
-        <?php } ?> 
+        <link rel="icon" href="/favicon.ico">
     </head>
 <body class="bd<?php if(Request::getCookie('dayNight') == 'dark') {?> dark<?php } ?>">
 <header>
@@ -52,7 +45,14 @@
                         </svg>
                     </span>
                 </li>
-                <?php if(!empty($data['uid']['id'])) { ?> 
+                <?php if(!$uid['id']) { ?> 
+                    <li class="nav">
+                        <a class="login" href="/login">Войти</a>
+                    </li>
+                    <li class="nav">
+                        <a class="register" href="/register">Регистрация</a>
+                    </li>
+                <?php } else { ?> 
                     <li class="nav create">  
                         <a class="nav" href="/post/add">  
                             <svg class="md-icon">
@@ -60,7 +60,7 @@
                             </svg> 
                         </a>
                     </li>   
-                    <?php if($data['uid']['notif']) { ?> 
+                    <?php if($uid['notif']) { ?> 
                         <li class="nav notif">  
                             <a class="nav" href="/notifications">  
                                 <svg class="md-icon">
@@ -70,14 +70,14 @@
                         </li>  
                     <?php } ?>    
                     <li class="dropbtn nav">
-                        <a class="b-my" href="#" title=""><span><?= $data['uid']['login']; ?></span>  
+                        <a class="b-my" href="#" title=""><span><?= $uid['login']; ?></span>  
                             <svg class="md-icon">
                                 <use xlink:href="/svg/icons.svg#chevrons-down"></use>
                             </svg>  
                         </a>
                         <span class="dropdown-menu">
                             <span class="st"></span>
-                            <a href="/u/<?= $data['uid']['login']; ?>">
+                            <a href="/u/<?= $uid['login']; ?>">
                                 <svg class="md-icon">
                                     <use xlink:href="/svg/icons.svg#user"></use>
                                 </svg> 
@@ -89,7 +89,7 @@
                                 </svg> 
                                 Настройки
                             </a>
-                            <a href="/threads/<?= $data['uid']['login']; ?>"> 
+                            <a href="/threads/<?= $uid['login']; ?>"> 
                                 <svg class="md-icon">
                                     <use xlink:href="/svg/icons.svg#devices"></use>
                                 </svg> 
@@ -110,25 +110,18 @@
                             </a>
                         </span>
                     </li>
-                <?php } else { ?> 
-                    <li class="nav">
-                        <a class="login" href="/login">Войти</a>
-                    </li>
-                    <li class="nav">
-                        <a class="register" href="/register">Регистрация</a>
-                    </li>
                 <?php } ?>     
             </ul>    
 		</div>
 	</div>
 </header>
 
-    <?php if ($data['msg']) { ?>
-      <div class="wrap">
+<?php if ($uid['msg']) { ?>
+    <div class="wrap">
         <div class="msg">
-          <?php foreach($data['msg'] as $message){ ?>
-            <?php echo $message; ?>
-          <?php } ?>
+            <?php foreach($uid['msg'] as $message){ ?>
+                <?= $message; ?>
+            <?php } ?>
         </div>
-      </div>
-    <?php } ?>
+    </div>
+<?php } ?>

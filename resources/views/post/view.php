@@ -1,7 +1,7 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 <section>
     <div class="wrap">
-        <div class="telo detail_post">
+        <div class="telo telo-post">
             <h1 class="titl"><?= $data['post']['title']; ?></h1>
             <div class="footer">
                 <img class="ava" src="/images/user/small/<?= $data['post']['avatar']; ?>">
@@ -19,8 +19,8 @@
                         <?= $data['post']['space_name']; ?>
                     </a>
                 </span>
-                <?php if ($data['uid']) { ?>
-                    <?php if($data['uid']['login'] == $data['post']['login']) { ?>
+                <?php if ($uid['id']) { ?>
+                    <?php if($uid['login'] == $data['post']['login']) { ?>
                         <span class="date">
                            &nbsp; <a href="/post/edit/<?= $data['post']['id']; ?>">
                                 <svg class="md-icon moon">
@@ -42,7 +42,7 @@
                 <?= $data['post']['content']; ?> 
             </div> 
 
-            <?php if ($data['uid']) { ?>
+            <?php if ($uid['id']) { ?>
             <form id="add_comm" class="new_comment" action="/comment/add" accept-charset="UTF-8" method="post">
             <?= csrf_field() ?>
                 <textarea rows="5" placeholder="Напишите, что нибудь..." name="comment" id="comment"></textarea>
@@ -70,8 +70,13 @@
                     <ol class="comment-telo<?php if ($comm['level'] == 0) { ?> one<?php } ?><?php if ($comm['level'] == 2) { ?> two<?php } ?><?php if ($comm['level'] > 2) { ?> three<?php } ?>"> 
                         <li class="comments_subtree" id="comm_<?= $comm['comment_id']; ?>">
                         
-                        <?php if ($data['uid']) { ?> 
-                           <?php if ($comm['comm_vote_status'] || $data['uid']['id'] == $comm['comment_user_id']) { ?>
+                        <?php if (!$uid['id']) { ?> 
+                            <div class="voters">
+                                <a rel="nofollow" href="/login"><div class="comm-up-id"></div></a>
+                                <div class="score"><?= $comm['comment_votes']; ?></div>
+                            </div>
+                        <?php } else { ?>
+                            <?php if ($comm['comm_vote_status'] || $uid['id'] == $comm['comment_user_id']) { ?>
                                 <div class="voters active">
                                     <div class="comm-up-id"></div>
                                     <div class="score"><?= $comm['comment_votes']; ?></div>
@@ -82,11 +87,6 @@
                                     <div class="score"><?= $comm['comment_votes']; ?></div>
                                 </div>
                             <?php } ?>
-                        <?php } else { ?>
-                                <div class="voters active">
-                                    <div class="comm-up-id"></div>
-                                    <div class="score"><?= $comm['comment_votes']; ?></div>
-                                </div>
                         <?php } ?>
                         
                             <div class="com-line<?php if($comm['comment_after'] != 1 and $comm['comment_on'] == 0) { ?> no-line<?php } ?>"></div> 

@@ -26,7 +26,7 @@ class PostModel extends \MainModel
             $string = 0;
         }        
         
-        $offset = ($page-1) * 10; 
+        $offset = ($page-1) * 15; 
 
         $sql = "SELECT p.post_id, p.post_title, p.post_slug, p.post_user_id, p.post_space_id, p.post_comments, p.post_date, p.post_votes,
                 u.id, u.login, u.avatar,
@@ -35,7 +35,7 @@ class PostModel extends \MainModel
                 INNER JOIN users as u ON u.id = p.post_user_id
                 INNER JOIN space as s ON s.space_id = p.post_space_id
                 WHERE p.post_space_id NOT IN(".$string.")
-                ORDER BY p.post_id DESC LIMIT 10 OFFSET ".$offset." ";
+                ORDER BY p.post_id DESC LIMIT 15 OFFSET ".$offset." ";
                         
         
         $result = DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 

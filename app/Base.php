@@ -10,12 +10,15 @@ class Base
         $user = Request::getSession('account') ?? [];
         $uid = [];
         if (!empty($user['user_id'])) {
-            $uid['id'] = $user['user_id'];
+            $uid['id']    = $user['user_id'];
             $uid['login'] = $user['login'] ?? 'undefined'; 
-            $uid['notif'] = NotificationsModel::usersNotification($uid['id']);            
-            return $uid;
+            $uid['notif'] = NotificationsModel::usersNotification($uid['id']);
+        } else {
+            $uid['id']    = null;
         }
-        return false;
+        $uid['msg']   = self::getMsg();
+        
+        return $uid;
     }
  
 
@@ -373,5 +376,9 @@ class Base
         setcookie('dev_secure', $loginEncode, $loginTime + 604800, '/');
     } 
     
-    
+    // Длина строки
+    public static function getStrlen($str)
+    {
+        return mb_strlen($str, "utf-8");
+    }
 }

@@ -7,7 +7,7 @@
   
                 <?php foreach ($data['messages'] as  $msg) { ?>
                     <div class="msg-telo<?php if (!$msg['unread'] > 0) { ?> active<?php } ?>">
-                        <?php if($msg['sender_uid'] == $data['uid']['id']) {  ?>
+                        <?php if($msg['sender_uid'] == $uid['id']) {  ?>
                              Я  |  <?= $msg['update_time']; ?> <br>
                         <?php } else { ?>
                              От 

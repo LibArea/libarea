@@ -11,15 +11,15 @@ class UserController extends \MainController
     // Все пользователи
     function index()
     {
-     
+        
+        $uid  = Base::getUid();
         $data = [
           'title' => 'Все участники',
+          'description' => 'Список всех участников сортированных по дате регистрации сайте AreaDev',
           'users' => UserModel::getUsersAll(),
-          'msg'   => Base::getMsg(),
-          'uid'   => Base::getUid(),
         ];
 
-        return view('/user/all', ['data' => $data]);
+        return view('/user/all', ['data' => $data, 'uid' => $uid]);
     }
 
     // Страница участника
@@ -40,9 +40,11 @@ class UserController extends \MainController
         if(!$user['avatar']) {
                 $user['avatar'] = 'noavatar.png';
         }
-
+        
+        $uid  = Base::getUid();
         $data =[
           'title'         => $user['login'] . ' - профиль',
+          'description'   => 'Страница профиля учасника (постов, комментариев) ' . $user['login'],
           'id'            => $user['id'],
           'login'         => $user['login'],
           'name'          => $user['name'],
@@ -53,11 +55,9 @@ class UserController extends \MainController
           'created_at'    => Base::ru_date($user['created_at']),
           'post_num_user' => UserModel::getUsersPostsNum($user['id']),
           'comm_num_user' => UserModel::getUsersCommentsNum($user['id']),
-          'msg'           => Base::getMsg(),
-          'uid'           => Base::getUid(),
         ];
 
-        return view('/user/profile', ['data' => $data]);
+        return view('/user/profile', ['data' => $data, 'uid' => $uid]);
 
     }  
 
@@ -75,18 +75,18 @@ class UserController extends \MainController
             $user['avatar'] = 'noavatar.png';
         }
         
+        $uid  = Base::getUid();
         $data = [
-          'title'  => 'Настрока профиля',
-          'login'  => $user['login'],
-          'name'   => $user['name'],
-          'avatar' => $user['avatar'],
-          'about'  => $user['about'],
-          'email'  => $user['email'],
-          'msg'    => Base::getMsg(),
-          'uid'    => Base::getUid(),
+          'title'       => 'Настрока профиля',
+          'description' => 'Страница настройки профиля', 
+          'login'       => $user['login'],
+          'name'        => $user['name'],
+          'avatar'      => $user['avatar'],
+          'about'       => $user['about'],
+          'email'       => $user['email'],
         ];
 
-        return view('/user/setting', ['data' => $data]);
+        return view('/user/setting', ['data' => $data, 'uid' => $uid]);
     }
     
     // Изменение профиля
@@ -100,23 +100,114 @@ class UserController extends \MainController
         $name    = Request::getPost('name');
         $about   = Request::getPost('about');
         
-        if (strlen($name) < 4 || strlen($name) > 20)
+        if (Base::getStrlen($name) < 4 || Base::getStrlen($name) > 20)
         {
           Base::addMsg('Имя должно быть от 3 до ~ 10 символов', 'error');
           redirect('/users/setting');
         }
         
-        if (strlen($about) > 450)
+        if (Base::getStrlen($about) > 350)
         {
           Base::addMsg('О себе должно быть меньше символов', 'error');
           redirect('/users/setting');
         }
-   
+
         $login   = $account['login'];
-       
+    
         UserModel::editProfile($login, $name, $about);
         
         redirect('/users/setting');
+    }
+    
+    // Форма загрзуки аватарки
+    function settingPageAvatar ()
+    {
+        if(!$account = Request::getSession('account')) {
+            redirect('/');
+        }
+        
+        $uid  = Base::getUid();
+        $data = [
+            'title'  => 'Изменение аватарки',
+            'description' => 'Страница изменение аватарки', 
+            'avatar' => 0,
+        ];
+
+        return view('/user/setting-avatar', ['data' => $data, 'uid' => $uid]);
+ 
+    }
+    
+    // Форма изменение пароля
+    function settingPageSecurity ()
+    {
+        if(!$account = Request::getSession('account')) {
+            redirect('/');
+        }
+        
+        $uid  = Base::getUid();
+        $data = [
+            'title'       => 'Изменение пароля',
+            'description' => 'Страница изменение пароля', 
+            'password'    => '',
+            'password2'   => '',
+            'password3'   => '',
+        ];
+
+        return view('/user/setting-security', ['data' => $data, 'uid' => $uid]);
+ 
+    }
+    
+    // Изменение аватарки
+    // https://github.com/kazzkiq/ImageUploader
+    function settingAvatarEdit() 
+    {
+        
+        if(!$account = Request::getSession('account')) {
+            redirect('/');
+        }
+        
+    }
+    
+    // Изменение пароля
+    function settingSecurityEdit()
+    {
+        
+        if(!$account = Request::getSession('account')) {
+            redirect('/');
+        }  
+        
+        $password    = Request::getPost('password');
+        $password2   = Request::getPost('password2');
+        $password3   = Request::getPost('password3');
+
+        if ($password2 != $password3) {
+            Base::addMsg('Пароли не совпадают', 'error');
+            redirect('/users/setting/security');
+        }
+        
+        if (substr_count($password2, ' ') > 0) {
+            Base::addMsg('Пароль не может содержать пробелов', 'error');
+            redirect('/users/setting/security');
+        }
+
+        if (Base::getStrlen($password2) < 8 || Base::getStrlen($password2) > 24) {
+            Base::addMsg('Длина пароля должна быть от 8 до 24 знаков', 'error');
+            redirect('/users/setting/security');
+        }
+        
+        $userInfo = UserModel::getUserInfo($account['email']);
+       
+        if (!password_verify($password, $userInfo['password'])) {
+            Base::addMsg('Старый пароль не верен', 'error');
+            redirect('/users/setting/security');
+        }
+        
+        $newpass = password_hash($password2, PASSWORD_BCRYPT);
+        UserModel::editPassword($account['login'], $newpass);
+
+        Base::addMsg('Пароль успешно изменен', 'error');
+        redirect('/users/setting');
+        
     }
     
 }

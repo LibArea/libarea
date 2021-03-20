@@ -22,9 +22,9 @@
             <?php if ($data['list']) { ?>
                 <?php foreach($data['list'] AS $key => $val) { ?>
               
-                    <div <?php if ($val['uid'] == $data['uid']['id']) { ?> class="active"<?php } ?>>
+                    <div <?php if ($val['uid'] == $uid['id']) { ?> class="active"<?php } ?>>
                         <div class="msg-telo">
-                            <?php if ($val['uid'] == $data['uid']['id']) { ?>
+                            <?php if ($val['uid'] == $uid['id']) { ?>
                                 Я | <?php echo $val['add_time']; ?>
                             <?php } else { ?>
                                 <a href="/u/<?= $val['login']; ?>">
@@ -36,7 +36,7 @@
                             <?= $val['message']; ?>
                             
                             <div class="footer">
-                                <?php if ($val['receipt'] AND $val['uid'] == $data['uid']['id']) { ?> 
+                                <?php if ($val['receipt'] AND $val['uid'] == $uid['id']) { ?> 
                             
                                   Было прочитанно - (<?= $val['receipt']; ?>)
                     

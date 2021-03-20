@@ -7,29 +7,25 @@ use Base;
 
 class NotificationsController extends \MainController
 {
-
+    // Страница уведомлений участника
     public function index()
     {
         
-        // Авторизировались или нет
         if (!$account = Request::getSession('account'))
         {
             redirect('/');
         }  
         
-        $user_uid = $account['user_id'];
+        $list = NotificationsModel::listNotification($account['user_id']);
         
-        $list = NotificationsModel::listNotification($user_uid);
-        
+        $uid  = Base::getUid();
         $data = [
-            'title' => 'Уведомления',
-            'list'  => $list,
-            'msg'   => Base::getMsg(),
-            'uid'   => Base::getUid(),
+            'title'       => 'Уведомления',
+            'description' => 'Страница уведомления',
+            'list'        => $list,
         ];
 
-        return view("notification/index", ['data' => $data]);
+        return view("notification/index", ['data' => $data, 'uid' => $uid]);
     }
-
    
 }

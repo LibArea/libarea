@@ -6,19 +6,25 @@
                 <?= $data['posts'][0]['space_description']; ?>
             </div>
              
-            <?php if(!empty($data['uid']['id'])) { ?>  
-                <div> <br> <center>
+            <?php if(!$uid['id']) { ?> 
+                <div> 
+                <br>
+                    <a href="/login"><div class="hide-space-id add-space">Подписаться</div></a>
+                </div>
+            <?php } else { ?>
+                <div> 
+                <br>  
                     <?php if($data['space_hide'] == 1) { ?> 
                         <div data-id="<?= $data['posts'][0]['space_id']; ?>" class="hide-space-id add-space">Подписаться</div>
                     <?php } else { ?> 
                         <div data-id="<?= $data['posts'][0]['space_id']; ?>" class="hide-space-id no-space">Отписаться</div>
-                    <?php } ?>  </center>
+                    <?php } ?>   
                 </div>  
             <?php } ?>    
                         
         </div>
         
-        <h1><?= $data['title']; ?>:   <?= $data['space']; ?></h1>
+        <h1><?= $data['title']; ?>: <?= $data['space']; ?></h1>
  
         <div class="telo comments">
             <?php if (!empty($data['posts'])) { ?>
@@ -44,7 +50,9 @@
                             </span>
                             <?php if($post['num_comments'] !=0) { ?> 
                                 <span class="otst"> | </span>
-                                <?= $post['num_comments']; ?>  <?= $post['post_comments']; ?>  
+                                <a class="u-url" href="/posts/<?= $post['post_slug']; ?>">
+                                    <?= $post['num_comments']; ?>  <?= $post['post_comments']; ?>
+                                </a>                                
                             <?php } ?>
                         </div>  
                     </div>

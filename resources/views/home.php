@@ -1,20 +1,26 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
     <div class="wrap">
 
-        <?php if (!$data['uid'] > 0) { ?>
+        <?php if (!$uid['id']) { ?>
             <h1 class="top banner">Сайт в стадии разработке. Читать - <a href="/info/about">о нас</a>...</h1> 
         <?php } ?>    
     
         <div class="telo">
-            <?php if (!empty($data['posts'])) { ?>
+            <?php if (!empty($data['posts'])) { ?> 
           
                 <?php foreach ($data['posts'] as  $post) { ?>
                     <div class="post-telo">
-                    
-                        <div id="vot<?= $post['post_id']; ?>" class="voters">
-                            <div data-id="<?= $post['post_id']; ?>" class="post-up-id"></div>
-                            <div class="score"><?= $post['post_votes']; ?></div>
-                        </div>
+                        <?php if (!$uid['id']) { ?> 
+                            <div id="vot<?= $post['post_id']; ?>" class="voters">
+                                <a rel="nofollow" href="/login"><div class="post-up-id"></div></a>
+                                <div class="score"><?= $post['post_votes']; ?></div>
+                            </div>
+                        <?php } else { ?> 
+                            <div id="vot<?= $post['post_id']; ?>" class="voters">
+                                <div data-id="<?= $post['post_id']; ?>" class="post-up-id"></div>
+                                <div class="score"><?= $post['post_votes']; ?></div>
+                            </div>
+                        <?php } ?> 
                         <div class="post-body">
                             <a class="u-url" href="/posts/<?= $post['post_slug']; ?>">
                                 <h2 class="titl"><?= $post['post_title']; ?></h2>

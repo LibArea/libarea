@@ -12,14 +12,14 @@ class SpaceController extends \MainController
     public function index()
     {
 
+        $uid  = Base::getUid();
         $data = [
-            'title' => 'Пространства сайта',
-            'space' => SpaceModel::getSpaceHome(),
-            'msg'   => Base::getMsg(),
-            'uid'   => Base::getUid(),
+            'title'       => 'Все пространства',
+            'description' => 'Страница всех пространств сайта AreaDev',
+            'space'       => SpaceModel::getSpaceHome(),
         ];
 
-        return view("space/all", ['data' => $data]);
+        return view("space/all", ['data' => $data, 'uid' => $uid]);
     }
 
     // Посты по пространству
@@ -62,16 +62,16 @@ class SpaceController extends \MainController
              
         }
         
+        $uid  = Base::getUid();
         $data = [
-            'title'      => 'Пространство',
+            'title'      => 'Посты по пространству',
+            'description'=> 'Страница постов по пространству на сайте AreaDev',
             'posts'      => $result,
             'space'      => $space,
             'space_hide' => $space_hide,
-            'msg'        => Base::getMsg(),
-            'uid'   => Base::getUid(),
         ];
 
-        return view("space/spaceposts", ['data' => $data]);
+        return view("space/spaceposts", ['data' => $data, 'uid' => $uid]);
         
     }
 
@@ -79,13 +79,14 @@ class SpaceController extends \MainController
     public function spaceForma()
     {
         
+        $uid  = Base::getUid();
         $data = [
             'title' => 'Изменение пространства',
+            'description' => 'Страница изменения пространства',
             'space' => SpaceModel::getSpaceHome(),
-            'msg'   => Base::getMsg(),
         ]; 
  
-        return view("space/formaspace", ['data' => $data]);
+        return view("space/formaspace", ['data' => $data, 'uid' => $uid]);
         
     }
     

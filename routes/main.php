@@ -29,10 +29,16 @@ Route::get('/info/privacy')->controller('InfoController@privacy');
 Route::get('/users')->controller('UserController');
 Route::get('/u/{login}')->controller('UserController@profile')->where(['login' => '[A-Za-z0-9]+']);
 Route::get('/users/setting')->controller('UserController@settingPage');
+Route::get('/users/setting/avatar')->controller('UserController@settingPageAvatar');
+Route::get('/users/setting/security')->controller('UserController@settingPageSecurity');
 Route::type('post')->protect()->get('/users/setting/edit')->controller('UserController@settingEdit');
+Route::type('post')->protect()->get('/users/setting/avatar/edit')->controller('UserController@settingAvatarEdit');
+Route::type('post')->protect()->get('/users/setting/security/edit')->controller('UserController@settingSecurityEdit');
+
 
 // Регистрация и авторизация
 Route::get('/register')->controller('AuthController@registerPage');
+Route::get('/recover')->controller('AuthController@recoverPage');
 Route::type('post')->protect()->get('/register/add')->controller('AuthController@registerHandler');
 Route::type('post')->protect()->get('/login')->controller('AuthController@loginHandler');
 Route::type('get')->get('/login')->controller('AuthController@loginPage');

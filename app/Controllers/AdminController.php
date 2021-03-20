@@ -8,11 +8,12 @@ class AdminController extends \MainController
 	public function index()
 	{
 
-		$data = [
-          'title' => 'Админка',
-          'msg'   => Base::getMsg(),
+        $uid  = Base::getUid();
+        $data = [
+            'title'        => 'Админка',
+            'description'  => 'Админка на AreaDev',
         ];
 
-         return view("admin/index", ['data' => $data]);
+         return view("admin/index", ['data' => $data, 'uid' => $uid]);
 	}
 }

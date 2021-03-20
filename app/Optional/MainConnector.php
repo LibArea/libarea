@@ -24,8 +24,8 @@ class MainConnector implements Connector
             // ...или, если добавляется конкретный класс,
             "Parsedown" => "vendor/parsedown/Parsedown.php",
             "Base" => "app/Base.php",
-            "DB" => "database/DB.php",
-          //  "Phphleb\Debugpan\DPanel" => "vendor/phphleb/debugpan/DPanel.php",
+            "DB" => "database/DB.php",  
+            // "Phphleb\Debugpan\DPanel" => "vendor/phphleb/debugpan/DPanel.php",
             "XdORM\XD" => "vendor/phphleb/xdorm/XD.php",
             // ... //
         ];

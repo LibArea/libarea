@@ -2,7 +2,7 @@
 <section>
     <div class="wrap">
 
-        <h1 class="head">Вход</h1>
+        <h1 class="head"><?= $data['title']; ?></h1>
         <div class="box wide">
             <form class="" action="/login" method="post">
                 <?php csrf_field(); ?>
@@ -10,24 +10,14 @@
                     <label for="email">Email</label>
                     <input type="text" name="email" id="email" value="ss@sdf.ru">
                 </div>
-                <div class="boxline">
-                    <label for="password">Пароль</label>
-                    <input type="password" name="password" id="password" value="">
-                    <small>qwer14qwer14</small>
-                </div>
-
-                <div class="boxline">
-                    <input type="checkbox" id="rememberme" name="rememberme" value="1">
-                    <label class="form-check-label" for="rememberme">Запомнить меня</label>
-                </div>
-
+                Страница в разработке (не работает)... <br><br>
                 <div class="row">
                     <div class="boxline">
-                        <button type="submit" class="button-primary">Войти</button>
+                        <button type="submit" class="button-primary">Сбросить</button>
                     </div>
                     <div class="boxline">
                         <a href="/register">Регистрация</a> &emsp;
-                        <a href="/recover">Забыли пароль?</a>
+                        <a href="/login">Войти</a>
                     </div>
                 </div>
             </form>

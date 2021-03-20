@@ -6,78 +6,78 @@ use Base;
 
 class InfoController extends \MainController
 {
-
-	public function index()
-	{
-
-		$data = [
-          'title' => 'Информация',
-          'msg'   => Base::getMsg(),
-          'uid'   => Base::getUid(),
+    // Далее методы по названию страниц
+    public function index()
+    {
+        
+        $uid  = Base::getUid();
+        $data = [
+            'title'        => 'Информация',
+            'description'  => 'Информация о сайте и команде работающей над AreaDev',
         ];
-
-         return view("info/index", ['data' => $data]);
-	}
+        return view("info/index", ['data' => $data, 'uid' => $uid]);
+        
+    }
 
     public function stats()
 	{
-
+        
+        // Получаем общее количество: участников, постов, комментариев и голосов за них
         $user_num      = InfoModel::getUsersNumAll();
         $post_num      = InfoModel::getPostsNumAll();
         $comm_num      = InfoModel::getCommentsNumAll();
         $vote_comm_num = InfoModel::getCommentsVoteNumAll();
         
-		$data = [
-          'title'         => 'Статистика',
-          'user_num'      => $user_num,
-          'post_num'      => $post_num,
-          'comm_num'      => $comm_num,
-          'vote_comm_num' => $vote_comm_num,
-          'msg'           => Base::getMsg(),
-          'uid'           => Base::getUid(),
+        $uid  = Base::getUid();
+        $data = [
+            'title'         => 'Статистика',
+            'description'   => 'Статистика сайта AreaDev. Посты, комментарии, участники и голосование',
+            'user_num'      => $user_num,
+            'post_num'      => $post_num,
+            'comm_num'      => $comm_num,
+            'vote_comm_num' => $vote_comm_num,
         ];
 
-        return view('info/stats', ['data' => $data]);
+        return view('info/stats', ['data' => $data, 'uid' => $uid]);
 
 	}
 
 	public function rules()
 	{
-
-		$data = [
-          'title' => 'Правила сайта',
-          'msg'   => Base::getMsg(),
-          'uid'   => Base::getUid(),
+        
+        $uid  = Base::getUid();
+        $data = [
+            'title'       => 'Правила сайта',
+            'description' => 'Правила сайта AreaDev, политика почтительности',
         ];
 
-        return view('info/rules', ['data' => $data]);
+        return view('info/rules', ['data' => $data, 'uid' => $uid]);
 
 	}
 
-
 	public function about()
 	{
-
-		$data = [
-          'title' => 'О нас',
-          'msg'   => Base::getMsg(),
-          'uid'   => Base::getUid(),
+        
+        $uid  = Base::getUid();
+        $data = [
+            'title'       => 'О нас',
+            'description' => 'Информация о сайте и команде работающей над AreaDev',
         ];
 
-        return view('info/about', ['data' => $data]);
+        return view('info/about', ['data' => $data, 'uid' => $uid]);
 
 	}
 
     public function privacy()
 	{
-
-		$data = [
-          'title' => 'Политика конфиденциальности',
-          'msg'   => Base::getMsg(),
-          'uid'   => Base::getUid(),
+        
+        $uid  = Base::getUid();
+        $data = [
+            'title'       => 'Политика конфиденциальности',
+            'description' => 'Политика конфиденциальности сайта AreaDev',
         ];
 
-        return view('info/privacy', ['data' => $data]);
+        return view('info/privacy', ['data' => $data, 'uid' => $uid]);
 
 	}
 

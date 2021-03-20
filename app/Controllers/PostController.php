@@ -53,8 +53,8 @@ class PostController extends \MainController
          
         }  
 
+        // Последние комментарии и отписанные пространства
         $latest_comments = CommentModel::latestComments();
-        
         $space_hide      = SpaceModel::getSpaceUser($user_id);
         
         $result_comm = Array();
@@ -71,18 +71,18 @@ class PostController extends \MainController
          
         }
 
+        $uid  = Base::getUid();
         $data = [
-            'title'            => 'Посты - главная страница сайта', 
+            'title'            => 'AreaDev - посты. Главная страница форума', 
+            'description'      => 'AreaDev - главная страница сайта, форум, посты',
             'posts'            => $result,
             'space_hide'       => $space_hide,
             'latest_comments'  => $result_comm,
-            'msg'              => Base::getMsg(),
-            'uid'              => Base::getUid(),
             'pagesCount'       => $pagesCount,
             'pNum'             => $page,
         ];
 
-        return view("home", ['data' => $data]);
+        return view("home", ['data' => $data, 'uid' => $uid]);
     }
 
     // Все посты
@@ -107,16 +107,16 @@ class PostController extends \MainController
          
         }  
 
-       $data = [
-         'title'            => 'Все посты',
-         'latest_comments'  => 0,
-         'space_hide'       => 0,
-         'posts'            => $result,
-         'msg'              => Base::getMsg(),
-         'uid'              => Base::getUid(),
-       ];
+        $uid  = Base::getUid();
+        $data = [
+            'title'            => 'Посты - главная страница сайта', 
+            'description'      => 'Все посты на AreaDev',
+            'latest_comments'  => 0,
+            'space_hide'       => 0,
+            'posts'            => $result,
+        ];
 
-        return view("home", ['data' => $data]);
+        return view("home", ['data' => $data, 'uid' => $uid]);
     }
 
     // Посты с начальными не нулевыми голосами, с голосованием, например, от 5
@@ -141,6 +141,7 @@ class PostController extends \MainController
          
         }  
         
+        // Последние комментарии
         $latest_comments = CommentModel::latestComments();
         
         $result_comm = Array();
@@ -157,18 +158,18 @@ class PostController extends \MainController
          
         }
         
-       $data = [
-         'title'            => 'Все посты',
-         'latest_comments'  => 0,
-         'space_hide'       => 0,
-         'posts'            => $result,
-         'latest_comments'  => $result_comm,
-         'pagesCount'       => 0,
-         'msg'              => Base::getMsg(),
-         'uid'              => Base::getUid(),
-       ];
+        $uid  = Base::getUid();
+        $data = [
+            'title'            => 'Посты - главная страница сайта', 
+            'description'      => 'Самые популярные посты на сайте AreaDev',
+            'latest_comments'  => 0,
+            'space_hide'       => 0,
+            'posts'            => $result,
+            'latest_comments'  => $result_comm,
+            'pagesCount'       => 0,
+        ];
 
-        return view("home", ['data' => $data]);
+        return view("home", ['data' => $data, 'uid' => $uid]);
     }
 
     // Полный пост
@@ -250,15 +251,15 @@ class PostController extends \MainController
          
         }
         
+        $uid  = Base::getUid();
         $data = [
-         'post'     => $data_post,
-         'comments' => $this->buildTree(0, 0, $result),
-         'title'    => $data_post['title'],
-         'msg'      => Base::getMsg(),
-         'uid'      => Base::getUid(),
+            'title'        => $data_post['title'] . ' | AreaDev', 
+            'description'  => 'Тут надо сделать описание',
+            'post'         => $data_post,
+            'comments'     => $this->buildTree(0, 0, $result),
         ]; 
         
-        return view("post/view", ['data' => $data]);
+        return view("post/view", ['data' => $data, 'uid' => $uid]);
         
     }
     
@@ -304,14 +305,14 @@ class PostController extends \MainController
          
         }
  
+        $uid  = Base::getUid();
         $data = [
-         'posts'    => $result,
-         'title'    => 'Посты ' . $login,
-         'msg'      => Base::getMsg(),
-         'uid'      => Base::getUid(),
+            'title'         => 'Посты ' . $login,
+            'description'   => 'Посты участника ' . $login,
+            'posts'         => $result,
         ]; 
         
-        return view("post/user", ['data' => $data]);
+        return view("post/user", ['data' => $data, 'uid' => $uid]);
         
     }
     
@@ -319,13 +320,13 @@ class PostController extends \MainController
     public function addPost() 
     {
         
+        $uid  = Base::getUid();
         $data = [
             'title'    => 'Добавить пост',
-            'msg'      => Base::getMsg(),
-            'uid'      => Base::getUid(),
-        ];   
+            'description'   => 'Страница добавления поста',
+        ];  
        
-        return view("post/add", ['data' => $data]);
+        return view("post/add", ['data' => $data, 'uid' => $uid]);
        
     }
     
@@ -343,35 +344,35 @@ class PostController extends \MainController
         $post_content = $_POST['post_content']; // не фильтруем
         
         // IP адрес и ID кто добавляет
-        $post_ip_int = Request::getRemoteAddress();
+        $post_ip_int  = Request::getRemoteAddress();
         
         // Получаем id тега
-        $space_id = (int)Request::getPost('space');
+        $space_id     = (int)Request::getPost('space');
         
         // id того, кто добавляет пост
         $post_user_id = $account['user_id'];
         
         // Проверяем длину title
-        if (strlen($post_title) < 6 || strlen($post_title) > 320)
+        if (Base::getStrlen($post_title) < 6 || Base::getStrlen($post_title) > 260)
         {
-            Base::addMsg('Длина заголовка должна быть от 6 до 320 знаков', 'error');
-            redirect('/post/add/');
+            Base::addMsg('Длина заголовка должна быть от 6 до 260 знаков', 'error');
+            redirect('/post/add');
             return true;
         }
         
         // Проверяем длину тела
-        if (strlen($post_content) < 6 || strlen($post_content) > 2500)
+        if (Base::getStrlen($post_content) < 6 || Base::getStrlen($post_content) > 2500)
         {
-            Base::addMsg('Длина заголовка должна быть от 6 до 2520 знаков', 'error');
-            redirect('/post/add/');
+            Base::addMsg('Длина заголовка должна быть от 6 до 2500 знаков', 'error');
+            redirect('/post/add');
             return true;
         }
         
         // Проверяем выбор тега
         if ($space_id == '')
         {
-            Base::addMsg('Выберите тег', 'error');
-            redirect('/post/add/');
+            Base::addMsg('Выберите пространство', 'error');
+            redirect('/post/add');
             return true;
         }
         
@@ -394,7 +395,7 @@ class PostController extends \MainController
         $post_id = Request::get('id');
         
         // Получим пост
-        $post = PostModel::getPostId($post_id); 
+        $post   = PostModel::getPostId($post_id); 
          
         if(!$post){
             redirect('/');
@@ -405,19 +406,19 @@ class PostController extends \MainController
             redirect('/');
         }
         
+        $uid  = Base::getUid();
         $data = [
-            'title'      => 'Изменить пост',
-            'id'         => $post_id,
-            'title_post' => htmlspecialchars($post['post_title']),
-            'content'    => $post['post_content'],
-            'space_tip'  => $post['space_tip'],
-            'space_slug' => $post['space_slug'],
-            'space_name' => $post['space_name'],  
-            'msg'        => Base::getMsg(),
-            'uid'        => Base::getUid(),
+            'title'         => 'Изменить пост', 
+            'description'   => 'Изменение поста...',
+            'id'            => $post_id,
+            'title_post'    => htmlspecialchars($post['post_title']),
+            'content'       => $post['post_content'],
+            'space_tip'     => $post['space_tip'],
+            'space_slug'    => $post['space_slug'],
+            'space_name'    => $post['space_name'],  
         ];
         
-        return view("post/edit", ['data' => $data]);
+        return view("post/edit", ['data' => $data, 'uid' => $uid]);
         
     }
     
@@ -449,7 +450,7 @@ class PostController extends \MainController
         if (strlen($post_title) < 6 || strlen($post_title) > 320)
         {
             Base::addMsg('Длина заголовка должна быть от 6 до 320 знаков', 'error');
-            redirect('/post/edit/' .$post_id);
+            redirect('/post/edit' .$post_id);
             return true;
         }
         
@@ -457,7 +458,7 @@ class PostController extends \MainController
         if (strlen($post_content) < 6 || strlen($post_content) > 2500)
         {
             Base::addMsg('Длина заголовка должна быть от 6 до 2520 знаков', 'error');
-            redirect('/post/edit/' .$post_id);
+            redirect('/post/edit' .$post_id);
             return true;
         }
         

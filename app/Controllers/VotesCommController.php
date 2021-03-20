@@ -13,7 +13,7 @@ class VotesCommController extends \MainController
     public function votes()
     {
         // Авторизировались или нет
-        if (!Request::getSession('account'))
+        if (!$account = Request::getSession('account'))
         {
             return false;
         }  
@@ -26,8 +26,7 @@ class VotesCommController extends \MainController
             return false;
         }
 
-        // id того, кто госует за комментарий
-        $account = Request::getSession('account');
+        // id того, кто голосует за комментарий
         $user_id = $account['user_id'];
         
         // Информация об комментарии

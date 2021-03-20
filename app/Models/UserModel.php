@@ -49,7 +49,7 @@ class UserModel extends \MainModel
 
     }
 
-    // Создание участника
+    // Регистрация участника
     public static function createUser($login,$email,$password)
     {
         
@@ -57,12 +57,23 @@ class UserModel extends \MainModel
            'login'     => $login,
            'email'     => $email,
            'password'  => password_hash($password, PASSWORD_BCRYPT),
-           'activated' =>'1', // ввести почту и инвайт 
-           'role'      =>'2'  // 1 админ
+           'activated' => '1', // ввести почту и инвайт 
+           'reg_ip'    => Request::getRemoteAddress(), // ip при регистрации 
+           'role'      => '2'  // 1 админ 
         ];
 
-        $sql = "INSERT INTO users(login, email, password, activated, role) VALUES(:login, :email,:password,:activated,:role)";
+        $sql = "INSERT INTO users(login, email, password, activated, reg_ip, role) VALUES(:login, :email,:password,:activated,:reg_ip,:role)";
         DB::run($sql,$params);
+        return true;
+        
+    }
+    
+    // Изменение пароля
+    public static function editPassword($login, $password)
+    {
+
+        XD::update(['users'])->set(['password'], '=', $password)->where(['login'], '=', $login)->run();
+ 
         return true;
         
     }
