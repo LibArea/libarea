@@ -21,13 +21,12 @@ class MainConnector implements Connector
             "Modules\*" => "modules/",
             "App\Commands\*" => "app/Commands/",
             // ... or, if a specific class is added,
-            // ...или, если добавляется конкретный класс,
-            "Parsedown" => "vendor/parsedown/Parsedown.php",
-            "Base" => "app/Base.php",
-            "DB" => "database/DB.php",  
-            // "Phphleb\Debugpan\DPanel" => "vendor/phphleb/debugpan/DPanel.php",
-            "XdORM\XD" => "vendor/phphleb/xdorm/XD.php",
-            // ... //
+            "Parsedown"   => "vendor/parsedown/Parsedown.php",  
+            "ImageUpload" => "app/Libraries/ImageUpload.php",
+            "Base"        => "app/Libraries/Base.php",  
+            "DB"          => "database/DB.php",  
+            "XdORM\XD"    => "vendor/phphleb/xdorm/XD.php",
+            //"Phphleb\Debugpan\DPanel" => "vendor/phphleb/debugpan/DPanel.php",
         ];
 
     }

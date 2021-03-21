@@ -165,7 +165,6 @@ class Base
     public static function ru_date($time, $time_limit = 604800, $out_format = 'Y-m-d H:i', $formats = null, $time_now = null)
     {
             
-       
        $timestamp = strtotime($time);
          
 
@@ -381,4 +380,6 @@ class Base
     {
         return mb_strlen($str, "utf-8");
     }
+    
+    
 }

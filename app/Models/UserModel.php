@@ -71,13 +71,27 @@ class UserModel extends \MainModel
     // Изменение пароля
     public static function editPassword($login, $password)
     {
-
         XD::update(['users'])->set(['password'], '=', $password)->where(['login'], '=', $login)->run();
- 
         return true;
-        
     }
 
+    // Изменение аватарки
+    public static function setAvatar($login, $img)
+    {
+        XD::update(['users'])->set(['avatar'], '=', $img)->where(['login'], '=', $login)->run();
+        return true;
+    }
+
+   // Изменение аватарки
+    public static function getAvatar($login)
+    {
+        $query = XD::select(['login', 'avatar'])->from(['users'])->where(['login'], '=', $login);
+
+        $result = $query->getSelectOne();
+        return $result;
+    }
+
+    // Информация участника
     public static function getUserInfo($data) 
     {
 
@@ -86,7 +100,6 @@ class UserModel extends \MainModel
              ->where(['email'], '=', $data);
 
         $result = $query->getSelectOne();
-
         return $result;
 
     }

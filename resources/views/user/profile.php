@@ -3,7 +3,7 @@
     <div class="wrap">
         <div class="profile">
             <div class="gravatar">
-                <img src="/images/user/<?= $data['avatar']; ?>">
+                <img alt="<?= $data['login']; ?>" src="/uploads/avatar/<?= $data['avatar']; ?>">
             </div>
 
             <h1>
@@ -15,7 +15,7 @@
                         <?php if($uid['login'] != $data['login']) { ?> &nbsp; 
                             <a href="/u/<?= $data['login']; ?>/messages">
                                 <svg class="md-icon">
-                                    <use xlink:href="/svg/icons.svg#mail"></use>
+                                    <use xlink:href="/assets/svg/icons.svg#mail"></use>
                                 </svg>
                             </a> 
                         <?php } ?>
@@ -79,7 +79,7 @@
                             </a>
                             
                             <div class="footer">
-                                <img class="ava" alt="<?= $data['post']['login']; ?>" src="/images/user/small/<?= $data['post']['avatar']; ?>">
+                                <img class="ava" alt="<?= $data['post']['login']; ?>" src="/uploads/avatar/small/<?= $data['post']['avatar']; ?>">
                                 <span class="user"> 
                                     <a href="/u/<?= $data['post']['login']; ?>">
                                         <?= $data['post']['login']; ?>

@@ -1,5 +1,5 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<link rel="stylesheet" href="/css/info.css">
+<link rel="stylesheet" href="/assets/css/info.css">
 <section>
     <div class="wrap">
         <div class="info">

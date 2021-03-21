@@ -27,7 +27,7 @@
                         </a>
                         
                         <div class="footer">
-                            <img class="ava" src="/images/user/small/<?php echo $post['avatar']; ?>">
+                            <img class="ava" src="/uploads/avatar/small/<?php echo $post['avatar']; ?>">
                             <span class="user"> 
                                 <a href="/u/<?php echo $post['login']; ?>"><?php echo $post['login']; ?></a> 
                             </span>

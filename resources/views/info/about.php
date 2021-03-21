@@ -8,7 +8,7 @@
             <b>Задача 1</b> — изучить <a rel="nofollow noreferrer" target="_blank" href="https://phphleb.ru/"><i>PHP Микрофреймворк HLEB</i></a>: routes, get / post, ajax, csrf и т.д.
               <br><br>
              <center> 
-            <img width="90%" alt="PHP Микрофреймворк HLEB - профилирование" src="/images/HLEB.jpg"> <br><small>на слабой win машине... </small>
+            <img width="90%" alt="PHP Микрофреймворк HLEB - профилирование" src="/assets/images/HLEB.jpg"> <br><small>на слабой win машине... </small>
                </center> 
             <br>
             <b>Задача 2</b> — построить систему авторизации, администрирование и систему документации с обратной связью. Которую (как базу) можно использовать далее.

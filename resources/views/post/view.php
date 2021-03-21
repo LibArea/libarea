@@ -4,7 +4,7 @@
         <div class="telo telo-post">
             <h1 class="titl"><?= $data['post']['title']; ?></h1>
             <div class="footer">
-                <img class="ava" src="/images/user/small/<?= $data['post']['avatar']; ?>">
+                <img class="ava" src="/uploads/avatar/small/<?= $data['post']['avatar']; ?>">
                 <span class="user"> 
                     <a href="/u/<?= $data['post']['login']; ?>"><?= $data['post']['login']; ?></a> 
                 </span>
@@ -24,7 +24,7 @@
                         <span class="date">
                            &nbsp; <a href="/post/edit/<?= $data['post']['id']; ?>">
                                 <svg class="md-icon moon">
-                                    <use xlink:href="/svg/icons.svg#edit"></use>
+                                    <use xlink:href="/assets/svg/icons.svg#edit"></use>
                                 </svg>
                             </a>
                         </span>
@@ -93,7 +93,7 @@
                             
                             <div class="comm-telo">
                                 <div class="comm-header">
-                                    <img class="ava" src="/images/user/small/<?= $comm['avatar'] ?>">
+                                    <img class="ava" src="/uploads/avatar/small/<?= $comm['avatar'] ?>">
                                     <span class="user"> 
                                         <a href="/u/<?= $comm['login']; ?>"><?= $comm['login']; ?></a> 
                                     </span> 

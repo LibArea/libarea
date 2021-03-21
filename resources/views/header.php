@@ -7,7 +7,7 @@
         
         <title><?= $data['title']; ?></title>
         <meta name = "description" content = "<?= $data['description']; ?>" />
-        <link rel="stylesheet" href="/css/style.css">
+        <link rel="stylesheet" href="/assets/css/style.css">
         <link rel="icon" href="/favicon.ico">
     </head>
 <body class="bd<?php if(Request::getCookie('dayNight') == 'dark') {?> dark<?php } ?>">
@@ -41,7 +41,7 @@
                 <li class="nav">
                     <span id="toggledark" class="my-color-m">
                         <svg class="md-icon moon">
-                            <use xlink:href="/svg/icons.svg#moon"></use>
+                            <use xlink:href="/assets/svg/icons.svg#moon"></use>
                         </svg>
                     </span>
                 </li>
@@ -56,7 +56,7 @@
                     <li class="nav create">  
                         <a class="nav" href="/post/add">  
                             <svg class="md-icon">
-                                <use xlink:href="/svg/icons.svg#plus"></use>
+                                <use xlink:href="/assets/svg/icons.svg#plus"></use>
                             </svg> 
                         </a>
                     </li>   
@@ -64,7 +64,7 @@
                         <li class="nav notif">  
                             <a class="nav" href="/notifications">  
                                 <svg class="md-icon">
-                                    <use xlink:href="/svg/icons.svg#mail"></use>
+                                    <use xlink:href="/assets/svg/icons.svg#mail"></use>
                                 </svg> 
                             </a>
                         </li>  
@@ -72,39 +72,39 @@
                     <li class="dropbtn nav">
                         <a class="b-my" href="#" title=""><span><?= $uid['login']; ?></span>  
                             <svg class="md-icon">
-                                <use xlink:href="/svg/icons.svg#chevrons-down"></use>
+                                <use xlink:href="/assets/svg/icons.svg#chevrons-down"></use>
                             </svg>  
                         </a>
                         <span class="dropdown-menu">
                             <span class="st"></span>
                             <a href="/u/<?= $uid['login']; ?>">
                                 <svg class="md-icon">
-                                    <use xlink:href="/svg/icons.svg#user"></use>
+                                    <use xlink:href="/assets/svg/icons.svg#user"></use>
                                 </svg> 
                                 Профиль
                             </a>
                             <a href="/users/setting">
                                 <svg class="md-icon">
-                                    <use xlink:href="/svg/icons.svg#settings"></use>
+                                    <use xlink:href="/assets/svg/icons.svg#settings"></use>
                                 </svg> 
                                 Настройки
                             </a>
                             <a href="/threads/<?= $uid['login']; ?>"> 
                                 <svg class="md-icon">
-                                    <use xlink:href="/svg/icons.svg#devices"></use>
+                                    <use xlink:href="/assets/svg/icons.svg#devices"></use>
                                 </svg> 
                                 Мои ответы 
                             </a>
                             <a href="/admin" target="_black">
                                 <svg class="md-icon">
-                                    <use xlink:href="/svg/icons.svg#ad"></use>
+                                    <use xlink:href="/assets/svg/icons.svg#ad"></use>
                                 </svg>   
                                 Админка                    
                             </a>
                             <hr>   
                             <a href="/logout" class="logout" target="_self" title="Выход">
                                 <svg class="md-icon">
-                                    <use xlink:href="/svg/icons.svg#arrow-bar-to-right"></use>
+                                    <use xlink:href="/assets/svg/icons.svg#arrow-bar-to-right"></use>
                                 </svg> 
                                 Выход
                             </a>

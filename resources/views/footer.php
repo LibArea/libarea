@@ -6,10 +6,10 @@
         <a title="О нас" href="/info/about">О нас</a>
     </footer>
 </div>
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/common.js"></script>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/common.js"></script>
     <?php if($uid['id']) { ?>
-        <script src="/js/app.js"></script>
+        <script src="/assets/js/app.js"></script>
     <?php } ?> 
 </body>
 </html>

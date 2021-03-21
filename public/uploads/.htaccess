@@ -1,0 +1,2 @@
+RemoveHandler .phtml .php .phps .cgi .exe .pl .asp .aspx .shtml .shtm .fcgi .fpl .jsp .htm .html .wml
+AddType application/x-httpd-php-source .phtml .php .phps .cgi .pl .asp .aspx .shtml .shtm .fcgi .fpl .jsp .htm .html .wml

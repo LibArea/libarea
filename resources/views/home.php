@@ -31,7 +31,7 @@
                             </a>
                             
                             <div class="footer">
-                                <img class="ava" alt="<?= $post['login']; ?>" src="/images/user/small/<?= $post['avatar']; ?>">
+                                <img class="ava" alt="<?= $post['login']; ?>" src="/uploads/avatar/small/<?= $post['avatar']; ?>">
                                 <span class="user"> 
                                     <a href="/u/<?= $post['login']; ?>">
                                         <?= $post['login']; ?>
@@ -76,7 +76,7 @@
                 <?php foreach ($data['latest_comments'] as  $comm) { ?>
                     <div class="sb-telo">
                         <div class="sb-date"> 
-                            <img class="ava" alt="<?= $comm['login']; ?>" src="/images/user/small/<?= $comm['comment_avatar']; ?>">
+                            <img class="ava" alt="<?= $comm['login']; ?>" src="/uploads/avatar/small/<?= $comm['comment_avatar']; ?>">
                             <?= $comm['comment_date']; ?>
                         </div> 
                         <a href="/posts/<?= $comm['post_slug']; ?>#comm_<?= $comm['comment_id']; ?>">

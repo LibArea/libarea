@@ -15,7 +15,7 @@
                 <?php csrf_field(); ?>
                     <div class="boxline">
                         <label for="name">Никнейм</label>
-                        <img class="mini ava" src="/images/user/<?php echo $data['avatar']; ?>"> 
+                        <img class="mini ava" src="/uploads/avatar/small/<?php echo $data['avatar']; ?>"> 
                         <?php echo $data['login']; ?>
                     </div>
                     <div class="boxline">

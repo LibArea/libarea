@@ -3,7 +3,7 @@
     <div class="wrap">
         <h1>Админка</h1>
 
-         <img width="97%" src="/images/kozodoi.jpg">
+         <img width="77%" src="/assets/images/kozodoi.jpg">
          <br>
          
          <b>Козодой</b> - птица. Характер нордический. Беспощаден к мухам. <br> <br> 

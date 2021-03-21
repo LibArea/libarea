@@ -6,6 +6,9 @@ use Hleb\Constructor\Handlers\Request;
 use App\Models\UserModel;
 use App\Models\PostModel;
 
+use ImageUpload;
+
+
 class UserController extends \MainController
 {
     // Все пользователи
@@ -126,11 +129,19 @@ class UserController extends \MainController
             redirect('/');
         }
         
+        $ava     = UserModel::getAvatar($account['login']);
+        $avatar  = $ava['avatar'];
+        
+        if(!$avatar) {
+            $avatar = 'noavatar.png';
+        } 
+        
+        
         $uid  = Base::getUid();
         $data = [
             'title'  => 'Изменение аватарки',
             'description' => 'Страница изменение аватарки', 
-            'avatar' => 0,
+            'avatar' => $avatar,
         ];
 
         return view('/user/setting-avatar', ['data' => $data, 'uid' => $uid]);
@@ -158,16 +169,63 @@ class UserController extends \MainController
     }
     
     // Изменение аватарки
-    // https://github.com/kazzkiq/ImageUploader
     function settingAvatarEdit() 
     {
         
         if(!$account = Request::getSession('account')) {
             redirect('/');
         }
-        
+  
+        $name     = $_FILES['image']['name'];
+        $size     = $_FILES['image']['size'];
+        $ext      = strtolower(pathinfo($name, PATHINFO_EXTENSION));
+       
+        $valid =  true;
+        if (!in_array($ext, array('jpg','jpeg','png','gif'))) {
+            $valid = false;
+            Base::addMsg('Тип файла не разрешен', 'error');
+            redirect('/users/setting/avatar');
+        }
+
+        if ($size/1024/1024 > 10) {
+            $valid = false;
+            Base::addMsg('Размер файла превышает допустимый', 'error');
+            redirect('/users/setting/avatar');
+        }
+
+        if ($valid) {
+            
+            // 110px и 16px
+            $path_img       = HLEB_PUBLIC_DIR. '/uploads/avatar/';
+            $path_img_small = HLEB_PUBLIC_DIR. '/uploads/avatar/small/';
+            
+            $image = new ImageUpload('image'); 
+            
+            $image->resize(110, 110, 'crop');            
+            $img = $image->saveTo($path_img, $account['user_id']);
+            
+            $image->resize(16, 16);            
+            $image->saveTo($path_img_small, $account['user_id']);
+            
+            // Получим страую если оно есть, удаляем
+            $avatar = UserModel::getAvatar($account['login']);
+            
+            // Удаляем старые аватарки
+            chmod($path_img . $avatar['avatar'], 0777);
+            chmod($path_img_small . $avatar['avatar'], 0777);
+            unlink($path_img . $avatar['avatar']);
+            unlink($path_img_small . $avatar['avatar']);
+    
+            // Запишем новую 
+            UserModel::setAvatar($account['login'], $img);
+            
+            Base::addMsg('Аватарка изменена', 'error');
+            redirect('/users/setting/avatar');
+            
+        }
     }
     
+
     // Изменение пароля
     function settingSecurityEdit()
     {

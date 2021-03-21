@@ -8,7 +8,7 @@
                     <div class="fl<?php if($notif['read_flag'] == 0) { ?> active<?php } ?>">
                     <?php if($notif['action_type'] == 1) { ?>
                         <svg class="md-icon moon">
-                            <use xlink:href="/svg/icons.svg#mail"></use>
+                            <use xlink:href="/assets/svg/icons.svg#mail"></use>
                         </svg>
                        
                         <a href="/u/<?= $notif['login'] ?>"><?= $notif['login'] ?></a> 
