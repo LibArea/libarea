@@ -63,7 +63,7 @@ class PostModel extends \MainModel
                 WHERE p.post_space_id NOT IN(".$string.") ";
 
         $query = DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
-        $result = ceil(count($query) / 10);
+        $result = ceil(count($query) / 15);
 
         return $result;
 
