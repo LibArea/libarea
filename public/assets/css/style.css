@@ -57,8 +57,11 @@ code {
 .telo.detail .post a, .comm-telo-body a {
 	text-decoration: underline;
 }
-.telo.profile, .telo.info, .telo.detail_post{
+.telo-profile, .telo-info, .telo-detail_post{
     margin-left: 5px;
+}
+.telo-info {
+    max-width: 800px;
 }
 blockquote {
     font-style: italic;

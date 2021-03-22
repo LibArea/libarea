@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5deb2
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Хост: localhost
--- Время создания: Мар 16 2021 г., 15:26
--- Версия сервера: 8.0.23-0ubuntu0.20.04.1
--- Версия PHP: 7.4.3
+-- Хост: 127.0.0.1
+-- Время создания: Мар 22 2021 г., 15:33
+-- Версия сервера: 10.4.17-MariaDB
+-- Версия PHP: 7.4.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- База данных: `myareadev`
+-- База данных: `222`
 --
 
 -- --------------------------------------------------------
@@ -29,16 +28,16 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `auth_logins` (
-  `id` int NOT NULL,
-  `user_id` int NOT NULL,
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `nickname` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `trust_level` varchar(255) NOT NULL,
   `ip_address` varchar(255) NOT NULL,
   `date` datetime NOT NULL,
-  `successfull` int NOT NULL
+  `successfull` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
- 
+
 -- --------------------------------------------------------
 
 --
@@ -46,8 +45,8 @@ CREATE TABLE `auth_logins` (
 --
 
 CREATE TABLE `auth_tokens` (
-  `id` int NOT NULL,
-  `user_id` int NOT NULL,
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `selector` varchar(255) NOT NULL,
   `hashedvalidator` varchar(255) NOT NULL,
   `expires` datetime NOT NULL
@@ -60,41 +59,107 @@ CREATE TABLE `auth_tokens` (
 --
 
 CREATE TABLE `comments` (
-  `comment_id` int NOT NULL,
+  `comment_id` int(11) NOT NULL,
   `comment_type` enum('normal','admin','private') NOT NULL DEFAULT 'normal',
-  `comment_post_id` int NOT NULL DEFAULT '0',
-  `comment_user_id` int NOT NULL DEFAULT '0',
-  `comment_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `comment_post_id` int(11) NOT NULL DEFAULT 0,
+  `comment_user_id` int(11) NOT NULL DEFAULT 0,
+  `comment_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `comment_modified` timestamp NOT NULL DEFAULT '2020-12-31 09:00:00',
   `comment_ip` varbinary(42) DEFAULT NULL,
-  `comment_order` smallint NOT NULL DEFAULT '0',
-  `comment_on` smallint NOT NULL DEFAULT '0',
-  `comment_after` smallint NOT NULL DEFAULT '0',
-  `comment_votes` smallint NOT NULL DEFAULT '0',
+  `comment_order` smallint(6) NOT NULL DEFAULT 0,
+  `comment_on` smallint(6) NOT NULL DEFAULT 0,
+  `comment_after` smallint(6) NOT NULL DEFAULT 0,
+  `comment_votes` smallint(6) NOT NULL DEFAULT 0,
   `comment_content` text NOT NULL,
-  `comment_del` tinyint(1) NOT NULL DEFAULT '0'
+  `comment_del` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `favorite`
+--
+
+CREATE TABLE `favorite` (
+  `fid` mediumint(8) NOT NULL,
+  `uid` mediumint(8) NOT NULL,
+  `tid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `messages`
+--
+
+CREATE TABLE `messages` (
+  `id` int(11) NOT NULL,
+  `uid` int(11) DEFAULT NULL COMMENT 'Отправитель',
+  `dialog_id` int(11) DEFAULT NULL,
+  `message` text DEFAULT NULL,
+  `add_time` timestamp NOT NULL DEFAULT current_timestamp(),
+  `sender_remove` tinyint(1) DEFAULT 0,
+  `recipient_remove` tinyint(1) DEFAULT 0,
+  `receipt` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `messages_dialog`
+--
+
+CREATE TABLE `messages_dialog` (
+  `id` int(11) NOT NULL,
+  `sender_uid` int(11) DEFAULT NULL COMMENT 'Отправитель',
+  `sender_unread` int(11) DEFAULT NULL COMMENT 'Отправитель, 0 непрочитано',
+  `recipient_uid` int(11) DEFAULT NULL COMMENT 'Получатель',
+  `recipient_unread` int(11) DEFAULT NULL COMMENT 'Получатель, 0 непрочитано',
+  `add_time` timestamp NOT NULL DEFAULT current_timestamp(),
+  `update_time` timestamp NOT NULL DEFAULT current_timestamp(),
+  `sender_count` int(11) DEFAULT NULL COMMENT 'Отправитель кол.',
+  `recipient_count` int(11) DEFAULT NULL COMMENT 'Получатель кол.'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `notification`
+--
+
+CREATE TABLE `notification` (
+  `notification_id` int(11) NOT NULL,
+  `sender_uid` int(11) DEFAULT NULL COMMENT 'Отправитель',
+  `recipient_uid` int(11) DEFAULT 0 COMMENT 'Получает ID',
+  `action_type` int(4) DEFAULT NULL COMMENT 'Тип оповещения',
+  `connection_type` int(11) DEFAULT NULL COMMENT 'Данные источника',
+  `add_time` timestamp NOT NULL DEFAULT current_timestamp(),
+  `read_flag` tinyint(1) DEFAULT 0 COMMENT 'Состояние прочтения',
+  `is_del` tinyint(1) UNSIGNED DEFAULT 0 COMMENT 'Стоит ли удалять'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
 
 --
 -- Структура таблицы `posts`
 --
 
 CREATE TABLE `posts` (
-  `post_id` int UNSIGNED NOT NULL,
+  `post_id` int(10) UNSIGNED NOT NULL,
   `post_title` varchar(250) NOT NULL,
   `post_slug` varchar(128) NOT NULL,
-  `post_space_id` int NOT NULL DEFAULT '0',
-  `post_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `edit_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `post_user_id` int UNSIGNED NOT NULL,
+  `post_space_id` int(11) NOT NULL DEFAULT 0,
+  `post_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `edit_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `post_user_id` int(10) UNSIGNED NOT NULL,
   `post_visible` enum('all','friends') NOT NULL DEFAULT 'all',
   `post_ip_int` varchar(112) DEFAULT NULL,
-  `post_votes` smallint NOT NULL DEFAULT '0',
-  `post_karma` smallint NOT NULL DEFAULT '0',
-  `post_comments` smallint NOT NULL DEFAULT '0',
+  `post_votes` smallint(6) NOT NULL DEFAULT 0,
+  `post_karma` smallint(6) NOT NULL DEFAULT 0,
+  `post_comments` smallint(6) NOT NULL DEFAULT 0,
   `post_content` text NOT NULL,
-  `post_top` tinyint(1) NOT NULL DEFAULT '0',
-  `post_is_delete` tinyint(1) NOT NULL DEFAULT '0'
+  `post_top` tinyint(1) NOT NULL DEFAULT 0,
+  `post_is_delete` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -112,13 +177,13 @@ INSERT INTO `posts` (`post_id`, `post_title`, `post_slug`, `post_space_id`, `pos
 --
 
 CREATE TABLE `space` (
-  `space_id` int NOT NULL,
+  `space_id` int(11) NOT NULL,
   `space_name` varchar(250) NOT NULL,
   `space_slug` varchar(128) NOT NULL,
   `space_description` varchar(250) NOT NULL,
-  `space_category_id` int NOT NULL DEFAULT '1',
-  `space_tip` int NOT NULL DEFAULT '1',
-  `space_permit_users` int NOT NULL DEFAULT '1'
+  `space_category_id` int(11) NOT NULL DEFAULT 1,
+  `space_tip` int(11) NOT NULL DEFAULT 1,
+  `space_permit_users` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -137,9 +202,9 @@ INSERT INTO `space` (`space_id`, `space_name`, `space_slug`, `space_description`
 --
 
 CREATE TABLE `space_hidden` (
-  `hidden_id` int NOT NULL,
-  `hidden_space_id` int NOT NULL,
-  `hidden_user_id` int NOT NULL
+  `hidden_id` int(11) NOT NULL,
+  `hidden_space_id` int(11) NOT NULL,
+  `hidden_user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -149,34 +214,43 @@ CREATE TABLE `space_hidden` (
 --
 
 CREATE TABLE `users` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `login` varchar(50) NOT NULL,
   `name` varchar(50) DEFAULT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `reset_token` varchar(250) DEFAULT NULL,
-  `reset_expire` datetime DEFAULT NULL,
   `activated` tinyint(1) NOT NULL,
   `reg_ip` bigint(12) DEFAULT NULL,
   `last_ip` bigint(12) DEFAULT NULL,
-  `trust_level` int NOT NULL COMMENT 'Уровень доверия. По умолчанию 0 (5 - админ)',
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `deleted_at` tinyint(1) DEFAULT '0',
+  `trust_level` int(11) NOT NULL COMMENT 'Уровень доверия. По умолчанию 0 (5 - админ)',
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `deleted_at` tinyint(1) DEFAULT 0,
   `avatar` varchar(250) DEFAULT NULL,
   `about` varchar(255) DEFAULT NULL,
-  `rating` int NOT NULL DEFAULT '0',
+  `rating` int(11) NOT NULL DEFAULT 0,
   `status` varchar(250) DEFAULT NULL,
-  `my_post` int DEFAULT NULL COMMENT 'Пост выведенный в профиль'
+  `my_post` int(11) DEFAULT NULL COMMENT 'Пост выведенный в профиль'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 
 --
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`id`, `login`, `name`, `email`, `password`, `reset_token`, `reset_expire`, `activated`, `reg_ip`, `last_ip`, `trust_level`, `created_at`, `updated_at`, `deleted_at`, `avatar`, `about`, `rating`, `status`, `my_post`) VALUES
-(1, 'AdreS', 'Олег', 'ss@sdf.ru', '$2y$10$oR5VZ.zk7IN/og70gQq/f.0Sb.GQJ33VZHIES4pyIpU3W2vF6aiaW', '', NULL, 1, NULL, NULL, 1, '2021-03-08 21:37:04', '2021-03-08 21:37:04', 0, '', 'Тестовый аккаунт', 0, '', 0);
+INSERT INTO `users` (`id`, `login`, `name`, `email`, `password`, `activated`, `reg_ip`, `last_ip`, `trust_level`, `created_at`, `updated_at`, `deleted_at`, `avatar`, `about`, `rating`, `status`, `my_post`) VALUES
+(1, 'AdreS', 'Олег', 'ss@sdf.ru', '$2y$10$oR5VZ.zk7IN/og70gQq/f.0Sb.GQJ33VZHIES4pyIpU3W2vF6aiaW', 1, NULL, NULL, 1, '2021-03-08 21:37:04', '2021-03-08 21:37:04', 0, '', 'Тестовый аккаунт', 0, '', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `users_notification_setting`
+--
+
+CREATE TABLE `users_notification_setting` (
+  `notice_setting_id` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `data` text DEFAULT NULL COMMENT 'Информация'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -185,9 +259,22 @@ INSERT INTO `users` (`id`, `login`, `name`, `email`, `password`, `reset_token`, 
 --
 
 CREATE TABLE `users_trust_level` (
-  `id` int NOT NULL,
-  `trust_name` varchar(255) NOT NULL
+  `trust_id` int(11) NOT NULL,
+  `trust_name` varchar(85) NOT NULL,
+  `trust_count` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Дамп данных таблицы `users_trust_level`
+--
+
+INSERT INTO `users_trust_level` (`trust_id`, `trust_name`, `trust_count`) VALUES
+(0, 'Посетитель', 0),
+(1, 'Пользователь', 0),
+(2, 'Участник', 0),
+(3, 'Постоялец', 0),
+(4, 'Лидер', 0),
+(5, 'Персонал', 1);
 
 -- --------------------------------------------------------
 
@@ -196,39 +283,47 @@ CREATE TABLE `users_trust_level` (
 --
 
 CREATE TABLE `votes_comm` (
-  `votes_comm_id` int NOT NULL,
-  `votes_comm_item_id` int NOT NULL,
-  `votes_comm_points` int NOT NULL,
+  `votes_comm_id` int(11) NOT NULL,
+  `votes_comm_item_id` int(11) NOT NULL,
+  `votes_comm_points` int(11) NOT NULL,
   `votes_comm_ip` varchar(20) NOT NULL,
-  `votes_comm_user_id` int NOT NULL DEFAULT '1',
+  `votes_comm_user_id` int(11) NOT NULL DEFAULT 1,
   `votes_comm_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Индексы сохранённых таблиц
+--
 
-CREATE TABLE `messages` (
-  `id` int(11) NOT NULL,
-  `uid` int(11) DEFAULT NULL COMMENT 'Отправитель',
-  `dialog_id` int(11) DEFAULT NULL,
-  `message` text DEFAULT NULL,
-  `add_time` timestamp NOT NULL DEFAULT current_timestamp(),
-  `sender_remove` tinyint(1) DEFAULT 0,
-  `recipient_remove` tinyint(1) DEFAULT 0,
-  `receipt` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+--
+-- Индексы таблицы `auth_logins`
+--
+ALTER TABLE `auth_logins`
+  ADD PRIMARY KEY (`id`);
 
+--
+-- Индексы таблицы `auth_tokens`
+--
+ALTER TABLE `auth_tokens`
+  ADD PRIMARY KEY (`id`);
 
-CREATE TABLE `messages_dialog` (
-  `id` int(11) NOT NULL,
-  `sender_uid` int(11) DEFAULT NULL COMMENT 'Отправитель',
-  `sender_unread` int(11) DEFAULT NULL COMMENT 'Отправитель, 0 непрочитано',
-  `recipient_uid` int(11) DEFAULT NULL COMMENT 'Получатель',
-  `recipient_unread` int(11) DEFAULT NULL COMMENT 'Получатель, 0 непрочитано',
-  `add_time` timestamp NOT NULL DEFAULT current_timestamp(),
-  `update_time` timestamp NOT NULL DEFAULT current_timestamp(),
-  `sender_count` int(11) DEFAULT NULL COMMENT 'Отправитель кол.',
-  `recipient_count` int(11) DEFAULT NULL COMMENT 'Получатель кол.'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+--
+-- Индексы таблицы `comments`
+--
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`comment_id`),
+  ADD KEY `comment_link_id_2` (`comment_post_id`,`comment_date`),
+  ADD KEY `comment_date` (`comment_date`),
+  ADD KEY `comment_user_id` (`comment_user_id`,`comment_date`),
+  ADD KEY `comment_post_id` (`comment_post_id`,`comment_order`);
 
+--
+-- Индексы таблицы `favorite`
+--
+ALTER TABLE `favorite`
+  ADD PRIMARY KEY (`fid`),
+  ADD KEY `fuid` (`fid`),
+  ADD KEY `id` (`tid`);
 
 --
 -- Индексы таблицы `messages`
@@ -252,98 +347,15 @@ ALTER TABLE `messages_dialog`
   ADD KEY `update_time` (`update_time`),
   ADD KEY `add_time` (`add_time`);
 
-
 --
--- AUTO_INCREMENT для таблицы `messages`
+-- Индексы таблицы `notification`
 --
-ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
-
---
--- AUTO_INCREMENT для таблицы `messages_dialog`
---
-ALTER TABLE `messages_dialog`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
-
---
--- Таблица избранное
---
-
-CREATE TABLE `favorite` (
-  `fid` mediumint(8) NOT NULL AUTO_INCREMENT,
-  `uid` mediumint(8) NOT NULL,
-  `tid` int(11) NOT NULL,
-  PRIMARY KEY (`fid`),
-  KEY `fuid` (`fid`),
-  KEY `id` (`tid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
---
--- Таблица уведомления
---
-
-CREATE TABLE `notification` (
-  `notification_id` int(11) NOT NULL,
-  `sender_uid` int(11) DEFAULT NULL COMMENT 'Отправитель',
-  `recipient_uid` int(11) DEFAULT '0' COMMENT 'Получает ID',
-  `action_type` int(4) DEFAULT NULL COMMENT 'Тип оповещения',
-  `connection_type` int(11) DEFAULT NULL COMMENT 'Данные источника',
-  `add_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `read_flag` tinyint(1) DEFAULT '0' COMMENT 'Состояние прочтения',
-  `is_del` tinyint(1) UNSIGNED DEFAULT '0' COMMENT 'Стоит ли удалять'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 ALTER TABLE `notification`
   ADD PRIMARY KEY (`notification_id`),
   ADD KEY `recipient_read_flag` (`recipient_uid`,`read_flag`),
   ADD KEY `sender_uid` (`sender_uid`),
   ADD KEY `action_type` (`action_type`),
   ADD KEY `add_time` (`add_time`);
-  
-
-ALTER TABLE `notification`
-  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;  
-
- 
-
-
---
--- Таблицы `users_notification_setting`
---
-
-CREATE TABLE `users_notification_setting` (
-  `notice_setting_id` int(11) NOT NULL,
-  `uid` int(11) NOT NULL,
-  `data` text COMMENT 'Информация'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-ALTER TABLE `users_notification_setting`
-  ADD PRIMARY KEY (`notice_setting_id`),
-  ADD KEY `uid` (`uid`);
-
-ALTER TABLE `users_notification_setting`
-  MODIFY `notice_setting_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
-
---
--- Индексы таблицы `auth_logins`
---
-ALTER TABLE `auth_logins`
-  ADD PRIMARY KEY (`id`);
-
---
--- Индексы таблицы `auth_tokens`
---
-ALTER TABLE `auth_tokens`
-  ADD PRIMARY KEY (`id`);
-
---
--- Индексы таблицы `comments`
---
-ALTER TABLE `comments`
-  ADD PRIMARY KEY (`comment_id`),
-  ADD KEY `comment_link_id_2` (`comment_post_id`,`comment_date`),
-  ADD KEY `comment_date` (`comment_date`),
-  ADD KEY `comment_user_id` (`comment_user_id`,`comment_date`),
-  ADD KEY `comment_post_id` (`comment_post_id`,`comment_order`);
 
 --
 -- Индексы таблицы `posts`
@@ -372,10 +384,17 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `users_notification_setting`
+--
+ALTER TABLE `users_notification_setting`
+  ADD PRIMARY KEY (`notice_setting_id`),
+  ADD KEY `uid` (`uid`);
+
+--
 -- Индексы таблицы `users_trust_level`
 --
 ALTER TABLE `users_trust_level`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`trust_id`);
 
 --
 -- Индексы таблицы `votes_comm`
@@ -394,55 +413,79 @@ ALTER TABLE `votes_comm`
 -- AUTO_INCREMENT для таблицы `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `auth_tokens`
 --
 ALTER TABLE `auth_tokens`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `comment_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `favorite`
+--
+ALTER TABLE `favorite`
+  MODIFY `fid` mediumint(8) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `messages`
+--
+ALTER TABLE `messages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `messages_dialog`
+--
+ALTER TABLE `messages_dialog`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `notification`
+--
+ALTER TABLE `notification`
+  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `post_id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `post_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `space`
 --
 ALTER TABLE `space`
-  MODIFY `space_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `space_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `space_hidden`
 --
 ALTER TABLE `space_hidden`
-  MODIFY `hidden_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `hidden_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT для таблицы `users_trust_level`
+-- AUTO_INCREMENT для таблицы `users_notification_setting`
 --
-ALTER TABLE `users_trust_level`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+ALTER TABLE `users_notification_setting`
+  MODIFY `notice_setting_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `votes_comm`
 --
 ALTER TABLE `votes_comm`
-  MODIFY `votes_comm_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `votes_comm_id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

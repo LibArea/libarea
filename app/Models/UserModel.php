@@ -53,12 +53,21 @@ class UserModel extends \MainModel
     public static function createUser($login,$email,$password)
     {
 
+        // количество участников 
+        $count = count(XD::select('*')->from(['users'])->getSelect());
+      
+        // Для "режима запуска" первые 50 участников получают trust_level = 1 
+        if($count < 50 && $GLOBALS['conf']['bootstrap_mode'] == 1) {
+            $trust_level = 1; // Режим "запуска сообщества"
+        } else {
+            $trust_level = 0; // 0 min, 5 TL max (5 = персонал, админ)
+        }
+
         $password    = password_hash($password, PASSWORD_BCRYPT);
         $activated   = 1; // ввести почту и инвайт 
         $reg_ip      = Request::getRemoteAddress(); // ip при регистрации 
-        $trust_level = 0;  // 5 TL max
         
-        XD::insertInto(['users'], '(', ['login'], ',', ['email'], ',', ['password'], ',', ['activated'], ',', ['reg_ip'],',', ['trust_level'], ')')->values( '(', XD::setList([$login, $email, $password, $password, $reg_ip, $trust_level]), ')' )->run();
+        XD::insertInto(['users'], '(', ['login'], ',', ['email'], ',', ['password'], ',', ['activated'], ',', ['reg_ip'],',', ['trust_level'], ')')->values( '(', XD::setList([$login, $email, $password, $activated, $reg_ip, $trust_level]), ')' )->run();
         
         return true;
         
@@ -78,12 +87,24 @@ class UserModel extends \MainModel
         return true;
     }
 
-   // Изменение аватарки
+   // Получение аватарки
     public static function getAvatar($login)
     {
         $query = XD::select(['login', 'avatar'])->from(['users'])->where(['login'], '=', $login);
 
         $result = $query->getSelectOne();
+        return $result;
+    }
+
+   // TL - название
+    public static function getUserTrust($id)
+    {
+        $q = XD::select(['id', 'trust_level', 'trust_id', 'trust_name'])->from(['users_trust_level']);
+        $query = $q->leftJoin(['users'])->on(['trust_level'], '=', ['trust_id'])
+                 ->where(['id'], '=', $id);
+                 
+        $result = $query->getSelectOne();
+        
         return $result;
     }
 

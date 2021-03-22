@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="/assets/css/info.css">
 <section>
     <div class="wrap">
-        <div class="info">
+        <div class="telo-info">
             <h1>Статистика</h1>
             
             <center>

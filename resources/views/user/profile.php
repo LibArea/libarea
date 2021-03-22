@@ -1,7 +1,7 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
     <section>
     <div class="wrap">
-        <div class="profile">
+        <div class="telo-profile">
             <div class="gravatar">
                 <img alt="<?= $data['login']; ?>" src="/uploads/avatar/<?= $data['avatar']; ?>">
             </div>
@@ -23,11 +23,18 @@
             </h1>
 
             <div class="box wide">
-                <label class="required">Профиль:</label>
-                <span class="d">id:<?= $data['id']; ?></span>
+                <label class="required">ID:</label>
+                <span class="d"><?= $data['id']; ?></span>
 
                 <br>
+         
+                <label class="required">TL:</label>
+                <span class="d">
+                    <a title="Уровень доверия" href="/info/trust-level"><?= $data['trust_level']['trust_name']; ?></a>
+                </span>
 
+                <br>
+                
                 <label class="required">Присоединился:</label>
                 <span class="d"><?= $data['created_at']; ?></span>
 

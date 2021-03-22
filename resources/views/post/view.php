@@ -1,7 +1,7 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 <section>
     <div class="wrap">
-        <div class="telo telo-post">
+        <div class="telo-detail_post">
             <h1 class="titl"><?= $data['post']['title']; ?></h1>
             <div class="footer">
                 <img class="ava" src="/uploads/avatar/small/<?= $data['post']['avatar']; ?>">

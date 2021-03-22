@@ -56,6 +56,7 @@ class UserController extends \MainController
           'my_post'       => $user['my_post'],
           'post'          => $post,
           'created_at'    => Base::ru_date($user['created_at']),
+          'trust_level'   => UserModel::getUserTrust($user['id']),
           'post_num_user' => UserModel::getUsersPostsNum($user['id']),
           'comm_num_user' => UserModel::getUsersCommentsNum($user['id']),
         ];
@@ -267,5 +268,25 @@ class UserController extends \MainController
         redirect('/users/setting');
         
     }
-    
+    function userFavorite ()
+    {
+        $login = Request::get('login');
+
+        $user  = UserModel::getUserLogin($login);
+
+        // Покажем 404
+        if(!$user) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
+        }
+        
+        $uid  = Base::getUid();
+        $data = [
+            'title'         => 'Избранное ' . $login,
+            'description'   => 'Избранные посты участника ' . $login,
+            'favorite'      => 0,
+        ]; 
+        
+        return view("user/favorite", ['data' => $data, 'uid' => $uid]);   
+    }
 }

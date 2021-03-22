@@ -1,10 +1,9 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 <section>
     <div class="wrap">
-
-        <h1>О нас</h1>
-
-        <div class="telo">
+        <div class="telo-info">
+            <h1>О нас</h1>
+        
             <b>Задача 1</b> — изучить <a rel="nofollow noreferrer" target="_blank" href="https://phphleb.ru/"><i>PHP Микрофреймворк HLEB</i></a>: routes, get / post, ajax, csrf и т.д.
               <br><br>
              <center> 

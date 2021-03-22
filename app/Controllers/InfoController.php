@@ -79,6 +79,18 @@ class InfoController extends \MainController
 
         return view('info/privacy', ['data' => $data, 'uid' => $uid]);
 
-	}
+	}  
+    
+    public function trustlevel()
+	{
+        
+        $uid  = Base::getUid();
+        $data = [
+            'title'       => 'Уровень доверия (TL)',
+            'description' => 'Информация об уровни доверия пользователя (TL). Права, доступ.',
+        ];
 
+        return view('info/trust-level', ['data' => $data, 'uid' => $uid]);
+
+	}
 }

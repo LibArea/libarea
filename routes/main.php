@@ -24,6 +24,7 @@ Route::get('/info/stats')->controller('InfoController@stats');
 Route::get('/info/rules')->controller('InfoController@rules');
 Route::get('/info/about')->controller('InfoController@about');
 Route::get('/info/privacy')->controller('InfoController@privacy');
+Route::get('/info/trust-level')->controller('InfoController@trustlevel');
 
 // Участник
 Route::get('/users')->controller('UserController');
@@ -35,6 +36,8 @@ Route::type('post')->protect()->get('/users/setting/edit')->controller('UserCont
 Route::type('post')->protect()->get('/users/setting/avatar/edit')->controller('UserController@settingAvatarEdit');
 Route::type('post')->protect()->get('/users/setting/security/edit')->controller('UserController@settingSecurityEdit');
 
+// Избранное участника
+Route::get('/favorite/{login}')->controller('UserController@userFavorite')->where(['login' => '[A-Za-z0-9]+']);
 
 // Регистрация и авторизация
 Route::get('/register')->controller('AuthController@registerPage');
@@ -44,9 +47,9 @@ Route::type('post')->protect()->get('/login')->controller('AuthController@loginH
 Route::type('get')->get('/login')->controller('AuthController@loginPage');
 Route::get('/logout')->controller('AuthController@logout');
  
-// Страница комментариев пользователя
+// Страница комментариев участника
 Route::get('/threads/{login}')->controller('CommentController@userComments')->where(['login' => '[A-Za-z0-9]+']);
-// Страница постов пользователя
+// Страница постов участника
 Route::get('/newest/{login}')->controller('PostController@userPosts')->where(['login' => '[A-Za-z0-9]+']);
 
 // Все комментарии
@@ -85,6 +88,9 @@ Route::get('/u/{login}/messages')->controller('MessagesController@profilMessages
 
 // Уведомления 
 Route::get('/notifications')->controller('NotificationsController'); 
+
+// Поиск
+Route::get('/search')->controller('SearchController');
 
 // Пагинация и главная страница
 Route::get('/{page?}')->protect()->controller('PostController')->where(['page' => '[0-9]+']);
