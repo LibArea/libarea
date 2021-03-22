@@ -181,10 +181,10 @@ INSERT INTO `users` (`id`, `login`, `name`, `email`, `password`, `reset_token`, 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `user_trust_level`
+-- Структура таблицы `users_trust_level`
 --
 
-CREATE TABLE `user_trust_level` (
+CREATE TABLE `users_trust_level` (
   `id` int NOT NULL,
   `trust_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -372,9 +372,9 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `user_trust_level`
+-- Индексы таблицы `users_trust_level`
 --
-ALTER TABLE `user_trust_level`
+ALTER TABLE `users_trust_level`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -433,9 +433,9 @@ ALTER TABLE `users`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT для таблицы `user_trust_level`
+-- AUTO_INCREMENT для таблицы `users_trust_level`
 --
-ALTER TABLE `user_trust_level`
+ALTER TABLE `users_trust_level`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --

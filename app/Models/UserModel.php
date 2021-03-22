@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Models;
+use Hleb\Constructor\Handlers\Request;
 use XdORM\XD;
-use DB;
 
 class UserModel extends \MainModel
 {
@@ -52,18 +52,14 @@ class UserModel extends \MainModel
     // Регистрация участника
     public static function createUser($login,$email,$password)
     {
-        
-        $params = [
-           'login'       => $login,
-           'email'       => $email,
-           'password'    => password_hash($password, PASSWORD_BCRYPT),
-           'activated'   => '1', // ввести почту и инвайт 
-           'reg_ip'      => Request::getRemoteAddress(), // ip при регистрации 
-           'trust_level' => '0'  // 5 TL max
-        ];
 
-        $sql = "INSERT INTO users(login, email, password, activated, reg_ip, trust_level) VALUES(:login, :email,:password,:activated,:reg_ip,:trust_level)";
-        DB::run($sql,$params);
+        $password    = password_hash($password, PASSWORD_BCRYPT);
+        $activated   = 1; // ввести почту и инвайт 
+        $reg_ip      = Request::getRemoteAddress(); // ip при регистрации 
+        $trust_level = 0;  // 5 TL max
+        
+        XD::insertInto(['users'], '(', ['login'], ',', ['email'], ',', ['password'], ',', ['activated'], ',', ['reg_ip'],',', ['trust_level'], ')')->values( '(', XD::setList([$login, $email, $password, $password, $reg_ip, $trust_level]), ')' )->run();
+        
         return true;
         
     }
