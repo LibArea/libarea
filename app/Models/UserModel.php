@@ -54,15 +54,15 @@ class UserModel extends \MainModel
     {
         
         $params = [
-           'login'     => $login,
-           'email'     => $email,
-           'password'  => password_hash($password, PASSWORD_BCRYPT),
-           'activated' => '1', // ввести почту и инвайт 
-           'reg_ip'    => Request::getRemoteAddress(), // ip при регистрации 
-           'role'      => '2'  // 1 админ 
+           'login'       => $login,
+           'email'       => $email,
+           'password'    => password_hash($password, PASSWORD_BCRYPT),
+           'activated'   => '1', // ввести почту и инвайт 
+           'reg_ip'      => Request::getRemoteAddress(), // ip при регистрации 
+           'trust_level' => '0'  // 5 TL max
         ];
 
-        $sql = "INSERT INTO users(login, email, password, activated, reg_ip, role) VALUES(:login, :email,:password,:activated,:reg_ip,:role)";
+        $sql = "INSERT INTO users(login, email, password, activated, reg_ip, trust_level) VALUES(:login, :email,:password,:activated,:reg_ip,:trust_level)";
         DB::run($sql,$params);
         return true;
         

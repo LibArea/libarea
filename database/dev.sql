@@ -33,7 +33,7 @@ CREATE TABLE `auth_logins` (
   `user_id` int NOT NULL,
   `nickname` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `role` varchar(255) NOT NULL,
+  `trust_level` varchar(255) NOT NULL,
   `ip_address` varchar(255) NOT NULL,
   `date` datetime NOT NULL,
   `successfull` int NOT NULL
@@ -159,7 +159,7 @@ CREATE TABLE `users` (
   `activated` tinyint(1) NOT NULL,
   `reg_ip` bigint(12) DEFAULT NULL,
   `last_ip` bigint(12) DEFAULT NULL,
-  `role` int NOT NULL COMMENT 'По умолчанию 2 (1 - админ)',
+  `trust_level` int NOT NULL COMMENT 'Уровень доверия. По умолчанию 0 (5 - админ)',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `deleted_at` tinyint(1) DEFAULT '0',
@@ -175,18 +175,18 @@ CREATE TABLE `users` (
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`id`, `login`, `name`, `email`, `password`, `reset_token`, `reset_expire`, `activated`, `reg_ip`, `last_ip`, `role`, `created_at`, `updated_at`, `deleted_at`, `avatar`, `about`, `rating`, `status`, `my_post`) VALUES
+INSERT INTO `users` (`id`, `login`, `name`, `email`, `password`, `reset_token`, `reset_expire`, `activated`, `reg_ip`, `last_ip`, `trust_level`, `created_at`, `updated_at`, `deleted_at`, `avatar`, `about`, `rating`, `status`, `my_post`) VALUES
 (1, 'AdreS', 'Олег', 'ss@sdf.ru', '$2y$10$oR5VZ.zk7IN/og70gQq/f.0Sb.GQJ33VZHIES4pyIpU3W2vF6aiaW', '', NULL, 1, NULL, NULL, 1, '2021-03-08 21:37:04', '2021-03-08 21:37:04', 0, '', 'Тестовый аккаунт', 0, '', 0);
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `user_roles`
+-- Структура таблицы `user_trust_level`
 --
 
-CREATE TABLE `user_roles` (
+CREATE TABLE `user_trust_level` (
   `id` int NOT NULL,
-  `role_name` varchar(255) NOT NULL
+  `trust_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -265,7 +265,18 @@ ALTER TABLE `messages`
 ALTER TABLE `messages_dialog`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
+--
+-- Таблица избранное
+--
 
+CREATE TABLE `favorite` (
+  `fid` mediumint(8) NOT NULL AUTO_INCREMENT,
+  `uid` mediumint(8) NOT NULL,
+  `tid` int(11) NOT NULL,
+  PRIMARY KEY (`fid`),
+  KEY `fuid` (`fid`),
+  KEY `id` (`tid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 --
 -- Таблица уведомления
 --
@@ -361,9 +372,9 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `user_roles`
+-- Индексы таблицы `user_trust_level`
 --
-ALTER TABLE `user_roles`
+ALTER TABLE `user_trust_level`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -422,9 +433,9 @@ ALTER TABLE `users`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT для таблицы `user_roles`
+-- AUTO_INCREMENT для таблицы `user_trust_level`
 --
-ALTER TABLE `user_roles`
+ALTER TABLE `user_trust_level`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
