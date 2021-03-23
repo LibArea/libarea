@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="/assets/css/style.css">
         <link rel="icon" href="/favicon.ico">
     </head>
-<body class="bd<?php if(Request::getCookie('dayNight') == 'dark') {?> dark<?php } ?>">
+<body class="bd">
 <header>
 	<div class="wrap">
 		<div class="title">
@@ -18,33 +18,38 @@
             <div class="menu-left">
                 <ul>
                     <li class="nav no-mob">
-                        <?php if(Request::getUri() == '/') { ?>
-                            <a title="На главную" class="home" href="/">AreaDev</a>
-                        <?php } else { ?>
-                           <a title="На главную" class="home" href="/">Главная</a>
-                        <?php } ?>
+                        <a title="Админка" class="home" href="/admin">Админка</a>
                     </li>
                     <li class="nav no-mob">
-                        <a title="TOP постов" class="home" href="/top">TOP</a>
+                        <a title="Участники" class="home" href="#">
+                            <svg class="md-icon">
+                                <use xlink:href="/assets/svg/icons.svg#user"></use>
+                            </svg> 
+                            Участники
+                        </a>
                     </li>
-                    <li class="nav no-mob-two">
-                        <a title="Все комментарии" class="comments" href="/comments">Комментарии</a>
-                    </li>  
-                    <li class="nav no-mob-two">
-                        <a title="Пространства" class="sp" href="/space">∞</a>
+                    <li class="nav no-mob"> 
+                        <a title="Посты" class="home" href="#">
+                            <svg class="md-icon">
+                                <use xlink:href="/assets/svg/icons.svg#devices"></use>
+                            </svg> 
+                            Посты
+                        </a>
+                    </li>
+                    <li class="nav no-mob">
+                        <a title="Комментарии" class="home" href="#">
+                            <svg class="md-icon">
+                                <use xlink:href="/assets/svg/icons.svg#message"></use>
+                            </svg> 
+                            Комментарии
+                        </a>
                     </li>
                 </ul>
             </div>
 		</div>
 		<div class="menu">
 			<ul>
-                <li class="nav">
-                    <span id="toggledark" class="my-color-m">
-                        <svg class="md-icon moon">
-                            <use xlink:href="/assets/svg/icons.svg#moon"></use>
-                        </svg>
-                    </span>
-                </li>
+ 
                 <?php if(!$uid['id']) { ?> 
                     <li class="nav">
                         <a class="login" href="/login">Войти</a>
@@ -53,13 +58,6 @@
                         <a class="register" href="/register">Регистрация</a>
                     </li>
                 <?php } else { ?> 
-                    <li class="nav create">  
-                        <a class="nav" href="/post/add">  
-                            <svg class="md-icon">
-                                <use xlink:href="/assets/svg/icons.svg#plus"></use>
-                            </svg> 
-                        </a>
-                    </li>   
                     <?php if($uid['notif']) { ?> 
                         <li class="nav notif">  
                             <a class="nav" href="/notifications">  
@@ -94,12 +92,6 @@
                                     <use xlink:href="/assets/svg/icons.svg#devices"></use>
                                 </svg> 
                                 Мои ответы 
-                            </a>
-                            <a href="/favorite/<?= $uid['login']; ?>">
-                                <svg class="md-icon">
-                                    <use xlink:href="/assets/svg/icons.svg#bookmark"></use>
-                                </svg>  
-                                Избранное                   
                             </a>
                             <a href="/admin" target="_black">
                                 <svg class="md-icon">

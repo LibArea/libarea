@@ -356,7 +356,7 @@ class Base
     }
     
     # Регистрация информации о пользователе
-    protected function loginCookie($Key, $uid, $login, $role)
+    protected function loginCookie($Key, $uid, $login, $trust_level)
     {
         $loginTime = time();
 
@@ -367,7 +367,7 @@ class Base
 
             $login,
 
-            $role,
+            $trust_level,
 
             $loginTime
         )), $Key);

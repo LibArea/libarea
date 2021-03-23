@@ -81,9 +81,9 @@ CREATE TABLE `comments` (
 --
 
 CREATE TABLE `favorite` (
-  `fid` mediumint(8) NOT NULL,
-  `uid` mediumint(8) NOT NULL,
-  `tid` int(11) NOT NULL
+  `favorite_id` mediumint(8) NOT NULL,
+  `favorite_uid` mediumint(8) NOT NULL,
+  `favorite_tid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -321,9 +321,9 @@ ALTER TABLE `comments`
 -- Индексы таблицы `favorite`
 --
 ALTER TABLE `favorite`
-  ADD PRIMARY KEY (`fid`),
-  ADD KEY `fuid` (`fid`),
-  ADD KEY `id` (`tid`);
+  ADD PRIMARY KEY (`favorite_id`),
+  ADD KEY `favorite_uid` (`favorite_id`),
+  ADD KEY `favorite_id` (`favorite_tid`);
 
 --
 -- Индексы таблицы `messages`
@@ -431,7 +431,7 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT для таблицы `favorite`
 --
 ALTER TABLE `favorite`
-  MODIFY `fid` mediumint(8) NOT NULL AUTO_INCREMENT;
+  MODIFY `favorite_id` mediumint(8) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `messages`

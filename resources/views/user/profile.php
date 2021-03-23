@@ -57,7 +57,16 @@
                         </a>
                     </span>  <br>
                 <?php } ?>
-
+                
+                <?php if($data['fav_num_user'] != 0) { ?>
+                    <label class="required">Избранное:</label>
+                    <span class="d">
+                        <a title="Избранное <?= $data['login']; ?>" href="/favorite/<?= $data['login']; ?>">
+                            <?= $data['fav_num_user']; ?>
+                        </a>
+                    </span>  <br>
+                <?php } ?>
+                
                 <label class="required">О себе:</label>
                 <span class="na about">
                     <?php if($data['about']) { ?>
@@ -67,6 +76,7 @@
                     <?php } ?>
                 </span>
                 <br>
+
                 
                 <?php if($data['my_post'] != 0) { ?>
                     <h4>Избранный пост:</h4>

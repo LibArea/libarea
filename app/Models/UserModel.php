@@ -106,7 +106,23 @@ class UserModel extends \MainModel
         $result = $query->getSelectOne();
         
         return $result;
-    }
+    }  
+
+    // Страница постов участника
+    public static function getUserFavorite($uid)
+    {
+         
+        $q = XD::select('*')->from(['posts']);
+        $query = $q->leftJoin(['users'])->on(['id'], '=', ['post_user_id'])
+                ->leftJoin(['space'])->on(['space_id'], '=', ['post_space_id'])
+                ->leftJoin(['favorite'])->on(['favorite_tid'], '=', ['post_id'])
+                ->where(['favorite_uid'], '=', $uid)
+                ->orderBy(['post_id'])->desc();
+  
+        $result = $query->getSelect();
+
+        return $result;
+    } 
 
     // Информация участника
     public static function getUserInfo($data) 
@@ -143,6 +159,17 @@ class UserModel extends \MainModel
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['comment_user_id'])
                  ->where(['id'], '=', $id);
        
+        $result = count($query->getSelect());
+        return $result;
+        
+    }
+    
+    // Количество закладок на странице профиля
+    public static function getUsersFavoriteNum($id)
+    {
+        
+        $query = XD::select('*')->from(['favorite'])->where(['favorite_uid'], '=', $id);
+
         $result = count($query->getSelect());
         return $result;
         

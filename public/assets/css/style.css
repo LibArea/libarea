@@ -60,7 +60,7 @@ code {
 .telo-profile, .telo-info, .telo-detail_post{
     margin-left: 5px;
 }
-.telo-info {
+.telo-info, .telo-detail_post {
     max-width: 800px;
 }
 blockquote {
@@ -313,7 +313,7 @@ textarea:focus {
 textarea:disabled {
 	background-color: #f0f0f0;
 }
-.telo textarea {
+.telo-detail_post textarea, .block-comments textarea {
     width: 95%;
 }
 
@@ -436,7 +436,7 @@ input.form-about {width: 250px;}
 .post-body {
     margin-left: 40px;
 }
-.detail .post img {
+.telo-detail_post img {
     max-width: 600px;
 }
 .post-telo {

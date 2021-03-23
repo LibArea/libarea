@@ -20,7 +20,7 @@
 
                 <div class="comm-telo">
                     <div class="comm-header">
-                        <img class="ava" src="/images/user/small/<?php echo $comm['avatar']; ?>">
+                        <img class="ava" alt="<?php echo $comm['login']; ?>" src="/uploads/avatar/small/<?php echo $comm['avatar']; ?>">
                         <span class="user"> 
                             <a href="/u/<?php echo $comm['login']; ?>"><?php echo $comm['login']; ?></a> 
                             

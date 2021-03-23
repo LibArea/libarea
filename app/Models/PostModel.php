@@ -106,7 +106,8 @@ class PostModel extends \MainModel
         $q = XD::select('*')->from(['posts']);
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['post_user_id'])
                 ->leftJoin(['space'])->on(['space_id'], '=', ['post_space_id'])
-                ->where(['login'], '=', $login);
+                ->where(['login'], '=', $login)
+                ->orderBy(['post_id'])->desc();
   
         $result = $query->getSelect();
 
@@ -200,5 +201,38 @@ class PostModel extends \MainModel
  
         return true;
     }
-    
+  
+    // Добавить пост в закладки
+    public static function setPostFavorite($post_id, $uid)
+    {
+        
+        $result = self::getMyFavorite($post_id, $uid); 
+
+        if(!$result){
+           XD::insertInto(['favorite'], '(', ['favorite_tid'], ',', ['favorite_uid'], ')')->values( '(', XD::setList([$post_id, $uid]), ')' )->run();
+            
+   
+        } else {
+            
+           XD::deleteFrom(['favorite'])->where(['favorite_tid'], '=', $post_id)->and(['favorite_uid'], '=', $uid)->run(); 
+
+        } 
+        
+        return true;
+    }
+  
+    // Пост уже в закладках или нет
+    public static function getMyFavorite($post_id, $uid) 
+    {
+        $q = XD::select('*')->from(['favorite'])->where(['favorite_tid'], '=', $post_id)->and(['favorite_uid'], '=', $uid);
+        $result = $q->getSelect();
+        
+        if($result) {
+            return 1;
+        } else {
+            return false;
+        }
+        
+    }
+  
 }

@@ -36,6 +36,19 @@
                             </a>
                         <?php } ?> 
                     <?php } ?> 
+                    
+                    <?php if ($data['post']['favorite_post']){ ?>
+                       <span class="otst"> | </span>    
+                       <span class="user-favorite" data-post="<?= $data['post']['id']; ?>">
+                            <span class="mu_favorite">Убрать из избранного</span>
+                       </span>   
+                    <?php } else { ?>
+                        <span class="otst"> | </span>
+                        <span class="user-favorite" data-post="<?= $data['post']['id']; ?>">
+                            <span class="mu_favorite">В избранное</span>
+                        </span>
+                     <?php } ?> 
+                    
                 <?php } ?>
             </div>   
             <div class="post">

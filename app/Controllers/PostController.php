@@ -227,6 +227,7 @@ class PostController extends \MainController
             'space_slug'    => $post['space_slug'],
             'space_name'    => $post['space_name'],            
             'post_comments' => Base::ru_num('comm', $post['post_comments']), 
+            'favorite_post' => PostModel::getMyFavorite($post['post_id'], $uid) ,
             
         ];
         
@@ -491,5 +492,25 @@ class PostController extends \MainController
         return true;
         
     }
-    
+  
+    // Помещаем пост в закладки
+    public function addPostFavorite()
+    {
+        
+        if(!$account = Request::getSession('account')) {
+           return true;
+        } 
+        
+        $post_id = Request::getPost('post_id');
+        
+        // Получим пост
+        $post = PostModel::getPostId($post_id); 
+        
+        
+        PostModel::setPostFavorite($post_id, $account['user_id']);
+       
+        return true;
+        
+    }
+  
 }

@@ -33,8 +33,21 @@ $(function(){
             type: 'POST',
             data: {post_id: post_id},
         }).done(function(data) {
-           $('.user-mypost').find('.mu_post').html('+ в профиле');
+            $('.user-mypost').find('.mu_post').html('+ в профиле');
         });
     });
+    
+    // Добавить пост в закладки
+    $(document).on("click", ".user-favorite", function(){      
+        var post_id  = $(this).data('post');
+        $.ajax({
+            url: '/post/addfavorite/' + post_id,
+            type: 'POST',
+            data: {post_id: post_id},
+        }).done(function(data) {
+           location.reload(); 
+           // $('.user-favorite').find('.mu_favorite').html('+ в закладки');
+        });
+    }); 
     
 });

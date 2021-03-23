@@ -58,13 +58,11 @@ class SpaceModel extends \MainModel
         
     }
     
-    // Добавляем теги
+    // Подписка / отписка от пространства
     public static function SpaceHide($space_id, $user_id)
     {
+        $result  = self::getMySpaceHide($space_id, $user_id);
           
-        $q = XD::select('*')->from(['space_hidden'])->where(['hidden_space_id'], '=', $space_id)->and(['hidden_user_id'], '=', $user_id);
-        $result = $q->getSelect();
-        
         if(!$result){
            
             XD::insertInto(['space_hidden'], '(', ['hidden_space_id'], ',', ['hidden_user_id'], ')')->values( '(', XD::setList([$space_id, $user_id]), ')' )->run();             

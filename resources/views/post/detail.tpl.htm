@@ -1,0 +1,120 @@
+<?php TPL::output('global/header.tpl.htm'); ?>
+
+<div class="qa-container-feature">
+	<div class="container qa-top-title">
+        <h1><?php echo $this->feature_info['title']; ?></h1>
+
+            <?php if ($this->feature_info['icon']) { ?>
+                <img alt="<?php echo $this->feature_info['title']; ?>" src="<?php echo get_feature_pic_url('max', $this->feature_info['icon']); ?>">
+            <?php } ?>
+			 
+		 
+	</div>
+    
+	<div class="container">
+		<div class="row">
+			<div class="clearfix">
+				<div class="width-75 telo qa-feature-content">
+				 
+					<div class="qa-mod clearfix">
+						<div class="mod-head">
+						 
+							<ul class="nav nav-tabs qa-nav-tabs active" id="hot_question_control">
+								<li><a href="#day_30" onclick="get_hot_posts(30);" data-toggle="tab"><?php _e('30 дней'); ?></a></li>
+								<li><a href="#day_7" onclick="get_hot_posts(7);" data-toggle="tab"><?php _e('7 дней'); ?></a></li>
+								<li class="active"><a href="#day_all" onclick="get_hot_posts(0);" data-toggle="tab"><?php _e('все'); ?></a></li>
+								<h2><?php _e('Популярные'); ?></h2>
+							</ul>
+						 
+						</div>
+						<div class="mod-body">
+							<div class="qa-list" id="hot_question_list"></div>
+						</div>
+					</div>
+			 
+					<div class="qa-mod clearfix">
+						<div class="mod-head">
+							<ul class="nav nav-tabs qa-nav-tabs active">
+							<br>	<h2><?php _e('Лучшие ответы'); ?></h2>
+							</ul>
+						</div>
+						<div id="c_best_list" class="mod-body qa-feed-list">
+						</div>
+					</div>
+					 
+					<div class="qa-mod clearfix">
+						<div class="mod-head">
+							 
+							<ul class="nav nav-tabs qa-nav-tabs active" id="feature_dynamic">
+								<li><a href="#unresponsive" data-toggle="tab"><?php _e('Без ответа'); ?></a></li>
+								<li class="active"><a href="#all" data-toggle="tab"><?php _e('Все'); ?></a></li>
+								<br> <h2><?php _e('События'); ?></h2>
+							</ul>
+						 
+						</div>
+						<div class="mod-body">
+							<div class="qa-list" id="c_all_list"></div>
+							<div class="qa-list" id="c_all_list_unresponsive" style="display: none;"></div>
+						</div>
+						<div class="mod-footer">
+						
+							<a class="qa-load-more-content" id="bp_all_more">
+								<span><?php _e('Ещё больше'); ?>...</span>
+							</a>
+							<a class="qa-load-more-content" id="bp_all_more_unresponsive" style="display: none">
+								<span><?php _e('Ещё больше'); ?>...</span>
+							</a>
+						
+						</div>
+					</div>
+				 
+				</div>
+			 
+				<div class="width-25 sidebar">
+				<div class="qa-sidebar"> 
+                
+                <div class="guest_banner">
+                    <small><?php echo $this->feature_info['description']; ?></small>
+                </div>
+                
+                
+                
+                
+					<div class="qa-mod">
+						<div class="mod-head">
+							<h3><?php _e('%s темы', '<sup">' . $this->feature_info['topic_count'] . '</up>'); ?></h3>
+						</div>
+						<?php if (is_array($this->sidebar_hot_topics)) { ?>
+						<div class="telo-body">
+							<?php foreach($this->sidebar_hot_topics AS $key => $val) {?>
+							 <div style="margin: 0 0 4px 0">
+								 <span class="topic-tag">
+									<a href="topic/<?php echo $val['topic_title']; ?>" class="text" data-id="<?php echo $val['topic_id']; ?>"><span><?php echo $val['topic_title']; ?></span></a>
+									&nbsp;<sup>x<?php echo $val['discuss_count']; ?></sup>
+                                 </span>
+							</div>
+							<?php } ?>
+						</div>
+						<?php } ?>
+					</div>
+				</div> 
+				</div>
+			 
+ 
+             
+				</div>
+		</div>
+	</div>
+</div>
+
+<?php if ($this->feature_info['css']) { ?>
+<style type="text/css">
+<?php echo $this->feature_info['css']; ?>
+</style>
+<?php } ?>
+
+<script type="text/javascript">
+	var FEATURE_ID = <?php echo $this->feature_info['id']; ?>;
+</script>
+
+<?php TPL::output('global/footer.tpl.htm'); ?>

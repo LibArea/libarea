@@ -79,6 +79,8 @@ Route::type('post')->protect()->get('/post/editpost/{id}')->controller('PostCont
 
 // Помещаем свой пост в профиль
 Route::type('post')->get('/post/addpostprof/{id}')->controller('PostController@addPostProf')->where(['id' => '[0-9]+']);
+// В закладки
+Route::type('post')->get('/post/addfavorite/{id}')->controller('PostController@addPostFavorite')->where(['id' => '[0-9]+']);
 
 // Личные сообщения 
 Route::get('/messages')->controller('MessagesController');  

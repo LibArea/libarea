@@ -59,6 +59,7 @@ class UserController extends \MainController
           'trust_level'   => UserModel::getUserTrust($user['id']),
           'post_num_user' => UserModel::getUsersPostsNum($user['id']),
           'comm_num_user' => UserModel::getUsersCommentsNum($user['id']),
+          'fav_num_user'  => UserModel::getUsersFavoriteNum($user['id']),
         ];
 
         return view('/user/profile', ['data' => $data, 'uid' => $uid]);
@@ -268,6 +269,9 @@ class UserController extends \MainController
         redirect('/users/setting');
         
     }
+    
+    
+    // Страница закладок участника
     function userFavorite ()
     {
         $login = Request::get('login');
@@ -280,11 +284,28 @@ class UserController extends \MainController
             hl_preliminary_exit();
         }
         
+        $fav = UserModel::getUserFavorite($user['id']);
+   
+        $result = Array();
+        foreach($fav as $ind => $row){
+             
+            if(!$row['avatar'] ) {
+                $row['avatar']  = 'noavatar.png';
+            } 
+ 
+            $row['avatar']  = $row['avatar'];
+            $row['title']   = $row['post_title'];
+            $row['slug']    = $row['post_slug'];
+            $row['date']    = Base::ru_date($row['post_date']);
+            $result[$ind]   = $row;
+         
+        }
+        
         $uid  = Base::getUid();
         $data = [
             'title'         => 'Избранное ' . $login,
             'description'   => 'Избранные посты участника ' . $login,
-            'favorite'      => 0,
+            'favorite'      => $result,
         ]; 
         
         return view("user/favorite", ['data' => $data, 'uid' => $uid]);   

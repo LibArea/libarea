@@ -37,7 +37,8 @@ class CommentModel extends \MainModel
         $q = XD::select('*')->from(['comments']);
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['comment_user_id'])
                 ->leftJoin(['posts'])->on(['comment_post_id'], '=', ['post_id'])
-                ->where(['login'], '=', $slug);
+                ->where(['login'], '=', $slug)
+                ->orderBy(['comment_id'])->desc();
         
         $result = $query->getSelect();
         
