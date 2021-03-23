@@ -101,12 +101,14 @@
                                 </svg>  
                                 Избранное                   
                             </a>
-                            <a href="/admin" target="_black">
-                                <svg class="md-icon">
-                                    <use xlink:href="/assets/svg/icons.svg#ad"></use>
-                                </svg>   
-                                Админка                    
-                            </a>
+                            <?php if($uid['trust_level'] == 5) { ?>
+                                <a href="/admin" target="_black">
+                                    <svg class="md-icon">
+                                        <use xlink:href="/assets/svg/icons.svg#ad"></use>
+                                    </svg>   
+                                    Админка                    
+                                </a> 
+                            <?php } ?>     
                             <hr>   
                             <a href="/logout" class="logout" target="_self" title="Выход">
                                 <svg class="md-icon">

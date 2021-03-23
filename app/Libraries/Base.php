@@ -5,18 +5,19 @@ use App\Models\NotificationsModel;
 class Base
 {
 
-    /** @return array|bool */
     public static function getUid() {
         $user = Request::getSession('account') ?? [];
         $uid = [];
         if (!empty($user['user_id'])) {
-            $uid['id']    = $user['user_id'];
-            $uid['login'] = $user['login'] ?? 'undefined'; 
-            $uid['notif'] = NotificationsModel::usersNotification($uid['id']);
+            $uid['id']          = $user['user_id'];
+            $uid['login']       = $user['login'] ?? 'undefined'; 
+            $uid['trust_level'] = $user['trust_level'];
+            $uid['notif']       = NotificationsModel::usersNotification($uid['id']);
         } else {
-            $uid['id']    = null;
+            $uid['id']           = null;
+            $user['trust_level'] = null;
         }
-        $uid['msg']   = self::getMsg();
+        $uid['msg']     = self::getMsg();
         
         return $uid;
     }

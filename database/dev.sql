@@ -23,37 +23,7 @@ SET time_zone = "+00:00";
 
 -- --------------------------------------------------------
 
---
--- Структура таблицы `auth_logins`
---
-
-CREATE TABLE `auth_logins` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `nickname` varchar(255) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `trust_level` varchar(255) NOT NULL,
-  `ip_address` varchar(255) NOT NULL,
-  `date` datetime NOT NULL,
-  `successfull` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `auth_tokens`
---
-
-CREATE TABLE `auth_tokens` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `selector` varchar(255) NOT NULL,
-  `hashedvalidator` varchar(255) NOT NULL,
-  `expires` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
+ 
 --
 -- Структура таблицы `comments`
 --
@@ -220,12 +190,11 @@ CREATE TABLE `users` (
   `email` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
   `activated` tinyint(1) NOT NULL,
-  `reg_ip` bigint(12) DEFAULT NULL,
-  `last_ip` bigint(12) DEFAULT NULL,
+  `reg_ip` varchar(15) DEFAULT NULL,
   `trust_level` int(11) NOT NULL COMMENT 'Уровень доверия. По умолчанию 0 (5 - админ)',
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `deleted_at` tinyint(1) DEFAULT 0,
+  `deleted` tinyint(1) DEFAULT 0,
   `avatar` varchar(250) DEFAULT NULL,
   `about` varchar(255) DEFAULT NULL,
   `rating` int(11) NOT NULL DEFAULT 0,
@@ -237,8 +206,8 @@ CREATE TABLE `users` (
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`id`, `login`, `name`, `email`, `password`, `activated`, `reg_ip`, `last_ip`, `trust_level`, `created_at`, `updated_at`, `deleted_at`, `avatar`, `about`, `rating`, `status`, `my_post`) VALUES
-(1, 'AdreS', 'Олег', 'ss@sdf.ru', '$2y$10$oR5VZ.zk7IN/og70gQq/f.0Sb.GQJ33VZHIES4pyIpU3W2vF6aiaW', 1, NULL, NULL, 1, '2021-03-08 21:37:04', '2021-03-08 21:37:04', 0, '', 'Тестовый аккаунт', 0, '', 0);
+INSERT INTO `users` (`id`, `login`, `name`, `email`, `password`, `activated`, `reg_ip`, `trust_level`, `created_at`, `updated_at`, `deleted`, `avatar`, `about`, `rating`, `status`, `my_post`) VALUES
+(1, 'AdreS', 'Олег', 'ss@sdf.ru', '$2y$10$oR5VZ.zk7IN/og70gQq/f.0Sb.GQJ33VZHIES4pyIpU3W2vF6aiaW', 1, NULL, 1, '2021-03-08 21:37:04', '2021-03-08 21:37:04', 0, '', 'Тестовый аккаунт', 0, '', 0);
 
 -- --------------------------------------------------------
 
@@ -291,22 +260,59 @@ CREATE TABLE `votes_comm` (
   `votes_comm_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+
+--
+-- Структура и дамп таблицы `votes_comm`
+--
+
+CREATE TABLE `users_banlist` (
+  `banlist_id` int(11) NOT NULL,
+  `banlist_user_id` int(11) NOT NULL,
+  `banlist_ip` varchar(15) NOT NULL,
+  `banlist_bandate` timestamp NOT NULL DEFAULT current_timestamp(),
+  `banlist_int_num` int(11) NOT NULL,
+  `banlist_int_period` varchar(20) NOT NULL,
+  `banlist_status` tinyint(1) NOT NULL DEFAULT 1,
+  `banlist_autodelete` tinyint(1) NOT NULL DEFAULT 0,
+  `banlist_cause` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+ALTER TABLE `users_banlist`
+  ADD PRIMARY KEY (`banlist_id`),
+  ADD KEY `banlist_ip` (`banlist_ip`),
+  ADD KEY `banlist_user_id` (`banlist_user_id`);
+
+
+ALTER TABLE `users_banlist`
+  MODIFY `banlist_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Структура и дамп таблицы `users_logs`
+--
+
+CREATE TABLE `users_logs` (
+  `logs_id` int(11) NOT NULL,
+  `logs_user_id` int(11) NOT NULL,
+  `logs_login` varchar(255) NOT NULL,
+  `logs_trust_level` int(11) NOT NULL,
+  `logs_ip_address` varchar(255) NOT NULL,
+  `logs_date` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+ALTER TABLE `users_logs`
+  ADD PRIMARY KEY (`logs_id`);
+
+
+ALTER TABLE `users_logs`
+  MODIFY `logs_id` int(11) NOT NULL AUTO_INCREMENT;
+
+
 --
 -- Индексы сохранённых таблиц
 --
-
---
--- Индексы таблицы `auth_logins`
---
-ALTER TABLE `auth_logins`
-  ADD PRIMARY KEY (`id`);
-
---
--- Индексы таблицы `auth_tokens`
---
-ALTER TABLE `auth_tokens`
-  ADD PRIMARY KEY (`id`);
-
+ 
 --
 -- Индексы таблицы `comments`
 --
@@ -408,18 +414,6 @@ ALTER TABLE `votes_comm`
 --
 -- AUTO_INCREMENT для сохранённых таблиц
 --
-
---
--- AUTO_INCREMENT для таблицы `auth_logins`
---
-ALTER TABLE `auth_logins`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT для таблицы `auth_tokens`
---
-ALTER TABLE `auth_tokens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `comments`

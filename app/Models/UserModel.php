@@ -11,9 +11,10 @@ class UserModel extends \MainModel
     public static function getUsersAll()
     {
 
-       $query = XD::select(['id', 'login', 'name', 'avatar', 'deleted_at'])
+       $query = XD::select(['id', 'login', 'name', 'avatar', 'deleted'])
               ->from(['users'])
-              ->where(['deleted_at'], '=', 0);
+              ->where(['deleted'], '=', 0)
+              ->orderBy(['id'])->desc();
 
         $result = $query->getSelect();
         return $result;
@@ -50,7 +51,7 @@ class UserModel extends \MainModel
     }
 
     // Регистрация участника
-    public static function createUser($login,$email,$password)
+    public static function createUser($login,$email,$password,$reg_ip)
     {
 
         // количество участников 
@@ -65,8 +66,7 @@ class UserModel extends \MainModel
 
         $password    = password_hash($password, PASSWORD_BCRYPT);
         $activated   = 1; // ввести почту и инвайт 
-        $reg_ip      = Request::getRemoteAddress(); // ip при регистрации 
-        
+                
         XD::insertInto(['users'], '(', ['login'], ',', ['email'], ',', ['password'], ',', ['activated'], ',', ['reg_ip'],',', ['trust_level'], ')')->values( '(', XD::setList([$login, $email, $password, $activated, $reg_ip, $trust_level]), ')' )->run();
         
         return true;
@@ -128,7 +128,7 @@ class UserModel extends \MainModel
     public static function getUserInfo($data) 
     {
 
-        $query = XD::select(['id', 'email', 'password', 'login', 'name', 'avatar', 'about', 'created_at'])
+        $query = XD::select(['id', 'email', 'password', 'login', 'name', 'avatar', 'trust_level'])
              ->from(['users'])
              ->where(['email'], '=', $data);
 
@@ -214,6 +214,44 @@ class UserModel extends \MainModel
         XD::update(['users'])->set(['name'], '=', $name, ',', ['about'], '=', $about)->where(['login'], '=', $login)->run();
  
         return true;
+        
+    }
+    
+    // Записываем последние данные авторизации
+    public static function setUserLastLogs($id, $login, $trust_level, $last_ip) 
+    {
+         
+        XD::insertInto(['users_logs'], '(', ['logs_user_id'], ',', ['logs_login'], ',', ['logs_trust_level'], ',', ['logs_ip_address'], ')')->values( '(', XD::setList([$id, $login, $trust_level, $last_ip]), ')' )->run();
+        return true;   
+    }
+    
+    // Персонал
+    public static function isAdmin($uid) 
+    {
+        
+        $result = XD::select(['id', 'trust_level'])->from(['users'])->where(['id'], '=', $uid)->getSelectOne();
+
+        if($result['trust_level'] != 5) {
+            return false;    
+        }
+
+        return true;   
+        
+    }
+    
+    // Находит ли пользователь в бан- листе
+    public static function isBan($uid)
+    {
+        
+        $result = XD::select('*')->from(['users_banlist'])
+                ->where(['banlist_user_id'], '=', $uid)
+                ->and(['banlist_status'], '=', 1)->getSelectOne();
+
+        if(!$result) {
+            return false;    
+        }
+
+        return true;   
         
     }
     

@@ -8,7 +8,14 @@
         <title><?= $data['title']; ?></title>
         <meta name = "description" content = "<?= $data['description']; ?>" />
         <link rel="stylesheet" href="/assets/css/style.css">
+        <link rel="stylesheet" href="/assets/css/admin.css">
         <link rel="icon" href="/favicon.ico">
+        <?php if($uid['id']) { ?>
+            <script src="/assets/js/jquery.min.js"></script>
+            <script src="/assets/js/common.js"></script>
+            <script src="/assets/js/app.js"></script>
+            <script src="/assets/js/admin.js"></script>
+        <?php } ?> 
     </head>
 <body class="bd">
 <header>

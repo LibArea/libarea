@@ -12,6 +12,7 @@
 
 // Админка
 Route::get('/admin')->controller('AdminController');
+Route::type('post')->get('/admin/ban/{id}')->controller('AdminController@banUser')->where(['id' => '[0-9]+']);
 
 // Посты и главная страница
 Route::get('/all')->controller('PostController@allPost');

@@ -1,0 +1,27 @@
+/* tables */
+.t-table {  
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.m-850 {max-width: 850px;}
+.t-tr, .t-th {display: table-row;}
+.t-th .t-td {font-weight: 600;}
+.t-th {background: #e3e3e3;}
+.t-td {
+  display: table-cell;
+  border: none;
+  border: 1px solid #ccc;
+  vertical-align: middle;
+  font-size: 14px;
+}
+.t-td.center{
+  text-align: center;
+}
+.t-td:not(.no-p){
+  padding: 4px 4px 4px 8px;
+}
+.w-30 {width:30px;}
+
+.ava {vertical-align: middle;width:24px;}

@@ -130,8 +130,9 @@ class AuthController extends \MainController
             Base::addMsg('Длина пароля должна быть от 8 до 24 знаков', 'error');
             redirect('/register');
         }
-
-        $user = UserModel::createUser($login,$email,$password);
+     
+        $reg_ip = Request::getRemoteAddress(); // ip при регистрации 
+        $user   = UserModel::createUser($login,$email,$password,$reg_ip);
 
         redirect('/login');
 
@@ -167,26 +168,36 @@ class AuthController extends \MainController
            redirect('/login');
         }
 
-        $userInfo = UserModel::getUserInfo($email);
+        $uInfo = UserModel::getUserInfo($email);
 
-        if (empty($userInfo['id'])) {
+        if (empty($uInfo['id'])) {
             Base::addMsg('Пользователь не существует', 'error');
             redirect('/login');
         }
-
-        if (!password_verify($password, $userInfo['password'])) {
+ 
+         // Находится ли в бан- листе
+        if (UserModel::isBan($uInfo['id'])) {
+            Base::addMsg('Ваш аккаунт находится на рассмотрении', 'error');
+            redirect('/login');
+        }
+        
+        if (!password_verify($password, $uInfo['password'])) {
             Base::addMsg('E-mail или пароль не верен', 'error');
             redirect('/login');
         } else {
             
             $user = [
-                'user_id'   => $userInfo['id'],
-                'login'     => $userInfo['login'],
-                'email'     => $userInfo['email'],
-                'name'      => $userInfo['name'],
-                'login'     => $userInfo['login'],
-                'avatar'    => $userInfo['avatar'],
+                'user_id'       => $uInfo['id'],
+                'login'         => $uInfo['login'],
+                'email'         => $uInfo['email'],
+                'name'          => $uInfo['name'],
+                'login'         => $uInfo['login'],
+                'avatar'        => $uInfo['avatar'],
+                'trust_level'   => $uInfo['trust_level'],
             ];
+            
+            $last_ip = Request::getRemoteAddress();  
+            UserModel::setUserLastLogs($uInfo['id'], $uInfo['login'], $uInfo['trust_level'], $last_ip);
             
             $_SESSION['account'] = $user;
             redirect('/');
