@@ -194,7 +194,7 @@ class AuthController extends \MainController
             }
             
             $data = [
-                'id'            => $uInfo['id'],
+                'user_id'       => $uInfo['id'],
                 'login'         => $uInfo['login'],
                 'email'         => $uInfo['email'],
                 'name'          => $uInfo['name'],
