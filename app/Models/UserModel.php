@@ -290,7 +290,7 @@ class UserModel extends \MainModel
         // так как валидатор обновляется при каждом входе в систему
         // поэтому проверим, есть ли уже маркер, и перепишем, если он есть.
         // Следует немного снизить уровень обслуживания БД и устранить необходимость в спорадических чистках.
-        $result = self::GetAuthTokenByUserId($uid);
+        $result = self::getAuthTokenByUserId($uid);
 
         // Если не вставить
         if (empty($result)) {
@@ -318,7 +318,7 @@ class UserModel extends \MainModel
     public static function rememberMeReset($uid, $selector)
     {
         // Получаем по селектору       
-        $existingToken = self::GetAuthTokenBySelector($selector);
+        $existingToken = self::getAuthTokenBySelector($selector);
 
         if (empty($existingToken)) {
 
