@@ -255,6 +255,169 @@ class UserModel extends \MainModel
         
     }
     
+    ////// ЗАПОМНИТЬ МЕНЯ
+    ////// Работа с токенамм
+ 
+    public function rememberMe($uid)
+    {
+
+        // НАСТРОЕМ НАШ СЕЛЕКТОР, ВАЛИДАТОР И СРОК ДЕЙСТВИЯ 
+        // Селектор действует как уникальный идентификатор, поэтому нам не нужно 
+        // сохранять идентификатор пользователя в нашем файле cookie
+        // валидатор сохраняется в виде обычного текста в файле cookie, но хэшируется в бд
+        // если селектор (id) найден в таблице auth_tokens, мы затем сопоставляем валидаторы
+
+        $rememberMeExpire = 30;
+        $selector = random_string('crypto', 12);
+        $validator = random_string('crypto', 20);
+        $expires = time() + 60 * 60 * 24 * $rememberMeExpire;
+
+        // Установим токен
+        $token = $selector . ':' . $validator;
+
+        // Массив данных
+        $data = [
+            'user_id' => $uid,
+            'selector' => $selector,
+            'hashedvalidator' => hash('sha256', $validator),
+            'expires' => date('Y-m-d H:i:s', $expires),
+        ];        
+
+
+        // ПРОВЕРИМ, ЕСТЬ ЛИ У ИДЕНТИФИКАТОРА ПОЛЬЗОВАТЕЛЯ УЖЕ НАБОР ТОКЕНОВ
+        // Мы действительно не хотим иметь несколько токенов и селекторов для
+        // одного и того же идентификатора пользователя. В этом нет необходимости, 
+        // так как валидатор обновляется при каждом входе в систему
+        // поэтому проверим, есть ли уже маркер, и перепишем, если он есть.
+        // Следует немного снизить уровень обслуживания БД и устранить необходимость в спорадических чистках.
+        $result = self::GetAuthTokenByUserId($uid);
+
+        // Если не вставить
+        if (empty($result)) {
+            self::insertToken($data);
+        } 
+        // Если есть обновление
+        else {
+            self::updateToken($data, $uid);
+        }
+
+        // set_Cookie
+        setcookie(
+            "remember",
+            $token,
+            $expires,
+            $GLOBALS['conf']['cookiePath'],
+            $GLOBALS['conf']['cookieDomain'],
+            $GLOBALS['conf']['cookieSecure'],
+            $GLOBALS['conf']['cookieHTTPOnly'],
+        );
+    } 
+
+    // Каждый раз, когда пользователь входит в систему, используя свой файл cookie «запомнить меня»
+    // Сбросить валидатор и обновить БД
+    public static function rememberMeReset($uid, $selector)
+    {
+        // Получаем по селектору       
+        $existingToken = self::GetAuthTokenBySelector($selector);
+
+        if (empty($existingToken)) {
+
+            return $this->rememberMe($uid);
+        }
+
+        $rememberMeExpire = 30;
+        $validator = random_string('crypto', 20);
+        $expires = time() + 60 * 60 * 24 * $rememberMeExpire;
+
+        // Установить
+        $token = $selector . ':' . $validator;
+
+
+        // Если установлено значение true, каждый раз, когда пользователь посещает сайт 
+        // и обнаруживает файл cookie новая дата истечения срока действия 
+        // устанавливается с помощью параметра  $rememberMeExpire - выше 
+        $rememberMeRenew = true;
+
+        if ($rememberMeRenew) {
+            // Массивы данных установим
+            $data = [
+                'hashedvalidator' => hash('sha256', $validator),
+                'expires' => date('Y-m-d H:i:s', $expires),
+            ];
+        } else {
+            $data = [
+                'hashedvalidator' => hash('sha256', $validator),
+            ];
+        }
+
+        self::UpdateSelector($data, $selector);
+
+        setcookie(
+            "remember",
+            $token,
+            $expires,
+            $GLOBALS['conf']['cookiePath'],
+            $GLOBALS['conf']['cookieDomain'],
+            $GLOBALS['conf']['cookieSecure'],
+            $GLOBALS['conf']['cookieHTTPOnly'],
+        );
+    }
+
+
+
+    // Поля в таблице users_auth_tokens
+    // auth_id,	auth_user_id,	auth_selector,	auth_hashedvalidator,	auth_expires	
+    public static function getAuthTokenByUserId($uid)
+    {
+
+        return XD::select('*')->from(['users_auth_tokens'])
+                ->where(['auth_user_id'], '=', $uid)->getSelectOne();
+
+    }
+ 
+    public static function insertToken($data)
+    {
+        
+        XD::insertInto(['users_auth_tokens'], '(', ['auth_user_id'], ',', ['auth_selector'], ',', ['auth_hashedvalidator'], ',', ['auth_expires'], ')')->values( '(', XD::setList([$data['user_id'], $data['selector'], $data['hashedvalidator'], $data['expires']]), ')' )->run();
+        
+        return true;
+    }
+    
+    public static function updateToken($data, $uid)
+    {
+        
+        XD::update(['users_auth_tokens'])->set(['auth_user_id'], '=', $data['user_id'], ',', ['auth_selector'], '=', $data['selector'], ',', ['auth_hashedvalidator'], '=', $data['hashedvalidator'], ',', ['auth_expires'], '=', $data['expires'])->where(['auth_user_id'], '=', $uid)->run();
+        
+        return true;
+    }
+    
+    public function DeleteTokenByUserId($uid)
+    {
+        
+        XD::deleteFrom(['users_auth_tokens'])->where(['auth_user_id'], '=', $uid)->run(); 
+        
+        return true;
+    }
+    
+    public function UpdateSelector($data, $selector)
+    {
+ 
+       XD::update(['users_auth_tokens'])->set(['auth_user_id'], '=', $data['user_id'], ',', ['auth_selector'], '=', $data['selector'], ',', ['auth_hashedvalidator'], '=', $data['hashedvalidator'], ',', ['auth_expires'], '=', $data['expires'])->where(['auth_selector'], '=', $data['selector'])->run();
+       
+       return true;
+        
+    }
+ 
+    
+    // Получаем токен аутентификации по селектору
+    public static function getAuthTokenBySelector($selector)
+    {
+        
+        return XD::select('*')->from(['users_auth_tokens'])
+                ->where(['selector'], '=', $selector)->getSelectOne();
+
+    }
+    
     // Настройка оповещений
     public static function getNotificationSettingByUid($uid)
     {

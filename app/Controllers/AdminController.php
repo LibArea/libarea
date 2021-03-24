@@ -14,9 +14,7 @@ class AdminController extends \MainController
         if(!$account = Request::getSession('account')) {
             redirect('/');
         }
-        
-         
-        
+
         // Если TL участника не равен 5 (персонал) - редирект
         if(!$isAdmin = UserModel::isAdmin($account['user_id'])) {
             redirect('/');

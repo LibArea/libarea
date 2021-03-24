@@ -21,5 +21,8 @@ return array(
     'smtpport'          => 25,
     'timezone'          => 'Europe/Moscow',
     'allow_ip'          => '', // Закрыть доступ в админку по ip
-    'cookie_key'        => 'd414kgdogkokd4G9fr998ecf8427e'
+    'cookieDomain'      => '',
+    'cookiePath'        => '/',
+    'cookieSecure'      => false,
+    'cookieHTTPOnly'    => false
 );

@@ -23,6 +23,16 @@ SET time_zone = "+00:00";
 
 -- --------------------------------------------------------
 
+
+CREATE TABLE IF NOT EXISTS `users_auth_tokens` (
+  `auth_id` int(11) NOT NULL AUTO_INCREMENT,
+  `auth_user_id` int(11) NOT NULL,
+  `auth_selector` varchar(255) NOT NULL,
+  `auth_hashedvalidator` varchar(255) NOT NULL,
+  `auth_expires` datetime NOT NULL,
+  PRIMARY KEY (`auth_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
  
 --
 -- Структура таблицы `comments`

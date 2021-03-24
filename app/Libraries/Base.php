@@ -356,31 +356,10 @@ class Base
             return $gram_num_record;
     }
     
-    # Регистрация информации о пользователе
-    protected function loginCookie($Key, $uid, $login, $trust_level)
-    {
-        $loginTime = time();
-
-        setcookie('dev_login', $login, $loginTime + 604800, '/');
-
-        $loginEncode = $this->secret->encrypt(json_encode(array(
-            $uid,
-
-            $login,
-
-            $trust_level,
-
-            $loginTime
-        )), $Key);
-
-        setcookie('dev_secure', $loginEncode, $loginTime + 604800, '/');
-    } 
-    
     // Длина строки
     public static function getStrlen($str)
     {
         return mb_strlen($str, "utf-8");
     }
-    
     
 }
