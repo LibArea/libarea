@@ -439,6 +439,10 @@ input.form-about {width: 250px;}
 .telo-detail_post img {
     max-width: 600px;
 }
+.telo-detail_post.dell {
+    background-color: rgb(246, 196, 184);
+    padding-left: 10px;
+}
 .post-telo {
     margin-bottom: 12px;
 }
@@ -542,7 +546,7 @@ a.space_3 {
 .block-comments {
   margin: 0 0 20px 0;
 }
-ol.dell.comment-telo {
+ol.dell.comment-telo, .dell.comm-telo_bottom {
     font-size: 13px;
     color: #888;
 }
@@ -562,6 +566,9 @@ ol.comment-telo {
 .comm-telo {
     margin-left: 40px;
     margin-right: 40px;
+}
+.comm-telo_bottom {
+    margin-bottom: 20px;
 }
 .comm-telo-body{
     max-width: 750px;
@@ -604,14 +611,12 @@ ol.comment-telo {
     color: #888;
     font-size: 13px;
 }
-
 .comments_subtree {
     position: relative;
 }
 .comments_subtree.dell {
-    display: none;
+    opacity: 0.3;
 }
-
 .com-line {
     position: absolute;
     left: 20px;

@@ -14,39 +14,35 @@
                 <?php foreach ($data['comments'] as $comm) { ?>  
                 
                     <?php if($comm['comment_del'] == 0) { ?>
-                        <ol class="comment-telo">
-                            <li>
-                                <div class="voters">
-                                    <div class="comm-up-id"></div>
-                                    <div class="score"><?= $comm['comment_votes'] ?></div>
+                        <div class="comm-telo_bottom">
+                            <div class="voters">
+                                <div class="comm-up-id"></div>
+                                <div class="score"><?= $comm['comment_votes'] ?></div>
+                            </div>
+                            <div class="comm-telo">
+                                <div class="comm-header">
+                                    <img class="ava" src="/uploads/avatar/small/<?php echo $comm['avatar'] ?>">
+                                    <span class="user"> 
+                                        <a href="/u/<?php echo $comm['login']; ?>"><?php echo $comm['login']; ?></a> 
+                                        
+                                        <?php echo $comm['date']; ?>
+                                    </span> 
+                 
+                                    <span class="otst"> | </span>
+                                    <span class="date">  
+                                       <a href="/posts/<?php echo $comm['post_slug']; ?>"><?php echo $comm['post_title']; ?></a>
+                                    </span>
                                 </div>
-                                <div class="comm-telo">
-                                    <div class="comm-header">
-                                        <img class="ava" src="/uploads/avatar/small/<?php echo $comm['avatar'] ?>">
-                                        <span class="user"> 
-                                            <a href="/u/<?php echo $comm['login']; ?>"><?php echo $comm['login']; ?></a> 
-                                            
-                                            <?php echo $comm['date']; ?>
-                                        </span> 
-                     
-                                        <span class="otst"> | </span>
-                                        <span class="date">  
-                                           <a href="/posts/<?php echo $comm['post_slug']; ?>"><?php echo $comm['post_title']; ?></a>
-                                        </span>
-                                    </div>
-                                    <div class="comm-telo-body">
-                                        <?php echo $comm['content']; ?> 
-                                    </div>
+                                <div class="comm-telo-body">
+                                    <?php echo $comm['content']; ?> 
                                 </div>
-                            </li>
-                        </ol>
+                            </div>
+                        </div>
                     <?php } else { ?>    
-                         <ol class="dell comment-telo<?php if ($comm['level'] == 0) { ?> one<?php } ?><?php if ($comm['level'] == 2) { ?> two<?php } ?><?php if ($comm['level'] > 2) { ?> three<?php } ?>"> 
-                            <li class="comments_subtree" id="comm_<?= $comm['comment_id']; ?>">
-                                <div class="voters"></div>
-                                    ~ Комментарий удален
-                            </li>
-                        </ol>
+                        <div class="dell comm-telo_bottom"> 
+                            <div class="voters"></div>
+                            ~ Комментарий удален
+                        </div>
                     <?php } ?> 
                 <?php } ?>
                 

@@ -18,7 +18,7 @@ class Base
             UserModel::checkCookie();
             
             $uid['id']           = null;
-            $user['trust_level'] = null;
+            $uid['trust_level'] = null;
         }
         $uid['msg']     = self::getMsg();
         

@@ -76,9 +76,10 @@ Route::type('post')->get('/comments/addform')->controller('CommentController@add
 Route::get('/post/add')->controller('PostController@addPost');
 // Само добавление поста
 Route::type('post')->protect()->get('/post/create')->controller('PostController@createPost');
-// Редактирование поста
+// Редактирование поста / удаление поста
 Route::get('/post/edit/{id}')->controller('PostController@editPost');
 Route::type('post')->protect()->get('/post/editpost/{id}')->controller('PostController@editPostRecording');
+Route::type('post')->get('/post/del/{id}')->controller('PostController@deletePost')->where(['id' => '[0-9]+']);
 
 // Помещаем свой пост в профиль
 Route::type('post')->get('/post/addpostprof/{id}')->controller('PostController@addPostProf')->where(['id' => '[0-9]+']);

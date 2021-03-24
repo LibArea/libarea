@@ -25,10 +25,7 @@ class PostController extends \MainController
             hl_preliminary_exit();
         }
  
-// Array ( [user_id] => 6 [login] => AdreS [name] => Олег [email] => ss@sdf.ru [trust_level] => 1 [about] => Тестовый аккаунт [avatar] => [isLoggedIn] => 1 [ipaddress] => 127.0.0.1 )  
-//print_r(Request::getSession('account')); 
-//exit;
-        
+       
         if($account = Request::getSession('account')){
             // Получаем все теги отписанные участником
             $space_user = SpaceModel::getSpaceUser($account['user_id']);
@@ -39,24 +36,25 @@ class PostController extends \MainController
         }
             
         $pagesCount = PostModel::getPostHomeCount($space_user); 
-        $posts      = PostModel::getPostHome($page, $space_user);
-        
+        $posts      = PostModel::getPostHome($page, $space_user, $account);
+
         $result = Array();
         foreach($posts as $ind => $row){
              
             if(!$row['avatar'] ) {
                 $row['avatar'] = 'noavatar.png';
             } 
-            $row['avatar']        = $row['avatar'];
-            $row['title']         = $row['post_title'];
-            $row['slug']          = $row['post_slug']; 
-            $row['num_comments']  = $row['post_comments'];            
-            $row['post_comments'] = Base::ru_num('comm', $row['post_comments']);
-            $row['date']          = Base::ru_date($row['post_date']);
-            $result[$ind]         = $row;
+            $row['avatar']         = $row['avatar'];
+            $row['title']          = $row['post_title'];
+            $row['slug']           = $row['post_slug']; 
+            $row['num_comments']   = $row['post_comments'];
+            $row['is_delete']      = $row['post_is_delete'];
+            $row['post_comments']  = Base::ru_num('comm', $row['post_comments']);
+            $row['date']           = Base::ru_date($row['post_date']);
+            $result[$ind]          = $row;
          
         }  
-
+ 
         // Последние комментарии и отписанные пространства
         $latest_comments = CommentModel::latestComments();
         $space_hide      = SpaceModel::getSpaceUser($user_id);
@@ -138,7 +136,8 @@ class PostController extends \MainController
             $row['avatar']        = $row['avatar'];
             $row['title']         = $row['post_title'];
             $row['slug']          = $row['post_slug'];
-            $row['num_comments']  = $row['post_comments'];            
+            $row['num_comments']  = $row['post_comments'];  
+            $row['is_delete']     = $row['post_is_delete'];            
             $row['post_comments'] = Base::ru_num('comm', $row['post_comments']);
             $row['date']          = Base::ru_date($row['post_date']);
             $result[$ind]         = $row;
@@ -226,7 +225,8 @@ class PostController extends \MainController
             'login'         => $post['login'],
             'my_post'       => $post['my_post'],
             'avatar'        => $post['avatar'],
-            'num_comments'  => $post['post_comments'],   
+            'num_comments'  => $post['post_comments'],  
+            'is_delete'     => $post['post_is_delete'],              
             'space_tip'     => $post['space_tip'],
             'space_slug'    => $post['space_slug'],
             'space_name'    => $post['space_name'],            
@@ -506,12 +506,32 @@ class PostController extends \MainController
         } 
         
         $post_id = Request::getPost('post_id');
-        
-        // Получим пост
         $post = PostModel::getPostId($post_id); 
         
-        
         PostModel::setPostFavorite($post_id, $account['user_id']);
+       
+        return true;
+        
+    }
+  
+    // Помещаем пост в закладки
+    public function deletePost()
+    {
+        
+        // Авторизировались или нет
+        if (!$account = Request::getSession('account'))
+        {
+            return false;
+        }  
+ 
+        // Доступ только персоналу
+        if ($account['trust_level'] != 5) {
+            return false;
+        }
+        
+        $post_id = Request::getPost('post_id');
+        
+        PostModel::PostDelete($post_id);
        
         return true;
         

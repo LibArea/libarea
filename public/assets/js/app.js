@@ -61,4 +61,17 @@ $(function(){
             $('#comm_' + comm_id).addClass('dell');
         });
     });
+    
+    // Удаляем пост
+    $(document).on('click', '.delpost', function() {
+        var post_id = $(this).data('post');
+        $.ajax({
+            url: '/post/del/' + post_id,
+            type: 'POST',
+            data: {post_id: post_id},
+        }).done(function(data) {
+            $('.telo-detail_post').addClass('dell');
+        });
+    });
+    
 });

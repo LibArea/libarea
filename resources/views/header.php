@@ -5,10 +5,15 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
+        <?php if (isset($data['post']['is_delete'])) { ?>  
+            <meta name="robots" content="noindex" />
+        <?php } ?>
+
         <title><?= $data['title']; ?></title>
         <meta name = "description" content = "<?= $data['description']; ?>" />
         <link rel="stylesheet" href="/assets/css/style.css">
         <link rel="icon" href="/favicon.ico">
+
     </head>
 <body class="bd<?php if(Request::getCookie('dayNight') == 'dark') {?> dark<?php } ?>">
 <header>

@@ -58,7 +58,7 @@ class CommentController extends \MainController
         
         $comment = Request::getPost('comment');
         
-        if (strlen($comment) < 6 || strlen($comment) > 1024)
+        if (Base::getStrlen($comment) < 6 || Base::getStrlen($comment) > 1024)
         {
             Base::addMsg('Длина комментария должна быть от 6 до 1000 знаков', 'error');
             redirect('/' . $vurl);
