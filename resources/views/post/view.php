@@ -47,7 +47,14 @@
                         <span class="user-favorite" data-post="<?= $data['post']['id']; ?>">
                             <span class="mu_favorite">В избранное</span>
                         </span>
-                     <?php } ?> 
+                    <?php } ?> 
+                    
+                    <?php if($uid['trust_level'] ==5) { ?>
+                        <span class="otst"> | </span>
+                        <span id="cm_dell" class="cm_add_link">
+                            <a data-post="<?= $data['post']['id']; ?>" class="delpost">Удалить</a>
+                        </span>
+                    <?php } ?>
                     
                 <?php } ?>
             </div>   
@@ -132,7 +139,13 @@
                             <span id="cm_add_link<?php $comm['comment_id']; ?>" class="cm_add_link">
                                 <a data-post_id="<?= $data['post']['id']; ?>" data-id="<?= $comm['comment_id']; ?>" class="addcomm">Ответить</a>
                             </span>
-
+                            
+                            <?php if($uid['trust_level'] ==5) { ?>
+                                <span id="cm_dell" class="cm_add_link">
+                                    <a data-id="<?= $comm['comment_id']; ?>" class="delcomm">Удалить</a>
+                                </span>
+                            <?php } ?>
+                            
                             <div id="cm_addentry<?= $comm['comment_id']; ?>" class="reply"></div> 
                         
                         </li>

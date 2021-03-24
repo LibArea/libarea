@@ -596,7 +596,7 @@ ol.comment-telo {
 .cm_addentry {
     margin-left: 40px;
 }
-.addcomm {
+.addcomm, .delcomm {
     color: #888;
     font-size: 13px;
 }
