@@ -141,7 +141,8 @@ class AuthController extends \MainController
     // Страница авторизации
     public function loginPage()
     {
- 
+        UserModel::checkCookie();
+        
         if(Request::getSession('account')) {
           redirect('/');
         }
@@ -160,8 +161,9 @@ class AuthController extends \MainController
     public function loginHandler()
     {
       
-        $email    = Request::getPost('email');
-        $password = Request::getPost('password');
+        $email      = Request::getPost('email');
+        $password   = Request::getPost('password');
+        $rememberMe = Request::getPost('rememberme');
 
         if (!$this->checkEmail($email)) {
            Base::addMsg('Недопустимый email', 'error');
@@ -185,6 +187,12 @@ class AuthController extends \MainController
             Base::addMsg('E-mail или пароль не верен', 'error');
             redirect('/login');
         } else {
+            
+            // Если нажал "Запомнить" 
+            // Устанавливает сеанс пользователя и регистрирует его
+            if ($rememberMe == '1') {
+                UserModel::rememberMe($uInfo['id']);
+            }
             
             $user = [
                 'user_id'       => $uInfo['id'],

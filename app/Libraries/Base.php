@@ -8,8 +8,8 @@ class Base
     public static function getUid() {
         $user = Request::getSession('account') ?? [];
         $uid = [];
-        if (!empty($user['user_id'])) {
-            $uid['id']          = $user['user_id'];
+        if (!empty($user['id'])) {
+            $uid['id']          = $user['id'];
             $uid['login']       = $user['login'] ?? 'undefined'; 
             $uid['trust_level'] = $user['trust_level'];
             $uid['notif']       = NotificationsModel::usersNotification($uid['id']);
@@ -362,4 +362,42 @@ class Base
         return mb_strlen($str, "utf-8");
     }
     
+    // Создать случайную строку (мы используем crypto)
+	public static function randomString(string $type = 'alnum', int $len = 8): string
+	{
+		switch ($type)
+		{
+			case 'alnum':
+			case 'numeric':
+			case 'nozero':
+			case 'alpha':
+				switch ($type)
+				{
+					case 'alpha':
+						$pool = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+						break;
+					case 'alnum':
+						$pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+						break;
+					case 'numeric':
+						$pool = '0123456789';
+						break;
+					case 'nozero':
+						$pool = '123456789';
+						break;
+				}
+
+				// @phpstan-ignore-next-line
+				return substr(str_shuffle(str_repeat($pool, ceil($len / strlen($pool)))), 0, $len);
+			case 'md5':
+				return md5(uniqid((string) mt_rand(), true));
+			case 'sha1':
+				return sha1(uniqid((string) mt_rand(), true));
+			case 'crypto':
+				return bin2hex(random_bytes($len / 2));
+		}
+		// 'basic' type treated as default
+		return (string) mt_rand();
+	}
+   
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 use Hleb\Constructor\Handlers\Request;
 use XdORM\XD;
+use Base;
 
 class UserModel extends \MainModel
 {
@@ -40,7 +41,7 @@ class UserModel extends \MainModel
     public static function getUserId($id)
     {
 
-        $query = XD::select(['id', 'login', 'name', 'email', 'avatar', 'about', 'created_at'])
+        $query = XD::select(['id', 'login', 'name', 'email', 'avatar', 'about', 'trust_level'])
                 ->from(['users'])
                 ->where(['id'], '=', $id);
 
@@ -256,9 +257,102 @@ class UserModel extends \MainModel
     }
     
     ////// ЗАПОМНИТЬ МЕНЯ
-    ////// Работа с токенамм
+    ////// Работа с токенами и куки
+    
+    // Проверяет, устанавливался ли когда-либо файл cookie «запомнить меня»
+    // Если мы найдем, проверьте его по нашей таблице users_auth_tokens и  
+    // если мы найдем совпадение, и оно все ещё в силе.
+    public static function checkCookie()
+    {
+
+        // Есть "remember" куки?
+        $remember = Request::getCookie('remember');
+
+//print_r($remember);
+//exit;
+        // Нет
+        if (empty($remember)) {
+            return;
+        }
+
+        // Получим наш селектор | значение валидатора
+        [$selector, $validator] = explode(':', $remember);
+        $validator = hash('sha256', $validator);
+
+        $token = self::getAuthTokenBySelector($selector);
  
-    public function rememberMe($uid)
+        if (empty($token)) {
+
+            return false;
+        }
+
+        // Хэш не соответствует
+        if (!hash_equals($token['auth_hashedvalidator'], $validator)) {
+
+            return false;
+        }
+ 
+        // Получение данных по id
+        $user = self::getUserId($token['auth_user_id']);
+//print_r($user);
+//exit;
+        // Нет пользователя
+        if (empty($user)) {
+
+            return false;
+        }
+
+        // ПРОСТО ПЕРЕД УСТАНОВКОЙ ДАННЫХ СЕССИИ И ВХОДОМ ПОЛЬЗОВАТЕЛЯ
+        // ДАВАЙТЕ ПРОВЕРИМ, НУЖЕН ЛИ ИХ ПРИНУДИТЕЛЬНЫЙ ВХОД
+        // Перенесем в конфиг?
+        $forceLogin = 0;
+        if ($forceLogin > 1) {
+
+            // ПОЛУЧАЕТ СЛУЧАЙНОЕ ЧИСЛО ОТ 1 до 100
+            // ЕСЛИ ЭТО НОМЕР МЕНЬШЕ ЧЕМ НОМЕР В НАСТРОЙКАХ ПРИНУДИТЕЛЬНОГО ВХОДА
+            // УДАЛИТЬ ТОКЕН ИЗ БД
+
+            if (rand(1, 100) < $forceLogin) {
+
+                self::DeleteTokenByUserId($token['auth_user_id']);               
+
+                return;
+            }
+        }
+
+        // Сессия участника
+        self::setUserSession($user, '1');
+
+        $uid = $token['auth_user_id'];
+
+        self::rememberMeReset($uid, $selector);
+
+        return;
+    }
+
+
+    public static function setUserSession($user)
+    {   
+        $data = [
+            'id'            => $user['id'],
+            'login'         => $user['login'],
+            'name'          => $user['name'],
+            'email'         => $user['email'],
+            'trust_level'   => $user['trust_level'],
+            'about'         => $user['about'],
+            'avatar'        => $user['avatar'],
+            'isLoggedIn'    => true,
+            'ipaddress'     => Request::getRemoteAddress(),
+        ];
+
+       
+        $_SESSION['account'] = $data;
+        //redirect('/');
+
+        return true;
+    }
+
+    public static function rememberMe($uid)
     {
 
         // НАСТРОЕМ НАШ СЕЛЕКТОР, ВАЛИДАТОР И СРОК ДЕЙСТВИЯ 
@@ -268,8 +362,8 @@ class UserModel extends \MainModel
         // если селектор (id) найден в таблице auth_tokens, мы затем сопоставляем валидаторы
 
         $rememberMeExpire = 30;
-        $selector = random_string('crypto', 12);
-        $validator = random_string('crypto', 20);
+        $selector = Base::randomString('crypto', 12);
+        $validator = Base::randomString('crypto', 20);
         $expires = time() + 60 * 60 * 24 * $rememberMeExpire;
 
         // Установим токен
@@ -322,11 +416,11 @@ class UserModel extends \MainModel
 
         if (empty($existingToken)) {
 
-            return $this->rememberMe($uid);
+            return self::rememberMe($uid);
         }
 
         $rememberMeExpire = 30;
-        $validator = random_string('crypto', 20);
+        $validator = Base::randomString('crypto', 20);
         $expires = time() + 60 * 60 * 24 * $rememberMeExpire;
 
         // Установить
@@ -342,7 +436,7 @@ class UserModel extends \MainModel
             // Массивы данных установим
             $data = [
                 'hashedvalidator' => hash('sha256', $validator),
-                'expires' => date('Y-m-d H:i:s', $expires),
+                'expires' => date('Y-m-d H:i:s', $expires)
             ];
         } else {
             $data = [
@@ -391,7 +485,7 @@ class UserModel extends \MainModel
         return true;
     }
     
-    public function DeleteTokenByUserId($uid)
+    public static function DeleteTokenByUserId($uid)
     {
         
         XD::deleteFrom(['users_auth_tokens'])->where(['auth_user_id'], '=', $uid)->run(); 
@@ -399,10 +493,10 @@ class UserModel extends \MainModel
         return true;
     }
     
-    public function UpdateSelector($data, $selector)
+    public static function UpdateSelector($data, $selector)
     {
  
-       XD::update(['users_auth_tokens'])->set(['auth_user_id'], '=', $data['user_id'], ',', ['auth_selector'], '=', $data['selector'], ',', ['auth_hashedvalidator'], '=', $data['hashedvalidator'], ',', ['auth_expires'], '=', $data['expires'])->where(['auth_selector'], '=', $data['selector'])->run();
+       XD::update(['users_auth_tokens'])->set(['auth_hashedvalidator'], '=', $data['hashedvalidator'], ',', ['auth_expires'], '=', $data['expires'])->where(['auth_selector'], '=', $selector)->run();
        
        return true;
         
@@ -414,7 +508,7 @@ class UserModel extends \MainModel
     {
         
         return XD::select('*')->from(['users_auth_tokens'])
-                ->where(['selector'], '=', $selector)->getSelectOne();
+                ->where(['auth_selector'], '=', $selector)->getSelectOne();
 
     }
     

@@ -24,11 +24,15 @@ class PostController extends \MainController
             include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
             hl_preliminary_exit();
         }
+ 
+// Array ( [id] => 6 [login] => AdreS [name] => Олег [email] => ss@sdf.ru [trust_level] => 1 [about] => Тестовый аккаунт [avatar] => [isLoggedIn] => 1 [ipaddress] => 127.0.0.1 )  
+//print_r(Request::getSession('account')); 
+//exit;
         
         if($account = Request::getSession('account')){
             // Получаем все теги отписанные участником
-            $space_user = SpaceModel::getSpaceUser($account['user_id']);
-            $user_id    = $account['user_id'];
+            $space_user = SpaceModel::getSpaceUser($account['id']);
+            $user_id    = $account['id'];
         } else {
             $space_user = [];
             $user_id    = 0;
