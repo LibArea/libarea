@@ -334,7 +334,7 @@ class UserModel extends \MainModel
     public static function setUserSession($user)
     {   
         $data = [
-            'id'            => $user['id'],
+            'user_id'       => $user['id'],
             'login'         => $user['login'],
             'name'          => $user['name'],
             'email'         => $user['email'],

@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\NotificationsModel;
+use App\Models\UserModel;
 
 class Base
 {
@@ -8,12 +9,14 @@ class Base
     public static function getUid() {
         $user = Request::getSession('account') ?? [];
         $uid = [];
-        if (!empty($user['id'])) {
-            $uid['id']          = $user['id'];
+        if (!empty($user['user_id'])) {
+            $uid['id']          = $user['user_id'];
             $uid['login']       = $user['login'] ?? 'undefined'; 
             $uid['trust_level'] = $user['trust_level'];
             $uid['notif']       = NotificationsModel::usersNotification($uid['id']);
         } else {
+            UserModel::checkCookie();
+            
             $uid['id']           = null;
             $user['trust_level'] = null;
         }

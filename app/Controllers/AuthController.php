@@ -141,7 +141,6 @@ class AuthController extends \MainController
     // Страница авторизации
     public function loginPage()
     {
-        UserModel::checkCookie();
         
         if(Request::getSession('account')) {
           redirect('/');
@@ -194,8 +193,8 @@ class AuthController extends \MainController
                 UserModel::rememberMe($uInfo['id']);
             }
             
-            $user = [
-                'user_id'       => $uInfo['id'],
+            $data = [
+                'id'            => $uInfo['id'],
                 'login'         => $uInfo['login'],
                 'email'         => $uInfo['email'],
                 'name'          => $uInfo['name'],
@@ -207,7 +206,7 @@ class AuthController extends \MainController
             $last_ip = Request::getRemoteAddress();  
             UserModel::setUserLastLogs($uInfo['id'], $uInfo['login'], $uInfo['trust_level'], $last_ip);
             
-            $_SESSION['account'] = $user;
+            $_SESSION['account'] = $data;
             redirect('/');
         }
       
