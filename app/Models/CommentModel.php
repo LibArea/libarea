@@ -70,6 +70,7 @@ class CommentModel extends \MainModel
         $q = XD::select('*')->from(['comments']);
         $query = $q->leftJoin(['posts'])->on(['post_id'], '=', ['comment_post_id'])
                  ->leftJoin(['users'])->on(['id'], '=', ['comment_user_id'])
+                 ->where(['comment_del'], '=', 0)
                  ->orderBy(['comment_id'])->desc()->limit(5);
 
 
@@ -78,4 +79,13 @@ class CommentModel extends \MainModel
         return $result;   
     }
     
+    // Удаление комментария
+    public static function CommentsDel($id)
+    {
+ 
+         XD::update(['comments'])->set(['comment_del'], '=', 1)
+        ->where(['comment_id'], '=', $id)->run();
+ 
+        return true;
+    }
 }

@@ -154,9 +154,25 @@ class CommentController extends \MainController
          
     }
 
-    // Удаление комментария 0/1 
-    public function delete($id)
+    // Удаление комментария
+    public function deletComment()
     {
 
+        // Авторизировались или нет
+        if (!$account = Request::getSession('account'))
+        {
+            return false;
+        }  
+ 
+        // Доступ только персоналу
+        if ($account['trust_level'] != 5) {
+            return false;
+        }
+        
+        $id = Request::getPost('comm_id');
+        
+        CommentModel::CommentsDel($id);
+        
+        return false;
     }
 }

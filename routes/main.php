@@ -66,8 +66,10 @@ Route::type('post')->get('/space/hide/{id}')->controller('SpaceController@hide')
 // Голосуем за комментарии
 Route::type('post')->get('/votes/{id}')->controller('VotesCommController@votes')->where(['id' => '[0-9]+']);
  
-// Добавляем комментарии 
+// Добавление комментария / удаление 
 Route::type('post')->protect()->get('/comment/add')->controller('CommentController@create');
+Route::type('post')->get('/comment/del/{id}')->controller('CommentController@deletComment')->where(['id' => '[0-9]+']);
+
 // Вызов формы комментария
 Route::type('post')->get('/comments/addform')->controller('CommentController@addform');
 // Страница добавление поста

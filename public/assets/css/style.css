@@ -542,6 +542,10 @@ a.space_3 {
 .block-comments {
   margin: 0 0 20px 0;
 }
+ol.dell.comment-telo {
+    font-size: 13px;
+    color: #888;
+}
 ol.comment-telo.one {
     padding: 0;
 }
@@ -591,7 +595,7 @@ ol.comment-telo {
     padding: 3px 0 0 0;
 }
 .otst {
-  margin: 0 1px;
+    margin: 0 1px;
 }
 .cm_addentry {
     margin-left: 40px;
@@ -604,6 +608,10 @@ ol.comment-telo {
 .comments_subtree {
     position: relative;
 }
+.comments_subtree.dell {
+    display: none;
+}
+
 .com-line {
     position: absolute;
     left: 20px;

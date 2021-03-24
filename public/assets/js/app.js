@@ -50,4 +50,15 @@ $(function(){
         });
     }); 
     
+    // Удаляем комментарии
+    $(document).on('click', '.delcomm', function() {
+        var comm_id = $(this).data('id');
+        $.ajax({
+            url: '/comment/del/' + comm_id,
+            type: 'POST',
+            data: {comm_id: comm_id},
+        }).done(function(data) {
+            $('#comm_' + comm_id).addClass('dell');
+        });
+    });
 });
