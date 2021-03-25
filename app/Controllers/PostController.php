@@ -226,7 +226,7 @@ class PostController extends \MainController
             'my_post'       => $post['my_post'],
             'avatar'        => $post['avatar'],
             'num_comments'  => $post['post_comments'],  
-            'is_delete'     => $post['post_is_delete'],              
+            'is_delete'     => PostModel::isThePostDeleted($post['post_id']),              
             'space_tip'     => $post['space_tip'],
             'space_slug'    => $post['space_slug'],
             'space_name'    => $post['space_name'],            
@@ -514,7 +514,7 @@ class PostController extends \MainController
         
     }
   
-    // Помещаем пост в закладки
+    // Удаляем пост / + восстанавливаем пост
     public function deletePost()
     {
         

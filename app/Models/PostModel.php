@@ -233,11 +233,10 @@ class PostModel extends \MainModel
         return true;
     }
   
-    // Пост уже в закладках или нет
+    // Пост в закладках или нет
     public static function getMyFavorite($post_id, $uid) 
     {
-        $q = XD::select('*')->from(['favorite'])->where(['favorite_tid'], '=', $post_id)->and(['favorite_uid'], '=', $uid);
-        $result = $q->getSelect();
+        $result = XD::select('*')->from(['favorite'])->where(['favorite_tid'], '=', $post_id)->and(['favorite_uid'], '=', $uid)->getSelect();
         
         if($result) {
             return 1;
@@ -247,13 +246,31 @@ class PostModel extends \MainModel
         
     }
     
+    // Удален пост или нет
+    public static function isThePostDeleted($post_id) 
+    {
+        
+        $result = XD::select('*')->from(['posts'])->where(['post_id'], '=', $post_id)->getSelectOne();
+        
+        return $result['post_is_delete'];
+        
+    }
+    
     // Удаляем пост  
     public static function PostDelete($post_id) 
     {
-         XD::update(['posts'])->set(['post_is_delete'], '=', 1)
-        ->where(['post_id'], '=', $post_id)->run();
+        if(self::isThePostDeleted($post_id) == 1) {
+            
+            XD::update(['posts'])->set(['post_is_delete'], '=', 0)->where(['post_id'], '=', $post_id)->run();
+        
+        } else {
+            
+            XD::update(['posts'])->set(['post_is_delete'], '=', 1)->where(['post_id'], '=', $post_id)->run();
  
+        }
+        
         return true;
         
     }
+   
 }

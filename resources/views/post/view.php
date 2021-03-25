@@ -55,7 +55,13 @@
                         <?php if($uid['trust_level'] ==5) { ?>
                             <span class="otst"> | </span>
                             <span id="cm_dell" class="cm_add_link">
-                                <a data-post="<?= $data['post']['id']; ?>" class="delpost">Удалить</a>
+                                <a data-post="<?= $data['post']['id']; ?>" class="delpost">
+                                    <?php if($data['post']['is_delete'] == 1) { ?>
+                                        Восстановить
+                                    <?php } else { ?>
+                                        Удалить
+                                    <?php } ?>
+                                </a>
                             </span>
                         <?php } ?>
                         

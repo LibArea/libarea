@@ -25,7 +25,7 @@
                             <a class="u-url" href="/posts/<?= $post['post_slug']; ?>">
                                 <?php if ($post['is_delete'] == 1) { ?> 
                                     <svg class="md-icon">
-                                        <use xlink:href="/assets/svg/icons.svg#eye"></use>
+                                        <use xlink:href="/assets/svg/icons.svg#trash"></use>
                                     </svg>
                                 <?php } ?>
                                 <h2 class="titl"><?= $post['post_title']; ?></h2>

@@ -70,7 +70,8 @@ $(function(){
             type: 'POST',
             data: {post_id: post_id},
         }).done(function(data) {
-            $('.telo-detail_post').addClass('dell');
+            // $('.telo-detail_post').addClass('dell');
+            location.reload(); 
         });
     });
     
