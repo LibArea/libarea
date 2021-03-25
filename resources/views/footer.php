@@ -9,7 +9,8 @@
     <script src="/assets/js/jquery.min.js"></script>
     <script src="/assets/js/common.js"></script>
     <?php if($uid['id']) { ?>
-        <script src="/assets/js/app.js"></script>
+        <script src="/assets/js/app.js"></script> 
+        <!--script src="/assets/js/editorjs@latest.js"></script-->
     <?php } ?> 
 </body>
 </html>

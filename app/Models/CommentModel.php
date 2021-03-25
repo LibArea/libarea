@@ -88,4 +88,24 @@ class CommentModel extends \MainModel
  
         return true;
     }
+    
+    
+   // Частота размещения комментариев участника 
+   public static function getCommentSpeed($uid)
+   {
+       
+        $post = XD::select(['comment_id', 'comment_user_id', 'comment_date'])->from(['comments'])
+            ->where(['comment_user_id'], '=', $uid)
+            ->orderBy(['comment_id'])->desc()->getSelectOne();
+        
+        // https://ru.stackoverflow.com/a/498675
+        $comm_date  = $post['comment_date']; 
+        $happy_day  = \DateTime::createFromFormat('Y-m-d H:i:s', $comm_date);
+        $now        = new \DateTime('now');
+        $result     = $now->diff($happy_day); 
+        
+        return $result;
+    
+   }
+    
 }

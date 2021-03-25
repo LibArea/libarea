@@ -10,7 +10,7 @@ https://github.com/phphleb/hleb
 
 ### Демонстрация
 
-![AreaDev](https://raw.githubusercontent.com/Toxu-ru/AreaDev/main/public/images/areadev.jpg)
+![AreaDev](https://raw.githubusercontent.com/Toxu-ru/AreaDev/main/public/assets/images/areadev.jpg)
 
 https://my.areadev.ru
 

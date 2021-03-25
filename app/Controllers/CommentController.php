@@ -74,6 +74,9 @@ class CommentController extends \MainController
         $account   = Request::getSession('account');
         $my_id     = $account['user_id'];
         
+        // Ограничим частоту добавления
+        // CommentModel::getCommentSpeed($my_id);
+        
         // Записываем покммент
         CommentModel::commentAdd($post_id, $ip, $comm_id, $comment, $my_id);
         

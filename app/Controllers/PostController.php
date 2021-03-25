@@ -325,6 +325,8 @@ class PostController extends \MainController
     public function addPost() 
     {
         
+        // print_r(PostModel::getPostSpeed(1));
+        
         $uid  = Base::getUid();
         $data = [
             'title'    => 'Добавить пост',
@@ -335,7 +337,7 @@ class PostController extends \MainController
        
     }
     
-    // Lобавление поста
+    // Добавление поста
     public function createPost()
     {
         // Авторизировались или нет
@@ -380,6 +382,9 @@ class PostController extends \MainController
             redirect('/post/add');
             return true;
         }
+        
+        // Ограничим частоту добавления
+        // PostModel::getPostSpeed($post_user_id);
         
         // Получаем SEO поста
         $post_slug = Base::seo($post_title); 
