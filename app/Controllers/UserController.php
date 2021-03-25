@@ -138,7 +138,6 @@ class UserController extends \MainController
             $avatar = 'noavatar.png';
         } 
         
-        
         $uid  = Base::getUid();
         $data = [
             'title'  => 'Изменение аватарки',

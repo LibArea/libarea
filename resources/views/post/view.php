@@ -72,15 +72,17 @@
                 </div> 
 
                 <?php if ($uid['id']) { ?>
-                <form id="add_comm" class="new_comment" action="/comment/add" accept-charset="UTF-8" method="post">
-                <?= csrf_field() ?>
-                    <textarea rows="5" placeholder="Напишите, что нибудь..." name="comment" id="comment"></textarea>
-                    <div> 
-                        <input type="hidden" name="post_id" id="post_id" value="<?= $data['post']['id']; ?>">
-                        <input type="hidden" name="comm_id" id="comm_id" value="0">
-                        <input type="submit" name="commit" value="Комментарий" class="comment-post">
-                    </div> 
-                </form>
+                   <?php if($data['post']['post_closed'] == 0) { ?>
+                        <form id="add_comm" class="new_comment" action="/comment/add" accept-charset="UTF-8" method="post">
+                        <?= csrf_field() ?>
+                            <textarea rows="5" placeholder="Напишите, что нибудь..." name="comment" id="comment"></textarea>
+                            <div> 
+                                <input type="hidden" name="post_id" id="post_id" value="<?= $data['post']['id']; ?>">
+                                <input type="hidden" name="comm_id" id="comm_id" value="0">
+                                <input type="submit" name="commit" value="Комментарий" class="comment-post">
+                            </div> 
+                        </form>
+                    <?php } ?>
                 <?php } else { ?>
                     <textarea rows="5" disabled="disabled" placeholder="Вы должны войти в систему, чтобы оставить комментарий." name="comment" id="comment"></textarea>
                     <div> 
@@ -95,6 +97,8 @@
                  Пост удален...
             </div>   
         <?php } ?>
+
+
 
         <?php if (!empty($data['comments'])) { ?>
             <div class="telo comments">
@@ -138,14 +142,16 @@
                                         <span class="date">  
                                            <?= $comm['date']; ?>
                                         </span>
-                                        <span class="date">  
-                                            <?php if ($data['post']['post_user_id'] == $comm['comment_user_id']) { ?><span class="authorpost">&#x21af;</span> <?php } ?>
-                                        </span>
-                                        <span class="date">
+                                        <?php if ($data['post']['post_user_id'] == $comm['comment_user_id']) { ?>
+                                            <span class="date ots">  
+                                                <span class="authorpost">&#x21af;</span>
+                                            </span>
+                                        <?php } ?>
+                                        <span class="date ots">
                                             <a rel="nofollow" href="/posts/<?= $data['post']['slug']; ?>#comm_<?= $comm['comment_id']; ?>">#</a>
                                         </span>
                                         <?php if ($comm['level'] != 0) { ?> 
-                                            <span class="date">
+                                            <span class="date ots">
                                                 <a rel="nofollow" href="/posts/<?= $data['post']['slug']; ?>#comm_<?= $comm['comment_on']; ?>">&#8679;</a>
                                             </span>
                                         <?php } ?> 
@@ -154,10 +160,12 @@
                                         <?= $comm['content'] ?> 
                                     </div>
                                 </div>
+                                <?php if($data['post']['post_closed'] == 0) { ?> 
                                 <?php if($data['post']['is_delete'] == 0 || $uid['trust_level'] == 5) { ?>
                                     <span id="cm_add_link<?php $comm['comment_id']; ?>" class="cm_add_link">
                                         <a data-post_id="<?= $data['post']['id']; ?>" data-id="<?= $comm['comment_id']; ?>" class="addcomm">Ответить</a>
                                     </span>
+                                <?php } ?>
                                 <?php } ?>
                                 <?php if($uid['trust_level'] ==5) { ?>
                                     <span id="cm_dell" class="cm_add_link">
@@ -188,6 +196,11 @@
             </div>
         <?php } ?>
   
+        <?php if($data['post']['post_closed'] == 1) { ?> 
+            <div class="telo">
+                <p>Пост закрыт...</p>
+            </div>
+        <?php } ?>
     </div>
 </section>
 <?php include TEMPLATE_DIR . '/footer.php'; ?> 

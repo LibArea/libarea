@@ -15,7 +15,18 @@
                     <label for="post_content">Текст</label>
                     <textarea name="post_content"><?= $data['content']; ?></textarea><br />
                 </div>
-                
+                <?php if($uid['trust_level'] == 5) { ?>
+                    <div class="boxline"> 
+                        <label for="post_content">Закрыть</label>
+                        <input type="radio" name="closed" <?php if($data['post_closed'] == 0) { ?>checked<?php } ?> value="0"> Нет
+                        <input type="radio" name="closed" <?php if($data['post_closed'] == 1) { ?>checked<?php } ?> value="1" > Да
+                    </div>  
+                    <div class="boxline">
+                        <label for="post_content">Поднять</label>
+                        <input type="radio" name="top" <?php if($data['post_top'] == 0) { ?>checked<?php } ?> value="0"> Нет
+                        <input type="radio" name="top" <?php if($data['post_top']== 1) { ?>checked<?php } ?> value="1"> Да
+                    </div>                      
+                <?php } ?>
                 <div class="boxline">  
                     <label for="post_content">Пространство</label>
                        <b> <?= $data['space_name'] ?></b>

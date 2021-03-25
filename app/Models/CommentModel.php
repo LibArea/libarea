@@ -54,13 +54,16 @@ class CommentModel extends \MainModel
     public static function commentAdd($post_id, $ip, $comm_id, $comment, $my_id)
     { 
 
-       XD::insertInto(['comments'], '(', ['comment_post_id'], ',', ['comment_ip'], ',', ['comment_on'], ',', ['comment_content'], ',', ['comment_user_id'], ')')->values( '(', XD::setList([$post_id, $ip, $comm_id, $comment, $my_id]), ')' )->run();
+        XD::insertInto(['comments'], '(', ['comment_post_id'], ',', ['comment_ip'], ',', ['comment_on'], ',', ['comment_content'], ',', ['comment_user_id'], ')')->values( '(', XD::setList([$post_id, $ip, $comm_id, $comment, $my_id]), ')' )->run();
+       
+       // id последнего комментария
+       $last_id = XD::select()->last_insert_id('()')->getSelectValue();
        
        // Отмечаем комментарий, что за ним есть ответ
        $otv = 1; // 1, значит за комментом есть ответ
        XD::update(['comments'])->set(['comment_after'], '=', $otv)->where(['comment_id'], '=', $comm_id)->run();
 
-        return true; 
+       return $last_id; 
 
     }
     

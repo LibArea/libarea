@@ -25,7 +25,6 @@ class PostController extends \MainController
             hl_preliminary_exit();
         }
  
-       
         if($account = Request::getSession('account')){
             // Получаем все теги отписанные участником
             $space_user = SpaceModel::getSpaceUser($account['user_id']);
@@ -136,8 +135,8 @@ class PostController extends \MainController
             $row['avatar']        = $row['avatar'];
             $row['title']         = $row['post_title'];
             $row['slug']          = $row['post_slug'];
-            $row['num_comments']  = $row['post_comments'];  
-            $row['is_delete']     = $row['post_is_delete'];            
+            $row['num_comments']  = $row['post_comments'];   
+            $row['is_delete']     = $row['post_is_delete'];     
             $row['post_comments'] = Base::ru_num('comm', $row['post_comments']);
             $row['date']          = Base::ru_date($row['post_date']);
             $result[$ind]         = $row;
@@ -213,11 +212,12 @@ class PostController extends \MainController
             $post['edit_date'] = NULL;
         }
         
-        // Перечислим пока все, чтобы знать необходимые...
+        // Перечислим пока все, чтобы знать необходимые... 
         $data_post = [
             'id'            => $post['post_id'],
             'title'         => $post['post_title'], 
-            'content'       => $Parsedown->text($post['post_content']),
+            'content'       => $Parsedown->text($post['post_content']), 
+            'post_closed'   => $post['post_closed'],
             'post_user_id'  => $post['post_user_id'],
             'date'          => Base::ru_date($post['post_date']),
             'edit_date'     => Base::ru_date($post['edit_date']),
@@ -225,7 +225,7 @@ class PostController extends \MainController
             'login'         => $post['login'],
             'my_post'       => $post['my_post'],
             'avatar'        => $post['avatar'],
-            'num_comments'  => $post['post_comments'],  
+            'num_comments'  => $post['post_comments'],   
             'is_delete'     => PostModel::isThePostDeleted($post['post_id']),              
             'space_tip'     => $post['space_tip'],
             'space_slug'    => $post['space_slug'],
@@ -423,6 +423,8 @@ class PostController extends \MainController
             'id'            => $post_id,
             'title_post'    => htmlspecialchars($post['post_title']),
             'content'       => $post['post_content'],
+            'post_closed'   => $post['post_closed'],
+            'post_top'      => $post['post_top'],
             'space_tip'     => $post['space_tip'],
             'space_slug'    => $post['space_slug'],
             'space_name'    => $post['space_name'],  
@@ -440,9 +442,11 @@ class PostController extends \MainController
            redirect('/');
         } 
         
-        $post_id       = Request::getPost('post_id');
-        $post_title    = Request::getPost('post_title');
-        $post_content  = Request::getPost('post_content');
+        $post_id        = Request::getPost('post_id');
+        $post_title     = Request::getPost('post_title');
+        $post_content   = Request::getPost('post_content');
+        $post_closed    = Request::getPost('closed');
+        $post_top       = Request::getPost('top');
         
         // Получим пост
         $post = PostModel::getPostId($post_id); 
@@ -472,7 +476,24 @@ class PostController extends \MainController
             return true;
         }
         
-        PostModel::editPost($post_id, $post_title, $post_content);
+        if ($post_closed != 1) { 
+            $post_closed = 0;
+        }
+        
+        if ($post_top != 1) { 
+            $post_top = 0;
+        }
+        
+        $data = [
+            'post_id'       => $post_id,
+            'post_title'    => $post_title, 
+            'post_content'  => $post_content,
+            'post_closed'   => $post_closed,
+            'post_top'      => $post_top,
+        ];
+        
+        
+        PostModel::editPost($data);
         
         redirect('/posts/' . $post['post_slug']);
         

@@ -138,6 +138,7 @@ CREATE TABLE `posts` (
   `post_karma` smallint(6) NOT NULL DEFAULT 0,
   `post_comments` smallint(6) NOT NULL DEFAULT 0,
   `post_content` text NOT NULL,
+  `post_closed` tinyint(1) NOT NULL DEFAULT 0,
   `post_top` tinyint(1) NOT NULL DEFAULT 0,
   `post_is_delete` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -161,6 +162,8 @@ CREATE TABLE `space` (
   `space_name` varchar(250) NOT NULL,
   `space_slug` varchar(128) NOT NULL,
   `space_description` varchar(250) NOT NULL,
+  `space_color` varchar(128) NOT NULL,
+  `space_text` varchar(550) NOT NULL,
   `space_category_id` int(11) NOT NULL DEFAULT 1,
   `space_tip` int(11) NOT NULL DEFAULT 1,
   `space_permit_users` int(11) NOT NULL DEFAULT 1
@@ -170,10 +173,10 @@ CREATE TABLE `space` (
 -- Дамп данных таблицы `space`
 --
 
-INSERT INTO `space` (`space_id`, `space_name`, `space_slug`, `space_description`, `space_category_id`, `space_tip`, `space_permit_users`) VALUES
-(1, 'cms', 'cms', 'Системы управления сайтами...', 0, 1, 0),
-(2, 'Вопросы', 'qa', 'Вопросы и ответы', 0, 2, 0),
-(3, 'флуд', 'flud', 'Просто обычные разговоры', 0, 3, 0);
+INSERT INTO `space` (`space_id`, `space_name`, `space_slug`, `space_description`, `space_color`, `space_text`, `space_category_id`, `space_tip`, `space_permit_users`) VALUES
+(1, 'cms', 'cms', 'Системы управления сайтами...', '', 'тест 1...', 0, 1, 0),
+(2, 'Вопросы', 'qa', 'Вопросы и ответы', '', 'тест 2...', 0, 2, 0),
+(3, 'флуд', 'flud', 'Просто обычные разговоры', '', 'тест 3...', 0, 3, 0);
 
 -- --------------------------------------------------------
 

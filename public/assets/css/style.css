@@ -414,7 +414,9 @@ input.form-about {width: 250px;}
     stroke: #666;
     vertical-align: middle;
 }
-
+.md-icon.top {
+    stroke: #f56400;
+}
 .nav.create .md-icon {
     stroke: #09c;
 }

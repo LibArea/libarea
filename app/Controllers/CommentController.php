@@ -78,12 +78,12 @@ class CommentController extends \MainController
         // CommentModel::getCommentSpeed($my_id);
         
         // Записываем покммент
-        CommentModel::commentAdd($post_id, $ip, $comm_id, $comment, $my_id);
-        
+        $last_id = CommentModel::commentAdd($post_id, $ip, $comm_id, $comment, $my_id);
+         
         // Пересчитываем количество комментариев для поста + 1
         PostModel::getNumComments($post_id); // + 1
         
-        redirect('/' . $return_url); 
+        redirect('/' . $return_url . '#comm_' . $last_id); 
 
     }
 

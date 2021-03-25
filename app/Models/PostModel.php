@@ -37,7 +37,7 @@ class PostModel extends \MainModel
             $display = '';
         }
 
-        $sql = "SELECT p.post_id, p.post_title, p.post_slug, p.post_user_id, p.post_space_id, p.post_comments, p.post_date, p.post_votes, p.post_is_delete,
+        $sql = "SELECT p.post_id, p.post_title, p.post_slug, p.post_user_id, p.post_space_id, p.post_comments, p.post_date, p.post_votes, p.post_is_delete, p.post_closed, p.post_top,
                 u.id, u.login, u.avatar,
                 s.space_id, s.space_slug, s.space_name, space_tip
                 fROM posts as p
@@ -47,7 +47,6 @@ class PostModel extends \MainModel
                 $display
                 ORDER BY p.post_id DESC LIMIT 15 OFFSET ".$offset." ";
                         
-        
         $result = DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
         
         return $result;
@@ -173,12 +172,12 @@ class PostModel extends \MainModel
     }
     
     // Редактирование поста
-    public static function editPost($post_id, $post_title, $post_content)
+    public static function editPost($data)
     {
-        $edit_date = date("Y-m-d H:i:s");
+        $edit_date = date("Y-m-d H:i:s"); 
        
-        XD::update(['posts'])->set(['post_title'], '=', $post_title, ',', ['edit_date'], '=', $edit_date, ',', ['post_content'], '=', $post_content)
-        ->where(['post_id'], '=', $post_id)->run();
+        XD::update(['posts'])->set(['post_title'], '=', $data['post_title'], ',', ['edit_date'], '=', $edit_date, ',', ['post_content'], '=', $data['post_content'], ',', ['post_closed'], '=', $data['post_closed'], ',', ['post_top'], '=', $data['post_top'])
+        ->where(['post_id'], '=', $data['post_id'])->run();
  
         return true;
     }

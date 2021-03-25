@@ -23,14 +23,24 @@
                         <?php } ?> 
                         <div class="post-body">
                             <a class="u-url" href="/posts/<?= $post['post_slug']; ?>">
+                                <h2 class="titl"><?= $post['post_title']; ?></h2>
                                 <?php if ($post['is_delete'] == 1) { ?> 
-                                    <svg class="md-icon">
+                                    <svg class="md-icon delete">
                                         <use xlink:href="/assets/svg/icons.svg#trash"></use>
                                     </svg>
                                 <?php } ?>
-                                <h2 class="titl"><?= $post['post_title']; ?></h2>
+                                <?php if($post['post_closed'] == 1) { ?> 
+                                    <svg class="md-icon closed">
+                                        <use xlink:href="/assets/svg/icons.svg#bulb-off"></use>
+                                    </svg>
+                                <?php } ?>
+                                <?php if($post['post_top'] == 1) { ?> 
+                                    <svg class="md-icon top">
+                                        <use xlink:href="/assets/svg/icons.svg#bulb-off"></use>
+                                    </svg>
+                                <?php } ?>
                             </a>
-                       
+                            
                             <a class="space space_<?= $post['space_tip'] ?>" href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
                                 <?= $post['space_name']; ?>
                             </a>
