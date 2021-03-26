@@ -29,13 +29,17 @@
                            <a title="На главную" class="home" href="/">Главная</a>
                         <?php } ?>
                     </li>
-                    <li class="nav no-mob">
-                        <a title="TOP постов" class="home" href="/top">TOP</a>
+                    <li class="nav no-mob<?php if(Request::getUri() == '/top') { ?> active<?php } ?>">
+                        <a title="TOP постов" class="home" href="/top">
+                            TOP
+                        </a>
                     </li>
-                    <li class="nav no-mob-two">
-                        <a title="Все комментарии" class="comments" href="/comments">Комментарии</a>
+                    <li class="nav no-mob-two<?php if(Request::getUri() == '/comments') { ?> active<?php } ?>">
+                        <a title="Все комментарии" class="comments" href="/comments">
+                            Комментарии
+                        </a>
                     </li>  
-                    <li class="nav no-mob-two">
+                    <li class="nav no-mob-two<?php if(Request::getUri() == '/space') { ?> active<?php } ?>">
                         <a title="Пространства" class="sp" href="/space">∞</a>
                     </li>
                 </ul>
@@ -76,6 +80,7 @@
                     <?php } ?>    
                     <li class="dropbtn nav">
                         <a class="b-my" href="#" title=""><span><?= $uid['login']; ?></span>  
+                            <img class="ava" alt="<?= $uid['login']; ?>" src="/uploads/avatar/small/<?= $uid['avatar']; ?>">
                             <svg class="md-icon">
                                 <use xlink:href="/assets/svg/icons.svg#chevrons-down"></use>
                             </svg>  

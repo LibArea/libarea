@@ -10,14 +10,21 @@ class Base
         $user = Request::getSession('account') ?? [];
         $uid = [];
         if (!empty($user['user_id'])) {
-            $uid['id']          = $user['user_id'];
-            $uid['login']       = $user['login'] ?? 'undefined'; 
-            $uid['trust_level'] = $user['trust_level'];
-            $uid['notif']       = NotificationsModel::usersNotification($uid['id']);
+            $usr = UserModel::getUserId($user['user_id']);
+            
+            if(!$usr['avatar'] ) {
+                $usr['avatar'] = 'noavatar.png';
+            } 
+            
+            $uid['id']          = $usr['id'];
+            $uid['login']       = $usr['login']; 
+            $uid['trust_level'] = $usr['trust_level'];
+            $uid['notif']       = NotificationsModel::usersNotification($usr['id']); 
+            $uid['avatar']      = $usr['avatar'];
         } else {
             UserModel::checkCookie();
             
-            $uid['id']           = null;
+            $uid['id']          = null;
             $uid['trust_level'] = null;
         }
         $uid['msg']     = self::getMsg();

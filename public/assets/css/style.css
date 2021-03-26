@@ -61,9 +61,6 @@ code {
 .telo-profile, .telo-info, .telo-detail_post, .box-users{
     margin-left: 5px;
 }
-.telo-info, .telo-detail_post {
-    max-width: 800px;
-}
 blockquote {
     font-style: italic;
     margin: 0.25em 0 0 0.5em;
@@ -207,11 +204,12 @@ header .wrap {
 .nav .avatar {
     display: flex;
 }
-.nav .ava img {
+.nav img.ava {
     width: 21px;
     height: 21px;
     margin-left: 8px;
     border-radius: 50%;
+    vertical-align: middle;
 }
 .nav a span{
     display: inline-block;
@@ -576,7 +574,7 @@ ol.comment-telo {
 .comm-telo_bottom {
     margin-bottom: 20px;
 }
-.comm-telo-body{
+.comm-telo-body, .telo-detail_post{
     max-width: 750px;
 }
 .telo.comments .cm_add_link {

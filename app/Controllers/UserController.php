@@ -135,7 +135,7 @@ class UserController extends \MainController
         redirect('/users/setting');
     }
     
-    // Форма загрзуки аватарки
+    // Форма загрузки аватарки
     function settingPageAvatar ()
     {
 
@@ -199,7 +199,7 @@ class UserController extends \MainController
         }
 
         if ($valid) {
-            
+          
             // 110px и 16px
             $path_img       = HLEB_PUBLIC_DIR. '/uploads/avatar/';
             $path_img_small = HLEB_PUBLIC_DIR. '/uploads/avatar/small/';
@@ -214,6 +214,7 @@ class UserController extends \MainController
             
             // Получим страую если оно есть, удаляем
             $avatar = UserModel::getAvatar($account['login']);
+            
             
             // Удаляем старые аватарки
             chmod($path_img . $avatar['avatar'], 0777);
