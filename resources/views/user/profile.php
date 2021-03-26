@@ -2,7 +2,7 @@
     <section>
     <div class="wrap">
         <div class="telo-profile">
-            <div class="gravatar">
+            <div class="gravatar right">
                 <img alt="<?= $data['login']; ?>" src="/uploads/avatar/<?= $data['avatar']; ?>">
             </div>
 
@@ -95,11 +95,11 @@
                                 <?= $data['post']['space_name']; ?>
                             </a>
                             
-                            <div class="footer">
-                                <img class="ava" alt="<?= $data['post']['login']; ?>" src="/uploads/avatar/small/<?= $data['post']['avatar']; ?>">
+                            <div class="footer"> 
+                                <img class="ava" alt="<?= $data['login']; ?>" src="/uploads/avatar/small/<?= $data['avatar']; ?>">
                                 <span class="user"> 
-                                    <a href="/u/<?= $data['post']['login']; ?>">
-                                        <?= $data['post']['login']; ?>
+                                    <a href="/u/<?= $data['login']; ?>">
+                                        <?= $data['login']; ?>
                                     </a> 
                                 </span>
                                 <span class="date"> 

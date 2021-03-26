@@ -31,7 +31,7 @@
                                 <?php } ?>
                                 <?php if($post['post_closed'] == 1) { ?> 
                                     <svg class="md-icon closed">
-                                        <use xlink:href="/assets/svg/icons.svg#bulb-off"></use>
+                                        <use xlink:href="/assets/svg/icons.svg#lock"></use>
                                     </svg>
                                 <?php } ?>
                                 <?php if($post['post_top'] == 1) { ?> 

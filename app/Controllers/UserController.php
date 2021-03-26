@@ -15,11 +15,25 @@ class UserController extends \MainController
     function index()
     {
         
+        $users = UserModel::getUsersAll();
+        
+        $result = Array();
+        foreach($users as $ind => $row){
+             
+            if(!$row['avatar'] ) {
+                $row['avatar'] = 'noavatar.png';
+            } 
+ 
+            $row['avatar']        = $row['avatar'];
+            $result[$ind]         = $row;
+         
+        } 
+        
         $uid  = Base::getUid();
         $data = [
           'title' => 'Все участники',
           'description' => 'Список всех участников сортированных по дате регистрации сайте AreaDev',
-          'users' => UserModel::getUsersAll(),
+          'users' => $result,
         ];
 
         return view('/user/all', ['data' => $data, 'uid' => $uid]);
@@ -38,12 +52,12 @@ class UserController extends \MainController
             hl_preliminary_exit();
         }
 
-        $post = PostModel::getPostProfile($user['my_post']);
+        $post = PostModel::getPostId($user['my_post']);
 
-        if(!$user['avatar']) {
-                $user['avatar'] = 'noavatar.png';
-        }
-        
+        if(!$user['avatar'] ) {
+            $user['avatar'] = 'noavatar.png';
+        } 
+ 
         $uid  = Base::getUid();
         $data =[
           'title'         => $user['login'] . ' - профиль',

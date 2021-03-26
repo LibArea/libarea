@@ -6,7 +6,7 @@ header($_SERVER["SERVER_PROTOCOL"] . " 404 Not Found");
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Ошибка 404</title>
-        <link href="/css/404.css" rel="stylesheet" type="text/css">
+        <link href="/assets/css/404.css" rel="stylesheet" type="text/css">
         <link rel="icon" href="/favicon.ico" type="image/png">
     </head>
     <body>

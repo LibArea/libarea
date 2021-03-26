@@ -163,6 +163,7 @@ class PostModel extends \MainModel
     public static function getPostId($id) 
     {
       
+        if(!$id) { $id = 0; }  
         $q = XD::select('*')->from(['posts']);
         $query = $q->leftJoin(['space'])->on(['space_id'], '=', ['post_space_id'])->where(['post_id'], '=', $id);
         $result = $query->getSelectOne();
@@ -180,27 +181,6 @@ class PostModel extends \MainModel
         ->where(['post_id'], '=', $data['post_id'])->run();
  
         return true;
-    }
-    
-    // Выбранный пост в профиль участника
-    public static function getPostProfile($my_post)
-    {
-
-        if(!$my_post){ $my_post = 0; }  
-          
-        $sql = "SELECT p.post_id, p.post_title, p.post_slug, p.post_user_id, p.post_space_id, p.post_comments, p.post_date, p.post_votes,
-                u.id, u.login, u.avatar,
-                s.space_id, s.space_slug, s.space_name, space_tip
-                fROM posts as p
-                INNER JOIN users as u ON u.id = p.post_user_id
-                INNER JOIN space as s ON s.space_id = p.post_space_id
-                WHERE p.post_id = ".$my_post." ";
-                        
-        
-        $result = DB::run($sql)->fetch(PDO::FETCH_ASSOC); 
-
-        return $result;
-
     }
     
     // Добавить пост в профиль

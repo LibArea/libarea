@@ -53,6 +53,7 @@ code {
     color: #b63e56;
     background: #f5f2f0;
     padding: 1px 4px;
+    font-size: 1.1em;
 }
 .telo.detail .post a, .comm-telo-body a {
 	text-decoration: underline;
@@ -463,7 +464,10 @@ input.form-about {width: 250px;}
 .date {
     color: #717171;
     text-transform: lowercase;
-    margin: 0 5px;
+    margin: 0 0 0 5px;
+}
+.date.ots {
+    margin: 0 0 0 12px;
 }
 .footer a, .footer {
     font-size: 13px;
@@ -582,26 +586,28 @@ ol.comment-telo {
     margin: 5px 0;
 }
 .comm-header a, .comm-header {
-    font-size: 13px;
+    font-size: 9.5pt;
     color: #888;
 }
 .comm-header a:hover {
     color: #666;
 }
 .comm-header .ava {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
     vertical-align: middle;
 }
 .comm-header .user {
-    margin: 0 5px;
+    margin: 0 0 0 3px;
+    text-transform: lowercase;
 }
 .comments .voters {
     margin-top: 3px;
 }
 .comments .comm-telo {
     padding: 3px 0 0 0;
+    font-size: 10.5pt;
 }
 .otst {
     margin: 0 1px;
@@ -611,7 +617,7 @@ ol.comment-telo {
 }
 .addcomm, .delcomm {
     color: #888;
-    font-size: 13px;
+    font-size: 9.5pt;
 }
 .comments_subtree {
     position: relative;
@@ -651,8 +657,6 @@ ol.comment-telo {
    background-color: lightyellow;
 }
 
- 
-
 /* Profile */
 .avatar-user .md-icon {
     width: 104px;
@@ -666,7 +670,6 @@ ol.comment-telo {
     border: 2px solid #fff;
     border-radius: 100% 100%;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
-    float: right;
     height: 100px;
     width: 100px;
 }
@@ -704,6 +707,28 @@ ol.comment-telo {
 }
 .box br {
     clear: left;
+}
+
+/* BOX участники */
+.all-users {
+    display: flex;
+    flex-wrap: wrap;
+}
+.column {
+    padding: 1rem;
+    padding: 1rem;
+    width: 16.66666667%;
+}
+.user_card {
+    text-align: center;
+    overflow: hidden; 
+}
+.user_card img:hover {
+    opacity: 0.8;
+}
+.box-footer {
+    font-size: 14px;
+    color: #888;
 }
 
 /* Изображаем смену цвета */
@@ -803,6 +828,7 @@ ol.comment-telo {
     }
     .telo, .sidebar {width: 98%;}
     .sb-telo {margin-left: 0;}
+    .column {width: 29.1%;padding: 10px;}
 }
 @media screen and (max-width: 610px) {
     div.box label, div.boxline label {

@@ -1,3 +1,5 @@
+**ATTENTION:** you are on the README file of an unstable branch of AreaDev specifically meant for the development of future releases. This means that the code on this branch is potentially unstable, and breaking change may happen without any prior notice. Do not use it in production environments or use it at your own risk!
+
 # AreaDev
 Скрипт сообщества, постороенного на PHP Micro-Framework HLEB
 
@@ -38,3 +40,5 @@ https://my.areadev.ru
 #### MIT License
 
 https://github.com/Toxu-ru/AreaDev/blob/main/LICENSE
+
+ 

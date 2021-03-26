@@ -86,40 +86,6 @@ class PostController extends \MainController
         return view("home", ['data' => $data, 'uid' => $uid]);
     }
 
-    // Все посты
-    public function allPost() {
-
-        $posts = PostModel::getPostAll();
- 
-        $result = Array();
-        foreach($posts as $ind => $row){
-             
-            if(!$row['avatar'] ) {
-                $row['avatar'] = 'noavatar.png';
-            } 
- 
-            $row['avatar']        = $row['avatar'];
-            $row['title']         = $row['post_title'];
-            $row['slug']          = $row['post_slug'];
-            $row['num_comments']  = $row['post_comments'];            
-            $row['post_comments'] = Base::ru_num('comm', $row['post_comments']);
-            $row['date']          = Base::ru_date($row['post_date']);
-            $result[$ind]         = $row;
-         
-        }  
-
-        $uid  = Base::getUid();
-        $data = [
-            'title'            => 'Посты - главная страница сайта', 
-            'description'      => 'Все посты на AreaDev',
-            'latest_comments'  => 0,
-            'space_hide'       => 0,
-            'posts'            => $result,
-        ];
-
-        return view("home", ['data' => $data, 'uid' => $uid]);
-    }
-
     // Посты с начальными не нулевыми голосами, с голосованием, например, от 5
     public function topPost() {
         // пока Top - по количеству комментариев  
