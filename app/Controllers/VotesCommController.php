@@ -12,13 +12,8 @@ class VotesCommController extends \MainController
    // Голосование за комментарий
     public function votes()
     {
-        // Авторизировались или нет
-        if (!$account = Request::getSession('account'))
-        {
-            return false;
-        }  
         
-        $comm_id = (int)Request::getInt('id');
+        $comm_id = Request::getInt('id');
  
         // Проверяем
         if (!$comm_id)
@@ -27,6 +22,7 @@ class VotesCommController extends \MainController
         }
 
         // id того, кто голосует за комментарий
+        $account = Request::getSession('account');
         $user_id = $account['user_id'];
         
         // Информация об комментарии

@@ -11,11 +11,8 @@ class NotificationsController extends \MainController
     public function index()
     {
         
-        if (!$account = Request::getSession('account'))
-        {
-            redirect('/');
-        }  
-        
+        // Данные участника и список уведомлений
+        $account = Request::getSession('account');
         $list = NotificationsModel::listNotification($account['user_id']);
         
         $uid  = Base::getUid();

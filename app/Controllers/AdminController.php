@@ -10,11 +10,7 @@ class AdminController extends \MainController
 {
 	public function index()
 	{
-        // Если не авторизирован - редирект
-        if(!$account = Request::getSession('account')) {
-            redirect('/');
-        }
-
+        
         // Если TL участника не равен 5 (персонал) - редирект
         if(!$isAdmin = UserModel::isAdmin($account['user_id'])) {
             redirect('/');
@@ -51,11 +47,6 @@ class AdminController extends \MainController
     public function banUser() 
     {
       
-        // Если не авторизирован - редирект
-        if(!$account = Request::getSession('account')) {
-            redirect('/');
-        }
-        
         // Если TL участника не равен 5 (персонал) - редирект
         if(!$isAdmin = UserModel::isAdmin($account['user_id'])) {
             redirect('/');

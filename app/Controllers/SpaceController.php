@@ -94,15 +94,9 @@ class SpaceController extends \MainController
     public function hide()
     {
 
-        if (!Request::getSession('account'))
-        {
-            return false;
-        } else {
-            $account = Request::getSession('account');
-        } 
-        
         $space_id = Request::get('id'); 
-        
+
+        $account = Request::getSession('account');
         SpaceModel::SpaceHide($space_id, $account['user_id']);
         
         return true;

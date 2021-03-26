@@ -13,11 +13,6 @@ class AuthController extends \MainController
     public function registerPage()
     {
         
-        // Если авторизирован, то возвращаемся на главную
-        if(Request::getSession('account')) {
-           redirect('/');
-        } 
-    
         $uid  = Base::getUid();
         $data = [
             'title'       => 'Регистрация | AreaDev',
@@ -31,11 +26,6 @@ class AuthController extends \MainController
     // Отправка запроса для регистрации
     public function registerHandler()
     {
-
-        // Если авторизирован, то возвращаемся на главную
-        if(Request::getSession('account')) {
-           redirect('/');
-        } 
 
         $email    = Request::getPost('email');
         $login    = Request::getPost('login');
@@ -142,10 +132,6 @@ class AuthController extends \MainController
     public function loginPage()
     {
         
-        if(Request::getSession('account')) {
-          redirect('/');
-        }
-        
         $uid  = Base::getUid();
         $data = [
             'title' => 'Вход | Авторизация',
@@ -222,10 +208,7 @@ class AuthController extends \MainController
 
     public function recoverPage () 
     {
-        if(Request::getSession('account')) {
-          redirect('/');
-        }
-        
+
         $uid  = Base::getUid();
         $data = [
             'title'       => 'Восстановление пароля',

@@ -16,8 +16,8 @@ $GLOBALS['conf'] = include( __DIR__ .'/../config.inc.php');
 
 // General headers.
 // Общие заголовки.
-// Content Security Policy
-header("Content-Security-Policy: script-src 'self'; style-src 'self';");
+// Content Security Policy (ВКЛЮЧИТЬ в производстве)
+// header("Content-Security-Policy: script-src 'self'; style-src 'self';");
 header("Referrer-Policy: no-referrer-when-downgrade");
 header("X-XSS-Protection: 1; mode=block");
 header("X-Content-Type-Options: nosniff");

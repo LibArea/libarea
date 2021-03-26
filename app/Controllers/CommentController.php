@@ -46,11 +46,6 @@ class CommentController extends \MainController
     // Добавление комментария
     public function create()
     {
-        // Авторизировались или нет
-        if (!Request::getSession('account'))
-        {
-            return false;
-        }  
         
         // получим относительный url поста для возрата (упростить)
         $url = str_replace('//', '', $_SERVER['HTTP_REFERER']);
@@ -161,13 +156,8 @@ class CommentController extends \MainController
     public function deletComment()
     {
 
-        // Авторизировались или нет
-        if (!$account = Request::getSession('account'))
-        {
-            return false;
-        }  
- 
         // Доступ только персоналу
+        $account = Request::getSession('account');
         if ($account['trust_level'] != 5) {
             return false;
         }
@@ -178,4 +168,5 @@ class CommentController extends \MainController
         
         return false;
     }
+    
 }

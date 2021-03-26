@@ -58,7 +58,7 @@ code {
 .telo.detail .post a, .comm-telo-body a {
 	text-decoration: underline;
 }
-.telo-profile, .telo-info, .telo-detail_post{
+.telo-profile, .telo-info, .telo-detail_post, .box-users{
     margin-left: 5px;
 }
 .telo-info, .telo-detail_post {
@@ -715,8 +715,7 @@ ol.comment-telo {
     flex-wrap: wrap;
 }
 .column {
-    padding: 1rem;
-    padding: 1rem;
+    padding: 1rem 1rem 1rem 0.2rem;
     width: 16.66666667%;
 }
 .user_card {
@@ -800,6 +799,7 @@ ol.comment-telo {
     padding: 0 0 10px 0;
     list-style: none;
     color: #667d99;
+    display: table;
 }
 .nav-tabs > li {
     margin: 0 10px 0 0;
@@ -828,7 +828,9 @@ ol.comment-telo {
     }
     .telo, .sidebar {width: 98%;}
     .sb-telo {margin-left: 0;}
-    .column {width: 29.1%;padding: 10px;}
+    .user_card .column {padding: 10px;}
+    .user_card .gravatar {height: 55px;width: 55px;}
+    
 }
 @media screen and (max-width: 610px) {
     div.box label, div.boxline label {

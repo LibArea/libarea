@@ -290,7 +290,7 @@ class PostController extends \MainController
     // Форма добавление поста
     public function addPost() 
     {
-        
+
         // print_r(PostModel::getPostSpeed(1));
         
         $uid  = Base::getUid();
@@ -306,12 +306,7 @@ class PostController extends \MainController
     // Добавление поста
     public function createPost()
     {
-        // Авторизировались или нет
-        if (!$account = Request::getSession('account'))
-        {
-            return false;
-        }  
-        
+
         // Получаем title и содержание
         $post_title   = Request::getPost('post_title');
         $post_content = $_POST['post_content']; // не фильтруем
@@ -320,9 +315,10 @@ class PostController extends \MainController
         $post_ip_int  = Request::getRemoteAddress();
         
         // Получаем id тега
-        $space_id     = (int)Request::getPost('space');
+        $space_id     = Request::getPost('space');
         
         // id того, кто добавляет пост
+        $account = Request::getSession('account');
         $post_user_id = $account['user_id'];
         
         // Проверяем длину title
@@ -364,10 +360,7 @@ class PostController extends \MainController
     // Показ формы поста для редактирование
     public function editPost() 
     {
-        if(!$account = Request::getSession('account')) {
-           redirect('/');
-        } 
-        
+
         $post_id = Request::get('id');
         
         // Получим пост
@@ -378,6 +371,7 @@ class PostController extends \MainController
         }
         
         // Редактировать может только автор
+        $account = Request::getSession('account');
         if ($post['post_user_id'] != $account['user_id']) {
             redirect('/');
         }
@@ -404,10 +398,7 @@ class PostController extends \MainController
     public function editPostRecording() 
     {
         
-        if(!$account = Request::getSession('account')) {
-           redirect('/');
-        } 
-        
+ 
         $post_id        = Request::getPost('post_id');
         $post_title     = Request::getPost('post_title');
         $post_content   = Request::getPost('post_content');
@@ -422,6 +413,7 @@ class PostController extends \MainController
         }
         
         // Редактировать может только автор
+        $account = Request::getSession('account');
         if ($post['post_user_id'] != $account['user_id']) {
             redirect('/');
         }
@@ -469,16 +461,13 @@ class PostController extends \MainController
     public function addPostProf()
     {
         
-        if(!$account = Request::getSession('account')) {
-           return true;
-        } 
-        
         $post_id = Request::getPost('post_id');
         
         // Получим пост
         $post = PostModel::getPostId($post_id); 
         
         // Это делать может только может только автор
+        $account = Request::getSession('account');
         if ($post['post_user_id'] != $account['user_id']) {
             return true;
         }
@@ -492,14 +481,11 @@ class PostController extends \MainController
     // Помещаем пост в закладки
     public function addPostFavorite()
     {
-        
-        if(!$account = Request::getSession('account')) {
-           return true;
-        } 
-        
+
         $post_id = Request::getPost('post_id');
         $post = PostModel::getPostId($post_id); 
         
+        $account = Request::getSession('account');
         PostModel::setPostFavorite($post_id, $account['user_id']);
        
         return true;
@@ -510,13 +496,8 @@ class PostController extends \MainController
     public function deletePost()
     {
         
-        // Авторизировались или нет
-        if (!$account = Request::getSession('account'))
-        {
-            return false;
-        }  
- 
         // Доступ только персоналу
+        $account = Request::getSession('account');
         if ($account['trust_level'] != 5) {
             return false;
         }

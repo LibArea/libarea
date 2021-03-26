@@ -84,10 +84,8 @@ class UserController extends \MainController
     function settingPage()
     {
         
-        if(!$account = Request::getSession('account')) {
-            redirect('/');
-        }
-      
+        // Данные участника
+        $account = Request::getSession('account');
         $user = UserModel::getUserLogin($account['login']);
         
         if(!$user['avatar']) {
@@ -112,10 +110,7 @@ class UserController extends \MainController
     function settingEdit ()
     {
         
-        if(!$account = Request::getSession('account')) {
-            redirect('/');
-        }  
-        
+     
         $name    = Request::getPost('name');
         $about   = Request::getPost('about');
         
@@ -131,6 +126,8 @@ class UserController extends \MainController
           redirect('/users/setting');
         }
 
+        // Логин участника
+        $account = Request::getSession('account');
         $login   = $account['login'];
     
         UserModel::editProfile($login, $name, $about);
@@ -141,10 +138,9 @@ class UserController extends \MainController
     // Форма загрзуки аватарки
     function settingPageAvatar ()
     {
-        if(!$account = Request::getSession('account')) {
-            redirect('/');
-        }
-        
+
+        // Аватар участника
+        $account = Request::getSession('account');
         $ava     = UserModel::getAvatar($account['login']);
         $avatar  = $ava['avatar'];
         
@@ -166,10 +162,7 @@ class UserController extends \MainController
     // Форма изменение пароля
     function settingPageSecurity ()
     {
-        if(!$account = Request::getSession('account')) {
-            redirect('/');
-        }
-        
+
         $uid  = Base::getUid();
         $data = [
             'title'       => 'Изменение пароля',
@@ -187,10 +180,7 @@ class UserController extends \MainController
     function settingAvatarEdit() 
     {
         
-        if(!$account = Request::getSession('account')) {
-            redirect('/');
-        }
-  
+        $account  = Request::getSession('account');
         $name     = $_FILES['image']['name'];
         $size     = $_FILES['image']['size'];
         $ext      = strtolower(pathinfo($name, PATHINFO_EXTENSION));
@@ -245,10 +235,6 @@ class UserController extends \MainController
     function settingSecurityEdit()
     {
         
-        if(!$account = Request::getSession('account')) {
-            redirect('/');
-        }  
-        
         $password    = Request::getPost('password');
         $password2   = Request::getPost('password2');
         $password3   = Request::getPost('password3');
@@ -268,6 +254,8 @@ class UserController extends \MainController
             redirect('/users/setting/security');
         }
         
+        // Данные участника
+        $account = Request::getSession('account');
         $userInfo = UserModel::getUserInfo($account['email']);
        
         if (!password_verify($password, $userInfo['password'])) {

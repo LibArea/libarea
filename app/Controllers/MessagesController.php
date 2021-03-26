@@ -11,11 +11,9 @@ class MessagesController extends \MainController
 
 	public function index()
 	{
-        // Авторизировались или нет
-        if(!$account = Request::getSession('account')) {
-            redirect('/');
-        }
 
+        // Данные участника
+        $account = Request::getSession('account');
         $user_id = $account['user_id'];
         
         if ($messages_dialog = MessagesModel::getMessages($user_id))
@@ -80,12 +78,8 @@ class MessagesController extends \MainController
 
 	public function dialog()
 	{
-        // Авторизировались или нет
-        if(!$account = Request::getSession('account')) 
-        {
-            redirect('/');
-        }
-        
+        // Данные участника
+        $account = Request::getSession('account');
         $user_id = $account['user_id'];
 
         $id  = Request::get('id');
@@ -148,12 +142,8 @@ class MessagesController extends \MainController
 	public function send()
 	{
         
-        // Авторизировались или нет
-        if(!$account = Request::getSession('account')) 
-        {
-            redirect('/');
-        }
-
+        // Данные участника
+        $account = Request::getSession('account');
         $sender_uid = $account['user_id'];
 
         $message = Request::getPost('message');
@@ -182,11 +172,6 @@ class MessagesController extends \MainController
     // Форма отправки из профиля
     public function  profilMessages()
     {
-        
-        // Авторизировались или нет
-        if(!$account = Request::getSession('account')) {
-            redirect('/');
-        }
         
         $login = Request::get('login');
         
