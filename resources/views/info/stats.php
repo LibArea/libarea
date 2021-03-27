@@ -29,6 +29,12 @@
                     <li class="-period">
                         <span class="-time">'21</span>
                         <ol class="-vrs">
+                            <li class="-vr"> Разработка сообщества... </li>
+                        </ol>
+                    </li>
+                    <li class="-period">
+                        <span class="-time">'21</span>
+                        <ol class="-vrs">
                             <li class="-vr"> Начало работы. Изучаем HLEB. </li>
                         </ol>
                     </li>
@@ -43,7 +49,9 @@
                 </ol>
             </section>
 
-            <p>Проголосовало: <?= $data['vote_comm_num']; ?></p>
+            <p>Голосов: <br>
+            - комментарии <b><?= $data['vote_comm_num']; ?></b> <br> 
+            - посты <b><?= $data['vote_post_num']; ?></b></p>
              
             <p><i>В стадии разработки...</i></p>
         </div>    

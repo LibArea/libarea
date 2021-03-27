@@ -6,6 +6,7 @@ use App\Models\PostModel;
 use App\Models\SpaceModel;
 use App\Models\CommentModel;
 use App\Models\VotesCommentModel;
+use App\Models\VotesPostModel;
 use Base;
 use Parsedown;
 
@@ -37,7 +38,7 @@ class PostController extends \MainController
         }
             
         $pagesCount = PostModel::getPostHomeCount($space_user); 
-        $posts      = PostModel::getPostHome($page, $space_user, $trust_level);
+        $posts      = PostModel::getPostHome($page, $space_user, $trust_level, $user_id);
 
         $result = Array();
         foreach($posts as $ind => $row){
@@ -45,11 +46,11 @@ class PostController extends \MainController
             if(!$row['avatar'] ) {
                 $row['avatar'] = 'noavatar.png';
             } 
-            
-            $row['avatar']         = $row['avatar'];
-            $row['num_comments']   = Base::ru_num('comm', $row['post_comments']);
-            $row['post_date']      = Base::ru_date($row['post_date']);
-            $result[$ind]          = $row;
+          //  $row['post_vote_status']    = VotesPostModel::getVoteStatus($row['post_id'], $user_id);
+            $row['avatar']              = $row['avatar'];
+            $row['num_comments']        = Base::ru_num('comm', $row['post_comments']);
+            $row['post_date']           = Base::ru_date($row['post_date']);
+            $result[$ind]               = $row;
          
         }  
  
@@ -87,8 +88,14 @@ class PostController extends \MainController
     // Посты с начальными не нулевыми голосами, с голосованием, например, от 5
     public function topPost() { 
     
+        if($account = Request::getSession('account')){
+            $user_id     = $account['user_id'];
+        } else {
+            $user_id     = 0;
+        }
+    
         // Пока Top - по количеству комментариев  
-        $posts = PostModel::getPostTop();
+        $posts = PostModel::getPostTop($user_id);
  
         $result = Array();
         foreach($posts as $ind => $row){
@@ -151,7 +158,7 @@ class PostController extends \MainController
         $slug = Request::get('slug');
         
         $post = []; 
-        $post = PostModel::getPost($slug);
+        $post = PostModel::getPost($slug, $uid);
  
         // Если нет поста
         if (empty($post))
@@ -233,8 +240,14 @@ class PostController extends \MainController
     public function userPosts()
     {
         
+        if($account = Request::getSession('account')){
+            $user_id = $account['user_id'];
+        } else {
+            $user_id = 0;
+        }
+        
         $login = Request::get('login');
-        $post_user  = PostModel::getUsersPosts($login); 
+        $post_user  = PostModel::getUsersPosts($login, $user_id); 
         
         // Если нет такого пользователя
         if(!$post_user) {
@@ -245,7 +258,7 @@ class PostController extends \MainController
         $result = Array();
         foreach($post_user as $ind => $row){
              
-            if(!$row['avatar'] ) {
+            if(!$row['avatar']) {
                 $row['avatar']  = 'noavatar.png';
             } 
  
@@ -429,7 +442,7 @@ class PostController extends \MainController
     public function addPostProf()
     {
         
-        $post_id = Request::getPost('post_id');
+        $post_id = \Request::getPostInt('post_id');
         
         // Получим пост
         $post = PostModel::getPostId($post_id); 
@@ -449,7 +462,7 @@ class PostController extends \MainController
     public function addPostFavorite()
     {
 
-        $post_id = Request::getPost('post_id');
+        $post_id = \Request::getPostInt('post_id');
         $post    = PostModel::getPostId($post_id); 
         
         if(!$post){
@@ -472,7 +485,7 @@ class PostController extends \MainController
             return false;
         }
         
-        $post_id = Request::getPost('post_id');
+        $post_id = \Request::getPostInt('post_id');
         
         PostModel::PostDelete($post_id);
        

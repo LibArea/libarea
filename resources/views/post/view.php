@@ -5,6 +5,29 @@
         <?php if($post['post_is_delete'] == 0 || $uid['trust_level'] == 5) { ?>
    
             <div class="telo-detail_post<?php if($post['post_is_delete'] == 1) { ?> dell<?php } ?>">
+            
+            
+                        <?php if (!$uid['id']) { ?> 
+                            <div id="vot<?= $post['post_id']; ?>" class="voters">
+                                <a rel="nofollow" href="/login"><div class="post-up-id"></div></a>
+                                <div class="score"><?= $post['post_votes']; ?></div>
+                            </div>
+                        <?php } else { ?> 
+
+                            <?php if ($post['votes_post_user_id'] || $uid['id'] == $post['post_user_id']) { ?>
+                                <div class="voters active">
+                                    <div class="post-up-id"></div>
+                                    <div class="score"><?= $post['post_votes']; ?></div>
+                                </div>
+                            <?php } else { ?>
+                                <div id="up<?= $post['post_id']; ?>" class="voters">
+                                    <div data-id="<?= $post['post_id']; ?>" class="post-up-id"></div>
+                                    <div class="score"><?= $post['post_votes']; ?></div>
+                                </div>
+                            <?php } ?> 
+                        <?php } ?> 
+            
+            
                 <h1 class="titl"><?= $post['post_title']; ?></h1>
                 
                 <div class="footer">
@@ -22,6 +45,7 @@
                         <a class="space space_<?= $post['space_tip'] ?>" href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
                             <?= $post['space_name']; ?>
                         </a>
+                        <span class="otst">   </span>
                     </span>
                     <?php if ($uid['id']) { ?>
                         <?php if($uid['login'] == $post['login']) { ?>
@@ -34,20 +58,22 @@
                             </span>
                             <?php if($post['my_post'] == $post['post_id']) { ?>
                                     <span class="mu_post">+ в профиле</span>
+                                    <span class="otst"> | </span>
                             <?php } else { ?> 
                                 <a class="user-mypost" data-opt="1" data-post="<?= $post['post_id']; ?>">
                                     <span class="mu_post">В профиль</span>
+                                    <span class="otst"> |  </span>
                                 </a>
                             <?php } ?> 
                         <?php } ?> 
                         
                         <?php if ($post['favorite_post']){ ?>
-                           <span class="otst"> | </span>    
+                           <span class="otst">   </span>    
                            <span class="user-favorite" data-post="<?= $post['post_id']; ?>">
                                 <span class="mu_favorite">Убрать из избранного</span>
                            </span>   
                         <?php } else { ?>
-                            <span class="otst"> | </span>
+                            <span class="otst">   </span>
                             <span class="user-favorite" data-post="<?= $post['post_id']; ?>">
                                 <span class="mu_favorite">В избранное</span>
                             </span>
@@ -67,30 +93,31 @@
                         <?php } ?>
                         
                     <?php } ?>
-                </div>   
-                <div class="post">
-                    <?= $post['post_content']; ?> 
-                </div> 
-
-                <?php if ($uid['id']) { ?>
-                   <?php if($post['post_closed'] == 0) { ?>
-                        <form id="add_comm" class="new_comment" action="/comment/add" accept-charset="UTF-8" method="post">
-                        <?= csrf_field() ?>
-                            <textarea rows="5" placeholder="Напишите, что нибудь..." name="comment" id="comment"></textarea>
-                            <div> 
-                                <input type="hidden" name="post_id" id="post_id" value="<?= $post['post_id']; ?>">
-                                <input type="hidden" name="comm_id" id="comm_id" value="0">
-                                <input type="submit" name="commit" value="Комментарий" class="comment-post">
-                            </div> 
-                        </form>
-                    <?php } ?>
-                <?php } else { ?>
-                    <textarea rows="5" disabled="disabled" placeholder="Вы должны войти в систему, чтобы оставить комментарий." name="comment" id="comment"></textarea>
-                    <div> 
-                        <input type="submit" name="commit" value="Комментарий" class="comment-post" disabled="disabled">
+                </div>  
+                <div class="left-ots">
+                    <div class="post">
+                        <?= $post['post_content']; ?> 
                     </div> 
-                <?php } ?>
-                
+
+                    <?php if ($uid['id']) { ?>
+                       <?php if($post['post_closed'] == 0) { ?>
+                            <form id="add_comm" class="new_comment" action="/comment/add" accept-charset="UTF-8" method="post">
+                            <?= csrf_field() ?>
+                                <textarea rows="5" placeholder="Напишите, что нибудь..." name="comment" id="comment"></textarea>
+                                <div> 
+                                    <input type="hidden" name="post_id" id="post_id" value="<?= $post['post_id']; ?>">
+                                    <input type="hidden" name="comm_id" id="comm_id" value="0">
+                                    <input type="submit" name="commit" value="Комментарий" class="comment-post">
+                                </div> 
+                            </form>
+                        <?php } ?>
+                    <?php } else { ?>
+                        <textarea rows="5" disabled="disabled" placeholder="Вы должны войти в систему, чтобы оставить комментарий." name="comment" id="comment"></textarea>
+                        <div> 
+                            <input type="submit" name="commit" value="Комментарий" class="comment-post" disabled="disabled">
+                        </div> 
+                    <?php } ?>
+                </div>
             </div>
 
         <?php } else { ?>
@@ -193,13 +220,13 @@
             </div>
         <?php } else { ?>
             <div class="telo">
-                <p>К сожалению комментариев пока нет...</p>
+                <p class="info">К сожалению комментариев пока нет...</p>
             </div>
         <?php } ?>
   
         <?php if($post['post_closed'] == 1) { ?> 
             <div class="telo">
-                <p>Пост закрыт...</p>
+                <p class="info">Пост закрыт...</p>
             </div>
         <?php } ?>
     </div>

@@ -162,7 +162,7 @@ class CommentController extends \MainController
             return false;
         }
         
-        $id = Request::getPost('comm_id');
+        $id = \Request::getPostInt('comm_id');
         
         CommentModel::CommentsDel($id);
         

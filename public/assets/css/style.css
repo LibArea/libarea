@@ -55,9 +55,13 @@ code {
 .telo.detail .post a, .comm-telo-body a {
 	text-decoration: underline;
 }
-.telo-profile, .telo-info, .telo-detail_post, .box-users{
+.telo-profile, .telo-info, .box-users{
     margin-left: 5px;
 }
+.left-ots, .telo.comments h2, p.info {
+     margin-left: 15px;
+}
+
 blockquote {
     font-style: italic;
     margin: 0.25em 0 0 0.5em;
@@ -757,6 +761,12 @@ ol.comment-telo {
     margin-top: 4px;
     width: 40px;
 }
+
+.telo-detail_post .voters {
+    float: left;
+    margin-top: 8px;
+    width: 40px;
+}
  div.voters .comm-up-id, div.voters .post-up-id {
     border-bottom-width: 11px;
 }
@@ -781,9 +791,9 @@ ol.comment-telo {
     margin-bottom: -3px;
     text-align: center;
 }
-.voters.active .comm-up-id, .voters.active .score {
-    border-color: transparent transparent #ac130d transparent;
-    color: #ac130d;
+.voters.active .comm-up-id, .voters.active .post-up-id, .voters.active .score {
+    border-color: transparent transparent #f56400 transparent;
+    color: #f56400;
 }
 
 /* Горизонтальное меню */

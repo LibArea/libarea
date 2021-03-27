@@ -27,6 +27,7 @@ class InfoController extends \MainController
         $post_num      = InfoModel::getPostsNumAll();
         $comm_num      = InfoModel::getCommentsNumAll();
         $vote_comm_num = InfoModel::getCommentsVoteNumAll();
+        $vote_post_num = InfoModel::getPostVoteNumAll();
         
         $uid  = Base::getUid();
         $data = [
@@ -36,6 +37,7 @@ class InfoController extends \MainController
             'post_num'      => $post_num,
             'comm_num'      => $comm_num,
             'vote_comm_num' => $vote_comm_num,
+            'vote_post_num' => $vote_post_num,
         ];
 
         return view('info/stats', ['data' => $data, 'uid' => $uid]);

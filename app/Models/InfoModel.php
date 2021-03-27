@@ -46,5 +46,15 @@ class InfoModel extends \MainModel
         return count($query->getSelect());
         
     }
+    
+   // Голосование за посты
+    public static function getPostVoteNumAll()
+    {
+        
+        $query = XD::select('*')->from(['votes_post']);
+       
+        return count($query->getSelect());
+        
+    }
 
 }

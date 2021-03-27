@@ -43,7 +43,7 @@
                 <?php if($data['post_num_user'] != 0) { ?>
                     <label class="required">Постов:</label>
                     <span class="d">
-                        <a title="Всего постов <?= $user['login']; ?>" href="/newest/<?= $data['login']; ?>">
+                        <a title="Всего постов <?= $user['login']; ?>" href="/newest/<?= $user['login']; ?>">
                             <?= $data['post_num_user']; ?>
                         </a>
                     </span> <br>
@@ -52,7 +52,7 @@
                 <?php if($data['comm_num_user'] != 0) { ?>
                     <label class="required">Комментариев:</label>
                     <span class="d">
-                        <a title="Все комментарии <?= $user['login']; ?>" href="/threads/<?= $data['login']; ?>">
+                        <a title="Все комментарии <?= $user['login']; ?>" href="/threads/<?= $user['login']; ?>">
                             <?= $data['comm_num_user']; ?>
                         </a>
                     </span>  <br>

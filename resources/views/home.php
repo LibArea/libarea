@@ -16,11 +16,20 @@
                                 <div class="score"><?= $post['post_votes']; ?></div>
                             </div>
                         <?php } else { ?> 
-                            <div id="vot<?= $post['post_id']; ?>" class="voters">
-                                <div data-id="<?= $post['post_id']; ?>" class="post-up-id"></div>
-                                <div class="score"><?= $post['post_votes']; ?></div>
-                            </div>
+
+                            <?php if ($post['votes_post_user_id'] || $uid['id'] == $post['post_user_id']) { ?>
+                                <div class="voters active">
+                                    <div class="post-up-id"></div>
+                                    <div class="score"><?= $post['post_votes']; ?></div>
+                                </div>
+                            <?php } else { ?>
+                                <div id="up<?= $post['post_id']; ?>" class="voters">
+                                    <div data-id="<?= $post['post_id']; ?>" class="post-up-id"></div>
+                                    <div class="score"><?= $post['post_votes']; ?></div>
+                                </div>
+                            <?php } ?> 
                         <?php } ?> 
+                        
                         <div class="post-body">
                             <a class="u-url" href="/posts/<?= $post['post_slug']; ?>">
                                 <h2 class="titl"><?= $post['post_title']; ?></h2>

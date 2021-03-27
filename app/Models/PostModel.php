@@ -12,7 +12,7 @@ class PostModel extends \MainModel
     // Посты на главной 
     // $page - страницы
     // $tags_user - список id отписанных тегов
-    public static function getPostHome($page, $space_user, $trust_level)
+    public static function getPostHome($page, $space_user, $trust_level, $uid)
     {
           
         $result = Array();
@@ -28,7 +28,6 @@ class PostModel extends \MainModel
 
         $offset = ($page-1) * 15; 
         
-       
         // Показывать удаленный пост и для персонала
         if($trust_level != 5) { 
             $display = 'AND p.post_is_delete  = 0';
@@ -38,10 +37,12 @@ class PostModel extends \MainModel
 
         $sql = "SELECT p.post_id, p.post_title, p.post_slug, p.post_user_id, p.post_space_id, p.post_comments, p.post_date, p.post_votes, p.post_is_delete, p.post_closed, p.post_top,
                 u.id, u.login, u.avatar,
+                v.votes_post_item_id, v.votes_post_user_id,  
                 s.space_id, s.space_slug, s.space_name, space_tip
                 fROM posts as p
                 INNER JOIN users as u ON u.id = p.post_user_id
                 INNER JOIN space as s ON s.space_id = p.post_space_id
+                LEFT JOIN votes_post as v ON v.votes_post_item_id = p.post_id AND v.votes_post_user_id = ".$uid."
                 WHERE p.post_space_id NOT IN(".$string.")
                 $display
                 ORDER BY p.post_id DESC LIMIT 15 OFFSET ".$offset." ";
@@ -78,12 +79,14 @@ class PostModel extends \MainModel
     }
 
     // TOP посты на главной 
-    public static function getPostTop()
+    public static function getPostTop($uid)
     {
 
         $q = XD::select('*')->from(['posts']);
         $query = $q->leftJoin(['users'])->on(['users.id'], '=', ['post_user_id'])
                 ->leftJoin(['space'])->on(['space_id'], '=', ['post_space_id'])
+                ->leftJoin(['votes_post'])->on(['votes_post_item_id'], '=', ['post_id'])
+                ->and(['votes_post_user_id'], '=', $uid)
                 ->where(['post_is_delete'], '=', 0)
                 ->orderBy(['post_comments'])->desc();
 
@@ -94,12 +97,14 @@ class PostModel extends \MainModel
     }
     
     // Полная версия поста  
-    public static function getPost($slug)
+    public static function getPost($slug, $uid)
     {
 
         $q = XD::select('*')->from(['posts']);
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['post_user_id'])
                  ->leftJoin(['space'])->on(['space_id'], '=', ['post_space_id'])
+                ->leftJoin(['votes_post'])->on(['votes_post_item_id'], '=', ['post_id'])
+                ->and(['votes_post_user_id'], '=', $uid)
                  ->where(['post_slug'], '=', $slug);
         
         $result = $query->getSelectOne();
@@ -109,12 +114,14 @@ class PostModel extends \MainModel
     }   
     
     // Страница постов участника
-    public static function getUsersPosts($login)
+    public static function getUsersPosts($login, $uid)
     {
-        
+
         $q = XD::select('*')->from(['posts']);
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['post_user_id'])
                 ->leftJoin(['space'])->on(['space_id'], '=', ['post_space_id'])
+                ->leftJoin(['votes_post'])->on(['votes_post_item_id'], '=', ['post_id'])
+                ->and(['votes_post_user_id'], '=', $uid)
                 ->where(['login'], '=', $login)
                 ->and(['post_is_delete'], '=', 0)
                 ->orderBy(['post_id'])->desc();

@@ -13,7 +13,7 @@ class VotesCommController extends \MainController
     public function votes()
     {
         
-        $comm_id = Request::getInt('id');
+        $comm_id = \Request::getPostInt('comm_id');
  
         // Проверяем
         if (!$comm_id)

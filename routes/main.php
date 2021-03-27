@@ -18,7 +18,7 @@ Route::before('Authorization@noAuth')->getGroup();
 	Route::type('post')->protect()->get('/post/create')->controller('PostController@createPost');
 	Route::get('/post/edit/{id}')->controller('PostController@editPost');
 	Route::type('post')->protect()->get('/post/editpost/{id}')->controller('PostController@editPostRecording');
-	Route::type('post')->get('/post/del/{id}')->controller('PostController@deletePost')->where(['id' => '[0-9]+']);
+	Route::type('post')->get('/post/del')->controller('PostController@deletePost');
 
 	Route::get('/users/setting')->controller('UserController@settingPage');
 	Route::get('/users/setting/avatar')->controller('UserController@settingPageAvatar');
@@ -31,12 +31,12 @@ Route::before('Authorization@noAuth')->getGroup();
 
 	// Добавление комментария / удаление 
 	Route::type('post')->protect()->get('/comment/add')->controller('CommentController@create');
-	Route::type('post')->get('/comment/del/{id}')->controller('CommentController@deletComment')->where(['id' => '[0-9]+']);
+	Route::type('post')->get('/comment/del')->controller('CommentController@deletComment');
 
 	// Помещаем свой пост в профиль
-	Route::type('post')->get('/post/addpostprof/{id}')->controller('PostController@addPostProf')->where(['id' => '[0-9]+']);
+	Route::type('post')->get('/post/addpostprof')->controller('PostController@addPostProf');
 	// В закладки
-	Route::type('post')->get('/post/addfavorite/{id}')->controller('PostController@addPostFavorite')->where(['id' => '[0-9]+']);
+	Route::type('post')->get('/post/addfavorite')->controller('PostController@addPostFavorite');
 
 	// Личные сообщения 
 	Route::get('/messages')->controller('MessagesController');  
@@ -48,10 +48,11 @@ Route::before('Authorization@noAuth')->getGroup();
 	Route::get('/notifications')->controller('NotificationsController');
 
 	// Подписываемся, отписываемся на тег
-	Route::type('post')->get('/space/hide/{id}')->controller('SpaceController@hide')->where(['id' => '[0-9]+']);
+	Route::type('post')->get('/space/hide')->controller('SpaceController@hide');
 
-	// Голосуем за комментарии
-	Route::type('post')->get('/votes/{id}')->controller('VotesCommController@votes')->where(['id' => '[0-9]+']);
+	// Голосуем
+	Route::type('post')->get('/votes/comm')->controller('VotesCommController@votes');
+    Route::type('post')->get('/votes/post')->controller('VotesPostController@votes');
 Route::endGroup();
 
 Route::before('Authorization@yesAuth')->getGroup();

@@ -45,7 +45,7 @@ class SpaceController extends \MainController
                 $row['avatar']  = 'noavatar.png';
             }  
             $row['avatar']        = $row['avatar'];
-            $row['num_comments'] = Base::ru_num('comm', $row['post_comments']);
+            $row['num_comments']  = Base::ru_num('comm', $row['post_comments']);
             $result[$ind]         = $row;
          
         }  
@@ -63,9 +63,9 @@ class SpaceController extends \MainController
  
         $uid  = Base::getUid();
         $data = [
-            'h1'         => 'Посты по пространству ' . $space,
+            'h1'         => 'Посты по пространству ' . $result[0]['space_name'],
             'title'      => $space . ' - посты по пространству | ' . $GLOBALS['conf']['sitename'],
-            'description'=> 'Страница постов по пространству ' . $space . ' на сайте ' . $GLOBALS['conf']['sitename'],
+            'description'=> 'Страница постов по пространству ' . $result[0]['space_name'] . ' на сайте ' . $GLOBALS['conf']['sitename'],
             'space_hide' => $space_hide,
         ];
 
@@ -100,7 +100,7 @@ class SpaceController extends \MainController
     public function hide()
     {
 
-        $space_id = Request::get('id'); 
+        $space_id = \Request::getPostInt('space_id'); 
 
         $account = Request::getSession('account');
         SpaceModel::SpaceHide($space_id, $account['user_id']);

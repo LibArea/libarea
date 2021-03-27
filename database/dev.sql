@@ -324,6 +324,27 @@ ALTER TABLE `users_logs`
 
 
 --
+-- Структура и дамп таблицы `votes_post`
+--
+CREATE TABLE `votes_post` (
+  `votes_post_id` int(11) NOT NULL,
+  `votes_post_item_id` int(11) NOT NULL,
+  `votes_post_points` int(11) NOT NULL,
+  `votes_post_ip` varchar(20) NOT NULL,
+  `votes_post_user_id` int(11) NOT NULL DEFAULT 1,
+  `votes_post_date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE `votes_post`
+  ADD PRIMARY KEY (`votes_post_id`),
+  ADD KEY `votes_post_item_id` (`votes_post_item_id`,`votes_post_user_id`),
+  ADD KEY `votes_post_ip` (`votes_post_item_id`,`votes_post_ip`),
+  ADD KEY `votes_post_user_id` (`votes_post_user_id`);
+
+
+ALTER TABLE `votes_post`
+  MODIFY `votes_post_id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- Индексы сохранённых таблиц
 --
  
