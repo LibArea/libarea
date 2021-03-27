@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
-        <?php if (isset($data['post']['is_delete'])) { ?>  
+        <?php if (isset($data['post']['post_is_delete'])) { ?>  
             <meta name="robots" content="noindex" />
         <?php } ?>
 
@@ -99,6 +99,12 @@
                                 </svg> 
                                 Настройки
                             </a>
+                            <a href="/messages">
+                                <svg class="md-icon">
+                                    <use xlink:href="/assets/svg/icons.svg#mail"></use>
+                                </svg>  
+                                Сообщения             
+                            </a>
                             <a href="/threads/<?= $uid['login']; ?>"> 
                                 <svg class="md-icon">
                                     <use xlink:href="/assets/svg/icons.svg#devices"></use>
@@ -109,7 +115,7 @@
                                 <svg class="md-icon">
                                     <use xlink:href="/assets/svg/icons.svg#bookmark"></use>
                                 </svg>  
-                                Избранное                   
+                                Избранное               
                             </a>
                             <?php if($uid['trust_level'] == 5) { ?>
                                 <a href="/admin" target="_black">

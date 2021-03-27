@@ -2,7 +2,7 @@
 <section>
     <div class="wrap">
 
-        <h2><?php echo $data['title']; ?></h2>
+        <h2><?php echo $data['h1']; ?></h2>
 
         <div class="box create">
             <form action="/post/create" method="post">

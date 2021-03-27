@@ -34,12 +34,12 @@ class CommentController extends \MainController
         
         $uid  = Base::getUid();
         $data = [
-            'title'       => 'Все комментарии на AreaDev',
-            'description' => 'Все комментарии на сайте AreaDev в порядке очередности',
-            'comments'    => $result,
+            'h1'          => 'Все комментарии',
+            'title'       => 'Все комментарии' . ' | ' . $GLOBALS['conf']['sitename'],
+            'description' => 'Все комментарии на сайте в порядке очередности. ' . $GLOBALS['conf']['sitename'],
         ]; 
  
-        return view("comment/all", ['data' => $data, 'uid' => $uid]);
+        return view("comment/all", ['data' => $data, 'uid' => $uid, 'comments' => $result]);
         
     }
 
@@ -143,12 +143,12 @@ class CommentController extends \MainController
         
         $uid  = Base::getUid();
         $data = [
-            'title'       => 'Комментарии ' . $login,
-            'description' => 'Страница комментариев учасника ' . $login,
-            'comments'    => $result,
+            'h1'          => 'Комментарии ' . $login,
+            'title'       => 'Комментарии ' . $login . ' | ' . $GLOBALS['conf']['sitename'],
+            'description' => 'Страница комментариев учасника ' . $login . ' на сайте ' . $GLOBALS['conf']['sitename'],
         ]; 
         
-        return view("comment/commuser", ['data' => $data, 'uid' => $uid]);
+        return view("comment/commuser", ['data' => $data, 'uid' => $uid, 'comments' => $result]);
          
     }
 

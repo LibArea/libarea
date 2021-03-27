@@ -1,11 +1,10 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
     <section>
         <div class="wrap">
-        <div class="box-users">
-             
-                <h1><?= $data['title']; ?></h1>
+            <div class="box-users">
+                <h1><?= $data['h1']; ?></h1>
                 <div class="all-users">
-                <?php foreach($data['users'] as $ind => $user) {  ?>
+                <?php foreach($users as $ind => $user) { ?>
                     <div class="column">
                         <div class="user_card">
                             <div>
@@ -27,7 +26,7 @@
                     </div>        
                 <?php } ?>
                 </div> 
-        </div>
+            </div>
         </div>
     </section>
     <br>

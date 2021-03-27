@@ -6,12 +6,12 @@
         Участники
     </a>
 
-    <h1 class="top"><?php echo $data['title']; ?></h1>
+    <h1 class="top"><?php echo $data['h1']; ?></h1>
  
     <div class="telo comments">
-        <?php if (!empty($data['comments'])) { ?>
+        <?php if (!empty($comments)) { ?>
    
-            <?php foreach ($data['comments'] as $comm) { ?> 
+            <?php foreach ($comments as $comm) { ?> 
             
                 <?php if($comm['comment_del'] == 0) { ?>
                     <div class="comm-telo_bottom">
@@ -56,3 +56,4 @@
 
         <?php } ?>
     </div> 
+<?php include TEMPLATE_DIR . '/footer.php'; ?>

@@ -26,11 +26,11 @@
                     <?php if ($data['post']['post_user_id'] == $comm['comment_user_id']) { ?><span class="authorpost">&#x21af;</span> <?php } ?>
                 </span>
                 <span class="date">
-                    <a rel="nofollow" href="/posts/<?= $data['post']['slug']; ?>#comm_<?= $comm['comment_id']; ?>">#</a>
+                    <a rel="nofollow" href="/posts/<?= $data['post']['post_slug']; ?>#comm_<?= $comm['comment_id']; ?>">#</a>
                 </span>
                 <?php if ($comm['level'] != 0) { ?> 
                     <span class="date">
-                        <a rel="nofollow" href="/posts/<?= $data['post']['slug']; ?>#comm_<?= $comm['comment_on']; ?>">&#8679;</a>
+                        <a rel="nofollow" href="/posts/<?= $data['post']['post_slug']; ?>#comm_<?= $comm['comment_on']; ?>">&#8679;</a>
                     </span>
                 <?php } ?> 
             </div>

@@ -11,16 +11,28 @@ class AdminModel extends \MainModel
     public static function UsersAll()
     {
 
-        $q = XD::select(['id', 'login', 'name', 'email', 'reg_ip', 'trust_level', 'created_at', 'updated_at', 'deleted', 'avatar', 'logs_id','logs_user_id','logs_login','logs_trust_level','logs_ip_address','logs_date'])->from(['users']);
-        $query = $q->leftJoin(['users_logs'])->on(['id'], '=', ['logs_user_id'])
-                 ->orderBy(['id'])->desc();
+        $result = XD::select('*')->from(['users'])->orderBy(['id'])->desc()->getSelect();
+        //$query = $q->leftJoin(['users_logs'])->on(['id'], '=', ['logs_user_id'])
+                 //->groupBy (['logs_user_id'])
+                // ->orderBy(['logs_user_id'])->desc();
 
-        $result = $query->getSelect();  // toString()
+       // $result = $query->getSelect();  // toString()
      
         return $result;
 
     }
 
+    // Страница участников
+    public static function UsersLogAll($id)
+    {
+
+        $result = XD::select('*')->from(['users_logs'])->where(['logs_user_id'], '=', $id)
+                ->orderBy(['id'])->desc()->getSelectOne();
+                
+        return $result;
+
+    }
+    
     
     // Получение информации по id
     public static function UserId($uid)
@@ -85,10 +97,12 @@ class AdminModel extends \MainModel
 
             if($status == 0) {   
             	// Забанить повторно
-                 XD::update(['users_banlist'])->set(['banlist_status'], '=', 1)->where(['banlist_user_id'], '=', $uid)->run();  
+                XD::update(['users_banlist'])->set(['banlist_status'], '=', 1)->where(['banlist_user_id'], '=', $uid)->run(); 
+                XD::update(['users'])->set(['ban_list'], '=', 1)->where(['id'], '=', $uid)->run();                 
             } else {  
                 // Разбанить
-                XD::update(['users_banlist'])->set(['banlist_status'], '=', 0)->where(['banlist_user_id'], '=', $uid)->run();  
+                XD::update(['users_banlist'])->set(['banlist_status'], '=', 0)->where(['banlist_user_id'], '=', $uid)->run(); 
+                XD::update(['users'])->set(['ban_list'], '=', 0)->where(['id'], '=', $uid)->run();                 
             }
             
         } else {  
@@ -101,6 +115,8 @@ class AdminModel extends \MainModel
             $date = date("Y-m-d H:i:s");
 
             XD::insertInto(['users_banlist'], '(', ['banlist_user_id'], ',', ['banlist_ip'], ',', ['banlist_bandate'], ',', ['banlist_int_num'], ',', ['banlist_int_period'], ',', ['banlist_status'], ',', ['banlist_autodelete'], ',', ['banlist_cause'], ')')->values( '(', XD::setList([$uid, $ip, $date, '', '', 1, 0, '']), ')' )->run();
+            
+            XD::update(['users'])->set(['ban_list'], '=', 1)->where(['id'], '=', $uid)->run();  
             
         }
         

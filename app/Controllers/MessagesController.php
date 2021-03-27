@@ -127,6 +127,10 @@ class MessagesController extends \MainController
             }
 		}
         
+        if(!$recipient_user['avatar'] ) {
+                $recipient_user['avatar'] = 'noavatar.png';
+            } 
+        
         $uid  = Base::getUid();
         $data = [
             'title'          => 'Диалог',

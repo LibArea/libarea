@@ -6,9 +6,9 @@
         <?php } ?>    
     
         <div class="telo">
-            <?php if (!empty($data['posts'])) { ?> 
+            <?php if (!empty($posts)) { ?> 
           
-                <?php foreach ($data['posts'] as  $post) { ?>
+                <?php foreach ($posts as  $post) { ?>
                     <div class="post-telo">
                         <?php if (!$uid['id']) { ?> 
                             <div id="vot<?= $post['post_id']; ?>" class="voters">
@@ -24,7 +24,7 @@
                         <div class="post-body">
                             <a class="u-url" href="/posts/<?= $post['post_slug']; ?>">
                                 <h2 class="titl"><?= $post['post_title']; ?></h2>
-                                <?php if ($post['is_delete'] == 1) { ?> 
+                                <?php if ($post['post_is_delete'] == 1) { ?> 
                                     <svg class="md-icon delete">
                                         <use xlink:href="/assets/svg/icons.svg#trash"></use>
                                     </svg>
@@ -53,12 +53,12 @@
                                     </a> 
                                 </span>
                                 <span class="date"> 
-                                   <?= $post['date'] ?>
+                                   <?= $post['post_date'] ?>
                                 </span>
-                                <?php if($post['num_comments'] !=0) { ?> 
+                                <?php if($post['post_comments'] !=0) { ?> 
                                     <span class="otst"> | </span>
                                     <a class="u-url" href="/posts/<?= $post['post_slug']; ?>">
-                                       <?= $post['num_comments']; ?>  <?= $post['post_comments']; ?>  
+                                       <?= $post['post_comments']; ?>  <?= $post['num_comments']; ?>  
                                     </a>
                                 <?php } ?>
                             </div>

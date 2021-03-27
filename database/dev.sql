@@ -212,7 +212,8 @@ CREATE TABLE `users` (
   `about` varchar(255) DEFAULT NULL,
   `rating` int(11) NOT NULL DEFAULT 0,
   `status` varchar(250) DEFAULT NULL,
-  `my_post` int(11) DEFAULT NULL COMMENT 'Пост выведенный в профиль'
+  `my_post` int(11) DEFAULT NULL COMMENT 'Пост выведенный в профиль',
+  `ban_list` tinyint(1) DEFAULT 0,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --

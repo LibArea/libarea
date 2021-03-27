@@ -8,6 +8,7 @@ class DefaultMiddlewareBefore extends \MainMiddleware
 
         // Your code here.
         // Разместите здесь свой код.
+        
 
     }
 

@@ -3,7 +3,7 @@
     <div class="wrap">
         <div class="right">
             <div class="space-bg no-mob">
-                <?= $data['posts'][0]['space_description']; ?>
+                <?= $posts[0]['space_description']; ?>
             </div>
              
             <?php if(!$uid['id']) { ?> 
@@ -15,21 +15,21 @@
                 <div> 
                 <br>  
                     <?php if($data['space_hide'] == 1) { ?> 
-                        <div data-id="<?= $data['posts'][0]['space_id']; ?>" class="hide-space-id add-space">Подписаться</div>
+                        <div data-id="<?= $posts[0]['space_id']; ?>" class="hide-space-id add-space">Подписаться</div>
                     <?php } else { ?> 
-                        <div data-id="<?= $data['posts'][0]['space_id']; ?>" class="hide-space-id no-space">Отписаться</div>
+                        <div data-id="<?= $posts[0]['space_id']; ?>" class="hide-space-id no-space">Отписаться</div>
                     <?php } ?>   
                 </div>  
             <?php } ?>    
                         
-        </div>
+        </div> 
         
-        <h1><?= $data['title']; ?>: <?= $data['space']; ?></h1>
+        <h1><?= $data['h1']; ?></h1>
  
         <div class="telo comments">
-            <?php if (!empty($data['posts'])) { ?>
+            <?php if (!empty($posts)) { ?>
          
-                <?php foreach ($data['posts'] as  $post) { ?> 
+                <?php foreach ($posts as  $post) { ?> 
  
                     <div id="vot<?= $post['post_id']; ?>" class="voters">
                         <div data-id="<?= $post['post_id']; ?>" class="post-up-id"></div>
@@ -45,13 +45,13 @@
                             <span class="user"> 
                                 <a href="/u/<?= $post['login']; ?>"><?= $post['login']; ?></a> 
                             </span>
-                            <span class="date"> 
-                                <?= $post['date']; ?>
+                            <span class="date">
+                                <?= $post['post_date']; ?>
                             </span>
-                            <?php if($post['num_comments'] !=0) { ?> 
+                            <?php if($post['post_comments'] !=0) { ?> 
                                 <span class="otst"> | </span>
                                 <a class="u-url" href="/posts/<?= $post['post_slug']; ?>">
-                                    <?= $post['num_comments']; ?>  <?= $post['post_comments']; ?>
+                                    <?= $post['post_comments']; ?>  <?= $post['num_comments']; ?>
                                 </a>                                
                             <?php } ?>
                         </div>  

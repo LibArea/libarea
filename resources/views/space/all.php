@@ -2,20 +2,20 @@
 <section>
     <div class="wrap">
         <div class="telo detail">
-            <h1><?= $data['title']; ?></h1>
+            <h1><?= $data['h1']; ?></h1>
             <p>Cимвол (∞) используется для обозначения разделов сайта: ∞ cms, ∞ флуд, ∞ вопросы и т.д.</p>
             <div class="telo space">
-                <?php if (!empty($data['space'])) { ?>
+                <?php if (!empty($space)) { ?>
               
-                    <?php foreach ($data['space'] as  $space) { ?>  
+                    <?php foreach ($space as  $sp) { ?>  
                         <div class="space-telo">
                             <span class="date"> 
-                             ∞  <a title="<?= $space['space_name']; ?>" class="space space_<?= $space['space_tip']; ?>" href="/s/<?= $space['space_slug']; ?>">
-                                    <?= $space['space_name']; ?>
+                             ∞  <a title="<?= $sp['space_name']; ?>" class="space space_<?= $sp['space_tip']; ?>" href="/s/<?= $sp['space_slug']; ?>">
+                                    <?= $sp['space_name']; ?>
                                 </a> 
                             </span> 
                             <span class="date space-des">  
-                                <?= $space['space_description']; ?>    
+                                <?= $sp['space_description']; ?>    
                             </span>
                         </div>
                     <?php } ?>

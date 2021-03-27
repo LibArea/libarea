@@ -9,16 +9,13 @@ body {
     color: #333;
     min-height: 100%;
 }
-
 html, body {
     margin: 0;
     padding: 0;
 }
-
 *, *:before, *:after {
     box-sizing: inherit;
 }
-
 a {
 	color: #2562dc;
 	cursor: pointer;
@@ -131,6 +128,7 @@ header .wrap {
 }
 .sidebar h3 {
     text-transform: uppercase;
+    letter-spacing: 1px;
     font-size:11px;
     margin: 2px 0;
 }
@@ -456,9 +454,6 @@ input.form-about {width: 250px;}
 .titl {
     margin-bottom: 0px;
 }
-.post {
-
-}
 .date {
     color: #717171;
     text-transform: lowercase;
@@ -470,6 +465,7 @@ input.form-about {width: 250px;}
 .footer a, .footer {
     font-size: 13px;
     color: #717171;
+    text-transform: lowercase;
 }
 .footer a:hover {
     color: #555;
@@ -499,7 +495,6 @@ a.space {
 	vertical-align: text-top;
     text-transform: lowercase;
 }
-
 a.space_2 {
     background-color: #f9ddde;
     border-color: #f0b2b8;
@@ -536,7 +531,6 @@ a.space_3 {
     padding: 5px;
     text-align: center;
 }
-
 
 /* Комментарии */
 .authorpost {
@@ -650,6 +644,10 @@ ol.comment-telo {
 .msg-telo {
    margin: 10px; 
    padding: 10px;
+}
+.msg-ava {
+    width: 18px;
+    border-radius: 50%;
 }
 .msg-telo.active {
    background-color: lightyellow;

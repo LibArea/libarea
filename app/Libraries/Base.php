@@ -5,13 +5,15 @@ use App\Models\UserModel;
 
 class Base
 {
-
+ 
     public static function getUid() {
         $user = Request::getSession('account') ?? [];
         $uid = [];
+
         if (!empty($user['user_id'])) {
+
             $usr = UserModel::getUserId($user['user_id']);
-            
+ 
             if(!$usr['avatar'] ) {
                 $usr['avatar'] = 'noavatar.png';
             } 
@@ -28,7 +30,6 @@ class Base
             $uid['trust_level'] = null;
         }
         $uid['msg']     = self::getMsg();
-        
         return $uid;
     }
  

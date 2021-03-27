@@ -27,15 +27,17 @@ class PostController extends \MainController
  
         if($account = Request::getSession('account')){
             // Получаем все теги отписанные участником
-            $space_user = SpaceModel::getSpaceUser($account['user_id']);
-            $user_id    = $account['user_id'];
+            $space_user  = SpaceModel::getSpaceUser($account['user_id']);
+            $user_id     = $account['user_id'];
+            $trust_level = $account['trust_level'];
         } else {
-            $space_user = [];
-            $user_id    = 0;
+            $space_user  = [];
+            $user_id     = 0;
+            $trust_level = 0;
         }
             
         $pagesCount = PostModel::getPostHomeCount($space_user); 
-        $posts      = PostModel::getPostHome($page, $space_user, $account);
+        $posts      = PostModel::getPostHome($page, $space_user, $trust_level);
 
         $result = Array();
         foreach($posts as $ind => $row){
@@ -43,13 +45,10 @@ class PostController extends \MainController
             if(!$row['avatar'] ) {
                 $row['avatar'] = 'noavatar.png';
             } 
+            
             $row['avatar']         = $row['avatar'];
-            $row['title']          = $row['post_title'];
-            $row['slug']           = $row['post_slug']; 
-            $row['num_comments']   = $row['post_comments'];
-            $row['is_delete']      = $row['post_is_delete'];
-            $row['post_comments']  = Base::ru_num('comm', $row['post_comments']);
-            $row['date']           = Base::ru_date($row['post_date']);
+            $row['num_comments']   = Base::ru_num('comm', $row['post_comments']);
+            $row['post_date']      = Base::ru_date($row['post_date']);
             $result[$ind]          = $row;
          
         }  
@@ -74,21 +73,21 @@ class PostController extends \MainController
 
         $uid  = Base::getUid();
         $data = [
-            'title'            => 'AreaDev - посты. Главная страница форума', 
-            'description'      => 'AreaDev - главная страница сайта, форум, посты',
-            'posts'            => $result,
+            'title'            => 'Посты сообщества | ' . $GLOBALS['conf']['sitename'], 
+            'description'      => 'Главная страница сообщества, форум, посты. ' . $GLOBALS['conf']['sitename'],
             'space_hide'       => $space_hide,
             'latest_comments'  => $result_comm,
             'pagesCount'       => $pagesCount,
             'pNum'             => $page,
         ];
 
-        return view("home", ['data' => $data, 'uid' => $uid]);
+        return view("home", ['data' => $data, 'uid' => $uid, 'posts' => $result]);
     }
 
     // Посты с начальными не нулевыми голосами, с голосованием, например, от 5
-    public function topPost() {
-        // пока Top - по количеству комментариев  
+    public function topPost() { 
+    
+        // Пока Top - по количеству комментариев  
         $posts = PostModel::getPostTop();
  
         $result = Array();
@@ -99,12 +98,8 @@ class PostController extends \MainController
             } 
  
             $row['avatar']        = $row['avatar'];
-            $row['title']         = $row['post_title'];
-            $row['slug']          = $row['post_slug'];
-            $row['num_comments']  = $row['post_comments'];   
-            $row['is_delete']     = $row['post_is_delete'];     
-            $row['post_comments'] = Base::ru_num('comm', $row['post_comments']);
-            $row['date']          = Base::ru_date($row['post_date']);
+            $row['num_comments']  = Base::ru_num('comm', $row['post_comments']);
+            $row['post_date']     = Base::ru_date($row['post_date']);
             $result[$ind]         = $row;
          
         }  
@@ -128,25 +123,23 @@ class PostController extends \MainController
         
         $uid  = Base::getUid();
         $data = [
-            'title'            => 'Посты - главная страница сайта', 
-            'description'      => 'Самые популярные посты на сайте AreaDev',
+            'title'            => 'Популярные посты | ' . $GLOBALS['conf']['sitename'], 
+            'description'      => 'Самые популярные посты сообществе. ' . $GLOBALS['conf']['sitename'],
             'latest_comments'  => 0,
             'space_hide'       => 0,
-            'posts'            => $result,
             'latest_comments'  => $result_comm,
             'pagesCount'       => 0,
         ];
 
-        return view("home", ['data' => $data, 'uid' => $uid]);
+        return view("home", ['data' => $data, 'uid' => $uid, 'posts' => $result]);
     }
 
     // Полный пост
     public function view()
     {
-
-        $uid = Request::getSession('account') ?? []; 
-        if(!empty($uid['user_id'])) {
-            $uid   = $uid['user_id'];
+ 
+        if(!empty($_SESSION['account']['user_id'])) {
+            $uid   = $_SESSION['account']['user_id'];
         } else {
             $uid   = 0;
         }
@@ -156,6 +149,8 @@ class PostController extends \MainController
         
         // Получим пост по slug
         $slug = Request::get('slug');
+        
+        $post = []; 
         $post = PostModel::getPost($slug);
  
         // Если нет поста
@@ -178,59 +173,46 @@ class PostController extends \MainController
             $post['edit_date'] = NULL;
         }
         
-        // Перечислим пока все, чтобы знать необходимые... 
-        $data_post = [
-            'id'            => $post['post_id'],
-            'title'         => $post['post_title'], 
-            'content'       => $Parsedown->text($post['post_content']), 
-            'post_closed'   => $post['post_closed'],
-            'post_user_id'  => $post['post_user_id'],
-            'date'          => Base::ru_date($post['post_date']),
-            'edit_date'     => Base::ru_date($post['edit_date']),
-            'slug'          => $post['post_slug'],
-            'login'         => $post['login'],
-            'my_post'       => $post['my_post'],
-            'avatar'        => $post['avatar'],
-            'num_comments'  => $post['post_comments'],   
-            'is_delete'     => PostModel::isThePostDeleted($post['post_id']),              
-            'space_tip'     => $post['space_tip'],
-            'space_slug'    => $post['space_slug'],
-            'space_name'    => $post['space_name'],            
-            'post_comments' => Base::ru_num('comm', $post['post_comments']), 
-            'favorite_post' => PostModel::getMyFavorite($post['post_id'], $uid) ,
-            
-        ];
+        // Обработает некоторые поля
+        $post['post_content']   = $Parsedown->text($post['post_content']);
+        $post['post_date']      = Base::ru_date($post['post_date']);
+        $post['edit_date']      = Base::ru_date($post['edit_date']);
+        $post['avatar']         = $post['avatar'];
+        $post['num_comments']   = Base::ru_num('comm', $post['post_comments']); 
+        $post['favorite_post']  = PostModel::getMyFavorite($post['post_id'], $uid);
         
+
         // Получим комментарии
-        $comm = CommentModel::getCommentsPost($post['post_id']);
+        $post_comments = CommentModel::getCommentsPost($post['post_id']);
  
-        $result = Array();
-        foreach($comm as $ind => $row){
+        $comments = Array();
+        foreach($post_comments as $ind => $row){
             
             if(!$row['avatar'] ) {
                 $row['avatar']  = 'noavatar.png';
             } 
  
-            $row['comment_on'] = $row['comment_on'];  
-            $row['avatar']     = $row['avatar'];
-            $row['content']    = $Parsedown->text($row['comment_content']);
-            $row['date']       = Base::ru_date($row['comment_date']);
-            $row['after']      = $row['comment_after'];
-            $row['del']        = $row['comment_del'];
-            $row['comm_vote_status'] = VotesCommentModel::getVoteStatus($row['comment_id'], $uid);
-            $result[$ind]    = $row;
+            $row['comment_on']          = $row['comment_on'];  
+            $row['avatar']              = $row['avatar'];
+            $row['content']             = $Parsedown->text($row['comment_content']);
+            $row['comment_date']        = Base::ru_date($row['comment_date']);
+            $row['after']               = $row['comment_after'];
+            $row['del']                 = $row['comment_del'];
+            $row['comm_vote_status']    = VotesCommentModel::getVoteStatus($row['comment_id'], $uid);
+            $comments[$ind]             = $row;
          
         }
-        
+       
+        // Комментарии
+        $comms = $this->buildTree(0, 0, $comments);
+  
         $uid  = Base::getUid();
         $data = [
-            'title'        => $data_post['title'] . ' | AreaDev', 
-            'description'  => 'Тут надо сделать описание',
-            'post'         => $data_post,
-            'comments'     => $this->buildTree(0, 0, $result),
+            'title'        => $post['post_title'] . ' | ' . $GLOBALS['conf']['sitename'], 
+            'description'  => 'Тут надо сделать описание. ' . $GLOBALS['conf']['sitename'],
         ]; 
         
-        return view("post/view", ['data' => $data, 'uid' => $uid]);
+        return view("post/view", ['data' => $data, 'post' => $post, 'comms' => $comms,  'uid' => $uid]);
         
     }
     
@@ -252,50 +234,49 @@ class PostController extends \MainController
     {
         
         $login = Request::get('login');
-
-        $posts  = PostModel::getUsersPosts($login); 
+        $post_user  = PostModel::getUsersPosts($login); 
         
-        // Покажем 404
-        if(!$posts) {
+        // Если нет такого пользователя
+        if(!$post_user) {
             include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
             hl_preliminary_exit();
         }
         
         $result = Array();
-        foreach($posts as $ind => $row){
+        foreach($post_user as $ind => $row){
              
             if(!$row['avatar'] ) {
                 $row['avatar']  = 'noavatar.png';
             } 
  
-            $row['avatar']  = $row['avatar'];
-            $row['title']   = $row['post_title'];
-            $row['slug']    = $row['post_slug'];
-            $row['date']    = Base::ru_date($row['post_date']);
-            $result[$ind]   = $row;
+            $row['avatar']      = $row['avatar'];
+            $row['post_title']  = $row['post_title'];
+            $row['post_slug']   = $row['post_slug'];
+            $row['post_date']   = Base::ru_date($row['post_date']);
+            $result[$ind]       = $row;
          
         }
  
         $uid  = Base::getUid();
         $data = [
-            'title'         => 'Посты ' . $login,
-            'description'   => 'Посты участника ' . $login,
-            'posts'         => $result,
+            'h1'            => 'Посты ' . $login, 
+            'title'         => 'Посты ' . $login . ' | ' . $GLOBALS['conf']['sitename'],
+            'description'   => 'Посты участника ' . $login . ' с сообществе ' . $GLOBALS['conf']['sitename'],
         ]; 
         
-        return view("post/user", ['data' => $data, 'uid' => $uid]);
+        return view("post/user", ['data' => $data, 'uid' => $uid, 'posts' => $result]);
         
     }
     
     // Форма добавление поста
     public function addPost() 
     {
-
+        // Будем проверять ограничение на частоту 
         // print_r(PostModel::getPostSpeed(1));
-        
         $uid  = Base::getUid();
         $data = [
-            'title'    => 'Добавить пост',
+            'h1'            => 'Добавить пост',
+            'title'         => 'Добавить пост' . ' | ' . $GLOBALS['conf']['sitename'],
             'description'   => 'Страница добавления поста',
         ];  
        
@@ -313,13 +294,10 @@ class PostController extends \MainController
         
         // IP адрес и ID кто добавляет
         $post_ip_int  = Request::getRemoteAddress();
+        $post_user_id = $_SESSION['account']['user_id'];
         
         // Получаем id тега
         $space_id     = Request::getPost('space');
-        
-        // id того, кто добавляет пост
-        $account = Request::getSession('account');
-        $post_user_id = $account['user_id'];
         
         // Проверяем длину title
         if (Base::getStrlen($post_title) < 6 || Base::getStrlen($post_title) > 260)
@@ -332,12 +310,12 @@ class PostController extends \MainController
         // Проверяем длину тела
         if (Base::getStrlen($post_content) < 6 || Base::getStrlen($post_content) > 2500)
         {
-            Base::addMsg('Длина заголовка должна быть от 6 до 2500 знаков', 'error');
+            Base::addMsg('Длина поста должна быть от 6 до 2500 знаков', 'error');
             redirect('/post/add');
             return true;
         }
         
-        // Проверяем выбор тега
+        // Проверяем выбор пространства
         if ($space_id == '')
         {
             Base::addMsg('Выберите пространство', 'error');
@@ -369,28 +347,20 @@ class PostController extends \MainController
         if(!$post){
             redirect('/');
         }
-        
+
         // Редактировать может только автор
-        $account = Request::getSession('account');
-        if ($post['post_user_id'] != $account['user_id']) {
+        if ($post['post_user_id'] != $_SESSION['account']['user_id']) {
             redirect('/');
         }
         
         $uid  = Base::getUid();
         $data = [
-            'title'         => 'Изменить пост', 
-            'description'   => 'Изменение поста...',
-            'id'            => $post_id,
-            'title_post'    => htmlspecialchars($post['post_title']),
-            'content'       => $post['post_content'],
-            'post_closed'   => $post['post_closed'],
-            'post_top'      => $post['post_top'],
-            'space_tip'     => $post['space_tip'],
-            'space_slug'    => $post['space_slug'],
-            'space_name'    => $post['space_name'],  
+            'h1'            => 'Изменить пост',
+            'title'         => 'Измененение поста ' . ' | ' . $GLOBALS['conf']['sitename'], 
+            'description'   => 'Изменение поста на ' . $GLOBALS['conf']['sitename'],
         ];
         
-        return view("post/edit", ['data' => $data, 'uid' => $uid]);
+        return view("post/edit", ['data' => $data, 'uid' => $uid, 'post' => $post]);
         
     }
     
@@ -398,7 +368,6 @@ class PostController extends \MainController
     public function editPostRecording() 
     {
         
- 
         $post_id        = Request::getPost('post_id');
         $post_title     = Request::getPost('post_title');
         $post_content   = Request::getPost('post_content');
@@ -413,13 +382,12 @@ class PostController extends \MainController
         }
         
         // Редактировать может только автор
-        $account = Request::getSession('account');
-        if ($post['post_user_id'] != $account['user_id']) {
+        if ($post['post_user_id'] != $_SESSION['account']['user_id']) {
             redirect('/');
         }
         
         // Проверяем длину title
-        if (strlen($post_title) < 6 || strlen($post_title) > 320)
+        if (Base::getStrlen($post_title) < 6 || Base::getStrlen($post_title) > 320)
         {
             Base::addMsg('Длина заголовка должна быть от 6 до 320 знаков', 'error');
             redirect('/post/edit' .$post_id);
@@ -427,7 +395,7 @@ class PostController extends \MainController
         }
         
         // Проверяем длину тела
-        if (strlen($post_content) < 6 || strlen($post_content) > 2500)
+        if (Base::getStrlen($post_content) < 6 || Base::getStrlen($post_content) > 2500)
         {
             Base::addMsg('Длина заголовка должна быть от 6 до 2520 знаков', 'error');
             redirect('/post/edit' .$post_id);
@@ -450,7 +418,7 @@ class PostController extends \MainController
             'post_top'      => $post_top,
         ];
         
-        
+        // Перезапишем пост
         PostModel::editPost($data);
         
         redirect('/posts/' . $post['post_slug']);
@@ -467,12 +435,11 @@ class PostController extends \MainController
         $post = PostModel::getPostId($post_id); 
         
         // Это делать может только может только автор
-        $account = Request::getSession('account');
-        if ($post['post_user_id'] != $account['user_id']) {
+        if ($post['post_user_id'] != $_SESSION['account']['user_id']) {
             return true;
         }
         
-        PostModel::addPostProfile($post_id, $account['user_id']);
+        PostModel::addPostProfile($post_id, $_SESSION['account']['user_id']);
        
         return true;
         
@@ -483,10 +450,13 @@ class PostController extends \MainController
     {
 
         $post_id = Request::getPost('post_id');
-        $post = PostModel::getPostId($post_id); 
+        $post    = PostModel::getPostId($post_id); 
         
-        $account = Request::getSession('account');
-        PostModel::setPostFavorite($post_id, $account['user_id']);
+        if(!$post){
+            redirect('/');
+        }
+        
+        PostModel::setPostFavorite($post_id, $_SESSION['account']['user_id']);
        
         return true;
         

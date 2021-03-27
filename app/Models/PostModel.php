@@ -12,7 +12,7 @@ class PostModel extends \MainModel
     // Посты на главной 
     // $page - страницы
     // $tags_user - список id отписанных тегов
-    public static function getPostHome($page, $space_user, $account)
+    public static function getPostHome($page, $space_user, $trust_level)
     {
           
         $result = Array();
@@ -28,10 +28,9 @@ class PostModel extends \MainModel
 
         $offset = ($page-1) * 15; 
         
-        if(!$account) {$account['trust_level'] = 0;}
-        
+       
         // Показывать удаленный пост и для персонала
-        if($account['trust_level'] != 5) { 
+        if($trust_level != 5) { 
             $display = 'AND p.post_is_delete  = 0';
         } else {
             $display = '';

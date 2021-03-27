@@ -12,14 +12,16 @@ class SpaceController extends \MainController
     public function index()
     {
 
+       $space = SpaceModel::getSpaceHome();
+
         $uid  = Base::getUid();
         $data = [
-            'title'       => 'Все пространства',
-            'description' => 'Страница всех пространств сайта AreaDev',
-            'space'       => SpaceModel::getSpaceHome(),
+            'h1'       => 'Все пространства',
+            'title'       => 'Все пространства | ' . $GLOBALS['conf']['sitename'],
+            'description' => 'Страница всех пространств сайта на ' . $GLOBALS['conf']['sitename'],
         ];
 
-        return view("space/all", ['data' => $data, 'uid' => $uid]);
+        return view("space/all", ['data' => $data, 'uid' => $uid, 'space' => $space]);
     }
 
     // Посты по пространству
@@ -43,10 +45,7 @@ class SpaceController extends \MainController
                 $row['avatar']  = 'noavatar.png';
             }  
             $row['avatar']        = $row['avatar'];
-            $row['post_votes']    = $row['post_votes'];
-            $row['date']          = $row['post_date'];
-            $row['num_comments']  = $row['post_comments']; 
-            $row['post_comments'] = Base::ru_num('comm', $row['post_comments']);
+            $row['num_comments'] = Base::ru_num('comm', $row['post_comments']);
             $result[$ind]         = $row;
          
         }  
@@ -61,32 +60,39 @@ class SpaceController extends \MainController
              $space_hide = NULL;
              
         }
-        
+ 
         $uid  = Base::getUid();
         $data = [
-            'title'      => 'Посты по пространству',
-            'description'=> 'Страница постов по пространству на сайте AreaDev',
-            'posts'      => $result,
-            'space'      => $space,
+            'h1'         => 'Посты по пространству ' . $space,
+            'title'      => $space . ' - посты по пространству | ' . $GLOBALS['conf']['sitename'],
+            'description'=> 'Страница постов по пространству ' . $space . ' на сайте ' . $GLOBALS['conf']['sitename'],
             'space_hide' => $space_hide,
         ];
 
-        return view("space/spaceposts", ['data' => $data, 'uid' => $uid]);
+        return view("space/spaceposts", ['data' => $data, 'uid' => $uid, 'posts' => $result]);
         
     }
 
-    // Изменение пространства
+    // Изменение пространства (в стадии разработки)
     public function spaceForma()
     {
         
+        // Доступ только персоналу
+        $account = Request::getSession('account');
+        if ($account['trust_level'] != 5) {
+            return false;
+        }
+        
+        $space = Request::get('space');
+        
         $uid  = Base::getUid();
         $data = [
-            'title' => 'Изменение пространства',
-            'description' => 'Страница изменения пространства',
-            'space' => SpaceModel::getSpaceHome(),
+            'h1'            => 'Изменение пространства',
+            'title'         => 'Изменение пространства | ' . $GLOBALS['conf']['sitename'],
+            'description'   => 'Страница изменения пространства на' . $GLOBALS['conf']['sitename'],
         ]; 
- 
-        return view("space/formaspace", ['data' => $data, 'uid' => $uid]);
+
+        return view("space/formaspace", ['data' => $data, 'uid' => $uid, 'space' => $space]);
         
     }
     

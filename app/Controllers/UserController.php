@@ -31,12 +31,12 @@ class UserController extends \MainController
         
         $uid  = Base::getUid();
         $data = [
-          'title' => 'Все участники',
-          'description' => 'Список всех участников сортированных по дате регистрации сайте AreaDev',
-          'users' => $result,
+            'h1'            => 'Все участники',
+            'title'         => 'Все участники' . ' | ' . $GLOBALS['conf']['sitename'],
+            'description'   => 'Список всех участников сортированных по дате регистрации сайте ' . $GLOBALS['conf']['sitename'],
         ];
 
-        return view('/user/all', ['data' => $data, 'uid' => $uid]);
+        return view('/user/all', ['data' => $data, 'uid' => $uid, 'users' => $result]);
     }
 
     // Страница участника
@@ -60,23 +60,17 @@ class UserController extends \MainController
  
         $uid  = Base::getUid();
         $data =[
-          'title'         => $user['login'] . ' - профиль',
-          'description'   => 'Страница профиля учасника (постов, комментариев) ' . $user['login'],
-          'id'            => $user['id'],
-          'login'         => $user['login'],
-          'name'          => $user['name'],
-          'about'         => $user['about'],
-          'avatar'        => $user['avatar'],
-          'my_post'       => $user['my_post'],
-          'post'          => $post,
-          'created_at'    => Base::ru_date($user['created_at']),
-          'trust_level'   => UserModel::getUserTrust($user['id']),
-          'post_num_user' => UserModel::getUsersPostsNum($user['id']),
-          'comm_num_user' => UserModel::getUsersCommentsNum($user['id']),
-          'fav_num_user'  => UserModel::getUsersFavoriteNum($user['id']),
+          'h1'              => $user['login'] . ' - профиль',
+          'title'           => $user['login'] . ' - профиль' . ' | ' . $GLOBALS['conf']['sitename'],
+          'description'     => 'Страница профиля учасника (посты, комментарии) ' . $user['login'] . ' на ' . $GLOBALS['conf']['sitename'],
+          'created_at'      => Base::ru_date($user['created_at']),
+          'trust_level'     => UserModel::getUserTrust($user['id']),
+          'post_num_user'   => UserModel::getUsersPostsNum($user['id']),
+          'comm_num_user'   => UserModel::getUsersCommentsNum($user['id']),
+          'fav_num_user'    => UserModel::getUsersFavoriteNum($user['id']),
         ];
 
-        return view('/user/profile', ['data' => $data, 'uid' => $uid]);
+        return view('/user/profile', ['data' => $data, 'uid' => $uid, 'user' => $user, 'post' => $post]);
 
     }  
 
@@ -231,7 +225,6 @@ class UserController extends \MainController
         }
     }
     
-
     // Изменение пароля
     function settingSecurityEdit()
     {
@@ -272,7 +265,6 @@ class UserController extends \MainController
         
     }
     
-    
     // Страница закладок участника
     function userFavorite ()
     {
@@ -305,11 +297,11 @@ class UserController extends \MainController
         
         $uid  = Base::getUid();
         $data = [
-            'title'         => 'Избранное ' . $login,
-            'description'   => 'Избранные посты участника ' . $login,
-            'favorite'      => $result,
+            'h1'            => 'Избранное ' . $login,
+            'title'         => 'Избранное ' . $login . ' | ' . $GLOBALS['conf']['sitename'],
+            'description'   => 'Избранные посты участника ' . $login . ' в сообществе ' . $GLOBALS['conf']['sitename'],
         ]; 
         
-        return view("user/favorite", ['data' => $data, 'uid' => $uid]);   
+        return view("user/favorite", ['data' => $data, 'uid' => $uid, 'favorite' => $result]);   
     }
 }

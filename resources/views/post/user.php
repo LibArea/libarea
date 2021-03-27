@@ -5,12 +5,12 @@
         <a title="Участники" class="avatar-user right" href="/users">
             Участники
         </a>
-        <h1 class="top"><?php echo $data['title']; ?></h1>
+        <h1 class="top"><?php echo $data['h1']; ?></h1>
 
         <div class="telo posts">
-            <?php if (!empty($data['posts'])) { ?>
+            <?php if (!empty($posts)) { ?>
           
-                <?php foreach ($data['posts'] as $post) { ?> 
+                <?php foreach ($posts as $post) { ?> 
               
                     <div id="vot<?php echo $post['post_id']; ?>" class="voters">
                         <div data-id="<?php echo $post['post_id']; ?>" class="post-up-id"></div>
@@ -18,8 +18,8 @@
                     </div>
                 
                     <div class="post-telo">
-                        <a class="u-url" href="/posts/<?php echo $post['slug']; ?>">
-                            <h3 class="titl"><?php echo $post['title']; ?></h3>
+                        <a class="u-url" href="/posts/<?php echo $post['post_slug']; ?>">
+                            <h3 class="titl"><?php echo $post['post_title']; ?></h3>
                         </a>
                         
                         <a class="space space_<?= $post['space_tip'] ?>" href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
@@ -32,7 +32,7 @@
                                 <a href="/u/<?php echo $post['login']; ?>"><?php echo $post['login']; ?></a> 
                             </span>
                             <span class="date"> 
-                                <?php echo $post['date']; ?>
+                                <?php echo $post['post_date']; ?>
                             </span>
                             <?php if($post['post_comments'] !=0) { ?> 
                                 <span class="otst"> | </span>

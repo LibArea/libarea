@@ -8,7 +8,8 @@
             <?= csrf_field() ?>
 				<input type="hidden" name="recipient" value="<?= $data['recipient_user']['id']; ?>" />
                 
-				Для <a href="/users/<?= $data['recipient_user']['login']; ?>" class="msg-user">
+				Для <img src="/uploads/avatar/small/<?= $data['recipient_user']['avatar']; ?>" class="msg-ava">
+                    <a href="/users/<?= $data['recipient_user']['login']; ?>" class="msg-user">
                     <?= $data['recipient_user']['login']; ?>
                 </a><br>
  																																								   
@@ -25,7 +26,7 @@
                     <div <?php if ($val['uid'] == $uid['id']) { ?> class="active"<?php } ?>>
                         <div class="msg-telo">
                             <?php if ($val['uid'] == $uid['id']) { ?>
-                                Я | <?php echo $val['add_time']; ?>
+                               Я | <?php echo $val['add_time']; ?>
                             <?php } else { ?>
                                 <a href="/u/<?= $val['login']; ?>">
                                     <?= $val['login']; ?> 

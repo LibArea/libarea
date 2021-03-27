@@ -37,7 +37,7 @@ class AdminController extends \MainController
         
         $uid  = Base::getUid();
         $data = [
-            'title'        => 'Админка',
+            'title'        => 'Последние сессии | Админка',
             'description'  => 'Админка на AreaDev',
             'users'        => $result,
         ];
@@ -49,6 +49,7 @@ class AdminController extends \MainController
     {
       
         // Если TL участника не равен 5 (персонал) - редирект
+        $account = Request::getSession('account');
         if(!$isAdmin = UserModel::isAdmin($account['user_id'])) {
             redirect('/');
         }
