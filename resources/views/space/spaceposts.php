@@ -1,61 +1,71 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 <section>
     <div class="wrap">
-        <div class="right">
-            <div class="space-bg no-mob">
-                <?= $posts[0]['space_description']; ?>
-            </div>
-             
-            <?php if(!$uid['id']) { ?> 
-                <div> 
-                <br>
-                    <a href="/login"><div class="hide-space-id add-space">Подписаться</div></a>
-                </div>
-            <?php } else { ?>
-                <div> 
-                <br>  
-                    <?php if($data['space_hide'] == 1) { ?> 
-                        <div data-id="<?= $posts[0]['space_id']; ?>" class="hide-space-id add-space">Подписаться</div>
-                    <?php } else { ?> 
-                        <div data-id="<?= $posts[0]['space_id']; ?>" class="hide-space-id no-space">Отписаться</div>
-                    <?php } ?>   
-                </div>  
-            <?php } ?>    
-                        
-        </div> 
-        
-        <h1><?= $data['h1']; ?></h1>
- 
+        <div class="w-100">
+            <div class="w-50">
+                <h1 class="left-ots"><span>~</span> <?= $data['h1']; ?></h1>
+            </div>     
+            <div class="w-50">
+                <?php if(!$uid['id']) { ?> 
+                        <div class="right"> 
+                            <a href="/login"><div class="hide-space-id add-space">Подписаться</div></a>
+                        </div>
+                    <?php } else { ?>
+                        <div class="right"> 
+                            <?php if($data['space_hide'] == 1) { ?> 
+                                <div data-id="<?= $space['space_id']; ?>" class="hide-space-id add-space">Подписаться</div>
+                            <?php } else { ?> 
+                                <div data-id="<?= $space['space_id']; ?>" class="hide-space-id no-space">Отписаться</div>
+                            <?php } ?>   
+                        </div>  
+                <?php } ?> 
+            </div>            
+        </div>
         <div class="telo comments">
             <?php if (!empty($posts)) { ?>
          
                 <?php foreach ($posts as  $post) { ?> 
- 
-                    <div id="vot<?= $post['post_id']; ?>" class="voters">
-                        <div data-id="<?= $post['post_id']; ?>" class="post-up-id"></div>
-                        <div class="score"><?= $post['post_votes']; ?></div>
-                    </div>
                     <div class="post-telo">
-                        <a class="u-url" href="/posts/<?= $post['post_slug']; ?>">
-                            <h3 class="titl"><?= $post['post_title']; ?></h3>
-                        </a>
-          
-                        <div class="footer">
-                            <img class="ava" src="/uploads/avatar/small/<?= $post['avatar'] ?>">
-                            <span class="user"> 
-                                <a href="/u/<?= $post['login']; ?>"><?= $post['login']; ?></a> 
-                            </span>
-                            <span class="date">
-                                <?= $post['post_date']; ?>
-                            </span>
-                            <?php if($post['post_comments'] !=0) { ?> 
-                                <span class="otst"> | </span>
-                                <a class="u-url" href="/posts/<?= $post['post_slug']; ?>">
-                                    <?= $post['post_comments']; ?>  <?= $post['num_comments']; ?>
-                                </a>                                
-                            <?php } ?>
-                        </div>  
-                    </div>
+                        <?php if (!$uid['id']) { ?> 
+                            <div id="vot<?= $post['post_id']; ?>" class="voters">
+                                <a rel="nofollow" href="/login"><div class="post-up-id"></div></a>
+                                <div class="score"><?= $post['post_votes']; ?></div>
+                            </div>
+                        <?php } else { ?> 
+                            <?php if ($post['votes_post_user_id'] || $uid['id'] == $post['post_user_id']) { ?>
+                                <div class="voters active">
+                                    <div class="post-up-id"></div>
+                                    <div class="score"><?= $post['post_votes']; ?></div>
+                                </div>
+                            <?php } else { ?>
+                                <div id="up<?= $post['post_id']; ?>" class="voters">
+                                    <div data-id="<?= $post['post_id']; ?>" class="post-up-id"></div>
+                                    <div class="score"><?= $post['post_votes']; ?></div>
+                                </div>
+                            <?php } ?> 
+                        <?php } ?> 
+                        <div class="post-body">
+                            <a class="u-url" href="/posts/<?= $post['post_slug']; ?>">
+                                <h3 class="titl"><?= $post['post_title']; ?></h3>
+                            </a>
+              
+                            <div class="footer">
+                                <img class="ava" src="/uploads/avatar/small/<?= $post['avatar'] ?>">
+                                <span class="user"> 
+                                    <a href="/u/<?= $post['login']; ?>"><?= $post['login']; ?></a> 
+                                </span>
+                                <span class="date">
+                                    <?= $post['post_date']; ?>
+                                </span>
+                                <?php if($post['post_comments'] !=0) { ?> 
+                                    <span class="otst"> | </span>
+                                    <a class="u-url" href="/posts/<?= $post['post_slug']; ?>">
+                                        <?= $post['post_comments']; ?>  <?= $post['num_comments']; ?>
+                                    </a>                                
+                                <?php } ?>
+                            </div>  
+                        </div>
+                    </div>    
                 <?php } ?>
 
             <?php } else { ?>
@@ -66,6 +76,23 @@
 
             <?php } ?>
         </div> 
+        
+        
+        <div class="sidebar">
+            <div class="space-text">
+                <?= $space['space_text']; ?>
+            
+                <?php if($uid['trust_level'] == 5) { ?>
+                    <a class="right" href="/space/<?= $space['space_slug']; ?>/edit">
+                        <svg class="md-icon moon">
+                            <use xlink:href="/assets/svg/icons.svg#edit"></use>
+                        </svg>
+                    </a>
+                <?php } ?>
+            </div>
+        </div> 
+        
+        
     </div>
 </section>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

@@ -16,7 +16,6 @@
                                 <div class="score"><?= $post['post_votes']; ?></div>
                             </div>
                         <?php } else { ?> 
-
                             <?php if ($post['votes_post_user_id'] || $uid['id'] == $post['post_user_id']) { ?>
                                 <div class="voters active">
                                     <div class="post-up-id"></div>

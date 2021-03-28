@@ -28,10 +28,17 @@ class SpaceController extends \MainController
     public function SpacePosts()
     {
  
-        $space = Request::get('space');
+        if($account = Request::getSession('account')){
+            $user_id = $account['user_id'];
+        } else {
+            $user_id = 0;
+        }
  
-        $posts = SpaceModel::getSpacePosts($space);
- 
+        // Информация по пространству и посты
+        $slug  = Request::get('slug');
+        $space = SpaceModel::getSpaceInfo($slug);
+        $posts = SpaceModel::getSpacePosts($space['space_id'], $user_id);
+  
         // Покажем 404
         if(!$posts) {
             include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
@@ -50,30 +57,22 @@ class SpaceController extends \MainController
          
         }  
 
-        // Отписан участник от тега или нет
-        if(Request::getSession('account')) {
-            
-            $user = Request::getSession('account');
-            $space_hide = SpaceModel::getMySpaceHide($result[0]['space_id'], $user['user_id']);
-            
-        } else {
-             $space_hide = NULL;
-             
-        }
+        // Отписан участник от пространства или нет
+        $space_hide = SpaceModel::getMySpaceHide($space['space_id'], $user_id);
  
         $uid  = Base::getUid();
         $data = [
-            'h1'         => 'Посты по пространству ' . $result[0]['space_name'],
-            'title'      => $space . ' - посты по пространству | ' . $GLOBALS['conf']['sitename'],
-            'description'=> 'Страница постов по пространству ' . $result[0]['space_name'] . ' на сайте ' . $GLOBALS['conf']['sitename'],
+            'h1'         => $space['space_name'],
+            'title'      => $space['space_name'] . ' - посты по пространству | ' . $GLOBALS['conf']['sitename'],
+            'description'=> 'Страница постов по пространству ' . $space['space_name'] . ' на сайте ' . $GLOBALS['conf']['sitename'],
             'space_hide' => $space_hide,
         ];
 
-        return view("space/spaceposts", ['data' => $data, 'uid' => $uid, 'posts' => $result]);
+        return view("space/spaceposts", ['data' => $data, 'uid' => $uid, 'posts' => $result, 'space' => $space]);
         
     }
 
-    // Изменение пространства (в стадии разработки)
+    // Форма изменения пространства
     public function spaceForma()
     {
         
@@ -83,11 +82,12 @@ class SpaceController extends \MainController
             return false;
         }
         
-        $space = Request::get('space');
+        $slug  = Request::get('slug');
+        $space = SpaceModel::getSpaceInfo($slug);
         
         $uid  = Base::getUid();
         $data = [
-            'h1'            => 'Изменение пространства',
+            'h1'            => 'Изменение - ' . $slug,
             'title'         => 'Изменение пространства | ' . $GLOBALS['conf']['sitename'],
             'description'   => 'Страница изменения пространства на' . $GLOBALS['conf']['sitename'],
         ]; 
@@ -96,13 +96,41 @@ class SpaceController extends \MainController
         
     }
     
+    // Изменение пространства
+    public function spaceEdit() 
+    {
+        // Доступ только персоналу
+        $account = Request::getSession('account');
+        if ($account['trust_level'] != 5) {
+            return false;
+        } 
+        
+        // Пока перечислим все поля
+        // Если пользователи смогут создавать пространства с TL2
+        // То данный метод следует изменить
+        $data = [
+            'space_id'          => \Request::getPostInt('space_id'),
+            'space_slug'        => \Request::getPost('space_slug'),
+            'space_name'        => \Request::getPost('space_name'),
+            'space_description' => \Request::getPost('space_description'),
+            'space_color'       => \Request::getPost('space_color'),
+            'space_text'        => $_POST['space_text'], // Не фильтруем!
+        ]; 
+        
+        SpaceModel::setSpaceEdit($data);
+        
+        Base::addMsg('Изменение сохранено', 'error');
+        redirect('/s/' . $data['space_slug']);
+        
+    }
+    
     // Отписка тегов
     public function hide()
     {
 
         $space_id = \Request::getPostInt('space_id'); 
-
         $account = Request::getSession('account');
+
         SpaceModel::SpaceHide($space_id, $account['user_id']);
         
         return true;

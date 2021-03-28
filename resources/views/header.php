@@ -40,7 +40,7 @@
                         </a>
                     </li>  
                     <li class="nav no-mob-two<?php if(Request::getUri() == '/space') { ?> active<?php } ?>">
-                        <a title="Пространства" class="sp" href="/space">∞</a>
+                        <a title="Пространства" class="sp" href="/space">~</a>
                     </li>
                 </ul>
             </div>

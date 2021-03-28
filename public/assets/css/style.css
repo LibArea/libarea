@@ -27,6 +27,21 @@ a:hover, a:focus{
 .right {
     float:right;
 }
+.w-100, .w-50, .w-66, .w-33 {
+    float: left;
+}
+.w-100 {
+    width: 100%;
+}
+.w-66 {
+    width: 66%;
+}
+.w-50 {
+    width: 50%;
+}
+.w-33 {
+    width: 33%;
+}
 h1 {
     font-weight: 300;
     margin: 0 0 20px 0;
@@ -510,15 +525,12 @@ a.space_3 {
 .space-des {
     margin-left:10px;
 }
-.space-bg {
-    border-left: 1px solid #09c;
+.space-text {
     color: #666;
     font-size: 13px;
-    width: 180px;
     padding: 5px;
-    text-align: center;
+    margin-left: 20px;
 }
-
 .add-space {
     background: #f0f0df;
     color: #666;
@@ -535,7 +547,9 @@ a.space_3 {
     padding: 5px;
     text-align: center;
 }
-
+h1 span{
+    vertical-align: middle;
+}
 /* Комментарии */
 .authorpost {
     color: #f8a853;

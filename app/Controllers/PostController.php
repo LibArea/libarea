@@ -46,7 +46,7 @@ class PostController extends \MainController
             if(!$row['avatar'] ) {
                 $row['avatar'] = 'noavatar.png';
             } 
-          //  $row['post_vote_status']    = VotesPostModel::getVoteStatus($row['post_id'], $user_id);
+
             $row['avatar']              = $row['avatar'];
             $row['num_comments']        = Base::ru_num('comm', $row['post_comments']);
             $row['post_date']           = Base::ru_date($row['post_date']);

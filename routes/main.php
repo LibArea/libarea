@@ -47,9 +47,11 @@ Route::before('Authorization@noAuth')->getGroup();
 	// Уведомления 
 	Route::get('/notifications')->controller('NotificationsController');
 
-	// Подписываемся, отписываемся на тег
+	// Подписываемся, отписываемся / изменяем пространство
 	Route::type('post')->get('/space/hide')->controller('SpaceController@hide');
-
+    Route::get('/space/{slug}/edit')->controller('SpaceController@spaceForma')->where(['slug' => '[A-Za-z0-9]+']);  
+    Route::type('post')->protect()->get('/space/editspace')->controller('SpaceController@spaceEdit');
+ 
 	// Голосуем
 	Route::type('post')->get('/votes/comm')->controller('VotesCommController@votes');
     Route::type('post')->get('/votes/post')->controller('VotesPostController@votes');
@@ -93,7 +95,7 @@ Route::get('/comments')->controller('CommentController');
 
 // Пространства
 Route::get('/space')->controller('SpaceController');
-Route::get('/s/{space}')->controller('SpaceController@spacePosts')->where(['space' => '[A-Za-z0-9]+']);
+Route::get('/s/{slug}')->controller('SpaceController@spacePosts')->where(['slug' => '[A-Za-z0-9]+']);
 
 // Вызов формы комментария
 Route::type('post')->get('/comments/addform')->controller('CommentController@addform');
