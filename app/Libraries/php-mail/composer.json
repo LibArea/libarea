@@ -1,0 +1,19 @@
+{
+    "name": "jacksonjeans/mail",
+    "description": "A mail composer, phpmailer alternative, and smtp client.",
+    "keywords": ["smtp", "php", "mail"],
+    "homepage": "https://github.com/jacksonjeans/mail",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Julian Tietz",
+            "homepage": "https://smanixx.de"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0"
+    },
+    "autoload": {
+        "classmap": ["src/JacksonJeans/"]
+    }
+}

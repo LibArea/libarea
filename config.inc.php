@@ -14,7 +14,7 @@ return array(
     'smtpuser'          => 'mail@****.ru', //SMTP username
     'smtppass'          => '****', //SMTP password
     'smtphost'          => 'smtp.yandex.ru',
-    'smtpport'          => 587,
+    'smtpport'          => 465,
     'timezone'          => 'Europe/Moscow',
     'allow_ip'          => '', // Закрыть доступ в админку по ip
     'cookieDomain'      => '',

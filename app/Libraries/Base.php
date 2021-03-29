@@ -2,10 +2,8 @@
 
 use App\Models\NotificationsModel;
 use App\Models\UserModel;
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
+use JacksonJeans\Mail;
+use JacksonJeans\MailException;
 
 class Base
 {
@@ -411,40 +409,22 @@ class Base
 		return (string) mt_rand();
 	}
     
-    // Отправка сообщения 
+    // https://github.com/JacksonJeans/php-mail
     public static function mailText($email, $subject='', $message='')
     {
-        $mail = self::confMailSystem();
 
-        //Recipients
-        $mail->addAddress($email);
-        
-        //Content
-        $mail->isHTML(true);                                 //Set email format to HTML
-        $mail->Subject = $subject;
-        $mail->Body    = $message;
+        $mail = new Mail('smtp', [
+            'host'      => 'ssl://' . $GLOBALS['conf']['smtphost'],
+            'port'      => $GLOBALS['conf']['smtpport'],
+            'username'  => $GLOBALS['conf']['smtpuser'],
+            'password'  => $GLOBALS['conf']['smtppass']
+        ]);
 
-        return $mail->send();
+        $mail->setFrom($GLOBALS['conf']['smtpuser'])
+            ->setTo($email)
+            ->setSubject($subject)
+            ->setText($message)
+            ->send();
     }
-
-    // Настройки PHPMailer
-    // https://github.com/PHPMailer/PHPMailer
-    private static function confMailSystem()
-    {
-        $mail = new PHPMailer(true);
-
-        $mail->SMTPDebug = SMTP::DEBUG_SERVER;              //Enable verbose debug output
-        $mail->isSMTP();                                    //Send using SMTP
-        $mail->Host       = $GLOBALS['conf']['smtphost'];   //Set the SMTP server to send through
-        $mail->SMTPAuth   = true;                           //Enable SMTP authentication
-        $mail->Username   = $GLOBALS['conf']['smtpuser'];   //SMTP username
-        $mail->Password   = $GLOBALS['conf']['smtppass'];   //SMTP password
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; //Enable TLS encryption;`PHPMailer::ENCRYPTION_SMTPS` encouraged
-        $mail->Port       = $GLOBALS['conf']['smtpport'];   //TCP port to connect to, use 465 for 
-        
-        $mail->setFrom($mail->Username, 'Mail');
-        
-        return $mail;
-    }
-   
+ 
 }

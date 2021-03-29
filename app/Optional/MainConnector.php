@@ -28,9 +28,10 @@ class MainConnector implements Connector
             "XdORM\XD"    => "vendor/phphleb/xdorm/XD.php",
             "Phphleb\Debugpan\DPanel" => "vendor/phphleb/debugpan/DPanel.php",
             
-            "PHPMailer\PHPMailer\Exception" => "app/Libraries/PHPMailer/src/Exception.php",
-            "PHPMailer\PHPMailer\PHPMailer" => "app/Libraries/PHPMailer/src/PHPMailer.php",
-            "PHPMailer\PHPMailer\SMTP" => "app/Libraries/PHPMailer/src/SMTP.php",
+            // https://github.com/JacksonJeans/php-mail
+            "JacksonJeans\MailException" => "app/Libraries/php-mail/src/JacksonJeans/MailException.class.php",
+            "JacksonJeans\Mail" => "app/Libraries/php-mail/src/JacksonJeans/Mail.class.php",
+
             
         ];
 
