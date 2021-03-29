@@ -1,7 +1,7 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 <section>
     <div class="wrap">
-        <h2><?= $data['title'] ?></h2>
+        <h1><?= $data['title'] ?></h1>
            <?php if (!empty($data['list'])) { ?>
            
                <?php foreach ($data['list'] as  $notif) { ?>

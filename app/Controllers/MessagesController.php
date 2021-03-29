@@ -34,7 +34,7 @@ class MessagesController extends \MainController
         {
             $last_message = MessagesModel::getLastMessages($dialog_ids);
         }
-
+  
 	    if ($messages_dialog)
 		{
 
@@ -44,19 +44,19 @@ class MessagesController extends \MainController
                
                 if ($row['recipient_uid'] == $user_id) // Принимающий  AND $row['recipient_count']
                 {
-
                     $row['unread']   = $row['recipient_unread'];
                     $row['count']    = $row['recipient_count'];
                     $row['msg_user'] = UserModel::getUserId($row['sender_uid']);
-
                 }
                 else if ($row['sender_uid'] == $user_id) // Отправляющий  AND $row['sender_count']
                 {
-
                     $row['unread']   = $row['sender_unread'];
                     $row['count']    = $row['sender_count'];
                     $row['msg_user'] = UserModel::getUserId($row['sender_uid']);
-                
+                } 
+
+                if(!$row['msg_user']['avatar']) {
+                    $row['msg_user']['avatar'] = 'noavatar.png';
                 } 
 
                 $result[$ind]        = $row;
@@ -72,6 +72,8 @@ class MessagesController extends \MainController
             'description' => 'Страница личных сообщений',
             'messages'    => $result,
         ];
+        
+        
         
         return view("messages/index", ['data' => $data, 'uid' => $uid]);
 	}

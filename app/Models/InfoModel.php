@@ -56,5 +56,7 @@ class InfoModel extends \MainModel
         return count($query->getSelect());
         
     }
-
+    
+    // Для графика
+    // SELECT ROUND(votes_comm_item_id, -1) AS bucket, COUNT(votes_comm_item_id), RPAD('', LN(COUNT(votes_comm_item_id)), '*') FROM ( SELECT votes_comm_item_id, COUNT(votes_comm_id) AS cnt FROM votes_comm WHERE votes_comm_item_id IS NOT NULL GROUP BY votes_comm_item_id ) AS counted GROUP BY bucket
 }

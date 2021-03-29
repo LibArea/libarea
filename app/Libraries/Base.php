@@ -3,10 +3,15 @@
 use App\Models\NotificationsModel;
 use App\Models\UserModel;
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
 class Base
 {
  
     public static function getUid() {
+        
         $user = Request::getSession('account') ?? [];
         $uid = [];
 
@@ -33,7 +38,6 @@ class Base
         return $uid;
     }
  
-
     // Возвращает массив сообщений
     public static function getMsg(){
 
@@ -45,7 +49,6 @@ class Base
 
         self::clearMsg();
         return $msg;
-
     }
 
     //  Очищает очередь сообщений
@@ -176,10 +179,8 @@ class Base
     // Временная, заменить
     public static function ru_date($time, $time_limit = 604800, $out_format = 'Y-m-d H:i', $formats = null, $time_now = null)
     {
-            
-       $timestamp = strtotime($time);
+        $timestamp = strtotime($time);
          
-
         if (!$timestamp)
         {
             return false;
@@ -299,10 +300,10 @@ class Base
         }
 
         return $dateDiff;
-        
     }
     
     public static function ru_num($type,$num){
+        
         $strlen_num = strlen($num);
         
         if($num <= 21){
@@ -321,7 +322,6 @@ class Base
             $numres = str_replace('0','10',$parsnum);
         }
 
-         
         if($type == 'comm'){
             if($numres == 1){
                 $gram_num_record = 'комментарий';
@@ -364,7 +364,7 @@ class Base
             }
         }
         
-            return $gram_num_record;
+        return $gram_num_record;
     }
     
     // Длина строки
@@ -410,5 +410,41 @@ class Base
 		// 'basic' type treated as default
 		return (string) mt_rand();
 	}
+    
+    // Отправка сообщения 
+    public static function mailText($email, $subject='', $message='')
+    {
+        $mail = self::confMailSystem();
+
+        //Recipients
+        $mail->addAddress($email);
+        
+        //Content
+        $mail->isHTML(true);                                 //Set email format to HTML
+        $mail->Subject = $subject;
+        $mail->Body    = $message;
+
+        return $mail->send();
+    }
+
+    // Настройки PHPMailer
+    // https://github.com/PHPMailer/PHPMailer
+    private static function confMailSystem()
+    {
+        $mail = new PHPMailer(true);
+
+        $mail->SMTPDebug = SMTP::DEBUG_SERVER;              //Enable verbose debug output
+        $mail->isSMTP();                                    //Send using SMTP
+        $mail->Host       = $GLOBALS['conf']['smtphost'];   //Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                           //Enable SMTP authentication
+        $mail->Username   = $GLOBALS['conf']['smtpuser'];   //SMTP username
+        $mail->Password   = $GLOBALS['conf']['smtppass'];   //SMTP password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; //Enable TLS encryption;`PHPMailer::ENCRYPTION_SMTPS` encouraged
+        $mail->Port       = $GLOBALS['conf']['smtpport'];   //TCP port to connect to, use 465 for 
+        
+        $mail->setFrom($mail->Username, 'Mail');
+        
+        return $mail;
+    }
    
 }

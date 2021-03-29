@@ -322,7 +322,24 @@ ALTER TABLE `users_logs`
 ALTER TABLE `users_logs`
   MODIFY `logs_id` int(11) NOT NULL AUTO_INCREMENT;
 
+--
+-- Структура и дамп таблицы `users_activate`
+--
 
+CREATE TABLE `users_activate` (
+  `activate_id` int(11) NOT NULL,
+  `activate_date` datetime NOT NULL,
+  `activate_user_id` int(11) NOT NULL,
+  `activate_code` varchar(50) NOT NULL,
+  `activate_flag` tinyint(1) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE `users_activate`
+  ADD PRIMARY KEY (`activate_id`);
+
+ALTER TABLE `users_activate`
+  MODIFY `activate_id` int(11) NOT NULL AUTO_INCREMENT;
+  
 --
 -- Структура и дамп таблицы `votes_post`
 --

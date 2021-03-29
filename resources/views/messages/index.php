@@ -11,6 +11,8 @@
                              Я  |  <?= $msg['update_time']; ?> <br>
                         <?php } else { ?>
                              От 
+                             
+                            <img src="/uploads/avatar/small/<?= $msg['msg_user']['avatar']; ?>" class="msg-ava">
                              <a href="/u/<?= $msg['msg_user']['login']; ?>">
                                 <?= $msg['msg_user']['login']; ?> 
                              </a>

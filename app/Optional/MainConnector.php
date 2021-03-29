@@ -27,6 +27,11 @@ class MainConnector implements Connector
             "DB"          => "database/DB.php",  
             "XdORM\XD"    => "vendor/phphleb/xdorm/XD.php",
             "Phphleb\Debugpan\DPanel" => "vendor/phphleb/debugpan/DPanel.php",
+            
+            "PHPMailer\PHPMailer\Exception" => "app/Libraries/PHPMailer/src/Exception.php",
+            "PHPMailer\PHPMailer\PHPMailer" => "app/Libraries/PHPMailer/src/PHPMailer.php",
+            "PHPMailer\PHPMailer\SMTP" => "app/Libraries/PHPMailer/src/SMTP.php",
+            
         ];
 
     }

@@ -43,7 +43,7 @@ class PostController extends \MainController
         $result = Array();
         foreach($posts as $ind => $row){
              
-            if(!$row['avatar'] ) {
+            if(!$row['avatar']) {
                 $row['avatar'] = 'noavatar.png';
             } 
 

@@ -75,17 +75,15 @@ class UserModel extends \MainModel
     }
     
     // Изменение пароля
-    public static function editPassword($login, $password)
+    public static function editPassword($id, $password)
     {
-        XD::update(['users'])->set(['password'], '=', $password)->where(['login'], '=', $login)->run();
-        return true;
+        return XD::update(['users'])->set(['password'], '=', $password)->where(['id'], '=', $id)->run();
     }
 
     // Изменение аватарки
     public static function setAvatar($login, $img)
     {
-        XD::update(['users'])->set(['avatar'], '=', $img)->where(['login'], '=', $login)->run();
-        return true;
+        return XD::update(['users'])->set(['avatar'], '=', $img)->where(['login'], '=', $login)->run();
     }
 
    // Получение аватарки
@@ -126,12 +124,12 @@ class UserModel extends \MainModel
     } 
 
     // Информация участника
-    public static function getUserInfo($data) 
+    public static function getUserInfo($email) 
     {
 
-        $query = XD::select(['id', 'email', 'password', 'login', 'name', 'avatar', 'trust_level'])
+        $query = XD::select(['id', 'email', 'password', 'login', 'name', 'avatar', 'trust_level', 'ban_list'])
              ->from(['users'])
-             ->where(['email'], '=', $data);
+             ->where(['email'], '=', $email);
 
         $result = $query->getSelectOne();
         return $result;
@@ -268,8 +266,6 @@ class UserModel extends \MainModel
         // Есть "remember" куки?
         $remember = Request::getCookie('remember');
 
-//print_r($remember);
-//exit;
         // Нет
         if (empty($remember)) {
             return;
@@ -294,8 +290,7 @@ class UserModel extends \MainModel
  
         // Получение данных по id
         $user = self::getUserId($token['auth_user_id']);
-//print_r($user);
-//exit;
+
         // Нет пользователя
         if (empty($user)) {
 
@@ -463,53 +458,58 @@ class UserModel extends \MainModel
     // auth_id,	auth_user_id,	auth_selector,	auth_hashedvalidator,	auth_expires	
     public static function getAuthTokenByUserId($uid)
     {
-
         return XD::select('*')->from(['users_auth_tokens'])
                 ->where(['auth_user_id'], '=', $uid)->getSelectOne();
-
     }
  
     public static function insertToken($data)
     {
-        
-        XD::insertInto(['users_auth_tokens'], '(', ['auth_user_id'], ',', ['auth_selector'], ',', ['auth_hashedvalidator'], ',', ['auth_expires'], ')')->values( '(', XD::setList([$data['user_id'], $data['selector'], $data['hashedvalidator'], $data['expires']]), ')' )->run();
-        
-        return true;
+        return  XD::insertInto(['users_auth_tokens'], '(', ['auth_user_id'], ',', ['auth_selector'], ',', ['auth_hashedvalidator'], ',', ['auth_expires'], ')')->values( '(', XD::setList([$data['user_id'], $data['selector'], $data['hashedvalidator'], $data['expires']]), ')' )->run();
     }
     
     public static function updateToken($data, $uid)
     {
-        
-        XD::update(['users_auth_tokens'])->set(['auth_user_id'], '=', $data['user_id'], ',', ['auth_selector'], '=', $data['selector'], ',', ['auth_hashedvalidator'], '=', $data['hashedvalidator'], ',', ['auth_expires'], '=', $data['expires'])->where(['auth_user_id'], '=', $uid)->run();
-        
-        return true;
+        return  XD::update(['users_auth_tokens'])->set(['auth_user_id'], '=', $data['user_id'], ',', ['auth_selector'], '=', $data['selector'], ',', ['auth_hashedvalidator'], '=', $data['hashedvalidator'], ',', ['auth_expires'], '=', $data['expires'])->where(['auth_user_id'], '=', $uid)->run();
     }
     
     public static function DeleteTokenByUserId($uid)
     {
-        
-        XD::deleteFrom(['users_auth_tokens'])->where(['auth_user_id'], '=', $uid)->run(); 
-        
-        return true;
+        return XD::deleteFrom(['users_auth_tokens'])->where(['auth_user_id'], '=', $uid)->run(); 
     }
     
     public static function UpdateSelector($data, $selector)
     {
- 
-       XD::update(['users_auth_tokens'])->set(['auth_hashedvalidator'], '=', $data['hashedvalidator'], ',', ['auth_expires'], '=', $data['expires'])->where(['auth_selector'], '=', $selector)->run();
-       
-       return true;
-        
+       return  XD::update(['users_auth_tokens'])->set(['auth_hashedvalidator'], '=', $data['hashedvalidator'], ',', ['auth_expires'], '=', $data['expires'])->where(['auth_selector'], '=', $selector)->run();
     }
  
+    // Восстановления пароля
+    public static function initRecover($uid, $code) 
+    {
+        $date = date('Y-m-d H:i:s');
+                
+        return  XD::insertInto(['users_activate'], '(', ['activate_date'], ',', ['activate_user_id'], ',', ['activate_code'], ')')->values( '(', XD::setList([$date, $uid, $code]), ')' )->run();
+    }
+    
+    
+    // Для одноразового использования кода восстановления
+    public static function editRecoverFlag($user_id) 
+    {
+        return XD::update(['users_activate'])->set(['activate_flag'], '=', 1)->where(['activate_user_id'], '=', $user_id)->run();
+    }
     
     // Получаем токен аутентификации по селектору
     public static function getAuthTokenBySelector($selector)
     {
-        
-        return XD::select('*')->from(['users_auth_tokens'])
-                ->where(['auth_selector'], '=', $selector)->getSelectOne();
-
+        return XD::select('*')->from(['users_auth_tokens'])->where(['auth_selector'], '=', $selector)->getSelectOne();
+    }
+    
+    
+    // Проверяем код смены пароля (использовали его или нет)
+    public static function getPasswordActivate($code)
+    {
+        return XD::select('*')->from(['users_activate'])
+                ->where(['activate_code'], '=', $code)
+                ->and(['activate_flag'], '!=', 1)->getSelectOne();
     }
     
     // Настройка оповещений

@@ -14,7 +14,6 @@ class UserController extends \MainController
     // Все пользователи
     function index()
     {
-        
         $users = UserModel::getUsersAll();
         
         $result = Array();
@@ -42,7 +41,6 @@ class UserController extends \MainController
     // Страница участника
     function profile()
     {
-
         $login = Request::get('login');
         $user  = UserModel::getUserLogin($login);
 
@@ -71,13 +69,11 @@ class UserController extends \MainController
         ];
 
         return view('/user/profile', ['data' => $data, 'uid' => $uid, 'user' => $user, 'post' => $post]);
-
     }  
 
     // Страница настройки профиля
     function settingPage()
     {
-        
         // Данные участника
         $account = Request::getSession('account');
         $user = UserModel::getUserLogin($account['login']);
@@ -103,8 +99,6 @@ class UserController extends \MainController
     // Изменение профиля
     function settingEdit ()
     {
-        
-     
         $name    = Request::getPost('name');
         $about   = Request::getPost('about');
         
@@ -132,12 +126,11 @@ class UserController extends \MainController
     // Форма загрузки аватарки
     function settingPageAvatar ()
     {
-
         // Аватар участника
         $account = Request::getSession('account');
         $ava     = UserModel::getAvatar($account['login']);
         $avatar  = $ava['avatar'];
-        
+
         if(!$avatar) {
             $avatar = 'noavatar.png';
         } 
@@ -150,13 +143,11 @@ class UserController extends \MainController
         ];
 
         return view('/user/setting-avatar', ['data' => $data, 'uid' => $uid]);
- 
     }
     
     // Форма изменение пароля
     function settingPageSecurity ()
     {
-
         $uid  = Base::getUid();
         $data = [
             'title'       => 'Изменение пароля',
@@ -167,17 +158,16 @@ class UserController extends \MainController
         ];
 
         return view('/user/setting-security', ['data' => $data, 'uid' => $uid]);
- 
     }
     
     // Изменение аватарки
     function settingAvatarEdit() 
     {
-        
         $account  = Request::getSession('account');
         $name     = $_FILES['image']['name'];
         $size     = $_FILES['image']['size'];
         $ext      = strtolower(pathinfo($name, PATHINFO_EXTENSION));
+        $width_h  = getimagesize($_FILES['image']['tmp_name']);
        
         $valid =  true;
         if (!in_array($ext, array('jpg','jpeg','png','gif'))) {
@@ -186,14 +176,25 @@ class UserController extends \MainController
             redirect('/users/setting/avatar');
         }
 
-        if ($size/1024/1024 > 10) {
+        // Проверка ширины, высоты и размера
+        if ($width_h['0'] > 150) {
+            $valid = false;
+            Base::addMsg('Ширина больше 150 пикселей', 'error');
+            redirect('/users/setting/avatar');
+        }
+        if ($width_h['1'] > 150) {
+            $valid = false;
+            Base::addMsg('Высота больше 150 пикселей', 'error');
+            redirect('/users/setting/avatar');
+        }
+        if ($size > 50000) {
             $valid = false;
             Base::addMsg('Размер файла превышает допустимый', 'error');
             redirect('/users/setting/avatar');
         }
 
         if ($valid) {
-          
+ 
             // 110px и 16px
             $path_img       = HLEB_PUBLIC_DIR. '/uploads/avatar/';
             $path_img_small = HLEB_PUBLIC_DIR. '/uploads/avatar/small/';
@@ -209,13 +210,12 @@ class UserController extends \MainController
             // Получим страую если оно есть, удаляем
             $avatar = UserModel::getAvatar($account['login']);
             
-            
             // Удаляем старые аватарки
             chmod($path_img . $avatar['avatar'], 0777);
             chmod($path_img_small . $avatar['avatar'], 0777);
             unlink($path_img . $avatar['avatar']);
             unlink($path_img_small . $avatar['avatar']);
-    
+
             // Запишем новую 
             UserModel::setAvatar($account['login'], $img);
             
@@ -228,7 +228,6 @@ class UserController extends \MainController
     // Изменение пароля
     function settingSecurityEdit()
     {
-        
         $password    = Request::getPost('password');
         $password2   = Request::getPost('password2');
         $password3   = Request::getPost('password3');
@@ -258,11 +257,10 @@ class UserController extends \MainController
         }
         
         $newpass = password_hash($password2, PASSWORD_BCRYPT);
-        UserModel::editPassword($account['login'], $newpass);
+        UserModel::editPassword($account['user_id'], $newpass);
 
         Base::addMsg('Пароль успешно изменен', 'error');
         redirect('/users/setting');
-        
     }
     
     // Страница закладок участника

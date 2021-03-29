@@ -60,15 +60,18 @@ Route::endGroup();
 Route::before('Authorization@yesAuth')->getGroup();
 	// Регистрация и авторизация
 	Route::get('/register')->controller('AuthController@registerPage');
-	Route::get('/recover')->controller('AuthController@recoverPage');
+    Route::type('get')->get('/recover')->controller('AuthController@recoverPage');  
+    Route::type('post')->protect()->get('/recover/send')->controller('AuthController@sendRecover'); 
+    Route::type('get')->get('/recover/remind/{code}')->controller('AuthController@RemindPage')->where(['code' => '[A-Za-z0-9-]+']);
+    Route::type('post')->protect()->get('/recover/send/pass')->controller('AuthController@RemindPageNew'); 
 	Route::type('post')->protect()->get('/register/add')->controller('AuthController@registerHandler');
 	Route::type('post')->protect()->get('/login')->controller('AuthController@loginHandler');
-	Route::type('get')->get('/login')->controller('AuthController@loginPage');
+	Route::type('get')->get('/login')->controller('AuthController@loginPage'); 
 Route::endGroup();
 
 // Посты и главная страница
 Route::get('/top')->controller('PostController@topPost');
-Route::get('/posts/{slug}/')->controller('PostController@view')->where(['slug' => '[A-Za-z0-9-]+']);
+Route::get('/posts/{slug}')->controller('PostController@view')->where(['slug' => '[A-Za-z0-9-]+']);
 
 // Правила
 Route::get('/info')->controller('InfoController');

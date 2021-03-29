@@ -27,9 +27,9 @@ class AuthController extends \MainController
     public function registerHandler()
     {
 
-        $email    = Request::getPost('email');
-        $login    = Request::getPost('login');
-        $password = Request::getPost('password');
+        $email    = \Request::getPost('email');
+        $login    = \Request::getPost('login');
+        $password = \Request::getPost('password');
 
         if ($email == '' || $login == '' || $password == '')
         {
@@ -146,9 +146,9 @@ class AuthController extends \MainController
     public function loginHandler()
     {
       
-        $email      = Request::getPost('email');
-        $password   = Request::getPost('password');
-        $rememberMe = Request::getPost('rememberme');
+        $email      = \Request::getPost('email');
+        $password   = \Request::getPost('password');
+        $rememberMe = \Request::getPost('rememberme');
 
         if (!$this->checkEmail($email)) {
            Base::addMsg('Недопустимый email', 'error');
@@ -217,6 +217,104 @@ class AuthController extends \MainController
 
         return view('/auth/recover', ['data' => $data, 'uid' => $uid]);
  
+    }
+
+    public function sendRecover () {
+        
+        $email = \Request::getPost('email');
+        
+        if (!$this->checkEmail($email)) {
+           Base::addMsg('Недопустимый email', 'error');
+           redirect('/recover');
+        }
+        
+        $uInfo = UserModel::getUserInfo($email);
+
+        if (empty($uInfo['email'])) {
+            Base::addMsg('Такого e-mail нет на сайте', 'error');
+            redirect('/recover');
+        }
+        
+        // Проверка на заблокированный аккаунт
+        if ($uInfo['ban_list'] == 1) {
+            Base::addMsg('Вы не можете восстановить пароль', 'error');
+            redirect('/recover');
+        }
+        
+        $code = $uInfo['id'] . '-' . Base::randomString('crypto', 25);
+        UserModel::initRecover($uInfo['id'], $code);
+
+        // Добавим текс письма тут
+        $newpass_link = $GLOBALS['conf']['url'] . '/recover/remind/' . $code;
+        $mail_message = "Your link to change your password: \n" .$newpass_link . "\n\n";
+
+        Base::mailText($email, $GLOBALS['conf']['sitename'].' - changing your password', $mail_message);
+
+        Base::addMsg('Новый пароль отправлен на E-mail', 'error');
+        redirect('/login');      
+        
+    }
+    
+    // Страница установки нового пароля
+    public function RemindPage()
+    {
+        // Код активации
+        $code = \Request::get('code');
+ 
+        // проверяем код
+        $user_id = UserModel::getPasswordActivate($code);
+        if(!$user_id) 
+        {
+            Base::addMsg('Код неверен, или он уже использовался. Пройдите процедуру восстановления заново.', 'error');
+            redirect('/recover');   
+        }
+
+        //получаем пользователя
+        if(!$user = UserModel::getUserId($user_id['activate_user_id'])) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
+        }
+         
+        $uid  = Base::getUid();
+        $data = [
+            'title'         => 'Восстановление пароля',
+            'description'   => 'Страница восстановление пароля на сайте',
+            'code'          => $code,
+            'user_id'       => $user_id['activate_user_id'],
+        ];
+        
+        return view('/auth/newrecover', ['data' => $data, 'uid' => $uid]);
+        
+    }
+    
+    public function RemindPageNew()
+    {
+        
+        $password   = \Request::getPost('password');
+        $code       = \Request::getPost('code');
+        $user_id    = \Request::getPost('user_id');
+        
+        if(!$user_id) {
+            return false;
+        }
+
+        if (Base::getStrlen($password) < 8 || Base::getStrlen($password) > 24)
+        {
+            Base::addMsg('Длина пароля должна быть от 8 до 24 знаков', 'error');
+            redirect('/recover/remind/' . $code );
+        }
+ 
+        $newpass  = password_hash($password, PASSWORD_BCRYPT);
+        $news     = UserModel::editPassword($user_id, $newpass);
+         
+        if(!$news) {
+            return false;
+        }
+        
+        UserModel::editRecoverFlag($user_id);
+ 
+        Base::addMsg('Пароль успешно изменен', 'error');
+        redirect('/login');
     }
 
     // Длина строки
