@@ -121,9 +121,17 @@ class AuthController extends \MainController
             redirect('/register');
         }
      
+        if ($GLOBALS['conf']['captcha']) {
+            if (!Base::checkCaptchaCode()) {
+                Base::addMsg('Введеный код не верен', 'error');
+                redirect('/register');
+            }
+        }
+     
         $reg_ip = Request::getRemoteAddress(); // ip при регистрации 
         $user   = UserModel::createUser($login,$email,$password,$reg_ip);
 
+        Base::addMsg('Регистрация прошла успешно. Введите e-mail и пароль.', 'error');
         redirect('/login');
 
     }
@@ -219,9 +227,16 @@ class AuthController extends \MainController
  
     }
 
-    public function sendRecover () {
-        
+    public function sendRecover () 
+    {
         $email = \Request::getPost('email');
+        
+        if ($GLOBALS['conf']['captcha']) {
+            if (!Base::checkCaptchaCode()) {
+                Base::addMsg('Введеный код не верен', 'error');
+                redirect('/recover');
+            }
+        }
         
         if (!$this->checkEmail($email)) {
            Base::addMsg('Недопустимый email', 'error');
@@ -252,7 +267,6 @@ class AuthController extends \MainController
 
         Base::addMsg('Новый пароль отправлен на E-mail', 'error');
         redirect('/login');      
-        
     }
     
     // Страница установки нового пароля
@@ -274,7 +288,7 @@ class AuthController extends \MainController
             include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
             hl_preliminary_exit();
         }
-         
+     
         $uid  = Base::getUid();
         $data = [
             'title'         => 'Восстановление пароля',
@@ -284,12 +298,10 @@ class AuthController extends \MainController
         ];
         
         return view('/auth/newrecover', ['data' => $data, 'uid' => $uid]);
-        
     }
     
     public function RemindPageNew()
     {
-        
         $password   = \Request::getPost('password');
         $code       = \Request::getPost('code');
         $user_id    = \Request::getPost('user_id');
@@ -339,7 +351,6 @@ class AuthController extends \MainController
     private function checkEmail($email)
     {
         $pattern = "/([a-z0-9]*[-_.]?[a-z0-9]+)*@([a-z0-9]*[-_]?[a-z0-9]+)+[.][a-z]{2,3}([.][a-z]{2})?/i";
-
         return preg_match($pattern, $email);
     }
 }

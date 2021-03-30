@@ -22,14 +22,23 @@
                      <div class="boxline">
                         <label for="password_confirm">Повторите пароль</label>
                         <input type="password" name="password_confirm" id="password_confirm">
-                    </div>                    
+                    </div>    
+                    <?php if ($GLOBALS['conf']['captcha']) { ?>
+                        <div class="captcha_data">
+                            <div class="captcha_wrap">
+                                <div class="g-recaptcha" data-theme="light" data-size="normal" data-callback="captcha_ready" data-sitekey="<?php echo $GLOBALS['conf']['public_key']; ?>"></div>
+                                <script async defer nonce="" src="https://www.google.com/recaptcha/api.js?hl=ru"></script>
+                            </div>
+                        </div>   <br />
+                    <?php } ?>
                     <div class="boxline">
                         <div class="boxline">
                             <button type="submit" class="button-primary">Регистрация</button>
+                            <small>
+                                <span class="left-ots"><a href="/login">Войти</a></span>
+                            </small>
                         </div>
-                        <div class="boxline">
-                            <a href="/login">Войти</a>
-                        </div>
+
                     </div>
                 </form>
             </div>

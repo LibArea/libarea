@@ -41,7 +41,7 @@ class UserController extends \MainController
     // Страница участника
     function profile()
     {
-        $login = Request::get('login');
+        $login = \Request::get('login');
         $user  = UserModel::getUserLogin($login);
 
         // Покажем 404
@@ -75,7 +75,7 @@ class UserController extends \MainController
     function settingPage()
     {
         // Данные участника
-        $account = Request::getSession('account');
+        $account = \Request::getSession('account');
         $user = UserModel::getUserLogin($account['login']);
         
         if(!$user['avatar']) {
@@ -99,8 +99,8 @@ class UserController extends \MainController
     // Изменение профиля
     function settingEdit ()
     {
-        $name    = Request::getPost('name');
-        $about   = Request::getPost('about');
+        $name    = \Request::getPost('name');
+        $about   = \Request::getPost('about');
         
         if (Base::getStrlen($name) < 4 || Base::getStrlen($name) > 20)
         {
@@ -115,7 +115,7 @@ class UserController extends \MainController
         }
 
         // Логин участника
-        $account = Request::getSession('account');
+        $account = \Request::getSession('account');
         $login   = $account['login'];
     
         UserModel::editProfile($login, $name, $about);
@@ -127,7 +127,7 @@ class UserController extends \MainController
     function settingPageAvatar ()
     {
         // Аватар участника
-        $account = Request::getSession('account');
+        $account = \Request::getSession('account');
         $ava     = UserModel::getAvatar($account['login']);
         $avatar  = $ava['avatar'];
 
@@ -163,7 +163,7 @@ class UserController extends \MainController
     // Изменение аватарки
     function settingAvatarEdit() 
     {
-        $account  = Request::getSession('account');
+        $account  = \Request::getSession('account');
         $name     = $_FILES['image']['name'];
         $size     = $_FILES['image']['size'];
         $ext      = strtolower(pathinfo($name, PATHINFO_EXTENSION));
@@ -228,9 +228,9 @@ class UserController extends \MainController
     // Изменение пароля
     function settingSecurityEdit()
     {
-        $password    = Request::getPost('password');
-        $password2   = Request::getPost('password2');
-        $password3   = Request::getPost('password3');
+        $password    = \Request::getPost('password');
+        $password2   = \Request::getPost('password2');
+        $password3   = \Request::getPost('password3');
 
         if ($password2 != $password3) {
             Base::addMsg('Пароли не совпадают', 'error');
@@ -248,7 +248,7 @@ class UserController extends \MainController
         }
         
         // Данные участника
-        $account = Request::getSession('account');
+        $account = \Request::getSession('account');
         $userInfo = UserModel::getUserInfo($account['email']);
        
         if (!password_verify($password, $userInfo['password'])) {
@@ -266,7 +266,7 @@ class UserController extends \MainController
     // Страница закладок участника
     function userFavorite ()
     {
-        $login = Request::get('login');
+        $login = \Request::get('login');
 
         $user  = UserModel::getUserLogin($login);
 

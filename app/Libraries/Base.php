@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\NotificationsModel;
+use Hleb\Constructor\Handlers\Request;
 use App\Models\UserModel;
 use JacksonJeans\Mail;
 use JacksonJeans\MailException;
@@ -426,5 +427,57 @@ class Base
             ->setText($message)
             ->send();
     }
- 
+    
+    // Работа с Captcha v2
+    private static function callApi($params) 
+    {
+       $api_url = 'https://www.google.com/recaptcha/api/siteverify';
+       
+       if (!function_exists('curl_init')){
+         
+            $data = @file_get_contents($api_url.'?'.http_build_query($params));
+
+        } else {
+
+            $curl = curl_init();
+
+            if(strpos($api_url, 'https') !== false){
+                curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+                curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+            }
+            curl_setopt($curl, CURLOPT_URL, $api_url);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_HEADER, false);
+            curl_setopt($curl, CURLOPT_TIMEOUT, 5);
+            curl_setopt($curl, CURLOPT_POST, true);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
+
+            $data = curl_exec($curl);
+
+            curl_close($curl);
+
+        }
+
+        if(!$data){ return false; }
+        $data = json_decode($data, true);
+
+        return !empty($data['success']);
+    }
+    
+    // Проверка в AuthControllerе
+    // Методы: 
+    public static function checkCaptchaCode() 
+    {
+        $response = Request::getPost('g-recaptcha-response');
+
+        if(!$response){ return false; }
+        
+        $private_key = $GLOBALS['conf']['private_key']; 
+        
+        return self::callApi(array(
+            'secret'   => $private_key,
+            'response' => $response,
+            'remoteip' => $_SERVER['REMOTE_ADDR']
+        ));
+    } 
 }

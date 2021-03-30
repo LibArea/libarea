@@ -24,10 +24,10 @@
                     <div class="row">
                         <div class="boxline">
                             <button type="submit" class="button-primary">Войти</button>
-                        </div>
-                        <div class="boxline">
-                            <a href="/register">Регистрация</a> &emsp;
-                            <a href="/recover">Забыли пароль?</a>
+                            <small>
+                                <span class="left-ots"><a href="/register">Регистрация</a></span>
+                                <span class="left-ots"><a href="/recover">Забыли пароль?</a></span>
+                            </small>
                         </div>
                     </div>
                 </form>
