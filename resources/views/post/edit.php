@@ -30,10 +30,12 @@
                 <?php } ?>
                 <div class="boxline">  
                     <label for="post_content">Пространство</label>
-                       <b> <?= $post['space_name'] ?></b>
-                      <br><small>  Изменение пространства пока не работают.</small> <br> 
+                    <?php foreach ($space as $sp) { ?>
                         
-                     
+                        <input type="radio" name="space_id" value="<?= $sp['space_id']; ?>"<?php if($post['space_id'] == $sp['space_id']) { ?> checked<?php } ?>><?= $sp['space_name']; ?>
+                       
+                    <?php } ?>
+                    <br> 
                 </div>
                 <input type="hidden" name="post_id" id="post_id" value="<?= $post['post_id']; ?>">
                 <input type="submit" name="submit" value="Изменить" />

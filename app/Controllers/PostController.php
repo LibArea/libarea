@@ -16,7 +16,7 @@ class PostController extends \MainController
     public function index() {
 
         if (Request::get('page')) {
-            $page = (int)Request::get('page');
+            $page = \Request::get('page');
         } else {
             $page = 1;
         }
@@ -27,7 +27,7 @@ class PostController extends \MainController
         }
  
         if($account = Request::getSession('account')){
-            // Получаем все теги отписанные участником
+            // Получаем все пространства отписанные участником
             $space_user  = SpaceModel::getSpaceUser($account['user_id']);
             $user_id     = $account['user_id'];
             $trust_level = $account['trust_level'];
@@ -144,7 +144,6 @@ class PostController extends \MainController
     // Полный пост
     public function view()
     {
- 
         if(!empty($_SESSION['account']['user_id'])) {
             $uid   = $_SESSION['account']['user_id'];
         } else {
@@ -155,7 +154,7 @@ class PostController extends \MainController
         $Parsedown->setSafeMode(true); // безопасность
         
         // Получим пост по slug
-        $slug = Request::get('slug');
+        $slug = \Request::get('slug');
         
         $post = []; 
         $post = PostModel::getPost($slug, $uid);
@@ -167,7 +166,6 @@ class PostController extends \MainController
             hl_preliminary_exit();
         }
         
-       
         if(!$post['avatar']) {
             $post['avatar'] = 'noavatar.png';
         }
@@ -188,7 +186,6 @@ class PostController extends \MainController
         $post['num_comments']   = Base::ru_num('comm', $post['post_comments']); 
         $post['favorite_post']  = PostModel::getMyFavorite($post['post_id'], $uid);
         
-
         // Получим комментарии
         $post_comments = CommentModel::getCommentsPost($post['post_id']);
  
@@ -220,7 +217,6 @@ class PostController extends \MainController
         ]; 
         
         return view("post/view", ['data' => $data, 'post' => $post, 'comms' => $comms,  'uid' => $uid]);
-        
     }
     
     // Для дерева комментариев
@@ -239,14 +235,13 @@ class PostController extends \MainController
     // Посты участника
     public function userPosts()
     {
-        
         if($account = Request::getSession('account')){
             $user_id = $account['user_id'];
         } else {
             $user_id = 0;
         }
         
-        $login = Request::get('login');
+        $login = \Request::get('login');
         $post_user  = PostModel::getUsersPosts($login, $user_id); 
         
         // Если нет такого пользователя
@@ -278,7 +273,6 @@ class PostController extends \MainController
         ]; 
         
         return view("post/user", ['data' => $data, 'uid' => $uid, 'posts' => $result]);
-        
     }
     
     // Форма добавление поста
@@ -294,23 +288,21 @@ class PostController extends \MainController
         ];  
        
         return view("post/add", ['data' => $data, 'uid' => $uid]);
-       
     }
     
     // Добавление поста
     public function createPost()
     {
-
         // Получаем title и содержание
-        $post_title   = Request::getPost('post_title');
+        $post_title   = \Request::getPost('post_title');
         $post_content = $_POST['post_content']; // не фильтруем
         
         // IP адрес и ID кто добавляет
-        $post_ip_int  = Request::getRemoteAddress();
+        $post_ip_int  = \Request::getRemoteAddress();
         $post_user_id = $_SESSION['account']['user_id'];
         
         // Получаем id тега
-        $space_id     = Request::getPost('space');
+        $space_id     = \Request::getPost('space');
         
         // Проверяем длину title
         if (Base::getStrlen($post_title) < 6 || Base::getStrlen($post_title) > 260)
@@ -351,8 +343,7 @@ class PostController extends \MainController
     // Показ формы поста для редактирование
     public function editPost() 
     {
-
-        $post_id = Request::get('id');
+        $post_id = \Request::get('id');
         
         // Получим пост
         $post   = PostModel::getPostId($post_id); 
@@ -366,6 +357,8 @@ class PostController extends \MainController
             redirect('/');
         }
         
+        $space = SpaceModel::getSpaceSelect();
+        
         $uid  = Base::getUid();
         $data = [
             'h1'            => 'Изменить пост',
@@ -373,19 +366,18 @@ class PostController extends \MainController
             'description'   => 'Изменение поста на ' . $GLOBALS['conf']['sitename'],
         ];
         
-        return view("post/edit", ['data' => $data, 'uid' => $uid, 'post' => $post]);
-        
+        return view("post/edit", ['data' => $data, 'uid' => $uid, 'post' => $post, 'space' => $space]);
     }
     
-    // Запись при редактирование
+    // Изменяем пост
     public function editPostRecording() 
     {
-        
-        $post_id        = Request::getPost('post_id');
-        $post_title     = Request::getPost('post_title');
-        $post_content   = Request::getPost('post_content');
-        $post_closed    = Request::getPost('closed');
-        $post_top       = Request::getPost('top');
+        $post_id        = \Request::getPostInt('post_id');
+        $post_title     = \Request::getPost('post_title');
+        $post_content   = \Request::getPost('post_content');
+        $post_closed    = \Request::getPost('closed');
+        $post_top       = \Request::getPost('top');
+        $post_space_id  = \Request::getPostInt('space_id');
         
         // Получим пост
         $post = PostModel::getPostId($post_id); 
@@ -429,19 +421,18 @@ class PostController extends \MainController
             'post_content'  => $post_content,
             'post_closed'   => $post_closed,
             'post_top'      => $post_top,
+            'post_space_id' => $post_space_id,
         ];
         
         // Перезапишем пост
         PostModel::editPost($data);
         
         redirect('/posts/' . $post['post_slug']);
-        
     }
     
     // Размещение своего поста у себя в профиле
     public function addPostProf()
     {
-        
         $post_id = \Request::getPostInt('post_id');
         
         // Получим пост
@@ -455,13 +446,11 @@ class PostController extends \MainController
         PostModel::addPostProfile($post_id, $_SESSION['account']['user_id']);
        
         return true;
-        
     }
   
     // Помещаем пост в закладки
     public function addPostFavorite()
     {
-
         $post_id = \Request::getPostInt('post_id');
         $post    = PostModel::getPostId($post_id); 
         
@@ -472,13 +461,11 @@ class PostController extends \MainController
         PostModel::setPostFavorite($post_id, $_SESSION['account']['user_id']);
        
         return true;
-        
     }
   
     // Удаляем пост / + восстанавливаем пост
     public function deletePost()
     {
-        
         // Доступ только персоналу
         $account = Request::getSession('account');
         if ($account['trust_level'] != 5) {
@@ -490,7 +477,6 @@ class PostController extends \MainController
         PostModel::PostDelete($post_id);
        
         return true;
-        
     }
   
 }

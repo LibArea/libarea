@@ -183,7 +183,7 @@ class PostModel extends \MainModel
     {
         $edit_date = date("Y-m-d H:i:s"); 
        
-        XD::update(['posts'])->set(['post_title'], '=', $data['post_title'], ',', ['edit_date'], '=', $edit_date, ',', ['post_content'], '=', $data['post_content'], ',', ['post_closed'], '=', $data['post_closed'], ',', ['post_top'], '=', $data['post_top'])
+        XD::update(['posts'])->set(['post_title'], '=', $data['post_title'], ',', ['edit_date'], '=', $edit_date, ',', ['post_content'], '=', $data['post_content'], ',', ['post_closed'], '=', $data['post_closed'], ',', ['post_top'], '=', $data['post_top'], ',', ['post_space_id'], '=', $data['post_space_id'])
         ->where(['post_id'], '=', $data['post_id'])->run();
  
         return true;

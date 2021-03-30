@@ -27,6 +27,9 @@
                 <li>Нет нападкам.</li>
                 <li>Нет спаму.</li>
             </ul>
+            
+            <br> 
+             <i>AreaDev на GitHub:</i> <a rel="nofollow noreferrer" target="_blank" href="https://github.com/Toxu-ru/AreaDev">AreaDev</a>
         </div>
     </div>
 <section>

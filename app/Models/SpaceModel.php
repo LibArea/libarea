@@ -7,7 +7,14 @@ class SpaceModel extends \MainModel
 {
     
     // Все пространства сайта
-    public static function getSpaceHome()
+    public static function getSpaceAll()
+    {
+        return  XD::select('*')->from(['space'])->getSelect();
+    } 
+
+    // Для форм добалвения и изменения, для массовой отписки и подписки (В планах!)
+    // Пока запрос одинаков с ALL, но необходимо учитывать TL и права Space
+    public static function getSpaceSelect()
     {
         return  XD::select('*')->from(['space'])->getSelect();
     } 
@@ -29,7 +36,7 @@ class SpaceModel extends \MainModel
         return  XD::select('*')->from(['space'])->where(['space_slug'], '=', $slug)->getSelectOne();
     }
     
-    // Все теги на которые отписан пользователь
+    // Все пространства на которые отписан пользователь
     public static function getSpaceUser($user_id) 
     {
         $q = XD::select('*')->from(['space_hidden']);
@@ -73,8 +80,9 @@ class SpaceModel extends \MainModel
     {
         // Временное решение для TL5
         if(!$data['space_color']) { $data['space_color'] = '#339900';}
+        if(!$data['space_img']) { $data['space_img'] = 'space-default.png';}
         
-        XD::update(['space'])->set(['space_slug'], '=', $data['space_slug'], ',', ['space_name'], '=', $data['space_name'], ',', ['space_description'], '=', $data['space_description'], ',', ['space_color'], '=', $data['space_color'], ',', ['space_text'], '=', $data['space_text'])->where(['space_id'], '=', $data['space_id'])->run();
+        XD::update(['space'])->set(['space_slug'], '=', $data['space_slug'], ',', ['space_name'], '=', $data['space_name'], ',', ['space_description'], '=', $data['space_description'], ',', ['space_color'], '=', $data['space_color'], ',', ['space_img'], '=', $data['space_img'], ',', ['space_text'], '=', $data['space_text'])->where(['space_id'], '=', $data['space_id'])->run();
         
         return true;
     }

@@ -12,7 +12,7 @@ class SpaceController extends \MainController
     public function index()
     {
 
-       $space = SpaceModel::getSpaceHome();
+        $space = SpaceModel::getSpaceAll();
 
         $uid  = Base::getUid();
         $data = [
@@ -109,7 +109,7 @@ class SpaceController extends \MainController
         // Если пользователи смогут создавать пространства с TL2
         // То данный метод следует изменить
         $data = [
-            'space_id'          => \Request::getPostInt('space_id'),
+            'space_id'          => \Request::getPost('space_id'),
             'space_slug'        => \Request::getPost('space_slug'),
             'space_name'        => \Request::getPost('space_name'),
             'space_description' => \Request::getPost('space_description'),

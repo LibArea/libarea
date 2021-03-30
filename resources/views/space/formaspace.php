@@ -28,7 +28,7 @@
                     </div>
                     <div class="boxline">
                         <label for="post_content">Текст</label>
-                       <textarea name="space_text"><?= $space['space_text']; ?></textarea><br />
+                        <textarea name="space_text"><?= $space['space_text']; ?></textarea><br />
                     </div>
 
                     <input type="hidden" name="space_id" id="space_id" value="<?= $space['space_id']; ?>">
