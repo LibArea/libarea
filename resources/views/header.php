@@ -19,28 +19,28 @@
 <header>
 	<div class="wrap">
 		<div class="title">
-            <a title="На главную" class="logo" href="/">My</a>
+            <a title="<?= L_HOME; ?>" class="logo" href="/"><?= L_LOGO; ?></a>
             <div class="menu-left">
                 <ul>
                     <li class="nav no-mob">
                         <?php if(Request::getUri() == '/') { ?>
-                            <a title="На главную" class="home" href="/">AreaDev</a>
+                            <a title="<?= L_HOME; ?>" class="home" href="/"><?= L_HOME_NAME; ?></a>
                         <?php } else { ?>
-                           <a title="На главную" class="home" href="/">Главная</a>
+                           <a title="<?= L_HOME; ?>" class="home" href="/"><?= L_HOME; ?></a>
                         <?php } ?>
                     </li>
                     <li class="nav no-mob<?php if(Request::getUri() == '/top') { ?> active<?php } ?>">
-                        <a title="TOP постов" class="home" href="/top">
-                            TOP
+                        <a title="<?= L_TOP; ?>" class="home" href="/top">
+                            <?= L_TOP; ?>
                         </a>
                     </li>
                     <li class="nav no-mob-two<?php if(Request::getUri() == '/comments') { ?> active<?php } ?>">
-                        <a title="Все комментарии" class="comments" href="/comments">
-                            Комментарии
+                        <a title="<?= L_COMMENTS; ?>" class="comments" href="/comments">
+                            <?= L_COMMENTS; ?>  
                         </a>
-                    </li>  
+                    </li>   
                     <li class="nav no-mob-two<?php if(Request::getUri() == '/space') { ?> active<?php } ?>">
-                        <a title="Пространства" class="sp" href="/space">~</a>
+                        <a title="<?= L_SPACE; ?>" class="sp" href="/space">~</a>
                     </li>
                 </ul>
             </div>
@@ -56,10 +56,10 @@
                 </li>
                 <?php if(!$uid['id']) { ?> 
                     <li class="nav">
-                        <a class="login" href="/login">Войти</a>
+                        <a class="login" title="<?= L_ENTRY; ?>" href="/login"><?= L_ENTRY; ?></a>
                     </li>
                     <li class="nav">
-                        <a class="register" href="/register">Регистрация</a>
+                        <a class="register" title="<?= L_REGISTRATION; ?>" href="/register"><?= L_REGISTRATION; ?></a>
                     </li>
                 <?php } else { ?> 
                     <li class="nav create">  
@@ -91,46 +91,46 @@
                                 <svg class="md-icon">
                                     <use xlink:href="/assets/svg/icons.svg#user"></use>
                                 </svg> 
-                                Профиль
+                                <?= L_PROFILE; ?>
                             </a>
                             <a href="/users/setting">
                                 <svg class="md-icon">
                                     <use xlink:href="/assets/svg/icons.svg#settings"></use>
                                 </svg> 
-                                Настройки
+                                <?= L_SETTINGS; ?>
                             </a>
                             <a href="/messages">
                                 <svg class="md-icon">
                                     <use xlink:href="/assets/svg/icons.svg#mail"></use>
                                 </svg>  
-                                Сообщения             
+                                <?= L_MESSAGES; ?>
                             </a>
                             <a href="/threads/<?= $uid['login']; ?>"> 
                                 <svg class="md-icon">
                                     <use xlink:href="/assets/svg/icons.svg#devices"></use>
                                 </svg> 
-                                Мои ответы 
+                                <?= L_MY_COMM; ?> 
                             </a>
                             <a href="/favorite/<?= $uid['login']; ?>">
                                 <svg class="md-icon">
                                     <use xlink:href="/assets/svg/icons.svg#bookmark"></use>
                                 </svg>  
-                                Избранное               
+                                <?= L_FAVORITES; ?>              
                             </a>
                             <?php if($uid['trust_level'] == 5) { ?>
                                 <a href="/admin" target="_black">
                                     <svg class="md-icon">
                                         <use xlink:href="/assets/svg/icons.svg#ad"></use>
                                     </svg>   
-                                    Админка                    
+                                    <?= L_ADMIN; ?>                    
                                 </a> 
                             <?php } ?>     
                             <hr>   
-                            <a href="/logout" class="logout" target="_self" title="Выход">
+                            <a href="/logout" class="logout" target="_self" title="<?= L_LOGOUT; ?>">
                                 <svg class="md-icon">
                                     <use xlink:href="/assets/svg/icons.svg#arrow-bar-to-right"></use>
                                 </svg> 
-                                Выход
+                                <?= L_LOGOUT; ?>
                             </a>
                         </span>
                     </li>

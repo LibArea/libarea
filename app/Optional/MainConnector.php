@@ -31,11 +31,8 @@ class MainConnector implements Connector
             // https://github.com/JacksonJeans/php-mail
             "JacksonJeans\MailException" => "app/Libraries/php-mail/src/JacksonJeans/MailException.class.php",
             "JacksonJeans\Mail" => "app/Libraries/php-mail/src/JacksonJeans/Mail.class.php",
-
-            
         ];
 
     }
-       
 }
 

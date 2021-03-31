@@ -11,8 +11,9 @@ define('HLEB_FRAME_VERSION', "1.5.58");
 define('HLEB_PUBLIC_DIR', __DIR__);
 define('TEMPLATE_DIR', realpath(__DIR__ . '/../resources/views/'));
 
-// Загружаем файл конфигурации
+// Загружаем файл конфигурации и локализации
 $GLOBALS['conf'] = include( __DIR__ .'/../config.inc.php');
+require __DIR__ . '/../app/Language/'. $GLOBALS['conf']['lang'] .'/lang.php';
 
 // General headers.
 // Общие заголовки.

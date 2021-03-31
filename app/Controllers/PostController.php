@@ -12,6 +12,7 @@ use Parsedown;
 
 class PostController extends \MainController
 {
+   
     // Главная страница
     public function index() {
 
