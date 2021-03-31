@@ -103,3 +103,11 @@ function public_path() {
 function view_path() {
     return hleb_601e30l60p2ii1e0o469tl_view_path();
 }
+  
+// Локализация
+function lang($text){ 
+    if(isset(LANG[$text])){ 
+        return LANG[$text];
+    }
+    return $text;
+}

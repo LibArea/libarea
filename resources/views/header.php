@@ -19,28 +19,28 @@
 <header>
 	<div class="wrap">
 		<div class="title">
-            <a title="<?= L_HOME; ?>" class="logo" href="/"><?= L_LOGO; ?></a>
+            <a title="<?= lang('Home'); ?>" class="logo" href="/"><?= lang('My'); ?></a>
             <div class="menu-left">
                 <ul>
                     <li class="nav no-mob">
                         <?php if(Request::getUri() == '/') { ?>
-                            <a title="<?= L_HOME; ?>" class="home" href="/"><?= L_HOME_NAME; ?></a>
+                            <a title="<?= lang('Home'); ?>" class="home" href="/"><?= lang('AreaDev'); ?></a>
                         <?php } else { ?>
-                           <a title="<?= L_HOME; ?>" class="home" href="/"><?= L_HOME; ?></a>
+                           <a title="<?= lang('Home'); ?>" class="home" href="/"><?= lang('Home'); ?></a>
                         <?php } ?>
                     </li>
                     <li class="nav no-mob<?php if(Request::getUri() == '/top') { ?> active<?php } ?>">
-                        <a title="<?= L_TOP; ?>" class="home" href="/top">
-                            <?= L_TOP; ?>
+                        <a title="<?= lang('TOP'); ?>" class="home" href="/top">
+                            <?= lang('TOP'); ?>
                         </a>
                     </li>
                     <li class="nav no-mob-two<?php if(Request::getUri() == '/comments') { ?> active<?php } ?>">
-                        <a title="<?= L_COMMENTS; ?>" class="comments" href="/comments">
-                            <?= L_COMMENTS; ?>  
+                        <a title="<?= lang('Comments'); ?>" class="comments" href="/comments">
+                             <?= lang('Comments'); ?>
                         </a>
                     </li>   
                     <li class="nav no-mob-two<?php if(Request::getUri() == '/space') { ?> active<?php } ?>">
-                        <a title="<?= L_SPACE; ?>" class="sp" href="/space">~</a>
+                        <a title="<?= lang('Space'); ?>" class="sp" href="/space">~</a>
                     </li>
                 </ul>
             </div>
@@ -54,12 +54,12 @@
                         </svg>
                     </span>
                 </li>
-                <?php if(!$uid['id']) { ?> 
+                <?php if(!$uid['id']) { ?>  
                     <li class="nav">
-                        <a class="login" title="<?= L_ENTRY; ?>" href="/login"><?= L_ENTRY; ?></a>
+                        <a class="login" title="<?= lang('Sign in'); ?>" href="/login"><?= lang('Sign in'); ?></a>
                     </li>
                     <li class="nav">
-                        <a class="register" title="<?= L_REGISTRATION; ?>" href="/register"><?= L_REGISTRATION; ?></a>
+                        <a class="register" title="<?= lang('Sign up'); ?>" href="/register"><?= lang('Sign up'); ?></a>
                     </li>
                 <?php } else { ?> 
                     <li class="nav create">  
@@ -91,46 +91,46 @@
                                 <svg class="md-icon">
                                     <use xlink:href="/assets/svg/icons.svg#user"></use>
                                 </svg> 
-                                <?= L_PROFILE; ?>
+                                <?= lang('Profile'); ?>
                             </a>
                             <a href="/users/setting">
                                 <svg class="md-icon">
                                     <use xlink:href="/assets/svg/icons.svg#settings"></use>
                                 </svg> 
-                                <?= L_SETTINGS; ?>
+                                <?= lang('Settings'); ?>
                             </a>
                             <a href="/messages">
                                 <svg class="md-icon">
                                     <use xlink:href="/assets/svg/icons.svg#mail"></use>
                                 </svg>  
-                                <?= L_MESSAGES; ?>
+                                <?= lang('Messages'); ?>
                             </a>
                             <a href="/threads/<?= $uid['login']; ?>"> 
                                 <svg class="md-icon">
-                                    <use xlink:href="/assets/svg/icons.svg#devices"></use>
+                                    <use xlink:href="/assets/svg/icons.svg#message"></use>
                                 </svg> 
-                                <?= L_MY_COMM; ?> 
+                                <?= lang('Comments'); ?> 
                             </a>
                             <a href="/favorite/<?= $uid['login']; ?>">
                                 <svg class="md-icon">
                                     <use xlink:href="/assets/svg/icons.svg#bookmark"></use>
                                 </svg>  
-                                <?= L_FAVORITES; ?>              
+                                <?= lang('Favorites'); ?>              
                             </a>
                             <?php if($uid['trust_level'] == 5) { ?>
                                 <a href="/admin" target="_black">
                                     <svg class="md-icon">
                                         <use xlink:href="/assets/svg/icons.svg#ad"></use>
                                     </svg>   
-                                    <?= L_ADMIN; ?>                    
+                                    <?= lang('Admin'); ?>                   
                                 </a> 
                             <?php } ?>     
                             <hr>   
-                            <a href="/logout" class="logout" target="_self" title="<?= L_LOGOUT; ?>">
+                            <a href="/logout" class="logout" target="_self" title="<?= lang('Sign out'); ?>">
                                 <svg class="md-icon">
                                     <use xlink:href="/assets/svg/icons.svg#arrow-bar-to-right"></use>
                                 </svg> 
-                                <?= L_LOGOUT; ?>
+                                <?= lang('Sign out'); ?>
                             </a>
                         </span>
                     </li>

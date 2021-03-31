@@ -13,7 +13,7 @@ define('TEMPLATE_DIR', realpath(__DIR__ . '/../resources/views/'));
 
 // Загружаем файл конфигурации и локализации
 $GLOBALS['conf'] = include( __DIR__ .'/../config.inc.php');
-require __DIR__ . '/../app/Language/'. $GLOBALS['conf']['lang'] .'/lang.php';
+define('LANG', include_once(__DIR__ .'/../app/Language/'. $GLOBALS['conf']['lang']. '/lang.php'));
 
 // General headers.
 // Общие заголовки.
