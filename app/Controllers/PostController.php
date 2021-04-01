@@ -186,8 +186,6 @@ class PostController extends \MainController
         }
         
         if(Base::getStrlen($post['post_url']) > 6) {
-            $post['post_url_full'] = $post['post_url'];
-            
             $parse = parse_url($post['post_url']);
             $post['post_url'] = $parse['host'];  
         } 
@@ -195,7 +193,7 @@ class PostController extends \MainController
         // Обработает некоторые поля
         $post['post_content']   = $Parsedown->text($post['post_content']);
         $post['post_url']       = $post['post_url'];
-        $post['post_url_full']  = $post['post_url_full'];
+        $post['post_url_full']  = empty($post['post_url_full']);
         $post['post_date']      = Base::ru_date($post['post_date']);
         $post['edit_date']      = Base::ru_date($post['edit_date']);
         $post['avatar']         = $post['avatar'];
