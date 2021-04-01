@@ -565,6 +565,9 @@ h1 span{
   vertical-align: middle;
 }
 /* Комментарии */
+.block-comments.line{
+    border-top: 3px dotted #ddd;
+}
 .authorpost {
   color: #f8a853;
 }

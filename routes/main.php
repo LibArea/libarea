@@ -81,6 +81,7 @@ Route::get('/info/rules')->controller('InfoController@rules');
 Route::get('/info/about')->controller('InfoController@about');
 Route::get('/info/privacy')->controller('InfoController@privacy');
 Route::get('/info/trust-level')->controller('InfoController@trustlevel');
+Route::get('/info/restriction')->controller('InfoController@restriction');
 
 // Участники
 Route::get('/users')->controller('UserController');

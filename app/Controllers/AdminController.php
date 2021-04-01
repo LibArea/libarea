@@ -29,7 +29,7 @@ class AdminController extends \MainController
             $row['replayIp']      = AdminModel::replayIp($row['reg_ip']);
             $row['isBan']         = AdminModel::isBan($row['id']);
             $row['created_at']    = Base::ru_date($row['created_at']); 
-            $row['logs_date']     = Base::ru_date($row['logs_date']);
+            $row['logs_date']     = Base::ru_date(empty($row['logs_date']));
             $row['updated_at']    = Base::ru_date($row['updated_at']);
             $result[$ind]         = $row;
          

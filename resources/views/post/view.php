@@ -27,73 +27,74 @@
                             <?php } ?> 
                         <?php } ?> 
             
-            
-                <h1 class="titl"><?= $post['post_title']; ?></h1>
+                <div class="post-body">
+                    <h1 class="titl"><?= $post['post_title']; ?></h1>
                 
-                <div class="footer">
-                    <img class="ava" src="/uploads/avatar/small/<?= $post['avatar']; ?>">
-                    <span class="user"> 
-                        <a href="/u/<?= $post['login']; ?>"><?= $post['login']; ?></a> 
-                    </span>
-                    <span class="date"> 
-                        <?= $post['post_date']; ?>
-                        <?php if($post['edit_date']) { ?> 
-                            (изм. <?= $post['edit_date']; ?>) 
-                        <?php } ?>
-                    </span>
-                    <span class="date"> 
-                        <a class="space space_<?= $post['space_tip'] ?>" href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
-                            <?= $post['space_name']; ?>
-                        </a>
-                        <span class="otst">   </span>
-                    </span>
-                    <?php if ($uid['id']) { ?>
-                        <?php if($uid['login'] == $post['login']) { ?>
-                            <span class="date">
-                               &nbsp; <a href="/post/edit/<?= $post['post_id']; ?>">
-                                    <svg class="md-icon moon">
-                                        <use xlink:href="/assets/svg/icons.svg#edit"></use>
-                                    </svg>
-                                </a>
-                            </span>
-                            <?php if($post['my_post'] == $post['post_id']) { ?>
-                                    <span class="mu_post">+ в профиле</span>
-                                    <span class="otst"> | </span>
-                            <?php } else { ?> 
-                                <a class="user-mypost" data-opt="1" data-post="<?= $post['post_id']; ?>">
-                                    <span class="mu_post">В профиль</span>
-                                    <span class="otst"> |  </span>
-                                </a>
-                            <?php } ?> 
-                        <?php } ?> 
-                        
-                        <?php if ($post['favorite_post']){ ?>
-                           <span class="otst">   </span>    
-                           <span class="user-favorite" data-post="<?= $post['post_id']; ?>">
-                                <span class="mu_favorite">Убрать из избранного</span>
-                           </span>   
-                        <?php } else { ?>
+                    <div class="footer">
+                        <img class="ava" src="/uploads/avatar/small/<?= $post['avatar']; ?>">
+                        <span class="user"> 
+                            <a href="/u/<?= $post['login']; ?>"><?= $post['login']; ?></a> 
+                        </span>
+                        <span class="date"> 
+                            <?= $post['post_date']; ?>
+                            <?php if($post['edit_date']) { ?> 
+                                (изм. <?= $post['edit_date']; ?>) 
+                            <?php } ?>
+                        </span>
+                        <span class="date"> 
+                            <a class="space space_<?= $post['space_tip'] ?>" href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
+                                <?= $post['space_name']; ?>
+                            </a>
                             <span class="otst">   </span>
-                            <span class="user-favorite" data-post="<?= $post['post_id']; ?>">
-                                <span class="mu_favorite">В избранное</span>
-                            </span>
-                        <?php } ?> 
-                        
-                        <?php if($uid['trust_level'] ==5) { ?>
-                            <span class="otst"> | </span>
-                            <span id="cm_dell" class="cm_add_link">
-                                <a data-post="<?= $post['post_id']; ?>" class="delpost">
-                                    <?php if($post['post_is_delete'] == 1) { ?>
-                                        Восстановить
-                                    <?php } else { ?>
-                                        Удалить
-                                    <?php } ?>
-                                </a>
-                            </span>
+                        </span>
+                        <?php if ($uid['id']) { ?>
+                            <?php if($uid['login'] == $post['login']) { ?>
+                                <span class="date">
+                                   &nbsp; <a href="/post/edit/<?= $post['post_id']; ?>">
+                                        <svg class="md-icon moon">
+                                            <use xlink:href="/assets/svg/icons.svg#edit"></use>
+                                        </svg>
+                                    </a>
+                                </span>
+                                <?php if($post['my_post'] == $post['post_id']) { ?>
+                                        <span class="mu_post">+ в профиле</span>
+                                        <span class="otst"> | </span>
+                                <?php } else { ?> 
+                                    <a class="user-mypost" data-opt="1" data-post="<?= $post['post_id']; ?>">
+                                        <span class="mu_post">В профиль</span>
+                                        <span class="otst"> |  </span>
+                                    </a>
+                                <?php } ?> 
+                            <?php } ?> 
+                            
+                            <?php if ($post['favorite_post']){ ?>
+                               <span class="otst">   </span>    
+                               <span class="user-favorite" data-post="<?= $post['post_id']; ?>">
+                                    <span class="mu_favorite">Убрать из избранного</span>
+                               </span>   
+                            <?php } else { ?>
+                                <span class="otst">   </span>
+                                <span class="user-favorite" data-post="<?= $post['post_id']; ?>">
+                                    <span class="mu_favorite">В избранное</span>
+                                </span>
+                            <?php } ?> 
+                            
+                            <?php if($uid['trust_level'] ==5) { ?>
+                                <span class="otst"> | </span>
+                                <span id="cm_dell" class="cm_add_link">
+                                    <a data-post="<?= $post['post_id']; ?>" class="delpost">
+                                        <?php if($post['post_is_delete'] == 1) { ?>
+                                            Восстановить
+                                        <?php } else { ?>
+                                            Удалить
+                                        <?php } ?>
+                                    </a>
+                                </span>
+                            <?php } ?>
+                            
                         <?php } ?>
-                        
-                    <?php } ?>
-                </div>  
+                    </div>  
+                </div>
                 <div class="left-ots">
                     <div class="post">
                         <?= $post['post_content']; ?> 

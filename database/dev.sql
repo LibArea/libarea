@@ -363,6 +363,40 @@ ALTER TABLE `votes_post`
 
 ALTER TABLE `votes_post`
   MODIFY `votes_post_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Структура и дамп таблицы `invitation`
+--
+
+CREATE TABLE `invitation` (
+  `invitation_id` int(10) UNSIGNED NOT NULL,
+  `uid` int(11) DEFAULT '0',
+  `invitation_code` varchar(32) DEFAULT NULL,
+  `invitation_email` varchar(255) DEFAULT NULL,
+  `add_time` int(10) DEFAULT NULL,
+  `add_ip` bigint(12) DEFAULT NULL,
+  `active_expire` tinyint(1) DEFAULT '0',
+  `active_time` int(10) DEFAULT NULL,
+  `active_ip` bigint(12) DEFAULT NULL,
+  `active_status` tinyint(4) DEFAULT '0',
+  `active_uid` int(11) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Индексы таблицы `invitation`
+--
+ALTER TABLE `invitation`
+  ADD PRIMARY KEY (`invitation_id`),
+  ADD KEY `uid` (`uid`),
+  ADD KEY `invitation_code` (`invitation_code`),
+  ADD KEY `invitation_email` (`invitation_email`),
+  ADD KEY `active_time` (`active_time`),
+  ADD KEY `active_ip` (`active_ip`),
+  ADD KEY `active_status` (`active_status`);
+  
+  ALTER TABLE `invitation`
+  MODIFY `invitation_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
 --
 -- Индексы сохранённых таблиц
 --

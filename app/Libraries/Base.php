@@ -18,6 +18,13 @@ class Base
 
             $usr = UserModel::getUserId($user['user_id']);
  
+            if($usr['ban_list'] == 1) {
+                if(!isset($_SESSION)) { session_start(); } 
+                session_destroy();
+                UserModel::DeleteTokenByUserId($usr['id']);
+                redirect('/info/restriction');
+            }
+
             if(!$usr['avatar'] ) {
                 $usr['avatar'] = 'noavatar.png';
             } 
@@ -59,7 +66,6 @@ class Base
     public static function addMsg($msg, $class='info'){
         $_SESSION['msg'][] = '<div class="msg_'.$class.'">✔ '.$msg.'</div>';
     }
-  
   
     public static function seo($str, $options = array('transliterate' => true))
     {

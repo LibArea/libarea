@@ -84,5 +84,16 @@ class InfoController extends \MainController
         ];
 
         return view('info/trust-level', ['data' => $data, 'uid' => $uid]);
-	}
+	} 
+    
+    public function restriction()
+	{
+        $uid  = Base::getUid();
+        $data = [
+            'title'       => 'Ограничение  | ' . $GLOBALS['conf']['sitename'],
+            'description' => 'Профиль проверяется ' . $GLOBALS['conf']['sitename'],
+        ];
+
+        return view('info/restriction', ['data' => $data, 'uid' => $uid]);
+	} 
 }

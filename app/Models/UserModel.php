@@ -36,12 +36,11 @@ class UserModel extends \MainModel
 
     }
     
-    
     // Получение информации по id
     public static function getUserId($id)
     {
 
-        $query = XD::select(['id', 'login', 'name', 'email', 'avatar', 'about', 'trust_level'])
+        $query = XD::select(['id', 'login', 'name', 'email', 'avatar', 'about', 'trust_level', 'ban_list'])
                 ->from(['users'])
                 ->where(['id'], '=', $id);
 
