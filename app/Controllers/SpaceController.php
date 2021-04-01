@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use App\Models\SpaceModel;
 use Hleb\Constructor\Handlers\Request;
+use ImageUpload;
 use Base;
 
 class SpaceController extends \MainController
@@ -38,6 +39,10 @@ class SpaceController extends \MainController
         $slug  = Request::get('slug');
         $space = SpaceModel::getSpaceInfo($slug);
         $posts = SpaceModel::getSpacePosts($space['space_id'], $user_id);
+  
+        if(!$space['space_img'] ) {
+            $space['space_img'] = 'space_no.png';
+        } 
   
         // Покажем 404
         if(!$posts) {
@@ -81,10 +86,14 @@ class SpaceController extends \MainController
         if ($account['trust_level'] != 5) {
             return false;
         }
-        
+ 
         $slug  = Request::get('slug');
         $space = SpaceModel::getSpaceInfo($slug);
-        
+
+        if(!$space['space_img'] ) {
+            $space['space_img'] = 'space_no.png';
+        } 
+     
         $uid  = Base::getUid();
         $data = [
             'h1'            => 'Изменение - ' . $slug,
@@ -105,16 +114,86 @@ class SpaceController extends \MainController
             return false;
         } 
         
+        $space_slug = \Request::getPost('space_slug');
+        $space_id   = \Request::getPost('space_id');
+        
+        $name     = $_FILES['image']['name'];
+        
+        if($name) {
+            $size     = $_FILES['image']['size'];
+            $ext      = strtolower(pathinfo($name, PATHINFO_EXTENSION));
+            $width_h  = getimagesize($_FILES['image']['tmp_name']);
+           
+            $valid =  true;
+            if (!in_array($ext, array('jpg','jpeg','png','gif'))) {
+                $valid = false;
+                Base::addMsg('Тип файла не разрешен', 'error');
+                redirect('/space/'.$space_slug.'/edit');
+            }
+
+            // Проверка ширины, высоты и размера
+            if ($width_h['0'] > 150) {
+                $valid = false;
+                Base::addMsg('Ширина больше 150 пикселей', 'error');
+                redirect('/space/'.$space_slug.'/edit');
+            }
+            if ($width_h['1'] > 150) {
+                $valid = false;
+                Base::addMsg('Высота больше 150 пикселей', 'error');
+                redirect('/space/'.$space_slug.'/edit');
+            }
+            if ($size > 50000) {
+                $valid = false;
+                Base::addMsg('Размер файла превышает допустимый', 'error');
+                redirect('/space/'.$space_slug.'/edit');
+            }
+
+            if ($valid) {
+                // 110px и 18px
+                $path_img       = HLEB_PUBLIC_DIR. '/uploads/space/';
+                $path_img_small = HLEB_PUBLIC_DIR. '/uploads/space/small/';
+                
+                $image = new ImageUpload('image'); 
+                
+                $image->resize(110, 110, 'crop');            
+                $img = $image->saveTo($path_img, $space_id . '_space');
+                
+                $image->resize(18, 18);            
+                $image->saveTo($path_img_small, $space_id. '_space');
+                
+                // Узнаем преждний img
+                $space = SpaceModel::getSpaceImg($space_id);
+                
+                if($space['space_img']){
+                    chmod($path_img . $space['space_img'], 0777);
+                    chmod($path_img_small . $space['space_img'], 0777);
+                    unlink($path_img . $space['space_img']);
+                    unlink($path_img_small . $space['space_img']);
+                }  
+                $space_img = $img;
+            } else {
+                $space_img = 'space-default.png';
+            }
+            
+        } else {
+            $space_img = 'space-default.png';
+        }
+        
+        if(!$data['space_color']) { 
+            $data['space_color'] = '#339900';
+        }
+        
         // Пока перечислим все поля
         // Если пользователи смогут создавать пространства с TL2
         // То данный метод следует изменить
         $data = [
-            'space_id'          => \Request::getPost('space_id'),
-            'space_slug'        => \Request::getPost('space_slug'),
+            'space_id'          => $space_id,
+            'space_slug'        => $space_slug,
             'space_name'        => \Request::getPost('space_name'),
             'space_description' => \Request::getPost('space_description'),
             'space_color'       => \Request::getPost('space_color'),
             'space_text'        => $_POST['space_text'], // Не фильтруем!
+            'space_img'         => $space_img,
         ]; 
         
         SpaceModel::setSpaceEdit($data);

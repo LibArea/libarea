@@ -140,6 +140,7 @@ CREATE TABLE `posts` (
   `post_content` text NOT NULL,
   `post_closed` tinyint(1) NOT NULL DEFAULT 0,
   `post_top` tinyint(1) NOT NULL DEFAULT 0,
+  `post_url` varchar(250) NOT NULL,
   `post_is_delete` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

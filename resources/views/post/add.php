@@ -9,21 +9,34 @@
                 <?= csrf_field() ?>
                 <div class="boxline">
                     <label for="post_title">Заголовок</label>
-                    <input class="add" type="text" name="post_title" /><br />
-                </div>        
+                    <input id="title" class="add" type="text" name="post_title" /><br />
+                </div>   
+                <?php if($uid['trust_level'] == 5) { ?>
+                    <div class="boxline">
+                        <label for="post_title">URL</label>
+                        <span class="w-50">
+                            <input id="link" class="add" type="url" name="post_url" />
+                        </span>
+                        <span class="w-33">
+                            <input id="graburl" type="submit_url" name="submit_url" value="Извлечь" />
+                        </span>
+                        <br>
+                    </div>
+                <?php } ?>
                 <div class="boxline">
                     <label for="post_content">Текст</label>
-                    <textarea name="post_content"></textarea><br />
+                    <textarea name="post_content"></textarea> <br />
                 </div>
-                
                 <div class="boxline">
                     <label for="post_content">Пространство</label>
                     <input type="radio" name="space" value="1" > cms
                     <input type="radio" name="space" value="2" > вопросы
                     <input type="radio" name="space" value="3" > флуд
                 </div>
-                
-                
+         
+                Все поля обязательны к заполнению...<br>
+                Поле URL является эксперементом (и не работает). Просто пропустите его.
+                <br><br>
                 <input type="submit" name="submit" value="Написать" />
             </form>
         </div>

@@ -99,6 +99,14 @@
                         <?= $post['post_content']; ?> 
                     </div> 
 
+                    <?php if($post['post_url']) { ?> 
+                        <span class="post_url_detal">
+                            Источник: <a rel="nofollow noreferrer" href="<?= $post['post_url_full']; ?>">
+                               <?= $post['post_url']; ?>
+                            </a>
+                        </span> 
+                    <?php } ?>
+
                     <?php if ($uid['id']) { ?>
                        <?php if($post['post_closed'] == 0) { ?>
                             <form id="add_comm" class="new_comment" action="/comment/add" accept-charset="UTF-8" method="post">

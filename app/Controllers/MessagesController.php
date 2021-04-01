@@ -27,7 +27,7 @@ class MessagesController extends \MainController
             } 
             
 		} else {
-            $dialog_ids = 0;
+            $dialog_ids = null;
         }
         
         if ($dialog_ids)
@@ -37,7 +37,7 @@ class MessagesController extends \MainController
   
 	    if ($messages_dialog)
 		{
-
+ 
             $result = Array();
 			foreach ($messages_dialog as $ind => $row)
 			{
@@ -58,8 +58,11 @@ class MessagesController extends \MainController
                 if(!$row['msg_user']['avatar']) {
                     $row['msg_user']['avatar'] = 'noavatar.png';
                 } 
-
-                $result[$ind]        = $row;
+           
+                $row['unread_num']  = Base::ru_num('pm', $row['unread']);
+                $row['count_num']   = Base::ru_num('pm', $row['count']);
+                
+                $result[$ind]       = $row;
              
 			}
 		} else {

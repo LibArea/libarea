@@ -15,10 +15,7 @@ class MessagesModel extends \MainModel
                 ->or(['recipient_uid'], '=', $user_id) // recipient_count > 0
                 ->orderBy(['update_time'])->desc();
 
-        $result = $query->getSelect();
- 
-        return $result;
- 
+        return $query->getSelect();
     }
   
     // Получаем диалог по id
@@ -30,11 +27,9 @@ class MessagesModel extends \MainModel
     // Диалог
     public static function getDialog($id)
     {
-      
         $query = XD::select('*')->from(['messages']);
        
         return count($query->getSelect());
-        
     }
     
     // Пересчет просмотрено или нет
@@ -53,8 +48,6 @@ class MessagesModel extends \MainModel
                                            ->where(['sender_unread'], '=', 0)
                                            ->and(['id'], '=', $dialog_id)->run();
             
-
-
 			if ($receipt)
 			{
                 
@@ -105,11 +98,9 @@ class MessagesModel extends \MainModel
     // Количество сообщений
     public static function getMessagesTotal($user_id)
     {
-      
         $query = XD::select('*')->from(['messages_dialog']);
        
         return count($query->getSelect());
-        
     }
 
 	public static function getLastMessages($dialog_ids)
@@ -132,8 +123,6 @@ class MessagesModel extends \MainModel
     // Записываем личное сообщение
     public static function SendMessage($sender_uid, $recipient_uid, $message)
     {
-       
-        
 		if (!$sender_uid OR !$recipient_uid OR !$message)
 		{
 			return false;
@@ -156,7 +145,6 @@ class MessagesModel extends \MainModel
         XD::insertInto(['messages'], '(', ['dialog_id'], ',', ['message'], ',', ['uid'], ')')->values( '(', XD::setList([$messages_dialog_id, $message, $sender_uid]), ')' )->run();
  
 		// self::updateDialogCount($messages_dialog_id, $sender_uid);
-
         /* Где хранить будем изменение и пересчет?
 		   UserModel::updateInboxUnread($recipient_uid);
 
@@ -165,12 +153,10 @@ class MessagesModel extends \MainModel
 			// Отправим на E-mail, потом, если он захочет, возможно...
 		} */
            
-
         $type = 1; // Личные сообщения        
         NotificationsModel::send($sender_uid, $recipient_uid, $type, $messages_dialog_id, 1);
  
 		return $message_id;
-        
     }
 
     // Изменение количество сообщений
@@ -211,7 +197,6 @@ class MessagesModel extends \MainModel
     // Информация о участнике
 	public static function getDialogByUser($sender_uid, $recipient_uid)
 	{
-        
         $query = XD::select('*')->from(['messages_dialog'])
                 ->where(['sender_uid'], '=', $sender_uid)
                 ->and(['recipient_uid'], '=', $recipient_uid)
@@ -219,8 +204,6 @@ class MessagesModel extends \MainModel
                 ->and(['sender_uid'], '=', $recipient_uid);
 
          return $query->getSelectOne();
-
-        
 	}
     
 }

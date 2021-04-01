@@ -11,7 +11,14 @@
                     <label for="post_title">Заголовок</label>
                     <input class="add" type="text" value="<?= htmlspecialchars($post['post_title']); ?>" name="post_title" />
                     <br />
-                </div>        
+                </div>   
+                <?php if($uid['trust_level'] == 5) { ?>
+                    <div class="boxline">
+                        <label for="post_title">URL</label>
+                        <input class="add" type="text" value="<?= htmlspecialchars($post['post_url']); ?>" name="post_url" />
+                        <br />
+                    </div> 
+                <?php } ?>
                 <div class="boxline">
                     <label for="post_content">Текст</label>
                     <textarea name="post_content"><?= $post['post_content']; ?></textarea><br />

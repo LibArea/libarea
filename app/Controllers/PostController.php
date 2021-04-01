@@ -47,7 +47,13 @@ class PostController extends \MainController
             if(!$row['avatar']) {
                 $row['avatar'] = 'noavatar.png';
             } 
-
+            
+            if(Base::getStrlen($row['post_url']) > 6) {
+                $parse = parse_url($row['post_url']);
+                $row['post_url'] = $parse['host'];  
+            } 
+            
+            $row['post_url']            = $row['post_url'];
             $row['avatar']              = $row['avatar'];
             $row['num_comments']        = Base::ru_num('comm', $row['post_comments']);
             $row['post_date']           = Base::ru_date($row['post_date']);
@@ -179,8 +185,17 @@ class PostController extends \MainController
             $post['edit_date'] = NULL;
         }
         
+        if(Base::getStrlen($post['post_url']) > 6) {
+            $post['post_url_full'] = $post['post_url'];
+            
+            $parse = parse_url($post['post_url']);
+            $post['post_url'] = $parse['host'];  
+        } 
+        
         // Обработает некоторые поля
         $post['post_content']   = $Parsedown->text($post['post_content']);
+        $post['post_url']       = $post['post_url'];
+        $post['post_url_full']  = $post['post_url_full'];
         $post['post_date']      = Base::ru_date($post['post_date']);
         $post['edit_date']      = Base::ru_date($post['edit_date']);
         $post['avatar']         = $post['avatar'];
@@ -297,6 +312,7 @@ class PostController extends \MainController
         // Получаем title и содержание
         $post_title   = \Request::getPost('post_title');
         $post_content = $_POST['post_content']; // не фильтруем
+        $post_url   = \Request::getPost('post_url');
         
         // IP адрес и ID кто добавляет
         $post_ip_int  = \Request::getRemoteAddress();
@@ -329,6 +345,13 @@ class PostController extends \MainController
             return true;
         }
         
+        // Проверяем url для > TL1
+        // Ввести проверку дублей и запрещенных
+        if ($post_url == '')
+        {
+           $post_url = 0;
+        }
+         
         // Ограничим частоту добавления
         // PostModel::getPostSpeed($post_user_id);
         
@@ -336,10 +359,21 @@ class PostController extends \MainController
         $post_slug = Base::seo($post_title); 
         
         // Записываем пост
-        PostModel::AddPost($post_title, $post_content, $post_slug, $post_ip_int, $post_user_id, $space_id);
+        PostModel::AddPost($post_title, $post_content, $post_slug, $post_ip_int, $post_user_id, $space_id, $post_url);
         
         redirect('/');   
     }
+    
+    // Парсим title
+    public function grabTitle() 
+    {
+        $url   = \Request::getPost('uri');
+        preg_match("/<title>(.+)<\/title>/siU", file_get_contents($url), $matches);
+        $title = $matches[1];
+
+        return $title;
+    }
+    
     
     // Показ формы поста для редактирование
     public function editPost() 
@@ -379,6 +413,7 @@ class PostController extends \MainController
         $post_closed    = \Request::getPost('closed');
         $post_top       = \Request::getPost('top');
         $post_space_id  = \Request::getPostInt('space_id');
+        $post_url       = \Request::getPost('post_url');
         
         // Получим пост
         $post = PostModel::getPostId($post_id); 
@@ -416,6 +451,16 @@ class PostController extends \MainController
             $post_top = 0;
         }
         
+        // Проверяем url для > TL1
+        // Ввести проверку дублей и запрещенных
+        // При изменение url считаем частоту смену url после добавления у конкретного пользователя
+        // Если больше N оповещение персонала, если изменен на запрещенный, скрытие поста,
+        // или более расширенное поведение
+        if ($post_url == '')
+        {
+           $post_url = 0;
+        }
+        
         $data = [
             'post_id'       => $post_id,
             'post_title'    => $post_title, 
@@ -423,6 +468,7 @@ class PostController extends \MainController
             'post_closed'   => $post_closed,
             'post_top'      => $post_top,
             'post_space_id' => $post_space_id,
+            'post_url'      => $post_url,
         ];
         
         // Перезапишем пост

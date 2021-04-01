@@ -5,9 +5,7 @@ use Base;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\UserModel;
 use App\Models\PostModel;
-
 use ImageUpload;
-
 
 class UserController extends \MainController
 {

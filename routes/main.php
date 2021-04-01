@@ -19,6 +19,7 @@ Route::before('Authorization@noAuth')->getGroup();
 	Route::get('/post/edit/{id}')->controller('PostController@editPost');
 	Route::type('post')->protect()->get('/post/editpost/{id}')->controller('PostController@editPostRecording');
 	Route::type('post')->get('/post/del')->controller('PostController@deletePost');
+    Route::type('post')->get('/post/grabtitle')->controller('PostController@grabTitle');
 
 	Route::get('/users/setting')->controller('UserController@settingPage');
 	Route::get('/users/setting/avatar')->controller('UserController@settingPageAvatar');

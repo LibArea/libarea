@@ -6,7 +6,7 @@
     
         <div class="telo space">
             <div class="box create">
-                <form action="/space/editspace" method="post">
+                <form action="/space/editspace" method="post" enctype="multipart/form-data">
                     <?= csrf_field() ?>
                     <div class="boxline">
                         <label for="post_title">URL</label>
@@ -30,9 +30,15 @@
                         <label for="post_content">Текст</label>
                         <textarea name="space_text"><?= $space['space_text']; ?></textarea><br />
                     </div>
-
-                    <input type="hidden" name="space_id" id="space_id" value="<?= $space['space_id']; ?>">
-                    <input type="submit" name="submit" value="Изменить" />
+                    <div class="boxline">
+                    <label for="space_img">
+                        <img width="60" src="/uploads/space/<?= $space['space_img']; ?>">
+                    </label>
+                        <input type="file" name="image" accept="image/*"/>
+                        <p>Выберите файл для загрузки 120x120px (jpg, jpeg, png)</p>
+                    </div>
+                        <input type="hidden" name="space_id" id="space_id" value="<?= $space['space_id']; ?>">
+                        <input type="submit" name="submit" value="Изменить" />
                 </form>
             </div>
         </div> 

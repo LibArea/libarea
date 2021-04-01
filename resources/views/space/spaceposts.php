@@ -80,6 +80,8 @@
         
         <div class="sidebar">
             <div class="space-text">
+                <img class="space-img" src="/uploads/space/<?= $space['space_img']; ?>">
+            
                 <?= $space['space_text']; ?>
             
                 <?php if($uid['trust_level'] == 5) { ?>

@@ -303,6 +303,7 @@ textarea {
 	resize: vertical;
 }
 input[type="text"],
+input[type="url"],
 input[type="search"],
 input[type="password"],
 input[type="email"],
@@ -353,6 +354,7 @@ button,
 input[type="button"],
 input[type="reset"],
 input[type="submit"],
+input[type="submit_url"],
 div.select2-choices {
 	display: inline-block;
 	padding: 2px 10px 2px 10px;
@@ -367,13 +369,15 @@ div.select2-choices {
 button:first-child,
 input[type="button"]:first-child,
 input[type="reset"]:first-child,
-input[type="submit"]:first-child {
+input[type="submit"]:first-child,
+input[type="submit_url"]:first-child {
 	margin-left: 0;
 }
 button:hover,
 input[type="button"]:hover,
 input[type="reset"]:hover,
-input[type="submit"]:hover {
+input[type="submit"]:hover,
+input[type="submit_url"]:hover {
 	color: #333333;
 	text-decoration: none;
 	background-color: #e6e6e6;
@@ -451,6 +455,17 @@ input.form-about {width: 250px;}
 }
 
 /* Посты */
+.post_url {
+    font-size: 12px;
+    margin-left: 10px;
+    color: #888;
+    font-style: italic;
+}
+.post_url_detal {
+    margin: 0 0 20px 0;
+    display: block;
+    font-style: italic;
+}
 .post-body {
     margin-left: 40px;
 }
@@ -530,6 +545,12 @@ a.space_3 {
     font-size: 13px;
     padding: 5px;
     margin-left: 20px;
+}
+.space-img{
+    float: left;
+    width: 40px;
+    height:40px;
+    margin: 7px 10px 0 0;
 }
 .add-space {
     background: #f0f0df;

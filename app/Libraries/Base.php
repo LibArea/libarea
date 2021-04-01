@@ -362,6 +362,20 @@ class Base
                 $gram_num_record = 'просмотр';
             }
         }
+
+        if($type == 'pm'){
+            if($numres == 1){
+                $gram_num_record = 'сообщение';
+            } elseif($numres == 0){
+                $gram_num_record = 'сообщений';
+            } elseif($numres < 5){
+                $gram_num_record = 'сообщения';
+            } elseif($numres < 21){
+                $gram_num_record = 'сообщений';
+            }  elseif($numres == 21){
+                $gram_num_record = 'сообщение';
+            }
+        }
         
         return $gram_num_record;
     }

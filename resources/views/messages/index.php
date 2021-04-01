@@ -21,9 +21,12 @@
     
                         <a href="/messages/read/<?= $msg['id']; ?>">
                             <?php if ($msg['unread']) { ?>
-                                 Есть <?= $msg['unread']; ?> сообщений
+                                 Есть <?= $msg['unread']; ?> <?= $msg['unread_num']; ?>
                             <?php } else { ?>
-                                 Посмотреть писем <?= $msg['count']; ?>
+                                 Посмотреть  
+                                <?php if($msg['count'] != 0) { ?> 
+                                    <?= $msg['count']; ?>  <?= $msg['count_num']; ?>
+                                <?php } ?>    
                             <?php } ?>
                         </a>
                         

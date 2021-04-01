@@ -19,6 +19,12 @@ class SpaceModel extends \MainModel
         return  XD::select('*')->from(['space'])->getSelect();
     } 
 
+   // Получение аватарки
+    public static function getSpaceImg($space_id)
+    {
+        return XD::select(['space_id', 'space_img'])->from(['space'])->where(['space_id'], '=', $space_id)->getSelectOne();
+    }
+
     // Списки постов по пространству
     public static function getSpacePosts($space_id, $user_id)
     {
@@ -78,10 +84,7 @@ class SpaceModel extends \MainModel
     // Изменение пространства
     public static function setSpaceEdit ($data)
     {
-        // Временное решение для TL5
-        if(!$data['space_color']) { $data['space_color'] = '#339900';}
-        if(!$data['space_img']) { $data['space_img'] = 'space-default.png';}
-        
+ 
         XD::update(['space'])->set(['space_slug'], '=', $data['space_slug'], ',', ['space_name'], '=', $data['space_name'], ',', ['space_description'], '=', $data['space_description'], ',', ['space_color'], '=', $data['space_color'], ',', ['space_img'], '=', $data['space_img'], ',', ['space_text'], '=', $data['space_text'])->where(['space_id'], '=', $data['space_id'])->run();
         
         return true;
