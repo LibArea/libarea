@@ -92,10 +92,24 @@ class CommentModel extends \MainModel
         return true;
     }
     
+    // Получаем комментарий по id комментария
+    public static function getCommentsOne($id)
+    {
+       return XD::select('*')->from(['comments'])->where(['comment_id'], '=', $id)->getSelectOne();
+    }
     
-   // Частота размещения комментариев участника 
-   public static function getCommentSpeed($uid)
-   {
+    
+    // Редактируем комментарий
+    public static function CommentEdit($comm_id, $comment)
+    {
+        $data = date("Y-m-d H:i:s"); 
+        return  XD::update(['comments'])->set(['comment_content'], '=', $comment, ',', ['comment_modified'], '=', $data)
+        ->where(['comment_id'], '=', $comm_id)->run(); 
+    }
+    
+    // Частота размещения комментариев участника 
+    public static function getCommentSpeed($uid)
+    {
        
         $post = XD::select(['comment_id', 'comment_user_id', 'comment_date'])->from(['comments'])
             ->where(['comment_user_id'], '=', $uid)

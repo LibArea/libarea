@@ -571,7 +571,7 @@ h1 span{
 .authorpost {
   color: #f8a853;
 }
-.comments_subtree:target {
+.comments_subtree:target, .comments_subtree.edit {
   -webkit-background-clip: content-box;
   background-clip: content-box;
   background-color: lightyellow;
@@ -642,8 +642,8 @@ ol.comment-telo {
 .cm_addentry {
   margin-left: 40px;
 }
-.addcomm, .delcomm {
-  color: #888;
+.addcomm, .delcomm, .editcomm {
+  color: var(--color-gray-1);
   font-size: 9.5pt;
 }
 .comments_subtree {

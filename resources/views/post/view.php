@@ -48,7 +48,7 @@
                             <span class="otst">   </span>
                         </span>
                         <?php if ($uid['id']) { ?>
-                            <?php if($uid['login'] == $post['login']) { ?>
+                            <?php if($uid['login'] == $post['login'] || $uid['trust_level'] == 5) { ?>
                                 <span class="date">
                                    &nbsp; <a href="/post/edit/<?= $post['post_id']; ?>">
                                         <svg class="md-icon moon">
@@ -179,6 +179,11 @@
                                         <span class="date">  
                                            <?= $comm['comment_date']; ?>
                                         </span>
+                                        <?php if (empty($comm['edit'])) { ?> 
+                                            <span class="date">  
+                                               (изм.)
+                                            </span>
+                                        <?php } ?>
                                         <?php if ($post['post_user_id'] == $comm['comment_user_id']) { ?>
                                             <span class="date ots">  
                                                 <span class="authorpost">&#x21af;</span>
@@ -192,6 +197,7 @@
                                                 <a rel="nofollow" href="/posts/<?= $post['post_slug']; ?>#comm_<?= $comm['comment_on']; ?>">&#8679;</a>
                                             </span>
                                         <?php } ?> 
+
                                     </div>
                                     <div class="comm-telo-body">
                                         <?= $comm['content'] ?> 
@@ -204,12 +210,19 @@
                                     </span>
                                 <?php } ?>
                                 <?php } ?>
+                                
+                                <?php if($uid['id'] == $comm['comment_user_id'] || $uid['trust_level'] == 5) { ?>
+                                    <span id="cm_edit" class="cm_add_link">
+                                        <a data-id="<?= $comm['comment_id']; ?>" class="editcomm">Изменить</a>
+                                    </span>
+                                <?php } ?>
+                                
                                 <?php if($uid['trust_level'] ==5) { ?>
                                     <span id="cm_dell" class="cm_add_link">
                                         <a data-id="<?= $comm['comment_id']; ?>" class="delcomm">Удалить</a>
                                     </span>
                                 <?php } ?>
-                                
+                              
                                 <div id="cm_addentry<?= $comm['comment_id']; ?>" class="reply"></div> 
                             
                             </li>

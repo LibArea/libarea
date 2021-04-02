@@ -12,24 +12,20 @@ class CommentController extends \MainController
     // Все комментарии
     public function index()
     {
-        
         $Parsedown = new Parsedown(); 
         $Parsedown->setSafeMode(true); // безопасность
          
-        $comm =  CommentModel::getCommentsAll();
+        $comm = CommentModel::getCommentsAll();
  
         $result = Array();
         foreach($comm  as $ind => $row){
-             
             if(!$row['avatar']) {
                 $row['avatar'] = 'noavatar.png';
             } 
-
             $row['avatar'] = $row['avatar'];
             $row['content'] = $Parsedown->text($row['comment_content']);
             $row['date'] = Base::ru_date($row['comment_date']);
             $result[$ind] = $row;
-         
         }
         
         $uid  = Base::getUid();
@@ -40,56 +36,109 @@ class CommentController extends \MainController
         ]; 
  
         return view("comment/all", ['data' => $data, 'uid' => $uid, 'comments' => $result]);
-        
     }
 
     // Добавление комментария
     public function create()
     {
-        
-        // получим относительный url поста для возрата (упростить)
+        // Получим относительный url поста для возрата (упростить)
         $url = str_replace('//', '', $_SERVER['HTTP_REFERER']);
         $return_url = substr($url, strpos($url, '/') + 1);
         
-        $comment = Request::getPost('comment');
+        $comment = \Request::getPost('comment');
         
         if (Base::getStrlen($comment) < 6 || Base::getStrlen($comment) > 1024)
         {
             Base::addMsg('Длина комментария должна быть от 6 до 1000 знаков', 'error');
-            redirect('/' . $vurl);
+            redirect('/' . $url);
             return true;
         }
 
-        $post_id   = (int)Request::getPost('post_id'); // в каком посту ответ
-        $comm_id   = (int)Request::getPost('comm_id'); // на какой коммент
+        $post_id   = \Request::getPostInt('post_id'); // в каком посту ответ
+        $comm_id   = \Request::getPostInt('comm_id'); // на какой коммент
         $comment   = $_POST['comment']; // не фильтруем
-        $ip        = Request::getRemoteAddress();      // ip отвечающего 
+        $ip        = \Request::getRemoteAddress();      // ip отвечающего 
         
         // id того, кто отвечает
-        $account   = Request::getSession('account');
+        $account   = \Request::getSession('account');
         $my_id     = $account['user_id'];
         
         // Ограничим частоту добавления
         // CommentModel::getCommentSpeed($my_id);
         
-        // Записываем покммент
+        // Записываем коммент
         $last_id = CommentModel::commentAdd($post_id, $ip, $comm_id, $comment, $my_id);
          
         // Пересчитываем количество комментариев для поста + 1
         PostModel::getNumComments($post_id); // + 1
         
         redirect('/' . $return_url . '#comm_' . $last_id); 
+    }
+    
+    // Редактируем комментарий
+    public function editComment()
+    {
+        $comm_id    = \Request::getPostInt('comm_id');
+        $post_id    = \Request::getPostInt('post_id');
+        $comment    = $_POST['comment']; // не фильтруем
+        
+        // Получим относительный url поста для возрата (упростить)
+        $url = str_replace('//', '', $_SERVER['HTTP_REFERER']);
+        $return_url = substr($url, strpos($url, '/') + 1);
+        
+        // id того, кто редактирует
+        $account   = \Request::getSession('account');
+        $user_id   = $account['user_id'];
+        
+        $comm = CommentModel::getCommentsOne($comm_id);
+        
+        // Проверим автора комментария и админа
+        if(!$user_id == $comm['comment_user_id']) {
+            return true; 
+        }
+        
+        // Редактируем комментарий
+        CommentModel::CommentEdit($comm_id, $comment);
+        
+        redirect('/' . $return_url . '#comm_' . $comm_id); 
+    }
 
+    // Покажем форму редактирования
+    public function editform()
+	{
+        $comm_id    = \Request::getPostInt('comm_id');
+        $post_id    = \Request::getPostInt('post_id');
+         
+        // id того, кто редактирует
+        $account   = \Request::getSession('account');
+        $user_id   = $account['user_id'];
+        
+        $comm = CommentModel::getCommentsOne($comm_id);
+
+        // Проверим автора комментария и админа
+        if($user_id != $comm['comment_user_id'] && $account['trust_level'] != 5) {
+            return true; 
+        }
+
+        $uid  = Base::getUid();
+        $data = [
+            'title'             => 'Форма Редактирования',
+            'description'       => 'Форма Редактирования...',
+            'comm_id'           => $comm_id,
+            'post_id'           => $post_id,
+            'user_id'           => $user_id,
+            'comment_content'   => $comm['comment_content'],
+        ]; 
+        
+        return view("comment/editform", ['data' => $data, 'uid' => $uid]);
     }
 
     // Покажем форму ответа
     public function addform()
 	{
-     
-        $id = (int)Request::getPost('comm_id');
-        $post_id = (int)Request::getPost('post_id');
-         
-        $user = Request::getSession('account') ?? [];
+        $comm_id    = \Request::getPostInt('comm_id');
+        $post_id    = \Request::getPostInt('post_id');
+        $user       = \Request::getSession('account') ?? [];
         
         if(!empty($user['user_id'])) {
              $user_id = $user['user_id'];
@@ -101,7 +150,7 @@ class CommentController extends \MainController
         $data = [
             'title'       => 'Форма ответа',
             'description' => 'Форма ответа...',
-            'comm_id'     => $id,
+            'comm_id'     => $comm_id,
             'post_id'     => $post_id,
             'user_id'     => $user_id,
         ]; 
@@ -112,11 +161,10 @@ class CommentController extends \MainController
     // Комментарии участника
     public function userComments()
     {
-        
         $Parsedown = new Parsedown(); 
         $Parsedown->setSafeMode(true); // безопасность
         
-        $login = Request::get('login');
+        $login = \Request::get('login');
        
         $comm  = CommentModel::getUsersComments($login); 
 
@@ -128,7 +176,7 @@ class CommentController extends \MainController
         
         $result = Array();
         foreach($comm as $ind => $row){
-             
+
             if(!$row['avatar'] ) {
                 $row['avatar']  = 'noavatar.png';
             } 
@@ -149,22 +197,20 @@ class CommentController extends \MainController
         ]; 
         
         return view("comment/commuser", ['data' => $data, 'uid' => $uid, 'comments' => $result]);
-         
     }
 
     // Удаление комментария
     public function deletComment()
     {
-
         // Доступ только персоналу
-        $account = Request::getSession('account');
+        $account = \Request::getSession('account');
         if ($account['trust_level'] != 5) {
             return false;
         }
         
-        $id = \Request::getPostInt('comm_id');
+        $comm_id = \Request::getPostInt('comm_id');
         
-        CommentModel::CommentsDel($id);
+        CommentModel::CommentsDel($comm_id);
         
         return false;
     }

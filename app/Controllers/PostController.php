@@ -209,9 +209,13 @@ class PostController extends \MainController
         $comments = Array();
         foreach($post_comments as $ind => $row){
             
-            if(!$row['avatar'] ) {
+            if(!$row['avatar']) {
                 $row['avatar']  = 'noavatar.png';
             } 
+            
+            if(strtotime($row['comment_modified']) < strtotime($row['comment_date'])) {
+                $row['edit'] = 1;
+            }
  
             $row['comment_on']          = $row['comment_on'];  
             $row['avatar']              = $row['avatar'];
@@ -380,6 +384,7 @@ class PostController extends \MainController
     public function editPost() 
     {
         $post_id = \Request::get('id');
+        $account = \Request::getSession('account');
         
         // Получим пост
         $post   = PostModel::getPostId($post_id); 
@@ -388,8 +393,10 @@ class PostController extends \MainController
             redirect('/');
         }
 
-        // Редактировать может только автор
-        if ($post['post_user_id'] != $_SESSION['account']['user_id']) {
+
+ 
+        // Редактировать может только автор и админ
+        if ($post['post_user_id'] != $account['user_id'] && $account['trust_level'] != 5) {
             redirect('/');
         }
         
@@ -416,6 +423,8 @@ class PostController extends \MainController
         $post_space_id  = \Request::getPostInt('space_id');
         $post_url       = \Request::getPost('post_url');
         
+        $account = \Request::getSession('account');
+        
         // Получим пост
         $post = PostModel::getPostId($post_id); 
          
@@ -423,8 +432,8 @@ class PostController extends \MainController
             redirect('/');
         }
         
-        // Редактировать может только автор
-        if ($post['post_user_id'] != $_SESSION['account']['user_id']) {
+        // Редактировать может только автор и админ
+        if ($post['post_user_id'] != $account['user_id'] && $account['trust_level'] != 5) {
             redirect('/');
         }
         
