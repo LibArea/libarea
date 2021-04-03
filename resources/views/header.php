@@ -12,8 +12,9 @@
         <title><?= $data['title']; ?></title>
         <meta name = "description" content = "<?= $data['description']; ?>" />
         <link rel="stylesheet" href="/assets/css/style.css">
+        <script src="/assets/js/jquery.min.js"></script>
         <link rel="icon" href="/favicon.ico">
-
+     
     </head>
 <body class="bd<?php if(Request::getCookie('dayNight') == 'dark') {?> dark<?php } ?>">
 <header>

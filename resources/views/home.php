@@ -48,13 +48,16 @@
                                     </svg>
                                 <?php } ?>
                             </a>
-
                             <a class="space space_<?= $post['space_tip'] ?>" href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
                                 <?= $post['space_name']; ?>
                             </a>
                             
                             <?php if($post['post_url']) { ?> 
                                 <span class="post_url"> <?= $post['post_url']; ?></span> 
+                            <?php } ?>
+                            
+                            <?php if ($post['post_content_preview']) { ?>
+                                <div class="post-prev"><?= $post['post_content_preview']; ?>...</div>
                             <?php } ?>
                             
                             <div class="footer">

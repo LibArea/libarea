@@ -35,7 +35,7 @@ class PostModel extends \MainModel
             $display = '';
         }
 
-        $sql = "SELECT p.post_id, p.post_title, p.post_slug, p.post_user_id, p.post_space_id, p.post_comments, p.post_date, p.post_votes, p.post_is_delete, p.post_closed, p.post_top, p.post_url,
+        $sql = "SELECT p.post_id, p.post_title, p.post_slug, p.post_user_id, p.post_space_id, p.post_comments, p.post_date, p.post_votes, p.post_is_delete, p.post_closed, p.post_top, p.post_url, p.post_content_preview, p.post_content_img,
                 u.id, u.login, u.avatar,
                 v.votes_post_item_id, v.votes_post_user_id,  
                 s.space_id, s.space_slug, s.space_name, space_tip
@@ -146,23 +146,43 @@ class PostModel extends \MainModel
     }
     
     // Проверка на дубликаты uri и запись поста
-    public static function addPost($post_title, $post_content, $post_slug, $post_ip_int, $post_user_id, $space_id, $space_url)
+    public static function addPost($data)
     {
-       
+  
         // Проверить пост на повтор slug (переделать)
         $q = XD::select('*')->from(['posts']);
-        $query = $q->where(['post_slug'], '=', $post_slug);
+        $query = $q->where(['post_slug'], '=', $data['post_slug']);
         $result = $query->getSelectOne();
         
         if ($result) {
-            $post_slug =  $post_slug . "-";
+            $data['post_slug'] =  $data['post_slug'] . "-";
         }
-       
+           
         // toString  строковая заменя для проверки
-        XD::insertInto(['posts'], '(', ['post_title'], ',', ['post_content'], ',', ['post_slug'], ',', ['post_ip_int'], ',', ['post_user_id'], ',', ['post_space_id'], ',', ['post_url'],')')->values( '(', XD::setList([$post_title, $post_content, $post_slug, $post_ip_int, $post_user_id, $space_id, $space_url]), ')' )->run();
+       XD::insertInto(['posts'], '(', 
+            ['post_title'], ',', 
+            ['post_content'], ',', 
+            ['post_content_preview'], ',', 
+            ['post_content_img'], ',', 
+            ['post_slug'], ',', 
+            ['post_ip_int'], ',', 
+            ['post_user_id'], ',', 
+            ['post_space_id'], ',', 
+            ['post_url'],')')->values( '(', 
+        
+        XD::setList([
+            $data['post_title'], 
+            $data['post_content'], 
+            $data['post_content_preview'], 
+            $data['post_content_img'], 
+            $data['post_slug'], 
+            $data['post_ip_int'], 
+            $data['post_user_id'], 
+            $data['post_space_id'], 
+            $data['post_url']]), ')' )->run();
 
         return true; 
-       
+
     } 
     
     // Получаем пост по id
@@ -183,9 +203,18 @@ class PostModel extends \MainModel
     {
         $edit_date = date("Y-m-d H:i:s"); 
        
-        XD::update(['posts'])->set(['post_title'], '=', $data['post_title'], ',', ['edit_date'], '=', $edit_date, ',', ['post_content'], '=', $data['post_content'], ',', ['post_closed'], '=', $data['post_closed'], ',', ['post_top'], '=', $data['post_top'], ',', ['post_space_id'], '=', $data['post_space_id'], ',', ['post_url'], '=', $data['post_url'])
-        ->where(['post_id'], '=', $data['post_id'])->run();
- 
+        XD::update(['posts'])->set(
+            ['post_title'], '=', $data['post_title'], ',', 
+            ['edit_date'], '=', $edit_date, ',', 
+            ['post_content'], '=', $data['post_content'], ',', 
+            ['post_content_preview'], '=', $data['post_content_preview'], ',', 
+            ['post_content_img'], '=', $data['post_content_img'], ',', 
+            ['post_closed'], '=', $data['post_closed'], ',', 
+            ['post_top'], '=', $data['post_top'], ',', 
+            ['post_space_id'], '=', $data['post_space_id'], ',', 
+            ['post_url'], '=', $data['post_url'])
+            ->where(['post_id'], '=', $data['post_id'])->run();
+
         return true;
     }
     

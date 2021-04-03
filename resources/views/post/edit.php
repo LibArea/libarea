@@ -15,10 +15,17 @@
                 <?php if($uid['trust_level'] == 5) { ?>
                     <div class="boxline">
                         <label for="post_title">URL</label>
-                        <input class="add" type="text" value="<?= htmlspecialchars($post['post_url']); ?>" name="post_url" />
+                        <input class="add" type="text" value="<?= $post['post_url']; ?>" name="post_url" />
                         <br />
-                    </div> 
-                <?php } ?>
+                    </div> <?php } ?>
+                    <div class="boxline">
+                        <label for="post_title">Превью</label>
+                            <script src="/assets/js/editor.js"></script>
+                            <textarea class="content_preview" name="content_preview" placeholder=""><?= $post['post_content_preview']; ?></textarea> <br />
+                        <label for="post_title"></label>    
+                        <div class="box_h">Около 160 символов</div>
+                    </div>
+                 
                 <div class="boxline">
                     <label for="post_content">Текст</label> <br />
                     <div class="qa-mod qa-editor-box">
@@ -65,6 +72,39 @@
                 <input type="hidden" name="post_id" id="post_id" value="<?= $post['post_id']; ?>">
                 <input type="submit" name="submit" value="Изменить" />
             </form>
+            <br>
+            <details>
+                <summary>Доступно форматирование Markdown</summary>
+                <p> 
+                <table>
+                  <tbody><tr>
+                    <td width="125"><em>курсив</em></td>
+                    <td>окружить текст <tt>*звездочками*</tt></td>
+                  </tr>
+                  <tr>
+                    <td><strong>жирный</strong></td>
+                    <td>окружить текст <tt>**двумя звездочками**</tt></td>
+                  </tr>
+                  <tr>
+                    <td><strike>зачеркнутый</strike></td>
+                    <td>окружить текст <tt>~~двумя тильдами~~</tt></td>
+                  </tr>
+                  <tr>
+                    <td><tt>код (строка)</tt></td>
+                    <td>окружить текст <tt>`обратными ковычками`</tt></td>
+                  </tr>
+                  <tr>
+                    <td><a href="http://example.com/" style="color: inherit;">связаный текст</a></td>
+                    <td><tt>[связанный текст](http://example.com/)</tt> или просто URL-адрес для создания без заголовка</td>
+                  </tr>
+                  <tr>
+                    <td><blockquote> цитата</blockquote></td>
+                    <td><tt>&gt;</tt> текс цитаты </td>
+                  </tr>
+                  </tbody></table>
+                </p>
+            </details>
+            <br>
         </div>
 
     </div>

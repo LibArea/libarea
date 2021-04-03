@@ -82,8 +82,12 @@ code {
 .telo-profile, .telo-info, .box-users{
   margin-left: 5px;
 }
-.left-ots, .telo.comments h2, p.info {
-   margin-left: 15px;
+.left-ots, p.info {
+  margin-left: 15px;
+}
+.telo.comments h2 {
+  margin: 20px 0 1px 14px;
+  font-weight: 300;
 }
 blockquote {
   font-style: italic;
@@ -120,7 +124,7 @@ header {
 }
 footer {
 	color: #999;
-	padding: 0 0 10px 0;
+	padding: 0 0 20px 0;
   float: right;
 }
 footer a {
@@ -272,7 +276,7 @@ hr {
 
 /* Пагинация */
 .pagination {
-  margin: 10px;
+  margin: 5px 10px 10px 13px;
   float: left;
   clear: both;
 }
@@ -410,6 +414,11 @@ input.form-about {width: 250px;}
   width: 100%;
   height: 180px;
 }
+.box.create textarea.content_preview {
+  margin-bottom: 4px;
+  width: 75%;
+  height: 45px;
+}
 .box.create input.add {
   width: 75%;
 }
@@ -500,6 +509,13 @@ input.form-about {width: 250px;}
 .footer a:hover {
   color: var(--color-gray-2);
 }
+.post-prev {
+  font-size: 13px;
+  color: var(--color-gray-1);
+  max-width: 600px;
+  margin: 0 0 5px 0;
+}
+
 .footer .ava, .mini.ava {
   border-radius: 8px;
   height: 16px;
@@ -566,7 +582,7 @@ h1 span{
 }
 /* Комментарии */
 .block-comments.line{
-    border-top: 3px dotted #ddd;
+    border-top: 2px dotted #ddd;
 }
 .authorpost {
   color: #f8a853;
@@ -577,7 +593,7 @@ h1 span{
   background-color: lightyellow;
 }
 .block-comments {
-  margin: 0 0 20px 0;
+  margin: 5px 0 5px 0;
 }
 ol.dell.comment-telo, .dell.comm-telo_bottom {
   font-size: 13px;
@@ -654,13 +670,10 @@ ol.comment-telo {
 }
 .com-line {
   position: absolute;
-  left: 20px;
+  left: -3px;
   border-left: 1px dotted #bbb;
-  top: 37px;
+  top: 3px;
   bottom: 0;
-}
-.com-line.no-line {
-  border-left-color: transparent;
 }
 
 /* ЛС */
@@ -715,6 +728,11 @@ ol.comment-telo {
 .box .boxline {
   clear: both;
   margin-bottom: 0.9em;
+}
+.box_h {
+    font-size: 12px;
+    color: var(--color-gray-1);
+        margin-top: -5px;
 }
 .box label, .box .label_holder {
   display: block;
@@ -789,7 +807,7 @@ ol.comment-telo {
 /* голосование */
 .voters {
   float: left;
-  margin-top: 4px;
+  margin-top: 1px;
   width: 40px;
 }
 
@@ -850,6 +868,9 @@ ol.comment-telo {
   cursor: pointer;
   border-bottom: 2px solid transparent;
 }
+.nav-tabs > li > a:hover {
+  border-bottom: 2px solid #ddd; 
+}
 .nav-tabs > li.active span {
   line-height: 30px;
   padding: 10px 15px;
@@ -864,6 +885,44 @@ ol.comment-telo {
   color: green;
   margin-bottom: 12px;
 }
+
+/* Диалог и детали */
+dialog {
+  display: none;
+  justify-content: center;
+  align-items: flex-start;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+}
+dialog[open] {display: flex}
+dialog > div {
+  pointer-events: auto;
+  background-color: #F5F3F7;
+  box-shadow: 0px 16px 18px -3px #858585;
+  margin-top: 126px;
+  min-height: 100px;
+  max-height: 75%;
+  max-width: 75%;
+}
+dialog > div > button[type=remove] { line-height: 0.5 }
+dialog > div > div {
+  height: 100%;
+  overflow: auto;
+}
+details > summary {
+  font-size: 13px;
+  color: var(--color-gray-1);
+  cursor: pointer;
+  list-style: none; /* Учтем Firefox */
+}
+details > summary:focus { outline: none }
+/* Учтем Chrome, Safari. */
+details > summary::-webkit-details-marker { display: none }
+
 
 @media screen and (max-width: 720px) {
   .no-mob {display: none;}

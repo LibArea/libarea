@@ -142,7 +142,7 @@
                 <h2><?= $post['post_comments'] ?> <?= $post['num_comments'] ?></h2>
                 
                 <?php foreach ($comms as  $comm) { ?>
-                <div class="block-comments">
+                <div class="block-comments<?php if ($comm['level'] == 0) { ?> line<?php } ?>">
                 
                     <?php if($comm['comment_del'] == 0) { ?>
                     
@@ -167,9 +167,9 @@
                                     </div>
                                 <?php } ?>
                             <?php } ?>
-                            
-                                <div class="com-line<?php if($comm['comment_after'] != 1 and $comm['comment_on'] == 0) { ?> no-line<?php } ?>"></div> 
-                                
+                            <?php if ($comm['level'] != 0) { ?>
+                                <div class="com-line"></div> 
+                            <?php } ?>    
                                 <div class="comm-telo">
                                     <div class="comm-header">
                                         <img class="ava" src="/uploads/avatar/small/<?= $comm['avatar'] ?>">

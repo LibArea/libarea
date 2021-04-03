@@ -138,9 +138,11 @@ CREATE TABLE `posts` (
   `post_karma` smallint(6) NOT NULL DEFAULT 0,
   `post_comments` smallint(6) NOT NULL DEFAULT 0,
   `post_content` text NOT NULL,
+  `post_content_preview` varchar(160) DEFAULT NULL,
+  `post_content_img` varchar(250) DEFAULT NULL,
   `post_closed` tinyint(1) NOT NULL DEFAULT 0,
   `post_top` tinyint(1) NOT NULL DEFAULT 0,
-  `post_url` varchar(250) NOT NULL,
+  `post_url` varchar(250) DEFAULT NULL,
   `post_is_delete` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

@@ -315,9 +315,11 @@ class PostController extends \MainController
     public function createPost()
     {
         // Получаем title и содержание
-        $post_title   = \Request::getPost('post_title');
-        $post_content = $_POST['post_content']; // не фильтруем
-        $post_url   = \Request::getPost('post_url');
+        $post_title             = \Request::getPost('post_title');
+        $post_content           = $_POST['post_content']; // не фильтруем
+        $post_content_preview   = \Request::getPost('content_preview');
+        $post_content_img       = \Request::getPost('content_img');
+        $post_url               = \Request::getPost('post_url');
         
         // IP адрес и ID кто добавляет
         $post_ip_int  = \Request::getRemoteAddress();
@@ -351,11 +353,12 @@ class PostController extends \MainController
         }
         
         // Проверяем url для > TL1
-        // Ввести проверку дублей и запрещенных
-        if ($post_url == '')
-        {
-           $post_url = 0;
-        }
+        // Ввести проверку дублей и запрещенных, для img повторов
+        $post_url             = (empty($post_url)) ? '' : $post_url;
+        $post_content_preview = (empty($post_content_preview)) ? '' : $post_content_preview;
+        $post_content_img     = (empty($post_content_img)) ? '' : $post_content_img;
+ 
+        
          
         // Ограничим частоту добавления
         // PostModel::getPostSpeed($post_user_id);
@@ -363,8 +366,21 @@ class PostController extends \MainController
         // Получаем SEO поста
         $post_slug = Base::seo($post_title); 
         
+        $data = [
+            'post_title'            => $post_title,
+            'post_content'          => $post_content,
+            'post_content_preview'  => $post_content_preview,
+            'post_content_img'      => $post_content_img,
+            'post_slug'             => $post_slug,
+            'post_ip_int'           => $post_ip_int,
+            'post_user_id'          => $post_user_id,
+            'post_space_id'         => $space_id,
+            'post_url'              => $post_url,
+        ];
+        
+        
         // Записываем пост
-        PostModel::AddPost($post_title, $post_content, $post_slug, $post_ip_int, $post_user_id, $space_id, $post_url);
+        PostModel::AddPost($data);
         
         redirect('/');   
     }
@@ -393,8 +409,6 @@ class PostController extends \MainController
             redirect('/');
         }
 
-
- 
         // Редактировать может только автор и админ
         if ($post['post_user_id'] != $account['user_id'] && $account['trust_level'] != 5) {
             redirect('/');
@@ -415,13 +429,15 @@ class PostController extends \MainController
     // Изменяем пост
     public function editPostRecording() 
     {
-        $post_id        = \Request::getPostInt('post_id');
-        $post_title     = \Request::getPost('post_title');
-        $post_content   = \Request::getPost('post_content');
-        $post_closed    = \Request::getPost('closed');
-        $post_top       = \Request::getPost('top');
-        $post_space_id  = \Request::getPostInt('space_id');
-        $post_url       = \Request::getPost('post_url');
+        $post_id                = \Request::getPostInt('post_id');
+        $post_title             = \Request::getPost('post_title');
+        $post_content           = \Request::getPost('post_content');
+        $post_content_preview   = \Request::getPost('content_preview');
+        $post_content_img       = \Request::getPost('content_img');
+        $post_closed            = \Request::getPost('closed');
+        $post_top               = \Request::getPost('top');
+        $post_space_id          = \Request::getPostInt('space_id');
+        $post_url               = \Request::getPost('post_url');
         
         $account = \Request::getSession('account');
         
@@ -460,25 +476,26 @@ class PostController extends \MainController
         if ($post_top != 1) { 
             $post_top = 0;
         }
-        
+
         // Проверяем url для > TL1
         // Ввести проверку дублей и запрещенных
         // При изменение url считаем частоту смену url после добавления у конкретного пользователя
         // Если больше N оповещение персонала, если изменен на запрещенный, скрытие поста,
-        // или более расширенное поведение
-        if ($post_url == '')
-        {
-           $post_url = 0;
-        }
+        // или более расширенное поведение, а пока просто проверим
+        $post_url             = (empty($post_url)) ? '' : $post_url;
+        $post_content_preview = (empty($post_content_preview)) ? '' : $post_content_preview;
+        $post_content_img     = (empty($post_content_img)) ? '' : $post_content_img;
         
         $data = [
-            'post_id'       => $post_id,
-            'post_title'    => $post_title, 
-            'post_content'  => $post_content,
-            'post_closed'   => $post_closed,
-            'post_top'      => $post_top,
-            'post_space_id' => $post_space_id,
-            'post_url'      => $post_url,
+            'post_id'               => $post_id,
+            'post_title'            => $post_title, 
+            'post_content'          => $post_content,
+            'post_content_preview'  => $post_content_preview,
+            'post_content_img'      => $post_content_img,
+            'post_closed'           => $post_closed,
+            'post_top'              => $post_top,
+            'post_space_id'         => $post_space_id,
+            'post_url'              => $post_url,
         ];
         
         // Перезапишем пост

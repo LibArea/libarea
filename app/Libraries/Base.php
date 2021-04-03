@@ -335,7 +335,7 @@ class Base
             } elseif($numres < 5){
                 $gram_num_record = 'комментария';
             } elseif($numres < 21){
-                $gram_num_record = 'комментарев';
+                $gram_num_record = 'комментариев';
             }  elseif($numres == 21){
                 $gram_num_record = 'комментарий';
             }
