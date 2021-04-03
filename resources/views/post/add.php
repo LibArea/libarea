@@ -23,19 +23,33 @@
                         <br>
                     </div>
                 <?php } ?>
-                <div class="boxline">
-                    <label for="post_content">Текст</label>
-                    <textarea name="post_content"></textarea> <br />
-                </div>
+
+                <div class="qa-mod qa-editor-box">
+                    <div class="mod-head">
+                        <div class="wmd-panel">
+                            <div id="questionText" class="editor liveMode">
+                                <div class="editor-toolbar">
+                                  <div class="editor-mode"></div>
+                                  <div id="wmd-button-bar"></div>
+                                </div>
+                                <div class="wmd">
+                                  <textarea id="wmd-input" name="post_content" placeholder=""></textarea>
+                                </div>
+                                <div class="editor-preview"><div class="fmt" id="wmd-preview"></div></div>
+                            </div>
+                            <link rel="stylesheet" href="/assets/js/editor/editor.css"> 
+                            <script src="/assets/js/editor/marked.js"></script>
+                            <script src="/assets/js/editor/markdown.editor.js"></script>
+                        </div>
+                    </div>
+                </div>         
+
                 <div class="boxline">
                     <label for="post_content">Пространство</label>
                     <input type="radio" name="space" value="1" > cms
                     <input type="radio" name="space" value="2" > вопросы
                     <input type="radio" name="space" value="3" > флуд
                 </div>
-         
-                Избегайте спама...
-                <br><br>
                 <input type="submit" name="submit" value="Написать" />
             </form>
         </div>

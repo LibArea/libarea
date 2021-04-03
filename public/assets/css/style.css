@@ -407,8 +407,8 @@ input.form-about {width: 250px;}
 /* Редактирование и добавление поста */
 .box.create textarea {
   margin-bottom: 4px;
-  width: 75%;
-  height: 124px;
+  width: 100%;
+  height: 180px;
 }
 .box.create input.add {
   width: 75%;
