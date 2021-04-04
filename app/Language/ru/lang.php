@@ -1,6 +1,5 @@
 <?php
 return [
-    'My'            => 'My',
     'AreaDev'       => 'AreaDev',
     'Home'          => 'Главная',
     'TOP'           => 'TOP',
@@ -18,4 +17,5 @@ return [
     'Statistics'    => 'Статистика',
     'Privacy'       => 'Конфедициальность',
     'About'         => 'О нас',
+    'Info'          => 'Информация',
 ];

@@ -1,6 +1,6 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<section>
-    <div class="wrap">
+<main>
+    <div class="left-ots">
         <a class="right" href="/u/<?= $data['login']; ?>">Посмотреть профиль</a>
         <ul class="nav-tabs">
             <li><a href="/users/setting"><span>Настройка профиля</span></a></li>
@@ -30,5 +30,5 @@
                 </form>    
         </div>
     </div>
-</section>
+</main>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

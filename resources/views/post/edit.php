@@ -1,6 +1,6 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<section>
-    <div class="wrap">
+<main>
+    <div class="left-ots">
 
         <h1><?= $data['h1']; ?></h1>
 
@@ -108,5 +108,5 @@
         </div>
 
     </div>
-</section>
+</main>
 <?php include TEMPLATE_DIR . '/footer.php'; ?> 

@@ -37,6 +37,7 @@ class InfoController extends \MainController
             'post_num'      => $post_num,
             'comm_num'      => $comm_num,
             'vote_comm_num' => $vote_comm_num,
+            'vote_post_num' => $vote_post_num,
         ];
 
         return view('info/stats', ['data' => $data, 'uid' => $uid]);

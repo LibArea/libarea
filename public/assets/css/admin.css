@@ -1,3 +1,10 @@
+ .admin {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    background: #fff;
+    padding: 0.4rem 0.5rem;
+}
+
 /* tables */
 .t-table {  
     display: table;

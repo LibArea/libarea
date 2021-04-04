@@ -1,10 +1,7 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<section>
-    <div class="wrap">
+<main>
+    <div class="left-ots">
 
-        <a title="Участники" class="avatar-user right" href="/users">
-            Участники
-        </a>
         <h1 class="top"><?php echo $data['h1']; ?></h1>
 
         <div class="telo posts">
@@ -67,5 +64,5 @@
             <?php } ?>
         </div> 
     </div>
-</section>
+</main>
 <?php include TEMPLATE_DIR . '/footer.php'; ?> 

@@ -1,6 +1,6 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<section>
-    <div class="wrap">  
+<main>
+    <div class="left-ots"> 
         <div class="messages">
             <h1><?= $data['title'] ?></h1>
             <?php if (!empty($data['messages'])) { ?>
@@ -40,5 +40,5 @@
             <?php } ?>
         </div>
     </div>
-</section>
+</main>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

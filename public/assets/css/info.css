@@ -1,25 +1,4 @@
-.info .telo {
-    padding: 1px 16px 16px 20px;
-}
-.info-nav {
-  margin: 20px 0 10px 0;
-  overflow: hidden;
-  clear: both;
-}
-.info-nav-right {
-   float: right;
-}
-.info-nav-left {
-   float: left;
-}
-.info-nav-right .md-icon, .info-nav-left .md-icon {
-   width: 54px;
-   height: 54px;
-   stroke: #919191;
-}
-.info-nav-right .md-icon:hover, .info-nav-left .md-icon:hover {
-    stroke: #666;
-}
+ 
 .time-cont {
   width: 100%;
   max-width: 830px;

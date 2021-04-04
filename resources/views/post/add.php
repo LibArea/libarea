@@ -1,8 +1,8 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<section>
-    <div class="wrap">
+<main>
+    <div class="left-ots">
 
-        <h2><?php echo $data['h1']; ?></h2>
+        <h1><?php echo $data['h1']; ?></h1>
 
         <div class="box create">
             <form action="/post/create" method="post">
@@ -95,5 +95,5 @@
         </div>
         
     </div>
-</section>
+</main>
 <?php include TEMPLATE_DIR . '/footer.php'; ?> 

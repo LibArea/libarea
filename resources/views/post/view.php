@@ -1,12 +1,12 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<section>
-    <div class="wrap">
+<main>
+    <article class="post-full">
+ <!--header-->
      
         <?php if($post['post_is_delete'] == 0 || $uid['trust_level'] == 5) { ?>
    
             <div class="telo-detail_post<?php if($post['post_is_delete'] == 1) { ?> dell<?php } ?>">
-            
-            
+
                         <?php if (!$uid['id']) { ?> 
                             <div id="vot<?= $post['post_id']; ?>" class="voters">
                                 <a rel="nofollow" href="/login"><div class="post-up-id"></div></a>
@@ -135,10 +135,8 @@
             </div>   
         <?php } ?>
 
-
-
         <?php if (!empty($comms)) { ?>
-            <div class="telo comments">
+            <div class="comments">
                 <h2><?= $post['post_comments'] ?> <?= $post['num_comments'] ?></h2>
                 
                 <?php foreach ($comms as  $comm) { ?>
@@ -228,11 +226,10 @@
                             </li>
                         </ol>
                                         
-                    
                     <?php } else { ?>    
                          <ol class="dell comment-telo<?php if ($comm['level'] == 0) { ?> one<?php } ?><?php if ($comm['level'] == 2) { ?> two<?php } ?><?php if ($comm['level'] > 2) { ?> three<?php } ?>"> 
                             <li class="comments_subtree" id="comm_<?= $comm['comment_id']; ?>">
-                                ~ Комментарий удален
+                                <span class="comm-deletes">~ Комментарий удален</span>
                             </li>
                         </ol>
                     <?php } ?>    
@@ -251,6 +248,7 @@
                 <p class="info">Пост закрыт...</p>
             </div>
         <?php } ?>
-    </div>
-</section>
+       
+    </article>
+</main>
 <?php include TEMPLATE_DIR . '/footer.php'; ?> 

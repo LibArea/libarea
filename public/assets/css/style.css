@@ -25,6 +25,61 @@ html, body {
 *, *:before, *:after {
   box-sizing: inherit;
 }
+article, aside, footer, header, section {
+  display: block;
+}
+
+/* основная сетка, подвал и sidebar */
+header {
+  z-index: 10;
+  display: flex;
+  grid-area: header;
+}
+body > main {
+  grid-area: main;
+}
+body {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 1fr minmax(auto, 1110px) 1fr;
+  grid-template-areas:
+    ". header ."
+    ". main ."
+    ". footer .";
+  grid-row-gap: 0.2rem;
+  max-width: 1110px;
+  margin-right: auto;
+  margin-left: auto;
+}
+footer {
+  grid-area: footer;
+  margin-bottom: 5px;
+}
+footer a {
+  color: var(--color-gray-1);
+  padding-right: 0.75em;
+  font-size: 14px;
+}
+footer a:hover {
+  color: var(--color-gray-2);
+}
+main {
+  overflow: hidden;
+  float: left;
+}
+#sidebar {
+  display: none;
+  padding: 0.4rem;
+  margin-top: 40px;
+}
+#sidebar h3 {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size:11px;
+  margin: 2px 0;
+}
+/* end */
+
 a {
   color: #2562dc;
   cursor: pointer;
@@ -36,24 +91,28 @@ a:hover, a:focus{
 .right {
   float:right;
 }
-.w-100, .w-50, .w-66, .w-33 {
-  float: left;
-}
-.w-100 {
-  width: 100%;
-}
-.w-66 {
-  width: 66%;
-}
-.w-50 {
-  width: 50%;
-}
-.w-33 {
-  width: 33%;
-}
+
+.w-100, .w-50, .w-66, .w-33 {float: left;}
+.w-100 {width: 100%;}
+.w-66 {width: 66%;}
+.w-50 {width: 50%;}
+.w-33 {width: 33%;}
+
 h1 {
   font-weight: 300;
+  font-size: 1.2rem;
   margin: 0 0 20px 0;
+}
+h1.top.banner {
+  font-size: 13px;
+  color: var(--color-gray-1);  
+  margin-left: 16px;
+}
+h1.head {
+  font-size: 21px;
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 pre code {
   background: #272822;
@@ -62,37 +121,51 @@ pre code {
   border-radius: 3px;
   display: inline-block;
 }
-h1.top {
-  padding: 0 0 0 17px;
-  margin-bottom: 15px;
-}
-h1.top.banner {
-  font-size: 13px;
-  color: var(--color-gray-1);  
-}
 code {
   color: #b63e56;
   background: #f5f2f0;
   padding: 1px 4px;
   font-size: 1.1em;
 }
-.telo.detail .post a, .comm-telo-body a {
+
+/* Хлебные крошки */
+ul.breadcrumb {
+  padding: 0;
+  font-family: sans-serif;
+  font-size: 0.8rem;
+  line-height: 0.8rem;
+  margin-bottom: 0;
+}
+.breadcrumb .breadcrumb-item:not(:last-child) {
+  margin-right: 0.2rem;
+}
+.breadcrumb .breadcrumb-item {
+  color: var(--color-gray-1);
+  display: inline-block;
+  margin: 0;
+  padding: 0.2rem 0;
+}
+.breadcrumb .breadcrumb-item:not(:last-child) a {
+  color: var(--color-gray-1);
+}
+.breadcrumb .breadcrumb-item:not(:first-child)::before {
+  color: var(--color-gray-1);
+  content: "/";
+  padding-right: 0.4rem;
+}
+.comm-telo-body a {
 	text-decoration: underline;
 }
-.telo-profile, .telo-info, .box-users{
-  margin-left: 5px;
-}
 .left-ots, p.info {
-  margin-left: 15px;
+  margin-left: 0.5rem;
 }
-.telo.comments h2 {
+.comments h2 {
   margin: 20px 0 1px 14px;
   font-weight: 300;
 }
 blockquote {
   font-style: italic;
   margin: 0.25em 0 0 0.5em;
-  padding: 0 0 0 1em;
   border-left: 2px solid gray;
 }
 .logo {
@@ -101,10 +174,9 @@ blockquote {
   width: 26px;
   height: 26px;
   padding: 1px;
-  margin: 0 11px 0 6px;
   color: var(--color-white);
   text-align: center;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -114,58 +186,23 @@ blockquote {
 .logo:hover, .logo:focus {
   color: var(--color-white);
 }
-
-header {
-  height: 45px;
-  width: 100%;
-  z-index: 10;
-  display: flex;
-  margin-bottom: 10px;
+.info-n {
+  margin: 5px 0 10px 25px;
+  overflow: hidden;
+  clear: both;
+  display: block;
+  font-size: 15px;
 }
-footer {
-	color: #999;
-	padding: 0 0 20px 0;
-  float: right;
-}
-footer a {
-	color: #666;
-  padding-right: 0.75em;
-}
-footer a:hover {
-	color: #999;
-}
-.wrap {
-  max-width: 1010px;
-  margin-right: auto;
-  margin-left: auto;
-  padding: 0 3px;
-}
-header .wrap {
-	display: flex;
-	width: calc(100% - 6px);
-}
-.telo {
-  width: 75%;
-  max-width: 750px;
-  float: left;
-}
-.sidebar {
-  width: 25%;
-  float: right;
-  margin: 10px 0;
-}
-.sidebar h3 {
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-size:11px;
-  margin: 2px 0;
+.info-n.active {
+  color: #333;
+} 
+.site-header {
+  padding: 0.4rem 0.5rem;
 }
 .sb-telo {
   margin-bottom: 15px;
   border-left: 3px solid #a1a8ae;
-  margin-left: 20px;
 }
-
 .sb-telo .ava {
   border-radius: 8px;
   height: 16px;
@@ -188,13 +225,10 @@ header .wrap {
 .sb-telo a:hover {
   color: var(--color-gray-1);
 }
-.title, .menu  {
-  margin-top: 8px;
-}
-.menu-left  {
+ 
+.menu-left {
   margin-top: 3px;
 }
-
 .menu-left ul > li {
   float: left;
   margin-right: 20px;
@@ -203,6 +237,7 @@ header .wrap {
   position: relative;
   margin-left: auto;
   align-items: center;
+  margin-top: 2px;
 }
 .menu ul, .menu-left ul{
   margin: 0 0 0 5px;
@@ -216,7 +251,7 @@ header .wrap {
   margin-top: 2px;
 }
 .menu-lf {
-	margin-left: 20px;
+  margin-left: 20px;
 }
 .nav a {
   color: var(--color-gray-1);
@@ -425,12 +460,7 @@ input.form-about {width: 250px;}
 .box.setting textarea, .box.setting input {
   width: 300px;
 }
-.head {
-  font-size: 21px;
-  font-weight: normal;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
+ 
 .md-icon {
   width: 24px;
   height: 24px;
@@ -622,9 +652,6 @@ ol.comment-telo {
 .comm-telo-body, .telo-detail_post{
   max-width: 750px;
 }
-.telo.comments .cm_add_link {
-  margin-left: 40px;
-}
 .comm-telo-body p {
   margin: 5px 0;
 }
@@ -655,7 +682,7 @@ ol.comment-telo {
 .otst {
   margin: 0 1px;
 }
-.cm_addentry {
+.cm_addentry, .comments .cm_add_link, .comm-deletes {
   margin-left: 40px;
 }
 .addcomm, .delcomm, .editcomm {
@@ -683,15 +710,8 @@ ol.comment-telo {
 .fl.active .md-icon {
   stroke: #f56400;
 } 
-.messages {
-  margin: 0 15px;
-}
-.messages textarea.mess {
-  width: 100%;
-}
-.msg-telo {
-   margin: 10px; 
-   padding: 10px;
+textarea.mess {
+  width: 96%;
 }
 .msg-ava {
   width: 18px;
@@ -702,6 +722,12 @@ ol.comment-telo {
 }
 
 /* Profile */
+.profile {
+  grid-column-start: 1;
+  grid-column-end: 4;
+  padding: 0.4rem 0.5rem;
+}
+
 .avatar-user .md-icon {
   width: 104px;
   height: 104px;
@@ -722,7 +748,7 @@ ol.comment-telo {
   height: 100px;
   width: 100px;
 }
-.telo-profile, .telo-post {
+.telo-post {
   margin-left: 5px;
 }
 .box .boxline {
@@ -730,9 +756,9 @@ ol.comment-telo {
   margin-bottom: 0.9em;
 }
 .box_h {
-    font-size: 12px;
-    color: var(--color-gray-1);
-        margin-top: -5px;
+  font-size: 12px;
+  color: var(--color-gray-1);
+  margin-top: -5px;
 }
 .box label, .box .label_holder {
   display: block;
@@ -923,11 +949,26 @@ details > summary:focus { outline: none }
 /* Учтем Chrome, Safari. */
 details > summary::-webkit-details-marker { display: none }
 
-
+@media (min-width: 840px) {
+  body {
+    grid-template-columns: 1fr minmax(auto, 1110px) 220px 1fr;
+    grid-template-areas:
+        ". header header ."
+        ". main sidebar ."
+        ". footer footer .";
+    grid-gap: 0.4rem;
+  }
+  #sidebar {
+    display: block;
+    grid-area: sidebar;
+  }
+  main {
+    max-width: calc(100vw - 220px - 1.2rem);
+  }
+}
 @media screen and (max-width: 720px) {
-  .no-mob {display: none;}
-  .telo, .sidebar {width: 98%;}
-  .sb-telo {margin-left: 0;}
+  #sidebar, .no-mob {display: none;}
+  main {max-width: 100vw;}
   .user_card .column {padding: 10px;}
   .user_card .gravatar {height: 55px;width: 55px;}
 }
