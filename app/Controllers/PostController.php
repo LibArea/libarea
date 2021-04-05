@@ -357,9 +357,7 @@ class PostController extends \MainController
         $post_url             = (empty($post_url)) ? '' : $post_url;
         $post_content_preview = (empty($post_content_preview)) ? '' : $post_content_preview;
         $post_content_img     = (empty($post_content_img)) ? '' : $post_content_img;
- 
-        
-         
+
         // Ограничим частоту добавления
         // PostModel::getPostSpeed($post_user_id);
         
@@ -378,7 +376,6 @@ class PostController extends \MainController
             'post_url'              => $post_url,
         ];
         
-        
         // Записываем пост
         PostModel::AddPost($data);
         
@@ -394,7 +391,6 @@ class PostController extends \MainController
 
         return $title;
     }
-    
     
     // Показ формы поста для редактирование
     public function editPost() 
@@ -431,7 +427,7 @@ class PostController extends \MainController
     {
         $post_id                = \Request::getPostInt('post_id');
         $post_title             = \Request::getPost('post_title');
-        $post_content           = \Request::getPost('post_content');
+        $post_content           = $_POST['post_content']; // не фильтруем
         $post_content_preview   = \Request::getPost('content_preview');
         $post_content_img       = \Request::getPost('content_img');
         $post_closed            = \Request::getPost('closed');
@@ -551,6 +547,23 @@ class PostController extends \MainController
         PostModel::PostDelete($post_id);
        
         return true;
+    }
+  
+    // Просмотр поста с титульной страницы
+    public function shownPost() 
+    {
+        $post_id = \Request::getPostInt('post_id');
+        $post    = PostModel::getPostId($post_id); 
+        
+        if(!$post){
+            return false;
+        }
+        
+        $Parsedown = new Parsedown(); 
+        $Parsedown->setSafeMode(true); // безопасность
+        $post = $Parsedown->text($post['post_content']);
+
+        return view("post/postcode", ['post_content' => $post]);
     }
   
 }

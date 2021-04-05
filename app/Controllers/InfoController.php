@@ -97,4 +97,15 @@ class InfoController extends \MainController
 
         return view('info/restriction', ['data' => $data, 'uid' => $uid]);
 	} 
+
+    public function markdown()
+	{
+        $uid  = Base::getUid();
+        $data = [
+            'title'       => 'Markdown (разметка)  | ' . $GLOBALS['conf']['sitename'],
+            'description' => 'Мы используем Markdown (разметку) на сайте ' . $GLOBALS['conf']['sitename'],
+        ];
+
+        return view('info/markdown', ['data' => $data, 'uid' => $uid]);
+	}    
 }

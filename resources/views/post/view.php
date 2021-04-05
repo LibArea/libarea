@@ -99,7 +99,7 @@
                     <div class="post">
                         <?= $post['post_content']; ?> 
                     </div> 
-
+                        
                     <?php if($post['post_url']) { ?> 
                         <span class="post_url_detal">
                             Источник: <a rel="nofollow noreferrer" href="<?= $post['post_url_full']; ?>">

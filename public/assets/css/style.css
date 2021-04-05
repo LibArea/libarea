@@ -28,6 +28,9 @@ html, body {
 article, aside, footer, header, section {
   display: block;
 }
+tt {
+    font-size: 14px;
+}
 
 /* основная сетка, подвал и sidebar */
 header {
@@ -158,6 +161,7 @@ ul.breadcrumb {
 }
 .left-ots, p.info {
   margin-left: 0.5rem;
+  max-width: 800px;
 }
 .comments h2 {
   margin: 20px 0 1px 14px;
@@ -167,6 +171,7 @@ blockquote {
   font-style: italic;
   margin: 0.25em 0 0 0.5em;
   border-left: 2px solid gray;
+  padding-left: 15px;
 }
 .logo {
   background: #f56400;
@@ -187,11 +192,11 @@ blockquote {
   color: var(--color-white);
 }
 .info-n {
-  margin: 5px 0 10px 25px;
+  margin: 5px 0 5px 25px;
   overflow: hidden;
   clear: both;
   display: block;
-  font-size: 15px;
+  font-size: 13px;
 }
 .info-n.active {
   color: #333;
@@ -489,6 +494,28 @@ input.form-about {width: 250px;}
 }
 
 /* Посты */
+.shown_post {
+  display: block;
+  max-width: 660px;
+  background: #f3f3f3;
+  padding: 0 15px 0 5px;
+}
+a.showpost {
+  font-size: 13px;
+  color: var(--color-gray-1);
+  max-width: 600px;
+  margin: 0 0 5px 0;
+  display: block;
+}
+a.showpost span {
+  color: #bbb;
+}
+.show_detail {
+  display: none;
+}
+.show_detail.active {
+  display: block;
+}
 .post_url {
   font-size: 12px;
   margin-left: 10px;
@@ -539,13 +566,7 @@ input.form-about {width: 250px;}
 .footer a:hover {
   color: var(--color-gray-2);
 }
-.post-prev {
-  font-size: 13px;
-  color: var(--color-gray-1);
-  max-width: 600px;
-  margin: 0 0 5px 0;
-}
-
+ 
 .footer .ava, .mini.ava {
   border-radius: 8px;
   height: 16px;
@@ -611,6 +632,12 @@ h1 span{
   vertical-align: middle;
 }
 /* Комментарии */
+.reply {
+    display: none;
+}
+.reply.active {
+    display: block;
+}
 .block-comments.line{
     border-top: 2px dotted #ddd;
 }
@@ -718,7 +745,7 @@ textarea.mess {
   border-radius: 50%;
 }
 .msg-telo.active {
-   background-color: lightyellow;
+  background-color: lightyellow;
 }
 
 /* Profile */
@@ -829,7 +856,9 @@ textarea.mess {
  max-width: 360px;
  display: inline-block;   
 }
-
+.dark blockquote {
+  background-color: #555;
+}
 /* голосование */
 .voters {
   float: left;

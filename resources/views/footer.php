@@ -1,8 +1,7 @@
 <footer>
     <div class="right">
+        <a title="<?= lang('Privacy'); ?>" href="/info/privacy"><?= lang('Privacy'); ?></a> 
         <a title="<?= lang('Help'); ?>" href="/info"><?= lang('Help'); ?></a>
-        <a title="<?= lang('Statistics'); ?>" href="/info/stats"><?= lang('Statistics'); ?></a>
-        <a class="no-mob" title="<?= lang('Privacy'); ?>" href="/info/privacy"><?= lang('Privacy'); ?></a> 
         <a title="<?= lang('About us'); ?>" href="/info/about"><?= lang('About'); ?></a>
     </div>
 </footer>

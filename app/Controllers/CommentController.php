@@ -120,17 +120,14 @@ class CommentController extends \MainController
             return true; 
         }
 
-        $uid  = Base::getUid();
         $data = [
-            'title'             => 'Форма Редактирования',
-            'description'       => 'Форма Редактирования...',
             'comm_id'           => $comm_id,
             'post_id'           => $post_id,
             'user_id'           => $user_id,
             'comment_content'   => $comm['comment_content'],
         ]; 
         
-        return view("comment/editform", ['data' => $data, 'uid' => $uid]);
+        return view("comment/editform", ['data' => $data]);
     }
 
     // Покажем форму ответа
@@ -146,16 +143,13 @@ class CommentController extends \MainController
             $user_id  = 0;
         }
         
-        $uid  = Base::getUid();
         $data = [
-            'title'       => 'Форма ответа',
-            'description' => 'Форма ответа...',
             'comm_id'     => $comm_id,
             'post_id'     => $post_id,
             'user_id'     => $user_id,
         ]; 
         
-        return view("comment/addform", ['data' => $data, 'uid' => $uid]);
+        return view("comment/addform", ['data' => $data]);
     }
 
     // Комментарии участника

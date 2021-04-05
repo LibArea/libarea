@@ -56,8 +56,16 @@
                     <?php } ?>
                     
                     <?php if ($post['post_content_preview']) { ?>
-                        <div class="post-prev"><?= $post['post_content_preview']; ?>...</div>
+                        <div class="show">
+                            <span class="show_add_<?= $post['post_id']; ?>">
+                                <a data-post_id="<?= $post['post_id']; ?>" class="showpost">
+                                    <span>&#9658;</span> 
+                                    <?= $post['post_content_preview']; ?>... 
+                                </a>
+                            </span>
+                        </div>
                     <?php } ?>
+                    <div id="show_<?= $post['post_id']; ?>" class="show_detail"></div> 
                     
                     <div class="footer">
                         <img class="ava" alt="<?= $post['login']; ?>" src="/uploads/avatar/small/<?= $post['avatar']; ?>">

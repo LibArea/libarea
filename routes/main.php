@@ -84,6 +84,10 @@ Route::get('/info/about')->controller('InfoController@about');
 Route::get('/info/privacy')->controller('InfoController@privacy');
 Route::get('/info/trust-level')->controller('InfoController@trustlevel');
 Route::get('/info/restriction')->controller('InfoController@restriction');
+Route::get('/info/markdown')->controller('InfoController@markdown');
+
+// Покажем пост в ленте
+Route::type('post')->get('/post/shown')->controller('PostController@shownPost');
 
 // Участники
 Route::get('/users')->controller('UserController');

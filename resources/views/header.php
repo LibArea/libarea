@@ -8,7 +8,7 @@
         <?php if (isset($data['post']['post_is_delete'])) { ?>  
             <meta name="robots" content="noindex" />
         <?php } ?>
-
+ 
         <title><?= $data['title']; ?></title>
         <meta name = "description" content = "<?= $data['description']; ?>" />
         <link rel="stylesheet" href="/assets/css/style.css">
@@ -17,8 +17,8 @@
      
     </head>
 <body class="bd<?php if(Request::getCookie('dayNight') == 'dark') {?> dark<?php } ?>">
-<header class="site-header">
-    <div class="title">
+<header class="site-header">  
+    <div class="title"> 
         <a title="<?= lang('Home'); ?>" class="logo" href="/">M</a>
         <div class="menu-left">
             <ul>

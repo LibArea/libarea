@@ -1,0 +1,1 @@
+<div class="shown_post"><?= $post_content; ?></div>
