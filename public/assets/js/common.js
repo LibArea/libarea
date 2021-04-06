@@ -16,7 +16,6 @@ $(function(){
         $('.cm_addentry').remove();
         $('.cm_add_link').show();
     });
-    
     // Show post body
     $(document).on("click", ".showpost", function(){
         var post_id = $(this).data('post_id');  
@@ -30,8 +29,7 @@ $(function(){
             }
         });
     });
-});
-
+}); 
 // toggle dark mode
 $(document).on('click', '#toggledark', function() {
     var mode = getCookie("dayNight");
@@ -70,4 +68,4 @@ function getCookie(cname) {
         }
     }
     return "";
-}
+};

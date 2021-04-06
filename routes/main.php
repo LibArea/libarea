@@ -113,6 +113,7 @@ Route::type('post')->get('/comments/addform')->controller('CommentController@add
 
 // Поиск
 Route::get('/search')->controller('SearchController');
+Route::type('post')->protect()->get('/search/q')->controller('SearchController@qSearch'); 
 
 // Пагинация и главная страница
 Route::get('/{page?}')->protect()->controller('PostController')->where(['page' => '[0-9]+']);

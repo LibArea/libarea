@@ -1,6 +1,6 @@
 <footer>
     <div class="right">
-        <a title="<?= lang('Privacy'); ?>" href="/info/privacy"><?= lang('Privacy'); ?></a> 
+        <a title="<?= lang('Search'); ?>" href="/search"><?= lang('Search'); ?></a> 
         <a title="<?= lang('Help'); ?>" href="/info"><?= lang('Help'); ?></a>
         <a title="<?= lang('About us'); ?>" href="/info/about"><?= lang('About'); ?></a>
     </div>

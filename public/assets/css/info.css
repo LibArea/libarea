@@ -1,4 +1,17 @@
- 
+.stats {
+  grid-column-start: 1;
+  grid-column-end: 4;
+  padding: 0.4rem 0.5rem;
+} 
+#canvas {
+  display: block;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+.canvas-telo {
+  height: 125px;
+}
 .time-cont {
   width: 100%;
   max-width: 830px;
@@ -102,9 +115,8 @@
 .img-email{width:119px;vertical-align: top;}
 .tag {margin-left: 24px;    display: inline-block;}
 .bl-left .title {font-size:21px;}
-h1.user {margin: 0;color:#f56400;font-size: 4em;font-family: Georgia,Arial,sans-serif;}
-h1.prof {margin: 0;color:#f56400;font-size: 3em;font-family: Georgia,Arial,sans-serif;}
-h3.user {margin: 0;color: #666;font-weight: 300;font-size: 1.3em;}
+h1 {margin: 0;color:#f56400;font-size: 3em;font-family: Georgia,Arial,sans-serif;}
+h3 {margin: 0;color: #666;font-weight: 300;font-size: 1.3em;}
 hr.user {display: block;height: 1px;margin: 1em 0;width: 200px;border: 0;border-top-width: 0px;border-top-style:none;
 	 border-top-color: currentcolor;border-top: 2px solid #999;padding: 0;}
 .user-img{background: url(/static/img/dev.jpg);height: 119px;width:70%;}
@@ -127,12 +139,12 @@ h3.suggested-topics-message a:hover {color: #f56400;}
 .img-top-user {vertical-align: middle;width:32px;margin-right: 5px;border-radius: 3px;}
 .img-blog {margin-top: 12px;}
 
-@media (max-width: 850px){
+@media (max-width: 720px){
 .prof-txt{white-space: nowrap;    overflow: hidden; padding: 5px;    text-overflow: ellipsis;}	
 .prof-blog-2 {float: left;width: 33%;}
 .prof-num, h1.prof {font-size: 2em;}
 .prof-txt, h3.user {font-size: 1em;}
 .prof-num-u {font-size: 1.2em;}
 .prof-num img.avatar {width: 34px;height:34px;}  
-.no-mob {display: none;}
+.no-mob, #canvas, .canvas-telo {display: none;}
 }
