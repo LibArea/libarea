@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use App\Models\CommentModel;
 use App\Models\PostModel;
+use App\Models\VotesCommentModel;
 use Hleb\Constructor\Handlers\Request;
 use Base;
 use Parsedown;
@@ -17,15 +18,23 @@ class CommentController extends \MainController
          
         $comm = CommentModel::getCommentsAll();
  
+        if(!empty($_SESSION['account']['user_id'])) {
+            $uid   = $_SESSION['account']['user_id'];
+        } else {
+            $uid   = 0;
+        }
+ 
         $result = Array();
         foreach($comm  as $ind => $row){
             if(!$row['avatar']) {
                 $row['avatar'] = 'noavatar.png';
             } 
-            $row['avatar'] = $row['avatar'];
+            $row['avatar']  = $row['avatar'];
             $row['content'] = $Parsedown->text($row['comment_content']);
-            $row['date'] = Base::ru_date($row['comment_date']);
-            $result[$ind] = $row;
+            $row['date']    = Base::ru_date($row['comment_date']);
+            // N+1 - перенести в запрос
+            $row['comm_vote_status']    = VotesCommentModel::getVoteStatus($row['comment_id'], $uid);
+            $result[$ind]   = $row;
         }
         
         $uid  = Base::getUid();

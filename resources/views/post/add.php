@@ -48,10 +48,10 @@
                 </div>         
            
                 <div class="boxline">
-                    <label for="post_content">Пространство</label>
-                    <input type="radio" name="space" value="1" > cms
-                    <input type="radio" name="space" value="2" > вопросы
-                    <input type="radio" name="space" value="3" > флуд
+                    <label for="post_content">Пространствa</label>
+                    <?php foreach ($space as $sp) { ?>
+                        <input type="radio" name="space_id" value="<?= $sp['space_id']; ?>"><?= $sp['space_name']; ?>
+                    <?php } ?>
                 </div>
                 <input type="submit" name="submit" value="Написать" />
             </form>

@@ -301,6 +301,9 @@ class PostController extends \MainController
     {
         // Будем проверять ограничение на частоту 
         // print_r(PostModel::getPostSpeed(1));
+        
+        $space = SpaceModel::getSpaceSelect();
+        
         $uid  = Base::getUid();
         $data = [
             'h1'            => 'Добавить пост',
@@ -308,7 +311,7 @@ class PostController extends \MainController
             'description'   => 'Страница добавления поста',
         ];  
        
-        return view("post/add", ['data' => $data, 'uid' => $uid]);
+        return view("post/add", ['data' => $data, 'uid' => $uid, 'space' => $space]);
     }
     
     // Добавление поста
@@ -325,8 +328,8 @@ class PostController extends \MainController
         $post_ip_int  = \Request::getRemoteAddress();
         $post_user_id = $_SESSION['account']['user_id'];
         
-        // Получаем id тега
-        $space_id     = \Request::getPost('space');
+        // Получаем id пространства
+        $space_id     = \Request::getPost('space_id');
         
         // Проверяем длину title
         if (Base::getStrlen($post_title) < 6 || Base::getStrlen($post_title) > 260)

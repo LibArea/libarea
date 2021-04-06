@@ -110,14 +110,15 @@
 
 <aside id="sidebar"> 
     <?php if($data['space_hide']) { ?>
-        <div class="sidebar no-mob">
+        <div>
             <h3>Отписан</h3>  
             <?php foreach ($data['space_hide'] as  $hide) { ?>
                 <a class="space space_<?= $hide['space_tip'] ?>" href="/s/<?= $hide['space_slug']; ?>" title="<?= $hide['space_name']; ?>">
                     <?= $hide['space_name']; ?>
                 </a>
             <?php } ?>
-        </div>
+            <div class="v-ots"></div> 
+        </div>    
     <?php } ?>
 
     <?php foreach ($data['latest_comments'] as  $comm) { ?>

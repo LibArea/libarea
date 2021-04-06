@@ -11,10 +11,26 @@
                 
                     <?php if($comm['comment_del'] == 0) { ?>
                         <div class="comm-telo_bottom">
-                            <div class="voters">
-                                <div class="comm-up-id"></div>
-                                <div class="score"><?= $comm['comment_votes'] ?></div>
-                            </div>
+                            
+                            <?php if (!$uid['id']) { ?> 
+                                <div class="voters">
+                                    <a rel="nofollow" href="/login"><div class="comm-up-id"></div></a>
+                                    <div class="score"><?= $comm['comment_votes']; ?></div>
+                                </div>
+                            <?php } else { ?>
+                                <?php if ($comm['comm_vote_status'] || $uid['id'] == $comm['comment_user_id']) { ?>
+                                    <div class="voters active">
+                                        <div class="comm-up-id"></div>
+                                        <div class="score"><?= $comm['comment_votes']; ?></div>
+                                    </div>
+                                <?php } else { ?>
+                                    <div id="up<?= $comm['comment_id']; ?>" class="voters">
+                                        <div data-id="<?= $comm['comment_id']; ?>" class="comm-up-id"></div>
+                                        <div class="score"><?= $comm['comment_votes']; ?></div>
+                                    </div>
+                                <?php } ?>
+                            <?php } ?>
+                            
                             <div class="comm-telo">
                                 <div class="comm-header">
                                     <img class="ava" src="/uploads/avatar/small/<?php echo $comm['avatar'] ?>">

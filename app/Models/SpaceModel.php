@@ -7,9 +7,13 @@ class SpaceModel extends \MainModel
 {
     
     // Все пространства сайта
-    public static function getSpaceAll()
+    public static function getSpaceAll($user_id)
     {
-        return  XD::select('*')->from(['space'])->getSelect();
+        $q = XD::select('*')->from(['space']);
+        $result = $q->leftJoin(['space_hidden'])->on(['hidden_space_id'], '=', ['space_id'])
+                ->and(['hidden_user_id'], '=', $user_id)->getSelect();
+        
+        return $result;
     } 
 
     // Для форм добалвения и изменения, для массовой отписки и подписки (В планах!)
@@ -51,7 +55,7 @@ class SpaceModel extends \MainModel
         return $result;
     }
     
-    // Подписан пользователь на тег или нет
+    // Подписан пользователь на пространство или нет
     public static function getMySpaceHide($space_id, $user_id) 
     {
         $result = XD::select('*')->from(['space_hidden'])->where(['hidden_space_id'], '=', $space_id)->and(['hidden_user_id'], '=', $user_id)->getSelect();

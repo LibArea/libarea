@@ -29,7 +29,7 @@ article, aside, footer, header, section {
   display: block;
 }
 tt {
-    font-size: 14px;
+  font-size: 14px;
 }
 
 /* основная сетка, подвал и sidebar */
@@ -224,7 +224,7 @@ blockquote {
 }
 .sb-telo a {
   color: var(--color-gray-2);
-  font-size: 13px;
+  font-size: 14px;
   margin-left: 20px;
   display: block;
 }
@@ -364,8 +364,7 @@ input[type="checkbox"] {
 select {
   border: 1px solid #ccc;
 }
-input:focus,
-textarea:focus {
+input:focus, textarea:focus {
   border-color: #888;
   color: #303030;
   outline: 0;
@@ -425,7 +424,6 @@ input[type="submit_url"]:hover {
   text-decoration: none;
   background-color: #e6e6e6;
 }
-
 select {
   margin-top: 3px;
   min-width: 100px;
@@ -439,12 +437,10 @@ select::-moz-focus-inner {
   border: 0;
   outline: 0;
 }
-
 input:disabled, button:disabled {
   background-color: #e9e9e9;
   color: gray;
 }
-
 input:disabled {background: #f1f1f1;}
 input.form-about {width: 250px;}
 
@@ -504,7 +500,7 @@ input.form-about {width: 250px;}
   padding: 0 15px 0 5px;
 }
 a.showpost {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--color-gray-1);
   max-width: 600px;
   margin: 0 0 5px 0;
@@ -583,8 +579,8 @@ a.showpost span {
 
 /* Теги */
 a.space {
-  background-color: #fffcd7;
-  border: 1px solid #d5d458;
+  background-color: #eee;
+  border: 1px solid #c8c8c8;
   border-radius: 5px;
   color: #555 !important;
   font-size: 8pt;
@@ -599,8 +595,16 @@ a.space_2 {
   border-color: #f0b2b8;
 }
 a.space_3 {
-  background-color: #eee;
-  border-color: #c8c8c8;
+  background-color: #fffcd7;
+  border-color: #d5d458;
+}
+a.space_4 {
+  background-color: #ddebf9;
+  border-color: #b2ccf0;
+}
+a.space_5 {
+  background-color: #ddebf9;
+  border-color: #b2ccf0;
 }
 .space-des {
   margin-left:10px;
@@ -632,6 +636,9 @@ a.space_3 {
   width: 180px;
   padding: 5px;
   text-align: center;
+}
+.space-telo {
+  margin-bottom: 15px;
 }
 h1 span{
   vertical-align: middle;

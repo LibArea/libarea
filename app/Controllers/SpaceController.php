@@ -12,8 +12,13 @@ class SpaceController extends \MainController
     // Все пространства сайта
     public function index()
     {
+        if($account  = \Request::getSession('account')){
+            $user_id = $account['user_id'];
+        } else {
+            $user_id = 0;
+        }
 
-        $space = SpaceModel::getSpaceAll();
+        $space = SpaceModel::getSpaceAll($user_id);
 
         $uid  = Base::getUid();
         $data = [
@@ -28,15 +33,14 @@ class SpaceController extends \MainController
     // Посты по пространству
     public function SpacePosts()
     {
- 
-        if($account = Request::getSession('account')){
+        if($account = \Request::getSession('account')){
             $user_id = $account['user_id'];
         } else {
             $user_id = 0;
         }
- 
+
         // Информация по пространству и посты
-        $slug  = Request::get('slug');
+        $slug  = \Request::get('slug');
         $space = SpaceModel::getSpaceInfo($slug);
         $posts = SpaceModel::getSpacePosts($space['space_id'], $user_id);
   
@@ -74,20 +78,18 @@ class SpaceController extends \MainController
         ];
 
         return view("space/spaceposts", ['data' => $data, 'uid' => $uid, 'posts' => $result, 'space' => $space]);
-        
     }
 
     // Форма изменения пространства
     public function spaceForma()
     {
-        
         // Доступ только персоналу
-        $account = Request::getSession('account');
+        $account = \Request::getSession('account');
         if ($account['trust_level'] != 5) {
             return false;
         }
  
-        $slug  = Request::get('slug');
+        $slug  = \Request::get('slug');
         $space = SpaceModel::getSpaceInfo($slug);
 
         if(!$space['space_img'] ) {
@@ -102,14 +104,13 @@ class SpaceController extends \MainController
         ]; 
 
         return view("space/formaspace", ['data' => $data, 'uid' => $uid, 'space' => $space]);
-        
     }
     
     // Изменение пространства
     public function spaceEdit() 
     {
         // Доступ только персоналу
-        $account = Request::getSession('account');
+        $account = \Request::getSession('account');
         if ($account['trust_level'] != 5) {
             return false;
         } 
@@ -117,6 +118,10 @@ class SpaceController extends \MainController
         $space_slug = \Request::getPost('space_slug');
         $space_id   = \Request::getPost('space_id');
         
+   
+        // Узнаем преждний img
+        $space = SpaceModel::getSpaceImg($space_id);
+           
         $name     = $_FILES['image']['name'];
         
         if($name) {
@@ -161,9 +166,6 @@ class SpaceController extends \MainController
                 $image->resize(18, 18);            
                 $image->saveTo($path_img_small, $space_id. '_space');
                 
-                // Узнаем преждний img
-                $space = SpaceModel::getSpaceImg($space_id);
-                
                 if($space['space_img']){
                     chmod($path_img . $space['space_img'], 0777);
                     chmod($path_img_small . $space['space_img'], 0777);
@@ -172,16 +174,15 @@ class SpaceController extends \MainController
                 }  
                 $space_img = $img;
             } else {
-                $space_img = 'space-default.png';
+                $space_img = (empty($space['space_img'])) ? '' : $space['space_img'];
             }
             
         } else {
-            $space_img = 'space-default.png';
+            $space_img = (empty($space['space_img'])) ? '' : $space['space_img'];
         }
         
-        if(!$data['space_color']) { 
-            $data['space_color'] = '#339900';
-        }
+        $space_color = \Request::getPost('space_color');
+        $space_color = (empty($space_color)) ? '' : $space_color;
         
         // Пока перечислим все поля
         // Если пользователи смогут создавать пространства с TL2
@@ -191,7 +192,7 @@ class SpaceController extends \MainController
             'space_slug'        => $space_slug,
             'space_name'        => \Request::getPost('space_name'),
             'space_description' => \Request::getPost('space_description'),
-            'space_color'       => \Request::getPost('space_color'),
+            'space_color'       => $space_color,
             'space_text'        => $_POST['space_text'], // Не фильтруем!
             'space_img'         => $space_img,
         ]; 
@@ -200,20 +201,17 @@ class SpaceController extends \MainController
         
         Base::addMsg('Изменение сохранено', 'error');
         redirect('/s/' . $data['space_slug']);
-        
     }
     
-    // Отписка тегов
+    // Отписка от пространств
     public function hide()
     {
-
         $space_id = \Request::getPostInt('space_id'); 
-        $account = Request::getSession('account');
+        $account  = \Request::getSession('account');
 
         SpaceModel::SpaceHide($space_id, $account['user_id']);
         
         return true;
-        
     }
 
 }
