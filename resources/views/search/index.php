@@ -3,7 +3,7 @@
     <div class="left-ots">
         <h1><?= $data['h1']; ?></h1>
 
-     	<form method="post" action="/search/q">
+     	<form method="post" action="/search">
             <?= csrf_field() ?>
             <input type="text" name="q" id="search" class='search'/>
  

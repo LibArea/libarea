@@ -112,8 +112,7 @@ Route::get('/s/{slug}')->controller('SpaceController@spacePosts')->where(['slug'
 Route::type('post')->get('/comments/addform')->controller('CommentController@addform');
 
 // Поиск
-Route::get('/search')->controller('SearchController');
-Route::type('post')->protect()->get('/search/q')->controller('SearchController@qSearch'); 
+Route::type(['get','post'])->get('/search')->controller('SearchController');
 
 // Пагинация и главная страница
 Route::get('/{page?}')->protect()->controller('PostController')->where(['page' => '[0-9]+']);
