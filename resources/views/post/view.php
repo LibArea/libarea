@@ -1,7 +1,6 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 <main>
-    <article class="post-full">
- <!--header-->
+    <article class="post-full max-width">
      
         <?php if($post['post_is_delete'] == 0 || $uid['trust_level'] == 5) { ?>
    

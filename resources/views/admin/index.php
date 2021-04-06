@@ -1,5 +1,5 @@
 <?php include TEMPLATE_DIR . '/admin/header_admin.php'; ?>
-<div class="admin">
+<main class="admin">
     <div class="left-ots">
  
         <h1><?= $data['title']?></h1>
@@ -59,5 +59,5 @@
             <?php } ?>
         </div>
     </div>
-</div> 
+</main> 
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

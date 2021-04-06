@@ -14,12 +14,8 @@
                 <?php if($uid['trust_level'] == 5) { ?>
                     <div class="boxline">
                         <label for="post_title">URL</label>
-                        <span class="w-50">
-                            <input id="link" class="add" type="url" name="post_url" />
-                        </span>
-                        <span class="w-33">
-                            <input id="graburl" type="submit_url" name="submit_url" value="Извлечь" />
-                        </span>
+                        <input id="link" class="add-url" type="url" name="post_url" />
+                        <input id="graburl" type="submit_url" name="submit_url" value="Извлечь" />
                         <br>
                     </div> <?php } ?>
                     <div class="boxline">
@@ -81,7 +77,7 @@
                     <td>окружить текст <tt>`обратными ковычками`</tt></td>
                   </tr>
                   <tr>
-                    <td><a href="http://example.com/" style="color: inherit;">связаный текст</a></td>
+                    <td><a href="http://example.com/">связаный текст</a></td>
                     <td><tt>[связанный текст](http://example.com/)</tt> или просто URL-адрес для создания без заголовка</td>
                   </tr>
                   <tr>

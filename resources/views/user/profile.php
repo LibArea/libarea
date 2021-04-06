@@ -1,5 +1,5 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<div class="profile">
+<main class="profiles">
     <div class="left-ots"> 
          
         <div class="gravatar right">
@@ -118,5 +118,5 @@
         </div>
          
     </div>        
-</div>
+</main>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

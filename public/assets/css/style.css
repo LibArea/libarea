@@ -81,6 +81,17 @@ main {
   font-size:11px;
   margin: 2px 0;
 }
+.profiles, .users {
+  grid-column-start: 1;
+  grid-column-end: 4;
+  padding: 0.4rem 0.5rem;
+}
+.left-ots {
+  margin-left: 0.5rem;
+}
+.max-width {
+  max-width: 800px;  
+}
 /* end */
 
 a {
@@ -94,12 +105,6 @@ a:hover, a:focus{
 .right {
   float:right;
 }
-
-.w-100, .w-50, .w-66, .w-33 {float: left;}
-.w-100 {width: 100%;}
-.w-66 {width: 66%;}
-.w-50 {width: 50%;}
-.w-33 {width: 33%;}
 
 h1 {
   font-weight: 300;
@@ -158,10 +163,6 @@ ul.breadcrumb {
 }
 .comm-telo-body a {
 	text-decoration: underline;
-}
-.left-ots, p.info {
-  margin-left: 0.5rem;
-  max-width: 800px;
 }
 .comments h2 {
   margin: 20px 0 1px 14px;
@@ -295,7 +296,6 @@ blockquote {
 .dropdown-menu.fast {
   display: block;
 }
-
 .dropdown-menu a {
   color: var(--color-gray-2);
   font-size: 14px;
@@ -462,6 +462,9 @@ input.form-about {width: 250px;}
 .box.create input.add {
   width: 75%;
 }
+.box.create input.add-url {
+  width: 52%;
+}
 .box.setting textarea, .box.setting input {
   width: 300px;
 }
@@ -569,7 +572,6 @@ a.showpost span {
 .footer a:hover {
   color: var(--color-gray-2);
 }
- 
 .footer .ava, .mini.ava {
   border-radius: 8px;
   height: 16px;
@@ -679,9 +681,6 @@ ol.comment-telo {
 .comm-telo_bottom {
   margin-bottom: 20px;
 }
-.comm-telo-body, .telo-detail_post{
-  max-width: 750px;
-}
 .comm-telo-body p {
   margin: 5px 0;
 }
@@ -743,6 +742,9 @@ ol.comment-telo {
 textarea.mess {
   width: 96%;
 }
+.msg-telo {
+  margin-bottom: 15px;
+}
 .msg-ava {
   width: 18px;
   border-radius: 50%;
@@ -752,12 +754,6 @@ textarea.mess {
 }
 
 /* Profile */
-.profile {
-  grid-column-start: 1;
-  grid-column-end: 4;
-  padding: 0.4rem 0.5rem;
-}
-
 .avatar-user .md-icon {
   width: 104px;
   height: 104px;
@@ -835,7 +831,7 @@ textarea.mess {
   color: #888;
 }
 
-/* Изображаем смену цвета */
+/* dark */
 .dark {
   background: #333;
   color: var(--color-white);
@@ -862,19 +858,19 @@ textarea.mess {
 .dark blockquote {
   background-color: #555;
 }
+
 /* голосование */
 .voters {
   float: left;
   margin-top: 1px;
   width: 40px;
 }
-
 .telo-detail_post .voters {
   float: left;
   margin-top: 8px;
   width: 40px;
 }
- div.voters .comm-up-id, div.voters .post-up-id {
+div.voters .comm-up-id, div.voters .post-up-id {
   border-bottom-width: 11px;
 }
 .voters .comm-up-id, .voters .post-up-id {
