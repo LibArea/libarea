@@ -37,6 +37,7 @@ class SpaceModel extends \MainModel
                 ->leftJoin(['votes_post'])->on(['votes_post_item_id'], '=', ['post_id'])
                 ->and(['votes_post_user_id'], '=', $user_id)
                 ->where(['post_space_id'], '=', $space_id)
+                ->orderBy(['post_id'])->desc()
                 ->getSelect();
     }
     
@@ -88,7 +89,6 @@ class SpaceModel extends \MainModel
     // Изменение пространства
     public static function setSpaceEdit ($data)
     {
- 
         XD::update(['space'])->set(['space_slug'], '=', $data['space_slug'], ',', ['space_name'], '=', $data['space_name'], ',', ['space_description'], '=', $data['space_description'], ',', ['space_color'], '=', $data['space_color'], ',', ['space_img'], '=', $data['space_img'], ',', ['space_text'], '=', $data['space_text'])->where(['space_id'], '=', $data['space_id'])->run();
         
         return true;

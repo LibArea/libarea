@@ -12,8 +12,8 @@ class SpaceController extends \MainController
     // Все пространства сайта
     public function index()
     {
-        $account   = \Request::getSession('account');
-        $user_id = (!$account) ? 0 : $account['user_id'];
+        $account    = \Request::getSession('account');
+        $user_id    = $account ? $account['user_id'] : 0;
 
         $space = SpaceModel::getSpaceAll($user_id);
 
@@ -31,7 +31,7 @@ class SpaceController extends \MainController
     public function SpacePosts()
     {
         $account    = \Request::getSession('account');
-        $user_id    = (!$account) ? 0 : $account['user_id'];
+        $user_id    = $account ? $account['user_id'] : 0;
 
         // Информация по пространству и посты
         $slug  = \Request::get('slug');

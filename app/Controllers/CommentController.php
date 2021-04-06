@@ -19,7 +19,7 @@ class CommentController extends \MainController
         $comm = CommentModel::getCommentsAll();
  
         $account    = \Request::getSession('account');
-        $user_id    = (!$account) ? 0 : $account['user_id'];
+        $user_id    = $account ? $account['user_id'] : 0;
  
         $result = Array();
         foreach($comm  as $ind => $row){
