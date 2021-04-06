@@ -95,11 +95,8 @@ class PostController extends \MainController
     // Посты с начальными не нулевыми голосами, с голосованием, например, от 5
     public function topPost() { 
     
-        if($account = Request::getSession('account')){
-            $user_id     = $account['user_id'];
-        } else {
-            $user_id     = 0;
-        }
+        $account   = \Request::getSession('account');
+        $user_id = (!$account) ? 0 : $account['user_id'];
     
         // Пока Top - по количеству комментариев  
         $posts = PostModel::getPostTop($user_id);
@@ -256,11 +253,8 @@ class PostController extends \MainController
     // Посты участника
     public function userPosts()
     {
-        if($account = Request::getSession('account')){
-            $user_id = $account['user_id'];
-        } else {
-            $user_id = 0;
-        }
+        $account    = \Request::getSession('account');
+        $user_id    = (!$account) ? 0 : $account['user_id'];
         
         $login = \Request::get('login');
         $post_user  = PostModel::getUsersPosts($login, $user_id); 
@@ -540,7 +534,7 @@ class PostController extends \MainController
     public function deletePost()
     {
         // Доступ только персоналу
-        $account = Request::getSession('account');
+        $account = \Request::getSession('account');
         if ($account['trust_level'] != 5) {
             return false;
         }

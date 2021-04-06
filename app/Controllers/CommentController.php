@@ -18,11 +18,8 @@ class CommentController extends \MainController
          
         $comm = CommentModel::getCommentsAll();
  
-        if(!empty($_SESSION['account']['user_id'])) {
-            $uid   = $_SESSION['account']['user_id'];
-        } else {
-            $uid   = 0;
-        }
+        $account    = \Request::getSession('account');
+        $user_id    = (!$account) ? 0 : $account['user_id'];
  
         $result = Array();
         foreach($comm  as $ind => $row){
@@ -33,7 +30,7 @@ class CommentController extends \MainController
             $row['content'] = $Parsedown->text($row['comment_content']);
             $row['date']    = Base::ru_date($row['comment_date']);
             // N+1 - перенести в запрос
-            $row['comm_vote_status']    = VotesCommentModel::getVoteStatus($row['comment_id'], $uid);
+            $row['comm_vote_status'] = VotesCommentModel::getVoteStatus($row['comment_id'], $user_id);
             $result[$ind]   = $row;
         }
         
@@ -51,7 +48,7 @@ class CommentController extends \MainController
     public function create()
     {
         // Получим относительный url поста для возрата (упростить)
-        $url = str_replace('//', '', $_SERVER['HTTP_REFERER']);
+        $url        = str_replace('//', '', $_SERVER['HTTP_REFERER']);
         $return_url = substr($url, strpos($url, '/') + 1);
         
         $comment = \Request::getPost('comment');
@@ -63,9 +60,9 @@ class CommentController extends \MainController
             return true;
         }
 
-        $post_id   = \Request::getPostInt('post_id'); // в каком посту ответ
-        $comm_id   = \Request::getPostInt('comm_id'); // на какой коммент
-        $comment   = $_POST['comment']; // не фильтруем
+        $post_id   = \Request::getPostInt('post_id');   // в каком посту ответ
+        $comm_id   = \Request::getPostInt('comm_id');   // на какой коммент
+        $comment   = $_POST['comment'];                 // не фильтруем
         $ip        = \Request::getRemoteAddress();      // ip отвечающего 
         
         // id того, кто отвечает
@@ -79,7 +76,7 @@ class CommentController extends \MainController
         $last_id = CommentModel::commentAdd($post_id, $ip, $comm_id, $comment, $my_id);
          
         // Пересчитываем количество комментариев для поста + 1
-        PostModel::getNumComments($post_id); // + 1
+        PostModel::getNumComments($post_id);
         
         redirect('/' . $return_url . '#comm_' . $last_id); 
     }

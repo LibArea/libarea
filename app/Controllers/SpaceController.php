@@ -12,19 +12,16 @@ class SpaceController extends \MainController
     // Все пространства сайта
     public function index()
     {
-        if($account  = \Request::getSession('account')){
-            $user_id = $account['user_id'];
-        } else {
-            $user_id = 0;
-        }
+        $account   = \Request::getSession('account');
+        $user_id = (!$account) ? 0 : $account['user_id'];
 
         $space = SpaceModel::getSpaceAll($user_id);
 
         $uid  = Base::getUid();
         $data = [
-            'h1'       => 'Все пространства',
-            'title'       => 'Все пространства | ' . $GLOBALS['conf']['sitename'],
-            'description' => 'Страница всех пространств сайта на ' . $GLOBALS['conf']['sitename'],
+            'h1'            => 'Все пространства',
+            'title'         => 'Все пространства | ' . $GLOBALS['conf']['sitename'],
+            'description'   => 'Страница всех пространств сайта на ' . $GLOBALS['conf']['sitename'],
         ];
 
         return view("space/all", ['data' => $data, 'uid' => $uid, 'space' => $space]);
@@ -33,11 +30,8 @@ class SpaceController extends \MainController
     // Посты по пространству
     public function SpacePosts()
     {
-        if($account = \Request::getSession('account')){
-            $user_id = $account['user_id'];
-        } else {
-            $user_id = 0;
-        }
+        $account    = \Request::getSession('account');
+        $user_id    = (!$account) ? 0 : $account['user_id'];
 
         // Информация по пространству и посты
         $slug  = \Request::get('slug');
