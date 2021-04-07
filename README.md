@@ -21,7 +21,7 @@ https://my.areadev.ru
 * Корневая папка проекта: public (настройте сервер)
 * Залейте: database/dev.sql
 * Пропишите настройки: database/dbase.config.php
-* Войдите в аккаунт используя данные: ss@sdf.ru / qwer14qwer14
+* Войдите в аккаунт используя данные: `ss@sdf.ru` / qwer14qwer14
 
 **ВАЖНО!**
 
