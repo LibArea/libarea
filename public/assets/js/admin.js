@@ -10,5 +10,15 @@ $(function(){
             location.reload();
         });
     }); 
- 
+    // Восстанавливаем комментарий
+    $(document).on('click', '.recover-comm', function() {
+        var comm_id = $(this).data('id');
+        $.ajax({
+            url: '/admin/comment/recover',
+            type: 'POST',
+            data: {comm_id: comm_id},
+        }).done(function(data) {
+            $('#comm_' + comm_id).addClass('recover');
+        });
+    });
 });

@@ -6,7 +6,6 @@ use XdORM\XD;
 
 class AdminModel extends \MainModel
 {
-    
     // Страница участников
     public static function UsersAll()
     {
@@ -19,36 +18,24 @@ class AdminModel extends \MainModel
        // $result = $query->getSelect();  // toString()
      
         return $result;
-
     }
 
     // Страница участников
     public static function UsersLogAll($id)
     {
-
-        $result = XD::select('*')->from(['users_logs'])->where(['logs_user_id'], '=', $id)
+        return XD::select('*')->from(['users_logs'])->where(['logs_user_id'], '=', $id)
                 ->orderBy(['id'])->desc()->getSelectOne();
-                
-        return $result;
 
     }
-    
     
     // Получение информации по id
     public static function UserId($uid)
     {
-
-        $query = XD::select('*')
+        return XD::select('*')
                 ->from(['users'])
-                ->where(['id'], '=', $uid);
-
-        $result = $query->getSelectOne();
-
-        return $result;
-
+                ->where(['id'], '=', $uid)->getSelectOne();
     }
 
-    
     // Проверка IP на дубликаты
     public static function replayIp($ip)
     {
@@ -59,14 +46,11 @@ class AdminModel extends \MainModel
                 ->where(['reg_ip'], '=', $ip);
 
         return count($query->getSelect());
-
     }
     
-
     // Находит ли пользователь в бан- листе и рабанен ли был он
     public static function isBan($uid)
     {
-        
         $result = XD::select('*')->from(['users_banlist'])
                 ->where(['banlist_user_id'], '=', $uid)
                 ->and(['banlist_status'], '=', 1)->getSelectOne();
@@ -76,17 +60,15 @@ class AdminModel extends \MainModel
         }
 
         return true;   
-        
     }
     
     
     public static function setBanUser($uid)
     {
-        
         $res = XD::select('*')->from(['users_banlist'])
                 ->where(['banlist_user_id'], '=', $uid)->getSelect();
                 
-        $num    = count($res);
+        $num = count($res);
      
         if($num != 0) { 
         
@@ -97,7 +79,8 @@ class AdminModel extends \MainModel
 
             if($status == 0) {   
             	// Забанить повторно
-                XD::update(['users_banlist'])->set(['banlist_status'], '=', 1)->where(['banlist_user_id'], '=', $uid)->run(); 
+                // Проставляем в banlist_int_num 2, что пока означет: возможно > 2
+                XD::update(['users_banlist'])->set(['banlist_int_num'], '=', 2, ',', ['banlist_status'], '=', 1)->where(['banlist_user_id'], '=', $uid)->run(); 
                 XD::update(['users'])->set(['ban_list'], '=', 1)->where(['id'], '=', $uid)->run();                 
             } else {  
                 // Разбанить
@@ -114,7 +97,7 @@ class AdminModel extends \MainModel
             // Забанить в первый раз
             $date = date("Y-m-d H:i:s");
 
-            XD::insertInto(['users_banlist'], '(', ['banlist_user_id'], ',', ['banlist_ip'], ',', ['banlist_bandate'], ',', ['banlist_int_num'], ',', ['banlist_int_period'], ',', ['banlist_status'], ',', ['banlist_autodelete'], ',', ['banlist_cause'], ')')->values( '(', XD::setList([$uid, $ip, $date, '', '', 1, 0, '']), ')' )->run();
+            XD::insertInto(['users_banlist'], '(', ['banlist_user_id'], ',', ['banlist_ip'], ',', ['banlist_bandate'], ',', ['banlist_int_num'], ',', ['banlist_int_period'], ',', ['banlist_status'], ',', ['banlist_autodelete'], ',', ['banlist_cause'], ')')->values( '(', XD::setList([$uid, $ip, $date, 1, '', 1, 0, '']), ')' )->run();
             
             XD::update(['users'])->set(['ban_list'], '=', 1)->where(['id'], '=', $uid)->run();  
             
@@ -122,5 +105,25 @@ class AdminModel extends \MainModel
         
         return true;   
     }
-
+    
+    // Удаленные комментарии
+    public static function getCommentsDell() 
+    {
+        $q = XD::select('*')->from(['comments']);
+        $query = $q->leftJoin(['users'])->on(['id'], '=', ['comment_user_id'])
+                ->leftJoin(['posts'])->on(['comment_post_id'], '=', ['post_id'])
+                ->where(['comment_del'], '=', 1)->orderBy(['comment_id'])->desc();
+        
+        return  $query->getSelect();
+    }
+    
+    // Восстановление комментария
+    public static function CommentsRecover($id)
+    {
+         XD::update(['comments'])->set(['comment_del'], '=', 0)
+        ->where(['comment_id'], '=', $id)->run();
+ 
+        return true;
+    }
+    
 }

@@ -170,7 +170,7 @@ ul.breadcrumb {
 }
 blockquote {
   font-style: italic;
-  margin: 0.25em 0 0 0.5em;
+  margin: 0.8em 0 0.8em 0.5em;
   border-left: 2px solid gray;
   padding-left: 15px;
 }
@@ -689,7 +689,7 @@ ol.comment-telo {
   margin-bottom: 20px;
 }
 .comm-telo-body p {
-  margin: 5px 0;
+  margin: 5px 0 10px 0;
 }
 .comm-header a, .comm-header {
   font-size: 9.5pt;

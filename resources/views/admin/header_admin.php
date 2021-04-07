@@ -26,7 +26,7 @@
                 <li class="nav no-mob">
                     <a title="Админка" class="home" href="/admin">Админка</a>
                 </li>
-                <li class="nav no-mob">
+                <!--li class="nav no-mob">
                     <a title="Участники" class="home" href="#">
                         <svg class="md-icon">
                             <use xlink:href="/assets/svg/icons.svg#user"></use>
@@ -41,9 +41,9 @@
                         </svg> 
                         Посты
                     </a>
-                </li>
+                </li-->
                 <li class="nav no-mob">
-                    <a title="Комментарии" class="home" href="#">
+                    <a title="Комментарии" class="home" href="/admin/comments">
                         <svg class="md-icon">
                             <use xlink:href="/assets/svg/icons.svg#message"></use>
                         </svg> 

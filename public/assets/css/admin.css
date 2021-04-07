@@ -1,15 +1,18 @@
- .admin {
-    grid-column-start: 1;
-    grid-column-end: 4;
-    background: #fff;
-    padding: 0.4rem 0.5rem;
+.admin {
+  grid-column-start: 1;
+  grid-column-end: 4;
+  background: #fff;
+  padding: 0.4rem 0.5rem;
+}
+.comm-telo_bottom.recover {
+  opacity: 0.3;
 }
 
 /* tables */
 .t-table {  
-    display: table;
-    width: 100%;
-    border-collapse: collapse;
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
 }
 
 .m-850 {max-width: 850px;}
@@ -23,12 +26,7 @@
   vertical-align: middle;
   font-size: 14px;
 }
-.t-td.center{
-  text-align: center;
-}
-.t-td:not(.no-p){
-  padding: 4px 4px 4px 8px;
-}
+.t-td.center{text-align: center;}
+.t-td:not(.no-p){padding: 4px 4px 4px 8px;}
 .w-30 {width:30px;}
-
 .ava {vertical-align: middle;width:24px;}

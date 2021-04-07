@@ -4,13 +4,13 @@ namespace App\Controllers;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\UserModel;
 use App\Models\AdminModel;
+use Parsedown;
 use Base;
 
 class AdminController extends \MainController
 {
 	public function index()
 	{
-        
         // Если TL участника не равен 5 (персонал) - редирект
         $account = Request::getSession('account');
         if(!$isAdmin = UserModel::isAdmin($account['user_id'])) {
@@ -47,7 +47,6 @@ class AdminController extends \MainController
     
     public function banUser() 
     {
-      
         // Если TL участника не равен 5 (персонал) - редирект
         $account = Request::getSession('account');
         if(!$isAdmin = UserModel::isAdmin($account['user_id'])) {
@@ -60,4 +59,51 @@ class AdminController extends \MainController
         return true;
     }
     
+    // Удаленые комментарии
+    public function Comments ()
+    {
+        $Parsedown = new Parsedown(); 
+        $Parsedown->setSafeMode(true); // безопасность
+         
+        $comm = AdminModel::getCommentsDell();
+ 
+        $account    = \Request::getSession('account');
+        $user_id    = $account ? $account['user_id'] : 0;
+ 
+        $result = Array();
+        foreach($comm  as $ind => $row){
+            if(!$row['avatar']) {
+                $row['avatar'] = 'noavatar.png';
+            } 
+            $row['avatar']  = $row['avatar'];
+            $row['content'] = $Parsedown->text($row['comment_content']);
+            $row['date']    = Base::ru_date($row['comment_date']);
+            $result[$ind]   = $row;
+        }
+        
+        $uid  = Base::getUid();
+        $data = [
+            'h1'          => 'Удаленные комментарии',
+            'title'       => 'Удаленные комментарии' . ' | ' . $GLOBALS['conf']['sitename'],
+            'description' => 'Все удаленные комментарии на сайте в порядке очередности. ' . $GLOBALS['conf']['sitename'],
+        ]; 
+ 
+        return view("admin/comm_del", ['data' => $data, 'uid' => $uid, 'comments' => $result]);
+    }
+     
+    // Удаление комментария
+    public function recoverComment()
+    {
+        // Доступ только персоналу
+        $account = \Request::getSession('account');
+        if ($account['trust_level'] != 5) {
+            return false;
+        }
+        
+        $comm_id = \Request::getPostInt('comm_id');
+        
+        AdminModel::CommentsRecover($comm_id);
+        
+        return true;
+    }
 }
