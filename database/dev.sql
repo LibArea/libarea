@@ -211,6 +211,7 @@ CREATE TABLE `users` (
   `trust_level` int(11) NOT NULL COMMENT 'Уровень доверия. По умолчанию 0 (5 - админ)',
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `invitation_available` int(10) NOT NULL DEFAULT '0',
   `deleted` tinyint(1) DEFAULT 0,
   `avatar` varchar(250) DEFAULT NULL,
   `about` varchar(250) DEFAULT NULL,
@@ -375,14 +376,14 @@ CREATE TABLE `invitation` (
   `uid` int(11) DEFAULT '0',
   `invitation_code` varchar(32) DEFAULT NULL,
   `invitation_email` varchar(255) DEFAULT NULL,
-  `add_time` int(10) DEFAULT NULL,
+  `add_time` datetime NOT NULL,
   `add_ip` bigint(12) DEFAULT NULL,
   `active_expire` tinyint(1) DEFAULT '0',
-  `active_time` int(10) DEFAULT NULL,
+  `active_time` datetime NOT NULL,  
   `active_ip` bigint(12) DEFAULT NULL,
   `active_status` tinyint(4) DEFAULT '0',
   `active_uid` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Индексы таблицы `invitation`
