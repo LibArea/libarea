@@ -37,7 +37,7 @@
                         <span class="date"> 
                             <?= $post['post_date']; ?>
                             <?php if($post['edit_date']) { ?> 
-                                (изм. <?= $post['edit_date']; ?>) 
+                                (<?= lang('ed'); ?>. <?= $post['edit_date']; ?>) 
                             <?php } ?>
                         </span>
                         <span class="date"> 
@@ -56,11 +56,11 @@
                                     </a>
                                 </span>
                                 <?php if($post['my_post'] == $post['post_id']) { ?>
-                                        <span class="mu_post">+ в профиле</span>
+                                        <span class="mu_post">+ <?= lang('in-the-profile'); ?></span>
                                         <span class="otst"> | </span>
                                 <?php } else { ?> 
                                     <a class="user-mypost" data-opt="1" data-post="<?= $post['post_id']; ?>">
-                                        <span class="mu_post">В профиль</span>
+                                        <span class="mu_post"><?= lang('in-the-profile'); ?></span>
                                         <span class="otst"> |  </span>
                                     </a>
                                 <?php } ?> 
@@ -69,12 +69,12 @@
                             <?php if ($post['favorite_post']){ ?>
                                <span class="otst">   </span>    
                                <span class="user-favorite" data-post="<?= $post['post_id']; ?>">
-                                    <span class="mu_favorite">Убрать из избранного</span>
+                                    <span class="mu_favorite"><?= lang('remove-favorites'); ?></span>
                                </span>   
                             <?php } else { ?>
                                 <span class="otst">   </span>
                                 <span class="user-favorite" data-post="<?= $post['post_id']; ?>">
-                                    <span class="mu_favorite">В избранное</span>
+                                    <span class="mu_favorite"><?= lang('add-favorites'); ?></span>
                                 </span>
                             <?php } ?> 
                             
@@ -83,9 +83,9 @@
                                 <span id="cm_dell" class="cm_add_link">
                                     <a data-post="<?= $post['post_id']; ?>" class="delpost">
                                         <?php if($post['post_is_delete'] == 1) { ?>
-                                            Восстановить
+                                            <?= lang('Recover'); ?>
                                         <?php } else { ?>
-                                            Удалить
+                                            <?= lang('Remove'); ?>
                                         <?php } ?>
                                     </a>
                                 </span>
@@ -101,7 +101,7 @@
                         
                     <?php if($post['post_url']) { ?> 
                         <span class="post_url_detal">
-                            Источник: <a rel="nofollow noreferrer" href="<?= $post['post_url_full']; ?>">
+                            <?= lang('Website'); ?>: <a rel="nofollow noreferrer" href="<?= $post['post_url_full']; ?>">
                                <?= $post['post_url']; ?>
                             </a>
                         </span> 
@@ -111,18 +111,18 @@
                        <?php if($post['post_closed'] == 0) { ?>
                             <form id="add_comm" class="new_comment" action="/comment/add" accept-charset="UTF-8" method="post">
                             <?= csrf_field() ?>
-                                <textarea rows="5" placeholder="Напишите, что нибудь..." name="comment" id="comment"></textarea>
+                                <textarea rows="5" placeholder="<?= lang('write-something'); ?>..." name="comment" id="comment"></textarea>
                                 <div> 
                                     <input type="hidden" name="post_id" id="post_id" value="<?= $post['post_id']; ?>">
                                     <input type="hidden" name="comm_id" id="comm_id" value="0">
-                                    <input type="submit" name="commit" value="Комментарий" class="comment-post">
+                                    <input type="submit" name="commit" value="<?= lang('Comment'); ?>" class="comment-post">
                                 </div> 
                             </form>
                         <?php } ?>
                     <?php } else { ?>
-                        <textarea rows="5" disabled="disabled" placeholder="Вы должны войти в систему, чтобы оставить комментарий." name="comment" id="comment"></textarea>
+                        <textarea rows="5" disabled="disabled" placeholder="<?= lang('no-auth-comm'); ?>" name="comment" id="comment"></textarea>
                         <div> 
-                            <input type="submit" name="commit" value="Комментарий" class="comment-post" disabled="disabled">
+                            <input type="submit" name="commit" value="<?= lang('Comment'); ?>" class="comment-post" disabled="disabled">
                         </div> 
                     <?php } ?>
                 </div>
@@ -130,7 +130,7 @@
 
         <?php } else { ?>
             <div class="telo-detail_post  dell">
-                 Пост удален...
+                 <?= lang('post-delete'); ?>...
             </div>   
         <?php } ?>
 
@@ -178,7 +178,7 @@
                                         </span>
                                         <?php if (empty($comm['edit'])) { ?> 
                                             <span class="date">  
-                                               (изм.)
+                                               (<?= lang('ed'); ?>.)
                                             </span>
                                         <?php } ?>
                                         <?php if ($post['post_user_id'] == $comm['comment_user_id']) { ?>
@@ -203,20 +203,20 @@
                                 <?php if($post['post_closed'] == 0) { ?> 
                                 <?php if($post['post_is_delete'] == 0 || $uid['trust_level'] == 5) { ?>
                                     <span id="cm_add_link<?php $comm['comment_id']; ?>" class="cm_add_link">
-                                        <a data-post_id="<?= $post['post_id']; ?>" data-id="<?= $comm['comment_id']; ?>" class="addcomm">Ответить</a>
+                                        <a data-post_id="<?= $post['post_id']; ?>" data-id="<?= $comm['comment_id']; ?>" class="addcomm"><?= lang('Reply to'); ?></a>
                                     </span>
                                 <?php } ?>
                                 <?php } ?>
                                 
                                 <?php if($uid['id'] == $comm['comment_user_id'] || $uid['trust_level'] == 5) { ?>
                                     <span id="cm_edit" class="cm_add_link">
-                                        <a data-id="<?= $comm['comment_id']; ?>" class="editcomm">Изменить</a>
+                                        <a data-id="<?= $comm['comment_id']; ?>" class="editcomm"><?= lang('Edit'); ?></a>
                                     </span>
                                 <?php } ?>
                                 
                                 <?php if($uid['trust_level'] ==5) { ?>
                                     <span id="cm_dell" class="cm_add_link">
-                                        <a data-id="<?= $comm['comment_id']; ?>" class="delcomm">Удалить</a>
+                                        <a data-id="<?= $comm['comment_id']; ?>" class="delcomm"><?= lang('Remove'); ?></a>
                                     </span>
                                 <?php } ?>
                               
@@ -228,7 +228,7 @@
                     <?php } else { ?>    
                          <ol class="dell comment-telo<?php if ($comm['level'] == 0) { ?> one<?php } ?><?php if ($comm['level'] == 2) { ?> two<?php } ?><?php if ($comm['level'] > 2) { ?> three<?php } ?>"> 
                             <li class="comments_subtree" id="comm_<?= $comm['comment_id']; ?>">
-                                <span class="comm-deletes">~ Комментарий удален</span>
+                                <span class="comm-deletes">~ <?= lang('comment-deleted'); ?></span>
                             </li>
                         </ol>
                     <?php } ?>    
@@ -237,14 +237,12 @@
                  
             </div>
         <?php } else { ?>
-            <div class="telo">
-                <p class="info">К сожалению комментариев пока нет...</p>
-            </div>
+            <div class="no-content"><?= lang('no-comment'); ?>...</div>
         <?php } ?>
   
         <?php if($post['post_closed'] == 1) { ?> 
             <div class="telo">
-                <p class="info">Пост закрыт...</p>
+                <p class="info"><?= lang('post-closed'); ?>...</p>
             </div>
         <?php } ?>
        

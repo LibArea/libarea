@@ -64,7 +64,9 @@ Route::before('Authorization@noAuth')->getGroup();
 Route::endGroup();
 
 Route::before('Authorization@yesAuth')->getGroup();
-	// Регистрация и авторизация
+	// Регистрация и авторизация (инвайты)
+    Route::get('/invite')->controller('AuthController@invitePage');
+    Route::type('post')->protect()->get('/invite')->controller('AuthController@inviteHandler');
 	Route::get('/register')->controller('AuthController@registerPage');
     Route::type('get')->get('/recover')->controller('AuthController@recoverPage');  
     Route::type('post')->protect()->get('/recover/send')->controller('AuthController@sendRecover'); 

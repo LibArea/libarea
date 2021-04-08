@@ -12,21 +12,12 @@ use Parsedown;
 
 class PostController extends \MainController
 {
-   
     // Главная страница
     public function index() {
 
-        if (Request::get('page')) {
-            $page = \Request::get('page');
-        } else {
-            $page = 1;
-        }
+        $pg = \Request::getInt('page'); 
+        $page = (!$pg) ? 1 : $pg;
 
-        if (!$page) {
-            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
-            hl_preliminary_exit();
-        }
- 
         if($account = Request::getSession('account')){
             // Получаем все пространства отписанные участником
             $space_user  = SpaceModel::getSpaceUser($account['user_id']);
@@ -40,6 +31,11 @@ class PostController extends \MainController
             
         $pagesCount = PostModel::getPostHomeCount($space_user); 
         $posts      = PostModel::getPostHome($page, $space_user, $trust_level, $user_id);
+
+        if (!$posts) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
+        }
 
         $result = Array();
         foreach($posts as $ind => $row){
@@ -79,10 +75,16 @@ class PostController extends \MainController
          
         }
 
+        if($page > 1) { 
+             $num = ' — ' . lang('Page') . ' ' . $page;
+        } else {
+            $num = '';
+        }
+
         $uid  = Base::getUid();
         $data = [
-            'title'            => 'Посты сообщества | ' . $GLOBALS['conf']['sitename'], 
-            'description'      => 'Главная страница сообщества, форум, посты. ' . $GLOBALS['conf']['sitename'],
+            'title'            => 'Главная | ' . $GLOBALS['conf']['sitename'] . $num, 
+            'description'      => 'Главная страница сообщества, форум, посты. ' . $GLOBALS['conf']['sitename'] . $num,
             'space_hide'       => $space_hide,
             'latest_comments'  => $result_comm,
             'pagesCount'       => $pagesCount,

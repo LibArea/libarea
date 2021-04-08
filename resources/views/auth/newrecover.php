@@ -6,20 +6,20 @@
             <form class="" action="/recover/send/pass" method="post">
                 <?php csrf_field(); ?>
                 <div class="boxline">
-                    <label for="password">Новый пароль</label>
-                    <input type="text" name="password" id="password">
+                    <label for="password"><?= lang('New password'); ?></label>
+                    <input type="text" name="password" id="password"> 
                 </div>
                 <div class="row">
                     <div class="boxline">
                         <input type="hidden" name="code" id="code" value="<?= $data['code']; ?>">
                         <input type="hidden" name="user_id" id="user_id" value="<?= $data['user_id']; ?>">
-                        <button type="submit" class="button-primary">Сбросить</button>
+                        <button type="submit" class="button-primary"><?= lang('Reset'); ?></button>
                     </div>
                 </div>
             </form>
                 <div class="boxline">
-                    <a href="/register">Регистрация</a> &emsp;
-                    <a href="/login">Войти</a>
+                    <a href="/register"><?= lang('Sign up'); ?></a> &emsp;
+                    <a href="/login"><?= lang('Sign in'); ?></a>
                 </div>
         </div>
     </div>

@@ -2,7 +2,7 @@
 <main class="telo">
 
     <?php if (!$uid['id']) { ?>
-        <h1 class="top banner">Сайт в стадии разработке. Читать - <a href="/info/about">о нас</a>...</h1> 
+        <h1 class="top banner"><?= lang('site-closed'); ?>. <a href="/info/about"><?= lang('Read'); ?></a>...</h1> 
     <?php } ?>  
 
     <?php if (!empty($posts)) { ?> 
@@ -90,28 +90,27 @@
         
     <?php } else { ?>
 
-        <h3>Нет постов</h3>
-
-        <p>К сожалению постов нет...</p>
+        <div class="no-content"><?= lanf('no-post'); ?>...</div>
 
     <?php } ?>
-
-    <div class="pagination">
-        <?php for ($pageNum = 1; $pageNum <= $data['pagesCount']; $pageNum++) { ?>
-            <?php if ($data['pNum'] == $pageNum || !$data['pNum'] == 1) { ?>
-                <span class="page"><?= $pageNum; ?></span>
-            <?php } else { ?>
-                <a href="/<?= $pageNum == 1 ? '' : $pageNum ?>"><?= $pageNum; ?></a>
-            <?php } ?>
-        <?php } ?>
-    </div>
     
+   <?php if(!($data['pNum'] > $data['pagesCount'])) { ?>
+        <div class="pagination">   
+            <?php if($data['pNum'] != 1) { ?> 
+                <a href="/<?= $data['pNum'] - 1; ?>"> << <?= lang('Page'); ?> <?= $data['pNum'] - 1; ?></a> 
+            <?php } ?>
+            <?php if($data['pagesCount'] != $data['pNum'] && $data['pNum'] != 1) { ?>|<?php } ?> 
+            <?php if($data['pagesCount'] > $data['pNum']) { ?>
+                <a href="/<?= $data['pNum'] + 1; ?>"><?= lang('Page'); ?>  <?= $data['pNum'] + 1; ?> >></a> 
+            <?php } ?>
+        </div>
+    <?php } ?>
 </main>
 
 <aside id="sidebar"> 
     <?php if($data['space_hide']) { ?>
         <div>
-            <h3>Отписан</h3>  
+            <h3><?= lanf('Unsubscribed'); ?></h3>  
             <?php foreach ($data['space_hide'] as  $hide) { ?>
                 <a class="space space_<?= $hide['space_tip'] ?>" href="/s/<?= $hide['space_slug']; ?>" title="<?= $hide['space_name']; ?>">
                     <?= $hide['space_name']; ?>

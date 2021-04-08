@@ -12,21 +12,45 @@ class AuthController extends \MainController
     // Показ формы регистрации
     public function registerPage()
     {
+        // Если включена инвайт система
+        if($GLOBALS['conf']['invite'] == 1) {
+            redirect('/invite');
+        }
         
         $uid  = Base::getUid();
         $data = [
-            'title'       => 'Регистрация | AreaDev',
-            'description' => 'Страница регистрации на сайте AreaDev',
+            'h1'            => lang('Sign up'),
+            'title'         => lang('Sign up'). ' | ' . $GLOBALS['conf']['sitename'],
+            'description'   => 'Страница регистрации на сайте ' . $GLOBALS['conf']['sitename'],
         ];
 
         return view('/auth/register', ['data' => $data, 'uid' => $uid]);    
-   
     }
+    
+    // Показ формы регистрации
+    public function invitePage()
+    {
+        $uid  = Base::getUid();
+        $data = [
+            'h1'            => lang('Invite'),
+            'title'         => lang('Invite') . 'Инвайт | ' . $GLOBALS['conf']['sitename'],
+            'description'   => 'Страница инвайтов на сайте ' . $GLOBALS['conf']['sitename'],
+        ];
 
+        return view('/auth/invite', ['data' => $data, 'uid' => $uid]);    
+    }
+   
+    // Отправка запроса инвайта
+    public function inviteHandler() 
+    {
+        $invite = \Request::getPost('invite');
+        print_r($invite);
+        exit;
+    }
+   
     // Отправка запроса для регистрации
     public function registerHandler()
     {
-
         $email    = \Request::getPost('email');
         $login    = \Request::getPost('login');
         $password = \Request::getPost('password');
@@ -133,27 +157,24 @@ class AuthController extends \MainController
 
         Base::addMsg('Регистрация прошла успешно. Введите e-mail и пароль.', 'error');
         redirect('/login');
-
     }
 
     // Страница авторизации
     public function loginPage()
     {
-        
         $uid  = Base::getUid();
         $data = [
-            'title' => 'Вход | Авторизация',
-            'description' => 'Авторизация на сайте AreaDev',
+            'h1'            => lang('Sign in'),
+            'title'         => lang('Sign in') . ' | ' . $GLOBALS['conf']['sitename'],
+            'description'   => 'Авторизация на сайте  ' . $GLOBALS['conf']['sitename'],
         ];
 
         return view('/auth/login', ['data' => $data, 'uid' => $uid]);
-
     }
 
     // Отправка запроса авторизации
     public function loginHandler()
     {
-      
         $email      = \Request::getPost('email');
         $password   = \Request::getPost('password');
         $rememberMe = \Request::getPost('rememberme');
@@ -170,7 +191,7 @@ class AuthController extends \MainController
             redirect('/login');
         }
  
-         // Находится ли в бан- листе
+        // Находится ли в бан- листе
         if (UserModel::isBan($uInfo['id'])) {
             Base::addMsg('Ваш аккаунт находится на рассмотрении', 'error');
             redirect('/login');
@@ -203,7 +224,6 @@ class AuthController extends \MainController
             $_SESSION['account'] = $data;
             redirect('/');
         }
-      
     }
 
     public function logout() 
@@ -216,15 +236,14 @@ class AuthController extends \MainController
 
     public function recoverPage () 
     {
-
         $uid  = Base::getUid();
         $data = [
-            'title'       => 'Восстановление пароля',
-            'description' => 'Страница восстановление пароля на сайте AreaDev',
+            'h1'          => lang('Password Recovery'),
+            'title'       => lang('Password Recovery') . ' | '  . $GLOBALS['conf']['sitename'],
+            'description' => 'Страница восстановление пароля на сайте ' . $GLOBALS['conf']['sitename'],
         ];
 
         return view('/auth/recover', ['data' => $data, 'uid' => $uid]);
- 
     }
 
     public function sendRecover () 

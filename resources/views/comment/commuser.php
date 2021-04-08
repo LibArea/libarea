@@ -44,11 +44,7 @@
             <?php } ?>
 
         <?php } else { ?>
-
-            <h3>Нет комментариев</h3>
-
-            <p>К сожалению комментариев нет...</p>
-
+            <div class="no-content"><?= lang('no-comment'); ?>...</div>
         <?php } ?>
     </div>    
 </main> 

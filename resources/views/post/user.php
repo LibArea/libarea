@@ -57,9 +57,7 @@
 
             <?php } else { ?>
 
-                <h3>Нет постов</h3>
-
-                <p>К сожалению постов нет...</p>
+                <div class="no-content"><?= lanf('no-post'); ?>...</div>
 
             <?php } ?>
         </div> 

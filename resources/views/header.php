@@ -58,9 +58,11 @@
                 <li class="nav">
                     <a class="login" title="<?= lang('Sign in'); ?>" href="/login"><?= lang('Sign in'); ?></a>
                 </li>
-                <li class="nav">
-                    <a class="register" title="<?= lang('Sign up'); ?>" href="/register"><?= lang('Sign up'); ?></a>
-                </li>
+                <?php if($GLOBALS['conf']['invite'] != 1) { ?>
+                    <li class="nav">
+                        <a class="register" title="<?= lang('Sign up'); ?>" href="/register"><?= lang('Sign up'); ?></a>
+                    </li>
+                <?php } ?>    
             <?php } else { ?> 
                 <li class="nav create">  
                     <a class="nav" href="/post/add">  

@@ -1,7 +1,7 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 <main>
     <div class="left-ots">
-        <h1 class="head"><?= $data['title']; ?></h1>
+        <h1 class="head"><?= $data['h1']; ?></h1>
         <div class="box wide">
             <form class="" action="/recover/send" method="post">
                 <?php csrf_field(); ?>
@@ -19,10 +19,12 @@
                 <?php } ?>
                 <div class="row">
                     <div class="boxline">
-                        <button type="submit" class="button-primary">Сбросить</button>
+                        <button type="submit" class="button-primary"><?= lang('Reset'); ?></button>
                         <small>
-                            <span class="left-ots"><a href="/register">Регистрация</a></span>
-                            <span class="left-ots"><a href="/login">Войти</a></span>
+                            <?php if($GLOBALS['conf']['invite'] != 1) { ?>
+                                <span class="left-ots"><a href="/register"><?= lang('Sign up'); ?></a></span>
+                            <?php } ?>
+                            <span class="left-ots"><a href="/login"><?= lang('Sign in'); ?></a></span>
                         </small>
                     </div>
                 </div>
