@@ -28,8 +28,8 @@ class UserController extends \MainController
         
         $uid  = Base::getUid();
         $data = [
-            'h1'            => 'Все участники',
-            'title'         => 'Все участники' . ' | ' . $GLOBALS['conf']['sitename'],
+            'h1'            => lang('Users'),
+            'title'         => lang('Users') . ' | ' . $GLOBALS['conf']['sitename'],
             'description'   => 'Список всех участников сортированных по дате регистрации сайте ' . $GLOBALS['conf']['sitename'],
         ];
 
