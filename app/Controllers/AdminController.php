@@ -42,7 +42,7 @@ class AdminController extends \MainController
             'users'        => $result,
         ];
 
-         return view("admin/index", ['data' => $data, 'uid' => $uid]);
+        return view("admin/index", ['data' => $data, 'uid' => $uid, 'alluser' => $result]);
 	}
     
     public function banUser() 
@@ -106,4 +106,46 @@ class AdminController extends \MainController
         
         return true;
     }
+    
+    // Показываем дерево приглашенных
+    public function Invitations ()
+    {
+        $invite     = AdminModel::getInvitations();
+        $account    = \Request::getSession('account');
+        $user_id    = $account ? $account['user_id'] : 0;
+ 
+        $result = Array();
+        foreach($invite  as $ind => $row){
+            if(!$row['avatar']) {
+                $row['avatar'] = 'noavatar.png';
+            } 
+            $row['uid']         = UserModel::getUserId($row['uid']);  
+            $row['active_time'] = Base::ru_date($row['active_time']);
+            $row['avatar']      = $row['avatar'];
+            $result[$ind]       = $row;
+        }
+
+        $uid  = Base::getUid();
+        $data = [
+            'h1'          => 'Инвайты',
+            'title'       => 'Инвайты' . ' | ' . $GLOBALS['conf']['sitename'],
+            'description' => 'Дерево инвайтов. ' . $GLOBALS['conf']['sitename'],
+        ]; 
+ 
+        return view("admin/invitations", ['data' => $data, 'uid' => $uid, 'invitations' => $result]);
+    }
+    
+    // Для дерева инвайтов
+    private function invatesTree($active_uid, $level, $invitations, $tree=array()){
+        $level++;
+        foreach($invitations as $invitation){
+            if ($invitation['uid'] == $uid){
+                $invitation['level'] = $level-1;
+                $tree[] = $invitation;
+                $tree = $this->invatesTree($invitation['active_uid'], $level, $invitations, $tree);
+            }
+        }
+		return $tree;
+    }
+    
 }

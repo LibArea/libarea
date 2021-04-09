@@ -167,7 +167,6 @@ class AuthController extends \MainController
             redirect($url);
         }
      
-     
         $reg_ip = Request::getRemoteAddress(); // ip при регистрации 
      
         if(!$inv_code) {

@@ -11,8 +11,9 @@
  */
 
 Route::before('Authorization@noAuth')->getGroup();
-	Route::get('/admin')->controller('AdminController');
-    Route::get('/admin/comments')->controller('AdminController@Comments');
+    Route::get('/admin')->controller('AdminController');
+    Route::get('/admin/comments')->controller('AdminController@Comments'); 
+    Route::get('/admin/invitations')->controller('AdminController@Invitations');
     Route::type('post')->get('/admin/comment/recover')->controller('AdminController@recoverComment');
     
     Route::type('post')->get('/admin/ban/{id}')->controller('AdminController@banUser')->where(['id' => '[0-9]+']);

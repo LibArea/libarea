@@ -20,11 +20,11 @@
 <body class="bd">
 <header>
     <div class="title">
-        <a title="На главную" class="logo" href="/">My</a>
+        <a title="<?= lang('Home'); ?>" class="logo" href="/">M</a>
         <div class="menu-left">
             <ul>
                 <li class="nav no-mob">
-                    <a title="Админка" class="home" href="/admin">Админка</a>
+                    <a title="<?= lang('Admin'); ?>" class="home" href="/admin"><?= lang('Admin'); ?></a>
                 </li>
                 <!--li class="nav no-mob">
                     <a title="Участники" class="home" href="#">
@@ -33,21 +33,21 @@
                         </svg> 
                         Участники
                     </a>
-                </li>
+                </li -->
                 <li class="nav no-mob"> 
-                    <a title="Посты" class="home" href="#">
+                    <a title="<?= lang('Invites'); ?>" class="home" href="/admin/invitations">
                         <svg class="md-icon">
-                            <use xlink:href="/assets/svg/icons.svg#devices"></use>
+                            <use xlink:href="/assets/svg/icons.svg#link"></use>
                         </svg> 
-                        Посты
+                        <?= lang('Invites'); ?>
                     </a>
-                </li-->
+                </li>
                 <li class="nav no-mob">
-                    <a title="Комментарии" class="home" href="/admin/comments">
+                    <a title="<?= lang('Comments'); ?>" class="home" href="/admin/comments">
                         <svg class="md-icon">
                             <use xlink:href="/assets/svg/icons.svg#message"></use>
                         </svg> 
-                        Комментарии
+                        <?= lang('Comments'); ?>
                     </a>
                 </li>
             </ul>
@@ -85,32 +85,44 @@
                             <svg class="md-icon">
                                 <use xlink:href="/assets/svg/icons.svg#user"></use>
                             </svg> 
-                            Профиль
+                            <?= lang('Profile'); ?>
                         </a>
                         <a href="/users/setting">
                             <svg class="md-icon">
                                 <use xlink:href="/assets/svg/icons.svg#settings"></use>
                             </svg> 
-                            Настройки
+                            <?= lang('Settings'); ?>
+                        </a>
+                        <a href="/messages">
+                            <svg class="md-icon">
+                                <use xlink:href="/assets/svg/icons.svg#mail"></use>
+                            </svg>  
+                            <?= lang('Messages'); ?>
                         </a>
                         <a href="/threads/<?= $uid['login']; ?>"> 
                             <svg class="md-icon">
-                                <use xlink:href="/assets/svg/icons.svg#devices"></use>
+                                <use xlink:href="/assets/svg/icons.svg#message"></use>
                             </svg> 
-                            Мои ответы 
+                            <?= lang('Comments'); ?> 
                         </a>
-                        <a href="/admin" target="_black">
+                        <a href="/favorite/<?= $uid['login']; ?>">
                             <svg class="md-icon">
-                                <use xlink:href="/assets/svg/icons.svg#ad"></use>
-                            </svg>   
-                            Админка                    
+                                <use xlink:href="/assets/svg/icons.svg#bookmark"></use>
+                            </svg>  
+                            <?= lang('Favorites'); ?>              
                         </a>
+                        <a href="/users/invitation">
+                            <svg class="md-icon">
+                                <use xlink:href="/assets/svg/icons.svg#link"></use>
+                            </svg>   
+                            <?= lang('Invites'); ?>                   
+                        </a> 
                         <hr>   
-                        <a href="/logout" class="logout" target="_self" title="Выход">
+                        <a href="/logout" class="logout" target="_self" title="<?= lang('Sign out'); ?>">
                             <svg class="md-icon">
                                 <use xlink:href="/assets/svg/icons.svg#arrow-bar-to-right"></use>
                             </svg> 
-                            Выход
+                            <?= lang('Sign out'); ?>
                         </a>
                     </span>
                 </li>

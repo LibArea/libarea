@@ -14,9 +14,9 @@
                 <span class="t-td center">Удален? / Забанен</span>
                 <span class="t-td center">Действие</span>
             </div>
-
-            <?php foreach($data['users'] as $ind => $user) {  ?>
-        
+ 
+            <?php foreach($alluser as   $user) {  ?>
+         
             <div class="t-tr">
                 <span class="t-td w-30 center">
                     <?= $user['id']; ?>
@@ -27,7 +27,8 @@
                     <?php if($user['name']) { ?>
                         (<?= $user['name']; ?>) 
                     <?php } ?>
-                    <sup class="red">TL:<?= $user['trust_level']; ?></sup><br>
+                    <sup class="red">TL:<?= $user['trust_level']; ?></sup>
+                    <?php if($user['invitation_id'] !=0) { ?><sup>+ инв. id<?= $user['invitation_id']; ?></sup><?php } ?> <br>
                 </span>
                 <span class="t-td">
                      <span class="date"><?= $user['email']; ?></span>

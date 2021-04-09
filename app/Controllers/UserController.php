@@ -316,7 +316,6 @@ class UserController extends \MainController
         return view('/user/invite', ['data' => $data, 'uid' => $uid]);    
     }
     
-    
     // Отправка запроса инвайта
     public function inviteHandler() 
     {
@@ -342,12 +341,10 @@ class UserController extends \MainController
         ];
 
         return view('/user/invitation', ['data' => $data, 'uid' => $uid, 'user' => $user,  'result' => $result]);  
-        
     }
     
     // Создать инвайт
     function invitationCreate() {
-        
         
         // Данные участника
         $account    = \Request::getSession('account');
@@ -376,9 +373,7 @@ class UserController extends \MainController
             redirect('/users/invitation');
         }
         
-        // + Ты не можешь пригласить себя.
         // + Повторная отправка
-        // + Отсылка инвайта
         
         $add_time           = date('Y-m-d H:i:s');
         $invitation_code    = Base::randomString('crypto', 25);
@@ -388,7 +383,6 @@ class UserController extends \MainController
 
         Base::addMsg('Инвайт создан', 'error');
         redirect('/users/invitation'); 
-        
     }
     
     // Проверка e-mail

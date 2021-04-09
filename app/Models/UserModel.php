@@ -7,11 +7,9 @@ use Base;
 
 class UserModel extends \MainModel
 {
-    
     // Страница участников
     public static function getUsersAll()
     {
-
        $query = XD::select(['id', 'login', 'name', 'avatar', 'deleted'])
               ->from(['users'])
               ->where(['deleted'], '=', 0)
@@ -19,13 +17,11 @@ class UserModel extends \MainModel
 
         $result = $query->getSelect();
         return $result;
-
     }
 
     // Получение информации по логину
     public static function getUserLogin($login)
     {
-
         $query = XD::select(['id', 'login', 'name', 'email', 'avatar', 'invitation_available', 'about', 'created_at', 'my_post'])
                 ->from(['users'])
                 ->where(['login'], '=', $login);
@@ -33,13 +29,11 @@ class UserModel extends \MainModel
         $result = $query->getSelectOne();
 
         return $result;
-
     }
     
     // Получение информации по id
     public static function getUserId($id)
     {
-
         $query = XD::select(['id', 'login', 'name', 'email', 'avatar', 'about', 'trust_level', 'ban_list'])
                 ->from(['users'])
                 ->where(['id'], '=', $id);
@@ -47,13 +41,11 @@ class UserModel extends \MainModel
         $result = $query->getSelectOne();
 
         return $result;
-
     }
 
     // Регистрация участника
     public static function createUser($login, $email, $password, $reg_ip, $invitation_id)
     {
-
         // количество участников 
         $count = count(XD::select('*')->from(['users'])->getSelect());
       
