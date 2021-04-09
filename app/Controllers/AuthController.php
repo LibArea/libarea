@@ -5,10 +5,8 @@ use Hleb\Constructor\Handlers\Request;
 use App\Models\UserModel;
 use Base;
 
-
 class AuthController extends \MainController
 {
-
     // Показ формы регистрации
     public function registerPage()
     {
@@ -27,134 +25,171 @@ class AuthController extends \MainController
         return view('/auth/register', ['data' => $data, 'uid' => $uid]);    
     }
     
-    // Показ формы регистрации
-    public function invitePage()
+    
+    // Показ формы регистрации с инвайтом
+    public function registerPageInvite()
     {
+        // Код активации
+        $code = \Request::get('code');
+ 
+        // Проверяем код
+        $invate = UserModel::InvitationAvailable($code);
+        if(!$invate) 
+        {
+            Base::addMsg('Код неверен, или он уже использовался.', 'error');
+            redirect('/');   
+        }
+        
+        // http://test.loc/register/invite/61514d8913558958c659b713
+        
         $uid  = Base::getUid();
         $data = [
-            'h1'            => lang('Invite'),
-            'title'         => lang('Invite') . 'Инвайт | ' . $GLOBALS['conf']['sitename'],
-            'description'   => 'Страница инвайтов на сайте ' . $GLOBALS['conf']['sitename'],
+            'h1'            => 'Регистрация по инвайту',
+            'title'         => 'Регистрация по инвайту | ' . $GLOBALS['conf']['sitename'],
+            'description'   => 'Страница регистрации на сайте ' . $GLOBALS['conf']['sitename'],
         ];
-
-        return view('/auth/invite', ['data' => $data, 'uid' => $uid]);    
-    }
    
-    // Отправка запроса инвайта
-    public function inviteHandler() 
-    {
-        $invite = \Request::getPost('invite');
-        print_r($invite);
-        exit;
+        return view('/auth/register-invate', ['data' => $data, 'uid' => $uid, 'invate' => $invate]);  
     }
-   
+    
     // Отправка запроса для регистрации
     public function registerHandler()
     {
-        $email    = \Request::getPost('email');
-        $login    = \Request::getPost('login');
+        $email      = \Request::getPost('email');
+        $login      = \Request::getPost('login');
+        $inv_code   = \Request::getPost('invitation_code');
+        $inv_uid    = \Request::getPost('invitation_id');
+        
         $password = \Request::getPost('password');
 
         if ($email == '' || $login == '' || $password == '')
         {
             if ($email == '')
             {
-               Base::addMsg('Поле «Email» не может быть пустым', 'error');
-               redirect('/register');
+                Base::addMsg('Поле «Email» не может быть пустым', 'error');
+                $url = ($inv_code) ? '/register/invite/'.$inv_code : '/register';
+                redirect($url);
             }
             if ($login == '')
             {
-               Base::addMsg('Поле «Логин» не может быть пустым', 'error');
-               redirect('/register');
+                Base::addMsg('Поле «Логин» не может быть пустым', 'error');
+                $url = ($inv_code) ? '/register/invite/'.$inv_code : '/register';
+                redirect($url);
             }
             if ($password == '')
             {
                 Base::addMsg('Поле «Пароль» не может быть пустым', 'error');
-                redirect('/register');
+                $url = ($inv_code) ? '/register/invite/'.$inv_code : '/register';
+                redirect($url);
             }
         }
 
         if (!$this->checkEmail($email))
         {
             Base::addMsg('Недопустимый email', 'error');
-            redirect('/register');
+            $url = ($inv_code) ? '/register/invite/'.$inv_code : '/register';
+            redirect($url);
         }
        
         if (!UserModel::replayEmail($email))
         {
-              Base::addMsg('Такой e-mail уже есть на сайте', 'error');
-              redirect('/register');
+            Base::addMsg('Такой e-mail уже есть на сайте', 'error');
+            $url = ($inv_code) ? '/register/invite/'.$inv_code : '/register';
+            redirect($url);
         }
        
         // Упростить и в метод
         if (strlen($login) < 3 || self::getStrlen($login) < 2)
         {
-          Base::addMsg('Логин слишком короткий', 'error');
-          redirect('/register');
+            Base::addMsg('Логин слишком короткий', 'error');
+            $url = ($inv_code) ? '/register/invite/'.$inv_code : '/register';
+            redirect($url);
         }
         if (self::getStrlen($login) > 10)
         {
-          Base::addMsg('Логин слишком длинный', 'error');
-          redirect('/register');
+            Base::addMsg('Логин слишком длинный', 'error');
+            $url = ($inv_code) ? '/register/invite/'.$inv_code : '/register';
+            redirect($url);
         }
         if (preg_match('/\s/', $login) || strpos($login,' '))
         {
-          Base::addMsg('В логине не допускаются пробелы', 'error');
-          redirect('/register');
+            Base::addMsg('В логине не допускаются пробелы', 'error');
+            $url = ($inv_code) ? '/register/invite/'.$inv_code : '/register';
+            redirect($url);
         }
         if (is_numeric(substr($login, 0, 1)) || substr($login, 0, 1) == "_")
         {
-          Base::addMsg('Логин не может начинаться с цифры и подчеркивания', 'error');
-          redirect('/register');
+            Base::addMsg('Логин не может начинаться с цифры и подчеркивания', 'error');
+            $url = ($inv_code) ? '/register/invite/'.$inv_code : '/register';
+            redirect($url);
         }
         if (substr($login, -1, 1) == "_")
         {
-          Base::addMsg('Логин не может заканчиваться символом подчеркивания', 'error');
-          redirect('/register');
+            Base::addMsg('Логин не может заканчиваться символом подчеркивания', 'error');
+            $url = ($inv_code) ? '/register/invite/'.$inv_code : '/register';
+            redirect($url);
         }
         if (!preg_match('/^[a-zA-Z0-9]+$/u', $login))
         {
-          Base::addMsg('В логине можно использовать только латиницу, цифры', 'error');
-          redirect('/register');
+            Base::addMsg('В логине можно использовать только латиницу, цифры', 'error');
+            $url = ($inv_code) ? '/register/invite/'.$inv_code : '/register';
+            redirect($url);
         }
         
         for ($i = 0, $l = self::getStrlen($login); $i < $l; $i++)
         {
-          if (self::textCount($login, self::getSubstr($login, $i, 1)) > 4)
-          {
-              Base::addMsg('В логине слишком много повторяющихся символов', 'error');
-              redirect('/register');
-          }
+            if (self::textCount($login, self::getSubstr($login, $i, 1)) > 4)
+            {
+                Base::addMsg('В логине слишком много повторяющихся символов', 'error');
+                $url = ($inv_code) ? '/register/invite/'.$inv_code : '/register';
+                redirect($url);
+            }
         }
 
         if (!UserModel::replayLogin($login))
         {
-              Base::addMsg('Такой логин уже есть на сайте', 'error');
-              redirect('/register');
+            Base::addMsg('Такой логин уже есть на сайте', 'error');
+            $url = ($inv_code) ? '/register/invite/'.$inv_code : '/register';
+            redirect($url);
         }
          
         if (substr_count($password, ' ') > 0)
         {
             Base::addMsg('Пароль не может содержать пробелов', 'error');
-            redirect('/register');
+            $url = ($inv_code) ? '/register/invite/'.$inv_code : '/register';
+            redirect($url);
         }
 
         if (Base::getStrlen($password) < 8 || Base::getStrlen($password) > 24)
         {
             Base::addMsg('Длина пароля должна быть от 8 до 24 знаков', 'error');
-            redirect('/register');
+            $url = ($inv_code) ? '/register/invite/'.$inv_code : '/register';
+            redirect($url);
         }
      
-        if ($GLOBALS['conf']['captcha']) {
-            if (!Base::checkCaptchaCode()) {
-                Base::addMsg('Введеный код не верен', 'error');
-                redirect('/register');
-            }
-        }
      
         $reg_ip = Request::getRemoteAddress(); // ip при регистрации 
-        $user   = UserModel::createUser($login,$email,$password,$reg_ip);
+     
+        if(!$inv_code) {
+            if ($GLOBALS['conf']['captcha']) {
+                if (!Base::checkCaptchaCode()) {
+                    Base::addMsg('Введеный код не верен', 'error');
+                    redirect('/register');
+                }
+            }
+            // Кто пригласил (нам нужны будут данные в таблице users)
+            $invitation_id = 0;
+        } else {
+            $invitation_id = $inv_uid;
+        }
 
+        $active_uid = UserModel::createUser($login, $email, $password, $reg_ip, $invitation_id);
+
+        if($inv_code) {
+            // Если регистрация по инвайту, то записываем данные
+            UserModel::sendInvitationEmail($inv_code, $inv_uid, $reg_ip, $active_uid);
+        }
+        
         Base::addMsg('Регистрация прошла успешно. Введите e-mail и пароль.', 'error');
         redirect('/login');
     }
@@ -180,8 +215,8 @@ class AuthController extends \MainController
         $rememberMe = \Request::getPost('rememberme');
 
         if (!$this->checkEmail($email)) {
-           Base::addMsg('Недопустимый email', 'error');
-           redirect('/login');
+            Base::addMsg('Недопустимый email', 'error');
+            redirect('/login');
         }
 
         $uInfo = UserModel::getUserInfo($email);
@@ -294,7 +329,7 @@ class AuthController extends \MainController
         // Код активации
         $code = \Request::get('code');
  
-        // проверяем код
+        // Проверяем код
         $user_id = UserModel::getPasswordActivate($code);
         if(!$user_id) 
         {
@@ -302,7 +337,7 @@ class AuthController extends \MainController
             redirect('/recover');   
         }
 
-        //получаем пользователя
+        // Получаем пользователя
         if(!$user = UserModel::getUserId($user_id['activate_user_id'])) {
             include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
             hl_preliminary_exit();

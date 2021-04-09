@@ -212,6 +212,7 @@ CREATE TABLE `users` (
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp(),
   `invitation_available` int(10) NOT NULL DEFAULT '0',
+  `invitation_id` int(10) NOT NULL DEFAULT '0',
   `deleted` tinyint(1) DEFAULT 0,
   `avatar` varchar(250) DEFAULT NULL,
   `about` varchar(250) DEFAULT NULL,
@@ -377,10 +378,10 @@ CREATE TABLE `invitation` (
   `invitation_code` varchar(32) DEFAULT NULL,
   `invitation_email` varchar(255) DEFAULT NULL,
   `add_time` datetime NOT NULL,
-  `add_ip` bigint(12) DEFAULT NULL,
+  `add_ip` varchar(12) DEFAULT NULL,
   `active_expire` tinyint(1) DEFAULT '0',
   `active_time` datetime NOT NULL,  
-  `active_ip` bigint(12) DEFAULT NULL,
+  `active_ip` varchar(12) DEFAULT NULL,
   `active_status` tinyint(4) DEFAULT '0',
   `active_uid` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

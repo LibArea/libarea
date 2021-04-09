@@ -73,8 +73,8 @@ class UserController extends \MainController
     function settingPage()
     {
         // Данные участника
-        $account = \Request::getSession('account');
-        $user = UserModel::getUserLogin($account['login']);
+        $account    = \Request::getSession('account');
+        $user       = UserModel::getUserLogin($account['login']);
         
         if(!$user['avatar']) {
             $user['avatar'] = 'noavatar.png';
@@ -300,4 +300,102 @@ class UserController extends \MainController
         
         return view("user/favorite", ['data' => $data, 'uid' => $uid, 'favorite' => $result]);   
     }
+    
+    /////////// СИСТЕМА ИНВАЙТОВ ///////////
+    
+    // Показ формы инвайта
+    public function invitePage()
+    {
+        $uid  = Base::getUid();
+        $data = [
+            'h1'            => lang('Invite'),
+            'title'         => lang('Invite') . ' | ' . $GLOBALS['conf']['sitename'],
+            'description'   => 'Страница инвайтов на сайте ' . $GLOBALS['conf']['sitename'],
+        ];
+
+        return view('/user/invite', ['data' => $data, 'uid' => $uid]);    
+    }
+    
+    
+    // Отправка запроса инвайта
+    public function inviteHandler() 
+    {
+        $invite = \Request::getPost('invite');
+        print_r($invite);
+        exit;
+    }
+    
+    // Страница инвайтов пользователя
+    function invitationPage() 
+    {
+        // Данные участника
+        $account    = \Request::getSession('account');
+        $user       = UserModel::getUserLogin($account['login']);
+        
+        $result =  UserModel::InvitationResult($user['id']);
+
+        $uid  = Base::getUid();
+        $data = [
+          'h1'          => 'Инвайты',
+          'title'       => 'Мои инвайты',
+          'description' => 'Страница личных инвайтов', 
+        ];
+
+        return view('/user/invitation', ['data' => $data, 'uid' => $uid, 'user' => $user,  'result' => $result]);  
+        
+    }
+    
+    // Создать инвайт
+    function invitationCreate() {
+        
+        
+        // Данные участника
+        $account    = \Request::getSession('account');
+        $user       = UserModel::getUserLogin($account['login']);
+        
+        $invitation_email = \Request::getPost('email');
+        
+        if (!$this->prEmail($invitation_email)) {
+           Base::addMsg('Недопустимый email', 'error');
+           redirect('/users/invitation');
+        }
+        
+        $uInfo = UserModel::getUserInfo($invitation_email);
+        if(!empty($uInfo['email'])) {
+            
+            if ($uInfo['email']) {
+                Base::addMsg('Пользователь уже есть на сайте', 'error');
+                redirect('/users/invitation');
+            }
+        } 
+        
+        $inv_user = UserModel::InvitationOne($user['id']);
+ 
+        if($inv_user['invitation_email'] == $invitation_email) {
+            Base::addMsg('Вы уже отсылали приглашение этому пользователю', 'error');
+            redirect('/users/invitation');
+        }
+        
+        // + Ты не можешь пригласить себя.
+        // + Повторная отправка
+        // + Отсылка инвайта
+        
+        $add_time           = date('Y-m-d H:i:s');
+        $invitation_code    = Base::randomString('crypto', 25);
+        $add_ip             = Request::getRemoteAddress();
+        
+        UserModel::addInvitation($user['id'], $invitation_code, $invitation_email, $add_time, $add_ip);
+
+        Base::addMsg('Инвайт создан', 'error');
+        redirect('/users/invitation'); 
+        
+    }
+    
+    // Проверка e-mail
+    // Перенести в Base
+    private function prEmail($email)
+    {
+        $pattern = "/([a-z0-9]*[-_.]?[a-z0-9]+)*@([a-z0-9]*[-_]?[a-z0-9]+)+[.][a-z]{2,3}([.][a-z]{2})?/i";
+        return preg_match($pattern, $email);
+    } 
 }

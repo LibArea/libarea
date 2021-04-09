@@ -26,7 +26,7 @@ class UserModel extends \MainModel
     public static function getUserLogin($login)
     {
 
-        $query = XD::select(['id', 'login', 'name', 'email', 'avatar', 'about', 'created_at', 'my_post'])
+        $query = XD::select(['id', 'login', 'name', 'email', 'avatar', 'invitation_available', 'about', 'created_at', 'my_post'])
                 ->from(['users'])
                 ->where(['login'], '=', $login);
 
@@ -51,7 +51,7 @@ class UserModel extends \MainModel
     }
 
     // Регистрация участника
-    public static function createUser($login,$email,$password,$reg_ip)
+    public static function createUser($login, $email, $password, $reg_ip, $invitation_id)
     {
 
         // количество участников 
@@ -67,10 +67,9 @@ class UserModel extends \MainModel
         $password    = password_hash($password, PASSWORD_BCRYPT);
         $activated   = 1; // ввести почту и инвайт 
                 
-        XD::insertInto(['users'], '(', ['login'], ',', ['email'], ',', ['password'], ',', ['activated'], ',', ['reg_ip'],',', ['trust_level'], ')')->values( '(', XD::setList([$login, $email, $password, $activated, $reg_ip, $trust_level]), ')' )->run();
+        XD::insertInto(['users'], '(', ['login'], ',', ['email'], ',', ['password'], ',', ['activated'], ',', ['reg_ip'],',', ['trust_level'],',', ['invitation_id'],  ')')->values( '(', XD::setList([$login, $email, $password, $activated, $reg_ip, $trust_level, $invitation_id]), ')' )->run();
         
-        return true;
-        
+       return  XD::select()->last_insert_id('()')->getSelectValue(); // Вернем последний id для таблицы invitation (active_uid)
     }
     
     // Изменение пароля
@@ -254,7 +253,7 @@ class UserModel extends \MainModel
     }
     
     ////// ЗАПОМНИТЬ МЕНЯ
-    ////// Работа с токенами и куки
+    ////// Работа с токенами и куки (перенести в BASE)
     
     // Проверяет, устанавливался ли когда-либо файл cookie «запомнить меня»
     // Если мы найдем, проверьте его по нашей таблице users_auth_tokens и  
@@ -510,6 +509,51 @@ class UserModel extends \MainModel
                 ->where(['activate_code'], '=', $code)
                 ->and(['activate_flag'], '!=', 1)->getSelectOne();
     }
+    
+    // Создадим инвайт для участника
+	public static function addInvitation($uid, $invitation_code, $invitation_email, $add_time, $add_ip)
+	{
+        $inv        = XD::select('*')->from(['users'])->where(['id'], '=', $uid)->getSelectOne();
+        $num_inv    = $inv['post_comments']; // получаем количество инвайтов
+        $num        = $num_inv + 1;          // плюсуем один
+
+        XD::update(['users'])->set(['invitation_available'], '=', $num)->where(['id'], '=', $uid,)->run();
+
+        return  XD::insertInto(['invitation'], '(', ['uid'], ',', ['invitation_code'], ',', ['invitation_email'], ',', ['add_time'], ',', ['add_ip'], ')')->values( '(', XD::setList([$uid, $invitation_code, $invitation_email, $add_time, $add_ip]), ')' )->run();
+	}
+    
+    // Проверим на повтор
+	public static function InvitationOne($uid)
+	{
+        return XD::select('*')->from(['invitation'])->where(['uid'], '=', $uid)->getSelectOne();
+	} 
+    
+    // Все инвайты участинка
+    public static function InvitationResult($uid) {
+        return XD::select('*')->from(['invitation'])->where(['uid'], '=', $uid)->getSelect();
+    }
+    
+    // Проверим не активированный инвайт
+    public static function InvitationAvailable($invitation_code)
+	{
+        return XD::select('*')->from(['invitation'])
+                ->where(['invitation_code'], '=', $invitation_code)
+                ->and(['active_status'], '=', 0)
+                ->getSelectOne();
+	}
+    
+    // Проверим не активированный инвайт и поменяем статус
+    public static function sendInvitationEmail($inv_code, $inv_uid, $reg_ip, $active_uid)
+	{
+        $active_time = date('Y-m-d H:i:s');
+
+        XD::update(['invitation'])->set(['active_status'], '=', 1, ',', ['active_ip'], '=', $reg_ip, ',', ['active_time'], '=', $active_time, ',', ['active_uid'], '=', $active_uid)
+        ->where(['invitation_code'], '=', $inv_code)
+        ->and(['uid'], '=', $inv_uid)
+        ->run();
+		
+		return true;
+	}
     
     // Настройка оповещений
     public static function getNotificationSettingByUid($uid)

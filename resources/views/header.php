@@ -119,7 +119,15 @@
                             </svg>  
                             <?= lang('Favorites'); ?>              
                         </a>
-                        <?php if($uid['trust_level'] == 5) { ?>
+                        <?php if($uid['trust_level'] > 1) { ?>
+                            <a href="/users/invitation">
+                                <svg class="md-icon">
+                                    <use xlink:href="/assets/svg/icons.svg#link"></use>
+                                </svg>   
+                                <?= lang('Invites'); ?>                   
+                            </a> 
+                        <?php } ?>  
+                        <?php if($uid['trust_level'] == 5) { ?> 
                             <a href="/admin" target="_black">
                                 <svg class="md-icon">
                                     <use xlink:href="/assets/svg/icons.svg#ad"></use>

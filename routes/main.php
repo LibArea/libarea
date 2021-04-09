@@ -24,6 +24,9 @@ Route::before('Authorization@noAuth')->getGroup();
 	Route::type('post')->get('/post/del')->controller('PostController@deletePost');
     Route::type('post')->get('/post/grabtitle')->controller('PostController@grabTitle');
 
+    Route::get('/users/invitation')->controller('UserController@invitationPage');
+	Route::type('post')->protect()->get('/invitation/create')->controller('UserController@invitationCreate');
+
 	Route::get('/users/setting')->controller('UserController@settingPage');
 	Route::get('/users/setting/avatar')->controller('UserController@settingPageAvatar');
 	Route::get('/users/setting/security')->controller('UserController@settingPageSecurity');
@@ -65,9 +68,10 @@ Route::endGroup();
 
 Route::before('Authorization@yesAuth')->getGroup();
 	// Регистрация и авторизация (инвайты)
-    Route::get('/invite')->controller('AuthController@invitePage');
-    Route::type('post')->protect()->get('/invite')->controller('AuthController@inviteHandler');
+    Route::get('/invite')->controller('UserController@invitePage');
+    Route::type('post')->protect()->get('/invite')->controller('UserController@inviteHandler');
 	Route::get('/register')->controller('AuthController@registerPage');
+    Route::type('get')->get('/register/invite/{code}')->controller('AuthController@registerPageInvite')->where(['code' => '[a-z0-9-]+']);
     Route::type('get')->get('/recover')->controller('AuthController@recoverPage');  
     Route::type('post')->protect()->get('/recover/send')->controller('AuthController@sendRecover'); 
     Route::type('get')->get('/recover/remind/{code}')->controller('AuthController@RemindPage')->where(['code' => '[A-Za-z0-9-]+']);
