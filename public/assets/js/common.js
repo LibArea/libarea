@@ -30,21 +30,33 @@ $(function(){
         });
     });
 }); 
-// toggle dark mode
+
+// Toggle dark mode
 $(document).on('click', '#toggledark', function() {
     var mode = getCookie("dayNight");
     var d = new Date();
     d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000)); //365 days
     var expires = "expires=" + d.toGMTString();
-    if (mode == "dark" || mode == "dank") {
+    if (mode == "dark") {
       document.cookie = "dayNight" + "=" + "light" + "; " + expires + ";path=/";
       document.getElementsByTagName('body')[0].classList.remove('dark');
-      document.getElementsByTagName('body')[0].classList.remove('dank');
-      // document.querySelector('#toggledark span').innerHTML = icons.moon;
     } else {
       document.cookie = "dayNight" + "=" + "dark" + "; " + expires + ";path=/";
       document.getElementsByTagName('body')[0].classList.add('dark');
-     // document.querySelector('#toggledark span').innerHTML = icons.sun;
+    }
+});
+// Toggle menu mode
+$(document).on('click', '#togglemenu', function() {
+    var mode = getCookie("menuS");
+    var d = new Date();
+    d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000)); //365 days
+    var expires = "expires=" + d.toGMTString();
+    if (mode == "menuno") {
+      document.cookie = "menuS" + "=" + "light" + "; " + expires + ";path=/";
+      document.getElementsByTagName('body')[0].classList.remove('menuno');
+    } else {
+      document.cookie = "menuS" + "=" + "menuno" + "; " + expires + ";path=/";
+      document.getElementsByTagName('body')[0].classList.add('menuno');
     }
 });
 // Show hide popover

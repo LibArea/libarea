@@ -130,7 +130,7 @@ class AdminModel extends \MainModel
     public static function getInvitations() 
     {
         $q = XD::select(['id', 'login', 'avatar', 'uid', 'active_uid', 'active_time'])->from(['invitation']);
-        $query = $q->leftJoin(['users'])->on(['active_uid'], '=', ['id']);
+        $query = $q->leftJoin(['users'])->on(['active_uid'], '=', ['id'])->orderBy(['id'])->desc();
         
         return $query->getSelect();
     }

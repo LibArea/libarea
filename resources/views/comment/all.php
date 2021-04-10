@@ -1,4 +1,5 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
+<?php include TEMPLATE_DIR . '/menu.php'; ?>
 <main>
     <div class="left-ots">
     

@@ -1,8 +1,9 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
+<?php include TEMPLATE_DIR . '/menu.php'; ?>
 <main class="telo">
 
     <?php if (!$uid['id']) { ?>
-        <h1 class="top banner"><?= lang('site-closed'); ?>. <a href="/info/about"><?= lang('Read'); ?></a>...</h1> 
+        <h1 class="top banner"><?= lang('site-closed'); ?>. <a href="/info"><?= lang('Read'); ?></a>...</h1> 
     <?php } ?>  
 
     <?php if (!empty($posts)) { ?> 
@@ -90,7 +91,7 @@
         
     <?php } else { ?>
 
-        <div class="no-content"><?= lanf('no-post'); ?>...</div>
+        <div class="no-content"><?= lang('no-post'); ?>...</div>
 
     <?php } ?>
     
@@ -110,7 +111,7 @@
 <aside id="sidebar"> 
     <?php if($data['space_hide']) { ?>
         <div>
-            <h3><?= lanf('Unsubscribed'); ?></h3>  
+            <h3><?= lang('Unsubscribed'); ?></h3>  
             <?php foreach ($data['space_hide'] as  $hide) { ?>
                 <a class="space space_<?= $hide['space_tip'] ?>" href="/s/<?= $hide['space_slug']; ?>" title="<?= $hide['space_name']; ?>">
                     <?= $hide['space_name']; ?>

@@ -1,8 +1,3 @@
-.stats {
-  grid-column-start: 1;
-  grid-column-end: 4;
-  padding: 0.4rem 0.5rem;
-} 
 #canvas {
   display: block;
   top: 0;

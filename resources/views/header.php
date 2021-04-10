@@ -16,36 +16,30 @@
         <link rel="icon" href="/favicon.ico">
      
     </head>
-<body class="bd<?php if(Request::getCookie('dayNight') == 'dark') {?> dark<?php } ?>">
+<body class="bd<?php if(Request::getCookie('dayNight') == 'dark') {?> dark<?php } ?><?php if(Request::getCookie('menuS') == 'menuno') {?> menuno<?php } ?>">
 <header class="site-header">  
     <div class="title"> 
         <a title="<?= lang('Home'); ?>" class="logo" href="/">M</a>
         <div class="menu-left">
             <ul>
-                <li class="nav no-mob">
+                <li class="nav">
                     <?php if(Request::getUri() == '/') { ?>
                         <a title="<?= lang('Home'); ?>" class="home" href="/"><?= lang('AreaDev'); ?></a>
                     <?php } else { ?>
                        <a title="<?= lang('Home'); ?>" class="home" href="/"><?= lang('Home'); ?></a>
                     <?php } ?>
                 </li>
-                <li class="nav no-mob<?php if(Request::getUri() == '/top') { ?> active<?php } ?>">
-                    <a title="<?= lang('TOP'); ?>" class="home" href="/top">
-                        <?= lang('TOP'); ?>
-                    </a>
-                </li>
-                <li class="nav no-mob-two<?php if(Request::getUri() == '/comments') { ?> active<?php } ?>">
-                    <a title="<?= lang('Comments'); ?>" class="comments" href="/comments">
-                         <?= lang('Comments'); ?>
-                    </a>
-                </li>   
-                <li class="nav no-mob-two<?php if(Request::getUri() == '/space') { ?> active<?php } ?>">
-                    <a title="<?= lang('Space'); ?>" class="sp" href="/space">~</a>
+                <li class="nav no-mob closed-on">        
+                    <div id="togglemenu">
+                        <svg class="md-icon moon">
+                            <use xlink:href="/assets/svg/icons.svg#arrow-bar-to-left"></use>
+                        </svg>
+                    </div>
                 </li>
             </ul>
         </div>
     </div>
-    <div class="menu">
+    <div class="menu-h">
         <ul>
             <li class="nav">
                 <span id="toggledark" class="my-color-m">

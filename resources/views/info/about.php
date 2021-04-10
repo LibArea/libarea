@@ -1,4 +1,5 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
+<?php include TEMPLATE_DIR . '/menu.php'; ?>
 <main class="info">
     <div class="left-ots max-width">
         <ul class="breadcrumb">
