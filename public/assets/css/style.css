@@ -25,9 +25,7 @@ html, body {
 *, *:before, *:after {
   box-sizing: inherit;
 }
-article, aside, footer, header, section {
-  display: block;
-}
+
 tt {
   font-size: 14px;
 }
@@ -123,10 +121,11 @@ h1.head {
   text-transform: uppercase;
   letter-spacing: 1px;
 }
-h1.space {
+h1.space, .nav a.post-space {
   font-size: 16px;
   margin: 0 0 0 68px;
   letter-spacing: 1px;
+  color: #2562dc;
 }
 h1.space a {
   color: #2562dc;
@@ -434,7 +433,6 @@ div.select2-choices {
   display: inline-block;
   padding: 2px 10px 2px 10px;
   line-height: 18px;
-  color: var(--color-gray-2);
   text-align: center;
   background-color: #fafafa;
   border: 1px solid #ccc;
@@ -651,6 +649,15 @@ a.space_5 {
   font-size: 13px;
   padding: 5px;
   margin-left: 20px;
+}
+.space-text h2 {
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 300;
+}
+.space-text-bar {
+  margin: 10px 0;  
 }
 .space-img {
   float: left;
@@ -883,13 +890,10 @@ textarea.mess {
 .dark a {
   color: var(--color-white);
 }
-.dark a:hover {
+.dark header, .dark header a, .dark a:hover {
   color: #eee;
 }
-.dark header, .dark header a {
-  color: #eee;
-}
-.dark footer, .dark footer a, .na {
+.dark footer, .dark footer a, .na, .dark a.menu.active, .dark .info-n.active {
   color: #999;
 }
 .dark .menu-h .md-icon {
@@ -899,7 +903,7 @@ textarea.mess {
  max-width: 360px;
  display: inline-block;   
 }
-.dark blockquote {
+.dark blockquote, .dark .menu-info {
   background-color: #555;
 }
 
@@ -1010,7 +1014,6 @@ menu a span {
 body.menuno menu  {
   display: none;
 }
- 
 
 @media (min-width: 840px) {
   body {
@@ -1033,9 +1036,6 @@ body.menuno menu  {
     display: block;
     grid-area: sidebar;
   }
-  /* main {
-    max-width: calc(100vw - 250px - 1.2rem);
-  } */
 }
   
 @media screen and (max-width: 840px) {

@@ -42,6 +42,8 @@ class SpaceController extends \MainController
             $space['space_img'] = 'space_no.png';
         } 
   
+        $space['space_date'] = Base::ru_date($space['space_date']);
+  
         // Покажем 404
         if(!$posts) {
             include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
@@ -71,7 +73,7 @@ class SpaceController extends \MainController
             'space_hide' => $space_hide,
         ];
 
-        return view("space/spaceposts", ['data' => $data, 'uid' => $uid, 'posts' => $result, 'space' => $space]);
+        return view("space/space-posts", ['data' => $data, 'uid' => $uid, 'posts' => $result, 'space_info' => $space]);
     }
 
     // Форма изменения пространства

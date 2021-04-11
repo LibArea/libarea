@@ -168,6 +168,7 @@ CREATE TABLE `space` (
   `space_color` varchar(128) NOT NULL,
   `space_img` varchar(250) DEFAULT NULL,
   `space_text` varchar(550) NOT NULL,
+  `space_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `space_category_id` int(11) NOT NULL DEFAULT 1,
   `space_tip` int(11) NOT NULL DEFAULT 1,
   `space_permit_users` int(11) NOT NULL DEFAULT 1
@@ -177,10 +178,32 @@ CREATE TABLE `space` (
 -- Дамп данных таблицы `space`
 --
 
-INSERT INTO `space` (`space_id`, `space_name`, `space_slug`, `space_description`, `space_color`, `space_text`, `space_category_id`, `space_tip`, `space_permit_users`) VALUES
-(1, 'cms', 'cms', 'Системы управления сайтами...', '', 'тест 1...', 0, 1, 0),
-(2, 'Вопросы', 'qa', 'Вопросы и ответы', '', 'тест 2...', 0, 2, 0),
-(3, 'флуд', 'flud', 'Просто обычные разговоры', '', 'тест 3...', 0, 3, 0);
+INSERT INTO `space` (`space_id`, `space_name`, `space_slug`, `space_description`, `space_color`, `space_text`, `space_date`, `space_category_id`, `space_tip`, `space_permit_users`) VALUES
+(1, 'cms', 'cms', 'Системы управления сайтами...', '', 'тест 1...', '2021-02-28 12:15:58', 0, 1, 0),
+(2, 'Вопросы', 'qa', 'Вопросы и ответы', '', 'тест 2...', '2021-02-28 12:15:58', 0, 2, 0),
+(3, 'флуд', 'flud', 'Просто обычные разговоры', '', 'тест 3...', '2021-02-28 12:15:58', 0, 3, 0);
+
+
+--
+-- Дамп данных таблицы `space`
+--
+
+CREATE TABLE `space_tags` (
+  `st_id` int(11) NOT NULL,
+  `space_id` int(11) NOT NULL,
+  `title` varchar(150) NOT NULL,
+  `description` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Индексы таблицы `cms_blog_cats`
+--
+ALTER TABLE `space_tags`
+  ADD PRIMARY KEY (`st_id`),
+  ADD KEY `space_id` (`space_id`);
+  
+ALTER TABLE `space_tags`
+  MODIFY `st_id` int(11) NOT NULL AUTO_INCREMENT;  
 
 -- --------------------------------------------------------
 

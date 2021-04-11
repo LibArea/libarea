@@ -1,5 +1,5 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<main>
+<div class="w-100">
     <div class="left-ots"> 
         <a class="right" href="/messages">Все сообщения</a>
         <h2><?= $data['title']; ?></h2>

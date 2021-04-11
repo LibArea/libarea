@@ -28,7 +28,17 @@
                         <a class="u-url" href="/posts/<?= $post['post_slug']; ?>">
                             <h3 class="titl"><?= $post['post_title']; ?></h3>
                         </a>
-          
+                    <?php if ($post['post_content_preview']) { ?>
+                        <div class="show">
+                            <span class="show_add_<?= $post['post_id']; ?>">
+                                <a data-post_id="<?= $post['post_id']; ?>" class="showpost">
+                                    <span>&#9658;</span> 
+                                    <?= $post['post_content_preview']; ?>... 
+                                </a>
+                            </span>
+                        </div>
+                    <?php } ?>
+                    <div id="show_<?= $post['post_id']; ?>" class="show_detail"></div> 
                         <div class="footer">
                             <img class="ava" src="/uploads/avatar/small/<?= $post['avatar'] ?>">
                             <span class="user"> 
@@ -66,24 +76,23 @@
         <?php } else { ?>
             <div class="right"> 
                 <?php if($data['space_hide'] == 1) { ?> 
-                    <div data-id="<?= $space['space_id']; ?>" class="hide-space-id add-space">Подписаться</div>
+                    <div data-id="<?= $space_info['space_id']; ?>" class="hide-space-id add-space">Подписаться</div>
                 <?php } else { ?> 
-                    <div data-id="<?= $space['space_id']; ?>" class="hide-space-id no-space">Отписаться</div>
+                    <div data-id="<?= $space_info['space_id']; ?>" class="hide-space-id no-space">Отписаться</div>
                 <?php } ?>   
             </div>  
     <?php } ?> 
     <br> <br> 
     <div class="space-text">
-        <img class="space-img" src="/uploads/space/<?= $space['space_img']; ?>">
-    
-        <?php print_r($space); ?>
-   
-    <?= $space['space_name']; ?>
-    
-        <?= $space['space_text']; ?>
-    
+        <img class="space-img" src="/uploads/space/<?= $space_info['space_img']; ?>">
+        <h2><?= $space_info['space_name']; ?></h2>  
+        <div class="data"><?= $space_info['space_date']; ?></div> 
+      
+        <div class="space-text-bar">
+            <?= $space_info['space_text']; ?>
+        </div>
         <?php if($uid['trust_level'] == 5) { ?>
-            <a class="right" href="/space/<?= $space['space_slug']; ?>/edit">
+            <a class="right" href="/space/<?= $space_info['space_slug']; ?>/edit">
                 <svg class="md-icon moon">
                     <use xlink:href="/assets/svg/icons.svg#edit"></use>
                 </svg>

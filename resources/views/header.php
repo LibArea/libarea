@@ -36,9 +36,21 @@
                         </svg>
                     </div>
                 </li>
-                <?php if(!empty($space)) { ?>
+                <?php if(!empty($space_info)) { ?>
                     <li class="nav no-mob"> 
-                        <h1 class="space"> <a href="">~  <?= $space['space_name']; ?></a></h1>
+                        <h1 class="space"> 
+                            <a href="/s/<?= $space_info['space_slug']; ?>">
+                            ~  <?= $space_info['space_name']; ?>
+                            </a>
+                        </h1>
+                    </li>
+                <?php } ?> 
+                
+                <?php if(!empty($post['space_slug'])) { ?>
+                    <li class="nav no-mob"> 
+                        <a class="post-space" href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
+                           ~  <?= $post['space_name']; ?>
+                        </a>
                     </li>
                 <?php } ?> 
             </ul>
