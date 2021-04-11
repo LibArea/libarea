@@ -1,6 +1,6 @@
 .admin {
-  grid-column-start: 1;
-  grid-column-end: 4;
+  grid-column-start: 2;
+  grid-column-end: 5;
   background: #fff;
   padding: 0.4rem 0.5rem;
 }

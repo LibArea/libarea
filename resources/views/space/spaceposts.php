@@ -2,7 +2,6 @@
 <?php include TEMPLATE_DIR . '/menu.php'; ?>
 <main>
     <div class="left-ots">
-        <h1 class="left-ots"><span>~</span> <?= $data['h1']; ?></h1>
         <?php if (!empty($posts)) { ?>
         
             <?php foreach ($posts as  $post) { ?> 
@@ -76,6 +75,10 @@
     <br> <br> 
     <div class="space-text">
         <img class="space-img" src="/uploads/space/<?= $space['space_img']; ?>">
+    
+        <?php print_r($space); ?>
+   
+    <?= $space['space_name']; ?>
     
         <?= $space['space_text']; ?>
     

@@ -196,7 +196,7 @@ class CommentController extends \MainController
             'description' => 'Страница комментариев учасника ' . $login . ' на сайте ' . $GLOBALS['conf']['sitename'],
         ]; 
         
-        return view("comment/commuser", ['data' => $data, 'uid' => $uid, 'comments' => $result]);
+        return view("comment/comm-user", ['data' => $data, 'uid' => $uid, 'comments' => $result]);
     }
 
     // Удаление комментария

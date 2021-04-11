@@ -53,7 +53,7 @@
             </ul>
         </div>
     </div>
-    <div class="menu">
+    <div class="menu-h">
         <ul>
 
             <?php if(!$uid['id']) { ?> 

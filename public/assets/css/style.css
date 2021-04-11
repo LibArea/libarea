@@ -80,7 +80,7 @@ main {
   font-size:11px;
   margin: 2px 0;
 }
-.profiles, .post, .stats {
+.profiles, .post, .w-100 {
   grid-column-start: 2;
   grid-column-end: 5;
   padding: 0.4rem 0.5rem;
@@ -122,6 +122,14 @@ h1.head {
   font-weight: normal;
   text-transform: uppercase;
   letter-spacing: 1px;
+}
+h1.space {
+  font-size: 16px;
+  margin: 0 0 0 68px;
+  letter-spacing: 1px;
+}
+h1.space a {
+  color: #2562dc;
 }
 pre code {
   background: #272822;
@@ -977,6 +985,7 @@ div.voters .comm-up-id, div.voters .post-up-id {
   margin: 50px 16px 5px 10px;
 }
 
+/* Меню */
 menu {
   grid-area: menu;
   padding: 0 8px;
@@ -988,6 +997,9 @@ menu a {
   font-size: 14px;
   margin-bottom: 5px;
   color: #888;
+}
+menu a.menu:hover > .md-icon {
+  stroke: #2562dc;
 }
 a.menu.active {
   color:#333;

@@ -289,7 +289,7 @@ class PostController extends \MainController
             'description'   => 'Посты участника ' . $login . ' с сообществе ' . $GLOBALS['conf']['sitename'],
         ]; 
         
-        return view("post/user", ['data' => $data, 'uid' => $uid, 'posts' => $result]);
+        return view("post/post-user", ['data' => $data, 'uid' => $uid, 'posts' => $result]);
     }
     
     // Форма добавление поста

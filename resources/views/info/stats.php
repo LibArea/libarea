@@ -1,7 +1,7 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 <link rel="stylesheet" href="/assets/css/info.css"> 
 <script src="/assets/js/canvas.js"></script>
-<div class="stats">
+<div class="w-100">
     <ul class="breadcrumb">
         <li class="breadcrumb-item">
             <a title="<?= lang('Home'); ?>" href="/"><?= lang('Home'); ?></a>

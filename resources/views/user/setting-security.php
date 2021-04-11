@@ -1,5 +1,5 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<main>
+<main class="w-100">
     <div class="left-ots">
         <a class="right" href="/u/<?= $data['login']; ?>">Посмотреть профиль</a>
         <ul class="nav-tabs">

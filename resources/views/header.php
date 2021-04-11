@@ -36,6 +36,11 @@
                         </svg>
                     </div>
                 </li>
+                <?php if(!empty($space)) { ?>
+                    <li class="nav no-mob"> 
+                        <h1 class="space"> <a href="">~  <?= $space['space_name']; ?></a></h1>
+                    </li>
+                <?php } ?> 
             </ul>
         </div>
     </div>
