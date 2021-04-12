@@ -2,6 +2,8 @@
 
 namespace App\Models;
 use XdORM\XD;
+use DB;
+use PDO;
 
 class SpaceModel extends \MainModel
 {
@@ -30,15 +32,21 @@ class SpaceModel extends \MainModel
     }
 
     // Списки постов по пространству
-    public static function getSpacePosts($space_id, $user_id)
+    public static function getSpacePosts($space_id, $user_id, $space_tags_id)
     {
-        return  XD::select('*')->from(['posts'])
-                ->leftJoin(['users'])->on(['id'], '=', ['post_user_id'])
-                ->leftJoin(['votes_post'])->on(['votes_post_item_id'], '=', ['post_id'])
-                ->and(['votes_post_user_id'], '=', $user_id)
-                ->where(['post_space_id'], '=', $space_id)
-                ->orderBy(['post_id'])->desc()
-                ->getSelect();
+        $q = XD::select('*')->from(['posts'])
+            ->leftJoin(['users'])->on(['id'], '=', ['post_user_id'])
+            ->leftJoin(['votes_post'])->on(['votes_post_item_id'], '=', ['post_id'])
+            ->and(['votes_post_user_id'], '=', $user_id)
+            ->where(['post_space_id'], '=', $space_id);
+
+        if($space_tags_id) {
+            $result = $q->and(['post_tag_id'], '=', $space_tags_id)->orderBy(['post_id'])->desc()->getSelect();
+        } else { 
+            $result = $q->orderBy(['post_id'])->desc()->getSelect();
+        }
+ 
+        return $result;
     }
     
     // Информация пространства
@@ -93,5 +101,13 @@ class SpaceModel extends \MainModel
         
         return true;
     }
-    
+
+    // Возвращает теги пространства
+    public static  function getSpaceTags($space_id){
+
+        $q = XD::select('*')->from(['space_tags']);
+        $result = $q->leftJoin(['space'])->on(['space_id'], '=', ['st_space_id'])->where(['space_id'], '=', $space_id)->getSelect();
+
+        return $result;
+    } 
 }

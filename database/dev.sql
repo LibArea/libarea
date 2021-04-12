@@ -190,9 +190,9 @@ INSERT INTO `space` (`space_id`, `space_name`, `space_slug`, `space_description`
 
 CREATE TABLE `space_tags` (
   `st_id` int(11) NOT NULL,
-  `space_id` int(11) NOT NULL,
-  `title` varchar(150) NOT NULL,
-  `description` varchar(500) NOT NULL
+  `st_space_id` int(11) NOT NULL,
+  `st_title` varchar(150) NOT NULL,
+  `st_description` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -200,7 +200,7 @@ CREATE TABLE `space_tags` (
 --
 ALTER TABLE `space_tags`
   ADD PRIMARY KEY (`st_id`),
-  ADD KEY `space_id` (`space_id`);
+  ADD KEY `st_space_id` (`st_space_id`);
   
 ALTER TABLE `space_tags`
   MODIFY `st_id` int(11) NOT NULL AUTO_INCREMENT;  
@@ -242,7 +242,7 @@ CREATE TABLE `users` (
   `rating` int(11) NOT NULL DEFAULT 0,
   `status` varchar(250) DEFAULT NULL,
   `my_post` int(11) DEFAULT NULL COMMENT 'Пост выведенный в профиль',
-  `ban_list` tinyint(1) DEFAULT 0,
+  `ban_list` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --

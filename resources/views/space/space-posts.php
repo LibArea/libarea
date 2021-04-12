@@ -87,18 +87,31 @@
         <img class="space-img" src="/uploads/space/<?= $space_info['space_img']; ?>">
         <h2><?= $space_info['space_name']; ?></h2>  
         <div class="data"><?= $space_info['space_date']; ?></div> 
-      
+       
         <div class="space-text-bar">
             <?= $space_info['space_text']; ?>
         </div>
         <?php if($uid['trust_level'] == 5) { ?>
-            <a class="right" href="/space/<?= $space_info['space_slug']; ?>/edit">
-                <svg class="md-icon moon">
-                    <use xlink:href="/assets/svg/icons.svg#edit"></use>
-                </svg>
-            </a>
+            <div class="edit-space">
+                <a href="/space/<?= $space_info['space_slug']; ?>/edit">
+                    <?= lang('Edit'); ?>
+                </a>
+                 <span class="otst"> | </span>
+                <a href="/space/<?= $space_info['space_slug']; ?>/edit">
+                    <?= lang('Метки'); ?>
+                </a>
+            </div> 
         <?php } ?>
     </div>
+    
+    <?php if (!empty($tags)) { ?>
+        <div class="space-tags">
+            <div class="menu-m">Метки</div>
+            <?php foreach ($tags as  $tag) { ?> 
+                <a href="/s/<?= $space_info['space_slug']; ?>/<?= $tag['st_id']; ?>"><?= $tag['st_title']; ?><a>
+            <?php } ?>
+        </div>
+    <?php } ?> 
 </aside> 
 
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

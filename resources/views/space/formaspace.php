@@ -1,7 +1,7 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<main>
+<main class="w-100">
     <div class="left-ots">
-         
+         <span class="right"><a href="/s/<?= $space['space_slug']; ?>"><?= $space['space_name']; ?></a></span>
         <h1><?= $data['h1']; ?></h1>
     
         <div class="telo space">
@@ -20,7 +20,7 @@
                     </div>        
                     <div class="boxline">
                         <label for="post_content">Meta- описание</label>
-                        <textarea name="space_description"><?= $space['space_description']; ?></textarea><br />
+                        <textarea class="add" name="space_description"><?= $space['space_description']; ?></textarea><br />
                     </div>
                     <div class="boxline">
                         <label for="post_content">Цвет</label>
@@ -28,7 +28,7 @@
                     </div>
                     <div class="boxline">
                         <label for="post_content">Текст</label>
-                        <textarea name="space_text"><?= $space['space_text']; ?></textarea><br />
+                        <textarea class="add" name="space_text"><?= $space['space_text']; ?></textarea><br />
                     </div>
                     <div class="boxline">
                     <label for="space_img">

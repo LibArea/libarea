@@ -40,13 +40,10 @@
                                 (<?= lang('ed'); ?>. <?= $post['edit_date']; ?>) 
                             <?php } ?>
                         </span>
-                        <span class="date"> 
-                            <a class="space space_<?= $post['space_tip'] ?>" href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
-                                <?= $post['space_name']; ?>
-                            </a>
-                            <span class="otst">   </span>
-                        </span>
                         <?php if ($uid['id']) { ?>
+                            <span class="date"> 
+                                <span class="otst"> | </span>
+                            </span>
                             <?php if($uid['login'] == $post['login'] || $uid['trust_level'] == 5) { ?>
                                 <span class="date">
                                    &nbsp; <a href="/post/edit/<?= $post['post_id']; ?>">

@@ -9,7 +9,9 @@
             <?php foreach ($space as  $sp) { ?>  
                 <div class="space-telo">
                     <span class="date"> <?php if($sp['hidden_space_id'] >= 1) {  ?><span class="red">&#10003;</span><?php } ?>
-                        <a title="<?= $sp['space_name']; ?>" class="space space_<?= $sp['space_tip']; ?>" href="/s/<?= $sp['space_slug']; ?>">
+                    
+                        <div class="space-color space_<?= $sp['space_tip'] ?>"></div>
+                        <a title="<?= $sp['space_name']; ?>" class="space-u" href="/s/<?= $sp['space_slug']; ?>">
                             <?= $sp['space_name']; ?>
                         </a> 
                     </span> 

@@ -48,7 +48,8 @@
                             </svg>
                         <?php } ?>
                     </a>
-                    <a class="space space_<?= $post['space_tip'] ?>" href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
+                    <div class="space-color space_<?= $post['space_tip'] ?>"></div>
+                    <a class="space-u" href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
                         <?= $post['space_name']; ?>
                     </a>
                     
@@ -113,7 +114,8 @@
         <div>
             <h3><?= lang('Unsubscribed'); ?></h3>  
             <?php foreach ($data['space_hide'] as  $hide) { ?>
-                <a class="space space_<?= $hide['space_tip'] ?>" href="/s/<?= $hide['space_slug']; ?>" title="<?= $hide['space_name']; ?>">
+                <div class="space-color space_<?= $hide['space_tip'] ?>"></div>
+                <a class="space-u" href="/s/<?= $hide['space_slug']; ?>" title="<?= $hide['space_name']; ?>">
                     <?= $hide['space_name']; ?>
                 </a>
             <?php } ?>

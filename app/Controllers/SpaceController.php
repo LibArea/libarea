@@ -30,24 +30,25 @@ class SpaceController extends \MainController
     // Посты по пространству
     public function SpacePosts()
     {
-        $account    = \Request::getSession('account');
-        $user_id    = $account ? $account['user_id'] : 0;
-
-        // Информация по пространству и посты
-        $slug  = \Request::get('slug');
+        $account        = \Request::getSession('account');
+        $user_id        = $account ? $account['user_id'] : 0;
+        $slug           = \Request::get('slug');
+        $space_tags_id  = \Request::get('tags');
+        
         $space = SpaceModel::getSpaceInfo($slug);
-        $posts = SpaceModel::getSpacePosts($space['space_id'], $user_id);
-  
+        $posts = SpaceModel::getSpacePosts($space['space_id'], $user_id, $space_tags_id);
+ 
         if(!$space['space_img'] ) {
             $space['space_img'] = 'space_no.png';
         } 
   
-        $space['space_date'] = Base::ru_date($space['space_date']);
-  
+        $space['space_date']        = Base::ru_date($space['space_date']);
+        $space['space_cont_post']   = count($posts);
+        
         // Покажем 404
         if(!$posts) {
-            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
-            hl_preliminary_exit();
+           // include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+           // hl_preliminary_exit();
         }
 
         $result = Array();
@@ -62,6 +63,8 @@ class SpaceController extends \MainController
          
         }  
 
+        $tags = SpaceModel::getSpaceTags($space['space_id']);
+
         // Отписан участник от пространства или нет
         $space_hide = SpaceModel::getMySpaceHide($space['space_id'], $user_id);
  
@@ -73,7 +76,7 @@ class SpaceController extends \MainController
             'space_hide' => $space_hide,
         ];
 
-        return view("space/space-posts", ['data' => $data, 'uid' => $uid, 'posts' => $result, 'space_info' => $space]);
+        return view("space/space-posts", ['data' => $data, 'uid' => $uid, 'posts' => $result, 'space_info' => $space, 'tags' => $tags]);
     }
 
     // Форма изменения пространства
@@ -178,9 +181,8 @@ class SpaceController extends \MainController
         }
         
         $space_color = \Request::getPost('space_color');
-        $space_color = (empty($space_color)) ? '' : $space_color;
+        $space_color = (empty($space_color)) ? 0 : $space_color;
         
-        // Пока перечислим все поля
         // Если пользователи смогут создавать пространства с TL2
         // То данный метод следует изменить
         $data = [

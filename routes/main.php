@@ -116,8 +116,8 @@ Route::get('/comments')->controller('CommentController');
 
 // Пространства
 Route::get('/space')->controller('SpaceController');
-Route::get('/s/{slug}')->controller('SpaceController@spacePosts')->where(['slug' => '[A-Za-z0-9]+']);
-
+Route::get('/s/{slug}/{tags?}')->controller('SpaceController@spacePosts')->where(['slug' => '[A-Za-z0-9]+',  'tags' => '[0-9]+']);
+//Route::get('/s/{slug}/{tags}')->controller('SpaceController@spacePosts')->where(['slug' => '[A-Za-z0-9]+', 'tags' => 'tag\-[0-9]+']);
 // Вызов формы комментария
 Route::type('post')->get('/comments/addform')->controller('CommentController@addform');
 
