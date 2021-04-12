@@ -24,13 +24,23 @@ class FlowModel extends \MainModel
        XD::insertInto(['flow_log'], '(', 
             ['flow_action_id'], ',', 
             ['flow_content'], ',', 
-            ['flow_user_id'], ',', 
+            ['flow_user_id'], ',',
+            ['flow_pubdate'], ',', 
+            ['flow_on_user_id'], ',',
+            ['flow_url'], ',', 
+            ['flow_space_id'], ',', 
+            ['flow_tl'], ',',
             ['flow_ip'], ')')->values( '(', 
         
         XD::setList([
             $data['flow_action_id'], 
             $data['flow_content'], 
             $data['flow_user_id'], 
+            $data['flow_pubdate'], 
+            0,
+            '',
+            0,
+            0,
             $data['flow_ip']]), ')' )->run();
 
         return true; 

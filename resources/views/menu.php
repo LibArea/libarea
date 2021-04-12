@@ -19,6 +19,10 @@
         <svg class="md-icon"><use xlink:href="/assets/svg/icons.svg#users"></use></svg>
         <span><?= lang('Users'); ?></span>
     </a>
+    <a class="menu<?php if(Request::getUri() == '/flow') { ?> active<?php } ?>" title="<?= lang('Flow'); ?>" href="/flow">
+        <svg class="md-icon"><use xlink:href="/assets/svg/icons.svg#chat"></use></svg>
+        <span><?= lang('Flow'); ?></span>
+    </a>
     <a class="menu<?php if(Request::getUri() == '/info') { ?> active<?php } ?>" title="<?= lang('Help'); ?>" href="/info">
         <svg class="md-icon"><use xlink:href="/assets/svg/icons.svg#info"></use></svg>
         <?= lang('Help'); ?>

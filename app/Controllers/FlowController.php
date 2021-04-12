@@ -63,7 +63,8 @@ class FlowController extends \MainController
             'flow_action_id'    => 5,
             'flow_content'      => $chat_content,
             'flow_user_id'      => $user_id,
-            'flow_ip'           => $flow_ip,
+            'flow_ip'           => $flow_ip, 
+            'flow_pubdate'      => date("Y-m-d H:i:s"),
         ];
         
         // Записываем пост

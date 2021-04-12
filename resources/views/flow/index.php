@@ -1,6 +1,6 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 <?php include TEMPLATE_DIR . '/menu.php'; ?>
-<meta http-equiv="Refresh" content="15" />
+<meta http-equiv="Refresh" content="35" />
 <link rel="stylesheet" href="/assets/css/flow.css">
 <main class="info">
     <div class="left-ots flow">

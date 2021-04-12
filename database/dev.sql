@@ -435,7 +435,7 @@ CREATE TABLE `flow_log` (
   `flow_about` varchar(255) DEFAULT NULL,
   `flow_space_id` int(11) NOT NULL,
   `flow_tl` int(11) NOT NULL,
-  `flow_ip` varchar(12) DEFAULT NULL,
+  `flow_ip` varchar(39) DEFAULT NULL,
   `flow_is_delete` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
