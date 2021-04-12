@@ -40,7 +40,7 @@
                     <li class="nav no-mob"> 
                         <h1 class="space"> 
                             <div class="space-color space_<?= $space_info['space_color'] ?>"></div>
-                            <a href="/s/<?= $space_info['space_slug']; ?>">
+                            <a class="space-u" href="/s/<?= $space_info['space_slug']; ?>">
                               <?= $space_info['space_name']; ?>
                             </a>
                         </h1>

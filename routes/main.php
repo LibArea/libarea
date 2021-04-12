@@ -37,6 +37,8 @@ Route::before('Authorization@noAuth')->getGroup();
 
 	Route::get('/logout')->controller('AuthController@logout');
 
+	Route::type('post')->protect()->get('/flow/add')->controller('FlowController@chatAdd');
+    
 	// Добавление комментария / удаление 
     Route::type('post')->get('/comments/editform')->controller('CommentController@editform');
     Route::type('post')->protect()->get('/comment/edit')->controller('CommentController@editComment');
@@ -110,6 +112,9 @@ Route::get('/favorite/{login}')->controller('UserController@userFavorite')->wher
 Route::get('/threads/{login}')->controller('CommentController@userComments')->where(['login' => '[A-Za-z0-9]+']);
 // Страница постов участника
 Route::get('/newest/{login}')->controller('PostController@userPosts')->where(['login' => '[A-Za-z0-9]+']);
+
+// Поток
+Route::get('/flow')->controller('FlowController');
 
 // Все комментарии
 Route::get('/comments')->controller('CommentController');

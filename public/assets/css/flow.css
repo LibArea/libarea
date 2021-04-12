@@ -1,0 +1,17 @@
+#add_flow {
+  display: flex;
+}
+.add-flow {
+  bottom: 30px;
+  position: fixed;
+  width: 60%;
+}
+textarea {
+  width: 70%;
+}
+.add-flow-butt {
+  margin: 10px;
+}
+@media (max-width: 720px){
+ 
+}

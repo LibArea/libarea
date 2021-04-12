@@ -284,7 +284,6 @@ class PostModel extends \MainModel
         }
         
         return true;
-        
     }
    
    // Частота размещения постов участника 

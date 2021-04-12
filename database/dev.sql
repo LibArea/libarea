@@ -426,7 +426,7 @@ ALTER TABLE `invitation`
 CREATE TABLE `flow_log` (
   `flow_id` int(11) NOT NULL,
   `flow_action_id` int(11) NOT NULL,
-  `flow_pubdate` datetime NOT NULL,
+  `flow_pubdate` datetime NOT NULL DEFAULT current_timestamp(),
   `flow_user_id` int(11) NOT NULL,
   `flow_on_user_id` int(11) NOT NULL,
   `flow_content` text NOT NULL,
@@ -434,7 +434,9 @@ CREATE TABLE `flow_log` (
   `flow_target_id` int(11) DEFAULT NULL,
   `flow_about` varchar(255) DEFAULT NULL,
   `flow_space_id` int(11) NOT NULL,
-  `flow_tl` int(11) NOT NULL
+  `flow_tl` int(11) NOT NULL,
+  `flow_ip` varchar(12) DEFAULT NULL,
+  `flow_is_delete` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 ALTER TABLE `flow_log`
