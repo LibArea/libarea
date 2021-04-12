@@ -170,7 +170,7 @@ CREATE TABLE `space` (
   `space_text` varchar(550) NOT NULL,
   `space_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `space_category_id` int(11) NOT NULL DEFAULT 1,
-  `space_tip` int(11) NOT NULL DEFAULT 1,
+  `space_tl` int(11) NOT NULL DEFAULT 1,
   `space_permit_users` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -178,7 +178,7 @@ CREATE TABLE `space` (
 -- Дамп данных таблицы `space`
 --
 
-INSERT INTO `space` (`space_id`, `space_name`, `space_slug`, `space_description`, `space_color`, `space_text`, `space_date`, `space_category_id`, `space_tip`, `space_permit_users`) VALUES
+INSERT INTO `space` (`space_id`, `space_name`, `space_slug`, `space_description`, `space_color`, `space_text`, `space_date`, `space_category_id`, `space_tl`, `space_permit_users`) VALUES
 (1, 'cms', 'cms', 'Системы управления сайтами...', '', 'тест 1...', '2021-02-28 12:15:58', 0, 1, 0),
 (2, 'Вопросы', 'qa', 'Вопросы и ответы', '', 'тест 2...', '2021-02-28 12:15:58', 0, 2, 0),
 (3, 'флуд', 'flud', 'Просто обычные разговоры', '', 'тест 3...', '2021-02-28 12:15:58', 0, 3, 0);
@@ -422,6 +422,29 @@ ALTER TABLE `invitation`
   
   ALTER TABLE `invitation`
   MODIFY `invitation_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+CREATE TABLE `flow_log` (
+  `flow_id` int(11) NOT NULL,
+  `flow_action_id` int(11) NOT NULL,
+  `flow_pubdate` datetime NOT NULL,
+  `flow_user_id` int(11) NOT NULL,
+  `flow_on_user_id` int(11) NOT NULL,
+  `flow_content` text NOT NULL,
+  `flow_url` varchar(255) NOT NULL,
+  `flow_target_id` int(11) DEFAULT NULL,
+  `flow_about` varchar(255) DEFAULT NULL,
+  `flow_space_id` int(11) NOT NULL,
+  `flow_tl` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE `flow_log`
+  ADD PRIMARY KEY (`flow_id`),
+  ADD KEY `flow_user_id` (`flow_user_id`);
+
+ALTER TABLE `flow_log`
+  MODIFY `flow_id` int(11) NOT NULL AUTO_INCREMENT;
+
+
 
 --
 -- Индексы сохранённых таблиц
