@@ -165,7 +165,7 @@ CREATE TABLE `space` (
   `space_name` varchar(250) NOT NULL,
   `space_slug` varchar(128) NOT NULL,
   `space_description` varchar(250) NOT NULL,
-  `space_color` varchar(128) NOT NULL,
+  `space_color` int(11) NOT NULL DEFAULT 0,
   `space_img` varchar(250) DEFAULT NULL,
   `space_text` varchar(550) NOT NULL,
   `space_date` timestamp NOT NULL DEFAULT current_timestamp(),
