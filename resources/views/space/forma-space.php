@@ -24,7 +24,7 @@
                     </div>
                     <div class="boxline">
                         <label for="post_content">Цвет</label>
-                        <input class="add" type="text" value="<?= $space['space_color']; ?>" name="space_color" />
+                        <?php include TEMPLATE_DIR . '/space/space-color-box.php'; ?>
                     </div>
                     <div class="boxline">
                         <label for="post_content">Текст</label>

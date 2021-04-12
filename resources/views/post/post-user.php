@@ -32,8 +32,8 @@
                         <a class="u-url" href="/posts/<?php echo $post['post_slug']; ?>">
                             <h3 class="titl"><?php echo $post['post_title']; ?></h3>
                         </a>
-                        
-                        <a class="space space_<?= $post['space_tip'] ?>" href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
+                        <div class="space-color space_<?= $post['space_color'] ?>"></div>
+                        <a class="space-u" href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
                             <?= $post['space_name']; ?>
                         </a>
                         

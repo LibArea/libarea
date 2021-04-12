@@ -73,6 +73,7 @@ class CommentModel extends \MainModel
         $q = XD::select('*')->from(['comments']);
         $query = $q->leftJoin(['posts'])->on(['post_id'], '=', ['comment_post_id'])
                  ->leftJoin(['users'])->on(['id'], '=', ['comment_user_id'])
+                 ->leftJoin(['space'])->on(['post_space_id'], '=', ['space_id'])
                  ->where(['comment_del'], '=', 0)
                  ->orderBy(['comment_id'])->desc()->limit(5);
 

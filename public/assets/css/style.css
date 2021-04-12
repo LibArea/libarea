@@ -73,10 +73,11 @@ main {
   padding: 0.4rem;
 }
 #sidebar h3 {
+  margin: 0 0 5px 0;
   text-transform: uppercase;
+  font-size: 12px;
   letter-spacing: 1px;
-  font-size:11px;
-  margin: 2px 0;
+  font-weight: 300;
 }
 .profiles, .post, .w-100 {
   grid-column-start: 2;
@@ -120,26 +121,6 @@ h1.head {
   font-weight: normal;
   text-transform: uppercase;
   letter-spacing: 1px;
-}
-h1.space, .nav a.post-space {
-  font-size: 16px;
-  margin: 0 0 0 68px;
-  letter-spacing: 1px;
-  color: #2562dc;
-}
-h1.space a {
-  color: #2562dc;
-}
-.space-tags {
-  margin-left: 24px;
-}
-.space-tags .menu-m {
-  margin: 0 0 10px 1px;
-}
-.space-tags a {
-   font-size: 13px; 
-   display: block;
-   margin: 0 0 5px 10px;
 }
 pre code {
   background: #272822;
@@ -230,7 +211,6 @@ blockquote {
 }
 .sb-telo {
   margin-bottom: 15px;
-  border-left: 3px solid #a1a8ae;
 }
 .sb-telo .ava {
   border-radius: 8px;
@@ -562,7 +542,7 @@ a.showpost span {
   display: block;
 }
 .post_url {
-  font-size: 12px;
+  font-size: 10pt;
   margin-left: 10px;
   color: var(--color-gray-1);
   font-style: italic;
@@ -624,33 +604,79 @@ a.showpost span {
 }
 
 /* Пространства */
+h1.space, .post-space-color {
+  font-size: 16px;
+  margin: 0 0 0 67px;
+  letter-spacing: 1px;
+  color: #2562dc;
+}
+h1.space a {
+  color: #2562dc;
+}
+.space-tags {
+  margin-left: 24px;
+}
+.space-tags .menu-m {
+  margin: 0 0 10px 1px;
+}
+.space-tags a {
+   font-size: 13px; 
+   display: block;
+   margin: 0 0 5px 10px;
+}
 a.space-u {
-  color: #555 !important;
+  color: var(--color-gray-1);
   font-size: 10pt;
   text-decoration: none;
-  vertical-align: text-top;
   text-transform: lowercase;
 }
 .space-color {
-  width: 9px;
+  width: 3px;
   height: 9px;
-  margin-right: 3px;
+  margin-right: 1px;
   display: inline-block;
   background-color: #390;
-  vertical-align: middle;
+  padding: 0;
 }
-.space_1 {
-  background-color: #f9ddde;
+.color-box-telo {
+  position: relative;
 }
-.space_2 {
-  background-color: #fffcd7;
+.space-color.box {
+  display: block;
+  width: 22px;
+  height: 15px;
 }
-.space_3 {
-  background-color: #ddebf9;
+.color-box {
+  text-align: center;
+  width: 20px;
+  margin-left: 20px;
+  float: left;
 }
-.space_4 {
-  background-color: #ddebf9;
-}
+.space_0 {background-color: #333;}
+.space_1 {background-color: #f56400;}
+.space_2 {background-color: #339900;}
+.space_3 {background-color: #7ba592;}
+.space_4 {background-color: #006b91;}
+.space_5 {background-color: #845e7e;}
+.space_6 {background-color: #07c;}
+.space_7 {background-color: #0af;}
+.space_8 {background-color: #09c;}
+.space_9 {background-color: #F7941D;}  
+.space_10 {background-color: #ED207B;}
+.space_11 {background-color: #9352E3;}
+
+.comm-space-color-0 {border-left: 2px solid #333;}
+.comm-space-color-1 {border-left: 2px solid #f56400;}
+.comm-space-color-2 {border-left: 2px solid #339900;}
+.comm-space-color-3 {border-left: 2px solid #7ba592;}
+.comm-space-color-4 {border-left: 2px solid #006b91;}
+.comm-space-color-5 {border-left: 2px solid #845e7e;}
+.comm-space-color-6 {border-left: 2px solid #07c;}
+.comm-space-color-7 {border-left: 2px solid #0af;}
+.comm-space-color-8 {border-left: 2px solid #09c;}
+.comm-space-color-9 {border-left: 2px solid #F7941D;}
+.comm-space-color-10 {border-left: 2px solid #ED207B;}
+.comm-space-color-11 {border-left: 2px solid #9352E3;}
 
 .space-des {
   margin-left:10px;

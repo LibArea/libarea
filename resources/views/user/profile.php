@@ -89,8 +89,9 @@
                         <a class="u-url" href="/posts/<?= $post['post_slug']; ?>">
                             <h2 class="titl"><?= $post['post_title']; ?></h2>
                         </a>
-                   
-                        <a class="space space_<?= $post['space_tip'] ?>" href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
+                        
+                        <div class="space-color space_<?= $post['space_color'] ?>"></div>
+                        <a class="space-u" href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
                             <?= $post['space_name']; ?>
                         </a>
                         

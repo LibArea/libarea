@@ -102,7 +102,7 @@ class SpaceController extends \MainController
             'description'   => 'Страница изменения пространства на' . $GLOBALS['conf']['sitename'],
         ]; 
 
-        return view("space/formaspace", ['data' => $data, 'uid' => $uid, 'space' => $space]);
+        return view("space/forma-space", ['data' => $data, 'uid' => $uid, 'space' => $space]);
     }
     
     // Изменение пространства

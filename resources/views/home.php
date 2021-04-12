@@ -9,6 +9,7 @@
     <?php if (!empty($posts)) { ?> 
   
         <?php foreach ($posts as  $post) { ?>
+        
             <div class="post-telo">
                 <?php if (!$uid['id']) { ?> 
                     <div id="vot<?= $post['post_id']; ?>" class="voters">
@@ -48,7 +49,7 @@
                             </svg>
                         <?php } ?>
                     </a>
-                    <div class="space-color space_<?= $post['space_tip'] ?>"></div>
+                    <div class="space-color space_<?= $post['space_color'] ?>"></div>
                     <a class="space-u" href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
                         <?= $post['space_name']; ?>
                     </a>
@@ -107,6 +108,7 @@
             <?php } ?>
         </div>
     <?php } ?>
+ 
 </main>
 
 <aside id="sidebar"> 
@@ -114,7 +116,7 @@
         <div>
             <h3><?= lang('Unsubscribed'); ?></h3>  
             <?php foreach ($data['space_hide'] as  $hide) { ?>
-                <div class="space-color space_<?= $hide['space_tip'] ?>"></div>
+                <div class="space-color space_<?= $hide['space_color'] ?>"></div>
                 <a class="space-u" href="/s/<?= $hide['space_slug']; ?>" title="<?= $hide['space_name']; ?>">
                     <?= $hide['space_name']; ?>
                 </a>
@@ -124,7 +126,7 @@
     <?php } ?>
 
     <?php foreach ($data['latest_comments'] as  $comm) { ?>
-        <div class="sb-telo">
+        <div class="sb-telo comm-space-color-<?= $comm['space_color']; ?>">
             <div class="sb-date"> 
                 <img class="ava" alt="<?= $comm['login']; ?>" src="/uploads/avatar/small/<?= $comm['comment_avatar']; ?>">
                 <?= $comm['comment_date']; ?>

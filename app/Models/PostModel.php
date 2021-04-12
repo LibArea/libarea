@@ -38,7 +38,7 @@ class PostModel extends \MainModel
         $sql = "SELECT p.post_id, p.post_title, p.post_slug, p.post_user_id, p.post_space_id, p.post_comments, p.post_date, p.post_votes, p.post_is_delete, p.post_closed, p.post_top, p.post_url, p.post_content_preview, p.post_content_img,
                 u.id, u.login, u.avatar,
                 v.votes_post_item_id, v.votes_post_user_id,  
-                s.space_id, s.space_slug, s.space_name, space_tip
+                s.space_id, s.space_slug, s.space_name, space_color
                 fROM posts as p
                 INNER JOIN users as u ON u.id = p.post_user_id
                 INNER JOIN space as s ON s.space_id = p.post_space_id
