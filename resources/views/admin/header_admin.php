@@ -36,17 +36,11 @@
                 </li -->
                 <li class="nav no-mob"> 
                     <a title="<?= lang('Invites'); ?>" class="home" href="/admin/invitations">
-                        <svg class="md-icon">
-                            <use xlink:href="/assets/svg/icons.svg#link"></use>
-                        </svg> 
                         <?= lang('Invites'); ?>
                     </a>
                 </li>
                 <li class="nav no-mob">
                     <a title="<?= lang('Comments'); ?>" class="home" href="/admin/comments">
-                        <svg class="md-icon">
-                            <use xlink:href="/assets/svg/icons.svg#message"></use>
-                        </svg> 
                         <?= lang('Comments'); ?>
                     </a>
                 </li>

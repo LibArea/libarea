@@ -430,6 +430,7 @@ CREATE TABLE `flow_log` (
   `flow_user_id` int(11) NOT NULL,
   `flow_content` text NOT NULL,
   `flow_url` varchar(255) NOT NULL,
+  `flow_target_id` int(11) DEFAULT NULL,
   `flow_about` varchar(255) DEFAULT NULL,
   `flow_space_id` int(11) NOT NULL,
   `flow_tl` int(11) NOT NULL,

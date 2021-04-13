@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use App\Models\PostModel;
 use App\Models\VotesPostModel;
+use App\Models\FlowModel;
 use Hleb\Constructor\Handlers\Request;
 use XdORM\XD;
 
@@ -47,13 +48,10 @@ class VotesPostController extends \MainController
         } else {
             
             $up = 1;
-            $dt = date("Y-m-d H:i:s");
+            $date = date("Y-m-d H:i:s");
             $ip = Request::getRemoteAddress();
-            
-           
-            
-            
-            VotesPostModel::saveVote($post_id, $up, $ip, $user_id, $dt);
+
+            VotesPostModel::saveVote($post_id, $up, $ip, $user_id, $date);
          
             // Получаем количество votes поста    
             $votes_num = $post_info['post_votes'];
@@ -61,6 +59,22 @@ class VotesPostController extends \MainController
           
             // Записываем новое значение Votes в строку поста по id
             XD::update(['posts'])->set(['post_votes'], '=', $votes)->where(['post_id'], '=', $post_id)->run();
+ 
+            // Добавим в чат и в поток
+            $data_flow = [
+                'flow_action_id'    => 3, // голосование за пост
+                'flow_content'      => '',
+                'flow_user_id'      => $user_id,
+                'flow_pubdate'      => $date,
+                'flow_url'          => '', 
+                'flow_target_id'    => $post_id,
+                'flow_about'        => lang('add_up_post'),
+                'flow_space_id'     => 0,
+                'flow_tl'           => 0,
+                'flow_ip'           => $ip, 
+                 
+            ];
+            FlowModel::FlowAdd($data_flow);
  
             return false;
         } 

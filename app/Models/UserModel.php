@@ -8,15 +8,20 @@ use Base;
 class UserModel extends \MainModel
 {
     // Страница участников
-    public static function getUsersAll()
+    public static function getUsersAll($user_id)
     {
-       $query = XD::select(['id', 'login', 'name', 'avatar', 'deleted'])
-              ->from(['users'])
-              ->where(['deleted'], '=', 0)
-              ->orderBy(['id'])->desc();
-
-        $result = $query->getSelect();
-        return $result;
+        $q = XD::select(['id', 'login', 'name', 'avatar', 'deleted'])
+            ->from(['users'])
+            ->where(['deleted'], '=', 0);
+                
+            if($user_id) {    
+                $query = $q->orderBy(['id'], '=', $user_id)->desc(',', ['id'])->desc();
+            } else {    
+                $query = $q->orderBy(['id'])->desc();
+            }
+            
+        return $query->getSelect();
+ 
     }
 
     // Получение информации по логину

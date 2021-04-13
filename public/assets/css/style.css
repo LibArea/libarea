@@ -84,6 +84,10 @@ main {
   grid-column-end: 5;
   padding: 0 0.1rem 0 0;
 }
+.w-75 {
+  grid-column-end: 5;
+  padding: 0 0.1rem 0 0;
+}
 .left-ots {
   margin-left: 0.5rem;
 }
@@ -861,6 +865,7 @@ textarea.mess {
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
   height: 100px;
   width: 100px;
+  margin-top: 3px;
 }
 .gravatar img {
   border-radius: 50px;

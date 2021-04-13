@@ -1,6 +1,6 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 <?php include TEMPLATE_DIR . '/menu.php'; ?>
-<main class="users">
+<main class="w-75">
     <div class="left-ots">
         <div class="box-users">
             <h1><?= $data['h1']; ?></h1>
@@ -16,11 +16,10 @@
                         <div class="box-footer">
                         <a href="/u/<?= $user['login']; ?>"><?= $user['login']; ?></a>
                         <br>
-                    
-                        id:<?php echo $user['id']; ?>
-               
                         <?php if($user['name']) { ?>
-                            (<?= $user['name']; ?>) 
+                           <small> <?= $user['name']; ?> </small>
+                        <?php } else { ?>
+                            
                         <?php } ?>
                         </div>
                     </div>    

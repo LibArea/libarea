@@ -9,6 +9,8 @@ class FlowModel extends \MainModel
     {
         $q = XD::select('*')->from(['flow_log']);
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['flow_user_id'])
+                ->where(['flow_action_id'], '!=', 3) // 3 - up post
+                ->and(['flow_action_id'], '!=', 4)   // 4 - up comment
                 ->orderBy(['flow_id'])->desc()->limit(15);
 
         $result = $query->getSelect();
@@ -24,7 +26,8 @@ class FlowModel extends \MainModel
             ['flow_content'], ',', 
             ['flow_user_id'], ',',
             ['flow_pubdate'], ',', 
-            ['flow_url'], ',', 
+            ['flow_url'], ',',  
+            ['flow_target_id'], ',',
             ['flow_about'], ',',
             ['flow_space_id'], ',', 
             ['flow_tl'], ',',
@@ -36,6 +39,7 @@ class FlowModel extends \MainModel
             $data['flow_user_id'], 
             $data['flow_pubdate'], 
             $data['flow_url'], 
+            $data['flow_target_id'], 
             $data['flow_about'], 
             $data['flow_space_id'], 
             $data['flow_tl'], 

@@ -72,12 +72,12 @@ class FlowController extends \MainController
             'flow_content'      => $chat_content,
             'flow_user_id'      => $user_id,
             'flow_pubdate'      => date("Y-m-d H:i:s"),
-            'flow_url'          => '',
+            'flow_url'          => 0,
+            'flow_target_id'    => 0,
             'flow_about'        => lang('add_chat'),
-            'flow_space_id'     => '',
+            'flow_space_id'     => 0,
             'flow_tl'           => 0,
             'flow_ip'           => $flow_ip, 
-             
         ];
         FlowModel::FlowAdd($data_flow);
         

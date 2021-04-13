@@ -78,13 +78,14 @@ class CommentController extends \MainController
          
         // Добавим в чат и поток
         $data_flow = [
-            'flow_action_id'    => 4, // комментарий
+            'flow_action_id'    => 2, // add комментарий
             'flow_content'      => $comment, // не фильтруем
             'flow_user_id'      => $my_id,
             'flow_pubdate'      => date("Y-m-d H:i:s"),
             'flow_url'          => $return_url . '#comm_' . $last_id,
+            'flow_target_id'    => $last_id,
             'flow_about'        => lang('add_comment'),            
-            'flow_space_id'     => '',
+            'flow_space_id'     => 0,
             'flow_tl'           => 0,
             'flow_ip'           => $ip, 
         ];

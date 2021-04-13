@@ -12,7 +12,8 @@ class UserController extends \MainController
     // Все пользователи
     function index()
     {
-        $users = UserModel::getUsersAll();
+        $uid  = Base::getUid();
+        $users = UserModel::getUsersAll($uid['id']);
         
         $result = Array();
         foreach($users as $ind => $row){
@@ -26,7 +27,6 @@ class UserController extends \MainController
          
         } 
         
-        $uid  = Base::getUid();
         $data = [
             'h1'            => lang('Users'),
             'title'         => lang('Users') . ' | ' . $GLOBALS['conf']['sitename'],
