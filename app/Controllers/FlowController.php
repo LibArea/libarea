@@ -18,8 +18,19 @@ class FlowController extends \MainController
         $account    = \Request::getSession('account');
         $user_id    = $account ? $account['user_id'] : 0;
 
-        $flows      = FlowModel::getFlowAll();
+        $uid  = Base::getUid();
+        $data = [
+            'h1'            => lang('Flow'),
+            'title'         => lang('Flow'). ' | ' . $GLOBALS['conf']['sitename'],
+            'description'   => 'Лента потока, активности на сайте ' . $GLOBALS['conf']['sitename'],
+        ];
 
+        return view("flow/index", ['data' => $data, 'uid' => $uid]);
+    }
+    public function contentChat() {
+        
+        $flows      = FlowModel::getFlowAll();
+        
         $result = Array();
         foreach($flows as $ind => $row){
              
@@ -32,17 +43,13 @@ class FlowController extends \MainController
             $result[$ind]           = $row;
          
         } 
-
+        
         $uid  = Base::getUid();
-        $data = [
-            'h1'            => lang('Flow'),
-            'title'         => lang('Flow'). ' | ' . $GLOBALS['conf']['sitename'],
-            'description'   => 'Лента потока, активности на сайте ' . $GLOBALS['conf']['sitename'],
-        ];
-
-        return view("flow/index", ['data' => $data, 'uid' => $uid, 'flows' => $result]);
+        
+        return view("flow/content", ['uid' => $uid, 'flows' => $result]);
+        
     }
-
+    
     // Добавим чат
     public function chatAdd() 
     {
@@ -59,20 +66,24 @@ class FlowController extends \MainController
             return true;
         }
         
-        $data = [
-            'flow_action_id'    => 5,
+        // Добавим в чат и в поток
+        $data_flow = [
+            'flow_action_id'    => 5, // чат
             'flow_content'      => $chat_content,
             'flow_user_id'      => $user_id,
-            'flow_ip'           => $flow_ip, 
             'flow_pubdate'      => date("Y-m-d H:i:s"),
+            'flow_url'          => '',
+            'flow_about'        => lang('add_chat'),
+            'flow_space_id'     => '',
+            'flow_tl'           => 0,
+            'flow_ip'           => $flow_ip, 
+             
         ];
-        
-        // Записываем пост
-        FlowModel::FlowChatAdd($data);
+        FlowModel::FlowAdd($data_flow);
         
         redirect('/flow');   
     }
-    
+ 
     // Удаляем  / восстанавливаем
     public function deleteFlow()
     {
@@ -84,7 +95,7 @@ class FlowController extends \MainController
         
         $flow_id = \Request::getPostInt('flow_id');
         
-        FlowModel::FlowDelete($post_id);
+        FlowModel::FlowDelete($flow_id);
        
         return true;
     }

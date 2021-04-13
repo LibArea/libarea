@@ -38,6 +38,7 @@ Route::before('Authorization@noAuth')->getGroup();
 	Route::get('/logout')->controller('AuthController@logout');
 
 	Route::type('post')->protect()->get('/flow/add')->controller('FlowController@chatAdd');
+    Route::type('post')->get('/flow/del')->controller('FlowController@deleteFlow');
     
 	// Добавление комментария / удаление 
     Route::type('post')->get('/comments/editform')->controller('CommentController@editform');
@@ -115,6 +116,7 @@ Route::get('/newest/{login}')->controller('PostController@userPosts')->where(['l
 
 // Поток
 Route::get('/flow')->controller('FlowController');
+Route::get('/flow/content')->controller('FlowController@contentChat');
 
 // Все комментарии
 Route::get('/comments')->controller('CommentController');

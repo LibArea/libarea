@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\Models\CommentModel;
 use App\Models\PostModel;
 use App\Models\VotesCommentModel;
+use App\Models\FlowModel;
 use Hleb\Constructor\Handlers\Request;
 use Base;
 use Parsedown;
@@ -74,6 +75,20 @@ class CommentController extends \MainController
         
         // Записываем коммент
         $last_id = CommentModel::commentAdd($post_id, $ip, $comm_id, $comment, $my_id);
+         
+        // Добавим в чат и поток
+        $data_flow = [
+            'flow_action_id'    => 4, // комментарий
+            'flow_content'      => $comment, // не фильтруем
+            'flow_user_id'      => $my_id,
+            'flow_pubdate'      => date("Y-m-d H:i:s"),
+            'flow_url'          => $return_url . '#comm_' . $last_id,
+            'flow_about'        => lang('add_comment'),            
+            'flow_space_id'     => '',
+            'flow_tl'           => 0,
+            'flow_ip'           => $ip, 
+        ];
+        FlowModel::FlowAdd($data_flow);        
          
         // Пересчитываем количество комментариев для поста + 1
         PostModel::getNumComments($post_id);

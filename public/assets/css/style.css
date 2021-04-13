@@ -82,7 +82,7 @@ main {
 .profiles, .post, .w-100 {
   grid-column-start: 2;
   grid-column-end: 5;
-  padding: 0.4rem 0.5rem;
+  padding: 0 0.1rem 0 0;
 }
 .left-ots {
   margin-left: 0.5rem;
@@ -624,7 +624,7 @@ h1.space a {
    display: block;
    margin: 0 0 5px 10px;
 }
-a.space-u {
+a.space-u, .space a.space-u {
   color: var(--color-gray-1);
   font-size: 10pt;
   text-decoration: none;

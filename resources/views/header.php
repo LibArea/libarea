@@ -14,7 +14,11 @@
         <link rel="stylesheet" href="/assets/css/style.css">
         <script src="/assets/js/jquery.min.js"></script>
         <link rel="icon" href="/favicon.ico">
-     
+        
+        <?php if(Request::getUri() == '/flow') { ?>
+            <script src="/assets/js/flow.js"></script>
+            <link rel="stylesheet" href="/assets/css/flow.css">
+        <?php } ?>
     </head>
 <body class="bd<?php if(Request::getCookie('dayNight') == 'dark') {?> dark<?php } ?><?php if(Request::getCookie('menuS') == 'menuno') {?> menuno<?php } ?>">
 <header class="site-header">  

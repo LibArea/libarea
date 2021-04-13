@@ -79,7 +79,19 @@ $(function(){
             location.reload(); 
         });
     });
-
+    
+    // Удаляем поток
+    $(document).on('click', '.delflow', function() {
+        var flow_id = $(this).data('flow');
+        $.ajax({
+            url: '/flow/del',
+            type: 'POST',
+            data: {flow_id: flow_id},
+        }).done(function(data) {
+            location.reload(); 
+        });
+    });
+    
     // Парсинг title с сайта для > TL1
     $(document).on('click', '#graburl', function(e) {    
         const uri = document.getElementById('link').value;

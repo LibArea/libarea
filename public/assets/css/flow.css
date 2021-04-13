@@ -12,6 +12,69 @@ textarea {
 .add-flow-butt {
   margin: 10px;
 }
+.flow-telo {
+  margin: 0 0 10px 0;
+  max-width: 650px;
+}
+aside#sidebar {
+  margin: 0 20px 0 0; 
+}
+.avatar {
+  vertical-align: middle;
+}
+.flow h1 {
+  margin: 0 0 10px 0;
+}
+.md-icon.comment {
+  margin: 7px 0 0 0; 
+  stroke: #07c;
+  width: 28px;
+  height: 28px;
+}
+.flow-comment .box {
+  margin: 6px 0 10px 0; 
+  background-color: #e1ecf4;
+  padding: 3px 10px 3px 10px;
+  color: #39739d;
+  font-size: 14px;
+  display: inline-block;
+}
+.flow-comment a {
+  color: #39739d;
+}
+.flow-telo.dell{
+ display: none;
+ background-color: rgb(246, 196, 184);
+ padding: 2px 10px 0 10px;
+}
+.flow-telo.dell.block{
+ display: block;
+}
+#content {
+  height:500px; 
+  overflow: auto; 
+}
+#content::-webkit-scrollbar {
+  width: 10px;
+}
+
+#content::-webkit-scrollbar-track {
+  -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
+  background-color: #f9f9fd;
+}
+
+#content::-webkit-scrollbar-thumb {
+  background-color: #f2bf93;
+  background-image: -webkit-linear-gradient(45deg,rgba(255, 255, 255, .25) 25%,
+                    transparent 25%,
+                    transparent 50%,
+                    rgba(255, 255, 255, .25) 50%,
+                    rgba(255, 255, 255, .25) 75%,
+                    transparent 75%,
+                    transparent);
+}
+
+
 @media (max-width: 720px){
  
 }
