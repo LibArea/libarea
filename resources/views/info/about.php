@@ -10,7 +10,7 @@
                 <a title="<?= lang('Info'); ?>" href="/info"><?= lang('Info'); ?></a>
             </li>
         </ul>
-        <h1>О нас</h1>
+        <h1><?= $data['h1']; ?></h1>
         Средний размер файла и «вес» веб-сайтов стали немного смешными. В апреле 2016 года было отмечено, что средняя страница теперь <a rel="nofollow noreferrer" target="_blank" href="https://mobiforge.com/research-analysis/the-web-is-doom">больше, чем в игре DOOM.</a> 
         <br><br>
         Это не дело! 

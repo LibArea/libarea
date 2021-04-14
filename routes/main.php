@@ -95,9 +95,10 @@ Route::get('/info/stats')->controller('InfoController@stats');
 Route::get('/info/rules')->controller('InfoController@rules');
 Route::get('/info/about')->controller('InfoController@about');
 Route::get('/info/privacy')->controller('InfoController@privacy');
-Route::get('/info/trust-level')->controller('InfoController@trustlevel');
+Route::get('/info/trust-level')->controller('InfoController@trustLevel');
 Route::get('/info/restriction')->controller('InfoController@restriction');
-Route::get('/info/markdown')->controller('InfoController@markdown');
+Route::get('/info/markdown')->controller('InfoController@markdown'); 
+Route::get('/info/initial-setup')->controller('InfoController@initialSetup');
 
 // Покажем пост в ленте
 Route::type('post')->get('/post/shown')->controller('PostController@shownPost');

@@ -134,44 +134,34 @@ h3.suggested-topics-message a:hover {color: #f56400;}
 .img-top-user {vertical-align: middle;width:32px;margin-right: 5px;border-radius: 3px;}
 .img-blog {margin-top: 12px;}
 
-
 .graph .labels.x-labels {
   text-anchor: middle;
 }
-
 .graph .labels.y-labels {
   text-anchor: end;
 }
-
-
 .graph {
   height: 500px;
   width: 800px;
 }
-
 .graph .grid {
   stroke: #ccc;
   stroke-dasharray: 0;
   stroke-width: 1;
 }
-
 .labels {
   font-size: 13px;
 }
-
 .label-title {
   font-weight: bold;
   text-transform: uppercase;
   font-size: 12px;
   fill: black;
 }
-
 .data {
   fill: red;
   stroke-width: 1; 
 }
-
-
 
 @media (max-width: 720px){
 .prof-txt{white-space: nowrap;    overflow: hidden; padding: 5px;    text-overflow: ellipsis;}	

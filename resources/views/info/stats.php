@@ -12,7 +12,7 @@
     </ul>
     
     <center>
-        <h1>Статистика</h1>
+        <h1><?= $data['h1']; ?></h1>
         <div class="canvas-telo">
             <canvas id="canvas"> </canvas>
         </div>

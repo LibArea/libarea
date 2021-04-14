@@ -71,7 +71,6 @@ class VotesCommController extends \MainController
                 'flow_space_id'     => 0,
                 'flow_tl'           => 0,
                 'flow_ip'           => $ip, 
-                 
             ];
             FlowModel::FlowAdd($data_flow);
  

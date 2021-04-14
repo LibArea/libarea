@@ -7,7 +7,6 @@ class CommentModel extends \MainModel
     // Все комментарии
     public static function getCommentsAll()
     {
- 
         $q = XD::select('*')->from(['comments']);
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['comment_user_id'])
                 ->leftJoin(['posts'])->on(['comment_post_id'], '=', ['post_id'])->orderBy(['comment_id'])->desc();
@@ -20,20 +19,17 @@ class CommentModel extends \MainModel
     // Получаем комментарии в посте
     public static function getCommentsPost($post_id)
     {
-        
         $q = XD::select('*')->from(['comments']);
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['comment_user_id'])->where(['comment_post_id'], '=', $post_id);
 
         $result = $query->getSelect();
 
         return $result;
-    
     }
 
     // Страница комментариев участника
     public static function getUsersComments($slug)
     {
-        
         $q = XD::select('*')->from(['comments']);
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['comment_user_id'])
                 ->leftJoin(['posts'])->on(['comment_post_id'], '=', ['post_id'])
@@ -53,7 +49,6 @@ class CommentModel extends \MainModel
     // $my_id   - id автора ответа
     public static function commentAdd($post_id, $ip, $comm_id, $comment, $my_id)
     { 
-
         XD::insertInto(['comments'], '(', ['comment_post_id'], ',', ['comment_ip'], ',', ['comment_on'], ',', ['comment_content'], ',', ['comment_user_id'], ')')->values( '(', XD::setList([$post_id, $ip, $comm_id, $comment, $my_id]), ')' )->run();
        
        // id последнего комментария
@@ -64,29 +59,28 @@ class CommentModel extends \MainModel
        XD::update(['comments'])->set(['comment_after'], '=', $otv)->where(['comment_id'], '=', $comm_id)->run();
 
        return $last_id; 
-
     }
     
     // Последние 5 комментариев
-    public static function latestComments() 
+    public static function latestComments($user_id) 
     {
         $q = XD::select('*')->from(['comments']);
         $query = $q->leftJoin(['posts'])->on(['post_id'], '=', ['comment_post_id'])
                  ->leftJoin(['users'])->on(['id'], '=', ['comment_user_id'])
-                 ->leftJoin(['space'])->on(['post_space_id'], '=', ['space_id'])
-                 ->where(['comment_del'], '=', 0)
-                 ->orderBy(['comment_id'])->desc()->limit(5);
-
-
-        $result = $query->getSelect();
-
-        return $result;   
+                 ->leftJoin(['space'])->on(['post_space_id'], '=', ['space_id']);
+                 
+                if($user_id){ 
+                    $result = $query->where(['comment_del'], '=', 0)->and(['comment_user_id'], '!=', $user_id);
+                } else {
+                    $result = $query->where(['comment_del'], '=', 0);
+                } 
+        
+        return $result->orderBy(['comment_id'])->desc()->limit(5)->getSelect();
     }
     
     // Удаление комментария
     public static function CommentsDel($id)
     {
- 
          XD::update(['comments'])->set(['comment_del'], '=', 1)
         ->where(['comment_id'], '=', $id)->run();
  
@@ -99,7 +93,6 @@ class CommentModel extends \MainModel
        return XD::select('*')->from(['comments'])->where(['comment_id'], '=', $id)->getSelectOne();
     }
     
-    
     // Редактируем комментарий
     public static function CommentEdit($comm_id, $comment)
     {
@@ -111,7 +104,6 @@ class CommentModel extends \MainModel
     // Частота размещения комментариев участника 
     public static function getCommentSpeed($uid)
     {
-       
         $post = XD::select(['comment_id', 'comment_user_id', 'comment_date'])->from(['comments'])
             ->where(['comment_user_id'], '=', $uid)
             ->orderBy(['comment_id'])->desc()->getSelectOne();
@@ -123,7 +115,6 @@ class CommentModel extends \MainModel
         $result     = $now->diff($happy_day); 
         
         return $result;
-    
    }
     
 }

@@ -58,7 +58,7 @@ class PostController extends \MainController
         }  
  
         // Последние комментарии и отписанные пространства
-        $latest_comments = CommentModel::latestComments();
+        $latest_comments = CommentModel::latestComments($user_id);
         $space_hide      = SpaceModel::getSpaceUser($user_id);
         
         $result_comm = Array();
