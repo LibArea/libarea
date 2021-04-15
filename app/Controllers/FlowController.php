@@ -25,7 +25,7 @@ class FlowController extends \MainController
             'description'   => 'Лента потока, активности на сайте ' . $GLOBALS['conf']['sitename'],
         ];
 
-        return view("flow/index", ['data' => $data, 'uid' => $uid]);
+        return view(PR_VIEW_DIR . '/flow/index', ['data' => $data, 'uid' => $uid]);
     }
     public function contentChat() {
         
@@ -46,7 +46,7 @@ class FlowController extends \MainController
         
         $uid  = Base::getUid();
         
-        return view("flow/content", ['uid' => $uid, 'flows' => $result]);
+        return view(PR_VIEW_DIR . '/flow/content', ['uid' => $uid, 'flows' => $result]);
         
     }
     

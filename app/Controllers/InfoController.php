@@ -16,7 +16,7 @@ class InfoController extends \MainController
             'description'   => lang('info-desc') . ' ' . $GLOBALS['conf']['sitename'],
         ];
         
-        return view("info/index", ['data' => $data, 'uid' => $uid]);
+        return view(PR_VIEW_DIR . '/info/index', ['data' => $data, 'uid' => $uid]);
     }
 
     public function stats()
@@ -42,7 +42,7 @@ class InfoController extends \MainController
             'vote_post_num' => $vote_post_num,
         ];
 
-        return view('info/stats', ['data' => $data, 'uid' => $uid]);
+        return view(PR_VIEW_DIR . '/info/stats', ['data' => $data, 'uid' => $uid]);
 	}
 
 	public function rules()
@@ -54,7 +54,7 @@ class InfoController extends \MainController
             'description'   => lang('rules-desc') . ' ' . $GLOBALS['conf']['sitename'],
         ];
 
-        return view('info/rules', ['data' => $data, 'uid' => $uid]);
+        return view(PR_VIEW_DIR . '/info/rules', ['data' => $data, 'uid' => $uid]);
 	}
 
 	public function about()
@@ -66,7 +66,7 @@ class InfoController extends \MainController
             'description'   => lang('about-desc') . ' ' . $GLOBALS['conf']['sitename'],
         ];
 
-        return view('info/about', ['data' => $data, 'uid' => $uid]);
+        return view(PR_VIEW_DIR . '/info/about', ['data' => $data, 'uid' => $uid]);
 	}
 
     public function privacy()
@@ -78,7 +78,7 @@ class InfoController extends \MainController
             'description'   => lang('privacy-desc') . ' ' . $GLOBALS['conf']['sitename'],
         ];
 
-        return view('info/privacy', ['data' => $data, 'uid' => $uid]);
+        return view(PR_VIEW_DIR . '/info/privacy', ['data' => $data, 'uid' => $uid]);
 	}  
     
     public function trustLevel()
@@ -90,7 +90,7 @@ class InfoController extends \MainController
             'description'   => lang('tl-desc') . ' ' . $GLOBALS['conf']['sitename'],
         ];
 
-        return view('info/trust-level', ['data' => $data, 'uid' => $uid]);
+        return view(PR_VIEW_DIR . '/info/trust-level', ['data' => $data, 'uid' => $uid]);
 	} 
     
     public function restriction()
@@ -102,7 +102,7 @@ class InfoController extends \MainController
             'description'   => lang('Restriction') . ' ' . $GLOBALS['conf']['sitename'],
         ];
 
-        return view('info/restriction', ['data' => $data, 'uid' => $uid]);
+        return view(PR_VIEW_DIR . '/info/restriction', ['data' => $data, 'uid' => $uid]);
 	} 
 
     public function markdown()
@@ -114,7 +114,7 @@ class InfoController extends \MainController
             'description'   => lang('markdown-desc') . ' ' . $GLOBALS['conf']['sitename'],
         ];
 
-        return view('info/markdown', ['data' => $data, 'uid' => $uid]);
+        return view(PR_VIEW_DIR . '/info/markdown', ['data' => $data, 'uid' => $uid]);
 	}  
 
     public function initialSetup()
@@ -126,6 +126,6 @@ class InfoController extends \MainController
             'description'   => lang('init-setip-desc') . ' | ' . $GLOBALS['conf']['sitename'],
         ];
 
-        return view('info/initial-setup', ['data' => $data, 'uid' => $uid]);
+        return view(PR_VIEW_DIR . '/info/initial-setup', ['data' => $data, 'uid' => $uid]);
 	}    
 }

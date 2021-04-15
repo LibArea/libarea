@@ -42,7 +42,7 @@ class AdminController extends \MainController
             'users'        => $result,
         ];
 
-        return view("admin/index", ['data' => $data, 'uid' => $uid, 'alluser' => $result]);
+        return view(PR_VIEW_DIR . '/admin/index', ['data' => $data, 'uid' => $uid, 'alluser' => $result]);
 	}
     
     public function banUser() 
@@ -88,7 +88,7 @@ class AdminController extends \MainController
             'description' => 'Все удаленные комментарии на сайте в порядке очередности. ' . $GLOBALS['conf']['sitename'],
         ]; 
  
-        return view("admin/comm_del", ['data' => $data, 'uid' => $uid, 'comments' => $result]);
+        return view(PR_VIEW_DIR . '/admin/comm_del', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
     }
      
     // Удаление комментария
@@ -132,7 +132,7 @@ class AdminController extends \MainController
             'description' => 'Дерево инвайтов. ' . $GLOBALS['conf']['sitename'],
         ]; 
  
-        return view("admin/invitations", ['data' => $data, 'uid' => $uid, 'invitations' => $result]);
+        return view(PR_VIEW_DIR . '/admin/invitations', ['data' => $data, 'uid' => $uid, 'invitations' => $result]);
     }
     
     // Для дерева инвайтов

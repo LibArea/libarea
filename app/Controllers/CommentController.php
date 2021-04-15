@@ -43,7 +43,7 @@ class CommentController extends \MainController
             'description' => 'Все комментарии на сайте в порядке очередности. ' . $GLOBALS['conf']['sitename'],
         ]; 
  
-        return view("comment/all", ['data' => $data, 'uid' => $uid, 'comments' => $result]);
+        return view(PR_VIEW_DIR . '/comment/all', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
     }
 
     // Добавление комментария
@@ -74,8 +74,8 @@ class CommentController extends \MainController
         // Ограничим частоту добавления
         // Добавить условие TL
         $num_comm =  CommentModel::getCommentSpeed($my_id);
-        if(count($num_comm) > 15) {
-            Base::addMsg('Вы исчерпали лимит комментариев на сегодня', 'error');
+        if(count($num_comm) > 35) {
+            Base::addMsg('Вы исчерпали лимит комментариев (35) на сегодня', 'error');
             redirect('/');
         }
         
@@ -168,7 +168,7 @@ class CommentController extends \MainController
             'comment_content'   => $comm['comment_content'],
         ]; 
         
-        return view("comment/editform", ['data' => $data]);
+        return view(PR_VIEW_DIR . '/comment/edit-form', ['data' => $data]);
     }
 
     // Покажем форму ответа
@@ -190,7 +190,7 @@ class CommentController extends \MainController
             'user_id'     => $user_id,
         ]; 
         
-        return view("comment/addform", ['data' => $data]);
+        return view(PR_VIEW_DIR . '/comment/add-form', ['data' => $data]);
     }
 
     // Комментарии участника
@@ -231,7 +231,7 @@ class CommentController extends \MainController
             'description' => 'Страница комментариев учасника ' . $login . ' на сайте ' . $GLOBALS['conf']['sitename'],
         ]; 
         
-        return view("comment/comm-user", ['data' => $data, 'uid' => $uid, 'comments' => $result]);
+        return view(PR_VIEW_DIR . '/comment/comm-user', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
     }
 
     // Удаление комментария

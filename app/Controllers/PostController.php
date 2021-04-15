@@ -91,7 +91,7 @@ class PostController extends \MainController
             'pNum'             => $page,
         ];
 
-        return view("home", ['data' => $data, 'uid' => $uid, 'posts' => $result]);
+        return view(PR_VIEW_DIR . '/home', ['data' => $data, 'uid' => $uid, 'posts' => $result]);
     }
 
     // Посты с начальными не нулевыми голосами, с голосованием, например, от 5
@@ -144,11 +144,11 @@ class PostController extends \MainController
             'pagesCount'       => 0,
         ];
 
-        return view("home", ['data' => $data, 'uid' => $uid, 'posts' => $result]);
+        return view(PR_VIEW_DIR . '/home', ['data' => $data, 'uid' => $uid, 'posts' => $result]);
     }
 
     // Полный пост
-    public function view()
+    public function viewPost()
     {
         if(!empty($_SESSION['account']['user_id'])) {
             $uid   = $_SESSION['account']['user_id'];
@@ -236,7 +236,7 @@ class PostController extends \MainController
             'description'  => 'Тут надо сделать описание. ' . $GLOBALS['conf']['sitename'],
         ]; 
         
-        return view("post/view", ['data' => $data, 'post' => $post, 'comms' => $comms,  'uid' => $uid]);
+        return view(PR_VIEW_DIR . '/post/view', ['data' => $data, 'post' => $post, 'comms' => $comms,  'uid' => $uid]);
     }
     
     // Для дерева комментариев
@@ -289,7 +289,7 @@ class PostController extends \MainController
             'description'   => 'Посты участника ' . $login . ' с сообществе ' . $GLOBALS['conf']['sitename'],
         ]; 
         
-        return view("post/post-user", ['data' => $data, 'uid' => $uid, 'posts' => $result]);
+        return view(PR_VIEW_DIR . '/post/post-user', ['data' => $data, 'uid' => $uid, 'posts' => $result]);
     }
     
     // Форма добавление поста
@@ -307,7 +307,7 @@ class PostController extends \MainController
             'description'   => 'Страница добавления поста',
         ];  
        
-        return view("post/add", ['data' => $data, 'uid' => $uid, 'space' => $space]);
+        return view(PR_VIEW_DIR . '/post/add', ['data' => $data, 'uid' => $uid, 'space' => $space]);
     }
     
     // Добавление поста
@@ -336,9 +336,9 @@ class PostController extends \MainController
         }
         
         // Проверяем длину тела
-        if (Base::getStrlen($post_content) < 6 || Base::getStrlen($post_content) > 2500)
+        if (Base::getStrlen($post_content) < 6 || Base::getStrlen($post_content) > 3500)
         {
-            Base::addMsg('Длина поста должна быть от 6 до 2500 знаков', 'error');
+            Base::addMsg('Длина поста должна быть от 6 до 3500 знаков', 'error');
             redirect('/post/add');
             return true;
         }
@@ -423,7 +423,7 @@ class PostController extends \MainController
             'description'   => 'Изменение поста на ' . $GLOBALS['conf']['sitename'],
         ];
         
-        return view("post/edit", ['data' => $data, 'uid' => $uid, 'post' => $post, 'space' => $space]);
+        return view(PR_VIEW_DIR . '/post/edit', ['data' => $data, 'uid' => $uid, 'post' => $post, 'space' => $space]);
     }
     
     // Изменяем пост
@@ -462,10 +462,10 @@ class PostController extends \MainController
         }
         
         // Проверяем длину тела
-        if (Base::getStrlen($post_content) < 6 || Base::getStrlen($post_content) > 2500)
+        if (Base::getStrlen($post_content) < 6 || Base::getStrlen($post_content) > 3500)
         {
             Base::addMsg('Длина заголовка должна быть от 6 до 2520 знаков', 'error');
-            redirect('/post/edit' .$post_id);
+            redirect('/post/edit/' .$post_id);
             return true;
         }
         
@@ -567,7 +567,7 @@ class PostController extends \MainController
         $Parsedown->setSafeMode(true); // безопасность
         $post = $Parsedown->text($post['post_content']);
 
-        return view("post/postcode", ['post_content' => $post]);
+        return view(PR_VIEW_DIR . '/post/postcode', ['post_content' => $post]);
     }
   
 }

@@ -1,7 +1,7 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 <main class="w-100">
     <div class="left-ots">
-        <a class="right" href="/u/<?php echo $data['login']; ?>">Посмотреть профиль</a>
+        <a class="right" href="/u/<?= $uid['login']; ?>">Посмотреть профиль</a>
          
         <ul class="nav-tabs">
             <li class="active"><span>Настройка профиля</span></li>
@@ -29,7 +29,7 @@
                
                 <div class="boxline">
                     <label for="about">О себе</label>
-                    <textarea type="text" class="form-about" name="about" id="about"><?php echo $data['about']; ?></textarea>
+                    <textarea type="text" rows="4" class="form-about" name="about" id="about"><?php echo $data['about']; ?></textarea>
                 </div>
                
                 <div class="boxline">

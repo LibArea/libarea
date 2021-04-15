@@ -1,5 +1,5 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<?php include TEMPLATE_DIR . '/menu.php'; ?>
+<?php include TEMPLATE_DIR . '/_block/left-menu.php'; ?>
 <main class="info">
     <div class="left-ots max-width">
         <ul class="breadcrumb">
@@ -36,6 +36,5 @@
         Читать далее: <a href="/info">Информация</a>
     </div>
 </main>
-<?php include 'menu.php'; ?>
-<?php include TEMPLATE_DIR . '/footer.php'; ?>
- 
+<?php include TEMPLATE_DIR . '/_block/info-menu.php'; ?>
+<?php include TEMPLATE_DIR . '/footer.php'; ?> 

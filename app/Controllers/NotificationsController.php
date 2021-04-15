@@ -29,7 +29,7 @@ class NotificationsController extends \MainController
             'description' => 'Страница уведомления',
         ];
 
-        return view("notification/index", ['data' => $data, 'uid' => $uid, 'list' => $result]);
+        return view(PR_VIEW_DIR . '/notification/index', ['data' => $data, 'uid' => $uid, 'list' => $result]);
     }
   
     // Изменяем флаг подписки прочитан или нет (переход по ссылке)

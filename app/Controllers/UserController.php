@@ -33,7 +33,7 @@ class UserController extends \MainController
             'description'   => 'Список всех участников сортированных по дате регистрации сайте ' . $GLOBALS['conf']['sitename'],
         ];
 
-        return view('/user/all', ['data' => $data, 'uid' => $uid, 'users' => $result]);
+        return view(PR_VIEW_DIR . '/user/all', ['data' => $data, 'uid' => $uid, 'users' => $result]);
     }
 
     // Страница участника
@@ -66,7 +66,7 @@ class UserController extends \MainController
           'fav_num_user'    => UserModel::getUsersFavoriteNum($user['id']),
         ];
 
-        return view('/user/profile', ['data' => $data, 'uid' => $uid, 'user' => $user, 'post' => $post]);
+        return view(PR_VIEW_DIR . '/user/profile', ['data' => $data, 'uid' => $uid, 'user' => $user, 'post' => $post]);
     }  
 
     // Страница настройки профиля
@@ -91,7 +91,7 @@ class UserController extends \MainController
           'email'       => $user['email'],
         ];
 
-        return view('/user/setting', ['data' => $data, 'uid' => $uid]);
+        return view(PR_VIEW_DIR . '/user/setting', ['data' => $data, 'uid' => $uid]);
     }
     
     // Изменение профиля
@@ -118,7 +118,7 @@ class UserController extends \MainController
     
         UserModel::editProfile($login, $name, $about);
         
-        redirect('/users/setting');
+        redirect(PR_VIEW_DIR . '/users/setting');
     }
     
     // Форма загрузки аватарки
@@ -140,7 +140,7 @@ class UserController extends \MainController
             'avatar' => $avatar,
         ];
 
-        return view('/user/setting-avatar', ['data' => $data, 'uid' => $uid]);
+        return view(PR_VIEW_DIR . '/user/setting-avatar', ['data' => $data, 'uid' => $uid]);
     }
     
     // Форма изменение пароля
@@ -155,7 +155,7 @@ class UserController extends \MainController
             'password3'   => '',
         ];
 
-        return view('/user/setting-security', ['data' => $data, 'uid' => $uid]);
+        return view(PR_VIEW_DIR . '/user/setting-security', ['data' => $data, 'uid' => $uid]);
     }
     
     // Изменение аватарки
@@ -298,7 +298,7 @@ class UserController extends \MainController
             'description'   => 'Избранные посты участника ' . $login . ' в сообществе ' . $GLOBALS['conf']['sitename'],
         ]; 
         
-        return view("user/favorite", ['data' => $data, 'uid' => $uid, 'favorite' => $result]);   
+        return view(PR_VIEW_DIR . '/user/favorite', ['data' => $data, 'uid' => $uid, 'favorite' => $result]);   
     }
     
     /////////// СИСТЕМА ИНВАЙТОВ ///////////
@@ -313,7 +313,7 @@ class UserController extends \MainController
             'description'   => 'Страница инвайтов на сайте ' . $GLOBALS['conf']['sitename'],
         ];
 
-        return view('/user/invite', ['data' => $data, 'uid' => $uid]);    
+        return view(PR_VIEW_DIR . '/user/invite', ['data' => $data, 'uid' => $uid]);    
     }
     
     // Отправка запроса инвайта
@@ -340,7 +340,7 @@ class UserController extends \MainController
           'description' => 'Страница личных инвайтов', 
         ];
 
-        return view('/user/invitation', ['data' => $data, 'uid' => $uid, 'user' => $user,  'result' => $result]);  
+        return view(PR_VIEW_DIR . '/user/invitation', ['data' => $data, 'uid' => $uid, 'user' => $user,  'result' => $result]);  
     }
     
     // Создать инвайт

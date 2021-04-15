@@ -88,7 +88,7 @@ Route::endGroup();
 
 // Посты и главная страница
 Route::get('/top')->controller('PostController@topPost');
-Route::get('/posts/{slug}')->controller('PostController@view')->where(['slug' => '[A-Za-z0-9-]+']);
+Route::get('/posts/{slug}')->controller('PostController@viewPost')->where(['slug' => '[A-Za-z0-9-]+']);
 
 // Правила
 Route::get('/info')->controller('InfoController');
@@ -104,17 +104,12 @@ Route::get('/info/initial-setup')->controller('InfoController@initialSetup');
 // Покажем пост в ленте
 Route::type('post')->get('/post/shown')->controller('PostController@shownPost');
 
-// Участники
+// Участники, авторизация, посты и комментарии, закладки
 Route::get('/users')->controller('UserController');
 Route::get('/u/{login}')->controller('UserController@profile')->where(['login' => '[A-Za-z0-9]+']);
-
-// Избранное участника
-Route::get('/favorite/{login}')->controller('UserController@userFavorite')->where(['login' => '[A-Za-z0-9]+']);
-
-// Страница комментариев участника
-Route::get('/threads/{login}')->controller('CommentController@userComments')->where(['login' => '[A-Za-z0-9]+']);
-// Страница постов участника
-Route::get('/newest/{login}')->controller('PostController@userPosts')->where(['login' => '[A-Za-z0-9]+']);
+Route::get('/u/{login}/posts')->controller('PostController@userPosts')->where(['login' => '[A-Za-z0-9]+']);
+Route::get('/u/{login}/comments')->controller('CommentController@userComments')->where(['login' => '[A-Za-z0-9]+']);
+Route::get('/u/{login}/favorite')->controller('UserController@userFavorite')->where(['login' => '[A-Za-z0-9]+']);
 
 // Поток
 Route::get('/flow')->controller('FlowController');

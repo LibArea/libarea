@@ -1,7 +1,7 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 <main class="w-100">
     <div class="left-ots">
-        <a class="right" href="/u/<?= $data['login']; ?>">Посмотреть профиль</a>
+        <a class="right" href="/u/<?= $uid['login']; ?>">Посмотреть профиль</a>
         <ul class="nav-tabs">
             <li><a href="/users/setting"><span>Настройка профиля</span></a></li>
             <li><a href="/users/setting/avatar"><span>Аватар</span></a></li>

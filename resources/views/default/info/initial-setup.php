@@ -1,5 +1,5 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<?php include TEMPLATE_DIR . '/menu.php'; ?>
+<?php include TEMPLATE_DIR . '/_block/left-menu.php'; ?>
 <main class="info">
     <div class="left-ots max-width">
         <ul class="breadcrumb">
@@ -43,17 +43,20 @@
         <br><br>
         <b>Как мне изменить текст на страницах с информацией?</b><br>
         Все эти страницы используют обычных html, и файлы вы можете найти в папке:
-        <pre><code>resources/views/info/*</code></pre>
+        <pre><code>resources/views/default/info/*</code></pre>
         В папке:
-        <pre><code>resources/views/*</code></pre>
-        как вы уже поняли располагаются шаблоны. Смелей меняйте их.
+        <pre><code>resources/views/default/*</code></pre>
+        как вы уже поняли располагаются шаблоны.
+        <br><br>
+        Если вы хотите изменить шаблон по умолчанию (default) на свой, то для этого достаточно заменить имя дефолтного шаблона в файле <i>start.hleb.php</i>:
+        
+         <pre><code>define( 'PR_VIEW_DIR', 'default' );
+define( 'TEMPLATE_DIR', __DIR__ .'/resources/views/default' );</code></pre>
+        в 2 строчках.
         <br><br>
         Скачайте архив <i>AreaDev с GitHub:</i> <a rel="nofollow noreferrer" target="_blank" href="https://github.com/Toxu-ru/AreaDev">github.com/Toxu-ru/AreaDev</a>
         
     </div>
 </main>
-<?php include 'menu.php'; ?>
-<?php include TEMPLATE_DIR . '/footer.php'; ?>
-
-
- 
+<?php include TEMPLATE_DIR . '/_block/info-menu.php'; ?>
+<?php include TEMPLATE_DIR . '/footer.php'; ?> 

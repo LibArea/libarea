@@ -136,13 +136,13 @@
                             </svg>  
                             <?= lang('Messages'); ?>
                         </a>
-                        <a href="/threads/<?= $uid['login']; ?>"> 
+                        <a href="/u/<?= $uid['login']; ?>/comments"> 
                             <svg class="md-icon">
                                 <use xlink:href="/assets/svg/icons.svg#message"></use>
                             </svg> 
                             <?= lang('Comments'); ?> 
                         </a>
-                        <a href="/favorite/<?= $uid['login']; ?>">
+                        <a href="/u/<?= $uid['login']; ?>/favorite">
                             <svg class="md-icon">
                                 <use xlink:href="/assets/svg/icons.svg#bookmark"></use>
                             </svg>  

@@ -22,7 +22,7 @@ class AuthController extends \MainController
             'description'   => 'Страница регистрации на сайте ' . $GLOBALS['conf']['sitename'],
         ];
 
-        return view('/auth/register', ['data' => $data, 'uid' => $uid]);    
+        return view(PR_VIEW_DIR . '/auth/register', ['data' => $data, 'uid' => $uid]);    
     }
     
     
@@ -49,7 +49,7 @@ class AuthController extends \MainController
             'description'   => 'Страница регистрации на сайте ' . $GLOBALS['conf']['sitename'],
         ];
    
-        return view('/auth/register-invate', ['data' => $data, 'uid' => $uid, 'invate' => $invate]);  
+        return view(PR_VIEW_DIR . '/auth/register-invate', ['data' => $data, 'uid' => $uid, 'invate' => $invate]);  
     }
     
     // Отправка запроса для регистрации
@@ -203,7 +203,7 @@ class AuthController extends \MainController
             'description'   => 'Авторизация на сайте  ' . $GLOBALS['conf']['sitename'],
         ];
 
-        return view('/auth/login', ['data' => $data, 'uid' => $uid]);
+        return view(PR_VIEW_DIR . '/auth/login', ['data' => $data, 'uid' => $uid]);
     }
 
     // Отправка запроса авторизации
@@ -277,7 +277,7 @@ class AuthController extends \MainController
             'description' => 'Страница восстановление пароля на сайте ' . $GLOBALS['conf']['sitename'],
         ];
 
-        return view('/auth/recover', ['data' => $data, 'uid' => $uid]);
+        return view(PR_VIEW_DIR . '/auth/recover', ['data' => $data, 'uid' => $uid]);
     }
 
     public function sendRecover () 
@@ -350,7 +350,7 @@ class AuthController extends \MainController
             'user_id'       => $user_id['activate_user_id'],
         ];
         
-        return view('/auth/newrecover', ['data' => $data, 'uid' => $uid]);
+        return view(PR_VIEW_DIR . '/auth/newrecover', ['data' => $data, 'uid' => $uid]);
     }
     
     public function RemindPageNew()

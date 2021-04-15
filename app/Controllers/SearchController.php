@@ -56,7 +56,7 @@ class SearchController extends \MainController
             'h1'            => lang('Search'),
         ];
 
-        return view("search/index", ['data' => $data, 'uid' => $uid, 'result' => $result, 'query' => $query]);
+        return view(PR_VIEW_DIR . '/search/index', ['data' => $data, 'uid' => $uid, 'result' => $result, 'query' => $query]);
     }
     
 }

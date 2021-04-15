@@ -43,7 +43,7 @@
             <?php if($data['post_num_user'] != 0) { ?>
                 <label class="required">Постов:</label>
                 <span class="d">
-                    <a title="Всего постов <?= $user['login']; ?>" href="/newest/<?= $user['login']; ?>">
+                    <a title="Всего постов <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/posts">
                         <?= $data['post_num_user']; ?>
                     </a>
                 </span> <br>
@@ -52,7 +52,7 @@
             <?php if($data['comm_num_user'] != 0) { ?>
                 <label class="required">Комментариев:</label>
                 <span class="d">
-                    <a title="Все комментарии <?= $user['login']; ?>" href="/threads/<?= $user['login']; ?>">
+                    <a title="Все комментарии <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/comments">
                         <?= $data['comm_num_user']; ?>
                     </a>
                 </span>  <br>
@@ -61,7 +61,7 @@
             <?php if($data['fav_num_user'] != 0) { ?>
                 <label class="required">Избранные:</label>
                 <span class="d">
-                    <a title="Избранное <?= $user['login']; ?>" href="/favorite/<?= $user['login']; ?>">
+                    <a title="Избранное <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/favorite">
                         <?= $data['fav_num_user']; ?>
                     </a>
                 </span>  <br>

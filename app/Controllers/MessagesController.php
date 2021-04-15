@@ -78,7 +78,7 @@ class MessagesController extends \MainController
         
         
         
-        return view("messages/index", ['data' => $data, 'uid' => $uid]);
+        return view(PR_VIEW_DIR . '/messages/index', ['data' => $data, 'uid' => $uid]);
 	}
 
 	public function dialog()
@@ -144,7 +144,7 @@ class MessagesController extends \MainController
             'recipient_user' => $recipient_user,
         ];
 
-        return view("messages/dialog", ['data' => $data, 'uid' => $uid]);
+        return view(PR_VIEW_DIR . '/messages/dialog', ['data' => $data, 'uid' => $uid]);
 	}
     
     // отправка сообщения участнику
@@ -197,7 +197,7 @@ class MessagesController extends \MainController
             'recipient_uid'  => $user['id'],
         ];
 
-        return view("messages/useraddmessages", ['data' => $data, 'uid' => $uid]);
+        return view(PR_VIEW_DIR . '/messages/user-add-messages', ['data' => $data, 'uid' => $uid]);
       
     }
     

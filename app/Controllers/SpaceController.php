@@ -24,7 +24,7 @@ class SpaceController extends \MainController
             'description'   => 'Страница всех пространств сайта на ' . $GLOBALS['conf']['sitename'],
         ];
 
-        return view("space/all", ['data' => $data, 'uid' => $uid, 'space' => $space]);
+        return view(PR_VIEW_DIR . '/space/all', ['data' => $data, 'uid' => $uid, 'space' => $space]);
     }
 
     // Посты по пространству
@@ -76,7 +76,7 @@ class SpaceController extends \MainController
             'space_hide' => $space_hide,
         ];
 
-        return view("space/space-posts", ['data' => $data, 'uid' => $uid, 'posts' => $result, 'space_info' => $space, 'tags' => $tags]);
+        return view(PR_VIEW_DIR . '/space/space-posts', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'space_info' => $space, 'tags' => $tags]);
     }
 
     // Форма изменения пространства
@@ -102,7 +102,7 @@ class SpaceController extends \MainController
             'description'   => 'Страница изменения пространства на' . $GLOBALS['conf']['sitename'],
         ]; 
 
-        return view("space/forma-space", ['data' => $data, 'uid' => $uid, 'space' => $space]);
+        return view(PR_VIEW_DIR . '/space/forma-space', ['data' => $data, 'uid' => $uid, 'space' => $space]);
     }
     
     // Изменение пространства
