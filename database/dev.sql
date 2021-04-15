@@ -113,6 +113,7 @@ CREATE TABLE `notification` (
   `recipient_uid` int(11) DEFAULT 0 COMMENT 'Получает ID',
   `action_type` int(4) DEFAULT NULL COMMENT 'Тип оповещения',
   `connection_type` int(11) DEFAULT NULL COMMENT 'Данные источника',
+  `url` varchar(250) DEFAULT NULL COMMENT 'URL источника',
   `add_time` timestamp NOT NULL DEFAULT current_timestamp(),
   `read_flag` tinyint(1) DEFAULT 0 COMMENT 'Состояние прочтения',
   `is_del` tinyint(1) UNSIGNED DEFAULT 0 COMMENT 'Стоит ли удалять'

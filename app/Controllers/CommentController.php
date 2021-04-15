@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\Models\CommentModel;
 use App\Models\PostModel;
 use App\Models\VotesCommentModel;
+use App\Models\NotificationsModel;
 use App\Models\FlowModel;
 use Hleb\Constructor\Handlers\Request;
 use Base;
@@ -71,10 +72,18 @@ class CommentController extends \MainController
         $my_id     = $account['user_id'];
         
         // Ограничим частоту добавления
-        // CommentModel::getCommentSpeed($my_id);
+        // Добавить условие TL
+        $num_comm =  CommentModel::getCommentSpeed($my_id);
+        if(count($num_comm) > 15) {
+            Base::addMsg('Вы исчерпали лимит комментариев на сегодня', 'error');
+            redirect('/');
+        }
         
         // Записываем коммент
         $last_id = CommentModel::commentAdd($post_id, $ip, $comm_id, $comment, $my_id);
+         
+        // Адрес комментария 
+        $url = $return_url . '#comm_' . $last_id; 
          
         // Добавим в чат и поток
         $data_flow = [
@@ -82,7 +91,7 @@ class CommentController extends \MainController
             'flow_content'      => $comment, // не фильтруем
             'flow_user_id'      => $my_id,
             'flow_pubdate'      => date("Y-m-d H:i:s"),
-            'flow_url'          => $return_url . '#comm_' . $last_id,
+            'flow_url'          => $url,
             'flow_target_id'    => $last_id,
             'flow_about'        => lang('add_comment'),            
             'flow_space_id'     => 0,
@@ -93,6 +102,16 @@ class CommentController extends \MainController
          
         // Пересчитываем количество комментариев для поста + 1
         PostModel::getNumComments($post_id);
+        
+        // Оповещение автору комментария если это ответ на комментарий
+        if($comm_id) {
+            // Себе не записываем (перенести в общий, т.к. ничего для себя не пишем в notf)
+            $infcomm = CommentModel::getCommentsOne($comm_id);
+            if($my_id != $infcomm['comment_user_id']) {
+                $type = 2; // Ответ на комментарий        
+                NotificationsModel::send($my_id, $infcomm['comment_user_id'], $type, $last_id, $url, 1);
+            }
+        }
         
         redirect('/' . $return_url . '#comm_' . $last_id); 
     }

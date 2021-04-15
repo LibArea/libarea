@@ -29,13 +29,12 @@ class NotificationsModel extends \MainModel
                 ->and(['read_flag'], '=', 0);  
 
         return  $query->getSelectOne();
-
     }  
 
 
 	// Уведомления
-    // NotificationsModel::send($sender_uid, $recipient_uid, $type, $messages_dialog_id, 1);
-	public static function send($sender_uid, $recipient_uid, $action_type, $connection_type, $model_type = 0)
+    // NotificationsModel::send($sender_uid, $recipient_uid, $type, $messages_dialog_id, $url, 1);
+	public static function send($sender_uid, $recipient_uid, $action_type, $connection_type, $url, $model_type = 0)
 	{
 		if (!$recipient_uid)
 		{
@@ -48,7 +47,7 @@ class NotificationsModel extends \MainModel
 			// return false; 
 		} 
 
-        XD::insertInto(['notification'], '(', ['sender_uid'], ',', ['recipient_uid'], ',', ['action_type'], ',', ['connection_type'], ',', ['read_flag'], ')')->values( '(', XD::setList([$sender_uid, $recipient_uid,$action_type, $connection_type, 0]), ')' )->run();
+        XD::insertInto(['notification'], '(', ['sender_uid'], ',', ['recipient_uid'], ',', ['action_type'], ',', ['connection_type'], ',', ['url'], ',', ['read_flag'], ')')->values( '(', XD::setList([$sender_uid, $recipient_uid,$action_type, $connection_type, $url, 0]), ')' )->run();
        
 		return $notification_id;
 		
@@ -75,13 +74,20 @@ class NotificationsModel extends \MainModel
     // Оповещение просмотрено
     public static function updateMessagesUnread($uid, $connection_type)
     {
-     
+
         XD::update(['notification'])->set(['read_flag'], '=', 1)
                                  ->where(['recipient_uid'], '=', $uid)
                                  ->and(['connection_type'], '=', $connection_type)
                                  ->run();
         return true;
-     
     } 
+    
+    // Данные по id
+    public static function getNotification($id)
+    {
+        return  XD::select('*')->from(['notification'])
+                ->where(['connection_type'], '=', $id)->getSelectOne();
+    }  
+
     
 }

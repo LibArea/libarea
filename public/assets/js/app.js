@@ -79,7 +79,6 @@ $(function(){
             location.reload(); 
         });
     });
-    
     // Удаляем поток
     $(document).on('click', '.delflow', function() {
         var flow_id = $(this).data('flow');
@@ -91,7 +90,6 @@ $(function(){
             location.reload(); 
         });
     });
-    
     // Парсинг title с сайта для > TL1
     $(document).on('click', '#graburl', function(e) {    
         const uri = document.getElementById('link').value;

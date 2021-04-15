@@ -289,19 +289,12 @@ class PostModel extends \MainModel
    // Частота размещения постов участника 
    public static function getPostSpeed($uid)
    {
-       
-        $post = XD::select(['post_id', 'post_user_id', 'post_date'])->from(['posts'])
-            ->where(['post_user_id'], '=', $uid)
-            ->orderBy(['post_id'])->desc()->getSelectOne();
-        
-        // https://ru.stackoverflow.com/a/498675
-        $post_date  = $post['post_date']; 
-        $happy_day  = \DateTime::createFromFormat('Y-m-d H:i:s', $post_date);
-        $now        = new \DateTime('now');
-        $result     = $now->diff($happy_day); 
-        
-        return $result;
-    
+        $sql = "SELECT post_id, post_user_id, post_date
+                fROM posts 
+                WHERE post_user_id = ".$uid."
+                AND post_date >= DATE_SUB(NOW(), INTERVAL 1 DAY)";
+                
+        return  DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
    }
    
 }

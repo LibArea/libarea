@@ -59,6 +59,7 @@ Route::before('Authorization@noAuth')->getGroup();
 
 	// Уведомления 
 	Route::get('/notifications')->controller('NotificationsController');
+    Route::get('/notifications/read/{id}')->controller('NotificationsController@notificationRead')->where(['id' => '[0-9]+']);  
 
 	// Подписываемся, отписываемся / изменяем пространство
 	Route::type('post')->get('/space/hide')->controller('SpaceController@hide');

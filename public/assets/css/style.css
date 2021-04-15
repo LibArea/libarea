@@ -315,7 +315,7 @@ blockquote {
   display: none;
   position: absolute;
   background-color: var(--color-white);
-  min-width: 140px;
+  min-width: 150px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
   right: 6px;
@@ -529,6 +529,9 @@ input.form-about {width: 250px;}
   background: #f3f3f3;
   padding: 0 15px 0 5px;
 }
+.shown_post img {
+  max-width: 99%;
+}
 a.showpost {
   font-size: 14px;
   color: var(--color-gray-1);
@@ -732,16 +735,19 @@ h1 span{
   text-align: center; 
   margin-bottom: 15px;
 }
+.fl {
+  padding: 5px; 
+}
 
 /* Комментарии */
 .reply {
-    display: none;
+  display: none;
 }
 .reply.active {
-    display: block;
+  display: block;
 }
 .block-comments.line{
-    border-top: 2px dotted #ddd;
+  border-top: 2px dotted #ddd;
 }
 .authorpost {
   color: #f8a853;

@@ -118,7 +118,7 @@ class PostController extends \MainController
         }  
         
         // Последние комментарии
-        $latest_comments = CommentModel::latestComments();
+        $latest_comments = CommentModel::latestComments($user_id);
         
         $result_comm = Array();
         foreach($latest_comments as $ind => $row){
@@ -358,7 +358,12 @@ class PostController extends \MainController
         $post_content_img     = (empty($post_content_img)) ? '' : $post_content_img;
 
         // Ограничим частоту добавления
-        // PostModel::getPostSpeed($post_user_id);
+        // Добавить условие TL
+        $num_post =  PostModel::getPostSpeed($post_user_id);
+        if(count($num_post) > 5) {
+            Base::addMsg('Вы исчерпали лимит постов на сегодня', 'error');
+            redirect('/');
+        }
         
         // Получаем SEO поста
         $post_slug = Base::seo($post_title); 

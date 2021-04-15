@@ -1,6 +1,8 @@
 <?php
 namespace App\Models;
 use XdORM\XD;
+use DB;
+use PDO;
 
 class CommentModel extends \MainModel
 {
@@ -101,20 +103,16 @@ class CommentModel extends \MainModel
         ->where(['comment_id'], '=', $comm_id)->run(); 
     }
     
-    // Частота размещения комментариев участника 
-    public static function getCommentSpeed($uid)
-    {
-        $post = XD::select(['comment_id', 'comment_user_id', 'comment_date'])->from(['comments'])
-            ->where(['comment_user_id'], '=', $uid)
-            ->orderBy(['comment_id'])->desc()->getSelectOne();
-        
-        // https://ru.stackoverflow.com/a/498675
-        $comm_date  = $post['comment_date']; 
-        $happy_day  = \DateTime::createFromFormat('Y-m-d H:i:s', $comm_date);
-        $now        = new \DateTime('now');
-        $result     = $now->diff($happy_day); 
-        
-        return $result;
+   // Частота размещения комментариев участника 
+   public static function getCommentSpeed($uid)
+   {
+        $sql = "SELECT comment_id, comment_user_id, comment_date
+                fROM comments 
+                WHERE comment_user_id = ".$uid."
+                AND comment_date >= DATE_SUB(NOW(), INTERVAL 1 DAY)";
+                
+        return  DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
    }
+    
     
 }

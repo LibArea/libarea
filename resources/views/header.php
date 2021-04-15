@@ -92,10 +92,14 @@
                 </li>   
                 <?php if($uid['notif']) { ?> 
                     <li class="nav notif">  
-                        <a class="nav" href="/notifications">  
+                        <a class="nav" href="/notifications"> 
                             <svg class="md-icon">
-                                <use xlink:href="/assets/svg/icons.svg#mail"></use>
-                            </svg> 
+                                <?php if($uid['notif']['action_type'] == 1) { ?>
+                                    <use xlink:href="/assets/svg/icons.svg#mail"></use>
+                                <?php } else { ?>    
+                                    <use xlink:href="/assets/svg/icons.svg#message"></use>
+                                <?php } ?>
+                            </svg>
                         </a>
                     </li>  
                 <?php } ?>    
@@ -119,6 +123,12 @@
                                 <use xlink:href="/assets/svg/icons.svg#settings"></use>
                             </svg> 
                             <?= lang('Settings'); ?>
+                        </a>
+                       <a href="/notifications">
+                            <svg class="md-icon">
+                                <use xlink:href="/assets/svg/icons.svg#bulb"></use>
+                            </svg>  
+                            <?= lang('Notifications'); ?>
                         </a>
                         <a href="/messages">
                             <svg class="md-icon">

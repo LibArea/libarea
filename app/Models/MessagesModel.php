@@ -154,7 +154,7 @@ class MessagesModel extends \MainModel
 		} */
            
         $type = 1; // Личные сообщения        
-        NotificationsModel::send($sender_uid, $recipient_uid, $type, $messages_dialog_id, 1);
+        NotificationsModel::send($sender_uid, $recipient_uid, $type, $messages_dialog_id, '', 1);
  
 		return $message_id;
     }
