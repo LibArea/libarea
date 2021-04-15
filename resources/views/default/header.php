@@ -34,7 +34,7 @@
                     <?php } ?>
                 </li>
                 <li class="nav no-mob closed-on">        
-                    <div id="togglemenu">
+                    <div class="togglemenu">
                         <svg class="md-icon moon">
                             <use xlink:href="/assets/svg/icons.svg#arrow-bar-to-left"></use>
                         </svg>
@@ -53,12 +53,12 @@
                 
                 <?php if(!empty($post['space_slug'])) { ?>
                     <li class="nav no-mob"> 
-                        <span class="post-space-color">  
+                        <div class="post-space-color">  
                             <div class="space-color space_<?= $post['space_color'] ?>"></div>
                             <a class="space-u" href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
                                <?= $post['space_name']; ?>
                             </a>
-                        </span>
+                        </div>
                     </li>
                 <?php } ?> 
             </ul>

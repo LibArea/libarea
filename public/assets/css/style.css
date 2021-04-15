@@ -245,7 +245,7 @@ blockquote {
 .menuno .closed-on {
   display: block;  
 } 
-.menu-m {
+.bar-m {
   margin: 0 0 15px 1px;
   text-transform: uppercase;
   font-size: 12px;
@@ -490,7 +490,7 @@ input.form-about {width: 250px;}
 .box.setting textarea, .box.setting input {
   width: 300px;
 }
- 
+
 .md-icon {
   width: 24px;
   height: 24px;
@@ -1043,28 +1043,28 @@ div.voters .comm-up-id, div.voters .post-up-id {
 }
 
 /* Меню */
-menu {
+.menu {
   grid-area: menu;
   padding: 0 8px;
   margin: 8px 0;
   position: relative;
 }
-menu a {
+.menu a {
   display: block;
   font-size: 14px;
   margin-bottom: 5px;
   color: #888;
 }
-menu a.menu:hover > .md-icon {
+.menu a.bar:hover > .md-icon {
   stroke: #2562dc;
 }
-a.menu.active {
+a.bar.active {
   color:#333;
 }
-menu a span {    
+.menu a span {    
   vertical-align: top;
 }
-body.menuno menu  {
+body.menuno .menu  {
   display: none;
 }
 

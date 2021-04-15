@@ -144,7 +144,8 @@ class MessagesModel extends \MainModel
         
         XD::insertInto(['messages'], '(', ['dialog_id'], ',', ['message'], ',', ['uid'], ')')->values( '(', XD::setList([$messages_dialog_id, $message, $sender_uid]), ')' )->run();
  
-		// self::updateDialogCount($messages_dialog_id, $sender_uid);
+		self::updateDialogCount($messages_dialog_id, $sender_uid);
+        
         /* Где хранить будем изменение и пересчет?
 		   UserModel::updateInboxUnread($recipient_uid);
 
@@ -174,20 +175,21 @@ class MessagesModel extends \MainModel
         $sender_count    = $query['sender_count'] + 1; 
         $recipient_count = $query['recipient_count'] + 1;
        
-       
+    
         XD::update(['messages_dialog'])->set(['sender_count'], '=', $sender_count, ',', ['update_time'], '=', $update_time, ',', ['recipient_count'], '=', $recipient_count)->where(['id'], '=', $dialog_id)->run();
 
 		if ($inbox_dialog['sender_uid'] == $uid)
 		{
 			// SET recipient_unread = recipient_unread + 1 WHERE id = " . intval($dialog_id));
             
-            $recipient_unread = 'recipient_unread + 1';
+            $recipient_unread = 0;
             XD::update(['messages_dialog'])->set(['recipient_unread'], '=', $recipient_unread)->where(['id'], '=', $dialog_id)->run();
             
 		}
 		else
 		{
-            $sender_unread = 'sender_unread + 1';
+            
+            $sender_unread = 0;
             XD::update(['messages_dialog'])->set(['sender_unread'], '=', $sender_unread)->where(['id'], '=', $dialog_id)->run();
             
 			// " SET sender_unread = sender_unread + 1 WHERE id = " . intval($dialog_id));

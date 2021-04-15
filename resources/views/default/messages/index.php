@@ -6,6 +6,7 @@
             <?php if (!empty($data['messages'])) { ?>
   
                 <?php foreach ($data['messages'] as  $msg) { ?>
+
                     <div class="msg-telo<?php if (!$msg['unread'] > 0) { ?> active<?php } ?>">
                         <?php if($msg['sender_uid'] == $uid['id']) {  ?>
                              Я  |  <?= $msg['update_time']; ?> <br>
@@ -21,7 +22,7 @@
     
                         <a href="/messages/read/<?= $msg['id']; ?>">
                             <?php if ($msg['unread']) { ?>
-                                 Есть <?= $msg['unread']; ?> <?= $msg['unread_num']; ?>
+                                 Есть <?= $msg['count']; ?> <?= $msg['unread_num']; ?>
                             <?php } else { ?>
                                  Посмотреть  
                                 <?php if($msg['count'] != 0) { ?> 

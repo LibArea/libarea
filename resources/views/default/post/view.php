@@ -30,7 +30,7 @@
                     <h1 class="titl"><?= $post['post_title']; ?></h1>
                 
                     <div class="footer">
-                        <img class="ava" src="/uploads/avatar/small/<?= $post['avatar']; ?>">
+                        <img class="ava" alt="<?= $post['login']; ?>" src="/uploads/avatar/small/<?= $post['avatar']; ?>">
                         <span class="user"> 
                             <a href="/u/<?= $post['login']; ?>"><?= $post['login']; ?></a> 
                         </span>
@@ -166,7 +166,7 @@
                             <?php } ?>    
                                 <div class="comm-telo">
                                     <div class="comm-header">
-                                        <img class="ava" src="/uploads/avatar/small/<?= $comm['avatar'] ?>">
+                                        <img alt="<?= $comm['login']; ?>" class="ava" src="/uploads/avatar/small/<?= $comm['avatar'] ?>">
                                         <span class="user"> 
                                             <a href="/u/<?= $comm['login']; ?>"><?= $comm['login']; ?></a> 
                                         </span> 
@@ -199,7 +199,7 @@
                                 </div>
                                 <?php if($post['post_closed'] == 0) { ?> 
                                 <?php if($post['post_is_delete'] == 0 || $uid['trust_level'] == 5) { ?>
-                                    <span id="cm_add_link<?php $comm['comment_id']; ?>" class="cm_add_link">
+                                    <span id="cm_add_link<?= $comm['comment_id']; ?>" class="cm_add_link">
                                         <a data-post_id="<?= $post['post_id']; ?>" data-id="<?= $comm['comment_id']; ?>" class="addcomm"><?= lang('Reply to'); ?></a>
                                     </span>
                                 <?php } ?>
