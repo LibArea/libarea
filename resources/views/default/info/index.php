@@ -1,6 +1,5 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<?php include TEMPLATE_DIR . '/_block/left-menu.php'; ?>
-<main class="info">
+<main class="w-100">
     <div class="left-ots max-width">
         <ul class="breadcrumb">
             <li class="breadcrumb-item">

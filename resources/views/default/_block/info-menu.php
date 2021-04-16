@@ -1,14 +1,13 @@
-<?php $uri = Request::getUri(); ?>
 <aside id="sidebar"> 
     <div class="menu-info">
-        <a class="info-n<?php if($uri == '/info') { ?> active<?php } ?>" href="/info">~ <?= lang('Info'); ?></a>
-        <a class="info-n<?php if($uri == '/info/privacy') { ?> active<?php } ?>" href="/info/privacy">~ <?= lang('Privacy'); ?></a>
-        <a class="info-n<?php if($uri == '/info/markdown') { ?> active<?php } ?>" href="/info/markdown">~ <?= lang('Мarkdown'); ?></a> 
-        <a class="info-n<?php if($uri == '/info/trust-level') { ?> active<?php } ?>" href="/info/trust-level">~ <?= lang('Trust level'); ?> (TL)</a>
-        <a class="info-n<?php if($uri == '/info/about') { ?> active<?php } ?>" href="/info/about">~ <?= lang('About'); ?></a>
+        <a <?php if($uid['uri'] == '/info') { ?>class="active"<?php } ?> href="/info">~ <?= lang('Info'); ?></a>
+        <a <?php if($uid['uri'] == '/info/privacy') { ?>class="active"<?php } ?> href="/info/privacy">~ <?= lang('Privacy'); ?></a>
+        <a <?php if($uid['uri'] == '/info/markdown') { ?>class="active"<?php } ?> href="/info/markdown">~ <?= lang('Мarkdown'); ?></a> 
+        <a <?php if($uid['uri'] == '/info/trust-level') { ?>class="active"<?php } ?> href="/info/trust-level">~ <?= lang('Trust level'); ?> (TL)</a>
+        <a <?php if($uid['uri'] == '/info/about') { ?>class="active"<?php } ?> href="/info/about">~ <?= lang('About'); ?></a>
         <div class="v-ots"></div>
-        <a class="info-n<?php if($uri == '/info/initial-setup') { ?> active<?php } ?>" href="/info/initial-setup">~ <?= lang('Initial Setup'); ?></a>
+        <a <?php if($uid['uri'] == '/info/initial-setup') { ?>class="active"<?php } ?> href="/info/initial-setup">~ <?= lang('Initial Setup'); ?></a>
         <div class="v-ots"></div>
-        <a class="info-n<?php if($uri == '/info/stats') { ?> active<?php } ?>" href="/info/stats">~ <?= lang('Statistics'); ?></a>
+        <a <?php if($uid['uri'] == '/info/stats') { ?>class="active"<?php } ?> href="/info/stats">~ <?= lang('Statistics'); ?></a>
     </div>
 </aside>

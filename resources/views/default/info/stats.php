@@ -2,15 +2,6 @@
 <link rel="stylesheet" href="/assets/css/info.css"> 
 <script src="/assets/js/canvas.js"></script>
 <div class="w-100">
-    <ul class="breadcrumb">
-        <li class="breadcrumb-item">
-            <a title="<?= lang('Home'); ?>" href="/"><?= lang('Home'); ?></a>
-        </li>
-        <li class="breadcrumb-item">
-            <a title="<?= lang('Info'); ?>" href="/info"><?= lang('Info'); ?></a>
-        </li>
-    </ul>
-    
     <center>
         <h1><?= $data['h1']; ?></h1>
         <div class="canvas-telo">

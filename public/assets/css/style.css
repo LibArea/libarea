@@ -196,20 +196,6 @@ blockquote {
 .logo:hover, .logo:focus {
   color: var(--color-white);
 }
-.info-n {
-  margin: 0 0 5px 0;
-  overflow: hidden;
-  clear: both;
-  display: block;
-  font-size: 13px;
-}
-.info-n.active {
-  color: #333;
-} 
-.menu-info {
-    background-color: #f0f0df;
-    padding: 15px 0 10px 20px;
-}
 .site-header {
   padding: 0.4rem 0.5rem;
 }
@@ -1043,22 +1029,28 @@ div.voters .comm-up-id, div.voters .post-up-id {
 }
 
 /* Меню */
+.menu-info {
+    background-color: #f0f0df;
+    padding: 15px 0 10px 20px;
+}
 .menu {
   grid-area: menu;
   padding: 0 8px;
   margin: 8px 0;
   position: relative;
 }
-.menu a {
+.menu a, .menu-info a {
   display: block;
-  font-size: 14px;
+  font-size: 13px;
   margin-bottom: 5px;
-  color: #888;
 }
-.menu a.bar:hover > .md-icon {
+.menu a {
+  color: #888;   
+}
+.menu a:hover > .md-icon {
   stroke: #2562dc;
 }
-a.bar.active {
+a.active {
   color:#333;
 }
 .menu a span {    

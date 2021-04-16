@@ -8,13 +8,13 @@
       
             <?php foreach ($space as  $sp) { ?>  
                 <div class="space-telo">
-                    <span class="date"> <?php if($sp['hidden_space_id'] >= 1) {  ?><span class="red">&#10003;</span><?php } ?>
-                    
+                    <span class="date"> 
                         <div class="space-color space_<?= $sp['space_color'] ?>"></div>
-                        <a title="<?= $sp['space_name']; ?>" class="space-u" href="/s/<?= $sp['space_slug']; ?>">
+                        <a title="<?= $sp['space_name']; ?>" class="space-s" href="/s/<?= $sp['space_slug']; ?>">
                             <?= $sp['space_name']; ?>
                         </a> 
                     </span> 
+                    <?php if($sp['hidden_space_id'] >= 1) {  ?><span class="red">&#10003;</span><?php } ?>
                     <span class="date space-des">  
                        — &nbsp;<?= $sp['space_description']; ?>    
                     </span>

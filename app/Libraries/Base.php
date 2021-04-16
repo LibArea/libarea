@@ -40,6 +40,7 @@ class Base
             $uid['id']          = null;
             $uid['trust_level'] = null;
         }
+        $uid['uri']     = Request::getUri();
         $uid['msg']     = self::getMsg();
         return $uid;
     }
