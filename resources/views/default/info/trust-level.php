@@ -1,6 +1,6 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 <main class="w-100">
-    <div class="left-ots max-width">
+    <div class="max-width">
         <ul class="breadcrumb">
             <li class="breadcrumb-item">
                 <a title="<?= lang('Home'); ?>" href="/"><?= lang('Home'); ?></a>

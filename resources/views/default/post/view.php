@@ -91,7 +91,7 @@
                         <?php } ?>
                     </div>  
                 </div>
-                <div class="left-ots">
+                <div class="post-body">
                     <div class="post">
                         <?= $post['post_content']; ?> 
                     </div> 
@@ -191,7 +191,11 @@
                                                 <a rel="nofollow" href="/posts/<?= $post['post_slug']; ?>#comm_<?= $comm['comment_on']; ?>">&#8679;</a>
                                             </span>
                                         <?php } ?> 
-
+                                        <?php if ($uid['trust_level'] == 5) { ?> 
+                                            <span class="date ots">
+                                                <?= $comm['comment_ip']; ?>
+                                            </span>
+                                        <?php } ?> 
                                     </div>
                                     <div class="comm-telo-body">
                                         <?= $comm['content'] ?> 

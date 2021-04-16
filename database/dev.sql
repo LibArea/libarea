@@ -51,6 +51,7 @@ CREATE TABLE `comments` (
   `comment_after` smallint(6) NOT NULL DEFAULT 0,
   `comment_votes` smallint(6) NOT NULL DEFAULT 0,
   `comment_content` text NOT NULL,
+  `comment_lo` tinyint(1) NOT NULL DEFAULT 0
   `comment_del` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

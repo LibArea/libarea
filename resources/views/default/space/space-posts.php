@@ -3,66 +3,64 @@
 
 <?php if ($space_info['space_is_delete'] == 0) { ?>
     <main>
-        <div class="left-ots"> 
-            <?php if (!empty($posts)) { ?>
-                <?php foreach ($posts as  $post) { ?> 
-                    <div class="post-telo">
-                        <?php if (!$uid['id']) { ?> 
-                            <div id="vot<?= $post['post_id']; ?>" class="voters">
-                                <a rel="nofollow" href="/login"><div class="post-up-id"></div></a>
+        <?php if (!empty($posts)) { ?>
+            <?php foreach ($posts as  $post) { ?> 
+                <div class="post-telo">
+                    <?php if (!$uid['id']) { ?> 
+                        <div id="vot<?= $post['post_id']; ?>" class="voters">
+                            <a rel="nofollow" href="/login"><div class="post-up-id"></div></a>
+                            <div class="score"><?= $post['post_votes']; ?></div>
+                        </div>
+                    <?php } else { ?> 
+                        <?php if ($post['votes_post_user_id'] || $uid['id'] == $post['post_user_id']) { ?>
+                            <div class="voters active">
+                                <div class="post-up-id"></div>
                                 <div class="score"><?= $post['post_votes']; ?></div>
                             </div>
-                        <?php } else { ?> 
-                            <?php if ($post['votes_post_user_id'] || $uid['id'] == $post['post_user_id']) { ?>
-                                <div class="voters active">
-                                    <div class="post-up-id"></div>
-                                    <div class="score"><?= $post['post_votes']; ?></div>
-                                </div>
-                            <?php } else { ?>
-                                <div id="up<?= $post['post_id']; ?>" class="voters">
-                                    <div data-id="<?= $post['post_id']; ?>" class="post-up-id"></div>
-                                    <div class="score"><?= $post['post_votes']; ?></div>
-                                </div>
-                            <?php } ?> 
-                        <?php } ?> 
-                        <div class="post-body">
-                            <a class="u-url" href="/posts/<?= $post['post_slug']; ?>">
-                                <h3 class="titl"><?= $post['post_title']; ?></h3>
-                            </a>
-                        <?php if ($post['post_content_preview']) { ?>
-                            <div class="show">
-                                <span class="show_add_<?= $post['post_id']; ?>">
-                                    <a data-post_id="<?= $post['post_id']; ?>" class="showpost">
-                                        <span>&#9658;</span> 
-                                        <?= $post['post_content_preview']; ?>... 
-                                    </a>
-                                </span>
+                        <?php } else { ?>
+                            <div id="up<?= $post['post_id']; ?>" class="voters">
+                                <div data-id="<?= $post['post_id']; ?>" class="post-up-id"></div>
+                                <div class="score"><?= $post['post_votes']; ?></div>
                             </div>
-                        <?php } ?>
-                        <div id="show_<?= $post['post_id']; ?>" class="show_detail"></div> 
-                            <div class="footer">
-                                <img class="ava" src="/uploads/avatar/small/<?= $post['avatar'] ?>">
-                                <span class="user"> 
-                                    <a href="/u/<?= $post['login']; ?>"><?= $post['login']; ?></a> 
-                                </span>
-                                <span class="date">
-                                    <?= $post['post_date']; ?>
-                                </span>
-                                <?php if($post['post_comments'] !=0) { ?> 
-                                    <span class="otst"> | </span>
-                                    <a class="u-url" href="/posts/<?= $post['post_slug']; ?>">
-                                        <?= $post['post_comments']; ?>  <?= $post['num_comments']; ?>
-                                    </a>                                
-                                <?php } ?>
-                            </div>  
+                        <?php } ?> 
+                    <?php } ?> 
+                    <div class="post-body">
+                        <a class="u-url" href="/posts/<?= $post['post_slug']; ?>">
+                            <h3 class="titl"><?= $post['post_title']; ?></h3>
+                        </a>
+                    <?php if ($post['post_content_preview']) { ?>
+                        <div class="show">
+                            <span class="show_add_<?= $post['post_id']; ?>">
+                                <a data-post_id="<?= $post['post_id']; ?>" class="showpost">
+                                    <span>&#9658;</span> 
+                                    <?= $post['post_content_preview']; ?>... 
+                                </a>
+                            </span>
                         </div>
-                    </div>    
-                <?php } ?>
+                    <?php } ?>
+                    <div id="show_<?= $post['post_id']; ?>" class="show_detail"></div> 
+                        <div class="footer">
+                            <img class="ava" src="/uploads/avatar/small/<?= $post['avatar'] ?>">
+                            <span class="user"> 
+                                <a href="/u/<?= $post['login']; ?>"><?= $post['login']; ?></a> 
+                            </span>
+                            <span class="date">
+                                <?= $post['post_date']; ?>
+                            </span>
+                            <?php if($post['post_comments'] !=0) { ?> 
+                                <span class="otst"> | </span>
+                                <a class="u-url" href="/posts/<?= $post['post_slug']; ?>">
+                                    <?= $post['post_comments']; ?>  <?= $post['num_comments']; ?>
+                                </a>                                
+                            <?php } ?>
+                        </div>  
+                    </div>
+                </div>    
+            <?php } ?>
 
-                <?php } else { ?>
-                    <div class="no-content"><?= lang('no-post'); ?>...</div>
-                <?php } ?>
-        </div>
+            <?php } else { ?>
+                <div class="no-content"><?= lang('no-post'); ?>...</div>
+            <?php } ?>
     </main>
 
     <aside id="sidebar">
