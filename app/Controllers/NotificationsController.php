@@ -35,17 +35,16 @@ class NotificationsController extends \MainController
     // Изменяем флаг подписки прочитан или нет (переход по ссылке)
     public function notificationRead()
     {
-       $account    = \Request::getSession('account');
-       $notif_id   = \Request::getInt('id');
-       $info   = NotificationsModel::getNotification($notif_id);
- 
-       if($account['user_id'] != $info['recipient_uid']) {
-           return false;
-       }
+        $account    = \Request::getSession('account');
+        $notif_id   = \Request::getInt('id');
+        $info   = NotificationsModel::getNotification($notif_id);
 
-      NotificationsModel::updateMessagesUnread($account['user_id'], $notif_id);
-      
-      redirect('/' .  $info['url']);
+        if($account['user_id'] != $info['recipient_uid']) {
+            return false;
+        }
 
-      }  
+        NotificationsModel::updateMessagesUnread($account['user_id'], $notif_id);
+
+        redirect('/' .  $info['url']);
+    }  
 }

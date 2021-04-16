@@ -12,10 +12,12 @@
 
 Route::before('Authorization@noAuth')->getGroup();
     Route::get('/admin')->controller('AdminController');
+    Route::get('/admin/space')->controller('AdminController@Space'); 
+    Route::get('/admin/space/add')->controller('AdminController@addSpacePage');
+    Route::type('post')->get('/admin/space/ban/{id}')->controller('AdminController@delSpace')->where(['id' => '[0-9]+']);
     Route::get('/admin/comments')->controller('AdminController@Comments'); 
     Route::get('/admin/invitations')->controller('AdminController@Invitations');
     Route::type('post')->get('/admin/comment/recover')->controller('AdminController@recoverComment');
-    
     Route::type('post')->get('/admin/ban/{id}')->controller('AdminController@banUser')->where(['id' => '[0-9]+']);
 
 	Route::get('/post/add')->controller('PostController@addPost');

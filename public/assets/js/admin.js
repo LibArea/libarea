@@ -21,4 +21,15 @@ $(function(){
             $('#comm_' + comm_id).addClass('recover');
         });
     });
+    // Удаление / восстановление пространства
+    $(document).on("click", ".space-ban", function(){      
+        var space_id  = $(this).data('id');  
+        $.ajax({
+            url: '/admin/space/ban/' + space_id,
+            type: 'POST',
+            data: {space_id: space_id},
+        }).done(function(data) {
+            location.reload();
+        });
+    }); 
 });

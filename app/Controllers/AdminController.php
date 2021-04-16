@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\UserModel;
+use App\Models\SpaceModel;
 use App\Models\AdminModel;
 use Parsedown;
 use Base;
@@ -146,6 +147,69 @@ class AdminController extends \MainController
             }
         }
 		return $tree;
+    }
+    
+    // Пространства
+    public function Space ()
+    {
+        $account    = \Request::getSession('account');
+        $user_id    = $account ? $account['user_id'] : 0;
+        $space      = SpaceModel::getSpaceAll($user_id);
+         
+        $result = Array();
+        foreach($space  as $ind => $row){
+            
+            if(!$row['space_img'] ) {
+                $row['space_img'] = 'space_no.png';
+            } 
+
+            $space['space_img'] = $row['space_img'];
+            $result[$ind]       = $row;
+        }
+
+        $uid  = Base::getUid();
+        $data = [
+            'h1'          => 'Пространства',
+            'title'       => 'Пространства' . ' | ' . $GLOBALS['conf']['sitename'],
+            'description' => 'Пространства. ' . $GLOBALS['conf']['sitename'],
+        ]; 
+ 
+        return view(PR_VIEW_DIR . '/admin/space', ['data' => $data, 'uid' => $uid, 'space' => $result]);
+    }
+    
+    // Добавить пространство
+    public function addSpacePage() 
+    {
+        // Доступ только персоналу
+        $account = \Request::getSession('account');
+        if ($account['trust_level'] != 5) {
+            return false;
+        }  
+        
+        $uid  = Base::getUid();
+        $data = [
+            'h1'          => 'Добавить пространство',
+            'title'       => 'Добавить пространство' . ' | ' . $GLOBALS['conf']['sitename'],
+            'description' => 'Добавить пространство. ' . $GLOBALS['conf']['sitename'],
+        ]; 
+        
+        return view(PR_VIEW_DIR . '/admin/add-space', ['data' => $data, 'uid' => $uid]);
+    }
+    
+    // Удаление / восстановление пространства
+    public function delSpace() {
+        
+        // Доступ только персоналу
+        $account = \Request::getSession('account');
+        if ($account['trust_level'] != 5) {
+            return false;
+        }   
+        
+        $space_id = \Request::getPostInt('space_id');
+
+        SpaceModel::SpaceDelete($space_id);
+       
+        return true;
     }
     
 }

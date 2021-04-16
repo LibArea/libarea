@@ -35,9 +35,7 @@
                 <?php } ?>
            
             <?php } else { ?>
-            
-                У вас нет диалогов
-             
+                <div class="no-content">У вас нет диалогов</div>
             <?php } ?>
         </div>
     </div>

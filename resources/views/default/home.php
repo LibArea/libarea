@@ -92,9 +92,7 @@
         <?php } ?>
         
     <?php } else { ?>
-
         <div class="no-content"><?= lang('no-post'); ?>...</div>
-
     <?php } ?>
     
    <?php if(!($data['pNum'] > $data['pagesCount'])) { ?>

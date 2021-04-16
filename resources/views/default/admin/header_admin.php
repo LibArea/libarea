@@ -26,14 +26,11 @@
                 <li class="nav no-mob">
                     <a title="<?= lang('Admin'); ?>" class="home" href="/admin"><?= lang('Admin'); ?></a>
                 </li>
-                <!--li class="nav no-mob">
-                    <a title="Участники" class="home" href="#">
-                        <svg class="md-icon">
-                            <use xlink:href="/assets/svg/icons.svg#user"></use>
-                        </svg> 
-                        Участники
+                <li class="nav no-mob">
+                    <a title="<?= lang('Space'); ?>" class="home" href="/admin/space">
+                        <?= lang('Space'); ?>
                     </a>
-                </li -->
+                </li>
                 <li class="nav no-mob"> 
                     <a title="<?= lang('Invites'); ?>" class="home" href="/admin/invitations">
                         <?= lang('Invites'); ?>

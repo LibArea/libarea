@@ -11,7 +11,6 @@ class MessagesController extends \MainController
 
 	public function index()
 	{
-
         // Данные участника
         $account = Request::getSession('account');
         $user_id = $account['user_id'];
@@ -64,6 +63,7 @@ class MessagesController extends \MainController
                 $result[$ind]       = $row;
              
 			}
+            
 		} else {
             $result = [];
         }
@@ -74,9 +74,7 @@ class MessagesController extends \MainController
             'description' => 'Страница личных сообщений',
             'messages'    => $result,
         ];
-        
-        
-        
+
         return view(PR_VIEW_DIR . '/messages/index', ['data' => $data, 'uid' => $uid]);
 	}
 
@@ -149,7 +147,6 @@ class MessagesController extends \MainController
     // отправка сообщения участнику
 	public function send()
 	{
-        
         // Данные участника
         $account = Request::getSession('account');
         $sender_uid = $account['user_id'];
@@ -180,7 +177,6 @@ class MessagesController extends \MainController
     // Форма отправки из профиля
     public function  profilMessages()
     {
-        
         $login = Request::get('login');
         
         if(!$user = UserModel::getUserLogin($login))
@@ -197,7 +193,6 @@ class MessagesController extends \MainController
         ];
 
         return view(PR_VIEW_DIR . '/messages/user-add-messages', ['data' => $data, 'uid' => $uid]);
-      
     }
     
 }

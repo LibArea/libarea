@@ -43,29 +43,24 @@ class MessagesModel extends \MainModel
         // Отправитель
 		if ($messages_dialog['sender_uid'] == $uid)
 		{
-
             XD::update(['messages_dialog'])->set(['sender_unread'], '=', $uid)
                                            ->where(['sender_unread'], '=', 0)
                                            ->and(['id'], '=', $dialog_id)->run();
-            
+
 			if ($receipt)
 			{
-                
                 XD::update(['messages_dialog'])->set(['sender_unread'], '=', $uid)
                                                ->where(['sender_unread'], '=', 0)
                                                ->and(['id'], '=', $dialog_id)->run();
-            
 			}  
 
 		}
         // Получатель
 		if ($messages_dialog['recipient_uid'] == $uid)
 		{
-
             XD::update(['messages_dialog'])->set(['recipient_unread'], '=', $uid)
                                ->where(['recipient_unread'], '=', 0)
                                ->and(['id'], '=', $dialog_id)->run();
-            
 		}
         
         // uid получателя и индификатор события
@@ -77,7 +72,6 @@ class MessagesModel extends \MainModel
     
 	public static function getMessageByDialogId($dialog_id)
 	{
-
         $query = XD::select('*')->from(['messages'])
                 ->where(['dialog_id'], '=', $dialog_id)
                 ->orderBy(['id'])->desc();
@@ -112,9 +106,7 @@ class MessagesModel extends \MainModel
 
 		foreach ($dialog_ids as $dialog_id)
 		{
-            
             $last_message =  XD::select('*')->from(['messages'])->where(['dialog_id'], '=', $dialog_id)->orderBy(['id'])->desc();
-         
 		}
 
 		return $last_message;
@@ -175,24 +167,17 @@ class MessagesModel extends \MainModel
         $sender_count    = $query['sender_count'] + 1; 
         $recipient_count = $query['recipient_count'] + 1;
        
-    
         XD::update(['messages_dialog'])->set(['sender_count'], '=', $sender_count, ',', ['update_time'], '=', $update_time, ',', ['recipient_count'], '=', $recipient_count)->where(['id'], '=', $dialog_id)->run();
 
 		if ($inbox_dialog['sender_uid'] == $uid)
 		{
-			// SET recipient_unread = recipient_unread + 1 WHERE id = " . intval($dialog_id));
-            
             $recipient_unread = 0;
             XD::update(['messages_dialog'])->set(['recipient_unread'], '=', $recipient_unread)->where(['id'], '=', $dialog_id)->run();
-            
 		}
 		else
 		{
-            
             $sender_unread = 0;
             XD::update(['messages_dialog'])->set(['sender_unread'], '=', $sender_unread)->where(['id'], '=', $dialog_id)->run();
-            
-			// " SET sender_unread = sender_unread + 1 WHERE id = " . intval($dialog_id));
 		}
 	}
     

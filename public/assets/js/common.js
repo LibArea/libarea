@@ -46,7 +46,7 @@ $(document).on('click', '#toggledark', function() {
     }
 });
 // Toggle menu mode
-$(document).on('click', '#togglemenu', function() {
+$(document).on('click', '.togglemenu', function() {
     var mode = getCookie("menuS");
     var d = new Date();
     d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000)); //365 days

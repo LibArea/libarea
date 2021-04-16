@@ -172,17 +172,18 @@ CREATE TABLE `space` (
   `space_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `space_category_id` int(11) NOT NULL DEFAULT 1,
   `space_tl` int(11) NOT NULL DEFAULT 1,
-  `space_permit_users` int(11) NOT NULL DEFAULT 1
+  `space_permit_users` int(11) NOT NULL DEFAULT 1,
+  `space_is_delete` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Дамп данных таблицы `space`
 --
 
-INSERT INTO `space` (`space_id`, `space_name`, `space_slug`, `space_description`, `space_color`, `space_text`, `space_date`, `space_category_id`, `space_tl`, `space_permit_users`) VALUES
-(1, 'cms', 'cms', 'Системы управления сайтами...', '', 'тест 1...', '2021-02-28 12:15:58', 0, 1, 0),
-(2, 'Вопросы', 'qa', 'Вопросы и ответы', '', 'тест 2...', '2021-02-28 12:15:58', 0, 2, 0),
-(3, 'флуд', 'flud', 'Просто обычные разговоры', '', 'тест 3...', '2021-02-28 12:15:58', 0, 3, 0);
+INSERT INTO `space` (`space_id`, `space_name`, `space_slug`, `space_description`, `space_color`, `space_text`, `space_date`, `space_category_id`, `space_tl`, `space_permit_users`, `space_is_delete`) VALUES
+(1, 'cms', 'cms', 'Системы управления сайтами...', '', 'тест 1...', '2021-02-28 12:15:58', 0, 1, 0, 0),
+(2, 'Вопросы', 'qa', 'Вопросы и ответы', '', 'тест 2...', '2021-02-28 12:15:58', 0, 2, 0, 0),
+(3, 'флуд', 'flud', 'Просто обычные разговоры', '', 'тест 3...', '2021-02-28 12:15:58', 0, 3, 0, 0);
 
 
 --
