@@ -18,11 +18,16 @@ class CommentController extends \MainController
         $Parsedown = new Parsedown(); 
         $Parsedown->setSafeMode(true); // безопасность
          
-        $comm = CommentModel::getCommentsAll();
+        $pg = \Request::getInt('page'); 
+        $page = (!$pg) ? 1 : $pg;
+         
+        $pagesCount = CommentModel::getCommentAllCount();  
+        $comm       = CommentModel::getCommentsAll($page);
  
         $account    = \Request::getSession('account');
         $user_id    = $account ? $account['user_id'] : 0;
  
+
         $result = Array();
         foreach($comm  as $ind => $row){
             if(!$row['avatar']) {
@@ -36,11 +41,19 @@ class CommentController extends \MainController
             $result[$ind]   = $row;
         }
         
+        if($page > 1) { 
+            $num = ' — ' . lang('Page') . ' ' . $page;
+        } else {
+            $num = '';
+        }
+        
         $uid  = Base::getUid();
         $data = [
-            'h1'          => 'Все комментарии',
-            'title'       => 'Все комментарии' . ' | ' . $GLOBALS['conf']['sitename'],
-            'description' => 'Все комментарии на сайте в порядке очередности. ' . $GLOBALS['conf']['sitename'],
+            'h1'            => lang('All comments'),
+            'title'         => lang('All comments') . ' | ' . $GLOBALS['conf']['sitename'] . $num,
+            'description'   => lang('comments-desc') .' '. $GLOBALS['conf']['sitename'] . $num,
+            'pagesCount'    => $pagesCount,
+            'pNum'          => $page,
         ]; 
  
         return view(PR_VIEW_DIR . '/comment/all', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
@@ -58,7 +71,7 @@ class CommentController extends \MainController
         if (Base::getStrlen($comment) < 6 || Base::getStrlen($comment) > 1024)
         {
             Base::addMsg('Длина комментария должна быть от 6 до 1000 знаков', 'error');
-            redirect('/' . $url);
+            redirect('/' . $return_url);
             return true;
         }
 

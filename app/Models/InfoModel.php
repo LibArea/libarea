@@ -48,14 +48,12 @@ class InfoModel extends \MainModel
         return count($query->getSelect());
     }
     
-    // Голосование за посты
-    public static function GrafVote()
-    {
-        $sql = "SELECT ROUND( comment_post_id, -1) AS bucket, COUNT(comment_votes), RPAD('', LN(COUNT(comment_votes)), '*') FROM comments GROUP BY bucket";
-       
+    // Группировка событий
+    public static function GrafFlow()
+    { 
+        $sql = "SELECT count(flow_id), DATE(flow_pubdate) date FROM flow_log GROUP BY date";
+        
         return DB::run($sql)->fetchall(PDO::FETCH_BOTH); 
-    }
-    
-    // Для графика
-    // SELECT ROUND(votes_comm_item_id, -1) AS bucket, COUNT(votes_comm_points), RPAD('', LN(COUNT(votes_comm_points)), '*') FROM votes_comm GROUP BY bucket
+    } 
+ 
 }

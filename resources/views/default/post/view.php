@@ -249,4 +249,21 @@
        
     </article>
 </main>
+<aside id="sidebar"> 
+    <?php if($recommend) { ?> 
+        <div>
+            <h3 class="recommend"><?= lang('Recommended'); ?></h3>  
+            <?php foreach ($recommend as  $post) { ?>
+                <div class="recommend-telo">
+                    <a href="/posts/<?= $post['post_slug']; ?>">
+                        <?= $post['post_title']; ?>  
+                    </a>
+                    <?php if($post['post_comments'] !=0) { ?>
+                        <span class="n-comm">+<?= $post['post_comments'] ?></span>
+                    <?php } ?> 
+               </div>
+            <?php } ?> 
+        </div> 
+    <?php } ?>   
+</aside> 
 <?php include TEMPLATE_DIR . '/footer.php'; ?> 

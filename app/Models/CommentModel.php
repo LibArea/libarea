@@ -7,15 +7,31 @@ use PDO;
 class CommentModel extends \MainModel
 {
     // Все комментарии
-    public static function getCommentsAll()
+    public static function getCommentsAll($page)
     {
-        $q = XD::select('*')->from(['comments']);
-        $query = $q->leftJoin(['users'])->on(['id'], '=', ['comment_user_id'])
-                ->leftJoin(['posts'])->on(['comment_post_id'], '=', ['post_id'])->orderBy(['comment_id'])->desc();
+        $offset = ($page-1) * 25; 
         
-        $result = $query->getSelect();
- 
+        $sql = "SELECT c.*, p.*,
+                u.id, u.login, u.avatar
+                fROM comments as c
+                INNER JOIN users as u ON u.id = c.comment_user_id
+                INNER JOIN posts as p ON c.comment_post_id = p.post_id
+                ORDER BY c.comment_id DESC LIMIT 25 OFFSET ".$offset." ";
+                        
+        $result = DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
+        
         return $result;
+    }
+    
+    
+   // Количество комментариев
+    public static function getCommentAllCount()
+    {
+        $query = XD::select('*')->from(['comments'])->getSelect();
+
+        $num = ceil(count($query) / 25);
+ 
+        return $num;
     }
     
     // Получаем комментарии в посте

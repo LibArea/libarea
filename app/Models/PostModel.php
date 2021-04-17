@@ -14,7 +14,6 @@ class PostModel extends \MainModel
     // $tags_user - список id отписанных тегов
     public static function getPostHome($page, $space_user, $trust_level, $uid)
     {
-          
         $result = Array();
         foreach($space_user as $ind => $row){
             $result[$ind] = $row['hidden_space_id'];
@@ -50,12 +49,11 @@ class PostModel extends \MainModel
         $result = DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
         
         return $result;
-
     }
     
+    // Количество постов
     public static function getPostHomeCount($space_user)
     {
-     
         $result = Array();
         foreach($space_user as $ind => $row){
             $result[$ind] = $row['hidden_space_id'];
@@ -75,13 +73,11 @@ class PostModel extends \MainModel
         $result = ceil(count($query) / 15);
 
         return $result;
-
     }
 
     // TOP посты на главной 
     public static function getPostTop($uid)
     {
-
         $q = XD::select('*')->from(['posts']);
         $query = $q->leftJoin(['users'])->on(['users.id'], '=', ['post_user_id'])
                 ->leftJoin(['space'])->on(['space_id'], '=', ['post_space_id'])
@@ -90,16 +86,12 @@ class PostModel extends \MainModel
                 ->where(['post_is_delete'], '=', 0)
                 ->orderBy(['post_comments'])->desc();
 
-        $result = $query->getSelect();
-
-        return $result;
-
+        return $query->getSelect();
     }
     
     // Полная версия поста  
     public static function getPost($slug, $uid)
     {
-
         $q = XD::select('*')->from(['posts']);
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['post_user_id'])
                  ->leftJoin(['space'])->on(['space_id'], '=', ['post_space_id'])
@@ -107,16 +99,25 @@ class PostModel extends \MainModel
                 ->and(['votes_post_user_id'], '=', $uid)
                  ->where(['post_slug'], '=', $slug);
         
-        $result = $query->getSelectOne();
-        
-        return $result;
-
+        return $query->getSelectOne();
     }   
+    
+    // Рекомендованные посты
+    public static function PostsSimilar($post_id, $space_id, $uid) 
+    {
+        $q = XD::select('*')->from(['posts']);
+        $query = $q->where(['post_id'], '<', $post_id)
+        ->and(['post_space_id'], '=', $space_id) // из пространства
+        ->and(['post_is_delete'], '=', 0)        // не удален
+        ->and(['post_user_id'], '!=', $uid)      // не участника, который смотрит
+        ->orderBy(['post_id'])->desc()->limit(5);
+        
+        return $query->getSelect();
+    }
     
     // Страница постов участника
     public static function getUsersPosts($login, $uid)
     {
-
         $q = XD::select('*')->from(['posts']);
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['post_user_id'])
                 ->leftJoin(['space'])->on(['space_id'], '=', ['post_space_id'])
@@ -126,15 +127,12 @@ class PostModel extends \MainModel
                 ->and(['post_is_delete'], '=', 0)
                 ->orderBy(['post_id'])->desc();
   
-        $result = $query->getSelect();
-
-        return $result;
+        return $query->getSelect();
     } 
     
     // Пересчитываем количество комментариев в посте
     public static function getNumComments($post_id) 
     {
-        
         $post = XD::select('*')->from(['posts'])->where(['post_id'], '=', $post_id)->getSelectOne();
         $post_comments = $post['post_comments']; // получаем количество комментариев
         $new_num = $post_comments + 1;           // плюсуем один
@@ -142,7 +140,6 @@ class PostModel extends \MainModel
         XD::update(['posts'])->set(['post_comments'], '=', $new_num)->where(['post_id'], '=', $post_id)->run();
      
         return true;
-        
     }
     
     // Проверка на дубликаты uri и запись поста
@@ -159,7 +156,7 @@ class PostModel extends \MainModel
         }
            
         // toString  строковая заменя для проверки
-       XD::insertInto(['posts'], '(', 
+        XD::insertInto(['posts'], '(', 
             ['post_title'], ',', 
             ['post_content'], ',', 
             ['post_content_preview'], ',', 
@@ -182,20 +179,16 @@ class PostModel extends \MainModel
             $data['post_url']]), ')' )->run();
 
         return true; 
-
     } 
     
     // Получаем пост по id
     public static function getPostId($id) 
     {
-      
         if(!$id) { $id = 0; }  
         $q = XD::select('*')->from(['posts']);
         $query = $q->leftJoin(['space'])->on(['space_id'], '=', ['post_space_id'])->where(['post_id'], '=', $id);
-        $result = $query->getSelectOne();
-       
-        return $result;
-      
+        
+        return $query->getSelectOne();
     }
     
     // Редактирование поста
@@ -221,7 +214,6 @@ class PostModel extends \MainModel
     // Добавить пост в профиль
     public static function addPostProfile($post_id, $uid)
     {
-
         XD::update(['users'])->set(['my_post'], '=', $post_id)
         ->where(['id'], '=', $uid)->run();
  
@@ -231,17 +223,12 @@ class PostModel extends \MainModel
     // Добавить пост в закладки
     public static function setPostFavorite($post_id, $uid)
     {
-        
         $result = self::getMyFavorite($post_id, $uid); 
 
         if(!$result){
            XD::insertInto(['favorite'], '(', ['favorite_tid'], ',', ['favorite_uid'], ')')->values( '(', XD::setList([$post_id, $uid]), ')' )->run();
-            
-   
         } else {
-            
            XD::deleteFrom(['favorite'])->where(['favorite_tid'], '=', $post_id)->and(['favorite_uid'], '=', $uid)->run(); 
-
         } 
         
         return true;
@@ -263,11 +250,9 @@ class PostModel extends \MainModel
     // Удален пост или нет
     public static function isThePostDeleted($post_id) 
     {
-        
         $result = XD::select('*')->from(['posts'])->where(['post_id'], '=', $post_id)->getSelectOne();
         
         return $result['post_is_delete'];
-        
     }
     
     // Удаляем пост  

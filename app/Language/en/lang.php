@@ -1,9 +1,11 @@
 <?php
 return [
+    'home-desc'         => 'Community home page, forum, posts',
     'site-closed'       => 'The site is under development',
     'no-post'           => 'Unfortunately there are no posts',
     'no-comment'        => 'Unfortunately there are no comments',
     'comment-deleted'   => 'Comments removed',
+    'comments-desc'     => 'All comments are in order of priority on the site',
     'post-closed'       => 'The post is closed',
     'no-auth-comm'      => 'You must be logged in to leave a comment',
     'write-something'   => 'Write something',

@@ -76,15 +76,15 @@ class PostController extends \MainController
         }
 
         if($page > 1) { 
-             $num = ' — ' . lang('Page') . ' ' . $page;
+            $num = ' — ' . lang('Page') . ' ' . $page;
         } else {
             $num = '';
         }
 
         $uid  = Base::getUid();
         $data = [
-            'title'            => 'Главная | ' . $GLOBALS['conf']['sitename'] . $num, 
-            'description'      => 'Главная страница сообщества, форум, посты. ' . $GLOBALS['conf']['sitename'] . $num,
+            'title'            => lang('Home') . 'Главная | ' . $GLOBALS['conf']['sitename'] . $num, 
+            'description'      => lang('home-desc') . ' ' . $GLOBALS['conf']['sitename'] . $num,
             'space_hide'       => $space_hide,
             'latest_comments'  => $result_comm,
             'pagesCount'       => $pagesCount,
@@ -171,7 +171,10 @@ class PostController extends \MainController
             include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
             hl_preliminary_exit();
         }
-        
+
+        // Рекомендованные посты
+        $recommend = PostModel::PostsSimilar($post['post_id'], $post['post_space_id'], $uid);
+     
         if(!$post['avatar']) {
             $post['avatar'] = 'noavatar.png';
         }
@@ -236,7 +239,7 @@ class PostController extends \MainController
             'description'  => 'Тут надо сделать описание. ' . $GLOBALS['conf']['sitename'],
         ]; 
         
-        return view(PR_VIEW_DIR . '/post/view', ['data' => $data, 'post' => $post, 'comms' => $comms,  'uid' => $uid]);
+        return view(PR_VIEW_DIR . '/post/view', ['data' => $data, 'post' => $post, 'comms' => $comms,  'uid' => $uid,  'recommend' => $recommend]);
     }
     
     // Для дерева комментариев

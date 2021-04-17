@@ -14,7 +14,8 @@
             <?php if($uid['trust_level'] == 5) { ?>
                 <div class="boxline">
                     <label for="post_title">URL</label>
-                    <input class="add" type="text" value="<?= $post['post_url']; ?>" name="post_url" />
+                    <input class="add-url" type="text" value="<?= $post['post_url']; ?>" name="post_url" />
+                    <input id="graburl" type="submit_url" name="submit_url" value="Извлечь" />
                     <br />
                 </div> <?php } ?>
                 <div class="boxline">

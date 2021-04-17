@@ -45,4 +45,5 @@
         <div class="no-content"><?= lang('no-comment'); ?>...</div>
     <?php } ?>
 </main> 
+<?php include TEMPLATE_DIR . '/_block/user-menu.php'; ?>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

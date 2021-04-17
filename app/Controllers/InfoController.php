@@ -27,8 +27,13 @@ class InfoController extends \MainController
         $comm_num      = InfoModel::getCommentsNumAll();
         $vote_comm_num = InfoModel::getCommentsVoteNumAll();
         $vote_post_num = InfoModel::getPostVoteNumAll();
+        $flow_num = InfoModel::GrafFlow();
         
-        $vote_graff = InfoModel::GrafVote();
+        $result = Array();
+        foreach($flow_num as $ind => $row){
+            $row['date']    = date("j", strtotime($row['date']));
+            $result[$ind]   = $row;
+        }
         
         $uid  = Base::getUid();
         $data = [
@@ -40,6 +45,7 @@ class InfoController extends \MainController
             'comm_num'      => $comm_num,
             'vote_comm_num' => $vote_comm_num,
             'vote_post_num' => $vote_post_num,
+            'flow_num'      => $result,
         ];
 
         return view(PR_VIEW_DIR . '/info/stats', ['data' => $data, 'uid' => $uid]);

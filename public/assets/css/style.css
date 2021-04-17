@@ -196,8 +196,12 @@ blockquote {
 .site-header {
   padding: 0.4rem 0.5rem;
 }
-.sb-telo {
+.sb-telo, .recommend-telo, #sidebar h3.recommend {
   margin-bottom: 15px;
+}
+.recommend-telo a {
+    font-size: 14px;
+    color: #333;
 }
 .sb-telo .ava {
   border-radius: 8px;
@@ -218,7 +222,7 @@ blockquote {
   margin-left: 20px;
   display: block;
 }
-.sb-telo a:hover {
+.sb-telo a:hover, .recommend-telo a:hover  {
   color: var(--color-gray-1);
 }
 .closed-on {
@@ -362,6 +366,7 @@ input[type="submit_url"] {
   cursor: pointer;
   color: #333333;
 }
+input[type="submit_url"] {text-align: center;}
 button:first-child,
 input[type="button"]:first-child,
 input[type="reset"]:first-child,
@@ -386,7 +391,7 @@ textarea {
   font-size: 15px;
 }
 .telo-detail_post textarea, .block-comments textarea {
-  width: 95%;
+  width: 75%;
 }
 textarea:focus, input:focus {
   border-color: #888;
@@ -431,7 +436,7 @@ input.form-about {width: 250px;}
   width: 75%;
 }
 .box.create input.add-url {
-  width: 52%;
+  width: 59%;
 }
 .box.setting textarea, .box.setting input {
   width: 300px;
@@ -731,6 +736,10 @@ ol.comment-telo.three {
 ol.comment-telo {
   list-style: none;
   padding-left: 23px;
+}
+.n-comm {
+  color: #390;
+  font-size: 13px;
 }
 .comm-telo {
   margin-left: 40px;
