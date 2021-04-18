@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="/assets/css/style.css">
         <script src="/assets/js/jquery.min.js"></script>
         <link rel="icon" href="/favicon.ico">
+        <link rel="apple-touch-icon" href="/favicon.png">
         
         <?php if(Request::getUri() == '/flow') { ?>
             <script src="/assets/js/flow.js"></script>

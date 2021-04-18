@@ -47,6 +47,7 @@ Route::before('Authorization@noAuth')->getGroup();
     Route::type('post')->protect()->get('/comment/edit')->controller('CommentController@editComment');
 	Route::type('post')->protect()->get('/comment/add')->controller('CommentController@create');
 	Route::type('post')->get('/comment/del')->controller('CommentController@deletComment');
+    Route::type('post')->get('/comment/addfavorite')->controller('CommentController@addCommentFavorite');
 
 	// Помещаем свой пост в профиль
 	Route::type('post')->get('/post/addpostprof')->controller('PostController@addPostProf');
@@ -129,6 +130,8 @@ Route::type('post')->get('/comments/addform')->controller('CommentController@add
 
 // Поиск
 Route::type(['get','post'])->get('/search')->controller('SearchController');
+Route::get('/domain/{domain}')->controller('SearchController@domain')->where(['domain' => '[A-Za-z0-9-.]+']);
 
-// Пагинация и главная страница
-Route::get('/{page?}')->protect()->controller('PostController')->where(['page' => '[0-9]+']);
+// Пагинация и главная страница, комментарии
+Route::get('/{page?}')->controller('PostController')->where(['page' => '[0-9]+']);
+Route::get('/comments/{page?}')->controller('CommentController')->where(['page' => '[0-9]+']);

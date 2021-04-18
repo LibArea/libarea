@@ -17,6 +17,7 @@ return [
     'forgot-password'   => 'Forgot your password',
     'repeat-password'   => 'Repeat the password',
     'ban-space'         => 'This space is blocked',
+    'domain-desc'       => 'Grouping posts by domain',
     
     /* Info */
     'init-setip-desc'   => 'This page describes the requirements and steps for setting up and installing the site. Frequently asked questions.',

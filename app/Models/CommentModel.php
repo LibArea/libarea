@@ -7,42 +7,41 @@ use PDO;
 class CommentModel extends \MainModel
 {
     // Все комментарии
-    public static function getCommentsAll($page)
+    public static function getCommentsAll($page, $user_id)
     {
         $offset = ($page-1) * 25; 
         
-        $sql = "SELECT c.*, p.*,
+        $sql = "SELECT c.*, p.*, 
                 u.id, u.login, u.avatar
                 fROM comments as c
-                INNER JOIN users as u ON u.id = c.comment_user_id
-                INNER JOIN posts as p ON c.comment_post_id = p.post_id
+                JOIN users as u ON u.id = c.comment_user_id
+                JOIN posts as p ON c.comment_post_id = p.post_id
                 ORDER BY c.comment_id DESC LIMIT 25 OFFSET ".$offset." ";
                         
-        $result = DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
-        
-        return $result;
+        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
     
+    // ->leftJoin(['votes_comm'])->on(['votes_comm_item_id'], '=', ['comment_id'])
+    //    ->and(['votes_comm_user_id'], '=', $uid)
     
    // Количество комментариев
     public static function getCommentAllCount()
     {
         $query = XD::select('*')->from(['comments'])->getSelect();
 
-        $num = ceil(count($query) / 25);
- 
-        return $num;
+        return ceil(count($query) / 25);
     }
     
     // Получаем комментарии в посте
-    public static function getCommentsPost($post_id)
-    {
+    public static function getCommentsPost($post_id, $uid)
+    { 
         $q = XD::select('*')->from(['comments']);
-        $query = $q->leftJoin(['users'])->on(['id'], '=', ['comment_user_id'])->where(['comment_post_id'], '=', $post_id);
+        $query = $q->leftJoin(['users'])->on(['id'], '=', ['comment_user_id'])
+        ->leftJoin(['votes_comm'])->on(['votes_comm_item_id'], '=', ['comment_id'])
+        ->and(['votes_comm_user_id'], '=', $uid)
+        ->where(['comment_post_id'], '=', $post_id);
 
-        $result = $query->getSelect();
-
-        return $result;
+        return $query->getSelect();
     }
 
     // Страница комментариев участника
@@ -54,9 +53,7 @@ class CommentModel extends \MainModel
                 ->where(['login'], '=', $slug)
                 ->orderBy(['comment_id'])->desc();
         
-        $result = $query->getSelect();
-        
-        return $result;
+        return $query->getSelect();
     } 
    
     // Запись комментария
@@ -130,5 +127,33 @@ class CommentModel extends \MainModel
         return  DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
    }
     
+    // Добавить комментарий в закладки
+    public static function setCommentFavorite($post_id, $uid)
+    {
+        $result = self::getMyCommentFavorite($post_id, $uid); 
+
+        if(!$result){
+           XD::insertInto(['favorite'], '(', ['favorite_tid'], ',', ['favorite_uid'], ',', ['favorite_type'], ')')->values( '(', XD::setList([$post_id, $uid, 2]), ')' )->run();
+        } else {
+           XD::deleteFrom(['favorite'])->where(['favorite_tid'], '=', $post_id)->and(['favorite_uid'], '=', $uid)->run(); 
+        } 
+        
+        return true;
+    }
+  
+    // Комментарий в закладках или нет
+    public static function getMyCommentFavorite($post_id, $uid) 
+    {
+        $result = XD::select('*')->from(['favorite'])->where(['favorite_tid'], '=', $post_id)
+        ->and(['favorite_uid'], '=', $uid)
+        ->and(['favorite_type'], '=', 2)
+        ->getSelect();
+        
+        if($result) {
+            return 1;
+        } else {
+            return false;
+        }
+    }
     
 }

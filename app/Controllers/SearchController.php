@@ -58,5 +58,43 @@ class SearchController extends \MainController
 
         return view(PR_VIEW_DIR . '/search/index', ['data' => $data, 'uid' => $uid, 'result' => $result, 'query' => $query]);
     }
-    
+    // Поиск по домену
+    public function domain() 
+    {
+        $domain     = \Request::get('domain');
+        $account    = \Request::getSession('account');
+        $user_id    = (!$account) ? 0 : $account['user_id'];
+        $post       = SearchModel::getDomain($domain, $user_id); 
+ 
+        // Покажем 404
+        if(!$post) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
+        }
+        
+        $result = Array();
+        foreach($post as $ind => $row){
+             
+            if(!$row['avatar']) {
+                $row['avatar']  = 'noavatar.png';
+            } 
+ 
+            $row['avatar']          = $row['avatar'];
+            $row['post_title']      = $row['post_title'];
+            $row['post_slug']       = $row['post_slug'];
+            $row['post_date']       = Base::ru_date($row['post_date']);
+            $row['num_comments']    = Base::ru_num('comm', $row['post_comments']);
+            $result[$ind]           = $row;
+         
+        }
+        
+        $uid  = Base::getUid();
+        $data = [
+            'h1'            => lang('Domain') . ': ' . $domain,  
+            'title'         => lang('Domain') . ': ' . $domain . ' | ' . $GLOBALS['conf']['sitename'],
+            'description'   => lang('domain-desc') . ' - ' . $domain . ' на сайте '. $GLOBALS['conf']['sitename'],
+        ];
+
+        return view(PR_VIEW_DIR . '/search/domain', ['data' => $data, 'uid' => $uid, 'posts' => $result]);
+    }
 }

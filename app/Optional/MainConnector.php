@@ -22,7 +22,8 @@ class MainConnector implements Connector
             "App\Commands\*" => "app/Commands/",
             // ... or, if a specific class is added,
             "Parsedown"   => "vendor/parsedown/Parsedown.php",  
-            "ImageUpload" => "app/Libraries/ImageUpload.php",
+            "ImageUpload" => "app/Libraries/ImageUpload.php",  // Возможно замена
+            // "ImageLib"    => "app/Libraries/ImageLib.php",
             "Base"        => "app/Libraries/Base.php",  
             "DB"          => "database/DB.php",  
             "XdORM\XD"    => "vendor/phphleb/xdorm/XD.php",

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use XdORM\XD;
 use DB;
 use PDO;
 
@@ -14,6 +15,22 @@ class SearchModel extends \MainModel
         $result = $result_q->fetchall(PDO::FETCH_ASSOC);
 
         return $result;
+    }
+
+    // Получение постов по url
+    public static function getDomain($url, $uid)
+    {
+        $q = XD::select('*')->from(['posts']);
+        $query = $q->leftJoin(['users'])->on(['id'], '=', ['post_user_id'])
+                ->leftJoin(['space'])->on(['space_id'], '=', ['post_space_id'])
+                ->leftJoin(['votes_post'])->on(['votes_post_item_id'], '=', ['post_id'])
+                ->and(['votes_post_user_id'], '=', $uid)
+                ->where(['post_is_delete'], '=', 0)
+                ->and(['post_url_domain'], '=', $url)
+                ->orderBy(['post_id'])->desc();
+
+        return $query->getSelect();
+
     }
 
 }

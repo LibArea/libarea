@@ -3,6 +3,12 @@
     <div class="togglemenu closed-off">
         <svg class="md-icon moon"><use xlink:href="/assets/svg/icons.svg#closed"></use></svg>
     </div>
+    <?php if($uid['id']) { ?>                     
+        <a <?php if($uid['uri'] == '/u/' .$uid['login']. '/favorite') { ?>class="active"<?php } ?> href="/u/<?= $uid['login']; ?>/favorite">
+            <svg class="md-icon"><use xlink:href="/assets/svg/icons.svg#bookmark"></use></svg>  
+            <span><?= lang('Favorites'); ?></span>              
+        </a>
+    <?php } ?>                     
     <a <?php if($uid['uri'] == '/top') { ?>class="active"<?php } ?> title="<?= lang('TOP'); ?>" href="/top">
         <svg class="md-icon"><use xlink:href="/assets/svg/icons.svg#bulb"></use></svg>
         <span><?= lang('TOP'); ?></span> 

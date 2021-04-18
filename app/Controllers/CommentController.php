@@ -20,14 +20,13 @@ class CommentController extends \MainController
          
         $pg = \Request::getInt('page'); 
         $page = (!$pg) ? 1 : $pg;
-         
-        $pagesCount = CommentModel::getCommentAllCount();  
-        $comm       = CommentModel::getCommentsAll($page);
- 
+        
         $account    = \Request::getSession('account');
         $user_id    = $account ? $account['user_id'] : 0;
+         
+        $pagesCount = CommentModel::getCommentAllCount();  
+        $comm       = CommentModel::getCommentsAll($page, $user_id);
  
-
         $result = Array();
         foreach($comm  as $ind => $row){
             if(!$row['avatar']) {
@@ -263,4 +262,18 @@ class CommentController extends \MainController
         return false;
     }
     
+    // Помещаем комментарий в закладки
+    public function addCommentFavorite()
+    {
+        $comm_id = \Request::getPostInt('comm_id');
+        $comm    = CommentModel::getCommentsOne($comm_id); 
+        
+        if(!$comm){
+            redirect('/');
+        }
+        
+        CommentModel::setCommentFavorite($comm_id, $_SESSION['account']['user_id']);
+       
+        return true;
+    } 
 }

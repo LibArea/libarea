@@ -160,23 +160,27 @@ class PostModel extends \MainModel
             ['post_title'], ',', 
             ['post_content'], ',', 
             ['post_content_preview'], ',', 
-            ['post_content_img'], ',', 
+            ['post_content_img'], ',',  
+            ['post_thumb_img'], ',',
             ['post_slug'], ',', 
             ['post_ip_int'], ',', 
             ['post_user_id'], ',', 
             ['post_space_id'], ',', 
-            ['post_url'],')')->values( '(', 
+            ['post_url'], ',',
+            ['post_url_domain'],')')->values( '(', 
         
         XD::setList([
             $data['post_title'], 
             $data['post_content'], 
             $data['post_content_preview'], 
-            $data['post_content_img'], 
+            $data['post_content_img'],
+            $data['post_thumb_img'],            
             $data['post_slug'], 
             $data['post_ip_int'], 
             $data['post_user_id'], 
             $data['post_space_id'], 
-            $data['post_url']]), ')' )->run();
+            $data['post_url'],
+            $data['post_url_domain']]), ')' )->run();
 
         return true; 
     } 
@@ -223,10 +227,10 @@ class PostModel extends \MainModel
     // Добавить пост в закладки
     public static function setPostFavorite($post_id, $uid)
     {
-        $result = self::getMyFavorite($post_id, $uid); 
+        $result = self::getMyPostFavorite($post_id, $uid); 
 
         if(!$result){
-           XD::insertInto(['favorite'], '(', ['favorite_tid'], ',', ['favorite_uid'], ')')->values( '(', XD::setList([$post_id, $uid]), ')' )->run();
+           XD::insertInto(['favorite'], '(', ['favorite_tid'], ',', ['favorite_uid'], ',', ['favorite_type'], ')')->values( '(', XD::setList([$post_id, $uid, 1]), ')' )->run();
         } else {
            XD::deleteFrom(['favorite'])->where(['favorite_tid'], '=', $post_id)->and(['favorite_uid'], '=', $uid)->run(); 
         } 
@@ -235,16 +239,18 @@ class PostModel extends \MainModel
     }
   
     // Пост в закладках или нет
-    public static function getMyFavorite($post_id, $uid) 
+    public static function getMyPostFavorite($post_id, $uid) 
     {
-        $result = XD::select('*')->from(['favorite'])->where(['favorite_tid'], '=', $post_id)->and(['favorite_uid'], '=', $uid)->getSelect();
+        $result = XD::select('*')->from(['favorite'])->where(['favorite_tid'], '=', $post_id)
+        ->and(['favorite_uid'], '=', $uid)
+        ->and(['favorite_type'], '=', 1)
+        ->getSelect();
         
         if($result) {
             return 1;
         } else {
             return false;
         }
-        
     }
     
     // Удален пост или нет
@@ -259,7 +265,7 @@ class PostModel extends \MainModel
     public static function PostDelete($post_id) 
     {
         if(self::isThePostDeleted($post_id) == 1) {
-            
+
             XD::update(['posts'])->set(['post_is_delete'], '=', 0)->where(['post_id'], '=', $post_id)->run();
         
         } else {

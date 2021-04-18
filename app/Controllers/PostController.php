@@ -5,7 +5,6 @@ use Hleb\Constructor\Handlers\Request;
 use App\Models\PostModel;
 use App\Models\SpaceModel;
 use App\Models\CommentModel;
-use App\Models\VotesCommentModel;
 use App\Models\VotesPostModel;
 use Base;
 use Parsedown;
@@ -203,10 +202,10 @@ class PostController extends \MainController
         $post['edit_date']      = Base::ru_date($post['edit_date']);
         $post['avatar']         = $post['avatar'];
         $post['num_comments']   = Base::ru_num('comm', $post['post_comments']); 
-        $post['favorite_post']  = PostModel::getMyFavorite($post['post_id'], $uid);
+        $post['favorite_post']  = PostModel::getMyPostFavorite($post['post_id'], $uid);
         
         // Получим комментарии
-        $post_comments = CommentModel::getCommentsPost($post['post_id']);
+        $post_comments = CommentModel::getCommentsPost($post['post_id'], $uid);
  
         $comments = Array();
         foreach($post_comments as $ind => $row){
@@ -225,7 +224,7 @@ class PostController extends \MainController
             $row['comment_date']        = Base::ru_date($row['comment_date']);
             $row['after']               = $row['comment_after'];
             $row['del']                 = $row['comment_del'];
-            $row['comm_vote_status']    = VotesCommentModel::getVoteStatus($row['comment_id'], $uid);
+            $row['favorite_comm']       = CommentModel::getMyCommentFavorite($row['comment_id'], $uid);
             $comments[$ind]             = $row;
          
         }
@@ -354,11 +353,19 @@ class PostController extends \MainController
             return true;
         }
         
+        if($post_url) { 
+            $og_img             = self::grabOgImg($post_url);
+            $parse              = parse_url($post_url);
+            $post_url_domain    = $parse['host']; 
+        } 
+
         // Проверяем url для > TL1
         // Ввести проверку дублей и запрещенных, для img повторов
         $post_url             = (empty($post_url)) ? '' : $post_url;
+        $post_url_domain      = (empty($post_url_domain)) ? '' : $post_url_domain;
         $post_content_preview = (empty($post_content_preview)) ? '' : $post_content_preview;
         $post_content_img     = (empty($post_content_img)) ? '' : $post_content_img;
+        $og_img               = (empty($og_img)) ? '' : $og_img;
 
         // Ограничим частоту добавления
         // Добавить условие TL
@@ -376,16 +383,18 @@ class PostController extends \MainController
             'post_content'          => $post_content,
             'post_content_preview'  => $post_content_preview,
             'post_content_img'      => $post_content_img,
+            'post_thumb_img'        => $og_img,
             'post_slug'             => $post_slug,
             'post_ip_int'           => $post_ip_int,
             'post_user_id'          => $post_user_id,
             'post_space_id'         => $space_id,
             'post_url'              => $post_url,
+            'post_url_domain'       => $post_url_domain,
         ];
         
         // Записываем пост
         PostModel::AddPost($data);
-        
+
         redirect('/');   
     }
     
@@ -393,10 +402,65 @@ class PostController extends \MainController
     public function grabTitle() 
     {
         $url   = \Request::getPost('uri');
-        preg_match("/<title>(.+)<\/title>/siU", file_get_contents($url), $matches);
-        $title = $matches[1];
+        
+        ob_start();
+        $curl_handle=curl_init();
+        curl_setopt($curl_handle, CURLOPT_URL, $url);
+        curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, true);
+        $getit = curl_exec($curl_handle);
+        curl_close($curl_handle);
+        ob_end_clean();
+        preg_match("/<title>(.*)<\/title>/i", $getit, $matches);
+        
+        return $matches[1];
+    }
+    
+    // Получаем данные Open Graph Protocol 
+    public static function grabOgImg($post_url) 
+    {
+        // Возможно использовать библиотеку, пока так...
+        $site_html = file_get_contents($post_url);
+        $matches=null;
+        preg_match_all('~<\s*meta\s+property="(og:[^"]+)"\s+content="([^"]*)~i', $site_html, $matches);
+        
+        $ogtags=array();
+        for($i=0;$i<count($matches[1]);$i++)
+        {
+            $ogtags[$matches[1][$i]]=$matches[2][$i];
+        }
+        
+        if($ogtags['og:image']) {
+            
+            $ext = pathinfo(parse_url($ogtags['og:image'], PHP_URL_PATH), PATHINFO_EXTENSION);
+            
+            if(in_array($ext, array ('jpg', 'jpeg', 'png'))) {
+                
+                $puth = HLEB_PUBLIC_DIR . '/uploads/thumbnails/';
+                $year = date('Y') . '/';
+                $filename = 'p-' . time() . '.' . $ext;
+                
+                if(!is_dir($puth . $year)) { @mkdir($puth . $year); }
+                $local = $puth . $year . $filename;
+ 
+                $fp = fopen ($local, 'w+');
+                $ch = curl_init($ogtags['og:image']);
+                curl_setopt($ch, CURLOPT_FILE, $fp);
+                curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+                curl_setopt($ch, CURLOPT_TIMEOUT, 1000);
+                curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0');
+                curl_exec($ch);
+                curl_close($ch);
+                fclose($fp);  
 
-        return $title;
+                if(file_exists($local)) {
+                    return $year . $filename;
+                }
+                
+            }
+
+        }
+
+        return false;
     }
     
     // Показ формы поста для редактирование

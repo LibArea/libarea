@@ -6,6 +6,7 @@ use Hleb\Constructor\Handlers\Request;
 use App\Models\UserModel;
 use App\Models\PostModel;
 use ImageUpload;
+use Parsedown;
 
 class UserController extends \MainController
 {
@@ -274,6 +275,10 @@ class UserController extends \MainController
             hl_preliminary_exit();
         }
         
+        $Parsedown = new Parsedown(); 
+        $Parsedown->setSafeMode(true); // безопасность
+        
+        
         $fav = UserModel::getUserFavorite($user['id']);
    
         $result = Array();
@@ -282,12 +287,12 @@ class UserController extends \MainController
             if(!$row['avatar'] ) {
                 $row['avatar']  = 'noavatar.png';
             } 
- 
-            $row['avatar']  = $row['avatar'];
-            $row['title']   = $row['post_title'];
-            $row['slug']    = $row['post_slug'];
-            $row['date']    = Base::ru_date($row['post_date']);
-            $result[$ind]   = $row;
+
+            $row['avatar']          = $row['avatar'];  
+            $row['comment_content'] = $Parsedown->text($row['comment_content']);
+            $row['date']            = Base::ru_date($row['post_date']);
+            $row['post']            = PostModel::getPostId($row['comment_post_id']);
+            $result[$ind]           = $row;
          
         }
         

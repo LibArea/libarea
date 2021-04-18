@@ -10,6 +10,8 @@ return [
     'All comments'      => 'Все комментарии', 
     'Recommended'       => 'Рекомендовано',
     'Notifications'     => 'Уведомления',
+    'Domain'            => 'Домен',
+    'domain-desc'       => 'Группировка постов по домену',
     'Sign in'           => 'Войти',
     'Sign out'          => 'Выйти', 
     'Sign up'           => 'Регистрация',

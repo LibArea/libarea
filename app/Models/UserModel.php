@@ -3,6 +3,8 @@
 namespace App\Models;
 use Hleb\Constructor\Handlers\Request;
 use XdORM\XD;
+use DB;
+use PDO;
 use Base;
 
 class UserModel extends \MainModel
@@ -21,7 +23,6 @@ class UserModel extends \MainModel
             }
             
         return $query->getSelect();
- 
     }
 
     // Получение информации по логину
@@ -31,9 +32,7 @@ class UserModel extends \MainModel
                 ->from(['users'])
                 ->where(['login'], '=', $login);
 
-        $result = $query->getSelectOne();
-
-        return $result;
+        return $query->getSelectOne();
     }
     
     // Получение информации по id
@@ -43,9 +42,7 @@ class UserModel extends \MainModel
                 ->from(['users'])
                 ->where(['id'], '=', $id);
 
-        $result = $query->getSelectOne();
-
-        return $result;
+        return $query->getSelectOne();
     }
 
     // Регистрация участника
@@ -86,8 +83,7 @@ class UserModel extends \MainModel
     {
         $query = XD::select(['login', 'avatar'])->from(['users'])->where(['login'], '=', $login);
 
-        $result = $query->getSelectOne();
-        return $result;
+        return $query->getSelectOne();
     }
 
    // TL - название
@@ -97,82 +93,68 @@ class UserModel extends \MainModel
         $query = $q->leftJoin(['users'])->on(['trust_level'], '=', ['trust_id'])
                  ->where(['id'], '=', $id);
                  
-        $result = $query->getSelectOne();
-        
-        return $result;
+        return $query->getSelectOne();
     }  
 
-    // Страница постов участника
+    // Страница закладок участника (комментарии и посты)
     public static function getUserFavorite($uid)
     {
-         
-        $q = XD::select('*')->from(['posts']);
-        $query = $q->leftJoin(['users'])->on(['id'], '=', ['post_user_id'])
-                ->leftJoin(['space'])->on(['space_id'], '=', ['post_space_id'])
-                ->leftJoin(['favorite'])->on(['favorite_tid'], '=', ['post_id'])
-                ->where(['favorite_uid'], '=', $uid)
-                ->orderBy(['post_id'])->desc();
-  
-        $result = $query->getSelect();
-
-        return $result;
+        $sql = "SELECT favorite.*, 
+                       users.id, users.login, users.avatar, 
+                       posts.*, 
+                       comments.*, 
+                       space.*
+                fROM favorite
+                LEFT JOIN users ON users.id = favorite.favorite_uid
+                LEFT JOIN posts ON posts.post_id = favorite.favorite_tid AND favorite.favorite_type = 1
+                LEFT JOIN comments ON comments.comment_id = favorite.favorite_tid AND favorite.favorite_type = 2
+                LEFT JOIN space ON  space.space_id = posts.post_space_id
+                WHERE favorite.favorite_uid = $uid LIMIT 25 "; 
+                        
+        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     } 
 
     // Информация участника
     public static function getUserInfo($email) 
     {
-
         $query = XD::select(['id', 'email', 'password', 'login', 'name', 'avatar', 'trust_level', 'ban_list'])
              ->from(['users'])
              ->where(['email'], '=', $email);
 
-        $result = $query->getSelectOne();
-        return $result;
-
+        return $query->getSelectOne();
     }
     
    // Количество постов на странице профиля
     public static function getUsersPostsNum($id)
     {
-       
         $q = XD::select('*')->from(['posts']);
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['post_user_id'])
                  ->where(['id'], '=', $id);
        
-        $result = count($query->getSelect());
-
-        return $result;
-        
+        return count($query->getSelect());
     } 
     
     // Количество комментариев на странице профиля
     public static function getUsersCommentsNum($id)
     {
-        
         $q = XD::select('*')->from(['comments']);
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['comment_user_id'])
                  ->where(['id'], '=', $id);
        
-        $result = count($query->getSelect());
-        return $result;
-        
+        return count($query->getSelect());
     }
     
     // Количество закладок на странице профиля
     public static function getUsersFavoriteNum($id)
     {
-        
         $query = XD::select('*')->from(['favorite'])->where(['favorite_uid'], '=', $id);
 
-        $result = count($query->getSelect());
-        return $result;
-        
+        return count($query->getSelect());
     }
     
     // Проверка Логина на дубликаты
     public static function replayLogin($login)
     {
-
         $q = XD::select('*')->from(['users']);
         $query = $q->where(['login'], '=', $login);
         $result = $query->getSelectOne();
@@ -182,13 +164,11 @@ class UserModel extends \MainModel
         }
         
         return true;
-        
     }
     
     // Проверка Email на дубликаты
     public static function replayEmail($email)
     {
-
         $q = XD::select('*')->from(['users']);
         $query = $q->where(['email'], '=', $email);
         $result = $query->getSelectOne();
@@ -198,23 +178,19 @@ class UserModel extends \MainModel
         }
         
         return true;
-        
     }
     
     // Редактирование профиля
     public static function editProfile($login, $name, $about)
     {
-
         XD::update(['users'])->set(['name'], '=', $name, ',', ['about'], '=', $about)->where(['login'], '=', $login)->run();
  
         return true;
-        
     }
     
     // Записываем последние данные авторизации
     public static function setUserLastLogs($id, $login, $trust_level, $last_ip) 
     {
-         
         XD::insertInto(['users_logs'], '(', ['logs_user_id'], ',', ['logs_login'], ',', ['logs_trust_level'], ',', ['logs_ip_address'], ')')->values( '(', XD::setList([$id, $login, $trust_level, $last_ip]), ')' )->run();
         return true;   
     }
@@ -230,7 +206,6 @@ class UserModel extends \MainModel
         }
 
         return true;   
-        
     }
     
     // Находит ли пользователь в бан- листе
@@ -246,7 +221,6 @@ class UserModel extends \MainModel
         }
 
         return true;   
-        
     }
     
     ////// ЗАПОМНИТЬ МЕНЯ
@@ -257,7 +231,6 @@ class UserModel extends \MainModel
     // если мы найдем совпадение, и оно все ещё в силе.
     public static function checkCookie()
     {
-
         // Есть "remember" куки?
         $remember = Request::getCookie('remember');
 
@@ -320,7 +293,6 @@ class UserModel extends \MainModel
         return;
     }
 
-
     public static function setUserSession($user)
     {   
         $data = [
@@ -344,7 +316,6 @@ class UserModel extends \MainModel
 
     public static function rememberMe($uid)
     {
-
         // НАСТРОЕМ НАШ СЕЛЕКТОР, ВАЛИДАТОР И СРОК ДЕЙСТВИЯ 
         // Селектор действует как уникальный идентификатор, поэтому нам не нужно 
         // сохранять идентификатор пользователя в нашем файле cookie
@@ -366,7 +337,6 @@ class UserModel extends \MainModel
             'hashedvalidator' => hash('sha256', $validator),
             'expires' => date('Y-m-d H:i:s', $expires),
         ];        
-
 
         // ПРОВЕРИМ, ЕСТЬ ЛИ У ИДЕНТИФИКАТОРА ПОЛЬЗОВАТЕЛЯ УЖЕ НАБОР ТОКЕНОВ
         // Мы действительно не хотим иметь несколько токенов и селекторов для
@@ -416,7 +386,6 @@ class UserModel extends \MainModel
         // Установить
         $token = $selector . ':' . $validator;
 
-
         // Если установлено значение true, каждый раз, когда пользователь посещает сайт 
         // и обнаруживает файл cookie новая дата истечения срока действия 
         // устанавливается с помощью параметра  $rememberMeExpire - выше 
@@ -446,8 +415,6 @@ class UserModel extends \MainModel
             $GLOBALS['conf']['cookieHTTPOnly'],
         );
     }
-
-
 
     // Поля в таблице users_auth_tokens
     // auth_id,	auth_user_id,	auth_selector,	auth_hashedvalidator,	auth_expires	

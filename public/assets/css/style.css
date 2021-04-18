@@ -3,7 +3,7 @@ html {
   overflow-y:scroll;
 }
 :root {
-  --color-gray-1: #767676;
+  --color-gray-1: #6d6b6b; 
   --color-gray-2: #444;
   --color-white: #fff;
 } 
@@ -338,11 +338,11 @@ hr {
 }
 .pagination a {
   padding: 0 3px;
-  color: #888;
+  color: var(--color-gray-1);
   font-size: 15px;
 }
 .pagination a:hover {
-  color: #666;
+  color: #333;
 }
 
 /* these must be separate */
@@ -492,14 +492,14 @@ input.form-about {width: 250px;}
 .shown_post img {
   max-width: 99%;
 }
-a.showpost {
+.showpost {
   font-size: 14px;
   color: var(--color-gray-1);
   max-width: 600px;
   margin: 0 0 5px 0;
   display: block;
 }
-a.showpost span {
+.showpost span {
   color: #bbb;
 }
 .show_detail {
@@ -523,8 +523,11 @@ a.showpost span {
 .post-body {
   margin-left: 40px;
 }
-.telo-detail_post img {
-  max-width: 600px;
+.telo-detail_post img, img.thumb {
+  max-width: 65%;
+}
+img.thumb {
+  margin: 10px 0;
 }
 .telo-detail_post.dell {
   background-color: rgb(246, 196, 184);
@@ -532,6 +535,20 @@ a.showpost span {
 }
 .post-telo {
   margin-bottom: 12px;
+}
+.telo-fav-comm {
+  background: #f3f3f3;
+  padding: 1px 15px;
+  max-width: 700px;
+  font-size: 13px;
+  color: var(--color-gray-1)
+}
+.voters-fav {
+  float: left;
+  width: 30px;
+  height: 45px;
+  margin: 3px 0 0 0;
+  font-size: 13px;
 }
 .u-url .titl {
   margin-bottom: 2px;
@@ -778,10 +795,10 @@ ol.comment-telo {
 .otst {
   margin: 0 1px;
 }
-.cm_addentry, .comments .cm_add_link, .comm-deletes {
-  margin-left: 40px;
+.cm_addentry, .comments .cm_add_link, .comm-deletes, .user-comm-fav {
+  margin-left: 30px;
 }
-.addcomm, .delcomm, .editcomm {
+.addcomm, .delcomm, .editcomm, .favcomm {
   color: var(--color-gray-1);
   font-size: 9.5pt;
 }
@@ -842,6 +859,7 @@ textarea.mess {
   height: 100px;
   width: 100px;
 }
+ 
 .telo-post {
   margin-left: 5px;
 }
@@ -999,8 +1017,9 @@ div.voters .comm-up-id, div.voters .post-up-id {
 
 /* Меню */
 .menu-info {
-    background-color: #f0f0df;
-    padding: 15px 0 10px 20px;
+  background-color: #f0f0df;
+  padding: 15px 0 10px 20px;
+  margin-left: 20px;
 }
 .menu {
   grid-area: menu;
@@ -1014,7 +1033,7 @@ div.voters .comm-up-id, div.voters .post-up-id {
   margin-bottom: 5px;
 }
 .menu a {
-  color: #888;   
+  color: var(--color-gray-1);   
 }
 .menu a:hover > .md-icon {
   stroke: #2562dc;
@@ -1054,6 +1073,7 @@ body.menuno .menu  {
   
 @media screen and (max-width: 840px) {
   #sidebar, .no-mob, menu {display: none;}
+  img.thumb {max-width: 95%;}
   main {max-width: 100vw;}
   .user_card .column {padding: 10px;}
   .user_card .gravatar {height: 55px;width: 55px;}

@@ -65,13 +65,13 @@
                             
                             <?php if ($post['favorite_post']){ ?>
                                <span class="otst">   </span>    
-                               <span class="user-favorite" data-post="<?= $post['post_id']; ?>">
-                                    <span class="mu_favorite"><?= lang('remove-favorites'); ?></span>
+                               <span class="user-post-fav" data-post="<?= $post['post_id']; ?>">
+                                    <span class="my_favorite"><?= lang('remove-favorites'); ?></span>
                                </span>   
                             <?php } else { ?>
                                 <span class="otst">   </span>
-                                <span class="user-favorite" data-post="<?= $post['post_id']; ?>">
-                                    <span class="mu_favorite"><?= lang('add-favorites'); ?></span>
+                                <span class="user-post-fav" data-post="<?= $post['post_id']; ?>">
+                                    <span class="my_favorite"><?= lang('add-favorites'); ?></span>
                                 </span>
                             <?php } ?> 
                             
@@ -92,6 +92,11 @@
                     </div>  
                 </div>
                 <div class="post-body">
+                
+                    <?php if($post['post_thumb_img']) { ?> 
+                        <img class="thumb" alt="<?= $post['post_url']; ?>" src="/uploads/thumbnails/<?= $post['post_thumb_img'] ?> ">
+                    <?php } ?>
+                
                     <div class="post">
                         <?= $post['post_content']; ?> 
                     </div> 
@@ -149,7 +154,7 @@
                                     <div class="score"><?= $comm['comment_votes']; ?></div>
                                 </div>
                             <?php } else { ?>
-                                <?php if ($comm['comm_vote_status'] || $uid['id'] == $comm['comment_user_id']) { ?>
+                                <?php if ($comm['votes_comm_user_id'] == $uid['id'] || $uid['id'] == $comm['comment_user_id']) { ?>
                                     <div class="voters active">
                                         <div class="comm-up-id"></div>
                                         <div class="score"><?= $comm['comment_votes']; ?></div>
@@ -214,8 +219,20 @@
                                         <a data-id="<?= $comm['comment_id']; ?>" class="editcomm"><?= lang('Edit'); ?></a>
                                     </span>
                                 <?php } ?>
+                    
+                                <?php if ($uid['id']) { ?>                    
+                                    <?php if ($comm['favorite_comm']){ ?>
+                                       <span class="user-comm-fav" data-comm="<?= $comm['comment_id']; ?>">
+                                            <span class="favcomm"><?= lang('remove-favorites'); ?></span>
+                                       </span>   
+                                    <?php } else { ?>
+                                        <span class="user-comm-fav" data-comm="<?= $comm['comment_id']; ?>">
+                                            <span class="favcomm"><?= lang('add-favorites'); ?></span>
+                                        </span>
+                                    <?php } ?> 
+                                <?php } ?>            
                                 
-                                <?php if($uid['trust_level'] ==5) { ?>
+                                <?php if($uid['trust_level'] == 5) { ?>
                                     <span id="cm_dell" class="cm_add_link">
                                         <a data-id="<?= $comm['comment_id']; ?>" class="delcomm"><?= lang('Remove'); ?></a>
                                     </span>

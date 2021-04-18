@@ -1,11 +1,8 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<?php include TEMPLATE_DIR . '/_block/left-menu.php'; ?>
-<main class="telo">
+<main class="w-100">
+    <h1><?= $data['h1']; ?></h1>
 
-    <?php if (!$uid['id']) { ?>
-        <h1 class="top banner"><?= lang('site-closed'); ?>. <a href="/info"><?= lang('Read'); ?></a>...</h1> 
-    <?php } ?>  
-
+   
     <?php if (!empty($posts)) { ?> 
   
         <?php foreach ($posts as  $post) { ?>
@@ -54,17 +51,13 @@
                         <?= $post['space_name']; ?>
                     </a>
                     
-                    <?php if($post['post_url']) { ?> 
-                        <a class="post_url" href="/domain/<?= $post['post_url']; ?>"><?= $post['post_url']; ?></a> 
-                    <?php } ?>
-                    
                     <?php if ($post['post_content_preview']) { ?>
                         <div class="show">
                             <span class="show_add_<?= $post['post_id']; ?>">
-                                <div data-post_id="<?= $post['post_id']; ?>" class="showpost">
+                                <a data-post_id="<?= $post['post_id']; ?>" class="showpost">
                                     <span>&#9658;</span> 
                                     <?= $post['post_content_preview']; ?>... 
-                                </div>
+                                </a>
                             </span>
                         </div>
                     <?php } ?>
@@ -94,45 +87,8 @@
     <?php } else { ?>
         <div class="no-content"><?= lang('no-post'); ?>...</div>
     <?php } ?>
-    
-   <?php if(!($data['pNum'] > $data['pagesCount'])) { ?>
-        <div class="pagination">   
-            <?php if($data['pNum'] != 1) { ?> 
-                <a href="/<?= $data['pNum'] - 1; ?>"> << <?= lang('Page'); ?> <?= $data['pNum'] - 1; ?></a> 
-            <?php } ?>
-            <?php if($data['pagesCount'] != $data['pNum'] && $data['pNum'] != 1) { ?>|<?php } ?> 
-            <?php if($data['pagesCount'] > $data['pNum']) { ?>
-                <a href="/<?= $data['pNum'] + 1; ?>"><?= lang('Page'); ?>  <?= $data['pNum'] + 1; ?> >></a> 
-            <?php } ?>
-        </div>
-    <?php } ?>
+   
+   
  
 </main>
-
-<aside id="sidebar"> 
-    <?php if($data['space_hide']) { ?>
-        <div>
-            <h3><?= lang('Unsubscribed'); ?></h3>  
-            <?php foreach ($data['space_hide'] as  $hide) { ?>
-                <div class="space-color space_<?= $hide['space_color'] ?>"></div>
-                <a class="space-u" href="/s/<?= $hide['space_slug']; ?>" title="<?= $hide['space_name']; ?>">
-                    <?= $hide['space_name']; ?>
-                </a>
-            <?php } ?>
-            <div class="v-ots"></div> 
-        </div>    
-    <?php } ?>
-
-    <?php foreach ($data['latest_comments'] as  $comm) { ?>
-        <div class="sb-telo comm-space-color-<?= $comm['space_color']; ?>">
-            <div class="sb-date"> 
-                <img class="ava" alt="<?= $comm['login']; ?>" src="/uploads/avatar/small/<?= $comm['comment_avatar']; ?>">
-                <?= $comm['comment_date']; ?>
-            </div> 
-            <a href="/posts/<?= $comm['post_slug']; ?>#comm_<?= $comm['comment_id']; ?>">
-                <?= $comm['comment_content']; ?>...  
-            </a>
-       </div>
-    <?php } ?>   
-</aside> 
-<?php include TEMPLATE_DIR . '/footer.php'; ?>
+<?php include TEMPLATE_DIR . '/footer.php'; ?> 

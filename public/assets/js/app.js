@@ -47,12 +47,23 @@ $(function(){
         });
     });
     // Добавить пост в закладки
-    $(document).on("click", ".user-favorite", function(){      
+    $(document).on("click", ".user-post-fav", function(){      
         var post_id  = $(this).data('post');
         $.ajax({
             url: '/post/addfavorite',
             type: 'POST',
             data: {post_id: post_id},
+        }).done(function(data) {
+           location.reload(); 
+        });
+    }); 
+    // Добавить пост в закладки
+    $(document).on("click", ".user-comm-fav", function(){      
+        var comm_id  = $(this).data('comm');
+        $.ajax({
+            url: '/comment/addfavorite',
+            type: 'POST',
+            data: {comm_id: comm_id},
         }).done(function(data) {
            location.reload(); 
         });
