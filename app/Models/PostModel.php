@@ -166,6 +166,7 @@ class PostModel extends \MainModel
             ['post_ip_int'], ',', 
             ['post_user_id'], ',', 
             ['post_space_id'], ',', 
+            ['post_tag_id'], ',', 
             ['post_url'], ',',
             ['post_url_domain'],')')->values( '(', 
         
@@ -179,6 +180,7 @@ class PostModel extends \MainModel
             $data['post_ip_int'], 
             $data['post_user_id'], 
             $data['post_space_id'], 
+            $data['post_tag_id'], 
             $data['post_url'],
             $data['post_url_domain']]), ')' )->run();
 
@@ -209,6 +211,7 @@ class PostModel extends \MainModel
             ['post_closed'], '=', $data['post_closed'], ',', 
             ['post_top'], '=', $data['post_top'], ',', 
             ['post_space_id'], '=', $data['post_space_id'], ',', 
+            ['post_tag_id'], '=', $data['post_tag_id'], ',',
             ['post_url'], '=', $data['post_url'])
             ->where(['post_id'], '=', $data['post_id'])->run();
 

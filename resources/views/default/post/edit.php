@@ -69,6 +69,19 @@
                 <?php } ?>
                 <br> 
             </div>
+            
+            <?php if($tags) { ?>
+                <div class="boxline">  
+                    <label for="post_content">Метки</label>
+                    <?php foreach ($tags as $tag) { ?>
+                        
+                        <input type="radio" name="tag_id" value="<?= $tag['st_id']; ?>"<?php if($post['post_tag_id'] == $tag['st_id']) { ?> checked<?php } ?>><?= $tag['st_title']; ?>
+                       
+                    <?php } ?>
+                    <br> 
+                </div>
+            <?php } ?>
+            
             <input type="hidden" name="post_id" id="post_id" value="<?= $post['post_id']; ?>">
             <input type="submit" name="submit" value="Изменить" />
         </form>

@@ -28,6 +28,11 @@
                         <a class="u-url" href="/posts/<?= $post['post_slug']; ?>">
                             <h3 class="titl"><?= $post['post_title']; ?></h3>
                         </a>
+                        
+                        <?php if($post['st_id']) { ?>
+                            <a class="space-u tag-u" href="/s/meta/<?= $post['st_id']; ?>" title="<?= $post['st_title']; ?>"><?= $post['st_title']; ?></a>
+                        <?php } ?>
+                         
                     <?php if ($post['post_content_preview']) { ?>
                         <div class="show">
                             <span class="show_add_<?= $post['post_id']; ?>">
@@ -64,20 +69,6 @@
     </main>
 
     <aside id="sidebar">
-        <?php if(!$uid['id']) { ?> 
-                <div class="right"> 
-                    <a href="/login"><div class="hide-space-id add-space">Подписаться</div></a>
-                </div>
-            <?php } else { ?>
-                <div class="right"> 
-                    <?php if($data['space_hide'] == 1) { ?> 
-                        <div data-id="<?= $space_info['space_id']; ?>" class="hide-space-id add-space">Подписаться</div>
-                    <?php } else { ?> 
-                        <div data-id="<?= $space_info['space_id']; ?>" class="hide-space-id no-space">Отписаться</div>
-                    <?php } ?>   
-                </div>  
-        <?php } ?> 
-        <br> <br> 
         <div class="space-text">
             <img class="space-img" src="/uploads/space/<?= $space_info['space_img']; ?>">
             <h2><?= $space_info['space_name']; ?></h2>  
@@ -106,6 +97,20 @@
                     <a href="/s/<?= $space_info['space_slug']; ?>/<?= $tag['st_id']; ?>"><?= $tag['st_title']; ?><a>
                 <?php } ?>
             </div>
+        <?php } ?> 
+        <br>
+        <?php if(!$uid['id']) { ?> 
+                <div class="right"> 
+                    <a href="/login"><div class="hide-space-id add-space">Подписаться</div></a>
+                </div>
+            <?php } else { ?>
+                <div class="right"> 
+                    <?php if($data['space_hide'] == 1) { ?> 
+                        <div data-id="<?= $space_info['space_id']; ?>" class="hide-space-id add-space">Подписаться</div>
+                    <?php } else { ?> 
+                        <div data-id="<?= $space_info['space_id']; ?>" class="hide-space-id no-space">Отписаться</div>
+                    <?php } ?>   
+                </div>  
         <?php } ?> 
     </aside> 
 <?php } else { ?>

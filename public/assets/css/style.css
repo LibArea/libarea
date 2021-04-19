@@ -7,10 +7,6 @@ html {
   --color-gray-2: #444;
   --color-white: #fff;
 } 
-:root .dark {
-  --color-gray-1: #ddd;
-  --color-gray-2: #eee;
-} 
 body {
   line-height: 1.46;
   font-family: Helvetica Neue, Arial, sans-serif;
@@ -614,6 +610,15 @@ a.space-u, .space a.space-u {
   text-decoration: none;
   text-transform: lowercase;
 }
+a.space-u.tag-u {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 8pt;
+  margin-left: 0.25em;
+  padding: 0px 0.4em 1px 0.4em;
+  text-decoration: none;
+  color: #888;
+}    
 .space-color {
   width: 3px;
   height: 9px;
@@ -859,7 +864,10 @@ textarea.mess {
   height: 100px;
   width: 100px;
 }
- 
+.about {
+ max-width: 360px;
+ display: inline-block;   
+} 
 .telo-post {
   margin-left: 5px;
 }
@@ -915,31 +923,6 @@ textarea.mess {
 .box-footer {
   font-size: 14px;
   color: #888;
-}
-
-/* dark */
-.dark {
-  background: #333;
-  color: var(--color-white);
-}
-.dark a {
-  color: var(--color-white);
-}
-.dark header, .dark header a, .dark a:hover {
-  color: #eee;
-}
-.dark footer, .dark footer a, .na, .dark a.menu.active, .dark .info-n.active {
-  color: #999;
-}
-.dark .menu-h .md-icon {
-  stroke: #eee;
-}
-.about {
- max-width: 360px;
- display: inline-block;   
-}
-.dark blockquote, .dark .menu-info {
-  background-color: #555;
 }
 
 /* голосование */
@@ -1082,4 +1065,33 @@ body.menuno .menu  {
   div.box label, div.boxline label {display: block;width: 100% !important;}
   .box label {margin-bottom: 0;}
   .no-mob-two {display: none;}
+}
+
+/* dark */
+.dark {
+  background: #333;
+  color: var(--color-white);
+}
+.dark .titl, .dark .title a {
+  color: #fff;
+}
+.dark a, .footer .date, .dark footer, .dark footer a, .na, .dark a.menu.active, 
+.dark .info-n.active, .favcomm {
+  color: #999;
+}
+.dark a:hover {
+  color: #eee;
+}
+.dark .menu-h .md-icon, .dark .md-icon {
+  stroke: #999;
+}
+.dark blockquote, .dark .menu-info {
+  background-color: #555;
+}
+.dark h1.top.banner {
+  color: #ddd;
+  background-color: #222;
+}
+.dark .comments_subtree:target, .dark .comments_subtree.edit {
+  background-color: #222;
 }

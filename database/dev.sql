@@ -132,6 +132,7 @@ CREATE TABLE `posts` (
   `post_title` varchar(250) NOT NULL,
   `post_slug` varchar(128) NOT NULL,
   `post_space_id` int(11) NOT NULL DEFAULT 0,
+  `post_tag_id` int(11) NOT NULL DEFAULT 0,
   `post_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `edit_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `post_user_id` int(10) UNSIGNED NOT NULL,

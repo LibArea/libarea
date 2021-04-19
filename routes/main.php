@@ -46,7 +46,7 @@ Route::before('Authorization@noAuth')->getGroup();
     Route::type('post')->get('/comments/editform')->controller('CommentController@editform');
     Route::type('post')->protect()->get('/comment/edit')->controller('CommentController@editComment');
 	Route::type('post')->protect()->get('/comment/add')->controller('CommentController@create');
-	Route::type('post')->get('/comment/del')->controller('CommentController@deletComment');
+    Route::type('post')->get('/comment/del')->controller('CommentController@deletComment');
     Route::type('post')->get('/comment/addfavorite')->controller('CommentController@addCommentFavorite');
 
 	// Помещаем свой пост в профиль

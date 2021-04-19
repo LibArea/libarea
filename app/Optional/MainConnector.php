@@ -21,12 +21,13 @@ class MainConnector implements Connector
             "Modules\*" => "modules/",
             "App\Commands\*" => "app/Commands/",
             // ... or, if a specific class is added,
-            "Parsedown"   => "vendor/parsedown/Parsedown.php",  
-            "ImageUpload" => "app/Libraries/ImageUpload.php",  // Возможно замена
+            "Parsedown"     => "vendor/parsedown/Parsedown.php",  
+            "UrlRecord"     => "app/Libraries/UrlRecord/UrlRecord.php",
+            "ImageUpload"   => "app/Libraries/ImageUpload.php",   // Возможно замена
             // "ImageLib"    => "app/Libraries/ImageLib.php",
-            "Base"        => "app/Libraries/Base.php",  
-            "DB"          => "database/DB.php",  
-            "XdORM\XD"    => "vendor/phphleb/xdorm/XD.php",
+            "Base"          => "app/Libraries/Base.php",  
+            "DB"            => "database/DB.php",  
+            "XdORM\XD"      => "vendor/phphleb/xdorm/XD.php",
             // "Phphleb\Debugpan\DPanel" => "vendor/phphleb/debugpan/DPanel.php",
             
             // https://github.com/JacksonJeans/php-mail

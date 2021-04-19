@@ -36,6 +36,7 @@ class SpaceModel extends \MainModel
     {
         $q = XD::select('*')->from(['posts'])
             ->leftJoin(['users'])->on(['id'], '=', ['post_user_id'])
+            ->leftJoin(['space_tags'])->on(['post_tag_id'], '=', ['st_id'])
             ->leftJoin(['votes_post'])->on(['votes_post_item_id'], '=', ['post_id'])
             ->and(['votes_post_user_id'], '=', $user_id)
             ->where(['post_space_id'], '=', $space_id);

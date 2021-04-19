@@ -8,6 +8,7 @@ use App\Models\CommentModel;
 use App\Models\VotesPostModel;
 use Base;
 use Parsedown;
+use UrlRecord;
 
 class PostController extends \MainController
 {
@@ -195,7 +196,7 @@ class PostController extends \MainController
         }
         
         // Обработает некоторые поля
-        $post['post_content']   = $Parsedown->text($post['post_content']);
+        $post['content']        = $Parsedown->text($post['post_content']);
         $post['post_url']       = $post['post_url'];
         $post['post_url_full']  = $post['post_url_full'];
         $post['post_date']      = Base::ru_date($post['post_date']);
@@ -231,16 +232,19 @@ class PostController extends \MainController
        
         // Комментарии
         $comms = $this->buildTree(0, 0, $comments);
-  
+        
+        // Перенести в метод, т.к. некобходимо формировать og:* и т.д.
+        $description = htmlspecialchars(substr(strip_tags($post['post_content']), 0, 160));
+
         $uid  = Base::getUid();
         $data = [
             'title'        => $post['post_title'] . ' | ' . $GLOBALS['conf']['sitename'], 
-            'description'  => 'Тут надо сделать описание. ' . $GLOBALS['conf']['sitename'],
+            'description'  => $description . ' — ' . $GLOBALS['conf']['sitename']
         ]; 
         
         return view(PR_VIEW_DIR . '/post/view', ['data' => $data, 'post' => $post, 'comms' => $comms,  'uid' => $uid,  'recommend' => $recommend]);
     }
-    
+
     // Для дерева комментариев
      private function buildTree($comment_on , $level, $comments, $tree=array()){
         $level++;
@@ -302,6 +306,11 @@ class PostController extends \MainController
         
         $space = SpaceModel::getSpaceSelect();
         
+        // Ajax выбор тега в зависимости от id пространства
+        // В шаблоне post/add.php
+        // Что будет учитываться в методе createPost() (добавлено)
+        // В методе AddPost() необходимые изменения внесены
+        
         $uid  = Base::getUid();
         $data = [
             'h1'            => 'Добавить пост',
@@ -327,7 +336,8 @@ class PostController extends \MainController
         $post_user_id = $_SESSION['account']['user_id'];
         
         // Получаем id пространства
-        $space_id     = \Request::getPost('space_id');
+        $space_id   = \Request::getPost('space_id');
+        $tag_id     = \Request::getPost('tag_id');
         
         // Проверяем длину title
         if (Base::getStrlen($post_title) < 6 || Base::getStrlen($post_title) > 260)
@@ -366,6 +376,7 @@ class PostController extends \MainController
         $post_content_preview = (empty($post_content_preview)) ? '' : $post_content_preview;
         $post_content_img     = (empty($post_content_img)) ? '' : $post_content_img;
         $og_img               = (empty($og_img)) ? '' : $og_img;
+        $tag_id               = (empty($tag_id)) ? 0 : $tag_id;
 
         // Ограничим частоту добавления
         // Добавить условие TL
@@ -376,8 +387,10 @@ class PostController extends \MainController
         }
         
         // Получаем SEO поста
-        $post_slug = Base::seo($post_title); 
-        
+        $slugGenerator  = new UrlRecord();
+        $slug           = $slugGenerator->GetSeoFriendlyName($post_title); 
+        $post_slug      = substr($slug, 0, 90);
+
         $data = [
             'post_title'            => $post_title,
             'post_content'          => $post_content,
@@ -388,6 +401,7 @@ class PostController extends \MainController
             'post_ip_int'           => $post_ip_int,
             'post_user_id'          => $post_user_id,
             'post_space_id'         => $space_id,
+            'post_tag_id'           => $tag_id,
             'post_url'              => $post_url,
             'post_url_domain'       => $post_url_domain,
         ];
@@ -482,6 +496,7 @@ class PostController extends \MainController
         }
         
         $space = SpaceModel::getSpaceSelect();
+        $tags  = SpaceModel::getSpaceTags($post['post_space_id']);
         
         $uid  = Base::getUid();
         $data = [
@@ -490,7 +505,7 @@ class PostController extends \MainController
             'description'   => 'Изменение поста на ' . $GLOBALS['conf']['sitename'],
         ];
         
-        return view(PR_VIEW_DIR . '/post/edit', ['data' => $data, 'uid' => $uid, 'post' => $post, 'space' => $space]);
+        return view(PR_VIEW_DIR . '/post/edit', ['data' => $data, 'uid' => $uid, 'post' => $post, 'space' => $space, 'tags' => $tags]);
     }
     
     // Изменяем пост
@@ -504,6 +519,7 @@ class PostController extends \MainController
         $post_closed            = \Request::getPost('closed');
         $post_top               = \Request::getPost('top');
         $post_space_id          = \Request::getPostInt('space_id');
+        $post_tag_id            = \Request::getPostInt('tag_id');
         $post_url               = \Request::getPost('post_url');
         
         $account = \Request::getSession('account');
@@ -552,6 +568,7 @@ class PostController extends \MainController
         $post_url             = (empty($post_url)) ? '' : $post_url;
         $post_content_preview = (empty($post_content_preview)) ? '' : $post_content_preview;
         $post_content_img     = (empty($post_content_img)) ? '' : $post_content_img;
+        $post_content_img     = (empty($post_tag_id)) ? '' : $post_tag_id;
         
         $data = [
             'post_id'               => $post_id,
@@ -562,6 +579,7 @@ class PostController extends \MainController
             'post_closed'           => $post_closed,
             'post_top'              => $post_top,
             'post_space_id'         => $post_space_id,
+            'post_tag_id'           => $post_tag_id,
             'post_url'              => $post_url,
         ];
         

@@ -98,7 +98,7 @@
                     <?php } ?>
                 
                     <div class="post">
-                        <?= $post['post_content']; ?> 
+                        <?= $post['content']; ?> 
                     </div> 
                         
                     <?php if($post['post_url']) { ?> 

@@ -36,21 +36,28 @@ class SpaceController extends \MainController
         $space_tags_id  = \Request::get('tags');
         
         $space = SpaceModel::getSpaceInfo($slug);
+        
+        // Покажем 404
+        if(!$space) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
+        }
+
         $posts = SpaceModel::getSpacePosts($space['space_id'], $user_id, $space_tags_id);
  
+        // Покажем 404
+        if(!$posts) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
+        }
+
         if(!$space['space_img'] ) {
             $space['space_img'] = 'space_no.png';
         } 
-  
+
         $space['space_date']        = Base::ru_date($space['space_date']);
         $space['space_cont_post']   = count($posts);
         
-        // Покажем 404
-        if(!$posts) {
-           // include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
-           // hl_preliminary_exit();
-        }
-
         $result = Array();
         foreach($posts as $ind => $row){
              
@@ -60,7 +67,7 @@ class SpaceController extends \MainController
             $row['avatar']        = $row['avatar'];
             $row['num_comments']  = Base::ru_num('comm', $row['post_comments']);
             $result[$ind]         = $row;
-         
+
         }  
 
         $tags = SpaceModel::getSpaceTags($space['space_id']);
