@@ -13,10 +13,21 @@
                         <?= $sp['space_name']; ?>
                     </a> 
                 </span> 
+                <?php if($sp['space_type'] == 1) { ?>
+                     <sup class="red">офф</sup>
+                <?php } ?>
                 <?php if($sp['hidden_space_id'] >= 1) {  ?><span class="red">&#10003;</span><?php } ?>
-                <span class="date space-des">  
-                   — &nbsp;<?= $sp['space_description']; ?>    
+                
+                
+                <span class="date space-des">
+                    <?php if($sp['space_description']) { ?> 
+                        — &nbsp; <?= $sp['space_description']; ?> 
+                    <?php } else { ?> 
+                        — &nbsp; описание формируется
+                    <?php } ?>    
                 </span>
+                
+                
             </div>
         <?php } ?>
 
@@ -31,4 +42,11 @@
     <p><span class="red">&#10003;</span> говорит о том, что вы не видите посты из этих пространства в ленте. Чтобы сделать их видимыми достаточно зайти в пространство и нажать «Подписаться».</p>
     
 </main>
+<?php if($uid['trust_level'] > 1) { ?>
+    <?php if($uid['my_space_id'] == 0) { ?>
+    <aside id="sidebar"> 
+        <a href="/space/add">Создать простарнство</a>
+    </aside>
+    <?php } ?>    
+<?php } ?> 
 <?php include TEMPLATE_DIR . '/footer.php'; ?>        

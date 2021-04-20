@@ -13,7 +13,7 @@
 Route::before('Authorization@noAuth')->getGroup();
     Route::get('/admin')->controller('AdminController');
     Route::get('/admin/space')->controller('AdminController@Space'); 
-    Route::get('/admin/space/add')->controller('AdminController@addSpacePage');
+    Route::get('/admin/space/add')->controller('AdminController@addAdminSpacePage');
     Route::type('post')->get('/admin/space/ban/{id}')->controller('AdminController@delSpace')->where(['id' => '[0-9]+']);
     Route::get('/admin/comments')->controller('AdminController@Comments'); 
     Route::get('/admin/invitations')->controller('AdminController@Invitations');
@@ -63,11 +63,16 @@ Route::before('Authorization@noAuth')->getGroup();
 	// Уведомления 
 	Route::get('/notifications')->controller('NotificationsController');
     Route::get('/notifications/read/{id}')->controller('NotificationsController@notificationRead')->where(['id' => '[0-9]+']);  
+    
+    // Избранное
+    Route::get('/u/{login}/favorite')->controller('UserController@userFavorite')->where(['login' => '[A-Za-z0-9]+']);
 
 	// Подписываемся, отписываемся / изменяем пространство
 	Route::type('post')->get('/space/hide')->controller('SpaceController@hide');
     Route::get('/space/{slug}/edit')->controller('SpaceController@spaceForma')->where(['slug' => '[A-Za-z0-9]+']);  
     Route::type('post')->protect()->get('/space/editspace')->controller('SpaceController@spaceEdit');
+    Route::get('/space/add')->controller('SpaceController@addSpacePage');
+    Route::type('post')->protect()->get('/space/addspace')->controller('SpaceController@spaceAdd');
  
 	// Голосуем
 	Route::type('post')->get('/votes/comm')->controller('VotesCommController@votes');
@@ -112,7 +117,6 @@ Route::get('/users')->controller('UserController');
 Route::get('/u/{login}')->controller('UserController@profile')->where(['login' => '[A-Za-z0-9]+']);
 Route::get('/u/{login}/posts')->controller('PostController@userPosts')->where(['login' => '[A-Za-z0-9]+']);
 Route::get('/u/{login}/comments')->controller('CommentController@userComments')->where(['login' => '[A-Za-z0-9]+']);
-Route::get('/u/{login}/favorite')->controller('UserController@userFavorite')->where(['login' => '[A-Za-z0-9]+']);
 
 // Поток
 Route::get('/flow')->controller('FlowController');

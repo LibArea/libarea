@@ -18,17 +18,26 @@ class SpaceModel extends \MainModel
         return $result;
     } 
 
-    // Для форм добалвения и изменения, для массовой отписки и подписки (В планах!)
-    // Пока запрос одинаков с ALL, но необходимо учитывать TL и права Space
-    public static function getSpaceSelect()
+    // Для форм добавления и изменения
+    // $id
+    // $my_space_id
+    // $trust_level
+    public static function getSpaceSelect($uid)
     {
-        return  XD::select('*')->from(['space'])->getSelect();
+        if ($uid['trust_level'] == 5) {
+            $sql = "SELECT * FROM space";
+        } else {
+            $string = (!$uid['my_space_id']) ? 0 : $uid['my_space_id'];
+            $sql = "SELECT * FROM space WHERE space_permit_users = 2 OR space_id = $string ";
+        }
+
+        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     } 
 
-   // Получение аватарки
-    public static function getSpaceImg($space_id)
+   // Получение по id
+    public static function getSpaceId($space_id)
     {
-        return XD::select(['space_id', 'space_img'])->from(['space'])->where(['space_id'], '=', $space_id)->getSelectOne();
+        return XD::select('*')->from(['space'])->where(['space_id'], '=', $space_id)->getSelectOne();
     }
 
     // Списки постов по пространству
@@ -50,7 +59,7 @@ class SpaceModel extends \MainModel
         return $result;
     }
     
-    // Информация пространства
+    // Информация пространства по slug
     public static function getSpaceInfo($slug)
     {
         return  XD::select('*')->from(['space'])->where(['space_slug'], '=', $slug)->getSelectOne();
@@ -96,9 +105,9 @@ class SpaceModel extends \MainModel
     }
     
     // Изменение пространства
-    public static function setSpaceEdit ($data)
+    public static function setSpaceEdit($data)  
     {
-        XD::update(['space'])->set(['space_slug'], '=', $data['space_slug'], ',', ['space_name'], '=', $data['space_name'], ',', ['space_description'], '=', $data['space_description'], ',', ['space_color'], '=', $data['space_color'], ',', ['space_img'], '=', $data['space_img'], ',', ['space_text'], '=', $data['space_text'])->where(['space_id'], '=', $data['space_id'])->run();
+        XD::update(['space'])->set(['space_slug'], '=', $data['space_slug'], ',', ['space_name'], '=', $data['space_name'], ',', ['space_description'], '=', $data['space_description'], ',', ['space_color'], '=', $data['space_color'], ',', ['space_img'], '=', $data['space_img'], ',', ['space_text'], '=', $data['space_text'], ',', ['space_permit_users'], '=', $data['space_permit_users'])->where(['space_id'], '=', $data['space_id'])->run();
         
         return true;
     }
@@ -132,4 +141,39 @@ class SpaceModel extends \MainModel
         return true;
     } 
     
+    // Добавляем пространства
+    public static function AddSpace($data) 
+    {
+
+        XD::insertInto(['space'], '(', 
+            ['space_name'], ',', 
+            ['space_slug'], ',', 
+            ['space_description'], ',', 
+            ['space_color'], ',',  
+            ['space_img'], ',',
+            ['space_text'], ',',  
+            ['space_date'], ',', 
+            ['space_user_id'], ',', 
+            ['space_type'], ',', 
+            ['space_permit_users'], ')')->values( '(', 
+        
+        XD::setList([
+            $data['space_name'], 
+            $data['space_slug'], 
+            $data['space_description'], 
+            $data['space_color'],
+            $data['space_img'],            
+            $data['space_text'], 
+            $data['space_date'], 
+            $data['space_user_id'], 
+            $data['space_type'], 
+            $data['space_permit_users']]), ')' )->run();
+        
+        // id добавленного пространства
+        $id = XD::select()->last_insert_id('()')->getSelectValue();
+        
+        XD::update(['users'])->set(['my_space_id'], '=', $id)->where(['id'], '=', $data['space_user_id'])->run();
+        
+        return true; 
+    }
 }

@@ -176,8 +176,9 @@ CREATE TABLE `space` (
   `space_text` varchar(550) NOT NULL,
   `space_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `space_category_id` int(11) NOT NULL DEFAULT 1,
-  `space_tl` int(11) NOT NULL DEFAULT 1,
-  `space_permit_users` int(11) NOT NULL DEFAULT 1,
+  `space_user_id` int(11) NOT NULL DEFAULT 1,
+  `space_type` int(11) NOT NULL DEFAULT 1 COMMENT '1 - персонала, 2 - участника',
+  `space_permit_users` int(11) NOT NULL DEFAULT 1 COMMENT '1 - могут писать все, 2 - только автор',
   `space_is_delete` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -185,10 +186,10 @@ CREATE TABLE `space` (
 -- Дамп данных таблицы `space`
 --
 
-INSERT INTO `space` (`space_id`, `space_name`, `space_slug`, `space_description`, `space_color`, `space_text`, `space_date`, `space_category_id`, `space_tl`, `space_permit_users`, `space_is_delete`) VALUES
-(1, 'cms', 'cms', 'Системы управления сайтами...', '', 'тест 1...', '2021-02-28 12:15:58', 0, 1, 0, 0),
-(2, 'Вопросы', 'qa', 'Вопросы и ответы', '', 'тест 2...', '2021-02-28 12:15:58', 0, 2, 0, 0),
-(3, 'флуд', 'flud', 'Просто обычные разговоры', '', 'тест 3...', '2021-02-28 12:15:58', 0, 3, 0, 0);
+INSERT INTO `space` (`space_id`, `space_name`, `space_slug`, `space_description`, `space_color`, `space_text`, `space_date`, `space_category_id`, `space_user_id`, `space_type`, `space_permit_users`, `space_is_delete`) VALUES
+(1, 'cms', 'cms', 'Системы управления сайтами...', '', 'тест 1...', '2021-02-28 12:15:58', 1, 1, 1, 1, 0),
+(2, 'Вопросы', 'qa', 'Вопросы и ответы', '', 'тест 2...', '2021-02-28 12:15:58', 1, 1, 1, 2, 0),
+(3, 'флуд', 'flud', 'Просто обычные разговоры', '', 'тест 3...', '2021-02-28 12:15:58', 1, 1, 1, 2, 0);
 
 
 --
@@ -241,14 +242,15 @@ CREATE TABLE `users` (
   `trust_level` int(11) NOT NULL COMMENT 'Уровень доверия. По умолчанию 0 (5 - админ)',
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `invitation_available` int(10) NOT NULL DEFAULT '0',
-  `invitation_id` int(10) NOT NULL DEFAULT '0',
+  `invitation_available` int(10) NOT NULL DEFAULT 0,
+  `invitation_id` int(11) NOT NULL DEFAULT 0,
   `deleted` tinyint(1) DEFAULT 0,
   `avatar` varchar(250) DEFAULT NULL,
   `about` varchar(250) DEFAULT NULL,
   `rating` int(11) NOT NULL DEFAULT 0,
   `status` varchar(250) DEFAULT NULL,
   `my_post` int(11) DEFAULT NULL COMMENT 'Пост выведенный в профиль',
+  `my_space_id` int(11) NOT NULL DEFAULT 0 COMMENT 'Пространство участника',
   `ban_list` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -257,7 +259,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `login`, `name`, `email`, `password`, `activated`, `reg_ip`, `trust_level`, `created_at`, `updated_at`, `deleted`, `avatar`, `about`, `rating`, `status`, `my_post`) VALUES
-(1, 'AdreS', 'Олег', 'ss@sdf.ru', '$2y$10$oR5VZ.zk7IN/og70gQq/f.0Sb.GQJ33VZHIES4pyIpU3W2vF6aiaW', 1, NULL, 5, '2021-03-08 21:37:04', '2021-03-08 21:37:04', 0, '', 'Тестовый аккаунт', 0, '', 0);
+(1, 'AdreS', 'Олег', 'ss@sdf.ru', '$2y$10$oR5VZ.zk7IN/og70gQq/f.0Sb.GQJ33VZHIES4pyIpU3W2vF6aiaW', 1, NULL, 5, '2021-03-08 21:37:04', '2021-03-08 21:37:04', 0, '', 'Тестовый аккаунт', 0, 0, 0);
 
 -- --------------------------------------------------------
 

@@ -36,20 +36,14 @@ class SpaceController extends \MainController
         $space_tags_id  = \Request::get('tags');
         
         $space = SpaceModel::getSpaceInfo($slug);
-        
+    
         // Покажем 404
         if(!$space) {
             include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
             hl_preliminary_exit();
         }
-
+  
         $posts = SpaceModel::getSpacePosts($space['space_id'], $user_id, $space_tags_id);
- 
-        // Покажем 404
-        if(!$posts) {
-            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
-            hl_preliminary_exit();
-        }
 
         if(!$space['space_img'] ) {
             $space['space_img'] = 'space_no.png';
@@ -89,45 +83,43 @@ class SpaceController extends \MainController
     // Форма изменения пространства
     public function spaceForma()
     {
-        // Доступ только персоналу
-        $account = \Request::getSession('account');
-        if ($account['trust_level'] != 5) {
-            return false;
+        $uid    = Base::getUid();
+        $slug   = \Request::get('slug');
+        $space  = SpaceModel::getSpaceInfo($slug);
+
+        // Или персонал или автор
+        if ($uid['trust_level'] != 5 && $space['space_user_id'] != $uid['id']) {
+            redirect('/');
         }
- 
-        $slug  = \Request::get('slug');
-        $space = SpaceModel::getSpaceInfo($slug);
 
         if(!$space['space_img'] ) {
             $space['space_img'] = 'space_no.png';
         } 
-     
-        $uid  = Base::getUid();
+
         $data = [
             'h1'            => 'Изменение - ' . $slug,
             'title'         => 'Изменение пространства | ' . $GLOBALS['conf']['sitename'],
             'description'   => 'Страница изменения пространства на' . $GLOBALS['conf']['sitename'],
         ]; 
 
-        return view(PR_VIEW_DIR . '/space/forma-space', ['data' => $data, 'uid' => $uid, 'space' => $space]);
+        return view(PR_VIEW_DIR . '/space/edit-space', ['data' => $data, 'uid' => $uid, 'space' => $space]);
     }
     
     // Изменение пространства
     public function spaceEdit() 
     {
-        // Доступ только персоналу
-        $account = \Request::getSession('account');
-        if ($account['trust_level'] != 5) {
-            return false;
-        } 
-        
+        $uid        = Base::getUid();
         $space_slug = \Request::getPost('space_slug');
         $space_id   = \Request::getPost('space_id');
+        $permit     = \Request::getPostInt('permit');
         
-   
-        // Узнаем преждний img
-        $space = SpaceModel::getSpaceImg($space_id);
-           
+        $space = SpaceModel::getSpaceId($space_id);
+
+        // Или персонал или владелец
+        if ($uid['trust_level'] != 5 && $space['space_user_id'] != $uid['id']) {
+            redirect('/');
+        }
+
         $name     = $_FILES['image']['name'];
         
         if($name) {
@@ -190,16 +182,25 @@ class SpaceController extends \MainController
         $space_color = \Request::getPost('space_color');
         $space_color = (empty($space_color)) ? 0 : $space_color;
         
-        // Если пользователи смогут создавать пространства с TL2
-        // То данный метод следует изменить
+        
+        $slug = SpaceModel::getSpaceInfo($space_slug);
+
+        if($slug['space_slug'] != $space['space_slug']) {
+            if($slug) {
+                Base::addMsg('Такой URL пространства уже есть', 'error');
+                redirect('/s/'.$space['space_slug']);
+            }
+        }
+  
         $data = [
-            'space_id'          => $space_id,
-            'space_slug'        => $space_slug,
-            'space_name'        => \Request::getPost('space_name'),
-            'space_description' => \Request::getPost('space_description'),
-            'space_color'       => $space_color,
-            'space_text'        => $_POST['space_text'], // Не фильтруем!
-            'space_img'         => $space_img,
+            'space_id'           => $space_id,
+            'space_slug'         => $space_slug,
+            'space_name'         => \Request::getPost('space_name'),
+            'space_description'  => \Request::getPost('space_description'),
+            'space_color'        => $space_color,
+            'space_text'         => $_POST['space_text'], // Не фильтруем!
+            'space_img'          => $space_img,
+            'space_permit_users' => $permit,
         ]; 
         
         SpaceModel::setSpaceEdit($data);
@@ -217,6 +218,98 @@ class SpaceController extends \MainController
         SpaceModel::SpaceHide($space_id, $account['user_id']);
         
         return true;
+    }
+
+    // Добавить пространство пользователю
+    public function addSpacePage() 
+    {
+        $uid  = Base::getUid();
+  
+        // Для пользователя с TL < 2 редирект    
+        if ($uid['trust_level'] < 2) {
+            redirect('/');
+        }  
+  
+        // Если пользователь уже создал пространство
+        if ($uid['my_space_id'] != 0) {
+            //redirect('/');
+        }  
+   
+        $data = [
+            'h1'          => 'Добавить пространство',
+            'title'       => 'Добавить пространство' . ' | ' . $GLOBALS['conf']['sitename'],
+            'description' => 'Добавить пространство. ' . $GLOBALS['conf']['sitename'],
+        ]; 
+        
+        return view(PR_VIEW_DIR . '/space/add-space', ['data' => $data, 'uid' => $uid]);
+    }
+
+    // Добавления пространства
+    public function spaceAdd() 
+    {
+        $uid  = Base::getUid();
+        
+        // Для пользователя с TL < 2       
+        if ($uid['trust_level'] < 2) {
+            redirect('/');
+        }  
+        
+        $space_slug = \Request::getPost('space_slug');
+        $space_name = \Request::getPost('space_name');  
+        $permit     = \Request::getPostInt('permit');
+     
+        if (!preg_match('/^[a-zA-Z0-9]+$/u', $space_slug))
+        {
+            Base::addMsg('В URL можно использовать только латиницу, цифры', 'error');
+            redirect('/space/add');
+        }
+        if (Base::getStrlen($space_slug) < 4 || Base::getStrlen($space_slug) > 15)
+        {
+          Base::addMsg('URL должно быть от 3 до ~ 15 символов', 'error');
+          redirect('/space/add');
+        }
+        if (preg_match('/\s/', $space_slug) || strpos($space_slug,' '))
+        {
+            Base::addMsg('В URL не допускаются пробелы', 'error');
+            redirect('/space/add');
+        }
+        if (SpaceModel::getSpaceInfo($space_slug)) {
+            Base::addMsg('Такой URL пространства уже есть', 'error');
+            redirect('/space/add');
+        }
+ 
+        // Проверяем длину названия
+        if (Base::getStrlen($space_name) < 6 || Base::getStrlen($space_name) > 25)
+        {
+            Base::addMsg('Длина названия должна быть от 6 до 25 знаков', 'error');
+            redirect('/space/add');
+        }
+        
+        if($permit == '') 
+        {
+            Base::addMsg('Выберите, кто будет публиковать в пространстве', 'error');
+            redirect('/space/add');   
+        }
+        
+        
+        $data = [
+            'space_name'         => $space_name,
+            'space_slug'         => $space_slug,
+            'space_description'  => '',
+            'space_color'        => 0,
+            'space_img'          => '',
+            'space_text'         => '',
+            'space_date'         => date("Y-m-d H:i:s"),
+            'space_user_id'      => $uid['id'],
+            'space_type'         => 2, 
+            'space_permit_users' => $permit,
+        ];
+ 
+        // Добавляем пространство
+        SpaceModel::AddSpace($data);
+
+        redirect('/space'); 
+        
     }
 
 }

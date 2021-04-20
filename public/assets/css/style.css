@@ -878,7 +878,6 @@ textarea.mess {
 .box_h {
   font-size: 12px;
   color: var(--color-gray-1);
-  margin-top: -5px;
 }
 .box label, .box .label_holder {
   display: block;

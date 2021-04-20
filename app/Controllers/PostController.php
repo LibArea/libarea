@@ -304,14 +304,15 @@ class PostController extends \MainController
         // Будем проверять ограничение на частоту 
         // print_r(PostModel::getPostSpeed(1));
         
-        $space = SpaceModel::getSpaceSelect();
+        $uid  = Base::getUid();
+        
+        $space = SpaceModel::getSpaceSelect($uid);
         
         // Ajax выбор тега в зависимости от id пространства
         // В шаблоне post/add.php
         // Что будет учитываться в методе createPost() (добавлено)
         // В методе AddPost() необходимые изменения внесены
         
-        $uid  = Base::getUid();
         $data = [
             'h1'            => 'Добавить пост',
             'title'         => 'Добавить пост' . ' | ' . $GLOBALS['conf']['sitename'],
@@ -480,8 +481,8 @@ class PostController extends \MainController
     // Показ формы поста для редактирование
     public function editPost() 
     {
-        $post_id = \Request::get('id');
-        $account = \Request::getSession('account');
+        $post_id    = \Request::get('id');
+        $uid        = Base::getUid();
         
         // Получим пост
         $post   = PostModel::getPostId($post_id); 
@@ -491,14 +492,13 @@ class PostController extends \MainController
         }
 
         // Редактировать может только автор и админ
-        if ($post['post_user_id'] != $account['user_id'] && $account['trust_level'] != 5) {
+        if ($post['post_user_id'] != $uid['id'] && $uid['trust_level'] != 5) {
             redirect('/');
         }
         
-        $space = SpaceModel::getSpaceSelect();
+        $space = SpaceModel::getSpaceSelect($uid);
         $tags  = SpaceModel::getSpaceTags($post['post_space_id']);
-        
-        $uid  = Base::getUid();
+
         $data = [
             'h1'            => 'Изменить пост',
             'title'         => 'Измененение поста ' . ' | ' . $GLOBALS['conf']['sitename'], 

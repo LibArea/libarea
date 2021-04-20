@@ -32,6 +32,7 @@ class Base
             $uid['id']          = $usr['id'];
             $uid['login']       = $usr['login']; 
             $uid['trust_level'] = $usr['trust_level'];
+            $uid['my_space_id'] = $usr['my_space_id'];
             $uid['notif']       = NotificationsModel::usersNotification($usr['id']); 
             $uid['avatar']      = $usr['avatar'];
         } else {

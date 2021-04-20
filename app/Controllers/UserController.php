@@ -5,6 +5,7 @@ use Base;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\UserModel;
 use App\Models\PostModel;
+use App\Models\SpaceModel;
 use ImageUpload;
 use Parsedown;
 
@@ -54,7 +55,7 @@ class UserController extends \MainController
         if(!$user['avatar'] ) {
             $user['avatar'] = 'noavatar.png';
         } 
- 
+
         $uid  = Base::getUid();
         $data =[
           'h1'              => $user['login'] . ' - профиль',
@@ -64,7 +65,7 @@ class UserController extends \MainController
           'trust_level'     => UserModel::getUserTrust($user['id']),
           'post_num_user'   => UserModel::getUsersPostsNum($user['id']),
           'comm_num_user'   => UserModel::getUsersCommentsNum($user['id']),
-          'fav_num_user'    => UserModel::getUsersFavoriteNum($user['id']),
+          'space_user'      => SpaceModel::getSpaceId($user['my_space_id']),
         ];
 
         return view(PR_VIEW_DIR . '/user/profile', ['data' => $data, 'uid' => $uid, 'user' => $user, 'post' => $post]);
@@ -265,14 +266,20 @@ class UserController extends \MainController
     // Страница закладок участника
     function userFavorite ()
     {
-        $login = \Request::get('login');
+        $uid    = Base::getUid();
+        $login  = \Request::get('login');
 
-        $user  = UserModel::getUserLogin($login);
+        $user   = UserModel::getUserLogin($login);
 
         // Покажем 404
         if(!$user) {
             include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
             hl_preliminary_exit();
+        }
+        
+        // Если страница закладок не участника
+        if($user['id'] != $uid['id']){
+            redirect('/');
         }
         
         $Parsedown = new Parsedown(); 
@@ -296,7 +303,6 @@ class UserController extends \MainController
          
         }
         
-        $uid  = Base::getUid();
         $data = [
             'h1'            => 'Избранное ' . $login,
             'title'         => 'Избранное ' . $login . ' | ' . $GLOBALS['conf']['sitename'],

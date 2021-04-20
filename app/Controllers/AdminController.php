@@ -154,7 +154,7 @@ class AdminController extends \MainController
     {
         $account    = \Request::getSession('account');
         $user_id    = $account ? $account['user_id'] : 0;
-        $space      = SpaceModel::getSpaceAll($user_id);
+        $space      = AdminModel::getAdminSpaceAll($user_id);
          
         $result = Array();
         foreach($space  as $ind => $row){
@@ -162,6 +162,10 @@ class AdminController extends \MainController
             if(!$row['space_img'] ) {
                 $row['space_img'] = 'space_no.png';
             } 
+
+           if(!$row['avatar'] ) {
+                $row['avatar'] = 'noavatar.png';
+           } 
 
             $space['space_img'] = $row['space_img'];
             $result[$ind]       = $row;
@@ -177,8 +181,8 @@ class AdminController extends \MainController
         return view(PR_VIEW_DIR . '/admin/space', ['data' => $data, 'uid' => $uid, 'space' => $result]);
     }
     
-    // Добавить пространство
-    public function addSpacePage() 
+    // Добавить пространство администратору
+    public function addAdminSpacePage() 
     {
         // Доступ только персоналу
         $account = \Request::getSession('account');

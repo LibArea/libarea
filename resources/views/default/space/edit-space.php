@@ -16,7 +16,12 @@
                     <label for="post_title">Название</label>
                     <input class="add" type="text" value="<?= $space['space_name']; ?>" name="space_name" />
                     <br />
-                </div>        
+                </div>
+                <div class="boxline"> 
+                    <label for="post_content">Публикации</label>
+                    <input type="radio" name="permit" <?php if($space['space_permit_users'] == 1) { ?>checked<?php } ?> value="1"> Только я
+                    <input type="radio" name="permit" <?php if($space['space_permit_users'] == 2) { ?>checked<?php } ?> value="2" > Все
+                </div>                  
                 <div class="boxline">
                     <label for="post_content">Meta- описание</label>
                     <textarea class="add" name="space_description"><?= $space['space_description']; ?></textarea><br />

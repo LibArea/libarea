@@ -28,7 +28,7 @@ class UserModel extends \MainModel
     // Получение информации по логину
     public static function getUserLogin($login)
     {
-        $query = XD::select(['id', 'login', 'name', 'email', 'avatar', 'invitation_available', 'about', 'created_at', 'my_post'])
+        $query = XD::select(['id', 'login', 'name', 'email', 'avatar', 'invitation_available', 'about', 'created_at', 'my_post', 'my_space_id'])
                 ->from(['users'])
                 ->where(['login'], '=', $login);
 
@@ -38,7 +38,7 @@ class UserModel extends \MainModel
     // Получение информации по id
     public static function getUserId($id)
     {
-        $query = XD::select(['id', 'login', 'name', 'email', 'avatar', 'about', 'trust_level', 'ban_list'])
+        $query = XD::select(['id', 'login', 'name', 'email', 'avatar', 'about', 'trust_level', 'my_space_id', 'ban_list'])
                 ->from(['users'])
                 ->where(['id'], '=', $id);
 
@@ -141,14 +141,6 @@ class UserModel extends \MainModel
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['comment_user_id'])
                  ->where(['id'], '=', $id);
        
-        return count($query->getSelect());
-    }
-    
-    // Количество закладок на странице профиля
-    public static function getUsersFavoriteNum($id)
-    {
-        $query = XD::select('*')->from(['favorite'])->where(['favorite_uid'], '=', $id);
-
         return count($query->getSelect());
     }
     

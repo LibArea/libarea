@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\UserModel;
+use Respect\Factory;
 use Base;
 
 class AuthController extends \MainController
@@ -99,39 +100,30 @@ class AuthController extends \MainController
         }
        
         // Упростить и в метод
-        if (strlen($login) < 3 || self::getStrlen($login) < 2)
+        if (!preg_match('/^[a-zA-Z0-9]+$/u', $login))
         {
-            Base::addMsg('Логин слишком короткий', 'error');
+            Base::addMsg('В логине можно использовать только латиницу, цифры', 'error');
             $url = ($inv_code) ? '/register/invite/'.$inv_code : '/register';
             redirect($url);
         }
-        if (self::getStrlen($login) > 10)
+        
+        if (strlen($login) < 3 || strlen($login) > 10)
         {
-            Base::addMsg('Логин слишком длинный', 'error');
+            Base::addMsg('Логин слишком длинный или короткий', 'error');
             $url = ($inv_code) ? '/register/invite/'.$inv_code : '/register';
             redirect($url);
         }
+ 
         if (preg_match('/\s/', $login) || strpos($login,' '))
         {
             Base::addMsg('В логине не допускаются пробелы', 'error');
             $url = ($inv_code) ? '/register/invite/'.$inv_code : '/register';
             redirect($url);
         }
-        if (is_numeric(substr($login, 0, 1)) || substr($login, 0, 1) == "_")
+        
+        if (is_numeric(substr($login, 0, 1)))
         {
-            Base::addMsg('Логин не может начинаться с цифры и подчеркивания', 'error');
-            $url = ($inv_code) ? '/register/invite/'.$inv_code : '/register';
-            redirect($url);
-        }
-        if (substr($login, -1, 1) == "_")
-        {
-            Base::addMsg('Логин не может заканчиваться символом подчеркивания', 'error');
-            $url = ($inv_code) ? '/register/invite/'.$inv_code : '/register';
-            redirect($url);
-        }
-        if (!preg_match('/^[a-zA-Z0-9]+$/u', $login))
-        {
-            Base::addMsg('В логине можно использовать только латиницу, цифры', 'error');
+            Base::addMsg('Логин не может начинаться с цифры', 'error');
             $url = ($inv_code) ? '/register/invite/'.$inv_code : '/register';
             redirect($url);
         }
@@ -250,6 +242,7 @@ class AuthController extends \MainController
                 'login'         => $uInfo['login'],
                 'avatar'        => $uInfo['avatar'],
                 'trust_level'   => $uInfo['trust_level'],
+                'my_space_id'   => $uInfo['my_space_id'],
             ];
             
             $last_ip = Request::getRemoteAddress();  

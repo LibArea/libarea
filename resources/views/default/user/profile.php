@@ -57,13 +57,14 @@
             </span>  <br>
         <?php } ?>
         
-        <?php if($data['fav_num_user'] != 0) { ?>
-            <label class="required">Избранные:</label>
+        <?php if($data['space_user']) { ?>
+            <label class="required">Владеет:</label>
             <span class="d">
-                <a title="Избранное <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/favorite">
-                    <?= $data['fav_num_user']; ?>
+                <a title="Пространство <?= $data['space_user']['space_name']; ?>" href="/s/<?= $data['space_user']['space_slug']; ?>">
+                    <?= $data['space_user']['space_name']; ?>
                 </a>
-            </span>  <br>
+            </span>  
+            <br>
         <?php } ?>
         
         <label class="required">О себе:</label>
