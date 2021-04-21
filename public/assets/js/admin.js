@@ -1,17 +1,15 @@
 window.onload=function(){
     // Забанить / разбанить участника
- 
     var ban = document.querySelector('.user-ban');
     if(ban) {
-        ban.addEventListener('click', function (e) {
-            var user_id  = ban.dataset.id;
-            const request = new XMLHttpRequest();
+        ban.addEventListener('click', function () {
             
-            fetch("/admin/ban/" + user_id, { 
+            var user_id  = ban.dataset.id;
+            fetch("/admin/ban", { 
                 method: "POST",
-                headers:{"content-type": "application/x-www-form-urlencoded"} 
+                body: "id=" + user_id,
+                headers:{'Content-Type': 'application/x-www-form-urlencoded'} 
                 })
-               
                 .then((response) => {
                     location.reload();                
                 })
@@ -21,15 +19,14 @@ window.onload=function(){
     // Восстанавливаем комментарий
     var comm = document.querySelector('.recover-comm');
     if(comm) {
-        comm.addEventListener('click', function (e) {
-            var comm_id  = comm.dataset.id;
-            const request = new XMLHttpRequest();
+        comm.addEventListener('click', function () {
             
-            fetch("/admin/comment/recover/" + comm_id, { 
+            var comm_id  = comm.dataset.id;
+            fetch("/admin/comment/recover", { 
                 method: "POST",
-                headers:{"content-type": "application/x-www-form-urlencoded"} 
+                body: "id=" + comm_id,
+                headers:{'Content-Type': 'application/x-www-form-urlencoded'} 
                 })
-               
                 .then((response) => {
                     location.reload();                
                 }) 
@@ -39,15 +36,14 @@ window.onload=function(){
     // Удаление / восстановление пространства
     var space = document.querySelector('.space-ban');
     if(space) {
-        space.addEventListener('click', function (e) {
-            var space_id  = space.dataset.id;
-            const request = new XMLHttpRequest();
+        space.addEventListener('click', function () {
             
-            fetch("/admin/space/ban/" + space_id, { 
+            var space_id  = space.dataset.id;
+            fetch("/admin/space/ban", { 
                 method: "POST",
-                headers:{"content-type": "application/x-www-form-urlencoded"} 
+                body: "id=" + space_id,
+                headers:{'Content-Type': 'application/x-www-form-urlencoded'} 
                 })
-               
                 .then((response) => {
                     location.reload();                
                 }) 

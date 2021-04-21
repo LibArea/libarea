@@ -51,13 +51,13 @@ class AdminController extends \MainController
     
     public function banUser() 
     {
-        // Если TL участника не равен 5 (персонал) - редирект
-        $account = Request::getSession('account');
-        if(!$isAdmin = UserModel::isAdmin($account['user_id'])) {
-            redirect('/');
+        // Доступ только персоналу
+        $account = \Request::getSession('account');
+        if ($account['trust_level'] != 5) {
+            return false;
         }
-        
-        $user_id = \Request::get('id');
+
+        $user_id = \Request::getPostInt('id');
         AdminModel::setBanUser($user_id);
         
         return true;
@@ -104,7 +104,7 @@ class AdminController extends \MainController
             return false;
         }
         
-        $comm_id = \Request::get('id');
+        $comm_id = \Request::getPostInt('id');
         AdminModel::CommentsRecover($comm_id);
         
         return true;
@@ -210,8 +210,8 @@ class AdminController extends \MainController
         if ($account['trust_level'] != 5) {
             return false;
         }   
-        $space_id = \Request::get('id');
-
+        
+        $space_id = \Request::getPostInt('id');
         SpaceModel::SpaceDelete($space_id);
        
         return true;

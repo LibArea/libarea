@@ -1,7 +1,9 @@
 <?php include TEMPLATE_DIR . '/admin/header_admin.php'; ?>
-<div class="w-100">
+<main class="admin">
     <a class="right" href="/admin/space/add"><?= lang('Add'); ?></a>
-    <h1 class="top"><?php echo $data['h1']; ?></h1>
+    <h1 class="top">
+        <a href="/admin"><?= lang('Admin'); ?></a> / <span class="red"><?php echo $data['h1']; ?></span>
+    </h1>
 
     <div class="space">
         <?php if (!empty($space)) { ?>

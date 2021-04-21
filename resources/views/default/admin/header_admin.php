@@ -20,21 +20,23 @@
         <a title="<?= lang('Home'); ?>" class="logo" href="/">M</a>
         <div class="menu-left">
             <ul>
-                <li class="nav no-mob">
-                    <a title="<?= lang('Admin'); ?>" class="home" href="/admin"><?= lang('Admin'); ?></a>
+                <li class="nav<?php if( $uid['uri'] == '/admin') { ?> active<?php } ?>">
+                    <a class="home" title="<?= lang('Admin'); ?>" href="/admin">
+                        <?= lang('Admin'); ?>
+                    </a>
                 </li>
-                <li class="nav no-mob">
-                    <a title="<?= lang('Space'); ?>" class="home" href="/admin/space">
+                <li class="nav<?php if( $uid['uri'] == '/admin/space') { ?> active<?php } ?>">
+                    <a class="home" title="<?= lang('Space'); ?>" href="/admin/space">
                         <?= lang('Space'); ?>
                     </a>
                 </li>
-                <li class="nav no-mob"> 
-                    <a title="<?= lang('Invites'); ?>" class="home" href="/admin/invitations">
+                <li class="nav<?php if( $uid['uri'] == '/admin/invitations') { ?> active<?php } ?>"> 
+                    <a class="home" title="<?= lang('Invites'); ?>" href="/admin/invitations">
                         <?= lang('Invites'); ?>
                     </a>
                 </li>
-                <li class="nav no-mob">
-                    <a title="<?= lang('Comments'); ?>" class="home" href="/admin/comments">
+                <li class="nav<?php if( $uid['uri'] == '/admin/comments') { ?> active<?php } ?>">
+                    <a class="home" title="<?= lang('Comments'); ?>" href="/admin/comments">
                         <?= lang('Comments'); ?>
                     </a>
                 </li>
