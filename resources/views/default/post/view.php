@@ -36,7 +36,7 @@
                         </span>
                         <span class="date"> 
                             <?= $post['post_date']; ?>
-                            <?php if($post['edit_date']) { ?> 
+                            <?php if($post['edit_date'] != 0) { ?> 
                                 (<?= lang('ed'); ?>. <?= $post['edit_date']; ?>) 
                             <?php } ?>
                         </span>

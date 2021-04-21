@@ -71,133 +71,46 @@ class Base
         $_SESSION['msg'][] = '<div class="msg_'.$class.'">✔ '.$msg.'</div>';
     }
   
-    // Возвращает дату, переформатированную в строку типа "2 дня назад"
-    // Временная, заменить
-    public static function ru_date($time, $time_limit = 604800, $out_format = 'Y-m-d H:i', $formats = null, $time_now = null)
+    // Локализация даты, событий....
+    public static function ru_date($string) 
     {
-        $timestamp = strtotime($time);
-         
-        if (!$timestamp)
-        {
-            return false;
-        }
+        $monn = array(
+            '',
+            lang('january'),
+            lang('february'),
+            lang('martha'),
+            lang('april'),
+            lang('may'),
+            lang('june'),
+            lang('july'),
+            lang('august'),
+            lang('september'),
+            lang('october'),
+            lang('november'),
+            lang('december')
+        );
+        //Разбиваем дату в массив
+        $a = preg_split('/[^\d]/',$string); 
+        
+        $today = date('Ymd');  //20210421
+        if(($a[0].$a[1].$a[2])==$today) {
+            //Если сегодня
+            return(lang('Today').' '.$a[3].':'.$a[4]);
 
-        if ($formats == null)
-        {
-            $formats = array(
-                'YEAR' => '%s лет назад',
-                'MONTH' => '%s месяцев назад',
-                'DAY' => '%s дней назад',
-                'HOUR' => '%s час. назад',
-                'MINUTE' => '%s минут назад',
-                'SECOND' => '%s секунд назад',
-                'YEARS' => '%ss лет назад',
-                'MONTHS' => '%s месяцев назад',
-                'DAYS' => '%ss дней назад',
-                'HOURS' => '%ss час. назад',
-                'MINUTES' => '%s минут назад',
-                'SECONDS' => '%ss секунд назад'
-            );
-        }
-
-        $time_now = $time_now == null ? time() : $time_now;
-        $seconds = $time_now - $timestamp;
-
-        if ($seconds == 0)
-        {
-            $seconds = 1;
-        }
-
-        if (!$time_limit OR $seconds > $time_limit)
-        {
-            return date($out_format, $timestamp);
-        }
-
-        $minutes = floor($seconds / 60);
-        $hours = floor($minutes / 60);
-        $days = floor($hours / 24);
-        $months = floor($days / 30);
-        $years = floor($months / 12);
-
-        if ($years > 0)
-        {
-            $diffFormat = 'YEAR';
-            if($years > 1){
-                $flag = 's';
+        } else {
+                $b = explode('-',date("Y-m-d"));
+                $tom = date('Ymd',mktime(0,0,0,$b[1],$b[2]-1,$b[0]));
+                if(($a[0].$a[1].$a[2])==$tom) {
+                //Если вчера
+                return(lang('Yesterday').' '.$a[3].':'.$a[4]);
+            } else {
+                //Если позже
+                $mm = intval($a[1]);
+                return($a[2]." ".$monn[$mm]." ".$a[0]." ".$a[3].":".$a[4]);
             }
         }
-        else
-        {
-            if ($months > 0)
-            {
-                $diffFormat = 'MONTH';
-                if($months > 1){
-                    $flag = 's';
-                }
-            }
-            else
-            {
-                if ($days > 0)
-                {
-                    $diffFormat = 'DAY';
-                    if($days > 1){
-                        $flag = 's';
-                    }
-                }
-                else
-                {
-                    if ($hours > 0)
-                    {
-                        $diffFormat = 'HOUR';
-                        if($hours > 1){
-                            $flag = 's';
-                        }
-                    }
-                    else
-                    {
-                        if($minutes > 0){
-                            $diffFormat = 'MINUTE';
-                            if($minutes > 1){
-                                $flag = 's';
-                            }
-                        }else{
-                            $diffFormat = 'SECOND';
-                            if($seconds > 1){
-                                $flag = 's';
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        $flag = [];
-        $dateDiff = null;
-        switch ($diffFormat)
-        {
-            case 'YEAR' :
-                $dateDiff = sprintf($formats[$diffFormat], $years, $flag);
-                break;
-            case 'MONTH' :
-                $dateDiff = sprintf($formats[$diffFormat], $months, $flag);
-                break;
-            case 'DAY' :
-                $dateDiff = sprintf($formats[$diffFormat], $days, $flag);
-                break;
-            case 'HOUR' :
-                $dateDiff = sprintf($formats[$diffFormat], $hours, $flag);
-                break;
-            case 'MINUTE' :
-                $dateDiff = sprintf($formats[$diffFormat], $minutes, $flag);
-                break;
-            case 'SECOND' :
-                $dateDiff = sprintf($formats[$diffFormat], $seconds, $flag);
-                break;
-        }
-
-        return $dateDiff;
     }
-    
+  
     public static function ru_num($type,$num)
     {
         $strlen_num = strlen($num);
@@ -220,15 +133,15 @@ class Base
 
         if($type == 'comm'){
             if($numres == 1){
-                $gram_num_record = 'комментарий';
+                $gram_num_record = lang('comment'); 
             } elseif($numres == 0){
-                $gram_num_record = 'комментариев';
+                $gram_num_record = lang('comments');
             } elseif($numres < 5){
-                $gram_num_record = 'комментария';
+                $gram_num_record = lang('comments_2');
             } elseif($numres < 21){
-                $gram_num_record = 'комментариев';
+                $gram_num_record = lang('comments');
             }  elseif($numres == 21){
-                $gram_num_record = 'комментарий';
+                $gram_num_record = lang('comment');
             }
         }
         
@@ -392,7 +305,7 @@ class Base
     } 
 
     // Discord
-    public static function AddWebhook($text, $url){
+    public static function AddWebhook($text, $title, $url){
         
         // Проверяем имя бота и YOUR_WEBHOOK_URL
         if(!$webhookurl = $GLOBALS['conf']['webhook_url']){
@@ -402,14 +315,13 @@ class Base
             return false;
         } 
         
-        $content = 'Добавлен пост';   
-        $title = 'Был добавлен пост'; 
-        $color = hexdec( "3366ff" );
+        $content    = lang('Post added');   
+        $color      = hexdec( "3366ff" );
 
         // Формируем даты
-        $timestamp = date("c", strtotime("now"));
+        $timestamp  = date("c", strtotime("now"));
 
-        $json_data = json_encode([
+        $json_data  = json_encode([
         
             // Сообщение над телом
             "content" => $content,
@@ -419,7 +331,7 @@ class Base
           
             // URL Аватара.
             // Можно использовать аватар загруженный при создании бота, или указанный ниже
-            //"avatar_url" => "https://ru.gravatar.com/userimage/28503754/1168e2bddca84f571d.jpg?size=512",
+            //"avatar_url" => "https://ru.gravatar.com/userimage/28503754/11685ddca84f571d.jpg?size=512",
 
             // Преобразование текста в речь
             "tts" => false,
@@ -458,7 +370,6 @@ class Base
 
         ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
 
-
         $ch = curl_init( $webhookurl );
         curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-type: application/json'));
         curl_setopt( $ch, CURLOPT_POST, 1);
@@ -468,7 +379,6 @@ class Base
         curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
 
         $response = curl_exec( $ch );
-        // Если что-то не работает, раскомментируем  и почитаем в чём беда :)
         // echo $response;
         curl_close( $ch );
     }

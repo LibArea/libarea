@@ -184,7 +184,7 @@ class PostController extends \MainController
         if($post['post_date'] != $post['edit_date']) {
             $post['edit_date'] = $post['edit_date'];
         } else {
-            $post['edit_date'] = NULL;
+            $post['edit_date'] = 0;
         }
         
         if(Base::getStrlen($post['post_url']) > 6) {
@@ -200,7 +200,7 @@ class PostController extends \MainController
         $post['post_url']       = $post['post_url'];
         $post['post_url_full']  = $post['post_url_full'];
         $post['post_date']      = Base::ru_date($post['post_date']);
-        $post['edit_date']      = Base::ru_date($post['edit_date']);
+        $post['edit_date']      = $post['edit_date'];
         $post['avatar']         = $post['avatar'];
         $post['num_comments']   = Base::ru_num('comm', $post['post_comments']); 
         $post['favorite_post']  = PostModel::getMyPostFavorite($post['post_id'], $uid);
@@ -413,7 +413,7 @@ class PostController extends \MainController
         // Отправим в Discord
         if($GLOBALS['conf']['discord'] == 1) {
             $url = '/posts/'. $post_slug;
-            Base::AddWebhook($post_content, $url);
+            Base::AddWebhook($post_content, $post_title, $url);
         }
         
         redirect('/');   

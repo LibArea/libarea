@@ -1074,7 +1074,7 @@ body.menuno .menu  {
 .dark .titl, .dark .title a {
   color: #fff;
 }
-.dark a, .footer .date, .dark footer, .dark footer a, .na, .dark a.menu.active, 
+.dark a, .dark .footer .date, .dark footer, .dark footer a, .na, .dark a.menu.active, 
 .dark .info-n.active, .favcomm {
   color: #999;
 }

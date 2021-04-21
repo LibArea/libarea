@@ -15,19 +15,19 @@ class InfoController extends \MainController
             'title'         => lang('Info') . ' | ' . $GLOBALS['conf']['sitename'],
             'description'   => lang('info-desc') . ' ' . $GLOBALS['conf']['sitename'],
         ];
-        
-        return view(PR_VIEW_DIR . '/info/index', ['data' => $data, 'uid' => $uid]);
+ 
+       return view(PR_VIEW_DIR . '/info/index', ['data' => $data, 'uid' => $uid]);
     }
 
     public function stats()
 	{
         // Получаем общее количество: участников, постов, комментариев и голосов по ним
-        $user_num      = InfoModel::getUsersNumAll();
-        $post_num      = InfoModel::getPostsNumAll();
-        $comm_num      = InfoModel::getCommentsNumAll();
-        $vote_comm_num = InfoModel::getCommentsVoteNumAll();
-        $vote_post_num = InfoModel::getPostVoteNumAll();
-        $flow_num = InfoModel::GrafFlow();
+        $user_num       = InfoModel::getUsersNumAll();
+        $post_num       = InfoModel::getPostsNumAll();
+        $comm_num       = InfoModel::getCommentsNumAll();
+        $vote_comm_num  = InfoModel::getCommentsVoteNumAll();
+        $vote_post_num  = InfoModel::getPostVoteNumAll();
+        $flow_num       = InfoModel::GrafFlow();
         
         $result = Array();
         foreach($flow_num as $ind => $row){

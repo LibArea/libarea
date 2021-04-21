@@ -10,10 +10,6 @@ define('HLEB_START', microtime(true));
 define('HLEB_FRAME_VERSION', "1.5.60");
 define('HLEB_PUBLIC_DIR', __DIR__);
 
-// Загружаем файл конфигурации и локализации
-$GLOBALS['conf'] = include( __DIR__ .'/../config.inc.php');
-define('LANG', include_once(__DIR__ .'/../app/Language/'. $GLOBALS['conf']['lang']. '/lang.php'));
-
 // General headers.
 // Общие заголовки.
 // Content Security Policy
