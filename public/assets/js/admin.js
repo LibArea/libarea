@@ -1,35 +1,57 @@
-$(function(){
+window.onload=function(){
     // Забанить / разбанить участника
-    $(document).on("click", ".user-ban", function(){      
-        var user_id  = $(this).data('id');  
-        $.ajax({
-            url: '/admin/ban/' + user_id,
-            type: 'POST',
-            data: {user_id: user_id},
-        }).done(function(data) {
-            location.reload();
-        });
-    }); 
+ 
+    var ban = document.querySelector('.user-ban');
+    if(ban) {
+        ban.addEventListener('click', function (e) {
+            var user_id  = ban.dataset.id;
+            const request = new XMLHttpRequest();
+            
+            fetch("/admin/ban/" + user_id, { 
+                method: "POST",
+                headers:{"content-type": "application/x-www-form-urlencoded"} 
+                })
+               
+                .then((response) => {
+                    location.reload();                
+                })
+        });  
+    }
+    
     // Восстанавливаем комментарий
-    $(document).on('click', '.recover-comm', function() {
-        var comm_id = $(this).data('id');
-        $.ajax({
-            url: '/admin/comment/recover',
-            type: 'POST',
-            data: {comm_id: comm_id},
-        }).done(function(data) {
-            $('#comm_' + comm_id).addClass('recover');
+    var comm = document.querySelector('.recover-comm');
+    if(comm) {
+        comm.addEventListener('click', function (e) {
+            var comm_id  = comm.dataset.id;
+            const request = new XMLHttpRequest();
+            
+            fetch("/admin/comment/recover/" + comm_id, { 
+                method: "POST",
+                headers:{"content-type": "application/x-www-form-urlencoded"} 
+                })
+               
+                .then((response) => {
+                    location.reload();                
+                }) 
         });
-    });
+    }
+    
     // Удаление / восстановление пространства
-    $(document).on("click", ".space-ban", function(){      
-        var space_id  = $(this).data('id');  
-        $.ajax({
-            url: '/admin/space/ban/' + space_id,
-            type: 'POST',
-            data: {space_id: space_id},
-        }).done(function(data) {
-            location.reload();
+    var space = document.querySelector('.space-ban');
+    if(space) {
+        space.addEventListener('click', function (e) {
+            var space_id  = space.dataset.id;
+            const request = new XMLHttpRequest();
+            
+            fetch("/admin/space/ban/" + space_id, { 
+                method: "POST",
+                headers:{"content-type": "application/x-www-form-urlencoded"} 
+                })
+               
+                .then((response) => {
+                    location.reload();                
+                }) 
         });
-    }); 
-});
+    }
+    
+} 

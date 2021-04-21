@@ -10,7 +10,7 @@
     
         <?php if($user['name']) { ?> / <?= $user['name']; ?><?php } ?>
     
-        <?php if($uid['id']) { ?>   
+        <?php if($uid['trust_level'] > 0) { ?>
             <?php if($uid['login'] != $user['login']) { ?> &nbsp; 
                 <a href="/u/<?= $user['login']; ?>/messages">
                     <svg class="md-icon">

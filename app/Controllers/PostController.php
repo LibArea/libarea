@@ -184,7 +184,7 @@ class PostController extends \MainController
         if($post['post_date'] != $post['edit_date']) {
             $post['edit_date'] = $post['edit_date'];
         } else {
-            $post['edit_date'] = 0;
+            $post['edit_date'] = null;
         }
         
         if(Base::getStrlen($post['post_url']) > 6) {

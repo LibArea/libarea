@@ -42,10 +42,12 @@
     <p><span class="red">&#10003;</span> говорит о том, что вы не видите посты из этих пространства в ленте. Чтобы сделать их видимыми достаточно зайти в пространство и нажать «Подписаться».</p>
     
 </main>
-<?php if($uid['trust_level'] > 1) { ?>
+<?php if($uid['trust_level'] >= $GLOBALS['conf']['space']) { ?>
     <?php if($uid['my_space_id'] == 0) { ?>
     <aside id="sidebar"> 
-        <a href="/space/add">Создать простарнство</a>
+        <div class="right">
+            <a class="add-space" href="/space/add">+ <?= lang('To create'); ?></a>
+        </div>    
     </aside>
     <?php } ?>    
 <?php } ?> 

@@ -59,4 +59,4 @@
         <?php } ?>
     </div>
 </main> 
-<?php include TEMPLATE_DIR . '/footer.php'; ?>
+<?php include TEMPLATE_DIR . '/admin/footer_admin.php'; ?>

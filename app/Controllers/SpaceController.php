@@ -232,7 +232,7 @@ class SpaceController extends \MainController
   
         // Если пользователь уже создал пространство
         if ($uid['my_space_id'] != 0) {
-            //redirect('/');
+            redirect('/');
         }  
    
         $data = [
@@ -249,8 +249,8 @@ class SpaceController extends \MainController
     {
         $uid  = Base::getUid();
         
-        // Для пользователя с TL < 2       
-        if ($uid['trust_level'] < 2) {
+        // Для пользователя с TL < N       
+        if ($uid['trust_level'] < $GLOBALS['conf']['space']) {
             redirect('/');
         }  
         

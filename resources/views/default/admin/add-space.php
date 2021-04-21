@@ -5,4 +5,4 @@
     В стадии разработки... Пока добавьте пространство через базу...
 
 </main>
-<?php include TEMPLATE_DIR . '/footer.php'; ?>   
+<?php include TEMPLATE_DIR . '/admin/footer_admin.php'; ?> 

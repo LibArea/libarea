@@ -17,6 +17,7 @@ return [
     'Sign up'           => 'Регистрация',
     'Remember me'       => 'Запомнить меня',
     'Reset'             => 'Сбросить', 
+    'To create'         => 'Создать',
     'Nickname'          => 'Никнейм',
     'Password'          => 'Пароль',
     'New password'      => 'Новый пароль', 

@@ -26,11 +26,14 @@ class AdminController extends \MainController
             if(!$row['avatar'] ) {
                 $row['avatar'] = 'noavatar.png';
             } 
+            
+            $row['logs_date'] = (empty($row['logs_date'])) ? null : Base::ru_date($row['logs_date']);
+            
             $row['avatar']        = $row['avatar'];  
             $row['replayIp']      = AdminModel::replayIp($row['reg_ip']);
             $row['isBan']         = AdminModel::isBan($row['id']);
             $row['created_at']    = Base::ru_date($row['created_at']); 
-            $row['logs_date']     = Base::ru_date(empty($row['logs_date']));
+            $row['logs_date']     = $row['logs_date'];
             $row['updated_at']    = Base::ru_date($row['updated_at']);
             $result[$ind]         = $row;
          
@@ -54,7 +57,7 @@ class AdminController extends \MainController
             redirect('/');
         }
         
-        $user_id = Request::get('id');
+        $user_id = \Request::get('id');
         AdminModel::setBanUser($user_id);
         
         return true;
@@ -101,8 +104,7 @@ class AdminController extends \MainController
             return false;
         }
         
-        $comm_id = \Request::getPostInt('comm_id');
-        
+        $comm_id = \Request::get('id');
         AdminModel::CommentsRecover($comm_id);
         
         return true;
@@ -208,8 +210,7 @@ class AdminController extends \MainController
         if ($account['trust_level'] != 5) {
             return false;
         }   
-        
-        $space_id = \Request::getPostInt('space_id');
+        $space_id = \Request::get('id');
 
         SpaceModel::SpaceDelete($space_id);
        
