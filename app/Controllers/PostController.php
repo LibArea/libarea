@@ -409,7 +409,13 @@ class PostController extends \MainController
         
         // Записываем пост
         PostModel::AddPost($data);
-
+        
+        // Отправим в Discord
+        if($GLOBALS['conf']['discord'] == 1) {
+            $url = '/posts/'. $post_slug;
+            Base::AddWebhook($post_content, $url);
+        }
+        
         redirect('/');   
     }
     

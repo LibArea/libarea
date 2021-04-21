@@ -391,4 +391,86 @@ class Base
         ));
     } 
 
+    // Discord
+    public static function AddWebhook($text, $url){
+        
+        // Проверяем имя бота и YOUR_WEBHOOK_URL
+        if(!$webhookurl = $GLOBALS['conf']['webhook_url']){
+           return false;
+        }
+        if(!$usernamebot = $GLOBALS['conf']['username_bot']){
+            return false;
+        } 
+        
+        $content = 'Добавлен пост';   
+        $title = 'Был добавлен пост'; 
+        $color = hexdec( "3366ff" );
+
+        // Формируем даты
+        $timestamp = date("c", strtotime("now"));
+
+        $json_data = json_encode([
+        
+            // Сообщение над телом
+            "content" => $content,
+         
+            // Ник бота который отправляет сообщение
+            "username" => $usernamebot,
+          
+            // URL Аватара.
+            // Можно использовать аватар загруженный при создании бота, или указанный ниже
+            //"avatar_url" => "https://ru.gravatar.com/userimage/28503754/1168e2bddca84f571d.jpg?size=512",
+
+            // Преобразование текста в речь
+            "tts" => false,
+
+            // Загрузка файла
+            // "file" => "",
+
+            // Массив Embeds
+            "embeds" => [
+                [
+                    // Заголовок
+                    "title" => $title,
+
+                    // Тип Embed Type, не меняем
+                    "type" => "rich",
+
+                    // Описание
+                    "description" => $text,
+
+                    // Ссылка в заголовке url
+                    "url" => $GLOBALS['conf']['url'] . $url,
+
+                    // Таймштамп, обязательно в формате ISO8601
+                    "timestamp" => $timestamp,
+
+                    // Цвет границы слева, в HEX
+                    "color" => $color,
+
+                    // Подпись и аватар в подвале sitename
+                    "footer" => [
+                        "text" => $GLOBALS['conf']['sitename'],
+                        "icon_url" => $GLOBALS['conf']['icon_url']
+                    ],
+                ]
+            ]
+
+        ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
+
+
+        $ch = curl_init( $webhookurl );
+        curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-type: application/json'));
+        curl_setopt( $ch, CURLOPT_POST, 1);
+        curl_setopt( $ch, CURLOPT_POSTFIELDS, $json_data);
+        curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt( $ch, CURLOPT_HEADER, 0);
+        curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
+
+        $response = curl_exec( $ch );
+        // Если что-то не работает, раскомментируем  и почитаем в чём беда :)
+        // echo $response;
+        curl_close( $ch );
+    }
+
 }
