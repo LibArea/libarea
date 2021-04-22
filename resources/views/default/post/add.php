@@ -19,7 +19,6 @@
                 </div> <?php } ?>
                 <div class="boxline">
                     <label for="post_title">Превью</label>
-                        <script src="/assets/js/editor.js"></script>
                         <textarea class="content_preview" name="content_preview" placeholder=""></textarea>
                     <br />
                     <label for="post_title"></label>    

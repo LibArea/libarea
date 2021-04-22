@@ -63,12 +63,12 @@
                             <span class="show_add_<?= $post['post_id']; ?>">
                                 <div data-post_id="<?= $post['post_id']; ?>" class="showpost">
                                     <span>&#9658;</span> 
-                                    <?= $post['post_content_preview']; ?>... 
+                                    <?= $post['post_content_preview']; ?>
+                                    <span class="s_<?= $post['post_id']; ?> show_detail">... </span>
                                 </div>
                             </span>
                         </div>
                     <?php } ?>
-                    <div id="show_<?= $post['post_id']; ?>" class="show_detail"></div> 
                     
                     <div class="footer">
                         <img class="ava" alt="<?= $post['login']; ?>" src="/uploads/avatar/small/<?= $post['avatar']; ?>">

@@ -20,7 +20,6 @@
                 </div> <?php } ?>
                 <div class="boxline">
                     <label for="post_title">Превью</label>
-                        <script src="/assets/js/editor.js"></script>
                         <textarea class="content_preview" name="content_preview" placeholder=""><?= $post['post_content_preview']; ?></textarea> <br />
                     <label for="post_title"></label>    
                     <div class="box_h">Около 160 символов</div>

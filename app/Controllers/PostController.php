@@ -15,22 +15,14 @@ class PostController extends \MainController
     // Главная страница
     public function index() {
 
-        $pg = \Request::getInt('page'); 
-        $page = (!$pg) ? 1 : $pg;
+        $pg     = \Request::getInt('page'); 
+        $page   = (!$pg) ? 1 : $pg;
+        $uid    = Base::getUid();
 
-        if($account = Request::getSession('account')){
-            // Получаем все пространства отписанные участником
-            $space_user  = SpaceModel::getSpaceUser($account['user_id']);
-            $user_id     = $account['user_id'];
-            $trust_level = $account['trust_level'];
-        } else {
-            $space_user  = [];
-            $user_id     = 0;
-            $trust_level = 0;
-        }
-            
+        $space_user  = SpaceModel::getSpaceUser($uid['id']);
+        
         $pagesCount = PostModel::getPostHomeCount($space_user); 
-        $posts      = PostModel::getPostHome($page, $space_user, $trust_level, $user_id);
+        $posts      = PostModel::getPostHome($page, $space_user, $uid['trust_level'], $uid['id']);
 
         if (!$posts) {
             include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
@@ -58,9 +50,9 @@ class PostController extends \MainController
         }  
  
         // Последние комментарии и отписанные пространства
-        $latest_comments = CommentModel::latestComments($user_id);
-        $space_hide      = SpaceModel::getSpaceUser($user_id);
-        
+        $latest_comments = CommentModel::latestComments($uid['id']);
+        $space_hide      = SpaceModel::getSpaceUser($uid['id']);
+
         $result_comm = Array();
         foreach($latest_comments as $ind => $row){
             
@@ -81,7 +73,6 @@ class PostController extends \MainController
             $num = '';
         }
 
-        $uid  = Base::getUid();
         $data = [
             'title'            => lang('Home') . 'Главная | ' . $GLOBALS['conf']['sitename'] . $num, 
             'description'      => lang('home-desc') . ' ' . $GLOBALS['conf']['sitename'] . $num,

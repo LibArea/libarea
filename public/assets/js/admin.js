@@ -1,4 +1,5 @@
-window.onload=function(){
+document.addEventListener('DOMContentLoaded', function() {
+    
     // Забанить / разбанить участника
     var ban = document.querySelector('.user-ban');
     if(ban) {
@@ -49,5 +50,4 @@ window.onload=function(){
                 }) 
         });
     }
-    
-} 
+});

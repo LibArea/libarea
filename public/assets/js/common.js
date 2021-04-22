@@ -1,71 +1,119 @@
-$(function(){
-    // Add comment (We need to simplify these constructs)
-    $(document).on("click", ".addcomm", function(){
-        var comm_id = $(this).data('id'); 
-        var post_id = $(this).data('post_id');        
-        var comm_h  = $('.reply.active');
-        $.post('/comments/addform', {comm_id: comm_id, post_id: post_id}, function(data) {
-            if(data){
-                $("#cm_addentry"+comm_id).html(data);
-                $("#cm_addentry"+comm_id).addClass('active');
-                comm_h.removeClass('active');
+// Call the form for adding a comment
+document.querySelectorAll(".addcomm")
+  .forEach(el => el.addEventListener("click",  function(e){ 
+  
+    var comm_id  = this.dataset.id;
+    var post_id  = this.dataset.post_id;
+    
+    var comm = document.querySelector('#cm_addentry'+comm_id);
+    var sss = comm.classList.add("active");
+     
+    fetch("/comments/addform", { 
+        method: "POST",
+        body: "comm_id=" + comm_id + "&post_id=" + post_id,
+        headers:{'Content-Type': 'application/x-www-form-urlencoded'} 
+        })
+        .then(
+            response => {
+                return response.text();
             }
-        });
-    });
-    $(document).on("click", "#cancel_cmm", function(){
-        $('.cm_addentry').remove();
-        $('.cm_add_link').show();
-    });
-    // Show post body
-    $(document).on("click", ".showpost", function(){
-        var post_id = $(this).data('post_id');  
-        var shows   = $('.show_detail.active');
-        $.post('/post/shown', {post_id: post_id}, function(data) {
-            if(data){
-                $("#show_"+post_id).html(data); 
-                $('#show_'+post_id).addClass('active');
-                // $('.show_add_' + post_id).find('.showpost').html('скрыть пост...');
-                shows.removeClass('active');
+        ).then(
+            text => {
+                comm.innerHTML = text;
             }
-        });
-    });
-}); 
+        );
+        
+        document.querySelectorAll('#cm_addentry_noauth'+comm_id)
+            .forEach(el => el.addEventListener("click",  function(e){ 
+           // console.log(e);
+            if(e.path) {
+                e.path[3].classList.remove("active");
+            }
+        }));
+         
+})); 
+
+// We will show a preview of the post on the central page
+document.querySelectorAll(".showpost")
+  .forEach(el => el.addEventListener("click",  function(e){ 
+  
+    var post_id  = this.dataset.post_id;
+    var post = document.querySelector('.s_'+post_id);   
+    post.classList.remove("hide");
+    
+    if(!e.target.classList.contains('showpost')){
+        post.classList.add("hide");
+    }
+    
+    fetch("/post/shown", { 
+            method: "POST",
+            body: "post_id=" + post_id,
+            headers:{'Content-Type': 'application/x-www-form-urlencoded'} 
+            })
+            .then(
+                response => {
+                    return response.text();
+                }
+            ).then(
+                text => {
+                    post.innerHTML = text;
+                }
+            );
+}));
 
 // Toggle dark mode
-$(document).on('click', '#toggledark', function() {
-    var mode = getCookie("dayNight");
-    var d = new Date();
-    d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000)); //365 days
-    var expires = "expires=" + d.toGMTString();
-    if (mode == "dark") {
-      document.cookie = "dayNight" + "=" + "light" + "; " + expires + ";path=/";
-      document.getElementsByTagName('body')[0].classList.remove('dark');
-    } else {
-      document.cookie = "dayNight" + "=" + "dark" + "; " + expires + ";path=/";
-      document.getElementsByTagName('body')[0].classList.add('dark');
-    }
-});
-// Toggle menu mode
-$(document).on('click', '.togglemenu', function() {
-    var mode = getCookie("menuS");
-    var d = new Date();
-    d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000)); //365 days
-    var expires = "expires=" + d.toGMTString();
-    if (mode == "menuno") {
-      document.cookie = "menuS" + "=" + "light" + "; " + expires + ";path=/";
-      document.getElementsByTagName('body')[0].classList.remove('menuno');
-    } else {
-      document.cookie = "menuS" + "=" + "menuno" + "; " + expires + ";path=/";
-      document.getElementsByTagName('body')[0].classList.add('menuno');
-    }
-});
-// Show hide popover
-$(document).on("click", ".dropbtn", function(){       
-    $('.dropdown-menu').addClass('fast');
-    $('body, .dropbtn a').click(function () {
-        $('.dropdown-menu').removeClass('fast');
+var toggledark = document.querySelector('#toggledark');
+if(toggledark) {
+    toggledark.addEventListener('click', function () {
+        var mode = getCookie("dayNight");
+        var d = new Date();
+        d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000)); //365 days
+        var expires = "expires=" + d.toGMTString();
+        if (mode == "dark") {
+          document.cookie = "dayNight" + "=" + "light" + "; " + expires + ";path=/";
+          document.getElementsByTagName('body')[0].classList.remove('dark');
+        } else {
+          document.cookie = "dayNight" + "=" + "dark" + "; " + expires + ";path=/";
+          document.getElementsByTagName('body')[0].classList.add('dark');
+        }
     });
-});
+}
+    
+// Toggle menu mode (To combine)
+// Combined with the following, it might be worth changing the css itself 
+// to make it easier to change the visible position of the menu 
+var togglemenuoff = document.querySelector('.togglemenuoff');
+var togglemenu = document.querySelector('.togglemenu');
+if(togglemenuoff) {
+    togglemenuoff.addEventListener('click', function () {
+        var mode = getCookie("menuS");
+        var d = new Date();
+        d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000)); //365 days
+        var expires = "expires=" + d.toGMTString();
+        if (mode == "menuno") {
+          document.cookie = "menuS" + "=" + "light" + "; " + expires + ";path=/";
+          document.getElementsByTagName('body')[0].classList.remove('menuno');
+        } else {
+          document.cookie = "menuS" + "=" + "menuno" + "; " + expires + ";path=/";
+          document.getElementsByTagName('body')[0].classList.add('menuno');
+        }
+    });
+}
+if(togglemenu) {
+    togglemenu.addEventListener('click', function () {
+        var mode = getCookie("menuS");
+        var d = new Date();
+        d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000)); //365 days
+        var expires = "expires=" + d.toGMTString();
+        if (mode == "menuno") {
+          document.cookie = "menuS" + "=" + "light" + "; " + expires + ";path=/";
+          document.getElementsByTagName('body')[0].classList.remove('menuno');
+        } else {
+          document.cookie = "menuS" + "=" + "menuno" + "; " + expires + ";path=/";
+          document.getElementsByTagName('body')[0].classList.add('menuno');
+        }
+    });
+}
 // TODO: move to util
 function getCookie(cname) {
     var name = cname + "=";

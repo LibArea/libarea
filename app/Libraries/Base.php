@@ -38,7 +38,7 @@ class Base
         } else {
             UserModel::checkCookie();
             
-            $uid['id']          = null;
+            $uid['id']          = 0;
             $uid['trust_level'] = null;
         }
         $uid['uri']     = Request::getUri();

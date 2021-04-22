@@ -188,21 +188,14 @@ class CommentController extends \MainController
 	{
         $comm_id    = \Request::getPostInt('comm_id');
         $post_id    = \Request::getPostInt('post_id');
-        $user       = \Request::getSession('account') ?? [];
         
-        if(!empty($user['user_id'])) {
-             $user_id = $user['user_id'];
-        } else {
-            $user_id  = 0;
-        }
-        
+        $uid  = Base::getUid();
         $data = [
             'comm_id'     => $comm_id,
             'post_id'     => $post_id,
-            'user_id'     => $user_id,
         ]; 
         
-        return view(PR_VIEW_DIR . '/comment/add-form', ['data' => $data]);
+        return view(PR_VIEW_DIR . '/comment/add-form', ['data' => $data, 'uid' => $uid]);
     }
 
     // Комментарии участника

@@ -233,7 +233,7 @@ blockquote {
   font-size: 12px;
   letter-spacing: 1px;
 }
-.closed-off {
+.togglemenuoff {
   position: absolute;
   right: 15px;
   top: -2px;  
@@ -301,7 +301,7 @@ blockquote {
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
   right: 6px;
-  top: 23px;
+  top: 25px;
   padding: 2px 4px 4px 4px;
   border-radius: 3px;
 }
@@ -476,6 +476,10 @@ input.form-about {width: 250px;}
   margin-bottom: 12px;
   grid-area: header;
   margin: 50px 16px 5px 10px;
+} 
+
+.notif-color-1 {
+ background: #F89406;
 }
 
 /* Посты */
@@ -495,14 +499,8 @@ input.form-about {width: 250px;}
   margin: 0 0 5px 0;
   display: block;
 }
-.showpost span {
-  color: #bbb;
-}
-.show_detail {
+.show_detail.hide {
   display: none;
-}
-.show_detail.active {
-  display: block;
 }
 .post_url {
   font-size: 10pt;
@@ -1021,7 +1019,10 @@ div.voters .comm-up-id, div.voters .post-up-id {
   stroke: #2562dc;
 }
 a.active {
-  color:#333;
+  color:#222;
+}
+a.active .md-icon {
+  stroke: #222;
 }
 .menu a span {    
   vertical-align: top;
@@ -1054,16 +1055,17 @@ body.menuno .menu  {
 }
   
 @media screen and (max-width: 840px) {
-  #sidebar, .no-mob, menu {display: none;}
+  #sidebar, .no-mob, .menu {display: none;}
   img.thumb {max-width: 95%;}
   main {max-width: 100vw;}
   .user_card .column {padding: 10px;}
   .user_card .gravatar {height: 55px;width: 55px;}
 }
 @media screen and (max-width: 610px) {
-  div.box label, div.boxline label {display: block;width: 100% !important;}
+  div.box label, div.boxline label, textarea {display: block;width: 93% !important;}
   .box label {margin-bottom: 0;}
   .no-mob-two {display: none;}
+  .post-body {margin-left: 2px;}
 }
 
 /* dark */
@@ -1075,7 +1077,7 @@ body.menuno .menu  {
   color: #fff;
 }
 .dark a, .dark .footer .date, .dark footer, .dark footer a, .na, .dark a.menu.active, 
-.dark .info-n.active, .favcomm {
+.dark .info-n.active, .dark .favcomm {
   color: #999;
 }
 .dark a:hover {

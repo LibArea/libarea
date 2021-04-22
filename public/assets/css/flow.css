@@ -21,6 +21,7 @@ aside#sidebar {
 }
 .avatar {
   vertical-align: middle;
+  width: 16px;
 }
 .flow h1 {
   margin: 0 0 10px 0;

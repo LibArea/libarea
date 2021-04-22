@@ -1,6 +1,6 @@
 <div class="menu">
     <div class="bar-m">Меню</div>
-    <div class="togglemenu closed-off">
+    <div class="togglemenuoff">
         <svg class="md-icon moon"><use xlink:href="/assets/svg/icons.svg#closed"></use></svg>
     </div>
     <?php if($uid['id']) { ?>                     

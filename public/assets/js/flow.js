@@ -1,15 +1,16 @@
 document.addEventListener('DOMContentLoaded', function() {
-    setInterval(ping,15000);
-    function ping() 
-    {
-        $.ajax({  
-                url: "/flow/content",  
-                cache: false,  
-                success: function(html){  
-                    $("#content").html(html);  
-                }  
-            }); 
-        }
+    
+    var content = document.querySelector('#content');
+    let promise = fetch('/flow/content');
 
-    ping();
-}); 
+    promise.then(
+        response => {
+            return response.text();
+        }
+    ).then(
+        text => {
+            content.innerHTML = text;
+        }
+    );
+    setTimeout(window.location.reload.bind(window.location), 12500);
+});
