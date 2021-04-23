@@ -293,6 +293,7 @@ blockquote {
 .mlogout {
   color: var(--color-gray-1);
 }
+
 .dropdown-menu {
   display: none;
   position: absolute;
@@ -305,7 +306,7 @@ blockquote {
   padding: 2px 4px 4px 4px;
   border-radius: 3px;
 }
-.dropdown-menu.fast {
+.dropdown-menu.show {
   display: block;
 }
 .dropdown-menu a {
@@ -1003,9 +1004,15 @@ div.voters .comm-up-id, div.voters .post-up-id {
 
 /* Меню */
 .menu-info {
-  background-color: #f0f0df;
-  padding: 15px 0 10px 20px;
+  padding: 15px 20px 0 0;
   margin-left: 20px;
+  float: right;
+}
+.menu-info a {
+  display: block;
+  font-size: 15px;
+  color: var(--color-gray-1); 
+  margin-bottom: 8px;
 }
 .menu {
   grid-area: menu;
@@ -1013,13 +1020,11 @@ div.voters .comm-up-id, div.voters .post-up-id {
   margin: 8px 0;
   position: relative;
 }
-.menu a, .menu-info a {
+.menu a {
+  color: var(--color-gray-1); 
   display: block;
   font-size: 13px;
   margin-bottom: 5px;
-}
-.menu a {
-  color: var(--color-gray-1);   
 }
 .menu a:hover > .md-icon {
   stroke: #2562dc;

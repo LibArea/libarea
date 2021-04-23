@@ -78,7 +78,28 @@ if(toggledark) {
         }
     });
 }
-    
+
+// Personal drop-down menu
+let hamburger = document.querySelector('.dropbtn');
+let menu = document.querySelector('.dropdown-menu');
+const toggleMenu = () => {
+  menu.classList.toggle('show');
+}
+hamburger.addEventListener('click', e => {
+  e.stopPropagation();
+  toggleMenu();
+});
+document.addEventListener('click', e => {
+  let target = e.target;
+  let its_menu = target == menu || menu.contains(target);
+  let its_hamburger = target == hamburger;
+  let menu_is_active = menu.classList.contains('show');
+  
+  if (!its_menu && !its_hamburger && menu_is_active) {
+    toggleMenu();
+  }
+})
+   
 // Toggle menu mode (To combine)
 // Combined with the following, it might be worth changing the css itself 
 // to make it easier to change the visible position of the menu 

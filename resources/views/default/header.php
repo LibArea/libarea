@@ -104,12 +104,12 @@
                     </li>  
                 <?php } ?>    
                 <li class="dropbtn nav">
-                    <a class="b-my" href="#" title=""><span><?= $uid['login']; ?></span>  
+                    <div class="b-my" title=""><span><?= $uid['login']; ?></span>  
                         <img class="ava" alt="<?= $uid['login']; ?>" src="/uploads/avatar/small/<?= $uid['avatar']; ?>">
                         <svg class="md-icon">
                             <use xlink:href="/assets/svg/icons.svg#chevrons-down"></use>
                         </svg>  
-                    </a>
+                    </div>
                     <span class="dropdown-menu">
                         <span class="st"></span>
                         <a href="/u/<?= $uid['login']; ?>">

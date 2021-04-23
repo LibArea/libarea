@@ -20,7 +20,10 @@ return [
     'To create'         => 'Создать',
     'Nickname'          => 'Никнейм',
     'Password'          => 'Пароль',
-    'New password'      => 'Новый пароль', 
+    'New password'      => 'Новый пароль',
+    'Repeat'            => 'Повторите',
+    'New'               => 'Новый',  
+    'Old'               => 'Старый', 
     'Code'              => 'Код',
     'Invite'            => 'Инвайт',
     'Invites'           => 'Инвайты',
@@ -110,5 +113,15 @@ return [
 
     'comment'           => 'комментарий',
     'comments'          => 'комментариев',
-    'comments_2'        => 'комментария',    
+    'comments_2'        => 'комментария',   
+
+    /* Настройки */
+    'Setting profile'       => 'Настрока профиля',    
+    'Setting profile page'  => 'Страница настройки профиля',
+    'Change avatar'         => 'Изменение аватарки', 
+    'Avatar'                => 'Аватарка',     
+    'Change avatar page'    => 'Страница изменение аватарки',    
+    'Change password'       => 'Изменение пароля', 
+    'Change password page'  => 'Страница изменение пароля', 
+   
 ];

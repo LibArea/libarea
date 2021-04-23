@@ -2,7 +2,6 @@
 <main class="w-100">
     <span class="right"><a href="/s/<?= $space['space_slug']; ?>"><?= $space['space_name']; ?></a></span>
     <h1><?= $data['h1']; ?></h1>
-
     <div class="telo space">
         <div class="box create">
             <form action="/space/editspace" method="post" enctype="multipart/form-data">
@@ -28,6 +27,7 @@
                 </div>
                 <div class="boxline">
                     <label for="post_content">Цвет</label>
+                    <!-- Можно: https://developer.mozilla.org/ru/docs/Web/HTML/Applying_color -->
                     <?php include TEMPLATE_DIR . '/space/space-color-box.php'; ?>
                 </div>
                 <div class="boxline">

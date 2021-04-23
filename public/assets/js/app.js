@@ -1,11 +1,4 @@
 $(function(){
-   // Show hide popover
-   $(document).on("click", ".dropbtn", function(){       
-        $('.dropdown-menu').addClass('fast');
-        $('body, .dropbtn a').click(function () {
-            $('.dropdown-menu').removeClass('fast');
-        });
-    }); 
     // Голосование за комментарии
     $(document).on('click', '.comm-up-id', function() {
         var comm_id = $(this).data('id');
@@ -158,6 +151,3 @@ $(function(){
         $('.cm_add_link').show();
     });
 });
-
-
- 

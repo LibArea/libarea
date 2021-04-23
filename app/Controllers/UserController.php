@@ -89,9 +89,9 @@ class UserController extends \MainController
         }
 
         $data = [
-          'h1'          => 'Настрока профиля',
-          'title'       => 'Настрока профиля',
-          'description' => 'Страница настройки профиля', 
+          'h1'          => lang('Setting profile'),
+          'title'       => lang('Setting profile'),
+          'description' => lang('Setting profile page'), 
         ];
 
         return view(PR_VIEW_DIR . '/user/setting', ['data' => $data, 'uid' => $uid, 'user' => $user]);
@@ -134,9 +134,9 @@ class UserController extends \MainController
         }
 
         $data = [
-            'h1'            => 'Изменение аватарки',
-            'title'         => 'Изменение аватарки',
-            'description'   => 'Страница изменение аватарки', 
+            'h1'            => lang('Change avatar'),
+            'title'         => lang('Change avatar'),
+            'description'   => lang('Change avatar page'), 
         ];
 
         return view(PR_VIEW_DIR . '/user/setting-avatar', ['data' => $data, 'uid' => $uid]);
@@ -154,11 +154,12 @@ class UserController extends \MainController
         }
         
         $data = [
-            'title'       => 'Изменение пароля',
-            'description' => 'Страница изменение пароля', 
-            'password'    => '',
-            'password2'   => '',
-            'password3'   => '',
+            'h1'            => lang('Change password'),
+            'title'         => lang('Change password'),
+            'description'   => lang('Change password page'), 
+            'password'      => '',
+            'password2'     => '',
+            'password3'     => '',
         ];
 
         return view(PR_VIEW_DIR . '/user/setting-security', ['data' => $data, 'uid' => $uid]);
@@ -339,7 +340,6 @@ class UserController extends \MainController
     // Страница инвайтов пользователя
     function invitationPage() 
     {
-        
         // Страница участника и данные
         $login      = \Request::get('login');
        
@@ -370,17 +370,16 @@ class UserController extends \MainController
     }
     
     // Создать инвайт
-    function invitationCreate() {
-        
+    function invitationCreate() 
+    {
         // Данные участника
-        $account    = \Request::getSession('account');
-        $user       = UserModel::getUserLogin($account['login']);
+        $uid    = Base::getUid();
         
         $invitation_email = \Request::getPost('email');
         
         if (!$this->prEmail($invitation_email)) {
            Base::addMsg('Недопустимый email', 'error');
-           redirect('/u/' . $user['login'] . '/invitation');
+           redirect('/u/' . $uid['login'] . '/invitation');
         }
         
         $uInfo = UserModel::getUserInfo($invitation_email);
@@ -388,15 +387,15 @@ class UserController extends \MainController
             
             if ($uInfo['email']) {
                 Base::addMsg('Пользователь уже есть на сайте', 'error');
-                redirect('/u/' . $user['login'] . '/invitation');
+                redirect('/u/' . $uid['login'] . '/invitation');
             }
         } 
         
-        $inv_user = UserModel::InvitationOne($user['id']);
+        $inv_user = UserModel::InvitationOne($uid['id']);
  
         if($inv_user['invitation_email'] == $invitation_email) {
             Base::addMsg('Вы уже отсылали приглашение этому пользователю', 'error');
-            redirect('/u/' . $user['login'] . '/invitation');
+            redirect('/u/' . $uid['login'] . '/invitation');
         }
         
         // + Повторная отправка
@@ -405,10 +404,10 @@ class UserController extends \MainController
         $invitation_code    = Base::randomString('crypto', 25);
         $add_ip             = Request::getRemoteAddress();
         
-        UserModel::addInvitation($user['id'], $invitation_code, $invitation_email, $add_time, $add_ip);
+        UserModel::addInvitation($uid['id'], $invitation_code, $invitation_email, $add_time, $add_ip);
 
         Base::addMsg('Инвайт создан', 'error');
-        redirect('/u/' . $user['login'] . '/invitation'); 
+        redirect('/u/' . $uid['login'] . '/invitation'); 
     }
     
     // Проверка e-mail
