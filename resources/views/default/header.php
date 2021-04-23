@@ -149,7 +149,7 @@
                             <?= lang('Favorites'); ?>              
                         </a>
                         <?php if($uid['trust_level'] > 1) { ?>
-                            <a href="/users/invitation">
+                            <a href="/u/<?= $uid['login']; ?>/invitation">
                                 <svg class="md-icon">
                                     <use xlink:href="/assets/svg/icons.svg#link"></use>
                                 </svg>   

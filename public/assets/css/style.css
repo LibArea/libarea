@@ -352,6 +352,8 @@ input[type="button"],
 input[type="reset"],
 input[type="submit"],
 input[type="text"],
+input[type="password"],
+input[type="email"],
 input[type="submit_url"] {
   display: inline-block;
   padding: 2px 10px 2px 10px;
@@ -368,6 +370,8 @@ input[type="button"]:first-child,
 input[type="reset"]:first-child,
 input[type="submit"]:first-child,
 input[type="text"]:first-child,
+input[type="password"]:first-child,
+input[type="email"]:first-child,
 input[type="submit_url"]:first-child {
   margin-left: 0;
 }
@@ -376,6 +380,8 @@ input[type="button"]:hover,
 input[type="reset"]:hover,
 input[type="submit"]:hover,
 input[type="test"]:hover,
+input[type="password"]:hover, 
+input[type="email"]:hover,
 input[type="submit_url"]:hover {
   color: var(--color-gray-2);
   text-decoration: none;

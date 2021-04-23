@@ -38,7 +38,7 @@ class UserModel extends \MainModel
     // Получение информации по id
     public static function getUserId($id)
     {
-        $query = XD::select(['id', 'login', 'name', 'email', 'avatar', 'about', 'trust_level', 'my_space_id', 'ban_list'])
+        $query = XD::select(['id', 'login', 'name', 'email', 'avatar', 'invitation_available',  'about', 'trust_level', 'my_space_id', 'ban_list'])
                 ->from(['users'])
                 ->where(['id'], '=', $id);
 
@@ -470,7 +470,7 @@ class UserModel extends \MainModel
 	public static function addInvitation($uid, $invitation_code, $invitation_email, $add_time, $add_ip)
 	{
         $inv        = XD::select('*')->from(['users'])->where(['id'], '=', $uid)->getSelectOne();
-        $num_inv    = $inv['post_comments']; // получаем количество инвайтов
+        $num_inv    = $inv['invitation_available']; // получаем количество инвайтов 
         $num        = $num_inv + 1;          // плюсуем один
 
         XD::update(['users'])->set(['invitation_available'], '=', $num)->where(['id'], '=', $uid,)->run();

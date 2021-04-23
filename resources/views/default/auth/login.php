@@ -10,7 +10,7 @@
             </div>
             <div class="boxline">
                 <label for="password"><?= lang('Password'); ?></label>
-                <input type="text" name="password" id="password" value="">
+                <input type="password" name="password" id="password" value="">
             </div>
             <div class="boxline">
                 <input type="checkbox" id="rememberme" name="rememberme" value="1">

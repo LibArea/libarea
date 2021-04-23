@@ -294,10 +294,12 @@ class UserController extends \MainController
             if(!$row['avatar'] ) {
                 $row['avatar']  = 'noavatar.png';
             } 
+        
+            $row['post_date'] = (empty($row['post_date'])) ? $row['post_date'] : Base::ru_date($row['post_date']);
 
             $row['avatar']          = $row['avatar'];  
             $row['comment_content'] = $Parsedown->text($row['comment_content']);
-            $row['date']            = Base::ru_date($row['post_date']);
+            $row['date']            = $row['post_date'];
             $row['post']            = PostModel::getPostId($row['comment_post_id']);
             $result[$ind]           = $row;
          
@@ -339,12 +341,11 @@ class UserController extends \MainController
     function invitationPage() 
     {
         // Данные участника
-        $account    = \Request::getSession('account');
-        $user       = UserModel::getUserLogin($account['login']);
+        $uid    = Base::getUid();
+        $user   = UserModel::getUserId($uid['id']);
         
-        $result =  UserModel::InvitationResult($user['id']);
+        $result =  UserModel::InvitationResult($uid['id']);
 
-        $uid  = Base::getUid();
         $data = [
           'h1'          => 'Инвайты',
           'title'       => 'Мои инвайты',
@@ -365,7 +366,7 @@ class UserController extends \MainController
         
         if (!$this->prEmail($invitation_email)) {
            Base::addMsg('Недопустимый email', 'error');
-           redirect('/users/invitation');
+           redirect('/u/' . $user['login'] . '/invitation');
         }
         
         $uInfo = UserModel::getUserInfo($invitation_email);
@@ -373,7 +374,7 @@ class UserController extends \MainController
             
             if ($uInfo['email']) {
                 Base::addMsg('Пользователь уже есть на сайте', 'error');
-                redirect('/users/invitation');
+                redirect('/u/' . $user['login'] . '/invitation');
             }
         } 
         
@@ -381,7 +382,7 @@ class UserController extends \MainController
  
         if($inv_user['invitation_email'] == $invitation_email) {
             Base::addMsg('Вы уже отсылали приглашение этому пользователю', 'error');
-            redirect('/users/invitation');
+            redirect('/u/' . $user['login'] . '/invitation');
         }
         
         // + Повторная отправка
@@ -393,7 +394,7 @@ class UserController extends \MainController
         UserModel::addInvitation($user['id'], $invitation_code, $invitation_email, $add_time, $add_ip);
 
         Base::addMsg('Инвайт создан', 'error');
-        redirect('/users/invitation'); 
+        redirect('/u/' . $user['login'] . '/invitation'); 
     }
     
     // Проверка e-mail

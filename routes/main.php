@@ -28,7 +28,8 @@ Route::before('Authorization@noAuth')->getGroup();
 	Route::type('post')->get('/post/del')->controller('PostController@deletePost');
     Route::type('post')->get('/post/grabtitle')->controller('PostController@grabTitle');
 
-    Route::get('/users/invitation')->controller('UserController@invitationPage');
+    // Инвайты
+    Route::get('/u/{login}/invitation')->controller('UserController@invitationPage')->where(['login' => '[A-Za-z0-9]+']); 
 	Route::type('post')->protect()->get('/invitation/create')->controller('UserController@invitationCreate');
 
 	Route::get('/users/setting')->controller('UserController@settingPage');

@@ -15,11 +15,11 @@
             </div>
             <div class="boxline">
                 <label for="password"><?= lang('Password'); ?></label>
-                <input type="text" name="password" id="password">
+                <input type="password" name="password" id="password">
             </div>
              <div class="boxline">
                 <label for="password_confirm"><?= lang('repeat-password'); ?></label>
-                <input type="text" name="password_confirm" id="password_confirm">
+                <input type="password" name="password_confirm" id="password_confirm">
             </div>    
             <?php if ($GLOBALS['conf']['captcha']) { ?>
                 <div class="captcha_data">
