@@ -4,7 +4,7 @@
         <svg class="md-icon moon"><use xlink:href="/assets/svg/icons.svg#closed"></use></svg>
     </div>
     <?php if($uid['id'] > 0) { ?>                     
-        <a <?php if($uid['uri'] == '/u/' .$uid['login']. '/favorite') { ?>class="active"<?php } ?> href="/u/<?= $uid['login']; ?>/favorite">
+        <a href="/u/<?= $uid['login']; ?>/favorite">
             <svg class="md-icon"><use xlink:href="/assets/svg/icons.svg#bookmark"></use></svg>  
             <span><?= lang('Favorites'); ?></span>              
         </a>

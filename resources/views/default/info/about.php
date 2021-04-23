@@ -10,6 +10,9 @@
             </li>
         </ul>
         <h1><?= $data['h1']; ?></h1>
+        
+        Мы в Discord: <a rel="nofollow noreferrer" target="_blank" href="https://discord.gg/dw47aNx5nU">https://discord.gg/dw47aNx5nU</a>
+        <br><br>
         Средний размер файла и «вес» веб-сайтов стали немного смешными. В апреле 2016 года было отмечено, что средняя страница теперь <a rel="nofollow noreferrer" target="_blank" href="https://mobiforge.com/research-analysis/the-web-is-doom">больше, чем в игре DOOM.</a> 
         <br><br>
         Это не дело! 

@@ -92,7 +92,7 @@
                 </li>   
                 <?php if($uid['notif']) { ?> 
                     <li class="nav notif">  
-                        <a class="nav" href="/notifications"> 
+                        <a class="nav" href="/u/<?= $uid['login']; ?>/notifications"> 
                             <svg class="md-icon">
                                 <?php if($uid['notif']['action_type'] == 1) { ?>
                                     <use xlink:href="/assets/svg/icons.svg#mail"></use>
@@ -118,19 +118,19 @@
                             </svg> 
                             <?= lang('Profile'); ?>
                         </a>
-                        <a href="/users/setting">
+                        <a href="/u/<?= $uid['login']; ?>/setting">
                             <svg class="md-icon">
                                 <use xlink:href="/assets/svg/icons.svg#settings"></use>
                             </svg> 
                             <?= lang('Settings'); ?>
                         </a>
-                       <a href="/notifications">
+                       <a href="/u/<?= $uid['login']; ?>/notifications">
                             <svg class="md-icon">
                                 <use xlink:href="/assets/svg/icons.svg#bulb"></use>
                             </svg>  
                             <?= lang('Notifications'); ?>
                         </a>
-                        <a href="/messages">
+                        <a href="/u/<?= $uid['login']; ?>/messages">
                             <svg class="md-icon">
                                 <use xlink:href="/assets/svg/icons.svg#mail"></use>
                             </svg>  

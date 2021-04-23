@@ -75,71 +75,68 @@ class UserController extends \MainController
     function settingPage()
     {
         // Данные участника
-        $account    = \Request::getSession('account');
-        $user       = UserModel::getUserLogin($account['login']);
+        $login  = \Request::get('login');
+        $uid    = Base::getUid();
+        $user   = UserModel::getUserLogin($uid['login']);
+        
+        // Ошибочный Slug в Url
+        if($login != $user['login']) {
+            redirect('/u/' . $user['login'] . '/setting');
+        }
         
         if(!$user['avatar']) {
             $user['avatar'] = 'noavatar.png';
         }
-        
-        $uid  = Base::getUid();
+
         $data = [
+          'h1'          => 'Настрока профиля',
           'title'       => 'Настрока профиля',
           'description' => 'Страница настройки профиля', 
-          'login'       => $user['login'],
-          'name'        => $user['name'],
-          'avatar'      => $user['avatar'],
-          'about'       => $user['about'],
-          'email'       => $user['email'],
         ];
 
-        return view(PR_VIEW_DIR . '/user/setting', ['data' => $data, 'uid' => $uid]);
+        return view(PR_VIEW_DIR . '/user/setting', ['data' => $data, 'uid' => $uid, 'user' => $user]);
     }
     
     // Изменение профиля
     function settingEdit ()
     {
+        $uid  = Base::getUid();
+
         $name    = \Request::getPost('name');
         $about   = \Request::getPost('about');
         
         if (Base::getStrlen($name) < 4 || Base::getStrlen($name) > 20)
         {
           Base::addMsg('Имя должно быть от 3 до ~ 10 символов', 'error');
-          redirect('/users/setting');
+          redirect('/u/' . $uid['login'] . '/setting');
         }
         
         if (Base::getStrlen($about) > 350)
         {
           Base::addMsg('О себе должно быть меньше символов', 'error');
-          redirect('/users/setting');
+          redirect('/u/' . $uid['login'] . '/setting');
         }
 
-        // Логин участника
-        $account = \Request::getSession('account');
-        $login   = $account['login'];
-    
-        UserModel::editProfile($login, $name, $about);
+        UserModel::editProfile($uid['login'], $name, $about);
         
-        redirect(PR_VIEW_DIR . '/users/setting');
+        redirect('/u/' . $uid['login'] . '/setting');
     }
     
     // Форма загрузки аватарки
     function settingPageAvatar ()
     {
-        // Аватар участника
-        $account = \Request::getSession('account');
-        $ava     = UserModel::getAvatar($account['login']);
-        $avatar  = $ava['avatar'];
-
-        if(!$avatar) {
-            $avatar = 'noavatar.png';
-        } 
-        
         $uid  = Base::getUid();
+        $login  = \Request::get('login');
+
+        // Ошибочный Slug в Url
+        if($login != $uid['login']) {
+            redirect('/u/' . $uid['login'] . '/setting/avatar');
+        }
+
         $data = [
-            'title'  => 'Изменение аватарки',
-            'description' => 'Страница изменение аватарки', 
-            'avatar' => $avatar,
+            'h1'            => 'Изменение аватарки',
+            'title'         => 'Изменение аватарки',
+            'description'   => 'Страница изменение аватарки', 
         ];
 
         return view(PR_VIEW_DIR . '/user/setting-avatar', ['data' => $data, 'uid' => $uid]);
@@ -149,6 +146,13 @@ class UserController extends \MainController
     function settingPageSecurity ()
     {
         $uid  = Base::getUid();
+        $login  = \Request::get('login');
+
+        // Ошибочный Slug в Url
+        if($login != $uid['login']) {
+            redirect('/u/' . $uid['login'] . '/setting/security');
+        }
+        
         $data = [
             'title'       => 'Изменение пароля',
             'description' => 'Страница изменение пароля', 
@@ -163,7 +167,8 @@ class UserController extends \MainController
     // Изменение аватарки
     function settingAvatarEdit() 
     {
-        $account  = \Request::getSession('account');
+        $uid  = Base::getUid();
+        
         $name     = $_FILES['image']['name'];
         $size     = $_FILES['image']['size'];
         $ext      = strtolower(pathinfo($name, PATHINFO_EXTENSION));
@@ -173,24 +178,24 @@ class UserController extends \MainController
         if (!in_array($ext, array('jpg','jpeg','png','gif'))) {
             $valid = false;
             Base::addMsg('Тип файла не разрешен', 'error');
-            redirect('/users/setting/avatar');
+            redirect('/u/' . $uid['login'] . '/setting/avatar');
         }
 
         // Проверка ширины, высоты и размера
         if ($width_h['0'] > 150) {
             $valid = false;
             Base::addMsg('Ширина больше 150 пикселей', 'error');
-            redirect('/users/setting/avatar');
+            redirect('/u/' . $uid['login'] . '/setting/avatar');
         }
         if ($width_h['1'] > 150) {
             $valid = false;
             Base::addMsg('Высота больше 150 пикселей', 'error');
-            redirect('/users/setting/avatar');
+            redirect('/u/' . $uid['login'] . '/setting/avatar');
         }
         if ($size > 50000) {
             $valid = false;
             Base::addMsg('Размер файла превышает допустимый', 'error');
-            redirect('/users/setting/avatar');
+            redirect('/u/' . $uid['login'] . '/setting/avatar');
         }
 
         if ($valid) {
@@ -202,13 +207,13 @@ class UserController extends \MainController
             $image = new ImageUpload('image'); 
             
             $image->resize(110, 110, 'crop');            
-            $img = $image->saveTo($path_img, $account['user_id']);
+            $img = $image->saveTo($path_img, $uid['user_id']);
             
             $image->resize(16, 16);            
-            $image->saveTo($path_img_small, $account['user_id']);
+            $image->saveTo($path_img_small, $uid['user_id']);
             
             // Получим страую если оно есть, удаляем
-            $avatar = UserModel::getAvatar($account['login']);
+            $avatar = UserModel::getAvatar($uid['login']);
             
             // Удаляем старые аватарки
             chmod($path_img . $avatar['avatar'], 0777);
@@ -217,10 +222,10 @@ class UserController extends \MainController
             unlink($path_img_small . $avatar['avatar']);
 
             // Запишем новую 
-            UserModel::setAvatar($account['login'], $img);
+            UserModel::setAvatar($uid['login'], $img);
             
             Base::addMsg('Аватарка изменена', 'error');
-            redirect('/users/setting/avatar');
+            redirect('/u/' . $uid['login'] . '/setting/avatar');
             
         }
     }
@@ -228,23 +233,24 @@ class UserController extends \MainController
     // Изменение пароля
     function settingSecurityEdit()
     {
+        $uid  = Base::getUid();
         $password    = \Request::getPost('password');
         $password2   = \Request::getPost('password2');
         $password3   = \Request::getPost('password3');
 
         if ($password2 != $password3) {
             Base::addMsg('Пароли не совпадают', 'error');
-            redirect('/users/setting/security');
+            redirect('/u/' . $uid['login'] . '/setting/security');
         }
         
         if (substr_count($password2, ' ') > 0) {
             Base::addMsg('Пароль не может содержать пробелов', 'error');
-            redirect('/users/setting/security');
+            redirect('/u/' . $uid['login'] . '/setting/security');
         }
 
         if (Base::getStrlen($password2) < 8 || Base::getStrlen($password2) > 24) {
             Base::addMsg('Длина пароля должна быть от 8 до 24 знаков', 'error');
-            redirect('/users/setting/security');
+            redirect('/u/' . $uid['login'] . '/setting/security');
         }
         
         // Данные участника
@@ -253,38 +259,31 @@ class UserController extends \MainController
        
         if (!password_verify($password, $userInfo['password'])) {
             Base::addMsg('Старый пароль не верен', 'error');
-            redirect('/users/setting/security');
+            redirect('/u/' . $uid['login'] . '/setting/security');
         }
         
         $newpass = password_hash($password2, PASSWORD_BCRYPT);
         UserModel::editPassword($account['user_id'], $newpass);
 
         Base::addMsg('Пароль успешно изменен', 'error');
-        redirect('/users/setting');
+        redirect('/u/' . $uid['login'] . '/setting');
     }
     
     // Страница закладок участника
     function userFavorite ()
     {
-        $uid    = Base::getUid();
         $login  = \Request::get('login');
-
-        $user   = UserModel::getUserLogin($login);
-
-        // Покажем 404
-        if(!$user) {
-            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
-            hl_preliminary_exit();
-        }
         
-        // Если страница закладок не участника
-        if($user['id'] != $uid['id']){
-            redirect('/');
+        $uid    = Base::getUid();
+        $user   = UserModel::getUserLogin($uid['login']);
+
+        // Ошибочный Slug в Url
+        if($login != $uid['login']){
+            redirect('/u/' . $user['login'] . '/favorite');
         }
-        
+
         $Parsedown = new Parsedown(); 
         $Parsedown->setSafeMode(true); // безопасность
-        
         
         $fav = UserModel::getUserFavorite($user['id']);
    
@@ -306,9 +305,9 @@ class UserController extends \MainController
         }
         
         $data = [
-            'h1'            => 'Избранное ' . $login,
-            'title'         => 'Избранное ' . $login . ' | ' . $GLOBALS['conf']['sitename'],
-            'description'   => 'Избранные посты участника ' . $login . ' в сообществе ' . $GLOBALS['conf']['sitename'],
+            'h1'            => lang('Favorites') . ' ' . $login,
+            'title'         => lang('Favorites') . ' ' . $login . ' | ' . $GLOBALS['conf']['sitename'],
+            'description'   => lang('Favorites') . ' ' . $login . ' — ' . $GLOBALS['conf']['sitename'],
         ]; 
         
         return view(PR_VIEW_DIR . '/user/favorite', ['data' => $data, 'uid' => $uid, 'favorite' => $result]);   
@@ -323,7 +322,7 @@ class UserController extends \MainController
         $data = [
             'h1'            => lang('Invite'),
             'title'         => lang('Invite') . ' | ' . $GLOBALS['conf']['sitename'],
-            'description'   => 'Страница инвайтов на сайте ' . $GLOBALS['conf']['sitename'],
+            'description'   => lang('Invite') . ' — ' . $GLOBALS['conf']['sitename'],
         ];
 
         return view(PR_VIEW_DIR . '/user/invite', ['data' => $data, 'uid' => $uid]);    
@@ -340,16 +339,31 @@ class UserController extends \MainController
     // Страница инвайтов пользователя
     function invitationPage() 
     {
-        // Данные участника
+        
+        // Страница участника и данные
+        $login      = \Request::get('login');
+       
+        // Кто смотрит
         $uid    = Base::getUid();
         $user   = UserModel::getUserId($uid['id']);
         
+        // Запретим смотреть инвайты чужого профиля
+        if($login != $user['login']) {
+            redirect('/u/' . $user['login'] . '/invitation');
+        }
+
+        // Покажем 404
+        if(!$user) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
+        }
+
         $result =  UserModel::InvitationResult($uid['id']);
 
         $data = [
-          'h1'          => 'Инвайты',
-          'title'       => 'Мои инвайты',
-          'description' => 'Страница личных инвайтов', 
+          'h1'          => lang('Invites'),
+          'title'       => lang('Invites') . ' | ' . $GLOBALS['conf']['sitename'],
+          'description' => lang('Invites') . ' - ' . $GLOBALS['conf']['sitename'], 
         ];
 
         return view(PR_VIEW_DIR . '/user/invitation', ['data' => $data, 'uid' => $uid, 'user' => $user,  'result' => $result]);  

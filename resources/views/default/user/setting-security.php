@@ -1,9 +1,8 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<main class="w-100">
-    <a class="right" href="/u/<?= $uid['login']; ?>">Посмотреть профиль</a>
+<main class="w-100 max-width">
     <ul class="nav-tabs">
-        <li><a href="/users/setting"><span>Настройка профиля</span></a></li>
-        <li><a href="/users/setting/avatar"><span>Аватар</span></a></li>
+        <li><a href="/u/<?= $uid['login']; ?>/setting"><span>Настройка профиля</span></a></li>
+        <li><a href="/u/<?= $uid['login']; ?>/setting/avatar"><span>Аватар</span></a></li>
         <li class="active"><span>Пароль</span></li>
     </ul>
     <div class="box setting">
@@ -29,4 +28,5 @@
             </form>    
     </div>
 </main>
+<?php include TEMPLATE_DIR . '/_block/user-menu.php'; ?>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

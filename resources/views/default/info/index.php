@@ -37,7 +37,9 @@
         <br><br>
         По вопросам, связанным с пожертвованиями, другими предложениями, замечаниями пишите туда же.
         <br> <br> 
+        Мы в Discord: <a rel="nofollow noreferrer" target="_blank" href="https://discord.gg/dw47aNx5nU">https://discord.gg/dw47aNx5nU</a>
          
+        <br> <br> 
     </div>
 </main>
 <?php include TEMPLATE_DIR . '/_block/info-menu.php'; ?>

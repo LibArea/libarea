@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\NotificationsModel;
+use App\Models\UserModel;
 use Base;
 
 class NotificationsController extends \MainController
@@ -10,10 +11,18 @@ class NotificationsController extends \MainController
     // Страница уведомлений участника
     public function index()
     {
+        $login  = \Request::get('login');
+        
+        $uid    = Base::getUid();
+        $user   = UserModel::getUserLogin($uid['login']);
+
+        // Если страница закладок не участника
+        if($login != $uid['login']){
+            redirect('/u/' . $user['login'] . '/notifications');
+        }
         
         // Данные участника и список уведомлений
-        $account = Request::getSession('account');
-        $list = NotificationsModel::listNotification($account['user_id']);
+        $list = NotificationsModel::listNotification($uid['id']);
 
         $result = Array();
         foreach($list as $ind => $row){
@@ -23,7 +32,6 @@ class NotificationsController extends \MainController
          
         } 
 
-        $uid  = Base::getUid();
         $data = [
             'title'       => 'Уведомления',
             'description' => 'Страница уведомления',

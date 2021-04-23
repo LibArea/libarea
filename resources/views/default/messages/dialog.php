@@ -1,7 +1,7 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<div class="w-100">
+<main class="w-100 max-width">
 
-    <h1><a href="/messages">Все сообщения</a> / <?= $data['title']; ?> </h1>
+    <h1><a href="/u/<?= $uid['login']; ?>/messages">Все сообщения</a> / <?= $data['title']; ?> </h1>
         
     <form action="/messages/send" method="post">
     <?= csrf_field() ?>

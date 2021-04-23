@@ -32,9 +32,10 @@ Route::before('Authorization@noAuth')->getGroup();
     Route::get('/u/{login}/invitation')->controller('UserController@invitationPage')->where(['login' => '[A-Za-z0-9]+']); 
 	Route::type('post')->protect()->get('/invitation/create')->controller('UserController@invitationCreate');
 
-	Route::get('/users/setting')->controller('UserController@settingPage');
-	Route::get('/users/setting/avatar')->controller('UserController@settingPageAvatar');
-	Route::get('/users/setting/security')->controller('UserController@settingPageSecurity');
+	Route::get('/u/{login}/setting')->controller('UserController@settingPage')->where(['login' => '[A-Za-z0-9]+']); 
+	Route::get('/u/{login}/setting/avatar')->controller('UserController@settingPageAvatar')->where(['login' => '[A-Za-z0-9]+']); 
+	Route::get('/u/{login}/setting/security')->controller('UserController@settingPageSecurity')->where(['login' => '[A-Za-z0-9]+']); 
+    
 	Route::type('post')->protect()->get('/users/setting/edit')->controller('UserController@settingEdit');
 	Route::type('post')->protect()->get('/users/setting/avatar/edit')->controller('UserController@settingAvatarEdit');
 	Route::type('post')->protect()->get('/users/setting/security/edit')->controller('UserController@settingSecurityEdit');
@@ -57,13 +58,13 @@ Route::before('Authorization@noAuth')->getGroup();
 	Route::type('post')->get('/post/addfavorite')->controller('PostController@addPostFavorite');
 
 	// Личные сообщения 
-	Route::get('/messages')->controller('MessagesController');  
+	Route::get('/u/{login}/messages')->controller('MessagesController')->where(['login' => '[A-Za-z0-9]+']);   
 	Route::type('post')->protect()->get('/messages/send')->controller('MessagesController@send');
 	Route::get('/messages/read/{id}')->controller('MessagesController@dialog')->where(['id' => '[0-9]+']); 
-	Route::get('/u/{login}/messages')->controller('MessagesController@profilMessages')->where(['login' => '[A-Za-z0-9]+']); 
+	Route::get('/u/{login}/mess')->controller('MessagesController@profilMessages')->where(['login' => '[A-Za-z0-9]+']); 
 
 	// Уведомления 
-	Route::get('/notifications')->controller('NotificationsController');
+	Route::get('/u/{login}/notifications')->controller('NotificationsController')->where(['login' => '[A-Za-z0-9]+']); 
     Route::get('/notifications/read/{id}')->controller('NotificationsController@notificationRead')->where(['id' => '[0-9]+']);  
     
     // Избранное

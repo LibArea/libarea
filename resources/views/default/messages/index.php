@@ -1,5 +1,5 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<div class="w-100">
+<main class="w-100 max-width">
     <div class="messages">
         <h1><?= $data['title'] ?></h1>
         <?php if (!empty($data['messages'])) { ?>
@@ -38,4 +38,5 @@
         <?php } ?>
     </div>
 </main>
+<?php include TEMPLATE_DIR . '/_block/user-menu.php'; ?>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

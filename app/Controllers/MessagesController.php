@@ -11,13 +11,18 @@ class MessagesController extends \MainController
 
 	public function index()
 	{
-        // Данные участника
-        $account = Request::getSession('account');
-        $user_id = $account['user_id'];
+        // Страница участника и данные
+        $login      = \Request::get('login');
+        $uid    = Base::getUid();
         
-        if ($messages_dialog = MessagesModel::getMessages($user_id))
+        // Ошибочный Slug в Url
+        if($login != $uid['login']) {
+            redirect('/u/' . $uid['login'] . '/messages');
+        }
+       
+        if ($messages_dialog = MessagesModel::getMessages($uid['id'])) 
 		{
-            $messages_total_rows = MessagesModel::getMessagesTotal($user_id);
+            $messages_total_rows = MessagesModel::getMessagesTotal($uid['id']);
 
             foreach ($messages_dialog as $val)
             {
@@ -40,13 +45,13 @@ class MessagesController extends \MainController
 			foreach ($messages_dialog as $ind => $row)
 			{
                
-                if ($row['recipient_uid'] == $user_id) // Принимающий  AND $row['recipient_count']
+                if ($row['recipient_uid'] == $uid['id']) // Принимающий  AND $row['recipient_count']
                 {
                     $row['unread']   = $row['recipient_unread'];
                     $row['count']    = $row['recipient_count'];
                     $row['msg_user'] = UserModel::getUserId($row['sender_uid']);
                 }
-                else if ($row['sender_uid'] == $user_id) // Отправляющий  AND $row['sender_count']
+                else if ($row['sender_uid'] == $uid['id']) // Отправляющий  AND $row['sender_count']
                 {
                     $row['unread']   = $row['sender_unread'];
                     $row['count']    = $row['sender_count'];
@@ -68,7 +73,6 @@ class MessagesController extends \MainController
             $result = [];
         }
 
-        $uid  = Base::getUid();
 		$data = [
             'title'       => 'Личные сообщения',
             'description' => 'Страница личных сообщений',
@@ -81,8 +85,7 @@ class MessagesController extends \MainController
 	public function dialog()
 	{
         // Данные участника
-        $account = Request::getSession('account');
-        $user_id = $account['user_id'];
+        $uid  = Base::getUid();
 
         $id  = Request::get('id');
 
@@ -92,18 +95,18 @@ class MessagesController extends \MainController
             redirect('/messages');
         }
 
-        if ($dialog['recipient_uid'] != $user_id AND $dialog['sender_uid'] != $user_id)
+        if ($dialog['recipient_uid'] != $uid['id'] AND $dialog['sender_uid'] != $uid['id'])
         {
             Base::addMsg('Указанного темы не существует', 'error');
-            redirect('/messages');
+            redirect('/u/' . $uid['login'] . '/messages');
         }
         
         // обновляем просмотры и т.д.
-        MessagesModel::setMessageRead($id, $user_id);
+        MessagesModel::setMessageRead($id, $uid['id']);
         
         if ($list = MessagesModel::getMessageByDialogId($id))
 		{
-			if ($dialog['sender_uid'] != $user_id)
+			if ($dialog['sender_uid'] != $uid['id'])
 			{
 				$recipient_user = UserModel::getUserId($dialog['sender_uid']);
 			}
@@ -114,11 +117,11 @@ class MessagesController extends \MainController
  
             foreach ($list as $key => $val)
             {
-                if ($dialog['sender_uid'] == $user_id AND $val['sender_remove'])
+                if ($dialog['sender_uid'] == $uid['id'] AND $val['sender_remove'])
                 {
                     unset($list[$key]);
                 }
-                else if ($dialog['sender_uid'] != $user_id AND $val['recipient_remove'])
+                else if ($dialog['sender_uid'] != $uid['id'] AND $val['recipient_remove'])
                 {
                     unset($list[$key]);
                     
@@ -133,7 +136,6 @@ class MessagesController extends \MainController
                 $recipient_user['avatar'] = 'noavatar.png';
             } 
         
-        $uid  = Base::getUid();
         $data = [
             'title'          => 'Диалог',
             'description'    => 'Страница диалогов',
@@ -148,9 +150,7 @@ class MessagesController extends \MainController
 	public function send()
 	{
         // Данные участника
-        $account = Request::getSession('account');
-        $sender_uid = $account['user_id'];
-
+        $uid        = Base::getUid();
         $message = Request::getPost('message');
         $recipient_uid = Request::getPost('recipient');
 
@@ -158,20 +158,25 @@ class MessagesController extends \MainController
         if ($message == '')
         {
             Base::addMsg('Введите содержание сообщения', 'error');
-            redirect('/register');
+            redirect('/u/' . $uid['login'] . '/messages');
         }
 
-        // Этого пользователь не существует (добавить!!!!!!!!!!!)
+        // Этого пользователь не существует
+        $user  = UserModel::getUserId($uid['id']);
+        if(!$user) {
+            Base::addMsg('Введите содержание сообщения', 'error');
+            redirect('/u/' . $uid['login'] . '/messages');
+        }
 
-        if ($recipient_uid == $sender_uid)
+        if ($recipient_uid == $uid['id'])
         {
             Base::addMsg('Себе отправлять сообщение нельзя', 'error');
-            redirect('/messages');
+            redirect('/u/' . $uid['login'] . '/messages');
         }
 
-        MessagesModel::SendMessage($sender_uid, $recipient_uid, $message);
+        MessagesModel::SendMessage($uid['id'], $recipient_uid, $message);
 
-        redirect('/messages');
+        redirect('/u/' . $uid['login'] . '/messages');
     }
     
     // Форма отправки из профиля
