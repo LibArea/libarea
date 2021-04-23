@@ -187,19 +187,6 @@ class UserModel extends \MainModel
         return true;   
     }
     
-    // Персонал
-    public static function isAdmin($uid) 
-    {
-        
-        $result = XD::select(['id', 'trust_level'])->from(['users'])->where(['id'], '=', $uid)->getSelectOne();
-
-        if($result['trust_level'] != 5) {
-            return false;    
-        }
-
-        return true;   
-    }
-    
     // Находит ли пользователь в бан- листе
     public static function isBan($uid)
     {

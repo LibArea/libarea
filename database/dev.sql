@@ -412,8 +412,8 @@ CREATE TABLE `invitation` (
   `add_time` datetime NOT NULL,
   `add_ip` varchar(12) DEFAULT NULL,
   `active_expire` tinyint(1) DEFAULT '0',
-  `active_time` datetime NOT NULL,  
-  `active_ip` varchar(12) DEFAULT NULL,
+  `active_time` datetime DEFAULT NULL,  
+  `active_ip` varchar(112) DEFAULT NULL,
   `active_status` tinyint(4) DEFAULT '0',
   `active_uid` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

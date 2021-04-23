@@ -1,6 +1,9 @@
 body {
    background: #f3f3f3;
 }
+.wrap {
+  grid-area: header;
+}
 .admin {
   grid-column-start: 2;
   grid-column-end: 5;
@@ -12,7 +15,7 @@ body {
   opacity: 0.3;
 }
 .nav.active > a {
-    color: #f56400;
+  color: #f56400;
 }
 /* tables */
 .t-table {  

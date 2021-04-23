@@ -13,7 +13,8 @@ class SpaceModel extends \MainModel
     {
         $q = XD::select('*')->from(['space']);
         $result = $q->leftJoin(['space_hidden'])->on(['hidden_space_id'], '=', ['space_id'])
-                ->and(['hidden_user_id'], '=', $user_id)->getSelect();
+                ->and(['hidden_user_id'], '=', $user_id)
+                ->where(['space_is_delete'], '!=', 1)->getSelect();
         
         return $result;
     } 

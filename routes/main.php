@@ -14,6 +14,7 @@ Route::before('Authorization@noAuth')->getGroup();
     Route::get('/admin')->controller('AdminController');
     Route::get('/admin/space')->controller('AdminController@Space'); 
     Route::get('/admin/space/add')->controller('AdminController@addAdminSpacePage');
+    Route::type('post')->protect()->get('/admin/addspaceadmin')->controller('AdminController@spaceAddAdmin');
     Route::get('/admin/comments')->controller('AdminController@Comments'); 
     Route::get('/admin/invitations')->controller('AdminController@Invitations');
     

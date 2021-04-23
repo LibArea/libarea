@@ -12,9 +12,9 @@ class AdminController extends \MainController
 {
 	public function index()
 	{
-        // Если TL участника не равен 5 (персонал) - редирект
-        $account = Request::getSession('account');
-        if(!$isAdmin = UserModel::isAdmin($account['user_id'])) {
+        // Доступ только персоналу
+        $uid = Base::getUid();
+        if ($uid['trust_level'] != 5) {
             redirect('/');
         }
       
@@ -39,7 +39,6 @@ class AdminController extends \MainController
          
         } 
         
-        $uid  = Base::getUid();
         $data = [
             'title'        => 'Последние сессии | Админка',
             'description'  => 'Админка на AreaDev',
@@ -52,9 +51,9 @@ class AdminController extends \MainController
     public function banUser() 
     {
         // Доступ только персоналу
-        $account = \Request::getSession('account');
-        if ($account['trust_level'] != 5) {
-            return false;
+        $uid = Base::getUid();
+        if ($uid['trust_level'] != 5) {
+            redirect('/');
         }
 
         $user_id = \Request::getPostInt('id');
@@ -66,14 +65,17 @@ class AdminController extends \MainController
     // Удаленые комментарии
     public function Comments ()
     {
+        // Доступ только персоналу
+        $uid = Base::getUid();
+        if ($uid['trust_level'] != 5) {
+            redirect('/');
+        }
+        
         $Parsedown = new Parsedown(); 
         $Parsedown->setSafeMode(true); // безопасность
          
         $comm = AdminModel::getCommentsDell();
- 
-        $account    = \Request::getSession('account');
-        $user_id    = $account ? $account['user_id'] : 0;
- 
+
         $result = Array();
         foreach($comm  as $ind => $row){
             if(!$row['avatar']) {
@@ -99,9 +101,9 @@ class AdminController extends \MainController
     public function recoverComment()
     {
         // Доступ только персоналу
-        $account = \Request::getSession('account');
-        if ($account['trust_level'] != 5) {
-            return false;
+        $uid = Base::getUid();
+        if ($uid['trust_level'] != 5) {
+            redirect('/');
         }
         
         $comm_id = \Request::getPostInt('id');
@@ -113,9 +115,13 @@ class AdminController extends \MainController
     // Показываем дерево приглашенных
     public function Invitations ()
     {
+        // Доступ только персоналу
+        $uid        = Base::getUid();
+        if ($uid['trust_level'] != 5) {
+            redirect('/');
+        }  
+ 
         $invite     = AdminModel::getInvitations();
-        $account    = \Request::getSession('account');
-        $user_id    = $account ? $account['user_id'] : 0;
  
         $result = Array();
         foreach($invite  as $ind => $row){
@@ -128,7 +134,6 @@ class AdminController extends \MainController
             $result[$ind]       = $row;
         }
 
-        $uid  = Base::getUid();
         $data = [
             'h1'          => 'Инвайты',
             'title'       => 'Инвайты' . ' | ' . $GLOBALS['conf']['sitename'],
@@ -154,9 +159,13 @@ class AdminController extends \MainController
     // Пространства
     public function Space ()
     {
-        $account    = \Request::getSession('account');
-        $user_id    = $account ? $account['user_id'] : 0;
-        $space      = AdminModel::getAdminSpaceAll($user_id);
+        // Доступ только персоналу
+        $uid        = Base::getUid();
+        if ($uid['trust_level'] != 5) {
+            redirect('/');
+        }  
+        
+        $space      = AdminModel::getAdminSpaceAll($uid['id']);
          
         $result = Array();
         foreach($space  as $ind => $row){
@@ -173,7 +182,6 @@ class AdminController extends \MainController
             $result[$ind]       = $row;
         }
 
-        $uid  = Base::getUid();
         $data = [
             'h1'          => 'Пространства',
             'title'       => 'Пространства' . ' | ' . $GLOBALS['conf']['sitename'],
@@ -187,12 +195,11 @@ class AdminController extends \MainController
     public function addAdminSpacePage() 
     {
         // Доступ только персоналу
-        $account = \Request::getSession('account');
-        if ($account['trust_level'] != 5) {
-            return false;
+        $uid  = Base::getUid();
+        if ($uid['trust_level'] != 5) {
+            redirect('/');
         }  
         
-        $uid  = Base::getUid();
         $data = [
             'h1'          => 'Добавить пространство',
             'title'       => 'Добавить пространство' . ' | ' . $GLOBALS['conf']['sitename'],
@@ -206,15 +213,98 @@ class AdminController extends \MainController
     public function delSpace() {
         
         // Доступ только персоналу
-        $account = \Request::getSession('account');
-        if ($account['trust_level'] != 5) {
-            return false;
+        $uid = Base::getUid();
+        if ($uid['trust_level'] != 5) {
+            redirect('/');
         }   
         
         $space_id = \Request::getPostInt('id');
         SpaceModel::SpaceDelete($space_id);
        
         return true;
+    }
+    
+    // Добавить пространства
+    public function spaceAddAdmin() 
+    {
+        // Доступ только персоналу
+        $uid = Base::getUid();
+        if ($uid['trust_level'] != 5) {
+            redirect('/');
+        } 
+        
+        $space_slug     = \Request::getPost('space_slug');
+        $space_name     = \Request::getPost('space_name');  
+        $permit         = \Request::getPostInt('permit');
+        $meta_desc      = \Request::getPost('space_description');
+        $space_text     = \Request::getPost('space_text');  
+        $space_color    = \Request::getPostInt('space_color');
+        
+        if (!preg_match('/^[a-zA-Z0-9]+$/u', $space_slug))
+        {
+            Base::addMsg('В URL можно использовать только латиницу, цифры', 'error');
+            redirect('/admin/space/add');
+        }
+        if (Base::getStrlen($space_slug) < 4 || Base::getStrlen($space_slug) > 15)
+        {
+          Base::addMsg('URL должно быть от 3 до ~ 15 символов', 'error');
+          redirect('/admin/space/add');
+        }
+        if (preg_match('/\s/', $space_slug) || strpos($space_slug,' '))
+        {
+            Base::addMsg('В URL не допускаются пробелы', 'error');
+            redirect('/admin/space/add');
+        }
+        if (SpaceModel::getSpaceInfo($space_slug)) {
+            Base::addMsg('Такой URL пространства уже есть', 'error');
+            redirect('/admin/space/add');
+        }
+ 
+        // Проверяем длину названия
+        if (Base::getStrlen($space_name) < 6 || Base::getStrlen($space_name) > 25)
+        {
+            Base::addMsg('Длина названия должна быть от 6 до 25 знаков', 'error');
+            redirect('/admin/space/add');
+        }
+        
+        // Проверяем длину meta
+        if (Base::getStrlen($meta_desc) < 6 || Base::getStrlen($meta_desc) > 325)
+        {
+            Base::addMsg('Длина meta должна быть от 6 до 325 знаков', 'error');
+            redirect('/admin/space/add');
+        } 
+        
+        // Проверяем длину meta
+        if (Base::getStrlen($space_text) < 6 || Base::getStrlen($space_text) > 325)
+        {
+            Base::addMsg('Длина описания для Sidebar должна быть от 6 до 325 знаков', 'error');
+            redirect('/admin/space/add');
+        }
+        
+        if($permit == '') 
+        {
+            Base::addMsg('Выберите, кто будет публиковать в пространстве', 'error');
+            redirect('/admin/space/add');   
+        }
+        
+        $data = [
+            'space_name'         => $space_name,
+            'space_slug'         => $space_slug,
+            'space_description'  => $meta_desc,
+            'space_color'        => $space_color,
+            'space_img'          => '',
+            'space_text'         => $space_text,
+            'space_date'         => date("Y-m-d H:i:s"),
+            'space_user_id'      => $uid['id'],
+            'space_type'         => 2, 
+            'space_permit_users' => $permit,
+        ];
+ 
+        // Добавляем пространство
+        SpaceModel::AddSpace($data);
+
+        redirect('/admin/space');
+        
     }
     
 }

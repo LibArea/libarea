@@ -13,17 +13,17 @@
                     <br />
                 </div>  
                 <div class="boxline">
-                    <label for="post_title">Название</label>
+                    <label for="post_title"><?= lang('Title'); ?></label>
                     <input class="add" type="text" name="space_name" />
                     <div class="box_h">Одно, два слова</b></div>
                     <br />   
                 </div>   
                 <div class="boxline"> 
-                    <label for="post_content">Публикации</label>
-                    <input type="radio" name="permit" value="1"> Только я
-                    <input type="radio" name="permit" value="2" > Все
+                    <label for="post_content"><?= lang('Publications'); ?></label>
+                    <input type="radio" name="permit" value="1"> <?= lang('Just me'); ?>
+                    <input type="radio" name="permit" value="2" > <?= lang('All'); ?>
                 </div>                   
-                    <input type="submit" name="submit" value="Добавить" />
+                    <input type="submit" name="submit" value="<?= lang('Add'); ?>" />
             </form>
             <br>
             Тут правила на 1, 2 строки...

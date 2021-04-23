@@ -1,20 +1,20 @@
 <?php
 
 namespace App\Controllers;
-use Base;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\UserModel;
 use App\Models\PostModel;
 use App\Models\SpaceModel;
 use ImageUpload;
 use Parsedown;
+use Base;
 
 class UserController extends \MainController
 {
     // Все пользователи
     function index()
     {
-        $uid  = Base::getUid();
+        $uid   = Base::getUid();
         $users = UserModel::getUsersAll($uid['id']);
         
         $result = Array();
