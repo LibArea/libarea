@@ -181,7 +181,7 @@ class AuthController extends \MainController
             UserModel::sendInvitationEmail($inv_code, $inv_uid, $reg_ip, $active_uid);
         }
         
-        Base::addMsg('Регистрация прошла успешно. Введите e-mail и пароль.', 'error');
+        Base::addMsg('Регистрация прошла успешно. Введите e-mail и пароль.', 'success');
         redirect('/login');
     }
 
@@ -311,7 +311,7 @@ class AuthController extends \MainController
 
         Base::mailText($email, $GLOBALS['conf']['sitename'].' - changing your password', $mail_message);
 
-        Base::addMsg('Новый пароль отправлен на E-mail', 'error');
+        Base::addMsg('Новый пароль отправлен на E-mail', 'success');
         redirect('/login');      
     }
     
@@ -371,7 +371,7 @@ class AuthController extends \MainController
         
         UserModel::editRecoverFlag($user_id);
  
-        Base::addMsg('Пароль успешно изменен', 'error');
+        Base::addMsg('Пароль успешно изменен', 'success');
         redirect('/login');
     }
 

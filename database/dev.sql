@@ -137,7 +137,7 @@ CREATE TABLE `posts` (
   `edit_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `post_user_id` int(10) UNSIGNED NOT NULL,
   `post_visible` enum('all','friends') NOT NULL DEFAULT 'all',
-  `post_ip_int` varchar(112) DEFAULT NULL,
+  `post_ip_int` varchar(45) DEFAULT NULL,
   `post_votes` smallint(6) NOT NULL DEFAULT 0,
   `post_karma` smallint(6) NOT NULL DEFAULT 0,
   `post_comments` smallint(6) NOT NULL DEFAULT 0,
@@ -238,7 +238,7 @@ CREATE TABLE `users` (
   `email` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
   `activated` tinyint(1) NOT NULL,
-  `reg_ip` varchar(15) DEFAULT NULL,
+  `reg_ip` varchar(45) DEFAULT NULL,
   `trust_level` int(11) NOT NULL COMMENT 'Уровень доверия. По умолчанию 0 (5 - админ)',
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp(),
@@ -307,7 +307,7 @@ CREATE TABLE `votes_comm` (
   `votes_comm_id` int(11) NOT NULL,
   `votes_comm_item_id` int(11) NOT NULL,
   `votes_comm_points` int(11) NOT NULL,
-  `votes_comm_ip` varchar(20) NOT NULL,
+  `votes_comm_ip` varchar(45) NOT NULL,
   `votes_comm_user_id` int(11) NOT NULL DEFAULT 1,
   `votes_comm_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -320,7 +320,7 @@ CREATE TABLE `votes_comm` (
 CREATE TABLE `users_banlist` (
   `banlist_id` int(11) NOT NULL,
   `banlist_user_id` int(11) NOT NULL,
-  `banlist_ip` varchar(15) NOT NULL,
+  `banlist_ip` varchar(45) NOT NULL,
   `banlist_bandate` timestamp NOT NULL DEFAULT current_timestamp(),
   `banlist_int_num` int(11) NOT NULL,
   `banlist_int_period` varchar(20) NOT NULL,
@@ -348,7 +348,7 @@ CREATE TABLE `users_logs` (
   `logs_user_id` int(11) NOT NULL,
   `logs_login` varchar(255) NOT NULL,
   `logs_trust_level` int(11) NOT NULL,
-  `logs_ip_address` varchar(255) NOT NULL,
+  `logs_ip_address` varchar(45) NOT NULL,
   `logs_date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -385,7 +385,7 @@ CREATE TABLE `votes_post` (
   `votes_post_id` int(11) NOT NULL,
   `votes_post_item_id` int(11) NOT NULL,
   `votes_post_points` int(11) NOT NULL,
-  `votes_post_ip` varchar(20) NOT NULL,
+  `votes_post_ip` varchar(45) NOT NULL,
   `votes_post_user_id` int(11) NOT NULL DEFAULT 1,
   `votes_post_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -410,10 +410,10 @@ CREATE TABLE `invitation` (
   `invitation_code` varchar(32) DEFAULT NULL,
   `invitation_email` varchar(100) DEFAULT NULL,
   `add_time` datetime NOT NULL,
-  `add_ip` varchar(12) DEFAULT NULL,
+  `add_ip` varchar(45) DEFAULT NULL,
   `active_expire` tinyint(1) DEFAULT '0',
   `active_time` datetime DEFAULT NULL,  
-  `active_ip` varchar(112) DEFAULT NULL,
+  `active_ip` varchar(45) DEFAULT NULL,
   `active_status` tinyint(4) DEFAULT '0',
   `active_uid` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -443,7 +443,7 @@ CREATE TABLE `flow_log` (
   `flow_about` varchar(255) DEFAULT NULL,
   `flow_space_id` int(11) NOT NULL,
   `flow_tl` int(11) NOT NULL,
-  `flow_ip` varchar(39) DEFAULT NULL,
+  `flow_ip` varchar(45) DEFAULT NULL,
   `flow_is_delete` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

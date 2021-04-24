@@ -179,9 +179,7 @@
 </header>
 
 <?php if ($uid['msg']) { ?>
-    <div class="msg">
-        <?php foreach($uid['msg'] as $message){ ?>
-            <?= $message; ?>
-        <?php } ?>
-    </div>
+    <?php foreach($uid['msg'] as $message){ ?>
+        <?= $message; ?>
+    <?php } ?>
 <?php } ?>

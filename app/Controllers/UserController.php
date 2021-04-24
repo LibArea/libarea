@@ -14,8 +14,8 @@ class UserController extends \MainController
     // Все пользователи
     function index()
     {
-        $uid   = Base::getUid();
-        $users = UserModel::getUsersAll($uid['id']);
+        $uid    = Base::getUid();
+        $users  = UserModel::getUsersAll($uid['id']);
         
         $result = Array();
         foreach($users as $ind => $row){
@@ -26,13 +26,12 @@ class UserController extends \MainController
  
             $row['avatar']        = $row['avatar'];
             $result[$ind]         = $row;
-         
         } 
         
         $data = [
             'h1'            => lang('Users'),
             'title'         => lang('Users') . ' | ' . $GLOBALS['conf']['sitename'],
-            'description'   => 'Список всех участников сортированных по дате регистрации сайте ' . $GLOBALS['conf']['sitename'],
+            'description'   => lang('desc-user-all') . ' ' . $GLOBALS['conf']['sitename'],
         ];
 
         return view(PR_VIEW_DIR . '/user/all', ['data' => $data, 'uid' => $uid, 'users' => $result]);
@@ -60,7 +59,7 @@ class UserController extends \MainController
         $data =[
           'h1'              => $user['login'] . ' - профиль',
           'title'           => $user['login'] . ' - профиль' . ' | ' . $GLOBALS['conf']['sitename'],
-          'description'     => 'Страница профиля учасника (посты, комментарии) ' . $user['login'] . ' на ' . $GLOBALS['conf']['sitename'],
+          'description'     => lang('desc-profile') . ' ' . $user['login'] . ' - ' . $GLOBALS['conf']['sitename'],
           'created_at'      => Base::ru_date($user['created_at']),
           'trust_level'     => UserModel::getUserTrust($user['id']),
           'post_num_user'   => UserModel::getUsersPostsNum($user['id']),
@@ -107,18 +106,19 @@ class UserController extends \MainController
         
         if (Base::getStrlen($name) < 4 || Base::getStrlen($name) > 20)
         {
-          Base::addMsg('Имя должно быть от 3 до ~ 10 символов', 'error');
+          Base::addMsg(lang('name-info-err'), 'error');
           redirect('/u/' . $uid['login'] . '/setting');
         }
         
         if (Base::getStrlen($about) > 350)
         {
-          Base::addMsg('О себе должно быть меньше символов', 'error');
+          Base::addMsg(lang('about-info-err'), 'error');
           redirect('/u/' . $uid['login'] . '/setting');
         }
 
         UserModel::editProfile($uid['login'], $name, $about);
         
+        Base::addMsg(lang('Changes saved'), 'success');
         redirect('/u/' . $uid['login'] . '/setting');
     }
     
@@ -178,7 +178,7 @@ class UserController extends \MainController
         $valid =  true;
         if (!in_array($ext, array('jpg','jpeg','png','gif'))) {
             $valid = false;
-            Base::addMsg('Тип файла не разрешен', 'error');
+            Base::addMsg(lang('file-type-not-err'), 'error');
             redirect('/u/' . $uid['login'] . '/setting/avatar');
         }
 
@@ -225,9 +225,8 @@ class UserController extends \MainController
             // Запишем новую 
             UserModel::setAvatar($uid['login'], $img);
             
-            Base::addMsg('Аватарка изменена', 'error');
+            Base::addMsg(lang('Avatar changed'), 'error');
             redirect('/u/' . $uid['login'] . '/setting/avatar');
-            
         }
     }
     
@@ -240,17 +239,17 @@ class UserController extends \MainController
         $password3   = \Request::getPost('password3');
 
         if ($password2 != $password3) {
-            Base::addMsg('Пароли не совпадают', 'error');
+            Base::addMsg(lang('pass-match-err'), 'error');
             redirect('/u/' . $uid['login'] . '/setting/security');
         }
         
         if (substr_count($password2, ' ') > 0) {
-            Base::addMsg('Пароль не может содержать пробелов', 'error');
+            Base::addMsg(lang('pass-gap-err'), 'error');
             redirect('/u/' . $uid['login'] . '/setting/security');
         }
 
         if (Base::getStrlen($password2) < 8 || Base::getStrlen($password2) > 24) {
-            Base::addMsg('Длина пароля должна быть от 8 до 24 знаков', 'error');
+            Base::addMsg(lang('pass-length-err'), 'error');
             redirect('/u/' . $uid['login'] . '/setting/security');
         }
         
@@ -259,14 +258,14 @@ class UserController extends \MainController
         $userInfo = UserModel::getUserInfo($account['email']);
        
         if (!password_verify($password, $userInfo['password'])) {
-            Base::addMsg('Старый пароль не верен', 'error');
+            Base::addMsg(lang('old-password-err'), 'error');
             redirect('/u/' . $uid['login'] . '/setting/security');
         }
         
         $newpass = password_hash($password2, PASSWORD_BCRYPT);
         UserModel::editPassword($account['user_id'], $newpass);
 
-        Base::addMsg('Пароль успешно изменен', 'error');
+        Base::addMsg(lang('Password changed'), 'error');
         redirect('/u/' . $uid['login'] . '/setting');
     }
     
@@ -295,14 +294,13 @@ class UserController extends \MainController
                 $row['avatar']  = 'noavatar.png';
             } 
         
-            $row['post_date'] = (empty($row['post_date'])) ? $row['post_date'] : Base::ru_date($row['post_date']);
+            $row['post_date']       = (empty($row['post_date'])) ? $row['post_date'] : Base::ru_date($row['post_date']);
 
             $row['avatar']          = $row['avatar'];  
             $row['comment_content'] = $Parsedown->text($row['comment_content']);
             $row['date']            = $row['post_date'];
             $row['post']            = PostModel::getPostId($row['comment_post_id']);
             $result[$ind]           = $row;
-         
         }
         
         $data = [
@@ -358,7 +356,18 @@ class UserController extends \MainController
             hl_preliminary_exit();
         }
 
-        $result =  UserModel::InvitationResult($uid['id']);
+        $Invitation = UserModel::InvitationResult($uid['id']);
+        
+        $result = Array();
+        foreach($Invitation as $ind => $row){
+             
+            if(!$row['avatar'] ) {
+                $row['avatar']  = 'noavatar.png';
+            } 
+
+            $row['avatar']          = $row['avatar'];  
+            $result[$ind]           = $row;
+        }
 
         $data = [
           'h1'          => lang('Invites'),
@@ -378,7 +387,7 @@ class UserController extends \MainController
         $invitation_email = \Request::getPost('email');
         
         if (!$this->prEmail($invitation_email)) {
-           Base::addMsg('Недопустимый email', 'error');
+           Base::addMsg(lang('Invalid') . ' email', 'error');
            redirect('/u/' . $uid['login'] . '/invitation');
         }
         
@@ -386,7 +395,7 @@ class UserController extends \MainController
         if(!empty($uInfo['email'])) {
             
             if ($uInfo['email']) {
-                Base::addMsg('Пользователь уже есть на сайте', 'error');
+                Base::addMsg(lang('user-already'), 'error');
                 redirect('/u/' . $uid['login'] . '/invitation');
             }
         } 
@@ -394,7 +403,7 @@ class UserController extends \MainController
         $inv_user = UserModel::InvitationOne($uid['id']);
  
         if($inv_user['invitation_email'] == $invitation_email) {
-            Base::addMsg('Вы уже отсылали приглашение этому пользователю', 'error');
+            Base::addMsg(lang('invate-to-replay'), 'error');
             redirect('/u/' . $uid['login'] . '/invitation');
         }
         
@@ -406,7 +415,7 @@ class UserController extends \MainController
         
         UserModel::addInvitation($uid['id'], $invitation_code, $invitation_email, $add_time, $add_ip);
 
-        Base::addMsg('Инвайт создан', 'error');
+        Base::addMsg(lang('Invite created'), 'success');
         redirect('/u/' . $uid['login'] . '/invitation'); 
     }
     

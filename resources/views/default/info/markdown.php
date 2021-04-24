@@ -60,9 +60,12 @@
                             <div class="editor-preview"><div class="fmt" id="wmd-preview"></div></div>
                         </div>
                         <link rel="stylesheet" href="/assets/js/editor/editor.css"> 
-                        <script src="/assets/js/editor.js"></script>
+                         <script src="/assets/js/jquery.min.js"></script> 
                         <script src="/assets/js/editor/marked.js"></script>
                         <script src="/assets/js/editor/markdown.editor.js"></script>
+                        <?php if($uid['id'] == 0) { ?>
+                            <script src="/assets/js/editor.js"></script>
+                        <?php } ?>
                     </div>
                 </div>
             </div>   

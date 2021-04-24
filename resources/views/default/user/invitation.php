@@ -22,14 +22,31 @@
             <?php if (!empty($result)) { ?> 
  
                 <?php foreach ($result as $inv) { ?>
-                    <?php if($inv['active_status'] == 1) { ?><span class="right">зарегистрировался</span><?php } ?> 
-                    Для   (<?= $inv['invitation_email']; ?>) можно отправить эту ссылку: <br>
-                    <code> 
-                        <?=  $GLOBALS['conf']['url'] . '/register/invite/' . $inv['invitation_code']; ?> 
-                    </code> 
                     <?php if($inv['active_status'] == 1) { ?>
-                        <small>(ссылка не актуальна)</small>
-                    <?php } ?> 
+                        <div class="comm-header">
+                            <img class="ava" src="/uploads/avatar/small/<?= $inv['avatar']; ?>">
+                            <a href="<?= $inv['login']; ?>"><?= $inv['login']; ?></a>
+                            - зарегистрировался
+                        </div>
+                        
+                            <?php if($uid['trust_level'] == 5) { ?>
+                                Была использована ссылка для: <?= $inv['invitation_email']; ?> <br>
+                                <code> 
+                                    <?=  $GLOBALS['conf']['url'] . '/register/invite/' . $inv['invitation_code']; ?> 
+                                </code>
+                            <?php } ?>
+                            
+                        <small>Ссылка была использована</small>
+                    <?php } else { ?>
+                    
+                        Для   (<?= $inv['invitation_email']; ?>) можно отправить эту ссылку: <br>
+                    
+                        <code> 
+                            <?=  $GLOBALS['conf']['url'] . '/register/invite/' . $inv['invitation_code']; ?> 
+                        </code> 
+                    
+                    <?php } ?>
+
                     <br><br>
                 <?php } ?> 
                 

@@ -19,6 +19,8 @@ return [
     'ban-space'         => 'This space is blocked',
     'domain-desc'       => 'Grouping posts by domain',
     
+    'select-file-up'    => 'Select the file to upload',
+    
     /* Info */
     'init-setip-desc'   => 'This page describes the requirements and steps for setting up and installing the site. Frequently asked questions.',
     'markdown-desc'     => 'We use Markdown (markup) on the site. Let take a look at the markup.', 
@@ -30,6 +32,21 @@ return [
     'info-desc'         => 'Reference documentation. Sections: rules, configuration and installation, trust level, statistics.',
     
     'no-invate-txt'     => 'Not a user yet? Signup is by invitation only to combat spam and increase accountability. If you know a <a href="/users">current user</a> of the site, ask them for an invitation.',
+    
+    /* MSG */
+    'about-info-err'    => 'About me should be less characters long',    
+    'name-info-err'     => 'Name must be between 3 and ~ 10 characters long',
+    'pass-length-err'   => 'The password must be between 8 and 24 characters long',
+    'old-password-err'  => 'The old password is not correct',
+    'pass-match-err'    => 'Passwords don*t match',
+    'pass-gap-err'      => 'The password cannot contain spaces',
+    'user-already'      => 'The user is already on the site',
+    'invate-to-replay'  => 'You have already sent an invitation to this user',
+    'file-type-not-err' => 'File type not allowed',
+    
+    /* Meta - desc */
+    'desc-user-all'  => 'List of all participants sorted by date of registration on the site',
+    'desc-profile'  => 'Participant*s profile page (posts, comments)',
 ];
 
 

@@ -472,8 +472,13 @@ class UserModel extends \MainModel
 	} 
     
     // Все инвайты участинка
-    public static function InvitationResult($uid) {
-        return XD::select('*')->from(['invitation'])->where(['uid'], '=', $uid)->getSelect();
+    public static function InvitationResult($uid) 
+    {
+        $q      = XD::select('*')->from(['invitation']);
+        $query  = $q->leftJoin(['users'])->on(['id'], '=', ['active_uid'])
+                  ->where(['uid'], '=', $uid)->getSelect();
+                  
+        return $query;
     }
     
     // Проверим не активированный инвайт

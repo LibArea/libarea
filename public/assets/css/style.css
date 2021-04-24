@@ -475,15 +475,23 @@ input.form-about {width: 250px;}
   padding: 10px 15px 0 0;
   margin: 10px;
 }
-.msg {
-  background: #fcf8e4;
+
+.msg_error, .msg_success {
   padding: 0 8px;
   font-size: 14px;
-  color: green;
   margin-bottom: 12px;
   grid-area: header;
   margin: 50px 16px 5px 10px;
 } 
+.msg_error {
+  background: #f3f3f3;
+  color: #f56400;  
+}
+.msg_success {
+  background: #fcf8e4;
+  color: green;  
+}
+
 
 .notif-color-1 {
  background: #F89406;
