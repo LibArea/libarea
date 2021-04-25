@@ -203,9 +203,6 @@ CREATE TABLE `space_tags` (
   `st_description` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Индексы таблицы `cms_blog_cats`
---
 ALTER TABLE `space_tags`
   ADD PRIMARY KEY (`st_id`),
   ADD KEY `st_space_id` (`st_space_id`);

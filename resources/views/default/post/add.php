@@ -47,9 +47,11 @@
        
             <div class="boxline">
                 <label for="post_content">Пространствa</label>
-                <?php foreach ($space as $sp) { ?>
-                    <input type="radio" name="space_id" value="<?= $sp['space_id']; ?>"><?= $sp['space_name']; ?>
-                <?php } ?>
+                <select name="space_id">
+                    <?php foreach ($space as $sp) { ?>
+                        <option value="<?= $sp['space_id']; ?>"><?= $sp['space_name']; ?></option>
+                    <?php } ?>
+                </select>
             </div>
             <input type="submit" name="submit" value="Написать" />
         </form>

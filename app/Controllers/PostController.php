@@ -363,12 +363,12 @@ class PostController extends \MainController
 
         // Проверяем url для > TL1
         // Ввести проверку дублей и запрещенных, для img повторов
-        $post_url             = (empty($post_url)) ? '' : $post_url;
-        $post_url_domain      = (empty($post_url_domain)) ? '' : $post_url_domain;
-        $post_content_preview = (empty($post_content_preview)) ? '' : $post_content_preview;
-        $post_content_img     = (empty($post_content_img)) ? '' : $post_content_img;
-        $og_img               = (empty($og_img)) ? '' : $og_img;
-        $tag_id               = (empty($tag_id)) ? 0 : $tag_id;
+        $post_url             = empty($post_url) ? '' : $post_url;
+        $post_url_domain      = empty($post_url_domain) ? '' : $post_url_domain;
+        $post_content_preview = empty($post_content_preview) ? '' : $post_content_preview;
+        $post_content_img     = empty($post_content_img) ? '' : $post_content_img;
+        $og_img               = empty($og_img) ? '' : $og_img;
+        $tag_id               = empty($tag_id) ? 0 : $tag_id;
 
         // Ограничим частоту добавления
         // Добавить условие TL
@@ -562,10 +562,10 @@ class PostController extends \MainController
         // При изменение url считаем частоту смену url после добавления у конкретного пользователя
         // Если больше N оповещение персонала, если изменен на запрещенный, скрытие поста,
         // или более расширенное поведение, а пока просто проверим
-        $post_url             = (empty($post_url)) ? '' : $post_url;
-        $post_content_preview = (empty($post_content_preview)) ? '' : $post_content_preview;
-        $post_content_img     = (empty($post_content_img)) ? '' : $post_content_img;
-        $post_content_img     = (empty($post_tag_id)) ? '' : $post_tag_id;
+        $post_url               = empty($post_url) ? '' : $post_url;
+        $post_content_preview   = empty($post_content_preview) ? '' : $post_content_preview;
+        $post_content_img       = empty($post_content_img) ? '' : $post_content_img;
+        $post_tag_img           = empty($post_tag_id) ? '' : $post_tag_id;
         
         $data = [
             'post_id'               => $post_id,

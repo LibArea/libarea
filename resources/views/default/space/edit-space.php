@@ -1,6 +1,6 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<main class="w-100">
-    <span class="right"><a href="/s/<?= $space['space_slug']; ?>"><?= $space['space_name']; ?></a></span>
+<main class="w-100 max-width">
+ 
     <h1><?= $data['h1']; ?></h1>
     <div class="telo space">
         <div class="box create">
@@ -22,7 +22,7 @@
                     <input type="radio" name="permit" <?php if($space['space_permit_users'] == 2) { ?>checked<?php } ?> value="2" > Все
                 </div>                  
                 <div class="boxline">
-                    <label for="post_content">Meta- описание</label>
+                    <label for="post_content">Meta-</label>
                     <textarea class="add" name="space_description"><?= $space['space_description']; ?></textarea><br />
                 </div>
                 <div class="boxline">
@@ -47,4 +47,5 @@
         </div>
     </div> 
 </main>
+<?php include TEMPLATE_DIR . '/_block/space-menu.php'; ?>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

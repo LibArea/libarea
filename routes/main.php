@@ -78,6 +78,10 @@ Route::before('Authorization@noAuth')->getGroup();
     Route::get('/space/add')->controller('SpaceController@addSpacePage');
     Route::type('post')->protect()->get('/space/addspace')->controller('SpaceController@spaceAdd');
  
+    // Работа с метками (тегами)
+    Route::get('/s/{slug}/{tags?}/edit')->controller('SpaceController@editTagSpacePage')->where(['slug' => '[A-Za-z0-9]+',  'tags' => '[0-9]+']);
+    Route::type('post')->protect()->get('/space/tag/edit')->controller('SpaceController@editTagSpace');
+    
 	// Голосуем
 	Route::type('post')->get('/votes/comm')->controller('VotesCommController@votes');
     Route::type('post')->get('/votes/post')->controller('VotesPostController@votes');

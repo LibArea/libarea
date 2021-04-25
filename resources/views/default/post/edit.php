@@ -61,11 +61,12 @@
             <?php } ?>
             <div class="boxline">  
                 <label for="post_content">Пространство</label>
-                <?php foreach ($space as $sp) { ?>
-                    
-                    <input type="radio" name="space_id" value="<?= $sp['space_id']; ?>"<?php if($post['space_id'] == $sp['space_id']) { ?> checked<?php } ?>><?= $sp['space_name']; ?>
-                   
-                <?php } ?>
+                <select name="space_id">
+                    <?php foreach ($space as $sp) { ?>
+                        <option <?php if($post['space_id'] == $sp['space_id']) { ?> selected<?php } ?>   value="<?= $sp['space_id']; ?>"> <?= $sp['space_name']; ?>
+                        </option>
+                    <?php } ?>
+                </select>
                 <br> 
             </div>
             
@@ -73,9 +74,7 @@
                 <div class="boxline">  
                     <label for="post_content">Метки</label>
                     <?php foreach ($tags as $tag) { ?>
-                        
                         <input type="radio" name="tag_id" value="<?= $tag['st_id']; ?>"<?php if($post['post_tag_id'] == $tag['st_id']) { ?> checked<?php } ?>><?= $tag['st_title']; ?>
-                       
                     <?php } ?>
                     <br> 
                 </div>

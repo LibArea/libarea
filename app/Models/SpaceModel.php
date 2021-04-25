@@ -114,14 +114,27 @@ class SpaceModel extends \MainModel
     }
 
     // Возвращает теги пространства
-    public static  function getSpaceTags($space_id){
-
+    public static function getSpaceTags($space_id)
+    {
         $q = XD::select('*')->from(['space_tags']);
         $result = $q->leftJoin(['space'])->on(['space_id'], '=', ['st_space_id'])->where(['space_id'], '=', $space_id)->getSelect();
 
         return $result;
     } 
     
+    // Информация по тэгу
+    public static function getTagInfo($tag_id)
+    {
+        return XD::select('*')->from(['space_tags'])->where(['st_id'], '=', $tag_id)->getSelectOne();
+    } 
+    
+    // Изменить тэг
+    public static function tagEdit($tag_id, $st_title, $st_desc)
+    {
+        XD::update(['space_tags'])->set(['st_title'], '=', $st_title, ',', ['st_description'], '=', $st_desc)->where(['st_id'], '=', $tag_id)->run();
+        
+        return true;
+    } 
     
     // Удален пространств или нет
     public static function isTheSpaceDeleted($space_id) 

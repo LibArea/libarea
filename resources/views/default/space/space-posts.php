@@ -80,12 +80,8 @@
             
             <?php if($uid['trust_level'] == 5 || $space_info['space_user_id'] == $uid['id']) { ?>
                 <div class="edit-space">
-                    <a href="/space/<?= $space_info['space_slug']; ?>/edit">
+                    <a class="add-space" href="/space/<?= $space_info['space_slug']; ?>/edit">
                         <?= lang('Edit'); ?>
-                    </a>
-                     <span class="otst"> | </span>
-                    <a href="/space/<?= $space_info['space_slug']; ?>/edit">
-                        <?= lang('Метки'); ?>
                     </a>
                 </div> 
             <?php } ?>

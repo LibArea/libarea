@@ -30,8 +30,7 @@ class SpaceController extends \MainController
     // Посты по пространству
     public function SpacePosts()
     {
-        $account        = \Request::getSession('account');
-        $user_id        = $account ? $account['user_id'] : 0;
+        $uid            = Base::getUid();
         $slug           = \Request::get('slug');
         $space_tags_id  = \Request::get('tags');
         
@@ -43,7 +42,7 @@ class SpaceController extends \MainController
             hl_preliminary_exit();
         }
   
-        $posts = SpaceModel::getSpacePosts($space['space_id'], $user_id, $space_tags_id);
+        $posts = SpaceModel::getSpacePosts($space['space_id'], $uid['id'], $space_tags_id);
 
         if(!$space['space_img'] ) {
             $space['space_img'] = 'space_no.png';
@@ -67,9 +66,8 @@ class SpaceController extends \MainController
         $tags = SpaceModel::getSpaceTags($space['space_id']);
 
         // Отписан участник от пространства или нет
-        $space_hide = SpaceModel::getMySpaceHide($space['space_id'], $user_id);
- 
-        $uid  = Base::getUid();
+        $space_hide = SpaceModel::getMySpaceHide($space['space_id'], $uid['id']);
+
         $data = [
             'h1'         => $space['space_name'],
             'title'      => $space['space_name'] . ' - посты по пространству | ' . $GLOBALS['conf']['sitename'],
@@ -207,6 +205,65 @@ class SpaceController extends \MainController
         
         Base::addMsg('Изменение сохранено', 'error');
         redirect('/s/' . $data['space_slug']);
+    }
+    
+    // Страница изменение тега пространства
+    public function editTagSpacePage()
+    {
+        $uid            = Base::getUid();
+        $slug           = \Request::get('slug');
+        $space_tags_id  = \Request::get('tags');
+        
+        $space = SpaceModel::getSpaceInfo($slug);
+    
+        // Покажем 404
+        if(!$space) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
+        }
+
+        // Редактировать может только автор и админ
+        if ($space['space_user_id'] != $uid['id'] && $uid['trust_level'] != 5) {
+            redirect('/');
+        }
+
+        $tag = SpaceModel::getTagInfo($space_tags_id);
+        
+        // Покажем 404
+        if(!$tag) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
+        }
+
+        $data = [
+            'h1'         => 'Изменить тэг',
+            'title'      => 'Изменить тэг',
+            'description'=> 'Страница измненению тега пространства',
+        ];
+
+        return view(PR_VIEW_DIR . '/space/edit-tag', ['data' => $data, 'uid' => $uid, 'tag' => $tag]);
+    }
+    
+    // Изменяем тег пространства
+    public function editTagSpace()
+    {
+        $uid        = Base::getUid();
+        $space_id   = \Request::getPostInt('space_id');
+        $tag_id     = \Request::getPostInt('tag_id');
+        $st_desc    = \Request::getPost('st_desc');
+        $st_title   = \Request::getPost('st_title');
+        
+        $space = SpaceModel::getSpaceId($space_id);
+        
+        // Редактировать может только автор и админ
+        if ($space['space_user_id'] != $uid['id'] && $uid['trust_level'] != 5) {
+            redirect('/');
+        }
+
+        SpaceModel::tagEdit($tag_id, $st_title, $st_desc);
+
+        Base::addMsg('Тэг успешно изменен', 'error');
+        redirect('/s/' .$space['space_slug']);
     }
     
     // Отписка от пространств
