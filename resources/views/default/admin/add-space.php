@@ -27,9 +27,10 @@
                     <label for="post_content">Meta-</label>
                     <textarea class="add" name="space_description"></textarea><br />
                 </div>
+                <!-- Possible: https://developer.mozilla.org/ru/docs/Web/HTML/Applying_color -->
                 <div class="boxline">
                     <label for="post_content"><?= lang('Color'); ?></label>
-                    <?php include TEMPLATE_DIR . '/space/space-color-box.php'; ?>
+                    <?php include TEMPLATE_DIR . '/admin/space-color-box.php'; ?>
                 </div>
                 <div class="boxline">
                     <label for="post_content"><?= lang('Text'); ?></label>
