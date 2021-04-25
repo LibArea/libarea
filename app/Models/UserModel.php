@@ -55,11 +55,11 @@ class UserModel extends \MainModel
         if($count < 50 && $GLOBALS['conf']['bootstrap_mode'] == 1) {
             $trust_level = 1; // Режим "запуска сообщества"
         } else {
-            $trust_level = 0; // 0 min, 5 TL max (5 = персонал, админ)
+            $trust_level = 0; // 0 min, 5 TL max (5 = персонал)
         }
 
         $password    = password_hash($password, PASSWORD_BCRYPT);
-        $activated   = 1; // ввести почту и инвайт 
+        $activated   = 1; // установить на 0, если e-mail активация будет запущена
                 
         XD::insertInto(['users'], '(', ['login'], ',', ['email'], ',', ['password'], ',', ['activated'], ',', ['reg_ip'],',', ['trust_level'],',', ['invitation_id'],  ')')->values( '(', XD::setList([$login, $email, $password, $activated, $reg_ip, $trust_level, $invitation_id]), ')' )->run();
         
@@ -195,11 +195,19 @@ class UserModel extends \MainModel
                 ->where(['banlist_user_id'], '=', $uid)
                 ->and(['banlist_status'], '=', 1)->getSelectOne();
 
-        if(!$result) {
-            return false;    
-        }
+        return $result;   
+    }
+    
+    
+    // Активирован ли пользователь (e-mail)
+    public static function isActivated($uid)
+    {
+        
+        $result = XD::select('*')->from(['users'])
+                ->where(['id'], '=', $uid)
+                ->and(['activated'], '=', 1)->getSelectOne();
 
-        return true;   
+        return $result;   
     }
     
     ////// ЗАПОМНИТЬ МЕНЯ
@@ -443,8 +451,7 @@ class UserModel extends \MainModel
     {
         return XD::select('*')->from(['users_auth_tokens'])->where(['auth_selector'], '=', $selector)->getSelectOne();
     }
-    
-    
+
     // Проверяем код смены пароля (использовали его или нет)
     public static function getPasswordActivate($code)
     {
@@ -452,7 +459,7 @@ class UserModel extends \MainModel
                 ->where(['activate_code'], '=', $code)
                 ->and(['activate_flag'], '!=', 1)->getSelectOne();
     }
-    
+ 
     // Создадим инвайт для участника
 	public static function addInvitation($uid, $invitation_code, $invitation_email, $add_time, $add_ip)
 	{
@@ -502,6 +509,36 @@ class UserModel extends \MainModel
 		
 		return true;
 	}
+    
+    // Делаем запись в таблицу активации e-mail
+    public static function sendActivateEmail($user_id, $email_code)
+	{
+        $pubdate    = date("Y-m-d H:i:s");
+  
+		XD::insertInto(['users_email_activate'], '(', ['pubdate'], ',', ['user_id'], ',', ['email_code'], ')')->values( '(', XD::setList([$pubdate, $user_id, $email_code]), ')' )->run();
+        
+		return true;
+	} 
+    
+    // Проверяем код активации e-mail
+    public static function getEmailActivate($code)
+    {
+        return XD::select('*')->from(['users_email_activate'])
+                ->where(['email_code'], '=', $code)
+                ->and(['email_activate_flag'], '!=', 1)->getSelectOne();
+    }
+    
+    // Активируем e-mail
+    public static function EmailActivate($user_id){
+       
+        XD::update(['users_email_activate'])->set(['email_activate_flag'], '=', 1)
+                ->where(['user_id'], '=', $user_id)->run();
+        
+        XD::update(['users'])->set(['activated'], '=', 1)
+                ->where(['id'], '=', $user_id)->run();        
+       
+        return true;
+    }
     
     // Настройка оповещений
     public static function getNotificationSettingByUid($uid)

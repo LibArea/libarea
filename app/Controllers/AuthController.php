@@ -174,11 +174,25 @@ class AuthController extends \MainController
             $invitation_id = $inv_uid;
         }
 
+        // id удастника
         $active_uid = UserModel::createUser($login, $email, $password, $reg_ip, $invitation_id);
 
         if($inv_code) {
             // Если регистрация по инвайту, то записываем данные
             UserModel::sendInvitationEmail($inv_code, $inv_uid, $reg_ip, $active_uid);
+        } else {
+        
+            // Активация e-mail
+            // Если будет раскомм. то в методе createUser изм. $activated   = 1 на 0
+            // $active_uid - id участника
+           /* $email_code = Base::randomString('crypto', 20);
+            UserModel::sendActivateEmail($active_uid, $email_code);
+            
+            // Добавим текс письма тут
+            $newpass_link = $GLOBALS['conf']['url'] . '/email/avtivate/' . $code;
+            $mail_message = "Activate E-mail: \n" .$newpass_link . "\n\n";
+            Base::mailText($email, $GLOBALS['conf']['sitename'].' - email', $mail_message); */
+        
         }
         
         Base::addMsg('Регистрация прошла успешно. Введите e-mail и пароль.', 'success');
@@ -221,6 +235,12 @@ class AuthController extends \MainController
         if (UserModel::isBan($uInfo['id'])) {
             Base::addMsg('Ваш аккаунт находится на рассмотрении', 'error');
             redirect('/login');
+        }  
+        
+        // Активирован ли E-mail
+        if (!UserModel::isActivated($uInfo['id'])) {
+            Base::addMsg('Ваш аккаунт не активирован', 'error');
+            redirect('/login');
         }
         
         if (!password_verify($password, $uInfo['password'])) {
@@ -261,7 +281,7 @@ class AuthController extends \MainController
        redirect('/');
     }
 
-    public function recoverPage () 
+    public function recoverPage() 
     {
         $uid  = Base::getUid();
         $data = [
@@ -345,6 +365,27 @@ class AuthController extends \MainController
         
         return view(PR_VIEW_DIR . '/auth/newrecover', ['data' => $data, 'uid' => $uid]);
     }
+    
+    // Проверка корректности E-mail
+    public function AvtivateEmailPage()
+    {
+        // Код активации
+        $code = \Request::get('code');
+ 
+        // Проверяем код
+        $avtivate_email = UserModel::getEmailActivate($code);
+        if(!$avtivate_email) 
+        {
+            Base::addMsg('Код неверен, или он уже использовался.', 'error');
+            redirect('/');   
+        }
+        
+        UserModel::EmailActivate($avtivate_email['user_id']);
+        
+        Base::addMsg('Теперь вы можете использовать свой e-mail и пароль.', 'error');
+        redirect('/login'); 
+    }
+    
     
     public function RemindPageNew()
     {

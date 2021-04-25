@@ -1,4 +1,4 @@
-$(function() {
+document.addEventListener('DOMContentLoaded', function() {
     let resizeReset = function() {
         w = canvasBody.width = 650; //window.innerWidth
         h = canvasBody.height = 120;

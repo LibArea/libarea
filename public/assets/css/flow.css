@@ -58,12 +58,10 @@ aside#sidebar {
 #content::-webkit-scrollbar {
   width: 10px;
 }
-
 #content::-webkit-scrollbar-track {
   -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
   background-color: #f9f9fd;
 }
-
 #content::-webkit-scrollbar-thumb {
   background-color: #f2bf93;
   background-image: -webkit-linear-gradient(45deg,rgba(255, 255, 255, .25) 25%,
@@ -74,7 +72,11 @@ aside#sidebar {
                     transparent 75%,
                     transparent);
 }
-
+.flow-info {
+  padding: 15px 20px 15px;
+  margin-left: 20px;
+  float: right;  
+}
 
 @media (max-width: 720px){
  

@@ -455,6 +455,23 @@ ALTER TABLE `flow_log`
   MODIFY `flow_id` int(11) NOT NULL AUTO_INCREMENT;
 
 
+--
+-- Структура, дамп и индексы таблицы `users_email_activate`
+--
+
+CREATE TABLE `users_email_activate` (
+  `id` int(11) NOT NULL,
+  `pubdate` datetime NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `email_code` varchar(50) NOT NULL,
+  `email_activate_flag` tinyint(1) DEFAULT '0'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE `users_email_activate`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `users_email_activate`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Индексы сохранённых таблиц

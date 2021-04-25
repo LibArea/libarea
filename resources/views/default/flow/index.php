@@ -9,7 +9,7 @@
     </div>
 </main>
 <aside id="sidebar"> 
-    <div class="menu-info">
+    <div class="flow-info">
        <small>Чат и лента активности находится в стадии разработки.</small>
     </div>
 </aside> 

@@ -609,6 +609,9 @@ h1.space a {
 .space-tags {
   margin-left: 24px;
 }
+.space-tags a.avtive {
+  color: #333;
+}
 .space-tags .menu-m {
   margin: 0 0 10px 1px;
 }

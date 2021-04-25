@@ -8,6 +8,7 @@ use App\Models\SpaceModel;
 use ImageUpload;
 use Parsedown;
 use Base;
+use Bayfront\Validator\Validate;
 
 class UserController extends \MainController
 {
@@ -101,15 +102,12 @@ class UserController extends \MainController
     {
         $uid  = Base::getUid();
 
-        $name    = \Request::getPost('name');
-        $about   = \Request::getPost('about');
-        
         if (Base::getStrlen($name) < 4 || Base::getStrlen($name) > 20)
         {
           Base::addMsg(lang('name-info-err'), 'error');
           redirect('/u/' . $uid['login'] . '/setting');
         }
-        
+
         if (Base::getStrlen($about) > 350)
         {
           Base::addMsg(lang('about-info-err'), 'error');

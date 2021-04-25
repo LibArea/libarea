@@ -90,12 +90,14 @@
                 </div> 
             <?php } ?>
         </div>
-        
+      
         <?php if (!empty($tags)) { ?>
             <div class="space-tags">
                 <div class="menu-m">Метки</div>
-                <?php foreach ($tags as  $tag) { ?> 
-                    <a href="/s/<?= $space_info['space_slug']; ?>/<?= $tag['st_id']; ?>"><?= $tag['st_title']; ?><a>
+                <?php foreach ($tags as  $tag) { ?>  
+                    <a <?php if ($uid['uri'] == '/s/'.$tag['space_slug'] .'/'.$tag['st_id']) { ?> class="avtive" <?php } ?> href="/s/<?= $space_info['space_slug']; ?>/<?= $tag['st_id']; ?>">
+                        <?= $tag['st_title']; ?>
+                    <a>
                 <?php } ?>
             </div>
         <?php } ?> 
