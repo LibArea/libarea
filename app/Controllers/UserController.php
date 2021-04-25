@@ -77,7 +77,7 @@ class UserController extends \MainController
         $login  = \Request::get('login');
         $uid    = Base::getUid();
         $user   = UserModel::getUserLogin($uid['login']);
-        
+   
         // Ошибочный Slug в Url
         if($login != $user['login']) {
             redirect('/u/' . $user['login'] . '/setting');

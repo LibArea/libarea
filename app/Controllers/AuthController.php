@@ -63,7 +63,7 @@ class AuthController extends \MainController
         
         $password = \Request::getPost('password');
 
-        if(!filter_var($invitation_email, FILTER_VALIDATE_EMAIL))
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL))
         {
             Base::addMsg(lang('Invalid') . ' email', 'error');
             $url = ($inv_code) ? '/register/invite/'.$inv_code : '/register';
@@ -197,7 +197,7 @@ class AuthController extends \MainController
         $password   = \Request::getPost('password');
         $rememberMe = \Request::getPost('rememberme');
 
-        if (!$this->checkEmail($email)) {
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             Base::addMsg('Недопустимый email', 'error');
             redirect('/login');
         }
@@ -282,7 +282,7 @@ class AuthController extends \MainController
             }
         }
         
-        if (!$this->checkEmail($email)) {
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
            Base::addMsg('Недопустимый email', 'error');
            redirect('/recover');
         }
