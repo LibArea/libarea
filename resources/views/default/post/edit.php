@@ -81,7 +81,7 @@
             <?php } ?>
             
             <input type="hidden" name="post_id" id="post_id" value="<?= $post['post_id']; ?>">
-            <input type="submit" name="submit" value="Изменить" />
+            <input type="submit" name="submit" value="<?= lang('Edit'); ?>" />
         </form>
         <br>
         <details>

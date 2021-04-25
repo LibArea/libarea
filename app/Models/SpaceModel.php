@@ -7,7 +7,6 @@ use PDO;
 
 class SpaceModel extends \MainModel
 {
-    
     // Все пространства сайта
     public static function getSpaceAll($user_id)
     {
@@ -136,7 +135,23 @@ class SpaceModel extends \MainModel
         return true;
     } 
     
-    // Удален пространств или нет
+    // Добавляем тэг
+    public static function tagAdd($space_id, $st_title, $st_desc)
+    {
+        XD::insertInto(['space_tags'], '(', 
+            ['st_space_id'], ',',
+            ['st_title'], ',', 
+            ['st_description'], ')')->values( '(', 
+        
+        XD::setList([
+            $space_id,
+            $st_title, 
+            $st_desc]), ')' )->run();
+
+        return true;
+    } 
+    
+    // Удалено пространство или нет
     public static function isTheSpaceDeleted($space_id) 
     {
         $result = XD::select('*')->from(['space'])->where(['space_id'], '=', $space_id)->getSelectOne();

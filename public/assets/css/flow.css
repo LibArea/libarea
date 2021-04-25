@@ -79,5 +79,5 @@ aside#sidebar {
 }
 
 @media (max-width: 720px){
- 
+  .add-flow {width: 90%;}
 }

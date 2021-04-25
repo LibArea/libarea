@@ -3,21 +3,20 @@
     <h1><?= $data['h1']; ?></h1>
     <div class="telo space">
         <div class="box create">
-            <form action="/space/tag/edit" method="post">
+            <form action="/space/tag/add" method="post">
                 <?= csrf_field() ?>
                 <div class="boxline">
                     <label for="post_title"><?= lang('Title'); ?></label>
-                    <input class="add" type="text" value="<?= $tag['st_title']; ?>" name="st_title" />
+                    <input class="add" type="text" value="" name="st_title" />
                     <div class="box_h">От 4 до 20 знаков</div>
                 </div>
                     <div class="boxline">
                     <label for="post_content"><?= lang('Description'); ?></label>
-                     <input class="add" type="text" value="<?= $tag['st_description']; ?>" name="st_desc" />
+                    <input class="add" type="text" value="" name="st_desc" />
                     <div class="box_h">От 20 до 180 знаков</div>
                 </div>
-                <input type="hidden" name="space_id" id="space_id" value="<?= $tag['st_space_id']; ?>">
-                <input type="hidden" name="tag_id" id="tag_id" value="<?= $tag['st_id']; ?>">
-                <input type="submit" name="submit" value="<?= lang('Edit'); ?>" />
+                <input type="hidden" name="space_id" id="space_id" value="<?= $space['space_id']; ?>">
+                <input type="submit" name="submit" value="<?= lang('Add'); ?>" />
             </form>
         </div>
     </div> 

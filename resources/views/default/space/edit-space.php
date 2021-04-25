@@ -42,7 +42,7 @@
                     <p>Выберите файл для загрузки 120x120px (jpg, jpeg, png)</p>
                 </div>
                     <input type="hidden" name="space_id" id="space_id" value="<?= $space['space_id']; ?>">
-                    <input type="submit" name="submit" value="Изменить" />
+                    <input type="submit" name="submit" value="<?= lang('Edit'); ?>" />
             </form>
         </div>
     </div> 

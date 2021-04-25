@@ -8,7 +8,6 @@ use Base;
 
 class SpaceController extends \MainController
 {
-
     // Все пространства сайта
     public function index()
     {
@@ -101,6 +100,29 @@ class SpaceController extends \MainController
         ]; 
 
         return view(PR_VIEW_DIR . '/space/edit-space', ['data' => $data, 'uid' => $uid, 'space' => $space]);
+    }
+    
+    // Страница с информацией по тегам
+    public function spaceTagsInfo() 
+    {
+        $uid    = Base::getUid();
+        $slug   = \Request::get('slug');
+        $space  = SpaceModel::getSpaceInfo($slug);
+
+        // Или персонал или автор
+        if ($uid['trust_level'] != 5 && $space['space_user_id'] != $uid['id']) {
+            redirect('/');
+        }
+        
+        $tags = SpaceModel::getSpaceTags($space['space_id']);
+        
+        $data = [
+            'h1'            => 'Информация - ' . $slug,
+            'title'         => 'Информация | ' . $GLOBALS['conf']['sitename'],
+            'description'   => 'Информация пространства на' . $GLOBALS['conf']['sitename'],
+        ]; 
+ 
+        return view(PR_VIEW_DIR . '/space/info-space', ['data' => $data, 'uid' => $uid, 'space' => $space, 'tags' => $tags]);
     }
     
     // Изменение пространства
@@ -260,9 +282,25 @@ class SpaceController extends \MainController
             redirect('/');
         }
 
+        // Проверяем длину title
+        if (Base::getStrlen($st_title) < 4 || Base::getStrlen($st_title) > 20)
+        {
+            Base::addMsg('Длина метки должна быть от 4 до 20 знаков', 'error');
+            redirect('/s/' . $space['space_slug'] . '/' . $tag_id . '/edit');
+            return true;
+        }
+        
+        // Проверяем длину описания
+        if (Base::getStrlen($st_desc) < 30 || Base::getStrlen($st_desc) > 180)
+        {
+            Base::addMsg('Длина поста должна быть от 30 до 180 знаков', 'error');
+            redirect('/s/' . $space['space_slug'] . '/' . $tag_id . '/edit');
+            return true;
+        }
+
         SpaceModel::tagEdit($tag_id, $st_title, $st_desc);
 
-        Base::addMsg('Тэг успешно изменен', 'error');
+        Base::addMsg('Тэг успешно изменен', 'success');
         redirect('/s/' .$space['space_slug']);
     }
     
@@ -300,7 +338,73 @@ class SpaceController extends \MainController
         
         return view(PR_VIEW_DIR . '/space/add-space', ['data' => $data, 'uid' => $uid]);
     }
+    
+    // Страница добавления тега
+    public function spaceTagsAddPage()
+    {
+        $uid    = Base::getUid();
+        $slug   = \Request::get('slug');
+        $space  = SpaceModel::getSpaceInfo($slug);
+        
+        // Покажем 404
+        if(!$space) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
+        }
 
+        // Добавлять может только автор и админ
+        if ($space['space_user_id'] != $uid['id'] && $uid['trust_level'] != 5) {
+            redirect('/');
+        }
+      
+        $data = [
+            'h1'          => 'Добавить метку',
+            'title'       => 'Добавить метку' . ' | ' . $GLOBALS['conf']['sitename'],
+            'description' => 'Добавить метку в пространство на ' . $GLOBALS['conf']['sitename'],
+        ]; 
+        
+        return view(PR_VIEW_DIR . '/space/add-tag', ['data' => $data, 'uid' => $uid, 'space' => $space]);
+    }
+    
+    // Добавления тега
+    public function addTagSpace() 
+    {
+        
+        $uid        = Base::getUid();
+        $space_id   = \Request::getPostInt('space_id');
+        $st_desc    = \Request::getPost('st_desc');
+        $st_title   = \Request::getPost('st_title');
+        
+        $space = SpaceModel::getSpaceId($space_id);
+        
+        // Редактировать может только автор и админ
+        if ($space['space_user_id'] != $uid['id'] && $uid['trust_level'] != 5) {
+            redirect('/');
+        }
+
+        // Проверяем длину title
+        if (Base::getStrlen($st_title) < 4 || Base::getStrlen($st_title) > 20)
+        {
+            Base::addMsg('Длина метки должна быть от 4 до 20 знаков', 'error');
+            redirect('/space/' . $space['space_slug'] . '/tags/add');
+            return true;
+        }
+  
+        // Проверяем длину описания
+        if (Base::getStrlen($st_desc) < 20 || Base::getStrlen($st_desc) > 180)
+        {
+            Base::addMsg('Длина поста должна быть от 20 до 180 знаков', 'error');
+            redirect('/space/' . $space['space_slug'] . '/tags/add');
+            return true;
+        }
+        
+        // Добавим
+        SpaceModel::tagAdd($space['space_id'], $st_title, $st_desc);
+        
+        Base::addMsg('Метка успешно добавлена', 'success');
+        redirect('/s/' . $space['space_slug']);
+    }
+    
     // Добавления пространства
     public function spaceAdd() 
     {
@@ -348,7 +452,6 @@ class SpaceController extends \MainController
             redirect('/space/add');   
         }
         
-        
         $data = [
             'space_name'         => $space_name,
             'space_slug'         => $space_slug,
@@ -366,7 +469,6 @@ class SpaceController extends \MainController
         SpaceModel::AddSpace($data);
 
         redirect('/space'); 
-        
     }
 
 }

@@ -407,6 +407,8 @@ textarea:disabled {
 select {
   margin-top: 3px;
   min-width: 100px;
+  padding: 2px 5px 2px 5px;
+  border: 1px solid #ccc;
 }
 select:focus {
   border-color: rgba(160,160,160,.8);
