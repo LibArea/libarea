@@ -63,31 +63,9 @@ class AuthController extends \MainController
         
         $password = \Request::getPost('password');
 
-        if ($email == '' || $login == '' || $password == '')
+        if(!filter_var($invitation_email, FILTER_VALIDATE_EMAIL))
         {
-            if ($email == '')
-            {
-                Base::addMsg('Поле «Email» не может быть пустым', 'error');
-                $url = ($inv_code) ? '/register/invite/'.$inv_code : '/register';
-                redirect($url);
-            }
-            if ($login == '')
-            {
-                Base::addMsg('Поле «Логин» не может быть пустым', 'error');
-                $url = ($inv_code) ? '/register/invite/'.$inv_code : '/register';
-                redirect($url);
-            }
-            if ($password == '')
-            {
-                Base::addMsg('Поле «Пароль» не может быть пустым', 'error');
-                $url = ($inv_code) ? '/register/invite/'.$inv_code : '/register';
-                redirect($url);
-            }
-        }
-
-        if (!$this->checkEmail($email))
-        {
-            Base::addMsg('Недопустимый email', 'error');
+            Base::addMsg(lang('Invalid') . ' email', 'error');
             $url = ($inv_code) ? '/register/invite/'.$inv_code : '/register';
             redirect($url);
         }
@@ -107,7 +85,7 @@ class AuthController extends \MainController
             redirect($url);
         }
         
-        if (strlen($login) < 3 || strlen($login) > 10)
+        if (strlen($login) < 4 || strlen($login) > 10)
         {
             Base::addMsg('Логин слишком длинный или короткий', 'error');
             $url = ($inv_code) ? '/register/invite/'.$inv_code : '/register';
@@ -128,9 +106,9 @@ class AuthController extends \MainController
             redirect($url);
         }
         
-        for ($i = 0, $l = self::getStrlen($login); $i < $l; $i++)
+        for ($i = 0, $l = Base::getStrlen($login); $i < $l; $i++)
         {
-            if (self::textCount($login, self::getSubstr($login, $i, 1)) > 4)
+            if (self::textCount($login, Base::getSubstr($login, $i, 1)) > 4)
             {
                 Base::addMsg('В логине слишком много повторяющихся символов', 'error');
                 $url = ($inv_code) ? '/register/invite/'.$inv_code : '/register';
@@ -416,12 +394,6 @@ class AuthController extends \MainController
         redirect('/login');
     }
 
-    // Длина строки
-    private function getStrlen($str)
-    {
-        return mb_strlen($str, "utf-8");
-    }
-
     // Вхождение подстроки
     private function textCount($str, $needle)
     {
@@ -434,10 +406,4 @@ class AuthController extends \MainController
         return mb_substr($str, $start, $len, 'utf-8');
     }
 
-    // Проверка e-mail
-    private function checkEmail($email)
-    {
-        $pattern = "/([a-z0-9]*[-_.]?[a-z0-9]+)*@([a-z0-9]*[-_]?[a-z0-9]+)+[.][a-z]{2,3}([.][a-z]{2})?/i";
-        return preg_match($pattern, $email);
-    }
 }

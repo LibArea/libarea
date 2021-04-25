@@ -8,7 +8,6 @@ use App\Models\SpaceModel;
 use ImageUpload;
 use Parsedown;
 use Base;
-use Bayfront\Validator\Validate;
 
 class UserController extends \MainController
 {
@@ -100,19 +99,19 @@ class UserController extends \MainController
     // Изменение профиля
     function settingEdit ()
     {
-        $uid  = Base::getUid();
-
-        if (Base::getStrlen($name) < 4 || Base::getStrlen($name) > 20)
-        {
+        $uid    = Base::getUid();
+        $name   = \Request::getPost('name');
+        $about  = \Request::getPost('about');
+        
+        if (Base::getStrlen($name) < 4 || Base::getStrlen($name) > 11) {
           Base::addMsg(lang('name-info-err'), 'error');
           redirect('/u/' . $uid['login'] . '/setting');
         }
-
-        if (Base::getStrlen($about) > 350)
-        {
+   
+        if (Base::getStrlen($about) < 4 || Base::getStrlen($about) > 320) {
           Base::addMsg(lang('about-info-err'), 'error');
           redirect('/u/' . $uid['login'] . '/setting');
-        }
+        }  
 
         UserModel::editProfile($uid['login'], $name, $about);
         
@@ -384,7 +383,7 @@ class UserController extends \MainController
         
         $invitation_email = \Request::getPost('email');
         
-        if (!$this->prEmail($invitation_email)) {
+        if(!filter_var($invitation_email, FILTER_VALIDATE_EMAIL)) {
            Base::addMsg(lang('Invalid') . ' email', 'error');
            redirect('/u/' . $uid['login'] . '/invitation');
         }
@@ -417,11 +416,4 @@ class UserController extends \MainController
         redirect('/u/' . $uid['login'] . '/invitation'); 
     }
     
-    // Проверка e-mail
-    // Перенести в Base
-    private function prEmail($email)
-    {
-        $pattern = "/([a-z0-9]*[-_.]?[a-z0-9]+)*@([a-z0-9]*[-_]?[a-z0-9]+)+[.][a-z]{2,3}([.][a-z]{2})?/i";
-        return preg_match($pattern, $email);
-    } 
 }
