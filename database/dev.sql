@@ -146,6 +146,7 @@ CREATE TABLE `posts` (
   `post_content_img` varchar(250) DEFAULT NULL,
   `post_thumb_img` varchar(250) DEFAULT NULL,
   `post_closed` tinyint(1) NOT NULL DEFAULT 0,
+  `post_lo` tinyint(1) NOT NULL DEFAULT 0,
   `post_top` tinyint(1) NOT NULL DEFAULT 0,
   `post_url` varchar(250) DEFAULT NULL,
   `post_url_domain` varchar(250) DEFAULT NULL,

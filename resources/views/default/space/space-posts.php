@@ -36,10 +36,11 @@
                     <?php if ($post['post_content_preview']) { ?>
                         <div class="show">
                             <span class="show_add_<?= $post['post_id']; ?>">
-                                <a data-post_id="<?= $post['post_id']; ?>" class="showpost">
+                                <div data-post_id="<?= $post['post_id']; ?>" class="showpost">
                                     <span>&#9658;</span> 
-                                    <?= $post['post_content_preview']; ?>... 
-                                </a>
+                                    <?= $post['post_content_preview']; ?>
+                                    <span class="s_<?= $post['post_id']; ?> show_detail">... </span>
+                                </div>
                             </span>
                         </div>
                     <?php } ?>

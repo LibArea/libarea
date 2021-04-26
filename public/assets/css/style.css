@@ -510,6 +510,9 @@ input.form-about {width: 250px;}
   margin: 0 0 5px 0;
   display: block;
 }
+.showpost span {
+  color: #999;
+}
 .show_detail.hide {
   display: none;
 }
@@ -1105,7 +1108,6 @@ body.menuno .menu  {
   font-style: normal;
   font-display: swap;
 }
-
 icon {
   font-family: 'icons';
   speak: none;
@@ -1148,3 +1150,4 @@ icon[name=trash]:before { content: "\e054"; }
 icon[name=github]:before { content: "\e60c"; }
 icon[name=action-undo]:before { content: "\e050"; }
 icon[name=energy]:before { content: "\e020"; }
+icon[name=trophy]:before { content: "\e006"; }

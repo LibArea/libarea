@@ -154,10 +154,10 @@ class CommentController extends \MainController
         CommentModel::CommentEdit($comm_id, $comment);
         
         redirect('/' . $return_url . '#comm_' . $comm_id); 
-    }
+	}
 
-    // Покажем форму редактирования
-    public function editform()
+   // Покажем форму редактирования
+	public function editform()
 	{
         $comm_id    = \Request::getPostInt('comm_id');
         $post_id    = \Request::getPostInt('post_id');
@@ -183,8 +183,8 @@ class CommentController extends \MainController
         return view(PR_VIEW_DIR . '/comment/edit-form', ['data' => $data]);
     }
 
-    // Покажем форму ответа
-    public function addform()
+	// Покажем форму ответа
+	public function addform()
 	{
         $comm_id    = \Request::getPostInt('comm_id');
         $post_id    = \Request::getPostInt('post_id');
@@ -261,7 +261,7 @@ class CommentController extends \MainController
         $comm_id = \Request::getPostInt('comm_id');
         $comm    = CommentModel::getCommentsOne($comm_id); 
         
-        if(!$comm){
+        if(!$comm) {
             redirect('/');
         }
         

@@ -143,12 +143,14 @@
                 
                 <?php foreach ($comms as  $comm) { ?>
                 <div class="block-comments<?php if ($comm['level'] == 0) { ?> line<?php } ?>">
-                
                     <?php if($comm['comment_del'] == 0) { ?>
-                    
                         <ol class="comment-telo<?php if ($comm['level'] == 0) { ?> one<?php } ?><?php if ($comm['level'] == 2) { ?> two<?php } ?><?php if ($comm['level'] > 2) { ?> three<?php } ?>"> 
                             <li class="comments_subtree" id="comm_<?= $comm['comment_id']; ?>">
-                            
+                            <?php if($comm['comment_lo'] == 1) { ?> 
+                                <span class="red right">
+                                    <icon name="trophy"></icon>
+                                </span>
+                            <?php } ?>
                             <?php if (!$uid['id']) { ?> 
                                 <div class="voters">
                                     <a rel="nofollow" href="/login"><div class="comm-up-id"></div></a>

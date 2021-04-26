@@ -7,7 +7,12 @@
         <?php foreach ($list as  $notif) { ?>
             <div class="fl<?php if($notif['read_flag'] == 0) { ?> active<?php } ?>">
             <?php if($notif['action_type'] == 1) { ?>
-                <icon name="action-undo"></icon>
+            
+                <?php if($notif['read_flag'] == 0) { ?>
+                    <span class="red"><icon name="action-undo"></icon></span>
+                <?php } else { ?>
+                    <icon name="action-undo"></icon>
+                <?php } ?>
                
                 <a href="/u/<?= $notif['login'] ?>"><?= $notif['login'] ?></a> 
                 написал вам 
@@ -20,7 +25,14 @@
             <?php } ?>
             
              <?php if($notif['action_type'] == 2) { ?>
-                <icon name="envelope"></icon>
+                
+                
+                <?php if($notif['read_flag'] == 0) { ?>
+                    <span class="red"><icon name="envelope"></icon></span>
+                <?php } else { ?>
+                    <icon name="envelope"></icon>
+                <?php } ?>
+                
                 <a href="/u/<?= $notif['login'] ?>"><?= $notif['login'] ?></a> 
                 
                     ответил вам в  

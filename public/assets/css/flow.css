@@ -34,14 +34,11 @@ aside#sidebar {
 }
 .flow-comment .box {
   margin: 6px 0 10px 0; 
-  background-color: #e1ecf4;
+  background-color: lightyellow;
   padding: 3px 10px 3px 10px;
   color: #39739d;
-  font-size: 14px;
+  font-size: 13px;
   display: inline-block;
-}
-.flow-comment a {
-  color: #39739d;
 }
 .flow-telo.dell{
  display: none;

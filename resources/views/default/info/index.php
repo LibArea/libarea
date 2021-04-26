@@ -15,7 +15,7 @@
         <br><br>
         <a href="/info/initial-setup">Начальная настройка</a> —  по установке локально и часто задаваемые вопросы.
         <br><br>
-        Скачайте архив <i>AreaDev с GitHub:</i> <a rel="nofollow noreferrer" target="_blank" href="https://github.com/Toxu-ru/AreaDev">github.com/Toxu-ru/AreaDev</a><br>
+        Скачайте архив <i>AreaDev с GitHub:</i> <icon name="github"></icon> <a rel="nofollow noreferrer" target="_blank" href="https://github.com/Toxu-ru/AreaDev">github.com/Toxu-ru/AreaDev</a><br>
       
         Код сайта имеет лицензию <a rel="nofollow noreferrer" target="_blank" href="https://ru.wikipedia.org/wiki/%D0%9B%D0%B8%D1%86%D0%B5%D0%BD%D0%B7%D0%B8%D1%8F_MIT">MIT</a>.  
         <br><br>
