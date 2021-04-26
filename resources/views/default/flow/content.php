@@ -35,9 +35,7 @@
                 </div>  
             <?php } elseif ($flow['flow_action_id'] == 2) { ?>
                 <div class="flow-comment">
-                    <svg class="md-icon comment">
-                        <use xlink:href="/assets/svg/icons.svg#message"></use>
-                    </svg>
+                    <icon name="action-undo"></icon>
                     <div class="box">
                     <img class="avatar" src="/uploads/avatar/small/<?= $flow['avatar']; ?>">
                     <span class="user"> 

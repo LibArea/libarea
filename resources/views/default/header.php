@@ -35,9 +35,7 @@
                 </li>
                 <li class="nav no-mob closed-on">        
                     <div class="togglemenu">
-                        <svg class="md-icon moon">
-                            <use xlink:href="/assets/svg/icons.svg#arrow-bar-to-left"></use>
-                        </svg>
+                        <icon name="options-vertical"></icon> 
                     </div>
                 </li>
                 <?php if(!empty($space_info)) { ?>
@@ -68,9 +66,7 @@
         <ul>
             <li class="nav">
                 <span id="toggledark" class="my-color-m">
-                    <svg class="md-icon moon">
-                        <use xlink:href="/assets/svg/icons.svg#moon"></use>
-                    </svg>
+                    <icon name="frame"></icon> 
                 </span>
             </li>
             <?php if(!$uid['id']) { ?>  
@@ -79,96 +75,75 @@
                 </li>
                 <?php if($GLOBALS['conf']['invite'] != 1) { ?>
                     <li class="nav">
-                        <a class="register" title="<?= lang('Sign up'); ?>" href="/register"><?= lang('Sign up'); ?></a>
+                        <a class="register" title="<?= lang('Sign up'); ?>" href="/register">
+                            <?= lang('Sign up'); ?>
+                        </a>
                     </li>
                 <?php } ?>    
             <?php } else { ?> 
                 <li class="nav create">  
-                    <a class="nav" href="/post/add">  
-                        <svg class="md-icon">
-                            <use xlink:href="/assets/svg/icons.svg#plus"></use>
-                        </svg> 
+                    <a class="nav" href="/post/add"> 
+                        <icon name="pencil"></icon>                    
                     </a>
                 </li>   
                 <?php if($uid['notif']) { ?> 
                     <li class="nav notif">  
                         <a class="nav" href="/u/<?= $uid['login']; ?>/notifications"> 
-                            <svg class="md-icon">
-                                <?php if($uid['notif']['action_type'] == 1) { ?>
-                                    <use xlink:href="/assets/svg/icons.svg#mail"></use>
-                                <?php } else { ?>    
-                                    <use xlink:href="/assets/svg/icons.svg#message"></use>
-                                <?php } ?>
-                            </svg>
+                            <?php if($uid['notif']['action_type'] == 1) { ?>
+                                <icon name="envelope"></icon>
+                            <?php } else { ?>    
+                                <icon name="bell"></icon>
+                            <?php } ?>
+                           
                         </a>
                     </li>  
                 <?php } ?>    
                 <li class="dropbtn nav">
                     <div class="b-my" title=""><span><?= $uid['login']; ?></span>  
                         <img class="ava" alt="<?= $uid['login']; ?>" src="/uploads/avatar/small/<?= $uid['avatar']; ?>">
-                        <svg class="md-icon">
-                            <use xlink:href="/assets/svg/icons.svg#chevrons-down"></use>
-                        </svg>  
+                        <icon class="arrow" name="arrow-down"></icon>
                     </div>
                     <span class="dropdown-menu">
                         <span class="st"></span>
                         <a href="/u/<?= $uid['login']; ?>">
-                            <svg class="md-icon">
-                                <use xlink:href="/assets/svg/icons.svg#user"></use>
-                            </svg> 
+                            <icon name="user"></icon>
                             <?= lang('Profile'); ?>
                         </a>
                         <a href="/u/<?= $uid['login']; ?>/setting">
-                            <svg class="md-icon">
-                                <use xlink:href="/assets/svg/icons.svg#settings"></use>
-                            </svg> 
+                            <icon name="settings"></icon>
                             <?= lang('Settings'); ?>
                         </a>
                        <a href="/u/<?= $uid['login']; ?>/notifications">
-                            <svg class="md-icon">
-                                <use xlink:href="/assets/svg/icons.svg#bulb"></use>
-                            </svg>  
+                            <icon name="bell"></icon> 
                             <?= lang('Notifications'); ?>
                         </a>
                         <a href="/u/<?= $uid['login']; ?>/messages">
-                            <svg class="md-icon">
-                                <use xlink:href="/assets/svg/icons.svg#mail"></use>
-                            </svg>  
+                            <icon name="envelope"></icon> 
                             <?= lang('Messages'); ?>
                         </a>
                         <a href="/u/<?= $uid['login']; ?>/comments"> 
-                            <svg class="md-icon">
-                                <use xlink:href="/assets/svg/icons.svg#message"></use>
-                            </svg> 
+                            <icon name="bubbles"></icon>
                             <?= lang('Comments'); ?> 
                         </a>
                         <a href="/u/<?= $uid['login']; ?>/favorite">
-                            <svg class="md-icon">
-                                <use xlink:href="/assets/svg/icons.svg#bookmark"></use>
-                            </svg>  
+                            <icon name="star"></icon> 
                             <?= lang('Favorites'); ?>              
                         </a>
                         <?php if($uid['trust_level'] > 1) { ?>
                             <a href="/u/<?= $uid['login']; ?>/invitation">
-                                <svg class="md-icon">
-                                    <use xlink:href="/assets/svg/icons.svg#link"></use>
-                                </svg>   
+                                <icon name="link"></icon>   
                                 <?= lang('Invites'); ?>                   
                             </a> 
                         <?php } ?>  
                         <?php if($uid['trust_level'] == 5) { ?> 
                             <a href="/admin" target="_black">
-                                <svg class="md-icon">
-                                    <use xlink:href="/assets/svg/icons.svg#ad"></use>
-                                </svg>   
+                                <icon name="shield"></icon>    
                                 <?= lang('Admin'); ?>                   
                             </a> 
                         <?php } ?>     
                         <hr>   
                         <a href="/logout" class="logout" target="_self" title="<?= lang('Sign out'); ?>">
-                            <svg class="md-icon">
-                                <use xlink:href="/assets/svg/icons.svg#arrow-bar-to-right"></use>
-                            </svg> 
+                            <icon name="logout"></icon> 
                             <?= lang('Sign out'); ?>
                         </a>
                     </span>

@@ -56,9 +56,7 @@
                 <?php if($uid['notif']) { ?> 
                     <li class="nav notif">  
                         <a class="nav" href="/notifications">  
-                            <svg class="md-icon">
-                                <use xlink:href="/assets/svg/icons.svg#mail"></use>
-                            </svg> 
+                            <icon name="bell"></icon> 
                         </a>
                     </li>  
                 <?php } ?>    

@@ -237,11 +237,9 @@ blockquote {
   position: absolute;
   right: 15px;
   top: -2px;  
+  color: #999;
+  font-size: 13px;
 } 
-.closed-off .md-icon {
-  width: 21px;
-  height: 21px; 
-}
 .menu-left {
   margin-top: 3px;
   float: left;
@@ -263,10 +261,24 @@ blockquote {
 }
 .menu-h ul > li {
   float: left;
-  margin-left: 20px;
+  margin-left: 30px;
+  color: #999;
 }
-.menu-h .md-icon {
-  margin-top: 2px;
+.menu-h .arrow {
+  font-size: 8px;
+  margin-left: 4px;
+}
+.togglemenu icon {
+  color: #999;
+}
+.menu-h icon{
+  vertical-align: middle;
+}
+.dropdown-menu icon, .notifications icon {
+  margin-right: 10px;
+}
+.nav.create icon {
+  color: #09c;
 }
 .menu-lf {
   margin-left: 20px;
@@ -447,22 +459,6 @@ input.form-about {width: 250px;}
   width: 300px;
 }
 
-.md-icon {
-  width: 24px;
-  height: 24px;
-  fill: none;
-  stroke: #666;
-  vertical-align: middle;
-}
-.md-icon.top {
-  stroke: #f56400;
-}
-.nav.create .md-icon {
-  stroke: #09c;
-}
-.nav.notif .md-icon {
-  stroke: #f56400;
-}
 /* Диалог */
 .alert-danger {
   color: #e83e8c;
@@ -493,8 +489,6 @@ input.form-about {width: 250px;}
   background: #fcf8e4;
   color: green;  
 }
-
-
 .notif-color-1 {
  background: #F89406;
 }
@@ -843,9 +837,6 @@ ol.comment-telo {
 .red {
   color: #f56400;
 }
-.fl.active .md-icon {
-  stroke: #f56400;
-} 
 textarea.mess {
   width: 96%;
 }
@@ -861,14 +852,6 @@ textarea.mess {
 }
 
 /* Profile */
-.avatar-user .md-icon {
-  width: 104px;
-  height: 104px;
-  fill: none;
-  stroke: #d3d3d3;
-  vertical-align: middle;
-  margin-top: 4px;
-}
 .gravatar {
   border: 2px solid var(--color-white);
   border-radius: 100% 100%;
@@ -1033,20 +1016,17 @@ div.voters .comm-up-id, div.voters .post-up-id {
   margin: 8px 0;
   position: relative;
 }
+.menu icon, .menu-info icon {
+  margin: 0 8px 0 0;
+}
 .menu a {
   color: var(--color-gray-1); 
   display: block;
   font-size: 13px;
   margin-bottom: 5px;
 }
-.menu a:hover > .md-icon {
-  stroke: #2562dc;
-}
-a.active {
-  color:#222;
-}
-a.active .md-icon {
-  stroke: #222;
+.menu a:hover, .menu icon:hover, .nav.notif icon, a.active {
+  color: #f56400;
 }
 .menu a span {    
   vertical-align: top;
@@ -1107,9 +1087,6 @@ body.menuno .menu  {
 .dark a:hover {
   color: #eee;
 }
-.dark .menu-h .md-icon, .dark .md-icon {
-  stroke: #999;
-}
 .dark blockquote, .dark .menu-info {
   background-color: #555;
 }
@@ -1120,3 +1097,54 @@ body.menuno .menu  {
 .dark .comments_subtree:target, .dark .comments_subtree.edit {
   background-color: #222;
 }
+
+@font-face {
+  font-family: 'icons';
+  src: url('./font/Simple-Line-Icons.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+icon {
+  font-family: 'icons';
+  speak: none;
+  font-style: normal;
+  font-weight: inherit;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+icon:before {
+  display: inline-block;
+}
+a:hover icon:before {
+  text-decoration: none !important;
+}
+icon[name=size-actual]:before { content: "\e058"; }
+icon[name=star]:before { content: "\e09b"; }
+icon[name=graph]:before { content: "\e06b"; }
+icon[name=bubbles]:before { content: "\e04a"; }
+icon[name=grid]:before { content: "\e06a"; }
+icon[name=user]:before { content: "\e005"; }
+icon[name=people]:before { content: "\e001"; }
+icon[name=calendar]:before { content: "\e075"; }
+icon[name=pencil]:before { content: "\e05f"; }
+icon[name=settings]:before { content: "\e09a"; }
+icon[name=envelope]:before { content: "\e086"; }
+icon[name=arrow-down]:before { content: "\e604"; }
+icon[name=link]:before { content: "\e08d"; }
+icon[name=bell]:before { content: "\e027"; }
+icon[name=shield]:before { content: "\e00e"; }
+icon[name=options-vertical]:before { content: "\e602"; }
+icon[name=frame]:before { content: "\e038"; }
+icon[name=logout]:before { content: "\e065"; }
+icon[name=lock]:before { content: "\e08e"; }
+icon[name=pin]:before { content: "\e031"; }
+icon[name=trash]:before { content: "\e054"; }
+icon[name=github]:before { content: "\e60c"; }
+icon[name=action-undo]:before { content: "\e050"; }
+icon[name=energy]:before { content: "\e020"; }

@@ -13,15 +13,11 @@
         <?php if($uid['trust_level'] > 0) { ?>
             <?php if($uid['login'] != $user['login']) { ?> &nbsp; 
                 <a href="/u/<?= $user['login']; ?>/mess">
-                    <svg class="md-icon">
-                        <use xlink:href="/assets/svg/icons.svg#mail"></use>
-                    </svg>
+                    <icon name="envelope"></icon>
                 </a> 
             <?php } else { ?>
                 <a href="/u/<?= $uid['login']; ?>/setting">
-                    <svg class="md-icon moon">
-                        <use xlink:href="/assets/svg/icons.svg#edit"></use>
-                    </svg>
+                    <icon name="pencil"></icon>
                 </a> 
             <?php } ?>
         <?php } ?>

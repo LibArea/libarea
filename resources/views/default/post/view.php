@@ -37,7 +37,7 @@
                         <span class="date"> 
                             <?= $post['post_date']; ?>
                             <?php if($post['edit_date']) { ?> 
-                                (<?= lang('ed'); ?>. <?= $post['edit_date']; ?>) 
+                                (<?= lang('ed'); ?>) 
                             <?php } ?>
                         </span>
                         <?php if ($uid['id']) { ?>
@@ -46,11 +46,12 @@
                             </span>
                             <?php if($uid['login'] == $post['login'] || $uid['trust_level'] == 5) { ?>
                                 <span class="date">
-                                   &nbsp; <a href="/post/edit/<?= $post['post_id']; ?>">
-                                        <svg class="md-icon moon">
-                                            <use xlink:href="/assets/svg/icons.svg#edit"></use>
-                                        </svg>
+                                    <a href="/post/edit/<?= $post['post_id']; ?>">
+                                        <icon name="pencil"></icon>  
                                     </a>
+                                </span>
+                                <span class="date"> 
+                                    <span class="otst"> | </span>
                                 </span>
                                 <?php if($post['my_post'] == $post['post_id']) { ?>
                                         <span class="mu_post">+ <?= lang('in-the-profile'); ?></span>

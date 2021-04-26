@@ -1,5 +1,5 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<main class="w-100 max-width">
+<main class="w-100 max-width notifications">
     <h1><?= $data['title'] ?></h1>
     
     <?php if (!empty($list)) { ?>
@@ -7,9 +7,7 @@
         <?php foreach ($list as  $notif) { ?>
             <div class="fl<?php if($notif['read_flag'] == 0) { ?> active<?php } ?>">
             <?php if($notif['action_type'] == 1) { ?>
-                <svg class="md-icon moon">
-                    <use xlink:href="/assets/svg/icons.svg#mail"></use>
-                </svg>
+                <icon name="action-undo"></icon>
                
                 <a href="/u/<?= $notif['login'] ?>"><?= $notif['login'] ?></a> 
                 написал вам 
@@ -22,13 +20,14 @@
             <?php } ?>
             
              <?php if($notif['action_type'] == 2) { ?>
-                <svg class="md-icon moon">
-                    <use xlink:href="/assets/svg/icons.svg#message"></use>
-                </svg>
-               
+                <icon name="envelope"></icon>
                 <a href="/u/<?= $notif['login'] ?>"><?= $notif['login'] ?></a> 
-                ответил вам в  
-                <a class="ntf2" href="/notifications/read/<?= $notif['connection_type']; ?>"">комментарии</a>
+                
+                    ответил вам в  
+                
+                <a class="ntf2" href="/notifications/read/<?= $notif['connection_type']; ?>">
+                    комментарии
+                </a>
             
                 <span class="date"> —  <?= $notif['add_time']; ?></span>
             

@@ -34,19 +34,13 @@
                     <a class="u-url" href="/posts/<?= $post['post_slug']; ?>">
                         <h2 class="titl"><?= $post['post_title']; ?></h2>
                         <?php if ($post['post_is_delete'] == 1) { ?> 
-                            <svg class="md-icon delete">
-                                <use xlink:href="/assets/svg/icons.svg#trash"></use>
-                            </svg>
+                            <icon name="trash"></icon>
                         <?php } ?>
                         <?php if($post['post_closed'] == 1) { ?> 
-                            <svg class="md-icon closed">
-                                <use xlink:href="/assets/svg/icons.svg#lock"></use>
-                            </svg>
+                            <icon name="lock"></icon>
                         <?php } ?>
                         <?php if($post['post_top'] == 1) { ?> 
-                            <svg class="md-icon top">
-                                <use xlink:href="/assets/svg/icons.svg#bulb-off"></use>
-                            </svg>
+                            <icon name="pin"></icon>
                         <?php } ?>
                     </a>
                     <div class="space-color space_<?= $post['space_color'] ?>"></div>

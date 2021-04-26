@@ -26,27 +26,9 @@
                 </div>
              
             <div class="boxline">
-                <label for="post_content">Текст</label> <br />
-                <div class="qa-mod qa-editor-box">
-                    <div class="mod-head">
-                        <div class="wmd-panel">
-                            <div id="questionText" class="editor liveMode">
-                                <div class="editor-toolbar">
-                                  <div class="editor-mode"></div>
-                                  <div id="wmd-button-bar"></div>
-                                </div>
-                                <div class="wmd">
-                                  <textarea id="wmd-input" name="post_content" placeholder=""><?= $post['post_content']; ?></textarea>
-                                </div>
-                                <div class="editor-preview"><div class="fmt" id="wmd-preview"></div></div>
-                            </div>
-                            <link rel="stylesheet" href="/assets/js/editor/editor.css"> 
-                            <script src="/assets/js/editor/marked.js"></script>
-                            <script src="/assets/js/editor/markdown.editor.js"></script>
-                        </div>
-                    </div>
-                </div>   
+                <?php include TEMPLATE_DIR . '/post/md-forma.php'; ?> 
             </div>
+            
             <?php if($uid['trust_level'] == 5) { ?>
                 <div class="boxline"> 
                     <label for="post_content">Закрыть</label>

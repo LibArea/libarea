@@ -24,27 +24,11 @@
                     <label for="post_title"></label>    
                     <div class="box_h">Около 160 символов</div>
                 </div>
+                
+            <div class="boxline">
+                <?php include TEMPLATE_DIR . '/post/md-forma.php'; ?>
+            </div>
             
-            <div class="qa-mod qa-editor-box">
-                <div class="mod-head">
-                    <div class="wmd-panel">
-                        <div id="questionText" class="editor liveMode">
-                            <div class="editor-toolbar">
-                              <div class="editor-mode"></div>
-                              <div id="wmd-button-bar"></div>
-                            </div>
-                            <div class="wmd">
-                              <textarea id="wmd-input" name="post_content" placeholder=""></textarea>
-                            </div>
-                            <div class="editor-preview"><div class="fmt" id="wmd-preview"></div></div>
-                        </div>
-                        <link rel="stylesheet" href="/assets/js/editor/editor.css"> 
-                        <script src="/assets/js/editor/marked.js"></script>
-                        <script src="/assets/js/editor/markdown.editor.js"></script>
-                    </div>
-                </div>
-            </div>         
-       
             <div class="boxline">
                 <label for="post_content">Пространствa</label>
                 <select name="space_id">
