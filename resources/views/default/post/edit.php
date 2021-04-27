@@ -17,7 +17,8 @@
                     <input class="add-url" type="text" value="<?= $post['post_url']; ?>" name="post_url" />
                     <input id="graburl" type="submit_url" name="submit_url" value="Извлечь" />
                     <br />
-                </div> <?php } ?>
+                </div> 
+            <?php } ?>
                 <div class="boxline">
                     <label for="post_title">Превью</label>
                         <textarea class="content_preview" name="content_preview" placeholder=""><?= $post['post_content_preview']; ?></textarea> <br />
@@ -29,16 +30,18 @@
                 <?php include TEMPLATE_DIR . '/post/md-forma.php'; ?> 
             </div>
             
-            <?php if($uid['trust_level'] == 5) { ?>
+            <?php if($uid['trust_level'] > 0) { ?>
                 <div class="boxline"> 
                     <label for="post_content">Закрыть</label>
-                    <input type="radio" name="closed" <?php if($post['post_closed'] == 0) { ?>checked<?php } ?> value="0"> Нет
-                    <input type="radio" name="closed" <?php if($post['post_closed'] == 1) { ?>checked<?php } ?> value="1" > Да
+                    <input type="radio" name="closed" <?php if($post['post_closed'] == 0) { ?>checked<?php } ?> value="0"> <?= lang('No'); ?>
+                    <input type="radio" name="closed" <?php if($post['post_closed'] == 1) { ?>checked<?php } ?> value="1" > <?= lang('Yes'); ?>
                 </div>  
+            <?php } ?>
+            <?php if($uid['trust_level'] > 2) { ?>            
                 <div class="boxline">
                     <label for="post_content">Поднять</label>
-                    <input type="radio" name="top" <?php if($post['post_top'] == 0) { ?>checked<?php } ?> value="0"> Нет
-                    <input type="radio" name="top" <?php if($post['post_top']== 1) { ?>checked<?php } ?> value="1"> Да
+                    <input type="radio" name="top" <?php if($post['post_top'] == 0) { ?>checked<?php } ?> value="0"> <?= lang('No'); ?>
+                    <input type="radio" name="top" <?php if($post['post_top']== 1) { ?>checked<?php } ?> value="1"> <?= lang('Yes'); ?>
                 </div>                      
             <?php } ?>
             <div class="boxline">  

@@ -274,7 +274,7 @@ blockquote {
 .menu-h icon{
   vertical-align: middle;
 }
-.dropdown-menu icon, .notifications icon {
+.dropdown-menu icon, .notifications icon, .post-body icon {
   margin-right: 10px;
 }
 .nav.create icon {
@@ -837,7 +837,7 @@ ol.comment-telo {
 }
 
 /* ЛС */
-.red {
+.red, .lo {
   color: #f56400;
 }
 textarea.mess {

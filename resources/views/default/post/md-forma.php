@@ -14,7 +14,11 @@
                   <div id="wmd-button-bar"></div>
                 </div>
                 <div class="wmd">
-                  <textarea id="wmd-input" name="post_content" placeholder=""></textarea>
+                    <?php if (!empty($post['post_content'])) { ?>
+                        <textarea id="wmd-input" name="post_content" placeholder=""><?= $post['post_content']; ?></textarea>
+                    <?php } else { ?>
+                        <textarea id="wmd-input" name="post_content" placeholder=""></textarea>
+                    <?php } ?>
                 </div>
                 <div class="editor-preview"><div class="fmt" id="wmd-preview"></div></div>
             </div>

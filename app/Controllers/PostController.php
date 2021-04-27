@@ -199,6 +199,15 @@ class PostController extends \MainController
         // Получим комментарии
         $post_comments = CommentModel::getCommentsPost($post['post_id'], $uid);
  
+        // Получим ЛО (временно)
+        // Возможно нам стоит просто поднять ответ на первое место?
+        // Изменив порядок сортировки при выбора LO, что позволит удрать это
+        if($post['post_lo'] > 0) {
+            $lo = CommentModel::getCommentLo($post['post_id']);
+        } else {
+            $lo = null;
+        }
+
         $comments = Array();
         foreach($post_comments as $ind => $row){
             
@@ -233,7 +242,7 @@ class PostController extends \MainController
             'description'  => $description . ' — ' . $GLOBALS['conf']['sitename']
         ]; 
         
-        return view(PR_VIEW_DIR . '/post/view', ['data' => $data, 'post' => $post, 'comms' => $comms,  'uid' => $uid,  'recommend' => $recommend]);
+        return view(PR_VIEW_DIR . '/post/view', ['data' => $data, 'post' => $post, 'comms' => $comms,  'uid' => $uid,  'recommend' => $recommend,  'lo' => $lo]);
     }
 
     // Для дерева комментариев
@@ -322,7 +331,9 @@ class PostController extends \MainController
         $post_content_preview   = \Request::getPost('content_preview');
         $post_content_img       = \Request::getPost('content_img');
         $post_url               = \Request::getPost('post_url');
-        
+        $post_closed            = \Request::getPostInt('closed');
+        $post_top               = \Request::getPostInt('top');
+     
         // IP адрес и ID кто добавляет
         $post_ip_int  = \Request::getRemoteAddress();
         $post_user_id = $_SESSION['account']['user_id'];
@@ -363,13 +374,13 @@ class PostController extends \MainController
 
         // Проверяем url для > TL1
         // Ввести проверку дублей и запрещенных, для img повторов
-        $post_url             = empty($post_url) ? '' : $post_url;
-        $post_url_domain      = empty($post_url_domain) ? '' : $post_url_domain;
-        $post_content_preview = empty($post_content_preview) ? '' : $post_content_preview;
-        $post_content_img     = empty($post_content_img) ? '' : $post_content_img;
-        $og_img               = empty($og_img) ? '' : $og_img;
-        $tag_id               = empty($tag_id) ? 0 : $tag_id;
-
+        $post_url               = empty($post_url) ? '' : $post_url;
+        $post_url_domain        = empty($post_url_domain) ? '' : $post_url_domain;
+        $post_content_preview   = empty($post_content_preview) ? '' : $post_content_preview;
+        $post_content_img       = empty($post_content_img) ? '' : $post_content_img;
+        $og_img                 = empty($og_img) ? '' : $og_img;
+        $tag_id                 = empty($tag_id) ? 0 : $tag_id;
+        
         // Ограничим частоту добавления
         // Добавить условие TL
         $num_post =  PostModel::getPostSpeed($post_user_id);
@@ -396,6 +407,8 @@ class PostController extends \MainController
             'post_tag_id'           => $tag_id,
             'post_url'              => $post_url,
             'post_url_domain'       => $post_url_domain,
+            'post_closed'           => $post_closed,
+            'post_top'              => $post_top,
         ];
         
         // Записываем пост
@@ -487,7 +500,7 @@ class PostController extends \MainController
         if(!$post){
             redirect('/');
         }
-
+ 
         // Редактировать может только автор и админ
         if ($post['post_user_id'] != $uid['id'] && $uid['trust_level'] != 5) {
             redirect('/');
@@ -501,7 +514,7 @@ class PostController extends \MainController
             'title'         => 'Измененение поста ' . ' | ' . $GLOBALS['conf']['sitename'], 
             'description'   => 'Изменение поста на ' . $GLOBALS['conf']['sitename'],
         ];
-        
+
         return view(PR_VIEW_DIR . '/post/edit', ['data' => $data, 'uid' => $uid, 'post' => $post, 'space' => $space, 'tags' => $tags]);
     }
     
@@ -513,8 +526,8 @@ class PostController extends \MainController
         $post_content           = $_POST['post_content']; // не фильтруем
         $post_content_preview   = \Request::getPost('content_preview');
         $post_content_img       = \Request::getPost('content_img');
-        $post_closed            = \Request::getPost('closed');
-        $post_top               = \Request::getPost('top');
+        $post_closed            = \Request::getPostInt('closed');
+        $post_top               = \Request::getPostInt('top');
         $post_space_id          = \Request::getPostInt('space_id');
         $post_tag_id            = \Request::getPostInt('tag_id');
         $post_url               = \Request::getPost('post_url');
@@ -549,14 +562,6 @@ class PostController extends \MainController
             return true;
         }
         
-        if ($post_closed != 1) { 
-            $post_closed = 0;
-        }
-        
-        if ($post_top != 1) { 
-            $post_top = 0;
-        }
-
         // Проверяем url для > TL1
         // Ввести проверку дублей и запрещенных
         // При изменение url считаем частоту смену url после добавления у конкретного пользователя

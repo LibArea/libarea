@@ -42,6 +42,9 @@
                         <?php if($post['post_top'] == 1) { ?> 
                             <icon name="pin"></icon>
                         <?php } ?>
+                        <?php if($post['post_lo'] > 0) { ?> 
+                            <icon class="lo" name="trophy"></icon>
+                        <?php } ?>
                     </a>
                     <div class="space-color space_<?= $post['space_color'] ?>"></div>
                     <a class="space-u" href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">

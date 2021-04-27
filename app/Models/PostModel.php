@@ -8,7 +8,6 @@ use Base;
 
 class PostModel extends \MainModel
 {
-
     // Посты на главной 
     // $page - страницы
     // $tags_user - список id отписанных тегов
@@ -34,7 +33,7 @@ class PostModel extends \MainModel
             $display = '';
         }
 
-        $sql = "SELECT p.post_id, p.post_title, p.post_slug, p.post_user_id, p.post_space_id, p.post_comments, p.post_date, p.post_votes, p.post_is_delete, p.post_closed, p.post_top, p.post_url, p.post_content_preview, p.post_content_img,
+        $sql = "SELECT p.post_id, p.post_title, p.post_slug, p.post_user_id, p.post_space_id, p.post_comments, p.post_date, p.post_votes, p.post_is_delete, p.post_closed, p.post_lo, p.post_top, p.post_url, p.post_content_preview, p.post_content_img,
                 u.id, u.login, u.avatar,
                 v.votes_post_item_id, v.votes_post_user_id,  
                 s.space_id, s.space_slug, s.space_name, space_color
@@ -142,10 +141,9 @@ class PostModel extends \MainModel
         return true;
     }
     
-    // Проверка на дубликаты uri и запись поста
+    // Добавляем пост и проверяем uri
     public static function addPost($data)
     {
-  
         // Проверить пост на повтор slug (переделать)
         $q = XD::select('*')->from(['posts']);
         $query = $q->where(['post_slug'], '=', $data['post_slug']);
@@ -166,7 +164,9 @@ class PostModel extends \MainModel
             ['post_ip_int'], ',', 
             ['post_user_id'], ',', 
             ['post_space_id'], ',', 
-            ['post_tag_id'], ',', 
+            ['post_tag_id'], ',',
+            ['post_closed'], ',',
+            ['post_top'], ',',
             ['post_url'], ',',
             ['post_url_domain'],')')->values( '(', 
         
@@ -181,6 +181,8 @@ class PostModel extends \MainModel
             $data['post_user_id'], 
             $data['post_space_id'], 
             $data['post_tag_id'], 
+            $data['post_closed'],
+            $data['post_top'],
             $data['post_url'],
             $data['post_url_domain']]), ')' )->run();
 

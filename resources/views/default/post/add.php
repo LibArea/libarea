@@ -28,7 +28,20 @@
             <div class="boxline">
                 <?php include TEMPLATE_DIR . '/post/md-forma.php'; ?>
             </div>
-            
+            <?php if($uid['trust_level'] > 0) { ?>
+                <div class="boxline"> 
+                    <label for="post_content">Закрыть</label>
+                    <input type="radio" name="closed" value="0"> <?= lang('No'); ?>
+                    <input type="radio" name="closed" value="1" > <?= lang('Yes'); ?>
+                </div>  
+            <?php } ?>
+            <?php if($uid['trust_level'] > 2) { ?>            
+                <div class="boxline">
+                    <label for="post_content">Поднять</label>
+                    <input type="radio" name="top" value="0"> <?= lang('No'); ?>
+                    <input type="radio" name="top" value="1"> <?= lang('Yes'); ?>
+                </div>                      
+            <?php } ?>
             <div class="boxline">
                 <label for="post_content">Пространствa</label>
                 <select name="space_id">

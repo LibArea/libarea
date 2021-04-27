@@ -21,15 +21,20 @@ class CommentModel extends \MainModel
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
     
-    // ->leftJoin(['votes_comm'])->on(['votes_comm_item_id'], '=', ['comment_id'])
-    //    ->and(['votes_comm_user_id'], '=', $uid)
-    
-   // Количество комментариев
+    // Количество комментариев
     public static function getCommentAllCount()
     {
         $query = XD::select('*')->from(['comments'])->getSelect();
 
         return ceil(count($query) / 25);
+    }
+    
+    // Получаем лучший комментарий (LO)
+    public static function getCommentLo($post_id)
+    {
+        return XD::select('*')->from(['comments'])
+                ->where(['comment_post_id'], '=', $post_id)
+                ->and(['comment_lo'], '>', 0)->getSelectOne();
     }
     
     // Получаем комментарии в посте
@@ -116,16 +121,16 @@ class CommentModel extends \MainModel
         ->where(['comment_id'], '=', $comm_id)->run(); 
     }
     
-   // Частота размещения комментариев участника 
-   public static function getCommentSpeed($uid)
-   {
+    // Частота размещения комментариев участника 
+    public static function getCommentSpeed($uid)
+    {
         $sql = "SELECT comment_id, comment_user_id, comment_date
                 fROM comments 
                 WHERE comment_user_id = ".$uid."
                 AND comment_date >= DATE_SUB(NOW(), INTERVAL 1 DAY)";
                 
         return  DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
-   }
+    }
     
     // Добавить комментарий в закладки
     public static function setCommentFavorite($post_id, $uid)

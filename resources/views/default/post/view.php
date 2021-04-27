@@ -27,8 +27,21 @@
                         <?php } ?> 
             
                 <div class="post-body">
-                    <h1 class="titl"><?= $post['post_title']; ?></h1>
-                
+                    <h1 class="titl">
+                        <?= $post['post_title']; ?> 
+                            <?php if ($post['post_is_delete'] == 1) { ?> 
+                                <icon name="trash"></icon>
+                            <?php } ?>
+                            <?php if($post['post_closed'] == 1) { ?> 
+                                <icon name="lock"></icon>
+                            <?php } ?>
+                            <?php if($post['post_top'] == 1) { ?> 
+                                <icon name="pin"></icon>
+                            <?php } ?>
+                            <?php if($post['post_lo'] > 0) { ?> 
+                                <icon class="lo" name="trophy"></icon>
+                            <?php } ?>
+                    </h1>
                     <div class="footer">
                         <img class="ava" alt="<?= $post['login']; ?>" src="/uploads/avatar/small/<?= $post['avatar']; ?>">
                         <span class="user"> 
@@ -146,7 +159,7 @@
                     <?php if($comm['comment_del'] == 0) { ?>
                         <ol class="comment-telo<?php if ($comm['level'] == 0) { ?> one<?php } ?><?php if ($comm['level'] == 2) { ?> two<?php } ?><?php if ($comm['level'] > 2) { ?> three<?php } ?>"> 
                             <li class="comments_subtree" id="comm_<?= $comm['comment_id']; ?>">
-                            <?php if($comm['comment_lo'] == 1) { ?> 
+                            <?php if($comm['comment_lo'] > 0) { ?> 
                                 <span class="red right">
                                     <icon name="trophy"></icon>
                                 </span>

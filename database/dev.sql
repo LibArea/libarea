@@ -51,7 +51,7 @@ CREATE TABLE `comments` (
   `comment_after` smallint(6) NOT NULL DEFAULT 0,
   `comment_votes` smallint(6) NOT NULL DEFAULT 0,
   `comment_content` text NOT NULL,
-  `comment_lo` tinyint(1) NOT NULL DEFAULT 0,
+  `comment_lo` int(11) NOT NULL DEFAULT 0,
   `comment_del` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -146,7 +146,7 @@ CREATE TABLE `posts` (
   `post_content_img` varchar(250) DEFAULT NULL,
   `post_thumb_img` varchar(250) DEFAULT NULL,
   `post_closed` tinyint(1) NOT NULL DEFAULT 0,
-  `post_lo` tinyint(1) NOT NULL DEFAULT 0,
+  `post_lo` int(11) NOT NULL DEFAULT 0,
   `post_top` tinyint(1) NOT NULL DEFAULT 0,
   `post_url` varchar(250) DEFAULT NULL,
   `post_url_domain` varchar(250) DEFAULT NULL,
