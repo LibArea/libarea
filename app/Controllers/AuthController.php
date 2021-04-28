@@ -108,7 +108,7 @@ class AuthController extends \MainController
         
         for ($i = 0, $l = Base::getStrlen($login); $i < $l; $i++)
         {
-            if (self::textCount($login, Base::getSubstr($login, $i, 1)) > 4)
+            if (self::textCount($login, Base::getStrlen($login, $i, 1)) > 4)
             {
                 Base::addMsg('В логине слишком много повторяющихся символов', 'error');
                 $url = ($inv_code) ? '/register/invite/'.$inv_code : '/register';
