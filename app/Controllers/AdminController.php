@@ -41,7 +41,6 @@ class AdminController extends \MainController
         
         $data = [
             'title'        => 'Последние сессии | Админка',
-            'description'  => 'Админка на AreaDev',
             'users'        => $result,
         ];
 
@@ -91,7 +90,6 @@ class AdminController extends \MainController
         $data = [
             'h1'          => 'Удаленные комментарии',
             'title'       => 'Удаленные комментарии' . ' | ' . $GLOBALS['conf']['sitename'],
-            'description' => 'Все удаленные комментарии на сайте в порядке очередности. ' . $GLOBALS['conf']['sitename'],
         ]; 
  
         return view(PR_VIEW_DIR . '/admin/comm_del', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
@@ -137,7 +135,6 @@ class AdminController extends \MainController
         $data = [
             'h1'          => 'Инвайты',
             'title'       => 'Инвайты' . ' | ' . $GLOBALS['conf']['sitename'],
-            'description' => 'Дерево инвайтов. ' . $GLOBALS['conf']['sitename'],
         ]; 
  
         return view(PR_VIEW_DIR . '/admin/invitations', ['data' => $data, 'uid' => $uid, 'invitations' => $result]);
@@ -185,7 +182,6 @@ class AdminController extends \MainController
         $data = [
             'h1'          => 'Пространства',
             'title'       => 'Пространства' . ' | ' . $GLOBALS['conf']['sitename'],
-            'description' => 'Пространства. ' . $GLOBALS['conf']['sitename'],
         ]; 
  
         return view(PR_VIEW_DIR . '/admin/space', ['data' => $data, 'uid' => $uid, 'space' => $result]);
@@ -203,7 +199,6 @@ class AdminController extends \MainController
         $data = [
             'h1'          => 'Добавить пространство',
             'title'       => 'Добавить пространство' . ' | ' . $GLOBALS['conf']['sitename'],
-            'description' => 'Добавить пространство. ' . $GLOBALS['conf']['sitename'],
         ]; 
         
         return view(PR_VIEW_DIR . '/admin/add-space', ['data' => $data, 'uid' => $uid]);

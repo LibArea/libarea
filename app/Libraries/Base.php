@@ -8,7 +8,6 @@ use JacksonJeans\MailException;
 
 class Base
 {
-
     public static function getUid() 
     {
         $user = Request::getSession('account') ?? [];

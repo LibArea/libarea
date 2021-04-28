@@ -68,7 +68,7 @@ main {
   display: none;
   padding: 0.4rem;
 }
-#sidebar h3 {
+#sidebar h3, h3.lo {
   margin: 0 0 5px 0;
   text-transform: uppercase;
   font-size: 12px;
@@ -274,8 +274,11 @@ blockquote {
 .menu-h icon{
   vertical-align: middle;
 }
-.dropdown-menu icon, .notifications icon, .post-body icon {
+icon {
   margin-right: 10px;
+}
+.post-body icon {
+  margin-left: 8px;
 }
 .nav.create icon {
   color: #09c;
@@ -499,6 +502,12 @@ input.form-about {width: 250px;}
   max-width: 660px;
   background: #f3f3f3;
   padding: 0 15px 0 5px;
+}
+.lo-post {
+  max-width: 660px;
+  background: #f3f3f3;
+  padding: 5px 5px 5px 10px;
+  margin: 10px 0;
 }
 .shown_post img {
   max-width: 99%;

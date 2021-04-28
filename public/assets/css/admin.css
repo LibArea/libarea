@@ -23,7 +23,7 @@ body {
   width: 100%;
   border-collapse: collapse;
 }
-
+input[type="text"] {width: 550px;}
 .m-850 {max-width: 850px;}
 .t-tr, .t-th {display: table-row;}
 .t-th .t-td {font-weight: 600;}

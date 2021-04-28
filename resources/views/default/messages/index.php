@@ -8,9 +8,9 @@
 
                 <div class="msg-telo<?php if (!$msg['unread'] > 0) { ?> active<?php } ?>">
                     <?php if($msg['sender_uid'] == $uid['id']) {  ?>
-                         Я  |  <?= $msg['update_time']; ?> <br>
+                        <?= lang('You'); ?>  |  <?= $msg['update_time']; ?> <br>
                     <?php } else { ?>
-                         От 
+                        <?= lang('From'); ?>
                          
                         <img src="/uploads/avatar/small/<?= $msg['msg_user']['avatar']; ?>" class="msg-ava">
                          <a href="/u/<?= $msg['msg_user']['login']; ?>">
@@ -21,9 +21,9 @@
 
                     <a href="/messages/read/<?= $msg['id']; ?>">
                         <?php if ($msg['unread']) { ?>
-                             Есть <?= $msg['count']; ?> <?= $msg['unread_num']; ?>
+                            <?= lang('There are'); ?> <?= $msg['count']; ?> <?= $msg['unread_num']; ?>
                         <?php } else { ?>
-                             Посмотреть  
+                            <?= lang('View'); ?>  
                             <?php if($msg['count'] != 0) { ?> 
                                 <?= $msg['count']; ?>  <?= $msg['count_num']; ?>
                             <?php } ?>    

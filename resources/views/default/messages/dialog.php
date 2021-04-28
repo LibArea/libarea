@@ -14,7 +14,7 @@
                                                                                                                                                            
         <textarea rows="3" id="message" class="mess" placeholder="Напишите..." type="text" name="message" /></textarea>
         <p>
-        <input type="submit" name="submit" value="Ответить" class="submit">    
+        <input type="submit" name="submit" value="<?= lang('Reply to'); ?>" class="submit">    
         </p>
     </form>
 

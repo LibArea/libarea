@@ -5,13 +5,12 @@
             <?= lang('Profile'); ?>
         </a>
         <?php if($uid['id'] > 0) { ?>
-
+            <div class="v-ots"></div>
             <a <?php if($uid['uri'] == '/u/'.$uid['login'].'/setting/avatar' || $uid['uri'] == '/u/'.$uid['login'].'/setting' || $uid['uri'] == '/u/'.$uid['login'].'/setting/security') { ?>class="active"<?php } ?> href="/u/<?= $uid['login']; ?>/setting">
                 <icon name="settings"></icon>
                 <?= lang('Settings'); ?>
             </a> 
         
-            <div class="v-ots"></div>
             <a <?php if($uid['uri'] == '/u/'.$uid['login'].'/notifications') { ?>class="active"<?php } ?> href="/u/<?= $uid['login']; ?>/notifications">
                 <icon name="bell"></icon>
                 <?= lang('Notifications'); ?>

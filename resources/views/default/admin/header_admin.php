@@ -6,7 +6,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
         <title><?= $data['title']; ?></title>
-        <meta name = "description" content = "<?= $data['description']; ?>" />
         <link rel="stylesheet" href="/assets/css/style.css">
         <link rel="stylesheet" href="/assets/css/admin.css">
         <link rel="icon" href="/favicon.ico">

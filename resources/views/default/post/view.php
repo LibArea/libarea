@@ -114,7 +114,17 @@
                     <div class="post">
                         <?= $post['content']; ?> 
                     </div> 
-                        
+                    <?php if($lo) { ?>
+                        <div class="lo-post">
+                            <h3 class="lo">ЛО</h3>
+                            <?= $lo['comment_content']; ?> 
+                            <span class="right">
+                                <a rel="nofollow" href="/posts/<?= $post['post_slug']; ?>#comm_<?= $lo['comment_id']; ?>">
+                                    <icon name="arrow-down"></icon>
+                                </a>
+                            </span>
+                        </div>     
+                    <?php } ?>    
                     <?php if($post['post_url']) { ?> 
                         <span class="post_url_detal">
                             <?= lang('Website'); ?>: <a rel="nofollow noreferrer" href="<?= $post['post_url_full']; ?>">

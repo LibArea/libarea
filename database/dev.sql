@@ -472,10 +472,6 @@ ALTER TABLE `users_email_activate`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Индексы сохранённых таблиц
---
- 
---
 -- Индексы таблицы `comments`
 --
 ALTER TABLE `comments`
