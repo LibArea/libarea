@@ -14,8 +14,8 @@
         <link rel="stylesheet" href="/assets/css/style.css">
         <link rel="icon" href="/favicon.ico">
         <link rel="apple-touch-icon" href="/favicon.png">
-        
-        <?php if(Request::getUri() == '/flow') { ?>
+
+        <?php if($uid['uri'] == '/flow') { ?>
             <script src="/assets/js/flow.js"></script>
             <link rel="stylesheet" href="/assets/css/flow.css">
         <?php } ?>
@@ -27,7 +27,7 @@
         <div class="menu-left">
             <ul>
                 <li class="nav">
-                    <?php if(Request::getUri() == '/') { ?>
+                    <?php if($uid['uri'] == '/') { ?>
                         <a title="<?= lang('Home'); ?>" class="home" href="/"><?= lang('Loriup'); ?></a>
                     <?php } else { ?>
                        <a title="<?= lang('Home'); ?>" class="home" href="/"><?= lang('Home'); ?></a>

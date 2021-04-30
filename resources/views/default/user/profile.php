@@ -59,13 +59,15 @@
             </span>  <br>
         <?php } ?>
         
-        <!--
+        <?php if($data['space_user'] != 0) { ?>
             <label class="required">Владеет:</label>
             <span class="d">
-                
-            </span>  
+                <?php foreach ($data['space_user'] as  $space) { ?>
+                    <a href="/s/<?= $space['space_slug'];?>"><?= $space['space_name'];?></a> &nbsp; 
+                <?php } ?>
+            </span>     
             <br>
-       -->
+        <?php } ?>
         
         <label class="required">О себе:</label>
         <span class="na about">

@@ -43,10 +43,12 @@
     
 </main>
 <?php if($uid['trust_level'] >= $GLOBALS['conf']['space']) { ?>
-    <aside id="sidebar"> 
-        <div class="right">
-            <a class="add-space" href="/space/add">+ <?= lang('To create'); ?></a>
-        </div>    
-    </aside>
+    <?php if($count_space <= 2) { ?>
+        <aside id="sidebar"> 
+            <div class="right">
+                <a class="add-space" href="/space/add">+ <?= lang('To create'); ?></a>
+            </div>    
+        </aside>
+    <?php } ?> 
 <?php } ?> 
 <?php include TEMPLATE_DIR . '/footer.php'; ?>        

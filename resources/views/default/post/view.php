@@ -358,13 +358,13 @@
                 <?php } ?>
             </div>
         <?php } else { ?>
-            <div class="no-answer"><?= lang('no-answer'); ?>...</div>
+            <?php if($post['post_closed'] != 1) { ?>
+                <div class="no-answer"><?= lang('no-answer'); ?>...</div>
+            <?php } ?>
         <?php } ?>
   
         <?php if($post['post_closed'] == 1) { ?> 
-            <div class="telo">
-                <p class="info"><?= lang('post-closed'); ?>...</p>
-            </div>
+                <p class="no-answer"><?= lang('post-closed'); ?>...</p>
         <?php } ?>
        
     </article>

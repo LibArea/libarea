@@ -48,7 +48,8 @@ class UserController extends \MainController
           'created_at'      => Base::ru_date($user['created_at']),
           'trust_level'     => UserModel::getUserTrust($user['id']),
           'post_num_user'   => UserModel::getUsersPostsNum($user['id']),
-          'comm_num_user'   => UserModel::getUsersCommentsNum($user['id']),
+          'comm_num_user'   => UserModel::getUsersCommentsNum($user['id']), 
+          'space_user'      => SpaceModel::getSpaceUserId($user['id']),
         ];
 
         return view(PR_VIEW_DIR . '/user/profile', ['data' => $data, 'uid' => $uid, 'user' => $user, 'post' => $post]);

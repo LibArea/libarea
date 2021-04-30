@@ -35,16 +35,16 @@
                 </div>  
             <?php } elseif ($flow['flow_action_id'] == 4) { ?>
                 <div class="flow-comment">
-                    <icon name="action-undo"></icon>
+                    <icon name="bubbles"></icon>
                     <div class="box">
-                    <img class="avatar" src="/uploads/avatar/small/<?= $flow['avatar']; ?>">
-                    <span class="user"> 
-                        <a href="/u/<?= $flow['login']; ?>"><?= $flow['login']; ?></a> 
-                    </span> 
-                    <span class="date">
-                        <?= $flow['flow_pubdate']; ?> 
-                    </span>
-                      — <a href="<?= $flow['flow_url']; ?>"><?= $flow['flow_about']; ?>...</a>
+                        <img class="avatar" src="/uploads/avatar/small/<?= $flow['avatar']; ?>">
+                        <span class="user"> 
+                            <a href="/u/<?= $flow['login']; ?>"><?= $flow['login']; ?></a> 
+                        </span> 
+                        <span class="date">
+                            <?= $flow['flow_pubdate']; ?> 
+                        </span>
+                          — <a href="<?= $flow['flow_url']; ?>"><?= $flow['flow_about']; ?>...</a>
                     </div>
                 </div>
             <?php } else { ?>

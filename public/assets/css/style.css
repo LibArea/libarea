@@ -500,8 +500,9 @@ input.form-about {width: 250px;}
 .shown_post {
   display: block;
   max-width: 660px;
-  background: #f3f3f3;
+  background: #f6f6f6;
   padding: 0 15px 0 5px;
+  color: #333;
 }
 .lo-post {
   max-width: 660px;
@@ -834,8 +835,8 @@ ol.comment-telo {
 .comm-telo_bottom {
   margin-bottom: 20px;
 }
-.comm-telo-body p {
-  margin: 5px 0 10px 0;
+.comm-telo-body {
+  margin: 5px 0;
 }
 .comm-header a, .comm-header {
   font-size: 9.5pt;

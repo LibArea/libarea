@@ -10,6 +10,7 @@ class SpaceModel extends \MainModel
     // Все пространства сайта
     public static function getSpaceAll($user_id)
     {
+
         $q = XD::select('*')->from(['space']);
         $result = $q->leftJoin(['space_hidden'])->on(['hidden_space_id'], '=', ['space_id'])
                 ->and(['hidden_user_id'], '=', $user_id)
@@ -32,10 +33,16 @@ class SpaceModel extends \MainModel
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     } 
 
-   // Получение по id
+   // По id
     public static function getSpaceId($space_id)
     {
         return XD::select('*')->from(['space'])->where(['space_id'], '=', $space_id)->getSelectOne();
+    }
+
+   // Пространства участника
+    public static function getSpaceUserId($user_id)
+    {
+        return XD::select('*')->from(['space'])->where(['space_user_id'], '=', $user_id)->getSelect();
     }
 
     // Списки постов по пространству

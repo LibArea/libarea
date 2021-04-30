@@ -11,19 +11,20 @@ class SpaceController extends \MainController
     // Все пространства сайта
     public function index()
     {
-        $account    = \Request::getSession('account');
-        $user_id    = $account ? $account['user_id'] : 0;
+        $uid    = Base::getUid();
+        $space  = SpaceModel::getSpaceAll($uid['id']);
 
-        $space = SpaceModel::getSpaceAll($user_id);
+        // Введем ограничение на количество создаваемых пространств
+        $sp             = SpaceModel::getSpaceUserId($uid['id']);
+        $count_space    = count($sp);
 
-        $uid  = Base::getUid();
         $data = [
             'h1'            => 'Все пространства',
             'title'         => 'Все пространства | ' . $GLOBALS['conf']['sitename'],
             'description'   => 'Страница всех пространств сайта на ' . $GLOBALS['conf']['sitename'],
         ];
 
-        return view(PR_VIEW_DIR . '/space/all', ['data' => $data, 'uid' => $uid, 'space' => $space]);
+        return view(PR_VIEW_DIR . '/space/all', ['data' => $data, 'uid' => $uid, 'space' => $space, 'count_space' => $count_space]);
     }
 
     // Посты по пространству
@@ -212,7 +213,7 @@ class SpaceController extends \MainController
         
         SpaceModel::setSpaceEdit($data);
         
-        Base::addMsg('Изменение сохранено', 'error');
+        Base::addMsg('Изменение сохранено', 'success');
         redirect('/s/' . $data['space_slug']);
     }
     
@@ -312,6 +313,15 @@ class SpaceController extends \MainController
             redirect('/');
         }  
   
+        // Введем ограничение на количество создаваемых пространств
+        $space          = SpaceModel::getSpaceUserId($uid['id']);
+        $count_space    = count($space);
+        
+        // Пока 3, далее привязать к TL
+        if ($count_space >= 3) {
+            redirect('/');
+        }  
+
         // Если пользователь уже создал пространство
         // Ограничить по TL количество + не показывать кнопку добавления
      
@@ -453,6 +463,7 @@ class SpaceController extends \MainController
         // Добавляем пространство
         SpaceModel::AddSpace($data);
 
+        Base::addMsg('Пространство успешно добавлено', 'success');
         redirect('/space'); 
     }
 
