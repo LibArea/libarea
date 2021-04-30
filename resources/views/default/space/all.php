@@ -43,12 +43,10 @@
     
 </main>
 <?php if($uid['trust_level'] >= $GLOBALS['conf']['space']) { ?>
-    <?php if($uid['my_space_id'] == 0) { ?>
     <aside id="sidebar"> 
         <div class="right">
             <a class="add-space" href="/space/add">+ <?= lang('To create'); ?></a>
         </div>    
     </aside>
-    <?php } ?>    
 <?php } ?> 
 <?php include TEMPLATE_DIR . '/footer.php'; ?>        

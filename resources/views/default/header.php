@@ -23,12 +23,12 @@
 <body class="bd<?php if(Request::getCookie('dayNight') == 'dark') {?> dark<?php } ?><?php if(Request::getCookie('menuS') == 'menuno') {?> menuno<?php } ?>">
 <header class="site-header">  
     <div class="title"> 
-        <a title="<?= lang('Home'); ?>" class="logo" href="/">M</a>
+        <a title="<?= lang('Home'); ?>" class="logo" href="/">L</a>
         <div class="menu-left">
             <ul>
                 <li class="nav">
                     <?php if(Request::getUri() == '/') { ?>
-                        <a title="<?= lang('Home'); ?>" class="home" href="/"><?= lang('AreaDev'); ?></a>
+                        <a title="<?= lang('Home'); ?>" class="home" href="/"><?= lang('Loriup'); ?></a>
                     <?php } else { ?>
                        <a title="<?= lang('Home'); ?>" class="home" href="/"><?= lang('Home'); ?></a>
                     <?php } ?>
@@ -97,7 +97,7 @@
                            
                         </a>
                     </li>  
-                <?php } ?>    
+                <?php } ?>  
                 <li class="dropbtn nav">
                     <div class="b-my" title=""><span><?= $uid['login']; ?></span>  
                         <img class="ava" alt="<?= $uid['login']; ?>" src="/uploads/avatar/small/<?= $uid['avatar']; ?>">

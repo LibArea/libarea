@@ -13,7 +13,7 @@
         <icon name="graph"></icon>
         <span><?= lang('TOP'); ?></span> 
     </a>
-    <a <?php if($uid['uri'] == '/comments') { ?>class="active"<?php } ?> title="<?= lang('Comments'); ?>" href="/comments">
+    <a <?php if($uid['uri'] == '/comments') { ?>class="active"<?php } ?> title="<?= lang('Answers'); ?>" href="/comments">
         <icon name="bubbles"></icon>
         <span><?= lang('Comments'); ?></span>
     </a>

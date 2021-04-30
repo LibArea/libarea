@@ -27,7 +27,7 @@ class MainConnector implements Connector
             "Base"          => "app/Libraries/Base.php",  
             "DB"            => "database/DB.php",  
             "XdORM\XD"      => "vendor/phphleb/xdorm/XD.php",
-            // "Phphleb\Debugpan\DPanel" => "vendor/phphleb/debugpan/DPanel.php",
+             "Phphleb\Debugpan\DPanel" => "vendor/phphleb/debugpan/DPanel.php",
             // https://github.com/JacksonJeans/php-mail
             "JacksonJeans\MailException" => "app/Libraries/php-mail/src/JacksonJeans/MailException.class.php",
             "JacksonJeans\Mail" => "app/Libraries/php-mail/src/JacksonJeans/Mail.class.php",

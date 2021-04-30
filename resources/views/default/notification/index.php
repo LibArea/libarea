@@ -9,9 +9,9 @@
             <?php if($notif['action_type'] == 1) { ?>
             
                 <?php if($notif['read_flag'] == 0) { ?>
-                    <span class="red"><icon name="action-undo"></icon></span>
+                    <span class="red"><icon name="envelope"></icon></span>
                 <?php } else { ?>
-                    <icon name="action-undo"></icon>
+                    <icon name="envelope"></icon>
                 <?php } ?>
                
                 <a href="/u/<?= $notif['login'] ?>"><?= $notif['login'] ?></a> 
@@ -24,23 +24,32 @@
             
             <?php } ?>
             
-             <?php if($notif['action_type'] == 2) { ?>
-                
+            <?php if($notif['action_type'] == 2) { ?>
+                Написал пост
+            <?php } ?> 
+             
+            <?php if($notif['action_type'] == 3) { ?>
+                Ответил на пост
+                <icon name="action-undo"></icon>
+            <?php } ?>  
+             
+             <?php if($notif['action_type'] == 4) { ?>
                 
                 <?php if($notif['read_flag'] == 0) { ?>
-                    <span class="red"><icon name="envelope"></icon></span>
+                    <span class="red"><icon name="bubbles"></icon></span>
                 <?php } else { ?>
-                    <icon name="envelope"></icon>
+                    <icon name="bubbles"></icon>
                 <?php } ?>
                 
                 <a href="/u/<?= $notif['login'] ?>"><?= $notif['login'] ?></a> 
                 
-                    ответил вам в  
+                    написал  
                 
                 <a class="ntf2" href="/notifications/read/<?= $notif['connection_type']; ?>">
-                    комментарии
+                    комментарий
                 </a>
             
+                   на ваш ответ
                 <span class="date"> —  <?= $notif['add_time']; ?></span>
             
                 <?php if($notif['read_flag'] == 0) { ?><sup class="red">✔</sup><?php } ?>

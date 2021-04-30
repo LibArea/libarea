@@ -3,8 +3,10 @@ return [
     'home-desc'         => 'Community home page, forum, posts',
     'site-closed'       => 'The site is under development',
     'no-post'           => 'Unfortunately there are no posts',
-    'no-comment'        => 'Unfortunately there are no comments',
-    'comment-deleted'   => 'Comments removed',
+    'no-comment'        => 'Unfortunately there are no comments', 
+    'no-answer'         => 'Unfortunately there are no answers',
+    'comment-deleted'   => 'Comments removed',    
+    'answer-deleted'    => 'Answer removed',
     'comments-desc'     => 'All comments are in order of priority on the site',
     'post-closed'       => 'The post is closed',
     'no-auth-comm'      => 'You must be logged in to leave a comment',
@@ -47,6 +49,14 @@ return [
     /* Meta - desc */
     'desc-user-all'  => 'List of all participants sorted by date of registration on the site',
     'desc-profile'  => 'Participant*s profile page (posts, comments)',
+    
+    /* For notification and chat */
+    'add_comment'       => 'added a comment',
+    'add_chat'          => 'added a message to the chat',
+    'add_post'          => 'added a post',
+    'add_up_post'       => 'I liked the post',
+    'add_up_answ'       => 'I liked the answer',
+    'add_up_comm'       => 'liked the comment',
 ];
 
 

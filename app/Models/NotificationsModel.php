@@ -6,7 +6,15 @@ use App\Models\UserModel;
 
 class NotificationsModel extends \MainModel
 {
-    
+    // $action_type
+    // 1 - сообщение
+    // 2 - пост
+    // 3 - ответ
+    // 4 - комментарий
+    // 5 - пост в чат
+    // 6 - понравился пост
+    // 7 - понравился ответ
+
     // Лист уведомлений для участника
     public static function listNotification($user_uid)
     {
@@ -33,6 +41,7 @@ class NotificationsModel extends \MainModel
 
 
 	// Уведомления
+    // 2 - ответы
     // NotificationsModel::send($sender_uid, $recipient_uid, $type, $messages_dialog_id, $url, 1);
 	public static function send($sender_uid, $recipient_uid, $action_type, $connection_type, $url, $model_type = 0)
 	{

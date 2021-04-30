@@ -59,15 +59,13 @@
             </span>  <br>
         <?php } ?>
         
-        <?php if($data['space_user']) { ?>
+        <!--
             <label class="required">Владеет:</label>
             <span class="d">
-                <a title="Пространство <?= $data['space_user']['space_name']; ?>" href="/s/<?= $data['space_user']['space_slug']; ?>">
-                    <?= $data['space_user']['space_name']; ?>
-                </a>
+                
             </span>  
             <br>
-        <?php } ?>
+       -->
         
         <label class="required">О себе:</label>
         <span class="na about">
@@ -104,13 +102,14 @@
                                 <?= $user['login']; ?>
                             </a> 
                         </span>
+   
                         <span class="date"> 
                            <?= $post['post_date'] ?>
                         </span>
-                        <?php if($post['post_comments'] !=0) { ?> 
+                        <?php if($post['post_answers_num'] !=0) { ?> 
                             <span class="otst"> | </span>
                             <a class="u-url" href="/posts/<?= $post['post_slug']; ?>">
-                               <?= $post['post_comments']; ?>   комментариев
+                              ответов <?= $post['post_answers_num']; ?>  
                             </a>
                         <?php } ?>
                     </div>

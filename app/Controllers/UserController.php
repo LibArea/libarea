@@ -17,24 +17,13 @@ class UserController extends \MainController
         $uid    = Base::getUid();
         $users  = UserModel::getUsersAll($uid['id']);
         
-        $result = Array();
-        foreach($users as $ind => $row){
-             
-            if(!$row['avatar'] ) {
-                $row['avatar'] = 'noavatar.png';
-            } 
- 
-            $row['avatar']        = $row['avatar'];
-            $result[$ind]         = $row;
-        } 
-        
         $data = [
             'h1'            => lang('Users'),
             'title'         => lang('Users') . ' | ' . $GLOBALS['conf']['sitename'],
             'description'   => lang('desc-user-all') . ' ' . $GLOBALS['conf']['sitename'],
         ];
 
-        return view(PR_VIEW_DIR . '/user/all', ['data' => $data, 'uid' => $uid, 'users' => $result]);
+        return view(PR_VIEW_DIR . '/user/all', ['data' => $data, 'uid' => $uid, 'users' => $users]);
     }
 
     // Страница участника
@@ -51,10 +40,6 @@ class UserController extends \MainController
 
         $post = PostModel::getPostId($user['my_post']);
 
-        if(!$user['avatar'] ) {
-            $user['avatar'] = 'noavatar.png';
-        } 
-
         $uid  = Base::getUid();
         $data =[
           'h1'              => $user['login'] . ' - профиль',
@@ -64,7 +49,6 @@ class UserController extends \MainController
           'trust_level'     => UserModel::getUserTrust($user['id']),
           'post_num_user'   => UserModel::getUsersPostsNum($user['id']),
           'comm_num_user'   => UserModel::getUsersCommentsNum($user['id']),
-          'space_user'      => SpaceModel::getSpaceId($user['my_space_id']),
         ];
 
         return view(PR_VIEW_DIR . '/user/profile', ['data' => $data, 'uid' => $uid, 'user' => $user, 'post' => $post]);
@@ -83,10 +67,6 @@ class UserController extends \MainController
             redirect('/u/' . $user['login'] . '/setting');
         }
         
-        if(!$user['avatar']) {
-            $user['avatar'] = 'noavatar.png';
-        }
-
         $data = [
           'h1'          => lang('Setting profile'),
           'title'       => lang('Setting profile'),
@@ -205,20 +185,21 @@ class UserController extends \MainController
             $image = new ImageUpload('image'); 
             
             $image->resize(110, 110, 'crop');            
-            $img = $image->saveTo($path_img, $uid['user_id']);
+            $img = $image->saveTo($path_img, $uid['id']);
             
             $image->resize(16, 16);            
-            $image->saveTo($path_img_small, $uid['user_id']);
+            $image->saveTo($path_img_small, $uid['id']);
             
-            // Получим страую если оно есть, удаляем
             $avatar = UserModel::getAvatar($uid['login']);
             
-            // Удаляем старые аватарки
-            chmod($path_img . $avatar['avatar'], 0777);
-            chmod($path_img_small . $avatar['avatar'], 0777);
-            unlink($path_img . $avatar['avatar']);
-            unlink($path_img_small . $avatar['avatar']);
-
+            // Удалим старую аватарку, кроме дефолтной
+            if($avatar['avatar'] != 'noavatar.png') {
+                chmod($path_img . $avatar['avatar'], 0777);
+                chmod($path_img_small . $avatar['avatar'], 0777);
+                unlink($path_img . $avatar['avatar']);
+                unlink($path_img_small . $avatar['avatar']);
+            }            
+            
             // Запишем новую 
             UserModel::setAvatar($uid['login'], $img);
             
@@ -287,16 +268,10 @@ class UserController extends \MainController
         $result = Array();
         foreach($fav as $ind => $row){
              
-            if(!$row['avatar'] ) {
-                $row['avatar']  = 'noavatar.png';
-            } 
-        
             $row['post_date']       = (empty($row['post_date'])) ? $row['post_date'] : Base::ru_date($row['post_date']);
-
-            $row['avatar']          = $row['avatar'];  
-            $row['comment_content'] = $Parsedown->text($row['comment_content']);
+            $row['answer_content'] = $Parsedown->text($row['answer_content']);
             $row['date']            = $row['post_date'];
-            $row['post']            = PostModel::getPostId($row['comment_post_id']);
+            $row['post']            = PostModel::getPostId($row['answer_post_id']);
             $result[$ind]           = $row;
         }
         
@@ -354,25 +329,14 @@ class UserController extends \MainController
         }
 
         $Invitation = UserModel::InvitationResult($uid['id']);
-        
-        $result = Array();
-        foreach($Invitation as $ind => $row){
-             
-            if(!$row['avatar'] ) {
-                $row['avatar']  = 'noavatar.png';
-            } 
-
-            $row['avatar']          = $row['avatar'];  
-            $result[$ind]           = $row;
-        }
-
+ 
         $data = [
           'h1'          => lang('Invites'),
           'title'       => lang('Invites') . ' | ' . $GLOBALS['conf']['sitename'],
           'description' => lang('Invites') . ' - ' . $GLOBALS['conf']['sitename'], 
         ];
 
-        return view(PR_VIEW_DIR . '/user/invitation', ['data' => $data, 'uid' => $uid, 'user' => $user,  'result' => $result]);  
+        return view(PR_VIEW_DIR . '/user/invitation', ['data' => $data, 'uid' => $uid, 'user' => $user,  'result' => $Invitation]);  
     }
     
     // Создать инвайт

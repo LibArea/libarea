@@ -43,10 +43,9 @@
                         <span class="date"> 
                             <?php echo $post['post_date']; ?>
                         </span>
-                        <?php if($post['post_comments'] !=0) { ?> 
+                        <?php if($post['post_answers_num'] !=0) { ?> 
                             <span class="otst"> | </span>
-                            комментариев (<?php echo $post['post_comments'] ?>) 
-                             
+                            ответов (<?php echo $post['post_answers_num'] ?>) 
                         <?php } ?>
                     </div>  
                 </div>

@@ -8,11 +8,14 @@ use Base;
 class FlowController extends \MainController
 {
     // Страница потока (flow_action_id):
-    // 1 - add post
-    // 2 - add comment
-    // 3 - up post
-    // 4 - up comment
-    // 5 - chat
+    // 1 - сообщение (сюда не выводятся)
+    // 2 - пост
+    // 3 - ответ
+    // 4 - комментарий
+    // 5 - пост в чат
+    // 6 - понравился пост
+    // 7 - понравился ответ
+    
     public function index()
     {
         $account    = \Request::getSession('account');
@@ -33,15 +36,8 @@ class FlowController extends \MainController
         
         $result = Array();
         foreach($flows as $ind => $row){
-             
-            if(!$row['avatar']) {
-                $row['avatar'] = 'noavatar.png';
-            } 
-
-            $row['avatar']          = $row['avatar'];
             $row['flow_pubdate']    = Base::ru_date($row['flow_pubdate']);
             $result[$ind]           = $row;
-         
         } 
         
         $uid  = Base::getUid();

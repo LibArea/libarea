@@ -6,6 +6,7 @@
         <?php if (!empty($favorite)) { ?>
       
             <?php $counter = 0; foreach ($favorite as $fav) { $counter++; ?> 
+            
                 <?php if ($fav['favorite_type'] == 1) { ?> 
                     <div class="voters-fav">
                        <div class="score"><?= $counter; ?>.</div> 
@@ -27,11 +28,11 @@
                             <span class="date"> 
                                 <?= $fav['date']; ?>
                             </span>
-                            <?php if($fav['post_comments'] !=0) { ?> 
+                            <?php if($fav['post_answers'] !=0) { ?> 
                                 <span class="otst"> | </span>
                                 
                              <a href="/posts/<?= $fav['post_slug']; ?>">    
-                                комментариев (<?= $fav['post_comments'] ?>) 
+                                комментариев (<?= $fav['post_answers'] ?>) 
                             </a>     
                             <?php } ?>
                             <?php if($uid['id'] > 0) { ?>
@@ -48,8 +49,8 @@
                     <div class="voters-fav">
                        <div class="score"><?= $counter; ?>.</div> 
                     </div>
-                    <div class="post-telo fav-comm">
-                        <a class="u-url"  href="/posts/<?= $fav['post']['post_slug']; ?>#comm_<?= $fav['comment_id']; ?>">
+                    <div class="post-telo fav-answ">
+                        <a class="u-url"  href="/posts/<?= $fav['post']['post_slug']; ?>#answ_<?= $fav['answer_id']; ?>">
                            <h3 class="titl"><?= $fav['post']['post_title']; ?></h3>
                         </a>
                         <div class="space-color space_<?= $fav['post']['space_color'] ?>"></div>
@@ -58,13 +59,13 @@
                         </a>
                                                 <?php if($uid['id'] > 0) { ?>
                             <?php if($uid['id'] == $fav['favorite_uid']) { ?>
-                                <span class="user-comm-fav right" data-comm="<?= $fav['comment_id']; ?>">
+                                <span class="user-answ-fav right" data-answ="<?= $fav['answer_id']; ?>">
                                      <span class="favcomm">убрать</span>
                                 </span>  
                             <?php } ?>                                
                         <?php } ?>
-                        <div class="telo-fav-comm">
-                            <?= $fav['comment_content']; ?>
+                        <div class="telo-fav-answ">
+                            <?= $fav['answer_content']; ?>
                         </div>
                     </div>
                 <?php } ?>

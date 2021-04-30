@@ -22,18 +22,11 @@ class AdminController extends \MainController
         
         $result = Array();
         foreach($user_all as $ind => $row){
-             
-            if(!$row['avatar'] ) {
-                $row['avatar'] = 'noavatar.png';
-            } 
-            
+
             $row['logs_date'] = (empty($row['logs_date'])) ? null : Base::ru_date($row['logs_date']);
-            
-            $row['avatar']        = $row['avatar'];  
             $row['replayIp']      = AdminModel::replayIp($row['reg_ip']);
             $row['isBan']         = AdminModel::isBan($row['id']);
             $row['created_at']    = Base::ru_date($row['created_at']); 
-            $row['logs_date']     = $row['logs_date'];
             $row['updated_at']    = Base::ru_date($row['updated_at']);
             $result[$ind]         = $row;
          
@@ -77,10 +70,6 @@ class AdminController extends \MainController
 
         $result = Array();
         foreach($comm  as $ind => $row){
-            if(!$row['avatar']) {
-                $row['avatar'] = 'noavatar.png';
-            } 
-            $row['avatar']  = $row['avatar'];
             $row['content'] = $Parsedown->text($row['comment_content']);
             $row['date']    = Base::ru_date($row['comment_date']);
             $result[$ind]   = $row;
@@ -123,12 +112,8 @@ class AdminController extends \MainController
  
         $result = Array();
         foreach($invite  as $ind => $row){
-            if(!$row['avatar']) {
-                $row['avatar'] = 'noavatar.png';
-            } 
             $row['uid']         = UserModel::getUserId($row['uid']);  
             $row['active_time'] = Base::ru_date($row['active_time']);
-            $row['avatar']      = $row['avatar'];
             $result[$ind]       = $row;
         }
 
@@ -163,28 +148,13 @@ class AdminController extends \MainController
         }  
         
         $space      = AdminModel::getAdminSpaceAll($uid['id']);
-         
-        $result = Array();
-        foreach($space  as $ind => $row){
-            
-            if(!$row['space_img'] ) {
-                $row['space_img'] = 'space_no.png';
-            } 
-
-           if(!$row['avatar'] ) {
-                $row['avatar'] = 'noavatar.png';
-           } 
-
-            $space['space_img'] = $row['space_img'];
-            $result[$ind]       = $row;
-        }
-
+        
         $data = [
             'h1'          => 'Пространства',
             'title'       => 'Пространства' . ' | ' . $GLOBALS['conf']['sitename'],
         ]; 
  
-        return view(PR_VIEW_DIR . '/admin/space', ['data' => $data, 'uid' => $uid, 'space' => $result]);
+        return view(PR_VIEW_DIR . '/admin/space', ['data' => $data, 'uid' => $uid, 'space' => $space]);
     }
     
     // Добавить пространство администратору

@@ -24,14 +24,9 @@ class Base
                 redirect('/info/restriction');
             }
 
-            if(!$usr['avatar'] ) {
-                $usr['avatar'] = 'noavatar.png';
-            } 
-            
             $uid['id']          = $usr['id'];
             $uid['login']       = $usr['login']; 
             $uid['trust_level'] = $usr['trust_level'];
-            $uid['my_space_id'] = $usr['my_space_id'];
             $uid['notif']       = NotificationsModel::usersNotification($usr['id']); 
             $uid['avatar']      = $usr['avatar'];
         } else {
@@ -141,6 +136,20 @@ class Base
                 $gram_num_record = lang('comments');
             }  elseif($numres == 21){
                 $gram_num_record = lang('comment');
+            }
+        }
+        
+        if($type == 'answ'){
+            if($numres == 1){
+                $gram_num_record = 'ответ'; 
+            } elseif($numres == 0){
+                $gram_num_record = 'ответов';
+            } elseif($numres < 5){
+                $gram_num_record = 'ответа';
+            } elseif($numres < 21){
+                $gram_num_record = 'ответов';
+            }  elseif($numres == 21){
+                $gram_num_record = 'ответ';
             }
         }
         

@@ -28,7 +28,7 @@ class UserModel extends \MainModel
     // Получение информации по логину
     public static function getUserLogin($login)
     {
-        $query = XD::select(['id', 'login', 'name', 'email', 'avatar', 'invitation_available', 'about', 'created_at', 'my_post', 'my_space_id'])
+        $query = XD::select(['id', 'login', 'name', 'email', 'avatar', 'invitation_available', 'about', 'created_at', 'my_post'])
                 ->from(['users'])
                 ->where(['login'], '=', $login);
 
@@ -38,7 +38,7 @@ class UserModel extends \MainModel
     // Получение информации по id
     public static function getUserId($id)
     {
-        $query = XD::select(['id', 'login', 'name', 'email', 'avatar', 'invitation_available',  'about', 'trust_level', 'my_space_id', 'ban_list'])
+        $query = XD::select(['id', 'login', 'name', 'email', 'avatar', 'invitation_available',  'about', 'trust_level',  'ban_list'])
                 ->from(['users'])
                 ->where(['id'], '=', $id);
 
@@ -102,12 +102,12 @@ class UserModel extends \MainModel
         $sql = "SELECT favorite.*, 
                        users.id, users.login, users.avatar, 
                        posts.*, 
-                       comments.*, 
+                       answers.*, 
                        space.*
                 fROM favorite
                 LEFT JOIN users ON users.id = favorite.favorite_uid
                 LEFT JOIN posts ON posts.post_id = favorite.favorite_tid AND favorite.favorite_type = 1
-                LEFT JOIN comments ON comments.comment_id = favorite.favorite_tid AND favorite.favorite_type = 2
+                LEFT JOIN answers ON answers.answer_id = favorite.favorite_tid AND favorite.favorite_type = 2
                 LEFT JOIN space ON  space.space_id = posts.post_space_id
                 WHERE favorite.favorite_uid = $uid LIMIT 25 "; 
                         

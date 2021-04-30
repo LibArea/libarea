@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\NotificationsModel;
 use App\Models\SearchModel;
 use Parsedown;
 use Base;
@@ -74,14 +73,6 @@ class SearchController extends \MainController
         
         $result = Array();
         foreach($post as $ind => $row){
-             
-            if(!$row['avatar']) {
-                $row['avatar']  = 'noavatar.png';
-            } 
- 
-            $row['avatar']          = $row['avatar'];
-            $row['post_title']      = $row['post_title'];
-            $row['post_slug']       = $row['post_slug'];
             $row['post_date']       = Base::ru_date($row['post_date']);
             $row['num_comments']    = Base::ru_num('comm', $row['post_comments']);
             $result[$ind]           = $row;

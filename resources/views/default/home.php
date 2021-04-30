@@ -77,10 +77,10 @@
                         <span class="date"> 
                            <?= $post['post_date'] ?>
                         </span>
-                        <?php if($post['post_comments'] !=0) { ?> 
+                        <?php if($post['post_answers_num'] !=0) { ?> 
                             <span class="otst"> | </span>
                             <a class="u-url" href="/posts/<?= $post['post_slug']; ?>">
-                               <?= $post['post_comments']; ?>  <?= $post['num_comments']; ?>  
+                               <?= $post['post_answers_num']; ?>  <?= $post['num_answers']; ?>  
                             </a>
                         <?php } ?>
                     </div>
@@ -120,14 +120,14 @@
         </div>    
     <?php } ?>
 
-    <?php foreach ($data['latest_comments'] as  $comm) { ?>
-        <div class="sb-telo comm-space-color-<?= $comm['space_color']; ?>">
+    <?php foreach ($data['latest_answers'] as  $answ) { ?>
+        <div class="sb-telo comm-space-color-<?= $answ['space_color']; ?>">
             <div class="sb-date"> 
-                <img class="ava" alt="<?= $comm['login']; ?>" src="/uploads/avatar/small/<?= $comm['comment_avatar']; ?>">
-                <?= $comm['comment_date']; ?>
+                <img class="ava" alt="<?= $answ['login']; ?>" src="/uploads/avatar/small/<?= $answ['avatar']; ?>">
+                <?= $answ['answer_date']; ?>
             </div> 
-            <a href="/posts/<?= $comm['post_slug']; ?>#comm_<?= $comm['comment_id']; ?>">
-                <?= $comm['comment_content']; ?>...  
+            <a href="/posts/<?= $answ['post_slug']; ?>#answ_<?= $answ['answer_id']; ?>">
+                <?= $answ['answer_content']; ?>...  
             </a>
        </div>
     <?php } ?>   

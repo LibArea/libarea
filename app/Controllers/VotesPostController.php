@@ -62,7 +62,7 @@ class VotesPostController extends \MainController
  
             // Добавим в чат и в поток
             $data_flow = [
-                'flow_action_id'    => 3, // голосование за пост
+                'flow_action_id'    => 6, // голосование за пост
                 'flow_content'      => '',
                 'flow_user_id'      => $user_id,
                 'flow_pubdate'      => $date,

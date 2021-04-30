@@ -2,15 +2,15 @@
 document.querySelectorAll(".addcomm")
   .forEach(el => el.addEventListener("click",  function(e){ 
   
-    var comm_id  = this.dataset.id;
+    var answ_id  = this.dataset.answ_id;
     var post_id  = this.dataset.post_id;
     
-    var comm = document.querySelector('#cm_addentry'+comm_id);
-    var sss = comm.classList.add("active");
+    var comm = document.querySelector('#answ_addentry'+answ_id);
+        comm.classList.add("active");
      
     fetch("/comments/addform", { 
         method: "POST",
-        body: "comm_id=" + comm_id + "&post_id=" + post_id,
+        body: "answ_id=" + answ_id + "&post_id=" + post_id,
         headers:{'Content-Type': 'application/x-www-form-urlencoded'} 
         })
         .then(
@@ -23,7 +23,7 @@ document.querySelectorAll(".addcomm")
             }
         );
         
-        document.querySelectorAll('#cm_addentry_noauth'+comm_id)
+        document.querySelectorAll('#cm_addentry_noauth'+answ_id)
             .forEach(el => el.addEventListener("click",  function(e){ 
            // console.log(e);
             if(e.path) {
@@ -32,6 +32,42 @@ document.querySelectorAll(".addcomm")
         }));
          
 })); 
+
+document.querySelectorAll(".addcomm_re")
+  .forEach(el => el.addEventListener("click",  function(e){ 
+  
+    var post_id  = this.dataset.post_id;
+    var answ_id  = this.dataset.answ_id;
+    var comm_id  = this.dataset.comm_id;
+    
+    var comm = document.querySelector('#comm_addentry'+comm_id);
+        comm.classList.add("active");
+     
+    fetch("/comments/addform", { 
+        method: "POST",
+        body: "answ_id=" + answ_id + "&post_id=" + post_id + "&comm_id=" + comm_id,
+        headers:{'Content-Type': 'application/x-www-form-urlencoded'} 
+        })
+        .then(
+            response => {
+                return response.text();
+            }
+        ).then(
+            text => {
+                comm.innerHTML = text;
+            }
+        );
+        
+        document.querySelectorAll('#comm_addentry_noauth'+answ_id)
+            .forEach(el => el.addEventListener("click",  function(e){ 
+           // console.log(e);
+            if(e.path) {
+                e.path[3].classList.remove("active");
+            }
+        }));
+         
+})); 
+
 
 // We will show a preview of the post on the central page
 document.querySelectorAll(".showpost")

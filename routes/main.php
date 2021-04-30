@@ -47,11 +47,19 @@ Route::before('Authorization@noAuth')->getGroup();
     Route::type('post')->get('/flow/del')->controller('FlowController@deleteFlow');
     
 	// Добавление комментария / удаление 
-    Route::type('post')->get('/comments/editform')->controller('CommentController@editform');
+    Route::type('post')->get('/comment/editform')->controller('CommentController@editFormComment');
     Route::type('post')->protect()->get('/comment/edit')->controller('CommentController@editComment');
-	Route::type('post')->protect()->get('/comment/add')->controller('CommentController@create');
+	Route::type('post')->protect()->get('/comment/add')->controller('CommentController@createComment');
     Route::type('post')->get('/comment/del')->controller('CommentController@deletComment');
     Route::type('post')->get('/comment/addfavorite')->controller('CommentController@addCommentFavorite');
+
+
+	// Добавление ответов / удаление 
+    Route::type('post')->get('/answer/editform')->controller('AnswerController@editFormAnswer');
+    Route::type('post')->protect()->get('/answer/edit')->controller('AnswerController@editAnswer');
+	Route::type('post')->protect()->get('/answer/add')->controller('AnswerController@createAnswer');
+    Route::type('post')->get('/answer/del')->controller('AnswerController@deletAnswer');
+    Route::type('post')->get('/answer/addfavorite')->controller('AnswerController@addAnswerFavorite');
 
 	// Помещаем свой пост в профиль
 	Route::type('post')->get('/post/addpostprof')->controller('PostController@addPostProf');
@@ -88,6 +96,7 @@ Route::before('Authorization@noAuth')->getGroup();
 	// Голосуем
 	Route::type('post')->get('/votes/comm')->controller('VotesCommController@votes');
     Route::type('post')->get('/votes/post')->controller('VotesPostController@votes');
+    Route::type('post')->get('/votes/answ')->controller('VotesAnswController@votes');
 Route::endGroup();
 
 Route::before('Authorization@yesAuth')->getGroup();
@@ -142,7 +151,7 @@ Route::get('/space')->controller('SpaceController');
 Route::get('/s/{slug}/{tags?}')->controller('SpaceController@spacePosts')->where(['slug' => '[A-Za-z0-9]+',  'tags' => '[0-9]+']);
 
 // Вызов формы комментария
-Route::type('post')->get('/comments/addform')->controller('CommentController@addform');
+Route::type('post')->get('/comments/addform')->controller('CommentController@addFormComm');
 
 // Поиск
 Route::type(['get','post'])->get('/search')->controller('SearchController');

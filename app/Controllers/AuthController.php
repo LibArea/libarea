@@ -240,7 +240,6 @@ class AuthController extends \MainController
                 'login'         => $uInfo['login'],
                 'avatar'        => $uInfo['avatar'],
                 'trust_level'   => $uInfo['trust_level'],
-                'my_space_id'   => $uInfo['my_space_id'],
             ];
             
             $last_ip = Request::getRemoteAddress();  

@@ -5,12 +5,22 @@ use XdORM\XD;
 
 class FlowModel extends \MainModel
 {
+    
+    // $flow_action_id
+    // 1 - сообщение (сюда не выводятся)
+    // 2 - пост
+    // 3 - ответ
+    // 4 - комментарий
+    // 5 - пост в чат
+    // 6 - понравился пост
+    // 7 - понравился ответ
+    
     public static function getFlowAll()
     {
         $q = XD::select('*')->from(['flow_log']);
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['flow_user_id'])
-                ->where(['flow_action_id'], '!=', 3) // 3 - up post
-                ->and(['flow_action_id'], '!=', 4)   // 4 - up comment
+                ->where(['flow_action_id'], '!=', 2) // 2 - post
+                ->and(['flow_action_id'], '!=', 3)   // 3 - answer
                 ->orderBy(['flow_id'])->desc()->limit(15);
 
         $result = $query->getSelect();

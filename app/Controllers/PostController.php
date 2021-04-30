@@ -4,6 +4,7 @@ namespace App\Controllers;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\PostModel;
 use App\Models\SpaceModel;
+use App\Models\AnswerModel;
 use App\Models\CommentModel;
 use App\Models\VotesPostModel;
 use Base;
@@ -31,40 +32,27 @@ class PostController extends \MainController
 
         $result = Array();
         foreach($posts as $ind => $row){
-             
-            if(!$row['avatar']) {
-                $row['avatar'] = 'noavatar.png';
-            } 
             
             if(Base::getStrlen($row['post_url']) > 6) {
                 $parse = parse_url($row['post_url']);
                 $row['post_url'] = $parse['host'];  
             } 
             
-            $row['post_url']            = $row['post_url'];
-            $row['avatar']              = $row['avatar'];
-            $row['num_comments']        = Base::ru_num('comm', $row['post_comments']);
+            $row['num_answers']         = Base::ru_num('answ', $row['post_answers_num']);
             $row['post_date']           = Base::ru_date($row['post_date']);
             $result[$ind]               = $row;
          
         }  
  
         // Последние комментарии и отписанные пространства
-        $latest_comments = CommentModel::latestComments($uid['id']);
+        $latest_answers = AnswerModel::latestAnswers($uid['id']);
         $space_hide      = SpaceModel::getSpaceUser($uid['id']);
 
         $result_comm = Array();
-        foreach($latest_comments as $ind => $row){
-            
-            if(!$row['avatar'] ) {
-                $row['avatar'] = 'noavatar.png';
-            } 
-   
-            $row['comment_avatar']     = $row['avatar'];
-            $row['comment_content']    = htmlspecialchars(mb_substr($row['comment_content'],0,81, 'utf-8'));  
-            $row['comment_date']       = Base::ru_date($row['comment_date']);
+        foreach($latest_answers as $ind => $row){
+            $row['answer_content']    = htmlspecialchars(mb_substr($row['answer_content'],0,81, 'utf-8'));  
+            $row['answer_date']       = Base::ru_date($row['answer_date']);
             $result_comm[$ind]         = $row;
-         
         }
 
         if($page > 1) { 
@@ -74,12 +62,12 @@ class PostController extends \MainController
         }
 
         $data = [
-            'title'            => lang('Home') . 'Главная | ' . $GLOBALS['conf']['sitename'] . $num, 
-            'description'      => lang('home-desc') . ' ' . $GLOBALS['conf']['sitename'] . $num,
-            'space_hide'       => $space_hide,
-            'latest_comments'  => $result_comm,
-            'pagesCount'       => $pagesCount,
-            'pNum'             => $page,
+            'title'             => lang('Home') . 'Главная | ' . $GLOBALS['conf']['sitename'] . $num, 
+            'description'       => lang('home-desc') . ' ' . $GLOBALS['conf']['sitename'] . $num,
+            'space_hide'        => $space_hide,
+            'latest_answers'    => $result_comm,
+            'pagesCount'        => $pagesCount,
+            'pNum'              => $page,
         ];
 
         return view(PR_VIEW_DIR . '/home', ['data' => $data, 'uid' => $uid, 'posts' => $result]);
@@ -96,16 +84,9 @@ class PostController extends \MainController
  
         $result = Array();
         foreach($posts as $ind => $row){
-             
-            if(!$row['avatar'] ) {
-                $row['avatar'] = 'noavatar.png';
-            } 
- 
-            $row['avatar']        = $row['avatar'];
             $row['num_comments']  = Base::ru_num('comm', $row['post_comments']);
             $row['post_date']     = Base::ru_date($row['post_date']);
             $result[$ind]         = $row;
-         
         }  
         
         // Последние комментарии
@@ -113,16 +94,9 @@ class PostController extends \MainController
         
         $result_comm = Array();
         foreach($latest_comments as $ind => $row){
-            
-            if(!$row['avatar'] ) {
-                $row['avatar'] = 'noavatar.png';
-            } 
-   
-            $row['comment_avatar']     = $row['avatar'];
             $row['comment_content']    = htmlspecialchars(mb_substr($row['comment_content'],0,81, 'utf-8'));  
             $row['comment_date']       = Base::ru_date($row['comment_date']);
             $result_comm[$ind]         = $row;
-         
         }
         
         $uid  = Base::getUid();
@@ -153,9 +127,9 @@ class PostController extends \MainController
         // Получим пост по slug
         $slug = \Request::get('slug');
         
-        $post = []; 
+       // $post = []; 
         $post = PostModel::getPost($slug, $uid);
- 
+
         // Если нет поста
         if (empty($post))
         {
@@ -166,10 +140,6 @@ class PostController extends \MainController
         // Рекомендованные посты
         $recommend = PostModel::PostsSimilar($post['post_id'], $post['post_space_id'], $uid);
      
-        if(!$post['avatar']) {
-            $post['avatar'] = 'noavatar.png';
-        }
-  
         // Выводить или нет? Что дает просмотр даты изменения?
         // Учитывать ли изменение в сортировки и в оповещение в будущем...
         if($post['post_date'] != $post['edit_date']) {
@@ -187,52 +157,44 @@ class PostController extends \MainController
         }
         
         // Обработает некоторые поля
-        $post['content']        = $Parsedown->text($post['post_content']);
+        $post['content']         = $Parsedown->text($post['post_content']);
         $post['post_url']       = $post['post_url'];
         $post['post_url_full']  = $post['post_url_full'];
         $post['post_date']      = Base::ru_date($post['post_date']);
         $post['edit_date']      = $post['edit_date'];
-        $post['avatar']         = $post['avatar'];
-        $post['num_comments']   = Base::ru_num('comm', $post['post_comments']); 
+        $post['num_answers']    = Base::ru_num('answ', $post['post_answers_num']); 
         $post['favorite_post']  = PostModel::getMyPostFavorite($post['post_id'], $uid);
         
-        // Получим комментарии
-        $post_comments = CommentModel::getCommentsPost($post['post_id'], $uid);
- 
+        // Получим ответы
+        $post_answers = AnswerModel::getAnswersPost($post['post_id'], $uid);
+  
         // Получим ЛО (временно)
         // Возможно нам стоит просто поднять ответ на первое место?
         // Изменив порядок сортировки при выбора LO, что позволит удрать это
         if($post['post_lo'] > 0) {
-            $lo = CommentModel::getCommentLo($post['post_id']);
+            $lo = AnswerModel::getAnswerLo($post['post_id']);
+            $lo['answer_content'] = $Parsedown->text($lo['answer_content']);
         } else {
             $lo = null;
         }
 
-        $comments = Array();
-        foreach($post_comments as $ind => $row){
+        $answers = Array();
+        foreach($post_answers as $ind => $row){
             
-            if(!$row['avatar']) {
-                $row['avatar']  = 'noavatar.png';
-            } 
-            
-            if(strtotime($row['comment_modified']) < strtotime($row['comment_date'])) {
+            if(strtotime($row['answer_modified']) < strtotime($row['answer_date'])) {
                 $row['edit'] = 1;
             }
- 
-            $row['comment_on']          = $row['comment_on'];  
-            $row['avatar']              = $row['avatar'];
-            $row['content']             = $Parsedown->text($row['comment_content']);
-            $row['comment_date']        = Base::ru_date($row['comment_date']);
-            $row['after']               = $row['comment_after'];
-            $row['del']                 = $row['comment_del'];
-            $row['favorite_comm']       = CommentModel::getMyCommentFavorite($row['comment_id'], $uid);
-            $comments[$ind]             = $row;
+
+            $row['comm']                = CommentModel::getCommentsAnswer($row['answer_id'], $uid);
+            $row['content']             = $Parsedown->text($row['answer_content']);
+            $row['answer_date']         = Base::ru_date($row['answer_date']);
+            $row['after']               = $row['answer_after'];
+            $row['del']                 = $row['answer_del'];
+            $row['favorite_answ']       = AnswerModel::getMyAnswerFavorite($row['answer_id'], $uid);
+            $answers[$ind]              = $row;
          
         }
        
-        // Комментарии
-        $comms = $this->buildTree(0, 0, $comments);
-        
         // Перенести в метод, т.к. некобходимо формировать og:* и т.д.
         $description = htmlspecialchars(substr(strip_tags($post['post_content']), 0, 160));
 
@@ -242,22 +204,9 @@ class PostController extends \MainController
             'description'  => $description . ' — ' . $GLOBALS['conf']['sitename']
         ]; 
         
-        return view(PR_VIEW_DIR . '/post/view', ['data' => $data, 'post' => $post, 'comms' => $comms,  'uid' => $uid,  'recommend' => $recommend,  'lo' => $lo]);
+        return view(PR_VIEW_DIR . '/post/view', ['data' => $data, 'post' => $post, 'answers' => $answers,  'uid' => $uid,  'recommend' => $recommend,  'lo' => $lo]);
     }
 
-    // Для дерева комментариев
-     private function buildTree($comment_on , $level, $comments, $tree=array()){
-        $level++;
-        foreach($comments as $comment){
-            if ($comment['comment_on'] == $comment_on ){
-                $comment['level'] = $level-1;
-                $tree[] = $comment;
-                $tree = $this->buildTree($comment['comment_id'], $level, $comments, $tree);
-            }
-        }
-		return $tree;
-    }
-    
     // Посты участника
     public function userPosts()
     {
@@ -275,17 +224,8 @@ class PostController extends \MainController
         
         $result = Array();
         foreach($post_user as $ind => $row){
-             
-            if(!$row['avatar']) {
-                $row['avatar']  = 'noavatar.png';
-            } 
- 
-            $row['avatar']      = $row['avatar'];
-            $row['post_title']  = $row['post_title'];
-            $row['post_slug']   = $row['post_slug'];
             $row['post_date']   = Base::ru_date($row['post_date']);
             $result[$ind]       = $row;
-         
         }
  
         $uid  = Base::getUid();

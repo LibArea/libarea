@@ -43,23 +43,13 @@ class SpaceController extends \MainController
   
         $posts = SpaceModel::getSpacePosts($space['space_id'], $uid['id'], $space_tags_id);
 
-        if(!$space['space_img'] ) {
-            $space['space_img'] = 'space_no.png';
-        } 
-
         $space['space_date']        = Base::ru_date($space['space_date']);
         $space['space_cont_post']   = count($posts);
         
         $result = Array();
         foreach($posts as $ind => $row){
-             
-            if(!$row['avatar'] ) {
-                $row['avatar']  = 'noavatar.png';
-            }  
-            $row['avatar']        = $row['avatar'];
-            $row['num_comments']  = Base::ru_num('comm', $row['post_comments']);
+            $row['num_comments']  = Base::ru_num('answ', $row['post_answers_num']);
             $result[$ind]         = $row;
-
         }  
 
         $tags = SpaceModel::getSpaceTags($space['space_id']);
@@ -88,10 +78,6 @@ class SpaceController extends \MainController
         if ($uid['trust_level'] != 5 && $space['space_user_id'] != $uid['id']) {
             redirect('/');
         }
-
-        if(!$space['space_img'] ) {
-            $space['space_img'] = 'space_no.png';
-        } 
 
         $data = [
             'h1'            => 'Изменение - ' . $slug,
@@ -184,7 +170,8 @@ class SpaceController extends \MainController
                 $image->resize(18, 18);            
                 $image->saveTo($path_img_small, $space_id. '_space');
                 
-                if($space['space_img']){
+                // Удалим, кроме дефолтной
+                if($space['space_img'] != 'space_no.png'){
                     chmod($path_img . $space['space_img'], 0777);
                     chmod($path_img_small . $space['space_img'], 0777);
                     unlink($path_img . $space['space_img']);
@@ -326,10 +313,8 @@ class SpaceController extends \MainController
         }  
   
         // Если пользователь уже создал пространство
-        if ($uid['my_space_id'] != 0) {
-            redirect('/');
-        }  
-   
+        // Ограничить по TL количество + не показывать кнопку добавления
+     
         $data = [
             'h1'          => 'Добавить пространство',
             'title'       => 'Добавить пространство' . ' | ' . $GLOBALS['conf']['sitename'],

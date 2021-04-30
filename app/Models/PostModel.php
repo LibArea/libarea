@@ -33,7 +33,7 @@ class PostModel extends \MainModel
             $display = '';
         }
 
-        $sql = "SELECT p.post_id, p.post_title, p.post_slug, p.post_user_id, p.post_space_id, p.post_comments, p.post_date, p.post_votes, p.post_is_delete, p.post_closed, p.post_lo, p.post_top, p.post_url, p.post_content_preview, p.post_content_img,
+        $sql = "SELECT p.post_id, p.post_title, p.post_slug, p.post_user_id, p.post_space_id, p.post_answers_num, p.post_date, p.post_votes, p.post_is_delete, p.post_closed, p.post_lo, p.post_top, p.post_url, p.post_content_preview, p.post_content_img,
                 u.id, u.login, u.avatar,
                 v.votes_post_item_id, v.votes_post_user_id,  
                 s.space_id, s.space_slug, s.space_name, space_color
@@ -45,9 +45,7 @@ class PostModel extends \MainModel
                 $display
                 ORDER BY p.post_id DESC LIMIT 15 OFFSET ".$offset." ";
                         
-        $result = DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
-        
-        return $result;
+        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
     
     // Количество постов
@@ -133,10 +131,22 @@ class PostModel extends \MainModel
     public static function getNumComments($post_id) 
     {
         $post = XD::select('*')->from(['posts'])->where(['post_id'], '=', $post_id)->getSelectOne();
-        $post_comments = $post['post_comments']; // получаем количество комментариев
-        $new_num = $post_comments + 1;           // плюсуем один
+        $post_comments_num = $post['post_comments_num']; // получаем количество ответов
+        $new_num = $post_comments_num + 1;           // плюсуем один
         
-        XD::update(['posts'])->set(['post_comments'], '=', $new_num)->where(['post_id'], '=', $post_id)->run();
+        XD::update(['posts'])->set(['post_comments_num'], '=', $new_num)->where(['post_id'], '=', $post_id)->run();
+     
+        return true;
+    }
+    
+    // Пересчитываем количество ответов в посте
+    public static function getNumAnswers($post_id) 
+    {
+        $post = XD::select('*')->from(['posts'])->where(['post_id'], '=', $post_id)->getSelectOne();
+        $post_answers_num = $post['post_answers_num']; // получаем количество ответов
+        $new_num = $post_answers_num + 1;           // плюсуем один
+        
+        XD::update(['posts'])->set(['post_answers_num'], '=', $new_num)->where(['post_id'], '=', $post_id)->run();
      
         return true;
     }

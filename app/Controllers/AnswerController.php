@@ -2,31 +2,36 @@
 
 namespace App\Controllers;
 use App\Models\CommentModel;
-use App\Models\PostModel;
 use App\Models\AnswerModel;
+use App\Models\PostModel;
 use App\Models\VotesCommentModel;
+use App\Models\VotesAnswerModel;
 use App\Models\NotificationsModel;
 use App\Models\FlowModel;
 use Hleb\Constructor\Handlers\Request;
 use Base;
+use Parsedown;
 
-class CommentController extends \MainController
+class AnswerController extends \MainController
 {
-    // Все комментарии
+    // Все ответы
     public function index()
     {
+        $Parsedown = new Parsedown(); 
+        $Parsedown->setSafeMode(true); // безопасность
+         
         $pg = \Request::getInt('page'); 
         $page = (!$pg) ? 1 : $pg;
         
         $uid        = Base::getUid();
         $user_id    = $uid['id'];
          
-        $pagesCount = CommentModel::getCommentAllCount();  
-        $comm       = CommentModel::getCommentsAll($page, $user_id);
+        $pagesCount = AnswerModel::getAnswersAllCount();  
+        $answ       = AnswerModel::getAnswersAll($page, $user_id);
  
         $result = Array();
-        foreach($comm  as $ind => $row){
- 
+        foreach($answ  as $ind => $row){
+            $row['content'] = $Parsedown->text($row['comment_content']);
             $row['date']    = Base::ru_date($row['comment_date']);
             // N+1 - перенести в запрос
             $row['comm_vote_status'] = VotesCommentModel::getVoteStatus($row['comment_id'], $user_id);
@@ -47,19 +52,19 @@ class CommentController extends \MainController
             'pNum'          => $page,
         ]; 
  
-        return view(PR_VIEW_DIR . '/comment/comm-all', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
+        return view(PR_VIEW_DIR . '/answer/all', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
     }
 
     // Добавление комментария
-    public function createComment()
+    public function createAnswer()
     {
         // Получим относительный url поста для возрата (упростить)
         $url        = str_replace('//', '', $_SERVER['HTTP_REFERER']);
         $return_url = substr($url, strpos($url, '/') + 1);
         
-        $comment = \Request::getPost('comment');
+        $answer = \Request::getPost('answer');
         
-        if (Base::getStrlen($comment) < 6 || Base::getStrlen($comment) > 1024)
+        if (Base::getStrlen($answer) < 6 || Base::getStrlen($answer) > 1024)
         {
             Base::addMsg('Длина комментария должна быть от 6 до 1000 знаков', 'error');
             redirect('/' . $return_url);
@@ -67,8 +72,7 @@ class CommentController extends \MainController
         }
 
         $post_id   = \Request::getPostInt('post_id');   // в каком посту ответ
-        $answ_id   = \Request::getPostInt('answ_id');   // на какой ответ
-        $comm_id   = \Request::getPostInt('comm_id');   // на какой комментарий
+        $answer   = $_POST['answer'];                 // не фильтруем
         $ip        = \Request::getRemoteAddress();      // ip отвечающего 
         
         // id того, кто отвечает
@@ -83,16 +87,16 @@ class CommentController extends \MainController
             redirect('/');
         }
         
-        // Записываем коммент
-        $last_id = CommentModel::commentAdd($post_id, $answ_id, $comm_id, $ip, $comment, $my_id);
+        // Записываем ответ
+        $last_id = AnswerModel::answerAdd($post_id, $ip, $answer, $my_id);
          
-        // Адрес комментария 
-        $url = $return_url . '#comm_' . $last_id; 
+        // Адрес ответа 
+        $url = $return_url . '#answ_' . $last_id; 
          
         // Добавим в чат и поток
         $data_flow = [
-            'flow_action_id'    => 4, // add комментарий
-            'flow_content'      => $comment,  
+            'flow_action_id'    => 3, // add ответы
+            'flow_content'      => $answer, // не фильтруем
             'flow_user_id'      => $my_id,
             'flow_pubdate'      => date("Y-m-d H:i:s"),
             'flow_url'          => $url,
@@ -104,28 +108,21 @@ class CommentController extends \MainController
         ];
         FlowModel::FlowAdd($data_flow);        
          
-        // Пересчитываем количество комментариев для поста + 1
-        PostModel::getNumComments($post_id);
+        // Пересчитываем количество ответов для поста + 1
+        PostModel::getNumAnswers($post_id);
         
-        // Оповещение автору ответа, что есть комментарий
-        if($answ_id) {
-            // Себе не записываем (перенести в общий, т.к. ничего для себя не пишем в notf)
-            $inf_answ = AnswerModel::getAnswerOne($answ_id);
-            if($my_id != $inf_answ['answer_user_id']) {
-                $type = 4; // Ответ на пост        
-                NotificationsModel::send($my_id, $inf_answ['answer_user_id'], $type, $last_id, $url, 1);
-            }
-        }
+        // Оповещение автору поста, что появился ответ
+        // Добавить
         
-        redirect('/' . $return_url . '#comm_' . $last_id); 
+        redirect('/' . $return_url . '#answ_' . $last_id); 
     }
     
-    // Редактируем комментарий
-    public function editComment()
+    // Редактируем посты
+    public function editAnswer()
     {
-        $comm_id    = \Request::getPostInt('comm_id');
+        $answ_id    = \Request::getPostInt('answ_id');
         $post_id    = \Request::getPostInt('post_id');
-        $comment    = \Request::getPost('comment');
+        $answer    = $_POST['answer']; // не фильтруем
         
         // Получим относительный url поста для возрата (упростить)
         $url = str_replace('//', '', $_SERVER['HTTP_REFERER']);
@@ -135,78 +132,79 @@ class CommentController extends \MainController
         $uid        = Base::getUid();
         $user_id    = $uid['id'];
         
-        $comm = CommentModel::getCommentsOne($comm_id);
+        $answ = AnswerModel::getAnswerOne($answ_id);
         
         // Проверим автора комментария и админа
-        if(!$user_id == $comm['comment_user_id']) {
+        if(!$user_id == $answ['answer_user_id']) {
             return true; 
         }
         
         // Редактируем комментарий
-        CommentModel::CommentEdit($comm_id, $comment);
+        AnswerModel::AnswerEdit($answ_id, $answer);
         
-        redirect('/' . $return_url . '#comm_' . $comm_id); 
+        redirect('/' . $return_url . '#answ_' . $answ_id); 
 	}
 
    // Покажем форму редактирования
-	public function editFormComment()
+	public function editFormAnswer()
 	{
-        $comm_id    = \Request::getPostInt('comm_id');
+        $answ_id    = \Request::getPostInt('answ_id');
         $post_id    = \Request::getPostInt('post_id');
-         
-        // id того, кто редактирует
         $uid        = Base::getUid();
-        $user_id    = $uid['id'];
         
-        $comm = CommentModel::getCommentsOne($comm_id);
+        $answ = AnswerModel::getAnswerOne($answ_id);
 
         // Проверим автора комментария и админа
-        if($user_id != $comm['comment_user_id'] && $uid['trust_level'] != 5) {
+        if($uid['id'] != $answ['answer_user_id'] && $uid['trust_level'] != 5) {
             return true; 
         }
 
         $data = [
-            'comm_id'           => $comm_id,
+            'answ_id'           => $answ_id,
             'post_id'           => $post_id,
-            'user_id'           => $user_id,
-            'comment_content'   => $comm['comment_content'],
+            'user_id'           => $uid['id'],
+            'answer_content'   => $answ['answer_content'],
         ]; 
         
-        return view(PR_VIEW_DIR . '/comment/comm-edit-form', ['data' => $data]);
+        return view(PR_VIEW_DIR . '/answer/answ-edit-form', ['data' => $data]);
     }
 
 	// Покажем форму ответа
-	public function addFormComm()
+	public function addFormAnswer()
 	{
-        $post_id    = \Request::getPostInt('post_id');
         $answ_id    = \Request::getPostInt('answ_id');
-        $comm_id    = \Request::getPostInt('comm_id');
+        $post_id    = \Request::getPostInt('post_id');
         
         $uid  = Base::getUid();
         $data = [
             'answ_id'     => $answ_id,
             'post_id'     => $post_id,
-            'comm_id'     => $comm_id,
         ]; 
         
-        return view(PR_VIEW_DIR . '/comment/comm-add-form-answ', ['data' => $data, 'uid' => $uid]);
+        return view(PR_VIEW_DIR . '/answer/answ-add-form', ['data' => $data, 'uid' => $uid]);
     }
 
-    // Комментарии участника
-    public function userComments()
+    // Ответы участника
+    public function userAnswers()
     {
+        $Parsedown = new Parsedown(); 
+        $Parsedown->setSafeMode(true); // безопасность
+        
         $login = \Request::get('login');
-        $comm  = CommentModel::getUsersComments($login); 
+       
+        $answ  = AnswerModel::getUsersAnswers($login); 
 
         // Покажем 404
-        if(!$comm) {
+        if(!$answ) {
             include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
             hl_preliminary_exit();
         }
         
         $result = Array();
-        foreach($comm as $ind => $row){
+        foreach($answ as $ind => $row){
+            $row['content'] = $Parsedown->text($row['comment_content']);
             $row['date']    = Base::ru_date($row['comment_date']);
+         
             $result[$ind]   = $row;
         }
         
@@ -217,39 +215,39 @@ class CommentController extends \MainController
             'description' => 'Страница комментариев учасника ' . $login . ' на сайте ' . $GLOBALS['conf']['sitename'],
         ]; 
         
-        return view(PR_VIEW_DIR . '/comment/comm-user', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
+        return view(PR_VIEW_DIR . '/answer/answ-user', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
     }
 
     // Удаление комментария
-    public function deletComment()
+    public function deletAnswer()
     {
         // Доступ только персоналу
-        $uid = Base::getUid();
+        $uid        = Base::getUid();
         if ($uid['trust_level'] != 5) {
             return false;
         }
         
-        $comm_id = \Request::getPostInt('comm_id');
-        
-        CommentModel::CommentsDel($comm_id);
+        $answ_id = \Request::getPostInt('answ_id');
+
+        AnswerModel::AnswerDel($answ_id);
         
         return false;
     }
     
     // Помещаем комментарий в закладки
-    public function addCommentFavorite()
+    public function addAnswerFavorite()
     {
         
-        $uid = Base::getUid();
+        $uid        = Base::getUid();
         
-        $comm_id = \Request::getPostInt('comm_id');
-        $comm    = CommentModel::getCommentsOne($comm_id); 
+        $answ_id = \Request::getPostInt('answ_id');
+        $answ    = AnswerModel::getAnswerOne($answ_id); 
         
-        if(!$comm) {
+        if(!$answ) {
             redirect('/');
         }
         
-        CommentModel::setCommentFavorite($comm_id, $uid['id']);
+        AnswerModel::setAnswerFavorite($answ_id, $uid['id']);
        
         return true;
     } 

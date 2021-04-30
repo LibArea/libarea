@@ -33,7 +33,7 @@
                 <div class="flow-telo">
                     <?= $flow['flow_content']; ?>
                 </div>  
-            <?php } elseif ($flow['flow_action_id'] == 2) { ?>
+            <?php } elseif ($flow['flow_action_id'] == 4) { ?>
                 <div class="flow-comment">
                     <icon name="action-undo"></icon>
                     <div class="box">

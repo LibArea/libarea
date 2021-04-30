@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Мар 22 2021 г., 15:33
+-- Время создания: Апр 30 2021 г., 06:45
 -- Версия сервера: 10.4.17-MariaDB
 -- Версия PHP: 7.4.13
 
@@ -18,40 +18,55 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- База данных: `222`
+-- База данных: `11test`
 --
 
 -- --------------------------------------------------------
 
+--
+-- Структура таблицы `answers`
+--
 
-CREATE TABLE IF NOT EXISTS `users_auth_tokens` (
-  `auth_id` int(11) NOT NULL AUTO_INCREMENT,
-  `auth_user_id` int(11) NOT NULL,
-  `auth_selector` varchar(255) NOT NULL,
-  `auth_hashedvalidator` varchar(255) NOT NULL,
-  `auth_expires` datetime NOT NULL,
-  PRIMARY KEY (`auth_id`)
+CREATE TABLE `answers` (
+  `answer_id` int(11) NOT NULL,
+  `answer_post_id` int(11) NOT NULL DEFAULT 0,
+  `answer_user_id` int(11) NOT NULL DEFAULT 0,
+  `answer_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `answer_modified` timestamp NOT NULL DEFAULT '2020-12-31 09:00:00',
+  `answer_ip` varbinary(42) DEFAULT NULL,
+  `answer_order` smallint(6) NOT NULL DEFAULT 0,
+  `answer_after` smallint(6) NOT NULL DEFAULT 0,
+  `answer_votes` smallint(6) NOT NULL DEFAULT 0,
+  `answer_content` text NOT NULL,
+  `answer_lo` int(11) NOT NULL DEFAULT 0,
+  `answer_del` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
- 
+--
+-- Дамп данных таблицы `answers`
+--
+
+INSERT INTO `answers` (`answer_id`, `answer_post_id`, `answer_user_id`, `answer_date`, `answer_modified`, `answer_ip`, `answer_order`, `answer_after`, `answer_votes`, `answer_content`, `answer_lo`, `answer_del`) VALUES
+(1, 3, 1, '2021-04-30 04:41:27', '2020-12-31 09:00:00', 0x3132372e302e302e31, 0, 0, 0, 'Первый ответ в теме', 0, 0);
+
+-- --------------------------------------------------------
+
 --
 -- Структура таблицы `comments`
 --
 
 CREATE TABLE `comments` (
   `comment_id` int(11) NOT NULL,
-  `comment_type` enum('normal','admin','private') NOT NULL DEFAULT 'normal',
   `comment_post_id` int(11) NOT NULL DEFAULT 0,
+  `comment_answ_id` int(11) NOT NULL DEFAULT 0,
+  `comment_comm_id` int(11) NOT NULL DEFAULT 0,
   `comment_user_id` int(11) NOT NULL DEFAULT 0,
   `comment_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `comment_modified` timestamp NOT NULL DEFAULT '2020-12-31 09:00:00',
   `comment_ip` varbinary(42) DEFAULT NULL,
-  `comment_order` smallint(6) NOT NULL DEFAULT 0,
-  `comment_on` smallint(6) NOT NULL DEFAULT 0,
   `comment_after` smallint(6) NOT NULL DEFAULT 0,
   `comment_votes` smallint(6) NOT NULL DEFAULT 0,
   `comment_content` text NOT NULL,
-  `comment_lo` int(11) NOT NULL DEFAULT 0,
   `comment_del` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -64,8 +79,56 @@ CREATE TABLE `comments` (
 CREATE TABLE `favorite` (
   `favorite_id` mediumint(8) NOT NULL,
   `favorite_uid` mediumint(8) NOT NULL,
-  `favorite_tid` int(11) NOT NULL, 
+  `favorite_tid` int(11) NOT NULL,
   `favorite_type` tinyint(1) NOT NULL COMMENT '1 посты, 2 комментарии'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `flow_log`
+--
+
+CREATE TABLE `flow_log` (
+  `flow_id` int(11) NOT NULL,
+  `flow_action_id` int(11) NOT NULL,
+  `flow_pubdate` datetime NOT NULL DEFAULT current_timestamp(),
+  `flow_user_id` int(11) NOT NULL,
+  `flow_content` text NOT NULL,
+  `flow_url` varchar(255) NOT NULL,
+  `flow_target_id` int(11) DEFAULT NULL,
+  `flow_about` varchar(255) DEFAULT NULL,
+  `flow_space_id` int(11) NOT NULL,
+  `flow_tl` int(11) NOT NULL,
+  `flow_ip` varchar(45) DEFAULT NULL,
+  `flow_is_delete` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Дамп данных таблицы `flow_log`
+--
+
+INSERT INTO `flow_log` (`flow_id`, `flow_action_id`, `flow_pubdate`, `flow_user_id`, `flow_content`, `flow_url`, `flow_target_id`, `flow_about`, `flow_space_id`, `flow_tl`, `flow_ip`, `flow_is_delete`) VALUES
+(1, 2, '2021-04-30 06:41:28', 1, 'Первый ответ в теме', 'posts/prosto-pervyj-post#comm_1', 1, 'добавил комментарий', 0, 0, '127.0.0.1', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `invitation`
+--
+
+CREATE TABLE `invitation` (
+  `invitation_id` int(10) UNSIGNED NOT NULL,
+  `uid` int(11) DEFAULT 0,
+  `invitation_code` varchar(32) DEFAULT NULL,
+  `invitation_email` varchar(100) DEFAULT NULL,
+  `add_time` datetime NOT NULL,
+  `add_ip` varchar(45) DEFAULT NULL,
+  `active_expire` tinyint(1) DEFAULT 0,
+  `active_time` datetime DEFAULT NULL,
+  `active_ip` varchar(45) DEFAULT NULL,
+  `active_status` tinyint(4) DEFAULT 0,
+  `active_uid` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -140,7 +203,8 @@ CREATE TABLE `posts` (
   `post_ip_int` varchar(45) DEFAULT NULL,
   `post_votes` smallint(6) NOT NULL DEFAULT 0,
   `post_karma` smallint(6) NOT NULL DEFAULT 0,
-  `post_comments` smallint(6) NOT NULL DEFAULT 0,
+  `post_answers_num` smallint(6) NOT NULL DEFAULT 0,
+  `post_comments_num` smallint(6) NOT NULL DEFAULT 0,
   `post_content` text NOT NULL,
   `post_content_preview` varchar(160) DEFAULT NULL,
   `post_content_img` varchar(250) DEFAULT NULL,
@@ -157,9 +221,10 @@ CREATE TABLE `posts` (
 -- Дамп данных таблицы `posts`
 --
 
-INSERT INTO `posts` (`post_id`, `post_title`, `post_slug`, `post_space_id`, `post_date`, `edit_date`, `post_user_id`, `post_visible`, `post_ip_int`, `post_votes`, `post_karma`, `post_comments`, `post_content`, `post_top`, `post_is_delete`) VALUES
-(1, 'Муха села на варенье, Вот и всё стихотворенье...', 'muha-stih', 1, '2021-02-28 12:08:09', '2021-03-05 10:05:25', 1, 'all', NULL, 0, 0, 0, '> \"Нет не всё!\" - сказала Муха,\r\n\r\n> Почесала себе брюхо,\r\n\r\n> Свесив с блюдца две ноги,\r\n\r\n> Мне сказала:\"Погоди!\r\n\r\n> Прежде чем сесть на варенье,\r\n\r\n> Я прочла стихотворенье,\r\n\r\n> Неизвестного поэта,\r\n\r\n> Написавшего про это.\r\n\r\n\r\n## Заголовок\r\n\r\nЧто-то в модели много кода:\r\n\r\n```\r\n$db = \\Config\\Database::connect();\r\n$builder = $db->table(\'Posts AS a\');\r\n$builder->select(\'a.*, b.id, b.nickname, b.avatar\');\r\n$builder->join(\"users AS b\", \"b.id = a.post_user_id\");\r\n$builder->where(\'a.post_slug\', $slug);\r\n$builder->orderBy(\'a.post_id\', \'DESC\');\r\n```\r\n\r\nВот. Это первый пост.', 0, 0),
-(2, 'Второй пост...', 'vtoroi-post', 2, '2021-02-28 12:15:58', '2021-03-05 10:05:25', 2, 'all', NULL, 0, 0, 0, 'Не будет тут про муху. Просто второй пост.\r\n\r\n> в лесу родилась ёлка, зеленая была...', 0, 0);
+INSERT INTO `posts` (`post_id`, `post_title`, `post_slug`, `post_space_id`, `post_tag_id`, `post_date`, `edit_date`, `post_user_id`, `post_visible`, `post_ip_int`, `post_votes`, `post_karma`, `post_answers_num`, `post_comments_num`, `post_content`, `post_content_preview`, `post_content_img`, `post_thumb_img`, `post_closed`, `post_lo`, `post_top`, `post_url`, `post_url_domain`, `post_is_delete`) VALUES
+(1, 'Муха села на варенье, Вот и всё стихотворенье...', 'muha-stih', 1, 0, '2021-02-28 12:08:09', '2021-03-05 10:05:25', 1, 'all', NULL, 0, 0, 0, 0, '> \"Нет не всё!\" - сказала Муха,\r\n\r\n> Почесала себе брюхо,\r\n\r\n> Свесив с блюдца две ноги,\r\n\r\n> Мне сказала:\"Погоди!\r\n\r\n> Прежде чем сесть на варенье,\r\n\r\n> Я прочла стихотворенье,\r\n\r\n> Неизвестного поэта,\r\n\r\n> Написавшего про это.\r\n\r\n\r\n## Заголовок\r\n\r\nЧто-то в модели много кода:\r\n\r\n```\r\n$db = \\Config\\Database::connect();\r\n$builder = $db->table(\'Posts AS a\');\r\n$builder->select(\'a.*, b.id, b.nickname, b.avatar\');\r\n$builder->join(\"users AS b\", \"b.id = a.post_user_id\");\r\n$builder->where(\'a.post_slug\', $slug);\r\n$builder->orderBy(\'a.post_id\', \'DESC\');\r\n```\r\n\r\nВот. Это первый пост.', NULL, NULL, NULL, 0, 0, 0, NULL, NULL, 0),
+(2, 'Второй пост...', 'vtoroi-post', 2, 0, '2021-02-28 12:15:58', '2021-03-05 10:05:25', 2, 'all', NULL, 0, 0, 0, 0, 'Не будет тут про муху. Просто второй пост.\r\n\r\n> в лесу родилась ёлка, зеленая была...', NULL, NULL, NULL, 0, 0, 0, NULL, NULL, 0),
+(3, 'Просто первый пост', 'prosto-pervyj-post', 2, 0, '2021-04-30 04:35:13', '2021-04-30 04:35:13', 1, 'all', '127.0.0.1', 0, 0, 1, 0, 'Просто первый пост', '', '', '', 0, 0, 0, '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -173,7 +238,7 @@ CREATE TABLE `space` (
   `space_slug` varchar(128) NOT NULL,
   `space_description` varchar(250) NOT NULL,
   `space_color` int(11) NOT NULL DEFAULT 0,
-  `space_img` varchar(250) DEFAULT NULL,
+  `space_img` varchar(250) NOT NULL DEFAULT 'space_no.png',
   `space_text` varchar(550) NOT NULL,
   `space_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `space_category_id` int(11) NOT NULL DEFAULT 1,
@@ -187,29 +252,10 @@ CREATE TABLE `space` (
 -- Дамп данных таблицы `space`
 --
 
-INSERT INTO `space` (`space_id`, `space_name`, `space_slug`, `space_description`, `space_color`, `space_text`, `space_date`, `space_category_id`, `space_user_id`, `space_type`, `space_permit_users`, `space_is_delete`) VALUES
-(1, 'cms', 'cms', 'Системы управления сайтами...', '', 'тест 1...', '2021-02-28 12:15:58', 1, 1, 1, 1, 0),
-(2, 'Вопросы', 'qa', 'Вопросы и ответы', '', 'тест 2...', '2021-02-28 12:15:58', 1, 1, 1, 2, 0),
-(3, 'флуд', 'flud', 'Просто обычные разговоры', '', 'тест 3...', '2021-02-28 12:15:58', 1, 1, 1, 2, 0);
-
-
---
--- Дамп данных таблицы `space`
---
-
-CREATE TABLE `space_tags` (
-  `st_id` int(11) NOT NULL,
-  `st_space_id` int(11) NOT NULL,
-  `st_title` varchar(150) NOT NULL,
-  `st_description` varchar(500) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-ALTER TABLE `space_tags`
-  ADD PRIMARY KEY (`st_id`),
-  ADD KEY `st_space_id` (`st_space_id`);
-  
-ALTER TABLE `space_tags`
-  MODIFY `st_id` int(11) NOT NULL AUTO_INCREMENT;  
+INSERT INTO `space` (`space_id`, `space_name`, `space_slug`, `space_description`, `space_color`, `space_img`, `space_text`, `space_date`, `space_category_id`, `space_user_id`, `space_type`, `space_permit_users`, `space_is_delete`) VALUES
+(1, 'meta', 'meta', 'Мета-обсуждение самого сайта, включая вопросы, предложения и отчеты об ошибках.', 0, 'space_no.png', 'тест 1...', '2021-02-28 12:15:58', 1, 1, 1, 1, 0),
+(2, 'Вопросы', 'qa', 'Вопросы по скрипту и не только', 0, 'space_no.png', 'Вопросы по скрипту и не только', '2021-02-28 12:15:58', 1, 1, 1, 2, 0),
+(3, 'флуд', 'flud', 'Просто обычные разговоры', 0, 'space_no.png', 'тест 3...', '2021-02-28 12:15:58', 1, 1, 1, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -221,6 +267,19 @@ CREATE TABLE `space_hidden` (
   `hidden_id` int(11) NOT NULL,
   `hidden_space_id` int(11) NOT NULL,
   `hidden_user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `space_tags`
+--
+
+CREATE TABLE `space_tags` (
+  `st_id` int(11) NOT NULL,
+  `st_space_id` int(11) NOT NULL,
+  `st_title` varchar(150) NOT NULL,
+  `st_description` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -243,12 +302,11 @@ CREATE TABLE `users` (
   `invitation_available` int(10) NOT NULL DEFAULT 0,
   `invitation_id` int(11) NOT NULL DEFAULT 0,
   `deleted` tinyint(1) DEFAULT 0,
-  `avatar` varchar(250) DEFAULT NULL,
+  `avatar` varchar(250) NOT NULL DEFAULT 'noavatar.png',
   `about` varchar(250) DEFAULT NULL,
   `rating` int(11) NOT NULL DEFAULT 0,
   `status` varchar(250) DEFAULT NULL,
   `my_post` int(11) DEFAULT NULL COMMENT 'Пост выведенный в профиль',
-  `my_space_id` int(11) NOT NULL DEFAULT 0 COMMENT 'Пространство участника',
   `ban_list` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -256,8 +314,92 @@ CREATE TABLE `users` (
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`id`, `login`, `name`, `email`, `password`, `activated`, `reg_ip`, `trust_level`, `created_at`, `updated_at`, `deleted`, `avatar`, `about`, `rating`, `status`, `my_post`) VALUES
-(1, 'AdreS', 'Олег', 'ss@sdf.ru', '$2y$10$oR5VZ.zk7IN/og70gQq/f.0Sb.GQJ33VZHIES4pyIpU3W2vF6aiaW', 1, NULL, 5, '2021-03-08 21:37:04', '2021-03-08 21:37:04', 0, '', 'Тестовый аккаунт', 0, 0, 0);
+INSERT INTO `users` (`id`, `login`, `name`, `email`, `password`, `activated`, `reg_ip`, `trust_level`, `created_at`, `updated_at`, `invitation_available`, `invitation_id`, `deleted`, `avatar`, `about`, `rating`, `status`, `my_post`, `ban_list`) VALUES
+(1, 'AdreS', 'Олег', 'ss@sdf.ru', '$2y$10$oR5VZ.zk7IN/og70gQq/f.0Sb.GQJ33VZHIES4pyIpU3W2vF6aiaW', 1, NULL, 5, '2021-03-08 21:37:04', '2021-03-08 21:37:04', 0, 0, 0, 'img_1.jpg', 'Тестовый аккаунт', 0, '0', 0, 0),
+(2, 'test', NULL, 'test@test.ru', '$2y$10$Iahcsh3ima0kGqgk6S/SSui5/ETU5bQueYROFhOsjUU/z1.xynR7W', 1, '127.0.0.1', 1, '2021-04-30 07:42:52', '2021-04-30 07:42:52', 0, 0, 0, 'noavatar.png', NULL, 0, NULL, NULL, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `users_activate`
+--
+
+CREATE TABLE `users_activate` (
+  `activate_id` int(11) NOT NULL,
+  `activate_date` datetime NOT NULL,
+  `activate_user_id` int(11) NOT NULL,
+  `activate_code` varchar(50) NOT NULL,
+  `activate_flag` tinyint(1) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `users_auth_tokens`
+--
+
+CREATE TABLE `users_auth_tokens` (
+  `auth_id` int(11) NOT NULL,
+  `auth_user_id` int(11) NOT NULL,
+  `auth_selector` varchar(255) NOT NULL,
+  `auth_hashedvalidator` varchar(255) NOT NULL,
+  `auth_expires` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `users_banlist`
+--
+
+CREATE TABLE `users_banlist` (
+  `banlist_id` int(11) NOT NULL,
+  `banlist_user_id` int(11) NOT NULL,
+  `banlist_ip` varchar(45) NOT NULL,
+  `banlist_bandate` timestamp NOT NULL DEFAULT current_timestamp(),
+  `banlist_int_num` int(11) NOT NULL,
+  `banlist_int_period` varchar(20) NOT NULL,
+  `banlist_status` tinyint(1) NOT NULL DEFAULT 1,
+  `banlist_autodelete` tinyint(1) NOT NULL DEFAULT 0,
+  `banlist_cause` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `users_email_activate`
+--
+
+CREATE TABLE `users_email_activate` (
+  `id` int(11) NOT NULL,
+  `pubdate` datetime NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `email_code` varchar(50) NOT NULL,
+  `email_activate_flag` tinyint(1) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `users_logs`
+--
+
+CREATE TABLE `users_logs` (
+  `logs_id` int(11) NOT NULL,
+  `logs_user_id` int(11) NOT NULL,
+  `logs_login` varchar(255) NOT NULL,
+  `logs_trust_level` int(11) NOT NULL,
+  `logs_ip_address` varchar(45) NOT NULL,
+  `logs_date` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Дамп данных таблицы `users_logs`
+--
+
+INSERT INTO `users_logs` (`logs_id`, `logs_user_id`, `logs_login`, `logs_trust_level`, `logs_ip_address`, `logs_date`) VALUES
+(1, 1, 'AdreS', 5, '127.0.0.1', '2021-04-30 07:19:27'),
+(2, 2, 'test', 1, '127.0.0.1', '2021-04-30 07:43:04');
 
 -- --------------------------------------------------------
 
@@ -298,6 +440,21 @@ INSERT INTO `users_trust_level` (`trust_id`, `trust_name`, `trust_count`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `votes_answ`
+--
+
+CREATE TABLE `votes_answ` (
+  `votes_answ_id` int(11) NOT NULL,
+  `votes_answ_item_id` int(11) NOT NULL,
+  `votes_answ_points` int(11) NOT NULL,
+  `votes_answ_ip` varchar(45) NOT NULL,
+  `votes_answ_user_id` int(11) NOT NULL DEFAULT 1,
+  `votes_answ_date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `votes_comm`
 --
 
@@ -310,75 +467,12 @@ CREATE TABLE `votes_comm` (
   `votes_comm_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
 
 --
--- Структура и дамп таблицы `votes_comm`
+-- Структура таблицы `votes_post`
 --
 
-CREATE TABLE `users_banlist` (
-  `banlist_id` int(11) NOT NULL,
-  `banlist_user_id` int(11) NOT NULL,
-  `banlist_ip` varchar(45) NOT NULL,
-  `banlist_bandate` timestamp NOT NULL DEFAULT current_timestamp(),
-  `banlist_int_num` int(11) NOT NULL,
-  `banlist_int_period` varchar(20) NOT NULL,
-  `banlist_status` tinyint(1) NOT NULL DEFAULT 1,
-  `banlist_autodelete` tinyint(1) NOT NULL DEFAULT 0,
-  `banlist_cause` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-
-ALTER TABLE `users_banlist`
-  ADD PRIMARY KEY (`banlist_id`),
-  ADD KEY `banlist_ip` (`banlist_ip`),
-  ADD KEY `banlist_user_id` (`banlist_user_id`);
-
-
-ALTER TABLE `users_banlist`
-  MODIFY `banlist_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Структура и дамп таблицы `users_logs`
---
-
-CREATE TABLE `users_logs` (
-  `logs_id` int(11) NOT NULL,
-  `logs_user_id` int(11) NOT NULL,
-  `logs_login` varchar(255) NOT NULL,
-  `logs_trust_level` int(11) NOT NULL,
-  `logs_ip_address` varchar(45) NOT NULL,
-  `logs_date` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-
-ALTER TABLE `users_logs`
-  ADD PRIMARY KEY (`logs_id`);
-
-
-ALTER TABLE `users_logs`
-  MODIFY `logs_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Структура и дамп таблицы `users_activate`
---
-
-CREATE TABLE `users_activate` (
-  `activate_id` int(11) NOT NULL,
-  `activate_date` datetime NOT NULL,
-  `activate_user_id` int(11) NOT NULL,
-  `activate_code` varchar(50) NOT NULL,
-  `activate_flag` tinyint(1) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-ALTER TABLE `users_activate`
-  ADD PRIMARY KEY (`activate_id`);
-
-ALTER TABLE `users_activate`
-  MODIFY `activate_id` int(11) NOT NULL AUTO_INCREMENT;
-  
---
--- Структура и дамп таблицы `votes_post`
---
 CREATE TABLE `votes_post` (
   `votes_post_id` int(11) NOT NULL,
   `votes_post_item_id` int(11) NOT NULL,
@@ -388,33 +482,43 @@ CREATE TABLE `votes_post` (
   `votes_post_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-ALTER TABLE `votes_post`
-  ADD PRIMARY KEY (`votes_post_id`),
-  ADD KEY `votes_post_item_id` (`votes_post_item_id`,`votes_post_user_id`),
-  ADD KEY `votes_post_ip` (`votes_post_item_id`,`votes_post_ip`),
-  ADD KEY `votes_post_user_id` (`votes_post_user_id`);
-
-
-ALTER TABLE `votes_post`
-  MODIFY `votes_post_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
--- Структура и дамп таблицы `invitation`
+-- Индексы сохранённых таблиц
 --
 
-CREATE TABLE `invitation` (
-  `invitation_id` int(10) UNSIGNED NOT NULL,
-  `uid` int(11) DEFAULT '0',
-  `invitation_code` varchar(32) DEFAULT NULL,
-  `invitation_email` varchar(100) DEFAULT NULL,
-  `add_time` datetime NOT NULL,
-  `add_ip` varchar(45) DEFAULT NULL,
-  `active_expire` tinyint(1) DEFAULT '0',
-  `active_time` datetime DEFAULT NULL,  
-  `active_ip` varchar(45) DEFAULT NULL,
-  `active_status` tinyint(4) DEFAULT '0',
-  `active_uid` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+--
+-- Индексы таблицы `answers`
+--
+ALTER TABLE `answers`
+  ADD PRIMARY KEY (`answer_id`),
+  ADD KEY `answer_link_id_2` (`answer_post_id`,`answer_date`),
+  ADD KEY `answer_date` (`answer_date`),
+  ADD KEY `answer_user_id` (`answer_user_id`,`answer_date`),
+  ADD KEY `answer_post_id` (`answer_post_id`,`answer_order`);
+
+--
+-- Индексы таблицы `comments`
+--
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`comment_id`),
+  ADD KEY `comment_link_id_2` (`comment_post_id`,`comment_date`),
+  ADD KEY `comment_date` (`comment_date`),
+  ADD KEY `comment_user_id` (`comment_user_id`,`comment_date`);
+
+--
+-- Индексы таблицы `favorite`
+--
+ALTER TABLE `favorite`
+  ADD PRIMARY KEY (`favorite_id`),
+  ADD KEY `favorite_uid` (`favorite_id`),
+  ADD KEY `favorite_id` (`favorite_tid`);
+
+--
+-- Индексы таблицы `flow_log`
+--
+ALTER TABLE `flow_log`
+  ADD PRIMARY KEY (`flow_id`),
+  ADD KEY `flow_user_id` (`flow_user_id`);
 
 --
 -- Индексы таблицы `invitation`
@@ -426,68 +530,6 @@ ALTER TABLE `invitation`
   ADD KEY `active_time` (`active_time`),
   ADD KEY `active_ip` (`active_ip`),
   ADD KEY `active_status` (`active_status`);
-  
-  ALTER TABLE `invitation`
-  MODIFY `invitation_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
-CREATE TABLE `flow_log` (
-  `flow_id` int(11) NOT NULL,
-  `flow_action_id` int(11) NOT NULL,
-  `flow_pubdate` datetime NOT NULL DEFAULT current_timestamp(),
-  `flow_user_id` int(11) NOT NULL,
-  `flow_content` text NOT NULL,
-  `flow_url` varchar(255) NOT NULL,
-  `flow_target_id` int(11) DEFAULT NULL,
-  `flow_about` varchar(255) DEFAULT NULL,
-  `flow_space_id` int(11) NOT NULL,
-  `flow_tl` int(11) NOT NULL,
-  `flow_ip` varchar(45) DEFAULT NULL,
-  `flow_is_delete` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-ALTER TABLE `flow_log`
-  ADD PRIMARY KEY (`flow_id`),
-  ADD KEY `flow_user_id` (`flow_user_id`);
-
-ALTER TABLE `flow_log`
-  MODIFY `flow_id` int(11) NOT NULL AUTO_INCREMENT;
-
-
---
--- Структура, дамп и индексы таблицы `users_email_activate`
---
-
-CREATE TABLE `users_email_activate` (
-  `id` int(11) NOT NULL,
-  `pubdate` datetime NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `email_code` varchar(50) NOT NULL,
-  `email_activate_flag` tinyint(1) DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-ALTER TABLE `users_email_activate`
-  ADD PRIMARY KEY (`id`);
-
-ALTER TABLE `users_email_activate`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Индексы таблицы `comments`
---
-ALTER TABLE `comments`
-  ADD PRIMARY KEY (`comment_id`),
-  ADD KEY `comment_link_id_2` (`comment_post_id`,`comment_date`),
-  ADD KEY `comment_date` (`comment_date`),
-  ADD KEY `comment_user_id` (`comment_user_id`,`comment_date`),
-  ADD KEY `comment_post_id` (`comment_post_id`,`comment_order`);
-
---
--- Индексы таблицы `favorite`
---
-ALTER TABLE `favorite`
-  ADD PRIMARY KEY (`favorite_id`),
-  ADD KEY `favorite_uid` (`favorite_id`),
-  ADD KEY `favorite_id` (`favorite_tid`);
 
 --
 -- Индексы таблицы `messages`
@@ -542,10 +584,49 @@ ALTER TABLE `space_hidden`
   ADD PRIMARY KEY (`hidden_id`);
 
 --
+-- Индексы таблицы `space_tags`
+--
+ALTER TABLE `space_tags`
+  ADD PRIMARY KEY (`st_id`),
+  ADD KEY `st_space_id` (`st_space_id`);
+
+--
 -- Индексы таблицы `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `users_activate`
+--
+ALTER TABLE `users_activate`
+  ADD PRIMARY KEY (`activate_id`);
+
+--
+-- Индексы таблицы `users_auth_tokens`
+--
+ALTER TABLE `users_auth_tokens`
+  ADD PRIMARY KEY (`auth_id`);
+
+--
+-- Индексы таблицы `users_banlist`
+--
+ALTER TABLE `users_banlist`
+  ADD PRIMARY KEY (`banlist_id`),
+  ADD KEY `banlist_ip` (`banlist_ip`),
+  ADD KEY `banlist_user_id` (`banlist_user_id`);
+
+--
+-- Индексы таблицы `users_email_activate`
+--
+ALTER TABLE `users_email_activate`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `users_logs`
+--
+ALTER TABLE `users_logs`
+  ADD PRIMARY KEY (`logs_id`);
 
 --
 -- Индексы таблицы `users_notification_setting`
@@ -561,6 +642,15 @@ ALTER TABLE `users_trust_level`
   ADD PRIMARY KEY (`trust_id`);
 
 --
+-- Индексы таблицы `votes_answ`
+--
+ALTER TABLE `votes_answ`
+  ADD PRIMARY KEY (`votes_answ_id`),
+  ADD KEY `votes_answ_item_id` (`votes_answ_item_id`,`votes_answ_user_id`),
+  ADD KEY `votes_answ_ip` (`votes_answ_item_id`,`votes_answ_ip`),
+  ADD KEY `votes_answ_user_id` (`votes_answ_user_id`);
+
+--
 -- Индексы таблицы `votes_comm`
 --
 ALTER TABLE `votes_comm`
@@ -570,8 +660,23 @@ ALTER TABLE `votes_comm`
   ADD KEY `votes_comm_user_id` (`votes_comm_user_id`);
 
 --
+-- Индексы таблицы `votes_post`
+--
+ALTER TABLE `votes_post`
+  ADD PRIMARY KEY (`votes_post_id`),
+  ADD KEY `votes_post_item_id` (`votes_post_item_id`,`votes_post_user_id`),
+  ADD KEY `votes_post_ip` (`votes_post_item_id`,`votes_post_ip`),
+  ADD KEY `votes_post_user_id` (`votes_post_user_id`);
+
+--
 -- AUTO_INCREMENT для сохранённых таблиц
 --
+
+--
+-- AUTO_INCREMENT для таблицы `answers`
+--
+ALTER TABLE `answers`
+  MODIFY `answer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT для таблицы `comments`
@@ -584,6 +689,18 @@ ALTER TABLE `comments`
 --
 ALTER TABLE `favorite`
   MODIFY `favorite_id` mediumint(8) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `flow_log`
+--
+ALTER TABLE `flow_log`
+  MODIFY `flow_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT для таблицы `invitation`
+--
+ALTER TABLE `invitation`
+  MODIFY `invitation_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `messages`
@@ -607,7 +724,7 @@ ALTER TABLE `notification`
 -- AUTO_INCREMENT для таблицы `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `post_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `post_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `space`
@@ -622,10 +739,46 @@ ALTER TABLE `space_hidden`
   MODIFY `hidden_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT для таблицы `space_tags`
+--
+ALTER TABLE `space_tags`
+  MODIFY `st_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT для таблицы `users_activate`
+--
+ALTER TABLE `users_activate`
+  MODIFY `activate_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `users_auth_tokens`
+--
+ALTER TABLE `users_auth_tokens`
+  MODIFY `auth_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `users_banlist`
+--
+ALTER TABLE `users_banlist`
+  MODIFY `banlist_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `users_email_activate`
+--
+ALTER TABLE `users_email_activate`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `users_logs`
+--
+ALTER TABLE `users_logs`
+  MODIFY `logs_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `users_notification_setting`
@@ -634,10 +787,22 @@ ALTER TABLE `users_notification_setting`
   MODIFY `notice_setting_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT для таблицы `votes_answ`
+--
+ALTER TABLE `votes_answ`
+  MODIFY `votes_answ_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT для таблицы `votes_comm`
 --
 ALTER TABLE `votes_comm`
   MODIFY `votes_comm_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `votes_post`
+--
+ALTER TABLE `votes_post`
+  MODIFY `votes_post_id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

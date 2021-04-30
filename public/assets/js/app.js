@@ -46,6 +46,18 @@ $(function(){
             $('#up' + post_id).find('.score').html('+');
         });
     });
+    // Голосование за ответ
+    $(document).on('click', '.answ-up-id', function() {
+        var answ_id = $(this).data('id');
+        $.ajax({
+            url: '/votes/answ',
+            type: 'POST',
+            data: {answ_id: answ_id},
+        }).done(function(data) {
+            $('#up' + answ_id + '.voters').addClass('active');
+            $('#up' + answ_id).find('.score').html('+');
+        });
+    });
     // Подписка на блог
     $(document).on("click", ".hide-space-id", function(){      
         var space_id  = $(this).data('id');  
@@ -80,7 +92,7 @@ $(function(){
            location.reload(); 
         });
     }); 
-    // Добавить пост в закладки
+    // Добавить комментарий в закладки
     $(document).on("click", ".user-comm-fav", function(){      
         var comm_id  = $(this).data('comm');
         $.ajax({
@@ -91,15 +103,37 @@ $(function(){
            location.reload(); 
         });
     }); 
+    // Добавить ответ в закладки
+    $(document).on("click", ".user-answ-fav", function(){      
+        var answ_id  = $(this).data('answ');
+        $.ajax({
+            url: '/answer/addfavorite',
+            type: 'POST',
+            data: {answ_id: answ_id},
+        }).done(function(data) {
+           location.reload(); 
+        });
+    }); 
     // Удаляем комментарии
     $(document).on('click', '.delcomm', function() {
-        var comm_id = $(this).data('id');
+        var comm_id = $(this).data('comm_id');
         $.ajax({
             url: '/comment/del',
             type: 'POST',
             data: {comm_id: comm_id},
         }).done(function(data) {
             $('#comm_' + comm_id).addClass('dell');
+        });
+    });
+    // Удаляем ответ
+    $(document).on('click', '.delansw', function() {
+        var answ_id = $(this).data('id');
+        $.ajax({
+            url: '/answer/del',
+            type: 'POST',
+            data: {answ_id: answ_id},
+        }).done(function(data) {
+            $('#answ_' + answ_id).addClass('dell');
         });
     });
     // Удаляем пост
@@ -155,7 +189,7 @@ $(function(){
             $link_span  = $('#cm_add_link'+comm_id);
             old_html    = $link_span.html();
            
-            $.post('/comments/editform', {comm_id: comm_id, post_id: post_id}, function(data) {
+            $.post('/comment/editform', {comm_id: comm_id, post_id: post_id}, function(data) {
                 if(data){
                     $('#comm_' + comm_id).addClass('edit');
                     $("#cm_addentry"+comm_id).html(data).fadeIn();
@@ -172,5 +206,63 @@ $(function(){
     $(document).on("click", "#cancel_cmm", function(){
         $('.cm_addentry').remove();
         $('.cm_add_link').show();
+    });
+    
+    // Edit answer
+    $(document).on("click", ".editansw", function(){
+        var answ_id = $(this).data('answ_id'); 
+        var post_id = $(this).data('post_id');        
+       
+            $('.answ_addentry').remove();
+            $('.answ_add_link').show();
+            $link_span  = $('#answ_add_link'+answ_id);
+            old_html    = $link_span.html();
+           
+            $.post('/answer/editform', {answ_id: answ_id, post_id: post_id}, function(data) {
+                if(data){
+                    $('#answ_' + answ_id).addClass('edit');
+                    $("#answ_addentry"+answ_id).html(data).fadeIn();
+                    $('#content').focus();
+                    $link_span.html(old_html).hide();
+                    $('#submit_answ').click(function(data) {
+                        $('#submit_answ').prop('disabled', true);
+                        $('#cancel_answ').hide();
+                        $('.submit_answ').append('...');
+                    });
+                }
+            });
+    });
+    $(document).on("click", "#cancel_answ", function(){
+        $('.answ_addentry').remove();
+        $('.answ_add_link').show();
+    });
+    
+    // Edit comment
+    $(document).on("click", ".editcomm", function(){
+        var comm_id = $(this).data('comm_id'); 
+        var post_id = $(this).data('post_id');        
+       
+            $('.comm_addentry').remove();
+            $('.comm_add_link').show();
+            $link_span  = $('#comm_add_link'+comm_id);
+            old_html    = $link_span.html();
+           
+            $.post('/comment/editform', {comm_id: comm_id, post_id: post_id}, function(data) {
+                if(data){
+                    $('#comm_' + comm_id).addClass('edit');
+                    $("#comm_addentry"+comm_id).html(data).fadeIn();
+                    $('#content').focus();
+                    $link_span.html(old_html).hide();
+                    $('#submit_comm').click(function(data) {
+                        $('#submit_comm').prop('disabled', true);
+                        $('#cancel_comm').hide();
+                        $('.submit_comm').append('...');
+                    });
+                }
+            });
+    });
+    $(document).on("click", "#cancel_comm", function(){
+        $('.comm_addentry_re').remove();
+        $('.comm_add_link').show();
     });
 });

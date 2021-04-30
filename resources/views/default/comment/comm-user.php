@@ -28,7 +28,7 @@
                             </span>
                         </div>
                         <div class="comm-telo-body">
-                            <?php echo $comm['content']; ?> 
+                            <?php echo $comm['comment_content']; ?> 
                         </div>
                     </div>
                 </div>  

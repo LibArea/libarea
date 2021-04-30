@@ -58,10 +58,6 @@ class MessagesController extends \MainController
                     $row['msg_user'] = UserModel::getUserId($row['sender_uid']);
                 } 
 
-                if(!$row['msg_user']['avatar']) {
-                    $row['msg_user']['avatar'] = 'noavatar.png';
-                } 
-           
                 $row['unread_num']  = Base::ru_num('pm', $row['unread']);
                 $row['count_num']   = Base::ru_num('pm', $row['count']);
                 
@@ -131,10 +127,6 @@ class MessagesController extends \MainController
                 }
             }
 		}
-        
-        if(!$recipient_user['avatar'] ) {
-                $recipient_user['avatar'] = 'noavatar.png';
-            } 
         
         $data = [
             'title'          => 'Диалог',

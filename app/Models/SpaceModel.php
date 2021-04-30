@@ -20,15 +20,13 @@ class SpaceModel extends \MainModel
 
     // Для форм добавления и изменения
     // $id
-    // $my_space_id
     // $trust_level
     public static function getSpaceSelect($uid)
     {
         if ($uid['trust_level'] == 5) {
             $sql = "SELECT * FROM space";
         } else {
-            $string = (!$uid['my_space_id']) ? 0 : $uid['my_space_id'];
-            $sql = "SELECT * FROM space WHERE space_permit_users = 2 OR space_id = $string ";
+            $sql = "SELECT * FROM space WHERE space_permit_users = 2 ";
         }
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
@@ -199,10 +197,8 @@ class SpaceModel extends \MainModel
             $data['space_permit_users']]), ')' )->run();
         
         // id добавленного пространства
-        $id = XD::select()->last_insert_id('()')->getSelectValue();
-        
-        XD::update(['users'])->set(['my_space_id'], '=', $id)->where(['id'], '=', $data['space_user_id'])->run();
-        
+        // $id = XD::select()->last_insert_id('()')->getSelectValue();
+
         return true; 
     }
 }
