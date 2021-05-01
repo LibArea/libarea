@@ -15,7 +15,7 @@ class CommentModel extends \MainModel
                 u.id, u.login, u.avatar
                 fROM comments as c
                 JOIN users as u ON u.id = c.comment_user_id
-                JOIN posts as p ON c.comment_answ_id = p.post_id
+                JOIN posts as p ON c.comment_post_id = p.post_id
                 ORDER BY c.comment_id DESC LIMIT 25 OFFSET ".$offset." ";
                         
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 

@@ -8,6 +8,7 @@ return [
     'comment-deleted'   => 'Comments removed',    
     'answer-deleted'    => 'Answer removed',
     'comments-desc'     => 'All comments are in order of priority on the site',
+    'answers-desc'      => 'All responses (to posts) in order of priority in the community',
     'post-closed'       => 'The post is closed',
     'no-auth-comm'      => 'You must be logged in to leave a comment',
     'write-something'   => 'Write something',

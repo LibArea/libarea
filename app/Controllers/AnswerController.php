@@ -31,10 +31,10 @@ class AnswerController extends \MainController
  
         $result = Array();
         foreach($answ  as $ind => $row){
-            $row['content'] = $Parsedown->text($row['comment_content']);
-            $row['date']    = Base::ru_date($row['comment_date']);
+            $row['answers_content'] = $Parsedown->text($row['answer_content']);
+            $row['date']            = Base::ru_date($row['answer_date']);
             // N+1 - перенести в запрос
-            $row['comm_vote_status'] = VotesCommentModel::getVoteStatus($row['comment_id'], $user_id);
+            $row['answ_vote_status'] = VotesAnswerModel::getVoteStatus($row['answer_id'], $user_id);
             $result[$ind]   = $row;
         }
         
@@ -45,14 +45,14 @@ class AnswerController extends \MainController
         }
         
         $data = [
-            'h1'            => lang('All comments'),
-            'title'         => lang('All comments') . ' | ' . $GLOBALS['conf']['sitename'] . $num,
-            'description'   => lang('comments-desc') .' '. $GLOBALS['conf']['sitename'] . $num,
+            'h1'            => lang('All answers'),
+            'title'         => lang('All answers') . ' | ' . $GLOBALS['conf']['sitename'] . $num,
+            'description'   => lang('answers-desc') .' '. $GLOBALS['conf']['sitename'] . $num,
             'pagesCount'    => $pagesCount,
             'pNum'          => $page,
         ]; 
  
-        return view(PR_VIEW_DIR . '/answer/all', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
+        return view(PR_VIEW_DIR . '/answer/answ-all', ['data' => $data, 'uid' => $uid, 'answers' => $result]);
     }
 
     // Добавление ответа
@@ -71,9 +71,9 @@ class AnswerController extends \MainController
             return true;
         }
 
-        $post_id   = \Request::getPostInt('post_id');   // в каком посту ответ
-        $answer   = $_POST['answer'];                 // не фильтруем
-        $ip        = \Request::getRemoteAddress();      // ip отвечающего 
+        $post_id    = \Request::getPostInt('post_id');   // в каком посту ответ
+        $answer     = $_POST['answer'];                 // не фильтруем
+        $ip         = \Request::getRemoteAddress();      // ip отвечающего 
         
         // id того, кто отвечает
         $account   = \Request::getSession('account');

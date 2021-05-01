@@ -107,6 +107,12 @@
 </main>
 
 <aside id="sidebar"> 
+    <?php if(!$space_bar) { ?>
+        <div class="space-no-user">
+            Читайте больше! <br><a href="/space">Подпишитесь</a> на пространства, которые вам интересны.
+        </div>
+    <?php }  ?>    
+
     <?php foreach ($data['latest_answers'] as  $answ) { ?>
         <div class="sb-telo comm-space-color-<?= $answ['space_color']; ?>">
             <div class="sb-date"> 
@@ -118,21 +124,5 @@
             </a>
        </div>
     <?php } ?>  
-
-    <?php if($space_signed) { ?>
-        <div class="bar-space">
-            <h3 class="bar-title"><?= lang('Signed'); ?></h3>  
-            <?php foreach ($space_signed as  $sig) { ?>
-                <a class="bar-space-telo" href="/s/<?= $sig['space_slug']; ?>" title="<?= $sig['space_name']; ?>">
-                    <img src="/uploads/space/small/<?= $sig['space_img']; ?>" alt="<?= $sig['space_name']; ?>">
-                    <span class="bar-name"><?= $sig['space_name']; ?></span>
-                </a>
-            <?php } ?>
-        </div>    
-    <?php } else { ?> 
-        <div class="space-no-user">
-            Читайте больше! <br><a href="/space">Подпишитесь</a> на пространства, которые вам интересны.
-        </div>
-    <?php }  ?>    
 </aside> 
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

@@ -143,8 +143,10 @@ Route::get('/u/{login}/comments')->controller('CommentController@userComments')-
 Route::get('/flow')->controller('FlowController');
 Route::get('/flow/content')->controller('FlowController@contentChat');
 
-// Все комментарии
+// Все комментарии и ответы
 Route::get('/comments')->controller('CommentController');
+Route::get('/answers')->controller('AnswerController');
+
 
 // Пространства
 Route::get('/space')->controller('SpaceController');

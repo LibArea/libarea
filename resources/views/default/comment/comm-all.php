@@ -33,27 +33,27 @@
                         
                         <div class="comm-telo">
                             <div class="comm-header">
-                                <img class="ava" src="/uploads/avatar/small/<?php echo $comm['avatar'] ?>">
+                                <img class="ava" src="/uploads/avatar/small/<?= $comm['avatar'] ?>">
                                 <span class="user"> 
-                                    <a href="/u/<?php echo $comm['login']; ?>"><?php echo $comm['login']; ?></a> 
-                                    
-                                    <?php echo $comm['date']; ?>
+                                    <a href="/u/<?= $comm['login']; ?>"><?= $comm['login']; ?></a> 
+                                    <?= $comm['date']; ?>
                                 </span> 
              
                                 <span class="otst"> | </span>
                                 <span class="date">  
-                                   <a href="/posts/<?php echo $comm['post_slug']; ?>"><?php echo $comm['post_title']; ?></a>
+                                   <a href="/posts/<?= $comm['post_slug']; ?>"><?= $comm['post_title']; ?></a>
                                 </span>
                             </div>
+
                             <div class="comm-telo-body">
-                                <?php echo $comm['content']; ?> 
+                                <?= $comm['comment_content']; ?> 
                             </div>
                         </div>
                     </div>
                 <?php } else { ?>    
                     <div class="dell comm-telo_bottom"> 
                         <div class="voters"></div>
-                        ~ Комментарий удален
+                        ~ <?= lang('Comment deleted'); ?>
                     </div>
                 <?php } ?> 
             <?php } ?>

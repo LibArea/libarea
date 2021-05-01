@@ -35,7 +35,7 @@
             <?php } else { ?>    
                 <div class="dell comm-telo_bottom"> 
                     <div class="voters"></div>
-                    ~ Комментарий удален
+                    ~ <?= lang('Comment deleted'); ?>
                 </div>
             <?php } ?>     
                     

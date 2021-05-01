@@ -44,7 +44,7 @@ body {
     ". main ."
     ". footer .";
   grid-row-gap: 0.2rem;
-  max-width: 1210px;
+  max-width: 1310px;
   margin-right: auto;
   margin-left: auto;
 }
@@ -185,6 +185,7 @@ blockquote {
   align-items: center;
   justify-content: center;
   text-decoration: none;
+  border-radius: 2px;
 }
 .logo:hover, .logo:focus {
   color: var(--color-white);
@@ -228,7 +229,7 @@ blockquote {
   display: block;  
 } 
 .bar-m {
-  margin: 0 0 15px 1px;
+  margin: 0 0 10px 1px;
   text-transform: uppercase;
   font-size: 12px;
   letter-spacing: 1px;
@@ -236,7 +237,7 @@ blockquote {
 .togglemenuoff {
   position: absolute;
   right: 15px;
-  top: -2px;  
+  top: 0;  
   color: #999;
   font-size: 13px;
 } 
@@ -288,6 +289,9 @@ icon {
 }
 .nav a {
   color: var(--color-gray-1);
+}
+a.login {
+  color: #e7672e;
 }
 .nav a:hover, .nav.active > a {
   color: var(--color-gray-2);
@@ -745,7 +749,7 @@ a.space-u.tag-u {
   color: #666;
   font-size: 13px;
   width: 98%;
-  margin-top: 20px;
+  margin-bottom: 20px;
   padding: 5px 5px 5px 10px;
 }
 h1 span{
@@ -758,16 +762,13 @@ h1 span{
 .fl {
   padding: 5px; 
 }
-.bar-space {
-    
-}
 .bar-space-telo {
   display: flex;
   align-items: center;
-  padding: 4px 0 6px 0;
+  padding: 5px 0;
   margin-bottom: 3px;
   font-size: 15px;
-  width: 160px;
+  width: 140px;
   color: #222;
   text-decoration: none;
   white-space: nowrap;
@@ -775,12 +776,17 @@ h1 span{
   text-overflow: ellipsis;
   position: relative;
 }
+.bar-space-telo:hover {
+  background: rgba(0,154,97,0.08);
+  color: #666;
+  text-decoration: none;
+}
 .bar-space-telo img {
-  margin-right: 10px;
+  margin-right: 6px;
   width: 21px;
   height: 21px;
-  border-radius: 12px;
-  margin-left: 8px;
+  border-radius: 2px;
+  vertical-align: middle;
 }
 .bar-space a.bar-space-telo .bar-name {
   text-decoration: none;
@@ -789,9 +795,9 @@ h1 span{
   text-overflow: ellipsis;
   font-size: 13px;
 }
-#sidebar h3.bar-title {
-  margin-left: 8px;
-  margin-bottom: 5px; 
+
+.bar-title {
+  margin-top: 25px;
 }
 
 /* Ответы */
@@ -998,8 +1004,6 @@ textarea.mess {
 .box label {
   width: 7em;
   vertical-align: middle;
-}
-.box label {
   display: block;
   float: left;
   margin-bottom: 4px;

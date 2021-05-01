@@ -80,12 +80,13 @@ class AnswerModel extends \MainModel
        return $last_id; 
     }
     
-    // Последние 5 комментариев
+    // Последние 5 ответа
     public static function latestAnswers($user_id) 
     {
         $q = XD::select('*')->from(['answers']);
         $query = $q->leftJoin(['posts'])->on(['post_id'], '=', ['answer_post_id'])
                  ->leftJoin(['users'])->on(['id'], '=', ['answer_user_id'])
+                 //->leftJoin(['comments'])->on(['comment_post_id'], '=', ['post_id'])
                  ->leftJoin(['space'])->on(['post_space_id'], '=', ['space_id']);
                  
                 if($user_id){ 

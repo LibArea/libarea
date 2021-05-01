@@ -45,8 +45,8 @@ class PostController extends \MainController
         }  
  
         // Последние комментарии и отписанные пространства
-        $latest_answers = AnswerModel::latestAnswers($uid['id']);
-        $space_signed   = SpaceModel::getSpaceUser($uid['id']);
+        $latest_answers     = AnswerModel::latestAnswers($uid['id']);
+        $space_signed_bar   = SpaceModel::getSpaceUser($uid['id']);
  
         $result_comm = Array();
         foreach($latest_answers as $ind => $row){
@@ -69,7 +69,7 @@ class PostController extends \MainController
             'pNum'              => $page,
         ];
 
-        return view(PR_VIEW_DIR . '/home', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'space_signed' => $space_signed]);
+        return view(PR_VIEW_DIR . '/home', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'space_bar' => $space_signed_bar]);
     }
 
 
@@ -103,14 +103,14 @@ class PostController extends \MainController
         }  
  
         // Последние комментарии и отписанные пространства
-        $latest_answers = AnswerModel::latestAnswers($uid['id']);
-        $space_signed   = SpaceModel::getSpaceUser($uid['id']);
-
+        $latest_answers     = AnswerModel::latestAnswers($uid['id']);
+        $space_signed_bar   = SpaceModel::getSpaceUser($uid['id']);
+ 
         $result_comm = Array();
         foreach($latest_answers as $ind => $row){
-            $row['answer_content']    = htmlspecialchars(mb_substr($row['answer_content'],0,81, 'utf-8'));  
-            $row['answer_date']       = Base::ru_date($row['answer_date']);
-            $result_comm[$ind]         = $row;
+            $row['answer_content']  = htmlspecialchars(mb_substr($row['answer_content'],0,81, 'utf-8'));  
+            $row['answer_date']     = Base::ru_date($row['answer_date']);
+            $result_comm[$ind]      = $row;
         }
 
         if($page > 1) { 
@@ -120,15 +120,14 @@ class PostController extends \MainController
         }
 
         $data = [
-            'title'             => lang('TOP') . ' | ' . $GLOBALS['conf']['sitename'] . $num, 
-            'description'       => lang('top-desc') . ' ' . $GLOBALS['conf']['sitename'] . $num,
-            'space_signed'      => $space_signed,
+            'title'             => lang('Home') . 'Главная | ' . $GLOBALS['conf']['sitename'] . $num, 
+            'description'       => lang('home-desc') . ' ' . $GLOBALS['conf']['sitename'] . $num,
             'latest_answers'    => $result_comm,
             'pagesCount'        => $pagesCount,
             'pNum'              => $page,
         ];
 
-        return view(PR_VIEW_DIR . '/home', ['data' => $data, 'uid' => $uid, 'posts' => $result]);
+        return view(PR_VIEW_DIR . '/home', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'space_bar' => $space_signed_bar]);
 
     }
 
@@ -177,7 +176,7 @@ class PostController extends \MainController
         }
         
         // Обработает некоторые поля
-        $post['content']         = $Parsedown->text($post['post_content']);
+        $post['content']        = $Parsedown->text($post['post_content']);
         $post['post_url']       = $post['post_url'];
         $post['post_url_full']  = $post['post_url_full'];
         $post['post_date']      = Base::ru_date($post['post_date']);

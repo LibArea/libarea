@@ -23,7 +23,7 @@ class CommentController extends \MainController
          
         $pagesCount = CommentModel::getCommentAllCount();  
         $comm       = CommentModel::getCommentsAll($page, $user_id);
- 
+
         $result = Array();
         foreach($comm  as $ind => $row){
  
