@@ -32,13 +32,19 @@ aside#sidebar {
   width: 28px;
   height: 28px;
 }
-.flow-comment .box {
+.flow-comment .box, .flow-answer .box {
   margin: 6px 0 10px 0; 
   background-color: lightyellow;
   padding: 3px 10px 3px 10px;
   color: #39739d;
   font-size: 13px;
   display: inline-block;
+}
+.flow-answer .box {
+  background-color: #f3f3f3;  
+}
+.flow icon {
+  margin-right: 1px;  
 }
 .flow-telo.dell{
  display: none;

@@ -73,9 +73,9 @@ class SearchController extends \MainController
         
         $result = Array();
         foreach($post as $ind => $row){
-            $row['post_date']       = Base::ru_date($row['post_date']);
-            $row['num_comments']    = Base::ru_num('comm', $row['post_comments']);
-            $result[$ind]           = $row;
+            $row['post_date']           = Base::ru_date($row['post_date']);
+            $row['lang_num_answers']    = Base::ru_num('answ', $row['post_answers_num']);
+            $result[$ind]               = $row;
          
         }
         

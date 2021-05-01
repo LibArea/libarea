@@ -56,7 +56,7 @@
                             <?php if($post['post_answers_num'] !=0) { ?> 
                                 <span class="otst"> | </span>
                                 <a class="u-url" href="/posts/<?= $post['post_slug']; ?>">
-                                    <?= $post['post_answers_num']; ?>  <?= $post['num_comments']; ?>
+                                    <?= $post['post_answers_num']; ?>  <?= $post['lang_num_answers']; ?>
                                 </a>                                
                             <?php } ?>
                         </div>  
@@ -90,7 +90,7 @@
       
         <?php if (!empty($tags)) { ?>
             <div class="space-tags">
-                <div class="menu-m">Метки</div>
+                <div class="menu-m"><?= lang('Tags'); ?></div>
                 <?php foreach ($tags as  $tag) { ?>  
                     <a <?php if ($uid['uri'] == '/s/'.$tag['space_slug'] .'/'.$tag['st_id']) { ?> class="avtive" <?php } ?> href="/s/<?= $space_info['space_slug']; ?>/<?= $tag['st_id']; ?>">
                         <?= $tag['st_title']; ?>
@@ -101,16 +101,24 @@
         <br>
         <?php if(!$uid['id']) { ?> 
                 <div class="right"> 
-                    <a href="/login"><div class="hide-space-id add-space">Подписаться</div></a>
+                    <a href="/login"><div class="hide-space-id add-space"><?= lang('Read'); ?></div></a>
                 </div>
-            <?php } else { ?>
-                <div class="right"> 
-                    <?php if($data['space_hide'] == 1) { ?> 
-                        <div data-id="<?= $space_info['space_id']; ?>" class="hide-space-id add-space">Подписаться</div>
-                    <?php } else { ?> 
-                        <div data-id="<?= $space_info['space_id']; ?>" class="hide-space-id no-space">Отписаться</div>
-                    <?php } ?>   
-                </div>  
+        <?php } else { ?>
+            <?php if($space_info['space_id'] !=1) { ?>
+                <?php if($space_info['space_user_id'] != $uid['id']) { ?>
+                    <div class="right"> 
+                        <?php if($space_signed == 1) { ?>
+                            <div data-id="<?= $space_info['space_id']; ?>" class="hide-space-id no-space">
+                                <?= lang('Unsubscribe'); ?>
+                            </div>
+                        <?php } else { ?> 
+                            <div data-id="<?= $space_info['space_id']; ?>" class="hide-space-id add-space">
+                                <?= lang('Read'); ?>
+                            </div>
+                        <?php } ?>   
+                    </div>
+                <?php } ?>
+            <?php } ?>                 
         <?php } ?> 
     </aside> 
 <?php } else { ?>

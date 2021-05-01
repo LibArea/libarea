@@ -22,7 +22,7 @@ class PostController extends \MainController
 
         $space_user  = SpaceModel::getSpaceUser($uid['id']);
         
-        $pagesCount = PostModel::getPostHomeCount($space_user); 
+        $pagesCount = PostModel::getPostHomeCount($space_user, $uid['id']); 
         $posts      = PostModel::getPostHome($page, $space_user, $uid['trust_level'], $uid['id']);
 
         if (!$posts) {
@@ -38,7 +38,7 @@ class PostController extends \MainController
                 $row['post_url'] = $parse['host'];  
             } 
             
-            $row['num_answers']         = Base::ru_num('answ', $row['post_answers_num']);
+            $row['lang_num_answers']    = Base::ru_num('answ', $row['post_answers_num']);
             $row['post_date']           = Base::ru_date($row['post_date']);
             $result[$ind]               = $row;
          
@@ -46,8 +46,8 @@ class PostController extends \MainController
  
         // Последние комментарии и отписанные пространства
         $latest_answers = AnswerModel::latestAnswers($uid['id']);
-        $space_hide      = SpaceModel::getSpaceUser($uid['id']);
-
+        $space_signed   = SpaceModel::getSpaceUser($uid['id']);
+ 
         $result_comm = Array();
         foreach($latest_answers as $ind => $row){
             $row['answer_content']    = htmlspecialchars(mb_substr($row['answer_content'],0,81, 'utf-8'));  
@@ -64,52 +64,72 @@ class PostController extends \MainController
         $data = [
             'title'             => lang('Home') . 'Главная | ' . $GLOBALS['conf']['sitename'] . $num, 
             'description'       => lang('home-desc') . ' ' . $GLOBALS['conf']['sitename'] . $num,
-            'space_hide'        => $space_hide,
+            'latest_answers'    => $result_comm,
+            'pagesCount'        => $pagesCount,
+            'pNum'              => $page,
+        ];
+
+        return view(PR_VIEW_DIR . '/home', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'space_signed' => $space_signed]);
+    }
+
+
+    // Посты с начальными не нулевыми голосами, с голосованием, например, от 5
+    public function topPost() { 
+    
+        $pg     = \Request::getInt('page'); 
+        $page   = (!$pg) ? 1 : $pg;
+        $uid    = Base::getUid();
+        
+        $pagesCount = PostModel::getPostTopCount(); 
+        $posts      = PostModel::getPostTop($page, $uid['id']);
+
+        if (!$posts) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
+        }
+
+        $result = Array();
+        foreach($posts as $ind => $row){
+            
+            if(Base::getStrlen($row['post_url']) > 6) {
+                $parse = parse_url($row['post_url']);
+                $row['post_url'] = $parse['host'];  
+            } 
+            
+            $row['lang_num_answers']    = Base::ru_num('answ', $row['post_answers_num']);
+            $row['post_date']           = Base::ru_date($row['post_date']);
+            $result[$ind]               = $row;
+         
+        }  
+ 
+        // Последние комментарии и отписанные пространства
+        $latest_answers = AnswerModel::latestAnswers($uid['id']);
+        $space_signed   = SpaceModel::getSpaceUser($uid['id']);
+
+        $result_comm = Array();
+        foreach($latest_answers as $ind => $row){
+            $row['answer_content']    = htmlspecialchars(mb_substr($row['answer_content'],0,81, 'utf-8'));  
+            $row['answer_date']       = Base::ru_date($row['answer_date']);
+            $result_comm[$ind]         = $row;
+        }
+
+        if($page > 1) { 
+            $num = ' — ' . lang('Page') . ' ' . $page;
+        } else {
+            $num = '';
+        }
+
+        $data = [
+            'title'             => lang('TOP') . ' | ' . $GLOBALS['conf']['sitename'] . $num, 
+            'description'       => lang('top-desc') . ' ' . $GLOBALS['conf']['sitename'] . $num,
+            'space_signed'      => $space_signed,
             'latest_answers'    => $result_comm,
             'pagesCount'        => $pagesCount,
             'pNum'              => $page,
         ];
 
         return view(PR_VIEW_DIR . '/home', ['data' => $data, 'uid' => $uid, 'posts' => $result]);
-    }
 
-    // Посты с начальными не нулевыми голосами, с голосованием, например, от 5
-    public function topPost() { 
-    
-        $account   = \Request::getSession('account');
-        $user_id = (!$account) ? 0 : $account['user_id'];
-    
-        // Пока Top - по количеству комментариев  
-        $posts = PostModel::getPostTop($user_id);
- 
-        $result = Array();
-        foreach($posts as $ind => $row){
-            $row['num_comments']  = Base::ru_num('comm', $row['post_comments']);
-            $row['post_date']     = Base::ru_date($row['post_date']);
-            $result[$ind]         = $row;
-        }  
-        
-        // Последние комментарии
-        $latest_comments = CommentModel::latestComments($user_id);
-        
-        $result_comm = Array();
-        foreach($latest_comments as $ind => $row){
-            $row['comment_content']    = htmlspecialchars(mb_substr($row['comment_content'],0,81, 'utf-8'));  
-            $row['comment_date']       = Base::ru_date($row['comment_date']);
-            $result_comm[$ind]         = $row;
-        }
-        
-        $uid  = Base::getUid();
-        $data = [
-            'title'            => 'Популярные посты | ' . $GLOBALS['conf']['sitename'], 
-            'description'      => 'Самые популярные посты сообществе. ' . $GLOBALS['conf']['sitename'],
-            'latest_comments'  => 0,
-            'space_hide'       => 0,
-            'latest_comments'  => $result_comm,
-            'pagesCount'       => 0,
-        ];
-
-        return view(PR_VIEW_DIR . '/home', ['data' => $data, 'uid' => $uid, 'posts' => $result]);
     }
 
     // Полный пост

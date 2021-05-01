@@ -19,8 +19,9 @@ class FlowModel extends \MainModel
     {
         $q = XD::select('*')->from(['flow_log']);
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['flow_user_id'])
-                ->where(['flow_action_id'], '!=', 2) // 2 - post
-                ->and(['flow_action_id'], '!=', 3)   // 3 - answer
+                ->where(['flow_action_id'], '!=', 2)
+                ->and(['flow_action_id'], '!=', 6)
+                ->and(['flow_action_id'], '!=', 7)  
                 ->orderBy(['flow_id'])->desc()->limit(15);
 
         $result = $query->getSelect();

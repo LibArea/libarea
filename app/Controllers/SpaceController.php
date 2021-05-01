@@ -49,23 +49,22 @@ class SpaceController extends \MainController
         
         $result = Array();
         foreach($posts as $ind => $row){
-            $row['num_comments']  = Base::ru_num('answ', $row['post_answers_num']);
-            $result[$ind]         = $row;
+            $row['lang_num_answers']    = Base::ru_num('answ', $row['post_answers_num']);
+            $result[$ind]               = $row;
         }  
 
         $tags = SpaceModel::getSpaceTags($space['space_id']);
 
         // Отписан участник от пространства или нет
-        $space_hide = SpaceModel::getMySpaceHide($space['space_id'], $uid['id']);
+        $space_signed = SpaceModel::getMySpaceHide($space['space_id'], $uid['id']);
 
         $data = [
             'h1'         => $space['space_name'],
             'title'      => $space['space_name'] . ' - посты по пространству | ' . $GLOBALS['conf']['sitename'],
             'description'=> 'Страница постов по пространству ' . $space['space_name'] . ' на сайте ' . $GLOBALS['conf']['sitename'],
-            'space_hide' => $space_hide,
         ];
 
-        return view(PR_VIEW_DIR . '/space/space-posts', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'space_info' => $space, 'tags' => $tags]);
+        return view(PR_VIEW_DIR . '/space/space-posts', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'space_info' => $space, 'tags' => $tags, 'space_signed' => $space_signed]);
     }
 
     // Форма изменения пространства
@@ -125,6 +124,25 @@ class SpaceController extends \MainController
         // Или персонал или владелец
         if ($uid['trust_level'] != 5 && $space['space_user_id'] != $uid['id']) {
             redirect('/');
+        }
+
+        $space_name          = \Request::getPost('space_name');
+        $space_description  = \Request::getPost('space_description');
+
+        // Проверяем длину title
+        if (Base::getStrlen($space_name) < 4 || Base::getStrlen($space_name) > 20)
+        {
+            Base::addMsg('Длина названия должна быть от 4 до 20 знаков', 'error');
+            redirect('/s/' . $space['space_slug']);
+            return true;
+        }
+  
+        // Проверяем длину описания
+        if (Base::getStrlen($space_description) < 60 || Base::getStrlen($space_description) > 240)
+        {
+            Base::addMsg('Длина meta- описания должна быть от 60 до 240 знаков', 'error');
+            redirect('/s/' . $space['space_slug']);
+            return true;
         }
 
         $name     = $_FILES['image']['name'];
@@ -190,7 +208,7 @@ class SpaceController extends \MainController
         $space_color = \Request::getPost('space_color');
         $space_color = (empty($space_color)) ? 0 : $space_color;
         
-        
+       
         $slug = SpaceModel::getSpaceInfo($space_slug);
 
         if($slug['space_slug'] != $space['space_slug']) {
@@ -203,8 +221,8 @@ class SpaceController extends \MainController
         $data = [
             'space_id'           => $space_id,
             'space_slug'         => $space_slug,
-            'space_name'         => \Request::getPost('space_name'),
-            'space_description'  => \Request::getPost('space_description'),
+            'space_name'         => $space_name,
+            'space_description'  => $space_description,
             'space_color'        => $space_color,
             'space_text'         => $_POST['space_text'], // Не фильтруем!
             'space_img'          => $space_img,
@@ -292,11 +310,18 @@ class SpaceController extends \MainController
         redirect('/s/' .$space['space_slug']);
     }
     
-    // Отписка от пространств
+    // Подписка / отписка от пространств
     public function hide()
     {
-        $space_id = \Request::getPostInt('space_id'); 
-        $account  = \Request::getSession('account');
+        $uid        = Base::getUid();
+        $space_id   = \Request::getPostInt('space_id'); 
+        $account    = \Request::getSession('account');
+
+        // Запретим действия если участник создал пространство
+        $sp_info    = SpaceModel::getSpaceId($space_id);
+        if($sp_info['space_user_id'] == $uid['id']) {
+            return false;
+        }
 
         SpaceModel::SpaceHide($space_id, $account['user_id']);
         
@@ -452,7 +477,7 @@ class SpaceController extends \MainController
             'space_slug'         => $space_slug,
             'space_description'  => '',
             'space_color'        => 0,
-            'space_img'          => '',
+            'space_img'          => 'space_no.png',
             'space_text'         => '',
             'space_date'         => date("Y-m-d H:i:s"),
             'space_user_id'      => $uid['id'],

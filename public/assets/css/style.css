@@ -695,6 +695,11 @@ a.space-u.tag-u {
 .space-des {
   margin-left:10px;
 }
+.space-des.all {
+  margin-left: 50px;
+  font-size: 14px;
+  color: #888;
+}    
 .space-text {
   color: #666;
   font-size: 13px;
@@ -733,7 +738,15 @@ a.space-u.tag-u {
   text-align: center;
 }
 .space-telo {
-  margin-bottom: 15px;
+  margin-bottom: 25px;
+}
+.space-no-user {
+  background: #f0f0df;
+  color: #666;
+  font-size: 13px;
+  width: 98%;
+  margin-top: 20px;
+  padding: 5px 5px 5px 10px;
 }
 h1 span{
   vertical-align: middle;
@@ -744,6 +757,41 @@ h1 span{
 }
 .fl {
   padding: 5px; 
+}
+.bar-space {
+    
+}
+.bar-space-telo {
+  display: flex;
+  align-items: center;
+  padding: 4px 0 6px 0;
+  margin-bottom: 3px;
+  font-size: 15px;
+  width: 160px;
+  color: #222;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+}
+.bar-space-telo img {
+  margin-right: 10px;
+  width: 21px;
+  height: 21px;
+  border-radius: 12px;
+  margin-left: 8px;
+}
+.bar-space a.bar-space-telo .bar-name {
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 13px;
+}
+#sidebar h3.bar-title {
+  margin-left: 8px;
+  margin-bottom: 5px; 
 }
 
 /* Ответы */
@@ -829,8 +877,10 @@ ol.comment-telo {
   font-size: 13px;
 }
 .comm-telo {
-  margin-left: 40px;
-  margin-right: 40px;
+  margin-left: 35px;
+}
+.comm-telo.step {
+  margin-left: 70px; 
 }
 .comm-telo_bottom {
   margin-bottom: 20px;
@@ -866,7 +916,7 @@ ol.comment-telo {
   margin: 0 1px;
 }
 .cm_addentry, .comments .cm_add_link, .comm-deletes, .user-comm-fav, .user-answ-fav, .answ_addentry, .answers .answ_add_link, .answers .cm_add_link, .answ-deletes {
-  margin-left: 40px;
+  margin-left: 35px;
 }
 .addcomm, .delcomm, .editcomm, .favcomm, .addansw, .delansw, .editansw, .addcomm_re {
   color: var(--color-gray-1);

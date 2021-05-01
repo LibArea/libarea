@@ -67,10 +67,10 @@
                         <span class="date"> 
                            <?= $post['post_date'] ?>
                         </span>
-                        <?php if($post['post_comments'] !=0) { ?> 
+                        <?php if($post['post_answers_num'] !=0) { ?> 
                             <span class="otst"> | </span>
                             <a class="u-url" href="/posts/<?= $post['post_slug']; ?>">
-                               <?= $post['post_comments']; ?>  <?= $post['num_comments']; ?>  
+                               <?= $post['post_answers_num']; ?>  <?= $post['lang_num_answers']; ?>  
                             </a>
                         <?php } ?>
                     </div>

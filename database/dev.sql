@@ -263,12 +263,20 @@ INSERT INTO `space` (`space_id`, `space_name`, `space_slug`, `space_description`
 -- Структура таблицы `space_hidden`
 --
 
-CREATE TABLE `space_hidden` (
-  `hidden_id` int(11) NOT NULL,
-  `hidden_space_id` int(11) NOT NULL,
-  `hidden_user_id` int(11) NOT NULL
+CREATE TABLE `space_signed` (
+  `signed_id` int(11) NOT NULL,
+  `signed_space_id` int(11) NOT NULL,
+  `signed_user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Дамп данных таблицы `flow_log`
+--
+
+INSERT INTO `space_signed` (`signed_id`, `signed_space_id`, `signed_user_id`) VALUES
+(1, 1, 1),
+(2, 2, 1),
+(3, 3, 1);
 -- --------------------------------------------------------
 
 --
@@ -580,8 +588,8 @@ ALTER TABLE `space`
 --
 -- Индексы таблицы `space_hidden`
 --
-ALTER TABLE `space_hidden`
-  ADD PRIMARY KEY (`hidden_id`);
+ALTER TABLE `space_signed`
+  ADD PRIMARY KEY (`signed_id`);
 
 --
 -- Индексы таблицы `space_tags`
@@ -735,8 +743,8 @@ ALTER TABLE `space`
 --
 -- AUTO_INCREMENT для таблицы `space_hidden`
 --
-ALTER TABLE `space_hidden`
-  MODIFY `hidden_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `space_signed`
+  MODIFY `signed_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `space_tags`

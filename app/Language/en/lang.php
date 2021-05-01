@@ -52,6 +52,7 @@ return [
     
     /* For notification and chat */
     'add_comment'       => 'added a comment',
+    'add_answer'        => 'added a answer',
     'add_chat'          => 'added a message to the chat',
     'add_post'          => 'added a post',
     'add_up_post'       => 'I liked the post',

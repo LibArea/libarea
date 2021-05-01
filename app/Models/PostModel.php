@@ -15,13 +15,21 @@ class PostModel extends \MainModel
     {
         $result = Array();
         foreach($space_user as $ind => $row){
-            $result[$ind] = $row['hidden_space_id'];
+            $result[$ind] = $row['signed_space_id'];
         } 
         
-        if($result) {
-            $string = implode(',', $result);
+        // Временное решение
+        // Мы должны сформировать список пространств по умолчанию (в config)
+        // и добавить условие показа постов, рейтинг которых достигает > N+ значения
+        // в первый час размещения, но не вошедшие в пространства по умолчанию к показу
+        if($uid == 0) {
+           $string = '';
         } else {
-            $string = 0;
+            if($result) {
+                $string = "WHERE p.post_space_id IN(1, ".implode(',', $result).")";
+            } else {
+               $string = "WHERE p.post_space_id IN(1)"; 
+            }
         }        
 
         $offset = ($page-1) * 15; 
@@ -41,30 +49,35 @@ class PostModel extends \MainModel
                 INNER JOIN users as u ON u.id = p.post_user_id
                 INNER JOIN space as s ON s.space_id = p.post_space_id
                 LEFT JOIN votes_post as v ON v.votes_post_item_id = p.post_id AND v.votes_post_user_id = ".$uid."
-                WHERE p.post_space_id NOT IN(".$string.")
+                $string
                 $display
                 ORDER BY p.post_id DESC LIMIT 15 OFFSET ".$offset." ";
-                        
+    
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
     
     // Количество постов
-    public static function getPostHomeCount($space_user)
+    public static function getPostHomeCount($space_user, $uid)
     {
         $result = Array();
         foreach($space_user as $ind => $row){
-            $result[$ind] = $row['hidden_space_id'];
-        }    
-        if($result) {
-            $string = implode(',', $result);
+            $result[$ind] = $row['signed_space_id'];
+        }   
+        
+        if($uid == 0) {
+           $string = '';
         } else {
-            $string = 0;
-        }     
+            if($result) {
+                $string = "WHERE p.post_space_id IN(1, ".implode(',', $result).")";
+            } else {
+               $string = "WHERE p.post_space_id IN(1)"; 
+            }
+        } 
      
         $sql = "SELECT p.post_id, p.post_space_id, s.space_id
                 fROM posts as p
                 INNER JOIN space as s ON s.space_id = p.post_space_id
-                WHERE p.post_space_id NOT IN(".$string.") ";
+                $string ";
 
         $query = DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
         $result = ceil(count($query) / 15);
@@ -81,9 +94,23 @@ class PostModel extends \MainModel
                 ->leftJoin(['votes_post'])->on(['votes_post_item_id'], '=', ['post_id'])
                 ->and(['votes_post_user_id'], '=', $uid)
                 ->where(['post_is_delete'], '=', 0)
-                ->orderBy(['post_comments'])->desc();
+                ->orderBy(['post_answers_num'])->desc();
 
         return $query->getSelect();
+    }
+    
+    // Количество TOP постов
+    public static function getPostTopCount()
+    {
+        $sql = "SELECT p.post_id, p.post_space_id, s.space_id
+                fROM posts as p
+                INNER JOIN space as s ON s.space_id = p.post_space_id ";
+
+        $query = DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
+        $result = ceil(count($query) / 15);
+
+        return $result;
+        
     }
     
     // Полная версия поста  

@@ -12,8 +12,8 @@ class SpaceModel extends \MainModel
     {
 
         $q = XD::select('*')->from(['space']);
-        $result = $q->leftJoin(['space_hidden'])->on(['hidden_space_id'], '=', ['space_id'])
-                ->and(['hidden_user_id'], '=', $user_id)
+        $result = $q->leftJoin(['space_signed'])->on(['signed_space_id'], '=', ['space_id'])
+                ->and(['signed_user_id'], '=', $user_id)
                 ->where(['space_is_delete'], '!=', 1)->getSelect();
         
         return $result;
@@ -70,11 +70,11 @@ class SpaceModel extends \MainModel
         return  XD::select('*')->from(['space'])->where(['space_slug'], '=', $slug)->getSelectOne();
     }
     
-    // Все пространства на которые отписан пользователь
+    // Все пространства на которые подписан пользователь
     public static function getSpaceUser($user_id) 
     {
-        $q = XD::select('*')->from(['space_hidden']);
-        $result = $q->leftJoin(['space'])->on(['hidden_space_id'], '=', ['space_id'])->where(['hidden_user_id'], '=', $user_id)->getSelect();
+        $q = XD::select('*')->from(['space_signed']);
+        $result = $q->leftJoin(['space'])->on(['signed_space_id'], '=', ['space_id'])->where(['signed_user_id'], '=', $user_id)->getSelect();
 
         return $result;
     }
@@ -82,7 +82,7 @@ class SpaceModel extends \MainModel
     // Подписан пользователь на пространство или нет
     public static function getMySpaceHide($space_id, $user_id) 
     {
-        $result = XD::select('*')->from(['space_hidden'])->where(['hidden_space_id'], '=', $space_id)->and(['hidden_user_id'], '=', $user_id)->getSelect();
+        $result = XD::select('*')->from(['space_signed'])->where(['signed_space_id'], '=', $space_id)->and(['signed_user_id'], '=', $user_id)->getSelect();
 
         if($result) {
             return 1;
@@ -98,11 +98,11 @@ class SpaceModel extends \MainModel
           
         if(!$result){
            
-            XD::insertInto(['space_hidden'], '(', ['hidden_space_id'], ',', ['hidden_user_id'], ')')->values( '(', XD::setList([$space_id, $user_id]), ')' )->run();             
+            XD::insertInto(['space_signed'], '(', ['signed_space_id'], ',', ['signed_user_id'], ')')->values( '(', XD::setList([$space_id, $user_id]), ')' )->run();             
             
         } else {
             
-           XD::deleteFrom(['space_hidden'])->where(['hidden_space_id'], '=', $space_id)->and(['hidden_user_id'], '=', $user_id)->run(); 
+           XD::deleteFrom(['space_signed'])->where(['signed_space_id'], '=', $space_id)->and(['signed_user_id'], '=', $user_id)->run(); 
 
         }
         
@@ -204,7 +204,10 @@ class SpaceModel extends \MainModel
             $data['space_permit_users']]), ')' )->run();
         
         // id добавленного пространства
-        // $id = XD::select()->last_insert_id('()')->getSelectValue();
+        $space_id = XD::select()->last_insert_id('()')->getSelectValue();
+
+        // Подписываем на созданное пространство   
+        XD::insertInto(['space_signed'], '(', ['signed_space_id'], ',', ['signed_user_id'], ')')->values( '(', XD::setList([$space_id, $data['space_user_id']]), ')' )->run(); 
 
         return true; 
     }

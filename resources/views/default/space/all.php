@@ -7,27 +7,50 @@
   
         <?php foreach ($space as  $sp) { ?>  
             <div class="space-telo">
-                <span class="date"> 
+            
+                <img class="space-img" alt="<?= $sp['space_name']; ?>" src="/uploads/space/<?= $sp['space_img'] ?>">
+            
+            
+                <span class="space-name"> 
                     <div class="space-color space_<?= $sp['space_color'] ?>"></div>
                     <a title="<?= $sp['space_name']; ?>" class="space-s" href="/s/<?= $sp['space_slug']; ?>">
                         <?= $sp['space_name']; ?>
                     </a> 
                 </span> 
                 <?php if($sp['space_type'] == 1) { ?>
-                     <sup class="red">офф</sup>
+                     <small><span class="red">— <?= lang('official'); ?></span></small> 
                 <?php } ?>
-                <?php if($sp['hidden_space_id'] >= 1) {  ?><span class="red">&#10003;</span><?php } ?>
-                
-                
-                <span class="date space-des">
+
+                <?php if(!$uid['id']) { ?> 
+                    <div class="right"> 
+                        <a href="/login"><div class="hide-space-id add-space"><?= lang('Read'); ?></div></a>
+                    </div>
+                <?php } else { ?>
+                    <?php if($sp['space_id'] !=1) { ?>
+                        <?php if($sp['space_user_id'] != $uid['id']) { ?>
+                            <div class="right"> 
+                                <?php if($sp['signed_space_id'] >= 1) { ?>
+                                    <div data-id="<?= $sp['space_id']; ?>" class="hide-space-id no-space">
+                                        <?= lang('Unsubscribe'); ?>
+                                    </div>
+                                <?php } else { ?> 
+                                    <div data-id="<?= $sp['space_id']; ?>" class="hide-space-id add-space">
+                                        <?= lang('Read'); ?>
+                                    </div>
+                                <?php } ?>   
+                            </div> 
+                        <?php } ?>    
+                    <?php } ?>                        
+                <?php } ?> 
+
+                <div class="space-des all">
                     <?php if($sp['space_description']) { ?> 
-                        — &nbsp; <?= $sp['space_description']; ?> 
+                        <?= $sp['space_description']; ?> 
                     <?php } else { ?> 
-                        — &nbsp; описание формируется
+                        Описание формируется
                     <?php } ?>    
-                </span>
-                
-                
+                </div>
+
             </div>
         <?php } ?>
 
@@ -38,9 +61,7 @@
         <p>К сожалению тегов нет...</p>
 
     <?php } ?>
-    
-    <p><span class="red">&#10003;</span> говорит о том, что вы не видите посты из этих пространства в ленте. Чтобы сделать их видимыми достаточно зайти в пространство и нажать «Подписаться».</p>
-    
+
 </main>
 <?php if($uid['trust_level'] >= $GLOBALS['conf']['space']) { ?>
     <?php if($count_space <= 2) { ?>

@@ -55,7 +55,7 @@ class AnswerController extends \MainController
         return view(PR_VIEW_DIR . '/answer/all', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
     }
 
-    // Добавление комментария
+    // Добавление ответа
     public function createAnswer()
     {
         // Получим относительный url поста для возрата (упростить)
@@ -66,7 +66,7 @@ class AnswerController extends \MainController
         
         if (Base::getStrlen($answer) < 6 || Base::getStrlen($answer) > 1024)
         {
-            Base::addMsg('Длина комментария должна быть от 6 до 1000 знаков', 'error');
+            Base::addMsg('Длина ответа должна быть от 6 до 1000 знаков', 'error');
             redirect('/' . $return_url);
             return true;
         }
@@ -81,9 +81,9 @@ class AnswerController extends \MainController
         
         // Ограничим частоту добавления
         // Добавить условие TL
-        $num_comm =  CommentModel::getCommentSpeed($my_id);
-        if(count($num_comm) > 35) {
-            Base::addMsg('Вы исчерпали лимит комментариев (35) на сегодня', 'error');
+        $num_answ =  CommentModel::getCommentSpeed($my_id);
+        if(count($num_answ) > 35) {
+            Base::addMsg('Вы исчерпали лимит ответов (35) на сегодня', 'error');
             redirect('/');
         }
         
@@ -101,7 +101,7 @@ class AnswerController extends \MainController
             'flow_pubdate'      => date("Y-m-d H:i:s"),
             'flow_url'          => $url,
             'flow_target_id'    => $last_id,
-            'flow_about'        => lang('add_comment'),            
+            'flow_about'        => lang('add_answer'),            
             'flow_space_id'     => 0,
             'flow_tl'           => 0,
             'flow_ip'           => $ip, 

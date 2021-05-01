@@ -3,7 +3,7 @@
         <div id="add_flow"> 
             <textarea rows="1" disabled="disabled" placeholder="<?= lang('no-auth-comm'); ?>." id="flow"></textarea>
             <div class="add-flow-butt"> 
-                <input type="button" value="<?= lang('Reply to'); ?>">
+                <input type="button" value="<?= lang('Reply'); ?>">
             </div> 
         </div> 
     <?php else : ?>
@@ -11,7 +11,7 @@
         <?= csrf_field() ?>
             <textarea rows="1" placeholder="<?= lang('write-something'); ?>..." name="flow" id="flow"></textarea>
             <div class="add-flow-butt"> 
-                <input type="submit" name="commit" value="<?= lang('Reply to'); ?>" class="comment-post">
+                <input type="submit" name="commit" value="<?= lang('Reply'); ?>" class="comment-post">
             </div> 
         </form>
     <?php endif; ?>

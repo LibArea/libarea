@@ -269,7 +269,7 @@
                 
                         <?php foreach ($answ['comm'] as  $comm) { ?>
                             <?php if($comm['comment_del'] == 0) { ?>
-                                <ol class="comm-telo"> 
+                                <ol class="comm-telo<?php if($comm['comment_comm_id'] > 0) { ?> step<?php } ?>"> 
                                     <li class="comm_subtree" id="comm_<?= $comm['comment_id']; ?>">
                   
                                     <?php if (!$uid['id']) { ?> 
