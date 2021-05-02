@@ -28,7 +28,7 @@ class SpaceController extends \MainController
     }
 
     // Посты по пространству
-    public function SpacePosts()
+    public function SpacePosts($type)
     {
         $uid            = Base::getUid();
         $slug           = \Request::get('slug');
@@ -42,7 +42,7 @@ class SpaceController extends \MainController
             hl_preliminary_exit();
         }
   
-        $posts = SpaceModel::getSpacePosts($space['space_id'], $uid['id'], $space_tags_id);
+        $posts = SpaceModel::getSpacePosts($space['space_id'], $uid['id'], $space_tags_id, $type);
 
         $space['space_date']        = Base::ru_date($space['space_date']);
         $space['space_cont_post']   = count($posts);
@@ -64,7 +64,7 @@ class SpaceController extends \MainController
             'description'=> 'Страница постов по пространству ' . $space['space_name'] . ' на сайте ' . $GLOBALS['conf']['sitename'],
         ];
 
-        return view(PR_VIEW_DIR . '/space/space-posts', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'space_info' => $space, 'tags' => $tags, 'space_signed' => $space_signed]);
+        return view(PR_VIEW_DIR . '/space/space-posts', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'space_info' => $space, 'tags' => $tags, 'space_signed' => $space_signed, 'type' => $type]);
     }
 
     // Форма изменения пространства

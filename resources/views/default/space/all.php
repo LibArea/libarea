@@ -22,7 +22,7 @@
 
                 <?php if(!$uid['id']) { ?> 
                     <div class="right"> 
-                        <a href="/login"><div class="hide-space-id add-space"><?= lang('Read'); ?></div></a>
+                        <a href="/login"><div class="hide-space-id yes-space">+ <?= lang('Read'); ?></div></a>
                     </div>
                 <?php } else { ?>
                     <?php if($sp['space_id'] !=1) { ?>
@@ -33,8 +33,8 @@
                                         <?= lang('Unsubscribe'); ?>
                                     </div>
                                 <?php } else { ?> 
-                                    <div data-id="<?= $sp['space_id']; ?>" class="hide-space-id add-space">
-                                        <?= lang('Read'); ?>
+                                    <div data-id="<?= $sp['space_id']; ?>" class="hide-space-id yes-space">
+                                        + <?= lang('Read'); ?>
                                     </div>
                                 <?php } ?>   
                             </div> 
@@ -64,7 +64,7 @@
 </main>
 <?php if($uid['trust_level'] >= $GLOBALS['conf']['space']) { ?>
     <?php if($count_space <= 2) { ?>
-        <aside id="sidebar"> 
+        <aside class="sidebar"> 
             <div class="right">
                 <a class="add-space" href="/space/add">+ <?= lang('To create'); ?></a>
             </div>    

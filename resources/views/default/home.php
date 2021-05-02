@@ -1,7 +1,6 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 <?php include TEMPLATE_DIR . '/_block/left-menu.php'; ?>
 <main class="telo">
-
     <?php if (!$uid['id']) { ?>
         <h1 class="top banner"><?= lang('site-closed'); ?>. <a href="/info"><?= lang('Read'); ?></a>...</h1> 
     <?php } ?>  
@@ -106,7 +105,7 @@
  
 </main>
 
-<aside id="sidebar"> 
+<aside class="sidebar"> 
     <?php if(!$space_bar) { ?>
         <div class="space-no-user">
             Читайте больше! <br><a href="/space">Подпишитесь</a> на пространства, которые вам интересны.

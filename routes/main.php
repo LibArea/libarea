@@ -115,8 +115,8 @@ Route::before('Authorization@yesAuth')->getGroup();
 	Route::type('get')->get('/login')->controller('AuthController@loginPage'); 
 Route::endGroup();
 
-// Посты и главная страница
-Route::get('/top')->controller('PostController@topPost');
+// Покажем пост в ленте и полный пост
+Route::type('post')->get('/post/shown')->controller('PostController@shownPost');
 Route::get('/posts/{slug}')->controller('PostController@viewPost')->where(['slug' => '[A-Za-z0-9-]+']);
 
 // Правила
@@ -129,9 +129,6 @@ Route::get('/info/trust-level')->controller('InfoController@trustLevel');
 Route::get('/info/restriction')->controller('InfoController@restriction');
 Route::get('/info/markdown')->controller('InfoController@markdown'); 
 Route::get('/info/initial-setup')->controller('InfoController@initialSetup');
-
-// Покажем пост в ленте
-Route::type('post')->get('/post/shown')->controller('PostController@shownPost');
 
 // Участники, авторизация, посты и комментарии, закладки
 Route::get('/users')->controller('UserController');
@@ -147,10 +144,10 @@ Route::get('/flow/content')->controller('FlowController@contentChat');
 Route::get('/comments')->controller('CommentController');
 Route::get('/answers')->controller('AnswerController');
 
-
 // Пространства
 Route::get('/space')->controller('SpaceController');
-Route::get('/s/{slug}/{tags?}')->controller('SpaceController@spacePosts')->where(['slug' => '[A-Za-z0-9]+',  'tags' => '[0-9]+']);
+Route::get('/s/{slug}/{tags?}')->controller('SpaceController@spacePosts', ['feed'])->where(['slug' => '[A-Za-z0-9]+',  'tags' => '[0-9]+']);
+Route::get('/s/{slug}/top/{tags?}')->controller('SpaceController@spacePosts', ['top'])->where(['slug' => '[A-Za-z0-9]+',  'tags' => '[0-9]+']);
 
 // Вызов формы комментария
 Route::type('post')->get('/comments/addform')->controller('CommentController@addFormComm');
@@ -159,6 +156,7 @@ Route::type('post')->get('/comments/addform')->controller('CommentController@add
 Route::type(['get','post'])->get('/search')->controller('SearchController');
 Route::get('/domain/{domain}')->controller('SearchController@domain')->where(['domain' => '[A-Za-z0-9-.]+']);
 
-// Пагинация и главная страница, комментарии
-Route::get('/{page?}')->controller('PostController')->where(['page' => '[0-9]+']);
+// Пагинация и главная (feed) страница, top, all...
+Route::get('/{page?}')->controller('PostController', ['feed'])->where(['page' => '[0-9]+']);
+Route::get('/top/{page?}')->controller('PostController', ['top'])->where(['page' => '[0-9]+']);
 Route::get('/comments/{page?}')->controller('CommentController')->where(['page' => '[0-9]+']);

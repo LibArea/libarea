@@ -115,6 +115,20 @@ if(toggledark) {
     });
 }
 
+// Add Header Post
+var header = document.getElementById("stHeader");
+if(header) {
+    window.onscroll = function() {myFunction()};
+    var sticky = header.offsetTop;
+    function myFunction() {
+      if (window.pageYOffset > sticky) {
+        header.classList.add("sticky");
+      } else {
+        header.classList.remove("sticky");
+      }
+    }
+} 
+
 // Toggle menu mode (To combine)
 // Combined with the following, it might be worth changing the css itself 
 // to make it easier to change the visible position of the menu 

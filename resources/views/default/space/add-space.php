@@ -30,7 +30,7 @@
         </div>
     </div> 
 </main>
-<aside id="sidebar">  
+<aside class="sidebar">  
     <div class="menu-info">
        Вы можете создать только одно пространство.
     </div> 

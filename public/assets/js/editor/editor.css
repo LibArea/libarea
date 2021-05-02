@@ -413,7 +413,6 @@
     position: relative;
     overflow: hidden;
     height: auto;
-    min-height: 180px;
     padding: 0;
     border-right: none;
     -moz-transition: width .3s ease;
@@ -462,6 +461,12 @@ blockquote {
     clear: both;
     padding: 5px 9px;
 }
+
+textarea#wmd-input {
+    width: 98%;
+    height: 200px;
+}
+
 .editor-preview > :first-child { margin-top: 0px !important; }.editor-preview > :last-child { margin-bottom: 0px !important; }.editor-preview a { color: rgb(65, 131, 196); text-decoration: none; }.editor-preview a:hover { text-decoration: underline; }
 .editor-preview h1, .editor-preview h2, .editor-preview h3, .editor-preview h4, .editor-preview h5, .editor-preview h6 { margin: 20px 0px 10px; padding: 0px; font-weight: bold; -webkit-font-smoothing: antialiased; }
 .editor-preview h4 { font-size: 16px; }

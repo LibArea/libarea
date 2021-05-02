@@ -1,5 +1,5 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<main class="w-100 max-width">
+<main class="w-75">
     <span class="right">
         <a href="/space/<?= $space['space_slug']; ?>/tags/add">
              <?= lang('Add'); ?>

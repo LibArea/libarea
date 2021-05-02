@@ -48,8 +48,9 @@ return [
     'file-type-not-err' => 'File type not allowed',
     
     /* Meta - desc */
-    'desc-user-all'  => 'List of all participants sorted by date of registration on the site',
-    'desc-profile'  => 'Participant*s profile page (posts, comments)',
+    'desc-user-all'     => 'List of all participants sorted by date of registration on the site',
+    'desc-profile'      => 'Participant*s profile page (posts, comments)',
+    'top-desc'          => 'List of popular posts in the community (by number of responses)',
     
     /* For notification and chat */
     'add_comment'       => 'added a comment',

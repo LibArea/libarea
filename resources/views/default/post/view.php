@@ -1,7 +1,7 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 <main class="post">
     <article class="post-full max-width">
-     
+
         <?php if($post['post_is_delete'] == 0 || $uid['trust_level'] == 5) { ?>
    
             <div class="telo-detail_post<?php if($post['post_is_delete'] == 1) { ?> dell<?php } ?>">
@@ -26,6 +26,7 @@
                             <?php } ?> 
                         <?php } ?> 
             
+ 
                 <div class="post-body">
                     <h1 class="titl">
                         <?= $post['post_title']; ?> 
@@ -369,7 +370,7 @@
        
     </article>
 </main>
-<aside id="sidebar"> 
+<aside class="sidebar"> 
     <?php if($recommend) { ?> 
         <div>
             <h3 class="recommend"><?= lang('Recommended'); ?></h3>  

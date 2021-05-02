@@ -38,7 +38,7 @@ class VotesPostController extends \MainController
         $userup = VotesPostModel::getVoteStatus($post_info['post_id'], $user_id);   
         
         if($userup == 1) {
-            
+
             // далее удаление строки в таблице голосования за пост
             // далее уменьшаем на -1 количество 
             // см. код ниже. А пока:

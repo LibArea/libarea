@@ -14,16 +14,16 @@ use UrlRecord;
 class PostController extends \MainController
 {
     // Главная страница
-    public function index() {
-
+    public function index($type) 
+    {
         $pg     = \Request::getInt('page'); 
         $page   = (!$pg) ? 1 : $pg;
         $uid    = Base::getUid();
 
         $space_user  = SpaceModel::getSpaceUser($uid['id']);
         
-        $pagesCount = PostModel::getPostHomeCount($space_user, $uid['id']); 
-        $posts      = PostModel::getPostHome($page, $space_user, $uid['trust_level'], $uid['id']);
+        $pagesCount = PostModel::getPostFeedCount($space_user, $uid['id'], $type); 
+        $posts      = PostModel::getPostFeed($page, $space_user, $uid['trust_level'], $uid['id'], $type);
 
         if (!$posts) {
             include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
@@ -50,9 +50,9 @@ class PostController extends \MainController
  
         $result_comm = Array();
         foreach($latest_answers as $ind => $row){
-            $row['answer_content']    = htmlspecialchars(mb_substr($row['answer_content'],0,81, 'utf-8'));  
-            $row['answer_date']       = Base::ru_date($row['answer_date']);
-            $result_comm[$ind]         = $row;
+            $row['answer_content']      = htmlspecialchars(mb_substr($row['answer_content'],0,81, 'utf-8'));  
+            $row['answer_date']         = Base::ru_date($row['answer_date']);
+            $result_comm[$ind]          = $row;
         }
 
         if($page > 1) { 
@@ -61,74 +61,23 @@ class PostController extends \MainController
             $num = '';
         }
 
-        $data = [
-            'title'             => lang('Home') . 'Главная | ' . $GLOBALS['conf']['sitename'] . $num, 
-            'description'       => lang('home-desc') . ' ' . $GLOBALS['conf']['sitename'] . $num,
-            'latest_answers'    => $result_comm,
-            'pagesCount'        => $pagesCount,
-            'pNum'              => $page,
-        ];
-
-        return view(PR_VIEW_DIR . '/home', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'space_bar' => $space_signed_bar]);
-    }
-
-
-    // Посты с начальными не нулевыми голосами, с голосованием, например, от 5
-    public function topPost() { 
-    
-        $pg     = \Request::getInt('page'); 
-        $page   = (!$pg) ? 1 : $pg;
-        $uid    = Base::getUid();
-        
-        $pagesCount = PostModel::getPostTopCount(); 
-        $posts      = PostModel::getPostTop($page, $uid['id']);
-
-        if (!$posts) {
-            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
-            hl_preliminary_exit();
-        }
-
-        $result = Array();
-        foreach($posts as $ind => $row){
-            
-            if(Base::getStrlen($row['post_url']) > 6) {
-                $parse = parse_url($row['post_url']);
-                $row['post_url'] = $parse['host'];  
-            } 
-            
-            $row['lang_num_answers']    = Base::ru_num('answ', $row['post_answers_num']);
-            $row['post_date']           = Base::ru_date($row['post_date']);
-            $result[$ind]               = $row;
-         
-        }  
- 
-        // Последние комментарии и отписанные пространства
-        $latest_answers     = AnswerModel::latestAnswers($uid['id']);
-        $space_signed_bar   = SpaceModel::getSpaceUser($uid['id']);
- 
-        $result_comm = Array();
-        foreach($latest_answers as $ind => $row){
-            $row['answer_content']  = htmlspecialchars(mb_substr($row['answer_content'],0,81, 'utf-8'));  
-            $row['answer_date']     = Base::ru_date($row['answer_date']);
-            $result_comm[$ind]      = $row;
-        }
-
-        if($page > 1) { 
-            $num = ' — ' . lang('Page') . ' ' . $page;
+        if($type == 'feed') {
+            $meta_title = lang('Home') . ' | ';
+            $meta_desc  = lang('home-desc') . ' ';
         } else {
-            $num = '';
+            $meta_title = lang('TOP') . ' (популярный) | ';
+            $meta_desc  = lang('top-desc') . ' ';   
         }
 
         $data = [
-            'title'             => lang('Home') . 'Главная | ' . $GLOBALS['conf']['sitename'] . $num, 
-            'description'       => lang('home-desc') . ' ' . $GLOBALS['conf']['sitename'] . $num,
+            'title'             => $meta_title . $GLOBALS['conf']['sitename'] . $num, 
+            'description'       => $meta_desc . $GLOBALS['conf']['sitename'] . $num,
             'latest_answers'    => $result_comm,
             'pagesCount'        => $pagesCount,
             'pNum'              => $page,
         ];
 
         return view(PR_VIEW_DIR . '/home', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'space_bar' => $space_signed_bar]);
-
     }
 
     // Полный пост

@@ -46,7 +46,7 @@ class SpaceModel extends \MainModel
     }
 
     // Списки постов по пространству
-    public static function getSpacePosts($space_id, $user_id, $space_tags_id)
+    public static function getSpacePosts($space_id, $user_id, $space_tags_id, $type)
     {
         $q = XD::select('*')->from(['posts'])
             ->leftJoin(['users'])->on(['id'], '=', ['post_user_id'])
@@ -54,11 +54,20 @@ class SpaceModel extends \MainModel
             ->leftJoin(['votes_post'])->on(['votes_post_item_id'], '=', ['post_id'])
             ->and(['votes_post_user_id'], '=', $user_id)
             ->where(['post_space_id'], '=', $space_id);
-
-        if($space_tags_id) {
-            $result = $q->and(['post_tag_id'], '=', $space_tags_id)->orderBy(['post_id'])->desc()->getSelect();
-        } else { 
-            $result = $q->orderBy(['post_id'])->desc()->getSelect();
+            
+        if ($type == 'feed') {
+            if($space_tags_id) {
+                $result = $q->and(['post_tag_id'], '=', $space_tags_id)->orderBy(['post_id'])->desc()->getSelect();
+            } else { 
+                $result = $q->orderBy(['post_id'])->desc()->getSelect();
+            }
+        } else {
+            
+            if($space_tags_id) {
+                $result = $q->and(['post_tag_id'], '=', $space_tags_id)->orderBy(['post_answers_num'])->desc()->getSelect();
+            } else { 
+                $result = $q->orderBy(['post_answers_num'])->desc()->getSelect();
+            }
         }
  
         return $result;

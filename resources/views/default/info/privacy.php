@@ -1,5 +1,5 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<main class="w-100">
+<main class="w-75">
     <div class="max-width">
         <ul class="breadcrumb">
             <li class="breadcrumb-item">

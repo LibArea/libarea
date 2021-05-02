@@ -10,8 +10,9 @@ class PostModel extends \MainModel
 {
     // Посты на главной 
     // $page - страницы
-    // $tags_user - список id отписанных тегов
-    public static function getPostHome($page, $space_user, $trust_level, $uid)
+    // $tags_user - список id отписанных пространств
+    // $type - feed / top / all
+    public static function getPostFeed($page, $space_user, $trust_level, $uid, $type)
     {
         $result = Array();
         foreach($space_user as $ind => $row){
@@ -40,6 +41,12 @@ class PostModel extends \MainModel
         } else {
             $display = '';
         }
+        
+        if($type == 'feed') { 
+            $sort = 'ORDER BY p.post_id DESC';
+        } else {
+            $sort = 'ORDER BY p.post_answers_num DESC';
+        }  
 
         $sql = "SELECT p.post_id, p.post_title, p.post_slug, p.post_user_id, p.post_space_id, p.post_answers_num, p.post_date, p.post_votes, p.post_is_delete, p.post_closed, p.post_lo, p.post_top, p.post_url, p.post_content_preview, p.post_content_img,
                 u.id, u.login, u.avatar,
@@ -51,13 +58,13 @@ class PostModel extends \MainModel
                 LEFT JOIN votes_post as v ON v.votes_post_item_id = p.post_id AND v.votes_post_user_id = ".$uid."
                 $string
                 $display
-                ORDER BY p.post_id DESC LIMIT 15 OFFSET ".$offset." ";
+                $sort LIMIT 15 OFFSET ".$offset." ";
     
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
     
     // Количество постов
-    public static function getPostHomeCount($space_user, $uid)
+    public static function getPostFeedCount($space_user, $uid, $type)
     {
         $result = Array();
         foreach($space_user as $ind => $row){
@@ -85,34 +92,6 @@ class PostModel extends \MainModel
         return $result;
     }
 
-    // TOP посты на главной 
-    public static function getPostTop($uid)
-    {
-        $q = XD::select('*')->from(['posts']);
-        $query = $q->leftJoin(['users'])->on(['users.id'], '=', ['post_user_id'])
-                ->leftJoin(['space'])->on(['space_id'], '=', ['post_space_id'])
-                ->leftJoin(['votes_post'])->on(['votes_post_item_id'], '=', ['post_id'])
-                ->and(['votes_post_user_id'], '=', $uid)
-                ->where(['post_is_delete'], '=', 0)
-                ->orderBy(['post_answers_num'])->desc();
-
-        return $query->getSelect();
-    }
-    
-    // Количество TOP постов
-    public static function getPostTopCount()
-    {
-        $sql = "SELECT p.post_id, p.post_space_id, s.space_id
-                fROM posts as p
-                INNER JOIN space as s ON s.space_id = p.post_space_id ";
-
-        $query = DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
-        $result = ceil(count($query) / 15);
-
-        return $result;
-        
-    }
-    
     // Полная версия поста  
     public static function getPost($slug, $uid)
     {

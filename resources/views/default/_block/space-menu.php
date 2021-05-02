@@ -1,4 +1,4 @@
-<aside id="sidebar"> 
+<aside class="sidebar"> 
     <div class="menu-info">
         <?php if($uid['id'] > 0) { ?>
             <a href="/s/<?= $space['space_slug']; ?>">

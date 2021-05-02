@@ -8,9 +8,4 @@
         <?php include TEMPLATE_DIR . '/flow/flow-form.php'; ?>
     </div>
 </main>
-<aside id="sidebar"> 
-    <div class="flow-info">
-       <small>Чат и лента активности находится в стадии разработки.</small>
-    </div>
-</aside> 
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

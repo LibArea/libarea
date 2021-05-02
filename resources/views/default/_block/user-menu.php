@@ -1,4 +1,4 @@
-<aside id="sidebar"> 
+<aside class="sidebar"> 
     <div class="menu-info">
         <a href="/u/<?= Request::get('login'); ?>">
             <icon name="user"></icon>
