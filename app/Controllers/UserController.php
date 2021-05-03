@@ -42,14 +42,15 @@ class UserController extends \MainController
 
         $uid  = Base::getUid();
         $data =[
-          'h1'              => $user['login'] . ' - профиль',
-          'title'           => $user['login'] . ' - профиль' . ' | ' . $GLOBALS['conf']['sitename'],
-          'description'     => lang('desc-profile') . ' ' . $user['login'] . ' - ' . $GLOBALS['conf']['sitename'],
-          'created_at'      => Base::ru_date($user['created_at']),
-          'trust_level'     => UserModel::getUserTrust($user['id']),
-          'post_num_user'   => UserModel::getUsersPostsNum($user['id']),
-          'comm_num_user'   => UserModel::getUsersCommentsNum($user['id']), 
-          'space_user'      => SpaceModel::getSpaceUserId($user['id']),
+            'h1'              => $user['login'] . ' - профиль',
+            'title'           => $user['login'] . ' - профиль' . ' | ' . $GLOBALS['conf']['sitename'],
+            'description'     => lang('desc-profile') . ' ' . $user['login'] . ' - ' . $GLOBALS['conf']['sitename'],
+            'created_at'      => Base::ru_date($user['created_at']),
+            'trust_level'     => UserModel::getUserTrust($user['id']),
+            'post_num_user'   => UserModel::getUsersPostsNum($user['id']),
+            'answ_num_user'   => UserModel::getUsersAnswersNum($user['id']),
+            'comm_num_user'   => UserModel::getUsersCommentsNum($user['id']), 
+            'space_user'      => SpaceModel::getSpaceUserId($user['id']),
         ];
 
         return view(PR_VIEW_DIR . '/user/profile', ['data' => $data, 'uid' => $uid, 'user' => $user, 'post' => $post]);

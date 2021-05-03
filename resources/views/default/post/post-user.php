@@ -1,5 +1,5 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<main class="w-100">
+<main>
     <h1 class="top"><?php echo $data['h1']; ?></h1>
 
     <div class="telo posts">
@@ -27,8 +27,8 @@
                 <?php } ?> 
             
                 <div class="post-telo">
-                    <a class="u-url" href="/posts/<?php echo $post['post_slug']; ?>">
-                        <h3 class="titl"><?php echo $post['post_title']; ?></h3>
+                    <a class="u-url" href="/posts/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
+                        <h3 class="titl"><?= $post['post_title']; ?></h3>
                     </a>
                     <div class="space-color space_<?= $post['space_color'] ?>"></div>
                     <a class="space-u" href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
@@ -36,16 +36,16 @@
                     </a>
                     
                     <div class="footer">
-                        <img class="ava" src="/uploads/avatar/small/<?php echo $post['avatar']; ?>">
+                        <img class="ava" src="/uploads/avatar/small/<?= $post['avatar']; ?>">
                         <span class="user"> 
-                            <a href="/u/<?php echo $post['login']; ?>"><?php echo $post['login']; ?></a> 
+                            <a href="/u/<?= $post['login']; ?>"><?= $post['login']; ?></a> 
                         </span>
                         <span class="date"> 
-                            <?php echo $post['post_date']; ?>
+                            <?= $post['post_date']; ?>
                         </span>
                         <?php if($post['post_answers_num'] !=0) { ?> 
                             <span class="otst"> | </span>
-                            ответов (<?php echo $post['post_answers_num'] ?>) 
+                            ответов (<?= $post['post_answers_num'] ?>) 
                         <?php } ?>
                     </div>  
                 </div>
@@ -54,7 +54,7 @@
 
         <?php } else { ?>
 
-            <div class="no-content"><?= lanf('no-post'); ?>...</div>
+            <div class="no-content"><?= lang('no-post'); ?>...</div>
 
         <?php } ?>
     </div> 

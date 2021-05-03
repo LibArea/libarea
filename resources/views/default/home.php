@@ -60,7 +60,7 @@
                 <?php } ?> 
                 
                 <div class="post-body">
-                    <a class="u-url" href="/posts/<?= $post['post_slug']; ?>">
+                    <a class="u-url" href="/posts/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
                         <h2 class="titl"><?= $post['post_title']; ?></h2>
                         <?php if ($post['post_is_delete'] == 1) { ?> 
                             <icon name="trash"></icon>
@@ -108,7 +108,7 @@
                         </span>
                         <?php if($post['post_answers_num'] !=0) { ?> 
                             <span class="otst"> | </span>
-                            <a class="u-url" href="/posts/<?= $post['post_slug']; ?>">
+                            <a class="u-url" href="/posts/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
                                <?= $post['post_answers_num']; ?>  <?= $post['lang_num_answers']; ?>  
                             </a>
                         <?php } ?>
@@ -149,7 +149,7 @@
                 <img class="ava" alt="<?= $answ['login']; ?>" src="/uploads/avatar/small/<?= $answ['avatar']; ?>">
                 <?= $answ['answer_date']; ?>
             </div> 
-            <a href="/posts/<?= $answ['post_slug']; ?>#answ_<?= $answ['answer_id']; ?>">
+            <a href="/posts/<?= $post['post_id']; ?>/<?= $answ['post_slug']; ?>#answ_<?= $answ['answer_id']; ?>">
                 <?= $answ['answer_content']; ?>...  
             </a>
        </div>

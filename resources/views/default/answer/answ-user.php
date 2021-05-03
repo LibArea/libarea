@@ -1,12 +1,12 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<main class="w-100 max-width">
+<main>
     <h1 class="top"><?php echo $data['h1']; ?></h1>
 
     <?php if (!empty($answers)) { ?>
 
         <?php foreach ($answers as $answ) { ?> 
         
-            <?php if($answ['comment_del'] == 0) { ?>
+            <?php if($answ['answer_del'] == 0) { ?>
                 <div class="answ-telo_bottom">
                     <div class="voters">
                         <div class="answ-up-id"></div>
@@ -24,7 +24,7 @@
          
                             <span class="otst"> | </span>
                             <span class="date">  
-                               <a href="/posts/<?= $answ['post_slug']; ?>"><?= $answ['post_title']; ?></a>
+                               <a href="/posts/<?= $answ['post_id']; ?>/<?= $answ['post_slug']; ?>"><?= $answ['post_title']; ?></a>
                             </span>
                         </div>
                         <div class="answ-telo-body">

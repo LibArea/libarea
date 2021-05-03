@@ -215,6 +215,17 @@ class Base
         }    
 	}
     
+    // Пределы
+    public static function Limits($name, $min, $max, $txt, $redirect)
+    {
+        if (self::getStrlen($name) < $min || self::getStrlen($name) > $max)
+        {
+            self::addMsg($txt, 'error');
+            redirect($redirect);
+        }
+        return true;
+    }
+    
     // https://github.com/JacksonJeans/php-mail
     public static function mailText($email, $subject='', $message='')
     {

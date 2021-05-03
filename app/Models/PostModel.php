@@ -93,7 +93,7 @@ class PostModel extends \MainModel
     }
 
     // Полная версия поста  
-    public static function getPost($slug, $uid)
+    public static function getPostSlug($slug, $uid)
     {
         $q = XD::select('*')->from(['posts']);
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['post_user_id'])
@@ -104,6 +104,16 @@ class PostModel extends \MainModel
         
         return $query->getSelectOne();
     }   
+    
+    // Получаем пост по id
+    public static function getPostId($id) 
+    {
+        if(!$id) { $id = 0; }  
+        $q = XD::select('*')->from(['posts']);
+        $query = $q->leftJoin(['space'])->on(['space_id'], '=', ['post_space_id'])->where(['post_id'], '=', $id);
+        
+        return $query->getSelectOne();
+    }
     
     // Рекомендованные посты
     public static function PostsSimilar($post_id, $space_id, $uid) 
@@ -204,17 +214,7 @@ class PostModel extends \MainModel
 
         return true; 
     } 
-    
-    // Получаем пост по id
-    public static function getPostId($id) 
-    {
-        if(!$id) { $id = 0; }  
-        $q = XD::select('*')->from(['posts']);
-        $query = $q->leftJoin(['space'])->on(['space_id'], '=', ['post_space_id'])->where(['post_id'], '=', $id);
-        
-        return $query->getSelectOne();
-    }
-    
+
     // Редактирование поста
     public static function editPost($data)
     {

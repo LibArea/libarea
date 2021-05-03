@@ -112,13 +112,13 @@
                             <img class="thumb" alt="<?= $post['post_url']; ?>" src="/uploads/thumbnails/<?= $post['post_thumb_img']; ?>">
                         <?php } ?>
                     
-                        <?= $post['content']; ?> 
+                        <?= $post['post_content']; ?> 
                     </div> 
                     <?php if($lo) { ?>
                         <div class="lo-post">
                             <h3 class="lo">ЛО</h3>
                             <span class="right">
-                                <a rel="nofollow" href="/posts/<?= $post['post_slug']; ?>#comm_<?= $lo['comment_id']; ?>">
+                                <a rel="nofollow" href="/posts/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#comm_<?= $lo['comment_id']; ?>">
                                     <icon name="arrow-down"></icon>
                                 </a>
                             </span>
@@ -208,7 +208,7 @@
                                             </span>
                                         <?php } ?>
                                         <span class="date ots">
-                                            <a rel="nofollow" href="/posts/<?= $post['post_slug']; ?>#answ_<?= $answ['answer_id']; ?>">#</a>
+                                            <a rel="nofollow" href="/posts/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#answ_<?= $answ['answer_id']; ?>">#</a>
                                         </span>
                                         <?php if ($uid['trust_level'] == 5) { ?> 
                                             <span class="date ots">
@@ -217,7 +217,7 @@
                                         <?php } ?> 
                                     </div>
                                     <div class="answ-telo-body">
-                                        <?= $answ['content'] ?> 
+                                        <?= $answ['answer_content'] ?> 
                                     </div>
                                 </div>
                                 <?php if($post['post_closed'] == 0) { ?> 
@@ -305,7 +305,7 @@
                                                     </span>
                                                 <?php } ?>
                                                 <span class="date ots">
-                                                    <a rel="nofollow" href="/posts/<?= $post['post_slug']; ?>#comm_<?= $comm['comment_id']; ?>">#</a>
+                                                    <a rel="nofollow" href="/posts/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#comm_<?= $comm['comment_id']; ?>">#</a>
                                                 </span>
                                                 <?php if ($uid['trust_level'] == 5) { ?> 
                                                     <span class="date ots">
@@ -386,7 +386,7 @@
             <h3 class="recommend"><?= lang('Recommended'); ?></h3>  
             <?php foreach ($recommend as  $post) { ?>
                 <div class="recommend-telo">
-                    <a href="/posts/<?= $post['post_slug']; ?>">
+                    <a href="/posts/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
                         <?= $post['post_title']; ?>  
                     </a>
                     <?php if($post['post_answers_num'] !=0) { ?>

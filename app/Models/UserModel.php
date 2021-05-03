@@ -134,6 +134,16 @@ class UserModel extends \MainModel
         return count($query->getSelect());
     } 
     
+    // Количество ответов на странице профиля
+    public static function getUsersAnswersNum($id)
+    {
+        $q = XD::select('*')->from(['answers']);
+        $query = $q->leftJoin(['users'])->on(['id'], '=', ['answer_user_id'])
+                 ->where(['id'], '=', $id);
+       
+        return count($query->getSelect());
+    } 
+    
     // Количество комментариев на странице профиля
     public static function getUsersCommentsNum($id)
     {

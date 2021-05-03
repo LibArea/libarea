@@ -40,7 +40,7 @@
              
                                 <span class="otst"> | </span>
                                 <span class="date">  
-                                   <a href="/posts/<?= $answ['post_slug']; ?>"><?= $answ['post_title']; ?></a>
+                                   <a href="/posts/<?= $answ['post_id']; ?>/<?= $answ['post_slug']; ?>"><?= $answ['post_title']; ?></a>
                                 </span>
                             </div>
                            

@@ -28,7 +28,7 @@
                 <?php } ?> 
                 
                 <div class="post-body">
-                    <a class="u-url" href="/posts/<?= $post['post_slug']; ?>">
+                    <a class="u-url" href="/posts/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
                         <h2 class="titl"><?= $post['post_title']; ?></h2>
                         <?php if ($post['post_is_delete'] == 1) { ?> 
                             <icon name="trash"></icon>

@@ -117,6 +117,8 @@ h1 {
   display: block;
   padding: 2px 16px;
   max-width: 340px;
+  margin-top: -23px;
+  border-radius: 1px;
 }
 .banner img { 
   float: left;
@@ -575,8 +577,10 @@ border-radius: 20px;
   max-width: 65%;
 }
 img.thumb {
-  margin: 10px 0;
+  margin: 0 0 10px 10px;
   float: right;
+  width: 110px;
+  border-radius: 2px;
 }
 .telo-detail_post.dell {
   background-color: rgb(246, 196, 184);
@@ -780,6 +784,7 @@ a.space-u.tag-u {
   width: 98%;
   margin-bottom: 20px;
   padding: 5px 5px 5px 10px;
+  border-radius: 1px;
 }
 .space-no-user icon {
   color: #42c02e;
@@ -1207,9 +1212,11 @@ body.menuno nav  {
 .dark blockquote, .dark .menu-info {
   background-color: #555;
 }
-.dark h1.banner-h1 {
-  color: #ddd;
-  background-color: #222;
+.dark .banner {
+  color: #333;
+}
+.dark .banner a {
+  color: #09c;
 }
 .dark .comments_subtree:target, .dark .comments_subtree.edit {
   background-color: #222;
@@ -1268,3 +1275,4 @@ icon[name=trophy]:before { content: "\e006"; }
 icon[name=home]:before { content: "\e069"; }
 icon[name=fire]:before { content: "\e01c"; }
 icon[name=diamond]:before { content: "\e043"; }
+icon[name=doc]:before { content: "\e085"; }

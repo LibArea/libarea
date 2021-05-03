@@ -49,7 +49,14 @@
                 </a>
             </span> <br>
         <?php } ?>
-
+        <?php if($data['answ_num_user'] != 0) { ?>
+            <label class="required">Ответов:</label>
+            <span class="d">
+                <a title="Всего ответов <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/answers">
+                    <?= $data['answ_num_user']; ?>
+                </a>
+            </span> <br>
+        <?php } ?>
         <?php if($data['comm_num_user'] != 0) { ?>
             <label class="required">Комментариев:</label>
             <span class="d">
@@ -59,7 +66,7 @@
             </span>  <br>
         <?php } ?>
         
-        <?php if($data['space_user'] != 0) { ?>
+        <?php if($data['space_user']) { ?>
             <label class="required">Владеет:</label>
             <span class="d">
                 <?php foreach ($data['space_user'] as  $space) { ?>
@@ -69,18 +76,18 @@
             <br>
         <?php } ?>
         
-        <label class="required">О себе:</label>
+        <label class="required"><?= lang('About me'); ?>:</label>
         <span class="na about">
             <?php if($user['about']) { ?>
                 <?= $user['about']; ?>
             <?php } else { ?>
-                Загадка...
+                <?= lang('Riddle'); ?>...
             <?php } ?>
         </span>
         <br>
 
         <?php if($user['my_post'] != 0) { ?>
-            <h4>Избранный пост:</h4>
+            <h4><?= lang('Selected Post'); ?>:</h4>
 
             <div class="post-telo">
                 <div id="vot<?= $post['post_id']; ?>" class="voters">
@@ -88,7 +95,7 @@
                     <div class="score"><?= $post['post_votes']; ?></div>
                 </div>
                 <div class="post-body">
-                    <a class="u-url" href="/posts/<?= $post['post_slug']; ?>">
+                    <a class="u-url" href="/posts/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
                         <h2 class="titl"><?= $post['post_title']; ?></h2>
                     </a>
                     
@@ -110,7 +117,7 @@
                         </span>
                         <?php if($post['post_answers_num'] !=0) { ?> 
                             <span class="otst"> | </span>
-                            <a class="u-url" href="/posts/<?= $post['post_slug']; ?>">
+                            <a class="u-url" href="/posts/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
                               ответов <?= $post['post_answers_num']; ?>  
                             </a>
                         <?php } ?>

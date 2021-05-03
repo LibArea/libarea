@@ -14,7 +14,7 @@
                 <div class="boxline">
                     <label for="post_title">Название</label>
                     <input class="add" type="text" value="<?= $space['space_name']; ?>" name="space_name" />
-                    <br />
+                    <div class="box_h">4 - 18 символов</div>
                 </div>
                 <div class="boxline"> 
                     <label for="post_content">Публикации</label>
@@ -23,7 +23,9 @@
                 </div>                  
                 <div class="boxline">
                     <label for="post_content">Meta-</label>
-                    <textarea class="add" name="space_description"><?= $space['space_description']; ?></textarea><br />
+                    <textarea class="add" name="space_description"><?= $space['space_description']; ?></textarea>
+                    <div class="box_h">60 - 180 символов</div>
+                    <br />
                 </div>
                 <div class="boxline">
                     <label for="post_content">Цвет</label>
@@ -31,8 +33,11 @@
                     <?php include TEMPLATE_DIR . '/space/space-color-box.php'; ?>
                 </div>
                 <div class="boxline">
+                    <br />
                     <label for="post_content">Текст</label>
-                    <textarea class="add" name="space_text"><?= $space['space_text']; ?></textarea><br />
+                    <textarea class="add" name="space_text"><?= $space['space_text']; ?></textarea>
+                    <div class="box_h">Markdown</div>
+                    <br />
                 </div>
                 <div class="boxline">
                 <label for="space_img">

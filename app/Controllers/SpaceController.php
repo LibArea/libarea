@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\Models\SpaceModel;
 use Hleb\Constructor\Handlers\Request;
 use ImageUpload;
+use Parsedown;
 use Base;
 
 class SpaceController extends \MainController
@@ -46,6 +47,11 @@ class SpaceController extends \MainController
 
         $space['space_date']        = Base::ru_date($space['space_date']);
         $space['space_cont_post']   = count($posts);
+        
+        // Фильтруем для Sidebar
+        $Parsedown = new Parsedown(); 
+        $Parsedown->setSafeMode(true); // безопасность
+        $space['space_text']   = $Parsedown->text($space['space_text']);
         
         $result = Array();
         foreach($posts as $ind => $row){
@@ -126,27 +132,19 @@ class SpaceController extends \MainController
             redirect('/');
         }
 
-        $space_name          = \Request::getPost('space_name');
+        $space_name         = \Request::getPost('space_name');
         $space_description  = \Request::getPost('space_description');
+        $space_text         = \Request::getPost('space_text');
 
-        // Проверяем длину title
-        if (Base::getStrlen($space_name) < 4 || Base::getStrlen($space_name) > 20)
-        {
-            Base::addMsg('Длина названия должна быть от 4 до 20 знаков', 'error');
-            redirect('/s/' . $space['space_slug']);
-            return true;
-        }
+        // Проверяем длину
+        $redirect   = '/space/' . $space['space_slug'] . '/edit';
+        $txt        = 'Длина названия должна быть от 4 до 20 знаков';
+        Base::Limits($space_name, '4', '20', $txt, $redirect);
   
-        // Проверяем длину описания
-        if (Base::getStrlen($space_description) < 60 || Base::getStrlen($space_description) > 240)
-        {
-            Base::addMsg('Длина meta- описания должна быть от 60 до 240 знаков', 'error');
-            redirect('/s/' . $space['space_slug']);
-            return true;
-        }
+        $txt        = 'Длина meta- описания должна быть от 60 до 190 знаков';
+        Base::Limits($space_description, '60', '190', $txt, $redirect);
 
         $name     = $_FILES['image']['name'];
-        
         if($name) {
             $size     = $_FILES['image']['size'];
             $ext      = strtolower(pathinfo($name, PATHINFO_EXTENSION));
@@ -224,7 +222,7 @@ class SpaceController extends \MainController
             'space_name'         => $space_name,
             'space_description'  => $space_description,
             'space_color'        => $space_color,
-            'space_text'         => $_POST['space_text'], // Не фильтруем!
+            'space_text'         => $space_text,
             'space_img'          => $space_img,
             'space_permit_users' => $permit,
         ]; 

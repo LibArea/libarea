@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use App\Models\CommentModel;
+use App\Models\UserModel;
 use App\Models\AnswerModel;
 use App\Models\PostModel;
 use App\Models\VotesCommentModel;
@@ -187,35 +188,36 @@ class AnswerController extends \MainController
     // Ответы участника
     public function userAnswers()
     {
-        $Parsedown = new Parsedown(); 
-        $Parsedown->setSafeMode(true); // безопасность
-        
         $login = \Request::get('login');
        
-        $answ  = AnswerModel::getUsersAnswers($login); 
-
-        // Покажем 404
-        if(!$answ) {
+        // Если нет такого пользователя 
+        $user   = UserModel::getUserLogin($login);
+        if(!$user) {
             include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
             hl_preliminary_exit();
         }
         
+        $answ  = AnswerModel::getUsersAnswers($login); 
+        
+        $Parsedown = new Parsedown(); 
+        $Parsedown->setSafeMode(true); // безопасность
+        
         $result = Array();
         foreach($answ as $ind => $row){
-            $row['content'] = $Parsedown->text($row['comment_content']);
-            $row['date']    = Base::ru_date($row['comment_date']);
+            $row['content'] = $Parsedown->text($row['answer_content']);
+            $row['date']    = Base::ru_date($row['answer_date']);
          
             $result[$ind]   = $row;
         }
         
         $uid  = Base::getUid();
         $data = [
-            'h1'          => 'Комментарии ' . $login,
-            'title'       => 'Комментарии ' . $login . ' | ' . $GLOBALS['conf']['sitename'],
-            'description' => 'Страница комментариев учасника ' . $login . ' на сайте ' . $GLOBALS['conf']['sitename'],
+            'h1'          => 'Ответы ' . $login,
+            'title'       => 'Ответы  ' . $login . ' | ' . $GLOBALS['conf']['sitename'],
+            'description' => 'Ответы  учасника сообщества ' . $login . ' на сайте ' . $GLOBALS['conf']['sitename'],
         ]; 
         
-        return view(PR_VIEW_DIR . '/answer/answ-user', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
+        return view(PR_VIEW_DIR . '/answer/answ-user', ['data' => $data, 'uid' => $uid, 'answers' => $result]);
     }
 
     // Удаление комментария

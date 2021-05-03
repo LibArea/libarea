@@ -1,5 +1,5 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<main class="w-100 max-width">
+<main>
      
     <ul class="nav-tabs">
         <li class="active">
@@ -48,5 +48,5 @@
         </form>
     </div>
 </main>
-<?php include TEMPLATE_DIR . '/_block/user-menu.php'; ?>
+<?php include TEMPLATE_DIR . '/_block/my-menu.php'; ?>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

@@ -55,7 +55,7 @@ aside#sidebar {
  display: block;
 }
 #content {
-  height:500px; 
+  height:450px; 
   overflow: auto; 
 }
 #content::-webkit-scrollbar {

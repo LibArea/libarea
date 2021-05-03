@@ -117,7 +117,7 @@ Route::endGroup();
 
 // Покажем пост в ленте и полный пост
 Route::type('post')->get('/post/shown')->controller('PostController@shownPost');
-Route::get('/posts/{slug}')->controller('PostController@viewPost')->where(['slug' => '[A-Za-z0-9-]+']);
+Route::get('/posts/{id}/{slug}')->controller('PostController@viewPost')->where(['id' => '[0-9-]+', 'slug' => '[A-Za-z0-9-]+']);
 
 // Правила
 Route::get('/info')->controller('InfoController');
@@ -134,7 +134,9 @@ Route::get('/info/initial-setup')->controller('InfoController@initialSetup');
 Route::get('/users')->controller('UserController');
 Route::get('/u/{login}')->controller('UserController@profile')->where(['login' => '[A-Za-z0-9]+']);
 Route::get('/u/{login}/posts')->controller('PostController@userPosts')->where(['login' => '[A-Za-z0-9]+']);
+Route::get('/u/{login}/answers')->controller('AnswerController@userAnswers')->where(['login' => '[A-Za-z0-9]+']);
 Route::get('/u/{login}/comments')->controller('CommentController@userComments')->where(['login' => '[A-Za-z0-9]+']);
+
 
 // Поток
 Route::get('/flow')->controller('FlowController');

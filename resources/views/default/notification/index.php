@@ -1,5 +1,5 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<main class="w-100 max-width notifications">
+<main>
     <h1><?= $data['title'] ?></h1>
     
     <?php if (!empty($list)) { ?>

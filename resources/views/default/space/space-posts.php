@@ -83,7 +83,7 @@
                     <?php } ?> 
                 <?php } ?> 
                 <div class="post-body">
-                    <a class="u-url" href="/posts/<?= $post['post_slug']; ?>">
+                    <a class="u-url" href="/posts/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
                         <h3 class="titl"><?= $post['post_title']; ?></h3>
                     </a>
                     

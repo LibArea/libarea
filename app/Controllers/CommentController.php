@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use App\Models\CommentModel;
+use App\Models\UserModel;
 use App\Models\PostModel;
 use App\Models\AnswerModel;
 use App\Models\VotesCommentModel;
@@ -196,13 +197,15 @@ class CommentController extends \MainController
     public function userComments()
     {
         $login = \Request::get('login');
-        $comm  = CommentModel::getUsersComments($login); 
 
-        // Покажем 404
-        if(!$comm) {
+        // Если нет такого пользователя 
+        $user   = UserModel::getUserLogin($login);
+        if(!$user) {
             include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
             hl_preliminary_exit();
         }
+        
+        $comm  = CommentModel::getUsersComments($login); 
         
         $result = Array();
         foreach($comm as $ind => $row){

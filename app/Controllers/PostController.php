@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\PostModel;
+use App\Models\UserModel;
 use App\Models\SpaceModel;
 use App\Models\AnswerModel;
 use App\Models\CommentModel;
@@ -84,30 +85,25 @@ class PostController extends \MainController
     // Полный пост
     public function viewPost()
     {
-        if(!empty($_SESSION['account']['user_id'])) {
-            $uid   = $_SESSION['account']['user_id'];
-        } else {
-            $uid   = 0;
-        }
-        
-        $Parsedown = new Parsedown(); 
-        $Parsedown->setSafeMode(true); // безопасность
-        
-        // Получим пост по slug
-        $slug = \Request::get('slug');
-        
-       // $post = []; 
-        $post = PostModel::getPost($slug, $uid);
+        $uid        = Base::getUid();
+        $slug       = \Request::get('slug');
+        $post_id    = \Request::getInt('id');
+        $post_new   = PostModel::getPostId($post_id); 
 
-        // Если нет поста
-        if (empty($post))
-        {
+        // Проверим (id, slug)
+        if (!$post_new) {
             include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
             hl_preliminary_exit();
+        } else {
+            if($slug != $post_new['post_slug']) {
+                redirect('/posts/' . $post_new['post_id'] . '/' . $post_new['post_slug']);
+            }
         }
-
+        
+        $post = PostModel::getPostSlug($slug, $uid['id']); 
+        
         // Рекомендованные посты
-        $recommend = PostModel::PostsSimilar($post['post_id'], $post['post_space_id'], $uid);
+        $recommend = PostModel::PostsSimilar($post['post_id'], $post['post_space_id'], $uid['id']);
      
         // Выводить или нет? Что дает просмотр даты изменения?
         // Учитывать ли изменение в сортировки и в оповещение в будущем...
@@ -125,17 +121,17 @@ class PostController extends \MainController
             $post['post_url_full'] = null;
         }
         
+        $Parsedown = new Parsedown(); 
+        $Parsedown->setSafeMode(true); // безопасность
+        
         // Обработает некоторые поля
-        $post['content']        = $Parsedown->text($post['post_content']);
-        $post['post_url']       = $post['post_url'];
-        $post['post_url_full']  = $post['post_url_full'];
+        $post['post_content']   = $Parsedown->text($post['post_content']);
         $post['post_date']      = Base::ru_date($post['post_date']);
-        $post['edit_date']      = $post['edit_date'];
         $post['num_answers']    = Base::ru_num('answ', $post['post_answers_num']); 
-        $post['favorite_post']  = PostModel::getMyPostFavorite($post['post_id'], $uid);
+        $post['favorite_post']  = PostModel::getMyPostFavorite($post['post_id'], $uid['id']);
         
         // Получим ответы
-        $post_answers = AnswerModel::getAnswersPost($post['post_id'], $uid);
+        $post_answers = AnswerModel::getAnswersPost($post['post_id'], $uid['id']);
   
         // Получим ЛО (временно)
         // Возможно нам стоит просто поднять ответ на первое место?
@@ -154,12 +150,10 @@ class PostController extends \MainController
                 $row['edit'] = 1;
             }
 
-            $row['comm']                = CommentModel::getCommentsAnswer($row['answer_id'], $uid);
-            $row['content']             = $Parsedown->text($row['answer_content']);
+            $row['comm']                = CommentModel::getCommentsAnswer($row['answer_id'], $uid['id']);
+            $row['answer_content']      = $Parsedown->text($row['answer_content']);
             $row['answer_date']         = Base::ru_date($row['answer_date']);
-            $row['after']               = $row['answer_after'];
-            $row['del']                 = $row['answer_del'];
-            $row['favorite_answ']       = AnswerModel::getMyAnswerFavorite($row['answer_id'], $uid);
+            $row['favorite_answ']       = AnswerModel::getMyAnswerFavorite($row['answer_id'], $uid['id']);
             $answers[$ind]              = $row;
          
         }
@@ -167,7 +161,6 @@ class PostController extends \MainController
         // Перенести в метод, т.к. некобходимо формировать og:* и т.д.
         $description = htmlspecialchars(substr(strip_tags($post['post_content']), 0, 160));
 
-        $uid  = Base::getUid();
         $data = [
             'title'        => $post['post_title'] . ' | ' . $GLOBALS['conf']['sitename'], 
             'description'  => $description . ' — ' . $GLOBALS['conf']['sitename']
@@ -179,25 +172,24 @@ class PostController extends \MainController
     // Посты участника
     public function userPosts()
     {
-        $account    = \Request::getSession('account');
-        $user_id    = (!$account) ? 0 : $account['user_id'];
+        $uid        = Base::getUid();
+        $login      = \Request::get('login');
         
-        $login = \Request::get('login');
-        $post_user  = PostModel::getUsersPosts($login, $user_id); 
-        
-        // Если нет такого пользователя
-        if(!$post_user) {
+        // Если нет такого пользователя 
+        $user   = UserModel::getUserLogin($login);
+        if(!$user) {
             include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
             hl_preliminary_exit();
         }
         
+        $posts_user  = PostModel::getUsersPosts($login, $uid['id']); 
+        
         $result = Array();
-        foreach($post_user as $ind => $row){
+        foreach($posts_user as $ind => $row){
             $row['post_date']   = Base::ru_date($row['post_date']);
             $result[$ind]       = $row;
         }
  
-        $uid  = Base::getUid();
         $data = [
             'h1'            => 'Посты ' . $login, 
             'title'         => 'Посты ' . $login . ' | ' . $GLOBALS['conf']['sitename'],

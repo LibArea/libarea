@@ -1,5 +1,5 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<main class="w-100 max-width">
+<main>
     <ul class="nav-tabs">
         <li><a href="/u/<?= $uid['login']; ?>/setting"><span><?= lang('Setting profile'); ?></span></a></li>
         <li><a href="/u/<?= $uid['login']; ?>/setting/avatar"><span><?= lang('Avatar'); ?></span></a></li>
@@ -28,5 +28,5 @@
             </form>    
     </div>
 </main>
-<?php include TEMPLATE_DIR . '/_block/user-menu.php'; ?>
+<?php include TEMPLATE_DIR . '/_block/my-menu.php'; ?>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>
