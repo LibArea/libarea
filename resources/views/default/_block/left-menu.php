@@ -14,12 +14,6 @@
             </a>
         </li>
     <?php } ?>  
-    <li>    
-        <a <?php if($uid['uri'] == '/top') { ?>class="active"<?php } ?> title="<?= lang('TOP'); ?>" href="/top">
-            <icon name="graph"></icon>
-            <span><?= lang('TOP'); ?></span> 
-        </a> 
-    </li>
     <li>
         <a <?php if($uid['uri'] == '/answers') { ?>class="active"<?php } ?> title="<?= lang('Answers'); ?>" href="/answers">
             <icon name="action-undo"></icon>

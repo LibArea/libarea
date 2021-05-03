@@ -1,9 +1,39 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
+ 
+    <?php if (!$uid['id']) { ?>
+        <div class="banner">
+            <div class="banner-telo">
+                <img src="/assets/svg/loriup.svg" alt="За стеклом">
+                <h1 class="banner-h1"><?= lang('site-banner'); ?></h1> 
+                <?= lang('site-banner-txt'); ?> <a href="/info"><?= lang('Read'); ?></a>...
+            </div>
+        </div>    
+    <?php } ?>  
+    
 <?php include TEMPLATE_DIR . '/_block/left-menu.php'; ?>
 <main class="telo">
-    <?php if (!$uid['id']) { ?>
-        <h1 class="top banner"><?= lang('site-closed'); ?>. <a href="/info"><?= lang('Read'); ?></a>...</h1> 
-    <?php } ?>  
+
+    <ul class="nav-tabs">
+        <?php if($type == 'feed') { ?>
+            <li class="active">
+               <span><icon name="calendar"></icon>  Посты</span>
+            </li>
+            <li>
+                <a href="/top">
+                     <span><icon name="fire"></icon> Top</span>
+                </a>
+            </li>
+        <?php } else { ?>
+            <li>  
+                <a href="/">
+                    <span><icon name="calendar"></icon> Посты</span>
+                </a>
+            </li>    
+            <li class="active">
+                  <span><icon name="fire"></icon> Top</span>
+            </li>
+        <?php } ?>        
+    </ul>
 
     <?php if (!empty($posts)) { ?> 
   
@@ -107,7 +137,8 @@
 
 <aside class="sidebar"> 
     <?php if(!$space_bar) { ?>
-        <div class="space-no-user">
+        <div class="space-no-user"> 
+            <icon name="diamond"></icon>
             Читайте больше! <br><a href="/space">Подпишитесь</a> на пространства, которые вам интересны.
         </div>
     <?php }  ?>    

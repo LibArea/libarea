@@ -1,6 +1,6 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 <main>
-    <h1 class="head"><?= $data['title']; ?></h1>
+    <h1><?= $data['title']; ?></h1>
     <div class="box wide">
         <form class="" action="/recover/send/pass" method="post">
             <?php csrf_field(); ?>

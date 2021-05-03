@@ -24,6 +24,7 @@ class MainConnector implements Connector
             "Parsedown"     => "vendor/parsedown/Parsedown.php",  
             "UrlRecord"     => "app/Libraries/UrlRecord/UrlRecord.php",
             "ImageUpload"   => "app/Libraries/ImageUpload.php",     
+            "Phphleb\Imageresizer\SimpleImage"   => "app/Libraries/SimpleImage.php", 
             "Base"          => "app/Libraries/Base.php",   
             "DB"            => "database/DB.php",  
             "XdORM\XD"      => "vendor/phphleb/xdorm/XD.php",

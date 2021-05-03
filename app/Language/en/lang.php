@@ -1,7 +1,8 @@
 <?php
 return [
     'home-desc'         => 'Community home page, forum, posts',
-    'site-closed'       => 'The site is under development',
+    'site-banner'       => 'Community of interests',
+    'site-banner-txt'   => 'The site is under development',
     'no-post'           => 'Unfortunately there are no posts',
     'no-comment'        => 'Unfortunately there are no comments', 
     'no-answer'         => 'Unfortunately there are no answers',

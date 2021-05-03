@@ -107,12 +107,11 @@
                     </div>  
                 </div>
                 <div class="post-body">
-                
-                    <?php if($post['post_thumb_img']) { ?> 
-                        <img class="thumb" alt="<?= $post['post_url']; ?>" src="/uploads/thumbnails/<?= $post['post_thumb_img'] ?> ">
-                    <?php } ?>
-                
                     <div class="post">
+                        <?php if($post['post_thumb_img']) { ?> 
+                            <img class="thumb" alt="<?= $post['post_url']; ?>" src="/uploads/thumbnails/<?= $post['post_thumb_img']; ?>">
+                        <?php } ?>
+                    
                         <?= $post['content']; ?> 
                     </div> 
                     <?php if($lo) { ?>
@@ -371,6 +370,17 @@
     </article>
 </main>
 <aside class="sidebar"> 
+
+    <?php if($post['space_slug']) { ?>
+        <div class="post-space-box">
+            <img alt="<?= $post['space_name']; ?>" src="/uploads/space/<?= $post['space_img']; ?>">
+            <a href="/s/<?= $post['space_slug']; ?>"><?= $post['space_name']; ?></a>
+            <div class="post-space-box-desc">
+                <?= $post['space_description']; ?>
+            </div>
+        </div>
+    <?php } ?>
+ 
     <?php if($recommend) { ?> 
         <div>
             <h3 class="recommend"><?= lang('Recommended'); ?></h3>  

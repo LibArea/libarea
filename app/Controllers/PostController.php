@@ -7,6 +7,7 @@ use App\Models\SpaceModel;
 use App\Models\AnswerModel;
 use App\Models\CommentModel;
 use App\Models\VotesPostModel;
+use Phphleb\Imageresizer\SimpleImage;
 use Base;
 use Parsedown;
 use UrlRecord;
@@ -77,7 +78,7 @@ class PostController extends \MainController
             'pNum'              => $page,
         ];
 
-        return view(PR_VIEW_DIR . '/home', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'space_bar' => $space_signed_bar]);
+        return view(PR_VIEW_DIR . '/home', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'space_bar' => $space_signed_bar, 'type' => $type]);
     }
 
     // Полный пост
@@ -384,6 +385,14 @@ class PostController extends \MainController
                 curl_exec($ch);
                 curl_close($ch);
                 fclose($fp);  
+ 
+                // https://github.com/phphleb/imageresizer
+                $image = new SimpleImage();
+                // Путь к исходному файлу в формате JPEG, GIF или PNG
+                $image->load($puth . $year . $filename);
+                // По ширине и высоте непропорционально
+                $image->resize(165, 125);
+                $image->save($puth . $year . $filename, "jpeg");
 
                 if(file_exists($local)) {
                     return $year . $filename;

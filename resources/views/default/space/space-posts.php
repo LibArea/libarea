@@ -88,7 +88,7 @@
                     </a>
                     
                     <?php if($post['st_id']) { ?>
-                        <a class="space-u tag-u" href="/s/meta/<?= $post['st_id']; ?>" title="<?= $post['st_title']; ?>"><?= $post['st_title']; ?></a>
+                        <a class="space-u tag-u" href="/s/<?= $space_info['space_slug']; ?>/<?= $post['st_id']; ?>" title="<?= $post['st_title']; ?>"><?= $post['st_title']; ?></a>
                     <?php } ?>
                      
                 <?php if ($post['post_content_preview']) { ?>

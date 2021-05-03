@@ -110,19 +110,26 @@ h1 {
   font-size: 1.2rem;
   margin: 0 0 20px 0;
 }
-h1.top.banner {
+.banner {
   font-size: 13px;
+  margin-bottom: 20px;
+  background-color: #fcf8e4;
+  display: block;
+  padding: 2px 16px;
+  max-width: 340px;
+}
+.banner img { 
+  float: left;
+  margin: 11px 15px 0 0;
+}
+.banner-telo.telo {
+  background-color: #fcf8e4;
+}
+h1.banner-h1 {
   color: var(--color-gray-1);
-  margin: 2px 0 20px 12px;
+  margin: 0;
   background-color: #fcf8e4;
   display: table;
-  padding: 2px 6px;
-}
-h1.head {
-  font-size: 21px;
-  font-weight: normal;
-  text-transform: uppercase;
-  letter-spacing: 1px;
 }
 pre code {
   background: #272822;
@@ -311,7 +318,7 @@ icon {
   background-color: var(--color-white);
   min-width: 150px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
+  z-index: 21;
   right: 6px;
   top: 25px;
   padding: 2px 4px 4px 4px;
@@ -505,6 +512,21 @@ border-radius: 20px;
 }
 
 /* Посты */
+.post-space-box {
+ margin: 0 0 24px 0;
+}
+.post-space-box img {
+  width: 36px;
+  height: 36px;
+  border-radius: 2px;
+  vertical-align: middle;
+  margin: 0 10px 0 0;
+}
+.post-space-box-desc {
+  color: #888;
+  font-size: 13px;
+  margin: 10px 0 24px 0;
+}
 .shown_post {
   display: block;
   max-width: 660px;
@@ -554,6 +576,7 @@ border-radius: 20px;
 }
 img.thumb {
   margin: 10px 0;
+  float: right;
 }
 .telo-detail_post.dell {
   background-color: rgb(246, 196, 184);
@@ -641,18 +664,18 @@ h1.space a {
   color: #2562dc;
 }
 .space-tags {
-  margin-left: 24px;
+  margin: 15px 0 0 4px;
 }
 .space-tags a.avtive {
   color: #333;
 }
 .space-tags .menu-m {
-  margin: 0 0 10px 1px;
+  margin: 0 0 5px 0;
 }
 .space-tags a {
    font-size: 13px; 
    display: block;
-   margin: 0 0 5px 10px;
+   margin: 0 0 5px 2px;
 }
 a.space-u, .space a.space-u {
   color: var(--color-gray-1);
@@ -757,6 +780,9 @@ a.space-u.tag-u {
   width: 98%;
   margin-bottom: 20px;
   padding: 5px 5px 5px 10px;
+}
+.space-no-user icon {
+  color: #42c02e;
 }
 h1 span{
   vertical-align: middle;
@@ -1181,7 +1207,7 @@ body.menuno nav  {
 .dark blockquote, .dark .menu-info {
   background-color: #555;
 }
-.dark h1.top.banner {
+.dark h1.banner-h1 {
   color: #ddd;
   background-color: #222;
 }
@@ -1241,3 +1267,4 @@ icon[name=energy]:before { content: "\e020"; }
 icon[name=trophy]:before { content: "\e006"; }
 icon[name=home]:before { content: "\e069"; }
 icon[name=fire]:before { content: "\e01c"; }
+icon[name=diamond]:before { content: "\e043"; }

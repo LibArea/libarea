@@ -87,7 +87,7 @@ class ImageUpload
 
     /* Available functions */
 
-    public function check($maxSize=1024)
+    public function check($maxSize=2024)
     {
         /* check upload errors & empty file & fileSize (in KB)
          * returns boolean
