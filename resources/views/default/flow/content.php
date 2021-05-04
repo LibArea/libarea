@@ -35,7 +35,7 @@
                 </div>  
             <?php } elseif ($flow['flow_action_id'] == 4) { ?>
                 <div class="flow-comment">
-                    <icon name="bubbles"></icon>
+                    <i class="icon bubbles"></i>
                     <div class="box">
                         <img class="avatar" src="/uploads/avatar/small/<?= $flow['avatar']; ?>">
                         <span class="user"> 
@@ -49,7 +49,7 @@
                 </div>
             <?php } elseif ($flow['flow_action_id'] == 3) { ?>
                 <div class="flow-answer">
-                    <icon name="action-undo"></icon>
+                    <i class="icon action-undo"></i>
                     <div class="box">
                         <img class="avatar" src="/uploads/avatar/small/<?= $flow['avatar']; ?>">
                         <span class="user"> 

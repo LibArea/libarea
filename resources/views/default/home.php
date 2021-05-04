@@ -16,21 +16,21 @@
     <ul class="nav-tabs">
         <?php if($type == 'feed') { ?>
             <li class="active">
-               <span><icon name="calendar"></icon>  Посты</span>
+                <span><?= lang('Feed'); ?></span>
             </li>
             <li>
                 <a href="/top">
-                     <span><icon name="fire"></icon> Top</span>
+                    <span>Top</span>
                 </a>
             </li>
         <?php } else { ?>
             <li>  
                 <a href="/">
-                    <span><icon name="calendar"></icon> Посты</span>
+                    <span><?= lang('Feed'); ?></span>
                 </a>
             </li>    
             <li class="active">
-                  <span><icon name="fire"></icon> Top</span>
+                <span>Top</span>
             </li>
         <?php } ?>        
     </ul>
@@ -63,16 +63,16 @@
                     <a class="u-url" href="/posts/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
                         <h2 class="titl"><?= $post['post_title']; ?></h2>
                         <?php if ($post['post_is_delete'] == 1) { ?> 
-                            <icon name="trash"></icon>
+                            <i class="icon trash"></i>
                         <?php } ?>
                         <?php if($post['post_closed'] == 1) { ?> 
-                            <icon name="lock"></icon>
+                            <i class="icon lock"></i>
                         <?php } ?>
                         <?php if($post['post_top'] == 1) { ?> 
-                            <icon name="pin"></icon>
+                            <i class="icon pin"></i>
                         <?php } ?>
                         <?php if($post['post_lo'] > 0) { ?> 
-                            <icon class="lo" name="trophy"></icon>
+                            <i class="icon trophy lo"></i>
                         <?php } ?>
                     </a>
                     <div class="space-color space_<?= $post['space_color'] ?>"></div>
@@ -85,15 +85,15 @@
                     <?php } ?>
                     
                     <?php if ($post['post_content_preview']) { ?>
-                        <div class="show">
-                            <span class="show_add_<?= $post['post_id']; ?>">
+                      
+                            <div class="show_add_<?= $post['post_id']; ?>">
                                 <div data-post_id="<?= $post['post_id']; ?>" class="showpost">
                                     <span>&#9658;</span> 
                                     <?= $post['post_content_preview']; ?>
                                     <span class="s_<?= $post['post_id']; ?> show_detail">... </span>
                                 </div>
-                            </span>
-                        </div>
+                            </div>
+                       
                     <?php } ?>
                     
                     <div class="footer">
@@ -138,7 +138,7 @@
 <aside class="sidebar"> 
     <?php if(!$space_bar) { ?>
         <div class="space-no-user"> 
-            <icon name="diamond"></icon>
+            <i class="icon diamond"></i>
             Читайте больше! <br><a href="/space">Подпишитесь</a> на пространства, которые вам интересны.
         </div>
     <?php }  ?>    

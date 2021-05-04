@@ -55,7 +55,7 @@
                 <?php if($uid['notif']) { ?> 
                     <li class="nav notif">  
                         <a class="nav" href="/notifications">  
-                            <icon name="bell"></icon> 
+                            <i class="icon bell"></i> 
                         </a>
                     </li>  
                 <?php } ?>    

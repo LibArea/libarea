@@ -37,11 +37,7 @@ nav {
   position: relative;
   float: left;
   min-width: 140px;
-}
-nav ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;  
+  list-style: none; 
 }
 header {
   z-index: 10;
@@ -192,7 +188,7 @@ a.logo, .slash, a.home {
 a.logo {
   color: #e7672e;
 }
-a.logo icon, .sticky icon {
+a.logo i.icon, .sticky i.icon {
   margin-right: 0;
 }
 a.home {
@@ -278,19 +274,19 @@ a.home {
   font-size: 8px;
   margin-left: 4px;
 }
-.togglemenu icon, a.register {
+.togglemenu i.icon, a.register {
   color: #888;
 }
-.menu-right icon{
+.menu-right i.icon{
   vertical-align: middle;
 }
-icon {
+i.icon {
   margin-right: 10px;
 }
-.post-body icon {
+.post-body i.icon {
   margin-left: 8px;
 }
-.nav.create icon {
+.nav.create i.icon {
   color: #09c;
 }
 .menu-lf {
@@ -786,7 +782,7 @@ a.space-u.tag-u {
   padding: 5px 5px 5px 10px;
   border-radius: 1px;
 }
-.space-no-user icon {
+.space-no-user i.icon {
   color: #42c02e;
 }
 h1 span{
@@ -809,7 +805,6 @@ h1 span{
   margin-bottom: 3px;
   font-size: 15px;
   width: 140px;
-  color: #222;
   text-decoration: none;
   white-space: nowrap;
   overflow: hidden;
@@ -1056,7 +1051,7 @@ ol.comment-telo {
 }
 .column {
   padding: 1rem 1rem 1rem 0.2rem;
-  width: 16.66666667%;
+  width: 9.1%;
 }
 .user_card {
   text-align: center;
@@ -1069,7 +1064,10 @@ ol.comment-telo {
   font-size: 14px;
   color: #888;
 }
-
+.gravatar.small {
+  height: 64px;
+  width: 64px;
+}
 /* голосование */
 .voters {
   float: left;
@@ -1136,7 +1134,7 @@ div.voters .comm-up-id, div.voters .post-up-id, div.voters .asnw-up-id {
   border-bottom: 2px solid transparent;
 }
 .nav-tabs > li > a:hover {
-  border-bottom: 2px solid #646464; 
+  border-bottom: 2px solid #ddd; 
   color: #646464;
 }
 .nav-tabs > li.active span {
@@ -1155,7 +1153,7 @@ div.voters .comm-up-id, div.voters .post-up-id, div.voters .asnw-up-id {
   margin-bottom: 8px;
 }
  
-nav icon, nav-info icon {
+nav i.icon, nav-info i.icon {
   margin: 0 8px 0 0;
 }
 nav a {
@@ -1164,7 +1162,7 @@ nav a {
   font-size: 13px;
   margin-bottom: 5px;
 }
-nav a:hover, nav icon:hover, .nav.notif icon, a.active {
+nav a:hover, nav i.icon:hover, .nav.notif i.icon, a.active {
   color: #e7672e;
 }
 nav a span {    
@@ -1186,6 +1184,7 @@ body.menuno nav  {
 @media (max-width: 880px) {
   nav {display: none;}
   main, main.w-75, main.w-100  {width: 100%;}
+  .column {width: 19%;}
 }
 
 
@@ -1229,7 +1228,7 @@ body.menuno nav  {
   font-style: normal;
   font-display: swap;
 }
-icon {
+.icon {
   font-family: 'icons';
   speak: none;
   font-style: normal;
@@ -1241,38 +1240,38 @@ icon {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-icon:before {
+.icon:before {
   display: inline-block;
 }
-a:hover icon:before {
+a:hover .icon:before {
   text-decoration: none !important;
 }
-icon[name=size-actual]:before { content: "\e058"; }
-icon[name=star]:before { content: "\e09b"; }
-icon[name=graph]:before { content: "\e06b"; }
-icon[name=bubbles]:before { content: "\e04a"; }
-icon[name=grid]:before { content: "\e06a"; }
-icon[name=user]:before { content: "\e005"; }
-icon[name=people]:before { content: "\e001"; }
-icon[name=calendar]:before { content: "\e075"; }
-icon[name=pencil]:before { content: "\e05f"; }
-icon[name=settings]:before { content: "\e09a"; }
-icon[name=envelope]:before { content: "\e086"; }
-icon[name=arrow-down]:before { content: "\e604"; }
-icon[name=link]:before { content: "\e08d"; }
-icon[name=bell]:before { content: "\e027"; }
-icon[name=shield]:before { content: "\e00e"; }
-icon[name=options-vertical]:before { content: "\e602"; }
-icon[name=frame]:before { content: "\e038"; }
-icon[name=logout]:before { content: "\e065"; }
-icon[name=lock]:before { content: "\e08e"; }
-icon[name=pin]:before { content: "\e031"; }
-icon[name=trash]:before { content: "\e054"; }
-icon[name=github]:before { content: "\e60c"; }
-icon[name=action-undo]:before { content: "\e050"; }
-icon[name=energy]:before { content: "\e020"; }
-icon[name=trophy]:before { content: "\e006"; }
-icon[name=home]:before { content: "\e069"; }
-icon[name=fire]:before { content: "\e01c"; }
-icon[name=diamond]:before { content: "\e043"; }
-icon[name=doc]:before { content: "\e085"; }
+.icon.size-actual:before { content: "\e058"; }
+.icon.star:before { content: "\e09b"; }
+.icon.graph:before { content: "\e06b"; }
+.icon.bubbles:before { content: "\e04a"; }
+.icon.grid:before { content: "\e06a"; }
+.icon.user:before { content: "\e005"; }
+.icon.people:before { content: "\e001"; }
+.icon.calendar:before { content: "\e075"; }
+.icon.pencil:before { content: "\e05f"; }
+.icon.settings:before { content: "\e09a"; }
+.icon.envelope:before { content: "\e086"; }
+.icon.arrow-down:before { content: "\e604"; }
+.icon.link:before { content: "\e08d"; }
+.icon.bell:before { content: "\e027"; }
+.icon.shield:before { content: "\e00e"; }
+.icon.options-vertical:before { content: "\e602"; }
+.icon.frame:before { content: "\e038"; }
+.icon.logout:before { content: "\e065"; }
+.icon.lock:before { content: "\e08e"; }
+.icon.pin:before { content: "\e031"; }
+.icon.trash:before { content: "\e054"; }
+.icon.github:before { content: "\e60c"; }
+.icon.action-undo:before { content: "\e050"; }
+.icon.energy:before { content: "\e020"; }
+.icon.trophy:before { content: "\e006"; }
+.icon.home:before { content: "\e069"; }
+.icon.fire:before { content: "\e01c"; }
+.icon.diamond:before { content: "\e043"; }
+.icon.doc:before { content: "\e085"; }

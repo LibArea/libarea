@@ -10,6 +10,7 @@ return [
     'Comments'          => 'Комментарии',
     'Comment'           => 'Комментарий',
     'Comment deleted'   => 'Комментарий удален',
+    'Feed'              => 'Лента',
     'Answer'            => 'Ответ',
     'Answers'           => 'Ответы',
     'All comments'      => 'Все комментарии', 

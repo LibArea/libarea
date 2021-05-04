@@ -31,16 +31,16 @@
                     <h1 class="titl">
                         <?= $post['post_title']; ?> 
                             <?php if ($post['post_is_delete'] == 1) { ?> 
-                                <icon name="trash"></icon>
+                                <i class="icon trash"></i>
                             <?php } ?>
                             <?php if($post['post_closed'] == 1) { ?> 
-                                <icon name="lock"></icon>
+                                <i class="icon lock"></i>
                             <?php } ?>
                             <?php if($post['post_top'] == 1) { ?> 
-                                <icon name="pin"></icon>
+                                <i class="icon pin"></i>
                             <?php } ?>
                             <?php if($post['post_lo'] > 0) { ?> 
-                                <icon class="lo" name="trophy"></icon>
+                                <i class="icon trophy lo"></i>
                             <?php } ?>
                     </h1>
                     <div class="footer">
@@ -61,7 +61,7 @@
                             <?php if($uid['login'] == $post['login'] || $uid['trust_level'] == 5) { ?>
                                 <span class="date">
                                     <a href="/post/edit/<?= $post['post_id']; ?>">
-                                        <icon name="pencil"></icon>  
+                                        <i class="icon pencil"></i>  
                                     </a>
                                 </span>
                                 <span class="date"> 
@@ -119,7 +119,7 @@
                             <h3 class="lo">ЛО</h3>
                             <span class="right">
                                 <a rel="nofollow" href="/posts/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#comm_<?= $lo['comment_id']; ?>">
-                                    <icon name="arrow-down"></icon>
+                                    <i class="icon arrow-down"></i>
                                 </a>
                             </span>
                             <?= $lo['comment_content']; ?> 

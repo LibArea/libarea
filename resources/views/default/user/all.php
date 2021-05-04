@@ -9,7 +9,7 @@
                 <div class="user_card">
                     <div>
                         <a href="/u/<?= $user['login']; ?>">
-                            <img class="gravatar" alt="<?= $user['login']; ?>" src="/uploads/avatar/<?php echo $user['avatar']; ?>">
+                            <img class="gravatar small" alt="<?= $user['login']; ?>" src="/uploads/avatar/<?php echo $user['avatar']; ?>">
                         </a>
                     </div>
                     <div class="box-footer">

@@ -1,51 +1,46 @@
 <nav>
-<ul>
-    <li>
+
         <div class="bar-m">Меню</div>
         <div class="togglemenuoff">
-            <icon name="size-actual"></icon>  
+            <i class="icon size-actual"></i>  
         </div>
-    </li>
+
     <?php if($uid['id'] > 0) { ?>                     
-        <li>
+
             <a href="/u/<?= $uid['login']; ?>/favorite">
-                <icon name="star"></icon>  
+                <i class="icon star"></i>  
                 <span><?= lang('Favorites'); ?></span>              
             </a>
-        </li>
+
     <?php } ?>  
-    <li>
-        <a <?php if($uid['uri'] == '/answers') { ?>class="active"<?php } ?> title="<?= lang('Answers'); ?>" href="/answers">
-            <icon name="action-undo"></icon>
-            <span><?= lang('Answers'); ?></span>
+
+        <a<?php if($uid['uri'] == '/answers') { ?> class="active"<?php } ?> title="<?= lang('Answers'); ?>" href="/answers">
+            <i class="icon action-undo"></i>
+            <?= lang('Answers'); ?>
         </a>
-    </li>
-    <li>
-        <a <?php if($uid['uri'] == '/comments') { ?>class="active"<?php } ?> title="<?= lang('Comments'); ?>" href="/comments">
-            <icon name="bubbles"></icon>
-            <span><?= lang('Comments'); ?></span>
+
+        <a<?php if($uid['uri'] == '/comments') { ?> class="active"<?php } ?> title="<?= lang('Comments'); ?>" href="/comments">
+            <i class="icon bubbles"></i>
+            <?= lang('Comments'); ?>
         </a>
-    </li>
-    <li>
-        <a <?php if($uid['uri'] == '/space') { ?>class="active"<?php } ?> title="<?= lang('Space'); ?>" href="/space">
-            <icon name="grid"></icon>
-            <span><?= lang('Space'); ?></span>
+
+        <a<?php if($uid['uri'] == '/space') { ?> class="active"<?php } ?> title="<?= lang('Space'); ?>" href="/space">
+            <i class="icon grid"></i>
+            <?= lang('Space'); ?>
         </a>
-    </li>
-    <li>
-        <a <?php if($uid['uri'] == '/users') { ?>class="active"<?php } ?> title="<?= lang('Users'); ?>" href="/users">
-            <icon name="people"></icon>
-            <span><?= lang('Users'); ?></span>
+
+        <a<?php if($uid['uri'] == '/users') { ?> class="active"<?php } ?> title="<?= lang('Users'); ?>" href="/users">
+            <i class="icon people"></i>
+            <?= lang('Users'); ?>
         </a>
-    </li>
-    <li>
+
         <a title="<?= lang('Flow'); ?>" href="/flow">
-            <icon name="energy"></icon>
-            <span><?= lang('Flow'); ?></span>
+            <i class="icon energy"></i>
+            <?= lang('Flow'); ?>
         </a>
-    </li>
+
     <?php if(!empty($space_bar)) { ?>
-    <li>
+
         <div class="bar-space">
             <div class="bar-m bar-title"><?= lang('Signed'); ?></div>  
             <?php foreach ($space_bar as  $sig) { ?>
@@ -55,7 +50,6 @@
                 </a>
             <?php } ?>
         </div>    
-    </li>
+
     <?php }  ?> 
-<ul>
 </nav>

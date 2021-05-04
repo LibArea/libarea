@@ -42,21 +42,25 @@
     <ul class="nav-tabs">
         <?php if($type == 'feed') { ?>
             <li class="active">
-               <span><icon name="calendar"></icon>  Посты</span>
+               <i class="icon calendar"></i>  
+               <span>Посты</span>
             </li>
             <li>
                 <a href="/s/<?= $space_info['space_slug']; ?>/top">
-                     <span><icon name="fire"></icon> Top</span>
+                     <i class="icon fire"></i> 
+                     <span>Top</span>
                 </a>
             </li>
         <?php } else { ?>
             <li>  
                 <a href="/s/<?= $space_info['space_slug']; ?>">
-                    <span><icon name="calendar"></icon> Посты</span>
+                    <i class="icon calendar"></i> 
+                    <span>Посты</span>
                 </a>
             </li>    
             <li class="active">
-                  <span><icon name="fire"></icon> Top</span>
+                  <i class="icon fire"></i> 
+                  <span>Top</span>
             </li>
         <?php } ?>        
     </ul>

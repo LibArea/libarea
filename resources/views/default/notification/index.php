@@ -9,9 +9,9 @@
             <?php if($notif['action_type'] == 1) { ?>
             
                 <?php if($notif['read_flag'] == 0) { ?>
-                    <span class="red"><icon name="envelope"></icon></span>
+                    <span class="red"><i class="icon envelope"></i></span>
                 <?php } else { ?>
-                    <icon name="envelope"></icon>
+                    <i class="icon envelope"></i>
                 <?php } ?>
                
                 <a href="/u/<?= $notif['login'] ?>"><?= $notif['login'] ?></a> 
@@ -30,15 +30,15 @@
              
             <?php if($notif['action_type'] == 3) { ?>
                 Ответил на пост
-                <icon name="action-undo"></icon>
+                <i class="icon action-undo"></i>
             <?php } ?>  
              
              <?php if($notif['action_type'] == 4) { ?>
                 
                 <?php if($notif['read_flag'] == 0) { ?>
-                    <span class="red"><icon name="bubbles"></icon></span>
+                    <i class="icon bubbles red"></i>
                 <?php } else { ?>
-                    <icon name="bubbles"></icon>
+                    <i class="icon bubbles"></i>
                 <?php } ?>
                 
                 <a href="/u/<?= $notif['login'] ?>"><?= $notif['login'] ?></a> 

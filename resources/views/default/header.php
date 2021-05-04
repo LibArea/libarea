@@ -29,7 +29,7 @@
                 <?php if($uid['uri'] == '/') { ?>
                    <a title="<?= lang('Home'); ?>" class="logo" href="/">LoriUP</a>
                 <?php } else { ?>
-                    <a title="<?= lang('Home'); ?>" class="logo" href="/"><icon name="home"></icon></a></a> 
+                    <a title="<?= lang('Home'); ?>" class="logo" href="/"><i class="icon home"></i></a>
                     <span class="slash">\</span>
                     <a title="<?= lang('LoriUP'); ?>" class="home" href="/"><?= lang('LoriUP'); ?></a>
                 <?php } ?>
@@ -37,7 +37,7 @@
 
             <li class="nav no-mob closed-on">        
                 <div class="togglemenu">
-                    <icon name="options-vertical"></icon> 
+                    <i class="icon options-vertical"></i> 
                 </div>
             </li>
         </ul>
@@ -45,7 +45,7 @@
     <div class="menu-right">
         <div class="nav">
             <span id="toggledark" class="my-color-m">
-                <icon name="frame"></icon> 
+                <i class="icon frame"></i> 
             </span>
         </div>
         <?php if(!$uid['id']) { ?>  
@@ -62,16 +62,16 @@
         <?php } else { ?> 
             <div class="nav create">  
                 <a href="/post/add"> 
-                    <icon name="pencil"></icon>                    
+                    <i class="icon pencil"></i>                    
                 </a>
             </div>   
             <?php if($uid['notif']) { ?> 
                 <div class="nav notif">  
                     <a href="/u/<?= $uid['login']; ?>/notifications"> 
                         <?php if($uid['notif']['action_type'] == 1) { ?>
-                            <icon name="envelope"></icon>
+                            <i class="icon envelope"></i>
                         <?php } else { ?>    
-                            <icon name="bell"></icon>
+                            <i class="icon bell"></i>
                         <?php } ?>
                        
                     </a>
@@ -80,49 +80,49 @@
             <div class="dropbtn nav">
                 <div class="b-my" title=""><span><?= $uid['login']; ?></span>  
                     <img class="ava" alt="<?= $uid['login']; ?>" src="/uploads/avatar/small/<?= $uid['avatar']; ?>">
-                    <icon class="arrow" name="arrow-down"></icon>
+                    <i class="icon arrow arrow-down"></i>
                 </div>
                 <div class="dropdown-menu">
                     <span class="st"></span>
                     <a href="/u/<?= $uid['login']; ?>">
-                        <icon name="user"></icon>
+                        <i class="icon user"></i>
                         <?= lang('Profile'); ?>
                     </a>
                     <a href="/u/<?= $uid['login']; ?>/setting">
-                        <icon name="settings"></icon>
+                        <i class="icon settings"></i>
                         <?= lang('Settings'); ?>
                     </a>
                    <a href="/u/<?= $uid['login']; ?>/notifications">
-                        <icon name="bell"></icon> 
+                        <i class="icon bell"></i> 
                         <?= lang('Notifications'); ?>
                     </a>
                     <a href="/u/<?= $uid['login']; ?>/messages">
-                        <icon name="envelope"></icon> 
+                        <i class="icon envelope"></i> 
                         <?= lang('Messages'); ?>
                     </a>
                     <a href="/u/<?= $uid['login']; ?>/comments"> 
-                        <icon name="bubbles"></icon>
+                        <i class="icon bubbles"></i>
                         <?= lang('Comments'); ?> 
                     </a>
                     <a href="/u/<?= $uid['login']; ?>/favorite">
-                        <icon name="star"></icon> 
+                        <i class="icon star"></i> 
                         <?= lang('Favorites'); ?>              
                     </a>
                     <?php if($uid['trust_level'] > 1) { ?>
                         <a href="/u/<?= $uid['login']; ?>/invitation">
-                            <icon name="link"></icon>   
+                            <i class="icon link"></i>   
                             <?= lang('Invites'); ?>                   
                         </a> 
                     <?php } ?>  
                     <?php if($uid['trust_level'] == 5) { ?> 
                         <a href="/admin" target="_black">
-                            <icon name="shield"></icon>    
+                            <i class="icon shield"></i>    
                             <?= lang('Admin'); ?>                   
                         </a> 
                     <?php } ?>     
                     <hr>   
                     <a href="/logout" class="logout" target="_self" title="<?= lang('Sign out'); ?>">
-                        <icon name="logout"></icon> 
+                        <i class="icon logout"></i> 
                         <?= lang('Sign out'); ?>
                     </a>
                 </div>
@@ -134,7 +134,7 @@
 <?php if(!empty($post['post_title'])) { ?>
     <div id="stHeader">
         <div class="wrap">
-            <a href="/"><icon name="home"></icon></a> <span class="slash">\</span> <?= $post['post_title']; ?>
+            <a href="/"><i class="icon home"></i></a> <span class="slash">\</span> <?= $post['post_title']; ?>
         </div>
     </div>
 <?php } ?>

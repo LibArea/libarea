@@ -13,11 +13,11 @@
         <?php if($uid['trust_level'] > 0) { ?>
             <?php if($uid['login'] != $user['login']) { ?> &nbsp; 
                 <a href="/u/<?= $user['login']; ?>/mess">
-                    <icon name="envelope"></icon>
+                    <i class="icon envelope"></i>
                 </a> 
             <?php } else { ?>
                 <a href="/u/<?= $uid['login']; ?>/setting">
-                    <icon name="pencil"></icon>
+                    <i class="icon pencil"></i>
                 </a> 
             <?php } ?>
         <?php } ?>

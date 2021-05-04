@@ -31,13 +31,13 @@
                     <a class="u-url" href="/posts/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
                         <h2 class="titl"><?= $post['post_title']; ?></h2>
                         <?php if ($post['post_is_delete'] == 1) { ?> 
-                            <icon name="trash"></icon>
+                            <i class="icon trash"></i>
                         <?php } ?>
                         <?php if($post['post_closed'] == 1) { ?> 
-                            <icon name="lock"></icon>
+                            <i class="icon lock"></i>
                         <?php } ?>
                         <?php if($post['post_top'] == 1) { ?> 
-                            <icon name="pin"></icon>
+                            <i class="icon pin"></i>
                         <?php } ?>
                     </a>
                     <div class="space-color space_<?= $post['space_color'] ?>"></div>
