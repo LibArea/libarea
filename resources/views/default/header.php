@@ -8,13 +8,30 @@
         <?php if (isset($data['post']['post_is_delete'])) { ?>  
             <meta name="robots" content="noindex" />
         <?php } ?>
- 
+
         <title><?= $data['title']; ?></title>
         <meta name = "description" content = "<?= $data['description']; ?>" />
-        <link rel="stylesheet" href="/assets/css/style.css">
+ 
+        <meta property="og:title" content="<?= $data['title']; ?>">
+        <meta property="og:description" content="<?= $data['description']; ?>"> 
+        <meta property="og:site_name" content="<?= $GLOBALS['conf']['hometitle']; ?>">
+        
+        <?php if (isset($data['post']['post_id'])) { ?>
+            <meta property="og:type" content="article">
+            <meta property="og:url" content="<?= $GLOBALS['conf']['url']; ?>/posts/<?=$data['post']['post_id']; ?>/<?=$data['post']['post_slug']; ?>">
+            <meta property="article:published_time" content="<?=$data['post']['post_date']; ?>">
+            <meta property="article:modified_time" content="<?=$data['post']['post_edit']; ?>">
+            <link rel="canonical" href="<?= $GLOBALS['conf']['url']; ?>/posts/<?=$data['post']['post_id']; ?>/<?=$data['post']['post_slug']; ?>">
+        <?php } else { ?>
+            <meta property="og:type" content="website">
+            <meta property="og:image" content="<?= $GLOBALS['conf']['url']; ?>/assets/images/areadev.jpg">
+            <meta property="og:image:type" content="image/jpeg">
+        <?php } ?>
+
         <link rel="icon" href="/favicon.ico">
         <link rel="apple-touch-icon" href="/favicon.png">
-
+        
+        <link rel="stylesheet" href="/assets/css/style.css">
         <?php if($uid['uri'] == '/flow') { ?>
             <script src="/assets/js/flow.js"></script>
             <link rel="stylesheet" href="/assets/css/flow.css">
@@ -30,8 +47,8 @@
                    <a title="<?= lang('Home'); ?>" class="logo" href="/">LoriUP</a>
                 <?php } else { ?>
                     <a title="<?= lang('Home'); ?>" class="logo" href="/"><i class="icon home"></i></a>
-                    <span class="slash">\</span>
-                    <a title="<?= lang('LoriUP'); ?>" class="home" href="/"><?= lang('LoriUP'); ?></a>
+                    <span class="slash no-mob">\</span>
+                    <a title="<?= lang('LoriUP'); ?>" class="home no-mob" href="/"><?= lang('LoriUP'); ?></a>
                 <?php } ?>
             </li> 
 

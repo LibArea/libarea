@@ -114,7 +114,6 @@ h1 {margin: 0;color:#f56400;font-size: 3em;font-family: Georgia,Arial,sans-serif
 h3 {margin: 0;color: #666;font-weight: 300;font-size: 1.3em;}
 hr.user {display: block;height: 1px;margin: 1em 0;width: 200px;border: 0;border-top-width: 0px;border-top-style:none;
 	 border-top-color: currentcolor;border-top: 2px solid #999;padding: 0;}
-.user-img{background: url(/static/img/dev.jpg);height: 119px;width:70%;}
 .prof-glog-blog {max-width: 500px;}
 .bord {border-bottom: 2px solid #f56400;max-width: 800px;padding-top:10px;}
 .bord-2 {border-bottom: 1px solid #ddd;max-width: 600px;padding-top: 10px;}

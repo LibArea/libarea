@@ -46,15 +46,17 @@
                     </a>
                     
                     <?php if ($post['post_content_preview']) { ?>
-                        <div class="show">
-                            <span class="show_add_<?= $post['post_id']; ?>">
-                                <a data-post_id="<?= $post['post_id']; ?>" class="showpost">
+                      
+                            <div class="show_add_<?= $post['post_id']; ?>">
+                                <div data-post_id="<?= $post['post_id']; ?>" class="showpost">
                                     <span>&#9658;</span> 
-                                    <?= $post['post_content_preview']; ?>... 
-                                </a>
-                            </span>
-                        </div>
+                                    <?= $post['post_content_preview']; ?>
+                                    <span class="s_<?= $post['post_id']; ?> show_detail">... </span>
+                                </div>
+                            </div>
+                       
                     <?php } ?>
+                    
                     <div id="show_<?= $post['post_id']; ?>" class="show_detail"></div> 
                     
                     <div class="footer">
@@ -69,7 +71,7 @@
                         </span>
                         <?php if($post['post_answers_num'] !=0) { ?> 
                             <span class="otst"> | </span>
-                            <a class="u-url" href="/posts/<?= $post['post_slug']; ?>">
+                            <a class="u-url" href="/posts/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
                                <?= $post['post_answers_num']; ?>  <?= $post['lang_num_answers']; ?>  
                             </a>
                         <?php } ?>

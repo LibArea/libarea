@@ -128,10 +128,12 @@ class PostController extends \MainController
         $post['post_content']   = $Parsedown->text($post['post_content']);
         $post['post_date']      = Base::ru_date($post['post_date']);
         $post['num_answers']    = Base::ru_num('answ', $post['post_answers_num']); 
+        $post['num_comments']   = Base::ru_num('comm', $post['post_comments_num']); 
         $post['favorite_post']  = PostModel::getMyPostFavorite($post['post_id'], $uid['id']);
         
         // Получим ответы
-        $post_answers = AnswerModel::getAnswersPost($post['post_id'], $uid['id']);
+        // post_type: 0 - дискуссия, 1 - Q&A
+        $post_answers = AnswerModel::getAnswersPost($post['post_id'], $uid['id'], $post['post_type']);
   
         // Получим ЛО (временно)
         // Возможно нам стоит просто поднять ответ на первое место?
@@ -233,7 +235,8 @@ class PostController extends \MainController
         $post_content_img       = \Request::getPost('content_img');
         $post_url               = \Request::getPost('post_url');
         $post_closed            = \Request::getPostInt('closed');
-        $post_top               = \Request::getPostInt('top');
+        $post_top               = \Request::getPostInt('top'); 
+        $post_type              = \Request::getPostInt('post_type');
      
         // IP адрес и ID кто добавляет
         $post_ip_int  = \Request::getRemoteAddress();
@@ -302,6 +305,7 @@ class PostController extends \MainController
             'post_content_img'      => $post_content_img,
             'post_thumb_img'        => $og_img,
             'post_slug'             => $post_slug,
+            'post_type'             => $post_type,
             'post_ip_int'           => $post_ip_int,
             'post_user_id'          => $post_user_id,
             'post_space_id'         => $space_id,
@@ -435,6 +439,7 @@ class PostController extends \MainController
         $post_content           = $_POST['post_content']; // не фильтруем
         $post_content_preview   = \Request::getPost('content_preview');
         $post_content_img       = \Request::getPost('content_img');
+        $post_type              = \Request::getPostInt('post_type');
         $post_closed            = \Request::getPostInt('closed');
         $post_top               = \Request::getPostInt('top');
         $post_space_id          = \Request::getPostInt('space_id');
@@ -484,6 +489,7 @@ class PostController extends \MainController
         $data = [
             'post_id'               => $post_id,
             'post_title'            => $post_title, 
+            'post_type'             => $post_type,
             'post_content'          => $post_content,
             'post_content_preview'  => $post_content_preview,
             'post_content_img'      => $post_content_img,
@@ -497,7 +503,7 @@ class PostController extends \MainController
         // Перезапишем пост
         PostModel::editPost($data);
         
-        redirect('/posts/' . $post['post_slug']);
+        redirect('/posts/' . $post['post_id'] . '/' . $post['post_slug']);
     }
     
     // Размещение своего поста у себя в профиле

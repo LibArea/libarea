@@ -12,7 +12,9 @@ return [
     'answers-desc'      => 'All responses (to posts) in order of priority in the community',
     'post-closed'       => 'The post is closed',
     'no-auth-comm'      => 'You must be logged in to leave a comment',
+    'no-auth-answ'      => 'You must be logged in to leave an answer to the question',
     'write-something'   => 'Write something',
+    'write-response'    => 'Write the answer to the question',
     'post-delete'       => 'Post deleted',
     'post-closed'       => 'The post is closed',
     'in-the-profile'    => 'go to profile',
@@ -52,6 +54,8 @@ return [
     'desc-user-all'     => 'List of all participants sorted by date of registration on the site',
     'desc-profile'      => 'Participant*s profile page (posts, comments)',
     'top-desc'          => 'List of popular posts in the community (by number of responses)',
+    'space-feed-title'  => 'Feed of posts by space',
+    'space-top-title'   => 'Popular posts by Space',
     
     /* For notification and chat */
     'add_comment'       => 'added a comment',

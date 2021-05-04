@@ -193,9 +193,9 @@ class UserController extends \MainController
             $image->saveTo($path_img_small, $uid['id']);
             
             $avatar = UserModel::getAvatar($uid['login']);
-            
+     
             // Удалим старую аватарку, кроме дефолтной
-            if($avatar['avatar'] != 'noavatar.png') {
+            if($avatar['avatar'] != 'noavatar.png' && $avatar['avatar'] != 'img_' . $uid['id'] .'.'. $ext) {
                 chmod($path_img . $avatar['avatar'], 0777);
                 chmod($path_img_small . $avatar['avatar'], 0777);
                 unlink($path_img . $avatar['avatar']);

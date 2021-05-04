@@ -63,11 +63,17 @@ class SpaceController extends \MainController
 
         // Отписан участник от пространства или нет
         $space_signed = SpaceModel::getMySpaceHide($space['space_id'], $uid['id']);
+        
+        if($type == 'feed') {
+            $s_title = lang('space-feed-title');
+        } else {
+            $s_title = lang('space-top-title');
+        }
 
         $data = [
             'h1'         => $space['space_name'],
-            'title'      => $space['space_name'] . ' - посты по пространству | ' . $GLOBALS['conf']['sitename'],
-            'description'=> 'Страница постов по пространству ' . $space['space_name'] . ' на сайте ' . $GLOBALS['conf']['sitename'],
+            'title'      => $space['space_name'] . ' | ' . $s_title . ' — ' . $GLOBALS['conf']['sitename'],
+            'description'=> $s_title . ' ' . $space['space_name'] . ' на сайте ' . $GLOBALS['conf']['sitename'],
         ];
 
         return view(PR_VIEW_DIR . '/space/space-posts', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'space_info' => $space, 'tags' => $tags, 'space_signed' => $space_signed, 'type' => $type]);

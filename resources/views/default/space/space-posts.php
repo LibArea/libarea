@@ -26,7 +26,9 @@
         <?php } ?> 
         <div class="space-text">
             <img class="space-box-img" src="/uploads/space/<?= $space_info['space_img']; ?>">
-            <h2><?= $space_info['space_name']; ?></h2>  
+            <a title="<?= $space_info['space_name']; ?>" href="/s/<?= $space_info['space_slug']; ?>">
+                <h1><?= $space_info['space_name']; ?></h1>
+            </a>  
             <div class="data"><?= $space_info['space_date']; ?></div> 
 
             <?php if($uid['trust_level'] == 5 || $space_info['space_user_id'] == $uid['id']) { ?>
@@ -42,25 +44,21 @@
     <ul class="nav-tabs">
         <?php if($type == 'feed') { ?>
             <li class="active">
-               <i class="icon calendar"></i>  
-               <span>Посты</span>
+               <span><?= lang('Feed'); ?></span>
             </li>
             <li>
                 <a href="/s/<?= $space_info['space_slug']; ?>/top">
-                     <i class="icon fire"></i> 
-                     <span>Top</span>
+                    <span>Top</span>
                 </a>
             </li>
         <?php } else { ?>
             <li>  
                 <a href="/s/<?= $space_info['space_slug']; ?>">
-                    <i class="icon calendar"></i> 
-                    <span>Посты</span>
+                    <span><?= lang('Feed'); ?></span>
                 </a>
             </li>    
             <li class="active">
-                  <i class="icon fire"></i> 
-                  <span>Top</span>
+                <span>Top</span>
             </li>
         <?php } ?>        
     </ul>
@@ -117,7 +115,7 @@
                         </span>
                         <?php if($post['post_answers_num'] !=0) { ?> 
                             <span class="otst"> | </span>
-                            <a class="u-url" href="/posts/<?= $post['post_slug']; ?>">
+                            <a class="u-url" href="/posts/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
                                 <?= $post['post_answers_num']; ?>  <?= $post['lang_num_answers']; ?>
                             </a>                                
                         <?php } ?>

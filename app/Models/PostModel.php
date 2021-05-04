@@ -48,7 +48,9 @@ class PostModel extends \MainModel
             $sort = 'ORDER BY p.post_answers_num DESC';
         }  
 
-        $sql = "SELECT p.post_id, p.post_title, p.post_slug, p.post_user_id, p.post_space_id, p.post_answers_num, p.post_date, p.post_votes, p.post_is_delete, p.post_closed, p.post_lo, p.post_top, p.post_url, p.post_content_preview, p.post_content_img,
+        $sql = "SELECT p.post_id, p.post_title, p.post_slug, p.post_type, p.post_user_id, p.post_space_id, p.post_answers_num, 
+        p.post_comments_num, p.post_date, p.post_votes, p.post_is_delete, p.post_closed, p.post_lo, p.post_top, p.post_url, 
+        p.post_content_preview, p.post_content_img,
                 u.id, u.login, u.avatar,
                 v.votes_post_item_id, v.votes_post_user_id,  
                 s.space_id, s.space_slug, s.space_name, space_color
@@ -187,6 +189,7 @@ class PostModel extends \MainModel
             ['post_content_img'], ',',  
             ['post_thumb_img'], ',',
             ['post_slug'], ',', 
+            ['post_type'], ',',
             ['post_ip_int'], ',', 
             ['post_user_id'], ',', 
             ['post_space_id'], ',', 
@@ -202,7 +205,8 @@ class PostModel extends \MainModel
             $data['post_content_preview'], 
             $data['post_content_img'],
             $data['post_thumb_img'],            
-            $data['post_slug'], 
+            $data['post_slug'],
+            $data['post_type'],
             $data['post_ip_int'], 
             $data['post_user_id'], 
             $data['post_space_id'], 
@@ -222,6 +226,7 @@ class PostModel extends \MainModel
        
         XD::update(['posts'])->set(
             ['post_title'], '=', $data['post_title'], ',', 
+            ['post_type'], '=', $data['post_type'], ',',
             ['edit_date'], '=', $edit_date, ',', 
             ['post_content'], '=', $data['post_content'], ',', 
             ['post_content_preview'], '=', $data['post_content_preview'], ',', 

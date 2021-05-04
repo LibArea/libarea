@@ -32,6 +32,11 @@
             
             <?php if($uid['trust_level'] > 0) { ?>
                 <div class="boxline"> 
+                    <label for="post_content">Формат</label>
+                    <input type="radio" name="post_type" <?php if($post['post_type'] == 0) { ?>checked<?php } ?> value="0"> Обсуждение
+                    <input type="radio" name="post_type" <?php if($post['post_type'] == 1) { ?>checked<?php } ?> value="1" > Q&A
+                </div> 
+                <div class="boxline"> 
                     <label for="post_content">Закрыть</label>
                     <input type="radio" name="closed" <?php if($post['post_closed'] == 0) { ?>checked<?php } ?> value="0"> <?= lang('No'); ?>
                     <input type="radio" name="closed" <?php if($post['post_closed'] == 1) { ?>checked<?php } ?> value="1" > <?= lang('Yes'); ?>

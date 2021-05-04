@@ -37,19 +37,23 @@ class AnswerModel extends \MainModel
                 ->and(['answer_lo'], '>', 0)->getSelectOne();
     }
     
-    // Получаем комментарии в посте
-    public static function getAnswersPost($post_id, $uid)
+    // Получаем ответы в посте
+    public static function getAnswersPost($post_id, $uid, $type)
     { 
         $q = XD::select('*')->from(['answers']);
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['answer_user_id'])
         ->leftJoin(['votes_answ'])->on(['votes_answ_item_id'], '=', ['answer_id'])
-        ->and(['votes_answ_user_id'], '=', $uid)
-        ->where(['answer_post_id'], '=', $post_id);
-
-        return $query->getSelect();
+        ->and(['votes_answ_user_id'], '=', $uid)->where(['answer_post_id'], '=', $post_id);
+        
+        // 0 - дискуссия, 1 - Q&A
+        if($type == 0) {
+            return $query->getSelect();
+        } else {
+            return $query->orderBy(['answer_votes'])->desc()->getSelect();
+        }
     }
 
-    // Страница комментариев участника
+    // Страница ответов участника
     public static function getUsersAnswers($slug)
     {
         $q = XD::select('*')->from(['answers']);

@@ -3,9 +3,9 @@
     <?php if (!$uid['id']) { ?>
         <div class="banner">
             <div class="banner-telo">
-                <img src="/assets/svg/loriup.svg" alt="За стеклом">
+                <img width="28" height="28" src="/assets/svg/loriup.svg" alt="За стеклом">
                 <h1 class="banner-h1"><?= lang('site-banner'); ?></h1> 
-                <?= lang('site-banner-txt'); ?> <a href="/info"><?= lang('Read'); ?></a>...
+                <?= lang('site-banner-txt'); ?>. <a href="/info"><?= lang('Read'); ?></a>...
             </div>
         </div>    
     <?php } ?>  
@@ -74,6 +74,9 @@
                         <?php if($post['post_lo'] > 0) { ?> 
                             <i class="icon trophy lo"></i>
                         <?php } ?>
+                        <?php if($post['post_type'] == 1) { ?> 
+                            <i class="icon question qa"></i>
+                        <?php } ?>
                     </a>
                     <div class="space-color space_<?= $post['space_color'] ?>"></div>
                     <a class="space-u" href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
@@ -109,7 +112,11 @@
                         <?php if($post['post_answers_num'] !=0) { ?> 
                             <span class="otst"> | </span>
                             <a class="u-url" href="/posts/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
-                               <?= $post['post_answers_num']; ?>  <?= $post['lang_num_answers']; ?>  
+                                <?php if($post['post_type'] ==0) { ?>
+                                    <?= $post['post_answers_num'] + $post['post_comments_num']; ?> коммент...
+                                <?php } else { ?>      
+                                    <?= $post['post_answers_num']; ?>  <?= $post['lang_num_answers']; ?>   
+                                <?php } ?>
                             </a>
                         <?php } ?>
                     </div>
@@ -149,7 +156,7 @@
                 <img class="ava" alt="<?= $answ['login']; ?>" src="/uploads/avatar/small/<?= $answ['avatar']; ?>">
                 <?= $answ['answer_date']; ?>
             </div> 
-            <a href="/posts/<?= $post['post_id']; ?>/<?= $answ['post_slug']; ?>#answ_<?= $answ['answer_id']; ?>">
+            <a href="/posts/<?= $answ['post_id']; ?>/<?= $answ['post_slug']; ?>#answ_<?= $answ['answer_id']; ?>">
                 <?= $answ['answer_content']; ?>...  
             </a>
        </div>
