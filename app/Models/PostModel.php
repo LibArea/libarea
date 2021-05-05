@@ -214,7 +214,8 @@ class PostModel extends \MainModel
             $data['post_url'],
             $data['post_url_domain']]), ')' )->run();
 
-        return true; 
+        // id поста
+        return XD::select()->last_insert_id('()')->getSelectValue();
     } 
 
     // Редактирование поста

@@ -318,11 +318,11 @@ class PostController extends \MainController
         ];
         
         // Записываем пост
-        PostModel::AddPost($data);
+        $post_id = PostModel::AddPost($data);
         
         // Отправим в Discord
         if($GLOBALS['conf']['discord'] == 1) {
-            $url = '/posts/'. $post_slug;
+            $url = '/posts/'. $post_id .'/'. $post_slug;
             Base::AddWebhook($post_content, $post_title, $url);
         }
         
