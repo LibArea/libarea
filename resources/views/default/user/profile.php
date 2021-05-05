@@ -67,7 +67,7 @@
         <?php } ?>
         
         <?php if($data['space_user']) { ?>
-            <label class="required">Владеет:</label>
+            <label class="required"><?= lang('Created by'); ?>:</label>
             <span class="d">
                 <?php foreach ($data['space_user'] as  $space) { ?>
                     <a href="/s/<?= $space['space_slug'];?>"><?= $space['space_name'];?></a> &nbsp; 

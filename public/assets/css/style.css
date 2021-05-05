@@ -507,6 +507,27 @@ border-radius: 20px;
  background: #F89406;
 }
 
+/* Урезанный пост на главной */
+.full-post-home, .post-telo.full {
+  overflow: hidden;
+  margin-bottom: 22px;
+}
+.full-post-home img.thumb {
+  margin: 10px 20px 10px 10px;
+}
+.fuul-head {
+  font-size: 13px;
+  margin: 0 0 5px 0;
+}
+.fuul-head a {
+  color: var(--color-gray-1);
+}
+.fuul-head .ava {
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+
 /* Посты */
 .post-space-box {
  margin: 0 0 24px 0;

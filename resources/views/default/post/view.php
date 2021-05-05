@@ -169,7 +169,9 @@
             <?php } ?>
         <?php } else { ?>
             <?php include TEMPLATE_DIR . '/post/qa-view.php'; ?>
-            <p class="no-answer">Вопрос закрыт...</p>
+            <?php if($post['post_closed'] == 1) { ?>
+                <p class="no-answer">Вопрос закрыт...</p>
+            <?php } ?>
         <?php } ?>        
 
          

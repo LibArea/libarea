@@ -35,9 +35,9 @@ class PostModel extends \MainModel
 
         $offset = ($page-1) * 15; 
         
-        // Показывать удаленный пост и для персонала
+        // Показывать удаленный пост и запрещенные к показу в ленте
         if($trust_level != 5) { 
-            $display = 'AND p.post_is_delete  = 0';
+            $display = 'AND p.post_is_delete  = 0 AND s.space_feed = 0';
         } else {
             $display = '';
         }
@@ -50,10 +50,10 @@ class PostModel extends \MainModel
 
         $sql = "SELECT p.post_id, p.post_title, p.post_slug, p.post_type, p.post_user_id, p.post_space_id, p.post_answers_num, 
         p.post_comments_num, p.post_date, p.post_votes, p.post_is_delete, p.post_closed, p.post_lo, p.post_top, p.post_url, 
-        p.post_content_preview, p.post_content_img,
+        p.post_content_img, p.post_thumb_img, p.post_content,
                 u.id, u.login, u.avatar,
                 v.votes_post_item_id, v.votes_post_user_id,  
-                s.space_id, s.space_slug, s.space_name, space_color
+                s.space_id, s.space_slug, s.space_name, s.space_color, s.space_feed
                 fROM posts as p
                 INNER JOIN users as u ON u.id = p.post_user_id
                 INNER JOIN space as s ON s.space_id = p.post_space_id
@@ -185,7 +185,6 @@ class PostModel extends \MainModel
         XD::insertInto(['posts'], '(', 
             ['post_title'], ',', 
             ['post_content'], ',', 
-            ['post_content_preview'], ',', 
             ['post_content_img'], ',',  
             ['post_thumb_img'], ',',
             ['post_slug'], ',', 
@@ -202,7 +201,6 @@ class PostModel extends \MainModel
         XD::setList([
             $data['post_title'], 
             $data['post_content'], 
-            $data['post_content_preview'], 
             $data['post_content_img'],
             $data['post_thumb_img'],            
             $data['post_slug'],
@@ -229,7 +227,6 @@ class PostModel extends \MainModel
             ['post_type'], '=', $data['post_type'], ',',
             ['edit_date'], '=', $edit_date, ',', 
             ['post_content'], '=', $data['post_content'], ',', 
-            ['post_content_preview'], '=', $data['post_content_preview'], ',', 
             ['post_content_img'], '=', $data['post_content_img'], ',', 
             ['post_closed'], '=', $data['post_closed'], ',', 
             ['post_top'], '=', $data['post_top'], ',', 

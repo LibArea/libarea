@@ -22,7 +22,14 @@
                     <label for="post_content"><?= lang('Publications'); ?></label>
                     <input type="radio" name="permit" value="1"> <?= lang('Just me'); ?>
                     <input type="radio" name="permit" value="2" > <?= lang('All'); ?>
-                </div>                  
+                </div>  
+                <div class="boxline"> 
+                    <label for="post_content">Показывать</label>
+                    <input type="radio" name="feed" value="0"> <?= lang('Yes'); ?>
+                    <input type="radio" name="feed" value="1" > <?= lang('No'); ?>
+                    <div class="box_h">Если нет, то посты не будут видны в ленте (на главной)</b></div>
+                    <br />  
+                </div> 
                 <div class="boxline">
                     <label for="post_content">Meta-</label>
                     <textarea class="add" name="space_description"></textarea><br />

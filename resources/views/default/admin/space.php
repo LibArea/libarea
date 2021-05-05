@@ -32,9 +32,9 @@
                             <br>
                             <small>
                             <?php if($sp['space_type'] == 1) {  ?>
-                                приватное
+                                официальное
                             <?php } else { ?>
-                                открытое   
+                                все   
                             <?php } ?>
                             </small>
                         </span>

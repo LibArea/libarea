@@ -200,10 +200,12 @@ class AdminController extends \MainController
         
         $space_slug     = \Request::getPost('space_slug');
         $space_name     = \Request::getPost('space_name');  
-        $permit         = \Request::getPostInt('permit');
+        $space_permit   = \Request::getPostInt('permit');
         $meta_desc      = \Request::getPost('space_description');
         $space_text     = \Request::getPost('space_text');  
         $space_color    = \Request::getPostInt('space_color');
+        $space_feed     = \Request::getPostInt('space_feed');
+        $space_tl       = \Request::getPostInt('space_tl');
         
         if (!preg_match('/^[a-zA-Z0-9]+$/u', $space_slug))
         {
@@ -246,23 +248,24 @@ class AdminController extends \MainController
             redirect('/admin/space/add');
         }
         
-        if($permit == '') 
-        {
-            Base::addMsg('Выберите, кто будет публиковать в пространстве', 'error');
-            redirect('/admin/space/add');   
-        }
+        $space_permit   = $space_permit == 1 ? 1 : 0;
+        $space_feed     = $space_feed == 1 ? 1 : 0;
+        $space_tl       = $space_tl == 1 ? 1 : 0;
         
         $data = [
-            'space_name'         => $space_name,
-            'space_slug'         => $space_slug,
-            'space_description'  => $meta_desc,
-            'space_color'        => $space_color,
-            'space_img'          => '',
-            'space_text'         => $space_text,
-            'space_date'         => date("Y-m-d H:i:s"),
-            'space_user_id'      => $uid['id'],
-            'space_type'         => 2, 
-            'space_permit_users' => $permit,
+            'space_name'            => $space_name,
+            'space_slug'            => $space_slug,
+            'space_description'     => $meta_desc,
+            'space_color'           => $space_color,
+            'space_img'             => '',
+            'space_text'            => $space_text,
+            'space_date'            => date("Y-m-d H:i:s"),
+            'space_category_id'     => 1,
+            'space_user_id'         => $uid['id'],
+            'space_type'            => 0, 
+            'space_permit_users'    => $space_permit,
+            'space_feed'            => $space_feed,
+            'space_tl'              => $space_tl,
         ];
  
         // Добавляем пространство

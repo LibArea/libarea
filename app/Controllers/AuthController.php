@@ -167,7 +167,7 @@ class AuthController extends \MainController
             UserModel::sendActivateEmail($active_uid, $email_code);
             
             // Добавим текс письма тут
-            $newpass_link = $GLOBALS['conf']['url'] . '/email/avtivate/' . $code;
+            $newpass_link = 'https://'. HLEB_MAIN_DOMAIN . '/email/avtivate/' . $code;
             $mail_message = "Activate E-mail: \n" .$newpass_link . "\n\n";
             Base::mailText($email, $GLOBALS['conf']['sitename'].' - email', $mail_message); */
         
@@ -303,7 +303,7 @@ class AuthController extends \MainController
         UserModel::initRecover($uInfo['id'], $code);
 
         // Добавим текс письма тут
-        $newpass_link = $GLOBALS['conf']['url'] . '/recover/remind/' . $code;
+        $newpass_link = 'https://'. HLEB_MAIN_DOMAIN . '/recover/remind/' . $code;
         $mail_message = "Your link to change your password: \n" .$newpass_link . "\n\n";
 
         Base::mailText($email, $GLOBALS['conf']['sitename'].' - changing your password', $mail_message);

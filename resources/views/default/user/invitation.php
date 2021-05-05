@@ -32,7 +32,7 @@
                             <?php if($uid['trust_level'] == 5) { ?>
                                 Была использована ссылка для: <?= $inv['invitation_email']; ?> <br>
                                 <code> 
-                                    <?=  $GLOBALS['conf']['url'] . '/register/invite/' . $inv['invitation_code']; ?> 
+                                    https://<?= HLEB_MAIN_DOMAIN; ?>/register/invite/ <?= $inv['invitation_code']; ?> 
                                 </code>
                             <?php } ?>
                             
@@ -42,7 +42,7 @@
                         Для   (<?= $inv['invitation_email']; ?>) можно отправить эту ссылку: <br>
                     
                         <code> 
-                            <?=  $GLOBALS['conf']['url'] . '/register/invite/' . $inv['invitation_code']; ?> 
+                            https://<?= HLEB_MAIN_DOMAIN; ?>/register/invite/ <?= $inv['invitation_code']; ?>
                         </code> 
                     
                     <?php } ?>

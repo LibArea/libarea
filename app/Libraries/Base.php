@@ -226,6 +226,18 @@ class Base
         return true;
     }
     
+    // Обрезка текста по словам
+    public static function  cutWords($text, $maxlen) {  
+        $len = (mb_strlen($text) > $maxlen)? mb_strripos(mb_substr($text, 0, $maxlen), ' ') : $maxlen;
+        $cutStr = mb_substr($text, 0, $len);
+        $temp = (mb_strlen($text) > $maxlen)? $cutStr. '' : $cutStr;
+        
+        $code_match = array('>', '*', '!', '[ADD:');
+	    $content = str_replace($code_match, '', $temp);
+
+        return $content;
+    } 
+    
     // https://github.com/JacksonJeans/php-mail
     public static function mailText($email, $subject='', $message='')
     {
@@ -344,7 +356,7 @@ class Base
                     "description" => $text,
 
                     // Ссылка в заголовке url
-                    "url" => $GLOBALS['conf']['url'] . $url,
+                    "url" => 'https://'. HLEB_MAIN_DOMAIN . $url,
 
                     // Таймштамп, обязательно в формате ISO8601
                     "timestamp" => $timestamp,

@@ -31,6 +31,9 @@ class PostController extends \MainController
             include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
             hl_preliminary_exit();
         }
+        
+        $Parsedown = new Parsedown(); 
+        $Parsedown->setSafeMode(true); // безопасность
 
         $result = Array();
         foreach($posts as $ind => $row){
@@ -39,20 +42,21 @@ class PostController extends \MainController
                 $parse = parse_url($row['post_url']);
                 $row['post_url'] = $parse['host'];  
             } 
-            
-            $row['lang_num_answers']    = Base::ru_num('answ', $row['post_answers_num']);
-            $row['post_date']           = Base::ru_date($row['post_date']);
-            $result[$ind]               = $row;
+            $row['post_content_preview']    = $Parsedown->line(Base::cutWords($row['post_content'], 68));
+            $row['lang_num_answers']        = Base::ru_num('answ', $row['post_answers_num']);
+            $row['post_date']               = Base::ru_date($row['post_date']);
+            $result[$ind]                   = $row;
          
         }  
- 
+
         // Последние комментарии и отписанные пространства
-        $latest_answers     = AnswerModel::latestAnswers($uid['id']);
+        $latest_answers     = AnswerModel::latestAnswers($uid);
         $space_signed_bar   = SpaceModel::getSpaceUser($uid['id']);
  
         $result_comm = Array();
         foreach($latest_answers as $ind => $row){
-            $row['answer_content']      = htmlspecialchars(mb_substr($row['answer_content'],0,81, 'utf-8'));  
+                                        // htmlspecialchars(mb_substr($row['answer_content'],0,81, 'utf-8'));
+            $row['answer_content']      = $Parsedown->line(Base::cutWords($row['answer_content'], 81, '...'));
             $row['answer_date']         = Base::ru_date($row['answer_date']);
             $result_comm[$ind]          = $row;
         }
@@ -231,7 +235,6 @@ class PostController extends \MainController
         // Получаем title и содержание
         $post_title             = \Request::getPost('post_title');
         $post_content           = $_POST['post_content']; // не фильтруем
-        $post_content_preview   = \Request::getPost('content_preview');
         $post_content_img       = \Request::getPost('content_img');
         $post_url               = \Request::getPost('post_url');
         $post_closed            = \Request::getPostInt('closed');
@@ -280,7 +283,6 @@ class PostController extends \MainController
         // Ввести проверку дублей и запрещенных, для img повторов
         $post_url               = empty($post_url) ? '' : $post_url;
         $post_url_domain        = empty($post_url_domain) ? '' : $post_url_domain;
-        $post_content_preview   = empty($post_content_preview) ? '' : $post_content_preview;
         $post_content_img       = empty($post_content_img) ? '' : $post_content_img;
         $og_img                 = empty($og_img) ? '' : $og_img;
         $tag_id                 = empty($tag_id) ? 0 : $tag_id;
@@ -301,7 +303,6 @@ class PostController extends \MainController
         $data = [
             'post_title'            => $post_title,
             'post_content'          => $post_content,
-            'post_content_preview'  => $post_content_preview,
             'post_content_img'      => $post_content_img,
             'post_thumb_img'        => $og_img,
             'post_slug'             => $post_slug,
@@ -437,7 +438,6 @@ class PostController extends \MainController
         $post_id                = \Request::getPostInt('post_id');
         $post_title             = \Request::getPost('post_title');
         $post_content           = $_POST['post_content']; // не фильтруем
-        $post_content_preview   = \Request::getPost('content_preview');
         $post_content_img       = \Request::getPost('content_img');
         $post_type              = \Request::getPostInt('post_type');
         $post_closed            = \Request::getPostInt('closed');
@@ -482,7 +482,6 @@ class PostController extends \MainController
         // Если больше N оповещение персонала, если изменен на запрещенный, скрытие поста,
         // или более расширенное поведение, а пока просто проверим
         $post_url               = empty($post_url) ? '' : $post_url;
-        $post_content_preview   = empty($post_content_preview) ? '' : $post_content_preview;
         $post_content_img       = empty($post_content_img) ? '' : $post_content_img;
         $post_tag_img           = empty($post_tag_id) ? '' : $post_tag_id;
         
@@ -491,7 +490,6 @@ class PostController extends \MainController
             'post_title'            => $post_title, 
             'post_type'             => $post_type,
             'post_content'          => $post_content,
-            'post_content_preview'  => $post_content_preview,
             'post_content_img'      => $post_content_img,
             'post_closed'           => $post_closed,
             'post_top'              => $post_top,

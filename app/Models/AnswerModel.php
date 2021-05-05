@@ -85,20 +85,28 @@ class AnswerModel extends \MainModel
     }
     
     // Последние 5 ответа
-    public static function latestAnswers($user_id) 
+    public static function latestAnswers($uid) 
     {
         $q = XD::select('*')->from(['answers']);
         $query = $q->leftJoin(['posts'])->on(['post_id'], '=', ['answer_post_id'])
                  ->leftJoin(['users'])->on(['id'], '=', ['answer_user_id'])
                  //->leftJoin(['comments'])->on(['comment_post_id'], '=', ['post_id'])
-                 ->leftJoin(['space'])->on(['post_space_id'], '=', ['space_id']);
+                 ->leftJoin(['space'])->on(['post_space_id'], '=', ['space_id'])->where(['answer_del'], '=', 0);
                  
-                if($user_id){ 
-                    $result = $query->where(['answer_del'], '=', 0)->and(['answer_user_id'], '!=', $user_id);
+                // Свои ответы показывать не будем 
+                if($uid['id']){ 
+                    $qa = $query->and(['answer_user_id'], '!=', $uid['id']);
                 } else {
-                    $result = $query->where(['answer_del'], '=', 0);
+                    $qa = $query;
                 } 
         
+                // Просматривать ответы из пространств ограниченных в ленте может только персонал
+                if($uid['trust_level'] == 5){ 
+                    $result = $qa;
+                } else {
+                    $result = $qa->and(['space_feed'], '=', 0);
+                } 
+                
         return $result->orderBy(['answer_id'])->desc()->limit(5)->getSelect();
     }
     

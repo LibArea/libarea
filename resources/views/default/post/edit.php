@@ -19,12 +19,6 @@
                     <br />
                 </div> 
             <?php } ?>
-                <div class="boxline">
-                    <label for="post_title">Превью</label>
-                        <textarea class="content_preview" name="content_preview" placeholder=""><?= $post['post_content_preview']; ?></textarea> <br />
-                    <label for="post_title"></label>    
-                    <div class="box_h">Около 160 символов</div>
-                </div>
              
             <div class="boxline">
                 <?php include TEMPLATE_DIR . '/post/md-forma.php'; ?> 

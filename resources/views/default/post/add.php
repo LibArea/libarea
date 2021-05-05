@@ -17,13 +17,6 @@
                     <input id="graburl" type="submit_url" name="submit_url" value="Извлечь" />
                     <br>
                 </div> <?php } ?>
-                <div class="boxline">
-                    <label for="post_title">Превью</label>
-                        <textarea class="content_preview" name="content_preview" placeholder=""></textarea>
-                    <br />
-                    <label for="post_title"></label>    
-                    <div class="box_h">Около 160 символов</div>
-                </div>
                 
             <div class="boxline">
                 <?php include TEMPLATE_DIR . '/post/md-forma.php'; ?>

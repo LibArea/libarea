@@ -29,7 +29,12 @@
             <a title="<?= $space_info['space_name']; ?>" href="/s/<?= $space_info['space_slug']; ?>">
                 <h1><?= $space_info['space_name']; ?></h1>
             </a>  
-            <div class="data"><?= $space_info['space_date']; ?></div> 
+            <div class="data">
+            <?= lang('Created by'); ?>: <a href="/u/<?= $space_info['login']; ?>"><?= $space_info['login']; ?></a>
+            
+            — <?= $space_info['space_date']; ?>
+            
+            </div> 
 
             <?php if($uid['trust_level'] == 5 || $space_info['space_user_id'] == $uid['id']) { ?>
                 <div class="edit-space right">
@@ -93,7 +98,6 @@
                         <a class="space-u tag-u" href="/s/<?= $space_info['space_slug']; ?>/<?= $post['st_id']; ?>" title="<?= $post['st_title']; ?>"><?= $post['st_title']; ?></a>
                     <?php } ?>
                      
-                <?php if ($post['post_content_preview']) { ?>
                     <div class="show">
                         <span class="show_add_<?= $post['post_id']; ?>">
                             <div data-post_id="<?= $post['post_id']; ?>" class="showpost">
@@ -103,7 +107,7 @@
                             </div>
                         </span>
                     </div>
-                <?php } ?>
+
                 <div id="show_<?= $post['post_id']; ?>" class="show_detail"></div> 
                     <div class="footer">
                         <img class="ava" src="/uploads/avatar/small/<?= $post['avatar'] ?>">

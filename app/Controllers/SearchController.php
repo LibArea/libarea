@@ -33,9 +33,7 @@ class SearchController extends \MainController
                 
                 $result = Array();
                 foreach($qa as $ind => $row){
-                    $row['post_title']    = $row['post_title'];
-                    $row['post_content']  = $Parsedown->line(mb_substr($row['post_content'],0,120, 'utf-8').'...'); 
-                    $row['post_slug']     = $row['post_slug'];             
+                    $row['post_content']  = $Parsedown->line(Base::cutWords($row['post_content'], 120, '...'));
                     $result[$ind]         = $row; 
                 }     
                 
@@ -71,11 +69,15 @@ class SearchController extends \MainController
             hl_preliminary_exit();
         }
         
+        $Parsedown = new Parsedown(); 
+        $Parsedown->setSafeMode(true); // безопасность
+        
         $result = Array();
         foreach($post as $ind => $row){
-            $row['post_date']           = Base::ru_date($row['post_date']);
-            $row['lang_num_answers']    = Base::ru_num('answ', $row['post_answers_num']);
-            $result[$ind]               = $row;
+            $row['post_content_preview']    = $Parsedown->line(Base::cutWords($row['post_content'], 68));
+            $row['post_date']               = Base::ru_date($row['post_date']);
+            $row['lang_num_answers']        = Base::ru_num('answ', $row['post_answers_num']);
+            $result[$ind]                   = $row;
          
         }
         

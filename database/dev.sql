@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Апр 30 2021 г., 06:45
+-- Время создания: Май 05 2021 г., 08:42
 -- Версия сервера: 10.4.17-MariaDB
 -- Версия PHP: 7.4.13
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- База данных: `11test`
+-- База данных: `testtest`
 --
 
 -- --------------------------------------------------------
@@ -200,19 +200,18 @@ CREATE TABLE `posts` (
   `post_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `edit_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `post_user_id` int(10) UNSIGNED NOT NULL,
-  `post_visible` enum('all','friends') NOT NULL DEFAULT 'all',
   `post_ip_int` varchar(45) DEFAULT NULL,
   `post_votes` smallint(6) NOT NULL DEFAULT 0,
   `post_karma` smallint(6) NOT NULL DEFAULT 0,
   `post_answers_num` smallint(6) NOT NULL DEFAULT 0,
   `post_comments_num` smallint(6) NOT NULL DEFAULT 0,
   `post_content` text NOT NULL,
-  `post_content_preview` varchar(160) DEFAULT NULL,
   `post_content_img` varchar(250) DEFAULT NULL,
   `post_thumb_img` varchar(250) DEFAULT NULL,
-  `post_closed` tinyint(1) NOT NULL DEFAULT 0,
-  `post_lo` int(11) NOT NULL DEFAULT 0,
-  `post_top` tinyint(1) NOT NULL DEFAULT 0,
+  `post_closed` tinyint(1) NOT NULL DEFAULT 0 COMMENT '1 - пост закрыт',
+  `post_tl` smallint(1) NOT NULL DEFAULT 0 COMMENT 'Видимость по уровню доверия',
+  `post_lo` int(11) NOT NULL DEFAULT 0 COMMENT 'Id лучшего ответа',
+  `post_top` tinyint(1) NOT NULL DEFAULT 0 COMMENT '1 - пост поднят',
   `post_url` varchar(250) DEFAULT NULL,
   `post_url_domain` varchar(250) DEFAULT NULL,
   `post_is_delete` tinyint(1) NOT NULL DEFAULT 0
@@ -222,10 +221,10 @@ CREATE TABLE `posts` (
 -- Дамп данных таблицы `posts`
 --
 
-INSERT INTO `posts` (`post_id`, `post_title`, `post_slug`, `post_type`,  `post_space_id`, `post_tag_id`, `post_date`, `edit_date`, `post_user_id`, `post_visible`, `post_ip_int`, `post_votes`, `post_karma`, `post_answers_num`, `post_comments_num`, `post_content`, `post_content_preview`, `post_content_img`, `post_thumb_img`, `post_closed`, `post_lo`, `post_top`, `post_url`, `post_url_domain`, `post_is_delete`) VALUES
-(1, 'Муха села на варенье, Вот и всё стихотворенье...', 'muha-stih', 0, 1, 0, '2021-02-28 12:08:09', '2021-03-05 10:05:25', 1, 'all', NULL, 0, 0, 0, 0, '> \"Нет не всё!\" - сказала Муха,\r\n\r\n> Почесала себе брюхо,\r\n\r\n> Свесив с блюдца две ноги,\r\n\r\n> Мне сказала:\"Погоди!\r\n\r\n> Прежде чем сесть на варенье,\r\n\r\n> Я прочла стихотворенье,\r\n\r\n> Неизвестного поэта,\r\n\r\n> Написавшего про это.\r\n\r\n\r\n## Заголовок\r\n\r\nЧто-то в модели много кода:\r\n\r\n```\r\n$db = \\Config\\Database::connect();\r\n$builder = $db->table(\'Posts AS a\');\r\n$builder->select(\'a.*, b.id, b.nickname, b.avatar\');\r\n$builder->join(\"users AS b\", \"b.id = a.post_user_id\");\r\n$builder->where(\'a.post_slug\', $slug);\r\n$builder->orderBy(\'a.post_id\', \'DESC\');\r\n```\r\n\r\nВот. Это первый пост.', NULL, NULL, NULL, 0, 0, 0, NULL, NULL, 0),
-(2, 'Второй пост...', 'vtoroi-post', 0, 2, 0, '2021-02-28 12:15:58', '2021-03-05 10:05:25', 2, 'all', NULL, 0, 0, 0, 0, 'Не будет тут про муху. Просто второй пост.\r\n\r\n> в лесу родилась ёлка, зеленая была...', NULL, NULL, NULL, 0, 0, 0, NULL, NULL, 0),
-(3, 'Просто первый пост', 'prosto-pervyj-post', 0, 2, 0, '2021-04-30 04:35:13', '2021-04-30 04:35:13', 1, 'all', '127.0.0.1', 0, 0, 1, 0, 'Просто первый пост', '', '', '', 0, 0, 0, '', '', 0);
+INSERT INTO `posts` (`post_id`, `post_title`, `post_slug`, `post_type`, `post_space_id`, `post_tag_id`, `post_date`, `edit_date`, `post_user_id`, `post_ip_int`, `post_votes`, `post_karma`, `post_answers_num`, `post_comments_num`, `post_content`, `post_content_img`, `post_thumb_img`, `post_closed`, `post_tl`, `post_lo`, `post_top`, `post_url`, `post_url_domain`, `post_is_delete`) VALUES
+(1, 'Муха села на варенье, Вот и всё стихотворенье...', 'muha-stih', 0, 1, 0, '2021-02-28 12:08:09', '2021-03-05 10:05:25', 1, NULL, 0, 0, 0, 0, '> \"Нет не всё!\" - сказала Муха,\r\n\r\n> Почесала себе брюхо,\r\n\r\n> Свесив с блюдца две ноги,\r\n\r\n> Мне сказала:\"Погоди!\r\n\r\n> Прежде чем сесть на варенье,\r\n\r\n> Я прочла стихотворенье,\r\n\r\n> Неизвестного поэта,\r\n\r\n> Написавшего про это.\r\n\r\n\r\n## Заголовок\r\n\r\nЧто-то в модели много кода:\r\n\r\n```\r\n$db = \\Config\\Database::connect();\r\n$builder = $db->table(\'Posts AS a\');\r\n$builder->select(\'a.*, b.id, b.nickname, b.avatar\');\r\n$builder->join(\"users AS b\", \"b.id = a.post_user_id\");\r\n$builder->where(\'a.post_slug\', $slug);\r\n$builder->orderBy(\'a.post_id\', \'DESC\');\r\n```\r\n\r\nВот. Это первый пост.', NULL, NULL, 0, 0, 0, 0, NULL, NULL, 0),
+(2, 'Второй пост...', 'vtoroi-post', 0, 2, 0, '2021-02-28 12:15:58', '2021-03-05 10:05:25', 2, NULL, 0, 0, 0, 0, 'Не будет тут про муху. Просто второй пост.\r\n\r\n> в лесу родилась ёлка, зеленая была...', NULL, NULL, 0, 0, 0, 0, NULL, NULL, 0),
+(3, 'Просто первый пост', 'prosto-pervyj-post', 0, 2, 0, '2021-04-30 04:35:13', '2021-04-30 04:35:13', 1, '127.0.0.1', 0, 0, 1, 0, 'Просто первый пост', '', '', 0, 0, 0, 0, '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -244,24 +243,26 @@ CREATE TABLE `space` (
   `space_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `space_category_id` int(11) NOT NULL DEFAULT 1,
   `space_user_id` int(11) NOT NULL DEFAULT 1,
-  `space_type` int(11) NOT NULL DEFAULT 1 COMMENT '1 - персонала, 2 - участника',
-  `space_permit_users` int(11) NOT NULL DEFAULT 1 COMMENT '1 - могут писать все, 2 - только автор',
-  `space_is_delete` int(11) NOT NULL DEFAULT 0
+  `space_type` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 - все пространства, 1 - официальные',
+  `space_permit_users` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 - могут писать все, 1 - только автор',
+  `space_feed` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 - показывать в ленте, 1 - нет',
+  `space_tl` int(11) NOT NULL DEFAULT 0 COMMENT 'Видимость по уровню доверия',
+  `space_is_delete` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Дамп данных таблицы `space`
 --
 
-INSERT INTO `space` (`space_id`, `space_name`, `space_slug`, `space_description`, `space_color`, `space_img`, `space_text`, `space_date`, `space_category_id`, `space_user_id`, `space_type`, `space_permit_users`, `space_is_delete`) VALUES
-(1, 'meta', 'meta', 'Мета-обсуждение самого сайта, включая вопросы, предложения и отчеты об ошибках.', 0, 'space_no.png', 'тест 1...', '2021-02-28 12:15:58', 1, 1, 1, 1, 0),
-(2, 'Вопросы', 'qa', 'Вопросы по скрипту и не только', 0, 'space_no.png', 'Вопросы по скрипту и не только', '2021-02-28 12:15:58', 1, 1, 1, 2, 0),
-(3, 'флуд', 'flud', 'Просто обычные разговоры', 0, 'space_no.png', 'тест 3...', '2021-02-28 12:15:58', 1, 1, 1, 2, 0);
+INSERT INTO `space` (`space_id`, `space_name`, `space_slug`, `space_description`, `space_color`, `space_img`, `space_text`, `space_date`, `space_category_id`, `space_user_id`, `space_type`, `space_permit_users`, `space_feed`, `space_tl`, `space_is_delete`) VALUES
+(1, 'meta', 'meta', 'Мета-обсуждение самого сайта, включая вопросы, предложения и отчеты об ошибках.', 0, 'space_no.png', 'тест 1...', '2021-02-28 12:15:58', 1, 1, 1, 0, 0, 0, 0),
+(2, 'Вопросы', 'qa', 'Вопросы по скрипту и не только', 0, 'space_no.png', 'Вопросы по скрипту и не только', '2021-02-28 12:15:58', 1, 1, 1, 0,0, 0, 0),
+(3, 'флуд', 'flud', 'Просто обычные разговоры', 0, 'space_no.png', 'тест 3...', '2021-02-28 12:15:58', 1, 1, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `space_hidden`
+-- Структура таблицы `space_signed`
 --
 
 CREATE TABLE `space_signed` (
@@ -271,13 +272,14 @@ CREATE TABLE `space_signed` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Дамп данных таблицы `flow_log`
+-- Дамп данных таблицы `space_signed`
 --
 
 INSERT INTO `space_signed` (`signed_id`, `signed_space_id`, `signed_user_id`) VALUES
 (1, 1, 1),
 (2, 2, 1),
 (3, 3, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -587,7 +589,7 @@ ALTER TABLE `space`
   ADD PRIMARY KEY (`space_id`);
 
 --
--- Индексы таблицы `space_hidden`
+-- Индексы таблицы `space_signed`
 --
 ALTER TABLE `space_signed`
   ADD PRIMARY KEY (`signed_id`);
@@ -742,7 +744,7 @@ ALTER TABLE `space`
   MODIFY `space_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT для таблицы `space_hidden`
+-- AUTO_INCREMENT для таблицы `space_signed`
 --
 ALTER TABLE `space_signed`
   MODIFY `signed_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;

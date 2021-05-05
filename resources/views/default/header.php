@@ -18,37 +18,38 @@
         
         <?php if (isset($data['post']['post_id'])) { ?>
             <meta property="og:type" content="article">
-            <meta property="og:url" content="<?= $GLOBALS['conf']['url']; ?>/posts/<?=$data['post']['post_id']; ?>/<?=$data['post']['post_slug']; ?>">
+            <meta property="og:url" content="//<?= HLEB_MAIN_DOMAIN; ?>/posts/<?=$data['post']['post_id']; ?>/<?=$data['post']['post_slug']; ?>">
             <meta property="article:published_time" content="<?=$data['post']['post_date']; ?>">
             <meta property="article:modified_time" content="<?=$data['post']['post_edit']; ?>">
-            <link rel="canonical" href="<?= $GLOBALS['conf']['url']; ?>/posts/<?=$data['post']['post_id']; ?>/<?=$data['post']['post_slug']; ?>">
+            <link rel="canonical" href="//<?= HLEB_MAIN_DOMAIN; ?>/posts/<?=$data['post']['post_id']; ?>/<?=$data['post']['post_slug']; ?>">
         <?php } else { ?>
             <meta property="og:type" content="website">
-            <meta property="og:image" content="<?= $GLOBALS['conf']['url']; ?>/assets/images/areadev.jpg">
+            <meta property="og:image" content="//<?= HLEB_MAIN_DOMAIN; ?>/assets/images/areadev.jpg">
             <meta property="og:image:type" content="image/jpeg">
         <?php } ?>
 
-        <link rel="icon" href="/favicon.ico">
-        <link rel="apple-touch-icon" href="/favicon.png">
-        
-        <link rel="stylesheet" href="/assets/css/style.css">
+        <link rel="icon" href="//<?= HLEB_MAIN_DOMAIN; ?>/favicon.ico">
+        <link rel="apple-touch-icon" href="//<?= HLEB_MAIN_DOMAIN; ?>/favicon.png">
+
+        <link rel="stylesheet" href="//<?= HLEB_MAIN_DOMAIN; ?>/assets/css/style.css">
         <?php if($uid['uri'] == '/flow') { ?>
-            <script src="/assets/js/flow.js"></script>
-            <link rel="stylesheet" href="/assets/css/flow.css">
+            <script src="//<?= HLEB_MAIN_DOMAIN;  ?>/assets/js/flow.js"></script>
+            <link rel="stylesheet" href="//<?= HLEB_MAIN_DOMAIN; ?>/assets/css/flow.css">
         <?php } ?>
     </head>
 <body class="bd<?php if(Request::getCookie('dayNight') == 'dark') {?> dark<?php } ?><?php if(Request::getCookie('menuS') == 'menuno') {?> menuno<?php } ?>">
 <header>  
 <div class="wrap">
+
     <div class="menu-left"> 
         <ul>
             <li class="nav"> 
                 <?php if($uid['uri'] == '/') { ?>
-                   <a title="<?= lang('Home'); ?>" class="logo" href="/">LoriUP</a>
+                   <a title="<?= lang('Home'); ?>" class="logo" href="//<?= HLEB_MAIN_DOMAIN; ?>">LoriUP</a>
                 <?php } else { ?>
-                    <a title="<?= lang('Home'); ?>" class="logo" href="/"><i class="icon home"></i></a>
+                    <a title="<?= lang('Home'); ?>" class="logo" href="//<?= HLEB_MAIN_DOMAIN; ?>"><i class="icon home"></i></a>
                     <span class="slash no-mob">\</span>
-                    <a title="<?= lang('LoriUP'); ?>" class="home no-mob" href="/"><?= lang('LoriUP'); ?></a>
+                    <a title="<?= lang('LoriUP'); ?>" class="home no-mob" href="//<?= HLEB_MAIN_DOMAIN; ?>"><?= lang('LoriUP'); ?></a>
                 <?php } ?>
             </li> 
 
@@ -68,23 +69,23 @@
         <?php if(!$uid['id']) { ?>  
             <?php if($GLOBALS['conf']['invite'] != 1) { ?>
                 <div class="nav">
-                    <a class="register" title="<?= lang('Sign up'); ?>" href="/register">
+                    <a class="register" title="<?= lang('Sign up'); ?>" href="//<?= HLEB_MAIN_DOMAIN; ?>/register">
                         <?= lang('Sign up'); ?>
                     </a>
                 </div>
             <?php } ?>  
             <div class="nav">
-                <a class="login" title="<?= lang('Sign in'); ?>" href="/login"><?= lang('Sign in'); ?></a>
+                <a class="login" title="<?= lang('Sign in'); ?>" href="//<?= HLEB_MAIN_DOMAIN; ?>/login"><?= lang('Sign in'); ?></a>
             </div>                
         <?php } else { ?> 
             <div class="nav create">  
-                <a href="/post/add"> 
+                <a href="//<?= HLEB_MAIN_DOMAIN; ?>/post/add"> 
                     <i class="icon pencil"></i>                    
                 </a>
             </div>   
             <?php if($uid['notif']) { ?> 
                 <div class="nav notif">  
-                    <a href="/u/<?= $uid['login']; ?>/notifications"> 
+                    <a href="//<?= HLEB_MAIN_DOMAIN; ?>/u/<?= $uid['login']; ?>/notifications"> 
                         <?php if($uid['notif']['action_type'] == 1) { ?>
                             <i class="icon envelope"></i>
                         <?php } else { ?>    
@@ -96,49 +97,49 @@
             <?php } ?>  
             <div class="dropbtn nav">
                 <div class="b-my" title=""><span><?= $uid['login']; ?></span>  
-                    <img class="ava" alt="<?= $uid['login']; ?>" src="/uploads/avatar/small/<?= $uid['avatar']; ?>">
+                    <img class="ava" alt="<?= $uid['login']; ?>" src="//<?= HLEB_MAIN_DOMAIN; ?>/uploads/avatar/small/<?= $uid['avatar']; ?>">
                     <i class="icon arrow arrow-down"></i>
                 </div>
                 <div class="dropdown-menu">
                     <span class="st"></span>
-                    <a href="/u/<?= $uid['login']; ?>">
+                    <a href="//<?= HLEB_MAIN_DOMAIN; ?>/u/<?= $uid['login']; ?>">
                         <i class="icon user"></i>
                         <?= lang('Profile'); ?>
                     </a>
-                    <a href="/u/<?= $uid['login']; ?>/setting">
+                    <a href="//<?= HLEB_MAIN_DOMAIN; ?>/u/<?= $uid['login']; ?>/setting">
                         <i class="icon settings"></i>
                         <?= lang('Settings'); ?>
                     </a>
-                   <a href="/u/<?= $uid['login']; ?>/notifications">
+                   <a href="//<?= HLEB_MAIN_DOMAIN; ?>/u/<?= $uid['login']; ?>/notifications">
                         <i class="icon bell"></i> 
                         <?= lang('Notifications'); ?>
                     </a>
-                    <a href="/u/<?= $uid['login']; ?>/messages">
+                    <a href="//<?= HLEB_MAIN_DOMAIN; ?>/u/<?= $uid['login']; ?>/messages">
                         <i class="icon envelope"></i> 
                         <?= lang('Messages'); ?>
                     </a>
-                    <a href="/u/<?= $uid['login']; ?>/comments"> 
+                    <a href="//<?= HLEB_MAIN_DOMAIN; ?>/u/<?= $uid['login']; ?>/comments"> 
                         <i class="icon bubbles"></i>
                         <?= lang('Comments'); ?> 
                     </a>
-                    <a href="/u/<?= $uid['login']; ?>/favorite">
+                    <a href="//<?= HLEB_MAIN_DOMAIN; ?>/u/<?= $uid['login']; ?>/favorite">
                         <i class="icon star"></i> 
                         <?= lang('Favorites'); ?>              
                     </a>
                     <?php if($uid['trust_level'] > 1) { ?>
-                        <a href="/u/<?= $uid['login']; ?>/invitation">
+                        <a href="//<?= HLEB_MAIN_DOMAIN; ?>/u/<?= $uid['login']; ?>/invitation">
                             <i class="icon link"></i>   
                             <?= lang('Invites'); ?>                   
                         </a> 
                     <?php } ?>  
                     <?php if($uid['trust_level'] == 5) { ?> 
-                        <a href="/admin" target="_black">
+                        <a href="//<?= HLEB_MAIN_DOMAIN; ?>/admin" target="_black">
                             <i class="icon shield"></i>    
                             <?= lang('Admin'); ?>                   
                         </a> 
                     <?php } ?>     
                     <hr>   
-                    <a href="/logout" class="logout" target="_self" title="<?= lang('Sign out'); ?>">
+                    <a href="//<?= HLEB_MAIN_DOMAIN; ?>/logout" class="logout" target="_self" title="<?= lang('Sign out'); ?>">
                         <i class="icon logout"></i> 
                         <?= lang('Sign out'); ?>
                     </a>
@@ -151,7 +152,7 @@
 <?php if(!empty($post['post_title'])) { ?>
     <div id="stHeader">
         <div class="wrap">
-            <a href="/"><i class="icon home"></i></a> <span class="slash">\</span> <?= $post['post_title']; ?>
+            <a href="//<?= HLEB_MAIN_DOMAIN; ?>"><i class="icon home"></i></a> <span class="slash">\</span> <?= $post['post_title']; ?>
         </div>
     </div>
 <?php } ?>

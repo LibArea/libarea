@@ -7,34 +7,43 @@
             <form action="/space/editspace" method="post" enctype="multipart/form-data">
                 <?= csrf_field() ?>
                 <div class="boxline">
-                    <label for="post_title">URL</label>
+                    <label for="post_title">URL<sup class="red">*</sup></label>
                     <input class="add" type="text" value="<?= $space['space_slug']; ?>" name="space_slug" />
                     <br />
                 </div>  
                 <div class="boxline">
-                    <label for="post_title">Название</label>
+                    <label for="post_title">Название<sup class="red">*</sup></label>
                     <input class="add" type="text" value="<?= $space['space_name']; ?>" name="space_name" />
-                    <div class="box_h">4 - 18 символов</div>
+                    <div class="box_h">4 - 18 <?= lang('characters'); ?></div>
                 </div>
                 <div class="boxline"> 
-                    <label for="post_content">Публикации</label>
-                    <input type="radio" name="permit" <?php if($space['space_permit_users'] == 1) { ?>checked<?php } ?> value="1"> Только я
-                    <input type="radio" name="permit" <?php if($space['space_permit_users'] == 2) { ?>checked<?php } ?> value="2" > Все
-                </div>                  
+                    <label for="post_content">Публикации<sup class="red">*</sup></label>
+                    <input type="radio" name="permit" <?php if($space['space_permit_users'] == 0) { ?>checked<?php } ?> value="0"> <?= lang('All'); ?>
+                    <input type="radio" name="permit" <?php if($space['space_permit_users'] == 1) { ?>checked<?php } ?> value="1" > <?= lang('Just me'); ?>
+                    <div class="box_h">Кто сможет размещать посты</div>
+                    <br />
+                </div>  
+                <div class="boxline"> 
+                    <label for="post_content">Показывать<sup class="red">*</sup></label>
+                    <input type="radio" name="feed" <?php if($space['space_feed'] == 0) { ?>checked<?php } ?> value="0"> <?= lang('Yes'); ?>
+                    <input type="radio" name="feed" <?php if($space['space_feed'] == 1) { ?>checked<?php } ?> value="1" > <?= lang('No'); ?>
+                    <div class="box_h">Если нет, то посты не будут видны в ленте (на главной)</b></div>
+                    <br />  
+                </div> 
                 <div class="boxline">
-                    <label for="post_content">Meta-</label>
+                    <label for="post_content">Meta-<sup class="red">*</sup></label>
                     <textarea class="add" name="space_description"><?= $space['space_description']; ?></textarea>
-                    <div class="box_h">60 - 180 символов</div>
+                    <div class="box_h">Description: 60 - 180 <?= lang('characters'); ?></div>
                     <br />
                 </div>
                 <div class="boxline">
-                    <label for="post_content">Цвет</label>
+                    <label for="post_content"><?= lang('Color'); ?></label>
                     <!-- Можно: https://developer.mozilla.org/ru/docs/Web/HTML/Applying_color -->
                     <?php include TEMPLATE_DIR . '/space/space-color-box.php'; ?>
                 </div>
                 <div class="boxline">
                     <br />
-                    <label for="post_content">Текст</label>
+                    <label for="post_content"><?= lang('Text'); ?></label>
                     <textarea class="add" name="space_text"><?= $space['space_text']; ?></textarea>
                     <div class="box_h">Markdown</div>
                     <br />

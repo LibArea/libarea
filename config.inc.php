@@ -8,9 +8,6 @@ return array(
     'hometitle'         => 'My.AreaDev — форум',
     'metadesc'          => 'My.AreaDev - мой форум, сообщество, беседы',
     
-    // URL сайта (без слеша в конце)
-    'url'               => 'https://***.ru',
-    
     // Выключить сайт
     // Сайт будет недоступен для всех, кроме персонала trust_level (TL5)
     'siteoff'           => 0,

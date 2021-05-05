@@ -3,7 +3,7 @@
     <?php if (!$uid['id']) { ?>
         <div class="banner">
             <div class="banner-telo">
-                <img width="28" height="28" src="/assets/svg/loriup.svg" alt="За стеклом">
+                <img width="28" height="28" src="/assets/svg/loriup.svg" alt="LoriUP">
                 <h1 class="banner-h1"><?= lang('site-banner'); ?></h1> 
                 <?= lang('site-banner-txt'); ?>. <a href="/info"><?= lang('Read'); ?></a>...
             </div>
@@ -36,7 +36,7 @@
     </ul>
 
     <?php if (!empty($posts)) { ?> 
-  
+    
         <?php foreach ($posts as  $post) { ?>
         
             <div class="post-telo">
@@ -87,17 +87,13 @@
                         <a class="post_url" href="/domain/<?= $post['post_url']; ?>"><?= $post['post_url']; ?></a> 
                     <?php } ?>
                     
-                    <?php if ($post['post_content_preview']) { ?>
-                      
-                            <div class="show_add_<?= $post['post_id']; ?>">
-                                <div data-post_id="<?= $post['post_id']; ?>" class="showpost">
-                                    <span>&#9658;</span> 
-                                    <?= $post['post_content_preview']; ?>
-                                    <span class="s_<?= $post['post_id']; ?> show_detail">... </span>
-                                </div>
-                            </div>
-                       
-                    <?php } ?>
+                    <div class="show_add_<?= $post['post_id']; ?>">
+                        <div data-post_id="<?= $post['post_id']; ?>" class="showpost">
+                            <span>&#9658;</span> 
+                            <?= $post['post_content_preview']; ?>
+                            <span class="s_<?= $post['post_id']; ?> show_detail">... </span>
+                        </div>
+                    </div>
                     
                     <div class="footer">
                         <img class="ava" alt="<?= $post['login']; ?>" src="/uploads/avatar/small/<?= $post['avatar']; ?>">
