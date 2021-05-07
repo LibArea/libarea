@@ -17,7 +17,6 @@
         <link rel="apple-touch-icon" href="/favicon.png">
 
         <link rel="stylesheet" href="/assets/css/style.css">
-        
     </head>
 <body class="bd<?php if(Request::getCookie('dayNight') == 'dark') {?> dark<?php } ?><?php if(Request::getCookie('menuS') == 'menuno') {?> menuno<?php } ?>">
 <header>  

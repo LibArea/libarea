@@ -1,4 +1,3 @@
-$(function(){
 var editor = new MediumEditor('.editable', {
      placeholder: {
         /* This example includes the default options for placeholder,
@@ -24,5 +23,4 @@ var editor = new MediumEditor('.editable', {
         sticky: false,
         updateOnEmptySelection: false
     }
-});
 });

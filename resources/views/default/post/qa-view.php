@@ -44,7 +44,7 @@
                             
                             <?php if($uid['id'] == $answ['answer_user_id'] || $uid['trust_level'] == 5) { ?>
                                 <span id="answ_edit" class="answ_add_link">
-                                    <a data-answ_id="<?= $answ['answer_id']; ?>" class="editansw"><?= lang('Edit'); ?></a>
+                                    <a class="editansw" href="/post/<?= $post['post_id'] ?>/answ/<?= $answ['answer_id']; ?>"><?= lang('Edit'); ?></a>
                                 </span>
                             <?php } ?>
                 
@@ -83,8 +83,8 @@
                                     <?php } ?>
                                 </div>
                             </div>
+                             
                         <div id="answ_addentry<?= $answ['answer_id']; ?>" class="reply"></div> 
-                    
                     </li>
                 </ol>
                                 
@@ -172,6 +172,8 @@
                         <input type="submit" name="answit" value="<?= lang('Reply'); ?>" class="answer-post">
                     </div> 
                 </form>
+                <script src="/assets/js/editor/js/medium-editor.js"></script>
+                <script src="/assets/js/editor.js"></script> 
             <?php } ?>
         <?php } else { ?>
             <br />

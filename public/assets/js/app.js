@@ -210,35 +210,6 @@ $(function(){
         $('.cm_add_link').show();
     });
     
-    // Edit answer
-    $(document).on("click", ".editansw", function(){
-        var answ_id = $(this).data('answ_id'); 
-        var post_id = $(this).data('post_id');        
-       
-            $('.answ_addentry').remove();
-            $('.answ_add_link').show();
-            $link_span  = $('#answ_add_link'+answ_id);
-            old_html    = $link_span.html();
-           
-            $.post('/answer/editform', {answ_id: answ_id, post_id: post_id}, function(data) {
-                if(data){
-                    $('#answ_' + answ_id).addClass('edit');
-                    $("#answ_addentry"+answ_id).html(data).fadeIn();
-                    $('#content').focus();
-                    $link_span.html(old_html).hide();
-                    $('#submit_answ').click(function(data) {
-                        $('#submit_answ').prop('disabled', true);
-                        $('#cancel_answ').hide();
-                        $('.submit_answ').append('...');
-                    });
-                }
-            });
-    });
-    $(document).on("click", "#cancel_answ", function(){
-        $('.answ_addentry').remove();
-        $('.answ_add_link').show();
-    });
-    
     // Edit comment
     $(document).on("click", ".editcomm", function(){
         var comm_id = $(this).data('comm_id'); 

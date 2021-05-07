@@ -115,16 +115,54 @@ class AnswerController extends \MainController
         redirect('/' . $return_url . '#answ_' . $last_id); 
     }
     
-    // Редактируем посты
+   // Покажем форму редактирования
+	public function editFormAnswer()
+	{
+        $answ_id    = \Request::getInt('answ_id');
+        $post_id    = \Request::getInt('post_id');
+        $uid        = Base::getUid();
+        
+ 
+        $answ = AnswerModel::getAnswerOne($answ_id);
+
+        // Проверим автора комментария и админа
+        if($uid['id'] != $answ['answer_user_id'] && $uid['trust_level'] != 5) {
+            return true; 
+        }
+
+        $post = PostModel::getPostId($post_id);
+        
+        if (!$post) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
+        }
+
+        $data = [
+            'h1'                => lang('Edit answer'),
+            'canonical'         => '/***',
+            'answ_id'           => $answ_id,
+            'post_id'           => $post_id,
+            'user_id'           => $uid['id'],
+            'answer_content'    => $answ['answer_content'],
+        ]; 
+        
+        Base::Meta(lang('Edit answer'), lang('Edit answer'), $other = false);
+        
+        return view(PR_VIEW_DIR . '/answer/answ-edit-form', ['data' => $data, 'uid' => $uid, 'post' => $post]);
+    }
+
+    // Редактируем ответ
     public function editAnswer()
     {
+       
         $answ_id    = \Request::getPostInt('answ_id');
         $post_id    = \Request::getPostInt('post_id');
-        $answer    = $_POST['answer']; // не фильтруем
+        $answer     = $_POST['answer']; // не фильтруем
         
-        // Получим относительный url поста для возрата (упростить)
-        $url = str_replace('//', '', $_SERVER['HTTP_REFERER']);
-        $return_url = substr($url, strpos($url, '/') + 1);
+        $post = PostModel::getPostId($post_id);
+
+        // Получим относительный url поста для возрата
+        $url = '/post/' . $post['post_id'] . '/' . post['post_slug'];
         
         // id того, кто редактирует
         $uid        = Base::getUid();
@@ -140,48 +178,9 @@ class AnswerController extends \MainController
         // Редактируем комментарий
         AnswerModel::AnswerEdit($answ_id, $answer);
         
-        redirect('/' . $return_url . '#answ_' . $answ_id); 
+        redirect('/' . $url . '#answ_' . $answ_id); 
 	}
-
-   // Покажем форму редактирования
-	public function editFormAnswer()
-	{
-        $answ_id    = \Request::getPostInt('answ_id');
-        $post_id    = \Request::getPostInt('post_id');
-        $uid        = Base::getUid();
-        
-        $answ = AnswerModel::getAnswerOne($answ_id);
-
-        // Проверим автора комментария и админа
-        if($uid['id'] != $answ['answer_user_id'] && $uid['trust_level'] != 5) {
-            return true; 
-        }
-
-        $data = [
-            'answ_id'           => $answ_id,
-            'post_id'           => $post_id,
-            'user_id'           => $uid['id'],
-            'answer_content'   => $answ['answer_content'],
-        ]; 
-        
-        return view(PR_VIEW_DIR . '/answer/answ-edit-form', ['data' => $data]);
-    }
-
-	// Покажем форму ответа
-	public function addFormAnswer()
-	{
-        $answ_id    = \Request::getPostInt('answ_id');
-        $post_id    = \Request::getPostInt('post_id');
-        
-        $uid  = Base::getUid();
-        $data = [
-            'answ_id'     => $answ_id,
-            'post_id'     => $post_id,
-        ]; 
-        
-        return view(PR_VIEW_DIR . '/answer/answ-add-form', ['data' => $data, 'uid' => $uid]);
-    }
-
+    
     // Ответы участника
     public function userAnswers()
     {

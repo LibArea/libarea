@@ -32,8 +32,8 @@ class AdminController extends \MainController
         } 
         
         $data = [
-            'title'     => lang('Admin'),
-            'users'     => $result,
+            'h1'    => lang('Admin'),
+            'users' => $result,
         ]; 
  
         // title, description
@@ -119,7 +119,7 @@ class AdminController extends \MainController
         }
 
         $data = [
-            'h1'          => lang('Invites'),
+            'h1'    => lang('Invites'),
         ]; 
  
         // title, description
@@ -153,7 +153,7 @@ class AdminController extends \MainController
         $space      = AdminModel::getAdminSpaceAll($uid['id']);
         
         $data = [
-            'h1'        => lang('Space'),
+            'h1'    => lang('Space'),
         ]; 
  
         // title, description
@@ -172,7 +172,7 @@ class AdminController extends \MainController
         }  
         
         $data = [
-            'h1'        => lang('Add Space'),
+            'h1'    => lang('Add Space'),
         ]; 
  
         // title, description

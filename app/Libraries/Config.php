@@ -32,7 +32,6 @@ class Config
 
     const PARAM_SPACE       = "parameters.space";
 
-   
     private static $data = null;
 
     public static function get(string $name): string

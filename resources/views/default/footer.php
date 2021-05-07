@@ -12,8 +12,7 @@
 <?php if($uid['id']) { ?>
     <script src="/assets/js/jquery.min.js"></script>
     <script src="/assets/js/app.js"></script>
-    <script src="/assets/js/editor.js"></script> 
-    <script src="/assets/js/editor/js/medium-editor.js"></script>
+     
     <link rel="stylesheet" href="/assets/js/editor/css/medium-editor.min.css">
     <link rel="stylesheet" href="/assets/js/editor/css/themes/default.css">
 <?php } ?>
