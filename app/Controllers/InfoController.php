@@ -2,7 +2,8 @@
 
 namespace App\Controllers;
 use App\Models\InfoModel;
-use Base;
+use Lori\Config;
+use Lori\Base;
 
 class InfoController extends \MainController
 {
@@ -11,10 +12,12 @@ class InfoController extends \MainController
     {
         $uid  = Base::getUid();
         $data = [
-            'h1'            => lang('Info'),
-            'title'         => lang('Info') . ' | ' . $GLOBALS['conf']['sitename'],
-            'description'   => lang('info-desc') . ' ' . $GLOBALS['conf']['sitename'],
+            'h1'        => lang('Info'),
+            'canonical' => Config::get(Config::PARAM_URL) . '/info',
         ];
+        
+       // title, description
+       Base::Meta(lang('Info'), lang('info-desc'), $other = false); 
  
        return view(PR_VIEW_DIR . '/info/index', ['data' => $data, 'uid' => $uid]);
     }
@@ -38,15 +41,17 @@ class InfoController extends \MainController
         $uid  = Base::getUid();
         $data = [
             'h1'            => lang('Statistics'),
-            'title'         => lang('Statistics') . ' | ' . $GLOBALS['conf']['sitename'],
-            'description'   => lang('stats-desc') .' ' . $GLOBALS['conf']['sitename'],
+            'canonical'     => Config::get(Config::PARAM_URL) . '/info/stats',
             'user_num'      => $user_num,
             'post_num'      => $post_num,
             'comm_num'      => $comm_num,
             'vote_comm_num' => $vote_comm_num,
             'vote_post_num' => $vote_post_num,
-            'flow_num'      => $result,
+            'flow_num'      => $result
         ];
+
+        // title, description
+        Base::Meta(lang('Statistics'), lang('stats-desc'), $other = false); 
 
         return view(PR_VIEW_DIR . '/info/stats', ['data' => $data, 'uid' => $uid]);
 	}
@@ -56,9 +61,11 @@ class InfoController extends \MainController
         $uid  = Base::getUid();
         $data = [
             'h1'            => lang('Rules'),
-            'title'         => lang('Rules') . ' | ' . $GLOBALS['conf']['sitename'],
-            'description'   => lang('rules-desc') . ' ' . $GLOBALS['conf']['sitename'],
+            'canonical'     => Config::get(Config::PARAM_URL) . '/info/rules',
         ];
+
+        // title, description
+        Base::Meta(lang('Rules'), lang('rules-desc'));
 
         return view(PR_VIEW_DIR . '/info/rules', ['data' => $data, 'uid' => $uid]);
 	}
@@ -67,10 +74,12 @@ class InfoController extends \MainController
 	{
         $uid  = Base::getUid();
         $data = [
-            'h1'            => lang('About'),
-            'title'         => lang('About') . ' | ' . $GLOBALS['conf']['sitename'],
-            'description'   => lang('about-desc') . ' ' . $GLOBALS['conf']['sitename'],
+            'h1'        => lang('About'),
+            'canonical' => Config::get(Config::PARAM_URL) . '/info/about',
         ];
+
+        // title, description
+        Base::Meta(lang('About'), lang('about-desc'), $other = false);
 
         return view(PR_VIEW_DIR . '/info/about', ['data' => $data, 'uid' => $uid]);
 	}
@@ -79,10 +88,12 @@ class InfoController extends \MainController
 	{
         $uid  = Base::getUid();
         $data = [
-            'h1'            => lang('Privacy Policy'),
-            'title'         => lang('Privacy Policy') . ' | ' . $GLOBALS['conf']['sitename'],
-            'description'   => lang('privacy-desc') . ' ' . $GLOBALS['conf']['sitename'],
+            'h1'        => lang('Privacy Policy'),
+            'canonical' => Config::get(Config::PARAM_URL) . '/info/privacy',
         ];
+
+        // title, description
+        Base::Meta(lang('Privacy Policy'), lang('privacy-desc'), $other = false);
 
         return view(PR_VIEW_DIR . '/info/privacy', ['data' => $data, 'uid' => $uid]);
 	}  
@@ -91,10 +102,12 @@ class InfoController extends \MainController
 	{
         $uid  = Base::getUid();
         $data = [
-            'h1'            => lang('Trust level') . ' (TL) ',
-            'title'         => lang('Trust level') . ' (TL) | ' . $GLOBALS['conf']['sitename'],
-            'description'   => lang('tl-desc') . ' ' . $GLOBALS['conf']['sitename'],
+            'h1'        => lang('Trust level') . ' (TL) ',
+            'canonical' => Config::get(Config::PARAM_URL) . '/info/trust-level',
         ];
+
+        // title, description
+        Base::Meta(lang('Trust level'), lang('tl-desc'), $other = false);
 
         return view(PR_VIEW_DIR . '/info/trust-level', ['data' => $data, 'uid' => $uid]);
 	} 
@@ -103,34 +116,26 @@ class InfoController extends \MainController
 	{
         $uid  = Base::getUid();
         $data = [
-            'h1'            => lang('Restriction'),
-            'title'         => lang('Restriction') . ' | ' . $GLOBALS['conf']['sitename'],
-            'description'   => lang('Restriction') . ' ' . $GLOBALS['conf']['sitename'],
+            'h1'        => lang('Restriction'),
+            'canonical' => Config::get(Config::PARAM_URL) . '/info/restriction',
         ];
+
+        // title, description
+        Base::Meta(lang('Restriction'), lang('Restriction'), $other = false);
 
         return view(PR_VIEW_DIR . '/info/restriction', ['data' => $data, 'uid' => $uid]);
 	} 
-
-    public function markdown()
-	{
-        $uid  = Base::getUid();
-        $data = [
-            'h1'            => lang('Мarkdown'),
-            'title'         => lang('Мarkdown') . ' | ' . $GLOBALS['conf']['sitename'],
-            'description'   => lang('markdown-desc') . ' ' . $GLOBALS['conf']['sitename'],
-        ];
-
-        return view(PR_VIEW_DIR . '/info/markdown', ['data' => $data, 'uid' => $uid]);
-	}  
 
     public function initialSetup()
 	{
         $uid  = Base::getUid();
         $data = [
-            'h1'            => lang('Initial Setup'), 
-            'title'         => lang('Initial Setup') . ' | ' . $GLOBALS['conf']['sitename'],
-            'description'   => lang('init-setip-desc') . ' | ' . $GLOBALS['conf']['sitename'],
+            'h1'        => lang('Initial Setup'),
+            'canonical' => Config::get(Config::PARAM_URL) . '/info/initial-setup',         
         ];
+
+        // title, description
+        Base::Meta(lang('Initial Setup'), lang('init-setip-desc'), $other = false);
 
         return view(PR_VIEW_DIR . '/info/initial-setup', ['data' => $data, 'uid' => $uid]);
 	}    

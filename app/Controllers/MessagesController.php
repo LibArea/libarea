@@ -4,7 +4,7 @@ namespace App\Controllers;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\MessagesModel;
 use App\Models\UserModel;
-use Base;
+use Lori\Base;
 
 class MessagesController extends \MainController
 {
@@ -83,7 +83,7 @@ class MessagesController extends \MainController
         // Данные участника
         $uid  = Base::getUid();
 
-        $id  = Request::get('id');
+        $id  = Request::getInt('id');
 
         if (!$dialog = MessagesModel::getDialogById($id))
         {

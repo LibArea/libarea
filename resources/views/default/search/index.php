@@ -18,7 +18,7 @@
     <?php if (!empty($result)) { ?>
         <?php foreach ($result as  $post) { ?>
            <div class="search">
-           <a href="/posts/<?= $post['post_id']; ?>/<?= $post['post_slug'] ?>"><?= $post['post_title']; ?></a> <br>
+           <a href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug'] ?>"><?= $post['post_title']; ?></a> <br>
            <?= $post['post_content']; ?>
            </div>
            <div class="v-ots"></div>

@@ -4,77 +4,88 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        
-        <title><?= $data['title']; ?></title>
+     
+        <?php getRequestHead()->output(); ?>
+ 
+        <?php if (isset($post['post_is_delete'])) { ?>  
+            <meta name="robots" content="noindex" />
+        <?php } ?>
+
+        <link rel="icon" href="/favicon.ico">
+        <link rel="apple-touch-icon" href="/favicon.png">
+
         <link rel="stylesheet" href="/assets/css/style.css">
         <link rel="stylesheet" href="/assets/css/admin.css">
-        <link rel="icon" href="/favicon.ico">
+        
         <?php if($uid['id']) { ?>
             <script src="/assets/js/admin.js"></script>
         <?php } ?> 
     </head>
 <body class="bd">
-<header class="site-header">
-    <div class="title">
-        <a title="<?= lang('Home'); ?>" class="logo" href="/">M</a>
-        <div class="menu-left">
-            <ul>
-                <li class="nav<?php if( $uid['uri'] == '/admin') { ?> active<?php } ?>">
-                    <a class="home" title="<?= lang('Admin'); ?>" href="/admin">
-                        <?= lang('Admin'); ?>
-                    </a>
-                </li>
-                <li class="nav<?php if( $uid['uri'] == '/admin/space') { ?> active<?php } ?>">
-                    <a class="home" title="<?= lang('Space'); ?>" href="/admin/space">
-                        <?= lang('Space'); ?>
-                    </a>
-                </li>
-                <li class="nav<?php if( $uid['uri'] == '/admin/invitations') { ?> active<?php } ?>"> 
-                    <a class="home" title="<?= lang('Invites'); ?>" href="/admin/invitations">
-                        <?= lang('Invites'); ?>
-                    </a>
-                </li>
-                <li class="nav<?php if( $uid['uri'] == '/admin/comments') { ?> active<?php } ?>">
-                    <a class="home" title="<?= lang('Comments'); ?>" href="/admin/comments">
-                        <?= lang('Comments'); ?>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="menu-h">
-        <ul>
-            <?php if(!$uid['id']) { ?> 
-                <li class="nav">
-                    <a class="login" href="/login">Войти</a>
-                </li>
-                <li class="nav">
-                    <a class="register" href="/register">Регистрация</a>
-                </li>
-            <?php } else { ?> 
-                <?php if($uid['notif']) { ?> 
-                    <li class="nav notif">  
-                        <a class="nav" href="/notifications">  
-                            <i class="icon bell"></i> 
-                        </a>
-                    </li>  
-                <?php } ?>    
-                <li class="dropbtn nav">
-                    <a class="b-my" href="/u/<?= $uid['login']; ?>" title="<?= $uid['login']; ?>">
-                        <span><?= $uid['login']; ?></span>  
-                    </a>
-                </li>
-            <?php } ?>     
-        </ul>    
-    </div>
-</header>
+<header>  
+<div class="wrap">
 
-<?php if ($uid['msg']) { ?>
-    <div class="wrap">
-        <div class="msg">
-            <?php foreach($uid['msg'] as $message){ ?>
-                <?= $message; ?>
-            <?php } ?>
+    <div class="menu-left"> 
+        <ul>
+            <li class="nav"> 
+                <?php if($uid['uri'] == '/') { ?>
+                   <a title="<?= lang('Home'); ?>" class="logo" href="/">LoriUP</a>
+                <?php } else { ?>
+                    <a title="<?= lang('Home'); ?>" class="logo" href="/"><i class="icon home"></i> 
+                        <span class="slash no-mob">
+                            <span class="sl">\</span> <?= lang('LoriUP'); ?>
+                        </span>
+                    </a>
+                <?php } ?>
+            </li> 
+
+            <li class="nav<?php if( $uid['uri'] == '/admin') { ?> active<?php } ?>">
+                <a class="home" title="<?= lang('Admin'); ?>" href="/admin">
+                    <?= lang('Admin'); ?>
+                </a>
+            </li>
+            <li class="nav<?php if( $uid['uri'] == '/admin/space') { ?> active<?php } ?>">
+                <a class="home" title="<?= lang('Space'); ?>" href="/admin/space">
+                    <?= lang('Space'); ?>
+                </a>
+            </li>
+            <li class="nav<?php if( $uid['uri'] == '/admin/invitations') { ?> active<?php } ?>"> 
+                <a class="home" title="<?= lang('Invites'); ?>" href="/admin/invitations">
+                    <?= lang('Invites'); ?>
+                </a>
+            </li>
+            <li class="nav<?php if( $uid['uri'] == '/admin/comments') { ?> active<?php } ?>">
+                <a class="home" title="<?= lang('Comments'); ?>" href="/admin/comments">
+                    <?= lang('Comments'); ?>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="menu-right">
+    <div class="nav notif"> 
+        <a href="/u/<?= $uid['login']; ?>"> 
+            <img class="ava" alt="<?= $uid['login']; ?>" src="/uploads/avatar/small/<?= $uid['avatar']; ?>">
+        </a>
+    </div>        
+    </div>
+</div>    
+</header>
+<?php if(!empty($post['post_title'])) { ?>
+    <div id="stHeader">
+        <div class="wrap">
+            <a href="/"><i class="icon home"></i></a> <span class="slash">\</span> <?= $post['post_title']; ?>
         </div>
     </div>
 <?php } ?>
+
+<div class="wrap">
+    <?php if ($uid['msg']) { ?>
+        <?php foreach($uid['msg'] as $message){ ?>
+            <?= $message; ?>
+        <?php } ?>
+    <?php } ?>
+    
+    
+    
+         
+  

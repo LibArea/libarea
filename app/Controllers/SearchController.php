@@ -3,8 +3,7 @@
 namespace App\Controllers;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\SearchModel;
-use Parsedown;
-use Base;
+use Lori\Base;
 
 class SearchController extends \MainController
 {
@@ -28,12 +27,9 @@ class SearchController extends \MainController
                     $qa =  SearchModel::getSearch($query);
                 } 
                 
-                $Parsedown = new Parsedown(); 
-                $Parsedown->setSafeMode(true); // безопасность
-                
                 $result = Array();
                 foreach($qa as $ind => $row){
-                    $row['post_content']  = $Parsedown->line(Base::cutWords($row['post_content'], 120, '...'));
+                    $row['post_content']  = Base::cutWords($row['post_content'], 120, '...');
                     $result[$ind]         = $row; 
                 }     
                 
@@ -46,11 +42,12 @@ class SearchController extends \MainController
             $result = '';
         }
         
+        Base::Meta(lang('Search'), $meta_desc, $other = false);
+        
         $uid  = Base::getUid();
         $data = [
-            'title'         => lang('Search') . ' | ' . $GLOBALS['conf']['sitename'],
-            'description'   => 'Страница поиска по сайту ' . $GLOBALS['conf']['sitename'],
-            'h1'            => lang('Search'),
+            'h1'        => lang('Search'),
+            'canonical' => '/search'
         ];
 
         return view(PR_VIEW_DIR . '/search/index', ['data' => $data, 'uid' => $uid, 'result' => $result, 'query' => $query]);
@@ -69,25 +66,25 @@ class SearchController extends \MainController
             hl_preliminary_exit();
         }
         
-        $Parsedown = new Parsedown(); 
-        $Parsedown->setSafeMode(true); // безопасность
-        
         $result = Array();
         foreach($post as $ind => $row){
-            $row['post_content_preview']    = $Parsedown->line(Base::cutWords($row['post_content'], 68));
+            $row['post_content_preview']    = Base::cutWords($row['post_content'], 68);
             $row['post_date']               = Base::ru_date($row['post_date']);
             $row['lang_num_answers']        = Base::ru_num('answ', $row['post_answers_num']);
             $result[$ind]                   = $row;
          
         }
         
+        $meta_title = lang('Domain') . ': ' . $domain;
+        $meta_desc = lang('domain-desc') . ': ' . $domain;
+        Base::Meta($meta_title, $meta_desc, $other = false);
+        
         $uid  = Base::getUid();
         $data = [
             'h1'            => lang('Domain') . ': ' . $domain,  
-            'title'         => lang('Domain') . ': ' . $domain . ' | ' . $GLOBALS['conf']['sitename'],
-            'description'   => lang('domain-desc') . ' - ' . $domain . ' на сайте '. $GLOBALS['conf']['sitename'],
+            'canonical'     => '/' . $domain,
         ];
-
+        
         return view(PR_VIEW_DIR . '/search/domain', ['data' => $data, 'uid' => $uid, 'posts' => $result]);
     }
 }

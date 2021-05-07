@@ -3,9 +3,11 @@
 namespace App\Models;
 use Hleb\Constructor\Handlers\Request;
 use XdORM\XD;
+use Lori\Base;
+use Lori\Config;
 use DB;
 use PDO;
-use Base;
+ 
 
 class UserModel extends \MainModel
 {
@@ -52,7 +54,7 @@ class UserModel extends \MainModel
         $count = count(XD::select('*')->from(['users'])->getSelect());
       
         // Для "режима запуска" первые 50 участников получают trust_level = 1 
-        if($count < 50 && $GLOBALS['conf']['bootstrap_mode'] == 1) {
+        if($count < 50 && Config::get(Config::MODE) == 1) {
             $trust_level = 1; // Режим "запуска сообщества"
         } else {
             $trust_level = 0; // 0 min, 5 TL max (5 = персонал)
@@ -357,10 +359,10 @@ class UserModel extends \MainModel
             "remember",
             $token,
             $expires,
-            $GLOBALS['conf']['cookiePath'],
-            $GLOBALS['conf']['cookieDomain'],
-            $GLOBALS['conf']['cookieSecure'],
-            $GLOBALS['conf']['cookieHTTPOnly'],
+            '',     // cookieDomain
+            '/',    // cookiePath
+            false,  // cookieSecure
+            false,  // cookieHTTPOnly
         );
     } 
 
@@ -406,10 +408,10 @@ class UserModel extends \MainModel
             "remember",
             $token,
             $expires,
-            $GLOBALS['conf']['cookiePath'],
-            $GLOBALS['conf']['cookieDomain'],
-            $GLOBALS['conf']['cookieSecure'],
-            $GLOBALS['conf']['cookieHTTPOnly'],
+            '',     // cookieDomain
+            '/',    // cookiePath
+            false,  // cookieSecure
+            false,  // cookieHTTPOnly
         );
     }
 

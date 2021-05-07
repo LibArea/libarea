@@ -1,15 +1,12 @@
 body {
    background: #f3f3f3;
 }
-.wrap {
-  grid-area: header;
-}
 .admin {
-  grid-column-start: 2;
-  grid-column-end: 5;
   background: #fff;
   padding: 0.4rem 1rem;
   border: 1px solid #eee;
+  max-width: 100%;
+  width: 100%;
 }
 .comm-telo_bottom.recover {
   opacity: 0.3;

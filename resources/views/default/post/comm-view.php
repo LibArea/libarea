@@ -47,7 +47,7 @@
                                     </span>
                                 <?php } ?>
                                 <span class="date ots">
-                                    <a rel="nofollow" href="/posts/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#answ_<?= $answ['answer_id']; ?>">#</a>
+                                    <a rel="nofollow" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#answ_<?= $answ['answer_id']; ?>">#</a>
                                 </span>
                                 <?php if ($uid['trust_level'] == 5) { ?> 
                                     <span class="date ots">
@@ -145,17 +145,17 @@
                                         <?php } ?>
                                         <?php if($comm['comment_comm_id'] > 0) { ?>
                                             <span class="date ots">
-                                                <a rel="nofollow" href="/posts/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#comm_<?= $comm['comment_comm_id']; ?>">&uarr;</a>
+                                                <a rel="nofollow" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#comm_<?= $comm['comment_comm_id']; ?>">&uarr;</a>
                                             </span>
                                         <?php } else { ?>
                                             <span class="date ots">
-                                                <a rel="nofollow" href="/posts/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#answ_<?= $comm['comment_answ_id']; ?>">&uarr;</a>
+                                                <a rel="nofollow" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#answ_<?= $comm['comment_answ_id']; ?>">&uarr;</a>
                                             </span>
                                         <?php } ?>
                                         
                                         
                                         <span class="date ots">
-                                            <a rel="nofollow" href="/posts/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#comm_<?= $comm['comment_id']; ?>">#</a>
+                                            <a rel="nofollow" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#comm_<?= $comm['comment_id']; ?>">#</a>
                                         </span>
                                         <?php if ($uid['trust_level'] == 5) { ?> 
                                             <span class="date ots">

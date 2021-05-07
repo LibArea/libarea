@@ -4,7 +4,8 @@ namespace App\Controllers;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\UserModel;
 use Respect\Factory;
-use Base;
+use Lori\Config;
+use Lori\Base;
 
 class AuthController extends \MainController
 {
@@ -12,17 +13,19 @@ class AuthController extends \MainController
     public function registerPage()
     {
         // Если включена инвайт система
-        if($GLOBALS['conf']['invite'] == 1) {
+        if(Config::get(Config::PARAM_INVITE)) {
             redirect('/invite');
         }
         
         $uid  = Base::getUid();
         $data = [
-            'h1'            => lang('Sign up'),
-            'title'         => lang('Sign up'). ' | ' . $GLOBALS['conf']['sitename'],
-            'description'   => 'Страница регистрации на сайте ' . $GLOBALS['conf']['sitename'],
+            'h1'        => lang('Sign up'),
+            'canonical' => '/register',
         ];
 
+        // title, description
+        Base::Meta(lang('Sign up'), lang('Sign up'), $other = false);
+        
         return view(PR_VIEW_DIR . '/auth/register', ['data' => $data, 'uid' => $uid]);    
     }
     
@@ -45,11 +48,13 @@ class AuthController extends \MainController
         
         $uid  = Base::getUid();
         $data = [
-            'h1'            => 'Регистрация по инвайту',
-            'title'         => 'Регистрация по инвайту | ' . $GLOBALS['conf']['sitename'],
-            'description'   => 'Страница регистрации на сайте ' . $GLOBALS['conf']['sitename'],
+            'h1'        => 'Регистрация по инвайту',
+            'canonical' => '/register',
         ];
-   
+
+        // title, description
+        Base::Meta('Регистрация по инвайту', 'Регистрация по инвайту', $other = false);
+        
         return view(PR_VIEW_DIR . '/auth/register-invate', ['data' => $data, 'uid' => $uid, 'invate' => $invate]);  
     }
     
@@ -140,7 +145,7 @@ class AuthController extends \MainController
         $reg_ip = Request::getRemoteAddress(); // ip при регистрации 
      
         if(!$inv_code) {
-            if ($GLOBALS['conf']['captcha']) {
+            if (Config::get(Config::PARAM_CAPTCHA)) {
                 if (!Base::checkCaptchaCode()) {
                     Base::addMsg('Введеный код не верен', 'error');
                     redirect('/register');
@@ -169,7 +174,7 @@ class AuthController extends \MainController
             // Добавим текс письма тут
             $newpass_link = 'https://'. HLEB_MAIN_DOMAIN . '/email/avtivate/' . $code;
             $mail_message = "Activate E-mail: \n" .$newpass_link . "\n\n";
-            Base::mailText($email, $GLOBALS['conf']['sitename'].' - email', $mail_message); */
+            Base::mailText($email, Config::get(Config::PARAM_NAME).' - email', $mail_message); */
         
         }
         
@@ -182,10 +187,12 @@ class AuthController extends \MainController
     {
         $uid  = Base::getUid();
         $data = [
-            'h1'            => lang('Sign in'),
-            'title'         => lang('Sign in') . ' | ' . $GLOBALS['conf']['sitename'],
-            'description'   => 'Авторизация на сайте  ' . $GLOBALS['conf']['sitename'],
+            'h1'        => lang('Sign in'),
+            'canonical' => '/login',
         ];
+
+        // title, description
+        Base::Meta(lang('Sign in'), lang('Sign in'), $other = false);
 
         return view(PR_VIEW_DIR . '/auth/login', ['data' => $data, 'uid' => $uid]);
     }
@@ -262,11 +269,13 @@ class AuthController extends \MainController
     {
         $uid  = Base::getUid();
         $data = [
-            'h1'          => lang('Password Recovery'),
-            'title'       => lang('Password Recovery') . ' | '  . $GLOBALS['conf']['sitename'],
-            'description' => 'Страница восстановление пароля на сайте ' . $GLOBALS['conf']['sitename'],
+            'h1'        => lang('Password Recovery'),
+            'canonical' => '/recover',
         ];
 
+        // title, description
+        Base::Meta(lang('Password Recovery'), lang('Password Recovery'), $other = false);
+        
         return view(PR_VIEW_DIR . '/auth/recover', ['data' => $data, 'uid' => $uid]);
     }
 
@@ -274,7 +283,7 @@ class AuthController extends \MainController
     {
         $email = \Request::getPost('email');
         
-        if ($GLOBALS['conf']['captcha']) {
+        if (Config::get(Config::PARAM_CAPTCHA)) {
             if (!Base::checkCaptchaCode()) {
                 Base::addMsg('Введеный код не верен', 'error');
                 redirect('/recover');
@@ -306,7 +315,7 @@ class AuthController extends \MainController
         $newpass_link = 'https://'. HLEB_MAIN_DOMAIN . '/recover/remind/' . $code;
         $mail_message = "Your link to change your password: \n" .$newpass_link . "\n\n";
 
-        Base::mailText($email, $GLOBALS['conf']['sitename'].' - changing your password', $mail_message);
+        Base::mailText($email, Config::get(Config::PARAM_NAME).' - changing your password', $mail_message);
 
         Base::addMsg('Новый пароль отправлен на E-mail', 'success');
         redirect('/login');      
@@ -334,11 +343,14 @@ class AuthController extends \MainController
      
         $uid  = Base::getUid();
         $data = [
-            'title'         => 'Восстановление пароля',
-            'description'   => 'Страница восстановление пароля на сайте',
-            'code'          => $code,
-            'user_id'       => $user_id['activate_user_id'],
+            'h1'        => 'Восстановление пароля',
+            'code'      => $code,
+            'user_id'   => $user_id['activate_user_id'],
+            'canonical' => 'recover/remind',
         ];
+
+        // title, description
+        Base::Meta('Восстановление пароля', 'Восстановление пароля', $other = false);
         
         return view(PR_VIEW_DIR . '/auth/newrecover', ['data' => $data, 'uid' => $uid]);
     }

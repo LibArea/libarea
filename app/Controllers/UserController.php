@@ -6,8 +6,8 @@ use App\Models\UserModel;
 use App\Models\PostModel;
 use App\Models\SpaceModel;
 use ImageUpload;
-use Parsedown;
-use Base;
+use Lori\Config;
+use Lori\Base;
 
 class UserController extends \MainController
 {
@@ -18,10 +18,12 @@ class UserController extends \MainController
         $users  = UserModel::getUsersAll($uid['id']);
         
         $data = [
-            'h1'            => lang('Users'),
-            'title'         => lang('Users') . ' | ' . $GLOBALS['conf']['sitename'],
-            'description'   => lang('desc-user-all') . ' ' . $GLOBALS['conf']['sitename'],
+            'h1'        => lang('Users'),
+            'canonical' => '/users',
         ];
+
+        // title, description
+        Base::Meta(lang('Users'), lang('desc-user-all'), $other = false);
 
         return view(PR_VIEW_DIR . '/user/all', ['data' => $data, 'uid' => $uid, 'users' => $users]);
     }
@@ -42,16 +44,21 @@ class UserController extends \MainController
 
         $uid  = Base::getUid();
         $data =[
-            'h1'              => $user['login'] . ' - профиль',
-            'title'           => $user['login'] . ' - профиль' . ' | ' . $GLOBALS['conf']['sitename'],
-            'description'     => lang('desc-profile') . ' ' . $user['login'] . ' - ' . $GLOBALS['conf']['sitename'],
-            'created_at'      => Base::ru_date($user['created_at']),
-            'trust_level'     => UserModel::getUserTrust($user['id']),
-            'post_num_user'   => UserModel::getUsersPostsNum($user['id']),
-            'answ_num_user'   => UserModel::getUsersAnswersNum($user['id']),
-            'comm_num_user'   => UserModel::getUsersCommentsNum($user['id']), 
-            'space_user'      => SpaceModel::getSpaceUserId($user['id']),
+            'h1'            => $user['login'] . ' - профиль',
+            'created_at'    => Base::ru_date($user['created_at']),
+            'trust_level'   => UserModel::getUserTrust($user['id']),
+            'post_num_user' => UserModel::getUsersPostsNum($user['id']),
+            'answ_num_user' => UserModel::getUsersAnswersNum($user['id']),
+            'comm_num_user' => UserModel::getUsersCommentsNum($user['id']), 
+            'space_user'    => SpaceModel::getSpaceUserId($user['id']),
+            'canonical'     => Config::get(Config::PARAM_URL) . '/u/' . $user['login'],
         ];
+        
+        $meta_title = $user['login'] . ' - профиль';
+        $meta_desc  = lang('desc-profile') . ' ' . $user['login'];
+
+        // title, description
+        Base::Meta($meta_title, $meta_desc, $other = false);
 
         return view(PR_VIEW_DIR . '/user/profile', ['data' => $data, 'uid' => $uid, 'user' => $user, 'post' => $post]);
     }  
@@ -71,9 +78,11 @@ class UserController extends \MainController
         
         $data = [
           'h1'          => lang('Setting profile'),
-          'title'       => lang('Setting profile'),
-          'description' => lang('Setting profile page'), 
+          'canonical'   => '/***', 
         ];
+
+        // title, description
+        Base::Meta(lang('Setting profile'), lang('Setting profile'), $other = false);
 
         return view(PR_VIEW_DIR . '/user/setting', ['data' => $data, 'uid' => $uid, 'user' => $user]);
     }
@@ -114,9 +123,11 @@ class UserController extends \MainController
 
         $data = [
             'h1'            => lang('Change avatar'),
-            'title'         => lang('Change avatar'),
-            'description'   => lang('Change avatar page'), 
+            'canonical'   => '/***', 
         ];
+
+        // title, description
+        Base::Meta(lang('Change avatar'), lang('Change avatar page'), $other = false);
 
         return view(PR_VIEW_DIR . '/user/setting-avatar', ['data' => $data, 'uid' => $uid]);
     }
@@ -134,12 +145,14 @@ class UserController extends \MainController
         
         $data = [
             'h1'            => lang('Change password'),
-            'title'         => lang('Change password'),
-            'description'   => lang('Change password page'), 
             'password'      => '',
             'password2'     => '',
             'password3'     => '',
+            'canonical'     => '/***', 
         ];
+
+        // title, description
+        Base::Meta(lang('Change password'), lang('Change password page'), $other = false);
 
         return view(PR_VIEW_DIR . '/user/setting-security', ['data' => $data, 'uid' => $uid]);
     }
@@ -261,17 +274,12 @@ class UserController extends \MainController
         if($login != $uid['login']){
             redirect('/u/' . $user['login'] . '/favorite');
         }
-
-        $Parsedown = new Parsedown(); 
-        $Parsedown->setSafeMode(true); // безопасность
-        
+  
         $fav = UserModel::getUserFavorite($user['id']);
    
         $result = Array();
         foreach($fav as $ind => $row){
-             
             $row['post_date']       = (empty($row['post_date'])) ? $row['post_date'] : Base::ru_date($row['post_date']);
-            $row['answer_content'] = $Parsedown->text($row['answer_content']);
             $row['date']            = $row['post_date'];
             $row['post']            = PostModel::getPostId($row['answer_post_id']);
             $result[$ind]           = $row;
@@ -279,9 +287,11 @@ class UserController extends \MainController
         
         $data = [
             'h1'            => lang('Favorites') . ' ' . $login,
-            'title'         => lang('Favorites') . ' ' . $login . ' | ' . $GLOBALS['conf']['sitename'],
-            'description'   => lang('Favorites') . ' ' . $login . ' — ' . $GLOBALS['conf']['sitename'],
-        ]; 
+            'canonical'     => '/***', 
+        ];
+
+        // title, description
+        Base::Meta(lang('Favorites'), lang('Favorites'), $other = false);
         
         return view(PR_VIEW_DIR . '/user/favorite', ['data' => $data, 'uid' => $uid, 'favorite' => $result]);   
     }
@@ -294,9 +304,11 @@ class UserController extends \MainController
         $uid  = Base::getUid();
         $data = [
             'h1'            => lang('Invite'),
-            'title'         => lang('Invite') . ' | ' . $GLOBALS['conf']['sitename'],
-            'description'   => lang('Invite') . ' — ' . $GLOBALS['conf']['sitename'],
+            'canonical'     => '/***', 
         ];
+
+        // title, description
+        Base::Meta(lang('Invite'), lang('Invite'), $other = false);
 
         return view(PR_VIEW_DIR . '/user/invite', ['data' => $data, 'uid' => $uid]);    
     }
@@ -333,10 +345,12 @@ class UserController extends \MainController
         $Invitation = UserModel::InvitationResult($uid['id']);
  
         $data = [
-          'h1'          => lang('Invites'),
-          'title'       => lang('Invites') . ' | ' . $GLOBALS['conf']['sitename'],
-          'description' => lang('Invites') . ' - ' . $GLOBALS['conf']['sitename'], 
+            'h1'          => lang('Invites'),
+            'canonical'     => '/***', 
         ];
+
+        // title, description
+        Base::Meta(lang('Invites'), lang('Invites'), $other = false);
 
         return view(PR_VIEW_DIR . '/user/invitation', ['data' => $data, 'uid' => $uid, 'user' => $user,  'result' => $Invitation]);  
     }

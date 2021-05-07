@@ -9,8 +9,8 @@ use App\Models\AnswerModel;
 use App\Models\CommentModel;
 use App\Models\VotesPostModel;
 use Phphleb\Imageresizer\SimpleImage;
-use Base;
-use Parsedown;
+use Lori\Config;
+use Lori\Base;
 use UrlRecord;
 
 class PostController extends \MainController
@@ -31,9 +31,6 @@ class PostController extends \MainController
             include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
             hl_preliminary_exit();
         }
-        
-        $Parsedown = new Parsedown(); 
-        $Parsedown->setSafeMode(true); // безопасность
 
         $result = Array();
         foreach($posts as $ind => $row){
@@ -42,7 +39,7 @@ class PostController extends \MainController
                 $parse = parse_url($row['post_url']);
                 $row['post_url'] = $parse['host'];  
             } 
-            $row['post_content_preview']    = $Parsedown->line(Base::cutWords($row['post_content'], 68));
+            $row['post_content_preview']    = Base::cutWords($row['post_content'], 120);
             $row['lang_num_answers']        = Base::ru_num('answ', $row['post_answers_num']);
             $row['post_date']               = Base::ru_date($row['post_date']);
             $result[$ind]                   = $row;
@@ -55,8 +52,7 @@ class PostController extends \MainController
  
         $result_comm = Array();
         foreach($latest_answers as $ind => $row){
-                                        // htmlspecialchars(mb_substr($row['answer_content'],0,81, 'utf-8'));
-            $row['answer_content']      = $Parsedown->line(Base::cutWords($row['answer_content'], 81, '...'));
+            $row['answer_content']      = Base::cutWords($row['answer_content'], 81);
             $row['answer_date']         = Base::ru_date($row['answer_date']);
             $result_comm[$ind]          = $row;
         }
@@ -68,19 +64,25 @@ class PostController extends \MainController
         }
 
         if($type == 'feed') {
-            $meta_title = lang('Home') . ' | ';
-            $meta_desc  = lang('home-desc') . ' ';
+            $meta_title = Config::get(Config::PARAM_HOME_TITLE) . $num;
+            $meta_desc  = lang('home-desc') . $num;
         } else {
-            $meta_title = lang('TOP') . ' (популярный) | ';
-            $meta_desc  = lang('top-desc') . ' ';   
+            $meta_title = lang('TOP') .'. '. Config::get(Config::PARAM_HOME_TITLE) . $num;
+            $meta_desc  = lang('top-desc') . $num;   
         }
 
+        $other = [
+            'img'   => '/assets/images/areadev.jpg'
+        ];
+   
+        // title, description
+        Base::Meta($meta_title, $meta_desc, $other);  
+        
         $data = [
-            'title'             => $meta_title . $GLOBALS['conf']['sitename'] . $num, 
-            'description'       => $meta_desc . $GLOBALS['conf']['sitename'] . $num,
             'latest_answers'    => $result_comm,
             'pagesCount'        => $pagesCount,
             'pNum'              => $page,
+            'canonical'         => '/',
         ];
 
         return view(PR_VIEW_DIR . '/home', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'space_bar' => $space_signed_bar, 'type' => $type]);
@@ -100,7 +102,7 @@ class PostController extends \MainController
             hl_preliminary_exit();
         } else {
             if($slug != $post_new['post_slug']) {
-                redirect('/posts/' . $post_new['post_id'] . '/' . $post_new['post_slug']);
+                redirect('/post/' . $post_new['post_id'] . '/' . $post_new['post_slug']);
             }
         }
         
@@ -125,11 +127,8 @@ class PostController extends \MainController
             $post['post_url_full'] = null;
         }
         
-        $Parsedown = new Parsedown(); 
-        $Parsedown->setSafeMode(true); // безопасность
-        
         // Обработает некоторые поля
-        $post['post_content']   = $Parsedown->text($post['post_content']);
+        $post['post_content']   = $post['post_content'];
         $post['post_date']      = Base::ru_date($post['post_date']);
         $post['num_answers']    = Base::ru_num('answ', $post['post_answers_num']); 
         $post['num_comments']   = Base::ru_num('comm', $post['post_comments_num']); 
@@ -144,7 +143,7 @@ class PostController extends \MainController
         // Изменив порядок сортировки при выбора LO, что позволит удрать это
         if($post['post_lo'] > 0) {
             $lo = AnswerModel::getAnswerLo($post['post_id']);
-            $lo['answer_content'] = $Parsedown->text($lo['answer_content']);
+            $lo['answer_content'] = $lo['answer_content'];
         } else {
             $lo = null;
         }
@@ -156,23 +155,29 @@ class PostController extends \MainController
                 $row['edit'] = 1;
             }
 
-            $row['comm']                = CommentModel::getCommentsAnswer($row['answer_id'], $uid['id']);
-            $row['answer_content']      = $Parsedown->text($row['answer_content']);
-            $row['answer_date']         = Base::ru_date($row['answer_date']);
-            $row['favorite_answ']       = AnswerModel::getMyAnswerFavorite($row['answer_id'], $uid['id']);
-            $answers[$ind]              = $row;
-         
+            $row['comm']            = CommentModel::getCommentsAnswer($row['answer_id'], $uid['id']);
+            $row['answer_content']  = $row['answer_content'];
+            $row['answer_date']     = Base::ru_date($row['answer_date']);
+            $row['favorite_answ']   = AnswerModel::getMyAnswerFavorite($row['answer_id'], $uid['id']);
+            $answers[$ind]          = $row;
         }
        
-        // Перенести в метод, т.к. некобходимо формировать og:* и т.д.
-        $description = htmlspecialchars(substr(strip_tags($post['post_content']), 0, 160));
+        $other = [
+            'type'      => 'article',
+            'url'       => '/post/' . $post['post_id'] . '/' . $post['post_slug'],
+            'post_date' => $post['post_date'],
+        ];
+       
+        // title, description
+        $meta_desc  = substr(strip_tags($post['post_content']), 0, 160);
+        Base::Meta($post['post_title'], $meta_desc, $other); 
 
         $data = [
-            'title'        => $post['post_title'] . ' | ' . $GLOBALS['conf']['sitename'], 
-            'description'  => $description . ' — ' . $GLOBALS['conf']['sitename']
+            'h1'        => '',
+            'canonical' => '/post/' . $post['post_id'] . '/' . $post['post_slug'],
         ]; 
         
-        return view(PR_VIEW_DIR . '/post/view', ['data' => $data, 'post' => $post, 'answers' => $answers,  'uid' => $uid,  'recommend' => $recommend,  'lo' => $lo]);
+        return view(PR_VIEW_DIR . '/post/post-view', ['data' => $data, 'post' => $post, 'answers' => $answers,  'uid' => $uid,  'recommend' => $recommend,  'lo' => $lo]);
     }
 
     // Посты участника
@@ -195,11 +200,15 @@ class PostController extends \MainController
             $row['post_date']   = Base::ru_date($row['post_date']);
             $result[$ind]       = $row;
         }
- 
+
+        $meta_title = lang('Posts') . ' ' . $login;
+        $meta_desc  = lang('Participant posts') . ' ' . $login;
+        
+        // title, description
+        Base::Meta($meta_title, $meta_desc, $other = false); 
+        
         $data = [
-            'h1'            => 'Посты ' . $login, 
-            'title'         => 'Посты ' . $login . ' | ' . $GLOBALS['conf']['sitename'],
-            'description'   => 'Посты участника ' . $login . ' с сообществе ' . $GLOBALS['conf']['sitename'],
+            'h1'    => $meta_title 
         ]; 
         
         return view(PR_VIEW_DIR . '/post/post-user', ['data' => $data, 'uid' => $uid, 'posts' => $result]);
@@ -221,12 +230,13 @@ class PostController extends \MainController
         // В методе AddPost() необходимые изменения внесены
         
         $data = [
-            'h1'            => 'Добавить пост',
-            'title'         => 'Добавить пост' . ' | ' . $GLOBALS['conf']['sitename'],
-            'description'   => 'Страница добавления поста',
+            'h1'    => lang('Add post')
         ];  
        
-        return view(PR_VIEW_DIR . '/post/add', ['data' => $data, 'uid' => $uid, 'space' => $space]);
+        // title, description
+        Base::Meta(lang('Add post'), lang('Add post'), $other = false); 
+       
+        return view(PR_VIEW_DIR . '/post/post-add', ['data' => $data, 'uid' => $uid, 'space' => $space]);
     }
     
     // Добавление поста
@@ -321,8 +331,8 @@ class PostController extends \MainController
         $post_id = PostModel::AddPost($data);
         
         // Отправим в Discord
-        if($GLOBALS['conf']['discord'] == 1) {
-            $url = '/posts/'. $post_id .'/'. $post_slug;
+        if(Config::get(Config::PARAM_DISCORD)) {
+            $url = '/post/'. $post_id .'/'. $post_slug;
             Base::AddWebhook($post_content, $post_title, $url);
         }
         
@@ -405,7 +415,7 @@ class PostController extends \MainController
     // Показ формы поста для редактирование
     public function editPost() 
     {
-        $post_id    = \Request::get('id');
+        $post_id    = \Request::getInt('id');
         $uid        = Base::getUid();
         
         // Получим пост
@@ -424,12 +434,13 @@ class PostController extends \MainController
         $tags  = SpaceModel::getSpaceTags($post['post_space_id']);
 
         $data = [
-            'h1'            => 'Изменить пост',
-            'title'         => 'Измененение поста ' . ' | ' . $GLOBALS['conf']['sitename'], 
-            'description'   => 'Изменение поста на ' . $GLOBALS['conf']['sitename'],
+            'h1'    => lang('Edit post')
         ];
 
-        return view(PR_VIEW_DIR . '/post/edit', ['data' => $data, 'uid' => $uid, 'post' => $post, 'space' => $space, 'tags' => $tags]);
+        // title, description
+        Base::Meta(lang('Edit post'), lang('Edit post'), $other = false);
+
+        return view(PR_VIEW_DIR . '/post/post-edit', ['data' => $data, 'uid' => $uid, 'post' => $post, 'space' => $space, 'tags' => $tags]);
     }
     
     // Изменяем пост
@@ -437,7 +448,7 @@ class PostController extends \MainController
     {
         $post_id                = \Request::getPostInt('post_id');
         $post_title             = \Request::getPost('post_title');
-        $post_content           = $_POST['post_content']; // не фильтруем
+        $post_content           = $_POST['post_content']; // не фильтруем 
         $post_content_img       = \Request::getPost('content_img');
         $post_type              = \Request::getPostInt('post_type');
         $post_closed            = \Request::getPostInt('closed');
@@ -501,7 +512,7 @@ class PostController extends \MainController
         // Перезапишем пост
         PostModel::editPost($data);
         
-        redirect('/posts/' . $post['post_id'] . '/' . $post['post_slug']);
+        redirect('/post/' . $post['post_id'] . '/' . $post['post_slug']);
     }
     
     // Размещение своего поста у себя в профиле
@@ -563,9 +574,7 @@ class PostController extends \MainController
             return false;
         }
         
-        $Parsedown = new Parsedown(); 
-        $Parsedown->setSafeMode(true); // безопасность
-        $post = $Parsedown->text($post['post_content']);
+        $post = $post['post_content'];
 
         return view(PR_VIEW_DIR . '/post/postcode', ['post_content' => $post]);
     }

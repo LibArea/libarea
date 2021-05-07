@@ -29,7 +29,6 @@ return [
     
     /* Info */
     'init-setip-desc'   => 'This page describes the requirements and steps for setting up and installing the site. Frequently asked questions.',
-    'markdown-desc'     => 'We use Markdown (markup) on the site. Let take a look at the markup.', 
     'tl-desc'           => 'Information about the users trust levels (TL). Rights, access.', 
     'privacy-desc'      => 'The sites Privacy Policy. Site rules.', 
     'about-desc'        => 'Information about the site and the team working on the community.',

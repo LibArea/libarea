@@ -199,19 +199,21 @@ define( 'HLEB_PROJECT_VALIDITY_URL', "/^[a-zA-Z0-9а-яё\_\-\/\.]+$/u" );
 define( 'PR_VIEW_DIR', 'default' );
 define( 'TEMPLATE_DIR', __DIR__ .'/resources/views/default' );
 
+
 /*
  |-----------------------------------------------------------------------------
- | Configuration and localization file
+ | Localization file
  |-----------------------------------------------------------------------------
  |
  | Perhaps this will be changed ... 
  |
  |-----------------------------------------------------------------------------
- | Загружаем файл конфигурации и локализации
+ | Загружаем файл локализации
  |-----------------------------------------------------------------------------
  |
  | Возможно это будет изменено...
  |
  */
-$GLOBALS['conf'] = include( __DIR__ .'/config.inc.php');
-define('LANG', include_once(__DIR__ .'/app/Language/'. $GLOBALS['conf']['lang']. '/lang.php'));
+define('CONFIG_FILE_PATH', __DIR__ .'/config.ini');
+define('SITE_LANG', 'ru' ); 
+define('LANG', include_once(__DIR__ .'/app/Language/'. SITE_LANG . '/lang.php'));

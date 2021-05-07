@@ -106,7 +106,7 @@
                         <?php } ?>
                     </div>  
                 </div>
-                <div class="post-body">
+                <div class="post-body full">
                     <div class="post">
                         <?php if($post['post_thumb_img']) { ?> 
                             <img class="thumb" alt="<?= $post['post_url']; ?>" src="/uploads/thumbnails/<?= $post['post_thumb_img']; ?>">
@@ -118,7 +118,7 @@
                         <div class="lo-post">
                             <h3 class="lo">ЛО</h3>
                             <span class="right">
-                                <a rel="nofollow" href="/posts/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#comm_<?= $lo['comment_id']; ?>">
+                                <a rel="nofollow" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#comm_<?= $lo['comment_id']; ?>">
                                     <i class="icon arrow-down"></i>
                                 </a>
                             </span>
@@ -195,7 +195,7 @@
             <h3 class="recommend"><?= lang('Recommended'); ?></h3>  
             <?php foreach ($recommend as  $post) { ?>
                 <div class="recommend-telo">
-                    <a href="/posts/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
+                    <a href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
                         <?= $post['post_title']; ?>  
                     </a>
                     <?php if($post['post_answers_num'] !=0) { ?>

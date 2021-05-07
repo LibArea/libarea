@@ -1,5 +1,5 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<div class="w-100">
+<main>
 
     <h1><?= $data['h1']; ?></h1>
 
@@ -21,7 +21,7 @@
             <?php } ?>
              
             <div class="boxline">
-                <?php include TEMPLATE_DIR . '/post/md-forma.php'; ?> 
+                <?php include TEMPLATE_DIR . '/post/editor.php'; ?> 
             </div>
             
             <?php if($uid['trust_level'] > 0) { ?>
@@ -67,38 +67,6 @@
             <input type="hidden" name="post_id" id="post_id" value="<?= $post['post_id']; ?>">
             <input type="submit" name="submit" value="<?= lang('Edit'); ?>" />
         </form>
-        <br>
-        <details>
-            <summary>Доступно форматирование Markdown</summary>
-            <p> 
-            <table>
-              <tbody><tr>
-                <td width="125"><em>курсив</em></td>
-                <td>окружить текст <tt>*звездочками*</tt></td>
-              </tr>
-              <tr>
-                <td><strong>жирный</strong></td>
-                <td>окружить текст <tt>**двумя звездочками**</tt></td>
-              </tr>
-              <tr>
-                <td><strike>зачеркнутый</strike></td>
-                <td>окружить текст <tt>~~двумя тильдами~~</tt></td>
-              </tr>
-              <tr>
-                <td><tt>код (строка)</tt></td>
-                <td>окружить текст <tt>`обратными ковычками`</tt></td>
-              </tr>
-              <tr>
-                <td><a href="http://example.com/" style="color: inherit;">связаный текст</a></td>
-                <td><tt>[связанный текст](http://example.com/)</tt> или просто URL-адрес для создания без заголовка</td>
-              </tr>
-              <tr>
-                <td><blockquote> цитата</blockquote></td>
-                <td><tt>&gt;</tt> текс цитаты </td>
-              </tr>
-              </tbody></table>
-            </p>
-        </details>
         <br>
     </div>
 </main>

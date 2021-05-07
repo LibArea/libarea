@@ -4,8 +4,8 @@ namespace App\Controllers;
 use App\Models\SpaceModel;
 use Hleb\Constructor\Handlers\Request;
 use ImageUpload;
-use Parsedown;
-use Base;
+use Lori\Config;
+use Lori\Base;
 
 class SpaceController extends \MainController
 {
@@ -21,10 +21,15 @@ class SpaceController extends \MainController
 
         $data = [
             'h1'            => 'Все пространства',
-            'title'         => 'Все пространства | ' . $GLOBALS['conf']['sitename'],
-            'description'   => 'Страница всех пространств сайта на ' . $GLOBALS['conf']['sitename'],
+            'canonical'     => '/space', 
         ];
 
+        $meta_title = 'Все пространства';
+        $meta_desc  = 'Все пространства сообщества';
+        
+        // title, description
+        Base::Meta($meta_title, $meta_desc, $other = false);
+        
         return view(PR_VIEW_DIR . '/space/all', ['data' => $data, 'uid' => $uid, 'space' => $space, 'count_space' => $count_space]);
     }
 
@@ -33,7 +38,7 @@ class SpaceController extends \MainController
     {
         $uid            = Base::getUid();
         $space_slug     = \Request::get('slug');
-        $space_tags_id  = \Request::get('tags');
+        $space_tags_id  = \Request::getInt('tags');
         
         $space = SpaceModel::getSpaceInfo($space_slug);
     
@@ -48,14 +53,9 @@ class SpaceController extends \MainController
         $space['space_date']        = Base::ru_date($space['space_date']);
         $space['space_cont_post']   = count($posts);
         
-        // Фильтруем для Sidebar
-        $Parsedown = new Parsedown(); 
-        $Parsedown->setSafeMode(true); // безопасность
-        $space['space_text']   = $Parsedown->text($space['space_text']);
-        
         $result = Array();
         foreach($posts as $ind => $row){
-            $row['post_content_preview']    = $Parsedown->line(Base::cutWords($row['post_content'], 68));
+            $row['post_content_preview']    = Base::cutWords($row['post_content'], 68);
             $row['lang_num_answers']        = Base::ru_num('answ', $row['post_answers_num']);
             $result[$ind]                   = $row;
         }  
@@ -73,9 +73,14 @@ class SpaceController extends \MainController
 
         $data = [
             'h1'            => $space['space_name'],
-            'title'         => $space['space_name'] . ' | ' . $s_title . ' — ' . $GLOBALS['conf']['sitename'],
-            'description'   => $s_title . ' ' . $space['space_name'] . ' на сайте ' . $GLOBALS['conf']['sitename'],
+            'canonical'     => '/s/' . $space['space_slug'], 
         ];
+
+        $meta_title = $space['space_name'] . ' — ' . $s_title;
+        $meta_desc  = $space['space_name'] . ' — ' . $s_title . '. ';
+        
+        // title, description
+        Base::Meta($meta_title, $meta_desc, $other = false);
 
         return view(PR_VIEW_DIR . '/space/space-posts', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'space_info' => $space, 'tags' => $tags, 'space_signed' => $space_signed, 'type' => $type]);
     }
@@ -94,14 +99,19 @@ class SpaceController extends \MainController
 
         $data = [
             'h1'            => 'Изменение - ' . $slug,
-            'title'         => 'Изменение пространства | ' . $GLOBALS['conf']['sitename'],
-            'description'   => 'Страница изменения пространства на' . $GLOBALS['conf']['sitename'],
-        ]; 
+            'canonical'     => '/***', 
+        ];
+
+        $meta_title = 'Изменение - ' . $slug;
+        $meta_desc  = 'Изменение - ' . $slug;
+        
+        // title, description
+        Base::Meta($meta_title, $meta_desc, $other = false);
 
         return view(PR_VIEW_DIR . '/space/edit-space', ['data' => $data, 'uid' => $uid, 'space' => $space]);
     }
     
-    // Страница с информацией по тегам
+    // Страница с информацией по меткам
     public function spaceTagsInfo() 
     {
         $uid    = Base::getUid();
@@ -116,10 +126,12 @@ class SpaceController extends \MainController
         $tags = SpaceModel::getSpaceTags($space['space_id']);
         
         $data = [
-            'h1'            => 'Информация - ' . $slug,
-            'title'         => 'Информация | ' . $GLOBALS['conf']['sitename'],
-            'description'   => 'Информация пространства на' . $GLOBALS['conf']['sitename'],
-        ]; 
+            'h1'            => 'Метки',
+            'canonical'     => '/***', 
+        ];
+
+        // title, description
+        Base::Meta('Метки', 'Метки', $other = false);
  
         return view(PR_VIEW_DIR . '/space/info-space', ['data' => $data, 'uid' => $uid, 'space' => $space, 'tags' => $tags]);
     }
@@ -150,9 +162,14 @@ class SpaceController extends \MainController
      
         $data = [
             'h1'          => 'Добавить пространство',
-            'title'       => 'Добавить пространство' . ' | ' . $GLOBALS['conf']['sitename'],
-            'description' => 'Добавить пространство. ' . $GLOBALS['conf']['sitename'],
-        ]; 
+            'canonical'     => '/***', 
+        ];
+
+        $meta_title = 'Добавить пространство';
+        $meta_desc  = 'Добавить пространство';
+        
+        // title, description
+        Base::Meta($meta_title, $meta_desc, $other = false);
         
         return view(PR_VIEW_DIR . '/space/add-space', ['data' => $data, 'uid' => $uid, 'num_add_space' => $num_add_space]);
     }
@@ -163,7 +180,7 @@ class SpaceController extends \MainController
         $uid  = Base::getUid();
         
         // Для пользователя с TL < N       
-        if ($uid['trust_level'] < $GLOBALS['conf']['space']) {
+        if ($uid['trust_level'] < Config::get(Config::PARAM_SPACE)) {
             redirect('/');
         }  
         
@@ -369,10 +386,12 @@ class SpaceController extends \MainController
         }
       
         $data = [
-            'h1'          => 'Добавить метку',
-            'title'       => 'Добавить метку' . ' | ' . $GLOBALS['conf']['sitename'],
-            'description' => 'Добавить метку в пространство на ' . $GLOBALS['conf']['sitename'],
-        ]; 
+            'h1'        => 'Добавить метку',
+            'canonical' => '/***', 
+        ];
+
+        // title, description
+        Base::Meta('Добавить метку', 'Добавить метку', $other = false);
         
         return view(PR_VIEW_DIR . '/space/add-tag', ['data' => $data, 'uid' => $uid, 'space' => $space]);
     }
@@ -382,7 +401,7 @@ class SpaceController extends \MainController
     {
         $uid            = Base::getUid();
         $slug           = \Request::get('slug');
-        $space_tags_id  = \Request::get('tags');
+        $space_tags_id  = \Request::getInt('tags');
         
         $space = SpaceModel::getSpaceInfo($slug);
     
@@ -407,9 +426,11 @@ class SpaceController extends \MainController
 
         $data = [
             'h1'         => 'Изменить тэг',
-            'title'      => 'Изменить тэг',
-            'description'=> 'Страница измненению тега пространства',
+            'canonical'     => '/***', 
         ];
+
+        // title, description
+        Base::Meta('Изменить тэг', 'Изменить тэг', $other = false);
 
         return view(PR_VIEW_DIR . '/space/edit-tag', ['data' => $data, 'uid' => $uid, 'tag' => $tag]);
     }

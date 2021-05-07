@@ -22,6 +22,8 @@ if(hamburger){
 }
 
 $(function(){
+ 
+    
     // Голосование за комментарии
     $(document).on('click', '.comm-up-id', function() {
         var comm_id = $(this).data('id');

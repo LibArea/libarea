@@ -8,9 +8,9 @@
                 <input id="cancel_cmm"  type="button" value="<?= lang('Cancel'); ?>">
             </div> 
     <?php } else { ?>
-        <form id="add_answ" class="new_answer" action="/answer/add" accept-charset="UTF-8" method="post">
+        <form id="add_answ" action="/answer/add" accept-charset="UTF-8" method="post">
         <?= csrf_field() ?>
-            <textarea rows="5" placeholder="<?= lang('write-something'); ?>..." name="answer" id="answer"></textarea>
+            <textarea rows="5" class="editable" placeholder="<?= lang('write-something'); ?>..." name="answer" id="answer"></textarea>
             <div> 
                 <input type="hidden" name="post_id" id="post_id" value="<?php echo $data['post_id']; ?>">
                 <input type="hidden" name="answ_id" id="comm_id" value="<?php echo $data['answ_id']; ?>">

@@ -26,7 +26,7 @@
          
                             <span class="otst"> | </span>
                             <span class="date">  
-                                <a href="/posts/<?php echo $comm['post_slug']; ?>"><?php echo $comm['post_title']; ?></a>
+                                <a href="/post/<?php echo $comm['post_slug']; ?>"><?php echo $comm['post_title']; ?></a>
                             </span>
                             <span class="otst"> | </span>
                             <span id="cm_dell" class="comm_link">

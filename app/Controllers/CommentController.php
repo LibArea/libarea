@@ -9,7 +9,7 @@ use App\Models\VotesCommentModel;
 use App\Models\NotificationsModel;
 use App\Models\FlowModel;
 use Hleb\Constructor\Handlers\Request;
-use Base;
+use Lori\Base;
 
 class CommentController extends \MainController
 {
@@ -42,11 +42,13 @@ class CommentController extends \MainController
         
         $data = [
             'h1'            => lang('All comments'),
-            'title'         => lang('All comments') . ' | ' . $GLOBALS['conf']['sitename'] . $num,
-            'description'   => lang('comments-desc') .' '. $GLOBALS['conf']['sitename'] . $num,
             'pagesCount'    => $pagesCount,
             'pNum'          => $page,
-        ]; 
+            'canonical'     => '/comments', 
+        ];
+
+        // title, description
+        Base::Meta(lang('All comments'), lang('comments-desc'), $other = false);
  
         return view(PR_VIEW_DIR . '/comment/comm-all', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
     }
@@ -215,10 +217,15 @@ class CommentController extends \MainController
         
         $uid  = Base::getUid();
         $data = [
-            'h1'          => 'Комментарии ' . $login,
-            'title'       => 'Комментарии ' . $login . ' | ' . $GLOBALS['conf']['sitename'],
-            'description' => 'Страница комментариев учасника ' . $login . ' на сайте ' . $GLOBALS['conf']['sitename'],
-        ]; 
+            'h1'        => 'Комментарии ' . $login,
+            'canonical' => '/u/' . $login . '/comments', 
+        ];
+
+        $meta_title = 'Комментарии ' . $login;
+        $meta_desc  = 'Комментарии ' . $login;
+
+        // title, description
+        Base::Meta($meta_title, $meta_desc, $other = false);
         
         return view(PR_VIEW_DIR . '/comment/comm-user', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
     }

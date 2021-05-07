@@ -4,7 +4,6 @@ namespace App\Models;
 use XdORM\XD;
 use DB;
 use PDO;
-use Base;
 
 class PostModel extends \MainModel
 {

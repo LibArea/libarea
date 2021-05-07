@@ -117,7 +117,7 @@ Route::endGroup();
 
 // Покажем пост в ленте и полный пост
 Route::type('post')->get('/post/shown')->controller('PostController@shownPost');
-Route::get('/posts/{id}/{slug}')->controller('PostController@viewPost')->where(['id' => '[0-9-]+', 'slug' => '[A-Za-z0-9-]+']);
+Route::get('/post/{id}/{slug}')->controller('PostController@viewPost')->where(['id' => '[0-9-]+', 'slug' => '[A-Za-z0-9-]+']);
 
 // Правила
 Route::get('/info')->controller('InfoController');
@@ -127,7 +127,6 @@ Route::get('/info/about')->controller('InfoController@about');
 Route::get('/info/privacy')->controller('InfoController@privacy');
 Route::get('/info/trust-level')->controller('InfoController@trustLevel');
 Route::get('/info/restriction')->controller('InfoController@restriction');
-Route::get('/info/markdown')->controller('InfoController@markdown'); 
 Route::get('/info/initial-setup')->controller('InfoController@initialSetup');
 
 // Участники, авторизация, посты и комментарии, закладки

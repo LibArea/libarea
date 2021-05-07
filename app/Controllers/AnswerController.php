@@ -10,17 +10,13 @@ use App\Models\VotesAnswerModel;
 use App\Models\NotificationsModel;
 use App\Models\FlowModel;
 use Hleb\Constructor\Handlers\Request;
-use Base;
-use Parsedown;
+use Lori\Base;
 
 class AnswerController extends \MainController
 {
     // Все ответы
     public function index()
     {
-        $Parsedown = new Parsedown(); 
-        $Parsedown->setSafeMode(true); // безопасность
-         
         $pg = \Request::getInt('page'); 
         $page = (!$pg) ? 1 : $pg;
         
@@ -32,7 +28,6 @@ class AnswerController extends \MainController
  
         $result = Array();
         foreach($answ  as $ind => $row){
-            $row['answers_content'] = $Parsedown->text($row['answer_content']);
             $row['date']            = Base::ru_date($row['answer_date']);
             // N+1 - перенести в запрос
             $row['answ_vote_status'] = VotesAnswerModel::getVoteStatus($row['answer_id'], $user_id);
@@ -47,11 +42,13 @@ class AnswerController extends \MainController
         
         $data = [
             'h1'            => lang('All answers'),
-            'title'         => lang('All answers') . ' | ' . $GLOBALS['conf']['sitename'] . $num,
-            'description'   => lang('answers-desc') .' '. $GLOBALS['conf']['sitename'] . $num,
             'pagesCount'    => $pagesCount,
             'pNum'          => $page,
-        ]; 
+            'canonical'     => '/answers', 
+        ];
+
+        // title, description
+        Base::Meta(lang('All answers'), lang('answers-desc'), $other = false);
  
         return view(PR_VIEW_DIR . '/answer/answ-all', ['data' => $data, 'uid' => $uid, 'answers' => $result]);
     }
@@ -199,23 +196,24 @@ class AnswerController extends \MainController
         
         $answ  = AnswerModel::getUsersAnswers($login); 
         
-        $Parsedown = new Parsedown(); 
-        $Parsedown->setSafeMode(true); // безопасность
-        
         $result = Array();
         foreach($answ as $ind => $row){
-            $row['content'] = $Parsedown->text($row['answer_content']);
+            $row['content'] = $row['answer_content'];
             $row['date']    = Base::ru_date($row['answer_date']);
-         
             $result[$ind]   = $row;
         }
         
         $uid  = Base::getUid();
         $data = [
-            'h1'          => 'Ответы ' . $login,
-            'title'       => 'Ответы  ' . $login . ' | ' . $GLOBALS['conf']['sitename'],
-            'description' => 'Ответы  учасника сообщества ' . $login . ' на сайте ' . $GLOBALS['conf']['sitename'],
-        ]; 
+            'h1'        => 'Ответы ' . $login,
+            'canonical' => '/u/' . $login . '/answers', 
+        ];
+
+        $meta_title = 'Ответы ' . $login;
+        $meta_desc  = 'Ответы  учасника сообщества ' . $login . ' на сайте ';
+        
+        // title, description
+        Base::Meta($meta_title, $meta_desc, $other = false);
         
         return view(PR_VIEW_DIR . '/answer/answ-user', ['data' => $data, 'uid' => $uid, 'answers' => $result]);
     }

@@ -4,7 +4,7 @@ namespace App\Controllers;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\NotificationsModel;
 use App\Models\UserModel;
-use Base;
+use Lori\Base;
 
 class NotificationsController extends \MainController
 {

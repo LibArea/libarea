@@ -8,10 +8,10 @@
                 <label for="email">Email</label>
                 <input type="text" name="email" id="email">
             </div>
-            <?php if ($GLOBALS['conf']['captcha']) { ?>
+            <?php if (Lori\Config::get(Lori\Config::PARAM_CAPTCHA)) { ?>
                 <div class="captcha_data">
                     <div class="captcha_wrap">
-                        <div class="g-recaptcha" data-theme="light" data-size="normal" data-callback="captcha_ready" data-sitekey="<?php echo $GLOBALS['conf']['public_key']; ?>"></div>
+                        <div class="g-recaptcha" data-theme="light" data-size="normal" data-callback="captcha_ready" data-sitekey="<?= Lori\Config::get(Lori\Config::PARAM_PUBLIC_KEY); ?>"></div>
                         <script async defer nonce="" src="https://www.google.com/recaptcha/api.js?hl=ru"></script>
                     </div>
                 </div>  <br /> 
@@ -20,7 +20,7 @@
                 <div class="boxline">
                     <button type="submit" class="button-primary"><?= lang('Reset'); ?></button>
                     <small>
-                        <?php if($GLOBALS['conf']['invite'] != 1) { ?>
+                        <?php if(!Lori\Config::get(Lori\Config::PARAM_INVITE)) { ?>
                             <span class="menu-lf"><a href="/register"><?= lang('Sign up'); ?></a></span>
                         <?php } ?>
                         <span class="menu-lf"><a href="/login"><?= lang('Sign in'); ?></a></span>

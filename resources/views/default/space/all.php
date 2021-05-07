@@ -62,7 +62,7 @@
     <?php } ?>
 
 </main>
-<?php if($uid['trust_level'] >= $GLOBALS['conf']['space']) { ?>
+<?php if($uid['trust_level'] >= Lori\Config::get(Lori\Config::PARAM_SPACE)) { ?>
     <?php if($count_space <= 2) { ?>
         <aside class="sidebar"> 
             <div class="right">

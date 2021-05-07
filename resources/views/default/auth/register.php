@@ -21,10 +21,10 @@
                 <label for="password_confirm"><?= lang('repeat-password'); ?></label>
                 <input type="password" name="password_confirm" id="password_confirm">
             </div>    
-            <?php if ($GLOBALS['conf']['captcha']) { ?>
+            <?php if (Lori\Config::get(Lori\Config::PARAM_CAPTCHA)) { ?>
                 <div class="captcha_data">
                     <div class="captcha_wrap">
-                        <div class="g-recaptcha" data-theme="light" data-size="normal" data-callback="captcha_ready" data-sitekey="<?php echo $GLOBALS['conf']['public_key']; ?>"></div>
+                        <div class="g-recaptcha" data-theme="light" data-size="normal" data-callback="captcha_ready" data-sitekey="<?= Lori\Config::get(Lori\Config::PARAM_PUBLIC_KEY); ?>"></div>
                         <script async defer nonce="" src="https://www.google.com/recaptcha/api.js?hl=ru"></script>
                     </div>
                 </div>   <br />

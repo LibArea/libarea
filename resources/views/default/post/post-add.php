@@ -1,5 +1,5 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<main class="w-100">
+<main>
 
     <h1><?php echo $data['h1']; ?></h1>
 
@@ -19,8 +19,9 @@
                 </div> <?php } ?>
                 
             <div class="boxline">
-                <?php include TEMPLATE_DIR . '/post/md-forma.php'; ?>
+                <?php include TEMPLATE_DIR . '/post/editor.php'; ?>
             </div>
+            
             <?php if($uid['trust_level'] > 0) { ?>
                 <div class="boxline"> 
                     <label for="post_content">Формат</label>
@@ -50,38 +51,6 @@
             </div>
             <input type="submit" name="submit" value="Написать" />
         </form>
-        <br>
-        <details>
-            <summary>Доступно форматирование Markdown</summary>
-            <p> 
-            <table>
-              <tbody><tr>
-                <td width="125"><em>курсив</em></td>
-                <td>окружить текст <tt>*звездочками*</tt></td>
-              </tr>
-              <tr>
-                <td><strong>жирный</strong></td>
-                <td>окружить текст <tt>**двумя звездочками**</tt></td>
-              </tr>
-              <tr>
-                <td><strike>зачеркнутый</strike></td>
-                <td>окружить текст <tt>~~двумя тильдами~~</tt></td>
-              </tr>
-              <tr>
-                <td><tt>од (строка)</tt></td>
-                <td>окружить текст <tt>`обратными ковычками`</tt></td>
-              </tr>
-              <tr>
-                <td><a href="http://example.com/">связаный текст</a></td>
-                <td><tt>[связанный текст](http://example.com/)</tt> или просто URL-адрес для создания без заголовка</td>
-              </tr>
-              <tr>
-                <td><blockquote> цитата</blockquote></td>
-                <td><tt>&gt;</tt> текс цитаты </td>
-              </tr>
-              </tbody></table>
-            </p>
-        </details>
         <br>
     </div>
 </main>

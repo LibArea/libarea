@@ -24,7 +24,7 @@
          
                             <span class="otst"> | </span>
                             <span class="date">  
-                               <a href="/posts/<?= $comm['post_id']; ?>/<?= $comm['post_slug']; ?>"><?php echo $comm['post_title']; ?></a>
+                               <a href="/post/<?= $comm['post_id']; ?>/<?= $comm['post_slug']; ?>"><?php echo $comm['post_title']; ?></a>
                             </span>
                         </div>
                         <div class="comm-telo-body">

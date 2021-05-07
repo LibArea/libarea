@@ -1,10 +1,13 @@
 <?php
 
+namespace Lori;
+
 use App\Models\NotificationsModel;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\UserModel;
 use JacksonJeans\Mail;
 use JacksonJeans\MailException;
+use Lori\Config;
 
 class Base
 {
@@ -227,14 +230,11 @@ class Base
     }
     
     // Обрезка текста по словам
-    public static function  cutWords($text, $maxlen) {  
-        $len = (mb_strlen($text) > $maxlen)? mb_strripos(mb_substr($text, 0, $maxlen), ' ') : $maxlen;
+    public static function  cutWords($txt, $maxlen) {  
+        $text   = strip_tags($txt);
+        $len    = (mb_strlen($text) > $maxlen)? mb_strripos(mb_substr($text, 0, $maxlen), ' ') : $maxlen;
         $cutStr = mb_substr($text, 0, $len);
-        $temp = (mb_strlen($text) > $maxlen)? $cutStr. '' : $cutStr;
-        
-        $code_match = array('>', '*', '!', '[ADD:');
-	    $content = str_replace($code_match, '', $temp);
-
+        $content = (mb_strlen($text) > $maxlen)? $cutStr. '' : $cutStr;
         return $content;
     } 
     
@@ -243,13 +243,13 @@ class Base
     {
 
         $mail = new Mail('smtp', [
-            'host'      => 'ssl://' . $GLOBALS['conf']['smtphost'],
-            'port'      => $GLOBALS['conf']['smtpport'],
-            'username'  => $GLOBALS['conf']['smtpuser'],
-            'password'  => $GLOBALS['conf']['smtppass']
+            'host'      => 'ssl://' . Config::get(Config::PARAM_SMTP_HOST),
+            'port'      => Config::get(Config::PARAM_SMTP_POST),
+            'username'  => Config::get(Config::PARAM_SMTP_USER),
+            'password'  => Config::get(Config::PARAM_SMTP_PASS)
         ]);
 
-        $mail->setFrom($GLOBALS['conf']['smtpuser'])
+        $mail->setFrom(Config::get(Config::PARAM_SMTP_USER))
             ->setTo($email)
             ->setSubject($subject)
             ->setText($message)
@@ -299,7 +299,7 @@ class Base
 
         if(!$response){ return false; }
         
-        $private_key = $GLOBALS['conf']['private_key']; 
+        $private_key = Config::get(Config::PARAM_PRICATE_KEY); 
         
         return self::callApi(array(
             'secret'   => $private_key,
@@ -311,11 +311,14 @@ class Base
     // Discord
     public static function AddWebhook($text, $title, $url){
         
+        $text = strip_tags($text, '<p>');
+        $text = preg_replace(array('/(<p>)/','(<\/p>)'), array('','\n'), $text);
+        
         // Проверяем имя бота и YOUR_WEBHOOK_URL
-        if(!$webhookurl = $GLOBALS['conf']['webhook_url']){
+        if(!$webhookurl = Config::get(Config::PARAM_WEBHOOK_URL)) {
            return false;
         }
-        if(!$usernamebot = $GLOBALS['conf']['username_bot']){
+        if(!$usernamebot = Config::get(Config::PARAM_NAME_BOT)) {
             return false;
         } 
         
@@ -356,7 +359,7 @@ class Base
                     "description" => $text,
 
                     // Ссылка в заголовке url
-                    "url" => 'https://'. HLEB_MAIN_DOMAIN . $url,
+                    "url" => Config::get(Config::PARAM_URL) . $url,
 
                     // Таймштамп, обязательно в формате ISO8601
                     "timestamp" => $timestamp,
@@ -366,8 +369,8 @@ class Base
 
                     // Подпись и аватар в подвале sitename
                     "footer" => [
-                        "text" => $GLOBALS['conf']['sitename'],
-                        "icon_url" => $GLOBALS['conf']['icon_url']
+                        "text" => Config::get(Config::PARAM_NAME),
+                        "icon_url" => Config::get(Config::PARAM_ICON_URL)
                     ],
                 ]
             ]
@@ -386,5 +389,33 @@ class Base
         // echo $response;
         curl_close( $ch );
     }
-
+    
+    // Meta- теги
+    public static function Meta($meta_title, $meta_desc, $other)
+    {
+        Request::getHead()->setTitle($meta_title .' | '. Config::get(Config::PARAM_NAME));
+        Request::getHead()->setDescription($meta_desc .' '. Config::get(Config::PARAM_HOME_TITLE));
+        Request::getHead()->addMeta('og:title', $meta_title);
+        Request::getHead()->addMeta('og:description', $meta_desc);
+        Request::getHead()->addMeta('og:site_name', Config::get(Config::PARAM_HOME_TITLE));
+       
+        // Статья, профиль участника и весь остальной сайт
+        if($other) {
+            if(!empty($other['img'])) {
+                Request::getHead()->addMeta('og:image', $other['img']);
+                Request::getHead()->addMeta('og:image:type', 'image/jpeg');
+            }
+            if (!empty($other['type']) == 'article') {
+                Request::getHead()->addMeta('og:type', 'article');
+                Request::getHead()->addMeta('og:url', Config::get(Config::PARAM_URL) . $other['url']);
+                Request::getHead()->addMeta('article:published_time', $other['post_date']);
+            } elseif (!empty($other['type']) == 'profile') {
+                Request::getHead()->addMeta('og:type', 'profile');
+            } else {
+                Request::getHead()->addMeta('og:type', 'website');
+            }
+        }
+       
+    }
+    
 }

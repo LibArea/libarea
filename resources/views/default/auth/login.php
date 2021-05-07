@@ -1,5 +1,5 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<main class="w-100">
+<main>
     <h1><?= $data['h1']; ?></h1>
     <div class="box wide">
         <form class="" action="/login" method="post">
@@ -20,7 +20,7 @@
                 <div class="boxline">
                     <button type="submit" class="button-primary"><?= lang('Sign in'); ?></button>
                     <small>
-                        <?php if($GLOBALS['conf']['invite'] != 1) { ?>
+                        <?php if(!Lori\Config::get(Lori\Config::PARAM_INVITE)) { ?>
                             <span class="menu-lf"><a href="/register"><?= lang('Sign up'); ?></a></span>
                         <?php } ?>
                         <span class="menu-lf"><a href="/recover"><?= lang('forgot-password'); ?>?</a></span>
@@ -29,7 +29,7 @@
             </div>
         </form>
 
-        <?php if($GLOBALS['conf']['invite'] == 1) { ?>
+        <?php if(Lori\Config::get(Lori\Config::PARAM_INVITE)) { ?>
             <?= lang('no-invate-txt'); ?> 
         <?php } ?>
     </div>

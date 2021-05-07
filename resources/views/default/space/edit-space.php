@@ -45,8 +45,6 @@
                     <br />
                     <label for="post_content"><?= lang('Text'); ?></label>
                     <textarea class="add" name="space_text"><?= $space['space_text']; ?></textarea>
-                    <div class="box_h">Markdown</div>
-                    <br />
                 </div>
                 <div class="boxline">
                 <label for="space_img">

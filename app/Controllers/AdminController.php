@@ -5,8 +5,7 @@ use Hleb\Constructor\Handlers\Request;
 use App\Models\UserModel;
 use App\Models\SpaceModel;
 use App\Models\AdminModel;
-use Parsedown;
-use Base;
+use Lori\Base;
 
 class AdminController extends \MainController
 {
@@ -33,9 +32,12 @@ class AdminController extends \MainController
         } 
         
         $data = [
-            'title'        => 'Последние сессии | Админка',
-            'users'        => $result,
-        ];
+            'title'     => lang('Admin'),
+            'users'     => $result,
+        ]; 
+ 
+        // title, description
+        Base::Meta(lang('Admin'), lang('Admin'), $other = false);
 
         return view(PR_VIEW_DIR . '/admin/index', ['data' => $data, 'uid' => $uid, 'alluser' => $result]);
 	}
@@ -62,24 +64,23 @@ class AdminController extends \MainController
         if ($uid['trust_level'] != 5) {
             redirect('/');
         }
-        
-        $Parsedown = new Parsedown(); 
-        $Parsedown->setSafeMode(true); // безопасность
          
         $comm = AdminModel::getCommentsDell();
 
         $result = Array();
         foreach($comm  as $ind => $row){
-            $row['content'] = $Parsedown->text($row['comment_content']);
+            $row['content'] = $row['comment_content'];
             $row['date']    = Base::ru_date($row['comment_date']);
             $result[$ind]   = $row;
         }
         
         $uid  = Base::getUid();
         $data = [
-            'h1'          => 'Удаленные комментарии',
-            'title'       => 'Удаленные комментарии' . ' | ' . $GLOBALS['conf']['sitename'],
+            'h1'        => lang('Deleted comments'),
         ]; 
+ 
+        // title, description
+        Base::Meta(lang('Deleted comments'), lang('Deleted comments'), $other = false);
  
         return view(PR_VIEW_DIR . '/admin/comm_del', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
     }
@@ -113,14 +114,16 @@ class AdminController extends \MainController
         $result = Array();
         foreach($invite  as $ind => $row){
             $row['uid']         = UserModel::getUserId($row['uid']);  
-            $row['active_time'] = Base::ru_date($row['active_time']);
+            $row['active_time'] = $row['active_time'];
             $result[$ind]       = $row;
         }
 
         $data = [
-            'h1'          => 'Инвайты',
-            'title'       => 'Инвайты' . ' | ' . $GLOBALS['conf']['sitename'],
+            'h1'          => lang('Invites'),
         ]; 
+ 
+        // title, description
+        Base::Meta(lang('Invites'), lang('Invites'), $other = false);
  
         return view(PR_VIEW_DIR . '/admin/invitations', ['data' => $data, 'uid' => $uid, 'invitations' => $result]);
     }
@@ -150,9 +153,11 @@ class AdminController extends \MainController
         $space      = AdminModel::getAdminSpaceAll($uid['id']);
         
         $data = [
-            'h1'          => 'Пространства',
-            'title'       => 'Пространства' . ' | ' . $GLOBALS['conf']['sitename'],
+            'h1'        => lang('Space'),
         ]; 
+ 
+        // title, description
+        Base::Meta(lang('Space'), lang('Space'), $other = false);
  
         return view(PR_VIEW_DIR . '/admin/space', ['data' => $data, 'uid' => $uid, 'space' => $space]);
     }
@@ -167,9 +172,11 @@ class AdminController extends \MainController
         }  
         
         $data = [
-            'h1'          => 'Добавить пространство',
-            'title'       => 'Добавить пространство' . ' | ' . $GLOBALS['conf']['sitename'],
+            'h1'        => lang('Add Space'),
         ]; 
+ 
+        // title, description
+        Base::Meta(lang('Add Space'), lang('Add Space'), $other = false);
         
         return view(PR_VIEW_DIR . '/admin/add-space', ['data' => $data, 'uid' => $uid]);
     }

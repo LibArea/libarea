@@ -3,7 +3,7 @@
 namespace App\Controllers;
 use App\Models\FlowModel;
 use Hleb\Constructor\Handlers\Request;
-use Base;
+use Lori\Base;
 
 class FlowController extends \MainController
 {
@@ -20,12 +20,13 @@ class FlowController extends \MainController
     {
         $account    = \Request::getSession('account');
         $user_id    = $account ? $account['user_id'] : 0;
+        
+        Base::Meta(lang('Flow'), lang('Flow'), $other = false);
 
         $uid  = Base::getUid();
         $data = [
             'h1'            => lang('Flow'),
-            'title'         => lang('Flow'). ' | ' . $GLOBALS['conf']['sitename'],
-            'description'   => 'Лента потока, активности на сайте ' . $GLOBALS['conf']['sitename'],
+            'canonical'     => '/flow',
         ];
 
         return view(PR_VIEW_DIR . '/flow/index', ['data' => $data, 'uid' => $uid]);

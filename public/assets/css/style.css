@@ -2,6 +2,13 @@ html {
   height: 100%;
   overflow-y:scroll;
 }
+html, body {
+  margin: 0;
+  padding: 0;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
 :root {
   --color-gray-1: #6d6b6b; 
   --color-gray-2: #444;
@@ -13,13 +20,6 @@ body {
   font-size: 0.95em;
   color: var(--color-gray-2);
   min-height: 100%;
-}
-html, body {
-  margin: 0;
-  padding: 0;
-}
-*, *:before, *:after {
-  box-sizing: inherit;
 }
 tt {
   font-size: 14px;
@@ -243,8 +243,11 @@ a.home {
   font-size: 13px;
 } 
 .slash {
-    margin: 0 5px;
-    color: #666;
+  margin: 0 5px;
+  color: #666;
+}
+.sl {
+  margin: 0 5px 0 0;
 }
 .menu-left, .menu-logo {
   display: inline-block;
@@ -436,7 +439,7 @@ input:disabled, button:disabled {
   color: gray;
 }
 input:disabled {background: #f1f1f1;}
-input.form-about {width: 250px;}
+input.form-about, input.add {width: 298px;}
 
 a.login, a.add-space {
   float: right;
@@ -587,6 +590,12 @@ border-radius: 20px;
 }
 .post-body {
   margin-left: 40px;
+}
+.post-body.full {
+  margin-top: 10px;
+}
+.post-body.full .post {
+  margin-bottom: 20px;
 }
 .telo-detail_post img, img.thumb {
   max-width: 65%;

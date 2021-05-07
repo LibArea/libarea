@@ -162,9 +162,10 @@
 <?php } else { ?>
     <?php if ($uid['id']) { ?>
             <?php if($post['post_closed'] == 0) { ?>
-                <form id="add_answ" class="new_answer" action="/answer/add" accept-charset="UTF-8" method="post">
+                <form id="add_answ" action="/answer/add" accept-charset="UTF-8" method="post">
                 <?= csrf_field() ?>
-                    <textarea rows="5" placeholder="<?= lang('write-response'); ?>..." name="answer" id="answer"></textarea>
+                <br>
+                    <textarea class="editable" name="answer" id="answer"></textarea>
                     <div> 
                         <input type="hidden" name="post_id" id="post_id" value="<?= $post['post_id']; ?>">
                         <input type="hidden" name="answ_id" id="answ_id" value="0">

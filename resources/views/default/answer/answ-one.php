@@ -26,11 +26,11 @@
                     <?php if ($data['post']['post_user_id'] == $answ['answer_user_id']) { ?><span class="authorpost">&#x21af;</span> <?php } ?>
                 </span>
                 <span class="date">
-                    <a rel="nofollow" href="/posts/<?= $data['post']['post_slug']; ?>#answ_<?= $answ['answer_id']; ?>">#</a>
+                    <a rel="nofollow" href="/post/<?= $data['post']['post_slug']; ?>#answ_<?= $answ['answer_id']; ?>">#</a>
                 </span>
                 <?php if ($answ['level'] != 0) { ?> 
                     <span class="date">
-                        <a rel="nofollow" href="/posts/<?= $data['post']['post_slug']; ?>#answ_<?= $answ['answer_on']; ?>">&#8679;</a>
+                        <a rel="nofollow" href="/post/<?= $data['post']['post_slug']; ?>#answ_<?= $answ['answer_on']; ?>">&#8679;</a>
                     </span>
                 <?php } ?> 
             </div>
