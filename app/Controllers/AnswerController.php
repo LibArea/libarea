@@ -148,6 +148,11 @@ class AnswerController extends \MainController
         
         Base::Meta(lang('Edit answer'), lang('Edit answer'), $other = false);
         
+        Request::getResources()->addBottomStyles('/assets/js/editor/css/medium-editor.min.css');
+        Request::getResources()->addBottomStyles('/assets/js/editor/css/themes/default.css');
+        Request::getResources()->addBottomScript('/assets/js/editor/js/medium-editor.min.js');
+        Request::getResources()->addBottomScript('/assets/js/editor.js');
+        
         return view(PR_VIEW_DIR . '/answer/answ-edit-form', ['data' => $data, 'uid' => $uid, 'post' => $post]);
     }
 

@@ -172,6 +172,11 @@ class PostController extends \MainController
         $meta_desc  = substr(strip_tags($post['post_content']), 0, 160);
         Base::Meta($post['post_title'], $meta_desc, $other); 
 
+        Request::getResources()->addBottomStyles('/assets/js/editor/css/medium-editor.min.css');
+        Request::getResources()->addBottomStyles('/assets/js/editor/css/themes/default.css');
+        Request::getResources()->addBottomScript('/assets/js/editor/js/medium-editor.min.js');
+        Request::getResources()->addBottomScript('/assets/js/editor.js');
+
         $data = [
             'h1'        => '',
             'canonical' => '/post/' . $post['post_id'] . '/' . $post['post_slug'],
@@ -235,6 +240,10 @@ class PostController extends \MainController
        
         // title, description
         Base::Meta(lang('Add post'), lang('Add post'), $other = false); 
+        Request::getResources()->addBottomStyles('/assets/js/editor/css/medium-editor.min.css');
+        Request::getResources()->addBottomStyles('/assets/js/editor/css/themes/default.css');
+        Request::getResources()->addBottomScript('/assets/js/editor/js/medium-editor.min.js');
+        Request::getResources()->addBottomScript('/assets/js/editor.js');
        
         return view(PR_VIEW_DIR . '/post/post-add', ['data' => $data, 'uid' => $uid, 'space' => $space]);
     }
@@ -436,6 +445,11 @@ class PostController extends \MainController
         $data = [
             'h1'    => lang('Edit post')
         ];
+
+        Request::getResources()->addBottomStyles('/assets/js/editor/css/medium-editor.min.css');
+        Request::getResources()->addBottomStyles('/assets/js/editor/css/themes/default.css');
+        Request::getResources()->addBottomScript('/assets/js/editor/js/medium-editor.min.js');
+        Request::getResources()->addBottomScript('/assets/js/editor.js');
 
         // title, description
         Base::Meta(lang('Edit post'), lang('Edit post'), $other = false);

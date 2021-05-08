@@ -12,7 +12,7 @@
                        <div class="score"><?= $counter; ?>.</div> 
                     </div>
                     <div class="post-telo">
-                        <a class="u-url" href="/post/<?= $fav['post_slug']; ?>">
+                        <a class="u-url" href="/post/<?= $fav['post_id']; ?>/<?= $fav['post_slug']; ?>">
                             <h3 class="titl"><?= $fav['post_title']; ?></h3>
                         </a>
                         
@@ -31,7 +31,7 @@
                             <?php if($fav['post_answers'] !=0) { ?> 
                                 <span class="otst"> | </span>
                                 
-                             <a href="/post/<?= $fav['post_slug']; ?>">    
+                             <a href="/post/<?= $fav['post_id']; ?>/<?= $fav['post_slug']; ?>">    
                                 комментариев (<?= $fav['post_answers'] ?>) 
                             </a>     
                             <?php } ?>
@@ -50,7 +50,7 @@
                        <div class="score"><?= $counter; ?>.</div> 
                     </div>
                     <div class="post-telo fav-answ">
-                        <a class="u-url"  href="/post/<?= $fav['post']['post_slug']; ?>#answ_<?= $fav['answer_id']; ?>">
+                        <a class="u-url"  href="/post/<?= $fav['post']['post_id']; ?>/<?= $fav['post']['post_slug']; ?>#answ_<?= $fav['answer_id']; ?>">
                            <h3 class="titl"><?= $fav['post']['post_title']; ?></h3>
                         </a>
                         <div class="space-color space_<?= $fav['post']['space_color'] ?>"></div>

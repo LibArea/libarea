@@ -22,7 +22,10 @@ class FlowController extends \MainController
         $user_id    = $account ? $account['user_id'] : 0;
         
         Base::Meta(lang('Flow'), lang('Flow'), $other = false);
-
+    
+        Request::getResources()->addBottomStyles('/assets/css/flow.css');
+        Request::getResources()->addBottomScript('/assets/js/flow.js');
+        
         $uid  = Base::getUid();
         $data = [
             'h1'            => lang('Flow'),

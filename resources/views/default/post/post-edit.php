@@ -70,6 +70,4 @@
         <br>
     </div>
 </main>
-<script src="/assets/js/editor/js/medium-editor.js"></script>
-<script src="/assets/js/editor.js"></script> 
 <?php include TEMPLATE_DIR . '/footer.php'; ?> 
