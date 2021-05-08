@@ -126,11 +126,12 @@ class AnswerModel extends \MainModel
     }
     
     // Редактируем ответ
-    public static function AnswerEdit($comm_id, $comment)
+    public static function AnswerEdit($comm_id, $answer)
     {
         $data = date("Y-m-d H:i:s"); 
-        return  XD::update(['answers'])->set(['answer_content'], '=', $comment, ',', ['answer_modified'], '=', $data)
-        ->where(['answer_id'], '=', $comm_id)->run(); 
+        
+        return  XD::update(['answers'])->set(['answer_content'], '=', $answer, ',', ['answer_modified'], '=', $data)
+        ->where(['answer_id'], '=', $comm_id)->run();
     }
     
     // Частота размещения ответа участника 

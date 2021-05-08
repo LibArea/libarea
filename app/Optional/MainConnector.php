@@ -22,9 +22,10 @@ class MainConnector implements Connector
             "App\Commands\*" => "app/Commands/",
             // ... or, if a specific class is added,
             "UrlRecord"     => "app/Libraries/UrlRecord/UrlRecord.php",
+            "Parsedown"     => "app/Libraries/Parsedown/Parsedown.php", 
             "ImageUpload"   => "app/Libraries/ImageUpload.php", 
             "Lori\Config"   => "app/Libraries/Config.php",  
-            "Lori\Base"     => "app/Libraries/Base.php",   
+            "Lori\Base"     => "app/Libraries/Base.php",    
             "Phphleb\Imageresizer\SimpleImage"   => "app/Libraries/SimpleImage.php", 
    
             "DB"            => "database/DB.php",  

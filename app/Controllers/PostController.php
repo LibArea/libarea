@@ -11,6 +11,7 @@ use App\Models\VotesPostModel;
 use Phphleb\Imageresizer\SimpleImage;
 use Lori\Config;
 use Lori\Base;
+use Parsedown;
 use UrlRecord;
 
 class PostController extends \MainController
@@ -127,8 +128,11 @@ class PostController extends \MainController
             $post['post_url_full'] = null;
         }
         
+        $Parsedown = new Parsedown(); 
+        $Parsedown->setSafeMode(true); // безопасность
+        
         // Обработает некоторые поля
-        $post['post_content']   = $post['post_content'];
+        $post['post_content']   = $Parsedown->text($post['post_content']);
         $post['post_date']      = Base::ru_date($post['post_date']);
         $post['num_answers']    = Base::ru_num('answ', $post['post_answers_num']); 
         $post['num_comments']   = Base::ru_num('comm', $post['post_comments_num']); 
@@ -156,7 +160,7 @@ class PostController extends \MainController
             }
 
             $row['comm']            = CommentModel::getCommentsAnswer($row['answer_id'], $uid['id']);
-            $row['answer_content']  = $row['answer_content'];
+            $row['answer_content']  = $Parsedown->text($row['answer_content']);
             $row['answer_date']     = Base::ru_date($row['answer_date']);
             $row['favorite_answ']   = AnswerModel::getMyAnswerFavorite($row['answer_id'], $uid['id']);
             $answers[$ind]          = $row;
@@ -172,9 +176,9 @@ class PostController extends \MainController
         $meta_desc  = substr(strip_tags($post['post_content']), 0, 160);
         Base::Meta($post['post_title'], $meta_desc, $other); 
 
-        Request::getResources()->addBottomStyles('/assets/js/editor/css/medium-editor.min.css');
-        Request::getResources()->addBottomStyles('/assets/js/editor/css/themes/default.css');
-        Request::getResources()->addBottomScript('/assets/js/editor/js/medium-editor.min.js');
+        Request::getResources()->addBottomStyles('/assets/js/editor/editor.css');
+        Request::getResources()->addBottomScript('/assets/js/editor/editor.js');
+        Request::getResources()->addBottomScript('/assets/js/editor/marked.js');
         Request::getResources()->addBottomScript('/assets/js/editor.js');
 
         $data = [
@@ -240,9 +244,10 @@ class PostController extends \MainController
        
         // title, description
         Base::Meta(lang('Add post'), lang('Add post'), $other = false); 
-        Request::getResources()->addBottomStyles('/assets/js/editor/css/medium-editor.min.css');
-        Request::getResources()->addBottomStyles('/assets/js/editor/css/themes/default.css');
-        Request::getResources()->addBottomScript('/assets/js/editor/js/medium-editor.min.js');
+        
+        Request::getResources()->addBottomStyles('/assets/js/editor/editor.css');
+        Request::getResources()->addBottomScript('/assets/js/editor/editor.js');
+        Request::getResources()->addBottomScript('/assets/js/editor/marked.js');
         Request::getResources()->addBottomScript('/assets/js/editor.js');
        
         return view(PR_VIEW_DIR . '/post/post-add', ['data' => $data, 'uid' => $uid, 'space' => $space]);
@@ -446,11 +451,11 @@ class PostController extends \MainController
             'h1'    => lang('Edit post')
         ];
 
-        Request::getResources()->addBottomStyles('/assets/js/editor/css/medium-editor.min.css');
-        Request::getResources()->addBottomStyles('/assets/js/editor/css/themes/default.css');
-        Request::getResources()->addBottomScript('/assets/js/editor/js/medium-editor.min.js');
+        Request::getResources()->addBottomStyles('/assets/js/editor/editor.css');
+        Request::getResources()->addBottomScript('/assets/js/editor/editor.js');
+        Request::getResources()->addBottomScript('/assets/js/editor/marked.js');
         Request::getResources()->addBottomScript('/assets/js/editor.js');
-
+        
         // title, description
         Base::Meta(lang('Edit post'), lang('Edit post'), $other = false);
 

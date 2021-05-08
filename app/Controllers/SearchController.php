@@ -27,9 +27,12 @@ class SearchController extends \MainController
                     $qa =  SearchModel::getSearch($query);
                 } 
                 
+                $Parsedown = new Parsedown(); 
+                $Parsedown->setSafeMode(true); // безопасность
+                
                 $result = Array();
                 foreach($qa as $ind => $row){
-                    $row['post_content']  = Base::cutWords($row['post_content'], 120, '...');
+                    $row['post_content']  = $Parsedown->line(Base::cutWords($row['post_content'], 120, '...'));
                     $result[$ind]         = $row; 
                 }     
                 

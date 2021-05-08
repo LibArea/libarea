@@ -84,6 +84,20 @@ class InfoController extends \MainController
         return view(PR_VIEW_DIR . '/info/about', ['data' => $data, 'uid' => $uid]);
 	}
 
+    public function markdown()
+	{
+        $uid  = Base::getUid();
+        $data = [
+            'h1'            => lang('Мarkdown'),
+            'canonical'     => Config::get(Config::PARAM_URL) . '/info/markdown',
+        ];
+
+        // title, description
+        Base::Meta(lang('Мarkdown'), lang('markdown-desc'), $other = false);
+
+        return view(PR_VIEW_DIR . '/info/markdown', ['data' => $data, 'uid' => $uid]);
+	}  
+
     public function privacy()
 	{
         $uid  = Base::getUid();

@@ -178,8 +178,8 @@
         <?php } else { ?>
             <br />
             <textarea rows="5" disabled="disabled" placeholder="<?= lang('no-auth-answ'); ?>" name="answer" id="answer"></textarea>
-            <div> 
-                <input type="submit" name="answit" value="<?= lang('Reply'); ?>" class="answer-post" disabled="disabled">
+            <div>
+                Для ответа вы <a href="/login">можете авторизироваться</a>.
             </div> 
     <?php } ?>
 <?php }  ?>    

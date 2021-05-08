@@ -235,6 +235,10 @@ class Base
         $len    = (mb_strlen($text) > $maxlen)? mb_strripos(mb_substr($text, 0, $maxlen), ' ') : $maxlen;
         $cutStr = mb_substr($text, 0, $len);
         $content = (mb_strlen($text) > $maxlen)? $cutStr. '' : $cutStr;
+        
+        $code_match = array('>', '*', '!', '[ADD:');
+        $content = str_replace($code_match, '', $content);
+        
         return $content;
     } 
     
@@ -337,8 +341,8 @@ class Base
             "username" => $usernamebot,
           
             // URL Аватара.
-            // Можно использовать аватар загруженный при создании бота, или указанный ниже
-            //"avatar_url" => "https://ru.gravatar.com/userimage/28503754/11685ddca84f571d.jpg?size=512",
+            // Можно использовать аватар загруженный при создании бота
+            //"avatar_url" => "",
 
             // Преобразование текста в речь
             "tts" => false,

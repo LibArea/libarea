@@ -5,6 +5,7 @@ use Hleb\Constructor\Handlers\Request;
 use App\Models\UserModel;
 use App\Models\SpaceModel;
 use App\Models\AdminModel;
+use Parsedown;
 use Lori\Base;
 
 class AdminController extends \MainController
@@ -67,9 +68,12 @@ class AdminController extends \MainController
          
         $comm = AdminModel::getCommentsDell();
 
+        $Parsedown = new Parsedown(); 
+        $Parsedown->setSafeMode(true); // безопасность
+
         $result = Array();
         foreach($comm  as $ind => $row){
-            $row['content'] = $row['comment_content'];
+            $row['content'] = $Parsedown->text($row['comment_content']);
             $row['date']    = Base::ru_date($row['comment_date']);
             $result[$ind]   = $row;
         }

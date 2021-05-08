@@ -45,7 +45,7 @@
                             </div>
                            
                             <div class="answ-telo-body">
-                                <?= $answ['answers_content']; ?> 
+                                <?= $answ['answer_content']; ?> 
                             </div>
                         </div>
                     </div>

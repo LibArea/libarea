@@ -69,7 +69,7 @@
                         
                         <?php if($uid['id'] == $answ['answer_user_id'] || $uid['trust_level'] == 5) { ?>
                             <span id="answ_edit" class="answ_add_link">
-                                <a data-answ_id="<?= $answ['answer_id']; ?>" class="editansw"><?= lang('Edit'); ?></a>
+                                 <a class="editansw" href="/post/<?= $post['post_id'] ?>/answ/<?= $answ['answer_id']; ?>"><?= lang('Edit'); ?></a>
                             </span>
                         <?php } ?>
             

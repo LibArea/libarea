@@ -173,9 +173,6 @@
                 <p class="no-answer">Вопрос закрыт...</p>
             <?php } ?>
         <?php } ?>        
-
-         
-       
     </article>
 </main>
 <aside class="sidebar"> 
