@@ -1,8 +1,7 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<?php include TEMPLATE_DIR . '/_block/left-menu.php'; ?>
-<?php if ($space_info['space_is_delete'] == 0) { ?>
-<main>
-    <div class="space-box">
+</div>
+<div class="space-box space_<?= $space_info['space_id']; ?>">
+    <div class="wrap">
          <?php if(!$uid['id']) { ?> 
                 <div class="right"> 
                     <a href="/login"><div class="hide-space-id yes-space">+ <?= lang('Read'); ?></div></a>
@@ -35,17 +34,14 @@
             — <?= $space_info['space_date']; ?>
             
             </div> 
-
-            <?php if($uid['trust_level'] == 5 || $space_info['space_user_id'] == $uid['id']) { ?>
-                <div class="edit-space right">
-                    <a class="edit-space" href="/space/<?= $space_info['space_slug']; ?>/edit">
-                        <?= lang('Edit'); ?>
-                    </a>
-                </div> 
-            <?php } ?>
         </div>
-    </div>
-   
+    </div>    
+</div>
+<div class="wrap">
+
+<?php include TEMPLATE_DIR . '/_block/left-menu.php'; ?>
+<?php if ($space_info['space_is_delete'] == 0) { ?>
+<main>
     <ul class="nav-tabs">
         <?php if($type == 'feed') { ?>
             <li class="active">
@@ -134,7 +130,15 @@
     </main>
 
     <aside class="sidebar">
-        <div class="space-text">
+        <?php if($uid['trust_level'] == 5 || $space_info['space_user_id'] == $uid['id']) { ?>
+            <div class="edit-space right">
+                <a class="edit-space" href="/space/<?= $space_info['space_slug']; ?>/edit">
+                    <?= lang('Edit'); ?>
+                </a>
+            </div> 
+        <?php } ?>
+            
+        <div class="space-text-sb">
             <div class="space-text-bar">
                 <?= $space_info['space_text']; ?>
             </div>

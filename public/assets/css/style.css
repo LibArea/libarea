@@ -44,6 +44,9 @@ header {
   border-bottom: 1px solid #eee;
   margin: 0 0 1rem 0;
 } 
+header.space {
+  margin: 0; 
+}
 body > main {
   padding: 0.4rem 0.4rem;
 }
@@ -695,7 +698,7 @@ h1.space a {
   margin: 15px 0 0 4px;
 }
 .space-tags a.avtive {
-  color: #333;
+  color: #e7672e;
 }
 .space-tags .menu-m {
   margin: 0 0 5px 0;
@@ -777,27 +780,41 @@ a.space-u.tag-u {
   color: #888;
 }   
 .space-box {
-  margin-bottom: 20px;  
+  margin-bottom: 10px;
+  margin-top: -0.5em;  
 } 
+.space-box .wrap {
+  padding: 0;
+}
+.space-box .yes-space, .space-box .no-space{
+    margin-top: 21px;
+}
 .space-text {
-  color: #666;
+  color: #fff;
   font-size: 13px;
-  padding: 5px;
+  padding: 10px 6px 9px 6px;
+  overflow: hidden;
+}
+.space-text a {
+  color: #fff;
 }
 .space-text h1 {
   padding: 0;
   margin: 0;
   font-size: 21px;
   font-weight: 400;
-  margin-top: -4px;
-  color: #333;
+  color: #fff;
 }
 .space-box-img, .space-img {
   float: left;
   width: 47px;
   height: 47px;
+  border: 2px solid #fff;
   margin: 0 15px 0 0;
-  border-radius: 2px;
+}
+.space-text-sb {
+  clear: both;
+  padding: 30px 0;
 }
 .space-telo {
   margin-bottom: 25px;
@@ -817,9 +834,9 @@ a.space-u.tag-u {
 h1 span{
   vertical-align: middle;
 }
-.edit-space {
+a.edit-space {
   text-align: center;
-  margin-bottom: 15px;
+  margin: 15px 0;
   background: #fcf8e4;
   color: #444;
   padding: 2px 6px;
@@ -992,7 +1009,7 @@ ol.comment-telo {
 .otst {
   margin: 0 1px;
 }
-.cm_addentry, .comments .cm_add_link, .comm-deletes, .user-comm-fav, .user-answ-fav, .answ_addentry, .answers .answ_add_link, .answers .cm_add_link, .answ-deletes {
+.cm_addentry, .comments .cm_add_link, .comm-deletes, .user-comm-fav, .user-answ-fav, .answers .answ_add_link, .answers .cm_add_link, .answ-deletes {
   margin-left: 35px;
 }
 .addcomm, .delcomm, .editcomm, .favcomm, .addansw, .delansw, .editansw, .addcomm_re {

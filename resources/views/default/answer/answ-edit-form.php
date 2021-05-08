@@ -1,6 +1,6 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<main>
-
+<main class="w-100">
+<script src="/assets/js/jquery.min.js"></script>
     <h1><?= $data['h1']; ?>: 
         <a href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
             <?= $post['post_title']; ?>
@@ -11,7 +11,7 @@
          
             <form id="add_answ" action="/answer/edit" accept-charset="UTF-8" method="post">
             <?= csrf_field() ?>
-                <textarea rows="5" name="answer" class="editable" id="answer"><?= $data['answer_content']; ?></textarea>
+                <textarea rows="5" name="answer" id="answer_100"><?= $data['answer_content']; ?></textarea>
                 <div> 
                     <input type="hidden" name="post_id" id="post_id" value="<?= $data['post_id']; ?>">
                     <input type="hidden" name="answ_id" id="answ_id" value="<?= $data['answ_id']; ?>">

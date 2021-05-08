@@ -32,7 +32,7 @@ class AnswerController extends \MainController
         
         $result = Array();
         foreach($answ  as $ind => $row){
-            $row['answers_content'] = $Parsedown->text($row['answer_content']);
+            $row['answer_content']  = $Parsedown->text($row['answer_content']);
             $row['date']            = Base::ru_date($row['answer_date']);
             // N+1 - перенести в запрос
             $row['answ_vote_status'] = VotesAnswerModel::getVoteStatus($row['answer_id'], $user_id);
@@ -153,9 +153,8 @@ class AnswerController extends \MainController
         
         Base::Meta(lang('Edit answer'), lang('Edit answer'), $other = false);
          
-        Request::getResources()->addBottomStyles('/assets/js/editor/editor.css');
-        Request::getResources()->addBottomScript('/assets/js/editor/editor.js');
-        Request::getResources()->addBottomScript('/assets/js/editor/marked.js');
+        Request::getResources()->addBottomStyles('/assets/js/md/dist/mdeditor.css');  
+        Request::getResources()->addBottomScript('/assets/js/md/dist/mdeditor.min.js');
         Request::getResources()->addBottomScript('/assets/js/editor.js');
         
         return view(PR_VIEW_DIR . '/answer/answ-edit-form', ['data' => $data, 'uid' => $uid, 'post' => $post]);

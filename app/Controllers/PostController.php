@@ -176,13 +176,12 @@ class PostController extends \MainController
         $meta_desc  = substr(strip_tags($post['post_content']), 0, 160);
         Base::Meta($post['post_title'], $meta_desc, $other); 
 
-        Request::getResources()->addBottomStyles('/assets/js/editor/editor.css');
-        Request::getResources()->addBottomScript('/assets/js/editor/editor.js');
-        Request::getResources()->addBottomScript('/assets/js/editor/marked.js');
+        Request::getResources()->addBottomStyles('/assets/js/md/mdeditor.css');  
+        Request::getResources()->addBottomScript('/assets/js/md/mdeditor.min.js');
         Request::getResources()->addBottomScript('/assets/js/editor.js');
 
         $data = [
-            'h1'        => '',
+            'h1'        => lang('Post'),
             'canonical' => '/post/' . $post['post_id'] . '/' . $post['post_slug'],
         ]; 
         
@@ -245,9 +244,8 @@ class PostController extends \MainController
         // title, description
         Base::Meta(lang('Add post'), lang('Add post'), $other = false); 
         
-        Request::getResources()->addBottomStyles('/assets/js/editor/editor.css');
-        Request::getResources()->addBottomScript('/assets/js/editor/editor.js');
-        Request::getResources()->addBottomScript('/assets/js/editor/marked.js');
+        Request::getResources()->addBottomStyles('/assets/js/md/dist/mdeditor.css');  
+        Request::getResources()->addBottomScript('/assets/js/md/dist/mdeditor.min.js');
         Request::getResources()->addBottomScript('/assets/js/editor.js');
        
         return view(PR_VIEW_DIR . '/post/post-add', ['data' => $data, 'uid' => $uid, 'space' => $space]);
@@ -451,9 +449,8 @@ class PostController extends \MainController
             'h1'    => lang('Edit post')
         ];
 
-        Request::getResources()->addBottomStyles('/assets/js/editor/editor.css');
-        Request::getResources()->addBottomScript('/assets/js/editor/editor.js');
-        Request::getResources()->addBottomScript('/assets/js/editor/marked.js');
+        Request::getResources()->addBottomStyles('/assets/js/md/dist/mdeditor.css');  
+        Request::getResources()->addBottomScript('/assets/js/md/dist/mdeditor.min.js');
         Request::getResources()->addBottomScript('/assets/js/editor.js');
         
         // title, description
