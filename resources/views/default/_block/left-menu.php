@@ -46,6 +46,9 @@
             <?php foreach ($space_bar as  $sig) { ?>
                 <a class="bar-space-telo" href="/s/<?= $sig['space_slug']; ?>" title="<?= $sig['space_name']; ?>">
                     <img src="/uploads/space/small/<?= $sig['space_img']; ?>" alt="<?= $sig['space_name']; ?>">
+                    <?php if($sig['space_user_id'] == $uid['id']) { ?>
+                        <div class="my_space"></div>
+                    <?php } ?>
                     <span class="bar-name"><?= $sig['space_name']; ?></span>
                 </a>
             <?php } ?>

@@ -1,5 +1,7 @@
 # WIPBICTBF : Work in progress but it's close to be finished
 
+https://github.com/Grafikart/JS-Markdown-Editor
+
 ![The result](screenshot.jpg)
 
 [DEMO](http://rawgit.com/Grafikart/JS-Markdown-Editor/master/dist/demo.html)

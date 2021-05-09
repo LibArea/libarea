@@ -44,7 +44,8 @@
                 <div class="boxline">
                     <br />
                     <label for="post_content"><?= lang('Text'); ?></label>
-                    <textarea class="add" name="space_text"><?= $space['space_text']; ?></textarea>
+                    <br>
+                    <textarea class="add" id="answer_100" name="space_text"><?= $space['space_text']; ?></textarea>
                 </div>
                 <div class="boxline">
                 <label for="space_img">

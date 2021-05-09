@@ -1,6 +1,0 @@
-node_modules
-.idea
-app/images
-.sass-cache
-app/scripts/bower_components
-.tmp

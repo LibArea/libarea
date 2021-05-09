@@ -130,6 +130,10 @@
     </main>
 
     <aside class="sidebar">
+        <?php if($space_info['space_id'] != 1) { ?>
+            Читают <?= $space_info['users']; ?>
+        <?php } ?>
+    
         <?php if($uid['trust_level'] == 5 || $space_info['space_user_id'] == $uid['id']) { ?>
             <div class="edit-space right">
                 <a class="edit-space" href="/space/<?= $space_info['space_slug']; ?>/edit">
@@ -139,7 +143,7 @@
         <?php } ?>
             
         <div class="space-text-sb">
-            <div class="space-text-bar">
+            <div class="space-text-bar"> 
                 <?= $space_info['space_text']; ?>
             </div>
         </div>

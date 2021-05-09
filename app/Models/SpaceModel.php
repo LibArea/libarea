@@ -45,6 +45,14 @@ class SpaceModel extends \MainModel
         return XD::select('*')->from(['space'])->where(['space_user_id'], '=', $user_id)->getSelect();
     }
 
+    // Количество читающих
+    public static function numSpaceSubscribers($space_id)
+    {
+        $result = XD::select('*')->from(['space_signed'])->where(['signed_space_id'], '=', $space_id)->getSelect();
+       
+        return count($result);
+    } 
+
     // Списки постов по пространству
     public static function getSpacePosts($space_id, $user_id, $space_tags_id, $type)
     {

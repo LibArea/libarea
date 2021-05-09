@@ -9,7 +9,9 @@
             <div class="space-telo">
             
                 <img class="space-img" alt="<?= $sp['space_name']; ?>" src="/uploads/space/<?= $sp['space_img'] ?>">
-            
+                    <?php if($sp['space_user_id'] == $uid['id']) { ?>
+                        <div class="my_space all"></div>
+                    <?php } ?>
                 <span class="space-name"> 
                     <div class="space-color space_<?= $sp['space_color'] ?>"></div>
                     <a title="<?= $sp['space_name']; ?>" class="space-s" href="/s/<?= $sp['space_slug']; ?>">
@@ -18,6 +20,10 @@
                 </span> 
                 <?php if($sp['space_type'] == 1) { ?>
                      <small><span class="red">— <?= lang('official'); ?></span></small> 
+                <?php } ?>
+                
+                <?php if($sp['space_id'] != 1) { ?>
+                    <sup>+ <?= $sp['users'] ?></sup>
                 <?php } ?>
 
                 <?php if(!$uid['id']) { ?> 

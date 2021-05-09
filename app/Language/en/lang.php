@@ -55,6 +55,9 @@ return [
     'top-desc'          => 'List of popular posts in the community (by number of responses)',
     'space-feed-title'  => 'Feed of posts by space',
     'space-top-title'   => 'Popular posts by Space',
+    'all-space-desc'    => 'All community spaces. Subscribe, official spaces, number of participants',
+    'tags-add-yes'      => 'Tag added successfully',
+    'tags-edit-yes'     => 'Label changed successfully',
     
     /* For notification and chat */
     'add_comment'       => 'added a comment',

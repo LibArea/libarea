@@ -126,7 +126,7 @@ class UserModel extends \MainModel
         return $query->getSelectOne();
     }
     
-   // Количество постов на странице профиля
+    // Количество постов на странице профиля
     public static function getUsersPostsNum($id)
     {
         $q = XD::select('*')->from(['posts']);

@@ -2,18 +2,20 @@
   display: flex;
 }
 .add-flow {
-  bottom: 30px;
+  bottom: 5px;
   position: fixed;
   width: 60%;
+  background: #fff;
+  padding: 5px;
+  border: 1px solid #ddd;
 }
 textarea {
-  width: 70%;
+  width: 85%;
 }
 .add-flow-butt {
   margin: 10px;
 }
 .flow-telo {
-  margin: 0 0 10px 0;
   max-width: 650px;
 }
 aside#sidebar {

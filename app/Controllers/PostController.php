@@ -34,7 +34,7 @@ class PostController extends \MainController
         }
 
         $result = Array();
-        foreach($posts as $ind => $row){
+        foreach($posts as $ind => $row) {
             
             if(Base::getStrlen($row['post_url']) > 6) {
                 $parse = parse_url($row['post_url']);
@@ -52,7 +52,7 @@ class PostController extends \MainController
         $space_signed_bar   = SpaceModel::getSpaceUser($uid['id']);
  
         $result_comm = Array();
-        foreach($latest_answers as $ind => $row){
+        foreach($latest_answers as $ind => $row) {
             $row['answer_content']      = Base::cutWords($row['answer_content'], 81);
             $row['answer_date']         = Base::ru_date($row['answer_date']);
             $result_comm[$ind]          = $row;
@@ -153,7 +153,7 @@ class PostController extends \MainController
         }
 
         $answers = Array();
-        foreach($post_answers as $ind => $row){
+        foreach($post_answers as $ind => $row) {
             
             if(strtotime($row['answer_modified']) < strtotime($row['answer_date'])) {
                 $row['edit'] = 1;
@@ -244,8 +244,8 @@ class PostController extends \MainController
         // title, description
         Base::Meta(lang('Add post'), lang('Add post'), $other = false); 
         
-        Request::getResources()->addBottomStyles('/assets/js/md/dist/mdeditor.css');  
-        Request::getResources()->addBottomScript('/assets/js/md/dist/mdeditor.min.js');
+        Request::getResources()->addBottomStyles('/assets/js/md/mdeditor.css');  
+        Request::getResources()->addBottomScript('/assets/js/md/mdeditor.min.js');
         Request::getResources()->addBottomScript('/assets/js/editor.js');
        
         return view(PR_VIEW_DIR . '/post/post-add', ['data' => $data, 'uid' => $uid, 'space' => $space]);
@@ -272,24 +272,21 @@ class PostController extends \MainController
         $tag_id     = \Request::getPost('tag_id');
         
         // Проверяем длину title
-        if (Base::getStrlen($post_title) < 6 || Base::getStrlen($post_title) > 260)
-        {
+        if (Base::getStrlen($post_title) < 6 || Base::getStrlen($post_title) > 260) {
             Base::addMsg('Длина заголовка должна быть от 6 до 260 знаков', 'error');
             redirect('/post/add');
             return true;
         }
         
         // Проверяем длину тела
-        if (Base::getStrlen($post_content) < 6 || Base::getStrlen($post_content) > 3500)
-        {
-            Base::addMsg('Длина поста должна быть от 6 до 3500 знаков', 'error');
+        if (Base::getStrlen($post_content) < 6 || Base::getStrlen($post_content) > 10000) {
+            Base::addMsg('Длина поста должна быть от 6 до 10000 знаков', 'error');
             redirect('/post/add');
             return true;
         }
         
         // Проверяем выбор пространства
-        if ($space_id == '')
-        {
+        if ($space_id == '') {
             Base::addMsg('Выберите пространство', 'error');
             redirect('/post/add');
             return true;
@@ -449,8 +446,8 @@ class PostController extends \MainController
             'h1'    => lang('Edit post')
         ];
 
-        Request::getResources()->addBottomStyles('/assets/js/md/dist/mdeditor.css');  
-        Request::getResources()->addBottomScript('/assets/js/md/dist/mdeditor.min.js');
+        Request::getResources()->addBottomStyles('/assets/js/md/mdeditor.css');  
+        Request::getResources()->addBottomScript('/assets/js/md/mdeditor.min.js');
         Request::getResources()->addBottomScript('/assets/js/editor.js');
         
         // title, description
@@ -488,17 +485,15 @@ class PostController extends \MainController
         }
         
         // Проверяем длину title
-        if (Base::getStrlen($post_title) < 6 || Base::getStrlen($post_title) > 320)
-        {
+        if (Base::getStrlen($post_title) < 6 || Base::getStrlen($post_title) > 320) {
             Base::addMsg('Длина заголовка должна быть от 6 до 320 знаков', 'error');
             redirect('/post/edit' .$post_id);
             return true;
         }
         
         // Проверяем длину тела
-        if (Base::getStrlen($post_content) < 6 || Base::getStrlen($post_content) > 3500)
-        {
-            Base::addMsg('Длина заголовка должна быть от 6 до 2520 знаков', 'error');
+        if (Base::getStrlen($post_content) < 6 || Base::getStrlen($post_content) > 10000) {
+            Base::addMsg('Длина заголовка должна быть от 6 до 10000 знаков', 'error');
             redirect('/post/edit/' .$post_id);
             return true;
         }
@@ -590,9 +585,11 @@ class PostController extends \MainController
             return false;
         }
         
-        $post = $post['post_content'];
+        $Parsedown = new Parsedown(); 
+        $Parsedown->setSafeMode(true); // безопасность
+        
+        $post = $Parsedown->text($post['post_content']);
 
         return view(PR_VIEW_DIR . '/post/postcode', ['post_content' => $post]);
     }
-  
 }

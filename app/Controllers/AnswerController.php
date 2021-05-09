@@ -153,8 +153,8 @@ class AnswerController extends \MainController
         
         Base::Meta(lang('Edit answer'), lang('Edit answer'), $other = false);
          
-        Request::getResources()->addBottomStyles('/assets/js/md/dist/mdeditor.css');  
-        Request::getResources()->addBottomScript('/assets/js/md/dist/mdeditor.min.js');
+        Request::getResources()->addBottomStyles('/assets/js/md/mdeditor.css');  
+        Request::getResources()->addBottomScript('/assets/js/md/mdeditor.min.js');
         Request::getResources()->addBottomScript('/assets/js/editor.js');
         
         return view(PR_VIEW_DIR . '/answer/answ-edit-form', ['data' => $data, 'uid' => $uid, 'post' => $post]);

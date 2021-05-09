@@ -462,24 +462,18 @@ a.login, a.add-space {
   color: #ea6f5a;
 }
 
-
-.yes-space {
-background: #f0f0df;
-background-color: rgb(240, 240, 223);
-color: #fff;
-padding: 5px 10px;
-text-align: center;
-background-color: #42c02e;
-border-radius: 20px; 
-}
-.no-space {
+.no-space, .yes-space {
   background: #f1f1f1;
   color: #666;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 20px; 
   padding: 5px 10px;
   text-align: center;
 }
+.yes-space {
+  background: #f4d85d;
+  color: #333;
+} 
  
 /* Диалог */
 .alert-danger {
@@ -685,6 +679,19 @@ img.thumb {
 }
 
 /* Пространства */
+.my_space {
+  background: #e7672e;
+  width: 5px;
+  height: 5px;
+  position: absolute;
+  border: 1px solid #fff;
+  left: 13px;
+  top: 6px;
+}
+.my_space.all {
+  left: 39px;
+  top: 5px;
+}
 h1.space {
   font-size: 16px;
   margin: 0 0 0 67px;
@@ -814,10 +821,11 @@ a.space-u.tag-u {
 }
 .space-text-sb {
   clear: both;
-  padding: 30px 0;
+  padding: 10px 0;
 }
 .space-telo {
   margin-bottom: 25px;
+  position: relative;
 }
 .space-no-user {
   background: #f0f0df;
