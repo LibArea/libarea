@@ -21,7 +21,7 @@ class SpaceController extends \MainController
         $count_space    = count($sp);
 
         $result = Array();
-        foreach($space as $ind => $row){
+        foreach($space as $ind => $row) {
             $row['users']   = SpaceModel::numSpaceSubscribers($row['space_id']);
             $result[$ind]   = $row;
         }  
@@ -100,6 +100,10 @@ class SpaceController extends \MainController
         $uid    = Base::getUid();
         $slug   = \Request::get('slug');
         $space  = SpaceModel::getSpaceInfo($slug);
+
+        if(!$space){
+            redirect('/');
+        }
 
         // Или персонал или автор
         if ($uid['trust_level'] != 5 && $space['space_user_id'] != $uid['id']) {
@@ -197,24 +201,20 @@ class SpaceController extends \MainController
         $space_tl       = \Request::getPostInt('space_tl');
      
         if (!preg_match('/^[a-zA-Z0-9]+$/u', $space_slug)) {
-            Base::addMsg('В URL можно использовать только латиницу, цифры', 'error');
+            Base::addMsg(lang('url-latin'), 'error');
             redirect('/space/add');
         }
         
-        // Проверяем длину
         $redirect   = '/space/add';
-        $txt        = 'Длина названия должна быть от 6 до 20 знаков';
-        Base::Limits($space_name, '6', '20', $txt, $redirect);
-  
-        $txt        = 'URL должно быть от 3 до ~ 15 символов';
-        Base::Limits($space_slug, '4', '15', $txt, $redirect);
+        Base::Limits($space_name, lang('titles'), '4', '20', $redirect);
+        Base::Limits($space_slug, 'slug (URL)', '4', '10', $redirect);
         
         if (preg_match('/\s/', $space_slug) || strpos($space_slug,' ')) {
-            Base::addMsg('В URL не допускаются пробелы', 'error');
+            Base::addMsg(lang('url-gaps'), 'error');
             redirect('/space/add');
         }
         if (SpaceModel::getSpaceInfo($space_slug)) {
-            Base::addMsg('Такой URL пространства уже есть', 'error');
+            Base::addMsg(lang('url-already-exists'), 'error');
             redirect('/space/add');
         }
         
@@ -242,7 +242,7 @@ class SpaceController extends \MainController
         // Добавляем пространство
         SpaceModel::AddSpace($data);
 
-        Base::addMsg('Пространство успешно добавлено', 'success');
+        Base::addMsg(lang('space-add-success'), 'success');
         redirect('/space'); 
     }
     
@@ -258,6 +258,10 @@ class SpaceController extends \MainController
         
         $space = SpaceModel::getSpaceId($space_id);
 
+        if(!$space){
+            redirect('/');
+        }
+
         // Или персонал или владелец
         if ($uid['trust_level'] != 5 && $space['space_user_id'] != $uid['id']) {
             redirect('/');
@@ -267,13 +271,15 @@ class SpaceController extends \MainController
         $space_description  = \Request::getPost('space_description');
         $space_text         = \Request::getPost('space_text');
 
-        // Проверяем длину
         $redirect   = '/space/' . $space['space_slug'] . '/edit';
-        $txt        = 'Длина названия должна быть от 4 до 20 знаков';
-        Base::Limits($space_name, '4', '20', $txt, $redirect);
-  
-        $txt        = 'Длина meta- описания должна быть от 60 до 190 знаков';
-        Base::Limits($space_description, '60', '190', $txt, $redirect);
+        if (!preg_match('/^[a-zA-Z0-9]+$/u', $space_slug)) {
+            Base::addMsg(lang('url-latin'), 'error');
+            redirect($redirect);
+        }
+
+        Base::Limits($space_name, lang('titles'), '4', '20', $redirect);
+        Base::Limits($space_description, 'Meta-', '60', '190', $redirect);
+        Base::Limits($space_slug, 'SLUG', '4', '10', $redirect);
 
         $name     = $_FILES['image']['name'];
         if($name) {
@@ -341,7 +347,7 @@ class SpaceController extends \MainController
 
         if($slug['space_slug'] != $space['space_slug']) {
             if($slug) {
-                Base::addMsg('Такой URL пространства уже есть', 'error');
+                Base::addMsg(lang('url-already-exists'), 'error');
                 redirect('/s/'.$space['space_slug']);
             }
         }
@@ -366,7 +372,7 @@ class SpaceController extends \MainController
         SpaceModel::setSpaceEdit($data);
         
         Base::addMsg(lang('Change saved'), 'success');
-        redirect('/s/' . $data['space_slug']);
+        redirect('/s/' . $space_slug);
     }
     
     // Страница добавления метки (тега) пространства
@@ -427,12 +433,12 @@ class SpaceController extends \MainController
         }
 
         $data = [
-            'h1'         => 'Изменить тэг',
-            'canonical'     => '/***', 
+            'h1'        => lang('Edit tag'),
+            'canonical' => '/***', 
         ];
 
         // title, description
-        Base::Meta('Изменить тэг', 'Изменить тэг', $other = false);
+        Base::Meta(lang('Edit tag'), lang('Edit tag'), $other = false);
 
         return view(PR_VIEW_DIR . '/space/edit-tag', ['data' => $data, 'uid' => $uid, 'tag' => $tag]);
     }
@@ -453,20 +459,10 @@ class SpaceController extends \MainController
             redirect('/');
         }
 
-        // Проверяем длину title
-        if (Base::getStrlen($st_title) < 4 || Base::getStrlen($st_title) > 20) {
-            Base::addMsg('Длина метки должна быть от 4 до 20 знаков', 'error');
-            redirect('/s/' . $space['space_slug'] . '/' . $tag_id . '/edit');
-            return true;
-        }
-        
-        // Проверяем длину описания
-        if (Base::getStrlen($st_desc) < 30 || Base::getStrlen($st_desc) > 180) {
-            Base::addMsg('Длина поста должна быть от 30 до 180 знаков', 'error');
-            redirect('/s/' . $space['space_slug'] . '/' . $tag_id . '/edit');
-            return true;
-        }
-
+        $redirect = '/s/' . $space['space_slug'] . '/' . $tag_id . '/edit';
+        Base::Limits($st_title, lang('titles'), '4', '20', $redirect);
+        Base::Limits($st_desc, lang('descriptions'), '30', '180', $redirect);
+    
         SpaceModel::tagEdit($tag_id, $st_title, $st_desc);
 
         Base::addMsg(lang('tags-edit-yes'), 'success');
@@ -506,20 +502,10 @@ class SpaceController extends \MainController
             redirect('/');
         }
 
-        // Проверяем длину title
-        if (Base::getStrlen($st_title) < 4 || Base::getStrlen($st_title) > 20) {
-            Base::addMsg('Длина метки должна быть от 4 до 20 знаков', 'error');
-            redirect('/space/' . $space['space_slug'] . '/tags/add');
-            return true;
-        }
-  
-        // Проверяем длину описания
-        if (Base::getStrlen($st_desc) < 20 || Base::getStrlen($st_desc) > 180) {
-            Base::addMsg('Длина поста должна быть от 20 до 180 знаков', 'error');
-            redirect('/space/' . $space['space_slug'] . '/tags/add');
-            return true;
-        }
-        
+        $redirect = '/space/' . $space['space_slug'] . '/tags/add';
+        Base::Limits($st_title, lang('titles'), '4', '20', $redirect);
+        Base::Limits($st_desc, lang('descriptions'), '30', '180', $redirect);
+
         // Добавим
         SpaceModel::tagAdd($space['space_id'], $st_title, $st_desc);
         

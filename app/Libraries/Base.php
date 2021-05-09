@@ -219,11 +219,14 @@ class Base
 	}
     
     // Пределы
-    public static function Limits($name, $min, $max, $txt, $redirect)
+    public static function Limits($name, $txt, $min, $max, $redirect)
     {
         if (self::getStrlen($name) < $min || self::getStrlen($name) > $max)
         {
-            self::addMsg($txt, 'error');
+
+            $text = sprintf(lang('text-string-length'), $txt, $min, $max);
+            
+            self::addMsg($text, 'error');
             redirect($redirect);
         }
         return true;

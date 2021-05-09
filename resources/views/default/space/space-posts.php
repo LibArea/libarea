@@ -116,7 +116,11 @@
                         <?php if($post['post_answers_num'] !=0) { ?> 
                             <span class="otst"> | </span>
                             <a class="u-url" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
-                                <?= $post['post_answers_num']; ?>  <?= $post['lang_num_answers']; ?>
+                                <?php if($post['post_type'] ==0) { ?>
+                                    <?= $post['post_answers_num'] + $post['post_comments_num']; ?> коммент...
+                                <?php } else { ?>      
+                                    <?= $post['post_answers_num']; ?>  <?= $post['lang_num_answers']; ?>   
+                                <?php } ?>
                             </a>                                
                         <?php } ?>
                     </div>  

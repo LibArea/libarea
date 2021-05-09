@@ -18,10 +18,10 @@ class SearchController extends \MainController
             if (!empty($query)) 
             { 
                 if (Base::getStrlen($query) < 3) {
-                    Base::addMsg('Слишком короткий поисковый запрос', 'error');
+                    Base::addMsg(lang('Too short'), 'error');
                     redirect('/search');
                 } else if (Base::getStrlen($query) > 128) {
-                    Base::addMsg('Слишком длинный поисковый запрос', 'error');
+                    Base::addMsg(lang('Too long'), 'error');
                     redirect('/search');
                 } else {
                     $qa =  SearchModel::getSearch($query);
@@ -37,7 +37,7 @@ class SearchController extends \MainController
                 }     
                 
             } else {
-                Base::addMsg('Задан пустой поисковый запрос.', 'error');
+                Base::addMsg(lang('Empty request'), 'error');
                 redirect('/search');
             }  
         } else {
@@ -45,7 +45,7 @@ class SearchController extends \MainController
             $result = '';
         }
         
-        Base::Meta(lang('Search'), $meta_desc, $other = false);
+        Base::Meta(lang('Search'), lang('search-desc'), $other = false);
         
         $uid  = Base::getUid();
         $data = [
