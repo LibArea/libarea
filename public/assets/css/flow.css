@@ -48,14 +48,15 @@ aside#sidebar {
 .flow icon {
   margin-right: 1px;  
 }
-.flow-telo.dell{
+.flow-telo.dell {
  display: none;
  background-color: rgb(246, 196, 184);
  padding: 2px 10px 0 10px;
 }
-.flow-telo.dell.block{
+.flow-telo.dell.block {
  display: block;
 }
+
 #content {
   height:450px; 
   overflow: auto; 
