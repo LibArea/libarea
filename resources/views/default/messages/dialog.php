@@ -25,11 +25,11 @@
             <div class="msg-telo<?php if ($val['uid'] == $uid['id']) { ?> class="active"<?php } ?>">
 
                 <?php if ($val['uid'] == $uid['id']) { ?>
-                   Я | <?php echo $val['add_time']; ?>
+                   Я | <?= $val['add_time']; ?>
                 <?php } else { ?>
                     <a href="/u/<?= $val['login']; ?>">
                         <?= $val['login']; ?> 
-                    </a> | <?php echo $val['add_time']; ?>
+                    </a> | <?= $val['add_time']; ?>
                 <?php } ?></a>  
                 <br>
                 

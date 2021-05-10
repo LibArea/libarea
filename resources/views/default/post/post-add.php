@@ -1,7 +1,7 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 <main class="w-100">
 
-    <h1><?php echo $data['h1']; ?></h1>
+    <h1><?= $data['h1']; ?></h1>
 
     <div class="box create">
         <form action="/post/create" method="post">

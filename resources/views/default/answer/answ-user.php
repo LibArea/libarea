@@ -1,6 +1,6 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 <main>
-    <h1 class="top"><?php echo $data['h1']; ?></h1>
+    <h1 class="top"><?= $data['h1']; ?></h1>
 
     <?php if (!empty($answers)) { ?>
 
@@ -18,8 +18,7 @@
                             <img class="ava" alt="<?= $answ['login']; ?>" src="/uploads/avatar/small/<?= $answ['avatar']; ?>">
                             <span class="user"> 
                                 <a href="/u/<?= $answ['login']; ?>"><?= $answ['login']; ?></a> 
-                                
-                                <?php echo $answ['date']; ?>
+                                <?= $answ['date']; ?>
                             </span> 
          
                             <span class="otst"> | </span>
@@ -28,7 +27,7 @@
                             </span>
                         </div>
                         <div class="answ-telo-body">
-                            <?php echo $answ['content']; ?> 
+                            <?= $answ['content']; ?> 
                         </div>
                     </div>
                 </div>  

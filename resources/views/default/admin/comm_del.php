@@ -1,7 +1,7 @@
 <?php include TEMPLATE_DIR . '/admin/header_admin.php'; ?>
 <main class="admin">
     <h1 class="top">
-        <a href="/admin"><?= lang('Admin'); ?></a> / <span class="red"><?php echo $data['h1']; ?></span>
+        <a href="/admin"><?= lang('Admin'); ?></a> / <span class="red"><?= $data['h1']; ?></span>
     </h1>
 
     <div class="telo comments">
@@ -18,15 +18,15 @@
                     
                     <div class="comm-telo">
                         <div class="comm-header">
-                            <img class="ava" src="/uploads/avatar/small/<?php echo $comm['avatar'] ?>">
+                            <img class="ava" src="/uploads/avatar/small/<?= $comm['avatar'] ?>">
                             <span class="user"> 
-                                <a href="/u/<?php echo $comm['login']; ?>"><?php echo $comm['login']; ?></a> 
-                                <?php echo $comm['date']; ?>
+                                <a href="/u/<?= $comm['login']; ?>"><?= $comm['login']; ?></a> 
+                                <?= $comm['date']; ?>
                             </span> 
          
                             <span class="otst"> | </span>
                             <span class="date">  
-                                <a href="/post/<?php echo $comm['post_slug']; ?>"><?php echo $comm['post_title']; ?></a>
+                                <a href="/post/<?= $comm['post_slug']; ?>"><?= $comm['post_title']; ?></a>
                             </span>
                             <span class="otst"> | </span>
                             <span id="cm_dell" class="comm_link">
@@ -34,7 +34,7 @@
                             </span>
                         </div>
                         <div class="comm-telo-body">
-                            <?php echo $comm['content']; ?> 
+                            <?= $comm['content']; ?> 
                         </div>
                     </div>
                 </div>

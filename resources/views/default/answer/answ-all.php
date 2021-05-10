@@ -1,7 +1,7 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 <?php include TEMPLATE_DIR . '/_block/left-menu.php'; ?>
 <main>
-    <h1 class="top"><?php echo $data['h1']; ?></h1>
+    <h1 class="top"><?= $data['h1']; ?></h1>
 
     <div class="telo answers">
         <?php if (!empty($answers)) { ?>

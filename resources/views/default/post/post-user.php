@@ -1,6 +1,6 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 <main>
-    <h1 class="top"><?php echo $data['h1']; ?></h1>
+    <h1 class="top"><?= $data['h1']; ?></h1>
 
     <div class="telo posts">
         <?php if (!empty($posts)) { ?>

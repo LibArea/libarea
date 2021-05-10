@@ -22,22 +22,22 @@
         <?php csrf_field(); ?>
             <div class="boxline">
                 <label for="name"><?= lang('Nickname'); ?></label>
-                <img class="mini ava" src="/uploads/avatar/small/<?php echo $user['avatar']; ?>"> 
-                <?php echo $user['login']; ?>
+                <img class="mini ava" src="/uploads/avatar/small/<?= $user['avatar']; ?>"> 
+                <?= $user['login']; ?>
             </div>
             <div class="boxline">
                 <label for="name">E-mail</label>
-                <?php echo $user['email']; ?>
+                <?= $user['email']; ?>
             </div>
         
             <div class="boxline">
                 <label for="name"><?= lang('Name'); ?></label>
-                <input type="text" class="form-control" name="name" id="name" value="<?php echo $user['name']; ?>">
+                <input type="text" class="form-control" name="name" id="name" value="<?= $user['name']; ?>">
             </div>
            
             <div class="boxline">
                 <label for="about"><?= lang('About me'); ?></label>
-                <textarea type="text" rows="4" class="form-about" name="about" id="about"><?php echo $user['about']; ?></textarea>
+                <textarea type="text" rows="4" class="form-about" name="about" id="about"><?= $user['about']; ?></textarea>
             </div>
            
             <div class="boxline">

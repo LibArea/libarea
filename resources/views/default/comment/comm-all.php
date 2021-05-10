@@ -2,7 +2,7 @@
 <?php include TEMPLATE_DIR . '/_block/left-menu.php'; ?>
 <main>
 
-    <h1 class="top"><?php echo $data['h1']; ?></h1>
+    <h1 class="top"><?= $data['h1']; ?></h1>
 
     <div class="telo comments">
         <?php if (!empty($comments)) { ?>

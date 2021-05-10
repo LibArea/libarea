@@ -2,7 +2,7 @@
 <main class="admin">
     <a class="right" href="/admin/space/add"><?= lang('Add'); ?></a>
     <h1 class="top">
-        <a href="/admin"><?= lang('Admin'); ?></a> / <span class="red"><?php echo $data['h1']; ?></span>
+        <a href="/admin"><?= lang('Admin'); ?></a> / <span class="red"><?= $data['h1']; ?></span>
     </h1>
 
     <div class="space">
