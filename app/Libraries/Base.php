@@ -224,7 +224,7 @@ class Base
         if (self::getStrlen($name) < $min || self::getStrlen($name) > $max)
         {
 
-            $text = sprintf(lang('text-string-length'), $txt, $min, $max);
+            $text = sprintf(lang('text-string-length'), '«'. $txt . '»', $min, $max);
             
             self::addMsg($text, 'error');
             redirect($redirect);

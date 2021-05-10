@@ -142,12 +142,12 @@ class SpaceController extends \MainController
         $tags = SpaceModel::getSpaceTags($space['space_id']);
         
         $data = [
-            'h1'            => 'Метки',
+            'h1'            => lang('Tags'),
             'canonical'     => '/***', 
         ];
 
         // title, description
-        Base::Meta('Метки', 'Метки', $other = false);
+        Base::Meta(lang('Tags'), lang('Tags'), $other = false);
  
         return view(PR_VIEW_DIR . '/space/info-space', ['data' => $data, 'uid' => $uid, 'space' => $space, 'tags' => $tags]);
     }

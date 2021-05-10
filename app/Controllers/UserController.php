@@ -94,21 +94,15 @@ class UserController extends \MainController
         $uid    = Base::getUid();
         $name   = \Request::getPost('name');
         $about  = \Request::getPost('about');
-        
-        if (Base::getStrlen($name) < 4 || Base::getStrlen($name) > 11) {
-          Base::addMsg(lang('name-info-err'), 'error');
-          redirect('/u/' . $uid['login'] . '/setting');
-        }
-   
-        if (Base::getStrlen($about) < 4 || Base::getStrlen($about) > 320) {
-          Base::addMsg(lang('about-info-err'), 'error');
-          redirect('/u/' . $uid['login'] . '/setting');
-        }  
+ 
+        $redirect = '/u/' . $uid['login'] . '/setting';
+        Base::Limits($name, lang('Name'), '4', '11', $redirect);
+        Base::Limits($about, lang('About me'), '4', '320', $redirect);
 
         UserModel::editProfile($uid['login'], $name, $about);
         
         Base::addMsg(lang('Changes saved'), 'success');
-        redirect('/u/' . $uid['login'] . '/setting');
+        redirect($redirect);
     }
     
     // Форма загрузки аватарки
@@ -232,19 +226,20 @@ class UserController extends \MainController
         $password2   = \Request::getPost('password2');
         $password3   = \Request::getPost('password3');
 
+        $redirect = '/u/' . $uid['login'] . '/setting/security';
         if ($password2 != $password3) {
             Base::addMsg(lang('pass-match-err'), 'error');
-            redirect('/u/' . $uid['login'] . '/setting/security');
+            redirect($redirect);
         }
         
         if (substr_count($password2, ' ') > 0) {
             Base::addMsg(lang('pass-gap-err'), 'error');
-            redirect('/u/' . $uid['login'] . '/setting/security');
+            redirect($redirect);
         }
 
         if (Base::getStrlen($password2) < 8 || Base::getStrlen($password2) > 24) {
             Base::addMsg(lang('pass-length-err'), 'error');
-            redirect('/u/' . $uid['login'] . '/setting/security');
+            redirect($redirect);
         }
         
         // Данные участника
