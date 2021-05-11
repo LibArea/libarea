@@ -32,6 +32,10 @@ class Base
             $uid['trust_level'] = $usr['trust_level'];
             $uid['notif']       = NotificationsModel::usersNotification($usr['id']); 
             $uid['avatar']      = $usr['avatar'];
+ 
+            Request::getResources()->addBottomScript('/assets/js/jquery.min.js');
+            Request::getResources()->addBottomScript('/assets/js/app.js');
+            
         } else {
             UserModel::checkCookie();
             

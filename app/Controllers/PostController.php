@@ -271,24 +271,14 @@ class PostController extends \MainController
         $space_id   = \Request::getPost('space_id');
         $tag_id     = \Request::getPost('tag_id');
         
-        // Проверяем длину title
-        if (Base::getStrlen($post_title) < 6 || Base::getStrlen($post_title) > 260) {
-            Base::addMsg('Длина заголовка должна быть от 6 до 260 знаков', 'error');
-            redirect('/post/add');
-            return true;
-        }
-        
-        // Проверяем длину тела
-        if (Base::getStrlen($post_content) < 6 || Base::getStrlen($post_content) > 10000) {
-            Base::addMsg('Длина поста должна быть от 6 до 10000 знаков', 'error');
-            redirect('/post/add');
-            return true;
-        }
+        $redirect = '/post/add';
+        Base::Limits($post_title, lang('Title'), '6', '260', $redirect);
+        Base::Limits($post_content, lang('The post'), '6', '10000', $redirect);
         
         // Проверяем выбор пространства
         if ($space_id == '') {
-            Base::addMsg('Выберите пространство', 'error');
-            redirect('/post/add');
+            Base::addMsg(lang('Select space'), 'error');
+            redirect($redirect);
             return true;
         }
         
@@ -310,7 +300,7 @@ class PostController extends \MainController
         // Добавить условие TL
         $num_post =  PostModel::getPostSpeed($post_user_id);
         if(count($num_post) > 5) {
-            Base::addMsg('Вы исчерпали лимит постов на сегодня', 'error');
+            Base::addMsg(lang('limit-post-day'), 'error');
             redirect('/');
         }
         

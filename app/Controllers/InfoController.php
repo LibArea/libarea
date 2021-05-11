@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers;
+use Hleb\Constructor\Handlers\Request;
 use App\Models\InfoModel;
 use Lori\Config;
 use Lori\Base;
@@ -49,6 +50,9 @@ class InfoController extends \MainController
             'vote_post_num' => $vote_post_num,
             'flow_num'      => $result
         ];
+
+        Request::getResources()->addBottomStyles('/assets/css/info.css');
+        Request::getResources()->addBottomScript('/assets/js/canvas.js');
 
         // title, description
         Base::Meta(lang('Statistics'), lang('stats-desc'), $other = false); 

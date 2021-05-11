@@ -1,7 +1,5 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<link rel="stylesheet" href="/assets/css/info.css"> 
-<script src="/assets/js/canvas.js"></script>
-<div class="w-100">
+<main class="w-100">
     <center>
         <h1><?= $data['h1']; ?></h1>
         <div class="canvas-telo">
@@ -25,31 +23,8 @@
         <div class="bord-3 new-str"></div>
     </center>
     
-    <section class="time-cont">
-        <ol class="time">
-            <li class="-period">
-                <span class="-time">'21</span>
-                <ol class="-vrs">
-                    <li class="-vr"> Разработка сообщества... </li>
-                </ol>
-            </li>
-            <li class="-period">
-                <span class="-time">'21</span>
-                <ol class="-vrs">
-                    <li class="-vr"> Начало работы. Изучаем HLEB. </li>
-                </ol>
-            </li>
-            <li class="-period">
-                <span class="-time">'20</span>
-                <ol class="-vrs">
-                    <li class="-vr"> 
-                        Тестовая запись...
-                    </li>
-                </ol>
-            </li>
-        </ol>
-    </section>
-
+    <br><br>
+    
     <p>Голосов: <br>
     - комментарии <b><?= $data['vote_comm_num']; ?></b> <br> 
     - посты <b><?= $data['vote_post_num']; ?></b></p>
@@ -66,10 +41,6 @@
       "/>
     </svg>
 
-
- 
-
-
     <p><i>В стадии разработки...</i></p>
-</div>
+</main>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

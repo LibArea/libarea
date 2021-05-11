@@ -117,8 +117,8 @@ class UserController extends \MainController
         }
 
         $data = [
-            'h1'            => lang('Change avatar'),
-            'canonical'   => '/***', 
+            'h1'        => lang('Change avatar'),
+            'canonical' => '/***', 
         ];
 
         // title, description
@@ -139,11 +139,11 @@ class UserController extends \MainController
         }
         
         $data = [
-            'h1'            => lang('Change password'),
-            'password'      => '',
-            'password2'     => '',
-            'password3'     => '',
-            'canonical'     => '/***', 
+            'h1'        => lang('Change password'),
+            'password'  => '',
+            'password2' => '',
+            'password3' => '',
+            'canonical' => '/***', 
         ];
 
         // title, description
@@ -162,28 +162,30 @@ class UserController extends \MainController
         $ext      = strtolower(pathinfo($name, PATHINFO_EXTENSION));
         $width_h  = getimagesize($_FILES['image']['tmp_name']);
        
+        $redirect = '/u/' . $uid['login'] . '/setting/avatar';
+       
         $valid =  true;
         if (!in_array($ext, array('jpg','jpeg','png','gif'))) {
             $valid = false;
             Base::addMsg(lang('file-type-not-err'), 'error');
-            redirect('/u/' . $uid['login'] . '/setting/avatar');
+            redirect($redirect);
         }
 
         // Проверка ширины, высоты и размера
         if ($width_h['0'] > 150) {
             $valid = false;
             Base::addMsg('Ширина больше 150 пикселей', 'error');
-            redirect('/u/' . $uid['login'] . '/setting/avatar');
+            redirect($redirect);
         }
         if ($width_h['1'] > 150) {
             $valid = false;
             Base::addMsg('Высота больше 150 пикселей', 'error');
-            redirect('/u/' . $uid['login'] . '/setting/avatar');
+            redirect($redirect);
         }
         if ($size > 50000) {
             $valid = false;
             Base::addMsg('Размер файла превышает допустимый', 'error');
-            redirect('/u/' . $uid['login'] . '/setting/avatar');
+            redirect($redirect);
         }
 
         if ($valid) {
@@ -214,7 +216,7 @@ class UserController extends \MainController
             UserModel::setAvatar($uid['login'], $img);
             
             Base::addMsg(lang('Avatar changed'), 'error');
-            redirect('/u/' . $uid['login'] . '/setting/avatar');
+            redirect($redirect);
         }
     }
     
@@ -248,14 +250,14 @@ class UserController extends \MainController
        
         if (!password_verify($password, $userInfo['password'])) {
             Base::addMsg(lang('old-password-err'), 'error');
-            redirect('/u/' . $uid['login'] . '/setting/security');
+            redirect($redirect);
         }
         
         $newpass = password_hash($password2, PASSWORD_BCRYPT);
         UserModel::editPassword($account['user_id'], $newpass);
 
         Base::addMsg(lang('Password changed'), 'error');
-        redirect('/u/' . $uid['login'] . '/setting');
+        redirect($redirect);
     }
     
     // Страница закладок участника
@@ -363,9 +365,11 @@ class UserController extends \MainController
         
         $invitation_email = \Request::getPost('email');
         
+        $redirect = '/u/' . $uid['login'] . '/invitation';
+        
         if(!filter_var($invitation_email, FILTER_VALIDATE_EMAIL)) {
            Base::addMsg(lang('Invalid') . ' email', 'error');
-           redirect('/u/' . $uid['login'] . '/invitation');
+           redirect($redirect);
         }
         
         $uInfo = UserModel::getUserInfo($invitation_email);
@@ -373,7 +377,7 @@ class UserController extends \MainController
             
             if ($uInfo['email']) {
                 Base::addMsg(lang('user-already'), 'error');
-                redirect('/u/' . $uid['login'] . '/invitation');
+                redirect($redirect);
             }
         } 
         
@@ -381,7 +385,7 @@ class UserController extends \MainController
  
         if($inv_user['invitation_email'] == $invitation_email) {
             Base::addMsg(lang('invate-to-replay'), 'error');
-            redirect('/u/' . $uid['login'] . '/invitation');
+            redirect($redirect);
         }
         
         // + Повторная отправка
@@ -393,7 +397,7 @@ class UserController extends \MainController
         UserModel::addInvitation($uid['id'], $invitation_code, $invitation_email, $add_time, $add_ip);
 
         Base::addMsg(lang('Invite created'), 'success');
-        redirect('/u/' . $uid['login'] . '/invitation'); 
+        redirect($redirect); 
     }
     
 }

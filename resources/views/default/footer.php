@@ -9,10 +9,6 @@
     </div>
 </footer>
 <script async src="/assets/js/common.js"></script>  
-<?php if($uid['id']) { ?>
-    <script src="/assets/js/jquery.min.js"></script>
-    <script src="/assets/js/app.js"></script>
-<?php } ?>
 <?php print getRequestResources()->getBottomStyles(); ?>
 <?php print getRequestResources()->getBottomScripts(); ?> 
 </html> 
