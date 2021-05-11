@@ -18,11 +18,11 @@ https://my.areadev.ru
 
 ### Тестирование
 
-* Корневая папка проекта: public (настройте сервер)
-* Залейте: database/dev.sql
-* Пропишите настройки: database/dbase.config.php
-* Войдите в аккаунт используя данные администратора: `ss@sdf.ru` / `qwer14qwer14`
-* Или участника: `test@test.ru` / `test@test.ru`
+*   Корневая папка проекта: public (настройте сервер)
+*   Залейте: database/dev.sql
+*   Пропишите настройки: database/dbase.config.php
+*   Войдите в аккаунт используя данные администратора: `ss@sdf.ru` / `qwer14qwer14`
+*   Или участника: `test@test.ru` / `test@test.ru`
 
 **ВАЖНО!**
 
@@ -31,17 +31,15 @@ https://my.areadev.ru
 Идеи, минимализм, дизайна был взят из того, что мне нравится:
 
 
-* https://news.ycombinator.com/
-* https://lobste.rs/
-* https://meta.discourse.org/
-* https://discuss.flarum.org/
-* https://tildes.net/
-* https://subreply.com/
+*   https://news.ycombinator.com/
+*   https://lobste.rs/
+*   https://meta.discourse.org/
+*   https://discuss.flarum.org/
+*   https://tildes.net/
+*   https://subreply.com/
 
 ...
 
 #### MIT License
 
-https://github.com/Toxu-ru/AreaDev/blob/main/LICENSE
-
- 
+https://github.com/Toxu-ru/AreaDev/blob/main/LICENSE 

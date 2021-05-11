@@ -136,5 +136,3 @@ Mail::fromArray( $data ) - import from assoc array (fabric)
 Mail::toJSON() - export to JSON
 Mail::fromJSON( $json ) - import from json (fabric)
 ```
-
-
