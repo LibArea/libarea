@@ -19,7 +19,7 @@ body {
 }
 
 /* tables */
-.t-table {  
+.t-table {
   display: table;
   width: 100%;
   border-collapse: collapse;
@@ -64,7 +64,7 @@ input[type="text"] {
 }
 
 .w-30 {
-  width:30px;
+  width: 30px;
 }
 
 .ava {

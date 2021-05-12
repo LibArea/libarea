@@ -38,7 +38,7 @@ body {
   float: right;
 }
 
-.telo-l, 
+.telo-l,
 .telo-r {
   width: 50%;
 }
@@ -67,7 +67,7 @@ body {
 
 .telo a {
   color: #1c7d9d;
-  font-size: 18px;  
+  font-size: 18px;
 }
 
 .telo a:hover {
@@ -75,14 +75,23 @@ body {
 }
 
 @media screen and (max-width: 695px) {
-  .telo { text-align: center;margin-top: 0px; }
-  .telo-404 { font-size: 110px; }
-  .telo-txt-desc { font-size: 16px; }
-  .telo-r  {
-      width: 100%;
-      float: none;
-      clear: both;
-      margin-bottom: 20px;
+  .telo {
+    text-align: center;
+    margin-top: 0px;
   }
-  .telo-l { display: none; }
+  .telo-404 {
+    font-size: 110px;
+  }
+  .telo-txt-desc {
+    font-size: 16px;
+  }
+  .telo-r {
+    width: 100%;
+    float: none;
+    clear: both;
+    margin-bottom: 20px;
+  }
+  .telo-l {
+    display: none;
+  }
 }
