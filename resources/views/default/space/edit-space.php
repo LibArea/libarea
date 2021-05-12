@@ -36,10 +36,10 @@
                     <div class="box_h">Description: 60 - 180 <?= lang('characters'); ?></div>
                     <br />
                 </div>
-                <div class="boxline">
+                <div id="box" class="boxline">
                     <label for="post_content"><?= lang('Color'); ?></label>
-                    <!-- Можно: https://developer.mozilla.org/ru/docs/Web/HTML/Applying_color -->
-                    <?php include TEMPLATE_DIR . '/space/space-color-box.php'; ?>
+                    <input type="color" value="<?= $space['space_color']; ?>" id="colorSpace">
+                    <input type="hidden" name="color" value="" id="color">
                 </div>
                 <div class="boxline">
                     <br />

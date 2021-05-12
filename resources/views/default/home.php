@@ -78,7 +78,6 @@
                             <i class="icon question qa"></i>
                         <?php } ?>
                     </a>
-                    <div class="space-color space_<?= $post['space_color'] ?>"></div>
                     <a class="space-u" href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
                         <?= $post['space_name']; ?>
                     </a>

@@ -226,7 +226,7 @@ class SpaceController extends \MainController
             'space_name'            => $space_name,
             'space_slug'            => $space_slug,
             'space_description'     => '',
-            'space_color'           => 0,
+            'space_color'           => '#56400',
             'space_img'             => 'space_no.png',
             'space_text'            => '',
             'space_date'            => date("Y-m-d H:i:s"),
@@ -340,8 +340,8 @@ class SpaceController extends \MainController
             $space_img = (empty($space['space_img'])) ? '' : $space['space_img'];
         }
         
-        $space_color = \Request::getPost('space_color');
-        $space_color = (empty($space_color)) ? 0 : $space_color;
+        $space_color = \Request::getPost('color');
+        $space_color = empty($space_color) ? $space['space_color'] : $space_color;
         
         $slug = SpaceModel::getSpaceInfo($space_slug);
 

@@ -8,10 +8,12 @@
     <div class="wrap">
         <div class="profile-header">
             <?php if($uid['trust_level'] > 0) { ?>
-                <?php if($uid['login'] != $user['login']) { ?> &nbsp; 
-                    <a class="right pm" href="/u/<?= $user['login']; ?>/mess">
-                        <i class="icon envelope"></i>
-                    </a> 
+                <?php if($uid['login'] != $user['login']) { ?> 
+                    <?php if($uid['trust_level'] >= Lori\Config::get(Lori\Config::PARAM_PM_MAIL)) { ?>
+                        <a class="right pm" href="/u/<?= $user['login']; ?>/mess">
+                            <i class="icon envelope"></i>
+                        </a> 
+                    <?php } ?>
                 <?php } else { ?>
                     <a class="right pm"  href="/u/<?= $uid['login']; ?>/setting">
                         <i class="icon pencil"></i>
@@ -39,33 +41,32 @@
             </div>
 
             <div class="stats">
-                <?php if($data['post_num_user'] != 0) { ?>
-                    <div class="d">
-                        <a title="Всего постов <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/posts">
-                            <?= $data['post_num_user']; ?>
-                        </a>
-                    </div> 
-                    <div>Постов</div>
-                    <br>
-                <?php } ?>
-                <?php if($data['answ_num_user'] != 0) { ?>
-                    <div class="d">
-                        <a title="Всего ответов <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/answers">
-                            <?= $data['answ_num_user']; ?>
-                        </a>
-                    </div> 
-                    <div>Ответов</div>
-                    <br>
-                <?php } ?>
-                <?php if($data['comm_num_user'] != 0) { ?>
-                    <div class="d">
-                        <a title="Все комментарии <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/comments">
-                            <?= $data['comm_num_user']; ?>
-                        </a>
-                    </div>  
-                    <div>Комментариев</div>
-                    <br>
-                <?php } ?>
+                <div class="stat-telo">
+                    <?php if($data['post_num_user'] != 0) { ?>
+                        <div class="d-cont">
+                            <a title="Всего постов <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/posts">
+                                <?= $data['post_num_user']; ?>
+                            </a>
+                        <div>Постов</div>
+                        </div>
+                    <?php } ?>
+                    <?php if($data['answ_num_user'] != 0) { ?>
+                        <div class="d-cont">
+                            <a title="Всего ответов <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/answers">
+                                <?= $data['answ_num_user']; ?>
+                            </a>
+                        <div>Ответов</div>
+                        </div>
+                    <?php } ?>
+                    <?php if($data['comm_num_user'] != 0) { ?>
+                        <div class="d-cont">
+                            <a title="Все комментарии <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/comments">
+                                <?= $data['comm_num_user']; ?>
+                            </a>
+                        <div>Комментариев</div>
+                        </div>
+                    <?php } ?>
+                </div>
             </div>
             
             </center>
@@ -85,31 +86,6 @@
 
             <br>
 
-            <?php if($data['post_num_user'] != 0) { ?>
-                <label class="required">Постов:</label>
-                <span class="d">
-                    <a title="Всего постов <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/posts">
-                        <?= $data['post_num_user']; ?>
-                    </a>
-                </span> <br>
-            <?php } ?>
-            <?php if($data['answ_num_user'] != 0) { ?>
-                <label class="required">Ответов:</label>
-                <span class="d">
-                    <a title="Всего ответов <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/answers">
-                        <?= $data['answ_num_user']; ?>
-                    </a>
-                </span> <br>
-            <?php } ?>
-            <?php if($data['comm_num_user'] != 0) { ?>
-                <label class="required">Комментариев:</label>
-                <span class="d">
-                    <a title="Все комментарии <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/comments">
-                        <?= $data['comm_num_user']; ?>
-                    </a>
-                </span>  <br>
-            <?php } ?>
-            
             <?php if($data['space_user']) { ?>
                 <label class="required"><?= lang('Created by'); ?>:</label>
                 <span class="d">
@@ -119,8 +95,6 @@
                 </span>     
                 <br>
             <?php } ?>
-            
-     
 
             <?php if($user['my_post'] != 0) { ?>
                 <h4><?= lang('Selected Post'); ?>:</h4>

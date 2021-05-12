@@ -67,16 +67,13 @@ class AnswerController extends \MainController
         
         $answer = \Request::getPost('answer');
         
-        if (Base::getStrlen($answer) < 6 || Base::getStrlen($answer) > 1024)
-        {
-            Base::addMsg('Длина ответа должна быть от 6 до 1000 знаков', 'error');
-            redirect('/' . $return_url);
-            return true;
-        }
 
-        $post_id    = \Request::getPostInt('post_id');   // в каком посту ответ
+        $redirect = '/' . $return_url;
+        Base::Limits($answer, lang('Bodies'), '6', '5000', $redirect);
+
+        $post_id    = \Request::getPostInt('post_id');  // в каком посту ответ
         $answer     = $_POST['answer'];                 // не фильтруем
-        $ip         = \Request::getRemoteAddress();      // ip отвечающего 
+        $ip         = \Request::getRemoteAddress();     // ip отвечающего 
         
         // id того, кто отвечает
         $account   = \Request::getSession('account');
@@ -167,9 +164,7 @@ class AnswerController extends \MainController
         $answ_id    = \Request::getPostInt('answ_id');
         $post_id    = \Request::getPostInt('post_id');
         $answer     = $_POST['answer']; // не фильтруем
-        
-      
-     
+
         $post = PostModel::getPostId($post_id);
 
         // Получим относительный url поста для возрата
@@ -186,7 +181,8 @@ class AnswerController extends \MainController
             return true; 
         }
         
-        // $answer = 'test 33 test "><script>alert("cookie: "+document.cookie)</script>,';
+        Base::Limits($answer, lang('Bodies'), '6', '5000', '/' . $url);
+
         // Редактируем комментарий
         AnswerModel::AnswerEdit($answ_id, $answer);
         

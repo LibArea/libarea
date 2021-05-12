@@ -13,7 +13,6 @@
                         <div class="my_space all"></div>
                     <?php } ?>
                 <span class="space-name"> 
-                    <div class="space-color space_<?= $sp['space_color'] ?>"></div>
                     <a title="<?= $sp['space_name']; ?>" class="space-s" href="/s/<?= $sp['space_slug']; ?>">
                         <?= $sp['space_name']; ?>
                     </a> 

@@ -86,6 +86,34 @@ h1.profile {
   border-radius: 50%;
 }
 
+.stats {
+  margin: 0 auto;
+  max-width: 300px;
+  margin-top: 20px;
+}
+
+.stat-telo {
+  display: flex;
+}
+
+.d-cont {
+  width: 100px;
+  text-align: center;
+}
+
+.d-cont a {
+  font-size: 24px;
+  color: #333;
+}
+
+.d-cont a:hover {
+  color: #e7672e;
+}
+
+.d-cont div {
+  font-size: 11px;
+}
+
 @media (max-width: 880px) {
   .profile-telo { margin: 30px 0 0 0; }
   footer { padding-top: 2rem; }

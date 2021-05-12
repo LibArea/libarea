@@ -114,24 +114,28 @@ h1 {
 }
 
 @media (max-width: 720px){
-  .prof-txt { 
+  .prof-txt {
     white-space: nowrap;
     overflow: hidden;
     padding: 5px;
     text-overflow: ellipsis;
-  }	
+  }
+
   .prof-num,
   h1.prof {
     font-size: 2em;
   }
+
   .prof-txt {
     font-size: 1em;
   }
+
   .prof-num-u {
     font-size: 1.2em;
   }
-  .no-mob, 
-  #canvas, 
+
+  .no-mob,
+  #canvas,
   .canvas-telo { 
     display: none;
   }

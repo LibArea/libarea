@@ -80,7 +80,7 @@ class AdminController extends \MainController
         
         $uid  = Base::getUid();
         $data = [
-            'h1'        => lang('Deleted comments'),
+            'h1' => lang('Deleted comments'),
         ]; 
  
         // title, description
@@ -108,7 +108,7 @@ class AdminController extends \MainController
     public function Invitations ()
     {
         // Доступ только персоналу
-        $uid        = Base::getUid();
+        $uid = Base::getUid();
         if ($uid['trust_level'] != 5) {
             redirect('/');
         }  
@@ -149,15 +149,15 @@ class AdminController extends \MainController
     public function Space ()
     {
         // Доступ только персоналу
-        $uid        = Base::getUid();
+        $uid = Base::getUid();
         if ($uid['trust_level'] != 5) {
             redirect('/');
         }  
         
-        $space      = AdminModel::getAdminSpaceAll($uid['id']);
-        
+        $space = AdminModel::getAdminSpaceAll($uid['id']);
+  
         $data = [
-            'h1'    => lang('Space'),
+            'h1' => lang('Space'),
         ]; 
  
         // title, description
@@ -176,7 +176,7 @@ class AdminController extends \MainController
         }  
         
         $data = [
-            'h1'    => lang('Add Space'),
+            'h1' => lang('Add Space'),
         ]; 
  
         // title, description
@@ -214,50 +214,28 @@ class AdminController extends \MainController
         $space_permit   = \Request::getPostInt('permit');
         $meta_desc      = \Request::getPost('space_description');
         $space_text     = \Request::getPost('space_text');  
-        $space_color    = \Request::getPostInt('space_color');
+        $space_color    = \Request::getPostInt('color');
         $space_feed     = \Request::getPostInt('space_feed');
         $space_tl       = \Request::getPostInt('space_tl');
         
+        $redirect = '/admin/space/add';
+
         if (!preg_match('/^[a-zA-Z0-9]+$/u', $space_slug))
         {
             Base::addMsg('В URL можно использовать только латиницу, цифры', 'error');
-            redirect('/admin/space/add');
+            redirect($redirect);
         }
-        if (Base::getStrlen($space_slug) < 4 || Base::getStrlen($space_slug) > 15)
-        {
-          Base::addMsg('URL должно быть от 3 до ~ 15 символов', 'error');
-          redirect('/admin/space/add');
-        }
-        if (preg_match('/\s/', $space_slug) || strpos($space_slug,' '))
-        {
-            Base::addMsg('В URL не допускаются пробелы', 'error');
-            redirect('/admin/space/add');
-        }
+
+        Base::Limits($space_slug, lang('URL'), '6', '20', $redirect);
+
         if (SpaceModel::getSpaceInfo($space_slug)) {
             Base::addMsg('Такой URL пространства уже есть', 'error');
-            redirect('/admin/space/add');
+            redirect($redirect);
         }
  
-        // Проверяем длину названия
-        if (Base::getStrlen($space_name) < 6 || Base::getStrlen($space_name) > 25)
-        {
-            Base::addMsg('Длина названия должна быть от 6 до 25 знаков', 'error');
-            redirect('/admin/space/add');
-        }
-        
-        // Проверяем длину meta
-        if (Base::getStrlen($meta_desc) < 6 || Base::getStrlen($meta_desc) > 325)
-        {
-            Base::addMsg('Длина meta должна быть от 6 до 325 знаков', 'error');
-            redirect('/admin/space/add');
-        } 
-        
-        // Проверяем длину meta
-        if (Base::getStrlen($space_text) < 6 || Base::getStrlen($space_text) > 325)
-        {
-            Base::addMsg('Длина описания для Sidebar должна быть от 6 до 325 знаков', 'error');
-            redirect('/admin/space/add');
-        }
+        Base::Limits($space_name, lang('Title'), '6', '25', $redirect);
+        Base::Limits($meta_desc, lang('Meta-'), '60', '225', $redirect);
+        Base::Limits($space_text, lang('Sidebar-'), '6', '325', $redirect);
         
         $space_permit   = $space_permit == 1 ? 1 : 0;
         $space_feed     = $space_feed == 1 ? 1 : 0;
@@ -268,7 +246,7 @@ class AdminController extends \MainController
             'space_slug'            => $space_slug,
             'space_description'     => $meta_desc,
             'space_color'           => $space_color,
-            'space_img'             => '',
+            'space_img'             => 'space_no.png',
             'space_text'            => $space_text,
             'space_date'            => date("Y-m-d H:i:s"),
             'space_category_id'     => 1,
@@ -277,6 +255,7 @@ class AdminController extends \MainController
             'space_permit_users'    => $space_permit,
             'space_feed'            => $space_feed,
             'space_tl'              => $space_tl,
+            'space_is_delete'       => 0,
         ];
  
         // Добавляем пространство

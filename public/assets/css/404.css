@@ -79,18 +79,22 @@ body {
     text-align: center;
     margin-top: 0px;
   }
+  
   .telo-404 {
     font-size: 110px;
   }
+  
   .telo-txt-desc {
     font-size: 16px;
   }
+  
   .telo-r {
     width: 100%;
     float: none;
     clear: both;
     margin-bottom: 20px;
   }
+  
   .telo-l {
     display: none;
   }

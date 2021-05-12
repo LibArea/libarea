@@ -13,6 +13,8 @@ class Config
     const PARAM_MODE        = "parameters.mode";
     const PARAM_INVITE      = "parameters.invite";
     
+    const PARAM_SEARCH      = "parameters.search";
+
     const PARAM_SITE_OFF    = "parameters.siteoff";
     const PARAM_OFF_TEXT    = "parameters.offtext";
 
@@ -31,6 +33,7 @@ class Config
     const PARAM_ICON_URL    = "parameters.icon_url";
 
     const PARAM_SPACE       = "parameters.space";
+    const PARAM_PM_MAIL     = "parameters.pm_mail";
 
     private static $data = null;
 

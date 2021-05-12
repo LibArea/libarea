@@ -21,6 +21,7 @@ if(hamburger){
     });
 }
 
+// Цвет обложки для профиля
 let colorPicker = document.getElementById("colorPicker");
 if(colorPicker){
     let box = document.getElementById("box");
@@ -34,6 +35,23 @@ if(colorPicker){
 
     colorPicker.addEventListener("change", function(event) {
       color.value = colorPicker.value;
+    }, false);
+}
+
+// Цвета пространств
+let colorSpace = document.getElementById("colorSpace");
+if(colorSpace){
+    let box = document.getElementById("box");
+    let color = document.getElementById("color");
+
+    box.style.borderColor = colorSpace.value;
+
+    colorSpace.addEventListener("input", function(event) {
+      box.style.borderColor = event.target.value;
+    }, false);
+
+    colorSpace.addEventListener("change", function(event) {
+      color.value = colorSpace.value;
     }, false);
 }
 

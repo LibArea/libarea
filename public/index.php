@@ -12,7 +12,8 @@ define('HLEB_PUBLIC_DIR', __DIR__);
 // General headers.
 // Общие заголовки.
 // Content Security Policy
-header("Content-Security-Policy: default-src 'self' https://www.google.com  https://www.gstatic.com; img-src 'self'; object-src 'none'");
+$_SERVER['nonce'] = bin2hex(random_bytes('12'));
+header("Content-Security-Policy: default-src 'self' https://www.google.com  https://www.gstatic.com; img-src 'self'; object-src 'none'; style-src 'self' 'nonce-".$_SERVER['nonce']."'");
 header("Strict-Transport-Security: max-age=31536000; includeSubDomains; preload;");
 header("Referrer-Policy: no-referrer-when-downgrade");
 header("X-XSS-Protection: 1; mode=block");

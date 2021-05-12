@@ -1,6 +1,9 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 </div>
-<div class="space-box space_<?= $space_info['space_id']; ?>">
+<style nonce="<?= $_SERVER['nonce']; ?>">
+.space-box {background:<?= $space_info['space_color']; ?>;}
+</style>
+<div class="space-box" >
     <div class="wrap">
          <?php if(!$uid['id']) { ?> 
                 <div class="right"> 
