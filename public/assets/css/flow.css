@@ -53,21 +53,21 @@ aside#sidebar {
 }
 
 .flow-answer .box {
-  background-color: #f3f3f3;  
+  background-color: #f3f3f3;
 }
 
 .flow icon {
-  margin-right: 1px;  
+  margin-right: 1px;
 }
 
 .flow-telo.dell {
- display: none;
- background-color: rgb(246, 196, 184);
- padding: 2px 10px 0 10px;
+  display: none;
+  background-color: rgb(246, 196, 184);
+  padding: 2px 10px 0 10px;
 }
 
 .flow-telo.dell.block {
- display: block;
+  display: block;
 }
 
 #content {
@@ -84,7 +84,7 @@ aside#sidebar {
 }
 
 #content::-webkit-scrollbar-thumb {
-  background-color: #ddd;  
+  background-color: #ddd;
   border-radius: 20px;
   border: 3px solid #f5f5f5;
 }

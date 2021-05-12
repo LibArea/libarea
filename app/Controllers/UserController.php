@@ -23,6 +23,8 @@ class UserController extends \MainController
             'canonical' => '/users',
         ];
 
+        Request::getResources()->addBottomStyles('/assets/css/users.css'); 
+        
         // title, description
         Base::Meta(lang('Users'), lang('desc-user-all'), $other = false);
 
@@ -57,6 +59,8 @@ class UserController extends \MainController
         
         $meta_title = $user['login'] . ' - профиль';
         $meta_desc  = lang('desc-profile') . ' ' . $user['login'];
+
+        Request::getResources()->addBottomStyles('/assets/css/users.css');
 
         // title, description
         Base::Meta($meta_title, $meta_desc, $other = false);
@@ -94,12 +98,17 @@ class UserController extends \MainController
         $uid    = Base::getUid();
         $name   = \Request::getPost('name');
         $about  = \Request::getPost('about');
- 
+        $color  = \Request::getPost('color');
+        
+        if(!$color) {
+           $color  = '#339900'; 
+        }
+
         $redirect = '/u/' . $uid['login'] . '/setting';
         Base::Limits($name, lang('Name'), '4', '11', $redirect);
         Base::Limits($about, lang('About me'), '4', '320', $redirect);
 
-        UserModel::editProfile($uid['login'], $name, $about);
+        UserModel::editProfile($uid['login'], $name, $about, $color);
         
         Base::addMsg(lang('Changes saved'), 'success');
         redirect($redirect);

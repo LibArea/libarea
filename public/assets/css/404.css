@@ -38,7 +38,8 @@ body {
   float: right;
 }
 
-.telo-l, .telo-r {
+.telo-l, 
+.telo-r {
   width: 50%;
 }
 
@@ -54,7 +55,7 @@ body {
 
 .telo-404 {
   color: #B2B2B2;
-  font-size: 150px;   
+  font-size: 150px;
 }
 
 .telo-l svg.svg-404 {

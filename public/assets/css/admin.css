@@ -1,5 +1,5 @@
 body {
-   background: #f3f3f3;
+  background: #f3f3f3;
 }
 
 .admin {
@@ -30,14 +30,16 @@ input[type="text"] {
 }
 
 .m-850 {
-   max-width: 850px;
+  max-width: 850px;
 }
 
-.t-tr, .t-th {
+.t-tr, 
+.t-th {
   display: table-row;
 }
 
-.t-th .t-td {
+.t-th 
+.t-td {
   font-weight: 600;
 }
 

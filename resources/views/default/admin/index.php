@@ -1,7 +1,7 @@
 <?php include TEMPLATE_DIR . '/admin/header_admin.php'; ?>
 <main class="admin">
  
-    <h1><?= $data['title']?></h1>
+    <h1><?= $data['h1']?></h1>
     
     <div class="t-table">
         <div class="t-th">

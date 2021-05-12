@@ -21,6 +21,22 @@ if(hamburger){
     });
 }
 
+let colorPicker = document.getElementById("colorPicker");
+if(colorPicker){
+    let box = document.getElementById("box");
+    let color = document.getElementById("color");
+
+    box.style.borderColor = colorPicker.value;
+
+    colorPicker.addEventListener("input", function(event) {
+      box.style.borderColor = event.target.value;
+    }, false);
+
+    colorPicker.addEventListener("change", function(event) {
+      color.value = colorPicker.value;
+    }, false);
+}
+
 $(function(){
  
     

@@ -30,7 +30,7 @@ class UserModel extends \MainModel
     // Получение информации по логину
     public static function getUserLogin($login)
     {
-        $query = XD::select(['id', 'login', 'name', 'email', 'avatar', 'invitation_available', 'about', 'created_at', 'my_post'])
+        $query = XD::select(['id', 'login', 'name', 'email', 'avatar', 'color', 'invitation_available', 'about', 'created_at', 'my_post'])
                 ->from(['users'])
                 ->where(['login'], '=', $login);
 
@@ -185,9 +185,9 @@ class UserModel extends \MainModel
     }
     
     // Редактирование профиля
-    public static function editProfile($login, $name, $about)
+    public static function editProfile($login, $name, $about, $color)
     {
-        XD::update(['users'])->set(['name'], '=', $name, ',', ['about'], '=', $about)->where(['login'], '=', $login)->run();
+        XD::update(['users'])->set(['name'], '=', $name, ',', ['about'], '=', $about, ',', ['color'], '=', $color)->where(['login'], '=', $login)->run();
  
         return true;
     }

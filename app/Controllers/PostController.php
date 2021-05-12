@@ -95,6 +95,7 @@ class PostController extends \MainController
         $uid        = Base::getUid();
         $slug       = \Request::get('slug');
         $post_id    = \Request::getInt('id');
+        
         $post_new   = PostModel::getPostId($post_id); 
 
         // Проверим (id, slug)

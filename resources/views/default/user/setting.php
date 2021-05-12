@@ -40,6 +40,12 @@
                 <textarea type="text" rows="4" class="form-about" name="about" id="about"><?= $user['about']; ?></textarea>
             </div>
            
+            <div id="box" class="boxline">
+                <label for="post_content"><?= lang('Color'); ?></label>
+                <input type="color" value="<?= $user['color']; ?>" id="colorPicker">
+                <input type="hidden" name="color" value="" id="color">
+            </div>
+           
             <div class="boxline">
                 <input type="hidden" name="nickname" id="nickname" value="">
                 <button type="submit" class="btn btn-primary"><?= lang('Edit'); ?></button>

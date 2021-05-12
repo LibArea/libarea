@@ -49,7 +49,8 @@
   width: 48px;
 }
 
-.static-content li, .static-content ._icon {
+.static-content li, 
+.static-content ._icon {
   font-size: 15px;
   line-height: 1.53333333;
   margin-bottom: 24px;
@@ -61,31 +62,59 @@
   justify-content: space-between;
 }
 
-.static-content ol, .static-content li {
+.static-content ol, 
+.static-content li {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
 .bl-right {
-  float: left;  
+  float: left;
   margin-left: 20px;
 }
 
 .bl-left {
-  float: left;  
+  float: left;
   width: 70%;
 }
 
-h1 { margin: 0;color:#f56400;font-size: 3em;font-family: Georgia,Arial,sans-serif; }
+h1 { 
+  margin: 0;
+  color:#f56400;
+  font-size: 3em;
+  font-family: Georgia,Arial,sans-serif;
+}
 
-.prof-blog { float: left;width: 33%;}
-.prof-num { color: #f56400; text-align: center; font-size: 4em;font-family: Georgia,Arial,sans-serif; }
-.prof-num-u { color: #f56400; text-align: center; font-size: 3em;font-family: Georgia,Arial,sans-serif; }
-.prof-txt { text-align:center;font-size:1.2em;color:#666;font-family: Georgia,Arial,sans-serif;font-weight: 300; }
+.prof-blog {
+  float: left;
+  width: 33%;
+}
+  
+.prof-num {
+ color: #f56400;
+ text-align: center;
+ font-size: 4em;
+ font-family: Georgia,Arial,sans-serif;
+}
+ 
+.prof-num-u {
+  color: #f56400;
+  text-align: center;
+  font-size: 3em;
+  font-family: Georgia,Arial,sans-serif;
+}
+  
+.prof-txt {
+  text-align:center;
+  font-size:1.2em;
+  color:#666;
+  font-family: Georgia,Arial,sans-serif;
+  font-weight: 300;
+}
 
 @media (max-width: 720px){
-  .prof-txt{ white-space: nowrap;overflow: hidden; padding: 5px;text-overflow: ellipsis; }	
+  .prof-txt { white-space: nowrap;overflow: hidden; padding: 5px;text-overflow: ellipsis; }	
   .prof-num, h1.prof { font-size: 2em; }
   .prof-txt { font-size: 1em; }
   .prof-num-u { font-size: 1.2em; }
