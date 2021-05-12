@@ -59,7 +59,7 @@ class CommentController extends \MainController
         // Получим относительный url поста для возрата (упростить)
         $url        = str_replace('//', '', $_SERVER['HTTP_REFERER']);
         $return_url = substr($url, strpos($url, '/') + 1);
-        
+
         $comment = \Request::getPost('comment');
         
         if (Base::getStrlen($comment) < 6 || Base::getStrlen($comment) > 1024)

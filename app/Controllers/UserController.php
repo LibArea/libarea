@@ -23,7 +23,7 @@ class UserController extends \MainController
             'canonical' => '/users',
         ];
 
-        Request::getResources()->addBottomStyles('/assets/css/users.css'); 
+        Request::getHead()->addStyles('/assets/css/users.css'); 
         
         // title, description
         Base::Meta(lang('Users'), lang('desc-user-all'), $other = false);
@@ -60,7 +60,7 @@ class UserController extends \MainController
         $meta_title = $user['login'] . ' - профиль';
         $meta_desc  = lang('desc-profile') . ' ' . $user['login'];
 
-        Request::getResources()->addBottomStyles('/assets/css/users.css');
+        Request::getHead()->addStyles('/assets/css/users.css');
 
         // title, description
         Base::Meta($meta_title, $meta_desc, $other = false);

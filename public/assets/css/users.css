@@ -114,6 +114,10 @@ h1.profile {
   font-size: 11px;
 }
 
+.dark .profile-header {
+  background: #333;
+}
+
 @media (max-width: 880px) {
   .profile-telo { margin: 30px 0 0 0; }
   footer { padding-top: 2rem; }

@@ -62,7 +62,7 @@
   justify-content: space-between;
 }
 
-.static-content ol, 
+.static-content ol,
 .static-content li {
   list-style: none;
   margin: 0;
@@ -81,9 +81,9 @@
 
 h1 {
   margin: 0;
-  color:#f56400;
+  color: #f56400;
   font-size: 3em;
-  font-family: Georgia,Arial,sans-serif;
+  font-family: Georgia, Arial, sans-serif;
 }
 
 .prof-blog {
@@ -95,21 +95,21 @@ h1 {
   color: #f56400;
   text-align: center;
   font-size: 4em;
-  font-family: Georgia,Arial,sans-serif;
+  font-family: Georgia, Arial, sans-serif;
 }
  
 .prof-num-u {
   color: #f56400;
   text-align: center;
   font-size: 3em;
-  font-family: Georgia,Arial,sans-serif;
+  font-family: Georgia, Arial, sans-serif;
 }
   
 .prof-txt {
   text-align: center;
   font-size: 1.2em;
   color: #666;
-  font-family: Georgia,Arial,sans-serif;
+  font-family: Georgia, Arial, sans-serif;
   font-weight: 300;
 }
 
@@ -139,4 +139,5 @@ h1 {
   .canvas-telo { 
     display: none;
   }
+  
 }

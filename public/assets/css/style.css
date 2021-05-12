@@ -8,7 +8,7 @@ html, body {
   padding: 0;
 }
 
-*, 
+*,
 *:before,
 *:after {
   box-sizing: inherit;
@@ -16,8 +16,8 @@ html, body {
 
 :root {
   --color-gray-1: #6d6b6b;
-  --color-gray-2: #444;
-  --color-white: #fff;
+  --color-gray-2: #444444;
+  --color-white: #ffffff;
 }
 
 body {
@@ -141,7 +141,7 @@ h1 {
   border-radius: 1px;
 }
 
-.banner img { 
+.banner img {
   float: left;
   margin: 11px 15px 0 0;
 }
@@ -408,7 +408,7 @@ i.icon {
   font-size: 14px;
   display: block;
   padding: 8px 9px 1px 6px;
-  font-size:15px;
+  font-size: 15px;
 }
 
 .dropdown-menu a span.ti-angle-down:hover, 
@@ -803,7 +803,7 @@ img.thumb {
 }
 
 #stHeader {
-  display: none; 
+  display: none;
 }
 
 #stHeader.sticky {

@@ -71,7 +71,7 @@ body {
 }
 
 .telo a:hover {
-  color: 1e6f8a;
+  color: #1e6f8a;
 }
 
 @media screen and (max-width: 695px) {
@@ -98,4 +98,5 @@ body {
   .telo-l {
     display: none;
   }
+  
 }

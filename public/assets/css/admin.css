@@ -33,12 +33,12 @@ input[type="text"] {
   max-width: 850px;
 }
 
-.t-tr, 
+.t-tr,
 .t-th {
   display: table-row;
 }
 
-.t-th 
+.t-th
 .t-td {
   font-weight: 600;
 }
@@ -68,6 +68,6 @@ input[type="text"] {
 }
 
 .ava {
-  vertical-align:middle;
-  width:24px;
+  vertical-align: middle;
+  width: 24px;
 }

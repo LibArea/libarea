@@ -24,8 +24,13 @@
             <div class="gravatar">
                 <img alt="<?= $user['login']; ?>" src="/uploads/avatar/<?= $user['avatar']; ?>">
             </div>
-            
-            <center>
+        </div>
+    </div>    
+</div>          
+<div class="profile-box-telo">
+    <div class="wrap">
+        <div class="profile-header-telo">
+        <center>
             <h1 class="profile">
                 <?= $user['login']; ?> 
             
@@ -68,28 +73,25 @@
                     <?php } ?>
                 </div>
             </div>
-            
             </center>
         </div>
         
         <div class="box profile-telo">
-     
-            <label class="required">TL:</label>
-            <span class="d">
-                <a title="Уровень доверия" href="/info/trust-level"><?= $data['trust_level']['trust_name']; ?></a>
-            </span>
 
+            <i class="icon calendar"></i>
+            <span class="ts"><?= $user['created_at']; ?></span> 
             <br>
-            
-            <label class="required">Присоединился:</label>
-            <span class="d"><?= $user['created_at']; ?></span>
-
-            <br>
+            <i class="icon user"></i>
+            <a title="Уровень доверия" href="/info/trust-level"><?= $data['trust_level']['trust_name']; ?></a>
 
             <?php if($data['space_user']) { ?>
+                <br><br>
                 <label class="required"><?= lang('Created by'); ?>:</label>
                 <span class="d">
                     <?php foreach ($data['space_user'] as  $space) { ?>
+                        <img src="/uploads/space/small/<?= $space['space_img']; ?>" alt="<?= $space['space_name']; ?>">
+                      
+
                         <a href="/s/<?= $space['space_slug'];?>"><?= $space['space_name'];?></a> &nbsp; 
                     <?php } ?>
                 </span>     
@@ -109,7 +111,6 @@
                             <h2 class="titl"><?= $post['post_title']; ?></h2>
                         </a>
                         
-                        <div class="space-color space_<?= $post['space_color'] ?>"></div>
                         <a class="space-u" href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
                             <?= $post['space_name']; ?>
                         </a>
@@ -137,12 +138,8 @@
             <br>   
             <?php } ?>
         </div>
-        
-        
+       
     </div>
 </div>
 
-<div class="wrap">
- 
- 
 <?php include TEMPLATE_DIR . '/footer.php'; ?>
