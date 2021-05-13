@@ -113,21 +113,18 @@ h1 {
   font-weight: 300;
 }
 
-@media (max-width: 720px){
+@media (max-width: 720px) {
   .prof-txt {
     white-space: nowrap;
     overflow: hidden;
     padding: 5px;
     text-overflow: ellipsis;
+    font-size: 1em;
   }
 
   .prof-num,
   h1.prof {
     font-size: 2em;
-  }
-
-  .prof-txt {
-    font-size: 1em;
   }
 
   .prof-num-u {
@@ -139,5 +136,5 @@ h1 {
   .canvas-telo { 
     display: none;
   }
-  
+
 }

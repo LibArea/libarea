@@ -30,7 +30,6 @@ https://my.areadev.ru
 
 Идеи, минимализм, дизайна был взят из того, что мне нравится:
 
-
 *   https://news.ycombinator.com/
 *   https://lobste.rs/
 *   https://meta.discourse.org/
