@@ -145,8 +145,16 @@
         </div>
     <?php }  ?>    
 
-    <?php foreach ($data['latest_answers'] as  $answ) { ?>
-        <div class="sb-telo comm-space-color-<?= $answ['space_color']; ?>">
+    <?php $num = 1; ?>
+    <?php foreach ($data['latest_answers'] as  $answ)  { ?>
+        <?php $num++;  ?>
+        <style nonce="<?= $_SERVER['nonce']; ?>">
+         .comm-space-color_<?= $num; ?> {border-left: 2px solid <?= $answ['space_color']; ?>;}
+        </style>
+    
+        <div class="sb-telo comm-space-color_<?= $num; ?>"
+        style="border-left: 2px solid <?= $answ['space_color']; ?>;"
+        >
             <div class="sb-date"> 
                 <img class="ava" alt="<?= $answ['login']; ?>" src="/uploads/avatar/small/<?= $answ['avatar']; ?>">
                 <?= $answ['answer_date']; ?>
