@@ -48,13 +48,12 @@ h1.profile {
 .about {
   max-width: 360px;
   display: inline-block;
-} 
+}
 
 .telo-post {
   margin-left: 5px;
 }
 
-/* BOX участники */
 .all-users {
   display: flex;
   flex-wrap: wrap;

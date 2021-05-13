@@ -61,14 +61,11 @@ class AnswerController extends \MainController
     // Добавление ответа
     public function createAnswer()
     {
-        // Получим относительный url поста для возрата (упростить)
-        $url        = str_replace('//', '', $_SERVER['HTTP_REFERER']);
-        $return_url = substr($url, strpos($url, '/') + 1);
-        
-        $answer = \Request::getPost('answer');
-        
-
-        $redirect = '/' . $return_url;
+        $answer     = \Request::getPost('answer');
+        $url        = \Request::getReferer();
+        $return_url = parse_url($url);
+    
+        $redirect = '/' . $return_url['path'];
         Base::Limits($answer, lang('Bodies'), '6', '5000', $redirect);
 
         $post_id    = \Request::getPostInt('post_id');  // в каком посту ответ
@@ -91,7 +88,7 @@ class AnswerController extends \MainController
         $last_id = AnswerModel::answerAdd($post_id, $ip, $answer, $my_id);
          
         // Адрес ответа 
-        $url = $return_url . '#answ_' . $last_id; 
+        $url = $return_url['path'] . '#answ_' . $last_id; 
          
         // Добавим в чат и поток
         $data_flow = [
@@ -114,7 +111,7 @@ class AnswerController extends \MainController
         // Оповещение автору поста, что появился ответ
         // Добавить
         
-        redirect('/' . $return_url . '#answ_' . $last_id); 
+        redirect('/' . $return_url['path'] . '#answ_' . $last_id); 
     }
     
    // Покажем форму редактирования

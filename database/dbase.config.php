@@ -20,6 +20,16 @@ define("HLEB_PARAMETERS_FOR_DB", [
         "pass" => ""
     ],
 
+    // Для Sphinx
+    "mysql.search" => [
+        "mysql:host=127.0.0.1",
+        "port=9306",
+        "dbname=postind",
+        "charset=utf8",
+        "user" => "",
+        "pass" => ""
+    ],
+
     "sqlite.myname" => [
         "sqlite:c:/main.db",
         "user" => "username",

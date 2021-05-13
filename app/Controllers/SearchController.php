@@ -3,6 +3,8 @@
 namespace App\Controllers;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\SearchModel;
+use Parsedown;
+use Lori\Config;
 use Lori\Base;
 
 class SearchController extends \MainController
@@ -13,8 +15,10 @@ class SearchController extends \MainController
 
         if (Request::getPost())
         {    
-            $query =  \Request::getPost('q');
-    
+            $qa =  \Request::getPost('q');
+          
+            $query = preg_replace('/[^a-zA-Zа-яА-Я0-9 ]/ui', '',$qa);
+
             if (!empty($query)) 
             { 
                 if (Base::getStrlen($query) < 3) {
@@ -24,15 +28,22 @@ class SearchController extends \MainController
                     Base::addMsg(lang('Too long'), 'error');
                     redirect('/search');
                 } else {
-                    $qa =  SearchModel::getSearch($query);
+                    // введем подключение словарной библиотеки для подсказок
                 } 
-                
+
+                // Успех и определим, что будем использовать
+                if(Config::get(Config::PARAM_SEARCH) == 0) {
+                    $qa =  SearchModel::getSearch($query);
+                } else {
+                    $qa =  SearchModel::getSearchServer($query);
+                }
+
                 $Parsedown = new Parsedown(); 
                 $Parsedown->setSafeMode(true); // безопасность
                 
                 $result = Array();
                 foreach($qa as $ind => $row){
-                    $row['post_content']  = $Parsedown->line(Base::cutWords($row['post_content'], 120, '...'));
+                    $row['post_content']  = $Parsedown->line(Base::cutWords($row['post_content'], 220, '...'));
                     $result[$ind]         = $row; 
                 }     
                 
@@ -55,13 +66,13 @@ class SearchController extends \MainController
 
         return view(PR_VIEW_DIR . '/search/index', ['data' => $data, 'uid' => $uid, 'result' => $result, 'query' => $query]);
     }
+    
     // Поиск по домену
     public function domain() 
     {
         $domain     = \Request::get('domain');
-        $account    = \Request::getSession('account');
-        $user_id    = (!$account) ? 0 : $account['user_id'];
-        $post       = SearchModel::getDomain($domain, $user_id); 
+        $uid        = Base::getUid();
+        $post       = SearchModel::getDomain($domain, $uid['id']); 
  
         // Покажем 404
         if(!$post) {
@@ -82,7 +93,6 @@ class SearchController extends \MainController
         $meta_desc = lang('domain-desc') . ': ' . $domain;
         Base::Meta($meta_title, $meta_desc, $other = false);
         
-        $uid  = Base::getUid();
         $data = [
             'h1'            => lang('Domain') . ': ' . $domain,  
             'canonical'     => '/' . $domain,

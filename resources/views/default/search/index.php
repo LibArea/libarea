@@ -16,13 +16,25 @@
     <br>
   
     <?php if (!empty($result)) { ?>
-        <?php foreach ($result as  $post) { ?>
-           <div class="search">
-           <a href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug'] ?>"><?= $post['post_title']; ?></a> <br>
-           <?= $post['post_content']; ?>
-           </div>
-           <div class="v-ots"></div>
-        <?php } ?>   
+        
+        <?php if (Lori\Config::get(Lori\Config::PARAM_SEARCH) == 0) { ?>
+            <?php foreach ($result as  $post) { ?>
+                <div class="search max-width">
+                        <a class="search-title" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug'] ?>"><?= $post['post_title']; ?></a> <br>
+                        <?= $post['post_content']; ?>...
+                </div>
+                <div class="v-ots"></div>
+            <?php } ?> 
+        <?php } else { ?>
+            <?php foreach ($result as  $post) { ?>
+                   <div class="search max-width">
+                        <a class="search-title" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug'] ?>"><?= $post['_title']; ?></a> <br>
+                        <?= $post['_content']; ?>
+                   </div>
+               <div class="v-ots"></div>
+            <?php } ?> 
+        <?php } ?>
+
     <?php } else { ?>
         <p>Поиск не дал результатов...<p>
     <?php } ?>

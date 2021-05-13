@@ -3,21 +3,16 @@ html {
   overflow-y: scroll;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
 }
 
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-}
-
 :root {
   --color-gray-1: #6d6b6b;
-  --color-gray-2: #444444;
-  --color-white: #ffffff;
+  --color-gray-2: #444;
+  --color-white: #fff;
 }
 
 body {
@@ -155,19 +150,19 @@ h1.banner-h1 {
   display: table;
 }
 
+code {
+  color: #b63e56;
+  background: #f5f2f0;
+  padding: 1px 4px;
+  font-size: 1.1em;
+}
+
 pre code {
   background: #272822;
   color: var(--color-white);
   padding: 2px 14px 2px 10px;
   border-radius: 3px;
   display: inline-block;
-}
-
-code {
-  color: #b63e56;
-  background: #f5f2f0;
-  padding: 1px 4px;
-  font-size: 1.1em;
 }
 
 /* Хлебные крошки */
@@ -216,8 +211,8 @@ blockquote {
   padding-left: 15px;
 }
 
-a.logo, 
-.slash, 
+a.logo,
+.slash,
 a.home {
   font-size: 18px;
   color: #888;
@@ -235,7 +230,7 @@ a.logo i.icon,
 a.home {
   color: #888;
 }
- 
+
 .sb-telo,
 .recommend-telo,
 .sidebar h3.recommend {
@@ -378,7 +373,7 @@ i.icon {
   vertical-align: middle;
 }
 
-.nav a span{
+.nav a span {
   display: inline-block;
 }
 
@@ -405,7 +400,6 @@ i.icon {
 
 .dropdown-menu a {
   color: var(--color-gray-2);
-  font-size: 14px;
   display: block;
   padding: 8px 9px 1px 6px;
   font-size: 15px;
@@ -441,6 +435,10 @@ hr {
   color: #333;
 }
 
+.search-title {
+  font-size: 21px; 
+}
+
 /* these must be separate */
 ::-webkit-input-placeholder, :-moz-placeholder {
   color: #aaa;
@@ -462,7 +460,7 @@ input[type="submit_url"] {
   border: 1px solid #ccc;
   border-bottom-color: #bbb;
   cursor: pointer;
-  color: #333333;
+  color: #333;
 }
 
 input[type="submit_url"] {text-align: center;}
@@ -813,7 +811,7 @@ img.thumb {
   width: 100%;
   border-bottom: 1px solid #eee;
   background:#fff;
-  z-index: 20;
+  z-index: 999;
   font-size: 18px;
 }
 
@@ -1564,7 +1562,8 @@ body.menuno nav {
 }
 
 .dark .comments_subtree:target, 
-.dark .comments_subtree.edit {
+.dark .comments_subtree.edit, 
+.dark .dropdown-menu {
   background-color: #222;
 }
 

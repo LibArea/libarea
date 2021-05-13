@@ -235,7 +235,7 @@ class AuthController extends \MainController
             
             // Если нажал "Запомнить" 
             // Устанавливает сеанс пользователя и регистрирует его
-            if ($rememberMe == '1') {
+            if ($rememberMe == 1) {
                 UserModel::rememberMe($uInfo['id']);
             }
             

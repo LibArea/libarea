@@ -313,7 +313,7 @@ class UserModel extends \MainModel
         return true;
     }
 
-    public static function rememberMe($uid)
+    public static function rememberMe($user_id)
     {
         // НАСТРОЕМ НАШ СЕЛЕКТОР, ВАЛИДАТОР И СРОК ДЕЙСТВИЯ 
         // Селектор действует как уникальный идентификатор, поэтому нам не нужно 
@@ -331,7 +331,7 @@ class UserModel extends \MainModel
 
         // Массив данных
         $data = [
-            'user_id' => $uid,
+            'user_id' => $user_id,
             'selector' => $selector,
             'hashedvalidator' => hash('sha256', $validator),
             'expires' => date('Y-m-d H:i:s', $expires),
@@ -343,7 +343,7 @@ class UserModel extends \MainModel
         // так как валидатор обновляется при каждом входе в систему
         // поэтому проверим, есть ли уже маркер, и перепишем, если он есть.
         // Следует немного снизить уровень обслуживания БД и устранить необходимость в спорадических чистках.
-        $result = self::getAuthTokenByUserId($uid);
+        $result = self::getAuthTokenByUserId($user_id);
 
         // Если не вставить
         if (empty($result)) {
@@ -351,7 +351,7 @@ class UserModel extends \MainModel
         } 
         // Если есть обновление
         else {
-            self::updateToken($data, $uid);
+            self::updateToken($data, $user_id);
         }
 
         // set_Cookie

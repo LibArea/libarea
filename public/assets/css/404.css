@@ -1,5 +1,5 @@
 body {
-  font-family: "-apple-system",BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  font-family: "-apple-system", BlinkMacSystemFont,"Segoe UI", Arial, sans-serif;
   font-size: .938em;
   line-height: 1.46;
 }
@@ -54,7 +54,7 @@ body {
 }
 
 .telo-404 {
-  color: #B2B2B2;
+  color: #b2b2b2;
   font-size: 150px;
 }
 

@@ -3,13 +3,13 @@
 .mdeditor_picture,
 .new_answer header,
 .post-full header {
-  display:none !important;
+  display: none !important;
 }
 @media (max-width: 880px) {
   .mdeditor_markdown {
-   width:100%;
+   width: 100%;
   }
   .mdeditor_preview {
-    display:none !important;
+    display: none !important;
   }
 }
