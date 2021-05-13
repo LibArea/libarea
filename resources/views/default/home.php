@@ -152,9 +152,7 @@
          .comm-space-color_<?= $num; ?> {border-left: 2px solid <?= $answ['space_color']; ?>;}
         </style>
     
-        <div class="sb-telo comm-space-color_<?= $num; ?>"
-        style="border-left: 2px solid <?= $answ['space_color']; ?>;"
-        >
+        <div class="sb-telo comm-space-color_<?= $num; ?>">
             <div class="sb-date"> 
                 <img class="ava" alt="<?= $answ['login']; ?>" src="/uploads/avatar/small/<?= $answ['avatar']; ?>">
                 <?= $answ['answer_date']; ?>
