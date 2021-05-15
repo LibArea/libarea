@@ -11,7 +11,7 @@ class PostModel extends \MainModel
     // $page - страницы
     // $tags_user - список id отписанных пространств
     // $type - feed / top / all
-    public static function getPostFeed($page, $space_user, $trust_level, $uid, $type)
+    public static function postsFeed($page, $space_user, $trust_level, $uid, $type)
     {
         $result = Array();
         foreach($space_user as $ind => $row){
@@ -23,37 +23,37 @@ class PostModel extends \MainModel
         // и добавить условие показа постов, рейтинг которых достигает > N+ значения
         // в первый час размещения, но не вошедшие в пространства по умолчанию к показу
         if($uid == 0) {
-           $string = '';
+           $string = 'WHERE p.post_draft  = 0';
         } else {
             if($result) {
-                $string = "WHERE p.post_space_id IN(1, ".implode(',', $result).")";
+                $string = "WHERE p.post_space_id IN(1, ".implode(',', $result).") AND p.post_draft  = 0";
             } else {
-               $string = "WHERE p.post_space_id IN(1)"; 
+               $string = "WHERE p.post_space_id IN(1) AND p.post_draft  = 0"; 
             }
         }        
 
         $offset = ($page-1) * 15; 
         
         // Показывать удаленный пост и запрещенные к показу в ленте
-        if($trust_level != 5) { 
+        if($trust_level != 5) {   
             $display = 'AND p.post_is_delete  = 0 AND s.space_feed = 0';
         } else {
-            $display = '';
+            $display = ''; 
         }
-        
+         
         if($type == 'feed') { 
-            $sort = 'ORDER BY p.post_id DESC';
+            $sort = 'ORDER BY p.post_date DESC';
         } else {
             $sort = 'ORDER BY p.post_answers_num DESC';
         }  
 
-        $sql = "SELECT p.post_id, p.post_title, p.post_slug, p.post_type, p.post_user_id, p.post_space_id, p.post_answers_num, 
+        $sql = "SELECT p.post_id, p.post_title, p.post_slug, p.post_type, p.post_draft, p.post_user_id, p.post_space_id, p.post_answers_num, 
         p.post_comments_num, p.post_date, p.post_votes, p.post_is_delete, p.post_closed, p.post_lo, p.post_top, p.post_url, 
         p.post_content_img, p.post_thumb_img, p.post_content,
                 u.id, u.login, u.avatar,
                 v.votes_post_item_id, v.votes_post_user_id,  
                 s.space_id, s.space_slug, s.space_name, s.space_color, s.space_feed
-                fROM posts as p
+                fROM posts as p 
                 INNER JOIN users as u ON u.id = p.post_user_id
                 INNER JOIN space as s ON s.space_id = p.post_space_id
                 LEFT JOIN votes_post as v ON v.votes_post_item_id = p.post_id AND v.votes_post_user_id = ".$uid."
@@ -65,7 +65,7 @@ class PostModel extends \MainModel
     }
     
     // Количество постов
-    public static function getPostFeedCount($space_user, $uid, $type)
+    public static function postsFeedCount($space_user, $uid, $type)
     {
         $result = Array();
         foreach($space_user as $ind => $row){
@@ -94,20 +94,20 @@ class PostModel extends \MainModel
     }
 
     // Полная версия поста  
-    public static function getPostSlug($slug, $uid)
+    public static function postSlug($slug, $uid)
     {
         $q = XD::select('*')->from(['posts']);
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['post_user_id'])
                  ->leftJoin(['space'])->on(['space_id'], '=', ['post_space_id'])
                 ->leftJoin(['votes_post'])->on(['votes_post_item_id'], '=', ['post_id'])
                 ->and(['votes_post_user_id'], '=', $uid)
-                 ->where(['post_slug'], '=', $slug);
+                ->where(['post_slug'], '=', $slug);
         
         return $query->getSelectOne();
     }   
     
     // Получаем пост по id
-    public static function getPostId($id) 
+    public static function postId($id) 
     {
         if(!$id) { $id = 0; }  
         $q = XD::select('*')->from(['posts']);
@@ -117,7 +117,7 @@ class PostModel extends \MainModel
     }
     
     // Рекомендованные посты
-    public static function PostsSimilar($post_id, $space_id, $uid) 
+    public static function postsSimilar($post_id, $space_id, $uid) 
     {
         $q = XD::select('*')->from(['posts']);
         $query = $q->where(['post_id'], '<', $post_id)
@@ -130,7 +130,7 @@ class PostModel extends \MainModel
     }
     
     // Страница постов участника
-    public static function getUsersPosts($login, $uid)
+    public static function userPosts($login, $uid)
     {
         $q = XD::select('*')->from(['posts']);
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['post_user_id'])
@@ -139,7 +139,8 @@ class PostModel extends \MainModel
                 ->and(['votes_post_user_id'], '=', $uid)
                 ->where(['login'], '=', $login)
                 ->and(['post_is_delete'], '=', 0)
-                ->orderBy(['post_id'])->desc();
+                ->and(['post_draft'], '=', 0)
+                ->orderBy(['post_date'])->desc();
   
         return $query->getSelect();
     } 
@@ -188,6 +189,7 @@ class PostModel extends \MainModel
             ['post_thumb_img'], ',',
             ['post_slug'], ',', 
             ['post_type'], ',',
+            ['post_draft'], ',',
             ['post_ip_int'], ',', 
             ['post_user_id'], ',', 
             ['post_space_id'], ',', 
@@ -204,6 +206,7 @@ class PostModel extends \MainModel
             $data['post_thumb_img'],            
             $data['post_slug'],
             $data['post_type'],
+            $data['post_draft'],
             $data['post_ip_int'], 
             $data['post_user_id'], 
             $data['post_space_id'], 
@@ -220,12 +223,12 @@ class PostModel extends \MainModel
     // Редактирование поста
     public static function editPost($data)
     {
-        $edit_date = date("Y-m-d H:i:s"); 
-       
-        XD::update(['posts'])->set(
+           XD::update(['posts'])->set(
             ['post_title'], '=', $data['post_title'], ',', 
             ['post_type'], '=', $data['post_type'], ',',
-            ['edit_date'], '=', $edit_date, ',', 
+            ['post_draft'], '=', $data['post_draft'], ',',
+            ['post_date'], '=', $data['post_date'], ',', 
+            ['edit_date'], '=', date("Y-m-d H:i:s"), ',', 
             ['post_content'], '=', $data['post_content'], ',', 
             ['post_content_img'], '=', $data['post_content_img'], ',', 
             ['post_closed'], '=', $data['post_closed'], ',', 
@@ -233,7 +236,7 @@ class PostModel extends \MainModel
             ['post_space_id'], '=', $data['post_space_id'], ',', 
             ['post_tag_id'], '=', $data['post_tag_id'], ',',
             ['post_url'], '=', $data['post_url'])
-            ->where(['post_id'], '=', $data['post_id'])->run();
+            ->where(['post_id'], '=', $data['post_id'])->run(); 
 
         return true;
     }

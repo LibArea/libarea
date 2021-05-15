@@ -23,7 +23,13 @@
             <div class="boxline">
                 <?php include TEMPLATE_DIR . '/post/editor.php'; ?> 
             </div>
-            
+            <?php if($post['post_draft'] == 1) { ?>
+                <div class="boxline"> 
+                    <label for="post_content"><?= lang('Draft'); ?>?</label>
+                    <input type="radio" name="post_draft" <?php if($post['post_draft'] == 0) { ?>checked<?php } ?> value="0"> <?= lang('No'); ?>
+                    <input type="radio" name="post_draft" <?php if($post['post_draft'] == 1) { ?>checked<?php } ?> value="1" > <?= lang('Yes'); ?>
+                </div> 
+            <?php } ?>
             <?php if($uid['trust_level'] > 0) { ?>
                 <div class="boxline"> 
                     <label for="post_content">Формат</label>
@@ -63,7 +69,9 @@
                     <br> 
                 </div>
             <?php } ?>
-            
+            <?php if($post['post_draft'] == 1) { ?>
+                <input type="hidden" name="draft" id="draft" value="1">
+            <?php } ?>
             <input type="hidden" name="post_id" id="post_id" value="<?= $post['post_id']; ?>">
             <input type="submit" name="submit" value="<?= lang('Edit'); ?>" />
         </form>

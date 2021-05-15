@@ -25,8 +25,8 @@ class PostController extends \MainController
  
         $space_user  = SpaceModel::getSpaceUser($uid['id']);
         
-        $pagesCount = PostModel::getPostFeedCount($space_user, $uid['id'], $type); 
-        $posts      = PostModel::getPostFeed($page, $space_user, $uid['trust_level'], $uid['id'], $type);
+        $pagesCount = PostModel::postsFeedCount($space_user, $uid['id'], $type); 
+        $posts      = PostModel::postsFeed($page, $space_user, $uid['trust_level'], $uid['id'], $type);
 
         if (!$posts) {
             include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
@@ -96,7 +96,7 @@ class PostController extends \MainController
         $slug       = \Request::get('slug');
         $post_id    = \Request::getInt('id');
         
-        $post_new   = PostModel::getPostId($post_id); 
+        $post_new   = PostModel::postId($post_id); 
 
         // Проверим (id, slug)
         if (!$post_new) {
@@ -108,10 +108,10 @@ class PostController extends \MainController
             }
         }
         
-        $post = PostModel::getPostSlug($slug, $uid['id']); 
+        $post = PostModel::postSlug($slug, $uid['id']); 
         
         // Рекомендованные посты
-        $recommend = PostModel::PostsSimilar($post['post_id'], $post['post_space_id'], $uid['id']);
+        $recommend = PostModel::postsSimilar($post['post_id'], $post['post_space_id'], $uid['id']);
      
         // Выводить или нет? Что дает просмотр даты изменения?
         // Учитывать ли изменение в сортировки и в оповещение в будущем...
@@ -129,6 +129,11 @@ class PostController extends \MainController
             $post['post_url_full'] = null;
         }
         
+        // Покажем черновик только автору
+        if($post['post_draft'] == 1 && $post['post_user_id'] != $uid['id']) {
+            redirect('/');
+        }
+
         $Parsedown = new Parsedown(); 
         $Parsedown->setSafeMode(true); // безопасность
         
@@ -177,9 +182,11 @@ class PostController extends \MainController
         $meta_desc  = substr(strip_tags($post['post_content']), 0, 160);
         Base::Meta($post['post_title'], $meta_desc, $other); 
 
-        Request::getResources()->addBottomStyles('/assets/js/md/mdeditor.css');  
-        Request::getResources()->addBottomScript('/assets/js/md/mdeditor.min.js');
-        Request::getResources()->addBottomScript('/assets/js/editor.js');
+        Request::getResources()->addBottomStyles('/assets/md/editor.css');  
+        Request::getResources()->addBottomScript('/assets/md/Markdown.Converter.js'); 
+        Request::getResources()->addBottomScript('/assets/md/Markdown.Sanitizer.js');
+        Request::getResources()->addBottomScript('/assets/md/Markdown.Editor.js');
+        Request::getResources()->addBottomScript('/assets/md/editor.js');
 
         $data = [
             'h1'        => lang('Post'),
@@ -190,7 +197,7 @@ class PostController extends \MainController
     }
 
     // Посты участника
-    public function userPosts()
+    public function getUserPosts()
     {
         $uid        = Base::getUid();
         $login      = \Request::get('login');
@@ -202,7 +209,7 @@ class PostController extends \MainController
             hl_preliminary_exit();
         }
         
-        $posts_user  = PostModel::getUsersPosts($login, $uid['id']); 
+        $posts_user  = PostModel::userPosts($login, $uid['id']); 
         
         $result = Array();
         foreach($posts_user as $ind => $row){
@@ -245,9 +252,11 @@ class PostController extends \MainController
         // title, description
         Base::Meta(lang('Add post'), lang('Add post'), $other = false); 
         
-        Request::getResources()->addBottomStyles('/assets/js/md/mdeditor.css');  
-        Request::getResources()->addBottomScript('/assets/js/md/mdeditor.min.js');
-        Request::getResources()->addBottomScript('/assets/js/editor.js');
+        Request::getResources()->addBottomStyles('/assets/md/editor.css');  
+        Request::getResources()->addBottomScript('/assets/md/Markdown.Converter.js'); 
+        Request::getResources()->addBottomScript('/assets/md/Markdown.Sanitizer.js');
+        Request::getResources()->addBottomScript('/assets/md/Markdown.Editor.js');
+        Request::getResources()->addBottomScript('/assets/md/editor.js');
        
         return view(PR_VIEW_DIR . '/post/post-add', ['data' => $data, 'uid' => $uid, 'space' => $space]);
     }
@@ -261,6 +270,7 @@ class PostController extends \MainController
         $post_content_img       = \Request::getPost('content_img');
         $post_url               = \Request::getPost('post_url');
         $post_closed            = \Request::getPostInt('closed');
+        $post_draft             = \Request::getPostInt('post_draft');
         $post_top               = \Request::getPostInt('top'); 
         $post_type              = \Request::getPostInt('post_type');
      
@@ -273,8 +283,8 @@ class PostController extends \MainController
         $tag_id     = \Request::getPost('tag_id');
         
         $redirect = '/post/add';
-        Base::Limits($post_title, lang('Title'), '6', '260', $redirect);
-        Base::Limits($post_content, lang('The post'), '6', '10000', $redirect);
+        Base::Limits($post_title, lang('Title'), '6', '460', $redirect);
+        Base::Limits($post_content, lang('The post'), '6', '15000', $redirect);
         
         // Проверяем выбор пространства
         if ($space_id == '') {
@@ -296,7 +306,8 @@ class PostController extends \MainController
         $post_content_img       = empty($post_content_img) ? '' : $post_content_img;
         $og_img                 = empty($og_img) ? '' : $og_img;
         $tag_id                 = empty($tag_id) ? 0 : $tag_id;
-        
+        $post_draft             = empty($post_draft) ? 0 : $post_draft;
+
         // Ограничим частоту добавления
         // Добавить условие TL
         $num_post =  PostModel::getPostSpeed($post_user_id);
@@ -317,6 +328,7 @@ class PostController extends \MainController
             'post_thumb_img'        => $og_img,
             'post_slug'             => $post_slug,
             'post_type'             => $post_type,
+            'post_draft'            => $post_draft,
             'post_ip_int'           => $post_ip_int,
             'post_user_id'          => $post_user_id,
             'post_space_id'         => $space_id,
@@ -419,7 +431,7 @@ class PostController extends \MainController
         $uid        = Base::getUid();
         
         // Получим пост
-        $post   = PostModel::getPostId($post_id); 
+        $post   = PostModel::postId($post_id); 
          
         if(!$post){
             redirect('/');
@@ -437,9 +449,11 @@ class PostController extends \MainController
             'h1'    => lang('Edit post')
         ];
 
-        Request::getResources()->addBottomStyles('/assets/js/md/mdeditor.css');  
-        Request::getResources()->addBottomScript('/assets/js/md/mdeditor.min.js');
-        Request::getResources()->addBottomScript('/assets/js/editor.js');
+        Request::getResources()->addBottomStyles('/assets/md/editor.css');  
+        Request::getResources()->addBottomScript('/assets/md/Markdown.Converter.js'); 
+        Request::getResources()->addBottomScript('/assets/md/Markdown.Sanitizer.js');
+        Request::getResources()->addBottomScript('/assets/md/Markdown.Editor.js');
+        Request::getResources()->addBottomScript('/assets/md/editor.js');
         
         // title, description
         Base::Meta(lang('Edit post'), lang('Edit post'), $other = false);
@@ -455,16 +469,18 @@ class PostController extends \MainController
         $post_content           = $_POST['post_content']; // не фильтруем 
         $post_content_img       = \Request::getPost('content_img');
         $post_type              = \Request::getPostInt('post_type');
+        $post_draft             = \Request::getPostInt('post_draft');
         $post_closed            = \Request::getPostInt('closed');
         $post_top               = \Request::getPostInt('top');
         $post_space_id          = \Request::getPostInt('space_id');
         $post_tag_id            = \Request::getPostInt('tag_id');
         $post_url               = \Request::getPost('post_url');
+        $draft                  = \Request::getPost('draft');
         
         $account = \Request::getSession('account');
         
         // Получим пост
-        $post = PostModel::getPostId($post_id); 
+        $post = PostModel::postId($post_id); 
          
         if(!$post){
             redirect('/');
@@ -484,7 +500,7 @@ class PostController extends \MainController
         
         // Проверяем длину тела
         if (Base::getStrlen($post_content) < 6 || Base::getStrlen($post_content) > 10000) {
-            Base::addMsg('Длина заголовка должна быть от 6 до 10000 знаков', 'error');
+            Base::addMsg('Длина тела должна быть от 6 до 10000 знаков', 'error');
             redirect('/post/edit/' .$post_id);
             return true;
         }
@@ -497,11 +513,26 @@ class PostController extends \MainController
         $post_url               = empty($post_url) ? '' : $post_url;
         $post_content_img       = empty($post_content_img) ? '' : $post_content_img;
         $post_tag_img           = empty($post_tag_id) ? '' : $post_tag_id;
-        
+
+        // Проверим хакинг формы
+        if ($post['post_draft'] == 0) {
+            $draft = 0;
+        }
+
+        // $draft = 1 // это черновик
+        // $post_draft = 0 // изменили
+        if($draft == 1 && $post_draft == 0) {
+            $post_date = date("Y-m-d H:i:s");
+        } else {
+            $post_date = $post['post_date'];
+        }
+
         $data = [
             'post_id'               => $post_id,
             'post_title'            => $post_title, 
             'post_type'             => $post_type,
+            'post_date'             => $post_date,
+            'post_draft'            => $post_draft,
             'post_content'          => $post_content,
             'post_content_img'      => $post_content_img,
             'post_closed'           => $post_closed,
@@ -523,13 +554,18 @@ class PostController extends \MainController
         $post_id = \Request::getPostInt('post_id');
         
         // Получим пост
-        $post = PostModel::getPostId($post_id); 
+        $post = PostModel::postId($post_id); 
         
         // Это делать может только может только автор
         if ($post['post_user_id'] != $_SESSION['account']['user_id']) {
-            return true;
+            return false;
         }
         
+        // Запретим добавлять черновик в профиль
+        if ($post['post_draft'] == 1) {
+            return false;
+        }
+
         PostModel::addPostProfile($post_id, $_SESSION['account']['user_id']);
        
         return true;
@@ -539,7 +575,7 @@ class PostController extends \MainController
     public function addPostFavorite()
     {
         $post_id = \Request::getPostInt('post_id');
-        $post    = PostModel::getPostId($post_id); 
+        $post    = PostModel::postId($post_id); 
         
         if(!$post){
             redirect('/');
@@ -570,7 +606,7 @@ class PostController extends \MainController
     public function shownPost() 
     {
         $post_id = \Request::getPostInt('post_id');
-        $post    = PostModel::getPostId($post_id); 
+        $post    = PostModel::postId($post_id); 
         
         if(!$post){
             return false;

@@ -115,6 +115,10 @@ a:focus {
   color: #3474f4;
 }
 
+.clear {
+  clear: both;  
+}
+
 .right {
   float: right;
 }
@@ -1640,3 +1644,4 @@ a:hover .icon:before {
 .icon.diamond:before { content: "\e043"; }
 .icon.doc:before { content: "\e085"; }
 .icon.question:before { content: "\e05d"; }
+.icon.book-open:before { content: "\e04c"; }

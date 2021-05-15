@@ -196,7 +196,7 @@ class CommentController extends \MainController
     }
 
     // Комментарии участника
-    public function userComments()
+    public function getUserComments()
     {
         $login = \Request::get('login');
 
@@ -207,7 +207,7 @@ class CommentController extends \MainController
             hl_preliminary_exit();
         }
         
-        $comm  = CommentModel::getUsersComments($login); 
+        $comm  = CommentModel::userComments($login); 
         
         $result = Array();
         foreach($comm as $ind => $row){

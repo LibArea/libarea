@@ -43,7 +43,7 @@ class CommentModel extends \MainModel
     }
 
     // Страница комментариев участника
-    public static function getUsersComments($slug)
+    public static function userComments($slug)
     {
         $q = XD::select('*')->from(['comments']);
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['comment_user_id'])

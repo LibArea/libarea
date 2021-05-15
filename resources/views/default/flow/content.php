@@ -21,10 +21,11 @@
             <?php } ?>
         
             <?php if($flow['flow_action_id'] == 5) { ?>
+                <div class="v-ots"></div> 
                 <div class="comm-header">
-                    <img class="avatar" src="/uploads/avatar/small/<?= $flow['avatar']; ?>">
+                     <img class="avatar" src="/uploads/avatar/small/<?= $flow['avatar']; ?>">
                     <span class="user"> 
-                        <a href="/u/<?= $flow['login']; ?>"><?= $flow['login']; ?></a> 
+                         <a href="/u/<?= $flow['login']; ?>"><?= $flow['login']; ?></a> 
                     </span> 
                     <span class="date">
                         <?= $flow['flow_pubdate']; ?> 

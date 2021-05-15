@@ -30,7 +30,6 @@
                     <a class="u-url" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
                         <h3 class="titl"><?= $post['post_title']; ?></h3>
                     </a>
-                    <div class="space-color space_<?= $post['space_color'] ?>"></div>
                     <a class="space-u" href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
                         <?= $post['space_name']; ?>
                     </a>

@@ -58,25 +58,29 @@
                             <span class="date"> 
                                 <span class="otst"> | </span>
                             </span>
+
                             <?php if($uid['login'] == $post['login'] || $uid['trust_level'] == 5) { ?>
                                 <span class="date">
                                     <a href="/post/edit/<?= $post['post_id']; ?>">
                                         <i class="icon pencil"></i>  
                                     </a>
                                 </span>
-                                <span class="date"> 
-                                    <span class="otst"> | </span>
-                                </span>
-                                <?php if($post['my_post'] == $post['post_id']) { ?>
-                                        <span class="mu_post">+ <?= lang('in-the-profile'); ?></span>
+                                <?php if($post['post_draft'] == 0) { ?>
+                                    <span class="date"> 
                                         <span class="otst"> | </span>
-                                <?php } else { ?> 
-                                    <a class="user-mypost" data-opt="1" data-post="<?= $post['post_id']; ?>">
-                                        <span class="mu_post"><?= lang('in-the-profile'); ?></span>
-                                        <span class="otst"> |  </span>
-                                    </a>
-                                <?php } ?> 
+                                    </span>
+                                    <?php if($post['my_post'] == $post['post_id']) { ?>
+                                            <span class="mu_post">+ <?= lang('in-the-profile'); ?></span>
+                                            <span class="otst"> | </span>
+                                    <?php } else { ?> 
+                                        <a class="user-mypost" data-opt="1" data-post="<?= $post['post_id']; ?>">
+                                            <span class="mu_post"><?= lang('in-the-profile'); ?></span>
+                                            <span class="otst"> |  </span>
+                                        </a>
+                                    <?php } ?> 
+                                <?php } ?>    
                             <?php } ?> 
+                            
                             
                             <?php if ($post['favorite_post']){ ?>
                                <span class="otst">   </span>    
@@ -133,7 +137,7 @@
                         </span> 
                     <?php } ?>
                     
-                    <?php if($post['post_type'] == 0) { ?>
+                    <?php if($post['post_type'] == 0 && $post['post_draft'] == 0) { ?>
                         <?php if ($uid['id']) { ?>
                            <?php if($post['post_closed'] == 0) { ?>
                                 <form id="add_answ" class="new_answer" action="/answer/add" accept-charset="UTF-8" method="post">
@@ -162,17 +166,21 @@
             </div>   
         <?php } ?>
         
-        <?php if($post['post_type'] == 0) { ?> 
-            <?php include TEMPLATE_DIR . '/post/comm-view.php'; ?>
-            <?php if($post['post_closed'] == 1) { ?> 
-                <p class="no-answer"><?= lang('post-closed'); ?>...</p>
-            <?php } ?>
-        <?php } else { ?>
-            <?php include TEMPLATE_DIR . '/post/qa-view.php'; ?>
-            <?php if($post['post_closed'] == 1) { ?>
-                <p class="no-answer">Вопрос закрыт...</p>
-            <?php } ?>
-        <?php } ?>        
+        <?php if($post['post_draft'] == 0) { ?> 
+            <?php if($post['post_type'] == 0) { ?> 
+                <?php include TEMPLATE_DIR . '/post/comm-view.php'; ?>
+                <?php if($post['post_closed'] == 1) { ?> 
+                    <p class="no-answer"><?= lang('post-closed'); ?>...</p>
+                <?php } ?>
+            <?php } else { ?>
+                <?php include TEMPLATE_DIR . '/post/qa-view.php'; ?>
+                <?php if($post['post_closed'] == 1) { ?>
+                    <p class="no-answer">Вопрос закрыт...</p>
+                <?php } ?>
+            <?php } ?> 
+        <?php } else { ?>   
+            <p class="no-answer red">Это черновик...</p>
+        <?php } ?>   
     </article>
 </main>
 <aside class="sidebar"> 

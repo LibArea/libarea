@@ -209,7 +209,7 @@ class AuthController extends \MainController
             redirect('/login');
         }
 
-        $uInfo = UserModel::getUserInfo($email);
+        $uInfo = UserModel::userInfo($email);
 
         if (empty($uInfo['id'])) {
             Base::addMsg('Пользователь не существует', 'error');
@@ -295,7 +295,7 @@ class AuthController extends \MainController
            redirect('/recover');
         }
         
-        $uInfo = UserModel::getUserInfo($email);
+        $uInfo = UserModel::userInfo($email);
 
         if (empty($uInfo['email'])) {
             Base::addMsg('Такого e-mail нет на сайте', 'error');

@@ -1,0 +1,170 @@
+.wmd-panel {
+  float: left;
+  width: 48%;
+}
+
+.wmd-button-bar {
+  width: 100%;
+  background-color: Silver; 
+}
+
+.wmd-input { 
+  height: 300px;
+  width: 98%;
+  border: 1px solid DarkGray;
+}
+
+.wmd-input.h-150 { 
+  height: 150px;
+}
+
+.wmd-input.w-95 {
+  width: 95%; 
+}
+
+.wmd-preview { 
+  padding: 0 0 0 15px;
+  margin: 20px 0 0 25px;
+  font-size: 15px;    
+}
+
+.wmd-button-row {
+  position: relative; 
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  margin-top: 10px;
+  padding: 0px;  
+  height: 20px;
+}
+
+.wmd-spacer {
+  width: 1px; 
+  height: 14px; 
+  margin: 0 18px 0 0;
+  background-color: Silver;
+  display: inline-block; 
+  list-style: none;
+}
+
+.wmd-button {
+  width: 20px;
+  height: 20px;
+  padding-left: 2px;
+  padding-right: 15px;
+  display: inline-block;
+  list-style: none;
+  cursor: pointer;
+}
+
+.wmd-button > span:hover {
+  color: #333;
+}
+
+.wmd-spacer1 {
+  left: 50px;
+}
+
+.wmd-spacer2 {
+  left: 175px;
+}
+
+.wmd-spacer3 {
+  left: 300px;
+}
+
+.wmd-prompt-background {
+  background-color: Black;
+}
+
+.wmd-prompt-dialog {
+  border: 1px solid #999999;
+  background-color: #F5F5F5;
+}
+
+.wmd-prompt-dialog > div {
+  font-size: 0.8em;
+  font-family: arial, helvetica, sans-serif;
+}
+
+.wmd-prompt-dialog > form > input[type="text"] {
+  border: 1px solid #999999;
+  color: black;
+}
+
+.wmd-prompt-dialog > form > input[type="button"]{
+  border: 1px solid #888888;
+  font-family: trebuchet MS, helvetica, sans-serif;
+  font-size: 0.8em;
+  font-weight: bold;
+}
+
+.redactor {
+  clear: both;
+  overflow: hidden;
+}
+
+@font-face {
+  font-family: 'icomoon';
+  src:  url('./fonts/icomoon.eot?q9w37d');
+  src:  url('./fonts/icomoon.eot?q9w37d#iefix') format('embedded-opentype'),
+    url('./fonts/icomoon.ttf?q9w37d') format('truetype'),
+    url('./fonts/icomoon.woff?q9w37d') format('woff'),
+    url('./fonts/icomoon.svg?q9w37d#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  font-size: 14px;
+  color: #888;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-image:before {
+  content: "\e90d";
+}
+.icon-undo:before {
+  content: "\e965";
+}
+.icon-redo:before {
+  content: "\e966";
+}
+.icon-quotes-left:before {
+  content: "\e977";
+}
+.icon-list-numbered:before {
+  content: "\e9b9";
+}
+.icon-list2:before {
+  content: "\e9bb";
+}
+.icon-link:before {
+  content: "\e9cb";
+}
+.icon-font-size:before {
+  content: "\ea61";
+}
+.icon-bold:before {
+  content: "\ea62";
+}
+.icon-italic:before {
+  content: "\ea64";
+}
+.icon-page-break:before {
+  content: "\ea68";
+}
+.icon-embed:before {
+  content: "\ea7f";
+}

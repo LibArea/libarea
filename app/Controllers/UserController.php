@@ -32,7 +32,7 @@ class UserController extends \MainController
     }
 
     // Страница участника
-    function profile()
+    function getProfile()
     {
         $login = \Request::get('login');
         $user  = UserModel::getUserLogin($login);
@@ -43,16 +43,16 @@ class UserController extends \MainController
             hl_preliminary_exit();
         }
 
-        $post = PostModel::getPostId($user['my_post']);
+        $post = PostModel::postId($user['my_post']);
 
         $uid  = Base::getUid();
         $data =[
             'h1'            => $user['login'] . ' - профиль',
             'created_at'    => Base::ru_date($user['created_at']),
             'trust_level'   => UserModel::getUserTrust($user['id']),
-            'post_num_user' => UserModel::getUsersPostsNum($user['id']),
-            'answ_num_user' => UserModel::getUsersAnswersNum($user['id']),
-            'comm_num_user' => UserModel::getUsersCommentsNum($user['id']), 
+            'post_num_user' => UserModel::userPostsNum($user['id']),
+            'answ_num_user' => UserModel::userAnswersNum($user['id']),
+            'comm_num_user' => UserModel::userCommentsNum($user['id']), 
             'space_user'    => SpaceModel::getSpaceUserId($user['id']),
             'canonical'     => Config::get(Config::PARAM_URL) . '/u/' . $user['login'],
         ];
@@ -255,7 +255,7 @@ class UserController extends \MainController
         
         // Данные участника
         $account = \Request::getSession('account');
-        $userInfo = UserModel::getUserInfo($account['email']);
+        $userInfo = UserModel::userInfo($account['email']);
        
         if (!password_verify($password, $userInfo['password'])) {
             Base::addMsg(lang('old-password-err'), 'error');
@@ -270,7 +270,7 @@ class UserController extends \MainController
     }
     
     // Страница закладок участника
-    function userFavorite ()
+    function getUserFavorite ()
     {
         $login  = \Request::get('login');
         
@@ -285,14 +285,14 @@ class UserController extends \MainController
         $Parsedown = new Parsedown(); 
         $Parsedown->setSafeMode(true); // безопасность
   
-        $fav = UserModel::getUserFavorite($user['id']);
+        $fav = UserModel::userFavorite($user['id']);
    
         $result = Array();
         foreach($fav as $ind => $row){
             $row['post_date']       = (empty($row['post_date'])) ? $row['post_date'] : Base::ru_date($row['post_date']);
             $row['answer_content']  = $Parsedown->text($row['answer_content']);
             $row['date']            = $row['post_date'];
-            $row['post']            = PostModel::getPostId($row['answer_post_id']);
+            $row['post']            = PostModel::postId($row['answer_post_id']);
             $result[$ind]           = $row;
         }
         
@@ -307,6 +307,33 @@ class UserController extends \MainController
         return view(PR_VIEW_DIR . '/user/favorite', ['data' => $data, 'uid' => $uid, 'favorite' => $result]);   
     }
     
+    // Страница черновиков участника
+    function getUserDrafts ()
+    {
+        $login  = \Request::get('login');
+        
+        $uid    = Base::getUid();
+        $user   = UserModel::getUserLogin($uid['login']);
+
+        // Ошибочный Slug в Url
+        if($login != $uid['login']){
+            redirect('/u/' . $user['login'] . '/drafts');
+        }
+  
+        $drafts = UserModel::userDraftPosts($user['id']);
+   
+        $data = [
+            'h1'            => lang('Drafts') . ' ' . $login,
+            'canonical'     => '/***', 
+        ];
+
+        // title, description
+        Base::Meta(lang('Drafts'), lang('Drafts'), $other = false);
+        
+        return view(PR_VIEW_DIR . '/user/draft-post', ['data' => $data, 'uid' => $uid, 'drafts' => $drafts]);   
+    }
+
+
     /////////// СИСТЕМА ИНВАЙТОВ ///////////
     
     // Показ формы инвайта
@@ -381,7 +408,7 @@ class UserController extends \MainController
            redirect($redirect);
         }
         
-        $uInfo = UserModel::getUserInfo($invitation_email);
+        $uInfo = UserModel::userInfo($invitation_email);
         if(!empty($uInfo['email'])) {
             
             if ($uInfo['email']) {

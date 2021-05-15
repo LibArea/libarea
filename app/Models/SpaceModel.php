@@ -27,7 +27,7 @@ class SpaceModel extends \MainModel
         if ($uid['trust_level'] == 5) {
             $sql = "SELECT * FROM space";
         } else {
-            $sql = "SELECT * FROM space WHERE space_permit_users = 0";
+            $sql = "SELECT * FROM space WHERE space_permit_users = 0 or space_user_id = ".$uid['id']."";
         }
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
@@ -61,13 +61,14 @@ class SpaceModel extends \MainModel
             ->leftJoin(['space_tags'])->on(['post_tag_id'], '=', ['st_id'])
             ->leftJoin(['votes_post'])->on(['votes_post_item_id'], '=', ['post_id'])
             ->and(['votes_post_user_id'], '=', $user_id)
-            ->where(['post_space_id'], '=', $space_id);
+            ->where(['post_space_id'], '=', $space_id)
+            ->and(['post_draft'], '=', 0);
             
         if ($type == 'feed') {
             if($space_tags_id) {
-                $result = $q->and(['post_tag_id'], '=', $space_tags_id)->orderBy(['post_id'])->desc()->getSelect();
+                $result = $q->and(['post_tag_id'], '=', $space_tags_id)->orderBy(['post_date'])->desc()->getSelect();
             } else { 
-                $result = $q->orderBy(['post_id'])->desc()->getSelect();
+                $result = $q->orderBy(['post_date'])->desc()->getSelect();
             }
         } else {
             

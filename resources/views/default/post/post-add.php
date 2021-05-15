@@ -21,7 +21,11 @@
             <div class="boxline">
                 <?php include TEMPLATE_DIR . '/post/editor.php'; ?>
             </div>
-            
+            <div class="boxline"> 
+                <label for="post_content"><?= lang('Draft'); ?>?</label>
+                <input type="radio" name="post_draft" checked value="0"> <?= lang('No'); ?>
+                <input type="radio" name="post_draft" value="1" > <?= lang('Yes'); ?>
+            </div> 
             <?php if($uid['trust_level'] > 0) { ?>
                 <div class="boxline"> 
                     <label for="post_content">Формат</label>

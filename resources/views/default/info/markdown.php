@@ -47,4 +47,12 @@
     </div>
 </main>
 <?php include TEMPLATE_DIR . '/_block/info-menu.php'; ?>
+<div class="clear">
+    <div class="wmd-panel">
+        <div id="wmd-button-bar"></div>
+        <textarea name="content" class="wmd-input h-150" id="wmd-input"></textarea>
+    </div>
+    <div id="wmd-preview" class="wmd-panel wmd-preview"></div>
+</div>
+<div class="clear"><br><br></div>
 <?php include TEMPLATE_DIR . '/footer.php'; ?> 

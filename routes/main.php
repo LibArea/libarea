@@ -76,8 +76,9 @@ Route::before('Authorization@noAuth')->getGroup();
 	Route::get('/u/{login}/notifications')->controller('NotificationsController')->where(['login' => '[A-Za-z0-9]+']); 
     Route::get('/notifications/read/{id}')->controller('NotificationsController@notificationRead')->where(['id' => '[0-9]+']);  
     
-    // Избранное
-    Route::get('/u/{login}/favorite')->controller('UserController@userFavorite')->where(['login' => '[A-Za-z0-9]+']);
+    // Избранное и черновики
+    Route::get('/u/{login}/favorite')->controller('UserController@getUserFavorite')->where(['login' => '[A-Za-z0-9]+']);
+    Route::get('/u/{login}/drafts')->controller('UserController@getUserDrafts')->where(['login' => '[A-Za-z0-9]+']);
 
 	// Подписываемся, отписываемся / изменяем пространство
 	Route::type('post')->get('/space/hide')->controller('SpaceController@hide');
@@ -132,10 +133,10 @@ Route::get('/info/initial-setup')->controller('InfoController@initialSetup');
 
 // Участники, авторизация, посты и комментарии, закладки
 Route::get('/users')->controller('UserController');
-Route::get('/u/{login}')->controller('UserController@profile')->where(['login' => '[A-Za-z0-9]+']);
-Route::get('/u/{login}/posts')->controller('PostController@userPosts')->where(['login' => '[A-Za-z0-9]+']);
-Route::get('/u/{login}/answers')->controller('AnswerController@userAnswers')->where(['login' => '[A-Za-z0-9]+']);
-Route::get('/u/{login}/comments')->controller('CommentController@userComments')->where(['login' => '[A-Za-z0-9]+']);
+Route::get('/u/{login}')->controller('UserController@getProfile')->where(['login' => '[A-Za-z0-9]+']);
+Route::get('/u/{login}/posts')->controller('PostController@getUserPosts')->where(['login' => '[A-Za-z0-9]+']);
+Route::get('/u/{login}/answers')->controller('AnswerController@getUserAnswers')->where(['login' => '[A-Za-z0-9]+']);
+Route::get('/u/{login}/comments')->controller('CommentController@getUserComments')->where(['login' => '[A-Za-z0-9]+']);
 
 
 // Поток

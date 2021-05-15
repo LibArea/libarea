@@ -93,7 +93,11 @@
                         <i class="icon settings"></i>
                         <?= lang('Settings'); ?>
                     </a>
-                   <a href="/u/<?= $uid['login']; ?>/notifications">
+                    <a href="/u/<?= $uid['login']; ?>/drafts">
+                        <i class="icon book-open"></i>
+                        <?= lang('Drafts'); ?>
+                    </a>
+                    <a href="/u/<?= $uid['login']; ?>/notifications">
                         <i class="icon bell"></i> 
                         <?= lang('Notifications'); ?>
                     </a>

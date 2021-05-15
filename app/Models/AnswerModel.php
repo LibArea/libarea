@@ -54,7 +54,7 @@ class AnswerModel extends \MainModel
     }
 
     // Страница ответов участника
-    public static function getUsersAnswers($slug)
+    public static function userAnswers($slug)
     {
         $q = XD::select('*')->from(['answers']);
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['answer_user_id'])

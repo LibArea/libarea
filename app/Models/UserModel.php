@@ -99,7 +99,7 @@ class UserModel extends \MainModel
     }  
 
     // Страница закладок участника (комментарии и посты)
-    public static function getUserFavorite($uid)
+    public static function userFavorite($uid)
     {
         $sql = "SELECT favorite.*, 
                        users.id, users.login, users.avatar, 
@@ -116,8 +116,21 @@ class UserModel extends \MainModel
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     } 
 
+    // Страница черновиков
+    public static function userDraftPosts($user_id)
+    {
+        $q = XD::select('*')->from(['posts']);
+        $query = $q->leftJoin(['users'])->on(['id'], '=', ['post_user_id'])
+                ->where(['id'], '=', $user_id)
+                ->and(['post_draft'], '=', 1)
+                ->and(['post_is_delete'], '=', 0)
+                ->orderBy(['post_id'])->desc();
+  
+        return $query->getSelect();
+    } 
+
     // Информация участника
-    public static function getUserInfo($email) 
+    public static function userInfo($email) 
     {
         $query = XD::select(['id', 'email', 'password', 'login', 'name', 'avatar', 'trust_level', 'ban_list'])
              ->from(['users'])
@@ -127,17 +140,17 @@ class UserModel extends \MainModel
     }
     
     // Количество постов на странице профиля
-    public static function getUsersPostsNum($id)
+    public static function userPostsNum($id)
     {
         $q = XD::select('*')->from(['posts']);
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['post_user_id'])
-                 ->where(['id'], '=', $id);
+                 ->where(['id'], '=', $id)->and(['post_draft'], '=', 0);
        
         return count($query->getSelect());
     } 
     
     // Количество ответов на странице профиля
-    public static function getUsersAnswersNum($id)
+    public static function userAnswersNum($id)
     {
         $q = XD::select('*')->from(['answers']);
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['answer_user_id'])
@@ -147,7 +160,7 @@ class UserModel extends \MainModel
     } 
     
     // Количество комментариев на странице профиля
-    public static function getUsersCommentsNum($id)
+    public static function userCommentsNum($id)
     {
         $q = XD::select('*')->from(['comments']);
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['comment_user_id'])
@@ -209,7 +222,6 @@ class UserModel extends \MainModel
 
         return $result;   
     }
-    
     
     // Активирован ли пользователь (e-mail)
     public static function isActivated($uid)

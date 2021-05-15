@@ -96,6 +96,12 @@ class InfoController extends \MainController
             'canonical'     => Config::get(Config::PARAM_URL) . '/info/markdown',
         ];
 
+        Request::getResources()->addBottomStyles('/assets/md/editor.css');  
+        Request::getResources()->addBottomScript('/assets/md/Markdown.Converter.js'); 
+        Request::getResources()->addBottomScript('/assets/md/Markdown.Sanitizer.js');
+        Request::getResources()->addBottomScript('/assets/md/Markdown.Editor.js');
+        Request::getResources()->addBottomScript('/assets/md/editor.js');
+
         // title, description
         Base::Meta(lang('Мarkdown'), lang('markdown-desc'), $other = false);
 

@@ -164,16 +164,17 @@
             <?php if($post['post_closed'] == 0) { ?>
                 <form id="add_answ" action="/answer/add" accept-charset="UTF-8" method="post">
                 <?= csrf_field() ?>
-                <br>
-                    <textarea class="editable" name="answer" id="answer"></textarea>
-                    <div> 
+                <div class="redactor">
+                    <div id="wmd-button-bar"></div>
+                    <textarea class="wmd-input h-150 w-95" name="answer" id="wmd-input"></textarea>
+                    <div class="clear"> 
                         <input type="hidden" name="post_id" id="post_id" value="<?= $post['post_id']; ?>">
                         <input type="hidden" name="answ_id" id="answ_id" value="0">
                         <input type="submit" name="answit" value="<?= lang('Reply'); ?>" class="answer-post">
                     </div> 
+                </div>     
                 </form>
-                <script src="/assets/js/editor/js/medium-editor.js"></script>
-                <script src="/assets/js/editor.js"></script> 
+
             <?php } ?>
         <?php } else { ?>
             <br />

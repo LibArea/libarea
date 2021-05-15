@@ -129,7 +129,7 @@ class AnswerController extends \MainController
             return true; 
         }
 
-        $post = PostModel::getPostId($post_id);
+        $post = PostModel::postId($post_id);
         
         if (!$post) {
             include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
@@ -147,9 +147,11 @@ class AnswerController extends \MainController
         
         Base::Meta(lang('Edit answer'), lang('Edit answer'), $other = false);
          
-        Request::getResources()->addBottomStyles('/assets/js/md/mdeditor.css');  
-        Request::getResources()->addBottomScript('/assets/js/md/mdeditor.min.js');
-        Request::getResources()->addBottomScript('/assets/js/editor.js');
+        Request::getResources()->addBottomStyles('/assets/md/editor.css');  
+        Request::getResources()->addBottomScript('/assets/md/Markdown.Converter.js'); 
+        Request::getResources()->addBottomScript('/assets/md/Markdown.Sanitizer.js');
+        Request::getResources()->addBottomScript('/assets/md/Markdown.Editor.js');
+        Request::getResources()->addBottomScript('/assets/md/editor.js');
         
         return view(PR_VIEW_DIR . '/answer/answ-edit-form', ['data' => $data, 'uid' => $uid, 'post' => $post]);
     }
@@ -162,7 +164,7 @@ class AnswerController extends \MainController
         $post_id    = \Request::getPostInt('post_id');
         $answer     = $_POST['answer']; // не фильтруем
 
-        $post = PostModel::getPostId($post_id);
+        $post = PostModel::postId($post_id);
 
         // Получим относительный url поста для возрата
         $url = '/post/' . $post['post_id'] . '/' . $post['post_slug'];
@@ -187,7 +189,7 @@ class AnswerController extends \MainController
 	}
     
     // Ответы участника
-    public function userAnswers()
+    public function getUserAnswers()
     {
         $login = \Request::get('login');
        
@@ -198,7 +200,7 @@ class AnswerController extends \MainController
             hl_preliminary_exit();
         }
         
-        $answ  = AnswerModel::getUsersAnswers($login); 
+        $answ  = AnswerModel::userAnswers($login); 
         
         $Parsedown = new Parsedown(); 
         $Parsedown->setSafeMode(true); // безопасность
