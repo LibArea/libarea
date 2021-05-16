@@ -469,10 +469,10 @@ class PostController extends \MainController
                 ->fromFile($local)  // load image.jpg
                 ->autoOrient()     // adjust orientation based on exif data
                 ->resize(165, null) // 125
-                ->toFile($path . $year . $file .'.jpeg', 'image/jpeg');
-
+                ->toFile($path . $year . $file .'.webp', 'image/webp');
+ 
                 if(file_exists($local)) {
-                    return $year . $file .'.jpeg';
+                    return $year . $file .'.webp';
                 }
                 
             }
