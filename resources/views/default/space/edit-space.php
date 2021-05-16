@@ -47,15 +47,19 @@
                     <br>
                     <textarea class="add" id="answer_100" name="space_text"><?= $space['space_text']; ?></textarea>
                 </div>
-                <div class="boxline">
-                <label for="space_img">
-                    <img width="60" src="/uploads/space/<?= $space['space_img']; ?>">
-                </label>
-                    <input type="file" name="image" accept="image/*"/>
-                    <p>Выберите файл для загрузки 120x120px (jpg, jpeg, png)</p>
-                </div>
+                <div class="box setting space">
+                    <img class="ava" src="/uploads/space/<?= $space['space_img']; ?>">
+                    <div class="box-form-img"> 
+                        <div class="boxline">
+                            <div class="input-images"></div>
+                        </div>
+                    </div> 
                     <input type="hidden" name="space_id" id="space_id" value="<?= $space['space_id']; ?>">
-                    <input type="submit" name="submit" value="<?= lang('Edit'); ?>" />
+                    <div class="clear"> 
+                        <p><?= lang('select-file-up'); ?>: 120x120px (jpg, jpeg, png)</p>
+                        <input type="submit" name="submit" value="<?= lang('Edit'); ?>" />
+                    </div> 
+                </div>                
             </form>
         </div>
     </div> 

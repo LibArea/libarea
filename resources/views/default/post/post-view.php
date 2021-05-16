@@ -112,8 +112,14 @@
                 </div>
                 <div class="post-body full">
                     <div class="post">
+                        <?php if($post['post_content_img']) { ?> 
+                            <div class="img-post-bl">
+                                <img class="img-post" alt="<?= $post['post_title']; ?>" src="/uploads/post/<?= $post['post_content_img']; ?>">
+                            </div>    
+                        <?php } ?>
+                    
                         <?php if($post['post_thumb_img']) { ?> 
-                            <img class="thumb" alt="<?= $post['post_url']; ?>" src="/uploads/thumbnails/<?= $post['post_thumb_img']; ?>">
+                            <img class="thumb" alt="<?= $post['post_url']; ?>" src="/uploads/post/thumbnails/<?= $post['post_thumb_img']; ?>">
                         <?php } ?>
                     
                         <?= $post['post_content']; ?> 
@@ -142,12 +148,15 @@
                            <?php if($post['post_closed'] == 0) { ?>
                                 <form id="add_answ" class="new_answer" action="/answer/add" accept-charset="UTF-8" method="post">
                                 <?= csrf_field() ?>
-                                    <textarea rows="5" placeholder="<?= lang('write-something'); ?>..." name="answer" id="answer"></textarea>
-                                    <div> 
+                                <div class="redactor">
+                                    <div id="wmd-button-bar"></div>
+                                    <textarea class="wmd-input h-150 w-95" rows="5" placeholder="<?= lang('write-something'); ?>..." name="answer" id="wmd-input"></textarea>
+                                    <div class="clear"> 
                                         <input type="hidden" name="post_id" id="post_id" value="<?= $post['post_id']; ?>">
                                         <input type="hidden" name="answ_id" id="answ_id" value="0">
                                         <input type="submit" name="answit" value="<?= lang('Reply'); ?>" class="answer-post">
-                                    </div> 
+                                    </div>
+                                </div>    
                                 </form>
                             <?php } ?>
                         <?php } else { ?>

@@ -30,6 +30,7 @@ aside#sidebar {
 .avatar {
   vertical-align: middle;
   width: 16px;
+  margin-right: 4px;
 }
 
 .flow h1 {
@@ -57,7 +58,7 @@ aside#sidebar {
   background-color: #f3f3f3;
 }
 
-.flow icon {
+i.icon {
   margin-right: 1px;
 }
 

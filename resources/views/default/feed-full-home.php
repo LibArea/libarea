@@ -67,7 +67,7 @@
             <div class="full-fuul-home">
             
                 <?php if($post['post_thumb_img']) { ?> 
-                    <img class="thumb" alt="<?= $post['post_url']; ?>" src="/uploads/thumbnails/<?= $post['post_thumb_img']; ?>">
+                    <img class="thumb" alt="<?= $post['post_url']; ?>" src="/uploads/post/thumbnails/<?= $post['post_thumb_img']; ?>">
                 <?php } ?>
                 
                 <?= Base::cutWords($post['post_content'], 248); ?> 

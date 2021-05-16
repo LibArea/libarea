@@ -5,10 +5,10 @@ use Hleb\Constructor\Handlers\Request;
 use App\Models\UserModel;
 use App\Models\PostModel;
 use App\Models\SpaceModel;
-use ImageUpload;
 use Parsedown;
 use Lori\Config;
 use Lori\Base;
+use SimpleImage;
 
 class UserController extends \MainController
 {
@@ -130,6 +130,10 @@ class UserController extends \MainController
             'canonical' => '/***', 
         ];
 
+
+        Request::getHead()->addStyles('/assets/css/image-uploader.css'); 
+        Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
+
         // title, description
         Base::Meta(lang('Change avatar'), lang('Change avatar page'), $other = false);
 
@@ -166,10 +170,10 @@ class UserController extends \MainController
     {
         $uid  = Base::getUid();
         
-        $name     = $_FILES['image']['name'];
-        $size     = $_FILES['image']['size'];
+        $name     = $_FILES['images']['name'][0];
+        $size     = $_FILES['images']['size'][0];
         $ext      = strtolower(pathinfo($name, PATHINFO_EXTENSION));
-        $width_h  = getimagesize($_FILES['image']['tmp_name']);
+        $width_h  = getimagesize($_FILES['images']['tmp_name'][0]);
        
         $redirect = '/u/' . $uid['login'] . '/setting/avatar';
        
@@ -180,41 +184,29 @@ class UserController extends \MainController
             redirect($redirect);
         }
 
-        // Проверка ширины, высоты и размера
-        if ($width_h['0'] > 150) {
-            $valid = false;
-            Base::addMsg('Ширина больше 150 пикселей', 'error');
-            redirect($redirect);
-        }
-        if ($width_h['1'] > 150) {
-            $valid = false;
-            Base::addMsg('Высота больше 150 пикселей', 'error');
-            redirect($redirect);
-        }
-        if ($size > 50000) {
-            $valid = false;
-            Base::addMsg('Размер файла превышает допустимый', 'error');
-            redirect($redirect);
-        }
-
         if ($valid) {
  
             // 110px и 16px
             $path_img       = HLEB_PUBLIC_DIR. '/uploads/avatar/';
             $path_img_small = HLEB_PUBLIC_DIR. '/uploads/avatar/small/';
+            $filename =  'a-' . $uid['id'] . '-' . time();
+            $file = $_FILES['images']['tmp_name'][0];
             
-            $image = new ImageUpload('image'); 
+            $image = new  SimpleImage();
             
-            $image->resize(110, 110, 'crop');            
-            $img = $image->saveTo($path_img, $uid['id']);
-            
-            $image->resize(16, 16);            
-            $image->saveTo($path_img_small, $uid['id']);
-            
-            $avatar = UserModel::getAvatar($uid['login']);
+            $image
+                ->fromFile($file)  // load image.jpg
+                ->autoOrient()     // adjust orientation based on exif data
+                ->resize(110, 110)
+                ->toFile($path_img . $filename .'.jpeg', 'image/jpeg')
+                ->resize(16, 16)
+                ->toFile($path_img_small . $filename .'.jpeg', 'image/jpeg');
+                    
+            $new_ava    = $filename . '.jpeg';
+            $avatar     = UserModel::getAvatar($uid['login']);
      
             // Удалим старую аватарку, кроме дефолтной
-            if($avatar['avatar'] != 'noavatar.png' && $avatar['avatar'] != 'img_' . $uid['id'] .'.'. $ext) {
+            if($avatar['avatar'] != 'noavatar.png' && $avatar['avatar'] != $new_ava) {
                 chmod($path_img . $avatar['avatar'], 0777);
                 chmod($path_img_small . $avatar['avatar'], 0777);
                 unlink($path_img . $avatar['avatar']);
@@ -222,11 +214,11 @@ class UserController extends \MainController
             }            
             
             // Запишем новую 
-            UserModel::setAvatar($uid['login'], $img);
-            
-            Base::addMsg(lang('Avatar changed'), 'error');
-            redirect($redirect);
+            UserModel::setAvatar($uid['login'], $new_ava);
         }
+        
+        Base::addMsg(lang('Avatar changed'), 'success');
+        redirect($redirect);
     }
     
     // Изменение пароля

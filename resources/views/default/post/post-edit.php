@@ -3,8 +3,8 @@
 
     <h1><?= $data['h1']; ?></h1>
 
-     <div class="box create">
-        <form action="/post/editpost/<?= $post['post_id']; ?>" method="post">
+     <div class="box setting post">
+        <form action="/post/editpost/<?= $post['post_id']; ?>" method="post" enctype="multipart/form-data">
             <?= csrf_field() ?>
             <div class="boxline">
                 <label for="post_title">Заголовок</label>
@@ -19,6 +19,23 @@
                     <br />
                 </div> 
             <?php } ?>
+             
+             <?php if($post['post_content_img']) { ?> 
+                <div class="img-post-edit">
+                    <img class="img-post" alt="<?= $post['post_title']; ?>" src="/uploads/post/<?= $post['post_content_img']; ?>">
+                    <input type="hidden" name="content_img" value="<?= $post['post_content_img']; ?>">
+                </div>    
+            <?php } ?>
+
+            <?php if($post['post_thumb_img']) { ?> 
+                <img class="thumb" alt="<?= $post['post_url']; ?>" src="/uploads/post/thumbnails/<?= $post['post_thumb_img']; ?>">
+            <?php } ?> 
+             
+            <div class="boxline post">    
+                <div class="boxline">
+                    <div class="input-images"></div>
+                </div>
+            </div>
              
             <div class="boxline">
                 <?php include TEMPLATE_DIR . '/post/editor.php'; ?> 

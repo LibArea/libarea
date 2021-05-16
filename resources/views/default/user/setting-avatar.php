@@ -15,13 +15,20 @@
             </a>
         </li>
     </ul>
-    <div class="box setting"> 
-       <img width="110" height="110" src="/uploads/avatar/<?= $uid['avatar']; ?>">
+    <div class="box setting avatar"> 
+       <img class="ava" src="/uploads/avatar/<?= $uid['avatar']; ?>">
+        
        <form method="POST" action="/users/setting/avatar/edit" enctype="multipart/form-data">
        <?= csrf_field() ?>
-          <input type="file" name="image" accept="image/*"/>
-          <p><?= lang('select-file-up'); ?>: 120x120px (jpg, jpeg, png)</p>
-          <p><input type="submit" value="Загрузить"/></p>
+            <div class="box-form-img"> 
+                <div class="boxline">
+                    <div class="input-images"></div>
+                </div>
+            </div> 
+            <div class="clear">
+            <p><?= lang('select-file-up'); ?>: 120x120px (jpg, jpeg, png)</p>
+            <p><input type="submit" value="Загрузить"/></p>
+            </div>
         </form>
     </div> 
 </main>

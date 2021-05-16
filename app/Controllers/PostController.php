@@ -8,11 +8,11 @@ use App\Models\SpaceModel;
 use App\Models\AnswerModel;
 use App\Models\CommentModel;
 use App\Models\VotesPostModel;
-use Phphleb\Imageresizer\SimpleImage;
 use Lori\Config;
 use Lori\Base;
 use Parsedown;
 use UrlRecord;
+use SimpleImage;
 
 class PostController extends \MainController
 {
@@ -73,7 +73,7 @@ class PostController extends \MainController
         }
 
         $other = [
-            'img'   => '/assets/images/areadev.jpg'
+            'img' => Config::get(Config::PARAM_URL) . '/assets/images/areadev.webp',
         ];
    
         // title, description
@@ -172,10 +172,17 @@ class PostController extends \MainController
             $answers[$ind]          = $row;
         }
        
+        if($post['post_content_img']) {
+            $content_img  = Config::get(Config::PARAM_URL) . '/uploads/post/' . $post['post_content_img'];
+        } else {
+            $content_img  = null;
+        }
+       
         $other = [
             'type'      => 'article',
             'url'       => '/post/' . $post['post_id'] . '/' . $post['post_slug'],
             'post_date' => $post['post_date'],
+            'img'       => $content_img,
         ];
        
         // title, description
@@ -190,7 +197,7 @@ class PostController extends \MainController
 
         $data = [
             'h1'        => lang('Post'),
-            'canonical' => '/post/' . $post['post_id'] . '/' . $post['post_slug'],
+            'canonical' => Config::get(Config::PARAM_URL) . '/post/' . $post['post_id'] . '/' . $post['post_slug'],
         ]; 
         
         return view(PR_VIEW_DIR . '/post/post-view', ['data' => $data, 'post' => $post, 'answers' => $answers,  'uid' => $uid,  'recommend' => $recommend,  'lo' => $lo]);
@@ -248,16 +255,21 @@ class PostController extends \MainController
         $data = [
             'h1'    => lang('Add post')
         ];  
-       
+
         // title, description
         Base::Meta(lang('Add post'), lang('Add post'), $other = false); 
         
+        Request::getHead()->addStyles('/assets/css/image-uploader.css'); 
+        Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
+
         Request::getResources()->addBottomStyles('/assets/md/editor.css');  
         Request::getResources()->addBottomScript('/assets/md/Markdown.Converter.js'); 
         Request::getResources()->addBottomScript('/assets/md/Markdown.Sanitizer.js');
         Request::getResources()->addBottomScript('/assets/md/Markdown.Editor.js');
         Request::getResources()->addBottomScript('/assets/md/editor.js');
-       
+        
+ 
+
         return view(PR_VIEW_DIR . '/post/post-add', ['data' => $data, 'uid' => $uid, 'space' => $space]);
     }
     
@@ -267,13 +279,15 @@ class PostController extends \MainController
         // Получаем title и содержание
         $post_title             = \Request::getPost('post_title');
         $post_content           = $_POST['post_content']; // не фильтруем
-        $post_content_img       = \Request::getPost('content_img');
         $post_url               = \Request::getPost('post_url');
         $post_closed            = \Request::getPostInt('closed');
         $post_draft             = \Request::getPostInt('post_draft');
         $post_top               = \Request::getPostInt('top'); 
         $post_type              = \Request::getPostInt('post_type');
-     
+      
+        // Используем для возврата
+        $redirect = '/post/add';
+
         // IP адрес и ID кто добавляет
         $post_ip_int  = \Request::getRemoteAddress();
         $post_user_id = $_SESSION['account']['user_id'];
@@ -281,8 +295,7 @@ class PostController extends \MainController
         // Получаем id пространства
         $space_id   = \Request::getPost('space_id');
         $tag_id     = \Request::getPost('tag_id');
-        
-        $redirect = '/post/add';
+
         Base::Limits($post_title, lang('Title'), '6', '460', $redirect);
         Base::Limits($post_content, lang('The post'), '6', '15000', $redirect);
         
@@ -297,17 +310,60 @@ class PostController extends \MainController
             $og_img             = self::grabOgImg($post_url);
             $parse              = parse_url($post_url);
             $post_url_domain    = $parse['host']; 
-        } 
+        }  else {
+            
+            // images
+            $name     = $_FILES['images']['name'][0];
+            if($name) {
+                $size     = $_FILES['images']['size'][0];
+                $ext      = strtolower(pathinfo($name, PATHINFO_EXTENSION));
+                $width_h  = getimagesize($_FILES['images']['tmp_name'][0]);
+
+                $valid =  true;
+                if (!in_array($ext, array('jpg','jpeg','png','gif'))) {
+                    $valid = false;
+                    Base::addMsg(lang('file-type-not-err'), 'error');
+                    redirect($redirect);
+                }
+                
+                // Проверка ширину
+                if ($width_h['0'] < 500) {
+                    $valid = false;
+                    Base::addMsg('Ширина меньше 600 пикселей', 'error');
+                    redirect($redirect);
+                }
+
+                if ($valid) {
+                
+                    $image = new  SimpleImage();
+                    $path = HLEB_PUBLIC_DIR. '/uploads/post/';
+                    $year = date('Y') . '/';
+                    $file = $_FILES['images']['tmp_name'][0];
+                    $filename = 'c-' . time();
+                   
+                    if(!is_dir($path . $year)) { @mkdir($path . $year); }             
+                    
+                    // https://github.com/claviska/SimpleImage
+                    $image
+                        ->fromFile($file)  // load image.jpg
+                        ->autoOrient()     // adjust orientation based on exif data
+                        ->resize(820, null)
+                        ->toFile($path . $year . $filename .'.webp', 'image/webp');
+                  
+                    $post_img = $year . $filename . '.webp';
+                }
+            }
+        }
 
         // Проверяем url для > TL1
         // Ввести проверку дублей и запрещенных, для img повторов
-        $post_url               = empty($post_url) ? '' : $post_url;
-        $post_url_domain        = empty($post_url_domain) ? '' : $post_url_domain;
-        $post_content_img       = empty($post_content_img) ? '' : $post_content_img;
-        $og_img                 = empty($og_img) ? '' : $og_img;
-        $tag_id                 = empty($tag_id) ? 0 : $tag_id;
-        $post_draft             = empty($post_draft) ? 0 : $post_draft;
-
+        $post_url           = empty($post_url) ? '' : $post_url;
+        $post_url_domain    = empty($post_url_domain) ? '' : $post_url_domain;
+        $post_content_img   = empty($post_img) ? '' : $post_img;
+        $og_img             = empty($og_img) ? '' : $og_img;
+        $tag_id             = empty($tag_id) ? 0 : $tag_id;
+        $post_draft         = empty($post_draft) ? 0 : $post_draft;
+        
         // Ограничим частоту добавления
         // Добавить условие TL
         $num_post =  PostModel::getPostSpeed($post_user_id);
@@ -388,9 +444,10 @@ class PostController extends \MainController
             
             if(in_array($ext, array ('jpg', 'jpeg', 'png'))) {
                 
-                $puth = HLEB_PUBLIC_DIR . '/uploads/thumbnails/';
+                $path = HLEB_PUBLIC_DIR . '/uploads/post/thumbnails/';
                 $year = date('Y') . '/';
                 $filename = 'p-' . time() . '.' . $ext;
+                $file = 'p-' . time();
                 
                 if(!is_dir($puth . $year)) { @mkdir($puth . $year); }
                 $local = $puth . $year . $filename;
@@ -407,14 +464,15 @@ class PostController extends \MainController
  
                 // https://github.com/phphleb/imageresizer
                 $image = new SimpleImage();
-                // Путь к исходному файлу в формате JPEG, GIF или PNG
-                $image->load($puth . $year . $filename);
-                // По ширине и высоте непропорционально
-                $image->resize(165, 125);
-                $image->save($puth . $year . $filename, "jpeg");
+                
+                $image
+                ->fromFile($local)  // load image.jpg
+                ->autoOrient()     // adjust orientation based on exif data
+                ->resize(165, null) // 125
+                ->toFile($path . $year . $file .'.jpeg', 'image/jpeg');
 
                 if(file_exists($local)) {
-                    return $year . $filename;
+                    return $year . $file .'.jpeg';
                 }
                 
             }
@@ -449,12 +507,15 @@ class PostController extends \MainController
             'h1'    => lang('Edit post')
         ];
 
+        Request::getHead()->addStyles('/assets/css/image-uploader.css'); 
+        Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
+
         Request::getResources()->addBottomStyles('/assets/md/editor.css');  
         Request::getResources()->addBottomScript('/assets/md/Markdown.Converter.js'); 
         Request::getResources()->addBottomScript('/assets/md/Markdown.Sanitizer.js');
         Request::getResources()->addBottomScript('/assets/md/Markdown.Editor.js');
         Request::getResources()->addBottomScript('/assets/md/editor.js');
-        
+
         // title, description
         Base::Meta(lang('Edit post'), lang('Edit post'), $other = false);
 
@@ -467,7 +528,6 @@ class PostController extends \MainController
         $post_id                = \Request::getPostInt('post_id');
         $post_title             = \Request::getPost('post_title');
         $post_content           = $_POST['post_content']; // не фильтруем 
-        $post_content_img       = \Request::getPost('content_img');
         $post_type              = \Request::getPostInt('post_type');
         $post_draft             = \Request::getPostInt('post_draft');
         $post_closed            = \Request::getPostInt('closed');
@@ -511,7 +571,6 @@ class PostController extends \MainController
         // Если больше N оповещение персонала, если изменен на запрещенный, скрытие поста,
         // или более расширенное поведение, а пока просто проверим
         $post_url               = empty($post_url) ? '' : $post_url;
-        $post_content_img       = empty($post_content_img) ? '' : $post_content_img;
         $post_tag_img           = empty($post_tag_id) ? '' : $post_tag_id;
 
         // Проверим хакинг формы
@@ -526,6 +585,59 @@ class PostController extends \MainController
         } else {
             $post_date = $post['post_date'];
         }
+        
+        // images
+        $name     = $_FILES['images']['name'][0];
+        
+        if($name) { 
+            $size     = $_FILES['images']['size'][0];
+            $ext      = strtolower(pathinfo($name, PATHINFO_EXTENSION));
+            $width_h  = getimagesize($_FILES['images']['tmp_name'][0]);
+
+            $valid =  true;
+            if (!in_array($ext, array('jpg','jpeg','png','gif'))) {
+                $valid = false;
+                Base::addMsg(lang('file-type-not-err'), 'error');
+                redirect($redirect);
+            }
+            
+            // Проверка ширину
+            if ($width_h['0'] < 500) {
+                $valid = false;
+                Base::addMsg('Ширина меньше 600 пикселей', 'error');
+                redirect($redirect);
+            }
+
+            if ($valid) {
+            
+                $image = new  SimpleImage();
+                $path = HLEB_PUBLIC_DIR. '/uploads/post/';
+                $year = date('Y') . '/';
+                $file = $_FILES['images']['tmp_name'][0];
+                $filename = 'c-' . time();
+               
+                if(!is_dir($path . $year)) { @mkdir($path . $year); }             
+                
+                // https://github.com/claviska/SimpleImage
+                $image
+                    ->fromFile($file)  // load image.jpg
+                    ->autoOrient()     // adjust orientation based on exif data
+                    ->resize(820, null)
+                    ->toFile($path . $year . $filename .'.webp', 'image/webp');
+              
+                $post_img = $year . $filename . '.webp';
+                
+                // Удалим если есть старая
+                if($post['post_content_img'] != $post_img){
+                    chmod($path . $post['post_content_img'], 0777);
+                    unlink($path . $post['post_content_img']);
+                } 
+                
+            } 
+ 
+        }
+        
+        $post_img = empty($post_img) ? $post['post_content_img'] : $post_img;
 
         $data = [
             'post_id'               => $post_id,
@@ -534,7 +646,7 @@ class PostController extends \MainController
             'post_date'             => $post_date,
             'post_draft'            => $post_draft,
             'post_content'          => $post_content,
-            'post_content_img'      => $post_content_img,
+            'post_content_img'      => $post_img,
             'post_closed'           => $post_closed,
             'post_top'              => $post_top,
             'post_space_id'         => $post_space_id,
@@ -615,8 +727,8 @@ class PostController extends \MainController
         $Parsedown = new Parsedown(); 
         $Parsedown->setSafeMode(true); // безопасность
         
-        $post = $Parsedown->text($post['post_content']);
+        $post['post_content'] = $Parsedown->text($post['post_content']);
 
-        return view(PR_VIEW_DIR . '/post/postcode', ['post_content' => $post]);
+        return view(PR_VIEW_DIR . '/post/postcode', ['post' => $post]);
     }
 }

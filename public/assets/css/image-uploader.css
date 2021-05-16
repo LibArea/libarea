@@ -1,0 +1,173 @@
+/*! Image Uploader - v1.2.3 - 26/11/2019
+ * Copyright (c) 2019 Christian Bayer; Licensed MIT 
+ * + modification (c) Evg 2021 */
+ 
+/* Icons Font Face*/
+
+@font-face {
+    font-family: 'Image Uploader Icons';
+    src: url('./fonts/iu.eot');
+    src: url('./fonts/iu.eot') format('embedded-opentype'),
+    url('./fonts/iu.ttf') format('truetype'),
+    url('./fonts/iu.woff') format('woff'),
+    url('./fonts/iu.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Icons class */
+[class^="iui-"], [class*="iui-"] {
+    font-family: 'Image Uploader Icons' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Icon Close */
+.iui-close:before {
+    content: "\e900";
+}
+
+/* Icon Cloud Upload */
+.iui-cloud-upload:before {
+    content: "\e901";
+}
+
+.image-uploader {
+  border: 1px solid #d9d9d9;
+  position: relative;
+  width: 528px;
+  height: 225px;
+}
+.boxline.post .input-images img {
+  max-width: 400px;
+  padding: 20px;
+  max-height: 190px;
+}
+
+/* Base style */
+.box.setting.avatar .image-uploader, 
+.box.setting.space .image-uploader {
+  border: 1px solid #d9d9d9;
+  position: relative;
+  width: 128px;
+  height: 125px;
+}
+
+.img-post-edit img.img-post {
+  max-width: 300px;  
+}
+
+/* Style on hover */
+.image-uploader.drag-over {
+    background-color: #f3f3f3;
+}
+
+/* Hide the file input */
+.image-uploader input[type="file"] {
+    width: 0;
+    height: 0;
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+
+/* Text container */
+.image-uploader .upload-text {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.image-uploader .upload-text i {
+    display: block;
+    font-size: 3rem;
+    margin-bottom: .5rem;
+}
+
+.image-uploader .upload-text span {
+    display: block;
+}
+
+/* Hide the text if there is at least one uploaded image */
+.image-uploader.has-files .upload-text {
+    display: none;
+}
+
+/* Delete image button */
+.image-uploader .uploaded .uploaded-image .delete-image {
+    display: none;
+    cursor: pointer;
+    position: absolute;
+    top: .2rem;
+    right: .2rem;
+    border-radius: 50%;
+    padding: .3rem;
+    line-height: 1;
+    background-color: rgba(0, 0, 0, .5);
+    -webkit-appearance: none;
+    border: none;
+}
+
+.box.setting.avatar img.ava, 
+.box.setting.space img.ava {
+  float: left;
+  border: 1px solid #d9d9d9;
+  padding: 7px;
+ 
+}
+
+.box.setting.space .uploaded-image img,
+.box.setting.avatar .uploaded-image img {
+  width: 112px;
+  padding: 8px;
+  height: 110px;
+}
+
+.box-form-img {
+  float: left;
+  margin-left: 30px;
+  width: 150px;
+}
+
+.image-uploader .uploaded .uploaded-image:hover .delete-image {
+    display: block;
+}
+
+.image-uploader .uploaded .uploaded-image .delete-image i {
+    display: block;
+    color: #fff;
+    width: 1.4rem;
+    height: 1.4rem;
+    font-size: 1.4rem;
+    line-height: 1.4rem;
+}
+
+ 
+
+ 
+
+@media screen and (max-width: 786px) {
+    .image-uploader .uploaded {
+        padding: .3rem;
+    }
+
+    .image-uploader .uploaded .uploaded-image {
+        width: calc(33.3333333333% - .6rem);
+        padding-bottom: calc(33.3333333333% - .3rem);
+        margin: .3rem;
+    }
+}
+
+ 

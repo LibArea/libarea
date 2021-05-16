@@ -4,7 +4,7 @@
     <h1><?= $data['h1']; ?></h1>
 
     <div class="box create">
-        <form action="/post/create" method="post">
+        <form action="/post/create" method="post" enctype="multipart/form-data">
             <?= csrf_field() ?>
             <div class="boxline">
                 <label for="post_title">Заголовок</label>
@@ -17,7 +17,11 @@
                     <input id="graburl" type="submit_url" name="submit_url" value="Извлечь" />
                     <br>
                 </div> <?php } ?>
-                
+            <div class="boxline post">    
+                <div class="boxline">
+                    <div class="input-images"></div>
+                </div>
+            </div>
             <div class="boxline">
                 <?php include TEMPLATE_DIR . '/post/editor.php'; ?>
             </div>

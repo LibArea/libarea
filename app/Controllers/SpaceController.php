@@ -3,7 +3,7 @@
 namespace App\Controllers;
 use App\Models\SpaceModel;
 use Hleb\Constructor\Handlers\Request;
-use ImageUpload;
+use SimpleImage;
 use Lori\Config;
 use Lori\Base;
 use Parsedown;
@@ -117,9 +117,8 @@ class SpaceController extends \MainController
 
         $meta_title = lang('Change') . ' - ' . $slug;
         
-        Request::getResources()->addBottomStyles('/assets/js/md/mdeditor.css');  
-        Request::getResources()->addBottomScript('/assets/js/md/mdeditor.min.js');
-        Request::getResources()->addBottomScript('/assets/js/editor.js');
+        Request::getHead()->addStyles('/assets/css/image-uploader.css'); 
+        Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
         
         // title, description
         Base::Meta($meta_title, lang('Change'), $other = false);
@@ -281,11 +280,11 @@ class SpaceController extends \MainController
         Base::Limits($space_description, 'Meta-', '60', '190', $redirect);
         Base::Limits($space_slug, 'SLUG', '4', '10', $redirect);
 
-        $name     = $_FILES['image']['name'];
+        $name     = $_FILES['images']['name'][0];
         if($name) {
-            $size     = $_FILES['image']['size'];
+            $size     = $_FILES['images']['size'][0];
             $ext      = strtolower(pathinfo($name, PATHINFO_EXTENSION));
-            $width_h  = getimagesize($_FILES['image']['tmp_name']);
+            $width_h  = getimagesize($_FILES['images']['tmp_name'][0]);
            
             $valid =  true;
             if (!in_array($ext, array('jpg','jpeg','png','gif'))) {
@@ -294,35 +293,22 @@ class SpaceController extends \MainController
                 redirect('/space/'.$space_slug.'/edit');
             }
 
-            // Проверка ширины, высоты и размера
-            if ($width_h['0'] > 150) {
-                $valid = false;
-                Base::addMsg('Ширина больше 150 пикселей', 'error');
-                redirect('/space/'.$space_slug.'/edit');
-            }
-            if ($width_h['1'] > 150) {
-                $valid = false;
-                Base::addMsg('Высота больше 150 пикселей', 'error');
-                redirect('/space/'.$space_slug.'/edit');
-            }
-            if ($size > 50000) {
-                $valid = false;
-                Base::addMsg('Размер файла превышает допустимый', 'error');
-                redirect('/space/'.$space_slug.'/edit');
-            }
-
             if ($valid) {
                 // 110px и 18px
                 $path_img       = HLEB_PUBLIC_DIR. '/uploads/space/';
                 $path_img_small = HLEB_PUBLIC_DIR. '/uploads/space/small/';
-                
-                $image = new ImageUpload('image'); 
-                
-                $image->resize(110, 110, 'crop');            
-                $img = $image->saveTo($path_img, $space_id . '_space');
-                
-                $image->resize(18, 18);            
-                $image->saveTo($path_img_small, $space_id. '_space');
+                $file           = $_FILES['images']['tmp_name'][0];
+                $filename       =  's-' . $space['space_id'] . '-' . time();
+
+                $image = new  SimpleImage();
+ 
+                $image
+                    ->fromFile($file)  // load image.jpg
+                    ->autoOrient()     // adjust orientation based on exif data
+                    ->resize(110, 110)
+                    ->toFile($path_img . $filename .'.jpeg', 'image/jpeg')
+                    ->resize(18, 18)
+                    ->toFile($path_img_small . $filename .'.jpeg', 'image/jpeg');
                 
                 // Удалим, кроме дефолтной
                 if($space['space_img'] != 'space_no.png'){
@@ -331,13 +317,15 @@ class SpaceController extends \MainController
                     unlink($path_img . $space['space_img']);
                     unlink($path_img_small . $space['space_img']);
                 }  
-                $space_img = $img;
+                
+                $space_img    = $filename . '.jpeg';
+                
             } else {
-                $space_img = (empty($space['space_img'])) ? '' : $space['space_img'];
+                $space_img = empty($space['space_img']) ? '' : $space['space_img'];
             }
             
         } else {
-            $space_img = (empty($space['space_img'])) ? '' : $space['space_img'];
+            $space_img = empty($space['space_img']) ? '' : $space['space_img'];
         }
         
         $space_color = \Request::getPost('color');

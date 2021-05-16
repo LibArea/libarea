@@ -412,9 +412,9 @@ class Base
        
         // Статья, профиль участника и весь остальной сайт
         if($other) {
-            if(!empty($other['img'])) {
+            if($other['img']) {
                 Request::getHead()->addMeta('og:image', $other['img']);
-                Request::getHead()->addMeta('og:image:type', 'image/jpeg');
+                Request::getHead()->addMeta('og:image:type', 'image/webp');
             }
             if (!empty($other['type']) == 'article') {
                 Request::getHead()->addMeta('og:type', 'article');

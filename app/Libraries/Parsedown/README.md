@@ -29,8 +29,8 @@ Install the `[composer package]` by running the following command:
     composer require erusev/parsedown
 
 #### Manual
-1. Download the "Source code" from the `[latest release]`
-2. Include `Parsedown.php`
+1.  Download the "Source code" from the `[latest release]`
+2.  Include `Parsedown.php`
 
 [composer package]: https://packagist.org/packages/erusev/parsedown "The Parsedown package on packagist.org"
 [latest release]: https://github.com/erusev/parsedown/releases/latest "The latest release of Parsedown"
@@ -52,6 +52,7 @@ More examples in [the wiki](https://github.com/erusev/parsedown/wiki/) and in [t
 Parsedown is capable of escaping user-input within the HTML that it generates. Additionally Parsedown will apply sanitisation to additional scripting vectors (such as scripting link destinations) that are introduced by the markdown syntax itself.
 
 To tell Parsedown that it is processing untrusted user-input, use the following:
+
 ```php
 $parsedown = new Parsedown;
 $parsedown->setSafeMode(true);
@@ -66,6 +67,7 @@ In both cases you should strongly consider employing defence-in-depth measures, 
 Safe mode does not necessarily yield safe results when using extensions to Parsedown. Extensions should be evaluated on their own to determine their specific safety against XSS.
 
 #### Escaping HTML
+
 > ⚠️  **WARNING:** This method isn't safe from XSS!
 
 If you wish to escape HTML **in trusted input**, you can use the following:

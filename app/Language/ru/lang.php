@@ -172,7 +172,7 @@ return [
     'Change avatar page'    => 'Страница изменение аватарки',    
     'Change password'       => 'Изменение пароля', 
     'Change password page'  => 'Страница изменение пароля',
-    'select-file-up'        => 'Выберите файл для загрузки',    
+    'select-file-up'        => 'Рекомендуемый размер',    
    
     /* MSG */
     'text-string-length'    => 'Длина %1$s должна быть от %2$s до %3$s символов',
