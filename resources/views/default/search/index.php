@@ -29,7 +29,7 @@
             <?php foreach ($result as  $post) { ?>
                    <div class="search max-width">
                         <div class="search-info">
-                            <img src="/uploads/space/small/<?= $post['space_img']; ?>" alt="<?= $post['space_name']; ?>">
+                            <img src="/uploads/spaces/small/<?= $post['space_img']; ?>" alt="<?= $post['space_name']; ?>">
                             <a class="search-info" href="/s/<?= $post['space_slug']; ?>"><?= $post['space_name']; ?></a>
                              — <?= lang('Like'); ?> <?= $post['post_votes']; ?>
                         </div>

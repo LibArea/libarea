@@ -365,3 +365,15 @@
 }(jQuery));
 
 $('.input-images').imageUploader();
+
+ let cover = {
+            preloaded: [],
+            imagesInputName: 'cover',
+            preloadedInputName: 'preloaded',
+            label: 'Фото',
+            extensions: ['.jpg', '.jpeg', '.png', '.gif', '.svg'],
+            mimes: ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml'],
+            maxSize: 3100000,
+            maxFiles: 1,
+    };
+$('.input-images-cover').imageUploader(cover);

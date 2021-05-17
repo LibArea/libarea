@@ -56,7 +56,7 @@
                     <div id="show_<?= $post['post_id']; ?>" class="show_detail"></div> 
                     
                     <div class="footer">
-                        <img class="ava" alt="<?= $post['login']; ?>" src="/uploads/avatar/small/<?= $post['avatar']; ?>">
+                        <img class="ava" alt="<?= $post['login']; ?>" src="/uploads/users/avatars/small/<?= $post['avatar']; ?>">
                         <span class="user"> 
                             <a href="/u/<?= $post['login']; ?>">
                                 <?= $post['login']; ?>

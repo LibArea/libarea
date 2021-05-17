@@ -173,7 +173,7 @@ class PostController extends \MainController
         }
        
         if($post['post_content_img']) {
-            $content_img  = Config::get(Config::PARAM_URL) . '/uploads/post/' . $post['post_content_img'];
+            $content_img  = Config::get(Config::PARAM_URL) . '/uploads/posts/' . $post['post_content_img'];
         } else {
             $content_img  = null;
         }
@@ -336,7 +336,7 @@ class PostController extends \MainController
                 if ($valid) {
                 
                     $image = new  SimpleImage();
-                    $path = HLEB_PUBLIC_DIR. '/uploads/post/';
+                    $path = HLEB_PUBLIC_DIR. '/uploads/posts/';
                     $year = date('Y') . '/';
                     $file = $_FILES['images']['tmp_name'][0];
                     $filename = 'c-' . time();
@@ -444,7 +444,7 @@ class PostController extends \MainController
             
             if(in_array($ext, array ('jpg', 'jpeg', 'png'))) {
                 
-                $path = HLEB_PUBLIC_DIR . '/uploads/post/thumbnails/';
+                $path = HLEB_PUBLIC_DIR . '/uploads/posts/thumbnails/';
                 $year = date('Y') . '/';
                 $filename = 'p-' . time() . '.' . $ext;
                 $file = 'p-' . time();
@@ -611,7 +611,7 @@ class PostController extends \MainController
             if ($valid) {
             
                 $image = new  SimpleImage();
-                $path = HLEB_PUBLIC_DIR. '/uploads/post/';
+                $path = HLEB_PUBLIC_DIR. '/uploads/posts/';
                 $year = date('Y') . '/';
                 $file = $_FILES['images']['tmp_name'][0];
                 $filename = 'c-' . time();

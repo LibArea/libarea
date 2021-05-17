@@ -7,7 +7,7 @@
         </li>
         <li>
             <a href="/u/<?= $uid['login']; ?>/setting/avatar">
-                <span><?= lang('Avatar'); ?></span>
+                <span><?= lang('Avatar'); ?> / <?= lang('Cover art'); ?></span>
             </a>
         </li>
         <li>
@@ -22,7 +22,7 @@
         <?php csrf_field(); ?>
             <div class="boxline">
                 <label for="name"><?= lang('Nickname'); ?></label>
-                <img class="mini ava" src="/uploads/avatar/small/<?= $user['avatar']; ?>"> 
+                <img class="mini ava" src="/uploads/users/avatars/small/<?= $user['avatar']; ?>"> 
                 <?= $user['login']; ?>
             </div>
             <div class="boxline">

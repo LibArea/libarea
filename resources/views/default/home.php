@@ -95,7 +95,7 @@
                     </div>
                     
                     <div class="footer">
-                        <img class="ava" alt="<?= $post['login']; ?>" src="/uploads/avatar/small/<?= $post['avatar']; ?>">
+                        <img class="ava" alt="<?= $post['login']; ?>" src="/uploads/users/avatars/small/<?= $post['avatar']; ?>">
                         <span class="user"> 
                             <a href="/u/<?= $post['login']; ?>">
                                 <?= $post['login']; ?>
@@ -154,7 +154,7 @@
     
         <div class="sb-telo comm-space-color_<?= $num; ?>">
             <div class="sb-date"> 
-                <img class="ava" alt="<?= $answ['login']; ?>" src="/uploads/avatar/small/<?= $answ['avatar']; ?>">
+                <img class="ava" alt="<?= $answ['login']; ?>" src="/uploads/users/avatars/small/<?= $answ['avatar']; ?>">
                 <?= $answ['answer_date']; ?>
             </div> 
             <a href="/post/<?= $answ['post_id']; ?>/<?= $answ['post_slug']; ?>#answ_<?= $answ['answer_id']; ?>">

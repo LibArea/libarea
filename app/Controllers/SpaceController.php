@@ -295,8 +295,8 @@ class SpaceController extends \MainController
 
             if ($valid) {
                 // 110px и 18px
-                $path_img       = HLEB_PUBLIC_DIR. '/uploads/space/';
-                $path_img_small = HLEB_PUBLIC_DIR. '/uploads/space/small/';
+                $path_img       = HLEB_PUBLIC_DIR. '/uploads/spaces/';
+                $path_img_small = HLEB_PUBLIC_DIR. '/uploads/spaces/small/';
                 $file           = $_FILES['images']['tmp_name'][0];
                 $filename       =  's-' . $space['space_id'] . '-' . time();
 

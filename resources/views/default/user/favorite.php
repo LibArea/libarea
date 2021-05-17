@@ -21,7 +21,7 @@
                             <?= $fav['space_name']; ?>
                         </a>
                         <div class="footer">
-                            <img class="ava" src="/uploads/avatar/small/<?= $fav['avatar']; ?>">
+                            <img class="ava" src="/uploads/users/avatars/small/<?= $fav['avatar']; ?>">
                             <span class="user"> 
                                 <a href="/u/<?= $fav['login']; ?>"><?= $fav['login']; ?></a> 
                             </span>

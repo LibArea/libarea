@@ -855,7 +855,7 @@ img.thumb {
 
 .footer .ava, 
 .mini.ava {
-  border-radius: 8px;
+  border-radius: 50%;
   height: 16px;
   margin-bottom: 2px;
   margin-right: 2px;
@@ -903,7 +903,7 @@ h1.space a {
 }
 
 .space-tags a {
-  font-size: 13px; 
+  font-size: 13px;
   display: block;
   margin: 0 0 5px 2px;
 }
@@ -966,14 +966,14 @@ a.space-u.tag-u {
 
 .space-box {
   margin-bottom: 10px;
-  margin-top: -1.5em;  
+  margin-top: -1.5em;
 }
 
 .space-box .wrap {
   padding: 0;
 }
 
-.space-box .yes-space, 
+.space-box .yes-space,
 .space-box .no-space {
   margin-top: 21px;
 }
@@ -997,7 +997,7 @@ a.space-u.tag-u {
   color: #fff;
 }
 
-.space-box-img, 
+.space-box-img,
 .space-img {
   float: left;
   width: 47px;
@@ -1056,7 +1056,7 @@ a.edit-space {
 }
 
 .fl {
-  padding: 5px; 
+  padding: 5px;
 }
 
 .bar-space-telo {
@@ -1105,7 +1105,7 @@ a.edit-space {
 }
 
 .line-qa {
-  border-top: 1px solid #eee; 
+  border-top: 1px solid #eee;
   margin-left: 30px;  
 }
 
@@ -1185,7 +1185,7 @@ ol.answer-telo {
   margin: 5px 0 5px 0;
 }
 
-ol.dell.comment-telo, 
+ol.dell.comment-telo,
 .dell.comm-telo_bottom {
   font-size: 13px;
   color: #888;
@@ -1266,24 +1266,24 @@ ol.comment-telo {
   margin: 0 1px;
 }
 
-.cm_addentry, 
-.comments .cm_add_link, 
-.comm-deletes, 
-.user-comm-fav, 
-.user-answ-fav, 
-.answers .answ_add_link, 
-.answers .cm_add_link, 
+.cm_addentry,
+.comments .cm_add_link,
+.comm-deletes,
+.user-comm-fav,
+.user-answ-fav,
+.answers .answ_add_link,
+.answers .cm_add_link,
 .answ-deletes {
   margin-left: 35px;
 }
 
-.addcomm, 
-.delcomm, 
-.editcomm, 
-.favcomm, 
-.addansw, 
-.delansw, 
-.editansw, 
+.addcomm,
+.delcomm,
+.editcomm,
+.favcomm,
+.addansw,
+.delansw,
+.editansw,
 .addcomm_re {
   color: var(--color-gray-1);
   font-size: 9.5pt;

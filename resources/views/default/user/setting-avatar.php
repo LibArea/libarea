@@ -7,7 +7,7 @@
             </a>
         </li>
         <li class="active">
-            <span><?= lang('Avatar'); ?></span>
+            <span><?= lang('Avatar'); ?> / <?= lang('Cover art'); ?></span>
         </li>
         <li>
             <a href="/u/<?= $uid['login']; ?>/setting/security">
@@ -16,7 +16,7 @@
         </li>
     </ul>
     <div class="box setting avatar"> 
-       <img class="ava" src="/uploads/avatar/<?= $uid['avatar']; ?>">
+       <img class="ava" src="/uploads/users/avatars/<?= $uid['avatar']; ?>">
         
        <form method="POST" action="/users/setting/avatar/edit" enctype="multipart/form-data">
        <?= csrf_field() ?>
@@ -26,9 +26,27 @@
                 </div>
             </div> 
             <div class="clear">
-            <p><?= lang('select-file-up'); ?>: 120x120px (jpg, jpeg, png)</p>
+            <p><?= lang('select-file-up'); ?>: 240x240px (jpg, jpeg, png)</p>
             <p><input type="submit" value="Загрузить"/></p>
             </div>
+            <br>
+            <?php if($user['cover_art'] != 'cover_art.jpeg') { ?>
+                <img class="cover" src="/uploads/users/cover/<?= $user['cover_art']; ?>">
+            <?php } else { ?>
+                У вас нет баннера. Загрузите...
+                <br>
+            <?php } ?>
+            <br>
+            <div class="box-form-img-cover"> 
+                <div class="boxline">
+                    <div class="input-images-cover"></div>
+                </div>
+            </div> 
+            <div class="clear">
+            <p><?= lang('select-file-up'); ?>: 1230x240px (jpg, jpeg, png)</p>
+            <p><input type="submit" value="Загрузить"/></p>
+            </div>
+            <br>
         </form>
     </div> 
 </main>

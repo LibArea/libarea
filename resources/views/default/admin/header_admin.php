@@ -64,7 +64,7 @@
     <div class="menu-right">
     <div class="nav notif"> 
         <a href="/u/<?= $uid['login']; ?>"> 
-            <img class="ava" alt="<?= $uid['login']; ?>" src="/uploads/avatar/small/<?= $uid['avatar']; ?>">
+            <img class="ava" alt="<?= $uid['login']; ?>" src="/uploads/users/avatars/small/<?= $uid['avatar']; ?>">
         </a>
     </div>        
     </div>

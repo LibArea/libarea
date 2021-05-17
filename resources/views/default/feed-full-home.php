@@ -42,7 +42,7 @@
             </a>
             
             <div class="fuul-head">
-                <img class="ava" alt="<?= $post['login']; ?>" src="/uploads/avatar/small/<?= $post['avatar']; ?>">
+                <img class="ava" alt="<?= $post['login']; ?>" src="/uploads/users/avatars/small/<?= $post['avatar']; ?>">
                 <span class="user"> 
                     <a href="/u/<?= $post['login']; ?>">
                         <?= $post['login']; ?>
@@ -67,7 +67,7 @@
             <div class="full-fuul-home">
             
                 <?php if($post['post_thumb_img']) { ?> 
-                    <img class="thumb" alt="<?= $post['post_url']; ?>" src="/uploads/post/thumbnails/<?= $post['post_thumb_img']; ?>">
+                    <img class="thumb" alt="<?= $post['post_url']; ?>" src="/uploads/posts/thumbnails/<?= $post['post_thumb_img']; ?>">
                 <?php } ?>
                 
                 <?= Base::cutWords($post['post_content'], 248); ?> 

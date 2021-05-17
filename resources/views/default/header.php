@@ -80,7 +80,7 @@
             <?php } ?>  
             <div class="dropbtn nav">
                 <div class="b-my" title=""><span><?= $uid['login']; ?></span>  
-                    <img class="ava" alt="<?= $uid['login']; ?>" src="/uploads/avatar/small/<?= $uid['avatar']; ?>">
+                    <img class="ava" alt="<?= $uid['login']; ?>" src="/uploads/users/avatars/small/<?= $uid['avatar']; ?>">
                     <i class="icon arrow arrow-down"></i>
                 </div>
                 <div class="dropdown-menu">

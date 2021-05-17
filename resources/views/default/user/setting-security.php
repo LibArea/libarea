@@ -2,7 +2,7 @@
 <main>
     <ul class="nav-tabs">
         <li><a href="/u/<?= $uid['login']; ?>/setting"><span><?= lang('Setting profile'); ?></span></a></li>
-        <li><a href="/u/<?= $uid['login']; ?>/setting/avatar"><span><?= lang('Avatar'); ?></span></a></li>
+        <li><a href="/u/<?= $uid['login']; ?>/setting/avatar"><span><?= lang('Avatar'); ?> / <?= lang('Cover art'); ?></span></a></li>
         <li class="active"><span><?= lang('Password'); ?></span></li>
     </ul>
     <div class="box setting">

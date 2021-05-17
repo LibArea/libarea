@@ -30,7 +30,7 @@ class UserModel extends \MainModel
     // Получение информации по логину
     public static function getUserLogin($login)
     {
-        $query = XD::select(['id', 'login', 'name', 'email', 'avatar', 'color', 'invitation_available', 'about', 'created_at', 'my_post'])
+        $query = XD::select(['id', 'login', 'name', 'email', 'avatar', 'cover_art', 'color',  'invitation_available', 'about', 'created_at', 'my_post'])
                 ->from(['users'])
                 ->where(['login'], '=', $login);
 
@@ -84,6 +84,20 @@ class UserModel extends \MainModel
     public static function getAvatar($login)
     {
         $query = XD::select(['login', 'avatar'])->from(['users'])->where(['login'], '=', $login);
+
+        return $query->getSelectOne();
+    }
+
+    // Изменение обложку
+    public static function setCover($login, $img)
+    {
+        return XD::update(['users'])->set(['cover_art'], '=', $img)->where(['login'], '=', $login)->run();
+    }
+    
+   // Получение обложки
+    public static function getCover($login)
+    {
+        $query = XD::select(['login', 'cover_art'])->from(['users'])->where(['login'], '=', $login);
 
         return $query->getSelectOne();
     }

@@ -315,6 +315,7 @@ CREATE TABLE `users` (
   `invitation_id` int(11) NOT NULL DEFAULT 0,
   `deleted` tinyint(1) DEFAULT 0,
   `avatar` varchar(250) NOT NULL DEFAULT 'noavatar.png',
+  `cover_art` varchar(250) NOT NULL DEFAULT 'cover_art.jpeg',
   `color` varchar(12) NOT NULL DEFAULT '#f56400',
   `about` varchar(250) DEFAULT NULL,
   `rating` int(11) NOT NULL DEFAULT 0,
@@ -327,9 +328,9 @@ CREATE TABLE `users` (
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`id`, `login`, `name`, `email`, `password`, `activated`, `reg_ip`, `trust_level`, `created_at`, `updated_at`, `invitation_available`, `invitation_id`, `deleted`, `avatar`, `color`, `about`, `rating`, `status`, `my_post`, `ban_list`) VALUES
-(1, 'AdreS', 'Олег', 'ss@sdf.ru', '$2y$10$oR5VZ.zk7IN/og70gQq/f.0Sb.GQJ33VZHIES4pyIpU3W2vF6aiaW', 1, NULL, 5, '2021-03-08 21:37:04', '2021-03-08 21:37:04', 0, 0, 0, 'img_1.jpg', '#f56400', 'Тестовый аккаунт', 0, '0', 0, 0),
-(2, 'test', NULL, 'test@test.ru', '$2y$10$Iahcsh3ima0kGqgk6S/SSui5/ETU5bQueYROFhOsjUU/z1.xynR7W', 1, '127.0.0.1', 1, '2021-04-30 07:42:52', '2021-04-30 07:42:52', 0, 0, 0, 'noavatar.png', '#339900', NULL, 0, NULL, NULL, 0);
+INSERT INTO `users` (`id`, `login`, `name`, `email`, `password`, `activated`, `reg_ip`, `trust_level`, `created_at`, `updated_at`, `invitation_available`, `invitation_id`, `deleted`, `avatar`, `cover_art`, `color`, `about`, `rating`, `status`, `my_post`, `ban_list`) VALUES
+(1, 'AdreS', 'Олег', 'ss@sdf.ru', '$2y$10$oR5VZ.zk7IN/og70gQq/f.0Sb.GQJ33VZHIES4pyIpU3W2vF6aiaW', 1, NULL, 5, '2021-03-08 21:37:04', '2021-03-08 21:37:04', 0, 0, 0, 'img_1.jpg', 'cover_art.jpeg', '#f56400', 'Тестовый аккаунт', 0, '0', 0, 0),
+(2, 'test', NULL, 'test@test.ru', '$2y$10$Iahcsh3ima0kGqgk6S/SSui5/ETU5bQueYROFhOsjUU/z1.xynR7W', 1, '127.0.0.1', 1, '2021-04-30 07:42:52', '2021-04-30 07:42:52', 0, 0, 0, 'noavatar.png', 'cover_art.jpeg', '#339900', NULL, 0, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 

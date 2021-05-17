@@ -27,7 +27,7 @@
             <?php } ?>                 
         <?php } ?> 
         <div class="space-text">
-            <img class="space-box-img" src="/uploads/space/<?= $space_info['space_img']; ?>">
+            <img class="space-box-img" src="/uploads/spaces/<?= $space_info['space_img']; ?>">
             <a title="<?= $space_info['space_name']; ?>" href="/s/<?= $space_info['space_slug']; ?>">
                 <h1><?= $space_info['space_name']; ?></h1>
             </a>  
@@ -109,7 +109,7 @@
 
                 <div id="show_<?= $post['post_id']; ?>" class="show_detail"></div> 
                     <div class="footer">
-                        <img class="ava" src="/uploads/avatar/small/<?= $post['avatar'] ?>">
+                        <img class="ava" src="/uploads/users/avatars/small/<?= $post['avatar'] ?>">
                         <span class="user"> 
                             <a href="/u/<?= $post['login']; ?>"><?= $post['login']; ?></a> 
                         </span>

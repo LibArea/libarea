@@ -15,7 +15,7 @@
 
                     <div class="answ-telo">
                         <div class="answ-header">
-                            <img class="ava" alt="<?= $answ['login']; ?>" src="/uploads/avatar/small/<?= $answ['avatar']; ?>">
+                            <img class="ava" alt="<?= $answ['login']; ?>" src="/uploads/users/avatars/small/<?= $answ['avatar']; ?>">
                             <span class="user"> 
                                 <a href="/u/<?= $answ['login']; ?>"><?= $answ['login']; ?></a> 
                                 <?= $answ['date']; ?>

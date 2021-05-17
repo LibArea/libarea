@@ -44,7 +44,7 @@
                             <?php } ?>
                     </h1>
                     <div class="footer">
-                        <img class="ava" alt="<?= $post['login']; ?>" src="/uploads/avatar/small/<?= $post['avatar']; ?>">
+                        <img class="ava" alt="<?= $post['login']; ?>" src="/uploads/users/avatars/small/<?= $post['avatar']; ?>">
                         <span class="user"> 
                             <a href="/u/<?= $post['login']; ?>"><?= $post['login']; ?></a> 
                         </span>
@@ -114,12 +114,12 @@
                     <div class="post">
                         <?php if($post['post_content_img']) { ?> 
                             <div class="img-post-bl">
-                                <img class="img-post" alt="<?= $post['post_title']; ?>" src="/uploads/post/<?= $post['post_content_img']; ?>">
+                                <img class="img-post" alt="<?= $post['post_title']; ?>" src="/uploads/posts/<?= $post['post_content_img']; ?>">
                             </div>    
                         <?php } ?>
                     
                         <?php if($post['post_thumb_img']) { ?> 
-                            <img class="thumb" alt="<?= $post['post_url']; ?>" src="/uploads/post/thumbnails/<?= $post['post_thumb_img']; ?>">
+                            <img class="thumb" alt="<?= $post['post_url']; ?>" src="/uploads/posts/thumbnails/<?= $post['post_thumb_img']; ?>">
                         <?php } ?>
                     
                         <?= $post['post_content']; ?> 
@@ -196,7 +196,7 @@
 
     <?php if($post['space_slug']) { ?>
         <div class="post-space-box">
-            <img alt="<?= $post['space_name']; ?>" src="/uploads/space/<?= $post['space_img']; ?>">
+            <img alt="<?= $post['space_name']; ?>" src="/uploads/spaces/<?= $post['space_img']; ?>">
             <a href="/s/<?= $post['space_slug']; ?>"><?= $post['space_name']; ?></a>
             <div class="post-space-box-desc">
                 <?= $post['space_description']; ?>
