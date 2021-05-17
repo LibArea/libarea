@@ -235,7 +235,7 @@ class AuthController extends \MainController
             
             // Если нажал "Запомнить" 
             // Устанавливает сеанс пользователя и регистрирует его
-            if ($rememberMe == 1) {
+            if ($rememberMe == 1) { 
                 UserModel::rememberMe($uInfo['id']);
             }
             
@@ -259,10 +259,11 @@ class AuthController extends \MainController
 
     public function logout() 
     { 
-       if(!isset($_SESSION)) { session_start(); } 
-       session_destroy();
-       // Возможно, что нужно очистить все или некоторые cookies
-       redirect('/');
+        if(!isset($_SESSION)) { session_start(); } 
+        session_destroy();
+        // Возможно, что нужно очистить все или некоторые cookies
+        setcookie("remember","",time()-3600,"/");
+        redirect('/');
     }
 
     public function recoverPage() 

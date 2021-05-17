@@ -365,17 +365,14 @@ class UserModel extends \MainModel
         else {
             self::updateToken($data, $user_id);
         }
-
+        
         // set_Cookie
-        setcookie(
-            "remember",
-            $token,
-            $expires,
-            '',     // cookieDomain
-            '/',    // cookiePath
-            false,  // cookieSecure
-            false,  // cookieHTTPOnly
-        );
+        setcookie("remember", $token, $expires);
+          //  '',     // cookieDomain
+          //  '/',    // cookiePath
+          //  false,  // cookieSecure
+          //  false,  // cookieHTTPOnly
+        
     } 
 
     // Каждый раз, когда пользователь входит в систему, используя свой файл cookie «запомнить меня»
@@ -416,15 +413,11 @@ class UserModel extends \MainModel
 
         self::UpdateSelector($data, $selector);
 
-        setcookie(
-            "remember",
-            $token,
-            $expires,
-            '',     // cookieDomain
-            '/',    // cookiePath
-            false,  // cookieSecure
-            false,  // cookieHTTPOnly
-        );
+        setcookie("remember", $token, $expires);
+           // '',     // cookieDomain
+           // '/',    // cookiePath
+           // false,  // cookieSecure
+           // false,  // cookieHTTPOnly
     }
 
     // Поля в таблице users_auth_tokens
