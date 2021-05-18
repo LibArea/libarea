@@ -218,7 +218,7 @@ blockquote {
 a.logo,
 .slash,
 a.home {
-  font-size: 18px;
+  font-size: 16px;
   color: #888;
 }
 
@@ -467,7 +467,10 @@ input[type="submit_url"] {
   color: #333;
 }
 
-input[type="submit_url"] { text-align: center; }
+input[type="submit_url"] {
+  text-align: center; 
+  width: 107px;
+}
 
 button:first-child,
 input[type="button"]:first-child,
@@ -540,8 +543,14 @@ input:disabled {
 }
 
 input.form-about,
-input.add { width: 298px; }
+input.add { 
+  width: calc(100% - 12em); 
+}
 
+input.add-url {
+  width: calc(100% - 22em);
+}
+ 
 .box .boxline {
   clear: both;
   margin-bottom: 0.9em;
@@ -1059,6 +1068,11 @@ a.edit-space {
   padding: 5px;
 }
 
+.fl.active {
+  background: rgba(82,186,213,0.1);
+  display: table;
+}
+
 .bar-space-telo {
   display: flex;
   align-items: center;
@@ -1327,10 +1341,10 @@ ol.comment-telo {
 }
 
 .qa-ava img {
-  width: 31px;
-  height: 31px;
+  width: 18px;
+  height: 18px;
   float: right;
-  margin:  4px 0 0 10px;
+  margin: 0 0 0 10px;
 }
 
 .qa-login { 
@@ -1523,6 +1537,7 @@ body.menuno nav {
   nav, .no-mob { display: none; }
   main, main.w-75, main.w-100  { width: 100%; }
   .column { width: 19%; }
+  input.add, input.add-url { width: 94%; }
 }
 
 /* dark */

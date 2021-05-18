@@ -98,15 +98,13 @@ class XdDB
             $prms = HLEB_PARAMETERS_FOR_DB[$conn_type_bd];
 
             $opt = array(
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                PDO::ATTR_EMULATE_PREPARES =>
-                    $prms["emulate_prepares"] ?? false
+                \PDO::ATTR_ERRMODE => $prms["errmode"] ?? \PDO::ERRMODE_EXCEPTION,
+                \PDO::ATTR_DEFAULT_FETCH_MODE => $prms["default_fetch_mode"] ?? \PDO::FETCH_ASSOC,
+                \PDO::ATTR_EMULATE_PREPARES => $prms["emulate_prepares"] ?? false
             );
 
-            $user = $prms["user"];
-
-            $pass = $prms["pass"];
+            $user = $prms["user"] ?? '';
+            $pass = $prms["pass"] ?? $prms["password"] ?? '';
 
             $condition  = [];
 
@@ -201,6 +199,9 @@ class XdDB
             }
 
             \Hleb\Main\DataDebug::add($result_sql, $time, $dbname, $type);
+        }
+        if(defined('HLEB_DB_LOG_ENABLED') && HLEB_DB_LOG_ENABLED && function_exists('hleb_system_log')) {
+            hleb_system_log('[XD:DB LOG ' . $dbname . ' ' . round($time, 4) . ' sec] ' . $sql . ';');
         }
     }
 }

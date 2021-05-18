@@ -67,20 +67,20 @@
                             <?php } ?>
                         </div> 
                             <div class="qa-footer">
-                                <?php if ($uid['trust_level'] == 5) { ?> 
-                                    <div class="qa-date">
-                                        <?= $answ['answer_ip']; ?>
-                                    </div>
-                                <?php } ?> 
-                                <div class="qa-ava">
-                                    <img alt="<?= $answ['login']; ?>" src="/uploads/users/avatars/<?= $answ['avatar'] ?>">
-                                </div>
-                                <div class="qa-ava-info"> 
-                                    <a class="qa-login" href="/u/<?= $answ['login']; ?>"><?= $answ['login']; ?></a> 
+                                <div class="qa-date">
                                     <?= $answ['answer_date']; ?> 
                                     <?php if (empty($answ['edit'])) { ?>
                                         (<?= lang('ed'); ?>.)
                                     <?php } ?>
+                                    <?php if ($uid['trust_level'] == 5) { ?> 
+                                       - <?= $answ['answer_ip']; ?>
+                                    <?php } ?> 
+                                </div>
+                                <div class="qa-ava">
+                                    <img alt="<?= $answ['login']; ?>" src="/uploads/users/avatars/small/<?= $answ['avatar'] ?>">
+                                </div>
+                                <div class="qa-ava-info"> 
+                                    <a class="qa-login" href="/u/<?= $answ['login']; ?>"><?= $answ['login']; ?></a> 
                                 </div>
                             </div>
                              

@@ -6,13 +6,13 @@
      <div class="box setting post">
         <form action="/post/editpost/<?= $post['post_id']; ?>" method="post" enctype="multipart/form-data">
             <?= csrf_field() ?>
-            <div class="boxline">
-                <label for="post_title">Заголовок</label>
-                <input class="add" type="text" value="<?= htmlspecialchars($post['post_title']); ?>" name="post_title" />
-                <br />
+            <div class="boxline max-width">
+                <label for="post_title">Заголовок<sup class="red">*</sup></label>
+                <input class="add" max="250" type="text" value="<?= htmlspecialchars($post['post_title']); ?>" name="post_title" />
+                <div class="box_h">6 - 250 <?= lang('characters'); ?></div>
             </div>   
             <?php if($uid['trust_level'] == 5) { ?>
-                <div class="boxline">
+                <div class="boxline max-width">
                     <label for="post_title">URL</label>
                     <input class="add-url" type="text" value="<?= $post['post_url']; ?>" name="post_url" />
                     <input id="graburl" type="submit_url" name="submit_url" value="Извлечь" />
@@ -31,7 +31,7 @@
                 <img class="thumb" alt="<?= $post['post_url']; ?>" src="/uploads/posts/thumbnails/<?= $post['post_thumb_img']; ?>">
             <?php } ?> 
              
-            <div class="boxline post">    
+            <div class="boxline max-width post">    
                 <div class="boxline">
                     <div class="input-images"></div>
                 </div>

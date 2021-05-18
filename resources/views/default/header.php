@@ -26,11 +26,11 @@
         <ul>
             <li class="nav"> 
                 <?php if($uid['uri'] == '/') { ?>
-                   <a title="<?= lang('Home'); ?>" class="logo" href="/">LoriUP</a>
+                   <a title="<?= lang('Home'); ?>" class="logo" href="/">LORIUP</a>
                 <?php } else { ?>
                     <a title="<?= lang('Home'); ?>" class="logo" href="/"><i class="icon home"></i> 
                         <span class="slash no-mob">
-                            <span class="sl">\</span> <?= lang('LoriUP'); ?>
+                            <span class="sl">\</span> <?= lang('LORIUP'); ?>
                         </span>
                     </a>
                 <?php } ?>

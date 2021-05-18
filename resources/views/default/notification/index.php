@@ -1,7 +1,8 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 <main>
+    <a class="right edit-space" href="/notifications/delete">Я прочитал</a>
     <h1><?= $data['title'] ?></h1>
-    
+     
     <?php if (!empty($list)) { ?>
 
         <?php foreach ($list as  $notif) { ?>

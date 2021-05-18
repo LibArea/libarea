@@ -81,9 +81,7 @@
             </span>
             <br>
         <?php } ?>
-    </div>
         
-    <div class="box profile-telo">
         <?php if($data['space_user']) { ?>
             <br>
             <label class="required"><?= lang('Created by'); ?>:</label>
@@ -97,15 +95,13 @@
                 <?php } ?>
             </span>     
         <?php } ?>
-
+    </div>
+        
+    <div class="box profile-telo">
         <?php if($user['my_post'] != 0) { ?>
             <h4><?= lang('Selected Post'); ?>:</h4>
 
             <div class="post-telo">
-                <div id="vot<?= $onepost['post_id']; ?>" class="voters">
-                    <div data-id="<?= $onepost['post_id']; ?>" class="post-up-id"></div>
-                    <div class="score"><?= $onepost['post_votes']; ?></div>
-                </div>
                 <div class="post-body">
                     <a class="u-url" href="/post/<?= $onepost['post_id']; ?>/<?= $onepost['post_slug']; ?>">
                         <h2 class="titl"><?= $onepost['post_title']; ?></h2>

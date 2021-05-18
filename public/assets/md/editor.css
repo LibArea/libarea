@@ -168,3 +168,9 @@
 .icon-embed:before {
   content: "\ea7f";
 }
+
+@media (max-width: 880px) {
+  .wmd-panel { width: 96%; }
+  .wmd-input, .image-uploader { height: 120px; }
+  .wmd-preview { padding: 0 0 0 1px; margin: 20px 0 0 2px; }
+}

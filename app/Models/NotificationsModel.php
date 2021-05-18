@@ -98,5 +98,11 @@ class NotificationsModel extends \MainModel
                 ->where(['connection_type'], '=', $id)->getSelectOne();
     }  
 
-    
+    public static function setRemove($user_id)
+    {
+        XD::update(['notification'])->set(['read_flag'], '=', 1)
+                                 ->where(['recipient_uid'], '=', $user_id)
+                                 ->run();
+        return true;
+    }
 }

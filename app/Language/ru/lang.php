@@ -82,6 +82,7 @@ return [
     'All'               => 'Все',
     'You'               => 'Вы',
     'From'              => 'От',
+    'In'                => 'В',
     'Just me'           => 'Только я',
     'Publications'      => 'Публикации',
     'Selected Post'     => 'Избранный пост', 

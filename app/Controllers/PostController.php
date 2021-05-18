@@ -186,8 +186,10 @@ class PostController extends \MainController
         ];
        
         // title, description
-        $meta_desc  = substr(strip_tags($post['post_content']), 0, 160);
-        Base::Meta($post['post_title'], $meta_desc, $other); 
+        $desc  = mb_strcut(strip_tags($post['post_content']), 0, 180);
+        $meta_desc = $desc . ' — ' . $post['space_name'];
+        $title = $post['post_title'] . '  ' . lang('In') . ' ' . $post['space_name'];
+        Base::Meta($title, $meta_desc, $other); 
 
         Request::getResources()->addBottomStyles('/assets/md/editor.css');  
         Request::getResources()->addBottomScript('/assets/md/Markdown.Converter.js'); 
@@ -296,8 +298,8 @@ class PostController extends \MainController
         $space_id   = \Request::getPost('space_id');
         $tag_id     = \Request::getPost('tag_id');
 
-        Base::Limits($post_title, lang('Title'), '6', '460', $redirect);
-        Base::Limits($post_content, lang('The post'), '6', '15000', $redirect);
+        Base::Limits($post_title, lang('Title'), '6', '250', $redirect);
+        Base::Limits($post_content, lang('The post'), '6', '25000', $redirect);
         
         // Проверяем выбор пространства
         if ($space_id == '') {
@@ -551,19 +553,9 @@ class PostController extends \MainController
             redirect('/');
         }
         
-        // Проверяем длину title
-        if (Base::getStrlen($post_title) < 6 || Base::getStrlen($post_title) > 320) {
-            Base::addMsg('Длина заголовка должна быть от 6 до 320 знаков', 'error');
-            redirect('/post/edit' .$post_id);
-            return true;
-        }
-        
-        // Проверяем длину тела
-        if (Base::getStrlen($post_content) < 6 || Base::getStrlen($post_content) > 10000) {
-            Base::addMsg('Длина тела должна быть от 6 до 10000 знаков', 'error');
-            redirect('/post/edit/' .$post_id);
-            return true;
-        }
+        $redirect = '/post/edit' .$post_id;
+        Base::Limits($post_title, lang('Title'), '6', '250', $redirect);
+        Base::Limits($post_content, lang('The post'), '6', '25000', $redirect);
         
         // Проверяем url для > TL1
         // Ввести проверку дублей и запрещенных

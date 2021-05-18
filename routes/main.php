@@ -74,7 +74,8 @@ Route::before('Authorization@noAuth')->getGroup();
 
 	// Уведомления 
 	Route::get('/u/{login}/notifications')->controller('NotificationsController')->where(['login' => '[A-Za-z0-9]+']); 
-    Route::get('/notifications/read/{id}')->controller('NotificationsController@notificationRead')->where(['id' => '[0-9]+']);  
+    Route::get('/notifications/read/{id}')->controller('NotificationsController@notifRead')->where(['id' => '[0-9]+']);  
+    Route::get('/notifications/delete')->controller('NotificationsController@notifRemove');  
     
     // Избранное и черновики
     Route::get('/u/{login}/favorite')->controller('UserController@getUserFavorite')->where(['login' => '[A-Za-z0-9]+']);

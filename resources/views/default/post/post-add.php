@@ -6,18 +6,19 @@
     <div class="box create">
         <form action="/post/create" method="post" enctype="multipart/form-data">
             <?= csrf_field() ?>
-            <div class="boxline">
-                <label for="post_title">Заголовок</label>
-                <input id="title" class="add" type="text" name="post_title" /><br />
+            <div class="boxline max-width">
+                <label for="post_title">Заголовок<sup class="red">*</sup></label>
+                <input id="title" class="add" max="250" type="text" name="post_title" />
+                <div class="box_h">6 - 250 <?= lang('characters'); ?></div>
             </div>   
             <?php if($uid['trust_level'] == 5) { ?>
-                <div class="boxline">
+                <div class="boxline max-width">
                     <label for="post_title">URL</label>
                     <input id="link" class="add-url" type="text" name="post_url" />
                     <input id="graburl" type="submit_url" name="submit_url" value="Извлечь" />
                     <br>
                 </div> <?php } ?>
-            <div class="boxline post">    
+            <div class="boxline max-width post">    
                 <div class="boxline">
                     <div class="input-images"></div>
                 </div>
@@ -38,14 +39,14 @@
                 </div> 
                 <div class="boxline"> 
                     <label for="post_content">Закрыть</label>
-                    <input type="radio" name="closed" value="0"> <?= lang('No'); ?>
+                    <input type="radio" name="closed" checked value="0"> <?= lang('No'); ?>
                     <input type="radio" name="closed" value="1" > <?= lang('Yes'); ?>
                 </div>  
             <?php } ?>
             <?php if($uid['trust_level'] > 2) { ?>            
                 <div class="boxline">
                     <label for="post_content">Поднять</label>
-                    <input type="radio" name="top" value="0"> <?= lang('No'); ?>
+                    <input type="radio" name="top" checked value="0"> <?= lang('No'); ?>
                     <input type="radio" name="top" value="1"> <?= lang('Yes'); ?>
                 </div>                      
             <?php } ?>
