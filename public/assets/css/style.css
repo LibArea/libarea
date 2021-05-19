@@ -47,7 +47,7 @@ header {
   z-index: 10;
   border-bottom: 1px solid #eee;
   margin: 0 0 1rem 0;
-} 
+}
 
 main {
   overflow: hidden;
@@ -116,7 +116,7 @@ a:focus {
 }
 
 .clear {
-  clear: both;  
+  clear: both;
 }
 
 .right {
@@ -349,17 +349,10 @@ a.register {
   vertical-align: middle;
 }
 
-i.icon {
-  margin-right: 10px;
-}
-
-.post-body i.icon {
-  margin-left: 8px;
-}
-
-.nav.create i.icon {
-  color: #09c;
-}
+i.icon { margin-right: 10px; }
+.info i.icon { margin: 0 1px; }
+.post-body i.icon { margin-left: 8px; }
+.nav.create i.icon { color: #09c; }
 
 .menu-lf {
   margin-left: 20px;
@@ -532,7 +525,7 @@ select::-moz-focus-inner {
   outline: 0;
 }
 
-input:disabled, 
+input:disabled,
 button:disabled {
   background-color: #e9e9e9;
   color: gray;
@@ -543,8 +536,8 @@ input:disabled {
 }
 
 input.form-about,
-input.add { 
-  width: calc(100% - 12em); 
+input.add {
+  width: calc(100% - 12em);
 }
 
 input.add-url {
@@ -561,7 +554,7 @@ input.add-url {
   color: var(--color-gray-1);
 }
 
-.box label, 
+.box label,
 .box .label_holder {
   display: block;
   float: left;
@@ -601,18 +594,18 @@ a.add-space {
   text-align: center;
 }
 
-.register, 
+.register,
 #toggledark {
   float: left;
   margin-top: 1px;
 }
 
-.nav a:hover, 
+.nav a:hover,
 .nav.active > a {
   color: #ea6f5a;
 }
 
-.no-space, 
+.no-space,
 .yes-space {
   background: #f1f1f1;
   color: #666;

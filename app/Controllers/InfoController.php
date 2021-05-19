@@ -17,7 +17,7 @@ class InfoController extends \MainController
             'canonical' => Config::get(Config::PARAM_URL) . '/info',
         ];
         
-       // title, description
+       // Далее title, description
        Base::Meta(lang('Info'), lang('info-desc'), $other = false); 
  
        return view(PR_VIEW_DIR . '/info/index', ['data' => $data, 'uid' => $uid]);
@@ -25,7 +25,7 @@ class InfoController extends \MainController
 
     public function stats()
 	{
-        // Получаем общее количество: участников, постов, комментариев и голосов по ним
+        // Количество: участников, постов, комментариев и голосов по ним
         $user_num       = InfoModel::getUsersNumAll();
         $post_num       = InfoModel::getPostsNumAll();
         $comm_num       = InfoModel::getCommentsNumAll();
@@ -54,7 +54,6 @@ class InfoController extends \MainController
         Request::getResources()->addBottomStyles('/assets/css/info.css');
         Request::getResources()->addBottomScript('/assets/js/canvas.js');
 
-        // title, description
         Base::Meta(lang('Statistics'), lang('stats-desc'), $other = false); 
 
         return view(PR_VIEW_DIR . '/info/stats', ['data' => $data, 'uid' => $uid]);
@@ -64,11 +63,10 @@ class InfoController extends \MainController
 	{
         $uid  = Base::getUid();
         $data = [
-            'h1'            => lang('Rules'),
-            'canonical'     => Config::get(Config::PARAM_URL) . '/info/rules',
+            'h1'        => lang('Rules'),
+            'canonical' => Config::get(Config::PARAM_URL) . '/info/rules',
         ];
 
-        // title, description
         Base::Meta(lang('Rules'), lang('rules-desc'));
 
         return view(PR_VIEW_DIR . '/info/rules', ['data' => $data, 'uid' => $uid]);
@@ -82,31 +80,10 @@ class InfoController extends \MainController
             'canonical' => Config::get(Config::PARAM_URL) . '/info/about',
         ];
 
-        // title, description
         Base::Meta(lang('About'), lang('about-desc'), $other = false);
 
         return view(PR_VIEW_DIR . '/info/about', ['data' => $data, 'uid' => $uid]);
 	}
-
-    public function markdown()
-	{
-        $uid  = Base::getUid();
-        $data = [
-            'h1'            => lang('Мarkdown'),
-            'canonical'     => Config::get(Config::PARAM_URL) . '/info/markdown',
-        ];
-
-        Request::getResources()->addBottomStyles('/assets/md/editor.css');  
-        Request::getResources()->addBottomScript('/assets/md/Markdown.Converter.js'); 
-        Request::getResources()->addBottomScript('/assets/md/Markdown.Sanitizer.js');
-        Request::getResources()->addBottomScript('/assets/md/Markdown.Editor.js');
-        Request::getResources()->addBottomScript('/assets/md/editor.js');
-
-        // title, description
-        Base::Meta(lang('Мarkdown'), lang('markdown-desc'), $other = false);
-
-        return view(PR_VIEW_DIR . '/info/markdown', ['data' => $data, 'uid' => $uid]);
-	}  
 
     public function privacy()
 	{
@@ -116,26 +93,11 @@ class InfoController extends \MainController
             'canonical' => Config::get(Config::PARAM_URL) . '/info/privacy',
         ];
 
-        // title, description
         Base::Meta(lang('Privacy Policy'), lang('privacy-desc'), $other = false);
 
         return view(PR_VIEW_DIR . '/info/privacy', ['data' => $data, 'uid' => $uid]);
 	}  
-    
-    public function trustLevel()
-	{
-        $uid  = Base::getUid();
-        $data = [
-            'h1'        => lang('Trust level') . ' (TL) ',
-            'canonical' => Config::get(Config::PARAM_URL) . '/info/trust-level',
-        ];
 
-        // title, description
-        Base::Meta(lang('Trust level'), lang('tl-desc'), $other = false);
-
-        return view(PR_VIEW_DIR . '/info/trust-level', ['data' => $data, 'uid' => $uid]);
-	} 
-    
     public function restriction()
 	{
         $uid  = Base::getUid();
@@ -144,23 +106,9 @@ class InfoController extends \MainController
             'canonical' => Config::get(Config::PARAM_URL) . '/info/restriction',
         ];
 
-        // title, description
         Base::Meta(lang('Restriction'), lang('Restriction'), $other = false);
 
         return view(PR_VIEW_DIR . '/info/restriction', ['data' => $data, 'uid' => $uid]);
 	} 
 
-    public function initialSetup()
-	{
-        $uid  = Base::getUid();
-        $data = [
-            'h1'        => lang('Initial Setup'),
-            'canonical' => Config::get(Config::PARAM_URL) . '/info/initial-setup',         
-        ];
-
-        // title, description
-        Base::Meta(lang('Initial Setup'), lang('init-setip-desc'), $other = false);
-
-        return view(PR_VIEW_DIR . '/info/initial-setup', ['data' => $data, 'uid' => $uid]);
-	}    
 }

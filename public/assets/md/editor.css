@@ -8,13 +8,13 @@
   background-color: Silver;
 }
 
-.wmd-input { 
+.wmd-input {
   height: 300px;
   width: 98%;
   border: 1px solid DarkGray;
 }
 
-.wmd-input.h-150 { 
+.wmd-input.h-150 {
   height: 150px;
 }
 
@@ -39,11 +39,11 @@
 }
 
 .wmd-spacer {
-  width: 1px; 
-  height: 14px; 
+  width: 1px;
+  height: 14px;
   margin: 0 18px 0 0;
   background-color: Silver;
-  display: inline-block; 
+  display: inline-block;
   list-style: none;
 }
 
@@ -118,7 +118,6 @@
 
 [class^="icon-"],
 [class*=" icon-"] {
-  /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icomoon' !important;
   speak: never;
   font-style: normal;
@@ -148,5 +147,9 @@
 @media (max-width: 880px) {
   .wmd-panel { width: 96%; }
   .wmd-input, .image-uploader { height: 120px; }
-  .wmd-preview { padding: 0 0 0 1px; margin: 20px 0 0 2px; }
+  .wmd-preview { 
+    padding: 0 0 0 1px; 
+    margin: 20px 0 0 2px; 
+  }
+
 }

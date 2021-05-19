@@ -28,8 +28,6 @@ return [
     'select-file-up'    => 'Select the file to upload',
     
     /* Info */
-    'init-setip-desc'   => 'This page describes the requirements and steps for setting up and installing the site. Frequently asked questions.',
-    'tl-desc'           => 'Information about the users trust levels (TL). Rights, access.', 
     'privacy-desc'      => 'The sites Privacy Policy. Site rules.', 
     'about-desc'        => 'Information about the site and the team working on the community.',
     'stats-desc'        => 'Site statistics. Posts, comments, participants, and voting. Charts.',

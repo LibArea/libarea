@@ -1,7 +1,7 @@
 /*! Image Uploader - v1.2.3 - 26/11/2019
  * Copyright (c) 2019 Christian Bayer; Licensed MIT 
  * + modification (c) Evg 2021 */
- 
+
 /* Icons Font Face*/
 
 @font-face {
@@ -16,7 +16,8 @@
 }
 
 /* Icons class */
-[class^="iui-"], [class*="iui-"] {
+[class^="iui-"],
+[class*="iui-"] {
   font-family: 'Image Uploader Icons' !important;
   speak: none;
   font-style: normal;
@@ -105,10 +106,10 @@
   display: none;
   cursor: pointer;
   position: absolute;
-  top: .2rem;
-  right: .2rem;
+  top: 0.2rem;
+  right: 0.2rem;
   border-radius: 50%;
-  padding: .3rem;
+  padding: 0.3rem;
   line-height: 1;
   background-color: rgba(0, 0, 0, .5);
   -webkit-appearance: none;
@@ -141,7 +142,7 @@
 }
 
 .setting.avatar img.cover {
-   max-width: 800px;
+  max-width: 800px;
 }
 
 .image-uploader .uploaded .uploaded-image:hover .delete-image {
@@ -163,8 +164,9 @@
   }
 
   .image-uploader .uploaded .uploaded-image {
-    width: calc(33.3333333333% - .6rem);
-    padding-bottom: calc(33.3333333333% - .3rem);
-    margin: .3rem;
+    width: calc(33.3333333333% - 0.6rem);
+    padding-bottom: calc(33.3333333333% - 0.3rem);
+    margin: 0.3rem;
   }
+
 } 
