@@ -8,7 +8,7 @@
         <?php foreach ($space as  $sp) { ?>  
             <div class="space-telo">
             
-                <img class="space-img" alt="<?= $sp['space_name']; ?>" src="/uploads/spaces/<?= $sp['space_img'] ?>">
+                <img class="space-img" alt="<?= $sp['space_name']; ?>" src="/uploads/spaces/logos/<?= $sp['space_img'] ?>">
                     <?php if($sp['space_user_id'] == $uid['id']) { ?>
                         <div class="my_space all"></div>
                     <?php } ?>

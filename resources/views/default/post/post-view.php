@@ -196,7 +196,7 @@
 
     <?php if($post['space_slug']) { ?>
         <div class="post-space-box">
-            <img alt="<?= $post['space_name']; ?>" src="/uploads/spaces/<?= $post['space_img']; ?>">
+            <img alt="<?= $post['space_name']; ?>" src="/uploads/spaces/logos/<?= $post['space_img']; ?>">
             <a href="/s/<?= $post['space_slug']; ?>"><?= $post['space_name']; ?></a>
             <div class="post-space-box-desc">
                 <?= $post['space_description']; ?>

@@ -48,7 +48,7 @@
                     <textarea class="add" id="answer_100" name="space_text"><?= $space['space_text']; ?></textarea>
                 </div>
                 <div class="box setting space">
-                    <img class="ava" src="/uploads/spaces/<?= $space['space_img']; ?>">
+                    <img class="ava" src="/uploads/spaces/logos/<?= $space['space_img']; ?>">
                     <div class="box-form-img"> 
                         <div class="boxline">
                             <div class="input-images"></div>

@@ -239,6 +239,7 @@ CREATE TABLE `space` (
   `space_slug` varchar(128) NOT NULL,
   `space_description` varchar(250) NOT NULL,
   `space_img` varchar(250) NOT NULL DEFAULT 'space_no.png',
+  `space_cover_art` varchar(250) NOT NULL DEFAULT 'space_cover_no.jpeg',
   `space_text` varchar(550) NOT NULL,
   `space_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `space_color` varchar(12) NOT NULL DEFAULT '#f56400',
@@ -255,10 +256,10 @@ CREATE TABLE `space` (
 -- Дамп данных таблицы `space`
 --
 
-INSERT INTO `space` (`space_id`, `space_name`, `space_slug`, `space_description`, `space_img`, `space_text`, `space_date`, `space_color`, `space_category_id`, `space_user_id`, `space_type`, `space_permit_users`, `space_feed`, `space_tl`, `space_is_delete`) VALUES
-(1, 'meta', 'meta', 'Мета-обсуждение самого сайта, включая вопросы, предложения и отчеты об ошибках.', 'space_no.png', 'тест 1...', '2021-02-28 12:15:58', '#339900', 1, 1, 1, 0, 0, 0, 0),
-(2, 'Вопросы', 'qa', 'Вопросы по скрипту и не только', 'space_no.png', 'Вопросы по скрипту и не только', '2021-02-28 12:15:58', '#333333', 1, 1, 1, 0,0, 0, 0),
-(3, 'флуд', 'flud', 'Просто обычные разговоры', 'space_no.png', 'тест 3...', '2021-02-28 12:15:58', '#f56400', 1, 1, 0, 0, 0, 0, 0);
+INSERT INTO `space` (`space_id`, `space_name`, `space_slug`, `space_description`, `space_img`, `space_cover_art`, `space_text`, `space_date`, `space_color`, `space_category_id`, `space_user_id`, `space_type`, `space_permit_users`, `space_feed`, `space_tl`, `space_is_delete`) VALUES
+(1, 'meta', 'meta', 'Мета-обсуждение самого сайта, включая вопросы, предложения и отчеты об ошибках.', 'space_no.png', 'space_cover_no.jpeg', 'тест 1...', '2021-02-28 12:15:58', '#339900', 1, 1, 1, 0, 0, 0, 0),
+(2, 'Вопросы', 'qa', 'Вопросы по скрипту и не только', 'space_no.png', 'space_cover_no.jpeg', 'Вопросы по скрипту и не только', '2021-02-28 12:15:58', '#333333', 1, 1, 1, 0,0, 0, 0),
+(3, 'флуд', 'flud', 'Просто обычные разговоры', 'space_no.png', 'space_cover_no.jpeg', 'тест 3...', '2021-02-28 12:15:58', '#f56400', 1, 1, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 

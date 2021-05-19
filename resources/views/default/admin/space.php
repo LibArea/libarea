@@ -24,7 +24,7 @@
                             <?= $sp['space_id']; ?>
                         </span>  
                         <span class="t-td w-30 center">
-                            <img class="ava" src="/uploads/spaces/<?= $sp['space_img']; ?>">
+                            <img class="ava" src="/uploads/spaces/logos/<?= $sp['space_img']; ?>">
                         </span>
                         <span class="t-td">
                             <img class="ava" src="/uploads/users/avatars/small/<?= $sp['avatar']; ?>">

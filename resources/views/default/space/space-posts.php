@@ -1,5 +1,13 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 </div>
+<?php if($space_info['space_id'] ==1) { ?>
+<style nonce="<?= $_SERVER['nonce']; ?>">
+.space-box {background:<?= $space_info['space_color']; ?>;}
+.ing-box {background-image: url(/TrQIfXi.jpg); background-position: 50% 50%;min-height: 300px;margin-top: -24px;}
+</style>
+
+<div class="ing-box"></div>
+<?php } else { ?> 
 <style nonce="<?= $_SERVER['nonce']; ?>">
 .space-box {background:<?= $space_info['space_color']; ?>;}
 </style>
@@ -27,7 +35,7 @@
             <?php } ?>                 
         <?php } ?> 
         <div class="space-text">
-            <img class="space-box-img" src="/uploads/spaces/<?= $space_info['space_img']; ?>">
+            <img class="space-box-img" src="/uploads/spaces/logos/<?= $space_info['space_img']; ?>">
             <a title="<?= $space_info['space_name']; ?>" href="/s/<?= $space_info['space_slug']; ?>">
                 <h1><?= $space_info['space_name']; ?></h1>
             </a>  
@@ -40,6 +48,9 @@
         </div>
     </div>    
 </div>
+ <?php } ?> 
+
+
 <div class="wrap">
 
 <?php include TEMPLATE_DIR . '/_block/left-menu.php'; ?>

@@ -89,7 +89,7 @@
             <span class="d">
                 <?php foreach ($data['space_user'] as  $space) { ?>
                     <div class="profile-space">
-                        <img src="/uploads/spaces/small/<?= $space['space_img']; ?>" alt="<?= $space['space_name']; ?>">
+                        <img src="/uploads/spaces/logos/small/<?= $space['space_img']; ?>" alt="<?= $space['space_name']; ?>">
                         <a href="/s/<?= $space['space_slug'];?>"><?= $space['space_name'];?></a> 
                     </div>
                 <?php } ?>
