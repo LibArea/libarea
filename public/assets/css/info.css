@@ -90,14 +90,14 @@ h1 {
   float: left;
   width: 33%;
 }
-  
+
 .prof-num {
   color: #f56400;
   text-align: center;
   font-size: 4em;
   font-family: Georgia, Arial, sans-serif;
 }
- 
+
 .prof-num-u {
   color: #f56400;
   text-align: center;
@@ -133,8 +133,7 @@ h1 {
 
   .no-mob,
   #canvas,
-  .canvas-telo { 
+  .canvas-telo {
     display: none;
   }
-
 }

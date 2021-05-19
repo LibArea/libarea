@@ -49,8 +49,25 @@ header {
   margin: 0 0 1rem 0;
 } 
 
+main {
+  overflow: hidden;
+  width: calc(100% - 460px);
+  float: left;
+  max-width: 800px;
+}
+
 body > main {
   padding: 0.4rem 0.4rem;
+}
+
+main.w-100 {
+  width: 100%;
+  max-width: 100%;
+}
+
+main.w-75 {
+  width: calc(100% - 220px);
+  max-width: 1000px;
 }
 
 footer {
@@ -66,23 +83,6 @@ footer a {
 
 footer a:hover {
   color: var(--color-gray-2);
-}
-
-main {
-  overflow: hidden;
-  width: calc(100% - 460px);
-  float: left;
-  max-width: 800px;
-}
-
-main.w-100 {
-  width: 100%;
-  max-width: 100%;
-}
-
-main.w-75 {
-  width: calc(100% - 220px);
-  max-width: 1000px;
 }
 
 .sidebar {
@@ -241,11 +241,6 @@ a.home {
   margin-bottom: 15px;
 }
 
-.recommend-telo a {
-  font-size: 14px;
-  color: #333;
-}
-
 .sb-telo .ava {
   border-radius: 8px;
   height: 16px;
@@ -266,6 +261,11 @@ a.home {
   font-size: 14px;
   margin-left: 20px;
   display: block;
+}
+
+.recommend-telo a {
+  font-size: 14px;
+  color: #333;
 }
 
 .sb-telo a:hover,
@@ -364,7 +364,7 @@ i.icon {
 .menu-lf {
   margin-left: 20px;
 }
- 
+
 .nav .avatar {
   display: flex;
 }
@@ -440,7 +440,7 @@ hr {
 }
 
 .search-title {
-  font-size: 21px; 
+  font-size: 21px;
 }
 
 ::-webkit-input-placeholder,
@@ -522,7 +522,7 @@ select {
 }
 
 select:focus {
-  border-color: rgba(160, 160, 160, .8);
+  border-color: rgba(160, 160, 160, 0.8);
   color: #303030;
   outline: 0;
 }
@@ -593,7 +593,7 @@ a.login,
 a.add-space {
   float: right;
   padding: 1px 10px;
-  border: 1px solid rgba(236,97,73,.7);
+  border: 1px solid rgba(236, 97, 73, 0.7);
   border-radius: 20px;
   font-size: 15px;
   color: #ea6f5a;
@@ -818,7 +818,7 @@ img.thumb {
 }
 
 #stHeader.sticky {
-  display: block; 
+  display: block;
   position: fixed;
   top: 0;
   width: 100%;

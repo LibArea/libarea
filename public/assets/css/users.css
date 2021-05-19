@@ -11,8 +11,8 @@
 
 .profile-header-telo,
 .profile-about {
-   margin: 15px 0 0 184px;
-   color: #666;
+  margin: 15px 0 0 184px;
+  color: #666;
 }
 
 .profile-ava {
@@ -127,12 +127,20 @@ h1.profile {
 }
 
 @media (max-width: 880px) {
-  .profile-ava img { width: 110px; height: 110px; }
+  .profile-ava img {
+    width: 110px;
+    height: 110px;
+  }
+
+  .box.profile-telo {
+    width: 100%;
+    margin: 20px 0 0 0;
+  }
+
   .profile-cover { height: 80px; }
   .profile-box { height: 60px; }
   .profile-box-telo { margin: 0 0 0 10px; }
   .profile-about { margin: 15px 0 0 8px; }
   .profile-header-telo { margin: 15px 0 0 134px; }
   .stats { width: 100%; }
-  .box.profile-telo { width: 100%; margin: 20px 0 0 0; }
 }

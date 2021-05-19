@@ -5,7 +5,7 @@
 
 .wmd-button-bar {
   width: 100%;
-  background-color: Silver; 
+  background-color: Silver;
 }
 
 .wmd-input { 
@@ -19,22 +19,22 @@
 }
 
 .wmd-input.w-95 {
-  width: 95%; 
+  width: 95%;
 }
 
-.wmd-preview { 
+.wmd-preview {
   padding: 0 0 0 15px;
   margin: 20px 0 0 25px;
-  font-size: 15px;    
+  font-size: 15px;
 }
 
 .wmd-button-row {
-  position: relative; 
+  position: relative;
   margin-left: 5px;
   margin-right: 5px;
   margin-bottom: 5px;
   margin-top: 10px;
-  padding: 0px;  
+  padding: 0;
   height: 20px;
 }
 
@@ -79,7 +79,7 @@
 
 .wmd-prompt-dialog {
   border: 1px solid #999999;
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
 }
 
 .wmd-prompt-dialog > div {
@@ -92,7 +92,7 @@
   color: black;
 }
 
-.wmd-prompt-dialog > form > input[type="button"]{
+.wmd-prompt-dialog > form > input[type="button"] {
   border: 1px solid #888888;
   font-family: trebuchet MS, helvetica, sans-serif;
   font-size: 0.8em;
@@ -106,8 +106,8 @@
 
 @font-face {
   font-family: 'icomoon';
-  src:  url('./fonts/icomoon.eot?q9w37d');
-  src:  url('./fonts/icomoon.eot?q9w37d#iefix') format('embedded-opentype'),
+  src: url('./fonts/icomoon.eot?q9w37d');
+  src: url('./fonts/icomoon.eot?q9w37d#iefix') format('embedded-opentype'),
     url('./fonts/icomoon.ttf?q9w37d') format('truetype'),
     url('./fonts/icomoon.woff?q9w37d') format('woff'),
     url('./fonts/icomoon.svg?q9w37d#icomoon') format('svg');
@@ -116,7 +116,8 @@
   font-display: block;
 }
 
-[class^="icon-"], [class*=" icon-"] {
+[class^="icon-"],
+[class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icomoon' !important;
   speak: never;
@@ -127,47 +128,22 @@
   line-height: 1;
   font-size: 14px;
   color: #888;
-  /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-image:before {
-  content: "\e90d";
-}
-.icon-undo:before {
-  content: "\e965";
-}
-.icon-redo:before {
-  content: "\e966";
-}
-.icon-quotes-left:before {
-  content: "\e977";
-}
-.icon-list-numbered:before {
-  content: "\e9b9";
-}
-.icon-list2:before {
-  content: "\e9bb";
-}
-.icon-link:before {
-  content: "\e9cb";
-}
-.icon-font-size:before {
-  content: "\ea61";
-}
-.icon-bold:before {
-  content: "\ea62";
-}
-.icon-italic:before {
-  content: "\ea64";
-}
-.icon-page-break:before {
-  content: "\ea68";
-}
-.icon-embed:before {
-  content: "\ea7f";
-}
+.icon-image::before { content: "\e90d"; }
+.icon-undo::before { content: "\e965"; }
+.icon-redo::before { content: "\e966"; }
+.icon-quotes-left::before { content: "\e977"; }
+.icon-list-numbered::before { content: "\e9b9"; }
+.icon-list2::before { content: "\e9bb"; }
+.icon-link::before { content: "\e9cb"; }
+.icon-font-size::before { content: "\ea61"; }
+.icon-bold::before { content: "\ea62"; }
+.icon-italic::before { content: "\ea64"; }
+.icon-page-break::before { content: "\ea68"; }
+.icon-embed::before { content: "\ea7f"; }
 
 @media (max-width: 880px) {
   .wmd-panel { width: 96%; }
