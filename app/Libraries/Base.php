@@ -349,7 +349,7 @@ class Base
           
             // URL Аватара.
             // Можно использовать аватар загруженный при создании бота
-            //"avatar_url" => "",
+            "avatar_url" => Config::get(Config::PARAM_ICON_URL),
 
             // Преобразование текста в речь
             "tts" => false,

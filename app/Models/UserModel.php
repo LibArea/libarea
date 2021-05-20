@@ -219,6 +219,13 @@ class UserModel extends \MainModel
         return true;
     }
     
+    // Удалим обложку для профиля
+    public static function userCoverRemove($user_id)
+    {
+        return XD::update(['users'])->set(['cover_art'], '=', 'cover_art.jpeg')
+                ->where(['id'], '=', $user_id)->run();
+    }
+    
     // Записываем последние данные авторизации
     public static function setUserLastLogs($id, $login, $trust_level, $last_ip) 
     {

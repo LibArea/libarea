@@ -347,6 +347,38 @@ class UserController extends \MainController
         return view(PR_VIEW_DIR . '/user/favorite', ['data' => $data, 'uid' => $uid, 'favorite' => $result]);   
     }
     
+    // Удаление обложки
+    function userCoverRemove()
+    {
+        $uid        = Base::getUid();
+        $login      = \Request::get('login');
+        $redirect   = '/u/' . $uid['login'] . '/setting/avatar';
+        
+        // Ошибочный Slug в Url
+        if($login != $uid['login']) {
+            redirect($redirect);
+        }
+
+        $user = UserModel::getUserLogin($uid['login']);
+        
+        // Удалять может только автор и админ
+        if ($user['id'] != $uid['id'] && $uid['trust_level'] != 5) {
+            redirect('/');
+        }
+        
+        $path_img = HLEB_PUBLIC_DIR. '/uploads/users/cover/';
+
+        // Удалим, кроме дефолтной
+        if($user['cover_art'] != 'noavatar.png') {
+            unlink($path_img . $user['cover_art']);
+        }  
+        
+        UserModel::userCoverRemove($user['id']);
+        
+        Base::addMsg(lang('Cover removed'), 'success');
+        redirect($redirect);
+    }
+
     // Страница черновиков участника
     function getUserDrafts ()
     {

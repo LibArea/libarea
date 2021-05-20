@@ -24,6 +24,7 @@ return [
     'repeat-password'   => 'Repeat the password',
     'ban-space'         => 'This space is blocked',
     'domain-desc'       => 'Grouping posts by domain',
+    'no-cover'          => 'No cover. Download it',
     
     'select-file-up'    => 'Select the file to upload',
     

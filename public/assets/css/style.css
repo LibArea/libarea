@@ -999,13 +999,48 @@ a.space-u.tag-u {
   color: #fff;
 }
 
-.space-box-img,
-.space-img {
+.space-box .space-box-img,
+.space-box .space-img {
   float: left;
   width: 47px;
   height: 47px;
   border: 2px solid #fff;
   margin: 0 15px 0 0;
+}
+
+.space-cover-box .space-box-img,
+.space-cover-box .space-img {
+  float: left;
+  width: 110px;
+  height: 110px;
+  border: 2px solid #fff;
+  margin: 0 15px 0 0;
+}
+
+.space-cover-box .space-text {
+  color: #fff;
+  font-size: 16px;
+  padding: 160px 6px 9px 6px;
+  overflow: hidden;
+}
+
+.space-cover-box .space-text a {
+  color: #fff;
+}
+
+.space-cover-box .space-text h1 {
+  padding: 0;
+  margin: 0;
+  font-size: 32px;
+  font-weight: 400;
+  color: #fff;
+}
+
+.space-cover-box .space-text .fons {
+  margin-top: 30px;
+  padding-bottom: 13px;
+  width: 70%;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.65), transparent);
 }
 
 .space-text-sb {
@@ -1016,6 +1051,12 @@ a.space-u.tag-u {
 .space-telo {
   margin-bottom: 25px;
   position: relative;
+}
+
+.space-telo img.space-img {
+  width: 48px;
+  float: left;
+  margin-right: 10px;
 }
 
 .space-no-user {

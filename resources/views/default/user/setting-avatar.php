@@ -27,13 +27,16 @@
             </div> 
             <div class="clear">
             <p><?= lang('select-file-up'); ?>: 240x240px (jpg, jpeg, png)</p>
-            <p><input type="submit" value="Загрузить"/></p>
+            <p><input type="submit" value="<?= lang('Download'); ?>"/></p>
             </div>
             <br>
             <?php if($user['cover_art'] != 'cover_art.jpeg') { ?>
                 <img class="cover" src="/uploads/users/cover/<?= $user['cover_art']; ?>">
+                <a class="right" href="/u/<?= $uid['login']; ?>/delete/cover">
+                    <?= lang('Remove'); ?>
+                </a>
             <?php } else { ?>
-                У вас нет баннера. Загрузите...
+                <?= lang('no-cover'); ?>...
                 <br>
             <?php } ?>
             <br>

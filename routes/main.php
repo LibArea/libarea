@@ -34,7 +34,8 @@ Route::before('Authorization@noAuth')->getGroup();
 	Route::type('post')->protect()->get('/invitation/create')->controller('UserController@invitationCreate');
 
 	Route::get('/u/{login}/setting')->controller('UserController@settingPage')->where(['login' => '[A-Za-z0-9]+']); 
-	Route::get('/u/{login}/setting/avatar')->controller('UserController@settingPageAvatar')->where(['login' => '[A-Za-z0-9]+']); 
+	Route::get('/u/{login}/setting/avatar')->controller('UserController@settingPageAvatar')->where(['login' => '[A-Za-z0-9]+']);
+    Route::get('/u/{login}/delete/cover')->controller('UserController@userCoverRemove')->where(['login' => '[A-Za-z0-9]+']); 
 	Route::get('/u/{login}/setting/security')->controller('UserController@settingPageSecurity')->where(['login' => '[A-Za-z0-9]+']); 
     
 	Route::type('post')->protect()->get('/users/setting/edit')->controller('UserController@settingEdit');
@@ -83,10 +84,13 @@ Route::before('Authorization@noAuth')->getGroup();
 
 	// Подписываемся, отписываемся / изменяем пространство
 	Route::type('post')->get('/space/hide')->controller('SpaceController@hide');
-    Route::get('/space/{slug}/edit')->controller('SpaceController@spaceForma')->where(['slug' => '[A-Za-z0-9]+']);  
+    Route::get('/space/{slug}/edit')->controller('SpaceController@spaceForma')->where(['slug' => '[A-Za-z0-9]+']); 
+    Route::get('/space/{slug}/edit/logo')->controller('SpaceController@spaceFormaLogo')->where(['slug' => '[A-Za-z0-9]+']);  
     Route::get('/space/{slug}/tags')->controller('SpaceController@spaceTagsInfo')->where(['slug' => '[A-Za-z0-9]+']); 
     Route::get('/space/{slug}/tags/add')->controller('SpaceController@spaceTagsAddPage')->where(['slug' => '[A-Za-z0-9]+']);
     Route::type('post')->protect()->get('/space/editspace')->controller('SpaceController@spaceEdit');
+    Route::type('post')->protect()->get('/space/editspace/logo')->controller('SpaceController@spaceEditLogo');
+    Route::get('/space/{slug}/delete/cover')->controller('SpaceController@spaceCoverRemove')->where(['slug' => '[A-Za-z0-9]+']);
     Route::get('/space/add')->controller('SpaceController@addSpacePage');
     Route::type('post')->protect()->get('/space/addspace')->controller('SpaceController@spaceAdd');
  

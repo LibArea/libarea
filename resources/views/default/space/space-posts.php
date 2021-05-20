@@ -1,55 +1,56 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 </div>
-<?php if($space_info['space_id'] ==1) { ?>
-<style nonce="<?= $_SERVER['nonce']; ?>">
-.space-box {background:<?= $space_info['space_color']; ?>;}
-.ing-box {background-image: url(/TrQIfXi.jpg); background-position: 50% 50%;min-height: 300px;margin-top: -24px;}
-</style>
-
-<div class="ing-box"></div>
+<?php if($space_info['space_cover_art'] != 'space_cover_no.jpeg') { ?>
+    <style nonce="<?= $_SERVER['nonce']; ?>">
+    .space-cover-box {background-image: url(/uploads/spaces/cover/<?= $space_info['space_cover_art']; ?>); background-position: 50% 50%;min-height: 300px;margin-top: -24px;}
+    </style>
+    <div class="space-cover-box">
+    
 <?php } else { ?> 
-<style nonce="<?= $_SERVER['nonce']; ?>">
-.space-box {background:<?= $space_info['space_color']; ?>;}
-</style>
-<div class="space-box" >
-    <div class="wrap">
-         <?php if(!$uid['id']) { ?> 
-                <div class="right"> 
-                    <a href="/login"><div class="hide-space-id yes-space">+ <?= lang('Read'); ?></div></a>
-                </div>
-        <?php } else { ?>
-            <?php if($space_info['space_id'] !=1) { ?>
-                <?php if($space_info['space_user_id'] != $uid['id']) { ?>
+    <style nonce="<?= $_SERVER['nonce']; ?>">
+    .space-box {background:<?= $space_info['space_color']; ?>;}
+    </style>
+    <div class="space-box" >
+<?php } ?>   
+    
+        <div class="wrap">
+             <?php if(!$uid['id']) { ?> 
                     <div class="right"> 
-                        <?php if($space_signed == 1) { ?>
-                            <div data-id="<?= $space_info['space_id']; ?>" class="hide-space-id no-space">
-                                <?= lang('Unsubscribe'); ?>
-                            </div>
-                        <?php } else { ?> 
-                            <div data-id="<?= $space_info['space_id']; ?>" class="hide-space-id yes-space">
-                                + <?= lang('Read'); ?>
-                            </div>
-                        <?php } ?>   
+                        <a href="/login"><div class="hide-space-id yes-space">+ <?= lang('Read'); ?></div></a>
                     </div>
-                <?php } ?>
-            <?php } ?>                 
-        <?php } ?> 
-        <div class="space-text">
-            <img class="space-box-img" src="/uploads/spaces/logos/<?= $space_info['space_img']; ?>">
-            <a title="<?= $space_info['space_name']; ?>" href="/s/<?= $space_info['space_slug']; ?>">
-                <h1><?= $space_info['space_name']; ?></h1>
-            </a>  
-            <div class="data">
-            <?= lang('Created by'); ?>: <a href="/u/<?= $space_info['login']; ?>"><?= $space_info['login']; ?></a>
-            
-            — <?= $space_info['space_date']; ?>
-            
-            </div> 
-        </div>
-    </div>    
-</div>
- <?php } ?> 
-
+            <?php } else { ?>
+                <?php if($space_info['space_id'] !=1) { ?>
+                    <?php if($space_info['space_user_id'] != $uid['id']) { ?>
+                        <div class="right"> 
+                            <?php if($space_signed == 1) { ?>
+                                <div data-id="<?= $space_info['space_id']; ?>" class="hide-space-id no-space">
+                                    <?= lang('Unsubscribe'); ?>
+                                </div>
+                            <?php } else { ?> 
+                                <div data-id="<?= $space_info['space_id']; ?>" class="hide-space-id yes-space">
+                                    + <?= lang('Read'); ?>
+                                </div>
+                            <?php } ?>   
+                        </div>
+                    <?php } ?>
+                <?php } ?>                 
+            <?php } ?> 
+            <div class="space-text">
+                <img class="space-box-img" src="/uploads/spaces/logos/<?= $space_info['space_img']; ?>">
+                <div class="fons">
+                    <a title="<?= $space_info['space_name']; ?>" href="/s/<?= $space_info['space_slug']; ?>">
+                        <h1><?= $space_info['space_name']; ?></h1>
+                    </a>  
+                    <div class="data">
+                    <?= lang('Created by'); ?>: <a href="/u/<?= $space_info['login']; ?>"><?= $space_info['login']; ?></a>
+                    
+                    — <?= $space_info['space_date']; ?>
+                
+                    </div> 
+                </div>    
+            </div>
+        </div>    
+    </div>
 
 <div class="wrap">
 

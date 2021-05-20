@@ -135,13 +135,29 @@ class SpaceModel extends \MainModel
                 ['space_name'], '=', $data['space_name'], ',', 
                 ['space_description'], '=', $data['space_description'], ',', 
                 ['space_color'], '=', $data['space_color'], ',', 
-                ['space_img'], '=', $data['space_img'], ',', 
                 ['space_text'], '=', $data['space_text'], ',',
                 ['space_permit_users'], '=', $data['space_permit_users'], ',',
                 ['space_feed'], '=', $data['space_feed'], ',',            
                 ['space_tl'], '=', $data['space_tl'])->where(['space_id'], '=', $data['space_id'])->run();
         
         return true;
+    }
+    
+    // Изменение пространства
+    public static function setSpaceEditLogo($data)  
+    {
+        XD::update(['space'])->set(['space_img'], '=', $data['space_img'], ',', 
+                ['space_cover_art'], '=', $data['space_cover_art'])
+                ->where(['space_id'], '=', $data['space_id'])->run();
+        
+        return true;
+    }
+
+    // Удалим обложку для пространства
+    public static function CoverRemove($space_id)
+    {
+        return XD::update(['space'])->set(['space_cover_art'], '=', 'space_cover_no.jpeg')
+                ->where(['space_id'], '=', $space_id)->run();
     }
 
     // Возвращает теги пространства

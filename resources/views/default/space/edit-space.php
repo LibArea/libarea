@@ -1,7 +1,17 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 <main class="w-75">
  
-    <h1><?= $data['h1']; ?></h1>
+    <ul class="nav-tabs">
+        <li class="active">
+            <span><?= $data['h1']; ?></span>
+        </li>
+        <li>
+            <a href="/space/<?= $space['space_slug']; ?>/edit/logo">
+                <span><?= lang('Logo'); ?> / <?= lang('Cover art'); ?></span>
+            </a>
+        </li>
+    </ul>
+    
     <div class="telo space">
         <div class="box create">
             <form action="/space/editspace" method="post" enctype="multipart/form-data">
@@ -32,7 +42,7 @@
                 </div> 
                 <div class="boxline">
                     <label for="post_content">Meta-<sup class="red">*</sup></label>
-                    <textarea class="add" name="space_description"><?= $space['space_description']; ?></textarea>
+                    <input class="add"  type="text" name="space_description" value="<?= $space['space_description']; ?>">
                     <div class="box_h">Description: 60 - 180 <?= lang('characters'); ?></div>
                     <br />
                 </div>
@@ -48,15 +58,8 @@
                     <textarea class="add" id="answer_100" name="space_text"><?= $space['space_text']; ?></textarea>
                 </div>
                 <div class="box setting space">
-                    <img class="ava" src="/uploads/spaces/logos/<?= $space['space_img']; ?>">
-                    <div class="box-form-img"> 
-                        <div class="boxline">
-                            <div class="input-images"></div>
-                        </div>
-                    </div> 
                     <input type="hidden" name="space_id" id="space_id" value="<?= $space['space_id']; ?>">
                     <div class="clear"> 
-                        <p><?= lang('select-file-up'); ?>: 120x120px (jpg, jpeg, png)</p>
                         <input type="submit" name="submit" value="<?= lang('Edit'); ?>" />
                     </div> 
                 </div>                

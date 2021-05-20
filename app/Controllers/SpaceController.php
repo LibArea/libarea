@@ -41,13 +41,11 @@ class SpaceController extends \MainController
     public function SpacePosts($type)
     {
         $uid            = Base::getUid();
-        $space_slug     = \Request::get('slug');
+        $slug           = \Request::get('slug');
         $space_tags_id  = \Request::getInt('tags');
         
-        $space = SpaceModel::getSpaceInfo($space_slug);
-    
         // Покажем 404
-        if(!$space) {
+        if(!$space = SpaceModel::getSpaceInfo($slug)) {
             include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
             hl_preliminary_exit();
         }
@@ -99,10 +97,11 @@ class SpaceController extends \MainController
     {
         $uid    = Base::getUid();
         $slug   = \Request::get('slug');
-        $space  = SpaceModel::getSpaceInfo($slug);
 
-        if(!$space){
-            redirect('/');
+        // Покажем 404
+        if(!$space = SpaceModel::getSpaceInfo($slug)) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
         }
 
         // Или персонал или автор
@@ -126,16 +125,49 @@ class SpaceController extends \MainController
         return view(PR_VIEW_DIR . '/space/edit-space', ['data' => $data, 'uid' => $uid, 'space' => $space]);
     }
     
+    // Форма изменения логотипа и обложки
+    public function spaceFormaLogo()
+    {
+        $uid    = Base::getUid();
+        $slug   = \Request::get('slug');
+
+        // Покажем 404
+        if(!$space = SpaceModel::getSpaceInfo($slug)) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
+        }
+
+        // Или персонал или автор
+        if ($uid['trust_level'] != 5 && $space['space_user_id'] != $uid['id']) {
+            redirect('/');
+        }
+
+        $data = [
+            'h1'            => lang('Logo') . ' - ' . $slug,
+            'canonical'     => '/***', 
+        ];
+
+        $meta_title = lang('Logo') . ' - ' . $slug;
+        
+        Request::getHead()->addStyles('/assets/css/image-uploader.css'); 
+        Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
+        
+        // title, description
+        Base::Meta($meta_title, lang('Logo'), $other = false);
+
+        return view(PR_VIEW_DIR . '/space/edit-space-logo', ['data' => $data, 'uid' => $uid, 'space' => $space]);
+    }
+    
     // Страница с информацией по меткам
     public function spaceTagsInfo() 
     {
         $uid    = Base::getUid();
         $slug   = \Request::get('slug');
-        $space  = SpaceModel::getSpaceInfo($slug);
 
-        // Или персонал или автор
-        if ($uid['trust_level'] != 5 && $space['space_user_id'] != $uid['id']) {
-            redirect('/');
+        // Покажем 404
+        if(!$space = SpaceModel::getSpaceInfo($slug)) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
         }
         
         $tags = SpaceModel::getSpaceTags($space['space_id']);
@@ -199,22 +231,22 @@ class SpaceController extends \MainController
         $space_feed     = \Request::getPostInt('feed');
         $space_tl       = \Request::getPostInt('space_tl');
      
+        $redirect   = '/space/add';
         if (!preg_match('/^[a-zA-Z0-9]+$/u', $space_slug)) {
             Base::addMsg(lang('url-latin'), 'error');
-            redirect('/space/add');
+            redirect($redirect);
         }
         
-        $redirect   = '/space/add';
         Base::Limits($space_name, lang('titles'), '4', '20', $redirect);
         Base::Limits($space_slug, 'slug (URL)', '4', '10', $redirect);
         
         if (preg_match('/\s/', $space_slug) || strpos($space_slug,' ')) {
             Base::addMsg(lang('url-gaps'), 'error');
-            redirect('/space/add');
+            redirect($redirect);
         }
         if (SpaceModel::getSpaceInfo($space_slug)) {
             Base::addMsg(lang('url-already-exists'), 'error');
-            redirect('/space/add');
+            redirect($redirect);
         }
         
         $space_permit   = $space_permit == 1 ? 1 : 0;
@@ -255,10 +287,10 @@ class SpaceController extends \MainController
         $space_feed     = \Request::getPostInt('feed');
         $space_tl       = \Request::getPostInt('space_tl');
         
-        $space = SpaceModel::getSpaceId($space_id);
-
-        if(!$space){
-            redirect('/');
+        // Покажем 404
+        if(!$space = SpaceModel::getSpaceId($space_id)) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
         }
 
         // Или персонал или владелец
@@ -280,6 +312,61 @@ class SpaceController extends \MainController
         Base::Limits($space_description, 'Meta-', '60', '190', $redirect);
         Base::Limits($space_slug, 'SLUG', '4', '10', $redirect);
 
+        $space_color = \Request::getPost('color');
+        $space_color = empty($space_color) ? $space['space_color'] : $space_color;
+        
+        $slug = SpaceModel::getSpaceInfo($space_slug);
+
+        if($slug['space_slug'] != $space['space_slug']) {
+            if($slug) {
+                Base::addMsg(lang('url-already-exists'), 'error');
+                redirect('/s/'.$space['space_slug']);
+            }
+        }
+  
+        $space_permit   = $space_permit == 1 ? 1 : 0;
+        $space_feed     = $space_feed == 1 ? 1 : 0;
+        $space_tl       = $space_tl == 1 ? 1 : 0;
+        
+        $data = [
+            'space_id'              => $space_id,
+            'space_slug'            => $space_slug,
+            'space_name'            => $space_name,
+            'space_description'     => $space_description,
+            'space_color'           => $space_color,
+            'space_text'            => $space_text,
+            'space_permit_users'    => $space_permit,
+            'space_feed'            => $space_feed,
+            'space_tl'              => $space_tl,
+        ]; 
+        
+        SpaceModel::setSpaceEdit($data);
+        
+        Base::addMsg(lang('Change saved'), 'success');
+        redirect('/s/' . $space_slug);
+    }
+    
+    
+    // Изменение логотипа и обложки
+    public function spaceEditLogo() 
+    {
+        $uid            = Base::getUid();
+        $space_slug     = \Request::getPost('space_slug');
+        $space_id       = \Request::getPost('space_id');
+        
+        // Покажем 404
+        if(!$space = SpaceModel::getSpaceId($space_id)) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
+        }
+
+        // Или персонал или владелец
+        if ($uid['trust_level'] != 5 && $space['space_user_id'] != $uid['id']) {
+            redirect('/');
+        }
+
+        $redirect   = '/space/' . $space['space_slug'] . '/edit/logo';
+
         $name     = $_FILES['images']['name'][0];
         if($name) {
             $size     = $_FILES['images']['size'][0];
@@ -290,7 +377,7 @@ class SpaceController extends \MainController
             if (!in_array($ext, array('jpg','jpeg','png','gif'))) {
                 $valid = false;
                 Base::addMsg('Тип файла не разрешен', 'error');
-                redirect('/space/'.$space_slug.'/edit');
+                redirect($redirect);
             }
 
             if ($valid) {
@@ -321,46 +408,108 @@ class SpaceController extends \MainController
                 $space_img    = $filename . '.jpeg';
                 
             } else {
-                $space_img = empty($space['space_img']) ? '' : $space['space_img'];
+                $space_img = empty($space['space_img']) ? 'space_no.png' : $space['space_img'];
             }
-            
-        } else {
-            $space_img = empty($space['space_img']) ? '' : $space['space_img'];
-        }
-        
-        $space_color = \Request::getPost('color');
-        $space_color = empty($space_color) ? $space['space_color'] : $space_color;
-        
-        $slug = SpaceModel::getSpaceInfo($space_slug);
 
-        if($slug['space_slug'] != $space['space_slug']) {
-            if($slug) {
-                Base::addMsg(lang('url-already-exists'), 'error');
-                redirect('/s/'.$space['space_slug']);
-            }
+        } else {
+            $space_img = empty($space['space_img']) ? 'space_no.png' : $space['space_img'];
         }
-  
-        $space_permit   = $space_permit == 1 ? 1 : 0;
-        $space_feed     = $space_feed == 1 ? 1 : 0;
-        $space_tl       = $space_tl == 1 ? 1 : 0;
+        
+        $cover     = $_FILES['cover']['name'][0];
+        if($cover) {
+            $size     = $_FILES['cover']['size'][0];
+            $ext      = strtolower(pathinfo($cover, PATHINFO_EXTENSION));
+            $width_h  = getimagesize($_FILES['cover']['tmp_name'][0]);
+           
+            $valid =  true;
+            if (!in_array($ext, array('jpg','jpeg','png','gif'))) {
+                $valid = false;
+                Base::addMsg('Тип файла не разрешен', 'error');
+                redirect('/space/'.$space['space_slug'].'/edit');
+            }
+
+            if ($valid) {
+                // 1920px и 300px
+                $path_cover_img       = HLEB_PUBLIC_DIR. '/uploads/spaces/cover/';
+                $path_cover_img_small = HLEB_PUBLIC_DIR. '/uploads/spaces/cover/small/';
+                $file_cover           = $_FILES['cover']['tmp_name'][0];
+                $filename_cover       =  's-' . $space['space_id'] . '-' . time();
+
+                $image = new  SimpleImage();
+ 
+                $image
+                    ->fromFile($file_cover)  // load image.jpg
+                    ->autoOrient()     // adjust orientation based on exif data
+                    ->resize(1920, 300)
+                    ->toFile($path_cover_img . $filename_cover .'.webp', 'image/webp')
+                    ->resize(280, 130)
+                    ->toFile($path_cover_img_small . $filename_cover .'.webp', 'image/webp');
+                    
+                    $cover_art = $filename_cover . '.webp';
+                
+                // Удалим, кроме дефолтной
+                if($space['space_cover_art'] != 'space_cover_no.jpeg' && $space['space_cover_art'] != $cover_art) {
+                    chmod($path_cover_img . $space['space_cover_art'], 0777);
+                    chmod($path_cover_img_small . $space['space_cover_art'], 0777);
+                    unlink($path_cover_img . $space['space_cover_art']);
+                    unlink($path_cover_img_small . $space['space_cover_art']);
+                }  
+                
+                $space_cover_art    = $filename_cover . '.webp';
+                
+            } else {
+                $space_cover_art = empty($space['space_img']) ? 'space_cover_no.jpeg' : $space['space_cover_art'];
+            }
+
+        } else {
+            $space_cover_art = empty($space['space_img']) ? 'space_cover_no.jpeg' : $space['space_cover_art'];
+        }
         
         $data = [
             'space_id'              => $space_id,
-            'space_slug'            => $space_slug,
-            'space_name'            => $space_name,
-            'space_description'     => $space_description,
-            'space_color'           => $space_color,
-            'space_text'            => $space_text,
             'space_img'             => $space_img,
-            'space_permit_users'    => $space_permit,
-            'space_feed'            => $space_feed,
-            'space_tl'              => $space_tl,
+            'space_cover_art'       => $space_cover_art,
         ]; 
         
-        SpaceModel::setSpaceEdit($data);
+        SpaceModel::setSpaceEditLogo($data);
         
         Base::addMsg(lang('Change saved'), 'success');
-        redirect('/s/' . $space_slug);
+        redirect($redirect);
+    }
+    
+    // Удаляем обложку
+    public function spaceCoverRemove()
+    {
+        $uid    = Base::getUid();
+        $slug   = \Request::get('slug');
+        
+        // Покажем 404
+        if(!$space = SpaceModel::getSpaceInfo($slug)) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
+        }
+        
+        // Удалять может только автор и админ
+        if ($space['space_user_id'] != $uid['id'] && $uid['trust_level'] != 5) {
+            redirect('/');
+        }
+      
+        $redirect   = '/space/' . $space['space_slug'] . '/edit/logo'; 
+        
+        // 1920px и 300px
+        $path_cover_img       = HLEB_PUBLIC_DIR. '/uploads/spaces/cover/';
+        $path_cover_img_small = HLEB_PUBLIC_DIR. '/uploads/spaces/cover/small/';
+
+        // Удалим, кроме дефолтной
+        if($space['space_cover_art'] != 'space_cover_no.jpeg') {
+            unlink($path_cover_img . $space['space_cover_art']);
+            unlink($path_cover_img_small . $space['space_cover_art']);
+        }  
+        
+        SpaceModel::CoverRemove($space['space_id']);
+        
+        Base::addMsg(lang('Cover removed'), 'success');
+        redirect($redirect);
     }
     
     // Страница добавления метки (тега) пространства
@@ -368,10 +517,9 @@ class SpaceController extends \MainController
     {
         $uid    = Base::getUid();
         $slug   = \Request::get('slug');
-        $space  = SpaceModel::getSpaceInfo($slug);
         
         // Покажем 404
-        if(!$space) {
+        if(!$space = SpaceModel::getSpaceInfo($slug)) {
             include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
             hl_preliminary_exit();
         }
@@ -399,10 +547,8 @@ class SpaceController extends \MainController
         $slug           = \Request::get('slug');
         $space_tags_id  = \Request::getInt('tags');
         
-        $space = SpaceModel::getSpaceInfo($slug);
-    
         // Покажем 404
-        if(!$space) {
+        if(!$space = SpaceModel::getSpaceInfo($slug)) {
             include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
             hl_preliminary_exit();
         }
@@ -440,7 +586,11 @@ class SpaceController extends \MainController
         $st_desc    = \Request::getPost('st_desc');
         $st_title   = \Request::getPost('st_title');
         
-        $space = SpaceModel::getSpaceId($space_id);
+        // Покажем 404
+        if(!$space = SpaceModel::getSpaceId($space_id)) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
+        }
         
         // Редактировать может только автор и админ
         if ($space['space_user_id'] != $uid['id'] && $uid['trust_level'] != 5) {
@@ -483,7 +633,11 @@ class SpaceController extends \MainController
         $st_desc    = \Request::getPost('st_desc');
         $st_title   = \Request::getPost('st_title');
         
-        $space = SpaceModel::getSpaceId($space_id);
+        // Покажем 404
+        if(!$space = SpaceModel::getSpaceId($space_id)) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
+        }
         
         // Редактировать может только автор и админ
         if ($space['space_user_id'] != $uid['id'] && $uid['trust_level'] != 5) {
