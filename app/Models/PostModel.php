@@ -223,8 +223,7 @@ class PostModel extends \MainModel
     // Редактирование поста
     public static function editPost($data)
     {
-           XD::update(['posts'])->set(
-            ['post_title'], '=', $data['post_title'], ',', 
+           XD::update(['posts'])->set(['post_title'], '=', $data['post_title'], ',', 
             ['post_type'], '=', $data['post_type'], ',',
             ['post_draft'], '=', $data['post_draft'], ',',
             ['post_date'], '=', $data['post_date'], ',', 
@@ -234,8 +233,7 @@ class PostModel extends \MainModel
             ['post_closed'], '=', $data['post_closed'], ',', 
             ['post_top'], '=', $data['post_top'], ',', 
             ['post_space_id'], '=', $data['post_space_id'], ',', 
-            ['post_tag_id'], '=', $data['post_tag_id'], ',',
-            ['post_url'], '=', $data['post_url'])
+            ['post_tag_id'], '=', $data['post_tag_id'])
             ->where(['post_id'], '=', $data['post_id'])->run(); 
 
         return true;

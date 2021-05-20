@@ -536,7 +536,6 @@ class PostController extends \MainController
         $post_top               = \Request::getPostInt('top');
         $post_space_id          = \Request::getPostInt('space_id');
         $post_tag_id            = \Request::getPostInt('tag_id');
-        $post_url               = \Request::getPost('post_url');
         $draft                  = \Request::getPost('draft');
         
         $account = \Request::getSession('account');
@@ -562,7 +561,6 @@ class PostController extends \MainController
         // При изменение url считаем частоту смену url после добавления у конкретного пользователя
         // Если больше N оповещение персонала, если изменен на запрещенный, скрытие поста,
         // или более расширенное поведение, а пока просто проверим
-        $post_url               = empty($post_url) ? '' : $post_url;
         $post_tag_img           = empty($post_tag_id) ? '' : $post_tag_id;
 
         // Проверим хакинг формы
@@ -643,7 +641,6 @@ class PostController extends \MainController
             'post_top'              => $post_top,
             'post_space_id'         => $post_space_id,
             'post_tag_id'           => $post_tag_id,
-            'post_url'              => $post_url,
         ];
         
         // Перезапишем пост

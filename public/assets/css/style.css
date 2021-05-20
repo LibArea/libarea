@@ -23,6 +23,17 @@ body {
   min-height: 100%;
 }
 
+a {
+  color: #2562dc;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+a:hover,
+a:focus {
+  color: #3474f4;
+}
+
 tt {
   font-size: 14px;
 }
@@ -102,17 +113,6 @@ h3.lo {
 
 .max-width {
   max-width: 780px;
-}
-
-a {
-  color: #2562dc;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-a:hover,
-a:focus {
-  color: #3474f4;
 }
 
 .clear {
@@ -215,6 +215,8 @@ blockquote {
   padding-left: 15px;
 }
 
+.info i.icon { margin: 0 1px; }
+
 a.logo,
 .slash,
 a.home {
@@ -224,6 +226,10 @@ a.home {
 
 a.logo {
   color: #e7672e;
+}
+
+i.icon {
+  margin-right: 10px; 
 }
 
 a.logo i.icon,
@@ -349,8 +355,6 @@ a.register {
   vertical-align: middle;
 }
 
-i.icon { margin-right: 10px; }
-.info i.icon { margin: 0 1px; }
 .post-body i.icon { margin-left: 8px; }
 .nav.create i.icon { color: #09c; }
 
@@ -581,7 +585,6 @@ input.add-url {
   clear: left;
 }
 
-
 a.login, 
 a.add-space {
   float: right;
@@ -642,7 +645,7 @@ a.add-space {
   position: absolute;
   top: 37px;
   right: 0;
-} 
+}
 
 .msg_error, 
 .msg_success {
