@@ -33,7 +33,7 @@
 
 .cover-image {
   width: 100%;
-  height: 100%; 
+  height: 100%;
 }
 
 .no-profile-cover {
@@ -73,7 +73,7 @@ h1.profile {
 }
 
 .box.profile-telo .post-body {
-  margin-left: 0px;
+  margin-left: 0;
 }
 
 .box.profile-telo .post-telo {
@@ -98,7 +98,7 @@ h1.profile {
   margin-right: 5px;
 }
 
-/* All users*/
+/* All users */
 .all-users {
   display: flex;
   flex-wrap: wrap;
@@ -143,5 +143,4 @@ h1.profile {
   .profile-about { margin: 15px 0 0 8px; }
   .profile-header-telo { margin: 15px 0 0 134px; }
   .stats { width: 100%; }
-
 }

@@ -14,9 +14,9 @@ class UserModel extends \MainModel
     // Страница участников
     public static function getUsersAll($user_id)
     {
-        $q = XD::select(['id', 'login', 'name', 'avatar', 'deleted'])
+        $q = XD::select(['id', 'login', 'name', 'avatar', 'is_deleted'])
             ->from(['users'])
-            ->where(['deleted'], '=', 0);
+            ->where(['is_deleted'], '=', 0);
                 
             if($user_id) {    
                 $query = $q->orderBy(['id'], '=', $user_id)->desc(',', ['id'])->desc();

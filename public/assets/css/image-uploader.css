@@ -2,7 +2,7 @@
  * Copyright (c) 2019 Christian Bayer; Licensed MIT 
  * + modification (c) Evg 2021 */
 
-/* Icons Font Face*/
+/* Icons Font Face */
 
 @font-face {
   font-family: 'Image Uploader Icons';
@@ -46,7 +46,7 @@
 }
 
 /* Base style */
-.box.setting.avatar .image-uploader, 
+.box.setting.avatar .image-uploader,
 .box.setting.space .image-uploader {
   border: 1px solid #d9d9d9;
   position: relative;
@@ -56,7 +56,7 @@
 
 .img-post-edit img.img-post,
 .box.setting.avatar .input-images-cover .image-uploader {
-  width: 328px;  
+  width: 328px;
 }
 
 /* Style on hover */
@@ -111,7 +111,7 @@
   border-radius: 50%;
   padding: 0.3rem;
   line-height: 1;
-  background-color: rgba(0, 0, 0, .5);
+  background-color: rgba(0, 0, 0, 0.5);
   -webkit-appearance: none;
   border: none;
 }
@@ -168,5 +168,4 @@
     padding-bottom: calc(33.3333333333% - 0.3rem);
     margin: 0.3rem;
   }
-
 } 

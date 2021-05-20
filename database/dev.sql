@@ -215,17 +215,18 @@ CREATE TABLE `posts` (
   `post_top` tinyint(1) NOT NULL DEFAULT 0 COMMENT '1 - пост поднят',
   `post_url` varchar(250) DEFAULT NULL,
   `post_url_domain` varchar(250) DEFAULT NULL,
-  `post_is_delete` tinyint(1) NOT NULL DEFAULT 0
+  `post_hits_count` int(11) DEFAULT 0,
+  `post_is_delete` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Дамп данных таблицы `posts`
 --
 
-INSERT INTO `posts` (`post_id`, `post_title`, `post_slug`, `post_type`, `post_draft`, `post_space_id`, `post_tag_id`, `post_date`, `edit_date`, `post_user_id`, `post_ip_int`, `post_votes`, `post_karma`, `post_answers_num`, `post_comments_num`, `post_content`, `post_content_img`, `post_thumb_img`, `post_closed`, `post_tl`, `post_lo`, `post_top`, `post_url`, `post_url_domain`, `post_is_delete`) VALUES
-(1, 'Муха села на варенье, Вот и всё стихотворенье...', 'muha-stih', 0, 1, 0, 0, '2021-02-28 12:08:09', '2021-03-05 10:05:25', 1, NULL, 0, 0, 0, 0, '> \"Нет не всё!\" - сказала Муха,\r\n\r\n> Почесала себе брюхо,\r\n\r\n> Свесив с блюдца две ноги,\r\n\r\n> Мне сказала:\"Погоди!\r\n\r\n> Прежде чем сесть на варенье,\r\n\r\n> Я прочла стихотворенье,\r\n\r\n> Неизвестного поэта,\r\n\r\n> Написавшего про это.\r\n\r\n\r\n## Заголовок\r\n\r\nЧто-то в модели много кода:\r\n\r\n```\r\n$db = \\Config\\Database::connect();\r\n$builder = $db->table(\'Posts AS a\');\r\n$builder->select(\'a.*, b.id, b.nickname, b.avatar\');\r\n$builder->join(\"users AS b\", \"b.id = a.post_user_id\");\r\n$builder->where(\'a.post_slug\', $slug);\r\n$builder->orderBy(\'a.post_id\', \'DESC\');\r\n```\r\n\r\nВот. Это первый пост.', NULL, NULL, 0, 0, 0, 0, NULL, NULL, 0),
-(2, 'Второй пост...', 'vtoroi-post', 0, 2, 0, 0, '2021-02-28 12:15:58', '2021-03-05 10:05:25', 2, NULL, 0, 0, 0, 0, 'Не будет тут про муху. Просто второй пост.\r\n\r\n> в лесу родилась ёлка, зеленая была...', NULL, NULL, 0, 0, 0, 0, NULL, NULL, 0),
-(3, 'Просто первый пост', 'prosto-pervyj-post', 0, 2, 0, 0, '2021-04-30 04:35:13', '2021-04-30 04:35:13', 1, '127.0.0.1', 0, 0, 1, 0, 'Просто первый пост', '', '', 0, 0, 0, 0, '', '', 0);
+INSERT INTO `posts` (`post_id`, `post_title`, `post_slug`, `post_type`, `post_draft`, `post_space_id`, `post_tag_id`, `post_date`, `edit_date`, `post_user_id`, `post_ip_int`, `post_votes`, `post_karma`, `post_answers_num`, `post_comments_num`, `post_content`, `post_content_img`, `post_thumb_img`, `post_closed`, `post_tl`, `post_lo`, `post_top`, `post_url`, `post_url_domain`, `post_hits_count`, `post_is_delete`) VALUES
+(1, 'Муха села на варенье, Вот и всё стихотворенье...', 'muha-stih', 0, 1, 0, 0, '2021-02-28 12:08:09', '2021-03-05 10:05:25', 1, NULL, 0, 0, 0, 0, '> \"Нет не всё!\" - сказала Муха,\r\n\r\n> Почесала себе брюхо,\r\n\r\n> Свесив с блюдца две ноги,\r\n\r\n> Мне сказала:\"Погоди!\r\n\r\n> Прежде чем сесть на варенье,\r\n\r\n> Я прочла стихотворенье,\r\n\r\n> Неизвестного поэта,\r\n\r\n> Написавшего про это.\r\n\r\n\r\n## Заголовок\r\n\r\nЧто-то в модели много кода:\r\n\r\n```\r\n$db = \\Config\\Database::connect();\r\n$builder = $db->table(\'Posts AS a\');\r\n$builder->select(\'a.*, b.id, b.nickname, b.avatar\');\r\n$builder->join(\"users AS b\", \"b.id = a.post_user_id\");\r\n$builder->where(\'a.post_slug\', $slug);\r\n$builder->orderBy(\'a.post_id\', \'DESC\');\r\n```\r\n\r\nВот. Это первый пост.', NULL, NULL, 0, 0, 0, 0, NULL, NULL, 0, 0),
+(2, 'Второй пост...', 'vtoroi-post', 0, 2, 0, 0, '2021-02-28 12:15:58', '2021-03-05 10:05:25', 2, NULL, 0, 0, 0, 0, 'Не будет тут про муху. Просто второй пост.\r\n\r\n> в лесу родилась ёлка, зеленая была...', NULL, NULL, 0, 0, 0, 0, NULL, NULL, 0, 0),
+(3, 'Просто первый пост', 'prosto-pervyj-post', 0, 2, 0, 0, '2021-04-30 04:35:13', '2021-04-30 04:35:13', 1, '127.0.0.1', 0, 0, 1, 0, 'Просто первый пост', '', '', 0, 0, 0, 0, '', '', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -314,24 +315,25 @@ CREATE TABLE `users` (
   `updated_at` datetime NOT NULL DEFAULT current_timestamp(),
   `invitation_available` int(10) NOT NULL DEFAULT 0,
   `invitation_id` int(11) NOT NULL DEFAULT 0,
-  `deleted` tinyint(1) DEFAULT 0,
   `avatar` varchar(250) NOT NULL DEFAULT 'noavatar.png',
   `cover_art` varchar(250) NOT NULL DEFAULT 'cover_art.jpeg',
   `color` varchar(12) NOT NULL DEFAULT '#f56400',
   `about` varchar(250) DEFAULT NULL,
-  `rating` int(11) NOT NULL DEFAULT 0,
+  `rating` int(11) DEFAULT 0,
   `status` varchar(250) DEFAULT NULL,
-  `my_post` int(11) DEFAULT NULL COMMENT 'Пост выведенный в профиль',
-  `ban_list` tinyint(1) DEFAULT 0
+  `my_post` int(11) DEFAULT 0 COMMENT 'Пост выведенный в профиль',
+  `ban_list` tinyint(1) DEFAULT 0,
+  `hits_count` int(11) DEFAULT 0,
+  `is_deleted` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`id`, `login`, `name`, `email`, `password`, `activated`, `reg_ip`, `trust_level`, `created_at`, `updated_at`, `invitation_available`, `invitation_id`, `deleted`, `avatar`, `cover_art`, `color`, `about`, `rating`, `status`, `my_post`, `ban_list`) VALUES
-(1, 'AdreS', 'Олег', 'ss@sdf.ru', '$2y$10$oR5VZ.zk7IN/og70gQq/f.0Sb.GQJ33VZHIES4pyIpU3W2vF6aiaW', 1, NULL, 5, '2021-03-08 21:37:04', '2021-03-08 21:37:04', 0, 0, 0, 'img_1.jpg', 'cover_art.jpeg', '#f56400', 'Тестовый аккаунт', 0, '0', 0, 0),
-(2, 'test', NULL, 'test@test.ru', '$2y$10$Iahcsh3ima0kGqgk6S/SSui5/ETU5bQueYROFhOsjUU/z1.xynR7W', 1, '127.0.0.1', 1, '2021-04-30 07:42:52', '2021-04-30 07:42:52', 0, 0, 0, 'noavatar.png', 'cover_art.jpeg', '#339900', NULL, 0, NULL, NULL, 0);
+INSERT INTO `users` (`id`, `login`, `name`, `email`, `password`, `activated`, `reg_ip`, `trust_level`, `created_at`, `updated_at`, `invitation_available`, `invitation_id`, `avatar`, `cover_art`, `color`, `about`, `rating`, `status`, `my_post`, `ban_list`, `hits_count`, `is_deleted`) VALUES
+(1, 'AdreS', 'Олег', 'ss@sdf.ru', '$2y$10$oR5VZ.zk7IN/og70gQq/f.0Sb.GQJ33VZHIES4pyIpU3W2vF6aiaW', 1, NULL, 5, '2021-03-08 21:37:04', '2021-03-08 21:37:04', 0, 0, 'img_1.jpg', 'cover_art.jpeg', '#f56400', 'Тестовый аккаунт', 0, NULL, 0, 0, 0, 0),
+(2, 'test', NULL, 'test@test.ru', '$2y$10$Iahcsh3ima0kGqgk6S/SSui5/ETU5bQueYROFhOsjUU/z1.xynR7W', 1, '127.0.0.1', 1, '2021-04-30 07:42:52', '2021-04-30 07:42:52', 0, 0, 'noavatar.png', 'cover_art.jpeg', '#339900', NULL, 0, NULL, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
