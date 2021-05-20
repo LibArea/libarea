@@ -7,6 +7,7 @@ use Hleb\Constructor\Handlers\Request;
 use App\Models\UserModel;
 use JacksonJeans\Mail;
 use JacksonJeans\MailException;
+use SourceParser;
 use Lori\Config;
 
 class Base
@@ -221,6 +222,13 @@ class Base
             return sha1(uniqid((string) mt_rand(), true));
         }    
 	}
+    
+    // Markdown
+    public static function  Markdown($text)
+    {
+        $SourceParser = new SourceParser();
+        return  $SourceParser->text($text); 
+    }
     
     // Пределы
     public static function Limits($name, $txt, $min, $max, $redirect)

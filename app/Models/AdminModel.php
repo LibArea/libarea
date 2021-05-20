@@ -3,21 +3,20 @@
 namespace App\Models;
 use Hleb\Constructor\Handlers\Request;
 use XdORM\XD;
+use DB;
+use PDO;
 
 class AdminModel extends \MainModel
 {
     // Страница участников
     public static function UsersAll()
     {
+        $sql = "SELECT users.*, users_logs.*
+                fROM users, users_logs WHERE logs_user_id = id
+                ORDER BY logs_date DESC LIMIT 55"; // GROUP BY id 
 
-        $result = XD::select('*')->from(['users'])->orderBy(['id'])->desc()->getSelect();
-        //$query = $q->leftJoin(['users_logs'])->on(['id'], '=', ['logs_user_id'])
-                 //->groupBy (['logs_user_id'])
-                // ->orderBy(['logs_user_id'])->desc();
+        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
 
-       // $result = $query->getSelect();  // toString()
-     
-        return $result;
     }
 
     // Страница участников

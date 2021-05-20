@@ -10,7 +10,6 @@ use App\Models\CommentModel;
 use App\Models\VotesPostModel;
 use Lori\Config;
 use Lori\Base;
-use Parsedown;
 use UrlRecord;
 use SimpleImage;
 
@@ -110,6 +109,16 @@ class PostController extends \MainController
         
         $post = PostModel::postSlug($slug, $uid['id']); 
         
+        // Просмотры поста
+        if (!isset($_SESSION['pagenumbers'])) {
+            $_SESSION['pagenumbers'] = array();
+        }
+
+        if (!isset($_SESSION['pagenumbers'][$post['post_id']])) {
+            PostModel::postHits($post['post_id']); 
+            $_SESSION['pagenumbers'][$post['post_id']] = $post['post_id'];
+        }
+        
         // Рекомендованные посты
         $recommend = PostModel::postsSimilar($post['post_id'], $post['post_space_id'], $uid['id']);
      
@@ -133,12 +142,8 @@ class PostController extends \MainController
         if($post['post_draft'] == 1 && $post['post_user_id'] != $uid['id']) {
             redirect('/');
         }
-
-        $Parsedown = new Parsedown(); 
-        $Parsedown->setSafeMode(true); // безопасность
-        
-        // Обработает некоторые поля
-        $post['post_content']   = $Parsedown->text($post['post_content']);
+     
+        $post['post_content']   = Base::Markdown($post['post_content']);
         $post['post_date']      = Base::ru_date($post['post_date']);
         $post['num_answers']    = Base::ru_num('answ', $post['post_answers_num']); 
         $post['num_comments']   = Base::ru_num('comm', $post['post_comments_num']); 
@@ -166,7 +171,7 @@ class PostController extends \MainController
             }
 
             $row['comm']            = CommentModel::getCommentsAnswer($row['answer_id'], $uid['id']);
-            $row['answer_content']  = $Parsedown->text($row['answer_content']);
+            $row['answer_content']  = Base::Markdown($row['answer_content']);
             $row['answer_date']     = Base::ru_date($row['answer_date']);
             $row['favorite_answ']   = AnswerModel::getMyAnswerFavorite($row['answer_id'], $uid['id']);
             $answers[$ind]          = $row;
@@ -713,10 +718,7 @@ class PostController extends \MainController
             return false;
         }
         
-        $Parsedown = new Parsedown(); 
-        $Parsedown->setSafeMode(true); // безопасность
-        
-        $post['post_content'] = $Parsedown->text($post['post_content']);
+        $post['post_content'] = Base::Markdown($post['post_content']);
 
         return view(PR_VIEW_DIR . '/post/postcode', ['post' => $post]);
     }

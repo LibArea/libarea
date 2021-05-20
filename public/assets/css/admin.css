@@ -38,8 +38,7 @@ input[type="text"] {
   display: table-row;
 }
 
-.t-th,
-.t-td {
+.t-th {
   font-weight: 600;
 }
 

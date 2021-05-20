@@ -64,9 +64,9 @@
             <br>
         <?php } ?>
         <?php if($data['answ_num_user'] != 0) { ?>
-            <label class="required">Ответов:</label>
+            <label class="required"><?= lang('Answers-m'); ?>:</label>
             <span class="d-cont">
-                <a title="Всего ответов <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/answers">
+                <a title="<?= lang('Answers-m'); ?> <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/answers">
                     <?= $data['answ_num_user']; ?>
                 </a>
             </span>
@@ -125,7 +125,7 @@
                         <?php if($onepost['post_answers_num'] !=0) { ?> 
                             <span class="otst"> | </span>
                             <a class="u-url" href="/post/<?= $onepost['post_id']; ?>/<?= $onepost['post_slug']; ?>">
-                              ответов <?= $onepost['post_answers_num']; ?>  
+                              <?= lang('Answers-m'); ?> <?= $onepost['post_answers_num']; ?>  
                             </a>
                         <?php } ?>
                     </div>

@@ -129,6 +129,14 @@ h1 {
   margin: 0 0 20px 0;
 }
 
+#h-200 {
+  height: 200px;
+}
+
+#h-100 {
+  height: 100px;
+}
+
 .banner {
   font-size: 13px;
   margin-bottom: 20px;
@@ -229,7 +237,7 @@ a.logo {
 }
 
 i.icon {
-  margin-right: 10px; 
+  margin-right: 10px;
 }
 
 a.logo i.icon,
@@ -301,7 +309,7 @@ a.home {
   top: 0;
   color: #999;
   font-size: 13px;
-} 
+}
 
 .slash {
   margin: 0 5px;
@@ -465,7 +473,7 @@ input[type="submit_url"] {
 }
 
 input[type="submit_url"] {
-  text-align: center; 
+  text-align: center;
   width: 107px;
 }
 
@@ -485,7 +493,7 @@ input[type="button"]:hover,
 input[type="reset"]:hover,
 input[type="submit"]:hover,
 input[type="test"]:hover,
-input[type="password"]:hover, 
+input[type="password"]:hover,
 input[type="email"]:hover,
 input[type="submit_url"]:hover {
   color: var(--color-gray-2);
@@ -585,7 +593,7 @@ input.add-url {
   clear: left;
 }
 
-a.login, 
+a.login,
 a.add-space {
   float: right;
   padding: 1px 10px;
@@ -665,11 +673,11 @@ a.add-space {
 }
 
 .notif-color-1 {
- background: #F89406;
+ background: #f89406;
 }
 
 /* Урезанный пост на главной */
-.full-post-home, 
+.full-post-home,
 .post-telo.full {
   overflow: hidden;
   margin-bottom: 22px;

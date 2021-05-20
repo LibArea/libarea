@@ -44,7 +44,7 @@
                         </span>
                         <?php if($post['post_answers_num'] !=0) { ?> 
                             <span class="otst"> | </span>
-                            ответов (<?= $post['post_answers_num'] ?>) 
+                            <?= lang('Answers-m'); ?> (<?= $post['post_answers_num'] ?>) 
                         <?php } ?>
                     </div>  
                 </div>

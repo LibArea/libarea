@@ -6,12 +6,12 @@
     <div class="t-table">
         <div class="t-th">
             <span class="t-td center">N</span>
-            <span class="t-td">Данные</span>
+            <span class="t-td"><?= lang('Information'); ?></span>
             <span class="t-td">E-mail</span>
-            <span class="t-td">IP регистрации</span>
-            <span class="t-td">Создан</span>
-            <span class="t-td center">Удален? / Забанен</span>
-            <span class="t-td center">Действие</span>
+            <span class="t-td"><?= lang('Sign up'); ?></span>
+            <span class="t-td">IP <?= lang('registrations'); ?></span>
+            <span class="t-td center"><?= lang('Information'); ?></span>
+            <span class="t-td center"><?= lang('Action'); ?></span>
         </div>
 
         <?php foreach($alluser as   $user) {  ?>
@@ -27,31 +27,30 @@
                     (<?= $user['name']; ?>) 
                 <?php } ?>
                 <sup class="red">TL:<?= $user['trust_level']; ?></sup>
-                <?php if($user['invitation_id'] !=0) { ?><sup>+ инв. id<?= $user['invitation_id']; ?></sup><?php } ?> <br>
+                <?php if($user['invitation_id'] !=0) { ?><sup>+ inv. id<?= $user['invitation_id']; ?></sup><?php } ?> <br>
             </span>
             <span class="t-td">
                  <span class="date"><?= $user['email']; ?></span>
+            </span>
+            <span class="t-td">
+                 <?= $user['created_at']; ?> 
             </span>
             <span class="t-td">
                  <?= $user['reg_ip']; ?>  <?php if($user['replayIp'] > 1) { ?>
                    <sup class="red">(<?= $user['replayIp']; ?>)</sup>
                  <?php } ?>
             </span>
-            <span class="t-td">
-                 <?= $user['created_at']; ?> 
-            </span>
             <span class="t-td center">
-                <?php if($user['deleted'] == 0) { ?>Нет<?php }else{ ?><span class="red">Да</span><?php } ?>
-                 /
-                <?php if($user['ban_list'] == 0) { ?>Нет<?php }else{ ?><span class="red">Да</span><?php } ?>
+                <?= $user['logs_ip_address']; ?> <br> 
+                <small><?= $user['logs_date']; ?></small> 
             </span>   
              <span class="t-td center">          
                 <?php if($user['isBan']) { ?>
                     <span class="user-ban" data-id="<?= $user['id']; ?>">
-                        <span class="red">разбанить</span>
+                        <span class="red"><?= lang('unban'); ?></span>
                     <span>
                 <?php } else { ?>
-                    <span class="user-ban" data-id="<?= $user['id']; ?>">забанить<span>
+                    <span class="user-ban" data-id="<?= $user['id']; ?>"><?= lang('ban it'); ?><span>
                 <?php } ?>
             </span> 
         </div>

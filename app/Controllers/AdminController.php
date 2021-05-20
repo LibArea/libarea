@@ -5,7 +5,6 @@ use Hleb\Constructor\Handlers\Request;
 use App\Models\UserModel;
 use App\Models\SpaceModel;
 use App\Models\AdminModel;
-use Parsedown;
 use Lori\Base;
 
 class AdminController extends \MainController
@@ -21,15 +20,12 @@ class AdminController extends \MainController
         $user_all = AdminModel::UsersAll();
         
         $result = Array();
-        foreach($user_all as $ind => $row){
-
-            $row['logs_date'] = (empty($row['logs_date'])) ? null : Base::ru_date($row['logs_date']);
+        foreach($user_all as $ind => $row) {
             $row['replayIp']      = AdminModel::replayIp($row['reg_ip']);
             $row['isBan']         = AdminModel::isBan($row['id']);
             $row['created_at']    = Base::ru_date($row['created_at']); 
-            $row['updated_at']    = Base::ru_date($row['updated_at']);
+            $row['logs_date']    = Base::ru_date($row['logs_date']);
             $result[$ind]         = $row;
-         
         } 
         
         $data = [
@@ -37,7 +33,6 @@ class AdminController extends \MainController
             'users' => $result,
         ]; 
  
-        // title, description
         Base::Meta(lang('Admin'), lang('Admin'), $other = false);
 
         return view(PR_VIEW_DIR . '/admin/index', ['data' => $data, 'uid' => $uid, 'alluser' => $result]);
@@ -68,12 +63,9 @@ class AdminController extends \MainController
          
         $comm = AdminModel::getCommentsDell();
 
-        $Parsedown = new Parsedown(); 
-        $Parsedown->setSafeMode(true); // безопасность
-
         $result = Array();
         foreach($comm  as $ind => $row){
-            $row['content'] = $Parsedown->text($row['comment_content']);
+            $row['content'] = Base::Markdown($row['comment_content']);
             $row['date']    = Base::ru_date($row['comment_date']);
             $result[$ind]   = $row;
         }

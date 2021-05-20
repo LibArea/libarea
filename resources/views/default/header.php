@@ -21,7 +21,6 @@
 <body class="bd<?php if(Request::getCookie('dayNight') == 'dark') {?> dark<?php } ?><?php if(Request::getCookie('menuS') == 'menuno') {?> menuno<?php } ?>">
 <header>
 <div class="wrap">
-
     <div class="menu-left"> 
         <ul>
             <li class="nav"> 

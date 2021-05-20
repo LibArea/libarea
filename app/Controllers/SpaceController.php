@@ -6,7 +6,6 @@ use Hleb\Constructor\Handlers\Request;
 use SimpleImage;
 use Lori\Config;
 use Lori\Base;
-use Parsedown;
 
 class SpaceController extends \MainController
 {
@@ -50,14 +49,11 @@ class SpaceController extends \MainController
             hl_preliminary_exit();
         }
   
-        $Parsedown = new Parsedown(); 
-        $Parsedown->setSafeMode(true); // безопасность
-  
         $posts = SpaceModel::getSpacePosts($space['space_id'], $uid['id'], $space_tags_id, $type);
 
         $space['space_date']        = Base::ru_date($space['space_date']);
         $space['space_cont_post']   = count($posts);
-        $space['space_text']        = $Parsedown->text($space['space_text']);
+        $space['space_text']        = Base::Markdown($space['space_text']);
         
         $result = Array();
         foreach($posts as $ind => $row) {

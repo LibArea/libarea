@@ -106,6 +106,14 @@ class PostModel extends \MainModel
         return $query->getSelectOne();
     }   
     
+    
+    // Просмотры  
+    public static function postHits($post_id)
+    {
+        $sql = "UPDATE posts SET post_hits_count = (post_hits_count + 1) WHERE post_id = ".$post_id."";
+        DB::run($sql); 
+    }   
+    
     // Получаем пост по id
     public static function postId($id) 
     {

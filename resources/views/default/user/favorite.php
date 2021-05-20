@@ -28,17 +28,16 @@
                             <span class="date"> 
                                 <?= $fav['date']; ?>
                             </span>
-                            <?php if($fav['post_answers'] !=0) { ?> 
+                            <?php if($fav['post_answers_num'] !=0) { ?> 
                                 <span class="otst"> | </span>
-                                
-                             <a href="/post/<?= $fav['post_id']; ?>/<?= $fav['post_slug']; ?>">    
-                                комментариев (<?= $fav['post_answers'] ?>) 
-                            </a>     
+                                <a href="/post/<?= $fav['post_id']; ?>/<?= $fav['post_slug']; ?>">    
+                                    <?= lang('Answers-m'); ?>  (<?= $fav['post_answers_num'] ?>) 
+                                </a>     
                             <?php } ?>
                             <?php if($uid['id'] > 0) { ?>
                                 <?php if($uid['id'] == $fav['favorite_uid']) { ?>
                                     <span class="user-post-fav right" data-post="<?= $fav['post_id']; ?>">
-                                         <span class="mu_favorite">убрать</span>
+                                         <span class="mu_favorite"><?= lang('Remove'); ?></span>
                                     </span>  
                                 <?php } ?>                                
                             <?php } ?>

@@ -11,7 +11,6 @@ use App\Models\NotificationsModel;
 use App\Models\FlowModel;
 use Hleb\Constructor\Handlers\Request;
 use Lori\Base;
-use Parsedown;
 
 class AnswerController extends \MainController
 {
@@ -27,12 +26,9 @@ class AnswerController extends \MainController
         $pagesCount = AnswerModel::getAnswersAllCount();  
         $answ       = AnswerModel::getAnswersAll($page, $user_id);
  
-        $Parsedown = new Parsedown(); 
-        $Parsedown->setSafeMode(true); // безопасность
-        
         $result = Array();
         foreach($answ  as $ind => $row){
-            $row['answer_content']  = $Parsedown->text($row['answer_content']);
+            $row['answer_content']  = Base::Markdown($row['answer_content']);
             $row['date']            = Base::ru_date($row['answer_date']);
             // N+1 - перенести в запрос
             $row['answ_vote_status'] = VotesAnswerModel::getVoteStatus($row['answer_id'], $user_id);
@@ -202,12 +198,9 @@ class AnswerController extends \MainController
         
         $answ  = AnswerModel::userAnswers($login); 
         
-        $Parsedown = new Parsedown(); 
-        $Parsedown->setSafeMode(true); // безопасность
-        
         $result = Array();
         foreach($answ as $ind => $row){
-            $row['content'] = $Parsedown->text($row['answer_content']);
+            $row['content'] = Base::Markdown($row['answer_content']);
             $row['date']    = Base::ru_date($row['answer_date']);
             $result[$ind]   = $row;
         }

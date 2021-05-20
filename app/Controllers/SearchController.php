@@ -3,7 +3,6 @@
 namespace App\Controllers;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\SearchModel;
-use Parsedown;
 use Lori\Config;
 use Lori\Base;
 
@@ -37,13 +36,10 @@ class SearchController extends \MainController
                 } else {
                     $qa =  SearchModel::getSearchServer($query);
                 }
-
-                $Parsedown = new Parsedown(); 
-                $Parsedown->setSafeMode(true); // безопасность
                 
                 $result = Array();
                 foreach($qa as $ind => $row){
-                    $row['post_content']  = $Parsedown->line(Base::cutWords($row['post_content'], 220, '...'));
+                    $row['post_content']  = Base::Markdown(Base::cutWords($row['post_content'], 220, '...'));
                     $result[$ind]         = $row; 
                 }     
                 

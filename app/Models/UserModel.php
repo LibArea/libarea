@@ -7,7 +7,6 @@ use Lori\Base;
 use Lori\Config;
 use DB;
 use PDO;
- 
 
 class UserModel extends \MainModel
 {
@@ -79,6 +78,13 @@ class UserModel extends \MainModel
     {
         return XD::update(['users'])->set(['avatar'], '=', $img)->where(['login'], '=', $login)->run();
     }
+
+    // Просмотры  
+    public static function userHits($user_id)
+    {
+        $sql = "UPDATE users SET hits_count = (hits_count + 1) WHERE id = ".$user_id."";
+        DB::run($sql); 
+    }   
 
    // Получение аватарки
     public static function getAvatar($login)

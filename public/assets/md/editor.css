@@ -78,7 +78,7 @@
 }
 
 .wmd-prompt-dialog {
-  border: 1px solid #999999;
+  border: 1px solid #999;
   background-color: #f5f5f5;
 }
 
@@ -88,7 +88,7 @@
 }
 
 .wmd-prompt-dialog > form > input[type="text"] {
-  border: 1px solid #999999;
+  border: 1px solid #999;
   color: black;
 }
 
@@ -108,9 +108,9 @@
   font-family: 'icomoon';
   src: url('./fonts/icomoon.eot?q9w37d');
   src: url('./fonts/icomoon.eot?q9w37d#iefix') format('embedded-opentype'),
-    url('./fonts/icomoon.ttf?q9w37d') format('truetype'),
-    url('./fonts/icomoon.woff?q9w37d') format('woff'),
-    url('./fonts/icomoon.svg?q9w37d#icomoon') format('svg');
+  url('./fonts/icomoon.ttf?q9w37d') format('truetype'), 
+  url('./fonts/icomoon.woff?q9w37d') format('woff'),
+  url('./fonts/icomoon.svg?q9w37d#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -118,7 +118,7 @@
 
 [class^="icon-"],
 [class*=" icon-"] {
-  font-family: 'icomoon' !important;
+  font-family: 'icomoon';
   speak: never;
   font-style: normal;
   font-weight: normal;
@@ -148,7 +148,7 @@
   .wmd-panel { width: 96%; }
   .wmd-input, .image-uploader { height: 120px; }
   .wmd-preview {
-    padding: 0 0 0 1; 
+    padding: 0 0 0 1;
     margin: 20px 0 0 2px; 
   }
 }

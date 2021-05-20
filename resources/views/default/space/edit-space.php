@@ -55,7 +55,8 @@
                     <br />
                     <label for="post_content"><?= lang('Text'); ?></label>
                     <br>
-                    <textarea class="add" id="answer_100" name="space_text"><?= $space['space_text']; ?></textarea>
+                    <textarea class="add" id="h-200" name="space_text"><?= $space['space_text']; ?></textarea>
+                    <div class="box_h">Markdown</div>
                 </div>
                 <div class="box setting space">
                     <input type="hidden" name="space_id" id="space_id" value="<?= $space['space_id']; ?>">

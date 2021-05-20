@@ -5,7 +5,6 @@ use Hleb\Constructor\Handlers\Request;
 use App\Models\UserModel;
 use App\Models\PostModel;
 use App\Models\SpaceModel;
-use Parsedown;
 use Lori\Config;
 use Lori\Base;
 use SimpleImage;
@@ -61,6 +60,16 @@ class UserController extends \MainController
         $meta_desc  = lang('desc-profile') . ' ' . $user['login'];
 
         Request::getHead()->addStyles('/assets/css/users.css');
+
+        // Просмотры поста
+        if (!isset($_SESSION['usernumbers'])) {
+            $_SESSION['usernumbers'] = array();
+        }
+
+        if (!isset($_SESSION['usernumbers'][$user['id']])) {
+            UserModel::userHits($user['id']); 
+            $_SESSION['usernumbers'][$user['id']] = $user['id'];
+        }
 
         // title, description
         Base::Meta($meta_title, $meta_desc, $other = false);
@@ -322,15 +331,12 @@ class UserController extends \MainController
             redirect('/u/' . $user['login'] . '/favorite');
         }
   
-        $Parsedown = new Parsedown(); 
-        $Parsedown->setSafeMode(true); // безопасность
-  
         $fav = UserModel::userFavorite($user['id']);
    
         $result = Array();
         foreach($fav as $ind => $row){
             $row['post_date']       = (empty($row['post_date'])) ? $row['post_date'] : Base::ru_date($row['post_date']);
-            $row['answer_content']  = $Parsedown->text($row['answer_content']);
+            $row['answer_content']  = Base::Markdown($row['answer_content']);
             $row['date']            = $row['post_date'];
             $row['post']            = PostModel::postId($row['answer_post_id']);
             $result[$ind]           = $row;
