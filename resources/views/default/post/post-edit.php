@@ -1,9 +1,9 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<main class="w-75">
+<main class="w-100">
 
     <h1><?= $data['h1']; ?></h1>
 
-     <div class="box setting post">
+     <div class="box edit-post">
         <form action="/post/editpost/<?= $post['post_id']; ?>" method="post" enctype="multipart/form-data">
             <?= csrf_field() ?>
             <div class="boxline max-width">

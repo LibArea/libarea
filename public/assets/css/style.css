@@ -46,7 +46,7 @@ a.active {
 }
 
 .small {
-  font-size: 11px;
+  font-size: 13px;
 }
 
 tt {
@@ -613,7 +613,7 @@ nav a.my.active {
   line-height: 13px;
   color: #14171a;
   margin-bottom: 7px;
-  font-size: 11px;
+  font-size: 13px;
   display: block;
 }
 
@@ -655,7 +655,7 @@ nav a.my.active {
 }
 
 .recover {
-  font-size: 12px;
+  font-size: 13px;
   line-height: 16px;
   color: #14171a;
   font-weight: 500;
@@ -663,7 +663,7 @@ nav a.my.active {
 }
 
 .login-nav.register a {
-  font-size: 11px;
+  font-size: 13px;
   line-height: 11px;
   color: #5b7083;
   text-transform: uppercase;
@@ -1546,3 +1546,5 @@ a:hover .icon:before {
 .icon.book-open:before { content: "\e04c"; }
 .icon.eye:before { content: "\e087"; }
 .icon.info:before { content: "\e08b"; }
+.icon.cloud-upload:before { content: "\e084"; }
+.icon.close:before { content: "\e082"; }

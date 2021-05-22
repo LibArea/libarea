@@ -92,7 +92,7 @@
                 }).appendTo($container),
 
                 // Create the icon and append it to the text container
-                $i = $('<i>', {class: 'iui-cloud-upload'}).appendTo($textContainer),
+                $i = $('<i>', {class: 'icon cloud-upload'}).appendTo($textContainer),
 
                 // Create the text and append it to the text container
                 $span = $('<span>', {text: plugin.settings.label}).appendTo($textContainer);
@@ -137,7 +137,7 @@
                 $button = $('<button>', {class: 'delete-image'}).appendTo($container),
 
                 // Create the delete icon
-                $i = $('<i>', {class: 'iui-close'}).appendTo($button);
+                $i = $('<i>', {class: 'icon close'}).appendTo($button);
 
 
             // If the image is preloaded

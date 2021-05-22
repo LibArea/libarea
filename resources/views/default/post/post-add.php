@@ -1,5 +1,5 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<main class="w-75">
+<main class="w-100">
 
     <h1><?= $data['h1']; ?></h1>
 
