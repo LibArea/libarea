@@ -1,5 +1,5 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<main>
+<main class="w-75">
     <h1><?= $data['h1']; ?></h1>
     <div class="box wide">
         <form class="" action="/login" method="post">
@@ -16,16 +16,14 @@
                 <input type="checkbox" id="rememberme" name="rememberme" value="1">
                 <label class="form-check-label" for="rememberme"><?= lang('Remember me'); ?></label>
             </div>
-            <div class="row">
-                <div class="boxline">
-                    <button type="submit" class="button-primary"><?= lang('Sign in'); ?></button>
-                    <small>
-                        <?php if(!Lori\Config::get(Lori\Config::PARAM_INVITE)) { ?>
-                            <span class="menu-lf"><a href="/register"><?= lang('Sign up'); ?></a></span>
-                        <?php } ?>
-                        <span class="menu-lf"><a href="/recover"><?= lang('forgot-password'); ?>?</a></span>
-                    </small>
-                </div>
+            <div class="boxline">
+                <button type="submit" class="button-primary"><?= lang('Sign in'); ?></button>
+                <small>
+                    <?php if(!Lori\Config::get(Lori\Config::PARAM_INVITE)) { ?>
+                        <span class="otst"><a href="/register"><?= lang('Sign up'); ?></a></span>
+                    <?php } ?>
+                    <span class="otst"><a href="/recover"><?= lang('forgot-password'); ?>?</a></span>
+                </small>
             </div>
         </form>
 

@@ -2,6 +2,7 @@
 <style nonce="<?= $_SERVER['nonce']; ?>">
 .profile-box {background:<?= $user['color']; ?>;}
 </style>
+<main class="w-75">
 <div class="profile-box"> 
     <?php if($user['cover_art'] != 'cover_art.jpeg') { ?>
         <div class="profile-cover">
@@ -37,22 +38,9 @@
             <?php if($user['name']) { ?> / <?= $user['name']; ?><?php } ?>
         </h1>
         
-        <i class="icon calendar"></i>
-        <span class="ts"><?= $user['created_at']; ?></span> 
-         
-        — 
-        
-        <a title="<?= lang('trust_level'); ?>" href="/info/trust-level"><?= $data['trust_level']['trust_name']; ?></a>
+ 
     </div>
 
-    <div class="profile-about">
-        <?php if($user['about']) { ?>
-        <?= $user['about']; ?>
-        <?php } else { ?>
-        <?= lang('Riddle'); ?>...
-        <?php } ?>
-    </div>
-   
     <div class="stats box wide">
         <?php if($data['post_num_user'] != 0) { ?>
             <label class="required">Постов:</label>
@@ -98,6 +86,21 @@
     </div>
         
     <div class="box profile-telo">
+    
+        <div class="profile-about">
+            <blockquote>
+                <?php if($user['about']) { ?>
+                <?= $user['about']; ?>
+                <?php } else { ?>
+                <?= lang('Riddle'); ?>...
+                <?php } ?>
+            </blockquote>
+        </div>
+        <div class="profile-about">
+        <i class="icon calendar"></i>
+        <span class="ts"><?= $user['created_at']; ?></span>  —  
+            <?= $data['trust_level']['trust_name']; ?>
+        </div>
         <?php if($user['my_post'] != 0) { ?>
             <h4><?= lang('Selected Post'); ?>:</h4>
 
@@ -135,5 +138,5 @@
         
     </div>
 </div>
-
+</main>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

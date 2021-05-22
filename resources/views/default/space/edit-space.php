@@ -1,6 +1,6 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 <main class="w-75">
- 
+
     <ul class="nav-tabs">
         <li class="active">
             <span><?= $data['h1']; ?></span>
@@ -8,6 +8,16 @@
         <li>
             <a href="/space/<?= $space['space_slug']; ?>/edit/logo">
                 <span><?= lang('Logo'); ?> / <?= lang('Cover art'); ?></span>
+            </a>
+        </li>
+        <li>
+            <a href="/space/<?= $space['space_slug']; ?>/tags">
+                <span><?= lang('Tags'); ?></span>
+            </a>
+        </li>
+        <li class="right">
+            <a href="/space/<?= $space['space_slug']; ?>">
+                <span><?= lang('In space'); ?></span>
             </a>
         </li>
     </ul>
@@ -68,5 +78,4 @@
         </div>
     </div> 
 </main>
-<?php include TEMPLATE_DIR . '/_block/space-menu.php'; ?>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

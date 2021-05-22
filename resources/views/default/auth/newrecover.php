@@ -1,5 +1,5 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<main>
+<main class="w-75">
     <h1><?= $data['title']; ?></h1>
     <div class="box wide">
         <form class="" action="/recover/send/pass" method="post">
@@ -16,10 +16,10 @@
                 </div>
             </div>
         </form>
-            <div class="boxline">
-                <a href="/register"><?= lang('Sign up'); ?></a> &emsp;
-                <a href="/login"><?= lang('Sign in'); ?></a>
-            </div>
+        <div class="boxline">
+            <a href="/register"><?= lang('Sign up'); ?></a> &emsp;
+            <a href="/login"><?= lang('Sign in'); ?></a>
+        </div>
     </div>
 </main>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

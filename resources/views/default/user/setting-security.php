@@ -1,9 +1,24 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<main>
+<main class="w-75">
     <ul class="nav-tabs">
-        <li><a href="/u/<?= $uid['login']; ?>/setting"><span><?= lang('Setting profile'); ?></span></a></li>
-        <li><a href="/u/<?= $uid['login']; ?>/setting/avatar"><span><?= lang('Avatar'); ?> / <?= lang('Cover art'); ?></span></a></li>
-        <li class="active"><span><?= lang('Password'); ?></span></li>
+        <li>
+            <a href="/u/<?= $uid['login']; ?>/setting">
+                <span><?= lang('Setting profile'); ?></span>
+            </a>
+        </li>
+        <li>
+            <a href="/u/<?= $uid['login']; ?>/setting/avatar">
+                <span><?= lang('Avatar'); ?> / <?= lang('Cover art'); ?></span>
+            </a>
+        </li>
+        <li class="active">
+            <span><?= lang('Password'); ?></span>
+        </li>
+        <li class="right">
+            <a href="/u/<?= $uid['login']; ?>">
+                <span><?= lang('Profile'); ?></span>
+            </a>
+        </li>
     </ul>
     <div class="box setting">
            <form action="/users/setting/security/edit" method="post" enctype="multipart/form-data">
@@ -28,5 +43,4 @@
             </form>    
     </div>
 </main>
-<?php include TEMPLATE_DIR . '/_block/my-menu.php'; ?>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

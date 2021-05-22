@@ -1,5 +1,5 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<main class="w-100">
+<main class="w-75">
     <h1><?= $data['h1']; ?></h1>
     <div class="box wide">
         <form class="" action="/recover/send" method="post">
@@ -21,9 +21,9 @@
                     <button type="submit" class="button-primary"><?= lang('Reset'); ?></button>
                     <small>
                         <?php if(!Lori\Config::get(Lori\Config::PARAM_INVITE)) { ?>
-                            <span class="menu-lf"><a href="/register"><?= lang('Sign up'); ?></a></span>
+                            <span class="otst"><a href="/register"><?= lang('Sign up'); ?></a></span>
                         <?php } ?>
-                        <span class="menu-lf"><a href="/login"><?= lang('Sign in'); ?></a></span>
+                        <span class="otst"><a href="/login"><?= lang('Sign in'); ?></a></span>
                     </small>
                 </div>
             </div>

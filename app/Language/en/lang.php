@@ -72,6 +72,13 @@ return [
     'add_up_post'           => 'I liked the post',
     'add_up_answ'           => 'I liked the answer',
     'add_up_comm'           => 'liked the comment',
+    
+    /* Setting */
+    'info_setting'          => 'Fill in your name to help participants address you by your first name. <br> <br> Tell me something about yourself. You have a great opportunity to open up to please others and seem like an interesting person.',
+    'info_avatar'           => 'Upload an avatar and cover image for your profile. <br><br> When each user has a unique avatar, it becomes much easier to follow the discussions!',
+    'info_security'         => 'Make sure that all your passwords have 8 characters or more, ideally a lot more. <br><br>Passwords must contain large letters, small letters, numbers, and special characters.',
+    'info_space'            => '«Spaces» are communities on a site dedicated to a specific topic. <br> <br> There are many spaces. They allow members to focus on a specific interest or topic when posting content.',
+    'info_flow'             => '«Flow» are some of the latest developments on the site. <br> <br> Stream combined with chat (for authorized users).',
+    'info_users'            => 'The list of participants sorted in the order of registration on the site.',
+    'info_search'           => 'To refine the search, try to find a more accurate query.',
 ];
-
-

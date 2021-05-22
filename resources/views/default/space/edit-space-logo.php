@@ -59,5 +59,4 @@
         </div>
     </div> 
 </main>
-<?php include TEMPLATE_DIR . '/_block/space-menu.php'; ?>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

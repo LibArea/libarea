@@ -1,3 +1,20 @@
+.sidebar {
+  width: 250px;
+  float: right;
+  margin: 20px 0;
+}
+
+.menu-info a {
+  display: block;
+  font-size: 15px;
+  color: var(--color-gray-1);
+  margin-bottom: 8px;
+}
+
+.menu-info a.active {
+  color: #1ca1f3;
+}
+
 #canvas {
   display: block;
   top: 0;
@@ -79,7 +96,7 @@
   width: 70%;
 }
 
-h1 {
+.stats h1 {
   margin: 0;
   color: #f56400;
   font-size: 3em;

@@ -34,19 +34,13 @@ class PostController extends \MainController
 
         $result = Array();
         foreach($posts as $ind => $row) {
-            
-            if(Base::getStrlen($row['post_url']) > 6) {
-                $parse = parse_url($row['post_url']);
-                $row['post_url'] = $parse['host'];  
-            } 
             $row['post_content_preview']    = Base::cutWords($row['post_content'], 120);
             $row['lang_num_answers']        = Base::ru_num('answ', $row['post_answers_num']);
             $row['post_date']               = Base::ru_date($row['post_date']);
             $result[$ind]                   = $row;
-         
         }  
 
-        // Последние комментарии и отписанные пространства
+        // Последние комментарии и подписанные пространства
         $latest_answers     = AnswerModel::latestAnswers($uid);
         $space_signed_bar   = SpaceModel::getSpaceUser($uid['id']);
  
@@ -707,7 +701,7 @@ class PostController extends \MainController
        
         return true;
     }
-  
+    
     // Просмотр поста с титульной страницы
     public function shownPost() 
     {

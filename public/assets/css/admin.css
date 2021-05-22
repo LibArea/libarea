@@ -2,6 +2,10 @@ body {
   background: #f3f3f3;
 }
 
+header {
+  margin-left: 0;
+}
+
 .admin {
   background: #fff;
   padding: 0.4rem 1rem;

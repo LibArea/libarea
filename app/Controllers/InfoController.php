@@ -17,6 +17,8 @@ class InfoController extends \MainController
             'canonical' => Config::get(Config::PARAM_URL) . '/info',
         ];
         
+        Request::getResources()->addBottomStyles('/assets/css/info.css');
+        
        // Далее title, description
        Base::Meta(lang('Info'), lang('info-desc'), $other = false); 
  
@@ -66,6 +68,8 @@ class InfoController extends \MainController
             'h1'        => lang('Rules'),
             'canonical' => Config::get(Config::PARAM_URL) . '/info/rules',
         ];
+        
+        Request::getResources()->addBottomStyles('/assets/css/info.css');
 
         Base::Meta(lang('Rules'), lang('rules-desc'));
 
@@ -80,6 +84,8 @@ class InfoController extends \MainController
             'canonical' => Config::get(Config::PARAM_URL) . '/info/about',
         ];
 
+        Request::getResources()->addBottomStyles('/assets/css/info.css');
+
         Base::Meta(lang('About'), lang('about-desc'), $other = false);
 
         return view(PR_VIEW_DIR . '/info/about', ['data' => $data, 'uid' => $uid]);
@@ -93,6 +99,8 @@ class InfoController extends \MainController
             'canonical' => Config::get(Config::PARAM_URL) . '/info/privacy',
         ];
 
+        Request::getResources()->addBottomStyles('/assets/css/info.css');
+
         Base::Meta(lang('Privacy Policy'), lang('privacy-desc'), $other = false);
 
         return view(PR_VIEW_DIR . '/info/privacy', ['data' => $data, 'uid' => $uid]);
@@ -105,6 +113,8 @@ class InfoController extends \MainController
             'h1'        => lang('Restriction'),
             'canonical' => Config::get(Config::PARAM_URL) . '/info/restriction',
         ];
+        
+        Request::getResources()->addBottomStyles('/assets/css/info.css');
 
         Base::Meta(lang('Restriction'), lang('Restriction'), $other = false);
 

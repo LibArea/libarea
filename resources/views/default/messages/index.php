@@ -1,6 +1,5 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<main>
-    <div class="messages">
+<main class="w-75">
         <h1><?= $data['title'] ?></h1>
         <?php if (!empty($data['messages'])) { ?>
 
@@ -36,7 +35,5 @@
         <?php } else { ?>
             <div class="no-content">У вас нет диалогов</div>
         <?php } ?>
-    </div>
 </main>
-<?php include TEMPLATE_DIR . '/_block/user-menu.php'; ?>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

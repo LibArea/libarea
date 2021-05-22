@@ -30,6 +30,8 @@ class SpaceController extends \MainController
             'canonical'     => '/space', 
         ];
 
+        Request::getResources()->addBottomStyles('/assets/css/space.css');
+
         // title, description
         Base::Meta(lang('All space'), lang('all-space-desc'), $other = false);
         
@@ -81,6 +83,8 @@ class SpaceController extends \MainController
 
         $meta_title = $space['space_name'] . ' — ' . $s_title;
         $meta_desc  = $space['space_name'] . ' — ' . $s_title . '. ';
+        
+        Request::getResources()->addBottomStyles('/assets/css/space.css');
         
         // title, description
         Base::Meta($meta_title, $meta_desc, $other = false);
@@ -436,9 +440,9 @@ class SpaceController extends \MainController
                 $image
                     ->fromFile($file_cover)  // load image.jpg
                     ->autoOrient()     // adjust orientation based on exif data
-                    ->resize(1920, 300)
+                    ->resize(1120, 300)
                     ->toFile($path_cover_img . $filename_cover .'.webp', 'image/webp')
-                    ->resize(280, 130)
+                    ->resize(180, 70)
                     ->toFile($path_cover_img_small . $filename_cover .'.webp', 'image/webp');
                     
                     $cover_art = $filename_cover . '.webp';

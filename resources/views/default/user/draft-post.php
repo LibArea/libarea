@@ -1,5 +1,5 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<main>
+<main class="w-75">
     <h1><?= $data['h1']; ?></h1>
 
     <div class="drafts max-width">
@@ -29,5 +29,4 @@
         <?php } ?>
     </div> 
 </main>
-<?php include TEMPLATE_DIR . '/_block/my-menu.php'; ?>
 <?php include TEMPLATE_DIR . '/footer.php'; ?> 

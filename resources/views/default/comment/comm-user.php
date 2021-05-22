@@ -1,5 +1,5 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<main>
+<main class="w-75">
     <h1 class="top"><?= $data['h1']; ?></h1>
 
     <?php if (!empty($comments)) { ?>
@@ -45,5 +45,4 @@
         <div class="no-content"><?= lang('no-comment'); ?>...</div>
     <?php } ?>
 </main> 
-<?php include TEMPLATE_DIR . '/_block/user-menu.php'; ?>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

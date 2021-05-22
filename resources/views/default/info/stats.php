@@ -1,5 +1,5 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<main class="w-100">
+<main class="w-75 stats">
     <center>
         <h1><?= $data['h1']; ?></h1>
         <div class="canvas-telo">

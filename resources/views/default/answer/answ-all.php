@@ -1,6 +1,5 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<?php include TEMPLATE_DIR . '/_block/left-menu.php'; ?>
-<main>
+<main class="w-75">
     <h1 class="top"><?= $data['h1']; ?></h1>
 
     <div class="telo answers">

@@ -48,7 +48,7 @@ class PostModel extends \MainModel
         }  
 
         $sql = "SELECT p.post_id, p.post_title, p.post_slug, p.post_type, p.post_draft, p.post_user_id, p.post_space_id, p.post_answers_num, 
-        p.post_comments_num, p.post_date, p.post_votes, p.post_is_delete, p.post_closed, p.post_lo, p.post_top, p.post_url, 
+        p.post_comments_num, p.post_date, p.post_votes, p.post_is_delete, p.post_closed, p.post_lo, p.post_top, p.post_url, post_url_domain, 
         p.post_content_img, p.post_thumb_img, p.post_content,
                 u.id, u.login, u.avatar,
                 v.votes_post_item_id, v.votes_post_user_id,  

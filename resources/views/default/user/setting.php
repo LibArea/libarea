@@ -1,6 +1,5 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<main>
-     
+<main class="w-75">
     <ul class="nav-tabs">
         <li class="active">
             <span><?= lang('Setting profile'); ?></span>
@@ -13,6 +12,11 @@
         <li>
             <a href="/u/<?= $uid['login']; ?>/setting/security">
                 <span><?= lang('Password'); ?></span>
+            </a>
+        </li>
+        <li class="right">
+            <a href="/u/<?= $uid['login']; ?>">
+                <span><?= lang('Profile'); ?></span>
             </a>
         </li>
     </ul>
@@ -50,9 +54,7 @@
                 <input type="hidden" name="nickname" id="nickname" value="">
                 <button type="submit" class="btn btn-primary"><?= lang('Edit'); ?></button>
             </div>
-            
         </form>
     </div>
 </main>
-<?php include TEMPLATE_DIR . '/_block/my-menu.php'; ?>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

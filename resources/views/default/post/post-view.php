@@ -1,30 +1,30 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<main class="post">
-    <article class="post-full max-width">
+<main class="w-75">
+    <article class="post-full">
 
         <?php if($post['post_is_delete'] == 0 || $uid['trust_level'] == 5) { ?>
    
             <div class="telo-detail_post<?php if($post['post_is_delete'] == 1) { ?> dell<?php } ?>">
 
-                        <?php if (!$uid['id']) { ?> 
-                            <div id="vot<?= $post['post_id']; ?>" class="voters">
-                                <a rel="nofollow" href="/login"><div class="post-up-id"></div></a>
-                                <div class="score"><?= $post['post_votes']; ?></div>
-                            </div>
-                        <?php } else { ?> 
+                <?php if (!$uid['id']) { ?> 
+                    <div id="vot<?= $post['post_id']; ?>" class="voters">
+                        <a rel="nofollow" href="/login"><div class="post-up-id"></div></a>
+                        <div class="score"><?= $post['post_votes']; ?></div>
+                    </div>
+                <?php } else { ?> 
 
-                            <?php if ($post['votes_post_user_id'] || $uid['id'] == $post['post_user_id']) { ?>
-                                <div class="voters active">
-                                    <div class="post-up-id"></div>
-                                    <div class="score"><?= $post['post_votes']; ?></div>
-                                </div>
-                            <?php } else { ?>
-                                <div id="up<?= $post['post_id']; ?>" class="voters">
-                                    <div data-id="<?= $post['post_id']; ?>" class="post-up-id"></div>
-                                    <div class="score"><?= $post['post_votes']; ?></div>
-                                </div>
-                            <?php } ?> 
-                        <?php } ?> 
+                    <?php if ($post['votes_post_user_id'] || $uid['id'] == $post['post_user_id']) { ?>
+                        <div class="voters active">
+                            <div class="post-up-id"></div>
+                            <div class="score"><?= $post['post_votes']; ?></div>
+                        </div>
+                    <?php } else { ?>
+                        <div id="up<?= $post['post_id']; ?>" class="voters">
+                            <div data-id="<?= $post['post_id']; ?>" class="post-up-id"></div>
+                            <div class="score"><?= $post['post_votes']; ?></div>
+                        </div>
+                    <?php } ?> 
+                <?php } ?> 
             
  
                 <div class="post-body">
@@ -105,6 +105,7 @@
                                         <?php } ?>
                                     </a>
                                 </span>
+                                <small> - (<?= $post['post_hits_count']; ?>)</small>
                             <?php } ?>
                             
                         <?php } ?>
@@ -191,19 +192,7 @@
             <p class="no-answer red">Это черновик...</p>
         <?php } ?>   
     </article>
-</main>
-<aside class="sidebar"> 
 
-    <?php if($post['space_slug']) { ?>
-        <div class="post-space-box">
-            <img alt="<?= $post['space_name']; ?>" src="/uploads/spaces/logos/<?= $post['space_img']; ?>">
-            <a href="/s/<?= $post['space_slug']; ?>"><?= $post['space_name']; ?></a>
-            <div class="post-space-box-desc">
-                <?= $post['space_description']; ?>
-            </div>
-        </div>
-    <?php } ?>
- 
     <?php if($recommend) { ?> 
         <div>
             <h3 class="recommend"><?= lang('Recommended'); ?></h3>  
@@ -218,6 +207,7 @@
                </div>
             <?php } ?> 
         </div> 
-    <?php } ?>   
-</aside> 
+    <?php } ?>  
+</main> 
+
 <?php include TEMPLATE_DIR . '/footer.php'; ?> 

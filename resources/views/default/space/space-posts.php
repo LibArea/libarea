@@ -1,62 +1,62 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-</div>
+<main class="w-75">
 <?php if($space_info['space_cover_art'] != 'space_cover_no.jpeg') { ?>
+
     <style nonce="<?= $_SERVER['nonce']; ?>">
     .space-cover-box {background-image: url(/uploads/spaces/cover/<?= $space_info['space_cover_art']; ?>); background-position: 50% 50%;min-height: 300px;margin-top: -24px;}
     </style>
     <div class="space-cover-box">
     
 <?php } else { ?> 
+
     <style nonce="<?= $_SERVER['nonce']; ?>">
     .space-box {background:<?= $space_info['space_color']; ?>;}
     </style>
     <div class="space-box" >
+    
 <?php } ?>   
     
-        <div class="wrap">
-             <?php if(!$uid['id']) { ?> 
-                    <div class="right"> 
-                        <a href="/login"><div class="hide-space-id yes-space">+ <?= lang('Read'); ?></div></a>
-                    </div>
-            <?php } else { ?>
-                <?php if($space_info['space_id'] !=1) { ?>
-                    <?php if($space_info['space_user_id'] != $uid['id']) { ?>
-                        <div class="right"> 
-                            <?php if($space_signed == 1) { ?>
-                                <div data-id="<?= $space_info['space_id']; ?>" class="hide-space-id no-space">
-                                    <?= lang('Unsubscribe'); ?>
-                                </div>
-                            <?php } else { ?> 
-                                <div data-id="<?= $space_info['space_id']; ?>" class="hide-space-id yes-space">
-                                    + <?= lang('Read'); ?>
-                                </div>
-                            <?php } ?>   
-                        </div>
-                    <?php } ?>
-                <?php } ?>                 
-            <?php } ?> 
-            <div class="space-text">
-                <img class="space-box-img" src="/uploads/spaces/logos/<?= $space_info['space_img']; ?>">
-                <div class="fons">
-                    <a title="<?= $space_info['space_name']; ?>" href="/s/<?= $space_info['space_slug']; ?>">
-                        <h1><?= $space_info['space_name']; ?></h1>
-                    </a>  
-                    <div class="data">
-                    <?= lang('Created by'); ?>: <a href="/u/<?= $space_info['login']; ?>"><?= $space_info['login']; ?></a>
-                    
-                    — <?= $space_info['space_date']; ?>
-                
-                    </div> 
-                </div>    
+
+    <?php if(!$uid['id']) { ?> 
+            <div class="right"> 
+                <a href="/login"><div class="hide-space-id yes-space">+ <?= lang('Read'); ?></div></a>
             </div>
+    <?php } else { ?>
+        <?php if($space_info['space_id'] !=1) { ?>
+            <?php if($space_info['space_user_id'] != $uid['id']) { ?>
+                <div class="right"> 
+                    <?php if($space_signed == 1) { ?>
+                        <div data-id="<?= $space_info['space_id']; ?>" class="hide-space-id no-space">
+                            <?= lang('Unsubscribe'); ?>
+                        </div>
+                    <?php } else { ?> 
+                        <div data-id="<?= $space_info['space_id']; ?>" class="hide-space-id yes-space">
+                            + <?= lang('Read'); ?>
+                        </div>
+                    <?php } ?>   
+                </div>
+            <?php } ?>
+        <?php } ?>                 
+    <?php } ?> 
+    <div class="space-text">
+        <img class="space-box-img" src="/uploads/spaces/logos/<?= $space_info['space_img']; ?>">
+        <div class="fons">
+            <a title="<?= $space_info['space_name']; ?>" href="/s/<?= $space_info['space_slug']; ?>">
+                <h1><?= $space_info['space_name']; ?></h1>
+            </a>  
+            <div class="data">
+            <?= lang('Created by'); ?>: <a href="/u/<?= $space_info['login']; ?>"><?= $space_info['login']; ?></a>
+            
+            — <?= $space_info['space_date']; ?>
+        
+            </div> 
         </div>    
     </div>
-
-<div class="wrap">
-
-<?php include TEMPLATE_DIR . '/_block/left-menu.php'; ?>
+   
+    </div>
+ 
 <?php if ($space_info['space_is_delete'] == 0) { ?>
-<main>
+ 
     <ul class="nav-tabs">
         <?php if($type == 'feed') { ?>
             <li class="active">
@@ -76,7 +76,14 @@
             <li class="active">
                 <span>Top</span>
             </li>
-        <?php } ?>        
+        <?php } ?> 
+        <?php if($uid['trust_level'] == 5 || $space_info['space_user_id'] == $uid['id']) { ?>        
+            <li class="right">
+                <a class="edit-space" href="/space/<?= $space_info['space_slug']; ?>/edit">
+                    <span><?= lang('Edit'); ?></span>
+                </a>
+            </li>
+        <?php } ?>            
     </ul>
     
     <?php if (!empty($posts)) { ?>
@@ -101,32 +108,15 @@
                     <?php } ?> 
                 <?php } ?> 
                 <div class="post-body">
-                    <a class="u-url" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
-                        <h3 class="titl"><?= $post['post_title']; ?></h3>
-                    </a>
-                    
-                    <?php if($post['st_id']) { ?>
-                        <a class="space-u tag-u" href="/s/<?= $space_info['space_slug']; ?>/<?= $post['st_id']; ?>" title="<?= $post['st_title']; ?>"><?= $post['st_title']; ?></a>
-                    <?php } ?>
-                     
-                    <div class="show">
-                        <span class="show_add_<?= $post['post_id']; ?>">
-                            <div data-post_id="<?= $post['post_id']; ?>" class="showpost">
-                                <span>&#9658;</span> 
-                                <?= $post['post_content_preview']; ?>
-                                <span class="s_<?= $post['post_id']; ?> show_detail">... </span>
-                            </div>
-                        </span>
-                    </div>
-
-                <div id="show_<?= $post['post_id']; ?>" class="show_detail"></div> 
                     <div class="footer">
-                        <img class="ava" src="/uploads/users/avatars/small/<?= $post['avatar'] ?>">
+                        <img class="ava" alt="<?= $post['login']; ?>" src="/uploads/users/avatars/small/<?= $post['avatar']; ?>">
                         <span class="user"> 
-                            <a href="/u/<?= $post['login']; ?>"><?= $post['login']; ?></a> 
+                            <a href="/u/<?= $post['login']; ?>">
+                                <?= $post['login']; ?>
+                            </a> 
                         </span>
-                        <span class="date">
-                            <?= $post['post_date']; ?>
+                        <span class="date"> 
+                           <?= $post['post_date'] ?>
                         </span>
                         <?php if($post['post_answers_num'] !=0) { ?> 
                             <span class="otst"> | </span>
@@ -136,49 +126,56 @@
                                 <?php } else { ?>      
                                     <?= $post['post_answers_num']; ?>  <?= $post['lang_num_answers']; ?>   
                                 <?php } ?>
-                            </a>                                
+                            </a>
                         <?php } ?>
-                    </div>  
-                </div>
+                    </div>
+                    <a class="u-url" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
+                        <h2 class="titl"><?= $post['post_title']; ?></h2>
+                        <?php if ($post['post_is_delete'] == 1) { ?> 
+                            <i class="icon trash"></i>
+                        <?php } ?>
+                        <?php if($post['post_closed'] == 1) { ?> 
+                            <i class="icon lock"></i>
+                        <?php } ?>
+                        <?php if($post['post_top'] == 1) { ?> 
+                            <i class="icon pin"></i>
+                        <?php } ?>
+                        <?php if($post['post_lo'] > 0) { ?> 
+                            <i class="icon trophy lo"></i>
+                        <?php } ?>
+                        <?php if($post['post_type'] == 1) { ?> 
+                            <i class="icon question qa"></i>
+                        <?php } ?>
+                    </a>
+                    
+                    <?php if($post['post_url_domain']) { ?> 
+                        <a class="post_url" href="/domain/<?= $post['post_url_domain']; ?>">
+                            <?= $post['post_url_domain']; ?>
+                        </a> 
+                    <?php } ?>
+                    
+                    <div class="post-details">
+                        <?php if($post['post_thumb_img']) { ?> 
+                            <img class="thumb" alt="<?= $post['post_url']; ?>" src="/uploads/posts/thumbnails/<?= $post['post_thumb_img']; ?>">
+                        <?php } ?>
+                    
+                        <?= $post['post_content_preview']; ?>...
+                        
+                         <?php if($post['post_content_img']) { ?> 
+                            <div class="img-post-bl">
+                                <img class="img-post" alt="<?= $post['post_title']; ?>" src="/uploads/posts/<?= $post['post_content_img']; ?>">
+                            </div>    
+                        <?php } ?>
+                    </div>
+                </div>  
             </div>    
         <?php } ?>
 
         <?php } else { ?>
             <div class="no-content"><?= lang('no-post'); ?>...</div>
         <?php } ?>
-    </main>
-
-    <aside class="sidebar">
-        <?php if($space_info['space_id'] != 1) { ?>
-            Читают <?= $space_info['users']; ?>
-        <?php } ?>
-    
-        <?php if($uid['trust_level'] == 5 || $space_info['space_user_id'] == $uid['id']) { ?>
-            <div class="edit-space right">
-                <a class="edit-space" href="/space/<?= $space_info['space_slug']; ?>/edit">
-                    <?= lang('Edit'); ?>
-                </a>
-            </div> 
-        <?php } ?>
-            
-        <div class="space-text-sb">
-            <div class="space-text-bar"> 
-                <?= $space_info['space_text']; ?>
-            </div>
-        </div>
-      
-        <?php if (!empty($tags)) { ?>
-            <div class="space-tags">
-                <div class="menu-m"><?= lang('Tags'); ?></div>
-                <?php foreach ($tags as  $tag) { ?>  
-                    <a <?php if ($uid['uri'] == '/s/'.$tag['space_slug'] .'/'.$tag['st_id']) { ?> class="avtive" <?php } ?> href="/s/<?= $space_info['space_slug']; ?>/<?= $tag['st_id']; ?>">
-                        <?= $tag['st_title']; ?>
-                    <a>
-                <?php } ?>
-            </div>
-        <?php } ?> 
-        <br>
-    </aside> 
+</main>
+ 
 <?php } else { ?>
     <main>
         <div class="no-content red"><?= lang('ban-space'); ?>...</div>

@@ -1,5 +1,5 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<main>
+<main class="w-75">
     <a class="right edit-space" href="/notifications/delete">Я прочитал</a>
     <h1><?= $data['title'] ?></h1>
      
@@ -64,5 +64,4 @@
          Уведомлений пока нет...
     <?php } ?>
 </main>
-<?php include TEMPLATE_DIR . '/_block/user-menu.php'; ?>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

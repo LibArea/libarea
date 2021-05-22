@@ -1,6 +1,5 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<?php include TEMPLATE_DIR . '/_block/left-menu.php'; ?>
-<main>
+<main class="w-75">
     <h1><?= $data['h1']; ?></h1>
 
     <?php if (!empty($space)) { ?>

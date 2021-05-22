@@ -1,5 +1,5 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<main class="w-100">
+<main class="w-75">
     <h1><?= $data['h1']; ?></h1>
     <div class="box wide">
         <form class="" action="/register/add" method="post">
@@ -33,7 +33,7 @@
                 <div class="boxline">
                     <button type="submit" class="button-primary"><?= lang('Sign up'); ?></button>
                     <small>
-                        <span class="menu-lf"><a href="/login"><?= lang('Sign in'); ?></a></span>
+                        <span class="otst"><a href="/login"><?= lang('Sign in'); ?></a></span>
                     </small>
                 </div>
 

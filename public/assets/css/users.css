@@ -9,15 +9,18 @@
   background: #fff;
 }
 
-.profile-header-telo,
-.profile-about {
+.profile-header-telo {
   margin: 15px 0 0 184px;
   color: #666;
 }
 
+.profile-about {
+  margin: 1px 0 40px 0; 
+}
+
 .profile-ava {
   position: absolute;
-  top: -50px;
+  top: -80px;
   left: 0;
   z-index: 1;
   border: 4px solid #fff;
@@ -41,8 +44,8 @@
 }
 
 .profile-ava img {
-  width: 160px;
-  height: 160px;
+  width: 120px;
+  height: 120px;
   border-radius: 4px;
 }
 
@@ -55,21 +58,21 @@ h1.profile {
 .right.pm {
   color: #fff;
   position: absolute;
-  top: 10px;
+  top: 30px;
   right: 8px;
   font-size: 24px;
 }
 
 .stats {
   float: left;
-  margin: 40px 0 0 0;
+  margin: 20px 0 0 0;
   width: 180px;
 }
 
 .box.profile-telo {
   width: calc(100% - 230px);
   float: left;
-  margin: 38px 0 0 50px;
+  margin: 18px 0 0 50px;
 }
 
 .box.profile-telo .post-body {

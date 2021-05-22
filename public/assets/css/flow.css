@@ -58,7 +58,7 @@ aside#sidebar {
   background-color: #f3f3f3;
 }
 
-i.icon {
+.flow i.icon {
   margin-right: 1px;
 }
 
@@ -95,6 +95,10 @@ i.icon {
   padding: 15px 20px 15px;
   margin-left: 20px;
   float: right;
+}
+
+footer {
+  padding-top: 30px;
 }
 
 @media (max-width: 720px) {

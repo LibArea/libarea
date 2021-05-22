@@ -1,5 +1,5 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<main>
+<main class="w-75">
     <h1><?= $data['h1']; ?></h1>
 
     <div class="favorite max-width">
@@ -56,7 +56,7 @@
                         <a class="space-u" href="/s/<?= $fav['post']['space_slug']; ?>" title="<?= $fav['post']['space_name']; ?>">
                             <?= $fav['post']['space_name']; ?>
                         </a>
-                                                <?php if($uid['id'] > 0) { ?>
+                        <?php if($uid['id'] > 0) { ?>
                             <?php if($uid['id'] == $fav['favorite_uid']) { ?>
                                 <span class="user-answ-fav right" data-answ="<?= $fav['answer_id']; ?>">
                                      <span class="favcomm">убрать</span>
@@ -77,5 +77,4 @@
         <?php } ?>
     </div> 
 </main>
-<?php include TEMPLATE_DIR . '/_block/my-menu.php'; ?>
 <?php include TEMPLATE_DIR . '/footer.php'; ?> 

@@ -26,8 +26,7 @@
 <div class="wrap">
 
     <div class="menu-left"> 
-        <ul>
-            <li class="nav"> 
+      
                 <?php if($uid['uri'] == '/') { ?>
                    <a title="<?= lang('Home'); ?>" class="logo" href="/">LoriUP</a>
                 <?php } else { ?>
@@ -37,36 +36,28 @@
                         </span>
                     </a>
                 <?php } ?>
-            </li> 
+          
 
-            <li class="nav<?php if( $uid['uri'] == '/admin') { ?> active<?php } ?>">
+            <div class="nav<?php if( $uid['uri'] == '/admin') { ?> active<?php } ?>">
                 <a class="home" title="<?= lang('Admin'); ?>" href="/admin">
                     <?= lang('Admin'); ?>
                 </a>
-            </li>
-            <li class="nav<?php if( $uid['uri'] == '/admin/space') { ?> active<?php } ?>">
+            </div>
+            <div class="nav<?php if( $uid['uri'] == '/admin/space') { ?> active<?php } ?>">
                 <a class="home" title="<?= lang('Space'); ?>" href="/admin/space">
                     <?= lang('Space'); ?>
                 </a>
-            </li>
-            <li class="nav<?php if( $uid['uri'] == '/admin/invitations') { ?> active<?php } ?>"> 
+            </div>
+            <div class="nav<?php if( $uid['uri'] == '/admin/invitations') { ?> active<?php } ?>"> 
                 <a class="home" title="<?= lang('Invites'); ?>" href="/admin/invitations">
                     <?= lang('Invites'); ?>
                 </a>
-            </li>
-            <li class="nav<?php if( $uid['uri'] == '/admin/comments') { ?> active<?php } ?>">
+            </div>
+            <div class="nav<?php if( $uid['uri'] == '/admin/comments') { ?> active<?php } ?>">
                 <a class="home" title="<?= lang('Comments'); ?>" href="/admin/comments">
                     <?= lang('Comments'); ?>
                 </a>
-            </li>
-        </ul>
-    </div>
-    <div class="menu-right">
-    <div class="nav notif"> 
-        <a href="/u/<?= $uid['login']; ?>"> 
-            <img class="ava" alt="<?= $uid['login']; ?>" src="/uploads/users/avatars/small/<?= $uid['avatar']; ?>">
-        </a>
-    </div>        
+            </div>
     </div>
 </div>    
 </header>

@@ -1,5 +1,5 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<main class="w-100 max-width">
+<main class="w-75">
 
     <h1><a href="/u/<?= $uid['login']; ?>/messages">Все сообщения</a> / <?= $data['title']; ?> </h1>
         

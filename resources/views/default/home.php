@@ -1,18 +1,5 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
- 
-    <?php if (!$uid['id']) { ?>
-        <div class="banner">
-            <div class="banner-telo">
-                <img width="28" height="28" src="/assets/svg/loriup.svg" alt="LoriUP">
-                <h1 class="banner-h1"><?= lang('site-banner'); ?></h1> 
-                <?= lang('site-banner-txt'); ?>. <a href="/info"><?= lang('Read'); ?></a>...
-            </div>
-        </div>    
-    <?php } ?>  
-    
-<?php include TEMPLATE_DIR . '/_block/left-menu.php'; ?>
 <main class="telo">
-
     <ul class="nav-tabs">
         <?php if($type == 'feed') { ?>
             <li class="active">
@@ -60,6 +47,27 @@
                 <?php } ?> 
                 
                 <div class="post-body">
+                    <div class="footer">
+                        <img class="ava" alt="<?= $post['login']; ?>" src="/uploads/users/avatars/small/<?= $post['avatar']; ?>">
+                        <span class="user"> 
+                            <a href="/u/<?= $post['login']; ?>">
+                                <?= $post['login']; ?>
+                            </a> 
+                        </span>
+                        <span class="date"> 
+                           <?= $post['post_date'] ?>
+                        </span>
+                        <?php if($post['post_answers_num'] !=0) { ?> 
+                            <span class="otst"> | </span>
+                            <a class="u-url" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
+                                <?php if($post['post_type'] ==0) { ?>
+                                    <?= $post['post_answers_num'] + $post['post_comments_num']; ?> коммент...
+                                <?php } else { ?>      
+                                    <?= $post['post_answers_num']; ?>  <?= $post['lang_num_answers']; ?>   
+                                <?php } ?>
+                            </a>
+                        <?php } ?>
+                    </div>
                     <a class="u-url" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
                         <h2 class="titl"><?= $post['post_title']; ?></h2>
                         <?php if ($post['post_is_delete'] == 1) { ?> 
@@ -82,37 +90,28 @@
                         <?= $post['space_name']; ?>
                     </a>
                     
-                    <?php if($post['post_url']) { ?> 
-                        <a class="post_url" href="/domain/<?= $post['post_url']; ?>"><?= $post['post_url']; ?></a> 
+                    <?php if($post['post_url_domain']) { ?> 
+                        <a class="post_url" href="/domain/<?= $post['post_url_domain']; ?>">
+                            <?= $post['post_url_domain']; ?>
+                        </a> 
                     <?php } ?>
                     
-                    <div class="show_add_<?= $post['post_id']; ?>">
-                        <div data-post_id="<?= $post['post_id']; ?>" class="showpost">
-                            <span>&#9658;</span> 
-                            <?= $post['post_content_preview']; ?>
-                            <span class="s_<?= $post['post_id']; ?> show_detail">... </span>
-                        </div>
-                    </div>
+                    <div class="post-details">
+                        <?php if($post['post_thumb_img']) { ?> 
+                            <img class="thumb" alt="<?= $post['post_url']; ?>" src="/uploads/posts/thumbnails/<?= $post['post_thumb_img']; ?>">
+                        <?php } ?>
                     
-                    <div class="footer">
-                        <img class="ava" alt="<?= $post['login']; ?>" src="/uploads/users/avatars/small/<?= $post['avatar']; ?>">
-                        <span class="user"> 
-                            <a href="/u/<?= $post['login']; ?>">
-                                <?= $post['login']; ?>
-                            </a> 
-                        </span>
-                        <span class="date"> 
-                           <?= $post['post_date'] ?>
-                        </span>
-                        <?php if($post['post_answers_num'] !=0) { ?> 
-                            <span class="otst"> | </span>
-                            <a class="u-url" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
-                                <?php if($post['post_type'] ==0) { ?>
-                                    <?= $post['post_answers_num'] + $post['post_comments_num']; ?> коммент...
-                                <?php } else { ?>      
-                                    <?= $post['post_answers_num']; ?>  <?= $post['lang_num_answers']; ?>   
-                                <?php } ?>
-                            </a>
+                        <div class="show_add_<?= $post['post_id']; ?>">
+                            <div data-post_id="<?= $post['post_id']; ?>" class="showpost">
+                                <?= $post['post_content_preview']; ?>
+                                <span class="s_<?= $post['post_id']; ?> show_detail">...</span>
+                            </div>
+                        </div>
+                        
+                         <?php if($post['post_content_img']) { ?> 
+                            <div class="img-post-bl">
+                                <img class="img-post" alt="<?= $post['post_title']; ?>" src="/uploads/posts/<?= $post['post_content_img']; ?>">
+                            </div>    
                         <?php } ?>
                     </div>
                 </div>                        
@@ -137,30 +136,4 @@
  
 </main>
 
-<aside class="sidebar"> 
-    <?php if(!$space_bar) { ?>
-        <div class="space-no-user"> 
-            <i class="icon diamond"></i>
-            Читайте больше! <br><a href="/space">Подпишитесь</a> на пространства, которые вам интересны.
-        </div>
-    <?php }  ?>    
-
-    <?php $num = 1; ?>
-    <?php foreach ($data['latest_answers'] as  $answ)  { ?>
-        <?php $num++;  ?>
-        <style nonce="<?= $_SERVER['nonce']; ?>">
-         .comm-space-color_<?= $num; ?> {border-left: 2px solid <?= $answ['space_color']; ?>;}
-        </style>
-    
-        <div class="sb-telo comm-space-color_<?= $num; ?>">
-            <div class="sb-date"> 
-                <img class="ava" alt="<?= $answ['login']; ?>" src="/uploads/users/avatars/small/<?= $answ['avatar']; ?>">
-                <?= $answ['answer_date']; ?>
-            </div> 
-            <a href="/post/<?= $answ['post_id']; ?>/<?= $answ['post_slug']; ?>#answ_<?= $answ['answer_id']; ?>">
-                <?= $answ['answer_content']; ?>...  
-            </a>
-       </div>
-    <?php } ?>  
-</aside> 
 <?php include TEMPLATE_DIR . '/footer.php'; ?>
