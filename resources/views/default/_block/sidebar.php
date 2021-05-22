@@ -101,11 +101,11 @@
             <br>
         </div>
     <?php } ?>
-    <div class="v-ots">
-        <?php if($uid['id'] > 0) { ?>
-            <?php include TEMPLATE_DIR . '/_block/setting-user-bar.php'; ?>
-        <?php } ?>
+ 
+    <?php if($uid['id'] > 0) { ?>
+        <?php include TEMPLATE_DIR . '/_block/setting-user-bar.php'; ?>
+    <?php } ?>
 
-        <?php include TEMPLATE_DIR . '/_block/info-bar.php'; ?>
-    </div>
+    <?php include TEMPLATE_DIR . '/_block/info-bar.php'; ?>
+ 
 </nav>

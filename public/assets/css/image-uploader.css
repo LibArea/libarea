@@ -27,6 +27,9 @@
   max-height: 190px;
 }
 
+.create .boxline.post .input-images img {
+  max-height: 140px;
+}
 /* Base style */
 .box.setting.avatar .image-uploader,
 .box.setting.space .image-uploader {

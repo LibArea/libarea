@@ -192,22 +192,6 @@
             <p class="no-answer red">Это черновик...</p>
         <?php } ?>   
     </article>
-
-    <?php if($recommend) { ?> 
-        <div>
-            <h3 class="recommend"><?= lang('Recommended'); ?></h3>  
-            <?php foreach ($recommend as  $post) { ?>
-                <div class="recommend-telo">
-                    <a href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
-                        <?= $post['post_title']; ?>  
-                    </a>
-                    <?php if($post['post_answers_num'] !=0) { ?>
-                        <span class="n-comm">+<?= $post['post_answers_num'] ?></span>
-                    <?php } ?> 
-               </div>
-            <?php } ?> 
-        </div> 
-    <?php } ?>  
 </main> 
 
 <?php include TEMPLATE_DIR . '/footer.php'; ?> 

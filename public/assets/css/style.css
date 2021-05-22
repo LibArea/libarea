@@ -65,6 +65,7 @@ nav {
   float: right;
   width: 250px;
   list-style: none;
+  margin-top: 20px;
 }
 
 header {
@@ -1406,6 +1407,78 @@ div.voters .asnw-up-id {
   float: right;
 }
 
+/* Info пространство и рекомендовано в посте */
+.space-info {
+  background: #efefef;
+  padding: 10px;
+  position: relative;
+}
+
+.space-info-desc {
+  padding: 2px 0 4px 0;
+  color: #333;
+  font-size: 13px;
+}
+
+.space-info-img .img-space {
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.img-space {
+  width: 35px;
+  height: 35px;
+  border-radius: 2px;
+}
+
+.space-info-title {
+  font-size: 16px;
+  vertical-align: middle;
+}
+
+.b-sticky {
+  font-size: 13px; 
+}
+
+.l-rec-small {
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.l-rec {
+  font-size: 26px;
+  float: left;
+  color: rgba(48, 41, 41, 0.51);
+  margin-top: 2px;
+}
+
+.l-rec-telo {
+  margin-left: 42px;
+  padding-top: 5px;
+  line-height: 1.2;
+  word-wrap: break-word;
+}
+
+.l-rec-telo a {
+  color: #333;
+}
+
+.l-rec-footer {
+  color: #666;
+  font-size: 13px;
+  margin-top: 3px;
+}
+
+h3.recommend {
+  border-bottom: 1px solid #ddd;
+  padding: 15px 0 10px 0;
+  margin: 20px 0 10px 0;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 13px;
+  color: #333;
+  font-weight: 400;
+}
 
 @media (max-width: 1050px) {
   nav {

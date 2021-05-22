@@ -132,7 +132,7 @@ class PostModel extends \MainModel
         ->and(['post_space_id'], '=', $space_id) // из пространства
         ->and(['post_is_delete'], '=', 0)        // не удален
         ->and(['post_user_id'], '!=', $uid)      // не участника, который смотрит
-        ->orderBy(['post_id'])->desc()->limit(5);
+        ->orderBy(['post_id'])->desc()->limit(3);
         
         return $query->getSelect();
     }
