@@ -124,14 +124,6 @@ class PostController extends \MainController
             $post['edit_date'] = null;
         }
         
-        if(Base::getStrlen($post['post_url']) > 6) {
-            $post['post_url_full'] = $post['post_url'];
-            $parse = parse_url($post['post_url']);
-            $post['post_url'] = $parse['host'];  
-        } else {
-            $post['post_url_full'] = null;
-        }
-        
         // Покажем черновик только автору
         if($post['post_draft'] == 1 && $post['post_user_id'] != $uid['id']) {
             redirect('/');
@@ -190,11 +182,13 @@ class PostController extends \MainController
         $title = $post['post_title'] . '  ' . lang('In') . ' ' . $post['space_name'];
         Base::Meta($title, $meta_desc, $other); 
 
-        Request::getResources()->addBottomStyles('/assets/md/editor.css');  
-        Request::getResources()->addBottomScript('/assets/md/Markdown.Converter.js'); 
-        Request::getResources()->addBottomScript('/assets/md/Markdown.Sanitizer.js');
-        Request::getResources()->addBottomScript('/assets/md/Markdown.Editor.js');
-        Request::getResources()->addBottomScript('/assets/md/editor.js');
+        if($uid['id'] > 0) {
+            Request::getResources()->addBottomStyles('/assets/md/editor.css');  
+            Request::getResources()->addBottomScript('/assets/md/Markdown.Converter.js'); 
+            Request::getResources()->addBottomScript('/assets/md/Markdown.Sanitizer.js');
+            Request::getResources()->addBottomScript('/assets/md/Markdown.Editor.js');
+            Request::getResources()->addBottomScript('/assets/md/editor.js');
+        }
 
         $data = [
             'h1'        => lang('Post'),

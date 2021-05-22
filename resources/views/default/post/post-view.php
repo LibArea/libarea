@@ -28,7 +28,7 @@
             
  
                 <div class="post-body">
-                    <h1 class="titl">
+                    <h1 class="title">
                         <?= $post['post_title']; ?> 
                             <?php if ($post['post_is_delete'] == 1) { ?> 
                                 <i class="icon trash"></i>
@@ -136,10 +136,10 @@
                             <?= $lo['comment_content']; ?> 
                         </div>     
                     <?php } ?>    
-                    <?php if($post['post_url']) { ?> 
+                    <?php if($post['post_url_domain']) { ?> 
                         <span class="post_url_detal">
                             <?= lang('Website'); ?>: <a rel="nofollow noreferrer" href="<?= $post['post_url_full']; ?>">
-                               <?= $post['post_url']; ?>
+                               <?= $post['post_url_domain']; ?>
                             </a>
                         </span> 
                     <?php } ?>

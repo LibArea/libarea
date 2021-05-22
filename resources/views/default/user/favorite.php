@@ -13,7 +13,7 @@
                     </div>
                     <div class="post-telo">
                         <a class="u-url" href="/post/<?= $fav['post_id']; ?>/<?= $fav['post_slug']; ?>">
-                            <h3 class="titl"><?= $fav['post_title']; ?></h3>
+                            <h3 class="title"><?= $fav['post_title']; ?></h3>
                         </a>
                         
                         <div class="space-color space_<?= $fav['space_color'] ?>"></div>

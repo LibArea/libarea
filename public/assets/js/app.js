@@ -214,7 +214,7 @@ $(function(){
                
         });
     });
-
+    
     // Edit comment
     $(document).on("click", ".editcomm", function(){
         var comm_id = $(this).data('id'); 
@@ -272,4 +272,4 @@ $(function(){
         $('.comm_addentry_re').remove();
         $('.comm_add_link').show();
     });
-});
+}); 

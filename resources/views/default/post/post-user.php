@@ -28,7 +28,7 @@
             
                 <div class="post-telo">
                     <a class="u-url" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
-                        <h3 class="titl"><?= $post['post_title']; ?></h3>
+                        <h3 class="title"><?= $post['post_title']; ?></h3>
                     </a>
                     <a class="space-u" href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
                         <?= $post['space_name']; ?>

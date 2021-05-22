@@ -50,15 +50,11 @@
             <?php } ?> 
             
         <?php } else { ?>
-         
             Пока нет приглашений
-         
         <?php } ?>
     
     <?php } else { ?>
-     
         Ваш уровень доверия пока не позволяет использовать инвайты.
-     
     <?php } ?>
 </main>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

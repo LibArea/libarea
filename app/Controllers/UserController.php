@@ -197,7 +197,7 @@ class UserController extends \MainController
 
             if ($valid) {
      
-                // 214px и 18px
+                // 125px и 18px
                 $path_img       = HLEB_PUBLIC_DIR. '/uploads/users/avatars/';
                 $path_img_small = HLEB_PUBLIC_DIR. '/uploads/users/avatars/small/';
                 $filename =  'a-' . $uid['id'] . '-' . time();

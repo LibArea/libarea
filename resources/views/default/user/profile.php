@@ -107,7 +107,7 @@
             <div class="post-telo">
                 <div class="post-body">
                     <a class="u-url" href="/post/<?= $onepost['post_id']; ?>/<?= $onepost['post_slug']; ?>">
-                        <h2 class="titl"><?= $onepost['post_title']; ?></h2>
+                        <h2 class="title"><?= $onepost['post_title']; ?></h2>
                     </a>
                     
                     <a class="space-u" href="/s/<?= $onepost['space_slug']; ?>" title="<?= $onepost['space_name']; ?>">

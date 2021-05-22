@@ -38,18 +38,16 @@
         <div class="header-right right">
  
             <?php if(!$uid['id']) { ?> 
-                <div class="nav">        
-                    <?php if(!Lori\Config::get(Lori\Config::PARAM_INVITE)) { ?>
-                        <div class="nav">
-                            <a class="register" title="<?= lang('Sign up'); ?>" href="/register">
-                                <?= lang('Sign up'); ?>
-                            </a>
-                        </div>
-                    <?php } ?>  
-                    <div class="nav no-pc">
-                        <a class="login" title="<?= lang('Sign in'); ?>" href="/login"><?= lang('Sign in'); ?></a>
-                    </div> 
-                </div>                  
+                <?php if(!Lori\Config::get(Lori\Config::PARAM_INVITE)) { ?>
+                    <div class="nav">
+                        <a class="register" title="<?= lang('Sign up'); ?>" href="/register">
+                            <?= lang('Sign up'); ?>
+                        </a>
+                    </div>
+                <?php } ?>  
+                <div class="nav no-pc">
+                    <a class="login" title="<?= lang('Sign in'); ?>" href="/login"><?= lang('Sign in'); ?></a>
+                </div> 
             <?php } else { ?> 
                 <div class="dropbtn nav">
                     <div class="nick" title=""><span><?= $uid['login']; ?></span>  

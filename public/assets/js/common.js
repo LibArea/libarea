@@ -68,7 +68,6 @@ document.querySelectorAll(".addcomm_re")
          
 })); 
 
-
 // We will show a preview of the post on the central page
 document.querySelectorAll(".showpost")
   .forEach(el => el.addEventListener("click",  function(e){ 
@@ -129,41 +128,6 @@ if(header) {
     }
 } 
 
-// Toggle menu mode (To combine)
-// Combined with the following, it might be worth changing the css itself 
-// to make it easier to change the visible position of the menu 
-var togglemenuoff = document.querySelector('.togglemenuoff');
-var togglemenu = document.querySelector('.togglemenu');
-if(togglemenuoff) {
-    togglemenuoff.addEventListener('click', function () {
-        var mode = getCookie("menuS");
-        var d = new Date();
-        d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000)); //365 days
-        var expires = "expires=" + d.toGMTString();
-        if (mode == "menuno") {
-          document.cookie = "menuS" + "=" + "light" + "; " + expires + ";path=/";
-          document.getElementsByTagName('body')[0].classList.remove('menuno');
-        } else {
-          document.cookie = "menuS" + "=" + "menuno" + "; " + expires + ";path=/";
-          document.getElementsByTagName('body')[0].classList.add('menuno');
-        }
-    });
-}
-if(togglemenu) {
-    togglemenu.addEventListener('click', function () {
-        var mode = getCookie("menuS");
-        var d = new Date();
-        d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000)); //365 days
-        var expires = "expires=" + d.toGMTString();
-        if (mode == "menuno") {
-          document.cookie = "menuS" + "=" + "light" + "; " + expires + ";path=/";
-          document.getElementsByTagName('body')[0].classList.remove('menuno');
-        } else {
-          document.cookie = "menuS" + "=" + "menuno" + "; " + expires + ";path=/";
-          document.getElementsByTagName('body')[0].classList.add('menuno');
-        }
-    });
-}
 // TODO: move to util
 function getCookie(cname) {
     var name = cname + "=";
@@ -179,3 +143,4 @@ function getCookie(cname) {
     }
     return "";
 };
+ 

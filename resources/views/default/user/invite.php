@@ -1,5 +1,5 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<main>e
+<main>
     <h1><?= $data['h1']; ?></h1>
     <div class="box wide">
         <form class="" action="/invite" method="post">

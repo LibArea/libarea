@@ -204,7 +204,7 @@ h3.lo {
 }
 
 h1 {
-  font-weight: 300;
+  font-weight: 400;
   font-size: 1.2rem;
 }
 
@@ -715,7 +715,7 @@ nav a.my.active {
   right: 0;
 }
 
-.msg_error, 
+.msg_error,
 .msg_success {
   padding: 8px 18px;
   font-size: 14px;
@@ -724,7 +724,7 @@ nav a.my.active {
 
 .msg_error {
   background: #f3f3f3;
-  color: #e7672e;  
+  color: #e7672e;
 }
 
 .msg_success {
@@ -800,10 +800,6 @@ nav a.my.active {
   max-width: 750px;
 }
 
-.post-details {
-  margin-top: 5px;
-}
-
 .post_url_detal {
   margin: 0 0 20px 0;
   display: block;
@@ -860,11 +856,11 @@ img.thumb {
   font-size: 13px;
 }
 
-.u-url .titl {
-  margin-bottom: 2px;
-  font-size: 16px;
+.u-url .title {
+  font-size: 1.2rem;
   display: inline;
   margin-right: 4px;
+  font-weight: 400;
 }
 
 #stHeader {
@@ -888,7 +884,7 @@ img.thumb {
   margin-left: 6px;
 }
 
-.titl {
+.title {
   margin-bottom: 0px;
 }
 
