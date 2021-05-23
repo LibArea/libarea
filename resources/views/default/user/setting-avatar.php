@@ -58,4 +58,7 @@
         </form>
     </div> 
 </main>
+<aside>
+    <?= lang('info_avatar'); ?>
+</aside>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

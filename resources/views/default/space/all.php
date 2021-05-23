@@ -66,13 +66,16 @@
     <?php } ?>
 
 </main>
-<?php if($uid['trust_level'] >= Lori\Config::get(Lori\Config::PARAM_SPACE)) { ?>
-    <?php if($count_space <= 2) { ?>
-        <aside class="sidebar"> 
+<aside>
+    <?= lang('info_space'); ?>
+
+    <?php if($uid['trust_level'] >= Lori\Config::get(Lori\Config::PARAM_SPACE)) { ?>
+        <?php if($count_space <= 2) { ?>
             <div class="right">
                 <a class="add-space" href="/space/add">+ <?= lang('To create'); ?></a>
-            </div>    
-        </aside>
+            </div> 
+            <br>            
+        <?php } ?> 
     <?php } ?> 
-<?php } ?> 
+</aside>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>        

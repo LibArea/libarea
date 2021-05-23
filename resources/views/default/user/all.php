@@ -26,4 +26,11 @@
         </div> 
     </div>
 </main>
+<aside>
+    <?php if ($uid['id'] == 0) { ?>
+        <?php include TEMPLATE_DIR . '/_block/login.php'; ?>
+    <?php } else { ?>
+        <?= lang('info_users'); ?>    
+    <?php } ?>    
+</aside>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

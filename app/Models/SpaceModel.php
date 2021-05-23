@@ -136,6 +136,7 @@ class SpaceModel extends \MainModel
                 ['space_description'], '=', $data['space_description'], ',', 
                 ['space_color'], '=', $data['space_color'], ',', 
                 ['space_text'], '=', $data['space_text'], ',',
+                ['space_short_text'], '=', $data['space_short_text'], ',',
                 ['space_permit_users'], '=', $data['space_permit_users'], ',',
                 ['space_feed'], '=', $data['space_feed'], ',',            
                 ['space_tl'], '=', $data['space_tl'])->where(['space_id'], '=', $data['space_id'])->run();
@@ -229,6 +230,7 @@ class SpaceModel extends \MainModel
             ['space_color'], ',',  
             ['space_img'], ',',
             ['space_text'], ',',  
+            ['space_short_text'], ',', 
             ['space_date'], ',',
             ['space_category_id'], ',',
             ['space_user_id'], ',', 
@@ -245,6 +247,7 @@ class SpaceModel extends \MainModel
             $data['space_color'],
             $data['space_img'],            
             $data['space_text'], 
+            $data['space_short_text'], 
             $data['space_date'], 
             $data['space_category_id'], 
             $data['space_user_id'], 

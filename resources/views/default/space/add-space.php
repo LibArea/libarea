@@ -39,7 +39,7 @@
         </div>
     </div> 
 </main>
-<aside class="sidebar">  
- 
+<aside>  
+   Правила... в стадии разработки... 
 </aside>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>   

@@ -17,7 +17,6 @@
             Нет нападкам.<br>
             Нет спаму.
         </p>
-        <p><i>В стадии разработки...</i></p>
     </div>
 </main>
 <?php include TEMPLATE_DIR . '/_block/info-page-menu.php'; ?>

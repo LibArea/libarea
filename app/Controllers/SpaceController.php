@@ -82,7 +82,7 @@ class SpaceController extends \MainController
         ];
 
         $meta_title = $space['space_name'] . ' — ' . $s_title;
-        $meta_desc  = $space['space_name'] . ' — ' . $s_title . '. ';
+        $meta_desc  = $space['space_description'] . ' ' . $s_title . '. ';
         
         Request::getResources()->addBottomStyles('/assets/css/space.css');
         
@@ -260,6 +260,7 @@ class SpaceController extends \MainController
             'space_color'           => '#56400',
             'space_img'             => 'space_no.png',
             'space_text'            => '',
+            'space_short_text'      => '',
             'space_date'            => date("Y-m-d H:i:s"),
             'space_category_id'     => 1,
             'space_user_id'         => $uid['id'],
@@ -301,6 +302,7 @@ class SpaceController extends \MainController
         $space_name         = \Request::getPost('space_name');
         $space_description  = \Request::getPost('space_description');
         $space_text         = \Request::getPost('space_text');
+        $space_short_text   = \Request::getPost('space_short_text');
 
         $redirect   = '/space/' . $space['space_slug'] . '/edit';
         if (!preg_match('/^[a-zA-Z0-9]+$/u', $space_slug)) {
@@ -311,6 +313,7 @@ class SpaceController extends \MainController
         Base::Limits($space_name, lang('titles'), '4', '20', $redirect);
         Base::Limits($space_description, 'Meta-', '60', '190', $redirect);
         Base::Limits($space_slug, 'SLUG', '4', '10', $redirect);
+        Base::Limits($space_short_text, 'TEXT', '20', '250', $redirect);
 
         $space_color = \Request::getPost('color');
         $space_color = empty($space_color) ? $space['space_color'] : $space_color;
@@ -335,6 +338,7 @@ class SpaceController extends \MainController
             'space_description'     => $space_description,
             'space_color'           => $space_color,
             'space_text'            => $space_text,
+            'space_short_text'      => $space_short_text,
             'space_permit_users'    => $space_permit,
             'space_feed'            => $space_feed,
             'space_tl'              => $space_tl,

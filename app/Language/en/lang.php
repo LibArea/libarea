@@ -81,4 +81,5 @@ return [
     'info_flow'             => '«Flow» are some of the latest developments on the site. <br> <br> Stream combined with chat (for authorized users).',
     'info_users'            => 'The list of participants sorted in the order of registration on the site.',
     'info_search'           => 'To refine the search, try to find a more accurate query.',
+    'info_notifications'    => 'You can mark all the ads as read, click on the link: «I read».',
 ];

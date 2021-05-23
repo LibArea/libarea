@@ -37,4 +37,7 @@
         <p>Поиск не дал результатов...<p>
     <?php } ?>
 </main>
+<aside>
+    <?= lang('info_search'); ?>
+</aside>
 <?php include TEMPLATE_DIR . '/footer.php'; ?> 

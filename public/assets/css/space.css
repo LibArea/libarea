@@ -180,9 +180,8 @@ a.space-u.tag-u {
   background: linear-gradient(to right, rgba(0, 0, 0, 0.65), transparent);
 }
 
-.space-text-sb {
-  clear: both;
-  padding: 10px 0;
+.space-text-sb p {
+  margin-top: 0;
 }
 
 .space-telo {
@@ -218,4 +217,17 @@ a.add-space {
   color: #ea6f5a;
   background-color: transparent;
   text-align: center;
+}
+
+.space-users-count {
+  background: #f3f3f3;
+  float: right;
+  clear: both;
+  padding: 5px 20px;
+  margin-top: -7px;
+}
+
+.space-text-sb {
+  clear: both;
+  padding-top: 20px;
 }

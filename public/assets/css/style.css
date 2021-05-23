@@ -59,18 +59,17 @@ tt {
   max-width: 1160px;
 }
 
-nav {
+aside {
   padding: 8px;
   position: relative;
   float: right;
   width: 250px;
   list-style: none;
-  margin-top: 20px;
 }
 
 header {
   z-index: 10;
-  margin: 0 0 2px 0;
+  margin: 0 0 12px 0;
   /* border-bottom: 1px solid #e6ecf0; */
   padding: 5px 5px 12px 5px;
 }
@@ -100,20 +99,6 @@ main.w-50 {
   max-width: 700px;
 }
 
-footer {
-  margin-bottom: 5px;
-  clear: both;
-}
-
-footer a {
-  color: var(--color-gray-1);
-  padding-right: 0.75em;
-  font-size: 14px;
-}
-
-footer a:hover {
-  color: var(--color-gray-2);
-}
 
 a.add-post {
   background: #1ca1f3;
@@ -546,12 +531,6 @@ input.add-url {
   clear: left;
 }
 
-.register,
-#toggledark {
-  float: left;
-  margin-top: 1px;
-}
-
 form.form {
   display: inherit;
 }
@@ -578,25 +557,25 @@ input.form-search:focus {
     background-color: #fff;
 }
 
-/* Меню */
-nav i.icon, 
+/* Sidebar */
+aside i.icon, 
 nav-info i.icon {
   margin: 0 8px 0 0;
 }
 
-nav .stat {
+aside .stat {
   font-size: 13px;
   text-transform: lowercase;
 }
 
-nav a.my {
+aside a.my {
   color: var(--color-gray-1);
   display: block;
   font-size: 16px;
   margin-bottom: 10px;
 }
 
-nav a.my.active {
+aside a.my.active {
   color: #1ca1f3; 
 }
 
@@ -886,7 +865,7 @@ img.thumb {
 }
 
 .title {
-  margin-bottom: 0px;
+  margin: 3px 0 0 0;
 }
 
 .date {
@@ -987,7 +966,6 @@ a.space-u,
 .space a.space-u,
 .post_url {
   font-size: 10pt;
-  margin-left: 10px;
   color: var(--color-gray-1);
   font-style: italic;
   vertical-align: middle;
@@ -1135,6 +1113,7 @@ ol.comment-telo {
 
 .comm-telo-body {
   margin: 5px 0;
+  max-width: 750px;
 }
 
 .qa-comm .comm-telo-body {
@@ -1352,7 +1331,7 @@ div.voters .asnw-up-id {
   position: relative;
   z-index: 1;
   height: 63px;
-  margin: 20px 0 0 0;
+  margin: 10px 0 0 0;
   padding: 0;
   list-style: none;
   color: #667d99;
@@ -1401,10 +1380,6 @@ div.voters .asnw-up-id {
   font-size: 15px;
   color: var(--color-gray-1);
   margin-bottom: 8px;
-}
-.sidebar {
-  max-width: 200px;
-  float: right;
 }
 
 /* Info пространство и рекомендовано в посте */
@@ -1480,8 +1455,85 @@ h3.recommend {
   font-weight: 400;
 }
 
+/* Footer */
+footer {
+  background: #edeeef;
+  clear: both;
+  color: #333;
+  padding: 10px 20px 20px 20px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.text-info {
+  width: 20%;
+  float: left;
+}
+
+.text-oth {
+  width: 36%;
+  float: left;
+}
+
+.p-head, .p-head-n {
+  color: #333;
+  font-size: 16px;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+a.footer {
+  display: block;
+  font-size: 13px;
+  margin-bottom: 3px;
+}
+
+.p-head-n {
+  margin-bottom: 10px;
+}
+
+.p-head:before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  width: 20px;
+  height: 3px;
+  bottom: -10px;
+}
+
+.p-head.one:before {
+  background-color: #19bca1;
+}
+
+.p-head.two:before {
+  background-color: #d6ae01;
+}
+
+.p-head.three:before {
+  background-color: #f56400;
+}
+
+.md-icon.discord {
+  width: 31px;
+  height: 31px;
+  fill: none;
+  stroke: #07c;
+  vertical-align: middle;
+}
+
+i.github {
+  font-size: 17px;
+  color: #07c;
+}
+
+.last-box {
+  font-size: 13px;
+  color: #666;
+  padding: 1px 0;
+}
+
 @media (max-width: 1050px) {
-  nav {
+  aside {
     margin: 0 15px 20px 0;
     width: 190px;
   }
@@ -1494,7 +1546,7 @@ h3.recommend {
 
 @media (max-width: 880px) {
   .no-mob, 
-  nav { display: none; }
+  aside { display: none; }
   header { margin-left: 0; }
   .no-pc { display: block; }
   .column { width: 19%; }
@@ -1506,6 +1558,8 @@ h3.recommend {
     width: 100%;
     max-width: 100%;
   }
+  .text-oth { width: 46%; }
+  .text-info { width: 40%; }
 }
 
 @media (max-width: 704px) {
@@ -1526,8 +1580,6 @@ h3.recommend {
 
 .dark a,
 .dark .footer .date,
-.dark footer,
-.dark footer a,
 .dark .na,
 .dark a.menu.active,
 .dark .info-n.active,

@@ -64,4 +64,7 @@
          Уведомлений пока нет...
     <?php } ?>
 </main>
+<aside>
+    <?= lang('info_notifications'); ?>
+<aside>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

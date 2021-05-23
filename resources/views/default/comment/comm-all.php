@@ -74,4 +74,9 @@
         <?php } ?>
     </div> 
 </main>
+<aside>
+    <?php if ($uid['id'] == 0) { ?>
+        <?php include TEMPLATE_DIR . '/_block/login.php'; ?>
+    <?php } ?>    
+</aside>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>   

@@ -1,0 +1,1 @@
+<!-- См. https://yandex.ru/support/metrica/code/install-counter-csp.html -->

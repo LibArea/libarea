@@ -8,4 +8,7 @@
         <?php include TEMPLATE_DIR . '/flow/flow-form.php'; ?>
     </div>
 </main>
+<aside>
+    <?= lang('info_flow'); ?>
+</aside>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

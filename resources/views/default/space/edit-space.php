@@ -34,7 +34,13 @@
                 <div class="boxline">
                     <label for="post_title">Название<sup class="red">*</sup></label>
                     <input class="add" type="text" value="<?= $space['space_name']; ?>" name="space_name" />
-                    <div class="box_h">4 - 18 <?= lang('characters'); ?></div>
+                    <div class="box_h">Короткое от 4 - 18 <?= lang('characters'); ?></div>
+                </div>
+                <div class="boxline">
+                    <label for="post_content">Длинное<sup class="red">*</sup></label>
+                    <input class="add"  type="text" name="space_short_text" value="<?= $space['space_short_text']; ?>">
+                    <div class="box_h">Длинное название от 20 - 250 <?= lang('characters'); ?></div>
+                    <br />
                 </div>
                 <div class="boxline"> 
                     <label for="post_content">Публикации<sup class="red">*</sup></label>
@@ -60,10 +66,10 @@
                     <label for="post_content"><?= lang('Color'); ?></label>
                     <input type="color" value="<?= $space['space_color']; ?>" id="colorSpace">
                     <input type="hidden" name="color" value="" id="color">
-                </div>
+                </div> 
                 <div class="boxline">
                     <br />
-                    <label for="post_content"><?= lang('Text'); ?></label>
+                    <label for="post_content"><?= lang('Text'); ?> (Sidebar)</label>
                     <br>
                     <textarea class="add" id="h-200" name="space_text"><?= $space['space_text']; ?></textarea>
                     <div class="box_h">Markdown</div>

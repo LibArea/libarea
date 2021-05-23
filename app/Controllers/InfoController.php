@@ -71,7 +71,7 @@ class InfoController extends \MainController
         
         Request::getResources()->addBottomStyles('/assets/css/info.css');
 
-        Base::Meta(lang('Rules'), lang('rules-desc'));
+        Base::Meta(lang('Rules'), lang('rules-desc'), $other = false);
 
         return view(PR_VIEW_DIR . '/info/rules', ['data' => $data, 'uid' => $uid]);
 	}

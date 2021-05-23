@@ -133,7 +133,52 @@
             <?php } ?>
         </div>
     <?php } ?>
- 
 </main>
+<aside>
+    <?php if ($uid['id']) { ?>
+        <?php if(!empty($space_bar)) { ?>
+            <div class="bar-space">
+                <div class="bar-m bar-title"><?= lang('Signed'); ?></div>  
+                <?php foreach ($space_bar as  $sig) { ?>
+                    <a class="bar-space-telo" href="/s/<?= $sig['space_slug']; ?>" title="<?= $sig['space_name']; ?>">
+                        <img src="/uploads/spaces/logos/small/<?= $sig['space_img']; ?>" alt="<?= $sig['space_name']; ?>">
+                        <?php if($sig['space_user_id'] == $uid['id']) { ?>
+                            <div class="my_space"></div>
+                        <?php } ?>
+                        <span class="bar-name"><?= $sig['space_name']; ?></span>
+                    </a>
+                <?php } ?>
+            </div>   
+        <br>        
+        <?php } else { ?>
+            <?php if($uid['uri'] == '/') { ?>
+                <div class="bar-space-no"><a href="/space">Подпишитесь</a> на пространства и читайте их в ленте...</div>
+            <?php } ?>
+        <?php } ?>
+    <?php } else { ?>
+        <?php include TEMPLATE_DIR . '/_block/login.php'; ?>
+    <?php } ?>
+    
+    <?php if (!empty($data['latest_answers'])) { ?>
+        <div class="last-comm"> 
+            <?php $num = 1; ?>
+            <?php foreach ($data['latest_answers'] as  $answ)  { ?>
+                <?php $num++;  ?>
+                <style nonce="<?= $_SERVER['nonce']; ?>">
+                 .comm-space-color_<?= $num; ?> {border-left: 2px solid <?= $answ['space_color']; ?>;}
+                </style>
+                <div class="sb-telo comm-space-color_<?= $num; ?>">
+                    <div class="sb-date"> 
+                        <img class="ava" alt="<?= $answ['login']; ?>" src="/uploads/users/avatars/small/<?= $answ['avatar']; ?>">
+                        <?= $answ['answer_date']; ?>
+                    </div> 
+                    <a href="/post/<?= $answ['post_id']; ?>/<?= $answ['post_slug']; ?>#answ_<?= $answ['answer_id']; ?>">
+                        <?= $answ['answer_content']; ?>...  
+                    </a>
+               </div>
+            <?php } ?>
+        </div> 
+    <?php } ?>
+</aside>
 
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

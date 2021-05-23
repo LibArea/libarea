@@ -1,20 +1,20 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 <main class="w-75">
-<?php if($space_info['space_cover_art'] != 'space_cover_no.jpeg') { ?>
+    <?php if($space_info['space_cover_art'] != 'space_cover_no.jpeg') { ?>
 
-    <style nonce="<?= $_SERVER['nonce']; ?>">
-    .space-cover-box {background-image: url(/uploads/spaces/cover/<?= $space_info['space_cover_art']; ?>); background-position: 50% 50%;min-height: 300px;margin-top: -24px;}
-    </style>
-    <div class="space-cover-box">
-    
-<?php } else { ?> 
+        <style nonce="<?= $_SERVER['nonce']; ?>">
+        .space-cover-box {background-image: url(/uploads/spaces/cover/<?= $space_info['space_cover_art']; ?>); background-position: 50% 50%;min-height: 300px;margin-top: -24px;}
+        </style>
+        <div class="space-cover-box">
+        
+    <?php } else { ?> 
 
-    <style nonce="<?= $_SERVER['nonce']; ?>">
-    .space-box {background:<?= $space_info['space_color']; ?>;}
-    </style>
-    <div class="space-box" >
-    
-<?php } ?>   
+        <style nonce="<?= $_SERVER['nonce']; ?>">
+        .space-box {background:<?= $space_info['space_color']; ?>;}
+        </style>
+        <div class="space-box" >
+        
+    <?php } ?>   
     
 
     <?php if(!$uid['id']) { ?> 
@@ -181,4 +181,29 @@
         <div class="no-content red"><?= lang('ban-space'); ?>...</div>
     </main>
 <?php } ?> 
+<aside> 
+    <div class="info-space">
+        <?php if($space_info['space_id'] != 1) { ?>
+            <div class="space-users-count">
+                Читают <?= $space_info['users']; ?>
+            </div>
+        <?php } ?>
+        
+        <div class="space-text-sb">
+            <?= $space_info['space_text']; ?>
+        </div>
+      
+        <?php if (!empty($tags)) { ?>
+            <div class="space-tags">
+                <div class="menu-m"><?= lang('Tags'); ?></div>
+                <?php foreach ($tags as  $tag) { ?>  
+                    <a <?php if ($uid['uri'] == '/s/'.$tag['space_slug'] .'/'.$tag['st_id']) { ?> class="avtive" <?php } ?> href="/s/<?= $space_info['space_slug']; ?>/<?= $tag['st_id']; ?>">
+                        <?= $tag['st_title']; ?>
+                    </a>
+                <?php } ?>
+            </div>
+        <?php } ?> 
+        <br>
+    </div>
+</aside> 
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

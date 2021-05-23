@@ -41,4 +41,7 @@
         </form>
     </div>
 </main>
+<aside>
+    <?= lang('info_security'); ?>
+</aside>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

@@ -57,4 +57,7 @@
         </form>
     </div>
 </main>
+<aside>
+    <?= lang('info_setting'); ?>
+</aside>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>
