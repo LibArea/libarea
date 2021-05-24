@@ -71,7 +71,7 @@ class Base
     // Добавляем сообщение
     public static function addMsg($msg, $class='info')
     {
-        $_SESSION['msg'][] = '<div class="fon msg_'.$class.'"><div class="msg_telo">✔ '.$msg.'</div></div>';
+        $_SESSION['msg'][] = array($msg, $class);
     }
   
     // Локализация даты, событий....

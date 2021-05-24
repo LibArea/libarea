@@ -16,7 +16,7 @@
             </a>
         </li>
         <li class="right">
-            <a href="/space/<?= $space['space_slug']; ?>">
+            <a href="/s/<?= $space['space_slug']; ?>">
                 <span><?= lang('In space'); ?></span>
             </a>
         </li>
@@ -84,4 +84,7 @@
         </div>
     </div> 
 </main>
+<aside>
+    <?= lang('info_space_edit'); ?>
+</aside>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

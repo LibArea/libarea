@@ -65,10 +65,11 @@ a.space-u.tag-u {
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 8pt;
-  margin-left: 0.25em;
-  padding: 0px 0.4em 0.4em 0.4em;
+  padding: 0.2em 0.4em 0.2em 0.4em;
   text-decoration: none;
   color: #888;
+  margin: -0.6em 0 0 0.25em;
+  display: inline-block;
 }
 
 .space-color {
@@ -230,4 +231,5 @@ a.add-space {
 .space-text-sb {
   clear: both;
   padding-top: 20px;
+  font-size: 14px;
 }

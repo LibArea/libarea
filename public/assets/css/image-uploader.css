@@ -1,11 +1,11 @@
 /*! Image Uploader - v1.2.3 - 26/11/2019
- * Copyright (c) 2019 Christian Bayer; Licensed MIT 
- * + modification (c) Evg 2021 
+ * Copyright (c) 2019 Christian Bayer; Licensed MIT
+ * + modification (c) Evg 2021
  * Icons Font Face */
 
 .upload-text i.icon,
 .delete-image i.icon {
-    margin-right: 0;
+  margin-right: 0;
 }
 
 .image-uploader {
@@ -16,7 +16,7 @@
 }
 
 .create .image-uploader,
-.edit-post .image-uploader{
+.edit-post .image-uploader {
   height: 125px;
   max-width: 450px;
 }
@@ -30,7 +30,7 @@
 .create .boxline.post .input-images img {
   max-height: 140px;
 }
-/* Base style */
+
 .box.setting.avatar .image-uploader,
 .box.setting.space .image-uploader {
   border: 1px solid #d9d9d9;
@@ -44,12 +44,10 @@
   width: 328px;
 }
 
-/* Style on hover */
 .image-uploader.drag-over {
   background-color: #f3f3f3;
 }
 
-/* Hide the file input */
 .image-uploader input[type="file"] {
   width: 0;
   height: 0;
@@ -58,7 +56,6 @@
   opacity: 0;
 }
 
-/* Text container */
 .image-uploader .upload-text {
   position: absolute;
   top: 0;

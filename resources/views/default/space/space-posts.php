@@ -147,7 +147,9 @@
                             <i class="icon question qa"></i>
                         <?php } ?>
                     </a>
-                    
+                    <?php if($post['st_id']) { ?>
+                        <a class="space-u tag-u" href="/s/<?= $space_info['space_slug']; ?>/<?= $post['st_id']; ?>" title="<?= $post['st_title']; ?>"><?= $post['st_title']; ?></a>
+                    <?php } ?>
                     <?php if($post['post_url_domain']) { ?> 
                         <a class="post_url" href="/domain/<?= $post['post_url_domain']; ?>">
                             <?= $post['post_url_domain']; ?>

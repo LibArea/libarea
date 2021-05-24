@@ -4,11 +4,21 @@
     <ul class="nav-tabs">
         <li>
            <a href="/space/<?= $space['space_slug']; ?>/edit">
-                <span><?= $data['h1']; ?></span>
+                <span><?= lang('Edit'); ?> - <?= $space['space_slug']; ?></span>
             </a>
         </li>
         <li class="active">
             <span><?= lang('Logo'); ?> / <?= lang('Cover art'); ?></span>
+        </li>
+        <li>
+            <a href="/space/<?= $space['space_slug']; ?>/tags">
+                <span><?= lang('Tags'); ?></span>
+            </a>
+        </li>
+        <li class="right">
+            <a href="/s/<?= $space['space_slug']; ?>">
+                <span><?= lang('In space'); ?></span>
+            </a>
         </li>
     </ul>
     
@@ -59,4 +69,7 @@
         </div>
     </div> 
 </main>
+<aside>
+    <?= lang('info_space_logo'); ?>
+</aside>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

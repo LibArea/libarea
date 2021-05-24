@@ -43,11 +43,8 @@ input[type="text"] {
 }
 
 .t-th {
-  font-weight: 600;
-}
-
-.t-th {
   background: #e3e3e3;
+  font-weight: 600;
 }
 
 .t-td {

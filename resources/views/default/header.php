@@ -15,7 +15,6 @@
         
         <link rel="icon" href="/favicon.ico">
         <link rel="apple-touch-icon" href="/favicon.png">
-
         <link rel="stylesheet" href="/assets/css/style.css">
     </head>
     
@@ -129,18 +128,11 @@
             
         </div>
     </header>
-    
+
 <?php if(!empty($post['post_title'])) { ?>
     <div id="stHeader">
         <a href="/"><i class="icon home"></i></a> <span class="slash">\</span> <?= $post['post_title']; ?>
     </div>
-<?php } ?>
-
- 
-<?php if ($uid['msg']) { ?>
-    <?php foreach($uid['msg'] as $message) { ?>
-        <?= $message; ?>
-    <?php } ?>
 <?php } ?>
 
 <?php if(!empty($space_bar)) { ?>

@@ -18,7 +18,7 @@
   height: 150px;
 }
 
-.wmd-input.w-95 {
+.wmd-button-bar .wmd-input.w-95 {
   width: 95%;
 }
 
@@ -145,8 +145,15 @@
 .icon-embed::before { content: "\ea7f"; }
 
 @media (max-width: 880px) {
-  .wmd-panel { width: 96%; }
-  .wmd-input, .image-uploader { height: 120px; }
+  .wmd-panel { 
+    width: 96%; 
+  }
+  
+  .wmd-input, 
+  .image-uploader { 
+    height: 120px; 
+  }
+  
   .wmd-preview {
     padding: 0 0 0 1;
     margin: 20px 0 0 2px;

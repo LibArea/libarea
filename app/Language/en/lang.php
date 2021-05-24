@@ -82,4 +82,8 @@ return [
     'info_users'            => 'The list of participants sorted in the order of registration on the site.',
     'info_search'           => 'To refine the search, try to find a more accurate query.',
     'info_notifications'    => 'You can mark all the ads as read, click on the link: «I read».',
+    'info_space_tags'       => 'Tags allow you to filter topics in the feed.',
+    'info_space_tags_2'     => 'If you already have tags, they will be displayed on this page.',
+    'info_space_edit'       => 'Fill in all the required fields. Some fields determine how your space will be visible in search engines.',
+    'info_space_logo'       => 'A lot depends on the logo. It should most accurately display the theme of the space.',
 ];

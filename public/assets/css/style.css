@@ -1457,7 +1457,7 @@ h3.recommend {
 
 /* Footer */
 footer {
-  background: #edeeef;
+  background-color: #edeeef;
   clear: both;
   color: #333;
   padding: 10px 20px 20px 20px;
@@ -1589,7 +1589,9 @@ i.github {
 
 .dark a:hover,
 .dark .showpost,
-.dark .login-nav label {
+.dark .login-nav label,
+.dark .p-head, 
+.dark .p-head-n {
   color: #eee;
 }
 
@@ -1605,7 +1607,8 @@ i.github {
 
 .dark .comments_subtree:target, 
 .dark .comments_subtree.edit, 
-.dark .dropdown-menu {
+.dark .dropdown-menu,
+.dark footer {
   background-color: #222;
 }
 

@@ -578,7 +578,7 @@ class SpaceController extends \MainController
         // title, description
         Base::Meta(lang('Edit tag'), lang('Edit tag'), $other = false);
 
-        return view(PR_VIEW_DIR . '/space/edit-tag', ['data' => $data, 'uid' => $uid, 'tag' => $tag]);
+        return view(PR_VIEW_DIR . '/space/edit-tag', ['data' => $data, 'uid' => $uid, 'tag' => $tag, 'space' => $space]);
     }
     
     // Изменяем тег пространства

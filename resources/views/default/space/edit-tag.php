@@ -1,6 +1,26 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 <main class="w-100">
-    <h1><?= $data['h1']; ?></h1>
+    <ul class="nav-tabs">
+        <li class="active">
+            <span><?= $data['h1']; ?></span>
+        </li>
+        <li>
+            <a href="/space/<?= $space['space_slug']; ?>/edit/logo">
+                <span><?= lang('Logo'); ?> / <?= lang('Cover art'); ?></span>
+            </a>
+        </li>
+        <li>
+            <a href="/space/<?= $space['space_slug']; ?>/tags">
+                <span><?= lang('Tags'); ?></span>
+            </a>
+        </li>
+        <li class="right">
+            <a href="/s/<?= $space['space_slug']; ?>">
+                <span><?= lang('In space'); ?></span>
+            </a>
+        </li>
+    </ul>
+
     <div class="telo space">
         <div class="box create">
             <form action="/space/tag/edit" method="post">
@@ -22,4 +42,7 @@
         </div>
     </div> 
 </main>
+<aside>
+    <?= lang('info_space_tags'); ?>
+</aside>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>
