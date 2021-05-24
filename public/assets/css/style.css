@@ -9,8 +9,8 @@ body {
   padding: 0;
 }
 
-*, 
-::after, 
+*,
+::after,
 ::before {
   box-sizing: border-box;
 }
@@ -70,7 +70,6 @@ aside {
 header {
   z-index: 10;
   margin: 0 0 12px 0;
-  /* border-bottom: 1px solid #e6ecf0; */
   padding: 5px 5px 12px 5px;
 }
 
@@ -98,7 +97,6 @@ main.w-50 {
   width: calc(100% - 490px);
   max-width: 700px;
 }
-
 
 a.add-post {
   background: #1ca1f3;
@@ -154,14 +152,14 @@ a.add-post {
 }
 
 .nick span {
-    font-size: 13px;
-    margin-right: 5px;
+  font-size: 13px;
+  margin-right: 5px;
 }
 
 a.add-post:hover {
   background: #fff;
   color: #1ca1f3;
-} 
+}
 
 a.link {
   font-size: 13px;
@@ -356,7 +354,7 @@ a.register {
 }
 
 .post-body i.icon {
-  margin-left: 8px; 
+  margin-left: 8px;
 }
 
 .mlogout {
@@ -548,13 +546,13 @@ input.form-search {
 }
 
 input.form-search:hover {
-    border: 1px solid #e6ecf0;
-    background-color: #fff;
+  border: 1px solid #e6ecf0;
+  background-color: #fff;
 }
 
 input.form-search:focus {
-    border: 1px solid #1ca1f3;
-    background-color: #fff;
+  border: 1px solid #1ca1f3;
+  background-color: #fff;
 }
 
 /* Sidebar */
@@ -687,29 +685,6 @@ aside a.my.active {
   padding: 10px 15px;
   margin: 10px 0;
   background-color: lightyellow;
-}
-
-.fon {
-  position: absolute;
-  top: 37px;
-  right: 0;
-}
-
-.msg_error,
-.msg_success {
-  padding: 8px 18px;
-  font-size: 14px;
-  margin-bottom: 12px;
-} 
-
-.msg_error {
-  background: #f3f3f3;
-  color: #e7672e;
-}
-
-.msg_success {
-  background: #fcf8e4;
-  color: green;  
 }
 
 .notif-color-1 {
@@ -893,7 +868,7 @@ img.thumb {
   color: var(--color-gray-2);
 }
 
-.footer .ava, 
+.footer .ava,
 .mini.ava {
   border-radius: 50%;
   height: 16px;
