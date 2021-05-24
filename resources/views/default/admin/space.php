@@ -15,6 +15,7 @@
                     <span class="t-td">Владелец&nbsp;/&nbsp;Тип</span>
                     <span class="t-td">Имя / slug</span>
                     <span class="t-td">Описание</span>
+                    <span class="t-td center">Бан</span>
                     <span class="t-td center">Действие</span>
                 </div>
 
@@ -54,12 +55,13 @@
                             <?php if($sp['space_is_delete']) { ?>
                                 <span class="space-ban" data-id="<?= $sp['space_id']; ?>">
                                     <span class="red">разбанить</span>
-                                <span>
+                                </span>
                             <?php } else { ?>
-                                <span class="space-ban" data-id="<?= $sp['space_id']; ?>">забанить<span>
+                                <span class="space-ban" data-id="<?= $sp['space_id']; ?>">забанить</span>
                             <?php } ?>
-
-                           <a href="/space/<?= $sp['space_slug']; ?>/edit">изменить</a>
+                        </span>
+                        <span class="t-td center">
+                            <a href="/space/<?= $sp['space_slug']; ?>/edit">изменить</a>
                         </span>
                     
                     </div>

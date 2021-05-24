@@ -1,7 +1,7 @@
 <?php include TEMPLATE_DIR . '/admin/header_admin.php'; ?>
 <main class="admin">
     <h1 class="top">
-        <a href="/admin"><?= lang('Admin'); ?></a> / <a href="/admin/space"><?= lang('Space'); ?></a> / <span class="red"><?= $data['h1']; ?></span>
+        <a href="/admin"><?= lang('Admin'); ?></a> / <a href="/admin/spaces"><?= lang('Space'); ?></a> / <span class="red"><?= $data['h1']; ?></span>
     </h1>
     
     <div class="telo space">
@@ -20,14 +20,20 @@
                     <div class="box_h">Title: 6 - 25 <?= lang('characters'); ?></div>
                     <br />
                 </div>
+                <div class="boxline">
+                    <label for="post_content">Длинное<sup class="red">*</sup></label>
+                    <input class="add"  type="text" name="space_short_text" value="">
+                    <div class="box_h">Длинное название от 20 - 250 <?= lang('characters'); ?></div>
+                    <br />
+                </div>
                 <div class="boxline"> 
                     <label for="post_content"><?= lang('Publications'); ?> <sup class="red">*</sup></label>
+                    <input type="radio" name="permit" checked value="2" > <?= lang('All'); ?>
                     <input type="radio" name="permit" value="1"> <?= lang('Just me'); ?>
-                    <input type="radio" name="permit" value="2" > <?= lang('All'); ?>
                 </div>  
                 <div class="boxline"> 
                     <label for="post_content">Показывать</label>
-                    <input type="radio" name="feed" value="0"> <?= lang('Yes'); ?>
+                    <input type="radio" name="feed" checked value="0"> <?= lang('Yes'); ?>
                     <input type="radio" name="feed" value="1" > <?= lang('No'); ?>
                     <div class="box_h">Если нет, то посты не будут видны в ленте (на главной)</b></div>
                     <br />  
@@ -38,13 +44,8 @@
                     <div class="box_h">Description: 60 - 180 <?= lang('characters'); ?></div>
                     <br />
                 </div>
-                <div id="box" class="boxline">
-                    <label for="post_content"><?= lang('Color'); ?></label>
-                    <input type="color" value="<?= $space['space_color']; ?>" id="colorSpace">
-                    <input type="hidden" name="color" value="" id="color">
-                </div>
                 <div class="boxline">
-                    <label for="post_content"><?= lang('Text'); ?> <sup class="red">*</sup></label>
+                    <label for="post_content">Sidebar<sup class="red">*</sup></label>
                     <textarea class="add" name="space_text"></textarea>
                     <div class="box_h">Title: 6 - 325 <?= lang('characters'); ?></div>
                     <br />

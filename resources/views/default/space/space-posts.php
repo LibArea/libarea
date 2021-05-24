@@ -1,4 +1,5 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
+<?php if ($space_info['space_is_delete'] == 0) { ?>
 <main class="w-75">
     <?php if($space_info['space_cover_art'] != 'space_cover_no.jpeg') { ?>
 
@@ -54,9 +55,7 @@
     </div>
    
     </div>
- 
-<?php if ($space_info['space_is_delete'] == 0) { ?>
- 
+
     <ul class="nav-tabs">
         <?php if($type == 'feed') { ?>
             <li class="active">
@@ -177,12 +176,7 @@
             <div class="no-content"><?= lang('no-post'); ?>...</div>
         <?php } ?>
 </main>
- 
-<?php } else { ?>
-    <main>
-        <div class="no-content red"><?= lang('ban-space'); ?>...</div>
-    </main>
-<?php } ?> 
+
 <aside> 
     <div class="info-space">
         <?php if($space_info['space_id'] != 1) { ?>
@@ -199,7 +193,7 @@
             <div class="space-tags">
                 <div class="menu-m"><?= lang('Tags'); ?></div>
                 <?php foreach ($tags as  $tag) { ?>  
-                    <a <?php if ($uid['uri'] == '/s/'.$tag['space_slug'] .'/'.$tag['st_id']) { ?> class="avtive" <?php } ?> href="/s/<?= $space_info['space_slug']; ?>/<?= $tag['st_id']; ?>">
+                    <a class="space-u tag-u<?php if ($uid['uri'] == '/s/'.$tag['space_slug'] .'/'.$tag['st_id']) { ?>  avtive<?php } ?>" href="/s/<?= $space_info['space_slug']; ?>/<?= $tag['st_id']; ?>">
                         <?= $tag['st_title']; ?>
                     </a>
                 <?php } ?>
@@ -208,4 +202,10 @@
         <br>
     </div>
 </aside> 
+
+<?php } else { ?>
+    <main>
+        <div class="no-content red"><?= lang('ban-space'); ?>...</div>
+    </main>
+<?php } ?> 
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

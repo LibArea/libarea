@@ -3,7 +3,7 @@ body {
 }
 
 header {
-  margin-left: 0;
+  margin: 0;
 }
 
 .admin {
@@ -22,7 +22,6 @@ header {
   color: #f56400;
 }
 
-/* tables */
 .t-table {
   display: table;
   width: 100%;

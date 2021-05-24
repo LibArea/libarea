@@ -12,11 +12,16 @@
 
 Route::before('Authorization@noAuth')->getGroup();
     Route::get('/admin')->controller('AdminController');
-    Route::get('/admin/space')->controller('AdminController@Space'); 
-    Route::get('/admin/space/add')->controller('AdminController@addAdminSpacePage');
-    Route::type('post')->protect()->get('/admin/addspaceadmin')->controller('AdminController@spaceAddAdmin');
-    Route::get('/admin/comments')->controller('AdminController@Comments'); 
-    Route::get('/admin/invitations')->controller('AdminController@Invitations');
+    Route::get('/admin/spaces')->controller('AdminController@spaces'); 
+    Route::get('/admin/space/add')->controller('AdminController@addSpacePage');
+    Route::type('post')->protect()->get('/admin/addspaceadmin')->controller('AdminController@spaceAdd');
+    Route::get('/admin/comments')->controller('AdminController@comments'); 
+    Route::get('/admin/invitations')->controller('AdminController@invitations');
+    Route::get('/admin/badges')->controller('AdminController@badges');
+    Route::get('/admin/badge/add')->controller('AdminController@addBadgePage');
+    Route::get('/admin/badge/{id}/edit')->controller('AdminController@badgeEditPage')->where(['id' => '[0-9]+']);
+    Route::type('post')->protect()->get('/admin/badge/edit/{id}')->controller('AdminController@badgeEdit')->where(['id' => '[0-9]+']);
+    Route::type('post')->protect()->get('/admin/badge/add')->controller('AdminController@badgeAdd');
     
     Route::type('post')->get('/admin/comment/recover')->controller('AdminController@recoverComment');
     Route::type('post')->get('/admin/space/ban')->controller('AdminController@delSpace');

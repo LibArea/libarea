@@ -22,8 +22,7 @@ class AdminModel extends \MainModel
     // Страница участников
     public static function UsersLogAll($id)
     {
-        return XD::select('*')->from(['users_logs'])->where(['logs_user_id'], '=', $id)
-                ->orderBy(['id'])->desc()->getSelectOne();
+        return XD::select('*')->from(['users_logs'])->where(['logs_user_id'], '=', $id)->getSelectOne();
 
     }
     
@@ -143,4 +142,45 @@ class AdminModel extends \MainModel
         
         return  $query->getSelect();
     }
+    
+    // Все награды
+    public static function getBadgesAll()
+    {
+        return XD::select('*')->from(['badge'])->getSelect();
+    }
+    
+    // Получим информацию по награде
+    public static function getBadgeId($badge_id)
+    {
+       return XD::select('*')->from(['badge'])->where(['badge_id'], '=', $badge_id)->getSelectOne(); 
+    }
+    
+    
+    // Редактирование награды
+    public static function setEditBadge($data)
+    {
+        XD::update(['badge'])->set(['badge_title'], '=', $data['badge_title'], ',', 
+            ['badge_description'], '=', $data['badge_description'], ',', 
+            ['badge_icon'], '=', $data['badge_icon'])
+            ->where(['badge_id'], '=', $data['badge_id'])->run(); 
+
+        return true;
+    }
+    
+    // Редактирование награды
+    public static function setAddBadge($data)
+    {
+        XD::insertInto(['badge'], '(', 
+            ['badge_title'], ',', 
+            ['badge_description'], ',',
+            ['badge_icon'], ')')->values( '(', 
+        
+        XD::setList([
+            $data['badge_title'], 
+            $data['badge_description'],
+            $data['badge_icon']]), ')' )->run();
+
+        return true;
+    }
+    
 }

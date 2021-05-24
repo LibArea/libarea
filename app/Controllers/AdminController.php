@@ -32,15 +32,16 @@ class AdminController extends \MainController
             'h1'    => lang('Admin'),
             'users' => $result,
         ]; 
- 
+        
+        // title, description
         Base::Meta(lang('Admin'), lang('Admin'), $other = false);
 
         return view(PR_VIEW_DIR . '/admin/index', ['data' => $data, 'uid' => $uid, 'alluser' => $result]);
 	}
     
+    // Бан участнику
     public function banUser() 
     {
-        // Доступ только персоналу
         $uid = Base::getUid();
         if ($uid['trust_level'] != 5) {
             redirect('/');
@@ -53,9 +54,8 @@ class AdminController extends \MainController
     }
     
     // Удаленые комментарии
-    public function Comments ()
+    public function comments ()
     {
-        // Доступ только персоналу
         $uid = Base::getUid();
         if ($uid['trust_level'] != 5) {
             redirect('/');
@@ -75,7 +75,6 @@ class AdminController extends \MainController
             'h1' => lang('Deleted comments'),
         ]; 
  
-        // title, description
         Base::Meta(lang('Deleted comments'), lang('Deleted comments'), $other = false);
  
         return view(PR_VIEW_DIR . '/admin/comm_del', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
@@ -84,7 +83,6 @@ class AdminController extends \MainController
     // Удаление комментария
     public function recoverComment()
     {
-        // Доступ только персоналу
         $uid = Base::getUid();
         if ($uid['trust_level'] != 5) {
             redirect('/');
@@ -97,9 +95,8 @@ class AdminController extends \MainController
     }
     
     // Показываем дерево приглашенных
-    public function Invitations ()
+    public function invitations ()
     {
-        // Доступ только персоналу
         $uid = Base::getUid();
         if ($uid['trust_level'] != 5) {
             redirect('/');
@@ -118,14 +115,14 @@ class AdminController extends \MainController
             'h1'    => lang('Invites'),
         ]; 
  
-        // title, description
         Base::Meta(lang('Invites'), lang('Invites'), $other = false);
  
         return view(PR_VIEW_DIR . '/admin/invitations', ['data' => $data, 'uid' => $uid, 'invitations' => $result]);
     }
     
     // Для дерева инвайтов
-    private function invatesTree($active_uid, $level, $invitations, $tree=array()){
+    private function invatesTree($active_uid, $level, $invitations, $tree=array())
+    {
         $level++;
         foreach($invitations as $invitation){
             if ($invitation['uid'] == $uid){
@@ -138,9 +135,8 @@ class AdminController extends \MainController
     }
     
     // Пространства
-    public function Space ()
+    public function spaces()
     {
-        // Доступ только персоналу
         $uid = Base::getUid();
         if ($uid['trust_level'] != 5) {
             redirect('/');
@@ -152,16 +148,14 @@ class AdminController extends \MainController
             'h1' => lang('Space'),
         ]; 
  
-        // title, description
         Base::Meta(lang('Space'), lang('Space'), $other = false);
  
         return view(PR_VIEW_DIR . '/admin/space', ['data' => $data, 'uid' => $uid, 'space' => $space]);
     }
     
-    // Добавить пространство администратору
-    public function addAdminSpacePage() 
+    // Форма добавить пространство
+    public function addSpacePage() 
     {
-        // Доступ только персоналу
         $uid  = Base::getUid();
         if ($uid['trust_level'] != 5) {
             redirect('/');
@@ -171,16 +165,14 @@ class AdminController extends \MainController
             'h1' => lang('Add Space'),
         ]; 
  
-        // title, description
         Base::Meta(lang('Add Space'), lang('Add Space'), $other = false);
         
         return view(PR_VIEW_DIR . '/admin/add-space', ['data' => $data, 'uid' => $uid]);
     }
     
     // Удаление / восстановление пространства
-    public function delSpace() {
-        
-        // Доступ только персоналу
+    public function delSpace() 
+    {
         $uid = Base::getUid();
         if ($uid['trust_level'] != 5) {
             redirect('/');
@@ -193,22 +185,21 @@ class AdminController extends \MainController
     }
     
     // Добавить пространства
-    public function spaceAddAdmin() 
+    public function spaceAdd() 
     {
-        // Доступ только персоналу
         $uid = Base::getUid();
         if ($uid['trust_level'] != 5) {
             redirect('/');
         } 
         
-        $space_slug     = \Request::getPost('space_slug');
-        $space_name     = \Request::getPost('space_name');  
-        $space_permit   = \Request::getPostInt('permit');
-        $meta_desc      = \Request::getPost('space_description');
-        $space_text     = \Request::getPost('space_text');  
-        $space_color    = \Request::getPostInt('color');
-        $space_feed     = \Request::getPostInt('space_feed');
-        $space_tl       = \Request::getPostInt('space_tl');
+        $space_slug         = \Request::getPost('space_slug');
+        $space_name         = \Request::getPost('space_name');  
+        $space_permit       = \Request::getPostInt('permit');
+        $meta_desc          = \Request::getPost('space_description');
+        $space_text         = \Request::getPost('space_text'); 
+        $space_short_text   = \Request::getPost('space_short_text');
+        $space_feed         = \Request::getPostInt('space_feed');
+        $space_tl           = \Request::getPostInt('space_tl');
         
         $redirect = '/admin/space/add';
 
@@ -218,7 +209,7 @@ class AdminController extends \MainController
             redirect($redirect);
         }
 
-        Base::Limits($space_slug, lang('URL'), '6', '20', $redirect);
+        Base::Limits($space_slug, lang('URL'), '4', '20', $redirect);
 
         if (SpaceModel::getSpaceInfo($space_slug)) {
             Base::addMsg('Такой URL пространства уже есть', 'error');
@@ -227,7 +218,8 @@ class AdminController extends \MainController
  
         Base::Limits($space_name, lang('Title'), '6', '25', $redirect);
         Base::Limits($meta_desc, lang('Meta-'), '60', '225', $redirect);
-        Base::Limits($space_text, lang('Sidebar-'), '6', '325', $redirect);
+        Base::Limits($space_text, lang('Sidebar-'), '6', '512', $redirect);
+        Base::Limits($space_short_text, 'TEXT', '20', '250', $redirect);
         
         $space_permit   = $space_permit == 1 ? 1 : 0;
         $space_feed     = $space_feed == 1 ? 1 : 0;
@@ -237,9 +229,10 @@ class AdminController extends \MainController
             'space_name'            => $space_name,
             'space_slug'            => $space_slug,
             'space_description'     => $meta_desc,
-            'space_color'           => $space_color,
+            'space_color'           => '#333',
             'space_img'             => 'space_no.png',
             'space_text'            => $space_text,
+            'space_short_text'      => $space_short_text,
             'space_date'            => date("Y-m-d H:i:s"),
             'space_category_id'     => 1,
             'space_user_id'         => $uid['id'],
@@ -250,11 +243,133 @@ class AdminController extends \MainController
             'space_is_delete'       => 0,
         ];
  
-        // Добавляем пространство
         SpaceModel::AddSpace($data);
 
-        redirect('/admin/space');
+        redirect('/admin/spaces');
+    }
+    
+    // Все награды
+    public function Badges()
+    {
+        $uid = Base::getUid();
+        if ($uid['trust_level'] != 5) {
+            redirect('/');
+        }
         
+        $badges = AdminModel::getBadgesAll();
+        
+        $data = [
+            'h1' => lang('Badges'),
+        ]; 
+ 
+        Base::Meta(lang('Badges'), lang('Badges'), $other = false);
+        
+        return view(PR_VIEW_DIR . '/admin/badges', ['data' => $data, 'uid' => $uid, 'badges' => $badges]);
+    }
+    
+    // Форма добавления награды
+    public function addBadgePage()
+    {
+        $uid = Base::getUid();
+        if ($uid['trust_level'] != 5) {
+            redirect('/');
+        }
+        
+        $data = [
+            'h1' => lang('Add badge'),
+        ]; 
+ 
+        Base::Meta(lang('Add badge'), lang('Add badge'), $other = false);
+        
+        return view(PR_VIEW_DIR . '/admin/badge-add', ['data' => $data, 'uid' => $uid]);
+    }
+    
+    // Форма изменения награды
+    public function badgeEditPage()
+    {
+        $uid = Base::getUid();
+        if ($uid['trust_level'] != 5) {
+            redirect('/');
+        }
+        
+        $badge_id   = \Request::getInt('id');
+        $badge      = AdminModel::getBadgeId($badge_id);        
+
+        if (!$badge['badge_id']) {
+            redirect('/admin/badges');
+        }
+
+        $data = [
+            'h1' => lang('Edit badge'),
+        ]; 
+ 
+        Base::Meta(lang('Edit badge'), lang('Edit badge'), $other = false);
+        
+        return view(PR_VIEW_DIR . '/admin/badge-edit', ['data' => $data, 'uid' => $uid, 'badge' => $badge]);
+    }
+    
+    // Измененяем награду
+    public function badgeEdit()
+    {
+        $redirect = '/admin/badges';
+        
+        $uid = Base::getUid();
+        if ($uid['trust_level'] != 5) {
+            redirect($redirect);
+        }
+        
+        $badge_id   = \Request::getInt('id');
+        $badge      = AdminModel::getBadgeId($badge_id); 
+        
+        if (!$badge['badge_id']) {
+            redirect($redirect);
+        }
+        
+        $badge_title         = \Request::getPost('badge_title');
+        $badge_description   = \Request::getPost('badge_description');
+        $badge_icon          = $_POST['badge_icon']; // не фильтруем
+
+        Base::Limits($badge_title, lang('Title'), '4', '250', $redirect);
+        Base::Limits($badge_description, lang('Description'), '12', '250', $redirect);
+        Base::Limits($badge_icon, lang('Icon'), '12', '550', $redirect);
+        
+        $data = [
+            'badge_id'          => $badge_id,
+            'badge_title'       => $badge_title,
+            'badge_description' => $badge_description,
+            'badge_icon'        => $badge_icon,
+        ];
+        
+        AdminModel::setEditBadge($data);
+        redirect($redirect);  
+    }
+    
+    // Измененяем награду
+    public function badgeAdd()
+    {
+        $redirect = '/admin/badges';
+        
+        $uid = Base::getUid();
+        if ($uid['trust_level'] != 5) {
+            redirect($redirect);
+        }
+        
+        $badge_title         = \Request::getPost('badge_title');
+        $badge_description   = \Request::getPost('badge_description');
+        $badge_icon          = $_POST['badge_icon']; // не фильтруем
+
+        Base::Limits($badge_title, lang('Title'), '4', '250', $redirect);
+        Base::Limits($badge_description, lang('Description'), '12', '250', $redirect);
+        Base::Limits($badge_icon, lang('Icon'), '12', '550', $redirect);
+        
+        $data = [
+            'badge_title'       => $badge_title,
+            'badge_description' => $badge_description,
+            'badge_icon'        => $badge_icon,
+        ];
+        
+        AdminModel::setAddBadge($data);
+        redirect($redirect);  
     }
     
 }

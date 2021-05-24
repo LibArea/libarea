@@ -32,10 +32,6 @@ h1.space a {
   margin: 15px 0 0 4px;
 }
 
-.space-tags a.avtive {
-  color: #e7672e;
-}
-
 .no-space,
 .yes-space {
   background: #f1f1f1;
@@ -53,12 +49,13 @@ h1.space a {
 
 .space-tags .menu-m {
   margin: 0 0 5px 0;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 11px;
 }
 
 .space-tags a {
-  font-size: 13px;
-  display: block;
-  margin: 0 0 5px 2px;
+  margin-bottom: 5px;
 }
 
 a.space-u.tag-u {
@@ -68,8 +65,17 @@ a.space-u.tag-u {
   padding: 0.2em 0.4em 0.2em 0.4em;
   text-decoration: none;
   color: #888;
-  margin: -0.6em 0 0 0.25em;
   display: inline-block;
+  font-style: normal;
+}
+
+a.space-u.tag-u:hover {
+  border: 1px solid #ccc;
+  color: #666;
+}
+
+a.space-u.tag-u.avtive {
+  color: #e7672e;
 }
 
 .space-color {

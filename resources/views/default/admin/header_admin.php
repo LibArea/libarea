@@ -43,8 +43,8 @@
                     <?= lang('Admin'); ?>
                 </a>
             </div>
-            <div class="nav<?php if( $uid['uri'] == '/admin/space') { ?> active<?php } ?>">
-                <a class="home" title="<?= lang('Space'); ?>" href="/admin/space">
+            <div class="nav<?php if( $uid['uri'] == '/admin/spaces') { ?> active<?php } ?>">
+                <a class="home" title="<?= lang('Space'); ?>" href="/admin/spaces">
                     <?= lang('Space'); ?>
                 </a>
             </div>
@@ -58,6 +58,11 @@
                     <?= lang('Comments'); ?>
                 </a>
             </div>
+            <div class="nav<?php if( $uid['uri'] == '/admin/badges') { ?> active<?php } ?>">
+                <a class="home" title="<?= lang('Badges'); ?>" href="/admin/badges">
+                    <?= lang('Badges'); ?>
+                </a>
+            </div>
     </div>
 </div>    
 </header>
@@ -69,14 +74,5 @@
     </div>
 <?php } ?>
 
-<div class="wrap">
-    <?php if ($uid['msg']) { ?>
-        <?php foreach($uid['msg'] as $message){ ?>
-            <?= $message; ?>
-        <?php } ?>
-    <?php } ?>
-    
-    
-    
-         
+<div class="wrap">    
   
