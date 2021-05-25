@@ -8,7 +8,7 @@ use PDO;
 class SpaceModel extends \MainModel
 {
     // Все пространства сайта
-    public static function getSpaceAll($user_id)
+    public static function getSpaces($user_id)
     {
 
         $q = XD::select('*')->from(['space']);
@@ -90,7 +90,7 @@ class SpaceModel extends \MainModel
     }
     
     // Все пространства на которые подписан пользователь
-    public static function getSpaceUser($user_id) 
+    public static function getSpaceUserSigned($user_id) 
     {
         $q = XD::select('*')->from(['space_signed']);
         $result = $q->leftJoin(['space'])->on(['signed_space_id'], '=', ['space_id'])->where(['signed_user_id'], '=', $user_id)->getSelect();

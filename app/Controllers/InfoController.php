@@ -61,36 +61,6 @@ class InfoController extends \MainController
         return view(PR_VIEW_DIR . '/info/stats', ['data' => $data, 'uid' => $uid]);
 	}
 
-	public function rules()
-	{
-        $uid  = Base::getUid();
-        $data = [
-            'h1'        => lang('Rules'),
-            'canonical' => Config::get(Config::PARAM_URL) . '/info/rules',
-        ];
-        
-        Request::getResources()->addBottomStyles('/assets/css/info.css');
-
-        Base::Meta(lang('Rules'), lang('rules-desc'), $other = false);
-
-        return view(PR_VIEW_DIR . '/info/rules', ['data' => $data, 'uid' => $uid]);
-	}
-
-	public function about()
-	{
-        $uid  = Base::getUid();
-        $data = [
-            'h1'        => lang('About'),
-            'canonical' => Config::get(Config::PARAM_URL) . '/info/about',
-        ];
-
-        Request::getResources()->addBottomStyles('/assets/css/info.css');
-
-        Base::Meta(lang('About'), lang('about-desc'), $other = false);
-
-        return view(PR_VIEW_DIR . '/info/about', ['data' => $data, 'uid' => $uid]);
-	}
-
     public function privacy()
 	{
         $uid  = Base::getUid();

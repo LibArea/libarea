@@ -100,6 +100,7 @@ Route::before('Authorization@noAuth')->getGroup();
     Route::get('/space/{slug}/delete/cover')->controller('SpaceController@spaceCoverRemove')->where(['slug' => '[A-Za-z0-9]+']);
     Route::get('/space/add')->controller('SpaceController@addSpacePage');
     Route::type('post')->protect()->get('/space/addspace')->controller('SpaceController@spaceAdd');
+    Route::get('/space/my')->controller('SpaceController@spaseUser');
  
     // Работа с метками (тегами)
     Route::get('/s/{slug}/{tags?}/edit')->controller('SpaceController@editTagSpacePage')->where(['slug' => '[A-Za-z0-9]+',  'tags' => '[0-9]+']);
@@ -135,8 +136,6 @@ Route::get('/post/{id}/{slug}')->controller('PostController@viewPost')->where(['
 // Правила
 Route::get('/info')->controller('InfoController');
 Route::get('/info/stats')->controller('InfoController@stats');
-Route::get('/info/rules')->controller('InfoController@rules');
-Route::get('/info/about')->controller('InfoController@about');
 Route::get('/info/privacy')->controller('InfoController@privacy');
 Route::get('/info/restriction')->controller('InfoController@restriction');
 

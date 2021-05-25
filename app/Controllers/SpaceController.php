@@ -13,7 +13,7 @@ class SpaceController extends \MainController
     public function index()
     {
         $uid    = Base::getUid();
-        $space  = SpaceModel::getSpaceAll($uid['id']);
+        $space  = SpaceModel::getSpaces($uid['id']); 
 
         // Введем ограничение на количество создаваемых пространств
         $sp             = SpaceModel::getSpaceUserId($uid['id']);
@@ -35,7 +35,33 @@ class SpaceController extends \MainController
         // title, description
         Base::Meta(lang('All space'), lang('all-space-desc'), $other = false);
         
-        return view(PR_VIEW_DIR . '/space/all', ['data' => $data, 'uid' => $uid, 'space' => $result, 'count_space' => $count_space]);
+        return view(PR_VIEW_DIR . '/space/all', ['data' => $data, 'uid' => $uid, 'space' => $result, 'count_space' => $count_space, 'sort' => 'all']);
+    }
+
+    // Пространства участника
+    public function spaseUser()
+    {
+        $uid            = Base::getUid();
+        $space          = SpaceModel::getSpaceUserSigned($uid['id']);
+        $count_space    = count($space);
+
+        $result = Array();
+        foreach($space as $ind => $row) {
+            $row['users']   = SpaceModel::numSpaceSubscribers($row['space_id']);
+            $result[$ind]   = $row;
+        }  
+        
+        $data = [
+            'h1'            => lang('I read space'),
+            'canonical'     => '/space', 
+        ];
+
+        Request::getResources()->addBottomStyles('/assets/css/space.css');
+
+        // title, description
+        Base::Meta(lang('I read space'), lang('I read space'), $other = false);
+        
+        return view(PR_VIEW_DIR . '/space/all', ['data' => $data, 'uid' => $uid, 'space' => $result, 'count_space' => $count_space, 'sort' => 'my']);
     }
 
     // Посты по пространству

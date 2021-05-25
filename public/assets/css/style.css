@@ -593,7 +593,7 @@ aside a.my.active {
 .login-nav input {
   height: 26px;
   border: none;
-  border-radius: 0px;
+  border-radius: 0;
   background: #f5f8fa;
   border-bottom: 2px solid #e6ecf0;
   box-shadow: none;
@@ -660,7 +660,7 @@ aside a.my.active {
   color: #1ca1f3;
   background: #fff;
 }
- 
+
 /* Диалог */
 .alert-danger {
   color: #e83e8c;
@@ -822,7 +822,7 @@ img.thumb {
   top: 0;
   width: 100%;
   border-bottom: 1px solid #eee;
-  background:#fff;
+  background: #fff;
   z-index: 999;
   font-size: 18px;
   padding: 5px;
@@ -902,7 +902,6 @@ h1 span {
   align-items: center;
   padding: 5px 0;
   margin-bottom: 3px;
-  font-size: 15px;
   width: 140px;
   text-decoration: none;
   white-space: nowrap;
@@ -977,7 +976,7 @@ ol.answer-telo {
   margin: 5px 0 10px 0;
 }
 
-.answ-header a, 
+.answ-header a,
 .answ-header {
   font-size: 9.5pt;
   color: #888;
@@ -1022,16 +1021,16 @@ ol.answer-telo {
   color: #f8a853;
 }
 
-.comm_subtree:target, 
-.comm_subtree.edit, 
-.answers_subtree:target, 
+.comm_subtree:target,
+.comm_subtree.edit,
+.answers_subtree:target,
 .answers_subtree.edit {
   -webkit-background-clip: content-box;
   background-clip: content-box;
   background-color: lightyellow;
 }
 
-.block-comments, 
+.block-comments,
 .block-answers {
   margin: 5px 0 5px 0;
 }
@@ -1069,7 +1068,7 @@ ol.comment-telo {
 }
 
 .comm-telo.step {
-  margin-left: 70px; 
+  margin-left: 70px;
 }
 
 .comm-telo_bottom {
@@ -1115,6 +1114,7 @@ ol.comment-telo {
   font-size: 10.5pt;
   max-width: 800px;
 }
+
 .otst {
   margin: 0 3px;
 }
@@ -1142,15 +1142,15 @@ ol.comment-telo {
   font-size: 9.5pt;
 }
 
-.comments_subtree, 
+.comments_subtree,
 .answers_subtree {
   position: relative;
   list-style: none;
 }
 
-.comments_subtree.dell, 
-.answers_subtree.dell, 
-.comm_subtree.dell{
+.comments_subtree.dell,
+.answers_subtree.dell,
+.comm_subtree.dell {
   opacity: 0.3;
 }
 
@@ -1259,7 +1259,7 @@ div.voters .asnw-up-id {
   border-color: transparent transparent #bbb transparent;
   border-style: solid;
   border-width: 6px;
-  width: 0px;
+  width: 0;
   height: 0;
   margin-bottom: 0;
   margin-left: 9px;

@@ -215,15 +215,8 @@ a.space-u.tag-u.avtive {
   color: #f56400;
 }
 
-a.add-space {
-  float: right;
-  padding: 1px 10px;
-  border: 1px solid rgba(236, 97, 73, 0.7);
-  border-radius: 20px;
-  font-size: 15px;
+.nav-tabs > li > a.add-space .add {
   color: #ea6f5a;
-  background-color: transparent;
-  text-align: center;
 }
 
 .space-users-count {

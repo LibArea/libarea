@@ -4,8 +4,8 @@
     <div class="wrap">
         <div class="text-info">
             <h4 class="p-head one"><?= lang('Help'); ?></h4>
-            <a class="footer" title="<?= lang('Help'); ?>" href="/info"><?= lang('Help'); ?></a> 
-            <a class="footer no-mob" title="<?= lang('Rules'); ?>" href="/info/rules"><?= lang('Rules'); ?></a>
+            <a class="footer" title="<?= lang('Info'); ?>" href="/info"><?= lang('Info'); ?></a> 
+            <a class="footer no-mob" title="<?= lang('Privacy'); ?>" href="/info/privacy"><?= lang('Privacy'); ?></a>
         </div>
         <div class="text-info no-mob">
             <h4 class="p-head two"><?= lang('Info'); ?></h4>

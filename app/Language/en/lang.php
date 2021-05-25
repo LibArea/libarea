@@ -30,9 +30,7 @@ return [
     
     /* Info */
     'privacy-desc'      => 'The sites Privacy Policy. Site rules.', 
-    'about-desc'        => 'Information about the site and the team working on the community.',
     'stats-desc'        => 'Site statistics. Posts, comments, participants, and voting. Charts.',
-    'rules-desc'        => 'Site rules, respect policy. No attacks, spam, violation of the laws of the country.', 
     'info-desc'         => 'Reference documentation. Sections: rules, configuration and installation, trust level, statistics.',
     
     'no-invate-txt'     => 'Not a user yet? Signup is by invitation only to combat spam and increase accountability. If you know a <a href="/users">current user</a> of the site, ask them for an invitation.',
@@ -78,6 +76,7 @@ return [
     'info_avatar'           => 'Upload an avatar and cover image for your profile. <br><br> When each user has a unique avatar, it becomes much easier to follow the discussions!',
     'info_security'         => 'Make sure that all your passwords have 8 characters or more, ideally a lot more. <br><br>Passwords must contain large letters, small letters, numbers, and special characters.',
     'info_space'            => '«Spaces» are communities on a site dedicated to a specific topic. <br> <br> There are many spaces. They allow members to focus on a specific interest or topic when posting content.',
+    'my_info_space'            => '«Spaces», which i read . <br><br>Created spaces and signed.',
     'info_flow'             => '«Flow» are some of the latest developments on the site. <br> <br> Stream combined with chat (for authorized users).',
     'info_users'            => 'The list of participants sorted in the order of registration on the site.',
     'info_search'           => 'To refine the search, try to find a more accurate query.',

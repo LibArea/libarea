@@ -43,4 +43,5 @@
 
     <p><i>В стадии разработки...</i></p>
 </main>
+<?php include TEMPLATE_DIR . '/_block/info-page-menu.php'; ?>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

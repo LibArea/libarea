@@ -1,6 +1,50 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 <main class="w-75">
     <h1><?= $data['h1']; ?></h1>
+    
+    <ul class="nav-tabs">
+        <?php if($sort == 'all') { ?>
+            <li class="active">
+                <span><?= lang('All'); ?></span>
+            </li>
+            <?php if($uid['id'] > 0) { ?>
+                <li>
+                    <a href="/space/my">
+                        <span><?= lang('Signed'); ?></span>
+                    </a>
+                </li>
+                <?php if($uid['trust_level'] >= Lori\Config::get(Lori\Config::PARAM_SPACE)) { ?>
+                    <?php if($count_space <= 2) { ?>
+                        <li class="right">
+                            <a class="add-space" href="/space/add">
+                                <span class="add">+</span> <?= lang('To create'); ?>
+                            </a>
+                        </li> 
+                    <?php } ?> 
+                <?php } ?> 
+            <?php } ?>    
+        <?php } else { ?>
+            <li>
+                <a href="/space">
+                    <span><?= lang('All'); ?></span>
+                </a>
+            </li>
+            <?php if($uid['id'] > 0) { ?>
+                <li class="active">
+                    <span><?= lang('Signed'); ?></span>
+                </li>
+                <?php if($uid['trust_level'] >= Lori\Config::get(Lori\Config::PARAM_SPACE)) { ?>
+                    <?php if($count_space <= 2) { ?>
+                        <li class="right">
+                            <a class="add-space" href="/space/add">
+                                <span class="add">+</span> <?= lang('To create'); ?>
+                            </a>
+                        </li> 
+                    <?php } ?> 
+                <?php } ?> 
+            <?php } ?>
+        <?php } ?>
+    </ul>
 
     <?php if (!empty($space)) { ?>
   
@@ -50,7 +94,7 @@
                     <?php if($sp['space_description']) { ?> 
                         <?= $sp['space_description']; ?> 
                     <?php } else { ?> 
-                        Описание формируется
+                        <?= lang('Description is formed'); ?>
                     <?php } ?>    
                 </div>
 
@@ -58,24 +102,15 @@
         <?php } ?>
 
     <?php } else { ?>
-
-        <h3>Нет тегов</h3>
-
-        <p>К сожалению тегов нет...</p>
-
+        <div class="no-answer"><i class="icon info"></i> <?= lang('No spaces'); ?></div>
     <?php } ?>
 
 </main>
 <aside>
-    <?= lang('info_space'); ?>
-
-    <?php if($uid['trust_level'] >= Lori\Config::get(Lori\Config::PARAM_SPACE)) { ?>
-        <?php if($count_space <= 2) { ?>
-            <div class="right">
-                <a class="add-space" href="/space/add">+ <?= lang('To create'); ?></a>
-            </div> 
-            <br>            
-        <?php } ?> 
-    <?php } ?> 
+    <?php if($sort == 'all') { ?>
+        <?= lang('info_space'); ?>
+    <?php } else { ?>
+        <?= lang('my_info_space'); ?>
+    <?php } ?>
 </aside>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>        

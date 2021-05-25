@@ -22,7 +22,7 @@ class PostController extends \MainController
         $page   = (!$pg) ? 1 : $pg;
         $uid    = Base::getUid();
  
-        $space_user  = SpaceModel::getSpaceUser($uid['id']);
+        $space_user  = SpaceModel::getSpaceUserSigned($uid['id']);
         
         $pagesCount = PostModel::postsFeedCount($space_user, $uid['id'], $type); 
         $posts      = PostModel::postsFeed($page, $space_user, $uid['trust_level'], $uid['id'], $type);
@@ -42,7 +42,7 @@ class PostController extends \MainController
 
         // Последние комментарии и подписанные пространства
         $latest_answers     = AnswerModel::latestAnswers($uid);
-        $space_signed_bar   = SpaceModel::getSpaceUser($uid['id']);
+        $space_signed_bar   = SpaceModel::getSpaceUserSigned($uid['id']);
  
         $result_comm = Array();
         foreach($latest_answers as $ind => $row) {
