@@ -25,6 +25,7 @@
         <li>Нет нападкам.</li>
         <li>Нет спаму.</li>
     </ul>
+    <i>И мы не обсуждаем участников...</i>
 </main>
 <?php include TEMPLATE_DIR . '/_block/info-page-menu.php'; ?>
 <?php include TEMPLATE_DIR . '/footer.php'; ?> 

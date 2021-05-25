@@ -114,7 +114,7 @@
                         <?= $onepost['space_name']; ?>
                     </a>
                     
-                    <div class="footer"> 
+                    <div class="post-footer"> 
                         <img class="ava" alt="<?= $user['login']; ?>" src="/uploads/users/avatars/small/<?= $user['avatar']; ?>">
                         <span class="user"> 
                             <a href="/u/<?= $user['login']; ?>">

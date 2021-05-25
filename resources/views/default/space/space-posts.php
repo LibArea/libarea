@@ -107,27 +107,6 @@
                     <?php } ?> 
                 <?php } ?> 
                 <div class="post-body">
-                    <div class="footer">
-                        <img class="ava" alt="<?= $post['login']; ?>" src="/uploads/users/avatars/small/<?= $post['avatar']; ?>">
-                        <span class="user"> 
-                            <a href="/u/<?= $post['login']; ?>">
-                                <?= $post['login']; ?>
-                            </a> 
-                        </span>
-                        <span class="date"> 
-                           <?= $post['post_date'] ?>
-                        </span>
-                        <?php if($post['post_answers_num'] !=0) { ?> 
-                            <span class="otst"> | </span>
-                            <a class="u-url" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
-                                <?php if($post['post_type'] ==0) { ?>
-                                    <?= $post['post_answers_num'] + $post['post_comments_num']; ?> коммент...
-                                <?php } else { ?>      
-                                    <?= $post['post_answers_num']; ?>  <?= $post['lang_num_answers']; ?>   
-                                <?php } ?>
-                            </a>
-                        <?php } ?>
-                    </div>
                     <a class="u-url" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
                         <h2 class="title"><?= $post['post_title']; ?></h2>
                         <?php if ($post['post_is_delete'] == 1) { ?> 
@@ -144,6 +123,9 @@
                         <?php } ?>
                         <?php if($post['post_type'] == 1) { ?> 
                             <i class="icon question qa"></i>
+                        <?php } ?>
+                        <?php if($post['post_translation'] == 1) { ?> 
+                            <span class="translation lowercase"><?= lang('Translation'); ?></span>
                         <?php } ?>
                     </a>
                     <?php if($post['st_id']) { ?>
@@ -167,6 +149,28 @@
                                 <img class="img-post" alt="<?= $post['post_title']; ?>" src="/uploads/posts/<?= $post['post_content_img']; ?>">
                             </div>    
                         <?php } ?>
+                    </div>
+                    
+                    <div class="post-footer lowercase">
+                        <img class="ava" alt="<?= $post['login']; ?>" src="/uploads/users/avatars/small/<?= $post['avatar']; ?>">
+                        <span class="user"> 
+                            <a href="/u/<?= $post['login']; ?>">
+                                <?= $post['login']; ?>
+                            </a> 
+                        </span>
+                        <span class="date"> 
+                           <?= $post['post_date'] ?>
+                        </span>
+                        <?php if($post['post_answers_num'] !=0) { ?> 
+                            <span class="otst no-mob"> &#183; </span>
+                            <a class="u-url no-mob" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
+                                <?php if($post['post_type'] ==0) { ?>
+                                    <?= $post['post_answers_num'] + $post['post_comments_num']; ?> коммент...
+                                <?php } else { ?>      
+                                    <?= $post['post_answers_num']; ?>  <?= $post['lang_num_answers']; ?>   
+                                <?php } ?>
+                            </a>
+                        <?php } ?> 
                     </div>
                 </div>  
             </div>    

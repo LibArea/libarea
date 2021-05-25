@@ -206,6 +206,8 @@
     </div>
 <?php } else { ?>
     <?php if($post['post_closed'] != 1) { ?>
-        <div class="no-answer"><i class="icon info"></i> <?= lang('no-answer'); ?>...</div>
+        <div class="no-answer">
+            <i class="icon info"></i> <?= lang('no-comment'); ?>...
+        </div>
     <?php } ?>
 <?php } ?>

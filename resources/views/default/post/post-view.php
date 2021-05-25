@@ -43,7 +43,7 @@
                                 <i class="icon trophy lo"></i>
                             <?php } ?>
                     </h1>
-                    <div class="footer">
+                    <div class="post-footer-full lowercase">
                         <img class="ava" alt="<?= $post['login']; ?>" src="/uploads/users/avatars/small/<?= $post['avatar']; ?>">
                         <span class="user"> 
                             <a href="/u/<?= $post['login']; ?>"><?= $post['login']; ?></a> 
@@ -55,10 +55,6 @@
                             <?php } ?>
                         </span>
                         <?php if ($uid['id']) { ?>
-                            <span class="date"> 
-                                <span class="otst"> | </span>
-                            </span>
-
                             <?php if($uid['login'] == $post['login'] || $uid['trust_level'] == 5) { ?>
                                 <span class="date">
                                     <a href="/post/edit/<?= $post['post_id']; ?>">
@@ -66,16 +62,13 @@
                                     </a>
                                 </span>
                                 <?php if($post['post_draft'] == 0) { ?>
-                                    <span class="date"> 
-                                        <span class="otst"> | </span>
-                                    </span>
                                     <?php if($post['my_post'] == $post['post_id']) { ?>
                                             <span class="mu_post">+ <?= lang('in-the-profile'); ?></span>
-                                            <span class="otst"> | </span>
+                                            <span class="otst"> &#183; </span>
                                     <?php } else { ?> 
                                         <a class="user-mypost" data-opt="1" data-post="<?= $post['post_id']; ?>">
                                             <span class="mu_post"><?= lang('in-the-profile'); ?></span>
-                                            <span class="otst"> |  </span>
+                                            <span class="otst"> &#183;  </span>
                                         </a>
                                     <?php } ?> 
                                 <?php } ?>    
@@ -95,7 +88,7 @@
                             <?php } ?> 
                             
                             <?php if($uid['trust_level'] ==5) { ?>
-                                <span class="otst"> | </span>
+                                <span class="otst"> &#183; </span>
                                 <span id="cm_dell" class="cm_add_link">
                                     <a data-post="<?= $post['post_id']; ?>" class="delpost">
                                         <?php if($post['post_is_delete'] == 1) { ?>
@@ -180,16 +173,16 @@
             <?php if($post['post_type'] == 0) { ?> 
                 <?php include TEMPLATE_DIR . '/post/comm-view.php'; ?>
                 <?php if($post['post_closed'] == 1) { ?> 
-                    <p class="no-answer"><?= lang('post-closed'); ?>...</p>
+                    <p class="no-answer"> <?= lang('post-closed'); ?>...</p>
                 <?php } ?>
             <?php } else { ?>
                 <?php include TEMPLATE_DIR . '/post/qa-view.php'; ?>
                 <?php if($post['post_closed'] == 1) { ?>
-                    <p class="no-answer">Вопрос закрыт...</p>
+                    <p class="no-answer"><i class="icon lock"></i> <?= lang('The question is closed'); ?>...</p>
                 <?php } ?>
             <?php } ?> 
         <?php } else { ?>   
-            <p class="no-answer red">Это черновик...</p>
+            <p class="no-answer red"><i class="icon info"></i> <?= lang('This is a draft'); ?>...</p>
         <?php } ?>   
     </article>
 </main> 

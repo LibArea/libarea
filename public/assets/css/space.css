@@ -78,6 +78,10 @@ a.space-u.tag-u.avtive {
   color: #e7672e;
 }
 
+.space-tags a.space-u.tag-u {
+  display: table;
+}
+
 .space-color {
   width: 3px;
   height: 9px;

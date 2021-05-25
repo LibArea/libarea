@@ -30,7 +30,7 @@ class SpaceController extends \MainController
             'canonical'     => '/space', 
         ];
 
-        Request::getResources()->addBottomStyles('/assets/css/space.css');
+        Request::getHead()->addStyles('/assets/css/space.css');
 
         // title, description
         Base::Meta(lang('All space'), lang('all-space-desc'), $other = false);
@@ -56,7 +56,7 @@ class SpaceController extends \MainController
             'canonical'     => '/space', 
         ];
 
-        Request::getResources()->addBottomStyles('/assets/css/space.css');
+        Request::getHead()->addStyles('/assets/css/space.css');
 
         // title, description
         Base::Meta(lang('I read space'), lang('I read space'), $other = false);
@@ -110,7 +110,7 @@ class SpaceController extends \MainController
         $meta_title = $space['space_name'] . ' — ' . $s_title;
         $meta_desc  = $space['space_description'] . ' ' . $s_title . '. ';
         
-        Request::getResources()->addBottomStyles('/assets/css/space.css');
+        Request::getHead()->addStyles('/assets/css/space.css');
         
         // title, description
         Base::Meta($meta_title, $meta_desc, $other = false);

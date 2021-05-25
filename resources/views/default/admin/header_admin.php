@@ -26,43 +26,37 @@
 <div class="wrap">
 
     <div class="menu-left"> 
-      
-                <?php if($uid['uri'] == '/') { ?>
-                   <a title="<?= lang('Home'); ?>" class="logo" href="/">LoriUP</a>
-                <?php } else { ?>
-                    <a title="<?= lang('Home'); ?>" class="logo" href="/"><i class="icon home"></i> 
-                        <span class="slash no-mob">
-                            <span class="sl">\</span> <?= lang('LoriUP'); ?>
-                        </span>
-                    </a>
-                <?php } ?>
-          
-
-            <div class="nav<?php if( $uid['uri'] == '/admin') { ?> active<?php } ?>">
-                <a class="home" title="<?= lang('Admin'); ?>" href="/admin">
-                    <?= lang('Admin'); ?>
-                </a>
-            </div>
-            <div class="nav<?php if( $uid['uri'] == '/admin/spaces') { ?> active<?php } ?>">
-                <a class="home" title="<?= lang('Space'); ?>" href="/admin/spaces">
-                    <?= lang('Space'); ?>
-                </a>
-            </div>
-            <div class="nav<?php if( $uid['uri'] == '/admin/invitations') { ?> active<?php } ?>"> 
-                <a class="home" title="<?= lang('Invites'); ?>" href="/admin/invitations">
-                    <?= lang('Invites'); ?>
-                </a>
-            </div>
-            <div class="nav<?php if( $uid['uri'] == '/admin/comments') { ?> active<?php } ?>">
-                <a class="home" title="<?= lang('Comments'); ?>" href="/admin/comments">
-                    <?= lang('Comments'); ?>
-                </a>
-            </div>
-            <div class="nav<?php if( $uid['uri'] == '/admin/badges') { ?> active<?php } ?>">
-                <a class="home" title="<?= lang('Badges'); ?>" href="/admin/badges">
-                    <?= lang('Badges'); ?>
-                </a>
-            </div>
+        <div class="menu<?php if( $uid['uri'] == '/admin') { ?> active<?php } ?>">
+            <a title="<?= lang('Admin'); ?>" class="logos" href="/admin">
+                <?= lang('Admin'); ?>
+            </a>
+        </div>    
+        <div class="menu">  |  </div>
+        <div class="menu<?php if( $uid['uri'] == '/admin/spaces') { ?> active<?php } ?>">
+            <a title="<?= lang('Space'); ?>" href="/admin/spaces">
+                <?= lang('Space'); ?>
+            </a>
+        </div>
+        <div class="menu<?php if( $uid['uri'] == '/admin/invitations') { ?> active<?php } ?>"> 
+            <a title="<?= lang('Invites'); ?>" href="/admin/invitations">
+                <?= lang('Invites'); ?>
+            </a>
+        </div>
+        <div class="menu<?php if( $uid['uri'] == '/admin/comments') { ?> active<?php } ?>">
+            <a title="<?= lang('Comments'); ?>" href="/admin/comments">
+                <?= lang('Comments'); ?>
+            </a>
+        </div>
+        <div class="menu<?php if( $uid['uri'] == '/admin/badges') { ?> active<?php } ?>">
+            <a title="<?= lang('Badges'); ?>" href="/admin/badges">
+                <?= lang('Badges'); ?>
+            </a>
+        </div>
+        <div class="nav">
+            <a class="home" title="<?= lang('Home'); ?>" href="/">
+                <i class="icon home"></i>
+            </a>
+        </div>
     </div>
 </div>    
 </header>
