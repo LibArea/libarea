@@ -17,8 +17,6 @@ class InfoController extends \MainController
             'canonical' => Config::get(Config::PARAM_URL) . '/info',
         ];
         
-        Request::getResources()->addBottomStyles('/assets/css/info.css');
-        
        // Далее title, description
        Base::Meta(lang('Info'), lang('info-desc'), $other = false); 
  
@@ -53,9 +51,6 @@ class InfoController extends \MainController
             'flow_num'      => $result
         ];
 
-        Request::getResources()->addBottomStyles('/assets/css/info.css');
-        Request::getResources()->addBottomScript('/assets/js/canvas.js');
-
         Base::Meta(lang('Statistics'), lang('stats-desc'), $other = false); 
 
         return view(PR_VIEW_DIR . '/info/stats', ['data' => $data, 'uid' => $uid]);
@@ -69,8 +64,6 @@ class InfoController extends \MainController
             'canonical' => Config::get(Config::PARAM_URL) . '/info/privacy',
         ];
 
-        Request::getResources()->addBottomStyles('/assets/css/info.css');
-
         Base::Meta(lang('Privacy Policy'), lang('privacy-desc'), $other = false);
 
         return view(PR_VIEW_DIR . '/info/privacy', ['data' => $data, 'uid' => $uid]);
@@ -83,8 +76,6 @@ class InfoController extends \MainController
             'h1'        => lang('Restriction'),
             'canonical' => Config::get(Config::PARAM_URL) . '/info/restriction',
         ];
-        
-        Request::getResources()->addBottomStyles('/assets/css/info.css');
 
         Base::Meta(lang('Restriction'), lang('Restriction'), $other = false);
 

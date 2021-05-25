@@ -150,8 +150,9 @@
     </div>
 <?php } else { ?>
     <?php if($post['post_closed'] != 1) { ?>
-        <div class="no-answer"><i class="icon info"></i> <?= lang('no-answer'); ?>... 
-        <br> Напишите свой первый ответ.</div>
+        <div class="no-answer">
+            <i class="icon info"></i> <?= lang('no-answer'); ?>... 
+        </div>
     <?php } ?>
 <?php } ?>
 

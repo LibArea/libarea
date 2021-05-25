@@ -49,6 +49,10 @@ a.active {
   font-size: 13px;
 }
 
+.lowercase {
+   text-transform: lowercase;
+}
+
 tt {
   font-size: 14px;
 }
@@ -1345,6 +1349,10 @@ div.voters .asnw-up-id {
   font-size: 15px;
   color: var(--color-gray-1);
   margin-bottom: 8px;
+}
+
+.menu-info a.active {
+  color: #1ca1f3;
 }
 
 /* Info пространство и рекомендовано в посте */

@@ -63,7 +63,7 @@
         </script>
     <?php } ?>
 <?php } ?>
-<?php print getRequestResources()->getBottomStyles(); ?>
-<?php print getRequestResources()->getBottomScripts(); ?> 
+<?= getRequestResources()->getBottomStyles(); ?>
+<?= getRequestResources()->getBottomScripts(); ?> 
 </body>
 </html> 
