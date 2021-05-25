@@ -10,7 +10,7 @@
     <?= lang('info_flow'); ?>
 </aside>
 <script async src="/assets/js/common.js"></script>
-<?php print getRequestResources()->getBottomStyles(); ?>
-<?php print getRequestResources()->getBottomScripts(); ?> 
+<?= getRequestResources()->getBottomStyles(); ?>
+<?= getRequestResources()->getBottomScripts(); ?> 
 </body>
 </html> 

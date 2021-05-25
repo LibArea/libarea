@@ -351,7 +351,7 @@ a.home {
 }
 
 i.icon.info,
-i.icon.lock {
+.no-answer i.icon.lock {
   color: #339900;
 }
 
@@ -776,7 +776,7 @@ aside a.my.active {
 
 .post-body.full .post {
   margin-bottom: 20px;
-  max-width: 800px;
+  max-width: 750px;
 }
 
 img.img-post {
@@ -869,12 +869,13 @@ img.thumb {
   display: inline-block;
   border-radius: 2px;
   font-size: 13px;
+  margin-rop: 5px;
 }
 
 .post-footer-full {
   color: var(--color-gray-1);
   display: inline-block;
-  font-size: 13px;  
+  font-size: 13px;
 }
 
 .post-footer a, .post-footer-full a {
@@ -1112,7 +1113,8 @@ ol.comment-telo {
   margin: 2px 0 2px 0;
 }
 
-.comm-header a, .comm-header {
+.comm-header a,
+.comm-header {
   font-size: 9.5pt;
   color: #888;
 }
@@ -1191,8 +1193,8 @@ ol.comment-telo {
 }
 
 .answers .comm-telo.qa-comm {
- margin-top: 1px;
- margin-bottom: 1px;
+  margin-top: 1px;
+  margin-bottom: 1px;
 }
 
 .qa-user,
@@ -1219,11 +1221,6 @@ ol.comment-telo {
   color: #333;
 }
 
-.qa-ava-info,
-.qa-date {
-  text-align: right;
-}
-
 .qa-date,
 .qa-ava-info {
   display: block;
@@ -1240,7 +1237,7 @@ ol.comment-telo {
 }
 
 /* ЛС */
-.red, 
+.red,
 .lo {
   color: #e7672e;
 }
