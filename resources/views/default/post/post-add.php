@@ -36,13 +36,18 @@
                     <label for="post_content">Формат</label>
                     <input type="radio" name="post_type" checked value="0"> Обсуждение
                     <input type="radio" name="post_type" value="1" > Q&A
-                </div> 
+                </div>
                 <div class="boxline"> 
                     <label for="post_content">Закрыть</label>
                     <input type="radio" name="closed" checked value="0"> <?= lang('No'); ?>
                     <input type="radio" name="closed" value="1" > <?= lang('Yes'); ?>
                 </div>  
             <?php } ?>
+                <div class="boxline"> 
+                    <label for="post_content"><?= lang('Translation'); ?>?</label>
+                    <input type="radio" name="translation" checked value="0"> <?= lang('No'); ?>
+                    <input type="radio" name="translation" value="1" > <?= lang('Yes'); ?>
+                </div> 
             <?php if($uid['trust_level'] > 2) { ?>            
                 <div class="boxline">
                     <label for="post_content">Поднять</label>

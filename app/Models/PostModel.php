@@ -197,6 +197,7 @@ class PostModel extends \MainModel
             ['post_thumb_img'], ',',
             ['post_slug'], ',', 
             ['post_type'], ',',
+            ['post_translation'], ',',
             ['post_draft'], ',',
             ['post_ip_int'], ',', 
             ['post_user_id'], ',', 
@@ -214,6 +215,7 @@ class PostModel extends \MainModel
             $data['post_thumb_img'],            
             $data['post_slug'],
             $data['post_type'],
+            $data['post_translation'],
             $data['post_draft'],
             $data['post_ip_int'], 
             $data['post_user_id'], 
@@ -233,6 +235,7 @@ class PostModel extends \MainModel
     {
            XD::update(['posts'])->set(['post_title'], '=', $data['post_title'], ',', 
             ['post_type'], '=', $data['post_type'], ',',
+            ['post_translation'], '=', $data['post_translation'], ',',
             ['post_draft'], '=', $data['post_draft'], ',',
             ['post_date'], '=', $data['post_date'], ',', 
             ['edit_date'], '=', date("Y-m-d H:i:s"), ',', 

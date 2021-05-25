@@ -11,9 +11,9 @@
             <div class="t-table">
                 <div class="t-th">
                     <span class="t-td center">Id</span>
-                    <span class="t-td">Иконка</span>
-                    <span class="t-td">Название&nbsp;/&nbsp;Описание</span>
-                    <span class="t-td center">Действие</span>
+                    <span class="t-td center">Icon</span>
+                    <span class="t-td"><?= lang('Title'); ?>&nbsp;/&nbsp;<?= lang('Description'); ?></span>
+                    <span class="t-td center"><?= lang('Action'); ?></span>
                 </div>
 
                 <?php foreach ($badges as $key => $bg) { ?>  
@@ -30,7 +30,9 @@
                             <?= $bg['badge_description']; ?>
                         </span>
                         <span class="t-td center">
-                            <a href="/admin/badge/<?= $bg['badge_id']; ?>/edit">Изменить</a>
+                            <a title="<?= lang('Edit'); ?>" href="/admin/badge/<?= $bg['badge_id']; ?>/edit">
+                                <i class="icon pencil"></i>
+                            </a>
                         </span>
                     </div>
                 <?php } ?>
@@ -41,7 +43,7 @@
             </div>
             
         <?php } else { ?>
-            <div class="no-content"><?= lang('no-comment'); ?>...</div>
+            <div class="no-content"><?= lang('No'); ?>...</div>
         <?php } ?>
     </div> 
 </main>

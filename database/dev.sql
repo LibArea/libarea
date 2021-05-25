@@ -195,6 +195,7 @@ CREATE TABLE `posts` (
   `post_title` varchar(250) NOT NULL,
   `post_slug` varchar(128) NOT NULL,
   `post_type` smallint(1) NOT NULL DEFAULT 0,
+  `post_translation` smallint(1) NOT NULL DEFAULT 0,
   `post_draft` smallint(1) NOT NULL DEFAULT 0,
   `post_space_id` int(11) NOT NULL DEFAULT 0,
   `post_tag_id` int(11) NOT NULL DEFAULT 0,
@@ -223,10 +224,10 @@ CREATE TABLE `posts` (
 -- Дамп данных таблицы `posts`
 --
 
-INSERT INTO `posts` (`post_id`, `post_title`, `post_slug`, `post_type`, `post_draft`, `post_space_id`, `post_tag_id`, `post_date`, `edit_date`, `post_user_id`, `post_ip_int`, `post_votes`, `post_karma`, `post_answers_num`, `post_comments_num`, `post_content`, `post_content_img`, `post_thumb_img`, `post_closed`, `post_tl`, `post_lo`, `post_top`, `post_url`, `post_url_domain`, `post_hits_count`, `post_is_delete`) VALUES
-(1, 'Муха села на варенье, Вот и всё стихотворенье...', 'muha-stih', 0, 1, 0, 0, '2021-02-28 12:08:09', '2021-03-05 10:05:25', 1, NULL, 0, 0, 0, 0, '> \"Нет не всё!\" - сказала Муха,\r\n\r\n> Почесала себе брюхо,\r\n\r\n> Свесив с блюдца две ноги,\r\n\r\n> Мне сказала:\"Погоди!\r\n\r\n> Прежде чем сесть на варенье,\r\n\r\n> Я прочла стихотворенье,\r\n\r\n> Неизвестного поэта,\r\n\r\n> Написавшего про это.\r\n\r\n\r\n## Заголовок\r\n\r\nЧто-то в модели много кода:\r\n\r\n```\r\n$db = \\Config\\Database::connect();\r\n$builder = $db->table(\'Posts AS a\');\r\n$builder->select(\'a.*, b.id, b.nickname, b.avatar\');\r\n$builder->join(\"users AS b\", \"b.id = a.post_user_id\");\r\n$builder->where(\'a.post_slug\', $slug);\r\n$builder->orderBy(\'a.post_id\', \'DESC\');\r\n```\r\n\r\nВот. Это первый пост.', NULL, NULL, 0, 0, 0, 0, NULL, NULL, 0, 0),
-(2, 'Второй пост...', 'vtoroi-post', 0, 2, 0, 0, '2021-02-28 12:15:58', '2021-03-05 10:05:25', 2, NULL, 0, 0, 0, 0, 'Не будет тут про муху. Просто второй пост.\r\n\r\n> в лесу родилась ёлка, зеленая была...', NULL, NULL, 0, 0, 0, 0, NULL, NULL, 0, 0),
-(3, 'Просто первый пост', 'prosto-pervyj-post', 0, 2, 0, 0, '2021-04-30 04:35:13', '2021-04-30 04:35:13', 1, '127.0.0.1', 0, 0, 1, 0, 'Просто первый пост', '', '', 0, 0, 0, 0, '', '', 0, 0);
+INSERT INTO `posts` (`post_id`, `post_title`, `post_slug`, `post_type`, `post_translation`, `post_draft`, `post_space_id`, `post_tag_id`, `post_date`, `edit_date`, `post_user_id`, `post_ip_int`, `post_votes`, `post_karma`, `post_answers_num`, `post_comments_num`, `post_content`, `post_content_img`, `post_thumb_img`, `post_closed`, `post_tl`, `post_lo`, `post_top`, `post_url`, `post_url_domain`, `post_hits_count`, `post_is_delete`) VALUES
+(1, 'Муха села на варенье, Вот и всё стихотворенье...', 'muha-stih', 0, 0, 1, 0, 0, '2021-02-28 12:08:09', '2021-03-05 10:05:25', 1, NULL, 0, 0, 0, 0, '> \"Нет не всё!\" - сказала Муха,\r\n\r\n> Почесала себе брюхо,\r\n\r\n> Свесив с блюдца две ноги,\r\n\r\n> Мне сказала:\"Погоди!\r\n\r\n> Прежде чем сесть на варенье,\r\n\r\n> Я прочла стихотворенье,\r\n\r\n> Неизвестного поэта,\r\n\r\n> Написавшего про это.\r\n\r\n\r\n## Заголовок\r\n\r\nЧто-то в модели много кода:\r\n\r\n```\r\n$db = \\Config\\Database::connect();\r\n$builder = $db->table(\'Posts AS a\');\r\n$builder->select(\'a.*, b.id, b.nickname, b.avatar\');\r\n$builder->join(\"users AS b\", \"b.id = a.post_user_id\");\r\n$builder->where(\'a.post_slug\', $slug);\r\n$builder->orderBy(\'a.post_id\', \'DESC\');\r\n```\r\n\r\nВот. Это первый пост.', NULL, NULL, 0, 0, 0, 0, NULL, NULL, 0, 0),
+(2, 'Второй пост...', 'vtoroi-post', 0, 0, 2, 0, 0, '2021-02-28 12:15:58', '2021-03-05 10:05:25', 2, NULL, 0, 0, 0, 0, 'Не будет тут про муху. Просто второй пост.\r\n\r\n> в лесу родилась ёлка, зеленая была...', NULL, NULL, 0, 0, 0, 0, NULL, NULL, 0, 0),
+(3, 'Просто первый пост', 'prosto-pervyj-post', 0, 0, 2, 0, 0, '2021-04-30 04:35:13', '2021-04-30 04:35:13', 1, '127.0.0.1', 0, 0, 1, 0, 'Просто первый пост', '', '', 0, 0, 0, 0, '', '', 0, 0);
 
 -- --------------------------------------------------------
 

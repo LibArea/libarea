@@ -17,6 +17,10 @@
   color: #fff;
 }
 
+.space-tags a {
+  margin-bottom: 5px;
+}
+
 h1.space {
   font-size: 16px;
   margin: 0 0 0 67px;
@@ -52,10 +56,6 @@ h1.space a {
   letter-spacing: 1px;
   text-transform: uppercase;
   font-size: 11px;
-}
-
-.space-tags a {
-  margin-bottom: 5px;
 }
 
 a.space-u.tag-u {
@@ -105,7 +105,7 @@ a.space-u.tag-u.avtive {
 }
 
 .space-des {
-  margin-left:10px;
+  margin-left: 10px;
 }
 
 .space-des.all {

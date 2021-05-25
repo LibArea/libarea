@@ -2,30 +2,27 @@
 
 namespace App\Controllers;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\UserModel;
 use App\Models\SpaceModel;
 use App\Models\AdminModel;
 use Lori\Base;
 
 class AdminController extends \MainController
 {
+    
 	public function index()
 	{
         // Доступ только персоналу
-        $uid = Base::getUid();
-        if ($uid['trust_level'] != 5) {
-            redirect('/');
-        }
-      
-        $user_all = AdminModel::UsersAll();
+        $uid = self::isAdmin();
+
+        $user_all   = AdminModel::UsersAll();
         
         $result = Array();
         foreach($user_all as $ind => $row) {
-            $row['replayIp']      = AdminModel::replayIp($row['reg_ip']);
-            $row['isBan']         = AdminModel::isBan($row['id']);
-            $row['created_at']    = Base::ru_date($row['created_at']); 
-            $row['logs_date']    = Base::ru_date($row['logs_date']);
-            $result[$ind]         = $row;
+            $row['replayIp']    = AdminModel::replayIp($row['reg_ip']);
+            $row['isBan']       = AdminModel::isBan($row['id']);
+            $row['created_at']  = Base::ru_date($row['created_at']); 
+            $row['logs_date']   = Base::ru_date($row['logs_date']);
+            $result[$ind]       = $row;
         } 
         
         $data = [
@@ -42,12 +39,9 @@ class AdminController extends \MainController
     // Бан участнику
     public function banUser() 
     {
-        $uid = Base::getUid();
-        if ($uid['trust_level'] != 5) {
-            redirect('/');
-        }
-
-        $user_id = \Request::getPostInt('id');
+        $uid = self::isAdmin();
+        
+        $user_id    = \Request::getPostInt('id');
         AdminModel::setBanUser($user_id);
         
         return true;
@@ -56,12 +50,8 @@ class AdminController extends \MainController
     // Удаленые комментарии
     public function comments ()
     {
-        $uid = Base::getUid();
-        if ($uid['trust_level'] != 5) {
-            redirect('/');
-        }
-         
-        $comm = AdminModel::getCommentsDell();
+        $uid    = self::isAdmin();
+        $comm   = AdminModel::getCommentsDell();
 
         $result = Array();
         foreach($comm  as $ind => $row){
@@ -70,7 +60,6 @@ class AdminController extends \MainController
             $result[$ind]   = $row;
         }
         
-        $uid  = Base::getUid();
         $data = [
             'h1' => lang('Deleted comments'),
         ]; 
@@ -83,12 +72,9 @@ class AdminController extends \MainController
     // Удаление комментария
     public function recoverComment()
     {
-        $uid = Base::getUid();
-        if ($uid['trust_level'] != 5) {
-            redirect('/');
-        }
+        $uid        = self::isAdmin();
+        $comm_id    = \Request::getPostInt('id');
         
-        $comm_id = \Request::getPostInt('id');
         AdminModel::CommentsRecover($comm_id);
         
         return true;
@@ -97,16 +83,12 @@ class AdminController extends \MainController
     // Показываем дерево приглашенных
     public function invitations ()
     {
-        $uid = Base::getUid();
-        if ($uid['trust_level'] != 5) {
-            redirect('/');
-        }  
- 
-        $invite     = AdminModel::getInvitations();
+        $uid    = self::isAdmin();
+        $invite = AdminModel::getInvitations();
  
         $result = Array();
         foreach($invite  as $ind => $row){
-            $row['uid']         = UserModel::getUserId($row['uid']);  
+            $row['uid']         = AdminModel::getUserId($row['uid']);  
             $row['active_time'] = $row['active_time'];
             $result[$ind]       = $row;
         }
@@ -137,12 +119,8 @@ class AdminController extends \MainController
     // Пространства
     public function spaces()
     {
-        $uid = Base::getUid();
-        if ($uid['trust_level'] != 5) {
-            redirect('/');
-        }  
-        
-        $space = AdminModel::getAdminSpaceAll($uid['id']);
+        $uid    = self::isAdmin();
+        $spaces = AdminModel::getAdminSpaceAll($uid['id']);
   
         $data = [
             'h1' => lang('Space'),
@@ -150,16 +128,13 @@ class AdminController extends \MainController
  
         Base::Meta(lang('Space'), lang('Space'), $other = false);
  
-        return view(PR_VIEW_DIR . '/admin/space', ['data' => $data, 'uid' => $uid, 'space' => $space]);
+        return view(PR_VIEW_DIR . '/admin/spaces', ['data' => $data, 'uid' => $uid, 'spaces' => $spaces]);
     }
     
     // Форма добавить пространство
     public function addSpacePage() 
     {
-        $uid  = Base::getUid();
-        if ($uid['trust_level'] != 5) {
-            redirect('/');
-        }  
+        $uid = self::isAdmin();
         
         $data = [
             'h1' => lang('Add Space'),
@@ -173,12 +148,9 @@ class AdminController extends \MainController
     // Удаление / восстановление пространства
     public function delSpace() 
     {
-        $uid = Base::getUid();
-        if ($uid['trust_level'] != 5) {
-            redirect('/');
-        }   
+        $uid        = self::isAdmin();
+        $space_id   = \Request::getPostInt('id');
         
-        $space_id = \Request::getPostInt('id');
         SpaceModel::SpaceDelete($space_id);
        
         return true;
@@ -187,10 +159,7 @@ class AdminController extends \MainController
     // Добавить пространства
     public function spaceAdd() 
     {
-        $uid = Base::getUid();
-        if ($uid['trust_level'] != 5) {
-            redirect('/');
-        } 
+        $uid = self::isAdmin();
         
         $space_slug         = \Request::getPost('space_slug');
         $space_name         = \Request::getPost('space_name');  
@@ -251,11 +220,7 @@ class AdminController extends \MainController
     // Все награды
     public function Badges()
     {
-        $uid = Base::getUid();
-        if ($uid['trust_level'] != 5) {
-            redirect('/');
-        }
-        
+        $uid    = self::isAdmin();
         $badges = AdminModel::getBadgesAll();
         
         $data = [
@@ -270,10 +235,7 @@ class AdminController extends \MainController
     // Форма добавления награды
     public function addBadgePage()
     {
-        $uid = Base::getUid();
-        if ($uid['trust_level'] != 5) {
-            redirect('/');
-        }
+        $uid = self::isAdmin();
         
         $data = [
             'h1' => lang('Add badge'),
@@ -287,11 +249,7 @@ class AdminController extends \MainController
     // Форма изменения награды
     public function badgeEditPage()
     {
-        $uid = Base::getUid();
-        if ($uid['trust_level'] != 5) {
-            redirect('/');
-        }
-        
+        $uid        = self::isAdmin();
         $badge_id   = \Request::getInt('id');
         $badge      = AdminModel::getBadgeId($badge_id);        
 
@@ -311,16 +269,11 @@ class AdminController extends \MainController
     // Измененяем награду
     public function badgeEdit()
     {
-        $redirect = '/admin/badges';
-        
-        $uid = Base::getUid();
-        if ($uid['trust_level'] != 5) {
-            redirect($redirect);
-        }
-        
+        $uid        = self::isAdmin();
         $badge_id   = \Request::getInt('id');
-        $badge      = AdminModel::getBadgeId($badge_id); 
+        $badge      = AdminModel::getBadgeId($badge_id);
         
+        $redirect = '/admin/badges';
         if (!$badge['badge_id']) {
             redirect($redirect);
         }
@@ -347,17 +300,13 @@ class AdminController extends \MainController
     // Измененяем награду
     public function badgeAdd()
     {
-        $redirect = '/admin/badges';
-        
-        $uid = Base::getUid();
-        if ($uid['trust_level'] != 5) {
-            redirect($redirect);
-        }
+        $uid = self::isAdmin();
         
         $badge_title         = \Request::getPost('badge_title');
         $badge_description   = \Request::getPost('badge_description');
         $badge_icon          = $_POST['badge_icon']; // не фильтруем
 
+        $redirect = '/admin/badges';
         Base::Limits($badge_title, lang('Title'), '4', '250', $redirect);
         Base::Limits($badge_description, lang('Description'), '12', '250', $redirect);
         Base::Limits($badge_icon, lang('Icon'), '12', '550', $redirect);
@@ -372,4 +321,59 @@ class AdminController extends \MainController
         redirect($redirect);  
     }
     
+    // Страница редактиорование участника
+    public function userEditPage()
+    {
+        $uid        = self::isAdmin();
+        $user_id    = \Request::getInt('id');
+        
+        $redirect = '/admin';
+        if(!$user = AdminModel::getUserId($user_id)) {
+           redirect($redirect); 
+        }
+        
+        $data = [
+            'h1' => lang('Edit user'),
+        ]; 
+ 
+        Base::Meta(lang('Edit user'), lang('Edit user'), $other = false);
+        
+        return view(PR_VIEW_DIR . '/admin/user-edit', ['data' => $data, 'uid' => $uid, 'user' => $user]);
+    }
+    
+    // Редактиоровать участника
+    public function userEdit()
+    {
+        $uid        = self::isAdmin();
+        $user_id    = \Request::getInt('id');
+        
+        $redirect = '/admin';
+        if (!AdminModel::getUserId($user_id)) {
+            redirect($redirect);
+        }
+        
+        $email          = \Request::getPost('email');
+        $login          = \Request::getPost('login');
+        $name           = \Request::getPost('name');
+        $about          = \Request::getPost('about');
+        $trust_level    = \Request::getPostInt('trust_level');
+        
+        Base::Limits($login, lang('Login'), '4', '11', $redirect);
+        Base::Limits($name, lang('Name'), '4', '11', $redirect);
+        Base::Limits($about, lang('About me'), '4', '320', $redirect);
+        
+        AdminModel::setUserEdit($user_id, $email, $login, $name, $about, $trust_level);
+        
+        redirect($redirect);
+    }
+    
+    // Проверка прав
+    public static function isAdmin()
+    {
+        $uid = Base::getUid();
+        if ($uid['trust_level'] != 5) {
+            redirect('/');
+        }
+        return $uid;
+    }
 }

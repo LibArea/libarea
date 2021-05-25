@@ -62,6 +62,11 @@
                     <input type="radio" name="closed" <?php if($post['post_closed'] == 1) { ?>checked<?php } ?> value="1" > <?= lang('Yes'); ?>
                 </div>  
             <?php } ?>
+                <div class="boxline"> 
+                    <label for="post_content"><?= lang('Translation'); ?>?</label>
+                    <input type="radio" name="translation" <?php if($post['post_translation'] == 0) { ?>checked<?php } ?> value="0"> <?= lang('No'); ?>
+                    <input type="radio" name="translation" <?php if($post['post_translation'] == 1) { ?>checked<?php } ?> value="1" > <?= lang('Yes'); ?>
+                </div>    
             <?php if($uid['trust_level'] > 2) { ?>            
                 <div class="boxline">
                     <label for="post_content">Поднять</label>

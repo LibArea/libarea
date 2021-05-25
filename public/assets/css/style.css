@@ -491,7 +491,7 @@ input.add {
 input.add-url {
   width: calc(100% - 22em);
 }
- 
+
 .box .boxline {
   clear: both;
   margin-bottom: 0.9em;
@@ -556,8 +556,7 @@ input.form-search:focus {
 }
 
 /* Sidebar */
-aside i.icon, 
-nav-info i.icon {
+aside i.icon {
   margin: 0 8px 0 0;
 }
 
@@ -574,14 +573,10 @@ aside a.my {
 }
 
 aside a.my.active {
-  color: #1ca1f3; 
+  color: #1ca1f3;
 }
 
 /* Форма авторизации */
-.login-nav-home {
-    
-}
-
 .login-nav {
   width: 100%;
   margin-bottom: 20px;
@@ -656,7 +651,6 @@ aside a.my.active {
   font-size: 11px;
   line-height: 13px;
   font-weight: 500;
-  color: #fff;
   width: 100%;
   text-transform: uppercase;
   border-radius: 10em;
@@ -680,7 +674,7 @@ aside a.my.active {
   color: #e83e8c;
 }
 
-.no-content, 
+.no-content,
 .no-answer {
   padding: 10px 15px;
   margin: 10px 0;
@@ -688,7 +682,7 @@ aside a.my.active {
 }
 
 .notif-color-1 {
- background: #f89406;
+  background: #f89406;
 }
 
 /* Урезанный пост на главной */
@@ -899,7 +893,7 @@ h1 span {
 }
 
 .fl.active {
-  background: rgba(82,186,213,0.1);
+  background: rgba(82, 186, 213, 0.1);
   display: table;
 }
 
@@ -933,7 +927,7 @@ h1 span {
   vertical-align: middle;
 }
 
-a.space-u, 
+a.space-u,
 .space a.space-u,
 .post_url {
   font-size: 10pt;
@@ -942,7 +936,7 @@ a.space-u,
   vertical-align: middle;
 }
 
-a.space-u:hover, 
+a.space-u:hover,
 .space a.space-u:hover,
 .post_url:hover {
   color: var(--color-gray-2);
@@ -959,7 +953,7 @@ a.space-u:hover,
 
 .line-qa {
   border-top: 1px solid #eee;
-  margin-left: 30px;  
+  margin-left: 30px;
 }
 
 ol.answer-telo {
@@ -1267,7 +1261,7 @@ div.voters .asnw-up-id {
   border-width: 6px;
   width: 0px;
   height: 0;
-  margin-bottom: 0px;
+  margin-bottom: 0;
   margin-left: 9px;
   padding: 0;
   display: block;
@@ -1343,7 +1337,7 @@ div.voters .asnw-up-id {
 }
  
 .no-pc {
-  display: none; 
+  display: none;
 }
 
 .menu-info a {
@@ -1508,11 +1502,11 @@ i.github {
     margin: 0 15px 20px 0;
     width: 190px;
   }
-  main { width: calc(100% - 455px); }
 }
 
 @media (max-width: 980px) {
   main { width: calc(100% - 215px); }
+  img.img-post { width: 98%; }
 }
 
 @media (max-width: 880px) {
@@ -1609,7 +1603,7 @@ i.github {
 }
 
 a:hover .icon:before {
-  text-decoration: none !important;
+  text-decoration: none;
 }
 
 .icon.size-actual:before { content: "\e058"; }

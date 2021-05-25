@@ -12,6 +12,8 @@
 
 Route::before('Authorization@noAuth')->getGroup();
     Route::get('/admin')->controller('AdminController');
+    Route::get('/admin/user/{id}/edit')->controller('AdminController@userEditPage')->where(['id' => '[0-9]+']);
+    Route::type('post')->protect()->get('/admin/user/edit/{id}')->controller('AdminController@userEdit')->where(['id' => '[0-9]+']);
     Route::get('/admin/spaces')->controller('AdminController@spaces'); 
     Route::get('/admin/space/add')->controller('AdminController@addSpacePage');
     Route::type('post')->protect()->get('/admin/addspaceadmin')->controller('AdminController@spaceAdd');

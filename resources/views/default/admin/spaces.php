@@ -6,7 +6,7 @@
     </h1>
 
     <div class="space">
-        <?php if (!empty($space)) { ?>
+        <?php if (!empty($spaces)) { ?>
       
             <div class="t-table">
                 <div class="t-th">
@@ -14,12 +14,12 @@
                     <span class="t-td">Логотип</span>
                     <span class="t-td">Владелец&nbsp;/&nbsp;Тип</span>
                     <span class="t-td">Имя / slug</span>
-                    <span class="t-td">Описание</span>
-                    <span class="t-td center">Бан</span>
-                    <span class="t-td center">Действие</span>
+                    <span class="t-td"><?= lang('Description'); ?></span>
+                    <span class="t-td center">Ban</span>
+                    <span class="t-td center"><?= lang('Action'); ?></span>
                 </div>
 
-                <?php foreach ($space as $key => $sp) { ?>  
+                <?php foreach ($spaces as $key => $sp) { ?>  
                     <div class="t-tr">
                         <span class="t-td w-30 center">
                             <?= $sp['space_id']; ?>
@@ -33,19 +33,17 @@
                             <br>
                             <small>
                             <?php if($sp['space_type'] == 1) {  ?>
-                                официальное
+                                <?= lang('official'); ?>
                             <?php } else { ?>
-                                все   
+                                <?= lang('All'); ?>   
                             <?php } ?>
                             </small>
                         </span>
                         <span class="t-td">
-                       
                             <span class="space-color space_<?= $sp['space_color'] ?>"></span>
                             <a title="<?= $sp['space_name']; ?>" class="space-u" href="/s/<?= $sp['space_slug']; ?>">
                                 <?= $sp['space_name']; ?> (<?= $sp['space_slug']; ?>)
                             </a> 
-                             
                         </span>
                         <span class="t-td">
                             <?= $sp['space_description']; ?> <br>
@@ -54,14 +52,16 @@
                         <span class="t-td center">
                             <?php if($sp['space_is_delete']) { ?>
                                 <span class="space-ban" data-id="<?= $sp['space_id']; ?>">
-                                    <span class="red">разбанить</span>
+                                    <span class="red"><?= lang('unban'); ?></span>
                                 </span>
                             <?php } else { ?>
-                                <span class="space-ban" data-id="<?= $sp['space_id']; ?>">забанить</span>
+                                <span class="space-ban" data-id="<?= $sp['space_id']; ?>"><?= lang('ban it'); ?></span>
                             <?php } ?>
                         </span>
                         <span class="t-td center">
-                            <a href="/space/<?= $sp['space_slug']; ?>/edit">изменить</a>
+                            <a title="<?= lang('Edit'); ?>"  href="/space/<?= $sp['space_slug']; ?>/edit">
+                                <i class="icon pencil"></i>
+                            </a>
                         </span>
                     
                     </div>
@@ -73,7 +73,7 @@
             </div>
             
         <?php } else { ?>
-            <div class="no-content"><?= lang('no-comment'); ?>...</div>
+            <div class="no-content"><?= lang('No'); ?>...</div>
         <?php } ?>
     </div> 
 </main>

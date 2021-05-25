@@ -279,6 +279,7 @@ class PostController extends \MainController
         $post_draft             = \Request::getPostInt('post_draft');
         $post_top               = \Request::getPostInt('top'); 
         $post_type              = \Request::getPostInt('post_type');
+        $post_translation       = \Request::getPostInt('translation');
       
         // Используем для возврата
         $redirect = '/post/add';
@@ -379,6 +380,7 @@ class PostController extends \MainController
             'post_thumb_img'        => $og_img,
             'post_slug'             => $post_slug,
             'post_type'             => $post_type,
+            'post_translation'      => $post_translation,
             'post_draft'            => $post_draft,
             'post_ip_int'           => $post_ip_int,
             'post_user_id'          => $post_user_id,
@@ -524,6 +526,7 @@ class PostController extends \MainController
         $post_title             = \Request::getPost('post_title');
         $post_content           = $_POST['post_content']; // не фильтруем 
         $post_type              = \Request::getPostInt('post_type');
+        $post_translation       = \Request::getPostInt('translation');
         $post_draft             = \Request::getPostInt('post_draft');
         $post_closed            = \Request::getPostInt('closed');
         $post_top               = \Request::getPostInt('top');
@@ -626,6 +629,7 @@ class PostController extends \MainController
             'post_id'               => $post_id,
             'post_title'            => $post_title, 
             'post_type'             => $post_type,
+            'post_translation'      => $post_translation,
             'post_date'             => $post_date,
             'post_draft'            => $post_draft,
             'post_content'          => $post_content,

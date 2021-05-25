@@ -27,7 +27,7 @@ class AdminModel extends \MainModel
     }
     
     // Получение информации по id
-    public static function UserId($uid)
+    public static function getUserId($uid)
     {
         return XD::select('*')
                 ->from(['users'])
@@ -181,6 +181,17 @@ class AdminModel extends \MainModel
             $data['badge_icon']]), ')' )->run();
 
         return true;
+    }
+    
+    // Редактирование участника
+    public static function setUserEdit($user_id, $email, $login, $name, $about, $trust_level)
+    {
+        XD::update(['users'])->set(['email'], '=', $email, ',', 
+            ['login'], '=', $login, ',',
+            ['name'], '=', $name, ',', 
+            ['about'], '=', $about, ',', 
+            ['trust_level'], '=', $trust_level)->where(['id'], '=', $user_id)->run(); 
+         return true;
     }
     
 }

@@ -21,7 +21,7 @@
                     <br />
                 </div>
                 <div class="boxline">
-                    <label for="post_content">Длинное<sup class="red">*</sup></label>
+                    <label for="post_content"><?= lang('Long'); ?><sup class="red">*</sup></label>
                     <input class="add"  type="text" name="space_short_text" value="">
                     <div class="box_h">Длинное название от 20 - 250 <?= lang('characters'); ?></div>
                     <br />
@@ -32,7 +32,7 @@
                     <input type="radio" name="permit" value="1"> <?= lang('Just me'); ?>
                 </div>  
                 <div class="boxline"> 
-                    <label for="post_content">Показывать</label>
+                    <label for="post_content"><?= lang('Show'); ?></label>
                     <input type="radio" name="feed" checked value="0"> <?= lang('Yes'); ?>
                     <input type="radio" name="feed" value="1" > <?= lang('No'); ?>
                     <div class="box_h">Если нет, то посты не будут видны в ленте (на главной)</b></div>

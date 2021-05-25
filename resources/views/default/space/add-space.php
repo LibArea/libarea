@@ -26,7 +26,7 @@
                     <br />
                 </div> 
                 <div class="boxline"> 
-                    <label for="post_content">Показывать</label>
+                    <label for="post_content"><?= lang('Show'); ?></label>
                     <input type="radio" name="feed" checked value="0"> <?= lang('Yes'); ?>
                     <input type="radio" name="feed" value="1" > <?= lang('No'); ?>
                     <div class="box_h">Если нет, то посты не будут видны в ленте (на главной)</b></div>

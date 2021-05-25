@@ -32,12 +32,12 @@
                     <br />
                 </div>  
                 <div class="boxline">
-                    <label for="post_title">Название<sup class="red">*</sup></label>
+                    <label for="post_title"><?= lang('Title'); ?><sup class="red">*</sup></label>
                     <input class="add" type="text" value="<?= $space['space_name']; ?>" name="space_name" />
                     <div class="box_h">Короткое от 4 - 18 <?= lang('characters'); ?></div>
                 </div>
                 <div class="boxline">
-                    <label for="post_content">Длинное<sup class="red">*</sup></label>
+                    <label for="post_content"><?= lang('Long'); ?><sup class="red">*</sup></label>
                     <input class="add"  type="text" name="space_short_text" value="<?= $space['space_short_text']; ?>">
                     <div class="box_h">Длинное название от 20 - 250 <?= lang('characters'); ?></div>
                     <br />
@@ -50,7 +50,7 @@
                     <br />
                 </div>  
                 <div class="boxline"> 
-                    <label for="post_content">Показывать<sup class="red">*</sup></label>
+                    <label for="post_content"><?= lang('Show'); ?><sup class="red">*</sup></label>
                     <input type="radio" name="feed" <?php if($space['space_feed'] == 0) { ?>checked<?php } ?> value="0"> <?= lang('Yes'); ?>
                     <input type="radio" name="feed" <?php if($space['space_feed'] == 1) { ?>checked<?php } ?> value="1" > <?= lang('No'); ?>
                     <div class="box_h">Если нет, то посты не будут видны в ленте (на главной)</b></div>
