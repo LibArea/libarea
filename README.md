@@ -18,6 +18,7 @@ https://loriup.ru/
 
 ### Тестирование
 
+*   Требуется: php 7*+, HTTPS 
 *   Корневая папка проекта: public (настройте сервер)
 *   Залейте: database/dev.sql
 *   Пропишите настройки: database/dbase.config.php
