@@ -106,7 +106,6 @@ class PostModel extends \MainModel
         return $query->getSelectOne();
     }   
     
-    
     // Просмотры  
     public static function postHits($post_id)
     {

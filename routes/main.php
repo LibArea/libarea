@@ -171,3 +171,5 @@ Route::get('/domain/{domain}')->controller('SearchController@domain')->where(['d
 Route::get('/{page?}')->controller('PostController', ['feed'])->where(['page' => '[0-9]+']);
 Route::get('/top/{page?}')->controller('PostController', ['top'])->where(['page' => '[0-9]+']);
 Route::get('/comments/{page?}')->controller('CommentController')->where(['page' => '[0-9]+']);
+
+Route::get('/sitemap.xml')->controller('SitemapController');

@@ -15,12 +15,8 @@
                         <a class="u-url" href="/post/<?= $fav['post_id']; ?>/<?= $fav['post_slug']; ?>">
                             <h3 class="title"><?= $fav['post_title']; ?></h3>
                         </a>
-                        
-                        <div class="space-color space_<?= $fav['space_color'] ?>"></div>
-                        <a class="space-u" href="/s/<?= $fav['space_slug']; ?>" title="<?= $fav['space_name']; ?>">
-                            <?= $fav['space_name']; ?>
-                        </a>
-                        <div class="footer">
+
+                        <div class="post-footer lowercase">
                             <img class="ava" src="/uploads/users/avatars/small/<?= $fav['avatar']; ?>">
                             <span class="user"> 
                                 <a href="/u/<?= $fav['login']; ?>"><?= $fav['login']; ?></a> 
@@ -28,6 +24,10 @@
                             <span class="date"> 
                                 <?= $fav['date']; ?>
                             </span>
+                        <span class="otst"> &#183; </span> 
+                        <a class="u-url" href="/s/<?= $fav['space_slug']; ?>" title="<?= $fav['space_name']; ?>">
+                            <?= $fav['space_name']; ?>
+                        </a> 
                             <?php if($fav['post_answers_num'] !=0) { ?> 
                                 <span class="otst"> | </span>
                                 <a href="/post/<?= $fav['post_id']; ?>/<?= $fav['post_slug']; ?>">    
@@ -36,6 +36,7 @@
                             <?php } ?>
                             <?php if($uid['id'] > 0) { ?>
                                 <?php if($uid['id'] == $fav['favorite_uid']) { ?>
+                                    <span class="otst"> &#183; </span> 
                                     <span class="user-post-fav right" data-post="<?= $fav['post_id']; ?>">
                                          <span class="mu_favorite"><?= lang('Remove'); ?></span>
                                     </span>  

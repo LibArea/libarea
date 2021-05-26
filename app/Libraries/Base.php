@@ -390,7 +390,7 @@ class Base
                     // Подпись и аватар в подвале sitename
                     "footer" => [
                         "text" => Config::get(Config::PARAM_NAME),
-                        "icon_url" => Config::get(Config::PARAM_ICON_URL)
+                        "icon_url" => Config::get(Config::PARAM_ICON_URL),
                     ],
                 ]
             ]
@@ -426,20 +426,18 @@ class Base
         Request::getHead()->addMeta('og:site_name', Config::get(Config::PARAM_HOME_TITLE));
        
         // Статья, профиль участника и весь остальной сайт
-        if($other) {
-            if($other['img']) {
-                Request::getHead()->addMeta('og:image', $other['img']);
-                Request::getHead()->addMeta('og:image:type', 'image/webp');
-            }
-            if (!empty($other['type']) == 'article') {
-                Request::getHead()->addMeta('og:type', 'article');
-                Request::getHead()->addMeta('og:url', Config::get(Config::PARAM_URL) . $other['url']);
-                Request::getHead()->addMeta('article:published_time', $other['post_date']);
-            } elseif (!empty($other['type']) == 'profile') {
-                Request::getHead()->addMeta('og:type', 'profile');
-            } else {
-                Request::getHead()->addMeta('og:type', 'website');
-            }
+        if(!empty($other['img'])) {
+            Request::getHead()->addMeta('og:image', $other['img']);
+            Request::getHead()->addMeta('og:image:type', 'image/webp');
+        }
+        if (!empty($other['type']) == 'article') {
+            Request::getHead()->addMeta('og:type', 'article');
+            Request::getHead()->addMeta('og:url', Config::get(Config::PARAM_URL) . $other['url']);
+            Request::getHead()->addMeta('article:published_time', $other['post_date']);
+        } elseif (!empty($other['type']) == 'profile') {
+            Request::getHead()->addMeta('og:type', 'profile');
+        } else {
+            Request::getHead()->addMeta('og:type', 'website');
         }
        
     }

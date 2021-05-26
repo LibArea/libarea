@@ -52,7 +52,7 @@ class PostController extends \MainController
         }
 
         if($page > 1) { 
-            $num = ' — ' . lang('Page') . ' ' . $page;
+            $num = ' | ' . lang('Page') . ' ' . $page;
         } else {
             $num = '';
         }
@@ -652,13 +652,18 @@ class PostController extends \MainController
     // Размещение своего поста у себя в профиле
     public function addPostProf()
     {
+        $uid     = Base::getUid();
         $post_id = \Request::getPostInt('post_id');
         
         // Получим пост
         $post = PostModel::postId($post_id); 
         
+        if(!$post){
+            redirect('/');
+        }
+        
         // Это делать может только может только автор
-        if ($post['post_user_id'] != $_SESSION['account']['user_id']) {
+        if ($post['post_user_id'] != $uid['id']) {
             return false;
         }
         
@@ -667,7 +672,7 @@ class PostController extends \MainController
             return false;
         }
 
-        PostModel::addPostProfile($post_id, $_SESSION['account']['user_id']);
+        PostModel::addPostProfile($post_id, $uid['id']);
        
         return true;
     }
@@ -675,6 +680,7 @@ class PostController extends \MainController
     // Помещаем пост в закладки
     public function addPostFavorite()
     {
+        $uid     = Base::getUid();
         $post_id = \Request::getPostInt('post_id');
         $post    = PostModel::postId($post_id); 
         
@@ -682,7 +688,7 @@ class PostController extends \MainController
             redirect('/');
         }
         
-        PostModel::setPostFavorite($post_id, $_SESSION['account']['user_id']);
+        PostModel::setPostFavorite($post_id, $uid['id']);
        
         return true;
     }
@@ -691,8 +697,8 @@ class PostController extends \MainController
     public function deletePost()
     {
         // Доступ только персоналу
-        $account = \Request::getSession('account');
-        if ($account['trust_level'] != 5) {
+        $uid = Base::getUid();
+        if ($uid['trust_level'] != 5) {
             return false;
         }
         

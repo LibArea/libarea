@@ -109,22 +109,21 @@
                     <a class="u-url" href="/post/<?= $onepost['post_id']; ?>/<?= $onepost['post_slug']; ?>">
                         <h2 class="title"><?= $onepost['post_title']; ?></h2>
                     </a>
-                    
-                    <a class="space-u" href="/s/<?= $onepost['space_slug']; ?>" title="<?= $onepost['space_name']; ?>">
-                        <?= $onepost['space_name']; ?>
-                    </a>
-                    
-                    <div class="post-footer"> 
+
+                    <div class="post-footer lowercase"> 
                         <img class="ava" alt="<?= $user['login']; ?>" src="/uploads/users/avatars/small/<?= $user['avatar']; ?>">
                         <span class="user"> 
                             <a href="/u/<?= $user['login']; ?>">
                                 <?= $user['login']; ?>
                             </a> 
                         </span>
-   
                         <span class="date"> 
                            <?= $onepost['post_date'] ?>
                         </span>
+                        <span class="otst"> &#183; </span> 
+                        <a class="u-url" href="/s/<?= $onepost['space_slug']; ?>" title="<?= $onepost['space_name']; ?>">
+                            <?= $onepost['space_name']; ?>
+                        </a> 
                         <?php if($onepost['post_answers_num'] !=0) { ?> 
                             <span class="otst"> | </span>
                             <a class="u-url" href="/post/<?= $onepost['post_id']; ?>/<?= $onepost['post_slug']; ?>">
