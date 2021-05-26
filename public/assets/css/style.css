@@ -16,16 +16,17 @@ body {
 }
 
 :root {
-  --color-gray-1: #5b7083;
-  --color-gray-2: #444;
-  --color-white: #fff;
+  --primary: #222;
+  --secondary: #fff;
+  --tertiary: #5b7083;
+  --quaternary: #e45735;
 }
 
 body {
   line-height: 1.46;
   font-family: Helvetica Neue, Arial, sans-serif;
   font-size: 0.95em;
-  color: var(--color-gray-2);
+  color: var(--primary);
   min-height: 100%;
 }
 
@@ -108,21 +109,56 @@ main.w-50 {
   max-width: 700px;
 }
 
-.banner {
-  padding: 11px 15px 15px 15px;
-  background: #f0f0df;
-  color: var(--color-gray-1);
-  font-size: 15px;
-  border-radius: 2px;
+#h-200 {
+  height: 200px;
 }
 
-.banner h1 {
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  font-size: 16px;
-  color: #333;
+#h-100 {
+  height: 100px;
+}
+
+h1 {
   font-weight: 400;
-  margin: 0 0 5px 0;
+  font-size: 1.2rem;
+}
+
+h1 span {
+  vertical-align: middle;
+}
+
+h3.lo {
+  margin: 0;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 1px;
+  font-weight: 300;
+}
+
+.max-width {
+  max-width: 780px;
+}
+
+.clear {
+  clear: both;
+}
+
+.right {
+  float: right;
+}
+
+code {
+  color: #b63e56;
+  background: #f5f2f0;
+  padding: 1px 4px;
+  font-size: 1.1em;
+}
+
+pre code {
+  background: #272822;
+  color: var(--secondary);
+  padding: 2px 14px 2px 10px;
+  border-radius: 3px;
+  display: inline-block;
 }
 
 a.add-post {
@@ -146,7 +182,7 @@ a.add-post {
 .dropdown-menu {
   display: none;
   position: absolute;
-  background-color: var(--color-white);
+  background-color: var(--secondary);
   min-width: 150px;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   z-index: 21;
@@ -161,7 +197,7 @@ a.add-post {
 }
 
 .dropdown-menu a {
-  color: var(--color-gray-1);
+  color: var(--tertiary);
   display: block;
   padding: 8px 9px 1px 6px;
   font-size: 15px;
@@ -169,7 +205,7 @@ a.add-post {
 
 .dropdown-menu a span.ti-angle-down:hover,
 .dropdown-menu a:hover {
-  color: var(--color-gray-2);
+  color: var(--primary);
 }
 
 .nick .ava {
@@ -181,6 +217,7 @@ a.add-post {
 .nick span {
   font-size: 13px;
   margin-right: 5px;
+  color: var(--tertiary);
 }
 
 a.add-post:hover {
@@ -190,56 +227,29 @@ a.add-post:hover {
 
 a.link {
   font-size: 13px;
-  color: var(--color-gray-2);
+  color: var(--tertiary);
   margin-left: 15px;
 }
 
-h3.lo {
-  margin: 0;
-  text-transform: uppercase;
-  font-size: 12px;
+a.link:hover {
+  color: var(--primary);
+}
+
+.banner {
+  padding: 11px 15px 15px 15px;
+  background: #f0f0df;
+  color: var(--tertiary);
+  font-size: 15px;
+  border-radius: 2px;
+}
+
+.banner h1 {
   letter-spacing: 1px;
-  font-weight: 300;
-}
-
-.max-width {
-  max-width: 780px;
-}
-
-.clear {
-  clear: both;
-}
-
-.right {
-  float: right;
-}
-
-h1 {
+  text-transform: uppercase;
+  font-size: 16px;
+  color: #333;
   font-weight: 400;
-  font-size: 1.2rem;
-}
-
-#h-200 {
-  height: 200px;
-}
-
-#h-100 {
-  height: 100px;
-}
-
-code {
-  color: #b63e56;
-  background: #f5f2f0;
-  padding: 1px 4px;
-  font-size: 1.1em;
-}
-
-pre code {
-  background: #272822;
-  color: var(--color-white);
-  padding: 2px 14px 2px 10px;
-  border-radius: 3px;
-  display: inline-block;
+  margin: 0 0 5px 0;
 }
 
 /* Хлебные крошки */
@@ -256,18 +266,18 @@ ul.breadcrumb {
 }
 
 .breadcrumb .breadcrumb-item {
-  color: var(--color-gray-1);
+  color: var(--tertiary);
   display: inline-block;
   margin: 0;
   padding: 0.2rem 0;
 }
 
 .breadcrumb .breadcrumb-item:not(:last-child) a {
-  color: var(--color-gray-1);
+  color: var(--tertiary);
 }
 
 .breadcrumb .breadcrumb-item:not(:first-child)::before {
-  color: var(--color-gray-1);
+  color: var(--tertiary);
   content: "/";
   padding-right: 0.4rem;
 }
@@ -296,7 +306,7 @@ a.logo {
 }
 
 a.logo span {
-  color: #e7672e;
+  color: var(--quaternary);
 }
 
 a.logo:hover {
@@ -333,11 +343,11 @@ a.home {
 .sb-date {
   margin-left: 20px;
   font-size: 12px;
-  color: var(--color-gray-1);
+  color: var(--tertiary);
 }
 
 .sb-telo a {
-  color: var(--color-gray-2);
+  color: var(--primary);
   font-size: 14px;
   margin-left: 20px;
   display: block;
@@ -350,7 +360,7 @@ a.home {
 
 .sb-telo a:hover,
 .recommend-telo a:hover {
-  color: var(--color-gray-1);
+  color: var(--tertiary);
 }
 
 .nav {
@@ -362,14 +372,18 @@ a.home {
   vertical-align: middle;
 }
 
+.header-right i.icon.arrow-down {
+  color: var(--tertiary);
+}
+
 .notif i.icon.bell,
 .dropdown-menu i.icon.shield {
-  color: #e7672e;
+  color: var(--quaternary);
 }
 
 i.icon.info,
 .no-answer i.icon.lock {
-  color: #339900;
+  color: #390;
 }
 
 .header-left,
@@ -386,7 +400,7 @@ a.register {
 }
 
 .mlogout {
-  color: var(--color-gray-1);
+  color: var(--tertiary);
 }
 
 hr {
@@ -406,7 +420,7 @@ hr {
 
 .pagination a {
   padding: 0 3px;
-  color: var(--color-gray-1);
+  color: var(--tertiary);
   font-size: 15px;
 }
 
@@ -460,7 +474,7 @@ input[type="test"]:hover,
 input[type="password"]:hover,
 input[type="email"]:hover,
 input[type="submit_url"]:hover {
-  color: var(--color-gray-2);
+  color: var(--primary);
   text-decoration: none;
   background-color: #e6e6e6;
 }
@@ -527,7 +541,7 @@ input.add-url {
 
 .box_h {
   font-size: 12px;
-  color: var(--color-gray-1);
+  color: var(--tertiary);
 }
 
 .box label,
@@ -594,7 +608,7 @@ aside .stat {
 }
 
 aside a.my {
-  color: var(--color-gray-1);
+  color: var(--tertiary);
   display: block;
   font-size: 16px;
   margin-bottom: 10px;
@@ -716,7 +730,7 @@ aside a.my.active {
 /* Урезанный пост на главной */
 .showpost {
   font-size: 14px;
-  color: var(--color-gray-1);
+  color: var(--tertiary);
   max-width: 600px;
   margin: 0 0 5px 0;
   display: block;
@@ -748,7 +762,7 @@ aside a.my.active {
 }
 
 .fuul-head a {
-  color: var(--color-gray-1);
+  color: var(--tertiary);
 }
 
 .fuul-head .ava {
@@ -822,7 +836,7 @@ img.thumb {
   padding: 1px 15px;
   max-width: 700px;
   font-size: 13px;
-  color: var(--color-gray-1);
+  color: var(--tertiary);
 }
 
 .voters-fav {
@@ -857,7 +871,7 @@ img.thumb {
 }
 
 #stHeader.sticky a {
-  color: #e7672e;
+  color: var(--quaternary);
   margin-left: 6px;
 }
 
@@ -866,7 +880,7 @@ img.thumb {
 }
 
 .date {
-  color: var(--color-gray-1);
+  color: var(--tertiary);
   text-transform: lowercase;
   margin: 0 0 0 5px;
 }
@@ -880,7 +894,7 @@ img.thumb {
 }
 
 .post-footer {
-  color: var(--color-gray-1);
+  color: var(--tertiary);
   padding: 4px 12px 4px 12px;
   border: solid 1px #ddd;
   display: table;
@@ -890,16 +904,18 @@ img.thumb {
 }
 
 .post-footer-full {
-  color: var(--color-gray-1);
+  color: var(--tertiary);
   display: inline-block;
   font-size: 13px;
 }
 
-.post-footer a, .post-footer-full a {
-  color: var(--color-gray-1);
+.post-footer a,
+.post-footer-full a {
+  color: var(--tertiary);
 }
 
-.post-footer a:hover, .post-footer-full a:hover {
+.post-footer a:hover,
+.post-footer-full a:hover {
   color: #333;
 }
 
@@ -915,7 +931,7 @@ img.thumb {
 
 .search-info,
 .search-info a {
-  color: var(--color-gray-1);
+  color: var(--tertiary);
   text-transform: lowercase;
   font-size: 13px;
 }
@@ -928,10 +944,6 @@ img.thumb {
 
 .no-md p {
   margin: 2px 0;
-}
-
-h1 span {
-  vertical-align: middle;
 }
 
 .fl {
@@ -955,7 +967,7 @@ h1 span {
   text-overflow: ellipsis;
   position: relative;
   font-size: 13px;
-  color: var(--color-gray-1);
+  color: var(--tertiary);
 }
 
 .bar-space-telo:hover {
@@ -976,7 +988,7 @@ a.space-u,
 .space a.space-u,
 .post_url {
   font-size: 10pt;
-  color: var(--color-gray-1);
+  color: var(--tertiary);
   font-style: italic;
   vertical-align: middle;
 }
@@ -984,11 +996,12 @@ a.space-u,
 a.space-u:hover,
 .space a.space-u:hover,
 .post_url:hover {
-  color: var(--color-gray-2);
+  color: var(--primary);
 }
 
 .bar-title {
   margin-top: 15px;
+  color: #646464;
 }
 
 /* Ответы */
@@ -1185,7 +1198,7 @@ ol.comment-telo {
 .delansw,
 .editansw,
 .addcomm_re {
-  color: var(--color-gray-1);
+  color: var(--tertiary);
   font-size: 9.5pt;
 }
 
@@ -1256,7 +1269,7 @@ ol.comment-telo {
 /* ЛС */
 .red,
 .lo {
-  color: #e7672e;
+  color: var(--quaternary);
 }
 
 .qa {
@@ -1313,7 +1326,7 @@ div.voters .asnw-up-id {
 .voters .comm-up-id:hover,
 .voters .post-up-id:hover,
 .voters .answ-up-id:hover {
-  border-color: transparent transparent #e7672e transparent;
+  border-color: transparent transparent var(--quaternary) transparent;
 }
 
 .voters .score {
@@ -1328,8 +1341,8 @@ div.voters .asnw-up-id {
 .voters.active .answ-up-id,
 .voters.active .post-up-id,
 .voters.active .score {
-  border-color: transparent transparent #e7672e transparent;
-  color: #e7672e;
+  border-color: transparent transparent var(--quaternary) transparent;
+  color: var(--quaternary);
   border-bottom-width: 11px;
 }
 
@@ -1385,7 +1398,7 @@ div.voters .asnw-up-id {
 .menu-info a {
   display: block;
   font-size: 15px;
-  color: var(--color-gray-1);
+  color: var(--tertiary);
   margin-bottom: 8px;
 }
 
@@ -1566,14 +1579,9 @@ i.github {
   header { margin-left: 0; }
   .no-pc { display: block; }
   .column { width: 19%; }
-  input.add, 
+  input.add,
   input.add-url { width: 94%; }
-  main  { width: 99%; }
-  /* Всплывающее меню */
-  main.w-75 {
-    width: 100%;
-    max-width: 100%;
-  }
+  main { width: 99%; }
   .text-oth { width: 46%; }
   .text-info { width: 40%; }
 }
@@ -1585,7 +1593,7 @@ i.github {
 /* dark */
 .dark {
   background: #333;
-  color: var(--color-white);
+  color: var(--secondary);
 }
 
 .dark #stHeader.sticky,

@@ -239,7 +239,7 @@ class PostController extends \MainController
     public function addPost() 
     {
         // Будем проверять ограничение на частоту 
-        // print_r(PostModel::getPostSpeed(1));
+        // PostModel::getPostSpeed(1);
         
         $uid  = Base::getUid();
         

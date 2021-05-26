@@ -4,7 +4,7 @@ if(hamburger){
     let menu = document.querySelector('.dropdown-menu');
     const toggleMenu = () => {
         menu.classList.toggle('show');
-    }
+    };
     hamburger.addEventListener('click', e => {
         e.stopPropagation();
         toggleMenu();

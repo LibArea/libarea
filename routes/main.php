@@ -116,7 +116,6 @@ Route::endGroup();
 Route::before('Authorization@yesAuth')->getGroup();
 	// Регистрация и авторизация (инвайты)
     Route::get('/invite')->controller('UserController@invitePage');
-    Route::type('post')->protect()->get('/invite')->controller('UserController@inviteHandler');
 	Route::get('/register')->controller('AuthController@registerPage');
     Route::type('get')->get('/register/invite/{code}')->controller('AuthController@registerPageInvite')->where(['code' => '[a-z0-9-]+']);
     Route::type('get')->get('/recover')->controller('AuthController@recoverPage');  

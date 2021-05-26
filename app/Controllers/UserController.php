@@ -429,14 +429,6 @@ class UserController extends \MainController
         return view(PR_VIEW_DIR . '/user/invite', ['data' => $data, 'uid' => $uid]);    
     }
     
-    // Отправка запроса инвайта
-    public function inviteHandler() 
-    {
-        $invite = \Request::getPost('invite');
-        print_r($invite);
-        exit;
-    }
-    
     // Страница инвайтов пользователя
     function invitationPage() 
     {
