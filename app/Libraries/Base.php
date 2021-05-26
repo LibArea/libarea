@@ -40,10 +40,16 @@ class Base
             
         } else {
             UserModel::checkCookie();
-            
             $uid['id']          = 0;
             $uid['trust_level'] = null;
+            
+            // Если сайт полностью приватен
+            if(Config::get(Config::PARAM_PRIVATE) == 1) { 
+               include HLEB_GLOBAL_DIRECTORY . '/app/Optional/login.php';
+               hl_preliminary_exit();
+            }
         }
+
         $uid['uri']     = Request::getUri();
         $uid['msg']     = self::getMsg();
         return $uid;

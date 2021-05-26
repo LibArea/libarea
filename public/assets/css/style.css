@@ -138,6 +138,10 @@ h3.lo {
   max-width: 780px;
 }
 
+.private {
+  max-width: 480px;  
+}
+
 .clear {
   clear: both;
 }
@@ -317,7 +321,6 @@ i.icon {
   margin-right: 10px;
 }
 
-a.logo i.icon,
 .sticky i.icon {
   margin-right: 0;
 }
@@ -709,7 +712,7 @@ aside a.my.active {
 }
 
 .alert-success {
-  color: #339900;
+  color: #390;
 }
 
 .errors > ul > li {
@@ -1273,7 +1276,7 @@ ol.comment-telo {
 }
 
 .qa {
-  color: #339900;
+  color: #390;
 }
 
 .msg-telo {
@@ -1642,8 +1645,8 @@ i.github {
   background-color: #222;
 }
 
-.dark .comments_subtree:target, 
-.dark .comments_subtree.edit, 
+.dark .comments_subtree:target,
+.dark .comments_subtree.edit,
 .dark .dropdown-menu,
 .dark footer {
   background-color: #222;

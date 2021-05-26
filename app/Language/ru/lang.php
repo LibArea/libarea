@@ -233,7 +233,9 @@ return [
     'tags-edit-yes'         => 'Метка успешно изменена',
     'Too short'             => 'Слишком короткий поисковый запрос',
     'Too long'              => 'Слишком длинный поисковый запрос',
-    'Empty request'         => 'Пустой поисковый запрос',    
+    'Empty request'         => 'Пустой поисковый запрос',   
+    'Enter'                 => 'Введите', 
+    'Enter your password'   => 'Введите пароль',
  
     'No account available'  => 'Нет учетной записи',
     'Description is formed' => 'Описание формируется',

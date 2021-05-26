@@ -15,6 +15,8 @@ class Config
     const PARAM_MODE            = "parameters.mode";
     const PARAM_INVITE          = "parameters.invite";
     
+    const PARAM_PRIVATE         = "parameters.private";
+    
     const PARAM_SEARCH          = "parameters.search";
 
     const PARAM_SITE_OFF        = "parameters.siteoff";

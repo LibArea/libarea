@@ -3,11 +3,11 @@
         <?php csrf_field(); ?>           
         <div class="login-nav">
             <label for="email">Email</label>
-            <input type="text" placeholder="Введите  Email" name="email" id="email">
+            <input type="text" placeholder="<?= lang('Enter'); ?>  e-mail" name="email" id="email">
         </div>
         <div class="login-nav">
             <label for="password"><?= lang('Password'); ?></label>
-            <input type="password" placeholder="Введите пароль" name="password" id="password">
+            <input type="password" placeholder="<?= lang('Enter your password'); ?>" name="password" id="password">
         </div>
         <div class="login-nav">
             <input type="checkbox" id="rememberme" name="rememberme" value="1">
