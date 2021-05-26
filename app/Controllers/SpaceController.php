@@ -27,7 +27,7 @@ class SpaceController extends \MainController
         
         $data = [
             'h1'            => lang('All space'),
-            'canonical'     => '/space', 
+            'canonical'     => Config::get(Config::PARAM_URL) . '/space', 
         ];
 
         Request::getHead()->addStyles('/assets/css/space.css');
@@ -104,7 +104,7 @@ class SpaceController extends \MainController
 
         $data = [
             'h1'            => $space['space_name'],
-            'canonical'     => '/s/' . $space['space_slug'], 
+            'canonical'     => Config::get(Config::PARAM_URL) . '/s/' . $space['space_slug'], 
         ];
 
         $meta_title = $space['space_name'] . ' — ' . $s_title;

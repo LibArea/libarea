@@ -7,7 +7,7 @@
      
         <?php getRequestHead()->output(); ?>
  
-        <?php if (isset($post['post_is_delete'])) { ?>  
+        <?php if (!empty($post['post_is_delete']) == 1) { ?>  
             <meta name="robots" content="noindex" />
         <?php } ?>
 

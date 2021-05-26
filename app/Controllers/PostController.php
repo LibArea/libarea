@@ -59,14 +59,17 @@ class PostController extends \MainController
 
         if($type == 'feed') {
             $meta_title = Config::get(Config::PARAM_HOME_TITLE) . $num;
-            $meta_desc  = lang('home-desc') . $num;
+            $meta_desc  = Config::get(Config::PARAM_META_DESC) . $num;
+            $canonical  = Config::get(Config::PARAM_URL);
         } else {
             $meta_title = lang('TOP') .'. '. Config::get(Config::PARAM_HOME_TITLE) . $num;
             $meta_desc  = lang('top-desc') . $num;   
+            $canonical  = Config::get(Config::PARAM_URL) . '/top';
         }
 
         $other = [
             'img' => Config::get(Config::PARAM_URL) . '/assets/images/areadev.webp',
+            'segment' => 'home',
         ];
    
         // title, description
@@ -76,7 +79,7 @@ class PostController extends \MainController
             'latest_answers'    => $result_comm,
             'pagesCount'        => $pagesCount,
             'pNum'              => $page,
-            'canonical'         => '/',
+            'canonical'         => $canonical,
         ];
 
         return view(PR_VIEW_DIR . '/home', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'space_bar' => $space_signed_bar, 'type' => $type]);

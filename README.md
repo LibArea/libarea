@@ -14,7 +14,7 @@ https://github.com/phphleb/hleb
 
 ![AreaDev](https://raw.githubusercontent.com/Toxu-ru/AreaDev/main/public/assets/images/areadev.jpg)
 
-https://my.areadev.ru
+https://loriup.ru/
 
 ### Тестирование
 

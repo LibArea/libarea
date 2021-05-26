@@ -1,5 +1,11 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 <main class="telo">
+    <?php if(!$uid['id']) { ?>
+        <div class="banner">
+            <h1><?= Lori\Config::get(Lori\Config::PARAM_BANNER_TITLE); ?></h1>
+            <span><?= Lori\Config::get(Lori\Config::PARAM_BANNER_DESC); ?>...</span>
+        </div>
+    <?php } ?>
     <ul class="nav-tabs">
         <?php if($type == 'feed') { ?>
             <li class="active">
@@ -77,7 +83,7 @@
                     
                     <div class="post-details">
                         <?php if($post['post_thumb_img']) { ?> 
-                            <img class="thumb" alt="<?= $post['post_url']; ?>" src="/uploads/posts/thumbnails/<?= $post['post_thumb_img']; ?>">
+                            <img class="thumb" alt="<?= $post['post_title']; ?>" src="/uploads/posts/thumbnails/<?= $post['post_thumb_img']; ?>">
                         <?php } ?>
                     
                         <div class="show_add_<?= $post['post_id']; ?>">

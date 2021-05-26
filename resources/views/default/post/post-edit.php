@@ -31,7 +31,7 @@
             <?php } ?>
 
             <?php if($post['post_thumb_img']) { ?> 
-                <img class="thumb" alt="<?= $post['post_url']; ?>" src="/uploads/posts/thumbnails/<?= $post['post_thumb_img']; ?>">
+                <img class="thumb" alt="<?= $post['post_title']; ?>" src="/uploads/posts/thumbnails/<?= $post['post_thumb_img']; ?>">
             <?php } ?> 
              
             <div class="boxline max-width post">    

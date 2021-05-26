@@ -19,7 +19,7 @@ class UserController extends \MainController
         
         $data = [
             'h1'        => lang('Users'),
-            'canonical' => '/users',
+            'canonical' => Config::get(Config::PARAM_URL) . '/users',
         ];
 
         Request::getHead()->addStyles('/assets/css/users.css'); 

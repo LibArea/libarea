@@ -40,7 +40,6 @@
     Мы в Discord: <a rel="nofollow noreferrer" target="_blank" href="https://discord.gg/dw47aNx5nU">https://discord.gg/dw47aNx5nU</a>
     <i class="icon link"></i>
     <br><br> 
-    <i>Читать далее:</i> <a href="/info/about">О нас</a>
 </main>
 <?php include TEMPLATE_DIR . '/_block/info-page-menu.php'; ?>
 <?php include TEMPLATE_DIR . '/footer.php'; ?> 

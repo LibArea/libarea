@@ -1,2 +1,11 @@
 User-agent: *
-Disallow: /
+Disallow: /flow
+Disallow: /search
+Disallow: /comments
+Disallow: /top
+Disallow: /s/*/top*
+Disallow: /s/flud/*
+Disallow: /domain/*
+Disallow: /*/*/comments*
+Disallow: /*/*/posts*
+Disallow: /u/*/answers*

@@ -413,8 +413,14 @@ class Base
     // Meta- теги
     public static function Meta($meta_title, $meta_desc, $other)
     {
-        Request::getHead()->setTitle($meta_title .' | '. Config::get(Config::PARAM_NAME));
-        Request::getHead()->setDescription($meta_desc .' '. Config::get(Config::PARAM_HOME_TITLE));
+        if(!empty($other['segment']) == 'home') {
+            Request::getHead()->setTitle($meta_title);
+            Request::getHead()->setDescription($meta_desc);
+        } else {
+            Request::getHead()->setTitle($meta_title .' | '. Config::get(Config::PARAM_NAME));
+            Request::getHead()->setDescription($meta_desc .' '. Config::get(Config::PARAM_HOME_TITLE));
+        }
+
         Request::getHead()->addMeta('og:title', $meta_title);
         Request::getHead()->addMeta('og:description', $meta_desc);
         Request::getHead()->addMeta('og:site_name', Config::get(Config::PARAM_HOME_TITLE));

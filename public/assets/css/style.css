@@ -108,6 +108,23 @@ main.w-50 {
   max-width: 700px;
 }
 
+.banner {
+  padding: 11px 15px 15px 15px;
+  background: #f0f0df;
+  color: var(--color-gray-1);
+  font-size: 15px;
+  border-radius: 2px;
+}
+
+.banner h1 {
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 16px;
+  color: #333;
+  font-weight: 400;
+  margin: 0 0 5px 0;
+}
+
 a.add-post {
   background: #1ca1f3;
   border: 1px solid #1ca1f3;
@@ -1575,7 +1592,8 @@ i.github {
 .dark .no-answer,
 .dark .space-info,
 .dark .profile-box-telo,
-.dark .box.profile-telo .post-telo {
+.dark .box.profile-telo .post-telo,
+.dark .banner {
   border-bottom: 1px solid #222;
   background: #222;
   color: #fff;
@@ -1595,18 +1613,19 @@ i.github {
 
 .dark a:hover,
 .dark .login-nav label,
-.dark .p-head, 
+.dark .p-head,
 .dark .p-head-n,
 .dark h1.profile {
   color: #eee;
 }
 
-.dark blockquote, 
+.dark blockquote,
 .dark .menu-info {
   background-color: #555;
 }
 
-.dark .u-url .title {
+.dark .u-url .title,
+.dark .banner h1 {
   color: #fff;
 }
 

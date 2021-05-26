@@ -139,7 +139,7 @@
                     
                     <div class="post-details">
                         <?php if($post['post_thumb_img']) { ?> 
-                            <img class="thumb" alt="<?= $post['post_url']; ?>" src="/uploads/posts/thumbnails/<?= $post['post_thumb_img']; ?>">
+                            <img class="thumb" alt="<?= $post['post_title']; ?>" src="/uploads/posts/thumbnails/<?= $post['post_thumb_img']; ?>">
                         <?php } ?>
                     
                         <?= $post['post_content_preview']; ?>...
