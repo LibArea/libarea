@@ -86,9 +86,11 @@ h1.profile {
   display: table;
 }
 
-.box.profile-telo h4 {
-  font-weight: 300;
-  margin: 0 0 10px 4px;
+.box.profile-telo h2,
+.box.profile-telo h3 {
+  font-weight: 400;
+  font-size: 18px;
+  margin: 0 0 10px 0;
 }
 
 .profile-space {

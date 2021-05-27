@@ -29,7 +29,7 @@ class UserModel extends \MainModel
     // Получение информации по логину
     public static function getUserLogin($login)
     {
-        $query = XD::select(['id', 'login', 'name', 'email', 'avatar', 'cover_art', 'color',  'invitation_available', 'about', 'created_at', 'my_post'])
+        $query = XD::select(['id', 'login', 'name', 'email', 'avatar', 'cover_art', 'color',  'invitation_available', 'about', 'website', 'location', 'public_email', 'skype', 'twitter', 'telegram', 'vk', 'created_at', 'my_post'])
                 ->from(['users'])
                 ->where(['login'], '=', $login);
 
@@ -218,9 +218,17 @@ class UserModel extends \MainModel
     }
     
     // Редактирование профиля
-    public static function editProfile($login, $name, $about, $color)
+    public static function editProfile($login, $name, $color, $about, $website, $location, $public_email, $skype, $twitter, $telegram, $vk)
     {
-        XD::update(['users'])->set(['name'], '=', $name, ',', ['about'], '=', $about, ',', ['color'], '=', $color)->where(['login'], '=', $login)->run();
+        XD::update(['users'])->set(['name'], '=', $name, ',', ['color'], '=', $color, ',', 
+        ['about'], '=', $about, ',', 
+        ['website'], '=', $website, ',', 
+        ['location'], '=', $location, ',', 
+        ['public_email'], '=', $public_email, ',', 
+        ['skype'], '=', $skype, ',', 
+        ['twitter'], '=', $twitter, ',', 
+        ['telegram'], '=', $telegram, ',', 
+        ['vk'], '=', $vk)->where(['login'], '=', $login)->run();
  
         return true;
     }

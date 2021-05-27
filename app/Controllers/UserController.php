@@ -104,20 +104,63 @@ class UserController extends \MainController
     // Изменение профиля
     function settingEdit ()
     {
-        $uid    = Base::getUid();
-        $name   = \Request::getPost('name');
-        $about  = \Request::getPost('about');
-        $color  = \Request::getPost('color');
+        $uid            = Base::getUid();
+        $name           = \Request::getPost('name');
+        $about          = \Request::getPost('about');
+        $color          = \Request::getPost('color');
+        $website        = \Request::getPost('website');
+        $location       = \Request::getPost('location');
+        $public_email   = \Request::getPost('public_email');
+        $skype          = \Request::getPost('skype');
+        $twitter        = \Request::getPost('twitter');
+        $telegram       = \Request::getPost('telegram');
+        $vk             = \Request::getPost('vk');
+        
         
         if(!$color) {
            $color  = '#339900'; 
         }
 
+        // См. https://github.com/Respect/Validation
         $redirect = '/u/' . $uid['login'] . '/setting';
         Base::Limits($name, lang('Name'), '4', '11', $redirect);
-        Base::Limits($about, lang('About me'), '4', '320', $redirect);
 
-        UserModel::editProfile($uid['login'], $name, $about, $color);
+        if(!filter_var($public_email, FILTER_VALIDATE_EMAIL))
+        {
+            $public_email = '';
+        }
+
+        if (!preg_match('/^[a-zA-Z0-9]+$/u', $skype))
+        {
+            $skype = '';
+        }
+
+        if (!preg_match('/^[a-zA-Z0-9]+$/u', $twitter))
+        {
+            $skype = '';
+        }
+        
+        if (!preg_match('/^[a-zA-Z0-9]+$/u', $telegram))
+        {
+            $skype = '';
+        }
+        
+        if (!preg_match('/^[a-zA-Z0-9]+$/u', $vk))
+        {
+            $vk = '';
+        }
+        
+        $about          = empty($about) ? '' : $about;
+        $website        = empty($website) ? '' : $website;
+        $location       = empty($location) ? '' : $location;
+        $public_email   = empty($public_email) ? '' : $public_email;
+        $skype          = empty($skype) ? '' : $skype;
+        $twitter        = empty($twitter) ? '' : $twitter;
+        $telegram       = empty($telegram) ? '' : $telegram;
+        $vk             = empty($vk) ? '' : $vk;
+
+
+        UserModel::editProfile($uid['login'], $name, $color, $about, $website, $location, $public_email, $skype,$twitter, $telegram, $vk);
         
         Base::addMsg(lang('Changes saved'), 'success');
         redirect($redirect);

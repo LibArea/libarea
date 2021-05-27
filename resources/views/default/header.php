@@ -11,6 +11,10 @@
             <meta name="robots" content="noindex" />
         <?php } ?>
 
+        <?php if (!empty($user['is_deleted']) == 1) { ?>  
+            <meta name="robots" content="noindex" />
+        <?php } ?>
+
         <link rel="canonical" href="<?= $data['canonical']; ?>">
         
         <link rel="icon" href="/favicon.ico">

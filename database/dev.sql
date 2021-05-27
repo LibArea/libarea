@@ -1,4 +1,4 @@
--- phpMyAdmin SQL Dump
+-- phpMyAdmin SQL Dump 
 -- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
@@ -321,8 +321,16 @@ CREATE TABLE `users` (
   `cover_art` varchar(250) NOT NULL DEFAULT 'cover_art.jpeg',
   `color` varchar(12) NOT NULL DEFAULT '#f56400',
   `about` varchar(250) DEFAULT NULL,
+
+  `website` varchar(50) DEFAULT NULL,
+  `location` varchar(50) DEFAULT NULL,
+  `public_email` varchar(50) DEFAULT NULL,
+  `skype` varchar(50) DEFAULT NULL,
+  `twitter` varchar(50) DEFAULT NULL,
+  `telegram` varchar(50) DEFAULT NULL,
+  `vk` varchar(50) DEFAULT NULL,
+
   `rating` int(11) DEFAULT 0,
-  `status` varchar(250) DEFAULT NULL,
   `my_post` int(11) DEFAULT 0 COMMENT 'Пост выведенный в профиль',
   `ban_list` tinyint(1) DEFAULT 0,
   `hits_count` int(11) DEFAULT 0,
@@ -333,9 +341,9 @@ CREATE TABLE `users` (
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`id`, `login`, `name`, `email`, `password`, `activated`, `reg_ip`, `trust_level`, `created_at`, `updated_at`, `invitation_available`, `invitation_id`, `avatar`, `cover_art`, `color`, `about`, `rating`, `status`, `my_post`, `ban_list`, `hits_count`, `is_deleted`) VALUES
-(1, 'AdreS', 'Олег', 'ss@sdf.ru', '$2y$10$oR5VZ.zk7IN/og70gQq/f.0Sb.GQJ33VZHIES4pyIpU3W2vF6aiaW', 1, NULL, 5, '2021-03-08 21:37:04', '2021-03-08 21:37:04', 0, 0, 'img_1.jpg', 'cover_art.jpeg', '#f56400', 'Тестовый аккаунт', 0, NULL, 0, 0, 0, 0),
-(2, 'test', NULL, 'test@test.ru', '$2y$10$Iahcsh3ima0kGqgk6S/SSui5/ETU5bQueYROFhOsjUU/z1.xynR7W', 1, '127.0.0.1', 1, '2021-04-30 07:42:52', '2021-04-30 07:42:52', 0, 0, 'noavatar.png', 'cover_art.jpeg', '#339900', NULL, 0, NULL, 0, 0, 0, 0);
+INSERT INTO `users` (`id`, `login`, `name`, `email`, `password`, `activated`, `reg_ip`, `trust_level`, `created_at`, `updated_at`, `invitation_available`, `invitation_id`, `avatar`, `cover_art`, `color`, `about`, `website`, `location`, `public_email`, `skype`, `twitter`, `telegram`, `vk`,  `rating`, `my_post`, `ban_list`, `hits_count`, `is_deleted`) VALUES
+(1, 'AdreS', 'Олег', 'ss@sdf.ru', '$2y$10$oR5VZ.zk7IN/og70gQq/f.0Sb.GQJ33VZHIES4pyIpU3W2vF6aiaW', 1, NULL, 5, '2021-03-08 21:37:04', '2021-03-08 21:37:04', 0, 0, 'img_1.jpg', 'cover_art.jpeg', '#f56400', 'Тестовый аккаунт', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0),
+(2, 'test', NULL, 'test@test.ru', '$2y$10$Iahcsh3ima0kGqgk6S/SSui5/ETU5bQueYROFhOsjUU/z1.xynR7W', 1, '127.0.0.1', 1, '2021-04-30 07:42:52', '2021-04-30 07:42:52', 0, 0, 'noavatar.png', 'cover_art.jpeg', '#339900', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 

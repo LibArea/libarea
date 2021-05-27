@@ -88,21 +88,70 @@
     <div class="box profile-telo">
     
         <div class="profile-about">
-            <blockquote>
-                <?php if($user['about']) { ?>
-                <?= $user['about']; ?>
-                <?php } else { ?>
-                <?= lang('Riddle'); ?>...
-                <?php } ?>
-            </blockquote>
-        </div>
-        <div class="profile-about">
         <i class="icon calendar"></i>
         <span class="ts"><?= $user['created_at']; ?></span>  —  
             <?= $data['trust_level']['trust_name']; ?>
         </div>
+
+        <h2><?= lang('Contacts'); ?></h2>
+        <?php if($user['website']) { ?>    
+            <div class="boxline">
+                <label for="name"><?= lang('URL'); ?></label>
+                <a href="<?= $user['website']; ?>" rel="noopener nofollow ugc">
+                    <?= $user['website']; ?>
+                </a>
+            </div>
+        <?php } ?>
+        <?php if($user['location']) { ?> 
+            <div class="boxline">
+                <label for="name"><?= lang('City'); ?></label>
+                <?= $user['location']; ?>
+            </div>
+        <?php } ?>
+        <?php if($user['public_email']) { ?> 
+            <div class="boxline">
+                <label for="name"><?= lang('E-mail'); ?></label>
+                <a href="mailto:<?= $user['public_email']; ?>" rel="noopener nofollow ugc">
+                    <?= $user['public_email']; ?>
+                </a>
+            </div>
+        <?php } ?>
+        <?php if($user['skype']) { ?>
+            <div class="boxline">
+                <label for="name"><?= lang('Skype'); ?></label>
+                <a href="skype:<?= $user['skype']; ?>" rel="noopener nofollow ugc">
+                    <?= $user['skype']; ?>
+                </a>
+            </div>
+        <?php } ?>
+        <?php if($user['twitter']) { ?>
+            <div class="boxline">
+                <label for="name"><?= lang('Twitter'); ?></label>
+                <a href="https://twitter.com/<?= $user['twitter']; ?>" rel="noopener nofollow ugc">
+                    <?= $user['twitter']; ?>
+                </a>
+            </div>
+        <?php } ?>
+        <?php if($user['telegram']) { ?>
+            <div class="boxline">
+                <label for="name"><?= lang('Telegram'); ?></label>
+                <a href="tg://resolve?domain=<?= $user['telegram']; ?>" rel="noopener nofollow ugc">
+                    <?= $user['telegram']; ?>
+                </a>
+            </div>
+        <?php } ?>
+        <?php if($user['vk']) { ?>
+            <div class="boxline">
+                <label for="name"><?= lang('VK'); ?></label>
+                <a href="https://vk.com/<?= $user['telegram']; ?>" rel="noopener nofollow ugc">
+                    <?= $user['vk']; ?>
+                </a>
+            </div> 
+        <?php } ?>    
+
         <?php if($user['my_post'] != 0) { ?>
-            <h4><?= lang('Selected Post'); ?>:</h4>
+            <br>
+            <h3><?= lang('Selected Post'); ?></h3>
 
             <div class="post-telo">
                 <div class="post-body">
@@ -141,6 +190,16 @@
 <aside>
     <?php if ($uid['id'] == 0) { ?>
         <?php include TEMPLATE_DIR . '/_block/login.php'; ?>
-    <?php } ?>    
+    <?php } ?>  
+
+    <div class="profile-about">
+        <blockquote>
+            <?php if($user['about']) { ?>
+            <?= $user['about']; ?>
+            <?php } else { ?>
+            <?= lang('Riddle'); ?>...
+            <?php } ?>
+        </blockquote>
+    </div>
 </aside>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

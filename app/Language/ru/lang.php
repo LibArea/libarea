@@ -30,6 +30,8 @@ return [
     'Sign out'          => 'Выйти', 
     'Sign up'           => 'Регистрация',
     'Information'       => 'Данные',
+    'Contacts'          => 'Контакты',
+    'City'              => 'Город',
     'Remember me'       => 'Запомнить меня',
     'ban it'            => 'забанить', 
     'unban'             => 'разбанить',

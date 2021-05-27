@@ -341,7 +341,7 @@ class AdminController extends \MainController
         return view(PR_VIEW_DIR . '/admin/user-edit', ['data' => $data, 'uid' => $uid, 'user' => $user]);
     }
     
-    // Редактиоровать участника
+    // Редактировать участника
     public function userEdit()
     {
         $uid        = self::isAdmin();
@@ -357,12 +357,29 @@ class AdminController extends \MainController
         $name           = \Request::getPost('name');
         $about          = \Request::getPost('about');
         $trust_level    = \Request::getPostInt('trust_level');
+
+        $website        = \Request::getPost('website');
+        $location       = \Request::getPost('location');
+        $public_email   = \Request::getPost('public_email');
+        $skype          = \Request::getPost('skype');
+        $twitter        = \Request::getPost('twitter');
+        $telegram       = \Request::getPost('telegram');
+        $vk             = \Request::getPost('vk');
         
+        // См. https://github.com/Respect/Validation
         Base::Limits($login, lang('Login'), '4', '11', $redirect);
         Base::Limits($name, lang('Name'), '4', '11', $redirect);
-        Base::Limits($about, lang('About me'), '4', '320', $redirect);
         
-        AdminModel::setUserEdit($user_id, $email, $login, $name, $about, $trust_level);
+        $about          = empty($about) ? '' : $about;
+        $website        = empty($website) ? '' : $website;
+        $location       = empty($location) ? '' : $location;
+        $public_email   = empty($public_email) ? '' : $public_email;
+        $skype          = empty($skype) ? '' : $skype;
+        $twitter        = empty($twitter) ? '' : $twitter;
+        $telegram       = empty($telegram) ? '' : $telegram;
+        $vk             = empty($vk) ? '' : $vk;
+        
+        AdminModel::setUserEdit($user_id, $email, $login, $name, $about, $trust_level, $website, $location, $public_email, $skype, $twitter, $telegram, $vk);
         
         redirect($redirect);
     }

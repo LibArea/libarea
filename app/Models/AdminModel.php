@@ -184,13 +184,20 @@ class AdminModel extends \MainModel
     }
     
     // Редактирование участника
-    public static function setUserEdit($user_id, $email, $login, $name, $about, $trust_level)
+    public static function setUserEdit($user_id, $email, $login, $name, $about, $trust_level, $website, $location, $public_email, $skype, $twitter, $telegram, $vk)
     {
         XD::update(['users'])->set(['email'], '=', $email, ',', 
             ['login'], '=', $login, ',',
             ['name'], '=', $name, ',', 
             ['about'], '=', $about, ',', 
-            ['trust_level'], '=', $trust_level)->where(['id'], '=', $user_id)->run(); 
+            ['trust_level'], '=', $trust_level, ',',
+            ['website'], '=', $website, ',',
+            ['location'], '=', $location, ',',
+            ['public_email'], '=', $public_email, ',',
+            ['skype'], '=', $skype, ',',
+            ['twitter'], '=', $twitter, ',',
+            ['telegram'], '=', $telegram, ',',
+            ['vk'], '=', $vk)->where(['id'], '=', $user_id)->run(); 
          return true;
     }
     

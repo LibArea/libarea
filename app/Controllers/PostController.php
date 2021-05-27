@@ -21,7 +21,7 @@ class PostController extends \MainController
         $pg     = \Request::getInt('page'); 
         $page   = (!$pg) ? 1 : $pg;
         $uid    = Base::getUid();
- 
+
         $space_user  = SpaceModel::getSpaceUserSigned($uid['id']);
         
         $pagesCount = PostModel::postsFeedCount($space_user, $uid['id'], $type); 
