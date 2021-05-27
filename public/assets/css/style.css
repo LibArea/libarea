@@ -31,7 +31,7 @@ body {
 }
 
 a {
-  color: #1ca1f3;
+  color: #275ec2;
   cursor: pointer;
   text-decoration: none;
 }
@@ -39,7 +39,7 @@ a {
 a:hover,
 a:focus,
 a.active {
-  color: #3474f4;
+  color: var(--quaternary);
 }
 
 .center {
@@ -1573,12 +1573,10 @@ i.github {
   }
 }
 
-@media (max-width: 980px) {
-  main { width: calc(100% - 215px); }
-  img.img-post { width: 98%; }
-}
-
-@media (max-width: 880px) {
+@media (max-width: 810px) {
+  main,  
+  main.w-75,
+  img.img-post { width: 100%; }
   .no-mob,
   aside { display: none; }
   header { margin-left: 0; }
@@ -1586,7 +1584,6 @@ i.github {
   .column { width: 19%; }
   input.add,
   input.add-url { width: 94%; }
-  main { width: 99%; }
   .text-oth { width: 46%; }
   .text-info { width: 40%; }
 }
