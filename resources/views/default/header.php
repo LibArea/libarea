@@ -39,13 +39,13 @@
             <?php if(!$uid['id']) { ?> 
                 <?php if(!Lori\Config::get(Lori\Config::PARAM_INVITE)) { ?>
                     <div class="nav">
-                        <a class="register" title="<?= lang('Sign up'); ?>" href="/register">
+                        <a class="link register" title="<?= lang('Sign up'); ?>" href="/register">
                             <?= lang('Sign up'); ?>
                         </a>
                     </div>
                 <?php } ?>  
                 <div class="nav no-pc">
-                    <a class="login" title="<?= lang('Sign in'); ?>" href="/login"><?= lang('Sign in'); ?></a>
+                    <a class="link login" title="<?= lang('Sign in'); ?>" href="/login"><?= lang('Sign in'); ?></a>
                 </div> 
             <?php } else { ?> 
                 <div class="dropbtn nav">

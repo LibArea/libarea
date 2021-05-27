@@ -139,7 +139,7 @@ h3.lo {
 }
 
 .private {
-  max-width: 480px;  
+  max-width: 480px; 
 }
 
 .clear {
@@ -216,6 +216,7 @@ a.add-post {
   border-radius: 50%;
   vertical-align: middle;
   margin-right: 4px;
+  width: 18px;
 }
 
 .nick span {
@@ -373,10 +374,15 @@ a.home {
 
 .header-right i.icon {
   vertical-align: middle;
+  color: var(--tertiary);
 }
 
-.header-right i.icon.arrow-down {
-  color: var(--tertiary);
+.header-right i.icon.pencil {
+  color: var(--secondary);
+}
+
+.header-right a:hover > i.icon.pencil {
+  color: #1ca1f3;
 }
 
 .notif i.icon.bell,
@@ -392,10 +398,6 @@ i.icon.info,
 .header-left,
 .header-right {
   display: inline-block;
-}
-
-a.register {
-  color: #888;
 }
 
 .post-body i.icon {
