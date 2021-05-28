@@ -242,7 +242,6 @@ class Base
     {
         if (self::getStrlen($name) < $min || self::getStrlen($name) > $max)
         {
-
             $text = sprintf(lang('text-string-length'), '«'. $txt . '»', $min, $max);
             
             self::addMsg($text, 'error');
@@ -250,6 +249,17 @@ class Base
         }
         return true;
     }
+    
+    // Ошибка 404
+    public static function PageError404($variable)
+    {
+        if(!$variable) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
+        }
+        return true;
+    }
+    
     
     // Обрезка текста по словам
     public static function  cutWords($txt, $maxlen) {  
@@ -267,7 +277,6 @@ class Base
     // https://github.com/JacksonJeans/php-mail
     public static function mailText($email, $subject='', $message='')
     {
-
         $mail = new Mail('smtp', [
             'host'      => 'ssl://' . Config::get(Config::PARAM_SMTP_HOST),
             'port'      => Config::get(Config::PARAM_SMTP_POST),
@@ -335,8 +344,8 @@ class Base
     } 
 
     // Discord
-    public static function AddWebhook($text, $title, $url){
-        
+    public static function AddWebhook($text, $title, $url)
+    {
         $text = strip_tags($text, '<p>');
         $text = preg_replace(array('/(<p>)/','(<\/p>)'), array('','\n'), $text);
         

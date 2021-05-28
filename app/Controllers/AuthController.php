@@ -48,12 +48,12 @@ class AuthController extends \MainController
         
         $uid  = Base::getUid();
         $data = [
-            'h1'        => 'Регистрация по инвайту',
+            'h1'        => lang('Registration by invite'),
             'canonical' => '/register',
         ];
 
         // title, description
-        Base::Meta('Регистрация по инвайту', 'Регистрация по инвайту', $other = false);
+        Base::Meta(lang('Registration by invite'), lang('Registration by invite'), $other = false);
         
         return view(PR_VIEW_DIR . '/auth/register-invate', ['data' => $data, 'uid' => $uid, 'invate' => $invate]);  
     }
@@ -336,22 +336,19 @@ class AuthController extends \MainController
             redirect('/recover');   
         }
 
-        // Получаем пользователя
-        if(!$user = UserModel::getUserId($user_id['activate_user_id'])) {
-            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
-            hl_preliminary_exit();
-        }
+        $user = UserModel::getUserId($user_id['activate_user_id']);
+        Base::PageError404($user);
      
         $uid  = Base::getUid();
         $data = [
-            'h1'        => 'Восстановление пароля',
+            'h1'        => lang('Password Recovery'),
             'code'      => $code,
             'user_id'   => $user_id['activate_user_id'],
             'canonical' => 'recover/remind',
         ];
 
         // title, description
-        Base::Meta('Восстановление пароля', 'Восстановление пароля', $other = false);
+        Base::Meta(lang('Password Recovery'), lang('Password Recovery'), $other = false);
         
         return view(PR_VIEW_DIR . '/auth/newrecover', ['data' => $data, 'uid' => $uid]);
     }
@@ -402,7 +399,7 @@ class AuthController extends \MainController
         
         UserModel::editRecoverFlag($user_id);
  
-        Base::addMsg('Пароль успешно изменен', 'success');
+        Base::addMsg(lang('Password changed'), 'success');
         redirect('/login');
     }
 
