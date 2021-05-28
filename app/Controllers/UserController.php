@@ -329,7 +329,7 @@ class UserController extends \MainController
             redirect($redirect);
         }
 
-        if (Base::getStrlen($password2) < 8 || Base::getStrlen($password2) > 24) {
+        if (Base::getStrlen($password2) < 8 || Base::getStrlen($password2) > 32) {
             Base::addMsg(lang('pass-length-err'), 'error');
             redirect($redirect);
         }

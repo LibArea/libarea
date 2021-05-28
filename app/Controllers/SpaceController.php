@@ -250,13 +250,13 @@ class SpaceController extends \MainController
         $space_tl       = \Request::getPostInt('space_tl');
      
         $redirect   = '/space/add';
-        if (!preg_match('/^[a-zA-Z0-9]+$/u', $space_slug)) {
+        if (!preg_match('/^[a-zA-Z0-9_]+$/u', $space_slug)) {
             Base::addMsg(lang('url-latin'), 'error');
             redirect($redirect);
         }
         
         Base::Limits($space_name, lang('titles'), '4', '20', $redirect);
-        Base::Limits($space_slug, 'slug (URL)', '4', '10', $redirect);
+        Base::Limits($space_slug, 'slug (URL)', '3', '10', $redirect);
         
         if (preg_match('/\s/', $space_slug) || strpos($space_slug,' ')) {
             Base::addMsg(lang('url-gaps'), 'error');
@@ -321,14 +321,14 @@ class SpaceController extends \MainController
         $space_short_text   = \Request::getPost('space_short_text');
 
         $redirect   = '/space/' . $space['space_slug'] . '/edit';
-        if (!preg_match('/^[a-zA-Z0-9]+$/u', $space_slug)) {
+        if (!preg_match('/^[a-zA-Z0-9_]+$/u', $space_slug)) {
             Base::addMsg(lang('url-latin'), 'error');
             redirect($redirect);
         }
 
         Base::Limits($space_name, lang('titles'), '4', '20', $redirect);
         Base::Limits($space_description, 'Meta-', '60', '190', $redirect);
-        Base::Limits($space_slug, 'SLUG', '4', '10', $redirect);
+        Base::Limits($space_slug, 'SLUG', '3', '10', $redirect);
         Base::Limits($space_short_text, 'TEXT', '20', '250', $redirect);
 
         $space_color = \Request::getPost('color');

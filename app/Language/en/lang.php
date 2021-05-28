@@ -38,7 +38,7 @@ return [
     /* MSG */
     'about-info-err'        => 'About me should be less characters long',    
     'name-info-err'         => 'Name must be between 3 and ~ 10 characters long',
-    'pass-length-err'       => 'The password must be between 8 and 24 characters long',
+    'pass-length-err'       => 'The password must be between 8 and 32 characters long',
     'old-password-err'      => 'The old password is not correct',
     'pass-match-err'        => 'Passwords don*t match',
     'pass-gap-err'          => 'The password cannot contain spaces',

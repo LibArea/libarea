@@ -91,19 +91,19 @@ Route::before('Authorization@noAuth')->getGroup();
 
 	// Подписываемся, отписываемся / изменяем пространство
 	Route::type('post')->get('/space/hide')->controller('SpaceController@hide');
-    Route::get('/space/{slug}/edit')->controller('SpaceController@spaceForma')->where(['slug' => '[A-Za-z0-9]+']); 
-    Route::get('/space/{slug}/edit/logo')->controller('SpaceController@spaceFormaLogo')->where(['slug' => '[A-Za-z0-9]+']);  
-    Route::get('/space/{slug}/tags')->controller('SpaceController@spaceTagsInfo')->where(['slug' => '[A-Za-z0-9]+']); 
-    Route::get('/space/{slug}/tags/add')->controller('SpaceController@spaceTagsAddPage')->where(['slug' => '[A-Za-z0-9]+']);
+    Route::get('/space/{slug}/edit')->controller('SpaceController@spaceForma')->where(['slug' => '[A-Za-z0-9_]+']); 
+    Route::get('/space/{slug}/edit/logo')->controller('SpaceController@spaceFormaLogo')->where(['slug' => '[A-Za-z0-9_]+']);  
+    Route::get('/space/{slug}/tags')->controller('SpaceController@spaceTagsInfo')->where(['slug' => '[A-Za-z0-9_]+']); 
+    Route::get('/space/{slug}/tags/add')->controller('SpaceController@spaceTagsAddPage')->where(['slug' => '[A-Za-z0-9_]+']);
     Route::type('post')->protect()->get('/space/editspace')->controller('SpaceController@spaceEdit');
     Route::type('post')->protect()->get('/space/editspace/logo')->controller('SpaceController@spaceEditLogo');
-    Route::get('/space/{slug}/delete/cover')->controller('SpaceController@spaceCoverRemove')->where(['slug' => '[A-Za-z0-9]+']);
+    Route::get('/space/{slug}/delete/cover')->controller('SpaceController@spaceCoverRemove')->where(['slug' => '[A-Za-z0-9_]+']);
     Route::get('/space/add')->controller('SpaceController@addSpacePage');
     Route::type('post')->protect()->get('/space/addspace')->controller('SpaceController@spaceAdd');
     Route::get('/space/my')->controller('SpaceController@spaseUser');
  
     // Работа с метками (тегами)
-    Route::get('/s/{slug}/{tags?}/edit')->controller('SpaceController@editTagSpacePage')->where(['slug' => '[A-Za-z0-9]+',  'tags' => '[0-9]+']);
+    Route::get('/s/{slug}/{tags?}/edit')->controller('SpaceController@editTagSpacePage')->where(['slug' => '[A-Za-z0-9_]+',  'tags' => '[0-9]+']);
     Route::type('post')->protect()->get('/space/tag/edit')->controller('SpaceController@editTagSpace');
     Route::type('post')->protect()->get('/space/tag/add')->controller('SpaceController@addTagSpace');
     
@@ -156,8 +156,8 @@ Route::get('/answers')->controller('AnswerController');
 
 // Пространства
 Route::get('/space')->controller('SpaceController');
-Route::get('/s/{slug}/{tags?}')->controller('SpaceController@spacePosts', ['feed'])->where(['slug' => '[A-Za-z0-9]+',  'tags' => '[0-9]+']);
-Route::get('/s/{slug}/top/{tags?}')->controller('SpaceController@spacePosts', ['top'])->where(['slug' => '[A-Za-z0-9]+',  'tags' => '[0-9]+']);
+Route::get('/s/{slug}/{tags?}')->controller('SpaceController@spacePosts', ['feed'])->where(['slug' => '[A-Za-z0-9_]+',  'tags' => '[0-9]+']);
+Route::get('/s/{slug}/top/{tags?}')->controller('SpaceController@spacePosts', ['top'])->where(['slug' => '[A-Za-z0-9_]+',  'tags' => '[0-9]+']);
 
 // Вызов формы комментария
 Route::type('post')->get('/comments/addform')->controller('CommentController@addFormComm');

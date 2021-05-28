@@ -135,9 +135,9 @@ class AuthController extends \MainController
             redirect($url);
         }
 
-        if (Base::getStrlen($password) < 8 || Base::getStrlen($password) > 24)
+        if (Base::getStrlen($password) < 8 || Base::getStrlen($password) > 32)
         {
-            Base::addMsg('Длина пароля должна быть от 8 до 24 знаков', 'error');
+            Base::addMsg('Длина пароля должна быть от 8 до 32 знаков', 'error');
             $url = ($inv_code) ? '/register/invite/'.$inv_code : '/register';
             redirect($url);
         }
@@ -384,9 +384,9 @@ class AuthController extends \MainController
             return false;
         }
 
-        if (Base::getStrlen($password) < 8 || Base::getStrlen($password) > 24)
+        if (Base::getStrlen($password) < 8 || Base::getStrlen($password) > 32)
         {
-            Base::addMsg('Длина пароля должна быть от 8 до 24 знаков', 'error');
+            Base::addMsg('Длина пароля должна быть от 8 до 32 знаков', 'error');
             redirect('/recover/remind/' . $code );
         }
  
