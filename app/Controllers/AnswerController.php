@@ -126,7 +126,11 @@ class AnswerController extends \MainController
         }
 
         $post = PostModel::postId($post_id);
-        Base::PageError404($post);
+        
+        if (!$post) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
+        }
 
         $data = [
             'h1'                => lang('Edit answer'),
@@ -187,7 +191,10 @@ class AnswerController extends \MainController
        
         // Если нет такого пользователя 
         $user   = UserModel::getUserLogin($login);
-        Base::PageError404($user);
+        if(!$user) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
+        }
         
         $answ  = AnswerModel::userAnswers($login); 
         

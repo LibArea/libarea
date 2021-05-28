@@ -72,8 +72,10 @@ class SpaceController extends \MainController
         $space_tags_id  = \Request::getInt('tags');
         
         // Покажем 404
-        $space = SpaceModel::getSpaceInfo($slug);
-        Base::PageError404($space);
+        if(!$space = SpaceModel::getSpaceInfo($slug)) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
+        }
   
         $posts = SpaceModel::getSpacePosts($space['space_id'], $uid['id'], $space_tags_id, $type);
 
@@ -123,8 +125,10 @@ class SpaceController extends \MainController
         $slug   = \Request::get('slug');
 
         // Покажем 404
-        $space = SpaceModel::getSpaceInfo($slug);
-        Base::PageError404($space);
+        if(!$space = SpaceModel::getSpaceInfo($slug)) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
+        }
 
         // Или персонал или автор
         if ($uid['trust_level'] != 5 && $space['space_user_id'] != $uid['id']) {
@@ -154,8 +158,10 @@ class SpaceController extends \MainController
         $slug   = \Request::get('slug');
 
         // Покажем 404
-        $space = SpaceModel::getSpaceInfo($slug);
-        Base::PageError404($space);
+        if(!$space = SpaceModel::getSpaceInfo($slug)) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
+        }
 
         // Или персонал или автор
         if ($uid['trust_level'] != 5 && $space['space_user_id'] != $uid['id']) {
@@ -185,8 +191,10 @@ class SpaceController extends \MainController
         $slug   = \Request::get('slug');
 
         // Покажем 404
-        $space = SpaceModel::getSpaceInfo($slug);
-        Base::PageError404($space);
+        if(!$space = SpaceModel::getSpaceInfo($slug)) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
+        }
         
         $tags = SpaceModel::getSpaceTags($space['space_id']);
         
@@ -307,8 +315,10 @@ class SpaceController extends \MainController
         $space_tl       = \Request::getPostInt('space_tl');
         
         // Покажем 404
-        $space = SpaceModel::getSpaceId($space_id);
-        Base::PageError404($space);
+        if(!$space = SpaceModel::getSpaceId($space_id)) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
+        }
 
         // Или персонал или владелец
         if ($uid['trust_level'] != 5 && $space['space_user_id'] != $uid['id']) {
@@ -375,8 +385,10 @@ class SpaceController extends \MainController
         $space_id       = \Request::getPost('space_id');
         
         // Покажем 404
-        $space = SpaceModel::getSpaceId($space_id);
-        Base::PageError404($space);
+        if(!$space = SpaceModel::getSpaceId($space_id)) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
+        }
 
         // Или персонал или владелец
         if ($uid['trust_level'] != 5 && $space['space_user_id'] != $uid['id']) {
@@ -385,10 +397,13 @@ class SpaceController extends \MainController
 
         $redirect   = '/space/' . $space['space_slug'] . '/edit/logo';
 
-        $name = $_FILES['images']['name'][0];
+        $name     = $_FILES['images']['name'][0];
         if($name) {
-            $ext    = strtolower(pathinfo($name, PATHINFO_EXTENSION));
-            $valid  =  true;
+            $size     = $_FILES['images']['size'][0];
+            $ext      = strtolower(pathinfo($name, PATHINFO_EXTENSION));
+            $width_h  = getimagesize($_FILES['images']['tmp_name'][0]);
+           
+            $valid =  true;
             if (!in_array($ext, array('jpg','jpeg','png','gif'))) {
                 $valid = false;
                 Base::addMsg('Тип файла не разрешен', 'error');
@@ -430,10 +445,13 @@ class SpaceController extends \MainController
             $space_img = empty($space['space_img']) ? 'space_no.png' : $space['space_img'];
         }
         
-        $cover = $_FILES['cover']['name'][0];
+        $cover     = $_FILES['cover']['name'][0];
         if($cover) {
-            $ext    = strtolower(pathinfo($cover, PATHINFO_EXTENSION));
-            $valid  =  true;
+            $size     = $_FILES['cover']['size'][0];
+            $ext      = strtolower(pathinfo($cover, PATHINFO_EXTENSION));
+            $width_h  = getimagesize($_FILES['cover']['tmp_name'][0]);
+           
+            $valid =  true;
             if (!in_array($ext, array('jpg','jpeg','png','gif'))) {
                 $valid = false;
                 Base::addMsg('Тип файла не разрешен', 'error');
@@ -496,8 +514,10 @@ class SpaceController extends \MainController
         $slug   = \Request::get('slug');
         
         // Покажем 404
-        $space = SpaceModel::getSpaceInfo($slug);
-        Base::PageError404($space);
+        if(!$space = SpaceModel::getSpaceInfo($slug)) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
+        }
         
         // Удалять может только автор и админ
         if ($space['space_user_id'] != $uid['id'] && $uid['trust_level'] != 5) {
@@ -529,8 +549,10 @@ class SpaceController extends \MainController
         $slug   = \Request::get('slug');
         
         // Покажем 404
-        $space = SpaceModel::getSpaceInfo($slug);
-        Base::PageError404($space);
+        if(!$space = SpaceModel::getSpaceInfo($slug)) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
+        }
 
         // Добавлять может только автор и админ
         if ($space['space_user_id'] != $uid['id'] && $uid['trust_level'] != 5) {
@@ -556,8 +578,10 @@ class SpaceController extends \MainController
         $space_tags_id  = \Request::getInt('tags');
         
         // Покажем 404
-        $space = SpaceModel::getSpaceInfo($slug);
-        Base::PageError404($space);
+        if(!$space = SpaceModel::getSpaceInfo($slug)) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
+        }
 
         // Редактировать может только автор и админ
         if ($space['space_user_id'] != $uid['id'] && $uid['trust_level'] != 5) {
@@ -565,7 +589,12 @@ class SpaceController extends \MainController
         }
 
         $tag = SpaceModel::getTagInfo($space_tags_id);
-        Base::PageError404($tag);
+        
+        // Покажем 404
+        if(!$tag) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
+        }
 
         $data = [
             'h1'        => lang('Edit tag'),
@@ -588,8 +617,10 @@ class SpaceController extends \MainController
         $st_title   = \Request::getPost('st_title');
         
         // Покажем 404
-        $space = SpaceModel::getSpaceId($space_id);
-        Base::PageError404($space);
+        if(!$space = SpaceModel::getSpaceId($space_id)) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
+        }
         
         // Редактировать может только автор и админ
         if ($space['space_user_id'] != $uid['id'] && $uid['trust_level'] != 5) {
@@ -633,8 +664,10 @@ class SpaceController extends \MainController
         $st_title   = \Request::getPost('st_title');
         
         // Покажем 404
-        $space = SpaceModel::getSpaceId($space_id);
-        Base::PageError404($space);
+        if(!$space = SpaceModel::getSpaceId($space_id)) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
+        }
         
         // Редактировать может только автор и админ
         if ($space['space_user_id'] != $uid['id'] && $uid['trust_level'] != 5) {

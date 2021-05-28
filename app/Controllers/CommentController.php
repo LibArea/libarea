@@ -202,7 +202,10 @@ class CommentController extends \MainController
 
         // Если нет такого пользователя 
         $user   = UserModel::getUserLogin($login);
-        Base::PageError404($user);
+        if(!$user) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
+        }
         
         $comm  = CommentModel::userComments($login); 
         

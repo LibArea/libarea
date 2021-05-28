@@ -68,9 +68,13 @@ class SearchController extends \MainController
     {
         $domain     = \Request::get('domain');
         $uid        = Base::getUid();
-        
         $post       = SearchModel::getDomain($domain, $uid['id']); 
-        Base::PageError404($post);
+ 
+        // Покажем 404
+        if(!$post) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
+        }
         
         $result = Array();
         foreach($post as $ind => $row){

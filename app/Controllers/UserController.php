@@ -37,7 +37,10 @@ class UserController extends \MainController
         $user  = UserModel::getUserLogin($login);
 
         // Покажем 404
-        Base::PageError404($user);
+        if(!$user) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
+        }
 
         $post = PostModel::postId($user['my_post']);
 
@@ -221,10 +224,14 @@ class UserController extends \MainController
         $redirect   = '/u/' . $uid['login'] . '/setting/avatar';
         
         // Аватар
-        $name = $_FILES['images']['name'][0];
+        $name     = $_FILES['images']['name'][0];
+       
         if($name) {
-            $ext    = strtolower(pathinfo($name, PATHINFO_EXTENSION));
-            $valid  =  true;
+            $size     = $_FILES['images']['size'][0];
+            $ext      = strtolower(pathinfo($name, PATHINFO_EXTENSION));
+            $width_h  = getimagesize($_FILES['images']['tmp_name'][0]);
+
+            $valid =  true;
             if (!in_array($ext, array('jpg','jpeg','png','gif'))) {
                 $valid = false;
                 Base::addMsg(lang('file-type-not-err'), 'error');
@@ -269,8 +276,11 @@ class UserController extends \MainController
         // Обложка
         $covername  = $_FILES['cover']['name'][0];
         if($covername) {
-            $ext    = strtolower(pathinfo($covername, PATHINFO_EXTENSION));
-            $valid  =  true;
+            $size     = $_FILES['cover']['size'][0];
+            $ext      = strtolower(pathinfo($covername, PATHINFO_EXTENSION));
+            $width_h  = getimagesize($_FILES['cover']['tmp_name'][0]);
+ 
+            $valid =  true;
             if (!in_array($ext, array('jpg','jpeg','png','gif'))) {
                 $valid = false;
                 Base::addMsg(lang('file-type-not-err'), 'error');
@@ -306,6 +316,7 @@ class UserController extends \MainController
                 Base::addMsg(lang('Cover changed'), 'success');
             }
         }
+        
          
         redirect($redirect);
     }
@@ -346,7 +357,7 @@ class UserController extends \MainController
         $newpass = password_hash($password2, PASSWORD_BCRYPT);
         UserModel::editPassword($account['user_id'], $newpass);
 
-        Base::addMsg(lang('Password changed'), 'success');
+        Base::addMsg(lang('Password changed'), 'error');
         redirect($redirect);
     }
     
@@ -477,8 +488,11 @@ class UserController extends \MainController
         }
 
         // Покажем 404
-        Base::PageError404($user);
-        
+        if(!$user) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
+        }
+
         $Invitation = UserModel::InvitationResult($uid['id']);
  
         $data = [

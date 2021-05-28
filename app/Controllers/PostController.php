@@ -27,7 +27,10 @@ class PostController extends \MainController
         $pagesCount = PostModel::postsFeedCount($space_user, $uid['id'], $type); 
         $posts      = PostModel::postsFeed($page, $space_user, $uid['trust_level'], $uid['id'], $type);
 
-        Base::PageError404($posts);
+        if (!$posts) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
+        }
 
         $result = Array();
         foreach($posts as $ind => $row) {
@@ -92,9 +95,13 @@ class PostController extends \MainController
         $post_new   = PostModel::postId($post_id); 
 
         // Проверим (id, slug)
-        Base::PageError404($post_new);
-        if($slug != $post_new['post_slug']) {
-            redirect('/post/' . $post_new['post_id'] . '/' . $post_new['post_slug']);
+        if (!$post_new) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
+        } else {
+            if($slug != $post_new['post_slug']) {
+                redirect('/post/' . $post_new['post_id'] . '/' . $post_new['post_slug']);
+            }
         }
         
         $post = PostModel::postSlug($slug, $uid['id']); 
@@ -206,7 +213,10 @@ class PostController extends \MainController
         
         // Если нет такого пользователя 
         $user   = UserModel::getUserLogin($login);
-        Base::PageError404($user);
+        if(!$user) {
+            include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+            hl_preliminary_exit();
+        }
         
         $posts_user  = PostModel::userPosts($login, $uid['id']); 
         
@@ -308,6 +318,7 @@ class PostController extends \MainController
             // images
             $name     = $_FILES['images']['name'][0];
             if($name) {
+                $size     = $_FILES['images']['size'][0];
                 $ext      = strtolower(pathinfo($name, PATHINFO_EXTENSION));
                 $width_h  = getimagesize($_FILES['images']['tmp_name'][0]);
 
@@ -455,7 +466,9 @@ class PostController extends \MainController
                 curl_close($ch);
                 fclose($fp);  
  
+                // https://github.com/phphleb/imageresizer
                 $image = new SimpleImage();
+                
                 $image
                 ->fromFile($local)  // load image.jpg
                 ->autoOrient()     // adjust orientation based on exif data
@@ -551,7 +564,7 @@ class PostController extends \MainController
         // При изменение url считаем частоту смену url после добавления у конкретного пользователя
         // Если больше N оповещение персонала, если изменен на запрещенный, скрытие поста,
         // или более расширенное поведение, а пока просто проверим
-        $post_tag_img = empty($post_tag_id) ? '' : $post_tag_id;
+        $post_tag_img           = empty($post_tag_id) ? '' : $post_tag_id;
 
         // Проверим хакинг формы
         if ($post['post_draft'] == 0) {
@@ -567,8 +580,10 @@ class PostController extends \MainController
         }
         
         // images
-        $name = $_FILES['images']['name'][0];
+        $name     = $_FILES['images']['name'][0];
+        
         if($name) { 
+            $size     = $_FILES['images']['size'][0];
             $ext      = strtolower(pathinfo($name, PATHINFO_EXTENSION));
             $width_h  = getimagesize($_FILES['images']['tmp_name'][0]);
 
