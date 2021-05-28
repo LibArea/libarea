@@ -135,9 +135,13 @@ class PostController extends \MainController
         $post['post_content']   = Base::Markdown($post['post_content']);
         $post['post_date']      = Base::ru_date($post['post_date']);
         $post['num_answers']    = Base::ru_num('answ', $post['post_answers_num']); 
-        $post['num_comments']   = Base::ru_num('comm', $post['post_comments_num']); 
-        $post['favorite_post']  = PostModel::getMyPostFavorite($post['post_id'], $uid['id']);
         
+        // общее количество (для модели - беседа)
+        $comment_n = $post['post_comments_num'] + $post['post_answers_num'];
+        $post['num_comments']   = Base::ru_num('comm', $comment_n); 
+        
+        $post['favorite_post']  = PostModel::getMyPostFavorite($post['post_id'], $uid['id']);
+      
         // Получим ответы
         // post_type: 0 - дискуссия, 1 - Q&A
         $post_answers = AnswerModel::getAnswersPost($post['post_id'], $uid['id'], $post['post_type']);

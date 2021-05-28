@@ -43,5 +43,12 @@
     <?php } else { ?>
         <div class="no-content"><i class="icon info"></i> <?= lang('no-answers'); ?>...</div>
     <?php } ?>
-</main> 
+</main>
+<aside>
+    <?php if ($uid['id'] == 0) { ?>
+        <?php include TEMPLATE_DIR . '/_block/login.php'; ?>
+    <?php } else { ?>
+        <?php include TEMPLATE_DIR . '/_block/user-menu.php'; ?>
+    <?php } ?>
+</aside>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

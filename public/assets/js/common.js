@@ -142,5 +142,5 @@ function getCookie(cname) {
         }
     }
     return "";
-};
+}
  

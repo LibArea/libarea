@@ -30,11 +30,8 @@
                     <a class="u-url" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
                         <h3 class="title"><?= $post['post_title']; ?></h3>
                     </a>
-                    <a class="space-u" href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
-                        <?= $post['space_name']; ?>
-                    </a>
                     
-                    <div class="footer">
+                    <div class="post-footer">
                         <img class="ava" src="/uploads/users/avatars/small/<?= $post['avatar']; ?>">
                         <span class="user"> 
                             <a href="/u/<?= $post['login']; ?>"><?= $post['login']; ?></a> 
@@ -42,6 +39,10 @@
                         <span class="date"> 
                             <?= $post['post_date']; ?>
                         </span>
+                        <span class="otst"> &#183; </span> 
+                        <a class="u-url" href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
+                            <?= $post['space_name']; ?>
+                        </a>
                         <?php if($post['post_answers_num'] !=0) { ?> 
                             <span class="otst"> | </span>
                             <?= lang('Answers-m'); ?> (<?= $post['post_answers_num'] ?>) 
@@ -58,4 +59,11 @@
         <?php } ?>
     </div> 
 </main>
+<aside>
+    <?php if ($uid['id'] == 0) { ?>
+        <?php include TEMPLATE_DIR . '/_block/login.php'; ?>
+    <?php } else { ?>
+        <?php include TEMPLATE_DIR . '/_block/user-menu.php'; ?>
+    <?php } ?>
+</aside>
 <?php include TEMPLATE_DIR . '/footer.php'; ?> 
