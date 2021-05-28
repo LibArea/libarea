@@ -23,7 +23,7 @@ class SearchModel extends \MainModel
         
         $sql = "SELECT id as post_id, space_slug, space_name, space_img, post_slug, post_space_id, post_votes, SNIPPET(post_title, :qa) as _title, SNIPPET(post_content, :qa) AS _content FROM postind WHERE MATCH(:qa)";
 
-        $result = DB::run($sql, ['qa' => $query], 'mysql.search');
+        $result = DB::run($sql, ['qa' => $query], 'mysql.sphinx-search');
         return  $result->fetchall(PDO::FETCH_ASSOC);
     }
 

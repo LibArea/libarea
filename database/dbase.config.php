@@ -14,14 +14,14 @@ define("HLEB_PARAMETERS_FOR_DB", [
     "mysql.myname" => [
         "mysql:host=127.0.0.1",
        // "port=3360",
-        "dbname=emlog",
-        "charset=utf8mb4", // таблица и база в этой кодировки.
+        "dbname=test",
+        "charset=utf8mb4",
         "user" => "root",
         "pass" => ""
     ],
 
     // Для Sphinx
-    "mysql.search" => [
+    "mysql.sphinx-search" => [
         "mysql:host=127.0.0.1",
         "port=9306",
         "dbname=postind",
