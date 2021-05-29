@@ -25,17 +25,17 @@ class SpaceController extends \MainController
             $result[$ind]   = $row;
         }  
         
+        Request::getHead()->addStyles('/assets/css/space.css');
+        
         $data = [
             'h1'            => lang('All space'),
-            'canonical'     => Config::get(Config::PARAM_URL) . '/space', 
+            'canonical'     => Config::get(Config::PARAM_URL) . '/space',
+            'sheet'         => 'spaces', 
+            'meta_title'    => lang('All space') .' | '. Config::get(Config::PARAM_NAME),
+            'meta_desc'     => lang('all-space-desc') .' '. Config::get(Config::PARAM_HOME_TITLE),
         ];
-
-        Request::getHead()->addStyles('/assets/css/space.css');
-
-        // title, description
-        Base::Meta(lang('All space'), lang('all-space-desc'), $other = false);
         
-        return view(PR_VIEW_DIR . '/space/all', ['data' => $data, 'uid' => $uid, 'space' => $result, 'count_space' => $count_space, 'sort' => 'all']);
+        return view(PR_VIEW_DIR . '/space/all', ['data' => $data, 'uid' => $uid, 'space' => $result, 'count_space' => $count_space]);
     }
 
     // Пространства участника
@@ -51,17 +51,17 @@ class SpaceController extends \MainController
             $result[$ind]   = $row;
         }  
         
-        $data = [
-            'h1'            => lang('I read space'),
-            'canonical'     => '/space', 
-        ];
-
         Request::getHead()->addStyles('/assets/css/space.css');
 
-        // title, description
-        Base::Meta(lang('I read space'), lang('I read space'), $other = false);
+        $data = [
+            'h1'            => lang('I read space'),
+            'canonical'     => Config::get(Config::PARAM_URL) . '/space', 
+            'sheet'         => 'my-space', 
+            'meta_title'    => lang('I read space') .' | '. Config::get(Config::PARAM_NAME),
+            'meta_desc'     => lang('I read space') .' '. Config::get(Config::PARAM_HOME_TITLE),
+        ];
         
-        return view(PR_VIEW_DIR . '/space/all', ['data' => $data, 'uid' => $uid, 'space' => $result, 'count_space' => $count_space, 'sort' => 'my']);
+        return view(PR_VIEW_DIR . '/space/all', ['data' => $data, 'uid' => $uid, 'space' => $result, 'count_space' => $count_space]);
     }
 
     // Посты по пространству
@@ -100,18 +100,16 @@ class SpaceController extends \MainController
             $s_title = lang('space-top-title');
         }
 
+        Request::getHead()->addStyles('/assets/css/space.css');
+
         $data = [
             'h1'            => $space['space_name'],
-            'canonical'     => Config::get(Config::PARAM_URL) . '/s/' . $space['space_slug'], 
+            'canonical'     => Config::get(Config::PARAM_URL) .'/s/'. $space['space_slug'],
+            'img'           => Config::get(Config::PARAM_URL) .'/uploads/spaces/logos/'. $space['space_img'],
+            'sheet'         => 'post-space',
+            'meta_title'    => $space['space_name'] .' — '. $s_title .' | '. Config::get(Config::PARAM_NAME),
+            'meta_desc'     => $space['space_description'] .' '. $s_title .' '. Config::get(Config::PARAM_HOME_TITLE),
         ];
-
-        $meta_title = $space['space_name'] . ' — ' . $s_title;
-        $meta_desc  = $space['space_description'] . ' ' . $s_title . '. ';
-        
-        Request::getHead()->addStyles('/assets/css/space.css');
-        
-        // title, description
-        Base::Meta($meta_title, $meta_desc, $other = false);
 
         return view(PR_VIEW_DIR . '/space/space-posts', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'space_info' => $space, 'tags' => $tags, 'space_signed' => $space_signed, 'type' => $type]);
     }
@@ -131,18 +129,16 @@ class SpaceController extends \MainController
             redirect('/');
         }
 
-        $data = [
-            'h1'            => lang('Change') . ' - ' . $slug,
-            'canonical'     => '/***', 
-        ];
-
-        $meta_title = lang('Change') . ' - ' . $slug;
-        
         Request::getHead()->addStyles('/assets/css/image-uploader.css'); 
         Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
         
-        // title, description
-        Base::Meta($meta_title, lang('Change'), $other = false);
+        $data = [
+            'h1'            => lang('Change') . ' - ' . $slug,
+            'canonical'     => '/***', 
+            'sheet'         => 'edit-space', 
+            'meta_title'    => lang('Change') . ' - ' . $slug,
+            'meta_desc'     => lang('Change'),
+        ];
 
         return view(PR_VIEW_DIR . '/space/edit-space', ['data' => $data, 'uid' => $uid, 'space' => $space]);
     }
@@ -162,18 +158,16 @@ class SpaceController extends \MainController
             redirect('/');
         }
 
-        $data = [
-            'h1'            => lang('Logo') . ' - ' . $slug,
-            'canonical'     => '/***', 
-        ];
-
-        $meta_title = lang('Logo') . ' - ' . $slug;
-        
         Request::getHead()->addStyles('/assets/css/image-uploader.css'); 
         Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
         
-        // title, description
-        Base::Meta($meta_title, lang('Logo'), $other = false);
+        $data = [
+            'h1'            => lang('Logo') . ' - ' . $slug,
+            'canonical'     => '/***', 
+            'sheet'         => 'edit-logo', 
+            'meta_title'    => lang('Logo') . ' - ' . $slug,
+            'meta_desc'     => lang('Logo'),
+        ];
 
         return view(PR_VIEW_DIR . '/space/edit-space-logo', ['data' => $data, 'uid' => $uid, 'space' => $space]);
     }
@@ -192,11 +186,11 @@ class SpaceController extends \MainController
         
         $data = [
             'h1'            => lang('Tags'),
-            'canonical'     => '/***', 
+            'canonical'     => '/***',
+            'sheet'         => 'edit-tags', 
+            'meta_title'    => lang('Tags'),
+            'meta_desc'     => lang('Tags'),            
         ];
-
-        // title, description
-        Base::Meta(lang('Tags'), lang('Tags'), $other = false);
  
         return view(PR_VIEW_DIR . '/space/info-space', ['data' => $data, 'uid' => $uid, 'space' => $space, 'tags' => $tags]);
     }
@@ -225,11 +219,11 @@ class SpaceController extends \MainController
         $data = [
             'h1'        => lang('Add Space'),
             'canonical' => '/***', 
+            'sheet'         => 'add-space', 
+            'meta_title'    => lang('Add Space'),
+            'meta_desc'     => lang('Add Space'),  
         ];
 
-        // title, description
-        Base::Meta(lang('Add Space'), lang('Add Space'), $other = false);
-        
         return view(PR_VIEW_DIR . '/space/add-space', ['data' => $data, 'uid' => $uid, 'num_add_space' => $num_add_space]);
     }
     
@@ -538,12 +532,12 @@ class SpaceController extends \MainController
         }
       
         $data = [
-            'h1'        => lang('Add tag'),
-            'canonical' => '/***', 
+            'h1'            => lang('Add tag'),
+            'canonical'     => '/***',
+            'sheet'         => 'add-tag', 
+            'meta_title'    => lang('Add tag'),
+            'meta_desc'     => lang('Add tag'), 
         ];
-
-        // title, description
-        Base::Meta(lang('Add tag'), lang('Add tag'), $other = false);
         
         return view(PR_VIEW_DIR . '/space/add-tag', ['data' => $data, 'uid' => $uid, 'space' => $space]);
     }
@@ -568,12 +562,12 @@ class SpaceController extends \MainController
         Base::PageError404($tag);
 
         $data = [
-            'h1'        => lang('Edit tag'),
-            'canonical' => '/***', 
+            'h1'            => lang('Edit tag'),
+            'canonical'     => '/***', 
+            'sheet'         => 'edit-tag', 
+            'meta_title'    => lang('Edit tag'),
+            'meta_desc'     => lang('Edit tag'), 
         ];
-
-        // title, description
-        Base::Meta(lang('Edit tag'), lang('Edit tag'), $other = false);
 
         return view(PR_VIEW_DIR . '/space/edit-tag', ['data' => $data, 'uid' => $uid, 'tag' => $tag, 'space' => $space]);
     }

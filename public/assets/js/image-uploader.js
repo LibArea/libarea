@@ -1,4 +1,5 @@
 /*! Image Uploader - v1.2.3 - 26/11/2019
+ * https://github.com/christianbayer/image-uploader
  * Copyright (c) 2019 Christian Bayer; Licensed MIT */
 
 (function ($) {

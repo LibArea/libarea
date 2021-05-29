@@ -64,6 +64,6 @@
     <?php } ?>
 <?php } ?>
 <?= getRequestResources()->getBottomStyles(); ?>
-<?= getRequestResources()->getBottomScripts(); ?> 
+<?= getRequestResources()->getBottomScripts(); ?>
 </body>
 </html> 

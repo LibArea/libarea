@@ -26,12 +26,11 @@ class AdminController extends \MainController
         } 
         
         $data = [
-            'h1'    => lang('Admin'),
-            'users' => $result,
+            'h1'            => lang('Admin'),
+            'users'         => $result,
+            'meta_title'    => lang('Admin'),
+            'meta_desc'     => lang('Admin'),
         ]; 
-        
-        // title, description
-        Base::Meta(lang('Admin'), lang('Admin'), $other = false);
 
         return view(PR_VIEW_DIR . '/admin/index', ['data' => $data, 'uid' => $uid, 'alluser' => $result]);
 	}
@@ -61,10 +60,10 @@ class AdminController extends \MainController
         }
         
         $data = [
-            'h1' => lang('Deleted comments'),
+            'h1'            => lang('Deleted comments'),
+            'meta_title'    => lang('Deleted comments'),
+            'meta_desc'     => lang('Deleted comments'),
         ]; 
- 
-        Base::Meta(lang('Deleted comments'), lang('Deleted comments'), $other = false);
  
         return view(PR_VIEW_DIR . '/admin/comm_del', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
     }
@@ -94,10 +93,10 @@ class AdminController extends \MainController
         }
 
         $data = [
-            'h1'    => lang('Invites'),
+            'h1'            => lang('Invites'),
+            'meta_title'    => lang('Invites'),
+            'meta_desc'     => lang('Invites'),
         ]; 
- 
-        Base::Meta(lang('Invites'), lang('Invites'), $other = false);
  
         return view(PR_VIEW_DIR . '/admin/invitations', ['data' => $data, 'uid' => $uid, 'invitations' => $result]);
     }
@@ -123,10 +122,10 @@ class AdminController extends \MainController
         $spaces = AdminModel::getAdminSpaceAll($uid['id']);
   
         $data = [
-            'h1' => lang('Space'),
+            'h1'            => lang('Space'),
+            'meta_title'    => lang('Space'),
+            'meta_desc'     => lang('Space'),
         ]; 
- 
-        Base::Meta(lang('Space'), lang('Space'), $other = false);
  
         return view(PR_VIEW_DIR . '/admin/spaces', ['data' => $data, 'uid' => $uid, 'spaces' => $spaces]);
     }
@@ -137,10 +136,10 @@ class AdminController extends \MainController
         $uid = self::isAdmin();
         
         $data = [
-            'h1' => lang('Add Space'),
+            'h1'            => lang('Add Space'),
+            'meta_title'    => lang('Add Space'),
+            'meta_desc'     => lang('Add Space'),
         ]; 
- 
-        Base::Meta(lang('Add Space'), lang('Add Space'), $other = false);
         
         return view(PR_VIEW_DIR . '/admin/add-space', ['data' => $data, 'uid' => $uid]);
     }
@@ -224,10 +223,10 @@ class AdminController extends \MainController
         $badges = AdminModel::getBadgesAll();
         
         $data = [
-            'h1' => lang('Badges'),
+            'h1'            => lang('Badges'),
+            'meta_title'    => lang('Badges'),
+            'meta_desc'     => lang('Badges'), 
         ]; 
- 
-        Base::Meta(lang('Badges'), lang('Badges'), $other = false);
         
         return view(PR_VIEW_DIR . '/admin/badges', ['data' => $data, 'uid' => $uid, 'badges' => $badges]);
     }
@@ -238,10 +237,10 @@ class AdminController extends \MainController
         $uid = self::isAdmin();
         
         $data = [
-            'h1' => lang('Add badge'),
+            'h1'            => lang('Add badge'),
+            'meta_title'    => lang('Add badge'),
+            'meta_desc'     => lang('Add badge'), 
         ]; 
- 
-        Base::Meta(lang('Add badge'), lang('Add badge'), $other = false);
         
         return view(PR_VIEW_DIR . '/admin/badge-add', ['data' => $data, 'uid' => $uid]);
     }
@@ -258,10 +257,10 @@ class AdminController extends \MainController
         }
 
         $data = [
-            'h1' => lang('Edit badge'),
+            'h1'            => lang('Edit badge'),
+            'meta_title'    => lang('Edit badge'),
+            'meta_desc'     => lang('Edit badge'), 
         ]; 
- 
-        Base::Meta(lang('Edit badge'), lang('Edit badge'), $other = false);
         
         return view(PR_VIEW_DIR . '/admin/badge-edit', ['data' => $data, 'uid' => $uid, 'badge' => $badge]);
     }
@@ -333,10 +332,10 @@ class AdminController extends \MainController
         }
         
         $data = [
-            'h1' => lang('Edit user'),
+            'h1'            => lang('Edit user'),
+            'meta_title'    => lang('Edit user'),
+            'meta_desc'     => lang('Edit user'), 
         ]; 
- 
-        Base::Meta(lang('Edit user'), lang('Edit user'), $other = false);
         
         return view(PR_VIEW_DIR . '/admin/user-edit', ['data' => $data, 'uid' => $uid, 'user' => $user]);
     }

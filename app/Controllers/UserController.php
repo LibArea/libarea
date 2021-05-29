@@ -20,13 +20,13 @@ class UserController extends \MainController
         $data = [
             'h1'        => lang('Users'),
             'canonical' => Config::get(Config::PARAM_URL) . '/users',
+            'sheet'         => 'users', 
+            'meta_title'    => lang('Users') .' | '. Config::get(Config::PARAM_NAME),
+            'meta_desc'     => lang('desc-user-all') .' '. Config::get(Config::PARAM_HOME_TITLE),   
         ];
 
         Request::getHead()->addStyles('/assets/css/users.css'); 
         
-        // title, description
-        Base::Meta(lang('Users'), lang('desc-user-all'), $other = false);
-
         return view(PR_VIEW_DIR . '/user/all', ['data' => $data, 'uid' => $uid, 'users' => $users]);
     }
 
@@ -41,23 +41,14 @@ class UserController extends \MainController
 
         $post = PostModel::postId($user['my_post']);
 
-        $uid  = Base::getUid();
-        $data =[
-            'h1'            => $user['login'] . ' - профиль',
-            'created_at'    => Base::ru_date($user['created_at']),
-            'trust_level'   => UserModel::getUserTrust($user['id']),
-            'post_num_user' => UserModel::userPostsNum($user['id']),
-            'answ_num_user' => UserModel::userAnswersNum($user['id']),
-            'comm_num_user' => UserModel::userCommentsNum($user['id']), 
-            'space_user'    => SpaceModel::getSpaceUserId($user['id']),
-            'canonical'     => Config::get(Config::PARAM_URL) . '/u/' . $user['login'],
-        ];
-        
         $meta_title = $user['login'] . ' - профиль';
         $meta_desc  = lang('desc-profile') . ' ' . $user['login'];
 
-        Request::getHead()->addStyles('/assets/css/users.css');
+        \Request::getHead()->addStyles('/assets/css/users.css');
 
+        if($user['is_deleted'] == 1) {
+            \Request::getHead()->addMeta('robots', 'noindex');
+        }
         // Просмотры поста
         if (!isset($_SESSION['usernumbers'])) {
             $_SESSION['usernumbers'] = array();
@@ -68,8 +59,21 @@ class UserController extends \MainController
             $_SESSION['usernumbers'][$user['id']] = $user['id'];
         }
 
-        // title, description
-        Base::Meta($meta_title, $meta_desc, $other = false);
+        $uid  = Base::getUid();
+        $data =[
+            'h1'            => $user['login'] . ' - профиль',
+            'created_at'    => Base::ru_date($user['created_at']),
+            'trust_level'   => UserModel::getUserTrust($user['id']),
+            'post_num_user' => UserModel::userPostsNum($user['id']),
+            'answ_num_user' => UserModel::userAnswersNum($user['id']),
+            'comm_num_user' => UserModel::userCommentsNum($user['id']), 
+            'space_user'    => SpaceModel::getSpaceUserId($user['id']),
+            'canonical'     => Config::get(Config::PARAM_URL) . '/u/' . $user['login'],
+            'sheet'         => 'profile',
+            'img'           => Config::get(Config::PARAM_URL) . '/uploads/users/avatars/' . $user['avatar'],
+            'meta_title'    => $meta_title,
+            'meta_desc'     => $meta_desc,
+        ];
 
         return view(PR_VIEW_DIR . '/user/profile', ['data' => $data, 'uid' => $uid, 'user' => $user, 'onepost' => $post]);
     }  
@@ -88,12 +92,12 @@ class UserController extends \MainController
         }
         
         $data = [
-          'h1'          => lang('Setting profile'),
-          'canonical'   => '/***', 
+            'h1'            => lang('Setting profile'),
+            'canonical'     => '/***',
+            'sheet'         => 'setting', 
+            'meta_title'    => lang('Setting profile'),
+            'meta_desc'     => lang('Setting profile'),
         ];
-
-        // title, description
-        Base::Meta(lang('Setting profile'), lang('Setting profile'), $other = false);
 
         return view(PR_VIEW_DIR . '/user/setting', ['data' => $data, 'uid' => $uid, 'user' => $user]);
     }
@@ -176,15 +180,15 @@ class UserController extends \MainController
 
         $userInfo = UserModel::getUserLogin($uid['login']);
         $data = [
-            'h1'        => lang('Change avatar'),
-            'canonical' => '/***', 
+            'h1'            => lang('Change avatar'),
+            'canonical'     => '/***', 
+            'sheet'         => 'setting-ava', 
+            'meta_title'    => lang('Change avatar'),
+            'meta_desc'     => lang('Change avatar page'),
         ];
 
         Request::getHead()->addStyles('/assets/css/image-uploader.css'); 
         Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
-
-        // title, description
-        Base::Meta(lang('Change avatar'), lang('Change avatar page'), $other = false);
 
         return view(PR_VIEW_DIR . '/user/setting-avatar', ['data' => $data, 'uid' => $uid, 'user' => $userInfo]);
     }
@@ -201,15 +205,15 @@ class UserController extends \MainController
         }
         
         $data = [
-            'h1'        => lang('Change password'),
-            'password'  => '',
-            'password2' => '',
-            'password3' => '',
-            'canonical' => '/***', 
+            'h1'            => lang('Change password'),
+            'password'      => '',
+            'password2'     => '',
+            'password3'     => '',
+            'canonical'     => '/***', 
+            'sheet'         => 'setting-pass', 
+            'meta_title'    => lang('Change password'),
+            'meta_desc'     => lang('Change password'),
         ];
-
-        // title, description
-        Base::Meta(lang('Change password'), lang('Change password page'), $other = false);
 
         return view(PR_VIEW_DIR . '/user/setting-security', ['data' => $data, 'uid' => $uid]);
     }
@@ -377,11 +381,11 @@ class UserController extends \MainController
         $data = [
             'h1'            => lang('Favorites') . ' ' . $login,
             'canonical'     => '/***', 
+            'sheet'         => 'favorites', 
+            'meta_title'    => lang('Favorites'),
+            'meta_desc'     => lang('Favorites'),
         ];
 
-        // title, description
-        Base::Meta(lang('Favorites'), lang('Favorites'), $other = false);
-        
         return view(PR_VIEW_DIR . '/user/favorite', ['data' => $data, 'uid' => $uid, 'favorite' => $result]);   
     }
     
@@ -434,12 +438,12 @@ class UserController extends \MainController
    
         $data = [
             'h1'            => lang('Drafts') . ' ' . $login,
-            'canonical'     => '/***', 
+            'canonical'     => '/***',
+            'sheet'         => 'drafts', 
+            'meta_title'    => lang('Drafts'),
+            'meta_desc'     => lang('Drafts'),
         ];
 
-        // title, description
-        Base::Meta(lang('Drafts'), lang('Drafts'), $other = false);
-        
         return view(PR_VIEW_DIR . '/user/draft-post', ['data' => $data, 'uid' => $uid, 'drafts' => $drafts]);   
     }
 
@@ -452,11 +456,11 @@ class UserController extends \MainController
         $uid  = Base::getUid();
         $data = [
             'h1'            => lang('Invite'),
-            'canonical'     => '/***', 
+            'canonical'     => '/***',
+            'sheet'         => 'invite', 
+            'meta_title'    => lang('Invite'),
+            'meta_desc'     => lang('Invite'), 
         ];
-
-        // title, description
-        Base::Meta(lang('Invite'), lang('Invite'), $other = false);
 
         return view(PR_VIEW_DIR . '/user/invite', ['data' => $data, 'uid' => $uid]);    
     }
@@ -483,11 +487,11 @@ class UserController extends \MainController
  
         $data = [
             'h1'          => lang('Invites'),
-            'canonical'     => '/***', 
+            'canonical'     => '/***',
+            'sheet'         => 'invites', 
+            'meta_title'    => lang('Invites'),
+            'meta_desc'     => lang('Invites'),            
         ];
-
-        // title, description
-        Base::Meta(lang('Invites'), lang('Invites'), $other = false);
 
         return view(PR_VIEW_DIR . '/user/invitation', ['data' => $data, 'uid' => $uid, 'user' => $user,  'result' => $Invitation]);  
     }

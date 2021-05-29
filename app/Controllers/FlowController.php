@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use App\Models\FlowModel;
 use Hleb\Constructor\Handlers\Request;
+use Lori\Config;
 use Lori\Base;
 
 class FlowController extends \MainController
@@ -18,11 +19,6 @@ class FlowController extends \MainController
     
     public function index()
     {
-        $account    = \Request::getSession('account');
-        $user_id    = $account ? $account['user_id'] : 0;
-        
-        Base::Meta(lang('Flow'), lang('Flow'), $other = false);
-    
         Request::getResources()->addBottomStyles('/assets/css/flow.css');
         Request::getResources()->addBottomScript('/assets/js/flow.js');
         
@@ -30,8 +26,11 @@ class FlowController extends \MainController
         $data = [
             'h1'            => lang('Flow'),
             'canonical'     => '/flow',
+            'sheet'         => 'flow',
+            'meta_title'    => lang('Flow'),
+            'meta_desc'     => lang('Flow'),
         ];
-
+ 
         return view(PR_VIEW_DIR . '/flow/index', ['data' => $data, 'uid' => $uid]);
     }
     public function contentChat() {

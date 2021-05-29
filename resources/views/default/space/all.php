@@ -3,7 +3,7 @@
     <h1><?= $data['h1']; ?></h1>
     
     <ul class="nav-tabs">
-        <?php if($sort == 'all') { ?>
+        <?php if($data['sheet'] == 'spaces') { ?>
             <li class="active">
                 <span><?= lang('All'); ?></span>
             </li>
@@ -107,7 +107,7 @@
 
 </main>
 <aside>
-    <?php if($sort == 'all') { ?>
+    <?php if($data['sheet'] == 'spaces') { ?>
         <?= lang('info_space'); ?>
     <?php } else { ?>
         <?= lang('my_info_space'); ?>

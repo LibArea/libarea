@@ -52,12 +52,12 @@ class SearchController extends \MainController
             $result = '';
         }
         
-        Base::Meta(lang('Search'), lang('search-desc'), $other = false);
-        
         $uid  = Base::getUid();
         $data = [
-            'h1'        => lang('Search'),
-            'canonical' => '/search'
+            'h1'            => lang('Search'),
+            'canonical'     => '/search',
+            'meta_title'    => lang('Search'),
+            'meta_desc'     => lang('Search'), 
         ];
 
         return view(PR_VIEW_DIR . '/search/index', ['data' => $data, 'uid' => $uid, 'result' => $result, 'query' => $query]);
@@ -81,15 +81,17 @@ class SearchController extends \MainController
          
         }
         
-        $meta_title = lang('Domain') . ': ' . $domain;
-        $meta_desc = lang('domain-desc') . ': ' . $domain;
-        Base::Meta($meta_title, $meta_desc, $other = false);
+        $meta_title = lang('Domain') . ': ' . $domain .' | '. Config::get(Config::PARAM_NAME);
+        $meta_desc = lang('domain-desc') . ': ' . $domain .' '. Config::get(Config::PARAM_HOME_TITLE);
         
         $data = [
             'h1'            => lang('Domain') . ': ' . $domain,  
             'canonical'     => '/' . $domain,
+            'meta_title'    => $meta_title,
+            'meta_desc'     => $meta_desc, 
         ];
         
         return view(PR_VIEW_DIR . '/search/domain', ['data' => $data, 'uid' => $uid, 'posts' => $result]);
     }
+
 }

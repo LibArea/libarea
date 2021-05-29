@@ -25,11 +25,11 @@
     <br><br>
     
     <b>Какие технологии используются на сайте?</b><br>
-    В разделе документация есть статья: <a rel="nofollow noreferrer" target="_blank" href="http://docs.loriup.ru/info/hleb">Какие технологии использует сайт?</a> <i class="icon link"></i> 
+    В разделе документация есть статья: <a rel="nofollow noreferrer" target="_blank" href="https://docs.loriup.ru/info/hleb">Какие технологии использует сайт?</a> <i class="icon link"></i> 
     <br><br>
       
     <b>Где можно подробней ознакомится с документацией?</b><br>
-    В разделе документация: <a href="http://docs.loriup.ru">docs.loriup.ru</a>
+    В разделе документация: <a href="https://docs.loriup.ru">docs.loriup.ru</a>
     <br><br>
     
     <b>Как я могу помочь сайту?</b><br>

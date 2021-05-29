@@ -10,6 +10,7 @@ use App\Models\VotesAnswerModel;
 use App\Models\NotificationsModel;
 use App\Models\FlowModel;
 use Hleb\Constructor\Handlers\Request;
+use Lori\Config;
 use Lori\Base;
 
 class AnswerController extends \MainController
@@ -45,12 +46,12 @@ class AnswerController extends \MainController
             'h1'            => lang('All answers'),
             'pagesCount'    => $pagesCount,
             'pNum'          => $page,
-            'canonical'     => '/answers', 
+            'canonical'     => Config::get(Config::PARAM_URL) . '/answers',
+            'sheet'         => 'answers', 
+            'meta_title'    => lang('All answers') .' | '. Config::get(Config::PARAM_NAME),
+            'meta_desc'     => lang('answers-desc') .' '. Config::get(Config::PARAM_HOME_TITLE),            
         ];
 
-        // title, description
-        Base::Meta(lang('All answers'), lang('answers-desc'), $other = false);
- 
         return view(PR_VIEW_DIR . '/answer/answ-all', ['data' => $data, 'uid' => $uid, 'answers' => $result]);
     }
 
@@ -128,6 +129,12 @@ class AnswerController extends \MainController
         $post = PostModel::postId($post_id);
         Base::PageError404($post);
 
+        Request::getResources()->addBottomStyles('/assets/md/editor.css');  
+        Request::getResources()->addBottomScript('/assets/md/Markdown.Converter.js'); 
+        Request::getResources()->addBottomScript('/assets/md/Markdown.Sanitizer.js');
+        Request::getResources()->addBottomScript('/assets/md/Markdown.Editor.js');
+        Request::getResources()->addBottomScript('/assets/md/editor.js');
+        
         $data = [
             'h1'                => lang('Edit answer'),
             'canonical'         => '/***',
@@ -135,15 +142,10 @@ class AnswerController extends \MainController
             'post_id'           => $post_id,
             'user_id'           => $uid['id'],
             'answer_content'    => $answ['answer_content'],
+            'sheet'             => 'edit-answers', 
+            'meta_title'        => lang('All answers'),
+            'meta_desc'         => lang('answers-desc'),  
         ]; 
-        
-        Base::Meta(lang('Edit answer'), lang('Edit answer'), $other = false);
-         
-        Request::getResources()->addBottomStyles('/assets/md/editor.css');  
-        Request::getResources()->addBottomScript('/assets/md/Markdown.Converter.js'); 
-        Request::getResources()->addBottomScript('/assets/md/Markdown.Sanitizer.js');
-        Request::getResources()->addBottomScript('/assets/md/Markdown.Editor.js');
-        Request::getResources()->addBottomScript('/assets/md/editor.js');
         
         return view(PR_VIEW_DIR . '/answer/answ-edit-form', ['data' => $data, 'uid' => $uid, 'post' => $post]);
     }
@@ -200,15 +202,12 @@ class AnswerController extends \MainController
         
         $uid  = Base::getUid();
         $data = [
-            'h1'        => 'Ответы ' . $login,
-            'canonical' => '/u/' . $login . '/answers', 
+            'h1'            =>  lang('Answers') .' '. $login,
+            'canonical'     => Config::get(Config::PARAM_URL) . '/u/' . $login . '/answers',
+            'sheet'         => 'user-answers', 
+            'meta_title'    => lang('Answers') .' '. $login .' | '. Config::get(Config::PARAM_NAME),
+            'meta_desc'     => 'Ответы  учасника сообщества ' . $login .' '. Config::get(Config::PARAM_HOME_TITLE),
         ];
-
-        $meta_title = 'Ответы ' . $login;
-        $meta_desc  = 'Ответы  учасника сообщества ' . $login . ' на сайте ';
-        
-        // title, description
-        Base::Meta($meta_title, $meta_desc, $other = false);
         
         return view(PR_VIEW_DIR . '/answer/answ-user', ['data' => $data, 'uid' => $uid, 'answers' => $result]);
     }

@@ -9,6 +9,7 @@ use App\Models\VotesCommentModel;
 use App\Models\NotificationsModel;
 use App\Models\FlowModel;
 use Hleb\Constructor\Handlers\Request;
+use Lori\Config;
 use Lori\Base;
 
 class CommentController extends \MainController
@@ -44,12 +45,12 @@ class CommentController extends \MainController
             'h1'            => lang('All comments'),
             'pagesCount'    => $pagesCount,
             'pNum'          => $page,
-            'canonical'     => '/comments', 
+            'canonical'     => Config::get(Config::PARAM_URL) . '/comments', 
+            'sheet'         => 'comments', 
+            'meta_title'    => lang('All comments') .' | '. Config::get(Config::PARAM_NAME),
+            'meta_desc'     => lang('comments-desc') .' '. Config::get(Config::PARAM_HOME_TITLE),
         ];
 
-        // title, description
-        Base::Meta(lang('All comments'), lang('comments-desc'), $other = false);
- 
         return view(PR_VIEW_DIR . '/comment/comm-all', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
     }
 
@@ -214,15 +215,12 @@ class CommentController extends \MainController
         
         $uid  = Base::getUid();
         $data = [
-            'h1'        => 'Комментарии ' . $login,
-            'canonical' => '/u/' . $login . '/comments', 
+            'h1'            => 'Комментарии ' . $login,
+            'canonical'     => Config::get(Config::PARAM_URL) . '/u/' . $login . '/comments', 
+            'sheet'         => 'user-comments', 
+            'meta_title'    => 'Комментарии ' . $login .' | '. Config::get(Config::PARAM_NAME),
+            'meta_desc'     => 'Комментарии ' . $login .' '. Config::get(Config::PARAM_HOME_TITLE),
         ];
-
-        $meta_title = 'Комментарии ' . $login;
-        $meta_desc  = 'Комментарии ' . $login;
-
-        // title, description
-        Base::Meta($meta_title, $meta_desc, $other = false);
         
         return view(PR_VIEW_DIR . '/comment/comm-user', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
     }

@@ -145,7 +145,6 @@ Route::get('/u/{login}/posts')->controller('PostController@getUserPosts')->where
 Route::get('/u/{login}/answers')->controller('AnswerController@getUserAnswers')->where(['login' => '[A-Za-z0-9]+']);
 Route::get('/u/{login}/comments')->controller('CommentController@getUserComments')->where(['login' => '[A-Za-z0-9]+']);
 
-
 // Поток
 Route::get('/flow')->controller('FlowController');
 Route::get('/flow/content')->controller('FlowController@contentChat');
@@ -165,6 +164,9 @@ Route::type('post')->get('/comments/addform')->controller('CommentController@add
 // Поиск
 Route::type(['get','post'])->get('/search')->controller('SearchController');
 Route::get('/domain/{domain}')->controller('SearchController@domain')->where(['domain' => '[A-Za-z0-9-.]+']);
+
+Route::type(['get','post'])->get('/search/users')->controller('PostController@userSelect');
+
 
 // Пагинация и главная (feed) страница, top, all...
 Route::get('/{page?}')->controller('PostController', ['feed'])->where(['page' => '[0-9]+']);

@@ -143,7 +143,7 @@
         <?php if($user['vk']) { ?>
             <div class="boxline">
                 <label for="name"><?= lang('VK'); ?></label>
-                <a href="https://vk.com/<?= $user['telegram']; ?>" rel="noopener nofollow ugc">
+                <a href="https://vk.com/<?= $user['vk']; ?>" rel="noopener nofollow ugc">
                     <?= $user['vk']; ?>
                 </a>
             </div> 

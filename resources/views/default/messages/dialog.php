@@ -1,7 +1,7 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 <main class="w-75">
 
-    <h1><a href="/u/<?= $uid['login']; ?>/messages">Все сообщения</a> / <?= $data['title']; ?> </h1>
+    <h1><a href="/u/<?= $uid['login']; ?>/messages"><?= lang('All messages'); ?></a> / <?= $data['h1']; ?> </h1>
         
     <form action="/messages/send" method="post">
     <?= csrf_field() ?>
@@ -12,7 +12,7 @@
             <?= $data['recipient_user']['login']; ?>
         </a><br>
                                                                                                                                                            
-        <textarea rows="3" id="message" class="mess" placeholder="Напишите..." type="text" name="message" /></textarea>
+        <textarea rows="3" id="message" class="mess" placeholder="<?= lang('Write'); ?>..." type="text" name="message" /></textarea>
         <p>
         <input type="submit" name="submit" value="<?= lang('Reply to'); ?>" class="submit">    
         </p>

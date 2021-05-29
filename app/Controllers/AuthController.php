@@ -19,12 +19,12 @@ class AuthController extends \MainController
         
         $uid  = Base::getUid();
         $data = [
-            'h1'        => lang('Sign up'),
-            'canonical' => '/register',
+            'h1'            => lang('Sign up'),
+            'canonical'     => '/register',
+            'sheet'         => 'register', 
+            'meta_title'    => lang('Sign up'),
+            'meta_desc'     => lang('Sign up'),
         ];
-
-        // title, description
-        Base::Meta(lang('Sign up'), lang('Sign up'), $other = false);
         
         return view(PR_VIEW_DIR . '/auth/register', ['data' => $data, 'uid' => $uid]);    
     }
@@ -48,12 +48,12 @@ class AuthController extends \MainController
         
         $uid  = Base::getUid();
         $data = [
-            'h1'        => lang('Registration by invite'),
-            'canonical' => '/register',
+            'h1'            => lang('Registration by invite'),
+            'canonical'     => '/register',
+            'sheet'         => 'register', 
+            'meta_title'    => lang('Registration by invite'),
+            'meta_desc'     => lang('Registration by invite'),
         ];
-
-        // title, description
-        Base::Meta(lang('Registration by invite'), lang('Registration by invite'), $other = false);
         
         return view(PR_VIEW_DIR . '/auth/register-invate', ['data' => $data, 'uid' => $uid, 'invate' => $invate]);  
     }
@@ -187,12 +187,12 @@ class AuthController extends \MainController
     {
         $uid  = Base::getUid();
         $data = [
-            'h1'        => lang('Sign in'),
-            'canonical' => '/login',
+            'h1'            => lang('Sign in'),
+            'canonical'     => '/login',
+            'sheet'         => 'login', 
+            'meta_title'    => lang('Sign in'),
+            'meta_desc'     => lang('Sign in'),
         ];
-
-        // title, description
-        Base::Meta(lang('Sign in'), lang('Sign in'), $other = false);
 
         return view(PR_VIEW_DIR . '/auth/login', ['data' => $data, 'uid' => $uid]);
     }
@@ -270,12 +270,12 @@ class AuthController extends \MainController
     {
         $uid  = Base::getUid();
         $data = [
-            'h1'        => lang('Password Recovery'),
-            'canonical' => '/recover',
+            'h1'            => lang('Password Recovery'),
+            'canonical'     => '/recover',
+            'sheet'         => 'login', 
+            'meta_title'    => lang('Password Recovery'),
+            'meta_desc'     => lang('Password Recovery'),
         ];
-
-        // title, description
-        Base::Meta(lang('Password Recovery'), lang('Password Recovery'), $other = false);
         
         return view(PR_VIEW_DIR . '/auth/recover', ['data' => $data, 'uid' => $uid]);
     }
@@ -341,14 +341,14 @@ class AuthController extends \MainController
      
         $uid  = Base::getUid();
         $data = [
-            'h1'        => lang('Password Recovery'),
-            'code'      => $code,
-            'user_id'   => $user_id['activate_user_id'],
-            'canonical' => 'recover/remind',
+            'h1'            => lang('Password Recovery'),
+            'code'          => $code,
+            'user_id'       => $user_id['activate_user_id'],
+            'canonical'     => 'recover/remind',
+            'sheet'         => 'recovery', 
+            'meta_title'    => lang('Password Recovery'),
+            'meta_desc'     => lang('Password Recovery'),
         ];
-
-        // title, description
-        Base::Meta(lang('Password Recovery'), lang('Password Recovery'), $other = false);
         
         return view(PR_VIEW_DIR . '/auth/newrecover', ['data' => $data, 'uid' => $uid]);
     }

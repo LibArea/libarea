@@ -13,13 +13,13 @@ class InfoController extends \MainController
     {
         $uid  = Base::getUid();
         $data = [
-            'h1'        => lang('Info'),
-            'canonical' => Config::get(Config::PARAM_URL) . '/info',
+            'h1'            => lang('Info'),
+            'canonical'     => Config::get(Config::PARAM_URL) . '/info',
+            'sheet'         => 'info',
+            'meta_title'    => lang('Info') .' | '. Config::get(Config::PARAM_NAME),
+            'meta_desc'     => lang('info-desc') .' '. Config::get(Config::PARAM_HOME_TITLE),
         ];
         
-       // Далее title, description
-       Base::Meta(lang('Info'), lang('info-desc'), $other = false); 
- 
        return view(PR_VIEW_DIR . '/info/index', ['data' => $data, 'uid' => $uid]);
     }
 
@@ -48,10 +48,11 @@ class InfoController extends \MainController
             'comm_num'      => $comm_num,
             'vote_comm_num' => $vote_comm_num,
             'vote_post_num' => $vote_post_num,
-            'flow_num'      => $result
+            'flow_num'      => $result,
+            'sheet'         => 'stats',
+            'meta_title'    => lang('Statistics') .' | '. Config::get(Config::PARAM_NAME),
+            'meta_desc'     => lang('stats-desc') .' '. Config::get(Config::PARAM_HOME_TITLE),
         ];
-
-        Base::Meta(lang('Statistics'), lang('stats-desc'), $other = false); 
 
         return view(PR_VIEW_DIR . '/info/stats', ['data' => $data, 'uid' => $uid]);
 	}
@@ -60,11 +61,12 @@ class InfoController extends \MainController
 	{
         $uid  = Base::getUid();
         $data = [
-            'h1'        => lang('Privacy Policy'),
-            'canonical' => Config::get(Config::PARAM_URL) . '/info/privacy',
+            'h1'            => lang('Privacy Policy'),
+            'canonical'     => Config::get(Config::PARAM_URL) . '/info/privacy',
+            'sheet'         => 'privacy',
+            'meta_title'    => lang('Privacy Policy') .' | '. Config::get(Config::PARAM_NAME),
+            'meta_desc'     => lang('privacy-desc') .' '. Config::get(Config::PARAM_HOME_TITLE),
         ];
-
-        Base::Meta(lang('Privacy Policy'), lang('privacy-desc'), $other = false);
 
         return view(PR_VIEW_DIR . '/info/privacy', ['data' => $data, 'uid' => $uid]);
 	}  
@@ -73,11 +75,12 @@ class InfoController extends \MainController
 	{
         $uid  = Base::getUid();
         $data = [
-            'h1'        => lang('Restriction'),
-            'canonical' => Config::get(Config::PARAM_URL) . '/info/restriction',
+            'h1'            => lang('Restriction'),
+            'canonical'     => Config::get(Config::PARAM_URL) . '/info/restriction',
+            'sheet'         => 'info-restriction',
+            'meta_title'    => lang('Restriction') .' | '. Config::get(Config::PARAM_NAME),
+            'meta_desc'     => lang('Restriction') .' '. Config::get(Config::PARAM_HOME_TITLE),
         ];
-
-        Base::Meta(lang('Restriction'), lang('Restriction'), $other = false);
 
         return view(PR_VIEW_DIR . '/info/restriction', ['data' => $data, 'uid' => $uid]);
 	} 

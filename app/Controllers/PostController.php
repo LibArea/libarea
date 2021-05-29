@@ -16,7 +16,7 @@ use SimpleImage;
 class PostController extends \MainController
 {
     // Главная страница
-    public function index($type) 
+    public function index($sheet) 
     {
         $pg     = \Request::getInt('page'); 
         $page   = (!$pg) ? 1 : $pg;
@@ -24,8 +24,8 @@ class PostController extends \MainController
 
         $space_user  = SpaceModel::getSpaceUserSigned($uid['id']);
         
-        $pagesCount = PostModel::postsFeedCount($space_user, $uid['id'], $type); 
-        $posts      = PostModel::postsFeed($page, $space_user, $uid['trust_level'], $uid['id'], $type);
+        $pagesCount = PostModel::postsFeedCount($space_user, $uid['id'], $sheet); 
+        $posts      = PostModel::postsFeed($page, $space_user, $uid['trust_level'], $uid['id'], $sheet);
 
         Base::PageError404($posts);
 
@@ -54,7 +54,7 @@ class PostController extends \MainController
             $num = '';
         }
 
-        if($type == 'feed') {
+        if($sheet == 'feed') {
             $meta_title = Config::get(Config::PARAM_HOME_TITLE) . $num;
             $meta_desc  = Config::get(Config::PARAM_META_DESC) . $num;
             $canonical  = Config::get(Config::PARAM_URL);
@@ -64,22 +64,18 @@ class PostController extends \MainController
             $canonical  = Config::get(Config::PARAM_URL) . '/top';
         }
 
-        $other = [
-            'img' => Config::get(Config::PARAM_URL) . '/assets/images/areadev.webp',
-            'segment' => 'home',
-        ];
-   
-        // title, description
-        Base::Meta($meta_title, $meta_desc, $other);  
-        
         $data = [
             'latest_answers'    => $result_comm,
             'pagesCount'        => $pagesCount,
             'pNum'              => $page,
+            'sheet'             => $sheet,
             'canonical'         => $canonical,
+            'img'               => Config::get(Config::PARAM_URL) . '/assets/images/areadev.webp',
+            'meta_title'        => $meta_title,
+            'meta_desc'         => $meta_desc,
         ];
 
-        return view(PR_VIEW_DIR . '/home', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'space_bar' => $space_signed_bar, 'type' => $type]);
+        return view(PR_VIEW_DIR . '/home', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'space_bar' => $space_signed_bar]);
     }
 
     // Полный пост
@@ -126,7 +122,7 @@ class PostController extends \MainController
         }
      
         $post['post_content']   = Base::Markdown($post['post_content']);
-        $post['post_date']      = Base::ru_date($post['post_date']);
+        $post['post_date_lang']      = Base::ru_date($post['post_date']);
         $post['num_answers']    = Base::ru_num('answ', $post['post_answers_num']); 
         
         // общее количество (для модели - беседа)
@@ -169,18 +165,10 @@ class PostController extends \MainController
             $content_img  = null;
         }
        
-        $other = [
-            'type'      => 'article',
-            'url'       => '/post/' . $post['post_id'] . '/' . $post['post_slug'],
-            'post_date' => $post['post_date'],
-            'img'       => $content_img,
-        ];
-       
         // title, description
         $desc  = mb_strcut(strip_tags($post['post_content']), 0, 180);
         $meta_desc = $desc . ' — ' . $post['space_name'];
-        $title = $post['post_title'] . '  ' . lang('In') . ' ' . $post['space_name'];
-        Base::Meta($title, $meta_desc, $other); 
+        $meta_title = strip_tags($post['post_title']) . '  ' . lang('In') . ' ' . strip_tags($post['space_name']);
 
         if($uid['id'] > 0) {
             Request::getResources()->addBottomStyles('/assets/md/editor.css');  
@@ -189,11 +177,23 @@ class PostController extends \MainController
             Request::getResources()->addBottomScript('/assets/md/Markdown.Editor.js');
             Request::getResources()->addBottomScript('/assets/md/editor.js');
         }
-
+        
+        if($post['post_is_delete'] == 1) {
+            \Request::getHead()->addMeta('robots', 'noindex');
+        }
+        
+        // + для Q&A другая разметка (в планах)
+        $sheet = 'article';
+        
         $data = [
-            'h1'        => lang('Post'),
-            'canonical' => Config::get(Config::PARAM_URL) . '/post/' . $post['post_id'] . '/' . $post['post_slug'],
-        ]; 
+            'h1'            => lang('Post'),
+            'canonical'     => Config::get(Config::PARAM_URL) . '/post/' . $post['post_id'] . '/' . $post['post_slug'],
+            'sheet'         => $sheet,
+            'post_date'     => $post['post_date'],
+            'img'           => $content_img,
+            'meta_title'    => $meta_title,
+            'meta_desc'     => $meta_desc,
+        ];
         
         return view(PR_VIEW_DIR . '/post/post-view', ['data' => $data, 'post' => $post, 'answers' => $answers,  'uid' => $uid,  'recommend' => $recommend,  'lo' => $lo]);
     }
@@ -218,12 +218,13 @@ class PostController extends \MainController
 
         $meta_title = lang('Posts') . ' ' . $login;
         $meta_desc  = lang('Participant posts') . ' ' . $login;
-        
-        // title, description
-        Base::Meta($meta_title, $meta_desc, $other = false); 
-        
+
         $data = [
-            'h1'    => $meta_title 
+            'h1'            => $meta_title,
+            'canonical'     => Config::get(Config::PARAM_URL) . '/u/' . $login . '/posts',
+            'sheet'         => 'user-post',
+            'meta_title'    => $meta_title,
+            'meta_desc'     => $meta_desc,
         ]; 
         
         return view(PR_VIEW_DIR . '/post/post-user', ['data' => $data, 'uid' => $uid, 'posts' => $result]);
@@ -245,11 +246,11 @@ class PostController extends \MainController
         // В методе AddPost() необходимые изменения внесены
         
         $data = [
-            'h1'    => lang('Add post')
+            'h1'            => lang('Add post'),
+            'sheet'         => 'add-post',
+            'meta_title'    => lang('Add post'),
+            'meta_desc'     => lang('Add post'),
         ];  
-
-        // title, description
-        Base::Meta(lang('Add post'), lang('Add post'), $other = false); 
         
         Request::getHead()->addStyles('/assets/css/image-uploader.css'); 
         Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
@@ -392,7 +393,7 @@ class PostController extends \MainController
         $post_id = PostModel::AddPost($data);
         
         // Отправим в Discord
-        if(Config::get(Config::PARAM_DISCORD)) {
+        if(Config::get(Config::PARAM_DISCORD) == 1) {
             $url = '/post/'. $post_id .'/'. $post_slug;
             Base::AddWebhook($post_content, $post_title, $url);
         }
@@ -493,24 +494,38 @@ class PostController extends \MainController
         
         $space = SpaceModel::getSpaceSelect($uid);
         $tags  = SpaceModel::getSpaceTags($post['post_space_id']);
-
-        $data = [
-            'h1'    => lang('Edit post')
-        ];
+        $user  = UserModel::getUserId($post['post_user_id']);
 
         Request::getHead()->addStyles('/assets/css/image-uploader.css'); 
+        Request::getResources()->addBottomStyles('/assets/css/select2.css'); 
+        Request::getResources()->addBottomStyles('/assets/md/editor.css');  
+        
         Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
 
-        Request::getResources()->addBottomStyles('/assets/md/editor.css');  
         Request::getResources()->addBottomScript('/assets/md/Markdown.Converter.js'); 
         Request::getResources()->addBottomScript('/assets/md/Markdown.Sanitizer.js');
         Request::getResources()->addBottomScript('/assets/md/Markdown.Editor.js');
         Request::getResources()->addBottomScript('/assets/md/editor.js');
 
-        // title, description
-        Base::Meta(lang('Edit post'), lang('Edit post'), $other = false);
+        if($uid['trust_level'] == 5) {
+            Request::getResources()->addBottomScript('/assets/js/select2.min.js'); 
+        } 
+        
+        $data = [
+            'h1'            => lang('Edit post'),
+            'sheet'         => 'edit-post',
+            'meta_title'    => lang('Edit post'),
+            'meta_desc'     => lang('Edit post'),
+        ];
 
-        return view(PR_VIEW_DIR . '/post/post-edit', ['data' => $data, 'uid' => $uid, 'post' => $post, 'space' => $space, 'tags' => $tags]);
+        return view(PR_VIEW_DIR . '/post/post-edit', ['data' => $data, 'uid' => $uid, 'post' => $post, 'space' => $space, 'tags' => $tags, 'user' => $user]);
+    }
+    
+    // Смена автора поста
+    public function userSelect()
+    {
+        $search =  \Request::getPost('searchTerm');
+        return UserModel::getSearchUsers($search);
     }
     
     // Изменяем пост
@@ -527,6 +542,7 @@ class PostController extends \MainController
         $post_space_id          = \Request::getPostInt('space_id');
         $post_tag_id            = \Request::getPostInt('tag_id');
         $draft                  = \Request::getPost('draft');
+        $post_user_new          = \Request::getPost('post_user_new');
         
         $account = \Request::getSession('account');
         
@@ -540,6 +556,17 @@ class PostController extends \MainController
         // Редактировать может только автор и админ
         if ($post['post_user_id'] != $account['user_id'] && $account['trust_level'] != 5) {
             redirect('/');
+        }
+        
+        // Если есть смена post_user_id и это TL5
+        if($post['post_user_id'] != $post_user_new) {
+            if($account['trust_level'] != 5) {
+                $post_user_id = $post['post_user_id'];
+            } else {    
+                $post_user_id = $post_user_new;
+            }
+        } else {
+            $post_user_id = $post['post_user_id'];
         }
         
         $redirect = '/post/edit' .$post_id;
@@ -623,6 +650,7 @@ class PostController extends \MainController
             'post_type'             => $post_type,
             'post_translation'      => $post_translation,
             'post_date'             => $post_date,
+            'post_user_id'          => $post_user_id,
             'post_draft'            => $post_draft,
             'post_content'          => $post_content,
             'post_content_img'      => $post_img,

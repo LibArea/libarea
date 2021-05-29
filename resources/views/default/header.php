@@ -5,20 +5,19 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
      
+        <title><?= $data['meta_title']; ?></title>
+        <meta name="description" content="<?= $data['meta_desc']; ?>">
+ 
         <?php getRequestHead()->output(); ?>
  
-        <?php if (!empty($post['post_is_delete']) == 1) { ?>  
-            <meta name="robots" content="noindex" />
-        <?php } ?>
-
-        <?php if (!empty($user['is_deleted']) == 1) { ?>  
-            <meta name="robots" content="noindex" />
-        <?php } ?>
-
         <link rel="canonical" href="<?= $data['canonical']; ?>">
+        
+        <?php include TEMPLATE_DIR . '/OpenGraph.php'; ?>
         
         <link rel="icon" href="/favicon.ico">
         <link rel="apple-touch-icon" href="/favicon.png">
+        
+        <script src="/assets/js/jquery.min.js"></script>
         <link rel="stylesheet" href="/assets/css/style.css">
     </head>
     

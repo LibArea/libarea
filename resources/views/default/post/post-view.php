@@ -49,7 +49,7 @@
                             <a href="/u/<?= $post['login']; ?>"><?= $post['login']; ?></a> 
                         </span>
                         <span class="date"> 
-                            <?= $post['post_date']; ?>
+                            <?= $post['post_date_lang']; ?>
                             <?php if($post['edit_date']) { ?> 
                                 (<?= lang('ed'); ?>) 
                             <?php } ?>

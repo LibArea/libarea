@@ -1,6 +1,6 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 <main class="w-75">
-        <h1><?= $data['title'] ?></h1>
+        <h1><?= $data['h1'] ?></h1>
         <?php if (!empty($data['messages'])) { ?>
 
             <?php foreach ($data['messages'] as  $msg) { ?>

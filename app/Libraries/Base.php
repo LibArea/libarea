@@ -35,7 +35,6 @@ class Base
             $uid['avatar']      = $usr['avatar'];
             $uid['hits_count']  = $usr['hits_count'];
              
-            Request::getResources()->addBottomScript('/assets/js/jquery.min.js');
             Request::getResources()->addBottomScript('/assets/js/app.js');
             
         } else {
@@ -404,7 +403,7 @@ class Base
 
                     // Подпись и аватар в подвале sitename
                     "footer" => [
-                        "text" => Config::get(Config::PARAM_NAME),
+                        "text" => Config::get(Config::PARAM_NAME_BOT),
                         "icon_url" => Config::get(Config::PARAM_ICON_URL),
                     ],
                 ]
@@ -424,37 +423,5 @@ class Base
         // echo $response;
         curl_close( $ch );
     }
-    
-    // Meta- теги
-    public static function Meta($meta_title, $meta_desc, $other)
-    {
-        if(!empty($other['segment']) == 'home') {
-            Request::getHead()->setTitle($meta_title);
-            Request::getHead()->setDescription($meta_desc);
-        } else {
-            Request::getHead()->setTitle($meta_title .' | '. Config::get(Config::PARAM_NAME));
-            Request::getHead()->setDescription($meta_desc .' '. Config::get(Config::PARAM_HOME_TITLE));
-        }
-
-        Request::getHead()->addMeta('og:title', $meta_title);
-        Request::getHead()->addMeta('og:description', $meta_desc);
-        Request::getHead()->addMeta('og:site_name', Config::get(Config::PARAM_HOME_TITLE));
-       
-        // Статья, профиль участника и весь остальной сайт
-        if(!empty($other['img'])) {
-            Request::getHead()->addMeta('og:image', $other['img']);
-            Request::getHead()->addMeta('og:image:type', 'image/webp');
-        }
-        if (!empty($other['type']) == 'article') {
-            Request::getHead()->addMeta('og:type', 'article');
-            Request::getHead()->addMeta('og:url', Config::get(Config::PARAM_URL) . $other['url']);
-            Request::getHead()->addMeta('article:published_time', $other['post_date']);
-        } elseif (!empty($other['type']) == 'profile') {
-            Request::getHead()->addMeta('og:type', 'profile');
-        } else {
-            Request::getHead()->addMeta('og:type', 'website');
-        }
-       
-    }
-    
+   
 }

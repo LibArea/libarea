@@ -70,9 +70,12 @@ class MessagesController extends \MainController
         }
 
 		$data = [
-            'title'       => 'Личные сообщения',
-            'description' => 'Страница личных сообщений',
-            'messages'    => $result,
+            'h1'            => lang('Private messages'),
+            'meta_title'    => lang('Private messages'),
+            'sheet'         => 'all-mess',
+            'meta_desc'     => '...',
+            'canonical'     => '/...',
+            'messages'      => $result,
         ];
 
         return view(PR_VIEW_DIR . '/messages/index', ['data' => $data, 'uid' => $uid]);
@@ -129,10 +132,13 @@ class MessagesController extends \MainController
 		}
         
         $data = [
-            'title'          => 'Диалог',
-            'description'    => 'Страница диалогов',
-            'list'           => $list,  
-            'recipient_user' => $recipient_user,
+            'h1'                => lang('Dialogue'),
+            'meta_title'        => lang('Dialogue'),
+            'meta_desc'         => '...',
+            'sheet'             => 'dialog',
+            'canonical'         => '/...',
+            'list'              => $list,  
+            'recipient_user'    => $recipient_user,
         ];
 
         return view(PR_VIEW_DIR . '/messages/dialog', ['data' => $data, 'uid' => $uid]);
@@ -142,9 +148,9 @@ class MessagesController extends \MainController
 	public function send()
 	{
         // Данные участника
-        $uid        = Base::getUid();
-        $message = Request::getPost('message');
-        $recipient_uid = Request::getPost('recipient');
+        $uid            = Base::getUid();
+        $message        = Request::getPost('message');
+        $recipient_uid  = Request::getPost('recipient');
 
         // Введите содержание сообщения
         if ($message == '')
@@ -174,9 +180,8 @@ class MessagesController extends \MainController
     // Форма отправки из профиля
     public function  profilMessages()
     {
-        $login = Request::get('login');
-        
-        if(!$user = UserModel::getUserLogin($login))
+        $login      = Request::get('login');
+        if(!$user   = UserModel::getUserLogin($login))
         {
             Base::addMsg('Пользователя не существует', 'error');
             redirect('/');
@@ -184,9 +189,11 @@ class MessagesController extends \MainController
         
         $uid  = Base::getUid();
         $data = [
-            'title'          => 'Отправить сообщение ' . $login,
-            'description'    => 'Страница отправки сообщения',
-            'recipient_uid'  => $user['id'],
+            'h1'            => lang('Send a message') . ' ' . $login,
+            'sheet'         => 'profil-mess',
+            'meta_desc'     => '...',
+            'canonical'     => '/...',
+            'recipient_uid' => $user['id'],
         ];
 
         return view(PR_VIEW_DIR . '/messages/user-add-messages', ['data' => $data, 'uid' => $uid]);

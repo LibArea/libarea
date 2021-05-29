@@ -97,8 +97,44 @@
             <?php if($post['post_draft'] == 1) { ?>
                 <input type="hidden" name="draft" id="draft" value="1">
             <?php } ?>
-            <input type="hidden" name="post_id" id="post_id" value="<?= $post['post_id']; ?>">
-            <input type="submit" name="submit" value="<?= lang('Edit'); ?>" />
+            
+            <?php if($uid['trust_level'] > 4) { ?> 
+                <div class="boxline">  
+                    <label for="post_content">Автор</label>
+                    <select name="post_user_new" id='selUser'>
+                        <option value="<?= $user['id']; ?>"><?= $user['login']; ?></option>
+                    </select>
+                    <script nonce="<?= $_SERVER['nonce']; ?>">
+                        $(document).ready(function(){
+                            $("#selUser").select2({
+                                ajax: { 
+                                    url: "/search/users",
+                                    type: "post",
+                                    dataType: 'json',
+                                    delay: 250,
+                                    data: function (params) {
+                                    return {
+                                      searchTerm: params.term 
+                                    };
+                                    },
+                                    processResults: function (response) {
+                                     return {
+                                        results: response
+                                     };
+                                    },
+                                    cache: true
+                                }
+                            });
+                        });
+                    </script>
+                </div>    
+            <?php } ?>
+            
+            <div class="boxline">
+                <br>
+                <input type="hidden" name="post_id" id="post_id" value="<?= $post['post_id']; ?>">
+                <input type="submit" name="submit" value="<?= lang('Edit'); ?>" />
+            </div>
         </form>
         <br>
     </div>

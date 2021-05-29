@@ -7,7 +7,7 @@
         </div>
     <?php } ?>
     <ul class="nav-tabs">
-        <?php if($type == 'feed') { ?>
+        <?php if($data['sheet'] == 'feed') { ?>
             <li class="active">
                 <span><?= lang('Feed'); ?></span>
             </li>
