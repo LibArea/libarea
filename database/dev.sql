@@ -321,7 +321,6 @@ CREATE TABLE `users` (
   `cover_art` varchar(250) NOT NULL DEFAULT 'cover_art.jpeg',
   `color` varchar(12) NOT NULL DEFAULT '#f56400',
   `about` varchar(250) DEFAULT NULL,
-
   `website` varchar(50) DEFAULT NULL,
   `location` varchar(50) DEFAULT NULL,
   `public_email` varchar(50) DEFAULT NULL,
@@ -329,7 +328,6 @@ CREATE TABLE `users` (
   `twitter` varchar(50) DEFAULT NULL,
   `telegram` varchar(50) DEFAULT NULL,
   `vk` varchar(50) DEFAULT NULL,
-
   `rating` int(11) DEFAULT 0,
   `my_post` int(11) DEFAULT 0 COMMENT 'Пост выведенный в профиль',
   `ban_list` tinyint(1) DEFAULT 0,
@@ -516,8 +514,8 @@ CREATE TABLE `votes_post` (
 CREATE TABLE `badge` (
   `badge_id` int(6) NOT NULL,
   `badge_icon` varchar(550) NOT NULL,
-  `badge_tl` int(6) NOT NULL,
-  `badge_score` int(6) NOT NULL,
+  `badge_tl` int(6) DEFAULT NULL,
+  `badge_score` int(6) DEFAULT NULL,
   `badge_title` varchar(150) NOT NULL,
   `badge_description` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

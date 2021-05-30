@@ -296,7 +296,7 @@ class AdminController extends \MainController
         redirect($redirect);  
     }
     
-    // Измененяем награду
+    // Добавляем награду
     public function badgeAdd()
     {
         $uid = self::isAdmin();

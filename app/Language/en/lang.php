@@ -55,7 +55,8 @@ return [
     
     /* Meta - desc */
     'desc-user-all'         => 'List of all participants sorted by date of registration on the site',
-    'desc-profile'          => 'Participant*s profile page (posts, comments)',
+    'title-profile'         => '%1$s %2$s | Profile on %3$s',
+    'desc-profile'          => '%1$s - profile page. %2$s Posts, comments, awards on %3$s',
     'top-desc'              => 'List of popular posts in the community (by number of responses)',
     'space-feed-title'      => 'Feed of posts by space',
     'space-top-title'       => 'Popular posts by Space',

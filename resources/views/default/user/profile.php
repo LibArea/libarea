@@ -194,12 +194,16 @@
 
     <div class="profile-about">
         <blockquote>
-            <?php if($user['about']) { ?>
-            <?= $user['about']; ?>
-            <?php } else { ?>
-            <?= lang('Riddle'); ?>...
-            <?php } ?>
+            <?= $user['about']; ?>...
         </blockquote>
     </div>
+    
+    <h3 class="recommend"><?= lang('Badges'); ?></h3>
+    <div class="profile-badge">
+        <?php if($user['id'] < 50) { ?>
+           <i title="<?= lang('Joined in the early days'); ?>" class="icon badge"></i>
+        <?php } ?>
+    </div>
+    <br>
 </aside>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

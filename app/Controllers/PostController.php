@@ -168,7 +168,7 @@ class PostController extends \MainController
         // title, description
         $desc  = mb_strcut(strip_tags($post['post_content']), 0, 180);
         $meta_desc = $desc . ' — ' . $post['space_name'];
-        $meta_title = strip_tags($post['post_title']) . '  ' . lang('In') . ' ' . strip_tags($post['space_name']);
+        $meta_title = strip_tags($post['post_title']) . ' — ' . strip_tags($post['space_name']) .' | '. Config::get(Config::PARAM_NAME);
 
         if($uid['id'] > 0) {
             Request::getResources()->addBottomStyles('/assets/md/editor.css');  

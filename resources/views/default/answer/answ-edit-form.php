@@ -1,5 +1,5 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<main class="w-75">
+<main class="w-100">
 <script src="/assets/js/jquery.min.js"></script>
     <h1><?= $data['h1']; ?>: 
         <a href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">

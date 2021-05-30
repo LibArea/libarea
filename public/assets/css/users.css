@@ -131,6 +131,14 @@ h1.profile {
   width: 9.5em;
 }
 
+.profile-badge i.icon {
+  font-size: 21px;
+}
+
+.icon.badge {
+  color: #390;
+}
+
 @media (max-width: 880px) {
   .profile-ava img {
     width: 110px;

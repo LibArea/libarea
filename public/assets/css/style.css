@@ -1340,17 +1340,6 @@ div.voters .asnw-up-id {
   display: none;
 }
 
-.menu-info a {
-  display: block;
-  font-size: 15px;
-  color: var(--tertiary);
-  margin-bottom: 8px;
-}
-
-.menu-info a.active {
-  color: #1ca1f3;
-}
-
 /* Info пространство и рекомендовано в посте */
 .space-info {
   background: #efefef;
@@ -1422,6 +1411,17 @@ h3.recommend {
   font-size: 13px;
   color: #333;
   font-weight: 400;
+}
+
+.menu-info a {
+  display: block;
+  font-size: 15px;
+  color: var(--tertiary);
+  margin-bottom: 8px;
+}
+
+.menu-info a.active {
+  color: #1ca1f3;
 }
 
 /* Хлебные крошки */
@@ -1537,62 +1537,6 @@ i.github {
   padding: 1px 0;
 }
 
-.dropdown-menu {
-  display: none;
-  position: absolute;
-  background-color: var(--secondary);
-  min-width: 155px;
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-  z-index: 21;
-  right: 6px;
-  top: 25px;
-  padding: 2px 4px 4px 4px;
-  border-radius: 3px;
-}
-
-.dropdown-menu.show {
-  display: block;
-}
-
-.dropdown-menu a {
-  color: var(--tertiary);
-  display: block;
-  padding: 8px 9px 1px 6px;
-  font-size: 15px;
-}
-
-.dropdown-menu a span.ti-angle-down:hover,
-.dropdown-menu a:hover {
-  color: var(--primary);
-}
-
-@media (max-width: 1050px) {
-  aside {
-    margin: 0 15px 20px 0;
-    width: 190px;
-  }
-}
-
-@media (max-width: 810px) {
-  main,
-  main.w-75,
-  img.img-post { width: 100%; }
-
-  .no-mob,
-  aside { display: none; }
-  header { margin-left: 0; }
-  .no-pc { display: block; }
-  .column { width: 19%; }
-  input.add,
-  input.add-url { width: 94%; }
-  .text-oth { width: 46%; }
-  .text-info { width: 40%; }
-}
-
-@media (max-width: 704px) {
-  form.form { display: none; }
-}
-
 /* dark */
 .dark {
   background: #333;
@@ -1650,6 +1594,62 @@ i.github {
 .dark .dropdown-menu,
 .dark footer {
   background-color: #222;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: var(--secondary);
+  min-width: 155px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  z-index: 21;
+  right: 6px;
+  top: 25px;
+  padding: 2px 4px 4px 4px;
+  border-radius: 3px;
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+.dropdown-menu a {
+  color: var(--tertiary);
+  display: block;
+  padding: 8px 9px 1px 6px;
+  font-size: 15px;
+}
+
+.dropdown-menu a span.ti-angle-down:hover,
+.dropdown-menu a:hover {
+  color: var(--primary);
+}
+
+@media (max-width: 1050px) {
+  aside {
+    margin: 0 15px 20px 0;
+    width: 190px;
+  }
+}
+
+@media (max-width: 810px) {
+  main,
+  main.w-75,
+  img.img-post { width: 100%; }
+
+  .no-mob,
+  aside { display: none; }
+  header { margin-left: 0; }
+  .no-pc { display: block; }
+  .column { width: 19%; }
+  input.add,
+  input.add-url { width: 94%; }
+  .text-oth { width: 46%; }
+  .text-info { width: 40%; }
+}
+
+@media (max-width: 704px) {
+  form.form { display: none; }
 }
 
 @font-face {
@@ -1717,3 +1717,4 @@ a:hover .icon::before {
 .icon.info::before { content: "\e08b"; }
 .icon.cloud-upload::before { content: "\e084"; }
 .icon.close::before { content: "\e082"; }
+.icon.badge::before { content: "\e028"; }

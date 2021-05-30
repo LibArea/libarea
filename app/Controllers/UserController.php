@@ -40,9 +40,14 @@ class UserController extends \MainController
         Base::PageError404($user);
 
         $post = PostModel::postId($user['my_post']);
+        
+        if(!$user['about']) { 
+            $user['about'] = lang('Riddle') . '...';
+        } 
 
-        $meta_title = $user['login'] . ' - профиль';
-        $meta_desc  = lang('desc-profile') . ' ' . $user['login'];
+        $site_name = Config::get(Config::PARAM_NAME);
+        $meta_title = sprintf(lang('title-profile'), $user['login'], $user['name'], $site_name); 
+        $meta_desc  = sprintf(lang('desc-profile'), $user['login'], $user['about'], $site_name);
 
         \Request::getHead()->addStyles('/assets/css/users.css');
 
@@ -61,7 +66,7 @@ class UserController extends \MainController
 
         $uid  = Base::getUid();
         $data =[
-            'h1'            => $user['login'] . ' - профиль',
+            'h1'            => $user['login'],
             'created_at'    => Base::ru_date($user['created_at']),
             'trust_level'   => UserModel::getUserTrust($user['id']),
             'post_num_user' => UserModel::userPostsNum($user['id']),
@@ -93,10 +98,10 @@ class UserController extends \MainController
         
         $data = [
             'h1'            => lang('Setting profile'),
-            'canonical'     => '/***',
+            'canonical'     => '***',
             'sheet'         => 'setting', 
             'meta_title'    => lang('Setting profile'),
-            'meta_desc'     => lang('Setting profile'),
+            'meta_desc'     => '***',
         ];
 
         return view(PR_VIEW_DIR . '/user/setting', ['data' => $data, 'uid' => $uid, 'user' => $user]);
@@ -123,31 +128,24 @@ class UserController extends \MainController
         }
 
         // См. https://github.com/Respect/Validation
+        // https://github.com/jquery-validation/jquery-validation
+        // https://github.com/mikeerickson/validatorjs
         $redirect = '/u/' . $uid['login'] . '/setting';
         Base::Limits($name, lang('Name'), '4', '11', $redirect);
 
-        if(!filter_var($public_email, FILTER_VALIDATE_EMAIL))
-        {
+        if(!filter_var($public_email, FILTER_VALIDATE_EMAIL)) {
             $public_email = '';
         }
-
-        if (!preg_match('/^[a-zA-Z0-9]+$/u', $skype))
-        {
+        if (!preg_match('/^[a-zA-Z0-9]+$/u', $skype)) {
             $skype = '';
         }
-
-        if (!preg_match('/^[a-zA-Z0-9]+$/u', $twitter))
-        {
+        if (!preg_match('/^[a-zA-Z0-9]+$/u', $twitter)) {
             $skype = '';
         }
-        
-        if (!preg_match('/^[a-zA-Z0-9]+$/u', $telegram))
-        {
+        if (!preg_match('/^[a-zA-Z0-9]+$/u', $telegram)) {
             $skype = '';
         }
-        
-        if (!preg_match('/^[a-zA-Z0-9]+$/u', $vk))
-        {
+        if (!preg_match('/^[a-zA-Z0-9]+$/u', $vk)) {
             $vk = '';
         }
         
@@ -158,7 +156,7 @@ class UserController extends \MainController
         $skype          = empty($skype) ? '' : $skype;
         $twitter        = empty($twitter) ? '' : $twitter;
         $telegram       = empty($telegram) ? '' : $telegram;
-        $vk             = empty($vk) ? '' : $vk;
+        $vk             = empty($vk) ? '' : $vk; 
 
 
         UserModel::editProfile($uid['login'], $name, $color, $about, $website, $location, $public_email, $skype,$twitter, $telegram, $vk);

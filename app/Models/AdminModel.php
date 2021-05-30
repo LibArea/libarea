@@ -167,15 +167,19 @@ class AdminModel extends \MainModel
         return true;
     }
     
-    // Редактирование награды
+    // Добавить награды
     public static function setAddBadge($data)
     {
-        XD::insertInto(['badge'], '(', 
+        XD::insertInto(['badge'], '(',
+            ['badge_tl'], ',',
+            ['badge_score'], ',',        
             ['badge_title'], ',', 
             ['badge_description'], ',',
             ['badge_icon'], ')')->values( '(', 
         
         XD::setList([
+            '',
+            '',
             $data['badge_title'], 
             $data['badge_description'],
             $data['badge_icon']]), ')' )->run();
