@@ -58,9 +58,9 @@ class MessagesController extends \MainController
                     $row['msg_user'] = UserModel::getUserId($row['sender_uid']);
                 } 
 
-                $row['unread_num']  = Base::ru_num('pm', $row['unread']);
-                $row['count_num']   = Base::ru_num('pm', $row['count']);
-                
+                $row['unread_num']  = Base::wordform($row['unread'], lang('Message'), lang('Messages-m'), lang('Messages'));
+                $row['count_num']   = Base::wordform($row['count'], lang('Message'), lang('Messages-m'), lang('Messages'));
+
                 $result[$ind]       = $row;
              
 			}

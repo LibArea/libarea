@@ -18,7 +18,7 @@
                             |  <?= $msg['update_time']; ?> <br>
                     <?php } ?>
 
-                    <a href="/messages/read/<?= $msg['id']; ?>">
+                    <a class="lowercase" href="/messages/read/<?= $msg['id']; ?>">
                         <?php if ($msg['unread']) { ?>
                             <?= lang('There are'); ?> <?= $msg['count']; ?> <?= $msg['unread_num']; ?>
                         <?php } else { ?>
@@ -33,7 +33,7 @@
             <?php } ?>
        
         <?php } else { ?>
-            <div class="no-content">У вас нет диалогов</div>
+            <div class="no-content"><?= lang('No dialogs'); ?>...</div>
         <?php } ?>
 </main>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

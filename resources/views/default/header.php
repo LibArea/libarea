@@ -76,11 +76,11 @@
                         </a>
                         <a href="/u/<?= $uid['login']; ?>/messages">
                             <i class="icon envelope"></i> 
-                            <?= lang('Messages'); ?>
+                            <?= lang('Messages-m'); ?>
                         </a>
                         <a href="/u/<?= $uid['login']; ?>/comments"> 
                             <i class="icon bubbles"></i>
-                            <?= lang('Comments'); ?> 
+                            <?= lang('Comments-n'); ?> 
                         </a>
                         <a href="/u/<?= $uid['login']; ?>/favorite">
                             <i class="icon star"></i> 

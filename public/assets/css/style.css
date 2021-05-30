@@ -183,35 +183,6 @@ a.add-post {
   margin-left: 4px;
 }
 
-.dropdown-menu {
-  display: none;
-  position: absolute;
-  background-color: var(--secondary);
-  min-width: 150px;
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-  z-index: 21;
-  right: 6px;
-  top: 25px;
-  padding: 2px 4px 4px 4px;
-  border-radius: 3px;
-}
-
-.dropdown-menu.show {
-  display: block;
-}
-
-.dropdown-menu a {
-  color: var(--tertiary);
-  display: block;
-  padding: 8px 9px 1px 6px;
-  font-size: 15px;
-}
-
-.dropdown-menu a span.ti-angle-down:hover,
-.dropdown-menu a:hover {
-  color: var(--primary);
-}
-
 .nick .ava {
   border-radius: 50%;
   vertical-align: middle;
@@ -1566,6 +1537,35 @@ i.github {
   padding: 1px 0;
 }
 
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: var(--secondary);
+  min-width: 155px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  z-index: 21;
+  right: 6px;
+  top: 25px;
+  padding: 2px 4px 4px 4px;
+  border-radius: 3px;
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+.dropdown-menu a {
+  color: var(--tertiary);
+  display: block;
+  padding: 8px 9px 1px 6px;
+  font-size: 15px;
+}
+
+.dropdown-menu a span.ti-angle-down:hover,
+.dropdown-menu a:hover {
+  color: var(--primary);
+}
+
 @media (max-width: 1050px) {
   aside {
     margin: 0 15px 20px 0;
@@ -1577,6 +1577,7 @@ i.github {
   main,
   main.w-75,
   img.img-post { width: 100%; }
+
   .no-mob,
   aside { display: none; }
   header { margin-left: 0; }

@@ -119,99 +119,20 @@ class Base
         }
     }
   
-    public static function ru_num($type,$num)
-    {
-        $strlen_num = strlen($num);
-        
-        if($num <= 21){
-            $numres = $num;
-        } elseif($strlen_num == 2){
-            $parsnum = substr($num,1,2);
-            $numres = str_replace('0','10',$parsnum);
-        } elseif($strlen_num == 3){
-            $parsnum = substr($num,2,3);
-            $numres = str_replace('0','10',$parsnum);
-        } elseif($strlen_num == 4){
-            $parsnum = substr($num,3,4);
-            $numres = str_replace('0','10',$parsnum);
-        } elseif($strlen_num == 5){
-            $parsnum = substr($num,4,5);
-            $numres = str_replace('0','10',$parsnum);
-        }
-
-        if($type == 'comm'){
-            if($numres == 1){
-                $gram_num_record = lang('comment'); 
-            } elseif($numres == 0){
-                $gram_num_record = lang('comments');
-            } elseif($numres < 5){
-                $gram_num_record = lang('comments_2');
-            } elseif($numres < 21){
-                $gram_num_record = lang('comments');
-            }  elseif($numres == 21){
-                $gram_num_record = lang('comment');
-            }
-        }
-        
-        if($type == 'answ'){
-            if($numres == 1){
-                $gram_num_record = 'ответ'; 
-            } elseif($numres == 0){
-                $gram_num_record = 'ответов';
-            } elseif($numres < 5){
-                $gram_num_record = 'ответа';
-            } elseif($numres < 21){
-                $gram_num_record = 'ответов';
-            }  elseif($numres == 21){
-                $gram_num_record = 'ответ';
-            }
-        }
-        
-        if($type == 'post'){
-            if($numres == 1){
-                $gram_num_record = 'пост';
-            } elseif($numres == 0){
-                $gram_num_record = 'постов';
-            } elseif($numres < 5){
-                $gram_num_record = 'поста';
-            } elseif($numres < 21){
-                $gram_num_record = 'постов';
-            }  elseif($numres == 21){
-                $gram_num_record = 'пост';
-            }
-        }
-        
-        if($type == 'views'){
-            if($numres == 1){
-                $gram_num_record = 'просмотр';
-            } elseif($numres == 0){
-                $gram_num_record = 'просмотров';
-            } elseif($numres < 5){
-                $gram_num_record = 'просмотра';
-            } elseif($numres < 21){
-                $gram_num_record = 'просмотр';
-            }  elseif($numres == 21){
-                $gram_num_record = 'просмотр';
-            }
-        }
-
-        if($type == 'pm'){
-            if($numres == 1){
-                $gram_num_record = 'сообщение';
-            } elseif($numres == 0){
-                $gram_num_record = 'сообщений';
-            } elseif($numres < 5){
-                $gram_num_record = 'сообщения';
-            } elseif($numres < 21){
-                $gram_num_record = 'сообщений';
-            }  elseif($numres == 21){
-                $gram_num_record = 'сообщение';
-            }
-        }
-        
-        return $gram_num_record;
+    // Склонения
+    public static function wordform($num, $form_for_1, $form_for_2, $form_for_5){
+        $num = abs($num) % 100; 
+        $num_x = $num % 10; 
+        if ($num > 10 && $num < 20)   // отрезок [11;19]
+            return $form_for_5;
+        if ($num_x > 1 && $num_x < 5) //  2,3,4
+            return $form_for_2;
+        if ($num_x == 1)              // оканчивается на 1
+            return $form_for_1;
+        return $form_for_5;
     }
-    
+  
+   
     // Длина строки
     public static function getStrlen($str)
     {

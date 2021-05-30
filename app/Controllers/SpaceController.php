@@ -84,7 +84,7 @@ class SpaceController extends \MainController
         $result = Array();
         foreach($posts as $ind => $row) {
             $row['post_content_preview']    = Base::cutWords($row['post_content'], 68);
-            $row['lang_num_answers']        = Base::ru_num('answ', $row['post_answers_num']);
+            $row['lang_num_answers']        = Base::wordform($row['post_answers_num'], lang('Answer'), lang('Answers-m'), lang('Answers'));
             $result[$ind]                   = $row;
         }  
 

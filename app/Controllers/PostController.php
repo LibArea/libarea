@@ -32,7 +32,7 @@ class PostController extends \MainController
         $result = Array();
         foreach($posts as $ind => $row) {
             $row['post_content_preview']    = Base::cutWords($row['post_content'], 120);
-            $row['lang_num_answers']        = Base::ru_num('answ', $row['post_answers_num']);
+            $row['lang_num_answers']        = Base::wordform($row['post_answers_num'], lang('Answer'), lang('Answers-m'), lang('Answers'));
             $row['post_date']               = Base::ru_date($row['post_date']);
             $result[$ind]                   = $row;
         }  
@@ -122,12 +122,12 @@ class PostController extends \MainController
         }
      
         $post['post_content']   = Base::Markdown($post['post_content']);
-        $post['post_date_lang']      = Base::ru_date($post['post_date']);
-        $post['num_answers']    = Base::ru_num('answ', $post['post_answers_num']); 
+        $post['post_date_lang'] = Base::ru_date($post['post_date']);
+        $post['num_answers']    = Base::wordform($post['post_answers_num'], lang('Answer'), lang('Answers-m'), lang('Answers'));
         
         // общее количество (для модели - беседа)
         $comment_n = $post['post_comments_num'] + $post['post_answers_num'];
-        $post['num_comments']   = Base::ru_num('comm', $comment_n); 
+        $post['num_comments']   = Base::wordform($comment_n, lang('Comment'), lang('Comments-m'), lang('Comments'));
         
         $post['favorite_post']  = PostModel::getMyPostFavorite($post['post_id'], $uid['id']);
       

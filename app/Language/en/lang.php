@@ -50,6 +50,8 @@ return [
     'url-latin'             => 'You can use only Latin characters in the URL, numbers',
     'url-gaps'              => 'Spaces are not allowed in the URL',
     'space-add-success'     => 'Space added successfully',
+    'you-question-no'       => 'You have already answered this question',
+    'no-auth-login'         => 'To respond, you can <a href="/login">log in</a>',
     
     /* Meta - desc */
     'desc-user-all'         => 'List of all participants sorted by date of registration on the site',

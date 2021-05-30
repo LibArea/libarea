@@ -1,6 +1,6 @@
 <?php if (!empty($answers)) { ?>
     <div class="answers">
-        <h2> <?= $post['post_answers_num'] ?> <?= $post['num_answers'] ?></h2>
+        <h2 class="lowercase"> <?= $post['post_answers_num'] ?> <?= $post['num_answers'] ?></h2>
         
         <?php foreach ($answers as  $answ) { ?>
         <div class="block-answer">
@@ -158,7 +158,7 @@
 
 <?php if(!empty($otvet)) { ?>
 
-    <div class="no-answer">Вы уже ответили на этот вопрос...</div>
+    <div class="no-answer"><?= lang('you-question-no'); ?>...</div>
 
 <?php } else { ?>
     <?php if ($uid['id']) { ?>
@@ -181,7 +181,7 @@
             <br />
             <textarea rows="5" disabled="disabled" placeholder="<?= lang('no-auth-answ'); ?>" name="answer" id="answer"></textarea>
             <div>
-                Для ответа вы <a href="/login">можете авторизироваться</a>.
+                <?= lang('no-auth-login'); ?>...
             </div> 
     <?php } ?>
 <?php }  ?>    

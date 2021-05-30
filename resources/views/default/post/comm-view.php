@@ -1,6 +1,6 @@
 <?php if (!empty($answers)) { ?>
     <div class="answers">
-        <h2> <?= $post['post_answers_num'] + $post['post_comments_num'] ?> <?= $post['num_comments'] ?></h2>
+        <h2 class="lowercase"><?= $post['post_answers_num'] + $post['post_comments_num'] ?> <?= $post['num_comments'] ?></h2>
         
         <?php foreach ($answers as  $answ) { ?>
         <div class="block-answer">
