@@ -1548,7 +1548,8 @@ i.github {
 .dark .space-info,
 .dark .profile-box-telo,
 .dark .box.profile-telo .post-telo,
-.dark .banner {
+.dark .banner,
+.dark .bar-space-no {
   border-bottom: 1px solid #222;
   background: #222;
   color: #fff;
@@ -1570,7 +1571,10 @@ i.github {
 .dark .login-nav label,
 .dark .p-head,
 .dark .p-head-n,
-.dark h1.profile {
+.dark h1.profile,
+.dark .dropdown-menu a,
+.dark .space-info-desc,
+.dark h3.recommend {
   color: #eee;
 }
 
@@ -1579,12 +1583,18 @@ i.github {
   background-color: #555;
 }
 
+.dark .post-footer {
+  border: solid 1px #444;
+}
+
 .dark .u-url .title,
-.dark .banner h1 {
+.dark .banner h1,
+.dark .dropdown-menu a:hover {
   color: #fff;
 }
 
-.dark .space-no-user {
+.dark .space-no-user,
+.dark textarea {
   color: #eee;
   background-color: #222;
 }
