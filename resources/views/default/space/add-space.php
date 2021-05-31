@@ -7,14 +7,14 @@
             <form action="/space/addspace" method="post" enctype="multipart/form-data">
                 <?= csrf_field() ?>
                 <div class="boxline">
-                    <label for="post_title">URL (slug)</label>
-                    <input class="add" type="text" name="space_slug" />
+                    <label for="post_title">URL (slug)<sup class="red">*</sup></label>
+                    <input class="add" minlength="3" type="text" name="space_slug" />
                     <div class="box_h">На английском. Пример: <b>meta</b></div>
                     <br />
                 </div>  
                 <div class="boxline">
-                    <label for="post_title"><?= lang('Title'); ?></label>
-                    <input class="add" type="text" name="space_name" />
+                    <label for="post_title"><?= lang('Title'); ?><sup class="red">*</sup></label>
+                    <input class="add" minlength="6" type="text" name="space_name" />
                     <div class="box_h">Одно, два слова</div>
                     <br />   
                 </div>   

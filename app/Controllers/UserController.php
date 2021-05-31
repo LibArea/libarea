@@ -110,7 +110,6 @@ class UserController extends \MainController
     // Изменение профиля
     function settingEdit ()
     {
-        $uid            = Base::getUid();
         $name           = \Request::getPost('name');
         $about          = \Request::getPost('about');
         $color          = \Request::getPost('color');
@@ -122,7 +121,6 @@ class UserController extends \MainController
         $telegram       = \Request::getPost('telegram');
         $vk             = \Request::getPost('vk');
         
-        
         if(!$color) {
            $color  = '#339900'; 
         }
@@ -130,7 +128,9 @@ class UserController extends \MainController
         // См. https://github.com/Respect/Validation
         // https://github.com/jquery-validation/jquery-validation
         // https://github.com/mikeerickson/validatorjs
-        $redirect = '/u/' . $uid['login'] . '/setting';
+        
+        $uid        = Base::getUid();
+        $redirect   = '/u/' . $uid['login'] . '/setting';
         Base::Limits($name, lang('Name'), '4', '11', $redirect);
 
         if(!filter_var($public_email, FILTER_VALIDATE_EMAIL)) {
@@ -157,7 +157,6 @@ class UserController extends \MainController
         $twitter        = empty($twitter) ? '' : $twitter;
         $telegram       = empty($telegram) ? '' : $telegram;
         $vk             = empty($vk) ? '' : $vk; 
-
 
         UserModel::editProfile($uid['login'], $name, $color, $about, $website, $location, $public_email, $skype,$twitter, $telegram, $vk);
         

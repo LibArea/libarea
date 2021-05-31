@@ -10,7 +10,7 @@
     <?php } else { ?>
         <form id="add_comm" class="new_comment" action="/comment/add" accept-charset="UTF-8" method="post">
         <?= csrf_field() ?>
-            <textarea rows="5" placeholder="<?= lang('write-something'); ?>..." name="comment" id="comment"></textarea>
+            <textarea rows="5" minlength="6" placeholder="<?= lang('write-something'); ?>..." name="comment" id="comment"></textarea>
             <div> 
                 <input type="hidden" name="post_id" id="post_id" value="<?= $data['post_id']; ?>">
                 <input type="hidden" name="answ_id" id="answ_id" value="<?= $data['answ_id']; ?>">

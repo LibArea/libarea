@@ -28,17 +28,17 @@
                 <?= csrf_field() ?>
                 <div class="boxline">
                     <label for="post_title">URL<sup class="red">*</sup></label>
-                    <input class="add" type="text" value="<?= $space['space_slug']; ?>" name="space_slug" />
+                    <input class="add" minlength="3" type="text" value="<?= $space['space_slug']; ?>" name="space_slug" />
                     <br />
                 </div>  
                 <div class="boxline">
                     <label for="post_title"><?= lang('Title'); ?><sup class="red">*</sup></label>
-                    <input class="add" type="text" value="<?= $space['space_name']; ?>" name="space_name" />
+                    <input class="add" minlength="4" maxlength="18" type="text" value="<?= $space['space_name']; ?>" name="space_name" />
                     <div class="box_h">Короткое от 4 - 18 <?= lang('characters'); ?></div>
                 </div>
                 <div class="boxline">
                     <label for="post_content"><?= lang('Long'); ?><sup class="red">*</sup></label>
-                    <input class="add"  type="text" name="space_short_text" value="<?= $space['space_short_text']; ?>">
+                    <input class="add" minlength="20" maxlength="250" type="text" name="space_short_text" value="<?= $space['space_short_text']; ?>">
                     <div class="box_h">Длинное название от 20 - 250 <?= lang('characters'); ?></div>
                     <br />
                 </div>
@@ -58,7 +58,7 @@
                 </div> 
                 <div class="boxline">
                     <label for="post_content">Meta-<sup class="red">*</sup></label>
-                    <input class="add"  type="text" name="space_description" value="<?= $space['space_description']; ?>">
+                    <input class="add" minlength="60" type="text" name="space_description" value="<?= $space['space_description']; ?>">
                     <div class="box_h">Description: 60 - 180 <?= lang('characters'); ?></div>
                     <br />
                 </div>

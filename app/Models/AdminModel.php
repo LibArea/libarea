@@ -178,8 +178,8 @@ class AdminModel extends \MainModel
             ['badge_icon'], ')')->values( '(', 
         
         XD::setList([
-            '',
-            '',
+            $data['badge_tl'],
+            $data['badge_score'],
             $data['badge_title'], 
             $data['badge_description'],
             $data['badge_icon']]), ')' )->run();

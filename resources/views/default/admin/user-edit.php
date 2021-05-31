@@ -23,7 +23,7 @@
             </div>
             <div class="boxline max-width">
                 <label for="post_title">E-mail</label>
-                <input type="text" name="email" value="<?= $user['email']; ?>">
+                <input type="text" name="email" value="<?= $user['email']; ?>" required>
             </div>
             <div class="boxline max-width">
                 <label for="post_title">TL</label>
@@ -37,7 +37,7 @@
             </div>
             <div class="boxline max-width">
                 <label for="post_title"><?= lang('Nickname'); ?></label>
-                /u/<input type="text" name="login" value="<?= $user['login']; ?>">
+                /u/<input type="text" name="login" value="<?= $user['login']; ?>" required>
             </div>
             <div class="boxline max-width">
                 <label for="post_title"><?= lang('Name'); ?></label>            

@@ -8,7 +8,7 @@
             <?= csrf_field() ?>
             <div class="boxline max-width">
                 <label for="post_title">Заголовок<sup class="red">*</sup></label>
-                <input id="title" class="add" max="250" type="text" name="post_title" />
+                <input id="title" class="add" minlength="6" maxlength="250" type="text" name="post_title" />
                 <div class="box_h">6 - 250 <?= lang('characters'); ?></div>
             </div>   
             <?php if($uid['trust_level'] == 5) { ?>

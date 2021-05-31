@@ -1,6 +1,6 @@
-**ATTENTION:** you are on the README file of an unstable branch of AreaDev specifically meant for the development of future releases. This means that the code on this branch is potentially unstable, and breaking change may happen without any prior notice. Do not use it in production environments or use it at your own risk!
+**ATTENTION:** you are on the README file of an unstable branch of Loriup specifically meant for the development of future releases. This means that the code on this branch is potentially unstable, and breaking change may happen without any prior notice. Do not use it in production environments or use it at your own risk!
 
-# AreaDev
+# Loriup
 Скрипт сообщества, постороенного на PHP Micro-Framework HLEB
 
 ## PHP Micro-Framework HLEB
@@ -12,7 +12,7 @@ https://github.com/phphleb/hleb
 
 ### Демонстрация
 
-![AreaDev](https://raw.githubusercontent.com/Toxu-ru/AreaDev/main/public/assets/images/areadev.jpg)
+![Loriup](https://raw.githubusercontent.com/Toxu-ru/AreaDev/main/public/assets/images/areadev.jpg)
 
 https://loriup.ru/
 

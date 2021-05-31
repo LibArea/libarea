@@ -5,21 +5,14 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
      
-        <?php getRequestHead()->output(); ?>
- 
-        <?php if (isset($post['post_is_delete'])) { ?>  
-            <meta name="robots" content="noindex" />
-        <?php } ?>
+        <title><?= $data['meta_title']; ?></title>
 
         <link rel="icon" href="/favicon.ico">
         <link rel="apple-touch-icon" href="/favicon.png">
 
         <link rel="stylesheet" href="/assets/css/style.css">
         <link rel="stylesheet" href="/assets/css/admin.css">
-        
-        <?php if($uid['id']) { ?>
-            <script src="/assets/js/admin.js"></script>
-        <?php } ?> 
+        <script src="/assets/js/admin.js"></script>
     </head>
 <body class="bd">
 <header>  

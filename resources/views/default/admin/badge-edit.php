@@ -14,15 +14,25 @@
             </div>
             <div class="boxline max-width">
                 <label for="post_title">Title</label>
-                <input type="text" name="badge_title" value="<?= $badge['badge_title']; ?>">
+                <input type="text" name="badge_title" value="<?= $badge['badge_title']; ?>" required>
             </div>
             <div class="boxline max-width">
                 <label for="post_title">Icon</label>            
-                <textarea class="add" name="badge_icon"><?= $badge['badge_icon']; ?></textarea>
+                <textarea class="add" name="badge_icon" required><?= $badge['badge_icon']; ?></textarea>
+            </div>
+            <div class="boxline">
+                <label for="post_title">Tl</label>
+                <input type="text" name="badge_tl" value="<?= $badge['badge_tl']; ?>" required>
+                <div class="box_h">Для TL (0 по умолчанию)</div>
+            </div>
+            <div class="boxline">
+                <label for="post_title">Score</label>
+                <input type="text" name="badge_score" value="<?= $badge['badge_score']; ?>" required>
+                <div class="box_h">Вес награды</div>
             </div>
             <div class="boxline max-width">
                 <label for="post_title"><?= lang('Description'); ?></label>
-                <textarea class="add" name="badge_description"><?= $badge['badge_description']; ?></textarea>
+                <textarea class="add" name="badge_description" required><?= $badge['badge_description']; ?></textarea>
             </div>
             <input type="submit" name="submit" value="<?= lang('Edit'); ?>" />
         </form>

@@ -36,7 +36,7 @@
         
             <div class="boxline">
                 <label for="name"><?= lang('Name'); ?><sup class="red">*</sup></label>
-                <input type="text" class="form-control" name="name" id="name" value="<?= $user['name']; ?>">
+                <input type="text" required class="form-control" name="name" id="name" value="<?= $user['name']; ?>">
             </div>
            
             <div class="boxline">

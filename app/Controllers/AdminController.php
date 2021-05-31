@@ -29,7 +29,6 @@ class AdminController extends \MainController
             'h1'            => lang('Admin'),
             'users'         => $result,
             'meta_title'    => lang('Admin'),
-            'meta_desc'     => lang('Admin'),
         ]; 
 
         return view(PR_VIEW_DIR . '/admin/index', ['data' => $data, 'uid' => $uid, 'alluser' => $result]);
@@ -62,7 +61,6 @@ class AdminController extends \MainController
         $data = [
             'h1'            => lang('Deleted comments'),
             'meta_title'    => lang('Deleted comments'),
-            'meta_desc'     => lang('Deleted comments'),
         ]; 
  
         return view(PR_VIEW_DIR . '/admin/comm_del', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
@@ -95,7 +93,6 @@ class AdminController extends \MainController
         $data = [
             'h1'            => lang('Invites'),
             'meta_title'    => lang('Invites'),
-            'meta_desc'     => lang('Invites'),
         ]; 
  
         return view(PR_VIEW_DIR . '/admin/invitations', ['data' => $data, 'uid' => $uid, 'invitations' => $result]);
@@ -124,7 +121,6 @@ class AdminController extends \MainController
         $data = [
             'h1'            => lang('Space'),
             'meta_title'    => lang('Space'),
-            'meta_desc'     => lang('Space'),
         ]; 
  
         return view(PR_VIEW_DIR . '/admin/spaces', ['data' => $data, 'uid' => $uid, 'spaces' => $spaces]);
@@ -138,7 +134,6 @@ class AdminController extends \MainController
         $data = [
             'h1'            => lang('Add Space'),
             'meta_title'    => lang('Add Space'),
-            'meta_desc'     => lang('Add Space'),
         ]; 
         
         return view(PR_VIEW_DIR . '/admin/add-space', ['data' => $data, 'uid' => $uid]);
@@ -225,7 +220,6 @@ class AdminController extends \MainController
         $data = [
             'h1'            => lang('Badges'),
             'meta_title'    => lang('Badges'),
-            'meta_desc'     => lang('Badges'), 
         ]; 
         
         return view(PR_VIEW_DIR . '/admin/badges', ['data' => $data, 'uid' => $uid, 'badges' => $badges]);
@@ -239,7 +233,6 @@ class AdminController extends \MainController
         $data = [
             'h1'            => lang('Add badge'),
             'meta_title'    => lang('Add badge'),
-            'meta_desc'     => lang('Add badge'), 
         ]; 
         
         return view(PR_VIEW_DIR . '/admin/badge-add', ['data' => $data, 'uid' => $uid]);
@@ -259,7 +252,6 @@ class AdminController extends \MainController
         $data = [
             'h1'            => lang('Edit badge'),
             'meta_title'    => lang('Edit badge'),
-            'meta_desc'     => lang('Edit badge'), 
         ]; 
         
         return view(PR_VIEW_DIR . '/admin/badge-edit', ['data' => $data, 'uid' => $uid, 'badge' => $badge]);
@@ -314,6 +306,8 @@ class AdminController extends \MainController
             'badge_title'       => $badge_title,
             'badge_description' => $badge_description,
             'badge_icon'        => $badge_icon,
+            'badge_tl'          => 0,
+            'badge_score'       => 0,
         ];
         
         AdminModel::setAddBadge($data);
@@ -334,7 +328,6 @@ class AdminController extends \MainController
         $data = [
             'h1'            => lang('Edit user'),
             'meta_title'    => lang('Edit user'),
-            'meta_desc'     => lang('Edit user'), 
         ]; 
         
         return view(PR_VIEW_DIR . '/admin/user-edit', ['data' => $data, 'uid' => $uid, 'user' => $user]);

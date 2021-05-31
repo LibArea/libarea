@@ -167,7 +167,7 @@
                 <?= csrf_field() ?>
                 <div class="redactor">
                     <div id="wmd-button-bar"></div>
-                    <textarea class="wmd-input h-150 w-95" name="answer" id="wmd-input"></textarea>
+                    <textarea minlength="6" class="wmd-input h-150 w-95" name="answer" id="wmd-input"></textarea>
                     <div class="clear"> 
                         <input type="hidden" name="post_id" id="post_id" value="<?= $post['post_id']; ?>">
                         <input type="hidden" name="answ_id" id="answ_id" value="0">
