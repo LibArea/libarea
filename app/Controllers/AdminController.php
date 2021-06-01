@@ -20,7 +20,7 @@ class AdminController extends \MainController
         foreach($user_all as $ind => $row) {
             $row['replayIp']    = AdminModel::replayIp($row['reg_ip']);
             $row['isBan']       = AdminModel::isBan($row['id']);
-            $row['logs']       = AdminModel::UsersLogAll($row['id']);
+            $row['logs']        = AdminModel::UsersLogAll($row['id']);
             $row['created_at']  = Base::ru_date($row['created_at']); 
             $result[$ind]       = $row;
         } 
@@ -34,6 +34,30 @@ class AdminController extends \MainController
 
         return view(PR_VIEW_DIR . '/admin/index', ['data' => $data, 'uid' => $uid, 'alluser' => $result]);
 	}
+    
+    // Повторы IP
+    public function logsIp() 
+    {
+
+        $uid        = self::isAdmin();
+        $user_ip    = \Request::get('ip');
+        $user_all   = AdminModel::getUserLogsId($user_ip);
+ 
+        $results = Array();
+        foreach($user_all as $ind => $row) {
+            $row['replayIp']    = AdminModel::replayIp($row['reg_ip']);
+            $row['isBan']       = AdminModel::isBan($row['id']);
+            $results[$ind]       = $row;
+        } 
+        
+        $data = [
+            'h1'            => lang('Search'),
+            'meta_title'    => lang('Search'),
+        ]; 
+
+        return view(PR_VIEW_DIR . '/admin/logip', ['data' => $data, 'uid' => $uid, 'alluser' => $results]); 
+    }
+    
     
     // Бан участнику
     public function banUser() 

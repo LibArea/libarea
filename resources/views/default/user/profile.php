@@ -1,37 +1,44 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<style nonce="<?= $_SERVER['nonce']; ?>">
-.profile-box {background:<?= $user['color']; ?>;}
-</style>
-<main class="w-75">
-<div class="profile-box"> 
-    <?php if($user['cover_art'] != 'cover_art.jpeg') { ?>
-        <div class="profile-cover">
-            <img class="cover-image" src="/uploads/users/cover/<?= $user['cover_art']; ?>" alt="<?= $user['login']; ?>">
-        </div>
-    <?php } else { ?>
-        <div class="no-profile-cover"> </div>
-    <?php } ?>
-    <div class="profile-header">
-        <?php if($uid['trust_level'] > 0) { ?>
-            <?php if($uid['login'] != $user['login']) { ?> 
-                <?php if($uid['trust_level'] >= Lori\Config::get(Lori\Config::PARAM_PM_MAIL)) { ?>
-                    <a class="right pm" href="/u/<?= $user['login']; ?>/mess">
-                        <i class="icon envelope"></i>
+
+<?php if($user['cover_art'] != 'cover_art.jpeg') { ?>
+    <style nonce="<?= $_SERVER['nonce']; ?>">
+    .profile-box-cover {background-image: url(/uploads/users/cover/<?= $user['cover_art']; ?>); background-position: 50% 50%;min-height: 310px;}
+    </style>
+    <div class="profile-box-cover">
+    <div class="wrap">      
+<?php } else { ?>
+    <style nonce="<?= $_SERVER['nonce']; ?>">
+    .profile-box {background:<?= $user['color']; ?>;min-height: 90px;}
+    </style>
+    <div class="profile-box">
+    <div class="wrap">    
+<?php } ?>
+        <div class="profile-header">
+            <?php if($uid['trust_level'] > 0) { ?>
+                <?php if($uid['login'] != $user['login']) { ?> 
+                    <?php if($uid['trust_level'] >= Lori\Config::get(Lori\Config::PARAM_PM_MAIL)) { ?>
+                        <a class="right pm" href="/u/<?= $user['login']; ?>/mess">
+                            <i class="icon envelope"></i>
+                        </a> 
+                    <?php } ?>
+                <?php } else { ?>
+                    <a class="right pm"  href="/u/<?= $uid['login']; ?>/setting">
+                        <i class="icon pencil"></i>
                     </a> 
                 <?php } ?>
-            <?php } else { ?>
-                <a class="right pm"  href="/u/<?= $uid['login']; ?>/setting">
-                    <i class="icon pencil"></i>
-                </a> 
             <?php } ?>
-        <?php } ?>
-    </div>
-</div>  
+        </div>
+        <div class="profile-ava">
+            <img alt="<?= $user['login']; ?>" src="/uploads/users/avatars/<?= $user['avatar']; ?>">
+        </div>
         
-<div class="profile-box-telo">
-    <div class="profile-ava">
-        <img alt="<?= $user['login']; ?>" src="/uploads/users/avatars/<?= $user['avatar']; ?>">
     </div>
+    </div> 
+ 
+<div class="wrap">
+<main class="w-75">     
+<div class="profile-box-telo">
+     
     <div class="profile-header-telo">
         <h1 class="profile">
             <?= $user['login']; ?> 
@@ -88,8 +95,14 @@
     <div class="box profile-telo">
     
         <div class="profile-about">
-        <i class="icon calendar"></i>
-        <span class="ts"><?= $user['created_at']; ?></span>  —  
+            <blockquote>
+                <?= $user['about']; ?>...
+            </blockquote>
+        </div>
+    
+        <div class="profile-about">
+            <i class="icon calendar"></i>
+            <span class="ts"><?= $user['created_at']; ?></span>  —  
             <?= $data['trust_level']['trust_name']; ?>
         </div>
 
@@ -187,23 +200,14 @@
     </div>
 </div>
 </main>
-<aside>
-    <?php if ($uid['id'] == 0) { ?>
-        <?php include TEMPLATE_DIR . '/_block/login.php'; ?>
-    <?php } ?>  
-
-    <div class="profile-about">
-        <blockquote>
-            <?= $user['about']; ?>...
-        </blockquote>
-    </div>
-    
-    <h3 class="recommend"><?= lang('Badges'); ?></h3>
-    <div class="profile-badge">
-        <?php if($user['id'] < 50) { ?>
-           <i title="<?= lang('Joined in the early days'); ?>" class="icon badge"></i>
-        <?php } ?>
-    </div>
-    <br>
-</aside>
+    <aside>
+        <h3 class="badge"><?= lang('Badges'); ?></h3>
+        <div class="profile-badge">
+            <?php if($user['id'] < 50) { ?>
+               <i title="<?= lang('Joined in the early days'); ?>" class="icon badge"></i>
+            <?php } ?>
+        </div>
+        <br>
+    </aside>
+</div>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

@@ -234,7 +234,7 @@ class UserController extends \MainController
 
             if ($valid) {
      
-                // 125px и 18px
+                // 160px и 18px
                 $path_img       = HLEB_PUBLIC_DIR. '/uploads/users/avatars/';
                 $path_img_small = HLEB_PUBLIC_DIR. '/uploads/users/avatars/small/';
                 $filename =  'a-' . $uid['id'] . '-' . time();
@@ -245,7 +245,7 @@ class UserController extends \MainController
                 $image
                     ->fromFile($file)  // load image.jpg
                     ->autoOrient()     // adjust orientation based on exif data
-                    ->resize(125, 125)
+                    ->resize(160, 160)
                     ->toFile($path_img . $filename .'.jpeg', 'image/jpeg')
                     ->resize(18, 18)
                     ->toFile($path_img_small . $filename .'.jpeg', 'image/jpeg');
@@ -280,7 +280,7 @@ class UserController extends \MainController
 
             if ($valid) {
      
-                // 1220px / 240px
+                // 1920px / 350px
                 $path_cover_img       = HLEB_PUBLIC_DIR. '/uploads/users/cover/';
                 $filename =  'cover-' . $uid['id'] . '-' . time();
                 $file_cover = $_FILES['cover']['tmp_name'][0];
@@ -290,7 +290,7 @@ class UserController extends \MainController
                 $image
                     ->fromFile($file_cover)  // load image.jpg
                     ->autoOrient()     // adjust orientation based on exif data
-                    ->resize(1120, 240)
+                    ->resize(1920, 350)
                     ->toFile($path_cover_img . $filename .'.jpeg', 'image/jpeg');
                         
                 $new_cover  = $filename . '.jpeg';

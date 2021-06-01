@@ -1,4 +1,3 @@
-</div>
 <div class="clear"></div>
 <footer>
     <div class="wrap">

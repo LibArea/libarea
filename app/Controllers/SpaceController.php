@@ -435,7 +435,7 @@ class SpaceController extends \MainController
             }
 
             if ($valid) {
-                // 1920px и 300px
+                // 1920px и 350px
                 $path_cover_img       = HLEB_PUBLIC_DIR. '/uploads/spaces/cover/';
                 $path_cover_img_small = HLEB_PUBLIC_DIR. '/uploads/spaces/cover/small/';
                 $file_cover           = $_FILES['cover']['tmp_name'][0];
@@ -446,7 +446,7 @@ class SpaceController extends \MainController
                 $image
                     ->fromFile($file_cover)  // load image.jpg
                     ->autoOrient()     // adjust orientation based on exif data
-                    ->resize(1120, 300)
+                    ->resize(1920, 350)
                     ->toFile($path_cover_img . $filename_cover .'.webp', 'image/webp')
                     ->resize(180, 70)
                     ->toFile($path_cover_img_small . $filename_cover .'.webp', 'image/webp');

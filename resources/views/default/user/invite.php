@@ -1,22 +1,24 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<main>
-    <h1><?= $data['h1']; ?></h1>
-    <div class="box wide">
-        <form class="" action="/invite" method="post">
-            <?php csrf_field(); ?>
-            <div class="boxline">
-                <label for="email"><?= lang('Code'); ?></label>
-                <input type="text" name="invite" id="invite">
-            </div>
-            <div class="row">
+<div class="wrap">
+    <main>
+        <h1><?= $data['h1']; ?></h1>
+        <div class="box wide">
+            <form class="" action="/invite" method="post">
+                <?php csrf_field(); ?>
                 <div class="boxline">
-                    <button type="submit" class="button-primary"><?= lang('Sign in'); ?></button>
-                    <small>
-                        <span class="menu-lf"><a href="/recover"><?= lang('forgot-password'); ?>?</a></span>
-                    </small>
+                    <label for="email"><?= lang('Code'); ?></label>
+                    <input type="text" name="invite" id="invite">
                 </div>
-            </div>
-        </form>
-    </div>
-</main>
+                <div class="row">
+                    <div class="boxline">
+                        <button type="submit" class="button-primary"><?= lang('Sign in'); ?></button>
+                        <small>
+                            <span class="menu-lf"><a href="/recover"><?= lang('forgot-password'); ?>?</a></span>
+                        </small>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+</div>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

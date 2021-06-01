@@ -1,8 +1,3 @@
-.profile-box {
-  margin-top: -23px;
-  position: relative;
-}
-
 .profile-box-telo {
   position: relative;
   margin: 0 20px 24px;
@@ -20,12 +15,16 @@
 
 .profile-ava {
   position: absolute;
-  top: -80px;
-  left: 0;
+  top: 210px;
+  left: 20px;
   z-index: 1;
   border: 4px solid #fff;
   background: #fff;
   border-radius: 4px;
+}
+
+.profile-box .profile-ava {
+  top: 20px;
 }
 
 .profile-cover {
@@ -34,18 +33,9 @@
   overflow: hidden;
 }
 
-.cover-image {
-  width: 100%;
-  height: 100%;
-}
-
-.no-profile-cover {
-  height: 130px;
-}
-
 .profile-ava img {
-  width: 120px;
-  height: 120px;
+  width: 160px;
+  height: 160px;
   border-radius: 4px;
 }
 
@@ -84,6 +74,17 @@ h1.profile {
   background-color: #f3f3f3;
   padding: 10px;
   display: table;
+}
+
+h3.badge {
+  border-bottom: 1px solid #ddd;
+  padding: 15px 0 10px 0;
+  margin: 0 0 10px 0;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 13px;
+  color: #333;
+  font-weight: 400;
 }
 
 .box.profile-telo h2,
@@ -139,10 +140,15 @@ h1.profile {
   color: #390;
 }
 
-@media (max-width: 880px) {
+.profile-about blockquote {
+  margin: 0.8em 0 0.8em 0;
+}
+
+@media (max-width: 890px) {
   .profile-ava img {
     width: 110px;
     height: 110px;
+    margin-top: -60px;
   }
 
   .box.profile-telo {
@@ -150,10 +156,13 @@ h1.profile {
     margin: 20px 0 0 0;
   }
 
-  .profile-cover { height: 80px; }
-  .profile-box { height: 60px; }
+body .profile-box-cover {
+    min-height: 210px;
+}
+ 
+
   .profile-box-telo { margin: 0 0 0 10px; }
-  .profile-about { margin: 15px 0 0 8px; }
+  .profile-about { margin: 5px 0 0 0; }
   .profile-header-telo { margin: 15px 0 0 134px; }
   .stats { width: 100%; }
 }

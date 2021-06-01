@@ -1,60 +1,62 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
-<main class="w-75">
-    <h1><?= $data['h1']; ?></h1>
-     
-     <?php if($uid['trust_level'] > 1) { ?>
-     
-        <form method="post" action="/invitation/create">
-        <?php csrf_field(); ?>
-
-            <div class="boxline">
-                <input id="link" class="add-email" type="email" name="email">
-                <input id="graburl" type="submit" name="submit" value="Создать">
-                <br>
-            </div>
-             Осталось приглашений <?= 5 - $user['invitation_available']; ?> 
-
-        </form>
+<div class="wrap">
+    <main class="w-75">
+        <h1><?= $data['h1']; ?></h1>
          
-        <h3>Приглашенные</h3>
+         <?php if($uid['trust_level'] > 1) { ?>
          
-        <?php if (!empty($result)) { ?> 
+            <form method="post" action="/invitation/create">
+            <?php csrf_field(); ?>
 
-            <?php foreach ($result as $inv) { ?>
-                <?php if($inv['active_status'] == 1) { ?>
-                    <div class="comm-header">
-                        <img class="ava" src="/uploads/users/avatars/small/<?= $inv['avatar']; ?>">
-                        <a href="<?= $inv['login']; ?>"><?= $inv['login']; ?></a>
-                        - зарегистрировался
-                    </div>
-                    
-                        <?php if($uid['trust_level'] == 5) { ?>
-                            Была использована ссылка для: <?= $inv['invitation_email']; ?> <br>
-                            <code> 
-                                <?= Lori\Config::get(Lori\Config::PARAM_URL); ?>/register/invite/ <?= $inv['invitation_code']; ?> 
-                            </code>
-                        <?php } ?>
+                <div class="boxline">
+                    <input id="link" class="add-email" type="email" name="email">
+                    <input id="graburl" type="submit" name="submit" value="Создать">
+                    <br>
+                </div>
+                 Осталось приглашений <?= 5 - $user['invitation_available']; ?> 
+
+            </form>
+             
+            <h3>Приглашенные</h3>
+             
+            <?php if (!empty($result)) { ?> 
+
+                <?php foreach ($result as $inv) { ?>
+                    <?php if($inv['active_status'] == 1) { ?>
+                        <div class="comm-header">
+                            <img class="ava" src="/uploads/users/avatars/small/<?= $inv['avatar']; ?>">
+                            <a href="<?= $inv['login']; ?>"><?= $inv['login']; ?></a>
+                            - зарегистрировался
+                        </div>
                         
-                    <small>Ссылка была использована</small>
-                <?php } else { ?>
-                
-                    Для   (<?= $inv['invitation_email']; ?>) можно отправить эту ссылку: <br>
-                
-                    <code> 
-                        <?= Lori\Config::get(Lori\Config::PARAM_URL); ?>/register/invite/ <?= $inv['invitation_code']; ?>
-                    </code> 
-                
-                <?php } ?>
+                            <?php if($uid['trust_level'] == 5) { ?>
+                                Была использована ссылка для: <?= $inv['invitation_email']; ?> <br>
+                                <code> 
+                                    <?= Lori\Config::get(Lori\Config::PARAM_URL); ?>/register/invite/ <?= $inv['invitation_code']; ?> 
+                                </code>
+                            <?php } ?>
+                            
+                        <small>Ссылка была использована</small>
+                    <?php } else { ?>
+                    
+                        Для   (<?= $inv['invitation_email']; ?>) можно отправить эту ссылку: <br>
+                    
+                        <code> 
+                            <?= Lori\Config::get(Lori\Config::PARAM_URL); ?>/register/invite/ <?= $inv['invitation_code']; ?>
+                        </code> 
+                    
+                    <?php } ?>
 
-                <br><br>
-            <?php } ?> 
-            
+                    <br><br>
+                <?php } ?> 
+                
+            <?php } else { ?>
+                Пока нет приглашений
+            <?php } ?>
+        
         <?php } else { ?>
-            Пока нет приглашений
+            Ваш уровень доверия пока не позволяет использовать инвайты.
         <?php } ?>
-    
-    <?php } else { ?>
-        Ваш уровень доверия пока не позволяет использовать инвайты.
-    <?php } ?>
-</main>
+    </main>
+</div>    
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

@@ -67,7 +67,8 @@ tt {
 .wrap {
   padding: 0.4rem 0.4rem 0.1rem 0.4rem;
   margin: 0 auto;
-  max-width: 1160px;
+  max-width: 1220px;
+  position: relative;
 }
 
 aside {
@@ -80,7 +81,6 @@ aside {
 
 header {
   z-index: 10;
-  margin: 0 0 12px 0;
   padding: 5px 5px 12px 5px;
 }
 
@@ -775,6 +775,7 @@ img.thumb {
 
 .post-telo {
   margin-bottom: 25px;
+  max-width: 800px
 }
 
 .telo-fav-answ {
@@ -1543,6 +1544,7 @@ i.github {
   color: var(--secondary);
 }
 
+.dark header,
 .dark #stHeader.sticky,
 .dark .no-answer,
 .dark .space-info,
@@ -1563,7 +1565,8 @@ i.github {
 .dark a.menu.active,
 .dark .info-n.active,
 .dark .favcomm,
-.dark .showpost {
+.dark .showpost,
+.dark .l-rec {
   color: #888;
 }
 
@@ -1572,7 +1575,9 @@ i.github {
 .dark .p-head,
 .dark .p-head-n,
 .dark h1.profile,
-.dark .dropdown-menu a,
+.dark .nick span,
+.dark .header-right i.icon,
+.dark .dropdown-menu a:hover,
 .dark .space-info-desc,
 .dark h3.recommend {
   color: #eee;
@@ -1587,9 +1592,9 @@ i.github {
   border: solid 1px #444;
 }
 
+.dark header a,
 .dark .u-url .title,
-.dark .banner h1,
-.dark .dropdown-menu a:hover {
+.dark .banner h1 {
   color: #fff;
 }
 
@@ -1633,6 +1638,10 @@ i.github {
 .dropdown-menu a span.ti-angle-down:hover,
 .dropdown-menu a:hover {
   color: var(--primary);
+}
+
+.login-nav-home {
+    margin-top: 15px;
 }
 
 @media (max-width: 1050px) {

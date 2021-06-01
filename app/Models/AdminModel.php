@@ -32,6 +32,15 @@ class AdminModel extends \MainModel
                 ->where(['id'], '=', $uid)->getSelectOne();
     }
 
+    // Получение информации по ip для сопоставления
+    public static function getUserLogsId($ip)
+    {
+        return XD::select('*')
+                ->from(['users_logs'])
+                ->leftJoin(['users'])->on(['id'], '=', ['logs_user_id'])
+                ->where(['logs_ip_address'], '=', $ip)->getSelect();
+    }
+
     // Проверка IP на дубликаты
     public static function replayIp($ip)
     {

@@ -23,8 +23,8 @@
     
 <body class="bd<?php if(Request::getCookie('dayNight') == 'dark') {?> dark<?php } ?>">
 
-<div class="wrap">
-    <header>
+<header>
+    <div class="wrap">
         <div class="header-left"> 
             <a title="<?= lang('Home'); ?>" class="logo" href="/">LORI<span>UP</span></a>
 
@@ -128,21 +128,19 @@
                     <i class="icon frame"></i> 
                 </span>
             </div>
-            
         </div>
-    </header>
+    </div>    
+</header>
 
-<?php if(!empty($post['post_title'])) { ?>
-    <div id="stHeader">
-        <a href="/"><i class="icon home"></i></a> <span class="slash">\</span> <?= $post['post_title']; ?>
-    </div>
-<?php } ?>
+ 
 
 <?php if(!empty($space_bar)) { ?>
     <?php if(!$space_bar && $uid['uri'] == '/') { ?>
-        <div class="space-no-user"> 
-            <i class="icon diamond"></i>
-            Читайте больше!  <a href="/space">Подпишитесь</a> на пространства, которые вам интересны.
+        <div class="space-no-user">
+         
+                <i class="icon diamond"></i>
+                Читайте больше!  <a href="/space">Подпишитесь</a> на пространства, которые вам интересны.
         </div>
+        
     <?php }  ?>
 <?php }  ?>

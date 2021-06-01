@@ -118,11 +118,6 @@ a.space-u.tag-u.avtive {
   color: #888;
 }
 
-.space-box {
-  margin-bottom: 10px;
-  padding-right: 15px;
-}
-
 .space-box .wrap {
   padding: 0;
 }
@@ -236,3 +231,8 @@ a.space-u.tag-u.avtive {
   padding-top: 20px;
   font-size: 14px;
 }
+
+@media (max-width: 880px) {
+
+}
+ 
