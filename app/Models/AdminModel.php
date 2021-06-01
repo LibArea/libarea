@@ -11,9 +11,7 @@ class AdminModel extends \MainModel
     // Страница участников
     public static function UsersAll()
     {
-        $sql = "SELECT users.*, users_logs.*
-                fROM users, users_logs WHERE logs_user_id = id
-                ORDER BY logs_date DESC LIMIT 55"; // GROUP BY id 
+        $sql = "SELECT * FROM users ORDER BY id DESC LIMIT 100"; // GROUP BY id 
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
 

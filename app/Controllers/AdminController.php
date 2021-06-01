@@ -20,11 +20,12 @@ class AdminController extends \MainController
         foreach($user_all as $ind => $row) {
             $row['replayIp']    = AdminModel::replayIp($row['reg_ip']);
             $row['isBan']       = AdminModel::isBan($row['id']);
+            $row['logs']       = AdminModel::UsersLogAll($row['id']);
             $row['created_at']  = Base::ru_date($row['created_at']); 
-            $row['logs_date']   = Base::ru_date($row['logs_date']);
             $result[$ind]       = $row;
         } 
         
+       
         $data = [
             'h1'            => lang('Admin'),
             'users'         => $result,

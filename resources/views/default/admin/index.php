@@ -40,8 +40,12 @@
                      <?php } ?>
                 </span>
                 <span class="t-td center">
-                    <?= $user['logs_ip_address']; ?> <br> 
-                    <small><?= $user['logs_date']; ?></small> 
+                    <?php if(!empty($user['logs']['logs_ip_address'])) { ?>
+                        <?= $user['logs']['logs_ip_address']; ?> <br> 
+                        <small><?= $user['logs']['logs_date']; ?></small> 
+                    <?php } else { ?>
+                        <small class="red"><?= lang('Not activated'); ?> e-mail</small>
+                    <?php } ?>
                 </span>   
                 <span class="t-td center"> 
                     <?php if($user['trust_level'] != 5) { ?>                 

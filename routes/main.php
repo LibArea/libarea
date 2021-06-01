@@ -174,3 +174,4 @@ Route::get('/top/{page?}')->controller('PostController', ['top'])->where(['page'
 Route::get('/comments/{page?}')->controller('CommentController')->where(['page' => '[0-9]+']);
 
 Route::get('/sitemap.xml')->controller('SitemapController');
+// Route::get('/rss-feed.xml')->controller('SitemapController@feed');

@@ -29,7 +29,7 @@ https://loriup.ru/
 
 Это тестовая версия!
 
-Идеи, минимализм, дизайна был взят из того, что мне нравится:
+Идеи, минимализм, дизайн был взят из того, что мне нравится:
 
 *   https://news.ycombinator.com/
 *   https://lobste.rs/
@@ -38,8 +38,10 @@ https://loriup.ru/
 *   https://tildes.net/
 *   https://subreply.com/
 
+Это учебный проект!
+
 ...
 
 #### MIT License
 
-https://github.com/Toxu-ru/AreaDev/blob/main/LICENSE 
+https://github.com/LoriUp/loriup/blob/main/LICENSE 

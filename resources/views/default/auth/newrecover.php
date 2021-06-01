@@ -13,13 +13,15 @@
                     <input type="hidden" name="code" id="code" value="<?= $data['code']; ?>">
                     <input type="hidden" name="user_id" id="user_id" value="<?= $data['user_id']; ?>">
                     <button type="submit" class="button-primary"><?= lang('Reset'); ?></button>
+                    <small>
+                        <?php if(!Lori\Config::get(Lori\Config::PARAM_INVITE)) { ?>
+                            <span class="otst"><a href="/register"><?= lang('Sign up'); ?></a></span>
+                        <?php } ?>
+                        <span class="otst"><a href="/login"><?= lang('Sign in'); ?></a></span>
+                    </small>
                 </div>
             </div>
         </form>
-        <div class="boxline">
-            <a href="/register"><?= lang('Sign up'); ?></a> &emsp;
-            <a href="/login"><?= lang('Sign in'); ?></a>
-        </div>
     </div>
 </main>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

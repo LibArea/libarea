@@ -15,7 +15,7 @@
         <div class="text-info no-mob">
             <h4 class="p-head three"><?= lang('Other'); ?></h4>
             <a class="footer" title="<?= lang('Users'); ?>" href="/users"><?= lang('Users'); ?></a> 
-            <a class="footer" title="<?= lang('Comments'); ?>" href="/comments"><?= lang('Comments'); ?></a> 
+            <a class="footer" title="<?= lang('Comments-n'); ?>" href="/comments"><?= lang('Comments-n'); ?></a> 
         </div>
         <div class="text-oth ots">
             <h4 class="p-head-n"><?= lang('Social networks'); ?></h4> 

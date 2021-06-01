@@ -20,4 +20,16 @@ class SitemapController extends \MainController
         return view(PR_VIEW_DIR . '/sitemap/sitemap', ['data' => $data]);
     }
  
+    public function feed()
+    {
+        $posts  = SitemapModel::getPostsFeed();
+        
+        $data = [
+            'url'       => Config::get(Config::PARAM_URL),
+            'posts'     => $posts,
+        ];
+
+        return view(PR_VIEW_DIR . '/sitemap/rss-feed', ['data' => $data]);
+    }
+ 
 }

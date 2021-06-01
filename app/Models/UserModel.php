@@ -79,7 +79,9 @@ class UserModel extends \MainModel
         }
 
         $password    = password_hash($password, PASSWORD_BCRYPT);
-        $activated   = 1; // установить на 0, если e-mail активация будет запущена
+        // установить на 0, если e-mail активация будет запущена
+        // если на 1, то комментируем в методе registerHandler() стр. 170
+        $activated   = 0;
                 
         XD::insertInto(['users'], '(', ['login'], ',', ['email'], ',', ['password'], ',', ['activated'], ',', ['reg_ip'],',', ['trust_level'],',', ['invitation_id'],  ')')->values( '(', XD::setList([$login, $email, $password, $activated, $reg_ip, $trust_level, $invitation_id]), ')' )->run();
         

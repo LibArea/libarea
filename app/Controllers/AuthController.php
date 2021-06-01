@@ -164,21 +164,19 @@ class AuthController extends \MainController
             // Если регистрация по инвайту, то записываем данные
             UserModel::sendInvitationEmail($inv_code, $inv_uid, $reg_ip, $active_uid);
         } else {
-        
             // Активация e-mail
-            // Если будет раскомм. то в методе createUser изм. $activated   = 1 на 0
+            // Если будет раскомм. то в методе createUser изм. $activated с 1 на 0
             // $active_uid - id участника
-           /* $email_code = Base::randomString('crypto', 20);
+            $email_code = Base::randomString('crypto', 20);
             UserModel::sendActivateEmail($active_uid, $email_code);
             
             // Добавим текс письма тут
-            $newpass_link = 'https://'. HLEB_MAIN_DOMAIN . '/email/avtivate/' . $code;
+            $newpass_link = 'https://'. HLEB_MAIN_DOMAIN . '/email/avtivate/' . $email_code;
             $mail_message = "Activate E-mail: \n" .$newpass_link . "\n\n";
-            Base::mailText($email, Config::get(Config::PARAM_NAME).' - email', $mail_message); */
-        
+            Base::mailText($email, Config::get(Config::PARAM_NAME).' - email', $mail_message); 
         }
         
-        Base::addMsg('Регистрация прошла успешно. Введите e-mail и пароль.', 'success');
+        Base::addMsg('Проверьте e-mail почту для активации аккаунта.', 'success');
         redirect('/login');
     }
 
@@ -369,7 +367,7 @@ class AuthController extends \MainController
         
         UserModel::EmailActivate($avtivate_email['user_id']);
         
-        Base::addMsg('Теперь вы можете использовать свой e-mail и пароль.', 'error');
+        Base::addMsg('Теперь вы можете использовать свой e-mail и пароль.', 'success');
         redirect('/login'); 
     }
     

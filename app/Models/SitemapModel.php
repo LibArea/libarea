@@ -17,4 +17,10 @@ class SitemapModel extends \MainModel
         return XD::select(['space_slug', 'space_is_delete'])->from(['space'])->where(['space_is_delete'], '!=', 1)->getSelect();
     } 
     
+    // Для Yandex
+    public static function getPostsFeed()
+    {
+        return XD::select(['post_id', 'post_slug', 'post_content', 'post_content_img', 'post_is_delete'])->from(['posts'])->where(['post_is_delete'], '!=', 1)->and(['post_content_img'], '!=', '')->getSelect();
+    } 
+    
 }
