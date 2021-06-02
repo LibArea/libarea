@@ -233,6 +233,5 @@ a.space-u.tag-u.avtive {
 }
 
 @media (max-width: 880px) {
-
+  .space-cover-box .space-text .fons { width: 99%; }
 }
- 

@@ -48,11 +48,11 @@ class InfoModel extends \MainModel
         return count($query->getSelect());
     }
     
-    // Группировка событий
-    public static function GrafFlow()
+    // Для статистики по ответам
+    public static function GrafAnsw()
     { 
-        $sql = "SELECT count(flow_id), DATE(flow_pubdate) date FROM flow_log GROUP BY date";
-        
+        $sql = "SELECT COUNT(votes_answ_id), DATE(votes_answ_date) as date FROM votes_answ GROUP BY date limit 10";
+
         return DB::run($sql)->fetchall(PDO::FETCH_BOTH); 
     } 
  

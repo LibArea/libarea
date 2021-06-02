@@ -11,6 +11,8 @@ class InfoController extends \MainController
     // Далее методы по названию страниц
     public function index()
     {
+        Request::getResources()->addBottomStyles('/assets/css/info.css'); 
+        
         $uid  = Base::getUid();
         $data = [
             'h1'            => lang('Info'),
@@ -31,13 +33,10 @@ class InfoController extends \MainController
         $comm_num       = InfoModel::getCommentsNumAll();
         $vote_comm_num  = InfoModel::getCommentsVoteNumAll();
         $vote_post_num  = InfoModel::getPostVoteNumAll();
-        $flow_num       = InfoModel::GrafFlow();
-        
-        $result = Array();
-        foreach($flow_num as $ind => $row){
-            $row['date']    = date("j", strtotime($row['date']));
-            $result[$ind]   = $row;
-        }
+        $flow_num       = InfoModel::GrafAnsw();
+  
+        Request::getResources()->addBottomStyles('/assets/css/info.css'); 
+        Request::getHead()->addScript('/assets/js/Chart.js');
         
         $uid  = Base::getUid();
         $data = [
@@ -48,7 +47,7 @@ class InfoController extends \MainController
             'comm_num'      => $comm_num,
             'vote_comm_num' => $vote_comm_num,
             'vote_post_num' => $vote_post_num,
-            'flow_num'      => $result,
+            'flow_num'      => $flow_num,
             'sheet'         => 'stats',
             'meta_title'    => lang('Statistics') .' | '. Config::get(Config::PARAM_NAME),
             'meta_desc'     => lang('stats-desc') .' '. Config::get(Config::PARAM_HOME_TITLE),
@@ -59,6 +58,8 @@ class InfoController extends \MainController
 
     public function privacy()
 	{
+        Request::getResources()->addBottomStyles('/assets/css/info.css'); 
+        
         $uid  = Base::getUid();
         $data = [
             'h1'            => lang('Privacy Policy'),
@@ -73,6 +74,9 @@ class InfoController extends \MainController
 
     public function restriction()
 	{
+        
+        Request::getResources()->addBottomStyles('/assets/css/info.css'); 
+        
         $uid  = Base::getUid();
         $data = [
             'h1'            => lang('Restriction'),

@@ -156,10 +156,9 @@ h3.badge {
     margin: 20px 0 0 0;
   }
 
-body .profile-box-cover {
+  body .profile-box-cover {
     min-height: 210px;
-}
- 
+  }
 
   .profile-box-telo { margin: 0 0 0 10px; }
   .profile-about { margin: 5px 0 0 0; }

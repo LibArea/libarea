@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\SearchModel;
+use App\Models\InfoModel;
 use Lori\Config;
 use Lori\Base;
 
@@ -52,12 +53,17 @@ class SearchController extends \MainController
             $result = '';
         }
         
+        Request::getResources()->addBottomStyles('/assets/css/info.css'); 
+        Request::getHead()->addScript('/assets/js/Chart.js');
+        
+        $flow_num = InfoModel::GrafAnsw();
         $uid  = Base::getUid();
         $data = [
             'h1'            => lang('Search'),
             'canonical'     => '/search',
             'meta_title'    => lang('Search'),
             'meta_desc'     => lang('Search'), 
+            'flow_num'      => $flow_num,
         ];
 
         return view(PR_VIEW_DIR . '/search/index', ['data' => $data, 'uid' => $uid, 'result' => $result, 'query' => $query]);
