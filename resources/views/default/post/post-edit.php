@@ -28,6 +28,10 @@
                     <div class="img-post-edit">
                         <img class="img-post" alt="<?= $post['post_title']; ?>" src="/uploads/posts/<?= $post['post_content_img']; ?>">
                         <input type="hidden" name="content_img" value="<?= $post['post_content_img']; ?>">
+                        
+                        <a class="img-remove right" href="/post/img/<?= $post['post_id']; ?>/remove">
+                            <small><?= lang('Remove'); ?></small>
+                        </a> 
                     </div>    
                 <?php } ?>
 

@@ -44,6 +44,18 @@
   width: 328px;
 }
 
+.img-post-edit {
+  width: 388px;
+}
+
+a.img-remove {
+  margin: 20px 0 0 10px;
+}
+
+.img-post-edit img.img-post {
+ border: 1px solid #eee;   
+}
+
 .image-uploader.drag-over {
   background-color: #f3f3f3;
 }

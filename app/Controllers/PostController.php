@@ -261,8 +261,6 @@ class PostController extends \MainController
         Request::getResources()->addBottomScript('/assets/md/Markdown.Editor.js');
         Request::getResources()->addBottomScript('/assets/md/editor.js');
         
- 
-
         return view(PR_VIEW_DIR . '/post/post-add', ['data' => $data, 'uid' => $uid, 'space' => $space]);
     }
     
@@ -544,7 +542,7 @@ class PostController extends \MainController
         $draft                  = \Request::getPost('draft');
         $post_user_new          = \Request::getPost('post_user_new');
         
-        $account = \Request::getSession('account');
+        $uid    = Base::getUid();
         
         // Получим пост
         $post = PostModel::postId($post_id); 
@@ -554,13 +552,13 @@ class PostController extends \MainController
         }
         
         // Редактировать может только автор и админ
-        if ($post['post_user_id'] != $account['user_id'] && $account['trust_level'] != 5) {
+        if ($post['post_user_id'] != $uid['id'] && $uid['trust_level'] != 5) {
             redirect('/');
         }
         
         // Если есть смена post_user_id и это TL5
         if($post['post_user_id'] != $post_user_new) {
-            if($account['trust_level'] != 5) {
+            if($uid['trust_level'] != 5) {
                 $post_user_id = $post['post_user_id'];
             } else {    
                 $post_user_id = $post_user_new;
@@ -665,6 +663,36 @@ class PostController extends \MainController
         
         redirect('/post/' . $post['post_id'] . '/' . $post['post_slug']);
     }
+    
+    
+    // Удаление обложки
+    function postImgRemove()
+    {
+        $post_id    = \Request::getInt('id');
+        $uid        = Base::getUid();
+        
+        // Получим пост
+        $post = PostModel::postId($post_id); 
+         
+        if(!$post){
+            redirect('/');
+        }
+        
+        // Редактировать может только автор и админ
+        if ($post['post_user_id'] != $uid['id'] && $uid['trust_level'] != 5) {
+            redirect('/');
+        }
+        
+        $path_img = HLEB_PUBLIC_DIR. '/uploads/posts/' . $post['post_content_img'];
+
+        PostModel::setPostImgRemove($post['post_id']);
+        unlink($path_img);
+
+        Base::addMsg(lang('Cover removed'), 'success');
+        redirect('/post/edit/' . $post['post_id']);
+    }
+    
+    
     
     // Размещение своего поста у себя в профиле
     public function addPostProf()

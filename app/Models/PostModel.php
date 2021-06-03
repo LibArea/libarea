@@ -250,6 +250,14 @@ class PostModel extends \MainModel
         return true;
     }
     
+    // Удаление фото- заставки
+    public static function setPostImgRemove($post_id)
+    {
+        XD::update(['posts'])->set(['post_content_img'], '=', '')->where(['post_id'], '=', $post_id)->run();
+        
+        return true;
+    }
+    
     // Добавить пост в профиль
     public static function addPostProfile($post_id, $uid)
     {

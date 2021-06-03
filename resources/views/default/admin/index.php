@@ -75,5 +75,18 @@
             </div>
         <?php } ?>
     </div>
+    
+    <?php if(!($data['pNum'] > $data['pagesCount'])) { ?>
+        <div class="pagination">   
+            <?php if($data['pNum'] != 1) { ?> 
+                <a href="/admin/<?= $data['pNum'] - 1; ?>"> << <?= lang('Page'); ?> <?= $data['pNum'] - 1; ?></a> 
+            <?php } ?>
+            <?php if($data['pagesCount'] != $data['pNum'] && $data['pNum'] != 1) { ?>|<?php } ?> 
+            <?php if($data['pagesCount'] > $data['pNum']) { ?>
+                <a href="/admin/<?= $data['pNum'] + 1; ?>"><?= lang('Page'); ?>  <?= $data['pNum'] + 1; ?> >></a> 
+            <?php } ?>
+        </div>
+    <?php } ?>
+    
 </main> 
 <?php include TEMPLATE_DIR . '/admin/footer_admin.php'; ?>

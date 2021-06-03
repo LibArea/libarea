@@ -11,7 +11,7 @@
  */
 
 Route::before('Authorization@noAuth')->getGroup();
-    Route::get('/admin')->controller('AdminController');
+    Route::get('/admin/{page?}')->controller('AdminController')->where(['page' => '[0-9]+']);
     Route::get('/admin/user/{id}/edit')->controller('AdminController@userEditPage')->where(['id' => '[0-9]+']);
     Route::type('post')->protect()->get('/admin/user/edit/{id}')->controller('AdminController@userEdit')->where(['id' => '[0-9]+']);
     Route::get('/admin/spaces')->controller('AdminController@spaces'); 
@@ -25,6 +25,8 @@ Route::before('Authorization@noAuth')->getGroup();
     Route::get('/admin/badge/{id}/edit')->controller('AdminController@badgeEditPage')->where(['id' => '[0-9]+']);
     Route::type('post')->protect()->get('/admin/badge/edit/{id}')->controller('AdminController@badgeEdit')->where(['id' => '[0-9]+']);
     Route::type('post')->protect()->get('/admin/badge/add')->controller('AdminController@badgeAdd');
+    
+    Route::get('/post/img/{id}/remove')->controller('PostController@postImgRemove')->where(['id' => '[0-9]+']);
     
     Route::type('post')->get('/admin/comment/recover')->controller('AdminController@recoverComment');
     Route::type('post')->get('/admin/space/ban')->controller('AdminController@delSpace');

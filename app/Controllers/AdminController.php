@@ -11,10 +11,16 @@ class AdminController extends \MainController
     
 	public function index()
 	{
+        $pg     = \Request::getInt('page'); 
+        $page   = (!$pg) ? 1 : $pg;
+ 
         // Доступ только персоналу
         $uid = self::isAdmin();
 
-        $user_all   = AdminModel::UsersAll();
+        $pagesCount = AdminModel::UsersCount();
+        $user_all   = AdminModel::UsersAll($page);
+
+        Base::PageError404($user_all);
         
         $result = Array();
         foreach($user_all as $ind => $row) {
@@ -25,9 +31,16 @@ class AdminController extends \MainController
             $result[$ind]       = $row;
         } 
         
+        if($page > 1) { 
+            $num = ' | ' . lang('Page') . ' ' . $page;
+        } else {
+            $num = '';
+        }
        
         $data = [
-            'h1'            => lang('Admin'),
+            'h1'            => lang('Admin') . $num,
+            'pagesCount'    => $pagesCount,
+            'pNum'          => $page,
             'users'         => $result,
             'meta_title'    => lang('Admin'),
         ]; 

@@ -134,10 +134,10 @@ class SpaceController extends \MainController
         
         $data = [
             'h1'            => lang('Change') . ' - ' . $slug,
-            'canonical'     => '/***', 
+            'canonical'     => '***', 
             'sheet'         => 'edit-space', 
-            'meta_title'    => lang('Change') . ' - ' . $slug,
-            'meta_desc'     => lang('Change'),
+            'meta_title'    => lang('Edit') . ' / ' . $slug,
+            'meta_desc'     => '***',
         ];
 
         return view(PR_VIEW_DIR . '/space/edit-space', ['data' => $data, 'uid' => $uid, 'space' => $space]);
@@ -163,10 +163,10 @@ class SpaceController extends \MainController
         
         $data = [
             'h1'            => lang('Logo') . ' - ' . $slug,
-            'canonical'     => '/***', 
+            'canonical'     => '***', 
             'sheet'         => 'edit-logo', 
-            'meta_title'    => lang('Logo') . ' - ' . $slug,
-            'meta_desc'     => lang('Logo'),
+            'meta_title'    => lang('Edit') . ' / ' . lang('Logo'),
+            'meta_desc'     => '***',
         ];
 
         return view(PR_VIEW_DIR . '/space/edit-space-logo', ['data' => $data, 'uid' => $uid, 'space' => $space]);
@@ -186,10 +186,10 @@ class SpaceController extends \MainController
         
         $data = [
             'h1'            => lang('Tags'),
-            'canonical'     => '/***',
+            'canonical'     => '***',
             'sheet'         => 'edit-tags', 
-            'meta_title'    => lang('Tags'),
-            'meta_desc'     => lang('Tags'),            
+            'meta_title'    => lang('Edit') . ' / ' . lang('Tags'),
+            'meta_desc'     => '***',            
         ];
  
         return view(PR_VIEW_DIR . '/space/info-space', ['data' => $data, 'uid' => $uid, 'space' => $space, 'tags' => $tags]);
@@ -218,10 +218,10 @@ class SpaceController extends \MainController
  
         $data = [
             'h1'        => lang('Add Space'),
-            'canonical' => '/***', 
+            'canonical' => '***', 
             'sheet'         => 'add-space', 
             'meta_title'    => lang('Add Space'),
-            'meta_desc'     => lang('Add Space'),  
+            'meta_desc'     => '***',  
         ];
 
         return view(PR_VIEW_DIR . '/space/add-space', ['data' => $data, 'uid' => $uid, 'num_add_space' => $num_add_space]);
@@ -563,10 +563,10 @@ class SpaceController extends \MainController
 
         $data = [
             'h1'            => lang('Edit tag'),
-            'canonical'     => '/***', 
+            'canonical'     => '***', 
             'sheet'         => 'edit-tag', 
             'meta_title'    => lang('Edit tag'),
-            'meta_desc'     => lang('Edit tag'), 
+            'meta_desc'     => '***', 
         ];
 
         return view(PR_VIEW_DIR . '/space/edit-tag', ['data' => $data, 'uid' => $uid, 'tag' => $tag, 'space' => $space]);

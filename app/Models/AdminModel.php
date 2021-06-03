@@ -9,12 +9,21 @@ use PDO;
 class AdminModel extends \MainModel
 {
     // Страница участников
-    public static function UsersAll()
+    public static function UsersAll($page)
     {
-        $sql = "SELECT * FROM users ORDER BY id DESC LIMIT 100"; // GROUP BY id 
+        $offset = ($page-1) * 25; 
+        $sql = "SELECT * FROM users ORDER BY id DESC LIMIT 25 OFFSET ".$offset.""; // GROUP BY id 
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
 
+    }
+    
+    // Количество участинков
+    public static function UsersCount()
+    {
+        $query = XD::select('*')->from(['users']);
+        $users =  count($query->getSelect());
+        return ceil($users / 25);
     }
 
     // Страница участников
