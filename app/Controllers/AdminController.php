@@ -91,7 +91,7 @@ class AdminController extends \MainController
 
         $result = Array();
         foreach($comm  as $ind => $row){
-            $row['content'] = Base::Markdown($row['comment_content']);
+            $row['content'] = Base::text($row['comment_content'], 'md');
             $row['date']    = Base::ru_date($row['comment_date']);
             $result[$ind]   = $row;
         }

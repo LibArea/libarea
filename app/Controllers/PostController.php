@@ -8,6 +8,7 @@ use App\Models\SpaceModel;
 use App\Models\AnswerModel;
 use App\Models\CommentModel;
 use App\Models\VotesPostModel;
+use App\Models\NotificationsModel;
 use Lori\Config;
 use Lori\Base;
 use UrlRecord;
@@ -121,7 +122,7 @@ class PostController extends \MainController
             redirect('/');
         }
      
-        $post['post_content']   = Base::Markdown($post['post_content']);
+        $post['post_content']   = Base::text($post['post_content'], 'md');
         $post['post_date_lang'] = Base::ru_date($post['post_date']);
         $post['num_answers']    = Base::wordform($post['post_answers_num'], lang('Answer'), lang('Answers-m'), lang('Answers'));
         
@@ -153,12 +154,12 @@ class PostController extends \MainController
             }
 
             $row['comm']            = CommentModel::getCommentsAnswer($row['answer_id'], $uid['id']);
-            $row['answer_content']  = Base::Markdown($row['answer_content']);
+            $row['answer_content']  = Base::text($row['answer_content'], 'md');
             $row['answer_date']     = Base::ru_date($row['answer_date']);
             $row['favorite_answ']   = AnswerModel::getMyAnswerFavorite($row['answer_id'], $uid['id']);
             $answers[$ind]          = $row;
         }
-       
+
         if($post['post_content_img']) {
             $content_img  = Config::get(Config::PARAM_URL) . '/uploads/posts/' . $post['post_content_img'];
         } else {
@@ -390,9 +391,24 @@ class PostController extends \MainController
         // Записываем пост
         $post_id = PostModel::AddPost($data);
         
+        // url поста
+        $url = '/post/'. $post_id .'/'. $post_slug;
+        
+        // Уведомление (@login)
+        if ($message = Base::parseUser($post_content, true, true)) {
+            
+			foreach ($message as $user_id) {
+                // Запретим отправку себе
+				if ($user_id == $post_user_id) {
+					continue;
+				}
+ 				$type = 10; // Упоминания в посте      
+                NotificationsModel::send($post_user_id, $user_id, $type, $post_id, $url, 1);
+			}
+		}
+        
         // Отправим в Discord
         if(Config::get(Config::PARAM_DISCORD) == 1) {
-            $url = '/post/'. $post_id .'/'. $post_slug;
             Base::AddWebhook($post_content, $post_title, $url);
         }
         
@@ -658,6 +674,9 @@ class PostController extends \MainController
             'post_tag_id'           => $post_tag_id,
         ];
         
+        // Think through the method 
+        // $url = Base::estimationUrl($post_content);
+
         // Перезапишем пост
         PostModel::editPost($data);
         
@@ -764,7 +783,7 @@ class PostController extends \MainController
             return false;
         }
         
-        $post['post_content'] = Base::Markdown($post['post_content']);
+        $post['post_content'] = Base::text($post['post_content'], 'md');
 
         return view(PR_VIEW_DIR . '/post/postcode', ['post' => $post]);
     }

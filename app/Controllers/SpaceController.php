@@ -79,7 +79,7 @@ class SpaceController extends \MainController
 
         $space['space_date']        = Base::ru_date($space['space_date']);
         $space['space_cont_post']   = count($posts);
-        $space['space_text']        = Base::Markdown($space['space_text']);
+        $space['space_text']        = Base::text($space['space_text'], 'md');
         
         $result = Array();
         foreach($posts as $ind => $row) {

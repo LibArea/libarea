@@ -7,8 +7,8 @@
                 <?php csrf_field(); ?>
                 <div class="boxline">
                     <label for="login"><?= lang('Nickname'); ?></label>
-                    <input type="text" name="login" id="login">
-         
+                    <input type="text" name="login" id="login" minlength="3" pattern="^[a-zA-Z\s]+$">
+                    <div class="box_h">>= 3 <?= lang('characters'); ?></div>
                 </div>
                 <div class="boxline">
                     <label for="email">Email</label>
@@ -17,6 +17,7 @@
                 <div class="boxline">
                     <label for="password"><?= lang('Password'); ?></label>
                     <input type="password" minlength="8" name="password" id="password">
+                    <div class="box_h">>= 8 <?= lang('characters'); ?></div>
                 </div>
                  <div class="boxline">
                     <label for="password_confirm"><?= lang('repeat-password'); ?></label>

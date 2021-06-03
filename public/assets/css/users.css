@@ -55,8 +55,12 @@ h1.profile {
 
 .stats {
   float: left;
-  margin: 20px 0 0 0;
+  margin: 10px 0 0 0;
   width: 180px;
+}
+
+.stats.no-cover {
+  margin: 40px 0 0 0;
 }
 
 .box.profile-telo {
@@ -95,7 +99,11 @@ h3.badge {
 }
 
 .profile-space {
-  margin: 8px;
+  margin: 8px 8px 8px 0;
+}
+
+.profile-space a {
+  font-size: 14px;
 }
 
 .profile-space img {

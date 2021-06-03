@@ -164,7 +164,7 @@
                                         <?php } ?> 
                                     </div>
                                     <div class="comm-telo-body">
-                                        <?= $comm['comment_content'] ?> 
+                                        <?= lori\Base::text($comm['comment_content'], 'text'); ?>
                                     </div>
                                 </div>
                                 

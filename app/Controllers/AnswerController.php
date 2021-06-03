@@ -29,7 +29,7 @@ class AnswerController extends \MainController
  
         $result = Array();
         foreach($answ  as $ind => $row){
-            $row['answer_content']  = Base::Markdown($row['answer_content']);
+            $row['answer_content']  = Base::text($row['answer_content'], 'md');
             $row['date']            = Base::ru_date($row['answer_date']);
             // N+1 - перенести в запрос
             $row['answ_vote_status'] = VotesAnswerModel::getVoteStatus($row['answer_id'], $user_id);
@@ -83,10 +83,23 @@ class AnswerController extends \MainController
         
         // Записываем ответ
         $last_id = AnswerModel::answerAdd($post_id, $ip, $answer, $my_id);
-         
+        
         // Адрес ответа 
         $url = $return_url['path'] . '#answ_' . $last_id; 
-         
+        
+        // Уведомление (@login)
+        if ($message = Base::parseUser($answer, true, true)) {
+            
+			foreach ($message as $user_id) {
+                // Запретим отправку себе
+				if ($user_id == $my_id) {
+					continue;
+				}
+ 				$type = 11; // Упоминания в ответе      
+                NotificationsModel::send($my_id, $user_id, $type, $last_id, $url, 1);
+			}
+		}
+
         // Добавим в чат и поток
         $data_flow = [
             'flow_action_id'    => 3, // add ответы
@@ -195,7 +208,7 @@ class AnswerController extends \MainController
         
         $result = Array();
         foreach($answ as $ind => $row){
-            $row['content'] = Base::Markdown($row['answer_content']);
+            $row['content'] = Base::text($row['answer_content'], 'md');
             $row['date']    = Base::ru_date($row['answer_date']);
             $result[$ind]   = $row;
         }

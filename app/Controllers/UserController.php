@@ -369,7 +369,7 @@ class UserController extends \MainController
         $result = Array();
         foreach($fav as $ind => $row){
             $row['post_date']       = (empty($row['post_date'])) ? $row['post_date'] : Base::ru_date($row['post_date']);
-            $row['answer_content']  = Base::Markdown($row['answer_content']);
+            $row['answer_content']  = Base::text($row['answer_content'], 'md');
             $row['date']            = $row['post_date'];
             $row['post']            = PostModel::postId($row['answer_post_id']);
             $result[$ind]           = $row;

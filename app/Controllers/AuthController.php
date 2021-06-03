@@ -65,20 +65,19 @@ class AuthController extends \MainController
         $login      = \Request::getPost('login');
         $inv_code   = \Request::getPost('invitation_code');
         $inv_uid    = \Request::getPost('invitation_id');
+        $password   = \Request::getPost('password');
         
-        $password = \Request::getPost('password');
+        $url = $inv_code ? '/register/invite/'.$inv_code : '/register';
 
         if(!filter_var($email, FILTER_VALIDATE_EMAIL))
         {
             Base::addMsg(lang('Invalid') . ' email', 'error');
-            $url = ($inv_code) ? '/register/invite/'.$inv_code : '/register';
             redirect($url);
         }
        
         if (!UserModel::replayEmail($email))
         {
             Base::addMsg('Такой e-mail уже есть на сайте', 'error');
-            $url = ($inv_code) ? '/register/invite/'.$inv_code : '/register';
             redirect($url);
         }
        
@@ -86,28 +85,24 @@ class AuthController extends \MainController
         if (!preg_match('/^[a-zA-Z0-9]+$/u', $login))
         {
             Base::addMsg('В логине можно использовать только латиницу, цифры', 'error');
-            $url = ($inv_code) ? '/register/invite/'.$inv_code : '/register';
             redirect($url);
         }
         
         if (strlen($login) < 4 || strlen($login) > 10)
         {
             Base::addMsg('Логин слишком длинный или короткий', 'error');
-            $url = ($inv_code) ? '/register/invite/'.$inv_code : '/register';
             redirect($url);
         }
  
         if (preg_match('/\s/', $login) || strpos($login,' '))
         {
             Base::addMsg('В логине не допускаются пробелы', 'error');
-            $url = ($inv_code) ? '/register/invite/'.$inv_code : '/register';
             redirect($url);
         }
         
         if (is_numeric(substr($login, 0, 1)))
         {
             Base::addMsg('Логин не может начинаться с цифры', 'error');
-            $url = ($inv_code) ? '/register/invite/'.$inv_code : '/register';
             redirect($url);
         }
         
@@ -116,29 +111,33 @@ class AuthController extends \MainController
             if (self::textCount($login, Base::getStrlen($login, $i, 1)) > 4)
             {
                 Base::addMsg('В логине слишком много повторяющихся символов', 'error');
-                $url = ($inv_code) ? '/register/invite/'.$inv_code : '/register';
                 redirect($url);
             }
         }
+        
+        // Запретим 
+        $disabled = ['admin', 'support', 'lori', 'loriup', 'dev', 'docs', 'meta', 'email', 'login'];
+        if(in_array($login, $disabled)) {
+            Base::addMsg('Такой логин уже есть на сайте', 'error');
+            redirect($url);
+        }
+        
 
         if (!UserModel::replayLogin($login))
         {
             Base::addMsg('Такой логин уже есть на сайте', 'error');
-            $url = ($inv_code) ? '/register/invite/'.$inv_code : '/register';
             redirect($url);
         }
          
         if (substr_count($password, ' ') > 0)
         {
             Base::addMsg('Пароль не может содержать пробелов', 'error');
-            $url = ($inv_code) ? '/register/invite/'.$inv_code : '/register';
             redirect($url);
         }
 
         if (Base::getStrlen($password) < 8 || Base::getStrlen($password) > 32)
         {
             Base::addMsg('Длина пароля должна быть от 8 до 32 знаков', 'error');
-            $url = ($inv_code) ? '/register/invite/'.$inv_code : '/register';
             redirect($url);
         }
      
@@ -202,33 +201,35 @@ class AuthController extends \MainController
         $password   = \Request::getPost('password');
         $rememberMe = \Request::getPost('rememberme');
 
+        $url = '/login';
+
         if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             Base::addMsg('Недопустимый email', 'error');
-            redirect('/login');
+            redirect($url);
         }
 
         $uInfo = UserModel::userInfo($email);
 
         if (empty($uInfo['id'])) {
             Base::addMsg('Пользователь не существует', 'error');
-            redirect('/login');
+            redirect($url);
         }
  
         // Находится ли в бан- листе
         if (UserModel::isBan($uInfo['id'])) {
             Base::addMsg('Ваш аккаунт находится на рассмотрении', 'error');
-            redirect('/login');
+            redirect($url);
         }  
         
         // Активирован ли E-mail
         if (!UserModel::isActivated($uInfo['id'])) {
             Base::addMsg('Ваш аккаунт не активирован', 'error');
-            redirect('/login');
+            redirect($url);
         }
         
         if (!password_verify($password, $uInfo['password'])) {
             Base::addMsg('E-mail или пароль не верен', 'error');
-            redirect('/login');
+            redirect($url);
         } else {
             
             // Если нажал "Запомнить" 

@@ -151,18 +151,115 @@ class Base
 	}
     
     // Markdown
-    public static function  Markdown($text)
+    public static function Markdown($content)
     {
         $SourceParser = new SourceParser();
-        return  $SourceParser->text($text); 
+        return  $SourceParser->text($content); 
     }
     
+    // Работа с контентом
+    public static function text($content, $type)
+    {
+        if($type == 'md') {
+            $md     = self::Markdown($content);
+            $text   = self::parseUser($md);            
+        } else {
+            $text   = self::parseUser($content);
+        }    
+
+        return self::parseUrl($text);
+    }
+    
+    // Для URL отслеживания
+    // Пока вернем (см. метод estimationUrl) 
+    public static function parseUrl($content) 
+    {
+        return $content;
+    }
+    
+    // Срабатывает тригер для оценки URl (используем далее, см. метод: editPostRecording)
+    // Тип публикации
+    // id публикации 
+    // url публикации
+    // Кто добавил
+    // Проверка на совпадение домена и его статус, вес домена в системе (добавить!)
+    public static function estimationUrl($content) 
+    {
+        $regex = '/(?<!!!\[\]\(|"|\'|\=|\)|>)(https?:\/\/[-a-zA-Z0-9@:;%_\+.~#?\&\/\/=!]+)(?!"|\'|\)|>)/i'; 
+        if($info = preg_match($regex, $content, $matches)) {
+            return  $matches[1];
+        } 
+        return true;
+    }
+    
+    // Парсинг user login / uid
+    public static function parseUser($content, $with_user = false, $to_uid = false)
+	{
+		preg_match_all('/@([^@,:\s,]+)/i', strip_tags($content), $matchs);
+
+		if (is_array($matchs[1]))
+		{
+			$match_name = array();
+
+			foreach ($matchs[1] as $key => $login)
+			{
+				if (in_array($login, $match_name)) {
+					continue;
+				}
+
+				$match_name[] = $login;
+			}
+
+			$match_name = array_unique($match_name);
+
+			arsort($match_name);
+
+			$all_users = array();
+
+			$content_uid = $content;
+
+			foreach ($match_name as $key => $login)	{
+                
+                // Добавим по id, нужна будет для notif
+				if (preg_match('/^[0-9]+$/', $login)) {
+					$user_info = UserModel::getUserId($login);
+				}
+				else {
+					$user_info = UserModel::getUserlogin($login);
+				}
+
+				if ($user_info) {
+					$content = str_replace('@' . $login, '<a href="/u/' . $user_info['login'] . '" class="to-user">@' . $user_info['login'] . '</a>', $content);
+
+					if ($to_uid) {
+						$content_uid = str_replace('@' . $login, '@' . $user_info['id'], $content_uid);
+					}
+
+					if ($with_user) {
+						$all_users[] = $user_info['id'];
+					}
+				}
+			}
+		}
+
+		if ($with_user) {
+			return $all_users;
+		}
+
+		if ($to_uid) {
+			return $content_uid;
+		}
+
+		return $content;
+	}
+    
+    
     // Пределы
-    public static function Limits($name, $txt, $min, $max, $redirect)
+    public static function Limits($name, $content, $min, $max, $redirect)
     {
         if (self::getStrlen($name) < $min || self::getStrlen($name) > $max)
         {
-            $text = sprintf(lang('text-string-length'), '«'. $txt . '»', $min, $max);
+            $text = sprintf(lang('text-string-length'), '«'. $content . '»', $min, $max);
             
             self::addMsg($text, 'error');
             redirect($redirect);
@@ -182,8 +279,8 @@ class Base
     
     
     // Обрезка текста по словам
-    public static function  cutWords($txt, $maxlen) {  
-        $text   = strip_tags($txt);
+    public static function  cutWords($content, $maxlen) {  
+        $text   = strip_tags($content);
         $len    = (mb_strlen($text) > $maxlen)? mb_strripos(mb_substr($text, 0, $maxlen), ' ') : $maxlen;
         $cutStr = mb_substr($text, 0, $len);
         $content = (mb_strlen($text) > $maxlen)? $cutStr. '' : $cutStr;

@@ -40,7 +40,7 @@ class SearchController extends \MainController
                 
                 $result = Array();
                 foreach($qa as $ind => $row){
-                    $row['post_content']  = Base::Markdown(Base::cutWords($row['post_content'], 220, '...'));
+                    $row['post_content']  = Base::text(Base::cutWords($row['post_content'], 220, '...'), 'md');
                     $result[$ind]         = $row; 
                 }     
                 
@@ -61,6 +61,7 @@ class SearchController extends \MainController
         $data = [
             'h1'            => lang('Search'),
             'canonical'     => '/search',
+            'sheet'         => 'search',
             'meta_title'    => lang('Search'),
             'meta_desc'     => lang('Search'), 
             'flow_num'      => $flow_num,
@@ -93,6 +94,7 @@ class SearchController extends \MainController
         $data = [
             'h1'            => lang('Domain') . ': ' . $domain,  
             'canonical'     => '/' . $domain,
+            'sheet'         => 'domain',
             'meta_title'    => $meta_title,
             'meta_desc'     => $meta_desc, 
         ];

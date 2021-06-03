@@ -1618,6 +1618,14 @@ i.github {
     margin-top: 15px;
 }
 
+.to-user {
+    background: #e7edf3;
+    color: #667d99;
+    border-radius: 4px;
+    padding: 2px 5px;
+    border: 0!important;
+}
+
 @media (max-width: 1050px) {
   aside {
     margin: 0 15px 20px 0;
@@ -1698,6 +1706,7 @@ a:hover .icon::before {
 .icon.trash::before { content: "\e054"; }
 .icon.github::before { content: "\e60c"; }
 .icon.action-undo::before { content: "\e050"; }
+.icon.action-redo::before { content: "\e051"; }
 .icon.energy::before { content: "\e020"; }
 .icon.trophy::before { content: "\e006"; }
 .icon.home::before { content: "\e069"; }

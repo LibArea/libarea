@@ -206,7 +206,20 @@ return [
     'Change avatar page'    => 'Страница изменение аватарки',    
     'Change password'       => 'Изменение пароля', 
     'Change password page'  => 'Страница изменение пароля',
-    'select-file-up'        => 'Рекомендуемый размер',    
+    'select-file-up'        => 'Рекомендуемый размер',
+
+    /* Уведомления */
+    'No notifications yet'  => 'Уведомлений пока нет',
+    'I read'                => 'Я прочитал',
+    'I read'                => 'Я прочитал',
+    'Wrote'                 => 'Написал', 
+    'Wrote a post'          => 'Написал пост',
+    'Replied to post'       => 'Ответил на пост',
+    'appealed to you'       => 'обратился к вам',
+    'in post'               => 'в посте',
+    'in answer'             => 'в ответе',
+    'in the comment'        => 'в комментарии',   
+    'to your answer'        => 'на ваш ответ',
    
     /* MSG */
     'text-string-length'    => 'Длина %1$s должна быть от %2$s до %3$s символов',

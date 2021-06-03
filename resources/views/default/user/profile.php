@@ -44,11 +44,9 @@
             <?= $user['login']; ?> 
             <?php if($user['name']) { ?> / <?= $user['name']; ?><?php } ?>
         </h1>
-        
- 
     </div>
 
-    <div class="stats box wide">
+    <div class="stats<?php if($user['cover_art'] == 'cover_art.jpeg') { ?> no-cover<?php } ?>">
         <?php if($data['post_num_user'] != 0) { ?>
             <label class="required">Постов:</label>
             <span class="d">
