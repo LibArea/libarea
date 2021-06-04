@@ -253,7 +253,7 @@ a.space-u.tag-u.avtive {
 
 .bl-t,
 .bl-n {
-  margin:0;
+  margin: 0;
   font-size: 14px;
 }
 
@@ -279,7 +279,7 @@ a.add-space-post:hover {
   background: #fff;
   color: #1ca1f3;
 }
- 
+
 @media (max-width: 880px) {
   .space-cover-box .space-text .fons { width: 99%; }
 }

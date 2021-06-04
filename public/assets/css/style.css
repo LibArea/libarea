@@ -1614,15 +1614,15 @@ i.github {
 }
 
 .login-nav-home {
-    margin-top: 15px;
+  margin-top: 15px;
 }
 
 .to-user {
-    background: #e7edf3;
-    color: #667d99;
-    border-radius: 4px;
-    padding: 2px 5px;
-    border: 0!important;
+  background: #e7edf3;
+  color: #667d99;
+  border-radius: 4px;
+  padding: 2px 5px;
+  border: 0 !important;
 }
 
 @media (max-width: 1050px) {
@@ -1642,6 +1642,7 @@ i.github {
   header { margin-left: 0; }
   .no-pc { display: block; }
   .column { width: 19%; }
+
   input.add,
   input.add-url { width: 94%; }
   .text-oth { width: 46%; }

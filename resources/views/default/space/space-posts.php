@@ -18,7 +18,6 @@
         <div class="wrap">
     <?php } ?>   
     
-
     <?php if(!$uid['id']) { ?> 
             <div class="right"> 
                 <a href="/login"><div class="hide-space-id yes-space">+ <?= lang('Read'); ?></div></a>
@@ -241,9 +240,7 @@
                     <?php } ?>
                 </div>
             <?php } ?>
-        
-            
-            
+
             <div class="space-text-sb">
                 <?= $space_info['space_text']; ?>
             </div>
