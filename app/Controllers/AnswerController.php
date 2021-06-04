@@ -88,17 +88,17 @@ class AnswerController extends \MainController
         $url = $return_url['path'] . '#answ_' . $last_id; 
         
         // Уведомление (@login)
-        if ($message = Base::parseUser($answer, true, true)) {
-            
-			foreach ($message as $user_id) {
+        if ($message = Base::parseUser($answer, true, true)) 
+        {
+            foreach ($message as $user_id) {
                 // Запретим отправку себе
-				if ($user_id == $my_id) {
-					continue;
-				}
- 				$type = 11; // Упоминания в ответе      
+                if ($user_id == $my_id) {
+                    continue;
+                }
+                $type = 11; // Упоминания в ответе      
                 NotificationsModel::send($my_id, $user_id, $type, $last_id, $url, 1);
-			}
-		}
+            }
+        }
 
         // Добавим в чат и поток
         $data_flow = [

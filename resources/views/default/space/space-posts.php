@@ -46,11 +46,8 @@
             <a title="<?= $space_info['space_name']; ?>" href="/s/<?= $space_info['space_slug']; ?>">
                 <h1><?= $space_info['space_name']; ?></h1>
             </a>  
-            <div class="data">
-            <?= lang('Created by'); ?>: <a href="/u/<?= $space_info['login']; ?>"><?= $space_info['login']; ?></a>
-            
-            — <?= $space_info['space_date']; ?>
-        
+            <div class="space-slug">
+                s/<?= $space_info['space_slug']; ?>
             </div> 
         </div>    
     </div>
@@ -186,11 +183,66 @@
 
     <aside> 
         <div class="info-space">
-            <?php if($space_info['space_id'] != 1) { ?>
-                <div class="space-users-count">
-                    Читают <?= $space_info['users']; ?>
+        
+            <div class="sb-space-short">
+                    <?= $space_info['space_short_text']; ?>
+            </div>
+            
+            <div class="sb-space-stat">
+                <div class="_bl">
+                    <p class="bl-n"><a href="/u/<?= $space_info['login']; ?>"><?= $space_info['login']; ?></a></p>
+                    <p class="bl-t"><?= lang('Created by'); ?></p>
+                </div>
+                <div class="_bl">
+                    <?php if($space_info['space_id'] != 1) { ?>
+                        <p class="bl-n"><?= $space_info['users']; ?></p>
+                    <?php } else { ?>
+                        <p class="bl-n">***</p>
+                    <?php } ?>
+                    <p class="bl-t"><?= lang('Reads'); ?></p>
+                </div>
+            </div>
+            
+            <hr>
+            
+            <div class="sb-created">
+                <i class="icon calendar"></i> <?= $space_info['space_date']; ?>
+            </div>
+            
+            <?php if(!$uid['id']) { ?> 
+                <div class="sb-add-space-post center">
+                    <a class="add-space-post" href="/login"> 
+                        <i class="icon pencil"></i>    
+                        <?= lang('Create Post'); ?>
+                    </a>
+                </div>    
+            <?php } else { ?>
+                <div class="sb-add-space-post center">
+                    <?php if($space_info['space_user_id'] == $uid['id']) { ?>
+                        <a class="add-space-post" href="/post/add/space/<?= $space_info['space_id']; ?>"> 
+                            <?= lang('Create Post'); ?>
+                        </a>     
+                    <?php } else { ?>
+                        <?php if($space_signed == 1) { ?>
+                            <?php if($space_info['space_permit_users'] == 1) { ?>
+                                <?php if($uid['trust_level'] == 5 || $space_info['space_user_id'] == $uid['id']) { ?>
+                                    <a class="add-space-post" href="/post/add/space/<?= $space_info['space_id']; ?>"> 
+                                        <?= lang('Create Post'); ?>
+                                    </a>
+                                <?php } else { ?> 
+                                    <span class="restricted"><?= lang('The owner restricted the publication'); ?></span>
+                                <?php } ?>                
+                            <?php } else { ?>
+                                <a class="add-space-post" href="/post/add/space/<?= $space_info['space_id']; ?>"> 
+                                    <?= lang('Create Post'); ?>
+                                </a>
+                            <?php } ?>                            
+                        <?php } ?>
+                    <?php } ?>
                 </div>
             <?php } ?>
+        
+            
             
             <div class="space-text-sb">
                 <?= $space_info['space_text']; ?>

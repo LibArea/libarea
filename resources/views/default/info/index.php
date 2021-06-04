@@ -16,7 +16,7 @@
         <br><br>
         <b>Где мне можно скачать архив сайта?</b>
         <br>
-        Скачайте архив <i>AreaDev с GitHub:</i> <a rel="nofollow noreferrer" target="_blank" href="https://github.com/LoriUp/loriup">github.com/LoriUp/loriup</a> 
+        Скачайте архив <i>loriup с GitHub:</i> <a rel="nofollow noreferrer" target="_blank" href="https://github.com/LoriUp/loriup">github.com/LoriUp/loriup</a> 
         <i class="icon github"></i> 
         <i class="icon link"></i>
         <br>

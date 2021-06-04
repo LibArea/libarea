@@ -88,4 +88,5 @@ return [
     'info_space_tags_2'     => 'If you already have tags, they will be displayed on this page.',
     'info_space_edit'       => 'Fill in all the required fields. Some fields determine how your space will be visible in search engines.',
     'info_space_logo'       => 'A lot depends on the logo. It should most accurately display the theme of the space.',
+    'info_login'            => 'Authorization gives you the ability to post, reply, and comment.<br><br>You can vote for other publications and have your own profile.',
 ];

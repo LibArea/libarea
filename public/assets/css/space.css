@@ -33,7 +33,16 @@ h1.space a {
 }
 
 .space-tags {
-  margin: 15px 0 0 4px;
+  margin: 25px 0 0 4px;
+}
+
+.restricted {
+  font-size: 14px;
+  padding: 5px 10px;
+  background: #f1f1f1;
+  text-align: center;
+  display: block;
+  color: #666;
 }
 
 .no-space,
@@ -129,7 +138,6 @@ a.space-u.tag-u.avtive {
 
 .space-text {
   color: #fff;
-  font-size: 13px;
   padding: 10px 6px 9px 6px;
   overflow: hidden;
 }
@@ -145,8 +153,8 @@ a.space-u.tag-u.avtive {
 .space-box .space-box-img,
 .space-box .space-img {
   float: left;
-  width: 47px;
-  height: 47px;
+  width: 48px;
+  height: 48px;
   border: 2px solid #fff;
   margin: 0 15px 0 0;
 }
@@ -218,12 +226,9 @@ a.space-u.tag-u.avtive {
   color: #ea6f5a;
 }
 
-.space-users-count {
-  background: #f3f3f3;
-  float: right;
-  clear: both;
-  padding: 5px 20px;
-  margin-top: -7px;
+.info-space {
+  font-size: 14px;
+  margin-top: 15px;
 }
 
 .space-text-sb {
@@ -232,6 +237,49 @@ a.space-u.tag-u.avtive {
   font-size: 14px;
 }
 
+.sb-add-space-post {
+  margin: 20px 0;
+}
+
+.sb-space-stat {
+  display: flex;
+  margin: 20px 0 10px 0;
+  width: 100%;
+}
+
+._bl {
+  flex: auto;
+}
+
+.bl-t,
+.bl-n {
+  margin:0;
+  font-size: 14px;
+}
+
+.bl-n {
+  font-size: 16px;
+}
+
+.sb-created,
+.bl-t {
+  color: #666;
+}
+
+a.add-space-post {
+  background: #1ca1f3;
+  border: 1px solid #1ca1f3;
+  padding: 5px 14px 5px 22px;
+  color: #fff;
+  border-radius: 2px;
+  display: block;
+}
+
+a.add-space-post:hover {
+  background: #fff;
+  color: #1ca1f3;
+}
+ 
 @media (max-width: 880px) {
   .space-cover-box .space-text .fons { width: 99%; }
 }

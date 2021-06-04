@@ -2,8 +2,14 @@
 <div class="wrap">
     <main class="w-100">
 
-        <h1><?= $data['h1']; ?></h1>
-
+        <h1><?= $data['h1']; ?>
+            <?php foreach ($space as $sp) { ?>
+                <?php if($space_id == $sp['space_id']) { ?> 
+                     / <span class="red"><?= $sp['space_name']; ?></span> 
+                <?php } ?> 
+            <?php } ?>
+        </h1>
+ 
         <div class="box create">
             <form action="/post/create" method="post" enctype="multipart/form-data">
                 <?= csrf_field() ?>
@@ -57,12 +63,17 @@
                     </div>                      
                 <?php } ?>
                 <div class="boxline">
-                    <label for="post_content">Пространствa</label>
-                    <select name="space_id">
-                        <?php foreach ($space as $sp) { ?>
-                            <option value="<?= $sp['space_id']; ?>"><?= $sp['space_name']; ?></option>
-                        <?php } ?>
-                    </select>
+                            
+         
+                        <label for="post_content">Пространствa</label>
+                        <select name="space_id">
+                            <?php foreach ($space as $sp) { ?>
+                                <option <?php if($space_id == $sp['space_id']) { ?>	selected<?php } ?> value="<?= $sp['space_id']; ?>">
+                                    <?= $sp['space_name']; ?> 
+                                </option>
+                            <?php } ?>
+                        </select>
+                 
                 </div>
                 <input type="submit" name="submit" value="Написать" />
             </form>

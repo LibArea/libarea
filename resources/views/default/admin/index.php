@@ -2,6 +2,7 @@
 <main class="admin">
  
     <h1><?= $data['h1']?></h1>
+    <?php print_r(getUrlByName('Test')); ?>
     
     <div class="t-table">
         <div class="t-th">

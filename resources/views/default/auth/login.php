@@ -33,5 +33,8 @@
             <?php } ?>
         </div>
     </main>
+    <aside>
+        <?= lang('info_login'); ?>
+    </aside>
 </div>    
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

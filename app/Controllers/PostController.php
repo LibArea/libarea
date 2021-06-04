@@ -95,7 +95,7 @@ class PostController extends \MainController
         }
         
         $post = PostModel::postSlug($slug, $uid['id']); 
-        
+    
         // Просмотры поста
         if (!isset($_SESSION['pagenumbers'])) {
             $_SESSION['pagenumbers'] = array();
@@ -234,12 +234,10 @@ class PostController extends \MainController
     // Форма добавление поста
     public function addPost() 
     {
-        // Будем проверять ограничение на частоту 
-        // PostModel::getPostSpeed(1);
+        $uid        = Base::getUid();
+        $space      = SpaceModel::getSpaceSelect($uid['id'], $uid['trust_level']);
         
-        $uid  = Base::getUid();
-        
-        $space = SpaceModel::getSpaceSelect($uid);
+        $space_id   = \Request::getInt('space_id');
         
         // Ajax выбор тега в зависимости от id пространства
         // В шаблоне post/add.php
@@ -250,7 +248,7 @@ class PostController extends \MainController
             'h1'            => lang('Add post'),
             'sheet'         => 'add-post',
             'meta_title'    => lang('Add post'),
-            'meta_desc'     => lang('Add post'),
+            'meta_desc'     => '***',
         ];  
         
         Request::getHead()->addStyles('/assets/css/image-uploader.css'); 
@@ -262,7 +260,7 @@ class PostController extends \MainController
         Request::getResources()->addBottomScript('/assets/md/Markdown.Editor.js');
         Request::getResources()->addBottomScript('/assets/md/editor.js');
         
-        return view(PR_VIEW_DIR . '/post/post-add', ['data' => $data, 'uid' => $uid, 'space' => $space]);
+        return view(PR_VIEW_DIR . '/post/post-add', ['data' => $data, 'uid' => $uid, 'space' => $space, 'space_id' => $space_id]);
     }
     
     // Добавление поста
@@ -281,23 +279,32 @@ class PostController extends \MainController
         // Используем для возврата
         $redirect = '/post/add';
 
-        // IP адрес и ID кто добавляет
-        $post_ip_int  = \Request::getRemoteAddress();
-        $post_user_id = $_SESSION['account']['user_id'];
+        // Данные кто добавляет
+        $uid            = Base::getUid();
+        $post_ip_int    = \Request::getRemoteAddress();
         
         // Получаем id пространства
-        $space_id   = \Request::getPost('space_id');
-        $tag_id     = \Request::getPost('tag_id');
+        $space_id   = \Request::getPostInt('space_id');
+        $tag_id     = \Request::getPostInt('tag_id');
 
-        Base::Limits($post_title, lang('Title'), '6', '250', $redirect);
-        Base::Limits($post_content, lang('The post'), '6', '25000', $redirect);
-        
-        // Проверяем выбор пространства
-        if ($space_id == '') {
+        // Получаем информацию по пространству
+        $space = SpaceModel::getSpaceId($space_id);
+        if (!$space) {
             Base::addMsg(lang('Select space'), 'error');
             redirect($redirect);
-            return true;
         }
+
+        // Если стоит ограничение: публиковать может только автор
+        if($space['space_permit_users'] == 1) {
+            // Кроме персонала и владельца
+            if ($uid['trust_level'] != 5 && $space['space_user_id'] != $uid['id']) {
+               Base::addMsg(lang('You dont have access'), 'error');
+               redirect($redirect);
+            }
+        }
+            
+        Base::Limits($post_title, lang('Title'), '6', '250', $redirect);
+        Base::Limits($post_content, lang('The post'), '6', '25000', $redirect);
         
         if($post_url) { 
             $og_img             = self::grabOgImg($post_url);
@@ -326,7 +333,6 @@ class PostController extends \MainController
                 }
 
                 if ($valid) {
-                
                     $image = new  SimpleImage();
                     $path = HLEB_PUBLIC_DIR. '/uploads/posts/';
                     $year = date('Y') . '/';
@@ -358,7 +364,7 @@ class PostController extends \MainController
         
         // Ограничим частоту добавления
         // Добавить условие TL
-        $num_post =  PostModel::getPostSpeed($post_user_id);
+        $num_post =  PostModel::getPostSpeed($uid['id']);
         if(count($num_post) > 5) {
             Base::addMsg(lang('limit-post-day'), 'error');
             redirect('/');
@@ -379,7 +385,7 @@ class PostController extends \MainController
             'post_translation'      => $post_translation,
             'post_draft'            => $post_draft,
             'post_ip_int'           => $post_ip_int,
-            'post_user_id'          => $post_user_id,
+            'post_user_id'          => $uid['id'],
             'post_space_id'         => $space_id,
             'post_tag_id'           => $tag_id,
             'post_url'              => $post_url,
@@ -506,7 +512,7 @@ class PostController extends \MainController
             redirect('/');
         }
         
-        $space = SpaceModel::getSpaceSelect($uid);
+        $space = SpaceModel::getSpaceSelect($uid['id'], $uid['trust_level']);
         $tags  = SpaceModel::getSpaceTags($post['post_space_id']);
         $user  = UserModel::getUserId($post['post_user_id']);
 
@@ -529,7 +535,7 @@ class PostController extends \MainController
             'h1'            => lang('Edit post'),
             'sheet'         => 'edit-post',
             'meta_title'    => lang('Edit post'),
-            'meta_desc'     => lang('Edit post'),
+            'meta_desc'     => '***',
         ];
 
         return view(PR_VIEW_DIR . '/post/post-edit', ['data' => $data, 'uid' => $uid, 'post' => $post, 'space' => $space, 'tags' => $tags, 'user' => $user]);
@@ -570,6 +576,23 @@ class PostController extends \MainController
         // Редактировать может только автор и админ
         if ($post['post_user_id'] != $uid['id'] && $uid['trust_level'] != 5) {
             redirect('/');
+        }
+        
+        
+        // Получаем информацию по пространству
+        $space = SpaceModel::getSpaceId($post_space_id);
+        if (!$space) {
+            Base::addMsg(lang('Select space'), 'error');
+            redirect($redirect);
+        }
+
+        // Если стоит ограничение: публиковать может только автор
+        if($space['space_permit_users'] == 1) {
+            // Кроме персонала и владельца
+            if ($uid['trust_level'] != 5 && $space['space_user_id'] != $uid['id']) {
+               Base::addMsg(lang('You dont have access'), 'error');
+               redirect($redirect);
+            }
         }
         
         // Если есть смена post_user_id и это TL5

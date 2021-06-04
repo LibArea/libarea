@@ -33,6 +33,7 @@ Route::before('Authorization@noAuth')->getGroup();
     Route::type('post')->get('/admin/ban')->controller('AdminController@banUser');
 
 	Route::get('/post/add')->controller('PostController@addPost');
+    Route::get('/post/add/space/{space_id}')->controller('PostController@addPost')->where(['space_id' => '[0-9]+']);
 	Route::type('post')->protect()->get('/post/create')->controller('PostController@createPost');
 	Route::get('/post/edit/{id}')->controller('PostController@editPost');
 	Route::type('post')->protect()->get('/post/editpost/{id}')->controller('PostController@editPostRecording');

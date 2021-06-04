@@ -170,7 +170,6 @@ a.add-post {
   border: 1px solid #1ca1f3;
   padding: 5px 14px 5px 22px;
   color: #fff;
-  border-radius: 80%;
   border-radius: 10em;
 }
 
@@ -677,7 +676,7 @@ aside a.my.active {
 .showpost {
   font-size: 14px;
   color: var(--tertiary);
-  max-width: 600px;
+  max-width: 750px;
   margin: 0 0 5px 0;
   display: block;
 }

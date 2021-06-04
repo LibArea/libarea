@@ -22,8 +22,8 @@ class AuthController extends \MainController
             'h1'            => lang('Sign up'),
             'canonical'     => '/register',
             'sheet'         => 'register', 
-            'meta_title'    => lang('Sign up'),
-            'meta_desc'     => lang('Sign up'),
+            'meta_title'    => lang('Sign up') .' | '. Config::get(Config::PARAM_NAME),
+            'meta_desc'     => lang('info_security'),
         ];
         
         return view(PR_VIEW_DIR . '/auth/register', ['data' => $data, 'uid' => $uid]);    
@@ -187,8 +187,8 @@ class AuthController extends \MainController
             'h1'            => lang('Sign in'),
             'canonical'     => '/login',
             'sheet'         => 'login', 
-            'meta_title'    => lang('Sign in'),
-            'meta_desc'     => lang('Sign in'),
+            'meta_title'    => lang('Sign in') .' | '. Config::get(Config::PARAM_NAME),
+            'meta_desc'     => lang('info_login'),
         ];
 
         return view(PR_VIEW_DIR . '/auth/login', ['data' => $data, 'uid' => $uid]);

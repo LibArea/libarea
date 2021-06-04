@@ -20,14 +20,12 @@ class SpaceModel extends \MainModel
     } 
 
     // Для форм добавления и изменения
-    // $id
-    // $trust_level
-    public static function getSpaceSelect($uid)
+    public static function getSpaceSelect($user_id, $trust_level)
     {
-        if ($uid['trust_level'] == 5) {
+        if ($trust_level == 5) {
             $sql = "SELECT * FROM space";
         } else {
-            $sql = "SELECT * FROM space WHERE space_permit_users = 0 or space_user_id = ".$uid['id']."";
+            $sql = "SELECT * FROM space WHERE space_permit_users = 0 or space_user_id = ".$user_id."";
         }
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 

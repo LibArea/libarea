@@ -122,17 +122,17 @@ class CommentController extends \MainController
         }
         
         // Уведомление (@login)
-        if ($message = Base::parseUser($comment, true, true)) {
-            
-			foreach ($message as $user_id) {
+        if ($message = Base::parseUser($comment, true, true)) 
+        {
+            foreach ($message as $user_id) {
                 // Запретим отправку себе и автору ответа (оповщение ему выше)
                 if ($user_id == $my_id || $user_id == $inf_answ['answer_user_id']) {
-					continue;
-				}
- 				$type = 12; // Упоминания в комментарии      
+                    continue;
+                }
+                $type = 12; // Упоминания в комментарии      
                 NotificationsModel::send($my_id, $user_id, $type, $last_id, $url, 1);
-			}
-		}
+            }
+        }
         
         redirect('/' . $return_url . '#comm_' . $last_id); 
     }
