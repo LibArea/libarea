@@ -18,7 +18,7 @@
                             </a>
 
                             <div class="post-footer lowercase">
-                                <img class="ava" src="/uploads/users/avatars/small/<?= $fav['avatar']; ?>">
+                                <img class="ava" src="<?= user_avatar_url($fav['avatar'], 'small'); ?>">
                                 <span class="user"> 
                                     <a href="/u/<?= $fav['login']; ?>"><?= $fav['login']; ?></a> 
                                 </span>

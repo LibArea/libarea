@@ -16,7 +16,7 @@
 
                         <div class="comm-telo">
                             <div class="comm-header">
-                                <img class="ava" alt="<?= $comm['login']; ?>" src="/uploads/users/avatars/small/<?= $comm['avatar']; ?>">
+                                <img class="ava" alt="<?= $comm['login']; ?>" src="<?= user_avatar_url($comm['avatar'], 'small'); ?>">
                                 <span class="user"> 
                                     <a href="/u/<?= $comm['login']; ?>"><?= $comm['login']; ?></a> 
                                     

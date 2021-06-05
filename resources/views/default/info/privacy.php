@@ -1,4 +1,3 @@
-<?php include TEMPLATE_DIR . '/header.php'; ?>
 <div class="wrap">
     <main class="w-75">
         <ul class="breadcrumb">
@@ -29,5 +28,4 @@
         <i>И мы не обсуждаем участников...</i>
     </main>
     <?php include TEMPLATE_DIR . '/_block/info-page-menu.php'; ?>
-</div>    
-<?php include TEMPLATE_DIR . '/footer.php'; ?> 
+</div>

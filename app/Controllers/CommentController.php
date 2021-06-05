@@ -29,7 +29,7 @@ class CommentController extends \MainController
         $result = Array();
         foreach($comm  as $ind => $row){
  
-            $row['date']    = Base::ru_date($row['comment_date']);
+            $row['date']    = lang_date($row['comment_date']);
             // N+1 - перенести в запрос
             $row['comm_vote_status'] = VotesCommentModel::getVoteStatus($row['comment_id'], $user_id);
             $result[$ind]   = $row;
@@ -210,7 +210,7 @@ class CommentController extends \MainController
     }
 
     // Комментарии участника
-    public function getUserComments()
+    public function userComments()
     {
         $login = \Request::get('login');
 
@@ -222,7 +222,7 @@ class CommentController extends \MainController
         
         $result = Array();
         foreach($comm as $ind => $row){
-            $row['date']    = Base::ru_date($row['comment_date']);
+            $row['date']    = lang_date($row['comment_date']);
             $result[$ind]   = $row;
         }
         

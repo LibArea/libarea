@@ -40,7 +40,7 @@
         <?php } ?>                 
     <?php } ?> 
     <div class="space-text">
-        <img class="space-box-img" src="/uploads/spaces/logos/<?= $space_info['space_img']; ?>">
+        <img class="space-box-img" src="<?= spase_logo_url($space_info['space_img'], 'small'); ?>">
         <div class="fons">
             <a title="<?= $space_info['space_name']; ?>" href="/s/<?= $space_info['space_slug']; ?>">
                 <h1><?= $space_info['space_name']; ?></h1>
@@ -151,7 +151,7 @@
                         </div>
                         
                         <div class="post-footer lowercase">
-                            <img class="ava" alt="<?= $post['login']; ?>" src="/uploads/users/avatars/small/<?= $post['avatar']; ?>">
+                            <img class="ava" alt="<?= $post['login']; ?>" src="<?= user_avatar_url($post['avatar'], 'small'); ?>">
                             <span class="user"> 
                                 <a href="/u/<?= $post['login']; ?>">
                                     <?= $post['login']; ?>

@@ -77,7 +77,7 @@
                                     <?php } ?> 
                                 </div>
                                 <div class="qa-ava">
-                                    <img alt="<?= $answ['login']; ?>" src="/uploads/users/avatars/small/<?= $answ['avatar'] ?>">
+                                    <img alt="<?= $answ['login']; ?>" src="<?= user_avatar_url($answ['avatar'], 'small'); ?>">
                                 </div>
                                 <div class="qa-ava-info"> 
                                     <a class="qa-login" href="/u/<?= $answ['login']; ?>"><?= $answ['login']; ?></a> 

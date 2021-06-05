@@ -23,7 +23,7 @@
             <?php if($flow['flow_action_id'] == 5) { ?>
                 <div class="v-ots"></div> 
                 <div class="comm-header">
-                     <img class="avatar" src="/uploads/users/avatars/small/<?= $flow['avatar']; ?>">
+                     <img class="avatar" src="<?= user_avatar_url($flow['avatar'], 'small'); ?>">
                     <span class="user"> 
                          <a href="/u/<?= $flow['login']; ?>"><?= $flow['login']; ?></a> 
                     </span> 
@@ -38,7 +38,7 @@
                 <div class="flow-comment">
                     <i class="icon bubbles"></i>
                     <div class="box">
-                        <img class="avatar" src="/uploads/users/avatars/small/<?= $flow['avatar']; ?>">
+                        <img class="avatar" src="<?= user_avatar_url($flow['avatar'], 'small'); ?>">
                         <span class="user"> 
                             <a href="/u/<?= $flow['login']; ?>"><?= $flow['login']; ?></a> 
                         </span> 
@@ -52,7 +52,7 @@
                 <div class="flow-answer">
                     <i class="icon action-undo"></i>
                     <div class="box">
-                        <img class="avatar" src="/uploads/users/avatars/small/<?= $flow['avatar']; ?>">
+                        <img class="avatar" src="<?= user_avatar_url($flow['avatar'], 'small'); ?>">
                         <span class="user"> 
                             <a href="/u/<?= $flow['login']; ?>"><?= $flow['login']; ?></a> 
                         </span> 

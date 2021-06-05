@@ -39,7 +39,7 @@ class FlowController extends \MainController
         
         $result = Array();
         foreach($flows as $ind => $row){
-            $row['flow_pubdate']    = Base::ru_date($row['flow_pubdate']);
+            $row['flow_pubdate']    = lang_date($row['flow_pubdate']);
             $result[$ind]           = $row;
         } 
         

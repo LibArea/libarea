@@ -52,7 +52,7 @@
             <?php foreach ($space as  $sp) { ?>  
                 <div class="space-telo">
                 
-                    <img class="space-img" alt="<?= $sp['space_name']; ?>" src="/uploads/spaces/logos/<?= $sp['space_img'] ?>">
+                    <img class="space-img" alt="<?= $sp['space_name']; ?>" src="<?= spase_logo_url($sp['space_img'], 'max'); ?>">
                         <?php if($sp['space_user_id'] == $uid['id']) { ?>
                             <div class="my_space all"></div>
                         <?php } ?>

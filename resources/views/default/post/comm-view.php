@@ -29,7 +29,7 @@
                     <?php } ?>
                         <div class="answ-telo">
                             <div class="answ-header">
-                                <img alt="<?= $answ['login']; ?>" class="ava" src="/uploads/users/avatars/small/<?= $answ['avatar'] ?>">
+                                <img alt="<?= $answ['login']; ?>" class="ava" src="<?= user_avatar_url($answ['avatar'], 'small'); ?>">
                                 <span class="user"> 
                                     <a href="/u/<?= $answ['login']; ?>"><?= $answ['login']; ?></a> 
                                 </span> 
@@ -130,8 +130,8 @@
                                 <?php } ?>
                             <?php } ?>
                                 <div class="comm-telo">
-                                    <div class="comm-header">
-                                        <img alt="<?= $comm['login']; ?>" class="ava" src="/uploads/users/avatars/small/<?= $comm['avatar'] ?>">
+                                    <div class="comm-header"> 
+                                        <img alt="<?= $comm['login']; ?>" class="ava" src="<?= user_avatar_url($comm['avatar'], 'small'); ?>">
                                         <span class="user"> 
                                             <a href="/u/<?= $comm['login']; ?>"><?= $comm['login']; ?></a> 
                                         </span> 

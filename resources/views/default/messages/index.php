@@ -12,7 +12,7 @@
                         <?php } else { ?>
                             <?= lang('From'); ?>
                              
-                            <img src="/uploads/users/avatars/small/<?= $msg['msg_user']['avatar']; ?>" class="msg-ava">
+                            <img src="<?= user_avatar_url($msg['msg_user']['avatar'], 'small'); ?>" class="msg-ava">
                              <a href="/u/<?= $msg['msg_user']['login']; ?>">
                                 <?= $msg['msg_user']['login']; ?> 
                              </a>

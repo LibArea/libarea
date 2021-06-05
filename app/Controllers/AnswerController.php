@@ -30,7 +30,7 @@ class AnswerController extends \MainController
         $result = Array();
         foreach($answ  as $ind => $row){
             $row['answer_content']  = Base::text($row['answer_content'], 'md');
-            $row['date']            = Base::ru_date($row['answer_date']);
+            $row['date']            = lang_date($row['answer_date']);
             // N+1 - перенести в запрос
             $row['answ_vote_status'] = VotesAnswerModel::getVoteStatus($row['answer_id'], $user_id);
             $result[$ind]   = $row;
@@ -196,7 +196,7 @@ class AnswerController extends \MainController
 	}
     
     // Ответы участника
-    public function getUserAnswers()
+    public function userAnswers()
     {
         $login = \Request::get('login');
        
@@ -209,7 +209,7 @@ class AnswerController extends \MainController
         $result = Array();
         foreach($answ as $ind => $row){
             $row['content'] = Base::text($row['answer_content'], 'md');
-            $row['date']    = Base::ru_date($row['answer_date']);
+            $row['date']    = lang_date($row['answer_date']);
             $result[$ind]   = $row;
         }
         

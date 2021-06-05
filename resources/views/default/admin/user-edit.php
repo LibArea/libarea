@@ -7,8 +7,13 @@
     <div class="box badges">
         <form action="/admin/user/edit/<?= $user['id']; ?>" method="post">
             <?= csrf_field() ?>
-            <img width="325" class="right" src="/uploads/users/cover/<?= $user['cover_art']; ?>">
-            <img width="65" src="/uploads/users/avatars/<?= $user['avatar']; ?>"> 
+ 
+            <a class="right" href="/u/<?= $user['login']; ?>/delete/cover">
+                <?= lang('Remove'); ?>
+            </a>
+            <br>
+            <img width="325" class="right" src="<?= user_cover_url($user['cover_art']); ?>">
+            <img width="65" src="<?= user_avatar_url($user['avatar'], 'max'); ?>"> 
             
             <div class="boxline max-width">
                 <label for="post_title">Id / <?= $user['id']; ?></label>

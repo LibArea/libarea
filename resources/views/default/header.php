@@ -53,7 +53,7 @@
             <?php } else { ?> 
                 <div class="dropbtn nav">
                     <div class="nick" title=""><span><?= $uid['login']; ?></span>  
-                        <img class="ava" alt="<?= $uid['login']; ?>" src="/uploads/users/avatars/small/<?= $uid['avatar']; ?>">
+                        <img class="ava" alt="<?= $uid['login']; ?>" src="<?= user_avatar_url($uid['avatar'], 'small'); ?>">
                         <i class="icon arrow arrow-down"></i>
                     </div>
                     <div class="dropdown-menu">

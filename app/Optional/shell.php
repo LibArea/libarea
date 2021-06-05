@@ -8,7 +8,7 @@ declare(strict_types=1);
  * Сопоставление названий для используемых функций. При конфликте имен можно использовать другое имя.
  */
 
-function view($to, $data = null) {
+function view($to, $data = null) { 
     return hleb_v5ds34hop4nm1d_page_view($to, $data);
 }
 
@@ -104,10 +104,4 @@ function view_path() {
     return hleb_601e30l60p2ii1e0o469tl_view_path();
 }
   
-// Локализация
-function lang($text){ 
-    if(isset(LANG[$text])){ 
-        return LANG[$text];
-    }
-    return $text;
-}
+hleb_require(HLEB_GLOBAL_DIRECTORY . '/app/Libraries/Template.php');

@@ -18,7 +18,7 @@
                     
                     <div class="comm-telo">
                         <div class="comm-header">
-                            <img class="ava" src="/uploads/users/avatars/small/<?= $comm['avatar'] ?>">
+                            <img class="ava" src="<?= user_avatar_url($comm['avatar'], 'small'); ?>">
                             <span class="user"> 
                                 <a href="/u/<?= $comm['login']; ?>"><?= $comm['login']; ?></a> 
                                 <?= $comm['date']; ?>
@@ -30,7 +30,7 @@
                             </span>
                             <span class="otst"> | </span>
                             <span id="cm_dell" class="comm_link">
-                                <a data-id="<?= $comm['comment_id']; ?>" class="recover-comm">Восстановить</a>
+                                <a data-id="<?= $comm['comment_id']; ?>" class="recover-comm"><?= lang('Recover'); ?></a>
                             </span>
                         </div>
                         <div class="comm-telo-body">

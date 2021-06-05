@@ -7,7 +7,7 @@
         <?= csrf_field() ?>
             <input type="hidden" name="recipient" value="<?= $data['recipient_user']['id']; ?>" />
             
-            Для <img src="/uploads/users/avatars/small/<?= $data['recipient_user']['avatar']; ?>" class="msg-ava">
+            Для <img src="<?= user_avatar_url($data['recipient_user']['avatar'], 'small'); ?>" class="msg-ava">
                 <a href="/u/<?= $data['recipient_user']['login']; ?>" class="msg-user">
                 <?= $data['recipient_user']['login']; ?>
             </a><br>

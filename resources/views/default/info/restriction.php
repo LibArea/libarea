@@ -1,4 +1,3 @@
-<?php include TEMPLATE_DIR . '/header.php'; ?>
 <main class="w-75">
     <div class="max-width">
         <ul class="breadcrumb">
@@ -9,9 +8,8 @@
                 <a title="<?= lang('Info'); ?>" href="/info"><?= lang('Info'); ?></a>
             </li>
         </ul>
-        <h1>Доступ ограничен</h1>
+        <h1><?= lang('Access restricted'); ?></h1>
 
-        <p><i>Ваш профиль находится на рассмотрении...</p>
+        <p><i><?= lang('The profile is being checked'); ?>...</p>
     </div>
 </main>
-<?php include TEMPLATE_DIR . '/footer.php'; ?>

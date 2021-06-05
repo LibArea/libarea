@@ -2,7 +2,7 @@
 
 <?php if($user['cover_art'] != 'cover_art.jpeg') { ?>
     <style nonce="<?= $_SERVER['nonce']; ?>">
-    .profile-box-cover {background-image: url(/uploads/users/cover/<?= $user['cover_art']; ?>); background-position: 50% 50%;min-height: 310px;}
+    .profile-box-cover {background-image: url(<?= user_cover_url($user['cover_art']); ?>); background-position: 50% 50%;min-height: 310px;}
     </style>
     <div class="profile-box-cover">
     <div class="wrap">      
@@ -29,7 +29,7 @@
             <?php } ?>
         </div>
         <div class="profile-ava">
-            <img alt="<?= $user['login']; ?>" src="/uploads/users/avatars/<?= $user['avatar']; ?>">
+            <img alt="<?= $user['login']; ?>" src="<?= user_avatar_url($user['avatar'], 'max'); ?>">
         </div>
         
     </div>
@@ -66,7 +66,7 @@
             <br>
         <?php } ?>
         <?php if($data['comm_num_user'] != 0) { ?>
-            <label class="required">Комментариев:</label>
+            <label class="required"><?= ('Comments'); ?>:</label>
             <span class="d">
                 <a title="Все комментарии <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/comments">
                     <?= $data['comm_num_user']; ?>
@@ -82,7 +82,7 @@
             <span class="d">
                 <?php foreach ($data['space_user'] as  $space) { ?>
                     <div class="profile-space">
-                        <img src="/uploads/spaces/logos/small/<?= $space['space_img']; ?>" alt="<?= $space['space_name']; ?>">
+                        <img src="<?= spase_logo_url($space['space_img'], 'small'); ?>" alt="<?= $space['space_name']; ?>">
                         <a href="/s/<?= $space['space_slug'];?>"><?= $space['space_name'];?></a> 
                     </div>
                 <?php } ?>
@@ -171,7 +171,7 @@
                     </a>
 
                     <div class="post-footer lowercase"> 
-                        <img class="ava" alt="<?= $user['login']; ?>" src="/uploads/users/avatars/small/<?= $user['avatar']; ?>">
+                        <img class="ava" alt="<?= $user['login']; ?>" src="<?= user_avatar_url($user['avatar'], 'small'); ?>">
                         <span class="user"> 
                             <a href="/u/<?= $user['login']; ?>">
                                 <?= $user['login']; ?>

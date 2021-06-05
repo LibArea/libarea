@@ -33,7 +33,7 @@
                         </a>
                         
                         <div class="post-footer">
-                            <img class="ava" src="/uploads/users/avatars/small/<?= $post['avatar']; ?>">
+                            <img class="ava" src="<?= user_avatar_url($post['avatar'], 'small'); ?>">
                             <span class="user"> 
                                 <a href="/u/<?= $post['login']; ?>"><?= $post['login']; ?></a> 
                             </span>

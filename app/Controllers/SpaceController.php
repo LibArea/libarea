@@ -77,14 +77,14 @@ class SpaceController extends \MainController
   
         $posts = SpaceModel::getSpacePosts($space['space_id'], $uid['id'], $space_tags_id, $type);
 
-        $space['space_date']        = Base::ru_date($space['space_date']);
+        $space['space_date']        = lang_date($space['space_date']);
         $space['space_cont_post']   = count($posts);
         $space['space_text']        = Base::text($space['space_text'], 'md');
         
         $result = Array();
         foreach($posts as $ind => $row) {
             $row['post_content_preview']    = Base::cutWords($row['post_content'], 68);
-            $row['lang_num_answers']        = Base::wordform($row['post_answers_num'], lang('Answer'), lang('Answers-m'), lang('Answers'));
+            $row['lang_num_answers']        = word_form($row['post_answers_num'], lang('Answer'), lang('Answers-m'), lang('Answers'));
             $result[$ind]                   = $row;
         }  
 

@@ -65,7 +65,6 @@ Route::before('Authorization@noAuth')->getGroup();
     Route::type('post')->get('/comment/del')->controller('CommentController@deletComment');
     Route::type('post')->get('/comment/addfavorite')->controller('CommentController@addCommentFavorite');
 
-
 	// Добавление ответов / удаление / изменение
     Route::get('/post/{post_id}/answ/{answ_id}')->controller('AnswerController@editFormAnswer')->where(['post_id' => '[0-9]+', 'answ_id' => '[0-9]+']);
     Route::type('post')->protect()->get('/answer/edit')->controller('AnswerController@editAnswer');
@@ -90,8 +89,8 @@ Route::before('Authorization@noAuth')->getGroup();
     Route::get('/notifications/delete')->controller('NotificationsController@notifRemove');  
     
     // Избранное и черновики
-    Route::get('/u/{login}/favorite')->controller('UserController@getUserFavorite')->where(['login' => '[A-Za-z0-9]+']);
-    Route::get('/u/{login}/drafts')->controller('UserController@getUserDrafts')->where(['login' => '[A-Za-z0-9]+']);
+    Route::get('/u/{login}/favorite')->controller('UserController@userFavorites')->where(['login' => '[A-Za-z0-9]+']);
+    Route::get('/u/{login}/drafts')->controller('UserController@userDrafts')->where(['login' => '[A-Za-z0-9]+']);
 
 	// Подписываемся, отписываемся / изменяем пространство
 	Route::type('post')->get('/space/hide')->controller('SpaceController@hide');
@@ -132,11 +131,11 @@ Route::before('Authorization@yesAuth')->getGroup();
 	Route::type('get')->get('/login')->controller('AuthController@loginPage'); 
 Route::endGroup();
 
-// Покажем пост в ленте и полный пост
+// Пост в ленте и полный пост
 Route::type('post')->get('/post/shown')->controller('PostController@shownPost');
 Route::get('/post/{id}/{slug}')->controller('PostController@viewPost')->where(['id' => '[0-9-]+', 'slug' => '[A-Za-z0-9-]+']);
 
-// Правила
+// Информация
 Route::get('/info')->controller('InfoController');
 Route::get('/info/stats')->controller('InfoController@stats');
 Route::get('/info/privacy')->controller('InfoController@privacy');
@@ -144,10 +143,10 @@ Route::get('/info/restriction')->controller('InfoController@restriction');
 
 // Участники, авторизация, посты и комментарии, закладки
 Route::get('/users')->controller('UserController');
-Route::get('/u/{login}')->controller('UserController@getProfile')->where(['login' => '[A-Za-z0-9]+']);
-Route::get('/u/{login}/posts')->controller('PostController@getUserPosts')->where(['login' => '[A-Za-z0-9]+']);
-Route::get('/u/{login}/answers')->controller('AnswerController@getUserAnswers')->where(['login' => '[A-Za-z0-9]+']);
-Route::get('/u/{login}/comments')->controller('CommentController@getUserComments')->where(['login' => '[A-Za-z0-9]+']);
+Route::get('/u/{login}')->controller('UserController@profile')->where(['login' => '[A-Za-z0-9]+']);
+Route::get('/u/{login}/posts')->controller('PostController@userPosts')->where(['login' => '[A-Za-z0-9]+']);
+Route::get('/u/{login}/answers')->controller('AnswerController@userAnswers')->where(['login' => '[A-Za-z0-9]+']);
+Route::get('/u/{login}/comments')->controller('CommentController@userComments')->where(['login' => '[A-Za-z0-9]+']);
 
 // Поток
 Route::get('/flow')->controller('FlowController');

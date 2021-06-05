@@ -1,4 +1,3 @@
-<?php include TEMPLATE_DIR . '/header.php'; ?>
 <div class="wrap">
     <main class="w-75">
         <h1><?= $data['h1']; ?></h1>
@@ -72,4 +71,3 @@
     </main>
     <?php include TEMPLATE_DIR . '/_block/info-page-menu.php'; ?>
 </div>
-<?php include TEMPLATE_DIR . '/footer.php'; ?>

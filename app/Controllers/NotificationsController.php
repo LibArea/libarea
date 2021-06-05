@@ -27,7 +27,7 @@ class NotificationsController extends \MainController
         $result = Array();
         foreach($list as $ind => $row) {
             
-            $row['add_time']        = Base::ru_date($row['add_time']);
+            $row['add_time']        = lang_date($row['add_time']);
             $result[$ind]           = $row;
          
         } 

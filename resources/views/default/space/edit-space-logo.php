@@ -27,7 +27,7 @@
                 <form action="/space/editspace/logo" method="post" enctype="multipart/form-data">
                     <?= csrf_field() ?>
                     <div class="box setting space">
-                        <img class="ava" src="/uploads/spaces/logos/<?= $space['space_img']; ?>">
+                        <img class="ava" src="<?= spase_logo_url($space['space_img'], 'max'); ?>">
                         <div class="box-form-img"> 
                             <div class="boxline">
                                 <div class="input-images"></div>

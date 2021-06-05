@@ -25,10 +25,10 @@
                             <?= $sp['space_id']; ?>
                         </span>  
                         <span class="t-td w-30 center">
-                            <img class="ava" src="/uploads/spaces/logos/<?= $sp['space_img']; ?>">
+                            <img class="ava" src="<?= spase_logo_url($sp['space_img'], 'max'); ?>">
                         </span>
                         <span class="t-td">
-                            <img class="ava" src="/uploads/users/avatars/small/<?= $sp['avatar']; ?>">
+                            <img class="ava" src="<?= user_avatar_url($sp['avatar'], 'small'); ?>">
                             <a target="_blank" rel="noopener" href="/u/<?= $sp['login']; ?>"><?= $sp['login']; ?></a>
                             <br>
                             <small>

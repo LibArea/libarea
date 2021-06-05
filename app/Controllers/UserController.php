@@ -31,7 +31,7 @@ class UserController extends \MainController
     }
 
     // Страница участника
-    function getProfile()
+    function profile()
     {
         $login = \Request::get('login');
         $user  = UserModel::getUserLogin($login);
@@ -67,7 +67,7 @@ class UserController extends \MainController
         $uid  = Base::getUid();
         $data =[
             'h1'            => $user['login'],
-            'created_at'    => Base::ru_date($user['created_at']),
+            'created_at'    => lang_date($user['created_at']),
             'trust_level'   => UserModel::getUserTrust($user['id']),
             'post_num_user' => UserModel::userPostsNum($user['id']),
             'answ_num_user' => UserModel::userAnswersNum($user['id']),
@@ -175,7 +175,8 @@ class UserController extends \MainController
             redirect('/u/' . $uid['login'] . '/setting/avatar');
         }
 
-        $userInfo = UserModel::getUserLogin($uid['login']);
+        $userInfo           = UserModel::getUserLogin($uid['login']);
+        
         $data = [
             'h1'            => lang('Change avatar'),
             'canonical'     => '/***', 
@@ -352,7 +353,7 @@ class UserController extends \MainController
     }
     
     // Страница закладок участника
-    function getUserFavorite ()
+    function userFavorites ()
     {
         $login  = \Request::get('login');
         
@@ -368,7 +369,7 @@ class UserController extends \MainController
    
         $result = Array();
         foreach($fav as $ind => $row){
-            $row['post_date']       = (empty($row['post_date'])) ? $row['post_date'] : Base::ru_date($row['post_date']);
+            $row['post_date']       = (empty($row['post_date'])) ? $row['post_date'] : lang_date($row['post_date']);
             $row['answer_content']  = Base::text($row['answer_content'], 'md');
             $row['date']            = $row['post_date'];
             $row['post']            = PostModel::postId($row['answer_post_id']);
@@ -394,12 +395,12 @@ class UserController extends \MainController
         $redirect   = '/u/' . $uid['login'] . '/setting/avatar';
         
         // Ошибочный Slug в Url
-        if($login != $uid['login']) {
+        if($login != $uid['login'] && $uid['trust_level'] != 5) {
             redirect($redirect);
         }
 
-        $user = UserModel::getUserLogin($uid['login']);
-        
+        $user = UserModel::getUserLogin($login);
+
         // Удалять может только автор и админ
         if ($user['id'] != $uid['id'] && $uid['trust_level'] != 5) {
             redirect('/');
@@ -419,7 +420,7 @@ class UserController extends \MainController
     }
 
     // Страница черновиков участника
-    function getUserDrafts ()
+    function userDrafts ()
     {
         $login  = \Request::get('login');
         

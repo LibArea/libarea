@@ -27,7 +27,7 @@ class AdminController extends \MainController
             $row['replayIp']    = AdminModel::replayIp($row['reg_ip']);
             $row['isBan']       = AdminModel::isBan($row['id']);
             $row['logs']        = AdminModel::UsersLogAll($row['id']);
-            $row['created_at']  = Base::ru_date($row['created_at']); 
+            $row['created_at']  = lang_date($row['created_at']); 
             $result[$ind]       = $row;
         } 
         
@@ -92,7 +92,7 @@ class AdminController extends \MainController
         $result = Array();
         foreach($comm  as $ind => $row){
             $row['content'] = Base::text($row['comment_content'], 'md');
-            $row['date']    = Base::ru_date($row['comment_date']);
+            $row['date']    = lang_date($row['comment_date']);
             $result[$ind]   = $row;
         }
         

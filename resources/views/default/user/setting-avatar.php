@@ -22,7 +22,7 @@
             </li>
         </ul>
         <div class="box setting avatar"> 
-           <img class="ava" src="/uploads/users/avatars/<?= $uid['avatar']; ?>">
+           <img class="ava" src="<?= user_avatar_url($user['avatar'], 'max'); ?>">
             
            <form method="POST" action="/users/setting/avatar/edit" enctype="multipart/form-data">
            <?= csrf_field() ?>
@@ -37,7 +37,7 @@
                 </div>
                 <br>
                 <?php if($user['cover_art'] != 'cover_art.jpeg') { ?>
-                    <img class="cover" src="/uploads/users/cover/<?= $user['cover_art']; ?>">
+                    <img class="cover" src="<?= user_cover_url($user['cover_art']); ?>">
                     <a class="right" href="/u/<?= $uid['login']; ?>/delete/cover">
                         <?= lang('Remove'); ?>
                     </a>
@@ -53,7 +53,7 @@
                 </div> 
                 <div class="clear">
                 <p><?= lang('select-file-up'); ?>: 1920x240px (jpg, jpeg, png)</p>
-                <p><input type="submit" value="Загрузить"/></p>
+                <p><input type="submit" value="<?= lang('Download'); ?>"/></p>
                 </div>
                 <br>
             </form>

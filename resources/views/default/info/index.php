@@ -51,5 +51,5 @@
         <br><br> 
     </main>
     <?php include TEMPLATE_DIR . '/_block/info-page-menu.php'; ?>
-</div>    
+</div>
 <?php include TEMPLATE_DIR . '/footer.php'; ?> 

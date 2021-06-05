@@ -27,7 +27,7 @@
             <?php csrf_field(); ?>
                 <div class="boxline">
                     <label for="name"><?= lang('Nickname'); ?></label>
-                    <img class="mini ava" src="/uploads/users/avatars/small/<?= $user['avatar']; ?>"> 
+                    <img class="mini ava" src="<?= user_avatar_url($user['avatar'], 'small'); ?>"> 
                     <?= $user['login']; ?>
                 </div>
                 <div class="boxline">

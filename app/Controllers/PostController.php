@@ -33,8 +33,8 @@ class PostController extends \MainController
         $result = Array();
         foreach($posts as $ind => $row) {
             $row['post_content_preview']    = Base::cutWords($row['post_content'], 120);
-            $row['lang_num_answers']        = Base::wordform($row['post_answers_num'], lang('Answer'), lang('Answers-m'), lang('Answers'));
-            $row['post_date']               = Base::ru_date($row['post_date']);
+            $row['lang_num_answers']        = word_form($row['post_answers_num'], lang('Answer'), lang('Answers-m'), lang('Answers'));
+            $row['post_date']               = lang_date($row['post_date']);
             $result[$ind]                   = $row;
         }  
 
@@ -45,7 +45,7 @@ class PostController extends \MainController
         $result_comm = Array();
         foreach($latest_answers as $ind => $row) {
             $row['answer_content']      = Base::cutWords($row['answer_content'], 81);
-            $row['answer_date']         = Base::ru_date($row['answer_date']);
+            $row['answer_date']         = lang_date($row['answer_date']);
             $result_comm[$ind]          = $row;
         }
 
@@ -123,12 +123,12 @@ class PostController extends \MainController
         }
      
         $post['post_content']   = Base::text($post['post_content'], 'md');
-        $post['post_date_lang'] = Base::ru_date($post['post_date']);
-        $post['num_answers']    = Base::wordform($post['post_answers_num'], lang('Answer'), lang('Answers-m'), lang('Answers'));
+        $post['post_date_lang'] = lang_date($post['post_date']);
+        $post['num_answers']    = word_form($post['post_answers_num'], lang('Answer'), lang('Answers-m'), lang('Answers'));
         
         // общее количество (для модели - беседа)
         $comment_n = $post['post_comments_num'] + $post['post_answers_num'];
-        $post['num_comments']   = Base::wordform($comment_n, lang('Comment'), lang('Comments-m'), lang('Comments'));
+        $post['num_comments']   = word_form($comment_n, lang('Comment'), lang('Comments-m'), lang('Comments'));
         
         $post['favorite_post']  = PostModel::getMyPostFavorite($post['post_id'], $uid['id']);
       
@@ -155,7 +155,7 @@ class PostController extends \MainController
 
             $row['comm']            = CommentModel::getCommentsAnswer($row['answer_id'], $uid['id']);
             $row['answer_content']  = Base::text($row['answer_content'], 'md');
-            $row['answer_date']     = Base::ru_date($row['answer_date']);
+            $row['answer_date']     = lang_date($row['answer_date']);
             $row['favorite_answ']   = AnswerModel::getMyAnswerFavorite($row['answer_id'], $uid['id']);
             $answers[$ind]          = $row;
         }
@@ -200,7 +200,7 @@ class PostController extends \MainController
     }
 
     // Посты участника
-    public function getUserPosts()
+    public function userPosts()
     {
         $uid        = Base::getUid();
         $login      = \Request::get('login');
@@ -213,7 +213,7 @@ class PostController extends \MainController
         
         $result = Array();
         foreach($posts_user as $ind => $row){
-            $row['post_date']   = Base::ru_date($row['post_date']);
+            $row['post_date']   = lang_date($row['post_date']);
             $result[$ind]       = $row;
         }
 

@@ -106,7 +106,7 @@
                         </div>
 
                         <div class="post-footer lowercase">
-                            <img class="ava" alt="<?= $post['login']; ?>" src="/uploads/users/avatars/small/<?= $post['avatar']; ?>">
+                            <img class="ava" alt="<?= $post['login']; ?>" src="<?= user_avatar_url($post['avatar'], 'small'); ?>">
                             <span class="user"> 
                                 <a href="/u/<?= $post['login']; ?>">
                                     <?= $post['login']; ?>
@@ -158,7 +158,7 @@
                     <div class="bar-m bar-title"><?= lang('Signed'); ?></div>  
                     <?php foreach ($space_bar as  $sig) { ?>
                         <a class="bar-space-telo" href="/s/<?= $sig['space_slug']; ?>" title="<?= $sig['space_name']; ?>">
-                            <img src="/uploads/spaces/logos/small/<?= $sig['space_img']; ?>" alt="<?= $sig['space_name']; ?>">
+                            <img src="<?= spase_logo_url($sig['space_img'], 'small'); ?>" alt="<?= $sig['space_name']; ?>">
                             <?php if($sig['space_user_id'] == $uid['id']) { ?>
                                 <div class="my_space"></div>
                             <?php } ?>
@@ -186,7 +186,7 @@
                     </style>
                     <div class="sb-telo comm-space-color_<?= $num; ?>">
                         <div class="sb-date"> 
-                            <img class="ava" alt="<?= $answ['login']; ?>" src="/uploads/users/avatars/small/<?= $answ['avatar']; ?>">
+                            <img class="ava" alt="<?= $answ['login']; ?>" src="<?= user_avatar_url($answ['avatar'], 'small'); ?>">
                             <?= $answ['answer_date']; ?>
                         </div> 
                         <a href="/post/<?= $answ['post_id']; ?>/<?= $answ['post_slug']; ?>#answ_<?= $answ['answer_id']; ?>">

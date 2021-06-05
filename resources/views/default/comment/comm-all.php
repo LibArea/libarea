@@ -33,7 +33,7 @@
                             
                             <div class="comm-telo">
                                 <div class="comm-header">
-                                    <img class="ava" src="/uploads/users/avatars/small/<?= $comm['avatar'] ?>">
+                                    <img class="ava" src="<?= user_avatar_url($comm['avatar'], 'small'); ?>">
                                     <span class="user"> 
                                         <a href="/u/<?= $comm['login']; ?>"><?= $comm['login']; ?></a> 
                                         <?= $comm['date']; ?>
