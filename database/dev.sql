@@ -545,6 +545,29 @@ ALTER TABLE `badge_user`
   MODIFY `bu_id` int(11) NOT NULL AUTO_INCREMENT; 
 
 --
+-- Система флагов (нарушения)
+--
+
+CREATE TABLE `report` (
+  `report_id` int(11) NOT NULL,
+  `report_uid` int(11) DEFAULT '0' COMMENT 'Индификатор участника id',
+  `report_type` varchar(50) DEFAULT NULL COMMENT 'Тип поста',
+  `report_target_id` int(11) DEFAULT '0' COMMENT 'ID',
+  `report_reason` varchar(255) DEFAULT NULL COMMENT 'Причина флага',
+  `report_url` varchar(255) DEFAULT NULL,
+  `report_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `report_status` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE `report`
+  ADD PRIMARY KEY (`report_id`),
+  ADD KEY `status` (`report_status`);
+  
+  ALTER TABLE `report`
+  MODIFY `report_id` int(11) NOT NULL AUTO_INCREMENT;
+
+
+--
 -- Индексы сохранённых таблиц
 --
 
