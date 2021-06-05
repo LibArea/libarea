@@ -1,3 +1,4 @@
+<?php include TEMPLATE_DIR . '/header.php'; ?>
 <main class="w-75">
     <div class="max-width">
         <ul class="breadcrumb">
@@ -13,3 +14,4 @@
         <p><i><?= lang('The profile is being checked'); ?>...</p>
     </div>
 </main>
+<?php include TEMPLATE_DIR . '/footer.php'; ?> 

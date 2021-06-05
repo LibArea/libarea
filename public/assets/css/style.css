@@ -243,8 +243,6 @@ blockquote {
   padding-left: 15px;
 }
 
-.info i.icon { margin: 0 1px; }
-
 a.logo {
   color: #333;
   font-size: 16px;
@@ -257,6 +255,8 @@ a.logo span {
 a.logo:hover {
   opacity: 0.8;
 }
+
+.info i.icon { margin: 0 1px; }
 
 i.icon {
   margin-right: 10px;
@@ -774,7 +774,7 @@ img.thumb {
 
 .post-telo {
   margin-bottom: 25px;
-  max-width: 800px
+  max-width: 800px;
 }
 
 .telo-fav-answ {
