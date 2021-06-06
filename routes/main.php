@@ -170,11 +170,10 @@ Route::get('/domain/{domain}')->controller('SearchController@domain')->where(['d
 
 Route::type(['get','post'])->get('/search/users')->controller('PostController@userSelect');
 
-
 // Пагинация и главная (feed) страница, top, all...
 Route::get('/{page?}')->controller('PostController', ['feed'])->where(['page' => '[0-9]+']);
 Route::get('/top/{page?}')->controller('PostController', ['top'])->where(['page' => '[0-9]+']);
 Route::get('/comments/{page?}')->controller('CommentController')->where(['page' => '[0-9]+']);
 
 Route::get('/sitemap.xml')->controller('SitemapController');
-// Route::get('/rss-feed.xml')->controller('SitemapController@feed');
+// Route::get('/rss-feed/space/{id}')->controller('SitemapController@feed')->where(['id' => '[0-9]+']);

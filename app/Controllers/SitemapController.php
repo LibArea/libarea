@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use App\Models\SitemapModel;
 use Lori\Config;
+use Lori\Base;
 
 class SitemapController extends \MainController
 {
@@ -17,19 +18,25 @@ class SitemapController extends \MainController
             'posts'     => $posts,
         ];
 
-        return view(PR_VIEW_DIR . '/sitemap/sitemap', ['data' => $data]);
+        includeCachedTemplate(PR_VIEW_DIR . '/sitemap/sitemap', ['data' => $data]);
     }
  
     public function feed()
     {
-        $posts  = SitemapModel::getPostsFeed();
+        $space_id  = \Request::getInt('id');
+        
+        $space = SitemapModel::getSpaceId($space_id);
+        Base::PageError404($space);
+        
+        $posts  = SitemapModel::getPostsFeed($space_id);
         
         $data = [
             'url'       => Config::get(Config::PARAM_URL),
             'posts'     => $posts,
+            'space'     => $space,
         ];
 
-        return view(PR_VIEW_DIR . '/sitemap/rss-feed', ['data' => $data]);
+        includeCachedTemplate(PR_VIEW_DIR . '/sitemap/rss-feed', ['data' => $data]);
     }
  
 }

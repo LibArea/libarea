@@ -17,10 +17,15 @@ class SitemapModel extends \MainModel
         return XD::select(['space_slug', 'space_is_delete'])->from(['space'])->where(['space_is_delete'], '!=', 1)->getSelect();
     } 
     
-    // Для Yandex
-    public static function getPostsFeed()
+    // Посты по id пространства
+    public static function getPostsFeed($space_id)
     {
-        return XD::select(['post_id', 'post_slug', 'post_content', 'post_content_img', 'post_is_delete'])->from(['posts'])->where(['post_is_delete'], '!=', 1)->and(['post_content_img'], '!=', '')->getSelect();
+        return XD::select(['post_id', 'post_slug', 'post_content', 'post_content_img', 'post_is_delete'])->from(['posts'])->where(['post_is_delete'], '!=', 1)->and(['post_content_img'], '!=', '')->and(['post_space_id'], '!=', $space_id)->getSelect();
     } 
     
+    // Информация по самому пространству
+    public static function getSpaceId($space_id)
+    {
+        return XD::select('*')->from(['space'])->where(['space_id'], '=', $space_id)->getSelectOne();
+    }
 }
