@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,9 +14,9 @@
         
         <?php include TEMPLATE_DIR . '/OpenGraph.php'; ?>
         
-        <link rel="icon" href="/favicon.ico">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">
         <link rel="apple-touch-icon" href="/favicon.png">
-        
+
         <script src="/assets/js/jquery.min.js"></script>
         <link rel="stylesheet" href="/assets/css/style.css">
     </head>

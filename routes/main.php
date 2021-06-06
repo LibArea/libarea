@@ -175,5 +175,6 @@ Route::get('/{page?}')->controller('PostController', ['feed'])->where(['page' =>
 Route::get('/top/{page?}')->controller('PostController', ['top'])->where(['page' => '[0-9]+']);
 Route::get('/comments/{page?}')->controller('CommentController')->where(['page' => '[0-9]+']);
 
-Route::get('/sitemap.xml')->controller('SitemapController');
-// Route::get('/rss-feed/space/{id}')->controller('SitemapController@feed')->where(['id' => '[0-9]+']);
+// Карта сайта и Турбо страницы (пространств)
+Route::get('/sitemap.xml')->controller('RssController');
+Route::get('/turbo-feed/space/{id}')->controller('RssController@turboFeed')->where(['id' => '[0-9]+']);

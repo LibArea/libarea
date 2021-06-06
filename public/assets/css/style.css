@@ -28,6 +28,7 @@ body {
   font-size: 0.95em;
   color: var(--primary);
   min-height: 100%;
+  letter-spacing: 0.5px;
 }
 
 a {
@@ -55,9 +56,12 @@ a.active {
 }
 
 .translation {
-  color: #8c651b;
   font-size: 13px;
   font-style: italic;
+  background: #f5efe3;
+  color: #47340c;
+  padding: 2px 4px;
+  border-radius: 6px;
 }
 
 tt {
@@ -657,10 +661,6 @@ aside a.my.active {
   color: #390;
 }
 
-.errors > ul > li {
-  color: #e83e8c;
-}
-
 .no-content,
 .no-answer {
   padding: 10px 15px;
@@ -675,7 +675,6 @@ aside a.my.active {
 /* Урезанный пост на главной */
 .showpost {
   font-size: 14px;
-  color: var(--tertiary);
   max-width: 750px;
   margin: 0 0 5px 0;
   display: block;
@@ -695,6 +694,13 @@ aside a.my.active {
 .post-telo.full {
   overflow: hidden;
   margin-bottom: 22px;
+}
+
+img.thumb {
+  margin: 5px 0 10px 10px;
+  float: right;
+  width: 70px;
+  border-radius: 2px;
 }
 
 .full-post-home img.thumb {
@@ -758,13 +764,6 @@ aside a.my.active {
 img.img-post {
   margin: 10px 0;
   max-width: 750px;
-}
-
-img.thumb {
-  margin: 5px 0 10px 10px;
-  float: right;
-  width: 70px;
-  border-radius: 2px;
 }
 
 .telo-detail_post.dell {
@@ -1336,6 +1335,10 @@ div.voters .asnw-up-id {
   color: #646464;
 }
 
+.errors > ul > li {
+  color: #e83e8c;
+}
+
 .no-pc {
   display: none;
 }
@@ -1647,6 +1650,8 @@ i.github {
   input.add-url { width: 94%; }
   .text-oth { width: 46%; }
   .text-info { width: 40%; }
+  .nav {margin-left: 15px;}
+  
 }
 
 @media (max-width: 704px) {
