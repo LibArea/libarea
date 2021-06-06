@@ -31,6 +31,25 @@
                         <?php } ?>
                     <?php } ?>
                         <div class="answ-telo qa-answ">
+                            <div class="qa-footer">
+                                <div class="qa-ava">
+                                    <img alt="<?= $answ['login']; ?>" src="<?= user_avatar_url($answ['avatar'], 'max'); ?>">
+                                </div>
+                                <div class="qa-ava-info"> 
+                                    <div class="qa-data-info"> 
+                                        <?= $answ['answer_date']; ?> 
+                                        <?php if (empty($answ['edit'])) { ?>
+                                            (<?= lang('ed'); ?>.)
+                                        <?php } ?>
+                                        <?php if ($uid['trust_level'] == 5) { ?> 
+                                            <?= $answ['answer_ip']; ?>
+                                        <?php } ?> 
+                                    </div>
+                                    <a class="qa-login" href="/u/<?= $answ['login']; ?>"><?= $answ['login']; ?></a> 
+                                </div>
+                            </div>
+                        
+                        
                             <?= $answ['answer_content'] ?>
                         </div>
                         <div class="qa-inline">
@@ -66,24 +85,6 @@
                                 </span>
                             <?php } ?>
                         </div> 
-                            <div class="qa-footer">
-                                <div class="qa-date">
-                                    <?= $answ['answer_date']; ?> 
-                                    <?php if (empty($answ['edit'])) { ?>
-                                        (<?= lang('ed'); ?>.)
-                                    <?php } ?>
-                                    <?php if ($uid['trust_level'] == 5) { ?> 
-                                       - <?= $answ['answer_ip']; ?>
-                                    <?php } ?> 
-                                </div>
-                                <div class="qa-ava">
-                                    <img alt="<?= $answ['login']; ?>" src="<?= user_avatar_url($answ['avatar'], 'small'); ?>">
-                                </div>
-                                <div class="qa-ava-info"> 
-                                    <a class="qa-login" href="/u/<?= $answ['login']; ?>"><?= $answ['login']; ?></a> 
-                                </div>
-                            </div>
-                             
                         <div id="answ_addentry<?= $answ['answer_id']; ?>" class="reply"></div> 
                     </li>
                 </ol>

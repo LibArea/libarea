@@ -377,10 +377,6 @@ hr {
   color: #333;
 }
 
-.search-title {
-  font-size: 21px;
-}
-
 button,
 input[type="button"],
 input[type="reset"],
@@ -878,12 +874,21 @@ img.img-post {
   color: var(--tertiary);
   text-transform: lowercase;
   font-size: 13px;
+  margin-top: 10px;
 }
 
 .search-info img {
   vertical-align: middle;
   margin-right: 5px;
   border-radius: 2px;
+}
+
+.search-title {
+  font-size: 18px;
+}
+
+.search {
+  margin-bottom: 20px;
 }
 
 .no-md p {
@@ -964,7 +969,6 @@ ol.answer-telo {
 
 .answ-telo {
   margin-left: 40px;
-  margin-right: 40px;
 }
 
 .answ-telo-body {
@@ -1178,28 +1182,25 @@ ol.comment-telo {
 }
 
 .qa-footer {
+  width: 120px;
+  margin: 0;
+  padding: 10px 0px 10px 0px;
+  margin-left: 10px;
+  border-radius: 3px;
+  border: 1px solid #ddd;
   float: right;
-  margin-top: -20px;
-  min-width: 190px;
+  overflow: hidden;
+  text-align: center;
 }
 
 .qa-ava img {
-  width: 18px;
-  height: 18px;
-  float: right;
-  margin: 0 0 0 10px;
+  border-radius: 500rem;
+  width: 64px;
 }
 
-.qa-login {
-  display: block;
-  color: #333;
-}
-
-.qa-date,
-.qa-ava-info {
-  display: block;
-  font-size: 13px;
-  color: #888;
+.qa-data-info {
+  font-size: 12px;
+  color: #666;
 }
 
 .qa-inline {
