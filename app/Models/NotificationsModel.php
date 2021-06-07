@@ -58,7 +58,7 @@ class NotificationsModel extends \MainModel
 
         XD::insertInto(['notification'], '(', ['sender_uid'], ',', ['recipient_uid'], ',', ['action_type'], ',', ['connection_type'], ',', ['url'], ',', ['read_flag'], ')')->values( '(', XD::setList([$sender_uid, $recipient_uid,$action_type, $connection_type, $url, 0]), ')' )->run();
        
-		return $notification_id;
+		return true;
 	}
 
 	// Проверить настройки уведомлений указанного пользователя 

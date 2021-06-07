@@ -59,7 +59,7 @@
                     <div class="boxline max-width">
                         <label for="post_content"><?= lang('For'); ?> TL</label>
                         <select name="post_tl">
-                            <?php for($i=1; $i<=$uid['trust_level']; $i++) {  ?>
+                            <?php for($i=0; $i<=$uid['trust_level']; $i++) {  ?>
                                 <option <?php if($post['post_tl'] == $i) { ?>selected<?php } ?> value="<?= $i; ?>"><?= $i; ?></option>
                             <?php } ?>
                         </select>

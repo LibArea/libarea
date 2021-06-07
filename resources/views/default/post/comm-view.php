@@ -178,7 +178,7 @@
                                 
                                 <?php if($uid['id'] == $comm['comment_user_id'] || $uid['trust_level'] == 5) { ?>
                                     <span id="comm_edit" class="cm_add_link">
-                                        <a data-comm_id="<?= $comm['comment_id']; ?>" class="editcomm"><?= lang('Edit'); ?></a>
+                                        <a data-post_id="<?= $post['post_id']; ?>" data-comm_id="<?= $comm['comment_id']; ?>" class="editcomm"><?= lang('Edit'); ?></a>
                                     </span>
                                 <?php } ?>
 

@@ -138,10 +138,11 @@ class CommentController extends \MainController
         $comm_id    = \Request::getPostInt('comm_id');
         $post_id    = \Request::getPostInt('post_id');
         $comment    = \Request::getPost('comment');
-        
-        // Получим относительный url поста для возрата (упростить)
-        $url = str_replace('//', '', $_SERVER['HTTP_REFERER']);
-        $return_url = substr($url, strpos($url, '/') + 1);
+
+        $post = PostModel::postId($post_id);
+
+        // Получим относительный url поста для возрата
+        $url = '/post/' . $post['post_id'] . '/' . $post['post_slug'] . '#comm_' . $comm_id;
         
         // id того, кто редактирует
         $uid        = Base::getUid();
@@ -156,8 +157,7 @@ class CommentController extends \MainController
         
         // Редактируем комментарий
         CommentModel::CommentEdit($comm_id, $comment);
-        
-        redirect('/' . $return_url . '#comm_' . $comm_id); 
+        redirect($url); 
 	}
 
    // Покажем форму редактирования
@@ -165,7 +165,7 @@ class CommentController extends \MainController
 	{
         $comm_id    = \Request::getPostInt('comm_id');
         $post_id    = \Request::getPostInt('post_id');
-         
+
         // id того, кто редактирует
         $uid        = Base::getUid();
         $user_id    = $uid['id'];
@@ -223,11 +223,11 @@ class CommentController extends \MainController
         
         $uid  = Base::getUid();
         $data = [
-            'h1'            => 'Комментарии ' . $login,
+            'h1'            => lang('Comments-n') . ' ' . $login,
             'canonical'     => Config::get(Config::PARAM_URL) . '/u/' . $login . '/comments', 
             'sheet'         => 'user-comments', 
-            'meta_title'    => 'Комментарии ' . $login .' | '. Config::get(Config::PARAM_NAME),
-            'meta_desc'     => 'Комментарии ' . $login .' '. Config::get(Config::PARAM_HOME_TITLE),
+            'meta_title'    => lang('Comments-n') . ' ' . $login .' | '. Config::get(Config::PARAM_NAME),
+            'meta_desc'     => lang('Comments-n') . ' ' . $login .' '. Config::get(Config::PARAM_HOME_TITLE),
         ];
         
         return view(PR_VIEW_DIR . '/comment/comm-user', ['data' => $data, 'uid' => $uid, 'comments' => $result]);

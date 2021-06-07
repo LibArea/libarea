@@ -1695,6 +1695,10 @@ a:hover .icon::before {
   text-decoration: none;
 }
 
+.icon.pin {
+  color: #390;
+}
+
 .icon.size-actual::before { content: "\e058"; }
 .icon.star::before { content: "\e09b"; }
 .icon.graph::before { content: "\e06b"; }
