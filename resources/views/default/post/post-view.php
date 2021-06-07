@@ -47,6 +47,9 @@
                                 <?php if($post['post_lo'] > 0) { ?> 
                                     <i class="icon trophy lo"></i>
                                 <?php } ?>
+                                <?php if($post['post_tl'] > 0) { ?> 
+                                    <span class="trust-level">tl<?= $post['post_tl']; ?></span>
+                                <?php } ?>
                         </h1>
                         <div class="post-footer-full lowercase">
                             <img class="ava" alt="<?= $post['login']; ?>" src="<?= user_avatar_url($post['avatar'], 'small'); ?>">

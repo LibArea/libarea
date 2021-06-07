@@ -157,8 +157,8 @@ class AdminController extends \MainController
         $spaces = AdminModel::getAdminSpaceAll($uid['id']);
   
         $data = [
-            'h1'            => lang('Space'),
-            'meta_title'    => lang('Space'),
+            'h1'            => lang('Spaces'),
+            'meta_title'    => lang('Spaces'),
         ]; 
  
         return view(PR_VIEW_DIR . '/admin/spaces', ['data' => $data, 'uid' => $uid, 'spaces' => $spaces]);

@@ -17,21 +17,20 @@ class CommentController extends \MainController
     // Все комментарии
     public function index()
     {
-        $pg = \Request::getInt('page'); 
-        $page = (!$pg) ? 1 : $pg;
+        $pg     = \Request::getInt('page'); 
+        $page   = (!$pg) ? 1 : $pg;
         
-        $uid        = Base::getUid();
-        $user_id    = $uid['id'];
+        $uid    = Base::getUid();
          
         $pagesCount = CommentModel::getCommentAllCount();  
-        $comm       = CommentModel::getCommentsAll($page, $user_id);
+        $comm       = CommentModel::getCommentsAll($page, $uid['id'], $uid['trust_level']);
 
         $result = Array();
         foreach($comm  as $ind => $row){
  
             $row['date']    = lang_date($row['comment_date']);
             // N+1 - перенести в запрос
-            $row['comm_vote_status'] = VotesCommentModel::getVoteStatus($row['comment_id'], $user_id);
+            $row['comm_vote_status'] = VotesCommentModel::getVoteStatus($row['comment_id'], $uid['id']);
             $result[$ind]   = $row;
         }
         
@@ -57,53 +56,49 @@ class CommentController extends \MainController
     // Добавление комментария
     public function createComment()
     {
-        // Получим относительный url поста для возрата (упростить)
-        $url        = str_replace('//', '', $_SERVER['HTTP_REFERER']);
-        $return_url = substr($url, strpos($url, '/') + 1);
-
-        $comment = \Request::getPost('comment');
+        $comment    = \Request::getPost('comment');
+        $post_id    = \Request::getPostInt('post_id');   // в каком посту ответ
+        $answ_id    = \Request::getPostInt('answ_id');   // на какой ответ
+        $comm_id    = \Request::getPostInt('comm_id');   // на какой комментарий
         
+        $uid        = Base::getUid();
+        $ip         = \Request::getRemoteAddress(); 
+        
+        $post       = PostModel::postId($post_id);
+        Base::PageError404($post);
+
+        $redirect = '/post/' . $post['post_id'] . '/' . $post['post_slug'];
+
         if (Base::getStrlen($comment) < 6 || Base::getStrlen($comment) > 1024)
         {
             Base::addMsg('Длина комментария должна быть от 6 до 1000 знаков', 'error');
-            redirect('/' . $return_url);
+            redirect($redirect);
             return true;
         }
-
-        $post_id   = \Request::getPostInt('post_id');   // в каком посту ответ
-        $answ_id   = \Request::getPostInt('answ_id');   // на какой ответ
-        $comm_id   = \Request::getPostInt('comm_id');   // на какой комментарий
-        $ip        = \Request::getRemoteAddress();      // ip отвечающего 
-        
-        // id того, кто отвечает
-        $account   = \Request::getSession('account');
-        $my_id     = $account['user_id'];
         
         // Ограничим частоту добавления
         // Добавить условие TL
-        $num_comm =  CommentModel::getCommentSpeed($my_id);
+        $num_comm =  CommentModel::getCommentSpeed($uid['id']);
         if(count($num_comm) > 35) {
             Base::addMsg('Вы исчерпали лимит комментариев (35) на сегодня', 'error');
             redirect('/');
         }
         
-        // Записываем коммент
-        $last_id = CommentModel::commentAdd($post_id, $answ_id, $comm_id, $ip, $comment, $my_id);
-         
-        // Адрес комментария 
-        $url = $return_url . '#comm_' . $last_id; 
+        // Записываем коммент и получаем его url
+        $last_comment_id    = CommentModel::commentAdd($post_id, $answ_id, $comm_id, $ip, $comment, $uid['id']);
+        $url_comment        = $redirect . '#comm_' . $last_comment_id; 
          
         // Добавим в чат и поток
         $data_flow = [
             'flow_action_id'    => 4, // add комментарий
             'flow_content'      => $comment,  
-            'flow_user_id'      => $my_id,
+            'flow_user_id'      => $uid['id'],
             'flow_pubdate'      => date("Y-m-d H:i:s"),
-            'flow_url'          => $url,
-            'flow_target_id'    => $last_id,
+            'flow_url'          => $url_comment,
+            'flow_target_id'    => $last_comment_id,
             'flow_about'        => lang('add_comment'),            
             'flow_space_id'     => 0,
-            'flow_tl'           => 0,
+            'flow_tl'           => $post['post_tl'], // TL поста
             'flow_ip'           => $ip, 
         ];
         FlowModel::FlowAdd($data_flow);        
@@ -114,10 +109,10 @@ class CommentController extends \MainController
         // Оповещение автору ответа, что есть комментарий
         if($answ_id) {
             // Себе не записываем (перенести в общий, т.к. ничего для себя не пишем в notf)
-            $inf_answ = AnswerModel::getAnswerOne($answ_id);
-            if($my_id != $inf_answ['answer_user_id']) {
+            $answ = AnswerModel::getAnswerOne($answ_id);
+            if($uid['id'] != $answ['answer_user_id']) {
                 $type = 4; // Ответ на пост        
-                NotificationsModel::send($my_id, $inf_answ['answer_user_id'], $type, $last_id, $url, 1);
+                NotificationsModel::send($uid['id'], $answ['answer_user_id'], $type, $last_comment_id, $url_comment, 1);
             }
         }
         
@@ -126,15 +121,15 @@ class CommentController extends \MainController
         {
             foreach ($message as $user_id) {
                 // Запретим отправку себе и автору ответа (оповщение ему выше)
-                if ($user_id == $my_id || $user_id == $inf_answ['answer_user_id']) {
+                if ($user_id == $uid['id'] || $user_id == $answ['answer_user_id']) {
                     continue;
                 }
                 $type = 12; // Упоминания в комментарии      
-                NotificationsModel::send($my_id, $user_id, $type, $last_id, $url, 1);
+                NotificationsModel::send($uid['id'], $user_id, $type, $last_comment_id, $url_comment, 1);
             }
         }
         
-        redirect('/' . $return_url . '#comm_' . $last_id); 
+        redirect($url_comment); 
     }
     
     // Редактируем комментарий

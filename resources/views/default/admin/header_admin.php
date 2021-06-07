@@ -26,8 +26,8 @@
         </div>    
         <div class="menu">  |  </div>
         <div class="menu<?php if( $uid['uri'] == '/admin/spaces') { ?> active<?php } ?>">
-            <a title="<?= lang('Space'); ?>" href="/admin/spaces">
-                <?= lang('Space'); ?>
+            <a title="<?= lang('Spaces'); ?>" href="/admin/spaces">
+                <?= lang('Spaces'); ?>
             </a>
         </div>
         <div class="menu<?php if( $uid['uri'] == '/admin/invitations') { ?> active<?php } ?>"> 

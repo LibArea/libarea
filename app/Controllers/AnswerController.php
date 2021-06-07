@@ -22,17 +22,16 @@ class AnswerController extends \MainController
         $page = (!$pg) ? 1 : $pg;
         
         $uid        = Base::getUid();
-        $user_id    = $uid['id'];
          
         $pagesCount = AnswerModel::getAnswersAllCount();  
-        $answ       = AnswerModel::getAnswersAll($page, $user_id);
+        $answ       = AnswerModel::getAnswersAll($page, $uid['id'], $uid['trust_level']);
  
         $result = Array();
         foreach($answ  as $ind => $row){
             $row['answer_content']  = Base::text($row['answer_content'], 'md');
             $row['date']            = lang_date($row['answer_date']);
             // N+1 - перенести в запрос
-            $row['answ_vote_status'] = VotesAnswerModel::getVoteStatus($row['answer_id'], $user_id);
+            $row['answ_vote_status'] = VotesAnswerModel::getVoteStatus($row['answer_id'], $uid['id']);
             $result[$ind]   = $row;
         }
         
@@ -59,58 +58,57 @@ class AnswerController extends \MainController
     public function createAnswer()
     {
         $answer     = \Request::getPost('answer');
-        $url        = \Request::getReferer();
-        $return_url = parse_url($url);
-    
-        $redirect = '/' . $return_url['path'];
-        Base::Limits($answer, lang('Bodies'), '6', '5000', $redirect);
 
-        $post_id    = \Request::getPostInt('post_id');  // в каком посту ответ
+        // Получаем информацию по посту
+        $post_id    = \Request::getPostInt('post_id');  
+        $post       = PostModel::postId($post_id);
+        Base::PageError404($post);
+        
         $answer     = $_POST['answer'];                 // не фильтруем
         $ip         = \Request::getRemoteAddress();     // ip отвечающего 
         
         // id того, кто отвечает
-        $account   = \Request::getSession('account');
-        $my_id     = $account['user_id'];
+        $uid        = Base::getUid();
+        
+        $redirect = '/post/' . $post['post_id'] . '/' . $post['post_slug'];
+        Base::Limits($answer, lang('Bodies'), '6', '5000', $redirect);
         
         // Ограничим частоту добавления
         // Добавить условие TL
-        $num_answ =  CommentModel::getCommentSpeed($my_id);
+        $num_answ =  CommentModel::getCommentSpeed($uid['id']);
         if(count($num_answ) > 35) {
             Base::addMsg('Вы исчерпали лимит ответов (35) на сегодня', 'error');
             redirect('/');
         }
         
-        // Записываем ответ
-        $last_id = AnswerModel::answerAdd($post_id, $ip, $answer, $my_id);
-        
-        // Адрес ответа 
-        $url = $return_url['path'] . '#answ_' . $last_id; 
+        // Записываем ответ и получаем его url
+        $last_answer_id = AnswerModel::answerAdd($post_id, $ip, $answer, $uid['id']);
+        $url_answer     = $redirect . '#answ_' . $last_answer_id; 
         
         // Уведомление (@login)
         if ($message = Base::parseUser($answer, true, true)) 
         {
             foreach ($message as $user_id) {
                 // Запретим отправку себе
-                if ($user_id == $my_id) {
+                if ($user_id == $uid['id']) {
                     continue;
                 }
                 $type = 11; // Упоминания в ответе      
-                NotificationsModel::send($my_id, $user_id, $type, $last_id, $url, 1);
+                NotificationsModel::send($uid['id'], $user_id, $type, $last_answer_id, $url_answer, 1);
             }
         }
 
-        // Добавим в чат и поток
+        // Добавим в поток
         $data_flow = [
-            'flow_action_id'    => 3, // add ответы
+            'flow_action_id'    => 3,       // add ответы
             'flow_content'      => $answer, // не фильтруем
-            'flow_user_id'      => $my_id,
+            'flow_user_id'      => $uid['id'],
             'flow_pubdate'      => date("Y-m-d H:i:s"),
-            'flow_url'          => $url,
-            'flow_target_id'    => $last_id,
+            'flow_url'          => $url_answer,
+            'flow_target_id'    => $last_answer_id,
             'flow_about'        => lang('add_answer'),            
             'flow_space_id'     => 0,
-            'flow_tl'           => 0,
+            'flow_tl'           => $post['post_tl'], // TL поста
             'flow_ip'           => $ip, 
         ];
         FlowModel::FlowAdd($data_flow);        
@@ -121,7 +119,7 @@ class AnswerController extends \MainController
         // Оповещение автору поста, что появился ответ
         // Добавить
         
-        redirect('/' . $return_url['path'] . '#answ_' . $last_id); 
+        redirect($url_answer); 
     }
     
    // Покажем форму редактирования

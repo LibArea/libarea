@@ -7,15 +7,21 @@ use PDO;
 class CommentModel extends \MainModel
 {
     // Все комментарии
-    public static function getCommentsAll($page, $user_id)
+    public static function getCommentsAll($page, $user_id, $trust_level)
     {
         $offset = ($page-1) * 25; 
+        
+        if(!$trust_level) { 
+                $tl = 'AND p.post_tl = 0';
+        } else {
+                $tl = 'AND p.post_tl <= '.$trust_level.'';
+        }
         
         $sql = "SELECT c.*, p.*, 
                 u.id, u.login, u.avatar
                 fROM comments as c
                 JOIN users as u ON u.id = c.comment_user_id
-                JOIN posts as p ON c.comment_post_id = p.post_id
+                JOIN posts as p ON c.comment_post_id = p.post_id AND c.comment_del = 0 ".$tl."
                 ORDER BY c.comment_id DESC LIMIT 25 OFFSET ".$offset." ";
                         
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
@@ -24,7 +30,7 @@ class CommentModel extends \MainModel
     // Количество комментариев
     public static function getCommentAllCount()
     {
-        $query = XD::select('*')->from(['comments'])->getSelect();
+        $query = XD::select('*')->from(['comments'])->where(['comment_del'], '=', 0)->getSelect();
 
         return ceil(count($query) / 25);
     }
@@ -35,9 +41,9 @@ class CommentModel extends \MainModel
     { 
         $q = XD::select('*')->from(['comments']);
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['comment_user_id'])
-        ->leftJoin(['votes_comm'])->on(['votes_comm_item_id'], '=', ['comment_id'])
-        ->and(['votes_comm_user_id'], '=', $uid)
-        ->where(['comment_answ_id'], '=', $answ_id);
+                ->leftJoin(['votes_comm'])->on(['votes_comm_item_id'], '=', ['comment_id'])
+                ->and(['votes_comm_user_id'], '=', $uid)
+                ->where(['comment_answ_id'], '=', $answ_id);
 
         return $query->getSelect();
     }
@@ -49,6 +55,8 @@ class CommentModel extends \MainModel
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['comment_user_id'])
                 ->leftJoin(['posts'])->on(['comment_post_id'], '=', ['post_id'])
                 ->where(['login'], '=', $slug)
+                ->and(['comment_del'], '=', 0)
+                ->and(['post_tl'], '=', 0)
                 ->orderBy(['comment_id'])->desc();
         
         return $query->getSelect();

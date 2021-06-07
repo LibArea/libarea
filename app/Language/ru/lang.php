@@ -2,12 +2,13 @@
 return [
     'Home'              => 'Главная', 
     'TOP'               => 'TOP',
-    'Space'             => 'Пространства',
+    'Space'             => 'Пространство',
+    'Spaces'            => 'Пространства',
     'No spaces'         => 'Пространств к сожалению нет',
     'Tags'              => 'Метки',
     'In space'          => 'В пространство',
-    'Posts'             => 'Посты',
     'Create Post'       => 'Написать пост',
+    'Create'            => 'Написать',
     'Reads'             => 'Читают',
     'The post'          => 'Поста',
     'Bodies'            => 'Тела',
@@ -56,6 +57,9 @@ return [
     'Profile'           => 'Профиль',
     'Settings'          => 'Настройки',
     'Title'             => 'Название',
+    'Heading'           => 'Заголовок',
+    'To extract'        => 'Извлечь',
+    'Discussion'        => 'Обсуждение',
     'Description'       => 'Описание',
     'Translation'       => 'Перевод',
     'Favorites'         => 'Избранное',
@@ -109,6 +113,7 @@ return [
     'From'              => 'От',
     'In'                => 'В',
     'on'                => 'на',
+    'For'               => 'Для',
     'Just me'           => 'Только я',
     'Publications'      => 'Публикации',
     'Selected Post'     => 'Избранный пост', 
@@ -191,10 +196,16 @@ return [
     'Answer'                => 'Ответ',
     'Answers'               => 'Ответов',
     'Answers-m'             => 'Ответа',
+    'Answers-n'             => 'Ответы',
     'Message'               => 'Сообщение',
     'Messages'              => 'Сообщений',
     'Messages-m'            => 'Сообщения',
+    'Posts'                 => 'Посты',
+    'Posts-m'               => 'Постов',
 
+    'To close'              => 'Закрыть',
+    'Format'                => 'Формат',
+    'Raise'                 => 'Поднять',
 
     /* Настройки */
     'Setting profile'       => 'Настрока профиля',    
@@ -220,6 +231,9 @@ return [
     'in answer'             => 'в ответе',
     'in the comment'        => 'в комментарии',   
     'to your answer'        => 'на ваш ответ',
+    
+    
+    
    
     /* MSG */
     'text-string-length'    => 'Длина %1$s должна быть от %2$s до %3$s символов',

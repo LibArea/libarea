@@ -21,7 +21,8 @@ class FlowModel extends \MainModel
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['flow_user_id'])
                 ->where(['flow_action_id'], '!=', 2)
                 ->and(['flow_action_id'], '!=', 6)
-                ->and(['flow_action_id'], '!=', 7)  
+                ->and(['flow_action_id'], '!=', 7) 
+                ->and(['flow_tl'], '=', 0)                 
                 ->orderBy(['flow_id'])->desc()->limit(15);
 
         $result = $query->getSelect();

@@ -7,15 +7,21 @@ use PDO;
 class AnswerModel extends \MainModel
 {
     // Все ответы
-    public static function getAnswersAll($page, $user_id)
+    public static function getAnswersAll($page, $user_id, $trust_level)
     {
         $offset = ($page-1) * 25; 
+        
+        if(!$trust_level) { 
+                $tl = 'AND p.post_tl = 0';
+        } else {
+                $tl = 'AND p.post_tl <= '.$trust_level.'';
+        }
         
         $sql = "SELECT c.*, p.*, 
                 u.id, u.login, u.avatar
                 fROM answers as c
                 JOIN users as u ON u.id = c.answer_user_id
-                JOIN posts as p ON c.answer_post_id = p.post_id
+                JOIN posts as p ON c.answer_post_id = p.post_id AND c.answer_del = 0 ".$tl."
                 ORDER BY c.answer_id DESC LIMIT 25 OFFSET ".$offset." ";
                         
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
@@ -24,8 +30,8 @@ class AnswerModel extends \MainModel
     // Количество ответов
     public static function getAnswersAllCount()
     {
-        $query = XD::select('*')->from(['answers'])->getSelect();
-
+        $query = XD::select('*')->from(['answers'])->where(['answer_del'], '=', 0)->getSelect();
+        
         return ceil(count($query) / 25);
     }
     
@@ -60,6 +66,8 @@ class AnswerModel extends \MainModel
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['answer_user_id'])
                 ->leftJoin(['posts'])->on(['answer_post_id'], '=', ['post_id'])
                 ->where(['login'], '=', $slug)
+                ->and(['answer_del'], '=', 0)
+                ->and(['post_tl'], '=', 0)
                 ->orderBy(['answer_id'])->desc();
         
         return $query->getSelect();
@@ -104,7 +112,13 @@ class AnswerModel extends \MainModel
                 if($uid['trust_level'] == 5){ 
                     $result = $qa;
                 } else {
-                    $result = $qa->and(['space_feed'], '=', 0);
+                    
+                    if($uid['id'] == 0) {
+                        $result = $qa->and(['space_feed'], '=', 0)->and(['post_tl'], '=', 0);
+                    } else {
+                       $result = $qa->and(['space_feed'], '=', 0)->and(['post_tl'], '<=', $uid['trust_level']); 
+                    }    
+                    
                 } 
                 
         return $result->orderBy(['answer_id'])->desc()->limit(5)->getSelect();

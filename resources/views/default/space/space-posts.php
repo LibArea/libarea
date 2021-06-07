@@ -40,7 +40,7 @@
         <?php } ?>                 
     <?php } ?> 
     <div class="space-text">
-        <img class="space-box-img" src="<?= spase_logo_url($space_info['space_img'], 'max'); ?>">
+        <img alt="<?= $space_info['space_name']; ?>" class="space-box-img" src="<?= spase_logo_url($space_info['space_img'], 'max'); ?>">
         <div class="fons">
             <a title="<?= $space_info['space_name']; ?>" href="/s/<?= $space_info['space_slug']; ?>">
                 <h1><?= $space_info['space_name']; ?></h1>

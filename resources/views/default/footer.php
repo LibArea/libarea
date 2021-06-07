@@ -8,13 +8,13 @@
         </div>
         <div class="text-info no-mob">
             <h4 class="p-head two"><?= lang('Info'); ?></h4>
-            <a class="footer" title="<?= lang('Space'); ?>" href="/space"><?= lang('Space'); ?></a>
+            <a class="footer" title="<?= lang('Spaces'); ?>" href="/space"><?= lang('Spaces'); ?></a>
             <a class="footer" title="<?= lang('Flow'); ?>" href="/flow"><?= lang('Flow'); ?></a>  
         </div>
         <div class="text-info no-mob">
             <h4 class="p-head three"><?= lang('Other'); ?></h4>
             <a class="footer" title="<?= lang('Users'); ?>" href="/users"><?= lang('Users'); ?></a> 
-            <a class="footer" title="<?= lang('Comments-n'); ?>" href="/comments"><?= lang('Comments-n'); ?></a> 
+            <a class="footer" title="<?= lang('All answers'); ?>" href="/answers"><?= lang('Answers-n'); ?></a> 
         </div>
         <div class="text-oth ots">
             <h4 class="p-head-n"><?= lang('Social networks'); ?></h4> 

@@ -48,27 +48,27 @@
 
     <div class="stats<?php if($user['cover_art'] == 'cover_art.jpeg') { ?> no-cover<?php } ?>">
         <?php if($data['post_num_user'] != 0) { ?>
-            <label class="required">Постов:</label>
+            <label class="required"><?= lang('Posts-m'); ?>:</label>
             <span class="d">
-                <a title="Всего постов <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/posts">
+                <a title="<?= lang('Posts-m'); ?> <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/posts">
                     <?= $data['post_num_user']; ?>
                 </a>
             </span>
             <br>
         <?php } ?>
         <?php if($data['answ_num_user'] != 0) { ?>
-            <label class="required"><?= lang('Answers-m'); ?>:</label>
+            <label class="required"><?= lang('Answers'); ?>:</label>
             <span class="d-cont">
-                <a title="<?= lang('Answers-m'); ?> <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/answers">
+                <a title="<?= lang('Answers'); ?> <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/answers">
                     <?= $data['answ_num_user']; ?>
                 </a>
             </span>
             <br>
         <?php } ?>
         <?php if($data['comm_num_user'] != 0) { ?>
-            <label class="required"><?= ('Comments'); ?>:</label>
+            <label class="required"><?= lang('Comments'); ?>:</label>
             <span class="d">
-                <a title="Все комментарии <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/comments">
+                <a title="<?= lang('Comments'); ?> <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/comments">
                     <?= $data['comm_num_user']; ?>
                 </a>
             </span>

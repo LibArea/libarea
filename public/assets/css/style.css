@@ -55,13 +55,19 @@ a.active {
   text-transform: lowercase;
 }
 
-.translation {
+.translation,
+.trust-level {
   font-size: 13px;
   font-style: italic;
   background: #f5efe3;
   color: #47340c;
   padding: 2px 4px;
   border-radius: 6px;
+}
+
+.trust-level {
+  background: #f5efe3;
+  color: #47340c;
 }
 
 tt {
@@ -505,7 +511,7 @@ input.add-url {
 }
 
 .box label {
-  width: 7em;
+  width: 8em;
   vertical-align: middle;
   display: block;
   float: left;

@@ -25,7 +25,7 @@ class PostController extends \MainController
 
         $space_user  = SpaceModel::getSpaceUserSigned($uid['id']);
         
-        $pagesCount = PostModel::postsFeedCount($space_user, $uid['id'], $sheet); 
+        $pagesCount = PostModel::postsFeedCount($space_user, $uid['trust_level'], $uid['id'], $sheet); 
         $posts      = PostModel::postsFeed($page, $space_user, $uid['trust_level'], $uid['id'], $sheet);
 
         Base::PageError404($posts);
@@ -94,7 +94,8 @@ class PostController extends \MainController
             redirect('/post/' . $post_new['post_id'] . '/' . $post_new['post_slug']);
         }
         
-        $post = PostModel::postSlug($slug, $uid['id']); 
+        $post = PostModel::postSlug($slug, $uid['id'], $uid['trust_level']); 
+        Base::PageError404($post);
     
         // Просмотры поста
         if (!isset($_SESSION['pagenumbers'])) {
@@ -246,6 +247,7 @@ class PostController extends \MainController
         
         $data = [
             'h1'            => lang('Add post'),
+            'canonical'     => '***',
             'sheet'         => 'add-post',
             'meta_title'    => lang('Add post'),
             'meta_desc'     => '***',
@@ -275,6 +277,8 @@ class PostController extends \MainController
         $post_top               = \Request::getPostInt('top'); 
         $post_type              = \Request::getPostInt('post_type');
         $post_translation       = \Request::getPostInt('translation');
+        $post_merged_id         = \Request::getPostInt('post_merged_id');
+        $post_tl                = \Request::getPostInt('post_tl');
       
         // Используем для возврата
         $redirect = '/post/add';
@@ -360,7 +364,6 @@ class PostController extends \MainController
         $post_content_img   = empty($post_img) ? '' : $post_img;
         $og_img             = empty($og_img) ? '' : $og_img;
         $tag_id             = empty($tag_id) ? 0 : $tag_id;
-        $post_draft         = empty($post_draft) ? 0 : $post_draft;
         
         // Ограничим частоту добавления
         // Добавить условие TL
@@ -380,6 +383,8 @@ class PostController extends \MainController
             'post_content'          => $post_content,
             'post_content_img'      => $post_content_img,
             'post_thumb_img'        => $og_img,
+            'post_merged_id'        => $post_merged_id,
+            'post_tl'               => $post_tl,
             'post_slug'             => $post_slug,
             'post_type'             => $post_type,
             'post_translation'      => $post_translation,
@@ -415,7 +420,9 @@ class PostController extends \MainController
         
         // Отправим в Discord
         if(Config::get(Config::PARAM_DISCORD) == 1) {
-            Base::AddWebhook($post_content, $post_title, $url);
+            if($post_tl == 0 && $post_draft == 0) {
+                Base::AddWebhook($post_content, $post_title, $url);
+            }
         }
         
         redirect('/');   
@@ -533,6 +540,7 @@ class PostController extends \MainController
         
         $data = [
             'h1'            => lang('Edit post'),
+            'canonical'     => '***',
             'sheet'         => 'edit-post',
             'meta_title'    => lang('Edit post'),
             'meta_desc'     => '***',
@@ -563,6 +571,8 @@ class PostController extends \MainController
         $post_tag_id            = \Request::getPostInt('tag_id');
         $draft                  = \Request::getPost('draft');
         $post_user_new          = \Request::getPost('post_user_new');
+        $post_merged_id         = \Request::getPostInt('post_merged_id');
+        $post_tl                = \Request::getPostInt('post_tl');
         
         $uid    = Base::getUid();
         
@@ -577,7 +587,6 @@ class PostController extends \MainController
         if ($post['post_user_id'] != $uid['id'] && $uid['trust_level'] != 5) {
             redirect('/');
         }
-        
         
         // Получаем информацию по пространству
         $space = SpaceModel::getSpaceId($post_space_id);
@@ -679,7 +688,7 @@ class PostController extends \MainController
  
         }
         
-        $post_img = empty($post_img) ? $post['post_content_img'] : $post_img;
+        $post_img           = empty($post_img) ? $post['post_content_img'] : $post_img;
 
         $data = [
             'post_id'               => $post_id,
@@ -691,6 +700,8 @@ class PostController extends \MainController
             'post_draft'            => $post_draft,
             'post_content'          => $post_content,
             'post_content_img'      => $post_img,
+            'post_merged_id'        => $post_merged_id,
+            'post_tl'               => $post_tl,
             'post_closed'           => $post_closed,
             'post_top'              => $post_top,
             'post_space_id'         => $post_space_id,

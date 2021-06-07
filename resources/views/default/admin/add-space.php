@@ -1,7 +1,7 @@
 <?php include TEMPLATE_DIR . '/admin/header_admin.php'; ?>
 <main class="admin">
     <h1 class="top">
-        <a href="/admin"><?= lang('Admin'); ?></a> / <a href="/admin/spaces"><?= lang('Space'); ?></a> / <span class="red"><?= $data['h1']; ?></span>
+        <a href="/admin"><?= lang('Admin'); ?></a> / <a href="/admin/spaces"><?= lang('Spaces'); ?></a> / <span class="red"><?= $data['h1']; ?></span>
     </h1>
     
     <div class="telo space">

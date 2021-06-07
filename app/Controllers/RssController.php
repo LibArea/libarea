@@ -28,6 +28,8 @@ class RssController extends \MainController
         Base::PageError404($space);
         
         $posts  = RssModel::getPostsFeed($space_id);
+        
+        print_r($posts);
         $result = Array();
         foreach($posts as $ind => $row) {
             $row['post_content']  = Base::text($row['post_content'], 'md');

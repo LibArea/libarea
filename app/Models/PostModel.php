@@ -33,21 +33,27 @@ class PostModel extends \MainModel
         }        
 
         $offset = ($page-1) * 15; 
-        
-        // Показывать удаленный пост и запрещенные к показу в ленте
+   
+        // Условия: удаленный пост, запрещенный к показу в ленте
+        // И ограниченный по TL
         if($trust_level != 5) {   
-            $display = 'AND p.post_is_delete  = 0 AND s.space_feed = 0';
+            if($uid == 0) { 
+                $tl = 'AND p.post_tl = 0';
+            } else {
+                $tl = 'AND p.post_tl <= '.$trust_level.'';
+            }
+            $display = 'AND p.post_is_delete = 0 AND s.space_feed = 0 '.$tl.'';
         } else {
             $display = ''; 
         }
          
         if($type == 'feed') { 
-            $sort = 'ORDER BY p.post_date DESC';
+            $sort = 'ORDER BY post_top DESC, p.post_date DESC';
         } else {
             $sort = 'ORDER BY p.post_answers_num DESC';
         }  
 
-        $sql = "SELECT p.post_id, p.post_title, p.post_slug, p.post_type, p.post_draft, p.post_user_id, p.post_space_id, p.post_answers_num, p.post_translation, 
+        $sql = "SELECT p.post_id, p.post_title, p.post_slug, p.post_type, p.post_draft, p.post_user_id, p.post_space_id, p.post_answers_num, p.post_translation, p.post_tl,
         p.post_comments_num, p.post_date, p.post_votes, p.post_is_delete, p.post_closed, p.post_lo, p.post_top, p.post_url, post_url_domain, 
         p.post_content_img, p.post_thumb_img, p.post_content,
                 u.id, u.login, u.avatar,
@@ -65,13 +71,14 @@ class PostModel extends \MainModel
     }
     
     // Количество постов
-    public static function postsFeedCount($space_user, $uid, $type)
+    public static function postsFeedCount($space_user, $trust_level, $uid, $type)
     {
         $result = Array();
         foreach($space_user as $ind => $row){
             $result[$ind] = $row['signed_space_id'];
         }   
         
+        // Учитываем подписку на пространства
         if($uid == 0) {
            $string = '';
         } else {
@@ -82,10 +89,22 @@ class PostModel extends \MainModel
             }
         } 
      
+        // Учитываем TL
+        if($trust_level != 5) {   
+            if($uid == 0) { 
+                $tl = 'AND p.post_tl = 0';
+            } else {
+                $tl = 'AND p.post_tl <= '.$trust_level.'';
+            }
+            $display = 'AND p.post_is_delete = 0 AND s.space_feed = 0 '.$tl.'';
+        } else {
+            $display = ''; 
+        }
+     
         $sql = "SELECT p.post_id, p.post_space_id, s.space_id
                 fROM posts as p
                 INNER JOIN space as s ON s.space_id = p.post_space_id
-                $string ";
+                $string $display";
 
         $query = DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
         $result = ceil(count($query) / 15);
@@ -94,14 +113,22 @@ class PostModel extends \MainModel
     }
 
     // Полная версия поста  
-    public static function postSlug($slug, $uid)
+    public static function postSlug($slug, $user_id, $trust_level)
     {
+        // Ограничение по TL
+        if($user_id == 0) {
+            $trust_level = 0; 
+        } else {
+            $trust_level = $trust_level;
+        }
+        
         $q = XD::select('*')->from(['posts']);
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['post_user_id'])
                  ->leftJoin(['space'])->on(['space_id'], '=', ['post_space_id'])
                 ->leftJoin(['votes_post'])->on(['votes_post_item_id'], '=', ['post_id'])
-                ->and(['votes_post_user_id'], '=', $uid)
-                ->where(['post_slug'], '=', $slug);
+                ->and(['votes_post_user_id'], '=', $user_id)
+                ->where(['post_slug'], '=', $slug)
+                ->and(['post_tl'], '<=', $trust_level);
         
         return $query->getSelectOne();
     }   
@@ -147,6 +174,7 @@ class PostModel extends \MainModel
                 ->where(['login'], '=', $login)
                 ->and(['post_is_delete'], '=', 0)
                 ->and(['post_draft'], '=', 0)
+                ->and(['post_tl'], '=', 0)
                 ->orderBy(['post_date'])->desc();
   
         return $query->getSelect();
@@ -194,6 +222,8 @@ class PostModel extends \MainModel
             ['post_content'], ',', 
             ['post_content_img'], ',',  
             ['post_thumb_img'], ',',
+            ['post_merged_id'], ',',
+            ['post_tl'], ',',
             ['post_slug'], ',', 
             ['post_type'], ',',
             ['post_translation'], ',',
@@ -211,7 +241,9 @@ class PostModel extends \MainModel
             $data['post_title'], 
             $data['post_content'], 
             $data['post_content_img'],
-            $data['post_thumb_img'],            
+            $data['post_thumb_img'],
+            $data['post_merged_id'],
+            $data['post_tl'],            
             $data['post_slug'],
             $data['post_type'],
             $data['post_translation'],
@@ -241,6 +273,8 @@ class PostModel extends \MainModel
             ['post_user_id'], '=', $data['post_user_id'], ',', 
             ['post_content'], '=', $data['post_content'], ',', 
             ['post_content_img'], '=', $data['post_content_img'], ',', 
+            ['post_merged_id'], '=', $data['post_merged_id'], ',', 
+            ['post_tl'], '=', $data['post_tl'], ',', 
             ['post_closed'], '=', $data['post_closed'], ',', 
             ['post_top'], '=', $data['post_top'], ',', 
             ['post_space_id'], '=', $data['post_space_id'], ',', 
