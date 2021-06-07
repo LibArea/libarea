@@ -22,16 +22,6 @@
                         <?php } ?>                    
                         <br />
                     </div> 
-                    <div class="boxline max-width">
-                        <label for="post_content"><?= lang('For'); ?> TL</label>
-                        <select name="post_tl">
-                            <option <?php if($post['post_tl'] == 0) { ?>selected<?php } ?> value="0">0</option>
-                            <option <?php if($post['post_tl'] == 1) { ?>selected<?php } ?> value="1">1</option>
-                            <option <?php if($post['post_tl'] == 2) { ?>selected<?php } ?> value="2">2</option>
-                            <option <?php if($post['post_tl'] == 3) { ?>selected<?php } ?> value="3">3</option>
-                            <option <?php if($post['post_tl'] == 4) { ?>selected<?php } ?> value="4">4</option>
-                        </select>
-                    </div>
                 <?php } ?>
                  
                  <?php if($post['post_content_img']) { ?> 
@@ -66,6 +56,14 @@
                     </div> 
                 <?php } ?>
                 <?php if($uid['trust_level'] > 0) { ?>
+                    <div class="boxline max-width">
+                        <label for="post_content"><?= lang('For'); ?> TL</label>
+                        <select name="post_tl">
+                            <?php for($i=1; $i<=$uid['trust_level']; $i++) {  ?>
+                                <option <?php if($post['post_tl'] == $i) { ?>selected<?php } ?> value="<?= $i; ?>"><?= $i; ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
                     <div class="boxline"> 
                         <label for="post_content">Формат</label>
                         <input type="radio" name="post_type" <?php if($post['post_type'] == 0) { ?>checked<?php } ?> value="0"> Обсуждение

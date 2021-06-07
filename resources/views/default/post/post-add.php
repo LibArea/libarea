@@ -26,18 +26,7 @@
                         <input id="graburl" type="submit_url" name="submit_url" value="<?= lang('To extract'); ?>" />
                         <br>
                     </div>
-                    <div class="boxline max-width">
-                        <label for="post_content"><?= lang('For'); ?> TL</label>
-                        <select name="post_tl">
-                            <option selected value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                        </select>
-                    </div>
                 <?php } ?>
-                
                 <div class="boxline max-width post">    
                     <div class="boxline">
                         <div class="input-images"></div>
@@ -52,6 +41,15 @@
                     <input type="radio" name="post_draft" value="1" > <?= lang('Yes'); ?>
                 </div> 
                 <?php if($uid['trust_level'] > 0) { ?>
+                    <div class="boxline max-width">
+                        <label for="post_content"><?= lang('For'); ?> TL</label>
+                        <select name="post_tl">
+                            <option selected value="0">0</option>
+                             <?php for($i=1; $i<=$uid['trust_level']; $i++) {  ?>
+                                <option value="<?= $i; ?>"><?= $i; ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
                     <div class="boxline"> 
                         <label for="post_content"><?= lang('Format'); ?></label>
                         <input type="radio" name="post_type" checked value="0"> <?= lang('Discussion'); ?>
