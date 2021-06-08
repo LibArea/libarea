@@ -32,6 +32,7 @@ class MainConnector implements Connector
             "UrlRecord"                     => "app/ThirdParty/UrlRecord/UrlRecord.php",
             "SourceParser"                  => "app/ThirdParty/SourceParser/SourceParser.php",
             "SimpleImage"                   => "app/ThirdParty/SimpleImage.php",
+            "URLScraper"                    => "app/ThirdParty/URLScraper.php",
             // https://github.com/JacksonJeans/php-mail
             "JacksonJeans\MailException"    => "app/ThirdParty/php-mail/src/JacksonJeans/MailException.class.php",
             "JacksonJeans\Mail"             => "app/ThirdParty/php-mail/src/JacksonJeans/Mail.class.php",

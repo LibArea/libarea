@@ -13,6 +13,7 @@ use Lori\Config;
 use Lori\Base;
 use UrlRecord;
 use SimpleImage;
+use URLScraper;
 
 class PostController extends \MainController
 {
@@ -431,37 +432,30 @@ class PostController extends \MainController
     // Парсим title
     public function grabTitle() 
     {
-        $url   = \Request::getPost('uri');
+        $url    = \Request::getPost('uri');
+        $result = URLScraper::get($url); 
         
-        ob_start();
-        $curl_handle=curl_init();
-        curl_setopt($curl_handle, CURLOPT_URL, $url);
-        curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, true);
-        $getit = curl_exec($curl_handle);
-        curl_close($curl_handle);
-        ob_end_clean();
-        preg_match("/<title>(.*)<\/title>/i", $getit, $matches);
-        
-        return $matches[1];
+        if($result['image']) {
+            $image = $result['image'];
+        } else {
+            $image = $result['tags_og']['image'];
+        }
+        return $result['title'];
     }
     
     // Получаем данные Open Graph Protocol 
     public static function grabOgImg($post_url) 
     {
-        // Возможно использовать библиотеку, пока так...
-        $site_html = file_get_contents($post_url);
-        $matches=null;
-        preg_match_all('~<\s*meta\s+property="(og:[^"]+)"\s+content="([^"]*)~i', $site_html, $matches);
-        
-        $ogtags=array();
-        for($i=0;$i<count($matches[1]);$i++)
-        {
-            $ogtags[$matches[1][$i]]=$matches[2][$i];
+        $result = URLScraper::get($post_url); 
+        if($result['image']) {
+            $image = $result['image'];
+        } else {
+            $image = $result['tags_og']['image'];
         }
         
-        if($ogtags['og:image']) {
+        if($image) {
             
-            $ext = pathinfo(parse_url($ogtags['og:image'], PHP_URL_PATH), PATHINFO_EXTENSION);
+            $ext = pathinfo(parse_url($image, PHP_URL_PATH), PATHINFO_EXTENSION);
             
             if(in_array($ext, array ('jpg', 'jpeg', 'png'))) {
                 
@@ -470,11 +464,11 @@ class PostController extends \MainController
                 $filename = 'p-' . time() . '.' . $ext;
                 $file = 'p-' . time();
                 
-                if(!is_dir($puth . $year)) { @mkdir($puth . $year); }
-                $local = $puth . $year . $filename;
+                if(!is_dir($path . $year)) { @mkdir($path . $year); }
+                $local = $path . $year . $filename;
  
                 $fp = fopen ($local, 'w+');
-                $ch = curl_init($ogtags['og:image']);
+                $ch = curl_init($image);
                 curl_setopt($ch, CURLOPT_FILE, $fp);
                 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
                 curl_setopt($ch, CURLOPT_TIMEOUT, 1000);
@@ -491,6 +485,7 @@ class PostController extends \MainController
                 ->toFile($path . $year . $file .'.webp', 'image/webp');
  
                 if(file_exists($local)) {
+                    unlink($path_img . $avatar['avatar']);
                     return $year . $file .'.webp';
                 }
                 

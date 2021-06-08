@@ -139,7 +139,7 @@
                         <?php } ?>    
                         <?php if($post['post_url_domain']) { ?> 
                             <span class="post_url_detal">
-                                <?= lang('Website'); ?>: <a rel="nofollow noreferrer" href="<?= $post['post_url_full']; ?>">
+                                <?= lang('Website'); ?>: <a rel="nofollow noreferrer" href="<?= $post['post_url']; ?>">
                                    <?= $post['post_url_domain']; ?>
                                 </a>
                             </span> 

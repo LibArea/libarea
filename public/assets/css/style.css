@@ -266,10 +266,12 @@ a.logo:hover {
   opacity: 0.8;
 }
 
-.info i.icon { margin: 0 1px; }
-
 i.icon {
   margin-right: 10px;
+}
+
+.info i.icon {
+  margin: 0 1px; 
 }
 
 .sticky i.icon {
@@ -455,14 +457,14 @@ select {
   border: 1px solid #ccc;
 }
 
-select:focus {
-  border-color: rgba(160, 160, 160, 0.8);
-  color: #303030;
+select::-moz-focus-inner {
+  border: 0;
   outline: 0;
 }
 
-select::-moz-focus-inner {
-  border: 0;
+select:focus {
+  border-color: rgba(160, 160, 160, 0.8);
+  color: #303030;
   outline: 0;
 }
 
@@ -1466,14 +1468,14 @@ footer {
   margin-bottom: 20px;
 }
 
-a.footer {
+footer a.footer {
   display: block;
   font-size: 13px;
   margin-bottom: 3px;
   color: #333;
 }
 
-a.footer:hover {
+footer a.footer:hover {
   color: #666;
 }
 
@@ -1657,7 +1659,7 @@ i.github {
   input.add-url { width: 94%; }
   .text-oth { width: 46%; }
   .text-info { width: 40%; }
-  .nav {margin-left: 15px;}
+  .nav { margin-left: 15px; }
   
 }
 
