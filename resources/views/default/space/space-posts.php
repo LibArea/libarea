@@ -129,6 +129,9 @@
                             <?php if($post['post_tl'] > 0) { ?> 
                                 <span class="trust-level">tl<?= $post['post_tl']; ?></span>
                             <?php } ?>
+                            <?php if($post['post_merged_id'] > 0) { ?> 
+                                <i class="icon graph red"></i>
+                            <?php } ?>
                         </a>
                         <?php if($post['st_id']) { ?>
                             <a class="space-u tag-u" href="/s/<?= $space_info['space_slug']; ?>/<?= $post['st_id']; ?>" title="<?= $post['st_title']; ?>"><?= $post['st_title']; ?></a>

@@ -64,9 +64,9 @@ class SpaceModel extends \MainModel
             
         if ($type == 'feed') {
             if($space_tags_id) {
-                $result = $q->and(['post_tag_id'], '=', $space_tags_id)->orderBy(['post_date'])->desc()->getSelect();
+                $result = $q->and(['post_tag_id'], '=', $space_tags_id)->orderBy(['post_top'])->desc(',', ['post_date'])->desc()->getSelect();
             } else { 
-                $result = $q->orderBy(['post_date'])->desc()->getSelect();
+                $result = $q->orderBy(['post_top'])->desc(',', ['post_date'])->desc()->getSelect();
             }
         } else {
             
@@ -74,8 +74,8 @@ class SpaceModel extends \MainModel
                 $result = $q->and(['post_tag_id'], '=', $space_tags_id)->orderBy(['post_answers_num'])->desc()->getSelect();
             } else { 
                 $result = $q->orderBy(['post_answers_num'])->desc()->getSelect();
-            }
-        }
+            }   
+        } 
  
         return $result;
     }

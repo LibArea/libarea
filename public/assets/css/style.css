@@ -271,7 +271,7 @@ i.icon {
 }
 
 .info i.icon {
-  margin: 0 1px; 
+  margin: 0 1px;
 }
 
 .sticky i.icon {
@@ -1192,7 +1192,7 @@ ol.comment-telo {
 .qa-footer {
   width: 120px;
   margin: 0;
-  padding: 10px 0px 10px 0px;
+  padding: 10px 0px 10px 0;
   margin-left: 10px;
   border-radius: 3px;
   border: 1px solid #ddd;
@@ -1660,7 +1660,6 @@ i.github {
   .text-oth { width: 46%; }
   .text-info { width: 40%; }
   .nav { margin-left: 15px; }
-  
 }
 
 @media (max-width: 704px) {

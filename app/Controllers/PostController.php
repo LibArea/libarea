@@ -94,10 +94,15 @@ class PostController extends \MainController
         if($slug != $post_new['post_slug']) {
             redirect('/post/' . $post_new['post_id'] . '/' . $post_new['post_slug']);
         }
-        
+
         $post = PostModel::postSlug($slug, $uid['id'], $uid['trust_level']); 
         Base::PageError404($post);
-    
+
+        // Редирект для слияния
+        if($post['post_merged_id'] > 0) {
+            redirect('/post/' . $post['post_merged_id']);
+        }
+
         // Просмотры поста
         if (!isset($_SESSION['pagenumbers'])) {
             $_SESSION['pagenumbers'] = array();

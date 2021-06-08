@@ -81,6 +81,9 @@
                             <?php if($post['post_tl'] > 0) { ?> 
                                 <span class="trust-level">tl<?= $post['post_tl']; ?></span>
                             <?php } ?>
+                            <?php if($post['post_merged_id'] > 0) { ?> 
+                                <i class="icon graph red"></i>
+                            <?php } ?>
                         </a>
 
                         <?php if($post['post_url_domain']) { ?> 

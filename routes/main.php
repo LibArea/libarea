@@ -133,6 +133,7 @@ Route::endGroup();
 
 // Пост в ленте и полный пост
 Route::type('post')->get('/post/shown')->controller('PostController@shownPost');
+Route::get('/post/{id}')->controller('PostController@viewPost')->where(['id' => '[0-9-]+']);
 Route::get('/post/{id}/{slug}')->controller('PostController@viewPost')->where(['id' => '[0-9-]+', 'slug' => '[A-Za-z0-9-]+']);
 
 // Информация
