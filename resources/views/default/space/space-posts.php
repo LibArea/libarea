@@ -126,6 +126,9 @@
                             <?php if($post['post_translation'] == 1) { ?> 
                                 <span class="translation lowercase"><?= lang('Translation'); ?></span>
                             <?php } ?>
+                            <?php if($post['post_tl'] > 0) { ?> 
+                                <span class="trust-level">tl<?= $post['post_tl']; ?></span>
+                            <?php } ?>
                         </a>
                         <?php if($post['st_id']) { ?>
                             <a class="space-u tag-u" href="/s/<?= $space_info['space_slug']; ?>/<?= $post['st_id']; ?>" title="<?= $post['st_title']; ?>"><?= $post['st_title']; ?></a>

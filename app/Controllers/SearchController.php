@@ -32,18 +32,21 @@ class SearchController extends \MainController
                 } 
 
                 // Успех и определим, что будем использовать
+                // Далее индивидуально расширим (+ лайки, просмотры и т.д.)
                 if(Config::get(Config::PARAM_SEARCH) == 0) {
                     $qa =  SearchModel::getSearch($query);
+                    $result = Array();
+                    foreach($qa as $ind => $row){
+                        $row['post_content']  = Base::text(Base::cutWords($row['post_content'], 220, '...'), 'md');
+                        $result[$ind]         = $row; 
+                    }  
                 } else {
                     $qa =  SearchModel::getSearchServer($query);
+                    $result = Array();
+                    foreach($qa as $ind => $row){
+                        $result[$ind]         = $row; 
+                    } 
                 }
-                
-                $result = Array();
-                foreach($qa as $ind => $row){
-                    $row['post_content']  = Base::text(Base::cutWords($row['post_content'], 220, '...'), 'md');
-                    $result[$ind]         = $row; 
-                }     
-                
             } else {
                 Base::addMsg(lang('Empty request'), 'error');
                 redirect('/search');
