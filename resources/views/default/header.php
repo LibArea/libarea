@@ -58,48 +58,48 @@
                     </div>
                     <div class="dropdown-menu">
                         <span class="st"></span>
-                        <a href="/u/<?= $uid['login']; ?>">
+                        <a class="dr-menu" href="/u/<?= $uid['login']; ?>">
                             <i class="icon user"></i>
                             <?= lang('Profile'); ?>
                         </a>
-                        <a href="/u/<?= $uid['login']; ?>/setting">
+                        <a class="dr-menu" href="/u/<?= $uid['login']; ?>/setting">
                             <i class="icon settings"></i>
                             <?= lang('Settings'); ?>
                         </a>
-                        <a href="/u/<?= $uid['login']; ?>/drafts">
+                        <a class="dr-menu" href="/u/<?= $uid['login']; ?>/drafts">
                             <i class="icon book-open"></i>
                             <?= lang('Drafts'); ?>
                         </a>
-                        <a href="/u/<?= $uid['login']; ?>/notifications">
+                        <a class="dr-menu" href="/u/<?= $uid['login']; ?>/notifications">
                             <i class="icon bell"></i> 
                             <?= lang('Notifications'); ?>
                         </a>
-                        <a href="/u/<?= $uid['login']; ?>/messages">
+                        <a class="dr-menu" href="/u/<?= $uid['login']; ?>/messages">
                             <i class="icon envelope"></i> 
                             <?= lang('Messages-m'); ?>
                         </a>
-                        <a href="/u/<?= $uid['login']; ?>/comments"> 
+                        <a class="dr-menu" href="/u/<?= $uid['login']; ?>/comments"> 
                             <i class="icon bubbles"></i>
                             <?= lang('Comments-n'); ?> 
                         </a>
-                        <a href="/u/<?= $uid['login']; ?>/favorite">
+                        <a class="dr-menu" href="/u/<?= $uid['login']; ?>/favorite">
                             <i class="icon star"></i> 
                             <?= lang('Favorites'); ?>              
                         </a>
                         <?php if($uid['trust_level'] > 1) { ?>
-                            <a href="/u/<?= $uid['login']; ?>/invitation">
+                            <a class="dr-menu" href="/u/<?= $uid['login']; ?>/invitation">
                                 <i class="icon link"></i>   
                                 <?= lang('Invites'); ?>                   
                             </a> 
                         <?php } ?>  
                         <?php if($uid['trust_level'] == 5) { ?> 
-                            <a href="/admin" target="_black">
+                            <a class="dr-menu" href="/admin" target="_black">
                                 <i class="icon shield"></i>    
                                 <?= lang('Admin'); ?>                   
                             </a> 
                         <?php } ?>     
                         <hr>   
-                        <a href="/logout" class="logout" target="_self" title="<?= lang('Sign out'); ?>">
+                        <a class="dr-menu" href="/logout" class="logout" title="<?= lang('Sign out'); ?>">
                             <i class="icon logout"></i> 
                             <?= lang('Sign out'); ?>
                         </a>

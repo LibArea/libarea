@@ -78,10 +78,12 @@ class CommentController extends \MainController
         
         // Ограничим частоту добавления
         // Добавить условие TL
-        $num_comm =  CommentModel::getCommentSpeed($uid['id']);
-        if(count($num_comm) > 35) {
-            Base::addMsg('Вы исчерпали лимит комментариев (35) на сегодня', 'error');
-            redirect('/');
+        if($uid['trust_level'] < 2) {
+            $num_comm =  CommentModel::getCommentSpeed($uid['id']);
+            if(count($num_comm) > 10) {
+                Base::addMsg('Вы исчерпали лимит комментариев (15) на сегодня', 'error');
+                redirect('/');
+            }
         }
         
         // Записываем коммент и получаем его url

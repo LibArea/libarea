@@ -82,7 +82,7 @@ tt {
 }
 
 aside {
-  padding: 8px;
+  padding: 15px 8px 8px 8px;
   position: relative;
   float: right;
   width: 250px;
@@ -200,7 +200,7 @@ a.add-post {
 }
 
 .nick span {
-  font-size: 13px;
+  font-size: 14px;
   margin-right: 5px;
   color: var(--tertiary);
 }
@@ -211,9 +211,9 @@ a.add-post:hover {
 }
 
 a.link {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--tertiary);
-  margin-left: 15px;
+  margin-left: 23px;
 }
 
 a.link:hover {
@@ -298,7 +298,7 @@ a.home {
 
 .sb-date {
   margin-left: 20px;
-  font-size: 12px;
+  font-size: 13px;
   color: var(--tertiary);
 }
 
@@ -326,7 +326,6 @@ a.home {
 
 .header-right i.icon {
   vertical-align: middle;
-  color: var(--tertiary);
 }
 
 .header-right i.icon.pencil {
@@ -368,21 +367,10 @@ hr {
   height: 1px;
 }
 
-/* Пагинация */
 .pagination {
   margin: 5px 10px 10px 15px;
   float: left;
   clear: both;
-}
-
-.pagination a {
-  padding: 0 3px;
-  color: var(--tertiary);
-  font-size: 15px;
-}
-
-.pagination a:hover {
-  color: #333;
 }
 
 button,
@@ -927,11 +915,6 @@ img.img-post {
   color: var(--tertiary);
 }
 
-.bar-space-telo:hover {
-  background: rgba(0, 154, 97, 0.08);
-  color: #1ca1f3;
-  text-decoration: none;
-}
 
 .bar-space-telo img {
   margin-right: 6px;
@@ -957,8 +940,7 @@ a.space-u:hover,
 }
 
 .bar-title {
-  margin-top: 15px;
-  color: #646464;
+  color: var(--tertiary);
 }
 
 /* Ответы */
@@ -1192,7 +1174,7 @@ ol.comment-telo {
 .qa-footer {
   width: 120px;
   margin: 0;
-  padding: 10px 0px 10px 0;
+  padding: 10px 0 10px 0;
   margin-left: 10px;
   border-radius: 3px;
   border: 1px solid #ddd;
@@ -1562,7 +1544,6 @@ i.github {
 .dark h1.profile,
 .dark .nick span,
 .dark .header-right i.icon,
-.dark .dropdown-menu a:hover,
 .dark .space-info-desc,
 .dark h3.recommend {
   color: #eee;
@@ -1613,16 +1594,17 @@ i.github {
   display: block;
 }
 
-.dropdown-menu a {
+.dr-menu {
   color: var(--tertiary);
   display: block;
-  padding: 8px 9px 1px 6px;
+  padding: 5px 9px 5px 6px;
   font-size: 15px;
 }
 
-.dropdown-menu a span.ti-angle-down:hover,
-.dropdown-menu a:hover {
-  color: var(--primary);
+.dr-menu:hover {
+  background: rgba(0, 154, 97, 0.08);
+  color: var(--quaternary);
+  text-decoration: none;
 }
 
 .login-nav-home {

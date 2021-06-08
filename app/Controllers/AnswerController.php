@@ -75,10 +75,12 @@ class AnswerController extends \MainController
         
         // Ограничим частоту добавления
         // Добавить условие TL
-        $num_answ =  CommentModel::getCommentSpeed($uid['id']);
-        if(count($num_answ) > 35) {
-            Base::addMsg('Вы исчерпали лимит ответов (35) на сегодня', 'error');
-            redirect('/');
+        if($uid['trust_level'] < 2) {
+            $num_answ =  AnswerModel::getAnswerSpeed($uid['id']);
+            if(count($num_answ) > 10) {
+                Base::addMsg('Вы исчерпали лимит ответов (10) на сегодня', 'error');
+                redirect('/');
+            }
         }
         
         // Записываем ответ и получаем его url

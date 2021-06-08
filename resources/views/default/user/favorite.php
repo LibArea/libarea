@@ -52,7 +52,7 @@
                         </div>
                         <div class="post-telo fav-answ">
                             <a class="u-url"  href="/post/<?= $fav['post']['post_id']; ?>/<?= $fav['post']['post_slug']; ?>#answ_<?= $fav['answer_id']; ?>">
-                               <h3 class="titl"><?= $fav['post']['post_title']; ?></h3>
+                               <h3 class="title"><?= $fav['post']['post_title']; ?></h3>
                             </a>
                             <div class="space-color space_<?= $fav['post']['space_color'] ?>"></div>
                             <a class="space-u" href="/s/<?= $fav['post']['space_slug']; ?>" title="<?= $fav['post']['space_name']; ?>">

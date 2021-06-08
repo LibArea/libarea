@@ -373,10 +373,12 @@ class PostController extends \MainController
         
         // Ограничим частоту добавления
         // Добавить условие TL
-        $num_post =  PostModel::getPostSpeed($uid['id']);
-        if(count($num_post) > 5) {
-            Base::addMsg(lang('limit-post-day'), 'error');
-            redirect('/');
+        if($uid['trust_level'] < 2) {
+            $num_post =  PostModel::getPostSpeed($uid['id']);
+            if(count($num_post) > 3) {
+                Base::addMsg(lang('limit-post-day'), 'error');
+                redirect('/');
+            }
         }
         
         // Получаем SEO поста
