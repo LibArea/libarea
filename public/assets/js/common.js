@@ -2,10 +2,10 @@
 document.querySelectorAll(".addcomm")
   .forEach(el => el.addEventListener("click",  function(e){ 
   
-    var answ_id  = this.dataset.answ_id;
-    var post_id  = this.dataset.post_id;
+    let answ_id  = this.dataset.answ_id;
+    let post_id  = this.dataset.post_id;
     
-    var comm = document.querySelector('#answ_addentry'+answ_id);
+    let comm = document.querySelector('#answ_addentry'+answ_id);
         comm.classList.add("active");
      
     fetch("/comments/addform", { 
@@ -36,11 +36,11 @@ document.querySelectorAll(".addcomm")
 document.querySelectorAll(".addcomm_re")
   .forEach(el => el.addEventListener("click",  function(e){ 
   
-    var post_id  = this.dataset.post_id;
-    var answ_id  = this.dataset.answ_id;
-    var comm_id  = this.dataset.comm_id;
+    let post_id  = this.dataset.post_id;
+    let answ_id  = this.dataset.answ_id;
+    let comm_id  = this.dataset.comm_id;
     
-    var comm = document.querySelector('#comm_addentry'+comm_id);
+    let comm = document.querySelector('#comm_addentry'+comm_id);
         comm.classList.add("active");
      
     fetch("/comments/addform", { 
@@ -72,8 +72,8 @@ document.querySelectorAll(".addcomm_re")
 document.querySelectorAll(".showpost")
   .forEach(el => el.addEventListener("click",  function(e){ 
   
-    var post_id  = this.dataset.post_id;
-    var post = document.querySelector('.s_'+post_id);   
+    let post_id  = this.dataset.post_id;
+    let post = document.querySelector('.s_'+post_id);   
     post.classList.remove("hide");
     
     if(!e.target.classList.contains('showpost')){
@@ -97,13 +97,13 @@ document.querySelectorAll(".showpost")
 }));
 
 // Toggle dark mode
-var toggledark = document.querySelector('#toggledark');
+let toggledark = document.querySelector('#toggledark');
 if(toggledark) {
     toggledark.addEventListener('click', function () {
-        var mode = getCookie("dayNight");
-        var d = new Date();
+        let mode = getCookie("dayNight");
+        let d = new Date();
         d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000)); //365 days
-        var expires = "expires=" + d.toGMTString();
+        let expires = "expires=" + d.toGMTString();
         if (mode == "dark") {
           document.cookie = "dayNight" + "=" + "light" + "; " + expires + ";path=/";
           document.getElementsByTagName('body')[0].classList.remove('dark');
@@ -115,10 +115,10 @@ if(toggledark) {
 }
 
 // Add Header Post
-var header = document.getElementById("stHeader");
+let header = document.getElementById("stHeader");
 if(header) {
     window.onscroll = function() {myFunction()};
-    var sticky = header.offsetTop;
+    let sticky = header.offsetTop;
     function myFunction() {
       if (window.pageYOffset > sticky) {
         header.classList.add("sticky");
@@ -130,10 +130,10 @@ if(header) {
 
 // TODO: move to util
 function getCookie(cname) {
-    var name = cname + "=";
-    var ca = document.cookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
+    let name = cname + "=";
+    let ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
         while (c.charAt(0) == ' ') {
             c = c.substring(1);
         }

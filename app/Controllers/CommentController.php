@@ -250,22 +250,4 @@ class CommentController extends \MainController
         
         return false;
     }
-    
-    // Помещаем комментарий в закладки
-    public function addCommentFavorite()
-    {
-        
-        $uid = Base::getUid();
-        
-        $comm_id = \Request::getPostInt('comm_id');
-        $comm    = CommentModel::getCommentsOne($comm_id); 
-        
-        if(!$comm) {
-            redirect('/');
-        }
-        
-        CommentModel::setCommentFavorite($comm_id, $uid['id']);
-       
-        return true;
-    } 
 }

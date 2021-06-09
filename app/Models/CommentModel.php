@@ -135,34 +135,5 @@ class CommentModel extends \MainModel
                 
         return  DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
-    
-    // Добавить комментарий в закладки
-    public static function setCommentFavorite($post_id, $uid)
-    {
-        $result = self::getMyCommentFavorite($post_id, $uid); 
 
-        if(!$result){
-           XD::insertInto(['favorite'], '(', ['favorite_tid'], ',', ['favorite_uid'], ',', ['favorite_type'], ')')->values( '(', XD::setList([$post_id, $uid, 2]), ')' )->run();
-        } else {
-           XD::deleteFrom(['favorite'])->where(['favorite_tid'], '=', $post_id)->and(['favorite_uid'], '=', $uid)->run(); 
-        } 
-        
-        return true;
-    }
-  
-    // Комментарий в закладках или нет
-    public static function getMyCommentFavorite($post_id, $uid) 
-    {
-        $result = XD::select('*')->from(['favorite'])->where(['favorite_tid'], '=', $post_id)
-        ->and(['favorite_uid'], '=', $uid)
-        ->and(['favorite_type'], '=', 2)
-        ->getSelect();
-        
-        if($result) {
-            return 1;
-        } else {
-            return false;
-        }
-    }
-    
 }

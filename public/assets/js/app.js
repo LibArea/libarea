@@ -60,7 +60,7 @@ $(function(){
     
     // Голосование за комментарии
     $(document).on('click', '.comm-up-id', function() {
-        var comm_id = $(this).data('id');
+        let comm_id = $(this).data('id');
         $.ajax({
             url: '/votes/comm',
             type: 'POST',
@@ -72,7 +72,7 @@ $(function(){
     });
     // Голосование за пост
     $(document).on('click', '.post-up-id', function() {
-        var post_id = $(this).data('id');
+        let post_id = $(this).data('id');
         $.ajax({
             url: '/votes/post',
             type: 'POST',
@@ -84,7 +84,7 @@ $(function(){
     });
     // Голосование за ответ
     $(document).on('click', '.answ-up-id', function() {
-        var answ_id = $(this).data('id');
+        let answ_id = $(this).data('id');
         $.ajax({
             url: '/votes/answ',
             type: 'POST',
@@ -96,7 +96,7 @@ $(function(){
     });
     // Подписка на блог
     $(document).on("click", ".hide-space-id", function(){      
-        var space_id  = $(this).data('id');  
+        let space_id  = $(this).data('id');  
         $.ajax({
             url: '/space/hide',
             type: 'POST',
@@ -107,8 +107,8 @@ $(function(){
     }); 
     // Добавить пост в профиль
     $(document).on("click", ".user-mypost", function(){  
-        var post_id = $(this).data('post'); 
-        var opt     = $(this).data('opt');
+        let post_id = $(this).data('post'); 
+        let opt     = $(this).data('opt');
         $.ajax({
             url: '/post/addpostprof',
             type: 'POST',
@@ -119,7 +119,7 @@ $(function(){
     });
     // Добавить пост в закладки
     $(document).on("click", ".user-post-fav", function(){      
-        var post_id  = $(this).data('post');
+        let post_id  = $(this).data('post');
         $.ajax({
             url: '/post/addfavorite',
             type: 'POST',
@@ -128,20 +128,9 @@ $(function(){
            location.reload(); 
         });
     }); 
-    // Добавить комментарий в закладки
-    $(document).on("click", ".user-comm-fav", function(){      
-        var comm_id  = $(this).data('comm');
-        $.ajax({
-            url: '/comment/addfavorite',
-            type: 'POST',
-            data: {comm_id: comm_id},
-        }).done(function(data) {
-           location.reload(); 
-        });
-    }); 
     // Добавить ответ в закладки
     $(document).on("click", ".user-answ-fav", function(){      
-        var answ_id  = $(this).data('answ');
+        let answ_id  = $(this).data('answ');
         $.ajax({
             url: '/answer/addfavorite',
             type: 'POST',
@@ -152,7 +141,7 @@ $(function(){
     }); 
     // Удаляем комментарии
     $(document).on('click', '.delcomm', function() {
-        var comm_id = $(this).data('comm_id');
+        let comm_id = $(this).data('comm_id');
         $.ajax({
             url: '/comment/del',
             type: 'POST',
@@ -163,7 +152,7 @@ $(function(){
     });
     // Удаляем ответ
     $(document).on('click', '.delansw', function() {
-        var answ_id = $(this).data('id');
+        let answ_id = $(this).data('id');
         $.ajax({
             url: '/answer/del',
             type: 'POST',
@@ -174,7 +163,7 @@ $(function(){
     });
     // Удаляем пост
     $(document).on('click', '.delpost', function() {
-        var post_id = $(this).data('post');
+        let post_id = $(this).data('post');
         $.ajax({
             url: '/post/del',
             type: 'POST',
@@ -185,7 +174,7 @@ $(function(){
     });
     // Удаляем поток
     $(document).on('click', '.delflow', function() {
-        var flow_id = $(this).data('flow');
+        let flow_id = $(this).data('flow');
         $.ajax({
             url: '/flow/del',
             type: 'POST',
@@ -217,8 +206,8 @@ $(function(){
     
     // Edit comment
     $(document).on("click", ".editcomm", function(){
-        var comm_id = $(this).data('id'); 
-        var post_id = $(this).data('post_id');        
+        let comm_id = $(this).data('id'); 
+        let post_id = $(this).data('post_id');        
        
             $('.cm_addentry').remove();
             $('.cm_add_link').show();
@@ -246,8 +235,8 @@ $(function(){
     
     // Edit comment
     $(document).on("click", ".editcomm", function(){
-        var comm_id = $(this).data('comm_id'); 
-        var post_id = $(this).data('post_id');        
+        let comm_id = $(this).data('comm_id'); 
+        let post_id = $(this).data('post_id');        
        
             $('.comm_addentry').remove();
             $('.comm_add_link').show();

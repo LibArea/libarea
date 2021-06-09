@@ -63,7 +63,6 @@ Route::before('Authorization@noAuth')->getGroup();
     Route::type('post')->protect()->get('/comment/edit')->controller('CommentController@editComment');
 	Route::type('post')->protect()->get('/comment/add')->controller('CommentController@createComment');
     Route::type('post')->get('/comment/del')->controller('CommentController@deletComment');
-    Route::type('post')->get('/comment/addfavorite')->controller('CommentController@addCommentFavorite');
 
 	// Добавление ответов / удаление / изменение
     Route::get('/post/{post_id}/answ/{answ_id}')->controller('AnswerController@editFormAnswer')->where(['post_id' => '[0-9]+', 'answ_id' => '[0-9]+']);

@@ -1002,10 +1002,6 @@ ol.answer-telo {
 }
 
 /* Комментарии */
-.comm-telo .voters {
-  margin-top: 3px;
-}
-
 .reply {
   display: none;
 }
@@ -1101,10 +1097,6 @@ ol.comment-telo {
 .comm-header .user {
   margin: 0 0 0 3px;
   text-transform: lowercase;
-}
-
-.comments .voters {
-  margin-top: 3px;
 }
 
 .comments .comm-telo {
@@ -1229,6 +1221,14 @@ ol.comment-telo {
   float: left;
   width: 30px;
   margin-top: 2px;
+}
+
+.comm-telo .voters {
+  margin-top: 3px;
+}
+
+.comments .voters {
+  margin-top: 3px;
 }
 
 .telo-detail_post .voters {
@@ -1609,14 +1609,6 @@ i.github {
 
 .login-nav-home {
   margin-top: 15px;
-}
-
-.to-user {
-  background: #e7edf3;
-  color: #667d99;
-  border-radius: 4px;
-  padding: 2px 5px;
-  border: 0 !important;
 }
 
 @media (max-width: 1050px) {
