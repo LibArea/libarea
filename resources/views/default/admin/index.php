@@ -6,11 +6,11 @@
     <div class="t-table">
         <div class="t-th">
             <span class="t-td center">N</span>
+            <span class="t-td"><?= lang('Avatar'); ?></span>
             <span class="t-td"><?= lang('Information'); ?></span>
-            <span class="t-td">E-mail</span>
-            <span class="t-td"><?= lang('Sign up'); ?></span>
+            <span class="t-td">E-mail / <?= lang('Sign up'); ?></span>
             <span class="t-td">IP <?= lang('registrations'); ?></span>
-            <span class="t-td center"><?= lang('Information'); ?></span>
+            <span class="t-td center"><?= lang('Last'); ?></span>
             <span class="t-td center">Ban</span>
             <span class="t-td center"><?= lang('Action'); ?></span>
         </div>
@@ -19,8 +19,11 @@
                 <span class="t-td w-30 center">
                     <?= $user['id']; ?>
                 </span>
+                <span class="t-td w-30 center">
+                    <img class="ava-max" src="<?= user_avatar_url($user['avatar'], 'max'); ?>">
+                </span>
                 <span class="t-td">
-                    <img class="ava" src="<?= user_avatar_url($user['avatar'], 'small'); ?>">
+                     
                     <a href="/u/<?= $user['login']; ?>"><?= $user['login']; ?></a>
                     <?php if($user['name']) { ?>
                         (<?= $user['name']; ?>) 
@@ -29,15 +32,16 @@
                     <?php if($user['invitation_id'] !=0) { ?><sup>+ inv. id<?= $user['invitation_id']; ?></sup><?php } ?> <br>
                 </span>
                 <span class="t-td">
-                     <span class="date"><?= $user['email']; ?></span>
+                     <span class="date">
+                        <?= $user['email']; ?>
+                     </span>
                 </span>
                 <span class="t-td">
-                     <?= $user['created_at']; ?> 
-                </span>
-                <span class="t-td">
-                     <?= $user['reg_ip']; ?>  <?php if($user['replayIp'] > 1) { ?>
+                     <?= $user['reg_ip']; ?>  
+                     <?php if($user['replayIp'] > 1) { ?>
                        <sup class="red">(<?= $user['replayIp']; ?>)</sup>
-                     <?php } ?>
+                     <?php } ?> <br>
+                     <small><?= $user['created_at']; ?></small>
                 </span>
                 <span class="t-td center">
                     <?php if(!empty($user['logs']['logs_ip_address'])) { ?>

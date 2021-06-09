@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\UserModel;
+use App\Models\AuthModel;
 use Respect\Factory;
 use Lori\Config;
 use Lori\Base;
@@ -66,6 +67,7 @@ class AuthController extends \MainController
         $inv_code   = \Request::getPost('invitation_code');
         $inv_uid    = \Request::getPost('invitation_id');
         $password   = \Request::getPost('password');
+        $reg_ip     = \Request::getRemoteAddress();
         
         $url = $inv_code ? '/register/invite/'.$inv_code : '/register';
 
@@ -75,12 +77,18 @@ class AuthController extends \MainController
             redirect($url);
         }
        
-        if (!UserModel::replayEmail($email))
+        if (!AuthModel::replayEmail($email))
         {
             Base::addMsg('Такой e-mail уже есть на сайте', 'error');
             redirect($url);
         }
        
+        if(!AuthModel::repeatIpBanRegistration($reg_ip))
+        {
+            Base::addMsg('Не регистрируйте множественные аккаунты', 'error');
+            redirect($url);
+        }
+       exit;
         // Упростить и в метод
         if (!preg_match('/^[a-zA-Z0-9]+$/u', $login))
         {
@@ -122,8 +130,7 @@ class AuthController extends \MainController
             redirect($url);
         }
         
-
-        if (!UserModel::replayLogin($login))
+        if (!AuthModel::replayLogin($login))
         {
             Base::addMsg('Такой логин уже есть на сайте', 'error');
             redirect($url);
@@ -140,8 +147,6 @@ class AuthController extends \MainController
             Base::addMsg('Длина пароля должна быть от 8 до 32 знаков', 'error');
             redirect($url);
         }
-     
-        $reg_ip = Request::getRemoteAddress(); // ip при регистрации 
      
         if(!$inv_code) {
             if (Config::get(Config::PARAM_CAPTCHA)) {

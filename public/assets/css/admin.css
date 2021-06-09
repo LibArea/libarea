@@ -80,7 +80,15 @@ input[type="text"] {
   width: 30px;
 }
 
-.ava {
+.space-logo,
+.ava-max {
   vertical-align: middle;
-  width: 24px;
+  width: 64px;
+}
+
+.ava-small {
+  vertical-align: middle;
+  width: 16px;
+  border-radius: 50%;
+  margin: 0 0 0 15px;
 }

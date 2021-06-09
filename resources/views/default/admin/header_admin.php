@@ -12,7 +12,7 @@
 
         <link rel="stylesheet" href="/assets/css/style.css">
         <link rel="stylesheet" href="/assets/css/admin.css">
-        <script src="/assets/js/admin.js"></script>
+        <script src="/assets/js/jquery.min.js"></script>
     </head>
 <body class="bd">
 <header>  

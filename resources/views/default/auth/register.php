@@ -7,7 +7,7 @@
                 <?php csrf_field(); ?>
                 <div class="boxline">
                     <label for="login"><?= lang('Nickname'); ?></label>
-                    <input type="text" name="login" id="login" minlength="3" pattern="^[a-zA-Z\s]+$">
+                    <input type="text" name="login" id="login" minlength="3" pattern="^[a-zA-Z0-9\s]+$">
                     <div class="box_h">>= 3 <?= lang('characters'); ?></div>
                 </div>
                 <div class="boxline">

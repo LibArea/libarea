@@ -212,7 +212,9 @@ return [
     'Setting profile page'  => 'Страница настройки профиля',
     'Change avatar'         => 'Изменение аватарки', 
     'Avatar'                => 'Аватарка',
-    'Cover art'             => 'Обложка',  
+    'Cover art'             => 'Обложка',
+    'Logo'                  => 'Логотип', 
+    'Last'                  => 'Последнее',     
     'Cover removed'         => 'Обложка удалена',
     'Change avatar page'    => 'Страница изменение аватарки',    
     'Change password'       => 'Изменение пароля', 
@@ -311,4 +313,5 @@ return [
     'Joined in the early days'              => 'Присоединился в первые дни запуска сообщества',
     'The owner restricted the publication'  => 'Владелец пространства ограничил публикацию',
     'The profile is being checked'          => 'Ваш профиль находится на рассмотрении',
+    'Ban-space-info-posts'                  => 'Бан пространства повлечет за собой недоступность всех постов',
 ];

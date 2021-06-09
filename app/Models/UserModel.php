@@ -210,34 +210,6 @@ class UserModel extends \MainModel
         return count($query->getSelect());
     }
     
-    // Проверка Логина на дубликаты
-    public static function replayLogin($login)
-    {
-        $q = XD::select('*')->from(['users']);
-        $query = $q->where(['login'], '=', $login);
-        $result = $query->getSelectOne();
-        
-        if ($result) {
-            return false;
-        }
-        
-        return true;
-    }
-    
-    // Проверка Email на дубликаты
-    public static function replayEmail($email)
-    {
-        $q = XD::select('*')->from(['users']);
-        $query = $q->where(['email'], '=', $email);
-        $result = $query->getSelectOne();
-        
-        if ($result) {
-            return false;
-        }
-        
-        return true;
-    }
-    
     // Редактирование профиля
     public static function editProfile($login, $name, $color, $about, $website, $location, $public_email, $skype, $twitter, $telegram, $vk)
     {

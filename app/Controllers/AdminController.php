@@ -161,7 +161,7 @@ class AdminController extends \MainController
             'meta_title'    => lang('Spaces'),
         ]; 
  
-        return view(PR_VIEW_DIR . '/admin/spaces', ['data' => $data, 'uid' => $uid, 'spaces' => $spaces]);
+        return view(PR_VIEW_DIR . '/admin/space/spaces', ['data' => $data, 'uid' => $uid, 'spaces' => $spaces]);
     }
     
     // Форма добавить пространство
@@ -174,7 +174,7 @@ class AdminController extends \MainController
             'meta_title'    => lang('Add Space'),
         ]; 
         
-        return view(PR_VIEW_DIR . '/admin/add-space', ['data' => $data, 'uid' => $uid]);
+        return view(PR_VIEW_DIR . '/admin/space/add-space', ['data' => $data, 'uid' => $uid]);
     }
     
     // Удаление / восстановление пространства
@@ -260,7 +260,7 @@ class AdminController extends \MainController
             'meta_title'    => lang('Badges'),
         ]; 
         
-        return view(PR_VIEW_DIR . '/admin/badges', ['data' => $data, 'uid' => $uid, 'badges' => $badges]);
+        return view(PR_VIEW_DIR . '/admin/badge/badges', ['data' => $data, 'uid' => $uid, 'badges' => $badges]);
     }
     
     // Форма добавления награды
@@ -273,7 +273,7 @@ class AdminController extends \MainController
             'meta_title'    => lang('Add badge'),
         ]; 
         
-        return view(PR_VIEW_DIR . '/admin/badge-add', ['data' => $data, 'uid' => $uid]);
+        return view(PR_VIEW_DIR . '/admin/badge/badge-add', ['data' => $data, 'uid' => $uid]);
     }
     
     // Форма изменения награды
@@ -292,7 +292,7 @@ class AdminController extends \MainController
             'meta_title'    => lang('Edit badge'),
         ]; 
         
-        return view(PR_VIEW_DIR . '/admin/badge-edit', ['data' => $data, 'uid' => $uid, 'badge' => $badge]);
+        return view(PR_VIEW_DIR . '/admin/badge/badge-edit', ['data' => $data, 'uid' => $uid, 'badge' => $badge]);
     }
     
     // Измененяем награду

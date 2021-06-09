@@ -56,8 +56,6 @@ if(colorSpace){
 }
 
 $(function(){
- 
-    
     // Голосование за комментарии
     $(document).on('click', '.comm-up-id', function() {
         let comm_id = $(this).data('id');

@@ -266,8 +266,12 @@
     </aside> 
 </div>
 <?php } else { ?>
-    <main>
-        <div class="no-content red"><?= lang('ban-space'); ?>...</div>
+    <main class="w-100">
+        <center>
+            <br>
+            <i class="icon shield red ban-space"></i>
+            <div class="no-content red"><?= lang('ban-space'); ?>...</div>
+        </center>
     </main>
 <?php } ?> 
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

@@ -492,20 +492,20 @@ input.add-url {
   margin-bottom: 4px;
 }
 
-.box.wide label {
-  width: 12em;
-}
-
-.box label.required {
-  font-weight: bold;
-}
-
 .box label {
   width: 8em;
   vertical-align: middle;
   display: block;
   float: left;
   margin-bottom: 4px;
+}
+
+.box label.required {
+  font-weight: bold;
+}
+
+.box.wide label {
+  width: 12em;
 }
 
 .box br {
@@ -995,12 +995,6 @@ ol.answer-telo {
   text-transform: lowercase;
 }
 
-.answers .comm-telo {
-  padding: 3px 0 0 0;
-  font-size: 10.5pt;
-  list-style: none;
-}
-
 /* Комментарии */
 .reply {
   display: none;
@@ -1071,6 +1065,12 @@ ol.comment-telo {
 .comm-telo-body {
   margin: 5px 0;
   max-width: 750px;
+}
+
+.answers .comm-telo {
+  padding: 3px 0 0 0;
+  font-size: 10.5pt;
+  list-style: none;
 }
 
 .qa-comm .comm-telo-body {
@@ -1505,6 +1505,40 @@ i.github {
   padding: 1px 0;
 }
 
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: var(--secondary);
+  min-width: 155px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  z-index: 21;
+  right: 6px;
+  top: 25px;
+  padding: 2px 4px 4px 4px;
+  border-radius: 3px;
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+.dr-menu {
+  color: var(--tertiary);
+  display: block;
+  padding: 5px 9px 5px 6px;
+  font-size: 15px;
+}
+
+.dr-menu:hover {
+  background: rgba(0, 154, 97, 0.08);
+  color: var(--quaternary);
+  text-decoration: none;
+}
+
+.login-nav-home {
+  margin-top: 15px;
+}
+
 /* dark */
 .dark {
   background: #333;
@@ -1577,40 +1611,6 @@ i.github {
   background-color: #222;
 }
 
-.dropdown-menu {
-  display: none;
-  position: absolute;
-  background-color: var(--secondary);
-  min-width: 155px;
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-  z-index: 21;
-  right: 6px;
-  top: 25px;
-  padding: 2px 4px 4px 4px;
-  border-radius: 3px;
-}
-
-.dropdown-menu.show {
-  display: block;
-}
-
-.dr-menu {
-  color: var(--tertiary);
-  display: block;
-  padding: 5px 9px 5px 6px;
-  font-size: 15px;
-}
-
-.dr-menu:hover {
-  background: rgba(0, 154, 97, 0.08);
-  color: var(--quaternary);
-  text-decoration: none;
-}
-
-.login-nav-home {
-  margin-top: 15px;
-}
-
 @media (max-width: 1050px) {
   aside {
     margin: 0 15px 20px 0;
@@ -1672,6 +1672,10 @@ a:hover .icon::before {
 
 .icon.pin {
   color: #390;
+}
+
+.icon.red.ban-space {
+  font-size: 48px;
 }
 
 .icon.size-actual::before { content: "\e058"; }
