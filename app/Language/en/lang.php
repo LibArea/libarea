@@ -89,4 +89,13 @@ return [
     'info_space_logo'       => 'A lot depends on the logo. It should most accurately display the theme of the space.',
     'info_login'            => 'Authorization gives you the ability to post, reply, and comment.<br><br>You can vote for other publications and have your own profile.',
     'Ban-space-info-posts'  => 'A space ban will result in the unavailability of all posts',
+    
+    'nickname-replay'                       => 'This nickname is already on the site',
+    'e-mail-replay'                         => 'This e-mail is already available on the site',
+    'multiple-accounts'                     => 'Do not register multiple accounts',
+    'password-spaces'                       => 'The password cannot contain spaces',
+    'only-latin-numbers'                    => 'In the nickname, you can only use Latin letters, numbers',
+    'nickname-no-start'                     => 'A nickname can*t start with a number',
+    'nickname-repeats-characters'           => 'The nickname has too many duplicate characters',
+    'The code is incorrect'                 => 'The code is incorrect, or it has already been used',
 ];

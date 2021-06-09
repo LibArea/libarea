@@ -30,7 +30,6 @@ class AuthController extends \MainController
         return view(PR_VIEW_DIR . '/auth/register', ['data' => $data, 'uid' => $uid]);    
     }
     
-    
     // Показ формы регистрации с инвайтом
     public function registerPageInvite()
     {
@@ -41,12 +40,11 @@ class AuthController extends \MainController
         $invate = UserModel::InvitationAvailable($code);
         if(!$invate) 
         {
-            Base::addMsg('Код неверен, или он уже использовался.', 'error');
+            Base::addMsg(lang('The code is incorrect'), 'error');
             redirect('/');   
         }
         
-        // http://test.loc/register/invite/61514d8913558958c659b713
-        
+        // http://***/register/invite/61514d8913558958c659b713
         $uid  = Base::getUid();
         $data = [
             'h1'            => lang('Registration by invite'),
@@ -79,38 +77,29 @@ class AuthController extends \MainController
        
         if (!AuthModel::replayEmail($email))
         {
-            Base::addMsg('Такой e-mail уже есть на сайте', 'error');
+            Base::addMsg(lang('e-mail-replay'), 'error');
             redirect($url);
         }
        
         if(!AuthModel::repeatIpBanRegistration($reg_ip))
         {
-            Base::addMsg('Не регистрируйте множественные аккаунты', 'error');
+            Base::addMsg(lang('multiple-accounts'), 'error');
             redirect($url);
         }
-       exit;
+
         // Упростить и в метод
         if (!preg_match('/^[a-zA-Z0-9]+$/u', $login))
         {
-            Base::addMsg('В логине можно использовать только латиницу, цифры', 'error');
+            Base::addMsg(lang('only-latin-numbers'), 'error');
             redirect($url);
         }
-        
-        if (strlen($login) < 4 || strlen($login) > 10)
-        {
-            Base::addMsg('Логин слишком длинный или короткий', 'error');
-            redirect($url);
-        }
- 
-        if (preg_match('/\s/', $login) || strpos($login,' '))
-        {
-            Base::addMsg('В логине не допускаются пробелы', 'error');
-            redirect($url);
-        }
+
+        Base::Limits($login, lang('Nickname'), '4', '10', $url);
+        Base::Limits($password, lang('Password'), '8', '32', $url);
         
         if (is_numeric(substr($login, 0, 1)))
         {
-            Base::addMsg('Логин не может начинаться с цифры', 'error');
+            Base::addMsg(lang('nickname-no-start'), 'error');
             redirect($url);
         }
         
@@ -118,7 +107,7 @@ class AuthController extends \MainController
         {
             if (self::textCount($login, Base::getStrlen($login, $i, 1)) > 4)
             {
-                Base::addMsg('В логине слишком много повторяющихся символов', 'error');
+                Base::addMsg(lang('nickname-repeats-characters'), 'error');
                 redirect($url);
             }
         }
@@ -126,32 +115,26 @@ class AuthController extends \MainController
         // Запретим 
         $disabled = ['admin', 'support', 'lori', 'loriup', 'dev', 'docs', 'meta', 'email', 'login'];
         if(in_array($login, $disabled)) {
-            Base::addMsg('Такой логин уже есть на сайте', 'error');
+            Base::addMsg(lang('nickname-replay'), 'error');
             redirect($url);
         }
         
         if (!AuthModel::replayLogin($login))
         {
-            Base::addMsg('Такой логин уже есть на сайте', 'error');
+            Base::addMsg(lang('nickname-replay'), 'error');
             redirect($url);
         }
          
         if (substr_count($password, ' ') > 0)
         {
-            Base::addMsg('Пароль не может содержать пробелов', 'error');
+            Base::addMsg(lang('password-spaces'), 'error');
             redirect($url);
         }
 
-        if (Base::getStrlen($password) < 8 || Base::getStrlen($password) > 32)
-        {
-            Base::addMsg('Длина пароля должна быть от 8 до 32 знаков', 'error');
-            redirect($url);
-        }
-     
         if(!$inv_code) {
             if (Config::get(Config::PARAM_CAPTCHA)) {
                 if (!Base::checkCaptchaCode()) {
-                    Base::addMsg('Введеный код не верен', 'error');
+                    Base::addMsg(lang('Code error'), 'error');
                     redirect('/register');
                 }
             }

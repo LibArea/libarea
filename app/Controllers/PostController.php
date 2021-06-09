@@ -246,11 +246,6 @@ class PostController extends \MainController
         
         $space_id   = \Request::getInt('space_id');
         
-        // Ajax выбор тега в зависимости от id пространства
-        // В шаблоне post/add.php
-        // Что будет учитываться в методе createPost() (добавлено)
-        // В методе AddPost() необходимые изменения внесены
-        
         $data = [
             'h1'            => lang('Add post'),
             'canonical'     => '***',
