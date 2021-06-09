@@ -1,7 +1,7 @@
 <meta property="og:title" content="<?= $data['meta_title']; ?>"/>
 <meta property="og:description" content="<?= $data['meta_desc']; ?>"/>
 <meta property="og:site_name" content="<?= Lori\Config::get(Lori\Config::PARAM_HOME_TITLE); ?>"/>
-<meta property="og:url" content="<?= $data['canonical']; ?>"/>
+<meta property="og:url" content="<?=  $data['canonical']; ?>"/>
 
 <?php if ($data['sheet'] == 'article') {  ?>
     <meta property="og:type" content="article"/>

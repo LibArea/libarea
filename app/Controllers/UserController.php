@@ -225,88 +225,68 @@ class UserController extends \MainController
         // Аватар
         $name = $_FILES['images']['name'][0];
         if($name) {
-            $ext    = strtolower(pathinfo($name, PATHINFO_EXTENSION));
-            $valid  =  true;
-            if (!in_array($ext, array('jpg','jpeg','png','gif'))) {
-                $valid = false;
-                Base::addMsg(lang('file-type-not-err'), 'error');
-                redirect($redirect);
-            }
 
-            if ($valid) {
+            // 160px и 18px
+            $path_img       = HLEB_PUBLIC_DIR. '/uploads/users/avatars/';
+            $path_img_small = HLEB_PUBLIC_DIR. '/uploads/users/avatars/small/';
+            $filename =  'a-' . $uid['id'] . '-' . time();
+            $file = $_FILES['images']['tmp_name'][0];
+            
+            $image = new  SimpleImage();
+            
+            $image
+                ->fromFile($file)  // load image.jpg
+                ->autoOrient()     // adjust orientation based on exif data
+                ->resize(160, 160)
+                ->toFile($path_img . $filename .'.jpeg', 'image/jpeg')
+                ->resize(18, 18)
+                ->toFile($path_img_small . $filename .'.jpeg', 'image/jpeg');
+                    
+            $new_ava    = $filename . '.jpeg';
+            $avatar     = UserModel::getAvatar($uid['login']);
      
-                // 160px и 18px
-                $path_img       = HLEB_PUBLIC_DIR. '/uploads/users/avatars/';
-                $path_img_small = HLEB_PUBLIC_DIR. '/uploads/users/avatars/small/';
-                $filename =  'a-' . $uid['id'] . '-' . time();
-                $file = $_FILES['images']['tmp_name'][0];
-                
-                $image = new  SimpleImage();
-                
-                $image
-                    ->fromFile($file)  // load image.jpg
-                    ->autoOrient()     // adjust orientation based on exif data
-                    ->resize(160, 160)
-                    ->toFile($path_img . $filename .'.jpeg', 'image/jpeg')
-                    ->resize(18, 18)
-                    ->toFile($path_img_small . $filename .'.jpeg', 'image/jpeg');
-                        
-                $new_ava    = $filename . '.jpeg';
-                $avatar     = UserModel::getAvatar($uid['login']);
-         
-                // Удалим старую аватарку, кроме дефолтной
-                if($avatar['avatar'] != 'noavatar.png' && $avatar['avatar'] != $new_ava) {
-                    chmod($path_img . $avatar['avatar'], 0777);
-                    chmod($path_img_small . $avatar['avatar'], 0777);
-                    unlink($path_img . $avatar['avatar']);
-                    unlink($path_img_small . $avatar['avatar']);
-                }            
-                
-                // Запишем новую 
-                UserModel::setAvatar($uid['login'], $new_ava);
-                Base::addMsg(lang('Avatar changed'), 'success');
-            }
+            // Удалим старую аватарку, кроме дефолтной
+            if($avatar['avatar'] != 'noavatar.png' && $avatar['avatar'] != $new_ava) {
+                chmod($path_img . $avatar['avatar'], 0777);
+                chmod($path_img_small . $avatar['avatar'], 0777);
+                unlink($path_img . $avatar['avatar']);
+                unlink($path_img_small . $avatar['avatar']);
+            }            
+            
+            // Запишем новую 
+            UserModel::setAvatar($uid['login'], $new_ava);
+            Base::addMsg(lang('Avatar changed'), 'success');
         }
         
         // Обложка
         $covername  = $_FILES['cover']['name'][0];
         if($covername) {
-            $ext    = strtolower(pathinfo($covername, PATHINFO_EXTENSION));
-            $valid  =  true;
-            if (!in_array($ext, array('jpg','jpeg','png','gif'))) {
-                $valid = false;
-                Base::addMsg(lang('file-type-not-err'), 'error');
-                redirect($redirect);
-            }
-
-            if ($valid) {
+                 
+            // 1920px / 350px
+            $path_cover_img       = HLEB_PUBLIC_DIR. '/uploads/users/cover/';
+            $filename =  'cover-' . $uid['id'] . '-' . time();
+            $file_cover = $_FILES['cover']['tmp_name'][0];
+            
+            $image = new  SimpleImage();
+            
+            $image
+                ->fromFile($file_cover)  // load image.jpg
+                ->autoOrient()     // adjust orientation based on exif data
+                ->resize(1920, 350)
+                ->toFile($path_cover_img . $filename .'.jpeg', 'image/jpeg');
+                    
+            $new_cover  = $filename . '.jpeg';
+            $cover      = UserModel::getCover($uid['login']);
      
-                // 1920px / 350px
-                $path_cover_img       = HLEB_PUBLIC_DIR. '/uploads/users/cover/';
-                $filename =  'cover-' . $uid['id'] . '-' . time();
-                $file_cover = $_FILES['cover']['tmp_name'][0];
-                
-                $image = new  SimpleImage();
-                
-                $image
-                    ->fromFile($file_cover)  // load image.jpg
-                    ->autoOrient()     // adjust orientation based on exif data
-                    ->resize(1920, 350)
-                    ->toFile($path_cover_img . $filename .'.jpeg', 'image/jpeg');
-                        
-                $new_cover  = $filename . '.jpeg';
-                $cover      = UserModel::getCover($uid['login']);
-         
-                // Удалим старую аватарку, кроме дефолтной
-                if($cover['cover_art'] != 'cover_art.jpeg' && $cover['cover_art'] != $new_cover) {
-                    chmod($path_cover_img . $cover['cover_art'], 0777);
-                    unlink($path_cover_img . $cover['cover_art']);
-                }            
-                
-                // Запишем обложку 
-                UserModel::setCover($uid['login'], $new_cover);
-                Base::addMsg(lang('Cover changed'), 'success');
-            }
+            // Удалим старую аватарку, кроме дефолтной
+            if($cover['cover_art'] != 'cover_art.jpeg' && $cover['cover_art'] != $new_cover) {
+                chmod($path_cover_img . $cover['cover_art'], 0777);
+                unlink($path_cover_img . $cover['cover_art']);
+            }            
+            
+            // Запишем обложку 
+            UserModel::setCover($uid['login'], $new_cover);
+            Base::addMsg(lang('Cover changed'), 'success');
         }
          
         redirect($redirect);

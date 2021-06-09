@@ -381,44 +381,31 @@ class SpaceController extends \MainController
 
         $name = $_FILES['images']['name'][0];
         if($name) {
-            $ext    = strtolower(pathinfo($name, PATHINFO_EXTENSION));
-            $valid  =  true;
-            if (!in_array($ext, array('jpg','jpeg','png','gif'))) {
-                $valid = false;
-                Base::addMsg('Тип файла не разрешен', 'error');
-                redirect($redirect);
-            }
+            // 110px и 18px
+            $path_img       = HLEB_PUBLIC_DIR. '/uploads/spaces/logos/';
+            $path_img_small = HLEB_PUBLIC_DIR. '/uploads/spaces/logos/small/';
+            $file           = $_FILES['images']['tmp_name'][0];
+            $filename       =  's-' . $space['space_id'] . '-' . time();
 
-            if ($valid) {
-                // 110px и 18px
-                $path_img       = HLEB_PUBLIC_DIR. '/uploads/spaces/logos/';
-                $path_img_small = HLEB_PUBLIC_DIR. '/uploads/spaces/logos/small/';
-                $file           = $_FILES['images']['tmp_name'][0];
-                $filename       =  's-' . $space['space_id'] . '-' . time();
+            $image = new  SimpleImage();
 
-                $image = new  SimpleImage();
- 
-                $image
-                    ->fromFile($file)  // load image.jpg
-                    ->autoOrient()     // adjust orientation based on exif data
-                    ->resize(110, 110)
-                    ->toFile($path_img . $filename .'.jpeg', 'image/jpeg')
-                    ->resize(18, 18)
-                    ->toFile($path_img_small . $filename .'.jpeg', 'image/jpeg');
-                
-                // Удалим, кроме дефолтной
-                if($space['space_img'] != 'space_no.png'){
-                    chmod($path_img . $space['space_img'], 0777);
-                    chmod($path_img_small . $space['space_img'], 0777);
-                    unlink($path_img . $space['space_img']);
-                    unlink($path_img_small . $space['space_img']);
-                }  
-                
-                $space_img    = $filename . '.jpeg';
-                
-            } else {
-                $space_img = empty($space['space_img']) ? 'space_no.png' : $space['space_img'];
-            }
+            $image
+                ->fromFile($file)  // load image.jpg
+                ->autoOrient()     // adjust orientation based on exif data
+                ->resize(110, 110)
+                ->toFile($path_img . $filename .'.jpeg', 'image/jpeg')
+                ->resize(18, 18)
+                ->toFile($path_img_small . $filename .'.jpeg', 'image/jpeg');
+            
+            // Удалим, кроме дефолтной
+            if($space['space_img'] != 'space_no.png'){
+                chmod($path_img . $space['space_img'], 0777);
+                chmod($path_img_small . $space['space_img'], 0777);
+                unlink($path_img . $space['space_img']);
+                unlink($path_img_small . $space['space_img']);
+            }  
+            
+            $space_img    = $filename . '.jpeg';
 
         } else {
             $space_img = empty($space['space_img']) ? 'space_no.png' : $space['space_img'];
@@ -426,46 +413,33 @@ class SpaceController extends \MainController
         
         $cover = $_FILES['cover']['name'][0];
         if($cover) {
-            $ext    = strtolower(pathinfo($cover, PATHINFO_EXTENSION));
-            $valid  =  true;
-            if (!in_array($ext, array('jpg','jpeg','png','gif'))) {
-                $valid = false;
-                Base::addMsg('Тип файла не разрешен', 'error');
-                redirect('/space/'.$space['space_slug'].'/edit');
-            }
+            // 1920px и 350px
+            $path_cover_img       = HLEB_PUBLIC_DIR. '/uploads/spaces/cover/';
+            $path_cover_img_small = HLEB_PUBLIC_DIR. '/uploads/spaces/cover/small/';
+            $file_cover           = $_FILES['cover']['tmp_name'][0];
+            $filename_cover       =  's-' . $space['space_id'] . '-' . time();
 
-            if ($valid) {
-                // 1920px и 350px
-                $path_cover_img       = HLEB_PUBLIC_DIR. '/uploads/spaces/cover/';
-                $path_cover_img_small = HLEB_PUBLIC_DIR. '/uploads/spaces/cover/small/';
-                $file_cover           = $_FILES['cover']['tmp_name'][0];
-                $filename_cover       =  's-' . $space['space_id'] . '-' . time();
+            $image = new  SimpleImage();
 
-                $image = new  SimpleImage();
- 
-                $image
-                    ->fromFile($file_cover)  // load image.jpg
-                    ->autoOrient()     // adjust orientation based on exif data
-                    ->resize(1920, 350)
-                    ->toFile($path_cover_img . $filename_cover .'.webp', 'image/webp')
-                    ->resize(180, 70)
-                    ->toFile($path_cover_img_small . $filename_cover .'.webp', 'image/webp');
-                    
-                    $cover_art = $filename_cover . '.webp';
+            $image
+                ->fromFile($file_cover)  // load image.jpg
+                ->autoOrient()     // adjust orientation based on exif data
+                ->resize(1920, 350)
+                ->toFile($path_cover_img . $filename_cover .'.webp', 'image/webp')
+                ->resize(180, 70)
+                ->toFile($path_cover_img_small . $filename_cover .'.webp', 'image/webp');
                 
-                // Удалим, кроме дефолтной
-                if($space['space_cover_art'] != 'space_cover_no.jpeg' && $space['space_cover_art'] != $cover_art) {
-                    chmod($path_cover_img . $space['space_cover_art'], 0777);
-                    chmod($path_cover_img_small . $space['space_cover_art'], 0777);
-                    unlink($path_cover_img . $space['space_cover_art']);
-                    unlink($path_cover_img_small . $space['space_cover_art']);
-                }  
-                
-                $space_cover_art    = $filename_cover . '.webp';
-                
-            } else {
-                $space_cover_art = empty($space['space_img']) ? 'space_cover_no.jpeg' : $space['space_cover_art'];
-            }
+                $cover_art = $filename_cover . '.webp';
+            
+            // Удалим, кроме дефолтной
+            if($space['space_cover_art'] != 'space_cover_no.jpeg' && $space['space_cover_art'] != $cover_art) {
+                chmod($path_cover_img . $space['space_cover_art'], 0777);
+                chmod($path_cover_img_small . $space['space_cover_art'], 0777);
+                unlink($path_cover_img . $space['space_cover_art']);
+                unlink($path_cover_img_small . $space['space_cover_art']);
+            }  
+            
+            $space_cover_art = $filename_cover . '.webp';
 
         } else {
             $space_cover_art = empty($space['space_img']) ? 'space_cover_no.jpeg' : $space['space_cover_art'];

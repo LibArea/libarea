@@ -44,7 +44,6 @@ return [
     'pass-gap-err'          => 'The password cannot contain spaces',
     'user-already'          => 'The user is already on the site',
     'invate-to-replay'      => 'You have already sent an invitation to this user',
-    'file-type-not-err'     => 'File type not allowed',
     'text-string-length'    => 'Length  %1$s should be from  %2$s - %3$s characters',
     'url-already-exists'    => 'This space URL already exists', 
     'url-latin'             => 'You can use only Latin characters in the URL, numbers',

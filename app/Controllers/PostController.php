@@ -321,45 +321,33 @@ class PostController extends \MainController
             $parse              = parse_url($post_url);
             $post_url_domain    = $parse['host']; 
         }  else {
-            
             // images
             $name     = $_FILES['images']['name'][0];
             if($name) {
-                $ext      = strtolower(pathinfo($name, PATHINFO_EXTENSION));
-                $width_h  = getimagesize($_FILES['images']['tmp_name'][0]);
-
-                $valid =  true;
-                if (!in_array($ext, array('jpg','jpeg','png','gif'))) {
-                    $valid = false;
-                    Base::addMsg(lang('file-type-not-err'), 'error');
-                    redirect($redirect);
-                }
-                
                 // Проверка ширину
+                $width_h  = getimagesize($_FILES['images']['tmp_name'][0]);
                 if ($width_h['0'] < 500) {
                     $valid = false;
                     Base::addMsg('Ширина меньше 600 пикселей', 'error');
                     redirect($redirect);
                 }
 
-                if ($valid) {
-                    $image = new  SimpleImage();
-                    $path = HLEB_PUBLIC_DIR. '/uploads/posts/';
-                    $year = date('Y') . '/';
-                    $file = $_FILES['images']['tmp_name'][0];
-                    $filename = 'c-' . time();
-                   
-                    if(!is_dir($path . $year)) { @mkdir($path . $year); }             
-                    
-                    // https://github.com/claviska/SimpleImage
-                    $image
-                        ->fromFile($file)  // load image.jpg
-                        ->autoOrient()     // adjust orientation based on exif data
-                        ->resize(820, null)
-                        ->toFile($path . $year . $filename .'.webp', 'image/webp');
-                  
-                    $post_img = $year . $filename . '.webp';
-                }
+                $image = new  SimpleImage();
+                $path = HLEB_PUBLIC_DIR. '/uploads/posts/';
+                $year = date('Y') . '/';
+                $file = $_FILES['images']['tmp_name'][0];
+                $filename = 'c-' . time();
+               
+                if(!is_dir($path . $year)) { @mkdir($path . $year); }             
+                
+                // https://github.com/claviska/SimpleImage
+                $image
+                    ->fromFile($file)  // load image.jpg
+                    ->autoOrient()     // adjust orientation based on exif data
+                    ->resize(820, null)
+                    ->toFile($path . $year . $filename .'.webp', 'image/webp');
+              
+                $post_img = $year . $filename . '.webp';
             }
         }
 
@@ -644,53 +632,39 @@ class PostController extends \MainController
         // images
         $name = $_FILES['images']['name'][0];
         if($name) { 
-            $ext      = strtolower(pathinfo($name, PATHINFO_EXTENSION));
-            $width_h  = getimagesize($_FILES['images']['tmp_name'][0]);
-
-            $valid =  true;
-            if (!in_array($ext, array('jpg','jpeg','png','gif'))) {
-                $valid = false;
-                Base::addMsg(lang('file-type-not-err'), 'error');
-                redirect($redirect);
-            }
-            
             // Проверка ширину
+            $width_h  = getimagesize($_FILES['images']['tmp_name'][0]);
             if ($width_h['0'] < 500) {
                 $valid = false;
                 Base::addMsg('Ширина меньше 600 пикселей', 'error');
                 redirect($redirect);
             }
 
-            if ($valid) {
+            $image = new  SimpleImage();
+            $path = HLEB_PUBLIC_DIR. '/uploads/posts/';
+            $year = date('Y') . '/';
+            $file = $_FILES['images']['tmp_name'][0];
+            $filename = 'c-' . time();
+           
+            if(!is_dir($path . $year)) { @mkdir($path . $year); }             
             
-                $image = new  SimpleImage();
-                $path = HLEB_PUBLIC_DIR. '/uploads/posts/';
-                $year = date('Y') . '/';
-                $file = $_FILES['images']['tmp_name'][0];
-                $filename = 'c-' . time();
-               
-                if(!is_dir($path . $year)) { @mkdir($path . $year); }             
-                
-                // https://github.com/claviska/SimpleImage
-                $image
-                    ->fromFile($file)  // load image.jpg
-                    ->autoOrient()     // adjust orientation based on exif data
-                    ->resize(820, null)
-                    ->toFile($path . $year . $filename .'.webp', 'image/webp');
-              
-                $post_img = $year . $filename . '.webp';
-                
-                // Удалим если есть старая
-                if($post['post_content_img'] != $post_img){
-                    chmod($path . $post['post_content_img'], 0777);
-                    unlink($path . $post['post_content_img']);
-                } 
-                
+            // https://github.com/claviska/SimpleImage
+            $image
+                ->fromFile($file)  // load image.jpg
+                ->autoOrient()     // adjust orientation based on exif data
+                ->resize(820, null)
+                ->toFile($path . $year . $filename .'.webp', 'image/webp');
+          
+            $post_img = $year . $filename . '.webp';
+            
+            // Удалим если есть старая
+            if($post['post_content_img'] != $post_img){
+                chmod($path . $post['post_content_img'], 0777);
+                unlink($path . $post['post_content_img']);
             } 
- 
         }
         
-        $post_img           = empty($post_img) ? $post['post_content_img'] : $post_img;
+        $post_img = empty($post_img) ? $post['post_content_img'] : $post_img;
 
         $data = [
             'post_id'               => $post_id,
