@@ -67,13 +67,13 @@
                                 <i class="icon lock"></i>
                             <?php } ?>
                             <?php if($post['post_top'] == 1) { ?> 
-                                <i class="icon pin"></i>
+                                <i class="icon pin red"></i>
                             <?php } ?>
                             <?php if($post['post_lo'] > 0) { ?> 
                                 <i class="icon trophy lo"></i>
                             <?php } ?>
                             <?php if($post['post_type'] == 1) { ?> 
-                                <i class="icon question qa"></i>
+                                <i class="icon question green"></i>
                             <?php } ?>
                             <?php if($post['post_translation'] == 1) { ?> 
                                 <span class="translation lowercase"><?= lang('Translation'); ?></span>

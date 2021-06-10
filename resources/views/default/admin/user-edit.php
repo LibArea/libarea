@@ -14,9 +14,44 @@
             <br>
             <img width="325" class="right" src="<?= user_cover_url($user['cover_art']); ?>">
             <img width="65" src="<?= user_avatar_url($user['avatar'], 'max'); ?>"> 
-            
+
             <div class="boxline max-width">
                 <label for="post_title">Id / <?= $user['id']; ?></label>
+                <?php if($user['trust_level'] != 5) { ?>                 
+                    <?php if($user['isBan']) { ?>
+                        <span class="user-ban" data-id="<?= $user['id']; ?>">
+                            <span class="red"><?= lang('unban'); ?></span>
+                        </span>
+                    <?php } else { ?>
+                        <span class="user-ban" data-id="<?= $user['id']; ?>">
+                            <span class="green">+ <?= lang('ban it'); ?></span>
+                        </span>
+                    <?php } ?>
+                <?php } else { ?> 
+                    ---
+                <?php } ?>   
+            </div>
+            <div class="boxline max-width">
+                <label for="post_title"><?= lang('Badge'); ?></label>
+                <a class="lowercase" href="/admin/badge/user/add/<?= $user['id']; ?>">
+                    <?= lang('Reward the user'); ?>
+                </a>
+            </div>
+            <div class="boxline max-width">
+                <label for="post_title"><?= lang('Badges'); ?></label>
+                <?php if ($user['badges']) { ?>
+                    <?php foreach ($user['badges'] as $badge) { ?>
+                        <?= $badge['badge_icon']; ?>
+                    <?php } ?>
+                <?php } else { ?>    
+                    ---
+                <?php } ?>
+            </div>
+            <div class="boxline max-width">
+                <label for="post_title"><?= lang('Profile'); ?></label>
+                <a class="lowercase" target="_blank" rel="noopener noreferrer" href="/u/<?= $user['login']; ?>">
+                    <?= lang('View'); ?>
+                </a>
             </div>
             <div class="boxline max-width">
                 <label for="post_title"><?= lang('Views'); ?></label>
@@ -24,7 +59,11 @@
             </div>
             <div class="boxline max-width">
                 <label for="post_title"><?= lang('Sign up'); ?></label>
-                <?= $user['created_at']; ?>
+                <?= $user['created_at']; ?> | 
+                <?= $user['reg_ip']; ?>  
+                <?php if($user['replayIp'] > 1) { ?>
+                <sup class="red">(<?= $user['replayIp']; ?>)</sup>
+                <?php } ?> <br>
             </div>
             <div class="boxline max-width">
                 <label for="post_title">E-mail</label>
@@ -33,11 +72,11 @@
             <div class="boxline max-width">
                 <label for="post_title">TL</label>
                 <select name="trust_level">
-                    <option <?php if($user['trust_level'] == 0) { ?> selected<?php } ?> value="0">0</option>
-                    <option <?php if($user['trust_level'] == 1) { ?> selected<?php } ?> value="1">1</option>
-                    <option <?php if($user['trust_level'] == 2) { ?> selected<?php } ?> value="2">2</option>
-                    <option <?php if($user['trust_level'] == 3) { ?> selected<?php } ?> value="3">3</option>
-                    <option <?php if($user['trust_level'] == 4) { ?> selected<?php } ?> value="4">4</option>
+                    <?php for($i=0; $i<=$user['trust_level']; $i++) {  ?>
+                        <option <?php if($user['trust_level'] == $i) { ?>selected<?php } ?> value="<?= $i; ?>">
+                            <?= $i; ?>
+                        </option>
+                    <?php } ?>
                 </select>
             </div>
             <div class="boxline max-width">
@@ -52,9 +91,8 @@
                 <label for="post_title"><?= lang('About me'); ?></label>
                 <textarea class="add" name="about"><?= $user['about']; ?></textarea>
             </div>
-            
-            
-           <h3><?= lang('Contacts'); ?></h3>
+
+            <h3><?= lang('Contacts'); ?></h3>
            
             <div class="boxline">
                 <label for="name"><?= lang('URL'); ?></label>

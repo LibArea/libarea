@@ -19,16 +19,17 @@
             <div class="boxline max-width">
                 <label for="post_title">Icon</label>            
                 <textarea class="add" name="badge_icon" required><?= $badge['badge_icon']; ?></textarea>
+                <div class="box_h"><?= lang('For example'); ?>: &lt;i title="<?= lang('Title'); ?>" class="icon badge"&gt;&lt;/i&gt;</div>
             </div>
             <div class="boxline">
                 <label for="post_title">Tl</label>
                 <input type="text" name="badge_tl" value="<?= $badge['badge_tl']; ?>" required>
-                <div class="box_h">Для TL (0 по умолчанию)</div>
+                <div class="box_h"><?= lang('For'); ?> TL (0 <?= lang('by default'); ?>)</div>
             </div>
             <div class="boxline">
                 <label for="post_title">Score</label>
                 <input type="text" name="badge_score" value="<?= $badge['badge_score']; ?>" required>
-                <div class="box_h">Вес награды</div>
+                <div class="box_h"><?= lang('Reward Weight'); ?></div>
             </div>
             <div class="boxline max-width">
                 <label for="post_title"><?= lang('Description'); ?></label>

@@ -202,10 +202,26 @@
         <h3 class="badge"><?= lang('Badges'); ?></h3>
         <div class="profile-badge">
             <?php if($user['id'] < 50) { ?>
-               <i title="<?= lang('Joined in the early days'); ?>" class="icon badge"></i>
+                <i title="<?= lang('Joined in the early days'); ?>" class="icon badge"></i>
+            <?php } ?>
+            <?php foreach ($data['badges'] as $badge) { ?>
+                <?= $badge['badge_icon']; ?>
             <?php } ?>
         </div>
         <br>
+        <?php if($uid['trust_level'] = 5) { ?>
+        <h3 class="badge"><?= lang('Admin'); ?></h3>
+        <div class="menu-info">
+            <a href="/admin/user/<?= $user['id']; ?>/edit">
+                <i class="icon settings red"></i>
+                <?= lang('Edit'); ?>
+            </a>
+            <a href="/admin/badge/user/add/<?= $user['id']; ?>">
+                <i class="icon badge"></i>
+                <?= lang('Reward the user'); ?>
+            </a>
+        </div>
+        <?php } ?>
     </aside>
 </div>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

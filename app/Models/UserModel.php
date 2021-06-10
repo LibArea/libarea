@@ -585,6 +585,16 @@ class UserModel extends \MainModel
         return true;
     }
     
+    // Все награды участника
+    public static function getBadgeUserAll($user_id)
+    {
+        $query  = XD::select('*')->from(['badge_user']);
+        $result = $query->leftJoin(['badge'])->on(['badge_id'], '=', ['bu_badge_id'])
+                  ->where(['bu_user_id'], '=', $user_id)->getSelect();
+        
+        return $result;
+    }
+    
     // Настройка оповещений
     public static function getNotificationSettingByUid($uid)
     {

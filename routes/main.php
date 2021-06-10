@@ -20,14 +20,17 @@ Route::before('Authorization@noAuth')->getGroup();
     Route::type('post')->protect()->get('/admin/addspaceadmin')->controller('AdminController@spaceAdd');
     Route::get('/admin/comments')->controller('AdminController@comments'); 
     Route::get('/admin/invitations')->controller('AdminController@invitations');
+    
     Route::get('/admin/badges')->controller('AdminController@badges');
     Route::get('/admin/badge/add')->controller('AdminController@addBadgePage');
+    Route::type('post')->protect()->get('/admin/badge/user/addform')->controller('AdminController@addBadgeUser');
+    Route::get('/admin/badge/user/add')->controller('AdminController@addBadgeUserPage');
+    Route::get('/admin/badge/user/add/{id}')->controller('AdminController@addBadgeUserPage')->where(['id' => '[0-9]+']);
     Route::get('/admin/badge/{id}/edit')->controller('AdminController@badgeEditPage')->where(['id' => '[0-9]+']);
     Route::type('post')->protect()->get('/admin/badge/edit/{id}')->controller('AdminController@badgeEdit')->where(['id' => '[0-9]+']);
     Route::type('post')->protect()->get('/admin/badge/add')->controller('AdminController@badgeAdd');
     
     Route::get('/post/img/{id}/remove')->controller('PostController@postImgRemove')->where(['id' => '[0-9]+']);
-    
     Route::type('post')->get('/admin/comment/recover')->controller('AdminController@recoverComment');
     Route::type('post')->get('/admin/space/ban')->controller('AdminController@delSpace');
     Route::type('post')->get('/admin/ban')->controller('AdminController@banUser');

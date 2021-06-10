@@ -73,6 +73,7 @@ class UserController extends \MainController
             'answ_num_user' => UserModel::userAnswersNum($user['id']),
             'comm_num_user' => UserModel::userCommentsNum($user['id']), 
             'space_user'    => SpaceModel::getSpaceUserId($user['id']),
+            'badges'        => UserModel::getBadgeUserAll($user['id']),
             'canonical'     => Config::get(Config::PARAM_URL) . '/u/' . $user['login'],
             'sheet'         => 'profile',
             'img'           => Config::get(Config::PARAM_URL) . '/uploads/users/avatars/' . $user['avatar'],

@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\SpaceModel;
+use App\Models\UserModel;
 use App\Models\AdminModel;
 use Lori\Base;
 
@@ -51,7 +52,6 @@ class AdminController extends \MainController
     // Повторы IP
     public function logsIp() 
     {
-
         $uid        = self::isAdmin();
         $user_ip    = \Request::get('ip');
         $user_all   = AdminModel::getUserLogsId($user_ip);
@@ -70,7 +70,6 @@ class AdminController extends \MainController
 
         return view(PR_VIEW_DIR . '/admin/logip', ['data' => $data, 'uid' => $uid, 'alluser' => $results]); 
     }
-    
     
     // Бан участнику
     public function banUser() 
@@ -276,6 +275,41 @@ class AdminController extends \MainController
         return view(PR_VIEW_DIR . '/admin/badge/badge-add', ['data' => $data, 'uid' => $uid]);
     }
     
+    // Форма награждения участинка
+    public function addBadgeUserPage()
+    {
+        $uid = self::isAdmin();
+        
+        $user_id    = \Request::getInt('id');
+        
+        if($user_id > 0) {
+            $user   = AdminModel::getUserId($user_id);
+        } else {
+            $user   = null;
+        }
+        
+        $badges = AdminModel::getBadgesAll();
+        
+        $data = [
+            'h1'            => lang('Reward the user'),
+            'meta_title'    => lang('Reward the user'),
+        ]; 
+        
+        return view(PR_VIEW_DIR . '/admin/badge/badge-user-add', ['data' => $data, 'uid' => $uid, 'user' => $user, 'badges' => $badges]);    
+    }
+    
+    // Награждение
+    public function addBadgeUser()
+    {
+        $user_id    = \Request::getPostInt('user_id');
+        $badge_id   = \Request::getPostInt('badge_id');
+
+        AdminModel::badgeUserAdd($user_id, $badge_id);
+
+        Base::addMsg(lang('Reward added'), 'success');
+        redirect('/admin/user/' . $user_id . '/edit');
+    }
+
     // Форма изменения награды
     public function badgeEditPage()
     {
@@ -363,6 +397,11 @@ class AdminController extends \MainController
            redirect($redirect); 
         }
         
+        $user['isBan']      = AdminModel::isBan($user_id);
+        $user['replayIp']   = AdminModel::replayIp($user_id);
+        $user['logs']       = AdminModel::UsersLogAll($user_id);
+        $user['badges']     = UserModel::getBadgeUserAll($user_id);
+         
         $data = [
             'h1'            => lang('Edit user'),
             'meta_title'    => lang('Edit user'),

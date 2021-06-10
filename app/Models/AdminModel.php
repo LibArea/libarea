@@ -76,7 +76,6 @@ class AdminModel extends \MainModel
         return true;   
     }
     
-    
     public static function setBanUser($uid)
     {
         $res = XD::select('*')->from(['users_banlist'])
@@ -199,6 +198,20 @@ class AdminModel extends \MainModel
             $data['badge_title'], 
             $data['badge_description'],
             $data['badge_icon']]), ')' )->run();
+
+        return true;
+    }
+    
+    // Наградить участника
+    public static function badgeUserAdd($user_id, $badge_id)
+    {
+        XD::insertInto(['badge_user'], '(',
+            ['bu_user_id'], ',',
+            ['bu_badge_id'], ')')->values( '(', 
+        
+        XD::setList([
+            $user_id,
+            $badge_id]), ')' )->run();
 
         return true;
     }

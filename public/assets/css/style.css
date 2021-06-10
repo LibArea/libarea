@@ -649,10 +649,6 @@ aside a.my.active {
   color: #e83e8c;
 }
 
-.alert-success {
-  color: #390;
-}
-
 .no-content,
 .no-answer {
   padding: 10px 15px;
@@ -915,7 +911,6 @@ img.img-post {
   color: var(--tertiary);
 }
 
-
 .bar-space-telo img {
   margin-right: 6px;
   width: 21px;
@@ -1006,6 +1001,12 @@ ol.answer-telo {
 
 .authorpost {
   color: #f8a853;
+}
+
+.comments_subtree,
+.answers_subtree {
+  position: relative;
+  list-style: none;
 }
 
 .comm_subtree:target,
@@ -1132,12 +1133,6 @@ ol.comment-telo {
   font-size: 9.5pt;
 }
 
-.comments_subtree,
-.answers_subtree {
-  position: relative;
-  list-style: none;
-}
-
 .comments_subtree.dell,
 .answers_subtree.dell,
 .comm_subtree.dell {
@@ -1199,7 +1194,8 @@ ol.comment-telo {
   color: var(--quaternary);
 }
 
-.qa {
+.green,
+.alert-success {
   color: #390;
 }
 
@@ -1668,10 +1664,6 @@ i.github {
 
 a:hover .icon::before {
   text-decoration: none;
-}
-
-.icon.pin {
-  color: #390;
 }
 
 .icon.red.ban-space {
