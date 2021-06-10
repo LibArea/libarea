@@ -44,8 +44,14 @@ class AdminController extends \MainController
             'pNum'          => $page,
             'users'         => $result,
             'meta_title'    => lang('Admin'),
+            'sheet'         => 'admin',
+            'canonical'     => '***',
+            'meta_desc'     => '***',
         ]; 
 
+        Request::getResources()->addBottomStyles('/assets/css/admin.css');
+        Request::getResources()->addBottomScript('/assets/js/admin.js'); 
+        
         return view(PR_VIEW_DIR . '/admin/index', ['data' => $data, 'uid' => $uid, 'alluser' => $result]);
 	}
     
@@ -66,7 +72,13 @@ class AdminController extends \MainController
         $data = [
             'h1'            => lang('Search'),
             'meta_title'    => lang('Search'),
+            'sheet'         => 'admin',
+            'canonical'     => '***',
+            'meta_desc'     => '***',
         ]; 
+
+        Request::getResources()->addBottomStyles('/assets/css/admin.css');
+        Request::getResources()->addBottomScript('/assets/js/admin.js'); 
 
         return view(PR_VIEW_DIR . '/admin/logip', ['data' => $data, 'uid' => $uid, 'alluser' => $results]); 
     }
@@ -98,7 +110,13 @@ class AdminController extends \MainController
         $data = [
             'h1'            => lang('Deleted comments'),
             'meta_title'    => lang('Deleted comments'),
+            'sheet'         => 'admin',
+            'canonical'     => '***',
+            'meta_desc'     => '***',
         ]; 
+
+        Request::getResources()->addBottomStyles('/assets/css/admin.css');
+        Request::getResources()->addBottomScript('/assets/js/admin.js'); 
  
         return view(PR_VIEW_DIR . '/admin/comm_del', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
     }
@@ -130,7 +148,13 @@ class AdminController extends \MainController
         $data = [
             'h1'            => lang('Invites'),
             'meta_title'    => lang('Invites'),
+            'sheet'         => 'admin',
+            'canonical'     => '***',
+            'meta_desc'     => '***',
         ]; 
+
+        Request::getResources()->addBottomStyles('/assets/css/admin.css');
+        Request::getResources()->addBottomScript('/assets/js/admin.js'); 
  
         return view(PR_VIEW_DIR . '/admin/invitations', ['data' => $data, 'uid' => $uid, 'invitations' => $result]);
     }
@@ -158,7 +182,13 @@ class AdminController extends \MainController
         $data = [
             'h1'            => lang('Spaces'),
             'meta_title'    => lang('Spaces'),
+            'sheet'         => 'admin',
+            'canonical'     => '***',
+            'meta_desc'     => '***',
         ]; 
+
+        Request::getResources()->addBottomStyles('/assets/css/admin.css');
+        Request::getResources()->addBottomScript('/assets/js/admin.js'); 
  
         return view(PR_VIEW_DIR . '/admin/space/spaces', ['data' => $data, 'uid' => $uid, 'spaces' => $spaces]);
     }
@@ -171,7 +201,13 @@ class AdminController extends \MainController
         $data = [
             'h1'            => lang('Add Space'),
             'meta_title'    => lang('Add Space'),
+            'sheet'         => 'admin',
+            'canonical'     => '***',
+            'meta_desc'     => '***',
         ]; 
+
+        Request::getResources()->addBottomStyles('/assets/css/admin.css');
+        Request::getResources()->addBottomScript('/assets/js/admin.js'); 
         
         return view(PR_VIEW_DIR . '/admin/space/add-space', ['data' => $data, 'uid' => $uid]);
     }
@@ -257,7 +293,13 @@ class AdminController extends \MainController
         $data = [
             'h1'            => lang('Badges'),
             'meta_title'    => lang('Badges'),
+            'sheet'         => 'admin',
+            'canonical'     => '***',
+            'meta_desc'     => '***',
         ]; 
+
+        Request::getResources()->addBottomStyles('/assets/css/admin.css');
+        Request::getResources()->addBottomScript('/assets/js/admin.js'); 
         
         return view(PR_VIEW_DIR . '/admin/badge/badges', ['data' => $data, 'uid' => $uid, 'badges' => $badges]);
     }
@@ -270,7 +312,13 @@ class AdminController extends \MainController
         $data = [
             'h1'            => lang('Add badge'),
             'meta_title'    => lang('Add badge'),
+            'sheet'         => 'admin',
+            'canonical'     => '***',
+            'meta_desc'     => '***',
         ]; 
+
+        Request::getResources()->addBottomStyles('/assets/css/admin.css');
+        Request::getResources()->addBottomScript('/assets/js/admin.js'); 
         
         return view(PR_VIEW_DIR . '/admin/badge/badge-add', ['data' => $data, 'uid' => $uid]);
     }
@@ -293,7 +341,13 @@ class AdminController extends \MainController
         $data = [
             'h1'            => lang('Reward the user'),
             'meta_title'    => lang('Reward the user'),
+            'sheet'         => 'admin',
+            'canonical'     => '***',
+            'meta_desc'     => '***',
         ]; 
+
+        Request::getResources()->addBottomStyles('/assets/css/admin.css');
+        Request::getResources()->addBottomScript('/assets/js/admin.js'); 
         
         return view(PR_VIEW_DIR . '/admin/badge/badge-user-add', ['data' => $data, 'uid' => $uid, 'user' => $user, 'badges' => $badges]);    
     }
@@ -324,7 +378,13 @@ class AdminController extends \MainController
         $data = [
             'h1'            => lang('Edit badge'),
             'meta_title'    => lang('Edit badge'),
+            'sheet'         => 'admin',
+            'canonical'     => '***',
+            'meta_desc'     => '***',        
         ]; 
+
+        Request::getResources()->addBottomStyles('/assets/css/admin.css');
+        Request::getResources()->addBottomScript('/assets/js/admin.js'); 
         
         return view(PR_VIEW_DIR . '/admin/badge/badge-edit', ['data' => $data, 'uid' => $uid, 'badge' => $badge]);
     }
@@ -405,7 +465,13 @@ class AdminController extends \MainController
         $data = [
             'h1'            => lang('Edit user'),
             'meta_title'    => lang('Edit user'),
+            'sheet'         => 'admin',
+            'canonical'     => '***',
+            'meta_desc'     => '***',
         ]; 
+
+        Request::getResources()->addBottomStyles('/assets/css/admin.css');
+        Request::getResources()->addBottomScript('/assets/js/admin.js'); 
         
         return view(PR_VIEW_DIR . '/admin/user-edit', ['data' => $data, 'uid' => $uid, 'user' => $user]);
     }
