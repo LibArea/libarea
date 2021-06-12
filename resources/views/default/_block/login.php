@@ -3,7 +3,7 @@
         <?php csrf_field(); ?>           
         <div class="login-nav">
             <label for="email">Email</label>
-            <input type="text" placeholder="<?= lang('Enter'); ?>  e-mail" name="email" id="email">
+            <input type="email" placeholder="<?= lang('Enter'); ?>  e-mail" name="email" id="email">
         </div>
         <div class="login-nav">
             <label for="password"><?= lang('Password'); ?></label>

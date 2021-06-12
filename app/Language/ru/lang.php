@@ -217,7 +217,7 @@ return [
     'Raise'                 => 'Поднять',
 
     /* Настройки */
-    'Setting profile'       => 'Настрока профиля',    
+    'Setting profile'       => 'Настройка профиля',    
     'Setting profile page'  => 'Страница настройки профиля',
     'Change avatar'         => 'Изменение аватарки', 
     'Avatar'                => 'Аватарка',

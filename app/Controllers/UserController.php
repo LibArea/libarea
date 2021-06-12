@@ -227,10 +227,7 @@ class UserController extends \MainController
         // Аватар
         $name = $_FILES['images']['name'][0];
         
-        print_r($_FILES);
-        exit;
         if($name) {
-
             // 160px и 18px
             $path_img       = HLEB_PUBLIC_DIR. '/uploads/users/avatars/';
             $path_img_small = HLEB_PUBLIC_DIR. '/uploads/users/avatars/small/';

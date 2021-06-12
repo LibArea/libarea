@@ -66,8 +66,8 @@ a.active {
 }
 
 .trust-level {
-  background: #f5efe3;
-  color: #47340c;
+  background-color: rgba(255,148,76,0.2);
+  color: rgba(33,32,31,.5);
 }
 
 tt {
@@ -222,8 +222,8 @@ a.link:hover {
 
 .banner {
   padding: 11px 15px 15px 15px;
-  background: #f0f0df;
-  color: var(--tertiary);
+  background: #f3f1ed;
+  color: rgba(33,32,31,.5);
   font-size: 15px;
   border-radius: 2px;
 }
@@ -1605,6 +1605,12 @@ i.github {
 .dark .dropdown-menu,
 .dark footer {
   background-color: #222;
+}
+
+.to-user {
+  border-radius: 3px;
+  background-color: #e1ecf4;
+  padding: 1px 4px;
 }
 
 @media (max-width: 1050px) {
