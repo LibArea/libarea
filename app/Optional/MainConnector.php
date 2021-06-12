@@ -30,7 +30,10 @@ class MainConnector implements Connector
             "Lori\Config"                   => "app/Config/Config.php",
 
             "UrlRecord"                     => "app/ThirdParty/UrlRecord/UrlRecord.php",
-            "SourceParser"                  => "app/ThirdParty/SourceParser/SourceParser.php",
+            
+            "Parsedown"                     => "app/ThirdParty/Parsedown/Parsedown.php",
+            "MyParsedown"                   => "app/ThirdParty/Parsedown/MyParsedown.php",
+             
             "SimpleImage"                   => "app/ThirdParty/SimpleImage.php",
             "URLScraper"                    => "app/ThirdParty/URLScraper.php",
             // https://github.com/JacksonJeans/php-mail

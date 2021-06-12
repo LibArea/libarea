@@ -25,8 +25,8 @@
         italicexample: "текст",
 
         link: "Ссылка <a> Ctrl+L",
-        linkdescription: "enter link description here",
-        linkdialog: "<p><b>Insert Hyperlink</b></p><p>http://example.com/ \"optional title\"</p>",
+        linkdescription: "Название ссылки",
+        linkdialog: "<p><b>Вставить ссылку </b></p><p>http://example.com/ \"название\"</p>",
 
         quote: "Цитата <blockquote> Ctrl+Q",
         quoteexample: "Цитата",
@@ -38,9 +38,9 @@
         imagedescription: "enter image description here",
         imagedialog: "<p><b>Добавьте фото</b></p>",
 
-        olist: "Numbered List <ol> Ctrl+O",
-        ulist: "Bulleted List <ul> Ctrl+U",
-        litem: "List item",
+        olist: "Нумерованный <ol> Ctrl+O",
+        ulist: "Маркированный <ul> Ctrl+U",
+        litem: "Пункт списка",
 
         heading: "Заголовок <h1>/<h2> Ctrl+H",
         headingexample: "Заголовок",

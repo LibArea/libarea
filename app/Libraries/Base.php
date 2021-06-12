@@ -7,7 +7,7 @@ use Hleb\Constructor\Handlers\Request;
 use App\Models\UserModel;
 use JacksonJeans\Mail;
 use JacksonJeans\MailException;
-use SourceParser;
+use MyParsedown;
 use Lori\Config;
 
 class Base
@@ -98,18 +98,26 @@ class Base
 	}
     
     // Markdown
-    public static function Markdown($content)
+    public static function Markdown($content, $type)
     {
-        $SourceParser = new SourceParser();
-        return  $SourceParser->text($content); 
+        $Parsedown = new MyParsedown();
+        $Parsedown->setSafeMode(true); //безопасность
+ 
+        if($type == 'line'){
+            return  $Parsedown->line($content); 
+        }
+        
+        return  $Parsedown->text($content); 
     }
     
     // Работа с контентом
     public static function text($content, $type)
     {
         if($type == 'md') {
-            $md     = self::Markdown($content);
-            $text   = self::parseUser($md);            
+            $md     = self::Markdown($content, 'text');
+            $text   = self::parseUser($md);
+        } elseif ($type == 'line') {
+            $text   = self::Markdown($content, 'line');
         } else {
             $text   = self::parseUser($content);
         }    
@@ -224,14 +232,14 @@ class Base
     }
     
     // Обрезка текста по словам
-    public static function  cutWords($content, $maxlen) {  
-        $text   = strip_tags($content);
-        $len    = (mb_strlen($text) > $maxlen)? mb_strripos(mb_substr($text, 0, $maxlen), ' ') : $maxlen;
-        $cutStr = mb_substr($text, 0, $len);
-        $content = (mb_strlen($text) > $maxlen)? $cutStr. '' : $cutStr;
-        
+    public static function  cutWords($content, $maxlen)
+    {  
+        $text       = strip_tags($content);
+        $len        = (mb_strlen($text) > $maxlen)? mb_strripos(mb_substr($text, 0, $maxlen), ' ') : $maxlen;
+        $cutStr     = mb_substr($text, 0, $len);
+        $content    = (mb_strlen($text) > $maxlen)? $cutStr. '' : $cutStr;
         $code_match = array('>', '*', '!', '[ADD:');
-        $content = str_replace($code_match, '', $content);
+        $content    = str_replace($code_match, '', $content);
         
         return $content;
     } 
