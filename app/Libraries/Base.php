@@ -38,6 +38,7 @@ class Base
             Request::getResources()->addBottomScript('/assets/js/app.js');
             
         } else {
+
             UserModel::checkCookie();
             $uid['id']          = 0;
             $uid['trust_level'] = null;
@@ -199,7 +200,6 @@ class Base
 		return $content;
 	}
     
-    
     // Пределы
     public static function Limits($name, $content, $min, $max, $redirect)
     {
@@ -222,7 +222,6 @@ class Base
         }
         return true;
     }
-    
     
     // Обрезка текста по словам
     public static function  cutWords($content, $maxlen) {  

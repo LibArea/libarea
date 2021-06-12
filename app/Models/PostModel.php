@@ -32,7 +32,7 @@ class PostModel extends \MainModel
             }
         }        
 
-        $offset = ($page-1) * 15; 
+        $offset = ($page-1) * 25; 
    
         // Условия: удаленный пост, запрещенный к показу в ленте
         // И ограниченный по TL
@@ -65,7 +65,7 @@ class PostModel extends \MainModel
                 LEFT JOIN votes_post as v ON v.votes_post_item_id = p.post_id AND v.votes_post_user_id = ".$uid."
                 $string
                 $display
-                $sort LIMIT 15 OFFSET ".$offset." ";
+                $sort LIMIT 25 OFFSET ".$offset." ";
     
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
@@ -107,7 +107,7 @@ class PostModel extends \MainModel
                 $string $display";
 
         $query = DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
-        $result = ceil(count($query) / 15);
+        $result = ceil(count($query) / 25);
 
         return $result;
     }

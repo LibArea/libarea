@@ -18,8 +18,8 @@ class UserController extends \MainController
         $users  = UserModel::getUsersAll($uid['id']);
         
         $data = [
-            'h1'        => lang('Users'),
-            'canonical' => Config::get(Config::PARAM_URL) . '/users',
+            'h1'            => lang('Users'),
+            'canonical'     => Config::get(Config::PARAM_URL) . '/users',
             'sheet'         => 'users', 
             'meta_title'    => lang('Users') .' | '. Config::get(Config::PARAM_NAME),
             'meta_desc'     => lang('desc-user-all') .' '. Config::get(Config::PARAM_HOME_TITLE),   
@@ -54,7 +54,8 @@ class UserController extends \MainController
         if($user['is_deleted'] == 1) {
             \Request::getHead()->addMeta('robots', 'noindex');
         }
-        // Просмотры поста
+        
+        // Просмотры профиля
         if (!isset($_SESSION['usernumbers'])) {
             $_SESSION['usernumbers'] = array();
         }
@@ -225,6 +226,9 @@ class UserController extends \MainController
         
         // Аватар
         $name = $_FILES['images']['name'][0];
+        
+        print_r($_FILES);
+        exit;
         if($name) {
 
             // 160px и 18px
@@ -359,10 +363,10 @@ class UserController extends \MainController
         
         $data = [
             'h1'            => lang('Favorites') . ' ' . $login,
-            'canonical'     => '/***', 
+            'canonical'     => '***', 
             'sheet'         => 'favorites', 
             'meta_title'    => lang('Favorites'),
-            'meta_desc'     => lang('Favorites'),
+            'meta_desc'     => '***',
         ];
 
         return view(PR_VIEW_DIR . '/user/favorite', ['data' => $data, 'uid' => $uid, 'favorite' => $result]);   
@@ -417,10 +421,10 @@ class UserController extends \MainController
    
         $data = [
             'h1'            => lang('Drafts') . ' ' . $login,
-            'canonical'     => '/***',
+            'canonical'     => '***',
             'sheet'         => 'drafts', 
             'meta_title'    => lang('Drafts'),
-            'meta_desc'     => lang('Drafts'),
+            'meta_desc'     => '***',
         ];
 
         return view(PR_VIEW_DIR . '/user/draft-post', ['data' => $data, 'uid' => $uid, 'drafts' => $drafts]);   
@@ -435,10 +439,10 @@ class UserController extends \MainController
         $uid  = Base::getUid();
         $data = [
             'h1'            => lang('Invite'),
-            'canonical'     => '/***',
+            'canonical'     => '***',
             'sheet'         => 'invite', 
             'meta_title'    => lang('Invite'),
-            'meta_desc'     => lang('Invite'), 
+            'meta_desc'     => '***', 
         ];
 
         return view(PR_VIEW_DIR . '/user/invite', ['data' => $data, 'uid' => $uid]);    
@@ -466,10 +470,10 @@ class UserController extends \MainController
  
         $data = [
             'h1'          => lang('Invites'),
-            'canonical'     => '/***',
+            'canonical'     => '***',
             'sheet'         => 'invites', 
             'meta_title'    => lang('Invites'),
-            'meta_desc'     => lang('Invites'),            
+            'meta_desc'     => '***',            
         ];
 
         return view(PR_VIEW_DIR . '/user/invitation', ['data' => $data, 'uid' => $uid, 'user' => $user,  'result' => $Invitation]);  

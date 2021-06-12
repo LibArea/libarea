@@ -266,6 +266,10 @@ a.logo:hover {
   opacity: 0.8;
 }
 
+a.home {
+  color: #888;
+}
+
 i.icon {
   margin-right: 10px;
 }
@@ -276,10 +280,6 @@ i.icon {
 
 .sticky i.icon {
   margin-right: 0;
-}
-
-a.home {
-  color: #888;
 }
 
 .sb-telo,

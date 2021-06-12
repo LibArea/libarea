@@ -12,8 +12,8 @@
             imagesInputName: 'images',
             preloadedInputName: 'preloaded',
             label: 'Фото',
-            extensions: ['.jpg', '.jpeg', '.png', '.gif', '.svg'],
-            mimes: ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml'],
+            extensions: ['.jpg', '.jpeg', '.png', '.gif'],
+            mimes: ['image/jpeg', 'image/png', 'image/gif'],
             maxSize: 2100000, // 2мб
             maxFiles: 1,
         };
@@ -372,8 +372,8 @@ $('.input-images').imageUploader();
             imagesInputName: 'cover',
             preloadedInputName: 'preloaded',
             label: 'Фото',
-            extensions: ['.jpg', '.jpeg', '.png', '.gif', '.svg'],
-            mimes: ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml'],
+            extensions: ['.jpg', '.jpeg', '.png', '.gif'],
+            mimes: ['image/jpeg', 'image/png', 'image/gif'],
             maxSize: 3100000,
             maxFiles: 1,
     };

@@ -243,7 +243,6 @@ class UserModel extends \MainModel
     // Находит ли пользователь в бан- листе
     public static function isBan($uid)
     {
-        
         $result = XD::select('*')->from(['users_banlist'])
                 ->where(['banlist_user_id'], '=', $uid)
                 ->and(['banlist_status'], '=', 1)->getSelectOne();
@@ -328,8 +327,9 @@ class UserModel extends \MainModel
         $uid = $token['auth_user_id'];
 
         self::rememberMeReset($uid, $selector);
-
-        return;
+        redirect('/');
+        return true;
+       // return;
     }
 
     public static function setUserSession($user)
@@ -345,10 +345,8 @@ class UserModel extends \MainModel
             'isLoggedIn'    => true,
             'ipaddress'     => Request::getRemoteAddress(),
         ];
-
        
         $_SESSION['account'] = $data;
-        //redirect('/');
 
         return true;
     }
