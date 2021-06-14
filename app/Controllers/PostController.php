@@ -163,7 +163,6 @@ class PostController extends \MainController
             $row['comm']            = CommentModel::getCommentsAnswer($row['answer_id'], $uid['id']);
             $row['answer_content']  = Base::text($row['answer_content'], 'md');
             $row['answer_date']     = lang_date($row['answer_date']);
-            $row['favorite_answ']   = AnswerModel::getMyAnswerFavorite($row['answer_id'], $uid['id']);
             $answers[$ind]          = $row;
         }
 

@@ -67,8 +67,8 @@
                                 </span>
                             <?php } ?>
                 
-                            <?php if ($uid['id']) { ?>                    
-                                <?php if ($answ['favorite_answ']){ ?>
+                            <?php if ($uid['id']) { ?>
+                                <?php if ($answ['favorite_uid']){ ?>
                                    <span class="user-answ-fav" data-answ="<?= $answ['answer_id']; ?>">
                                         <span class="favcomm"><?= lang('remove-favorites'); ?></span>
                                    </span>   

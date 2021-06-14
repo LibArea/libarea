@@ -49,7 +49,11 @@ class AnswerModel extends \MainModel
         $q = XD::select('*')->from(['answers']);
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['answer_user_id'])
         ->leftJoin(['votes_answ'])->on(['votes_answ_item_id'], '=', ['answer_id'])
-        ->and(['votes_answ_user_id'], '=', $uid)->where(['answer_post_id'], '=', $post_id);
+        ->and(['votes_answ_user_id'], '=', $uid)
+         ->leftJoin(['favorite'])->on(['favorite_tid'], '=', ['answer_id'])
+        ->and(['favorite_uid'], '=', $uid)
+        ->and(['favorite_type'], '=', 2)
+        ->where(['answer_post_id'], '=', $post_id);
         
         // 0 - дискуссия, 1 - Q&A
         if($type == 0) {
