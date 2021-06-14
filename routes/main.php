@@ -136,7 +136,7 @@ Route::endGroup();
 // Пост в ленте и полный пост
 Route::type('post')->get('/post/shown')->controller('PostController@shownPost');
 Route::get('/post/{id}')->controller('PostController@viewPost')->where(['id' => '[0-9-]+']);
-Route::get('/post/{id}/{slug}')->controller('PostController@viewPost')->where(['id' => '[0-9-]+', 'slug' => '[A-Za-z0-9-]+']);
+Route::get('/post/{id}/{slug}')->controller('PostController@viewPost')->where(['id' => '[0-9-]+', 'slug' => '[A-Za-z0-9-_]+']);
 
 // Информация
 Route::get('/info')->controller('InfoController');
@@ -172,6 +172,7 @@ Route::type(['get','post'])->get('/search')->controller('SearchController');
 Route::get('/domain/{domain}')->controller('SearchController@domain')->where(['domain' => '[A-Za-z0-9-.]+']);
 
 Route::type(['get','post'])->get('/search/users')->controller('PostController@userSelect');
+Route::type(['get','post'])->get('/search/posts')->controller('PostController@postsSelect');
 
 // Пагинация и главная (feed) страница, top, all...
 Route::get('/{page?}')->controller('PostController', ['feed'])->where(['page' => '[0-9]+']);

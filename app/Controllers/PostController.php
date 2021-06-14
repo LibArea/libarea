@@ -193,6 +193,11 @@ class PostController extends \MainController
         // + для Q&A другая разметка (в планах)
         $sheet = 'article';
         
+        if($post['post_related']) {
+            $post_related = PostModel::postRelated($post['post_related']);
+        }
+        $post_related = empty($post_related) ? '' : $post_related;
+
         $data = [
             'h1'            => lang('Post'),
             'canonical'     => Config::get(Config::PARAM_URL) . '/post/' . $post['post_id'] . '/' . $post['post_slug'],
@@ -203,7 +208,7 @@ class PostController extends \MainController
             'meta_desc'     => $meta_desc,
         ];
         
-        return view(PR_VIEW_DIR . '/post/post-view', ['data' => $data, 'post' => $post, 'answers' => $answers,  'uid' => $uid,  'recommend' => $recommend,  'lo' => $lo]);
+        return view(PR_VIEW_DIR . '/post/post-view', ['data' => $data, 'post' => $post, 'answers' => $answers,  'uid' => $uid,  'recommend' => $recommend,  'lo' => $lo, 'post_related' => $post_related]);
     }
 
     // Посты участника
@@ -262,7 +267,12 @@ class PostController extends \MainController
         Request::getResources()->addBottomScript('/assets/md/Markdown.Sanitizer.js');
         Request::getResources()->addBottomScript('/assets/md/Markdown.Editor.js');
         Request::getResources()->addBottomScript('/assets/md/editor.js');
-        
+        Request::getResources()->addBottomStyles('/assets/css/select2.css'); 
+
+        if($uid['trust_level'] > 0) {
+            Request::getResources()->addBottomScript('/assets/js/select2.min.js'); 
+        } 
+
         return view(PR_VIEW_DIR . '/post/post-add', ['data' => $data, 'uid' => $uid, 'space' => $space, 'space_id' => $space_id]);
     }
     
@@ -280,6 +290,9 @@ class PostController extends \MainController
         $post_translation       = \Request::getPostInt('translation');
         $post_merged_id         = \Request::getPostInt('post_merged_id');
         $post_tl                = \Request::getPostInt('post_tl');
+      
+        $related = empty($_POST['post_related']) ? '' : $_POST['post_related'];
+        $post_related = empty($related) ? '' : implode(',', $related);
       
         // Используем для возврата
         $redirect = '/post/add';
@@ -353,7 +366,7 @@ class PostController extends \MainController
         $post_content_img   = empty($post_img) ? '' : $post_img;
         $og_img             = empty($og_img) ? '' : $og_img;
         $tag_id             = empty($tag_id) ? 0 : $tag_id;
-        
+
         // Ограничим частоту добавления
         // Добавить условие TL
         if($uid['trust_level'] < 2) {
@@ -374,6 +387,7 @@ class PostController extends \MainController
             'post_content'          => $post_content,
             'post_content_img'      => $post_content_img,
             'post_thumb_img'        => $og_img,
+            'post_related'           => $post_related,
             'post_merged_id'        => $post_merged_id,
             'post_tl'               => $post_tl,
             'post_slug'             => $post_slug,
@@ -446,7 +460,6 @@ class PostController extends \MainController
         if($image) {
             
             $ext = pathinfo(parse_url($image, PHP_URL_PATH), PATHINFO_EXTENSION);
-            
             if(in_array($ext, array ('jpg', 'jpeg', 'png'))) {
                 
                 $path = HLEB_PUBLIC_DIR . '/uploads/posts/thumbnails/';
@@ -519,10 +532,12 @@ class PostController extends \MainController
         Request::getResources()->addBottomScript('/assets/md/Markdown.Editor.js');
         Request::getResources()->addBottomScript('/assets/md/editor.js');
 
-        if($uid['trust_level'] == 5) {
+        if($uid['trust_level'] > 0) {
             Request::getResources()->addBottomScript('/assets/js/select2.min.js'); 
         } 
-        
+
+        $post_related = PostModel::postRelated($post['post_related']);
+
         $data = [
             'h1'            => lang('Edit post'),
             'canonical'     => '***',
@@ -531,14 +546,25 @@ class PostController extends \MainController
             'meta_desc'     => '***',
         ];
 
-        return view(PR_VIEW_DIR . '/post/post-edit', ['data' => $data, 'uid' => $uid, 'post' => $post, 'space' => $space, 'tags' => $tags, 'user' => $user]);
+        return view(PR_VIEW_DIR . '/post/post-edit', ['data' => $data, 'uid' => $uid, 'post' => $post, 'post_related' => $post_related, 'space' => $space, 'tags' => $tags, 'user' => $user]);
     }
     
     // Смена автора поста
     public function userSelect()
     {
         $search =  \Request::getPost('searchTerm');
+        $search = preg_replace('/[^a-zA-Z0-9]/ui', '', $search);
+        
         return UserModel::getSearchUsers($search);
+    }
+    
+    // Связанные посты
+    public function postsSelect()
+    {
+        $search =  \Request::getPost('searchTerm');
+        $search = preg_replace('/[^a-zA-Zа-яА-Я0-9]/ui', '', $search);
+        
+        return PostModel::getSearchPosts($search);
     }
     
     // Изменяем пост
@@ -561,6 +587,9 @@ class PostController extends \MainController
         
         $uid    = Base::getUid();
         
+        $related = empty($_POST['post_related']) ? '' : $_POST['post_related'];
+        $post_related = empty($related) ? '' : implode(',', $related);
+       
         // Получим пост
         $post = PostModel::postId($post_id); 
          
@@ -671,6 +700,7 @@ class PostController extends \MainController
             'post_draft'            => $post_draft,
             'post_content'          => $post_content,
             'post_content_img'      => $post_img,
+            'post_related'          => $post_related,
             'post_merged_id'        => $post_merged_id,
             'post_tl'               => $post_tl,
             'post_closed'           => $post_closed,

@@ -117,18 +117,30 @@
                         <select name="post_user_new" id='selUser'>
                             <option value="<?= $user['id']; ?>"><?= $user['login']; ?></option>
                         </select>
+                    </div>  
+                <?php } ?>
+
+                <?php if($uid['trust_level'] > 0) { ?> 
+                    <div class="boxline">  
+                        <label for="post_content"><?= lang('Related'); ?></label>
+                        <select name="post_related[]" multiple="multiple" id='selLinked'>
+                            <?php foreach ($post_related as $related) { ?>
+                                <option selected value="<?= $related['post_id']; ?>"><?= $related['post_title']; ?></option>
+                            <?php } ?>
+                        </select>
                         <script nonce="<?= $_SERVER['nonce']; ?>">
                             $(document).ready(function(){
-                                $("#selUser").select2({
+                                $("#selLinked").select2({
+                                    width: '70%',
                                     ajax: { 
-                                        url: "/search/users",
+                                        url: "/search/posts",
                                         type: "post",
                                         dataType: 'json',
                                         delay: 250,
                                         data: function (params) {
-                                        return {
-                                          searchTerm: params.term 
-                                        };
+                                            return {
+                                              searchTerm: params.term 
+                                            };
                                         },
                                         processResults: function (response) {
                                          return {
@@ -138,9 +150,30 @@
                                         cache: true
                                     }
                                 });
+
+                                // Смена владельца
+                                $("#selUser").select2({
+                                    ajax: { 
+                                        url: "/search/users",
+                                        type: "post",
+                                        dataType: 'json',
+                                        delay: 250,
+                                        data: function (params) {
+                                            return {
+                                              searchTerm: params.term 
+                                            };
+                                        },
+                                        processResults: function (response) {
+                                            return {
+                                                results: response
+                                            };
+                                        },
+                                        cache: true
+                                    }
+                                });
                             });
                         </script>
-                    </div>    
+                    </div>   
                 <?php } ?>
                 
                 <div class="boxline">

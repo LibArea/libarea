@@ -222,6 +222,7 @@ class PostModel extends \MainModel
             ['post_content'], ',', 
             ['post_content_img'], ',',  
             ['post_thumb_img'], ',',
+            ['post_related'], ',',
             ['post_merged_id'], ',',
             ['post_tl'], ',',
             ['post_slug'], ',', 
@@ -242,6 +243,7 @@ class PostModel extends \MainModel
             $data['post_content'], 
             $data['post_content_img'],
             $data['post_thumb_img'],
+            $data['post_related'],
             $data['post_merged_id'],
             $data['post_tl'],            
             $data['post_slug'],
@@ -272,7 +274,8 @@ class PostModel extends \MainModel
             ['edit_date'], '=', date("Y-m-d H:i:s"), ',',
             ['post_user_id'], '=', $data['post_user_id'], ',', 
             ['post_content'], '=', $data['post_content'], ',', 
-            ['post_content_img'], '=', $data['post_content_img'], ',', 
+            ['post_content_img'], '=', $data['post_content_img'], ',',
+            ['post_related'], '=', $data['post_related'], ',', 
             ['post_merged_id'], '=', $data['post_merged_id'], ',', 
             ['post_tl'], '=', $data['post_tl'], ',', 
             ['post_closed'], '=', $data['post_closed'], ',', 
@@ -282,6 +285,15 @@ class PostModel extends \MainModel
             ->where(['post_id'], '=', $data['post_id'])->run(); 
 
         return true;
+    }
+    
+    // Связанные посты
+    public static function postRelated($post_related)
+    {
+        
+        $sql = "SELECT post_id,post_title, post_slug, post_type, post_draft, post_related, post_is_delete
+                fROM posts WHERE post_id IN(0, ".$post_related.") AND post_is_delete = 0 AND post_tl = 0";
+        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
     
     // Удаление фото- заставки
@@ -364,5 +376,23 @@ class PostModel extends \MainModel
                 
         return  DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
    }
+   
+    // Select posts
+    public static function getSearchPosts($query)
+    {
+        $sql = "SELECT post_id, post_title, post_is_delete, post_tl FROM posts WHERE post_title LIKE :post_title AND post_is_delete = 0 AND post_tl = 0 ORDER BY post_id LIMIT 8";
+        
+        $result = DB::run($sql, ['post_title' => "%".$query."%"]);
+        $postsList  = $result->fetchall(PDO::FETCH_ASSOC);
+        $response = array();
+        foreach($postsList as $post){
+           $response[] = array(
+              "id" => $post['post_id'],
+              "text" => $post['post_title']
+           );
+        }
+
+        echo json_encode($response);
+    }
    
 }

@@ -186,7 +186,7 @@
             <div class="last-comm"> 
                 <?php $num = 1; ?>
                 <?php foreach ($data['latest_answers'] as  $answ)  { ?>
-                    <?php $num++;  ?>
+                    <?php $num++; ?>
                     <style nonce="<?= $_SERVER['nonce']; ?>">
                      .comm-space-color_<?= $num; ?> {border-left: 2px solid <?= $answ['space_color']; ?>;}
                     </style>

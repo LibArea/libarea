@@ -14,8 +14,7 @@
         
         <?php include TEMPLATE_DIR . '/OpenGraph.php'; ?>
         
-        <link rel="icon" href="https://loriup.ru/favicon.ico" type="image/x-icon">
-        <link rel="apple-touch-icon" href="https://loriup.ru/favicon.png">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
         <script src="/assets/js/jquery.min.js"></script>
         <link rel="stylesheet" href="/assets/css/style.css">

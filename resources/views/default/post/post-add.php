@@ -83,6 +83,38 @@
                         <?php } ?>
                     </select>
                 </div>
+                
+                <?php if($uid['trust_level'] > 0) { ?> 
+                    <div class="boxline">  
+                        <label for="post_content"><?= lang('Related'); ?></label>
+                        <select name="post_related[]" multiple="multiple" id='selLinked'>
+                        </select>
+                        <script nonce="<?= $_SERVER['nonce']; ?>">
+                            $(document).ready(function(){
+                                $("#selLinked").select2({
+                                    width: '70%',
+                                    ajax: { 
+                                        url: "/search/posts",
+                                        type: "post",
+                                        dataType: 'json',
+                                        delay: 250,
+                                        data: function (params) {
+                                            return {
+                                              searchTerm: params.term 
+                                            };
+                                        },
+                                        processResults: function (response) {
+                                         return {
+                                            results: response
+                                         };
+                                        },
+                                        cache: true
+                                    }
+                                });
+                            });
+                        </script>
+                    </div>   
+                <?php } ?>
                 <input type="submit" name="submit" value="<?= lang('Create'); ?>" />
             </form>
             <br>

@@ -145,6 +145,22 @@
                             </span> 
                         <?php } ?>
                         
+                    <?php if(!empty($post_related)) { ?>
+                        <div class="related"> 
+                        <h3><?= lang('Related'); ?>:</h3>
+                            <?php $num = 0; ?>
+                            <?php foreach ($post_related as $related) { ?>
+                                <div class="related-box">
+                                    <?php $num++; ?>
+                                    <span><?= $num; ?></span>
+                                    <a href="/post/<?= $related['post_id']; ?>/<?= $related['post_slug']; ?>">
+                                        <?= $related['post_title']; ?>
+                                    </a>
+                               </div> 
+                            <?php } ?>
+                        </div>
+                    <?php } ?>
+                        
                         <?php if($post['post_type'] == 0 && $post['post_draft'] == 0) { ?>
                             <?php if ($uid['id']) { ?>
                                <?php if($post['post_closed'] == 0) { ?>
@@ -169,6 +185,7 @@
                             <?php } ?>
                         <?php } ?>
                     </div>
+                    
                 </div>
 
             <?php } else { ?>
