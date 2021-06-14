@@ -21,7 +21,7 @@ class SearchModel extends \MainModel
         // Без SNIPPET
         // $sql = "SELECT * FROM postind WHERE MATCH(:qa)";
         
-        $sql = "SELECT id as post_id, space_slug, space_name, space_img, post_slug, post_space_id, post_tl, post_is_delete, post_votes, SNIPPET(post_title, :qa) as _title, SNIPPET(post_content, :qa) AS _content FROM postind WHERE MATCH(:qa) AND post_is_delete = 0 AND post_tl = 0";
+        $sql = "SELECT id as post_id, space_slug, space_name, space_img, post_slug, post_space_id, post_votes, SNIPPET(post_title, :qa) as _title, SNIPPET(post_content, :qa) AS _content FROM postind WHERE MATCH(:qa)";
 
         $result = DB::run($sql, ['qa' => $query], 'mysql.sphinx-search');
         return  $result->fetchall(PDO::FETCH_ASSOC);
