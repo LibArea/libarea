@@ -6,45 +6,47 @@
         <form action="/messages/send" method="post">
         <?= csrf_field() ?>
             <input type="hidden" name="recipient" value="<?= $data['recipient_user']['id']; ?>" />
-            
-            Для <img src="<?= user_avatar_url($data['recipient_user']['avatar'], 'small'); ?>" class="msg-ava">
-                <a href="/u/<?= $data['recipient_user']['login']; ?>" class="msg-user">
-                <?= $data['recipient_user']['login']; ?>
-            </a><br>
-                                                                                                                                                               
             <textarea rows="3" id="message" class="mess" placeholder="<?= lang('Write'); ?>..." type="text" name="message" /></textarea>
             <p>
-            <input type="submit" name="submit" value="<?= lang('Reply to'); ?>" class="submit">    
+            <input type="submit" name="submit" value="<?= lang('Reply'); ?>" class="submit">    
             </p>
         </form>
 
-          
         <?php if ($data['list']) { ?>
             <?php foreach($data['list'] AS $key => $val) { ?>
           
-                <div class="msg-telo<?php if ($val['uid'] == $uid['id']) { ?> class="active"<?php } ?>">
+                <div class="msg-telo">
 
                     <?php if ($val['uid'] == $uid['id']) { ?>
-                       Я | <?= $val['add_time']; ?>
+                    
+                        <img class="avatar left" src="<?= user_avatar_url($uid['avatar'], 'max'); ?>"> 
+                       
+                    <div class="message left">
+                        
                     <?php } else { ?>
-                        <a href="/u/<?= $val['login']; ?>">
-                            <?= $val['login']; ?> 
-                        </a> | <?= $val['add_time']; ?>
-                    <?php } ?></a>  
-                    <br>
-                    
-                    <?= $val['message']; ?>
-                    
-                    <div class="footer">
-                        <?php if ($val['receipt'] AND $val['uid'] == $uid['id']) { ?> 
-                    
-                          Было прочитанно - (<?= $val['receipt']; ?>)
-            
-                        <?php } else { ?> 
-                            <!-- Отправлено на e-mail, возможно --> 
-                        <?php } ?>
-                    </div>
 
+                        <a class="right" href="/u/<?= $val['login']; ?>">
+                            <img class="avatar left" src="<?= user_avatar_url($val['avatar'], 'max'); ?>">
+                        </a> 
+
+                    <div class="message right">
+
+                        <a class="left" href="/u/<?= $val['login']; ?>"> 
+                            <?= $val['login']; ?>: &nbsp;
+                        </a> 
+                    
+                    <?php } ?>  
+ 
+                        <?= $val['message']; ?>
+
+                        <div class="date">
+                            <?= $val['add_time']; ?> 
+                            
+                            <?php if ($val['receipt'] AND $val['uid'] == $uid['id']) { ?> 
+                                <?= lang('It was read'); ?> (<?= $val['receipt']; ?>)
+                            <?php } ?>
+                        </div>
+                    </div>
                 </div>
                 
             <?php } ?>

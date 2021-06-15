@@ -45,17 +45,21 @@ class MessagesController extends \MainController
 			foreach ($messages_dialog as $ind => $row)
 			{
                
-                if ($row['recipient_uid'] == $uid['id']) // Принимающий  AND $row['recipient_count']
-                {
+                // Принимающий  AND $row['recipient_count']
+                if ($row['recipient_uid'] == $uid['id']) {
+                    
                     $row['unread']   = $row['recipient_unread'];
                     $row['count']    = $row['recipient_count'];
                     $row['msg_user'] = UserModel::getUserId($row['sender_uid']);
-                }
-                else if ($row['sender_uid'] == $uid['id']) // Отправляющий  AND $row['sender_count']
-                {
+                    $row['message']  = MessagesModel::getMessageOne($row['id']);
+                    
+                // Отправляющий  AND $row['sender_count']    
+                } else if ($row['sender_uid'] == $uid['id']) {
+                    
                     $row['unread']   = $row['sender_unread'];
                     $row['count']    = $row['sender_count'];
                     $row['msg_user'] = UserModel::getUserId($row['sender_uid']);
+                    $row['message']  = MessagesModel::getMessageOne($row['id']);
                 } 
 
                 $row['unread_num']  = word_form($row['unread'], lang('Message'), lang('Messages-m'), lang('Messages'));
@@ -68,6 +72,8 @@ class MessagesController extends \MainController
 		} else {
             $result = [];
         }
+        
+        Request::getHead()->addStyles('/assets/css/messages.css');
 
 		$data = [
             'h1'            => lang('Private messages'),
@@ -100,7 +106,7 @@ class MessagesController extends \MainController
         
         // обновляем просмотры и т.д.
         MessagesModel::setMessageRead($id, $uid['id']);
-        
+          
         if ($list = MessagesModel::getMessageByDialogId($id))
 		{
 			if ($dialog['sender_uid'] != $uid['id'])
@@ -123,11 +129,14 @@ class MessagesController extends \MainController
                     unset($list[$key]);
                     
                 } else {
-                    $list[$key]['message'] =  $val['message'];
-                    $list[$key]['login'] = $recipient_user['login'];
+                    $list[$key]['message']  =  $val['message'];
+                    $list[$key]['login']    = $recipient_user['login'];
+                    $list[$key]['avatar']   = $recipient_user['avatar'];
                 }
             }
 		}
+        
+        Request::getHead()->addStyles('/assets/css/messages.css');
         
         $data = [
             'h1'                => lang('Dialogue'),
@@ -185,7 +194,8 @@ class MessagesController extends \MainController
         
         $uid  = Base::getUid();
         $data = [
-            'h1'            => lang('Send a message') . ' ' . $login,
+            'h1'            => lang('Send a message') . ': ' . $login,
+            'meta_title'    => lang('Send a message'),
             'sheet'         => 'profil-mess',
             'recipient_uid' => $user['id'],
         ];

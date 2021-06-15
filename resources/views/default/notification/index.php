@@ -1,8 +1,11 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 <div class="wrap">
     <main class="w-75">
-        <a class="right edit-space" href="/notifications/delete"><?= lang('I read'); ?></a>
-        <h1><?= $data['h1'] ?></h1>
+         
+        <h1>
+            <?= $data['h1'] ?>
+            <a class="right small button" href="/notifications/delete"><?= lang('I read'); ?></a>
+        </h1>
          
         <?php if (!empty($list)) { ?>
 

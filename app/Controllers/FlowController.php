@@ -27,8 +27,8 @@ class FlowController extends \MainController
             'h1'            => lang('Flow'),
             'canonical'     => '/flow',
             'sheet'         => 'flow',
-            'meta_title'    => lang('Flow'),
-            'meta_desc'     => lang('Flow'),
+            'meta_title'    => lang('Flow') .' | '. Config::get(Config::PARAM_NAME),
+            'meta_desc'     => lang('Flow') .' '. Config::get(Config::PARAM_HOME_TITLE),
         ];
  
         return view(PR_VIEW_DIR . '/flow/index', ['data' => $data, 'uid' => $uid]);

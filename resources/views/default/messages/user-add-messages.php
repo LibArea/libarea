@@ -1,9 +1,10 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 <div class="wrap">
-    <main class="w-100 max-width">
-        <a class="right" href="/u/<?= $uid['login']; ?>/messages"><?= lang('All messages'); ?></a>
-        <h1><?= $data['h1']; ?></h1>
-        
+    <main class="w-75">
+        <h1>
+            <?= $data['h1']; ?>
+            <a class="right small" href="/u/<?= $uid['login']; ?>/messages"><?= lang('All messages'); ?></a>
+        </h1>
         <form action="/messages/send" method="post">
         <?= csrf_field() ?>
             <input type="hidden" name="recipient" value="<?= $data['recipient_uid']; ?>" />

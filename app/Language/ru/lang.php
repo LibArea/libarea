@@ -30,6 +30,7 @@ return [
     'Sign out'          => 'Выйти', 
     'Sign up'           => 'Регистрация',
     'Private messages'  => 'Личные сообщения',
+    'It was read'       => 'Было прочитано',
     'All messages'      => 'Все сообщения',
     'Send a message'    => 'Диалог',
     'Dialogue'          => 'Отправить сообщение',

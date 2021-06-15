@@ -598,11 +598,5 @@ class UserModel extends \MainModel
     {
         return true;
     }  
-    
-    // Прочитан или нет
-    public static function updateNotificationUnread($uid)
-    {
-        return true;
-    }
-    
+
 }

@@ -24,14 +24,6 @@ class MessagesModel extends \MainModel
         return  XD::select('*')->from(['messages_dialog'])->where(['id'], '=', $dialog_id)->getSelectOne();
 	}
  
-    // Диалог
-    public static function getDialog($id)
-    {
-        $query = XD::select('*')->from(['messages']);
-       
-        return count($query->getSelect());
-    }
-    
     // Пересчет просмотрено или нет
 	public static function setMessageRead($dialog_id, $uid, $receipt = true)
 	{
@@ -69,7 +61,15 @@ class MessagesModel extends \MainModel
 		return true;
 	}
     
-    
+    // Последнее сообщение в диалоге
+	public static function getMessageOne($dialog_id)
+	{
+        return XD::select('*')->from(['messages'])
+                ->where(['dialog_id'], '=', $dialog_id)
+                ->orderBy(['id'])->desc()->getSelectOne();
+	}
+
+  
 	public static function getMessageByDialogId($dialog_id)
 	{
         $query = XD::select('*')->from(['messages'])

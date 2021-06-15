@@ -55,6 +55,11 @@ a.active {
   text-transform: lowercase;
 }
 
+.red,
+.lo {
+  color: var(--quaternary);
+}
+
 .translation,
 .trust-level {
   font-size: 13px;
@@ -66,8 +71,8 @@ a.active {
 }
 
 .trust-level {
-  background-color: rgba(255,148,76,0.2);
-  color: rgba(33,32,31,.5);
+  background-color: rgba(255, 148, 76, 0.2);
+  color: rgba(33, 32, 31, 0.5);
 }
 
 tt {
@@ -91,7 +96,8 @@ aside {
 
 header {
   z-index: 10;
-  padding: 5px 5px 12px 5px;
+  padding: 5px 5px 10px 5px;
+  box-shadow: 0 1px 3px rgb(18 18 18 / 10%);
 }
 
 main {
@@ -183,6 +189,13 @@ a.add-post {
   border-radius: 10em;
 }
 
+a.button {
+  background: #a9beb2;
+  padding: 5px 14px 5px 22px;
+  color: #fff;
+  border-radius: 3px;
+}
+
 .dropbtn.nav {
   position: relative;
 }
@@ -223,7 +236,7 @@ a.link:hover {
 .banner {
   padding: 11px 15px 15px 15px;
   background: #f3f1ed;
-  color: rgba(33,32,31,.5);
+  color: rgba(33, 32, 31, 0.5);
   font-size: 15px;
   border-radius: 2px;
 }
@@ -322,6 +335,7 @@ i.icon {
 .nav {
   float: right;
   margin-left: 30px;
+  color: var(--tertiary);
 }
 
 .header-right i.icon {
@@ -659,6 +673,8 @@ aside a.my.active {
 .notif-color-1 {
   background: #f89406;
 }
+
+
 
 /* Урезанный пост на главной */
 .showpost {
@@ -1188,30 +1204,6 @@ ol.comment-telo {
   margin-left: 15px;
 }
 
-/* ЛС */
-.red,
-.lo {
-  color: var(--quaternary);
-}
-
-.green,
-.alert-success {
-  color: #390;
-}
-
-.msg-telo {
-  margin-bottom: 15px;
-}
-
-.msg-ava {
-  width: 18px;
-  border-radius: 50%;
-}
-
-.msg-telo.active {
-  background-color: lightyellow;
-}
-
 /* голосование */
 .voters {
   float: left;
@@ -1328,6 +1320,35 @@ div.voters .asnw-up-id {
 
 .no-pc {
   display: none;
+}
+
+.related  {
+  margin: 0 0 25px 0;  
+}
+
+.related h3 {
+  margin: 0 0 5px 0;
+  font-weight: 300;
+  text-transform: uppercase;
+  font-size: 13px;
+}
+
+.related-box {
+  margin: 0 0 5px 0;  
+}
+
+.related-box span {
+  background: #eef0f1;
+  width: 21px;
+  height: 21px;
+  font-size: 13px;
+  color: #4d5760;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-right: 5px;
+  flex-shrink: 0;
 }
 
 /* Info пространство и рекомендовано в посте */

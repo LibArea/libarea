@@ -16,9 +16,13 @@
                              <a href="/u/<?= $msg['msg_user']['login']; ?>">
                                 <?= $msg['msg_user']['login']; ?> 
                              </a>
-                                |  <?= $msg['update_time']; ?> <br>
+                               <span class="date"> |  <?= $msg['update_time']; ?> </span>
                         <?php } ?>
-
+                        
+                        <div class="message one">
+                            <?= $msg['message']['message']; ?>
+                        </div>
+                        
                         <a class="lowercase" href="/messages/read/<?= $msg['id']; ?>">
                             <?php if ($msg['unread']) { ?>
                                 <?= lang('There are'); ?> <?= $msg['count']; ?> <?= $msg['unread_num']; ?>
