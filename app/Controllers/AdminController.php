@@ -45,8 +45,6 @@ class AdminController extends \MainController
             'users'         => $result,
             'meta_title'    => lang('Admin'),
             'sheet'         => 'admin',
-            'canonical'     => '***',
-            'meta_desc'     => '***',
         ]; 
 
         Request::getResources()->addBottomStyles('/assets/css/admin.css');
@@ -73,8 +71,6 @@ class AdminController extends \MainController
             'h1'            => lang('Search'),
             'meta_title'    => lang('Search'),
             'sheet'         => 'admin',
-            'canonical'     => '***',
-            'meta_desc'     => '***',
         ]; 
 
         Request::getResources()->addBottomStyles('/assets/css/admin.css');
@@ -111,8 +107,6 @@ class AdminController extends \MainController
             'h1'            => lang('Deleted comments'),
             'meta_title'    => lang('Deleted comments'),
             'sheet'         => 'admin',
-            'canonical'     => '***',
-            'meta_desc'     => '***',
         ]; 
 
         Request::getResources()->addBottomStyles('/assets/css/admin.css');
@@ -149,8 +143,6 @@ class AdminController extends \MainController
             'h1'            => lang('Invites'),
             'meta_title'    => lang('Invites'),
             'sheet'         => 'admin',
-            'canonical'     => '***',
-            'meta_desc'     => '***',
         ]; 
 
         Request::getResources()->addBottomStyles('/assets/css/admin.css');
@@ -183,8 +175,6 @@ class AdminController extends \MainController
             'h1'            => lang('Spaces'),
             'meta_title'    => lang('Spaces'),
             'sheet'         => 'admin',
-            'canonical'     => '***',
-            'meta_desc'     => '***',
         ]; 
 
         Request::getResources()->addBottomStyles('/assets/css/admin.css');
@@ -202,8 +192,6 @@ class AdminController extends \MainController
             'h1'            => lang('Add Space'),
             'meta_title'    => lang('Add Space'),
             'sheet'         => 'admin',
-            'canonical'     => '***',
-            'meta_desc'     => '***',
         ]; 
 
         Request::getResources()->addBottomStyles('/assets/css/admin.css');
@@ -294,8 +282,6 @@ class AdminController extends \MainController
             'h1'            => lang('Badges'),
             'meta_title'    => lang('Badges'),
             'sheet'         => 'admin',
-            'canonical'     => '***',
-            'meta_desc'     => '***',
         ]; 
 
         Request::getResources()->addBottomStyles('/assets/css/admin.css');
@@ -313,8 +299,6 @@ class AdminController extends \MainController
             'h1'            => lang('Add badge'),
             'meta_title'    => lang('Add badge'),
             'sheet'         => 'admin',
-            'canonical'     => '***',
-            'meta_desc'     => '***',
         ]; 
 
         Request::getResources()->addBottomStyles('/assets/css/admin.css');
@@ -342,8 +326,6 @@ class AdminController extends \MainController
             'h1'            => lang('Reward the user'),
             'meta_title'    => lang('Reward the user'),
             'sheet'         => 'admin',
-            'canonical'     => '***',
-            'meta_desc'     => '***',
         ]; 
 
         Request::getResources()->addBottomStyles('/assets/css/admin.css');
@@ -379,8 +361,6 @@ class AdminController extends \MainController
             'h1'            => lang('Edit badge'),
             'meta_title'    => lang('Edit badge'),
             'sheet'         => 'admin',
-            'canonical'     => '***',
-            'meta_desc'     => '***',        
         ]; 
 
         Request::getResources()->addBottomStyles('/assets/css/admin.css');
@@ -466,8 +446,6 @@ class AdminController extends \MainController
             'h1'            => lang('Edit user'),
             'meta_title'    => lang('Edit user'),
             'sheet'         => 'admin',
-            'canonical'     => '***',
-            'meta_desc'     => '***',
         ]; 
 
         Request::getResources()->addBottomStyles('/assets/css/admin.css');

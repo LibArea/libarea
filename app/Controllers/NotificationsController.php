@@ -35,9 +35,7 @@ class NotificationsController extends \MainController
         $data = [
             'h1'            => lang('Notifications'),
             'meta_title'    => lang('Notifications'),
-            'meta_desc'     => '...',
             'sheet'         => 'notifications',
-            'canonical'     => '/...',
         ];
 
         return view(PR_VIEW_DIR . '/notification/index', ['data' => $data, 'uid' => $uid, 'list' => $result]);

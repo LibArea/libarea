@@ -1,7 +1,25 @@
+
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">  
+  
+<title><?= $data['meta_title']; ?></title>
+
+<?php if (!empty($data['meta_desc'])) { ?>
+    <meta name="description" content="<?= $data['meta_desc']; ?>">
+<?php } ?>
+
 <meta property="og:title" content="<?= $data['meta_title']; ?>"/>
-<meta property="og:description" content="<?= $data['meta_desc']; ?>"/>
+
+<?php if (!empty($data['meta_desc'])) { ?>
+    <meta property="og:description" content="<?= $data['meta_desc']; ?>"/>
+<?php } ?>
+
 <meta property="og:site_name" content="<?= Lori\Config::get(Lori\Config::PARAM_HOME_TITLE); ?>"/>
-<meta property="og:url" content="<?=  $data['canonical']; ?>"/>
+
+<?php if (!empty($data['meta_desc'])) { ?>
+    <meta property="og:url" content="<?=  $data['canonical']; ?>"/>
+<?php } ?>
 
 <?php if ($data['sheet'] == 'article') {  ?>
     <meta property="og:type" content="article"/>
@@ -23,3 +41,10 @@
 <?php } else { ?>
     <meta property="og:type" content="website"/>
 <?php } ?>
+
+<?php if (!empty($data['canonical'])) {  ?>
+    <link rel="canonical" href="<?= $data['canonical']; ?>">
+<?php } ?>
+
+<link rel="icon" sizes="16x16" href="/favicon-16.ico" type="image/x-icon">
+<link rel="icon" sizes="48x48" href="/favicon-48.ico" type="image/x-icon">

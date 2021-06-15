@@ -1,20 +1,9 @@
 <!DOCTYPE html>
 <html lang="ru" prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-     
-        <title><?= $data['meta_title']; ?></title>
-        <meta name="description" content="<?= $data['meta_desc']; ?>">
- 
+        <?php include TEMPLATE_DIR . '/meta-tags.php'; ?>
+
         <?php getRequestHead()->output(); ?>
- 
-        <link rel="canonical" href="<?= $data['canonical']; ?>">
-        
-        <?php include TEMPLATE_DIR . '/OpenGraph.php'; ?>
-        
-        <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
         <script src="/assets/js/jquery.min.js"></script>
         <link rel="stylesheet" href="/assets/css/style.css">

@@ -21,7 +21,6 @@ class AuthController extends \MainController
         $uid  = Base::getUid();
         $data = [
             'h1'            => lang('Sign up'),
-            'canonical'     => '/register',
             'sheet'         => 'register', 
             'meta_title'    => lang('Sign up') .' | '. Config::get(Config::PARAM_NAME),
             'meta_desc'     => lang('info_security'),
@@ -48,10 +47,8 @@ class AuthController extends \MainController
         $uid  = Base::getUid();
         $data = [
             'h1'            => lang('Registration by invite'),
-            'canonical'     => '/register',
             'sheet'         => 'register', 
             'meta_title'    => lang('Registration by invite'),
-            'meta_desc'     => lang('Registration by invite'),
         ];
         
         return view(PR_VIEW_DIR . '/auth/register-invate', ['data' => $data, 'uid' => $uid, 'invate' => $invate]);  
@@ -173,7 +170,6 @@ class AuthController extends \MainController
         $uid  = Base::getUid();
         $data = [
             'h1'            => lang('Sign in'),
-            'canonical'     => '/login',
             'sheet'         => 'login', 
             'meta_title'    => lang('Sign in') .' | '. Config::get(Config::PARAM_NAME),
             'meta_desc'     => lang('info_login'),
@@ -258,10 +254,8 @@ class AuthController extends \MainController
         $uid  = Base::getUid();
         $data = [
             'h1'            => lang('Password Recovery'),
-            'canonical'     => '/recover',
             'sheet'         => 'login', 
             'meta_title'    => lang('Password Recovery'),
-            'meta_desc'     => lang('Password Recovery'),
         ];
         
         return view(PR_VIEW_DIR . '/auth/recover', ['data' => $data, 'uid' => $uid]);
@@ -331,10 +325,8 @@ class AuthController extends \MainController
             'h1'            => lang('Password Recovery'),
             'code'          => $code,
             'user_id'       => $user_id['activate_user_id'],
-            'canonical'     => 'recover/remind',
             'sheet'         => 'recovery', 
             'meta_title'    => lang('Password Recovery'),
-            'meta_desc'     => lang('Password Recovery'),
         ];
         
         return view(PR_VIEW_DIR . '/auth/newrecover', ['data' => $data, 'uid' => $uid]);

@@ -73,8 +73,6 @@ class MessagesController extends \MainController
             'h1'            => lang('Private messages'),
             'meta_title'    => lang('Private messages'),
             'sheet'         => 'all-mess',
-            'meta_desc'     => '...',
-            'canonical'     => '/...',
             'messages'      => $result,
         ];
 
@@ -134,9 +132,7 @@ class MessagesController extends \MainController
         $data = [
             'h1'                => lang('Dialogue'),
             'meta_title'        => lang('Dialogue'),
-            'meta_desc'         => '...',
             'sheet'             => 'dialog',
-            'canonical'         => '/...',
             'list'              => $list,  
             'recipient_user'    => $recipient_user,
         ];
@@ -191,8 +187,6 @@ class MessagesController extends \MainController
         $data = [
             'h1'            => lang('Send a message') . ' ' . $login,
             'sheet'         => 'profil-mess',
-            'meta_desc'     => '...',
-            'canonical'     => '/...',
             'recipient_uid' => $user['id'],
         ];
 

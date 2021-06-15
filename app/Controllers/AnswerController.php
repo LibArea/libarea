@@ -150,7 +150,6 @@ class AnswerController extends \MainController
         
         $data = [
             'h1'                => lang('Edit answer'),
-            'canonical'         => '/***',
             'answ_id'           => $answ_id,
             'post_id'           => $post_id,
             'user_id'           => $uid['id'],

@@ -63,10 +63,8 @@ class SearchController extends \MainController
         $uid  = Base::getUid();
         $data = [
             'h1'            => lang('Search'),
-            'canonical'     => '/search',
             'sheet'         => 'search',
             'meta_title'    => lang('Search'),
-            'meta_desc'     => lang('Search'), 
             'flow_num'      => $flow_num,
         ];
 

@@ -100,10 +100,8 @@ class UserController extends \MainController
         
         $data = [
             'h1'            => lang('Setting profile'),
-            'canonical'     => '***',
             'sheet'         => 'setting', 
             'meta_title'    => lang('Setting profile'),
-            'meta_desc'     => '***',
         ];
 
         return view(PR_VIEW_DIR . '/user/setting', ['data' => $data, 'uid' => $uid, 'user' => $user]);
@@ -181,7 +179,6 @@ class UserController extends \MainController
         
         $data = [
             'h1'            => lang('Change avatar'),
-            'canonical'     => '/***', 
             'sheet'         => 'setting-ava', 
             'meta_title'    => lang('Change avatar'),
             'meta_desc'     => lang('Change avatar page'),
@@ -209,10 +206,8 @@ class UserController extends \MainController
             'password'      => '',
             'password2'     => '',
             'password3'     => '',
-            'canonical'     => '/***', 
             'sheet'         => 'setting-pass', 
             'meta_title'    => lang('Change password'),
-            'meta_desc'     => lang('Change password'),
         ];
 
         return view(PR_VIEW_DIR . '/user/setting-security', ['data' => $data, 'uid' => $uid]);
@@ -360,10 +355,8 @@ class UserController extends \MainController
         
         $data = [
             'h1'            => lang('Favorites') . ' ' . $login,
-            'canonical'     => '***', 
             'sheet'         => 'favorites', 
             'meta_title'    => lang('Favorites'),
-            'meta_desc'     => '***',
         ];
 
         return view(PR_VIEW_DIR . '/user/favorite', ['data' => $data, 'uid' => $uid, 'favorite' => $result]);   
@@ -418,10 +411,8 @@ class UserController extends \MainController
    
         $data = [
             'h1'            => lang('Drafts') . ' ' . $login,
-            'canonical'     => '***',
             'sheet'         => 'drafts', 
             'meta_title'    => lang('Drafts'),
-            'meta_desc'     => '***',
         ];
 
         return view(PR_VIEW_DIR . '/user/draft-post', ['data' => $data, 'uid' => $uid, 'drafts' => $drafts]);   
@@ -436,10 +427,8 @@ class UserController extends \MainController
         $uid  = Base::getUid();
         $data = [
             'h1'            => lang('Invite'),
-            'canonical'     => '***',
             'sheet'         => 'invite', 
             'meta_title'    => lang('Invite'),
-            'meta_desc'     => '***', 
         ];
 
         return view(PR_VIEW_DIR . '/user/invite', ['data' => $data, 'uid' => $uid]);    
@@ -467,10 +456,8 @@ class UserController extends \MainController
  
         $data = [
             'h1'          => lang('Invites'),
-            'canonical'     => '***',
             'sheet'         => 'invites', 
             'meta_title'    => lang('Invites'),
-            'meta_desc'     => '***',            
         ];
 
         return view(PR_VIEW_DIR . '/user/invitation', ['data' => $data, 'uid' => $uid, 'user' => $user,  'result' => $Invitation]);  

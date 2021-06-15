@@ -252,10 +252,8 @@ class PostController extends \MainController
         
         $data = [
             'h1'            => lang('Add post'),
-            'canonical'     => '***',
             'sheet'         => 'add-post',
             'meta_title'    => lang('Add post'),
-            'meta_desc'     => '***',
         ];  
         
         Request::getHead()->addStyles('/assets/css/image-uploader.css'); 
@@ -539,10 +537,8 @@ class PostController extends \MainController
 
         $data = [
             'h1'            => lang('Edit post'),
-            'canonical'     => '***',
             'sheet'         => 'edit-post',
             'meta_title'    => lang('Edit post'),
-            'meta_desc'     => '***',
         ];
 
         return view(PR_VIEW_DIR . '/post/post-edit', ['data' => $data, 'uid' => $uid, 'post' => $post, 'post_related' => $post_related, 'space' => $space, 'tags' => $tags, 'user' => $user]);
