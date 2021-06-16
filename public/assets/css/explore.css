@@ -1,3 +1,11 @@
-.explore {
-    
+.box-card {
+  position: relative;
+}
+
+.box-card img {
+  width: 98%;
+}
+
+.box-card a:hover > img {
+  opacity: 0.8;
 }

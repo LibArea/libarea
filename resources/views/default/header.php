@@ -21,9 +21,7 @@
                 <input type="text" name="q" id="search" placeholder="Найти..." class="form-search">
             </form>
            
-           <a class="link no-mob" title="<?= lang('Spaces'); ?>" href="/space"><?= lang('Spaces'); ?></a> 
-           <a class="link no-mob" title="<?= lang('Flow'); ?>" href="/flow"><?= lang('Flow'); ?></a>
-
+           <a class="link no-mob" title="<?= lang('Review'); ?>" href="/explore"><?= lang('Review'); ?></a> 
         </div>
         <div class="header-right right">
  

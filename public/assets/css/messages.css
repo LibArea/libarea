@@ -23,7 +23,7 @@
   color: rgba(33, 32, 31, 0.5);
 }
 
-.left{
+.left {
   float: left;
 }
 
@@ -46,10 +46,10 @@
   width: 18px;
   border-radius: 50%;
 }
- 
+
 .message .date {
   color: #919191;
   text-transform: lowercase;
   margin: 5px 0 0 0;
   font-size: 13px;
-} 
+}
