@@ -140,7 +140,6 @@ Route::get('/post/{id}/{slug}')->controller('PostController@viewPost')->where(['
 
 // Информация
 Route::get('/info')->controller('InfoController');
-Route::get('/info/stats')->controller('InfoController@stats');
 Route::get('/info/privacy')->controller('InfoController@privacy');
 Route::get('/info/restriction')->controller('InfoController@restriction');
 

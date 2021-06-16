@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\InfoModel;
 use Lori\Config;
 use Lori\Base;
 
@@ -27,25 +26,6 @@ class InfoController extends \MainController
         
        return view(PR_VIEW_DIR . '/info/index', ['data' => $data, 'uid' => $uid]);
     }
-
-    public function stats()
-	{
-        Request::getResources()->addBottomStyles('/assets/css/info.css'); 
-        Request::getHead()->addScript('/assets/js/Chart.js');
-
-        $uid  = Base::getUid();
-        $data = [
-            'h1'            => lang('Statistics'),
-            'canonical'     => Config::get(Config::PARAM_URL) . '/info/stats',
-            'flow_num'      => InfoModel::GrafAnsw(),
-            'stats'         => InfoModel::getStatsAll(),
-            'sheet'         => 'stats',
-            'meta_title'    => lang('Statistics') .' | '. Config::get(Config::PARAM_NAME),
-            'meta_desc'     => lang('stats-desc') .' '. Config::get(Config::PARAM_HOME_TITLE),
-        ];
-
-        return view(PR_VIEW_DIR . '/info/stats', ['data' => $data, 'uid' => $uid]);
-	}
 
     public function privacy()
 	{

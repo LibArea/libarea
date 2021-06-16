@@ -20,9 +20,9 @@
                         <i class="icon envelope"></i>
                     <?php } ?>
                    
-                    <a href="/u/<?= $notif['login'] ?>"><?= $notif['login'] ?></a> 
+                    <a href="/u/<?= $notif['login']; ?>"><?= $notif['login']; ?></a> 
                     <?= lang('Wrote to you'); ?> 
-                    <a href="/messages/read/<?= $notif['notification_id'] ?>"><?= lang('Message'); ?></a>
+                    <a href="/notifications/read/<?= $notif['notification_id']; ?>"><?= lang('Message'); ?></a>
                 <?php } ?>
                 
                 <?php if($notif['action_type'] == 2) { ?>
@@ -36,7 +36,7 @@
                  
                 <?php if($notif['action_type'] == 10 || $notif['action_type'] == 11 || $notif['action_type'] == 12) { ?>
                     <i class="icon user"></i> 
-                    <a href="/u/<?= $notif['login'] ?>">@<?= $notif['login'] ?></a> 
+                    <a href="/u/<?= $notif['login']; ?>">@<?= $notif['login']; ?></a> 
                     <?= lang('appealed to you'); ?>
                     <a class="ntf2 lowercase" href="/notifications/read/<?= $notif['notification_id']; ?>">
                         <?php if($notif['action_type'] == 10) { ?>
@@ -55,7 +55,7 @@
                         <?php } else { ?>
                             <i class="icon bubbles"></i>
                         <?php } ?>
-                        <a href="/u/<?= $notif['login'] ?>"><?= $notif['login'] ?></a> 
+                        <a href="/u/<?= $notif['login']; ?>"><?= $notif['login']; ?></a> 
                             <?= lang('Wrote'); ?>  
                         <a class="ntf2" href="/notifications/read/<?= $notif['notification_id']; ?>">
                             <?= lang('Comment'); ?>

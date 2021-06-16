@@ -52,6 +52,11 @@ class NotificationsController extends \MainController
             return false;
         }
 
+       // Если личные сообщения 
+       if($info['action_type'] == 1) {
+           $info['url'] = 'messages/read/' . $info['connection_type'];
+       }
+
         NotificationsModel::updateMessagesUnread($uid['id'], $notif_id);
 
         redirect('/' .  $info['url']);

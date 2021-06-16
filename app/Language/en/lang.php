@@ -30,8 +30,7 @@ return [
     
     /* Info */
     'privacy-desc'      => 'The sites Privacy Policy. Site rules.', 
-    'stats-desc'        => 'Site statistics. Posts, comments, participants, and voting. Charts.',
-    'info-desc'         => 'Reference documentation. Sections: rules, configuration and installation, trust level, statistics.',
+    'info-desc'         => 'Information, help. Rules, privacy policy, site archive, and technology.',
     
     'no-invate-txt'     => 'Not a user yet? Signup is by invitation only to combat spam and increase accountability. If you know a <a href="/users">current user</a> of the site, ask them for an invitation.',
     
