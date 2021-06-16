@@ -294,6 +294,9 @@ return [
     'Empty request'         => 'Пустой поисковый запрос',   
     'Enter'                 => 'Введите', 
     'Enter your password'   => 'Введите пароль',
+    'Explore'               => 'Открытие',
+    'explore-title'         => 'Исследовать',
+    'explore-desc'          => 'Эта сводная страница последней сводки на сайте',
  
     'No account available'  => 'Нет учетной записи',
     'Description is formed' => 'Описание формируется',

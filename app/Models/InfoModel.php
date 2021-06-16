@@ -1,54 +1,23 @@
 <?php
 
 namespace App\Models;
-use XdORM\XD;
 use DB;
 use PDO;
 
 class InfoModel extends \MainModel
 {
-    
-    // Всего участников
-    public static function getUsersNumAll()
+    public static function getStatsAll()
     {
-        $query = XD::select('*')->from(['users']);
+        // $sql = "show table status";
+        $sql  = "SELECT
+                (SELECT COUNT(*) FROM answers) AS answer,
+                (SELECT COUNT(*) FROM posts) AS post,
+                (SELECT COUNT(*) FROM comments) AS comment,
+                (SELECT COUNT(*) FROM users) AS user";
 
-        return count($query->getSelect());
+        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
-    
-   // Количество постов
-    public static function getPostsNumAll()
-    {
-        $query = XD::select('*')->from(['posts']);
-       
-        return count($query->getSelect());
-    } 
-    
-    // Количество комментариев
-    public static function getCommentsNumAll()
-    {
-        $query = XD::select('*')->from(['comments']);
-       
-        return count($query->getSelect());
-    }
-
-    // Голосование за комментарии
-    public static function getCommentsVoteNumAll()
-    {
-        $query = XD::select('*')->from(['votes_comm']);
-       
-        return count($query->getSelect());
-    }
-    
-    // Голосование за посты
-    public static function getPostVoteNumAll()
-    {
-        $query = XD::select('*')->from(['votes_post']);
-       
-        return count($query->getSelect());
-    }
-    
-    // Для статистики по ответам
+   
     public static function GrafAnsw()
     { 
         $sql = "SELECT COUNT(votes_answ_id), DATE(votes_answ_date) as date FROM votes_answ GROUP BY date limit 10";

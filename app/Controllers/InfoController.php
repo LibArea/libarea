@@ -13,9 +13,12 @@ class InfoController extends \MainController
     {
         Request::getResources()->addBottomStyles('/assets/css/info.css'); 
         
+        $text = file_get_contents(TEMPLATE_DIR. '/info/md/index.md');
+        
         $uid  = Base::getUid();
         $data = [
             'h1'            => lang('Info'),
+            'content'       => Base::text($text, 'md'),
             'canonical'     => Config::get(Config::PARAM_URL) . '/info',
             'sheet'         => 'info',
             'meta_title'    => lang('Info') .' | '. Config::get(Config::PARAM_NAME),
@@ -27,27 +30,15 @@ class InfoController extends \MainController
 
     public function stats()
 	{
-        // Количество: участников, постов, комментариев и голосов по ним
-        $user_num       = InfoModel::getUsersNumAll();
-        $post_num       = InfoModel::getPostsNumAll();
-        $comm_num       = InfoModel::getCommentsNumAll();
-        $vote_comm_num  = InfoModel::getCommentsVoteNumAll();
-        $vote_post_num  = InfoModel::getPostVoteNumAll();
-        $flow_num       = InfoModel::GrafAnsw();
-  
         Request::getResources()->addBottomStyles('/assets/css/info.css'); 
         Request::getHead()->addScript('/assets/js/Chart.js');
-        
+
         $uid  = Base::getUid();
         $data = [
             'h1'            => lang('Statistics'),
             'canonical'     => Config::get(Config::PARAM_URL) . '/info/stats',
-            'user_num'      => $user_num,
-            'post_num'      => $post_num,
-            'comm_num'      => $comm_num,
-            'vote_comm_num' => $vote_comm_num,
-            'vote_post_num' => $vote_post_num,
-            'flow_num'      => $flow_num,
+            'flow_num'      => InfoModel::GrafAnsw(),
+            'stats'         => InfoModel::getStatsAll(),
             'sheet'         => 'stats',
             'meta_title'    => lang('Statistics') .' | '. Config::get(Config::PARAM_NAME),
             'meta_desc'     => lang('stats-desc') .' '. Config::get(Config::PARAM_HOME_TITLE),
@@ -60,9 +51,12 @@ class InfoController extends \MainController
 	{
         Request::getResources()->addBottomStyles('/assets/css/info.css'); 
         
+        $text = file_get_contents(TEMPLATE_DIR. '/info/md/privacy.md');
+        
         $uid  = Base::getUid();
         $data = [
             'h1'            => lang('Privacy Policy'),
+            'content'       => Base::text($text, 'md'),
             'canonical'     => Config::get(Config::PARAM_URL) . '/info/privacy',
             'sheet'         => 'privacy',
             'meta_title'    => lang('Privacy Policy') .' | '. Config::get(Config::PARAM_NAME),
@@ -74,7 +68,6 @@ class InfoController extends \MainController
 
     public function restriction()
 	{
-        
         Request::getResources()->addBottomStyles('/assets/css/info.css'); 
         
         $uid  = Base::getUid();

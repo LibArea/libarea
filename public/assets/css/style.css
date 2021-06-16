@@ -110,6 +110,10 @@ body > main {
   padding: 0.4rem 0.4rem;
 }
 
+.w-33 {
+  width: 33%;  
+}
+
 main.w-100 {
   width: 100%;
   max-width: 100%;
@@ -164,6 +168,10 @@ h3.lo {
 
 .right {
   float: right;
+}
+
+.left {
+  float: left;
 }
 
 code {
@@ -239,6 +247,8 @@ a.link:hover {
   color: rgba(33, 32, 31, 0.5);
   font-size: 15px;
   border-radius: 2px;
+  text-align: center;
+  overflow: hidden;
 }
 
 .banner h1 {

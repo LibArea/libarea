@@ -159,6 +159,9 @@ Route::get('/flow/content')->controller('FlowController@contentChat');
 Route::get('/comments')->controller('CommentController');
 Route::get('/answers')->controller('AnswerController');
 
+// Исследовать
+Route::get('/explore')->controller('ExploreController');
+
 // Пространства
 Route::get('/space')->controller('SpaceController');
 Route::get('/s/{slug}/{tags?}')->controller('SpaceController@spacePosts', ['feed'])->where(['slug' => '[A-Za-z0-9_]+',  'tags' => '[0-9]+']);

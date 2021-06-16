@@ -10,22 +10,20 @@
                 var myChart = new Chart(ctx, {
                     type: 'bar',
                     data: {
-                        labels: ['<?= lang('Users'); ?>', '<?= lang('Posts'); ?>', '<?= lang('Comments'); ?>', '<?= lang('I like comments'); ?>', '<?= lang('I like posts'); ?>'],
+                        labels: ['<?= lang('Users'); ?>', '<?= lang('Posts'); ?>', '<?= lang('Comments'); ?>', '<?= lang('Answers'); ?>'],
                         datasets: [{
-                            label: 'всего',
-                            data: [<?= $data['user_num']; ?>, <?= $data['post_num']; ?>, <?= $data['comm_num']; ?>, <?= $data['vote_comm_num']; ?>, <?= $data['vote_post_num']; ?>],
+                            label: 'данные',
+                            data: [<?= $data['stats'][0]['user']; ?>, <?= $data['stats'][0]['post']; ?>, <?= $data['stats'][0]['comment']; ?>, <?= $data['stats'][0]['answer']; ?>],
                             backgroundColor: [
                                 'rgba(255, 99, 132, 0.2)',
                                 'rgba(54, 162, 235, 0.2)',
                                 'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(153, 102, 255, 0.2)'
+                                'rgba(153, 102, 255, 0.2)',
                             ],
                             borderColor: [
                                 'rgba(255, 99, 132, 1)',
                                 'rgba(54, 162, 235, 1)',
                                 'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
                                 'rgba(153, 102, 255, 1)'
                             ],
                             borderWidth: 1
