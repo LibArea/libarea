@@ -112,6 +112,10 @@ Route::before('Authorization@noAuth')->getGroup();
     Route::type('post')->protect()->get('/space/tag/edit')->controller('SpaceController@editTagSpace');
     Route::type('post')->protect()->get('/space/tag/add')->controller('SpaceController@addTagSpace');
     
+    // Для авторизированных по умолчанию включается режим ленты (feed) и нет возможности посмотреть все посты 
+    // из различных пространств. Кроме черновиков, удаленных и ограниченных TL.
+    Route::get('/all/{page?}')->controller('PostController', ['all'])->where(['page' => '[0-9]+']);
+    
 	// Голосуем
 	Route::type('post')->get('/votes/comm')->controller('VotesCommController@votes');
     Route::type('post')->get('/votes/post')->controller('VotesPostController@votes');

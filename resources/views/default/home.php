@@ -16,6 +16,29 @@
                 <li class="active">
                     <span><?= lang('Feed'); ?></span>
                 </li>
+                <?php if($uid['id']) { ?>
+                    <li>  
+                        <a href="/all">
+                            <span><?= lang('All'); ?></span>
+                        </a>
+                    </li>
+                <?php } ?>
+                <li>
+                    <a href="/top">
+                        <span>Top</span>
+                    </a>
+                </li>
+            <?php } elseif($data['sheet'] == 'all') { ?>
+                <li>  
+                    <a href="/">
+                        <span><?= lang('Feed'); ?></span>
+                    </a>
+                </li>
+                <?php if($uid['id']) { ?>
+                    <li class="active">
+                        <span><?= lang('All'); ?></span>
+                    </li>
+                <?php } ?>
                 <li>
                     <a href="/top">
                         <span>Top</span>
@@ -26,7 +49,14 @@
                     <a href="/">
                         <span><?= lang('Feed'); ?></span>
                     </a>
-                </li>    
+                </li>
+                <?php if($uid['id']) { ?>
+                    <li>  
+                        <a href="/all">
+                            <span><?= lang('All'); ?></span>
+                        </a>
+                    </li>
+                <?php } ?>                
                 <li class="active">
                     <span>Top</span>
                 </li>

@@ -27,7 +27,7 @@
                                     <i class="icon trophy lo"></i>
                                 <?php } ?>
                                 <?php if($post['post_tl'] > 0) { ?> 
-                                    <span class="trust-level">tl<?= $post['post_tl']; ?></span>
+                                    <span class="trust-level small">tl<?= $post['post_tl']; ?></span>
                                 <?php } ?>
                         </h1>
                         <div class="post-footer-full small lowercase">

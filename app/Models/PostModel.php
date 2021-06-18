@@ -25,18 +25,23 @@ class PostModel extends \MainModel
         if($uid == 0) {
            $string = 'WHERE p.post_draft  = 0';
         } else {
-            if($result) {
-                $string = "WHERE p.post_space_id IN(1, ".implode(',', $result).") AND p.post_draft  = 0";
-            } else {
-               $string = "WHERE p.post_space_id IN(1) AND p.post_draft  = 0"; 
-            }
+            if($type == 'all') {
+                $string = "WHERE p.post_draft  = 0"; 
+            } else {    
+                if($result) {
+                    $string = "WHERE p.post_space_id IN(1, ".implode(',', $result).") AND p.post_draft  = 0";
+                } else {
+                   $string = "WHERE p.post_space_id IN(1) AND p.post_draft  = 0"; 
+                }
+            }    
         }        
 
         $offset = ($page-1) * 25; 
    
         // Условия: удаленный пост, запрещенный к показу в ленте
         // И ограниченный по TL
-        if($trust_level != 5) {   
+        if($trust_level != 5) {  
+        
             if($uid == 0) { 
                 $tl = 'AND p.post_tl = 0';
             } else {
@@ -47,7 +52,7 @@ class PostModel extends \MainModel
             $display = ''; 
         }
          
-        if($type == 'feed') { 
+        if($type == 'feed' || $type == 'all') { 
             $sort = 'ORDER BY post_top DESC, p.post_date DESC';
         } else {
             $sort = 'ORDER BY p.post_answers_num DESC';

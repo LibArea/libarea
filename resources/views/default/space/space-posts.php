@@ -283,7 +283,7 @@
           
             <?php if (!empty($tags)) { ?>
                 <div class="space-tags white-box">
-                    <div class="inner-padding">
+                    <div class="inner-padding big">
                         <div class="menu-m"><?= lang('Tags'); ?></div>
                         <?php foreach ($tags as  $tag) { ?>  
                             <a class="space-u tag-u<?php if ($uid['uri'] == '/s/'.$tag['space_slug'] .'/'.$tag['st_id']) { ?>  avtive<?php } ?>" href="/s/<?= $space_info['space_slug']; ?>/<?= $tag['st_id']; ?>">
