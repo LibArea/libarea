@@ -686,6 +686,7 @@ class PostController extends \MainController
         }
         
         $post_img = empty($post_img) ? $post['post_content_img'] : $post_img;
+        $post_img = empty($post_img) ? '' : $post_img;
 
         $data = [
             'post_id'               => $post_id,

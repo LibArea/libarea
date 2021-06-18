@@ -103,18 +103,18 @@ header {
 }
 
 .inner-padding {
-  padding: 5px 15px; 
+  padding: 5px 15px;
 }
 
 .inner-padding.big {
-  padding: 15px; 
+  padding: 15px;
 }
 
 header .wrap,
 footer .wrap,
 .space-cover-box .wrap,
 .space-box .wrap {
-  max-width: 1290px;  
+  max-width: 1290px;
 }
 
 main {
@@ -134,7 +134,7 @@ main.w-100 {
 }
 
 .w-33 {
-  width: 33%;  
+  width: 33%;
 }
 
 #h-200 {
@@ -722,11 +722,6 @@ img.thumb {
   color: #333;
 }
 
-.post-header {
-  padding: 15px 15px 0 15px;
-  overflow: hidden;
-}
-
 .post-footer {
   padding: 0 15px 10px 15px;
   overflow: hidden;
@@ -741,7 +736,7 @@ img.img-post,
 .post-body img {
   width: 100%;
 }
-.post-img a:hover > img { 
+.post-img a:hover > img {
   opacity: 0.8;
 }
 
@@ -781,7 +776,7 @@ img.img-post,
 }
 
 .img-post-bl {
-  margin: 15px 0 0 0; 
+  margin: 15px 0 0 0;
 }
 
 .telo-fav-answ {
@@ -1119,7 +1114,7 @@ ol.comment-telo {
   text-align: center;
 }
 
-.answ-telo.qa-answ{
+.answ-telo.qa-answ {
   overflow: hidden;
 }
 
@@ -1139,7 +1134,7 @@ ol.comment-telo {
 
 /* голосование */
 .voters,
-.voters a, 
+.voters a,
 .voters .answ-up-id,
 .voters .comm-up-id,
 .telo-detail_post .voters {
@@ -1246,7 +1241,7 @@ div.voters .asnw-up-id {
 }
 
 .related  {
-  margin: 0 0 25px 0;  
+  margin: 0 0 25px 0;
 }
 
 .related h3 {
@@ -1256,7 +1251,7 @@ div.voters .asnw-up-id {
 }
 
 .related-box {
-  margin: 0 0 5px 0;  
+  margin: 0 0 5px 0;
 }
 
 .related-box span {
@@ -1418,11 +1413,11 @@ i.github {
 
 footer a.footer:hover,
 i.github:hover {
-  color: #ddd; 
+  color: #ddd;
 }
 
 .md-icon.discord:hover {
-  stroke: #ddd; 
+  stroke: #ddd;
 }
 
 .dropdown-menu {
