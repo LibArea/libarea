@@ -71,11 +71,15 @@ class SpaceController extends \MainController
         $slug           = \Request::get('slug');
         $space_tags_id  = \Request::getInt('tags');
         
+        $pg     = \Request::getInt('page'); 
+        $page   = (!$pg) ? 1 : $pg;
+        
         // Покажем 404
         $space = SpaceModel::getSpaceInfo($slug);
         Base::PageError404($space);
   
-        $posts = SpaceModel::getSpacePosts($space['space_id'], $uid['id'], $space_tags_id, $type);
+        $pagesCount = SpaceModel::getSpaceCount($space['space_id'], $uid['id'], $space_tags_id, $type); 
+        $posts      = SpaceModel::getSpacePosts($space['space_id'], $uid['id'], $space_tags_id, $type);
 
         $space['space_date']        = lang_date($space['space_date']);
         $space['space_cont_post']   = count($posts);
@@ -83,7 +87,8 @@ class SpaceController extends \MainController
         
         $result = Array();
         foreach($posts as $ind => $row) {
-            $row['post_content_preview']    = Base::cutWords($row['post_content'], 68);
+            $text = explode("\n", $row['post_content']);
+            $row['post_content_preview']    = Base::text($text[0], 'line');
             $row['lang_num_answers']        = word_form($row['post_answers_num'], lang('Answer'), lang('Answers-m'), lang('Answers'));
             $result[$ind]                   = $row;
         }  
@@ -102,10 +107,19 @@ class SpaceController extends \MainController
 
         Request::getHead()->addStyles('/assets/css/space.css');
 
+
+        if($page > 1) { 
+            $num = ' | ' . lang('Page') . ' ' . $page;
+        } else {
+            $num = '';
+        }
+
         $data = [
             'h1'            => $space['space_name'],
             'canonical'     => Config::get(Config::PARAM_URL) .'/s/'. $space['space_slug'],
             'img'           => Config::get(Config::PARAM_URL) .'/uploads/spaces/logos/'. $space['space_img'],
+            'pagesCount'    => $pagesCount,
+            'pNum'          => $page,
             'sheet'         => 'post-space',
             'meta_title'    => $space['space_name'] .' — '. $s_title .' | '. Config::get(Config::PARAM_NAME),
             'meta_desc'     => $space['space_description'] .' '. $s_title .' '. Config::get(Config::PARAM_HOME_TITLE),
@@ -373,7 +387,7 @@ class SpaceController extends \MainController
 
         $name = $_FILES['images']['name'][0];
         if($name) {
-            // 110px и 18px
+            // 110px и 24px
             $path_img       = HLEB_PUBLIC_DIR. '/uploads/spaces/logos/';
             $path_img_small = HLEB_PUBLIC_DIR. '/uploads/spaces/logos/small/';
             $file           = $_FILES['images']['tmp_name'][0];
@@ -386,7 +400,7 @@ class SpaceController extends \MainController
                 ->autoOrient()     // adjust orientation based on exif data
                 ->resize(110, 110)
                 ->toFile($path_img . $filename .'.jpeg', 'image/jpeg')
-                ->resize(18, 18)
+                ->resize(24, 24)
                 ->toFile($path_img_small . $filename .'.jpeg', 'image/jpeg');
             
             // Удалим, кроме дефолтной

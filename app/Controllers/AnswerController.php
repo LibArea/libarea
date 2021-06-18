@@ -214,7 +214,7 @@ class AnswerController extends \MainController
         
         $uid  = Base::getUid();
         $data = [
-            'h1'            =>  lang('Answers') .' '. $login,
+            'h1'            =>  lang('Answers-n') .' '. $login,
             'canonical'     => Config::get(Config::PARAM_URL) . '/u/' . $login . '/answers',
             'sheet'         => 'user-answers', 
             'meta_title'    => lang('Answers') .' '. $login .' | '. Config::get(Config::PARAM_NAME),

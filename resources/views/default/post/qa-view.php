@@ -1,5 +1,5 @@
 <?php if (!empty($answers)) { ?>
-    <div class="answers">
+    <div class="answers white-box">
         <h2 class="lowercase"> <?= $post['post_answers_num'] ?> <?= $post['num_answers'] ?></h2>
         
         <?php foreach ($answers as  $answ) { ?>
@@ -11,25 +11,6 @@
                 <div class="line"></div>
                 <ol class="answer-telo"> 
                     <li class="answers_subtree" id="answ_<?= $answ['answer_id']; ?>">
-          
-                    <?php if (!$uid['id']) { ?> 
-                        <div class="voters">
-                            <a rel="nofollow" href="/login"><div class="answ-up-id"></div></a>
-                            <div class="score"><?= $answ['answer_votes']; ?></div>
-                        </div>
-                    <?php } else { ?>
-                        <?php if ($answ['votes_answ_user_id'] == $uid['id'] || $uid['id'] == $answ['answer_user_id']) { ?>
-                            <div class="voters active">
-                                <div class="answ-up-id"></div>
-                                <div class="score"><?= $answ['answer_votes']; ?></div>
-                            </div>
-                        <?php } else { ?>
-                            <div id="up<?= $answ['answer_id']; ?>" class="voters">
-                                <div data-id="<?= $answ['answer_id']; ?>" class="answ-up-id"></div>
-                                <div class="score"><?= $answ['answer_votes']; ?></div>
-                            </div>
-                        <?php } ?>
-                    <?php } ?>
                         <div class="answ-telo qa-answ">
                             <div class="qa-footer">
                                 <div class="qa-ava">
@@ -52,38 +33,66 @@
                         
                             <?= $answ['answer_content'] ?>
                         </div>
-                        <div class="qa-inline">
+                        <div class="comm-footer">
                             <?php if($post['post_closed'] == 0) { ?> 
                             <?php if($post['post_is_delete'] == 0 || $uid['trust_level'] == 5) { ?>
                                 <span id="cm_add_link<?= $answ['answer_id']; ?>" class="cm_add_link">
-                                    <a data-post_id="<?= $post['post_id']; ?>" data-answ_id="<?= $answ['answer_id']; ?>" class="addcomm"><?= lang('Reply'); ?></a>
+                                    <a data-post_id="<?= $post['post_id']; ?>" data-answ_id="<?= $answ['answer_id']; ?>" class="addcomm bar"><?= lang('Reply'); ?></a>
                                 </span>
                             <?php } ?>
                             <?php } ?>
                             
                             <?php if($uid['id'] == $answ['answer_user_id'] || $uid['trust_level'] == 5) { ?>
                                 <span id="answ_edit" class="answ_add_link">
-                                    <a class="editansw" href="/post/<?= $post['post_id'] ?>/answ/<?= $answ['answer_id']; ?>"><?= lang('Edit'); ?></a>
+                                    <a class="editansw bar" href="/post/<?= $post['post_id'] ?>/answ/<?= $answ['answer_id']; ?>"><?= lang('Edit'); ?></a>
                                 </span>
                             <?php } ?>
                 
                             <?php if ($uid['id']) { ?>
                                 <?php if ($answ['favorite_uid']){ ?>
-                                   <span class="user-answ-fav" data-answ="<?= $answ['answer_id']; ?>">
+                                   <span class="user-answ-fav bar" data-answ="<?= $answ['answer_id']; ?>">
                                         <span class="favcomm"><?= lang('remove-favorites'); ?></span>
                                    </span>   
                                 <?php } else { ?>
-                                    <span class="user-answ-fav" data-answ="<?= $answ['answer_id']; ?>">
+                                    <span class="user-answ-fav bar" data-answ="<?= $answ['answer_id']; ?>">
                                         <span class="favcomm"><?= lang('add-favorites'); ?></span>
                                     </span>
                                 <?php } ?> 
                             <?php } ?>            
                             
                             <?php if($uid['trust_level'] == 5) { ?>
+                                <span class="otst"></span>
+                                <span class="otst"></span>
                                 <span id="answ_dell" class="answ_add_link">
-                                    <a data-id="<?= $answ['answer_id']; ?>" class="delansw"><?= lang('Remove'); ?></a>
+                                    <a data-id="<?= $answ['answer_id']; ?>" class="delansw bar"><?= lang('Remove'); ?></a>
                                 </span>
                             <?php } ?>
+                            
+                            <?php if (!$uid['id']) { ?> 
+                                <div class="voters">
+                                    <a rel="nofollow" href="/login"><div class="answ-up-id"></div></a>
+                                    <div class="score">
+                                        <?= $answ['answer_votes'] ? '+'.$answ['answer_votes'] : $answ['answer_votes']; ?>
+                                    </div>
+                                </div>
+                            <?php } else { ?>
+                                <?php if ($answ['votes_answ_user_id'] == $uid['id'] || $uid['id'] == $answ['answer_user_id']) { ?>
+                                    <div class="voters active">
+                                        <div class="answ-up-id"></div>
+                                        <div class="score">
+                                            <?= $answ['answer_votes'] ? '+'.$answ['answer_votes'] : $answ['answer_votes']; ?>
+                                        </div>
+                                    </div>
+                                <?php } else { ?>
+                                    <div id="up<?= $answ['answer_id']; ?>" class="voters">
+                                        <div data-id="<?= $answ['answer_id']; ?>" class="answ-up-id"></div>
+                                        <div class="score">
+                                            <?= $answ['answer_votes'] ? '+'.$answ['answer_votes'] : $answ['answer_votes']; ?>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+                            <?php } ?>
+                            
                         </div> 
                         <div id="answ_addentry<?= $answ['answer_id']; ?>" class="reply"></div> 
                     </li>

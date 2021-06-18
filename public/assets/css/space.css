@@ -131,6 +131,10 @@ a.space-u.tag-u.avtive {
   padding: 0;
 }
 
+.sb-space-short {
+  margin-top: 15px;
+}
+
 .space-box .yes-space,
 .space-box .no-space {
   margin-top: 21px;
@@ -228,7 +232,6 @@ a.space-u.tag-u.avtive {
 
 .info-space {
   font-size: 14px;
-  margin-top: 15px;
 }
 
 .space-text-sb {

@@ -1,3 +1,7 @@
+body {
+  background-color: #fff;
+}
+
 h1 {
   margin-top: 0;
 }
@@ -103,6 +107,17 @@ aside#sidebar {
 
 footer {
   padding-top: 30px;
+}
+
+.dark .flow-comment .box,
+.dark .flow-answer .box,
+.dark .add-flow {
+  background-color: #222;
+  color: #fff;
+}
+
+.dark textarea {
+  background-color: #333;
 }
 
 @media (max-width: 720px) {

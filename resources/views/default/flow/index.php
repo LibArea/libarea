@@ -1,6 +1,6 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 <div class="wrap">
-    <main class="w-75">
+    <main>
         <div class="flow">
             <div id="content"></div>
             <?php include TEMPLATE_DIR . '/flow/flow-form.php'; ?>

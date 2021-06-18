@@ -87,6 +87,7 @@ return [
     'info_space_edit'       => 'Fill in all the required fields. Some fields determine how your space will be visible in search engines.',
     'info_space_logo'       => 'A lot depends on the logo. It should most accurately display the theme of the space.',
     'info_login'            => 'Authorization gives you the ability to post, reply, and comment.<br><br>You can vote for other publications and have your own profile.',
+    'info_recover'          => 'fter you click the "Reset" button, check your e-mail...',
     'Ban-space-info-posts'  => 'A space ban will result in the unavailability of all posts',
     
     'nickname-replay'                       => 'This nickname is already on the site',

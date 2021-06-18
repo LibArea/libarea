@@ -36,8 +36,9 @@
     </div> 
  
 <div class="wrap">
-<main class="w-75">     
-<div class="profile-box-telo">
+<main>     
+<div class="profile-box-telo white-box">
+    <div class="inner-padding">
      
     <div class="profile-header-telo">
         <h1 class="profile">
@@ -194,33 +195,40 @@
                 </div>                        
             </div>
         <?php } ?>
-        
+    </div>    
     </div>
 </div>
 </main>
     <aside>
-        <h3 class="badge"><?= lang('Badges'); ?></h3>
-        <div class="profile-badge">
-            <?php if($user['id'] < 50) { ?>
-                <i title="<?= lang('Joined in the early days'); ?>" class="icon badge"></i>
-            <?php } ?>
-            <?php foreach ($data['badges'] as $badge) { ?>
-                <?= $badge['badge_icon']; ?>
-            <?php } ?>
-        </div>
-        <br>
-        <?php if($uid['trust_level'] > 4) { ?>
-            <h3 class="badge"><?= lang('Admin'); ?></h3>
-            <div class="menu-info">
-                <a href="/admin/user/<?= $user['id']; ?>/edit">
-                    <i class="icon settings red"></i>
-                    <?= lang('Edit'); ?>
-                </a>
-                <a href="/admin/badge/user/add/<?= $user['id']; ?>">
-                    <i class="icon badge"></i>
-                    <?= lang('Reward the user'); ?>
-                </a>
+        <div class="profile-box-telo white-box">
+            <div class="inner-padding">
+                <h3 class="badge"><?= lang('Badges'); ?></h3>
+                <div class="profile-badge">
+                    <?php if($user['id'] < 50) { ?>
+                        <i title="<?= lang('Joined in the early days'); ?>" class="icon badge"></i>
+                    <?php } ?>
+                    <?php foreach ($data['badges'] as $badge) { ?>
+                        <?= $badge['badge_icon']; ?>
+                    <?php } ?>
+                </div>
             </div>
+        </div>
+        <?php if($uid['trust_level'] > 4) { ?>
+            <div class="profile-box-telo white-box">
+                <div class="inner-padding">
+                    <h3 class="badge"><?= lang('Admin'); ?></h3>
+                    <div class="menu-info">
+                        <a href="/admin/user/<?= $user['id']; ?>/edit">
+                            <i class="icon settings red"></i>
+                            <?= lang('Edit'); ?>
+                        </a>
+                        <a href="/admin/badge/user/add/<?= $user['id']; ?>">
+                            <i class="icon badge"></i>
+                            <?= lang('Reward the user'); ?>
+                        </a>
+                    </div>
+                </div>
+            </div>            
         <?php } ?>
     </aside>
 </div>

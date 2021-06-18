@@ -24,11 +24,10 @@ body {
 
 body {
   line-height: 1.46;
-  font-family: Helvetica Neue, Arial, sans-serif;
-  font-size: 0.95em;
+  font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif;
   color: var(--primary);
   min-height: 100%;
-  letter-spacing: 0.5px;
+  background-color: #f3f3f3;
 }
 
 a {
@@ -47,12 +46,12 @@ a.active {
   text-align: center;
 }
 
-.small {
-  font-size: 13px;
-}
-
 .lowercase {
   text-transform: lowercase;
+}
+
+.green {
+  color: #390;
 }
 
 .red,
@@ -62,7 +61,6 @@ a.active {
 
 .translation,
 .trust-level {
-  font-size: 13px;
   font-style: italic;
   background: #f5efe3;
   color: #47340c;
@@ -75,43 +73,59 @@ a.active {
   color: rgba(33, 32, 31, 0.5);
 }
 
-tt {
-  font-size: 14px;
-}
-
 .wrap {
-  padding: 0.4rem 0.4rem 0.1rem 0.4rem;
+  padding: 0.7rem 0.4rem 0.3rem 0.4rem;
   margin: 0 auto;
-  max-width: 1220px;
+  max-width: 1180px;
   position: relative;
 }
 
 aside {
-  padding: 15px 8px 8px 8px;
   position: relative;
   float: right;
-  width: 250px;
-  list-style: none;
+  width: 300px;
 }
 
 header {
   z-index: 10;
   padding: 5px 5px 10px 5px;
   box-shadow: 0 1px 3px rgb(18 18 18 / 10%);
+  background-color: #fff;
+  color: var(--tertiary);
+}
+
+.white-box {
+  background-color: #fff;
+  box-shadow: 0 1px 1px 0 rgba(144,170,185,.3);
+  overflow: hidden;
+  margin-bottom: 20px;
+  border-radius: 2px;
+}
+
+.inner-padding {
+  padding: 5px 15px; 
+}
+
+.inner-padding.big {
+  padding: 15px; 
+}
+
+header .wrap,
+footer .wrap,
+.space-cover-box .wrap,
+.space-box .wrap {
+  max-width: 1290px;  
 }
 
 main {
   overflow: hidden;
-  width: calc(100% - 285px);
+  width: calc(100% - 315px);
   float: left;
+  margin-right: 15px;
 }
 
 body > main {
   padding: 0.4rem 0.4rem;
-}
-
-.w-33 {
-  width: 33%;  
 }
 
 main.w-100 {
@@ -119,14 +133,8 @@ main.w-100 {
   max-width: 100%;
 }
 
-main.w-75 {
-  width: calc(100% - 290px);
-  max-width: 100%;
-}
-
-main.w-50 {
-  width: calc(100% - 490px);
-  max-width: 700px;
+.w-33 {
+  width: 33%;  
 }
 
 #h-200 {
@@ -158,10 +166,6 @@ h3.lo {
   max-width: 780px;
 }
 
-.private {
-  max-width: 480px;
-}
-
 .clear {
   clear: both;
 }
@@ -172,6 +176,10 @@ h3.lo {
 
 .left {
   float: left;
+}
+
+.small {
+  font-size: 13px;
 }
 
 code {
@@ -213,15 +221,7 @@ a.button {
   margin-left: 4px;
 }
 
-.nick .ava {
-  border-radius: 50%;
-  vertical-align: middle;
-  margin-right: 4px;
-  width: 18px;
-}
-
 .nick span {
-  font-size: 14px;
   margin-right: 5px;
   color: var(--tertiary);
 }
@@ -232,9 +232,7 @@ a.add-post:hover {
 }
 
 a.link {
-  font-size: 14px;
   color: var(--tertiary);
-  margin-left: 23px;
 }
 
 a.link:hover {
@@ -254,7 +252,7 @@ a.link:hover {
 .banner h1 {
   letter-spacing: 1px;
   text-transform: uppercase;
-  font-size: 16px;
+  font-size: 21px;
   color: #333;
   font-weight: 400;
   margin: 0 0 5px 0;
@@ -265,7 +263,7 @@ a.link:hover {
 }
 
 .answers h2 {
-  margin: 20px 0 0 4px;
+  margin: 0 0 0 4px;
   font-weight: 300;
 }
 
@@ -294,7 +292,7 @@ a.home {
 }
 
 i.icon {
-  margin-right: 10px;
+  margin-right: 5px;
 }
 
 .info i.icon {
@@ -305,35 +303,22 @@ i.icon {
   margin-right: 0;
 }
 
-.sb-telo,
-.recommend-telo {
-  margin-bottom: 15px;
-}
-
-.sb-telo .ava {
-  border-radius: 8px;
-  height: 16px;
-  margin-bottom: 2px;
-  margin-right: 2px;
-  vertical-align: middle;
-  width: 16px;
+.sb-telo {
+  margin: 15px 0;
 }
 
 .sb-date {
   margin-left: 20px;
-  font-size: 13px;
   color: var(--tertiary);
 }
 
 .sb-telo a {
   color: var(--primary);
-  font-size: 14px;
   margin-left: 20px;
   display: block;
 }
 
 .recommend-telo a {
-  font-size: 14px;
   color: #333;
 }
 
@@ -345,7 +330,6 @@ i.icon {
 .nav {
   float: right;
   margin-left: 30px;
-  color: var(--tertiary);
 }
 
 .header-right i.icon {
@@ -375,10 +359,6 @@ i.icon.info,
   display: inline-block;
 }
 
-.post-body i.icon {
-  margin-left: 8px;
-}
-
 .mlogout {
   color: var(--tertiary);
 }
@@ -392,7 +372,7 @@ hr {
 }
 
 .pagination {
-  margin: 5px 10px 10px 15px;
+  margin: 5px 10px 10px 0;
   float: left;
   clear: both;
 }
@@ -538,6 +518,7 @@ input.add-url {
 
 form.form {
   display: inherit;
+  margin-right: 10px;
 }
 
 input.form-search {
@@ -546,7 +527,6 @@ input.form-search {
   border-radius: 10em;
   padding: 2px 0 2px 20px;
   height: 25px;
-  font-size: 13px;
   color: #14171a;
   margin-left: 50px;
   width: 300px;
@@ -568,7 +548,6 @@ aside i.icon {
 }
 
 aside .stat {
-  font-size: 13px;
   text-transform: lowercase;
 }
 
@@ -591,9 +570,7 @@ aside a.my.active {
 
 .login-nav label {
   line-height: 13px;
-  color: #14171a;
   margin-bottom: 7px;
-  font-size: 13px;
   display: block;
 }
 
@@ -605,7 +582,6 @@ aside a.my.active {
   border-bottom: 2px solid #e6ecf0;
   box-shadow: none;
   outline: 0;
-  font-size: 13px;
   color: #004874;
   width: 100%;
 }
@@ -635,7 +611,6 @@ aside a.my.active {
 }
 
 .recover {
-  font-size: 13px;
   line-height: 16px;
   color: #14171a;
   font-weight: 500;
@@ -643,7 +618,6 @@ aside a.my.active {
 }
 
 .login-nav.register a {
-  font-size: 13px;
   line-height: 11px;
   color: #5b7083;
   text-transform: uppercase;
@@ -684,14 +658,11 @@ aside a.my.active {
   background: #f89406;
 }
 
-
-
 /* Урезанный пост на главной */
 .showpost {
-  font-size: 14px;
-  max-width: 750px;
-  margin: 0 0 5px 0;
+  margin: 10px 0 5px 0;
   display: block;
+  font-size: 16px;
 }
 
 .show_detail.hide {
@@ -710,8 +681,9 @@ aside a.my.active {
   margin-bottom: 22px;
 }
 
+.post-body img.thumb,
 img.thumb {
-  margin: 5px 0 10px 10px;
+  margin: -25px 0 10px 10px;
   float: right;
   width: 70px;
   border-radius: 2px;
@@ -722,7 +694,6 @@ img.thumb {
 }
 
 .fuul-head {
-  font-size: 13px;
   margin: 0 0 5px 0;
 }
 
@@ -730,20 +701,50 @@ img.thumb {
   color: var(--tertiary);
 }
 
-.fuul-head .ava {
-  border-radius: 50%;
-  vertical-align: middle;
-  margin-right: 4px;
-}
-
 .bar-space-no {
   margin: 10px 0 25px 0;
   background: #f3f3f3;
-  font-size: 13px;
   padding: 15px;
 }
 
 /* Посты */
+
+.post-header {
+  padding: 15px 15px 0 15px;
+  overflow: hidden;
+}
+
+.post-header img {
+  vertical-align: middle;
+}
+
+.post-header a {
+  color: #333;
+}
+
+.post-header {
+  padding: 15px 15px 0 15px;
+  overflow: hidden;
+}
+
+.post-footer {
+  padding: 0 15px 10px 15px;
+  overflow: hidden;
+  color: var(--tertiary);
+}
+
+.post-details {
+  padding: 0 15px;
+}
+
+img.img-post,
+.post-body img {
+  width: 100%;
+}
+.post-img a:hover > img { 
+  opacity: 0.8;
+}
+
 .lo-post {
   max-width: 660px;
   background: #f3f3f3;
@@ -751,50 +752,42 @@ img.thumb {
   margin: 10px 0;
 }
 
-.post-details,
-.post-details .img-post {
-  max-width: 750px;
-}
-
 .post_url_detal {
   margin: 0 0 20px 0;
   display: block;
   font-style: italic;
 }
-
-.post-body {
-  margin-left: 40px;
-}
-
-.post-body.full {
-  margin-top: 10px;
-}
-
-.post-body.full .post {
-  margin-bottom: 20px;
-  max-width: 750px;
-}
-
-img.img-post {
-  margin: 10px 0;
-  max-width: 750px;
-}
-
+ 
 .telo-detail_post.dell {
   background-color: rgb(246, 196, 184);
   padding-left: 10px;
 }
 
-.post-telo {
-  margin-bottom: 25px;
-  max-width: 800px;
+.telo-detail_post,
+.answers {
+  padding: 15px;
+}
+
+.telo-detail_post .title {
+  padding: 0;
+}
+
+.post-full-footer {
+  border-bottom: 1px solid #ddd;
+  overflow: hidden;
+  margin-bottom: 20px;
+  padding-bottom: 5px;
+  color: var(--tertiary);
+}
+
+.img-post-bl {
+  margin: 15px 0 0 0; 
 }
 
 .telo-fav-answ {
   background: #f3f3f3;
   padding: 1px 15px;
   max-width: 700px;
-  font-size: 13px;
   color: var(--tertiary);
 }
 
@@ -803,18 +796,19 @@ img.img-post {
   width: 30px;
   height: 45px;
   margin: 3px 0 0 0;
-  font-size: 13px;
 }
 
 .title {
   margin: 3px 0 0 0;
+  font-size: 21px;
+  padding: 0 15px;
+  margin-right: 4px;
+  font-weight: 500;
+  color: #333;
 }
 
-.u-url .title {
-  font-size: 1.2rem;
-  display: inline;
-  margin-right: 4px;
-  font-weight: 400;
+.title:hover {
+  color: var(--quaternary);
 }
 
 #stHeader {
@@ -851,20 +845,9 @@ img.img-post {
   margin: 15px 0;
 }
 
-.post-footer {
-  color: var(--tertiary);
-  padding: 4px 12px 4px 12px;
-  border: solid 1px #ddd;
-  display: table;
-  border-radius: 2px;
-  font-size: 13px;
-  margin-top: 5px;
-}
-
 .post-footer-full {
   color: var(--tertiary);
   display: inline-block;
-  font-size: 13px;
 }
 
 .post-footer a,
@@ -877,21 +860,16 @@ img.img-post {
   color: #333;
 }
 
-.post-footer .ava,
-.post-footer-full .ava,
-.mini.ava {
-  border-radius: 50%;
-  height: 16px;
-  margin-right: 2px;
+img.ava {
+  border-radius: 2px;
   vertical-align: middle;
-  width: 16px;
+  width: 18px;
 }
 
 .search-info,
 .search-info a {
   color: var(--tertiary);
   text-transform: lowercase;
-  font-size: 13px;
   margin-top: 10px;
 }
 
@@ -902,7 +880,8 @@ img.img-post {
 }
 
 .search-title {
-  font-size: 18px;
+  font-size: 21px;
+  margin-bottom: 10px;
 }
 
 .search {
@@ -933,7 +912,6 @@ img.img-post {
   overflow: hidden;
   text-overflow: ellipsis;
   position: relative;
-  font-size: 13px;
   color: var(--tertiary);
 }
 
@@ -962,11 +940,14 @@ a.space-u:hover,
 
 .bar-title {
   color: var(--tertiary);
+  text-transform: uppercase;
+  margin: 8px 0 0;
 }
 
 /* Ответы */
 .line {
   border-top: 2px dotted #ddd;
+  margin-bottom: 20px;
 }
 
 .line-qa {
@@ -976,10 +957,7 @@ a.space-u:hover,
 
 ol.answer-telo {
   padding: 0;
-}
-
-.answ-telo {
-  margin-left: 40px;
+  margin: 0;
 }
 
 .answ-telo-body {
@@ -992,23 +970,7 @@ ol.answer-telo {
 
 .answ-telo-body p {
   margin: 5px 0 10px 0;
-}
-
-.answ-header a,
-.answ-header {
-  font-size: 9.5pt;
-  color: #888;
-}
-
-.answ-header a:hover {
-  color: #666;
-}
-
-.answ-header .ava {
-  width: 21px;
-  height: 21px;
-  border-radius: 50%;
-  vertical-align: middle;
+  font-size: 15px;
 }
 
 .answ-header .user {
@@ -1044,6 +1006,10 @@ ol.answer-telo {
   background-color: lightyellow;
 }
 
+.container {
+  padding: 5px;
+}
+
 .block-comments,
 .block-answers {
   margin: 5px 0 5px 0;
@@ -1051,7 +1017,6 @@ ol.answer-telo {
 
 ol.dell.comment-telo,
 .dell.comm-telo_bottom {
-  font-size: 13px;
   color: #888;
 }
 
@@ -1074,15 +1039,10 @@ ol.comment-telo {
 
 .n-comm {
   color: #390;
-  font-size: 13px;
-}
-
-.comm-telo {
-  margin-left: 35px;
 }
 
 .comm-telo.step {
-  margin-left: 70px;
+  margin-left: 30px;
 }
 
 .comm-telo_bottom {
@@ -1091,34 +1051,15 @@ ol.comment-telo {
 
 .comm-telo-body {
   margin: 5px 0;
-  max-width: 750px;
+  font-size: 15px;
 }
 
 .answers .comm-telo {
-  padding: 3px 0 0 0;
-  font-size: 10.5pt;
   list-style: none;
 }
 
 .qa-comm .comm-telo-body {
   margin: 2px 0 2px 0;
-}
-
-.comm-header a,
-.comm-header {
-  font-size: 9.5pt;
-  color: #888;
-}
-
-.comm-header a:hover {
-  color: #666;
-}
-
-.comm-header .ava {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  vertical-align: middle;
 }
 
 .comm-header .user {
@@ -1136,27 +1077,10 @@ ol.comment-telo {
   margin: 0 3px;
 }
 
-.cm_addentry,
-.comments .cm_add_link,
-.comm-deletes,
-.user-comm-fav,
-.user-answ-fav,
-.answers .answ_add_link,
-.answers .cm_add_link,
-.answ-deletes {
-  margin-left: 35px;
-}
-
-.addcomm,
-.delcomm,
-.editcomm,
-.favcomm,
-.addansw,
-.delansw,
-.editansw,
-.addcomm_re {
+.bar {
   color: var(--tertiary);
   font-size: 9.5pt;
+  margin: 0 20px 0 0;
 }
 
 .comments_subtree.dell,
@@ -1185,15 +1109,18 @@ ol.comment-telo {
 }
 
 .qa-footer {
-  width: 120px;
-  margin: 0;
+  width: 130px;
+  margin: 10px 0 0;
   padding: 10px 0 10px 0;
-  margin-left: 10px;
   border-radius: 3px;
   border: 1px solid #ddd;
   float: right;
   overflow: hidden;
   text-align: center;
+}
+
+.answ-telo.qa-answ{
+  overflow: hidden;
 }
 
 .qa-ava img {
@@ -1206,39 +1133,36 @@ ol.comment-telo {
   color: #666;
 }
 
-.qa-inline {
-  display: inline-block;
-}
-
 .answers .qa-comm .cm_add_link {
   margin-left: 15px;
 }
 
 /* голосование */
-.voters {
-  float: left;
-  width: 30px;
-  margin-top: 2px;
-}
-
-.comm-telo .voters {
-  margin-top: 3px;
-}
-
-.comments .voters {
-  margin-top: 3px;
-}
-
+.voters,
+.voters a, 
+.voters .answ-up-id,
+.voters .comm-up-id,
 .telo-detail_post .voters {
   float: left;
-  margin-top: 4px;
-  width: 30px;
+}
+
+.voters .score {
+  float: left;
+  margin: 1px 2px 0 7px;
+  color: var(--tertiary);
+  font-size: 15px;
+}
+
+.answer-telo .voters,
+.comm-telo .voters {
+  margin: 0 20px 0 0;
 }
 
 div.voters .comm-up-id,
 div.voters .post-up-id,
 div.voters .asnw-up-id {
   border-bottom-width: 11px;
+  float: left;
 }
 
 .voters .comm-up-id,
@@ -1250,7 +1174,6 @@ div.voters .asnw-up-id {
   width: 0;
   height: 0;
   margin-bottom: 0;
-  margin-left: 9px;
   padding: 0;
   display: block;
   border-bottom-width: 11px;
@@ -1262,14 +1185,6 @@ div.voters .asnw-up-id {
   border-color: transparent transparent var(--quaternary) transparent;
 }
 
-.voters .score {
-  color: #aaa;
-  font-size: 9pt;
-  margin-top: 1px;
-  margin-bottom: -3px;
-  text-align: center;
-}
-
 .voters.active .comm-up-id,
 .voters.active .answ-up-id,
 .voters.active .post-up-id,
@@ -1277,24 +1192,24 @@ div.voters .asnw-up-id {
   border-color: transparent transparent var(--quaternary) transparent;
   color: var(--quaternary);
   border-bottom-width: 11px;
+  float: left;
 }
 
 /* Горизонтальное меню */
 .nav-tabs {
   position: relative;
   z-index: 1;
-  height: 63px;
-  margin: 10px 0 0 0;
-  padding: 0;
+  height: 48px;
+  margin: 0;
+  padding: 15px;
   list-style: none;
   color: #667d99;
-  display: table;
-  width: 100%;
+  background: #fff;
+  margin-bottom: 20px;
 }
 
 .nav-tabs > li {
   margin: 0 10px 0 0;
-  font-size: 14px;
   float: left;
 }
 
@@ -1305,7 +1220,6 @@ div.voters .asnw-up-id {
 .nav-tabs > li > a {
   line-height: 30px;
   padding: 10px 15px;
-  font-size: 14px;
   cursor: pointer;
   color: #969696;
   border-bottom: 2px solid transparent;
@@ -1319,8 +1233,7 @@ div.voters .asnw-up-id {
 .nav-tabs > li.active span {
   line-height: 30px;
   padding: 10px 15px;
-  font-size: 14px;
-  border-bottom: 2px solid #646464;
+  border-bottom: 2px solid var(--quaternary);
   color: #646464;
 }
 
@@ -1340,7 +1253,6 @@ div.voters .asnw-up-id {
   margin: 0 0 5px 0;
   font-weight: 300;
   text-transform: uppercase;
-  font-size: 13px;
 }
 
 .related-box {
@@ -1351,7 +1263,6 @@ div.voters .asnw-up-id {
   background: #eef0f1;
   width: 21px;
   height: 21px;
-  font-size: 13px;
   color: #4d5760;
   display: inline-flex;
   align-items: center;
@@ -1362,16 +1273,8 @@ div.voters .asnw-up-id {
 }
 
 /* Info пространство и рекомендовано в посте */
-.space-info {
-  background: #efefef;
-  padding: 10px;
-  position: relative;
-}
-
-.space-info-desc {
-  padding: 2px 0 4px 0;
-  color: #333;
-  font-size: 13px;
+.space-info-img {
+  margin-top: 10px;
 }
 
 .img-space {
@@ -1388,10 +1291,6 @@ div.voters .asnw-up-id {
 .space-info-title {
   font-size: 16px;
   vertical-align: middle;
-}
-
-.b-sticky {
-  font-size: 13px;
 }
 
 .l-rec-small {
@@ -1419,17 +1318,15 @@ div.voters .asnw-up-id {
 
 .l-rec-footer {
   color: #666;
-  font-size: 13px;
   margin-top: 3px;
 }
 
 h3.recommend {
   border-bottom: 1px solid #ddd;
   padding: 15px 0 10px 0;
-  margin: 20px 0 10px 0;
+  margin: 0 0 10px 0;
   letter-spacing: 1px;
   text-transform: uppercase;
-  font-size: 13px;
   color: #333;
   font-weight: 400;
 }
@@ -1438,7 +1335,7 @@ h3.recommend {
   display: block;
   font-size: 15px;
   color: var(--tertiary);
-  margin-bottom: 8px;
+  margin: 5px 0 5px 0;
 }
 
 .menu-info a.active {
@@ -1451,12 +1348,12 @@ h3.recommend {
 
 /* Footer */
 footer {
-  background-color: #edeeef;
+  background-color: #3c464d;
   clear: both;
-  color: #333;
   padding: 10px 20px 20px 20px;
   overflow: hidden;
   margin-top: 20px;
+  color: #fff;
 }
 
 .text-info {
@@ -1471,21 +1368,14 @@ footer {
 
 .p-head,
 .p-head-n {
-  color: #333;
-  font-size: 16px;
   position: relative;
   margin-bottom: 20px;
 }
 
 footer a.footer {
   display: block;
-  font-size: 13px;
   margin-bottom: 3px;
-  color: #333;
-}
-
-footer a.footer:hover {
-  color: #666;
+  color: #fff;
 }
 
 .p-head-n {
@@ -1517,19 +1407,22 @@ footer a.footer:hover {
   width: 31px;
   height: 31px;
   fill: none;
-  stroke: #07c;
+  stroke: #fff;
   vertical-align: middle;
 }
 
 i.github {
   font-size: 17px;
-  color: #07c;
+  color: #fff;
 }
 
-.last-box {
-  font-size: 13px;
-  color: #666;
-  padding: 1px 0;
+footer a.footer:hover,
+i.github:hover {
+  color: #ddd; 
+}
+
+.md-icon.discord:hover {
+  stroke: #ddd; 
 }
 
 .dropdown-menu {
@@ -1562,80 +1455,53 @@ i.github {
   text-decoration: none;
 }
 
-.login-nav-home {
-  margin-top: 15px;
-}
-
 /* dark */
 .dark {
-  background: #333;
+  background: #222;
   color: var(--secondary);
 }
 
 .dark header,
 .dark #stHeader.sticky,
-.dark .no-answer,
-.dark .space-info,
-.dark .profile-box-telo,
-.dark .box.profile-telo .post-telo,
-.dark .banner,
-.dark .bar-space-no {
-  border-bottom: 1px solid #222;
-  background: #222;
-  color: #fff;
-}
-
-.dark a,
-.dark .post-footer .date,
-.dark .post-footer-full .date,
-.dark .post-footer-full,
-.dark .na,
-.dark a.menu.active,
-.dark .info-n.active,
-.dark .favcomm,
-.dark .showpost,
-.dark .l-rec {
-  color: #888;
-}
-
-.dark a:hover,
-.dark .login-nav label,
-.dark .p-head,
-.dark .p-head-n,
-.dark h1.profile,
-.dark .nick span,
-.dark .header-right i.icon,
-.dark .space-info-desc,
-.dark h3.recommend {
-  color: #eee;
-}
-
-.dark blockquote,
-.dark .menu-info {
-  background-color: #555;
-}
-
-.dark .post-footer {
-  border: solid 1px #444;
-}
-
-.dark header a,
-.dark .u-url .title,
-.dark .banner h1 {
-  color: #fff;
-}
-
-.dark .space-no-user,
-.dark textarea {
-  color: #eee;
-  background-color: #222;
-}
-
-.dark .comments_subtree:target,
-.dark .comments_subtree.edit,
-.dark .dropdown-menu,
 .dark footer {
-  background-color: #222;
+  background: #111;
+}
+
+.dark .white-box,
+.dark .nav-tabs,
+.dark .dropdown-menu {
+  background: #282828;
+}
+
+.dark input.form-search,
+.dark .banner {
+  background: #282828;
+  border: 1px solid #282828;
+  color: #eee;
+}
+
+.dark .comm_subtree:target,
+.dark .comm_subtree.edit,
+.dark .answers_subtree:target {
+  background: #111;
+  color: #fff;
+  padding: 5px;
+}
+
+.dark header,
+.dark .title,
+.dark a,
+.dark a.logo,
+.dark a.link,
+.dark .nick span,
+.dark .banner,
+.dark .banner h1,
+.dark .nav-tabs > li.active span {
+  color: #fff;
+}
+
+.dark a:hover {
+  color: #eee;
 }
 
 .to-user {
@@ -1644,23 +1510,15 @@ i.github {
   padding: 1px 4px;
 }
 
-@media (max-width: 1050px) {
-  aside {
-    margin: 0 15px 20px 0;
-    width: 190px;
-  }
-}
-
 @media (max-width: 810px) {
-  main,
-  main.w-75,
-  img.img-post { width: 100%; }
-
   .no-mob,
   aside { display: none; }
   header { margin-left: 0; }
   .no-pc { display: block; }
   .column { width: 19%; }
+
+  main,
+  main.w-75 { width: 100%; }
 
   input.add,
   input.add-url { width: 94%; }

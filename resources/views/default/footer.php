@@ -3,18 +3,18 @@
     <div class="wrap">
         <div class="text-info">
             <h4 class="p-head one"><?= lang('Help'); ?></h4>
-            <a class="footer" title="<?= lang('Info'); ?>" href="/info"><?= lang('Info'); ?></a> 
-            <a class="footer no-mob" title="<?= lang('Privacy'); ?>" href="/info/privacy"><?= lang('Privacy'); ?></a>
+            <a class="footer small" title="<?= lang('Info'); ?>" href="/info"><?= lang('Info'); ?></a> 
+            <a class="footer small no-mob" title="<?= lang('Privacy'); ?>" href="/info/privacy"><?= lang('Privacy'); ?></a>
         </div>
         <div class="text-info no-mob">
             <h4 class="p-head two"><?= lang('Info'); ?></h4>
-            <a class="footer" title="<?= lang('Spaces'); ?>" href="/space"><?= lang('Spaces'); ?></a>
-            <a class="footer" title="<?= lang('Flow'); ?>" href="/flow"><?= lang('Flow'); ?></a>  
+            <a class="footer small" title="<?= lang('Spaces'); ?>" href="/space"><?= lang('Spaces'); ?></a>
+            <a class="footer small" title="<?= lang('Flow'); ?>" href="/flow"><?= lang('Flow'); ?></a>  
         </div>
         <div class="text-info no-mob">
             <h4 class="p-head three"><?= lang('Other'); ?></h4>
-            <a class="footer" title="<?= lang('Users'); ?>" href="/users"><?= lang('Users'); ?></a> 
-            <a class="footer" title="<?= lang('All answers'); ?>" href="/answers"><?= lang('Answers-n'); ?></a> 
+            <a class="footer small" title="<?= lang('Users'); ?>" href="/users"><?= lang('Users'); ?></a> 
+            <a class="footer small" title="<?= lang('All answers'); ?>" href="/answers"><?= lang('Answers-n'); ?></a> 
         </div>
         <div class="text-oth ots">
             <h4 class="p-head-n"><?= lang('Social networks'); ?></h4> 
@@ -32,7 +32,7 @@
                 <i class="icon github"></i>
             </a>
            
-            <div class="last-box">
+            <div class="small">
                 Loriup &copy; <?= date('Y'); ?> — сообщество<br> 
             </div> 
         </div>

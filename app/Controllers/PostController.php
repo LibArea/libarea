@@ -33,7 +33,9 @@ class PostController extends \MainController
 
         $result = Array();
         foreach($posts as $ind => $row) {
-            $row['post_content_preview']    = Base::cutWords($row['post_content'], 120);
+            $text = explode("\n", $row['post_content']);
+            $row['post_content_preview']    = Base::text($text[0], 'line');
+        //  $row['post_content_preview']    = preg_replace('/\A(.*)$/mi', '', $row['post_content']);
             $row['lang_num_answers']        = word_form($row['post_answers_num'], lang('Answer'), lang('Answers-m'), lang('Answers'));
             $row['post_date']               = lang_date($row['post_date']);
             $result[$ind]                   = $row;

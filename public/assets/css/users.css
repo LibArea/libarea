@@ -1,11 +1,9 @@
 .profile-box-telo {
   position: relative;
-  margin: 0 20px 24px;
-  background: #fff;
 }
 
 .profile-header-telo {
-  margin: 15px 0 0 184px;
+  margin: 10px 0 0 184px;
   color: #666;
 }
 
@@ -82,7 +80,7 @@ h1.profile {
 
 h3.badge {
   border-bottom: 1px solid #ddd;
-  padding: 15px 0 10px 0;
+  padding: 5px 0 10px 0;
   margin: 0 0 10px 0;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -132,7 +130,7 @@ h3.badge {
 
 .column {
   padding: 1rem 1rem 1rem 0.2rem;
-  width: 9.1%;
+  width: 11%;
   min-width: 65px;
 }
 
@@ -150,6 +148,15 @@ h3.badge {
 
 .profile-about blockquote {
   margin: 0.8em 0 0.8em 0;
+}
+
+.dark h3.badge,
+.dark h1.profile {
+  color: #fff;
+}
+
+.dark .box.profile-telo .post-telo {
+  background-color: #333; 
 }
 
 @media (max-width: 890px) {

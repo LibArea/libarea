@@ -80,6 +80,12 @@ class SpaceModel extends \MainModel
         return $result;
     }
     
+    // Количество постов
+    public static function getSpaceCount($space_id, $user_id, $space_tags_id, $type)
+    {
+        return 0;
+    }
+    
     // Информация пространства по slug
     public static function getSpaceInfo($slug)
     {

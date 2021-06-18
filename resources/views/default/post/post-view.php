@@ -4,34 +4,13 @@
         <a href="/"><i class="icon home"></i></a> <span class="slash">\</span> <?= $post['post_title']; ?>
     </div>
  
-    <main class="w-75">
+    <main>
         <article class="post-full">
 
             <?php if($post['post_is_delete'] == 0 || $uid['trust_level'] == 5) { ?>
        
-                <div class="telo-detail_post<?php if($post['post_is_delete'] == 1) { ?> dell<?php } ?>">
+                <div class="white-box telo-detail_post<?php if($post['post_is_delete'] == 1) { ?> dell<?php } ?>">
 
-                    <?php if (!$uid['id']) { ?> 
-                        <div id="vot<?= $post['post_id']; ?>" class="voters">
-                            <a rel="nofollow" href="/login"><div class="post-up-id"></div></a>
-                            <div class="score"><?= $post['post_votes']; ?></div>
-                        </div>
-                    <?php } else { ?> 
-
-                        <?php if ($post['votes_post_user_id'] || $uid['id'] == $post['post_user_id']) { ?>
-                            <div class="voters active">
-                                <div class="post-up-id"></div>
-                                <div class="score"><?= $post['post_votes']; ?></div>
-                            </div>
-                        <?php } else { ?>
-                            <div id="up<?= $post['post_id']; ?>" class="voters">
-                                <div data-id="<?= $post['post_id']; ?>" class="post-up-id"></div>
-                                <div class="score"><?= $post['post_votes']; ?></div>
-                            </div>
-                        <?php } ?> 
-                    <?php } ?> 
-                
-     
                     <div class="post-body">
                         <h1 class="title">
                             <?= $post['post_title']; ?> 
@@ -51,7 +30,7 @@
                                     <span class="trust-level">tl<?= $post['post_tl']; ?></span>
                                 <?php } ?>
                         </h1>
-                        <div class="post-footer-full lowercase">
+                        <div class="post-footer-full small lowercase">
                             <img class="ava" alt="<?= $post['login']; ?>" src="<?= user_avatar_url($post['avatar'], 'small'); ?>">
                             <span class="user"> 
                                 <a href="/u/<?= $post['login']; ?>"><?= $post['login']; ?></a> 
@@ -147,7 +126,7 @@
                         
                     <?php if(!empty($post_related)) { ?>
                         <div class="related"> 
-                        <h3><?= lang('Related'); ?>:</h3>
+                        <h3 class="small"><?= lang('Related'); ?>:</h3>
                             <?php $num = 0; ?>
                             <?php foreach ($post_related as $related) { ?>
                                 <div class="related-box">
@@ -160,7 +139,40 @@
                             <?php } ?>
                         </div>
                     <?php } ?>
+                    </div>
+                    <div class="post-full-footer">
+                        <?php if (!$uid['id']) { ?> 
+                            <div id="vot<?= $post['post_id']; ?>" class="voters">
+                                <a rel="nofollow" href="/login"><div class="post-up-id"></div></a>
+                                <div class="score">
+                                    <?= $post['post_votes'] ? '+'.$post['post_votes'] : $post['post_votes']; ?>
+                                </div>
+                            </div>
+                        <?php } else { ?> 
+                            <?php if ($post['votes_post_user_id'] || $uid['id'] == $post['post_user_id']) { ?>
+                                <div class="voters active">
+                                    <div class="post-up-id"></div>
+                                    <div class="score">
+                                        <?= $post['post_votes'] ? '+'.$post['post_votes'] : $post['post_votes']; ?>
+                                    </div>
+                                </div>
+                            <?php } else { ?>
+                                <div id="up<?= $post['post_id']; ?>" class="voters">
+                                    <div data-id="<?= $post['post_id']; ?>" class="post-up-id"></div>
+                                    <div class="score">
+                                        <?= $post['post_votes'] ? '+'.$post['post_votes'] : $post['post_votes']; ?>
+                                    </div>
+                                </div>
+                            <?php } ?> 
+                        <?php } ?> 
                         
+                        <span class="right">
+                            <i class="icon bubbles"></i>
+                            <?= $post['post_answers_num'] + $post['post_comments_num'] ?>
+                        </span>
+                        
+                    </div>
+                    <div>                    
                         <?php if($post['post_type'] == 0 && $post['post_draft'] == 0) { ?>
                             <?php if ($uid['id']) { ?>
                                <?php if($post['post_closed'] == 0) { ?>
@@ -185,7 +197,7 @@
                             <?php } ?>
                         <?php } ?>
                     </div>
-                    
+                   
                 </div>
 
             <?php } else { ?>
@@ -213,29 +225,34 @@
     </main> 
 
     <aside>
-        <div class="space-info"> 
-            <div class="space-info-img">
-                <img class="img-space" alt="<?= $post['space_slug']; ?>" src="<?= spase_logo_url($post['space_img'], 'max'); ?>">
-                <a class="space-info-title" href="/s/<?= $post['space_slug']; ?>"><?= $post['space_name']; ?></a> 
-            </div>    
-            <div class="space-info-desc"><?= $post['space_short_text']; ?></div> 
+        <div class="space-info white-box">
+            <div class="inner-padding"> 
+                <div class="space-info-img">
+                    <img class="img-space" alt="<?= $post['space_slug']; ?>" src="<?= spase_logo_url($post['space_img'], 'max'); ?>">
+                    <a class="space-info-title" href="/s/<?= $post['space_slug']; ?>"><?= $post['space_name']; ?></a> 
+                </div>    
+                <div class="space-info-desc small"><?= $post['space_short_text']; ?></div> 
+            </div>
         </div>
+        
         <?php if($recommend) { ?> 
-            <div>
-                <h3 class="recommend"><?= lang('Recommended'); ?></h3>  
-                <?php $n=0; foreach ($recommend as  $post) { $n++; ?>
-                     <div class="l-rec-small"> 
-                        <div class="l-rec">0<?= $n; ?></div> 
-                        <div class="l-rec-telo"> 
-                            <a class="edit-bl"  href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
-                                <?= $post['post_title']; ?>  
-                            </a>
-                            <?php if($post['post_answers_num'] !=0) { ?>
-                                <span class="n-comm">+<?= $post['post_answers_num'] ?></span>
-                            <?php } ?> 
-                        </div>
-                   </div>
-                <?php } ?> 
+            <div class="white-box">
+                <div class="inner-padding">
+                    <h3 class="recommend small"><?= lang('Recommended'); ?></h3>  
+                    <?php $n=0; foreach ($recommend as  $post) { $n++; ?>
+                         <div class="l-rec-small"> 
+                            <div class="l-rec">0<?= $n; ?></div> 
+                            <div class="l-rec-telo"> 
+                                <a class="edit-bl"  href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
+                                    <?= $post['post_title']; ?>  
+                                </a>
+                                <?php if($post['post_answers_num'] !=0) { ?>
+                                    <span class="n-comm">+<?= $post['post_answers_num'] ?></span>
+                                <?php } ?> 
+                            </div>
+                       </div>
+                    <?php } ?> 
+                </div>    
             </div> 
         <?php } ?> 
     </aside>

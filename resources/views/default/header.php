@@ -64,10 +64,6 @@
                             <i class="icon envelope"></i> 
                             <?= lang('Messages-m'); ?>
                         </a>
-                        <a class="dr-menu" href="/u/<?= $uid['login']; ?>/comments"> 
-                            <i class="icon bubbles"></i>
-                            <?= lang('Comments-n'); ?> 
-                        </a>
                         <a class="dr-menu" href="/u/<?= $uid['login']; ?>/favorite">
                             <i class="icon star"></i> 
                             <?= lang('Favorites'); ?>              
