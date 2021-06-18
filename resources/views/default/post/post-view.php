@@ -236,7 +236,7 @@
         </div>
         
         <?php if($recommend) { ?> 
-            <div class="white-box">
+            <div class="white-box sticky recommend">
                 <div class="inner-padding">
                     <h3 class="recommend small"><?= lang('Recommended'); ?></h3>  
                     <?php $n=0; foreach ($recommend as  $post) { $n++; ?>

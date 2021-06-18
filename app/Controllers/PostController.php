@@ -590,6 +590,8 @@ class PostController extends \MainController
         // Получим пост
         $post = PostModel::postId($post_id); 
          
+        $redirect = '/post/edit/' . $post_id; 
+         
         if(!$post){
             redirect('/');
         }
@@ -626,7 +628,6 @@ class PostController extends \MainController
             $post_user_id = $post['post_user_id'];
         }
         
-        $redirect = '/post/edit' .$post_id;
         Base::Limits($post_title, lang('Title'), '6', '250', $redirect);
         Base::Limits($post_content, lang('The post'), '6', '25000', $redirect);
         

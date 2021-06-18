@@ -69,11 +69,7 @@
         </div>
     </main>
     <aside>
-        <?php if ($uid['id'] == 0) { ?>
-            <?php include TEMPLATE_DIR . '/_block/login.php'; ?>
-        <?php } else { ?>
-            <?php include TEMPLATE_DIR . '/_block/user-menu.php'; ?>
-        <?php } ?>
+        <?php include TEMPLATE_DIR . '/_block/user-menu.php'; ?>
     </aside>
 </div>    
 <?php include TEMPLATE_DIR . '/footer.php'; ?> 

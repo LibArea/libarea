@@ -106,6 +106,7 @@
         </div>
 
         <h2><?= lang('Contacts'); ?></h2>
+        
         <?php if($user['website']) { ?>    
             <div class="boxline">
                 <label for="name"><?= lang('URL'); ?></label>
@@ -118,6 +119,11 @@
             <div class="boxline">
                 <label for="name"><?= lang('City'); ?></label>
                 <?= $user['location']; ?>
+            </div>
+        <?php } else { ?>
+            <div class="boxline">
+                <label for="name"><?= lang('City'); ?></label>
+                ...
             </div>
         <?php } ?>
         <?php if($user['public_email']) { ?> 

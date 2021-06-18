@@ -1,7 +1,7 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 
  <div class="banner">
-    <div class="wrap">
+    <div class="wrap no-flex">
             <h1><?= lang('Explore'); ?></h1> 
             
             <div class="box-card">

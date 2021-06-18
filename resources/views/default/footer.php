@@ -1,6 +1,6 @@
 <div class="clear"></div>
 <footer>
-    <div class="wrap">
+    <div class="wrap no-flex">
         <div class="text-info">
             <h4 class="p-head one"><?= lang('Help'); ?></h4>
             <a class="footer small" title="<?= lang('Info'); ?>" href="/info"><?= lang('Info'); ?></a> 

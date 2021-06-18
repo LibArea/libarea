@@ -2,7 +2,7 @@
 
 <?php if(!$uid['id']) { ?>
     <div class="banner">
-        <div class="wrap">
+        <div class="wrap-header">
             <h1><?= Lori\Config::get(Lori\Config::PARAM_BANNER_TITLE); ?></h1>
             <span><?= Lori\Config::get(Lori\Config::PARAM_BANNER_DESC); ?>...</span>
         </div>
@@ -223,8 +223,8 @@
                 </div>   
             <?php } else { ?>
                 <?php if($uid['uri'] == '/') { ?>
-                    <div class="bar-space-no white-box">
-                        <div class="inner-padding">
+                    <div class="white-box">
+                        <div class="inner-padding big">
                             <a href="/space">Подпишитесь</a> на пространства и читайте их в ленте...
                         </div>
                     </div>
@@ -235,7 +235,7 @@
         <?php } ?>
         
         <?php if (!empty($data['latest_answers'])) { ?>
-            <div class="last-comm white-box"> 
+            <div class="last-comm white-box sticky"> 
                 <div class="inner-padding">
                     <?php $num = 1; ?>
                     <?php foreach ($data['latest_answers'] as  $answ)  { ?>

@@ -9,3 +9,7 @@
 .box-card a:hover > img {
   opacity: 0.8;
 }
+
+.w-33 {
+  width: 33%;
+}
