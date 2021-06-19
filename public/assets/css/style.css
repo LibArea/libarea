@@ -15,7 +15,9 @@ body {
   box-sizing: border-box;
 }
 
-:active, :hover, :focus {
+:active,
+:hover,
+:focus {
   outline: 0;
   outline-offset: 0;
 }
@@ -390,7 +392,7 @@ hr {
   clear: both;
 }
 
-/* Формы и кнопки*/
+/* Формы и кнопки */
 textarea {
   width: 100%;
   border: 0.05rem solid #caced7;
@@ -402,6 +404,10 @@ textarea {
   max-width: 40rem;
 }
 
+.form.mini {
+  max-width: 20rem;
+}
+
 .form-label {
   max-width: 40rem;
   display: block;
@@ -411,7 +417,7 @@ textarea {
 }
 
 .form-input {
-  transition: all .2s ease;
+  transition: all 0.2s ease;
   appearance: none;
   background: #fff;
   background-image: none;
@@ -432,7 +438,7 @@ textarea {
 .form-input:focus,
 textarea:focus {
   box-shadow: 0 0 0 0.1rem rgba(38, 139, 210, 0.2);
-  border-color: #268bd2; 
+  border-color: #268bd2;
 }
 
 .form-input {
@@ -448,6 +454,12 @@ textarea:focus {
   font-size: 0.8rem;
   line-height: 0.9rem;
   margin: 0.2rem;
+  color: var(--tertiary);
+}
+
+.cancel {
+  background: transparent;
+  border: none;
   color: var(--tertiary);
 }
 

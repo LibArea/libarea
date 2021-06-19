@@ -4,43 +4,42 @@
         <div class="white-box">
             <div class="inner-padding">
                 <h1><?= $data['h1']; ?></h1>
-                <div class="box wide">
+                <div class="form mini">
                     <form class="" action="/register/add" method="post">
                         <?php csrf_field(); ?>
                         <div class="boxline">
-                            <label for="login"><?= lang('Nickname'); ?></label>
-                            <input type="text" name="login" id="login" minlength="3" pattern="^[a-zA-Z0-9\s]+$">
+                            <label class="form-label" for="login"><?= lang('Nickname'); ?></label>
+                            <input type="text" class="form-input" name="login" id="login" minlength="3" pattern="^[a-zA-Z0-9\s]+$">
                             <div class="box_h">>= 3 <?= lang('characters'); ?></div>
                         </div>
                         <div class="boxline">
-                            <label for="email">Email</label>
-                            <input type="email" name="email" id="email">
+                            <label class="form-label" for="email">Email</label>
+                            <input type="email" class="form-input" name="email" id="email">
                         </div>
                         <div class="boxline">
-                            <label for="password"><?= lang('Password'); ?></label>
-                            <input type="password" minlength="8" name="password" id="password">
+                            <label class="form-label" for="password"><?= lang('Password'); ?></label>
+                            <input type="password" class="form-input" minlength="8" name="password" id="password">
                             <div class="box_h">>= 8 <?= lang('characters'); ?></div>
                         </div>
                          <div class="boxline">
-                            <label for="password_confirm"><?= lang('repeat-password'); ?></label>
-                            <input type="password" minlength="8" name="password_confirm" id="password_confirm">
+                            <label class="form-label" for="password_confirm"><?= lang('repeat-password'); ?></label>
+                            <input type="password" class="form-input" minlength="8" name="password_confirm" id="password_confirm">
                         </div>    
                         <?php if (Lori\Config::get(Lori\Config::PARAM_CAPTCHA)) { ?>
-                            <div class="captcha_data">
+                            <div class="boxline captcha_data">
                                 <div class="captcha_wrap">
                                     <div class="g-recaptcha" data-theme="light" data-size="normal" data-callback="captcha_ready" data-sitekey="<?= Lori\Config::get(Lori\Config::PARAM_PUBLIC_KEY); ?>"></div>
                                     <script async defer nonce="" src="https://www.google.com/recaptcha/api.js?hl=ru"></script>
                                 </div>
-                            </div>   <br />
+                            </div>
                         <?php } ?>
                         <div class="boxline">
                             <div class="boxline">
-                                <button type="submit" class="button-primary"><?= lang('Sign up'); ?></button>
+                                <button type="submit" class="button"><?= lang('Sign up'); ?></button>
                                 <small>
                                     <span class="otst"><a href="/login"><?= lang('Sign in'); ?></a></span>
                                 </small>
                             </div>
-
                         </div>
                     </form>
                 </div>

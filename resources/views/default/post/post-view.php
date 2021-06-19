@@ -181,10 +181,10 @@
                                     <div class="redactor">
                                         <div id="wmd-button-bar"></div>
                                         <textarea minlength="6" class="wmd-input h-150 w-95" rows="5" placeholder="<?= lang('write-something'); ?>..." name="answer" id="wmd-input"></textarea>
-                                        <div class="clear"> 
+                                        <div class="boxline"> 
                                             <input type="hidden" name="post_id" id="post_id" value="<?= $post['post_id']; ?>">
                                             <input type="hidden" name="answ_id" id="answ_id" value="0">
-                                            <input type="submit" name="answit" value="<?= lang('Reply'); ?>" class="answer-post">
+                                            <input type="submit" class="button" name="answit" value="<?= lang('Reply'); ?>" class="answer-post">
                                         </div>
                                     </div>    
                                     </form>

@@ -4,12 +4,12 @@
         <div class="white-box">
             <div class="inner-padding">
                 <h1><?= $data['h1']; ?></h1>
-                <div class="box wide">
+                <div class="form mini">
                     <form class="" action="/recover/send" method="post">
                         <?php csrf_field(); ?>
                         <div class="boxline">
-                            <label for="email">Email</label>
-                            <input type="text" name="email" id="email">
+                            <label class="form-label" for="email">Email</label>
+                            <input class="form-input" type="text" name="email" id="email">
                         </div>
                         <?php if (Lori\Config::get(Lori\Config::PARAM_CAPTCHA)) { ?>
                             <div class="captcha_data">
@@ -21,7 +21,7 @@
                         <?php } ?>
                         <div class="row">
                             <div class="boxline">
-                                <button type="submit" class="button-primary"><?= lang('Reset'); ?></button>
+                                <button type="submit" class="button"><?= lang('Reset'); ?></button>
                                 <small>
                                     <?php if(!Lori\Config::get(Lori\Config::PARAM_INVITE)) { ?>
                                         <span class="otst"><a href="/register"><?= lang('Sign up'); ?></a></span>

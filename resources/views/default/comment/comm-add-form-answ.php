@@ -4,19 +4,19 @@
             <div> 
                 <input type="hidden" name="post_id" id="post_id" value="<?= $data['post_id']; ?>">
                 <input type="hidden" name="answ_id" id="answ_id" value="<?= $data['answ_id']; ?>">
-                <input type="submit" name="commit" value="<?= lang('Comment'); ?>" class="comment-post">
-                <input id="cancel_cmm"  type="button" value="<?= lang('Cancel'); ?>">
+                <input type="submit" class="button" name="commit" value="<?= lang('Comment'); ?>" class="comment-post">
+                <input id="cancel_cmm" class="cancel" type="button" value="<?= lang('Cancel'); ?>">
             </div> 
     <?php } else { ?>
         <form id="add_comm" class="new_comment" action="/comment/add" accept-charset="UTF-8" method="post">
         <?= csrf_field() ?>
             <textarea rows="5" minlength="6" placeholder="<?= lang('write-something'); ?>..." name="comment" id="comment"></textarea>
-            <div> 
+            <div class="boxline"> 
                 <input type="hidden" name="post_id" id="post_id" value="<?= $data['post_id']; ?>">
                 <input type="hidden" name="answ_id" id="answ_id" value="<?= $data['answ_id']; ?>">
                 <input type="hidden" name="comm_id" id="comm_id" value="<?= $data['comm_id']; ?>">                
-                <input type="submit" name="commit" value="<?= lang('Comment'); ?>" class="comment-post">
-                <input id="cancel_cmm"  type="button" value="<?= lang('Cancel'); ?>">
+                <input type="submit" class="button" name="commit" value="<?= lang('Comment'); ?>" class="comment-post">
+                <input id="cancel_cmm" class="cancel" type="button" value="<?= lang('Cancel'); ?>">
             </div> 
         </form>
     <?php } ?>
