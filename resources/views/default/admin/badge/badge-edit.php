@@ -3,8 +3,9 @@
     <main class="admin">
         <div class="white-box">
             <div class="inner-padding">
-                <h1 class="top">
-                    <a href="/admin"><?= lang('Admin'); ?></a> / <a href="/admin/badges"><?= lang('Badges'); ?></a> /
+                <h1>
+                    <a href="/admin"><?= lang('Admin'); ?></a> / 
+                    <a href="/admin/badges"><?= lang('Badges'); ?></a> /
                     <span class="red"><?= $data['h1']; ?></span>
                 </h1>
 

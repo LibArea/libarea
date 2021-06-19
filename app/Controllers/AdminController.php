@@ -90,7 +90,7 @@ class AdminController extends \MainController
         return true;
     }
     
-    // Удаленые комментарии
+    // Удалёные комментарии
     public function comments ()
     {
         $uid    = self::isAdmin();
@@ -121,7 +121,43 @@ class AdminController extends \MainController
         $uid        = self::isAdmin();
         $comm_id    = \Request::getPostInt('id');
         
-        AdminModel::CommentsRecover($comm_id);
+        AdminModel::CommentRecover($comm_id);
+        
+        return true;
+    }
+    
+    // Удалёные ответы
+    public function answers ()
+    {
+        $uid    = self::isAdmin();
+        $answ   = AdminModel::getAnswersDell();
+
+        $result = Array();
+        foreach($answ  as $ind => $row){
+            $row['content'] = Base::text($row['answer_content'], 'md');
+            $row['date']    = lang_date($row['answer_date']);
+            $result[$ind]   = $row;
+        }
+        
+        $data = [
+            'h1'            => lang('Deleted answers'),
+            'meta_title'    => lang('Deleted answers'),
+            'sheet'         => 'admin',
+        ]; 
+
+        Request::getResources()->addBottomStyles('/assets/css/admin.css');
+        Request::getResources()->addBottomScript('/assets/js/admin.js'); 
+ 
+        return view(PR_VIEW_DIR . '/admin/answ_del', ['data' => $data, 'uid' => $uid, 'answers' => $result]);
+    }
+     
+    // Удаление ответа
+    public function recoverAnswer()
+    {
+        $uid        = self::isAdmin();
+        $answ_id    = \Request::getPostInt('id');
+        
+        AdminModel::AnswerRecover($answ_id);
         
         return true;
     }

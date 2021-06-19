@@ -18,7 +18,8 @@ Route::before('Authorization@noAuth')->getGroup();
     Route::get('/admin/space/add')->controller('AdminController@addSpacePage');
     Route::get('/admin/logip/{ip}')->controller('AdminController@logsIp')->where(['ip' => '[0-9].+']);
     Route::type('post')->protect()->get('/admin/addspaceadmin')->controller('AdminController@spaceAdd');
-    Route::get('/admin/comments')->controller('AdminController@comments'); 
+    Route::get('/admin/comments')->controller('AdminController@comments');
+    Route::get('/admin/answers')->controller('AdminController@answers'); 
     Route::get('/admin/invitations')->controller('AdminController@invitations');
     
     Route::get('/admin/badges')->controller('AdminController@badges');
@@ -32,6 +33,7 @@ Route::before('Authorization@noAuth')->getGroup();
     
     Route::get('/post/img/{id}/remove')->controller('PostController@postImgRemove')->where(['id' => '[0-9]+']);
     Route::type('post')->get('/admin/comment/recover')->controller('AdminController@recoverComment');
+    Route::type('post')->get('/admin/answer/recover')->controller('AdminController@recoverAnswer');
     Route::type('post')->get('/admin/space/ban')->controller('AdminController@delSpace');
     Route::type('post')->get('/admin/ban')->controller('AdminController@banUser');
 
@@ -41,7 +43,7 @@ Route::before('Authorization@noAuth')->getGroup();
 	Route::get('/post/edit/{id}')->controller('PostController@editPost');
 	Route::type('post')->protect()->get('/post/editpost/{id}')->controller('PostController@editPostRecording');
 	Route::type('post')->get('/post/del')->controller('PostController@deletePost');
-    Route::type('post')->get('/post/grabtitle')->controller('PostController@grabTitle');
+    Route::type('post')->get('/post/grabtitle')->controller('PostController@grabMeta');
 
     // Инвайты
     Route::get('/u/{login}/invitation')->controller('UserController@invitationPage')->where(['login' => '[A-Za-z0-9]+']); 

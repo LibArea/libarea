@@ -3,7 +3,7 @@
     <main class="admin">
         <div class="white-box">
             <div class="inner-padding">
-                <h1 class="top">
+                <h1>
                     <a href="/admin"><?= lang('Admin'); ?></a> / 
                     <a href="/admin/user/<?= $user['id']; ?>/edit"><?= $user['login']; ?></a> /
                     <a href="/admin/badges"><?= lang('Badges'); ?></a> /

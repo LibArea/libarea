@@ -184,6 +184,7 @@ $(function(){
     // Парсинг title с сайта для > TL1
     $(document).on('click', '#graburl', function(e) {    
         const uri = document.getElementById('link').value;
+        
         if (uri === '') {
             return;
         }
@@ -192,12 +193,10 @@ $(function(){
             type: 'POST',
             data: {uri: uri},
         }).done(function(data) {
-            if(data === '') {
-                return;
-            }
-            document.getElementById('title').value = data
-            // Автоматически подпишемся на уведомления (в будущем).
-            // И покажем ошибку, если сайт не отвечает.
+              
+            let review = JSON.parse(data);
+            document.getElementById('title').value = review.title
+            document.getElementById('wmd-input').value = review.description
                
         });
     });

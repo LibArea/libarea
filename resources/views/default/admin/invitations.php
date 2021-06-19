@@ -3,9 +3,9 @@
     <main class="admin">
         <div class="white-box">
             <div class="inner-padding">
-                <h1 class="top">
+                <h1>
                     <a href="/admin"><?= lang('Admin'); ?></a> / <span class="red"><?= $data['h1']; ?></span>
-                 </h1>
+                </h1>
 
                 <div class="telo invitations">
                     <?php if (!empty($invitations)) { ?>

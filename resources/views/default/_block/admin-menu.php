@@ -11,6 +11,9 @@
                 <a <?php if( $uid['uri'] == '/admin/comments') { ?> class="active"<?php } ?> title="<?= lang('Comments-n'); ?>" href="/admin/comments">
                     ~ <?= lang('Comments-n'); ?>
                 </a>
+                <a <?php if( $uid['uri'] == '/admin/answers') { ?> class="active"<?php } ?> title="<?= lang('Answers-n'); ?>" href="/admin/answers">
+                    ~ <?= lang('Answers-n'); ?>
+                </a>
                 <a <?php if( $uid['uri'] == '/admin/badges') { ?> class="active"<?php } ?> title="<?= lang('Badges'); ?>" href="/admin/badges">
                     ~ <?= lang('Badges'); ?>
                 </a>

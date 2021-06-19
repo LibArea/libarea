@@ -7,27 +7,27 @@
                     <a href="/admin"><?= lang('Admin'); ?></a> / <span class="red"><?= $data['h1']; ?></span>
                 </h1>
 
-                <?php if (!empty($comments)) { ?>
+                <?php if (!empty($answers)) { ?>
               
-                    <?php foreach ($comments as $comm) { ?>  
+                    <?php foreach ($answers as $answ) { ?>  
                     
-                        <div class="comm-telo_bottom" id="comm_<?= $comm['comment_id']; ?>">
+                        <div class="answ-telo_bottom" id="answ_<?= $answ['comment_id']; ?>">
                             <div class="small">
-                                <img class="ava" src="<?= user_avatar_url($comm['avatar'], 'small'); ?>">
-                                <a class="date" href="/u/<?= $comm['login']; ?>"><?= $comm['login']; ?></a> 
+                                <img class="ava" src="<?= user_avatar_url($answ['avatar'], 'small'); ?>">
+                                <a class="date" href="/u/<?= $answ['login']; ?>"><?= $answ['login']; ?></a> 
                                 
-                                <span class="date"><?= $comm['date']; ?></span>
+                                <span class="date"><?= $answ['date']; ?></span>
 
                                 <span class="otst"> &#183; </span>
-                                <a href="/post/<?= $comm['post_id']; ?>/<?= $comm['post_slug']; ?>"><?= $comm['post_title']; ?></a>
+                                <a href="/post/<?= $answ['post_id']; ?>/<?= $answ['post_slug']; ?>"><?= $answ['post_title']; ?></a>
                             </div>
-                            <div class="comm-telo-body">
-                                <?= $comm['content']; ?> 
+                            <div class="answ-telo-body">
+                                <?= $answ['content']; ?> 
                             </div>
                            <div class="post-full-footer date">
-                               + <?= $comm['comment_votes']; ?>
+                               + <?= $answ['answer_votes']; ?>
                                <span id="cm_dell" class="right comm_link small">
-                                    <a data-id="<?= $comm['comment_id']; ?>" class="recover-comm"><?= lang('Recover'); ?></a>
+                                    <a data-id="<?= $answ['answer_id']; ?>" class="recover-answ"><?= lang('Recover'); ?></a>
                                </span>
                            </div>
                         </div>
@@ -38,8 +38,9 @@
                     </div>
                     
                 <?php } else { ?>
-                    <div class="no-content"><?= lang('no-comment'); ?>...</div>
+                    <div class="no-content"> <i class="icon info"></i> <?= lang('No answers'); ?>...</div>
                 <?php } ?>
+
             </div>
         </div>
     </main>

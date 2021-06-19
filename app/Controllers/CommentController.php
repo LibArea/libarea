@@ -28,9 +28,9 @@ class CommentController extends \MainController
         $result = Array();
         foreach($comm  as $ind => $row){
  
-            $row['date']    = lang_date($row['comment_date']);
-            // N+1 - перенести в запрос
-            $row['comm_vote_status'] = VotesCommentModel::getVoteStatus($row['comment_id'], $uid['id']);
+            $row['date']                = lang_date($row['comment_date']);
+            $row['comment_content']     = Base::text($row['comment_content'], 'line');
+            $row['comm_vote_status']    = VotesCommentModel::getVoteStatus($row['comment_id'], $uid['id']);
             $result[$ind]   = $row;
         }
         
@@ -219,8 +219,9 @@ class CommentController extends \MainController
         
         $result = Array();
         foreach($comm as $ind => $row){
-            $row['date']    = lang_date($row['comment_date']);
-            $result[$ind]   = $row;
+            $row['comment_content'] = Base::text($row['comment_content'], 'line');
+            $row['date']            = lang_date($row['comment_date']);
+            $result[$ind]           = $row;
         }
         
         $uid  = Base::getUid();

@@ -25,6 +25,19 @@ $(function(){
             }) 
     });
 
+    // Восстанавливаем ответы
+    $(document).on('click', '.recover-answ', function() {
+        let answ_id  = $(this).data('id');
+        fetch("/admin/answer/recover", { 
+            method: "POST",
+            body: "id=" + answ_id,
+            headers:{'Content-Type': 'application/x-www-form-urlencoded'} 
+            })
+            .then((response) => {
+                location.reload();                
+            }) 
+    });
+
     // Удаление / восстановление пространства
     $(document).on('click', '.space-ban', function() {
         let space_id  = $(this).data('id');

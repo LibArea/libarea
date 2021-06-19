@@ -3,33 +3,28 @@
     <main>
         <div class="white-box">
             <div class="inner-padding">
-                <h1 class="top"><?= $data['h1']; ?></h1>
+                <h1><?= $data['h1']; ?></h1>
 
                 <?php if (!empty($answers)) { ?>
 
                     <?php foreach ($answers as $answ) { ?> 
-                    
                         <?php if($answ['answer_del'] == 0) { ?>
                             <div class="answ-telo_bottom">
-                                <div class="answ-telo">
-                                    <div class="answ-header date">
-                                        <img class="ava" alt="<?= $answ['login']; ?>" src="<?= user_avatar_url($answ['avatar'], 'small'); ?>">
-                                        <span class="user"> 
-                                            <a href="/u/<?= $answ['login']; ?>"><?= $answ['login']; ?></a> 
-                                            <?= $answ['date']; ?>
-                                        </span> 
-                                        <span class="otst"> | </span>
-                                        <span>  
-                                           + <?= $answ['answer_votes']; ?>
-                                        </span>
-                                        <span class="otst"> | </span>
-                                        <span>
-                                            <a href="/post/<?= $answ['post_id']; ?>/<?= $answ['post_slug']; ?>"><?= $answ['post_title']; ?></a>
-                                        </span>  
-                                    </div>
-                                    <div class="answ-telo-body">
-                                        <?= $answ['content']; ?> 
-                                    </div>
+                                <div class="small">
+                                    <img class="ava" alt="<?= $answ['login']; ?>" src="<?= user_avatar_url($answ['avatar'], 'small'); ?>">
+                                    
+                                    <a class="date" href="/u/<?= $answ['login']; ?>"><?= $answ['login']; ?></a>
+                                    
+                                    <span class="date"><?= $answ['date']; ?></span>
+                                   
+                                    <span class="otst"> &#183; </span>
+                                    <a href="/post/<?= $answ['post_id']; ?>/<?= $answ['post_slug']; ?>"><?= $answ['post_title']; ?></a>
+                                </div>
+                                <div class="telo-body">
+                                    <?= $answ['content']; ?> 
+                                </div>
+                                <div class="post-full-footer date">
+                                    <div class="answ-up-id"></div> + <?= $answ['answer_votes']; ?>
                                 </div>
                             </div>  
                         <?php } else { ?>    

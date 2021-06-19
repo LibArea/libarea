@@ -3,8 +3,10 @@
     <main class="admin">
         <div class="white-box">
             <div class="inner-padding">
-                <h1 class="top">
-                    <a href="/admin"><?= lang('Admin'); ?></a> / <a href="/admin/spaces"><?= lang('Spaces'); ?></a> / <span class="red"><?= $data['h1']; ?></span>
+                <h1>
+                    <a href="/admin"><?= lang('Admin'); ?></a> / 
+                    <a href="/admin/spaces"><?= lang('Spaces'); ?></a> / 
+                    <span class="red"><?= $data['h1']; ?></span>
                 </h1>
                 
                 <div class="telo space">

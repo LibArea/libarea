@@ -3,7 +3,7 @@
     <main>
         <div class="white-box">
             <div class="inner-padding">
-                <h1 class="top"><?= $data['h1']; ?></h1>
+                <h1><?= $data['h1']; ?></h1>
 
                 <div class="telo posts">
                     <?php if (!empty($posts)) { ?>
@@ -13,12 +13,12 @@
                             <div class="post-header small">
                                 <img class="ava" src="<?= user_avatar_url($post['avatar'], 'small'); ?>">
                                 <span class="otst"></span>
-                                <span class="user"> 
-                                    <a href="/u/<?= $post['login']; ?>"><?= $post['login']; ?></a> 
-                                </span>
-                                <span> 
-                                    <?= $post['post_date']; ?>
-                                </span>
+
+                                <a class="date" href="/u/<?= $post['login']; ?>"><?= $post['login']; ?></a> 
+
+                                <span class="otst"></span>
+                                <?= $post['post_date']; ?>
+
                                 <span class="otst"> &#183; </span> 
                                 <a class="u-url" href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
                                     <?= $post['space_name']; ?>
@@ -61,7 +61,7 @@
 
                     <?php } else { ?>
 
-                        <div class="no-content"><?= lang('no-post'); ?>...</div>
+                        <div class="no-content"><i class="icon info"></i> <?= lang('no-post'); ?>...</div>
 
                     <?php } ?>
                 </div>

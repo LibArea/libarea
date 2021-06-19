@@ -3,7 +3,7 @@
     <main class="admin">
         <div class="white-box">
             <div class="inner-padding">
-                <h1 class="top">
+                <h1>
                     <a href="/admin"><?= lang('Admin'); ?></a> / <span class="red"><?= $data['h1']; ?></span>
                 </h1>
 
@@ -75,7 +75,7 @@
                         <div class="boxline max-width">
                             <label for="post_title">TL</label>
                             <select name="trust_level">
-                                <?php for($i=0; $i<=$user['trust_level']; $i++) {  ?>
+                                <?php for($i=0; $i<=5; $i++) {  ?>
                                     <option <?php if($user['trust_level'] == $i) { ?>selected<?php } ?> value="<?= $i; ?>">
                                         <?= $i; ?>
                                     </option>

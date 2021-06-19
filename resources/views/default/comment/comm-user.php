@@ -3,7 +3,7 @@
     <main>
         <div class="white-box">
             <div class="inner-padding">
-                <h1 class="top"><?= $data['h1']; ?></h1>
+                <h1><?= $data['h1']; ?></h1>
 
                 <?php if (!empty($comments)) { ?>
 
@@ -11,25 +11,21 @@
                     
                         <?php if($comm['comment_del'] == 0) { ?>
                             <div class="comm-telo_bottom">
-                                <div class="comm-telo">
-                                    <div class="comm-header date">
-                                        <img class="ava" alt="<?= $comm['login']; ?>" src="<?= user_avatar_url($comm['avatar'], 'small'); ?>">
-                                        <span class="user"> 
-                                            <a href="/u/<?= $comm['login']; ?>"><?= $comm['login']; ?></a> 
-                                            <?= $comm['date']; ?>
-                                        </span> 
-                                        <span class="otst"> | </span>
-                                        <span>
-                                            + <?= $comm['comment_votes']; ?>
-                                        </span>
-                                        <span class="otst"> | </span>
-                                        <span>  
-                                           <a href="/post/<?= $comm['post_id']; ?>/<?= $comm['post_slug']; ?>"><?= $comm['post_title']; ?></a>
-                                        </span>
-                                    </div>
-                                    <div class="comm-telo-body">
-                                        <?= $comm['comment_content']; ?> 
-                                    </div>
+                                <div class="small">
+                                    <img class="ava" alt="<?= $comm['login']; ?>" src="<?= user_avatar_url($comm['avatar'], 'small'); ?>">
+                              
+                                    <a class="date" href="/u/<?= $comm['login']; ?>"><?= $comm['login']; ?></a> 
+
+                                    <span class="date"><?= $comm['date']; ?></span>
+                              
+                                    <span class="otst"> &#183; </span>
+                                     <a href="/post/<?= $comm['post_id']; ?>/<?= $comm['post_slug']; ?>"><?= $comm['post_title']; ?></a>
+                                </div>
+                                <div class="comm-telo-body">
+                                    <?= $comm['comment_content']; ?> 
+                                </div>
+                                <div class="post-full-footer date">
+                                    + <?= $comm['comment_votes']; ?>
                                 </div>
                             </div>  
                         <?php } else { ?>    
@@ -42,7 +38,7 @@
                     <?php } ?>
 
                 <?php } else { ?>
-                    <div class="no-content"><?= lang('no-comment'); ?>...</div>
+                    <div class="no-content"><i class="icon info"></i> <?= lang('no-comment'); ?>...</div>
                 <?php } ?>
             </div>
         </div>

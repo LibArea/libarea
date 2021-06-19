@@ -432,18 +432,13 @@ class PostController extends \MainController
         redirect('/');   
     }
     
-    // Парсим title
-    public function grabTitle() 
+    // Парсинг
+    public function grabMeta() 
     {
         $url    = \Request::getPost('uri');
         $result = URLScraper::get($url); 
         
-        if($result['image']) {
-            $image = $result['image'];
-        } else {
-            $image = $result['tags_og']['image'];
-        }
-        return $result['title'];
+        return json_encode($result);
     }
     
     // Получаем данные Open Graph Protocol 

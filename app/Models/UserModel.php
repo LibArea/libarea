@@ -18,9 +18,9 @@ class UserModel extends \MainModel
             ->where(['is_deleted'], '=', 0);
                 
             if($user_id) {    
-                $query = $q->orderBy(['id'], '=', $user_id)->desc(',', ['id'])->desc();
+                $query = $q->orderBy(['id'], '=', $user_id)->desc(',', ['trust_level'])->desc();
             } else {    
-                $query = $q->orderBy(['id'])->desc();
+                $query = $q->orderBy(['trust_level'])->desc();
             }
             
         return $query->getSelect();

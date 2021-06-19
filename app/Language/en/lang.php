@@ -79,7 +79,7 @@ return [
     'info_space'            => '«Spaces» are communities on a site dedicated to a specific topic. <br> <br> There are many spaces. They allow members to focus on a specific interest or topic when posting content.',
     'my_info_space'            => '«Spaces», which i read . <br><br>Created spaces and signed.',
     'info_flow'             => '«Flow» are some of the latest developments on the site. <br> <br> Stream combined with chat (for authorized users).',
-    'info_users'            => 'The list of participants sorted in the order of registration on the site.',
+    'info_users'            => 'List of participants sorted in order of activity on the site.',
     'info_search'           => 'To refine the search, try to find a more accurate query.',
     'info_notifications'    => 'You can mark all the ads as read, click on the link: «I read».',
     'info_space_tags'       => 'Tags allow you to filter topics in the feed.',

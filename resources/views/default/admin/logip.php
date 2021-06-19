@@ -3,7 +3,7 @@
     <main class="admin">
         <div class="white-box">
             <div class="inner-padding">
-                <h1 class="top">
+                <h1>
                     <a href="/admin"><?= lang('Admin'); ?></a> / <span class="red"><?= $data['h1']; ?> - IP</span>
                 </h1>
                 

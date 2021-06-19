@@ -131,10 +131,30 @@ class AdminModel extends \MainModel
     }
     
     // Восстановление комментария
-    public static function CommentsRecover($id)
+    public static function CommentRecover($id)
     {
          XD::update(['comments'])->set(['comment_del'], '=', 0)
         ->where(['comment_id'], '=', $id)->run();
+ 
+        return true;
+    }
+    
+    // Удаленные ответы
+    public static function getAnswersDell() 
+    {
+        $q = XD::select('*')->from(['answers']);
+        $query = $q->leftJoin(['users'])->on(['id'], '=', ['answer_user_id'])
+                ->leftJoin(['posts'])->on(['answer_post_id'], '=', ['post_id'])
+                ->where(['answer_del'], '=', 1)->orderBy(['answer_id'])->desc();
+        
+        return  $query->getSelect();
+    }
+    
+    // Восстановление ответов
+    public static function AnswerRecover($id)
+    {
+         XD::update(['answers'])->set(['answer_del'], '=', 0)
+        ->where(['answer_id'], '=', $id)->run();
  
         return true;
     }
