@@ -213,7 +213,7 @@
                         </ol>
                 
                     <?php } else { ?>    
-                         <ol class="dell comment-telo<?php if ($comm['level'] == 0) { ?> one<?php } ?><?php if ($comm['level'] == 2) { ?> two<?php } ?><?php if ($comm['level'] > 2) { ?> three<?php } ?>"> 
+                         <ol class="dell comment-telo"> 
                             <li class="comments_subtree" id="comm_<?= $comm['comment_id']; ?>">
                                 <span class="comm-deletes">~ <?= lang('comment-deleted'); ?></span>
                             </li>

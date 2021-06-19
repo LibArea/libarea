@@ -15,6 +15,11 @@ body {
   box-sizing: border-box;
 }
 
+:active, :hover, :focus {
+  outline: 0;
+  outline-offset: 0;
+}
+
 :root {
   --primary: #222;
   --secondary: #fff;
@@ -210,16 +215,22 @@ pre code {
 a.add-post {
   background: #1ca1f3;
   border: 1px solid #1ca1f3;
-  padding: 5px 14px 5px 22px;
+  padding: 4px 14px 6px 22px;
   color: #fff;
   border-radius: 10em;
 }
 
-a.button {
-  background: #a9beb2;
-  padding: 5px 14px 5px 22px;
+.button {
+  background: #54b9f7;
+  border: 1px solid #54b9f7;
+  padding: 5px 14px 5px 14px;
   color: #fff;
   border-radius: 3px;
+}
+
+.button:hover {
+  background: #439cd3;
+  border: 1px solid #439cd3;
 }
 
 .dropbtn.nav {
@@ -379,185 +390,65 @@ hr {
   clear: both;
 }
 
-button,
-input[type="button"],
-input[type="reset"],
-input[type="submit"],
-input[type="text"],
-input[type="password"],
-input[type="email"],
-input[type="submit_url"] {
-  display: inline-block;
-  padding: 2px 10px 2px 10px;
-  line-height: 18px;
-  background-color: #fafafa;
-  border: 1px solid #ccc;
-  border-bottom-color: #bbb;
-  cursor: pointer;
-  color: #333;
-}
-
-input[type="submit_url"] {
-  text-align: center;
-  width: 107px;
-}
-
-button:first-child,
-input[type="button"]:first-child,
-input[type="reset"]:first-child,
-input[type="submit"]:first-child,
-input[type="text"]:first-child,
-input[type="password"]:first-child,
-input[type="email"]:first-child,
-input[type="submit_url"]:first-child {
-  margin-left: 0;
-}
-
-button:hover,
-input[type="button"]:hover,
-input[type="reset"]:hover,
-input[type="submit"]:hover,
-input[type="test"]:hover,
-input[type="password"]:hover,
-input[type="email"]:hover,
-input[type="submit_url"]:hover {
-  color: var(--primary);
-  text-decoration: none;
-  background-color: #e6e6e6;
-}
-
+/* Формы и кнопки*/
 textarea {
-  border: 1px solid #ccc;
-  padding: 2px 10px 2px 10px;
-  font-size: 15px;
-  width: 95%;
+  width: 100%;
+  border: 0.05rem solid #caced7;
+  font-size: 16px;
+  padding: 1px 6px;
 }
 
-textarea:focus,
-input:focus {
-  border-color: #888;
-  color: #303030;
-  outline: 0;
+.form {
+  max-width: 40rem;
 }
 
-textarea:disabled {
-  background-color: #f0f0f0;
+.form-label {
+  max-width: 40rem;
+  display: block;
+  line-height: 1rem;
+  padding: 0.4rem 0;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
 }
 
-select {
-  margin-top: 3px;
-  min-width: 100px;
-  padding: 2px 5px 2px 5px;
-  border: 1px solid #ccc;
+.form-input {
+  transition: all .2s ease;
+  appearance: none;
+  background: #fff;
+  background-image: none;
+  border: 0.05rem solid #caced7;
+  border-radius: 0;
+  color: #50596c;
+  display: block;
+  font-size: 0.8rem;
+  height: 1.8rem;
+  line-height: 1rem;
+  max-width: 100%;
+  outline: none;
+  padding: 0.35rem 0.4rem;
+  position: relative;
+  width: 100%;
 }
 
-select::-moz-focus-inner {
-  border: 0;
-  outline: 0;
+.form-input:focus,
+textarea:focus {
+  box-shadow: 0 0 0 0.1rem rgba(38, 139, 210, 0.2);
+  border-color: #268bd2; 
 }
 
-select:focus {
-  border-color: rgba(160, 160, 160, 0.8);
-  color: #303030;
-  outline: 0;
+.form-input {
+  max-width: 40rem;
 }
 
-input:disabled,
-button:disabled {
-  background-color: #e9e9e9;
-  color: gray;
-}
-
-input:disabled {
-  background: #f1f1f1;
-}
-
-input.form-about,
-input.add {
-  width: calc(100% - 12em);
-}
-
-input.add-url {
-  width: calc(100% - 22em);
-}
-
-.box .boxline {
+.boxline {
   clear: both;
-  margin-bottom: 0.9em;
+  margin-bottom: 0.9rem;
 }
 
 .box_h {
-  font-size: 12px;
+  font-size: 0.8rem;
+  line-height: 0.9rem;
+  margin: 0.2rem;
   color: var(--tertiary);
-}
-
-.box label,
-.box .label_holder {
-  display: block;
-  float: left;
-  margin-bottom: 4px;
-}
-
-.box label {
-  width: 8em;
-  vertical-align: middle;
-  display: block;
-  float: left;
-  margin-bottom: 4px;
-}
-
-.box label.required {
-  font-weight: bold;
-}
-
-.box.wide label {
-  width: 12em;
-}
-
-.box br {
-  clear: left;
-}
-
-form.form {
-  display: inherit;
-  margin-right: 10px;
-}
-
-input.form-search {
-  border: 1px solid #e6ecf0;
-  background-color: #e6ecf0;
-  border-radius: 10em;
-  padding: 2px 0 2px 20px;
-  height: 25px;
-  color: #14171a;
-  margin-left: 50px;
-  width: 300px;
-}
-
-input.form-search:hover {
-  border: 1px solid #e6ecf0;
-  background-color: #fff;
-}
-
-input.form-search:focus {
-  border: 1px solid #1ca1f3;
-  background-color: #fff;
-}
-
-/* Sidebar */
-aside .stat {
-  text-transform: lowercase;
-}
-
-aside a.my {
-  color: var(--tertiary);
-  display: block;
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
-aside a.my.active {
-  color: #1ca1f3;
 }
 
 /* Форма авторизации */
@@ -638,6 +529,48 @@ aside a.my.active {
 .login-nav button:hover {
   color: #1ca1f3;
   background: #fff;
+}
+
+/* Поиск */
+input.form-search {
+  border: 1px solid #e6ecf0;
+  background-color: #e6ecf0;
+  border-radius: 10em;
+  padding: 2px 0 2px 10px;
+  height: 25px;
+  color: #14171a;
+  margin: 0 30px;
+  width: 300px;
+}
+
+input.form-search:hover {
+  border: 1px solid #e6ecf0;
+  background-color: #fff;
+}
+
+input.form-search:focus {
+  border: 1px solid #1ca1f3;
+  background-color: #fff;
+}
+
+form.form {
+  display: inherit;
+}
+
+/* Sidebar */
+aside .stat {
+  text-transform: lowercase;
+}
+
+aside a.my {
+  color: var(--tertiary);
+  display: block;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+aside a.my.active {
+  color: #1ca1f3;
 }
 
 /* Диалог */
@@ -1507,10 +1440,11 @@ i.github:hover {
   .column { width: 19%; }
 
   main,
-  main.w-75 { width: 100%; margin-right: 0; }
+  main.w-75 {
+    width: 100%;
+    margin-right: 0;
+  }
 
-  input.add,
-  input.add-url { width: 94%; }
   .text-oth { width: 46%; }
   .text-info { width: 40%; }
   .nav { margin-left: 15px; }

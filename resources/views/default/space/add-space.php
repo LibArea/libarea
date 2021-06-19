@@ -10,35 +10,34 @@
                         <form action="/space/addspace" method="post" enctype="multipart/form-data">
                             <?= csrf_field() ?>
                             <div class="boxline">
-                                <label for="post_title">URL (slug)<sup class="red">*</sup></label>
-                                <input class="add" minlength="3" type="text" name="space_slug" />
+                                <label class="form-label" for="post_title">URL (slug)<sup class="red">*</sup></label>
+                                <input class="form-input" minlength="3" type="text" name="space_slug" />
                                 <div class="box_h">На английском. Пример: <b>meta</b></div>
-                                <br />
                             </div>  
                             <div class="boxline">
-                                <label for="post_title"><?= lang('Title'); ?><sup class="red">*</sup></label>
-                                <input class="add" minlength="6" type="text" name="space_name" />
+                                <label class="form-label" for="post_title"><?= lang('Title'); ?><sup class="red">*</sup></label>
+                                <input class="form-input" minlength="6" type="text" name="space_name" />
                                 <div class="box_h">Одно, два слова</div>
-                                <br />   
                             </div>   
                             <div class="boxline"> 
-                                <label for="post_content"><?= lang('Publications'); ?></label>
+                                <label class="form-label" for="post_content"><?= lang('Publications'); ?></label>
                                 <input type="radio" name="permit" checked value="0"> <?= lang('All'); ?>
                                 <input type="radio" name="permit" value="1" > <?= lang('Just me'); ?>
                                 <div class="box_h">Кто сможет размещать посты</div>
-                                <br />
                             </div> 
                             <div class="boxline"> 
-                                <label for="post_content"><?= lang('Show'); ?></label>
+                                <label class="form-label" for="post_content"><?= lang('Show'); ?></label>
                                 <input type="radio" name="feed" checked value="0"> <?= lang('Yes'); ?>
                                 <input type="radio" name="feed" value="1" > <?= lang('No'); ?>
                                 <div class="box_h">Если нет, то посты не будут видны в ленте (на главной)</b></div>
-                                <br />  
-                            </div>                 
-                                <input type="submit" name="submit" value="<?= lang('Add'); ?>" />
+                            </div>
+                            <div class="boxline">                             
+                                <input type="submit" class="button" name="submit" value="<?= lang('Add'); ?>" />
+                            </div>    
                         </form>
-                        <br>
-                        Вы можете добавить пространств: <b><?= $num_add_space; ?></b>
+                        <div class="boxline">
+                            Вы можете добавить пространств: <b><?= $num_add_space; ?></b>
+                        </div>
                     </div>
                 </div>
             </div>

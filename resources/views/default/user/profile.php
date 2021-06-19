@@ -50,7 +50,7 @@
     <div class="stats<?php if($user['cover_art'] == 'cover_art.jpeg') { ?> no-cover<?php } ?>">
         <?php if($data['post_num_user'] != 0) { ?>
             <label class="required"><?= lang('Posts-m'); ?>:</label>
-            <span class="d">
+            <span class="right">
                 <a title="<?= lang('Posts-m'); ?> <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/posts">
                     <?= $data['post_num_user']; ?>
                 </a>
@@ -59,7 +59,7 @@
         <?php } ?>
         <?php if($data['answ_num_user'] != 0) { ?>
             <label class="required"><?= lang('Answers'); ?>:</label>
-            <span class="d-cont">
+            <span class="right">
                 <a title="<?= lang('Answers'); ?> <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/answers">
                     <?= $data['answ_num_user']; ?>
                 </a>
@@ -68,7 +68,7 @@
         <?php } ?>
         <?php if($data['comm_num_user'] != 0) { ?>
             <label class="required"><?= lang('Comments'); ?>:</label>
-            <span class="d">
+            <span class="right">
                 <a title="<?= lang('Comments'); ?> <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/comments">
                     <?= $data['comm_num_user']; ?>
                 </a>
@@ -109,60 +109,60 @@
         
         <?php if($user['website']) { ?>    
             <div class="boxline">
-                <label for="name"><?= lang('URL'); ?></label>
+                <label for="name"><?= lang('URL'); ?>:</label>
                 <a href="<?= $user['website']; ?>" rel="noopener nofollow ugc">
-                    <?= $user['website']; ?>
+                    <span class="otst"><?= $user['website']; ?></span>
                 </a>
             </div>
         <?php } ?>
         <?php if($user['location']) { ?> 
             <div class="boxline">
-                <label for="name"><?= lang('City'); ?></label>
-                <?= $user['location']; ?>
+                <label for="name"><?= lang('City'); ?>:</label>
+                <span class="otst"><?= $user['location']; ?></span>
             </div>
         <?php } else { ?>
             <div class="boxline">
-                <label for="name"><?= lang('City'); ?></label>
-                ...
+                <label for="name"><?= lang('City'); ?>:</label>
+                <span class="otst">...</span>
             </div>
         <?php } ?>
         <?php if($user['public_email']) { ?> 
             <div class="boxline">
-                <label for="name"><?= lang('E-mail'); ?></label>
+                <label for="name"><?= lang('E-mail'); ?>:</label>
                 <a href="mailto:<?= $user['public_email']; ?>" rel="noopener nofollow ugc">
-                    <?= $user['public_email']; ?>
+                    <span class="otst"><?= $user['public_email']; ?></span>
                 </a>
             </div>
         <?php } ?>
         <?php if($user['skype']) { ?>
             <div class="boxline">
-                <label for="name"><?= lang('Skype'); ?></label>
-                <a href="skype:<?= $user['skype']; ?>" rel="noopener nofollow ugc">
-                    <?= $user['skype']; ?>
+                <label for="name"><?= lang('Skype'); ?>:</label>
+                <a class="otst" href="skype:<?= $user['skype']; ?>" rel="noopener nofollow ugc">
+                    <span class="otst"><?= $user['skype']; ?></span>
                 </a>
             </div>
         <?php } ?>
         <?php if($user['twitter']) { ?>
             <div class="boxline">
-                <label for="name"><?= lang('Twitter'); ?></label>
+                <label for="name"><?= lang('Twitter'); ?>:</label>
                 <a href="https://twitter.com/<?= $user['twitter']; ?>" rel="noopener nofollow ugc">
-                    <?= $user['twitter']; ?>
+                    <span class="otst"><?= $user['twitter']; ?></span>
                 </a>
             </div>
         <?php } ?>
         <?php if($user['telegram']) { ?>
             <div class="boxline">
-                <label for="name"><?= lang('Telegram'); ?></label>
+                <label for="name"><?= lang('Telegram'); ?>:</label>
                 <a href="tg://resolve?domain=<?= $user['telegram']; ?>" rel="noopener nofollow ugc">
-                    <?= $user['telegram']; ?>
+                    <span class="otst"><?= $user['telegram']; ?></span>
                 </a>
             </div>
         <?php } ?>
         <?php if($user['vk']) { ?>
             <div class="boxline">
-                <label for="name"><?= lang('VK'); ?></label>
+                <label for="name"><?= lang('VK'); ?>:</label>
                 <a href="https://vk.com/<?= $user['vk']; ?>" rel="noopener nofollow ugc">
-                    <?= $user['vk']; ?>
+                    <span class="otst"><?= $user['vk']; ?></span>
                 </a>
             </div> 
         <?php } ?>    
@@ -173,28 +173,25 @@
 
             <div class="post-telo">
                 <div class="post-body">
-                    <a class="u-url" href="/post/<?= $onepost['post_id']; ?>/<?= $onepost['post_slug']; ?>">
-                        <h2 class="title"><?= $onepost['post_title']; ?></h2>
+                    <a href="/post/<?= $onepost['post_id']; ?>/<?= $onepost['post_slug']; ?>">
+                        <h2><?= $onepost['post_title']; ?></h2>
                     </a>
 
-                    <div class="post-footer lowercase"> 
+                    <div class="lowercase"> 
                         <img class="ava" alt="<?= $user['login']; ?>" src="<?= user_avatar_url($user['avatar'], 'small'); ?>">
-                        <span class="user"> 
-                            <a href="/u/<?= $user['login']; ?>">
-                                <?= $user['login']; ?>
-                            </a> 
-                        </span>
-                        <span class="date"> 
-                           <?= $onepost['post_date'] ?>
-                        </span>
+                        <a class="date" href="/u/<?= $user['login']; ?>"><?= $user['login']; ?></a> 
+                        
                         <span class="otst"> &#183; </span> 
-                        <a class="u-url" href="/s/<?= $onepost['space_slug']; ?>" title="<?= $onepost['space_name']; ?>">
+                        <span class="date"><?= $onepost['post_date'] ?></span>
+                        
+                        <span class="otst"> &#183; </span> 
+                        <a class="date"  href="/s/<?= $onepost['space_slug']; ?>" title="<?= $onepost['space_name']; ?>">
                             <?= $onepost['space_name']; ?>
                         </a> 
+                        
                         <?php if($onepost['post_answers_num'] !=0) { ?> 
-                            <span class="otst"> | </span>
-                            <a class="u-url" href="/post/<?= $onepost['post_id']; ?>/<?= $onepost['post_slug']; ?>">
-                              <?= lang('Answers-m'); ?> <?= $onepost['post_answers_num']; ?>  
+                            <a class="date right" href="/post/<?= $onepost['post_id']; ?>/<?= $onepost['post_slug']; ?>">
+                                <i class="icon bubbles"></i> <?= $onepost['post_answers_num']; ?>  
                             </a>
                         <?php } ?>
                     </div>

@@ -28,17 +28,19 @@
                         <form action="/space/tag/add" method="post">
                             <?= csrf_field() ?>
                             <div class="boxline">
-                                <label for="post_title"><?= lang('Title'); ?></label>
-                                <input class="add" type="text" value="" name="st_title" />
+                                <label class="form-label" for="post_title"><?= lang('Title'); ?></label>
+                                <input class="form-input" type="text" value="" name="st_title" />
                                 <div class="box_h">4 до 20 <?= lang('characters'); ?></div>
                             </div>
-                                <div class="boxline">
-                                <label for="post_content"><?= lang('Description'); ?></label>
-                                <input class="add" type="text" value="" name="st_desc" />
+                            <div class="boxline">
+                                <label class="form-label" for="post_content"><?= lang('Description'); ?></label>
+                                <input class="form-input" type="text" value="" name="st_desc" />
                                 <div class="box_h">20 до 180 <?= lang('characters'); ?></div>
                             </div>
-                            <input type="hidden" name="space_id" id="space_id" value="<?= $space['space_id']; ?>">
-                            <input type="submit" name="submit" value="<?= lang('Add'); ?>" />
+                            <div class="boxline">
+                                <input type="hidden" name="space_id" id="space_id" value="<?= $space['space_id']; ?>">
+                                <input type="submit" class="button" name="submit" value="<?= lang('Add'); ?>" />
+                            </div>
                         </form>
                     </div>
                 </div>

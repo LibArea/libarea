@@ -19,12 +19,13 @@
                                 </div> 
                                 <div id="wmd-preview" class="wmd-panel wmd-preview"></div> 
                             </div>
-                            <div class="clear"> 
-                                <input type="hidden" name="post_id" id="post_id" value="<?= $data['post_id']; ?>">
-                                <input type="hidden" name="answ_id" id="answ_id" value="<?= $data['answ_id']; ?>">
-                                <input type="submit" name="answit" value="<?= lang('Edit'); ?>" class="answer-post">
+                       
+                            <input type="hidden" name="post_id" id="post_id" value="<?= $data['post_id']; ?>">
+                            <input type="hidden" name="answ_id" id="answ_id" value="<?= $data['answ_id']; ?>">
+                            
+                            <div class="boxline">
+                                <input type="submit" class="button" name="answit" value="<?= lang('Edit'); ?>" class="answer-post">
                             </div> 
-             
                         </form>
                     <?php endif; ?>
                 </div>

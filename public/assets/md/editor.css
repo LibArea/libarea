@@ -8,10 +8,33 @@
   background-color: Silver;
 }
 
+#graburl {
+  border: 1px solid #caced7;
+  color: #666;
+  padding: 4px 6px;
+}
+
+#graburl:hover,
+#graburl:focus,
+#graburl:active {
+  border: 1px solid #1ca1f3;
+  background-color: #1ca1f3;
+  color: #fff;
+  padding: 4px 6px;
+  outline: none;
+}
+
 .wmd-input {
   height: 300px;
   width: 98%;
-  border: 1px solid DarkGray;
+  border: 1px solid #caced7;
+  font-size: 16px;
+  outline: none;
+}
+
+.wmd-input:focus {
+  box-shadow: 0 0 0 0.1rem rgba(38, 139, 210, 0.2);
+  border-color: #268bd2; 
 }
 
 .wmd-input.h-150 {
@@ -146,12 +169,13 @@
 
 @media (max-width: 880px) {
   .wmd-panel { 
-    width: 96%; 
+    width: 100%; 
   }
   
   .wmd-input, 
   .image-uploader { 
-    height: 120px; 
+    height: 120px;
+    width: 100%;     
   }
   
   .wmd-preview {

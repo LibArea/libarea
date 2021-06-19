@@ -134,6 +134,7 @@ return [
     'Participant posts' => 'Посты участника',
     'Color'             => 'Цвет',
     'Text'              => 'Текст',
+    'Author'            => 'Автор',
     'characters'        => 'символов',
     'Post added'        => 'Добавлен пост',
     'forgot-password'   => 'Забыли пароль',

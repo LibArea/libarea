@@ -38,7 +38,7 @@
                                 <div class="clear"> 
                                     <p><?= lang('select-file-up'); ?>: 120x120px (jpg, jpeg, png)</p>
                                     <input type="hidden" name="space_id" id="space_id" value="<?= $space['space_id']; ?>">
-                                    <input type="submit" name="submit" value="<?= lang('Edit'); ?>" />
+                                    <input type="submit" class="button" name="submit" value="<?= lang('Edit'); ?>" />
                                     <br><br>
                                 </div> 
                             </div>
@@ -65,7 +65,7 @@
                             </div>
                             <div class="clear">
                                 <input type="hidden" name="space_id" id="space_id" value="<?= $space['space_id']; ?>">
-                                <input type="submit" name="submit" value="<?= lang('Edit'); ?>" />
+                                <input type="submit" class="button" name="submit" value="<?= lang('Edit'); ?>" />
                             </div>                
                         </form>
                     </div>

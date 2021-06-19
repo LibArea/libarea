@@ -6,8 +6,10 @@
             <div> 
                 <input type="hidden" name="post_id" id="post_id" value="<?= $data['post_id']; ?>">
                 <input type="hidden" name="answ_id" id="answ_id" value="<?= $data['answ_id']; ?>">
-                <input type="submit" name="answit" value="<?= lang('Edit'); ?>" class="answer-post">
-                <input id="cancel_answ" type="button" value="<?= lang('Cancel'); ?>">
+                <div class="boxline">
+                    <input type="submit" name="answit" value="<?= lang('Edit'); ?>" class="answer-post">
+                    <input id="cancel_answ" class="button" type="button" value="<?= lang('Cancel'); ?>">
+                </div>
             </div> 
         </form>
     <?php endif; ?>

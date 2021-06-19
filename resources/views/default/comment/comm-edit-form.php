@@ -7,7 +7,7 @@
                 <input type="hidden" name="post_id" id="post_id" value="<?= $data['post_id']; ?>">
                 <input type="hidden" name="comm_id" id="comm_id" value="<?= $data['comm_id']; ?>">
                 <input type="submit" name="commit" value="<?= lang('Edit'); ?>" class="comment-post">
-                <input id="cancel_cmm" type="button" value="<?= lang('Cancel'); ?>">
+                <input id="cancel_cmm" class="button" type="button" value="<?= lang('Cancel'); ?>">
             </div> 
         </form>
     <?php endif; ?>

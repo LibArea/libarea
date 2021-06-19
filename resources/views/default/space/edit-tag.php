@@ -29,18 +29,20 @@
                         <form action="/space/tag/edit" method="post">
                             <?= csrf_field() ?>
                             <div class="boxline">
-                                <label for="post_title"><?= lang('Title'); ?></label>
-                                <input class="add" type="text" value="<?= $tag['st_title']; ?>" name="st_title" />
+                                <label class="form-label" for="post_title"><?= lang('Title'); ?></label>
+                                <input class="form-input" type="text" value="<?= $tag['st_title']; ?>" name="st_title" />
                                 <div class="box_h">От 4 до 20 знаков</div>
                             </div>
-                                <div class="boxline">
-                                <label for="post_content"><?= lang('Description'); ?></label>
-                                 <input class="add" type="text" value="<?= $tag['st_description']; ?>" name="st_desc" />
+                            <div class="boxline">
+                                <label class="form-label" for="post_content"><?= lang('Description'); ?></label>
+                                 <input class="form-input" type="text" value="<?= $tag['st_description']; ?>" name="st_desc" />
                                 <div class="box_h">От 20 до 180 знаков</div>
                             </div>
-                            <input type="hidden" name="space_id" id="space_id" value="<?= $tag['st_space_id']; ?>">
-                            <input type="hidden" name="tag_id" id="tag_id" value="<?= $tag['st_id']; ?>">
-                            <input type="submit" name="submit" value="<?= lang('Edit'); ?>" />
+                            <div class="boxline">
+                                <input type="hidden" name="space_id" id="space_id" value="<?= $tag['st_space_id']; ?>">
+                                <input type="hidden" name="tag_id" id="tag_id" value="<?= $tag['st_id']; ?>">
+                                <input type="submit" class="button" name="submit" value="<?= lang('Edit'); ?>" />
+                            </div>
                         </form>
                     </div>
                 </div>
