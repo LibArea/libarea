@@ -141,6 +141,8 @@
                             <sup class="date small"><?= $domain['link_count']; ?></sup>
                         </a><br>
                     <?php } ?>
+                <?php } else { ?>
+                    <p><?= lang('There are no domains'); ?>...</p>
                 <?php } ?>
             </div>                        
         </div>

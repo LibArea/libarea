@@ -29,6 +29,11 @@
                                 <?php if($post['post_tl'] > 0) { ?> 
                                     <span class="trust-level small">tl<?= $post['post_tl']; ?></span>
                                 <?php } ?>
+                                <?php if($post['post_url_domain']) { ?> 
+                                    <a class="post_url" href="/domain/<?= $post['post_url_domain']; ?>">
+                                        <?= $post['post_url_domain']; ?>
+                                    </a> 
+                                <?php } ?>
                         </h1>
                         <div class="post-footer-full small lowercase">
                             <img class="ava" alt="<?= $post['login']; ?>" src="<?= user_avatar_url($post['avatar'], 'small'); ?>">

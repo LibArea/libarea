@@ -25,7 +25,7 @@ class LinkModel extends \MainModel
     // 5 популярных доменов
     public static function getDomainsTop($domain)
     {
-        return XD::select('*')->from(['links'])->where(['link_url_domain'], '=', $domain)
+        return XD::select('*')->from(['links'])->where(['link_url_domain'], '!=', $domain)
                 ->and(['link_is_deleted'], '=', 0)->orderBy(['link_count'])->desc()->limit(10)->getSelect();
     } 
 
