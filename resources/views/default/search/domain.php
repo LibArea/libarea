@@ -1,7 +1,11 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 <div class="wrap">
     <main>
-        <h1><?= $data['h1']; ?></h1>
+        <div class="white-box">
+            <div class="inner-padding space-tags">
+                <h1><?= $data['h1']; ?></h1>
+            </div>
+        </div>
         <?php if (!empty($posts)) { ?> 
         
             <?php foreach ($posts as  $post) { ?>
@@ -28,7 +32,7 @@
                     </div>
                     
                     <div class="post-body">
-                        <a class="u-url" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
+                        <a href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
                             <h2 class="title"><?= $post['post_title']; ?>
                                 <?php if ($post['post_is_delete'] == 1) { ?> 
                                     <i class="icon trash"></i>
@@ -79,7 +83,7 @@
 
                         <?php if($post['post_content_img']) { ?> 
                                 <div class="post-img">
-                                    <a title="<?= $post['post_title']; ?>" class="u-url" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
+                                    <a title="<?= $post['post_title']; ?>" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
                                         <img class="img-post" alt="<?= $post['post_title']; ?>" src="/uploads/posts/<?= $post['post_content_img']; ?>">
                                     </a>
                                 </div>    
@@ -125,7 +129,20 @@
         <?php } else { ?>
             <div class="no-content"><?= lang('no-post'); ?>...</div>
         <?php } ?>
-
     </main>
+    <aside>
+        <div class="white-box">
+            <div class="inner-padding space-tags">
+                <?php if (!empty($domains)) { ?>
+                    <div class="bar-title small"><?= lang('Domains'); ?></div>
+                    <?php foreach ($domains as  $domain) { ?>
+                        <a class="space-u tag-u" href="/domain/<?= $domain['post_url_domain']; ?>">
+                            <i class="icon link"></i> <?= $domain['post_url_domain']; ?>
+                        </a><br>
+                    <?php } ?>
+                <?php } ?>
+            </div>                        
+        </div>
+    </aside>
 </div>    
 <?php include TEMPLATE_DIR . '/footer.php'; ?> 

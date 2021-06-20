@@ -626,7 +626,7 @@ aside a.my.active {
 
 .post-body img.thumb,
 img.thumb {
-  margin: -25px 0 10px 10px;
+  margin: -12px 0 10px 10px;
   float: right;
   width: 70px;
   border-radius: 2px;
@@ -1091,13 +1091,6 @@ ol.comment-telo {
   margin: 0 20px 0 0;
 }
 
-div.voters .comm-up-id,
-div.voters .post-up-id,
-div.voters .asnw-up-id {
-  border-bottom-width: 11px;
-  float: left;
-}
-
 .voters .comm-up-id,
 .voters .post-up-id,
 .voters .answ-up-id {
@@ -1124,6 +1117,13 @@ div.voters .asnw-up-id {
 .voters.active .score {
   border-color: transparent transparent var(--quaternary) transparent;
   color: var(--quaternary);
+  border-bottom-width: 11px;
+  float: left;
+}
+
+div.voters .comm-up-id,
+div.voters .post-up-id,
+div.voters .asnw-up-id {
   border-bottom-width: 11px;
   float: left;
 }
@@ -1207,7 +1207,7 @@ div.voters .asnw-up-id {
 
 /* Info пространство и рекомендовано в посте */
 .space-info-img {
-  margin-top: 10px;
+  margin: 10px 0;
 }
 
 .img-space {
@@ -1257,7 +1257,7 @@ div.voters .asnw-up-id {
 
 h3.recommend {
   border-bottom: 1px solid #ddd;
-  padding: 15px 0 10px 0;
+  padding: 12px 0 10px 0;
   margin: 0 0 10px 0;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -1500,6 +1500,24 @@ a:hover .icon::before {
   font-size: 48px;
 }
 
+.social {
+  padding-top: 5px;
+}
+
+.push .icon {
+  font-size: 26px;
+  margin-right: 30px;
+  color: var(--tertiary);
+}
+
+.push .icon:hover {
+  color: var(--quaternary);
+}
+
+.push.pinterest .icon {
+  margin-right: 0;
+}
+
 .icon.size-actual::before { content: "\e058"; }
 .icon.star::before { content: "\e09b"; }
 .icon.graph::before { content: "\e06b"; }
@@ -1537,3 +1555,7 @@ a:hover .icon::before {
 .icon.cloud-upload::before { content: "\e084"; }
 .icon.close::before { content: "\e082"; }
 .icon.badge::before { content: "\e028"; }
+.icon.social-vkontakte::before { content: "\e618"; }
+.icon.twitter::before { content: "\e009"; }
+.icon.social-facebook::before { content: "\e00b"; }
+.icon.social-pinterest::before { content: "\e60b"; }

@@ -116,7 +116,7 @@ class PostController extends \MainController
         }
         
         // Рекомендованные посты
-        $recommend = PostModel::postsSimilar($post['post_id'], $post['post_space_id'], $uid['id']);
+        $recommend = PostModel::postsSimilar($post['post_id'], $post['post_space_id'], $uid['id'], 5);
      
         // Выводить или нет? Что дает просмотр даты изменения?
         // Учитывать ли изменение в сортировки и в оповещение в будущем...
@@ -186,6 +186,7 @@ class PostController extends \MainController
             Request::getResources()->addBottomScript('/assets/md/Markdown.Editor.js');
             Request::getResources()->addBottomScript('/assets/md/editor.js');
         }
+        Request::getResources()->addBottomScript('/assets/js/shares.js');
         
         if($post['post_is_delete'] == 1) {
             \Request::getHead()->addMeta('robots', 'noindex');

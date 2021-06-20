@@ -103,7 +103,7 @@
                     </div>
                     
                     <div class="post-body">
-                        <a class="u-url" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
+                        <a href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
                             <h2 class="title"><?= $post['post_title']; ?>
                                 <?php if ($post['post_is_delete'] == 1) { ?> 
                                     <i class="icon trash"></i>
@@ -153,7 +153,7 @@
 
                         <?php if($post['post_content_img']) { ?> 
                                 <div class="post-img">
-                                    <a title="<?= $post['post_title']; ?>" class="u-url" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
+                                    <a title="<?= $post['post_title']; ?>" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
                                         <img class="img-post" alt="<?= $post['post_title']; ?>" src="/uploads/posts/<?= $post['post_content_img']; ?>">
                                     </a>
                                 </div>    

@@ -156,14 +156,14 @@ class PostModel extends \MainModel
     }
     
     // Рекомендованные посты
-    public static function postsSimilar($post_id, $space_id, $uid) 
+    public static function postsSimilar($post_id, $space_id, $uid, $quantity) 
     {
         $q = XD::select('*')->from(['posts']);
         $query = $q->where(['post_id'], '<', $post_id)
         ->and(['post_space_id'], '=', $space_id) // из пространства
         ->and(['post_is_delete'], '=', 0)        // не удален
         ->and(['post_user_id'], '!=', $uid)      // не участника, который смотрит
-        ->orderBy(['post_id'])->desc()->limit(3);
+        ->orderBy(['post_id'])->desc()->limit($quantity);
         
         return $query->getSelect();
     }

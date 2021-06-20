@@ -20,7 +20,7 @@
                                 <?= $post['post_date']; ?>
 
                                 <span class="otst"> &#183; </span> 
-                                <a class="u-url" href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
+                                <a href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
                                     <?= $post['space_name']; ?>
                                 </a>
                             </div> 

@@ -89,6 +89,8 @@ class SearchController extends \MainController
          
         }
         
+        $domains = SearchModel::getDomainsTop($domain); 
+        
         $meta_title = lang('Domain') . ': ' . $domain .' | '. Config::get(Config::PARAM_NAME);
         $meta_desc = lang('domain-desc') . ': ' . $domain .' '. Config::get(Config::PARAM_HOME_TITLE);
         
@@ -100,7 +102,7 @@ class SearchController extends \MainController
             'meta_desc'     => $meta_desc, 
         ];
         
-        return view(PR_VIEW_DIR . '/search/domain', ['data' => $data, 'uid' => $uid, 'posts' => $result]);
+        return view(PR_VIEW_DIR . '/search/domain', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'domains' => $domains]);
     }
 
 }

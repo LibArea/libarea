@@ -41,5 +41,16 @@ class SearchModel extends \MainModel
 
         return $query->getSelect();
     }
+    
+    // 5 популярных доменов
+    public static function getDomainsTop($domain)
+    {
+
+        $sql = "SELECT * FROM posts WHERE post_url_domain != '' AND post_url_domain != :domain";
+
+        $result = DB::run($sql, ['domain' => $domain]);
+        return  $result->fetchall(PDO::FETCH_ASSOC);
+        
+    }
 
 }

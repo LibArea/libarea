@@ -235,6 +235,18 @@
             </div>
         </div>
         
+        <div class="space-info white-box">
+            <div class="inner-padding"> 
+                <h3 class="recommend small"><?= lang('To share'); ?></h3> 
+                <div class="social center" data-url="<?= Lori\Config::get(Lori\Config::PARAM_URL) . '/post/' . $post['post_id'] . '/' . $post['post_slug']; ?>" data-title="<?= $post['post_title']; ?>">		
+                    <a class="push facebook" data-id="fb"><i class="icon social-facebook"></i></a>
+                    <a class="push vkontakte" data-id="vk"><i class="icon social-vkontakte"></i></a>
+                    <a class="push twitter" data-id="tw"><i class="icon twitter"></i></a>
+                    <a class="push pinterest" data-id="pin"><i class="icon social-pinterest"></i></a>
+                </div>
+            </div>
+        </div>
+
         <?php if($recommend) { ?> 
             <div class="white-box sticky recommend">
                 <div class="inner-padding">

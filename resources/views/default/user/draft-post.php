@@ -13,7 +13,7 @@
                                    <div class="score"><?= $counter; ?>.</div> 
                                 </div>
                                 <div class="post-telo">
-                                    <a class="u-url" href="/post/<?= $dr['post_id']; ?>/<?= $dr['post_slug']; ?>">
+                                    <a href="/post/<?= $dr['post_id']; ?>/<?= $dr['post_slug']; ?>">
                                         <h3 class="title"><?= $dr['post_title']; ?></h3>
                                     </a>
                                     <div class="footer">
