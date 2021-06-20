@@ -41,7 +41,8 @@ class LinkController extends \MainController
          
         }
         
-        $domains = LinkModel::getDomainsTop($domain); 
+        $info_domain    = LinkModel::getLinkOne($domain);
+        $domains        = LinkModel::getDomainsTop($domain); 
         
         $meta_title = lang('Domain') . ': ' . $domain .' | '. Config::get(Config::PARAM_NAME);
         $meta_desc = lang('domain-desc') . ': ' . $domain .' '. Config::get(Config::PARAM_HOME_TITLE);
@@ -54,7 +55,7 @@ class LinkController extends \MainController
             'meta_desc'     => $meta_desc, 
         ];
         
-        return view(PR_VIEW_DIR . '/link/domain', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'domains' => $domains]);
+        return view(PR_VIEW_DIR . '/link/domain', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'domains' => $domains, 'info_domain' => $info_domain]);
     }
 
 }

@@ -166,6 +166,12 @@ h1 {
   font-size: 1.2rem;
 }
 
+h1.domain {
+  font-weight: 400;
+  font-size: 1.2rem;
+  margin: 5px 0;
+}
+
 h1 span {
   vertical-align: middle;
 }
@@ -316,6 +322,15 @@ a.home {
 
 i.icon {
   margin-right: 5px;
+}
+
+.domain-content {
+  color: #666;
+}
+
+.domain-footer-small {
+  font-size: 14px;
+  margin: 5px 0;
 }
 
 .sb-telo {
@@ -1548,3 +1563,5 @@ a:hover .icon::before {
 .icon.twitter::before { content: "\e009"; }
 .icon.social-facebook::before { content: "\e00b"; }
 .icon.social-pinterest::before { content: "\e60b"; }
+.icon.share-alt::before { content: "\e05a"; }
+

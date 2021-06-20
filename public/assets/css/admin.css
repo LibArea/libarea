@@ -62,3 +62,17 @@ input[type="text"] {
   border-radius: 50%;
   margin: 0 0 0 15px;
 }
+
+.domain-box {
+  margin: 0 0 25px 0;
+}
+
+.domain-telo {
+  margin: 0 0 5px 15px;
+  color: #666;
+}
+
+.domain-footer {
+  color: #666;
+  font-size: 14px;
+}

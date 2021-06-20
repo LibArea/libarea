@@ -254,4 +254,28 @@ class AdminModel extends \MainModel
          return true;
     }
     
+    // Все домены
+    public static function getDomains($page)
+    {
+        $offset = ($page-1) * 25; 
+        $sql = "SELECT * FROM links ORDER BY link_id DESC LIMIT 25 OFFSET ".$offset."";
+
+        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
+    } 
+    
+    // Информация по домену
+    public static function getLinkIdOne($id)
+    {
+        return XD::select('*')->from(['links'])->where(['link_id'], '=', $id)->getSelectOne();
+    }
+    
+    // Изменим домен
+    public static function setLinkEdit($domain_id, $link_url, $link_title, $link_content)
+    {
+        XD::update(['links'])->set(['link_url'], '=', $link_url, ',', 
+            ['link_title'], '=', $link_title, ',',
+            ['link_content'], '=', $link_content)->where(['link_id'], '=', $domain_id)->run(); 
+        return true;  
+    }
+    
 }

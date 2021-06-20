@@ -26,6 +26,7 @@ return [
     'no-cover'          => 'No cover. Download it',
     
     'select-file-up'    => 'Select the file to upload',
+    'format-cover-post' => 'Width, more than 500px. The orientation is horizontal',
     
     /* Info */
     'privacy-desc'      => 'The sites Privacy Policy. Site rules.', 
@@ -73,7 +74,8 @@ return [
     
     'domain-desc'           => 'Grouping posts by domain',
     'domains-title'         => 'Sites in the system',
-    'domains-desc'          => 'Statistics on domains, links that are used to compile publications on the site. Most visited, popular sites',    
+    'domains-desc'          => 'Statistics on domains, links that are used to compile publications on the site. Most visited, popular sites', 
+    'info_url_edit'         => 'Changes to the data become visible instantly. Be careful!',    
     
     /* Setting */
     'info_setting'          => 'Fill in your name to help participants address you by your first name. <br> <br> Tell me something about yourself. You have a great opportunity to open up to please others and seem like an interesting person.',

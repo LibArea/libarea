@@ -22,6 +22,10 @@ Route::before('Authorization@noAuth')->getGroup();
     Route::get('/admin/answers')->controller('AdminController@answers'); 
     Route::get('/admin/invitations')->controller('AdminController@invitations');
     
+    Route::get('/admin/domain/{id}/edit')->controller('AdminController@editDomain')->where(['id' => '[0-9]+']);
+    Route::type('post')->protect()->get('/admin/domain/edit/{id}')->controller('AdminController@domainEdit')->where(['id' => '[0-9]+']);
+    Route::get('/admin/domains/{page?}')->controller('AdminController@domains')->where(['page' => '[0-9]+']);
+        
     Route::get('/admin/badges')->controller('AdminController@badges');
     Route::get('/admin/badge/add')->controller('AdminController@addBadgePage');
     Route::type('post')->protect()->get('/admin/badge/user/addform')->controller('AdminController@addBadgeUser');

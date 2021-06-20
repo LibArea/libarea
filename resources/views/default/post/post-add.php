@@ -32,6 +32,7 @@
                                 <div class="boxline">
                                     <div class="input-images"></div>
                                 </div>
+                                <div class="box_h"><?= lang('format-cover-post'); ?>.</div>
                             </div>
                         </div>  
                         

@@ -4,6 +4,7 @@ namespace App\Controllers;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\SpaceModel;
 use App\Models\UserModel;
+use App\Models\LinkModel;
 use App\Models\AdminModel;
 use Lori\Base;
 
@@ -529,6 +530,77 @@ class AdminController extends \MainController
         $vk             = empty($vk) ? '' : $vk;
         
         AdminModel::setUserEdit($user_id, $email, $login, $name, $about, $trust_level, $website, $location, $public_email, $skype, $twitter, $telegram, $vk);
+        
+        redirect($redirect);
+    }
+    
+    // Домены в системе
+    public function domains()
+    {
+        $uid        = self::isAdmin();
+        $user_id    = \Request::getInt('id');
+        
+        $pg     = \Request::getInt('page'); 
+        $page   = (!$pg) ? 1 : $pg;
+        
+        $domains    = AdminModel::getDomains($page);
+        $data = [
+            'h1'            => lang('Domains'),
+            'meta_title'    => lang('Domains'),
+            'sheet'         => 'admin',
+        ]; 
+
+        Request::getResources()->addBottomStyles('/assets/css/admin.css');
+        Request::getResources()->addBottomScript('/assets/js/admin.js'); 
+        
+        return view(PR_VIEW_DIR . '/admin/domain/domains', ['data' => $data, 'uid' => $uid, 'domains' => $domains]);
+    }
+    
+    // Форма редактирование домена
+    public function editDomain()
+    {
+        $uid        = self::isAdmin();
+        $domain_id  = \Request::getInt('id');
+        
+        $pg     = \Request::getInt('page'); 
+        $page   = (!$pg) ? 1 : $pg;
+        
+        $domain = AdminModel::getLinkIdOne($domain_id);
+
+        $data = [
+            'h1'            => lang('Change the domain') .' | '. $domain['link_url_domain'],
+            'meta_title'    => lang('Change the domain'),
+            'sheet'         => 'admin',
+        ]; 
+
+        Request::getResources()->addBottomStyles('/assets/css/admin.css');
+        Request::getResources()->addBottomScript('/assets/js/admin.js'); 
+        
+        return view(PR_VIEW_DIR . '/admin/domain/domain-edit', ['data' => $data, 'uid' => $uid, 'domain' => $domain]);
+    }
+    
+    // Изменение домена
+    public function domainEdit()
+    {
+        $uid        = self::isAdmin();
+        $domain_id    = \Request::getInt('id');
+        
+        $redirect = '/admin/domains';
+        if (!AdminModel::getLinkIdOne($domain_id)) {
+            redirect($redirect);
+        }
+        
+        $link_url           = \Request::getPost('link_url');
+        $link_title         = \Request::getPost('link_title');
+        $link_content       = \Request::getPost('link_content');
+
+        Base::Limits($link_title , lang('Title'), '24', '250', $redirect);
+        Base::Limits($link_content, lang('Description'), '24', '1500', $redirect);
+        
+        $about          = empty($about) ? '' : $about;
+        $website        = empty($website) ? '' : $website;
+        
+        AdminModel::setLinkEdit($domain_id, $link_url, $link_title, $link_content);
         
         redirect($redirect);
     }

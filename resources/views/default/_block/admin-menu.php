@@ -17,6 +17,9 @@
                 <a <?php if( $uid['uri'] == '/admin/badges') { ?> class="active"<?php } ?> title="<?= lang('Badges'); ?>" href="/admin/badges">
                     ~ <?= lang('Badges'); ?>
                 </a>
+                <a <?php if( $uid['uri'] == '/admin/domains') { ?> class="active"<?php } ?> title="<?= lang('Domains'); ?>" href="/admin/domains">
+                    ~ <?= lang('Domains'); ?>
+                </a>
             </div>
         </div>    
     </div>

@@ -17,29 +17,29 @@
                             <?= $badge['badge_id']; ?>
                         </div>
                         <div class="boxline max-width">
-                            <label for="post_title">Title</label>
-                            <input type="text" name="badge_title" value="<?= $badge['badge_title']; ?>" required>
+                            <label class="form-label" for="post_title">Title</label>
+                            <input class="form-input" type="text" name="badge_title" value="<?= $badge['badge_title']; ?>" required>
                         </div>
                         <div class="boxline max-width">
-                            <label for="post_title">Icon</label>            
+                            <label class="form-label" for="post_title">Icon</label>            
                             <textarea class="add" name="badge_icon" required><?= $badge['badge_icon']; ?></textarea>
                             <div class="box_h"><?= lang('For example'); ?>: &lt;i title="<?= lang('Title'); ?>" class="icon badge"&gt;&lt;/i&gt;</div>
                         </div>
                         <div class="boxline">
-                            <label for="post_title">Tl</label>
-                            <input type="text" name="badge_tl" value="<?= $badge['badge_tl']; ?>" required>
+                            <label class="form-label" for="post_title">Tl</label>
+                            <input class="form-input" type="text" name="badge_tl" value="<?= $badge['badge_tl']; ?>" required>
                             <div class="box_h"><?= lang('For'); ?> TL (0 <?= lang('by default'); ?>)</div>
                         </div>
                         <div class="boxline">
-                            <label for="post_title">Score</label>
-                            <input type="text" name="badge_score" value="<?= $badge['badge_score']; ?>" required>
+                            <label class="form-label" for="post_title">Score</label>
+                            <input class="form-input" type="text" name="badge_score" value="<?= $badge['badge_score']; ?>" required>
                             <div class="box_h"><?= lang('Reward Weight'); ?></div>
                         </div>
                         <div class="boxline max-width">
-                            <label for="post_title"><?= lang('Description'); ?></label>
+                            <label class="form-label" for="post_title"><?= lang('Description'); ?></label>
                             <textarea class="add" name="badge_description" required><?= $badge['badge_description']; ?></textarea>
                         </div>
-                        <input type="submit" name="submit" value="<?= lang('Edit'); ?>" />
+                        <input type="submit" class="button" name="submit" value="<?= lang('Edit'); ?>" />
                     </form>
                 </div>
             </div>

@@ -3,7 +3,21 @@
     <main>
         <div class="white-box">
             <div class="inner-padding space-tags">
-                <h1><?= $data['h1']; ?></h1>
+                <?php if($info_domain['link_title']) { ?>
+                    <h1 class="domain"><?= $info_domain['link_title']; ?></h1>
+                    <div class="domain-content">
+                    <?= $info_domain['link_content']; ?>
+                    </div>
+                    <div class="domain-footer-small">
+                        <a class="green" rel="nofollow noreferrer ugc" href="<?= $info_domain['link_url']; ?>">
+                            <i class="icon share-alt"></i> <?= $info_domain['link_url']; ?>
+                        </a> 
+                        
+                        <span class="right"><?= $info_domain['link_count']; ?></span>
+                    </div>
+                <?php } else { ?>
+                    <h1><?= $data['h1']; ?></h1>
+                <?php } ?>    
             </div>
         </div>
         <?php if (!empty($posts)) { ?> 
@@ -135,7 +149,7 @@
                 <?php if (!empty($domains)) { ?>
                     <div class="bar-title small"><?= lang('Domains'); ?></div>
                     <?php foreach ($domains as  $domain) { ?>
-                        <a class="date tag-u" href="/domain/<?= $domain['link_url_domain']; ?>">
+                        <a class="date small" href="/domain/<?= $domain['link_url_domain']; ?>">
                             <i class="icon link"></i> <?= $domain['link_url_domain']; ?> 
                             <sup class="date small"><?= $domain['link_count']; ?></sup>
                         </a><br>
