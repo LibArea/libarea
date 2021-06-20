@@ -30,7 +30,7 @@
                                     <span class="trust-level small">tl<?= $post['post_tl']; ?></span>
                                 <?php } ?>
                                 <?php if($post['post_url_domain']) { ?> 
-                                    <a class="post_url" href="/domain/<?= $post['post_url_domain']; ?>">
+                                    <a class="date small" href="/domain/<?= $post['post_url_domain']; ?>">
                                         <?= $post['post_url_domain']; ?>
                                     </a> 
                                 <?php } ?>
@@ -56,11 +56,11 @@
                                     <?php if($post['post_draft'] == 0) { ?>
                                         <?php if($post['my_post'] == $post['post_id']) { ?>
                                                 <span class="mu_post">+ <?= lang('in-the-profile'); ?></span>
-                                                <span class="otst"> &#183; </span>
+                                                <span class="indent"> &#183; </span>
                                         <?php } else { ?> 
                                             <a class="user-mypost" data-opt="1" data-post="<?= $post['post_id']; ?>">
                                                 <span class="mu_post"><?= lang('in-the-profile'); ?></span>
-                                                <span class="otst"> &#183;  </span>
+                                                <span class="indent"> &#183;  </span>
                                             </a>
                                         <?php } ?> 
                                     <?php } ?>    
@@ -68,19 +68,19 @@
                                 
                                 
                                 <?php if ($post['favorite_post']){ ?>
-                                   <span class="otst">   </span>    
+                                   <span class="indent"></span>    
                                    <span class="user-post-fav" data-post="<?= $post['post_id']; ?>">
                                         <span class="my_favorite"><?= lang('remove-favorites'); ?></span>
                                    </span>   
                                 <?php } else { ?>
-                                    <span class="otst">   </span>
+                                    <span class="indent"></span>
                                     <span class="user-post-fav" data-post="<?= $post['post_id']; ?>">
                                         <span class="my_favorite"><?= lang('add-favorites'); ?></span>
                                     </span>
                                 <?php } ?> 
                                 
                                 <?php if($uid['trust_level'] ==5) { ?>
-                                    <span class="otst"> &#183; </span>
+                                    <span class="indent"> &#183; </span>
                                     <span id="cm_dell" class="cm_add_link">
                                         <a data-post="<?= $post['post_id']; ?>" class="delpost">
                                             <?php if($post['post_is_delete'] == 1) { ?>

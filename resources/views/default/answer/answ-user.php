@@ -17,7 +17,7 @@
                                     
                                     <span class="date"><?= $answ['date']; ?></span>
                                    
-                                    <span class="otst"> &#183; </span>
+                                    <span class="indent"> &#183; </span>
                                     <a href="/post/<?= $answ['post_id']; ?>/<?= $answ['post_slug']; ?>"><?= $answ['post_title']; ?></a>
                                 </div>
                                 <div class="telo-body">

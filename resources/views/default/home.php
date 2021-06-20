@@ -71,18 +71,18 @@
                     <div class="post-header small">
                     
                         <img class="ava" alt="<?= $post['login']; ?>" src="<?= user_avatar_url($post['avatar'], 'small'); ?>">
-                        <span class="otst"></span> 
+                        <span class="indent"></span> 
                         <span class="user"> 
                             <a href="/u/<?= $post['login']; ?>">
                                 <?= $post['login']; ?>
                             </a> 
                         </span>
-                        <span class="otst"></span> 
+                        <span class="indent"></span> 
                         <a href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
                             <?= $post['space_name']; ?>
                         </a> 
                         
-                        <span class="otst"></span> 
+                        <span class="indent"></span> 
                           <span class="date"> 
                            <?= $post['post_date'] ?>
                         </span>
@@ -115,14 +115,14 @@
                                 <?php if($post['post_merged_id'] > 0) { ?> 
                                     <i class="icon graph red"></i>
                                 <?php } ?>
-                                
-                                <?php if($post['post_url_domain']) { ?> 
-                                    <a class="post_url" href="/domain/<?= $post['post_url_domain']; ?>">
-                                        <?= $post['post_url_domain']; ?>
-                                    </a> 
-                                <?php } ?>
                             </h2>
                         </a>
+                                                        
+                        <?php if($post['post_url_domain']) { ?> 
+                            <a class="date small indent-bid" href="/domain/<?= $post['post_url_domain']; ?>">
+                                <i class="icon link"></i> <?= $post['post_url_domain']; ?>
+                            </a> 
+                        <?php } ?>
 
                         <div class="post-details">
                             <?php if($post['post_thumb_img']) { ?> 

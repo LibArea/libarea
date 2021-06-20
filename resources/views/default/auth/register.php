@@ -37,7 +37,7 @@
                             <div class="boxline">
                                 <button type="submit" class="button"><?= lang('Sign up'); ?></button>
                                 <small>
-                                    <span class="otst"><a href="/login"><?= lang('Sign in'); ?></a></span>
+                                    <span class="indent"><a href="/login"><?= lang('Sign in'); ?></a></span>
                                 </small>
                             </div>
                         </div>

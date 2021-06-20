@@ -23,9 +23,9 @@
                             <button type="submit" class="button"><?= lang('Sign in'); ?></button>
                             <small>
                                 <?php if(!Lori\Config::get(Lori\Config::PARAM_INVITE)) { ?>
-                                    <span class="otst"><a href="/register"><?= lang('Sign up'); ?></a></span>
+                                    <span class="indent"><a href="/register"><?= lang('Sign up'); ?></a></span>
                                 <?php } ?>
-                                <span class="otst"><a href="/recover"><?= lang('forgot-password'); ?>?</a></span>
+                                <span class="indent"><a href="/recover"><?= lang('forgot-password'); ?>?</a></span>
                             </small>
                         </div>
                     </form>

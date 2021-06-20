@@ -626,7 +626,7 @@ aside a.my.active {
 
 .post-body img.thumb,
 img.thumb {
-  margin: -12px 0 10px 10px;
+  margin: -28px 0 10px 10px;
   float: right;
   width: 70px;
   border-radius: 2px;
@@ -855,21 +855,6 @@ img.ava {
   vertical-align: middle;
 }
 
-a.space-u,
-.space a.space-u,
-.post_url {
-  font-size: 10pt;
-  color: var(--tertiary);
-  font-style: italic;
-  vertical-align: middle;
-}
-
-a.space-u:hover,
-.space a.space-u:hover,
-.post_url:hover {
-  color: var(--primary);
-}
-
 .bar-title {
   color: var(--tertiary);
   text-transform: uppercase;
@@ -1006,8 +991,12 @@ ol.comment-telo {
   max-width: 800px;
 }
 
-.otst {
+.indent {
   margin: 0 3px;
+}
+
+.indent-bid {
+  margin: 0 0 0 15px;
 }
 
 .bar {

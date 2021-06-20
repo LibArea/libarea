@@ -111,34 +111,34 @@
             <div class="boxline">
                 <label for="name"><?= lang('URL'); ?>:</label>
                 <a href="<?= $user['website']; ?>" rel="noopener nofollow ugc">
-                    <span class="otst"><?= $user['website']; ?></span>
+                    <span class="indent"><?= $user['website']; ?></span>
                 </a>
             </div>
         <?php } ?>
         <?php if($user['location']) { ?> 
             <div class="boxline">
                 <label for="name"><?= lang('City'); ?>:</label>
-                <span class="otst"><?= $user['location']; ?></span>
+                <span class="indent"><?= $user['location']; ?></span>
             </div>
         <?php } else { ?>
             <div class="boxline">
                 <label for="name"><?= lang('City'); ?>:</label>
-                <span class="otst">...</span>
+                <span class="indent">...</span>
             </div>
         <?php } ?>
         <?php if($user['public_email']) { ?> 
             <div class="boxline">
                 <label for="name"><?= lang('E-mail'); ?>:</label>
                 <a href="mailto:<?= $user['public_email']; ?>" rel="noopener nofollow ugc">
-                    <span class="otst"><?= $user['public_email']; ?></span>
+                    <span class="indent"><?= $user['public_email']; ?></span>
                 </a>
             </div>
         <?php } ?>
         <?php if($user['skype']) { ?>
             <div class="boxline">
                 <label for="name"><?= lang('Skype'); ?>:</label>
-                <a class="otst" href="skype:<?= $user['skype']; ?>" rel="noopener nofollow ugc">
-                    <span class="otst"><?= $user['skype']; ?></span>
+                <a class="indent" href="skype:<?= $user['skype']; ?>" rel="noopener nofollow ugc">
+                    <span class="indent"><?= $user['skype']; ?></span>
                 </a>
             </div>
         <?php } ?>
@@ -146,7 +146,7 @@
             <div class="boxline">
                 <label for="name"><?= lang('Twitter'); ?>:</label>
                 <a href="https://twitter.com/<?= $user['twitter']; ?>" rel="noopener nofollow ugc">
-                    <span class="otst"><?= $user['twitter']; ?></span>
+                    <span class="indent"><?= $user['twitter']; ?></span>
                 </a>
             </div>
         <?php } ?>
@@ -154,7 +154,7 @@
             <div class="boxline">
                 <label for="name"><?= lang('Telegram'); ?>:</label>
                 <a href="tg://resolve?domain=<?= $user['telegram']; ?>" rel="noopener nofollow ugc">
-                    <span class="otst"><?= $user['telegram']; ?></span>
+                    <span class="indent"><?= $user['telegram']; ?></span>
                 </a>
             </div>
         <?php } ?>
@@ -162,7 +162,7 @@
             <div class="boxline">
                 <label for="name"><?= lang('VK'); ?>:</label>
                 <a href="https://vk.com/<?= $user['vk']; ?>" rel="noopener nofollow ugc">
-                    <span class="otst"><?= $user['vk']; ?></span>
+                    <span class="indent"><?= $user['vk']; ?></span>
                 </a>
             </div> 
         <?php } ?>    
@@ -181,10 +181,10 @@
                         <img class="ava" alt="<?= $user['login']; ?>" src="<?= user_avatar_url($user['avatar'], 'small'); ?>">
                         <a class="date" href="/u/<?= $user['login']; ?>"><?= $user['login']; ?></a> 
                         
-                        <span class="otst"> &#183; </span> 
+                        <span class="indent"> &#183; </span> 
                         <span class="date"><?= $onepost['post_date'] ?></span>
                         
-                        <span class="otst"> &#183; </span> 
+                        <span class="indent"> &#183; </span> 
                         <a class="date"  href="/s/<?= $onepost['space_slug']; ?>" title="<?= $onepost['space_name']; ?>">
                             <?= $onepost['space_name']; ?>
                         </a> 

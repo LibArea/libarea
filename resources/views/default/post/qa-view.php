@@ -63,8 +63,8 @@
                             <?php } ?>            
                             
                             <?php if($uid['trust_level'] == 5) { ?>
-                                <span class="otst"></span>
-                                <span class="otst"></span>
+                                <span class="indent"></span>
+                                <span class="indent"></span>
                                 <span id="answ_dell" class="answ_add_link">
                                     <a data-id="<?= $answ['answer_id']; ?>" class="delansw bar"><?= lang('Remove'); ?></a>
                                 </span>

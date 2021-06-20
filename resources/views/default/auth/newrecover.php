@@ -20,9 +20,9 @@
                                         <button type="submit" class="button-primary"><?= lang('Reset'); ?></button>
                                         <small>
                                             <?php if(!Lori\Config::get(Lori\Config::PARAM_INVITE)) { ?>
-                                                <span class="otst"><a href="/register"><?= lang('Sign up'); ?></a></span>
+                                                <span class="indent"><a href="/register"><?= lang('Sign up'); ?></a></span>
                                             <?php } ?>
-                                            <span class="otst"><a href="/login"><?= lang('Sign in'); ?></a></span>
+                                            <span class="indent"><a href="/login"><?= lang('Sign in'); ?></a></span>
                                         </small>
                                     </div>
                                 </div>

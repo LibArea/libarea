@@ -90,13 +90,13 @@
                 <div class="post-telo white-box">
                     <div class="post-header small">
                         <img class="ava" alt="<?= $post['login']; ?>" src="<?= user_avatar_url($post['avatar'], 'small'); ?>">
-                        <span class="otst"></span> 
+                        <span class="indent"></span> 
                         <span class="user"> 
                             <a href="/u/<?= $post['login']; ?>">
                                 <?= $post['login']; ?>
                             </a> 
                         </span>
-                        <span class="otst"></span> 
+                        <span class="indent"></span> 
                           <span class="date"> 
                            <?= $post['post_date'] ?>
                         </span>
@@ -133,8 +133,8 @@
                         </a>
 
                         <?php if($post['post_url_domain']) { ?> 
-                            <a class="post_url" href="/domain/<?= $post['post_url_domain']; ?>">
-                                <?= $post['post_url_domain']; ?>
+                            <a class="date small indent-bid" href="/domain/<?= $post['post_url_domain']; ?>">
+                                <i class="icon link"></i> <?= $post['post_url_domain']; ?>
                             </a> 
                         <?php } ?>
                         
@@ -286,7 +286,7 @@
                     <div class="inner-padding big">
                         <div class="menu-m"><?= lang('Tags'); ?></div>
                         <?php foreach ($tags as  $tag) { ?>  
-                            <a class="space-u tag-u<?php if ($uid['uri'] == '/s/'.$tag['space_slug'] .'/'.$tag['st_id']) { ?>  avtive<?php } ?>" href="/s/<?= $space_info['space_slug']; ?>/<?= $tag['st_id']; ?>">
+                            <a class="date tag-u<?php if ($uid['uri'] == '/s/'.$tag['space_slug'] .'/'.$tag['st_id']) { ?>  avtive<?php } ?>" href="/s/<?= $space_info['space_slug']; ?>/<?= $tag['st_id']; ?>">
                                 <?= $tag['st_title']; ?>
                             </a>
                         <?php } ?>

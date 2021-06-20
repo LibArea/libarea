@@ -17,7 +17,7 @@
                                      
                                     <span class="date"><?= $comm['date']; ?></span>
                                     
-                                    <span class="otst"> &#183; </span>
+                                    <span class="indent"> &#183; </span>
                                     <a href="/post/<?= $comm['post_id']; ?>/<?= $comm['post_slug']; ?>"><?= $comm['post_title']; ?></a>
                                 </div>
 

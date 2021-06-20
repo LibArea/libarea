@@ -25,19 +25,19 @@
 
                                         <span class="date"><?= $fav['date']; ?></span>
                                         
-                                        <span class="otst"> &#183; </span> 
+                                        <span class="indent"> &#183; </span> 
                                         <a class="date" href="/s/<?= $fav['space_slug']; ?>" title="<?= $fav['space_name']; ?>">
                                             <?= $fav['space_name']; ?>
                                         </a> 
                                         <?php if($fav['post_answers_num'] !=0) { ?> 
-                                            <span class="otst"></span>
+                                            <span class="indent"></span>
                                             <a class="date" href="/post/<?= $fav['post_id']; ?>/<?= $fav['post_slug']; ?>">    
                                                 <i class="icon bubbles"></i>  <?= $fav['post_answers_num'] ?> 
                                             </a>     
                                         <?php } ?>
                                         <?php if($uid['id'] > 0) { ?>
                                             <?php if($uid['id'] == $fav['favorite_uid']) { ?>
-                                                <span class="otst"> &#183; </span> 
+                                                <span class="indent"> &#183; </span> 
                                                 <span class="user-post-fav right" data-post="<?= $fav['post_id']; ?>">
                                                      <span class="mu_favorite date"><?= lang('Remove'); ?></span>
                                                 </span>  
@@ -55,7 +55,7 @@
                                        <h3 class="title"><?= $fav['post']['post_title']; ?></h3>
                                     </a>
                                     <div class="space-color space_<?= $fav['post']['space_color'] ?>"></div>
-                                    <a class="space-u" href="/s/<?= $fav['post']['space_slug']; ?>" title="<?= $fav['post']['space_name']; ?>">
+                                    <a class="date" href="/s/<?= $fav['post']['space_slug']; ?>" title="<?= $fav['post']['space_name']; ?>">
                                         <?= $fav['post']['space_name']; ?>
                                     </a>
                                     <?php if($uid['id'] > 0) { ?>

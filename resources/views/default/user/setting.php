@@ -29,12 +29,12 @@
                     <?php csrf_field(); ?>
                         <div class="boxline">
                             <span class="name"><?= lang('Nickname'); ?></span>
-                            <img class="mini otst ava" src="<?= user_avatar_url($user['avatar'], 'small'); ?>"> 
-                            <span class="otst"><?= $user['login']; ?></span>
+                            <img class="mini indent ava" src="<?= user_avatar_url($user['avatar'], 'small'); ?>"> 
+                            <span class="indent"><?= $user['login']; ?></span>
                         </div>
                         <div class="boxline">
                             <span class="name">E-mail</span>
-                            <span class="otst"><?= $user['email']; ?></span>
+                            <span class="indent"><?= $user['email']; ?></span>
                         </div>
                     
                         <div class="boxline">

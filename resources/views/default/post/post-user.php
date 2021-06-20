@@ -12,14 +12,14 @@
 
                             <div class="post-header small">
                                 <img class="ava" src="<?= user_avatar_url($post['avatar'], 'small'); ?>">
-                                <span class="otst"></span>
+                                <span class="indent"></span>
 
                                 <a class="date" href="/u/<?= $post['login']; ?>"><?= $post['login']; ?></a> 
 
-                                <span class="otst"></span>
+                                <span class="indent"></span>
                                 <?= $post['post_date']; ?>
 
-                                <span class="otst"> &#183; </span> 
+                                <span class="indent"> &#183; </span> 
                                 <a href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
                                     <?= $post['space_name']; ?>
                                 </a>
