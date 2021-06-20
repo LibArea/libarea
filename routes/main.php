@@ -177,7 +177,9 @@ Route::type('post')->get('/comments/addform')->controller('CommentController@add
 
 // Поиск
 Route::type(['get','post'])->get('/search')->controller('SearchController');
-Route::get('/domain/{domain}')->controller('SearchController@domain')->where(['domain' => '[A-Za-z0-9-.]+']);
+// Домены
+Route::get('/domains')->controller('LinkController');
+Route::get('/domain/{domain}')->controller('LinkController@domain')->where(['domain' => '[A-Za-z0-9-.]+']);
 
 Route::type(['get','post'])->get('/search/users')->controller('PostController@userSelect');
 Route::type(['get','post'])->get('/search/posts')->controller('PostController@postsSelect');

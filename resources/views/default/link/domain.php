@@ -136,8 +136,9 @@
                 <?php if (!empty($domains)) { ?>
                     <div class="bar-title small"><?= lang('Domains'); ?></div>
                     <?php foreach ($domains as  $domain) { ?>
-                        <a class="space-u tag-u" href="/domain/<?= $domain['post_url_domain']; ?>">
-                            <i class="icon link"></i> <?= $domain['post_url_domain']; ?>
+                        <a class="space-u tag-u" href="/domain/<?= $domain['link_url_domain']; ?>">
+                            <i class="icon link"></i> <?= $domain['link_url_domain']; ?> 
+                            <sup class="date small"><?= $domain['link_count']; ?></sup>
                         </a><br>
                     <?php } ?>
                 <?php } ?>

@@ -70,39 +70,4 @@ class SearchController extends \MainController
 
         return view(PR_VIEW_DIR . '/search/index', ['data' => $data, 'uid' => $uid, 'result' => $result, 'query' => $query]);
     }
-    
-    // Поиск по домену
-    public function domain() 
-    {
-        $domain     = \Request::get('domain');
-        $uid        = Base::getUid();
-        
-        $post       = SearchModel::getDomain($domain, $uid['id']); 
-        Base::PageError404($post);
-        
-        $result = Array();
-        foreach($post as $ind => $row){
-            $row['post_content_preview']    = Base::cutWords($row['post_content'], 68);
-            $row['post_date']               = lang_date($row['post_date']);
-            $row['lang_num_answers']        = word_form($row['post_answers_num'], lang('Answer'), lang('Answers-m'), lang('Answers'));
-            $result[$ind]                   = $row;
-         
-        }
-        
-        $domains = SearchModel::getDomainsTop($domain); 
-        
-        $meta_title = lang('Domain') . ': ' . $domain .' | '. Config::get(Config::PARAM_NAME);
-        $meta_desc = lang('domain-desc') . ': ' . $domain .' '. Config::get(Config::PARAM_HOME_TITLE);
-        
-        $data = [
-            'h1'            => lang('Domain') . ': ' . $domain,  
-            'canonical'     => '/' . $domain,
-            'sheet'         => 'domain',
-            'meta_title'    => $meta_title,
-            'meta_desc'     => $meta_desc, 
-        ];
-        
-        return view(PR_VIEW_DIR . '/search/domain', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'domains' => $domains]);
-    }
-
 }

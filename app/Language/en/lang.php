@@ -23,7 +23,6 @@ return [
     'forgot-password'   => 'Forgot your password',
     'repeat-password'   => 'Repeat the password',
     'ban-space'         => 'This space is blocked',
-    'domain-desc'       => 'Grouping posts by domain',
     'no-cover'          => 'No cover. Download it',
     
     'select-file-up'    => 'Select the file to upload',
@@ -71,6 +70,10 @@ return [
     'add_up_post'           => 'I liked the post',
     'add_up_answ'           => 'I liked the answer',
     'add_up_comm'           => 'liked the comment',
+    
+    'domain-desc'           => 'Grouping posts by domain',
+    'domains-title'         => 'Sites in the system',
+    'domains-desc'          => 'Statistics on domains, links that are used to compile publications on the site. Most visited, popular sites',    
     
     /* Setting */
     'info_setting'          => 'Fill in your name to help participants address you by your first name. <br> <br> Tell me something about yourself. You have a great opportunity to open up to please others and seem like an interesting person.',

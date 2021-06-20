@@ -5,6 +5,7 @@ use Hleb\Constructor\Handlers\Request;
 use App\Models\PostModel;
 use App\Models\UserModel;
 use App\Models\SpaceModel;
+use App\Models\LinkModel;
 use App\Models\AnswerModel;
 use App\Models\CommentModel;
 use App\Models\VotesPostModel;
@@ -325,40 +326,60 @@ class PostController extends \MainController
         Base::Limits($post_content, lang('The post'), '6', '25000', $redirect);
         
         if($post_url) { 
+            // Поскольку это для поста, то получим превью 
             $og_img             = self::grabOgImg($post_url);
             $parse              = parse_url($post_url);
             $post_url_domain    = $parse['host']; 
-        }  else {
-            // images
-            $name     = $_FILES['images']['name'][0];
-            if($name) {
-                // Проверка ширину
-                $width_h  = getimagesize($_FILES['images']['tmp_name'][0]);
-                if ($width_h['0'] < 500) {
-                    $valid = false;
-                    Base::addMsg('Ширина меньше 600 пикселей', 'error');
-                    redirect($redirect);
-                }
+            $link_url           = $parse['scheme'] . '://' . $parse['host'];
 
-                $image = new  SimpleImage();
-                $path = HLEB_PUBLIC_DIR. '/uploads/posts/';
-                $year = date('Y') . '/';
-                $file = $_FILES['images']['tmp_name'][0];
-                $filename = 'c-' . time();
-               
-                if(!is_dir($path . $year)) { @mkdir($path . $year); }             
-                
-                // https://github.com/claviska/SimpleImage
-                $image
-                    ->fromFile($file)  // load image.jpg
-                    ->autoOrient()     // adjust orientation based on exif data
-                    ->resize(820, null)
-                    ->toFile($path . $year . $filename .'.webp', 'image/webp');
-              
-                $post_img = $year . $filename . '.webp';
+            // Мы должны добавить домен, который появился в системе
+            // Далее мы можем менять ему статус, запрещать и т.д.
+            $link = LinkModel::getLinkOne($post_url_domain);
+            if(!$link) {
+                // Запишем минимальные данный для дальнешей работы
+                $data = [
+                    'link_url'          => $link_url,
+                    'link_url_domain'   => $post_url_domain,
+                    'link_add_uid'      => $uid['id'],
+                    'link_type'         => 0,
+                    'link_status'       => 200,
+                    'link_cat_id'       => 1,
+                ];
+                LinkModel::addLinks($data);
+            } else {
+                LinkModel::addLinkCount($post_url_domain);
             }
-        }
+        }   
 
+        // images
+        $name     = $_FILES['images']['name'][0];
+        if($name) {
+            // Проверка ширину
+            $width_h  = getimagesize($_FILES['images']['tmp_name'][0]);
+            if ($width_h['0'] < 500) {
+                $valid = false;
+                Base::addMsg('Ширина меньше 600 пикселей', 'error');
+                redirect($redirect);
+            }
+
+            $image = new  SimpleImage();
+            $path = HLEB_PUBLIC_DIR. '/uploads/posts/';
+            $year = date('Y') . '/';
+            $file = $_FILES['images']['tmp_name'][0];
+            $filename = 'c-' . time();
+           
+            if(!is_dir($path . $year)) { @mkdir($path . $year); }             
+            
+            // https://github.com/claviska/SimpleImage
+            $image
+                ->fromFile($file)  // load image.jpg
+                ->autoOrient()     // adjust orientation based on exif data
+                ->resize(820, null)
+                ->toFile($path . $year . $filename .'.webp', 'image/webp');
+          
+            $post_img = $year . $filename . '.webp';
+        }
+        
         // Проверяем url для > TL1
         // Ввести проверку дублей и запрещенных, для img повторов
         $post_url           = empty($post_url) ? '' : $post_url;
@@ -367,8 +388,7 @@ class PostController extends \MainController
         $og_img             = empty($og_img) ? '' : $og_img;
         $tag_id             = empty($tag_id) ? 0 : $tag_id;
 
-        // Ограничим частоту добавления
-        // Добавить условие TL
+        // Участник с нулевым уровнем доверия должен быть ограничен в добавлении ответов
         if($uid['trust_level'] < Config::get(Config::PARAM_TL_ADD_POST)) {
             $num_post =  PostModel::getPostSpeed($uid['id']);
             if(count($num_post) > 2) {
@@ -387,7 +407,7 @@ class PostController extends \MainController
             'post_content'          => $post_content,
             'post_content_img'      => $post_content_img,
             'post_thumb_img'        => $og_img,
-            'post_related'           => $post_related,
+            'post_related'          => $post_related,
             'post_merged_id'        => $post_merged_id,
             'post_tl'               => $post_tl,
             'post_slug'             => $post_slug,
@@ -478,12 +498,12 @@ class PostController extends \MainController
                 $image = new SimpleImage();
                 $image
                 ->fromFile($local)  // load image.jpg
-                ->autoOrient()     // adjust orientation based on exif data
+                ->autoOrient()      // adjust orientation based on exif data
                 ->resize(165, null) // 125
                 ->toFile($path . $year . $file .'.webp', 'image/webp');
  
                 if(file_exists($local)) {
-                    unlink($path_img . $avatar['avatar']);
+                    unlink($local);
                     return $year . $file .'.webp';
                 }
                 

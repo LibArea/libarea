@@ -178,7 +178,7 @@ class MessagesController extends \MainController
             redirect('/u/' . $uid['login'] . '/messages');
         }
 
-        // Для пользователя с TL < N   
+        // Участник с нулевым уровнем доверия должен быть ограничен в добавлении ЛС
         Base::validTl($uid['trust_level'], Config::get(Config::PARAM_TL_ADD_PM), '/');
 
         MessagesModel::SendMessage($uid['id'], $recipient_uid, $message);
@@ -197,7 +197,7 @@ class MessagesController extends \MainController
             redirect('/');
         }  
         
-        // Для пользователя с TL < N   
+        // Участник с нулевым уровнем доверия должен быть ограничен в добавлении ЛС
         Base::validTl($uid['trust_level'], Config::get(Config::PARAM_TL_ADD_PM), '/');
         
         $data = [

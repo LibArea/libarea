@@ -20,37 +20,9 @@ class SearchModel extends \MainModel
     {
         // Без SNIPPET
         // $sql = "SELECT * FROM postind WHERE MATCH(:qa)";
-        
         $sql = "SELECT id as post_id, space_slug, space_name, space_img, post_slug, post_space_id, post_votes, SNIPPET(post_title, :qa) as _title, SNIPPET(post_content, :qa) AS _content FROM postind WHERE MATCH(:qa)";
 
         $result = DB::run($sql, ['qa' => $query], 'mysql.sphinx-search');
         return  $result->fetchall(PDO::FETCH_ASSOC);
     }
-
-    // Получение постов по url
-    public static function getDomain($url, $uid)
-    {
-        $q = XD::select('*')->from(['posts']);
-        $query = $q->leftJoin(['users'])->on(['id'], '=', ['post_user_id'])
-                ->leftJoin(['space'])->on(['space_id'], '=', ['post_space_id'])
-                ->leftJoin(['votes_post'])->on(['votes_post_item_id'], '=', ['post_id'])
-                ->and(['votes_post_user_id'], '=', $uid)
-                ->where(['post_is_delete'], '=', 0)
-                ->and(['post_url_domain'], '=', $url)
-                ->orderBy(['post_id'])->desc();
-
-        return $query->getSelect();
-    }
-    
-    // 5 популярных доменов
-    public static function getDomainsTop($domain)
-    {
-
-        $sql = "SELECT * FROM posts WHERE post_url_domain != '' AND post_url_domain != :domain";
-
-        $result = DB::run($sql, ['domain' => $domain]);
-        return  $result->fetchall(PDO::FETCH_ASSOC);
-        
-    }
-
 }

@@ -76,11 +76,10 @@ class CommentController extends \MainController
             return true;
         }
         
-        // Ограничим частоту добавления
-        // Добавить условие TL
-        if($uid['trust_level'] < 2) {
+        // Участник с нулевым уровнем доверия должен быть ограничен в добавлении комментариев
+        if($uid['trust_level'] < Config::get(Config::PARAM_TL_ADD_COMM)) {
             $num_comm =  CommentModel::getCommentSpeed($uid['id']);
-            if(count($num_comm) > 10) {
+            if(count($num_comm) > 9) {
                 Base::addMsg('Вы исчерпали лимит комментариев (15) на сегодня', 'error');
                 redirect('/');
             }
