@@ -4,6 +4,7 @@ namespace App\Controllers;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\MessagesModel;
 use App\Models\UserModel;
+use Lori\Config;
 use Lori\Base;
 
 class MessagesController extends \MainController
@@ -177,6 +178,9 @@ class MessagesController extends \MainController
             redirect('/u/' . $uid['login'] . '/messages');
         }
 
+        // Для пользователя с TL < N   
+        Base::validTl($uid['trust_level'], Config::get(Config::PARAM_TL_ADD_PM), '/');
+
         MessagesModel::SendMessage($uid['id'], $recipient_uid, $message);
 
         redirect('/u/' . $uid['login'] . '/messages');
@@ -185,6 +189,7 @@ class MessagesController extends \MainController
     // Форма отправки из профиля
     public function  profilMessages()
     {
+        $uid        = Base::getUid();
         $login      = Request::get('login');
         if(!$user   = UserModel::getUserLogin($login))
         {
@@ -192,7 +197,9 @@ class MessagesController extends \MainController
             redirect('/');
         }  
         
-        $uid  = Base::getUid();
+        // Для пользователя с TL < N   
+        Base::validTl($uid['trust_level'], Config::get(Config::PARAM_TL_ADD_PM), '/');
+        
         $data = [
             'h1'            => lang('Send a message') . ': ' . $login,
             'meta_title'    => lang('Send a message'),

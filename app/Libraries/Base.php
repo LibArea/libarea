@@ -318,7 +318,7 @@ class Base
     {
         $text = strip_tags($text, '<p>');
         $text = preg_replace(array('/(<p>)/','(<\/p>)'), array('','\n'), $text);
-        
+
         // Проверяем имя бота и YOUR_WEBHOOK_URL
         if(!$webhookurl = Config::get(Config::PARAM_WEBHOOK_URL)) {
            return false;
@@ -393,6 +393,18 @@ class Base
         $response = curl_exec( $ch );
         // echo $response;
         curl_close( $ch );
+    }
+
+    // Права для TL
+    public static function validTl($trust_level, $action, $redirect) {
+        
+        if ($trust_level < $action)
+        {
+            self::addMsg(lang('tl-limitation'), 'error');
+            redirect($redirect);
+        }
+        
+        return true;
     }
 
 }

@@ -16,7 +16,7 @@
         <div class="profile-header">
             <?php if($uid['trust_level'] > 0) { ?>
                 <?php if($uid['login'] != $user['login']) { ?> 
-                    <?php if($uid['trust_level'] >= Lori\Config::get(Lori\Config::PARAM_PM_MAIL)) { ?>
+                    <?php if($uid['trust_level'] >= Lori\Config::get(Lori\Config::PARAM_TL_ADD_PM)) { ?>
                         <a class="right pm" href="/u/<?= $user['login']; ?>/mess">
                             <i class="icon envelope"></i>
                         </a> 
@@ -102,7 +102,7 @@
         <div class="profile-about">
             <i class="icon calendar"></i>
             <span class="ts"><?= $user['created_at']; ?></span>  —  
-            <?= $data['trust_level']['trust_name']; ?>
+            <?= $data['trust_level']['trust_name']; ?> <sup class="date">TL<?= $user['trust_level']; ?></sup>
         </div>
 
         <h2><?= lang('Contacts'); ?></h2>
@@ -229,6 +229,8 @@
                             <i class="icon badge"></i>
                             <?= lang('Reward the user'); ?>
                         </a>
+                        <hr>
+                        id<?= $user['id']; ?> | <?= $user['email']; ?>
                     </div>
                 </div>
             </div>            

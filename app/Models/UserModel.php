@@ -29,7 +29,7 @@ class UserModel extends \MainModel
     // Получение информации по логину
     public static function getUserLogin($login)
     {
-        $query = XD::select(['id', 'login', 'name', 'email', 'avatar', 'cover_art', 'color',  'invitation_available', 'about', 'website', 'location', 'public_email', 'skype', 'twitter', 'telegram', 'vk', 'created_at', 'my_post', 'is_deleted'])
+        $query = XD::select(['id', 'login', 'name', 'email', 'avatar', 'trust_level', 'cover_art', 'color',  'invitation_available', 'about', 'website', 'location', 'public_email', 'skype', 'twitter', 'telegram', 'vk', 'created_at', 'my_post', 'is_deleted'])
                 ->from(['users'])
                 ->where(['login'], '=', $login);
 

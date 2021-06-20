@@ -369,9 +369,9 @@ class PostController extends \MainController
 
         // Ограничим частоту добавления
         // Добавить условие TL
-        if($uid['trust_level'] < 2) {
+        if($uid['trust_level'] < Config::get(Config::PARAM_TL_ADD_POST)) {
             $num_post =  PostModel::getPostSpeed($uid['id']);
-            if(count($num_post) > 3) {
+            if(count($num_post) > 2) {
                 Base::addMsg(lang('limit-post-day'), 'error');
                 redirect('/');
             }

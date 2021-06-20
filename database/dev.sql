@@ -567,6 +567,33 @@ ALTER TABLE `report`
   ALTER TABLE `report`
   MODIFY `report_id` int(11) NOT NULL AUTO_INCREMENT;
 
+--
+-- Links (domain / url)
+--
+
+CREATE TABLE `links` (
+`link_id` int(11) NOT NULL,
+`link_ind_id` int(11) DEFAULT '0' COMMENT 'Индификатор ссылки отличных от id',
+`link_url` varchar(255) DEFAULT NULL, 
+`link_url_domain` varchar(255) DEFAULT NULL,
+`link_title` varchar(250) NOT NULL,
+`link_content` text NOT NULL,
+`link_add_uid` int(11) NOT NULL DEFAULT 0 COMMENT 'Кто добавил',
+`link_date` datetime NOT NULL DEFAULT current_timestamp(),
+`link_type` int(6) NOT NULL DEFAULT 0 COMMENT 'Тип сайта (0 - общий, 1 - блог, 2 - энциклопедия)',
+`link_status` int(6) NOT NULL DEFAULT 200 COMMENT 'Статус сайта (200, 403, 404)',
+`link_status_date` datetime NOT NULL DEFAULT current_timestamp() COMMENT 'Когда была проверка статуса',
+`link_cat_id` int(11) DEFAULT 0 COMMENT 'Категория сайта',
+`link_votes` int(6) NOT NULL DEFAULT 0,
+`link_is_deleted` tinyint(1) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE `links`
+  ADD PRIMARY KEY (`link_id`);
+  
+  ALTER TABLE `links`
+  MODIFY `link_id` int(11) NOT NULL AUTO_INCREMENT;
+
 
 --
 -- Индексы сохранённых таблиц

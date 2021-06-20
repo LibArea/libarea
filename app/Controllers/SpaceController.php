@@ -208,13 +208,10 @@ class SpaceController extends \MainController
     {
         $uid  = Base::getUid();
   
-        // Для пользователя с TL < 2 редирект    
-        if ($uid['trust_level'] < 2) {
-            redirect('/');
-        }  
+        // Для пользователя с TL < N   
+        Base::validTl($uid['trust_level'], Config::get(Config::PARAM_TL_ADD_SPACE), '/');
   
-        // Если пользователь уже создал пространство
-        // Ограничить по TL (добавить!) количество + не показывать кнопку добавления
+        // Если пользователь уже создал пространство, то ограничим их количество
         $space          = SpaceModel::getSpaceUserId($uid['id']);
         $count_space    = count($space);
         
@@ -225,7 +222,7 @@ class SpaceController extends \MainController
         $num_add_space = 3 - $count_space;
  
         $data = [
-            'h1'        => lang('Add Space'),
+            'h1'            => lang('Add Space'),
             'sheet'         => 'add-space', 
             'meta_title'    => lang('Add Space'),
         ];
@@ -239,9 +236,7 @@ class SpaceController extends \MainController
         $uid  = Base::getUid();
         
         // Для пользователя с TL < N       
-        if ($uid['trust_level'] < Config::get(Config::PARAM_SPACE)) {
-            redirect('/');
-        }  
+        Base::validTl($uid['trust_level'], Config::get(Config::PARAM_TL_ADD_SPACE), '/');
         
         $space_slug     = \Request::getPost('space_slug');
         $space_name     = \Request::getPost('space_name');  

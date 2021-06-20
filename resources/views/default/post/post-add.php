@@ -20,7 +20,7 @@
                                 <input id="title" class="form-input" minlength="6" maxlength="250" type="text" name="post_title" />
                                 <div class="box_h">6 - 250 <?= lang('characters'); ?></div>
                             </div>   
-                            <?php if($uid['trust_level'] == 5) { ?>
+                            <?php if($uid['trust_level'] > Lori\Config::get(Lori\Config::PARAM_TL_ADD_URL)) { ?>
                                 <div class="boxline">
                                     <label class="form-label" for="post_title">URL</label>
                                     <input id="link" class="form-input" type="text" name="post_url" />

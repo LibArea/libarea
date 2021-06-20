@@ -34,11 +34,13 @@
                             <?= $answ['answer_content'] ?>
                         </div>
                         <div class="comm-footer">
+                            <?php if($uid['trust_level'] >= Lori\Config::get(Lori\Config::PARAM_TL_ADD_COMM_QA)) { ?>
                             <?php if($post['post_closed'] == 0) { ?> 
                             <?php if($post['post_is_delete'] == 0 || $uid['trust_level'] == 5) { ?>
                                 <span id="cm_add_link<?= $answ['answer_id']; ?>" class="cm_add_link">
                                     <a data-post_id="<?= $post['post_id']; ?>" data-answ_id="<?= $answ['answer_id']; ?>" class="addcomm bar"><?= lang('Reply'); ?></a>
                                 </span>
+                            <?php } ?>
                             <?php } ?>
                             <?php } ?>
                             
@@ -124,11 +126,13 @@
                                         <?php } ?> 
                                      </span>
 
-                                    <?php if($post['post_closed'] == 0) { ?> 
+                                    <?php if($uid['trust_level'] >= Lori\Config::get(Lori\Config::PARAM_TL_ADD_COMM_QA)) { ?>
+                                    <?php if($post['post_closed'] == 0) { ?>
                                     <?php if($post['post_is_delete'] == 0 || $uid['trust_level'] == 5) { ?>
                                         <span id="cm_add_link<?= $comm['comment_id']; ?>" class="cm_add_link">
                                             <a data-post_id="<?= $post['post_id']; ?>" data-answ_id="<?= $answ['answer_id']; ?>" data-comm_id="<?= $comm['comment_id']; ?>" class="addcomm_re"><?= lang('Reply'); ?></a>
                                         </span>
+                                    <?php } ?>
                                     <?php } ?>
                                     <?php } ?>
                                     

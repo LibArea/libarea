@@ -36,8 +36,12 @@ class Config
     const PARAM_NAME_BOT        = "parameters.name_bot";
     const PARAM_ICON_URL        = "parameters.icon_url";
 
-    const PARAM_SPACE           = "parameters.space";
-    const PARAM_PM_MAIL         = "parameters.pm_mail";
+    const PARAM_TL_ADD_SPACE    = "parameters.tl_add_space";
+    const PARAM_TL_ADD_PM       = "parameters.tl_add_pm";
+    const PARAM_TL_ADD_COMM_QA  = "parameters.tl_add_comm_qa";
+    const PARAM_TL_ADD_POST     = "parameters.tl_add_post";
+    const PARAM_TL_ADD_COMM     = "parameters.tl_add_comm";
+    const PARAM_TL_ADD_URL      = "parameters.tl_add_url";
 
     private static $data = null;
 

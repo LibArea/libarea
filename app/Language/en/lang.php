@@ -98,4 +98,6 @@ return [
     'nickname-no-start'                     => 'A nickname can*t start with a number',
     'nickname-repeats-characters'           => 'The nickname has too many duplicate characters',
     'The code is incorrect'                 => 'The code is incorrect, or it has already been used',
+    
+    'tl-limitation'                         => 'Your trust level (TL) does not allow you to perform this action',
 ];
