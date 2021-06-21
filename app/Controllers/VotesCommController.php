@@ -14,11 +14,11 @@ class VotesCommController extends \MainController
    // Голосование за комментарий
     public function votes()
     {
-        $comm_id    = \Request::getPostInt('comm_id');
+        $comment_id = \Request::getPostInt('comm_id');
         $uid        = Base::getUid();
         
         // Информация об комментарии
-        $comm_info = VotesCommentModel::infoCommentId($comm_id);
+        $comm_info = VotesCommentModel::infoCommentId($comment_id);
         
         // Пользователь не должен голосовать за свой комментарий
         if ($uid['id'] == $comm_info['comment_user_id']) {
@@ -29,25 +29,18 @@ class VotesCommController extends \MainController
         $userup = VotesCommentModel::getVoteStatus($comm_info['comment_id'], $uid['id']);   
         
         if($userup == 1) {
-            
-            // + если будет в минус
             return false;
-            
-        } else {
-
-            $up = 1;
-            $date = date("Y-m-d H:i:s");
-            $ip = Request::getRemoteAddress();
-            VotesCommentModel::saveVoteUp($comm_id, $up, $ip, $uid['id'], $date);
-         
-            // Получаем количество votes комментария    
-            $votes_num = $comm_info['comment_votes'];
-            $votes = $votes_num + 1;
-          
-            // Записываем новое значение Votes в строку комментария по id
-            VotesCommentModel::saveVoteCommQuantity($votes, $comm_id);
-            return true;
         } 
+
+        $up = 1;
+        $date = date("Y-m-d H:i:s");
+        $ip = Request::getRemoteAddress();
+        
+        VotesCommentModel::saveVoteUp($comment_id, $up, $ip, $uid['id'], $date);
+     
+        VotesCommentModel::saveVoteComment($comment_id);
+        
+        return true;
     }
  
 }

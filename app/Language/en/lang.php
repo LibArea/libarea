@@ -62,6 +62,8 @@ return [
     'search-desc'           => 'Site search. By title and text of posts. By spaces and participants',
     'tags-add-yes'          => 'Tag added successfully',
     'tags-edit-yes'         => 'Label changed successfully',
+    'explore-title'         => 'Explore, review',
+    'explore-desc'          => 'This summary page is an overview of the news on the site. Explore new posts, comments, responses, and statistics.',
     
     /* For notification and chat */
     'add_comment'           => 'added a comment',

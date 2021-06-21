@@ -14,11 +14,11 @@ class VotesAnswController extends \MainController
    // Голосование за ответ
     public function votes()
     {
-        $answ_id    = \Request::getPostInt('answ_id');
+        $answer_id  = \Request::getPostInt('answ_id');
         $uid        = Base::getUid();
 
         // Информация об ответе
-        $answ_info = VotesAnswerModel::infoAnswerId($answ_id);
+        $answ_info = VotesAnswerModel::infoAnswerId($answer_id);
         
         // Пользователь не должен голосовать за свой ответ
         if ($uid['id'] == $answ_info['answer_user_id']) {
@@ -29,39 +29,33 @@ class VotesAnswController extends \MainController
         $userup = VotesAnswerModel::getVoteStatus($answ_info['answer_id'], $uid['id']);   
         
         if($userup == 1) {
-            // + если будет в минус
             return false;
+        }
             
-        } else {
-            
-            $up = 1;
-            $date = date("Y-m-d H:i:s");
-            $ip = Request::getRemoteAddress();
-            VotesAnswerModel::saveVoteUp($answ_id, $up, $ip, $uid['id'], $date);
-         
-            // Получаем количество    
-            $votes_num = $answ_info['answer_votes'];
-            $votes = $votes_num + 1;
-          
-            // Записываем новое значение Votes по id
-            VotesAnswerModel::saveVoteAnswerQuantity($votes, $answ_id);
+        $up = 1;
+        $date = date("Y-m-d H:i:s");
+        $ip = Request::getRemoteAddress();
+        
+        VotesAnswerModel::saveVoteUp($answer_id, $up, $ip, $uid['id'], $date);
+     
+        VotesAnswerModel::saveVoteAnswer($answer_id);
 
-            // Добавим в чат и в поток
-            $data_flow = [
-                'flow_action_id'    => 7, // в чат добавим ответ
-                'flow_content'      => '',
-                'flow_user_id'      => $uid['id'],
-                'flow_pubdate'      => $date,
-                'flow_url'          => '', 
-                'flow_target_id'    => $answ_id,
-                'flow_about'        => lang('add_up_answ'),
-                'flow_space_id'     => 0,
-                'flow_tl'           => 0,
-                'flow_ip'           => $ip, 
-            ];
-            FlowModel::FlowAdd($data_flow);
-            return true;
-        } 
+        // Добавим в чат и в поток
+        $data_flow = [
+            'flow_action_id'    => 7, // в чат добавим ответ
+            'flow_content'      => '',
+            'flow_user_id'      => $uid['id'],
+            'flow_pubdate'      => $date,
+            'flow_url'          => '', 
+            'flow_target_id'    => $answer_id,
+            'flow_about'        => lang('add_up_answ'),
+            'flow_space_id'     => 0,
+            'flow_tl'           => 0,
+            'flow_ip'           => $ip, 
+        ];
+        FlowModel::FlowAdd($data_flow);
+        return true;
+        
     }
  
 }

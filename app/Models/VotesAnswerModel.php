@@ -2,6 +2,8 @@
 
 namespace App\Models;
 use XdORM\XD;
+use DB;
+use PDO;
 
 class VotesAnswerModel extends \MainModel
 {
@@ -35,10 +37,12 @@ class VotesAnswerModel extends \MainModel
     }
  
     // Записываем количество
-    public static function saveVoteAnswerQuantity($votes, $answ_id)
+    public static function saveVoteAnswer($answer_id)
     {
-        XD::update(['answers'])->set(['answer_votes'], '=', $votes)->where(['answer_id'], '=', $answ_id)->run();
-        return true; 
+        $sql = "UPDATE answers SET answer_votes = (answer_votes + 1) WHERE answer_id = :answer_id";
+        DB::run($sql,['answer_id' => $answer_id]);
+        
+        return true;
     }
 
 }

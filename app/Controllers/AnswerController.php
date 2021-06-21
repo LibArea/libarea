@@ -131,7 +131,6 @@ class AnswerController extends \MainController
         $post_id    = \Request::getInt('post_id');
         $uid        = Base::getUid();
         
- 
         $answ = AnswerModel::getAnswerOne($answ_id);
 
         // Проверим автора комментария и админа

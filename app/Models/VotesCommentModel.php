@@ -2,6 +2,8 @@
 
 namespace App\Models;
 use XdORM\XD;
+use DB;
+use PDO;
 
 class VotesCommentModel extends \MainModel
 {
@@ -38,9 +40,11 @@ class VotesCommentModel extends \MainModel
     }
  
     // Записываем количество
-    public static function saveVoteCommQuantity($votes, $comm_id)
+    public static function saveVoteComment($comment_id)
     {
-        XD::update(['comments'])->set(['comment_votes'], '=', $votes)->where(['comment_id'], '=', $comm_id)->run();
+        $sql = "UPDATE comments SET comment_votes = (comment_votes + 1) WHERE comment_id = :comment_id";
+        DB::run($sql,['comment_id' => $comment_id]);
+        
         return true;
     }
  

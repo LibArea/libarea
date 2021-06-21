@@ -19,6 +19,7 @@ class ExploreModel extends \MainModel
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
    
+    // График активности
     public static function getGraf()
     { 
         $sql = "SELECT COUNT(votes_answ_id), DATE(votes_answ_date) as date FROM votes_answ GROUP BY date limit 10";
@@ -38,8 +39,7 @@ class ExploreModel extends \MainModel
         return $query->orderBy(['post_id'])->desc()->getSelectOne();
     }  
     
-    
-        // Поcледний пост по ряду условий  
+    // Поcледний пост по ряду условий  
     public static function lastРostFive()
     {
         $q = XD::select('*')->from(['posts']);

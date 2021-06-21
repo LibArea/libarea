@@ -141,8 +141,8 @@ class PostModel extends \MainModel
     // Просмотры  
     public static function postHits($post_id)
     {
-        $sql = "UPDATE posts SET post_hits_count = (post_hits_count + 1) WHERE post_id = ".$post_id."";
-        DB::run($sql); 
+        $sql = "UPDATE posts SET post_hits_count = (post_hits_count + 1) WHERE post_id = :post_id";
+        DB::run($sql,['post_id' => $post_id]); 
     }   
     
     // Получаем пост по id

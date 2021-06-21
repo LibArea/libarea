@@ -103,8 +103,8 @@ class UserModel extends \MainModel
     // Просмотры  
     public static function userHits($user_id)
     {
-        $sql = "UPDATE users SET hits_count = (hits_count + 1) WHERE id = ".$user_id."";
-        DB::run($sql); 
+        $sql = "UPDATE users SET hits_count = (hits_count + 1) WHERE id = :user_id";
+        DB::run($sql,['user_id' => $user_id]); 
     }   
 
    // Получение аватарки
