@@ -108,7 +108,7 @@ class UserController extends \MainController
     }
     
     // Изменение профиля
-    function settingEdit ()
+    function settingEdit()
     {
         $name           = \Request::getPost('name');
         $about          = \Request::getPost('about');
@@ -165,7 +165,7 @@ class UserController extends \MainController
     }
     
     // Форма загрузки аватарки
-    function settingPageAvatar ()
+    function settingAvatarPage()
     {
         $uid  = Base::getUid();
         $login  = \Request::get('login');
@@ -191,7 +191,7 @@ class UserController extends \MainController
     }
     
     // Форма изменение пароля
-    function settingPageSecurity ()
+    function settingSecurityPage()
     {
         $uid  = Base::getUid();
         $login  = \Request::get('login');
@@ -330,7 +330,7 @@ class UserController extends \MainController
     }
     
     // Страница закладок участника
-    function userFavorites ()
+    function userFavorites()
     {
         $login  = \Request::get('login');
         
@@ -345,7 +345,7 @@ class UserController extends \MainController
         $fav = UserModel::userFavorite($user['id']);
    
         $result = Array();
-        foreach($fav as $ind => $row){
+        foreach ($fav as $ind => $row) {
             $row['post_date']       = (empty($row['post_date'])) ? $row['post_date'] : lang_date($row['post_date']);
             $row['answer_content']  = Base::text($row['answer_content'], 'md');
             $row['date']            = $row['post_date'];
@@ -395,7 +395,7 @@ class UserController extends \MainController
     }
 
     // Страница черновиков участника
-    function userDrafts ()
+    function userDrafts()
     {
         $login  = \Request::get('login');
         

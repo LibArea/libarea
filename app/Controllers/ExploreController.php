@@ -12,8 +12,15 @@ class ExploreController extends \MainController
     {
         Request::getHead()->addStyles('/assets/css/explore.css');
         Request::getHead()->addScript('/assets/js/Chart.js');
+  
+        $last_post  = ExploreModel::lastРost();
+        $best_users = ExploreModel::bestTopUser();
+        $five_post  = ExploreModel::lastРostFive();
+        $uid        = Base::getUid();
         
-        $uid    = Base::getUid();
+        
+        
+        
         $data = [
             'h1'            => lang('Explore'),
             'meta_title'    => lang('explore-title') .' | '. Config::get(Config::PARAM_NAME),
@@ -24,7 +31,7 @@ class ExploreController extends \MainController
             'canonical'     => Config::get(Config::PARAM_URL) . '/explore',
         ];
 
-        return view(PR_VIEW_DIR . '/explore/index', ['data' => $data, 'uid' => $uid]);
+        return view(PR_VIEW_DIR . '/explore/index', ['data' => $data, 'uid' => $uid, 'last_post' => $last_post, 'best_users' => $best_users, 'five_post' => $five_post]);
     }
 
 }

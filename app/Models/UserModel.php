@@ -55,7 +55,7 @@ class UserModel extends \MainModel
         $usersList  = $result->fetchall(PDO::FETCH_ASSOC);
 
         $response = array();
-        foreach($usersList as $user){
+        foreach ($usersList as $user) {
            $response[] = array(
               "id" => $user['id'],
               "text" => $user['login']

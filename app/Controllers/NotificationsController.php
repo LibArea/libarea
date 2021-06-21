@@ -25,7 +25,7 @@ class NotificationsController extends \MainController
         $list = NotificationsModel::listNotification($uid['id']);
 
         $result = Array();
-        foreach($list as $ind => $row) {
+        foreach ($list as $ind => $row) {
             
             $row['add_time']        = lang_date($row['add_time']);
             $result[$ind]           = $row;

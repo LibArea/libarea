@@ -102,6 +102,12 @@
                         </span>
                     </div>
                     
+                    <?php if($post['post_thumb_img']) { ?>
+                        <a title="<?= $post['post_title']; ?>" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">                    
+                            <img class="thumb no-mob" alt="<?= $post['post_title']; ?>" src="/uploads/posts/thumbnails/<?= $post['post_thumb_img']; ?>">
+                        </a>
+                    <?php } ?>
+                    
                     <div class="post-body">
                         <a href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
                             <h2 class="title"><?= $post['post_title']; ?>
@@ -139,10 +145,6 @@
                         <?php } ?>
                         
                         <div class="post-details">
-                            <?php if($post['post_thumb_img']) { ?> 
-                                <img class="thumb" alt="<?= $post['post_title']; ?>" src="/uploads/posts/thumbnails/<?= $post['post_thumb_img']; ?>">
-                            <?php } ?>
-                        
                             <div class="show_add_<?= $post['post_id']; ?>">
                                 <div data-post_id="<?= $post['post_id']; ?>" class="showpost">
                                     <?= $post['post_content_preview']; ?>

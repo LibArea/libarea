@@ -33,7 +33,7 @@ class PostController extends \MainController
         Base::PageError404($posts);
 
         $result = Array();
-        foreach($posts as $ind => $row) {
+        foreach ($posts as $ind => $row) {
             $text = explode("\n", $row['post_content']);
             $row['post_content_preview']    = Base::text($text[0], 'line');
             $row['lang_num_answers']        = word_form($row['post_answers_num'], lang('Answer'), lang('Answers-m'), lang('Answers'));
@@ -46,7 +46,7 @@ class PostController extends \MainController
         $space_signed_bar   = SpaceModel::getSpaceUserSigned($uid['id']);
  
         $result_comm = Array();
-        foreach($latest_answers as $ind => $row) {
+        foreach ($latest_answers as $ind => $row) {
             $row['answer_content']      = Base::cutWords($row['answer_content'], 81);
             $row['answer_date']         = lang_date($row['answer_date']);
             $result_comm[$ind]          = $row;
@@ -156,7 +156,7 @@ class PostController extends \MainController
         }
 
         $answers = Array();
-        foreach($post_answers as $ind => $row) {
+        foreach ($post_answers as $ind => $row) {
             
             if(strtotime($row['answer_modified']) < strtotime($row['answer_date'])) {
                 $row['edit'] = 1;
@@ -226,7 +226,7 @@ class PostController extends \MainController
         $posts_user  = PostModel::userPosts($login, $uid['id']); 
         
         $result = Array();
-        foreach($posts_user as $ind => $row){
+        foreach ($posts_user as $ind => $row) {
             $row['post_date']   = lang_date($row['post_date']);
             $result[$ind]       = $row;
         }
@@ -514,7 +514,7 @@ class PostController extends \MainController
     }
     
     // Показ формы поста для редактирование
-    public function editPost() 
+    public function editPostPage() 
     {
         $post_id    = \Request::getInt('id');
         $uid        = Base::getUid();
@@ -575,7 +575,7 @@ class PostController extends \MainController
     }
     
     // Изменяем пост
-    public function editPostRecording() 
+    public function editPost() 
     {
         $post_id                = \Request::getPostInt('post_id');
         $post_title             = \Request::getPost('post_title');

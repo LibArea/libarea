@@ -30,7 +30,7 @@ class AuthController extends \MainController
     }
     
     // Показ формы регистрации с инвайтом
-    public function registerPageInvite()
+    public function registerInvitePage()
     {
         // Код активации
         $code = \Request::get('code');
@@ -261,7 +261,7 @@ class AuthController extends \MainController
         return view(PR_VIEW_DIR . '/auth/recover', ['data' => $data, 'uid' => $uid]);
     }
 
-    public function sendRecover () 
+    public function sendRecover() 
     {
         $email = \Request::getPost('email');
         
@@ -353,7 +353,7 @@ class AuthController extends \MainController
     }
     
     
-    public function RemindPageNew()
+    public function RemindNewPage()
     {
         $password   = \Request::getPost('password');
         $code       = \Request::getPost('code');

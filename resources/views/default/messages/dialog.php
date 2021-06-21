@@ -15,7 +15,7 @@
                 </form>
 
                 <?php if ($data['list']) { ?>
-                    <?php foreach($data['list'] AS $key => $val) { ?>
+                    <?php foreach ($data['list'] AS $key => $val) { ?>
                   
                         <div class="msg-telo">
 

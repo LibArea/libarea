@@ -44,8 +44,8 @@ Route::before('Authorization@noAuth')->getGroup();
 	Route::get('/post/add')->controller('PostController@addPost');
     Route::get('/post/add/space/{space_id}')->controller('PostController@addPost')->where(['space_id' => '[0-9]+']);
 	Route::type('post')->protect()->get('/post/create')->controller('PostController@createPost');
-	Route::get('/post/edit/{id}')->controller('PostController@editPost');
-	Route::type('post')->protect()->get('/post/editpost/{id}')->controller('PostController@editPostRecording');
+	Route::get('/post/edit/{id}')->controller('PostController@editPostPage');
+	Route::type('post')->protect()->get('/post/editpost/{id}')->controller('PostController@editPost');
 	Route::type('post')->get('/post/del')->controller('PostController@deletePost');
     Route::type('post')->get('/post/grabtitle')->controller('PostController@grabMeta');
 
@@ -54,13 +54,14 @@ Route::before('Authorization@noAuth')->getGroup();
 	Route::type('post')->protect()->get('/invitation/create')->controller('UserController@invitationCreate');
 
 	Route::get('/u/{login}/setting')->controller('UserController@settingPage')->where(['login' => '[A-Za-z0-9]+']); 
-	Route::get('/u/{login}/setting/avatar')->controller('UserController@settingPageAvatar')->where(['login' => '[A-Za-z0-9]+']);
-    Route::get('/u/{login}/delete/cover')->controller('UserController@userCoverRemove')->where(['login' => '[A-Za-z0-9]+']); 
-	Route::get('/u/{login}/setting/security')->controller('UserController@settingPageSecurity')->where(['login' => '[A-Za-z0-9]+']); 
+	Route::get('/u/{login}/setting/avatar')->controller('UserController@settingAvatarPage')->where(['login' => '[A-Za-z0-9]+']);
+	Route::get('/u/{login}/setting/security')->controller('UserController@settingSecurityPage')->where(['login' => '[A-Za-z0-9]+']); 
     
 	Route::type('post')->protect()->get('/users/setting/edit')->controller('UserController@settingEdit');
 	Route::type('post')->protect()->get('/users/setting/avatar/edit')->controller('UserController@settingAvatarEdit');
 	Route::type('post')->protect()->get('/users/setting/security/edit')->controller('UserController@settingSecurityEdit');
+    
+    Route::get('/u/{login}/delete/cover')->controller('UserController@userCoverRemove')->where(['login' => '[A-Za-z0-9]+']); 
 
 	Route::get('/logout')->controller('AuthController@logout');
 
@@ -74,7 +75,7 @@ Route::before('Authorization@noAuth')->getGroup();
     Route::type('post')->get('/comment/del')->controller('CommentController@deletComment');
 
 	// Добавление ответов / удаление / изменение
-    Route::get('/post/{post_id}/answ/{answ_id}')->controller('AnswerController@editFormAnswer')->where(['post_id' => '[0-9]+', 'answ_id' => '[0-9]+']);
+    Route::get('/post/{post_id}/answ/{answ_id}')->controller('AnswerController@editAnswerPage')->where(['post_id' => '[0-9]+', 'answ_id' => '[0-9]+']);
     Route::type('post')->protect()->get('/answer/edit')->controller('AnswerController@editAnswer');
 	Route::type('post')->protect()->get('/answer/add')->controller('AnswerController@createAnswer');
     Route::type('post')->get('/answer/del')->controller('AnswerController@deletAnswer');
@@ -132,12 +133,12 @@ Route::before('Authorization@yesAuth')->getGroup();
 	// Регистрация и авторизация (инвайты)
     Route::get('/invite')->controller('UserController@invitePage');
 	Route::get('/register')->controller('AuthController@registerPage');
-    Route::type('get')->get('/register/invite/{code}')->controller('AuthController@registerPageInvite')->where(['code' => '[a-z0-9-]+']);
+    Route::type('get')->get('/register/invite/{code}')->controller('AuthController@registerInvitePage')->where(['code' => '[a-z0-9-]+']);
     Route::type('get')->get('/recover')->controller('AuthController@recoverPage');  
     Route::type('post')->protect()->get('/recover/send')->controller('AuthController@sendRecover'); 
     Route::type('get')->get('/recover/remind/{code}')->controller('AuthController@RemindPage')->where(['code' => '[A-Za-z0-9-]+']);
     Route::type('get')->get('/email/avtivate/{code}')->controller('AuthController@AvtivateEmailPage')->where(['code' => '[A-Za-z0-9-]+']);
-    Route::type('post')->protect()->get('/recover/send/pass')->controller('AuthController@RemindPageNew'); 
+    Route::type('post')->protect()->get('/recover/send/pass')->controller('AuthController@RemindNewPage'); 
 	Route::type('post')->protect()->get('/register/add')->controller('AuthController@registerHandler');
 	Route::type('post')->protect()->get('/login')->controller('AuthController@loginHandler');
 	Route::type('get')->get('/login')->controller('AuthController@loginPage'); 

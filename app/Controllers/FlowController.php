@@ -38,7 +38,7 @@ class FlowController extends \MainController
         $flows      = FlowModel::getFlowAll();
         
         $result = Array();
-        foreach($flows as $ind => $row){
+        foreach ($flows as $ind => $row) {
             $row['flow_pubdate']    = lang_date($row['flow_pubdate']);
             $result[$ind]           = $row;
         } 

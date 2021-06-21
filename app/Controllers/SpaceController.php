@@ -20,7 +20,7 @@ class SpaceController extends \MainController
         $count_space    = count($sp);
 
         $result = Array();
-        foreach($space as $ind => $row) {
+        foreach ($space as $ind => $row) {
             $row['users']   = SpaceModel::numSpaceSubscribers($row['space_id']);
             $result[$ind]   = $row;
         }  
@@ -46,7 +46,7 @@ class SpaceController extends \MainController
         $count_space    = count($space);
 
         $result = Array();
-        foreach($space as $ind => $row) {
+        foreach ($space as $ind => $row) {
             $row['users']   = SpaceModel::numSpaceSubscribers($row['space_id']);
             $result[$ind]   = $row;
         }  
@@ -86,7 +86,7 @@ class SpaceController extends \MainController
         $space['space_text']        = Base::text($space['space_text'], 'md');
         
         $result = Array();
-        foreach($posts as $ind => $row) {
+        foreach ($posts as $ind => $row) {
             $text = explode("\n", $row['post_content']);
             $row['post_content_preview']    = Base::text($text[0], 'line');
             $row['lang_num_answers']        = word_form($row['post_answers_num'], lang('Answer'), lang('Answers-m'), lang('Answers'));
@@ -270,7 +270,7 @@ class SpaceController extends \MainController
             'space_name'            => $space_name,
             'space_slug'            => $space_slug,
             'space_description'     => '',
-            'space_color'           => '#56400',
+            'space_color'           => '#fa6807',
             'space_img'             => 'space_no.png',
             'space_text'            => '',
             'space_short_text'      => '',

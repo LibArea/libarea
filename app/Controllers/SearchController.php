@@ -36,14 +36,14 @@ class SearchController extends \MainController
                 if(Config::get(Config::PARAM_SEARCH) == 0) {
                     $qa =  SearchModel::getSearch($query);
                     $result = Array();
-                    foreach($qa as $ind => $row){
+                    foreach ($qa as $ind => $row) {
                         $row['post_content']  = Base::text(Base::cutWords($row['post_content'], 220, '...'), 'md');
                         $result[$ind]         = $row; 
                     }  
                 } else {
                     $qa =  SearchModel::getSearchServer($query);
                     $result = Array();
-                    foreach($qa as $ind => $row){
+                    foreach ($qa as $ind => $row) {
                         $result[$ind]         = $row; 
                     } 
                 }

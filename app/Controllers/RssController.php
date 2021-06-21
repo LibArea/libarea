@@ -29,7 +29,7 @@ class RssController extends \MainController
         
         $posts  = RssModel::getPostsFeed($space_id);
         $result = Array();
-        foreach($posts as $ind => $row) {
+        foreach ($posts as $ind => $row) {
             $row['post_content']  = Base::text($row['post_content'], 'md');
             $result[$ind]           = $row;
         }

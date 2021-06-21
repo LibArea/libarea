@@ -17,7 +17,7 @@
                         <span class="t-td center">Ban</span>
                         <span class="t-td center"><?= lang('Action'); ?></span>
                     </div>
-                    <?php foreach($alluser as $user) {  ?>
+                    <?php foreach ($alluser as $user) {  ?>
                         <div class="t-tr">
                             <span class="t-td w-30 center">
                                 <?= $user['id']; ?>

@@ -25,7 +25,7 @@ class AdminController extends \MainController
         Base::PageError404($user_all);
         
         $result = Array();
-        foreach($user_all as $ind => $row) {
+        foreach ($user_all as $ind => $row) {
             $row['replayIp']    = AdminModel::replayIp($row['reg_ip']);
             $row['isBan']       = AdminModel::isBan($row['id']);
             $row['logs']        = AdminModel::UsersLogAll($row['id']);
@@ -62,7 +62,7 @@ class AdminController extends \MainController
         $user_all   = AdminModel::getUserLogsId($user_ip);
  
         $results = Array();
-        foreach($user_all as $ind => $row) {
+        foreach ($user_all as $ind => $row) {
             $row['replayIp']    = AdminModel::replayIp($row['reg_ip']);
             $row['isBan']       = AdminModel::isBan($row['id']);
             $results[$ind]       = $row;
@@ -92,13 +92,13 @@ class AdminController extends \MainController
     }
     
     // Удалёные комментарии
-    public function comments ()
+    public function comments()
     {
         $uid    = self::isAdmin();
         $comm   = AdminModel::getCommentsDell();
 
         $result = Array();
-        foreach($comm  as $ind => $row){
+        foreach ($comm  as $ind => $row) {
             $row['content'] = Base::text($row['comment_content'], 'md');
             $row['date']    = lang_date($row['comment_date']);
             $result[$ind]   = $row;
@@ -128,13 +128,13 @@ class AdminController extends \MainController
     }
     
     // Удалёные ответы
-    public function answers ()
+    public function answers()
     {
         $uid    = self::isAdmin();
         $answ   = AdminModel::getAnswersDell();
 
         $result = Array();
-        foreach($answ  as $ind => $row){
+        foreach ($answ  as $ind => $row) {
             $row['content'] = Base::text($row['answer_content'], 'md');
             $row['date']    = lang_date($row['answer_date']);
             $result[$ind]   = $row;
@@ -164,13 +164,13 @@ class AdminController extends \MainController
     }
     
     // Показываем дерево приглашенных
-    public function invitations ()
+    public function invitations()
     {
         $uid    = self::isAdmin();
         $invite = AdminModel::getInvitations();
  
         $result = Array();
-        foreach($invite  as $ind => $row){
+        foreach ($invite  as $ind => $row) {
             $row['uid']         = AdminModel::getUserId($row['uid']);  
             $row['active_time'] = $row['active_time'];
             $result[$ind]       = $row;
@@ -192,7 +192,7 @@ class AdminController extends \MainController
     private function invatesTree($active_uid, $level, $invitations, $tree=array())
     {
         $level++;
-        foreach($invitations as $invitation){
+        foreach ($invitations as $invitation) {
             if ($invitation['uid'] == $uid){
                 $invitation['level'] = $level-1;
                 $tree[] = $invitation;

@@ -33,7 +33,7 @@ class LinkController extends \MainController
         Base::PageError404($post);
         
         $result = Array();
-        foreach($post as $ind => $row){
+        foreach ($post as $ind => $row) {
             $text = explode("\n", $row['post_content']);
             $row['post_content_preview']    = Base::text($text[0], 'line');
             $row['post_date']               = lang_date($row['post_date']);

@@ -86,7 +86,7 @@ class AdminModel extends \MainModel
         if($num != 0) { 
         
             $result = Array();
-            foreach($res as $row){
+            foreach ($res as $row) {
                 $status = $row['banlist_status'];
             }  
 

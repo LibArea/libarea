@@ -27,7 +27,7 @@ class AnswerController extends \MainController
         $answ       = AnswerModel::getAnswersAll($page, $uid['id'], $uid['trust_level']);
  
         $result = Array();
-        foreach($answ  as $ind => $row){
+        foreach ($answ  as $ind => $row) {
             $row['answer_content']  = Base::text($row['answer_content'], 'md');
             $row['date']            = lang_date($row['answer_date']);
             // N+1 - перенести в запрос
@@ -125,7 +125,7 @@ class AnswerController extends \MainController
     }
     
    // Покажем форму редактирования
-	public function editFormAnswer()
+	public function editAnswerPage()
 	{
         $answ_id    = \Request::getInt('answ_id');
         $post_id    = \Request::getInt('post_id');
@@ -206,7 +206,7 @@ class AnswerController extends \MainController
         $answ  = AnswerModel::userAnswers($login); 
         
         $result = Array();
-        foreach($answ as $ind => $row){
+        foreach ($answ as $ind => $row) {
             $row['content'] = Base::text($row['answer_content'], 'md');
             $row['date']    = lang_date($row['answer_date']);
             $result[$ind]   = $row;

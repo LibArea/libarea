@@ -14,7 +14,7 @@ class PostModel extends \MainModel
     public static function postsFeed($page, $space_user, $trust_level, $uid, $type)
     {
         $result = Array();
-        foreach($space_user as $ind => $row){
+        foreach ($space_user as $ind => $row) {
             $result[$ind] = $row['signed_space_id'];
         } 
         
@@ -79,7 +79,7 @@ class PostModel extends \MainModel
     public static function postsFeedCount($space_user, $trust_level, $uid, $type)
     {
         $result = Array();
-        foreach($space_user as $ind => $row){
+        foreach ($space_user as $ind => $row) {
             $result[$ind] = $row['signed_space_id'];
         }   
         
@@ -390,7 +390,7 @@ class PostModel extends \MainModel
         $result = DB::run($sql, ['post_title' => "%".$query."%"]);
         $postsList  = $result->fetchall(PDO::FETCH_ASSOC);
         $response = array();
-        foreach($postsList as $post){
+        foreach ($postsList as $post) {
            $response[] = array(
               "id" => $post['post_id'],
               "text" => $post['post_title']

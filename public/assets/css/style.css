@@ -201,7 +201,7 @@ h3.lo {
 }
 
 code {
-  color: #b63e56;
+  color: #9b4f5e;
   background: #f5f2f0;
   padding: 1px 4px;
   font-size: 1.1em;
@@ -669,7 +669,7 @@ img.thumb {
 }
 
 .post-header a {
-  color: color: var(--tertiary);
+  color: var(--tertiary);
 }
 
 .post-header a:hover {
@@ -691,7 +691,8 @@ img.img-post,
   width: 100%;
 }
 
-.post-img a:hover > img {
+.post-img a:hover > img,
+.thumb.no-mob:hover {
   opacity: 0.8;
 }
 
@@ -1447,7 +1448,7 @@ i.github:hover {
 
 .to-user {
   border-radius: 3px;
-  background-color: #e1ecf4;
+  color: #b63e56;
   padding: 1px 4px;
 }
 

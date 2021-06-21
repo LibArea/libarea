@@ -5,7 +5,7 @@
             <div class="inner-padding">
                 <h1><?= $data['h1']; ?></h1>
                 <div class="all-users">
-                    <?php foreach($users as $ind => $user) { ?>
+                    <?php foreach ($users as $ind => $user) { ?>
                         <div class="column">
                             <div class="user_card">
                                 <div>

@@ -26,8 +26,7 @@ class CommentController extends \MainController
         $comm       = CommentModel::getCommentsAll($page, $uid['id'], $uid['trust_level']);
 
         $result = Array();
-        foreach($comm  as $ind => $row){
- 
+        foreach ($comm  as $ind => $row) {
             $row['date']                = lang_date($row['comment_date']);
             $row['comment_content']     = Base::text($row['comment_content'], 'line');
             $row['comm_vote_status']    = VotesCommentModel::getVoteStatus($row['comment_id'], $uid['id']);
@@ -217,7 +216,7 @@ class CommentController extends \MainController
         $comm  = CommentModel::userComments($login); 
         
         $result = Array();
-        foreach($comm as $ind => $row){
+        foreach ($comm as $ind => $row) {
             $row['comment_content'] = Base::text($row['comment_content'], 'line');
             $row['date']            = lang_date($row['comment_date']);
             $result[$ind]           = $row;
