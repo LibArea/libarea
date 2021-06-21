@@ -185,8 +185,8 @@ Route::type(['get','post'])->get('/search')->controller('SearchController');
 Route::get('/domains')->controller('LinkController');
 Route::get('/domain/{domain}')->controller('LinkController@domain')->where(['domain' => '[A-Za-z0-9-.]+']);
 
-Route::type(['get','post'])->get('/search/users')->controller('PostController@userSelect');
-Route::type(['get','post'])->get('/search/posts')->controller('PostController@postsSelect');
+Route::type(['get','post'])->get('/search/users')->controller('PostController@postsSelect', ['user'])->where(['user' => '[a-z]+']);
+Route::type(['get','post'])->get('/search/posts')->controller('PostController@postsSelect', ['posts'])->where(['posts' => '[a-z]+']);
 
 // Пагинация и главная (feed) страница, top, all...
 Route::get('/{page?}')->controller('PostController', ['feed'])->where(['page' => '[0-9]+']);

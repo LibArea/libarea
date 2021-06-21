@@ -12,4 +12,13 @@
 
 .w-33 {
   width: 33%;
+  position: relative;
+}
+
+.box-card a div {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  color: #fff;
+  font-size: 18px;
 }

@@ -36,7 +36,6 @@ class PostController extends \MainController
         foreach($posts as $ind => $row) {
             $text = explode("\n", $row['post_content']);
             $row['post_content_preview']    = Base::text($text[0], 'line');
-        //  $row['post_content_preview']    = preg_replace('/\A(.*)$/mi', '', $row['post_content']);
             $row['lang_num_answers']        = word_form($row['post_answers_num'], lang('Answer'), lang('Answers-m'), lang('Answers'));
             $row['post_date']               = lang_date($row['post_date']);
             $result[$ind]                   = $row;
@@ -562,22 +561,17 @@ class PostController extends \MainController
         return view(PR_VIEW_DIR . '/post/post-edit', ['data' => $data, 'uid' => $uid, 'post' => $post, 'post_related' => $post_related, 'space' => $space, 'tags' => $tags, 'user' => $user]);
     }
     
-    // Смена автора поста
-    public function userSelect()
-    {
+    // Связанные посты и выбор автора
+    public function postsSelect($sheet)
+    {   
         $search =  \Request::getPost('searchTerm');
-        $search = preg_replace('/[^a-zA-Z0-9]/ui', '', $search);
+        $search = preg_replace('/[^a-zA-ZА-Яа-я0-9 ]/ui', '', $search);
+        
+        if($sheet == 'posts') {
+            return PostModel::getSearchPosts($search);
+        } 
         
         return UserModel::getSearchUsers($search);
-    }
-    
-    // Связанные посты
-    public function postsSelect()
-    {
-        $search =  \Request::getPost('searchTerm');
-        $search = preg_replace('/[^a-zA-Zа-яА-Я0-9]/ui', '', $search);
-        
-        return PostModel::getSearchPosts($search);
     }
     
     // Изменяем пост
@@ -733,7 +727,6 @@ class PostController extends \MainController
         redirect('/post/' . $post['post_id'] . '/' . $post['post_slug']);
     }
     
-    
     // Удаление обложки
     function postImgRemove()
     {
@@ -760,8 +753,6 @@ class PostController extends \MainController
         Base::addMsg(lang('Cover removed'), 'success');
         redirect('/post/edit/' . $post['post_id']);
     }
-    
-    
     
     // Размещение своего поста у себя в профиле
     public function addPostProf()

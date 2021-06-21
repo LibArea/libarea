@@ -134,7 +134,7 @@ a.active {
 
 .white-box {
   background-color: #fff;
-  box-shadow: 0 1px 1px 0 rgba(144, 170, 185, 0.3);
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
   overflow: hidden;
   margin-bottom: 20px;
   border-radius: 2px;
@@ -170,10 +170,6 @@ h1.domain {
   font-weight: 400;
   font-size: 1.2rem;
   margin: 5px 0;
-}
-
-h1 span {
-  vertical-align: middle;
 }
 
 h3.lo {
@@ -239,6 +235,7 @@ a.add-post {
 .button:hover {
   background: #439cd3;
   border: 1px solid #439cd3;
+  color: #fff;
 }
 
 .dropbtn.nav {
@@ -440,7 +437,7 @@ textarea {
   border-radius: 0;
   color: #50596c;
   display: block;
-  font-size: 0.8rem;
+  font-size: 1rem;
   height: 1.8rem;
   line-height: 1rem;
   max-width: 100%;
@@ -641,9 +638,10 @@ aside a.my.active {
 
 .post-body img.thumb,
 img.thumb {
-  margin: -28px 0 10px 10px;
+  margin: 5px 15px 10px 30px;
   float: right;
-  width: 70px;
+  width: 140px;
+  max-width: 120px;
   border-radius: 2px;
 }
 
@@ -663,6 +661,7 @@ img.thumb {
 .post-header {
   padding: 15px 15px 0 15px;
   overflow: hidden;
+  color: var(--tertiary);
 }
 
 .post-header img {
@@ -670,6 +669,10 @@ img.thumb {
 }
 
 .post-header a {
+  color: color: var(--tertiary);
+}
+
+.post-header a:hover {
   color: #333;
 }
 
@@ -1136,13 +1139,15 @@ div.voters .asnw-up-id {
 .nav-tabs {
   position: relative;
   z-index: 1;
-  height: 48px;
+  height: 45px;
   margin: 0;
-  padding: 15px;
+  padding: 13px 15px 15px 15px;
   list-style: none;
   color: #667d99;
   background: #fff;
   margin-bottom: 20px;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
+  border-radius: 2px;
 }
 
 .nav-tabs > li {
@@ -1155,7 +1160,6 @@ div.voters .asnw-up-id {
 }
 
 .nav-tabs > li > a {
-  line-height: 30px;
   padding: 10px 15px;
   cursor: pointer;
   color: #969696;
@@ -1168,7 +1172,6 @@ div.voters .asnw-up-id {
 }
 
 .nav-tabs > li.active span {
-  line-height: 30px;
   padding: 10px 15px;
   border-bottom: 2px solid var(--quaternary);
   color: #646464;
@@ -1564,4 +1567,3 @@ a:hover .icon::before {
 .icon.social-facebook::before { content: "\e00b"; }
 .icon.social-pinterest::before { content: "\e60b"; }
 .icon.share-alt::before { content: "\e05a"; }
-

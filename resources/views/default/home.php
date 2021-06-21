@@ -69,7 +69,6 @@
             
                 <div class="post-telo white-box">
                     <div class="post-header small">
-                    
                         <img class="ava" alt="<?= $post['login']; ?>" src="<?= user_avatar_url($post['avatar'], 'small'); ?>">
                         <span class="indent"></span> 
                         <span class="user"> 
@@ -81,12 +80,15 @@
                         <a href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
                             <?= $post['space_name']; ?>
                         </a> 
-                        
                         <span class="indent"></span> 
                           <span class="date"> 
                            <?= $post['post_date'] ?>
                         </span>
                     </div>
+                    
+                    <?php if($post['post_thumb_img']) { ?> 
+                        <img class="thumb no-mob" alt="<?= $post['post_title']; ?>" src="/uploads/posts/thumbnails/<?= $post['post_thumb_img']; ?>">
+                    <?php } ?>
                     
                     <div class="post-body">
                         <a href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
@@ -117,7 +119,7 @@
                                 <?php } ?>
                             </h2>
                         </a>
-                                                        
+                        
                         <?php if($post['post_url_domain']) { ?> 
                             <a class="date small indent-bid" href="/domain/<?= $post['post_url_domain']; ?>">
                                 <i class="icon link"></i> <?= $post['post_url_domain']; ?>
@@ -125,10 +127,6 @@
                         <?php } ?>
 
                         <div class="post-details">
-                            <?php if($post['post_thumb_img']) { ?> 
-                                <img class="thumb" alt="<?= $post['post_title']; ?>" src="/uploads/posts/thumbnails/<?= $post['post_thumb_img']; ?>">
-                            <?php } ?>
-                        
                             <div class="show_add_<?= $post['post_id']; ?>">
                                 <div data-post_id="<?= $post['post_id']; ?>" class="showpost">
                                     <?= $post['post_content_preview']; ?>

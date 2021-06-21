@@ -105,7 +105,7 @@
                                 <div class="boxline">  
                                     <label class="form-label" for="post_content"><?= lang('Tags'); ?></label>
                                     <?php foreach ($tags as $tag) { ?>
-                                        <input class="form-input" type="radio" name="tag_id" value="<?= $tag['st_id']; ?>"<?php if($post['post_tag_id'] == $tag['st_id']) { ?> checked<?php } ?>><?= $tag['st_title']; ?>
+                                        <input type="radio" name="tag_id" value="<?= $tag['st_id']; ?>"<?php if($post['post_tag_id'] == $tag['st_id']) { ?> checked<?php } ?>><?= $tag['st_title']; ?>
                                     <?php } ?>
                                     <br> 
                                 </div>
