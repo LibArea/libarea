@@ -91,7 +91,7 @@ CREATE TABLE `favorite` (
 
 CREATE TABLE `flow_log` (
   `flow_id` int(11) NOT NULL,
-  `flow_action_type` int(11) NOT NULL,
+  `flow_action_type` varchar(25) NOT NULL,
   `flow_pubdate` datetime NOT NULL DEFAULT current_timestamp(),
   `flow_user_id` int(11) NOT NULL,
   `flow_content` text NOT NULL,
