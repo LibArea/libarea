@@ -6,38 +6,39 @@
             <div class="inner-padding">
                 <div class="top-box">
                     <div class="w-33 left">
-                        <a class="ex-title" title="<?= $last_post['post_title']; ?>" href="/post/<?= $last_post['post_id']; ?>/<?= $last_post['post_slug']; ?>">
-                            <!--div class="ex-post-img">
-                                <img class="img-post" alt="<?= $last_post['post_title']; ?>" src="/uploads/posts/<?= $last_post['post_content_img']; ?>">
-                            </div-->
-                            <style nonce="<?= $_SERVER['nonce']; ?>">
-                                .center-cropped {
-                                  width: 360px;
-                                  height: 220px;
-                                  background-position: center center;
-                                  background-repeat: no-repeat;
-                                  background-image: url('/uploads/posts/<?= $last_post['post_content_img']; ?>');
-                                      margin: 20px 0 10px 0;
-                                }
-                            </style>
-                            <div class="center-cropped">
-                            </div>
-                            <span><?= $last_post['post_title']; ?><span>
-                        </a>
-                            
-                        <div class="ex-footer small date">
-                            <div class="voters active">
-                                <div class="post-up-id"></div>
-                                <div class="score">
-                                   <?= $last_post['post_votes']; ?>
+                        <?php if(!empty($last_post['post_title'])) { ?>
+                            <a class="ex-title" title="<?= $last_post['post_title']; ?>" href="/post/<?= $last_post['post_id']; ?>/<?= $last_post['post_slug']; ?>">
+                                <style nonce="<?= $_SERVER['nonce']; ?>">
+                                    .center-cropped {
+                                      width: 360px;
+                                      height: 220px;
+                                      background-position: center center;
+                                      background-repeat: no-repeat;
+                                      background-image: url('/uploads/posts/<?= $last_post['post_content_img']; ?>');
+                                          margin: 20px 0 10px 0;
+                                    }
+                                </style>
+                                <div class="center-cropped">
                                 </div>
-                             </div>
+                                <span><?= $last_post['post_title']; ?><span>
+                            </a>
+                                
+                            <div class="ex-footer small date">
+                                <div class="voters active">
+                                    <div class="post-up-id"></div>
+                                    <div class="score">
+                                       <?= $last_post['post_votes']; ?>
+                                    </div>
+                                 </div>
 
-                            <span class="right">
-                                <i class="icon bubbles"></i>
-                                <?= $last_post['post_answers_num'] + $last_post['post_comments_num']; ?>
-                            </span>
-                        </div>
+                                <span class="right">
+                                    <i class="icon bubbles"></i>
+                                    <?= $last_post['post_answers_num'] + $last_post['post_comments_num']; ?>
+                                </span>
+                            </div>
+                        <?php } else { ?>
+                           <br> Добавьте пост с фото...
+                        <?php } ?>
                     </div>
                     <div class="w-66 left"> 
                         <h1><?= lang('Explore'); ?></h1>

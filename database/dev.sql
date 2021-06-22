@@ -91,7 +91,7 @@ CREATE TABLE `favorite` (
 
 CREATE TABLE `flow_log` (
   `flow_id` int(11) NOT NULL,
-  `flow_action_id` int(11) NOT NULL,
+  `flow_action_type` int(11) NOT NULL,
   `flow_pubdate` datetime NOT NULL DEFAULT current_timestamp(),
   `flow_user_id` int(11) NOT NULL,
   `flow_content` text NOT NULL,
@@ -107,7 +107,7 @@ CREATE TABLE `flow_log` (
 -- Дамп данных таблицы `flow_log`
 --
 
-INSERT INTO `flow_log` (`flow_id`, `flow_action_id`, `flow_pubdate`, `flow_user_id`, `flow_content`, `flow_url`, `flow_target_id`, `flow_space_id`, `flow_tl`, `flow_ip`, `flow_is_delete`) VALUES
+INSERT INTO `flow_log` (`flow_id`, `flow_action_type`, `flow_pubdate`, `flow_user_id`, `flow_content`, `flow_url`, `flow_target_id`, `flow_space_id`, `flow_tl`, `flow_ip`, `flow_is_delete`) VALUES
 (1, 2, '2021-04-30 06:41:28', 1, 'Первый ответ в теме', 'posts/prosto-pervyj-post#comm_1', 1, 0, 0, '127.0.0.1', 0);
 
 -- --------------------------------------------------------
