@@ -102,13 +102,12 @@ class AnswerController extends \MainController
 
         // Добавим в поток
         $data_flow = [
-            'flow_action_id'    => 3,       // add ответы
+            'flow_action_type'  => 'add_answer',
             'flow_content'      => $answer, // не фильтруем
             'flow_user_id'      => $uid['id'],
             'flow_pubdate'      => date("Y-m-d H:i:s"),
             'flow_url'          => $url_answer,
             'flow_target_id'    => $last_answer_id,
-            'flow_about'        => lang('add_answer'),            
             'flow_space_id'     => 0,
             'flow_tl'           => $post['post_tl'], // TL поста
             'flow_ip'           => $ip, 

@@ -44,22 +44,22 @@
                             <div class="comm-footer">
                                 <?php if (!$uid['id']) { ?> 
                                     <div class="voters">
-                                        <a rel="nofollow" href="/login"><div class="answ-up-id"></div></a>
+                                        <a rel="nofollow" href="/login"><div class="answer-up-id"></div></a>
                                         <div class="score">
                                             <?= $answ['answer_votes'] ? '+'.$answ['answer_votes'] : $answ['answer_votes']; ?>
                                         </div>
                                     </div>
                                 <?php } else { ?>
-                                    <?php if ($answ['votes_answ_user_id'] == $uid['id'] || $uid['id'] == $answ['answer_user_id']) { ?>
+                                     <?php if ($answ['votes_answer_user_id'] == $uid['id'] || $uid['id'] == $answ['answer_user_id']) { ?>
                                         <div class="voters active">
-                                            <div class="answ-up-id"></div>
+                                            <div class="answer-up-id"></div>
                                             <div class="score">
                                                 <?= $answ['answer_votes'] ? '+'.$answ['answer_votes'] : $answ['answer_votes']; ?>
                                             </div>
                                         </div>
                                     <?php } else { ?>
                                         <div id="up<?= $answ['answer_id']; ?>" class="voters">
-                                            <div data-id="<?= $answ['answer_id']; ?>" class="answ-up-id"></div>
+                                            <div data-id="<?= $answ['answer_id']; ?>" class="answer-up-id"></div>
                                             <div class="score">
                                                 <?= $answ['answer_votes'] ? '+'.$answ['answer_votes'] : $answ['answer_votes']; ?>
                                             </div>
@@ -116,7 +116,7 @@
         
                 <?php foreach ($answ['comm'] as  $comm) { ?>
                     <?php if($comm['comment_del'] == 0) { ?>
-                        <ol class="comm-telo<?php if($comm['comment_comm_id'] > 0) { ?> step<?php } ?>"> 
+                        <ol class="comm-telo<?php if($comm['comment_comment_id'] > 0) { ?> step<?php } ?>"> 
                             <li class="comm_subtree" id="comm_<?= $comm['comment_id']; ?>">
                                 <div class="container">
                                     <div class="comm-telo">
@@ -133,13 +133,13 @@
                                                     <span class="authorpost">&#x21af;</span>
                                                 </span>
                                             <?php } ?>
-                                            <?php if($comm['comment_comm_id'] > 0) { ?>
+                                            <?php if($comm['comment_comment_id'] > 0) { ?>
                                                 <span class="date ots">
-                                                    <a class="date" rel="nofollow" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#comm_<?= $comm['comment_comm_id']; ?>">&uarr;</a>
+                                                    <a class="date" rel="nofollow" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#comm_<?= $comm['comment_comment_id']; ?>">&uarr;</a>
                                                 </span>
                                             <?php } else { ?>
                                                 <span class="date ots">
-                                                    <a class="date" rel="nofollow" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#answ_<?= $comm['comment_answ_id']; ?>">&uarr;</a>
+                                                    <a class="date" rel="nofollow" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#answ_<?= $comm['comment_answer_id']; ?>">&uarr;</a>
                                                 </span>
                                             <?php } ?>
                                             <span class="date ots">
@@ -158,22 +158,22 @@
                                     <div class="comm-footer">
                                         <?php if (!$uid['id']) { ?> 
                                             <div class="voters">
-                                                <a rel="nofollow" href="/login"><div class="comm-up-id"></div></a>
+                                                <a rel="nofollow" href="/login"><div class="comment-up-id"></div></a>
                                                 <div class="score">
                                                 <?= $comm['comment_votes'] ? '+'.$comm['comment_votes'] : $comm['comment_votes']; ?>
                                                 </div>
                                             </div>
                                         <?php } else { ?>
-                                            <?php if ($comm['votes_comm_user_id'] == $uid['id'] || $uid['id'] == $comm['comment_user_id']) { ?>
+                                            <?php if ($comm['votes_comment_user_id'] == $uid['id'] || $uid['id'] == $comm['comment_user_id']) { ?>
                                                 <div class="voters active">
-                                                    <div class="comm-up-id"></div>
+                                                    <div class="comment-up-id"></div>
                                                     <div class="score">
                                                         <?= $comm['comment_votes'] ? '+'.$comm['comment_votes'] : $comm['comment_votes']; ?>
                                                     </div>
                                                 </div>
                                             <?php } else { ?>
                                                 <div id="up<?= $comm['comment_id']; ?>" class="voters">
-                                                    <div data-id="<?= $comm['comment_id']; ?>" class="comm-up-id"></div>
+                                                    <div data-id="<?= $comm['comment_id']; ?>" class="comment-up-id"></div>
                                                     <div class="score">
                                                         <?= $comm['comment_votes'] ? '+'.$comm['comment_votes'] : $comm['comment_votes']; ?>
                                                     </div>

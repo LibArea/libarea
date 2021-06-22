@@ -6,22 +6,15 @@ use XdORM\XD;
 class FlowModel extends \MainModel
 {
     
-    // $flow_action_id
-    // 1 - сообщение (сюда не выводятся)
-    // 2 - пост
-    // 3 - ответ
-    // 4 - комментарий
-    // 5 - пост в чат
-    // 6 - понравился пост
-    // 7 - понравился ответ
-    
+    // Вывод событий в поток
     public static function getFlowAll()
     {
         $q = XD::select('*')->from(['flow_log']);
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['flow_user_id'])
-                ->where(['flow_action_id'], '!=', 2)
-                ->and(['flow_action_id'], '!=', 6)
-                ->and(['flow_action_id'], '!=', 7) 
+                ->where(['flow_action_type'], '!=', 'add_post')
+                ->and(['flow_action_type'], '!=', 'vote_post')
+                ->and(['flow_action_type'], '!=', 'vote_answer')
+                ->and(['flow_action_type'], '!=', 'vote_comment')
                 ->and(['flow_tl'], '=', 0)                 
                 ->orderBy(['flow_id'])->desc()->limit(15);
 
@@ -30,29 +23,27 @@ class FlowModel extends \MainModel
         return $result;
     }
     
-    // Добавляем в поток 
+    // Добавим в поток 
     public static function FlowAdd($data) 
     {
        XD::insertInto(['flow_log'], '(', 
-            ['flow_action_id'], ',', 
+            ['flow_action_type'], ',', 
             ['flow_content'], ',', 
             ['flow_user_id'], ',',
             ['flow_pubdate'], ',', 
             ['flow_url'], ',',  
             ['flow_target_id'], ',',
-            ['flow_about'], ',',
             ['flow_space_id'], ',', 
             ['flow_tl'], ',',
             ['flow_ip'], ')')->values( '(', 
         
         XD::setList([
-            $data['flow_action_id'], 
+            $data['flow_action_type'], 
             $data['flow_content'], 
             $data['flow_user_id'], 
             $data['flow_pubdate'], 
             $data['flow_url'], 
             $data['flow_target_id'], 
-            $data['flow_about'], 
             $data['flow_space_id'], 
             $data['flow_tl'], 
             $data['flow_ip']]), ')' )->run();
@@ -72,7 +63,7 @@ class FlowModel extends \MainModel
         return true;
     }
     
-    // Удален поток или нет
+    // Удалена нить потока или нет
     public static function isTheFlowDeleted($flow_id) 
     {
         $result = XD::select('*')->from(['flow_log'])->where(['flow_id'], '=', $flow_id)->getSelectOne();

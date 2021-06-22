@@ -41,9 +41,9 @@ class CommentModel extends \MainModel
     { 
         $q = XD::select('*')->from(['comments']);
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['comment_user_id'])
-                ->leftJoin(['votes_comm'])->on(['votes_comm_item_id'], '=', ['comment_id'])
-                ->and(['votes_comm_user_id'], '=', $uid)
-                ->where(['comment_answ_id'], '=', $answ_id);
+                ->leftJoin(['votes_comment'])->on(['votes_comment_item_id'], '=', ['comment_id'])
+                ->and(['votes_comment_user_id'], '=', $uid)
+                ->where(['comment_answer_id'], '=', $answ_id);
 
         return $query->getSelect();
     }
@@ -72,7 +72,7 @@ class CommentModel extends \MainModel
     public static function commentAdd($post_id, $answ_id, $comm_id, $ip, $comment, $my_id)
     { 
 
-        XD::insertInto(['comments'], '(', ['comment_post_id'], ',', ['comment_answ_id'], ',', ['comment_comm_id'], ',', ['comment_ip'], ',', ['comment_content'], ',', ['comment_user_id'], ')')->values( '(', XD::setList([$post_id, $answ_id, $comm_id, $ip, $comment, $my_id]), ')' )->run();
+        XD::insertInto(['comments'], '(', ['comment_post_id'], ',', ['comment_answer_id'], ',', ['comment_comment_id'], ',', ['comment_ip'], ',', ['comment_content'], ',', ['comment_user_id'], ')')->values( '(', XD::setList([$post_id, $answ_id, $comm_id, $ip, $comment, $my_id]), ')' )->run();
        
        // id последнего комментария
        $last_id = XD::select()->last_insert_id('()')->getSelectValue();

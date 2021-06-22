@@ -8,15 +8,7 @@ use Lori\Base;
 
 class FlowController extends \MainController
 {
-    // Страница потока (flow_action_id):
-    // 1 - сообщение (сюда не выводятся)
-    // 2 - пост
-    // 3 - ответ
-    // 4 - комментарий
-    // 5 - пост в чат
-    // 6 - понравился пост
-    // 7 - понравился ответ
-    
+  
     public function index()
     {
         Request::getResources()->addBottomStyles('/assets/css/flow.css');
@@ -67,13 +59,12 @@ class FlowController extends \MainController
         
         // Добавим в чат и в поток
         $data_flow = [
-            'flow_action_id'    => 5, // чат
+            'flow_action_type'  => 'add_chat',
             'flow_content'      => $chat_content,
             'flow_user_id'      => $user_id,
             'flow_pubdate'      => date("Y-m-d H:i:s"),
             'flow_url'          => 0,
             'flow_target_id'    => 0,
-            'flow_about'        => lang('add_chat'),
             'flow_space_id'     => 0,
             'flow_tl'           => 0,
             'flow_ip'           => $flow_ip, 

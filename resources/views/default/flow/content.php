@@ -19,8 +19,8 @@
                     </a>
                 </span>
             <?php } ?>
-        
-            <?php if($flow['flow_action_id'] == 5) { ?>
+
+            <?php if($flow['flow_action_type'] == 'add_chat') { ?>
                 <div class="v-ots"></div> 
                 <div class="comm-header">
                      <img class="avatar" src="<?= user_avatar_url($flow['avatar'], 'small'); ?>">
@@ -34,7 +34,7 @@
                 <div class="flow-telo">
                     <?= $flow['flow_content']; ?>
                 </div>  
-            <?php } elseif ($flow['flow_action_id'] == 4) { ?>
+            <?php } elseif ($flow['flow_action_type'] == 'add_comment') { ?>
                 <div class="flow-comment">
                     <i class="icon bubbles"></i>
                     <div class="box">
@@ -45,10 +45,10 @@
                         <span class="date">
                             <?= $flow['flow_pubdate']; ?> 
                         </span>
-                          — <a href="<?= $flow['flow_url']; ?>"><?= $flow['flow_about']; ?>...</a>
+                          — <a href="<?= $flow['flow_url']; ?>"><?= lang($flow['flow_action_type']); ?>...</a>
                     </div>
                 </div>
-            <?php } elseif ($flow['flow_action_id'] == 3) { ?>
+            <?php } elseif ($flow['flow_action_type'] == 'add_answer') { ?>
                 <div class="flow-answer">
                     <i class="icon action-undo"></i>
                     <div class="box">
@@ -59,7 +59,7 @@
                         <span class="date">
                             <?= $flow['flow_pubdate']; ?> 
                         </span>
-                          — <a href="<?= $flow['flow_url']; ?>"><?= $flow['flow_about']; ?>...</a>
+                          — <a href="<?= $flow['flow_url']; ?>"><?= lang($flow['flow_action_type']); ?>...</a>
                     </div>
                 </div>
             <?php } else { ?>

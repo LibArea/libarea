@@ -72,7 +72,7 @@
                             <?php } ?>
                         <?php } ?>
                     <?php } else { ?>
-                        <p class="no-answer"><i class="icon lock"></i> <?= lang('There are no favorites'); ?>...</p>
+                        <p class="no-answer"><i class="icon info"></i> <?= lang('There are no favorites'); ?>...</p>
                     <?php } ?>
                     <br>
                 </div>

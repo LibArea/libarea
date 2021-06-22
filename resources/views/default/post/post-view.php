@@ -29,6 +29,9 @@
                                 <?php if($post['post_tl'] > 0) { ?> 
                                     <span class="trust-level small">tl<?= $post['post_tl']; ?></span>
                                 <?php } ?>
+                                <?php if($post['post_type'] == 1) { ?> 
+                                    <i class="icon question green"></i>
+                                <?php } ?>
                                 <?php if($post['post_url_domain']) { ?> 
                                     <a class="date small" href="/domain/<?= $post['post_url_domain']; ?>">
                                         <?= $post['post_url_domain']; ?>
@@ -215,7 +218,7 @@
                 <?php if($post['post_type'] == 0) { ?> 
                     <?php include TEMPLATE_DIR . '/post/comm-view.php'; ?>
                     <?php if($post['post_closed'] == 1) { ?> 
-                        <p class="no-answer"> <?= lang('post-closed'); ?>...</p>
+                        <p class="no-answer"> <i class="icon info"></i> <?= lang('post-closed'); ?>...</p>
                     <?php } ?>
                 <?php } else { ?>
                     <?php include TEMPLATE_DIR . '/post/qa-view.php'; ?>

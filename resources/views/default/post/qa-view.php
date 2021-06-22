@@ -72,22 +72,22 @@
                             
                             <?php if (!$uid['id']) { ?> 
                                 <div class="voters">
-                                    <a rel="nofollow" href="/login"><div class="answ-up-id"></div></a>
+                                    <a rel="nofollow" href="/login"><div class="answer-up-id"></div></a>
                                     <div class="score">
                                         <?= $answ['answer_votes'] ? '+'.$answ['answer_votes'] : $answ['answer_votes']; ?>
                                     </div>
                                 </div>
                             <?php } else { ?>
-                                <?php if ($answ['votes_answ_user_id'] == $uid['id'] || $uid['id'] == $answ['answer_user_id']) { ?>
+                                <?php if ($answ['votes_answer_user_id'] == $uid['id'] || $uid['id'] == $answ['answer_user_id']) { ?>
                                     <div class="voters active">
-                                        <div class="answ-up-id"></div>
+                                        <div class="answer-up-id"></div>
                                         <div class="score">
                                             <?= $answ['answer_votes'] ? '+'.$answ['answer_votes'] : $answ['answer_votes']; ?>
                                         </div>
                                     </div>
                                 <?php } else { ?>
                                     <div id="up<?= $answ['answer_id']; ?>" class="voters">
-                                        <div data-id="<?= $answ['answer_id']; ?>" class="answ-up-id"></div>
+                                        <div data-id="<?= $answ['answer_id']; ?>" class="answer-up-id"></div>
                                         <div class="score">
                                             <?= $answ['answer_votes'] ? '+'.$answ['answer_votes'] : $answ['answer_votes']; ?>
                                         </div>

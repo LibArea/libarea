@@ -3,12 +3,12 @@
 
        <?php if ($answ['answ_vote_status'] || $uid['id'] == $answ['answer_user_id']) { ?>
             <div class="voters active">
-                <div class="answ-up-id"></div>
+                <div class="answer-up-id"></div>
                 <div class="score"><?= $answ['answer_votes']; ?></div>
             </div>
         <?php } else { ?>
             <div id="up<?= $answ['answer_id']; ?>" class="voters">
-                <div data-id="<?= $answ['answer_id']; ?>" class="answ-up-id"></div>
+                <div data-id="<?= $answ['answer_id']; ?>" class="answer-up-id"></div>
                 <div class="score"><?= $answ['answer_votes']; ?></div>
             </div>
         <?php } ?>

@@ -24,7 +24,7 @@
                                     <?= $answ['content']; ?> 
                                 </div>
                                 <div class="post-full-footer date">
-                                    <div class="answ-up-id"></div> + <?= $answ['answer_votes']; ?>
+                                    <div class="answer-up-id"></div> + <?= $answ['answer_votes']; ?>
                                 </div>
                             </div>  
                         <?php } else { ?>    

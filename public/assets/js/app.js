@@ -56,16 +56,17 @@ if(colorSpace){
 }
 
 $(function(){
+
     // Голосование за комментарии
-    $(document).on('click', '.comm-up-id', function() {
-        let comm_id = $(this).data('id');
+    $(document).on('click', '.comment-up-id', function() {
+        let comment_id = $(this).data('id');
         $.ajax({
-            url: '/votes/comm',
+            url: '/votes/comment',
             type: 'POST',
-            data: {comm_id: comm_id},
+            data: {comment_id: comment_id},
         }).done(function(data) {
-            $('#up' + comm_id + '.voters').addClass('active');
-            $('#up' + comm_id).find('.score').html('+');
+            $('#up' + comment_id + '.voters').addClass('active');
+            $('#up' + comment_id).find('.score').html('+');
         });
     });
     // Голосование за пост
@@ -81,17 +82,19 @@ $(function(){
         });
     });
     // Голосование за ответ
-    $(document).on('click', '.answ-up-id', function() {
-        let answ_id = $(this).data('id');
+    $(document).on('click', '.answer-up-id', function() {
+        let answer_id = $(this).data('id');
         $.ajax({
-            url: '/votes/answ',
+            url: '/votes/answer',
             type: 'POST',
-            data: {answ_id: answ_id},
+            data: {answer_id: answer_id},
         }).done(function(data) {
-            $('#up' + answ_id + '.voters').addClass('active');
-            $('#up' + answ_id).find('.score').html('+');
+            $('#up' + answer_id + '.voters').addClass('active');
+            $('#up' + answer_id).find('.score').html('+');
         });
     });
+    
+    
     // Подписка на блог
     $(document).on("click", ".hide-space-id", function(){      
         let space_id  = $(this).data('id');  

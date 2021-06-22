@@ -18,9 +18,6 @@ class ExploreController extends \MainController
         $five_post  = ExploreModel::lastРostFive();
         $uid        = Base::getUid();
         
-        
-        
-        
         $data = [
             'h1'            => lang('Explore'),
             'meta_title'    => lang('explore-title') .' | '. Config::get(Config::PARAM_NAME),

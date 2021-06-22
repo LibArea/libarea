@@ -70,9 +70,10 @@ return [
     'add_answer'            => 'added a answer',
     'add_chat'              => 'added a message to the chat',
     'add_post'              => 'added a post',
-    'add_up_post'           => 'I liked the post',
-    'add_up_answ'           => 'I liked the answer',
-    'add_up_comm'           => 'liked the comment',
+    'vote_post'             => 'I liked the post',
+    'vote_answer'           => 'I liked the answer',
+    'vote_comment'          => 'liked the comment',
+    'vote_link'             => 'liked the link',
     
     'domain-desc'           => 'Grouping posts by domain',
     'domains-title'         => 'Sites in the system',

@@ -8,7 +8,6 @@ use App\Models\SpaceModel;
 use App\Models\LinkModel;
 use App\Models\AnswerModel;
 use App\Models\CommentModel;
-use App\Models\VotesPostModel;
 use App\Models\NotificationsModel;
 use Lori\Config;
 use Lori\Base;
@@ -339,7 +338,7 @@ class PostController extends \MainController
                 $data = [
                     'link_url'          => $link_url,
                     'link_url_domain'   => $post_url_domain,
-                    'link_add_uid'      => $uid['id'],
+                    'link_user_id'      => $uid['id'],
                     'link_type'         => 0,
                     'link_status'       => 200,
                     'link_cat_id'       => 1,

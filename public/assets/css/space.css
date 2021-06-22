@@ -67,7 +67,7 @@ h1.space a {
   font-size: 11px;
 }
 
-a.space-u.tag-u {
+a.tags {
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 8pt;
@@ -78,7 +78,12 @@ a.space-u.tag-u {
   font-style: normal;
 }
 
-a.space-u.tag-u:hover {
+a.tags.avtive {
+  border: 1px solid #e45735;
+  color: #e45735;
+}
+
+a.tags:hover {
   border: 1px solid #ccc;
   color: #666;
 }

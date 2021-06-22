@@ -123,10 +123,11 @@ Route::before('Authorization@noAuth')->getGroup();
     // из различных пространств. Кроме черновиков, удаленных и ограниченных TL.
     Route::get('/all/{page?}')->controller('PostController', ['all'])->where(['page' => '[0-9]+']);
     
-	// Голосуем
-	Route::type('post')->get('/votes/comm')->controller('VotesCommController@votes');
-    Route::type('post')->get('/votes/post')->controller('VotesPostController@votes');
-    Route::type('post')->get('/votes/answ')->controller('VotesAnswController@votes');
+	// Голосуем (UP)
+    Route::type('post')->get('/votes/post')->controller('VotesController', ['post']); 
+    Route::type('post')->get('/votes/answer')->controller('VotesController', ['answer']); 
+    Route::type('post')->get('/votes/comment')->controller('VotesController', ['comment']);
+    Route::type('post')->get('/votes/link')->controller('VotesController', ['link']);
 Route::endGroup();
 
 Route::before('Authorization@yesAuth')->getGroup();

@@ -3,12 +3,12 @@
 
        <?php if ($comm['comm_vote_status'] || $uid['id'] == $comm['comment_user_id']) { ?>
             <div class="voters active">
-                <div class="comm-up-id"></div>
+                <div class="comment-up-id"></div>
                 <div class="score"><?= $comm['comment_votes']; ?></div>
             </div>
         <?php } else { ?>
             <div id="up<?= $comm['comment_id']; ?>" class="voters">
-                <div data-id="<?= $comm['comment_id']; ?>" class="comm-up-id"></div>
+                <div data-id="<?= $comm['comment_id']; ?>" class="comment-up-id"></div>
                 <div class="score"><?= $comm['comment_votes']; ?></div>
             </div>
         <?php } ?>

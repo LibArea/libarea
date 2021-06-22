@@ -48,8 +48,8 @@ class AnswerModel extends \MainModel
     { 
         $q = XD::select('*')->from(['answers']);
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['answer_user_id'])
-        ->leftJoin(['votes_answ'])->on(['votes_answ_item_id'], '=', ['answer_id'])
-        ->and(['votes_answ_user_id'], '=', $uid)
+        ->leftJoin(['votes_answer'])->on(['votes_answer_item_id'], '=', ['answer_id'])
+        ->and(['votes_answer_user_id'], '=', $uid)
          ->leftJoin(['favorite'])->on(['favorite_tid'], '=', ['answer_id'])
         ->and(['favorite_uid'], '=', $uid)
         ->and(['favorite_type'], '=', 2)

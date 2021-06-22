@@ -58,8 +58,8 @@ INSERT INTO `answers` (`answer_id`, `answer_post_id`, `answer_user_id`, `answer_
 CREATE TABLE `comments` (
   `comment_id` int(11) NOT NULL,
   `comment_post_id` int(11) NOT NULL DEFAULT 0,
-  `comment_answ_id` int(11) NOT NULL DEFAULT 0,
-  `comment_comm_id` int(11) NOT NULL DEFAULT 0,
+  `comment_answer_id` int(11) NOT NULL DEFAULT 0,
+  `comment_comment_id` int(11) NOT NULL DEFAULT 0,
   `comment_user_id` int(11) NOT NULL DEFAULT 0,
   `comment_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `comment_modified` timestamp NOT NULL DEFAULT '2020-12-31 09:00:00',
@@ -97,7 +97,6 @@ CREATE TABLE `flow_log` (
   `flow_content` text NOT NULL,
   `flow_url` varchar(255) NOT NULL,
   `flow_target_id` int(11) DEFAULT NULL,
-  `flow_about` varchar(255) DEFAULT NULL,
   `flow_space_id` int(11) NOT NULL,
   `flow_tl` int(11) NOT NULL,
   `flow_ip` varchar(45) DEFAULT NULL,
@@ -108,8 +107,8 @@ CREATE TABLE `flow_log` (
 -- Дамп данных таблицы `flow_log`
 --
 
-INSERT INTO `flow_log` (`flow_id`, `flow_action_id`, `flow_pubdate`, `flow_user_id`, `flow_content`, `flow_url`, `flow_target_id`, `flow_about`, `flow_space_id`, `flow_tl`, `flow_ip`, `flow_is_delete`) VALUES
-(1, 2, '2021-04-30 06:41:28', 1, 'Первый ответ в теме', 'posts/prosto-pervyj-post#comm_1', 1, 'добавил комментарий', 0, 0, '127.0.0.1', 0);
+INSERT INTO `flow_log` (`flow_id`, `flow_action_id`, `flow_pubdate`, `flow_user_id`, `flow_content`, `flow_url`, `flow_target_id`, `flow_space_id`, `flow_tl`, `flow_ip`, `flow_is_delete`) VALUES
+(1, 2, '2021-04-30 06:41:28', 1, 'Первый ответ в теме', 'posts/prosto-pervyj-post#comm_1', 1, 0, 0, '127.0.0.1', 0);
 
 -- --------------------------------------------------------
 
@@ -467,31 +466,31 @@ INSERT INTO `users_trust_level` (`trust_id`, `trust_name`, `trust_count`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `votes_answ`
+-- Структура таблицы `votes_answer`
 --
 
-CREATE TABLE `votes_answ` (
-  `votes_answ_id` int(11) NOT NULL,
-  `votes_answ_item_id` int(11) NOT NULL,
-  `votes_answ_points` int(11) NOT NULL,
-  `votes_answ_ip` varchar(45) NOT NULL,
-  `votes_answ_user_id` int(11) NOT NULL DEFAULT 1,
-  `votes_answ_date` datetime NOT NULL
+CREATE TABLE `votes_answer` (
+  `votes_answer_id` int(11) NOT NULL,
+  `votes_answer_item_id` int(11) NOT NULL,
+  `votes_answer_points` int(11) NOT NULL,
+  `votes_answer_ip` varchar(45) NOT NULL,
+  `votes_answer_user_id` int(11) NOT NULL DEFAULT 1,
+  `votes_answer_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `votes_comm`
+-- Структура таблицы `votes_comment`
 --
 
-CREATE TABLE `votes_comm` (
-  `votes_comm_id` int(11) NOT NULL,
-  `votes_comm_item_id` int(11) NOT NULL,
-  `votes_comm_points` int(11) NOT NULL,
-  `votes_comm_ip` varchar(45) NOT NULL,
-  `votes_comm_user_id` int(11) NOT NULL DEFAULT 1,
-  `votes_comm_date` datetime NOT NULL
+CREATE TABLE `votes_comment` (
+  `votes_comment_id` int(11) NOT NULL,
+  `votes_comment_item_id` int(11) NOT NULL,
+  `votes_comment_points` int(11) NOT NULL,
+  `votes_comment_ip` varchar(45) NOT NULL,
+  `votes_comment_user_id` int(11) NOT NULL DEFAULT 1,
+  `votes_comment_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -507,6 +506,20 @@ CREATE TABLE `votes_post` (
   `votes_post_ip` varchar(45) NOT NULL,
   `votes_post_user_id` int(11) NOT NULL DEFAULT 1,
   `votes_post_date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+--
+-- Структура таблицы `votes_link`
+--
+
+CREATE TABLE `votes_link` (
+  `votes_link_id` int(11) NOT NULL,
+  `votes_link_item_id` int(11) NOT NULL,
+  `votes_link_points` int(11) NOT NULL,
+  `votes_link_ip` varchar(45) NOT NULL,
+  `votes_link_user_id` int(11) NOT NULL DEFAULT 1,
+  `votes_link_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -578,6 +591,7 @@ CREATE TABLE `links` (
     `link_title` varchar(250) NOT NULL,
     `link_content` text NOT NULL,
     `link_add_uid` int(11) NOT NULL DEFAULT 0 COMMENT 'Кто добавил',
+    `link_user_id` int(11) NOT NULL DEFAULT 0,
     `link_date` datetime NOT NULL DEFAULT current_timestamp(),
     `link_type` int(6) NOT NULL DEFAULT 0 COMMENT 'Тип сайта (0 - общий, 1 - блог, 2 - энциклопедия)',
     `link_status` int(6) NOT NULL DEFAULT 200 COMMENT 'Статус сайта (200, 403, 404)',
@@ -755,22 +769,22 @@ ALTER TABLE `users_trust_level`
   ADD PRIMARY KEY (`trust_id`);
 
 --
--- Индексы таблицы `votes_answ`
+-- Индексы таблицы `votes_answer`
 --
-ALTER TABLE `votes_answ`
-  ADD PRIMARY KEY (`votes_answ_id`),
-  ADD KEY `votes_answ_item_id` (`votes_answ_item_id`,`votes_answ_user_id`),
-  ADD KEY `votes_answ_ip` (`votes_answ_item_id`,`votes_answ_ip`),
-  ADD KEY `votes_answ_user_id` (`votes_answ_user_id`);
+ALTER TABLE `votes_answer`
+  ADD PRIMARY KEY (`votes_answer_id`),
+  ADD KEY `votes_answer_item_id` (`votes_answer_item_id`,`votes_answer_user_id`),
+  ADD KEY `votes_answer_ip` (`votes_answer_item_id`,`votes_answer_ip`),
+  ADD KEY `votes_answer_user_id` (`votes_answer_user_id`);
 
 --
--- Индексы таблицы `votes_comm`
+-- Индексы таблицы `votes_comment`
 --
-ALTER TABLE `votes_comm`
-  ADD PRIMARY KEY (`votes_comm_id`),
-  ADD KEY `votes_comm_item_id` (`votes_comm_item_id`,`votes_comm_user_id`),
-  ADD KEY `votes_comm_ip` (`votes_comm_item_id`,`votes_comm_ip`),
-  ADD KEY `votes_comm_user_id` (`votes_comm_user_id`);
+ALTER TABLE `votes_comment`
+  ADD PRIMARY KEY (`votes_comment_id`),
+  ADD KEY `votes_comment_item_id` (`votes_comment_item_id`,`votes_comment_user_id`),
+  ADD KEY `votes_comment_ip` (`votes_comment_item_id`,`votes_comment_ip`),
+  ADD KEY `votes_comment_user_id` (`votes_comment_user_id`);
 
 --
 -- Индексы таблицы `votes_post`
@@ -780,6 +794,16 @@ ALTER TABLE `votes_post`
   ADD KEY `votes_post_item_id` (`votes_post_item_id`,`votes_post_user_id`),
   ADD KEY `votes_post_ip` (`votes_post_item_id`,`votes_post_ip`),
   ADD KEY `votes_post_user_id` (`votes_post_user_id`);
+
+
+--
+-- Индексы таблицы `votes_link`
+--
+ALTER TABLE `votes_link`
+  ADD PRIMARY KEY (`votes_link_id`),
+  ADD KEY `votes_link_item_id` (`votes_link_item_id`,`votes_link_user_id`),
+  ADD KEY `votes_link_ip` (`votes_link_item_id`,`votes_link_ip`),
+  ADD KEY `votes_link_user_id` (`votes_link_user_id`);
 
 --
 -- AUTO_INCREMENT для сохранённых таблиц
@@ -900,22 +924,29 @@ ALTER TABLE `users_notification_setting`
   MODIFY `notice_setting_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `votes_answ`
+-- AUTO_INCREMENT для таблицы `votes_answer`
 --
-ALTER TABLE `votes_answ`
-  MODIFY `votes_answ_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `votes_answer`
+  MODIFY `votes_answer_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `votes_comm`
+-- AUTO_INCREMENT для таблицы `votes_comment`
 --
-ALTER TABLE `votes_comm`
-  MODIFY `votes_comm_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `votes_comment`
+  MODIFY `votes_comment_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `votes_post`
 --
 ALTER TABLE `votes_post`
   MODIFY `votes_post_id` int(11) NOT NULL AUTO_INCREMENT;
+COMMIT;
+
+--
+-- AUTO_INCREMENT для таблицы `votes_post`
+--
+ALTER TABLE `votes_link`
+  MODIFY `votes_link_id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

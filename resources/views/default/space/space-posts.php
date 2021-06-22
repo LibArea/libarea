@@ -143,6 +143,9 @@
                                 <i class="icon link"></i> <?= $post['post_url_domain']; ?>
                             </a> 
                         <?php } ?>
+                        <?php if($post['st_id']) { ?>
+                            <a class="tags indent-bid" href="/s/<?= $space_info['space_slug']; ?>/<?= $post['st_id']; ?>" title="<?= $post['st_title']; ?>"><?= $post['st_title']; ?></a>
+                        <?php } ?>
                         
                         <div class="post-details">
                             <div class="show_add_<?= $post['post_id']; ?>">
@@ -288,7 +291,7 @@
                     <div class="inner-padding big">
                         <div class="menu-m"><?= lang('Tags'); ?></div>
                         <?php foreach ($tags as  $tag) { ?>  
-                            <a class="date tag-u<?php if ($uid['uri'] == '/s/'.$tag['space_slug'] .'/'.$tag['st_id']) { ?>  avtive<?php } ?>" href="/s/<?= $space_info['space_slug']; ?>/<?= $tag['st_id']; ?>">
+                            <a class="tags<?php if ($uid['uri'] == '/s/'.$tag['space_slug'] .'/'.$tag['st_id']) { ?>  avtive<?php } ?>" href="/s/<?= $space_info['space_slug']; ?>/<?= $tag['st_id']; ?>">
                                 <?= $tag['st_title']; ?>
                             </a>
                         <?php } ?>

@@ -22,7 +22,7 @@ class ExploreModel extends \MainModel
     // График активности
     public static function getGraf()
     { 
-        $sql = "SELECT COUNT(votes_answ_id), DATE(votes_answ_date) as date FROM votes_answ GROUP BY date limit 10";
+        $sql = "SELECT COUNT(votes_answer_id), DATE(votes_answer_date) as date FROM votes_answer GROUP BY date limit 10";
 
         return DB::run($sql)->fetchall(PDO::FETCH_BOTH); 
     } 

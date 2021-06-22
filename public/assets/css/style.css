@@ -1081,8 +1081,8 @@ ol.comment-telo {
 /* голосование */
 .voters,
 .voters a,
-.voters .answ-up-id,
-.voters .comm-up-id,
+.voters .answer-up-id,
+.voters .comment-up-id,
 .telo-detail_post .voters {
   float: left;
 }
@@ -1099,9 +1099,10 @@ ol.comment-telo {
   margin: 0 20px 0 0;
 }
 
-.voters .comm-up-id,
+.voters .link-up-id,
+.voters .comment-up-id,
 .voters .post-up-id,
-.voters .answ-up-id {
+.voters .answer-up-id {
   border-color: transparent transparent #bbb transparent;
   border-style: solid;
   border-width: 6px;
@@ -1113,14 +1114,16 @@ ol.comment-telo {
   border-bottom-width: 11px;
 }
 
-.voters .comm-up-id:hover,
+.voters .link-up-id:hover,
+.voters .comment-up-id:hover,
 .voters .post-up-id:hover,
-.voters .answ-up-id:hover {
+.voters .answer-up-id:hover {
   border-color: transparent transparent var(--quaternary) transparent;
 }
 
-.voters.active .comm-up-id,
-.voters.active .answ-up-id,
+.voters.active .link-up-id,
+.voters.active .comment-up-id,
+.voters.active .answer-up-id,
 .voters.active .post-up-id,
 .voters.active .score {
   border-color: transparent transparent var(--quaternary) transparent;
@@ -1129,9 +1132,10 @@ ol.comment-telo {
   float: left;
 }
 
-div.voters .comm-up-id,
+div.voters .link-up-id,
+div.voters .comment-up-id,
 div.voters .post-up-id,
-div.voters .asnw-up-id {
+div.voters .asnwer-up-id {
   border-bottom-width: 11px;
   float: left;
 }
