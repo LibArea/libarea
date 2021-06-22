@@ -740,6 +740,11 @@ img.img-post,
   padding: 1px 15px;
   max-width: 700px;
   color: var(--tertiary);
+  margin: 0 0 0 30px;
+}
+
+.post-telo-fav {
+  margin: 0 0 20px 0;
 }
 
 .voters-fav {

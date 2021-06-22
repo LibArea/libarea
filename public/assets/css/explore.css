@@ -1,5 +1,6 @@
 .box-card {
   position: relative;
+  clear: both;
 }
 
 .box-card img {

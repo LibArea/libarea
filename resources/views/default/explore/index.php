@@ -133,7 +133,7 @@
                                     labels: [1,2,3,4,5,6,7,8,9,10],
                                     datasets: [
                                         {
-                                            label: "<?= lang('Answers'); ?>",
+                                            label: "<?= lang('Activity'); ?>",
                                             data: [
                                             
                                             <?php foreach ($data['flow_num'] as $flow) { ?>

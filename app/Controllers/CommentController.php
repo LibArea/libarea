@@ -5,7 +5,7 @@ use App\Models\CommentModel;
 use App\Models\UserModel;
 use App\Models\PostModel;
 use App\Models\AnswerModel;
-use App\Models\VotesCommentModel;
+use App\Models\VotesModel;
 use App\Models\NotificationsModel;
 use App\Models\FlowModel;
 use Hleb\Constructor\Handlers\Request;
@@ -29,7 +29,7 @@ class CommentController extends \MainController
         foreach ($comm  as $ind => $row) {
             $row['date']                = lang_date($row['comment_date']);
             $row['comment_content']     = Base::text($row['comment_content'], 'line');
-            $row['comm_vote_status']    = VotesCommentModel::getVoteStatus($row['comment_id'], $uid['id']);
+            $row['comm_vote_status']    = VotesModel::voteStatus($row['comment_id'], $uid['id'], 'comment');
             $result[$ind]   = $row;
         }
         

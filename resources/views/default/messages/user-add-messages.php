@@ -13,7 +13,7 @@
                
                     <textarea rows="3" id="message" class="mess" placeholder="<?= lang('Write'); ?>..." type="text" name="message" /></textarea>
                     <p>
-                        <input type="submit" name="submit" value="<?= lang('Send'); ?>" class="submit">    
+                        <input type="submit" name="submit" value="<?= lang('Send'); ?>" class="button">    
                     </p>
                 </form>
             </div>

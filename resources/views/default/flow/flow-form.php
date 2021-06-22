@@ -11,7 +11,7 @@
         <?= csrf_field() ?>
             <textarea rows="1" placeholder="<?= lang('write-something'); ?>..." name="flow" id="flow"></textarea>
             <div class="add-flow-butt"> 
-                <input type="submit" name="commit" value="<?= lang('Reply'); ?>" class="comment-post">
+                <input type="submit" name="commit" value="<?= lang('Reply'); ?>" class="button">
             </div> 
         </form>
     <?php endif; ?>

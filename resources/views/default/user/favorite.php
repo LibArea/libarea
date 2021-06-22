@@ -14,7 +14,7 @@
                                 <div class="voters-fav">
                                    <div class="score"><?= $counter; ?>.</div> 
                                 </div>
-                                <div class="post-telo">
+                                <div class="post-telo-fav">
                                     <a href="/post/<?= $fav['post_id']; ?>/<?= $fav['post_slug']; ?>">
                                         <h3 class="title"><?= $fav['post_title']; ?></h3>
                                     </a>
@@ -39,7 +39,7 @@
                                             <?php if($uid['id'] == $fav['favorite_uid']) { ?>
                                                 <span class="indent"> &#183; </span> 
                                                 <span class="user-post-fav right" data-post="<?= $fav['post_id']; ?>">
-                                                     <span class="mu_favorite date"><?= lang('Remove'); ?></span>
+                                                     <span class="date"><?= lang('Remove'); ?></span>
                                                 </span>  
                                             <?php } ?>                                
                                         <?php } ?>
@@ -61,7 +61,7 @@
                                     <?php if($uid['id'] > 0) { ?>
                                         <?php if($uid['id'] == $fav['favorite_uid']) { ?>
                                             <span class="user-answ-fav right" data-answ="<?= $fav['answer_id']; ?>">
-                                                 <span class="favcomm date"><?= lang('Remove'); ?></span>
+                                                 <span class="small date"><?= lang('Remove'); ?></span>
                                             </span>  
                                         <?php } ?>                                
                                     <?php } ?>

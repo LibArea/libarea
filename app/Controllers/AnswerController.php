@@ -5,8 +5,7 @@ use App\Models\CommentModel;
 use App\Models\UserModel;
 use App\Models\AnswerModel;
 use App\Models\PostModel;
-use App\Models\VotesCommentModel;
-use App\Models\VotesAnswerModel;
+use App\Models\VotesModel;
 use App\Models\NotificationsModel;
 use App\Models\FlowModel;
 use Hleb\Constructor\Handlers\Request;
@@ -31,7 +30,7 @@ class AnswerController extends \MainController
             $row['answer_content']  = Base::text($row['answer_content'], 'md');
             $row['date']            = lang_date($row['answer_date']);
             // N+1 - перенести в запрос
-            $row['answ_vote_status'] = VotesAnswerModel::getVoteStatus($row['answer_id'], $uid['id']);
+            $row['answ_vote_status'] = VotesModel::voteStatus($row['answer_id'], $uid['id'], 'answer');
             $result[$ind]   = $row;
         }
         
