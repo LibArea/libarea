@@ -11,7 +11,7 @@ use Lori\Base;
 class AuthController extends \MainController
 {
     // Показ формы регистрации
-    public function registerPage()
+    public function registerForm()
     {
         // Если включена инвайт система
         if(Config::get(Config::PARAM_INVITE)) {
@@ -30,7 +30,7 @@ class AuthController extends \MainController
     }
     
     // Показ формы регистрации с инвайтом
-    public function registerInvitePage()
+    public function registerInviteForm()
     {
         // Код активации
         $code = \Request::get('code');
@@ -55,7 +55,7 @@ class AuthController extends \MainController
     }
     
     // Отправка запроса для регистрации
-    public function registerHandler()
+    public function register()
     {
         $email      = \Request::getPost('email');
         $login      = \Request::getPost('login');
@@ -165,7 +165,7 @@ class AuthController extends \MainController
     }
 
     // Страница авторизации
-    public function loginPage()
+    public function loginForm()
     {
         $uid  = Base::getUid();
         $data = [
@@ -179,7 +179,7 @@ class AuthController extends \MainController
     }
 
     // Отправка запроса авторизации
-    public function loginHandler()
+    public function login()
     {
         $email      = \Request::getPost('email');
         $password   = \Request::getPost('password');
@@ -249,7 +249,7 @@ class AuthController extends \MainController
         redirect('/');
     }
 
-    public function recoverPage() 
+    public function recoverForm() 
     {
         $uid  = Base::getUid();
         $data = [
@@ -304,7 +304,7 @@ class AuthController extends \MainController
     }
     
     // Страница установки нового пароля
-    public function RemindPage()
+    public function RemindForm()
     {
         // Код активации
         $code = \Request::get('code');
@@ -333,7 +333,7 @@ class AuthController extends \MainController
     }
     
     // Проверка корректности E-mail
-    public function AvtivateEmailPage()
+    public function AvtivateEmail()
     {
         // Код активации
         $code = \Request::get('code');
@@ -353,7 +353,7 @@ class AuthController extends \MainController
     }
     
     
-    public function RemindNewPage()
+    public function remindNew()
     {
         $password   = \Request::getPost('password');
         $code       = \Request::getPost('code');

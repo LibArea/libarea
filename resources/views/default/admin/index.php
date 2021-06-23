@@ -10,9 +10,8 @@
                         <span class="t-td center">N</span>
                         <span class="t-td"><?= lang('Avatar'); ?></span>
                         <span class="t-td"><?= lang('Information'); ?></span>
-                        <span class="t-td">E-mail / <?= lang('Sign up'); ?></span>
                         <span class="t-td">IP <?= lang('registrations'); ?></span>
-                        <span class="t-td center"><?= lang('Last'); ?></span>
+                        <span class="t-td"><?= lang('Last'); ?></span>
                         <span class="t-td center">Ban</span>
                         <span class="t-td center"><?= lang('Action'); ?></span>
                     </div>
@@ -31,12 +30,10 @@
                                     (<?= $user['name']; ?>) 
                                 <?php } ?>
                                 <sup class="red">TL:<?= $user['trust_level']; ?></sup>
-                                <?php if($user['invitation_id'] !=0) { ?><sup>+ inv. id<?= $user['invitation_id']; ?></sup><?php } ?> <br>
-                            </span>
-                            <span class="t-td">
-                                 <span class="date">
+                                <?php if($user['invitation_id'] !=0) { ?><sup>+ inv. id<?= $user['invitation_id']; ?></sup><?php } ?>
+                                <div class="small">
                                     <?= $user['email']; ?>
-                                 </span>
+                                </div>
                             </span>
                             <span class="t-td">
                                  <?= $user['reg_ip']; ?>  
@@ -45,7 +42,7 @@
                                  <?php } ?> <br>
                                  <small><?= $user['created_at']; ?></small>
                             </span>
-                            <span class="t-td center">
+                            <span class="t-td">
                                 <?php if(!empty($user['logs']['logs_ip_address'])) { ?>
                                     <a href="/admin/logip/<?= $user['logs']['logs_ip_address']; ?>">
                                         <?= $user['logs']['logs_ip_address']; ?>

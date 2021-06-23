@@ -213,10 +213,10 @@
             <?php foreach ($space_bar as  $sig) { ?>
               <a class="bar-space-telo" href="/s/<?= $sig['space_slug']; ?>" title="<?= $sig['space_name']; ?>">
                 <img src="<?= spase_logo_url($sig['space_img'], 'small'); ?>" alt="<?= $sig['space_name']; ?>">
-                <?php if($sig['space_user_id'] == $uid['id']) { ?>
-                  <div class="my_space"></div>
-                <?php } ?>
                 <span class="bar-name small"><?= $sig['space_name']; ?></span>
+                <?php if($sig['space_user_id'] == $uid['id']) { ?>
+                  <sup class="red indent">+</sup>
+                <?php } ?>
               </a>
             <?php } ?>
           </div> 

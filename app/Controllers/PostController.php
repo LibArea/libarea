@@ -276,7 +276,7 @@ class PostController extends \MainController
     }
     
     // Добавление поста
-    public function createPost()
+    public function create()
     {
         // Получаем title и содержание
         $post_title             = \Request::getPost('post_title');
@@ -513,7 +513,7 @@ class PostController extends \MainController
     }
     
     // Показ формы поста для редактирование
-    public function editPostPage() 
+    public function editPostForm() 
     {
         $post_id    = \Request::getInt('id');
         $uid        = Base::getUid();
@@ -561,7 +561,7 @@ class PostController extends \MainController
     }
     
     // Связанные посты и выбор автора
-    public function postsSelect($sheet)
+    public function select($sheet)
     {   
         $search =  \Request::getPost('searchTerm');
         $search = preg_replace('/[^a-zA-ZА-Яа-я0-9 ]/ui', '', $search);
@@ -574,7 +574,7 @@ class PostController extends \MainController
     }
     
     // Изменяем пост
-    public function editPost() 
+    public function edit() 
     {
         $post_id                = \Request::getPostInt('post_id');
         $post_title             = \Request::getPost('post_title');
@@ -727,7 +727,7 @@ class PostController extends \MainController
     }
     
     // Удаление обложки
-    function postImgRemove()
+    function imgPostRemove()
     {
         $post_id    = \Request::getInt('id');
         $uid        = Base::getUid();
@@ -754,7 +754,7 @@ class PostController extends \MainController
     }
     
     // Размещение своего поста у себя в профиле
-    public function addPostProf()
+    public function addPostProfile()
     {
         $uid     = Base::getUid();
         $post_id = \Request::getPostInt('post_id');

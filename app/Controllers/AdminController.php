@@ -328,7 +328,7 @@ class AdminController extends \MainController
     }
     
     // Форма добавления награды
-    public function addBadgePage()
+    public function addBadgeForm()
     {
         $uid = self::isAdmin();
         
@@ -384,7 +384,7 @@ class AdminController extends \MainController
     }
 
     // Форма изменения награды
-    public function badgeEditPage()
+    public function badgeEditForm()
     {
         $uid        = self::isAdmin();
         $badge_id   = \Request::getInt('id');

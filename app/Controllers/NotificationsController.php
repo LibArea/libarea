@@ -42,7 +42,7 @@ class NotificationsController extends \MainController
     }
   
     // Изменяем флаг подписки прочитан или нет (переход по ссылке)
-    public function notifRead()
+    public function read()
     {
         $uid        = Base::getUid();
         $notif_id   = \Request::getInt('id');
@@ -63,7 +63,7 @@ class NotificationsController extends \MainController
     }  
     
     // Удаляем уведомления
-    public function notifRemove()
+    public function remove()
     {
         $uid    = Base::getUid();
         NotificationsModel::setRemove($uid['id']);

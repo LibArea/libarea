@@ -85,8 +85,8 @@ class UserController extends \MainController
         return view(PR_VIEW_DIR . '/user/profile', ['data' => $data, 'uid' => $uid, 'user' => $user, 'onepost' => $post]);
     }  
 
-    // Страница настройки профиля
-    function settingPage()
+    // Форма настройки профиля
+    function settingForm()
     {
         // Данные участника
         $login  = \Request::get('login');
@@ -165,7 +165,7 @@ class UserController extends \MainController
     }
     
     // Форма загрузки аватарки
-    function settingAvatarPage()
+    function settingAvatarForm()
     {
         $uid  = Base::getUid();
         $login  = \Request::get('login');
@@ -191,7 +191,7 @@ class UserController extends \MainController
     }
     
     // Форма изменение пароля
-    function settingSecurityPage()
+    function settingSecurityForm()
     {
         $uid  = Base::getUid();
         $login  = \Request::get('login');
@@ -422,7 +422,7 @@ class UserController extends \MainController
     /////////// СИСТЕМА ИНВАЙТОВ ///////////
     
     // Показ формы инвайта
-    public function invitePage()
+    public function inviteForm()
     {
         $uid  = Base::getUid();
         $data = [

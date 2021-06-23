@@ -65,7 +65,7 @@ class SpaceController extends \MainController
     }
 
     // Посты по пространству
-    public function SpacePosts($type)
+    public function posts($type)
     {
         $uid            = Base::getUid();
         $slug           = \Request::get('slug');
@@ -129,7 +129,7 @@ class SpaceController extends \MainController
     }
 
     // Форма изменения пространства
-    public function spaceForma()
+    public function editForm()
     {
         $uid    = Base::getUid();
         $slug   = \Request::get('slug');
@@ -156,7 +156,7 @@ class SpaceController extends \MainController
     }
     
     // Форма изменения логотипа и обложки
-    public function spaceFormaLogo()
+    public function logoForm()
     {
         $uid    = Base::getUid();
         $slug   = \Request::get('slug');
@@ -183,7 +183,7 @@ class SpaceController extends \MainController
     }
     
     // Страница с информацией по меткам
-    public function spaceTagsInfo() 
+    public function tagsInfo() 
     {
         $uid    = Base::getUid();
         $slug   = \Request::get('slug');
@@ -204,7 +204,7 @@ class SpaceController extends \MainController
     }
     
     // Форма добавления пространства
-    public function addSpacePage() 
+    public function addForm() 
     {
         $uid  = Base::getUid();
   
@@ -231,7 +231,7 @@ class SpaceController extends \MainController
     }
     
     // Добавления пространства
-    public function spaceAdd() 
+    public function add() 
     {
         $uid  = Base::getUid();
         
@@ -292,7 +292,7 @@ class SpaceController extends \MainController
     }
     
     // Изменение пространства
-    public function spaceEdit() 
+    public function edit() 
     {
         $uid            = Base::getUid();
         $space_slug     = \Request::getPost('space_slug');
@@ -363,7 +363,7 @@ class SpaceController extends \MainController
     
     
     // Изменение логотипа и обложки
-    public function spaceEditLogo() 
+    public function logoEdit() 
     {
         $uid            = Base::getUid();
         $space_slug     = \Request::getPost('space_slug');
@@ -459,7 +459,7 @@ class SpaceController extends \MainController
     }
     
     // Удаляем обложку
-    public function spaceCoverRemove()
+    public function coverRemove()
     {
         $uid    = Base::getUid();
         $slug   = \Request::get('slug');
@@ -492,7 +492,7 @@ class SpaceController extends \MainController
     }
     
     // Страница добавления метки (тега) пространства
-    public function spaceTagsAddPage()
+    public function tagsAddForm()
     {
         $uid    = Base::getUid();
         $slug   = \Request::get('slug');
@@ -516,7 +516,7 @@ class SpaceController extends \MainController
     }
     
     // Страница изменение тега пространства
-    public function editTagSpacePage()
+    public function editTagForm()
     {
         $uid            = Base::getUid();
         $slug           = \Request::get('slug');
@@ -544,7 +544,7 @@ class SpaceController extends \MainController
     }
     
     // Изменяем тег пространства
-    public function editTagSpace()
+    public function editTag()
     {
         $uid        = Base::getUid();
         $space_id   = \Request::getPostInt('space_id');
@@ -590,7 +590,7 @@ class SpaceController extends \MainController
     }
 
     // Добавления тега
-    public function addTagSpace() 
+    public function addTag() 
     {
         $uid        = Base::getUid();
         $space_id   = \Request::getPostInt('space_id');

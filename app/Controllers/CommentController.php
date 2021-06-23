@@ -187,7 +187,7 @@ class CommentController extends \MainController
     }
 
 	// Покажем форму ответа
-	public function addFormComm()
+	public function addForm()
 	{
         $post_id    = \Request::getPostInt('post_id');
         $answ_id    = \Request::getPostInt('answ_id');
