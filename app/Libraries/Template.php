@@ -32,6 +32,16 @@ function spase_logo_url($file, $size='small')
     return  '/uploads/spaces/logos/' . $file;
 }
 
+
+// Favicon 
+function favicon_url($link_id) 
+{
+    if(file_exists(HLEB_PUBLIC_DIR. '/uploads/favicons/' . $link_id . '.png')) {
+        return '/uploads/favicons/' . $link_id . '.png';
+    }
+    return '/uploads/favicons/no-link.png';
+}
+
 // Localization of dates and events....
 function lang_date($string) 
 {

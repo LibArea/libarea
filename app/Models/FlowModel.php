@@ -15,6 +15,7 @@ class FlowModel extends \MainModel
                 ->and(['flow_action_type'], '!=', 'vote_post')
                 ->and(['flow_action_type'], '!=', 'vote_answer')
                 ->and(['flow_action_type'], '!=', 'vote_comment')
+                ->and(['flow_action_type'], '!=', 'vote_link')
                 ->and(['flow_tl'], '=', 0)                 
                 ->orderBy(['flow_id'])->desc()->limit(15);
 

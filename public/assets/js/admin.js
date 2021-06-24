@@ -12,6 +12,19 @@ $(function(){
             })
     });  
    
+    // Запишем Favicon
+    $(document).on('click', '.add-favicon', function() {
+        let link_id  = $(this).data('id');
+        fetch("/admin/favicon/add", { 
+            method: "POST",
+            body: "id=" + link_id,
+            headers:{'Content-Type': 'application/x-www-form-urlencoded'} 
+            })
+            .then((response) => {
+                location.reload();                
+            }) 
+    });
+   
     // Восстанавливаем комментарий
     $(document).on('click', '.recover-comm', function() {
         let comm_id  = $(this).data('id');

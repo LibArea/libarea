@@ -28,18 +28,18 @@
                                 <div class="post-full-footer date">
                                     <?php if (!$uid['id']) { ?> 
                                         <div class="voters">
-                                            <a rel="nofollow" href="/login"><div class="comment-up-id"></div></a>
+                                            <a rel="nofollow" href="/login"><div class="up-id"></div></a>
                                             <div class="score"><?= $comm['comment_votes']; ?></div>
                                         </div>
                                     <?php } else { ?>
                                         <?php if ($comm['comm_vote_status'] || $uid['id'] == $comm['comment_user_id']) { ?>
                                             <div class="voters active">
-                                                <div class="comment-up-id"></div>
+                                                <div class="up-id"></div>
                                                 <div class="score"><?= $comm['comment_votes']; ?></div>
                                             </div>
                                         <?php } else { ?>
                                             <div id="up<?= $comm['comment_id']; ?>" class="voters">
-                                                <div data-id="<?= $comm['comment_id']; ?>" class="comment-up-id"></div>
+                                                <div data-id="<?= $comm['comment_id']; ?>" data-type="comment" class="up-id"></div>
                                                 <div class="score"><?= $comm['comment_votes']; ?></div>
                                             </div>
                                         <?php } ?>

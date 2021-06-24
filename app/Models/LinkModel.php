@@ -7,6 +7,16 @@ use PDO;
 
 class LinkModel extends \MainModel
 {
+    // Список доменов
+    public static function getDomainAll($user_id, $page)
+    {
+        $q = XD::select('*')->from(['links']);
+        $query = $q->leftJoin(['votes_link'])->on(['votes_link_item_id'], '=', ['link_id'])
+                ->and(['votes_link_user_id'], '=', $user_id)->where(['link_is_deleted'], '=', 0);
+        
+        return $query->getSelect(); 
+    }
+    
     // Получение постов по url
     public static function getDomain($url, $uid)
     {
@@ -29,8 +39,14 @@ class LinkModel extends \MainModel
                 ->and(['link_is_deleted'], '=', 0)->orderBy(['link_count'])->desc()->limit(10)->getSelect();
     } 
 
+    // Данные по id домена
+    public static function getLinkId($link_id)
+    {
+        return XD::select('*')->from(['links'])->where(['link_id'], '=', $link_id)->getSelectOne();
+    } 
+
     // Добавим домен
-    public static function addLinks($data)
+    public static function addLink($data)
     {
         XD::insertInto(['links'], '(', 
             ['link_url'], ',', 
@@ -70,5 +86,16 @@ class LinkModel extends \MainModel
     {
         return XD::select('*')->from(['links'])->where(['link_url_domain'], '=', $domain)->getSelectOne();
     }
-
+    
+    // Данные о домене
+    public static function getLink($domain, $user_id)
+    {
+        $q = XD::select('*')->from(['links']);
+        $query = $q->leftJoin(['votes_link'])->on(['votes_link_item_id'], '=', ['link_id'])
+                ->and(['votes_link_user_id'], '=', $user_id)->where(['link_url_domain'], '=', $domain);
+        
+        return $query->getSelectOne();
+    }   
+    
+ 
 }

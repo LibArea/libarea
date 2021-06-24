@@ -25,7 +25,7 @@ class SpaceModel extends \MainModel
         if ($trust_level == 5) {
             $sql = "SELECT * FROM space";
         } else {
-            $sql = "SELECT * FROM space WHERE space_permit_users = 0 or space_user_id = ".$user_id."";
+            $sql = "SELECT * FROM space WHERE space_permit_users = 0 or space_user_id = ".$user_id." ORDER BY space_id DESC";
         }
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 

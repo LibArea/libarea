@@ -55,46 +55,20 @@ if(colorSpace){
     }, false);
 }
 
-$(function(){
-
-    // Голосование за комментарии
-    $(document).on('click', '.comment-up-id', function() {
-        let comment_id = $(this).data('id');
+$(function(){ 
+    // Up
+    $(document).on('click', '.up-id', function() {
+        let up_id           = $(this).data('id');
+        let type_content    = $(this).data('type');
         $.ajax({
-            url: '/votes/comment',
+            url: '/votes/' + type_content,
             type: 'POST',
-            data: {comment_id: comment_id},
+            data: {up_id: up_id},
         }).done(function(data) {
-            $('#up' + comment_id + '.voters').addClass('active');
-            $('#up' + comment_id).find('.score').html('+');
+            $('#up' + up_id + '.voters').addClass('active');
+            $('#up' + up_id).find('.score').html('+');
         });
     });
-    // Голосование за пост
-    $(document).on('click', '.post-up-id', function() {
-        let post_id = $(this).data('id');
-        $.ajax({
-            url: '/votes/post',
-            type: 'POST',
-            data: {post_id: post_id},
-        }).done(function(data) {
-            $('#up' + post_id + '.voters').addClass('active');
-            $('#up' + post_id).find('.score').html('+');
-        });
-    });
-    // Голосование за ответ
-    $(document).on('click', '.answer-up-id', function() {
-        let answer_id = $(this).data('id');
-        $.ajax({
-            url: '/votes/answer',
-            type: 'POST',
-            data: {answer_id: answer_id},
-        }).done(function(data) {
-            $('#up' + answer_id + '.voters').addClass('active');
-            $('#up' + answer_id).find('.score').html('+');
-        });
-    });
-    
-    
     // Подписка на блог
     $(document).on("click", ".hide-space-id", function(){      
         let space_id  = $(this).data('id');  

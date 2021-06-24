@@ -185,7 +185,9 @@ class PostController extends \MainController
             Request::getResources()->addBottomScript('/assets/md/Markdown.Editor.js');
             Request::getResources()->addBottomScript('/assets/md/editor.js');
         }
+        Request::getResources()->addBottomStyles('/assets/css/magnific-popup.css');
         Request::getResources()->addBottomScript('/assets/js/shares.js');
+        Request::getResources()->addBottomScript('/assets/js/jquery.magnific-popup.min.js');
         
         if($post['post_is_delete'] == 1) {
             \Request::getHead()->addMeta('robots', 'noindex');
@@ -343,7 +345,7 @@ class PostController extends \MainController
                     'link_status'       => 200,
                     'link_cat_id'       => 1,
                 ];
-                LinkModel::addLinks($data);
+                LinkModel::addLink($data);
             } else {
                 LinkModel::addLinkCount($post_url_domain);
             }

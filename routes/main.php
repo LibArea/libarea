@@ -7,6 +7,7 @@ Route::before('Authorization@noAuth')->getGroup();
         Route::get('/admin/answer/recover')->controller('AdminController@recoverAnswer');
         Route::get('/admin/space/ban')->controller('AdminController@delSpace');
         Route::get('/admin/ban')->controller('AdminController@banUser');
+        Route::get('/admin/favicon/add')->controller('LinkController@favicon');
         
         Route::get('/votes/post')->controller('VotesController', ['post']); 
         Route::get('/votes/answer')->controller('VotesController', ['answer']); 
@@ -93,28 +94,28 @@ Route::before('Authorization@noAuth')->getGroup();
     
     Route::get('/post/img/{id}/remove')->controller('PostController@imgPostRemove')->where(['id' => '[0-9]+']);
  
-	Route::get('/post/add')->controller('PostController@addPost');
+    Route::get('/post/add')->controller('PostController@addPost');
     Route::get('/post/add/space/{space_id}')->controller('PostController@addPost')->where(['space_id' => '[0-9]+']);
  
-	Route::get('/post/edit/{id}')->controller('PostController@editPostForm');
+    Route::get('/post/edit/{id}')->controller('PostController@editPostForm');
     
     Route::get('/u/{login}/invitation')->controller('UserController@invitationPage')->where(['login' => '[A-Za-z0-9]+']); 
-	Route::get('/u/{login}/setting')->controller('UserController@settingForm')->where(['login' => '[A-Za-z0-9]+']); 
-	Route::get('/u/{login}/setting/avatar')->controller('UserController@settingAvatarForm')->where(['login' => '[A-Za-z0-9]+']);
-	Route::get('/u/{login}/setting/security')->controller('UserController@settingSecurityForm')->where(['login' => '[A-Za-z0-9]+']); 
+    Route::get('/u/{login}/setting')->controller('UserController@settingForm')->where(['login' => '[A-Za-z0-9]+']); 
+    Route::get('/u/{login}/setting/avatar')->controller('UserController@settingAvatarForm')->where(['login' => '[A-Za-z0-9]+']);
+    Route::get('/u/{login}/setting/security')->controller('UserController@settingSecurityForm')->where(['login' => '[A-Za-z0-9]+']); 
     
     Route::get('/u/{login}/delete/cover')->controller('UserController@userCoverRemove')->where(['login' => '[A-Za-z0-9]+']); 
 
-	Route::get('/logout')->controller('AuthController@logout');
+    Route::get('/logout')->controller('AuthController@logout');
 
 	// Добавление ответов / удаление / изменение
     Route::get('/post/{post_id}/answ/{answ_id}')->controller('AnswerController@editAnswerPage')->where(['post_id' => '[0-9]+', 'answ_id' => '[0-9]+']);
 
 	// Личные сообщения 
-	Route::get('/u/{login}/messages')->controller('MessagesController')->where(['login' => '[A-Za-z0-9]+']);   
- 
-	Route::get('/messages/read/{id}')->controller('MessagesController@dialog')->where(['id' => '[0-9]+']); 
-	Route::get('/u/{login}/mess')->controller('MessagesController@profilMessages')->where(['login' => '[A-Za-z0-9]+']); 
+    Route::get('/u/{login}/messages')->controller('MessagesController')->where(['login' => '[A-Za-z0-9]+']);   
+
+    Route::get('/messages/read/{id}')->controller('MessagesController@dialog')->where(['id' => '[0-9]+']); 
+    Route::get('/u/{login}/mess')->controller('MessagesController@profilMessages')->where(['login' => '[A-Za-z0-9]+']); 
 
 	// Уведомления 
 	Route::get('/u/{login}/notifications')->controller('NotificationsController')->where(['login' => '[A-Za-z0-9]+']); 

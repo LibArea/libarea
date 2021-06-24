@@ -25,7 +25,7 @@
                                 
                             <div class="ex-footer small date">
                                 <div class="voters active">
-                                    <div class="post-up-id"></div>
+                                    <div class="up-id"></div>
                                     <div class="score">
                                        <?= $last_post['post_votes']; ?>
                                     </div>

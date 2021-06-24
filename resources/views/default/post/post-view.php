@@ -101,12 +101,7 @@
                     </div>
                     <div class="post-body full">
                         <div class="post">
-                            <?php if($post['post_content_img']) { ?> 
-                                <div class="img-post-bl">
-                                    <img class="img-post" alt="<?= $post['post_title']; ?>" src="/uploads/posts/<?= $post['post_content_img']; ?>">
-                                </div>    
-                            <?php } ?>
-                        
+                       
                             <?php if($post['post_thumb_img']) { ?> 
                                 <img class="thumb" alt="<?= $post['post_title']; ?>" src="/uploads/posts/thumbnails/<?= $post['post_thumb_img']; ?>">
                             <?php } ?>
@@ -151,7 +146,7 @@
                     <div class="post-full-footer">
                         <?php if (!$uid['id']) { ?> 
                             <div id="vot<?= $post['post_id']; ?>" class="voters">
-                                <a rel="nofollow" href="/login"><div class="post-up-id"></div></a>
+                                <a rel="nofollow" href="/login"><div class="up-id"></div></a>
                                 <div class="score">
                                     <?= $post['post_votes'] ? '+'.$post['post_votes'] : $post['post_votes']; ?>
                                 </div>
@@ -159,14 +154,14 @@
                         <?php } else { ?> 
                             <?php if ($post['votes_post_user_id'] || $uid['id'] == $post['post_user_id']) { ?>
                                 <div class="voters active">
-                                    <div class="post-up-id"></div>
+                                    <div class="up-id"></div>
                                     <div class="score">
                                         <?= $post['post_votes'] ? '+'.$post['post_votes'] : $post['post_votes']; ?>
                                     </div>
                                 </div>
                             <?php } else { ?>
                                 <div id="up<?= $post['post_id']; ?>" class="voters">
-                                    <div data-id="<?= $post['post_id']; ?>" class="post-up-id"></div>
+                                    <div data-id="<?= $post['post_id']; ?>" data-type="post" class="up-id"></div>
                                     <div class="score">
                                         <?= $post['post_votes'] ? '+'.$post['post_votes'] : $post['post_votes']; ?>
                                     </div>
@@ -231,7 +226,7 @@
             <?php } ?>   
         </article>
     </main> 
-
+ 
     <aside>
         <div class="space-info white-box">
             <div class="inner-padding"> 
@@ -242,7 +237,13 @@
                 <div class="space-info-desc small"><?= $post['space_short_text']; ?></div> 
             </div>
         </div>
-        
+        <?php if($post['post_content_img']) { ?>
+          <div class="space-info white-box">
+            <div class="inner-padding big"> 
+              <img class="img-post" alt="<?= $post['post_title']; ?>" src="/uploads/posts/<?= $post['post_content_img']; ?>">
+            </div>
+          </div>
+        <?php } ?>    
         <div class="space-info white-box">
             <div class="inner-padding"> 
                 <h3 class="recommend small"><?= lang('To share'); ?></h3> 
@@ -254,20 +255,20 @@
                 </div>
             </div>
         </div>
-
+ 
         <?php if($recommend) { ?> 
             <div class="white-box sticky recommend">
                 <div class="inner-padding">
                     <h3 class="recommend small"><?= lang('Recommended'); ?></h3>  
-                    <?php $n=0; foreach ($recommend as  $post) { $n++; ?>
+                    <?php $n=0; foreach ($recommend as  $rec_post) { $n++; ?>
                          <div class="l-rec-small"> 
                             <div class="l-rec">0<?= $n; ?></div> 
                             <div class="l-rec-telo"> 
-                                <a class="edit-bl"  href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
-                                    <?= $post['post_title']; ?>  
+                                <a class="edit-bl"  href="/post/<?= $rec_post['post_id']; ?>/<?= $rec_post['post_slug']; ?>">
+                                    <?= $rec_post['post_title']; ?>  
                                 </a>
-                                <?php if($post['post_answers_num'] !=0) { ?>
-                                    <span class="n-comm">+<?= $post['post_answers_num'] ?></span>
+                                <?php if($rec_post['post_answers_num'] !=0) { ?>
+                                    <span class="n-comm">+<?= $rec_post['post_answers_num'] ?></span>
                                 <?php } ?> 
                             </div>
                        </div>
@@ -277,4 +278,15 @@
         <?php } ?> 
     </aside>
 </div>    
+
+<script nonce="<?= $_SERVER['nonce']; ?>">
+$(document).ready(function() {
+  $('.img-post').magnificPopup({
+    items: {
+      src: '/uploads/posts/<?= $post['post_content_img']; ?>'
+    },
+    type: 'image'
+  });
+});
+</script>  
 <?php include TEMPLATE_DIR . '/footer.php'; ?> 

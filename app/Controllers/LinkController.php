@@ -11,7 +11,12 @@ class LinkController extends \MainController
 {
     public function index() 
     {
-        $uid        = Base::getUid();
+        $uid    = Base::getUid();
+        $pg     = \Request::getInt('page'); 
+        $page   = (!$pg) ? 1 : $pg;
+        
+        $links  = LinkModel::getDomainAll($uid['id'], $page);
+        
         $data = [
             'h1'            => lang('domains-title'),  
             'canonical'     => '/domains',
@@ -20,7 +25,7 @@ class LinkController extends \MainController
             'meta_desc'     => lang('domains-desc'), 
         ];
         
-        return view(PR_VIEW_DIR . '/link/index', ['data' => $data, 'uid' => $uid]);
+        return view(PR_VIEW_DIR . '/link/index', ['data' => $data, 'uid' => $uid, 'links' => $links]);
     }
     
     // Выборка по домену
@@ -42,8 +47,8 @@ class LinkController extends \MainController
          
         }
         
-        $info_domain    = LinkModel::getLinkOne($domain);
-        $domains        = LinkModel::getDomainsTop($domain); 
+        $link       = LinkModel::getLink($domain, $uid['id']);
+        $domains    = LinkModel::getDomainsTop($domain); 
         
         $meta_title = lang('Domain') . ': ' . $domain .' | '. Config::get(Config::PARAM_NAME);
         $meta_desc = lang('domain-desc') . ': ' . $domain .' '. Config::get(Config::PARAM_HOME_TITLE);
@@ -56,7 +61,40 @@ class LinkController extends \MainController
             'meta_desc'     => $meta_desc, 
         ];
         
-        return view(PR_VIEW_DIR . '/link/domain', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'domains' => $domains, 'info_domain' => $info_domain]);
+        return view(PR_VIEW_DIR . '/link/domain', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'domains' => $domains, 'link' => $link]);
     }
 
+    // Получим Favicon
+    public static function getFavicon($url)
+    {
+        $url = str_replace("https://", '', $url);
+        return "https://www.google.com/s2/favicons?domain=".$url;
+    }
+    
+    // Запишем Favicon
+    public function favicon()
+    {
+        $link_id    = \Request::getPostInt('id');
+        $uid        = Base::getUid();
+
+        if ($uid['trust_level'] != 5) {
+            return false;
+        }
+        
+        $link = LinkModel::getLinkId($link_id);
+        
+        if (!$link) {
+            return false;
+        }
+        
+        $puth = HLEB_PUBLIC_DIR. '/uploads/favicons/' . $link["link_id"] . '.png';
+        $dirF = HLEB_PUBLIC_DIR. '/uploads/favicons/';
+
+        if (!file_exists($puth)){  
+            $urls = self::getFavicon($link['link_url_domain']);       
+            copy($urls, $puth); 
+        } 
+        
+        return true;
+    }
 }

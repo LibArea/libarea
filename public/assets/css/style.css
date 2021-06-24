@@ -325,11 +325,6 @@ i.icon {
   color: #666;
 }
 
-.domain-footer-small {
-  font-size: 14px;
-  margin: 5px 0;
-}
-
 .sb-telo {
   margin: 15px 0;
 }
@@ -691,6 +686,7 @@ img.img-post,
   width: 100%;
 }
 
+.inner-padding img:hover,
 .post-img a:hover > img,
 .thumb.no-mob:hover {
   opacity: 0.8;
@@ -1086,8 +1082,7 @@ ol.comment-telo {
 /* голосование */
 .voters,
 .voters a,
-.voters .answer-up-id,
-.voters .comment-up-id,
+.voters .up-id,
 .telo-detail_post .voters {
   float: left;
 }
@@ -1104,10 +1099,7 @@ ol.comment-telo {
   margin: 0 20px 0 0;
 }
 
-.voters .link-up-id,
-.voters .comment-up-id,
-.voters .post-up-id,
-.voters .answer-up-id {
+.voters .up-id {
   border-color: transparent transparent #bbb transparent;
   border-style: solid;
   border-width: 6px;
@@ -1119,17 +1111,11 @@ ol.comment-telo {
   border-bottom-width: 11px;
 }
 
-.voters .link-up-id:hover,
-.voters .comment-up-id:hover,
-.voters .post-up-id:hover,
-.voters .answer-up-id:hover {
+.voters .up-id:hover {
   border-color: transparent transparent var(--quaternary) transparent;
 }
 
-.voters.active .link-up-id,
-.voters.active .comment-up-id,
-.voters.active .answer-up-id,
-.voters.active .post-up-id,
+.voters.active .up-id,
 .voters.active .score {
   border-color: transparent transparent var(--quaternary) transparent;
   color: var(--quaternary);
@@ -1137,12 +1123,18 @@ ol.comment-telo {
   float: left;
 }
 
-div.voters .link-up-id,
-div.voters .comment-up-id,
-div.voters .post-up-id,
-div.voters .asnwer-up-id {
-  border-bottom-width: 11px;
-  float: left;
+.heart-link .voters {
+  padding-top: 5px;
+}
+
+.domain-telo {
+  margin: 0 0 25px 0;
+}
+
+.favicon {
+  vertical-align: middle;
+  margin: 0 5px 0 0;
+  width: 16px;
 }
 
 /* Горизонтальное меню */
@@ -1547,6 +1539,7 @@ a:hover .icon::before {
 .icon.settings::before { content: "\e09a"; }
 .icon.envelope::before { content: "\e086"; }
 .icon.arrow-down::before { content: "\e604"; }
+.icon.arrow-right::before { content: "\e606"; }
 .icon.link::before { content: "\e08d"; }
 .icon.bell::before { content: "\e027"; }
 .icon.shield::before { content: "\e00e"; }

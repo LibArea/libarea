@@ -3,21 +3,47 @@
     <main>
         <div class="white-box">
             <div class="inner-padding space-tags">
-                <?php if($info_domain['link_title']) { ?>
-                    <h1 class="domain"><?= $info_domain['link_title']; ?></h1>
+                <?php if($link['link_title']) { ?>
+                    <div class="right heart-link">
+                        <?php if (!$uid['id']) { ?> 
+                            <div class="voters">
+                                <a rel="nofollow" href="/login"><i class="icon up-id"></i></a>
+                                <div class="score">
+                                    <?= $link['link_votes'] ? '+'.$link['link_votes'] : $link['link_votes']; ?>
+                                </div>
+                            </div>
+                        <?php } else { ?>
+                             <?php if ($link['votes_link_user_id'] == $uid['id'] || $uid['id'] == $link['link_user_id']) { ?>
+                                <div class="voters active">
+                                    <div class="score">
+                                        <?= $link['link_votes'] ? '+'.$link['link_votes'] : $link['link_votes']; ?>
+                                    </div>
+                                </div>
+                            <?php } else { ?>
+                                <div id="up<?= $link['link_id']; ?>" class="voters">
+                                    <div data-id="<?= $link['link_id']; ?>" data-type="link" class="up-id"></div>
+                                    <div class="score">
+                                        <?= $link['link_votes'] ? '+'.$link['link_votes'] : $link['link_votes']; ?>
+                                    </div>
+                                </div>
+                            <?php } ?>
+                        <?php } ?>
+                    </div>
+                    <h1 class="domain"><?= $link['link_title']; ?></h1>
                     <div class="domain-content">
-                    <?= $info_domain['link_content']; ?>
+                    <?= $link['link_content']; ?>
                     </div>
                     <div class="domain-footer-small">
-                        <a class="green" rel="nofollow noreferrer ugc" href="<?= $info_domain['link_url']; ?>">
-                            <i class="icon share-alt"></i> <?= $info_domain['link_url']; ?>
+                        <a class="green" rel="nofollow noreferrer ugc" href="<?= $link['link_url']; ?>">
+                            <img class="favicon" alt="<?= $link['link_url_domain']; ?>" src="<?= favicon_url($link['link_id']); ?>"> 
+                            <?= $link['link_url']; ?>
                         </a> 
                         
-                        <span class="right"><?= $info_domain['link_count']; ?></span>
+                        <span class="right"><?= $link['link_count']; ?></span>
                     </div>
                 <?php } else { ?>
                     <h1><?= $data['h1']; ?></h1>
-                <?php } ?>    
+                <?php } ?>
             </div>
         </div>
         <?php if (!empty($posts)) { ?> 
@@ -44,7 +70,9 @@
                            <?= $post['post_date'] ?>
                         </span>
                     </div>
-                    
+                    <?php if($post['post_thumb_img']) { ?> 
+                        <img class="thumb" alt="<?= $post['post_title']; ?>" src="/uploads/posts/thumbnails/<?= $post['post_thumb_img']; ?>">
+                    <?php } ?>
                     <div class="post-body">
                         <a href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
                             <h2 class="title"><?= $post['post_title']; ?>
@@ -75,17 +103,13 @@
                             </h2>
                         </a>
 
-                                 <?php if($post['post_url_domain']) { ?> 
-                                    <a class="date small indent-bid" href="/domain/<?= $post['post_url_domain']; ?>">
-                                        <i class="icon link"></i> <?= $post['post_url_domain']; ?>
-                                    </a> 
-                                <?php } ?>
+                        <?php if($post['post_url_domain']) { ?> 
+                            <a class="date small indent-bid" href="/domain/<?= $post['post_url_domain']; ?>">
+                                <i class="icon link"></i> <?= $post['post_url_domain']; ?>
+                            </a> 
+                        <?php } ?>
                         
                         <div class="post-details">
-                            <?php if($post['post_thumb_img']) { ?> 
-                                <img class="thumb" alt="<?= $post['post_title']; ?>" src="/uploads/posts/thumbnails/<?= $post['post_thumb_img']; ?>">
-                            <?php } ?>
-                        
                             <div class="show_add_<?= $post['post_id']; ?>">
                                 <div data-post_id="<?= $post['post_id']; ?>" class="showpost">
                                     <?= $post['post_content_preview']; ?>
@@ -105,18 +129,18 @@
                         <div class="post-footer lowercase">
                             <?php if (!$uid['id']) { ?> 
                                 <div id="vot<?= $post['post_id']; ?>" class="voters">
-                                    <a rel="nofollow" href="/login"><div class="post-up-id"></div></a>
-                                    <div class="score"><?= $post['post_votes']; ?></div>
+                                    <a rel="nofollow" href="/login"><div class="up-id"></div></a>
+                                    <div class="score">+<?= $post['post_votes']; ?></div>
                                 </div>
                             <?php } else { ?> 
                                 <?php if ($post['votes_post_user_id'] || $uid['id'] == $post['post_user_id']) { ?>
                                     <div class="voters active">
-                                        <div class="post-up-id"></div>
+                                        <div class="up-id"></div>
                                         <div class="score"><?= $post['post_votes']; ?></div>
                                     </div>
                                 <?php } else { ?>
                                     <div id="up<?= $post['post_id']; ?>" class="voters">
-                                        <div data-id="<?= $post['post_id']; ?>" class="post-up-id"></div>
+                                        <div data-id="<?= $post['post_id']; ?>" data-type="post" class="up-id"></div>
                                         <div class="score"><?= $post['post_votes']; ?></div>
                                     </div>
                                 <?php } ?> 

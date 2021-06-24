@@ -131,7 +131,7 @@ class UserController extends \MainController
         
         $uid        = Base::getUid();
         $redirect   = '/u/' . $uid['login'] . '/setting';
-        Base::Limits($name, lang('Name'), '4', '11', $redirect);
+        Base::Limits($name, lang('Name'), '3', '11', $redirect);
 
         if(!filter_var($public_email, FILTER_VALIDATE_EMAIL)) {
             $public_email = '';

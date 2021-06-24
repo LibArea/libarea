@@ -10,36 +10,42 @@
                 <div class="domains">
                     <?php if (!empty($domains)) { ?>
                   
-                        <?php foreach ($domains as $key => $domain) { ?>  
+                        <?php foreach ($domains as $key => $link) { ?>  
                             <div class="domain-box">
+                                <span class="add-favicon right small" data-id="<?= $link['link_id']; ?>">
+                                    +фавикон
+                                </span>
                                 <h2 class="title">
-                                    <?php if($domain['link_title']) { ?>
-                                        <?= $domain['link_title']; ?>
+                                    <?php if($link['link_title']) { ?>
+                                        <?= $link['link_title']; ?>
                                     <?php } else { ?>
                                         Add title...                                    
                                     <?php } ?> 
                                 </h2>
                                 <div class="domain-telo indent-bid">
-                                    <?php if($domain['link_content']) { ?>
-                                        <?= $domain['link_content']; ?>
+                                    <?php if($link['link_content']) { ?>
+                                        <?= $link['link_content']; ?>
                                     <?php } else { ?>
                                         Add content...                                    
                                     <?php } ?> 
                                 </div> 
                                 <div class="domain-footer indent-bid">
-                                    <a class="green" rel="nofollow noreferrer" href="<?= $domain['link_url']; ?>">
-                                        <i class="icon share-alt"></i><?= $domain['link_url']; ?>
+                                    <a class="green" rel="nofollow noreferrer" href="<?= $link['link_url']; ?>">
+                                        <img class="favicon" alt="<?= $link['link_url_domain']; ?>" src="<?= favicon_url($link['link_id']); ?>"> 
+                                        <?= $link['link_url']; ?>
                                     </a> | 
+                                    id<?= $link['link_id']; ?> |
+                                    <?= $link['link_url_domain']; ?> |
                                     
-                                    <?= $domain['link_url_domain']; ?> |
-                                    <?= $domain['link_count']; ?> |
-                                    
-                                    <?php if($domain['link_is_deleted'] == 0) { ?>
+                                    <?php if($link['link_is_deleted'] == 0) { ?>
                                         active
                                     <?php } else { ?>
                                         <span class="red">Ban</span>                                  
                                     <?php } ?> |
-                                    <a href="/admin/domain/<?= $domain['link_id']; ?>/edit"><?= lang('Edit'); ?></a>
+                                    <a href="/admin/domain/<?= $link['link_id']; ?>/edit"><?= lang('Edit'); ?></a>
+                                    <span class="right heart-link red">
+                                         +<?= $link['link_count']; ?>
+                                    </span>
                                 </div>
                             </div>
                         <?php } ?>

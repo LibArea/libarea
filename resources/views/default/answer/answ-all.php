@@ -29,18 +29,18 @@
                                     <div class="post-full-footer date">
                                         <?php if (!$uid['id']) { ?> 
                                             <div class="voters">
-                                                <a rel="nofollow" href="/login"><div class="answer-up-id"></div></a>
+                                                <a rel="nofollow" href="/login"><div class="up-id"></div></a>
                                                 <div class="score"><?= $answ['answer_votes']; ?></div>
                                             </div>
                                         <?php } else { ?>
                                             <?php if ($answ['answ_vote_status'] || $uid['id'] == $answ['answer_user_id']) { ?>
                                                 <div class="voters active">
-                                                    <div class="answer-up-id"></div>
+                                                    <div class="up-id"></div>
                                                     <div class="score"><?= $answ['answer_votes']; ?></div>
                                                 </div>
                                             <?php } else { ?>
                                                 <div id="up<?= $answ['answer_id']; ?>" class="voters">
-                                                    <div data-id="<?= $answ['answer_id']; ?>" class="answer-up-id"></div>
+                                                    <div data-id="<?= $answ['answer_id']; ?>" data-type="answer" class="up-id"></div>
                                                     <div class="score"><?= $answ['answer_votes']; ?></div>
                                                 </div>
                                             <?php } ?>

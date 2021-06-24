@@ -148,7 +148,7 @@
             <div class="post-footer lowercase">
               <?php if (!$uid['id']) { ?> 
                 <div id="vot<?= $post['post_id']; ?>" class="voters">
-                  <a rel="nofollow" href="/login"><div class="post-up-id"></div></a>
+                  <a rel="nofollow" href="/login"><div class="up-id"></div></a>
                   <div class="score">
                     <?= $post['post_votes'] ? '+'.$post['post_votes'] : $post['post_votes']; ?>
                   </div>
@@ -156,14 +156,14 @@
               <?php } else { ?> 
                 <?php if ($post['votes_post_user_id'] || $uid['id'] == $post['post_user_id']) { ?>
                   <div class="voters active">
-                    <div class="post-up-id"></div>
+                    <div class="up-id"></div>
                     <div class="score">
                       <?= $post['post_votes'] ? '+'.$post['post_votes'] : $post['post_votes']; ?>
                     </div>
                   </div>
                 <?php } else { ?>
                   <div id="up<?= $post['post_id']; ?>" class="voters">
-                    <div data-id="<?= $post['post_id']; ?>" class="post-up-id"></div>
+                    <div data-id="<?= $post['post_id']; ?>" data-type="post" class="up-id"></div>
                     <div class="score">
                       <?= $post['post_votes'] ? '+'.$post['post_votes'] : $post['post_votes']; ?>
                     </div>
@@ -208,8 +208,11 @@
     <?php if ($uid['id']) { ?>
       <?php if(!empty($space_bar)) { ?>
         <div class="white-box">
-          <div class="inner-padding">
-            <div class="bar-title small"><?= lang('Signed'); ?></div>  
+          <div class="inner-padding"> 
+            <div class="bar-title small">
+                <?= lang('Signed'); ?>
+                <a class="right" title="<?= lang('Spaces'); ?>" href="/space"><i class="icon arrow-right"></i></a>
+            </div>  
             <?php foreach ($space_bar as  $sig) { ?>
               <a class="bar-space-telo" href="/s/<?= $sig['space_slug']; ?>" title="<?= $sig['space_name']; ?>">
                 <img src="<?= spase_logo_url($sig['space_img'], 'small'); ?>" alt="<?= $sig['space_name']; ?>">
