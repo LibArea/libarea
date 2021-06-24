@@ -636,7 +636,7 @@ img.thumb {
   margin: 5px 15px 10px 30px;
   float: right;
   width: 140px;
-  max-width: 120px;
+  max-height: 100px;
   border-radius: 2px;
 }
 

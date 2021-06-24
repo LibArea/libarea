@@ -74,12 +74,13 @@ class SpaceController extends \MainController
         $pg     = \Request::getInt('page'); 
         $page   = (!$pg) ? 1 : $pg;
         
+        
         // Покажем 404
         $space = SpaceModel::getSpaceInfo($slug);
         Base::PageError404($space);
   
-        $pagesCount = SpaceModel::getSpaceCount($space['space_id'], $uid['id'], $space_tags_id, $type); 
-        $posts      = SpaceModel::getSpacePosts($space['space_id'], $uid['id'], $space_tags_id, $type);
+        $pagesCount = SpaceModel::getCount($space['space_id'], $uid['id'], $uid['trust_level'], $space_tags_id, $type, $page); 
+        $posts      = SpaceModel::getPosts($space['space_id'], $uid['id'], $uid['trust_level'], $space_tags_id, $type, $page);
 
         $space['space_date']        = lang_date($space['space_date']);
         $space['space_cont_post']   = count($posts);
@@ -134,14 +135,10 @@ class SpaceController extends \MainController
         $uid    = Base::getUid();
         $slug   = \Request::get('slug');
 
-        // Покажем 404
         $space = SpaceModel::getSpaceInfo($slug);
-        Base::PageError404($space);
-
-        // Или персонал или автор
-        if ($uid['trust_level'] != 5 && $space['space_user_id'] != $uid['id']) {
-            redirect('/');
-        }
+        
+        // Проверка доступа 
+        Base::accessСheck($space, 'space', $uid); 
 
         Request::getHead()->addStyles('/assets/css/image-uploader.css'); 
         Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
@@ -161,14 +158,10 @@ class SpaceController extends \MainController
         $uid    = Base::getUid();
         $slug   = \Request::get('slug');
 
-        // Покажем 404
         $space = SpaceModel::getSpaceInfo($slug);
-        Base::PageError404($space);
 
-        // Или персонал или автор
-        if ($uid['trust_level'] != 5 && $space['space_user_id'] != $uid['id']) {
-            redirect('/');
-        }
+        // Проверка доступа 
+        Base::accessСheck($space, 'space', $uid); 
 
         Request::getHead()->addStyles('/assets/css/image-uploader.css'); 
         Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
@@ -188,9 +181,10 @@ class SpaceController extends \MainController
         $uid    = Base::getUid();
         $slug   = \Request::get('slug');
 
-        // Покажем 404
         $space = SpaceModel::getSpaceInfo($slug);
-        Base::PageError404($space);
+
+        // Проверка доступа 
+        Base::accessСheck($space, 'space', $uid); 
         
         $tags = SpaceModel::getSpaceTags($space['space_id']);
         
@@ -301,14 +295,10 @@ class SpaceController extends \MainController
         $space_feed     = \Request::getPostInt('feed');
         $space_tl       = \Request::getPostInt('space_tl');
         
-        // Покажем 404
         $space = SpaceModel::getSpaceId($space_id);
-        Base::PageError404($space);
-
-        // Или персонал или владелец
-        if ($uid['trust_level'] != 5 && $space['space_user_id'] != $uid['id']) {
-            redirect('/');
-        }
+        
+        // Проверка доступа 
+        Base::accessСheck($space, 'space', $uid); 
 
         $space_name         = \Request::getPost('space_name');
         $space_description  = \Request::getPost('space_description');
@@ -369,14 +359,10 @@ class SpaceController extends \MainController
         $space_slug     = \Request::getPost('space_slug');
         $space_id       = \Request::getPost('space_id');
         
-        // Покажем 404
         $space = SpaceModel::getSpaceId($space_id);
-        Base::PageError404($space);
-
-        // Или персонал или владелец
-        if ($uid['trust_level'] != 5 && $space['space_user_id'] != $uid['id']) {
-            redirect('/');
-        }
+        
+        // Проверка доступа 
+        Base::accessСheck($space, 'space', $uid); 
 
         $redirect   = '/space/' . $space['space_slug'] . '/edit/logo';
 
@@ -464,14 +450,11 @@ class SpaceController extends \MainController
         $uid    = Base::getUid();
         $slug   = \Request::get('slug');
         
-        // Покажем 404
+
         $space = SpaceModel::getSpaceInfo($slug);
-        Base::PageError404($space);
         
-        // Удалять может только автор и админ
-        if ($space['space_user_id'] != $uid['id'] && $uid['trust_level'] != 5) {
-            redirect('/');
-        }
+        // Проверка доступа 
+        Base::accessСheck($space, 'space', $uid); 
       
         $redirect   = '/space/' . $space['space_slug'] . '/edit/logo'; 
         
@@ -497,14 +480,10 @@ class SpaceController extends \MainController
         $uid    = Base::getUid();
         $slug   = \Request::get('slug');
         
-        // Покажем 404
         $space = SpaceModel::getSpaceInfo($slug);
-        Base::PageError404($space);
 
-        // Добавлять может только автор и админ
-        if ($space['space_user_id'] != $uid['id'] && $uid['trust_level'] != 5) {
-            redirect('/');
-        }
+        // Проверка доступа 
+        Base::accessСheck($space, 'space', $uid); 
       
         $data = [
             'h1'            => lang('Add tag'),
@@ -522,14 +501,10 @@ class SpaceController extends \MainController
         $slug           = \Request::get('slug');
         $space_tags_id  = \Request::getInt('tags');
         
-        // Покажем 404
         $space = SpaceModel::getSpaceInfo($slug);
-        Base::PageError404($space);
 
-        // Редактировать может только автор и админ
-        if ($space['space_user_id'] != $uid['id'] && $uid['trust_level'] != 5) {
-            redirect('/');
-        }
+        // Проверка доступа 
+        Base::accessСheck($space, 'space', $uid); 
 
         $tag = SpaceModel::getTagInfo($space_tags_id);
         Base::PageError404($tag);
@@ -552,14 +527,10 @@ class SpaceController extends \MainController
         $st_desc    = \Request::getPost('st_desc');
         $st_title   = \Request::getPost('st_title');
         
-        // Покажем 404
         $space = SpaceModel::getSpaceId($space_id);
-        Base::PageError404($space);
         
-        // Редактировать может только автор и админ
-        if ($space['space_user_id'] != $uid['id'] && $uid['trust_level'] != 5) {
-            redirect('/');
-        }
+        // Проверка доступа 
+        Base::accessСheck($space, 'space', $uid); 
 
         $redirect = '/s/' . $space['space_slug'] . '/' . $tag_id . '/edit';
         Base::Limits($st_title, lang('titles'), '4', '20', $redirect);

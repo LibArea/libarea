@@ -406,5 +406,21 @@ class Base
         
         return true;
     }
+    
+    // Проверка доступа
+    public static function accessСheck($content, $type, $uid)
+    {
+        
+        if(!$content){
+            redirect('/');
+        }
+ 
+        // Редактировать может только автор и админ
+        if ($content[$type . '_user_id'] != $uid['id'] && $uid['trust_level'] != 5) {
+            redirect('/');
+        }
+        
+        return true;
+    } 
 
 }

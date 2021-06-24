@@ -52,38 +52,98 @@ class SpaceModel extends \MainModel
     } 
 
     // Списки постов по пространству
-    public static function getSpacePosts($space_id, $user_id, $space_tags_id, $type)
+    public static function getPosts($space_id, $user_id, $user_tl, $space_tags_id, $type, $page)
     {
-        $q = XD::select('*')->from(['posts'])
-            ->leftJoin(['users'])->on(['id'], '=', ['post_user_id'])
-            ->leftJoin(['space_tags'])->on(['post_tag_id'], '=', ['st_id'])
-            ->leftJoin(['votes_post'])->on(['votes_post_item_id'], '=', ['post_id'])
-            ->and(['votes_post_user_id'], '=', $user_id)
-            ->where(['post_space_id'], '=', $space_id)
-            ->and(['post_draft'], '=', 0);
+        if($user_tl != 5) {  
+            if($user_id == 0) { 
+                $tl = "AND p.post_tl = 0";
+            } else {
+                $tl = "AND p.post_tl <= $user_tl";
+            }
+            $display = "AND p.post_is_delete = 0 $tl";
+        } else {
+            $display = ''; 
+        }
+         
+        if($type == 'feed') { 
+            $sort = "ORDER BY post_top DESC, p.post_date DESC";
+        } else {
+            $sort = "ORDER BY p.post_answers_num DESC";
+        }           
             
         if ($type == 'feed') {
             if($space_tags_id) {
-                $result = $q->and(['post_tag_id'], '=', $space_tags_id)->orderBy(['post_top'])->desc(',', ['post_date'])->desc()->getSelect();
+                $sort = "and post_tag_id = $space_tags_id ORDER BY p.post_top DESC, p.post_date DESC";
             } else { 
-                $result = $q->orderBy(['post_top'])->desc(',', ['post_date'])->desc()->getSelect();
+                $sort = "ORDER BY p.post_top DESC, p.post_date DESC";
             }
         } else {
             
             if($space_tags_id) {
-                $result = $q->and(['post_tag_id'], '=', $space_tags_id)->orderBy(['post_answers_num'])->desc()->getSelect();
+                $sort = "and post_tag_id = $space_tags_id ORDER BY p.post_answers_num DESC";
             } else { 
-                $result = $q->orderBy(['post_answers_num'])->desc()->getSelect();
+                $sort = "ORDER BY p.post_answers_num DESC";
             }   
-        } 
- 
-        return $result;
+        }
+
+        $offset = ($page-1) * 25;   
+
+        $sql = "SELECT p.*, u.*, t.*, v.* FROM posts as p 
+                LEFT JOIN users as u ON u.id = p.post_user_id 
+                LEFT JOIN space_tags as t ON p.post_tag_id = t.st_id 
+                LEFT JOIN votes_post as v ON v.votes_post_item_id = p.post_id AND v.votes_post_user_id = $user_id
+                WHERE p.post_space_id = $space_id and p.post_draft = 0
+                $display
+                $sort LIMIT 25 OFFSET ".$offset." ";
+             
+
+        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
     
     // Количество постов
-    public static function getSpaceCount($space_id, $user_id, $space_tags_id, $type)
+    public static function getCount($space_id, $user_id, $user_tl, $space_tags_id, $type, $page)
     {
-        return 0;
+        
+        if($user_tl != 5) {  
+            if($user_id == 0) { 
+                $tl = "AND p.post_tl = 0";
+            } else {
+                $tl = "AND p.post_tl <= $user_tl";
+            }
+            $display = "AND p.post_is_delete = 0 $tl";
+        } else {
+            $display = ''; 
+        }
+        
+        if($type == 'feed') { 
+            $sort = "ORDER BY post_top DESC, p.post_date DESC";
+        } else {
+            $sort = "ORDER BY p.post_answers_num DESC";
+        }           
+            
+        if ($type == 'feed') {
+            if($space_tags_id) {
+                $sort = "and post_tag_id = $space_tags_id ORDER BY p.post_top DESC, p.post_date DESC";
+            } else { 
+                $sort = "ORDER BY p.post_top DESC, p.post_date DESC";
+            }
+        } else {
+            
+            if($space_tags_id) {
+                $sort = "and post_tag_id = $space_tags_id ORDER BY p.post_answers_num DESC";
+            } else { 
+                $sort = "ORDER BY p.post_answers_num DESC";
+            }   
+        }
+        
+       $sql = "SELECT p.*, u.*, t.*, v.* FROM posts as p 
+                LEFT JOIN users as u ON u.id = p.post_user_id 
+                LEFT JOIN space_tags as t ON p.post_tag_id = t.st_id 
+                LEFT JOIN votes_post as v ON v.votes_post_item_id = p.post_id AND v.votes_post_user_id = $user_id
+                WHERE p.post_space_id = $space_id and p.post_draft = 0 $display $sort";
+
+        $query = DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
+        return ceil(count($query) / 25);
     }
     
     // Информация пространства по slug

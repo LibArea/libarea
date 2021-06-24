@@ -19,7 +19,7 @@ Route::before('Authorization@noAuth')->getGroup();
  
         Route::get('/flow/del')->controller('FlowController@deleteFlow');
     
-        Route::get('/comment/editform')->controller('CommentController@editFormComment');
+        Route::get('/comment/editform')->controller('CommentController@editCommentForm');
         Route::get('/comment/del')->controller('CommentController@deletComment');
         
         Route::get('/answer/del')->controller('AnswerController@deletAnswer');
@@ -200,8 +200,10 @@ Route::get('/explore')->controller('ExploreController');
 
 // Пространства
 Route::get('/space')->controller('SpaceController');
-Route::get('/s/{slug}/{tags?}')->controller('SpaceController@posts', ['feed'])->where(['slug' => '[A-Za-z0-9_]+',  'tags' => '[0-9]+']);
-Route::get('/s/{slug}/top/{tags?}')->controller('SpaceController@posts', ['top'])->where(['slug' => '[A-Za-z0-9_]+',  'tags' => '[0-9]+']);
+Route::get('/s/{slug}/{page?}')->controller('SpaceController@posts', ['feed'])->where(['slug' => '[A-Za-z0-9_]+', 'page' => '[0-9]+']);
+Route::get('/s/{slug}/top/{page?}')->controller('SpaceController@posts', ['top'])->where(['slug' => '[A-Za-z0-9_]+', 'page' => '[0-9]+']);
+Route::get('/s/{slug}/tag/{tags?}')->controller('SpaceController@posts', ['feed'])->where(['slug' => '[A-Za-z0-9_]+',  'tags' => '[0-9]+']);
+Route::get('/s/{slug}/top/tag/{tags?}')->controller('SpaceController@posts', ['top'])->where(['slug' => '[A-Za-z0-9_]+',  'tags' => '[0-9]+']);
 
 // Домены
 Route::get('/domains')->controller('LinkController');

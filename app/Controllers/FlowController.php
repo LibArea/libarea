@@ -31,6 +31,7 @@ class FlowController extends \MainController
         
         $result = Array();
         foreach ($flows as $ind => $row) {
+            $row['flow_content']    = Base::text($row['flow_content'], 'line');
             $row['flow_pubdate']    = lang_date($row['flow_pubdate']);
             $result[$ind]           = $row;
         } 

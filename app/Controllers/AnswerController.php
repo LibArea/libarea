@@ -125,16 +125,14 @@ class AnswerController extends \MainController
    // Покажем форму редактирования
 	public function editAnswerPage()
 	{
-        $answ_id    = \Request::getInt('answ_id');
+        $answer_id  = \Request::getInt('answ_id');
         $post_id    = \Request::getInt('post_id');
         $uid        = Base::getUid();
         
-        $answ = AnswerModel::getAnswerOne($answ_id);
+        $answer = AnswerModel::getAnswerOne($answer_id);
 
-        // Проверим автора комментария и админа
-        if($uid['id'] != $answ['answer_user_id'] && $uid['trust_level'] != 5) {
-            return true; 
-        }
+        // Проверка доступа 
+        Base::accessСheck($answer, 'answer', $uid); 
 
         $post = PostModel::postId($post_id);
         Base::PageError404($post);
@@ -147,10 +145,10 @@ class AnswerController extends \MainController
         
         $data = [
             'h1'                => lang('Edit answer'),
-            'answ_id'           => $answ_id,
+            'answ_id'           => $answer_id,
             'post_id'           => $post_id,
             'user_id'           => $uid['id'],
-            'answer_content'    => $answ['answer_content'],
+            'answer_content'    => $answer['answer_content'],
             'sheet'             => 'edit-answers', 
             'meta_title'        => lang('All answers'),
             'meta_desc'         => lang('answers-desc'),  
@@ -163,9 +161,9 @@ class AnswerController extends \MainController
     public function editAnswer()
     {
        
-        $answ_id    = \Request::getPostInt('answ_id');
-        $post_id    = \Request::getPostInt('post_id');
-        $answer     = $_POST['answer']; // не фильтруем
+        $answer_id      = \Request::getPostInt('answ_id');
+        $post_id        = \Request::getPostInt('post_id');
+        $answer_content = $_POST['answer']; // не фильтруем
 
         $post = PostModel::postId($post_id);
 
@@ -176,19 +174,17 @@ class AnswerController extends \MainController
         $uid        = Base::getUid();
         $user_id    = $uid['id'];
         
-        $answ = AnswerModel::getAnswerOne($answ_id);
+        $answer = AnswerModel::getAnswerOne($answer_id);
         
-        // Проверим автора комментария и админа
-        if(!$user_id == $answ['answer_user_id']) {
-            return true; 
-        }
+        // Проверка доступа 
+        Base::accessСheck($answer, 'answer', $uid); 
         
-        Base::Limits($answer, lang('Bodies'), '6', '5000', '/' . $url);
+        Base::Limits($answer_content, lang('Bodies'), '6', '5000', '/' . $url);
 
         // Редактируем комментарий
-        AnswerModel::AnswerEdit($answ_id, $answer);
+        AnswerModel::AnswerEdit($answer_id, $answer_content);
         
-        redirect('/' . $url . '#answ_' . $answ_id); 
+        redirect('/' . $url . '#answ_' . $answer_id); 
 	}
     
     // Ответы участника
@@ -241,7 +237,7 @@ class AnswerController extends \MainController
     public function addAnswerFavorite()
     {
         
-        $uid        = Base::getUid();
+        $uid     = Base::getUid();
         
         $answ_id = \Request::getPostInt('answ_id');
         $answ    = AnswerModel::getAnswerOne($answ_id); 

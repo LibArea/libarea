@@ -485,21 +485,15 @@ class PostController extends \MainController
                 if(!is_dir($path . $year)) { @mkdir($path . $year); }
                 $local = $path . $year . $filename;
  
-                $fp = fopen ($local, 'w+');
-                $ch = curl_init($image);
-                curl_setopt($ch, CURLOPT_FILE, $fp);
-                curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-                curl_setopt($ch, CURLOPT_TIMEOUT, 1000);
-                curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0');
-                curl_exec($ch);
-                curl_close($ch);
-                fclose($fp);  
+                if (!file_exists($local)){  
+                    copy($image, $local); 
+                } 
  
                 $image = new SimpleImage();
                 $image
                 ->fromFile($local)  // load image.jpg
                 ->autoOrient()      // adjust orientation based on exif data
-                ->resize(165, null) // 125
+                ->resize(165, null) 
                 ->toFile($path . $year . $file .'.webp', 'image/webp');
  
                 if(file_exists($local)) {
@@ -520,17 +514,10 @@ class PostController extends \MainController
         $post_id    = \Request::getInt('id');
         $uid        = Base::getUid();
         
-        // Получим пост
         $post   = PostModel::postId($post_id); 
          
-        if(!$post){
-            redirect('/');
-        }
- 
-        // Редактировать может только автор и админ
-        if ($post['post_user_id'] != $uid['id'] && $uid['trust_level'] != 5) {
-            redirect('/');
-        }
+        // Проверка доступа 
+        Base::accessСheck($post, 'post', $uid);        
         
         $space = SpaceModel::getSpaceSelect($uid['id'], $uid['trust_level']);
         $tags  = SpaceModel::getSpaceTags($post['post_space_id']);
@@ -598,19 +585,12 @@ class PostController extends \MainController
         $related = empty($_POST['post_related']) ? '' : $_POST['post_related'];
         $post_related = empty($related) ? '' : implode(',', $related);
        
-        // Получим пост
         $post = PostModel::postId($post_id); 
          
         $redirect = '/post/edit/' . $post_id; 
          
-        if(!$post){
-            redirect('/');
-        }
-        
-        // Редактировать может только автор и админ
-        if ($post['post_user_id'] != $uid['id'] && $uid['trust_level'] != 5) {
-            redirect('/');
-        }
+        // Проверка доступа 
+        Base::accessСheck($post, 'post', $uid); 
         
         // Получаем информацию по пространству
         $space = SpaceModel::getSpaceId($post_space_id);
@@ -734,17 +714,10 @@ class PostController extends \MainController
         $post_id    = \Request::getInt('id');
         $uid        = Base::getUid();
         
-        // Получим пост
         $post = PostModel::postId($post_id); 
          
-        if(!$post){
-            redirect('/');
-        }
-        
-        // Редактировать может только автор и админ
-        if ($post['post_user_id'] != $uid['id'] && $uid['trust_level'] != 5) {
-            redirect('/');
-        }
+        // Проверка доступа 
+        Base::accessСheck($post, 'post', $uid); 
         
         $path_img = HLEB_PUBLIC_DIR. '/uploads/posts/' . $post['post_content_img'];
 
@@ -761,17 +734,10 @@ class PostController extends \MainController
         $uid     = Base::getUid();
         $post_id = \Request::getPostInt('post_id');
         
-        // Получим пост
         $post = PostModel::postId($post_id); 
         
-        if(!$post){
-            redirect('/');
-        }
-        
-        // Это делать может только может только автор
-        if ($post['post_user_id'] != $uid['id']) {
-            return false;
-        }
+        // Проверка доступа 
+        Base::accessСheck($post, 'post', $uid); 
         
         // Запретим добавлять черновик в профиль
         if ($post['post_draft'] == 1) {

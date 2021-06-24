@@ -134,53 +134,45 @@ class CommentController extends \MainController
     // Редактируем комментарий
     public function editComment()
     {
-        $comm_id    = \Request::getPostInt('comm_id');
-        $post_id    = \Request::getPostInt('post_id');
-        $comment    = \Request::getPost('comment');
-
-        $post = PostModel::postId($post_id);
+        $comm_id            = \Request::getPostInt('comm_id');
+        $post_id            = \Request::getPostInt('post_id');
+        $comment_content    = \Request::getPost('comment');
 
         // Получим относительный url поста для возрата
-        $url = '/post/' . $post['post_id'] . '/' . $post['post_slug'] . '#comm_' . $comm_id;
+        $post       = PostModel::postId($post_id);
+        $redirect   = '/post/' . $post['post_id'] . '/' . $post['post_slug'] . '#comm_' . $comm_id;
         
         // id того, кто редактирует
         $uid        = Base::getUid();
         $user_id    = $uid['id'];
         
-        $comm = CommentModel::getCommentsOne($comm_id);
+        $comment = CommentModel::getCommentsOne($comm_id);
         
-        // Проверим автора комментария и админа
-        if(!$user_id == $comm['comment_user_id']) {
-            return true; 
-        }
+        // Проверка доступа 
+        Base::accessСheck($comment, 'comment', $uid); 
         
         // Редактируем комментарий
-        CommentModel::CommentEdit($comm_id, $comment);
-        redirect($url); 
+        CommentModel::CommentEdit($comm_id, $comment_content);
+        redirect($redirect); 
 	}
 
    // Покажем форму редактирования
-	public function editFormComment()
+	public function editCommentForm()
 	{
-        $comm_id    = \Request::getPostInt('comm_id');
-        $post_id    = \Request::getPostInt('post_id');
-
-        // id того, кто редактирует
-        $uid        = Base::getUid();
-        $user_id    = $uid['id'];
+        $comment_id     = \Request::getPostInt('comm_id');
+        $post_id        = \Request::getPostInt('post_id');
+        $uid            = Base::getUid();
         
-        $comm = CommentModel::getCommentsOne($comm_id);
+        $comment = CommentModel::getCommentsOne($comment_id);
 
-        // Проверим автора комментария и админа
-        if($user_id != $comm['comment_user_id'] && $uid['trust_level'] != 5) {
-            return true; 
-        }
+        // Проверка доступа 
+        Base::accessСheck($comment, 'comment', $uid); 
 
         $data = [
-            'comm_id'           => $comm_id,
+            'comm_id'           => $comment_id,
             'post_id'           => $post_id,
-            'user_id'           => $user_id,
-            'comment_content'   => $comm['comment_content'],
+            'user_id'           => $uid['id'],
+            'comment_content'   => $comment['comment_content'],
         ]; 
         
         return view(PR_VIEW_DIR . '/comment/comm-edit-form', ['data' => $data]);
