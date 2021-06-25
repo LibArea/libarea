@@ -50,12 +50,14 @@
                                 <?php } ?>
                             </span>
                             <?php if ($uid['id']) { ?>
-                                <?php if($uid['login'] == $post['login']) { ?>
+                                <?php if($uid['login'] == $post['login']  || $uid['trust_level'] == 5) { ?>
                                     <span class="date">
                                         <a href="/post/edit/<?= $post['post_id']; ?>">
                                             <i class="icon pencil"></i>  
                                         </a>
                                     </span>
+                                <?php } ?>     
+                                <?php if($uid['login'] == $post['login']) { ?>    
                                     <?php if($post['post_draft'] == 0) { ?>
                                         <?php if($post['my_post'] == $post['post_id']) { ?>
                                                 <span class="mu_post">+ <?= lang('in-the-profile'); ?></span>

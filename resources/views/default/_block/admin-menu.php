@@ -20,6 +20,9 @@
                 <a <?php if( $uid['uri'] == '/admin/domains') { ?> class="active"<?php } ?> title="<?= lang('Domains'); ?>" href="/admin/domains">
                     ~ <?= lang('Domains'); ?>
                 </a>
+                <a <?php if( $uid['uri'] == '/admin/words') { ?> class="active"<?php } ?> title="<?= lang('Stop words'); ?>" href="/admin/words">
+                    ~ <?= lang('Stop words'); ?>
+                </a>
             </div>
         </div>    
     </div>

@@ -682,7 +682,7 @@ img.thumb {
 
 img.img-post,
 .post-body img {
-  width: 100%;
+  max-width: 100%;
 }
 
 .inner-padding img:hover,

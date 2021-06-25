@@ -607,6 +607,74 @@ class AdminController extends \MainController
         redirect($redirect);
     }
     
+    // Страница стоп-слов
+    public function words()
+    {
+        $uid        = self::isAdmin();
+        
+        $pg     = \Request::getInt('page'); 
+        $page   = (!$pg) ? 1 : $pg;
+        
+        $words = UserModel::getStopWords();
+
+        $data = [
+            'h1'            => lang('Stop words'),
+            'meta_title'    => lang('Stop words'),
+            'sheet'         => 'words',
+        ]; 
+
+        Request::getResources()->addBottomStyles('/assets/css/admin.css');
+        Request::getResources()->addBottomScript('/assets/js/admin.js'); 
+        
+        return view(PR_VIEW_DIR . '/admin/word/words', ['data' => $data, 'uid' => $uid, 'words' => $words]);
+    }
+    
+    
+    // Форма добавления стоп-слова
+    public function wordsAddForm()
+    {
+        $uid        = self::isAdmin();
+        
+        $data = [
+            'h1'            => lang('Add a stop word'),
+            'meta_title'    => lang('Add a stop word'),
+            'sheet'         => 'add-words',
+        ]; 
+
+        Request::getResources()->addBottomStyles('/assets/css/admin.css');
+        Request::getResources()->addBottomScript('/assets/js/admin.js'); 
+        
+        return view(PR_VIEW_DIR . '/admin/word/add-word', ['data' => $data, 'uid' => $uid]);
+    }
+    
+    // Добавление стоп-слова
+    public function createWord()
+    {
+        $uid        = self::isAdmin();
+        $word       = \Request::getPost('word');
+        
+        $data = [
+            'stop_word'     => $word,
+            'stop_add_uid'  => 1,
+            'stop_space_id' => 0, // Глобально
+        ];
+
+        AdminModel::setStopWord($data);
+        
+        redirect('/admin/words');  
+    }
+    
+    // Удаление стоп-слова
+    public function deleteWord()
+    {
+        $uid        = self::isAdmin();
+        $word_id    = \Request::getPostInt('id');
+
+        AdminModel::deleteStopWord($word_id);
+        
+        redirect('/admin/words');  
+    }
+    
     // Проверка прав
     public static function isAdmin()
     {

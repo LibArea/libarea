@@ -316,7 +316,7 @@ class UserModel extends \MainModel
 
             if (rand(1, 100) < $forceLogin) {
 
-                self::DeleteTokenByUserId($token['auth_user_id']);               
+                self::deleteTokenByUserId($token['auth_user_id']);               
 
                 return;
             }
@@ -465,7 +465,7 @@ class UserModel extends \MainModel
         return  XD::update(['users_auth_tokens'])->set(['auth_user_id'], '=', $data['user_id'], ',', ['auth_selector'], '=', $data['selector'], ',', ['auth_hashedvalidator'], '=', $data['hashedvalidator'], ',', ['auth_expires'], '=', $data['expires'])->where(['auth_user_id'], '=', $uid)->run();
     }
     
-    public static function DeleteTokenByUserId($uid)
+    public static function deleteTokenByUserId($uid)
     {
         return XD::deleteFrom(['users_auth_tokens'])->where(['auth_user_id'], '=', $uid)->run(); 
     }
@@ -593,6 +593,12 @@ class UserModel extends \MainModel
         
         return $result;
     }
+    
+    // Получим список запрещенных стоп-слов
+    public static function getStopWords()
+	{
+        return XD::select('*')->from(['stop_words'])->getSelect();
+	}
     
     // Настройка оповещений
     public static function getNotificationSettingByUid($uid)

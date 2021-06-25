@@ -35,7 +35,7 @@
                             <label class="form-label" for="post_title"><?= lang('Description'); ?></label>
                             <textarea class="add" name="badge_description" required></textarea>
                         </div>
-                        <input type="submit" name="submit" value="<?= lang('Add'); ?>" />
+                        <input type="submit" class="button" name="submit" value="<?= lang('Add'); ?>" />
                     </form>
                 </div>
             </div>

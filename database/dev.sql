@@ -608,6 +608,23 @@ ALTER TABLE `links`
   ALTER TABLE `links`
   MODIFY `link_id` int(11) NOT NULL AUTO_INCREMENT;
 
+--
+-- stop_words
+--
+
+CREATE TABLE `stop_words` (
+    `stop_id` int(11) NOT NULL,
+    `stop_word` varchar(50) DEFAULT NULL, 
+    `stop_add_uid` int(11) NOT NULL DEFAULT 0 COMMENT 'Кто добавил',
+    `stop_space_id` int(11) NOT NULL DEFAULT 0 COMMENT '0 - глобально',
+    `stop_date` datetime NOT NULL DEFAULT current_timestamp()
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE `stop_words`
+  ADD PRIMARY KEY (`stop_id`);
+  
+  ALTER TABLE `stop_words`
+  MODIFY `stop_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Индексы сохранённых таблиц

@@ -9,6 +9,8 @@ Route::before('Authorization@noAuth')->getGroup();
         Route::get('/admin/ban')->controller('AdminController@banUser');
         Route::get('/admin/favicon/add')->controller('LinkController@favicon');
         
+        Route::get('/admin/word/del')->controller('AdminController@deleteWord');
+        
         Route::get('/votes/post')->controller('VotesController', ['post']); 
         Route::get('/votes/answer')->controller('VotesController', ['answer']); 
         Route::get('/votes/comment')->controller('VotesController', ['comment']);
@@ -40,6 +42,8 @@ Route::before('Authorization@noAuth')->getGroup();
             Route::get('/admin/badge/user/addform')->controller('AdminController@addBadgeUser');
             Route::get('/admin/badge/edit/{id}')->controller('AdminController@badgeEdit')->where(['id' => '[0-9]+']);
             Route::get('/admin/badge/add')->controller('AdminController@badgeAdd');
+            
+            Route::get('/admin/word/add')->controller('AdminController@createWord');
             
             Route::get('/users/setting/edit')->controller('UserController@settingEdit');
             Route::get('/users/setting/avatar/edit')->controller('UserController@settingAvatarEdit');
@@ -74,6 +78,9 @@ Route::before('Authorization@noAuth')->getGroup();
     Route::get('/admin/{page?}')->controller('AdminController', ['all'])->where(['page' => '[0-9]+']);
     Route::get('/admin/ban/{page?}')->controller('AdminController', ['ban'])->where(['page' => '[0-9]+']);
     Route::get('/admin/user/{id}/edit')->controller('AdminController@userEditPage')->where(['id' => '[0-9]+']);
+
+    Route::get('/admin/words')->controller('AdminController@words');
+    Route::get('/admin/wordadd')->controller('AdminController@wordsAddForm');
 
     Route::get('/admin/spaces')->controller('AdminController@spaces'); 
     Route::get('/admin/space/add')->controller('AdminController@addSpacePage');

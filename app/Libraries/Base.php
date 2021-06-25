@@ -24,7 +24,7 @@ class Base
             if($usr['ban_list'] == 1) {
                 if(!isset($_SESSION)) { session_start(); } 
                 session_destroy();
-                UserModel::DeleteTokenByUserId($usr['id']);
+                UserModel::deleteTokenByUserId($usr['id']);
                 redirect('/info/restriction');
             }
 
@@ -116,15 +116,68 @@ class Base
         if($type == 'md') {
             $md     = self::Markdown($content, 'text');
             $text   = self::parseUser($md);
+            $text   = self::stopWords($text);
         } elseif ($type == 'line') {
             $text   = self::Markdown($content, 'line');
+            $text   = self::stopWords($text);
         } else {
             $text   = self::parseUser($content);
+            $text   = self::stopWords($text);
         }    
 
         return self::parseUrl($text);
     }
     
+    
+	public static function stopWords($content, $replace = '*')
+	{
+
+        $stop_words = UserModel::getStopWords();
+        
+		foreach($stop_words as $word)
+		{
+    		$word = trim($word['stop_word']);
+
+			if (!$word) {
+				continue;
+			}
+
+            // В случае появления чувствительных слов, содержимое переходит в аудит (или меняется)
+            // Поддерживая как обычные строки, так и регулярные выражения.
+            // Регулярное выражение { *** } должно соответствовать PCRE
+            // https://www.php.net/manual/ru/pcre.pattern.php
+            // *** - можно расширить для выбора условий
+			if (substr($word, 0, 1) == '{' AND substr($word, -1, 1) == '}') {
+				$regex[] = substr($word, 1, -1);
+			} else {
+				$word_length = self::rowData($word);
+
+				$replace_str = '';
+				for ($i = 0; $i < $word_length; $i++) {
+					$replace_str .=  $replace;
+				}
+
+				$content = str_replace($word, $replace_str, $content);
+			}
+		}
+
+		if (isset($regex)) {
+			preg_replace($regex, '***', $content);
+		}
+
+		return $content;
+	}
+    
+    // Длина строки и количество символов 
+    public static function rowData($string, $charset = 'UTF-8')
+    {
+        if (function_exists('mb_strlen')) {
+            return mb_strlen($string, $charset);
+        } else {
+            return iconv_strlen($string, $charset);
+        }
+    }
+
     // Для URL отслеживания
     // Пока вернем (см. метод estimationUrl) 
     public static function parseUrl($content) 

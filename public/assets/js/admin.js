@@ -51,6 +51,19 @@ $(function(){
             }) 
     });
 
+    // Удалим стоп-слово
+    $(document).on('click', '.delete-word', function() {
+        let word_id  = $(this).data('id');
+        fetch("/admin/word/del", { 
+            method: "POST",
+            body: "id=" + word_id,
+            headers:{'Content-Type': 'application/x-www-form-urlencoded'} 
+            })
+            .then((response) => {
+                location.reload();                
+            }) 
+    });
+
     // Удаление / восстановление пространства
     $(document).on('click', '.space-ban', function() {
         let space_id  = $(this).data('id');
