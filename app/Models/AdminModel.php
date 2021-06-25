@@ -9,7 +9,7 @@ use PDO;
 class AdminModel extends \MainModel
 {
     // Страница участников
-    public static function UsersAll($page, $sheet)
+    public static function usersAll($page, $sheet)
     {
         if($sheet == 'all') {
             $string = "";
@@ -25,7 +25,7 @@ class AdminModel extends \MainModel
     }
     
     // Количество участинков
-    public static function UsersCount($page, $sheet)
+    public static function usersCount($page, $sheet)
     {
         $query = XD::select('*')->from(['users']);
         $users =  count($query->getSelect());
@@ -33,7 +33,7 @@ class AdminModel extends \MainModel
     }
 
     // Страница участников
-    public static function UsersLogAll($id)
+    public static function usersLogAll($id)
     {
         return XD::select('*')->from(['users_logs'])->where(['logs_user_id'], '=', $id)->getSelectOne();
 

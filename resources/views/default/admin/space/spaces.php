@@ -4,7 +4,7 @@
         <div class="white-box">
             <div class="inner-padding">
                 <h1>
-                    <a href="/admin"><?= lang('Admin'); ?></a> / <span class="red"><?= $data['h1']; ?></span>
+                    <a href="/admin"><?= lang('Admin'); ?></a> / <span class="red"><?= $data['meta_title']; ?></span>
                     <a class="right" href="/admin/space/add"><?= lang('Add'); ?></a>
                 </h1>
 

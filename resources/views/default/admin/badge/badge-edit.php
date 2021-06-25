@@ -6,7 +6,7 @@
                 <h1>
                     <a href="/admin"><?= lang('Admin'); ?></a> / 
                     <a href="/admin/badges"><?= lang('Badges'); ?></a> /
-                    <span class="red"><?= $data['h1']; ?></span>
+                    <span class="red"><?= $data['meta_title']; ?></span>
                 </h1>
 
                 <div class="box badges">

@@ -19,26 +19,19 @@ class AdminController extends \MainController
         // Доступ только персоналу
         $uid = self::isAdmin();
 
-        $pagesCount = AdminModel::UsersCount($page, $sheet);
-        $user_all   = AdminModel::UsersAll($page, $sheet);
+        $pagesCount = AdminModel::usersCount($page, $sheet);
+        $user_all   = AdminModel::usersAll($page, $sheet);
 
         $result = Array();
         foreach ($user_all as $ind => $row) {
             $row['replayIp']    = AdminModel::replayIp($row['reg_ip']);
             $row['isBan']       = AdminModel::isBan($row['id']);
-            $row['logs']        = AdminModel::UsersLogAll($row['id']);
+            $row['logs']        = AdminModel::usersLogAll($row['id']);
             $row['created_at']  = lang_date($row['created_at']); 
             $result[$ind]       = $row;
         } 
         
-        if($page > 1) { 
-            $num = ' | ' . lang('Page') . ' ' . $page;
-        } else {
-            $num = '';
-        }
-       
         $data = [
-            'h1'            => lang('Admin') . $num,
             'pagesCount'    => $pagesCount,
             'pNum'          => $page,
             'users'         => $result,
@@ -103,7 +96,6 @@ class AdminController extends \MainController
         }
         
         $data = [
-            'h1'            => lang('Deleted comments'),
             'meta_title'    => lang('Deleted comments'),
             'sheet'         => 'admin',
         ]; 
@@ -139,7 +131,6 @@ class AdminController extends \MainController
         }
         
         $data = [
-            'h1'            => lang('Deleted answers'),
             'meta_title'    => lang('Deleted answers'),
             'sheet'         => 'admin',
         ]; 
@@ -175,7 +166,6 @@ class AdminController extends \MainController
         }
 
         $data = [
-            'h1'            => lang('Invites'),
             'meta_title'    => lang('Invites'),
             'sheet'         => 'admin',
         ]; 
@@ -207,7 +197,6 @@ class AdminController extends \MainController
         $spaces = AdminModel::getAdminSpaceAll($uid['id']);
   
         $data = [
-            'h1'            => lang('Spaces'),
             'meta_title'    => lang('Spaces'),
             'sheet'         => 'admin',
         ]; 
@@ -224,7 +213,6 @@ class AdminController extends \MainController
         $uid = self::isAdmin();
         
         $data = [
-            'h1'            => lang('Add Space'),
             'meta_title'    => lang('Add Space'),
             'sheet'         => 'admin',
         ]; 
@@ -314,7 +302,6 @@ class AdminController extends \MainController
         $badges = AdminModel::getBadgesAll();
         
         $data = [
-            'h1'            => lang('Badges'),
             'meta_title'    => lang('Badges'),
             'sheet'         => 'admin',
         ]; 
@@ -331,7 +318,6 @@ class AdminController extends \MainController
         $uid = self::isAdmin();
         
         $data = [
-            'h1'            => lang('Add badge'),
             'meta_title'    => lang('Add badge'),
             'sheet'         => 'admin',
         ]; 
@@ -358,7 +344,6 @@ class AdminController extends \MainController
         $badges = AdminModel::getBadgesAll();
         
         $data = [
-            'h1'            => lang('Reward the user'),
             'meta_title'    => lang('Reward the user'),
             'sheet'         => 'admin',
         ]; 
@@ -393,7 +378,6 @@ class AdminController extends \MainController
         }
 
         $data = [
-            'h1'            => lang('Edit badge'),
             'meta_title'    => lang('Edit badge'),
             'sheet'         => 'admin',
         ]; 
@@ -474,11 +458,10 @@ class AdminController extends \MainController
         
         $user['isBan']      = AdminModel::isBan($user_id);
         $user['replayIp']   = AdminModel::replayIp($user_id);
-        $user['logs']       = AdminModel::UsersLogAll($user_id);
+        $user['logs']       = AdminModel::usersLogAll($user_id);
         $user['badges']     = UserModel::getBadgeUserAll($user_id);
          
         $data = [
-            'h1'            => lang('Edit user'),
             'meta_title'    => lang('Edit user'),
             'sheet'         => 'admin',
             'post_num_user' => UserModel::userPostsNum($user_id),
@@ -547,7 +530,6 @@ class AdminController extends \MainController
         
         $domains    = AdminModel::getDomains($page);
         $data = [
-            'h1'            => lang('Domains'),
             'meta_title'    => lang('Domains'),
             'sheet'         => 'admin',
         ]; 
@@ -570,8 +552,7 @@ class AdminController extends \MainController
         $domain = AdminModel::getLinkIdOne($domain_id);
 
         $data = [
-            'h1'            => lang('Change the domain') .' | '. $domain['link_url_domain'],
-            'meta_title'    => lang('Change the domain'),
+            'meta_title'    => lang('Change the domain') .' | '. $domain['link_url_domain'],
             'sheet'         => 'admin',
         ]; 
 

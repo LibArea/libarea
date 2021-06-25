@@ -3,7 +3,6 @@
   <main class="admin">
     <div class="white-box">
       <div class="inner-padding">
-        <!-- h1 class="red"><?= $data['h1']?></h1 -->
         
           <ul class="nav-tabs">
             <?php if($data['sheet'] == 'all') { ?>
