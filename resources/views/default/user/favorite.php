@@ -51,7 +51,7 @@
                                    <div class="score"><?= $counter; ?>.</div> 
                                 </div>
                                 <div class="post-telo fav-answ">
-                                    <a href="/post/<?= $fav['post']['post_id']; ?>/<?= $fav['post']['post_slug']; ?>#answ_<?= $fav['answer_id']; ?>">
+                                    <a href="/post/<?= $fav['post']['post_id']; ?>/<?= $fav['post']['post_slug']; ?>#answer_<?= $fav['answer_id']; ?>">
                                        <h3 class="title"><?= $fav['post']['post_title']; ?></h3>
                                     </a>
                                     <div class="space-color space_<?= $fav['post']['space_color'] ?>"></div>
@@ -60,7 +60,7 @@
                                     </a>
                                     <?php if($uid['id'] > 0) { ?>
                                         <?php if($uid['id'] == $fav['favorite_uid']) { ?>
-                                            <span class="user-answ-fav right" data-answ="<?= $fav['answer_id']; ?>">
+                                            <span class="user-answer-fav right" data-answer="<?= $fav['answer_id']; ?>">
                                                  <span class="small date"><?= lang('Remove'); ?></span>
                                             </span>  
                                         <?php } ?>                                
@@ -72,7 +72,7 @@
                             <?php } ?>
                         <?php } ?>
                     <?php } else { ?>
-                        <p class="no-answer"><i class="icon info"></i> <?= lang('There are no favorites'); ?>...</p>
+                        <p class="no-content"><i class="icon info"></i> <?= lang('There are no favorites'); ?>...</p>
                     <?php } ?>
                     <br>
                 </div>

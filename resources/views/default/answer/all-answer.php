@@ -33,7 +33,7 @@
                                                 <div class="score"><?= $answ['answer_votes']; ?></div>
                                             </div>
                                         <?php } else { ?>
-                                            <?php if ($answ['answ_vote_status'] || $uid['id'] == $answ['answer_user_id']) { ?>
+                                            <?php if ($answ['answer_vote_status'] || $uid['id'] == $answ['answer_user_id']) { ?>
                                                 <div class="voters active">
                                                     <div class="up-id"></div>
                                                     <div class="score"><?= $answ['answer_votes']; ?></div>

@@ -55,7 +55,7 @@
                                 <div class="box_h">Title: 6 - 325 <?= lang('characters'); ?></div>
                                 <br />
                             </div>
-                                <input type="submit" name="submit" value="<?= lang('Add'); ?>" />
+                                <input type="submit" name="submit"  class="button" value="<?= lang('Add'); ?>" />
                         </form>
                     </div>
                 </div>

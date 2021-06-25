@@ -372,7 +372,7 @@ i.icon {
 }
 
 i.icon.info,
-.no-answer i.icon.lock {
+.no-content i.icon.lock {
   color: #390;
 }
 
@@ -597,8 +597,7 @@ aside a.my.active {
   color: #e83e8c;
 }
 
-.no-content,
-.no-answer {
+.no-content {
   padding: 10px 15px;
   margin: 10px 0;
   background-color: lightyellow;
@@ -935,8 +934,8 @@ ol.dell.answer-telo {
   list-style: none;
 }
 
-.comm_subtree:target,
-.comm_subtree.edit,
+.comment_subtree:target,
+.comment_subtree.edit,
 .answers_subtree:target,
 .answers_subtree.edit {
   -webkit-background-clip: content-box;
@@ -1027,7 +1026,7 @@ ol.comment-telo {
 
 .comments_subtree.dell,
 .answers_subtree.dell,
-.comm_subtree.dell {
+.comment_subtree.dell {
   opacity: 0.3;
 }
 
@@ -1423,8 +1422,8 @@ i.github:hover {
   color: #eee;
 }
 
-.dark .comm_subtree:target,
-.dark .comm_subtree.edit,
+.dark .comment_subtree:target,
+.dark .comment_subtree.edit,
 .dark .answers_subtree:target {
   background: #111;
   color: #fff;

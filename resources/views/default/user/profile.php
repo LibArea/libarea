@@ -48,47 +48,51 @@
     </div>
 
     <div class="stats<?php if($user['cover_art'] == 'cover_art.jpeg') { ?> no-cover<?php } ?>">
-        <?php if($data['post_num_user'] != 0) { ?>
-            <label class="required"><?= lang('Posts-m'); ?>:</label>
-            <span class="right">
-                <a title="<?= lang('Posts-m'); ?> <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/posts">
-                    <?= $data['post_num_user']; ?>
-                </a>
-            </span>
-            <br>
-        <?php } ?>
-        <?php if($data['answ_num_user'] != 0) { ?>
-            <label class="required"><?= lang('Answers'); ?>:</label>
-            <span class="right">
-                <a title="<?= lang('Answers'); ?> <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/answers">
-                    <?= $data['answ_num_user']; ?>
-                </a>
-            </span>
-            <br>
-        <?php } ?>
-        <?php if($data['comm_num_user'] != 0) { ?>
-            <label class="required"><?= lang('Comments'); ?>:</label>
-            <span class="right">
-                <a title="<?= lang('Comments'); ?> <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/comments">
-                    <?= $data['comm_num_user']; ?>
-                </a>
-            </span>
-            <br>
-        <?php } ?>
-        
-        <?php if($data['space_user']) { ?>
-            <br>
-            <label class="required"><?= lang('Created by'); ?>:</label>
-            <br>
-            <span class="d">
-                <?php foreach ($data['space_user'] as  $space) { ?>
-                    <div class="profile-space">
-                        <img src="<?= spase_logo_url($space['space_img'], 'small'); ?>" alt="<?= $space['space_name']; ?>">
-                        <a href="/s/<?= $space['space_slug'];?>"><?= $space['space_name'];?></a> 
-                    </div>
-                <?php } ?>
-            </span>     
-        <?php } ?>
+        <?php if($user['ban_list'] == 0) { ?>
+            <?php if($data['post_num_user'] != 0) { ?>
+                <label class="required"><?= lang('Posts-m'); ?>:</label>
+                <span class="right">
+                    <a title="<?= lang('Posts-m'); ?> <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/posts">
+                        <?= $data['post_num_user']; ?>
+                    </a>
+                </span>
+                <br>
+            <?php } ?>
+            <?php if($data['answer_num_user'] != 0) { ?>
+                <label class="required"><?= lang('Answers'); ?>:</label>
+                <span class="right">
+                    <a title="<?= lang('Answers'); ?> <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/answers">
+                        <?= $data['answer_num_user']; ?>
+                    </a>
+                </span>
+                <br>
+            <?php } ?>
+            <?php if($data['comment_num_user'] != 0) { ?>
+                <label class="required"><?= lang('Comments'); ?>:</label>
+                <span class="right">
+                    <a title="<?= lang('Comments'); ?> <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/comments">
+                        <?= $data['comment_num_user']; ?>
+                    </a>
+                </span>
+                <br>
+            <?php } ?>
+            
+            <?php if($data['space_user']) { ?>
+                <br>
+                <label class="required"><?= lang('Created by'); ?>:</label>
+                <br>
+                <span class="d">
+                    <?php foreach ($data['space_user'] as  $space) { ?>
+                        <div class="profile-space">
+                            <img src="<?= spase_logo_url($space['space_img'], 'small'); ?>" alt="<?= $space['space_name']; ?>">
+                            <a href="/s/<?= $space['space_slug'];?>"><?= $space['space_name'];?></a> 
+                        </div>
+                    <?php } ?>
+                </span>     
+            <?php } ?>
+        <?php } else { ?>
+        ...
+        <?php } ?>    
     </div>
         
     <div class="box profile-telo">

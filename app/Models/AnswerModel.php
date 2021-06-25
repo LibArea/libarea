@@ -91,7 +91,7 @@ class AnswerModel extends \MainModel
        
        // Отмечаем комментарий, что за ним есть ответ
        //$otv = 1; // 1, значит за комментом есть ответ
-       //XD::update(['comments'])->set(['comment_after'], '=', $otv)->where(['comment_id'], '=', $comm_id)->run();
+       //XD::update(['comments'])->set(['comment_after'], '=', $otv)->where(['comment_id'], '=', $comment_id)->run();
 
        return $last_id; 
     }
@@ -144,12 +144,12 @@ class AnswerModel extends \MainModel
     }
     
     // Редактируем ответ
-    public static function AnswerEdit($comm_id, $answer)
+    public static function AnswerEdit($comment_id, $answer)
     {
         $data = date("Y-m-d H:i:s"); 
         
         return  XD::update(['answers'])->set(['answer_content'], '=', $answer, ',', ['answer_modified'], '=', $data)
-        ->where(['answer_id'], '=', $comm_id)->run();
+        ->where(['answer_id'], '=', $comment_id)->run();
     }
     
     // Частота размещения ответа участника 

@@ -9,25 +9,29 @@
 
                 <?php if (!empty($answers)) { ?>
               
-                    <?php foreach ($answers as $answ) { ?>  
+                    <?php foreach ($answers as $answer) { ?>  
                     
-                        <div class="answ-telo_bottom" id="answ_<?= $answ['comment_id']; ?>">
+                        <div class="answ-telo_bottom" id="answer_<?= $answer['comment_id']; ?>">
                             <div class="small">
-                                <img class="ava" src="<?= user_avatar_url($answ['avatar'], 'small'); ?>">
-                                <a class="date" href="/u/<?= $answ['login']; ?>"><?= $answ['login']; ?></a> 
+                                <img class="ava" src="<?= user_avatar_url($answer['avatar'], 'small'); ?>">
+                                <a class="date" href="/u/<?= $answer['login']; ?>"><?= $answer['login']; ?></a> 
                                 
-                                <span class="date"><?= $answ['date']; ?></span>
+                                <span class="date"><?= $answer['date']; ?></span>
 
                                 <span class="indent"> &#183; </span>
-                                <a href="/post/<?= $answ['post_id']; ?>/<?= $answ['post_slug']; ?>"><?= $answ['post_title']; ?></a>
+                                <a href="/post/<?= $answer['post_id']; ?>/<?= $answer['post_slug']; ?>">
+                                    <?= $answer['post_title']; ?>
+                                </a>
                             </div>
                             <div class="answ-telo-body">
-                                <?= $answ['content']; ?> 
+                                <?= $answer['content']; ?> 
                             </div>
                            <div class="post-full-footer date">
-                               + <?= $answ['answer_votes']; ?>
-                               <span id="cm_dell" class="right comm_link small">
-                                    <a data-id="<?= $answ['answer_id']; ?>" class="recover-answ"><?= lang('Recover'); ?></a>
+                               + <?= $answer['answer_votes']; ?>
+                               <span id="cm_dell" class="right comment_link small">
+                                    <a data-id="<?= $answer['answer_id']; ?>" class="recover-answer">
+                                        <?= lang('Recover'); ?>
+                                    </a>
                                </span>
                            </div>
                         </div>

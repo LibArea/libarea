@@ -1,16 +1,16 @@
 // Call the form for adding a comment
-document.querySelectorAll(".addcomm")
+document.querySelectorAll(".add-comment")
   .forEach(el => el.addEventListener("click",  function(e){ 
   
-    let answ_id  = this.dataset.answ_id;
-    let post_id  = this.dataset.post_id;
+    let answer_id   = this.dataset.answer_id;
+    let post_id     = this.dataset.post_id;
     
-    let comm = document.querySelector('#answ_addentry'+answ_id);
-        comm.classList.add("active");
+    let comment = document.querySelector('#answer_addentry'+answer_id);
+        comment.classList.add("active");
      
     fetch("/comments/addform", { 
         method: "POST",
-        body: "answ_id=" + answ_id + "&post_id=" + post_id,
+        body: "answer_id=" + answer_id + "&post_id=" + post_id,
         headers:{'Content-Type': 'application/x-www-form-urlencoded'} 
         })
         .then(
@@ -19,11 +19,11 @@ document.querySelectorAll(".addcomm")
             }
         ).then(
             text => {
-                comm.innerHTML = text;
+                comment.innerHTML = text;
             }
         );
         
-        document.querySelectorAll('#cm_addentry_noauth'+answ_id)
+        document.querySelectorAll('#cm_addentry_noauth'+answer_id)
             .forEach(el => el.addEventListener("click",  function(e){ 
            // console.log(e);
             if(e.path) {
@@ -33,19 +33,19 @@ document.querySelectorAll(".addcomm")
          
 })); 
 
-document.querySelectorAll(".addcomm_re")
+document.querySelectorAll(".add-comment-re")
   .forEach(el => el.addEventListener("click",  function(e){ 
   
-    let post_id  = this.dataset.post_id;
-    let answ_id  = this.dataset.answ_id;
-    let comm_id  = this.dataset.comm_id;
+    let post_id     = this.dataset.post_id;
+    let answer_id   = this.dataset.answer_id;
+    let comment_id  = this.dataset.comment_id;
     
-    let comm = document.querySelector('#comm_addentry'+comm_id);
-        comm.classList.add("active");
+    let comment = document.querySelector('#comment_addentry'+comment_id);
+        comment.classList.add("active");
      
     fetch("/comments/addform", { 
         method: "POST",
-        body: "answ_id=" + answ_id + "&post_id=" + post_id + "&comm_id=" + comm_id,
+        body: "answer_id=" + answer_id + "&post_id=" + post_id + "&comment_id=" + comment_id,
         headers:{'Content-Type': 'application/x-www-form-urlencoded'} 
         })
         .then(
@@ -54,11 +54,11 @@ document.querySelectorAll(".addcomm_re")
             }
         ).then(
             text => {
-                comm.innerHTML = text;
+                comment.innerHTML = text;
             }
         );
         
-        document.querySelectorAll('#comm_addentry_noauth'+answ_id)
+        document.querySelectorAll('#comment_addentry_noauth'+answer_id)
             .forEach(el => el.addEventListener("click",  function(e){ 
            // console.log(e);
             if(e.path) {

@@ -26,11 +26,11 @@ $(function(){
     });
    
     // Восстанавливаем комментарий
-    $(document).on('click', '.recover-comm', function() {
-        let comm_id  = $(this).data('id');
+    $(document).on('click', '.recover-comment', function() {
+        let comment_id  = $(this).data('id');
         fetch("/admin/comment/recover", { 
             method: "POST",
-            body: "id=" + comm_id,
+            body: "id=" + comment_id,
             headers:{'Content-Type': 'application/x-www-form-urlencoded'} 
             })
             .then((response) => {
@@ -39,11 +39,11 @@ $(function(){
     });
 
     // Восстанавливаем ответы
-    $(document).on('click', '.recover-answ', function() {
-        let answ_id  = $(this).data('id');
+    $(document).on('click', '.recover-answer', function() {
+        let answer_id  = $(this).data('id');
         fetch("/admin/answer/recover", { 
             method: "POST",
-            body: "id=" + answ_id,
+            body: "id=" + answer_id,
             headers:{'Content-Type': 'application/x-www-form-urlencoded'} 
             })
             .then((response) => {

@@ -251,7 +251,7 @@
                 <img class="ava" alt="<?= $answ['login']; ?>" src="<?= user_avatar_url($answ['avatar'], 'small'); ?>">
                 <?= $answ['answer_date']; ?>
               </div> 
-              <a href="/post/<?= $answ['post_id']; ?>/<?= $answ['post_slug']; ?>#answ_<?= $answ['answer_id']; ?>">
+              <a href="/post/<?= $answ['post_id']; ?>/<?= $answ['post_slug']; ?>#answer_<?= $answ['answer_id']; ?>">
                 <?= $answ['answer_content']; ?>...  
               </a>
              </div>

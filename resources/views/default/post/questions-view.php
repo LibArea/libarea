@@ -10,7 +10,7 @@
             
                 <div class="line"></div>
                 <ol class="answer-telo"> 
-                    <li class="answers_subtree" id="answ_<?= $answ['answer_id']; ?>">
+                    <li class="answers_subtree" id="answer_<?= $answ['answer_id']; ?>">
                         <div class="answ-telo qa-answ">
                             <div class="qa-footer">
                                 <div class="qa-ava">
@@ -38,25 +38,25 @@
                             <?php if($post['post_closed'] == 0) { ?> 
                             <?php if($post['post_is_delete'] == 0 || $uid['trust_level'] == 5) { ?>
                                 <span id="cm_add_link<?= $answ['answer_id']; ?>" class="cm_add_link">
-                                    <a data-post_id="<?= $post['post_id']; ?>" data-answ_id="<?= $answ['answer_id']; ?>" class="addcomm bar"><?= lang('Reply'); ?></a>
+                                    <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answ['answer_id']; ?>" class="add-comment bar"><?= lang('Reply'); ?></a>
                                 </span>
                             <?php } ?>
                             <?php } ?>
                             <?php } ?>
                             
                             <?php if($uid['id'] == $answ['answer_user_id'] || $uid['trust_level'] == 5) { ?>
-                                <span id="answ_edit" class="answ_add_link">
+                                <span id="answer_edit" class="answer_add_link">
                                     <a class="editansw bar" href="/post/<?= $post['post_id'] ?>/answ/<?= $answ['answer_id']; ?>"><?= lang('Edit'); ?></a>
                                 </span>
                             <?php } ?>
                 
                             <?php if ($uid['id']) { ?>
                                 <?php if ($answ['favorite_uid']){ ?>
-                                   <span class="user-answ-fav bar" data-answ="<?= $answ['answer_id']; ?>">
+                                   <span class="user-answer-fav bar" data-answer="<?= $answ['answer_id']; ?>">
                                         <span class="favcomm"><?= lang('remove-favorites'); ?></span>
                                    </span>   
                                 <?php } else { ?>
-                                    <span class="user-answ-fav bar" data-answ="<?= $answ['answer_id']; ?>">
+                                    <span class="user-answer-fav bar" data-answer="<?= $answ['answer_id']; ?>">
                                         <span class="favcomm"><?= lang('add-favorites'); ?></span>
                                     </span>
                                 <?php } ?> 
@@ -65,8 +65,8 @@
                             <?php if($uid['trust_level'] == 5) { ?>
                                 <span class="indent"></span>
                                 <span class="indent"></span>
-                                <span id="answ_dell" class="answ_add_link">
-                                    <a data-id="<?= $answ['answer_id']; ?>" class="delansw bar"><?= lang('Remove'); ?></a>
+                                <span id="answer_dell" class="answer_add_link">
+                                    <a data-id="<?= $answ['answer_id']; ?>" class="del-answer bar"><?= lang('Remove'); ?></a>
                                 </span>
                             <?php } ?>
                             
@@ -96,13 +96,13 @@
                             <?php } ?>
                             
                         </div> 
-                        <div id="answ_addentry<?= $answ['answer_id']; ?>" class="reply"></div> 
+                        <div id="answer_addentry<?= $answ['answer_id']; ?>" class="reply"></div> 
                     </li>
                 </ol>
                                 
             <?php } else { ?>    
                  <ol class="dell answer-telo"> 
-                    <li class="answers_subtree" id="answ_<?= $answ['answer_id']; ?>">
+                    <li class="answers_subtree" id="answer_<?= $answ['answer_id']; ?>">
                         <span class="answ-deletes">~ <?= lang('answer-deleted'); ?></span>
                     </li>
                 </ol>
@@ -113,7 +113,7 @@
                 <?php if($comm['comment_del'] == 0) { ?>
                      
                     <ol class="comm-telo qa-comm"> 
-                        <li class="comm_subtree" id="comm_<?= $comm['comment_id']; ?>">
+                        <li class="comment_subtree" id="comment_<?= $comm['comment_id']; ?>">
                             <div class="line-qa"></div>
                             <div class="comm-telo">
                                 <div class="comm-telo-body">
@@ -130,27 +130,33 @@
                                     <?php if($post['post_closed'] == 0) { ?>
                                     <?php if($post['post_is_delete'] == 0 || $uid['trust_level'] == 5) { ?>
                                         <span id="cm_add_link<?= $comm['comment_id']; ?>" class="cm_add_link">
-                                            <a data-post_id="<?= $post['post_id']; ?>" data-answ_id="<?= $answ['answer_id']; ?>" data-comm_id="<?= $comm['comment_id']; ?>" class="addcomm_re"><?= lang('Reply'); ?></a>
+                                            <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answ['answer_id']; ?>" data-comment_id="<?= $comm['comment_id']; ?>" class="add-comment-re">
+                                                <?= lang('Reply'); ?>
+                                            </a>
                                         </span>
                                     <?php } ?>
                                     <?php } ?>
                                     <?php } ?>
                                     
                                     <?php if($uid['id'] == $comm['comment_user_id'] || $uid['trust_level'] == 5) { ?>
-                                        <span id="comm_edit" class="cm_add_link">
-                                            <a data-comm_id="<?= $comm['comment_id']; ?>" class="editcomm"><?= lang('Edit'); ?></a>
+                                        <span id="comment_edit" class="cm_add_link">
+                                            <a data-comment_id="<?= $comm['comment_id']; ?>" class="editcomm">
+                                                <?= lang('Edit'); ?>
+                                            </a>
                                         </span>
                                     <?php } ?>
 
                                     <?php if($uid['trust_level'] == 5) { ?>
-                                        <span id="comm_dell" class="cm_add_link">
-                                            <a data-comm_id="<?= $comm['comment_id']; ?>" class="delcomm"><?= lang('Remove'); ?></a>
+                                        <span id="comment_dell" class="cm_add_link">
+                                            <a data-comment_id="<?= $comm['comment_id']; ?>" class="del-comment">
+                                                <?= lang('Remove'); ?>
+                                            </a>
                                         </span>
                                     <?php } ?>
                                     
                                 </div>
                             </div>
-                            <div id="comm_addentry<?= $comm['comment_id']; ?>" class="reply"></div> 
+                            <div id="comment_addentry<?= $comm['comment_id']; ?>" class="reply"></div> 
                         
                         </li>
                     </ol>
@@ -164,7 +170,7 @@
     </div>
 <?php } else { ?>
     <?php if($post['post_closed'] != 1) { ?>
-        <div class="no-answer">
+        <div class="no-content">
             <i class="icon info"></i> <?= lang('no-answer'); ?>... 
         </div>
     <?php } ?>
@@ -172,7 +178,7 @@
 
 <?php if(!empty($otvet)) { ?>
 
-    <div class="no-answer"><?= lang('you-question-no'); ?>...</div>
+    <div class="no-content"><?= lang('you-question-no'); ?>...</div>
 
 <?php } else { ?>
     <?php if ($uid['id']) { ?>
@@ -184,7 +190,7 @@
                     <textarea minlength="6" class="wmd-input h-150 w-95" name="answer" id="wmd-input"></textarea>
                     <div class="clear"> 
                         <input type="hidden" name="post_id" id="post_id" value="<?= $post['post_id']; ?>">
-                        <input type="hidden" name="answ_id" id="answ_id" value="0">
+                        <input type="hidden" name="answer_id" id="answer_id" value="0">
                         <input type="submit" name="answit" value="<?= lang('Reply'); ?>" class="answer-post">
                     </div> 
                 </div>     

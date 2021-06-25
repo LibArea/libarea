@@ -37,13 +37,13 @@ class CommentModel extends \MainModel
     
    
     // Получаем комментарии к ответу
-    public static function getCommentsAnswer($answ_id, $uid)
+    public static function getCommentsAnswer($answer_id, $uid)
     { 
         $q = XD::select('*')->from(['comments']);
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['comment_user_id'])
                 ->leftJoin(['votes_comment'])->on(['votes_comment_item_id'], '=', ['comment_id'])
                 ->and(['votes_comment_user_id'], '=', $uid)
-                ->where(['comment_answer_id'], '=', $answ_id);
+                ->where(['comment_answer_id'], '=', $answer_id);
 
         return $query->getSelect();
     }
@@ -64,22 +64,22 @@ class CommentModel extends \MainModel
    
     // Запись комментария
     // $post_id - на какой пост ответ
-    // $answ_id - на какой ответ комментарий
+    // $answer_id - на какой ответ комментарий
     // $ip      - IP отвечающего  
-    // $comm_id - на какой комм. ответ, 0 - корневой
+    // $comment_id - на какой комм. ответ, 0 - корневой
     // $comment - содержание
     // $my_id   - id автора ответа
-    public static function commentAdd($post_id, $answ_id, $comm_id, $ip, $comment, $my_id)
+    public static function commentAdd($post_id, $answer_id, $comment_id, $ip, $comment, $my_id)
     { 
 
-        XD::insertInto(['comments'], '(', ['comment_post_id'], ',', ['comment_answer_id'], ',', ['comment_comment_id'], ',', ['comment_ip'], ',', ['comment_content'], ',', ['comment_user_id'], ')')->values( '(', XD::setList([$post_id, $answ_id, $comm_id, $ip, $comment, $my_id]), ')' )->run();
+        XD::insertInto(['comments'], '(', ['comment_post_id'], ',', ['comment_answer_id'], ',', ['comment_comment_id'], ',', ['comment_ip'], ',', ['comment_content'], ',', ['comment_user_id'], ')')->values( '(', XD::setList([$post_id, $answer_id, $comment_id, $ip, $comment, $my_id]), ')' )->run();
        
        // id последнего комментария
        $last_id = XD::select()->last_insert_id('()')->getSelectValue();
        
        // Отмечаем комментарий, что за ним есть ответ
        $otv = 1; // 1, значит за комментом есть ответ
-       XD::update(['comments'])->set(['comment_after'], '=', $otv)->where(['comment_id'], '=', $answ_id)->run();
+       XD::update(['comments'])->set(['comment_after'], '=', $otv)->where(['comment_id'], '=', $answer_id)->run();
 
        return $last_id; 
     }
@@ -102,11 +102,11 @@ class CommentModel extends \MainModel
     }
     
     // Удаление комментария
-    public static function CommentsDel($comm_id)
+    public static function CommentsDel($comment_id)
     {
         
          XD::update(['comments'])->set(['comment_del'], '=', 1)
-        ->where(['comment_id'], '=', $comm_id)->run();
+        ->where(['comment_id'], '=', $comment_id)->run();
  
         return true;
     }
@@ -118,11 +118,11 @@ class CommentModel extends \MainModel
     }
     
     // Редактируем комментарий
-    public static function CommentEdit($comm_id, $comment)
+    public static function CommentEdit($comment_id, $comment)
     {
         $data = date("Y-m-d H:i:s"); 
         return  XD::update(['comments'])->set(['comment_content'], '=', $comment, ',', ['comment_modified'], '=', $data)
-        ->where(['comment_id'], '=', $comm_id)->run(); 
+        ->where(['comment_id'], '=', $comment_id)->run(); 
     }
     
     // Частота размещения комментариев участника 

@@ -71,7 +71,8 @@ Route::before('Authorization@noAuth')->getGroup();
         Route::endProtect(); // Завершение защиты
     Route::endType();  // Завершение getType('post')
 
-    Route::get('/admin/{page?}')->controller('AdminController')->where(['page' => '[0-9]+']);
+    Route::get('/admin/{page?}')->controller('AdminController', ['all'])->where(['page' => '[0-9]+']);
+    Route::get('/admin/ban/{page?}')->controller('AdminController', ['ban'])->where(['page' => '[0-9]+']);
     Route::get('/admin/user/{id}/edit')->controller('AdminController@userEditPage')->where(['id' => '[0-9]+']);
 
     Route::get('/admin/spaces')->controller('AdminController@spaces'); 
@@ -109,7 +110,7 @@ Route::before('Authorization@noAuth')->getGroup();
     Route::get('/logout')->controller('AuthController@logout');
 
 	// Добавление ответов / удаление / изменение
-    Route::get('/post/{post_id}/answ/{answ_id}')->controller('AnswerController@editAnswerPage')->where(['post_id' => '[0-9]+', 'answ_id' => '[0-9]+']);
+    Route::get('/post/{post_id}/answ/{answer_id}')->controller('AnswerController@editAnswerPage')->where(['post_id' => '[0-9]+', 'answer_id' => '[0-9]+']);
 
 	// Личные сообщения 
     Route::get('/u/{login}/messages')->controller('MessagesController')->where(['login' => '[A-Za-z0-9]+']);   

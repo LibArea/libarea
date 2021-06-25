@@ -21,7 +21,7 @@
                                     <i class="icon lock"></i>
                                 <?php } ?>
                                 <?php if($post['post_top'] == 1) { ?> 
-                                    <i class="icon pin"></i>
+                                    <i class="icon pin red"></i>
                                 <?php } ?>
                                 <?php if($post['post_lo'] > 0) { ?> 
                                     <i class="icon trophy lo"></i>
@@ -50,7 +50,7 @@
                                 <?php } ?>
                             </span>
                             <?php if ($uid['id']) { ?>
-                                <?php if($uid['login'] == $post['login'] || $uid['trust_level'] == 5) { ?>
+                                <?php if($uid['login'] == $post['login']) { ?>
                                     <span class="date">
                                         <a href="/post/edit/<?= $post['post_id']; ?>">
                                             <i class="icon pencil"></i>  
@@ -69,7 +69,6 @@
                                     <?php } ?>    
                                 <?php } ?> 
                                 
-                                
                                 <?php if ($post['favorite_post']){ ?>
                                    <span class="indent"></span>    
                                    <span class="user-post-fav" data-post="<?= $post['post_id']; ?>">
@@ -85,7 +84,7 @@
                                 <?php if($uid['trust_level'] ==5) { ?>
                                     <span class="indent"> &#183; </span>
                                     <span id="cm_dell" class="cm_add_link">
-                                        <a data-post="<?= $post['post_id']; ?>" class="delpost">
+                                        <a data-post="<?= $post['post_id']; ?>" class="del-post">
                                             <?php if($post['post_is_delete'] == 1) { ?>
                                                 <?= lang('Recover'); ?>
                                             <?php } else { ?>
@@ -112,7 +111,7 @@
                             <div class="lo-post">
                                 <h3 class="lo">ЛО</h3>
                                 <span class="right">
-                                    <a rel="nofollow" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#comm_<?= $lo['comment_id']; ?>">
+                                    <a rel="nofollow" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#comment_<?= $lo['comment_id']; ?>">
                                         <i class="icon arrow-down"></i>
                                     </a>
                                 </span>
@@ -186,7 +185,7 @@
                                         <textarea minlength="6" class="wmd-input h-150 w-95" rows="5" placeholder="<?= lang('write-something'); ?>..." name="answer" id="wmd-input"></textarea>
                                         <div class="boxline"> 
                                             <input type="hidden" name="post_id" id="post_id" value="<?= $post['post_id']; ?>">
-                                            <input type="hidden" name="answ_id" id="answ_id" value="0">
+                                            <input type="hidden" name="answer_id" id="answer_id" value="0">
                                             <input type="submit" class="button" name="answit" value="<?= lang('Reply'); ?>" class="answer-post">
                                         </div>
                                     </div>    
@@ -211,18 +210,18 @@
             
             <?php if($post['post_draft'] == 0) { ?> 
                 <?php if($post['post_type'] == 0) { ?> 
-                    <?php include TEMPLATE_DIR . '/post/comm-view.php'; ?>
+                    <?php include TEMPLATE_DIR . '/post/comment-view.php'; ?>
                     <?php if($post['post_closed'] == 1) { ?> 
-                        <p class="no-answer"> <i class="icon info"></i> <?= lang('post-closed'); ?>...</p>
+                        <p class="no-content"> <i class="icon info"></i> <?= lang('post-closed'); ?>...</p>
                     <?php } ?>
                 <?php } else { ?>
-                    <?php include TEMPLATE_DIR . '/post/qa-view.php'; ?>
+                    <?php include TEMPLATE_DIR . '/post/questions-view.php'; ?>
                     <?php if($post['post_closed'] == 1) { ?>
-                        <p class="no-answer"><i class="icon lock"></i> <?= lang('The question is closed'); ?>...</p>
+                        <p class="no-content"><i class="icon lock"></i> <?= lang('The question is closed'); ?>...</p>
                     <?php } ?>
                 <?php } ?> 
             <?php } else { ?>   
-                <p class="no-answer red"><i class="icon info"></i> <?= lang('This is a draft'); ?>...</p>
+                <p class="no-content red"><i class="icon info"></i> <?= lang('This is a draft'); ?>...</p>
             <?php } ?>   
         </article>
     </main> 

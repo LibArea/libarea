@@ -8,7 +8,7 @@
         
             <?php if($uid['trust_level'] == 5) { ?>
                 <span id="cm_dell" class="right">
-                    <a data-flow="<?= $flow['flow_id']; ?>" class="delflow">
+                    <a data-flow="<?= $flow['flow_id']; ?>" class="del-flow">
                         <small>
                             <?php if($flow['flow_is_delete'] == 1) { ?>
                                 <?= lang('Recover'); ?> 

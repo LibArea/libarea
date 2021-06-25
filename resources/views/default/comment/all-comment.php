@@ -32,7 +32,7 @@
                                             <div class="score"><?= $comm['comment_votes']; ?></div>
                                         </div>
                                     <?php } else { ?>
-                                        <?php if ($comm['comm_vote_status'] || $uid['id'] == $comm['comment_user_id']) { ?>
+                                        <?php if ($comm['comment_vote_status'] || $uid['id'] == $comm['comment_user_id']) { ?>
                                             <div class="voters active">
                                                 <div class="up-id"></div>
                                                 <div class="score"><?= $comm['comment_votes']; ?></div>

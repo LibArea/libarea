@@ -13,9 +13,10 @@ class UserModel extends \MainModel
     // Страница участников
     public static function getUsersAll($user_id)
     {
-        $q = XD::select(['id', 'login', 'name', 'avatar', 'is_deleted'])
+        $q = XD::select(['id', 'login', 'name', 'avatar', 'avatar', 'is_deleted'])
             ->from(['users'])
-            ->where(['is_deleted'], '=', 0);
+            ->where(['is_deleted'], '!=', 1)
+            ->and(['ban_list'], '!=', 1);
                 
             if($user_id) {    
                 $query = $q->orderBy(['id'], '=', $user_id)->desc(',', ['trust_level'])->desc();
@@ -29,7 +30,7 @@ class UserModel extends \MainModel
     // Получение информации по логину
     public static function getUserLogin($login)
     {
-        $query = XD::select(['id', 'login', 'name', 'email', 'avatar', 'trust_level', 'cover_art', 'color',  'invitation_available', 'about', 'website', 'location', 'public_email', 'skype', 'twitter', 'telegram', 'vk', 'created_at', 'my_post', 'is_deleted'])
+        $query = XD::select(['id', 'login', 'name', 'email', 'avatar', 'trust_level', 'cover_art', 'color',  'invitation_available', 'about', 'website', 'location', 'public_email', 'skype', 'twitter', 'telegram', 'vk', 'created_at', 'my_post', 'ban_list', 'is_deleted'])
                 ->from(['users'])
                 ->where(['login'], '=', $login);
 

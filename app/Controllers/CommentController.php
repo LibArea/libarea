@@ -29,7 +29,7 @@ class CommentController extends \MainController
         foreach ($comm  as $ind => $row) {
             $row['date']                = lang_date($row['comment_date']);
             $row['comment_content']     = Base::text($row['comment_content'], 'line');
-            $row['comm_vote_status']    = VotesModel::voteStatus($row['comment_id'], $uid['id'], 'comment');
+            $row['comment_vote_status']    = VotesModel::voteStatus($row['comment_id'], $uid['id'], 'comment');
             $result[$ind]   = $row;
         }
         
@@ -49,7 +49,7 @@ class CommentController extends \MainController
             'meta_desc'     => lang('comments-desc') .' '. Config::get(Config::PARAM_HOME_TITLE),
         ];
 
-        return view(PR_VIEW_DIR . '/comment/comm-all', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
+        return view(PR_VIEW_DIR . '/comment/all-comment', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
     }
 
     // Добавление комментария
@@ -57,8 +57,8 @@ class CommentController extends \MainController
     {
         $comment    = \Request::getPost('comment');
         $post_id    = \Request::getPostInt('post_id');   // в каком посту ответ
-        $answ_id    = \Request::getPostInt('answ_id');   // на какой ответ
-        $comm_id    = \Request::getPostInt('comm_id');   // на какой комментарий
+        $answer_id  = \Request::getPostInt('answer_id');   // на какой ответ
+        $comment_id = \Request::getPostInt('comment_id');   // на какой комментарий
         
         $uid        = Base::getUid();
         $ip         = \Request::getRemoteAddress(); 
@@ -85,8 +85,8 @@ class CommentController extends \MainController
         }
         
         // Записываем коммент и получаем его url
-        $last_comment_id    = CommentModel::commentAdd($post_id, $answ_id, $comm_id, $ip, $comment, $uid['id']);
-        $url_comment        = $redirect . '#comm_' . $last_comment_id; 
+        $last_comment_id    = CommentModel::commentAdd($post_id, $answer_id, $comment_id, $ip, $comment, $uid['id']);
+        $url_comment        = $redirect . '#comment_' . $last_comment_id; 
          
         // Добавим в чат и поток
         $data_flow = [
@@ -106,9 +106,9 @@ class CommentController extends \MainController
         PostModel::getNumComments($post_id);
         
         // Оповещение автору ответа, что есть комментарий
-        if($answ_id) {
+        if($answer_id) {
             // Себе не записываем (перенести в общий, т.к. ничего для себя не пишем в notf)
-            $answ = AnswerModel::getAnswerOne($answ_id);
+            $answ = AnswerModel::getAnswerOne($answer_id);
             if($uid['id'] != $answ['answer_user_id']) {
                 $type = 4; // Ответ на пост        
                 NotificationsModel::send($uid['id'], $answ['answer_user_id'], $type, $last_comment_id, $url_comment, 1);
@@ -134,32 +134,32 @@ class CommentController extends \MainController
     // Редактируем комментарий
     public function editComment()
     {
-        $comm_id            = \Request::getPostInt('comm_id');
+        $comment_id         = \Request::getPostInt('comment_id');
         $post_id            = \Request::getPostInt('post_id');
         $comment_content    = \Request::getPost('comment');
 
         // Получим относительный url поста для возрата
         $post       = PostModel::postId($post_id);
-        $redirect   = '/post/' . $post['post_id'] . '/' . $post['post_slug'] . '#comm_' . $comm_id;
+        $redirect   = '/post/' . $post['post_id'] . '/' . $post['post_slug'] . '#comment_' . $comment_id;
         
         // id того, кто редактирует
         $uid        = Base::getUid();
         $user_id    = $uid['id'];
         
-        $comment = CommentModel::getCommentsOne($comm_id);
+        $comment = CommentModel::getCommentsOne($comment_id);
         
         // Проверка доступа 
         Base::accessСheck($comment, 'comment', $uid); 
         
         // Редактируем комментарий
-        CommentModel::CommentEdit($comm_id, $comment_content);
+        CommentModel::CommentEdit($comment_id, $comment_content);
         redirect($redirect); 
 	}
 
    // Покажем форму редактирования
 	public function editCommentForm()
 	{
-        $comment_id     = \Request::getPostInt('comm_id');
+        $comment_id     = \Request::getPostInt('comment_id');
         $post_id        = \Request::getPostInt('post_id');
         $uid            = Base::getUid();
         
@@ -169,30 +169,30 @@ class CommentController extends \MainController
         Base::accessСheck($comment, 'comment', $uid); 
 
         $data = [
-            'comm_id'           => $comment_id,
+            'comment_id'           => $comment_id,
             'post_id'           => $post_id,
             'user_id'           => $uid['id'],
             'comment_content'   => $comment['comment_content'],
         ]; 
         
-        return view(PR_VIEW_DIR . '/comment/comm-edit-form', ['data' => $data]);
+        return view(PR_VIEW_DIR . '/comment/edit-form-comment', ['data' => $data]);
     }
 
 	// Покажем форму ответа
 	public function addForm()
 	{
         $post_id    = \Request::getPostInt('post_id');
-        $answ_id    = \Request::getPostInt('answ_id');
-        $comm_id    = \Request::getPostInt('comm_id');
+        $answer_id  = \Request::getPostInt('answer_id');
+        $comment_id = \Request::getPostInt('comment_id');
         
         $uid  = Base::getUid();
         $data = [
-            'answ_id'     => $answ_id,
-            'post_id'     => $post_id,
-            'comm_id'     => $comm_id,
+            'answer_id'     => $answer_id,
+            'post_id'       => $post_id,
+            'comment_id'    => $comment_id,
         ]; 
         
-        return view(PR_VIEW_DIR . '/comment/comm-add-form-answ', ['data' => $data, 'uid' => $uid]);
+        return view(PR_VIEW_DIR . '/comment/add-form-answer-comment', ['data' => $data, 'uid' => $uid]);
     }
 
     // Комментарии участника
@@ -222,7 +222,7 @@ class CommentController extends \MainController
             'meta_desc'     => lang('Comments-n') . ' ' . $login .' '. Config::get(Config::PARAM_HOME_TITLE),
         ];
         
-        return view(PR_VIEW_DIR . '/comment/comm-user', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
+        return view(PR_VIEW_DIR . '/comment/user-comment', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
     }
 
     // Удаление комментария
@@ -234,9 +234,9 @@ class CommentController extends \MainController
             return false;
         }
         
-        $comm_id = \Request::getPostInt('comm_id');
+        $comment_id = \Request::getPostInt('comment_id');
         
-        CommentModel::CommentsDel($comm_id);
+        CommentModel::CommentsDel($comment_id);
         
         return false;
     }

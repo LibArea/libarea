@@ -9,17 +9,23 @@ use PDO;
 class AdminModel extends \MainModel
 {
     // Страница участников
-    public static function UsersAll($page)
+    public static function UsersAll($page, $sheet)
     {
+        if($sheet == 'all') {
+            $string = "";
+        } else {
+            $string = "WHERE ban_list > 0";
+        }
+        
         $offset = ($page-1) * 25; 
-        $sql = "SELECT * FROM users ORDER BY id DESC LIMIT 25 OFFSET ".$offset.""; // GROUP BY id 
+        $sql = "SELECT * FROM users $string ORDER BY id DESC LIMIT 25 OFFSET ".$offset." ";
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
 
     }
     
     // Количество участинков
-    public static function UsersCount()
+    public static function UsersCount($page, $sheet)
     {
         $query = XD::select('*')->from(['users']);
         $users =  count($query->getSelect());

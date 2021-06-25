@@ -11,7 +11,7 @@ use Lori\Base;
 class AdminController extends \MainController
 {
     
-	public function index()
+	public function index($sheet)
 	{
         $pg     = \Request::getInt('page'); 
         $page   = (!$pg) ? 1 : $pg;
@@ -19,11 +19,9 @@ class AdminController extends \MainController
         // Доступ только персоналу
         $uid = self::isAdmin();
 
-        $pagesCount = AdminModel::UsersCount();
-        $user_all   = AdminModel::UsersAll($page);
+        $pagesCount = AdminModel::UsersCount($page, $sheet);
+        $user_all   = AdminModel::UsersAll($page, $sheet);
 
-        Base::PageError404($user_all);
-        
         $result = Array();
         foreach ($user_all as $ind => $row) {
             $row['replayIp']    = AdminModel::replayIp($row['reg_ip']);
@@ -45,7 +43,7 @@ class AdminController extends \MainController
             'pNum'          => $page,
             'users'         => $result,
             'meta_title'    => lang('Admin'),
-            'sheet'         => 'admin',
+            'sheet'         => $sheet,
         ]; 
 
         Request::getResources()->addBottomStyles('/assets/css/admin.css');
@@ -113,16 +111,16 @@ class AdminController extends \MainController
         Request::getResources()->addBottomStyles('/assets/css/admin.css');
         Request::getResources()->addBottomScript('/assets/js/admin.js'); 
  
-        return view(PR_VIEW_DIR . '/admin/comm_del', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
+        return view(PR_VIEW_DIR . '/admin/comment_delet', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
     }
      
     // Удаление комментария
     public function recoverComment()
     {
         $uid        = self::isAdmin();
-        $comm_id    = \Request::getPostInt('id');
+        $comment_id = \Request::getPostInt('id');
         
-        AdminModel::CommentRecover($comm_id);
+        AdminModel::CommentRecover($comment_id);
         
         return true;
     }
@@ -130,11 +128,11 @@ class AdminController extends \MainController
     // Удалёные ответы
     public function answers()
     {
-        $uid    = self::isAdmin();
-        $answ   = AdminModel::getAnswersDell();
+        $uid        = self::isAdmin();
+        $answers    = AdminModel::getAnswersDell();
 
         $result = Array();
-        foreach ($answ  as $ind => $row) {
+        foreach ($answers  as $ind => $row) {
             $row['content'] = Base::text($row['answer_content'], 'md');
             $row['date']    = lang_date($row['answer_date']);
             $result[$ind]   = $row;
@@ -149,16 +147,16 @@ class AdminController extends \MainController
         Request::getResources()->addBottomStyles('/assets/css/admin.css');
         Request::getResources()->addBottomScript('/assets/js/admin.js'); 
  
-        return view(PR_VIEW_DIR . '/admin/answ_del', ['data' => $data, 'uid' => $uid, 'answers' => $result]);
+        return view(PR_VIEW_DIR . '/admin/answer_delet', ['data' => $data, 'uid' => $uid, 'answers' => $result]);
     }
      
     // Удаление ответа
     public function recoverAnswer()
     {
         $uid        = self::isAdmin();
-        $answ_id    = \Request::getPostInt('id');
+        $answer_id  = \Request::getPostInt('id');
         
-        AdminModel::AnswerRecover($answ_id);
+        AdminModel::AnswerRecover($answer_id);
         
         return true;
     }
@@ -483,6 +481,10 @@ class AdminController extends \MainController
             'h1'            => lang('Edit user'),
             'meta_title'    => lang('Edit user'),
             'sheet'         => 'admin',
+            'post_num_user' => UserModel::userPostsNum($user_id),
+            'answ_num_user' => UserModel::userAnswersNum($user_id),
+            'comm_num_user' => UserModel::userCommentsNum($user_id), 
+            'space_user'    => SpaceModel::getSpaceUserId($user_id),
         ]; 
 
         Request::getResources()->addBottomStyles('/assets/css/admin.css');

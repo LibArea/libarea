@@ -6,14 +6,14 @@ class MyParsedown extends Parsedown
         protected function inlineLink($Excerpt)
         {
             $link = parent::inlineLink($Excerpt);
-
-            if ($this->urlIsExternal($link['element']['attributes']['href'])) {
-                $link['element']['attributes'] += [
-                    'target' => '_blank',
-                    'rel'    => 'noopener nofollow ugc',
-                ];
+            if($link) {
+                if ($this->urlIsExternal($link['element']['attributes']['href'])) {
+                    $link['element']['attributes'] += [
+                        'target' => '_blank',
+                        'rel'    => 'noopener nofollow ugc',
+                    ];
+                }
             }
-
             return $link;
         }
 

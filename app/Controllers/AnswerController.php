@@ -30,7 +30,7 @@ class AnswerController extends \MainController
             $row['answer_content']  = Base::text($row['answer_content'], 'md');
             $row['date']            = lang_date($row['answer_date']);
             // N+1 - перенести в запрос
-            $row['answ_vote_status'] = VotesModel::voteStatus($row['answer_id'], $uid['id'], 'answer');
+            $row['answer_vote_status'] = VotesModel::voteStatus($row['answer_id'], $uid['id'], 'answer');
             $result[$ind]   = $row;
         }
         
@@ -50,7 +50,7 @@ class AnswerController extends \MainController
             'meta_desc'     => lang('answers-desc') .' '. Config::get(Config::PARAM_HOME_TITLE),            
         ];
 
-        return view(PR_VIEW_DIR . '/answer/answ-all', ['data' => $data, 'uid' => $uid, 'answers' => $result]);
+        return view(PR_VIEW_DIR . '/answer/all-answer', ['data' => $data, 'uid' => $uid, 'answers' => $result]);
     }
 
     // Добавление ответа
@@ -84,7 +84,7 @@ class AnswerController extends \MainController
         
         // Записываем ответ и получаем его url
         $last_answer_id = AnswerModel::answerAdd($post_id, $ip, $answer, $uid['id']);
-        $url_answer     = $redirect . '#answ_' . $last_answer_id; 
+        $url_answer     = $redirect . '#answer_' . $last_answer_id; 
         
         // Уведомление (@login)
         if ($message = Base::parseUser($answer, true, true)) 
@@ -125,7 +125,7 @@ class AnswerController extends \MainController
    // Покажем форму редактирования
 	public function editAnswerPage()
 	{
-        $answer_id  = \Request::getInt('answ_id');
+        $answer_id  = \Request::getInt('answer_id');
         $post_id    = \Request::getInt('post_id');
         $uid        = Base::getUid();
         
@@ -145,7 +145,7 @@ class AnswerController extends \MainController
         
         $data = [
             'h1'                => lang('Edit answer'),
-            'answ_id'           => $answer_id,
+            'answer_id'         => $answer_id,
             'post_id'           => $post_id,
             'user_id'           => $uid['id'],
             'answer_content'    => $answer['answer_content'],
@@ -154,14 +154,14 @@ class AnswerController extends \MainController
             'meta_desc'         => lang('answers-desc'),  
         ]; 
         
-        return view(PR_VIEW_DIR . '/answer/answ-edit-form', ['data' => $data, 'uid' => $uid, 'post' => $post]);
+        return view(PR_VIEW_DIR . '/answer/edit-form-answer', ['data' => $data, 'uid' => $uid, 'post' => $post]);
     }
 
     // Редактируем ответ
     public function editAnswer()
     {
        
-        $answer_id      = \Request::getPostInt('answ_id');
+        $answer_id      = \Request::getPostInt('answer_id');
         $post_id        = \Request::getPostInt('post_id');
         $answer_content = $_POST['answer']; // не фильтруем
 
@@ -184,7 +184,7 @@ class AnswerController extends \MainController
         // Редактируем комментарий
         AnswerModel::AnswerEdit($answer_id, $answer_content);
         
-        redirect('/' . $url . '#answ_' . $answer_id); 
+        redirect('/' . $url . '#answer_' . $answer_id); 
 	}
     
     // Ответы участника
@@ -214,7 +214,7 @@ class AnswerController extends \MainController
             'meta_desc'     => 'Ответы  учасника сообщества ' . $login .' '. Config::get(Config::PARAM_HOME_TITLE),
         ];
         
-        return view(PR_VIEW_DIR . '/answer/answ-user', ['data' => $data, 'uid' => $uid, 'answers' => $result]);
+        return view(PR_VIEW_DIR . '/answer/user-answer', ['data' => $data, 'uid' => $uid, 'answers' => $result]);
     }
 
     // Удаление комментария
@@ -226,9 +226,9 @@ class AnswerController extends \MainController
             return false;
         }
         
-        $answ_id = \Request::getPostInt('answ_id');
+        $answer_id = \Request::getPostInt('answer_id');
 
-        AnswerModel::AnswerDel($answ_id);
+        AnswerModel::AnswerDel($answer_id);
         
         return false;
     }
@@ -237,16 +237,15 @@ class AnswerController extends \MainController
     public function addAnswerFavorite()
     {
         
-        $uid     = Base::getUid();
+        $uid        = Base::getUid();
+        $answer_id  = \Request::getPostInt('answer_id');
+        $answer     = AnswerModel::getAnswerOne($answer_id); 
         
-        $answ_id = \Request::getPostInt('answ_id');
-        $answ    = AnswerModel::getAnswerOne($answ_id); 
-        
-        if(!$answ) {
+        if(!$answer) {
             redirect('/');
         }
         
-        AnswerModel::setAnswerFavorite($answ_id, $uid['id']);
+        AnswerModel::setAnswerFavorite($answer_id, $uid['id']);
        
         return true;
     } 

@@ -51,7 +51,7 @@ class UserController extends \MainController
 
         \Request::getHead()->addStyles('/assets/css/users.css');
 
-        if($user['is_deleted'] == 1) {
+        if($user['ban_list'] == 1) {
             \Request::getHead()->addMeta('robots', 'noindex');
         }
         
@@ -67,19 +67,19 @@ class UserController extends \MainController
 
         $uid  = Base::getUid();
         $data =[
-            'h1'            => $user['login'],
-            'created_at'    => lang_date($user['created_at']),
-            'trust_level'   => UserModel::getUserTrust($user['id']),
-            'post_num_user' => UserModel::userPostsNum($user['id']),
-            'answ_num_user' => UserModel::userAnswersNum($user['id']),
-            'comm_num_user' => UserModel::userCommentsNum($user['id']), 
-            'space_user'    => SpaceModel::getSpaceUserId($user['id']),
-            'badges'        => UserModel::getBadgeUserAll($user['id']),
-            'canonical'     => Config::get(Config::PARAM_URL) . '/u/' . $user['login'],
-            'sheet'         => 'profile',
-            'img'           => Config::get(Config::PARAM_URL) . '/uploads/users/avatars/' . $user['avatar'],
-            'meta_title'    => $meta_title,
-            'meta_desc'     => $meta_desc,
+            'h1'                => $user['login'],
+            'created_at'        => lang_date($user['created_at']),
+            'trust_level'       => UserModel::getUserTrust($user['id']),
+            'post_num_user'     => UserModel::userPostsNum($user['id']),
+            'answer_num_user'   => UserModel::userAnswersNum($user['id']),
+            'comment_num_user'  => UserModel::userCommentsNum($user['id']), 
+            'space_user'        => SpaceModel::getSpaceUserId($user['id']),
+            'badges'            => UserModel::getBadgeUserAll($user['id']),
+            'canonical'         => Config::get(Config::PARAM_URL) . '/u/' . $user['login'],
+            'sheet'             => 'profile',
+            'img'               => Config::get(Config::PARAM_URL) . '/uploads/users/avatars/' . $user['avatar'],
+            'meta_title'        => $meta_title,
+            'meta_desc'         => $meta_desc,
         ];
 
         return view(PR_VIEW_DIR . '/user/profile', ['data' => $data, 'uid' => $uid, 'user' => $user, 'onepost' => $post]);
@@ -384,13 +384,18 @@ class UserController extends \MainController
         $path_img = HLEB_PUBLIC_DIR. '/uploads/users/cover/';
 
         // Удалим, кроме дефолтной
-        if($user['cover_art'] != 'noavatar.png') {
+        if($user['cover_art'] != 'cover_art.jpeg') {
             unlink($path_img . $user['cover_art']);
         }  
         
         UserModel::userCoverRemove($user['id']);
-        
         Base::addMsg(lang('Cover removed'), 'success');
+        
+        // Если удаляет администрация
+        if($uid['trust_level'] == 5) {
+            redirect('/admin/user/'.$user['id'].'/edit');
+        }
+        
         redirect($redirect);
     }
 

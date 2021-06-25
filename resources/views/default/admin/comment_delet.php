@@ -9,25 +9,29 @@
 
                 <?php if (!empty($comments)) { ?>
               
-                    <?php foreach ($comments as $comm) { ?>  
+                    <?php foreach ($comments as $comment) { ?>  
                     
-                        <div class="comm-telo_bottom" id="comm_<?= $comm['comment_id']; ?>">
+                        <div class="comm-telo_bottom" id="comment_<?= $comment['comment_id']; ?>">
                             <div class="small">
-                                <img class="ava" src="<?= user_avatar_url($comm['avatar'], 'small'); ?>">
-                                <a class="date" href="/u/<?= $comm['login']; ?>"><?= $comm['login']; ?></a> 
+                                <img class="ava" src="<?= user_avatar_url($comment['avatar'], 'small'); ?>">
+                                <a class="date" href="/u/<?= $comment['login']; ?>"><?= $comment['login']; ?></a> 
                                 
-                                <span class="date"><?= $comm['date']; ?></span>
+                                <span class="date"><?= $comment['date']; ?></span>
 
                                 <span class="indent"> &#183; </span>
-                                <a href="/post/<?= $comm['post_id']; ?>/<?= $comm['post_slug']; ?>"><?= $comm['post_title']; ?></a>
+                                <a href="/post/<?= $comment['post_id']; ?>/<?= $comment['post_slug']; ?>">
+                                    <?= $comment['post_title']; ?>
+                                </a>
                             </div>
                             <div class="comm-telo-body">
-                                <?= $comm['content']; ?> 
+                                <?= $comment['content']; ?> 
                             </div>
                            <div class="post-full-footer date">
-                               + <?= $comm['comment_votes']; ?>
-                               <span id="cm_dell" class="right comm_link small">
-                                    <a data-id="<?= $comm['comment_id']; ?>" class="recover-comm"><?= lang('Recover'); ?></a>
+                               + <?= $comment['comment_votes']; ?>
+                               <span id="cm_dell" class="right comment_link small">
+                                    <a data-id="<?= $comment['comment_id']; ?>" class="recover-comment">
+                                        <?= lang('Recover'); ?>
+                                    </a>
                                </span>
                            </div>
                         </div>

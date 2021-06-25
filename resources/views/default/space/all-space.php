@@ -105,7 +105,7 @@
                     <?php } ?>
 
                 <?php } else { ?>
-                    <div class="no-answer"><i class="icon info"></i> <?= lang('No spaces'); ?></div>
+                    <div class="no-content"><i class="icon info"></i> <?= lang('No spaces'); ?></div>
                 <?php } ?>
             </div>
         </div>
