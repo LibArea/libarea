@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\Models\SpaceModel;
 use Hleb\Constructor\Handlers\Request;
 use SimpleImage;
+use Lori\Content;
 use Lori\Config;
 use Lori\Base;
 
@@ -61,7 +62,7 @@ class SpaceController extends \MainController
             'meta_desc'     => lang('I read space') .' '. Config::get(Config::PARAM_HOME_TITLE),
         ];
         
-        return view(PR_VIEW_DIR . '/space/all', ['data' => $data, 'uid' => $uid, 'space' => $result, 'count_space' => $count_space]);
+        return view(PR_VIEW_DIR . '/space/all-space', ['data' => $data, 'uid' => $uid, 'space' => $result, 'count_space' => $count_space]);
     }
 
     // Посты по пространству
@@ -84,12 +85,12 @@ class SpaceController extends \MainController
 
         $space['space_date']        = lang_date($space['space_date']);
         $space['space_cont_post']   = count($posts);
-        $space['space_text']        = Base::text($space['space_text'], 'md');
+        $space['space_text']        = Content::text($space['space_text'], 'text');
         
         $result = Array();
         foreach ($posts as $ind => $row) {
             $text = explode("\n", $row['post_content']);
-            $row['post_content_preview']    = Base::text($text[0], 'line');
+            $row['post_content_preview']    = Content::text($text[0], 'line');
             $row['lang_num_answers']        = word_form($row['post_answers_num'], lang('Answer'), lang('Answers-m'), lang('Answers'));
             $result[$ind]                   = $row;
         }  

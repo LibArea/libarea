@@ -26,6 +26,14 @@ class UserModel extends \MainModel
             
         return $query->getSelect();
     }
+    
+    // Количество участинков
+    public static function usersCount()
+    {
+        $query = XD::select('*')->from(['users']);
+        $users =  count($query->getSelect());
+        return ceil($users / 25);
+    }
 
     // Получение информации по логину
     public static function getUserLogin($login)
@@ -38,13 +46,9 @@ class UserModel extends \MainModel
     }
     
     // Получение информации по id
-    public static function getUserId($id)
+    public static function getUserId($user_id)
     {
-        $query = XD::select(['id', 'login', 'name', 'email', 'avatar', 'invitation_available',  'about', 'trust_level', 'hits_count',  'ban_list'])
-                ->from(['users'])
-                ->where(['id'], '=', $id);
-
-        return $query->getSelectOne();
+        return XD::select('*')->from(['users'])->where(['id'], '=', $user_id)->getSelectOne();
     }
 
     // Select user
@@ -593,12 +597,6 @@ class UserModel extends \MainModel
         
         return $result;
     }
-    
-    // Получим список запрещенных стоп-слов
-    public static function getStopWords()
-	{
-        return XD::select('*')->from(['stop_words'])->getSelect();
-	}
     
     // Настройка оповещений
     public static function getNotificationSettingByUid($uid)

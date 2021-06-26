@@ -934,6 +934,10 @@ ol.dell.answer-telo {
   list-style: none;
 }
 
+.delleted {
+  background-color: rgb(246, 196, 184);
+}
+
 .comment_subtree:target,
 .comment_subtree.edit,
 .answers_subtree:target,
@@ -989,6 +993,10 @@ ol.comment-telo {
 .comm-telo-body {
   margin: 5px 0;
   font-size: 15px;
+}
+
+.comm-telo-body p {
+  margin: 8px 0;
 }
 
 .answers .comm-telo {

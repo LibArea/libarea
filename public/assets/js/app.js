@@ -158,6 +158,18 @@ $(function(){
             location.reload(); 
         });
     });
+    // Восстанавливаем комментарий
+    $(document).on('click', '.recover-comment', function() {
+        let comment_id  = $(this).data('id');
+        fetch("/admin/comment/recover", { 
+            method: "POST",
+            body: "id=" + comment_id,
+            headers:{'Content-Type': 'application/x-www-form-urlencoded'} 
+            })
+            .then((response) => {
+                location.reload();                
+            }) 
+    });
     // Парсинг title с сайта для > TL1
     $(document).on('click', '#graburl', function(e) {    
         const uri = document.getElementById('link').value;
@@ -193,14 +205,14 @@ $(function(){
                     $link_span.html(old_html).hide();
                     $('#submit_comm').click(function(data) {
                         $('#submit_comm').prop('disabled', true);
-                        $('#cancel_comm').hide();
+                       // $('#cancel_comment').hide();
                         $('.submit_comm').append('...');
                     });
                 }
             });
     });
-    $(document).on("click", "#cancel_comm", function(){
-        $('.comment_addentry_re').remove();
-        $('.comment_add_link').show();
-    }); 
+    $(document).on("click", "#cancel_comment", function(){ 
+        $('.cm_addentry').remove();
+       // $('.comment_add_link').show();
+    });
 }); 

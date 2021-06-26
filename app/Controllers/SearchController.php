@@ -4,32 +4,23 @@ namespace App\Controllers;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\SearchModel;
 use App\Models\ExploreModel;
+use Lori\Content;
 use Lori\Config;
 use Lori\Base;
 
 class SearchController extends \MainController
 {
-    // Форма поиска
     public function index()
     {
-
-        if (Request::getPost())
-        {    
+        if (Request::getPost()) {
+            
             $qa =  \Request::getPost('q');
-          
-            $query = preg_replace('/[^a-zA-Zа-яА-Я0-9 ]/ui', '',$qa);
 
-            if (!empty($query)) 
-            { 
-                if (Base::getStrlen($query) < 3) {
-                    Base::addMsg(lang('Too short'), 'error');
-                    redirect('/search');
-                } else if (Base::getStrlen($query) > 128) {
-                    Base::addMsg(lang('Too long'), 'error');
-                    redirect('/search');
-                } else {
-                    // введем подключение словарной библиотеки для подсказок
-                } 
+            $query = preg_replace('/[^a-zA-Zа-яА-Я0-9]/ui', '',$qa);
+
+            if (!empty($query)) { 
+
+                Base::Limits($query, lang('Too short'), '3', '128', '/search');
 
                 // Успех и определим, что будем использовать
                 // Далее индивидуально расширим (+ лайки, просмотры и т.д.)
@@ -37,7 +28,7 @@ class SearchController extends \MainController
                     $qa =  SearchModel::getSearch($query);
                     $result = Array();
                     foreach ($qa as $ind => $row) {
-                        $row['post_content']  = Base::text(Base::cutWords($row['post_content'], 220, '...'), 'md');
+                        $row['post_content']  = Content::text(Base::cutWords($row['post_content'], 220, '...'), 'text');
                         $result[$ind]         = $row; 
                     }  
                 } else {
@@ -47,15 +38,17 @@ class SearchController extends \MainController
                         $result[$ind]         = $row; 
                     } 
                 }
+                
             } else {
                 Base::addMsg(lang('Empty request'), 'error');
                 redirect('/search');
-            }  
+            } 
+            
         } else {
             $query  = '';
             $result = '';
         }
-        
+   
         Request::getResources()->addBottomStyles('/assets/css/info.css'); 
         Request::getHead()->addScript('/assets/js/Chart.js');
         

@@ -9,6 +9,7 @@ use App\Models\LinkModel;
 use App\Models\AnswerModel;
 use App\Models\CommentModel;
 use App\Models\NotificationsModel;
+use Lori\Content;
 use Lori\Config;
 use Lori\Base;
 use UrlRecord;
@@ -34,7 +35,7 @@ class PostController extends \MainController
         $result = Array();
         foreach ($posts as $ind => $row) {
             $text = explode("\n", $row['post_content']);
-            $row['post_content_preview']    = Base::text($text[0], 'line');
+            $row['post_content_preview']    = Content::text($text[0], 'line');
             $row['lang_num_answers']        = word_form($row['post_answers_num'], lang('Answer'), lang('Answers-m'), lang('Answers'));
             $row['post_date']               = lang_date($row['post_date']);
             $result[$ind]                   = $row;
@@ -130,7 +131,7 @@ class PostController extends \MainController
             redirect('/');
         }
      
-        $post['post_content']   = Base::text($post['post_content'], 'md');
+        $post['post_content']   = Content::text($post['post_content'], 'text');
         $post['post_date_lang'] = lang_date($post['post_date']);
         $post['num_answers']    = word_form($post['post_answers_num'], lang('Answer'), lang('Answers-m'), lang('Answers'));
         
@@ -162,7 +163,7 @@ class PostController extends \MainController
             }
 
             $row['comm']            = CommentModel::getCommentsAnswer($row['answer_id'], $uid['id']);
-            $row['answer_content']  = Base::text($row['answer_content'], 'md');
+            $row['answer_content']  = Content::text($row['answer_content'], 'text');
             $row['answer_date']     = lang_date($row['answer_date']);
             $answers[$ind]          = $row;
         }
@@ -431,7 +432,7 @@ class PostController extends \MainController
         $url = '/post/'. $post_id .'/'. $post_slug;
         
         // Уведомление (@login)
-        if ($message = Base::parseUser($post_content, true, true)) {
+        if ($message = Content::parseUser($post_content, true, true)) {
             
 			foreach ($message as $user_id) {
                 // Запретим отправку себе
@@ -791,7 +792,7 @@ class PostController extends \MainController
             return false;
         }
         
-        $post['post_content'] = Base::text($post['post_content'], 'md');
+        $post['post_content'] = Content::text($post['post_content'], 'text');
 
         return view(PR_VIEW_DIR . '/post/postcode', ['post' => $post]);
     }

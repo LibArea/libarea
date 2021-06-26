@@ -4,6 +4,7 @@ namespace App\Controllers;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\ExploreModel;
 use App\Models\LinkModel;
+use Lori\Content;
 use Lori\Config;
 use Lori\Base;
 
@@ -15,7 +16,7 @@ class LinkController extends \MainController
         $pg     = \Request::getInt('page'); 
         $page   = (!$pg) ? 1 : $pg;
         
-        $links  = LinkModel::getDomainAll($uid['id'], $page);
+        $links  = LinkModel::getLinksAll($uid['id'], $page);
         
         $data = [
             'h1'            => lang('domains-title'),  
@@ -34,13 +35,13 @@ class LinkController extends \MainController
         $domain     = \Request::get('domain');
         $uid        = Base::getUid();
         
-        $post       = LinkModel::getDomain($domain, $uid['id']); 
+        $post       = LinkModel::getLinkUrl($domain, $uid['id']); 
         Base::PageError404($post);
         
         $result = Array();
         foreach ($post as $ind => $row) {
             $text = explode("\n", $row['post_content']);
-            $row['post_content_preview']    = Base::text($text[0], 'line');
+            $row['post_content_preview']    = Content::text($text[0], 'line');
             $row['post_date']               = lang_date($row['post_date']);
             $row['lang_num_answers']        = word_form($row['post_answers_num'], lang('Answer'), lang('Answers-m'), lang('Answers'));
             $result[$ind]                   = $row;
@@ -48,7 +49,7 @@ class LinkController extends \MainController
         }
         
         $link       = LinkModel::getLink($domain, $uid['id']);
-        $domains    = LinkModel::getDomainsTop($domain); 
+        $domains    = LinkModel::getLinksTop($domain); 
         
         $meta_title = lang('Domain') . ': ' . $domain .' | '. Config::get(Config::PARAM_NAME);
         $meta_desc = lang('domain-desc') . ': ' . $domain .' '. Config::get(Config::PARAM_HOME_TITLE);
@@ -62,6 +63,15 @@ class LinkController extends \MainController
         ];
         
         return view(PR_VIEW_DIR . '/link/domain', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'domains' => $domains, 'link' => $link]);
+    }
+
+    // Изменение
+    public static function setLinkEdit($domain_id, $link_url, $link_title, $link_content)
+    {
+        XD::update(['links'])->set(['link_url'], '=', $link_url, ',', 
+            ['link_title'], '=', $link_title, ',',
+            ['link_content'], '=', $link_content)->where(['link_id'], '=', $domain_id)->run(); 
+        return true;  
     }
 
     // Получим Favicon
@@ -97,4 +107,5 @@ class LinkController extends \MainController
         
         return true;
     }
+
 }

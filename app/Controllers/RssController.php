@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use App\Models\RssModel;
+use Lori\Content;
 use Lori\Config;
 use Lori\Base;
 
@@ -30,8 +31,8 @@ class RssController extends \MainController
         $posts  = RssModel::getPostsFeed($space_id);
         $result = Array();
         foreach ($posts as $ind => $row) {
-            $row['post_content']  = Base::text($row['post_content'], 'md');
-            $result[$ind]           = $row;
+            $row['post_content']  = Content::text($row['post_content'], 'text');
+            $result[$ind]         = $row;
         }
 
         $data = [

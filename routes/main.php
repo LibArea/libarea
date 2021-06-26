@@ -176,7 +176,6 @@ Route::getType('post');
     Route::get('/post/shown')->controller('PostController@shownPost');
     // Вызов формы комментария и поиск
     Route::get('/comments/addform')->controller('CommentController@addForm');
-    Route::get('/search')->controller('SearchController');
 Route::endType();
 
 // Другие страницы без авторизии
@@ -225,3 +224,5 @@ Route::get('/comments/{page?}')->controller('CommentController')->where(['page' 
 // Карта сайта и Турбо страницы (пространств)
 Route::get('/sitemap.xml')->controller('RssController');
 Route::get('/turbo-feed/space/{id}')->controller('RssController@turboFeed')->where(['id' => '[0-9]+']);
+
+Route::type(['get', 'post'])->get('/search')->controller('SearchController');

@@ -192,4 +192,23 @@ class AnswerModel extends \MainModel
         }
     }
     
+    // Удаленные ответы
+    public static function getAnswersDell() 
+    {
+        $q = XD::select('*')->from(['answers']);
+        $query = $q->leftJoin(['users'])->on(['id'], '=', ['answer_user_id'])
+                ->leftJoin(['posts'])->on(['answer_post_id'], '=', ['post_id'])
+                ->where(['answer_del'], '=', 1)->orderBy(['answer_id'])->desc();
+        
+        return  $query->getSelect();
+    }
+    
+    // Восстановление
+    public static function answerRecover($id)
+    {
+         XD::update(['answers'])->set(['answer_del'], '=', 0)
+        ->where(['answer_id'], '=', $id)->run();
+ 
+        return true;
+    }    
 }

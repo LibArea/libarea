@@ -135,5 +135,27 @@ class CommentModel extends \MainModel
                 
         return  DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
+    
+    // Удаленные
+    public static function getCommentsDeleted() 
+    {
+        $q = XD::select('*')->from(['comments']);
+        $query = $q->leftJoin(['users'])->on(['id'], '=', ['comment_user_id'])
+                ->leftJoin(['posts'])->on(['comment_post_id'], '=', ['post_id'])
+                ->where(['comment_del'], '=', 1)->orderBy(['comment_id'])->desc();
+        
+        return  $query->getSelect();
+    }
+    
+    // Восстановление
+    public static function commentRecover($id)
+    {
+         XD::update(['comments'])->set(['comment_del'], '=', 0)
+        ->where(['comment_id'], '=', $id)->run();
+ 
+        return true;
+    }
+    
+    
 
 }

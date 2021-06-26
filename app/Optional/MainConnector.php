@@ -27,6 +27,7 @@ class MainConnector implements Connector
             // "Phphleb\Debugpan\DPanel"    => "vendor/phphleb/debugpan/DPanel.php",
 
             "Lori\Base"                     => "app/Libraries/Base.php",
+            "Lori\Content"                  => "app/Libraries/Content.php",
             "Lori\Config"                   => "app/Config/Config.php",
 
             "UrlRecord"                     => "app/ThirdParty/UrlRecord/UrlRecord.php",

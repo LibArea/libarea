@@ -6,11 +6,14 @@ use App\Models\SpaceModel;
 use App\Models\UserModel;
 use App\Models\LinkModel;
 use App\Models\AdminModel;
+use App\Models\CommentModel;
+use App\Models\AnswerModel;
+use App\Models\ContentModel;
+use Lori\Content;
 use Lori\Base;
 
 class AdminController extends \MainController
 {
-    
 	public function index($sheet)
 	{
         $pg     = \Request::getInt('page'); 
@@ -26,7 +29,7 @@ class AdminController extends \MainController
         foreach ($user_all as $ind => $row) {
             $row['replayIp']    = AdminModel::replayIp($row['reg_ip']);
             $row['isBan']       = AdminModel::isBan($row['id']);
-            $row['logs']        = AdminModel::usersLogAll($row['id']);
+            $row['logs']        = AdminModel::userLogId($row['id']);
             $row['created_at']  = lang_date($row['created_at']); 
             $result[$ind]       = $row;
         } 
@@ -86,11 +89,11 @@ class AdminController extends \MainController
     public function comments()
     {
         $uid    = self::isAdmin();
-        $comm   = AdminModel::getCommentsDell();
+        $comm   = CommentModel::getCommentsDeleted();
 
         $result = Array();
         foreach ($comm  as $ind => $row) {
-            $row['content'] = Base::text($row['comment_content'], 'md');
+            $row['content'] = Content::text($row['comment_content'], 'text');
             $row['date']    = lang_date($row['comment_date']);
             $result[$ind]   = $row;
         }
@@ -112,7 +115,7 @@ class AdminController extends \MainController
         $uid        = self::isAdmin();
         $comment_id = \Request::getPostInt('id');
         
-        AdminModel::CommentRecover($comment_id);
+        CommentModel::commentRecover($comment_id);
         
         return true;
     }
@@ -121,11 +124,11 @@ class AdminController extends \MainController
     public function answers()
     {
         $uid        = self::isAdmin();
-        $answers    = AdminModel::getAnswersDell();
+        $answers    = AnswerModel::getAnswersDell();
 
         $result = Array();
         foreach ($answers  as $ind => $row) {
-            $row['content'] = Base::text($row['answer_content'], 'md');
+            $row['content'] = Content::text($row['answer_content'], 'text');
             $row['date']    = lang_date($row['answer_date']);
             $result[$ind]   = $row;
         }
@@ -147,7 +150,7 @@ class AdminController extends \MainController
         $uid        = self::isAdmin();
         $answer_id  = \Request::getPostInt('id');
         
-        AdminModel::AnswerRecover($answer_id);
+        AnswerModel::answerRecover($answer_id);
         
         return true;
     }
@@ -160,7 +163,7 @@ class AdminController extends \MainController
  
         $result = Array();
         foreach ($invite  as $ind => $row) {
-            $row['uid']         = AdminModel::getUserId($row['uid']);  
+            $row['uid']         = UserModel::getUserId($row['uid']);  
             $row['active_time'] = $row['active_time'];
             $result[$ind]       = $row;
         }
@@ -336,7 +339,7 @@ class AdminController extends \MainController
         $user_id    = \Request::getInt('id');
         
         if($user_id > 0) {
-            $user   = AdminModel::getUserId($user_id);
+            $user   = UserModel::getUserId($user_id);
         } else {
             $user   = null;
         }
@@ -452,13 +455,13 @@ class AdminController extends \MainController
         $user_id    = \Request::getInt('id');
         
         $redirect = '/admin';
-        if(!$user = AdminModel::getUserId($user_id)) {
+        if(!$user = UserModel::getUserId($user_id)) {
            redirect($redirect); 
         }
         
         $user['isBan']      = AdminModel::isBan($user_id);
         $user['replayIp']   = AdminModel::replayIp($user_id);
-        $user['logs']       = AdminModel::usersLogAll($user_id);
+        $user['logs']       = AdminModel::userLogId($user_id);
         $user['badges']     = UserModel::getBadgeUserAll($user_id);
          
         $data = [
@@ -483,7 +486,7 @@ class AdminController extends \MainController
         $user_id    = \Request::getInt('id');
         
         $redirect = '/admin';
-        if (!AdminModel::getUserId($user_id)) {
+        if (!UserModel::getUserId($user_id)) {
             redirect($redirect);
         }
         
@@ -503,8 +506,8 @@ class AdminController extends \MainController
         
         // См. https://github.com/Respect/Validation
         Base::Limits($login, lang('Login'), '4', '11', $redirect);
-        Base::Limits($name, lang('Name'), '4', '11', $redirect);
         
+        $name           = empty($name) ? '' : $name;
         $about          = empty($about) ? '' : $about;
         $website        = empty($website) ? '' : $website;
         $location       = empty($location) ? '' : $location;
@@ -522,13 +525,11 @@ class AdminController extends \MainController
     // Домены в системе
     public function domains()
     {
-        $uid        = self::isAdmin();
-        $user_id    = \Request::getInt('id');
-        
+        $uid    = self::isAdmin();
         $pg     = \Request::getInt('page'); 
         $page   = (!$pg) ? 1 : $pg;
         
-        $domains    = AdminModel::getDomains($page);
+        $domains    = LinkModel::getLinksAll($uid['id'], $page);
         $data = [
             'meta_title'    => lang('Domains'),
             'sheet'         => 'admin',
@@ -549,7 +550,7 @@ class AdminController extends \MainController
         $pg     = \Request::getInt('page'); 
         $page   = (!$pg) ? 1 : $pg;
         
-        $domain = AdminModel::getLinkIdOne($domain_id);
+        $domain = LinkModel::getLinkId($domain_id);
 
         $data = [
             'meta_title'    => lang('Change the domain') .' | '. $domain['link_url_domain'],
@@ -583,7 +584,7 @@ class AdminController extends \MainController
         $about          = empty($about) ? '' : $about;
         $website        = empty($website) ? '' : $website;
         
-        AdminModel::setLinkEdit($domain_id, $link_url, $link_title, $link_content);
+        LinkModel::setLinkEdit($domain_id, $link_url, $link_title, $link_content);
         
         redirect($redirect);
     }
@@ -640,7 +641,7 @@ class AdminController extends \MainController
             'stop_space_id' => 0, // Глобально
         ];
 
-        AdminModel::setStopWord($data);
+        ContentModel::setStopWord($data);
         
         redirect('/admin/words');  
     }
@@ -651,7 +652,7 @@ class AdminController extends \MainController
         $uid        = self::isAdmin();
         $word_id    = \Request::getPostInt('id');
 
-        AdminModel::deleteStopWord($word_id);
+        ContentModel::deleteStopWord($word_id);
         
         redirect('/admin/words');  
     }

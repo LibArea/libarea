@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use Hleb\Constructor\Handlers\Request;
+use Lori\Content;
 use Lori\Config;
 use Lori\Base;
 
@@ -17,7 +18,7 @@ class InfoController extends \MainController
         $uid  = Base::getUid();
         $data = [
             'h1'            => lang('Info'),
-            'content'       => Base::text($text, 'md'),
+            'content'       => Content::text($text, 'text'),
             'canonical'     => Config::get(Config::PARAM_URL) . '/info',
             'sheet'         => 'info',
             'meta_title'    => lang('Info') .' | '. Config::get(Config::PARAM_NAME),
@@ -36,7 +37,7 @@ class InfoController extends \MainController
         $uid  = Base::getUid();
         $data = [
             'h1'            => lang('Privacy Policy'),
-            'content'       => Base::text($text, 'md'),
+            'content'       => Content::text($text, 'text'),
             'canonical'     => Config::get(Config::PARAM_URL) . '/info/privacy',
             'sheet'         => 'privacy',
             'meta_title'    => lang('Privacy Policy') .' | '. Config::get(Config::PARAM_NAME),

@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use App\Models\FlowModel;
 use Hleb\Constructor\Handlers\Request;
+use Lori\Content;
 use Lori\Config;
 use Lori\Base;
 
@@ -31,7 +32,7 @@ class FlowController extends \MainController
         
         $result = Array();
         foreach ($flows as $ind => $row) {
-            $row['flow_content']    = Base::text($row['flow_content'], 'line');
+            $row['flow_content']    = Content::text($row['flow_content'], 'line');
             $row['flow_pubdate']    = lang_date($row['flow_pubdate']);
             $result[$ind]           = $row;
         } 
@@ -51,12 +52,7 @@ class FlowController extends \MainController
         $chat_content   = \Request::getPost('flow');
         
         // Проверяем длину тела
-        if (Base::getStrlen($chat_content) < 6 || Base::getStrlen($chat_content) > 500)
-        {
-            Base::addMsg('Длина поста должна быть от 6 до 500 знаков', 'error');
-            redirect('/flow');
-            return true;
-        }
+        Base::Limits($chat_content, lang('Title'), '6', '500', '/flow');
         
         // Добавим в чат и в поток
         $data_flow = [

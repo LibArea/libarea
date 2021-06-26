@@ -9,6 +9,7 @@ use App\Models\VotesModel;
 use App\Models\NotificationsModel;
 use App\Models\FlowModel;
 use Hleb\Constructor\Handlers\Request;
+use Lori\Content;
 use Lori\Config;
 use Lori\Base;
 
@@ -27,7 +28,7 @@ class AnswerController extends \MainController
  
         $result = Array();
         foreach ($answ  as $ind => $row) {
-            $row['answer_content']  = Base::text($row['answer_content'], 'md');
+            $row['answer_content']  = Content::text($row['answer_content'], 'text');
             $row['date']            = lang_date($row['answer_date']);
             // N+1 - перенести в запрос
             $row['answer_vote_status'] = VotesModel::voteStatus($row['answer_id'], $uid['id'], 'answer');
@@ -87,7 +88,7 @@ class AnswerController extends \MainController
         $url_answer     = $redirect . '#answer_' . $last_answer_id; 
         
         // Уведомление (@login)
-        if ($message = Base::parseUser($answer, true, true)) 
+        if ($message = Content::parseUser($answer, true, true)) 
         {
             foreach ($message as $user_id) {
                 // Запретим отправку себе
@@ -200,7 +201,7 @@ class AnswerController extends \MainController
         
         $result = Array();
         foreach ($answ as $ind => $row) {
-            $row['content'] = Base::text($row['answer_content'], 'md');
+            $row['content'] = Content::text($row['answer_content'], 'text');
             $row['date']    = lang_date($row['answer_date']);
             $result[$ind]   = $row;
         }

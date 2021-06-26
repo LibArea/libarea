@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers;
+use Hleb\Constructor\Handlers\Request;
 use App\Models\CommentModel;
 use App\Models\UserModel;
 use App\Models\PostModel;
@@ -8,7 +9,7 @@ use App\Models\AnswerModel;
 use App\Models\VotesModel;
 use App\Models\NotificationsModel;
 use App\Models\FlowModel;
-use Hleb\Constructor\Handlers\Request;
+use Lori\Content;
 use Lori\Config;
 use Lori\Base;
 
@@ -28,8 +29,8 @@ class CommentController extends \MainController
         $result = Array();
         foreach ($comm  as $ind => $row) {
             $row['date']                = lang_date($row['comment_date']);
-            $row['comment_content']     = Base::text($row['comment_content'], 'line');
-            $row['comment_vote_status']    = VotesModel::voteStatus($row['comment_id'], $uid['id'], 'comment');
+            $row['comment_content']     = Content::text($row['comment_content'], 'line');
+            $row['comment_vote_status'] = VotesModel::voteStatus($row['comment_id'], $uid['id'], 'comment');
             $result[$ind]   = $row;
         }
         
@@ -68,13 +69,9 @@ class CommentController extends \MainController
 
         $redirect = '/post/' . $post['post_id'] . '/' . $post['post_slug'];
 
-        if (Base::getStrlen($comment) < 6 || Base::getStrlen($comment) > 1024)
-        {
-            Base::addMsg('Длина комментария должна быть от 6 до 1000 знаков', 'error');
-            redirect($redirect);
-            return true;
-        }
-        
+        // Проверяем длину тела
+        Base::Limits($comment, lang('Comments-m'), '6', '1024', $redirect);
+
         // Участник с нулевым уровнем доверия должен быть ограничен в добавлении комментариев
         if($uid['trust_level'] < Config::get(Config::PARAM_TL_ADD_COMM)) {
             $num_comm =  CommentModel::getCommentSpeed($uid['id']);
@@ -116,7 +113,7 @@ class CommentController extends \MainController
         }
         
         // Уведомление (@login)
-        if ($message = Base::parseUser($comment, true, true)) 
+        if ($message = Content::parseUser($comment, true, true)) 
         {
             foreach ($message as $user_id) {
                 // Запретим отправку себе и автору ответа (оповщение ему выше)
@@ -208,7 +205,7 @@ class CommentController extends \MainController
         
         $result = Array();
         foreach ($comm as $ind => $row) {
-            $row['comment_content'] = Base::text($row['comment_content'], 'line');
+            $row['comment_content'] = Content::text($row['comment_content'], 'line');
             $row['date']            = lang_date($row['comment_date']);
             $result[$ind]           = $row;
         }

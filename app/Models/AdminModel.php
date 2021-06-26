@@ -31,22 +31,13 @@ class AdminModel extends \MainModel
         $users =  count($query->getSelect());
         return ceil($users / 25);
     }
-
-    // Страница участников
-    public static function usersLogAll($id)
+    
+    // По логам
+    public static function userLogId($user_id)
     {
-        return XD::select('*')->from(['users_logs'])->where(['logs_user_id'], '=', $id)->getSelectOne();
-
+        return XD::select('*')->from(['users_logs'])->where(['logs_user_id'], '=', $user_id)->getSelectOne();
     }
     
-    // Получение информации по id
-    public static function getUserId($uid)
-    {
-        return XD::select('*')
-                ->from(['users'])
-                ->where(['id'], '=', $uid)->getSelectOne();
-    }
-
     // Получение информации по ip для сопоставления
     public static function getUserLogsId($ip)
     {
@@ -125,46 +116,6 @@ class AdminModel extends \MainModel
         return true;   
     }
     
-    // Удаленные комментарии
-    public static function getCommentsDell() 
-    {
-        $q = XD::select('*')->from(['comments']);
-        $query = $q->leftJoin(['users'])->on(['id'], '=', ['comment_user_id'])
-                ->leftJoin(['posts'])->on(['comment_post_id'], '=', ['post_id'])
-                ->where(['comment_del'], '=', 1)->orderBy(['comment_id'])->desc();
-        
-        return  $query->getSelect();
-    }
-    
-    // Восстановление комментария
-    public static function CommentRecover($id)
-    {
-         XD::update(['comments'])->set(['comment_del'], '=', 0)
-        ->where(['comment_id'], '=', $id)->run();
- 
-        return true;
-    }
-    
-    // Удаленные ответы
-    public static function getAnswersDell() 
-    {
-        $q = XD::select('*')->from(['answers']);
-        $query = $q->leftJoin(['users'])->on(['id'], '=', ['answer_user_id'])
-                ->leftJoin(['posts'])->on(['answer_post_id'], '=', ['post_id'])
-                ->where(['answer_del'], '=', 1)->orderBy(['answer_id'])->desc();
-        
-        return  $query->getSelect();
-    }
-    
-    // Восстановление ответов
-    public static function AnswerRecover($id)
-    {
-         XD::update(['answers'])->set(['answer_del'], '=', 0)
-        ->where(['answer_id'], '=', $id)->run();
- 
-        return true;
-    }
-    
     // Дерева инвайтов
     public static function getInvitations() 
     {
@@ -195,7 +146,6 @@ class AdminModel extends \MainModel
     {
        return XD::select('*')->from(['badge'])->where(['badge_id'], '=', $badge_id)->getSelectOne(); 
     }
-    
     
     // Редактирование награды
     public static function setEditBadge($data)
@@ -260,49 +210,5 @@ class AdminModel extends \MainModel
          return true;
     }
     
-    // Все домены
-    public static function getDomains($page)
-    {
-        $offset = ($page-1) * 25; 
-        $sql = "SELECT * FROM links ORDER BY link_id DESC LIMIT 25 OFFSET ".$offset."";
 
-        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
-    } 
-    
-    // Информация по домену
-    public static function getLinkIdOne($id)
-    {
-        return XD::select('*')->from(['links'])->where(['link_id'], '=', $id)->getSelectOne();
-    }
-    
-    // Изменим домен
-    public static function setLinkEdit($domain_id, $link_url, $link_title, $link_content)
-    {
-        XD::update(['links'])->set(['link_url'], '=', $link_url, ',', 
-            ['link_title'], '=', $link_title, ',',
-            ['link_content'], '=', $link_content)->where(['link_id'], '=', $domain_id)->run(); 
-        return true;  
-    }
-    
-    // Добавить стоп-слово
-    public static function setStopWord($data)
-    {
-        XD::insertInto(['stop_words'], '(',
-            ['stop_word'], ',', 
-            ['stop_add_uid'], ',',
-            ['stop_space_id'], ')')->values( '(', 
-        
-        XD::setList([
-            $data['stop_word'], 
-            $data['stop_add_uid'],
-            $data['stop_space_id']]), ')' )->run();
-
-        return true;
-    }
-    
-    // Удалить стоп-слово
-    public static function deleteStopWord($word_id)
-    {
-        return XD::deleteFrom(['stop_words'])->where(['stop_id'], '=', $word_id)->run(); 
-    }  
 }

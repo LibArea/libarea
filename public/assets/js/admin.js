@@ -25,19 +25,6 @@ $(function(){
             }) 
     });
    
-    // Восстанавливаем комментарий
-    $(document).on('click', '.recover-comment', function() {
-        let comment_id  = $(this).data('id');
-        fetch("/admin/comment/recover", { 
-            method: "POST",
-            body: "id=" + comment_id,
-            headers:{'Content-Type': 'application/x-www-form-urlencoded'} 
-            })
-            .then((response) => {
-                location.reload();                
-            }) 
-    });
-
     // Восстанавливаем ответы
     $(document).on('click', '.recover-answer', function() {
         let answer_id  = $(this).data('id');

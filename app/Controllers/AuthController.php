@@ -363,12 +363,8 @@ class AuthController extends \MainController
             return false;
         }
 
-        if (Base::getStrlen($password) < 8 || Base::getStrlen($password) > 32)
-        {
-            Base::addMsg('Длина пароля должна быть от 8 до 32 знаков', 'error');
-            redirect('/recover/remind/' . $code );
-        }
- 
+        Base::Limits($password, lang('Password'), '8', '32', '/recover/remind/' . $code);
+
         $newpass  = password_hash($password, PASSWORD_BCRYPT);
         $news     = UserModel::editPassword($user_id, $newpass);
          
