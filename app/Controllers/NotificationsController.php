@@ -17,7 +17,7 @@ class NotificationsController extends \MainController
         $user   = UserModel::getUserLogin($uid['login']);
 
         // Если страница закладок не участника
-        if($login != $uid['login']){
+        if ($login != $uid['login']) {
             redirect('/u/' . $user['login'] . '/notifications');
         }
         
@@ -48,12 +48,12 @@ class NotificationsController extends \MainController
         $notif_id   = \Request::getInt('id');
         $info       = NotificationsModel::getNotification($notif_id);
  
-        if($uid['id'] != $info['recipient_uid']) {
+        if ($uid['id'] != $info['recipient_uid']) {
             return false;
         }
 
        // Если личные сообщения 
-       if($info['action_type'] == 1) {
+       if ($info['action_type'] == 1) {
            $info['url'] = 'messages/read/' . $info['connection_type'];
        }
 

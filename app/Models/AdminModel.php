@@ -11,7 +11,7 @@ class AdminModel extends \MainModel
     // Страница участников
     public static function usersAll($page, $sheet)
     {
-        if($sheet == 'all') {
+        if ($sheet == 'all') {
             $string = "";
         } else {
             $string = "WHERE ban_list > 0";
@@ -50,7 +50,7 @@ class AdminModel extends \MainModel
     // Проверка IP на дубликаты
     public static function replayIp($ip)
     {
-        if(!$ip) { return 0; }
+        if (!$ip) { return 0; }
 
         $query = XD::select('*')
                 ->from(['users'])
@@ -66,7 +66,7 @@ class AdminModel extends \MainModel
                 ->where(['banlist_user_id'], '=', $uid)
                 ->and(['banlist_status'], '=', 1)->getSelectOne();
 
-        if(!$result) {
+        if (!$result) {
             return false;    
         }
 
@@ -80,14 +80,14 @@ class AdminModel extends \MainModel
                 
         $num = count($res);
      
-        if($num != 0) { 
+        if ($num != 0) { 
         
             $result = Array();
             foreach ($res as $row) {
                 $status = $row['banlist_status'];
             }  
 
-            if($status == 0) {   
+            if ($status == 0) {   
             	// Забанить повторно
                 // Проставляем в banlist_int_num 2, что пока означет: возможно > 2
                 XD::update(['users_banlist'])->set(['banlist_int_num'], '=', 2, ',', ['banlist_status'], '=', 1)->where(['banlist_user_id'], '=', $uid)->run(); 

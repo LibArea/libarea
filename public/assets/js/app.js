@@ -170,6 +170,18 @@ $(function(){
                 location.reload();                
             }) 
     });
+    // Восстанавливаем ответы
+    $(document).on('click', '.recover-answer', function() {
+        let answer_id  = $(this).data('id');
+        fetch("/admin/answer/recover", { 
+            method: "POST",
+            body: "id=" + answer_id,
+            headers:{'Content-Type': 'application/x-www-form-urlencoded'} 
+            })
+            .then((response) => {
+                location.reload();                
+            }) 
+    });
     // Парсинг title с сайта для > TL1
     $(document).on('click', '#graburl', function(e) {    
         const uri = document.getElementById('link').value;
@@ -205,7 +217,6 @@ $(function(){
                     $link_span.html(old_html).hide();
                     $('#submit_comm').click(function(data) {
                         $('#submit_comm').prop('disabled', true);
-                       // $('#cancel_comment').hide();
                         $('.submit_comm').append('...');
                     });
                 }
@@ -213,6 +224,5 @@ $(function(){
     });
     $(document).on("click", "#cancel_comment", function(){ 
         $('.cm_addentry').remove();
-       // $('.comment_add_link').show();
     });
 }); 

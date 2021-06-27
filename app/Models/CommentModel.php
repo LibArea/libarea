@@ -11,7 +11,7 @@ class CommentModel extends \MainModel
     {
         $offset = ($page-1) * 25; 
         
-        if(!$trust_level) { 
+        if (!$trust_level) { 
                 $tl = 'AND p.post_tl = 0';
         } else {
                 $tl = 'AND p.post_tl <= '.$trust_level.'';
@@ -37,7 +37,7 @@ class CommentModel extends \MainModel
     
    
     // Получаем комментарии к ответу
-    public static function getCommentsAnswer($answer_id, $uid)
+    public static function getComments($answer_id, $uid)
     { 
         $q = XD::select('*')->from(['comments']);
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['comment_user_id'])
@@ -71,15 +71,20 @@ class CommentModel extends \MainModel
     // $my_id   - id автора ответа
     public static function commentAdd($post_id, $answer_id, $comment_id, $ip, $comment, $my_id)
     { 
-
         XD::insertInto(['comments'], '(', ['comment_post_id'], ',', ['comment_answer_id'], ',', ['comment_comment_id'], ',', ['comment_ip'], ',', ['comment_content'], ',', ['comment_user_id'], ')')->values( '(', XD::setList([$post_id, $answer_id, $comment_id, $ip, $comment, $my_id]), ')' )->run();
        
        // id последнего комментария
        $last_id = XD::select()->last_insert_id('()')->getSelectValue();
        
        // Отмечаем комментарий, что за ним есть ответ
-       $otv = 1; // 1, значит за комментом есть ответ
-       XD::update(['comments'])->set(['comment_after'], '=', $otv)->where(['comment_id'], '=', $answer_id)->run();
+       XD::update(['comments'])->set(['comment_after'], '=', $last_id)->where(['comment_id'], '=', $comment_id)->run();
+
+       $answer = XD::select('*')->from(['answers'])->where(['answer_id'], '=', $answer_id)->getSelectOne();
+       
+       if ($answer['answer_after'] == 0) {
+            // Отмечаем ответ, что за ним есть комментарии
+            XD::update(['answers'])->set(['answer_after'], '=', $last_id)->where(['answer_id'], '=', $answer_id)->run();   
+       }
 
        return $last_id; 
     }
@@ -92,7 +97,7 @@ class CommentModel extends \MainModel
                  ->leftJoin(['users'])->on(['id'], '=', ['comment_user_id'])
                  ->leftJoin(['space'])->on(['post_space_id'], '=', ['space_id']);
                  
-                if($user_id){ 
+                if ($user_id) { 
                     $result = $query->where(['comment_del'], '=', 0)->and(['comment_user_id'], '!=', $user_id);
                 } else {
                     $result = $query->where(['comment_del'], '=', 0);

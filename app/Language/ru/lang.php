@@ -270,6 +270,7 @@ return [
     'no-auth-login'         => 'Для ответа вы можете <a href="/login">авторизироваться</a>',
     'You dont have access'  => 'У вас нет доступа',
     'Access restricted'     => 'Доступ ограничен',
+    'Member does not exist' => 'Участника не существует',
     
     'Changes saved'         => 'Изменения сохранены',
     'Invite created'        => 'Инвайт создан',
@@ -306,6 +307,7 @@ return [
     'Empty request'         => 'Пустой поисковый запрос',   
     'Enter'                 => 'Введите', 
     'Enter your password'   => 'Введите пароль',
+    'Enter content'         => 'Введите содержание',
     'Explore'               => 'Обзор',
     'explore-title'         => 'Исследовать, обзор',
     'explore-desc'          => 'Эта сводная страница, обзор новостей на сайте. Исследуйте новые публикации, комментарии, ответы и статистику.',
@@ -356,6 +358,11 @@ return [
     'The code is incorrect'                 => 'Код неверен, или он уже использовался',
     'interesting spaces'                    => 'пространства, которые вам интересны',
     'format-cover-post'                     => 'Ширина, больше 500px. Ориентация горизонтальная',
+    
+    'E-mail or password is not correct'     => 'E-mail или пароль не верен',
+    'Your account is not activated'         => 'Ваш аккаунт не активирован',
+    'Your account is under review'          => 'Ваш аккаунт находится на рассмотрении',
+    'Invalid email address'                 => 'Недопустимый e-mail',
     
     
     'tl-limitation'                         => 'Ваш уровень доверия (TL) не позволяет совершить это действие',

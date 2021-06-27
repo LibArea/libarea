@@ -40,6 +40,7 @@
                         </h1>
                         <div class="post-footer-full small lowercase">
                             <img class="ava" alt="<?= $post['login']; ?>" src="<?= user_avatar_url($post['avatar'], 'small'); ?>">
+                            <span class="indent"></span> 
                             <span class="user"> 
                                 <a href="/u/<?= $post['login']; ?>"><?= $post['login']; ?></a> 
                             </span>

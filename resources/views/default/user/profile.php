@@ -14,24 +14,21 @@
     <div class="wrap">    
 <?php } ?>
         <div class="profile-header">
-            <?php if($uid['trust_level'] > 0) { ?>
-                <?php if($uid['login'] != $user['login']) { ?> 
-                    <?php if($uid['trust_level'] >= Lori\Config::get(Lori\Config::PARAM_TL_ADD_PM)) { ?>
-                        <a class="right pm" href="/u/<?= $user['login']; ?>/mess">
-                            <i class="icon envelope"></i>
-                        </a> 
-                    <?php } ?>
-                <?php } else { ?>
-                    <a class="right pm"  href="/u/<?= $uid['login']; ?>/setting">
-                        <i class="icon pencil"></i>
-                    </a> 
-                <?php } ?>
+            <?php if($uid['login'] != $user['login']) { ?>
+                <?php if($button_pm === true) { ?>            
+                    <a class="right pm" href="/u/<?= $user['login']; ?>/mess">
+                        <i class="icon envelope"></i>
+                    </a>
+                <?php } ?>    
+            <?php } else { ?>
+                <a class="right pm"  href="/u/<?= $uid['login']; ?>/setting">
+                    <i class="icon pencil"></i>
+                </a> 
             <?php } ?>
         </div>
         <div class="profile-ava">
             <img alt="<?= $user['login']; ?>" src="<?= user_avatar_url($user['avatar'], 'max'); ?>">
         </div>
-        
     </div>
     </div> 
  

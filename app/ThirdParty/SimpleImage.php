@@ -503,7 +503,7 @@ class SimpleImage {
   public function autoOrient() {
     $exif = $this->getExif();
 
-    if(!$exif || !isset($exif['Orientation'])){
+    if (!$exif || !isset($exif['Orientation'])) {
       return $this;
     }
 

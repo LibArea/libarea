@@ -34,7 +34,7 @@ class CommentController extends \MainController
             $result[$ind]   = $row;
         }
         
-        if($page > 1) { 
+        if ($page > 1) { 
             $num = ' — ' . lang('Page') . ' ' . $page;
         } else {
             $num = '';
@@ -73,9 +73,9 @@ class CommentController extends \MainController
         Base::Limits($comment, lang('Comments-m'), '6', '1024', $redirect);
 
         // Участник с нулевым уровнем доверия должен быть ограничен в добавлении комментариев
-        if($uid['trust_level'] < Config::get(Config::PARAM_TL_ADD_COMM)) {
+        if ($uid['trust_level'] < Config::get(Config::PARAM_TL_ADD_COMM)) {
             $num_comm =  CommentModel::getCommentSpeed($uid['id']);
-            if(count($num_comm) > 9) {
+            if (count($num_comm) > 9) {
                 Base::addMsg('Вы исчерпали лимит комментариев (15) на сегодня', 'error');
                 redirect('/');
             }
@@ -103,10 +103,10 @@ class CommentController extends \MainController
         PostModel::getNumComments($post_id);
         
         // Оповещение автору ответа, что есть комментарий
-        if($answer_id) {
+        if ($answer_id) {
             // Себе не записываем (перенести в общий, т.к. ничего для себя не пишем в notf)
             $answ = AnswerModel::getAnswerOne($answer_id);
-            if($uid['id'] != $answ['answer_user_id']) {
+            if ($uid['id'] != $answ['answer_user_id']) {
                 $type = 4; // Ответ на пост        
                 NotificationsModel::send($uid['id'], $answ['answer_user_id'], $type, $last_comment_id, $url_comment, 1);
             }
@@ -146,7 +146,7 @@ class CommentController extends \MainController
         $comment = CommentModel::getCommentsOne($comment_id);
         
         // Проверка доступа 
-        Base::accessСheck($comment, 'comment', $uid); 
+        accessСheck($comment, 'comment', $uid); 
         
         // Редактируем комментарий
         CommentModel::CommentEdit($comment_id, $comment_content);
@@ -163,7 +163,7 @@ class CommentController extends \MainController
         $comment = CommentModel::getCommentsOne($comment_id);
 
         // Проверка доступа 
-        Base::accessСheck($comment, 'comment', $uid); 
+        accessСheck($comment, 'comment', $uid); 
 
         $data = [
             'comment_id'           => $comment_id,
@@ -225,16 +225,19 @@ class CommentController extends \MainController
     // Удаление комментария
     public function deletComment()
     {
-        // Доступ только персоналу
-        $uid = Base::getUid();
-        if ($uid['trust_level'] != 5) {
-            return false;
-        }
-        
+        $uid        = Base::getUid();
         $comment_id = \Request::getPostInt('comment_id');
+ 
+        $comment = CommentModel::getCommentsOne($comment_id); 
+        
+        // Проверка доступа 
+        accessСheck($comment, 'comment', $uid);  
+        
+        // Ограничим по времени и если есть ответ
+        accessEditDelete($comment, $uid, 30);
         
         CommentModel::CommentsDel($comment_id);
         
-        return false;
+        return true;
     }
 }

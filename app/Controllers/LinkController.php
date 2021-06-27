@@ -100,7 +100,7 @@ class LinkController extends \MainController
         $puth = HLEB_PUBLIC_DIR. '/uploads/favicons/' . $link["link_id"] . '.png';
         $dirF = HLEB_PUBLIC_DIR. '/uploads/favicons/';
 
-        if (!file_exists($puth)){  
+        if (!file_exists($puth)) {  
             $urls = self::getFavicon($link['link_url_domain']);       
             copy($urls, $puth); 
         } 

@@ -24,7 +24,7 @@ class SearchController extends \MainController
 
                 // Успех и определим, что будем использовать
                 // Далее индивидуально расширим (+ лайки, просмотры и т.д.)
-                if(Config::get(Config::PARAM_SEARCH) == 0) {
+                if (Config::get(Config::PARAM_SEARCH) == 0) {
                     $qa =  SearchModel::getSearch($query);
                     $result = Array();
                     foreach ($qa as $ind => $row) {

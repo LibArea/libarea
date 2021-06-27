@@ -22,13 +22,13 @@ class PostModel extends \MainModel
         // Мы должны сформировать список пространств по умолчанию (в config)
         // и добавить условие показа постов, рейтинг которых достигает > N+ значения
         // в первый час размещения, но не вошедшие в пространства по умолчанию к показу
-        if($uid == 0) {
+        if ($uid == 0) {
            $string = 'WHERE p.post_draft  = 0';
         } else {
-            if($type == 'all') {
+            if ($type == 'all') {
                 $string = "WHERE p.post_draft  = 0"; 
             } else {    
-                if($result) {
+                if ($result) {
                     $string = "WHERE p.post_space_id IN(1, ".implode(',', $result).") AND p.post_draft  = 0";
                 } else {
                    $string = "WHERE p.post_space_id IN(1) AND p.post_draft  = 0"; 
@@ -40,9 +40,9 @@ class PostModel extends \MainModel
    
         // Условия: удаленный пост, запрещенный к показу в ленте
         // И ограниченный по TL
-        if($trust_level != 5) {  
+        if ($trust_level != 5) {  
         
-            if($uid == 0) { 
+            if ($uid == 0) { 
                 $tl = 'AND p.post_tl = 0';
             } else {
                 $tl = 'AND p.post_tl <= '.$trust_level.'';
@@ -52,7 +52,7 @@ class PostModel extends \MainModel
             $display = ''; 
         }
          
-        if($type == 'feed' || $type == 'all') { 
+        if ($type == 'feed' || $type == 'all') { 
             $sort = 'ORDER BY post_top DESC, p.post_date DESC';
         } else {
             $sort = 'ORDER BY p.post_answers_num DESC';
@@ -82,10 +82,10 @@ class PostModel extends \MainModel
         }   
         
         // Учитываем подписку на пространства
-        if($uid == 0) {
+        if ($uid == 0) {
            $string = '';
         } else {
-            if($result) {
+            if ($result) {
                 $string = "WHERE p.post_space_id IN(1, ".implode(',', $result).")";
             } else {
                $string = "WHERE p.post_space_id IN(1)"; 
@@ -93,8 +93,8 @@ class PostModel extends \MainModel
         } 
      
         // Учитываем TL
-        if($trust_level != 5) {   
-            if($uid == 0) { 
+        if ($trust_level != 5) {   
+            if ($uid == 0) { 
                 $tl = 'AND p.post_tl = 0';
             } else {
                 $tl = 'AND p.post_tl <= '.$trust_level.'';
@@ -119,7 +119,7 @@ class PostModel extends \MainModel
     public static function postSlug($slug, $user_id, $trust_level)
     {
         // Ограничение по TL
-        if($user_id == 0) {
+        if ($user_id == 0) {
             $trust_level = 0; 
         } else {
             $trust_level = $trust_level;
@@ -146,7 +146,7 @@ class PostModel extends \MainModel
     // Получаем пост по id
     public static function postId($id) 
     {
-        if(!$id) { $id = 0; }  
+        if (!$id) { $id = 0; }  
         $q = XD::select('*')->from(['posts']);
         $query = $q->leftJoin(['space'])->on(['space_id'], '=', ['post_space_id'])->where(['post_id'], '=', $id);
         
@@ -321,7 +321,7 @@ class PostModel extends \MainModel
     {
         $result = self::getMyPostFavorite($post_id, $uid); 
 
-        if(!$result){
+        if (!$result) {
            XD::insertInto(['favorite'], '(', ['favorite_tid'], ',', ['favorite_uid'], ',', ['favorite_type'], ')')->values( '(', XD::setList([$post_id, $uid, 1]), ')' )->run();
         } else {
            XD::deleteFrom(['favorite'])->where(['favorite_tid'], '=', $post_id)->and(['favorite_uid'], '=', $uid)->run(); 
@@ -338,7 +338,7 @@ class PostModel extends \MainModel
         ->and(['favorite_type'], '=', 1)
         ->getSelect();
         
-        if($result) {
+        if ($result) {
             return 1;
         } else {
             return false;
@@ -356,7 +356,7 @@ class PostModel extends \MainModel
     // Удаляем пост  
     public static function PostDelete($post_id) 
     {
-        if(self::isThePostDeleted($post_id) == 1) {
+        if (self::isThePostDeleted($post_id) == 1) {
 
             XD::update(['posts'])->set(['post_is_delete'], '=', 0)->where(['post_id'], '=', $post_id)->run();
         

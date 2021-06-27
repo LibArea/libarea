@@ -54,8 +54,8 @@ class SpaceModel extends \MainModel
     // Списки постов по пространству
     public static function getPosts($space_id, $user_id, $user_tl, $space_tags_id, $type, $page)
     {
-        if($user_tl != 5) {  
-            if($user_id == 0) { 
+        if ($user_tl != 5) {  
+            if ($user_id == 0) { 
                 $tl = "AND p.post_tl = 0";
             } else {
                 $tl = "AND p.post_tl <= $user_tl";
@@ -65,21 +65,21 @@ class SpaceModel extends \MainModel
             $display = ''; 
         }
          
-        if($type == 'feed') { 
+        if ($type == 'feed') { 
             $sort = "ORDER BY post_top DESC, p.post_date DESC";
         } else {
             $sort = "ORDER BY p.post_answers_num DESC";
         }           
             
         if ($type == 'feed') {
-            if($space_tags_id) {
+            if ($space_tags_id) {
                 $sort = "and post_tag_id = $space_tags_id ORDER BY p.post_top DESC, p.post_date DESC";
             } else { 
                 $sort = "ORDER BY p.post_top DESC, p.post_date DESC";
             }
         } else {
             
-            if($space_tags_id) {
+            if ($space_tags_id) {
                 $sort = "and post_tag_id = $space_tags_id ORDER BY p.post_answers_num DESC";
             } else { 
                 $sort = "ORDER BY p.post_answers_num DESC";
@@ -104,8 +104,8 @@ class SpaceModel extends \MainModel
     public static function getCount($space_id, $user_id, $user_tl, $space_tags_id, $type, $page)
     {
         
-        if($user_tl != 5) {  
-            if($user_id == 0) { 
+        if ($user_tl != 5) {  
+            if ($user_id == 0) { 
                 $tl = "AND p.post_tl = 0";
             } else {
                 $tl = "AND p.post_tl <= $user_tl";
@@ -115,21 +115,21 @@ class SpaceModel extends \MainModel
             $display = ''; 
         }
         
-        if($type == 'feed') { 
+        if ($type == 'feed') { 
             $sort = "ORDER BY post_top DESC, p.post_date DESC";
         } else {
             $sort = "ORDER BY p.post_answers_num DESC";
         }           
             
         if ($type == 'feed') {
-            if($space_tags_id) {
+            if ($space_tags_id) {
                 $sort = "and post_tag_id = $space_tags_id ORDER BY p.post_top DESC, p.post_date DESC";
             } else { 
                 $sort = "ORDER BY p.post_top DESC, p.post_date DESC";
             }
         } else {
             
-            if($space_tags_id) {
+            if ($space_tags_id) {
                 $sort = "and post_tag_id = $space_tags_id ORDER BY p.post_answers_num DESC";
             } else { 
                 $sort = "ORDER BY p.post_answers_num DESC";
@@ -167,7 +167,7 @@ class SpaceModel extends \MainModel
     {
         $result = XD::select('*')->from(['space_signed'])->where(['signed_space_id'], '=', $space_id)->and(['signed_user_id'], '=', $user_id)->getSelect();
 
-        if($result) {
+        if ($result) {
             return 1;
         } else {
             return false;
@@ -179,7 +179,7 @@ class SpaceModel extends \MainModel
     {
         $result  = self::getMySpaceHide($space_id, $user_id);
           
-        if(!$result){
+        if (!$result) {
            
             XD::insertInto(['space_signed'], '(', ['signed_space_id'], ',', ['signed_user_id'], ')')->values( '(', XD::setList([$space_id, $user_id]), ')' )->run();             
             
@@ -275,7 +275,7 @@ class SpaceModel extends \MainModel
     // Удаление, восстановление пространства
     public static  function SpaceDelete($space_id)
     {
-        if(self::isTheSpaceDeleted($space_id) == 1) {
+        if (self::isTheSpaceDeleted($space_id) == 1) {
             XD::update(['space'])->set(['space_is_delete'], '=', 0)->where(['space_id'], '=', $space_id)->run();
         } else {
             XD::update(['space'])->set(['space_is_delete'], '=', 1)->where(['space_id'], '=', $space_id)->run();

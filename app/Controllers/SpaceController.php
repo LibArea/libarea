@@ -19,6 +19,7 @@ class SpaceController extends \MainController
         // Введем ограничение на количество создаваемых пространств
         $sp             = SpaceModel::getSpaceUserId($uid['id']);
         $count_space    = count($sp);
+        $add_space_button = validTl($uid['trust_level'], Config::get(Config::PARAM_TL_ADD_SPACE), $count_space, 3);
 
         $result = Array();
         foreach ($space as $ind => $row) {
@@ -36,7 +37,7 @@ class SpaceController extends \MainController
             'meta_desc'     => lang('all-space-desc') .' '. Config::get(Config::PARAM_HOME_TITLE),
         ];
         
-        return view(PR_VIEW_DIR . '/space/all-space', ['data' => $data, 'uid' => $uid, 'space' => $result, 'count_space' => $count_space]);
+        return view(PR_VIEW_DIR . '/space/all-space', ['data' => $data, 'uid' => $uid, 'space' => $result, 'add_space_button' => $add_space_button]);
     }
 
     // Пространства участника
@@ -44,7 +45,11 @@ class SpaceController extends \MainController
     {
         $uid            = Base::getUid();
         $space          = SpaceModel::getSpaceUserSigned($uid['id']);
-        $count_space    = count($space);
+
+        // Введем ограничение на количество создаваемых пространств
+        $all_space          = SpaceModel::getSpaceUserId($uid['id']);
+        $count_space        = count($all_space);
+        $add_space_button   = validTl($uid['trust_level'], Config::get(Config::PARAM_TL_ADD_SPACE), $count_space, 3);
 
         $result = Array();
         foreach ($space as $ind => $row) {
@@ -62,7 +67,7 @@ class SpaceController extends \MainController
             'meta_desc'     => lang('I read space') .' '. Config::get(Config::PARAM_HOME_TITLE),
         ];
         
-        return view(PR_VIEW_DIR . '/space/all-space', ['data' => $data, 'uid' => $uid, 'space' => $result, 'count_space' => $count_space]);
+        return view(PR_VIEW_DIR . '/space/all-space', ['data' => $data, 'uid' => $uid, 'space' => $result, 'add_space_button' => $add_space_button]);
     }
 
     // Посты по пространству
@@ -101,7 +106,7 @@ class SpaceController extends \MainController
         // Отписан участник от пространства или нет
         $space_signed = SpaceModel::getMySpaceHide($space['space_id'], $uid['id']);
         
-        if($type == 'feed') {
+        if ($type == 'feed') {
             $s_title = lang('space-feed-title');
         } else {
             $s_title = lang('space-top-title');
@@ -110,7 +115,7 @@ class SpaceController extends \MainController
         Request::getHead()->addStyles('/assets/css/space.css');
 
 
-        if($page > 1) { 
+        if ($page > 1) { 
             $num = ' | ' . lang('Page') . ' ' . $page;
         } else {
             $num = '';
@@ -139,7 +144,7 @@ class SpaceController extends \MainController
         $space = SpaceModel::getSpaceInfo($slug);
         
         // Проверка доступа 
-        Base::accessСheck($space, 'space', $uid); 
+        accessСheck($space, 'space', $uid); 
 
         Request::getHead()->addStyles('/assets/css/image-uploader.css'); 
         Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
@@ -162,7 +167,7 @@ class SpaceController extends \MainController
         $space = SpaceModel::getSpaceInfo($slug);
 
         // Проверка доступа 
-        Base::accessСheck($space, 'space', $uid); 
+        accessСheck($space, 'space', $uid); 
 
         Request::getHead()->addStyles('/assets/css/image-uploader.css'); 
         Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
@@ -185,7 +190,7 @@ class SpaceController extends \MainController
         $space = SpaceModel::getSpaceInfo($slug);
 
         // Проверка доступа 
-        Base::accessСheck($space, 'space', $uid); 
+        accessСheck($space, 'space', $uid); 
         
         $tags = SpaceModel::getSpaceTags($space['space_id']);
         
@@ -203,16 +208,15 @@ class SpaceController extends \MainController
     {
         $uid  = Base::getUid();
   
-        // Для пользователя с TL < N   
-        Base::validTl($uid['trust_level'], Config::get(Config::PARAM_TL_ADD_SPACE), '/');
-  
         // Если пользователь уже создал пространство, то ограничим их количество
         $space          = SpaceModel::getSpaceUserId($uid['id']);
         $count_space    = count($space);
         
-        if ($count_space >= 3) {
+        // Для пользователя с TL < N   
+        $valid = validTl($uid['trust_level'], Config::get(Config::PARAM_TL_ADD_SPACE), $count_space, 3);
+        if ($valid === false) {
             redirect('/');
-        }  
+        }
  
         $num_add_space = 3 - $count_space;
  
@@ -230,8 +234,14 @@ class SpaceController extends \MainController
     {
         $uid  = Base::getUid();
         
-        // Для пользователя с TL < N       
-        Base::validTl($uid['trust_level'], Config::get(Config::PARAM_TL_ADD_SPACE), '/');
+        // Проверка на случай хакинга формы
+        $space          = SpaceModel::getSpaceUserId($uid['id']);
+        $count_space    = count($space);
+        
+        $valid = validTl($uid['trust_level'], Config::get(Config::PARAM_TL_ADD_SPACE), $count_space, 3);
+        if ($valid === false) {
+            redirect('/');
+        }
         
         $space_slug     = \Request::getPost('space_slug');
         $space_name     = \Request::getPost('space_name');  
@@ -299,7 +309,7 @@ class SpaceController extends \MainController
         $space = SpaceModel::getSpaceId($space_id);
         
         // Проверка доступа 
-        Base::accessСheck($space, 'space', $uid); 
+        accessСheck($space, 'space', $uid); 
 
         $space_name         = \Request::getPost('space_name');
         $space_description  = \Request::getPost('space_description');
@@ -322,8 +332,8 @@ class SpaceController extends \MainController
         
         $slug = SpaceModel::getSpaceInfo($space_slug);
 
-        if($slug['space_slug'] != $space['space_slug']) {
-            if($slug) {
+        if ($slug['space_slug'] != $space['space_slug']) {
+            if ($slug) {
                 Base::addMsg(lang('url-already-exists'), 'error');
                 redirect('/s/'.$space['space_slug']);
             }
@@ -363,12 +373,12 @@ class SpaceController extends \MainController
         $space = SpaceModel::getSpaceId($space_id);
         
         // Проверка доступа 
-        Base::accessСheck($space, 'space', $uid); 
+        accessСheck($space, 'space', $uid); 
 
         $redirect   = '/space/' . $space['space_slug'] . '/edit/logo';
 
         $name = $_FILES['images']['name'][0];
-        if($name) {
+        if ($name) {
             // 110px и 24px
             $path_img       = HLEB_PUBLIC_DIR. '/uploads/spaces/logos/';
             $path_img_small = HLEB_PUBLIC_DIR. '/uploads/spaces/logos/small/';
@@ -386,7 +396,7 @@ class SpaceController extends \MainController
                 ->toFile($path_img_small . $filename .'.jpeg', 'image/jpeg');
             
             // Удалим, кроме дефолтной
-            if($space['space_img'] != 'space_no.png'){
+            if ($space['space_img'] != 'space_no.png') {
                 chmod($path_img . $space['space_img'], 0777);
                 chmod($path_img_small . $space['space_img'], 0777);
                 unlink($path_img . $space['space_img']);
@@ -400,7 +410,7 @@ class SpaceController extends \MainController
         }
         
         $cover = $_FILES['cover']['name'][0];
-        if($cover) {
+        if ($cover) {
             // 1920px и 350px
             $path_cover_img       = HLEB_PUBLIC_DIR. '/uploads/spaces/cover/';
             $path_cover_img_small = HLEB_PUBLIC_DIR. '/uploads/spaces/cover/small/';
@@ -420,7 +430,7 @@ class SpaceController extends \MainController
                 $cover_art = $filename_cover . '.webp';
             
             // Удалим, кроме дефолтной
-            if($space['space_cover_art'] != 'space_cover_no.jpeg' && $space['space_cover_art'] != $cover_art) {
+            if ($space['space_cover_art'] != 'space_cover_no.jpeg' && $space['space_cover_art'] != $cover_art) {
                 chmod($path_cover_img . $space['space_cover_art'], 0777);
                 chmod($path_cover_img_small . $space['space_cover_art'], 0777);
                 unlink($path_cover_img . $space['space_cover_art']);
@@ -455,7 +465,7 @@ class SpaceController extends \MainController
         $space = SpaceModel::getSpaceInfo($slug);
         
         // Проверка доступа 
-        Base::accessСheck($space, 'space', $uid); 
+        accessСheck($space, 'space', $uid); 
       
         $redirect   = '/space/' . $space['space_slug'] . '/edit/logo'; 
         
@@ -464,7 +474,7 @@ class SpaceController extends \MainController
         $path_cover_img_small = HLEB_PUBLIC_DIR. '/uploads/spaces/cover/small/';
 
         // Удалим, кроме дефолтной
-        if($space['space_cover_art'] != 'space_cover_no.jpeg') {
+        if ($space['space_cover_art'] != 'space_cover_no.jpeg') {
             unlink($path_cover_img . $space['space_cover_art']);
             unlink($path_cover_img_small . $space['space_cover_art']);
         }  
@@ -484,7 +494,7 @@ class SpaceController extends \MainController
         $space = SpaceModel::getSpaceInfo($slug);
 
         // Проверка доступа 
-        Base::accessСheck($space, 'space', $uid); 
+        accessСheck($space, 'space', $uid); 
       
         $data = [
             'h1'            => lang('Add tag'),
@@ -505,7 +515,7 @@ class SpaceController extends \MainController
         $space = SpaceModel::getSpaceInfo($slug);
 
         // Проверка доступа 
-        Base::accessСheck($space, 'space', $uid); 
+        accessСheck($space, 'space', $uid); 
 
         $tag = SpaceModel::getTagInfo($space_tags_id);
         Base::PageError404($tag);
@@ -531,7 +541,7 @@ class SpaceController extends \MainController
         $space = SpaceModel::getSpaceId($space_id);
         
         // Проверка доступа 
-        Base::accessСheck($space, 'space', $uid); 
+        accessСheck($space, 'space', $uid); 
 
         $redirect = '/s/' . $space['space_slug'] . '/' . $tag_id . '/edit';
         Base::Limits($st_title, lang('titles'), '4', '20', $redirect);
@@ -552,7 +562,7 @@ class SpaceController extends \MainController
 
         // Запретим действия если участник создал пространство
         $sp_info    = SpaceModel::getSpaceId($space_id);
-        if($sp_info['space_user_id'] == $uid['id']) {
+        if ($sp_info['space_user_id'] == $uid['id']) {
             return false;
         }
 

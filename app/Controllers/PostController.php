@@ -52,13 +52,13 @@ class PostController extends \MainController
             $result_comm[$ind]          = $row;
         }
 
-        if($page > 1) { 
+        if ($page > 1) { 
             $num = ' | ' . lang('Page') . ' ' . $page;
         } else {
             $num = '';
         }
 
-        if($sheet == 'feed') {
+        if ($sheet == 'feed') {
             $meta_title = Config::get(Config::PARAM_HOME_TITLE) . $num;
             $meta_desc  = Config::get(Config::PARAM_META_DESC) . $num;
             $canonical  = Config::get(Config::PARAM_URL);
@@ -93,7 +93,7 @@ class PostController extends \MainController
 
         // Проверим (id, slug)
         Base::PageError404($post_new);
-        if($slug != $post_new['post_slug']) {
+        if ($slug != $post_new['post_slug']) {
             redirect('/post/' . $post_new['post_id'] . '/' . $post_new['post_slug']);
         }
 
@@ -101,7 +101,7 @@ class PostController extends \MainController
         Base::PageError404($post);
 
         // Редирект для слияния
-        if($post['post_merged_id'] > 0) {
+        if ($post['post_merged_id'] > 0) {
             redirect('/post/' . $post['post_merged_id']);
         }
 
@@ -120,14 +120,14 @@ class PostController extends \MainController
      
         // Выводить или нет? Что дает просмотр даты изменения?
         // Учитывать ли изменение в сортировки и в оповещение в будущем...
-        if($post['post_date'] != $post['edit_date']) {
+        if ($post['post_date'] != $post['edit_date']) {
             $post['edit_date'] = $post['edit_date'];
         } else {
             $post['edit_date'] = null;
         }
         
         // Покажем черновик только автору
-        if($post['post_draft'] == 1 && $post['post_user_id'] != $uid['id']) {
+        if ($post['post_draft'] == 1 && $post['post_user_id'] != $uid['id']) {
             redirect('/');
         }
      
@@ -148,7 +148,7 @@ class PostController extends \MainController
         // Получим ЛО (временно)
         // Возможно нам стоит просто поднять ответ на первое место?
         // Изменив порядок сортировки при выбора LO, что позволит удрать это
-        if($post['post_lo'] > 0) {
+        if ($post['post_lo'] > 0) {
             $lo = AnswerModel::getAnswerLo($post['post_id']);
             $lo['answer_content'] = $lo['answer_content'];
         } else {
@@ -158,17 +158,17 @@ class PostController extends \MainController
         $answers = Array();
         foreach ($post_answers as $ind => $row) {
             
-            if(strtotime($row['answer_modified']) < strtotime($row['answer_date'])) {
+            if (strtotime($row['answer_modified']) < strtotime($row['answer_date'])) {
                 $row['edit'] = 1;
             }
 
-            $row['comm']            = CommentModel::getCommentsAnswer($row['answer_id'], $uid['id']);
+            $row['comm']            = CommentModel::getComments($row['answer_id'], $uid['id']);
             $row['answer_content']  = Content::text($row['answer_content'], 'text');
             $row['answer_date']     = lang_date($row['answer_date']);
             $answers[$ind]          = $row;
         }
 
-        if($post['post_content_img']) {
+        if ($post['post_content_img']) {
             $content_img  = Config::get(Config::PARAM_URL) . '/uploads/posts/' . $post['post_content_img'];
         } else {
             $content_img  = null;
@@ -179,7 +179,7 @@ class PostController extends \MainController
         $meta_desc = $desc . ' — ' . $post['space_name'];
         $meta_title = strip_tags($post['post_title']) . ' — ' . strip_tags($post['space_name']) .' | '. Config::get(Config::PARAM_NAME);
 
-        if($uid['id'] > 0) {
+        if ($uid['id'] > 0) {
             Request::getResources()->addBottomStyles('/assets/md/editor.css');  
             Request::getResources()->addBottomScript('/assets/md/Markdown.Converter.js'); 
             Request::getResources()->addBottomScript('/assets/md/Markdown.Sanitizer.js');
@@ -190,14 +190,14 @@ class PostController extends \MainController
         Request::getResources()->addBottomScript('/assets/js/shares.js');
         Request::getResources()->addBottomScript('/assets/js/jquery.magnific-popup.min.js');
         
-        if($post['post_is_delete'] == 1) {
+        if ($post['post_is_delete'] == 1) {
             \Request::getHead()->addMeta('robots', 'noindex');
         }
         
         // + для Q&A другая разметка (в планах)
         $sheet = 'article';
         
-        if($post['post_related']) {
+        if ($post['post_related']) {
             $post_related = PostModel::postRelated($post['post_related']);
         }
         $post_related = empty($post_related) ? '' : $post_related;
@@ -271,14 +271,14 @@ class PostController extends \MainController
         Request::getResources()->addBottomScript('/assets/md/editor.js');
         Request::getResources()->addBottomStyles('/assets/css/select2.css'); 
 
-        if($uid['trust_level'] > 0) {
+        if ($uid['trust_level'] > 0) {
             Request::getResources()->addBottomScript('/assets/js/select2.min.js'); 
         } 
 
         return view(PR_VIEW_DIR . '/post/post-add', ['data' => $data, 'uid' => $uid, 'space' => $space, 'space_id' => $space_id]);
     }
     
-    // Добавление поста
+    // Добавим
     public function create()
     {
         // Получаем title и содержание
@@ -315,7 +315,7 @@ class PostController extends \MainController
         }
 
         // Если стоит ограничение: публиковать может только автор
-        if($space['space_permit_users'] == 1) {
+        if ($space['space_permit_users'] == 1) {
             // Кроме персонала и владельца
             if ($uid['trust_level'] != 5 && $space['space_user_id'] != $uid['id']) {
                Base::addMsg(lang('You dont have access'), 'error');
@@ -326,7 +326,7 @@ class PostController extends \MainController
         Base::Limits($post_title, lang('Title'), '6', '250', $redirect);
         Base::Limits($post_content, lang('The post'), '6', '25000', $redirect);
         
-        if($post_url) { 
+        if ($post_url) { 
             // Поскольку это для поста, то получим превью 
             $og_img             = self::grabOgImg($post_url);
             $parse              = parse_url($post_url);
@@ -336,7 +336,7 @@ class PostController extends \MainController
             // Мы должны добавить домен, который появился в системе
             // Далее мы можем менять ему статус, запрещать и т.д.
             $link = LinkModel::getLinkOne($post_url_domain);
-            if(!$link) {
+            if (!$link) {
                 // Запишем минимальные данный для дальнешей работы
                 $data = [
                     'link_url'          => $link_url,
@@ -354,7 +354,7 @@ class PostController extends \MainController
 
         // images
         $name     = $_FILES['images']['name'][0];
-        if($name) {
+        if ($name) {
             // Проверка ширину
             $width_h  = getimagesize($_FILES['images']['tmp_name'][0]);
             if ($width_h['0'] < 500) {
@@ -369,7 +369,7 @@ class PostController extends \MainController
             $file = $_FILES['images']['tmp_name'][0];
             $filename = 'c-' . time();
            
-            if(!is_dir($path . $year)) { @mkdir($path . $year); }             
+            if (!is_dir($path . $year)) { @mkdir($path . $year); }             
             
             // https://github.com/claviska/SimpleImage
             $image
@@ -390,9 +390,9 @@ class PostController extends \MainController
         $tag_id             = empty($tag_id) ? 0 : $tag_id;
 
         // Участник с нулевым уровнем доверия должен быть ограничен в добавлении ответов
-        if($uid['trust_level'] < Config::get(Config::PARAM_TL_ADD_POST)) {
+        if ($uid['trust_level'] < Config::get(Config::PARAM_TL_ADD_POST)) {
             $num_post =  PostModel::getPostSpeed($uid['id']);
-            if(count($num_post) > 2) {
+            if (count($num_post) > 2) {
                 Base::addMsg(lang('limit-post-day'), 'error');
                 redirect('/');
             }
@@ -445,8 +445,8 @@ class PostController extends \MainController
 		}
         
         // Отправим в Discord
-        if(Config::get(Config::PARAM_DISCORD) == 1) {
-            if($post_tl == 0 && $post_draft == 0) {
+        if (Config::get(Config::PARAM_DISCORD) == 1) {
+            if ($post_tl == 0 && $post_draft == 0) {
                 Base::AddWebhook($post_content, $post_title, $url);
             }
         }
@@ -467,26 +467,26 @@ class PostController extends \MainController
     public static function grabOgImg($post_url) 
     {
         $result = URLScraper::get($post_url); 
-        if($result['image']) {
+        if ($result['image']) {
             $image = $result['image'];
         } else {
             $image = $result['tags_og']['image'];
         }
         
-        if($image) {
+        if ($image) {
             
             $ext = pathinfo(parse_url($image, PHP_URL_PATH), PATHINFO_EXTENSION);
-            if(in_array($ext, array ('jpg', 'jpeg', 'png'))) {
+            if (in_array($ext, array ('jpg', 'jpeg', 'png'))) {
                 
                 $path = HLEB_PUBLIC_DIR . '/uploads/posts/thumbnails/';
                 $year = date('Y') . '/';
                 $filename = 'p-' . time() . '.' . $ext;
                 $file = 'p-' . time();
                 
-                if(!is_dir($path . $year)) { @mkdir($path . $year); }
+                if (!is_dir($path . $year)) { @mkdir($path . $year); }
                 $local = $path . $year . $filename;
  
-                if (!file_exists($local)){  
+                if (!file_exists($local)) {  
                     copy($image, $local); 
                 } 
  
@@ -497,7 +497,7 @@ class PostController extends \MainController
                 ->resize(165, null) 
                 ->toFile($path . $year . $file .'.webp', 'image/webp');
  
-                if(file_exists($local)) {
+                if (file_exists($local)) {
                     unlink($local);
                     return $year . $file .'.webp';
                 }
@@ -518,7 +518,7 @@ class PostController extends \MainController
         $post   = PostModel::postId($post_id); 
          
         // Проверка доступа 
-        Base::accessСheck($post, 'post', $uid);        
+        accessСheck($post, 'post', $uid);        
         
         $space = SpaceModel::getSpaceSelect($uid['id'], $uid['trust_level']);
         $tags  = SpaceModel::getSpaceTags($post['post_space_id']);
@@ -535,7 +535,7 @@ class PostController extends \MainController
         Request::getResources()->addBottomScript('/assets/md/Markdown.Editor.js');
         Request::getResources()->addBottomScript('/assets/md/editor.js');
 
-        if($uid['trust_level'] > 0) {
+        if ($uid['trust_level'] > 0) {
             Request::getResources()->addBottomScript('/assets/js/select2.min.js'); 
         } 
 
@@ -556,7 +556,7 @@ class PostController extends \MainController
         $search =  \Request::getPost('searchTerm');
         $search = preg_replace('/[^a-zA-ZА-Яа-я0-9 ]/ui', '', $search);
         
-        if($sheet == 'posts') {
+        if ($sheet == 'posts') {
             return PostModel::getSearchPosts($search);
         } 
         
@@ -591,7 +591,7 @@ class PostController extends \MainController
         $redirect = '/post/edit/' . $post_id; 
          
         // Проверка доступа 
-        Base::accessСheck($post, 'post', $uid); 
+        accessСheck($post, 'post', $uid); 
         
         // Получаем информацию по пространству
         $space = SpaceModel::getSpaceId($post_space_id);
@@ -601,7 +601,7 @@ class PostController extends \MainController
         }
 
         // Если стоит ограничение: публиковать может только автор
-        if($space['space_permit_users'] == 1) {
+        if ($space['space_permit_users'] == 1) {
             // Кроме персонала и владельца
             if ($uid['trust_level'] != 5 && $space['space_user_id'] != $uid['id']) {
                Base::addMsg(lang('You dont have access'), 'error');
@@ -610,8 +610,8 @@ class PostController extends \MainController
         }
         
         // Если есть смена post_user_id и это TL5
-        if($post['post_user_id'] != $post_user_new) {
-            if($uid['trust_level'] != 5) {
+        if ($post['post_user_id'] != $post_user_new) {
+            if ($uid['trust_level'] != 5) {
                 $post_user_id = $post['post_user_id'];
             } else {    
                 $post_user_id = $post_user_new;
@@ -637,7 +637,7 @@ class PostController extends \MainController
 
         // $draft = 1 // это черновик
         // $post_draft = 0 // изменили
-        if($draft == 1 && $post_draft == 0) {
+        if ($draft == 1 && $post_draft == 0) {
             $post_date = date("Y-m-d H:i:s");
         } else {
             $post_date = $post['post_date'];
@@ -645,7 +645,7 @@ class PostController extends \MainController
         
         // images
         $name = $_FILES['images']['name'][0];
-        if($name) { 
+        if ($name) { 
             // Проверка ширину
             $width_h  = getimagesize($_FILES['images']['tmp_name'][0]);
             if ($width_h['0'] < 500) {
@@ -660,7 +660,7 @@ class PostController extends \MainController
             $file = $_FILES['images']['tmp_name'][0];
             $filename = 'c-' . time();
            
-            if(!is_dir($path . $year)) { @mkdir($path . $year); }             
+            if (!is_dir($path . $year)) { @mkdir($path . $year); }             
             
             // https://github.com/claviska/SimpleImage
             $image
@@ -672,7 +672,7 @@ class PostController extends \MainController
             $post_img = $year . $filename . '.webp';
             
             // Удалим если есть старая
-            if($post['post_content_img'] != $post_img){
+            if ($post['post_content_img'] != $post_img) {
                 chmod($path . $post['post_content_img'], 0777);
                 unlink($path . $post['post_content_img']);
             } 
@@ -718,7 +718,7 @@ class PostController extends \MainController
         $post = PostModel::postId($post_id); 
          
         // Проверка доступа 
-        Base::accessСheck($post, 'post', $uid); 
+        accessСheck($post, 'post', $uid); 
         
         $path_img = HLEB_PUBLIC_DIR. '/uploads/posts/' . $post['post_content_img'];
 
@@ -738,7 +738,7 @@ class PostController extends \MainController
         $post = PostModel::postId($post_id); 
         
         // Проверка доступа 
-        Base::accessСheck($post, 'post', $uid); 
+        accessСheck($post, 'post', $uid); 
         
         // Запретим добавлять черновик в профиль
         if ($post['post_draft'] == 1) {
@@ -757,7 +757,7 @@ class PostController extends \MainController
         $post_id = \Request::getPostInt('post_id');
         $post    = PostModel::postId($post_id); 
         
-        if(!$post){
+        if (!$post) {
             redirect('/');
         }
         
@@ -788,7 +788,7 @@ class PostController extends \MainController
         $post_id = \Request::getPostInt('post_id');
         $post    = PostModel::postId($post_id); 
         
-        if(!$post){
+        if (!$post) {
             return false;
         }
         

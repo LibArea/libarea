@@ -23,14 +23,10 @@ document.querySelectorAll(".add-comment")
             }
         );
         
-        document.querySelectorAll('#cm_addentry_noauth'+answer_id)
-            .forEach(el => el.addEventListener("click",  function(e){ 
-           // console.log(e);
-            if(e.path) {
-                e.path[3].classList.remove("active");
-            }
-        }));
-         
+    $('#answer_addentry'+answer_id).on('click', '#cancel_comment', function(){
+       comment.classList.remove("active");
+    });
+    
 })); 
 
 document.querySelectorAll(".add-comment-re")
@@ -42,6 +38,7 @@ document.querySelectorAll(".add-comment-re")
     
     let comment = document.querySelector('#comment_addentry'+comment_id);
         comment.classList.add("active");
+         
      
     fetch("/comments/addform", { 
         method: "POST",
@@ -57,16 +54,12 @@ document.querySelectorAll(".add-comment-re")
                 comment.innerHTML = text;
             }
         );
-        
-        document.querySelectorAll('#comment_addentry_noauth'+answer_id)
-            .forEach(el => el.addEventListener("click",  function(e){ 
-           // console.log(e);
-            if(e.path) {
-                e.path[3].classList.remove("active");
-            }
-        }));
-         
-})); 
+
+    $('#comment_addentry'+comment_id).on('click', '#cancel_comment', function(){
+       comment.classList.remove("active");
+    });
+
+}));
 
 // We will show a preview of the post on the central page
 document.querySelectorAll(".showpost")

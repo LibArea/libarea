@@ -18,7 +18,7 @@ class UserModel extends \MainModel
             ->where(['is_deleted'], '!=', 1)
             ->and(['ban_list'], '!=', 1);
                 
-            if($user_id) {    
+            if ($user_id) {    
                 $query = $q->orderBy(['id'], '=', $user_id)->desc(',', ['trust_level'])->desc();
             } else {    
                 $query = $q->orderBy(['trust_level'])->desc();
@@ -77,7 +77,7 @@ class UserModel extends \MainModel
         $count = count(XD::select('*')->from(['users'])->getSelect());
       
         // Для "режима запуска" первые 50 участников получают trust_level = 1 
-        if($count < 50 && Config::get(Config::PARAM_MODE) == 1) {
+        if ($count < 50 && Config::get(Config::PARAM_MODE) == 1) {
             $trust_level = 1; // Режим "запуска сообщества"
         } else {
             $trust_level = 0; // 0 min, 5 TL max (5 = персонал)
@@ -577,8 +577,8 @@ class UserModel extends \MainModel
     }
     
     // Активируем e-mail
-    public static function EmailActivate($user_id){
-       
+    public static function EmailActivate($user_id)
+    {
         XD::update(['users_email_activate'])->set(['email_activate_flag'], '=', 1)
                 ->where(['user_id'], '=', $user_id)->run();
         

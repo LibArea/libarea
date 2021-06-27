@@ -45,6 +45,7 @@
                         <div class="boxline">
                             <label class="form-label" for="about"><?= lang('About me'); ?></label>
                             <textarea type="text" rows="4" name="about" id="about"><?= $user['about']; ?></textarea>
+                            <div class="box_h">0 - 255 <?= lang('characters'); ?></div>
                         </div>
                        
                         <div id="box" class="boxline">

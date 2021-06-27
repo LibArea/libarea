@@ -16,14 +16,12 @@
                                     <span><?= lang('Signed'); ?></span>
                                 </a>
                             </li>
-                            <?php if($uid['trust_level'] >= Lori\Config::get(Lori\Config::PARAM_TL_ADD_SPACE)) { ?>
-                                <?php if($count_space <= 2) { ?>
-                                    <li class="right">
-                                        <a class="add-space" href="/space/add">
-                                            <span class="add">+</span> <?= lang('To create'); ?>
-                                        </a>
-                                    </li> 
-                                <?php } ?> 
+                            <?php if($add_space_button === true) { ?>
+                                <li class="right">
+                                    <a class="add-space" href="/space/add">
+                                        <span class="add">+</span> <?= lang('To create'); ?>
+                                    </a>
+                                </li> 
                             <?php } ?> 
                         <?php } ?>    
                     <?php } else { ?>
@@ -36,14 +34,12 @@
                             <li class="active">
                                 <span><?= lang('Signed'); ?></span>
                             </li>
-                            <?php if($uid['trust_level'] >= Lori\Config::get(Lori\Config::PARAM_TL_ADD_SPACE)) { ?>
-                                <?php if($count_space <= 2) { ?>
-                                    <li class="right">
-                                        <a class="add-space" href="/space/add">
-                                            <span class="add">+</span> <?= lang('To create'); ?>
-                                        </a>
-                                    </li> 
-                                <?php } ?> 
+                            <?php if($add_space_button === true) { ?>
+                                <li class="right">
+                                    <a class="add-space" href="/space/add">
+                                        <span class="add">+</span> <?= lang('To create'); ?>
+                                    </a>
+                                </li> 
                             <?php } ?> 
                         <?php } ?>
                     <?php } ?>

@@ -24,7 +24,7 @@ class VotesModel extends \MainModel
         $q = XD::select('*')->from(['votes_'.$type])->where(['votes_'.$type.'_item_id'], '=', $content_id);
         $info = $q->and(['votes_'.$type.'_user_id'], '=', $author_id)->getSelect();
           
-        if($info) {
+        if ($info) {
             return false;
         } 
         

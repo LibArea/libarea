@@ -14,7 +14,7 @@ class AuthController extends \MainController
     public function registerForm()
     {
         // Если включена инвайт система
-        if(Config::get(Config::PARAM_INVITE)) {
+        if (Config::get(Config::PARAM_INVITE)) {
             redirect('/invite');
         }
         
@@ -37,8 +37,7 @@ class AuthController extends \MainController
  
         // Проверяем код
         $invate = UserModel::InvitationAvailable($code);
-        if(!$invate) 
-        {
+        if (!$invate) {
             Base::addMsg(lang('The code is incorrect'), 'error');
             redirect('/');   
         }
@@ -66,7 +65,7 @@ class AuthController extends \MainController
         
         $url = $inv_code ? '/register/invite/'.$inv_code : '/register';
 
-        if(!filter_var($email, FILTER_VALIDATE_EMAIL))
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL))
         {
             Base::addMsg(lang('Invalid') . ' email', 'error');
             redirect($url);
@@ -78,7 +77,7 @@ class AuthController extends \MainController
             redirect($url);
         }
        
-        if(!AuthModel::repeatIpBanRegistration($reg_ip))
+        if (!AuthModel::repeatIpBanRegistration($reg_ip))
         {
             Base::addMsg(lang('multiple-accounts'), 'error');
             redirect($url);
@@ -111,7 +110,7 @@ class AuthController extends \MainController
         
         // Запретим 
         $disabled = ['admin', 'support', 'lori', 'loriup', 'dev', 'docs', 'meta', 'email', 'login'];
-        if(in_array($login, $disabled)) {
+        if (in_array($login, $disabled)) {
             Base::addMsg(lang('nickname-replay'), 'error');
             redirect($url);
         }
@@ -128,7 +127,7 @@ class AuthController extends \MainController
             redirect($url);
         }
 
-        if(!$inv_code) {
+        if (!$inv_code) {
             if (Config::get(Config::PARAM_CAPTCHA)) {
                 if (!Base::checkCaptchaCode()) {
                     Base::addMsg(lang('Code error'), 'error');
@@ -144,7 +143,7 @@ class AuthController extends \MainController
         // id удастника
         $active_uid = UserModel::createUser($login, $email, $password, $reg_ip, $invitation_id);
 
-        if($inv_code) {
+        if ($inv_code) {
             // Если регистрация по инвайту, то записываем данные
             UserModel::sendInvitationEmail($inv_code, $inv_uid, $reg_ip, $active_uid);
         } else {
@@ -187,32 +186,32 @@ class AuthController extends \MainController
 
         $url = '/login';
 
-        if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            Base::addMsg('Недопустимый email', 'error');
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            Base::addMsg(lang('Invalid email address'), 'error');
             redirect($url);
         }
 
         $uInfo = UserModel::userInfo($email);
 
         if (empty($uInfo['id'])) {
-            Base::addMsg('Пользователь не существует', 'error');
+            Base::addMsg(lang('Member does not exist'), 'error');
             redirect($url);
         }
  
         // Находится ли в бан- листе
         if (UserModel::isBan($uInfo['id'])) {
-            Base::addMsg('Ваш аккаунт находится на рассмотрении', 'error');
+            Base::addMsg(lang('Your account is under review'), 'error');
             redirect($url);
         }  
         
         // Активирован ли E-mail
         if (!UserModel::isActivated($uInfo['id'])) {
-            Base::addMsg('Ваш аккаунт не активирован', 'error');
+            Base::addMsg(lang('Your account is not activated'), 'error');
             redirect($url);
         }
         
         if (!password_verify($password, $uInfo['password'])) {
-            Base::addMsg('E-mail или пароль не верен', 'error');
+            Base::addMsg(lang('E-mail or password is not correct'), 'error');
             redirect($url);
         } else {
             
@@ -242,7 +241,7 @@ class AuthController extends \MainController
 
     public function logout() 
     { 
-        if(!isset($_SESSION)) { session_start(); } 
+        if (!isset($_SESSION)) { session_start(); } 
         session_destroy();
         // Возможно, что нужно очистить все или некоторые cookies
         setcookie("remember","",time()-3600,"/");
@@ -272,7 +271,7 @@ class AuthController extends \MainController
             }
         }
         
-        if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
            Base::addMsg('Недопустимый email', 'error');
            redirect('/recover');
         }
@@ -311,8 +310,7 @@ class AuthController extends \MainController
  
         // Проверяем код
         $user_id = UserModel::getPasswordActivate($code);
-        if(!$user_id) 
-        {
+        if (!$user_id) {
             Base::addMsg('Код неверен, или он уже использовался. Пройдите процедуру восстановления заново.', 'error');
             redirect('/recover');   
         }
@@ -340,8 +338,7 @@ class AuthController extends \MainController
  
         // Проверяем код
         $avtivate_email = UserModel::getEmailActivate($code);
-        if(!$avtivate_email) 
-        {
+        if (!$avtivate_email) {
             Base::addMsg('Код неверен, или он уже использовался.', 'error');
             redirect('/');   
         }
@@ -359,7 +356,7 @@ class AuthController extends \MainController
         $code       = \Request::getPost('code');
         $user_id    = \Request::getPost('user_id');
         
-        if(!$user_id) {
+        if (!$user_id) {
             return false;
         }
 
@@ -368,7 +365,7 @@ class AuthController extends \MainController
         $newpass  = password_hash($password, PASSWORD_BCRYPT);
         $news     = UserModel::editPassword($user_id, $newpass);
          
-        if(!$news) {
+        if (!$news) {
             return false;
         }
         

@@ -25,19 +25,6 @@ $(function(){
             }) 
     });
    
-    // Восстанавливаем ответы
-    $(document).on('click', '.recover-answer', function() {
-        let answer_id  = $(this).data('id');
-        fetch("/admin/answer/recover", { 
-            method: "POST",
-            body: "id=" + answer_id,
-            headers:{'Content-Type': 'application/x-www-form-urlencoded'} 
-            })
-            .then((response) => {
-                location.reload();                
-            }) 
-    });
-
     // Удалим стоп-слово
     $(document).on('click', '.delete-word', function() {
         let word_id  = $(this).data('id');

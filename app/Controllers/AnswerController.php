@@ -35,7 +35,7 @@ class AnswerController extends \MainController
             $result[$ind]   = $row;
         }
         
-        if($page > 1) { 
+        if ($page > 1) { 
             $num = ' — ' . lang('Page') . ' ' . $page;
         } else {
             $num = '';
@@ -75,9 +75,9 @@ class AnswerController extends \MainController
         
         // Ограничим частоту добавления
         // Добавить условие TL
-        if($uid['trust_level'] < 2) {
+        if ($uid['trust_level'] < 2) {
             $num_answ =  AnswerModel::getAnswerSpeed($uid['id']);
-            if(count($num_answ) > 10) {
+            if (count($num_answ) > 10) {
                 Base::addMsg('Вы исчерпали лимит ответов (10) на сегодня', 'error');
                 redirect('/');
             }
@@ -133,7 +133,7 @@ class AnswerController extends \MainController
         $answer = AnswerModel::getAnswerOne($answer_id);
 
         // Проверка доступа 
-        Base::accessСheck($answer, 'answer', $uid); 
+        accessСheck($answer, 'answer', $uid); 
 
         $post = PostModel::postId($post_id);
         Base::PageError404($post);
@@ -178,7 +178,7 @@ class AnswerController extends \MainController
         $answer = AnswerModel::getAnswerOne($answer_id);
         
         // Проверка доступа 
-        Base::accessСheck($answer, 'answer', $uid); 
+        accessСheck($answer, 'answer', $uid); 
         
         Base::Limits($answer_content, lang('Bodies'), '6', '5000', '/' . $url);
 
@@ -237,12 +237,11 @@ class AnswerController extends \MainController
     // Помещаем комментарий в закладки
     public function addAnswerFavorite()
     {
-        
         $uid        = Base::getUid();
         $answer_id  = \Request::getPostInt('answer_id');
         $answer     = AnswerModel::getAnswerOne($answer_id); 
         
-        if(!$answer) {
+        if (!$answer) {
             redirect('/');
         }
         

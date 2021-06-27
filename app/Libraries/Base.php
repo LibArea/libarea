@@ -20,8 +20,8 @@ class Base
 
             $usr = UserModel::getUserId($user['user_id']);
  
-            if($usr['ban_list'] == 1) {
-                if(!isset($_SESSION)) { session_start(); } 
+            if ($usr['ban_list'] == 1) {
+                if (!isset($_SESSION)) { session_start(); } 
                 session_destroy();
                 UserModel::deleteTokenByUserId($usr['id']);
                 redirect('/info/restriction');
@@ -43,7 +43,7 @@ class Base
             $uid['trust_level'] = null;
             
             // Если сайт полностью приватен
-            if(Config::get(Config::PARAM_PRIVATE) == 1) { 
+            if (Config::get(Config::PARAM_PRIVATE) == 1) { 
                include HLEB_GLOBAL_DIRECTORY . '/app/Optional/login.php';
                hl_preliminary_exit();
             }
@@ -57,7 +57,7 @@ class Base
     // Возвращает массив сообщений
     public static function getMsg()
     {
-        if (isset($_SESSION['msg'])){
+        if (isset($_SESSION['msg'])) {
             $msg = $_SESSION['msg'];
         } else {
             $msg = false;
@@ -112,7 +112,7 @@ class Base
     // Ошибка 404
     public static function PageError404($variable)
     {
-        if(!$variable) {
+        if (!$variable) {
             include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
             hl_preliminary_exit();
         }
@@ -154,7 +154,7 @@ class Base
     {
        $api_url = 'https://www.google.com/recaptcha/api/siteverify';
        
-       if (!function_exists('curl_init')){
+       if (!function_exists('curl_init')) {
          
             $data = @file_get_contents($api_url.'?'.http_build_query($params));
 
@@ -162,7 +162,7 @@ class Base
 
             $curl = curl_init();
 
-            if(strpos($api_url, 'https') !== false){
+            if (strpos($api_url, 'https') !== false) {
                 curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
                 curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
             }
@@ -179,7 +179,7 @@ class Base
 
         }
 
-        if(!$data){ return false; }
+        if (!$data) { return false; }
         $data = json_decode($data, true);
 
         return !empty($data['success']);
@@ -190,7 +190,7 @@ class Base
     {
         $response = Request::getPost('g-recaptcha-response');
 
-        if(!$response){ return false; }
+        if (!$response) { return false; }
         
         $private_key = Config::get(Config::PARAM_PRICATE_KEY); 
         
@@ -208,10 +208,10 @@ class Base
         $text = preg_replace(array('/(<p>)/','(<\/p>)'), array('','\n'), $text);
 
         // Проверяем имя бота и YOUR_WEBHOOK_URL
-        if(!$webhookurl = Config::get(Config::PARAM_WEBHOOK_URL)) {
+        if (!$webhookurl = Config::get(Config::PARAM_WEBHOOK_URL)) {
            return false;
         }
-        if(!$usernamebot = Config::get(Config::PARAM_NAME_BOT)) {
+        if (!$usernamebot = Config::get(Config::PARAM_NAME_BOT)) {
             return false;
         } 
         
@@ -282,33 +282,5 @@ class Base
         // echo $response;
         curl_close( $ch );
     }
-
-    // Права для TL
-    public static function validTl($trust_level, $action, $redirect) {
-        
-        if ($trust_level < $action)
-        {
-            self::addMsg(lang('tl-limitation'), 'error');
-            redirect($redirect);
-        }
-        
-        return true;
-    }
-    
-    // Проверка доступа
-    public static function accessСheck($content, $type, $uid)
-    {
-        
-        if(!$content){
-            redirect('/');
-        }
- 
-        // Редактировать может только автор и админ
-        if ($content[$type . '_user_id'] != $uid['id'] && $uid['trust_level'] != 5) {
-            redirect('/');
-        }
-        
-        return true;
-    } 
 
 }

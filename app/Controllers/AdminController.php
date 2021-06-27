@@ -184,7 +184,7 @@ class AdminController extends \MainController
     {
         $level++;
         foreach ($invitations as $invitation) {
-            if ($invitation['uid'] == $uid){
+            if ($invitation['uid'] == $uid) {
                 $invitation['level'] = $level-1;
                 $tree[] = $invitation;
                 $tree = $this->invatesTree($invitation['active_uid'], $level, $invitations, $tree);
@@ -338,7 +338,7 @@ class AdminController extends \MainController
         
         $user_id    = \Request::getInt('id');
         
-        if($user_id > 0) {
+        if ($user_id > 0) {
             $user   = UserModel::getUserId($user_id);
         } else {
             $user   = null;
@@ -455,7 +455,7 @@ class AdminController extends \MainController
         $user_id    = \Request::getInt('id');
         
         $redirect = '/admin';
-        if(!$user = UserModel::getUserId($user_id)) {
+        if (!$user = UserModel::getUserId($user_id)) {
            redirect($redirect); 
         }
         

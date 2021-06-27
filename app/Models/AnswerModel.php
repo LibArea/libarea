@@ -11,7 +11,7 @@ class AnswerModel extends \MainModel
     {
         $offset = ($page-1) * 25; 
         
-        if(!$trust_level) { 
+        if (!$trust_level) { 
                 $tl = 'AND p.post_tl = 0';
         } else {
                 $tl = 'AND p.post_tl <= '.$trust_level.'';
@@ -56,7 +56,7 @@ class AnswerModel extends \MainModel
         ->where(['answer_post_id'], '=', $post_id);
         
         // 0 - дискуссия, 1 - Q&A
-        if($type == 0) {
+        if ($type == 0) {
             return $query->getSelect();
         } else {
             return $query->orderBy(['answer_votes'])->desc()->getSelect();
@@ -106,18 +106,18 @@ class AnswerModel extends \MainModel
                  ->leftJoin(['space'])->on(['post_space_id'], '=', ['space_id'])->where(['answer_del'], '=', 0);
                  
                 // Свои ответы показывать не будем 
-                if($uid['id']){ 
+                if ($uid['id']) { 
                     $qa = $query->and(['answer_user_id'], '!=', $uid['id']);
                 } else {
                     $qa = $query;
                 } 
         
                 // Просматривать ответы из пространств ограниченных в ленте может только персонал
-                if($uid['trust_level'] == 5){ 
+                if ($uid['trust_level'] == 5) { 
                     $result = $qa;
                 } else {
                     
-                    if($uid['id'] == 0) {
+                    if ($uid['id'] == 0) {
                         $result = $qa->and(['space_feed'], '=', 0)->and(['post_tl'], '=', 0);
                     } else {
                        $result = $qa->and(['space_feed'], '=', 0)->and(['post_tl'], '<=', $uid['trust_level']); 
@@ -168,7 +168,7 @@ class AnswerModel extends \MainModel
     {
         $result = self::getMyAnswerFavorite($post_id, $uid); 
 
-        if(!$result){
+        if (!$result) {
            XD::insertInto(['favorite'], '(', ['favorite_tid'], ',', ['favorite_uid'], ',', ['favorite_type'], ')')->values( '(', XD::setList([$post_id, $uid, 2]), ')' )->run();
         } else {
            XD::deleteFrom(['favorite'])->where(['favorite_tid'], '=', $post_id)->and(['favorite_uid'], '=', $uid)->run(); 
@@ -185,7 +185,7 @@ class AnswerModel extends \MainModel
         ->and(['favorite_type'], '=', 2)
         ->getSelect();
         
-        if($result) {
+        if ($result) {
             return 1;
         } else {
             return false;

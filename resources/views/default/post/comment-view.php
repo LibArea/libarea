@@ -104,12 +104,28 @@
                     </li>
                 </ol>
                                 
-            <?php } else { ?>    
-                 <ol class="dell answer-telo"> 
-                    <li class="answers_subtree" id="answer_<?= $answ['answer_id']; ?>">
-                        <span class="answ-deletes">~ <?= lang('answer-deleted'); ?></span>
-                    </li>
-                </ol>
+            <?php } else { ?>
+            
+                <?php if($uid['trust_level'] == 5) { ?>                    
+                     <ol class="delleted small comm-telo"> 
+                        <li class="comments_subtree" id="comment_<?= $answ['answer_id']; ?>">
+                            <span class="comm-deletes nick">
+                                <?= $answ['answer_content']; ?>
+                                <?= lang('Answer'); ?> —  <?= $answ['login']; ?> 
+                                <a data-id="<?= $answ['answer_id']; ?>" class="recover-answer right">
+                                    <span><?= lang('Recover'); ?></span>
+                                </a>
+                            </span>
+                        </li>
+                    </ol>
+               <?php } else { ?>  
+                   <ol class="dell answer-telo"> 
+                        <li class="answers_subtree" id="answer_<?= $answ['answer_id']; ?>">
+                            <span class="answ-deletes">~ <?= lang('Comment deleted'); ?></span>
+                        </li>
+                    </ol>
+               <?php } ?> 
+               
             <?php } ?>    
         </div>
         
@@ -190,21 +206,19 @@
                                         <?php } ?>
                                         <?php } ?>
                                         
-                                        <?php if($uid['id'] == $comment['comment_user_id'] || $uid['trust_level'] == 5) { ?>
+                                        <?php if (accessEditDelete($comment, $uid, 30) === true) { ?>
                                             <span id="comment_edit" class="cm_add_link">
                                                 <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm bar">
                                                     <?= lang('Edit'); ?>
                                                 </a>
                                             </span>
-                                        <?php } ?>
-
-                                        <?php if($uid['trust_level'] == 5) { ?>
-                                            <span id="comment_dell" class="cm_add_link">
-                                                <a data-comment_id="<?= $comment['comment_id']; ?>" class="del-comment bar">
-                                                    <?= lang('Remove'); ?>
-                                                </a>
-                                            </span>
-                                        <?php } ?>
+                                             
+                                                <span id="comment_dell" class="cm_add_link">
+                                                    <a data-comment_id="<?= $comment['comment_id']; ?>" class="del-comment bar">
+                                                        <?= lang('Remove'); ?>
+                                                    </a>
+                                                </span>
+                                         <?php } ?>
                                     </div>
                                 </div>                                
                                 <div id="comment_addentry<?= $comment['comment_id']; ?>" class="reply"></div> 

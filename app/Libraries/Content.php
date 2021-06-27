@@ -12,7 +12,7 @@ class Content
     public static function text($content, $type)
     {
         // text /  line
-        if($type) {
+        if ($type) {
             $text   = self::Markdown($content, $type);
             $text   = self::parseUser($text);
         } else {
@@ -30,7 +30,7 @@ class Content
         $Parsedown = new MyParsedown();
         $Parsedown->setSafeMode(true); //безопасность
  
-        if($type == 'line'){
+        if ($type == 'line') {
             return  $Parsedown->line($content); 
         }
         
@@ -101,7 +101,7 @@ class Content
     public static function estimationUrl($content) 
     {
         $regex = '/(?<!!!\[\]\(|"|\'|\=|\)|>)(https?:\/\/[-a-zA-Z0-9@:;%_\+.~#?\&\/\/=!]+)(?!"|\'|\)|>)/i'; 
-        if($info = preg_match($regex, $content, $matches)) {
+        if ($info = preg_match($regex, $content, $matches)) {
             return  $matches[1];
         } 
         return true;

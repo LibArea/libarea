@@ -42,7 +42,7 @@ class UserController extends \MainController
 
         $post = PostModel::postId($user['my_post']);
         
-        if(!$user['about']) { 
+        if (!$user['about']) { 
             $user['about'] = lang('Riddle') . '...';
         } 
 
@@ -52,7 +52,7 @@ class UserController extends \MainController
 
         \Request::getHead()->addStyles('/assets/css/users.css');
 
-        if($user['ban_list'] == 1) {
+        if ($user['ban_list'] == 1) {
             \Request::getHead()->addMeta('robots', 'noindex');
         }
         
@@ -66,7 +66,11 @@ class UserController extends \MainController
             $_SESSION['usernumbers'][$user['id']] = $user['id'];
         }
 
-        $uid  = Base::getUid();
+        $uid        = Base::getUid();
+        
+        // Ограничение на показ кнопки отправить Pm (ЛС, личные сообщения)
+        $button_pm  = accessPm($uid, $user['id'], Config::get(Config::PARAM_TL_ADD_PM));
+        
         $data =[
             'h1'                => $user['login'],
             'created_at'        => lang_date($user['created_at']),
@@ -83,7 +87,7 @@ class UserController extends \MainController
             'meta_desc'         => $meta_desc,
         ];
 
-        return view(PR_VIEW_DIR . '/user/profile', ['data' => $data, 'uid' => $uid, 'user' => $user, 'onepost' => $post]);
+        return view(PR_VIEW_DIR . '/user/profile', ['data' => $data, 'uid' => $uid, 'user' => $user, 'onepost' => $post, 'button_pm' => $button_pm]);
     }  
 
     // Форма настройки профиля
@@ -95,7 +99,7 @@ class UserController extends \MainController
         $user   = UserModel::getUserLogin($uid['login']);
    
         // Ошибочный Slug в Url
-        if($login != $user['login']) {
+        if ($login != $user['login']) {
             redirect('/u/' . $user['login'] . '/setting');
         }
         
@@ -122,7 +126,7 @@ class UserController extends \MainController
         $telegram       = \Request::getPost('telegram');
         $vk             = \Request::getPost('vk');
         
-        if(!$color) {
+        if (!$color) {
            $color  = '#339900'; 
         }
 
@@ -133,8 +137,9 @@ class UserController extends \MainController
         $uid        = Base::getUid();
         $redirect   = '/u/' . $uid['login'] . '/setting';
         Base::Limits($name, lang('Name'), '3', '11', $redirect);
+        Base::Limits($about, lang('About me'), '0', '255', $redirect);
 
-        if(!filter_var($public_email, FILTER_VALIDATE_EMAIL)) {
+        if (!filter_var($public_email, FILTER_VALIDATE_EMAIL)) {
             $public_email = '';
         }
         if (!preg_match('/^[a-zA-Z0-9]+$/u', $skype)) {
@@ -172,7 +177,7 @@ class UserController extends \MainController
         $login  = \Request::get('login');
 
         // Ошибочный Slug в Url
-        if($login != $uid['login']) {
+        if ($login != $uid['login']) {
             redirect('/u/' . $uid['login'] . '/setting/avatar');
         }
 
@@ -198,7 +203,7 @@ class UserController extends \MainController
         $login  = \Request::get('login');
 
         // Ошибочный Slug в Url
-        if($login != $uid['login']) {
+        if ($login != $uid['login']) {
             redirect('/u/' . $uid['login'] . '/setting/security');
         }
         
@@ -223,7 +228,7 @@ class UserController extends \MainController
         // Аватар
         $name = $_FILES['images']['name'][0];
         
-        if($name) {
+        if ($name) {
             // 160px и 24px
             $path_img       = HLEB_PUBLIC_DIR. '/uploads/users/avatars/';
             $path_img_small = HLEB_PUBLIC_DIR. '/uploads/users/avatars/small/';
@@ -244,7 +249,7 @@ class UserController extends \MainController
             $avatar     = UserModel::getAvatar($uid['login']);
      
             // Удалим старую аватарку, кроме дефолтной
-            if($avatar['avatar'] != 'noavatar.png' && $avatar['avatar'] != $new_ava) {
+            if ($avatar['avatar'] != 'noavatar.png' && $avatar['avatar'] != $new_ava) {
                 chmod($path_img . $avatar['avatar'], 0777);
                 chmod($path_img_small . $avatar['avatar'], 0777);
                 unlink($path_img . $avatar['avatar']);
@@ -258,7 +263,7 @@ class UserController extends \MainController
         
         // Обложка
         $covername  = $_FILES['cover']['name'][0];
-        if($covername) {
+        if ($covername) {
                  
             // 1920px / 350px
             $path_cover_img       = HLEB_PUBLIC_DIR. '/uploads/users/cover/';
@@ -277,7 +282,7 @@ class UserController extends \MainController
             $cover      = UserModel::getCover($uid['login']);
      
             // Удалим старую аватарку, кроме дефолтной
-            if($cover['cover_art'] != 'cover_art.jpeg' && $cover['cover_art'] != $new_cover) {
+            if ($cover['cover_art'] != 'cover_art.jpeg' && $cover['cover_art'] != $new_cover) {
                 chmod($path_cover_img . $cover['cover_art'], 0777);
                 unlink($path_cover_img . $cover['cover_art']);
             }            
@@ -339,7 +344,7 @@ class UserController extends \MainController
         $user   = UserModel::getUserLogin($uid['login']);
 
         // Ошибочный Slug в Url
-        if($login != $uid['login']){
+        if ($login != $uid['login']) {
             redirect('/u/' . $user['login'] . '/favorite');
         }
   
@@ -371,7 +376,7 @@ class UserController extends \MainController
         $redirect   = '/u/' . $uid['login'] . '/setting/avatar';
         
         // Ошибочный Slug в Url
-        if($login != $uid['login'] && $uid['trust_level'] != 5) {
+        if ($login != $uid['login'] && $uid['trust_level'] != 5) {
             redirect($redirect);
         }
 
@@ -385,7 +390,7 @@ class UserController extends \MainController
         $path_img = HLEB_PUBLIC_DIR. '/uploads/users/cover/';
 
         // Удалим, кроме дефолтной
-        if($user['cover_art'] != 'cover_art.jpeg') {
+        if ($user['cover_art'] != 'cover_art.jpeg') {
             unlink($path_img . $user['cover_art']);
         }  
         
@@ -393,7 +398,7 @@ class UserController extends \MainController
         Base::addMsg(lang('Cover removed'), 'success');
         
         // Если удаляет администрация
-        if($uid['trust_level'] == 5) {
+        if ($uid['trust_level'] == 5) {
             redirect('/admin/user/'.$user['id'].'/edit');
         }
         
@@ -409,7 +414,7 @@ class UserController extends \MainController
         $user   = UserModel::getUserLogin($uid['login']);
 
         // Ошибочный Slug в Url
-        if($login != $uid['login']){
+        if ($login != $uid['login']) {
             redirect('/u/' . $user['login'] . '/drafts');
         }
   
@@ -451,7 +456,7 @@ class UserController extends \MainController
         $user   = UserModel::getUserId($uid['id']);
         
         // Запретим смотреть инвайты чужого профиля
-        if($login != $user['login']) {
+        if ($login != $user['login']) {
             redirect('/u/' . $user['login'] . '/invitation');
         }
 
@@ -479,13 +484,13 @@ class UserController extends \MainController
         
         $redirect = '/u/' . $uid['login'] . '/invitation';
         
-        if(!filter_var($invitation_email, FILTER_VALIDATE_EMAIL)) {
+        if (!filter_var($invitation_email, FILTER_VALIDATE_EMAIL)) {
            Base::addMsg(lang('Invalid') . ' email', 'error');
            redirect($redirect);
         }
         
         $uInfo = UserModel::userInfo($invitation_email);
-        if(!empty($uInfo['email'])) {
+        if (!empty($uInfo['email'])) {
             
             if ($uInfo['email']) {
                 Base::addMsg(lang('user-already'), 'error');
@@ -495,7 +500,7 @@ class UserController extends \MainController
         
         $inv_user = UserModel::InvitationOne($uid['id']);
  
-        if($inv_user['invitation_email'] == $invitation_email) {
+        if ($inv_user['invitation_email'] == $invitation_email) {
             Base::addMsg(lang('invate-to-replay'), 'error');
             redirect($redirect);
         }

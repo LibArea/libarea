@@ -1,8 +1,8 @@
 <?php
 
 // Localization
-function lang($text){ 
-    if(isset(LANG[$text])){ 
+function lang($text) { 
+    if (isset(LANG[$text])) { 
         return LANG[$text];
     }
     return $text;
@@ -11,7 +11,7 @@ function lang($text){
 // User's Avatar
 function user_avatar_url($file, $size) 
 {
-    if($size == 'small') {  
+    if ($size == 'small') {  
         return '/uploads/users/avatars/small/' . $file;
     } 
     return '/uploads/users/avatars/' . $file;
@@ -26,7 +26,7 @@ function user_cover_url($file)
 // Space Logo
 function spase_logo_url($file, $size='small') 
 {
-    if($size == 'small') {
+    if ($size == 'small') {
         return '/uploads/spaces/logos/small/' . $file;
     } 
     return  '/uploads/spaces/logos/' . $file;
@@ -36,7 +36,7 @@ function spase_logo_url($file, $size='small')
 // Favicon 
 function favicon_url($link_id) 
 {
-    if(file_exists(HLEB_PUBLIC_DIR. '/uploads/favicons/' . $link_id . '.png')) {
+    if (file_exists(HLEB_PUBLIC_DIR. '/uploads/favicons/' . $link_id . '.png')) {
         return '/uploads/favicons/' . $link_id . '.png';
     }
     return '/uploads/favicons/no-link.png';
@@ -64,14 +64,14 @@ function lang_date($string)
     $a = preg_split('/[^\d]/',$string); 
     
     $today = date('Ymd');  //20210421
-    if(($a[0].$a[1].$a[2])==$today) {
+    if (($a[0].$a[1].$a[2])==$today) {
         //Если сегодня
         return(lang('Today').' '.$a[3].':'.$a[4]);
 
     } else {
             $b = explode('-',date("Y-m-d"));
             $tom = date('Ymd',mktime(0,0,0,$b[1],$b[2]-1,$b[0]));
-            if(($a[0].$a[1].$a[2])==$tom) {
+            if (($a[0].$a[1].$a[2])==$tom) {
             //Если вчера
             return(lang('Yesterday').' '.$a[3].':'.$a[4]);
         } else {
@@ -83,7 +83,7 @@ function lang_date($string)
 }
 
 // Declensions
-function word_form($num, $form_for_1, $form_for_2, $form_for_5){
+function word_form($num, $form_for_1, $form_for_2, $form_for_5) {
     $num = abs($num) % 100; 
     $num_x = $num % 10; 
     if ($num > 10 && $num < 20)   // отрезок [11;19]
@@ -93,4 +93,92 @@ function word_form($num, $form_for_1, $form_for_2, $form_for_5){
     if ($num_x == 1)              // оканчивается на 1
         return $form_for_1;
     return $form_for_5;
+}
+
+//******************** Доступ ********************//
+
+// Права для TL
+// $trust_leve - уровень доверие участника
+// $allowed_tl - с какого TL разрешено
+// $count_content - сколько уже создал
+// $count_total - сколько разрешено
+function validTl($trust_level, $allowed_tl, $count_content, $count_total) {
+    
+    if ($trust_level < $allowed_tl) {
+        return false;
+    }
+    
+    if ($count_content >= $count_total) {
+        return false;
+    }  
+
+    return true;
+}
+    
+// Отправки личных сообщений (ЛС)
+// $uid - кто отправляет
+// $user_id - кому
+// $add_tl -  с какого уровня доверия
+function accessPm($uid, $user_id, $add_tl)
+{
+    // Запретим отправку себе
+    if ($uid['id'] == $user_id) {
+        return false;
+    }
+
+    // Если уровень доверия меньше установленного
+    if ($add_tl > $uid['trust_level']) {
+        return false;
+    }
+    
+    return true;
+}    
+    
+    
+// Проверка доступа
+function accessСheck($content, $type, $uid)
+{
+    if (!$content) {
+        return false;
+    }
+
+    // Редактировать может только автор и админ
+    if ($content[$type . '_user_id'] != $uid['id'] && $uid['trust_level'] != 5) {
+        return false;
+    }
+    
+    return true;
+} 
+
+// Access to edit and delete comments
+// Perhaps it is worth making a universal method and combining it with the upper one. 
+// It will be clear after the introduction of similar actions to the answers. 
+function accessEditDelete($comment, $uid, $stop_time)
+{
+    
+    if (!$comment) {
+        return false;
+    }
+    
+    // Редактировать может только автор и админ
+    if ($comment['comment_user_id'] != $uid['id'] && $uid['trust_level'] != 5) {
+        return false;
+    }
+    
+    // Запретим удаление если есть ответ
+    // И если прошло 30 минут
+    if ($uid['trust_level'] != 5) {
+        if ($comment['comment_after'] > 0) {
+            return false;
+        }
+
+        $diff = strtotime(date("Y-m-d H:i:s")) - strtotime($comment['comment_date']);
+        $time = floor($diff / 60);
+       
+        if ($time > $stop_time) {
+            return false;
+        }
+    }
+
+    return true;
 }
