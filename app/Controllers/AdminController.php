@@ -59,9 +59,15 @@ class AdminController extends \MainController
         foreach ($user_all as $ind => $row) {
             $row['replayIp']    = AdminModel::replayIp($row['reg_ip']);
             $row['isBan']       = AdminModel::isBan($row['id']);
-            $results[$ind]       = $row;
+            $results[$ind]      = $row;
         } 
         
+        $flow_ip     = AdminModel::replayFlowIp($user_ip);
+        $flows = Array();
+        foreach ($flow_ip as $ind => $row) {
+            $flows[$ind]      = $row;
+        } 
+
         $data = [
             'h1'            => lang('Search'),
             'meta_title'    => lang('Search'),
@@ -71,7 +77,7 @@ class AdminController extends \MainController
         Request::getResources()->addBottomStyles('/assets/css/admin.css');
         Request::getResources()->addBottomScript('/assets/js/admin.js'); 
 
-        return view(PR_VIEW_DIR . '/admin/logip', ['data' => $data, 'uid' => $uid, 'alluser' => $results]); 
+        return view(PR_VIEW_DIR . '/admin/logip', ['data' => $data, 'uid' => $uid, 'alluser' => $results, 'flows' => $flows]); 
     }
     
     // Бан участнику

@@ -35,7 +35,7 @@ class AdminModel extends \MainModel
     // По логам
     public static function userLogId($user_id)
     {
-        return XD::select('*')->from(['users_logs'])->where(['logs_user_id'], '=', $user_id)->getSelectOne();
+        return XD::select('*')->from(['users_logs'])->where(['logs_user_id'], '=', $user_id)->orderBy(['logs_user_id'])->desc()->getSelectOne();
     }
     
     // Получение информации по ip для сопоставления
@@ -57,6 +57,18 @@ class AdminModel extends \MainModel
                 ->where(['reg_ip'], '=', $ip);
 
         return count($query->getSelect());
+    }
+    
+    // IP по всем логам
+    public static function replayFlowIp($ip)
+    {
+        if (!$ip) { return 0; }
+
+        $query = XD::select('*')->from(['flow_log'])
+                ->leftJoin(['users'])->on(['id'], '=', ['flow_user_id'])
+                ->where(['flow_ip'], '=', $ip);
+
+        return $query->getSelect();
     }
     
     // Находит ли пользователь в бан- листе и рабанен ли был он

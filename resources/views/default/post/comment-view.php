@@ -75,9 +75,11 @@
                                 <?php } ?>
                                 
                                 <?php if($uid['id'] == $answ['answer_user_id'] || $uid['trust_level'] == 5) { ?>
-                                    <span id="answer_edit" class="answer_add_link">
-                                         <a class="editansw bar" href="/post/<?= $post['post_id'] ?>/answ/<?= $answ['answer_id']; ?>"><?= lang('Edit'); ?></a>
-                                    </span>
+                                    <?php if($answ['answer_after'] == 0 || $uid['trust_level'] == 5) { ?>
+                                        <span id="answer_edit" class="answer_add_link">
+                                             <a class="editansw bar" href="/post/<?= $post['post_id'] ?>/answ/<?= $answ['answer_id']; ?>"><?= lang('Edit'); ?></a>
+                                        </span>
+                                    <?php } ?>
                                 <?php } ?>
                     
                                 <?php if ($uid['id']) { ?>
@@ -213,11 +215,11 @@
                                                 </a>
                                             </span>
                                              
-                                                <span id="comment_dell" class="cm_add_link">
-                                                    <a data-comment_id="<?= $comment['comment_id']; ?>" class="del-comment bar">
-                                                        <?= lang('Remove'); ?>
-                                                    </a>
-                                                </span>
+                                            <span id="comment_dell" class="cm_add_link">
+                                                <a data-comment_id="<?= $comment['comment_id']; ?>" class="del-comment bar">
+                                                    <?= lang('Remove'); ?>
+                                                </a>
+                                            </span>
                                          <?php } ?>
                                     </div>
                                 </div>                                

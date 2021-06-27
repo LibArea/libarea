@@ -171,13 +171,15 @@ function accessEditDelete($comment, $uid, $stop_time)
         if ($comment['comment_after'] > 0) {
             return false;
         }
-
-        $diff = strtotime(date("Y-m-d H:i:s")) - strtotime($comment['comment_date']);
-        $time = floor($diff / 60);
-       
-        if ($time > $stop_time) {
-            return false;
-        }
+        
+        if ($stop_time !=0) { 
+            $diff = strtotime(date("Y-m-d H:i:s")) - strtotime($comment['comment_date']);
+            $time = floor($diff / 60);
+           
+            if ($time > $stop_time) {
+                return false;
+            }
+        }   
     }
 
     return true;

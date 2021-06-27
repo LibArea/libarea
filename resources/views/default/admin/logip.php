@@ -67,7 +67,38 @@
                           
                           <br><br>
                         </div> 
-                    <?php } ?>
+                    <?php } ?> 
+                    <br>
+                    Flog
+                    <br>
+                    <?php if($flows) {  ?>
+                        <?php foreach ($flows as $flow) {  ?>
+                            <div class="t-tr">
+                                <span class="t-td w-30 center">
+                                    <?= $flow['id']; ?>
+                                </span>
+                                <span class="t-td">
+                                    <img class="ava" src="<?= user_avatar_url($flow['avatar'], 'small'); ?>">
+                                    <a href="/u/<?= $flow['login']; ?>"><?= $flow['login']; ?></a>
+                                    <?php if($flow['name']) { ?>
+                                        (<?= $flow['name']; ?>) 
+                                    <?php } ?>
+                                    <sup class="red">TL:<?= $flow['trust_level']; ?></sup>
+                                    <?php if($flow['invitation_id'] !=0) { ?><sup>+ inv. id<?= $flow['invitation_id']; ?></sup><?php } ?> <br>
+                                </span>              
+                                <span class="t-td">
+                                     <span class="date"><?= $flow['email']; ?></span>
+                                </span>
+                                <span class="t-td">
+                                     <?= $flow['created_at']; ?> 
+                                </span>
+                 
+                              <br><br>
+                            </div> 
+                        <?php } ?>
+                    <?php } else { ?> 
+                        ---                    
+                    <?php } ?>                    
                 </div>
             </div>
         </div>

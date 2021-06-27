@@ -349,7 +349,6 @@ class AuthController extends \MainController
         redirect('/login'); 
     }
     
-    
     public function remindNew()
     {
         $password   = \Request::getPost('password');
@@ -380,11 +379,4 @@ class AuthController extends \MainController
     {
         return mb_substr_count($str, $needle, 'utf-8');
     }
-
-    // Разобьем строки
-    private function getSubstr($str, $start, $len)
-    {
-        return mb_substr($str, $start, $len, 'utf-8');
-    }
-
 }
