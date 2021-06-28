@@ -161,7 +161,7 @@ $(function(){
     // Восстанавливаем комментарий
     $(document).on('click', '.recover-comment', function() {
         let comment_id  = $(this).data('id');
-        fetch("/admin/comment/recover", { 
+        fetch("/comment/recover", { 
             method: "POST",
             body: "id=" + comment_id,
             headers:{'Content-Type': 'application/x-www-form-urlencoded'} 
@@ -173,7 +173,7 @@ $(function(){
     // Восстанавливаем ответы
     $(document).on('click', '.recover-answer', function() {
         let answer_id  = $(this).data('id');
-        fetch("/admin/answer/recover", { 
+        fetch("/answer/recover", { 
             method: "POST",
             body: "id=" + answer_id,
             headers:{'Content-Type': 'application/x-www-form-urlencoded'} 

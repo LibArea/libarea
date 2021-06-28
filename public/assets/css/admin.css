@@ -6,6 +6,34 @@ header {
   padding: 58px 0 10px 50px;
 }
 
+.space-logo,
+.ava-max {
+  vertical-align: middle;
+  width: 64px;
+}
+
+.ava-small {
+  vertical-align: middle;
+  width: 16px;
+  border-radius: 50%;
+  margin: 0 0 0 15px;
+}
+
+.domain-box {
+  margin: 0 0 25px 0;
+}
+
+.domain-telo {
+  margin: 0 0 5px 15px;
+  color: #666;
+}
+
+.domain-footer {
+  color: #666;
+  font-size: 14px;
+}
+
+/* Таблицы */
 .t-table {
   display: table;
   width: 100%;
@@ -40,31 +68,4 @@ header {
 
 .w-30 {
   width: 30px;
-}
-
-.space-logo,
-.ava-max {
-  vertical-align: middle;
-  width: 64px;
-}
-
-.ava-small {
-  vertical-align: middle;
-  width: 16px;
-  border-radius: 50%;
-  margin: 0 0 0 15px;
-}
-
-.domain-box {
-  margin: 0 0 25px 0;
-}
-
-.domain-telo {
-  margin: 0 0 5px 15px;
-  color: #666;
-}
-
-.domain-footer {
-  color: #666;
-  font-size: 14px;
 }

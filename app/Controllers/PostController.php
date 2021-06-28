@@ -518,8 +518,10 @@ class PostController extends \MainController
         $post   = PostModel::postId($post_id); 
          
         // Проверка доступа 
-        accessСheck($post, 'post', $uid);        
-        
+        if (!accessСheck($post, 'post', $uid, 0, 0)) {
+            redirect('/');
+        }  
+
         $space = SpaceModel::getSpaceSelect($uid['id'], $uid['trust_level']);
         $tags  = SpaceModel::getSpaceTags($post['post_space_id']);
         $user  = UserModel::getUserId($post['post_user_id']);
@@ -591,7 +593,9 @@ class PostController extends \MainController
         $redirect = '/post/edit/' . $post_id; 
          
         // Проверка доступа 
-        accessСheck($post, 'post', $uid); 
+        if (!accessСheck($post, 'post', $uid, 0, 0)) {
+            redirect('/');
+        }  
         
         // Получаем информацию по пространству
         $space = SpaceModel::getSpaceId($post_space_id);
@@ -718,7 +722,9 @@ class PostController extends \MainController
         $post = PostModel::postId($post_id); 
          
         // Проверка доступа 
-        accessСheck($post, 'post', $uid); 
+        if (!accessСheck($post, 'post', $uid, 0, 0)) {
+            redirect('/');
+        }  
         
         $path_img = HLEB_PUBLIC_DIR. '/uploads/posts/' . $post['post_content_img'];
 
@@ -738,7 +744,9 @@ class PostController extends \MainController
         $post = PostModel::postId($post_id); 
         
         // Проверка доступа 
-        accessСheck($post, 'post', $uid); 
+        if (!accessСheck($post, 'post', $uid, 0, 0)) {
+            redirect('/');
+        }  
         
         // Запретим добавлять черновик в профиль
         if ($post['post_draft'] == 1) {

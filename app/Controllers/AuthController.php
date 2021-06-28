@@ -266,26 +266,26 @@ class AuthController extends \MainController
         
         if (Config::get(Config::PARAM_CAPTCHA)) {
             if (!Base::checkCaptchaCode()) {
-                Base::addMsg('Введеный код не верен', 'error');
+                Base::addMsg(lang('Code error'), 'error');
                 redirect('/recover');
             }
         }
         
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-           Base::addMsg('Недопустимый email', 'error');
+           Base::addMsg(lang('Invalid') . ' email', 'error');
            redirect('/recover');
         }
         
         $uInfo = UserModel::userInfo($email);
 
         if (empty($uInfo['email'])) {
-            Base::addMsg('Такого e-mail нет на сайте', 'error');
+            Base::addMsg(lang('There is no such e-mail on the site'), 'error');
             redirect('/recover');
         }
         
         // Проверка на заблокированный аккаунт
         if ($uInfo['ban_list'] == 1) {
-            Base::addMsg('Вы не можете восстановить пароль', 'error');
+            Base::addMsg(lang('Your account is under review'), 'error');
             redirect('/recover');
         }
         
@@ -298,7 +298,7 @@ class AuthController extends \MainController
 
         Base::mailText($email, Config::get(Config::PARAM_NAME).' - changing your password', $mail_message);
 
-        Base::addMsg('Новый пароль отправлен на E-mail', 'success');
+        Base::addMsg(lang('New password has been sent to e-mail'), 'success');
         redirect('/login');      
     }
     
@@ -311,7 +311,7 @@ class AuthController extends \MainController
         // Проверяем код
         $user_id = UserModel::getPasswordActivate($code);
         if (!$user_id) {
-            Base::addMsg('Код неверен, или он уже использовался. Пройдите процедуру восстановления заново.', 'error');
+            Base::addMsg(lang('code-incorrect'), 'error');
             redirect('/recover');   
         }
 
@@ -339,13 +339,13 @@ class AuthController extends \MainController
         // Проверяем код
         $avtivate_email = UserModel::getEmailActivate($code);
         if (!$avtivate_email) {
-            Base::addMsg('Код неверен, или он уже использовался.', 'error');
+            Base::addMsg(lang('code-used'), 'error');
             redirect('/');   
         }
         
         UserModel::EmailActivate($avtivate_email['user_id']);
         
-        Base::addMsg('Теперь вы можете использовать свой e-mail и пароль.', 'success');
+        Base::addMsg(lang('yes-email-pass'), 'success');
         redirect('/login'); 
     }
     

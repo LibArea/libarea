@@ -137,7 +137,7 @@ class AnswerModel extends \MainModel
         return true;
     }
     
-    // Получаем ответ по id 
+    // Информацию по id ответа
     public static function getAnswerOne($id)
     {
        return XD::select('*')->from(['answers'])->where(['answer_id'], '=', $id)->getSelectOne();

@@ -208,7 +208,7 @@
                                         <?php } ?>
                                         <?php } ?>
                                         
-                                        <?php if (accessEditDelete($comment, $uid, 30) === true) { ?>
+                                        <?php if (accessСheck($comment, 'comment', $uid, 0, 30) === true) { ?>
                                             <span id="comment_edit" class="cm_add_link">
                                                 <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm bar">
                                                     <?= lang('Edit'); ?>

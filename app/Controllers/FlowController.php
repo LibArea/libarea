@@ -26,6 +26,7 @@ class FlowController extends \MainController
  
         return view(PR_VIEW_DIR . '/flow/index', ['data' => $data, 'uid' => $uid]);
     }
+    
     public function contentChat() {
         
         $flows      = FlowModel::getFlowAll();
@@ -75,16 +76,39 @@ class FlowController extends \MainController
     public function deleteFlow()
     {
         // Доступ только персоналу
-        $account = \Request::getSession('account');
-        if ($account['trust_level'] != 5) {
+        $uid  = Base::getUid();
+        if ($uid['trust_level'] != 5) {
             return false;
         }
         
         $flow_id = \Request::getPostInt('flow_id');
         
-        FlowModel::FlowDelete($flow_id);
+        FlowModel::FlowDelete($flow_id, $uid['id']);
        
         return true;
+    }
+    
+    // Информация по удалению постов / ответов / комментариев
+    public function moderations()
+    {
+        $moderations_log      = FlowModel::getModerations();
+        
+        $result = Array();
+        foreach ($moderations_log as $ind => $row) {
+            $row['flow_pubdate']  = lang_date($row['flow_pubdate']);
+            $result[$ind]         = $row;
+        } 
+        
+        $uid  = Base::getUid();
+        $data = [
+            'h1'            => lang('Flow'),
+            'canonical'     => '/flow',
+            'sheet'         => 'flow',
+            'meta_title'    => lang('Flow') .' | '. Config::get(Config::PARAM_NAME),
+            'meta_desc'     => lang('Flow') .' '. Config::get(Config::PARAM_HOME_TITLE),
+        ];
+        
+        return view(PR_VIEW_DIR . '/flow/moderations', ['data' => $data, 'uid' => $uid, 'moderations' => $result]);
     }
     
 }

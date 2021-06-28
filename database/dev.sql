@@ -202,6 +202,7 @@ CREATE TABLE `posts` (
   `edit_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `post_user_id` int(10) UNSIGNED NOT NULL,
   `post_ip_int` varchar(45) DEFAULT NULL,
+  `post_after` smallint(6) NOT NULL DEFAULT 0 COMMENT 'id первого ответа',
   `post_votes` smallint(6) NOT NULL DEFAULT 0,
   `post_karma` smallint(6) NOT NULL DEFAULT 0,
   `post_answers_num` smallint(6) NOT NULL DEFAULT 0,
@@ -225,10 +226,10 @@ CREATE TABLE `posts` (
 -- Дамп данных таблицы `posts`
 --
 
-INSERT INTO `posts` (`post_id`, `post_title`, `post_slug`, `post_type`, `post_translation`, `post_draft`, `post_space_id`, `post_tag_id`, `post_date`, `edit_date`, `post_user_id`, `post_ip_int`, `post_votes`, `post_karma`, `post_answers_num`, `post_comments_num`, `post_content`, `post_content_img`, `post_thumb_img`, `post_related`, `post_merged_id`, `post_closed`, `post_tl`, `post_lo`, `post_top`, `post_url`, `post_url_domain`, `post_hits_count`, `post_is_delete`) VALUES
-(1, 'Муха села на варенье, Вот и всё стихотворенье...', 'muha-stih', 0, 0, 0, 1, 0, '2021-02-28 12:08:09', '2021-03-05 10:05:25', 1, NULL, 0, 0, 0, 0, '> \"Нет не всё!\" - сказала Муха,\r\n\r\n> Почесала себе брюхо,\r\n\r\n> Свесив с блюдца две ноги,\r\n\r\n> Мне сказала:\"Погоди!\r\n\r\n> Прежде чем сесть на варенье,\r\n\r\n> Я прочла стихотворенье,\r\n\r\n> Неизвестного поэта,\r\n\r\n> Написавшего про это.\r\n\r\n\r\n## Заголовок\r\n\r\nЧто-то в модели много кода:\r\n\r\n```\r\n$db = \\Config\\Database::connect();\r\n$builder = $db->table(\'Posts AS a\');\r\n$builder->select(\'a.*, b.id, b.nickname, b.avatar\');\r\n$builder->join(\"users AS b\", \"b.id = a.post_user_id\");\r\n$builder->where(\'a.post_slug\', $slug);\r\n$builder->orderBy(\'a.post_id\', \'DESC\');\r\n```\r\n\r\nВот. Это первый пост.', NULL, NULL, NULL, 0, 0, 0, 0, 0, NULL, NULL, 0, 0),
-(2, 'Второй пост...', 'vtoroi-post', 0, 0, 0, 2, 0, '2021-02-28 12:15:58', '2021-03-05 10:05:25', 2, NULL, 0, 0, 0, 0, 'Не будет тут про муху. Просто второй пост.\r\n\r\n> в лесу родилась ёлка, зеленая была...', NULL, NULL, NULL, 0, 0, 0, 0, 0, NULL, NULL, 0, 0),
-(3, 'Просто первый пост', 'prosto-pervyj-post', 0, 0, 0, 2, 0, '2021-04-30 04:35:13', '2021-04-30 04:35:13', 1, '127.0.0.1', 0, 0, 1, 0, 'Просто первый пост', NULL, NULL, NULL, 0, 0, 0, 0, 0, NULL, NULL, 0, 0);
+INSERT INTO `posts` (`post_id`, `post_title`, `post_slug`, `post_type`, `post_translation`, `post_draft`, `post_space_id`, `post_tag_id`, `post_date`, `edit_date`, `post_user_id`, `post_ip_int`, `post_after`, `post_votes`, `post_karma`, `post_answers_num`, `post_comments_num`, `post_content`, `post_content_img`, `post_thumb_img`, `post_related`, `post_merged_id`, `post_closed`, `post_tl`, `post_lo`, `post_top`, `post_url`, `post_url_domain`, `post_hits_count`, `post_is_delete`) VALUES
+(1, 'Муха села на варенье, Вот и всё стихотворенье...', 'muha-stih', 0, 0, 0, 1, 0, '2021-02-28 12:08:09', '2021-03-05 10:05:25', 1, NULL, 0, 0, 0, 0, 0, '> \"Нет не всё!\" - сказала Муха,\r\n\r\n> Почесала себе брюхо,\r\n\r\n> Свесив с блюдца две ноги,\r\n\r\n> Мне сказала:\"Погоди!\r\n\r\n> Прежде чем сесть на варенье,\r\n\r\n> Я прочла стихотворенье,\r\n\r\n> Неизвестного поэта,\r\n\r\n> Написавшего про это.\r\n\r\n\r\n## Заголовок\r\n\r\nЧто-то в модели много кода:\r\n\r\n```\r\n$db = \\Config\\Database::connect();\r\n$builder = $db->table(\'Posts AS a\');\r\n$builder->select(\'a.*, b.id, b.nickname, b.avatar\');\r\n$builder->join(\"users AS b\", \"b.id = a.post_user_id\");\r\n$builder->where(\'a.post_slug\', $slug);\r\n$builder->orderBy(\'a.post_id\', \'DESC\');\r\n```\r\n\r\nВот. Это первый пост.', NULL, NULL, NULL, 0, 0, 0, 0, 0, NULL, NULL, 0, 0),
+(2, 'Второй пост...', 'vtoroi-post', 0, 0, 0, 2, 0, '2021-02-28 12:15:58', '2021-03-05 10:05:25', 2, NULL, 0, 0, 0, 0, 0, 'Не будет тут про муху. Просто второй пост.\r\n\r\n> в лесу родилась ёлка, зеленая была...', NULL, NULL, NULL, 0, 0, 0, 0, 0, NULL, NULL, 0, 0),
+(3, 'Просто первый пост', 'prosto-pervyj-post', 0, 0, 0, 2, 0, '2021-04-30 04:35:13', '2021-04-30 04:35:13', 1, '127.0.0.1', 0, 0, 0, 1, 0, 'Просто первый пост', NULL, NULL, NULL, 0, 0, 0, 0, 0, NULL, NULL, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -536,7 +537,7 @@ CREATE TABLE `badge` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `badge` (`badge_id`, `badge_icon`, `badge_tl`, `badge_score`, `badge_title`, `badge_description`) VALUES
-(1, '<svg viewBox=\"0 0 24 24\"><path d=\"M14,12H10V10H14M14,16H10V14H14M20,8H17.19C16.74,7.22 16.12,6.55 15.37,6.04L17,4.41L15.59,3L13.42,5.17C12.96,5.06 12.5,5 12,5C11.5,5 11.04,5.06 10.59,5.17L8.41,3L7,4.41L8.62,6.04C7.88,6.55 7.26,7.22 6.81,8H4V10H6.09C6.04,10.33 6,10.66 6,11V12H4V14H6V15C6,15.34 6.04,15.67 6.09,16H4V18H6.81C7.85,19.79 9.78,21 12,21C14.22,21 16.15,19.79 17.19,18H20V16H17.91C17.96,15.67 18,15.34 18,15V14H20V12H18V11C18,10.66 17.96,10.33 17.91,10H20V8Z\"></path></svg>', 0, 0, 'Тестер', 'Сообщение об ошибке, которое понравилось команде сайта.');
+(1, '<i title=\"Тестер\" class=\"icon energy\"></i>', 0, 0, 'Тестер', 'Сообщение об ошибке, которое понравилось команде сайта.');
 
 ALTER TABLE `badge`
   ADD PRIMARY KEY (`badge_id`);
@@ -557,28 +558,6 @@ ALTER TABLE `badge_user`
   
 ALTER TABLE `badge_user`
   MODIFY `bu_id` int(11) NOT NULL AUTO_INCREMENT; 
-
---
--- Система флагов (нарушения)
---
-
-CREATE TABLE `report` (
-  `report_id` int(11) NOT NULL,
-  `report_uid` int(11) DEFAULT '0' COMMENT 'Индификатор участника id',
-  `report_type` varchar(50) DEFAULT NULL COMMENT 'Тип поста',
-  `report_target_id` int(11) DEFAULT '0' COMMENT 'ID',
-  `report_reason` varchar(255) DEFAULT NULL COMMENT 'Причина флага',
-  `report_url` varchar(255) DEFAULT NULL,
-  `report_date` datetime NOT NULL DEFAULT current_timestamp(),
-  `report_status` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-ALTER TABLE `report`
-  ADD PRIMARY KEY (`report_id`),
-  ADD KEY `status` (`report_status`);
-  
-  ALTER TABLE `report`
-  MODIFY `report_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Links (domain / url)
@@ -625,6 +604,51 @@ ALTER TABLE `stop_words`
   
   ALTER TABLE `stop_words`
   MODIFY `stop_id` int(11) NOT NULL AUTO_INCREMENT;
+
+
+--
+-- Система флагов (нарушения)
+--
+
+CREATE TABLE `report` (
+  `report_id` int(11) NOT NULL,
+  `report_user_id` int(11) NOT NULL DEFAULT 0 COMMENT 'Индификатор участника id',
+  `report_type` varchar(50) NOT NULL COMMENT 'Тип контента',
+  `report_content_id` int(11) NOT NULL DEFAULT 0 COMMENT 'Id контента',
+  `report_reason` varchar(255) NOT NULL COMMENT 'Причина флага',
+  `report_url` varchar(255) NOT NULL,
+  `report_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `report_status` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE `report`
+  ADD PRIMARY KEY (`report_id`),
+  ADD KEY `status` (`report_status`);
+  
+  ALTER TABLE `report`
+  MODIFY `report_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- stop_words
+--
+
+CREATE TABLE `moderations` (
+    `mod_id` int(11) NOT NULL,
+    `mod_moderates_user_id` int(11) NOT NULL DEFAULT 0 COMMENT 'Кто меняет',
+    `mod_moderates_user_tl` int(11) NOT NULL DEFAULT 0 COMMENT 'Модераторы от tl4',
+    `mod_created_at` datetime NOT NULL DEFAULT current_timestamp(),
+    `mod_updated_at` datetime NOT NULL DEFAULT current_timestamp(),
+    `mod_post_id` int(11) NOT NULL DEFAULT 0 COMMENT 'id поста', 
+    `mod_content_id` int(11) NOT NULL DEFAULT 0 COMMENT 'id контента', 
+    `mod_action` varchar(250) NOT NULL COMMENT 'deleted, restored и т.д.',
+    `mod_reason` varchar(250) NOT NULL
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE `moderations`
+  ADD PRIMARY KEY (`mod_id`);
+  
+  ALTER TABLE `moderations`
+  MODIFY `mod_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Индексы сохранённых таблиц

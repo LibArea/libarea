@@ -53,12 +53,12 @@ class FlowModel extends \MainModel
     }
     
     // Удаляем / восстанавливаем 
-    public static function FlowDelete($flow_id) 
+    public static function FlowDelete($flow_id, $user_id) 
     {
         if (self::isTheFlowDeleted($flow_id) == 1) {
             XD::update(['flow_log'])->set(['flow_is_delete'], '=', 0)->where(['flow_id'], '=', $flow_id)->run();
         } else {
-            XD::update(['flow_log'])->set(['flow_is_delete'], '=', 1)->where(['flow_id'], '=', $flow_id)->run();
+            XD::update(['flow_log'])->set(['flow_is_delete'], '=', $user_id)->where(['flow_id'], '=', $flow_id)->run();
         }
         
         return true;

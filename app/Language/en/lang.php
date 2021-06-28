@@ -78,7 +78,10 @@ return [
     'domain-desc'           => 'Grouping posts by domain',
     'domains-title'         => 'Sites in the system',
     'domains-desc'          => 'Statistics on domains, links that are used to compile publications on the site. Most visited, popular sites', 
-    'info_url_edit'         => 'Changes to the data become visible instantly. Be careful!',    
+    'info-url-edit'         => 'Changes to the data become visible instantly. Be careful!',
+    'code-incorrect'        => 'The code is incorrect or has already been used. Go through the recovery procedure again.',
+    'yes-email-pass'        => 'Now you can use your email and password.', 
+    'code-used'             => 'The code is incorrect or has already been used.',    
     
     /* Setting */
     'info_setting'          => 'Fill in your name to help participants address you by your first name. <br> <br> Tell me something about yourself. You have a great opportunity to open up to please others and seem like an interesting person.',
@@ -97,6 +100,14 @@ return [
     'info_login'            => 'Authorization gives you the ability to post, reply, and comment.<br><br>You can vote for other publications and have your own profile.',
     'info_recover'          => 'fter you click the "Reset" button, check your e-mail...',
     'Ban-space-info-posts'  => 'A space ban will result in the unavailability of all posts',
+    'meta-moderation'       => 'Actions of the participant and moderators to delete and restore the content in the community.',
+
+    'deleted-post'          => 'Deleted post',
+    'restored-post'         => 'Restored post',
+    'deleted-comment'       => 'Deleted comment',
+    'restored-comment'      => 'Restored comment',
+    'deleted-answer'        => 'Deleted answer',
+    'restored-answer'       => 'Restored answer',
     
     'nickname-replay'                       => 'This nickname is already on the site',
     'e-mail-replay'                         => 'This e-mail is already available on the site',

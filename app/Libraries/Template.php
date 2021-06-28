@@ -136,44 +136,34 @@ function accessPm($uid, $user_id, $add_tl)
     
     
 // Проверка доступа
-function accessСheck($content, $type, $uid)
+// $content
+// $type -  post / answer / comment
+// $after - есть ли ответы
+// $stop_time - разрешенное время
+function accessСheck($content, $type, $uid, $after, $stop_time)
 {
+    
     if (!$content) {
         return false;
     }
-
+    
     // Редактировать может только автор и админ
     if ($content[$type . '_user_id'] != $uid['id'] && $uid['trust_level'] != 5) {
-        return false;
-    }
-    
-    return true;
-} 
-
-// Access to edit and delete comments
-// Perhaps it is worth making a universal method and combining it with the upper one. 
-// It will be clear after the introduction of similar actions to the answers. 
-function accessEditDelete($comment, $uid, $stop_time)
-{
-    
-    if (!$comment) {
-        return false;
-    }
-    
-    // Редактировать может только автор и админ
-    if ($comment['comment_user_id'] != $uid['id'] && $uid['trust_level'] != 5) {
         return false;
     }
     
     // Запретим удаление если есть ответ
     // И если прошло 30 минут
     if ($uid['trust_level'] != 5) {
-        if ($comment['comment_after'] > 0) {
-            return false;
+        
+        if ($after > 0) {
+            if ($content[$type . '_after'] > 0) {
+                return false;
+            }
         }
         
-        if ($stop_time !=0) { 
-            $diff = strtotime(date("Y-m-d H:i:s")) - strtotime($comment['comment_date']);
+        if ($stop_time > 0) { 
+            $diff = strtotime(date("Y-m-d H:i:s")) - strtotime($content[$type . '_date']);
             $time = floor($diff / 60);
            
             if ($time > $stop_time) {

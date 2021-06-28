@@ -1,5 +1,6 @@
 <?php
 namespace App\Models;
+
 use XdORM\XD;
 use DB;
 use PDO;
@@ -107,11 +108,11 @@ class CommentModel extends \MainModel
     }
     
     // Удаление комментария
-    public static function CommentsDel($comment_id)
+    public static function CommentDel($comment_id, $user_id)
     {
         XD::update(['comments'])->set(['comment_del'], '=', 1)->where(['comment_id'], '=', $comment_id)->run();
         
-        XD::update(['flow_log'])->set(['flow_is_delete'], '=', 1)
+        XD::update(['flow_log'])->set(['flow_is_delete'], '=', $user_id)
             ->where(['flow_action_type'], '=', 'add_comment')
             ->and(['flow_target_id'], '=', $comment_id)->run();
         

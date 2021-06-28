@@ -144,7 +144,9 @@ class SpaceController extends \MainController
         $space = SpaceModel::getSpaceInfo($slug);
         
         // Проверка доступа 
-        accessСheck($space, 'space', $uid); 
+        if (!accessСheck($space, 'space', $uid, 0, 0)) {
+            redirect('/');
+        } 
 
         Request::getHead()->addStyles('/assets/css/image-uploader.css'); 
         Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
@@ -167,7 +169,9 @@ class SpaceController extends \MainController
         $space = SpaceModel::getSpaceInfo($slug);
 
         // Проверка доступа 
-        accessСheck($space, 'space', $uid); 
+        if (!accessСheck($space, 'space', $uid, 0, 0)) {
+            redirect('/');
+        } 
 
         Request::getHead()->addStyles('/assets/css/image-uploader.css'); 
         Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
@@ -190,7 +194,9 @@ class SpaceController extends \MainController
         $space = SpaceModel::getSpaceInfo($slug);
 
         // Проверка доступа 
-        accessСheck($space, 'space', $uid); 
+        if (!accessСheck($space, 'space', $uid, 0, 0)) {
+            redirect('/');
+        }
         
         $tags = SpaceModel::getSpaceTags($space['space_id']);
         
@@ -309,7 +315,9 @@ class SpaceController extends \MainController
         $space = SpaceModel::getSpaceId($space_id);
         
         // Проверка доступа 
-        accessСheck($space, 'space', $uid); 
+        if (!accessСheck($space, 'space', $uid, 0, 0)) {
+            redirect('/');
+        }
 
         $space_name         = \Request::getPost('space_name');
         $space_description  = \Request::getPost('space_description');
@@ -373,7 +381,9 @@ class SpaceController extends \MainController
         $space = SpaceModel::getSpaceId($space_id);
         
         // Проверка доступа 
-        accessСheck($space, 'space', $uid); 
+        if (!accessСheck($space, 'space', $uid, 0, 0)) {
+            redirect('/');
+        } 
 
         $redirect   = '/space/' . $space['space_slug'] . '/edit/logo';
 
@@ -465,7 +475,9 @@ class SpaceController extends \MainController
         $space = SpaceModel::getSpaceInfo($slug);
         
         // Проверка доступа 
-        accessСheck($space, 'space', $uid); 
+        if (!accessСheck($space, 'space', $uid, 0, 0)) {
+            redirect('/');
+        } 
       
         $redirect   = '/space/' . $space['space_slug'] . '/edit/logo'; 
         
@@ -494,7 +506,9 @@ class SpaceController extends \MainController
         $space = SpaceModel::getSpaceInfo($slug);
 
         // Проверка доступа 
-        accessСheck($space, 'space', $uid); 
+        if (!accessСheck($space, 'space', $uid, 0, 0)) {
+            redirect('/');
+        } 
       
         $data = [
             'h1'            => lang('Add tag'),
@@ -515,7 +529,9 @@ class SpaceController extends \MainController
         $space = SpaceModel::getSpaceInfo($slug);
 
         // Проверка доступа 
-        accessСheck($space, 'space', $uid); 
+        if (!accessСheck($space, 'space', $uid, 0, 0)) {
+            redirect('/');
+        } 
 
         $tag = SpaceModel::getTagInfo($space_tags_id);
         Base::PageError404($tag);
@@ -541,7 +557,9 @@ class SpaceController extends \MainController
         $space = SpaceModel::getSpaceId($space_id);
         
         // Проверка доступа 
-        accessСheck($space, 'space', $uid); 
+        if (!accessСheck($space, 'space', $uid, 0, 0)) {
+            redirect('/');
+        } 
 
         $redirect = '/s/' . $space['space_slug'] . '/' . $tag_id . '/edit';
         Base::Limits($st_title, lang('titles'), '4', '20', $redirect);

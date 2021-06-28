@@ -2,12 +2,13 @@
 
 namespace App\Controllers;
 use Hleb\Constructor\Handlers\Request;
+use App\Models\NotificationsModel;
+use App\Models\ModerationModel;
 use App\Models\CommentModel;
 use App\Models\UserModel;
 use App\Models\PostModel;
 use App\Models\AnswerModel;
 use App\Models\VotesModel;
-use App\Models\NotificationsModel;
 use App\Models\FlowModel;
 use Lori\Content;
 use Lori\Config;
@@ -146,7 +147,9 @@ class CommentController extends \MainController
         $comment = CommentModel::getCommentsOne($comment_id);
         
         // Проверка доступа 
-        accessСheck($comment, 'comment', $uid); 
+        if (!accessСheck($comment, 'comment', $uid, 0, 0)) {
+            redirect('/');
+        }  
         
         // Редактируем комментарий
         CommentModel::CommentEdit($comment_id, $comment_content);
@@ -163,7 +166,9 @@ class CommentController extends \MainController
         $comment = CommentModel::getCommentsOne($comment_id);
 
         // Проверка доступа 
-        accessСheck($comment, 'comment', $uid); 
+        if (!accessСheck($comment, 'comment', $uid, 0, 0)) {
+            redirect('/');
+        }
 
         $data = [
             'comment_id'           => $comment_id,
@@ -231,13 +236,55 @@ class CommentController extends \MainController
         $comment = CommentModel::getCommentsOne($comment_id); 
         
         // Проверка доступа 
-        accessСheck($comment, 'comment', $uid);  
+        if (!accessСheck($comment, 'comment', $uid, 1, 30)) {
+            redirect('/');
+        } 
         
-        // Ограничим по времени и если есть ответ
-        accessEditDelete($comment, $uid, 30);
+        CommentModel::CommentDel($comment['comment_id'], $uid['id']);
         
-        CommentModel::CommentsDel($comment_id);
+        $data = [
+            'user_id'       => $uid['id'], 
+            'user_tl'       => $uid['trust_level'], 
+            'created_at'    => date("Y-m-d H:i:s"), 
+            'post_id'       => $comment['comment_post_id'],
+            'content_id'    => $comment['comment_id'], 
+            'action'        => 'deleted-comment',
+            'reason'        => '',
+        ];
+        
+        ModerationModel::moderationsAdd($data);
         
         return true;
     }
+    
+    // Восстановление комментария
+    public function recoverComment()
+    {
+        $uid        = Base::getUid();
+        $comment_id = \Request::getPostInt('id');
+        
+        $comment = CommentModel::getCommentsOne($comment_id); 
+        
+        // Проверка доступа 
+        if (!accessСheck($comment, 'comment', $uid, 1, 30)) {
+            redirect('/');
+        } 
+        
+        CommentModel::commentRecover($comment['comment_id']);
+        
+        $data = [
+            'user_id'       => $uid['id'], 
+            'user_tl'       => $uid['trust_level'], 
+            'created_at'    => date("Y-m-d H:i:s"), 
+            'post_id'       => $comment['comment_post_id'],
+            'content_id'    => $comment['comment_id'], 
+            'action'        => 'restored-comment',
+            'reason'        => '',
+        ];
+        
+        ModerationModel::moderationsAdd($data);
+        
+        return true;
+    }
+    
 }

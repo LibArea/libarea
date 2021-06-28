@@ -115,17 +115,6 @@ class AdminController extends \MainController
         return view(PR_VIEW_DIR . '/admin/comment_delet', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
     }
      
-    // Удаление комментария
-    public function recoverComment()
-    {
-        $uid        = self::isAdmin();
-        $comment_id = \Request::getPostInt('id');
-        
-        CommentModel::commentRecover($comment_id);
-        
-        return true;
-    }
-    
     // Удалёные ответы
     public function answers()
     {
@@ -150,17 +139,6 @@ class AdminController extends \MainController
         return view(PR_VIEW_DIR . '/admin/answer_delet', ['data' => $data, 'uid' => $uid, 'answers' => $result]);
     }
      
-    // Удаление ответа
-    public function recoverAnswer()
-    {
-        $uid        = self::isAdmin();
-        $answer_id  = \Request::getPostInt('id');
-        
-        AnswerModel::answerRecover($answer_id);
-        
-        return true;
-    }
-    
     // Показываем дерево приглашенных
     public function invitations()
     {

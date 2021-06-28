@@ -3,8 +3,6 @@
 
 Route::before('Authorization@noAuth')->getGroup();
     Route::getType('post');
-        Route::get('/admin/comment/recover')->controller('AdminController@recoverComment');
-        Route::get('/admin/answer/recover')->controller('AdminController@recoverAnswer');
         Route::get('/admin/space/ban')->controller('AdminController@delSpace');
         Route::get('/admin/ban')->controller('AdminController@banUser');
         Route::get('/admin/favicon/add')->controller('LinkController@favicon');
@@ -23,9 +21,11 @@ Route::before('Authorization@noAuth')->getGroup();
     
         Route::get('/comment/editform')->controller('CommentController@editCommentForm');
         Route::get('/comment/del')->controller('CommentController@deletComment');
+        Route::get('/comment/recover')->controller('CommentController@recoverComment');
         
         Route::get('/answer/del')->controller('AnswerController@deletAnswer');
         Route::get('/answer/addfavorite')->controller('AnswerController@addAnswerFavorite');
+        Route::get('/answer/recover')->controller('AnswerController@recoverAnswer');
  
         Route::get('/post/addpostprof')->controller('PostController@addPostProfile');
         Route::get('/post/addfavorite')->controller('PostController@addPostFavorite');
@@ -211,6 +211,8 @@ Route::get('/s/{slug}/{page?}')->controller('SpaceController@posts', ['feed'])->
 Route::get('/s/{slug}/top/{page?}')->controller('SpaceController@posts', ['top'])->where(['slug' => '[A-Za-z0-9_]+', 'page' => '[0-9]+']);
 Route::get('/s/{slug}/tag/{tags?}')->controller('SpaceController@posts', ['feed'])->where(['slug' => '[A-Za-z0-9_]+',  'tags' => '[0-9]+']);
 Route::get('/s/{slug}/top/tag/{tags?}')->controller('SpaceController@posts', ['top'])->where(['slug' => '[A-Za-z0-9_]+',  'tags' => '[0-9]+']);
+
+Route::get('/moderations')->controller('ModerationController');
 
 // Домены
 Route::get('/domains')->controller('LinkController');

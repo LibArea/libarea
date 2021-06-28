@@ -44,7 +44,7 @@
     <aside>
         <div class="white-box">
             <div class="inner-padding big">
-                <?= lang('info_url_edit'); ?>
+                <?= lang('info-url-edit'); ?>
             </div>
         </div>
     </aside>

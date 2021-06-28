@@ -1,14 +1,16 @@
 <?php
 
 namespace App\Controllers;
+
+use Hleb\Constructor\Handlers\Request;
+use App\Models\NotificationsModel;
+use App\Models\ModerationModel;
 use App\Models\CommentModel;
 use App\Models\UserModel;
 use App\Models\AnswerModel;
 use App\Models\PostModel;
 use App\Models\VotesModel;
-use App\Models\NotificationsModel;
 use App\Models\FlowModel;
-use Hleb\Constructor\Handlers\Request;
 use Lori\Content;
 use Lori\Config;
 use Lori\Base;
@@ -133,7 +135,9 @@ class AnswerController extends \MainController
         $answer = AnswerModel::getAnswerOne($answer_id);
 
         // Проверка доступа 
-        accessСheck($answer, 'answer', $uid); 
+        if (!accessСheck($answer, 'answer', $uid, 0, 0)) {
+            redirect('/');
+        }        
 
         $post = PostModel::postId($post_id);
         Base::PageError404($post);
@@ -177,8 +181,10 @@ class AnswerController extends \MainController
         
         $answer = AnswerModel::getAnswerOne($answer_id);
         
-        // Проверка доступа 
-        accessСheck($answer, 'answer', $uid); 
+        // Проверка доступа
+        if (!accessСheck($answer, 'answer', $uid, 0, 0)) {
+            redirect('/');
+        }        
         
         Base::Limits($answer_content, lang('Bodies'), '6', '5000', '/' . $url);
 
@@ -228,10 +234,60 @@ class AnswerController extends \MainController
         }
         
         $answer_id = \Request::getPostInt('answer_id');
+        
+        $answer = AnswerModel::getAnswerOne($answer_id); 
+        if (!$answer) {
+             return false;
+        }
+        
+        $data = [
+            'user_id'       => $uid['id'], 
+            'user_tl'       => $uid['trust_level'], 
+            'created_at'    => date("Y-m-d H:i:s"), 
+            'post_id'       => $answer['answer_post_id'],
+            'content_id'    => $answer['answer_id'], 
+            'action'        => 'deleted-answer',
+            'reason'        => '',
+        ];
+        
+        ModerationModel::moderationsAdd($data);
 
         AnswerModel::AnswerDel($answer_id);
         
-        return false;
+        return true;
+    }
+    
+    // Восстановления
+    public function recoverAnswer()
+    {
+        // Доступ только персоналу
+        $uid        = Base::getUid();
+        if ($uid['trust_level'] != 5) {
+            return false;
+        }
+        
+        $answer_id  = \Request::getPostInt('id');
+        
+        $answer = AnswerModel::getAnswerOne($answer_id); 
+        if (!$answer) {
+             return false;
+        }
+        
+        $data = [
+            'user_id'       => $uid['id'], 
+            'user_tl'       => $uid['trust_level'], 
+            'created_at'    => date("Y-m-d H:i:s"), 
+            'post_id'       => $answer['answer_post_id'],
+            'content_id'    => $answer['answer_id'], 
+            'action'        => 'restored-answer',
+            'reason'        => '',
+        ];
+        
+        ModerationModel::moderationsAdd($data);
+        
+        AnswerModel::answerRecover($answer_id);
+        
+        return true;
     }
     
     // Помещаем комментарий в закладки
