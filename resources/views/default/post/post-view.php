@@ -134,7 +134,7 @@
                         <h3 class="style small"><?= lang('Related'); ?>:</h3>
                             <?php $num = 0; ?>
                             <?php foreach ($post_related as $related) { ?>
-                                <div class="related-box">
+                                <div class="related-box-num">
                                     <?php $num++; ?>
                                     <span><?= $num; ?></span>
                                     <a href="/post/<?= $related['post_id']; ?>/<?= $related['post_slug']; ?>">

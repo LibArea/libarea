@@ -183,7 +183,7 @@ h1.domain {
 h1.topics {
   font-weight: 400;
   font-size: 1.2rem;
-  margin-top: 0;
+  margin: 0;
 }
 
 h3.lo {
@@ -483,6 +483,38 @@ textarea:focus {
   background: transparent;
   border: none;
   color: var(--tertiary);
+}
+
+/* Подписка на темы */
+.add-topic {
+  background: #ebf0ff;
+  border: 1px solid #e0e6f9;
+  padding: 4px 14px;
+  color: #688ffb;
+  border-radius: 10em;
+  align-items: center;
+  text-align: center;
+  display: inline;
+  max-width: 180px;
+}
+
+.add-topic:hover {
+  background: #ebeced;
+  border: 1px solid #d9dcdf;
+  color: #ada8a8;
+}
+
+.topics-footer {
+  margin-top: 13px;
+}
+
+.box-number{
+  -webkit-box-flex: 1;
+  flex: 1 1;
+}
+
+.box-100 {
+  flex-basis: 100%;
 }
 
 /* Форма авторизации */
@@ -832,6 +864,10 @@ img.ava {
 
 img.ava-24 {
   width: 24px;
+}
+
+img.ava-94  {
+  width: 94px;
 }
 
 .search-info,
@@ -1217,17 +1253,11 @@ ol.comment-telo {
   margin: 0 0 25px 0;
 }
 
-h3.style {
-  margin: 0 0 5px 0;
-  font-weight: 300;
-  text-transform: uppercase;
-}
-
-.related-box {
+.related-box-num {
   margin: 0 0 5px 0;
 }
 
-.related-box span {
+.related-box-num span {
   background: #eef0f1;
   width: 21px;
   height: 21px;
@@ -1238,6 +1268,17 @@ h3.style {
   border-radius: 50%;
   margin-right: 5px;
   flex-shrink: 0;
+}
+
+.style {
+  margin: 0 0 5px 0;
+  font-weight: 300;
+  text-transform: uppercase;
+}
+
+.box-flex {
+  box-sizing: border-box;
+  display: flex;
 }
 
 /* Topic */
@@ -1658,14 +1699,15 @@ a:hover .icon::before {
 .icon.share-alt::before { content: "\e05a"; }
 
 #fixed {
- position: fixed;
- top: 0;
- left: 0;
- z-index:9999;
- width: 64px;
- height: 100%;
- background: #DCDCDC;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index:9999;
+  width: 64px;
+  height: 100%;
+  background: #dcdcdc;
 }
+
 .updown {
   display: none;
   min-height: 32px;
@@ -1674,6 +1716,7 @@ a:hover .icon::before {
   cursor: pointer;
   margin: 100% auto;
 }
+
 .updown::before {
   display: block;
   content: '';

@@ -8,35 +8,22 @@ use MyParsedown;
 
 class Content
 {
-    // Работа с контентом
+    // Работа с контентом (Parsedown)
     public static function text($content, $type)
     {
-        // text /  line
-        if ($type) {
-            $text   = self::Markdown($content, $type);
-            $text   = self::parseUser($text);
-        } else {
-            $text   = self::parseUser($content);
-        }
         
-        $text   = self::stopWords($text);
-
+        $Parsedown = new MyParsedown();
+        $Parsedown->setSafeMode(true); //безопасность
+        
+        if ($type  == 'text') {
+            $text   = $Parsedown->text($content);
+            $text   = self::stopWords($text);
+        } else {
+            return  $Parsedown->line($content); 
+        }
         return self::parseUrl($text);
     }
   
-    // Markdown
-    public static function Markdown($content, $type)
-    {
-        $Parsedown = new MyParsedown();
-        $Parsedown->setSafeMode(true); //безопасность
- 
-        if ($type == 'line') {
-            return  $Parsedown->line($content); 
-        }
-        
-        return  $Parsedown->text($content); 
-    }
-    
 	public static function stopWords($content, $replace = '*')
 	{
         $stop_words = ContentModel::getStopWords();

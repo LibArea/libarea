@@ -11,7 +11,8 @@
                             <i class="icon pencil"></i>          
                         </a>
                     <?php } ?></h1>
-                <h3>Введение</h3>               
+  
+                <h3><?= lang('Info'); ?></h3>  
                
                 <?= $topic['topic_info']; ?>
             </div>

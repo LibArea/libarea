@@ -3,15 +3,38 @@
     <main>
         <div class="white-box">
             <div class="inner-padding">
-                <a class="tel-topics" title="<?= lang('All topics'); ?>" href="/topics"> ← <?= lang('Topics'); ?></a>
                 
-                <h1 class="topics"><?= $data['h1']; ?>
-                    <?php if($uid['trust_level'] == 5) { ?>
-                        <a class="right" href="/admin/topic/<?= $topic['topic_id']; ?>/edit"> 
-                            <i class="icon pencil"></i>          
+            <div class="box-flex">
+                <!--a class="tel-topics" title="<?= lang('All topics'); ?>" href="/topics"> ← <?= lang('Topics'); ?></a-->
+                <div>
+                    <img class="ava-94" alt="<?= $topic['topic_title']; ?>" src="<?= topic_url($topic['topic_img'], 'max'); ?>">
+                </div>
+                <div class="indent-bid box-100">   
+                    <h1 class="topics">
+                        <?= $data['h1']; ?>
+                        <?php if($uid['trust_level'] == 5) { ?>
+                            <a class="right" href="/admin/topic/<?= $topic['topic_id']; ?>/edit"> 
+                                <i class="icon pencil"></i>          
+                            </a>
+                        <?php } ?>
+                    </h1>
+                    <div class="small"><?= $topic['topic_description']; ?></div>
+                    <div class="topics-footer">
+                        <div class="add-topic">
+                                + Подписаться                     
+                        </div>
+                        <a title="<?= lang('Info'); ?>" class="small lowercase right gray" href="/topic/<?= $topic['topic_slug']; ?>/info">
+                            <i class="icon book-open"></i>
                         </a>
-                    <?php } ?></h1>
-                    
+                    </div>    
+                </div>
+                
+            </div>  
+                                
+            </div>
+        </div>             
+        <div class="white-box">
+            <div class="inner-padding">          
                  <?php if (!empty($posts)) { ?> 
     
                     <?php foreach ($posts as  $post) { ?>
@@ -169,15 +192,15 @@
     <aside>
         <div class="white-box">
             <div class="inner-padding big">
-                <div class="small"><?= $topic['topic_description']; ?></div>
-                <a class="small lowercase right" href="/topic/<?= $topic['topic_slug']; ?>/info">
-                    <?= lang('More'); ?>...
-                </a>
-                <br>
-                <hr>
-                <div class="sb-created">
-                    <i class="icon calendar"></i> <?= $topic['topic_add_date']; ?> 
-                    <img alt="<?= $topic['topic_title']; ?>" class="ava-24 right" src="<?= topic_url($topic['topic_img'], 'max'); ?>">
+                <div class="box-flex">
+                    <div class="box-post center box-number">
+                        <div class="style small gray lowercase"><?= lang('Posts-m'); ?></div>
+                        <?= $topic['topic_count']; ?>
+                    </div>
+                    <div class="box-fav center box-number">
+                        <div class="style small gray lowercase"><?= lang('Reads'); ?></div>
+                        <?= $topic['topic_focus_count']; ?>
+                    </div>
                 </div>
             </div>
         </div>
@@ -189,8 +212,9 @@
                     <h3 class="style small"><?= lang('Related'); ?></h3>
                     <?php foreach ($topic_related as $related) { ?>
                         <div class="related-box">
-                            <a class="tags" href="/topic/<?= $related['topic_slug']; ?>">
-                                <?= $related['topic_title']; ?>
+                            <a class="bar-space-telo" href="/topic/<?= $related['topic_slug']; ?>">
+                                <img alt="<?= $related['topic_title']; ?>" src="<?= topic_url($related['topic_img'], 'small'); ?>">
+                                <span class="bar-name small"><?= $related['topic_title']; ?></span>
                             </a>
                        </div> 
                     <?php } ?>
