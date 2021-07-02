@@ -222,4 +222,36 @@ class TopicModel extends \MainModel
         $sql = "SELECT * FROM posts WHERE post_id IN(0, ".$topic_post_related.") ";
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
+    
+    // Подписан пользователь на topic
+    public static function getMyFocus($topic_id, $user_id) 
+    {
+        $result = XD::select('*')->from(['topic_signed'])->where(['signed_topic_id'], '=', $topic_id)->and(['signed_user_id'], '=', $user_id)->getSelect();
+
+        if ($result) {
+            return true;
+        } 
+        return false;
+    }
+    
+    // Подписка / отписка
+    public static function focus($topic_id, $user_id)
+    {
+        $result  = self::getMyFocus($topic_id, $user_id);
+          
+        if ($result === true) {
+            XD::deleteFrom(['topic_signed'])->where(['signed_topic_id'], '=', $topic_id)->and(['signed_user_id'], '=', $user_id)->run();
+            
+            $sql = "UPDATE topic SET topic_focus_count = (topic_focus_count - 1) WHERE topic_id = :topic_id";
+            DB::run($sql,['topic_id' => $topic_id]); 
+            
+        } else {
+            XD::insertInto(['topic_signed'], '(', ['signed_topic_id'], ',', ['signed_user_id'], ')')->values( '(', XD::setList([$topic_id, $user_id]), ')' )->run();
+
+            $sql = "UPDATE topic SET topic_focus_count = (topic_focus_count + 1) WHERE topic_id = :topic_id";
+            DB::run($sql,['topic_id' => $topic_id]);            
+        }
+        
+        return true;
+    }
 }

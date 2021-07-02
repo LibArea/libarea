@@ -413,11 +413,10 @@ class SpaceController extends \MainController
     }
     
     // Подписка / отписка от пространств
-    public function hide()
+    public function focus()
     {
         $uid        = Base::getUid();
         $space_id   = \Request::getPostInt('space_id'); 
-        $account    = \Request::getSession('account');
 
         // Запретим действия если участник создал пространство
         $sp_info    = SpaceModel::getSpaceId($space_id);
@@ -425,7 +424,7 @@ class SpaceController extends \MainController
             return false;
         }
 
-        SpaceModel::SpaceHide($space_id, $account['user_id']);
+        SpaceModel::SpaceHide($space_id, $uid['id']);
         
         return true;
     }

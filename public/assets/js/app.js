@@ -55,7 +55,18 @@ if(colorSpace){
     }, false);
 }
 
-$(function(){ 
+$(function(){
+    // Подписка на тему
+    $(document).on("click", ".focus-topic", function(){      
+        let topic_id  = $(this).data('id');  
+        $.ajax({
+            url: '/topic/focus',
+            type: 'POST',
+            data: {topic_id: topic_id},
+        }).done(function(data) {
+            location.reload();
+        });
+    }); 
     // Up
     $(document).on('click', '.up-id', function() {
         let up_id           = $(this).data('id');
@@ -73,7 +84,7 @@ $(function(){
     $(document).on("click", ".hide-space-id", function(){      
         let space_id  = $(this).data('id');  
         $.ajax({
-            url: '/space/hide',
+            url: '/space/focus',
             type: 'POST',
             data: {space_id: space_id},
         }).done(function(data) {

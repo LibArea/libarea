@@ -79,7 +79,8 @@ class TopicController extends \MainController
             $result[$ind]                   = $row;
         } 
 
-        $topic_related = TopicModel::topicRelated($topic['topic_related']);
+        $topic_related  = TopicModel::topicRelated($topic['topic_related']);
+        $topic_signed   = TopicModel::getMyFocus($topic['topic_id'], $uid['id']);
         
         $meta_title = $topic['topic_seo_title'] . ' — ' .  lang('Topic');
         $data = [
@@ -92,7 +93,7 @@ class TopicController extends \MainController
             'meta_desc'     => $topic['topic_description'] .'. '. Config::get(Config::PARAM_HOME_TITLE),            
         ];
 
-        return view(PR_VIEW_DIR . '/topic/topic', ['data' => $data, 'uid' => $uid, 'topic' => $topic, 'posts' => $result, 'topic_related' => $topic_related]);
+        return view(PR_VIEW_DIR . '/topic/topic', ['data' => $data, 'uid' => $uid, 'topic' => $topic, 'posts' => $result, 'topic_related' => $topic_related, 'topic_signed' => $topic_signed]);
 
     }
  
@@ -284,5 +285,15 @@ class TopicController extends \MainController
         Base::addMsg(lang('Changes saved'), 'success');
         redirect($redirect);  
     }
- 
+    
+    // Подписка / отписка от тем
+    public function focus()
+    {
+        $uid        = Base::getUid();
+        $topic_id   = \Request::getPostInt('topic_id'); 
+
+        TopicModel::focus($topic_id, $uid['id']);
+        
+        return true;
+    }
 }

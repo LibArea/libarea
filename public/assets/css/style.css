@@ -486,11 +486,8 @@ textarea:focus {
 }
 
 /* Подписка на темы */
-.add-topic {
-  background: #ebf0ff;
-  border: 1px solid #e0e6f9;
+.focus-topic {
   padding: 4px 14px;
-  color: #688ffb;
   border-radius: 10em;
   align-items: center;
   text-align: center;
@@ -498,17 +495,35 @@ textarea:focus {
   max-width: 180px;
 }
 
-.add-topic:hover {
+.add-focus {
+  background: #ebf0ff;
+  border: 1px solid #e0e6f9;
+  color: #688ffb;
+}
+
+.del-focus {
+  background: #ebeced;
+  border: 1px solid #d9dcdf;
+  color: #ada8a8; 
+}
+
+.add-focus:hover {
   background: #ebeced;
   border: 1px solid #d9dcdf;
   color: #ada8a8;
+}
+
+.del-focus:hover {
+  background: #ebf0ff;
+  border: 1px solid #e0e6f9;
+  color: #688ffb;
 }
 
 .topics-footer {
   margin-top: 13px;
 }
 
-.box-number{
+.box-number {
   -webkit-box-flex: 1;
   flex: 1 1;
 }
@@ -866,7 +881,7 @@ img.ava-24 {
   width: 24px;
 }
 
-img.ava-94  {
+img.ava-94 {
   width: 94px;
 }
 
@@ -1702,7 +1717,7 @@ a:hover .icon::before {
   position: fixed;
   top: 0;
   left: 0;
-  z-index:9999;
+  z-index: 9999;
   width: 64px;
   height: 100%;
   background: #dcdcdc;

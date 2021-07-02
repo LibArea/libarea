@@ -20,9 +20,19 @@
                     </h1>
                     <div class="small"><?= $topic['topic_description']; ?></div>
                     <div class="topics-footer">
-                        <div class="add-topic">
-                                + Подписаться                     
-                        </div>
+                        <?php if(!$uid['id']) { ?> 
+                             <a href="/login"><div class="add-focus focus-topic">+ <?= lang('Read'); ?></div></a>
+                        <?php } else { ?>
+                            <?php if($topic_signed == 1) { ?>
+                                <div data-id="<?= $topic['topic_id']; ?>" class="del-focus focus-topic">
+                                    <?= lang('Unsubscribe'); ?>
+                                </div>
+                            <?php } else { ?> 
+                                <div data-id="<?= $topic['topic_id']; ?>" class="add-focus focus-topic">
+                                    + <?= lang('Read'); ?>
+                                </div>
+                            <?php } ?>   
+                        <?php } ?> 
                         <a title="<?= lang('Info'); ?>" class="small lowercase right gray" href="/topic/<?= $topic['topic_slug']; ?>/info">
                             <i class="icon book-open"></i>
                         </a>

@@ -32,7 +32,8 @@ Route::before('Authorization@noAuth')->getGroup();
         Route::get('/search/posts')->controller('PostController@select', ['posts']);
         Route::get('/search/topics')->controller('PostController@select', ['topics']);
  
-        Route::get('/space/hide')->controller('SpaceController@hide');
+        Route::get('/space/focus')->controller('SpaceController@focus');
+        Route::get('/topic/focus')->controller('TopicController@focus');
         
         Route::getProtect(); // Начало защиты
             Route::get('/admin/user/edit/{id}')->controller('AdminController@userEdit')->where(['id' => '[0-9]+']);
