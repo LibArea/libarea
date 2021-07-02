@@ -22,7 +22,6 @@
                                     <?php } else { ?>
                                         ...
                                     <?php } ?>                    
-                                    <br />
                                 </div> 
                             <?php } ?>
                              
@@ -98,18 +97,8 @@
                                         </option>
                                     <?php } ?>
                                 </select>
-                                <br> 
                             </div>
                             
-                            <?php if($tags) { ?>
-                                <div class="boxline">  
-                                    <label class="form-label" for="post_content"><?= lang('Tags'); ?></label>
-                                    <?php foreach ($tags as $tag) { ?>
-                                        <input type="radio" name="tag_id" value="<?= $tag['st_id']; ?>"<?php if($post['post_tag_id'] == $tag['st_id']) { ?> checked<?php } ?>><?= $tag['st_title']; ?>
-                                    <?php } ?>
-                                    <br> 
-                                </div>
-                            <?php } ?>
                             <?php if($post['post_draft'] == 1) { ?>
                                 <input type="hidden" name="draft" id="draft" value="1">
                             <?php } ?>
@@ -122,7 +111,16 @@
                                     </select>
                                 </div>  
                             <?php } ?>
-
+                            <?php if($uid['trust_level'] > 4) { ?> 
+                                <div class="boxline">
+                                    <label class="form-label" for="post_content"><?= lang('Topics'); ?></label>
+                                    <select name="post_topics[]" multiple="multiple" id='selTopics'>
+                                        <?php foreach ($post_topics as $topic) { ?>
+                                            <option selected value="<?= $topic['topic_id']; ?>"><?= $topic['topic_title']; ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>                                  
+                            <?php } ?>
                             <?php if($uid['trust_level'] > 0) { ?> 
                                 <div class="boxline">  
                                     <label class="form-label" for="post_content"><?= lang('Related'); ?></label>
@@ -133,6 +131,26 @@
                                     </select>
                                     <script nonce="<?= $_SERVER['nonce']; ?>">
                                         $(document).ready(function(){
+                                            $("#selTopics").select2({
+                                                width: '70%',
+                                                ajax: { 
+                                                    url: "/search/topics",
+                                                    type: "post",
+                                                    dataType: 'json',
+                                                    delay: 250,
+                                                    data: function (params) {
+                                                        return {
+                                                          searchTerm: params.term 
+                                                        };
+                                                    },
+                                                    processResults: function (response) {
+                                                     return {
+                                                        results: response
+                                                     };
+                                                    },
+                                                    cache: true
+                                                }
+                                            });
                                             $("#selLinked").select2({
                                                 width: '70%',
                                                 ajax: { 

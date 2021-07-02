@@ -97,17 +97,19 @@ h3.badge {
 }
 
 .profile-space {
-  margin: 8px 8px 8px 0;
+  margin: 8px 0 8px 0;
 }
 
 .profile-space a {
-  font-size: 14px;
+  font-size: 13px;
+  color: #333;
 }
 
 .profile-space img {
   vertical-align: middle;
   border-radius: 2px;
   margin-right: 5px;
+  width: 18px;
 }
 
 /* All users */

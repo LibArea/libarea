@@ -8,8 +8,8 @@
     </div>
     <div class="text-info no-mob">
       <h4 class="p-head two"><?= lang('Info'); ?></h4>
-      <a class="footer small" title="<?= lang('Spaces'); ?>" href="/space"><?= lang('Spaces'); ?></a>
-      <a class="footer small" title="<?= lang('Flow'); ?>" href="/flow"><?= lang('Flow'); ?></a>  
+      <a class="footer small" title="<?= lang('Spaces'); ?>" href="/spaces"><?= lang('Spaces'); ?></a>
+      <a class="footer small" title="<?= lang('Topics'); ?>" href="/topics"><?= lang('Topics'); ?></a>  
     </div>
     <div class="text-info no-mob">
       <h4 class="p-head three"><?= lang('Other'); ?></h4>
@@ -67,5 +67,7 @@
 
 <?= getRequestResources()->getBottomStyles(); ?>
 <?= getRequestResources()->getBottomScripts(); ?>
+
+<a id="scroll_top" title="Наверх">&#8593;</a>
 </body>
 </html> 

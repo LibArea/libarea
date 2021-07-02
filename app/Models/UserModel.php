@@ -99,12 +99,6 @@ class UserModel extends \MainModel
         return XD::update(['users'])->set(['password'], '=', $password)->where(['id'], '=', $id)->run();
     }
 
-    // Изменение аватарки
-    public static function setAvatar($login, $img)
-    {
-        return XD::update(['users'])->set(['avatar'], '=', $img)->where(['login'], '=', $login)->run();
-    }
-
     // Просмотры  
     public static function userHits($user_id)
     {
@@ -112,29 +106,18 @@ class UserModel extends \MainModel
         DB::run($sql,['user_id' => $user_id]); 
     }   
 
-   // Получение аватарки
-    public static function getAvatar($login)
+    // Изменение аватарки / обложки
+    public static function setImg($user_id, $img)
     {
-        $query = XD::select(['login', 'avatar'])->from(['users'])->where(['login'], '=', $login);
-
-        return $query->getSelectOne();
+        return XD::update(['users'])->set(['avatar'], '=', $img)->where(['id'], '=', $user_id)->run();
     }
 
-    // Изменение обложку
-    public static function setCover($login, $img)
+    public static function setCover($user_id, $img)
     {
-        return XD::update(['users'])->set(['cover_art'], '=', $img)->where(['login'], '=', $login)->run();
+        return XD::update(['users'])->set(['cover_art'], '=', $img)->where(['id'], '=', $user_id)->run();
     }
     
-   // Получение обложки
-    public static function getCover($login)
-    {
-        $query = XD::select(['login', 'cover_art'])->from(['users'])->where(['login'], '=', $login);
-
-        return $query->getSelectOne();
-    }
-
-   // TL - название
+    // TL - название
     public static function getUserTrust($id)
     {
         $q = XD::select(['id', 'trust_level', 'trust_id', 'trust_name'])->from(['users_trust_level']);

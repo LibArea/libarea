@@ -52,7 +52,7 @@ class SpaceModel extends \MainModel
     } 
 
     // Списки постов по пространству
-    public static function getPosts($space_id, $user_id, $user_tl, $space_tags_id, $type, $page)
+    public static function getPosts($space_id, $user_id, $user_tl, $type, $page)
     {
         if ($user_tl != 5) {  
             if ($user_id == 0) { 
@@ -71,26 +71,10 @@ class SpaceModel extends \MainModel
             $sort = "ORDER BY p.post_answers_num DESC";
         }           
             
-        if ($type == 'feed') {
-            if ($space_tags_id) {
-                $sort = "and post_tag_id = $space_tags_id ORDER BY p.post_top DESC, p.post_date DESC";
-            } else { 
-                $sort = "ORDER BY p.post_top DESC, p.post_date DESC";
-            }
-        } else {
-            
-            if ($space_tags_id) {
-                $sort = "and post_tag_id = $space_tags_id ORDER BY p.post_answers_num DESC";
-            } else { 
-                $sort = "ORDER BY p.post_answers_num DESC";
-            }   
-        }
-
         $offset = ($page-1) * 25;   
 
-        $sql = "SELECT p.*, u.*, t.*, v.* FROM posts as p 
+        $sql = "SELECT p.*, u.*, v.* FROM posts as p 
                 LEFT JOIN users as u ON u.id = p.post_user_id 
-                LEFT JOIN space_tags as t ON p.post_tag_id = t.st_id 
                 LEFT JOIN votes_post as v ON v.votes_post_item_id = p.post_id AND v.votes_post_user_id = $user_id
                 WHERE p.post_space_id = $space_id and p.post_draft = 0
                 $display
@@ -101,7 +85,7 @@ class SpaceModel extends \MainModel
     }
     
     // Количество постов
-    public static function getCount($space_id, $user_id, $user_tl, $space_tags_id, $type, $page)
+    public static function getCount($space_id, $user_id, $user_tl, $type, $page)
     {
         
         if ($user_tl != 5) {  
@@ -121,33 +105,19 @@ class SpaceModel extends \MainModel
             $sort = "ORDER BY p.post_answers_num DESC";
         }           
             
-        if ($type == 'feed') {
-            if ($space_tags_id) {
-                $sort = "and post_tag_id = $space_tags_id ORDER BY p.post_top DESC, p.post_date DESC";
-            } else { 
-                $sort = "ORDER BY p.post_top DESC, p.post_date DESC";
-            }
-        } else {
-            
-            if ($space_tags_id) {
-                $sort = "and post_tag_id = $space_tags_id ORDER BY p.post_answers_num DESC";
-            } else { 
-                $sort = "ORDER BY p.post_answers_num DESC";
-            }   
-        }
-        
-       $sql = "SELECT p.*, u.*, t.*, v.* FROM posts as p 
+       $sql = "SELECT p.*, u.*, v.* FROM posts as p 
                 LEFT JOIN users as u ON u.id = p.post_user_id 
-                LEFT JOIN space_tags as t ON p.post_tag_id = t.st_id 
                 LEFT JOIN votes_post as v ON v.votes_post_item_id = p.post_id AND v.votes_post_user_id = $user_id
                 WHERE p.post_space_id = $space_id and p.post_draft = 0 $display $sort";
 
-        $query = DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
-        return ceil(count($query) / 25);
+        $quantity = DB::run($sql)->rowCount(); 
+       
+        return ceil($quantity / 25);
+        
     }
     
     // Информация пространства по slug
-    public static function getSpaceInfo($slug)
+    public static function getSpaceSlug($slug)
     {
         $q = XD::select('*')->from(['space']);
         return $q->leftJoin(['users'])->on(['space_user_id'], '=', ['id'])->where(['space_slug'], '=', $slug)->getSelectOne();
@@ -193,7 +163,7 @@ class SpaceModel extends \MainModel
     }
     
     // Изменение пространства
-    public static function setSpaceEdit($data)  
+    public static function edit($data)
     {
         XD::update(['space'])->set(['space_slug'], '=', $data['space_slug'], ',', 
                 ['space_name'], '=', $data['space_name'], ',', 
@@ -208,16 +178,17 @@ class SpaceModel extends \MainModel
         return true;
     }
     
-    // Изменение пространства
-    public static function setSpaceEditLogo($data)  
+    // Изменение фото / обложки
+    public static function setImg($space_id, $img)
     {
-        XD::update(['space'])->set(['space_img'], '=', $data['space_img'], ',', 
-                ['space_cover_art'], '=', $data['space_cover_art'])
-                ->where(['space_id'], '=', $data['space_id'])->run();
-        
-        return true;
+        return XD::update(['space'])->set(['space_img'], '=', $img)->where(['space_id'], '=', $space_id)->run();
     }
 
+    public static function setCover($space_id, $cover)
+    {
+        return XD::update(['space'])->set(['space_cover_art'], '=', $cover)->where(['space_id'], '=', $space_id)->run();
+    }
+ 
     // Удалим обложку для пространства
     public static function CoverRemove($space_id)
     {
@@ -225,45 +196,6 @@ class SpaceModel extends \MainModel
                 ->where(['space_id'], '=', $space_id)->run();
     }
 
-    // Возвращает теги пространства
-    public static function getSpaceTags($space_id)
-    {
-        $q = XD::select('*')->from(['space_tags']);
-        $result = $q->leftJoin(['space'])->on(['space_id'], '=', ['st_space_id'])->where(['space_id'], '=', $space_id)->getSelect();
-
-        return $result;
-    } 
-    
-    // Информация по тэгу
-    public static function getTagInfo($tag_id)
-    {
-        return XD::select('*')->from(['space_tags'])->where(['st_id'], '=', $tag_id)->getSelectOne();
-    } 
-    
-    // Изменить тэг
-    public static function tagEdit($tag_id, $st_title, $st_desc)
-    {
-        XD::update(['space_tags'])->set(['st_title'], '=', $st_title, ',', ['st_description'], '=', $st_desc)->where(['st_id'], '=', $tag_id)->run();
-        
-        return true;
-    } 
-    
-    // Добавляем тэг
-    public static function tagAdd($space_id, $st_title, $st_desc)
-    {
-        XD::insertInto(['space_tags'], '(', 
-            ['st_space_id'], ',',
-            ['st_title'], ',', 
-            ['st_description'], ')')->values( '(', 
-        
-        XD::setList([
-            $space_id,
-            $st_title, 
-            $st_desc]), ')' )->run();
-
-        return true;
-    } 
-    
     // Удалено пространство или нет
     public static function isTheSpaceDeleted($space_id) 
     {

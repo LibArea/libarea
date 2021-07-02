@@ -56,7 +56,7 @@
 <div class="wrap">   
     <main>
         <ul class="nav-tabs">
-            <?php if($type == 'feed') { ?>
+            <?php if($data['sheet'] == 'feed') { ?>
                 <li class="active">
                    <span><?= lang('Feed'); ?></span>
                 </li>
@@ -143,9 +143,6 @@
                                 <i class="icon link"></i> <?= $post['post_url_domain']; ?>
                             </a> 
                         <?php } ?>
-                        <?php if($post['st_id']) { ?>
-                            <a class="tags indent-bid" href="/s/<?= $space_info['space_slug']; ?>/tag/<?= $post['st_id']; ?>" title="<?= $post['st_title']; ?>"><?= $post['st_title']; ?></a>
-                        <?php } ?>
                         
                         <div class="post-details">
                             <div class="show_add_<?= $post['post_id']; ?>">
@@ -207,11 +204,21 @@
         <?php if(!($data['pNum'] > $data['pagesCount'])) { ?>
             <div class="pagination">   
                 <?php if($data['pNum'] != 1) { ?> 
-                    <a class="link" href="/s/<?= $space_info['space_slug']; ?>/<?= $data['pNum'] - 1; ?>"> << <?= lang('Page'); ?> <?= $data['pNum'] - 1; ?></a> 
+                     <?php if (($data['pNum'] - 1) == 1) { ?>
+                        <a class="link" href="/s/<?= $space_info['space_slug']; ?><?php if($data['sheet'] == 'top') { ?>/top<?php } ?>"> 
+                            << <?= lang('Page'); ?> 
+                            <?= $data['pNum'] - 1; ?>
+                        </a> 
+                    <?php } else { ?>
+                        <a class="link" href="/s/<?= $space_info['space_slug']; ?><?php if($data['sheet'] == 'top') { ?>/top<?php } ?>/page/<?= $data['pNum'] - 1; ?>"> 
+                            << <?= lang('Page'); ?> 
+                            <?= $data['pNum'] - 1; ?>
+                        </a> 
+                    <?php } ?>
                 <?php } ?>
                 <?php if($data['pagesCount'] != $data['pNum'] && $data['pNum'] != 1) { ?>|<?php } ?> 
                 <?php if($data['pagesCount'] > $data['pNum']) { ?>
-                    <a class="link" href="/s/<?= $space_info['space_slug']; ?>/<?= $data['pNum'] + 1; ?>"><?= lang('Page'); ?>  <?= $data['pNum'] + 1; ?> >></a> 
+                    <a class="link" href="/s/<?= $space_info['space_slug']; ?><?php if($data['sheet'] == 'top') { ?>/top<?php } ?>/page/<?= $data['pNum'] + 1; ?>"><?= lang('Page'); ?>  <?= $data['pNum'] + 1; ?> >></a> 
                 <?php } ?>
             </div>
         <?php } ?>
@@ -285,19 +292,7 @@
                     <?= $space_info['space_text']; ?>
                 </div>
             </div>
-          
-            <?php if (!empty($tags)) { ?>
-                <div class="space-tags white-box">
-                    <div class="inner-padding big">
-                        <div class="menu-m"><?= lang('Tags'); ?></div>
-                        <?php foreach ($tags as  $tag) { ?>  
-                            <a class="tags<?php if ($uid['uri'] == '/s/'.$tag['space_slug'] .'/tag/'.$tag['st_id']) { ?>  avtive<?php } ?>" href="/s/<?= $space_info['space_slug']; ?>/tag/<?= $tag['st_id']; ?>">
-                                <?= $tag['st_title']; ?>
-                            </a>
-                        <?php } ?>
-                    </div>
-                </div>
-            <?php } ?> 
+
     </aside> 
 </div>
 <?php } else { ?>

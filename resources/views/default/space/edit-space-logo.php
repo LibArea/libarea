@@ -12,11 +12,6 @@
                     <li class="active">
                         <span><?= lang('Logo'); ?> / <?= lang('Cover art'); ?></span>
                     </li>
-                    <li>
-                        <a href="/space/<?= $space['space_slug']; ?>/tags">
-                            <span><?= lang('Tags'); ?></span>
-                        </a>
-                    </li>
                     <li class="right">
                         <a href="/s/<?= $space['space_slug']; ?>">
                             <span><?= lang('In space'); ?></span>

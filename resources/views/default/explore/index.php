@@ -5,12 +5,12 @@
         <div class="white-box">
             <div class="inner-padding">
                 <div class="top-box">
-                    <div class="w-33 left">
+                    <div class="w-33 left no-mob">
                         <?php if(!empty($last_post['post_title'])) { ?>
                             <a class="ex-title" title="<?= $last_post['post_title']; ?>" href="/post/<?= $last_post['post_id']; ?>/<?= $last_post['post_slug']; ?>">
                                 <style nonce="<?= $_SERVER['nonce']; ?>">
                                     .center-cropped {
-                                      width: 360px;
+                                      max-width: 360px;
                                       height: 220px;
                                       background-position: center center;
                                       background-repeat: no-repeat;
@@ -39,6 +39,22 @@
                         <?php } else { ?>
                            <br> Добавьте пост с фото...
                         <?php } ?>
+                        
+                        <div class="box-card">
+                            <div class="w-50 left">
+                                <a  title="<?= lang('Users'); ?>" href="/users">
+                                    <img alt="<?= lang('Users'); ?>" src="assets/images/explore/Card04.png" class="card">
+                                    <div><?= lang('Users'); ?></div>
+                                </a>
+                            </div>
+                            <div class="w-50 left">
+                                <a title="<?= lang('Spaces'); ?>" href="/space">
+                                    <img alt="<?= lang('Spaces'); ?>" src="assets/images/explore/Card05.png" class="card">
+                                    <div><?= lang('Spaces'); ?></div>
+                                </a>
+                            </div>
+                        </div> 
+                        
                     </div>
                     <div class="w-66 left"> 
                         <h1><?= lang('Explore'); ?></h1>
@@ -61,26 +77,7 @@
                         <?php } ?>
                     </div>
                 </div>
-                <div class="box-card">
-                    <div class="w-33 left">
-                        <a  title="<?= lang('Users'); ?>" href="/users">
-                            <img alt="<?= lang('Users'); ?>" src="assets/images/explore/Card04.png" class="card">
-                            <div><?= lang('Users'); ?></div>
-                        </a>
-                    </div>
-                    <div class="w-33 left">
-                        <a title="<?= lang('Flow'); ?>" href="/flow">
-                            <img alt="<?= lang('Flow'); ?>" src="assets/images/explore/Card07.png" class="card">
-                            <div><?= lang('Flow'); ?></div>
-                        </a>
-                    </div>
-                    <div class="w-33 left">
-                        <a title="<?= lang('Spaces'); ?>" href="/space">
-                            <img alt="<?= lang('Spaces'); ?>" src="assets/images/explore/Card05.png" class="card">
-                            <div><?= lang('Spaces'); ?></div>
-                        </a>
-                    </div>
-                </div> 
+
             
                 <div class="footer-box">
                     <h3>Статистика</h3>
@@ -122,34 +119,6 @@
                             });
                         }); 
                     </script>    
-                    <br><br>
-                    <canvas id="myChart2"></canvas>
-                    <script nonce="<?= $_SERVER['nonce']; ?>">
-                        window.onload=function(){
-                            var ctx = document.getElementById("myChart2").getContext("2d");
-                            var myChart2 = new Chart(ctx, {
-                                type: 'line',
-                                data: {
-                                    labels: [1,2,3,4,5,6,7,8,9,10],
-                                    datasets: [
-                                        {
-                                            label: "<?= lang('Activity'); ?>",
-                                            data: [
-                                            
-                                            <?php foreach ($data['flow_num'] as $flow) { ?>
-                                                <?= $flow['0']; ?>,
-                                            <?php } ?>
-                                            
-                                            ]
-                                        }
-                                    ]
-                                },
-                                options: {
-                                    responsive: false
-                                }
-                            });
-                        }
-                    </script>
                  </div>   
             </div>
         </div>

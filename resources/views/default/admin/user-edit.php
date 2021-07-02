@@ -28,11 +28,11 @@
                             <?php if($user['trust_level'] != 5) { ?>                 
                                 <?php if($user['isBan']) { ?>
                                     <span class="user-ban" data-id="<?= $user['id']; ?>">
-                                        <span class="red"><?= lang('unban'); ?></span>
+                                        <span class="red"><?= lang('Unban'); ?></span>
                                     </span>
                                 <?php } else { ?>
                                     <span class="user-ban" data-id="<?= $user['id']; ?>">
-                                        <span class="green">+ <?= lang('ban it'); ?></span>
+                                        <span class="green">+ <?= lang('Ban it'); ?></span>
                                     </span>
                                 <?php } ?>
                             <?php } else { ?> 

@@ -8,6 +8,15 @@ function lang($text) {
     return $text;
 }
 
+// Topic
+function topic_url($file, $size)
+{
+    if ($size == 'small') {  
+        return '/uploads/topics/small/' . $file;
+    } 
+    return '/uploads/topics/' . $file;
+}
+
 // User's Avatar
 function user_avatar_url($file, $size) 
 {
@@ -31,7 +40,6 @@ function spase_logo_url($file, $size='small')
     } 
     return  '/uploads/spaces/logos/' . $file;
 }
-
 
 // Favicon 
 function favicon_url($link_id) 
@@ -133,7 +141,6 @@ function accessPm($uid, $user_id, $add_tl)
     
     return true;
 }    
-    
     
 // Проверка доступа
 // $content

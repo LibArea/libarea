@@ -86,6 +86,10 @@ a.active {
   color: #390;
 }
 
+.gray {
+  color: var(--tertiary);
+}
+
 .red,
 .lo {
   color: var(--quaternary);
@@ -148,6 +152,10 @@ a.active {
   padding: 15px;
 }
 
+img {
+  border-radius: 2px;
+}
+
 main.w-100 {
   width: 100%;
   max-width: 100%;
@@ -170,6 +178,12 @@ h1.domain {
   font-weight: 400;
   font-size: 1.2rem;
   margin: 5px 0;
+}
+
+h1.topics {
+  font-weight: 400;
+  font-size: 1.2rem;
+  margin-top: 0;
 }
 
 h3.lo {
@@ -259,6 +273,7 @@ a.add-post:hover {
 
 a.link {
   color: var(--tertiary);
+  font-size: 14px;
 }
 
 a.link:hover {
@@ -636,7 +651,6 @@ img.thumb {
   float: right;
   width: 140px;
   max-height: 100px;
-  border-radius: 2px;
 }
 
 .full-post-home img.thumb {
@@ -812,9 +826,12 @@ img.img-post,
 }
 
 img.ava {
-  border-radius: 2px;
   vertical-align: middle;
   width: 18px;
+}
+
+img.ava-24 {
+  width: 24px;
 }
 
 .search-info,
@@ -827,7 +844,6 @@ img.ava {
 .search-info img {
   vertical-align: middle;
   margin-right: 5px;
-  border-radius: 2px;
 }
 
 .search-title {
@@ -870,7 +886,6 @@ img.ava {
   margin-right: 6px;
   width: 21px;
   height: 21px;
-  border-radius: 2px;
   vertical-align: middle;
 }
 
@@ -913,6 +928,10 @@ ol.dell.answer-telo {
 .answ-header .user {
   margin: 0 0 0 3px;
   text-transform: lowercase;
+}
+
+.answer-footer {
+  height: 24px;
 }
 
 /* Комментарии */
@@ -1198,7 +1217,7 @@ ol.comment-telo {
   margin: 0 0 25px 0;
 }
 
-.related h3 {
+h3.style {
   margin: 0 0 5px 0;
   font-weight: 300;
   text-transform: uppercase;
@@ -1219,6 +1238,28 @@ ol.comment-telo {
   border-radius: 50%;
   margin-right: 5px;
   flex-shrink: 0;
+}
+
+/* Topic */
+a.tags {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 8pt;
+  padding: 0.2em 0.4em 0.2em 0.4em;
+  text-decoration: none;
+  color: #888;
+  display: inline-block;
+  font-style: normal;
+}
+
+a.tags.avtive {
+  border: 1px solid #e45735;
+  color: #e45735;
+}
+
+a.tags:hover {
+  border: 1px solid #ccc;
+  color: #666;
 }
 
 /* Info пространство и рекомендовано в посте */
@@ -1269,6 +1310,13 @@ ol.comment-telo {
 .l-rec-footer {
   color: #666;
   margin-top: 3px;
+}
+
+.sb-created {
+  color: #666;
+  font-size: 14px;
+  vertical-align: middle;
+  display: inline;
 }
 
 h3.recommend {
@@ -1405,6 +1453,30 @@ i.github:hover {
   text-decoration: none;
 }
 
+.tel-topics {
+  font-size: 13px;
+}
+
+.topic-list .item {
+  position: relative;
+  float: left;
+  width: 50%;
+  min-height: 90px;
+  padding: 20px 5px 20px 68px;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.img-topic {
+  position: absolute;
+  left: 5px;
+  top: 26px;
+}
+
+.img-topic img {
+  width: 54px;
+  border-radius: 3px;
+}
+
 /* dark */
 .dark {
   background: #222;
@@ -1454,13 +1526,19 @@ i.github:hover {
   color: #eee;
 }
 
-.to-user {
-  border-radius: 3px;
-  color: #b63e56;
-  padding: 1px 4px;
+/* Прокрутка */
+#scroll_top {
+  bottom: 150px;
+  display: none;
+  cursor: pointer;
+  position: fixed;
+  padding: 7px;
+  right: 1px;
+  color: var(--quaternary);
+  font-size: 24px;
 }
 
-@media (max-width: 810px) {
+@media (max-width: 880px) {
   .no-mob,
   aside { display: none; }
   header { margin-left: 0; }
@@ -1480,6 +1558,7 @@ i.github:hover {
 
 @media (max-width: 704px) {
   form.form { display: none; }
+  .topic-list .item { width: 100%; }
 }
 
 @font-face {
@@ -1577,3 +1656,27 @@ a:hover .icon::before {
 .icon.social-facebook::before { content: "\e00b"; }
 .icon.social-pinterest::before { content: "\e60b"; }
 .icon.share-alt::before { content: "\e05a"; }
+
+#fixed {
+ position: fixed;
+ top: 0;
+ left: 0;
+ z-index:9999;
+ width: 64px;
+ height: 100%;
+ background: #DCDCDC;
+}
+.updown {
+  display: none;
+  min-height: 32px;
+  height: 300px;
+  width: 100%;
+  cursor: pointer;
+  margin: 100% auto;
+}
+.updown::before {
+  display: block;
+  content: '';
+  height: 50%;
+  width: 100%;
+}

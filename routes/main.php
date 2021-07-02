@@ -17,8 +17,6 @@ Route::before('Authorization@noAuth')->getGroup();
         Route::get('/post/del')->controller('PostController@deletePost');
         Route::get('/post/grabtitle')->controller('PostController@grabMeta');
  
-        Route::get('/flow/del')->controller('FlowController@deleteFlow');
-    
         Route::get('/comment/editform')->controller('CommentController@editCommentForm');
         Route::get('/comment/del')->controller('CommentController@deletComment');
         Route::get('/comment/recover')->controller('CommentController@recoverComment');
@@ -32,18 +30,27 @@ Route::before('Authorization@noAuth')->getGroup();
         
         Route::get('/search/users')->controller('PostController@select', ['user']);
         Route::get('/search/posts')->controller('PostController@select', ['posts']);
+        Route::get('/search/topics')->controller('PostController@select', ['topics']);
  
         Route::get('/space/hide')->controller('SpaceController@hide');
         
         Route::getProtect(); // Начало защиты
-            Route::get('/admin/addspaceadmin')->controller('AdminController@spaceAdd');
             Route::get('/admin/user/edit/{id}')->controller('AdminController@userEdit')->where(['id' => '[0-9]+']);
             Route::get('/admin/domain/edit/{id}')->controller('AdminController@domainEdit')->where(['id' => '[0-9]+']);
+            
             Route::get('/admin/badge/user/addform')->controller('AdminController@addBadgeUser');
             Route::get('/admin/badge/edit/{id}')->controller('AdminController@badgeEdit')->where(['id' => '[0-9]+']);
             Route::get('/admin/badge/add')->controller('AdminController@badgeAdd');
             
             Route::get('/admin/word/add')->controller('AdminController@createWord');
+            
+            Route::get('/admin/addspaceadmin')->controller('AdminController@spaceAdd');
+            Route::get('/space/editspace')->controller('SpaceController@edit');
+            Route::get('/space/editspace/logo')->controller('SpaceController@logoEdit');
+            Route::get('/space/addspace')->controller('SpaceController@add');
+            
+            Route::get('/admin/addtopicadmin')->controller('TopicController@topicAdd');
+            Route::get('/admin/topic/edit/{id}')->controller('TopicController@topicEdit')->where(['id' => '[0-9]+']);
             
             Route::get('/users/setting/edit')->controller('UserController@settingEdit');
             Route::get('/users/setting/avatar/edit')->controller('UserController@settingAvatarEdit');
@@ -57,20 +64,12 @@ Route::before('Authorization@noAuth')->getGroup();
             Route::get('/users/setting/avatar/edit')->controller('UserController@settingAvatarEdit');
             Route::get('/users/setting/security/edit')->controller('UserController@settingSecurityEdit');
 
-            Route::get('/flow/add')->controller('FlowController@chatAdd');
-        
             Route::get('/comment/edit')->controller('CommentController@editComment');
             Route::get('/comment/add')->controller('CommentController@createComment');
         
             Route::get('/answer/edit')->controller('AnswerController@editAnswer');
             Route::get('/answer/add')->controller('AnswerController@createAnswer');
-        
-            Route::get('/space/editspace')->controller('SpaceController@edit');
-            Route::get('/space/editspace/logo')->controller('SpaceController@logoEdit');
-            Route::get('/space/addspace')->controller('SpaceController@add');
-            Route::get('/space/tag/edit')->controller('SpaceController@editTag');
-            Route::get('/space/tag/add')->controller('SpaceController@addTag');
-            
+     
             Route::get('/messages/send')->controller('MessagesController@send');
         Route::endProtect(); // Завершение защиты
     Route::endType();  // Завершение getType('post')
@@ -96,9 +95,13 @@ Route::before('Authorization@noAuth')->getGroup();
     Route::get('/admin/badges')->controller('AdminController@badges');
     Route::get('/admin/badge/add')->controller('AdminController@addBadgeForm');
  
+    Route::get('/admin/topics')->controller('AdminController@topics');
+    Route::get('/admin/topic/add')->controller('TopicController@addTopicForm');
+    Route::get('/admin/topic/{id}/edit')->controller('TopicController@editTopicForm')->where(['id' => '[0-9]+']);
+ 
     Route::get('/admin/badge/user/add')->controller('AdminController@addBadgeUserPage');
     Route::get('/admin/badge/user/add/{id}')->controller('AdminController@addBadgeUserPage')->where(['id' => '[0-9]+']);
-    Route::get('/admin/badge/{id}/edit')->controller('AdminController@badgeEditForm')->where(['id' => '[0-9]+']);
+    Route::get('/admin/badge/{id}/edit')->controller('AdminController@editBadgeForm')->where(['id' => '[0-9]+']);
     
     Route::get('/post/img/{id}/remove')->controller('PostController@imgPostRemove')->where(['id' => '[0-9]+']);
  
@@ -137,16 +140,13 @@ Route::before('Authorization@noAuth')->getGroup();
 	// Подписываемся, отписываемся / изменяем пространство
     Route::get('/space/{slug}/edit')->controller('SpaceController@editForm')->where(['slug' => '[A-Za-z0-9_]+']); 
     Route::get('/space/{slug}/edit/logo')->controller('SpaceController@logoForm')->where(['slug' => '[A-Za-z0-9_]+']);  
-    Route::get('/space/{slug}/tags')->controller('SpaceController@tagsInfo')->where(['slug' => '[A-Za-z0-9_]+']); 
-    Route::get('/space/{slug}/tags/add')->controller('SpaceController@tagsAddForm')->where(['slug' => '[A-Za-z0-9_]+']);
  
     Route::get('/space/{slug}/delete/cover')->controller('SpaceController@coverRemove')->where(['slug' => '[A-Za-z0-9_]+']);
     Route::get('/space/add')->controller('SpaceController@addForm');
     Route::get('/space/my')->controller('SpaceController@spaseUser');
  
-    Route::get('/s/{slug}/{tags?}/edit')->controller('SpaceController@editTagForm')->where(['slug' => '[A-Za-z0-9_]+',  'tags' => '[0-9]+']);
-    
-    Route::get('/all/{page?}')->controller('PostController', ['all'])->where(['page' => '[0-9]+']);
+    Route::get('/all')->controller('PostController', ['all']);
+    Route::get('/all/page/{page?}')->controller('PostController', ['all'])->where(['page' => '[0-9]+']);
 Route::endGroup();
 
 Route::before('Authorization@yesAuth')->getGroup();
@@ -194,34 +194,37 @@ Route::get('/u/{login}/posts')->controller('PostController@userPosts')->where(['
 Route::get('/u/{login}/answers')->controller('AnswerController@userAnswers')->where(['login' => '[A-Za-z0-9]+']);
 Route::get('/u/{login}/comments')->controller('CommentController@userComments')->where(['login' => '[A-Za-z0-9]+']);
 
-// Поток
-Route::get('/flow')->controller('FlowController');
-Route::get('/flow/content')->controller('FlowController@contentChat');
-
 // Все комментарии и ответы
 Route::get('/comments')->controller('CommentController');
-Route::get('/answers')->controller('AnswerController');
+Route::get('/comments/page/{page?}')->controller('CommentController')->where(['page' => '[0-9]+']);
 
-// Исследовать
-Route::get('/explore')->controller('ExploreController');
+Route::get('/answers')->controller('AnswerController');
+Route::get('/answers/page/{page?}')->controller('AnswerController')->where(['page' => '[0-9]+']);
 
 // Пространства
-Route::get('/space')->controller('SpaceController');
-Route::get('/s/{slug}/{page?}')->controller('SpaceController@posts', ['feed'])->where(['slug' => '[A-Za-z0-9_]+', 'page' => '[0-9]+']);
-Route::get('/s/{slug}/top/{page?}')->controller('SpaceController@posts', ['top'])->where(['slug' => '[A-Za-z0-9_]+', 'page' => '[0-9]+']);
-Route::get('/s/{slug}/tag/{tags?}')->controller('SpaceController@posts', ['feed'])->where(['slug' => '[A-Za-z0-9_]+',  'tags' => '[0-9]+']);
-Route::get('/s/{slug}/top/tag/{tags?}')->controller('SpaceController@posts', ['top'])->where(['slug' => '[A-Za-z0-9_]+',  'tags' => '[0-9]+']);
+Route::get('/spaces')->controller('SpaceController');
+Route::get('/s/{slug}')->controller('SpaceController@posts', ['feed'])->where(['slug' => '[A-Za-z0-9_]+']);
+Route::get('/s/{slug}/page/{page?}')->controller('SpaceController@posts', ['feed'])->where(['slug' => '[A-Za-z0-9_]+', 'page' => '[0-9]+']);
+Route::get('/s/{slug}/top')->controller('SpaceController@posts', ['top'])->where(['slug' => '[A-Za-z0-9_]+']);
+Route::get('/s/{slug}/top/page/{page?}')->controller('SpaceController@posts', ['top'])->where(['slug' => '[A-Za-z0-9_]+', 'page' => '[0-9]+']);
 
 Route::get('/moderations')->controller('ModerationController');
+
+Route::get('/topics')->controller('TopicController')->where(['page' => '[0-9]+']);
+Route::get('/topic/page/{page?}')->controller('TopicController')->where(['page' => '[0-9]+']);
+Route::get('/topic/{slug}')->controller('TopicController@topic')->where(['slug' => '[A-Za-z0-9_]+']);
+Route::get('/topic/{slug}/info')->controller('TopicController@info')->where(['slug' => '[A-Za-z0-9_]+']);
+Route::get('/topic/{slug}/page/{page?}')->controller('TopicController@topic')->where(['slug' => '[A-Za-z0-9_]+', 'page' => '[0-9]+']);
 
 // Домены
 Route::get('/domains')->controller('LinkController');
 Route::get('/domain/{domain}')->controller('LinkController@domain')->where(['domain' => '[A-Za-z0-9-.]+']);
 
 // Пагинация и главная (feed) страница, top, all...
-Route::get('/{page?}')->controller('PostController', ['feed'])->where(['page' => '[0-9]+']);
-Route::get('/top/{page?}')->controller('PostController', ['top'])->where(['page' => '[0-9]+']);
-Route::get('/comments/{page?}')->controller('CommentController')->where(['page' => '[0-9]+']);
+Route::get('/')->controller('PostController', ['feed']);
+Route::get('/page/{page?}')->controller('PostController', ['feed'])->where(['page' => '[0-9]+']);
+Route::get('/top')->controller('PostController', ['top']);
+Route::get('/top/page/{page?}')->controller('PostController', ['top'])->where(['page' => '[0-9]+']);
 
 // Карта сайта и Турбо страницы (пространств)
 Route::get('/sitemap.xml')->controller('RssController');

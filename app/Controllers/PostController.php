@@ -7,6 +7,7 @@ use App\Models\UserModel;
 use App\Models\SpaceModel;
 use App\Models\LinkModel;
 use App\Models\AnswerModel;
+use App\Models\TopicModel;
 use App\Models\CommentModel;
 use App\Models\NotificationsModel;
 use Lori\Content;
@@ -27,8 +28,8 @@ class PostController extends \MainController
 
         $space_user  = SpaceModel::getSpaceUserSigned($uid['id']);
         
-        $pagesCount = PostModel::postsFeedCount($space_user, $uid['trust_level'], $uid['id'], $sheet); 
-        $posts      = PostModel::postsFeed($page, $space_user, $uid['trust_level'], $uid['id'], $sheet);
+        $pagesCount = PostModel::postsFeedCount($space_user, $uid, $sheet); 
+        $posts      = PostModel::postsFeed($page, $space_user, $uid, $sheet);
 
         Base::PageError404($posts);
 
@@ -126,6 +127,8 @@ class PostController extends \MainController
             $post['edit_date'] = null;
         }
         
+        $topics = PostModel::getPostTopic($post['post_id']);
+        
         // Покажем черновик только автору
         if ($post['post_draft'] == 1 && $post['post_user_id'] != $uid['id']) {
             redirect('/');
@@ -212,7 +215,7 @@ class PostController extends \MainController
             'meta_desc'     => $meta_desc,
         ];
         
-        return view(PR_VIEW_DIR . '/post/post-view', ['data' => $data, 'post' => $post, 'answers' => $answers,  'uid' => $uid,  'recommend' => $recommend,  'lo' => $lo, 'post_related' => $post_related]);
+        return view(PR_VIEW_DIR . '/post/post-view', ['data' => $data, 'post' => $post, 'answers' => $answers,  'uid' => $uid,  'recommend' => $recommend,  'lo' => $lo, 'post_related' => $post_related, 'topics' => $topics]);
     }
 
     // Посты участника
@@ -293,9 +296,10 @@ class PostController extends \MainController
         $post_merged_id         = \Request::getPostInt('post_merged_id');
         $post_tl                = \Request::getPostInt('post_tl');
       
-        $related = empty($_POST['post_related']) ? '' : $_POST['post_related'];
-        $post_related = empty($related) ? '' : implode(',', $related);
-      
+        $related        = empty($_POST['post_related']) ? '' : $_POST['post_related'];
+        $post_related   = empty($related) ? '' : implode(',', $related);
+        $topics         = empty($_POST['post_topics']) ? '' : $_POST['post_topics'];
+        
         // Используем для возврата
         $redirect = '/post/add';
 
@@ -418,7 +422,6 @@ class PostController extends \MainController
             'post_ip_int'           => $post_ip_int,
             'post_user_id'          => $uid['id'],
             'post_space_id'         => $space_id,
-            'post_tag_id'           => $tag_id,
             'post_url'              => $post_url,
             'post_url_domain'       => $post_url_domain,
             'post_closed'           => $post_closed,
@@ -427,9 +430,17 @@ class PostController extends \MainController
         
         // Записываем пост
         $post_id = PostModel::AddPost($data);
-        
+
         // url поста
         $url = '/post/'. $post_id .'/'. $post_slug;
+        
+        if(!empty($topics)) { 
+            $arr = [];
+            foreach ($topics as $row) {
+                $arr[] = array($row, $post_id);
+            }
+            TopicModel::addPostTopics($arr, $post_id);
+        } 
         
         // Уведомление (@login)
         if ($message = Content::parseUser($post_content, true, true)) {
@@ -523,7 +534,6 @@ class PostController extends \MainController
         }  
 
         $space = SpaceModel::getSpaceSelect($uid['id'], $uid['trust_level']);
-        $tags  = SpaceModel::getSpaceTags($post['post_space_id']);
         $user  = UserModel::getUserId($post['post_user_id']);
 
         Request::getHead()->addStyles('/assets/css/image-uploader.css'); 
@@ -542,14 +552,15 @@ class PostController extends \MainController
         } 
 
         $post_related = PostModel::postRelated($post['post_related']);
-
+        $post_topics  = PostModel::getPostTopic($post['post_id']);
+        
         $data = [
             'h1'            => lang('Edit post'),
             'sheet'         => 'edit-post',
             'meta_title'    => lang('Edit post'),
         ];
 
-        return view(PR_VIEW_DIR . '/post/post-edit', ['data' => $data, 'uid' => $uid, 'post' => $post, 'post_related' => $post_related, 'space' => $space, 'tags' => $tags, 'user' => $user]);
+        return view(PR_VIEW_DIR . '/post/post-edit', ['data' => $data, 'uid' => $uid, 'post' => $post, 'post_related' => $post_related, 'space' => $space, 'user' => $user, 'post_topics' => $post_topics]);
     }
     
     // Связанные посты и выбор автора
@@ -560,7 +571,9 @@ class PostController extends \MainController
         
         if ($sheet == 'posts') {
             return PostModel::getSearchPosts($search);
-        } 
+        } elseif ($sheet == 'topics') {
+            return TopicModel::getSearchTopics($search);
+        }             
         
         return UserModel::getSearchUsers($search);
     }
@@ -577,7 +590,6 @@ class PostController extends \MainController
         $post_closed            = \Request::getPostInt('closed');
         $post_top               = \Request::getPostInt('top');
         $post_space_id          = \Request::getPostInt('space_id');
-        $post_tag_id            = \Request::getPostInt('tag_id');
         $draft                  = \Request::getPost('draft');
         $post_user_new          = \Request::getPost('post_user_new');
         $post_merged_id         = \Request::getPostInt('post_merged_id');
@@ -585,9 +597,11 @@ class PostController extends \MainController
         
         $uid    = Base::getUid();
         
-        $related = empty($_POST['post_related']) ? '' : $_POST['post_related'];
-        $post_related = empty($related) ? '' : implode(',', $related);
-       
+        // Связанные посты и темы
+        $related        = empty($_POST['post_related']) ? '' : $_POST['post_related'];
+        $post_related   = empty($related) ? '' : implode(',', $related);
+        $topics         = empty($_POST['post_topics']) ? '' : $_POST['post_topics'];
+
         $post = PostModel::postId($post_id); 
          
         $redirect = '/post/edit/' . $post_id; 
@@ -627,13 +641,6 @@ class PostController extends \MainController
         Base::Limits($post_title, lang('Title'), '6', '250', $redirect);
         Base::Limits($post_content, lang('The post'), '6', '25000', $redirect);
         
-        // Проверяем url для > TL1
-        // Ввести проверку дублей и запрещенных
-        // При изменение url считаем частоту смену url после добавления у конкретного пользователя
-        // Если больше N оповещение персонала, если изменен на запрещенный, скрытие поста,
-        // или более расширенное поведение, а пока просто проверим
-        $post_tag_img = empty($post_tag_id) ? '' : $post_tag_id;
-
         // Проверим хакинг формы
         if ($post['post_draft'] == 0) {
             $draft = 0;
@@ -701,7 +708,6 @@ class PostController extends \MainController
             'post_closed'           => $post_closed,
             'post_top'              => $post_top,
             'post_space_id'         => $post_space_id,
-            'post_tag_id'           => $post_tag_id,
         ];
         
         // Think through the method 
@@ -709,6 +715,14 @@ class PostController extends \MainController
 
         // Перезапишем пост
         PostModel::editPost($data);
+
+        if(!empty($topics)) { 
+            $arr = [];
+            foreach ($topics as $row) {
+                $arr[] = array($row, $post_id);
+            }
+            TopicModel::addPostTopics($arr, $post_id);
+        } 
         
         redirect('/post/' . $post['post_id'] . '/' . $post['post_slug']);
     }

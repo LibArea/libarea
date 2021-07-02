@@ -76,7 +76,7 @@ class MessagesController extends \MainController
             'messages'      => $result,
         ];
 
-        return view(PR_VIEW_DIR . '/messages/index', ['data' => $data, 'uid' => $uid]);
+        return view(PR_VIEW_DIR . '/messages/messages', ['data' => $data, 'uid' => $uid]);
 	}
 
 	public function dialog()

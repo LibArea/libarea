@@ -3,7 +3,7 @@
 namespace App\Controllers;
 use App\Models\SpaceModel;
 use Hleb\Constructor\Handlers\Request;
-use SimpleImage;
+use Lori\UploadImage;
 use Lori\Content;
 use Lori\Config;
 use Lori\Base;
@@ -37,7 +37,7 @@ class SpaceController extends \MainController
             'meta_desc'     => lang('all-space-desc') .' '. Config::get(Config::PARAM_HOME_TITLE),
         ];
         
-        return view(PR_VIEW_DIR . '/space/all-space', ['data' => $data, 'uid' => $uid, 'space' => $result, 'add_space_button' => $add_space_button]);
+        return view(PR_VIEW_DIR . '/space/spaces', ['data' => $data, 'uid' => $uid, 'space' => $result, 'add_space_button' => $add_space_button]);
     }
 
     // Пространства участника
@@ -71,22 +71,21 @@ class SpaceController extends \MainController
     }
 
     // Посты по пространству
-    public function posts($type)
+    public function posts($sheet)
     {
         $uid            = Base::getUid();
         $slug           = \Request::get('slug');
-        $space_tags_id  = \Request::getInt('tags');
         
         $pg     = \Request::getInt('page'); 
         $page   = (!$pg) ? 1 : $pg;
         
         
         // Покажем 404
-        $space = SpaceModel::getSpaceInfo($slug);
+        $space = SpaceModel::getSpaceSlug($slug);
         Base::PageError404($space);
   
-        $pagesCount = SpaceModel::getCount($space['space_id'], $uid['id'], $uid['trust_level'], $space_tags_id, $type, $page); 
-        $posts      = SpaceModel::getPosts($space['space_id'], $uid['id'], $uid['trust_level'], $space_tags_id, $type, $page);
+        $pagesCount = SpaceModel::getCount($space['space_id'], $uid['id'], $uid['trust_level'], $sheet, $page); 
+        $posts      = SpaceModel::getPosts($space['space_id'], $uid['id'], $uid['trust_level'], $sheet, $page);
 
         $space['space_date']        = lang_date($space['space_date']);
         $space['space_cont_post']   = count($posts);
@@ -97,16 +96,16 @@ class SpaceController extends \MainController
             $text = explode("\n", $row['post_content']);
             $row['post_content_preview']    = Content::text($text[0], 'line');
             $row['lang_num_answers']        = word_form($row['post_answers_num'], lang('Answer'), lang('Answers-m'), lang('Answers'));
+            $row['post_date']               = lang_date($row['post_date']);
             $result[$ind]                   = $row;
         }  
 
-        $tags           = SpaceModel::getSpaceTags($space['space_id']);
         $space['users'] = SpaceModel::numSpaceSubscribers($space['space_id']);
 
         // Отписан участник от пространства или нет
         $space_signed = SpaceModel::getMySpaceHide($space['space_id'], $uid['id']);
         
-        if ($type == 'feed') {
+        if ($sheet == 'feed') {
             $s_title = lang('space-feed-title');
         } else {
             $s_title = lang('space-top-title');
@@ -127,12 +126,12 @@ class SpaceController extends \MainController
             'img'           => Config::get(Config::PARAM_URL) .'/uploads/spaces/logos/'. $space['space_img'],
             'pagesCount'    => $pagesCount,
             'pNum'          => $page,
-            'sheet'         => 'post-space',
+            'sheet'         => $sheet,
             'meta_title'    => $space['space_name'] .' — '. $s_title .' | '. Config::get(Config::PARAM_NAME),
             'meta_desc'     => $space['space_description'] .' '. $s_title .' '. Config::get(Config::PARAM_HOME_TITLE),
         ];
 
-        return view(PR_VIEW_DIR . '/space/space-posts', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'space_info' => $space, 'tags' => $tags, 'space_signed' => $space_signed, 'type' => $type]);
+        return view(PR_VIEW_DIR . '/space/space-posts', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'space_info' => $space, 'space_signed' => $space_signed]);
     }
 
     // Форма изменения пространства
@@ -141,7 +140,7 @@ class SpaceController extends \MainController
         $uid    = Base::getUid();
         $slug   = \Request::get('slug');
 
-        $space = SpaceModel::getSpaceInfo($slug);
+        $space = SpaceModel::getSpaceSlug($slug);
         
         // Проверка доступа 
         if (!accessСheck($space, 'space', $uid, 0, 0)) {
@@ -166,7 +165,7 @@ class SpaceController extends \MainController
         $uid    = Base::getUid();
         $slug   = \Request::get('slug');
 
-        $space = SpaceModel::getSpaceInfo($slug);
+        $space = SpaceModel::getSpaceSlug($slug);
 
         // Проверка доступа 
         if (!accessСheck($space, 'space', $uid, 0, 0)) {
@@ -183,30 +182,6 @@ class SpaceController extends \MainController
         ];
 
         return view(PR_VIEW_DIR . '/space/edit-space-logo', ['data' => $data, 'uid' => $uid, 'space' => $space]);
-    }
-    
-    // Страница с информацией по меткам
-    public function tagsInfo() 
-    {
-        $uid    = Base::getUid();
-        $slug   = \Request::get('slug');
-
-        $space = SpaceModel::getSpaceInfo($slug);
-
-        // Проверка доступа 
-        if (!accessСheck($space, 'space', $uid, 0, 0)) {
-            redirect('/');
-        }
-        
-        $tags = SpaceModel::getSpaceTags($space['space_id']);
-        
-        $data = [
-            'h1'            => lang('Tags'),
-            'sheet'         => 'edit-tags', 
-            'meta_title'    => lang('Edit') . ' / ' . lang('Tags'),
-        ];
- 
-        return view(PR_VIEW_DIR . '/space/info-space', ['data' => $data, 'uid' => $uid, 'space' => $space, 'tags' => $tags]);
     }
     
     // Форма добавления пространства
@@ -268,7 +243,7 @@ class SpaceController extends \MainController
             Base::addMsg(lang('url-gaps'), 'error');
             redirect($redirect);
         }
-        if (SpaceModel::getSpaceInfo($space_slug)) {
+        if (SpaceModel::getSpaceSlug($space_slug)) {
             Base::addMsg(lang('url-already-exists'), 'error');
             redirect($redirect);
         }
@@ -307,7 +282,7 @@ class SpaceController extends \MainController
     {
         $uid            = Base::getUid();
         $space_slug     = \Request::getPost('space_slug');
-        $space_id       = \Request::getPost('space_id');
+        $space_id       = \Request::getPostInt('space_id');
         $space_permit   = \Request::getPostInt('permit');
         $space_feed     = \Request::getPostInt('feed');
         $space_tl       = \Request::getPostInt('space_tl');
@@ -338,7 +313,7 @@ class SpaceController extends \MainController
         $space_color = \Request::getPost('color');
         $space_color = empty($space_color) ? $space['space_color'] : $space_color;
         
-        $slug = SpaceModel::getSpaceInfo($space_slug);
+        $slug = SpaceModel::getSpaceSlug($space_slug);
 
         if ($slug['space_slug'] != $space['space_slug']) {
             if ($slug) {
@@ -364,7 +339,7 @@ class SpaceController extends \MainController
             'space_tl'              => $space_tl,
         ]; 
         
-        SpaceModel::setSpaceEdit($data);
+        SpaceModel::edit($data);
         
         Base::addMsg(lang('Change saved'), 'success');
         redirect('/s/' . $space_slug);
@@ -387,80 +362,20 @@ class SpaceController extends \MainController
 
         $redirect   = '/space/' . $space['space_slug'] . '/edit/logo';
 
-        $name = $_FILES['images']['name'][0];
-        if ($name) {
-            // 110px и 24px
-            $path_img       = HLEB_PUBLIC_DIR. '/uploads/spaces/logos/';
-            $path_img_small = HLEB_PUBLIC_DIR. '/uploads/spaces/logos/small/';
-            $file           = $_FILES['images']['tmp_name'][0];
-            $filename       =  's-' . $space['space_id'] . '-' . time();
+        // Запишем img
+        $img        = $_FILES['images'];
+        $check_img  = $_FILES['images']['name'][0];
+        if($check_img) {
+            UploadImage::img($img, $space['space_id'], 'space');
+        }   
 
-            $image = new  SimpleImage();
-
-            $image
-                ->fromFile($file)  // load image.jpg
-                ->autoOrient()     // adjust orientation based on exif data
-                ->resize(110, 110)
-                ->toFile($path_img . $filename .'.jpeg', 'image/jpeg')
-                ->resize(24, 24)
-                ->toFile($path_img_small . $filename .'.jpeg', 'image/jpeg');
-            
-            // Удалим, кроме дефолтной
-            if ($space['space_img'] != 'space_no.png') {
-                chmod($path_img . $space['space_img'], 0777);
-                chmod($path_img_small . $space['space_img'], 0777);
-                unlink($path_img . $space['space_img']);
-                unlink($path_img_small . $space['space_img']);
-            }  
-            
-            $space_img    = $filename . '.jpeg';
-
-        } else {
-            $space_img = empty($space['space_img']) ? 'space_no.png' : $space['space_img'];
-        }
-        
-        $cover = $_FILES['cover']['name'][0];
-        if ($cover) {
-            // 1920px и 350px
-            $path_cover_img       = HLEB_PUBLIC_DIR. '/uploads/spaces/cover/';
-            $path_cover_img_small = HLEB_PUBLIC_DIR. '/uploads/spaces/cover/small/';
-            $file_cover           = $_FILES['cover']['tmp_name'][0];
-            $filename_cover       =  's-' . $space['space_id'] . '-' . time();
-
-            $image = new  SimpleImage();
-
-            $image
-                ->fromFile($file_cover)  // load image.jpg
-                ->autoOrient()     // adjust orientation based on exif data
-                ->resize(1920, 350)
-                ->toFile($path_cover_img . $filename_cover .'.webp', 'image/webp')
-                ->resize(180, 70)
-                ->toFile($path_cover_img_small . $filename_cover .'.webp', 'image/webp');
-                
-                $cover_art = $filename_cover . '.webp';
-            
-            // Удалим, кроме дефолтной
-            if ($space['space_cover_art'] != 'space_cover_no.jpeg' && $space['space_cover_art'] != $cover_art) {
-                chmod($path_cover_img . $space['space_cover_art'], 0777);
-                chmod($path_cover_img_small . $space['space_cover_art'], 0777);
-                unlink($path_cover_img . $space['space_cover_art']);
-                unlink($path_cover_img_small . $space['space_cover_art']);
-            }  
-            
-            $space_cover_art = $filename_cover . '.webp';
-
-        } else {
-            $space_cover_art = empty($space['space_img']) ? 'space_cover_no.jpeg' : $space['space_cover_art'];
-        }
-        
-        $data = [
-            'space_id'              => $space_id,
-            'space_img'             => $space_img,
-            'space_cover_art'       => $space_cover_art,
-        ]; 
-        
-        SpaceModel::setSpaceEditLogo($data);
-        
+        // Запишем баннер
+        $cover          = $_FILES['cover'];
+        $check_cover    = $_FILES['cover']['name'][0];
+        if($check_cover) {
+            UploadImage::cover($cover, $space['space_id'], 'space');
+        } 
+ 
         Base::addMsg(lang('Change saved'), 'success');
         redirect($redirect);
     }
@@ -472,7 +387,7 @@ class SpaceController extends \MainController
         $slug   = \Request::get('slug');
         
 
-        $space = SpaceModel::getSpaceInfo($slug);
+        $space = SpaceModel::getSpaceSlug($slug);
         
         // Проверка доступа 
         if (!accessСheck($space, 'space', $uid, 0, 0)) {
@@ -497,80 +412,6 @@ class SpaceController extends \MainController
         redirect($redirect);
     }
     
-    // Страница добавления метки (тега) пространства
-    public function tagsAddForm()
-    {
-        $uid    = Base::getUid();
-        $slug   = \Request::get('slug');
-        
-        $space = SpaceModel::getSpaceInfo($slug);
-
-        // Проверка доступа 
-        if (!accessСheck($space, 'space', $uid, 0, 0)) {
-            redirect('/');
-        } 
-      
-        $data = [
-            'h1'            => lang('Add tag'),
-            'sheet'         => 'add-tag', 
-            'meta_title'    => lang('Add tag'),
-        ];
-        
-        return view(PR_VIEW_DIR . '/space/add-tag', ['data' => $data, 'uid' => $uid, 'space' => $space]);
-    }
-    
-    // Страница изменение тега пространства
-    public function editTagForm()
-    {
-        $uid            = Base::getUid();
-        $slug           = \Request::get('slug');
-        $space_tags_id  = \Request::getInt('tags');
-        
-        $space = SpaceModel::getSpaceInfo($slug);
-
-        // Проверка доступа 
-        if (!accessСheck($space, 'space', $uid, 0, 0)) {
-            redirect('/');
-        } 
-
-        $tag = SpaceModel::getTagInfo($space_tags_id);
-        Base::PageError404($tag);
-
-        $data = [
-            'h1'            => lang('Edit tag'),
-            'sheet'         => 'edit-tag', 
-            'meta_title'    => lang('Edit tag'),
-        ];
-
-        return view(PR_VIEW_DIR . '/space/edit-tag', ['data' => $data, 'uid' => $uid, 'tag' => $tag, 'space' => $space]);
-    }
-    
-    // Изменяем тег пространства
-    public function editTag()
-    {
-        $uid        = Base::getUid();
-        $space_id   = \Request::getPostInt('space_id');
-        $tag_id     = \Request::getPostInt('tag_id');
-        $st_desc    = \Request::getPost('st_desc');
-        $st_title   = \Request::getPost('st_title');
-        
-        $space = SpaceModel::getSpaceId($space_id);
-        
-        // Проверка доступа 
-        if (!accessСheck($space, 'space', $uid, 0, 0)) {
-            redirect('/');
-        } 
-
-        $redirect = '/s/' . $space['space_slug'] . '/' . $tag_id . '/edit';
-        Base::Limits($st_title, lang('titles'), '4', '20', $redirect);
-        Base::Limits($st_desc, lang('descriptions'), '30', '180', $redirect);
-    
-        SpaceModel::tagEdit($tag_id, $st_title, $st_desc);
-
-        Base::addMsg(lang('tags-edit-yes'), 'success');
-        redirect('/s/' .$space['space_slug']);
-    }
-    
     // Подписка / отписка от пространств
     public function hide()
     {
@@ -588,33 +429,4 @@ class SpaceController extends \MainController
         
         return true;
     }
-
-    // Добавления тега
-    public function addTag() 
-    {
-        $uid        = Base::getUid();
-        $space_id   = \Request::getPostInt('space_id');
-        $st_desc    = \Request::getPost('st_desc');
-        $st_title   = \Request::getPost('st_title');
-        
-        // Покажем 404
-        $space = SpaceModel::getSpaceId($space_id);
-        Base::PageError404($space);
-        
-        // Редактировать может только автор и админ
-        if ($space['space_user_id'] != $uid['id'] && $uid['trust_level'] != 5) {
-            redirect('/');
-        }
-
-        $redirect = '/space/' . $space['space_slug'] . '/tags/add';
-        Base::Limits($st_title, lang('titles'), '4', '20', $redirect);
-        Base::Limits($st_desc, lang('descriptions'), '30', '180', $redirect);
-
-        // Добавим
-        SpaceModel::tagAdd($space['space_id'], $st_title, $st_desc);
-        
-        Base::addMsg(lang('tags-add-yes'), 'success');
-        redirect('/s/' . $space['space_slug']);
-    }
-
 }

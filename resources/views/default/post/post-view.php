@@ -131,7 +131,7 @@
                         
                     <?php if(!empty($post_related)) { ?>
                         <div class="related"> 
-                        <h3 class="small"><?= lang('Related'); ?>:</h3>
+                        <h3 class="style small"><?= lang('Related'); ?>:</h3>
                             <?php $num = 0; ?>
                             <?php foreach ($post_related as $related) { ?>
                                 <div class="related-box">
@@ -144,6 +144,18 @@
                             <?php } ?>
                         </div>
                     <?php } ?>
+                     
+                    <?php if(!empty($topics)) { ?>
+                        <div class="related"> 
+                        <h3 class="style small"><?= lang('Topics'); ?>:</h3>
+                            <?php foreach ($topics as $topic) { ?>
+                                <a class="tags" href="/topic/<?= $topic['topic_slug']; ?>">
+                                    <?= $topic['topic_title']; ?>
+                                </a>
+                            <?php } ?>
+                        </div>
+                    <?php } ?>
+                    
                     </div>
                     <div class="post-full-footer">
                         <?php if (!$uid['id']) { ?> 

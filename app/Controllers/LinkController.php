@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\ExploreModel;
 use App\Models\LinkModel;
 use Lori\Content;
 use Lori\Config;
@@ -26,7 +25,7 @@ class LinkController extends \MainController
             'meta_desc'     => lang('domains-desc'), 
         ];
         
-        return view(PR_VIEW_DIR . '/link/index', ['data' => $data, 'uid' => $uid, 'links' => $links]);
+        return view(PR_VIEW_DIR . '/link/links', ['data' => $data, 'uid' => $uid, 'links' => $links]);
     }
     
     // Выборка по домену
@@ -62,7 +61,7 @@ class LinkController extends \MainController
             'meta_desc'     => $meta_desc, 
         ];
         
-        return view(PR_VIEW_DIR . '/link/domain', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'domains' => $domains, 'link' => $link]);
+        return view(PR_VIEW_DIR . '/link/link', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'domains' => $domains, 'link' => $link]);
     }
 
     // Изменение

@@ -10,7 +10,6 @@ use App\Models\UserModel;
 use App\Models\AnswerModel;
 use App\Models\PostModel;
 use App\Models\VotesModel;
-use App\Models\FlowModel;
 use Lori\Content;
 use Lori\Config;
 use Lori\Base;
@@ -53,7 +52,7 @@ class AnswerController extends \MainController
             'meta_desc'     => lang('answers-desc') .' '. Config::get(Config::PARAM_HOME_TITLE),            
         ];
 
-        return view(PR_VIEW_DIR . '/answer/all-answer', ['data' => $data, 'uid' => $uid, 'answers' => $result]);
+        return view(PR_VIEW_DIR . '/answer/answers', ['data' => $data, 'uid' => $uid, 'answers' => $result]);
     }
 
     // Добавление ответа
@@ -101,21 +100,7 @@ class AnswerController extends \MainController
                 NotificationsModel::send($uid['id'], $user_id, $type, $last_answer_id, $url_answer, 1);
             }
         }
-
-        // Добавим в поток
-        $data_flow = [
-            'flow_action_type'  => 'add_answer',
-            'flow_content'      => $answer, // не фильтруем
-            'flow_user_id'      => $uid['id'],
-            'flow_pubdate'      => date("Y-m-d H:i:s"),
-            'flow_url'          => $url_answer,
-            'flow_target_id'    => $last_answer_id,
-            'flow_space_id'     => 0,
-            'flow_tl'           => $post['post_tl'], // TL поста
-            'flow_ip'           => $ip, 
-        ];
-        FlowModel::FlowAdd($data_flow);        
-         
+   
         // Пересчитываем количество ответов для поста + 1
         PostModel::getNumAnswers($post_id);
         

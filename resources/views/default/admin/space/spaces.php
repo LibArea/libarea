@@ -54,10 +54,10 @@
                                     <span class="t-td center">
                                         <?php if($sp['space_is_delete']) { ?>
                                             <span class="space-ban" data-id="<?= $sp['space_id']; ?>">
-                                                <span class="red"><?= lang('unban'); ?></span>
+                                                <span class="red"><?= lang('Unban'); ?></span>
                                             </span>
                                         <?php } else { ?>
-                                            <span class="space-ban" data-id="<?= $sp['space_id']; ?>"><?= lang('ban it'); ?></span>
+                                            <span class="space-ban" data-id="<?= $sp['space_id']; ?>"><?= lang('Ban it'); ?></span>
                                         <?php } ?>
                                     </span>
                                     <span class="t-td center">

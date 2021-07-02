@@ -112,10 +112,6 @@ class CommentModel extends \MainModel
     {
         XD::update(['comments'])->set(['comment_del'], '=', 1)->where(['comment_id'], '=', $comment_id)->run();
         
-        XD::update(['flow_log'])->set(['flow_is_delete'], '=', $user_id)
-            ->where(['flow_action_type'], '=', 'add_comment')
-            ->and(['flow_target_id'], '=', $comment_id)->run();
-        
         return true;
     }
     

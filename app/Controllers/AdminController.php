@@ -6,11 +6,13 @@ use App\Models\SpaceModel;
 use App\Models\UserModel;
 use App\Models\LinkModel;
 use App\Models\AdminModel;
+use App\Models\TopicModel;
 use App\Models\CommentModel;
 use App\Models\AnswerModel;
 use App\Models\ContentModel;
 use Lori\Content;
 use Lori\Base;
+use Lori\UploadImage;
 
 class AdminController extends \MainController
 {
@@ -62,12 +64,6 @@ class AdminController extends \MainController
             $results[$ind]      = $row;
         } 
         
-        $flow_ip     = AdminModel::replayFlowIp($user_ip);
-        $flows = Array();
-        foreach ($flow_ip as $ind => $row) {
-            $flows[$ind]      = $row;
-        } 
-
         $data = [
             'h1'            => lang('Search'),
             'meta_title'    => lang('Search'),
@@ -77,7 +73,7 @@ class AdminController extends \MainController
         Request::getResources()->addBottomStyles('/assets/css/admin.css');
         Request::getResources()->addBottomScript('/assets/js/admin.js'); 
 
-        return view(PR_VIEW_DIR . '/admin/logip', ['data' => $data, 'uid' => $uid, 'alluser' => $results, 'flows' => $flows]); 
+        return view(PR_VIEW_DIR . '/admin/logip', ['data' => $data, 'uid' => $uid, 'alluser' => $results]); 
     }
     
     // Бан участнику
@@ -245,7 +241,7 @@ class AdminController extends \MainController
 
         Base::Limits($space_slug, lang('URL'), '4', '20', $redirect);
 
-        if (SpaceModel::getSpaceInfo($space_slug)) {
+        if (SpaceModel::getSpaceSlug($space_slug)) {
             Base::addMsg('Такой URL пространства уже есть', 'error');
             redirect($redirect);
         }
@@ -354,7 +350,7 @@ class AdminController extends \MainController
     }
 
     // Форма изменения награды
-    public function badgeEditForm()
+    public function editBadgeForm()
     {
         $uid        = self::isAdmin();
         $badge_id   = \Request::getInt('id');
@@ -554,7 +550,7 @@ class AdminController extends \MainController
         $domain_id    = \Request::getInt('id');
         
         $redirect = '/admin/domains';
-        if (!AdminModel::getLinkIdOne($domain_id)) {
+        if (!LinkModel::getLinkId($domain_id)) {
             redirect($redirect);
         }
         
@@ -594,7 +590,6 @@ class AdminController extends \MainController
         
         return view(PR_VIEW_DIR . '/admin/word/words', ['data' => $data, 'uid' => $uid, 'words' => $words]);
     }
-    
     
     // Форма добавления стоп-слова
     public function wordsAddForm()
@@ -641,6 +636,28 @@ class AdminController extends \MainController
         redirect('/admin/words');  
     }
     
+    // Все
+    public function topics() 
+    {
+        $uid    = self::isAdmin();
+        $pg     = \Request::getInt('page'); 
+        $page   = (!$pg) ? 1 : $pg;
+        
+        $topics     = TopicModel::getTopicAll($page, $uid['id']);
+        
+        $data = [
+            'meta_title'    => lang('Topics'),
+            'sheet'         => 'admin',
+        ]; 
+        
+        Request::getResources()->addBottomStyles('/assets/css/admin.css');
+        Request::getResources()->addBottomScript('/assets/js/admin.js'); 
+        
+        return view(PR_VIEW_DIR . '/admin/topic/topics', ['data' => $data, 'uid' => $uid, 'topics' => $topics]);
+    }        
+    
+ 
+
     // Проверка прав
     public static function isAdmin()
     {
@@ -649,5 +666,5 @@ class AdminController extends \MainController
             redirect('/');
         }
         return $uid;
-    }
+    }    
 }

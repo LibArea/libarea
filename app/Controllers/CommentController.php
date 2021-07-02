@@ -9,7 +9,6 @@ use App\Models\UserModel;
 use App\Models\PostModel;
 use App\Models\AnswerModel;
 use App\Models\VotesModel;
-use App\Models\FlowModel;
 use Lori\Content;
 use Lori\Config;
 use Lori\Base;
@@ -51,7 +50,7 @@ class CommentController extends \MainController
             'meta_desc'     => lang('comments-desc') .' '. Config::get(Config::PARAM_HOME_TITLE),
         ];
 
-        return view(PR_VIEW_DIR . '/comment/all-comment', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
+        return view(PR_VIEW_DIR . '/comment/comments', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
     }
 
     // Добавление комментария
@@ -85,21 +84,7 @@ class CommentController extends \MainController
         // Записываем коммент и получаем его url
         $last_comment_id    = CommentModel::commentAdd($post_id, $answer_id, $comment_id, $ip, $comment, $uid['id']);
         $url_comment        = $redirect . '#comment_' . $last_comment_id; 
-         
-        // Добавим в чат и поток
-        $data_flow = [
-            'flow_action_type'  => 'add_comment',
-            'flow_content'      => $comment,  
-            'flow_user_id'      => $uid['id'],
-            'flow_pubdate'      => date("Y-m-d H:i:s"),
-            'flow_url'          => $url_comment,
-            'flow_target_id'    => $last_comment_id,
-            'flow_space_id'     => 0,
-            'flow_tl'           => $post['post_tl'], // TL поста
-            'flow_ip'           => $ip, 
-        ];
-        FlowModel::FlowAdd($data_flow);        
-         
+
         // Пересчитываем количество комментариев для поста + 1
         PostModel::getNumComments($post_id);
         

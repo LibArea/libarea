@@ -46,10 +46,10 @@
                                 <?php if($user['trust_level'] != 5) { ?>                 
                                     <?php if($user['isBan']) { ?>
                                         <div class="user-ban" data-id="<?= $user['id']; ?>">
-                                            <span class="red"><?= lang('unban'); ?></span>
+                                            <span class="red"><?= lang('Unban'); ?></span>
                                         </div>
                                     <?php } else { ?>
-                                        <div class="user-ban" data-id="<?= $user['id']; ?>"><?= lang('ban it'); ?></div>
+                                        <div class="user-ban" data-id="<?= $user['id']; ?>"><?= lang('Ban it'); ?></div>
                                     <?php } ?>
                                 <?php } else { ?> 
                                     ---
@@ -68,37 +68,6 @@
                           <br><br>
                         </div> 
                     <?php } ?> 
-                    <br>
-                    Flog
-                    <br>
-                    <?php if($flows) {  ?>
-                        <?php foreach ($flows as $flow) {  ?>
-                            <div class="t-tr">
-                                <span class="t-td w-30 center">
-                                    <?= $flow['id']; ?>
-                                </span>
-                                <span class="t-td">
-                                    <img class="ava" src="<?= user_avatar_url($flow['avatar'], 'small'); ?>">
-                                    <a href="/u/<?= $flow['login']; ?>"><?= $flow['login']; ?></a>
-                                    <?php if($flow['name']) { ?>
-                                        (<?= $flow['name']; ?>) 
-                                    <?php } ?>
-                                    <sup class="red">TL:<?= $flow['trust_level']; ?></sup>
-                                    <?php if($flow['invitation_id'] !=0) { ?><sup>+ inv. id<?= $flow['invitation_id']; ?></sup><?php } ?> <br>
-                                </span>              
-                                <span class="t-td">
-                                     <span class="date"><?= $flow['email']; ?></span>
-                                </span>
-                                <span class="t-td">
-                                     <?= $flow['created_at']; ?> 
-                                </span>
-                 
-                              <br><br>
-                            </div> 
-                        <?php } ?>
-                    <?php } else { ?> 
-                        ---                    
-                    <?php } ?>                    
                 </div>
             </div>
         </div>

@@ -21,11 +21,11 @@
         <input type="text" name="q" id="search" placeholder="Найти..." class="form-search">
       </form>
        
-      <a class="link no-mob" title="<?= lang('Review'); ?>" href="/explore">
-        <?= lang('Review'); ?>
+      <a class="link no-mob" title="<?= lang('Topics'); ?>" href="/topics">
+        <?= lang('Topics'); ?>
       </a> 
       <span class="indent-bid"></span>
-      <a class="link no-mob" title="<?= lang('Spaces'); ?>" href="/space">
+      <a class="link no-mob" title="<?= lang('Spaces'); ?>" href="/spaces">
         <?= lang('Spaces'); ?>
       </a> 
     </div>

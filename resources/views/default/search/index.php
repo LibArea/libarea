@@ -48,35 +48,7 @@
                 <?= lang('info_search'); ?>
             
                 <i><?= lang('Under development'); ?></i>
-            
-                <br><br>
-                <canvas id="myChart"></canvas>
-                <script nonce="<?= $_SERVER['nonce']; ?>">
-                    window.onload=function(){
-                        var ctx = document.getElementById("myChart").getContext("2d");
-                        var myChart = new Chart(ctx, {
-                            type: 'line',
-                            data: {
-                                labels: [1,2,3,4,5,6,7,8,9,10],
-                                datasets: [
-                                    {
-                                        label: "<?= lang('Activity'); ?>",
-                                        data: [
-                                        
-                                        <?php foreach ($data['flow_num'] as $flow) { ?>
-                                            <?= $flow['0']; ?>,
-                                        <?php } ?>
-                                        
-                                        ]
-                                    }
-                                ]
-                            },
-                            options: {
-                                responsive: false
-                            }
-                        });
-                    }
-                </script>
+ 
             </div>
         </div>
     </aside>

@@ -23,6 +23,9 @@
                 <a <?php if( $uid['uri'] == '/admin/words') { ?> class="active"<?php } ?> title="<?= lang('Stop words'); ?>" href="/admin/words">
                     ~ <?= lang('Stop words'); ?>
                 </a>
+                <a <?php if( $uid['uri'] == '/admin/topics') { ?> class="active"<?php } ?> title="<?= lang('Topics'); ?>" href="/admin/topics">
+                    ~ <?= lang('Topics'); ?>
+                </a>
             </div>
         </div>    
     </div>

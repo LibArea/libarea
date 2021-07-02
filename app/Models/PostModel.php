@@ -8,10 +8,7 @@ use PDO;
 class PostModel extends \MainModel
 {
     // Посты на главной 
-    // $page - страницы
-    // $tags_user - список id отписанных пространств
-    // $type - feed / top / all
-    public static function postsFeed($page, $space_user, $trust_level, $uid, $type)
+    public static function postsFeed($page, $space_user, $uid, $type)
     {
         $result = Array();
         foreach ($space_user as $ind => $row) {
@@ -22,7 +19,7 @@ class PostModel extends \MainModel
         // Мы должны сформировать список пространств по умолчанию (в config)
         // и добавить условие показа постов, рейтинг которых достигает > N+ значения
         // в первый час размещения, но не вошедшие в пространства по умолчанию к показу
-        if ($uid == 0) {
+        if ($uid['id'] == 0) {
            $string = 'WHERE p.post_draft  = 0';
         } else {
             if ($type == 'all') {
@@ -40,12 +37,12 @@ class PostModel extends \MainModel
    
         // Условия: удаленный пост, запрещенный к показу в ленте
         // И ограниченный по TL
-        if ($trust_level != 5) {  
+        if ($uid['trust_level'] != 5) {  
         
-            if ($uid == 0) { 
+            if ($uid['id'] == 0) { 
                 $tl = 'AND p.post_tl = 0';
             } else {
-                $tl = 'AND p.post_tl <= '.$trust_level.'';
+                $tl = 'AND p.post_tl <= '.$uid['trust_level'].'';
             }
             $display = 'AND p.post_is_delete = 0 AND s.space_feed = 0 '.$tl.'';
         } else {
@@ -53,7 +50,7 @@ class PostModel extends \MainModel
         }
          
         if ($type == 'feed' || $type == 'all') { 
-            $sort = 'ORDER BY post_top DESC, p.post_date DESC';
+            $sort = 'ORDER BY p.post_top DESC, p.post_date DESC';
         } else {
             $sort = 'ORDER BY p.post_answers_num DESC';
         }  
@@ -65,7 +62,7 @@ class PostModel extends \MainModel
                 fROM posts as p 
                 INNER JOIN users as u ON u.id = p.post_user_id
                 INNER JOIN space as s ON s.space_id = p.post_space_id
-                LEFT JOIN votes_post as v ON v.votes_post_item_id = p.post_id AND v.votes_post_user_id = ".$uid."
+                LEFT JOIN votes_post as v ON v.votes_post_item_id = p.post_id AND v.votes_post_user_id = ".$uid['id']."
                 $string
                 $display
                 $sort LIMIT 25 OFFSET ".$offset." ";
@@ -74,7 +71,7 @@ class PostModel extends \MainModel
     }
     
     // Количество постов
-    public static function postsFeedCount($space_user, $trust_level, $uid, $type)
+    public static function postsFeedCount($space_user, $uid, $type)
     {
         $result = Array();
         foreach ($space_user as $ind => $row) {
@@ -82,7 +79,7 @@ class PostModel extends \MainModel
         }   
         
         // Учитываем подписку на пространства
-        if ($uid == 0) {
+        if ($uid['id'] == 0) {
            $string = '';
         } else {
             if ($result) {
@@ -93,11 +90,11 @@ class PostModel extends \MainModel
         } 
      
         // Учитываем TL
-        if ($trust_level != 5) {   
-            if ($uid == 0) { 
+        if ($uid['trust_level'] != 5) {   
+            if ($uid['id'] == 0) { 
                 $tl = 'AND p.post_tl = 0';
             } else {
-                $tl = 'AND p.post_tl <= '.$trust_level.'';
+                $tl = 'AND p.post_tl <= '.$uid['trust_level'].'';
             }
             $display = 'AND p.post_is_delete = 0 AND s.space_feed = 0 '.$tl.'';
         } else {
@@ -109,10 +106,9 @@ class PostModel extends \MainModel
                 INNER JOIN space as s ON s.space_id = p.post_space_id
                 $string $display";
 
-        $query = DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
-        $result = ceil(count($query) / 25);
-
-        return $result;
+        $quantity = DB::run($sql)->rowCount(); 
+       
+        return ceil($quantity / 25);
     }
 
     // Полная версия поста  
@@ -235,7 +231,6 @@ class PostModel extends \MainModel
             ['post_ip_int'], ',', 
             ['post_user_id'], ',', 
             ['post_space_id'], ',', 
-            ['post_tag_id'], ',',
             ['post_closed'], ',',
             ['post_top'], ',',
             ['post_url'], ',',
@@ -256,7 +251,6 @@ class PostModel extends \MainModel
             $data['post_ip_int'], 
             $data['post_user_id'], 
             $data['post_space_id'], 
-            $data['post_tag_id'], 
             $data['post_closed'],
             $data['post_top'],
             $data['post_url'],
@@ -283,8 +277,7 @@ class PostModel extends \MainModel
             ['post_tl'], '=', $data['post_tl'], ',', 
             ['post_closed'], '=', $data['post_closed'], ',', 
             ['post_top'], '=', $data['post_top'], ',', 
-            ['post_space_id'], '=', $data['post_space_id'], ',', 
-            ['post_tag_id'], '=', $data['post_tag_id'])
+            ['post_space_id'], '=', $data['post_space_id'])
             ->where(['post_id'], '=', $data['post_id'])->run(); 
 
         return true;
@@ -295,7 +288,7 @@ class PostModel extends \MainModel
     {
         
         $sql = "SELECT post_id,post_title, post_slug, post_type, post_draft, post_related, post_is_delete
-                fROM posts WHERE post_id IN(0, ".$post_related.") AND post_is_delete = 0 AND post_tl = 0";
+                FROM posts WHERE post_id IN(0, ".$post_related.") AND post_is_delete = 0 AND post_tl = 0";
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
     
@@ -396,6 +389,18 @@ class PostModel extends \MainModel
         }
 
         echo json_encode($response);
+    }
+   
+    // Информация список постов
+    public static function getPostTopic($post_id)
+    {
+       
+        $sql = "SELECT t.*, r.*
+                fROM topic as t 
+                INNER JOIN topic_post_relation as r ON r.relation_topic_id = t.topic_id
+                WHERE r.relation_post_id  = ".$post_id." ";
+                
+        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
    
 }

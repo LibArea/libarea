@@ -59,18 +59,6 @@ class AdminModel extends \MainModel
         return count($query->getSelect());
     }
     
-    // IP по всем логам
-    public static function replayFlowIp($ip)
-    {
-        if (!$ip) { return 0; }
-
-        $query = XD::select('*')->from(['flow_log'])
-                ->leftJoin(['users'])->on(['id'], '=', ['flow_user_id'])
-                ->where(['flow_ip'], '=', $ip);
-
-        return $query->getSelect();
-    }
-    
     // Находит ли пользователь в бан- листе и рабанен ли был он
     public static function isBan($uid)
     {

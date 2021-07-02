@@ -97,5 +97,12 @@ class LinkModel extends \MainModel
         return $query->getSelectOne();
     }   
     
- 
+    // Изменим домен
+    public static function setLinkEdit($domain_id, $link_url, $link_title, $link_content)
+    {
+        XD::update(['links'])->set(['link_url'], '=', $link_url, ',', 
+            ['link_title'], '=', $link_title, ',',
+            ['link_content'], '=', $link_content)->where(['link_id'], '=', $domain_id)->run(); 
+        return true;  
+    }
 }
