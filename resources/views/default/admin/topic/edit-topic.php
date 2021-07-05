@@ -39,7 +39,7 @@
                                 <label class="form-label" for="topic_content">
                                     <?= lang('Title'); ?> (SEO)<sup class="red">*</sup>
                                 </label>
-                                <input class="form-input" minlength="14" name="topic_seo_title" value="<?= $topic['topic_seo_title']; ?>">
+                                <input class="form-input" minlength="4" name="topic_seo_title" value="<?= $topic['topic_seo_title']; ?>">
                                 <div class="box_h">4 - 225 <?= lang('characters'); ?></div>
                             </div>
                              <div class="boxline">
@@ -55,12 +55,19 @@
                                 </label>
                                 <input class="form-input"  type="text" name="topic_count" value="<?= $topic['topic_count']; ?>">
                             </div>
-                            <div class="boxline"> 
-                                <label for="topic_content"><?= lang('Корневая'); ?>?</label>
-                                <input type="radio" name="topic_is_parent" <?php if($topic['topic_is_parent'] == 0) { ?>checked<?php } ?> value="0"> <?= lang('No'); ?>
-                                <input type="radio" name="topic_is_parent" <?php if($topic['topic_is_parent'] == 1) { ?>checked<?php } ?> value="1" >  <?= lang('Yes'); ?>
-                                <div class="box_h"><?= lang('root-help'); ?></div>
-                            </div> 
+                            <?php if($topic['topic_parent_id'] > 0) { ?>
+                                <div class="boxline">
+                                    <label for="topic_content"><?= lang('Корневая'); ?>?</label>
+                                    ----
+                                </div>    
+                            <?php } else { ?>
+                                <div class="boxline"> 
+                                    <label for="topic_content"><?= lang('Корневая'); ?>?</label>
+                                    <input type="radio" name="topic_is_parent" <?php if($topic['topic_is_parent'] == 0) { ?>checked<?php } ?> value="0"> <?= lang('No'); ?>
+                                    <input type="radio" name="topic_is_parent" <?php if($topic['topic_is_parent'] == 1) { ?>checked<?php } ?> value="1" >  <?= lang('Yes'); ?>
+                                    <div class="box_h"><?= lang('root-help'); ?></div>
+                                </div> 
+                            <?php } ?>
                             <div class="boxline">
                                 <label for="topic_content"><?= lang('Description'); ?><sup class="red">*</sup></label>
                                 <textarea class="add" name="topic_description"><?= $topic['topic_description']; ?></textarea>
@@ -70,6 +77,16 @@
                                 <textarea class="add" name="topic_info"><?= $topic['topic_info']; ?></textarea>
                                 <div class="box_h">Markdown, > 14 <?= lang('characters'); ?></div>
                             </div>
+                            <?php if($topic['topic_is_parent'] != 1) { ?>
+                                <div class="boxline">
+                                    <label class="form-label" for="topic_content"><?= lang('Root'); ?></label>
+                                    <select name="topic_parent_id[]" multiple="multiple" id='selMainLinked'>
+                                        <?php foreach ($topic_parent_id as $parent) { ?>
+                                            <option selected value="<?= $parent['topic_id']; ?>"><?= $parent['topic_title']; ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            <?php } ?>
                             <div class="boxline">  
                                     <label class="form-label" for="topic_content"><?= lang('Related'); ?></label>
                                     <select name="topic_related[]" multiple="multiple" id='selLinked'>
@@ -83,6 +100,27 @@
                                                 width: '70%',
                                                 ajax: { 
                                                     url: "/search/topics",
+                                                    type: "post",
+                                                    dataType: 'json',
+                                                    delay: 250,
+                                                    data: function (params) {
+                                                        return {
+                                                          searchTerm: params.term 
+                                                        };
+                                                    },
+                                                    processResults: function (response) {
+                                                     return {
+                                                        results: response
+                                                     };
+                                                    },
+                                                    cache: true
+                                                }
+                                            });
+                                            $("#selMainLinked").select2({
+                                                width: '70%',
+                                                maximumSelectionLength: 1,
+                                                ajax: { 
+                                                    url: "/search/topics/main",
                                                     type: "post",
                                                     dataType: 'json',
                                                     delay: 250,

@@ -3,7 +3,13 @@
     <main>
         <div class="white-box">
             <div class="inner-padding topic-list">
-                <h1><?= $data['h1']; ?></h1>
+                <h1><?= $data['h1']; ?>
+                    <?php if($uid['trust_level'] == 5) { ?>
+                        <a class="right" href="/admin/topics"> 
+                            <i class="icon pencil"></i>          
+                        </a>
+                    <?php } ?>
+                </h1>
                 
                 <?php if (!empty($topics)) { ?>
               
@@ -29,7 +35,7 @@
                     <div class="no-content"><i class="icon info"></i> <?= lang('No topics'); ?></div>
                 <?php } ?>
                 
-            <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], 'topics'); ?>
+                <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], 'topics'); ?>
      
             </div>
         </div>
@@ -47,7 +53,7 @@
                     <?php foreach ($news as $new) { ?>
                         <a title="<?= $new['topic_title']; ?>" class="tags" href="/topic/<?= $new['topic_slug']; ?>">
                             <?= $new['topic_title']; ?>
-                        </a>
+                        </a><br>
                     <?php } ?>
                 </div>
             </div>

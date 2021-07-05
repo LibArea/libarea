@@ -194,7 +194,35 @@
             </div>
         </div>
         
+        <?php if(!empty($main_topic)) { ?>
+            <div class="white-box">
+                <div class="inner-padding big"> 
+                    <h3 class="style small"><?= lang('Root'); ?></h3>
+                    <div class="related-box">
+                        <a class="tags" href="/topic/<?= $main_topic['topic_slug']; ?>">
+                            <?= $main_topic['topic_title']; ?>
+                        </a>
+                   </div> 
+                </div>
+            </div>
+        <?php } ?> 
          
+        <?php if(!empty($subtopics)) { ?>
+            <div class="white-box">
+                <div class="inner-padding big"> 
+                    <h3 class="style small"><?= lang('Subtopics'); ?></h3>
+                    <?php foreach ($subtopics as $sub) { ?>
+                        <div class="related-box">
+                            <a class="tags" href="/topic/<?= $sub['topic_slug']; ?>">
+                                <?= $sub['topic_title']; ?>
+                            </a>
+                       </div> 
+                    <?php } ?>
+                </div>
+            </div>
+        <?php } ?>
+
+       
         <?php if(!empty($topic_related)) { ?>
             <div class="white-box">
                 <div class="inner-padding big"> 

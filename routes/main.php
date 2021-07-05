@@ -31,6 +31,7 @@ Route::before('Authorization@noAuth')->getGroup();
         Route::get('/search/users')->controller('PostController@select', ['user']);
         Route::get('/search/posts')->controller('PostController@select', ['posts']);
         Route::get('/search/topics')->controller('PostController@select', ['topics']);
+        Route::get('/search/topics/main')->controller('PostController@select', ['main']);
  
         Route::get('/space/focus')->controller('SpaceController@focus');
         Route::get('/topic/focus')->controller('TopicController@focus');

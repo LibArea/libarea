@@ -25,8 +25,8 @@
                                 <label class="form-label" for="post_content">
                                     <?= lang('Title'); ?> (SEO)<sup class="red">*</sup>
                                 </label>
-                                <input class="form-input" minlength="14" type="text" name="topic_seo_title" value="">
-                                <div class="box_h">14 - 225 <?= lang('characters'); ?></div>
+                                <input class="form-input" minlength="4" type="text" name="topic_seo_title" value="">
+                                <div class="box_h">4 - 225 <?= lang('characters'); ?></div>
                             </div>
                              <div class="boxline">
                                 <label class="form-label" for="post_content">

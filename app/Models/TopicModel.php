@@ -113,9 +113,15 @@ class TopicModel extends \MainModel
     }
 
     // Select topics
-    public static function getSearchTopics($query)
+    public static function getSearchTopics($query, $main)
     {
-        $sql = "SELECT t.* FROM topic AS t WHERE t.topic_title LIKE :topic_title ORDER BY t.topic_id LIMIT 8";
+        if ($main == 'main') {
+            $and = ' t.topic_is_parent !=0 AND';
+        } else {
+            $and = '';
+        }
+        
+        $sql = "SELECT t.* FROM topic AS t WHERE $and t.topic_title LIKE :topic_title ORDER BY t.topic_id LIMIT 8";
         
         $result = DB::run($sql, ['topic_title' => "%".$query."%"]);
         $topicList  = $result->fetchall(PDO::FETCH_ASSOC);
@@ -258,4 +264,23 @@ class TopicModel extends \MainModel
         
         return true;
     }
+    
+    // Выбор корневой темы при редактирование (если они есть)
+    public static function topicMain($topic_id)
+    {
+        return XD::select('*')->from(['topic'])->where(['topic_id'], '=', $topic_id)->and(['topic_is_parent'], '=', 1)->getSelect();
+    } 
+    
+    // Выведем подтемы
+    public static function subTopics($topic_id)
+    { 
+        return XD::select('*')->from(['topic'])->where(['topic_parent_id'], '=', $topic_id)->getSelect();
+    }
+    
+    // Очистим привязку при изменение корневой темы
+    public static function clearBinding($topic_id)
+    {
+        return XD::update(['topic'])->set(['topic_parent_id'], '=', 0)->where(['topic_parent_id'], '=', $topic_id)->run();
+    }
+    
 }

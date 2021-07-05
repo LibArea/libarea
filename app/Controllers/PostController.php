@@ -567,12 +567,14 @@ class PostController extends \MainController
         $search = preg_replace('/[^a-zA-ZА-Яа-я0-9 ]/ui', '', $search);
         
         if ($sheet == 'posts') {
-            return PostModel::getSearchPosts($search);
+            return PostModel::getSearchPosts($search, 'all');
         } elseif ($sheet == 'topics') {
-            return TopicModel::getSearchTopics($search);
+            return TopicModel::getSearchTopics($search, 'all');
+        } elseif ($sheet == 'main') {
+            return TopicModel::getSearchTopics($search, 'main');
         }             
         
-        return UserModel::getSearchUsers($search);
+        return UserModel::getSearchUsers($search, 'all');
     }
     
     // Изменяем пост

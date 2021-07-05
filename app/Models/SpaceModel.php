@@ -104,25 +104,27 @@ class SpaceModel extends \MainModel
     {
         if ($user_tl != 5) {  
             if ($user_id == 0) { 
-                $tl = "AND post_tl = 0";
+                $tl = "AND p.post_tl = 0";
             } else {
-                $tl = "AND post_tl <= $user_tl";
+                $tl = "AND p.post_tl <= $user_tl";
             }
-            $display = "AND post_is_delete = 0 $tl";
+            $display = "AND p.post_is_delete = 0 $tl";
         } else {
             $display = ''; 
         }
         
         if ($type == 'feed') { 
-            $sort = "ORDER BY post_top DESC, post_date DESC";
+            $sort = "ORDER BY p.post_top DESC, p.post_date DESC";
         } else {
-            $sort = "ORDER BY post_answers_num DESC";
+            $sort = "ORDER BY p.post_answers_num DESC";
         }           
             
-       $sql = "SELECT * FROM posts 
-                LEFT JOIN users ON id = post_user_id 
-                LEFT JOIN votes_post ON votes_post_item_id = post_id AND votes_post_user_id = $user_id
-                WHERE post_space_id = $space_id and post_draft = 0 $display $sort";
+       $sql = "SELECT p.*, v.*,
+                u.id, u.login, u.avatar,
+                FROM posts AS p
+                LEFT JOIN users AS u ON id = post_user_id 
+                LEFT JOIN votes_post AS v ON v.votes_post_item_id = p.post_id AND v.votes_post_user_id = $user_id
+                WHERE p.post_space_id = $space_id and p.post_draft = 0 $display $sort";
 
         $quantity = DB::run($sql)->rowCount(); 
        

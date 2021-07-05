@@ -47,7 +47,6 @@ class TopicController extends \MainController
         ];
 
         return view(PR_VIEW_DIR . '/topic/topics', ['data' => $data, 'uid' => $uid, 'topics' => $result, 'news' => $news]);
-
     }
     
     // Страница темы
@@ -62,6 +61,20 @@ class TopicController extends \MainController
         $topic  = TopicModel::getTopicSlug($slug);
         Base::PageError404($topic);  
           
+        // Показываем корневую тему на странице подтемы  
+        if ($topic['topic_parent_id']  != 0) {
+            $main_topic   = TopicModel::getTopicId($topic['topic_parent_id']);
+        } else {
+            $main_topic   = '';
+        }
+        
+        // Показываем подтемы корневой темы
+        if ($topic['topic_is_parent']  == 1 || $topic['topic_parent_id']  != 0) { 
+            $subtopics  = TopicModel::subTopics($topic['topic_id']);     
+        } else {
+            $subtopics  = '';
+        }
+        
         $topic['topic_add_date']    = lang_date($topic['topic_add_date']);
         
         $text = explode("\n", $topic['topic_description']);
@@ -82,6 +95,7 @@ class TopicController extends \MainController
         $topic_related  = TopicModel::topicRelated($topic['topic_related']);
         $topic_signed   = TopicModel::getMyFocus($topic['topic_id'], $uid['id']);
         
+       
         $meta_title = $topic['topic_seo_title'] . ' — ' .  lang('Topic');
         $data = [
             'h1'            => $topic['topic_seo_title'],
@@ -93,7 +107,7 @@ class TopicController extends \MainController
             'meta_desc'     => $topic['topic_description'] .'. '. Config::get(Config::PARAM_HOME_TITLE),            
         ];
 
-        return view(PR_VIEW_DIR . '/topic/topic', ['data' => $data, 'uid' => $uid, 'topic' => $topic, 'posts' => $result, 'topic_related' => $topic_related, 'topic_signed' => $topic_signed]);
+        return view(PR_VIEW_DIR . '/topic/topic', ['data' => $data, 'uid' => $uid, 'topic' => $topic, 'posts' => $result, 'topic_related' => $topic_related, 'topic_signed' => $topic_signed, 'main_topic' => $main_topic, 'subtopics' => $subtopics]);
 
     }
  
@@ -112,6 +126,20 @@ class TopicController extends \MainController
 
         $topic_related  = TopicModel::topicRelated($topic['topic_related']);
         $post_related   = TopicModel::topicPostRelated($topic['topic_post_related']);
+        
+        // Показываем корневую тему на странице подтемы  
+        if ($topic['topic_parent_id']  != 0) {
+            $main_topic   = TopicModel::getTopicId($topic['topic_parent_id']);
+        } else {
+            $main_topic   = '';
+        }
+        
+        // Показываем подтемы корневой темы
+        if ($topic['topic_is_parent']  == 1 || $topic['topic_parent_id']  != 0) { 
+            $subtopics  = TopicModel::subTopics($topic['topic_id']);     
+        } else {
+            $subtopics  = '';
+        }
 
         $meta_title = $topic['topic_seo_title'] . ' — ' .  lang('Info');
         $data = [
@@ -122,7 +150,7 @@ class TopicController extends \MainController
             'meta_desc'     => $topic['topic_description'] .'. '. lang('Info') .' '. Config::get(Config::PARAM_HOME_TITLE),            
         ];
 
-        return view(PR_VIEW_DIR . '/topic/info', ['data' => $data, 'uid' => $uid, 'topic' => $topic, 'topic_related' => $topic_related, 'post_related' => $post_related]); 
+        return view(PR_VIEW_DIR . '/topic/info', ['data' => $data, 'uid' => $uid, 'topic' => $topic, 'topic_related' => $topic_related, 'post_related' => $post_related, 'subtopics' => $subtopics, 'main_topic' => $main_topic]); 
     }
  
     // Форма добавить topic
@@ -205,14 +233,20 @@ class TopicController extends \MainController
         Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
         Request::getResources()->addBottomScript('/assets/js/select2.min.js'); 
         
-        $topic_related = TopicModel::topicRelated($topic['topic_related']);
+        $topic_related      = TopicModel::topicRelated($topic['topic_related']);
+        
+        if ($topic['topic_parent_id']  != 0) {
+            $topic_parent_id    = TopicModel::topicMain($topic['topic_parent_id']);
+        } else {
+            $topic_parent_id    = '';
+        }
         
         $data = [
             'meta_title'    => lang('Edit topic') . ' — ' . $topic['topic_title'],
             'sheet'         => 'topics',
         ]; 
 
-        return view(PR_VIEW_DIR . '/admin/topic/edit-topic', ['data' => $data, 'uid' => $uid, 'topic' => $topic, 'topic_related' => $topic_related]);
+        return view(PR_VIEW_DIR . '/admin/topic/edit-topic', ['data' => $data, 'uid' => $uid, 'topic' => $topic, 'topic_related' => $topic_related, 'topic_parent_id' => $topic_parent_id]);
     }
     
     // Edit topic
@@ -231,16 +265,23 @@ class TopicController extends \MainController
         $topic_slug         = \Request::getPost('topic_slug');
         $topic_seo_title    = \Request::getPost('topic_seo_title');
         $topic_merged_id    = \Request::getPostInt('topic_merged_id');
-        $topic_parent_id    = \Request::getPostInt('topic_parent_id');
         $topic_is_parent    = \Request::getPostInt('topic_is_parent');
         $topic_count        = \Request::getPostInt('topic_count');
         
         $topic = TopicModel::getTopicId($topic_id);
         Base::PageError404($topic);
         
-        $related        = empty($_POST['topic_related']) ? '' : $_POST['topic_related'];
-        $topic_related  = empty($related) ? '' : implode(',', $related);
+        $parent_id          = empty($_POST['topic_parent_id']) ? '' : $_POST['topic_parent_id'];
+        $topic_parent_id    = empty($parent_id) ? 0 : implode(',', $parent_id);
         
+        $related            = empty($_POST['topic_related']) ? '' : $_POST['topic_related'];
+        $topic_related      = empty($related) ? '' : implode(',', $related);
+        
+        // Если убираем тему из корневой, то должны очистеть те темы, которые были подтемами
+        if ($topic['topic_is_parent'] == 1 && $topic_is_parent == 0) {
+            TopicModel::clearBinding($topic['topic_id']);
+        }
+
         $redirect = '/admin/topic/' . $topic['topic_id'] . '/edit';
 
         Base::Limits($topic_title , lang('Title'), '3', '64', $redirect);
@@ -252,7 +293,7 @@ class TopicController extends \MainController
         $topic_merged_id    = empty($topic_merged_id) ? 0 : $topic_merged_id;
         $topic_parent_id    = empty($topic_parent_id) ? 0 : $topic_parent_id;
         $topic_is_parent    = empty($topic_is_parent) ? 0 : $topic_is_parent;
-        $topic_count        = empty($topic_related) ? 0 : $topic_count;
+        $topic_count        = empty($topic_count) ? 0 : $topic_count;
         
         // Запишем img
         $img = $_FILES['images'];
@@ -293,4 +334,5 @@ class TopicController extends \MainController
         
         return true;
     }
+    
 }
