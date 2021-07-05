@@ -124,7 +124,7 @@
   <?php if(!$space_bar && $uid['uri'] == '/') { ?>
     <div class="space-no-user">
       <i class="icon diamond"></i>
-      <?= lang('Read more'); ?>! <a href="/space"><?= lang('Subscribe'); ?></a> <?= lang('on'); ?>
+      <?= lang('Read more'); ?>! <a href="/spaces"><?= lang('Subscribe'); ?></a> <?= lang('on'); ?>
       <?= lang('interesting spaces'); ?>.
     </div>
   <?php } ?>

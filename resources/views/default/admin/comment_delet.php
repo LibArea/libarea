@@ -37,10 +37,6 @@
                         </div>
                     <?php } ?>
                     
-                    <div class="pagination">
-                  
-                    </div>
-                    
                 <?php } else { ?>
                     <div class="no-content"><?= lang('no-comment'); ?>...</div>
                 <?php } ?>

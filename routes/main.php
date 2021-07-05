@@ -134,6 +134,8 @@ Route::before('Authorization@noAuth')->getGroup();
     Route::get('/notifications/read/{id}')->controller('NotificationsController@read')->where(['id' => '[0-9]+']);  
     Route::get('/notifications/delete')->controller('NotificationsController@remove');  
     
+    Route::get('/admin/update/count')->controller('AdminController@updateQuantity'); 
+    
     // Избранное и черновики
     Route::get('/u/{login}/favorite')->controller('UserController@userFavorites')->where(['login' => '[A-Za-z0-9]+']);
     Route::get('/u/{login}/drafts')->controller('UserController@userDrafts')->where(['login' => '[A-Za-z0-9]+']);
@@ -212,7 +214,7 @@ Route::get('/s/{slug}/top/page/{page?}')->controller('SpaceController@posts', ['
 Route::get('/moderations')->controller('ModerationController');
 
 Route::get('/topics')->controller('TopicController')->where(['page' => '[0-9]+']);
-Route::get('/topic/page/{page?}')->controller('TopicController')->where(['page' => '[0-9]+']);
+Route::get('/topics/page/{page?}')->controller('TopicController')->where(['page' => '[0-9]+']);
 Route::get('/topic/{slug}')->controller('TopicController@topic')->where(['slug' => '[A-Za-z0-9_]+']);
 Route::get('/topic/{slug}/info')->controller('TopicController@info')->where(['slug' => '[A-Za-z0-9_]+']);
 Route::get('/topic/{slug}/page/{page?}')->controller('TopicController@topic')->where(['slug' => '[A-Za-z0-9_]+', 'page' => '[0-9]+']);

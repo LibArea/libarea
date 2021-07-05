@@ -19,10 +19,6 @@
                             </div>
                         <?php } ?>
 
-                        <div class="pagination">
-                      
-                        </div>
-                        
                     <?php } else { ?>
                         <div class="no-content"><?= lang('Stop words no'); ?>...</div>
                     <?php } ?>

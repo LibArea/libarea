@@ -5,7 +5,6 @@
             <div class="inner-padding">
                 
             <div class="box-flex">
-                <!--a class="tel-topics" title="<?= lang('All topics'); ?>" href="/topics"> ← <?= lang('Topics'); ?></a-->
                 <div>
                     <img class="ava-94" alt="<?= $topic['topic_title']; ?>" src="<?= topic_url($topic['topic_img'], 'max'); ?>">
                 </div>
@@ -174,27 +173,7 @@
                   <div class="no-content"><?= lang('no-post'); ?>...</div>
                 <?php } ?>
                 
-                 <?php if(!($data['pNum'] > $data['pagesCount'])) { ?>
-                  <div class="pagination">   
-                    <?php if($data['pNum'] != 1) { ?> 
-                        <?php if (($data['pNum'] - 1) == 1) { ?>
-                            <a class="link" href="/topic/<?= $topic['topic_slug']; ?>"> 
-                                << <?= lang('Page'); ?> 
-                                <?= $data['pNum'] - 1; ?>
-                            </a> 
-                        <?php } else { ?>
-                            <a class="link" href="/topic/<?= $topic['topic_slug']; ?>/page/<?= $data['pNum'] - 1; ?>"> 
-                                << <?= lang('Page'); ?> 
-                                <?= $data['pNum'] - 1; ?>
-                            </a> 
-                        <?php } ?>
-                    <?php } ?>
-                    <?php if($data['pagesCount'] != $data['pNum'] && $data['pNum'] != 1) { ?>|<?php } ?> 
-                    <?php if($data['pagesCount'] > $data['pNum']) { ?>
-                      <a class="link" href="/topic/<?= $topic['topic_slug']; ?>/page/<?= $data['pNum'] + 1; ?>"><?= lang('Page'); ?>  <?= $data['pNum'] + 1; ?> >></a> 
-                    <?php } ?>
-                  </div>
-                <?php } ?>
+                <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], 'topic' . $topic['topic_slug']); ?>
                 
             </div>
         </div>
@@ -222,9 +201,8 @@
                     <h3 class="style small"><?= lang('Related'); ?></h3>
                     <?php foreach ($topic_related as $related) { ?>
                         <div class="related-box">
-                            <a class="bar-space-telo" href="/topic/<?= $related['topic_slug']; ?>">
-                                <img alt="<?= $related['topic_title']; ?>" src="<?= topic_url($related['topic_img'], 'small'); ?>">
-                                <span class="bar-name small"><?= $related['topic_title']; ?></span>
+                            <a class="tags" href="/topic/<?= $related['topic_slug']; ?>">
+                                <?= $related['topic_title']; ?>
                             </a>
                        </div> 
                     <?php } ?>

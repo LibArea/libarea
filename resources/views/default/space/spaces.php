@@ -26,7 +26,7 @@
                         <?php } ?>    
                     <?php } else { ?>
                         <li>
-                            <a href="/space">
+                            <a href="/spaces">
                                 <span><?= lang('All'); ?></span>
                             </a>
                         </li>

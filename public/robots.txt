@@ -9,3 +9,5 @@ Disallow: /domain/*
 Disallow: /*/*/comments*
 Disallow: /*/*/posts*
 Disallow: /u/*/answers*
+Disallow: /page/*
+Disallow: /*/page/*

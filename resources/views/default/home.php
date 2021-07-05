@@ -87,7 +87,7 @@
           </div>
           
           <?php if($post['post_thumb_img']) { ?>
-            <a title="<?= $post['post_title']; ?>" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">          
+            <a title="<?= $post['post_title']; ?>" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">    
               <img class="thumb no-mob" alt="<?= $post['post_title']; ?>" src="/uploads/posts/thumbnails/<?= $post['post_thumb_img']; ?>">
             </a>
           <?php } ?>
@@ -127,6 +127,8 @@
                 <i class="icon link"></i> <?= $post['post_url_domain']; ?>
               </a> 
             <?php } ?>
+            
+            <?= html_topic($post['topic_list'], 'date small indent-bid'); ?>
 
             <div class="post-details">
               <div class="show_add_<?= $post['post_id']; ?>">
@@ -192,29 +194,8 @@
       <div class="no-content"><?= lang('no-post'); ?>...</div>
     <?php } ?>
     
+    <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], null); ?>
     
-    
-     <?php if(!($data['pNum'] > $data['pagesCount'])) { ?>
-      <div class="pagination">   
-        <?php if($data['pNum'] != 1) { ?> 
-            <?php if (($data['pNum'] - 1) == 1) { ?>
-                <a class="link" href="<?php if($data['sheet'] == 'top') { ?>/top<?php } ?><?php if($data['sheet'] == 'all') { ?>/all<?php } ?>/"> 
-                    << <?= lang('Page'); ?> 
-                    <?= $data['pNum'] - 1; ?>
-                </a> 
-            <?php } else { ?>
-                <a class="link" href="<?php if($data['sheet'] == 'top') { ?>/top<?php } ?><?php if($data['sheet'] == 'all') { ?>/all<?php } ?>/page/<?= $data['pNum'] - 1; ?>"> 
-                    << <?= lang('Page'); ?> 
-                    <?= $data['pNum'] - 1; ?>
-                </a> 
-            <?php } ?>
-        <?php } ?>
-        <?php if($data['pagesCount'] != $data['pNum'] && $data['pNum'] != 1) { ?>|<?php } ?> 
-        <?php if($data['pagesCount'] > $data['pNum']) { ?>
-          <a class="link" href="<?php if($data['sheet'] == 'top') { ?>/top<?php } ?><?php if($data['sheet'] == 'all') { ?>/all<?php } ?>/page/<?= $data['pNum'] + 1; ?>"><?= lang('Page'); ?>  <?= $data['pNum'] + 1; ?> >></a> 
-        <?php } ?>
-      </div>
-    <?php } ?>
   </main>
   <aside>
     <?php if ($uid['id']) { ?>
@@ -223,7 +204,7 @@
           <div class="inner-padding"> 
             <div class="bar-title small">
                 <?= lang('Signed'); ?>
-                <a class="right" title="<?= lang('Spaces'); ?>" href="/space"><i class="icon arrow-right"></i></a>
+                <a class="right" title="<?= lang('Spaces'); ?>" href="/spaces"><i class="icon arrow-right"></i></a>
             </div>  
             <?php foreach ($space_bar as  $sig) { ?>
               <a class="bar-space-telo" href="/s/<?= $sig['space_slug']; ?>" title="<?= $sig['space_name']; ?>">
@@ -240,7 +221,7 @@
         <?php if($uid['uri'] == '/') { ?>
           <div class="white-box">
             <div class="inner-padding big">
-              <a href="/space">Подпишитесь</a> на пространства и читайте их в ленте...
+              <a href="/spaces">Подпишитесь</a> на пространства и читайте их в ленте...
             </div>
           </div>
         <?php } ?>

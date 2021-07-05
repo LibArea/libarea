@@ -107,17 +107,7 @@
           <?php } ?>
         </div>
         
-        <?php if(!($data['pNum'] > $data['pagesCount'])) { ?>
-          <div class="pagination">   
-            <?php if($data['pNum'] != 1) { ?> 
-              <a class="link" href="/admin/<?= $data['pNum'] - 1; ?>"> << <?= lang('Page'); ?> <?= $data['pNum'] - 1; ?></a> 
-            <?php } ?>
-            <?php if($data['pagesCount'] != $data['pNum'] && $data['pNum'] != 1) { ?>|<?php } ?> 
-            <?php if($data['pagesCount'] > $data['pNum']) { ?>
-              <a class="link" href="/admin/<?= $data['pNum'] + 1; ?>"><?= lang('Page'); ?>  <?= $data['pNum'] + 1; ?> >></a> 
-            <?php } ?>
-          </div>
-        <?php } ?>
+        <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], 'admin'); ?>
       </div>
     </div>   
   </main> 

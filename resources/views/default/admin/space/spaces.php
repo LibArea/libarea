@@ -70,9 +70,6 @@
                             <?php } ?>
                         </div>
                         * <?= lang('Ban-space-info-posts'); ?>...
-                        <div class="pagination">
-                      
-                        </div>
                         
                     <?php } else { ?>
                         <div class="no-content"><?= lang('No'); ?>...</div>

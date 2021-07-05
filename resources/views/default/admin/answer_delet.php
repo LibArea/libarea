@@ -37,10 +37,6 @@
                         </div>
                     <?php } ?>
                     
-                    <div class="pagination">
-                  
-                    </div>
-                    
                 <?php } else { ?>
                     <div class="no-content"> <i class="icon info"></i> <?= lang('No answers'); ?>...</div>
                 <?php } ?>

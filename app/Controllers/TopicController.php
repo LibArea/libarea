@@ -136,12 +136,9 @@ class TopicController extends \MainController
 
         $data = [
             'meta_title'    => lang('Add topic'),
-            'sheet'         => 'admin',
+            'sheet'         => 'topics',
         ]; 
 
-        Request::getResources()->addBottomStyles('/assets/css/admin.css');
-        Request::getResources()->addBottomScript('/assets/js/admin.js'); 
-        
         return view(PR_VIEW_DIR . '/admin/topic/add-topic', ['data' => $data, 'uid' => $uid]);
     }
     
@@ -212,7 +209,7 @@ class TopicController extends \MainController
         
         $data = [
             'meta_title'    => lang('Edit topic') . ' — ' . $topic['topic_title'],
-            'sheet'         => 'admin',
+            'sheet'         => 'topics',
         ]; 
 
         return view(PR_VIEW_DIR . '/admin/topic/edit-topic', ['data' => $data, 'uid' => $uid, 'topic' => $topic, 'topic_related' => $topic_related]);

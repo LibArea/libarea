@@ -67,16 +67,20 @@ class TopicModel extends \MainModel
             $display = ''; 
         }
         
-        $sql = "SELECT t.*, r.*, p.*, u.*, s.*, v.*
-            fROM topic as t 
-            INNER JOIN topic_post_relation as r ON r.relation_topic_id = t.topic_id
-            INNER JOIN posts as p ON p.post_id = r.relation_post_id
-            INNER JOIN space as s ON s.space_id = p.post_space_id
-            INNER JOIN users as u ON u.id = p.post_user_id
-            LEFT JOIN votes_post as v ON v.votes_post_item_id = p.post_id AND v.votes_post_user_id = ".$uid['id']."
+        $sql = "SELECT p.*, t.*,
+            r.relation_post_id, r.relation_topic_id,
+            u.id, u.login, u.avatar,
+            s.space_id, s.space_slug, s.space_name,
+            v.votes_post_item_id, v.votes_post_user_id
+            FROM topic AS t
+            INNER JOIN topic_post_relation AS r ON r.relation_topic_id = t.topic_id
+            INNER JOIN posts AS p ON p.post_id = r.relation_post_id
+            INNER JOIN space AS s ON s.space_id = p.post_space_id
+            INNER JOIN users AS u ON u.id = p.post_user_id
+            LEFT JOIN votes_post AS v ON v.votes_post_item_id = p.post_id AND v.votes_post_user_id = ".$uid['id']."
             WHERE t.topic_id  = $topic_id
-            $display ORDER BY post_top DESC, post_date DESC LIMIT 25 OFFSET ".$offset." ";
-                
+            $display ORDER BY p.post_top DESC, p.post_date DESC LIMIT 25 OFFSET ".$offset." ";
+
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
 
@@ -96,10 +100,10 @@ class TopicModel extends \MainModel
             $display = ''; 
         }
         
-        $sql = "SELECT t.*, r.*, p.*
-            fROM topic as t 
-            INNER JOIN topic_post_relation as r ON r.relation_topic_id = t.topic_id
-            INNER JOIN posts as p ON p.post_id = r.relation_post_id
+        $sql = "SELECT p.*, t.*, r.*
+            FROM topic AS t
+            INNER JOIN topic_post_relation AS r ON r.relation_topic_id = t.topic_id
+            INNER JOIN posts AS p ON p.post_id = r.relation_post_id
             WHERE t.topic_id  = $topic_id
             $display ";
 
@@ -111,7 +115,7 @@ class TopicModel extends \MainModel
     // Select topics
     public static function getSearchTopics($query)
     {
-        $sql = "SELECT * FROM topic WHERE topic_title LIKE :topic_title ORDER BY topic_id LIMIT 8";
+        $sql = "SELECT t.* FROM topic AS t WHERE t.topic_title LIKE :topic_title ORDER BY t.topic_id LIMIT 8";
         
         $result = DB::run($sql, ['topic_title' => "%".$query."%"]);
         $topicList  = $result->fetchall(PDO::FETCH_ASSOC);
@@ -129,7 +133,7 @@ class TopicModel extends \MainModel
     // Есть пост в темах
     public static function getRelationId($id)
     {
-        $sql = "SELECT * FROM topic_post_relation WHERE relation_post_id = :id";
+        $sql = "SELECT r.* FROM topic_post_relation AS r WHERE r.relation_post_id = :id";
         
         return DB::run($sql, ['id' => $id])->fetch(PDO::FETCH_ASSOC); 
     }

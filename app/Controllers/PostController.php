@@ -26,7 +26,8 @@ class PostController extends \MainController
         $page   = (!$pg) ? 1 : $pg;
         $uid    = Base::getUid();
 
-        $space_user  = SpaceModel::getSpaceUserSigned($uid['id']);
+        $space_user         = SpaceModel::getSpaceUserSigned($uid['id']);
+        $latest_answers     = AnswerModel::latestAnswers($uid);
         
         $pagesCount = PostModel::postsFeedCount($space_user, $uid, $sheet); 
         $posts      = PostModel::postsFeed($page, $space_user, $uid, $sheet);
@@ -41,10 +42,6 @@ class PostController extends \MainController
             $row['post_date']               = lang_date($row['post_date']);
             $result[$ind]                   = $row;
         }  
-
-        // Последние комментарии и подписанные пространства
-        $latest_answers     = AnswerModel::latestAnswers($uid);
-        $space_signed_bar   = SpaceModel::getSpaceUserSigned($uid['id']);
  
         $result_comm = Array();
         foreach ($latest_answers as $ind => $row) {
@@ -80,7 +77,7 @@ class PostController extends \MainController
             'meta_desc'         => $meta_desc,
         ];
 
-        return view(PR_VIEW_DIR . '/home', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'space_bar' => $space_signed_bar]);
+        return view(PR_VIEW_DIR . '/home', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'space_bar' => $space_user]);
     }
 
     // Полный пост
@@ -700,6 +697,7 @@ class PostController extends \MainController
             'post_date'             => $post_date,
             'post_user_id'          => $post_user_id,
             'post_draft'            => $post_draft,
+            'post_space_id'         => $post_space_id,
             'post_content'          => $post_content,
             'post_content_img'      => $post_img,
             'post_related'          => $post_related,
@@ -707,7 +705,6 @@ class PostController extends \MainController
             'post_tl'               => $post_tl,
             'post_closed'           => $post_closed,
             'post_top'              => $post_top,
-            'post_space_id'         => $post_space_id,
         ];
         
         // Think through the method 
@@ -715,7 +712,7 @@ class PostController extends \MainController
 
         // Перезапишем пост
         PostModel::editPost($data);
-
+      
         if(!empty($topics)) { 
             $arr = [];
             foreach ($topics as $row) {
@@ -723,7 +720,7 @@ class PostController extends \MainController
             }
             TopicModel::addPostTopics($arr, $post_id);
         } 
-        
+      
         redirect('/post/' . $post['post_id'] . '/' . $post['post_slug']);
     }
     

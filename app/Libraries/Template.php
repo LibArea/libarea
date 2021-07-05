@@ -8,6 +8,22 @@ function lang($text) {
     return $text;
 }
 
+// Topic for posts
+function html_topic($topic, $css) 
+{
+    if (!$topic) { return ''; }
+ 
+    if (!is_array($topic)){
+        $topic = preg_split('/(@)/', $topic);
+    }
+ 
+    $result = Array();
+    foreach (array_chunk($topic, 2) as $ind => $row) {
+        $result[] = '<a class="'. $css .'" href="/topic/'. $row[0] .'">'. $row[1] .'</a>';
+    }
+    return implode($result);
+}
+
 // Topic
 function topic_url($file, $size)
 {
@@ -180,4 +196,41 @@ function accessСheck($content, $type, $uid, $after, $stop_time)
     }
 
     return true;
+}
+
+function pagination($pNum, $pagesCount, $sheet, $other)
+{
+    if ($pNum > $pagesCount) {
+        return null;
+    }
+
+    $other = empty($other) ? '' : $other;
+
+    if ($sheet == 'all' || $sheet == 'top' ) {
+        $page = $other . '/' . $sheet;
+    } else {
+        $page = $other . '';
+    }
+
+    $html = '<div class="pagination">';
+    
+    if ($pNum != 1) {  
+        if (($pNum - 1) == 1) { 
+             $html .= '<a class="link" href="'. $page .'/"> << '.lang('Page').' '. ($pNum - 1) .'</a>';
+        } else {
+             $html .= '<a class="link" href="'. $page .'/page/'.($pNum - 1).'"> << '. lang('Page') .' '. ($pNum - 1) .'</a>';
+        }
+    } 
+    
+    if ($pagesCount != $pNum && $pNum != 1) { 
+        $html .= ' | ';
+    }
+    
+    if ($pagesCount > $pNum) { 
+        $html .= '<a class="link" href="'. $page .'/page/'. ($pNum + 1) .'">'. lang('Page') .' '. ($pNum + 1) .' >></a>';
+    }
+
+    $html .= '</div>';
+        
+    return $html; 
 }

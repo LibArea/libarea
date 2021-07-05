@@ -89,7 +89,6 @@
                                     <?php } ?>
                                 </select>
                             </div>
-                            <?php if($uid['trust_level'] > 4) { ?> 
                                 <div class="boxline">
                                     <label class="form-label" for="post_content"><?= lang('Topics'); ?></label>
                                     <select name="post_topics[]" multiple="multiple" id='selTopics'>
@@ -98,8 +97,6 @@
                                         <?php } ?>
                                     </select>
                                 </div>                                  
-                            <?php } ?>
-                            <?php if($uid['trust_level'] > 0) { ?> 
                                 <div class="boxline">  
                                     <label class="form-label" for="post_content"><?= lang('Related'); ?></label>
                                     <select name="post_related[]" multiple="multiple" id='selLinked'>
@@ -108,6 +105,7 @@
                                         $(document).ready(function(){
                                             $("#selTopics").select2({
                                                 width: '70%',
+                                                maximumSelectionLength: 3,
                                                 ajax: { 
                                                     url: "/search/topics",
                                                     type: "post",
@@ -128,6 +126,7 @@
                                             });
                                             $("#selLinked").select2({
                                                 width: '70%',
+                                                maximumSelectionLength: 5,
                                                 ajax: { 
                                                     url: "/search/posts",
                                                     type: "post",
@@ -149,7 +148,6 @@
                                         });
                                     </script>
                                 </div>   
-                            <?php } ?>
                         </div>
                         <div class="boxline">
                             <input type="submit" class="button" name="submit" value="<?= lang('Create'); ?>" />

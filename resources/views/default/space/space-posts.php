@@ -144,6 +144,8 @@
                             </a> 
                         <?php } ?>
                         
+                        <?= html_topic($post['topic_list'], 'date small indent-bid'); ?>
+                        
                         <div class="post-details">
                             <div class="show_add_<?= $post['post_id']; ?>">
                                 <div data-post_id="<?= $post['post_id']; ?>" class="showpost">
@@ -201,27 +203,9 @@
         <?php } else { ?>
             <div class="no-content"><?= lang('no-post'); ?>...</div>
         <?php } ?>  
-        <?php if(!($data['pNum'] > $data['pagesCount'])) { ?>
-            <div class="pagination">   
-                <?php if($data['pNum'] != 1) { ?> 
-                     <?php if (($data['pNum'] - 1) == 1) { ?>
-                        <a class="link" href="/s/<?= $space_info['space_slug']; ?><?php if($data['sheet'] == 'top') { ?>/top<?php } ?>"> 
-                            << <?= lang('Page'); ?> 
-                            <?= $data['pNum'] - 1; ?>
-                        </a> 
-                    <?php } else { ?>
-                        <a class="link" href="/s/<?= $space_info['space_slug']; ?><?php if($data['sheet'] == 'top') { ?>/top<?php } ?>/page/<?= $data['pNum'] - 1; ?>"> 
-                            << <?= lang('Page'); ?> 
-                            <?= $data['pNum'] - 1; ?>
-                        </a> 
-                    <?php } ?>
-                <?php } ?>
-                <?php if($data['pagesCount'] != $data['pNum'] && $data['pNum'] != 1) { ?>|<?php } ?> 
-                <?php if($data['pagesCount'] > $data['pNum']) { ?>
-                    <a class="link" href="/s/<?= $space_info['space_slug']; ?><?php if($data['sheet'] == 'top') { ?>/top<?php } ?>/page/<?= $data['pNum'] + 1; ?>"><?= lang('Page'); ?>  <?= $data['pNum'] + 1; ?> >></a> 
-                <?php } ?>
-            </div>
-        <?php } ?>
+        
+        <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/s/' . $space_info['space_slug']); ?>
+        
     </main>
 
     <aside> 

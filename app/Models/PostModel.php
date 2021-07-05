@@ -50,23 +50,36 @@ class PostModel extends \MainModel
         }
          
         if ($type == 'feed' || $type == 'all') { 
-            $sort = 'ORDER BY p.post_top DESC, p.post_date DESC';
+            $sort = ' ORDER BY p.post_top DESC, p.post_date DESC';
         } else {
-            $sort = 'ORDER BY p.post_answers_num DESC';
+            $sort = ' ORDER BY p.post_answers_num DESC';
         }  
 
+       // $sql_mode = "SET sql_mode = (SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''))";
+       // DB::run($sql_mode);
+
         $sql = "SELECT p.*,
-                u.id, u.login, u.avatar,
-                v.votes_post_item_id, v.votes_post_user_id,  
-                s.space_id, s.space_slug, s.space_name, s.space_color, s.space_feed
-                fROM posts as p 
-                INNER JOIN users as u ON u.id = p.post_user_id
-                INNER JOIN space as s ON s.space_id = p.post_space_id
-                LEFT JOIN votes_post as v ON v.votes_post_item_id = p.post_id AND v.votes_post_user_id = ".$uid['id']."
-                $string
-                $display
-                $sort LIMIT 25 OFFSET ".$offset." ";
-    
+            v.votes_post_item_id, v.votes_post_user_id,
+            r.relation_post_id, r.relation_topic_id,
+            u.id, u.login, u.avatar,
+            t.topic_id, t.topic_slug, t.topic_title,
+            s.space_id, s.space_slug, s.space_name,
+            
+            GROUP_CONCAT(t.topic_slug, '@', t.topic_title SEPARATOR '@') AS topic_list
+       
+            FROM posts AS p
+            LEFT JOIN topic_post_relation AS r on r.relation_post_id = p.post_id 
+            LEFT JOIN topic AS t on t.topic_id = r.relation_topic_id 
+            
+            INNER JOIN users AS u ON u.id = p.post_user_id
+            INNER JOIN space AS s ON s.space_id = p.post_space_id
+            LEFT JOIN votes_post AS v ON v.votes_post_item_id = p.post_id AND v.votes_post_user_id = ".$uid['id']."
+            
+            $string
+            $display
+
+            GROUP BY r.relation_post_id  $sort LIMIT 25 OFFSET $offset "; 
+
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
     
@@ -83,27 +96,27 @@ class PostModel extends \MainModel
            $string = '';
         } else {
             if ($result) {
-                $string = "WHERE p.post_space_id IN(1, ".implode(',', $result).")";
+                $string = "WHERE post_space_id IN(1, ".implode(',', $result).")";
             } else {
-               $string = "WHERE p.post_space_id IN(1)"; 
+               $string = "WHERE post_space_id IN(1)"; 
             }
         } 
      
         // Учитываем TL
         if ($uid['trust_level'] != 5) {   
             if ($uid['id'] == 0) { 
-                $tl = 'AND p.post_tl = 0';
+                $tl = 'AND post_tl = 0';
             } else {
-                $tl = 'AND p.post_tl <= '.$uid['trust_level'].'';
+                $tl = 'AND post_tl <= '.$uid['trust_level'].'';
             }
-            $display = 'AND p.post_is_delete = 0 AND s.space_feed = 0 '.$tl.'';
+            $display = 'AND post_is_delete = 0 AND space_feed = 0 '.$tl.'';
         } else {
             $display = ''; 
         }
      
-        $sql = "SELECT p.post_id, p.post_space_id, s.space_id
-                fROM posts as p
-                INNER JOIN space as s ON s.space_id = p.post_space_id
+        $sql = "SELECT post_id,post_space_id, space_id
+                FROM posts
+                INNER JOIN space ON space_id = post_space_id
                 $string $display";
 
         $quantity = DB::run($sql)->rowCount(); 
@@ -267,6 +280,7 @@ class PostModel extends \MainModel
             ['post_type'], '=', $data['post_type'], ',',
             ['post_translation'], '=', $data['post_translation'], ',',
             ['post_draft'], '=', $data['post_draft'], ',',
+            ['post_space_id'], '=', $data['post_space_id'], ',',
             ['post_date'], '=', $data['post_date'], ',', 
             ['edit_date'], '=', date("Y-m-d H:i:s"), ',',
             ['post_user_id'], '=', $data['post_user_id'], ',', 
@@ -276,8 +290,7 @@ class PostModel extends \MainModel
             ['post_merged_id'], '=', $data['post_merged_id'], ',', 
             ['post_tl'], '=', $data['post_tl'], ',', 
             ['post_closed'], '=', $data['post_closed'], ',', 
-            ['post_top'], '=', $data['post_top'], ',', 
-            ['post_space_id'], '=', $data['post_space_id'])
+            ['post_top'], '=', $data['post_top'])
             ->where(['post_id'], '=', $data['post_id'])->run(); 
 
         return true;
@@ -287,7 +300,7 @@ class PostModel extends \MainModel
     public static function postRelated($post_related)
     {
         
-        $sql = "SELECT post_id,post_title, post_slug, post_type, post_draft, post_related, post_is_delete
+        $sql = "SELECT post_id, post_title, post_slug, post_type, post_draft, post_related, post_is_delete
                 FROM posts WHERE post_id IN(0, ".$post_related.") AND post_is_delete = 0 AND post_tl = 0";
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
@@ -350,13 +363,9 @@ class PostModel extends \MainModel
     public static function PostDelete($post_id) 
     {
         if (self::isThePostDeleted($post_id) == 1) {
-
             XD::update(['posts'])->set(['post_is_delete'], '=', 0)->where(['post_id'], '=', $post_id)->run();
-        
         } else {
-            
             XD::update(['posts'])->set(['post_is_delete'], '=', 1)->where(['post_id'], '=', $post_id)->run();
- 
         }
         
         return true;
@@ -394,11 +403,10 @@ class PostModel extends \MainModel
     // Информация список постов
     public static function getPostTopic($post_id)
     {
-       
-        $sql = "SELECT t.*, r.*
-                fROM topic as t 
-                INNER JOIN topic_post_relation as r ON r.relation_topic_id = t.topic_id
-                WHERE r.relation_post_id  = ".$post_id." ";
+        $sql = "SELECT *
+                fROM topic  
+                INNER JOIN topic_post_relation  ON relation_topic_id = topic_id
+                WHERE relation_post_id  = ".$post_id." ";
                 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }

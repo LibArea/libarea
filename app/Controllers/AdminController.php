@@ -102,7 +102,7 @@ class AdminController extends \MainController
         
         $data = [
             'meta_title'    => lang('Deleted comments'),
-            'sheet'         => 'admin',
+            'sheet'         => 'comments',
         ]; 
 
         Request::getResources()->addBottomStyles('/assets/css/admin.css');
@@ -126,7 +126,7 @@ class AdminController extends \MainController
         
         $data = [
             'meta_title'    => lang('Deleted answers'),
-            'sheet'         => 'admin',
+            'sheet'         => 'answers',
         ]; 
 
         Request::getResources()->addBottomStyles('/assets/css/admin.css');
@@ -150,12 +150,9 @@ class AdminController extends \MainController
 
         $data = [
             'meta_title'    => lang('Invites'),
-            'sheet'         => 'admin',
+            'sheet'         => 'invitations',
         ]; 
 
-        Request::getResources()->addBottomStyles('/assets/css/admin.css');
-        Request::getResources()->addBottomScript('/assets/js/admin.js'); 
- 
         return view(PR_VIEW_DIR . '/admin/invitations', ['data' => $data, 'uid' => $uid, 'invitations' => $result]);
     }
     
@@ -200,9 +197,6 @@ class AdminController extends \MainController
             'sheet'         => 'admin',
         ]; 
 
-        Request::getResources()->addBottomStyles('/assets/css/admin.css');
-        Request::getResources()->addBottomScript('/assets/js/admin.js'); 
-        
         return view(PR_VIEW_DIR . '/admin/space/add-space', ['data' => $data, 'uid' => $uid]);
     }
     
@@ -286,11 +280,10 @@ class AdminController extends \MainController
         
         $data = [
             'meta_title'    => lang('Badges'),
-            'sheet'         => 'admin',
+            'sheet'         => 'badges',
         ]; 
 
         Request::getResources()->addBottomStyles('/assets/css/admin.css');
-        Request::getResources()->addBottomScript('/assets/js/admin.js'); 
         
         return view(PR_VIEW_DIR . '/admin/badge/badges', ['data' => $data, 'uid' => $uid, 'badges' => $badges]);
     }
@@ -302,12 +295,9 @@ class AdminController extends \MainController
         
         $data = [
             'meta_title'    => lang('Add badge'),
-            'sheet'         => 'admin',
+            'sheet'         => 'badges',
         ]; 
 
-        Request::getResources()->addBottomStyles('/assets/css/admin.css');
-        Request::getResources()->addBottomScript('/assets/js/admin.js'); 
-        
         return view(PR_VIEW_DIR . '/admin/badge/badge-add', ['data' => $data, 'uid' => $uid]);
     }
     
@@ -331,9 +321,6 @@ class AdminController extends \MainController
             'sheet'         => 'admin',
         ]; 
 
-        Request::getResources()->addBottomStyles('/assets/css/admin.css');
-        Request::getResources()->addBottomScript('/assets/js/admin.js'); 
-        
         return view(PR_VIEW_DIR . '/admin/badge/badge-user-add', ['data' => $data, 'uid' => $uid, 'user' => $user, 'badges' => $badges]);    
     }
     
@@ -365,9 +352,6 @@ class AdminController extends \MainController
             'sheet'         => 'admin',
         ]; 
 
-        Request::getResources()->addBottomStyles('/assets/css/admin.css');
-        Request::getResources()->addBottomScript('/assets/js/admin.js'); 
-        
         return view(PR_VIEW_DIR . '/admin/badge/badge-edit', ['data' => $data, 'uid' => $uid, 'badge' => $badge]);
     }
     
@@ -512,7 +496,7 @@ class AdminController extends \MainController
         $domains    = LinkModel::getLinksAll($uid['id'], $page);
         $data = [
             'meta_title'    => lang('Domains'),
-            'sheet'         => 'admin',
+            'sheet'         => 'domains',
         ]; 
 
         Request::getResources()->addBottomStyles('/assets/css/admin.css');
@@ -537,9 +521,6 @@ class AdminController extends \MainController
             'sheet'         => 'admin',
         ]; 
 
-        Request::getResources()->addBottomStyles('/assets/css/admin.css');
-        Request::getResources()->addBottomScript('/assets/js/admin.js'); 
-        
         return view(PR_VIEW_DIR . '/admin/domain/domain-edit', ['data' => $data, 'uid' => $uid, 'domain' => $domain]);
     }
     
@@ -577,7 +558,7 @@ class AdminController extends \MainController
         $pg     = \Request::getInt('page'); 
         $page   = (!$pg) ? 1 : $pg;
         
-        $words = UserModel::getStopWords();
+        $words = ContentModel::getStopWords();
 
         $data = [
             'h1'            => lang('Stop words'),
@@ -599,12 +580,9 @@ class AdminController extends \MainController
         $data = [
             'h1'            => lang('Add a stop word'),
             'meta_title'    => lang('Add a stop word'),
-            'sheet'         => 'add-words',
+            'sheet'         => 'words',
         ]; 
 
-        Request::getResources()->addBottomStyles('/assets/css/admin.css');
-        Request::getResources()->addBottomScript('/assets/js/admin.js'); 
-        
         return view(PR_VIEW_DIR . '/admin/word/add-word', ['data' => $data, 'uid' => $uid]);
     }
     
@@ -647,7 +625,7 @@ class AdminController extends \MainController
         
         $data = [
             'meta_title'    => lang('Topics'),
-            'sheet'         => 'admin',
+            'sheet'         => 'topics',
         ]; 
         
         Request::getResources()->addBottomStyles('/assets/css/admin.css');
@@ -655,8 +633,6 @@ class AdminController extends \MainController
         
         return view(PR_VIEW_DIR . '/admin/topic/topics', ['data' => $data, 'uid' => $uid, 'topics' => $topics]);
     }        
-    
- 
 
     // Проверка прав
     public static function isAdmin()
@@ -666,5 +642,14 @@ class AdminController extends \MainController
             redirect('/');
         }
         return $uid;
-    }    
+    }
+    
+    // Проверка прав
+    public static function updateQuantity()
+    {
+        $uid    = self::isAdmin();
+        AdminModel::setUpdateQuantity();
+        
+        redirect('/admin/topics');
+    }
 }

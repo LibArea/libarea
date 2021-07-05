@@ -13,19 +13,21 @@
     <div class="profile-box">
     <div class="wrap">    
 <?php } ?>
-        <div class="profile-header">
-            <?php if($uid['login'] != $user['login']) { ?>
-                <?php if($button_pm === true) { ?>            
-                    <a class="right pm" href="/u/<?= $user['login']; ?>/mess">
-                        <i class="icon envelope"></i>
-                    </a>
-                <?php } ?>    
-            <?php } else { ?>
-                <a class="right pm"  href="/u/<?= $uid['login']; ?>/setting">
-                    <i class="icon pencil"></i>
-                </a> 
-            <?php } ?>
-        </div>
+        <?php if($uid['id'] > 0) { ?>
+            <div class="profile-header">
+                <?php if($uid['login'] != $user['login']) { ?>
+                    <?php if($button_pm === true) { ?>            
+                        <a class="right pm" href="/u/<?= $user['login']; ?>/mess">
+                            <i class="icon envelope"></i>
+                        </a>
+                    <?php } ?>    
+                <?php } else { ?>
+                    <a class="right pm"  href="/u/<?= $uid['login']; ?>/setting">
+                        <i class="icon pencil"></i>
+                    </a> 
+                <?php } ?>
+            </div>
+        <?php } ?>    
         <div class="profile-ava">
             <img alt="<?= $user['login']; ?>" src="<?= user_avatar_url($user['avatar'], 'max'); ?>">
         </div>

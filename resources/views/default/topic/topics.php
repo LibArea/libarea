@@ -27,28 +27,8 @@
                     <div class="no-content"><i class="icon info"></i> <?= lang('No topics'); ?></div>
                 <?php } ?>
                 
-                <?php if(!($data['pNum'] > $data['pagesCount'])) { ?>
-                    <div class="pagination">   
-                        <?php if ($data['pNum'] != 1) { ?> 
-                            <?php if (($data['pNum'] - 1) == 1) { ?>
-                                <a class="link" href="/topics"> 
-                                    << <?= lang('Page'); ?> 
-                                    <?= $data['pNum'] - 1; ?>
-                                </a> 
-                            <?php } else { ?>
-                                <a class="link" href="/topic/page/<?= $data['pNum'] - 1; ?>"> 
-                                    << <?= lang('Page'); ?> 
-                                    <?= $data['pNum'] - 1; ?>
-                                </a> 
-                            <?php } ?>
-                        <?php } ?>
-                        <?php if($data['pagesCount'] != $data['pNum'] && $data['pNum'] != 1) { ?>|<?php } ?> 
-                        <?php if($data['pagesCount'] > $data['pNum']) { ?>
-                            <a class="link" href="/topic/page/<?= $data['pNum'] + 1; ?>"><?= lang('Page'); ?>  <?= $data['pNum'] + 1; ?> >></a> 
-                        <?php } ?>
-                    </div>
-                <?php } ?>
-                
+            <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], 'topics'); ?>
+     
             </div>
         </div>
     </main>
@@ -63,11 +43,9 @@
                 <div class="inner-padding big"> 
                     <h3 class="style small"><?= lang('New ones'); ?></h3>
                     <?php foreach ($news as $new) { ?>
-                        <div class="related-box">
-                            <a class="tags" href="/topic/<?= $new['topic_slug']; ?>">
-                                <?= $new['topic_title']; ?>
-                            </a>
-                       </div> 
+                        <a class="tags" href="/topic/<?= $new['topic_slug']; ?>">
+                            <?= $new['topic_title']; ?>
+                        </a>
                     <?php } ?>
                 </div>
             </div>

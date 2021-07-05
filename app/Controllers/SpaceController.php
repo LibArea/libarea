@@ -103,7 +103,7 @@ class SpaceController extends \MainController
         $space['users'] = SpaceModel::numSpaceSubscribers($space['space_id']);
 
         // Отписан участник от пространства или нет
-        $space_signed = SpaceModel::getMySpaceHide($space['space_id'], $uid['id']);
+        $space_signed = SpaceModel::getMyFocus($space['space_id'], $uid['id']);
         
         if ($sheet == 'feed') {
             $s_title = lang('space-feed-title');
@@ -424,7 +424,7 @@ class SpaceController extends \MainController
             return false;
         }
 
-        SpaceModel::SpaceHide($space_id, $uid['id']);
+        SpaceModel::focus($space_id, $uid['id']);
         
         return true;
     }

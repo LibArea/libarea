@@ -31,6 +31,9 @@
                                         </a>
                                         | <span class="green"><?= $topic['topic_slug']; ?></span>
                                         | <?= $topic['topic_count']; ?>
+                                        <?php if ($topic['topic_is_parent'] == 1) { ?>
+                                            |  <span class="red"><?= lang('Root'); ?></span>
+                                        <?php } ?>
                                         <a class="right" target="_blank" rel="noopener noreferrer" href="/topic/<?= $topic['topic_slug']; ?>"><i class="icon share-alt"></i></a>
                                         <br> 
                                         <?= $topic['topic_description']; ?>
@@ -42,9 +45,6 @@
                                     </span>
                                 </div>
                             <?php } ?>
-                        </div>
-                        <div class="pagination">
-                      
                         </div>
                         
                     <?php } else { ?>

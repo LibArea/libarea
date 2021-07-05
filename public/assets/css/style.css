@@ -504,7 +504,7 @@ textarea:focus {
 .del-focus {
   background: #ebeced;
   border: 1px solid #d9dcdf;
-  color: #ada8a8; 
+  color: #ada8a8;
 }
 
 .add-focus:hover {
@@ -520,7 +520,7 @@ textarea:focus {
 }
 
 .topics-footer {
-  margin-top: 13px;
+  margin-top: 11px;
 }
 
 .box-number {
@@ -883,6 +883,7 @@ img.ava-24 {
 
 img.ava-94 {
   width: 94px;
+  margin-top: 5px;
 }
 
 .search-info,
@@ -1298,25 +1299,24 @@ ol.comment-telo {
 
 /* Topic */
 a.tags {
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 8pt;
-  padding: 0.2em 0.4em 0.2em 0.4em;
-  text-decoration: none;
-  color: #888;
+  position: relative;
   display: inline-block;
-  font-style: normal;
+  height: 30px;
+  padding: 0 12px;
+  font-size: 13px;
+  line-height: 30px;
+  vertical-align: top;
+  border-radius: 10em;
+  background: #0066ff1a;
+  margin: 0 0 10px 0;
 }
 
+a.tags:hover,
 a.tags.avtive {
-  border: 1px solid #e45735;
-  color: #e45735;
+  background: rgba(0, 102, 255, 0.15);
+  color: #275ec2;
 }
 
-a.tags:hover {
-  border: 1px solid #ccc;
-  color: #666;
-}
 
 /* Info пространство и рекомендовано в посте */
 .space-info-img {
