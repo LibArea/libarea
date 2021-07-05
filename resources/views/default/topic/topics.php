@@ -9,12 +9,14 @@
               
                     <?php foreach ($topics as $topic) { ?>  
                         <div class="item">
-                            <a class="img-topic" href="/topic/<?= $topic['topic_slug']; ?>" data-id="2">
-                                <img alt="<?= $topic['topic_title']; ?>" class="" src="<?= topic_url($topic['topic_img'], 'max'); ?>">
+                            <a title="<?= $topic['topic_title']; ?>" class="img-topic" href="/topic/<?= $topic['topic_slug']; ?>">
+                                <img alt="<?= $topic['topic_title']; ?>" src="<?= topic_url($topic['topic_img'], 'max'); ?>">
                             </a>
                     
                             <div class="item-desc">
-                                <a href="/topic/<?= $topic['topic_slug']; ?>"><?= $topic['topic_title']; ?></a>
+                                <a title="<?= $topic['topic_title']; ?>" href="/topic/<?= $topic['topic_slug']; ?>">
+                                    <?= $topic['topic_title']; ?>
+                                </a>
                                 <span class="indent"></span>
                                 <sup class="gray">x<?= $topic['topic_count']; ?></sup>
                         
@@ -43,7 +45,7 @@
                 <div class="inner-padding big"> 
                     <h3 class="style small"><?= lang('New ones'); ?></h3>
                     <?php foreach ($news as $new) { ?>
-                        <a class="tags" href="/topic/<?= $new['topic_slug']; ?>">
+                        <a title="<?= $new['topic_title']; ?>" class="tags" href="/topic/<?= $new['topic_slug']; ?>">
                             <?= $new['topic_title']; ?>
                         </a>
                     <?php } ?>

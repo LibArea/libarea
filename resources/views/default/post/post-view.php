@@ -245,8 +245,10 @@
         <div class="space-info white-box">
             <div class="inner-padding"> 
                 <div class="space-info-img">
-                    <img class="img-space" alt="<?= $post['space_slug']; ?>" src="<?= spase_logo_url($post['space_img'], 'max'); ?>">
-                    <a class="space-info-title" href="/s/<?= $post['space_slug']; ?>"><?= $post['space_name']; ?></a> 
+                    <a title="<?= $post['space_name']; ?>" class="space-info-title" href="/s/<?= $post['space_slug']; ?>">
+                        <img class="img-space" alt="<?= $post['space_slug']; ?>" src="<?= spase_logo_url($post['space_img'], 'max'); ?>">
+                        <?= $post['space_name']; ?>
+                    </a> 
                 </div>    
                 <div class="space-info-desc small"><?= $post['space_short_text']; ?></div> 
             </div>

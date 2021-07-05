@@ -114,7 +114,7 @@ class PostModel extends \MainModel
             $display = ''; 
         }
      
-        $sql = "SELECT post_id,post_space_id, space_id
+        $sql = "SELECT post_id, post_space_id, space_id
                 FROM posts
                 INNER JOIN space ON space_id = post_space_id
                 $string $display";
