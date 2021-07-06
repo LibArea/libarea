@@ -36,8 +36,11 @@
                                 <div class="box_h">3 - 32 <?= lang('characters'); ?></div>
                             </div>
                             <div class="boxline">
-                                <label for="post_content"><?= lang('Description'); ?><sup class="red">*</sup></label>
+                                <label for="post_content">
+                                    <?= lang('Meta Description'); ?><sup class="red">*</sup>
+                                </label>
                                 <textarea class="add" name="topic_description"></textarea>
+                                <div class="box_h">> 44 <?= lang('characters'); ?></div>
                             </div>
                                 <input type="submit" name="submit"  class="button" value="<?= lang('Add'); ?>" />
                         </form>

@@ -65,14 +65,17 @@ class PostModel extends \MainModel
                 LEFT JOIN
                 (
                     SELECT 
-                      t.topic_id, t.topic_slug, t.topic_title,
-                      r.relation_topic_id, r.relation_post_id,
-                    
+                        MAX(t.topic_id), 
+                        MAX(t.topic_slug), 
+                        MAX(t.topic_title),
+                        MAX(r.relation_topic_id), 
+                        r.relation_post_id,
+
                         GROUP_CONCAT(t.topic_slug, '@', t.topic_title SEPARATOR '@') AS topic_list
                         FROM topic  AS t
                         LEFT JOIN topic_post_relation AS r
                             on t.topic_id = r.relation_topic_id
-                        GROUP BY r.relation_post_id,  r.relation_topic_id, t.topic_id, t.topic_slug, t.topic_title
+                        GROUP BY r.relation_post_id
                 ) AS rel
                     ON rel.relation_post_id = p.post_id 
 

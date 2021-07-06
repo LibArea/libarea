@@ -45,7 +45,7 @@
       <?php } else { ?> 
         <div class="dropbtn nav">
           <div class="nick" title=""><span><?= $uid['login']; ?></span>  
-            <img class="ava" alt="<?= $uid['login']; ?>" src="<?= user_avatar_url($uid['avatar'], 'small'); ?>">
+            <?= user_avatar_img($uid['avatar'], 'small', $uid['login'], 'ava'); ?> 
             <i class="icon arrow arrow-down"></i>
           </div>
           <div class="dropdown-menu">

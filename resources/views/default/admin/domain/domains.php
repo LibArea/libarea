@@ -31,7 +31,7 @@
                                 </div> 
                                 <div class="domain-footer indent-bid">
                                     <a class="green" rel="nofollow noreferrer" href="<?= $link['link_url']; ?>">
-                                        <img class="favicon" alt="<?= $link['link_url_domain']; ?>" src="<?= favicon_url($link['link_id']); ?>"> 
+                                        <?= favicon_img($link['link_id'], $link['link_url_domain']); ?>
                                         <?= $link['link_url']; ?>
                                     </a> | 
                                     id<?= $link['link_id']; ?> |

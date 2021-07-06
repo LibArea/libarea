@@ -20,7 +20,7 @@
                                     </a>
 
                                     <div class="lowercase small">
-                                        <img class="ava" src="<?= user_avatar_url($fav['avatar'], 'small'); ?>">
+                                        <?= user_avatar_img($fav['avatar'], 'small', $fav['login'], 'ava'); ?>
                                         <a class="date"  href="/u/<?= $fav['login']; ?>"><?= $fav['login']; ?></a> 
 
                                         <span class="date"><?= $fav['date']; ?></span>

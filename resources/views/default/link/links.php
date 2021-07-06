@@ -18,7 +18,7 @@
                                     </h2>
                                 </a> 
                                 <a class="green indent-bid" target="_blank" rel="nofollow noreferrer ugc" href="<?= $link['link_url']; ?>">
-                                    <img class="favicon" alt="<?= $link['link_url_domain']; ?>" src="<?= favicon_url($link['link_id']); ?>"> 
+                                    <?= favicon_img($link['link_id'], $link['link_url_domain']); ?>
                                     <?= $link['link_url_domain']; ?>
                                 </a>                                
                                 <div class="domain-content indent-bid">

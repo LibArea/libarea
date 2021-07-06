@@ -10,15 +10,20 @@
 
                         <div class="msg-telo<?php if (!$msg['unread'] > 0) { ?> active<?php } ?>">
                             <?php if($msg['sender_uid'] == $uid['id']) {  ?>
-                                <?= lang('You'); ?>  |  <?= $msg['update_time']; ?> <br>
+                                <div class="small">
+                                    <?= lang('You'); ?>  |  <?= $msg['update_time']; ?>
+                                </div>    
                             <?php } else { ?>
-                                <?= lang('From'); ?>
-                                 
-                                <img src="<?= user_avatar_url($msg['msg_user']['avatar'], 'small'); ?>" class="msg-ava">
-                                 <a href="/u/<?= $msg['msg_user']['login']; ?>">
-                                    <?= $msg['msg_user']['login']; ?> 
-                                 </a>
-                                   <span class="date"> |  <?= $msg['update_time']; ?> </span>
+                                <div class="small">
+                                    <?= lang('From'); ?>
+                                    <span class="indent"></span>
+                                    <?= user_avatar_img($msg['msg_user']['avatar'], 'small', $msg['msg_user']['login'], 'ava'); ?>
+                                    <span class="indent"></span>
+                                    <a href="/u/<?= $msg['msg_user']['login']; ?>">
+                                       <?= $msg['msg_user']['login']; ?> 
+                                    </a>
+                                    <span class="date"><?= $msg['update_time']; ?></span>
+                                 </div>
                             <?php } ?>
                             
                             <div class="message one">

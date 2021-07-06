@@ -24,7 +24,7 @@
                             <input type="hidden" name="answer_id" id="answer_id" value="<?= $data['answer_id']; ?>">
                             
                             <div class="boxline">
-                                <input type="submit" class="button" name="answit" value="<?= lang('Edit'); ?>" class="answer-post">
+                                <input type="submit" class="button" name="answit" value="<?= lang('Edit'); ?>" class="button">
                             </div> 
                         </form>
                     <?php endif; ?>

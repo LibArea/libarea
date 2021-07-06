@@ -10,7 +10,7 @@
 
 .my_space.all {
   left: 39px;
-  top: 5px;
+  top: 11px;
 }
 
 .space-text a {
@@ -190,7 +190,7 @@ h1.space a {
 .space-telo img.space-img {
   width: 48px;
   float: left;
-  margin-right: 10px;
+  margin: 8px 10px 0 0;
 }
 
 .space-no-user {

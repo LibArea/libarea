@@ -39,7 +39,7 @@
                                 <?php } ?>
                         </h1>
                         <div class="post-footer-full small lowercase">
-                            <img class="ava" alt="<?= $post['login']; ?>" src="<?= user_avatar_url($post['avatar'], 'small'); ?>">
+                            <?= user_avatar_img($post['avatar'], 'small', $post['login'], 'ava'); ?>
                             <span class="indent"></span> 
                             <span class="user"> 
                                 <a href="/u/<?= $post['login']; ?>"><?= $post['login']; ?></a> 
@@ -201,7 +201,7 @@
                                         <div class="boxline"> 
                                             <input type="hidden" name="post_id" id="post_id" value="<?= $post['post_id']; ?>">
                                             <input type="hidden" name="answer_id" id="answer_id" value="0">
-                                            <input type="submit" class="button" name="answit" value="<?= lang('Reply'); ?>" class="answer-post">
+                                            <input type="submit" class="button" name="answit" value="<?= lang('Reply'); ?>" class="button">
                                         </div>
                                     </div>    
                                     </form>
@@ -209,7 +209,7 @@
                             <?php } else { ?>
                                 <textarea rows="5" disabled="disabled" placeholder="<?= lang('no-auth-comm'); ?>" name="answer" id="answer"></textarea>
                                 <div> 
-                                    <input type="submit" name="answit" value="<?= lang('Reply'); ?>" class="answer-post" disabled="disabled">
+                                    <input type="submit" name="answit" value="<?= lang('Reply'); ?>" class="button" disabled="disabled">
                                 </div> 
                             <?php } ?>
                         <?php } ?>
@@ -246,7 +246,7 @@
             <div class="inner-padding"> 
                 <div class="space-info-img">
                     <a title="<?= $post['space_name']; ?>" class="space-info-title" href="/s/<?= $post['space_slug']; ?>">
-                        <img class="img-space" alt="<?= $post['space_slug']; ?>" src="<?= spase_logo_url($post['space_img'], 'max'); ?>">
+                        <?= spase_logo_img($post['space_img'], 'max', $post['space_slug'], 'img-space'); ?>
                         <?= $post['space_name']; ?>
                     </a> 
                 </div>    

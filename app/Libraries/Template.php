@@ -24,22 +24,43 @@ function html_topic($topic, $css)
     return implode($result);
 }
 
-// Topic
-function topic_url($file, $size)
+// Topic logo img
+function topic_logo_img($file, $size, $alt, $style)
 {
     if ($size == 'small') {  
-        return '/uploads/topics/small/' . $file;
-    } 
-    return '/uploads/topics/' . $file;
+        $src = '/uploads/topics/small/' . $file;
+    } else {
+        $src = '/uploads/topics/' . $file;
+    }
+    $img = '<img class="'.$style.'" src="'.$src.'" alt="'.$alt.'">';
+    
+    return $img;
+}
+
+// Space logo img
+function spase_logo_img($file, $size='small', $alt, $style) 
+{
+    if ($size == 'small') {
+        $src = '/uploads/spaces/logos/small/' . $file;
+    } else {
+        $src = '/uploads/spaces/logos/' . $file;
+    }
+    $img = '<img class="'.$style.'" src="'.$src.'" alt="'.$alt.'">';
+    
+    return $img;
 }
 
 // User's Avatar
-function user_avatar_url($file, $size) 
+function user_avatar_img($file, $size='small', $alt, $style) 
 {
     if ($size == 'small') {  
-        return '/uploads/users/avatars/small/' . $file;
-    } 
-    return '/uploads/users/avatars/' . $file;
+        $src = '/uploads/users/avatars/small/' . $file;
+    } else {
+        $src = '/uploads/users/avatars/' . $file;
+    }
+    $img = '<img class="'.$style.'" src="'.$src.'" alt="'.$alt.'">';
+    
+    return $img;
 }
 
 // User's Cover art
@@ -48,22 +69,16 @@ function user_cover_url($file)
     return '/uploads/users/cover/' . $file;
 }
 
-// Space Logo
-function spase_logo_url($file, $size='small') 
-{
-    if ($size == 'small') {
-        return '/uploads/spaces/logos/small/' . $file;
-    } 
-    return  '/uploads/spaces/logos/' . $file;
-}
-
 // Favicon 
-function favicon_url($link_id) 
+function favicon_img($link_id, $alt) 
 {
     if (file_exists(HLEB_PUBLIC_DIR. '/uploads/favicons/' . $link_id . '.png')) {
-        return '/uploads/favicons/' . $link_id . '.png';
+        $img = '<img class="favicon" src="/uploads/favicons/'.$link_id.'.png" alt="'.$alt.'">';
+        return $img;
     }
-    return '/uploads/favicons/no-link.png';
+
+    $img = '<img class="favicon" src="/uploads/favicons/no-link.png" alt="'.$alt.'">';
+    return $img;
 }
 
 // Localization of dates and events....

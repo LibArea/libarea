@@ -11,7 +11,7 @@
                         <div class="container">
                             <div class="answ-telo">
                                 <div class="answ-header small">
-                                    <img alt="<?= $answ['login']; ?>" class="ava" src="<?= user_avatar_url($answ['avatar'], 'small'); ?>">
+                                    <?= user_avatar_img($answ['avatar'], 'small', $answ['login'], 'ava'); ?>
                                     <span class="user"> 
                                         <a class="date" href="/u/<?= $answ['login']; ?>"><?= $answ['login']; ?></a> 
                                     </span> 
@@ -139,7 +139,7 @@
                                 <div class="container">
                                     <div class="comm-telo">
                                         <div class="comm-header small"> 
-                                            <img alt="<?= $comment['login']; ?>" class="ava" src="<?= user_avatar_url($comment['avatar'], 'small'); ?>">
+                                            <?= user_avatar_img($comment['avatar'], 'small', $comment['login'], 'ava'); ?>
                                             <span class="user"> 
                                                 <a class="date" href="/u/<?= $comment['login']; ?>"><?= $comment['login']; ?></a> 
                                             </span> 

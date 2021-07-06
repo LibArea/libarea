@@ -29,7 +29,7 @@
             </div>
         <?php } ?>    
         <div class="profile-ava">
-            <img alt="<?= $user['login']; ?>" src="<?= user_avatar_url($user['avatar'], 'max'); ?>">
+            <?= user_avatar_img($user['avatar'], 'max', $user['login'], 'ava'); ?>
         </div>
     </div>
     </div> 
@@ -78,13 +78,14 @@
             
             <?php if($data['space_user']) { ?>
                 <br>
-                <label class="required"><?= lang('Created by'); ?>:</label>
-                <br>
+                <div class="bar-title small"><?= lang('Created by'); ?></div>
                 <span class="d">
                     <?php foreach ($data['space_user'] as  $space) { ?>
                         <div class="profile-space">
-                            <img src="<?= spase_logo_url($space['space_img'], 'small'); ?>" alt="<?= $space['space_name']; ?>">
-                            <a href="/s/<?= $space['space_slug'];?>"><?= $space['space_name'];?></a> 
+                            <a class="bar-space-telo" href="/s/<?= $space['space_slug'];?>">
+                                <?= spase_logo_img($space['space_img'], 'small', $space['space_name'], 'space-logo'); ?>
+                                <span class="bar-name small"><?= $space['space_name'];?></span>
+                            </a> 
                         </div>
                     <?php } ?>
                 </span>     
@@ -181,7 +182,7 @@
                     </a>
 
                     <div class="lowercase"> 
-                        <img class="ava" alt="<?= $user['login']; ?>" src="<?= user_avatar_url($user['avatar'], 'small'); ?>">
+                        <?= user_avatar_img($user['avatar'], 'small', $user['login'], 'ava'); ?>
                         <a class="date" href="/u/<?= $user['login']; ?>"><?= $user['login']; ?></a> 
                         
                         <span class="indent"> &#183; </span> 

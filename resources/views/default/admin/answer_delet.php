@@ -13,7 +13,7 @@
                     
                         <div class="answ-telo_bottom" id="answer_<?= $answer['comment_id']; ?>">
                             <div class="small">
-                                <img class="ava" src="<?= user_avatar_url($answer['avatar'], 'small'); ?>">
+                                <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava'); ?>
                                 <a class="date" href="/u/<?= $answer['login']; ?>"><?= $answer['login']; ?></a> 
                                 
                                 <span class="date"><?= $answer['date']; ?></span>

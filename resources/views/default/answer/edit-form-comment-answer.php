@@ -7,7 +7,7 @@
                 <input type="hidden" name="post_id" id="post_id" value="<?= $data['post_id']; ?>">
                 <input type="hidden" name="answer_id" id="answer_id" value="<?= $data['answer_id']; ?>">
                 <div class="boxline">
-                    <input type="submit" name="answit" value="<?= lang('Edit'); ?>" class="answer-post">
+                    <input type="submit" name="answit" value="<?= lang('Edit'); ?>" class="button">
                     <input id="cancel_answ" class="button" type="button" value="<?= lang('Cancel'); ?>">
                 </div>
             </div> 

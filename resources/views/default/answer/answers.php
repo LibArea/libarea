@@ -12,8 +12,7 @@
                             <?php if($answ['answer_del'] == 0) { ?>
                                 <div class="answ-telo_bottom">
                                     <div class="answ-header small">
-                                        <img class="ava" src="<?= user_avatar_url($answ['avatar'], 'small'); ?>">
-                                        
+                                        <?= user_avatar_img($answ['avatar'], 'small', $answ['login'], 'ava'); ?>
                                         <a class="date" href="/u/<?= $answ['login']; ?>"><?= $answ['login']; ?></a> 
                                         
                                         <span class="date"><?= $answ['date']; ?></span>

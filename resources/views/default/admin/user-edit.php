@@ -16,7 +16,7 @@
                         </a>
                         <br>
                         <img width="325" class="right" src="<?= user_cover_url($user['cover_art']); ?>">
-                        <img width="65" src="<?= user_avatar_url($user['avatar'], 'max'); ?>"> 
+                        <?= user_avatar_img($user['avatar'], 'small', $user['login'], 'ava'); ?> 
 
                         <div class="boxline">
                             <label class="form-label" for="post_title">
@@ -69,7 +69,7 @@
                                 <span class="d">
                                     <?php foreach ($data['space_user'] as  $space) { ?>
                                         <div class="profile-space">
-                                            <img src="<?= spase_logo_url($space['space_img'], 'small'); ?>" alt="<?= $space['space_name']; ?>">
+                                            <?= spase_logo_img($space['space_img'], 'small', $space['space_name'], 'space_img'); ?>
                                             <a href="/s/<?= $space['space_slug'];?>"><?= $space['space_name'];?></a> 
                                         </div>
                                     <?php } ?>

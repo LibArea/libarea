@@ -189,6 +189,7 @@ class TopicController extends \MainController
         $redirect = '/admin/topic/add';
 
         Base::Limits($topic_title , lang('Title'), '3', '64', $redirect);
+        Base::Limits($topic_description, lang('Meta Description'), '44', '225', $redirect);
         Base::Limits($topic_slug, lang('Slug'), '3', '43', $redirect);
         Base::Limits($topic_seo_title, lang('Slug'), '4', '225', $redirect);
         
@@ -287,7 +288,7 @@ class TopicController extends \MainController
         Base::Limits($topic_title , lang('Title'), '3', '64', $redirect);
         Base::Limits($topic_slug, lang('Slug'), '3', '43', $redirect);
         Base::Limits($topic_seo_title, lang('Name SEO'), '4', '225', $redirect);
-        Base::Limits($topic_description, lang('Description'), '44', '225', $redirect);
+        Base::Limits($topic_description, lang('Meta Description'), '44', '225', $redirect);
         Base::Limits($topic_info, lang('Info'), '14', '5000', $redirect);
         
         $topic_merged_id    = empty($topic_merged_id) ? 0 : $topic_merged_id;

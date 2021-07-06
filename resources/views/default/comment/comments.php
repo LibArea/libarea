@@ -12,7 +12,7 @@
                         <?php if($comm['comment_del'] == 0) { ?>
                             <div class="comm-telo_bottom">
                                 <div class="small">
-                                    <img class="ava" src="<?= user_avatar_url($comm['avatar'], 'small'); ?>">
+                                    <?= user_avatar_img($comm['avatar'], 'small', $comm['login'], 'ava'); ?>
                                     <a class="date" href="/u/<?= $comm['login']; ?>"><?= $comm['login']; ?></a> 
                                      
                                     <span class="date"><?= $comm['date']; ?></span>

@@ -23,7 +23,7 @@
                                 <?= $user['id']; ?>
                             </span>
                             <span class="t-td">
-                                <img class="ava" src="<?= user_avatar_url($user['avatar'], 'small'); ?>">
+                                <?= user_avatar_img($user['avatar'], 'small', $user['login'], 'ava'); ?>
                                 <a href="/u/<?= $user['login']; ?>"><?= $user['login']; ?></a>
                                 <?php if($user['name']) { ?>
                                     (<?= $user['name']; ?>) 

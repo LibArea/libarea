@@ -45,7 +45,7 @@
                     <?= $user['id']; ?>
                   </span>
                   <span class="t-td w-30 center">
-                    <img class="ava-max" src="<?= user_avatar_url($user['avatar'], 'max'); ?>">
+                    <?= user_avatar_img($user['avatar'], 'amx', $user['login'], 'ava-max'); ?>
                   </span>
                   <span class="t-td">
                     <a href="/u/<?= $user['login']; ?>"><?= $user['login']; ?></a>

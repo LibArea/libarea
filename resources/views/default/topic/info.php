@@ -45,7 +45,7 @@
                 <center>
                     <a title="<?= $topic['topic_title']; ?>" href="/topic/<?= $topic['topic_slug']; ?>">
                         <div><?= $topic['topic_title']; ?><div>
-                        <img alt="<?= $topic['topic_title']; ?>" src="<?= topic_url($topic['topic_img'], 'max'); ?>">
+                        <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'topic-img'); ?>
                     </a>    
                 </center>
                 <hr>

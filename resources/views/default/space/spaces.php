@@ -49,16 +49,18 @@
               
                     <?php foreach ($space as  $sp) { ?>  
                         <div class="space-telo">
-                        
-                            <img class="space-img" alt="<?= $sp['space_name']; ?>" src="<?= spase_logo_url($sp['space_img'], 'max'); ?>">
-                                <?php if($sp['space_user_id'] == $uid['id']) { ?>
-                                    <div class="my_space all"></div>
-                                <?php } ?>
+                            <?= spase_logo_img($sp['space_img'], 'max', $sp['space_name'], 'space-img'); ?>
+                            
+                            <?php if($sp['space_user_id'] == $uid['id']) { ?>
+                                <div class="my_space all"></div>
+                            <?php } ?>
+                            
                             <span class="space-name"> 
                                 <a title="<?= $sp['space_name']; ?>" class="space-s" href="/s/<?= $sp['space_slug']; ?>">
                                     <?= $sp['space_name']; ?>
                                 </a> 
                             </span> 
+                            
                             <?php if($sp['space_type'] == 1) { ?>
                                  <small><span class="red">— <?= lang('official'); ?></span></small> 
                             <?php } ?>

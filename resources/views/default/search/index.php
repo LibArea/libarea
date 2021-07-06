@@ -25,7 +25,7 @@
                         <?php foreach ($result as  $post) { ?>
                                <div class="search max-width">
                                     <div class="search-info small">
-                                        <img src="<?= spase_logo_url($post['space_img'], 'small'); ?>" alt="<?= $post['space_name']; ?>">
+                                        <?= spase_logo_img($post['space_img'], 'small', $post['space_name'], 'space-img'); ?>
                                         <a class="search-info" href="/s/<?= $post['space_slug']; ?>"><?= $post['space_name']; ?></a>
                                          — <?= lang('Like'); ?> <?= $post['post_votes']; ?>
                                     </div>

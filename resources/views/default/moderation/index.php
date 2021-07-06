@@ -10,7 +10,7 @@
                         <?php foreach ($moderations as  $mod) { ?> 
                             <div class="post-telo white-box">
                                 <div class="post-footer-full small lowercase">
-                                    <img class="ava" alt="<?= $mod['login']; ?>" src="<?= user_avatar_url($mod['avatar'], 'small'); ?>">
+                                    <?= user_avatar_img($mod['avatar'], 'small', $mod['login'], 'ava'); ?>
                                     
                                     <span class="indent"></span>
                                     <a href="/u/<?= $mod['login']; ?>"><?= $mod['login']; ?></a> 

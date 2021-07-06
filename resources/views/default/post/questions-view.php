@@ -14,7 +14,7 @@
                         <div class="answ-telo qa-answ">
                             <div class="qa-footer">
                                 <div class="qa-ava">
-                                    <img alt="<?= $answ['login']; ?>" src="<?= user_avatar_url($answ['avatar'], 'max'); ?>">
+                                     <?= user_avatar_img($answ['avatar'], 'max', $answ['login'], 'avatar'); ?>
                                 </div>
                                 <div class="qa-ava-info"> 
                                     <div class="qa-data-info"> 
@@ -191,7 +191,7 @@
                     <div class="clear"> 
                         <input type="hidden" name="post_id" id="post_id" value="<?= $post['post_id']; ?>">
                         <input type="hidden" name="answer_id" id="answer_id" value="0">
-                        <input type="submit" name="answit" value="<?= lang('Reply'); ?>" class="answer-post">
+                        <input type="submit" name="answit" value="<?= lang('Reply'); ?>" class="button">
                     </div> 
                 </div>     
                 </form>

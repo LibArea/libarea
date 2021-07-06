@@ -16,7 +16,7 @@
                     <?php foreach ($topics as $topic) { ?>  
                         <div class="item">
                             <a title="<?= $topic['topic_title']; ?>" class="img-topic" href="/topic/<?= $topic['topic_slug']; ?>">
-                                <img alt="<?= $topic['topic_title']; ?>" src="<?= topic_url($topic['topic_img'], 'max'); ?>">
+                                <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'topic-img'); ?>
                             </a>
                     
                             <div class="item-desc">

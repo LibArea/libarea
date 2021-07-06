@@ -11,7 +11,7 @@
                         <?php foreach ($posts as $post) { ?> 
 
                             <div class="post-header small">
-                                <img class="ava" src="<?= user_avatar_url($post['avatar'], 'small'); ?>">
+                                <?= user_avatar_img($post['avatar'], 'small', $post['login'], 'ava'); ?>
                                 <span class="indent"></span>
 
                                 <a class="date" href="/u/<?= $post['login']; ?>"><?= $post['login']; ?></a> 

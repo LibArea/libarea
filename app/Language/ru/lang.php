@@ -72,6 +72,7 @@ return [
     'To extract'        => 'Извлечь',
     'Discussion'        => 'Обсуждение',
     'Description'       => 'Описание',
+    'Meta Description'  => 'Мета- описание',
     'Translation'       => 'Перевод',
     'Favorites'         => 'Избранное',
     'Long'              => 'Длинное',

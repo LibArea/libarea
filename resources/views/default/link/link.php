@@ -35,7 +35,7 @@
                     </div>
                     <div class="domain-footer-small">
                         <a class="green" rel="nofollow noreferrer ugc" href="<?= $link['link_url']; ?>">
-                            <img class="favicon" alt="<?= $link['link_url_domain']; ?>" src="<?= favicon_url($link['link_id']); ?>"> 
+                            <?= favicon_img($link['link_id'], $link['link_url_domain']); ?>
                             <?= $link['link_url']; ?>
                         </a> 
                         
@@ -52,8 +52,7 @@
             
                 <div class="post-telo white-box">
                     <div class="post-header small">
-                    
-                        <img class="ava" alt="<?= $post['login']; ?>" src="<?= user_avatar_url($post['avatar'], 'small'); ?>">
+                        <?= user_avatar_img($post['avatar'], 'small', $post['login'], 'ava'); ?>
                         <span class="indent"></span> 
                         <span class="user"> 
                             <a href="/u/<?= $post['login']; ?>">

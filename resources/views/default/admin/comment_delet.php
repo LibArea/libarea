@@ -13,7 +13,7 @@
                     
                         <div class="comm-telo_bottom" id="comment_<?= $comment['comment_id']; ?>">
                             <div class="small">
-                                <img class="ava" src="<?= user_avatar_url($comment['avatar'], 'small'); ?>">
+                                <?= user_avatar_img($comment['avatar'], 'small', $comment['login'], 'ava'); ?>
                                 <a class="date" href="/u/<?= $comment['login']; ?>"><?= $comment['login']; ?></a> 
                                 
                                 <span class="date"><?= $comment['date']; ?></span>

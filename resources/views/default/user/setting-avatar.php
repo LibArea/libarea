@@ -24,8 +24,7 @@
                     </li>
                 </ul>
                 <div class="box setting avatar"> 
-                   <img class="ava" src="<?= user_avatar_url($user['avatar'], 'max'); ?>">
-                    
+                   <?= user_avatar_img($user['avatar'], 'max', $user['login'], 'ava'); ?> 
                    <form method="POST" action="/users/setting/avatar/edit" enctype="multipart/form-data">
                    <?= csrf_field() ?>
                         <div class="box-form-img"> 

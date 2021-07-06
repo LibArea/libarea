@@ -40,7 +40,9 @@
         <?php } ?>                 
     <?php } ?> 
     <div class="space-text">
-        <img alt="<?= $space_info['space_name']; ?>" class="space-box-img" src="<?= spase_logo_url($space_info['space_img'], 'max'); ?>">
+
+        <?= spase_logo_img($space_info['space_img'], 'max', $space_info['space_name'], 'space-box-img'); ?>
+        
         <div class="fons">
             <a title="<?= $space_info['space_name']; ?>" href="/s/<?= $space_info['space_slug']; ?>">
                 <h1><?= $space_info['space_name']; ?></h1>
@@ -89,7 +91,7 @@
             
                 <div class="post-telo white-box">
                     <div class="post-header small">
-                        <img class="ava" alt="<?= $post['login']; ?>" src="<?= user_avatar_url($post['avatar'], 'small'); ?>">
+                        <?= user_avatar_img($post['avatar'], 'small', $post['login'], 'ava'); ?>
                         <span class="indent"></span> 
                         <span class="user"> 
                             <a href="/u/<?= $post['login']; ?>">

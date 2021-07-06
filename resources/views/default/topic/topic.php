@@ -6,7 +6,7 @@
                 
             <div class="box-flex">
                 <div>
-                    <img class="ava-94" alt="<?= $topic['topic_title']; ?>" src="<?= topic_url($topic['topic_img'], 'max'); ?>">
+                    <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'ava-94'); ?>
                 </div>
                 <div class="indent-bid box-100">   
                     <h1 class="topics">
@@ -49,7 +49,7 @@
                     <?php foreach ($posts as  $post) { ?>
                        <div class="post-telo white-box">
                           <div class="post-header small">
-                            <img class="ava" alt="<?= $post['login']; ?>" src="<?= user_avatar_url($post['avatar'], 'small'); ?>">
+                            <?= user_avatar_img($post['avatar'], 'max', $post['login'], 'ava'); ?> 
                             <span class="indent"></span> 
                             <span class="user"> 
                               <a href="/u/<?= $post['login']; ?>">

@@ -29,7 +29,7 @@
                     <?php csrf_field(); ?>
                         <div class="boxline">
                             <span class="name"><?= lang('Nickname'); ?></span>
-                            <img class="mini indent ava" src="<?= user_avatar_url($user['avatar'], 'small'); ?>"> 
+                            <?= user_avatar_img($user['avatar'], 'small', $user['login'], 'mini indent ava'); ?>
                             <span class="indent"><?= $user['login']; ?></span>
                         </div>
                         <div class="boxline">

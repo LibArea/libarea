@@ -26,7 +26,7 @@
                                         <?= $sp['space_id']; ?>
                                     </span>  
                                     <span class="t-td w-30 center">
-                                        <img class="space-logo" src="<?= spase_logo_url($sp['space_img'], 'max'); ?>">
+                                        <?= spase_logo_img($sp['space_img'], 'max', $sp['space_slug'], 'space-logo'); ?>
                                     </span>
                                     <span class="t-td">
                                         <a title="<?= $sp['space_name']; ?>" href="/s/<?= $sp['space_slug']; ?>">
@@ -45,7 +45,7 @@
                                         <?= $sp['space_description']; ?> <br>
                                         <small>
                                             <?= $sp['space_date']; ?> 
-                                            <img class="ava-small" src="<?= user_avatar_url($sp['avatar'], 'small'); ?>">
+                                            <?= user_avatar_img($sp['avatar'], 'small', $sp['login'], 'ava-small'); ?>
                                             <a target="_blank" rel="noopener" href="/u/<?= $sp['login']; ?>">
                                                 <?= $sp['login']; ?>
                                             </a>

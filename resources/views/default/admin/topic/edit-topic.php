@@ -14,8 +14,7 @@
                 <div class="telo topic">
                     <div class="box create ">
                     
-                        <img class="img-topic-edit" src="<?= topic_url($topic['topic_img'], 'max'); ?>">
-                        
+                        <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'img-topic-edit'); ?>
                         <form action="/admin/topic/edit/<?= $topic['topic_id']; ?>" method="post" enctype="multipart/form-data">
                             <?= csrf_field() ?>
                              
@@ -69,8 +68,11 @@
                                 </div> 
                             <?php } ?>
                             <div class="boxline">
-                                <label for="topic_content"><?= lang('Description'); ?><sup class="red">*</sup></label>
+                                <label for="topic_content">
+                                    <?= lang('Meta Description'); ?><sup class="red">*</sup>
+                                </label>
                                 <textarea class="add" name="topic_description"><?= $topic['topic_description']; ?></textarea>
+                                <div class="box_h">> 44 <?= lang('characters'); ?></div>
                             </div>
                             <div class="boxline">
                                 <label for="topic_content"><?= lang('Info'); ?><sup class="red">*</sup></label>

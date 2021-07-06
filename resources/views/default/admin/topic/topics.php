@@ -23,7 +23,7 @@
                                         <?= $topic['topic_id']; ?>
                                     </span>  
                                     <span class="t-td w-30 center">
-                                        <img class="space-logo" src="<?= topic_url($topic['topic_img'], 'max'); ?>">
+                                        <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'space-logo'); ?>
                                     </span>                            
                                     <span class="t-td">
                                         <a rel="nofollow noreferrer" href="/topic/<?= $topic['topic_slug']; ?>">

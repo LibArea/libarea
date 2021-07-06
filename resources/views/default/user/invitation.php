@@ -26,7 +26,7 @@
                         <?php foreach ($result as $inv) { ?>
                             <?php if($inv['active_status'] == 1) { ?>
                                 <div class="comm-header">
-                                    <img class="ava" src="<?= user_avatar_url($inv['avatar'], 'small'); ?>">
+                                    <?= user_avatar_img($inv['avatar'], 'small', $inv['login'], 'ava'); ?>
                                     <a href="<?= $inv['login']; ?>"><?= $inv['login']; ?></a>
                                     - зарегистрировался
                                 </div>
