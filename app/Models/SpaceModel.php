@@ -73,28 +73,32 @@ class SpaceModel extends \MainModel
             
         $offset = ($page-1) * 25;   
 
-       // $sql_mode = "SET sql_mode = (SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''))";
-       // DB::run($sql_mode);
-
-        $sql = "SELECT p.*,
-                v.votes_post_item_id, v.votes_post_user_id,
-                r.relation_post_id, r.relation_topic_id,
-                t.topic_id, t.topic_slug, t.topic_title,
-                u.id, u.login, u.avatar,
+        $sql = "SELECT p.*, 
+                    rel.*,
+                    v.votes_post_item_id, v.votes_post_user_id,
+                    u.id, u.login, u.avatar
+                FROM posts AS p
                 
-                GROUP_CONCAT(t.topic_slug, '@', t.topic_title SEPARATOR '@') AS topic_list
-                
-                FROM posts AS p 
-                
-                LEFT JOIN topic_post_relation AS r on r.relation_post_id = p.post_id 
-                LEFT JOIN topic AS t on t.topic_id = r.relation_topic_id 
+                LEFT JOIN
+                (
+                    SELECT 
+                      t.topic_id, t.topic_slug, t.topic_title,
+                      r.relation_topic_id, r.relation_post_id,
+                    
+                        GROUP_CONCAT(t.topic_slug, '@', t.topic_title SEPARATOR '@') AS topic_list
+                        FROM topic  AS t
+                        LEFT JOIN topic_post_relation AS r
+                            on t.topic_id = r.relation_topic_id
+                        GROUP BY r.relation_post_id,  r.relation_topic_id, t.topic_id, t.topic_slug, t.topic_title
+                ) AS rel
+                    ON rel.relation_post_id = p.post_id 
             
                 LEFT JOIN users AS u ON u.id = p.post_user_id 
                 LEFT JOIN votes_post AS v ON v.votes_post_item_id = p.post_id AND v.votes_post_user_id = $user_id
                 WHERE p.post_space_id = $space_id and p.post_draft = 0
                 
                 $display
-                GROUP BY r.relation_post_id $sort LIMIT 25 OFFSET ".$offset." ";
+                $sort LIMIT 25 OFFSET ".$offset." ";
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
