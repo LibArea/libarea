@@ -193,20 +193,21 @@ class AdminModel extends \MainModel
     }
     
     // Редактирование участника
-    public static function setUserEdit($user_id, $email, $login, $name, $about, $trust_level, $website, $location, $public_email, $skype, $twitter, $telegram, $vk)
+    public static function setUserEdit($data)
     {
-        XD::update(['users'])->set(['email'], '=', $email, ',', 
-            ['login'], '=', $login, ',',
-            ['name'], '=', $name, ',', 
-            ['about'], '=', $about, ',', 
-            ['trust_level'], '=', $trust_level, ',',
-            ['website'], '=', $website, ',',
-            ['location'], '=', $location, ',',
-            ['public_email'], '=', $public_email, ',',
-            ['skype'], '=', $skype, ',',
-            ['twitter'], '=', $twitter, ',',
-            ['telegram'], '=', $telegram, ',',
-            ['vk'], '=', $vk)->where(['id'], '=', $user_id)->run(); 
+        XD::update(['users'])->set(['email'], '=', $data['email'], ',', 
+            ['login'], '=', $data['login'], ',',
+            ['name'], '=', $data['name'], ',', 
+            ['activated'], '=', $data['activated'], ',',
+            ['about'], '=', $data['about'], ',', 
+            ['trust_level'], '=', $data['trust_level'], ',',
+            ['website'], '=', $data['website'], ',',
+            ['location'], '=', $data['location'], ',',
+            ['public_email'], '=', $data['public_email'], ',',
+            ['skype'], '=', $data['skype'], ',',
+            ['twitter'], '=', $data['twitter'], ',',
+            ['telegram'], '=', $data['telegram'], ',',
+            ['vk'], '=', $data['vk'])->where(['id'], '=', $data['id'])->run(); 
          return true;
     }
     

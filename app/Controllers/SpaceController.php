@@ -373,7 +373,7 @@ class SpaceController extends \MainController
         $cover          = $_FILES['cover'];
         $check_cover    = $_FILES['cover']['name'][0];
         if($check_cover) {
-            UploadImage::cover($cover, $space['space_id'], 'space');
+            UploadImage::cover_user($cover, $space['space_id'], 'space');
         } 
  
         Base::addMsg(lang('Change saved'), 'success');

@@ -256,7 +256,7 @@
         <?php if($post['post_content_img']) { ?>
           <div class="space-info white-box">
             <div class="inner-padding big"> 
-              <img class="img-post" alt="<?= $post['post_title']; ?>" src="/uploads/posts/<?= $post['post_content_img']; ?>">
+              <?= post_cover_img($post['post_content_img'], $post['post_title'], 'img-post'); ?>
             </div>
           </div>
         <?php } ?>    
@@ -299,7 +299,7 @@
 $(document).ready(function() {
   $('.img-post').magnificPopup({
     items: {
-      src: '/uploads/posts/<?= $post['post_content_img']; ?>'
+      src: '/uploads/posts/cover/<?= $post['post_content_img']; ?>'
     },
     type: 'image'
   });

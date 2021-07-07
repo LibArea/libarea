@@ -96,6 +96,8 @@ return [
     'Ban-space-info-posts'  => 'A space ban will result in the unavailability of all posts',
     'meta-moderation'       => 'Actions of the participant and moderators to delete and restore the content in the community.',
 
+    'space-subscription'    => '<a href="/spaces">Subscribe to spaces</a> and read them in the feed',
+
     'deleted-post'          => 'Deleted post',
     'restored-post'         => 'Restored post',
     'deleted-comment'       => 'Deleted comment',

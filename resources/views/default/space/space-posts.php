@@ -160,7 +160,7 @@
                         <?php if($post['post_content_img']) { ?> 
                                 <div class="post-img">
                                     <a title="<?= $post['post_title']; ?>" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
-                                        <img class="img-post" alt="<?= $post['post_title']; ?>" src="/uploads/posts/<?= $post['post_content_img']; ?>">
+                                        <?= post_cover_img($post['post_content_img'], $post['post_title'], 'img-post'); ?>
                                     </a>
                                 </div>    
                         <?php } ?>

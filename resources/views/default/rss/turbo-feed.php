@@ -19,7 +19,7 @@
 						</header>
                         <?php if($post['post_content_img']) { ?>
                             <figure>
-                                <img src="/uploads/posts/<?= $post['post_content_img']; ?>"/>
+                                <?= post_cover_img($post['post_content_img'], $post['post_title'], 'img-post'); ?>
                             </figure>
                         <?php } ?>    
                         <?= $post['post_content']; ?>

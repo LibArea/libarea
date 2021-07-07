@@ -63,6 +63,14 @@
       <?php } ?>    
     </ul>
 
+    <?php if($uid['uri'] == '/' && $uid['id'] > 0 && empty($space_bar)) { ?>
+        <div class="white-box">
+            <div class="inner-padding big center">
+                <i class="icon bulb red"></i> <?= lang('space-subscription'); ?>...
+            </div>
+        </div>
+    <?php } ?>
+
     <?php if (!empty($posts)) { ?> 
     
       <?php foreach ($posts as  $post) { ?>
@@ -142,7 +150,7 @@
             <?php if($post['post_content_img']) { ?> 
                 <div class="post-img">
                   <a title="<?= $post['post_title']; ?>" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
-                    <img class="img-post" alt="<?= $post['post_title']; ?>" src="/uploads/posts/<?= $post['post_content_img']; ?>">
+                    <?= post_cover_img($post['post_content_img'], $post['post_title'], 'img-post'); ?>
                   </a>
                 </div>  
             <?php } ?>
@@ -219,14 +227,6 @@
             <?php } ?>
           </div> 
         </div>   
-      <?php } else { ?>
-        <?php if($uid['uri'] == '/') { ?>
-          <div class="white-box">
-            <div class="inner-padding big">
-              <a href="/spaces">Подпишитесь</a> на пространства и читайте их в ленте...
-            </div>
-          </div>
-        <?php } ?>
       <?php } ?>
     <?php } else { ?>
       <?php include TEMPLATE_DIR . '/_block/login.php'; ?>

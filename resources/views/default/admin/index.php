@@ -85,6 +85,10 @@
                       </a> 
                       <br> 
                       <small><?= $user['logs']['logs_date']; ?></small> 
+                    <?php } ?>
+                    
+                    <?php if($user['activated'] == 1) { ?>
+                         <div class="small"><?= lang('Email activated'); ?></div>
                     <?php } else { ?>
                       <small class="red"><?= lang('Not activated'); ?> e-mail</small>
                     <?php } ?>

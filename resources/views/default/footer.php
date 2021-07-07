@@ -1,20 +1,22 @@
 <div class="clear"></div>
 <footer>
   <div class="wrap no-flex">
+    <div class="text-info no-mob">
+      <h4 class="p-head two"><?= lang('Info'); ?></h4>
+      <a class="footer small" title="<?= lang('Spaces'); ?>" href="/spaces"><?= lang('Spaces'); ?></a>
+      <a class="footer small" title="<?= lang('Topics'); ?>" href="/topics"><?= lang('Topics'); ?></a>
+      <a class="footer small" title="<?= lang('Users'); ?>" href="/users"><?= lang('Users'); ?></a> 
+    </div>
+    <div class="text-info no-mob">
+      <h4 class="p-head three"><?= lang('Other'); ?></h4>
+      <a class="footer small" title="<?= lang('All answers'); ?>" href="/answers"><?= lang('Answers-n'); ?></a>
+      <a class="footer small" title="<?= lang('All comments'); ?>" href="/comments"><?= lang('Comments-n'); ?></a>
+      <a class="footer small" title="<?= lang('All domains'); ?>" href="/domains"><?= lang('Domains'); ?></a>
+    </div>
     <div class="text-info">
       <h4 class="p-head one"><?= lang('Help'); ?></h4>
       <a class="footer small" title="<?= lang('Info'); ?>" href="/info"><?= lang('Info'); ?></a> 
       <a class="footer small no-mob" title="<?= lang('Privacy'); ?>" href="/info/privacy"><?= lang('Privacy'); ?></a>
-    </div>
-    <div class="text-info no-mob">
-      <h4 class="p-head two"><?= lang('Info'); ?></h4>
-      <a class="footer small" title="<?= lang('Spaces'); ?>" href="/spaces"><?= lang('Spaces'); ?></a>
-      <a class="footer small" title="<?= lang('Topics'); ?>" href="/topics"><?= lang('Topics'); ?></a>  
-    </div>
-    <div class="text-info no-mob">
-      <h4 class="p-head three"><?= lang('Other'); ?></h4>
-      <a class="footer small" title="<?= lang('Users'); ?>" href="/users"><?= lang('Users'); ?></a> 
-      <a class="footer small" title="<?= lang('All answers'); ?>" href="/answers"><?= lang('Answers-n'); ?></a> 
     </div>
     <div class="text-oth ots">
       <h4 class="p-head-n"><?= lang('Social networks'); ?></h4> 

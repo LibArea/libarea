@@ -27,11 +27,11 @@ function html_topic($topic, $css)
 // Topic logo img
 function topic_logo_img($file, $size, $alt, $style)
 {
+    $src = '/uploads/topics/' . $file;
     if ($size == 'small') {  
         $src = '/uploads/topics/small/' . $file;
-    } else {
-        $src = '/uploads/topics/' . $file;
-    }
+    } 
+    
     $img = '<img class="'.$style.'" src="'.$src.'" alt="'.$alt.'">';
     
     return $img;
@@ -40,11 +40,11 @@ function topic_logo_img($file, $size, $alt, $style)
 // Space logo img
 function spase_logo_img($file, $size='small', $alt, $style) 
 {
+    $src = '/uploads/spaces/logos/' . $file;
     if ($size == 'small') {
         $src = '/uploads/spaces/logos/small/' . $file;
-    } else {
-        $src = '/uploads/spaces/logos/' . $file;
     }
+    
     $img = '<img class="'.$style.'" src="'.$src.'" alt="'.$alt.'">';
     
     return $img;
@@ -53,11 +53,20 @@ function spase_logo_img($file, $size='small', $alt, $style)
 // User's Avatar
 function user_avatar_img($file, $size='small', $alt, $style) 
 {
+    $src = '/uploads/users/avatars/' . $file;
     if ($size == 'small') {  
         $src = '/uploads/users/avatars/small/' . $file;
-    } else {
-        $src = '/uploads/users/avatars/' . $file;
     }
+    
+    $img = '<img class="'.$style.'" src="'.$src.'" alt="'.$alt.'">';
+    
+    return $img;
+}
+
+// The cover of the post
+function post_cover_img($file, $alt, $style) 
+{
+    $src = '/uploads/posts/cover/' . $file;
     $img = '<img class="'.$style.'" src="'.$src.'" alt="'.$alt.'">';
     
     return $img;

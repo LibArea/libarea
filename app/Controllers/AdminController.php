@@ -458,8 +458,8 @@ class AdminController extends \MainController
         $login          = \Request::getPost('login');
         $name           = \Request::getPost('name');
         $about          = \Request::getPost('about');
+        $activated      = \Request::getPostInt('activated');
         $trust_level    = \Request::getPostInt('trust_level');
-
         $website        = \Request::getPost('website');
         $location       = \Request::getPost('location');
         $public_email   = \Request::getPost('public_email');
@@ -468,20 +468,26 @@ class AdminController extends \MainController
         $telegram       = \Request::getPost('telegram');
         $vk             = \Request::getPost('vk');
         
-        // См. https://github.com/Respect/Validation
         Base::Limits($login, lang('Login'), '4', '11', $redirect);
         
-        $name           = empty($name) ? '' : $name;
-        $about          = empty($about) ? '' : $about;
-        $website        = empty($website) ? '' : $website;
-        $location       = empty($location) ? '' : $location;
-        $public_email   = empty($public_email) ? '' : $public_email;
-        $skype          = empty($skype) ? '' : $skype;
-        $twitter        = empty($twitter) ? '' : $twitter;
-        $telegram       = empty($telegram) ? '' : $telegram;
-        $vk             = empty($vk) ? '' : $vk;
+        $data = [
+            'id'            => $user_id,
+            'email'         => $email,
+            'login'         => $login,
+            'name'          => empty($name) ? '' : $name,
+            'activated'     => $activated,
+            'trust_level'   => $trust_level,
+            'about'         => empty($about) ? '' : $about,
+            'website'       => empty($website) ? '' : $website,
+            'location'      => empty($location) ? '' : $location,
+            'public_email'  => empty($public_email) ? '' : $public_email,
+            'skype'         => empty($skype) ? '' : $skype,
+            'twitter'       => empty($twitter) ? '' : $twitter,
+            'telegram'      => empty($telegram) ? '' : $telegram,
+            'vk'            => empty($vk) ? '' : $vk,
+        ];
         
-        AdminModel::setUserEdit($user_id, $email, $login, $name, $about, $trust_level, $website, $location, $public_email, $skype, $twitter, $telegram, $vk);
+        AdminModel::setUserEdit($data);
         
         redirect($redirect);
     }

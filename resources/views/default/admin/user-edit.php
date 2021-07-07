@@ -10,11 +10,12 @@
                 <div class="box badges">
                     <form action="/admin/user/edit/<?= $user['id']; ?>" method="post">
                         <?= csrf_field() ?>
-             
-                        <a class="right" href="/u/<?= $user['login']; ?>/delete/cover">
-                            <?= lang('Remove'); ?>
-                        </a>
-                        <br>
+                        <?php if($user['cover_art'] != 'cover_art.jpeg') { ?> 
+                            <a class="right" href="/u/<?= $user['login']; ?>/delete/cover">
+                                <small><?= lang('Remove'); ?></small>
+                            </a>
+                            <br>
+                        <?php } ?>    
                         <img width="325" class="right" src="<?= user_cover_url($user['cover_art']); ?>">
                         <?= user_avatar_img($user['avatar'], 'small', $user['login'], 'ava'); ?> 
 
@@ -103,12 +104,19 @@
                             <?= $user['reg_ip']; ?>  
                             <?php if($user['replayIp'] > 1) { ?>
                             <sup class="red">(<?= $user['replayIp']; ?>)</sup>
-                            <?php } ?> <br>
+                            <?php } ?> 
                         </div>
+                        <hr>
                         <div class="boxline">
                             <label class="form-label" for="post_title">E-mail</label>
                             <input class="form-input" type="text" name="email" value="<?= $user['email']; ?>" required>
                         </div>
+                        <div class="boxline"> 
+                            <label class="form-label" for="post_content"><?= lang('Email activated'); ?>?</label>
+                            <input type="radio" name="activated" <?php if($user['activated'] == 0) { ?>checked<?php } ?> value="0"> <?= lang('No'); ?>
+                            <input type="radio" name="activated" <?php if($user['activated'] == 1) { ?>checked<?php } ?> value="1" > <?= lang('Yes'); ?>
+                        </div> 
+                        <hr>
                         <div class="boxline">
                             <label class="form-label" for="post_title">TL</label>
                             <select name="trust_level">
@@ -134,7 +142,6 @@
                         </div>
 
                         <h3><?= lang('Contacts'); ?></h3>
-                       
                         <div class="boxline">
                             <label class="form-label" for="name"><?= lang('URL'); ?></label>
                             <input type="text" class="form-input" name="website" id="name" value="<?= $user['website']; ?>">

@@ -1708,6 +1708,7 @@ a:hover .icon::before {
 .icon.social-facebook::before { content: "\e00b"; }
 .icon.social-pinterest::before { content: "\e60b"; }
 .icon.share-alt::before { content: "\e05a"; }
+.icon.bulb::before { content: "\e076"; }
 
 #fixed {
   position: fixed;

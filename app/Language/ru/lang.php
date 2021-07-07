@@ -12,6 +12,7 @@ return [
     'The post'          => 'Поста',
     'Bodies'            => 'Тела',
     'Comment deleted'   => 'Комментарий удален',
+    'Email activated'   => 'Активирован e-mail', 
     'Not activated'     => 'Не активирован',
     'Like'              => 'Нравится',
     'Like'              => 'Нравится',
@@ -26,6 +27,7 @@ return [
     'Action'            => 'Действие',
     'Domain'            => 'Домен',
     'Domains'           => 'Домены',
+    'All domains'       => 'Все домены',
     'Topics'            => 'Темы',
     'Topic'             => 'Тема',
     'Topics no'         => 'Тем нет',
@@ -330,6 +332,8 @@ return [
     'Enter your password'   => 'Введите пароль',
     'Enter content'         => 'Введите содержание',
     'topic-desc'            => 'Страница тем, расположенных в порядке популярности.  Темы контента, постов. Популярные, новые, глобальная выборка. Тема дня.',
+ 
+    'space-subscription'    => '<a href="/spaces">Подпишитесь на пространства</a> и читайте их в ленте',
  
     'No account available'  => 'Нет учетной записи',
     'Description is formed' => 'Описание формируется',

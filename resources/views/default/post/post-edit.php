@@ -27,7 +27,7 @@
                              
                              <?php if($post['post_content_img']) { ?> 
                                 <div class="img-post-edit">
-                                    <img class="img-post" alt="<?= $post['post_title']; ?>" src="/uploads/posts/<?= $post['post_content_img']; ?>">
+                                    <?= post_cover_img($post['post_content_img'], $post['post_title'], 'img-post'); ?>
                                     <input type="hidden" name="content_img" value="<?= $post['post_content_img']; ?>">
                                     
                                     <a class="img-remove" href="/post/img/<?= $post['post_id']; ?>/remove">

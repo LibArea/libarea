@@ -8,39 +8,41 @@
                 <div class="telo">
                     <?php if (!empty($answers)) { ?>
                   
-                        <?php foreach ($answers as $answ) { ?>  
-                            <?php if($answ['answer_del'] == 0) { ?>
+                        <?php foreach ($answers as $answer) { ?>  
+                            <?php if($answer['answer_del'] == 0) { ?>
                                 <div class="answ-telo_bottom">
                                     <div class="answ-header small">
-                                        <?= user_avatar_img($answ['avatar'], 'small', $answ['login'], 'ava'); ?>
-                                        <a class="date" href="/u/<?= $answ['login']; ?>"><?= $answ['login']; ?></a> 
-                                        
-                                        <span class="date"><?= $answ['date']; ?></span>
-                                         
+                                        <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava'); ?>
+                                        <a class="date" href="/u/<?= $answer['login']; ?>">
+                                            <?= $answer['login']; ?>
+                                        </a> 
+                                        <span class="date"><?= $answer['date']; ?></span>
                                         <span class="indent"> &#183; </span>
-                                        <a href="/post/<?= $answ['post_id']; ?>/<?= $answ['post_slug']; ?>"><?= $answ['post_title']; ?></a>
+                                        <a href="/post/<?= $answer['post_id']; ?>/<?= $answer['post_slug']; ?>">
+                                            <?= $answer['post_title']; ?>
+                                        </a>
                                     </div>
                                    
                                     <div class="answ-telo-body">
-                                        <?= $answ['answer_content']; ?> 
+                                        <?= $answer['answer_content']; ?> 
                                     </div>
 
                                     <div class="post-full-footer date">
                                         <?php if (!$uid['id']) { ?> 
                                             <div class="voters">
                                                 <a rel="nofollow" href="/login"><div class="up-id"></div></a>
-                                                <div class="score"><?= $answ['answer_votes']; ?></div>
+                                                <div class="score"><?= $answer['answer_votes']; ?></div>
                                             </div>
                                         <?php } else { ?>
-                                            <?php if ($answ['answer_vote_status'] || $uid['id'] == $answ['answer_user_id']) { ?>
+                                            <?php if ($answer['answer_vote_status'] || $uid['id'] == $answer['answer_user_id']) { ?>
                                                 <div class="voters active">
                                                     <div class="up-id"></div>
-                                                    <div class="score"><?= $answ['answer_votes']; ?></div>
+                                                    <div class="score"><?= $answer['answer_votes']; ?></div>
                                                 </div>
                                             <?php } else { ?>
-                                                <div id="up<?= $answ['answer_id']; ?>" class="voters">
-                                                    <div data-id="<?= $answ['answer_id']; ?>" data-type="answer" class="up-id"></div>
-                                                    <div class="score"><?= $answ['answer_votes']; ?></div>
+                                                <div id="up<?= $answer['answer_id']; ?>" class="voters">
+                                                    <div data-id="<?= $answer['answer_id']; ?>" data-type="answer" class="up-id"></div>
+                                                    <div class="score"><?= $answer['answer_votes']; ?></div>
                                                 </div>
                                             <?php } ?>
                                         <?php } ?>

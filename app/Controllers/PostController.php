@@ -14,7 +14,7 @@ use Lori\Content;
 use Lori\Config;
 use Lori\Base;
 use UrlRecord;
-use SimpleImage;
+use Lori\UploadImage;
 use URLScraper;
 
 class PostController extends \MainController
@@ -169,7 +169,7 @@ class PostController extends \MainController
         }
 
         if ($post['post_content_img']) {
-            $content_img  = Config::get(Config::PARAM_URL) . '/uploads/posts/' . $post['post_content_img'];
+            $content_img  = Config::get(Config::PARAM_URL) . '/uploads/posts/cover/' . $post['post_content_img'];
         } else {
             $content_img  = null;
         }
@@ -306,7 +306,6 @@ class PostController extends \MainController
         
         // Получаем id пространства
         $space_id   = \Request::getPostInt('space_id');
-        $tag_id     = \Request::getPostInt('tag_id');
 
         // Получаем информацию по пространству
         $space = SpaceModel::getSpaceId($space_id);
@@ -353,34 +352,12 @@ class PostController extends \MainController
             }
         }   
 
-        // images
-        $name     = $_FILES['images']['name'][0];
-        if ($name) {
-            // Проверка ширину
-            $width_h  = getimagesize($_FILES['images']['tmp_name'][0]);
-            if ($width_h['0'] < 500) {
-                $valid = false;
-                Base::addMsg('Ширина меньше 600 пикселей', 'error');
-                redirect($redirect);
-            }
-
-            $image = new  SimpleImage();
-            $path = HLEB_PUBLIC_DIR. '/uploads/posts/';
-            $year = date('Y') . '/';
-            $file = $_FILES['images']['tmp_name'][0];
-            $filename = 'c-' . time();
-           
-            if (!is_dir($path . $year)) { @mkdir($path . $year); }             
-            
-            // https://github.com/claviska/SimpleImage
-            $image
-                ->fromFile($file)  // load image.jpg
-                ->autoOrient()     // adjust orientation based on exif data
-                ->resize(820, null)
-                ->toFile($path . $year . $filename .'.webp', 'image/webp');
-          
-            $post_img = $year . $filename . '.webp';
-        }
+        // Обложка поста
+        $cover          = $_FILES['images'];
+        $check_cover    = $_FILES['images']['name'][0];
+        if($check_cover) {
+           $post_img = UploadImage::cover_post($cover, $post);
+        } 
         
         // Проверяем url для > TL1
         // Ввести проверку дублей и запрещенных, для img повторов
@@ -388,7 +365,6 @@ class PostController extends \MainController
         $post_url_domain    = empty($post_url_domain) ? '' : $post_url_domain;
         $post_content_img   = empty($post_img) ? '' : $post_img;
         $og_img             = empty($og_img) ? '' : $og_img;
-        $tag_id             = empty($tag_id) ? 0 : $tag_id;
 
         // Участник с нулевым уровнем доверия должен быть ограничен в добавлении ответов
         if ($uid['trust_level'] < Config::get(Config::PARAM_TL_ADD_POST)) {
@@ -477,44 +453,13 @@ class PostController extends \MainController
         $result = URLScraper::get($post_url); 
         if ($result['image']) {
             $image = $result['image'];
+        } elseif ($result['tags_meta']['twitter:image']) {    
+            $image = $result['tags_meta']['twitter:image'];
         } else {
-            $image = $result['tags_og']['image'];
+            $image = $result['tags_meta']['image'];
         }
         
-        if ($image) {
-            
-            $ext = pathinfo(parse_url($image, PHP_URL_PATH), PATHINFO_EXTENSION);
-            if (in_array($ext, array ('jpg', 'jpeg', 'png'))) {
-                
-                $path = HLEB_PUBLIC_DIR . '/uploads/posts/thumbnails/';
-                $year = date('Y') . '/';
-                $filename = 'p-' . time() . '.' . $ext;
-                $file = 'p-' . time();
-                
-                if (!is_dir($path . $year)) { @mkdir($path . $year); }
-                $local = $path . $year . $filename;
- 
-                if (!file_exists($local)) {  
-                    copy($image, $local); 
-                } 
- 
-                $image = new SimpleImage();
-                $image
-                ->fromFile($local)  // load image.jpg
-                ->autoOrient()      // adjust orientation based on exif data
-                ->resize(165, null) 
-                ->toFile($path . $year . $file .'.webp', 'image/webp');
- 
-                if (file_exists($local)) {
-                    unlink($local);
-                    return $year . $file .'.webp';
-                }
-                
-            }
-
-        }
-
-        return false;
+        return UploadImage::thumb_post($image);
     }
     
     // Показ формы поста для редактирование
@@ -653,40 +598,12 @@ class PostController extends \MainController
             $post_date = $post['post_date'];
         }
         
-        // images
-        $name = $_FILES['images']['name'][0];
-        if ($name) { 
-            // Проверка ширину
-            $width_h  = getimagesize($_FILES['images']['tmp_name'][0]);
-            if ($width_h['0'] < 500) {
-                $valid = false;
-                Base::addMsg('Ширина меньше 600 пикселей', 'error');
-                redirect($redirect);
-            }
-
-            $image = new  SimpleImage();
-            $path = HLEB_PUBLIC_DIR. '/uploads/posts/';
-            $year = date('Y') . '/';
-            $file = $_FILES['images']['tmp_name'][0];
-            $filename = 'c-' . time();
-           
-            if (!is_dir($path . $year)) { @mkdir($path . $year); }             
-            
-            // https://github.com/claviska/SimpleImage
-            $image
-                ->fromFile($file)  // load image.jpg
-                ->autoOrient()     // adjust orientation based on exif data
-                ->resize(820, null)
-                ->toFile($path . $year . $filename .'.webp', 'image/webp');
-          
-            $post_img = $year . $filename . '.webp';
-            
-            // Удалим если есть старая
-            if ($post['post_content_img'] != $post_img) {
-                chmod($path . $post['post_content_img'], 0777);
-                unlink($path . $post['post_content_img']);
-            } 
-        }
+        // Обложка поста
+        $cover          = $_FILES['images'];
+        $check_cover    = $_FILES['images']['name'][0];
+        if($check_cover) {
+           $post_img = UploadImage::cover_post($cover, $post);
+        } 
         
         $post_img = empty($post_img) ? $post['post_content_img'] : $post_img;
         $post_img = empty($post_img) ? '' : $post_img;
@@ -739,7 +656,7 @@ class PostController extends \MainController
             redirect('/');
         }  
         
-        $path_img = HLEB_PUBLIC_DIR. '/uploads/posts/' . $post['post_content_img'];
+        $path_img = HLEB_PUBLIC_DIR. '/uploads/posts/cover/' . $post['post_content_img'];
 
         PostModel::setPostImgRemove($post['post_id']);
         unlink($path_img);

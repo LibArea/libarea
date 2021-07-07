@@ -85,8 +85,8 @@ class UploadImage
        
     }
     
-    // Работа с контентом
-    public static function cover($cover, $content_id, $type)
+    // Обложка участника
+    public static function cover_user($cover, $content_id, $type)
     {
         if($type == 'user') {
             // 1920px / 350px
@@ -139,5 +139,77 @@ class UploadImage
 
        return false;
        
+    }
+    
+    // Обложка поста
+    public static function cover_post($cover, $post)
+    {   
+        // Проверка ширину
+        $width_h  = getimagesize($cover['tmp_name'][0]);
+        if ($width_h['0'] < 500) {
+            $valid = false;
+            Base::addMsg('Ширина меньше 600 пикселей', 'error');
+            redirect($redirect);
+        }
+
+        $image = new  SimpleImage();
+        $path = HLEB_PUBLIC_DIR. '/uploads/posts/cover/';
+        $year = date('Y') . '/';
+        $file = $cover['tmp_name'][0];
+        $filename = 'c-' . time();
+       
+        if (!is_dir($path . $year)) { @mkdir($path . $year); }             
+        
+        // https://github.com/claviska/SimpleImage
+        $image
+            ->fromFile($file)  // load image.jpg
+            ->autoOrient()     // adjust orientation based on exif data
+            ->resize(820, null)
+            ->toFile($path . $year . $filename .'.webp', 'image/webp');
+      
+        $post_img = $year . $filename . '.webp';
+        
+        // Удалим если есть старая
+        if ($post['post_content_img'] != $post_img) {
+            chmod($path . $post['post_content_img'], 0777);
+            unlink($path . $post['post_content_img']);
+        } 
+        
+        return $post_img;
+    }
+    
+    // Thumb for post
+    public static function thumb_post($image)
+    { 
+        $ext = pathinfo(parse_url($image, PHP_URL_PATH), PATHINFO_EXTENSION);
+        if (in_array($ext, array ('jpg', 'jpeg', 'png'))) {
+            
+            $path = HLEB_PUBLIC_DIR . '/uploads/posts/thumbnails/';
+            $year = date('Y') . '/';
+            $filename = 'p-' . time() . '.' . $ext;
+            $file = 'p-' . time();
+            
+            if (!is_dir($path . $year)) { @mkdir($path . $year); }
+            $local = $path . $year . $filename;
+
+            if (!file_exists($local)) {  
+                copy($image, $local); 
+            } 
+
+            $image = new SimpleImage();
+            $image
+            ->fromFile($local)  // load image.jpg
+            ->autoOrient()      // adjust orientation based on exif data
+            ->resize(165, null) 
+            ->toFile($path . $year . $file .'.webp', 'image/webp');
+
+            if (file_exists($local)) {
+                unlink($local);
+            }
+            
+            return $year . $file .'.webp';
+        }
+        
+        return false;
     }
 }
