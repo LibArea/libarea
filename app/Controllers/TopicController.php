@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Models\TopicModel;
+use App\Models\PostModel;
 use Lori\UploadImage;
 use Lori\Content;
 use Lori\Config;
@@ -22,11 +23,10 @@ class TopicController extends \MainController
         $pagesCount = TopicModel::getTopicAllCount();  
         $topics     = TopicModel::getTopicAll($page, $uid['id']);
 
+        $num = '';
         if ($page > 1) { 
             $num = ' — ' . lang('Page') . ' ' . $page;
-        } else {
-            $num = '';
-        }
+        } 
         
         $result = Array();
         foreach ($topics as $ind => $row) {
@@ -61,18 +61,16 @@ class TopicController extends \MainController
         $topic  = TopicModel::getTopicSlug($slug);
         Base::PageError404($topic);  
           
-        // Показываем корневую тему на странице подтемы  
+        // Показываем корневую тему на странице подтемы 
+        $main_topic   = '';        
         if ($topic['topic_parent_id']  != 0) {
             $main_topic   = TopicModel::getTopicId($topic['topic_parent_id']);
-        } else {
-            $main_topic   = '';
-        }
+        } 
         
         // Показываем подтемы корневой темы
+        $subtopics  = '';
         if ($topic['topic_is_parent']  == 1 || $topic['topic_parent_id']  != 0) { 
             $subtopics  = TopicModel::subTopics($topic['topic_id']);     
-        } else {
-            $subtopics  = '';
         }
         
         $topic['topic_add_date']    = lang_date($topic['topic_add_date']);
@@ -128,19 +126,17 @@ class TopicController extends \MainController
         $post_related   = TopicModel::topicPostRelated($topic['topic_post_related']);
         
         // Показываем корневую тему на странице подтемы  
+        $main_topic   = '';
         if ($topic['topic_parent_id']  != 0) {
             $main_topic   = TopicModel::getTopicId($topic['topic_parent_id']);
-        } else {
-            $main_topic   = '';
-        }
+        } 
         
         // Показываем подтемы корневой темы
+        $subtopics  = '';
         if ($topic['topic_is_parent']  == 1 || $topic['topic_parent_id']  != 0) { 
             $subtopics  = TopicModel::subTopics($topic['topic_id']);     
-        } else {
-            $subtopics  = '';
-        }
-
+        } 
+        
         $meta_title = $topic['topic_seo_title'] . ' — ' .  lang('Info');
         $data = [
             'h1'            => $topic['topic_seo_title'],
@@ -235,19 +231,19 @@ class TopicController extends \MainController
         Request::getResources()->addBottomScript('/assets/js/select2.min.js'); 
         
         $topic_related      = TopicModel::topicRelated($topic['topic_related']);
+        $post_related       = PostModel::postRelated($topic['topic_post_related']);
         
+        $topic_parent_id    = '';
         if ($topic['topic_parent_id']  != 0) {
             $topic_parent_id    = TopicModel::topicMain($topic['topic_parent_id']);
-        } else {
-            $topic_parent_id    = '';
-        }
+        } 
         
         $data = [
             'meta_title'    => lang('Edit topic') . ' — ' . $topic['topic_title'],
             'sheet'         => 'topics',
         ]; 
 
-        return view(PR_VIEW_DIR . '/admin/topic/edit-topic', ['data' => $data, 'uid' => $uid, 'topic' => $topic, 'topic_related' => $topic_related, 'topic_parent_id' => $topic_parent_id]);
+        return view(PR_VIEW_DIR . '/admin/topic/edit-topic', ['data' => $data, 'uid' => $uid, 'topic' => $topic, 'topic_related' => $topic_related, 'topic_parent_id' => $topic_parent_id, 'post_related' => $post_related]);
     }
     
     // Edit topic
@@ -278,6 +274,9 @@ class TopicController extends \MainController
         $related            = empty($_POST['topic_related']) ? '' : $_POST['topic_related'];
         $topic_related      = empty($related) ? '' : implode(',', $related);
         
+        $related_post       = empty($_POST['post_related']) ? '' : $_POST['post_related'];
+        $topic_post_related = empty($related_post) ? '' : implode(',', $related_post);
+        
         // Если убираем тему из корневой, то должны очистеть те темы, которые были подтемами
         if ($topic['topic_is_parent'] == 1 && $topic_is_parent == 0) {
             TopicModel::clearBinding($topic['topic_id']);
@@ -305,18 +304,19 @@ class TopicController extends \MainController
          
         $topic_add_date = date("Y-m-d H:i:s");
         $data = [
-            'topic_id'          => $topic_id, 
-            'topic_title'       => $topic_title, 
-            'topic_description' => $topic_description,
-            'topic_info'        => $topic_info, 
-            'topic_slug'        => $topic_slug, 
-            'topic_add_date'    => $topic_add_date,
-            'topic_seo_title'   => $topic_seo_title, 
-            'topic_merged_id'   => $topic_merged_id,
-            'topic_parent_id'   => $topic_parent_id,
-            'topic_is_parent'   => $topic_is_parent,
-            'topic_related'     => $topic_related,
-            'topic_count'       => $topic_count, 
+            'topic_id'              => $topic_id, 
+            'topic_title'           => $topic_title, 
+            'topic_description'     => $topic_description,
+            'topic_info'            => $topic_info, 
+            'topic_slug'            => $topic_slug, 
+            'topic_add_date'        => $topic_add_date,
+            'topic_seo_title'       => $topic_seo_title, 
+            'topic_merged_id'       => $topic_merged_id,
+            'topic_parent_id'       => $topic_parent_id,
+            'topic_is_parent'       => $topic_is_parent,
+            'topic_post_related'    => $topic_post_related,
+            'topic_related'         => $topic_related,
+            'topic_count'           => $topic_count, 
         ];
         
         TopicModel::edit($data);

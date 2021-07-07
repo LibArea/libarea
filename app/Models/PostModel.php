@@ -296,7 +296,7 @@ class PostModel extends \MainModel
         return true;
     }
     
-    // Связанные посты
+    // Связанные посты для поста
     public static function postRelated($post_related)
     {
         

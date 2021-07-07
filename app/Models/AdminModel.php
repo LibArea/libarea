@@ -11,11 +11,10 @@ class AdminModel extends \MainModel
     // Страница участников
     public static function usersAll($page, $sheet)
     {
+        $string = "WHERE ban_list > 0";
         if ($sheet == 'all') {
             $string = "";
-        } else {
-            $string = "WHERE ban_list > 0";
-        }
+        } 
         
         $offset = ($page-1) * 25; 
         $sql = "SELECT * FROM users $string ORDER BY id DESC LIMIT 25 OFFSET ".$offset." ";

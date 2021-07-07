@@ -195,6 +195,7 @@ class TopicModel extends \MainModel
             ['topic_merged_id'], '=', $data['topic_merged_id'], ',', 
             ['topic_parent_id'], '=', $data['topic_parent_id'], ',',
             ['topic_is_parent'], '=', $data['topic_is_parent'], ',',
+            ['topic_post_related'], '=', $data['topic_post_related'], ',',
             ['topic_related'], '=', $data['topic_related'], ',', 
             ['topic_count'], '=', $data['topic_count'])
             ->where(['topic_id'], '=', $data['topic_id'])->run(); 

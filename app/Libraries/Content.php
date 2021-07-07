@@ -11,7 +11,6 @@ class Content
     // Работа с контентом (Parsedown)
     public static function text($content, $type)
     {
-        
         $Parsedown = new MyParsedown();
         $Parsedown->setSafeMode(true); //безопасность
         
@@ -19,8 +18,9 @@ class Content
             $text   = $Parsedown->text($content);
             $text   = self::stopWords($text);
         } else {
-            return  $Parsedown->line($content); 
+            $text   = $Parsedown->line($content);
         }
+        $text   = self::parseUser($text); 
         return self::parseUrl($text);
     }
   

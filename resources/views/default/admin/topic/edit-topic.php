@@ -89,16 +89,28 @@
                                     </select>
                                 </div>
                             <?php } ?>
+                            
                             <div class="boxline">  
-                                    <label class="form-label" for="topic_content"><?= lang('Related'); ?></label>
-                                    <select name="topic_related[]" multiple="multiple" id='selLinked'>
+                                <label class="form-label" for="post_content">
+                                    <?= lang('Related'); ?> post
+                                </label>
+                                <select name="post_related[]" multiple="multiple" id='postRelated'>
+                                    <?php foreach ($post_related as $related) { ?>
+                                        <option selected value="<?= $related['post_id']; ?>"><?= $related['post_title']; ?></option>
+                                    <?php } ?>
+                                </select>
+                            <div class="boxline">  
+                                    <label class="form-label" for="topic_content">
+                                        <?= lang('Related'); ?> topic
+                                    </label>
+                                    <select name="topic_related[]" multiple="multiple" id='topicRelated'>
                                         <?php foreach ($topic_related as $related) { ?>
                                             <option selected value="<?= $related['topic_id']; ?>"><?= $related['topic_title']; ?></option>
                                         <?php } ?>
                                     </select>
                                     <script nonce="<?= $_SERVER['nonce']; ?>">
                                         $(document).ready(function(){
-                                            $("#selLinked").select2({
+                                            $("#topicRelated").select2({
                                                 width: '70%',
                                                 ajax: { 
                                                     url: "/search/topics",
@@ -123,6 +135,27 @@
                                                 maximumSelectionLength: 1,
                                                 ajax: { 
                                                     url: "/search/topics/main",
+                                                    type: "post",
+                                                    dataType: 'json',
+                                                    delay: 250,
+                                                    data: function (params) {
+                                                        return {
+                                                          searchTerm: params.term 
+                                                        };
+                                                    },
+                                                    processResults: function (response) {
+                                                     return {
+                                                        results: response
+                                                     };
+                                                    },
+                                                    cache: true
+                                                }
+                                            });
+                                            $("#postRelated").select2({
+                                                width: '70%',
+                                                maximumSelectionLength: 5,
+                                                ajax: { 
+                                                    url: "/search/posts",
                                                     type: "post",
                                                     dataType: 'json',
                                                     delay: 250,

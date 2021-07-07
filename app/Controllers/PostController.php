@@ -50,11 +50,10 @@ class PostController extends \MainController
             $result_comm[$ind]          = $row;
         }
 
+        $num = '';
         if ($page > 1) { 
             $num = ' | ' . lang('Page') . ' ' . $page;
-        } else {
-            $num = '';
-        }
+        } 
 
         if ($sheet == 'feed') {
             $meta_title = Config::get(Config::PARAM_HOME_TITLE) . $num;
@@ -118,11 +117,10 @@ class PostController extends \MainController
      
         // Выводить или нет? Что дает просмотр даты изменения?
         // Учитывать ли изменение в сортировки и в оповещение в будущем...
+        $post['edit_date'] = null;
         if ($post['post_date'] != $post['edit_date']) {
             $post['edit_date'] = $post['edit_date'];
-        } else {
-            $post['edit_date'] = null;
-        }
+        } 
         
         $topics = PostModel::getPostTopic($post['post_id']);
         
@@ -148,12 +146,11 @@ class PostController extends \MainController
         // Получим ЛО (временно)
         // Возможно нам стоит просто поднять ответ на первое место?
         // Изменив порядок сортировки при выбора LO, что позволит удрать это
+        $lo = null;
         if ($post['post_lo'] > 0) {
             $lo = AnswerModel::getAnswerLo($post['post_id']);
             $lo['answer_content'] = $lo['answer_content'];
-        } else {
-            $lo = null;
-        }
+        } 
 
         $answers = Array();
         foreach ($post_answers as $ind => $row) {
@@ -167,12 +164,11 @@ class PostController extends \MainController
             $row['answer_date']     = lang_date($row['answer_date']);
             $answers[$ind]          = $row;
         }
-
+        
+        $content_img  = null;
         if ($post['post_content_img']) {
             $content_img  = Config::get(Config::PARAM_URL) . '/uploads/posts/cover/' . $post['post_content_img'];
-        } else {
-            $content_img  = null;
-        }
+        } 
        
         // title, description
         $desc  = mb_strcut(strip_tags($post['post_content']), 0, 180);
