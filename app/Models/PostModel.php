@@ -37,22 +37,19 @@ class PostModel extends \MainModel
    
         // Условия: удаленный пост, запрещенный к показу в ленте
         // И ограниченный по TL
-        if ($uid['trust_level'] != 5) {  
         
+        $display = '';
+        if ($uid['trust_level'] != 5) {  
+            $tl = 'AND p.post_tl <= '.$uid['trust_level'].'';
             if ($uid['id'] == 0) { 
                 $tl = 'AND p.post_tl = 0';
-            } else {
-                $tl = 'AND p.post_tl <= '.$uid['trust_level'].'';
-            }
+            } 
             $display = 'AND p.post_is_delete = 0 AND s.space_feed = 0 '.$tl.'';
-        } else {
-            $display = ''; 
-        }
+        } 
          
+        $sort = ' ORDER BY p.post_answers_num DESC'; 
         if ($type == 'feed' || $type == 'all') { 
             $sort = ' ORDER BY p.post_top DESC, p.post_date DESC';
-        } else {
-            $sort = ' ORDER BY p.post_answers_num DESC';
         }  
 
         $sql = "SELECT p.*, 
@@ -98,28 +95,25 @@ class PostModel extends \MainModel
             $result[$ind] = $row['signed_space_id'];
         }   
         
+        $string = "WHERE post_space_id IN(1)"; 
+        if ($result) {
+                $string = "WHERE post_space_id IN(1, ".implode(',', $result).")";
+        } 
+
         // Учитываем подписку на пространства
         if ($uid['id'] == 0) {
            $string = '';
-        } else {
-            if ($result) {
-                $string = "WHERE post_space_id IN(1, ".implode(',', $result).")";
-            } else {
-               $string = "WHERE post_space_id IN(1)"; 
-            }
         } 
-     
+            
         // Учитываем TL
+        $display = ''; 
         if ($uid['trust_level'] != 5) {   
+            $tl = 'AND post_tl <= '.$uid['trust_level'].'';
             if ($uid['id'] == 0) { 
                 $tl = 'AND post_tl = 0';
-            } else {
-                $tl = 'AND post_tl <= '.$uid['trust_level'].'';
-            }
+            } 
             $display = 'AND post_is_delete = 0 AND space_feed = 0 '.$tl.'';
-        } else {
-            $display = ''; 
-        }
+        } 
      
         $sql = "SELECT post_id, post_space_id, space_id
                 FROM posts
@@ -135,10 +129,9 @@ class PostModel extends \MainModel
     public static function postSlug($slug, $user_id, $trust_level)
     {
         // Ограничение по TL
+        $trust_level = $trust_level;
         if ($user_id == 0) {
             $trust_level = 0; 
-        } else {
-            $trust_level = $trust_level;
         }
         
         $q = XD::select('*')->from(['posts']);

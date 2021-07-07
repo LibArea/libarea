@@ -10,25 +10,24 @@ class SpaceModel extends \MainModel
     // Все пространства сайта
     public static function getSpaces($user_id)
     {
-
         $q = XD::select('*')->from(['space']);
-        $result = $q->leftJoin(['space_signed'])->on(['signed_space_id'], '=', ['space_id'])
+        $result = $q->leftJoin(['users'])->on(['id'], '=', ['space_user_id'])
+                ->leftJoin(['space_signed'])->on(['signed_space_id'], '=', ['space_id'])
                 ->and(['signed_user_id'], '=', $user_id)
                 ->where(['space_is_delete'], '!=', 1)->getSelect();
         
         return $result;
     } 
 
-    // Для форм добавления и изменения
+    // Для форм добавления и изменения поста
     public static function getSpaceSelect($user_id, $trust_level)
     {
+        $sql = "SELECT * FROM space WHERE space_permit_users = 0 or space_user_id = :user_id ORDER BY space_id DESC";
         if ($trust_level == 5) {
             $sql = "SELECT * FROM space";
-        } else {
-            $sql = "SELECT * FROM space WHERE space_permit_users = 0 or space_user_id = ".$user_id." ORDER BY space_id DESC";
         }
 
-        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
+        return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC); 
     } 
 
    // По id
@@ -54,21 +53,18 @@ class SpaceModel extends \MainModel
     // Списки постов по пространству
     public static function getPosts($space_id, $user_id, $user_tl, $type, $page)
     {
+        $display = ''; 
         if ($user_tl != 5) {  
+            $tl = "AND p.post_tl <= $user_tl";
             if ($user_id == 0) { 
                 $tl = "AND p.post_tl = 0";
-            } else {
-                $tl = "AND p.post_tl <= $user_tl";
-            }
+            } 
             $display = "AND p.post_is_delete = 0 $tl";
-        } else {
-            $display = ''; 
-        }
+        } 
          
+        $sort = "ORDER BY p.post_answers_num DESC"; 
         if ($type == 'feed') { 
             $sort = "ORDER BY p.post_top DESC, p.post_date DESC";
-        } else {
-            $sort = "ORDER BY p.post_answers_num DESC";
         }           
             
         $offset = ($page-1) * 25;   
@@ -109,24 +105,23 @@ class SpaceModel extends \MainModel
     // Количество постов
     public static function getCount($space_id, $user_id, $user_tl, $type, $page)
     {
+        $display = ''; 
         if ($user_tl != 5) {  
+            
+            $tl = "AND p.post_tl <= $user_tl";
             if ($user_id == 0) { 
                 $tl = "AND p.post_tl = 0";
-            } else {
-                $tl = "AND p.post_tl <= $user_tl";
-            }
+            } 
+            
             $display = "AND p.post_is_delete = 0 $tl";
-        } else {
-            $display = ''; 
-        }
+        } 
         
+        $sort = "ORDER BY p.post_answers_num DESC";
         if ($type == 'feed') { 
             $sort = "ORDER BY p.post_top DESC, p.post_date DESC";
-        } else {
-            $sort = "ORDER BY p.post_answers_num DESC";
-        }           
+        }          
             
-       $sql = "SELECT p.*, v.*,
+        $sql = "SELECT p.*, v.*,
                 u.id, u.login, u.avatar,
                 FROM posts AS p
                 LEFT JOIN users AS u ON id = post_user_id 

@@ -174,7 +174,7 @@ class AdminController extends \MainController
     public function spaces()
     {
         $uid    = self::isAdmin();
-        $spaces = AdminModel::getAdminSpaceAll($uid['id']);
+        $spaces = SpaceModel::getSpaces($uid['id']);
   
         $data = [
             'meta_title'    => lang('Spaces'),
@@ -191,7 +191,6 @@ class AdminController extends \MainController
     public function addSpacePage() 
     {
         $uid = self::isAdmin();
-        
         $data = [
             'meta_title'    => lang('Add Space'),
             'sheet'         => 'admin',

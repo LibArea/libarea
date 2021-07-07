@@ -125,16 +125,6 @@ class AdminModel extends \MainModel
         return $query->getSelect();
     }
     
-    // Просмотр всех пространств в панели администрирования
-    public static function getAdminSpaceAll() 
-    {
-        $q = XD::select('*')->from(['space']);
-        $query = $q->leftJoin(['users'])->on(['id'], '=', ['space_user_id'])
-                ->orderBy(['space_id'])->desc();
-        
-        return  $query->getSelect();
-    }
-    
     // Все награды
     public static function getBadgesAll()
     {
