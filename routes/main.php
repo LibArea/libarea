@@ -149,8 +149,8 @@ Route::before('Authorization@noAuth')->getGroup();
     Route::get('/space/add')->controller('SpaceController@addForm');
     Route::get('/space/my')->controller('SpaceController@spaseUser');
  
-    Route::get('/all')->controller('PostController', ['all']);
-    Route::get('/all/page/{page?}')->controller('PostController', ['all'])->where(['page' => '[0-9]+']);
+    Route::get('/all')->controller('HomeController', ['all']);
+    Route::get('/all/page/{page?}')->controller('HomeController', ['all'])->where(['page' => '[0-9]+']);
 Route::endGroup();
 
 Route::before('Authorization@yesAuth')->getGroup();
@@ -183,8 +183,8 @@ Route::getType('post');
 Route::endType();
 
 // Другие страницы без авторизии
-Route::get('/post/{id}')->controller('PostController@viewPost')->where(['id' => '[0-9-]+']);
-Route::get('/post/{id}/{slug}')->controller('PostController@viewPost')->where(['id' => '[0-9-]+', 'slug' => '[A-Za-z0-9-_]+']);
+Route::get('/post/{id}')->controller('PostController')->where(['id' => '[0-9-]+']);
+Route::get('/post/{id}/{slug}')->controller('PostController')->where(['id' => '[0-9-]+', 'slug' => '[A-Za-z0-9-_]+']);
 
 // Информация
 Route::get('/info')->controller('InfoController');
@@ -225,10 +225,10 @@ Route::get('/domains')->controller('LinkController');
 Route::get('/domain/{domain}')->controller('LinkController@domain')->where(['domain' => '[A-Za-z0-9-.]+']);
 
 // Пагинация и главная (feed) страница, top, all...
-Route::get('/')->controller('PostController', ['feed']);
-Route::get('/page/{page?}')->controller('PostController', ['feed'])->where(['page' => '[0-9]+']);
-Route::get('/top')->controller('PostController', ['top']);
-Route::get('/top/page/{page?}')->controller('PostController', ['top'])->where(['page' => '[0-9]+']);
+Route::get('/')->controller('HomeController', ['feed']);
+Route::get('/page/{page?}')->controller('HomeController', ['feed'])->where(['page' => '[0-9]+']);
+Route::get('/top')->controller('HomeController', ['top']);
+Route::get('/top/page/{page?}')->controller('HomeController', ['top'])->where(['page' => '[0-9]+']);
 
 // Карта сайта и Турбо страницы (пространств)
 Route::get('/sitemap.xml')->controller('RssController');

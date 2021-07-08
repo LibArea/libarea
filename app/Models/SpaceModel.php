@@ -7,17 +7,37 @@ use PDO;
 
 class SpaceModel extends \MainModel
 {
-    // Все пространства сайта
-    public static function getSpaces($user_id)
+    // Пространства все / подписан
+    public static function getSpaces($user_id, $sort) 
     {
-        $q = XD::select('*')->from(['space']);
-        $result = $q->leftJoin(['users'])->on(['id'], '=', ['space_user_id'])
-                ->leftJoin(['space_signed'])->on(['signed_space_id'], '=', ['space_id'])
-                ->and(['signed_user_id'], '=', $user_id)
-                ->where(['space_is_delete'], '!=', 1)->getSelect();
+        $signet = "";
+        if ($sort == 'subscription') { 
+            $signet = "AND f.signed_user_id = :user_id"; 
+        } 
         
-        return $result;
-    } 
+        $sql = "SELECT 
+                s.space_id, 
+                s.space_name, 
+                s.space_description,
+                s.space_slug, 
+                s.space_img,
+                s.space_date,
+                s.space_type,
+                s.space_user_id,
+                s.space_is_delete,
+                u.id,
+                u.login,
+                u.avatar,
+                f.signed_space_id, 
+                f.signed_user_id
+ 
+                    FROM space s 
+                    LEFT JOIN users as u ON u.id = s.space_user_id
+                    LEFT JOIN space_signed as f ON f.signed_space_id = s.space_id AND f.signed_user_id = :user_id 
+                    WHERE s.space_is_delete != 1 $signet";
+
+       return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);  
+    }
 
     // Для форм добавления и изменения поста
     public static function getSpaceSelect($user_id, $trust_level)
@@ -138,16 +158,6 @@ class SpaceModel extends \MainModel
     {
         $q = XD::select('*')->from(['space'])->leftJoin(['users'])->on(['space_user_id'], '=', ['id']);
         return $q->where(['space_slug'], '=', $slug)->getSelectOne();
-    }
-    
-    // Все пространства на которые подписан пользователь
-    public static function getSpaceUserSigned($user_id) 
-    {
-       $sql = "SELECT f.*, s.* FROM space_signed as f 
-            LEFT JOIN space as s ON f.signed_space_id = s.space_id 
-            WHERE f.signed_user_id = " . $user_id;
-
-       return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);  
     }
     
     // Подписан пользователь на пространство или нет

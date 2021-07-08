@@ -25,12 +25,13 @@
                             <?= csrf_field() ?>
                             <div class="boxline">
                                 <label class="form-label" for="post_title">URL<sup class="red">*</sup></label>
-                                <input class="form-input" minlength="3" type="text" value="<?= $space['space_slug']; ?>" name="space_slug" />
+                                <input class="form-input" minlength="3" maxlength="12" type="text" value="<?= $space['space_slug']; ?>" name="space_slug" />
+                                <div class="box_h">3 - 12 <?= lang('characters'); ?></div>
                             </div>  
                             <div class="boxline">
                                 <label class="form-label" for="post_title"><?= lang('Title'); ?><sup class="red">*</sup></label>
                                 <input class="form-input" minlength="4" maxlength="18" type="text" value="<?= $space['space_name']; ?>" name="space_name" />
-                                <div class="box_h">Короткое от 4 - 18 <?= lang('characters'); ?></div>
+                                <div class="box_h">4 - 18 <?= lang('characters'); ?></div>
                             </div>
                             <div class="boxline">
                                 <label class="form-label" for="post_content"><?= lang('Long'); ?><sup class="red">*</sup></label>

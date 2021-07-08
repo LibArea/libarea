@@ -174,7 +174,7 @@ class AdminController extends \MainController
     public function spaces()
     {
         $uid    = self::isAdmin();
-        $spaces = SpaceModel::getSpaces($uid['id']);
+        $spaces = SpaceModel::getSpaces($uid['id'], 'all');
   
         $data = [
             'meta_title'    => lang('Spaces'),

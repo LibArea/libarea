@@ -19,68 +19,8 @@ use URLScraper;
 
 class PostController extends \MainController
 {
-    // Главная страница
-    public function index($sheet) 
-    {
-        $pg     = \Request::getInt('page'); 
-        $page   = (!$pg) ? 1 : $pg;
-        $uid    = Base::getUid();
-
-        $space_user         = SpaceModel::getSpaceUserSigned($uid['id']);
-        $latest_answers     = AnswerModel::latestAnswers($uid);
-        
-        $pagesCount = PostModel::postsFeedCount($space_user, $uid, $sheet); 
-        $posts      = PostModel::postsFeed($page, $space_user, $uid, $sheet);
-
-        Base::PageError404($posts);
-
-        $result = Array();
-        foreach ($posts as $ind => $row) {
-            $text = explode("\n", $row['post_content']);
-            $row['post_content_preview']    = Content::text($text[0], 'line');
-            $row['lang_num_answers']        = word_form($row['post_answers_num'], lang('Answer'), lang('Answers-m'), lang('Answers'));
-            $row['post_date']               = lang_date($row['post_date']);
-            $result[$ind]                   = $row;
-        }  
- 
-        $result_comm = Array();
-        foreach ($latest_answers as $ind => $row) {
-            $row['answer_content']      = Base::cutWords($row['answer_content'], 81);
-            $row['answer_date']         = lang_date($row['answer_date']);
-            $result_comm[$ind]          = $row;
-        }
-
-        $num = '';
-        if ($page > 1) { 
-            $num = ' | ' . lang('Page') . ' ' . $page;
-        } 
-
-        if ($sheet == 'feed') {
-            $meta_title = Config::get(Config::PARAM_HOME_TITLE) . $num;
-            $meta_desc  = Config::get(Config::PARAM_META_DESC) . $num;
-            $canonical  = Config::get(Config::PARAM_URL);
-        } else {
-            $meta_title = lang('TOP') .'. '. Config::get(Config::PARAM_HOME_TITLE) . $num;
-            $meta_desc  = lang('top-desc') . $num;   
-            $canonical  = Config::get(Config::PARAM_URL) . '/top';
-        }
-
-        $data = [
-            'latest_answers'    => $result_comm,
-            'pagesCount'        => $pagesCount,
-            'pNum'              => $page,
-            'sheet'             => $sheet,
-            'canonical'         => $canonical,
-            'img'               => Config::get(Config::PARAM_URL) . '/assets/images/areadev.webp',
-            'meta_title'        => $meta_title,
-            'meta_desc'         => $meta_desc,
-        ];
-
-        return view(PR_VIEW_DIR . '/home', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'space_bar' => $space_user]);
-    }
-
     // Полный пост
-    public function viewPost()
+    public function index()
     {
         $uid        = Base::getUid();
         $slug       = \Request::get('slug');

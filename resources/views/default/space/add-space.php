@@ -11,13 +11,13 @@
                             <?= csrf_field() ?>
                             <div class="boxline">
                                 <label class="form-label" for="post_title">URL (slug)<sup class="red">*</sup></label>
-                                <input class="form-input" minlength="3" type="text" name="space_slug" />
-                                <div class="box_h">На английском. Пример: <b>meta</b></div>
+                                <input class="form-input" minlength="3" maxlength="12" type="text" name="space_slug" />
+                                <div class="box_h">3 - 12 <?= lang('characters'); ?> (английский)</div>
                             </div>  
                             <div class="boxline">
                                 <label class="form-label" for="post_title"><?= lang('Title'); ?><sup class="red">*</sup></label>
-                                <input class="form-input" minlength="6" type="text" name="space_name" />
-                                <div class="box_h">Одно, два слова</div>
+                                <input class="form-input" minlength="4" maxlength="18" type="text" name="space_name" />
+                                <div class="box_h">4 - 18 <?= lang('characters'); ?></div>
                             </div>   
                             <div class="boxline"> 
                                 <label class="form-label" for="post_content"><?= lang('Publications'); ?></label>

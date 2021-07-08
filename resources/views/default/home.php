@@ -63,7 +63,7 @@
       <?php } ?>    
     </ul>
 
-    <?php if($uid['uri'] == '/' && $uid['id'] > 0 && empty($space_bar)) { ?>
+    <?php if($uid['uri'] == '/' && $uid['id'] > 0 && empty($space_user)) { ?>
         <div class="white-box">
             <div class="inner-padding big center">
                 <i class="icon bulb red"></i> <?= lang('space-subscription'); ?>...
@@ -207,14 +207,14 @@
   </main>
   <aside>
     <?php if ($uid['id']) { ?>
-      <?php if(!empty($space_bar)) { ?>
+      <?php if(!empty($space_user)) { ?>
         <div class="white-box">
           <div class="inner-padding"> 
             <div class="bar-title small">
                 <?= lang('Signed'); ?>
                 <a class="right" title="<?= lang('Spaces'); ?>" href="/spaces"><i class="icon arrow-right"></i></a>
             </div>  
-            <?php foreach ($space_bar as  $sig) { ?>
+            <?php foreach ($space_user as  $sig) { ?>
               <a class="bar-space-telo" href="/s/<?= $sig['space_slug']; ?>" title="<?= $sig['space_name']; ?>">
               
                 <?= spase_logo_img($sig['space_img'], 'small', $sig['space_name'], 'img-space'); ?>

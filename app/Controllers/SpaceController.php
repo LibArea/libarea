@@ -14,7 +14,7 @@ class SpaceController extends \MainController
     public function index()
     {
         $uid    = Base::getUid();
-        $space  = SpaceModel::getSpaces($uid['id']); 
+        $space  = SpaceModel::getSpaces($uid['id'], 'all'); 
 
         // Введем ограничение на количество создаваемых пространств
         $sp             = SpaceModel::getSpaceUserId($uid['id']);
@@ -44,7 +44,7 @@ class SpaceController extends \MainController
     public function spaseUser()
     {
         $uid            = Base::getUid();
-        $space          = SpaceModel::getSpaceUserSigned($uid['id']);
+        $space          = SpaceModel::getSpaces($uid['id'], 'subscription');
 
         // Введем ограничение на количество создаваемых пространств
         $all_space          = SpaceModel::getSpaceUserId($uid['id']);
@@ -236,8 +236,8 @@ class SpaceController extends \MainController
             redirect($redirect);
         }
         
-        Base::Limits($space_name, lang('titles'), '4', '20', $redirect);
-        Base::Limits($space_slug, 'slug (URL)', '3', '10', $redirect);
+        Base::Limits($space_name, lang('titles'), '4', '18', $redirect);
+        Base::Limits($space_slug, 'slug (URL)', '3', '12', $redirect);
         
         if (preg_match('/\s/', $space_slug) || strpos($space_slug,' ')) {
             Base::addMsg(lang('url-gaps'), 'error');
@@ -274,7 +274,7 @@ class SpaceController extends \MainController
         SpaceModel::AddSpace($data);
 
         Base::addMsg(lang('space-add-success'), 'success');
-        redirect('/space'); 
+        redirect('/s/' . $space_slug); 
     }
     
     // Изменение пространства
@@ -305,9 +305,9 @@ class SpaceController extends \MainController
             redirect($redirect);
         }
 
-        Base::Limits($space_name, lang('titles'), '4', '20', $redirect);
+        Base::Limits($space_name, lang('titles'), '4', '18', $redirect);
         Base::Limits($space_description, 'Meta-', '60', '190', $redirect);
-        Base::Limits($space_slug, 'SLUG', '3', '10', $redirect);
+        Base::Limits($space_slug, 'SLUG', '3', '12', $redirect);
         Base::Limits($space_short_text, 'TEXT', '20', '250', $redirect);
 
         $space_color = \Request::getPost('color');
