@@ -5,7 +5,7 @@
             <div class="inner-padding">
                 <div class="white-box">
                     <div class="inner-padding">
-                        <h1><?= $data['title']; ?></h1>
+                        <h1><?= $data['h1']; ?></h1>
                         <div class="box wide">
                             <form class="" action="/recover/send/pass" method="post">
                                 <?php csrf_field(); ?>

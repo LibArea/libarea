@@ -13,10 +13,10 @@ class Content
     {
         $Parsedown = new MyParsedown();
         $Parsedown->setSafeMode(true); //безопасность
-        
+         
         if ($type  == 'text') {
             $text   = $Parsedown->text($content);
-            $text   = self::stopWords($text);
+            $text   = self::stopWords($text); 
         } else {
             $text   = $Parsedown->line($content);
         }

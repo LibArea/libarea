@@ -130,8 +130,7 @@
                
             <?php } ?>    
         </div>
-        
-        
+       
                 <?php foreach ($answ['comm'] as  $comment) { ?>
                     <?php if($comment['comment_del'] == 0) { ?>
                         <ol class="comm-telo<?php if($comment['comment_comment_id'] > 0) { ?> step<?php } ?>"> 
@@ -170,7 +169,7 @@
                                             <?php } ?> 
                                         </div>
                                         <div class="comm-telo-body">
-                                            <?= lori\Content::text($comment['comment_content'], 'text'); ?>
+                                            <?= lori\Content::text($comment['comment_content'], 'line'); ?>
                                         </div>
                                     </div>
                                     <div class="comm-footer">

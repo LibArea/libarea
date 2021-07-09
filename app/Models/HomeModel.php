@@ -86,7 +86,7 @@ class HomeModel extends \MainModel
     }
     
     // Количество постов
-    public static function feedCount($space_user, $uid, $type)
+    public static function feedCount($space_user, $uid)
     {
         $result = Array();
         foreach ($space_user as $ind => $row) {

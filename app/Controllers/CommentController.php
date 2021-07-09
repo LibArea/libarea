@@ -24,7 +24,7 @@ class CommentController extends \MainController
         $uid    = Base::getUid();
          
         $pagesCount = CommentModel::getCommentAllCount();  
-        $comm       = CommentModel::getCommentsAll($page, $uid['id'], $uid['trust_level']);
+        $comm       = CommentModel::getCommentsAll($page, $uid['trust_level']);
 
         $result = Array();
         foreach ($comm  as $ind => $row) {
@@ -225,7 +225,7 @@ class CommentController extends \MainController
             redirect('/');
         } 
         
-        CommentModel::CommentDel($comment['comment_id'], $uid['id']);
+        CommentModel::CommentDel($comment['comment_id']);
         
         $data = [
             'user_id'       => $uid['id'], 

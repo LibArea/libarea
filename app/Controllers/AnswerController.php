@@ -25,7 +25,7 @@ class AnswerController extends \MainController
         $uid        = Base::getUid();
          
         $pagesCount = AnswerModel::getAnswersAllCount();  
-        $answ       = AnswerModel::getAnswersAll($page, $uid['id'], $uid['trust_level']);
+        $answ       = AnswerModel::getAnswersAll($page, $uid['trust_level']);
  
         $result = Array();
         foreach ($answ  as $ind => $row) {

@@ -8,7 +8,7 @@ use PDO;
 class CommentModel extends \MainModel
 {
     // Все комментарии
-    public static function getCommentsAll($page, $user_id, $trust_level)
+    public static function getCommentsAll($page, $trust_level)
     {
         $offset = ($page-1) * 25; 
         
@@ -36,17 +36,34 @@ class CommentModel extends \MainModel
         return ceil(count($query) / 25);
     }
     
-   
     // Получаем комментарии к ответу
-    public static function getComments($answer_id, $uid)
+    public static function getComments($answer_id, $user_id)
     { 
-        $q = XD::select('*')->from(['comments']);
-        $query = $q->leftJoin(['users'])->on(['id'], '=', ['comment_user_id'])
-                ->leftJoin(['votes_comment'])->on(['votes_comment_item_id'], '=', ['comment_id'])
-                ->and(['votes_comment_user_id'], '=', $uid)
-                ->where(['comment_answer_id'], '=', $answer_id);
-
-        return $query->getSelect();
+        $sql = "SELECT 
+                c.comment_id,
+                c.comment_user_id,                
+                c.comment_answer_id,
+                c.comment_comment_id,
+                c.comment_content,
+                c.comment_date,
+                c.comment_votes,
+                c.comment_ip,
+                c.comment_del,
+                
+                v.votes_comment_item_id, 
+                v.votes_comment_user_id,
+                
+                u.id, 
+                u.login, 
+                u.avatar
+                
+                    FROM comments as c
+                    LEFT JOIN users as u ON u.id = c.comment_user_id
+                    LEFT JOIN votes_comment as v ON v.votes_comment_item_id = c.comment_id 
+                    AND v.votes_comment_user_id = $user_id
+                    WHERE c.comment_answer_id = " . $answer_id;
+        
+        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
 
     // Страница комментариев участника
@@ -108,11 +125,9 @@ class CommentModel extends \MainModel
     }
     
     // Удаление комментария
-    public static function CommentDel($comment_id, $user_id)
+    public static function CommentDel($comment_id)
     {
-        XD::update(['comments'])->set(['comment_del'], '=', 1)->where(['comment_id'], '=', $comment_id)->run();
-        
-        return true;
+        return XD::update(['comments'])->set(['comment_del'], '=', 1)->where(['comment_id'], '=', $comment_id)->run();
     }
     
     // Получаем комментарий по id комментария

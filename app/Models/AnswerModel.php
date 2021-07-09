@@ -7,19 +7,18 @@ use PDO;
 class AnswerModel extends \MainModel
 {
     // Все ответы
-    public static function getAnswersAll($page, $user_id, $trust_level)
+    public static function getAnswersAll($page, $trust_level)
     {
         $offset = ($page-1) * 25; 
         
-        if (!$trust_level) { 
-                $tl = 'AND p.post_tl = 0';
-        } else {
+        $tl = 'AND p.post_tl = 0';
+        if ($trust_level) { 
                 $tl = 'AND p.post_tl <= '.$trust_level.'';
-        }
+        } 
         
         $sql = "SELECT c.*, p.*, 
                 u.id, u.login, u.avatar
-                fROM answers as c
+                FROM answers as c
                 JOIN users as u ON u.id = c.answer_user_id
                 JOIN posts as p ON c.answer_post_id = p.post_id AND c.answer_del = 0 ".$tl."
                 ORDER BY c.answer_id DESC LIMIT 25 OFFSET ".$offset." ";
@@ -44,23 +43,47 @@ class AnswerModel extends \MainModel
     }
     
     // Получаем ответы в посте
-    public static function getAnswersPost($post_id, $uid, $type)
+    public static function getAnswersPost($post_id, $user_id, $type)
     { 
-        $q = XD::select('*')->from(['answers']);
-        $query = $q->leftJoin(['users'])->on(['id'], '=', ['answer_user_id'])
-        ->leftJoin(['votes_answer'])->on(['votes_answer_item_id'], '=', ['answer_id'])
-        ->and(['votes_answer_user_id'], '=', $uid)
-         ->leftJoin(['favorite'])->on(['favorite_tid'], '=', ['answer_id'])
-        ->and(['favorite_uid'], '=', $uid)
-        ->and(['favorite_type'], '=', 2)
-        ->where(['answer_post_id'], '=', $post_id);
+        $sort = "";
+        if ($type == 1) {
+            $sort = 'ORDER BY a.answer_votes DESC ';
+        }    
         
-        // 0 - дискуссия, 1 - Q&A
-        if ($type == 0) {
-            return $query->getSelect();
-        } else {
-            return $query->orderBy(['answer_votes'])->desc()->getSelect();
-        }
+        $sql = "SELECT 
+                a.answer_id,
+                a.answer_user_id,
+                a.answer_post_id,
+                a.answer_date,
+                a.answer_content,
+                a.answer_modified,
+                a.answer_ip,
+                a.answer_votes,
+                a.answer_after,
+                a.answer_del,
+        
+                v.votes_answer_item_id, 
+                v.votes_answer_user_id,
+                
+                f.favorite_tid,
+                f.favorite_uid,
+                f.favorite_type,
+                
+                u.id, 
+                u.login, 
+                u.avatar
+                
+                FROM answers AS a
+                LEFT JOIN users AS u ON u.id = a.answer_user_id
+                LEFT JOIN votes_answer AS v ON v.votes_answer_item_id = a.answer_id
+                    AND v.votes_answer_user_id = $user_id
+                LEFT JOIN favorite AS f ON f.favorite_tid = a.answer_id
+                    AND f.favorite_uid  = $user_id
+                    AND f.favorite_type = 2
+                    WHERE a.answer_post_id = $post_id
+                    $sort ";
+
+        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
 
     // Страница ответов участника
@@ -99,10 +122,7 @@ class AnswerModel extends \MainModel
     // Удаление ответа
     public static function AnswerDel($id)
     {
-         XD::update(['answers'])->set(['answer_del'], '=', 1)
-        ->where(['answer_id'], '=', $id)->run();
- 
-        return true;
+       return  XD::update(['answers'])->set(['answer_del'], '=', 1)->where(['answer_id'], '=', $id)->run();
     }
     
     // Информацию по id ответа
@@ -152,12 +172,11 @@ class AnswerModel extends \MainModel
         ->and(['favorite_uid'], '=', $uid)
         ->and(['favorite_type'], '=', 2)
         ->getSelect();
-        
+
         if ($result) {
-            return 1;
-        } else {
-            return false;
-        }
+            return true;
+        } 
+        return false;
     }
     
     // Удаленные ответы

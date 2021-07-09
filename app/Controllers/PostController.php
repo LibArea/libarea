@@ -147,7 +147,7 @@ class PostController extends \MainController
             'meta_title'    => $meta_title,
             'meta_desc'     => $meta_desc,
         ];
-        
+
         return view(PR_VIEW_DIR . '/post/post-view', ['data' => $data, 'post' => $post, 'answers' => $answers,  'uid' => $uid,  'recommend' => $recommend,  'lo' => $lo, 'post_related' => $post_related, 'topics' => $topics]);
     }
 

@@ -626,7 +626,7 @@ class AdminController extends \MainController
         $pg     = \Request::getInt('page'); 
         $page   = (!$pg) ? 1 : $pg;
         
-        $topics     = TopicModel::getTopicAll($page, $uid['id']);
+        $topics     = TopicModel::getTopicAll($page);
         
         $data = [
             'meta_title'    => lang('Topics'),

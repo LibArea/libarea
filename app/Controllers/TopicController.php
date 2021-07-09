@@ -21,7 +21,7 @@ class TopicController extends \MainController
         $uid        = Base::getUid();
          
         $pagesCount = TopicModel::getTopicAllCount();  
-        $topics     = TopicModel::getTopicAll($page, $uid['id']);
+        $topics     = TopicModel::getTopicAll($page);
 
         $num = '';
         if ($page > 1) { 

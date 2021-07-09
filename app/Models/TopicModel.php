@@ -7,7 +7,7 @@ use PDO;
 class TopicModel extends \MainModel
 {
     // Все темы
-    public static function getTopicAll($page, $user_id)
+    public static function getTopicAll($page)
     {
         $offset = ($page-1) * 25; 
         $sql = "SELECT * FROM topic ORDER BY topic_count DESC LIMIT 25 OFFSET ".$offset." ";

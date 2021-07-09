@@ -47,7 +47,7 @@ class AuthController extends \MainController
         $data = [
             'h1'            => lang('Registration by invite'),
             'sheet'         => 'register', 
-            'meta_title'    => lang('Registration by invite'),
+            'meta_title'    => lang('Registration by invite') .' | '. Config::get(Config::PARAM_NAME),
         ];
         
         return view(PR_VIEW_DIR . '/auth/register-invate', ['data' => $data, 'uid' => $uid, 'invate' => $invate]);  
@@ -254,7 +254,7 @@ class AuthController extends \MainController
         $data = [
             'h1'            => lang('Password Recovery'),
             'sheet'         => 'login', 
-            'meta_title'    => lang('Password Recovery'),
+            'meta_title'    => lang('Password Recovery') .' | '. Config::get(Config::PARAM_NAME),
         ];
         
         return view(PR_VIEW_DIR . '/auth/recover', ['data' => $data, 'uid' => $uid]);
@@ -324,7 +324,7 @@ class AuthController extends \MainController
             'code'          => $code,
             'user_id'       => $user_id['activate_user_id'],
             'sheet'         => 'recovery', 
-            'meta_title'    => lang('Password Recovery'),
+            'meta_title'    => lang('Password Recovery') .' | '. Config::get(Config::PARAM_NAME),
         ];
         
         return view(PR_VIEW_DIR . '/auth/newrecover', ['data' => $data, 'uid' => $uid]);
