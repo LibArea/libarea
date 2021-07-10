@@ -39,7 +39,7 @@
                                 <label for="post_content">
                                     <?= lang('Meta Description'); ?><sup class="red">*</sup>
                                 </label>
-                                <textarea class="add" name="topic_description"></textarea>
+                                <textarea rows="6" class="add" name="topic_description"></textarea>
                                 <div class="box_h">> 44 <?= lang('characters'); ?></div>
                             </div>
                                 <input type="submit" name="submit"  class="button" value="<?= lang('Add'); ?>" />

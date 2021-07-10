@@ -272,7 +272,6 @@ class AuthController extends \MainController
         // поэтому проверим, есть ли уже маркер, и перепишем, если он есть.
         // Следует немного снизить уровень обслуживания БД и устранить необходимость в спорадических чистках.
         $result = AuthModel::getAuthTokenByUserId($user_id);
-        print_r($result);
  
         // Записываем
         if (empty($result)) {

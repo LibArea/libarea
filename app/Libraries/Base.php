@@ -14,26 +14,26 @@ class Base
 {
     public static function getUid() 
     {
-        $user = Request::getSession('account') ?? [];
+        $account = Request::getSession('account') ?? [];
         $uid = [];
 
-        if (!empty($user['user_id'])) {
+        if (!empty($account['user_id'])) {
 
-            $usr = UserModel::getUserId($user['user_id']);
+            $user = UserModel::getUserId($account['user_id']);
  
-            if ($usr['ban_list'] == 1) {
+            if ($user['ban_list'] == 1) {
                 if (!isset($_SESSION)) { session_start(); } 
                 session_destroy();
-                AuthModel::deleteTokenByUserId($usr['id']);
+                AuthModel::deleteTokenByUserId($user['id']);
                 redirect('/info/restriction');
             }
 
-            $uid['id']          = $usr['id'];
-            $uid['login']       = $usr['login']; 
-            $uid['trust_level'] = $usr['trust_level'];
-            $uid['notif']       = NotificationsModel::usersNotification($usr['id']); 
-            $uid['avatar']      = $usr['avatar'];
-            $uid['hits_count']  = $usr['hits_count'];
+            $uid['id']          = $user['id'];
+            $uid['login']       = $user['login']; 
+            $uid['trust_level'] = $user['trust_level'];
+            $uid['notif']       = NotificationsModel::usersNotification($user['id']); 
+            $uid['avatar']      = $user['avatar'];
+            $uid['hits_count']  = $user['hits_count'];
              
             Request::getResources()->addBottomScript('/assets/js/app.js');
             
@@ -73,7 +73,7 @@ class Base
         [$selector, $validator] = explode(':', $remember);
         $validator = hash('sha256', $validator);
 
-        $token = UserModel::getAuthTokenBySelector($selector);
+        $token = AuthModel::getAuthTokenBySelector($selector);
  
         if (empty($token)) {
 
@@ -107,7 +107,7 @@ class Base
 
             if (rand(1, 100) < $forceLogin) {
 
-                UserModel::deleteTokenByUserId($token['auth_user_id']);               
+                AuthModel::deleteTokenByUserId($token['auth_user_id']);               
 
                 return;
             }
@@ -143,8 +143,7 @@ class Base
         return true;
     }
  
- 
-     // Каждый раз, когда пользователь входит в систему, используя свой файл cookie «запомнить меня»
+    // Каждый раз, когда пользователь входит в систему, используя свой файл cookie «запомнить меня»
     // Сбросить валидатор и обновить БД
     public static function rememberMeReset($uid, $selector)
     {
@@ -183,10 +182,6 @@ class Base
         AuthModel::UpdateSelector($data, $selector);
 
         setcookie("remember", $token, $expires);
-           // '',     // cookieDomain
-           // '/',    // cookiePath
-           // false,  // cookieSecure
-           // false,  // cookieHTTPOnly
     }
  
  

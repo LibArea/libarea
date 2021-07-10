@@ -71,12 +71,12 @@
                                 <label for="topic_content">
                                     <?= lang('Meta Description'); ?><sup class="red">*</sup>
                                 </label>
-                                <textarea class="add" name="topic_description"><?= $topic['topic_description']; ?></textarea>
+                                <textarea class="add" rows="6" name="topic_description"><?= $topic['topic_description']; ?></textarea>
                                 <div class="box_h">> 44 <?= lang('characters'); ?></div>
                             </div>
                             <div class="boxline">
                                 <label for="topic_content"><?= lang('Info'); ?><sup class="red">*</sup></label>
-                                <textarea class="add" name="topic_info"><?= $topic['topic_info']; ?></textarea>
+                                <textarea class="add" rows="6" name="topic_info"><?= $topic['topic_info']; ?></textarea>
                                 <div class="box_h">Markdown, > 14 <?= lang('characters'); ?></div>
                             </div>
                             <?php if($topic['topic_is_parent'] != 1) { ?>
