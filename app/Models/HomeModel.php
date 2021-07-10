@@ -162,4 +162,5 @@ class HomeModel extends \MainModel
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
+
 }

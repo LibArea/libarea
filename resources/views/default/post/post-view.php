@@ -196,7 +196,6 @@
                                     <form id="add_answ" class="new_answer" action="/answer/add" accept-charset="UTF-8" method="post">
                                     <?= csrf_field() ?>
                                     <div class="redactor">
-                                        <div id="wmd-button-bar"></div>
                                         <textarea minlength="6" class="wmd-input h-150 w-95" rows="5" placeholder="<?= lang('write-something'); ?>..." name="answer" id="wmd-input"></textarea>
                                         <div class="boxline"> 
                                             <input type="hidden" name="post_id" id="post_id" value="<?= $post['post_id']; ?>">

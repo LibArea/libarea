@@ -115,13 +115,6 @@ class PostController extends \MainController
         $meta_desc = $desc . ' — ' . $post['space_name'];
         $meta_title = strip_tags($post['post_title']) . ' — ' . strip_tags($post['space_name']) .' | '. Config::get(Config::PARAM_NAME);
 
-        if ($uid['id'] > 0) {
-            Request::getResources()->addBottomStyles('/assets/md/editor.css');  
-            Request::getResources()->addBottomScript('/assets/md/Markdown.Converter.js'); 
-            Request::getResources()->addBottomScript('/assets/md/Markdown.Sanitizer.js');
-            Request::getResources()->addBottomScript('/assets/md/Markdown.Editor.js');
-            Request::getResources()->addBottomScript('/assets/md/editor.js');
-        }
         Request::getResources()->addBottomStyles('/assets/css/magnific-popup.css');
         Request::getResources()->addBottomScript('/assets/js/shares.js');
         Request::getResources()->addBottomScript('/assets/js/jquery.magnific-popup.min.js');
@@ -200,11 +193,12 @@ class PostController extends \MainController
         Request::getHead()->addStyles('/assets/css/image-uploader.css'); 
         Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
 
-        Request::getResources()->addBottomStyles('/assets/md/editor.css');  
-        Request::getResources()->addBottomScript('/assets/md/Markdown.Converter.js'); 
-        Request::getResources()->addBottomScript('/assets/md/Markdown.Sanitizer.js');
-        Request::getResources()->addBottomScript('/assets/md/Markdown.Editor.js');
-        Request::getResources()->addBottomScript('/assets/md/editor.js');
+        Request::getResources()->addBottomStyles('/assets/editor/editormd.css');
+        Request::getResources()->addBottomScript('/assets/editor/editormd.js');
+        Request::getResources()->addBottomScript('/assets/editor/lib/marked.min.js');
+        Request::getResources()->addBottomScript('/assets/editor/lib/prettify.min.js');
+        Request::getResources()->addBottomScript('/assets/editor/config.js');
+
         Request::getResources()->addBottomStyles('/assets/css/select2.css'); 
 
         if ($uid['trust_level'] > 0) {
@@ -416,15 +410,14 @@ class PostController extends \MainController
 
         Request::getHead()->addStyles('/assets/css/image-uploader.css'); 
         Request::getResources()->addBottomStyles('/assets/css/select2.css'); 
-        Request::getResources()->addBottomStyles('/assets/md/editor.css');  
-        
         Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
 
-        Request::getResources()->addBottomScript('/assets/md/Markdown.Converter.js'); 
-        Request::getResources()->addBottomScript('/assets/md/Markdown.Sanitizer.js');
-        Request::getResources()->addBottomScript('/assets/md/Markdown.Editor.js');
-        Request::getResources()->addBottomScript('/assets/md/editor.js');
-
+        Request::getResources()->addBottomStyles('/assets/editor/editormd.css');
+        Request::getResources()->addBottomScript('/assets/editor/editormd.js');
+        Request::getResources()->addBottomScript('/assets/editor/lib/marked.min.js');
+        Request::getResources()->addBottomScript('/assets/editor/lib/prettify.min.js');
+        Request::getResources()->addBottomScript('/assets/editor/config.js');
+        
         if ($uid['trust_level'] > 0) {
             Request::getResources()->addBottomScript('/assets/js/select2.min.js'); 
         } 

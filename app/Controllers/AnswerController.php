@@ -127,11 +127,11 @@ class AnswerController extends \MainController
         $post = PostModel::postId($post_id);
         Base::PageError404($post);
 
-        Request::getResources()->addBottomStyles('/assets/md/editor.css');  
-        Request::getResources()->addBottomScript('/assets/md/Markdown.Converter.js'); 
-        Request::getResources()->addBottomScript('/assets/md/Markdown.Sanitizer.js');
-        Request::getResources()->addBottomScript('/assets/md/Markdown.Editor.js');
-        Request::getResources()->addBottomScript('/assets/md/editor.js');
+        Request::getResources()->addBottomStyles('/assets/editor/editormd.css');
+        Request::getResources()->addBottomScript('/assets/editor/editormd.js');
+        Request::getResources()->addBottomScript('/assets/editor/lib/marked.min.js');
+        Request::getResources()->addBottomScript('/assets/editor/lib/prettify.min.js');
+        Request::getResources()->addBottomScript('/assets/editor/config.js');
         
         $data = [
             'h1'                => lang('Edit answer'),

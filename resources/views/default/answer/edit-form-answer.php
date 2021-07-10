@@ -13,8 +13,7 @@
                         <form id="add_answ" action="/answer/edit" accept-charset="UTF-8" method="post">
                             <?= csrf_field() ?>
                             <div class="redactor">
-                                <div class="wmd-panel">
-                                    <div id="wmd-button-bar"></div>
+                                <div id="test-markdown-view">
                                     <textarea name="answer"  class="wmd-input h-150" id="wmd-input"><?= $data['answer_content']; ?></textarea>
                                 </div> 
                                 <div id="wmd-preview" class="wmd-panel wmd-preview"></div> 

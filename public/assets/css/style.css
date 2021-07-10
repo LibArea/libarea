@@ -9,6 +9,11 @@ body {
   padding: 0;
 }
 
+body.scroll {
+  margin-left: calc(100vw - 100%);
+  margin-right: 0;
+}
+
 *,
 ::after,
 ::before {
@@ -384,6 +389,7 @@ i.icon {
 .notif i.icon.bell,
 .dropdown-menu i.icon.shield {
   color: var(--quaternary);
+  font-weight: 800;
 }
 
 i.icon.info,
@@ -1595,7 +1601,6 @@ i.github:hover {
   aside { display: none; }
   header { margin-left: 0; }
   .no-pc { display: block; }
-  .column { width: 19%; }
 
   main,
   main.w-75 {
@@ -1709,6 +1714,12 @@ a:hover .icon::before {
 .icon.social-pinterest::before { content: "\e60b"; }
 .icon.share-alt::before { content: "\e05a"; }
 .icon.bulb::before { content: "\e076"; }
+.icon.bubble::before { content: "\e07d"; }
+.icon.picture::before { content: "\e032"; }
+.icon.size-fullscreen::before { content: "\e057"; }
+.icon.list::before { content: "\e067"; }
+.icon.screen-desktop::before { content: "\e011"; }
+.icon.crop::before { content: "\e024"; }
 
 #fixed {
   position: fixed;
