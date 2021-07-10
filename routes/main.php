@@ -216,9 +216,9 @@ Route::get('/moderations')->controller('ModerationController');
 
 Route::get('/topics')->controller('TopicController')->where(['page' => '[0-9]+']);
 Route::get('/topics/page/{page?}')->controller('TopicController')->where(['page' => '[0-9]+']);
-Route::get('/topic/{slug}')->controller('TopicController@topic')->where(['slug' => '[A-Za-z0-9_]+']);
-Route::get('/topic/{slug}/info')->controller('TopicController@info')->where(['slug' => '[A-Za-z0-9_]+']);
-Route::get('/topic/{slug}/page/{page?}')->controller('TopicController@topic')->where(['slug' => '[A-Za-z0-9_]+', 'page' => '[0-9]+']);
+Route::get('/topic/{slug}')->controller('TopicController@topic')->where(['slug' => '[A-Za-z0-9-]+']);
+Route::get('/topic/{slug}/info')->controller('TopicController@info')->where(['slug' => '[A-Za-z0-9-]+']);
+Route::get('/topic/{slug}/page/{page?}')->controller('TopicController@topic')->where(['slug' => '[A-Za-z0-9-]+', 'page' => '[0-9]+']);
 
 // Домены
 Route::get('/domains')->controller('LinkController');

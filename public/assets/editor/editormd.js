@@ -1161,7 +1161,7 @@
                     iconTexts = (typeof iconTexts === "undefined") ? "" : iconTexts;
                     iconClass = (typeof iconClass === "undefined") ? "" : iconClass;
 
-                    var menuItem = pullRight ? "<li class=\"pull-right\">" : "<li>";
+                    var menuItem = pullRight ? "<li class=\"pull-right\">" : "<li class=\"n-"+iconClass+"\">";
                     
                     if (typeof settings.toolbarCustomIcons[name] !== "undefined" && typeof settings.toolbarCustomIcons[name] !== "function")
                     {

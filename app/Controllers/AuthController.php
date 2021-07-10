@@ -182,7 +182,7 @@ class AuthController extends \MainController
     {
         $email      = \Request::getPost('email');
         $password   = \Request::getPost('password');
-        $rememberMe = \Request::getPost('rememberme');
+        $rememberMe = \Request::getPostInt('rememberme');
 
         $url = '/login';
 
@@ -218,7 +218,7 @@ class AuthController extends \MainController
             // Если нажал "Запомнить" 
             // Устанавливает сеанс пользователя и регистрирует его
             if ($rememberMe == 1) { 
-                UserModel::rememberMe($uInfo['id']);
+                self::rememberMe($uInfo['id']);
             }
             
             $data = [
@@ -238,7 +238,55 @@ class AuthController extends \MainController
             redirect('/');
         }
     }
+    
+    ////// ЗАПОМНИТЬ МЕНЯ
+    ////// Работа с токенами и куки 
+    public static function rememberMe($user_id)
+    {
+        // НАСТРОЕМ НАШ СЕЛЕКТОР, ВАЛИДАТОР И СРОК ДЕЙСТВИЯ 
+        // Селектор действует как уникальный идентификатор, поэтому нам не нужно 
+        // сохранять идентификатор пользователя в нашем файле cookie
+        // валидатор сохраняется в виде обычного текста в файле cookie, но хэшируется в бд
+        // если селектор (id) найден в таблице auth_tokens, мы затем сопоставляем валидаторы
 
+        $rememberMeExpire = 30;
+        $selector = Base::randomString('crypto', 12);
+        $validator = Base::randomString('crypto', 20);
+        $expires = time() + 60 * 60 * 24 * $rememberMeExpire;
+
+        // Установим токен
+        $token = $selector . ':' . $validator;
+
+        // Массив данных
+        $data = [
+            'user_id' => $user_id,
+            'selector' => $selector,
+            'hashedvalidator' => hash('sha256', $validator),
+            'expires' => date('Y-m-d H:i:s', $expires),
+        ];        
+
+        // ПРОВЕРИМ, ЕСТЬ ЛИ У ИДЕНТИФИКАТОРА ПОЛЬЗОВАТЕЛЯ УЖЕ НАБОР ТОКЕНОВ
+        // Мы действительно не хотим иметь несколько токенов и селекторов для
+        // одного и того же идентификатора пользователя. В этом нет необходимости, 
+        // так как валидатор обновляется при каждом входе в систему
+        // поэтому проверим, есть ли уже маркер, и перепишем, если он есть.
+        // Следует немного снизить уровень обслуживания БД и устранить необходимость в спорадических чистках.
+        $result = AuthModel::getAuthTokenByUserId($user_id);
+        print_r($result);
+ 
+        // Записываем
+        if (empty($result)) {
+           AuthModel::insertToken($data);
+        } 
+        // Если есть, то обновление
+        else {
+            AuthModel::updateToken($data, $user_id);
+        }
+        
+        // set_Cookie
+        setcookie("remember", $token, $expires);
+    } 
+    
     public function logout() 
     { 
         if (!isset($_SESSION)) { session_start(); } 

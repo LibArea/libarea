@@ -5,6 +5,7 @@ namespace Lori;
 use App\Models\NotificationsModel;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\UserModel;
+use App\Models\AuthModel;
 use JacksonJeans\Mail;
 use JacksonJeans\MailException;
 use Lori\Config;
@@ -23,7 +24,7 @@ class Base
             if ($usr['ban_list'] == 1) {
                 if (!isset($_SESSION)) { session_start(); } 
                 session_destroy();
-                UserModel::deleteTokenByUserId($usr['id']);
+                AuthModel::deleteTokenByUserId($usr['id']);
                 redirect('/info/restriction');
             }
 
@@ -38,7 +39,7 @@ class Base
             
         } else {
 
-            UserModel::checkCookie();
+            self::checkCookie();
             $uid['id']          = 0;
             $uid['trust_level'] = null;
             
@@ -53,6 +54,141 @@ class Base
         $uid['msg']     = self::getMsg();
         return $uid;
     }
+ 
+ 
+     // Проверяет, устанавливался ли когда-либо файл cookie «запомнить меня»
+    // Если мы найдем, проверьте его по нашей таблице users_auth_tokens и  
+    // если мы найдем совпадение, и оно все ещё в силе.
+    public static function checkCookie()
+    {
+        // Есть "remember" куки?
+        $remember = Request::getCookie('remember');
+
+        // Нет
+        if (empty($remember)) {
+            return;
+        }
+
+        // Получим наш селектор | значение валидатора
+        [$selector, $validator] = explode(':', $remember);
+        $validator = hash('sha256', $validator);
+
+        $token = UserModel::getAuthTokenBySelector($selector);
+ 
+        if (empty($token)) {
+
+            return false;
+        }
+
+        // Хэш не соответствует
+        if (!hash_equals($token['auth_hashedvalidator'], $validator)) {
+
+            return false;
+        }
+ 
+        // Получение данных по id
+        $user = UserModel::getUserId($token['auth_user_id']);
+
+        // Нет пользователя
+        if (empty($user)) {
+
+            return false;
+        }
+
+        // ПРОСТО ПЕРЕД УСТАНОВКОЙ ДАННЫХ СЕССИИ И ВХОДОМ ПОЛЬЗОВАТЕЛЯ
+        // ДАВАЙТЕ ПРОВЕРИМ, НУЖЕН ЛИ ИХ ПРИНУДИТЕЛЬНЫЙ ВХОД
+        // Перенесем в конфиг?
+        $forceLogin = 0;
+        if ($forceLogin > 1) {
+
+            // ПОЛУЧАЕТ СЛУЧАЙНОЕ ЧИСЛО ОТ 1 до 100
+            // ЕСЛИ ЭТО НОМЕР МЕНЬШЕ ЧЕМ НОМЕР В НАСТРОЙКАХ ПРИНУДИТЕЛЬНОГО ВХОДА
+            // УДАЛИТЬ ТОКЕН ИЗ БД
+
+            if (rand(1, 100) < $forceLogin) {
+
+                UserModel::deleteTokenByUserId($token['auth_user_id']);               
+
+                return;
+            }
+        }
+
+        // Сессия участника
+        self::setUserSession($user, '1');
+
+        $uid = $token['auth_user_id'];
+
+        self::rememberMeReset($uid, $selector);
+        redirect('/');
+        return true;
+       // return;
+    }
+ 
+    public static function setUserSession($user)
+    {   
+        $data = [
+            'user_id'       => $user['id'],
+            'login'         => $user['login'],
+            'name'          => $user['name'],
+            'email'         => $user['email'],
+            'trust_level'   => $user['trust_level'],
+            'about'         => $user['about'],
+            'avatar'        => $user['avatar'],
+            'isLoggedIn'    => true,
+            'ipaddress'     => Request::getRemoteAddress(),
+        ];
+       
+        $_SESSION['account'] = $data;
+
+        return true;
+    }
+ 
+ 
+     // Каждый раз, когда пользователь входит в систему, используя свой файл cookie «запомнить меня»
+    // Сбросить валидатор и обновить БД
+    public static function rememberMeReset($uid, $selector)
+    {
+        // Получаем по селектору       
+        $existingToken = AuthModel::getAuthTokenBySelector($selector);
+
+        if (empty($existingToken)) {
+
+            return self::rememberMe($uid);
+        }
+
+        $rememberMeExpire = 30;
+        $validator = self::randomString('crypto', 20);
+        $expires = time() + 60 * 60 * 24 * $rememberMeExpire;
+
+        // Установить
+        $token = $selector . ':' . $validator;
+
+        // Если установлено значение true, каждый раз, когда пользователь посещает сайт 
+        // и обнаруживает файл cookie новая дата истечения срока действия 
+        // устанавливается с помощью параметра  $rememberMeExpire - выше 
+        $rememberMeRenew = true;
+
+        if ($rememberMeRenew) {
+            // Массивы данных установим
+            $data = [
+                'hashedvalidator' => hash('sha256', $validator),
+                'expires' => date('Y-m-d H:i:s', $expires)
+            ];
+        } else {
+            $data = [
+                'hashedvalidator' => hash('sha256', $validator),
+            ];
+        }
+
+        AuthModel::UpdateSelector($data, $selector);
+
+        setcookie("remember", $token, $expires);
+           // '',     // cookieDomain
+           // '/',    // cookiePath
+           // false,  // cookieSecure
+           // false,  // cookieHTTPOnly
+    }
+ 
  
     // Возвращает массив сообщений
     public static function getMsg()
