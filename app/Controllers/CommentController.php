@@ -86,7 +86,7 @@ class CommentController extends \MainController
         $url_comment        = $redirect . '#comment_' . $last_comment_id; 
 
         // Пересчитываем количество комментариев для поста + 1
-        PostModel::getNumComments($post_id);
+        PostModel::updateCount($post_id, 'comments');
         
         // Оповещение автору ответа, что есть комментарий
         if ($answer_id) {

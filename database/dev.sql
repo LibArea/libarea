@@ -225,8 +225,9 @@ CREATE TABLE `posts` (
   `post_after` smallint(6) NOT NULL DEFAULT 0 COMMENT 'id первого ответа',
   `post_votes` smallint(6) NOT NULL DEFAULT 0,
   `post_karma` smallint(6) NOT NULL DEFAULT 0,
-  `post_answers_num` smallint(6) NOT NULL DEFAULT 0,
-  `post_comments_num` smallint(6) NOT NULL DEFAULT 0,
+  `post_answers_count` int(11) DEFAULT 0,
+  `post_comments_count` int(11) DEFAULT 0,
+  `post_hits_count` int(11) DEFAULT 0,
   `post_content` text NOT NULL,
   `post_content_img` varchar(250) DEFAULT NULL,
   `post_thumb_img` varchar(250) DEFAULT NULL,
@@ -238,7 +239,6 @@ CREATE TABLE `posts` (
   `post_top` tinyint(1) NOT NULL DEFAULT 0 COMMENT '1 - пост поднят',
   `post_url` varchar(250) DEFAULT NULL,
   `post_url_domain` varchar(250) DEFAULT NULL,
-  `post_hits_count` int(11) DEFAULT 0,
   `post_is_delete` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -246,10 +246,10 @@ CREATE TABLE `posts` (
 -- Дамп данных таблицы `posts`
 --
 
-INSERT INTO `posts` (`post_id`, `post_title`, `post_slug`, `post_type`, `post_translation`, `post_draft`, `post_space_id`, `post_date`, `edit_date`, `post_user_id`, `post_ip_int`, `post_after`, `post_votes`, `post_karma`, `post_answers_num`, `post_comments_num`, `post_content`, `post_content_img`, `post_thumb_img`, `post_related`, `post_merged_id`, `post_closed`, `post_tl`, `post_lo`, `post_top`, `post_url`, `post_url_domain`, `post_hits_count`, `post_is_delete`) VALUES
-(1, 'Муха села на варенье, Вот и всё стихотворение...', 'muha-stih', 0, 0, 0, 1, '2021-02-28 09:08:09', '2021-03-05 07:05:25', 1, NULL, 0, 0, 0, 1, 0, '> \"Нет не всё!\" - сказала Муха,\r\n\r\n> Почесала себе брюхо,\r\n\r\n> Свесив с блюдца две ноги,\r\n\r\n> Мне сказала:\"Погоди!\r\n\r\n> Прежде чем сесть на варенье,\r\n\r\n> Я прочла стихотворенье,\r\n\r\n> Неизвестного поэта,\r\n\r\n> Написавшего про это.\r\n\r\n\r\n## Заголовок\r\n\r\nЧто-то в модели много кода:\r\n\r\n```\r\n$db = \\Config\\Database::connect();\r\n$builder = $db->table(\'Posts AS a\');\r\n$builder->select(\'a.*, b.id, b.nickname, b.avatar\');\r\n$builder->join(\"users AS b\", \"b.id = a.post_user_id\");\r\n$builder->where(\'a.post_slug\', $slug);\r\n$builder->orderBy(\'a.post_id\', \'DESC\');\r\n```\r\n\r\nВот. Это первый пост.', NULL, NULL, NULL, 0, 0, 0, 0, 0, NULL, NULL, 2, 0),
-(2, 'Второй пост...', 'vtoroi-post', 0, 0, 0, 2, '2021-02-28 09:15:58', '2021-03-05 07:05:25', 2, NULL, 0, 0, 0, 0, 0, 'Не будет тут про муху. Просто второй пост.\r\n\r\n> в лесу родилась ёлка, зеленая была...', NULL, NULL, NULL, 0, 0, 0, 0, 0, NULL, NULL, 2, 0),
-(3, 'Medium — платформа для создания контента', 'medium-where-good-ideas-find-you', 0, 0, 0, 2, '2021-04-30 01:35:13', '2021-04-30 01:35:13', 1, '127.0.0.1', 0, 0, 0, 1, 0, 'Medium — это платформа для создания контента, основанная соучредителем Blogger и Twitter Эван Уильямсом. Многие компании используют Medium в качестве платформы для публикации...', '2021/c-1624954734.webp', NULL, NULL, 0, 0, 0, 0, 0, NULL, NULL, 1, 0);
+INSERT INTO `posts` (`post_id`, `post_title`, `post_slug`, `post_type`, `post_translation`, `post_draft`, `post_space_id`, `post_date`, `edit_date`, `post_user_id`, `post_ip_int`, `post_after`, `post_votes`, `post_karma`, `post_answers_count`, `post_comments_count`, `post_hits_count`, `post_content`, `post_content_img`, `post_thumb_img`, `post_related`, `post_merged_id`, `post_closed`, `post_tl`, `post_lo`, `post_top`, `post_url`, `post_url_domain`, `post_is_delete`) VALUES
+(1, 'Муха села на варенье, Вот и всё стихотворение...', 'muha-stih', 0, 0, 0, 1, '2021-02-28 09:08:09', '2021-03-05 07:05:25', 1, NULL, 0, 0, 0, 1, 0, 2, '> \"Нет не всё!\" - сказала Муха,\r\n\r\n> Почесала себе брюхо,\r\n\r\n> Свесив с блюдца две ноги,\r\n\r\n> Мне сказала:\"Погоди!\r\n\r\n> Прежде чем сесть на варенье,\r\n\r\n> Я прочла стихотворенье,\r\n\r\n> Неизвестного поэта,\r\n\r\n> Написавшего про это.\r\n\r\n\r\n## Заголовок\r\n\r\nЧто-то в модели много кода:\r\n\r\n```\r\n$db = \\Config\\Database::connect();\r\n$builder = $db->table(\'Posts AS a\');\r\n$builder->select(\'a.*, b.id, b.nickname, b.avatar\');\r\n$builder->join(\"users AS b\", \"b.id = a.post_user_id\");\r\n$builder->where(\'a.post_slug\', $slug);\r\n$builder->orderBy(\'a.post_id\', \'DESC\');\r\n```\r\n\r\nВот. Это первый пост.', NULL, NULL, NULL, 0, 0, 0, 0, 0, NULL, NULL, 0),
+(2, 'Второй пост...', 'vtoroi-post', 0, 0, 0, 2, '2021-02-28 09:15:58', '2021-03-05 07:05:25', 2, NULL, 0, 0, 0, 0, 0, 2, 'Не будет тут про муху. Просто второй пост.\r\n\r\n> в лесу родилась ёлка, зеленая была...', NULL, NULL, NULL, 0, 0, 0, 0, 0, NULL, NULL, 0),
+(3, 'Medium — платформа для создания контента', 'medium-where-good-ideas-find-you', 0, 0, 0, 2, '2021-04-30 01:35:13', '2021-04-30 01:35:13', 1, '127.0.0.1', 0, 0, 0, 1, 0, 1, 'Medium — это платформа для создания контента, основанная соучредителем Blogger и Twitter Эван Уильямсом. Многие компании используют Medium в качестве платформы для публикации...', '2021/c-1624954734.webp', NULL, NULL, 0, 0, 0, 0, 0, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 

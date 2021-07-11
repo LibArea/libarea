@@ -48,7 +48,7 @@ class PostController extends \MainController
         }
 
         if (!isset($_SESSION['pagenumbers'][$post['post_id']])) {
-            PostModel::postHits($post['post_id']); 
+            PostModel::updateCount($post['post_id'], 'hits'); 
             $_SESSION['pagenumbers'][$post['post_id']] = $post['post_id'];
         }
         
@@ -71,10 +71,10 @@ class PostController extends \MainController
      
         $post['post_content']   = Content::text($post['post_content'], 'text');
         $post['post_date_lang'] = lang_date($post['post_date']);
-        $post['num_answers']    = word_form($post['post_answers_num'], lang('Answer'), lang('Answers-m'), lang('Answers'));
+        $post['num_answers']    = word_form($post['post_answers_count'], lang('Answer'), lang('Answers-m'), lang('Answers'));
         
         // общее количество (для модели - беседа)
-        $comment_n = $post['post_comments_num'] + $post['post_answers_num'];
+        $comment_n = $post['post_comments_count'] + $post['post_answers_count'];
         $post['num_comments']   = word_form($comment_n, lang('Comment'), lang('Comments-m'), lang('Comments'));
         
         $post['favorite_post']  = PostModel::getMyPostFavorite($post['post_id'], $uid['id']);
@@ -385,6 +385,8 @@ class PostController extends \MainController
             $image = $result['image'];
         } elseif ($result['tags_meta']['twitter:image']) {    
             $image = $result['tags_meta']['twitter:image'];
+        } elseif ($result['tags_meta']['og:image']) {    
+            $image = $result['tags_meta']['og:image'];
         } else {
             $image = $result['tags_meta']['image'];
         }

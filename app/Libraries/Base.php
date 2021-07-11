@@ -114,11 +114,9 @@ class Base
         }
 
         // Сессия участника
-        self::setUserSession($user, '1');
+        self::setUserSession($user);
 
-        $uid = $token['auth_user_id'];
-
-        self::rememberMeReset($uid, $selector);
+        self::rememberMeReset($token['auth_user_id'], $selector);
         redirect('/');
         return true;
        // return;

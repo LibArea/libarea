@@ -102,7 +102,7 @@ class AnswerController extends \MainController
         }
    
         // Пересчитываем количество ответов для поста + 1
-        PostModel::getNumAnswers($post_id);
+        PostModel::updateCount($post_id, 'answers');
         
         // Оповещение автору поста, что появился ответ
         // Добавить

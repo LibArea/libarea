@@ -45,7 +45,7 @@ class HomeModel extends \MainModel
             $display = 'AND p.post_is_delete = 0 AND s.space_feed = 0 '.$tl.'';
         } 
          
-        $sort = ' ORDER BY p.post_answers_num DESC'; 
+        $sort = ' ORDER BY p.post_answers_count DESC'; 
         if ($type == 'feed' || $type == 'all') { 
             $sort = ' ORDER BY p.post_top DESC, p.post_date DESC';
         }  

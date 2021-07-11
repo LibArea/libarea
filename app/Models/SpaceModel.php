@@ -82,7 +82,7 @@ class SpaceModel extends \MainModel
             $display = "AND p.post_is_delete = 0 $tl";
         } 
          
-        $sort = "ORDER BY p.post_answers_num DESC"; 
+        $sort = "ORDER BY p.post_answers_count DESC"; 
         if ($type == 'feed') { 
             $sort = "ORDER BY p.post_top DESC, p.post_date DESC";
         }           
@@ -136,7 +136,7 @@ class SpaceModel extends \MainModel
             $display = "AND p.post_is_delete = 0 $tl";
         } 
         
-        $sort = "ORDER BY p.post_answers_num DESC";
+        $sort = "ORDER BY p.post_answers_count DESC";
         if ($type == 'feed') { 
             $sort = "ORDER BY p.post_top DESC, p.post_date DESC";
         }          

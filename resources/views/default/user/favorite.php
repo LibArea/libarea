@@ -29,10 +29,10 @@
                                         <a class="date" href="/s/<?= $fav['space_slug']; ?>" title="<?= $fav['space_name']; ?>">
                                             <?= $fav['space_name']; ?>
                                         </a> 
-                                        <?php if($fav['post_answers_num'] !=0) { ?> 
+                                        <?php if($fav['post_answers_count'] !=0) { ?> 
                                             <span class="indent"></span>
                                             <a class="date" href="/post/<?= $fav['post_id']; ?>/<?= $fav['post_slug']; ?>">    
-                                                <i class="icon bubbles"></i>  <?= $fav['post_answers_num'] ?> 
+                                                <i class="icon bubbles"></i>  <?= $fav['post_answers_count'] ?> 
                                             </a>     
                                         <?php } ?>
                                         <?php if($uid['id'] > 0) { ?>

@@ -151,14 +151,14 @@
                                 <?php } ?> 
                               <?php } ?> 
                           
-                              <?php if($post['post_answers_num'] !=0) { ?> 
+                              <?php if($post['post_answers_count'] !=0) { ?> 
                                 <a class="right" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
                                   <?php if($post['post_type'] ==0) { ?>
                                      <i class="icon bubbles"></i> 
-                                     <?= $post['post_answers_num'] + $post['post_comments_num']; ?> 
+                                     <?= $post['post_answers_count'] + $post['post_comments_count']; ?> 
                                   <?php } else { ?>    
                                      <i class="icon bubbles"></i> 
-                                     <?= $post['post_answers_num']; ?>  <?= $post['lang_num_answers']; ?>   
+                                     <?= $post['post_answers_count']; ?>  <?= $post['lang_num_answers']; ?>   
                                   <?php } ?>
                                 </a>
                               <?php } ?> 

@@ -42,7 +42,7 @@ class LinkController extends \MainController
             $text = explode("\n", $row['post_content']);
             $row['post_content_preview']    = Content::text($text[0], 'line');
             $row['post_date']               = lang_date($row['post_date']);
-            $row['lang_num_answers']        = word_form($row['post_answers_num'], lang('Answer'), lang('Answers-m'), lang('Answers'));
+            $row['lang_num_answers']        = word_form($row['post_answers_count'], lang('Answer'), lang('Answers-m'), lang('Answers'));
             $result[$ind]                   = $row;
          
         }

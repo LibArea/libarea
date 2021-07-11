@@ -193,9 +193,9 @@
                             <?= $onepost['space_name']; ?>
                         </a> 
                         
-                        <?php if($onepost['post_answers_num'] !=0) { ?> 
+                        <?php if($onepost['post_answers_count'] !=0) { ?> 
                             <a class="date right" href="/post/<?= $onepost['post_id']; ?>/<?= $onepost['post_slug']; ?>">
-                                <i class="icon bubbles"></i> <?= $onepost['post_answers_num']; ?>  
+                                <i class="icon bubbles"></i> <?= $onepost['post_answers_count']; ?>  
                             </a>
                         <?php } ?>
                     </div>

@@ -185,7 +185,7 @@
                         
                         <span class="right">
                             <i class="icon bubbles"></i>
-                            <?= $post['post_answers_num'] + $post['post_comments_num'] ?>
+                            <?= $post['post_answers_count'] + $post['post_comments_count'] ?>
                         </span>
                         
                     </div>
@@ -282,8 +282,8 @@
                                 <a class="edit-bl"  href="/post/<?= $rec_post['post_id']; ?>/<?= $rec_post['post_slug']; ?>">
                                     <?= $rec_post['post_title']; ?>  
                                 </a>
-                                <?php if($rec_post['post_answers_num'] !=0) { ?>
-                                    <span class="n-comm">+<?= $rec_post['post_answers_num'] ?></span>
+                                <?php if($rec_post['post_answers_count'] !=0) { ?>
+                                    <span class="n-comm">+<?= $rec_post['post_answers_count'] ?></span>
                                 <?php } ?> 
                             </div>
                        </div>

@@ -28,13 +28,6 @@ class PostModel extends \MainModel
         return $query->getSelectOne();
     }   
     
-    // Просмотры  
-    public static function postHits($post_id)
-    {
-        $sql = "UPDATE posts SET post_hits_count = (post_hits_count + 1) WHERE post_id = :post_id";
-        DB::run($sql,['post_id' => $post_id]); 
-    }   
-    
     // Получаем пост по id
     public static function postId($id) 
     {
@@ -75,26 +68,12 @@ class PostModel extends \MainModel
         return $query->getSelect();
     } 
     
-    // Пересчитываем количество комментариев в посте
-    public static function getNumComments($post_id) 
+    // Пересчитываем количество
+    // $type (comments / answers / hits)
+    public static function updateCount($post_id, $type) 
     {
-        $post = XD::select('*')->from(['posts'])->where(['post_id'], '=', $post_id)->getSelectOne();
-        $post_comments_num = $post['post_comments_num']; // получаем количество ответов
-        $new_num = $post_comments_num + 1;           // плюсуем один
-        
-        XD::update(['posts'])->set(['post_comments_num'], '=', $new_num)->where(['post_id'], '=', $post_id)->run();
-     
-        return true;
-    }
-    
-    // Пересчитываем количество ответов в посте
-    public static function getNumAnswers($post_id) 
-    {
-        $post = XD::select('*')->from(['posts'])->where(['post_id'], '=', $post_id)->getSelectOne();
-        $post_answers_num = $post['post_answers_num']; // получаем количество ответов
-        $new_num = $post_answers_num + 1;           // плюсуем один
-        
-        XD::update(['posts'])->set(['post_answers_num'], '=', $new_num)->where(['post_id'], '=', $post_id)->run();
+        $sql = "UPDATE posts SET post_". $type ."_count = (post_". $type ."_count + 1) WHERE post_id = :post_id";
+        DB::run($sql,['post_id' => $post_id]); 
      
         return true;
     }

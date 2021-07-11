@@ -49,9 +49,9 @@
                                             </div>
                                         <?php } ?> 
                                     <?php } ?> 
-                                    <?php if($post['post_answers_num'] !=0) { ?>
+                                    <?php if($post['post_answers_count'] !=0) { ?>
                                         <span class="right">
-                                            <i class="icon bubbles"></i> <?= $post['post_answers_num'] ?>
+                                            <i class="icon bubbles"></i> <?= $post['post_answers_count'] ?>
                                         </span>
                                     <?php } ?>
                                 </div>  
