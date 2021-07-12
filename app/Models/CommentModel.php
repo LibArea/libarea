@@ -148,7 +148,7 @@ class CommentModel extends \MainModel
     public static function getCommentSpeed($uid)
     {
         $sql = "SELECT comment_id, comment_user_id, comment_date
-                fROM comments 
+                FROM comments 
                 WHERE comment_user_id = ".$uid."
                 AND comment_date >= DATE_SUB(NOW(), INTERVAL 1 DAY)";
                 
@@ -156,14 +156,38 @@ class CommentModel extends \MainModel
     }
     
     // Удаленные
-    public static function getCommentsDeleted() 
+    public static function getCommentsDeleted($page, $limit) 
     {
-        $q = XD::select('*')->from(['comments']);
-        $query = $q->leftJoin(['users'])->on(['id'], '=', ['comment_user_id'])
-                ->leftJoin(['posts'])->on(['comment_post_id'], '=', ['post_id'])
-                ->where(['comment_del'], '=', 1)->orderBy(['comment_id'])->desc();
-        
-        return  $query->getSelect();
+        $start  = ($page-1) * $limit;
+        $sql = "SELECT 
+                    c.comment_id, 
+                    c.comment_user_id, 
+                    c.comment_date,
+                    c.comment_content,
+                    c.comment_votes,
+                    c.comment_del,
+                    u.id,
+                    u.login,
+                    u.avatar,
+                    p.post_id,
+                    p.post_title,
+                    p.post_slug
+                    
+                        FROM comments AS c
+                        LEFT JOIN users AS u ON u.id = c.comment_user_id
+                        LEFT JOIN posts AS p ON p.post_id = c.comment_post_id
+                        WHERE c.comment_del = 1
+                        ORDER BY c.comment_id DESC LIMIT $start, $limit";
+                
+        return  DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
+    }
+    
+    // Количество
+    public static function getCommentsDeletedCount()
+    {
+        $sql = "SELECT comment_id, comment_del FROM comments WHERE comment_del = 1";
+
+        return DB::run($sql)->rowCount(); 
     }
     
     // Восстановление

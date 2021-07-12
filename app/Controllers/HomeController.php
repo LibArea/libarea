@@ -15,8 +15,8 @@ class HomeController extends \MainController
         $uid    = Base::getUid();
         $page   = \Request::getInt('page'); 
         $page   = $page == 0 ? 1 : $page;
+        
         $limit  = 25;
-
         $space_user         = HomeModel::getSubscriptionSpaces($uid['id']);
         $latest_answers     = HomeModel::latestAnswers($uid);
         

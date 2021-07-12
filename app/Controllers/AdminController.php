@@ -25,8 +25,8 @@ class AdminController extends \MainController
         $page   = $page == 0 ? 1 : $page;
 
         $limit = 55;
-        $pagesCount = AdminModel::getUsersAllCount($sheet);
-        $user_all   = AdminModel::getUsersAll($page, $limit, $sheet);
+        $pagesCount = AdminModel::getUsersListForAdminCount($sheet);
+        $user_all   = AdminModel::getUsersListForAdmin($page, $limit, $sheet);
 
         $result = Array();
         foreach ($user_all as $ind => $row) {
@@ -92,10 +92,16 @@ class AdminController extends \MainController
     public function comments()
     {
         $uid    = self::isAdmin();
-        $comm   = CommentModel::getCommentsDeleted();
+        
+        $page   = \Request::getInt('page'); 
+        $page   = $page == 0 ? 1 : $page;
+
+        $limit = 100;
+        $pagesCount = CommentModel::getCommentsDeletedCount();
+        $comments   = CommentModel::getCommentsDeleted($page, $limit);
 
         $result = Array();
-        foreach ($comm  as $ind => $row) {
+        foreach ($comments  as $ind => $row) {
             $row['content'] = Content::text($row['comment_content'], 'text');
             $row['date']    = lang_date($row['comment_date']);
             $result[$ind]   = $row;
@@ -104,6 +110,8 @@ class AdminController extends \MainController
         $data = [
             'meta_title'    => lang('Deleted comments'),
             'sheet'         => 'comments',
+            'pagesCount'    => ceil($pagesCount / $limit),
+            'pNum'          => $page,
         ]; 
 
         Request::getResources()->addBottomStyles('/assets/css/admin.css');
@@ -116,7 +124,13 @@ class AdminController extends \MainController
     public function answers()
     {
         $uid        = self::isAdmin();
-        $answers    = AnswerModel::getAnswersDell();
+        
+        $page   = \Request::getInt('page'); 
+        $page   = $page == 0 ? 1 : $page;
+
+        $limit = 100;
+        $pagesCount = AnswerModel::getAnswersDeletedCount();
+        $answers    = AnswerModel::getAnswersDeleted($page, $limit);
 
         $result = Array();
         foreach ($answers  as $ind => $row) {
@@ -128,6 +142,8 @@ class AdminController extends \MainController
         $data = [
             'meta_title'    => lang('Deleted answers'),
             'sheet'         => 'answers',
+            'pagesCount'    => ceil($pagesCount / $limit),
+            'pNum'          => $page,
         ]; 
 
         Request::getResources()->addBottomStyles('/assets/css/admin.css');

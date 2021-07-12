@@ -180,14 +180,38 @@ class AnswerModel extends \MainModel
     }
     
     // Удаленные ответы
-    public static function getAnswersDell() 
+    public static function getAnswersDeleted($page, $limit) 
     {
-        $q = XD::select('*')->from(['answers']);
-        $query = $q->leftJoin(['users'])->on(['id'], '=', ['answer_user_id'])
-                ->leftJoin(['posts'])->on(['answer_post_id'], '=', ['post_id'])
-                ->where(['answer_del'], '=', 1)->orderBy(['answer_id'])->desc();
-        
-        return  $query->getSelect();
+        $start  = ($page-1) * $limit;
+        $sql = "SELECT 
+                    a.answer_id, 
+                    a.answer_user_id, 
+                    a.answer_date,
+                    a.answer_content,
+                    a.answer_votes,
+                    a.answer_del,
+                    u.id,
+                    u.login,
+                    u.avatar,
+                    p.post_id,
+                    p.post_title,
+                    p.post_slug
+                    
+                        FROM answers AS a
+                        LEFT JOIN users AS u ON u.id = a.answer_user_id
+                        LEFT JOIN posts AS p ON p.post_id = a.answer_post_id
+                        WHERE a.answer_del = 1
+                        ORDER BY a.answer_id DESC LIMIT $start, $limit";
+                
+        return  DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    // Количество
+    public static function getAnswersDeletedCount()
+    {
+        $sql = "SELECT answer_id, answer_del FROM answers WHERE answer_del = 1";
+
+        return DB::run($sql)->rowCount(); 
     }
     
     // Восстановление

@@ -9,7 +9,7 @@ use PDO;
 class AdminModel extends \MainModel
 {
     // Страница участников
-    public static function getUsersAll($page, $limit, $sheet)
+    public static function getUsersListForAdmin($page, $limit, $sheet)
     {
         $string = "WHERE ban_list > 0";
         if ($sheet == 'all') {
@@ -23,7 +23,7 @@ class AdminModel extends \MainModel
     }
     
     // Количество участинков
-    public static function getUsersAllCount($sheet)
+    public static function getUsersListForAdminCount($sheet)
     {
         $string = "WHERE ban_list > 0";
         if ($sheet == 'all') {

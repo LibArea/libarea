@@ -43,6 +43,7 @@
 
             </div>
         </div>
+        <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/admin/answers'); ?>
     </main>
     <?php include TEMPLATE_DIR . '/_block/admin-menu.php'; ?>
 </div>

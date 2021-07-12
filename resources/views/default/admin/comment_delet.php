@@ -42,6 +42,7 @@
                 <?php } ?>
             </div>
         </div>
+        <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/admin/comments'); ?>
     </main>
     <?php include TEMPLATE_DIR . '/_block/admin-menu.php'; ?>
 </div>

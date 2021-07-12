@@ -15,19 +15,21 @@ class UserController extends \MainController
     // Все пользователи
     function index()
     {
-        $pg     = \Request::getInt('page'); 
-        $page   = (!$pg) ? 1 : $pg;
         $uid    = Base::getUid();
+        $page   = \Request::getInt('page'); 
+        $page   = $page == 0 ? 1 : $page;
         
-        $quantity_per_page = 40;
+        $limit = 40;
         $usersCount = UserModel::getUsersAllCount(); 
-        $users      = UserModel::getUsersAll($uid['id'], $page, $quantity_per_page);
+        $users      = UserModel::getUsersAll($page, $limit, $uid['id']);
+        
+        Base::PageError404($users);
         
         $data = [
             'h1'            => lang('Users'),
             'canonical'     => Config::get(Config::PARAM_URL) . '/users',
             'sheet'         => 'users', 
-            'pagesCount'    => ceil($usersCount / $quantity_per_page),
+            'pagesCount'    => ceil($usersCount / $limit),
             'pNum'          => $page,
             'meta_title'    => lang('Users') .' | '. Config::get(Config::PARAM_NAME),
             'meta_desc'     => lang('desc-user-all') .' '. Config::get(Config::PARAM_HOME_TITLE),   

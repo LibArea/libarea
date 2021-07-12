@@ -11,10 +11,9 @@ use PDO;
 class UserModel extends \MainModel
 {
     // Страница участников
-    public static function getUsersAll($user_id, $page, $quantity_per_page)
+    public static function getUsersAll($page, $limit, $user_id)
     {  
-        $offset = ($page-1) * $quantity_per_page; 
-        
+        $start  = ($page-1) * $limit;
         $sql = "SELECT  
                     id,
                     login,
@@ -24,7 +23,7 @@ class UserModel extends \MainModel
                     
                         FROM users 
                         WHERE is_deleted != 1 and ban_list != 1
-                        ORDER BY id = :user_id DESC, trust_level DESC LIMIT $quantity_per_page OFFSET $offset"; 
+                        ORDER BY id = :user_id DESC, trust_level DESC LIMIT $start, $limit"; 
         
         return DB::run($sql, ['user_id' =>$user_id])->fetchAll(PDO::FETCH_ASSOC);
     }

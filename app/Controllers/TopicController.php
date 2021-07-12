@@ -23,6 +23,8 @@ class TopicController extends \MainController
         $pagesCount = TopicModel::getTopicsAllCount();  
         $topics     = TopicModel::getTopicsAll($page, $limit);
 
+        Base::PageError404($topics);
+
         $num = ' | ';
         if ($page > 1) { 
             $num = sprintf(lang('page-number'), $page);

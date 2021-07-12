@@ -21,6 +21,8 @@ class SpaceController extends \MainController
         $pagesCount = SpaceModel::getSpacesAllCount(); 
         $spaces     = SpaceModel::getSpacesAll($page, $limit, $uid['id'], 'all');
 
+        Base::PageError404($spaces);
+
         // Введем ограничение на количество создаваемых пространств
         $sp                 = SpaceModel::getUserCreatedSpaces($uid['id']);
         $count_space        = count($sp);

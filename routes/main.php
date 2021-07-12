@@ -91,7 +91,10 @@ Route::before('Authorization@noAuth')->getGroup();
     Route::get('/admin/logip/{ip}')->controller('AdminController@logsIp')->where(['ip' => '[0-9].+']);
     
     Route::get('/admin/comments')->controller('AdminController@comments');
-    Route::get('/admin/answers')->controller('AdminController@answers'); 
+    Route::get('/admin/comments/page/{page?}')->controller('AdminController@comments')->where(['page' => '[0-9]+']);
+    Route::get('/admin/answers')->controller('AdminController@answers');
+    Route::get('/admin/answers/page/{page?}')->controller('AdminController@answers')->where(['page' => '[0-9]+']);
+    
     Route::get('/admin/invitations')->controller('AdminController@invitations');
     
     Route::get('/admin/domain/{id}/edit')->controller('AdminController@editDomain')->where(['id' => '[0-9]+']);
