@@ -38,7 +38,7 @@ class SpaceController extends \MainController
         
         $data = [
             'h1'            => lang('All space'),
-            'canonical'     => Config::get(Config::PARAM_URL) . '/space',
+            'canonical'     => Config::get(Config::PARAM_URL) . '/spaces',
             'sheet'         => 'spaces', 
             'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
@@ -75,7 +75,7 @@ class SpaceController extends \MainController
 
         $data = [
             'h1'            => lang('I read space'),
-            'canonical'     => Config::get(Config::PARAM_URL) . '/space', 
+            'canonical'     => Config::get(Config::PARAM_URL) . '/space/my', 
             'sheet'         => 'my-space', 
             'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,

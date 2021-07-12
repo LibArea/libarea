@@ -55,7 +55,7 @@ class LinkController extends \MainController
         
         $data = [
             'h1'            => lang('Domain') . ': ' . $domain,  
-            'canonical'     => '/' . $domain,
+            'canonical'     => Config::get(Config::PARAM_URL) . '/domain/' . $domain,
             'sheet'         => 'domain',
             'meta_title'    => $meta_title,
             'meta_desc'     => $meta_desc, 

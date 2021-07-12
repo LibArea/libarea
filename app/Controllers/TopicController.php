@@ -143,7 +143,7 @@ class TopicController extends \MainController
         $meta_title = $topic['topic_seo_title'] . ' — ' .  lang('Info');
         $data = [
             'h1'            => $topic['topic_seo_title'],
-            'canonical'     => Config::get(Config::PARAM_URL) . '/topic',
+            'canonical'     => Config::get(Config::PARAM_URL) . '/topic/' . $topic['topic_slug'] . '/info',
             'sheet'         => 'info', 
             'meta_title'    => $meta_title .' | '. Config::get(Config::PARAM_NAME),
             'meta_desc'     => $topic['topic_description'] .'. '. lang('Info') .' '. Config::get(Config::PARAM_HOME_TITLE),            
