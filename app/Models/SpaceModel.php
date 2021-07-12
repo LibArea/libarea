@@ -8,13 +8,14 @@ use PDO;
 class SpaceModel extends \MainModel
 {
     // Пространства все / подписан
-    public static function getSpaces($user_id, $sort) 
+    public static function getSpacesAll($page, $limit, $user_id, $sort) 
     {
         $signet = "";
         if ($sort == 'subscription') { 
             $signet = "AND f.signed_user_id = :user_id"; 
         } 
         
+        $start  = ($page-1) * $limit;
         $sql = "SELECT 
                 s.space_id, 
                 s.space_name, 
@@ -34,9 +35,18 @@ class SpaceModel extends \MainModel
                     FROM space s 
                     LEFT JOIN users as u ON u.id = s.space_user_id
                     LEFT JOIN space_signed as f ON f.signed_space_id = s.space_id AND f.signed_user_id = :user_id 
-                    WHERE s.space_is_delete != 1 $signet";
+                    WHERE s.space_is_delete != 1 $signet
+                    ORDER BY s.space_id DESC LIMIT $start, $limit";
 
        return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);  
+    }
+
+    // Количество
+    public static function getSpacesAllCount()
+    {
+        $sql = "SELECT space_id FROM space WHERE space_is_delete != 1";
+
+        return DB::run($sql)->rowCount(); 
     }
 
     // Для форм добавления и изменения поста
@@ -50,33 +60,76 @@ class SpaceModel extends \MainModel
         return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC); 
     } 
 
-   // По id
-    public static function getSpaceId($space_id)
+    // Информация по пространству (id, slug)
+    public static function getSpace($params, $name)
     {
-        return XD::select('*')->from(['space'])->where(['space_id'], '=', $space_id)->getSelectOne();
+        $sort = "space_id = :params";
+        if ($name == 'slug') {
+            $sort = "space_slug = :params";
+        } 
+        
+        $sql = "SELECT 
+                    s.space_id,
+                    s.space_name,
+                    s.space_slug,
+                    s.space_description,
+                    s.space_img,
+                    s.space_cover_art,
+                    s.space_text,
+                    s.space_short_text,
+                    s.space_date,
+                    s.space_color,
+                    s.space_category_id,
+                    s.space_user_id,
+                    s.space_type,
+                    s.space_permit_users,
+                    s.space_feed,
+                    s.space_tl,
+                    s.space_is_delete,
+                    
+                    u.id,
+                    u.login,
+                    u.avatar
+        
+                FROM space AS s
+                LEFT JOIN users AS u ON s.space_user_id = u.id
+                WHERE $sort";
+
+        return DB::run($sql, ['params' => $params])->fetch(PDO::FETCH_ASSOC); 
     }
 
-   // Пространства участника
-    public static function getSpaceUserId($user_id)
+    // Пространства, которые создал участник
+    public static function getUserCreatedSpaces($user_id)
     {
-        return XD::select('*')->from(['space'])->where(['space_user_id'], '=', $user_id)->getSelect();
+        $sql = "SELECT 
+                space_id, 
+                space_slug, 
+                space_name,
+                space_img,
+                space_user_id,
+                space_is_delete
+ 
+                    FROM space  
+                    WHERE space_user_id = :user_id AND space_is_delete != 1";
+
+       return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);  
     }
 
     // Количество читающих
     public static function numSpaceSubscribers($space_id)
     {
-        $result = XD::select('*')->from(['space_signed'])->where(['signed_space_id'], '=', $space_id)->getSelect();
-       
-        return count($result);
+        $sql = "SELECT signed_id FROM space_signed WHERE signed_space_id = $space_id";
+
+        return DB::run($sql)->rowCount(); 
     } 
 
     // Списки постов по пространству
-    public static function getPosts($space_id, $user_id, $user_tl, $type, $page)
+    public static function getPosts($space_id, $uid, $type, $page, $quantity_per_page)
     {
         $display = ''; 
-        if ($user_tl != 5) {  
-            $tl = "AND p.post_tl <= $user_tl";
-            if ($user_id == 0) { 
+        if ($uid['trust_level'] != 5) {  
+            $tl = "AND p.post_tl <= " . $uid['trust_level'];
+            if ($uid['id'] == 0) { 
                 $tl = "AND p.post_tl = 0";
             } 
             $display = "AND p.post_is_delete = 0 $tl";
@@ -87,7 +140,7 @@ class SpaceModel extends \MainModel
             $sort = "ORDER BY p.post_top DESC, p.post_date DESC";
         }           
             
-        $offset = ($page-1) * 25;   
+        $offset = ($page-1) * $quantity_per_page;   
 
         $sql = "SELECT p.*, 
                     rel.*,
@@ -113,23 +166,23 @@ class SpaceModel extends \MainModel
                     ON rel.relation_post_id = p.post_id 
             
                 LEFT JOIN users AS u ON u.id = p.post_user_id 
-                LEFT JOIN votes_post AS v ON v.votes_post_item_id = p.post_id AND v.votes_post_user_id = $user_id
+                LEFT JOIN votes_post AS v ON v.votes_post_item_id = p.post_id AND v.votes_post_user_id = ". $uid['id'] ." 
                 WHERE p.post_space_id = $space_id and p.post_draft = 0
                 
                 $display
-                $sort LIMIT 25 OFFSET ".$offset." ";
+                $sort LIMIT $quantity_per_page OFFSET ".$offset." ";
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
     
     // Количество постов
-    public static function getCount($space_id, $user_id, $user_tl, $type, $page)
+    public static function getPostsCount($space_id, $uid, $type, $page)
     {
         $display = ''; 
-        if ($user_tl != 5) {  
+        if ($uid['trust_level'] != 5) {  
             
-            $tl = "AND p.post_tl <= $user_tl";
-            if ($user_id == 0) { 
+            $tl = "AND p.post_tl <= " . $uid['trust_level'];
+            if ($uid['id'] == 0) { 
                 $tl = "AND p.post_tl = 0";
             } 
             
@@ -145,19 +198,10 @@ class SpaceModel extends \MainModel
                 u.id, u.login, u.avatar,
                 FROM posts AS p
                 LEFT JOIN users AS u ON id = post_user_id 
-                LEFT JOIN votes_post AS v ON v.votes_post_item_id = p.post_id AND v.votes_post_user_id = $user_id
+                LEFT JOIN votes_post AS v ON v.votes_post_item_id = p.post_id AND v.votes_post_user_id = ". $uid['id'] ."
                 WHERE p.post_space_id = $space_id and p.post_draft = 0 $display $sort";
 
-        $quantity = DB::run($sql)->rowCount(); 
-       
-        return ceil($quantity / 25);
-    }
-    
-    // Информация пространства по slug
-    public static function getSpaceSlug($slug)
-    {
-        $q = XD::select('*')->from(['space'])->leftJoin(['users'])->on(['space_user_id'], '=', ['id']);
-        return $q->where(['space_slug'], '=', $slug)->getSelectOne();
+        return DB::run($sql)->rowCount(); 
     }
     
     // Подписан пользователь на пространство или нет

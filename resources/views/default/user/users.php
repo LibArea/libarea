@@ -28,6 +28,7 @@
                 </div>
             </div>
         </div>
+         <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/users'); ?>
     </main>
     <aside>
         <?php if ($uid['id'] == 0) { ?>

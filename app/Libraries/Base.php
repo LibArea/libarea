@@ -16,10 +16,10 @@ class Base
     {
         $account = Request::getSession('account') ?? [];
         $uid = [];
-
+ 
         if (!empty($account['user_id'])) {
 
-            $user = UserModel::getUserId($account['user_id']);
+            $user = UserModel::getUser($account['user_id'], 'id');
  
             if ($user['ban_list'] == 1) {
                 if (!isset($_SESSION)) { session_start(); } 
@@ -34,11 +34,12 @@ class Base
             $uid['notif']       = NotificationsModel::usersNotification($user['id']); 
             $uid['avatar']      = $user['avatar'];
             $uid['hits_count']  = $user['hits_count'];
+            $uid['invitation_available'] = $user['invitation_available'];
              
             Request::getResources()->addBottomScript('/assets/js/app.js');
             
         } else {
-
+ 
             self::checkCookie();
             $uid['id']          = 0;
             $uid['trust_level'] = null;
@@ -87,7 +88,7 @@ class Base
         }
  
         // Получение данных по id
-        $user = UserModel::getUserId($token['auth_user_id']);
+        $user = UserModel::getUser($token['auth_user_id'], 'id');
 
         // Нет пользователя
         if (empty($user)) {
@@ -119,7 +120,6 @@ class Base
         self::rememberMeReset($token['auth_user_id'], $selector);
         redirect('/');
         return true;
-       // return;
     }
  
     public static function setUserSession($user)
@@ -143,14 +143,14 @@ class Base
  
     // Каждый раз, когда пользователь входит в систему, используя свой файл cookie «запомнить меня»
     // Сбросить валидатор и обновить БД
-    public static function rememberMeReset($uid, $selector)
+    public static function rememberMeReset($user_id, $selector)
     {
         // Получаем по селектору       
         $existingToken = AuthModel::getAuthTokenBySelector($selector);
 
         if (empty($existingToken)) {
 
-            return self::rememberMe($uid);
+            return self::rememberMe($user_id);
         }
 
         $rememberMeExpire = 30;

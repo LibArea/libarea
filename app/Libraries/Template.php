@@ -240,7 +240,7 @@ function pagination($pNum, $pagesCount, $sheet, $other)
     
     if ($pNum != 1) {  
         if (($pNum - 1) == 1) { 
-             $html .= '<a class="link" href="'. $page .'/"> << '.lang('Page').' '. ($pNum - 1) .'</a>';
+             $html .= '<a class="link" href="'. $page .'"> << '.lang('Page').' '. ($pNum - 1) .'</a>';
         } else {
              $html .= '<a class="link" href="'. $page .'/page/'.($pNum - 1).'"> << '. lang('Page') .' '. ($pNum - 1) .'</a>';
         }

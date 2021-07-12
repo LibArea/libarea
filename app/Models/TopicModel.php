@@ -7,53 +7,80 @@ use PDO;
 class TopicModel extends \MainModel
 {
     // Все темы
-    public static function getTopicAll($page)
+    public static function getTopicsAll($page, $limit)
     {
-        $offset = ($page-1) * 25; 
-        $sql = "SELECT * FROM topic ORDER BY topic_count DESC LIMIT 25 OFFSET ".$offset." ";
+        $start  = ($page-1) * $limit; 
+        $sql    = "SELECT 
+                    topic_id,
+                    topic_title,
+                    topic_description,
+                    topic_slug,
+                    topic_img,
+                    topic_parent_id,
+                    topic_is_parent,
+                    topic_count
+        
+                FROM topic ORDER BY topic_count DESC LIMIT $start, $limit";
                         
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
+
+    // Количество
+    public static function getTopicsAllCount()
+    {
+        $sql = "SELECT topic_id FROM topic";
+
+        return DB::run($sql)->rowCount(); 
+    }
     
+    // Информация по теме (id, slug)
+    public static function getTopic($params, $name)
+    {
+        $sort = "topic_id = :params";
+        if ($name == 'slug') {
+            $sort = "topic_slug = :params";
+        } 
+        
+        $sql = "SELECT 
+                    topic_id,
+                    topic_title,
+                    topic_description,
+                    topic_info,
+                    topic_slug,
+                    topic_img,
+                    topic_add_date,
+                    topic_seo_title,
+                    topic_merged_id,
+                    topic_parent_id,
+                    topic_is_parent,
+                    topic_tl,
+                    topic_related,
+                    topic_post_related,
+                    topic_space_related,
+                    topic_focus_count,
+                    topic_count
+        
+                FROM topic WHERE $sort";
+
+        return DB::run($sql, ['params' => $params])->fetch(PDO::FETCH_ASSOC); 
+    }
+
     // Новые
     public static function getTopicNew()
     {
-        $sql = "SELECT * FROM topic ORDER BY topic_id DESC LIMIT 5";
+        $sql = "SELECT 
+                    topic_id,
+                    topic_title,
+                    topic_slug
+                
+                FROM topic ORDER BY topic_id DESC LIMIT 10";
                         
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
     
-    // Количество
-    public static function getTopicAllCount()
-    {
-        $sql = "SELECT * FROM topic";
-
-        $quantity = DB::run($sql)->rowCount(); 
-       
-        return ceil($quantity / 25);
-    }
-    
-    // Информация по url
-    public static function getTopicSlug($slug)
-    {
-        $sql = "SELECT * FROM topic WHERE topic_slug = :slug";
-        
-        return DB::run($sql, ['slug' => $slug])->fetch(PDO::FETCH_ASSOC); 
-    }
-    
-    // По id
-    public static function getTopicId($id)
-    {
-        $sql = "SELECT * FROM topic WHERE topic_id = :id";
-        
-        return DB::run($sql, ['id' => $id])->fetch(PDO::FETCH_ASSOC); 
-    }
- 
     // Информация список постов
-    public static function getPostsListByTopic($topic_id, $uid, $page)
+    public static function getPostsListByTopic($page, $limit, $topic_id, $uid)
     {
-        $offset = ($page-1) * 25; 
-        
         // Условия: удаленный пост, запрещенный к показу в ленте
         // И ограниченный по TL
         if ($uid['trust_level'] != 5) {  
@@ -67,6 +94,7 @@ class TopicModel extends \MainModel
             $display = ''; 
         }
         
+        $start  = ($page-1) * $limit; 
         $sql = "SELECT p.*, t.*,
             r.relation_post_id, r.relation_topic_id,
             u.id, u.login, u.avatar,
@@ -79,7 +107,7 @@ class TopicModel extends \MainModel
             INNER JOIN users AS u ON u.id = p.post_user_id
             LEFT JOIN votes_post AS v ON v.votes_post_item_id = p.post_id AND v.votes_post_user_id = ".$uid['id']."
             WHERE t.topic_id  = $topic_id
-            $display ORDER BY p.post_top DESC, p.post_date DESC LIMIT 25 OFFSET ".$offset." ";
+            $display ORDER BY p.post_top DESC, p.post_date DESC LIMIT $start, $limit ";
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
@@ -100,28 +128,30 @@ class TopicModel extends \MainModel
             $display = ''; 
         }
         
-        $sql = "SELECT p.*, t.*, r.*
+        $sql = "SELECT p.*, t.*, 
+            r.relation_post_id, r.relation_topic_id,
             FROM topic AS t
             INNER JOIN topic_post_relation AS r ON r.relation_topic_id = t.topic_id
             INNER JOIN posts AS p ON p.post_id = r.relation_post_id
             WHERE t.topic_id  = $topic_id
             $display ";
 
-        $quantity = DB::run($sql)->rowCount(); 
-       
-        return ceil($quantity / 25);   
+        return DB::run($sql)->rowCount(); 
     }
 
     // Select topics
     public static function getSearchTopics($query, $main)
     {
+        $and = '';
         if ($main == 'main') {
-            $and = ' t.topic_is_parent !=0 AND';
-        } else {
-            $and = '';
-        }
+            $and = 'topic_is_parent !=0 AND';
+        } 
         
-        $sql = "SELECT t.* FROM topic AS t WHERE $and t.topic_title LIKE :topic_title ORDER BY t.topic_id LIMIT 8";
+        $sql = "SELECT 
+                topic_id,
+                topic_title
+                    FROM topic 
+                    WHERE $and topic_title LIKE :topic_title ORDER BY topic_id LIMIT 8";
         
         $result = DB::run($sql, ['topic_title' => "%".$query."%"]);
         $topicList  = $result->fetchall(PDO::FETCH_ASSOC);

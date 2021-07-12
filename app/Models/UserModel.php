@@ -11,48 +11,78 @@ use PDO;
 class UserModel extends \MainModel
 {
     // Страница участников
-    public static function getUsersAll($user_id)
-    {
-        $q = XD::select(['id', 'login', 'name', 'avatar', 'avatar', 'is_deleted'])
-            ->from(['users'])
-            ->where(['is_deleted'], '!=', 1)
-            ->and(['ban_list'], '!=', 1);
-                
-            if ($user_id) {    
-                $query = $q->orderBy(['id'], '=', $user_id)->desc(',', ['trust_level'])->desc();
-            } else {    
-                $query = $q->orderBy(['trust_level'])->desc();
-            }
-            
-        return $query->getSelect();
+    public static function getUsersAll($user_id, $page, $quantity_per_page)
+    {  
+        $offset = ($page-1) * $quantity_per_page; 
+        
+        $sql = "SELECT  
+                    id,
+                    login,
+                    name, 
+                    avatar,
+                    is_deleted
+                    
+                        FROM users 
+                        WHERE is_deleted != 1 and ban_list != 1
+                        ORDER BY id = :user_id DESC, trust_level DESC LIMIT $quantity_per_page OFFSET $offset"; 
+        
+        return DB::run($sql, ['user_id' =>$user_id])->fetchAll(PDO::FETCH_ASSOC);
     }
     
-    // Количество участинков
-    public static function usersCount()
+    // Количество
+    public static function getUsersAllCount()
     {
-        $query = XD::select('*')->from(['users']);
-        $users =  count($query->getSelect());
-        return ceil($users / 25);
+        $sql = "SELECT 
+                    id, 
+                    is_deleted
+                    
+                    FROM users
+                    WHERE is_deleted = 0";
+
+        return  DB::run($sql)->rowCount(); 
     }
 
-    // Получение информации по логину
-    public static function getUserLogin($login)
+    // Информация по участнику (id, slug)
+    public static function getUser($params, $name)
     {
-        $query = XD::select(['id', 'login', 'name', 'email', 'avatar', 'trust_level', 'cover_art', 'color',  'invitation_available', 'about', 'website', 'location', 'public_email', 'skype', 'twitter', 'telegram', 'vk', 'created_at', 'my_post', 'ban_list', 'is_deleted'])
-                ->from(['users'])
-                ->where(['login'], '=', $login);
-
-        return $query->getSelectOne();
+        $sort = "id = :params";
+        if ($name == 'slug') {
+            $sort = "login = :params";
+        } 
+        
+        $sql = "SELECT 
+                    id,
+                    login,
+                    name,
+                    email,
+                    avatar,
+                    trust_level,
+                    cover_art,
+                    color,
+                    invitation_available,
+                    about,
+                    website,
+                    location,
+                    public_email,
+                    skype,
+                    twitter,
+                    telegram,
+                    vk,
+                    created_at,
+                    my_post,
+                    ban_list,
+                    hits_count,
+                    is_deleted 
+        
+                    FROM users WHERE $sort";
+        
+        $result = DB::run($sql, ['params' => $params]);
+        
+        return $result->fetch(PDO::FETCH_ASSOC);     
     }
     
-    // Получение информации по id
-    public static function getUserId($user_id)
-    {
-        return XD::select('*')->from(['users'])->where(['id'], '=', $user_id)->getSelectOne();
-    }
-
     // Select user
-    public static function  getSearchUsers($query)
+    public static function getSearchUsers($query)
     {
         $sql = "SELECT id, login FROM users WHERE login LIKE :login";
         
@@ -84,13 +114,13 @@ class UserModel extends \MainModel
         }
 
         $password    = password_hash($password, PASSWORD_BCRYPT);
-        // установить на 0, если e-mail активация будет запущена
-        // если на 1, то комментируем в методе registerHandler() стр. 170
+
+        // 0 - требуется активация по e-mail
         $activated   = 0;
                 
         XD::insertInto(['users'], '(', ['login'], ',', ['email'], ',', ['password'], ',', ['activated'], ',', ['reg_ip'],',', ['trust_level'],',', ['invitation_id'],  ')')->values( '(', XD::setList([$login, $email, $password, $activated, $reg_ip, $trust_level, $invitation_id]), ')' )->run();
         
-       return  XD::select()->last_insert_id('()')->getSelectValue(); // Вернем последний id для таблицы invitation (active_uid)
+       return  XD::select()->last_insert_id('()')->getSelectValue(); 
     }
     
     // Изменение пароля
@@ -102,7 +132,8 @@ class UserModel extends \MainModel
     // Просмотры  
     public static function userHits($user_id)
     {
-                $sql = "UPDATE users SET hits_count = (hits_count + 1) WHERE id = :user_id";
+        $sql = "UPDATE users SET hits_count = (hits_count + 1) WHERE id = :user_id";
+        
         return  DB::run($sql,['user_id' => $user_id]); 
     }   
 
@@ -162,55 +193,41 @@ class UserModel extends \MainModel
     public static function userInfo($email) 
     {
         $query = XD::select(['id', 'email', 'password', 'login', 'name', 'avatar', 'trust_level', 'ban_list'])
-             ->from(['users'])
-             ->where(['email'], '=', $email);
+                 ->from(['users'])->where(['email'], '=', $email);
 
         return $query->getSelectOne();
     }
     
-    // Количество постов на странице профиля
-    public static function userPostsNum($user_id)
+    // Количество контента участника
+    public static function contentCount($user_id, $type)   
     {
-        $q = XD::select('*')->from(['posts']);
-        $query = $q->leftJoin(['users'])->on(['id'], '=', ['post_user_id'])
-                 ->where(['id'], '=', $user_id)->and(['post_draft'], '=', 0);
-       
-        return count($query->getSelect());
-    } 
-    
-    // Количество ответов на странице профиля
-    public static function userAnswersNum($user_id)
-    {
-        $q = XD::select('*')->from(['answers']);
-        $query = $q->leftJoin(['users'])->on(['id'], '=', ['answer_user_id'])
-                 ->where(['id'], '=', $user_id);
-       
-        return count($query->getSelect());
-    } 
-    
-    // Количество комментариев на странице профиля
-    public static function userCommentsNum($user_id)
-    {
-        $q = XD::select('*')->from(['comments']);
-        $query = $q->leftJoin(['users'])->on(['id'], '=', ['comment_user_id'])
-                 ->where(['id'], '=', $user_id);
-       
-        return count($query->getSelect());
+        if ($type == 'posts') {
+            
+            $sql = "SELECT post_id, post_draft, post_is_delete 
+                    FROM posts WHERE post_user_id = :user_id and post_draft = 0 and post_is_delete = 0";
+            
+        } elseif ($type == 'comments') {
+            $sql = "SELECT comment_id FROM comments WHERE comment_user_id = :user_id and comment_del = 0";
+        } else {
+            $sql = "SELECT answer_id FROM answers WHERE answer_user_id = :user_id and answer_del = 0";
+        }
+
+        return  DB::run($sql, ['user_id' => $user_id])->rowCount(); 
     }
     
     // Редактирование профиля
-    public static function editProfile($login, $name, $color, $about, $website, $location, $public_email, $skype, $twitter, $telegram, $vk)
+    public static function editProfile($data)
     {
-        XD::update(['users'])->set(['name'], '=', $name, ',', ['color'], '=', $color, ',', 
-        ['about'], '=', $about, ',', 
-        ['website'], '=', $website, ',', 
-        ['location'], '=', $location, ',', 
-        ['public_email'], '=', $public_email, ',', 
-        ['skype'], '=', $skype, ',', 
-        ['twitter'], '=', $twitter, ',', 
-        ['telegram'], '=', $telegram, ',', 
-        ['vk'], '=', $vk)->where(['login'], '=', $login)->run();
- 
+        XD::update(['users'])->set(['name'], '=', $data['name'], ',', 
+            ['color'], '=', $data['color'], ',', 
+            ['about'], '=', $data['about'], ',', 
+            ['website'], '=', $data['website'], ',', 
+            ['location'], '=', $data['location'], ',', 
+            ['public_email'], '=', $data['public_email'], ',', 
+            ['skype'], '=', $data['skype'], ',', 
+            ['twitter'], '=', $data['twitter'], ',', 
+            ['telegram'], '=', $data['telegram'], ',', 
+            ['vk'], '=', $data['vk'])->where(['id'], '=', $data['id'])->run();
         return true;
     }
     
@@ -267,15 +284,13 @@ class UserModel extends \MainModel
     }
  
     // Создадим инвайт для участника
-	public static function addInvitation($uid, $invitation_code, $invitation_email, $add_time, $add_ip)
+	public static function addInvitation($user_id, $invitation_code, $invitation_email, $add_time, $add_ip)
 	{
-        $inv        = XD::select('*')->from(['users'])->where(['id'], '=', $uid)->getSelectOne();
-        $num_inv    = $inv['invitation_available']; // получаем количество инвайтов 
-        $num        = $num_inv + 1;          // плюсуем один
+        $sql = "UPDATE users SET invitation_available = (invitation_available + 1) WHERE id = :user_id";
+        
+        DB::run($sql,['user_id' => $user_id]); 
 
-        XD::update(['users'])->set(['invitation_available'], '=', $num)->where(['id'], '=', $uid,)->run();
-
-        return  XD::insertInto(['invitation'], '(', ['uid'], ',', ['invitation_code'], ',', ['invitation_email'], ',', ['add_time'], ',', ['add_ip'], ')')->values( '(', XD::setList([$uid, $invitation_code, $invitation_email, $add_time, $add_ip]), ')' )->run();
+        return  XD::insertInto(['invitation'], '(', ['uid'], ',', ['invitation_code'], ',', ['invitation_email'], ',', ['add_time'], ',', ['add_ip'], ')')->values( '(', XD::setList([$user_id, $invitation_code, $invitation_email, $add_time, $add_ip]), ')' )->run();
 	}
     
     // Проверим на повтор

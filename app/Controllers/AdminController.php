@@ -18,14 +18,15 @@ class AdminController extends \MainController
 {
 	public function index($sheet)
 	{
-        $pg     = \Request::getInt('page'); 
-        $page   = (!$pg) ? 1 : $pg;
- 
         // Доступ только персоналу
         $uid = self::isAdmin();
 
-        $pagesCount = AdminModel::usersCount($page, $sheet);
-        $user_all   = AdminModel::usersAll($page, $sheet);
+        $page   = \Request::getInt('page'); 
+        $page   = $page == 0 ? 1 : $page;
+
+        $limit = 55;
+        $pagesCount = AdminModel::getUsersAllCount($sheet);
+        $user_all   = AdminModel::getUsersAll($page, $limit, $sheet);
 
         $result = Array();
         foreach ($user_all as $ind => $row) {
@@ -37,7 +38,7 @@ class AdminController extends \MainController
         } 
         
         $data = [
-            'pagesCount'    => $pagesCount,
+            'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
             'users'         => $result,
             'meta_title'    => lang('Admin'),
@@ -143,7 +144,7 @@ class AdminController extends \MainController
  
         $result = Array();
         foreach ($invite  as $ind => $row) {
-            $row['uid']         = UserModel::getUserId($row['uid']);  
+            $row['uid']         = UserModel::getUser($row['uid'], 'id');  
             $row['active_time'] = $row['active_time'];
             $result[$ind]       = $row;
         }
@@ -174,11 +175,18 @@ class AdminController extends \MainController
     public function spaces()
     {
         $uid    = self::isAdmin();
-        $spaces = SpaceModel::getSpaces($uid['id'], 'all');
+        $page   = \Request::getInt('page'); 
+        $page   = $page == 0 ? 1 : $page;
+
+        $limit = 25;
+        $pagesCount = SpaceModel::getSpacesAllCount(); 
+        $spaces = SpaceModel::getSpacesAll($page, $limit, $uid['id'], 'all');
   
         $data = [
             'meta_title'    => lang('Spaces'),
             'sheet'         => 'admin',
+            'pagesCount'    => ceil($pagesCount / $limit),
+            'pNum'          => $page,
         ]; 
 
         Request::getResources()->addBottomStyles('/assets/css/admin.css');
@@ -234,7 +242,7 @@ class AdminController extends \MainController
 
         Base::Limits($space_slug, lang('URL'), '4', '20', $redirect);
 
-        if (SpaceModel::getSpaceSlug($space_slug)) {
+        if (SpaceModel::getSpace($space_slug, 'slug')) {
             Base::addMsg('Такой URL пространства уже есть', 'error');
             redirect($redirect);
         }
@@ -308,7 +316,7 @@ class AdminController extends \MainController
         $user_id    = \Request::getInt('id');
         
         if ($user_id > 0) {
-            $user   = UserModel::getUserId($user_id);
+            $user   = UserModel::getUser($user_id, 'id');
         } else {
             $user   = null;
         }
@@ -418,7 +426,7 @@ class AdminController extends \MainController
         $user_id    = \Request::getInt('id');
         
         $redirect = '/admin';
-        if (!$user = UserModel::getUserId($user_id)) {
+        if (!$user = UserModel::getUser($user_id, 'id')) {
            redirect($redirect); 
         }
         
@@ -428,12 +436,12 @@ class AdminController extends \MainController
         $user['badges']     = UserModel::getBadgeUserAll($user_id);
          
         $data = [
-            'meta_title'    => lang('Edit user'),
-            'sheet'         => 'admin',
-            'post_num_user' => UserModel::userPostsNum($user_id),
-            'answ_num_user' => UserModel::userAnswersNum($user_id),
-            'comm_num_user' => UserModel::userCommentsNum($user_id), 
-            'space_user'    => SpaceModel::getSpaceUserId($user_id),
+            'meta_title'        => lang('Edit user'),
+            'sheet'             => 'edit-user',
+            'posts_count'       => UserModel::contentCount($user['id'], 'posts'),
+            'answers_count'     => UserModel::contentCount($user['id'], 'answers'),
+            'comments_count'    => UserModel::contentCount($user['id'], 'comments'), 
+            'spaces_user'       => SpaceModel::getUserCreatedSpaces($user_id),
         ]; 
 
         Request::getResources()->addBottomStyles('/assets/css/admin.css');
@@ -449,7 +457,7 @@ class AdminController extends \MainController
         $user_id    = \Request::getInt('id');
         
         $redirect = '/admin';
-        if (!UserModel::getUserId($user_id)) {
+        if (!UserModel::getUser($user_id, 'id')) {
             redirect($redirect);
         }
         
@@ -623,14 +631,18 @@ class AdminController extends \MainController
     public function topics() 
     {
         $uid    = self::isAdmin();
-        $pg     = \Request::getInt('page'); 
-        $page   = (!$pg) ? 1 : $pg;
+        $page   = \Request::getInt('page'); 
+        $page   = $page == 0 ? 1 : $page;
         
-        $topics     = TopicModel::getTopicAll($page);
+        $limit  = 55;
+        $pagesCount = TopicModel::getTopicsAllCount(); 
+        $topics     = TopicModel::getTopicsAll($page, $limit);
         
         $data = [
             'meta_title'    => lang('Topics'),
             'sheet'         => 'topics',
+            'pagesCount'    => ceil($pagesCount / $limit),
+            'pNum'          => $page,
         ]; 
         
         Request::getResources()->addBottomStyles('/assets/css/admin.css');

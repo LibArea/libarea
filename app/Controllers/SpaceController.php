@@ -14,15 +14,20 @@ class SpaceController extends \MainController
     public function index()
     {
         $uid    = Base::getUid();
-        $space  = SpaceModel::getSpaces($uid['id'], 'all'); 
+        $page   = \Request::getInt('page'); 
+        $page   = $page == 0 ? 1 : $page;
+
+        $limit = 25; 
+        $pagesCount = SpaceModel::getSpacesAllCount(); 
+        $spaces     = SpaceModel::getSpacesAll($page, $limit, $uid['id'], 'all');
 
         // Введем ограничение на количество создаваемых пространств
-        $sp             = SpaceModel::getSpaceUserId($uid['id']);
-        $count_space    = count($sp);
-        $add_space_button = validTl($uid['trust_level'], Config::get(Config::PARAM_TL_ADD_SPACE), $count_space, 3);
+        $sp                 = SpaceModel::getUserCreatedSpaces($uid['id']);
+        $count_space        = count($sp);
+        $add_space_button   = validTl($uid['trust_level'], Config::get(Config::PARAM_TL_ADD_SPACE), $count_space, 3);
 
         $result = Array();
-        foreach ($space as $ind => $row) {
+        foreach ($spaces as $ind => $row) {
             $row['users']   = SpaceModel::numSpaceSubscribers($row['space_id']);
             $result[$ind]   = $row;
         }  
@@ -33,6 +38,8 @@ class SpaceController extends \MainController
             'h1'            => lang('All space'),
             'canonical'     => Config::get(Config::PARAM_URL) . '/space',
             'sheet'         => 'spaces', 
+            'pagesCount'    => ceil($pagesCount / $limit),
+            'pNum'          => $page,
             'meta_title'    => lang('All space') .' | '. Config::get(Config::PARAM_NAME),
             'meta_desc'     => lang('all-space-desc') .' '. Config::get(Config::PARAM_HOME_TITLE),
         ];
@@ -43,11 +50,16 @@ class SpaceController extends \MainController
     // Пространства участника
     public function spaseUser()
     {
-        $uid            = Base::getUid();
-        $space          = SpaceModel::getSpaces($uid['id'], 'subscription');
+        $uid    = Base::getUid();
+        $page   = \Request::getInt('page'); 
+        $page   = $page == 0 ? 1 : $page;
+        $limit  = 25; 
+                
+        $pagesCount = SpaceModel::getSpacesAllCount();         
+        $space      = SpaceModel::getSpacesAll($page, $limit, $uid['id'], 'subscription');
 
         // Введем ограничение на количество создаваемых пространств
-        $all_space          = SpaceModel::getSpaceUserId($uid['id']);
+        $all_space          = SpaceModel::getUserCreatedSpaces($uid['id']);
         $count_space        = count($all_space);
         $add_space_button   = validTl($uid['trust_level'], Config::get(Config::PARAM_TL_ADD_SPACE), $count_space, 3);
 
@@ -63,6 +75,8 @@ class SpaceController extends \MainController
             'h1'            => lang('I read space'),
             'canonical'     => Config::get(Config::PARAM_URL) . '/space', 
             'sheet'         => 'my-space', 
+            'pagesCount'    => ceil($pagesCount / $limit),
+            'pNum'          => $page,
             'meta_title'    => lang('I read space') .' | '. Config::get(Config::PARAM_NAME),
             'meta_desc'     => lang('I read space') .' '. Config::get(Config::PARAM_HOME_TITLE),
         ];
@@ -79,13 +93,13 @@ class SpaceController extends \MainController
         $pg     = \Request::getInt('page'); 
         $page   = (!$pg) ? 1 : $pg;
         
-        
         // Покажем 404
-        $space = SpaceModel::getSpaceSlug($slug);
+        $space = SpaceModel::getSpace($slug, 'slug');
         Base::PageError404($space);
   
-        $pagesCount = SpaceModel::getCount($space['space_id'], $uid['id'], $uid['trust_level'], $sheet, $page); 
-        $posts      = SpaceModel::getPosts($space['space_id'], $uid['id'], $uid['trust_level'], $sheet, $page);
+        $quantity_per_page = 25;
+        $pagesCount = SpaceModel::getPostsCount($space['space_id'], $uid, $sheet, $page); 
+        $posts      = SpaceModel::getPosts($space['space_id'], $uid, $sheet, $page, $quantity_per_page);
 
         $space['space_date']        = lang_date($space['space_date']);
         $space['space_cont_post']   = count($posts);
@@ -124,7 +138,7 @@ class SpaceController extends \MainController
             'h1'            => $space['space_name'],
             'canonical'     => Config::get(Config::PARAM_URL) .'/s/'. $space['space_slug'],
             'img'           => Config::get(Config::PARAM_URL) .'/uploads/spaces/logos/'. $space['space_img'],
-            'pagesCount'    => $pagesCount,
+            'pagesCount'    => ceil($pagesCount / $quantity_per_page),
             'pNum'          => $page,
             'sheet'         => $sheet,
             'meta_title'    => $space['space_name'] .' — '. $s_title .' | '. Config::get(Config::PARAM_NAME),
@@ -140,7 +154,7 @@ class SpaceController extends \MainController
         $uid    = Base::getUid();
         $slug   = \Request::get('slug');
 
-        $space = SpaceModel::getSpaceSlug($slug);
+        $space = SpaceModel::getSpace($slug, 'slug');
         
         // Проверка доступа 
         if (!accessСheck($space, 'space', $uid, 0, 0)) {
@@ -165,7 +179,7 @@ class SpaceController extends \MainController
         $uid    = Base::getUid();
         $slug   = \Request::get('slug');
 
-        $space = SpaceModel::getSpaceSlug($slug);
+        $space = SpaceModel::getSpace($slug, 'slug');
 
         // Проверка доступа 
         if (!accessСheck($space, 'space', $uid, 0, 0)) {
@@ -190,7 +204,7 @@ class SpaceController extends \MainController
         $uid  = Base::getUid();
   
         // Если пользователь уже создал пространство, то ограничим их количество
-        $space          = SpaceModel::getSpaceUserId($uid['id']);
+        $space          = SpaceModel::getUserCreatedSpaces($uid['id']);
         $count_space    = count($space);
         
         // Для пользователя с TL < N   
@@ -216,7 +230,7 @@ class SpaceController extends \MainController
         $uid  = Base::getUid();
         
         // Проверка на случай хакинга формы
-        $space          = SpaceModel::getSpaceUserId($uid['id']);
+        $space          = SpaceModel::getUserCreatedSpaces($uid['id']);
         $count_space    = count($space);
         
         $valid = validTl($uid['trust_level'], Config::get(Config::PARAM_TL_ADD_SPACE), $count_space, 3);
@@ -243,7 +257,7 @@ class SpaceController extends \MainController
             Base::addMsg(lang('url-gaps'), 'error');
             redirect($redirect);
         }
-        if (SpaceModel::getSpaceSlug($space_slug)) {
+        if (SpaceModel::getSpace($space_slug, 'slug')) {
             Base::addMsg(lang('url-already-exists'), 'error');
             redirect($redirect);
         }
@@ -287,7 +301,7 @@ class SpaceController extends \MainController
         $space_feed     = \Request::getPostInt('feed');
         $space_tl       = \Request::getPostInt('space_tl');
         
-        $space = SpaceModel::getSpaceId($space_id);
+        $space = SpaceModel::getSpace($space_id, 'id');
         
         // Проверка доступа 
         if (!accessСheck($space, 'space', $uid, 0, 0)) {
@@ -313,7 +327,7 @@ class SpaceController extends \MainController
         $space_color = \Request::getPost('color');
         $space_color = empty($space_color) ? $space['space_color'] : $space_color;
         
-        $slug = SpaceModel::getSpaceSlug($space_slug);
+        $slug = SpaceModel::getSpace($space_slug, 'slug');
 
         if ($slug['space_slug'] != $space['space_slug']) {
             if ($slug) {
@@ -353,7 +367,7 @@ class SpaceController extends \MainController
         $space_slug     = \Request::getPost('space_slug');
         $space_id       = \Request::getPost('space_id');
         
-        $space = SpaceModel::getSpaceId($space_id);
+        $space = SpaceModel::getSpace($space_id, 'id');
         
         // Проверка доступа 
         if (!accessСheck($space, 'space', $uid, 0, 0)) {
@@ -387,7 +401,7 @@ class SpaceController extends \MainController
         $slug   = \Request::get('slug');
         
 
-        $space = SpaceModel::getSpaceSlug($slug);
+        $space = SpaceModel::getSpace($slug, 'slug');
         
         // Проверка доступа 
         if (!accessСheck($space, 'space', $uid, 0, 0)) {
@@ -419,7 +433,7 @@ class SpaceController extends \MainController
         $space_id   = \Request::getPostInt('space_id'); 
 
         // Запретим действия если участник создал пространство
-        $sp_info    = SpaceModel::getSpaceId($space_id);
+        $sp_info    = SpaceModel::getSpace($space_id, 'id');
         if ($sp_info['space_user_id'] == $uid['id']) {
             return false;
         }

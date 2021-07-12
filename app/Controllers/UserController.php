@@ -15,13 +15,20 @@ class UserController extends \MainController
     // Все пользователи
     function index()
     {
+        $pg     = \Request::getInt('page'); 
+        $page   = (!$pg) ? 1 : $pg;
         $uid    = Base::getUid();
-        $users  = UserModel::getUsersAll($uid['id']);
+        
+        $quantity_per_page = 40;
+        $usersCount = UserModel::getUsersAllCount(); 
+        $users      = UserModel::getUsersAll($uid['id'], $page, $quantity_per_page);
         
         $data = [
             'h1'            => lang('Users'),
             'canonical'     => Config::get(Config::PARAM_URL) . '/users',
             'sheet'         => 'users', 
+            'pagesCount'    => ceil($usersCount / $quantity_per_page),
+            'pNum'          => $page,
             'meta_title'    => lang('Users') .' | '. Config::get(Config::PARAM_NAME),
             'meta_desc'     => lang('desc-user-all') .' '. Config::get(Config::PARAM_HOME_TITLE),   
         ];
@@ -35,7 +42,7 @@ class UserController extends \MainController
     function profile()
     {
         $login = \Request::get('login');
-        $user  = UserModel::getUserLogin($login);
+        $user  = UserModel::getUser($login, 'slug');
 
         // Покажем 404
         Base::PageError404($user);
@@ -70,18 +77,18 @@ class UserController extends \MainController
         
         // Ограничение на показ кнопки отправить Pm (ЛС, личные сообщения)
         $button_pm  = accessPm($uid, $user['id'], Config::get(Config::PARAM_TL_ADD_PM));
-        
+
         $data =[
             'h1'                => $user['login'],
+            'sheet'             => 'profile',
             'created_at'        => lang_date($user['created_at']),
             'trust_level'       => UserModel::getUserTrust($user['id']),
-            'post_num_user'     => UserModel::userPostsNum($user['id']),
-            'answer_num_user'   => UserModel::userAnswersNum($user['id']),
-            'comment_num_user'  => UserModel::userCommentsNum($user['id']), 
-            'space_user'        => SpaceModel::getSpaceUserId($user['id']),
+            'posts_count'       => UserModel::contentCount($user['id'], 'posts'),
+            'answers_count'     => UserModel::contentCount($user['id'], 'answers'),
+            'comments_count'    => UserModel::contentCount($user['id'], 'comments'), 
+            'spaces_user'       => SpaceModel::getUserCreatedSpaces($user['id']),
             'badges'            => UserModel::getBadgeUserAll($user['id']),
             'canonical'         => Config::get(Config::PARAM_URL) . '/u/' . $user['login'],
-            'sheet'             => 'profile',
             'img'               => Config::get(Config::PARAM_URL) . '/uploads/users/avatars/' . $user['avatar'],
             'meta_title'        => $meta_title,
             'meta_desc'         => $meta_desc,
@@ -96,7 +103,7 @@ class UserController extends \MainController
         // Данные участника
         $login  = \Request::get('login');
         $uid    = Base::getUid();
-        $user   = UserModel::getUserLogin($uid['login']);
+        $user   = UserModel::getUser($uid['login'], 'slug');
    
         // Ошибочный Slug в Url
         if ($login != $user['login']) {
@@ -126,14 +133,11 @@ class UserController extends \MainController
         $telegram       = \Request::getPost('telegram');
         $vk             = \Request::getPost('vk');
         
+  
         if (!$color) {
            $color  = '#339900'; 
         }
 
-        // См. https://github.com/Respect/Validation
-        // https://github.com/jquery-validation/jquery-validation
-        // https://github.com/mikeerickson/validatorjs
-        
         $uid        = Base::getUid();
         $redirect   = '/u/' . $uid['login'] . '/setting';
         Base::Limits($name, lang('Name'), '3', '11', $redirect);
@@ -142,29 +146,27 @@ class UserController extends \MainController
         if (!filter_var($public_email, FILTER_VALIDATE_EMAIL)) {
             $public_email = '';
         }
-        if (!preg_match('/^[a-zA-Z0-9]+$/u', $skype)) {
-            $skype = '';
-        }
-        if (!preg_match('/^[a-zA-Z0-9]+$/u', $twitter)) {
-            $skype = '';
-        }
-        if (!preg_match('/^[a-zA-Z0-9]+$/u', $telegram)) {
-            $skype = '';
-        }
-        if (!preg_match('/^[a-zA-Z0-9]+$/u', $vk)) {
-            $vk = '';
-        }
         
-        $about          = empty($about) ? '' : $about;
-        $website        = empty($website) ? '' : $website;
-        $location       = empty($location) ? '' : $location;
-        $public_email   = empty($public_email) ? '' : $public_email;
-        $skype          = empty($skype) ? '' : $skype;
-        $twitter        = empty($twitter) ? '' : $twitter;
-        $telegram       = empty($telegram) ? '' : $telegram;
-        $vk             = empty($vk) ? '' : $vk; 
+        $skype      = substr($skype, 0, 25);
+        $twitter    = substr($twitter, 0, 25);
+        $telegram   = substr($telegram, 0, 25);
+        $vk         = substr($vk, 0, 25);
+  
+        $data = [
+            'id'            => $uid['id'],
+            'name'          => $name,
+            'color'         => $color,
+            'about'         => empty($about) ? '' : $about,
+            'website'       => empty($website) ? '' : $website,
+            'location'      => empty($location) ? '' : $location,
+            'public_email'  => empty($public_email) ? '' : $public_email,
+            'skype'         => empty($skype) ? '' : $skype,
+            'twitter'       => empty($twitter) ? '' : $twitter,
+            'telegram'      => empty($telegram) ? '' : $telegram,
+            'vk'            => empty($vk) ? '' : $vk,
+        ];
 
-        UserModel::editProfile($uid['login'], $name, $color, $about, $website, $location, $public_email, $skype,$twitter, $telegram, $vk);
+        UserModel::editProfile($data);
         
         Base::addMsg(lang('Changes saved'), 'success');
         redirect($redirect);
@@ -173,7 +175,7 @@ class UserController extends \MainController
     // Форма загрузки аватарки
     function settingAvatarForm()
     {
-        $uid  = Base::getUid();
+        $uid    = Base::getUid();
         $login  = \Request::get('login');
 
         // Ошибочный Slug в Url
@@ -181,7 +183,7 @@ class UserController extends \MainController
             redirect('/u/' . $uid['login'] . '/setting/avatar');
         }
 
-        $userInfo           = UserModel::getUserLogin($uid['login']);
+        $userInfo           = UserModel::getUser($uid['login'], 'slug');
         
         $data = [
             'h1'            => lang('Change avatar'),
@@ -289,7 +291,7 @@ class UserController extends \MainController
         $login  = \Request::get('login');
         
         $uid    = Base::getUid();
-        $user   = UserModel::getUserLogin($uid['login']);
+        $user   = UserModel::getUser($uid['login'], 'slug');
 
         // Ошибочный Slug в Url
         if ($login != $uid['login']) {
@@ -328,7 +330,7 @@ class UserController extends \MainController
             redirect($redirect);
         }
 
-        $user = UserModel::getUserLogin($login);
+        $user = UserModel::getUser($login, 'slug');
 
         // Удалять может только автор и админ
         if ($user['id'] != $uid['id'] && $uid['trust_level'] != 5) {
@@ -359,7 +361,7 @@ class UserController extends \MainController
         $login  = \Request::get('login');
         
         $uid    = Base::getUid();
-        $user   = UserModel::getUserLogin($uid['login']);
+        $user   = UserModel::getUser($uid['login'], 'slug');
 
         // Ошибочный Slug в Url
         if ($login != $uid['login']) {
@@ -379,7 +381,6 @@ class UserController extends \MainController
 
 
     /////////// СИСТЕМА ИНВАЙТОВ ///////////
-    
     // Показ формы инвайта
     public function inviteForm()
     {
@@ -392,25 +393,19 @@ class UserController extends \MainController
 
         return view(PR_VIEW_DIR . '/user/invite', ['data' => $data, 'uid' => $uid]);    
     }
-    
+   
     // Страница инвайтов пользователя
     function invitationPage() 
     {
         // Страница участника и данные
-        $login      = \Request::get('login');
-       
-        // Кто смотрит
         $uid    = Base::getUid();
-        $user   = UserModel::getUserId($uid['id']);
-        
+        $login      = \Request::get('login');
+  
         // Запретим смотреть инвайты чужого профиля
-        if ($login != $user['login']) {
-            redirect('/u/' . $user['login'] . '/invitation');
+        if ($login != $uid['login']) {
+            redirect('/u/' . $uid['login'] . '/invitation');
         }
 
-        // Покажем 404
-        Base::PageError404($user);
-        
         $Invitation = UserModel::InvitationResult($uid['id']);
  
         $data = [
@@ -419,7 +414,7 @@ class UserController extends \MainController
             'meta_title'    => lang('Invites'),
         ];
 
-        return view(PR_VIEW_DIR . '/user/invitation', ['data' => $data, 'uid' => $uid, 'user' => $user,  'result' => $Invitation]);  
+        return view(PR_VIEW_DIR . '/user/invitation', ['data' => $data, 'uid' => $uid, 'result' => $Invitation]);  
     }
     
     // Создать инвайт

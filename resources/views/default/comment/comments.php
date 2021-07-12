@@ -7,40 +7,40 @@
 
                 <?php if (!empty($comments)) { ?>
               
-                    <?php foreach ($comments as $comm) { ?>  
+                    <?php foreach ($comments as $comment) { ?>  
                     
-                        <?php if($comm['comment_del'] == 0) { ?>
+                        <?php if($comment['comment_del'] == 0) { ?>
                             <div class="comm-telo_bottom">
                                 <div class="small">
-                                    <?= user_avatar_img($comm['avatar'], 'small', $comm['login'], 'ava'); ?>
-                                    <a class="date" href="/u/<?= $comm['login']; ?>"><?= $comm['login']; ?></a> 
+                                    <?= user_avatar_img($comment['avatar'], 'small', $comment['login'], 'ava'); ?>
+                                    <a class="date" href="/u/<?= $comment['login']; ?>"><?= $comment['login']; ?></a> 
                                      
-                                    <span class="date"><?= $comm['date']; ?></span>
+                                    <span class="date"><?= $comment['date']; ?></span>
                                     
                                     <span class="indent"> &#183; </span>
-                                    <a href="/post/<?= $comm['post_id']; ?>/<?= $comm['post_slug']; ?>"><?= $comm['post_title']; ?></a>
+                                    <a href="/post/<?= $comment['post_id']; ?>/<?= $comment['post_slug']; ?>"><?= $comment['post_title']; ?></a>
                                 </div>
 
                                 <div class="comm-telo-body">
-                                    <?= $comm['comment_content']; ?> 
+                                    <?= $comment['comment_content']; ?> 
                                 </div>
                            
                                 <div class="post-full-footer date">
                                     <?php if (!$uid['id']) { ?> 
                                         <div class="voters">
                                             <a rel="nofollow" href="/login"><div class="up-id"></div></a>
-                                            <div class="score"><?= $comm['comment_votes']; ?></div>
+                                            <div class="score"><?= $comment['comment_votes']; ?></div>
                                         </div>
                                     <?php } else { ?>
-                                        <?php if ($comm['comment_vote_status'] || $uid['id'] == $comm['comment_user_id']) { ?>
+                                        <?php if ($comment['comment_vote_status'] || $uid['id'] == $comment['comment_user_id']) { ?>
                                             <div class="voters active">
                                                 <div class="up-id"></div>
-                                                <div class="score"><?= $comm['comment_votes']; ?></div>
+                                                <div class="score"><?= $comment['comment_votes']; ?></div>
                                             </div>
                                         <?php } else { ?>
-                                            <div id="up<?= $comm['comment_id']; ?>" class="voters">
-                                                <div data-id="<?= $comm['comment_id']; ?>" data-type="comment" class="up-id"></div>
-                                                <div class="score"><?= $comm['comment_votes']; ?></div>
+                                            <div id="up<?= $comment['comment_id']; ?>" class="voters">
+                                                <div data-id="<?= $comment['comment_id']; ?>" data-type="comment" class="up-id"></div>
+                                                <div class="score"><?= $comment['comment_votes']; ?></div>
                                             </div>
                                         <?php } ?>
                                     <?php } ?>

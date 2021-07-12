@@ -188,7 +188,7 @@ class CommentController extends \MainController
         $login = \Request::get('login');
 
         // Если нет такого пользователя 
-        $user   = UserModel::getUserLogin($login);
+        $user   = UserModel::getUser($login, 'slug');
         Base::PageError404($user);
         
         $comm  = CommentModel::userComments($login); 

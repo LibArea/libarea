@@ -76,14 +76,17 @@ Route::before('Authorization@noAuth')->getGroup();
         Route::endProtect(); // Завершение защиты
     Route::endType();  // Завершение getType('post')
 
-    Route::get('/admin/{page?}')->controller('AdminController', ['all'])->where(['page' => '[0-9]+']);
-    Route::get('/admin/ban/{page?}')->controller('AdminController', ['ban'])->where(['page' => '[0-9]+']);
+    Route::get('/admin')->controller('AdminController', ['all']);
+    Route::get('/admin/all/page/{page?}')->controller('AdminController', ['all'])->where(['page' => '[0-9]+']);
+    Route::get('/admin/ban')->controller('AdminController', ['ban']);
+    Route::get('/admin/ban/page/{page?}')->controller('AdminController', ['ban'])->where(['page' => '[0-9]+']);
     Route::get('/admin/user/{id}/edit')->controller('AdminController@userEditPage')->where(['id' => '[0-9]+']);
 
     Route::get('/admin/words')->controller('AdminController@words');
     Route::get('/admin/wordadd')->controller('AdminController@wordsAddForm');
 
-    Route::get('/admin/spaces')->controller('AdminController@spaces'); 
+    Route::get('/admin/spaces')->controller('AdminController@spaces');
+    Route::get('/admin/spaces/page/{page?}')->controller('AdminController@spaces')->where(['page' => '[0-9]+']);
     Route::get('/admin/space/add')->controller('AdminController@addSpacePage');
     Route::get('/admin/logip/{ip}')->controller('AdminController@logsIp')->where(['ip' => '[0-9].+']);
     
@@ -92,12 +95,14 @@ Route::before('Authorization@noAuth')->getGroup();
     Route::get('/admin/invitations')->controller('AdminController@invitations');
     
     Route::get('/admin/domain/{id}/edit')->controller('AdminController@editDomain')->where(['id' => '[0-9]+']);
-    Route::get('/admin/domains/{page?}')->controller('AdminController@domains')->where(['page' => '[0-9]+']);
+    Route::get('/admin/domains')->controller('AdminController@domains');
+    Route::get('/admin/domains/page/{page?}')->controller('AdminController@domains')->where(['page' => '[0-9]+']);
         
     Route::get('/admin/badges')->controller('AdminController@badges');
     Route::get('/admin/badge/add')->controller('AdminController@addBadgeForm');
  
     Route::get('/admin/topics')->controller('AdminController@topics');
+    Route::get('/admin/topics/page/{page?}')->controller('AdminController@topics')->where(['page' => '[0-9]+']);
     Route::get('/admin/topic/add')->controller('TopicController@addTopicForm');
     Route::get('/admin/topic/{id}/edit')->controller('TopicController@editTopicForm')->where(['id' => '[0-9]+']);
  
@@ -148,6 +153,7 @@ Route::before('Authorization@noAuth')->getGroup();
     Route::get('/space/{slug}/delete/cover')->controller('SpaceController@coverRemove')->where(['slug' => '[A-Za-z0-9_]+']);
     Route::get('/space/add')->controller('SpaceController@addForm');
     Route::get('/space/my')->controller('SpaceController@spaseUser');
+    Route::get('/space/my/page/{page?}')->controller('SpaceController@spaseUser')->where(['page' => '[0-9]+']);
  
     Route::get('/all')->controller('HomeController', ['all']);
     Route::get('/all/page/{page?}')->controller('HomeController', ['all'])->where(['page' => '[0-9]+']);
@@ -193,6 +199,7 @@ Route::get('/info/restriction')->controller('InfoController@restriction');
 
 // Участники, авторизация, посты и комментарии, закладки
 Route::get('/users')->controller('UserController');
+Route::get('/users/page/{page?}')->controller('UserController')->where(['page' => '[0-9]+']);
 Route::get('/u/{login}')->controller('UserController@profile')->where(['login' => '[A-Za-z0-9]+']);
 Route::get('/u/{login}/posts')->controller('PostController@userPosts')->where(['login' => '[A-Za-z0-9]+']);
 Route::get('/u/{login}/answers')->controller('AnswerController@userAnswers')->where(['login' => '[A-Za-z0-9]+']);
@@ -207,6 +214,7 @@ Route::get('/answers/page/{page?}')->controller('AnswerController')->where(['pag
 
 // Пространства
 Route::get('/spaces')->controller('SpaceController');
+Route::get('/spaces/page/{page?}')->controller('SpaceController')->where(['page' => '[0-9]+']);
 Route::get('/s/{slug}')->controller('SpaceController@posts', ['feed'])->where(['slug' => '[A-Za-z0-9_]+']);
 Route::get('/s/{slug}/page/{page?}')->controller('SpaceController@posts', ['feed'])->where(['slug' => '[A-Za-z0-9_]+', 'page' => '[0-9]+']);
 Route::get('/s/{slug}/top')->controller('SpaceController@posts', ['top'])->where(['slug' => '[A-Za-z0-9_]+']);

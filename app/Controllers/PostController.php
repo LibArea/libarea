@@ -151,7 +151,7 @@ class PostController extends \MainController
         $login      = \Request::get('login');
         
         // Если нет такого пользователя 
-        $user   = UserModel::getUserLogin($login);
+        $user   = UserModel::getUser($login, 'slug');
         Base::PageError404($user);
         
         $posts_user  = PostModel::userPosts($login, $uid['id']); 
@@ -238,7 +238,7 @@ class PostController extends \MainController
         $space_id   = \Request::getPostInt('space_id');
 
         // Получаем информацию по пространству
-        $space = SpaceModel::getSpaceId($space_id);
+        $space = SpaceModel::getSpace($space_id, 'id');
         if (!$space) {
             Base::addMsg(lang('Select space'), 'error');
             redirect($redirect);
@@ -408,7 +408,7 @@ class PostController extends \MainController
         }  
 
         $space = SpaceModel::getSpaceSelect($uid['id'], $uid['trust_level']);
-        $user  = UserModel::getUserId($post['post_user_id']);
+        $user  = UserModel::getUser($post['post_user_id'], 'id');
 
         Request::getHead()->addStyles('/assets/css/image-uploader.css'); 
         Request::getResources()->addBottomStyles('/assets/css/select2.css'); 
@@ -487,7 +487,7 @@ class PostController extends \MainController
         }  
         
         // Получаем информацию по пространству
-        $space = SpaceModel::getSpaceId($post_space_id);
+        $space = SpaceModel::getSpace($post_space_id, 'id');
         if (!$space) {
             Base::addMsg(lang('Select space'), 'error');
             redirect($redirect);

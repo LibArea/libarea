@@ -141,7 +141,7 @@ class MessagesModel extends \MainModel
         /* Где хранить будем изменение и пересчет?
 		   UserModel::updateInboxUnread($recipient_uid);
 
-		if ($user_info = UserModel::getUserId($sender_uid))
+		if ($user_info = UserModel::getUser($sender_uid, 'id'))
 		{
 			// Отправим на E-mail, потом, если он захочет, возможно...
 		} */

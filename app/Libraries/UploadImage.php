@@ -50,14 +50,14 @@ class UploadImage
             $new_img    = $filename . '.jpeg';
 
             if ($type == 'topic') {
-                $images     = TopicModel::getTopicId($content_id);
+                $images     = TopicModel::getTopic($content_id, 'id');
                 $foto       = $images['topic_img'];
             } elseif ($type == 'user') {
-                $images     = UserModel::getUserId($content_id);
+                $images     = UserModel::getUser($content_id, 'id');
                 $foto       = $images['avatar'];
  
             } elseif ($type == 'space') {
-                $images     = SpaceModel::getSpaceId($content_id);
+                $images     = SpaceModel::getSpace($content_id, 'id');
                 $foto       = $images['space_img'];
             }
             
@@ -114,10 +114,10 @@ class UploadImage
                     
             $new_cover  = $filename . '.jpeg';
             if ($type == 'user') {
-                $user      = UserModel::getUserId($content_id);
+                $user      = UserModel::getUser($content_id, 'id');
                 $cover_art  = $user['cover_art'];
             } elseif ($type == 'space') {
-                $space      = SpaceModel::getSpaceId($content_id);
+                $space      = SpaceModel::getSpace($content_id, 'id');
                 $cover_art  = $space['space_cover_art'];
             }
             

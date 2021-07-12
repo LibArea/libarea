@@ -124,10 +124,10 @@ class Content
                 
                 // Добавим по id, нужна будет для notif
 				if (preg_match('/^[0-9]+$/', $login)) {
-					$user_info = UserModel::getUserId($login);
+					$user_info = UserModel::getUser($login, 'id');
 				}
 				else {
-					$user_info = UserModel::getUserlogin($login);
+					$user_info = UserModel::getUser($login, 'slug');
 				}
 
 				if ($user_info) {

@@ -48,39 +48,39 @@
 
     <div class="stats<?php if($user['cover_art'] == 'cover_art.jpeg') { ?> no-cover<?php } ?>">
         <?php if($user['ban_list'] == 0) { ?>
-            <?php if($data['post_num_user'] != 0) { ?>
+            <?php if($data['posts_count'] > 0) { ?>
                 <label class="required"><?= lang('Posts-m'); ?>:</label>
                 <span class="right">
                     <a title="<?= lang('Posts-m'); ?> <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/posts">
-                        <?= $data['post_num_user']; ?>
+                        <?= $data['posts_count']; ?>
                     </a>
                 </span>
                 <br>
             <?php } ?>
-            <?php if($data['answer_num_user'] != 0) { ?>
+            <?php if($data['answers_count'] > 0) { ?>
                 <label class="required"><?= lang('Answers'); ?>:</label>
                 <span class="right">
                     <a title="<?= lang('Answers'); ?> <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/answers">
-                        <?= $data['answer_num_user']; ?>
+                        <?= $data['answers_count']; ?>
                     </a>
                 </span>
                 <br>
             <?php } ?>
-            <?php if($data['comment_num_user'] != 0) { ?>
+            <?php if($data['comments_count'] > 0) { ?>
                 <label class="required"><?= lang('Comments'); ?>:</label>
                 <span class="right">
                     <a title="<?= lang('Comments'); ?> <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/comments">
-                        <?= $data['comment_num_user']; ?>
+                        <?= $data['comments_count']; ?>
                     </a>
                 </span>
                 <br>
             <?php } ?>
             
-            <?php if($data['space_user']) { ?>
+            <?php if($data['spaces_user']) { ?>
                 <br>
                 <div class="bar-title small"><?= lang('Created by'); ?></div>
                 <span class="d">
-                    <?php foreach ($data['space_user'] as  $space) { ?>
+                    <?php foreach ($data['spaces_user'] as  $space) { ?>
                         <div class="profile-space">
                             <a class="bar-space-telo" href="/s/<?= $space['space_slug'];?>">
                                 <?= spase_logo_img($space['space_img'], 'small', $space['space_name'], 'space-logo'); ?>

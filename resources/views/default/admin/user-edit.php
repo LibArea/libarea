@@ -42,33 +42,33 @@
                         </div>
                         
                        <div class="boxline"> 
-                           <?php if($data['post_num_user'] != 0) { ?>
+                           <?php if($data['posts_count'] != 0) { ?>
                                 <label class="required"><?= lang('Posts-m'); ?>:</label>
                                 <a target="_blank" rel="noopener noreferrer" title="<?= lang('Posts-m'); ?> <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/posts">
-                                    <?= $data['post_num_user']; ?>
+                                    <?= $data['posts_count']; ?>
                                 </a>
                                 <br>
                             <?php } ?>
-                            <?php if($data['answ_num_user'] != 0) { ?>
+                            <?php if($data['answers_count'] != 0) { ?>
                                 <label class="required"><?= lang('Answers'); ?>:</label>
                                 <a target="_blank" rel="noopener noreferrer" title="<?= lang('Answers'); ?> <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/answers">
-                                    <?= $data['answ_num_user']; ?>
+                                    <?= $data['answers_count']; ?>
                                 </a>
                                 <br>
                             <?php } ?>
-                            <?php if($data['comm_num_user'] != 0) { ?>
+                            <?php if($data['comments_count'] != 0) { ?>
                                 <label class="required"><?= lang('Comments'); ?>:</label>
                                     <a target="_blank" rel="noopener noreferrer" title="<?= lang('Comments'); ?> <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/comments">
-                                        <?= $data['comm_num_user']; ?>
+                                        <?= $data['comments_count']; ?>
                                     </a>
                                 <br>
                             <?php } ?>
-                            <?php if($data['space_user']) { ?>
+                            <?php if($data['spaces_user']) { ?>
                                 <br>
                                 <label class="required"><?= lang('Created by'); ?>:</label>
                                 <br>
                                 <span class="d">
-                                    <?php foreach ($data['space_user'] as  $space) { ?>
+                                    <?php foreach ($data['spaces_user'] as  $space) { ?>
                                         <div class="profile-space">
                                             <?= spase_logo_img($space['space_img'], 'small', $space['space_name'], 'space_img'); ?>
                                             <a href="/s/<?= $space['space_slug'];?>"><?= $space['space_name'];?></a> 

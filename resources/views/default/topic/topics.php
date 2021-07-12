@@ -32,10 +32,10 @@
                     <?php } ?>
 
                 <?php } else { ?>
-                    <div class="no-content"><i class="icon info"></i> <?= lang('No topics'); ?></div>
+                    <div class="no-content"><i class="icon info"></i> <?= lang('Topics no'); ?>...</div>
                 <?php } ?>
                 
-                <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], 'topics'); ?>
+                <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/topics'); ?>
      
             </div>
         </div>

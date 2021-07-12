@@ -15,7 +15,7 @@
                             <input id="graburl" type="submit" name="submit" value="Создать">
                             <br>
                         </div>
-                         Осталось приглашений <?= 5 - $user['invitation_available']; ?> 
+                         Осталось приглашений <?= 5 - $uid['invitation_available']; ?> 
 
                     </form>
                      

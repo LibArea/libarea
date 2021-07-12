@@ -7,22 +7,21 @@ use PDO;
 class HomeModel extends \MainModel
 {
     // Посты на центральной странице
-    public static function feed($page, $space_user, $uid, $type)
+    public static function feed($page, $limit, $space_user, $uid, $type)
     {
         $result = Array();
         foreach ($space_user as $ind => $row) {
             $result[$ind] = $row['signed_space_id'];
         } 
         
-        // Временное решение
         // Мы должны сформировать список пространств по умолчанию (в config)
         // и добавить условие показа постов, рейтинг которых достигает > N+ значения
         // в первый час размещения, но не вошедшие в пространства по умолчанию к показу
         if ($uid['id'] == 0) {
-           $string = 'WHERE p.post_draft  = 0';
+           $string = "WHERE p.post_draft = 0";
         } else {
             if ($type == 'all') {
-                $string = "WHERE p.post_draft  = 0"; 
+                $string = "WHERE p.post_draft = 0"; 
             } else {    
                 if ($result) {
                     $string = "WHERE p.post_space_id IN(1, ".implode(',', $result).") AND p.post_draft  = 0";
@@ -32,24 +31,22 @@ class HomeModel extends \MainModel
             }    
         }        
 
-        $offset = ($page-1) * 25; 
-   
-        // Условия: удаленный пост, запрещенный к показу в ленте
-        // И ограниченный по TL
+        // Удаленный пост, запрещенный к показу в ленте и ограниченный по TL
         $display = '';
         if ($uid['trust_level'] != 5) {  
-            $tl = 'AND p.post_tl <= '.$uid['trust_level'].'';
+            $tl = "AND p.post_tl <= " . $uid['trust_level'];
             if ($uid['id'] == 0) { 
-                $tl = 'AND p.post_tl = 0';
+                $tl = "AND p.post_tl = 0";
             } 
-            $display = 'AND p.post_is_delete = 0 AND s.space_feed = 0 '.$tl.'';
+            $display = "AND p.post_is_delete = 0 AND s.space_feed = 0 $tl";
         } 
          
-        $sort = ' ORDER BY p.post_answers_count DESC'; 
+        $sort = "ORDER BY p.post_answers_count DESC"; 
         if ($type == 'feed' || $type == 'all') { 
-            $sort = ' ORDER BY p.post_top DESC, p.post_date DESC';
+            $sort = "ORDER BY p.post_top DESC, p.post_date DESC";
         }  
-
+        
+        $start  = ($page-1) * $limit;
         $sql = "SELECT p.*, 
                     rel.*,
                     v.votes_post_item_id, v.votes_post_user_id,
@@ -76,11 +73,9 @@ class HomeModel extends \MainModel
 
             INNER JOIN users AS u ON u.id = p.post_user_id
             INNER JOIN space AS s ON s.space_id = p.post_space_id
-            LEFT JOIN votes_post AS v ON v.votes_post_item_id = p.post_id AND v.votes_post_user_id = ".$uid['id']."
+            LEFT JOIN votes_post AS v ON v.votes_post_item_id = p.post_id AND v.votes_post_user_id = ". $uid['id'] ."
             
-            $string
-            $display
-            $sort LIMIT 25 OFFSET $offset "; 
+            $string $display $sort LIMIT $start, $limit"; 
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
@@ -106,11 +101,11 @@ class HomeModel extends \MainModel
         // Учитываем TL
         $display = ''; 
         if ($uid['trust_level'] != 5) {   
-            $tl = 'AND post_tl <= '.$uid['trust_level'].'';
+            $tl = "AND post_tl <= " . $uid['trust_level'];
             if ($uid['id'] == 0) { 
-                $tl = 'AND post_tl = 0';
+                $tl = "AND post_tl = 0";
             } 
-            $display = 'AND post_is_delete = 0 AND space_feed = 0 '.$tl.'';
+            $display = "AND post_is_delete = 0 AND space_feed = 0 $tl";
         } 
      
         $sql = "SELECT post_id, post_space_id, space_id
@@ -118,9 +113,7 @@ class HomeModel extends \MainModel
                 INNER JOIN space ON space_id = post_space_id
                 $string $display";
 
-        $quantity = DB::run($sql)->rowCount(); 
-       
-        return ceil($quantity / 25);
+        return DB::run($sql)->rowCount(); 
     }
    
     // Последние 5 ответа на главной
@@ -128,7 +121,7 @@ class HomeModel extends \MainModel
     {
         $user_answer = "AND s.space_feed = 0 AND p.post_tl = 0";
         if ($uid['id']) { 
-            $user_answer = "AND s.space_feed = 0 AND a.answer_user_id != ".$uid['id']." AND p.post_tl <= ".$uid['trust_level'];
+            $user_answer = "AND s.space_feed = 0 AND a.answer_user_id != ". $uid['id'] ." AND p.post_tl <= " . $uid['trust_level'];
          
             if ($uid['trust_level'] != 5) { 
                  $user_answer = "AND a.answer_user_id != " . $uid['id'];
@@ -162,5 +155,25 @@ class HomeModel extends \MainModel
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
+    
+    // Пространства все / подписан
+    public static function getSubscriptionSpaces($user_id) 
+    {
+        $sql = "SELECT 
+                s.space_id, 
+                s.space_slug, 
+                s.space_name,
+                s.space_img,
+                s.space_user_id,
+                s.space_is_delete,
+                f.signed_space_id, 
+                f.signed_user_id
+ 
+                    FROM space s 
+                    LEFT JOIN space_signed as f ON f.signed_space_id = s.space_id AND f.signed_user_id = :user_id 
+                    WHERE s.space_is_delete != 1 AND f.signed_user_id = :user_id";
+
+       return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);  
+    }   
 
 }

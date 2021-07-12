@@ -3,6 +3,9 @@
   <main class="admin">
     <div class="white-box">
       <div class="inner-padding">
+          <h1>
+             <a href="/admin"><?= lang('Admin'); ?></a> / <span class="red"><?= lang('Admin'); ?></span>
+          </h1>
         
           <ul class="nav-tabs">
             <?php if($data['sheet'] == 'all') { ?>
@@ -25,9 +28,7 @@
             </li>
             <?php } ?>  
           </ul>
-        
-        
- 
+
         <div class="t-table">
           <div class="t-th">
             <span class="t-td center">N</span>
@@ -111,7 +112,7 @@
           <?php } ?>
         </div>
         
-        <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], 'admin'); ?>
+        <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/admin'); ?>
       </div>
     </div>   
   </main> 

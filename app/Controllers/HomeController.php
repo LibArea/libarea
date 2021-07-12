@@ -3,7 +3,6 @@
 namespace App\Controllers;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\HomeModel;
-use App\Models\SpaceModel;
 use Lori\Content;
 use Lori\Config;
 use Lori\Base;
@@ -13,15 +12,17 @@ class HomeController extends \MainController
     // Главная страница
     public function index($sheet) 
     {
-        $pg     = \Request::getInt('page'); 
-        $page   = (!$pg) ? 1 : $pg;
         $uid    = Base::getUid();
+        $page   = \Request::getInt('page'); 
+        $page   = $page == 0 ? 1 : $page;
+        $limit  = 25;
 
-        $space_user         = SpaceModel::getSpaces($uid['id'], 'subscription');
+        $space_user         = HomeModel::getSubscriptionSpaces($uid['id']);
         $latest_answers     = HomeModel::latestAnswers($uid);
         
+         
         $pagesCount = HomeModel::feedCount($space_user, $uid); 
-        $posts      = HomeModel::feed($page, $space_user, $uid, $sheet);
+        $posts      = HomeModel::feed($page, $limit, $space_user, $uid, $sheet);
 
         Base::PageError404($posts);
 
@@ -62,7 +63,7 @@ class HomeController extends \MainController
 
         $data = [
             'latest_answers'    => $result_comm,
-            'pagesCount'        => $pagesCount,
+            'pagesCount'        => ceil($pagesCount / $limit),
             'pNum'              => $page,
             'sheet'             => $sheet,
             'canonical'         => $canonical,

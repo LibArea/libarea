@@ -182,16 +182,15 @@ class AnswerController extends \MainController
     // Ответы участника
     public function userAnswers()
     {
-        $login = \Request::get('login');
-       
-        // Если нет такого пользователя 
-        $user   = UserModel::getUserLogin($login);
+        $login  = \Request::get('login');
+        $user   = UserModel::getUser($login, 'slug');
+        
         Base::PageError404($user);
         
-        $answ  = AnswerModel::userAnswers($login); 
+        $answers  = AnswerModel::userAnswers($login); 
         
         $result = Array();
-        foreach ($answ as $ind => $row) {
+        foreach ($answers as $ind => $row) {
             $row['content'] = Content::text($row['answer_content'], 'text');
             $row['date']    = lang_date($row['answer_date']);
             $result[$ind]   = $row;

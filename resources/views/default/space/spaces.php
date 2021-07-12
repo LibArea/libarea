@@ -107,6 +107,7 @@
                 <?php } ?>
             </div>
         </div>
+        <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/spaces'); ?>
     </main>
     <aside>
         <div class="white-box">

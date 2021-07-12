@@ -362,7 +362,7 @@ class AuthController extends \MainController
             redirect('/recover');   
         }
 
-        $user = UserModel::getUserId($user_id['activate_user_id']);
+        $user = UserModel::getUser($user_id['activate_user_id'], 'id');
         Base::PageError404($user);
      
         $uid  = Base::getUid();

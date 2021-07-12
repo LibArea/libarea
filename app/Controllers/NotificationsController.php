@@ -14,7 +14,7 @@ class NotificationsController extends \MainController
         $login  = \Request::get('login');
         
         $uid    = Base::getUid();
-        $user   = UserModel::getUserLogin($uid['login']);
+        $user   = UserModel::getUser($uid['login'], 'slug');
 
         // Если страница закладок не участника
         if ($login != $uid['login']) {

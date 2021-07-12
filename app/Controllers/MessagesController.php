@@ -46,17 +46,16 @@ class MessagesController extends \MainController
                     
                     $row['unread']   = $row['recipient_unread'];
                     $row['count']    = $row['recipient_count'];
-                    $row['msg_user'] = UserModel::getUserId($row['sender_uid']);
-                    $row['message']  = MessagesModel::getMessageOne($row['id']);
                     
                 // Отправляющий  AND $row['sender_count']    
                 } else if ($row['sender_uid'] == $uid['id']) {
                     
                     $row['unread']   = $row['sender_unread'];
                     $row['count']    = $row['sender_count'];
-                    $row['msg_user'] = UserModel::getUserId($row['sender_uid']);
-                    $row['message']  = MessagesModel::getMessageOne($row['id']);
                 } 
+
+                $row['msg_user'] = UserModel::getUser($row['sender_uid'], 'id');
+                $row['message']  = MessagesModel::getMessageOne($row['id']);
 
                 $row['unread_num']  = word_form($row['unread'], lang('Message'), lang('Messages-m'), lang('Messages'));
                 $row['count_num']   = word_form($row['count'], lang('Message'), lang('Messages-m'), lang('Messages'));
@@ -102,9 +101,9 @@ class MessagesController extends \MainController
         if ($list = MessagesModel::getMessageByDialogId($id)) {
             
 			if ($dialog['sender_uid'] != $uid['id']) {
-				$recipient_user = UserModel::getUserId($dialog['sender_uid']);
+				$recipient_user = UserModel::getUser($dialog['sender_uid'], 'id');
 			} else {    
-				$recipient_user = UserModel::getUserId($dialog['recipient_uid']);
+				$recipient_user = UserModel::getUser($dialog['recipient_uid'], 'id');
 			}
  
             foreach ($list as $key => $val) {
@@ -140,7 +139,7 @@ class MessagesController extends \MainController
         $uid        = Base::getUid();
         
         $login      = Request::get('login');
-        if (!$user   = UserModel::getUserLogin($login)) {
+        if (!$user  = UserModel::getUser($login, 'slug')) {
             Base::addMsg(lang('Member does not exist'), 'error');
             redirect('/');
         }  
@@ -176,7 +175,7 @@ class MessagesController extends \MainController
         }
 
         // Этого пользователь не существует
-        $user  = UserModel::getUserId($uid['id']);
+        $user  = UserModel::getUser($uid['id'], 'id');
         if (!$user) {
             Base::addMsg(lang('Member does not exist'), 'error');
             redirect('/u/' . $uid['login'] . '/messages');

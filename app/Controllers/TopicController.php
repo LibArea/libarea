@@ -15,17 +15,17 @@ class TopicController extends \MainController
     // Все темы
     public function index()
     {
-        $pg = \Request::getInt('page'); 
-        $page = (!$pg) ? 1 : $pg;
-        
-        $uid        = Base::getUid();
-         
-        $pagesCount = TopicModel::getTopicAllCount();  
-        $topics     = TopicModel::getTopicAll($page);
+        $uid    = Base::getUid();
+        $page   = \Request::getInt('page'); 
+        $page   = $page == 0 ? 1 : $page;
 
-        $num = '';
+        $limit = 30; 
+        $pagesCount = TopicModel::getTopicsAllCount();  
+        $topics     = TopicModel::getTopicsAll($page, $limit);
+
+        $num = ' | ';
         if ($page > 1) { 
-            $num = ' — ' . lang('Page') . ' ' . $page;
+            $num = sprintf(lang('page-number'), $page);
         } 
         
         $result = Array();
@@ -38,12 +38,12 @@ class TopicController extends \MainController
         
         $data = [
             'h1'            => lang('All topics'),
-            'pagesCount'    => $pagesCount,
+            'sheet'         => 'topics',
+            'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
             'canonical'     => Config::get(Config::PARAM_URL) . '/topics',
-            'sheet'         => 'topics', 
-            'meta_title'    => lang('All topics') .' | '. Config::get(Config::PARAM_NAME),
-            'meta_desc'     => lang('topic-desc') .' '. Config::get(Config::PARAM_HOME_TITLE),            
+            'meta_title'    => lang('All topics') . $num . Config::get(Config::PARAM_NAME),
+            'meta_desc'     => lang('topic-desc') . $num . Config::get(Config::PARAM_HOME_TITLE),            
         ];
 
         return view(PR_VIEW_DIR . '/topic/topics', ['data' => $data, 'uid' => $uid, 'topics' => $result, 'news' => $news]);
@@ -52,19 +52,19 @@ class TopicController extends \MainController
     // Страница темы
     public function topic()
     {
-        $pg = \Request::getInt('page'); 
-        $page = (!$pg) ? 1 : $pg;
-        
-        $slug   = \Request::get('slug');
         $uid    = Base::getUid();
+        $page   = \Request::getInt('page'); 
+        $page   = $page == 0 ? 1 : $page;
+
+        $slug   = \Request::get('slug'); 
          
-        $topic  = TopicModel::getTopicSlug($slug);
+        $topic  = TopicModel::getTopic($slug, 'slug');
         Base::PageError404($topic);  
           
         // Показываем корневую тему на странице подтемы 
         $main_topic   = '';        
         if ($topic['topic_parent_id']  != 0) {
-            $main_topic   = TopicModel::getTopicId($topic['topic_parent_id']);
+            $main_topic   = TopicModel::getTopic($topic['topic_parent_id'], 'id');
         } 
         
         // Показываем подтемы корневой темы
@@ -78,8 +78,9 @@ class TopicController extends \MainController
         $text = explode("\n", $topic['topic_description']);
         $topic['topic_cropped']    = Content::text($text[0], 'line');
  
+        $limit = 25;  
         $pagesCount = TopicModel::getPostsListByTopicCount($topic['topic_id'], $uid);  
-        $posts      = TopicModel::getPostsListByTopic($topic['topic_id'], $uid, $page);
+        $posts      = TopicModel::getPostsListByTopic($page, $limit, $topic['topic_id'], $uid);
     
         $result = Array();
         foreach ($posts as $ind => $row) {
@@ -97,7 +98,7 @@ class TopicController extends \MainController
         $meta_title = $topic['topic_seo_title'] . ' — ' .  lang('Topic');
         $data = [
             'h1'            => $topic['topic_seo_title'],
-            'pagesCount'    => $pagesCount,
+            'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
             'canonical'     => Config::get(Config::PARAM_URL) . '/topic/' . $topic['topic_slug'],
             'sheet'         => 'topic', 
@@ -115,7 +116,7 @@ class TopicController extends \MainController
         $slug   = \Request::get('slug');
         $uid    = Base::getUid();
          
-        $topic  = TopicModel::getTopicSlug($slug);
+        $topic  = TopicModel::getTopic($slug, 'slug');
         Base::PageError404($topic);  
           
         $topic['topic_add_date']    = lang_date($topic['topic_add_date']);
@@ -128,7 +129,7 @@ class TopicController extends \MainController
         // Показываем корневую тему на странице подтемы  
         $main_topic   = '';
         if ($topic['topic_parent_id']  != 0) {
-            $main_topic   = TopicModel::getTopicId($topic['topic_parent_id']);
+            $main_topic   = TopicModel::getTopic($topic['topic_parent_id'], 'id');
         } 
         
         // Показываем подтемы корневой темы
@@ -221,7 +222,7 @@ class TopicController extends \MainController
         }
         
         $topic_id   = \Request::getInt('id');
-        $topic      = TopicModel::getTopicId($topic_id);
+        $topic      = TopicModel::getTopic($topic_id, 'id');
         
         Base::PageError404($topic);
         
@@ -265,7 +266,7 @@ class TopicController extends \MainController
         $topic_is_parent    = \Request::getPostInt('topic_is_parent');
         $topic_count        = \Request::getPostInt('topic_count');
         
-        $topic = TopicModel::getTopicId($topic_id);
+        $topic = TopicModel::getTopic($topic_id, 'id');
         Base::PageError404($topic);
         
         $parent_id          = empty($_POST['topic_parent_id']) ? '' : $_POST['topic_parent_id'];

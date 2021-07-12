@@ -61,6 +61,7 @@ return [
     'all-space-desc'        => 'All community spaces. Subscribe, official spaces, number of participants',
     'search-desc'           => 'Site search. By title and text of posts. By spaces and participants',
     'topic-desc'            => 'Topics of content, posts. Popular, best, global selection. Topics of the day.',
+    'page-number'           => ' — page %1$s | ',
     
     /* For notification and chat */
     'add_comment'           => 'added a comment',
