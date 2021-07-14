@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\SpaceModel;
+use App\Models\PostModel;
 use App\Models\UserModel;
 use App\Models\LinkModel;
 use App\Models\AdminModel;
@@ -643,7 +644,6 @@ class AdminController extends \MainController
         redirect('/admin/words');  
     }
     
-    // Все
     public function topics() 
     {
         $uid    = self::isAdmin();
@@ -666,6 +666,56 @@ class AdminController extends \MainController
         
         return view(PR_VIEW_DIR . '/admin/topic/topics', ['data' => $data, 'uid' => $uid, 'topics' => $topics]);
     }        
+
+    public function audit() 
+    {
+        $uid    = self::isAdmin();
+        $page   = \Request::getInt('page'); 
+        $page   = $page == 0 ? 1 : $page;
+        
+        $limit  = 55;
+        $pagesCount = AdminModel::getAuditsAllCount(); 
+        $audits     = AdminModel::getAuditsAll($page, $limit);
+        
+        $result = Array();
+        foreach ($audits  as $ind => $row) {
+            
+            if ($row['audit_type'] == 'post') {
+                $row['content'] = PostModel::postId($row['audit_content_id']);
+            } elseif ($row['audit_type'] == 'answer') {
+                $row['content'] = AnswerModel::getAnswerOne($row['audit_content_id']); 
+            } elseif ($row['audit_type'] == 'comment') {
+                $row['content'] = CommentModel::getCommentsOne($row['audit_content_id']); 
+            }
+
+            $result[$ind]       = $row;
+        }
+        
+        $data = [
+            'meta_title'    => lang('Audit'),
+            'sheet'         => 'audit',
+            'pagesCount'    => ceil($pagesCount / $limit),
+            'pNum'          => $page,
+        ]; 
+        
+        Request::getResources()->addBottomStyles('/assets/css/admin.css');
+        Request::getResources()->addBottomScript('/assets/js/admin.js'); 
+        
+        return view(PR_VIEW_DIR . '/admin/audit/audits', ['data' => $data, 'uid' => $uid, 'audits' => $result]);
+    } 
+
+    // Восстановление после аудита
+    public function status() 
+    {
+        $uid    = self::isAdmin();
+        $st     = \Request::getPost('status');
+        $status = preg_split('/(@)/', $st);
+       
+        // id, type
+        AdminModel::recoveryAudit($status[0], $status[1]);
+      
+        return true;
+    }
 
     // Проверка прав
     public static function isAdmin()

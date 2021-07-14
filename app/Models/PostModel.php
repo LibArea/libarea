@@ -7,7 +7,6 @@ use PDO;
 
 class PostModel extends \MainModel
 {
-    
     // Полная версия поста  
     public static function postSlug($slug, $user_id, $trust_level)
     {
@@ -44,7 +43,7 @@ class PostModel extends \MainModel
         $q = XD::select('*')->from(['posts']);
         $query = $q->where(['post_id'], '<', $post_id)
         ->and(['post_space_id'], '=', $space_id) // из пространства
-        ->and(['post_is_delete'], '=', 0)        // не удален
+        ->and(['post_is_deleted'], '=', 0)        // не удален
         ->and(['post_user_id'], '!=', $uid)      // не участника, который смотрит
         ->orderBy(['post_id'])->desc()->limit($quantity);
         
@@ -60,7 +59,7 @@ class PostModel extends \MainModel
                 ->leftJoin(['votes_post'])->on(['votes_post_item_id'], '=', ['post_id'])
                 ->and(['votes_post_user_id'], '=', $uid)
                 ->where(['login'], '=', $login)
-                ->and(['post_is_delete'], '=', 0)
+                ->and(['post_is_deleted'], '=', 0)
                 ->and(['post_draft'], '=', 0)
                 ->and(['post_tl'], '=', 0)
                 ->orderBy(['post_date'])->desc();
@@ -78,63 +77,6 @@ class PostModel extends \MainModel
         return true;
     }
     
-    // Добавляем пост и проверяем uri
-    public static function addPost($data)
-    {
-        // Проверить пост на повтор slug (переделать)
-        $q = XD::select('*')->from(['posts']);
-        $query = $q->where(['post_slug'], '=', $data['post_slug']);
-        $result = $query->getSelectOne();
-        
-        if ($result) {
-            $data['post_slug'] =  $data['post_slug'] . "-";
-        }
-           
-        // toString  строковая заменя для проверки
-        XD::insertInto(['posts'], '(', 
-            ['post_title'], ',', 
-            ['post_content'], ',', 
-            ['post_content_img'], ',',  
-            ['post_thumb_img'], ',',
-            ['post_related'], ',',
-            ['post_merged_id'], ',',
-            ['post_tl'], ',',
-            ['post_slug'], ',', 
-            ['post_type'], ',',
-            ['post_translation'], ',',
-            ['post_draft'], ',',
-            ['post_ip_int'], ',', 
-            ['post_user_id'], ',', 
-            ['post_space_id'], ',', 
-            ['post_closed'], ',',
-            ['post_top'], ',',
-            ['post_url'], ',',
-            ['post_url_domain'],')')->values( '(', 
-        
-        XD::setList([
-            $data['post_title'], 
-            $data['post_content'], 
-            $data['post_content_img'],
-            $data['post_thumb_img'],
-            $data['post_related'],
-            $data['post_merged_id'],
-            $data['post_tl'],            
-            $data['post_slug'],
-            $data['post_type'],
-            $data['post_translation'],
-            $data['post_draft'],
-            $data['post_ip_int'], 
-            $data['post_user_id'], 
-            $data['post_space_id'], 
-            $data['post_closed'],
-            $data['post_top'],
-            $data['post_url'],
-            $data['post_url_domain']]), ')' )->run();
-
-        // id поста
-        return XD::select()->last_insert_id('()')->getSelectValue();
-    } 
-
     // Редактирование поста
     public static function editPost($data)
     {
@@ -144,7 +86,7 @@ class PostModel extends \MainModel
             ['post_draft'], '=', $data['post_draft'], ',',
             ['post_space_id'], '=', $data['post_space_id'], ',',
             ['post_date'], '=', $data['post_date'], ',', 
-            ['edit_date'], '=', date("Y-m-d H:i:s"), ',',
+            ['post_modified'], '=', date("Y-m-d H:i:s"), ',',
             ['post_user_id'], '=', $data['post_user_id'], ',', 
             ['post_content'], '=', $data['post_content'], ',', 
             ['post_content_img'], '=', $data['post_content_img'], ',',
@@ -162,8 +104,8 @@ class PostModel extends \MainModel
     public static function postRelated($post_related)
     {
         
-        $sql = "SELECT post_id, post_title, post_slug, post_type, post_draft, post_related, post_is_delete
-                FROM posts WHERE post_id IN(0, ".$post_related.") AND post_is_delete = 0 AND post_tl = 0";
+        $sql = "SELECT post_id, post_title, post_slug, post_type, post_draft, post_related, post_is_deleted
+                FROM posts WHERE post_id IN(0, ".$post_related.") AND post_is_deleted = 0 AND post_tl = 0";
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
     
@@ -218,21 +160,9 @@ class PostModel extends \MainModel
     {
         $result = XD::select('*')->from(['posts'])->where(['post_id'], '=', $post_id)->getSelectOne();
         
-        return $result['post_is_delete'];
+        return $result['post_is_deleted'];
     }
     
-    // Удаляем пост  
-    public static function PostDelete($post_id) 
-    {
-        if (self::isThePostDeleted($post_id) == 1) {
-            XD::update(['posts'])->set(['post_is_delete'], '=', 0)->where(['post_id'], '=', $post_id)->run();
-        } else {
-            XD::update(['posts'])->set(['post_is_delete'], '=', 1)->where(['post_id'], '=', $post_id)->run();
-        }
-        
-        return true;
-    }
-   
    // Частота размещения постов участника 
    public static function getPostSpeed($uid)
    {
@@ -247,7 +177,7 @@ class PostModel extends \MainModel
     // Select posts
     public static function getSearchPosts($query)
     {
-        $sql = "SELECT post_id, post_title, post_is_delete, post_tl FROM posts WHERE post_title LIKE :post_title AND post_is_delete = 0 AND post_tl = 0 ORDER BY post_id LIMIT 8";
+        $sql = "SELECT post_id, post_title, post_is_deleted, post_tl FROM posts WHERE post_title LIKE :post_title AND post_is_deleted = 0 AND post_tl = 0 ORDER BY post_id LIMIT 8";
         
         $result = DB::run($sql, ['post_title' => "%".$query."%"]);
         $postsList  = $result->fetchall(PDO::FETCH_ASSOC);

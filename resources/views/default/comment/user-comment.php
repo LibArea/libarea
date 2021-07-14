@@ -9,7 +9,7 @@
 
                     <?php foreach ($comments as $comm) { ?> 
                     
-                        <?php if($comm['comment_del'] == 0) { ?>
+                        <?php if($comm['comment_is_deleted'] == 0) { ?>
                             <div class="comm-telo_bottom">
                                 <div class="small">
                                     <?= user_avatar_img($comm['avatar'], 'max', $comm['login'], 'ava'); ?> 

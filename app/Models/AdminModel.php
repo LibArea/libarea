@@ -212,4 +212,37 @@ class AdminModel extends \MainModel
         
         return true;
     }
+
+    // Страница аудита
+    public static function getAuditsAll($page, $limit)
+    {
+        $start  = ($page-1) * $limit;
+        $sql = "SELECT * FROM audits WHERE audit_read_flag = 0 ORDER BY audit_id DESC LIMIT $start, $limit";
+
+        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
+    }
+    
+    public static function getAuditsAllCount()
+    {
+        $sql = "SELECT id FROM users WHERE audit_read_flag = 0";
+
+        return DB::run($sql)->rowCount(); 
+    }
+    
+    //Восстановление
+    public static function recoveryAudit($id, $type)
+    {
+        if ($type == 'post') {
+            XD::update(['posts'])->set(['post_published'], '=', 1)->where(['post_id'], '=', $id)->run(); 
+        } elseif ($type == 'answer') {
+            XD::update(['answers'])->set(['answer_published'], '=', 1)->where(['answer_id'], '=', $id)->run(); 
+        } else {
+            XD::update(['comments'])->set(['comment_published'], '=', 1)->where(['comment_id'], '=', $id)->run(); 
+        }
+        
+        XD::update(['audits'])->set(['audit_read_flag'], '=', 1)->where(['audit_content_id'], '=', $id)->run();
+        
+        return true;
+    }
+    
 }

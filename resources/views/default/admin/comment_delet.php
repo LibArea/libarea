@@ -29,7 +29,7 @@
                            <div class="post-full-footer date">
                                + <?= $comment['comment_votes']; ?>
                                <span id="cm_dell" class="right comment_link small">
-                                    <a data-id="<?= $comment['comment_id']; ?>" class="recover-comment">
+                                    <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action">
                                         <?= lang('Recover'); ?>
                                     </a>
                                </span>

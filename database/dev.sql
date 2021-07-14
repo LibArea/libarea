@@ -3,23 +3,39 @@ CREATE TABLE `answers` (
   `answer_post_id` int(11) NOT NULL DEFAULT 0,
   `answer_user_id` int(11) NOT NULL DEFAULT 0,
   `answer_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `answer_modified` timestamp NOT NULL DEFAULT '2020-12-31 06:00:00',
+  `answer_modified` timestamp NOT NULL DEFAULT '2020-12-31 03:00:00',
+  `answer_published` tinyint(1) NOT NULL DEFAULT 1,
   `answer_ip` varbinary(42) DEFAULT NULL,
   `answer_order` smallint(6) NOT NULL DEFAULT 0,
   `answer_after` smallint(6) NOT NULL DEFAULT 0,
   `answer_votes` smallint(6) NOT NULL DEFAULT 0,
   `answer_content` text NOT NULL,
   `answer_lo` int(11) NOT NULL DEFAULT 0,
-  `answer_del` tinyint(1) NOT NULL DEFAULT 0
+  `answer_is_deleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Дамп данных таблицы `answers`
 --
 
-INSERT INTO `answers` (`answer_id`, `answer_post_id`, `answer_user_id`, `answer_date`, `answer_modified`, `answer_ip`, `answer_order`, `answer_after`, `answer_votes`, `answer_content`, `answer_lo`, `answer_del`) VALUES
-(1, 3, 1, '2021-04-30 01:41:27', '2020-12-31 06:00:00', 0x3132372e302e302e31, 0, 0, 0, 'Первый ответ в теме', 0, 0),
-(2, 1, 2, '2021-07-02 04:34:52', '2020-12-31 06:00:00', 0x3132372e302e302e31, 0, 0, 0, 'Муха села на варенье, Вот и всё стихотворение... ', 0, 0);
+INSERT INTO `answers` (`answer_id`, `answer_post_id`, `answer_user_id`, `answer_date`, `answer_modified`, `answer_published`, `answer_ip`, `answer_order`, `answer_after`, `answer_votes`, `answer_content`, `answer_lo`, `answer_is_deleted`) VALUES
+(1, 3, 1, '2021-04-29 22:41:27', '2020-12-31 03:00:00', 1, 0x3132372e302e302e31, 0, 0, 0, 'Первый ответ в теме', 0, 0),
+(2, 1, 2, '2021-07-02 01:34:52', '2020-12-31 03:00:00', 1, 0x3132372e302e302e31, 0, 0, 0, 'Муха села на варенье, Вот и всё стихотворение... ', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `audits`
+--
+
+CREATE TABLE `audits` (
+  `audit_id` int(11) NOT NULL,
+  `audit_type` varchar(16) DEFAULT NULL COMMENT 'Посты, ответы, комментарии',
+  `audit_data` timestamp NOT NULL DEFAULT current_timestamp(),
+  `audit_user_id` int(11) NOT NULL DEFAULT 0,
+  `audit_content_id` int(11) NOT NULL DEFAULT 0,
+  `audit_read_flag` tinyint(1) DEFAULT 0 COMMENT 'Состояние прочтения'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -68,12 +84,13 @@ CREATE TABLE `comments` (
   `comment_comment_id` int(11) NOT NULL DEFAULT 0,
   `comment_user_id` int(11) NOT NULL DEFAULT 0,
   `comment_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `comment_modified` timestamp NOT NULL DEFAULT '2020-12-31 06:00:00',
+  `comment_modified` timestamp NOT NULL DEFAULT '2020-12-31 03:00:00',
+  `comment_published` tinyint(1) NOT NULL DEFAULT 1,
   `comment_ip` varbinary(42) DEFAULT NULL,
   `comment_after` smallint(6) NOT NULL DEFAULT 0,
   `comment_votes` smallint(6) NOT NULL DEFAULT 0,
   `comment_content` text NOT NULL,
-  `comment_del` tinyint(1) NOT NULL DEFAULT 0
+  `comment_is_deleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -219,7 +236,8 @@ CREATE TABLE `posts` (
   `post_draft` smallint(1) NOT NULL DEFAULT 0,
   `post_space_id` int(11) NOT NULL DEFAULT 0,
   `post_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `edit_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `post_modified` timestamp NOT NULL DEFAULT current_timestamp(),
+  `post_published` tinyint(1) NOT NULL DEFAULT 1,
   `post_user_id` int(10) UNSIGNED NOT NULL,
   `post_ip_int` varchar(45) DEFAULT NULL,
   `post_after` smallint(6) NOT NULL DEFAULT 0 COMMENT 'id первого ответа',
@@ -239,17 +257,17 @@ CREATE TABLE `posts` (
   `post_top` tinyint(1) NOT NULL DEFAULT 0 COMMENT '1 - пост поднят',
   `post_url` varchar(250) DEFAULT NULL,
   `post_url_domain` varchar(250) DEFAULT NULL,
-  `post_is_delete` tinyint(1) DEFAULT 0
+  `post_is_deleted` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Дамп данных таблицы `posts`
 --
 
-INSERT INTO `posts` (`post_id`, `post_title`, `post_slug`, `post_type`, `post_translation`, `post_draft`, `post_space_id`, `post_date`, `edit_date`, `post_user_id`, `post_ip_int`, `post_after`, `post_votes`, `post_karma`, `post_answers_count`, `post_comments_count`, `post_hits_count`, `post_content`, `post_content_img`, `post_thumb_img`, `post_related`, `post_merged_id`, `post_closed`, `post_tl`, `post_lo`, `post_top`, `post_url`, `post_url_domain`, `post_is_delete`) VALUES
-(1, 'Муха села на варенье, Вот и всё стихотворение...', 'muha-stih', 0, 0, 0, 1, '2021-02-28 09:08:09', '2021-03-05 07:05:25', 1, NULL, 0, 0, 0, 1, 0, 2, '> \"Нет не всё!\" - сказала Муха,\r\n\r\n> Почесала себе брюхо,\r\n\r\n> Свесив с блюдца две ноги,\r\n\r\n> Мне сказала:\"Погоди!\r\n\r\n> Прежде чем сесть на варенье,\r\n\r\n> Я прочла стихотворенье,\r\n\r\n> Неизвестного поэта,\r\n\r\n> Написавшего про это.\r\n\r\n\r\n## Заголовок\r\n\r\nЧто-то в модели много кода:\r\n\r\n```\r\n$db = \\Config\\Database::connect();\r\n$builder = $db->table(\'Posts AS a\');\r\n$builder->select(\'a.*, b.id, b.nickname, b.avatar\');\r\n$builder->join(\"users AS b\", \"b.id = a.post_user_id\");\r\n$builder->where(\'a.post_slug\', $slug);\r\n$builder->orderBy(\'a.post_id\', \'DESC\');\r\n```\r\n\r\nВот. Это первый пост.', NULL, NULL, NULL, 0, 0, 0, 0, 0, NULL, NULL, 0),
-(2, 'Второй пост...', 'vtoroi-post', 0, 0, 0, 2, '2021-02-28 09:15:58', '2021-03-05 07:05:25', 2, NULL, 0, 0, 0, 0, 0, 2, 'Не будет тут про муху. Просто второй пост.\r\n\r\n> в лесу родилась ёлка, зеленая была...', NULL, NULL, NULL, 0, 0, 0, 0, 0, NULL, NULL, 0),
-(3, 'Medium — платформа для создания контента', 'medium-where-good-ideas-find-you', 0, 0, 0, 2, '2021-04-30 01:35:13', '2021-04-30 01:35:13', 1, '127.0.0.1', 0, 0, 0, 1, 0, 1, 'Medium — это платформа для создания контента, основанная соучредителем Blogger и Twitter Эван Уильямсом. Многие компании используют Medium в качестве платформы для публикации...', '2021/c-1624954734.webp', NULL, NULL, 0, 0, 0, 0, 0, NULL, NULL, 0);
+INSERT INTO `posts` (`post_id`, `post_title`, `post_slug`, `post_type`, `post_translation`, `post_draft`, `post_space_id`, `post_date`, `post_modified`, `post_published`, `post_user_id`, `post_ip_int`, `post_after`, `post_votes`, `post_karma`, `post_answers_count`, `post_comments_count`, `post_hits_count`, `post_content`, `post_content_img`, `post_thumb_img`, `post_related`, `post_merged_id`, `post_closed`, `post_tl`, `post_lo`, `post_top`, `post_url`, `post_url_domain`, `post_is_deleted`) VALUES
+(1, 'Муха села на варенье, Вот и всё стихотворение...', 'muha-stih', 0, 0, 0, 1, '2021-02-28 06:08:09', '2021-03-05 04:05:25', 1, 1, NULL, 0, 0, 0, 1, 0, 2, '> \"Нет не всё!\" - сказала Муха,\r\n\r\n> Почесала себе брюхо,\r\n\r\n> Свесив с блюдца две ноги,\r\n\r\n> Мне сказала:\"Погоди!\r\n\r\n> Прежде чем сесть на варенье,\r\n\r\n> Я прочла стихотворенье,\r\n\r\n> Неизвестного поэта,\r\n\r\n> Написавшего про это.\r\n\r\n\r\n## Заголовок\r\n\r\nЧто-то в модели много кода:\r\n\r\n```\r\n$db = \\Config\\Database::connect();\r\n$builder = $db->table(\'Posts AS a\');\r\n$builder->select(\'a.*, b.id, b.nickname, b.avatar\');\r\n$builder->join(\"users AS b\", \"b.id = a.post_user_id\");\r\n$builder->where(\'a.post_slug\', $slug);\r\n$builder->orderBy(\'a.post_id\', \'DESC\');\r\n```\r\n\r\nВот. Это первый пост.', NULL, NULL, NULL, 0, 0, 0, 0, 0, NULL, NULL, 0),
+(2, 'Второй пост...', 'vtoroi-post', 0, 0, 0, 2, '2021-02-28 06:15:58', '2021-03-05 04:05:25', 1, 2, NULL, 0, 0, 0, 0, 0, 2, 'Не будет тут про муху. Просто второй пост.\r\n\r\n> в лесу родилась ёлка, зеленая была...', NULL, NULL, NULL, 0, 0, 0, 0, 0, NULL, NULL, 0),
+(3, 'Medium — платформа для создания контента', 'medium-where-good-ideas-find-you', 0, 0, 0, 2, '2021-04-29 22:35:13', '2021-04-29 22:35:13', 1, 1, '127.0.0.1', 0, 0, 0, 1, 0, 1, 'Medium — это платформа для создания контента, основанная соучредителем Blogger и Twitter Эван Уильямсом. Многие компании используют Medium в качестве платформы для публикации...', '2021/c-1624954734.webp', NULL, NULL, 0, 0, 0, 0, 0, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -299,9 +317,9 @@ CREATE TABLE `space` (
 --
 
 INSERT INTO `space` (`space_id`, `space_name`, `space_slug`, `space_description`, `space_img`, `space_cover_art`, `space_text`, `space_short_text`, `space_date`, `space_color`, `space_category_id`, `space_user_id`, `space_type`, `space_permit_users`, `space_feed`, `space_tl`, `space_is_delete`) VALUES
-(1, 'meta', 'meta', 'Мета-обсуждение самого сайта, включая вопросы, предложения и отчеты об ошибках.', 'space_no.png', 'space_cover_no.jpeg', 'тест 1...', 'Короткое описание...', '2021-02-28 09:15:58', '#339900', 1, 1, 1, 0, 0, 0, 0),
-(2, 'Вопросы', 'qa', 'Вопросы по скрипту и не только', 'space_no.png', 'space_cover_no.jpeg', 'Вопросы по скрипту и не только', 'Короткое описание...', '2021-02-28 09:15:58', '#333333', 1, 1, 1, 0, 0, 0, 0),
-(3, 'флуд', 'flud', 'Просто обычные разговоры', 'space_no.png', 'space_cover_no.jpeg', 'тест 3...', 'Короткое описание...', '2021-02-28 09:15:58', '#f56400', 1, 1, 0, 0, 0, 0, 0);
+(1, 'meta', 'meta', 'Мета-обсуждение самого сайта, включая вопросы, предложения и отчеты об ошибках.', 'space_no.png', 'space_cover_no.jpeg', 'тест 1...', 'Короткое описание...', '2021-02-28 06:15:58', '#339900', 1, 1, 1, 0, 0, 0, 0),
+(2, 'Вопросы', 'qa', 'Вопросы по скрипту и не только', 'space_no.png', 'space_cover_no.jpeg', 'Вопросы по скрипту и не только', 'Короткое описание...', '2021-02-28 06:15:58', '#333333', 1, 1, 1, 0, 0, 0, 0),
+(3, 'флуд', 'flud', 'Просто обычные разговоры', 'space_no.png', 'space_cover_no.jpeg', 'тест 3...', 'Короткое описание...', '2021-02-28 06:15:58', '#f56400', 1, 1, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -369,8 +387,8 @@ CREATE TABLE `topic` (
 --
 
 INSERT INTO `topic` (`topic_id`, `topic_title`, `topic_description`, `topic_info`, `topic_slug`, `topic_img`, `topic_add_date`, `topic_seo_title`, `topic_merged_id`, `topic_parent_id`, `topic_is_parent`, `topic_tl`, `topic_related`, `topic_post_related`, `topic_space_related`, `topic_focus_count`, `topic_count`) VALUES
-(1, 'SEO', 'Поисковая оптимизация — это комплекс мер по внутренней и внешней оптимизации для поднятия позиций сайта в результатах выдачи поисковых систем.\r\n', 'Комплекс мер по внутренней и внешней оптимизации для поднятия позиций сайта в результатах выдачи поисковых систем по определённым запросам пользователей.\r\n\r\n**Поисковая оптимизация** — это способ использования правил поиска поисковых систем для улучшения текущего естественного ранжирования веб-сайтов в соответствующих поисковых системах. \r\n\r\nЦелью SEO является предоставление экологического решения для саморекламы для веб-сайта, позволяющего веб-сайту занимать лидирующие позиции в отрасли, чтобы получить преимущества бренда. \r\n\r\nSEO включает как внешнее, так и внутреннее SEO. \r\n\r\nSEO средства получить от поисковых систем больше бесплатного трафика, разумное планирование с точки зрения структуры веб-сайта, плана построения контента, взаимодействия с пользователем и общения, страниц и т.д., чтобы сделать веб-сайт более подходящим для принципов индексации поисковых систем. \r\n\r\nПовышение пригодности веб-сайтов для поисковых систем также называется Оптимизацией для поисковых систем, может не только улучшить эффект SEO, но и сделать информацию, относящуюся к веб-сайту, отображаемую в поисковой системе, более привлекательной для пользователей.', 'seo', 't-1-1625149922.jpeg', '2021-06-29 06:29:20', 'Поисковая оптимизация (SEO)', 0, 0, 0, 0, '', NULL, NULL, 0, 1),
-(2, 'Интересные сайты', 'Интересные сайты в Интернете. Обзоры, интересные материалы, переводы. Статьи.', 'Интересные сайты в Интернете. Обзоры, интересные материалы, переводы. Статьи.\r\n\r\nПросто вводная страница... В разработке...', 'sites', 't-2-1625149821.jpeg', '2021-06-29 06:29:20', 'Интересные сайты', 0, 0, 0, 0, '1', '3', NULL, 0, 1);
+(1, 'SEO', 'Поисковая оптимизация — это комплекс мер по внутренней и внешней оптимизации для поднятия позиций сайта в результатах выдачи поисковых систем.\r\n', 'Комплекс мер по внутренней и внешней оптимизации для поднятия позиций сайта в результатах выдачи поисковых систем по определённым запросам пользователей.\r\n\r\n**Поисковая оптимизация** — это способ использования правил поиска поисковых систем для улучшения текущего естественного ранжирования веб-сайтов в соответствующих поисковых системах. \r\n\r\nЦелью SEO является предоставление экологического решения для саморекламы для веб-сайта, позволяющего веб-сайту занимать лидирующие позиции в отрасли, чтобы получить преимущества бренда. \r\n\r\nSEO включает как внешнее, так и внутреннее SEO. \r\n\r\nSEO средства получить от поисковых систем больше бесплатного трафика, разумное планирование с точки зрения структуры веб-сайта, плана построения контента, взаимодействия с пользователем и общения, страниц и т.д., чтобы сделать веб-сайт более подходящим для принципов индексации поисковых систем. \r\n\r\nПовышение пригодности веб-сайтов для поисковых систем также называется Оптимизацией для поисковых систем, может не только улучшить эффект SEO, но и сделать информацию, относящуюся к веб-сайту, отображаемую в поисковой системе, более привлекательной для пользователей.', 'seo', 't-1-1625149922.jpeg', '2021-06-29 03:29:20', 'Поисковая оптимизация (SEO)', 0, 0, 0, 0, '', NULL, NULL, 0, 1),
+(2, 'Интересные сайты', 'Интересные сайты в Интернете. Обзоры, интересные материалы, переводы. Статьи.', 'Интересные сайты в Интернете. Обзоры, интересные материалы, переводы. Статьи.\r\n\r\nПросто вводная страница... В разработке...', 'sites', 't-2-1625149821.jpeg', '2021-06-29 03:29:20', 'Интересные сайты', 0, 0, 0, 0, '1', '3', NULL, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -660,6 +678,15 @@ ALTER TABLE `answers`
   ADD KEY `answer_post_id` (`answer_post_id`,`answer_order`);
 
 --
+-- Индексы таблицы `audits`
+--
+ALTER TABLE `audits`
+  ADD PRIMARY KEY (`audit_id`),
+  ADD KEY `audit_type` (`audit_type`),
+  ADD KEY `audit_user_id` (`audit_user_id`),
+  ADD KEY `audit_content_id` (`audit_content_id`);
+
+--
 -- Индексы таблицы `badge`
 --
 ALTER TABLE `badge`
@@ -904,6 +931,12 @@ ALTER TABLE `votes_post`
 --
 ALTER TABLE `answers`
   MODIFY `answer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT для таблицы `audits`
+--
+ALTER TABLE `audits`
+  MODIFY `audit_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `badge`

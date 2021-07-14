@@ -7,30 +7,30 @@
 
                 <?php if (!empty($answers)) { ?>
 
-                    <?php foreach ($answers as $answ) { ?> 
-                        <?php if($answ['answer_del'] == 0) { ?>
+                    <?php foreach ($answers as $answer) { ?> 
+                        <?php if($answer['answer_is_deleted'] == 0) { ?>
                             <div class="answ-telo_bottom">
                                 <div class="small">
-                                    <?= user_avatar_img($answ['avatar'], 'small', $answ['login'], 'ava'); ?>
+                                    <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava'); ?>
                                     
-                                    <a class="date" href="/u/<?= $answ['login']; ?>"><?= $answ['login']; ?></a>
+                                    <a class="date" href="/u/<?= $answer['login']; ?>"><?= $answer['login']; ?></a>
                                     
-                                    <span class="date"><?= $answ['date']; ?></span>
+                                    <span class="date"><?= $answer['date']; ?></span>
                                    
                                     <span class="indent"> &#183; </span>
-                                    <a href="/post/<?= $answ['post_id']; ?>/<?= $answ['post_slug']; ?>"><?= $answ['post_title']; ?></a>
+                                    <a href="/post/<?= $answer['post_id']; ?>/<?= $answer['post_slug']; ?>"><?= $answer['post_title']; ?></a>
                                 </div>
                                 <div class="telo-body">
-                                    <?= $answ['content']; ?> 
+                                    <?= $answer['content']; ?> 
                                 </div>
                                 <div class="post-full-footer date">
-                                    <div class="up-id"></div> + <?= $answ['answer_votes']; ?>
+                                    <div class="up-id"></div> + <?= $answer['answer_votes']; ?>
                                 </div>
                             </div>  
                         <?php } else { ?>    
                             <div class="dell answ-telo_bottom"> 
                                 <div class="voters"></div>
-                                ~ <?= lang('answer-deleted'); ?>
+                                ~ <?= lang('Answer deleted'); ?>
                             </div>
                         <?php } ?>     
                                 

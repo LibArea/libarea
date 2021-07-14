@@ -2,6 +2,9 @@
     <div class="white-box menu-info">
         <div class="inner-padding big">
             <div class="menu-info">
+                <a <?php if ($uid['uri'] == '/admin/audit') { ?> class="active"<?php } ?> title="<?= lang('Audit'); ?>" href="/admin/audit">
+                    ~ <?= lang('Audit'); ?>
+                </a>
                 <a <?php if ($uid['uri'] == '/admin/spaces') { ?> class="active"<?php } ?> title="<?= lang('Spaces'); ?>" href="/admin/spaces">
                     ~ <?= lang('Spaces'); ?>
                 </a>

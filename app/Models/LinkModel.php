@@ -32,7 +32,7 @@ class LinkModel extends \MainModel
                 ->leftJoin(['space'])->on(['space_id'], '=', ['post_space_id'])
                 ->leftJoin(['votes_post'])->on(['votes_post_item_id'], '=', ['post_id'])
                 ->and(['votes_post_user_id'], '=', $uid)
-                ->where(['post_is_delete'], '=', 0)
+                ->where(['post_is_deleted'], '=', 0)
                 ->and(['post_url_domain'], '=', $url)
                 ->orderBy(['post_id'])->desc();
 

@@ -9,22 +9,17 @@ Route::before('Authorization@noAuth')->getGroup();
         
         Route::get('/admin/word/del')->controller('AdminController@deleteWord');
         
+        Route::get('/admin/audit/status')->controller('AdminController@status');
+        Route::get('/status/action')->controller('PublishController@deletingAndRestoring');
+
         Route::get('/votes/post')->controller('VotesController', ['post']); 
         Route::get('/votes/answer')->controller('VotesController', ['answer']); 
         Route::get('/votes/comment')->controller('VotesController', ['comment']);
         Route::get('/votes/link')->controller('VotesController', ['link']);
 
-        Route::get('/post/del')->controller('PostController@deletePost');
         Route::get('/post/grabtitle')->controller('PostController@grabMeta');
- 
         Route::get('/comment/editform')->controller('CommentController@editCommentForm');
-        Route::get('/comment/del')->controller('CommentController@deletComment');
-        Route::get('/comment/recover')->controller('CommentController@recoverComment');
-        
-        Route::get('/answer/del')->controller('AnswerController@deletAnswer');
         Route::get('/answer/addfavorite')->controller('AnswerController@addAnswerFavorite');
-        Route::get('/answer/recover')->controller('AnswerController@recoverAnswer');
- 
         Route::get('/post/addpostprof')->controller('PostController@addPostProfile');
         Route::get('/post/addfavorite')->controller('PostController@addPostFavorite');
         
@@ -58,20 +53,19 @@ Route::before('Authorization@noAuth')->getGroup();
             Route::get('/users/setting/avatar/edit')->controller('UserController@settingAvatarEdit');
             Route::get('/users/setting/security/edit')->controller('UserController@settingSecurityEdit');
             
-            Route::get('/post/create')->controller('PostController@create');
+            Route::get('/post/create')->controller('PublishController@createPost');
+            Route::get('/comment/add')->controller('PublishController@createComment');
+            Route::get('/answer/add')->controller('PublishController@createAnswer');
+            
             Route::get('/post/editpost/{id}')->controller('PostController@edit');
+            Route::get('/comment/edit')->controller('CommentController@editComment');
+            Route::get('/answer/edit')->controller('AnswerController@editAnswer');
             
             Route::get('/invitation/create')->controller('UserController@invitationCreate');
             Route::get('/users/setting/edit')->controller('UserController@settingEdit');
             Route::get('/users/setting/avatar/edit')->controller('UserController@settingAvatarEdit');
             Route::get('/users/setting/security/edit')->controller('UserController@settingSecurityEdit');
 
-            Route::get('/comment/edit')->controller('CommentController@editComment');
-            Route::get('/comment/add')->controller('CommentController@createComment');
-        
-            Route::get('/answer/edit')->controller('AnswerController@editAnswer');
-            Route::get('/answer/add')->controller('AnswerController@createAnswer');
-     
             Route::get('/messages/send')->controller('MessagesController@send');
         Route::endProtect(); // Завершение защиты
     Route::endType();  // Завершение getType('post')
@@ -84,6 +78,8 @@ Route::before('Authorization@noAuth')->getGroup();
 
     Route::get('/admin/words')->controller('AdminController@words');
     Route::get('/admin/wordadd')->controller('AdminController@wordsAddForm');
+    
+    Route::get('/admin/audit')->controller('AdminController@audit');
 
     Route::get('/admin/spaces')->controller('AdminController@spaces');
     Route::get('/admin/spaces/page/{page?}')->controller('AdminController@spaces')->where(['page' => '[0-9]+']);
@@ -114,9 +110,10 @@ Route::before('Authorization@noAuth')->getGroup();
     Route::get('/admin/badge/{id}/edit')->controller('AdminController@editBadgeForm')->where(['id' => '[0-9]+']);
     
     Route::get('/post/img/{id}/remove')->controller('PostController@imgPostRemove')->where(['id' => '[0-9]+']);
- 
-    Route::get('/post/add')->controller('PostController@addPost');
-    Route::get('/post/add/space/{space_id}')->controller('PostController@addPost')->where(['space_id' => '[0-9]+']);
+    
+    // Добавим пост (форма)
+    Route::get('/post/add')->controller('PublishController@addPostForm');
+    Route::get('/post/add/space/{space_id}')->controller('PublishController@addPostForm')->where(['space_id' => '[0-9]+']);
  
     Route::get('/post/edit/{id}')->controller('PostController@editPostForm');
     
@@ -223,7 +220,7 @@ Route::get('/s/{slug}/page/{page?}')->controller('SpaceController@posts', ['feed
 Route::get('/s/{slug}/top')->controller('SpaceController@posts', ['top'])->where(['slug' => '[A-Za-z0-9_]+']);
 Route::get('/s/{slug}/top/page/{page?}')->controller('SpaceController@posts', ['top'])->where(['slug' => '[A-Za-z0-9_]+', 'page' => '[0-9]+']);
 
-Route::get('/moderations')->controller('ModerationController');
+Route::get('/moderations')->controller('PublishController@moderation');
 
 Route::get('/topics')->controller('TopicController')->where(['page' => '[0-9]+']);
 Route::get('/topics/page/{page?}')->controller('TopicController')->where(['page' => '[0-9]+']);

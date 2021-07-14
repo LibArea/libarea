@@ -103,7 +103,7 @@
           <div class="post-body">
             <a href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
               <h2 class="title"><?= $post['post_title']; ?>
-                <?php if ($post['post_is_delete'] == 1) { ?> 
+                <?php if ($post['post_is_deleted'] == 1) { ?> 
                   <i class="icon trash"></i>
                 <?php } ?>
                 <?php if($post['post_closed'] == 1) { ?> 
@@ -236,19 +236,19 @@
       <div class="last-comm white-box sticky"> 
         <div class="inner-padding">
           <?php $num = 1; ?>
-          <?php foreach ($data['latest_answers'] as  $answ)  { ?>
+          <?php foreach ($data['latest_answers'] as  $answer)  { ?>
             <?php $num++; ?>
             <style nonce="<?= $_SERVER['nonce']; ?>">
-             .comm-space-color_<?= $num; ?> {border-left: 2px solid <?= $answ['space_color']; ?>;}
+             .comm-space-color_<?= $num; ?> {border-left: 2px solid <?= $answer['space_color']; ?>;}
             </style>
             <div class="sb-telo comm-space-color_<?= $num; ?>">
               <div class="sb-date small"> 
-                <?= user_avatar_img($answ['avatar'], 'small', $answ['login'], 'ava'); ?>
+                <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava'); ?>
                 <span class="indent"></span>
-                <?= $answ['answer_date']; ?>
+                <?= $answer['answer_date']; ?>
               </div> 
-              <a href="/post/<?= $answ['post_id']; ?>/<?= $answ['post_slug']; ?>#answer_<?= $answ['answer_id']; ?>">
-                <?= $answ['answer_content']; ?>...  
+              <a href="/post/<?= $answer['post_id']; ?>/<?= $answer['post_slug']; ?>#answer_<?= $answer['answer_id']; ?>">
+                <?= $answer['answer_content']; ?>...  
               </a>
              </div>
           <?php } ?>

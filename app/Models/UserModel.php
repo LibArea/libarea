@@ -53,6 +53,8 @@ class UserModel extends \MainModel
                     id,
                     login,
                     name,
+                    activated,
+                    reg_ip,
                     email,
                     avatar,
                     trust_level,
@@ -182,7 +184,7 @@ class UserModel extends \MainModel
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['post_user_id'])
                 ->where(['id'], '=', $user_id)
                 ->and(['post_draft'], '=', 1)
-                ->and(['post_is_delete'], '=', 0)
+                ->and(['post_is_deleted'], '=', 0)
                 ->orderBy(['post_id'])->desc();
   
         return $query->getSelect();
@@ -202,13 +204,13 @@ class UserModel extends \MainModel
     {
         if ($type == 'posts') {
             
-            $sql = "SELECT post_id, post_draft, post_is_delete 
-                    FROM posts WHERE post_user_id = :user_id and post_draft = 0 and post_is_delete = 0";
+            $sql = "SELECT post_id, post_draft, post_is_deleted 
+                    FROM posts WHERE post_user_id = :user_id and post_draft = 0 and post_is_deleted = 0";
             
         } elseif ($type == 'comments') {
-            $sql = "SELECT comment_id FROM comments WHERE comment_user_id = :user_id and comment_del = 0";
+            $sql = "SELECT comment_id FROM comments WHERE comment_user_id = :user_id and comment_is_deleted = 0";
         } else {
-            $sql = "SELECT answer_id FROM answers WHERE answer_user_id = :user_id and answer_del = 0";
+            $sql = "SELECT answer_id FROM answers WHERE answer_user_id = :user_id and answer_is_deleted = 0";
         }
 
         return  DB::run($sql, ['user_id' => $user_id])->rowCount(); 

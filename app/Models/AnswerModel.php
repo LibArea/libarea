@@ -20,7 +20,7 @@ class AnswerModel extends \MainModel
                 u.id, u.login, u.avatar
                 FROM answers as c
                 JOIN users as u ON u.id = c.answer_user_id
-                JOIN posts as p ON c.answer_post_id = p.post_id AND c.answer_del = 0 ".$tl."
+                JOIN posts as p ON c.answer_post_id = p.post_id AND c.answer_is_deleted = 0 ".$tl."
                 ORDER BY c.answer_id DESC LIMIT 25 OFFSET ".$offset." ";
                         
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
@@ -29,7 +29,7 @@ class AnswerModel extends \MainModel
     // Количество ответов
     public static function getAnswersAllCount()
     {
-        $query = XD::select('*')->from(['answers'])->where(['answer_del'], '=', 0)->getSelect();
+        $query = XD::select('*')->from(['answers'])->where(['answer_is_deleted'], '=', 0)->getSelect();
         
         return ceil(count($query) / 25);
     }
@@ -60,7 +60,7 @@ class AnswerModel extends \MainModel
                 a.answer_ip,
                 a.answer_votes,
                 a.answer_after,
-                a.answer_del,
+                a.answer_is_deleted,
         
                 v.votes_answer_item_id, 
                 v.votes_answer_user_id,
@@ -93,38 +93,13 @@ class AnswerModel extends \MainModel
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['answer_user_id'])
                 ->leftJoin(['posts'])->on(['answer_post_id'], '=', ['post_id'])
                 ->where(['login'], '=', $slug)
-                ->and(['answer_del'], '=', 0)
+                ->and(['answer_is_deleted'], '=', 0)
                 ->and(['post_tl'], '=', 0)
                 ->orderBy(['answer_id'])->desc();
         
         return $query->getSelect();
     } 
    
-    // Запись ответа
-    // $post_id - на какой пост ответ
-    // $ip      - IP отвечающего  
-    // $comment - содержание
-    // $my_id   - id автора ответа
-    public static function answerAdd($post_id, $ip, $comment, $my_id)
-    { 
-        XD::insertInto(['answers'], '(', ['answer_post_id'], ',', ['answer_ip'], ',', ['answer_content'], ',', ['answer_user_id'], ')')->values( '(', XD::setList([$post_id, $ip, $comment, $my_id]), ')' )->run();
-       
-       // id последнего ответа
-       $last_id = XD::select()->last_insert_id('()')->getSelectValue();
-       
-       // Отмечаем комментарий, что за ним есть ответ
-       //$otv = 1; // 1, значит за комментом есть ответ
-       //XD::update(['comments'])->set(['comment_after'], '=', $otv)->where(['comment_id'], '=', $comment_id)->run();
-
-       return $last_id; 
-    }
-    
-    // Удаление ответа
-    public static function AnswerDel($id)
-    {
-       return  XD::update(['answers'])->set(['answer_del'], '=', 1)->where(['answer_id'], '=', $id)->run();
-    }
-    
     // Информацию по id ответа
     public static function getAnswerOne($id)
     {
@@ -189,7 +164,7 @@ class AnswerModel extends \MainModel
                     a.answer_date,
                     a.answer_content,
                     a.answer_votes,
-                    a.answer_del,
+                    a.answer_is_deleted,
                     u.id,
                     u.login,
                     u.avatar,
@@ -200,7 +175,7 @@ class AnswerModel extends \MainModel
                         FROM answers AS a
                         LEFT JOIN users AS u ON u.id = a.answer_user_id
                         LEFT JOIN posts AS p ON p.post_id = a.answer_post_id
-                        WHERE a.answer_del = 1
+                        WHERE a.answer_is_deleted = 1
                         ORDER BY a.answer_id DESC LIMIT $start, $limit";
                 
         return  DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
@@ -209,17 +184,9 @@ class AnswerModel extends \MainModel
     // Количество
     public static function getAnswersDeletedCount()
     {
-        $sql = "SELECT answer_id, answer_del FROM answers WHERE answer_del = 1";
+        $sql = "SELECT answer_id, answer_is_deleted FROM answers WHERE answer_is_deleted = 1";
 
         return DB::run($sql)->rowCount(); 
     }
-    
-    // Восстановление
-    public static function answerRecover($id)
-    {
-         XD::update(['answers'])->set(['answer_del'], '=', 0)
-        ->where(['answer_id'], '=', $id)->run();
- 
-        return true;
-    }    
+
 }

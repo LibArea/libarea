@@ -22,7 +22,7 @@ class CommentModel extends \MainModel
                 u.id, u.login, u.avatar
                 fROM comments as c
                 JOIN users as u ON u.id = c.comment_user_id
-                JOIN posts as p ON c.comment_post_id = p.post_id AND c.comment_del = 0 ".$tl."
+                JOIN posts as p ON c.comment_post_id = p.post_id AND c.comment_is_deleted = 0 ".$tl."
                 ORDER BY c.comment_id DESC LIMIT 25 OFFSET ".$offset." ";
                         
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
@@ -31,7 +31,7 @@ class CommentModel extends \MainModel
     // Количество комментариев
     public static function getCommentAllCount()
     {
-        $query = XD::select('*')->from(['comments'])->where(['comment_del'], '=', 0)->getSelect();
+        $query = XD::select('*')->from(['comments'])->where(['comment_is_deleted'], '=', 0)->getSelect();
 
         return ceil(count($query) / 25);
     }
@@ -40,28 +40,29 @@ class CommentModel extends \MainModel
     public static function getComments($answer_id, $user_id)
     { 
         $sql = "SELECT 
-                c.comment_id,
-                c.comment_user_id,                
-                c.comment_answer_id,
-                c.comment_comment_id,
-                c.comment_content,
-                c.comment_date,
-                c.comment_votes,
-                c.comment_ip,
-                c.comment_del,
+                comment_id,
+                comment_user_id,                
+                comment_answer_id,
+                comment_comment_id,
+                comment_content,
+                comment_date,
+                comment_votes,
+                comment_ip,
+                comment_after,
+                comment_is_deleted,
                 
-                v.votes_comment_item_id, 
-                v.votes_comment_user_id,
+                votes_comment_item_id, 
+                votes_comment_user_id,
                 
-                u.id, 
-                u.login, 
-                u.avatar
+                id, 
+                login, 
+                avatar
                 
-                    FROM comments as c
-                    LEFT JOIN users as u ON u.id = c.comment_user_id
-                    LEFT JOIN votes_comment as v ON v.votes_comment_item_id = c.comment_id 
-                    AND v.votes_comment_user_id = $user_id
-                    WHERE c.comment_answer_id = " . $answer_id;
+                    FROM comments 
+                    LEFT JOIN users  ON id = comment_user_id
+                    LEFT JOIN votes_comment  ON votes_comment_item_id = comment_id 
+                    AND votes_comment_user_id = $user_id
+                    WHERE comment_answer_id = " . $answer_id;
         
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
@@ -73,39 +74,12 @@ class CommentModel extends \MainModel
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['comment_user_id'])
                 ->leftJoin(['posts'])->on(['comment_post_id'], '=', ['post_id'])
                 ->where(['login'], '=', $slug)
-                ->and(['comment_del'], '=', 0)
+                ->and(['comment_is_deleted'], '=', 0)
                 ->and(['post_tl'], '=', 0)
                 ->orderBy(['comment_id'])->desc();
         
         return $query->getSelect();
     } 
-   
-    // Запись комментария
-    // $post_id - на какой пост ответ
-    // $answer_id - на какой ответ комментарий
-    // $ip      - IP отвечающего  
-    // $comment_id - на какой комм. ответ, 0 - корневой
-    // $comment - содержание
-    // $my_id   - id автора ответа
-    public static function commentAdd($post_id, $answer_id, $comment_id, $ip, $comment, $my_id)
-    { 
-        XD::insertInto(['comments'], '(', ['comment_post_id'], ',', ['comment_answer_id'], ',', ['comment_comment_id'], ',', ['comment_ip'], ',', ['comment_content'], ',', ['comment_user_id'], ')')->values( '(', XD::setList([$post_id, $answer_id, $comment_id, $ip, $comment, $my_id]), ')' )->run();
-       
-       // id последнего комментария
-       $last_id = XD::select()->last_insert_id('()')->getSelectValue();
-       
-       // Отмечаем комментарий, что за ним есть ответ
-       XD::update(['comments'])->set(['comment_after'], '=', $last_id)->where(['comment_id'], '=', $comment_id)->run();
-
-       $answer = XD::select('*')->from(['answers'])->where(['answer_id'], '=', $answer_id)->getSelectOne();
-       
-       if ($answer['answer_after'] == 0) {
-            // Отмечаем ответ, что за ним есть комментарии
-            XD::update(['answers'])->set(['answer_after'], '=', $last_id)->where(['answer_id'], '=', $answer_id)->run();   
-       }
-
-       return $last_id; 
-    }
     
     // Последние 5 комментариев
     public static function latestComments($user_id) 
@@ -116,18 +90,12 @@ class CommentModel extends \MainModel
                  ->leftJoin(['space'])->on(['post_space_id'], '=', ['space_id']);
                  
                 if ($user_id) { 
-                    $result = $query->where(['comment_del'], '=', 0)->and(['comment_user_id'], '!=', $user_id);
+                    $result = $query->where(['comment_is_deleted'], '=', 0)->and(['comment_user_id'], '!=', $user_id);
                 } else {
-                    $result = $query->where(['comment_del'], '=', 0);
+                    $result = $query->where(['comment_is_deleted'], '=', 0);
                 } 
         
         return $result->orderBy(['comment_id'])->desc()->limit(5)->getSelect();
-    }
-    
-    // Удаление комментария
-    public static function CommentDel($comment_id)
-    {
-        return XD::update(['comments'])->set(['comment_del'], '=', 1)->where(['comment_id'], '=', $comment_id)->run();
     }
     
     // Получаем комментарий по id комментария
@@ -165,7 +133,7 @@ class CommentModel extends \MainModel
                     c.comment_date,
                     c.comment_content,
                     c.comment_votes,
-                    c.comment_del,
+                    c.comment_is_deleted,
                     u.id,
                     u.login,
                     u.avatar,
@@ -176,7 +144,7 @@ class CommentModel extends \MainModel
                         FROM comments AS c
                         LEFT JOIN users AS u ON u.id = c.comment_user_id
                         LEFT JOIN posts AS p ON p.post_id = c.comment_post_id
-                        WHERE c.comment_del = 1
+                        WHERE c.comment_is_deleted = 1
                         ORDER BY c.comment_id DESC LIMIT $start, $limit";
                 
         return  DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
@@ -185,20 +153,10 @@ class CommentModel extends \MainModel
     // Количество
     public static function getCommentsDeletedCount()
     {
-        $sql = "SELECT comment_id, comment_del FROM comments WHERE comment_del = 1";
+        $sql = "SELECT comment_id, comment_is_deleted FROM comments WHERE comment_is_deleted = 1";
 
         return DB::run($sql)->rowCount(); 
     }
-    
-    // Восстановление
-    public static function commentRecover($id)
-    {
-         XD::update(['comments'])->set(['comment_del'], '=', 0)
-        ->where(['comment_id'], '=', $id)->run();
- 
-        return true;
-    }
-    
-    
+  
 
 }

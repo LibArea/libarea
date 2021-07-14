@@ -16,7 +16,6 @@ class Content
          
         if ($type  == 'text') {
             $text   = $Parsedown->text($content);
-            $text   = self::stopWords($text); 
         } else {
             $text   = $Parsedown->line($content);
         }
@@ -24,43 +23,35 @@ class Content
         return self::parseUrl($text);
     }
   
-	public static function stopWords($content, $replace = '*')
+    // Аудит
+	public static function stopWordsExists($content, $replace = '*')
 	{
         $stop_words = ContentModel::getStopWords();
         
-		foreach($stop_words as $word)
-		{
-    		$word = trim($word['stop_word']);
-
+		foreach($stop_words as $word) {
+            
+            $word = trim($word['stop_word']);
+            
 			if (!$word) {
 				continue;
 			}
 
-            // В случае появления чувствительных слов, содержимое переходит в аудит (или меняется)
-            // Поддерживая как обычные строки, так и регулярные выражения.
-            // Регулярное выражение { *** } должно соответствовать PCRE
-            // https://www.php.net/manual/ru/pcre.pattern.php
-            // *** - можно расширить для выбора условий
 			if (substr($word, 0, 1) == '{' AND substr($word, -1, 1) == '}') {
-				$regex[] = substr($word, 1, -1);
-			} else {
-				$word_length = self::rowData($word);
-
-				$replace_str = '';
-				for ($i = 0; $i < $word_length; $i++) {
-					$replace_str .=  $replace;
+                
+				if (preg_match(substr($word, 1, -1), $content)) {
+					return true;
 				}
-
-				$content = str_replace($word, $replace_str, $content);
+                
+			} else {
+				if (strstr($content, $word)) {
+					return true;
+				}
 			}
 		}
 
-		if (isset($regex)) {
-			preg_replace($regex, '***', $content);
-		}
-
-		return $content;
+		return false;
 	}
+    
     
     // Длина строки и количество символов 
     public static function rowData($string, $charset = 'UTF-8')

@@ -113,7 +113,7 @@
                     <div class="post-body">
                         <a href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
                             <h2 class="title"><?= $post['post_title']; ?>
-                                <?php if ($post['post_is_delete'] == 1) { ?> 
+                                <?php if ($post['post_is_deleted'] == 1) { ?> 
                                     <i class="icon trash"></i>
                                 <?php } ?>
                                 <?php if($post['post_closed'] == 1) { ?> 

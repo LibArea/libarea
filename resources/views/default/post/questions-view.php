@@ -2,61 +2,61 @@
     <div class="answers white-box">
         <h2 class="lowercase"> <?= $post['post_answers_count'] ?> <?= $post['num_answers'] ?></h2>
         
-        <?php foreach ($answers as  $answ) { ?>
+        <?php foreach ($answers as  $answer) { ?>
         <div class="block-answer">
-            <?php if($answ['answer_del'] == 0) { ?>
+            <?php if($answer['answer_is_deleted'] == 0) { ?>
             
-            <?php if($uid['id'] == $answ['answer_user_id']) { ?> <?php $otvet = 1; ?> <?php } ?>
+            <?php if($uid['id'] == $answer['answer_user_id']) { ?> <?php $otvet = 1; ?> <?php } ?>
             
                 <div class="line"></div>
                 <ol class="answer-telo"> 
-                    <li class="answers_subtree" id="answer_<?= $answ['answer_id']; ?>">
+                    <li class="answers_subtree" id="answer_<?= $answer['answer_id']; ?>">
                         <div class="answ-telo qa-answ">
                             <div class="qa-footer">
                                 <div class="qa-ava">
-                                     <?= user_avatar_img($answ['avatar'], 'max', $answ['login'], 'avatar'); ?>
+                                     <?= user_avatar_img($answer['avatar'], 'max', $answer['login'], 'avatar'); ?>
                                 </div>
                                 <div class="qa-ava-info"> 
                                     <div class="qa-data-info"> 
-                                        <?= $answ['answer_date']; ?> 
-                                        <?php if (empty($answ['edit'])) { ?>
+                                        <?= $answer['answer_date']; ?> 
+                                        <?php if (empty($answer['edit'])) { ?>
                                             (<?= lang('ed'); ?>.)
                                         <?php } ?>
                                         <?php if ($uid['trust_level'] == 5) { ?> 
-                                            <?= $answ['answer_ip']; ?>
+                                            <?= $answer['answer_ip']; ?>
                                         <?php } ?> 
                                     </div>
-                                    <a class="qa-login" href="/u/<?= $answ['login']; ?>"><?= $answ['login']; ?></a> 
+                                    <a class="qa-login" href="/u/<?= $answer['login']; ?>"><?= $answer['login']; ?></a> 
                                 </div>
                             </div>
                         
                         
-                            <?= $answ['answer_content'] ?>
+                            <?= $answer['answer_content'] ?>
                         </div>
                         <div class="answer-footer">
                             <?php if($uid['trust_level'] >= Lori\Config::get(Lori\Config::PARAM_TL_ADD_COMM_QA)) { ?>
                             <?php if($post['post_closed'] == 0) { ?> 
-                            <?php if($post['post_is_delete'] == 0 || $uid['trust_level'] == 5) { ?>
-                                <span id="cm_add_link<?= $answ['answer_id']; ?>" class="cm_add_link">
-                                    <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answ['answer_id']; ?>" class="add-comment bar"><?= lang('Reply'); ?></a>
+                            <?php if($post['post_is_deleted'] == 0 || $uid['trust_level'] == 5) { ?>
+                                <span id="cm_add_link<?= $answer['answer_id']; ?>" class="cm_add_link">
+                                    <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment bar"><?= lang('Reply'); ?></a>
                                 </span>
                             <?php } ?>
                             <?php } ?>
                             <?php } ?>
                             
-                            <?php if($uid['id'] == $answ['answer_user_id'] || $uid['trust_level'] == 5) { ?>
+                            <?php if($uid['id'] == $answer['answer_user_id'] || $uid['trust_level'] == 5) { ?>
                                 <span id="answer_edit" class="answer_add_link">
-                                    <a class="editansw bar" href="/post/<?= $post['post_id'] ?>/answ/<?= $answ['answer_id']; ?>"><?= lang('Edit'); ?></a>
+                                    <a class="editansw bar" href="/post/<?= $post['post_id'] ?>/answ/<?= $answer['answer_id']; ?>"><?= lang('Edit'); ?></a>
                                 </span>
                             <?php } ?>
                 
                             <?php if ($uid['id']) { ?>
-                                <?php if ($answ['favorite_uid']){ ?>
-                                   <span class="user-answer-fav bar" data-answer="<?= $answ['answer_id']; ?>">
+                                <?php if ($answer['favorite_uid']){ ?>
+                                   <span class="user-answer-fav bar" data-answer="<?= $answer['answer_id']; ?>">
                                         <span class="favcomm"><?= lang('remove-favorites'); ?></span>
                                    </span>   
                                 <?php } else { ?>
-                                    <span class="user-answer-fav bar" data-answer="<?= $answ['answer_id']; ?>">
+                                    <span class="user-answer-fav bar" data-answer="<?= $answer['answer_id']; ?>">
                                         <span class="favcomm"><?= lang('add-favorites'); ?></span>
                                     </span>
                                 <?php } ?> 
@@ -66,7 +66,9 @@
                                 <span class="indent"></span>
                                 <span class="indent"></span>
                                 <span id="answer_dell" class="answer_add_link">
-                                    <a data-id="<?= $answ['answer_id']; ?>" class="del-answer bar"><?= lang('Remove'); ?></a>
+                                    <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action bar">
+                                    <?= lang('Remove'); ?>
+                                    </a>
                                 </span>
                             <?php } ?>
                             
@@ -74,63 +76,63 @@
                                 <div class="voters">
                                     <a rel="nofollow" href="/login"><div class="up-id"></div></a>
                                     <div class="score">
-                                        <?= $answ['answer_votes'] ? '+'.$answ['answer_votes'] : $answ['answer_votes']; ?>
+                                        <?= $answer['answer_votes'] ? '+'.$answer['answer_votes'] : $answer['answer_votes']; ?>
                                     </div>
                                 </div>
                             <?php } else { ?>
-                                <?php if ($answ['votes_answer_user_id'] == $uid['id'] || $uid['id'] == $answ['answer_user_id']) { ?>
+                                <?php if ($answer['votes_answer_user_id'] == $uid['id'] || $uid['id'] == $answer['answer_user_id']) { ?>
                                     <div class="voters active">
                                         <div class="up-id"></div>
                                         <div class="score">
-                                            <?= $answ['answer_votes'] ? '+'.$answ['answer_votes'] : $answ['answer_votes']; ?>
+                                            <?= $answer['answer_votes'] ? '+'.$answer['answer_votes'] : $answer['answer_votes']; ?>
                                         </div>
                                     </div>
                                 <?php } else { ?>
-                                    <div id="up<?= $answ['answer_id']; ?>" class="voters">
-                                        <div data-id="<?= $answ['answer_id']; ?>" data-type="answer" class="up-id"></div>
+                                    <div id="up<?= $answer['answer_id']; ?>" class="voters">
+                                        <div data-id="<?= $answer['answer_id']; ?>" data-type="answer" class="up-id"></div>
                                         <div class="score">
-                                            <?= $answ['answer_votes'] ? '+'.$answ['answer_votes'] : $answ['answer_votes']; ?>
+                                            <?= $answer['answer_votes'] ? '+'.$answer['answer_votes'] : $answer['answer_votes']; ?>
                                         </div>
                                     </div>
                                 <?php } ?>
                             <?php } ?>
                             
                         </div> 
-                        <div id="answer_addentry<?= $answ['answer_id']; ?>" class="reply"></div> 
+                        <div id="answer_addentry<?= $answer['answer_id']; ?>" class="reply"></div> 
                     </li>
                 </ol>
                                 
             <?php } else { ?>    
                  <ol class="dell answer-telo"> 
-                    <li class="answers_subtree" id="answer_<?= $answ['answer_id']; ?>">
-                        <span class="answ-deletes">~ <?= lang('answer-deleted'); ?></span>
+                    <li class="answers_subtree" id="answer_<?= $answer['answer_id']; ?>">
+                        <span class="answ-deletes">~ <?= lang('Answer deleted'); ?></span>
                     </li>
                 </ol>
-            <?php } ?>    
+            <?php } ?> 
         </div>
 
-            <?php foreach ($answ['comm'] as  $comm) { ?>
-                <?php if($comm['comment_del'] == 0) { ?>
+            <?php foreach ($answer['comm'] as  $comment) { ?>
+                <?php if($comment['comment_is_deleted'] == 0) { ?>
                      
                     <ol class="comm-telo qa-comm"> 
-                        <li class="comment_subtree" id="comment_<?= $comm['comment_id']; ?>">
+                        <li class="comment_subtree" id="comment_<?= $comment['comment_id']; ?>">
                             <div class="line-qa"></div>
                             <div class="comm-telo">
                                 <div class="comm-telo-body">
-                                    <?= $comm['comment_content'] ?>  
+                                    <?= $comment['comment_content'] ?>  
                                     <span class="qa-comm-info"> 
-                                        —  <a class="qa-user" href="/u/<?= $comm['login']; ?>"><?= $comm['login']; ?></a> 
-                                       &nbsp; <?= $comm['comment_date']; ?>
+                                        —  <a class="qa-user" href="/u/<?= $comment['login']; ?>"><?= $comment['login']; ?></a> 
+                                       &nbsp; <?= $comment['comment_date']; ?>
                                         <?php if ($uid['trust_level'] == 5) { ?> 
-                                            &nbsp; <?= $comm['comment_ip']; ?>
+                                            &nbsp; <?= $comment['comment_ip']; ?>
                                         <?php } ?> 
                                      </span>
 
                                     <?php if($uid['trust_level'] >= Lori\Config::get(Lori\Config::PARAM_TL_ADD_COMM_QA)) { ?>
                                     <?php if($post['post_closed'] == 0) { ?>
-                                    <?php if($post['post_is_delete'] == 0 || $uid['trust_level'] == 5) { ?>
-                                        <span id="cm_add_link<?= $comm['comment_id']; ?>" class="cm_add_link">
-                                            <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answ['answer_id']; ?>" data-comment_id="<?= $comm['comment_id']; ?>" class="add-comment-re">
+                                    <?php if($post['post_is_deleted'] == 0 || $uid['trust_level'] == 5) { ?>
+                                        <span id="cm_add_link<?= $comment['comment_id']; ?>" class="cm_add_link">
+                                            <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment-re bar">
                                                 <?= lang('Reply'); ?>
                                             </a>
                                         </span>
@@ -138,9 +140,9 @@
                                     <?php } ?>
                                     <?php } ?>
                                     
-                                    <?php if($uid['id'] == $comm['comment_user_id'] || $uid['trust_level'] == 5) { ?>
+                                    <?php if($uid['id'] == $comment['comment_user_id'] || $uid['trust_level'] == 5) { ?>
                                         <span id="comment_edit" class="cm_add_link">
-                                            <a data-comment_id="<?= $comm['comment_id']; ?>" class="editcomm">
+                                            <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm bar">
                                                 <?= lang('Edit'); ?>
                                             </a>
                                         </span>
@@ -148,7 +150,7 @@
 
                                     <?php if($uid['trust_level'] == 5) { ?>
                                         <span id="comment_dell" class="cm_add_link">
-                                            <a data-comment_id="<?= $comm['comment_id']; ?>" class="del-comment">
+                                            <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action">
                                                 <?= lang('Remove'); ?>
                                             </a>
                                         </span>
@@ -156,7 +158,7 @@
                                     
                                 </div>
                             </div>
-                            <div id="comment_addentry<?= $comm['comment_id']; ?>" class="reply"></div> 
+                            <div id="comment_addentry<?= $comment['comment_id']; ?>" class="reply"></div> 
                         
                         </li>
                     </ol>

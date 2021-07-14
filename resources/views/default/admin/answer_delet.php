@@ -29,7 +29,7 @@
                            <div class="post-full-footer date">
                                + <?= $answer['answer_votes']; ?>
                                <span id="cm_dell" class="right comment_link small">
-                                    <a data-id="<?= $answer['answer_id']; ?>" class="recover-answer">
+                                    <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action">
                                         <?= lang('Recover'); ?>
                                     </a>
                                </span>

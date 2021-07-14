@@ -50,4 +50,18 @@ $(function(){
                 location.reload();                
             }) 
     });
+    
+    // Восстановление контента
+    $(document).on('click', '.audit-status', function() {
+        let status_id  = $(this).data('id');
+        let status_type = $(this).data('status');
+        fetch("/admin/audit/status", { 
+            method: "POST",
+            body: "status=" + status_id + "@" + status_type,
+            headers:{'Content-Type': 'application/x-www-form-urlencoded'} 
+            })
+            .then((response) => {
+                location.reload();                
+            }) 
+    });
 });

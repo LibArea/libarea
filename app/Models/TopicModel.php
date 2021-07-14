@@ -89,7 +89,7 @@ class TopicModel extends \MainModel
             } else {
                 $tl = 'AND p.post_tl <= '.$uid['trust_level'].'';
             }
-            $display = 'AND p.post_is_delete = 0 '.$tl.'';
+            $display = 'AND p.post_is_deleted = 0 '.$tl.'';
         } else {
             $display = ''; 
         }
@@ -123,7 +123,7 @@ class TopicModel extends \MainModel
             } else {
                 $tl = 'AND p.post_tl <= '.$uid['trust_level'].'';
             }
-            $display = 'AND p.post_is_delete = 0 '.$tl.'';
+            $display = 'AND p.post_is_deleted = 0 '.$tl.'';
         } else {
             $display = ''; 
         }

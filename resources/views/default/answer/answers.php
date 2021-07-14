@@ -9,7 +9,7 @@
                     <?php if (!empty($answers)) { ?>
                   
                         <?php foreach ($answers as $answer) { ?>  
-                            <?php if($answer['answer_del'] == 0) { ?>
+                            <?php if($answer['answer_is_deleted'] == 0) { ?>
                                 <div class="answ-telo_bottom">
                                     <div class="answ-header small">
                                         <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava'); ?>

@@ -189,16 +189,15 @@ function accessPm($uid, $user_id, $add_tl)
 // $stop_time - разрешенное время
 function accessСheck($content, $type, $uid, $after, $stop_time)
 {
-    
     if (!$content) {
         return false;
     }
-    
+      
     // Редактировать может только автор и админ
     if ($content[$type . '_user_id'] != $uid['id'] && $uid['trust_level'] != 5) {
         return false;
     }
-    
+ 
     // Запретим удаление если есть ответ
     // И если прошло 30 минут
     if ($uid['trust_level'] != 5) {
@@ -208,14 +207,15 @@ function accessСheck($content, $type, $uid, $after, $stop_time)
                 return false;
             }
         }
-        
+              
         if ($stop_time > 0) { 
             $diff = strtotime(date("Y-m-d H:i:s")) - strtotime($content[$type . '_date']);
             $time = floor($diff / 60);
-           
+          
             if ($time > $stop_time) {
                 return false;
             }
+
         }   
     }
 

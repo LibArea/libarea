@@ -56,7 +56,7 @@ if(colorSpace){
 }
 
 $(function(){
-    // Подписка на тему
+    // Subscribe to a topic
     $(document).on("click", ".focus-topic", function(){      
         let topic_id  = $(this).data('id');  
         $.ajax({
@@ -80,7 +80,7 @@ $(function(){
             $('#up' + up_id).find('.score').html('+');
         });
     });
-    // Подписка на блог
+    // Subscribe to the blog
     $(document).on("click", ".hide-space-id", function(){      
         let space_id  = $(this).data('id');  
         $.ajax({
@@ -91,7 +91,7 @@ $(function(){
             location.reload();
         });
     }); 
-    // Добавить пост в профиль
+    // Add a post to your profile
     $(document).on("click", ".user-mypost", function(){  
         let post_id = $(this).data('post'); 
         let opt     = $(this).data('opt');
@@ -103,7 +103,7 @@ $(function(){
             $('.user-mypost').find('.mu_post').html('+ в профиле');
         });
     });
-    // Добавить пост в закладки
+    // Add a post to bookmarks
     $(document).on("click", ".user-post-fav", function(){      
         let post_id  = $(this).data('post');
         $.ajax({
@@ -114,7 +114,7 @@ $(function(){
            location.reload(); 
         });
     }); 
-    // Добавить ответ в закладки
+    // Add the answer to bookmarks
     $(document).on("click", ".user-answer-fav", function(){      
         let answer_id  = $(this).data('answer');
         $.ajax({
@@ -125,75 +125,20 @@ $(function(){
            location.reload(); 
         });
     }); 
-    // Удаляем комментарии
-    $(document).on('click', '.del-comment', function() {
-        let comment_id = $(this).data('comment_id');
-        $.ajax({
-            url: '/comment/del',
-            type: 'POST',
-            data: {comment_id: comment_id},
-        }).done(function(data) {
-            $('#comment_' + comment_id).addClass('dell');
-        });
-    });
-    // Удаляем ответ
-    $(document).on('click', '.del-answer', function() {
-        let answer_id = $(this).data('id');
-        $.ajax({
-            url: '/answer/del',
-            type: 'POST',
-            data: {answer_id: answer_id},
-        }).done(function(data) {
-            $('#answer_' + answer_id).addClass('dell');
-        });
-    });
-    // Удаляем пост
-    $(document).on('click', '.del-post', function() {
-        let post_id = $(this).data('post');
-        $.ajax({
-            url: '/post/del',
-            type: 'POST',
-            data: {post_id: post_id},
-        }).done(function(data) {
-            location.reload(); 
-        });
-    });
-    // Удаляем поток
-    $(document).on('click', '.del-flow', function() {
-        let flow_id = $(this).data('flow');
-        $.ajax({
-            url: '/flow/del',
-            type: 'POST',
-            data: {flow_id: flow_id},
-        }).done(function(data) {
-            location.reload(); 
-        });
-    });
-    // Восстанавливаем комментарий
-    $(document).on('click', '.recover-comment', function() {
-        let comment_id  = $(this).data('id');
-        fetch("/comment/recover", { 
+    // Deleting / restoring content
+    $(document).on('click', '.type-action', function() {
+        let content_id   = $(this).data('id');
+        let content_type = $(this).data('type');
+        fetch("/status/action", { 
             method: "POST",
-            body: "id=" + comment_id,
+            body: "info=" + content_id + "@" + content_type,
             headers:{'Content-Type': 'application/x-www-form-urlencoded'} 
             })
             .then((response) => {
                 location.reload();                
             }) 
     });
-    // Восстанавливаем ответы
-    $(document).on('click', '.recover-answer', function() {
-        let answer_id  = $(this).data('id');
-        fetch("/answer/recover", { 
-            method: "POST",
-            body: "id=" + answer_id,
-            headers:{'Content-Type': 'application/x-www-form-urlencoded'} 
-            })
-            .then((response) => {
-                location.reload();                
-            }) 
-    });
-    // Парсинг title с сайта для > TL1
+    // Parsing the title from the site for > TL1
     $(document).on('click', '#graburl', function(e) {    
         const uri = document.getElementById('link').value;
         

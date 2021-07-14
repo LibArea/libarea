@@ -8,8 +8,8 @@ class RssModel extends \MainModel
     // Все посты для Sitemap
     public static function getPostsSitemap()
     {
-        return XD::select(['post_id', 'post_slug', 'post_tl', 'post_is_delete'])->from(['posts'])
-                    ->where(['post_is_delete'], '!=', 1)
+        return XD::select(['post_id', 'post_slug', 'post_tl', 'post_is_deleted'])->from(['posts'])
+                    ->where(['post_is_deleted'], '!=', 1)
                     ->and(['post_tl'], '=', 0)->getSelect();
     } 
 
@@ -25,7 +25,7 @@ class RssModel extends \MainModel
     {
         return XD::select('*')->from(['posts'])
                    ->where(['post_space_id'], '=', $space_id)
-                   ->and(['post_is_delete'], '!=', 1)
+                   ->and(['post_is_deleted'], '!=', 1)
                    ->and(['post_tl'], '=', 0)
                    ->and(['post_content_img'], '!=', '')->orderBy(['post_id'])->desc()->getSelect();
     } 

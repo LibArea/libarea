@@ -7,14 +7,14 @@
     <main>
         <article class="post-full">
 
-            <?php if($post['post_is_delete'] == 0 || $uid['trust_level'] == 5) { ?>
+            <?php if($post['post_is_deleted'] == 0 || $uid['trust_level'] == 5) { ?>
        
-                <div class="white-box telo-detail_post<?php if($post['post_is_delete'] == 1) { ?> dell<?php } ?>">
+                <div class="white-box telo-detail_post<?php if($post['post_is_deleted'] == 1) { ?> dell<?php } ?>">
 
                     <div class="post-body">
                         <h1 class="title">
                             <?= $post['post_title']; ?> 
-                                <?php if ($post['post_is_delete'] == 1) { ?> 
+                                <?php if ($post['post_is_deleted'] == 1) { ?> 
                                     <i class="icon trash"></i>
                                 <?php } ?>
                                 <?php if($post['post_closed'] == 1) { ?> 
@@ -46,7 +46,7 @@
                             </span>
                             <span class="date"> 
                                 <?= $post['post_date_lang']; ?>
-                                <?php if($post['edit_date']) { ?> 
+                                <?php if($post['modified']) { ?> 
                                     (<?= lang('ed'); ?>) 
                                 <?php } ?>
                             </span>
@@ -87,8 +87,8 @@
                                 <?php if($uid['trust_level'] ==5) { ?>
                                     <span class="indent"> &#183; </span>
                                     <span id="cm_dell" class="cm_add_link">
-                                        <a data-post="<?= $post['post_id']; ?>" class="del-post">
-                                            <?php if($post['post_is_delete'] == 1) { ?>
+                                        <a data-type="post" data-id="<?= $post['post_id']; ?>" class="type-action">
+                                            <?php if($post['post_is_deleted'] == 1) { ?>
                                                 <?= lang('Recover'); ?>
                                             <?php } else { ?>
                                                 <?= lang('Remove'); ?>
@@ -189,7 +189,7 @@
                         </span>
                         
                     </div>
-                    <div>                    
+                    <div>      
                         <?php if($post['post_type'] == 0 && $post['post_draft'] == 0) { ?>
                             <?php if ($uid['id']) { ?>
                                <?php if($post['post_closed'] == 0) { ?>
@@ -218,7 +218,7 @@
 
             <?php } else { ?>
                 <div class="telo-detail_post  dell">
-                     <?= lang('post-delete'); ?>...
+                     <?= lang('Post deleted'); ?>...
                 </div>   
             <?php } ?>
             

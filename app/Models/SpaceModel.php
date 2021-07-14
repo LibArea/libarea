@@ -132,7 +132,7 @@ class SpaceModel extends \MainModel
             if ($uid['id'] == 0) { 
                 $tl = "AND p.post_tl = 0";
             } 
-            $display = "AND p.post_is_delete = 0 $tl";
+            $display = "AND p.post_is_deleted = 0 $tl";
         } 
          
         $sort = "ORDER BY p.post_answers_count DESC"; 
@@ -186,7 +186,7 @@ class SpaceModel extends \MainModel
                 $tl = "AND p.post_tl = 0";
             } 
             
-            $display = "AND p.post_is_delete = 0 $tl";
+            $display = "AND p.post_is_deleted = 0 $tl";
         } 
         
         $sort = "ORDER BY p.post_answers_count DESC";
