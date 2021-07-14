@@ -12,17 +12,26 @@ class LinkController extends \MainController
     public function index() 
     {
         $uid    = Base::getUid();
-        $pg     = \Request::getInt('page'); 
-        $page   = (!$pg) ? 1 : $pg;
+        $page   = \Request::getInt('page'); 
+        $page   = $page == 0 ? 1 : $page;
         
-        $links  = LinkModel::getLinksAll($uid['id'], $page);
+        $limit  = 25;
+        $pagesCount = LinkModel::getLinksAllCount();  
+        $links  = LinkModel::getLinksAll($page, $limit, $uid['id']);
+        
+        $num = ' | ';
+        if ($page > 1) { 
+            $num = sprintf(lang('page-number'), $page) . ' | ';
+        } 
         
         $data = [
             'h1'            => lang('domains-title'),  
             'canonical'     => '/domains',
             'sheet'         => 'domains',
-            'meta_title'    => lang('domains-title') .' | '. Config::get(Config::PARAM_NAME),
-            'meta_desc'     => lang('domains-desc'), 
+            'pagesCount'    => ceil($pagesCount / $limit),
+            'pNum'          => $page,
+            'meta_title'    => lang('domains-title') . $num . Config::get(Config::PARAM_NAME),
+            'meta_desc'     => lang('domains-desc') . $num . Config::get(Config::PARAM_HOME_TITLE),  
         ];
         
         return view(PR_VIEW_DIR . '/link/links', ['data' => $data, 'uid' => $uid, 'links' => $links]);

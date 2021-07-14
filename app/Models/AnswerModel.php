@@ -7,21 +7,32 @@ use PDO;
 class AnswerModel extends \MainModel
 {
     // Все ответы
-    public static function getAnswersAll($page, $trust_level)
+    public static function getAnswersAll($page, $limit, $uid)
     {
-        $offset = ($page-1) * 25; 
-        
-        $tl = 'AND p.post_tl = 0';
-        if ($trust_level) { 
-                $tl = 'AND p.post_tl <= '.$trust_level.'';
+        $tl = 'AND post_tl = 0';
+        if ($uid['trust_level']) { 
+                $tl = 'AND post_tl <= '.$uid['trust_level'].'';
         } 
         
-        $sql = "SELECT c.*, p.*, 
-                u.id, u.login, u.avatar
-                FROM answers as c
-                JOIN users as u ON u.id = c.answer_user_id
-                JOIN posts as p ON c.answer_post_id = p.post_id AND c.answer_is_deleted = 0 ".$tl."
-                ORDER BY c.answer_id DESC LIMIT 25 OFFSET ".$offset." ";
+        $start  = ($page-1) * $limit;
+        $sql = "SELECT 
+                    post_id,
+                    post_title,
+                    post_slug,
+                    answer_id,
+                    answer_content,
+                    answer_date,
+                    answer_user_id,
+                    answer_post_id,
+                    answer_votes,
+                    answer_is_deleted,
+                    id, 
+                    login, 
+                    avatar
+                        FROM answers
+                        INNER JOIN users ON id = answer_user_id
+                        INNER JOIN posts ON answer_post_id = post_id AND answer_is_deleted = 0 ".$tl."
+                        ORDER BY answer_id DESC LIMIT $start, $limit ";
                         
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
@@ -29,9 +40,9 @@ class AnswerModel extends \MainModel
     // Количество ответов
     public static function getAnswersAllCount()
     {
-        $query = XD::select('*')->from(['answers'])->where(['answer_is_deleted'], '=', 0)->getSelect();
-        
-        return ceil(count($query) / 25);
+        $sql = "SELECT answer_id, answer_is_deleted FROM answers WHERE answer_is_deleted = 0";
+
+        return DB::run($sql)->rowCount(); 
     }
     
     // Получаем лучший комментарий (LO)

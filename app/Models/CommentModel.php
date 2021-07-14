@@ -8,22 +8,36 @@ use PDO;
 class CommentModel extends \MainModel
 {
     // Все комментарии
-    public static function getCommentsAll($page, $trust_level)
+    public static function getCommentsAll($page, $limit, $uid)
     {
-        $offset = ($page-1) * 25; 
-        
-        if (!$trust_level) { 
-                $tl = 'AND p.post_tl = 0';
+        if (!$uid['trust_level']) { 
+                $tl = 'AND post_tl = 0';
         } else {
-                $tl = 'AND p.post_tl <= '.$trust_level.'';
+                $tl = 'AND post_tl <= '.$uid['trust_level'].'';
         }
         
-        $sql = "SELECT c.*, p.*, 
-                u.id, u.login, u.avatar
-                fROM comments as c
-                JOIN users as u ON u.id = c.comment_user_id
-                JOIN posts as p ON c.comment_post_id = p.post_id AND c.comment_is_deleted = 0 ".$tl."
-                ORDER BY c.comment_id DESC LIMIT 25 OFFSET ".$offset." ";
+        $start  = ($page-1) * $limit;
+        $sql = "SELECT
+                    post_id,
+                    post_title,
+                    post_slug,
+                    post_tl,
+                    comment_id,
+                    comment_date,
+                    comment_content,
+                    comment_post_id,
+                    comment_user_id,
+                    comment_votes,
+                    comment_is_deleted,
+                    id, 
+                    login, 
+                    avatar
+                    
+                        FROM comments 
+                        JOIN users ON id = comment_user_id
+                        JOIN posts ON comment_post_id = post_id AND comment_is_deleted = 0 ".$tl."
+                        
+                        ORDER BY comment_id DESC LIMIT $start, $limit ";
                         
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
@@ -31,9 +45,9 @@ class CommentModel extends \MainModel
     // Количество комментариев
     public static function getCommentAllCount()
     {
-        $query = XD::select('*')->from(['comments'])->where(['comment_is_deleted'], '=', 0)->getSelect();
+        $sql = "SELECT comment_id, comment_is_deleted FROM comments WHERE comment_is_deleted = 0";
 
-        return ceil(count($query) / 25);
+        return DB::run($sql)->rowCount(); 
     }
     
     // Получаем комментарии к ответу

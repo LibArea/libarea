@@ -18,7 +18,7 @@
                                         </a> 
                                         <span class="date"><?= $answer['date']; ?></span>
                                         <span class="indent"> &#183; </span>
-                                        <a href="/post/<?= $answer['post_id']; ?>/<?= $answer['post_slug']; ?>">
+                                        <a href="/post/<?= $answer['post_id']; ?>/<?= $answer['post_slug']; ?>#answer_<?= $answer['answer_id']; ?>">
                                             <?= $answer['post_title']; ?>
                                         </a>
                                     </div>
@@ -26,26 +26,9 @@
                                     <div class="answ-telo-body">
                                         <?= $answer['answer_content']; ?> 
                                     </div>
-
+                               
                                     <div class="post-full-footer date">
-                                        <?php if (!$uid['id']) { ?> 
-                                            <div class="voters">
-                                                <a rel="nofollow" href="/login"><div class="up-id"></div></a>
-                                                <div class="score"><?= $answer['answer_votes']; ?></div>
-                                            </div>
-                                        <?php } else { ?>
-                                            <?php if ($answer['answer_vote_status'] || $uid['id'] == $answer['answer_user_id']) { ?>
-                                                <div class="voters active">
-                                                    <div class="up-id"></div>
-                                                    <div class="score"><?= $answer['answer_votes']; ?></div>
-                                                </div>
-                                            <?php } else { ?>
-                                                <div id="up<?= $answer['answer_id']; ?>" class="voters">
-                                                    <div data-id="<?= $answer['answer_id']; ?>" data-type="answer" class="up-id"></div>
-                                                    <div class="score"><?= $answer['answer_votes']; ?></div>
-                                                </div>
-                                            <?php } ?>
-                                        <?php } ?>
+                                     + <?= $answer['answer_votes']; ?>                            
                                     </div>
                                 </div>
                             <?php } else { ?>    

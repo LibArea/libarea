@@ -15,67 +15,38 @@ class CommentController extends \MainController
     // Все комментарии
     public function index()
     {
-        $pg     = \Request::getInt('page'); 
-        $page   = (!$pg) ? 1 : $pg;
-        
         $uid    = Base::getUid();
-         
+        $page   = \Request::getInt('page'); 
+        $page   = $page == 0 ? 1 : $page;
+        
+        $limit  = 25;
         $pagesCount = CommentModel::getCommentAllCount();  
-        $comm       = CommentModel::getCommentsAll($page, $uid['trust_level']);
+        $comments   = CommentModel::getCommentsAll($page, $limit, $uid);
 
         $result = Array();
-        foreach ($comm  as $ind => $row) {
+        foreach ($comments  as $ind => $row) {
             $row['date']                = lang_date($row['comment_date']);
             $row['comment_content']     = Content::text($row['comment_content'], 'line');
-            $row['comment_vote_status'] = VotesModel::voteStatus($row['comment_id'], $uid['id'], 'comment');
             $result[$ind]   = $row;
         }
         
+        $num = ' | ';
         if ($page > 1) { 
-            $num = ' — ' . lang('Page') . ' ' . $page;
-        } else {
-            $num = '';
-        }
+            $num = sprintf(lang('page-number'), $page) . ' | ';
+        } 
         
         $data = [
             'h1'            => lang('All comments'),
-            'pagesCount'    => $pagesCount,
+            'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
             'canonical'     => Config::get(Config::PARAM_URL) . '/comments', 
             'sheet'         => 'comments', 
-            'meta_title'    => lang('All comments') .' | '. Config::get(Config::PARAM_NAME),
-            'meta_desc'     => lang('comments-desc') .' '. Config::get(Config::PARAM_HOME_TITLE),
+            'meta_title'    => lang('All comments') . $num . Config::get(Config::PARAM_NAME),
+            'meta_desc'     => lang('comments-desc') . $num . Config::get(Config::PARAM_HOME_TITLE),
         ];
 
         return view(PR_VIEW_DIR . '/comment/comments', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
     }
-
-    // Редактируем комментарий
-    public function editComment()
-    {
-        $comment_id         = \Request::getPostInt('comment_id');
-        $post_id            = \Request::getPostInt('post_id');
-        $comment_content    = \Request::getPost('comment');
-
-        // Получим относительный url поста для возрата
-        $post       = PostModel::postId($post_id);
-        $redirect   = '/post/' . $post['post_id'] . '/' . $post['post_slug'] . '#comment_' . $comment_id;
-        
-        // id того, кто редактирует
-        $uid        = Base::getUid();
-        $user_id    = $uid['id'];
-        
-        $comment = CommentModel::getCommentsOne($comment_id);
-        
-        // Проверка доступа 
-        if (!accessСheck($comment, 'comment', $uid, 0, 0)) {
-            redirect('/');
-        }  
-        
-        // Редактируем комментарий
-        CommentModel::CommentEdit($comment_id, $comment_content);
-        redirect($redirect); 
-	}
 
    // Покажем форму редактирования
 	public function editCommentForm()
@@ -100,6 +71,32 @@ class CommentController extends \MainController
         
         return view(PR_VIEW_DIR . '/comment/edit-form-comment', ['data' => $data]);
     }
+
+    // Редактируем комментарий
+    public function editComment()
+    {
+        $uid                = Base::getUid();
+        $comment_id         = \Request::getPostInt('comment_id');
+        $post_id            = \Request::getPostInt('post_id');
+        $comment_content    = \Request::getPost('comment');
+
+        // Получим относительный url поста для возрата
+        $post       = PostModel::postId($post_id);
+        Base::PageRedirection($post);
+        
+        $comment = CommentModel::getCommentsOne($comment_id);
+        
+        // Проверка доступа 
+        if (!accessСheck($comment, 'comment', $uid, 0, 0)) {
+            redirect('/');
+        }  
+        
+        $redirect   = '/post/' . $post['post_id'] . '/' . $post['post_slug'] . '#comment_' . $comment['comment_id'];
+        
+        // Редактируем комментарий
+        CommentModel::CommentEdit($comment['comment_id'], $comment_content);
+        redirect($redirect); 
+	}
 
 	// Покажем форму ответа
 	public function addForm()

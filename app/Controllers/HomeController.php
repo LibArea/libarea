@@ -42,9 +42,9 @@ class HomeController extends \MainController
             $result_comm[$ind]          = $row;
         }
 
-        $num = '';
+        $num = ' | ';
         if ($page > 1) { 
-            $num = ' | ' . lang('Page') . ' ' . $page;
+            $num = sprintf(lang('page-number'), $page);
         } 
 
         $meta_title = Config::get(Config::PARAM_HOME_TITLE) . $num;
@@ -52,13 +52,13 @@ class HomeController extends \MainController
         $canonical  = Config::get(Config::PARAM_URL);
         
         if ($sheet == 'top') {
-            $meta_title = lang('TOP') .'. '. Config::get(Config::PARAM_HOME_TITLE) . $num;
+            $meta_title = lang('TOP') . $num . Config::get(Config::PARAM_HOME_TITLE) . $num;
             $meta_desc  = lang('top-desc') . $num;   
             $canonical  = Config::get(Config::PARAM_URL) . '/top';
         } 
         
         if ($sheet == 'all') {
-            $meta_title = lang('All') .'. '. Config::get(Config::PARAM_HOME_TITLE) . $num;
+            $meta_title = lang('All') . $num . Config::get(Config::PARAM_HOME_TITLE) . $num;
         } 
 
         $data = [

@@ -18,7 +18,9 @@
                                     <span class="date"><?= $comment['date']; ?></span>
                                     
                                     <span class="indent"> &#183; </span>
-                                    <a href="/post/<?= $comment['post_id']; ?>/<?= $comment['post_slug']; ?>"><?= $comment['post_title']; ?></a>
+                                    <a href="/post/<?= $comment['post_id']; ?>/<?= $comment['post_slug']; ?>#comment_<?= $comment['comment_id']; ?>">
+                                        <?= $comment['post_title']; ?>
+                                    </a>
                                 </div>
 
                                 <div class="comm-telo-body">
@@ -26,24 +28,7 @@
                                 </div>
                            
                                 <div class="post-full-footer date">
-                                    <?php if (!$uid['id']) { ?> 
-                                        <div class="voters">
-                                            <a rel="nofollow" href="/login"><div class="up-id"></div></a>
-                                            <div class="score"><?= $comment['comment_votes']; ?></div>
-                                        </div>
-                                    <?php } else { ?>
-                                        <?php if ($comment['comment_vote_status'] || $uid['id'] == $comment['comment_user_id']) { ?>
-                                            <div class="voters active">
-                                                <div class="up-id"></div>
-                                                <div class="score"><?= $comment['comment_votes']; ?></div>
-                                            </div>
-                                        <?php } else { ?>
-                                            <div id="up<?= $comment['comment_id']; ?>" class="voters">
-                                                <div data-id="<?= $comment['comment_id']; ?>" data-type="comment" class="up-id"></div>
-                                                <div class="score"><?= $comment['comment_votes']; ?></div>
-                                            </div>
-                                        <?php } ?>
-                                    <?php } ?>
+                                 + <?= $comment['comment_votes']; ?>                            
                                 </div>
                             </div>
                         <?php } else { ?>    

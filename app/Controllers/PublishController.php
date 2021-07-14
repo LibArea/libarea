@@ -405,7 +405,6 @@ class PublishController extends \MainController
         // Проверка доступа 
         $info_type = PublishModel::getInfoTypeContent($type_id, $type);
      
-        
         if (!accessСheck($info_type, $type, $uid, 1, 30)) {
             redirect('/');
         } 

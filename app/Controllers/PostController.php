@@ -402,9 +402,7 @@ class PostController extends \MainController
         $post_id = \Request::getPostInt('post_id');
         $post    = PostModel::postId($post_id); 
         
-        if (!$post) {
-            redirect('/');
-        }
+        Base::PageRedirection($post);
         
         PostModel::setPostFavorite($post_id, $uid['id']);
        

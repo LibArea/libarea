@@ -230,6 +230,7 @@ Route::get('/topic/{slug}/page/{page?}')->controller('TopicController@topic')->w
 
 // Домены
 Route::get('/domains')->controller('LinkController');
+Route::get('/domains/page/{page?}')->controller('LinkController')->where(['page' => '[0-9]+']);
 Route::get('/domain/{domain}')->controller('LinkController@domain')->where(['domain' => '[A-Za-z0-9-.]+']);
 
 // Пагинация и главная (feed) страница, top, all...

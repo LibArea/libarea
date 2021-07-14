@@ -8,13 +8,32 @@ use PDO;
 class LinkModel extends \MainModel
 {
     // Все сайты
-    public static function getLinksAll($user_id, $page)
+    public static function getLinksAll($page, $limit, $user_id)
     {
-        $q = XD::select('*')->from(['links']);
-        $query = $q->leftJoin(['votes_link'])->on(['votes_link_item_id'], '=', ['link_id'])
-                ->and(['votes_link_user_id'], '=', $user_id)->where(['link_is_deleted'], '=', 0);
-        
-        return $query->getSelect(); 
+        $start  = ($page-1) * $limit;
+        $sql = "SELECT
+                    link_id,
+                    link_title,
+                    link_content,
+                    link_count,
+                    link_url,
+                    link_url_domain,
+                    link_is_deleted,
+                    votes_link_user_id, 
+                    votes_link_item_id
+                        FROM links 
+                        LEFT JOIN votes_link ON votes_link_item_id = link_id AND  votes_link_user_id = $user_id
+                        WHERE link_is_deleted = 0
+                        ORDER BY link_id DESC LIMIT $start, $limit ";
+                        
+        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);  
+    }
+    
+    public static function getLinksAllCount()
+    {
+        $sql = "SELECT link_id, link_is_deleted FROM links WHERE link_is_deleted = 0";
+
+        return DB::run($sql)->rowCount(); 
     }
     
     // 5 популярных доменов

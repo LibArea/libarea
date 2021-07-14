@@ -238,12 +238,19 @@ class Base
         return true;
     }
     
-    // Ошибка 404
     public static function PageError404($variable)
     {
         if (!$variable) {
             include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
             hl_preliminary_exit();
+        }
+        return true;
+    }
+    
+    public static function PageRedirection($variable)
+    {
+        if (!$variable) {
+            redirect('/');
         }
         return true;
     }

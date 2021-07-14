@@ -16,37 +16,34 @@ class AnswerController extends \MainController
     // Все ответы
     public function index()
     {
-        $pg = \Request::getInt('page'); 
-        $page = (!$pg) ? 1 : $pg;
+        $uid    = Base::getUid();
+        $page   = \Request::getInt('page'); 
+        $page   = $page == 0 ? 1 : $page;
         
-        $uid        = Base::getUid();
-         
+        $limit  = 25;
         $pagesCount = AnswerModel::getAnswersAllCount();  
-        $answ       = AnswerModel::getAnswersAll($page, $uid['trust_level']);
+        $answ       = AnswerModel::getAnswersAll($page, $limit, $uid);
  
         $result = Array();
         foreach ($answ  as $ind => $row) {
             $row['answer_content']  = Content::text($row['answer_content'], 'text');
             $row['date']            = lang_date($row['answer_date']);
-            // N+1 - перенести в запрос
-            $row['answer_vote_status'] = VotesModel::voteStatus($row['answer_id'], $uid['id'], 'answer');
-            $result[$ind]   = $row;
+            $result[$ind]           = $row;
         }
         
+        $num = ' | ';
         if ($page > 1) { 
-            $num = ' — ' . lang('Page') . ' ' . $page;
-        } else {
-            $num = '';
-        }
+            $num = sprintf(lang('page-number'), $page) . ' | ';
+        } 
         
         $data = [
             'h1'            => lang('All answers'),
-            'pagesCount'    => $pagesCount,
+            'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
             'canonical'     => Config::get(Config::PARAM_URL) . '/answers',
             'sheet'         => 'answers', 
-            'meta_title'    => lang('All answers') .' | '. Config::get(Config::PARAM_NAME),
-            'meta_desc'     => lang('answers-desc') .' '. Config::get(Config::PARAM_HOME_TITLE),            
+            'meta_title'    => lang('All answers') . $num . Config::get(Config::PARAM_NAME),
+            'meta_desc'     => lang('answers-desc') . $num . Config::get(Config::PARAM_HOME_TITLE),            
         ];
 
         return view(PR_VIEW_DIR . '/answer/answers', ['data' => $data, 'uid' => $uid, 'answers' => $result]);
@@ -157,9 +154,7 @@ class AnswerController extends \MainController
         $answer_id  = \Request::getPostInt('answer_id');
         $answer     = AnswerModel::getAnswerOne($answer_id); 
         
-        if (!$answer) {
-            redirect('/');
-        }
+        Base::PageRedirection($answer);
         
         AnswerModel::setAnswerFavorite($answer_id, $uid['id']);
        

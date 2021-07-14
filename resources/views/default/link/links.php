@@ -52,6 +52,7 @@
                 <?php } ?>
             </div>
         </div>
+        <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/domains'); ?>
     </main>
     <aside>
         <div class="white-box">
