@@ -17,6 +17,7 @@ class NotificationsModel extends \MainModel
     // 10 - обращение в постах (@login)
     // 11 - в ответах (@login)
     // 12 - в комментариях (@login)
+    // 15 -  аудит
 
     // Лист уведомлений
     public static function listNotification($user_uid)

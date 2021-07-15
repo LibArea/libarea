@@ -31,7 +31,8 @@ Route::before('Authorization@admin')->getGroup();
     Route::get('/admin/words')->controller('AdminController@words');
     Route::get('/admin/wordadd')->controller('AdminController@wordsAddForm');
     
-    Route::get('/admin/audit')->controller('AdminController@audit');
+    Route::get('/admin/audit')->controller('AdminController@audit', ['all']);
+    Route::get('/admin/audit/approved')->controller('AdminController@audit', ['approved']);
 
     Route::get('/admin/spaces')->controller('AdminController@spaces');
     Route::get('/admin/spaces/page/{page?}')->controller('AdminController@spaces')->where(['page' => '[0-9]+']);

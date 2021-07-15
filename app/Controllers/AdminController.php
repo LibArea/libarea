@@ -80,7 +80,6 @@ class AdminController extends \MainController
     // Бан участнику
     public function banUser() 
     {
-        $uid        = Base::getUid();
         $user_id    = \Request::getPostInt('id');
         
         AdminModel::setBanUser($user_id);
@@ -171,20 +170,6 @@ class AdminController extends \MainController
         return view(PR_VIEW_DIR . '/admin/invitations', ['data' => $data, 'uid' => $uid, 'invitations' => $result]);
     }
     
-    // Для дерева инвайтов
-    private function invatesTree($active_uid, $level, $invitations, $tree=array())
-    {
-        $level++;
-        foreach ($invitations as $invitation) {
-            if ($invitation['uid'] == $uid) {
-                $invitation['level'] = $level-1;
-                $tree[] = $invitation;
-                $tree = $this->invatesTree($invitation['active_uid'], $level, $invitations, $tree);
-            }
-        }
-		return $tree;
-    }
-    
     // Пространства
     public function spaces()
     {
@@ -194,7 +179,7 @@ class AdminController extends \MainController
 
         $limit = 25;
         $pagesCount = SpaceModel::getSpacesAllCount(); 
-        $spaces = SpaceModel::getSpacesAll($page, $limit, $uid['id'], 'all');
+        $spaces     = SpaceModel::getSpacesAll($page, $limit, $uid['id'], 'all');
   
         $data = [
             'meta_title'    => lang('Spaces'),
@@ -224,7 +209,6 @@ class AdminController extends \MainController
     // Удаление / восстановление пространства
     public function delSpace() 
     {
-        $uid        = Base::getUid();
         $space_id   = \Request::getPostInt('id');
         
         SpaceModel::SpaceDelete($space_id);
@@ -377,7 +361,6 @@ class AdminController extends \MainController
     // Измененяем награду
     public function badgeEdit()
     {
-        $uid        = Base::getUid();
         $badge_id   = \Request::getInt('id');
         $badge      = AdminModel::getBadgeId($badge_id);
         
@@ -408,7 +391,6 @@ class AdminController extends \MainController
     // Добавляем награду
     public function badgeAdd()
     {
-        $uid                 = Base::getUid();
         $badge_title         = \Request::getPost('badge_title');
         $badge_description   = \Request::getPost('badge_description');
         $badge_icon          = $_POST['badge_icon']; // не фильтруем
@@ -436,9 +418,8 @@ class AdminController extends \MainController
         $uid        = Base::getUid();
         $user_id    = \Request::getInt('id');
         
-        $redirect = '/admin';
         if (!$user = UserModel::getUser($user_id, 'id')) {
-           redirect($redirect); 
+           redirect('/admin'); 
         }
         
         $user['isBan']      = AdminModel::isBan($user_id);
@@ -464,7 +445,6 @@ class AdminController extends \MainController
     // Редактировать участника
     public function userEdit()
     {
-        $uid        = Base::getUid();
         $user_id    = \Request::getInt('id');
         
         $redirect = '/admin';
@@ -556,7 +536,6 @@ class AdminController extends \MainController
     // Изменение домена
     public function domainEdit()
     {
-        $uid        = Base::getUid();
         $domain_id  = \Request::getInt('id');
         
         $redirect = '/admin/domains';
@@ -616,7 +595,6 @@ class AdminController extends \MainController
     // Добавление стоп-слова
     public function createWord()
     {
-        $uid  = Base::getUid();
         $word = \Request::getPost('word');
         $data = [
             'stop_word'     => $word,
@@ -632,7 +610,6 @@ class AdminController extends \MainController
     // Удаление стоп-слова
     public function deleteWord()
     {
-        $uid        = Base::getUid();
         $word_id    = \Request::getPostInt('id');
 
         ContentModel::deleteStopWord($word_id);
@@ -663,15 +640,15 @@ class AdminController extends \MainController
         return view(PR_VIEW_DIR . '/admin/topic/topics', ['data' => $data, 'uid' => $uid, 'topics' => $topics]);
     }        
 
-    public function audit() 
+    public function audit($sheet) 
     {
         $uid    = Base::getUid();
         $page   = \Request::getInt('page'); 
         $page   = $page == 0 ? 1 : $page;
         
         $limit  = 55;
-        $pagesCount = AdminModel::getAuditsAllCount(); 
-        $audits     = AdminModel::getAuditsAll($page, $limit);
+        $pagesCount = AdminModel::getAuditsAllCount($sheet); 
+        $audits     = AdminModel::getAuditsAll($page, $limit, $sheet);
         
         $result = Array();
         foreach ($audits  as $ind => $row) {
@@ -689,7 +666,7 @@ class AdminController extends \MainController
         
         $data = [
             'meta_title'    => lang('Audit'),
-            'sheet'         => 'audit',
+            'sheet'         => $sheet,
             'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
         ]; 
@@ -703,7 +680,6 @@ class AdminController extends \MainController
     // Восстановление после аудита
     public function status() 
     {
-        $uid    = Base::getUid();
         $st     = \Request::getPost('status');
         $status = preg_split('/(@)/', $st);
        

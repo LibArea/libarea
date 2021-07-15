@@ -17,7 +17,7 @@
                             <br>
                         <?php } ?>    
                         <img width="325" class="right" src="<?= user_cover_url($user['cover_art']); ?>">
-                        <?= user_avatar_img($user['avatar'], 'small', $user['login'], 'ava'); ?> 
+                        <?= user_avatar_img($user['avatar'], 'max', $user['login'], 'avatar'); ?> 
 
                         <div class="boxline">
                             <label class="form-label" for="post_title">

@@ -186,7 +186,11 @@ class PublishController extends \MainController
         $url_post       = '/post/'. $last_post_id .'/'. $post_slug;
         
         if ($post_published == 0) {
-           PublishModel::addAudit('post', $uid['id'], $last_post_id);
+            PublishModel::addAudit('post', $uid['id'], $last_post_id);
+            // Оповещение админу
+            $type = 15; // Упоминания в посте  
+            $user_id  = 1; // админу        
+            NotificationsModel::send($uid['id'], $user_id, $type, $last_post_id, $url_post, 1);
         } 
         
         if(!empty($topics)) { 
@@ -288,6 +292,10 @@ class PublishController extends \MainController
         
         if ($answer_published == 0) {
             PublishModel::addAudit('answer', $uid['id'], $last_answer_id);
+            // Оповещение админу
+            $type = 15; // Упоминания в посте  
+            $user_id  = 1; // админу         
+            NotificationsModel::send($uid['id'], $user_id, $type, $last_answer_id, $url_answer, 1);
         } 
         
         // Уведомление (@login)
@@ -357,6 +365,10 @@ class PublishController extends \MainController
 
         if ($comment_published == 0) {
             PublishModel::addAudit('comment', $uid['id'], $last_comment_id);
+            // Оповещение админу
+            $type = 15; // Упоминания в посте  
+            $user_id  = 1; // админу
+            NotificationsModel::send($uid['id'], $user_id, $type, $last_comment_id, $url_comment, 1);
         } 
 
         // Пересчитываем количество комментариев для поста + 1

@@ -49,6 +49,20 @@
                                 <?php } ?>
                             </a> 
                         <?php } ?> 
+                        <?php if($notif['action_type'] == 15) { ?>
+                            <a class="ntf2 lowercase" href="/notifications/read/<?= $notif['notification_id']; ?>">
+                                <i class="icon red shield"></i>
+                                <?= lang('Audit'); ?>
+                            </a>
+                            |
+                            <a class="ntf2 lowercase" href="/admin/user/<?= $notif['sender_uid']; ?>/edit">
+                                <?= $notif['login']; ?>
+                            </a>  
+                            |  
+                            <a class="ntf2 lowercase" href="/admin/audit">
+                                <?= lang('Admin'); ?>
+                            </a>
+                        <?php } ?> 
                         <span class="lowercase">
                             <?php if($notif['action_type'] == 4) { ?>
                                 <?php if($notif['read_flag'] == 0) { ?>

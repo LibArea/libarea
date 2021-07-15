@@ -214,17 +214,27 @@ class AdminModel extends \MainModel
     }
 
     // Страница аудита
-    public static function getAuditsAll($page, $limit)
+    public static function getAuditsAll($page, $limit, $sheet)
     {
+        $sort = "audit_read_flag = 0";
+        if ($sheet == 'approved') {
+            $sort = "audit_read_flag = 1";
+        }
+        
         $start  = ($page-1) * $limit;
-        $sql = "SELECT * FROM audits WHERE audit_read_flag = 0 ORDER BY audit_id DESC LIMIT $start, $limit";
+        $sql = "SELECT * FROM audits WHERE $sort ORDER BY audit_id DESC LIMIT $start, $limit";
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
     
-    public static function getAuditsAllCount()
+    public static function getAuditsAllCount($sheet)
     {
-        $sql = "SELECT id FROM users WHERE audit_read_flag = 0";
+        $sort = "audit_read_flag = 0";
+        if ($sheet == 'approved') {
+            $sort = "audit_read_flag = 1";
+        }
+        
+        $sql = "SELECT id FROM users WHERE $sort";
 
         return DB::run($sql)->rowCount(); 
     }

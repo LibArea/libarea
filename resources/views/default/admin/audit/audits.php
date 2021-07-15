@@ -7,6 +7,28 @@
                     <a href="/admin"><?= lang('Admin'); ?></a> / <span class="red"><?= $data['meta_title']; ?></span>
                 </h1>
 
+                <ul class="nav-tabs">
+                  <?php if($data['sheet'] == 'all') { ?>
+                    <li class="active">
+                      <span><?= lang('New ones'); ?></span>
+                    </li>
+                    <li>
+                      <a href="/admin/audit/approved">
+                        <span><?= lang('Approved'); ?></span>
+                      </a>
+                    </li>
+                  <?php } else { ?>
+                    <li>  
+                      <a href="/admin/audit">
+                        <span><?= lang('New ones'); ?></span>
+                      </a>
+                    </li>
+                    <li class="active">
+                      <span><?= lang('Approved'); ?></span>
+                    </li>
+                  <?php } ?>    
+                </ul>
+
                 <div class="space">
                     <?php if (!empty($audits)) { ?>
                   
@@ -40,8 +62,7 @@
                                         </span>
                                     </span>
                                     <span class="t-td w-30 center">
-                                        <a data-id="<?= $audit['content'][$audit['audit_type'] . '_id']; ?>" class="del-<?= $audit['audit_type']; ?> small">
-                                        
+                                        <a data-id="<?= $audit['content'][$audit['audit_type'] . '_id']; ?>" data-type="<?= $audit['audit_type']; ?>" class="type-action small">
                                             <?php if($audit['content'][$audit['audit_type'] . '_is_deleted'] == 1) { ?>
                                                  <span class="red"><?= lang('Recover'); ?></span>
                                             <?php } else { ?>
@@ -50,9 +71,18 @@
                                         </a>
                                     </span>
                                     <span class="t-td w-30 center">
-                                        <a data-status="<?= $audit['audit_type']; ?>" data-id="<?= $audit['content'][$audit['audit_type'] . '_id']; ?>" class="audit-status small">
-                                            <?= lang('To approve'); ?>
-                                        </a>    
+                                         
+                                        <?php if($audit['audit_read_flag'] == 1) { ?>
+                                            id: 
+                                            <a href="/admin/user/<?= $audit['audit_user_id']; ?>/edit">
+                                                <?= $audit['audit_user_id']; ?>
+                                            </a>
+                                        <?php } else { ?>
+                                            <a data-status="<?= $audit['audit_type']; ?>" data-id="<?= $audit['content'][$audit['audit_type'] . '_id']; ?>" class="audit-status small">
+                                                <?= lang('To approve'); ?>
+                                            </a>
+                                        <?php } ?>
+                                             
                                     </span>
                                 </div>
                             <?php } ?>
