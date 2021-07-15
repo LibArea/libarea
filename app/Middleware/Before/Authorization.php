@@ -21,6 +21,15 @@ class Authorization extends \MainMiddleware
         } 
 
     }
+    
+    public function admin() {
+        
+        $account = Request::getSession('account');
+        if($account['trust_level'] != 5) {
+           redirect('/');
+        } 
+
+    }
 
 }
 

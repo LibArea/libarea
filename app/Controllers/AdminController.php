@@ -19,9 +19,8 @@ class AdminController extends \MainController
 {
 	public function index($sheet)
 	{
-        // Доступ только персоналу
-        $uid = self::isAdmin();
 
+        $uid    = Base::getUid();
         $page   = \Request::getInt('page'); 
         $page   = $page == 0 ? 1 : $page;
 
@@ -55,7 +54,7 @@ class AdminController extends \MainController
     // Повторы IP
     public function logsIp() 
     {
-        $uid        = self::isAdmin();
+        $uid        = Base::getUid();
         $user_ip    = \Request::get('ip');
         $user_all   = AdminModel::getUserLogsId($user_ip);
  
@@ -81,9 +80,9 @@ class AdminController extends \MainController
     // Бан участнику
     public function banUser() 
     {
-        $uid = self::isAdmin();
-        
+        $uid        = Base::getUid();
         $user_id    = \Request::getPostInt('id');
+        
         AdminModel::setBanUser($user_id);
         
         return true;
@@ -92,8 +91,7 @@ class AdminController extends \MainController
     // Удалёные комментарии
     public function comments()
     {
-        $uid    = self::isAdmin();
-        
+        $uid    = Base::getUid();
         $page   = \Request::getInt('page'); 
         $page   = $page == 0 ? 1 : $page;
 
@@ -124,8 +122,7 @@ class AdminController extends \MainController
     // Удалёные ответы
     public function answers()
     {
-        $uid        = self::isAdmin();
-        
+        $uid    = Base::getUid();
         $page   = \Request::getInt('page'); 
         $page   = $page == 0 ? 1 : $page;
 
@@ -156,7 +153,7 @@ class AdminController extends \MainController
     // Показываем дерево приглашенных
     public function invitations()
     {
-        $uid    = self::isAdmin();
+        $uid    = Base::getUid();
         $invite = AdminModel::getInvitations();
  
         $result = Array();
@@ -191,7 +188,7 @@ class AdminController extends \MainController
     // Пространства
     public function spaces()
     {
-        $uid    = self::isAdmin();
+        $uid    = Base::getUid();
         $page   = \Request::getInt('page'); 
         $page   = $page == 0 ? 1 : $page;
 
@@ -215,7 +212,7 @@ class AdminController extends \MainController
     // Форма добавить пространство
     public function addSpacePage() 
     {
-        $uid = self::isAdmin();
+        $uid  = Base::getUid();
         $data = [
             'meta_title'    => lang('Add Space'),
             'sheet'         => 'admin',
@@ -227,7 +224,7 @@ class AdminController extends \MainController
     // Удаление / восстановление пространства
     public function delSpace() 
     {
-        $uid        = self::isAdmin();
+        $uid        = Base::getUid();
         $space_id   = \Request::getPostInt('id');
         
         SpaceModel::SpaceDelete($space_id);
@@ -238,7 +235,7 @@ class AdminController extends \MainController
     // Добавить пространства
     public function spaceAdd() 
     {
-        $uid = self::isAdmin();
+        $uid    = Base::getUid();
         
         $space_slug         = \Request::getPost('space_slug');
         $space_name         = \Request::getPost('space_name');  
@@ -299,7 +296,7 @@ class AdminController extends \MainController
     // Все награды
     public function Badges()
     {
-        $uid    = self::isAdmin();
+        $uid    = Base::getUid();
         $badges = AdminModel::getBadgesAll();
         
         $data = [
@@ -315,8 +312,7 @@ class AdminController extends \MainController
     // Форма добавления награды
     public function addBadgeForm()
     {
-        $uid = self::isAdmin();
-        
+        $uid  = Base::getUid();
         $data = [
             'meta_title'    => lang('Add badge'),
             'sheet'         => 'badges',
@@ -328,8 +324,7 @@ class AdminController extends \MainController
     // Форма награждения участинка
     public function addBadgeUserPage()
     {
-        $uid = self::isAdmin();
-        
+        $uid        = Base::getUid();
         $user_id    = \Request::getInt('id');
         
         if ($user_id > 0) {
@@ -363,7 +358,7 @@ class AdminController extends \MainController
     // Форма изменения награды
     public function editBadgeForm()
     {
-        $uid        = self::isAdmin();
+        $uid        = Base::getUid();
         $badge_id   = \Request::getInt('id');
         $badge      = AdminModel::getBadgeId($badge_id);        
 
@@ -382,7 +377,7 @@ class AdminController extends \MainController
     // Измененяем награду
     public function badgeEdit()
     {
-        $uid        = self::isAdmin();
+        $uid        = Base::getUid();
         $badge_id   = \Request::getInt('id');
         $badge      = AdminModel::getBadgeId($badge_id);
         
@@ -413,8 +408,7 @@ class AdminController extends \MainController
     // Добавляем награду
     public function badgeAdd()
     {
-        $uid = self::isAdmin();
-        
+        $uid                 = Base::getUid();
         $badge_title         = \Request::getPost('badge_title');
         $badge_description   = \Request::getPost('badge_description');
         $badge_icon          = $_POST['badge_icon']; // не фильтруем
@@ -439,7 +433,7 @@ class AdminController extends \MainController
     // Страница редактиорование участника
     public function userEditPage()
     {
-        $uid        = self::isAdmin();
+        $uid        = Base::getUid();
         $user_id    = \Request::getInt('id');
         
         $redirect = '/admin';
@@ -470,7 +464,7 @@ class AdminController extends \MainController
     // Редактировать участника
     public function userEdit()
     {
-        $uid        = self::isAdmin();
+        $uid        = Base::getUid();
         $user_id    = \Request::getInt('id');
         
         $redirect = '/admin';
@@ -519,14 +513,19 @@ class AdminController extends \MainController
     // Домены в системе
     public function domains()
     {
-        $uid    = self::isAdmin();
-        $pg     = \Request::getInt('page'); 
-        $page   = (!$pg) ? 1 : $pg;
+        $uid    = Base::getUid();
+        $page   = \Request::getInt('page'); 
+        $page   = $page == 0 ? 1 : $page;
         
-        $domains    = LinkModel::getLinksAll($uid['id'], $page);
+        $limit  = 25;
+        $pagesCount = LinkModel::getLinksAllCount();  
+        $domains    = LinkModel::getLinksAll($page, $limit, $uid['id']);
+        
         $data = [
             'meta_title'    => lang('Domains'),
             'sheet'         => 'domains',
+            'pagesCount'    => ceil($pagesCount / $limit),
+            'pNum'          => $page,
         ]; 
 
         Request::getResources()->addBottomStyles('/assets/css/admin.css');
@@ -538,7 +537,7 @@ class AdminController extends \MainController
     // Форма редактирование домена
     public function editDomain()
     {
-        $uid        = self::isAdmin();
+        $uid        = Base::getUid();
         $domain_id  = \Request::getInt('id');
         
         $pg     = \Request::getInt('page'); 
@@ -557,8 +556,8 @@ class AdminController extends \MainController
     // Изменение домена
     public function domainEdit()
     {
-        $uid        = self::isAdmin();
-        $domain_id    = \Request::getInt('id');
+        $uid        = Base::getUid();
+        $domain_id  = \Request::getInt('id');
         
         $redirect = '/admin/domains';
         if (!LinkModel::getLinkId($domain_id)) {
@@ -583,8 +582,7 @@ class AdminController extends \MainController
     // Страница стоп-слов
     public function words()
     {
-        $uid        = self::isAdmin();
-        
+        $uid    = Base::getUid();
         $pg     = \Request::getInt('page'); 
         $page   = (!$pg) ? 1 : $pg;
         
@@ -605,8 +603,7 @@ class AdminController extends \MainController
     // Форма добавления стоп-слова
     public function wordsAddForm()
     {
-        $uid        = self::isAdmin();
-        
+        $uid  = Base::getUid();
         $data = [
             'h1'            => lang('Add a stop word'),
             'meta_title'    => lang('Add a stop word'),
@@ -619,9 +616,8 @@ class AdminController extends \MainController
     // Добавление стоп-слова
     public function createWord()
     {
-        $uid        = self::isAdmin();
-        $word       = \Request::getPost('word');
-        
+        $uid  = Base::getUid();
+        $word = \Request::getPost('word');
         $data = [
             'stop_word'     => $word,
             'stop_add_uid'  => 1,
@@ -636,7 +632,7 @@ class AdminController extends \MainController
     // Удаление стоп-слова
     public function deleteWord()
     {
-        $uid        = self::isAdmin();
+        $uid        = Base::getUid();
         $word_id    = \Request::getPostInt('id');
 
         ContentModel::deleteStopWord($word_id);
@@ -646,7 +642,7 @@ class AdminController extends \MainController
     
     public function topics() 
     {
-        $uid    = self::isAdmin();
+        $uid    = Base::getUid();
         $page   = \Request::getInt('page'); 
         $page   = $page == 0 ? 1 : $page;
         
@@ -669,7 +665,7 @@ class AdminController extends \MainController
 
     public function audit() 
     {
-        $uid    = self::isAdmin();
+        $uid    = Base::getUid();
         $page   = \Request::getInt('page'); 
         $page   = $page == 0 ? 1 : $page;
         
@@ -707,7 +703,7 @@ class AdminController extends \MainController
     // Восстановление после аудита
     public function status() 
     {
-        $uid    = self::isAdmin();
+        $uid    = Base::getUid();
         $st     = \Request::getPost('status');
         $status = preg_split('/(@)/', $st);
        
@@ -716,21 +712,10 @@ class AdminController extends \MainController
       
         return true;
     }
-
-    // Проверка прав
-    public static function isAdmin()
-    {
-        $uid = Base::getUid();
-        if ($uid['trust_level'] != 5) {
-            redirect('/');
-        }
-        return $uid;
-    }
-    
-    // Проверка прав
+   
+    // Обновление
     public static function updateQuantity()
     {
-        $uid    = self::isAdmin();
         AdminModel::setUpdateQuantity();
         
         redirect('/admin/topics');
