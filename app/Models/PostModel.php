@@ -8,7 +8,7 @@ use PDO;
 class PostModel extends \MainModel
 {
     // Полная версия поста  
-    public static function postSlug($slug, $user_id, $trust_level)
+    public static function getPostSlug($slug, $user_id, $trust_level)
     {
         // Ограничение по TL
         $trust_level = $trust_level;
@@ -28,7 +28,7 @@ class PostModel extends \MainModel
     }   
     
     // Получаем пост по id
-    public static function postId($id) 
+    public static function getPostId($id) 
     {
         if (!$id) { $id = 0; }  
         $q = XD::select('*')->from(['posts']);
@@ -126,35 +126,6 @@ class PostModel extends \MainModel
         return true;
     }
   
-    // Добавить пост в закладки
-    public static function setPostFavorite($post_id, $uid)
-    {
-        $result = self::getMyPostFavorite($post_id, $uid); 
-
-        if (!$result) {
-           XD::insertInto(['favorite'], '(', ['favorite_tid'], ',', ['favorite_uid'], ',', ['favorite_type'], ')')->values( '(', XD::setList([$post_id, $uid, 1]), ')' )->run();
-        } else {
-           XD::deleteFrom(['favorite'])->where(['favorite_tid'], '=', $post_id)->and(['favorite_uid'], '=', $uid)->run(); 
-        } 
-        
-        return true;
-    }
-  
-    // Пост в закладках или нет
-    public static function getMyPostFavorite($post_id, $uid) 
-    {
-        $result = XD::select('*')->from(['favorite'])->where(['favorite_tid'], '=', $post_id)
-        ->and(['favorite_uid'], '=', $uid)
-        ->and(['favorite_type'], '=', 1)
-        ->getSelect();
-        
-        if ($result) {
-            return 1;
-        } else {
-            return false;
-        }
-    }
-    
     // Удален пост или нет
     public static function isThePostDeleted($post_id) 
     {

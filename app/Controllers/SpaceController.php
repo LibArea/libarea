@@ -89,19 +89,17 @@ class SpaceController extends \MainController
     // Посты по пространству
     public function posts($sheet)
     {
-        $uid            = Base::getUid();
-        $slug           = \Request::get('slug');
-        
-        $pg     = \Request::getInt('page'); 
-        $page   = (!$pg) ? 1 : $pg;
-        
-        // Покажем 404
+        $uid    = Base::getUid();
+        $slug   = \Request::get('slug');
+        $page   = \Request::getInt('page'); 
+        $page   = $page == 0 ? 1 : $page;
+
         $space = SpaceModel::getSpace($slug, 'slug');
         Base::PageError404($space);
   
-        $quantity_per_page = 25;
-        $pagesCount = SpaceModel::getPostsCount($space['space_id'], $uid, $sheet, $page); 
-        $posts      = SpaceModel::getPosts($space['space_id'], $uid, $sheet, $page, $quantity_per_page);
+        $limit = 25; 
+        $pagesCount = SpaceModel::getPostsCount($space['space_id'], $uid, $sheet); 
+        $posts      = SpaceModel::getPosts($page, $limit, $space['space_id'], $uid, $sheet);
 
         $space['space_date']        = lang_date($space['space_date']);
         $space['space_cont_post']   = count($posts);
@@ -130,21 +128,20 @@ class SpaceController extends \MainController
         Request::getHead()->addStyles('/assets/css/space.css');
 
 
+        $num = ' | ';
         if ($page > 1) { 
-            $num = ' | ' . lang('Page') . ' ' . $page;
-        } else {
-            $num = '';
-        }
+            $num = sprintf(lang('page-number'), $page);
+        } 
 
         $data = [
             'h1'            => $space['space_name'],
             'canonical'     => Config::get(Config::PARAM_URL) .'/s/'. $space['space_slug'],
             'img'           => Config::get(Config::PARAM_URL) .'/uploads/spaces/logos/'. $space['space_img'],
-            'pagesCount'    => ceil($pagesCount / $quantity_per_page),
+            'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
             'sheet'         => $sheet,
-            'meta_title'    => $space['space_name'] .' — '. $s_title .' | '. Config::get(Config::PARAM_NAME),
-            'meta_desc'     => $space['space_description'] .' '. $s_title .' '. Config::get(Config::PARAM_HOME_TITLE),
+            'meta_title'    => $space['space_name'] .$num. $s_title .' | '. Config::get(Config::PARAM_NAME),
+            'meta_desc'     => $space['space_description'] .$num. $s_title .' '. Config::get(Config::PARAM_HOME_TITLE),
         ];
 
         return view(PR_VIEW_DIR . '/space/space-posts', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'space_info' => $space, 'space_signed' => $space_signed]);
@@ -329,6 +326,8 @@ class SpaceController extends \MainController
         $space_color = \Request::getPost('color');
         $space_color = empty($space_color) ? $space['space_color'] : $space_color;
         
+        $space_text  = empty($space_text) ? '' : $space_text;
+        
         $slug = SpaceModel::getSpace($space_slug, 'slug');
 
         if ($slug['space_slug'] != $space['space_slug']) {
@@ -354,7 +353,7 @@ class SpaceController extends \MainController
             'space_feed'            => $space_feed,
             'space_tl'              => $space_tl,
         ]; 
-        
+
         SpaceModel::edit($data);
         
         Base::addMsg(lang('Change saved'), 'success');

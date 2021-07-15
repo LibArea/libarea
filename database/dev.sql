@@ -101,7 +101,7 @@ CREATE TABLE `comments` (
 
 CREATE TABLE `favorite` (
   `favorite_id` mediumint(8) NOT NULL,
-  `favorite_uid` mediumint(8) NOT NULL,
+  `favorite_user_id` mediumint(8) NOT NULL,
   `favorite_tid` int(11) NOT NULL,
   `favorite_type` tinyint(1) NOT NULL COMMENT '1 посты, 2 комментарии'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -714,7 +714,7 @@ ALTER TABLE `comments`
 --
 ALTER TABLE `favorite`
   ADD PRIMARY KEY (`favorite_id`),
-  ADD KEY `favorite_uid` (`favorite_id`),
+  ADD KEY `favorite_user_id` (`favorite_id`),
   ADD KEY `favorite_id` (`favorite_tid`);
 
 --

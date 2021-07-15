@@ -3,8 +3,6 @@
 namespace App\Models;
 use Hleb\Constructor\Handlers\Request;
 use XdORM\XD;
-use Lori\Base;
-use Lori\Config;
 use DB;
 use PDO;
 

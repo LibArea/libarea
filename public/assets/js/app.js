@@ -103,24 +103,14 @@ $(function(){
             $('.user-mypost').find('.mu_post').html('+ в профиле');
         });
     });
-    // Add a post to bookmarks
-    $(document).on("click", ".user-post-fav", function(){      
-        let post_id  = $(this).data('post');
+    // Add / Remove from favorites
+    $(document).on("click", ".add-favorite", function(){      
+        let content_id    = $(this).data('id');
+        let content_type  = $(this).data('type');
         $.ajax({
-            url: '/post/addfavorite',
+            url: '/favorite/' + content_type,
             type: 'POST',
-            data: {post_id: post_id},
-        }).done(function(data) {
-           location.reload(); 
-        });
-    }); 
-    // Add the answer to bookmarks
-    $(document).on("click", ".user-answer-fav", function(){      
-        let answer_id  = $(this).data('answer');
-        $.ajax({
-            url: '/answer/addfavorite',
-            type: 'POST',
-            data: {answer_id: answer_id},
+            data: {content_id: content_id},
         }).done(function(data) {
            location.reload(); 
         });

@@ -72,17 +72,14 @@
                                     <?php } ?>    
                                 <?php } ?> 
                                 
-                                <?php if ($post['favorite_post']){ ?>
-                                   <span class="indent"></span>    
-                                   <span class="user-post-fav" data-post="<?= $post['post_id']; ?>">
-                                        <span class="my_favorite"><?= lang('remove-favorites'); ?></span>
-                                   </span>   
-                                <?php } else { ?>
-                                    <span class="indent"></span>
-                                    <span class="user-post-fav" data-post="<?= $post['post_id']; ?>">
-                                        <span class="my_favorite"><?= lang('add-favorites'); ?></span>
-                                    </span>
-                                <?php } ?> 
+                                <span class="indent"></span>
+                                <span class="add-favorite" data-id="<?= $post['post_id']; ?>" data-type="post">
+                                    <?php if ($post['favorite_post']){ ?>
+                                        <?= lang('remove-favorites'); ?>
+                                    <?php } else { ?>
+                                        <?= lang('add-favorites'); ?>
+                                    <?php } ?> 
+                                </span>
                                 
                                 <?php if($uid['trust_level'] ==5) { ?>
                                     <span class="indent"> &#183; </span>

@@ -55,7 +55,7 @@ class CommentController extends \MainController
         $post_id        = \Request::getPostInt('post_id');
         $uid            = Base::getUid();
 
-        $comment = CommentModel::getCommentsOne($comment_id);
+        $comment = CommentModel::getCommentsId($comment_id);
 
         // Проверка доступа 
         if (!accessСheck($comment, 'comment', $uid, 0, 0)) {
@@ -81,10 +81,10 @@ class CommentController extends \MainController
         $comment_content    = \Request::getPost('comment');
 
         // Получим относительный url поста для возрата
-        $post       = PostModel::postId($post_id);
+        $post       = PostModel::getPostId($post_id);
         Base::PageRedirection($post);
         
-        $comment = CommentModel::getCommentsOne($comment_id);
+        $comment = CommentModel::getCommentsId($comment_id);
         
         // Проверка доступа 
         if (!accessСheck($comment, 'comment', $uid, 0, 0)) {

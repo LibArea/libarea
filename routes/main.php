@@ -19,9 +19,11 @@ Route::before('Authorization@noAuth')->getGroup();
 
         Route::get('/post/grabtitle')->controller('PostController@grabMeta');
         Route::get('/comment/editform')->controller('CommentController@editCommentForm');
-        Route::get('/answer/addfavorite')->controller('AnswerController@addAnswerFavorite');
+ 
         Route::get('/post/addpostprof')->controller('PostController@addPostProfile');
-        Route::get('/post/addfavorite')->controller('PostController@addPostFavorite');
+        
+        Route::get('/favorite/post')->controller('FavoriteController', ['post']);
+        Route::get('/favorite/answer')->controller('FavoriteController', ['answer']);
         
         Route::get('/search/users')->controller('PostController@select', ['user']);
         Route::get('/search/posts')->controller('PostController@select', ['posts']);

@@ -681,11 +681,11 @@ class AdminController extends \MainController
         foreach ($audits  as $ind => $row) {
             
             if ($row['audit_type'] == 'post') {
-                $row['content'] = PostModel::postId($row['audit_content_id']);
+                $row['content'] = PostModel::getPostId($row['audit_content_id']);
             } elseif ($row['audit_type'] == 'answer') {
-                $row['content'] = AnswerModel::getAnswerOne($row['audit_content_id']); 
+                $row['content'] = AnswerModel::getAnswerId($row['audit_content_id']); 
             } elseif ($row['audit_type'] == 'comment') {
-                $row['content'] = CommentModel::getCommentsOne($row['audit_content_id']); 
+                $row['content'] = CommentModel::getCommentsId($row['audit_content_id']); 
             }
 
             $result[$ind]       = $row;

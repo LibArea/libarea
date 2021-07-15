@@ -8,6 +8,7 @@ use App\Models\SpaceModel;
 use App\Models\AnswerModel;
 use App\Models\TopicModel;
 use App\Models\CommentModel;
+use App\Models\FavoriteModel;
 use App\Models\NotificationsModel;
 use Lori\Content;
 use Lori\Config;
@@ -23,7 +24,7 @@ class PostController extends \MainController
         $slug       = \Request::get('slug');
         $post_id    = \Request::getInt('id');
         
-        $post_new   = PostModel::postId($post_id); 
+        $post_new   = PostModel::getPostId($post_id); 
 
         // Проверим (id, slug)
         Base::PageError404($post_new);
@@ -31,7 +32,7 @@ class PostController extends \MainController
             redirect('/post/' . $post_new['post_id'] . '/' . $post_new['post_slug']);
         }
 
-        $post = PostModel::postSlug($slug, $uid['id'], $uid['trust_level']); 
+        $post = PostModel::getPostSlug($slug, $uid['id'], $uid['trust_level']); 
         Base::PageError404($post);
 
         // Редирект для слияния
@@ -71,7 +72,7 @@ class PostController extends \MainController
         $comment_n = $post['post_comments_count'] + $post['post_answers_count'];
         $post['num_comments']   = word_form($comment_n, lang('Comment'), lang('Comments-m'), lang('Comments'));
         
-        $post['favorite_post']  = PostModel::getMyPostFavorite($post['post_id'], $uid['id']);
+        $post['favorite_post']  = FavoriteModel::getUserFavorite($post['post_id'], $uid['id'], 1);
       
         // Получим ответы
         // post_type: 0 - дискуссия, 1 - Q&A
@@ -176,7 +177,7 @@ class PostController extends \MainController
         $post_id    = \Request::getInt('id');
         $uid        = Base::getUid();
         
-        $post   = PostModel::postId($post_id); 
+        $post   = PostModel::getPostId($post_id); 
          
         // Проверка доступа 
         if (!accessСheck($post, 'post', $uid, 0, 0)) {
@@ -253,7 +254,7 @@ class PostController extends \MainController
         $post_related   = empty($related) ? '' : implode(',', $related);
         $topics         = empty($_POST['post_topics']) ? '' : $_POST['post_topics'];
 
-        $post = PostModel::postId($post_id); 
+        $post = PostModel::getPostId($post_id); 
          
         $redirect = '/post/edit/' . $post_id; 
          
@@ -356,7 +357,7 @@ class PostController extends \MainController
         $post_id    = \Request::getInt('id');
         $uid        = Base::getUid();
         
-        $post = PostModel::postId($post_id); 
+        $post = PostModel::getPostId($post_id); 
          
         // Проверка доступа 
         if (!accessСheck($post, 'post', $uid, 0, 0)) {
@@ -378,7 +379,7 @@ class PostController extends \MainController
         $uid     = Base::getUid();
         $post_id = \Request::getPostInt('post_id');
         
-        $post = PostModel::postId($post_id); 
+        $post = PostModel::getPostId($post_id); 
         
         // Проверка доступа 
         if (!accessСheck($post, 'post', $uid, 0, 0)) {
@@ -400,7 +401,7 @@ class PostController extends \MainController
     {
         $uid     = Base::getUid();
         $post_id = \Request::getPostInt('post_id');
-        $post    = PostModel::postId($post_id); 
+        $post    = PostModel::getPostId($post_id); 
         
         Base::PageRedirection($post);
         
@@ -413,7 +414,7 @@ class PostController extends \MainController
     public function shownPost() 
     {
         $post_id = \Request::getPostInt('post_id');
-        $post    = PostModel::postId($post_id); 
+        $post    = PostModel::gePostId($post_id); 
         
         if (!$post) {
             return false;

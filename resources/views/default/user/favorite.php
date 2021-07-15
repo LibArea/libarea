@@ -36,9 +36,9 @@
                                             </a>     
                                         <?php } ?>
                                         <?php if($uid['id'] > 0) { ?>
-                                            <?php if($uid['id'] == $fav['favorite_uid']) { ?>
+                                            <?php if($uid['id'] == $fav['favorite_user_id']) { ?>
                                                 <span class="indent"> &#183; </span> 
-                                                <span class="user-post-fav right" data-post="<?= $fav['post_id']; ?>">
+                                                <span class="add-favorite right" data-id="<?= $fav['post_id']; ?>" data-type="post">
                                                      <span class="date"><?= lang('Remove'); ?></span>
                                                 </span>  
                                             <?php } ?>                                
@@ -59,8 +59,8 @@
                                         <?= $fav['post']['space_name']; ?>
                                     </a>
                                     <?php if($uid['id'] > 0) { ?>
-                                        <?php if($uid['id'] == $fav['favorite_uid']) { ?>
-                                            <span class="user-answer-fav right" data-answer="<?= $fav['answer_id']; ?>">
+                                        <?php if($uid['id'] == $fav['favorite_user_id']) { ?>
+                                            <span class="add-favorite right" data-id="<?= $fav['answer_id']; ?>" data-type="answer">
                                                  <span class="small date"><?= lang('Remove'); ?></span>
                                             </span>  
                                         <?php } ?>                                

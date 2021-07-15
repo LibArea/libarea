@@ -51,15 +51,13 @@
                             <?php } ?>
                 
                             <?php if ($uid['id']) { ?>
-                                <?php if ($answer['favorite_uid']){ ?>
-                                   <span class="user-answer-fav bar" data-answer="<?= $answer['answer_id']; ?>">
-                                        <span class="favcomm"><?= lang('remove-favorites'); ?></span>
-                                   </span>   
-                                <?php } else { ?>
-                                    <span class="user-answer-fav bar" data-answer="<?= $answer['answer_id']; ?>">
-                                        <span class="favcomm"><?= lang('add-favorites'); ?></span>
-                                    </span>
-                                <?php } ?> 
+                               <span class="add-favorite bar" data-id="<?= $answer['answer_id']; ?>" data-type="answer">
+                                    <?php if ($answer['favorite_user_id']){ ?>
+                                        <?= lang('remove-favorites'); ?>
+                                    <?php } else { ?>
+                                        <?= lang('add-favorites'); ?>
+                                    <?php } ?>
+                               </span>   
                             <?php } ?>            
                             
                             <?php if($uid['trust_level'] == 5) { ?>

@@ -95,27 +95,10 @@ class CommentModel extends \MainModel
         return $query->getSelect();
     } 
     
-    // Последние 5 комментариев
-    public static function latestComments($user_id) 
-    {
-        $q = XD::select('*')->from(['comments']);
-        $query = $q->leftJoin(['posts'])->on(['post_id'], '=', ['comment_post_id'])
-                 ->leftJoin(['users'])->on(['id'], '=', ['comment_user_id'])
-                 ->leftJoin(['space'])->on(['post_space_id'], '=', ['space_id']);
-                 
-                if ($user_id) { 
-                    $result = $query->where(['comment_is_deleted'], '=', 0)->and(['comment_user_id'], '!=', $user_id);
-                } else {
-                    $result = $query->where(['comment_is_deleted'], '=', 0);
-                } 
-        
-        return $result->orderBy(['comment_id'])->desc()->limit(5)->getSelect();
-    }
-    
     // Получаем комментарий по id комментария
-    public static function getCommentsOne($id)
+    public static function getCommentsId($comment_id)
     {
-       return XD::select('*')->from(['comments'])->where(['comment_id'], '=', $id)->getSelectOne();
+       return XD::select('*')->from(['comments'])->where(['comment_id'], '=', $comment_id)->getSelectOne();
     }
     
     // Редактируем комментарий

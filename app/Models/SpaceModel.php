@@ -12,31 +12,30 @@ class SpaceModel extends \MainModel
     {
         $signet = "";
         if ($sort == 'subscription') { 
-            $signet = "AND f.signed_user_id = :user_id"; 
+            $signet = "AND signed_user_id = :user_id"; 
         } 
         
         $start  = ($page-1) * $limit;
         $sql = "SELECT 
-                s.space_id, 
-                s.space_name, 
-                s.space_description,
-                s.space_slug, 
-                s.space_img,
-                s.space_date,
-                s.space_type,
-                s.space_user_id,
-                s.space_is_delete,
-                u.id,
-                u.login,
-                u.avatar,
-                f.signed_space_id, 
-                f.signed_user_id
- 
-                    FROM space s 
-                    LEFT JOIN users as u ON u.id = s.space_user_id
-                    LEFT JOIN space_signed as f ON f.signed_space_id = s.space_id AND f.signed_user_id = :user_id 
-                    WHERE s.space_is_delete != 1 $signet
-                    ORDER BY s.space_id DESC LIMIT $start, $limit";
+                space_id, 
+                space_name, 
+                space_description,
+                space_slug, 
+                space_img,
+                space_date,
+                space_type,
+                space_user_id,
+                space_is_delete,
+                id,
+                login,
+                avatar,
+                signed_space_id, 
+                signed_user_id
+                    FROM space  
+                    LEFT JOIN users ON id = space_user_id
+                    LEFT JOIN space_signed ON signed_space_id = space_id AND signed_user_id = :user_id 
+                    WHERE space_is_delete != 1 $signet
+                    ORDER BY space_id DESC LIMIT $start, $limit";
 
        return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);  
     }
@@ -44,7 +43,7 @@ class SpaceModel extends \MainModel
     // Количество
     public static function getSpacesAllCount()
     {
-        $sql = "SELECT space_id FROM space WHERE space_is_delete != 1";
+        $sql = "SELECT space_id, space_is_delete FROM space WHERE space_is_delete != 1";
 
         return DB::run($sql)->rowCount(); 
     }
@@ -52,9 +51,20 @@ class SpaceModel extends \MainModel
     // Для форм добавления и изменения поста
     public static function getSpaceSelect($user_id, $trust_level)
     {
-        $sql = "SELECT * FROM space WHERE space_permit_users = 0 or space_user_id = :user_id ORDER BY space_id DESC";
+        $sql = "SELECT 
+                    space_id,
+                    space_name,
+                    space_user_id,
+                    space_permit_users
+                        FROM space 
+                        WHERE space_permit_users = 0 or space_user_id = :user_id ORDER BY space_id DESC";
+                        
         if ($trust_level == 5) {
-            $sql = "SELECT * FROM space";
+            $sql = "SELECT 
+                    space_id,
+                    space_name,
+                    space_user_id
+                        FROM space";
         }
 
         return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC); 
@@ -69,31 +79,29 @@ class SpaceModel extends \MainModel
         } 
         
         $sql = "SELECT 
-                    s.space_id,
-                    s.space_name,
-                    s.space_slug,
-                    s.space_description,
-                    s.space_img,
-                    s.space_cover_art,
-                    s.space_text,
-                    s.space_short_text,
-                    s.space_date,
-                    s.space_color,
-                    s.space_category_id,
-                    s.space_user_id,
-                    s.space_type,
-                    s.space_permit_users,
-                    s.space_feed,
-                    s.space_tl,
-                    s.space_is_delete,
-                    
-                    u.id,
-                    u.login,
-                    u.avatar
-        
-                FROM space AS s
-                LEFT JOIN users AS u ON s.space_user_id = u.id
-                WHERE $sort";
+                    space_id,
+                    space_name,
+                    space_slug,
+                    space_description,
+                    space_img,
+                    space_cover_art,
+                    space_text,
+                    space_short_text,
+                    space_date,
+                    space_color,
+                    space_category_id,
+                    space_user_id,
+                    space_type,
+                    space_permit_users,
+                    space_feed,
+                    space_tl,
+                    space_is_delete,
+                    id,
+                    login,
+                    avatar
+                        FROM space 
+                        LEFT JOIN users ON space_user_id = id
+                        WHERE $sort";
 
         return DB::run($sql, ['params' => $params])->fetch(PDO::FETCH_ASSOC); 
     }
@@ -118,88 +126,126 @@ class SpaceModel extends \MainModel
     // Количество читающих
     public static function numSpaceSubscribers($space_id)
     {
-        $sql = "SELECT signed_id FROM space_signed WHERE signed_space_id = $space_id";
+        $sql = "SELECT signed_id, signed_space_id FROM space_signed WHERE signed_space_id = $space_id";
 
         return DB::run($sql)->rowCount(); 
     } 
 
-    // Списки постов по пространству
-    public static function getPosts($space_id, $uid, $type, $page, $quantity_per_page)
+    // Список постов по пространству
+    public static function getPosts($page, $limit, $space_id, $uid, $type)
     {
         $display = ''; 
         if ($uid['trust_level'] != 5) {  
-            $tl = "AND p.post_tl <= " . $uid['trust_level'];
+            $tl = "AND post_tl <= " . $uid['trust_level'];
             if ($uid['id'] == 0) { 
-                $tl = "AND p.post_tl = 0";
+                $tl = "AND post_tl = 0";
             } 
-            $display = "AND p.post_is_deleted = 0 $tl";
+            $display = "AND post_is_deleted = 0 $tl";
         } 
          
-        $sort = "ORDER BY p.post_answers_count DESC"; 
+        $sort = "ORDER BY post_answers_count DESC"; 
         if ($type == 'feed') { 
-            $sort = "ORDER BY p.post_top DESC, p.post_date DESC";
+            $sort = "ORDER BY post_top DESC, post_date DESC";
         }           
             
-        $offset = ($page-1) * $quantity_per_page;   
-
-        $sql = "SELECT p.*, 
+        $start  = ($page-1) * $limit;
+        $sql = "SELECT 
+                    post_id,
+                    post_title,
+                    post_slug,
+                    post_type,
+                    post_translation,
+                    post_draft,
+                    post_space_id,
+                    post_date,
+                    post_published,
+                    post_user_id,
+                    post_votes,
+                    post_answers_count,
+                    post_comments_count,
+                    post_content,
+                    post_content_img,
+                    post_thumb_img,
+                    post_merged_id,
+                    post_closed,
+                    post_tl,
+                    post_lo,
+                    post_top,
+                    post_url_domain,
+                    post_is_deleted,
                     rel.*,
-                    v.votes_post_item_id, v.votes_post_user_id,
-                    u.id, u.login, u.avatar
-                FROM posts AS p
+                    votes_post_item_id, 
+                    votes_post_user_id,
+                    id, 
+                    login, 
+                    avatar
+                        FROM posts
                 
-                LEFT JOIN
-                (
-                    SELECT 
-                        MAX(t.topic_id), 
-                        MAX(t.topic_slug), 
-                        MAX(t.topic_title),
-                        MAX(r.relation_topic_id), 
-                        r.relation_post_id,
+                        LEFT JOIN
+                        (
+                            SELECT 
+                                MAX(topic_id), 
+                                MAX(topic_slug), 
+                                MAX(topic_title),
+                                MAX(relation_topic_id), 
+                                relation_post_id,
 
-                        GROUP_CONCAT(t.topic_slug, '@', t.topic_title SEPARATOR '@') AS topic_list
-                        FROM topic  AS t
-                        LEFT JOIN topic_post_relation AS r
-                            on t.topic_id = r.relation_topic_id
-                        GROUP BY r.relation_post_id
-                ) AS rel
-                    ON rel.relation_post_id = p.post_id 
+                                GROUP_CONCAT(topic_slug, '@', topic_title SEPARATOR '@') AS topic_list
+                                FROM topic
+                                LEFT JOIN topic_post_relation 
+                                    on topic_id = relation_topic_id
+                                GROUP BY relation_post_id
+                        ) AS rel
+                            ON rel.relation_post_id = post_id 
             
-                LEFT JOIN users AS u ON u.id = p.post_user_id 
-                LEFT JOIN votes_post AS v ON v.votes_post_item_id = p.post_id AND v.votes_post_user_id = ". $uid['id'] ." 
-                WHERE p.post_space_id = $space_id and p.post_draft = 0
+                LEFT JOIN users ON id = post_user_id 
+                LEFT JOIN votes_post ON votes_post_item_id = post_id AND votes_post_user_id = ". $uid['id'] ." 
+                WHERE post_space_id = $space_id and post_draft = 0
                 
                 $display
-                $sort LIMIT $quantity_per_page OFFSET ".$offset." ";
+                $sort LIMIT $start, $limit ";
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
     
     // Количество постов
-    public static function getPostsCount($space_id, $uid, $type, $page)
+    public static function getPostsCount($space_id, $uid, $type)
     {
         $display = ''; 
         if ($uid['trust_level'] != 5) {  
             
-            $tl = "AND p.post_tl <= " . $uid['trust_level'];
+            $tl = "AND post_tl <= " . $uid['trust_level'];
             if ($uid['id'] == 0) { 
-                $tl = "AND p.post_tl = 0";
+                $tl = "AND post_tl = 0";
             } 
             
-            $display = "AND p.post_is_deleted = 0 $tl";
+            $display = "AND post_is_deleted = 0 $tl";
         } 
         
-        $sort = "ORDER BY p.post_answers_count DESC";
+        $sort = "ORDER BY post_answers_count DESC";
         if ($type == 'feed') { 
-            $sort = "ORDER BY p.post_top DESC, p.post_date DESC";
+            $sort = "ORDER BY post_top DESC, post_date DESC";
         }          
             
-        $sql = "SELECT p.*, v.*,
-                u.id, u.login, u.avatar,
-                FROM posts AS p
-                LEFT JOIN users AS u ON id = post_user_id 
-                LEFT JOIN votes_post AS v ON v.votes_post_item_id = p.post_id AND v.votes_post_user_id = ". $uid['id'] ."
-                WHERE p.post_space_id = $space_id and p.post_draft = 0 $display $sort";
+        $sql = "SELECT 
+                post_id,
+                post_space_id,
+                post_draft,
+                post_user_id,
+                post_answers_count,
+                post_date,
+                post_top,
+                post_tl,
+                post_is_deleted,
+                votes_post_item_id,
+                votes_post_user_id,
+                id, 
+                login, 
+                avatar
+                    FROM posts
+                    LEFT JOIN users ON id = post_user_id 
+                    LEFT JOIN votes_post ON votes_post_item_id = post_id AND votes_post_user_id = ". $uid['id'] ."
+                    WHERE post_space_id = $space_id and post_draft = 0 $display $sort";
 
         return DB::run($sql)->rowCount(); 
     }
@@ -239,7 +285,7 @@ class SpaceModel extends \MainModel
                 ['space_text'], '=', $data['space_text'], ',',
                 ['space_short_text'], '=', $data['space_short_text'], ',',
                 ['space_permit_users'], '=', $data['space_permit_users'], ',',
-                ['space_feed'], '=', $data['space_feed'], ',',            
+                ['space_feed'], '=', $data['space_feed'], ',',
                 ['space_tl'], '=', $data['space_tl'])->where(['space_id'], '=', $data['space_id'])->run();
         
         return true;

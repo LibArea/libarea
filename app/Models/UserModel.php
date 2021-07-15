@@ -20,7 +20,6 @@ class UserModel extends \MainModel
                     name, 
                     avatar,
                     is_deleted
-                    
                         FROM users 
                         WHERE is_deleted != 1 and ban_list != 1
                         ORDER BY id = :user_id DESC, trust_level DESC LIMIT $start, $limit"; 
@@ -34,9 +33,8 @@ class UserModel extends \MainModel
         $sql = "SELECT 
                     id, 
                     is_deleted
-                    
-                    FROM users
-                    WHERE is_deleted = 0";
+                        FROM users
+                        WHERE is_deleted = 0";
 
         return  DB::run($sql)->rowCount(); 
     }
@@ -74,8 +72,7 @@ class UserModel extends \MainModel
                     ban_list,
                     hits_count,
                     is_deleted 
-        
-                    FROM users WHERE $sort";
+                        FROM users WHERE $sort";
         
         $result = DB::run($sql, ['params' => $params]);
         
@@ -162,17 +159,31 @@ class UserModel extends \MainModel
     // Страница закладок участника (комментарии и посты)
     public static function userFavorite($uid)
     {
-        $sql = "SELECT favorite.*, 
-                       users.id, users.login, users.avatar, 
-                       posts.*, 
-                       answers.*, 
-                       space.*
-                fROM favorite
-                LEFT JOIN users ON users.id = favorite.favorite_uid
-                LEFT JOIN posts ON posts.post_id = favorite.favorite_tid AND favorite.favorite_type = 1
-                LEFT JOIN answers ON answers.answer_id = favorite.favorite_tid AND favorite.favorite_type = 2
-                LEFT JOIN space ON  space.space_id = posts.post_space_id
-                WHERE favorite.favorite_uid = $uid LIMIT 25 "; 
+        $sql = "SELECT 
+                    favorite_user_id, 
+                    favorite_type,
+                    favorite_tid,
+                    id, 
+                    login,
+                    avatar, 
+                    post_id,
+                    post_title,
+                    post_slug,
+                    post_date,
+                    post_space_id,
+                    post_answers_count,
+                    answer_id,
+                    answer_post_id,
+                    answer_content,
+                    space_id,
+                    space_name,
+                    space_slug
+                        fROM favorite
+                        LEFT JOIN users ON id = favorite_user_id
+                        LEFT JOIN posts ON post_id = favorite_tid AND favorite_type = 1
+                        LEFT JOIN answers ON answer_id = favorite_tid AND favorite_type = 2
+                        LEFT JOIN space ON  space_id = post_space_id
+                        WHERE favorite_user_id = $uid LIMIT 25 "; 
                         
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     } 

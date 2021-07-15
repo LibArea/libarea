@@ -49,7 +49,7 @@ class UserController extends \MainController
         // Покажем 404
         Base::PageError404($user);
 
-        $post = PostModel::postId($user['my_post']);
+        $post = PostModel::getPostId($user['my_post']);
         
         if (!$user['about']) { 
             $user['about'] = lang('Riddle') . '...';
@@ -307,7 +307,7 @@ class UserController extends \MainController
             $row['post_date']       = (empty($row['post_date'])) ? $row['post_date'] : lang_date($row['post_date']);
             $row['answer_content']  = Content::text($row['answer_content'], 'text');
             $row['date']            = $row['post_date'];
-            $row['post']            = PostModel::postId($row['answer_post_id']);
+            $row['post']            = PostModel::getPostId($row['answer_post_id']);
             $result[$ind]           = $row;
         }
         

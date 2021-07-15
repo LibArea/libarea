@@ -250,7 +250,7 @@ class PublishController extends \MainController
     public function createAnswer()
     {
         $post_id    = \Request::getPostInt('post_id');  
-        $post       = PostModel::postId($post_id);
+        $post       = PostModel::getPostId($post_id);
         Base::PageError404($post);
         
         $answer_content = $_POST['answer'];                 // не фильтруем (для Markdown)
@@ -319,7 +319,7 @@ class PublishController extends \MainController
         
         $uid        = Base::getUid();
         $ip         = \Request::getRemoteAddress(); 
-        $post       = PostModel::postId($post_id);
+        $post       = PostModel::getPostId($post_id);
         Base::PageError404($post);
 
         $redirect = '/post/' . $post['post_id'] . '/' . $post['post_slug'];
@@ -365,7 +365,7 @@ class PublishController extends \MainController
         // Оповещение автору ответа, что есть комментарий
         if ($answer_id) {
             // Себе не записываем (перенести в общий, т.к. ничего для себя не пишем в notf)
-            $answ = AnswerModel::getAnswerOne($answer_id);
+            $answ = AnswerModel::getAnswerId($answer_id);
             if ($uid['id'] != $answ['answer_user_id']) {
                 $type = 4; // Ответ на пост        
                 NotificationsModel::send($uid['id'], $answ['answer_user_id'], $type, $last_comment_id, $url_comment, 1);

@@ -77,7 +77,7 @@ class AnswerModel extends \MainModel
                 v.votes_answer_user_id,
                 
                 f.favorite_tid,
-                f.favorite_uid,
+                f.favorite_user_id,
                 f.favorite_type,
                 
                 u.id, 
@@ -89,7 +89,7 @@ class AnswerModel extends \MainModel
                 LEFT JOIN votes_answer AS v ON v.votes_answer_item_id = a.answer_id
                     AND v.votes_answer_user_id = $user_id
                 LEFT JOIN favorite AS f ON f.favorite_tid = a.answer_id
-                    AND f.favorite_uid  = $user_id
+                    AND f.favorite_user_id  = $user_id
                     AND f.favorite_type = 2
                     WHERE a.answer_post_id = $post_id
                     $sort ";
@@ -112,9 +112,9 @@ class AnswerModel extends \MainModel
     } 
    
     // Информацию по id ответа
-    public static function getAnswerOne($id)
+    public static function getAnswerId($answer_id)
     {
-       return XD::select('*')->from(['answers'])->where(['answer_id'], '=', $id)->getSelectOne();
+       return XD::select('*')->from(['answers'])->where(['answer_id'], '=', $answer_id)->getSelectOne();
     }
     
     // Редактируем ответ
@@ -136,35 +136,7 @@ class AnswerModel extends \MainModel
                 
         return  DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
-    
-    // Добавить ответы в закладки
-    public static function setAnswerFavorite($post_id, $uid)
-    {
-        $result = self::getMyAnswerFavorite($post_id, $uid); 
-
-        if (!$result) {
-           XD::insertInto(['favorite'], '(', ['favorite_tid'], ',', ['favorite_uid'], ',', ['favorite_type'], ')')->values( '(', XD::setList([$post_id, $uid, 2]), ')' )->run();
-        } else {
-           XD::deleteFrom(['favorite'])->where(['favorite_tid'], '=', $post_id)->and(['favorite_uid'], '=', $uid)->run(); 
-        } 
-        
-        return true;
-    }
   
-    // Ответы в закладках или нет
-    public static function getMyAnswerFavorite($post_id, $uid) 
-    {
-        $result = XD::select('*')->from(['favorite'])->where(['favorite_tid'], '=', $post_id)
-        ->and(['favorite_uid'], '=', $uid)
-        ->and(['favorite_type'], '=', 2)
-        ->getSelect();
-
-        if ($result) {
-            return true;
-        } 
-        return false;
-    }
-    
     // Удаленные ответы
     public static function getAnswersDeleted($page, $limit) 
     {

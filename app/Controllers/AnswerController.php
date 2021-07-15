@@ -56,14 +56,14 @@ class AnswerController extends \MainController
         $post_id    = \Request::getInt('post_id');
         $uid        = Base::getUid();
         
-        $answer = AnswerModel::getAnswerOne($answer_id);
+        $answer = AnswerModel::getAnswerId($answer_id);
 
         // Проверка доступа 
         if (!accessСheck($answer, 'answer', $uid, 0, 0)) {
             redirect('/');
         }        
 
-        $post = PostModel::postId($post_id);
+        $post = PostModel::getPostId($post_id);
         Base::PageError404($post);
 
         Request::getResources()->addBottomStyles('/assets/editor/editormd.css');
@@ -94,7 +94,7 @@ class AnswerController extends \MainController
         $post_id        = \Request::getPostInt('post_id');
         $answer_content = $_POST['answer']; // не фильтруем
 
-        $post = PostModel::postId($post_id);
+        $post = PostModel::getPostId($post_id);
 
         // Получим относительный url поста для возрата
         $url = '/post/' . $post['post_id'] . '/' . $post['post_slug'];
@@ -103,7 +103,7 @@ class AnswerController extends \MainController
         $uid        = Base::getUid();
         $user_id    = $uid['id'];
         
-        $answer = AnswerModel::getAnswerOne($answer_id);
+        $answer = AnswerModel::getAnswerId($answer_id);
         
         // Проверка доступа
         if (!accessСheck($answer, 'answer', $uid, 0, 0)) {
@@ -152,7 +152,7 @@ class AnswerController extends \MainController
     {
         $uid        = Base::getUid();
         $answer_id  = \Request::getPostInt('answer_id');
-        $answer     = AnswerModel::getAnswerOne($answer_id); 
+        $answer     = AnswerModel::getAnswerId($answer_id); 
         
         Base::PageRedirection($answer);
         
