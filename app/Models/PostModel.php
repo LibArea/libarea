@@ -7,6 +7,63 @@ use PDO;
 
 class PostModel extends \MainModel
 {
+    // Добавляем пост
+    public static function addPost($data)
+    {
+        // Проверить пост на повтор slug (переделать)
+        $result = XD::select('*')->from(['posts'])->where(['post_slug'], '=', $data['post_slug'])->getSelectOne();
+        
+        if ($result) {
+            $data['post_slug'] =  $data['post_slug'] . "-";
+        }
+           
+        // toString  строковая заменя для проверки
+        XD::insertInto(['posts'], '(', 
+            ['post_title'], ',', 
+            ['post_content'], ',', 
+            ['post_content_img'], ',',  
+            ['post_thumb_img'], ',',
+            ['post_related'], ',',
+            ['post_merged_id'], ',',
+            ['post_tl'], ',',
+            ['post_slug'], ',', 
+            ['post_type'], ',',
+            ['post_translation'], ',',
+            ['post_draft'], ',',
+            ['post_ip_int'], ',', 
+            ['post_published'], ',', 
+            ['post_user_id'], ',', 
+            ['post_space_id'], ',', 
+            ['post_closed'], ',',
+            ['post_top'], ',',
+            ['post_url'], ',',
+            ['post_url_domain'],')')->values( '(', 
+        
+        XD::setList([
+            $data['post_title'], 
+            $data['post_content'], 
+            $data['post_content_img'],
+            $data['post_thumb_img'],
+            $data['post_related'],
+            $data['post_merged_id'],
+            $data['post_tl'],            
+            $data['post_slug'],
+            $data['post_type'],
+            $data['post_translation'],
+            $data['post_draft'],
+            $data['post_ip_int'],  
+            $data['post_published'],
+            $data['post_user_id'], 
+            $data['post_space_id'], 
+            $data['post_closed'],
+            $data['post_top'],
+            $data['post_url'],
+            $data['post_url_domain']]), ')' )->run();
+
+        // id поста
+        return  XD::select()->last_insert_id('()')->getSelectValue();
+    } 
+    
     // Полная версия поста  
     public static function getPostSlug($slug, $user_id, $trust_level)
     {
@@ -144,24 +201,6 @@ class PostModel extends \MainModel
                 
         return  DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
    }
-   
-    // Select posts
-    public static function getSearchPosts($query)
-    {
-        $sql = "SELECT post_id, post_title, post_is_deleted, post_tl FROM posts WHERE post_title LIKE :post_title AND post_is_deleted = 0 AND post_tl = 0 ORDER BY post_id LIMIT 8";
-        
-        $result = DB::run($sql, ['post_title' => "%".$query."%"]);
-        $postsList  = $result->fetchall(PDO::FETCH_ASSOC);
-        $response = array();
-        foreach ($postsList as $post) {
-           $response[] = array(
-              "id" => $post['post_id'],
-              "text" => $post['post_title']
-           );
-        }
-
-        echo json_encode($response);
-    }
    
     // Информация список постов
     public static function getPostTopic($post_id)

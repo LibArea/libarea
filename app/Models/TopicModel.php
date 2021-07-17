@@ -139,33 +139,6 @@ class TopicModel extends \MainModel
         return DB::run($sql)->rowCount(); 
     }
 
-    // Select topics
-    public static function getSearchTopics($query, $main)
-    {
-        $and = '';
-        if ($main == 'main') {
-            $and = 'topic_is_parent !=0 AND';
-        } 
-        
-        $sql = "SELECT 
-                topic_id,
-                topic_title
-                    FROM topic 
-                    WHERE $and topic_title LIKE :topic_title ORDER BY topic_id LIMIT 8";
-        
-        $result = DB::run($sql, ['topic_title' => "%".$query."%"]);
-        $topicList  = $result->fetchall(PDO::FETCH_ASSOC);
-        $response = array();
-        foreach ($topicList as $topic) {
-           $response[] = array(
-              "id" => $topic['topic_id'],
-              "text" => $topic['topic_title']
-           );
-        }
-
-        echo json_encode($response);
-    }
- 
     // Есть пост в темах
     public static function getRelationId($id)
     {
@@ -314,4 +287,13 @@ class TopicModel extends \MainModel
         return XD::update(['topic'])->set(['topic_parent_id'], '=', 0)->where(['topic_parent_id'], '=', $topic_id)->run();
     }
     
+    // Обновим данные
+    public static function setUpdateQuantity()
+    {
+        $sql = "UPDATE topic SET topic_count = (SELECT count(relation_post_id) FROM topic_post_relation where relation_topic_id = topic_id )";
+
+        DB::run($sql); 
+        
+        return true;
+    }
 }

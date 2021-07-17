@@ -23,7 +23,7 @@
                                     </a>
                                 </li> 
                             <?php } ?> 
-                        <?php } ?>    
+                         <?php } ?>    
                     <?php } else { ?>
                         <li>
                             <a href="/spaces">

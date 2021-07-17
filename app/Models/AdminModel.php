@@ -203,16 +203,6 @@ class AdminModel extends \MainModel
          return true;
     }
     
-    // Обновим данные
-    public static function setUpdateQuantity()
-    {
-        $sql = "UPDATE topic SET topic_count = (SELECT count(relation_post_id) FROM topic_post_relation where relation_topic_id = topic_id )";
-
-        DB::run($sql); 
-        
-        return true;
-    }
-
     // Страница аудита
     public static function getAuditsAll($page, $limit, $sheet)
     {

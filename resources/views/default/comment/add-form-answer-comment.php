@@ -8,7 +8,7 @@
                 <input id="cancel_comment" class="cancel" type="button" value="<?= lang('Cancel'); ?>">
             </div> 
     <?php } else { ?>
-        <form id="add_comm" class="new_comment" action="/comment/add" accept-charset="UTF-8" method="post">
+        <form id="add_comm" class="new_comment" action="/comment/create" accept-charset="UTF-8" method="post">
         <?= csrf_field() ?>
             <textarea rows="5" minlength="6" placeholder="<?= lang('write-something'); ?>..." name="comment" id="comment"></textarea>
             <div class="boxline"> 

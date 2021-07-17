@@ -22,9 +22,13 @@
                                     <a href="/post/<?= $mod['post_id']; ?>/<?= $mod['post_slug']; ?>">
                                         <?= $mod['post_title']; ?>
                                     </a>
+                                    <?php if($mod['post_type'] == 1) { ?> 
+                                        <span class="indent"></span>
+                                        <i class="icon question green"></i>
+                                    <?php } ?>
                                 </div>
                                 <div class="small">
-                                   <?= lang('Action'); ?>: <?= lang($mod['mod_action']); ?> 
+                                   <?= lang('Action'); ?>: <b><?= lang($mod['mod_action']); ?></b> 
                                 </div>     
                             </div>  
                         <?php } ?>

@@ -7,6 +7,40 @@ use PDO;
 
 class CommentModel extends \MainModel
 {
+    // Добавляем комментарий
+    public static function addComment($data)
+    { 
+        XD::insertInto(['comments'], '(', ['comment_post_id'], ',', 
+            ['comment_answer_id'], ',', 
+            ['comment_comment_id'], ',', 
+            ['comment_content'], ',', 
+            ['comment_published'], ',', 
+            ['comment_ip'], ',', 
+            ['comment_user_id'], ')')->values( '(', 
+        
+        XD::setList([
+            $data['comment_post_id'], 
+            $data['comment_answer_id'], 
+            $data['comment_comment_id'], 
+            $data['comment_content'], 
+            $data['comment_published'],
+            $data['comment_ip'],    
+            $data['comment_user_id']]), ')' )->run();
+       
+       $last_id = XD::select()->last_insert_id('()')->getSelectValue();
+       
+       // Отмечаем комментарий, что за ним есть ответ
+       XD::update(['comments'])->set(['comment_after'], '=', $last_id)->where(['comment_id'], '=', $data['comment_comment_id'])->run();
+
+       $answer = XD::select('*')->from(['answers'])->where(['answer_id'], '=', $data['comment_answer_id'])->getSelectOne();
+       if ($answer['answer_after'] == 0) {
+            // Отмечаем ответ, что за ним есть комментарии
+            XD::update(['answers'])->set(['answer_after'], '=', $last_id)->where(['answer_id'], '=', $data['comment_answer_id'])->run();   
+       }
+
+       return $last_id; 
+    }
+    
     // Все комментарии
     public static function getCommentsAll($page, $limit, $uid)
     {
@@ -32,11 +66,9 @@ class CommentModel extends \MainModel
                     id, 
                     login, 
                     avatar
-                    
                         FROM comments 
                         JOIN users ON id = comment_user_id
                         JOIN posts ON comment_post_id = post_id AND comment_is_deleted = 0 ".$tl."
-                        
                         ORDER BY comment_id DESC LIMIT $start, $limit ";
                         
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
@@ -54,29 +86,26 @@ class CommentModel extends \MainModel
     public static function getComments($answer_id, $user_id)
     { 
         $sql = "SELECT 
-                comment_id,
-                comment_user_id,                
-                comment_answer_id,
-                comment_comment_id,
-                comment_content,
-                comment_date,
-                comment_votes,
-                comment_ip,
-                comment_after,
-                comment_is_deleted,
-                
-                votes_comment_item_id, 
-                votes_comment_user_id,
-                
-                id, 
-                login, 
-                avatar
-                
-                    FROM comments 
-                    LEFT JOIN users  ON id = comment_user_id
-                    LEFT JOIN votes_comment  ON votes_comment_item_id = comment_id 
-                    AND votes_comment_user_id = $user_id
-                    WHERE comment_answer_id = " . $answer_id;
+                    comment_id,
+                    comment_user_id,                
+                    comment_answer_id,
+                    comment_comment_id,
+                    comment_content,
+                    comment_date,
+                    comment_votes,
+                    comment_ip,
+                    comment_after,
+                    comment_is_deleted,
+                    votes_comment_item_id, 
+                    votes_comment_user_id,
+                    id, 
+                    login, 
+                    avatar
+                        FROM comments 
+                        LEFT JOIN users  ON id = comment_user_id
+                        LEFT JOIN votes_comment  ON votes_comment_item_id = comment_id 
+                        AND votes_comment_user_id = $user_id
+                        WHERE comment_answer_id = " . $answer_id;
         
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
@@ -119,30 +148,30 @@ class CommentModel extends \MainModel
                 
         return  DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
-    
+
     // Удаленные
     public static function getCommentsDeleted($page, $limit) 
     {
         $start  = ($page-1) * $limit;
         $sql = "SELECT 
-                    c.comment_id, 
-                    c.comment_user_id, 
-                    c.comment_date,
-                    c.comment_content,
-                    c.comment_votes,
-                    c.comment_is_deleted,
-                    u.id,
-                    u.login,
-                    u.avatar,
-                    p.post_id,
-                    p.post_title,
-                    p.post_slug
-                    
-                        FROM comments AS c
-                        LEFT JOIN users AS u ON u.id = c.comment_user_id
-                        LEFT JOIN posts AS p ON p.post_id = c.comment_post_id
-                        WHERE c.comment_is_deleted = 1
-                        ORDER BY c.comment_id DESC LIMIT $start, $limit";
+                    comment_id, 
+                    comment_user_id, 
+                    comment_date,
+                    comment_content,
+                    comment_votes,
+                    comment_is_deleted,
+                    id,
+                    login,
+                    avatar,
+                    post_id,
+                    post_title,
+                    post_type,
+                    post_slug
+                        FROM comments 
+                        LEFT JOIN users ON id = comment_user_id
+                        LEFT JOIN posts ON post_id = comment_post_id
+                        WHERE comment_is_deleted = 1
+                        ORDER BY comment_id DESC LIMIT $start, $limit";
                 
         return  DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }

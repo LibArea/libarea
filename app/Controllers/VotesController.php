@@ -3,20 +3,19 @@
 namespace App\Controllers;
 use App\Models\VotesModel;
 use Hleb\Constructor\Handlers\Request;
-use XdORM\XD;
 
 class VotesController extends \MainController
 {
 
    // Голосование за пост
-    public function index($type)
+    public function index()
     {
-        // id того, кто голосует
         $account = Request::getSession('account');
         $user_id = $account['user_id'];
         
-        $up_id = \Request::getPostInt('up_id');
-
+        $up_id  = \Request::getPostInt('up_id');
+        $type   = \Request::get('type');
+        
         if ($up_id <= 0) {
             return false;
         }

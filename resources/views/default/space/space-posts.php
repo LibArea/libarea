@@ -79,7 +79,7 @@
             <?php } ?> 
             <?php if($uid['trust_level'] == 5 || $space_info['space_user_id'] == $uid['id']) { ?>        
                 <li class="right">
-                    <a class="edit-space" href="/space/<?= $space_info['space_slug']; ?>/edit">
+                    <a class="edit-space" href="/space/edit/<?= $space_info['space_id']; ?>">
                         <span><?= lang('Edit'); ?></span>
                     </a>
                 </li>

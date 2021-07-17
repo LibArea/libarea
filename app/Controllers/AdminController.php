@@ -5,7 +5,7 @@ use Hleb\Constructor\Handlers\Request;
 use App\Models\SpaceModel;
 use App\Models\PostModel;
 use App\Models\UserModel;
-use App\Models\LinkModel;
+use App\Models\WebModel;
 use App\Models\AdminModel;
 use App\Models\TopicModel;
 use App\Models\CommentModel;
@@ -13,7 +13,6 @@ use App\Models\AnswerModel;
 use App\Models\ContentModel;
 use Lori\Content;
 use Lori\Base;
-use Lori\UploadImage;
 
 class AdminController extends \MainController
 {
@@ -74,7 +73,7 @@ class AdminController extends \MainController
         Request::getResources()->addBottomStyles('/assets/css/admin.css');
         Request::getResources()->addBottomScript('/assets/js/admin.js'); 
 
-        return view(PR_VIEW_DIR . '/admin/logip', ['data' => $data, 'uid' => $uid, 'alluser' => $results]); 
+        return view(PR_VIEW_DIR . '/admin/user/logip', ['data' => $data, 'uid' => $uid, 'alluser' => $results]); 
     }
     
     // Бан участнику
@@ -115,7 +114,7 @@ class AdminController extends \MainController
         Request::getResources()->addBottomStyles('/assets/css/admin.css');
         Request::getResources()->addBottomScript('/assets/js/admin.js'); 
  
-        return view(PR_VIEW_DIR . '/admin/comment_delet', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
+        return view(PR_VIEW_DIR . '/admin/comment-delet', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
     }
      
     // Удалёные ответы
@@ -146,7 +145,7 @@ class AdminController extends \MainController
         Request::getResources()->addBottomStyles('/assets/css/admin.css');
         Request::getResources()->addBottomScript('/assets/js/admin.js'); 
  
-        return view(PR_VIEW_DIR . '/admin/answer_delet', ['data' => $data, 'uid' => $uid, 'answers' => $result]);
+        return view(PR_VIEW_DIR . '/admin/answer-delet', ['data' => $data, 'uid' => $uid, 'answers' => $result]);
     }
      
     // Показываем дерево приглашенных
@@ -191,19 +190,7 @@ class AdminController extends \MainController
         Request::getResources()->addBottomStyles('/assets/css/admin.css');
         Request::getResources()->addBottomScript('/assets/js/admin.js'); 
  
-        return view(PR_VIEW_DIR . '/admin/space/spaces', ['data' => $data, 'uid' => $uid, 'spaces' => $spaces]);
-    }
-    
-    // Форма добавить пространство
-    public function addSpacePage() 
-    {
-        $uid  = Base::getUid();
-        $data = [
-            'meta_title'    => lang('Add Space'),
-            'sheet'         => 'admin',
-        ]; 
-
-        return view(PR_VIEW_DIR . '/admin/space/add-space', ['data' => $data, 'uid' => $uid]);
+        return view(PR_VIEW_DIR . '/admin/spaces', ['data' => $data, 'uid' => $uid, 'spaces' => $spaces]);
     }
     
     // Удаление / восстановление пространства
@@ -214,67 +201,6 @@ class AdminController extends \MainController
         SpaceModel::SpaceDelete($space_id);
        
         return true;
-    }
-    
-    // Добавить пространства
-    public function spaceAdd() 
-    {
-        $uid    = Base::getUid();
-        
-        $space_slug         = \Request::getPost('space_slug');
-        $space_name         = \Request::getPost('space_name');  
-        $space_permit       = \Request::getPostInt('permit');
-        $meta_desc          = \Request::getPost('space_description');
-        $space_text         = \Request::getPost('space_text'); 
-        $space_short_text   = \Request::getPost('space_short_text');
-        $space_feed         = \Request::getPostInt('space_feed');
-        $space_tl           = \Request::getPostInt('space_tl');
-        
-        $redirect = '/admin/space/add';
-
-        if (!preg_match('/^[a-zA-Z0-9]+$/u', $space_slug))
-        {
-            Base::addMsg('В URL можно использовать только латиницу, цифры', 'error');
-            redirect($redirect);
-        }
-
-        Base::Limits($space_slug, lang('URL'), '4', '20', $redirect);
-
-        if (SpaceModel::getSpace($space_slug, 'slug')) {
-            Base::addMsg('Такой URL пространства уже есть', 'error');
-            redirect($redirect);
-        }
- 
-        Base::Limits($space_name, lang('Title'), '6', '25', $redirect);
-        Base::Limits($meta_desc, lang('Meta-'), '60', '225', $redirect);
-        Base::Limits($space_text, lang('Sidebar-'), '6', '512', $redirect);
-        Base::Limits($space_short_text, 'TEXT', '20', '250', $redirect);
-        
-        $space_permit   = $space_permit == 1 ? 1 : 0;
-        $space_feed     = $space_feed == 1 ? 1 : 0;
-        $space_tl       = $space_tl == 1 ? 1 : 0;
-        
-        $data = [
-            'space_name'            => $space_name,
-            'space_slug'            => $space_slug,
-            'space_description'     => $meta_desc,
-            'space_color'           => '#333',
-            'space_img'             => 'space_no.png',
-            'space_text'            => $space_text,
-            'space_short_text'      => $space_short_text,
-            'space_date'            => date("Y-m-d H:i:s"),
-            'space_category_id'     => 1,
-            'space_user_id'         => $uid['id'],
-            'space_type'            => 0, 
-            'space_permit_users'    => $space_permit,
-            'space_feed'            => $space_feed,
-            'space_tl'              => $space_tl,
-            'space_is_delete'       => 0,
-        ];
- 
-        SpaceModel::AddSpace($data);
-
-        redirect('/admin/spaces');
     }
     
     // Все награды
@@ -302,11 +228,11 @@ class AdminController extends \MainController
             'sheet'         => 'badges',
         ]; 
 
-        return view(PR_VIEW_DIR . '/admin/badge/badge-add', ['data' => $data, 'uid' => $uid]);
+        return view(PR_VIEW_DIR . '/admin/badge/add', ['data' => $data, 'uid' => $uid]);
     }
     
     // Форма награждения участинка
-    public function addBadgeUserPage()
+    public function addBadgeUserForm()
     {
         $uid        = Base::getUid();
         $user_id    = \Request::getInt('id');
@@ -324,7 +250,7 @@ class AdminController extends \MainController
             'sheet'         => 'admin',
         ]; 
 
-        return view(PR_VIEW_DIR . '/admin/badge/badge-user-add', ['data' => $data, 'uid' => $uid, 'user' => $user, 'badges' => $badges]);    
+        return view(PR_VIEW_DIR . '/admin/badge/user-add', ['data' => $data, 'uid' => $uid, 'user' => $user, 'badges' => $badges]);    
     }
     
     // Награждение
@@ -355,7 +281,7 @@ class AdminController extends \MainController
             'sheet'         => 'admin',
         ]; 
 
-        return view(PR_VIEW_DIR . '/admin/badge/badge-edit', ['data' => $data, 'uid' => $uid, 'badge' => $badge]);
+        return view(PR_VIEW_DIR . '/admin/badge/edit', ['data' => $data, 'uid' => $uid, 'badge' => $badge]);
     }
     
     // Измененяем награду
@@ -439,7 +365,7 @@ class AdminController extends \MainController
         Request::getResources()->addBottomStyles('/assets/css/admin.css');
         Request::getResources()->addBottomScript('/assets/js/admin.js'); 
         
-        return view(PR_VIEW_DIR . '/admin/user-edit', ['data' => $data, 'uid' => $uid, 'user' => $user]);
+        return view(PR_VIEW_DIR . '/admin/user/edit', ['data' => $data, 'uid' => $uid, 'user' => $user]);
     }
     
     // Редактировать участника
@@ -498,8 +424,8 @@ class AdminController extends \MainController
         $page   = $page == 0 ? 1 : $page;
         
         $limit  = 25;
-        $pagesCount = LinkModel::getLinksAllCount();  
-        $domains    = LinkModel::getLinksAll($page, $limit, $uid['id']);
+        $pagesCount = WebModel::getLinksAllCount();  
+        $domains    = WebModel::getLinksAll($page, $limit, $uid['id']);
         
         $data = [
             'meta_title'    => lang('Domains'),
@@ -511,51 +437,7 @@ class AdminController extends \MainController
         Request::getResources()->addBottomStyles('/assets/css/admin.css');
         Request::getResources()->addBottomScript('/assets/js/admin.js'); 
         
-        return view(PR_VIEW_DIR . '/admin/domain/domains', ['data' => $data, 'uid' => $uid, 'domains' => $domains]);
-    }
-    
-    // Форма редактирование домена
-    public function editDomain()
-    {
-        $uid        = Base::getUid();
-        $domain_id  = \Request::getInt('id');
-        
-        $pg     = \Request::getInt('page'); 
-        $page   = (!$pg) ? 1 : $pg;
-        
-        $domain = LinkModel::getLinkId($domain_id);
-
-        $data = [
-            'meta_title'    => lang('Change the domain') .' | '. $domain['link_url_domain'],
-            'sheet'         => 'admin',
-        ]; 
-
-        return view(PR_VIEW_DIR . '/admin/domain/domain-edit', ['data' => $data, 'uid' => $uid, 'domain' => $domain]);
-    }
-    
-    // Изменение домена
-    public function domainEdit()
-    {
-        $domain_id  = \Request::getInt('id');
-        
-        $redirect = '/admin/domains';
-        if (!LinkModel::getLinkId($domain_id)) {
-            redirect($redirect);
-        }
-        
-        $link_url           = \Request::getPost('link_url');
-        $link_title         = \Request::getPost('link_title');
-        $link_content       = \Request::getPost('link_content');
-
-        Base::Limits($link_title , lang('Title'), '24', '250', $redirect);
-        Base::Limits($link_content, lang('Description'), '24', '1500', $redirect);
-        
-        $about          = empty($about) ? '' : $about;
-        $website        = empty($website) ? '' : $website;
-        
-        LinkModel::setLinkEdit($domain_id, $link_url, $link_title, $link_content);
-        
-        redirect($redirect);
+        return view(PR_VIEW_DIR . '/admin/domains', ['data' => $data, 'uid' => $uid, 'domains' => $domains]);
     }
     
     // Страница стоп-слов
@@ -579,6 +461,30 @@ class AdminController extends \MainController
         return view(PR_VIEW_DIR . '/admin/word/words', ['data' => $data, 'uid' => $uid, 'words' => $words]);
     }
     
+    // Все пространства
+    public function topics() 
+    {
+        $uid    = Base::getUid();
+        $page   = \Request::getInt('page'); 
+        $page   = $page == 0 ? 1 : $page;
+        
+        $limit  = 55;
+        $pagesCount = TopicModel::getTopicsAllCount(); 
+        $topics     = TopicModel::getTopicsAll($page, $limit);
+        
+        $data = [
+            'meta_title'    => lang('Topics'),
+            'sheet'         => 'topics',
+            'pagesCount'    => ceil($pagesCount / $limit),
+            'pNum'          => $page,
+        ]; 
+        
+        Request::getResources()->addBottomStyles('/assets/css/admin.css');
+        Request::getResources()->addBottomScript('/assets/js/admin.js'); 
+        
+        return view(PR_VIEW_DIR . '/admin/topics', ['data' => $data, 'uid' => $uid, 'topics' => $topics]);
+    }
+    
     // Форма добавления стоп-слова
     public function wordsAddForm()
     {
@@ -593,7 +499,7 @@ class AdminController extends \MainController
     }
     
     // Добавление стоп-слова
-    public function createWord()
+    public function wordAdd()
     {
         $word = \Request::getPost('word');
         $data = [
@@ -617,29 +523,6 @@ class AdminController extends \MainController
         redirect('/admin/words');  
     }
     
-    public function topics() 
-    {
-        $uid    = Base::getUid();
-        $page   = \Request::getInt('page'); 
-        $page   = $page == 0 ? 1 : $page;
-        
-        $limit  = 55;
-        $pagesCount = TopicModel::getTopicsAllCount(); 
-        $topics     = TopicModel::getTopicsAll($page, $limit);
-        
-        $data = [
-            'meta_title'    => lang('Topics'),
-            'sheet'         => 'topics',
-            'pagesCount'    => ceil($pagesCount / $limit),
-            'pNum'          => $page,
-        ]; 
-        
-        Request::getResources()->addBottomStyles('/assets/css/admin.css');
-        Request::getResources()->addBottomScript('/assets/js/admin.js'); 
-        
-        return view(PR_VIEW_DIR . '/admin/topic/topics', ['data' => $data, 'uid' => $uid, 'topics' => $topics]);
-    }        
-
     public function audit($sheet) 
     {
         $uid    = Base::getUid();
@@ -674,9 +557,9 @@ class AdminController extends \MainController
         Request::getResources()->addBottomStyles('/assets/css/admin.css');
         Request::getResources()->addBottomScript('/assets/js/admin.js'); 
         
-        return view(PR_VIEW_DIR . '/admin/audit/audits', ['data' => $data, 'uid' => $uid, 'audits' => $result]);
+        return view(PR_VIEW_DIR . '/admin/audits', ['data' => $data, 'uid' => $uid, 'audits' => $result]);
     } 
-
+    
     // Восстановление после аудита
     public function status() 
     {
@@ -688,12 +571,5 @@ class AdminController extends \MainController
       
         return true;
     }
-   
-    // Обновление
-    public static function updateQuantity()
-    {
-        AdminModel::setUpdateQuantity();
-        
-        redirect('/admin/topics');
-    }
+ 
 }

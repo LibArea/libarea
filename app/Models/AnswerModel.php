@@ -6,6 +6,25 @@ use PDO;
 
 class AnswerModel extends \MainModel
 {
+    // Добавляем ответ
+    public static function addAnswer($data)
+    { 
+        XD::insertInto(['answers'], '(', ['answer_post_id'], ',', 
+            ['answer_content'], ',', 
+            ['answer_published'], ',', 
+            ['answer_ip'], ',', 
+            ['answer_user_id'], ')')->values( '(', 
+        
+        XD::setList([
+            $data['answer_post_id'], 
+            $data['answer_content'], 
+            $data['answer_published'],
+            $data['answer_ip'], 
+            $data['answer_user_id']]), ')' )->run();
+       
+       return XD::select()->last_insert_id('()')->getSelectValue();
+    }
+    
     // Все ответы
     public static function getAnswersAll($page, $limit, $uid)
     {
@@ -58,41 +77,37 @@ class AnswerModel extends \MainModel
     { 
         $sort = "";
         if ($type == 1) {
-            $sort = 'ORDER BY a.answer_votes DESC ';
+            $sort = 'ORDER BY answer_votes DESC ';
         }    
         
         $sql = "SELECT 
-                a.answer_id,
-                a.answer_user_id,
-                a.answer_post_id,
-                a.answer_date,
-                a.answer_content,
-                a.answer_modified,
-                a.answer_ip,
-                a.answer_votes,
-                a.answer_after,
-                a.answer_is_deleted,
-        
-                v.votes_answer_item_id, 
-                v.votes_answer_user_id,
-                
-                f.favorite_tid,
-                f.favorite_user_id,
-                f.favorite_type,
-                
-                u.id, 
-                u.login, 
-                u.avatar
-                
-                FROM answers AS a
-                LEFT JOIN users AS u ON u.id = a.answer_user_id
-                LEFT JOIN votes_answer AS v ON v.votes_answer_item_id = a.answer_id
-                    AND v.votes_answer_user_id = $user_id
-                LEFT JOIN favorite AS f ON f.favorite_tid = a.answer_id
-                    AND f.favorite_user_id  = $user_id
-                    AND f.favorite_type = 2
-                    WHERE a.answer_post_id = $post_id
-                    $sort ";
+                    answer_id,
+                    answer_user_id,
+                    answer_post_id,
+                    answer_date,
+                    answer_content,
+                    answer_modified,
+                    answer_ip,
+                    answer_votes,
+                    answer_after,
+                    answer_is_deleted,
+                    votes_answer_item_id, 
+                    votes_answer_user_id,
+                    favorite_tid,
+                    favorite_user_id,
+                    favorite_type,
+                    id, 
+                    login, 
+                    avatar
+                        FROM answers
+                        LEFT JOIN users ON id = answer_user_id
+                        LEFT JOIN votes_answer ON votes_answer_item_id = answer_id
+                            AND votes_answer_user_id = $user_id
+                        LEFT JOIN favorite ON favorite_tid = answer_id
+                            AND favorite_user_id  = $user_id
+                            AND favorite_type = 2
+                            WHERE answer_post_id = $post_id
+                            $sort ";
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
@@ -142,24 +157,24 @@ class AnswerModel extends \MainModel
     {
         $start  = ($page-1) * $limit;
         $sql = "SELECT 
-                    a.answer_id, 
-                    a.answer_user_id, 
-                    a.answer_date,
-                    a.answer_content,
-                    a.answer_votes,
-                    a.answer_is_deleted,
-                    u.id,
-                    u.login,
-                    u.avatar,
-                    p.post_id,
-                    p.post_title,
-                    p.post_slug
-                    
-                        FROM answers AS a
-                        LEFT JOIN users AS u ON u.id = a.answer_user_id
-                        LEFT JOIN posts AS p ON p.post_id = a.answer_post_id
-                        WHERE a.answer_is_deleted = 1
-                        ORDER BY a.answer_id DESC LIMIT $start, $limit";
+                    answer_id, 
+                    answer_user_id, 
+                    answer_date,
+                    answer_content,
+                    answer_votes,
+                    answer_is_deleted,
+                    id,
+                    login,
+                    avatar,
+                    post_id,
+                    post_title,
+                    post_type,
+                    post_slug
+                        FROM answers
+                        LEFT JOIN users ON id = answer_user_id
+                        LEFT JOIN posts ON post_id = answer_post_id
+                        WHERE answer_is_deleted = 1
+                        ORDER BY answer_id DESC LIMIT $start, $limit";
                 
         return  DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }

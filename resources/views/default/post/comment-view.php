@@ -77,7 +77,8 @@
                                 <?php if($uid['id'] == $answer['answer_user_id'] || $uid['trust_level'] == 5) { ?>
                                     <?php if($answer['answer_after'] == 0 || $uid['trust_level'] == 5) { ?>
                                         <span id="answer_edit" class="answer_add_link">
-                                             <a class="editansw bar" href="/post/<?= $post['post_id'] ?>/answ/<?= $answer['answer_id']; ?>"><?= lang('Edit'); ?></a>
+                                            <a class="editansw bar" href="/answer/edit/<?= $answer['answer_id']; ?>">   <?= lang('Edit'); ?>
+                                            </a>
                                         </span>
                                     <?php } ?>
                                 <?php } ?>

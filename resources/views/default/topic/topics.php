@@ -18,14 +18,16 @@
                             <a title="<?= $topic['topic_title']; ?>" class="img-topic" href="/topic/<?= $topic['topic_slug']; ?>">
                                 <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'topic-img'); ?>
                             </a>
-                    
                             <div class="item-desc">
                                 <a title="<?= $topic['topic_title']; ?>" href="/topic/<?= $topic['topic_slug']; ?>">
                                     <?= $topic['topic_title']; ?>
                                 </a>
+
                                 <span class="indent"></span>
                                 <sup class="gray">x<?= $topic['topic_count']; ?></sup>
-                        
+                                <?php if ($topic['topic_is_parent'] == 1 && $uid['trust_level'] > 4) { ?>
+                                     <sup class="red small">root</sup>
+                                <?php } ?>
                                 <div class="small"><?= $topic['topic_cropped']; ?>...</div>
                             </div>
                         </div>
@@ -58,6 +60,10 @@
                 </div>
             </div>
         <?php } ?>
+        
+        <?php if ($data['sheet'] == 'topics' && $uid['trust_level'] > 4) { ?>
+            <a class="right small button" href="/update/count"><?= lang('Update the data'); ?></a> 
+        <?php } ?> 
     </aside>
 </div>    
 <?php include TEMPLATE_DIR . '/footer.php'; ?>        

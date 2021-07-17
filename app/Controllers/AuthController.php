@@ -4,7 +4,6 @@ namespace App\Controllers;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\UserModel;
 use App\Models\AuthModel;
-use Respect\Factory;
 use Lori\Config;
 use Lori\Base;
 

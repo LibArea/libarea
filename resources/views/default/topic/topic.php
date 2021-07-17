@@ -12,7 +12,7 @@
                     <h1 class="topics">
                         <?= $data['h1']; ?>
                         <?php if($uid['trust_level'] == 5) { ?>
-                            <a class="right" href="/admin/topic/<?= $topic['topic_id']; ?>/edit"> 
+                            <a class="right" href="/topic/edit/<?= $topic['topic_id']; ?>"> 
                                 <i class="icon pencil"></i>          
                             </a>
                         <?php } ?>

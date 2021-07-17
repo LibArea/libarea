@@ -2,11 +2,17 @@
     <div class="white-box menu-info">
         <div class="inner-padding big">
             <div class="menu-info">
+                <a <?php if ($uid['uri'] == '/admin') { ?> class="active"<?php } ?> title="<?= lang('Aadmin'); ?>" href="/admin">
+                    ~ <?= lang('Admin'); ?>
+                </a>
                 <a <?php if ($uid['uri'] == '/admin/audit') { ?> class="active"<?php } ?> title="<?= lang('Audit'); ?>" href="/admin/audit">
                     ~ <?= lang('Audit'); ?>
                 </a>
                 <a <?php if ($uid['uri'] == '/admin/spaces') { ?> class="active"<?php } ?> title="<?= lang('Spaces'); ?>" href="/admin/spaces">
                     ~ <?= lang('Spaces'); ?>
+                </a>
+                <a <?php if ($data['sheet'] == 'topics') { ?> class="active"<?php } ?> title="<?= lang('Topics'); ?>" href="/admin/topics">
+                    ~ <?= lang('Topics'); ?>
                 </a>
                 <a <?php if ($data['sheet'] == 'invitations') { ?> class="active"<?php } ?> title="<?= lang('Invites'); ?>" href="/admin/invitations">
                     ~ <?= lang('Invites'); ?>
@@ -26,13 +32,7 @@
                 <a <?php if ($data['sheet'] == 'words') { ?> class="active"<?php } ?> title="<?= lang('Stop words'); ?>" href="/admin/words">
                     ~ <?= lang('Stop words'); ?>
                 </a>
-                <a <?php if ($data['sheet'] == 'topics') { ?> class="active"<?php } ?> title="<?= lang('Topics'); ?>" href="/admin/topics">
-                    ~ <?= lang('Topics'); ?>
-                </a>
             </div>
         </div> 
     </div>
-        <?php if ($data['sheet'] == 'topics') { ?>
-            <a class="right small button" href="/admin/update/count"><?= lang('Update the data'); ?></a> 
-        <?php } ?> 
 </aside>

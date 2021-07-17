@@ -79,25 +79,6 @@ class UserModel extends \MainModel
         return $result->fetch(PDO::FETCH_ASSOC);     
     }
     
-    // Select user
-    public static function getSearchUsers($query)
-    {
-        $sql = "SELECT id, login FROM users WHERE login LIKE :login";
-        
-        $result = DB::run($sql, ['login' => $query."%"]);
-        $usersList  = $result->fetchall(PDO::FETCH_ASSOC);
-
-        $response = array();
-        foreach ($usersList as $user) {
-           $response[] = array(
-              "id" => $user['id'],
-              "text" => $user['login']
-           );
-        }
-
-        echo json_encode($response);
-    }
-
     // Регистрация участника
     public static function createUser($login, $email, $password, $reg_ip, $invitation_id)
     {

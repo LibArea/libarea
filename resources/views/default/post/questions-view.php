@@ -46,7 +46,9 @@
                             
                             <?php if($uid['id'] == $answer['answer_user_id'] || $uid['trust_level'] == 5) { ?>
                                 <span id="answer_edit" class="answer_add_link">
-                                    <a class="editansw bar" href="/post/<?= $post['post_id'] ?>/answ/<?= $answer['answer_id']; ?>"><?= lang('Edit'); ?></a>
+                                    <a class="editansw bar" href="/answer/edit/<?= $answer['answer_id']; ?>">
+                                        <?= lang('Edit'); ?>
+                                    </a>
                                 </span>
                             <?php } ?>
                 
@@ -120,7 +122,9 @@
                                     <?= $comment['comment_content'] ?>  
                                     <span class="qa-comm-info"> 
                                         —  <a class="qa-user" href="/u/<?= $comment['login']; ?>"><?= $comment['login']; ?></a> 
-                                       &nbsp; <?= $comment['comment_date']; ?>
+                                        <span class="lowercase"> 
+                                            &nbsp; <?= lang_date($comment['comment_date']); ?>
+                                        </span>    
                                         <?php if ($uid['trust_level'] == 5) { ?> 
                                             &nbsp; <?= $comment['comment_ip']; ?>
                                         <?php } ?> 
@@ -183,7 +187,7 @@
 <?php } else { ?>
     <?php if ($uid['id']) { ?>
             <?php if($post['post_closed'] == 0) { ?>
-                <form id="add_answ" action="/answer/add" accept-charset="UTF-8" method="post">
+                <form id="add_answ" action="/answer/create" accept-charset="UTF-8" method="post">
                 <?= csrf_field() ?>
                 <div class="redactor">
                     <textarea minlength="6" class="wmd-input h-150 w-95" rows="5" name="answer" id="wmd-input"></textarea>
