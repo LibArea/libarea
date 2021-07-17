@@ -3,6 +3,11 @@
     <main>
         <div class="white-box">
             <div class="inner-padding space-tags">
+                <?php if ($uid['trust_level'] == 5) { ?>
+                    <a class="right" href="/web/add">
+                        <?= lang('Add'); ?>
+                    </a>
+                <?php } ?>    
                 <h1><?= $data['h1']; ?></h1>
                 
                 <?php if (!empty($links)) { ?>
@@ -15,7 +20,7 @@
                                         <?php } else { ?>
                                             Add title...                                    
                                         <?php } ?> 
-                                        <?php if($uid['trust_level'] > 4) { ?>
+                                        <?php if($uid['trust_level'] == 5) { ?>
                                             <span class="indent"></span>
                                             <a class="small" title="<?= lang('Edit'); ?>" href="/web/edit/<?= $link['link_id']; ?>">
                                                 <i class="icon pencil"></i>

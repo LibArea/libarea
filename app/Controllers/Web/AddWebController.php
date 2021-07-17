@@ -22,11 +22,11 @@ class AddWebController extends \MainController
         $link_content       = \Request::getPost('link_content');
 
         $parse              = parse_url($link_url);
-        $url_domain         = $parse['host']; 
+        $link_url_domain    = $parse['host']; 
         $link_url           = $parse['scheme'] . '://' . $parse['host'];
 
-        $redirect = '/web/add';
-        $link = WebModel::getLinkOne($url_domain);
+        $redirect = '/web';
+        $link = WebModel::getLinkOne($link_url_domain, $uid['id']);
         if ($link) {
             Base::addMsg(lang('The site is already there'), 'error');
             redirect($redirect);
@@ -37,9 +37,9 @@ class AddWebController extends \MainController
         
         $data = [
                     'link_url'          => $link_url,
-                    'link_url_domain'   => $url_domain,
+                    'link_url_domain'   => $link_url_domain,
                     'link_title'        => $link_title,
-                    'link_content'      => $url_content,
+                    'link_content'      => $link_content,
                     'link_user_id'      => $uid['id'],
                     'link_type'         => 0,
                     'link_status'       => 200,

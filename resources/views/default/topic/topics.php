@@ -25,7 +25,7 @@
 
                                 <span class="indent"></span>
                                 <sup class="gray">x<?= $topic['topic_count']; ?></sup>
-                                <?php if ($topic['topic_is_parent'] == 1 && $uid['trust_level'] > 4) { ?>
+                                <?php if ($topic['topic_is_parent'] == 1 && $uid['trust_level'] == 5) { ?>
                                      <sup class="red small">root</sup>
                                 <?php } ?>
                                 <div class="small"><?= $topic['topic_cropped']; ?>...</div>

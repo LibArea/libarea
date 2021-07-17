@@ -110,7 +110,7 @@
                                                 width: '70%',
                                                 maximumSelectionLength: 3,
                                                 ajax: { 
-                                                    url: "/search/topics",
+                                                    url: "/search/topic",
                                                     type: "post",
                                                     dataType: 'json',
                                                     delay: 250,
@@ -131,7 +131,7 @@
                                                 width: '70%',
                                                 maximumSelectionLength: 5,
                                                 ajax: { 
-                                                    url: "/search/posts",
+                                                    url: "/search/post",
                                                     type: "post",
                                                     dataType: 'json',
                                                     delay: 250,
