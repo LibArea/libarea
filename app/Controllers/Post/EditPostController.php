@@ -6,6 +6,7 @@ use App\Models\PostModel;
 use App\Models\UserModel;
 use App\Models\SpaceModel;
 use App\Models\TopicModel;
+use Lori\Config;
 use Lori\Base;
 use Lori\UploadImage;
 
@@ -166,9 +167,9 @@ class EditPostController extends \MainController
         $post_topics  = PostModel::getPostTopic($post['post_id']);
         
         $data = [
-            'h1'            => lang('Edit post'),
             'sheet'         => 'edit-post',
-            'meta_title'    => lang('Edit post'),
+            'h1'            => lang('Edit post'),
+            'meta_title'    => lang('Edit post') .' | '. Config::get(Config::PARAM_NAME),
         ];
 
         return view(PR_VIEW_DIR . '/post/edit', ['data' => $data, 'uid' => $uid, 'post' => $post, 'post_related' => $post_related, 'space' => $space, 'user' => $user, 'post_topics' => $post_topics]);

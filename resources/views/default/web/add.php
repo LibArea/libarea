@@ -3,11 +3,17 @@
     <main>
         <div class="white-box">
             <div class="inner-padding">
-                <h1>
-                    <a href="/admin"><?= lang('Admin'); ?></a> / 
-                    <a href="/admin/domains"><?= lang('Domains'); ?></a> /
-                    <span class="red"><?= $data['meta_title']; ?></span>
-                </h1>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a title="<?= lang('Admin'); ?>" href="/admin"><?= lang('Admin'); ?></a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a title="<?= lang('Domains'); ?>" href="/admin/domains"><?= lang('Domains'); ?></a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <span class="red"><?= $data['meta_title']; ?></span>
+                    </li>
+                </ul>
                 <div class="telo space">
                     <div class="box create">
                         <form action="/web/create" method="post">

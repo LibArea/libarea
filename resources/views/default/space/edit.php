@@ -3,14 +3,11 @@
     <main>
         <div class="white-box">
             <div class="inner-padding">
-                <h1>
-                    <a href="/spaces"><?= lang('Spaces'); ?></a> / 
-                    <a href="/s/<?= $space['space_slug']; ?>"><?= $space['space_name']; ?></a> / 
-                    <span class="red"><?= $data['meta_title']; ?></span>
-                </h1>
+                <?= breadcrumb('/', lang('Home'), '/s/' . $space['space_slug'], $space['space_name'], $data['h1']); ?>
+
                 <ul class="nav-tabs">
                     <li class="active">
-                        <span><?= $data['h1']; ?></span>
+                        <span><?= lang('Edit'); ?></span>
                     </li>
                     <li>
                         <a href="/space/logo/<?= $space['space_slug']; ?>/edit">

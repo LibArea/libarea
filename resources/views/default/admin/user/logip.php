@@ -19,7 +19,7 @@
                     </div>
                     <?php foreach ($alluser as $user) {  ?>
                         <div class="t-tr">
-                            <span class="t-td w-30 center">
+                            <span class="t-td width-30 center">
                                 <?= $user['id']; ?>
                             </span>
                             <span class="t-td">

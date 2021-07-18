@@ -3,7 +3,7 @@
     <main class="w-100">
         <div class="white-box">
             <div class="inner-padding">
-                <h1><?= $data['h1']; ?></h1>
+                 <?= breadcrumb('/', lang('Home'), '/post/' . $post['post_id'] .'/'.$post['post_slug'], $post['post_title'], $data['h1']); ?>
 
                  <div class="box edit-post">
                     <form action="/post/edit" method="post" enctype="multipart/form-data">

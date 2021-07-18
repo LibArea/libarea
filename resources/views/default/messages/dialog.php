@@ -3,8 +3,8 @@
     <main>
         <div class="white-box">
             <div class="inner-padding">
-                <h1><a href="/u/<?= $uid['login']; ?>/messages"><?= lang('All messages'); ?></a> / <?= $data['h1']; ?> </h1>
-                    
+                <?= breadcrumb('/', lang('Home'), '/u/' .$uid['login']. '/messages', lang('All messages'), $data['h1']); ?>
+
                 <form action="/messages/send" method="post">
                 <?= csrf_field() ?>
                     <input type="hidden" name="recipient" value="<?= $data['recipient_user']['id']; ?>" />

@@ -100,28 +100,21 @@ h3.badge {
   margin: 8px 0 8px 0;
 }
 
-/* All users */
 .all-users {
-  display: flex;
-  flex-wrap: wrap;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:10px;
 }
 
-.user_card {
+.all-users > div {
+  height:140px;
   text-align: center;
-  font-size: 14px;
-  color: #888;
 }
 
 .gr.small {
   height: 64px;
   width: 64px;
   border-radius: 50%;
-}
-
-.column {
-  padding: 1rem 1rem 1rem 0.2rem;
-  width: 11%;
-  min-width: 65px;
 }
 
 .profile-box-telo .box.wide label {

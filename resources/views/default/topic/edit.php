@@ -3,13 +3,8 @@
     <main class="admin">
         <div class="white-box">
             <div class="inner-padding">
-                <a class="right" target="_blank" rel="noopener noreferrer" href="/topic/<?= $topic['topic_slug']; ?>">
-                    <i class="icon share-alt"></i>
-                </a>
-                <h1>
-                    <a href="/topics"><?= lang('Topics'); ?></a> / 
-                    <span class="red"><?= $data['meta_title']; ?></span>
-                </h1>
+                <?= breadcrumb('/topics', lang('Topics'), '/topic/' . $topic['topic_slug'], $topic['topic_title'], $data['meta_title']); ?>
+                
                 <div class="telo topic">
                     <div class="box create ">
                     

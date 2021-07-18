@@ -5,6 +5,7 @@ namespace App\Controllers\Answer;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\AnswerModel;
 use App\Models\PostModel;
+use Lori\Config;
 use Lori\Base;
 
 class EditAnswerController extends \MainController
@@ -70,7 +71,7 @@ class EditAnswerController extends \MainController
             'user_id'           => $uid['id'],
             'answer_content'    => $answer['answer_content'],
             'sheet'             => 'edit-answers', 
-            'meta_title'        => lang('All answers'),
+            'meta_title'        => lang('Edit answer') .' | '. Config::get(Config::PARAM_NAME),
             'meta_desc'         => lang('answers-desc'),  
         ]; 
         

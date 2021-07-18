@@ -3,7 +3,7 @@
     <main>
         <div class="white-box">
             <div class="inner-padding">
-                <h1><?= $data['h1']; ?></h1>
+                <?= breadcrumb('/', lang('Home'), '/spaces', lang('Spaces'), $data['h1']); ?>
 
                 <div class="max-width space">
                     <div class="box create">

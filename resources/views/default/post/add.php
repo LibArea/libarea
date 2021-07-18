@@ -3,17 +3,8 @@
     <main class="w-100">
         <div class="white-box">
             <div class="inner-padding">
-                <h1>
-                    <a href="/"><?= lang('Home'); ?></a> / 
-                    <span class="red"><?= $data['h1']; ?></span>
+                <?= breadcrumb('/', lang('Home'), null, null, $data['h1']); ?>
 
-                    <?php foreach ($space as $sp) { ?>
-                        <?php if($space_id == $sp['space_id']) { ?> 
-                             / <span class="red"><?= $sp['space_name']; ?></span> 
-                        <?php } ?> 
-                    <?php } ?>
-                </h1>
-         
                 <div class="box create">
                     <form action="/post/create" method="post" enctype="multipart/form-data">
                         <?= csrf_field() ?>

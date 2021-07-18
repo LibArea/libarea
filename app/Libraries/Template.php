@@ -258,3 +258,26 @@ function pagination($pNum, $pagesCount, $sheet, $other)
         
     return $html; 
 }
+
+function breadcrumb($path_home, $title_home, $path_intermediate, $title_intermediate, $title_page)
+{
+    
+    $html = '<ul class="breadcrumb">';
+    $html .= '<li class="breadcrumb-item">
+                <a title="'. $title_home .'" href="'. $path_home .'">'. $title_home .'</a>
+                </li>';
+    
+    if ($path_intermediate) {
+        $html .= '<li class="breadcrumb-item">
+                    <a title="'. $title_intermediate .'" href="'. $path_intermediate .'">'. $title_intermediate .'</a>
+                    </li>';
+    }
+    
+    $html .= '<li class="breadcrumb-item">
+                <span class="red">'.$title_page.'</span>
+                </li>
+                </ul>
+                <h1>'.$title_page.'</h1>';       
+
+    return $html;
+}

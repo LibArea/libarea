@@ -70,7 +70,7 @@ class MessagesController extends \MainController
 
 		$data = [
             'h1'            => lang('Private messages'),
-            'meta_title'    => lang('Private messages'),
+            'meta_title'    => lang('Private messages') .' | '. Config::get(Config::PARAM_NAME),
             'sheet'         => 'all-mess',
             'messages'      => $result,
         ];
@@ -124,7 +124,7 @@ class MessagesController extends \MainController
         
         $data = [
             'h1'                => lang('Dialogue') .' - '. $list[$key]['login'],
-            'meta_title'        => lang('Dialogue'),
+            'meta_title'        => lang('Dialogue') .' | '. Config::get(Config::PARAM_NAME),
             'sheet'             => 'dialog',
             'list'              => $list,  
             'recipient_user'    => $recipient_user,
@@ -152,7 +152,7 @@ class MessagesController extends \MainController
         
         $data = [
             'h1'            => lang('Send a message') . ': ' . $login,
-            'meta_title'    => lang('Send a message'),
+            'meta_title'    => lang('Send a message') .' | '. Config::get(Config::PARAM_NAME),
             'sheet'         => 'profil-mess',
             'recipient_uid' => $user['id'],
         ];

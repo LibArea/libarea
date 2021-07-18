@@ -3,6 +3,8 @@
     <main>
         <div class="white-box">
             <div class="inner-padding big">
+                <?= breadcrumb('/', lang('Home'), null, null, $data['h1']); ?>
+            
                 <ul class="nav-tabs">
                     <li class="active">
                         <span><?= lang('Setting profile'); ?></span>

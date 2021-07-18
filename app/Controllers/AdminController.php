@@ -44,7 +44,6 @@ class AdminController extends \MainController
             'sheet'         => $sheet,
         ]; 
 
-        Request::getResources()->addBottomStyles('/assets/css/admin.css');
         Request::getResources()->addBottomScript('/assets/js/admin.js'); 
         
         return view(PR_VIEW_DIR . '/admin/index', ['data' => $data, 'uid' => $uid, 'alluser' => $result]);
@@ -70,7 +69,6 @@ class AdminController extends \MainController
             'sheet'         => 'admin',
         ]; 
 
-        Request::getResources()->addBottomStyles('/assets/css/admin.css');
         Request::getResources()->addBottomScript('/assets/js/admin.js'); 
 
         return view(PR_VIEW_DIR . '/admin/user/logip', ['data' => $data, 'uid' => $uid, 'alluser' => $results]); 
@@ -111,7 +109,6 @@ class AdminController extends \MainController
             'pNum'          => $page,
         ]; 
 
-        Request::getResources()->addBottomStyles('/assets/css/admin.css');
         Request::getResources()->addBottomScript('/assets/js/admin.js'); 
  
         return view(PR_VIEW_DIR . '/admin/comment-delet', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
@@ -142,7 +139,6 @@ class AdminController extends \MainController
             'pNum'          => $page,
         ]; 
 
-        Request::getResources()->addBottomStyles('/assets/css/admin.css');
         Request::getResources()->addBottomScript('/assets/js/admin.js'); 
  
         return view(PR_VIEW_DIR . '/admin/answer-delet', ['data' => $data, 'uid' => $uid, 'answers' => $result]);
@@ -187,7 +183,6 @@ class AdminController extends \MainController
             'pNum'          => $page,
         ]; 
 
-        Request::getResources()->addBottomStyles('/assets/css/admin.css');
         Request::getResources()->addBottomScript('/assets/js/admin.js'); 
  
         return view(PR_VIEW_DIR . '/admin/spaces', ['data' => $data, 'uid' => $uid, 'spaces' => $spaces]);
@@ -214,8 +209,6 @@ class AdminController extends \MainController
             'sheet'         => 'badges',
         ]; 
 
-        Request::getResources()->addBottomStyles('/assets/css/admin.css');
-        
         return view(PR_VIEW_DIR . '/admin/badge/badges', ['data' => $data, 'uid' => $uid, 'badges' => $badges]);
     }
     
@@ -362,7 +355,6 @@ class AdminController extends \MainController
             'spaces_user'       => SpaceModel::getUserCreatedSpaces($user_id),
         ]; 
 
-        Request::getResources()->addBottomStyles('/assets/css/admin.css');
         Request::getResources()->addBottomScript('/assets/js/admin.js'); 
         
         return view(PR_VIEW_DIR . '/admin/user/edit', ['data' => $data, 'uid' => $uid, 'user' => $user]);
@@ -434,7 +426,6 @@ class AdminController extends \MainController
             'pNum'          => $page,
         ]; 
 
-        Request::getResources()->addBottomStyles('/assets/css/admin.css');
         Request::getResources()->addBottomScript('/assets/js/admin.js'); 
         
         return view(PR_VIEW_DIR . '/admin/domains', ['data' => $data, 'uid' => $uid, 'domains' => $domains]);
@@ -455,7 +446,6 @@ class AdminController extends \MainController
             'sheet'         => 'words',
         ]; 
 
-        Request::getResources()->addBottomStyles('/assets/css/admin.css');
         Request::getResources()->addBottomScript('/assets/js/admin.js'); 
         
         return view(PR_VIEW_DIR . '/admin/word/words', ['data' => $data, 'uid' => $uid, 'words' => $words]);
@@ -479,7 +469,6 @@ class AdminController extends \MainController
             'pNum'          => $page,
         ]; 
         
-        Request::getResources()->addBottomStyles('/assets/css/admin.css');
         Request::getResources()->addBottomScript('/assets/js/admin.js'); 
         
         return view(PR_VIEW_DIR . '/admin/topics', ['data' => $data, 'uid' => $uid, 'topics' => $topics]);
@@ -554,7 +543,6 @@ class AdminController extends \MainController
             'pNum'          => $page,
         ]; 
         
-        Request::getResources()->addBottomStyles('/assets/css/admin.css');
         Request::getResources()->addBottomScript('/assets/js/admin.js'); 
         
         return view(PR_VIEW_DIR . '/admin/audits', ['data' => $data, 'uid' => $uid, 'audits' => $result]);

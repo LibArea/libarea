@@ -3,10 +3,8 @@
     <main class="admin">
         <div class="white-box">
             <div class="inner-padding">
-                <h1>
-                    <a href="/admin"><?= lang('Admin'); ?></a> / <span class="red"><?= $data['meta_title']; ?></span>
-                    <a class="right" href="/admin/badge/add"><?= lang('Add'); ?></a>
-                </h1>
+                <a class="right v-ots" title="<?= lang('Add'); ?>" href="/admin/badge/add"><i class="icon plus"></i></a>
+                <?= breadcrumb('/admin', lang('Admin'), null, null, $data['meta_title']); ?>
 
                 <div class="badges">
                     <?php if (!empty($badges)) { ?>
@@ -21,10 +19,10 @@
 
                             <?php foreach ($badges as $key => $bg) { ?>  
                                 <div class="t-tr">
-                                    <span class="t-td w-30 center">
+                                    <span class="t-td width-30 center">
                                         <?= $bg['badge_id']; ?>
                                     </span>  
-                                    <span class="t-td w-30 center">
+                                    <span class="t-td width-30 center">
                                         <?= $bg['badge_icon']; ?>
                                     </span>
                                     <span class="t-td">

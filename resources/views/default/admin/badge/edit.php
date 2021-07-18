@@ -3,11 +3,7 @@
     <main class="admin">
         <div class="white-box">
             <div class="inner-padding">
-                <h1>
-                    <a href="/admin"><?= lang('Admin'); ?></a> / 
-                    <a href="/admin/badges"><?= lang('Badges'); ?></a> /
-                    <span class="red"><?= $data['meta_title']; ?></span>
-                </h1>
+                <?= breadcrumb('/admin', lang('Admin'), '/admin/badges', lang('Badges'), $data['meta_title']); ?>
 
                 <div class="box badges">
                     <form action="/admin/badge/edit/<?= $badge['badge_id']; ?>" method="post">

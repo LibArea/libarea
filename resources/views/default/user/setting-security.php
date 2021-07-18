@@ -3,6 +3,8 @@
     <main>
         <div class="white-box">
             <div class="inner-padding big">
+                 <?= breadcrumb('/', lang('Home'), '/u/' .$uid['login'] . '/setting', lang('Setting profile'), $data['h1']); ?>
+                
                 <ul class="nav-tabs">
                     <li>
                         <a href="/u/<?= $uid['login']; ?>/setting">

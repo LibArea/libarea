@@ -200,9 +200,9 @@ class AddPostController extends \MainController
         $space_id   = \Request::getInt('space_id');
         
         $data = [
-            'h1'            => lang('Add post'),
             'sheet'         => 'add-post',
-            'meta_title'    => lang('Add post'),
+            'h1'            => lang('Add post'), 
+            'meta_title'    => lang('Add post') .' | '. Config::get(Config::PARAM_NAME), 
         ];  
         
         Request::getHead()->addStyles('/assets/css/image-uploader.css'); 

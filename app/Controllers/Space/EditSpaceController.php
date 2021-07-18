@@ -96,7 +96,7 @@ class EditSpaceController extends \MainController
         Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
         
         $data = [
-            'h1'            => lang('Change'),
+            'h1'            => lang('Change') . ' — ' . $space['space_slug'],
             'sheet'         => 'edit-space', 
             'meta_title'    => lang('Edit') . ' — ' . $space['space_slug'],
         ];

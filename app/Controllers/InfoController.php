@@ -11,8 +11,6 @@ class InfoController extends \MainController
     // Далее методы по названию страниц
     public function index()
     {
-        Request::getResources()->addBottomStyles('/assets/css/info.css'); 
-        
         $text = file_get_contents(TEMPLATE_DIR. '/info/md/index.md');
         
         $uid  = Base::getUid();
@@ -30,8 +28,6 @@ class InfoController extends \MainController
 
     public function privacy()
 	{
-        Request::getResources()->addBottomStyles('/assets/css/info.css'); 
-        
         $text = file_get_contents(TEMPLATE_DIR. '/info/md/privacy.md');
         
         $uid  = Base::getUid();
@@ -49,8 +45,6 @@ class InfoController extends \MainController
 
     public function restriction()
 	{
-        Request::getResources()->addBottomStyles('/assets/css/info.css'); 
-        
         $uid  = Base::getUid();
         $data = [
             'h1'            => lang('Restriction'),

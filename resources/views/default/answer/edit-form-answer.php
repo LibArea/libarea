@@ -3,11 +3,8 @@
     <main class="w-100">
         <div class="white-box">
             <div class="inner-padding">
-                <h1><?= $data['h1']; ?>: 
-                    <a href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
-                        <?= $post['post_title']; ?>
-                    </a>
-                </h1>
+                <?= breadcrumb('/', lang('Home'), '/post/' . $post['post_id'] .'/'.$post['post_slug'], $post['post_title'], $data['h1']); ?>
+               
                 <div class="answer_addentry"> 
                     <?php if ($data['user_id'] > 0) : ?>
                         <form id="add_answ" action="/answer/edit" accept-charset="UTF-8" method="post">

@@ -3,10 +3,9 @@
     <main class="admin">
         <div class="white-box">
             <div class="inner-padding">
-                <h1>
-                    <a href="/admin"><?= lang('Admin'); ?></a> / <span class="red"><?= $data['meta_title']; ?></span>
-                    <a class="right" href="/admin/wordadd"><?= lang('Add'); ?></a>
-                </h1>
+                <a class="right v-ots" title="<?= lang('Add'); ?>" href="/admin/wordadd"><i class="icon plus"></i></a>
+                <?= breadcrumb('/admin', lang('Admin'), null, null, $data['meta_title']); ?>
+
                 <div class="words">
                     <?php if (!empty($words)) { ?>
                   

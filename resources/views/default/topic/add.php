@@ -3,10 +3,7 @@
     <main class="admin">
         <div class="white-box">
             <div class="inner-padding">
-                <h1>
-                    <a href="/topics"><?= lang('Topics'); ?></a> / 
-                    <span class="red"><?= $data['meta_title']; ?></span>
-                </h1>
+                <?= breadcrumb('/topics', lang('Topics'), null, null, $data['meta_title']); ?>
                 
                 <div class="telo space">
                     <div class="box create">

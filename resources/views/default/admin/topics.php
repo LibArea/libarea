@@ -3,11 +3,9 @@
     <main class="admin">
         <div class="white-box">
             <div class="inner-padding">
-                <h1>
-                    <a href="/admin"><?= lang('Admin'); ?></a> / <span class="red"><?= $data['meta_title']; ?></span>
-                    <a class="right" href="/topic/add"><?= lang('Add'); ?></a>
-                </h1>
-
+                <a class="right v-ots" title="<?= lang('Add'); ?>" href="/topic/add"><i class="icon plus"></i></a>
+                <?= breadcrumb('/admin', lang('Admin'), null, null, $data['meta_title']); ?>
+                
                 <div class="space">
                     <?php if (!empty($topics)) { ?>
                         <div class="t-table">
@@ -19,15 +17,16 @@
                             </div>
                             <?php foreach ($topics as $key => $topic) { ?> 
                                 <div class="t-tr">
-                                    <span class="t-td w-30 center">
+                                    <span class="t-td width-30 center">
                                         <?= $topic['topic_id']; ?>
                                     </span>  
-                                    <span class="t-td w-30 center">
-                                        <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'space-logo'); ?>
+                                    <span class="t-td width-30 center">
+                                        <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'ava-94'); ?>
                                     </span>                            
                                     <span class="t-td">
                                         <a rel="nofollow noreferrer" href="/topic/<?= $topic['topic_slug']; ?>">
                                             <?= $topic['topic_title']; ?>
+                                            <i class="icon share-alt"></i>
                                         </a>
                                         | <span class="green">topic/<?= $topic['topic_slug']; ?></span>
                                         | <?= $topic['topic_count']; ?>
@@ -37,11 +36,11 @@
                                         <?php if ($topic['topic_parent_id'] != 0) { ?>
                                             |  <span class="green"><?= lang('Subtopic'); ?></span>
                                         <?php } ?>
-                                        <a class="right" target="_blank" rel="noopener noreferrer" href="/topic/<?= $topic['topic_slug']; ?>"><i class="icon share-alt"></i></a>
-                                        <br> 
-                                        <?= $topic['topic_description']; ?>
+                                        <div class="gray">
+                                            <?= $topic['topic_description']; ?>
+                                        </div>
                                     </span> 
-                                    <span class="t-td w-30 center">
+                                    <span class="t-td width-30 center">
                                         <a title="<?= lang('Edit'); ?>" href="/topic/edit/<?= $topic['topic_id']; ?>">
                                            <i class="icon pencil"></i>
                                         </a>

@@ -3,31 +3,29 @@
   <main class="admin">
     <div class="white-box">
       <div class="inner-padding">
-          <h1>
-             <a href="/admin"><?= lang('Admin'); ?></a> / <span class="red"><?= lang('Admin'); ?></span>
-          </h1>
+        <?= breadcrumb('/admin', lang('Admin'), null, null, $data['meta_title']); ?>
         
-          <ul class="nav-tabs">
+        <ul class="nav-tabs">
             <?php if($data['sheet'] == 'all') { ?>
-            <li class="active">
-              <span><?= lang('All'); ?></span>
-            </li>
-            <li>
-              <a href="/admin/ban">
-              <span><?= lang('Banned'); ?></span>
-              </a>
-            </li>
+                <li class="active">
+                    <span><?= lang('All'); ?></span>
+                </li>
+                <li>
+                    <a href="/admin/ban">
+                        <span><?= lang('Banned'); ?></span>
+                    </a>
+                </li>
             <?php } elseif($data['sheet'] == 'ban') { ?>
-            <li>
-              <a href="/admin">
-              <span><?= lang('All'); ?></span>
-              </a>
-            </li>
-            <li class="active">
-              <span><?= lang('Banned'); ?></span>
-            </li>
+                <li>
+                    <a href="/admin">
+                        <span><?= lang('All'); ?></span>
+                    </a>
+                </li>
+                <li class="active">
+                    <span><?= lang('Banned'); ?></span>
+                </li>
             <?php } ?>  
-          </ul>
+        </ul>
 
         <div class="t-table">
           <div class="t-th">
@@ -42,11 +40,11 @@
           <?php if($alluser) {  ?>
               <?php foreach ($alluser as $user) {  ?>
                 <div class="t-tr">
-                  <span class="t-td w-30 center">
+                  <span class="t-td width-30 center">
                     <?= $user['id']; ?>
                   </span>
-                  <span class="t-td w-30 center">
-                    <?= user_avatar_img($user['avatar'], 'amx', $user['login'], 'ava-max'); ?>
+                  <span class="t-td width-30 center">
+                    <?= user_avatar_img($user['avatar'], 'max', $user['login'], 'ava-94'); ?>
                   </span>
                   <span class="t-td">
                     <a href="/u/<?= $user['login']; ?>"><?= $user['login']; ?></a>

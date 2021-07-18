@@ -191,7 +191,7 @@ class UserController extends \MainController
             'h1'            => lang('Change avatar'),
             'sheet'         => 'setting-ava', 
             'meta_title'    => lang('Change avatar'),
-            'meta_desc'     => lang('Change avatar page'),
+            'meta_desc'     => lang('Change avatar page') . ' | ' . Config::get(Config::PARAM_NAME),
         ];
 
         Request::getHead()->addStyles('/assets/css/image-uploader.css'); 
@@ -217,7 +217,7 @@ class UserController extends \MainController
             'password2'     => '',
             'password3'     => '',
             'sheet'         => 'setting-pass', 
-            'meta_title'    => lang('Change password'),
+            'meta_title'    => lang('Change password') . ' | ' . Config::get(Config::PARAM_NAME),
         ];
 
         return view(PR_VIEW_DIR . '/user/setting-security', ['data' => $data, 'uid' => $uid]);
@@ -312,9 +312,9 @@ class UserController extends \MainController
         }
         
         $data = [
-            'h1'            => lang('Favorites') . ' ' . $login,
             'sheet'         => 'favorites', 
-            'meta_title'    => lang('Favorites'),
+            'h1'            => lang('Favorites') . ' ' . $login,
+            'meta_title'    => lang('Favorites') . ' ' . $login . ' | ' . Config::get(Config::PARAM_NAME),
         ];
 
         return view(PR_VIEW_DIR . '/user/favorite', ['data' => $data, 'uid' => $uid, 'favorite' => $result]);   
@@ -373,9 +373,9 @@ class UserController extends \MainController
         $drafts = UserModel::userDraftPosts($user['id']);
    
         $data = [
-            'h1'            => lang('Drafts') . ' ' . $login,
             'sheet'         => 'drafts', 
-            'meta_title'    => lang('Drafts'),
+            'h1'            => lang('Drafts') . ' ' . $login,
+            'meta_title'    => lang('Drafts') . ' ' . $login . ' | ' . Config::get(Config::PARAM_NAME)
         ];
 
         return view(PR_VIEW_DIR . '/user/draft-post', ['data' => $data, 'uid' => $uid, 'drafts' => $drafts]);   
@@ -413,7 +413,7 @@ class UserController extends \MainController
         $data = [
             'h1'          => lang('Invites'),
             'sheet'         => 'invites', 
-            'meta_title'    => lang('Invites'),
+            'meta_title'    => lang('Invites'). ' | ' . Config::get(Config::PARAM_NAME)
         ];
 
         return view(PR_VIEW_DIR . '/user/invitation', ['data' => $data, 'uid' => $uid, 'result' => $Invitation]);  

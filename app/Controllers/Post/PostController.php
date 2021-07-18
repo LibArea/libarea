@@ -153,14 +153,14 @@ class PostController extends \MainController
             $result[$ind]       = $row;
         }
 
-        $meta_title = lang('Posts') . ' ' . $login;
+        $h1 = lang('Posts') . ' ' . $login;
         $meta_desc  = lang('Participant posts') . ' ' . $login;
 
         $data = [
-            'h1'            => $meta_title,
             'canonical'     => Config::get(Config::PARAM_URL) . '/u/' . $login . '/posts',
             'sheet'         => 'user-post',
-            'meta_title'    => $meta_title,
+            'h1'            => lang('Posts') . ' ' . $login,
+            'meta_title'    => lang('Posts') . ' ' . $login . ' | ' . Config::get(Config::PARAM_NAME),
             'meta_desc'     => $meta_desc,
         ]; 
         

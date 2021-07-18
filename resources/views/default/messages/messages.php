@@ -3,7 +3,8 @@
     <main>
         <div class="white-box">
             <div class="inner-padding">
-                <h1><?= $data['h1'] ?></h1>
+                <?= breadcrumb('/', lang('Home'), '/u/' . $uid['login'], lang('Profile'), $data['h1']); ?>
+                
                 <?php if (!empty($data['messages'])) { ?>
 
                     <?php foreach ($data['messages'] as  $msg) { ?>

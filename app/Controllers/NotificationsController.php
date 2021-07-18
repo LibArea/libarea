@@ -4,6 +4,7 @@ namespace App\Controllers;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\NotificationsModel;
 use App\Models\UserModel;
+use Lori\Config;
 use Lori\Base;
 
 class NotificationsController extends \MainController
@@ -34,7 +35,7 @@ class NotificationsController extends \MainController
 
         $data = [
             'h1'            => lang('Notifications'),
-            'meta_title'    => lang('Notifications'),
+            'meta_title'    => lang('Notifications') . ' | ' . Config::get(Config::PARAM_NAME),
             'sheet'         => 'notifications',
         ];
 

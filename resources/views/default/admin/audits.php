@@ -3,9 +3,7 @@
     <main class="admin">
         <div class="white-box">
             <div class="inner-padding">
-                <h1>
-                    <a href="/admin"><?= lang('Admin'); ?></a> / <span class="red"><?= $data['meta_title']; ?></span>
-                </h1>
+                <?= breadcrumb('/admin', lang('Admin'), null, null, $data['meta_title']); ?>
 
                 <ul class="nav-tabs">
                   <?php if($data['sheet'] == 'all') { ?>
@@ -42,7 +40,7 @@
 
                             <?php foreach ($audits as $key => $audit) { ?>  
                                 <div class="t-tr">
-                                    <span class="t-td w-30 center">
+                                    <span class="t-td width-30 center">
                                         <?= $audit['audit_id']; ?>
                                     </span>  
                                     <span class="t-td">
@@ -61,7 +59,7 @@
                                             — <?= $audit['content'][$audit['audit_type'] . '_date']; ?>
                                         </span>
                                     </span>
-                                    <span class="t-td w-30 center">
+                                    <span class="t-td width-30 center">
                                         <a data-id="<?= $audit['content'][$audit['audit_type'] . '_id']; ?>" data-type="<?= $audit['audit_type']; ?>" class="type-action small">
                                             <?php if($audit['content'][$audit['audit_type'] . '_is_deleted'] == 1) { ?>
                                                  <span class="red"><?= lang('Recover'); ?></span>
@@ -70,7 +68,7 @@
                                             <?php } ?>
                                         </a>
                                     </span>
-                                    <span class="t-td w-30 center">
+                                    <span class="t-td width-30 center">
                                          
                                         <?php if($audit['audit_read_flag'] == 1) { ?>
                                             id: 

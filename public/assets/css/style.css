@@ -1264,6 +1264,74 @@ ol.comment-telo {
   color: #646464;
 }
 
+/* Bread crumbs */
+ul.breadcrumb {
+  padding: 0;
+  font-family: sans-serif;
+  font-size: 0.8rem;
+  line-height: 0.8rem;
+  margin: 0.4rem 0;
+}
+
+.breadcrumb .breadcrumb-item,
+.breadcrumb .breadcrumb-item-no {
+  color: var(--tertiary);
+  display: inline-block;
+  margin: 0;
+  padding: 0.2rem 0;
+}
+
+.breadcrumb .breadcrumb-item:not(:last-child) {
+  margin-right: 0.4rem;
+}
+
+.breadcrumb .breadcrumb-item:not(:last-child) a {
+  color: var(--tertiary);
+}
+
+.breadcrumb .breadcrumb-item:not(:first-child)::before {
+  color: var(--tertiary);
+  content: "/";
+  padding-right: 0.4rem;
+}
+
+/* Таблицы */
+.t-table {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.t-tr,
+.t-th {
+  display: table-row;
+}
+
+.t-th {
+  background: #e3e3e3;
+  font-weight: 600;
+}
+
+.t-td {
+  display: table-cell;
+  border: none;
+  border: 1px solid #ccc;
+  vertical-align: middle;
+  font-size: 14px;
+}
+
+.t-td.center {
+  text-align: center;
+}
+
+.t-td:not(.no-p) {
+  padding: 4px 4px 4px 8px;
+}
+
+.w-30 {
+  width: 30px;
+}
+
 .errors > ul > li {
   color: #e83e8c;
 }
@@ -1720,6 +1788,7 @@ a:hover .icon::before {
 .icon.list::before { content: "\e067"; }
 .icon.screen-desktop::before { content: "\e011"; }
 .icon.crop::before { content: "\e024"; }
+.icon.plus::before { content: "\e095"; }
 
 #fixed {
   position: fixed;
