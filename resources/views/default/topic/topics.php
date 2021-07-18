@@ -12,11 +12,11 @@
                 </h1>
                 
                 <?php if (!empty($topics)) { ?>
-                    <div class="topic-list">
+                    <div class="oblong-box-list topic-box-list">
                     <?php foreach ($topics as $topic) { ?>  
-                        <div class="item">
-                            <a title="<?= $topic['topic_title']; ?>" class="img-topic" href="/topic/<?= $topic['topic_slug']; ?>">
-                                <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'topic-img'); ?>
+                        <div class="oblong-box">
+                            <a title="<?= $topic['topic_title']; ?>" class="img-box" href="/topic/<?= $topic['topic_slug']; ?>">
+                                <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'ava-54'); ?>
                             </a>
                             <div class="item-desc">
                                 <a title="<?= $topic['topic_title']; ?>" href="/topic/<?= $topic['topic_slug']; ?>">

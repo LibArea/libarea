@@ -46,11 +46,12 @@
                 </ul>
 
                 <?php if (!empty($space)) { ?>
-              
+                    <div class="oblong-box-list space-box-list">
                     <?php foreach ($space as  $sp) { ?>  
-                        <div class="space-telo">
-                            <?= spase_logo_img($sp['space_img'], 'max', $sp['space_name'], 'space-img'); ?>
-                            
+                        <div class="oblong-box">
+                            <a title="<?= $sp['space_name']; ?>" class="img-box" href="/s/<?= $sp['space_slug']; ?>">
+                                <?= spase_logo_img($sp['space_img'], 'max', $sp['space_name'], 'ava-54'); ?>
+                            </a>
                             <?php if($sp['space_user_id'] == $uid['id']) { ?>
                                 <div class="my_space all"></div>
                             <?php } ?>
@@ -91,7 +92,7 @@
                                 <?php } ?>                        
                             <?php } ?> 
 
-                            <div class="space-des all">
+                            <div class="small">
                                 <?php if($sp['space_description']) { ?> 
                                     <?= $sp['space_description']; ?> 
                                 <?php } else { ?> 
@@ -101,7 +102,7 @@
 
                         </div>
                     <?php } ?>
-
+                    </div>
                 <?php } else { ?>
                     <div class="no-content"><i class="icon info"></i> <?= lang('No spaces'); ?></div>
                 <?php } ?>

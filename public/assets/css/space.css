@@ -182,17 +182,6 @@ h1.space a {
   margin-top: 0;
 }
 
-.space-telo {
-  margin-bottom: 25px;
-  position: relative;
-}
-
-.space-telo img.space-img {
-  width: 48px;
-  float: left;
-  margin: 8px 10px 0 0;
-}
-
 .space-no-user {
   background: #f0f0df;
   color: #666;

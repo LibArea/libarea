@@ -284,14 +284,13 @@ function breadcrumb($path_home, $title_home, $path_intermediate, $title_intermed
 
 function votes($user_id, $content, $type)
 {
-    $html = '';
+    $html  = '';
+    $count = '';
+    if ($content[$type.'_votes'] > 0 ) {
+        $count = '+'.$content[$type.'_votes'];
+    }
+    
     if ($user_id > 0) {
-        
-        $count = '';
-        if ($content[$type.'_votes'] > 0 ) {
-            $count = '+'.$content[$type.'_votes'];
-        }
-        
         if ($content['votes_'.$type.'_user_id'] || $user_id == $content[$type . '_user_id']) { 
             $html .= '<div class="voters active">
                         <div class="up-id"></div>
@@ -307,10 +306,10 @@ function votes($user_id, $content, $type)
         } 
         
     } else {    
-        $html .= '333<div class="voters">
+        $html .= '<div class="voters">
                     <a rel="nofollow" href="/login"><div class="up-id"></div></a>
                     <div class="score">
-                        +'.$content[$type . '_count'].'                
+                         '. $count .'                
                     </div></div>';
     }
 

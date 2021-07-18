@@ -15,7 +15,6 @@
                         </a>
                     </li>
                 </ul>
-                
                 <div class="telo space">
                     <div class="box create">
                         <form action="/space/edit" method="post" enctype="multipart/form-data">
@@ -59,7 +58,7 @@
                             </div> 
                             <div class="boxline">
                                 <label class="form-label" for="post_content"><?= lang('Text'); ?> (Sidebar)</label>
-                                <textarea class="form-input" id="h-200" name="space_text"><?= $space['space_text']; ?></textarea>
+                                <textarea rows="6" cols="60" name="space_text"><?= $space['space_text']; ?></textarea>
                                 <div class="box_h">Markdown</div>
                             </div>
                             <div class="boxline">

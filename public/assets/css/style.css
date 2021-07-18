@@ -166,14 +166,6 @@ main.w-100 {
   max-width: 100%;
 }
 
-#h-200 {
-  height: 200px;
-}
-
-#h-100 {
-  height: 100px;
-}
-
 h1 {
   font-weight: 400;
   font-size: 1.2rem;
@@ -420,9 +412,12 @@ hr {
 textarea {
   width: 100%;
   border: 0.05rem solid #caced7;
-  background: #f3f3f3;
   font-size: 16px;
   padding: 1px 6px;
+}
+
+.darkening {
+  background: #f3f3f3;
 }
 
 .form {
@@ -916,6 +911,10 @@ img.ava {
 
 img.ava-24 {
   width: 24px;
+}
+
+img.ava-54 {
+  width: 54px;
 }
 
 img.ava-94 {
@@ -1605,22 +1604,36 @@ i.github:hover {
   gap: 10px;
 }
 
-.topic-list .item {
+.oblong-box {
   position: relative;
   float: left;
   padding: 10px 5px 10px 68px;
   border-bottom: 1px solid #f2f2f2;
+  min-height: 80px;
 }
 
-.img-topic {
+.img-box {
   position: absolute;
   left: 5px;
   top: 17px;
 }
 
-.img-topic img {
+.img-box img {
   width: 54px;
   border-radius: 3px;
+}
+
+.oblong-box-list {
+  display: grid;
+  gap: 10px;  
+}
+
+.topic-box-list {
+  grid-template-columns: repeat(auto-fit,minmax(48%,1fr));
+}
+
+.space-box-list {
+  grid-template-columns: repeat(auto-fit,minmax(99%,1fr));
 }
 
 /* dark */
@@ -1642,8 +1655,10 @@ i.github:hover {
 }
 
 .dark input.form-search,
-.dark .banner {
-  background: #282828;
+.dark .banner,
+.dark textarea,
+.dark .login-nav input {
+  background: #383838;
   border: 1px solid #282828;
   color: #eee;
 }
@@ -1668,8 +1683,15 @@ i.github:hover {
   color: #fff;
 }
 
-.dark a:hover {
+.dark a:hover,
+.dark .l-rec {
   color: #eee;
+}
+
+.dark .comm-footer a,
+.dark .bar,
+.dark a.date {
+  color: var(--tertiary);
 }
 
 /* Прокрутка */
@@ -1703,8 +1725,7 @@ i.github:hover {
 
 @media (max-width: 704px) {
   form.form { display: none; }
-  .topic-list .item { width: 100%; }
-  .topic-list { grid-template-columns: repeat(auto-fit,minmax(99%,1fr)); }
+  .topic-box-list { grid-template-columns: repeat(auto-fit,minmax(99%,1fr)); }
 }
 
 @font-face {

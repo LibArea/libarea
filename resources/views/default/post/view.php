@@ -165,7 +165,7 @@
                     </div>
                     <div>      
                         <?php if($post['post_type'] == 0 && $post['post_draft'] == 0) { ?>
-                            <?php if ($uid['id']) { ?>
+                            <?php if ($uid['id'] > 0) { ?>
                                <?php if($post['post_closed'] == 0) { ?>
                                     <form id="add_answ" class="new_answer" action="/answer/create" accept-charset="UTF-8" method="post">
                                     <?= csrf_field() ?>
@@ -180,7 +180,7 @@
                                     </form>
                                 <?php } ?>
                             <?php } else { ?>
-                                <textarea rows="5" disabled="disabled" placeholder="<?= lang('no-auth-comm'); ?>" name="answer" id="answer"></textarea>
+                                <textarea rows="5" class="darkening" disabled="disabled" placeholder="<?= lang('no-auth-comm'); ?>" name="answer" id="answer"></textarea>
                                 <div> 
                                     <input type="submit" name="answit" value="<?= lang('Reply'); ?>" class="button" disabled="disabled">
                                 </div> 
