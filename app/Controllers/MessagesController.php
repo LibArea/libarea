@@ -66,8 +66,6 @@ class MessagesController extends \MainController
             $result = [];
         }
         
-        Request::getHead()->addStyles('/assets/css/messages.css');
-
 		$data = [
             'h1'            => lang('Private messages'),
             'meta_title'    => lang('Private messages') .' | '. Config::get(Config::PARAM_NAME),
@@ -119,8 +117,6 @@ class MessagesController extends \MainController
                 }
             }
 		}
-        
-        Request::getHead()->addStyles('/assets/css/messages.css');
         
         $data = [
             'h1'                => lang('Dialogue') .' - '. $list[$key]['login'],

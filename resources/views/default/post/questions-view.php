@@ -30,7 +30,6 @@
                                 </div>
                             </div>
                         
-                        
                             <?= $answer['answer_content'] ?>
                         </div>
                         <div class="answer-footer">
@@ -72,30 +71,7 @@
                                 </span>
                             <?php } ?>
                             
-                            <?php if (!$uid['id']) { ?> 
-                                <div class="voters">
-                                    <a rel="nofollow" href="/login"><div class="up-id"></div></a>
-                                    <div class="score">
-                                        <?= $answer['answer_votes'] ? '+'.$answer['answer_votes'] : $answer['answer_votes']; ?>
-                                    </div>
-                                </div>
-                            <?php } else { ?>
-                                <?php if ($answer['votes_answer_user_id'] == $uid['id'] || $uid['id'] == $answer['answer_user_id']) { ?>
-                                    <div class="voters active">
-                                        <div class="up-id"></div>
-                                        <div class="score">
-                                            <?= $answer['answer_votes'] ? '+'.$answer['answer_votes'] : $answer['answer_votes']; ?>
-                                        </div>
-                                    </div>
-                                <?php } else { ?>
-                                    <div id="up<?= $answer['answer_id']; ?>" class="voters">
-                                        <div data-id="<?= $answer['answer_id']; ?>" data-type="answer" class="up-id"></div>
-                                        <div class="score">
-                                            <?= $answer['answer_votes'] ? '+'.$answer['answer_votes'] : $answer['answer_votes']; ?>
-                                        </div>
-                                    </div>
-                                <?php } ?>
-                            <?php } ?>
+                            <?= votes($uid['id'], $answer, 'answer'); ?>
                             
                         </div> 
                         <div id="answer_addentry<?= $answer['answer_id']; ?>" class="reply"></div> 

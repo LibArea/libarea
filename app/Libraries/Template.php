@@ -281,3 +281,38 @@ function breadcrumb($path_home, $title_home, $path_intermediate, $title_intermed
 
     return $html;
 }
+
+function votes($user_id, $content, $type)
+{
+    $html = '';
+    if ($user_id > 0) {
+        
+        $count = '';
+        if ($content[$type.'_votes'] > 0 ) {
+            $count = '+'.$content[$type.'_votes'];
+        }
+        
+        if ($content['votes_'.$type.'_user_id'] || $user_id == $content[$type . '_user_id']) { 
+            $html .= '<div class="voters active">
+                        <div class="up-id"></div>
+                        <div class="score">
+                            '. $count .'
+                        </div></div>';
+        } else { 
+            $html .= '<div id="up' . $content[$type.'_id'].'" class="voters">
+                        <div data-id="'.$content[$type.'_id'].'" data-type="'.$type.'" class="up-id"></div>
+                        <div class="score">
+                            '. $count .'
+                        </div></div>';
+        } 
+        
+    } else {    
+        $html .= '333<div class="voters">
+                    <a rel="nofollow" href="/login"><div class="up-id"></div></a>
+                    <div class="score">
+                        +'.$content[$type . '_count'].'                
+                    </div></div>';
+    }
+
+    return $html;
+}

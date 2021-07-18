@@ -5,29 +5,7 @@
             <div class="inner-padding space-tags">
                 <?php if($link['link_title']) { ?>
                     <div class="right heart-link">
-                        <?php if (!$uid['id']) { ?> 
-                            <div class="voters">
-                                <a rel="nofollow" href="/login"><i class="icon up-id"></i></a>
-                                <div class="score">
-                                    <?= $link['link_votes'] ? '+'.$link['link_votes'] : $link['link_votes']; ?>
-                                </div>
-                            </div>
-                        <?php } else { ?>
-                             <?php if ($link['votes_link_user_id'] == $uid['id'] || $uid['id'] == $link['link_user_id']) { ?>
-                                <div class="voters active">
-                                    <div class="score">
-                                        <?= $link['link_votes'] ? '+'.$link['link_votes'] : $link['link_votes']; ?>
-                                    </div>
-                                </div>
-                            <?php } else { ?>
-                                <div id="up<?= $link['link_id']; ?>" class="voters">
-                                    <div data-id="<?= $link['link_id']; ?>" data-type="link" class="up-id"></div>
-                                    <div class="score">
-                                        <?= $link['link_votes'] ? '+'.$link['link_votes'] : $link['link_votes']; ?>
-                                    </div>
-                                </div>
-                            <?php } ?>
-                        <?php } ?>
+                        <?= votes($uid['id'], $link, 'link'); ?> 
                     </div>
                     <h1 class="domain"><?= $link['link_title']; ?>
                         <?php if($uid['trust_level'] > 4) { ?>
@@ -37,7 +15,7 @@
                             </a>
                         <?php } ?>
                     </h1>
-                    <div class="domain-content">
+                    <div class="gray">
                     <?= $link['link_content']; ?>
                     </div>
                     <div class="domain-footer-small">
@@ -133,24 +111,7 @@
                         <?php } ?>
 
                         <div class="post-footer lowercase">
-                            <?php if (!$uid['id']) { ?> 
-                                <div id="vot<?= $post['post_id']; ?>" class="voters">
-                                    <a rel="nofollow" href="/login"><div class="up-id"></div></a>
-                                    <div class="score">+<?= $post['post_votes']; ?></div>
-                                </div>
-                            <?php } else { ?> 
-                                <?php if ($post['votes_post_user_id'] || $uid['id'] == $post['post_user_id']) { ?>
-                                    <div class="voters active">
-                                        <div class="up-id"></div>
-                                        <div class="score"><?= $post['post_votes']; ?></div>
-                                    </div>
-                                <?php } else { ?>
-                                    <div id="up<?= $post['post_id']; ?>" class="voters">
-                                        <div data-id="<?= $post['post_id']; ?>" data-type="post" class="up-id"></div>
-                                        <div class="score"><?= $post['post_votes']; ?></div>
-                                    </div>
-                                <?php } ?> 
-                            <?php } ?> 
+                            <?= votes($uid['id'], $post, 'post'); ?>
                     
                             <?php if($post['post_answers_count'] !=0) { ?> 
                                 <a class="right" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">

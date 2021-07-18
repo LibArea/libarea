@@ -15,9 +15,11 @@ class WebModel extends \MainModel
                     link_id,
                     link_title,
                     link_content,
-                    link_count,
+                    link_user_id,
                     link_url,
                     link_url_domain,
+                    link_votes,
+                    link_count,
                     link_is_deleted,
                     votes_link_user_id, 
                     votes_link_item_id

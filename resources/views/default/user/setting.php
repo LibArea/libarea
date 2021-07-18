@@ -3,7 +3,7 @@
     <main>
         <div class="white-box">
             <div class="inner-padding big">
-                <?= breadcrumb('/', lang('Home'), null, null, $data['h1']); ?>
+                <?= breadcrumb('/', lang('Home'), '/u/'. $uid['login'], lang('Profile'), $data['h1']); ?>
             
                 <ul class="nav-tabs">
                     <li class="active">
@@ -17,11 +17,6 @@
                     <li>
                         <a href="/u/<?= $uid['login']; ?>/setting/security">
                             <span><?= lang('Password'); ?></span>
-                        </a>
-                    </li>
-                    <li class="right">
-                        <a href="/u/<?= $uid['login']; ?>">
-                            <span><?= lang('Profile'); ?></span>
                         </a>
                     </li>
                 </ul>

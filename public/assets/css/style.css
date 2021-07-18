@@ -341,10 +341,6 @@ i.icon {
   margin-right: 5px;
 }
 
-.domain-content {
-  color: #666;
-}
-
 .sb-telo {
   margin: 15px 0;
 }
@@ -619,6 +615,55 @@ textarea:focus {
   background: #fff;
 }
 
+/* ЛС */
+.message {
+  padding: 1em 1.5em;
+  border-radius: 1em;
+  position: relative;
+  line-height: 1.5em;
+  width: calc(90% - 45px);
+}
+
+.message.left {
+  margin: 0 0 0 25px;
+  background-color: rgba(128, 175, 255, 0.2);
+  color: #506788;
+}
+
+.message.right {
+  margin: 0 25px 0 0;
+  background-color: rgba(247, 206, 70, 0.2);
+  color: #67614b;
+}
+
+.message.one {
+  background: #f3f1ed;
+  color: rgba(33, 32, 31, 0.5);
+}
+
+.avatar {
+  width: 35px;
+  border-radius: 50%;
+}
+
+.msg-telo {
+  margin-bottom: 15px;
+  overflow: hidden;
+}
+
+.message .date {
+  color: #919191;
+  text-transform: lowercase;
+  margin: 5px 0 0 0;
+  font-size: 13px;
+}
+
+.no-content {
+  padding: 10px 15px;
+  margin: 10px 0;
+  background-color: lightyellow;
+}
+
 /* Поиск */
 input.form-search {
   border: 1px solid #e6ecf0;
@@ -659,21 +704,6 @@ aside a.my {
 
 aside a.my.active {
   color: #1ca1f3;
-}
-
-/* Диалог */
-.alert-danger {
-  color: #e83e8c;
-}
-
-.no-content {
-  padding: 10px 15px;
-  margin: 10px 0;
-  background-color: lightyellow;
-}
-
-.notif-color-1 {
-  background: #f89406;
 }
 
 /* Урезанный пост на главной */
@@ -772,17 +802,17 @@ img.img-post,
   font-style: italic;
 }
 
-.telo-detail_post.dell {
+.telo-detail-post.dell {
   background-color: rgb(246, 196, 184);
   padding-left: 10px;
 }
 
-.telo-detail_post,
+.telo-detail-post,
 .answers {
   padding: 15px;
 }
 
-.telo-detail_post .title {
+.telo-detail-post .title {
   padding: 0;
 }
 
@@ -1110,20 +1140,6 @@ ol.comment-telo {
   margin: 0 20px 0 0;
 }
 
-.comments_subtree.dell,
-.answers_subtree.dell,
-.comment_subtree.dell {
-  opacity: 0.3;
-}
-
-.com-line {
-  position: absolute;
-  left: -3px;
-  border-left: 1px dotted #bbb;
-  top: 3px;
-  bottom: 0;
-}
-
 .answers .comm-telo.qa-comm {
   margin-top: 1px;
   margin-bottom: 1px;
@@ -1168,7 +1184,7 @@ ol.comment-telo {
 .voters,
 .voters a,
 .voters .up-id,
-.telo-detail_post .voters {
+.telo-detail-post .voters {
   float: left;
 }
 
@@ -1583,19 +1599,23 @@ i.github:hover {
   font-size: 13px;
 }
 
+.topic-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(48%,1fr));
+  gap: 10px;
+}
+
 .topic-list .item {
   position: relative;
   float: left;
-  width: 50%;
-  min-height: 90px;
-  padding: 20px 5px 20px 68px;
+  padding: 10px 5px 10px 68px;
   border-bottom: 1px solid #f2f2f2;
 }
 
 .img-topic {
   position: absolute;
   left: 5px;
-  top: 26px;
+  top: 17px;
 }
 
 .img-topic img {
@@ -1684,6 +1704,7 @@ i.github:hover {
 @media (max-width: 704px) {
   form.form { display: none; }
   .topic-list .item { width: 100%; }
+  .topic-list { grid-template-columns: repeat(auto-fit,minmax(99%,1fr)); }
 }
 
 @font-face {

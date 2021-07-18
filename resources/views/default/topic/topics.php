@@ -2,7 +2,7 @@
 <div class="wrap">
     <main>
         <div class="white-box">
-            <div class="inner-padding topic-list">
+            <div class="inner-padding">
                 <h1><?= $data['h1']; ?>
                     <?php if($uid['trust_level'] == 5) { ?>
                         <a class="right" href="/admin/topics"> 
@@ -12,7 +12,7 @@
                 </h1>
                 
                 <?php if (!empty($topics)) { ?>
-              
+                    <div class="topic-list">
                     <?php foreach ($topics as $topic) { ?>  
                         <div class="item">
                             <a title="<?= $topic['topic_title']; ?>" class="img-topic" href="/topic/<?= $topic['topic_slug']; ?>">
@@ -32,7 +32,7 @@
                             </div>
                         </div>
                     <?php } ?>
-
+                    </div>
                 <?php } else { ?>
                     <div class="no-content"><i class="icon info"></i> <?= lang('Topics no'); ?>...</div>
                 <?php } ?>

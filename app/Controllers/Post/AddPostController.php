@@ -151,7 +151,7 @@ class AddPostController extends \MainController
         
         $last_post_id   = PostModel::AddPost($data);
         $url_post       = '/post/'. $last_post_id .'/'. $post_slug;
-        
+
         if ($post_published == 0) {
             ActionModel::addAudit('post', $uid['id'], $last_post_id);
             // Оповещение админу
@@ -188,7 +188,7 @@ class AddPostController extends \MainController
             }
         }
         
-        redirect('/');   
+        redirect($url_post);   
     }
     
     // Форма добавление поста

@@ -32,7 +32,7 @@
                                     <?= favicon_img($link['link_id'], $link['link_url_domain']); ?>
                                     <?= $link['link_url_domain']; ?>
                                 </span>                                
-                                <div class="domain-content indent-bid">
+                                <div class="gray indent-bid">
                                     <?php if($link['link_content']) { ?>
                                         <?= $link['link_content']; ?>
                                     <?php } else { ?>
@@ -40,21 +40,7 @@
                                     <?php } ?> 
                                 </div> 
                                 <div class="post-footer lowercase">
-                                    <?php if (!$uid['id']) { ?> 
-                                        <div class="voters">
-                                            <a rel="nofollow" href="/login"><div class="up-id"></div></a>
-                                            <div class="score">
-                                                +<?= $link['link_count']; ?>                
-                                            </div>
-                                        </div>
-                                    <?php } else { ?>
-                                        <div class="voters active">
-                                            <div class="up-id"></div>
-                                            <div class="score">
-                                                +<?= $link['link_count']; ?>                
-                                           </div>
-                                        </div>
-                                    <?php } ?>
+                                    <?= votes($uid['id'], $link, 'link'); ?> 
                                 </div>
                             </div>
                         <?php } ?>

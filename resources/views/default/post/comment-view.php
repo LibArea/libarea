@@ -42,30 +42,8 @@
                                 </div>
                             </div>
                             <div class="comm-footer">
-                                <?php if (!$uid['id']) { ?> 
-                                    <div class="voters">
-                                        <a rel="nofollow" href="/login"><div class="up-id"></div></a>
-                                        <div class="score">
-                                            <?= $answer['answer_votes'] ? '+'.$answer['answer_votes'] : $answer['answer_votes']; ?>
-                                        </div>
-                                    </div>
-                                <?php } else { ?>
-                                     <?php if ($answer['votes_answer_user_id'] == $uid['id'] || $uid['id'] == $answer['answer_user_id']) { ?>
-                                        <div class="voters active">
-                                            <div class="up-id"></div>
-                                            <div class="score">
-                                                <?= $answer['answer_votes'] ? '+'.$answer['answer_votes'] : $answer['answer_votes']; ?>
-                                            </div>
-                                        </div>
-                                    <?php } else { ?>
-                                        <div id="up<?= $answer['answer_id']; ?>" class="voters">
-                                            <div data-id="<?= $answer['answer_id']; ?>" data-type="answer" class="up-id"></div>
-                                            <div class="score">
-                                                <?= $answer['answer_votes'] ? '+'.$answer['answer_votes'] : $answer['answer_votes']; ?>
-                                            </div>
-                                        </div>
-                                    <?php } ?>
-                                <?php } ?>
+                                <?= votes($uid['id'], $answer, 'answer'); ?> 
+
                                 <?php if($post['post_closed'] == 0) { ?> 
                                 <?php if($post['post_is_deleted'] == 0 || $uid['trust_level'] == 5) { ?>
                                     <span id="cm_add_link<?= $answer['answer_id']; ?>" class="cm_add_link">
@@ -108,7 +86,7 @@
                 </ol>
                                 
             <?php } else { ?>
-            
+           
                 <?php if($uid['trust_level'] == 5) { ?>                    
                      <ol class="delleted small comm-telo"> 
                         <li class="comments_subtree" id="comment_<?= $answer['answer_id']; ?>">
@@ -175,30 +153,8 @@
                                         </div>
                                     </div>
                                     <div class="comm-footer">
-                                        <?php if (!$uid['id']) { ?> 
-                                            <div class="voters">
-                                                <a rel="nofollow" href="/login"><div class="up-id"></div></a>
-                                                <div class="score">
-                                                <?= $comment['comment_votes'] ? '+'.$comment['comment_votes'] : $comment['comment_votes']; ?>
-                                                </div>
-                                            </div>
-                                        <?php } else { ?>
-                                            <?php if ($comment['votes_comment_user_id'] == $uid['id'] || $uid['id'] == $comment['comment_user_id']) { ?>
-                                                <div class="voters active">
-                                                    <div class="up-id"></div>
-                                                    <div class="score">
-                                                        <?= $comment['comment_votes'] ? '+'.$comment['comment_votes'] : $comment['comment_votes']; ?>
-                                                    </div>
-                                                </div>
-                                            <?php } else { ?>
-                                                <div id="up<?= $comment['comment_id']; ?>" class="voters">
-                                                    <div data-id="<?= $comment['comment_id']; ?>" data-type="comment" class="up-id"></div>
-                                                    <div class="score">
-                                                        <?= $comment['comment_votes'] ? '+'.$comment['comment_votes'] : $comment['comment_votes']; ?>
-                                                    </div>
-                                                </div>
-                                            <?php } ?>
-                                        <?php } ?>
+                                        <?= votes($uid['id'], $comment, 'comment'); ?> 
+                                        
                                         <?php if($post['post_closed'] == 0) { ?> 
                                         <?php if($post['post_is_deleted'] == 0 || $uid['trust_level'] == 5) { ?>
                                             <span id="cm_add_link<?= $comment['comment_id']; ?>" class="cm_add_link">
