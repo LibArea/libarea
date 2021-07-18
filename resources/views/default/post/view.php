@@ -38,13 +38,14 @@
                                     </a> 
                                 <?php } ?>
                         </h1>
-                        <div class="post-footer-full small lowercase">
-                            <?= user_avatar_img($post['avatar'], 'small', $post['login'], 'ava'); ?>
-                            <span class="indent"></span> 
-                            <span class="user"> 
-                                <a href="/u/<?= $post['login']; ?>"><?= $post['login']; ?></a> 
-                            </span>
-                            <span class="date"> 
+                        <div class="small lowercase">
+                            <a href="/u/<?= $post['login']; ?>">
+                                <?= user_avatar_img($post['avatar'], 'small', $post['login'], 'ava'); ?>
+                                <span class="indent">
+                                    <?= $post['login']; ?>
+                                </span> 
+                            </a> 
+                            <span class="indent"> 
                                 <?= $post['post_date_lang']; ?>
                                 <?php if($post['modified']) { ?> 
                                     (<?= lang('ed'); ?>) 
@@ -52,7 +53,7 @@
                             </span>
                             <?php if ($uid['id']) { ?>
                                 <?php if($uid['login'] == $post['login']  || $uid['trust_level'] == 5) { ?>
-                                    <span class="date">
+                                    <span class="indent">
                                         <a href="/post/edit/<?= $post['post_id']; ?>">
                                             <i class="icon pencil"></i>  
                                         </a>
@@ -64,16 +65,14 @@
                                                 <span class="mu_post">+ <?= lang('in-the-profile'); ?></span>
                                                 <span class="indent"> &#183; </span>
                                         <?php } else { ?> 
-                                            <a class="user-mypost" data-opt="1" data-post="<?= $post['post_id']; ?>">
+                                            <a class="user-mypost indent" data-opt="1" data-post="<?= $post['post_id']; ?>">
                                                 <span class="mu_post"><?= lang('in-the-profile'); ?></span>
                                                 <span class="indent"> &#183;  </span>
                                             </a>
                                         <?php } ?> 
                                     <?php } ?>    
                                 <?php } ?> 
-                                
-                                <span class="indent"></span>
-                                <span class="add-favorite" data-id="<?= $post['post_id']; ?>" data-type="post">
+                                <span class="add-favorite indent" data-id="<?= $post['post_id']; ?>" data-type="post">
                                     <?php if ($post['favorite_post']){ ?>
                                         <?= lang('remove-favorites'); ?>
                                     <?php } else { ?>
@@ -83,7 +82,7 @@
                                 
                                 <?php if($uid['trust_level'] ==5) { ?>
                                     <span class="indent"> &#183; </span>
-                                    <span id="cm_dell" class="cm_add_link">
+                                    <span id="cm_dell" class="cm_add_link indent">
                                         <a data-type="post" data-id="<?= $post['post_id']; ?>" class="type-action">
                                             <?php if($post['post_is_deleted'] == 1) { ?>
                                                 <?= lang('Recover'); ?>
@@ -257,7 +256,7 @@
                                     <?= $rec_post['post_title']; ?>  
                                 </a>
                                 <?php if($rec_post['post_answers_count'] !=0) { ?>
-                                    <span class="n-comm">+<?= $rec_post['post_answers_count'] ?></span>
+                                    <span class="green">+<?= $rec_post['post_answers_count'] ?></span>
                                 <?php } ?> 
                             </div>
                        </div>

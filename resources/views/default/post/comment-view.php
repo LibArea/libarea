@@ -10,29 +10,32 @@
                     <li class="answers_subtree" id="answer_<?= $answer['answer_id']; ?>">
                         <div class="container">
                             <div class="answ-telo">
-                                <div class="answ-header small">
-                                    <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava'); ?>
-                                    <span class="user"> 
-                                        <a class="date" href="/u/<?= $answer['login']; ?>"><?= $answer['login']; ?></a> 
-                                    </span> 
-                                    <span class="date">  
+                                <div class="small">
+                                    <a href="/u/<?= $answer['login']; ?>">
+                                        <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava'); ?>
+                                        <span class="indent"> 
+                                            <?= $answer['login']; ?>
+                                        </span>
+                                    </a> 
+                                    
+                                    <span class="indent">  
                                        <?= $answer['answer_date']; ?>
                                     </span>
                                     <?php if (empty($answer['edit'])) { ?> 
-                                        <span class="date">  
+                                        <span class="indent">  
                                            (<?= lang('ed'); ?>.)
                                         </span>
                                     <?php } ?>
                                     <?php if ($post['post_user_id'] == $answer['answer_user_id']) { ?>
-                                        <span class="date ots">  
+                                        <span class="indent">  
                                             <span class="authorpost">&#x21af;</span>
                                         </span>
                                     <?php } ?>
-                                    <span class="date ots">
+                                    <span class="indent">
                                         <a rel="nofollow" class="date" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#answer_<?= $answer['answer_id']; ?>">#</a>
                                     </span>
                                     <?php if ($uid['trust_level'] == 5) { ?> 
-                                        <span class="date ots">
+                                        <span class="indent">
                                             <?= $answer['answer_ip']; ?>
                                         </span>
                                     <?php } ?> 
@@ -41,12 +44,12 @@
                                     <?= $answer['answer_content'] ?> 
                                 </div>
                             </div>
-                            <div class="comm-footer">
+                            <div class="comm-footer small">
                                 <?= votes($uid['id'], $answer, 'answer'); ?> 
 
                                 <?php if($post['post_closed'] == 0) { ?> 
                                 <?php if($post['post_is_deleted'] == 0 || $uid['trust_level'] == 5) { ?>
-                                    <span id="cm_add_link<?= $answer['answer_id']; ?>" class="cm_add_link">
+                                    <span id="cm_add_link<?= $answer['answer_id']; ?>" class="cm_add_link indent">
                                         <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment bar"><?= lang('Reply'); ?></a>
                                     </span>
                                 <?php } ?>
@@ -54,26 +57,26 @@
                                 
                                 <?php if($uid['id'] == $answer['answer_user_id'] || $uid['trust_level'] == 5) { ?>
                                     <?php if($answer['answer_after'] == 0 || $uid['trust_level'] == 5) { ?>
-                                        <span id="answer_edit" class="answer_add_link">
-                                            <a class="editansw bar" href="/answer/edit/<?= $answer['answer_id']; ?>">   <?= lang('Edit'); ?>
+                                        <span id="answer_edit" class="answer_add_link indent">
+                                            <a class="editansw" href="/answer/edit/<?= $answer['answer_id']; ?>">   <?= lang('Edit'); ?>
                                             </a>
                                         </span>
                                     <?php } ?>
                                 <?php } ?>
                     
                                 <?php if ($uid['id']) { ?>
-                                   <span class="add-favorite bar" data-id="<?= $answer['answer_id']; ?>" data-type="answer">
+                                   <a class="add-favorite indent" data-id="<?= $answer['answer_id']; ?>" data-type="answer">
                                         <?php if ($answer['favorite_user_id']){ ?>
                                             <?= lang('remove-favorites'); ?>
                                         <?php } else { ?>
                                             <?= lang('add-favorites'); ?>
                                         <?php } ?> 
-                                   </span>   
+                                   </a>   
                                 <?php } ?>            
                                 
                                 <?php if($uid['trust_level'] == 5) { ?>
-                                    <span id="answer_dell" class="answer_add_link">
-                                        <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action bar">
+                                    <span id="answer_dell" class="answer_add_link indent">
+                                        <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action">
                                             <?= lang('Remove'); ?>
                                         </a>
                                     </span>
@@ -117,33 +120,36 @@
                             <li class="comment_subtree" id="comment_<?= $comment['comment_id']; ?>">
                                 <div class="container">
                                     <div class="comm-telo">
-                                        <div class="comm-header small"> 
-                                            <?= user_avatar_img($comment['avatar'], 'small', $comment['login'], 'ava'); ?>
-                                            <span class="user"> 
-                                                <a class="date" href="/u/<?= $comment['login']; ?>"><?= $comment['login']; ?></a> 
-                                            </span> 
-                                            <span class="date">  
+                                        <div class="small"> 
+                                            <a href="/u/<?= $comment['login']; ?>">
+                                               <?= user_avatar_img($comment['avatar'], 'small', $comment['login'], 'ava'); ?>
+                                               <span class="indent"> 
+                                                    <?= $comment['login']; ?>
+                                               </span>
+                                            </a> 
+                                            
+                                            <span class="indent">  
                                                <?= lang_date($comment['comment_date']); ?>
                                             </span>
                                             <?php if ($post['post_user_id'] == $comment['comment_user_id']) { ?>
-                                                <span class="date ots">  
+                                                <span class="indent">  
                                                     <span class="authorpost">&#x21af;</span>
                                                 </span>
                                             <?php } ?>
                                             <?php if($comment['comment_comment_id'] > 0) { ?>
-                                                <span class="date ots">
+                                                <span class="indent">
                                                     <a class="date" rel="nofollow" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#comment_<?= $comment['comment_comment_id']; ?>">&uarr;</a>
                                                 </span>
                                             <?php } else { ?>
-                                                <span class="date ots">
+                                                <span class="indent">
                                                     <a class="date" rel="nofollow" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#answer_<?= $comment['comment_answer_id']; ?>">&uarr;</a>
                                                 </span>
                                             <?php } ?>
-                                            <span class="date ots">
+                                            <span class="indent">
                                                 <a class="date" rel="nofollow" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#comment_<?= $comment['comment_id']; ?>">#</a>
                                             </span>
                                             <?php if ($uid['trust_level'] == 5) { ?> 
-                                                <span class="date ots">
+                                                <span class="indent">
                                                     <?= $comment['comment_ip']; ?>
                                                 </span>
                                             <?php } ?> 
@@ -152,13 +158,13 @@
                                             <?= lori\Content::text($comment['comment_content'], 'line'); ?>
                                         </div>
                                     </div>
-                                    <div class="comm-footer">
+                                    <div class="comm-footer small">
                                         <?= votes($uid['id'], $comment, 'comment'); ?> 
                                         
                                         <?php if($post['post_closed'] == 0) { ?> 
                                         <?php if($post['post_is_deleted'] == 0 || $uid['trust_level'] == 5) { ?>
-                                            <span id="cm_add_link<?= $comment['comment_id']; ?>" class="cm_add_link">
-                                                <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment-re bar">
+                                            <span id="cm_add_link<?= $comment['comment_id']; ?>" class="cm_add_link indent">
+                                                <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment-re">
                                                     <?= lang('Reply'); ?>
                                                 </a>
                                             </span>
@@ -166,14 +172,14 @@
                                         <?php } ?>
                                         
                                         <?php if (accessСheck($comment, 'comment', $uid, 1, 30) === true) { ?>
-                                            <span id="comment_edit" class="cm_add_link">
-                                                <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm bar">
+                                            <span id="comment_edit" class="cm_add_link indent">
+                                                <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm">
                                                     <?= lang('Edit'); ?>
                                                 </a>
                                             </span>
                                              
-                                            <span id="comment_dell" class="cm_add_link">
-                                                <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action bar">
+                                            <span id="comment_dell" class="cm_add_link indent">
+                                                <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action">
                                                     <?= lang('Remove'); ?>
                                                 </a>
                                             </span>

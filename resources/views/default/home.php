@@ -77,19 +77,17 @@
       
         <div class="post-telo white-box">
           <div class="post-header small">
-            <?= user_avatar_img($post['avatar'], 'small', $post['login'], 'ava'); ?>
-            <span class="indent"></span> 
-            <span class="user"> 
-              <a href="/u/<?= $post['login']; ?>">
+            <a href="/u/<?= $post['login']; ?>">
+                <?= user_avatar_img($post['avatar'], 'small', $post['login'], 'ava'); ?>
+                <span class="indent"></span> 
                 <?= $post['login']; ?>
-              </a> 
-            </span>
+            </a> 
+
             <span class="indent"></span> 
             <a href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
               <?= $post['space_name']; ?>
             </a> 
-            <span class="indent"></span> 
-              <span class="date"> 
+            <span class="indent">
                <?= $post['post_date'] ?>
             </span>
           </div>
@@ -131,12 +129,12 @@
             </a>
             
             <?php if($post['post_url_domain']) { ?> 
-              <a class="date small indent-bid" href="/domain/<?= $post['post_url_domain']; ?>">
+              <a class="gray small indent-bid" href="/domain/<?= $post['post_url_domain']; ?>">
                 <i class="icon link"></i> <?= $post['post_url_domain']; ?>
               </a> 
             <?php } ?>
             
-            <?= html_topic($post['topic_list'], 'date small indent-bid'); ?>
+            <?= html_topic($post['topic_list'], 'gray small indent-bid'); ?>
 
             <div class="post-details">
               <div class="show_add_<?= $post['post_id']; ?>">

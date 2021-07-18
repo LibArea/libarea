@@ -10,13 +10,15 @@
                         <?php foreach ($moderations as  $mod) { ?> 
                             <div class="post-telo white-box">
                                 <div class="post-footer-full small lowercase">
-                                    <?= user_avatar_img($mod['avatar'], 'small', $mod['login'], 'ava'); ?>
-                                    
-                                    <span class="indent"></span>
-                                    <a href="/u/<?= $mod['login']; ?>"><?= $mod['login']; ?></a> 
-                                        
-                                    <span class="indent"></span>
-                                    <?= $mod['mod_created_at']; ?>
+                                    <a href="/u/<?= $mod['login']; ?>">
+                                        <?= user_avatar_img($mod['avatar'], 'small', $mod['login'], 'ava'); ?>
+                                        <span class="indent">
+                                            <?= $mod['login']; ?>
+                                        </span>
+                                    </a> 
+                                    <span class="indent">
+                                        <?= $mod['mod_created_at']; ?>
+                                    </span>
                                 </div>
                                 <div>
                                     <a href="/post/<?= $mod['post_id']; ?>/<?= $mod['post_slug']; ?>">

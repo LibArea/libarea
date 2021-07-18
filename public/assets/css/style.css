@@ -161,6 +161,10 @@ img {
   border-radius: 2px;
 }
 
+a:hover > img {
+  opacity: 0.8;
+}
+
 main.w-100 {
   width: 100%;
   max-width: 100%;
@@ -718,7 +722,6 @@ aside a.my.active {
   color: #333;
 }
 
-.full-post-home,
 .post-telo.full {
   overflow: hidden;
   margin-bottom: 22px;
@@ -730,10 +733,6 @@ img.thumb {
   float: right;
   width: 140px;
   max-height: 100px;
-}
-
-.full-post-home img.thumb {
-  margin: 10px 20px 10px 10px;
 }
 
 .fuul-head {
@@ -819,6 +818,16 @@ img.img-post,
   color: var(--tertiary);
 }
 
+.post-footer a,
+.post-footer-full a {
+  color: var(--tertiary);
+}
+
+.post-footer a:hover,
+.post-footer-full a:hover {
+  color: #333;
+}
+
 .img-post-bl {
   margin: 15px 0 0 0;
 }
@@ -831,11 +840,7 @@ img.img-post,
   margin: 0 0 0 30px;
 }
 
-.post-telo-fav {
-  margin: 0 0 20px 0;
-}
-
-.voters-fav {
+ .voters-fav {
   float: left;
   width: 30px;
   height: 45px;
@@ -875,34 +880,17 @@ img.img-post,
   color: var(--quaternary);
 }
 
-.date {
+.indent,
+.indent a {
   color: var(--tertiary);
-  text-transform: lowercase;
-  margin: 0 0 0 5px;
+  margin: 0 3px;
 }
 
-.date.ots {
-  margin: 0 0 0 12px;
+.indent-bid {
+  margin: 0 0 0 15px;
 }
 
-.v-ots {
-  margin: 15px 0;
-}
-
-.post-footer-full {
-  color: var(--tertiary);
-  display: inline-block;
-}
-
-.post-footer a,
-.post-footer-full a {
-  color: var(--tertiary);
-}
-
-.post-footer a:hover,
-.post-footer-full a:hover {
-  color: #333;
-}
+.v-ots { margin: 15px 0; }
 
 img.ava {
   vertical-align: middle;
@@ -1013,11 +1001,6 @@ ol.dell.answer-telo {
   font-size: 15px;
 }
 
-.answ-header .user {
-  margin: 0 0 0 3px;
-  text-transform: lowercase;
-}
-
 .answer-footer {
   height: 24px;
 }
@@ -1058,11 +1041,6 @@ ol.dell.answer-telo {
   padding: 5px;
 }
 
-.block-comments,
-.block-answers {
-  margin: 5px 0 5px 0;
-}
-
 ol.dell.comment-telo,
 .dell.comm-telo_bottom {
   color: #888;
@@ -1083,10 +1061,6 @@ ol.comment-telo.three {
 ol.comment-telo {
   list-style: none;
   padding-left: 23px;
-}
-
-.n-comm {
-  color: #390;
 }
 
 .comm-telo.step {
@@ -1114,29 +1088,10 @@ ol.comment-telo {
   margin: 2px 0 2px 0;
 }
 
-.comm-header .user {
-  margin: 0 0 0 3px;
-  text-transform: lowercase;
-}
-
 .comments .comm-telo {
   padding: 3px 0 0 0;
   font-size: 10.5pt;
   max-width: 800px;
-}
-
-.indent {
-  margin: 0 3px;
-}
-
-.indent-bid {
-  margin: 0 0 0 15px;
-}
-
-.bar {
-  color: var(--tertiary);
-  font-size: 9.5pt;
-  margin: 0 20px 0 0;
 }
 
 .answers .comm-telo.qa-comm {
@@ -1189,14 +1144,15 @@ ol.comment-telo {
 
 .voters .score {
   float: left;
-  margin: 1px 2px 0 7px;
+  margin: 0 2px 0 7px;
   color: var(--tertiary);
   font-size: 15px;
+  line-height: 1.26;
 }
 
 .answer-telo .voters,
 .comm-telo .voters {
-  margin: 0 20px 0 0;
+  margin: 0 10px 0 0;
 }
 
 .voters .up-id {
@@ -1209,6 +1165,7 @@ ol.comment-telo {
   padding: 0;
   display: block;
   border-bottom-width: 11px;
+  margin-top: -1px;
 }
 
 .voters .up-id:hover {
@@ -1466,7 +1423,6 @@ h3.recommend {
   margin: 0 0 10px 0;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: #333;
   font-weight: 400;
 }
 
@@ -1683,15 +1639,15 @@ i.github:hover {
   color: #fff;
 }
 
+.dark .indent,
+.dark .indent a {
+  color: #919191;
+  margin: 0 3px;
+}
+
 .dark a:hover,
 .dark .l-rec {
   color: #eee;
-}
-
-.dark .comm-footer a,
-.dark .bar,
-.dark a.date {
-  color: var(--tertiary);
 }
 
 /* Прокрутка */
