@@ -12,7 +12,7 @@
 <body class="bd<?php if(Request::getCookie('dayNight') == 'dark') {?> dark<?php } ?>">
 
 <header>
-  <div class="wrap no-flex">
+  <div class="wrap no-flex header-body">
     <div class="header-left"> 
       <a title="<?= lang('Home'); ?>" class="logo" href="/">LORI<span>UP</span></a>
 

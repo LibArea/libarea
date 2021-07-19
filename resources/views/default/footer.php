@@ -1,6 +1,6 @@
 <div class="clear"></div>
 <footer>
-  <div class="wrap no-flex">
+  <div class="wrap">
     <div class="text-info no-mob">
       <h4 class="p-head two"><?= lang('Info'); ?></h4>
       <a class="footer small" title="<?= lang('Spaces'); ?>" href="/spaces"><?= lang('Spaces'); ?></a>
@@ -35,7 +35,8 @@
       </a>
        
       <div class="small">
-        Loriup &copy; <?= date('Y'); ?> — сообщество<br> 
+        Loriup &copy; <?= date('Y'); ?> 
+        <span class="no-mob">— <?= lang('community'); ?></span> 
       </div> 
     </div>
   </div>

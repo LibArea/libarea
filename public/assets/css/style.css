@@ -44,10 +44,10 @@ body {
 
 header {
   z-index: 10;
-  padding: 5px 5px 10px 5px;
   box-shadow: 0 1px 3px rgb(18 18 18 / 10%);
   background-color: #fff;
   color: var(--tertiary);
+  height: 43px;
 }
 
 main {
@@ -121,10 +121,14 @@ img { border-radius: 2px; }
 .space-cover-box .wrap,
 .space-box .wrap {
   max-width: 1290px;
-  padding: 0.7rem 0.4rem 0.3rem 0.4rem;
+  padding: 0.5rem;
   margin: 0 auto;
   position: relative;
   display: block;
+}
+
+header .wrap.header-body {
+  padding-top: 9px; 
 }
 
 .sticky {
@@ -236,8 +240,7 @@ a.add-post:hover {
 }
 
 .banner {
-  padding: 11px 15px 15px 15px;
-  background: #f3f1ed;
+  padding: 16px 15px 10px 15px;
   color: rgba(33, 32, 31, 0.5);
   font-size: 15px;
   border-radius: 2px;
@@ -246,10 +249,9 @@ a.add-post:hover {
 }
 
 .banner h1 {
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   text-transform: uppercase;
   font-size: 21px;
-  color: #333;
   font-weight: 400;
   margin: 0 0 5px 0;
 }
@@ -1213,7 +1215,7 @@ ul.breadcrumb {
 }
 
 .t-td:not(.no-p) {
-  padding: 4px 4px 4px 8px;
+  padding: 4px;
 }
 
 .w-30 {
@@ -1380,7 +1382,7 @@ footer {
 .p-head,
 .p-head-n {
   position: relative;
-  margin-bottom: 20px;
+  margin: 5px 0 20px 0;
 }
 
 footer a.footer {
@@ -1399,7 +1401,7 @@ footer a.footer {
   position: absolute;
   width: 20px;
   height: 3px;
-  bottom: -10px;
+  bottom: -8px;
 }
 
 .p-head.one::before {
@@ -1550,11 +1552,11 @@ i.github:hover {
 .dark a.link,
 .dark .nick span,
 .dark .banner,
-.dark .banner h1,
 .dark .nav-tabs > li.active span {
   color: #fff;
 }
 
+.dark .gray,
 .dark .indent,
 .dark a.gray {
   color: #919191;
@@ -1581,7 +1583,7 @@ i.github:hover {
 @media (max-width: 880px) {
   .no-mob,
   aside { display: none; }
-  header { margin-left: 0; }
+  footer { padding: 8px; }
   .no-pc { display: block; }
 
   main,
@@ -1590,8 +1592,8 @@ i.github:hover {
     margin-right: 0;
   }
 
-  .text-oth { width: 46%; }
-  .text-info { width: 40%; }
+  .text-oth { width: 40%; }
+  .text-info { width: 57%; }
   .nav { margin-left: 15px; }
 }
 
@@ -1610,7 +1612,6 @@ i.github:hover {
 
 .icon {
   font-family: 'icons';
-  speak: none;
   font-style: normal;
   font-weight: inherit;
   font-variant: normal;
@@ -1622,21 +1623,10 @@ i.github:hover {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon::before {
-  display: inline-block;
-}
-
-a:hover .icon::before {
-  text-decoration: none;
-}
-
-.icon.red.ban-space {
-  font-size: 48px;
-}
-
-.social {
-  padding-top: 5px;
-}
+.icon::before { display: inline-block; }
+a:hover .icon::before { text-decoration: none; }
+.icon.red.ban-space { font-size: 48px; }
+.social { padding-top: 5px; }
 
 .push .icon {
   font-size: 26px;
@@ -1644,13 +1634,8 @@ a:hover .icon::before {
   color: var(--tertiary);
 }
 
-.push .icon:hover {
-  color: var(--quaternary);
-}
-
-.push.pinterest .icon {
-  margin-right: 0;
-}
+.push .icon:hover { color: var(--quaternary); }
+.push.pinterest .icon { margin-right: 0; }
 
 .icon.size-actual::before { content: "\e058"; }
 .icon.star::before { content: "\e09b"; }
@@ -1703,29 +1688,3 @@ a:hover .icon::before {
 .icon.screen-desktop::before { content: "\e011"; }
 .icon.crop::before { content: "\e024"; }
 .icon.plus::before { content: "\e095"; }
-
-#fixed {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 9999;
-  width: 64px;
-  height: 100%;
-  background: #dcdcdc;
-}
-
-.updown {
-  display: none;
-  min-height: 32px;
-  height: 300px;
-  width: 100%;
-  cursor: pointer;
-  margin: 100% auto;
-}
-
-.updown::before {
-  display: block;
-  content: '';
-  height: 50%;
-  width: 100%;
-}

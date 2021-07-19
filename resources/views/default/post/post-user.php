@@ -11,16 +11,15 @@
                         <?php foreach ($posts as $post) { ?> 
 
                             <div class="post-header small">
-                                <?= user_avatar_img($post['avatar'], 'small', $post['login'], 'ava'); ?>
-                                <span class="indent"></span>
-
-                                <a class="date" href="/u/<?= $post['login']; ?>"><?= $post['login']; ?></a> 
-
-                                <span class="indent"></span>
-                                <?= $post['post_date']; ?>
-
-                                <span class="indent"> &#183; </span> 
-                                <a href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
+                                <a class="gray" href="/u/<?= $post['login']; ?>">
+                                    <?= user_avatar_img($post['avatar'], 'small', $post['login'], 'ava'); ?>
+                                    <span class="indent"></span>
+                                    <?= $post['login']; ?>
+                                </a> 
+                                <span class="indent gray lowercase">
+                                    <?= $post['post_date']; ?>
+                                </span>
+                                <a class="gray indent" href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
                                     <?= $post['space_name']; ?>
                                 </a>
                             </div> 
@@ -30,7 +29,7 @@
                                     <h3 class="title"><?= $post['post_title']; ?></h3>
                                 </a>
                                 
-                                <div class="post-footer date">
+                                <div class="post-footer gray">
                                     <?= votes($uid['id'], $post, 'post'); ?>
                                     
                                     <?php if($post['post_answers_count'] !=0) { ?>

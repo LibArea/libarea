@@ -12,14 +12,15 @@
                         <?php if($comm['comment_is_deleted'] == 0) { ?>
                             <div class="comm-telo_bottom">
                                 <div class="small">
-                                    <?= user_avatar_img($comm['avatar'], 'max', $comm['login'], 'ava'); ?> 
-                              
-                                    <a class="date" href="/u/<?= $comm['login']; ?>"><?= $comm['login']; ?></a> 
-
-                                    <span class="date"><?= $comm['date']; ?></span>
-                              
-                                    <span class="indent"> &#183; </span>
-                                     <a href="/post/<?= $comm['post_id']; ?>/<?= $comm['post_slug']; ?>"><?= $comm['post_title']; ?></a>
+                                    <a class="gray" href="/u/<?= $comm['login']; ?>">
+                                        <?= user_avatar_img($comm['avatar'], 'max', $comm['login'], 'ava'); ?> 
+                                        <span class="indent"></span>
+                                        <?= $comm['login']; ?>
+                                    </a> 
+                                    <span class="gray">
+                                        <?= $comm['date']; ?>
+                                    </span>
+                                    <a class="indent" href="/post/<?= $comm['post_id']; ?>/<?= $comm['post_slug']; ?>"><?= $comm['post_title']; ?></a>
                                 </div>
                                 <div class="comm-telo-body">
                                     <?= $comm['comment_content']; ?> 
