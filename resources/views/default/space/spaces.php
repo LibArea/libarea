@@ -3,6 +3,15 @@
     <main>
         <div class="white-box">
             <div class="inner-padding">
+                <?php if($uid['id'] > 0) { ?>
+                    <?php if($add_space_button === true) { ?>
+                        <a class="right v-ots small" href="/space/add">
+                            <i class="icon plus red"></i> 
+                            <?= lang('To create'); ?>
+                        </a>
+                    <?php } ?> 
+                <?php } ?>
+            
                 <h1><?= $data['h1']; ?></h1>
                 
                 <ul class="nav-tabs">
@@ -16,13 +25,6 @@
                                     <span><?= lang('Signed'); ?></span>
                                 </a>
                             </li>
-                            <?php if($add_space_button === true) { ?>
-                                <li class="right">
-                                    <a class="add-space" href="/space/add">
-                                        <span class="add">+</span> <?= lang('To create'); ?>
-                                    </a>
-                                </li> 
-                            <?php } ?> 
                          <?php } ?>    
                     <?php } else { ?>
                         <li>
@@ -34,13 +36,6 @@
                             <li class="active">
                                 <span><?= lang('Signed'); ?></span>
                             </li>
-                            <?php if($add_space_button === true) { ?>
-                                <li class="right">
-                                    <a class="add-space" href="/space/add">
-                                        <span class="add">+</span> <?= lang('To create'); ?>
-                                    </a>
-                                </li> 
-                            <?php } ?> 
                         <?php } ?>
                     <?php } ?>
                 </ul>

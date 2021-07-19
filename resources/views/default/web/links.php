@@ -4,8 +4,8 @@
         <div class="white-box">
             <div class="inner-padding space-tags">
                 <?php if ($uid['trust_level'] == 5) { ?>
-                    <a class="right" href="/web/add">
-                        <?= lang('Add'); ?>
+                    <a title="<?= lang('Add'); ?>" class="right v-ots" href="/web/add">
+                        <i class="icon plus"></i>
                     </a>
                 <?php } ?>    
                 <h1><?= $data['h1']; ?></h1>

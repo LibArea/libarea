@@ -11,7 +11,7 @@
       <h4 class="p-head three"><?= lang('Other'); ?></h4>
       <a class="footer small" title="<?= lang('All answers'); ?>" href="/answers"><?= lang('Answers-n'); ?></a>
       <a class="footer small" title="<?= lang('All comments'); ?>" href="/comments"><?= lang('Comments-n'); ?></a>
-      <a class="footer small" title="<?= lang('All domains'); ?>" href="/domains"><?= lang('Domains'); ?></a>
+      <a class="footer small" title="<?= lang('All domains'); ?>" href="/web"><?= lang('Domains'); ?></a>
     </div>
     <div class="text-info">
       <h4 class="p-head one"><?= lang('Help'); ?></h4>
