@@ -8,7 +8,7 @@
                 <div>
                     <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'ava-94'); ?>
                 </div>
-                <div class="indent-bid box-100">   
+                <div class="indent-big box-100">   
                     <h1 class="topics">
                         <?= $data['h1']; ?>
                         <?php if($uid['trust_level'] == 5) { ?>
@@ -48,23 +48,22 @@
     
                     <?php foreach ($posts as  $post) { ?>
                        <div class="post-telo white-box">
-                          <div class="post-header small">
-                            <?= user_avatar_img($post['avatar'], 'max', $post['login'], 'ava'); ?> 
-                            <span class="indent"></span> 
-                            <span class="user"> 
-                              <a href="/u/<?= $post['login']; ?>">
-                                <?= $post['login']; ?>
-                              </a> 
-                            </span>
-                            <span class="indent"></span> 
-                            <a href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
-                              <?= $post['space_name']; ?>
-                            </a> 
-                            <span class="indent"></span> 
-                              <span class="date"> 
-                               <?= $post['post_date'] ?>
-                            </span>
-                          </div>
+                            <div class="post-header small">
+                                <a class="gray" href="/u/<?= $post['login']; ?>">
+                                    <?= user_avatar_img($post['avatar'], 'max', $post['login'], 'ava'); ?> 
+                                    <span class="indent"></span>
+                                    <?= $post['login']; ?>
+                                </a> 
+                                                           
+                                <span class="indent"></span> 
+                                <a class="gray" href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
+                                    <?= $post['space_name']; ?>
+                                </a> 
+                                <span class="indent"></span> 
+                                <span class="gray"> 
+                                    <?= $post['post_date'] ?>
+                                </span>
+                            </div>
                           
                           <?php if($post['post_thumb_img']) { ?>
                             <a title="<?= $post['post_title']; ?>" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">          
@@ -103,7 +102,7 @@
                             </a>
                             
                             <?php if($post['post_url_domain']) { ?> 
-                              <a class="indent small indent-bid" href="/domain/<?= $post['post_url_domain']; ?>">
+                              <a class="small indent-big" href="/domain/<?= $post['post_url_domain']; ?>">
                                 <i class="icon link"></i> <?= $post['post_url_domain']; ?>
                               </a> 
                             <?php } ?>

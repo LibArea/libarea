@@ -28,11 +28,11 @@
                                         <?php } ?>
                                     </h2>
                                 </a> 
-                                <span class="green indent-bid">
+                                <span class="green indent-big">
                                     <?= favicon_img($link['link_id'], $link['link_url_domain']); ?>
                                     <?= $link['link_url_domain']; ?>
                                 </span>                                
-                                <div class="gray indent-bid">
+                                <div class="gray indent-big">
                                     <?php if($link['link_content']) { ?>
                                         <?= $link['link_content']; ?>
                                     <?php } else { ?>

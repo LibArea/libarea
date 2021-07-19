@@ -21,11 +21,11 @@
         <input type="text" name="q" id="search" placeholder="Найти..." class="form-search">
       </form>
        
-      <a class="link no-mob" title="<?= lang('Topics'); ?>" href="/topics">
+      <a class="gray no-mob" title="<?= lang('Topics'); ?>" href="/topics">
         <?= lang('Topics'); ?>
       </a> 
-      <span class="indent-bid"></span>
-      <a class="link no-mob" title="<?= lang('Spaces'); ?>" href="/spaces">
+      <span class="indent-big"></span>
+      <a class="gray no-mob" title="<?= lang('Spaces'); ?>" href="/spaces">
         <?= lang('Spaces'); ?>
       </a> 
     </div>
@@ -34,13 +34,13 @@
       <?php if(!$uid['id']) { ?> 
         <?php if(!Lori\Config::get(Lori\Config::PARAM_INVITE)) { ?>
           <div class="nav">
-            <a class="link register" title="<?= lang('Sign up'); ?>" href="/register">
+            <a class="gray register" title="<?= lang('Sign up'); ?>" href="/register">
               <?= lang('Sign up'); ?>
             </a>
           </div>
         <?php } ?>  
         <div class="nav no-pc">
-          <a class="link login" title="<?= lang('Sign in'); ?>" href="/login"><?= lang('Sign in'); ?></a>
+          <a class="gray login" title="<?= lang('Sign in'); ?>" href="/login"><?= lang('Sign in'); ?></a>
         </div> 
       <?php } else { ?> 
         <div class="dropbtn nav">

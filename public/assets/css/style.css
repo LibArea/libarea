@@ -272,15 +272,6 @@ a.add-post:hover {
   color: #1ca1f3;
 }
 
-a.link {
-  color: var(--tertiary);
-  font-size: 14px;
-}
-
-a.link:hover {
-  color: var(--primary);
-}
-
 .banner {
   padding: 11px 15px 15px 15px;
   background: #f3f1ed;
@@ -747,19 +738,10 @@ img.thumb {
 .post-header {
   padding: 15px 15px 0 15px;
   overflow: hidden;
-  color: var(--tertiary);
 }
 
 .post-header img {
   vertical-align: middle;
-}
-
-.post-header a {
-  color: var(--tertiary);
-}
-
-.post-header a:hover {
-  color: #333;
 }
 
 .post-footer {
@@ -818,16 +800,6 @@ img.img-post,
   color: var(--tertiary);
 }
 
-.post-footer a,
-.post-footer-full a {
-  color: var(--tertiary);
-}
-
-.post-footer a:hover,
-.post-footer-full a:hover {
-  color: #333;
-}
-
 .img-post-bl {
   margin: 15px 0 0 0;
 }
@@ -880,13 +852,11 @@ img.img-post,
   color: var(--quaternary);
 }
 
-.indent,
-.indent a {
-  color: var(--tertiary);
+.indent {
   margin: 0 3px;
 }
 
-.indent-bid {
+.indent-big {
   margin: 0 0 0 15px;
 }
 
@@ -966,7 +936,6 @@ img.ava-94 {
 }
 
 .bar-title {
-  color: var(--tertiary);
   text-transform: uppercase;
   margin: 8px 0 0;
 }
@@ -1640,7 +1609,7 @@ i.github:hover {
 }
 
 .dark .indent,
-.dark .indent a {
+.dark a.gray {
   color: #919191;
   margin: 0 3px;
 }

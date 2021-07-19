@@ -21,7 +21,7 @@
                                         Add title...                                    
                                     <?php } ?> 
                                 </h2>
-                                <div class="indent-bid gray">
+                                <div class="indent-big gray">
                                     <?php if($link['link_content']) { ?>
                                         <?= $link['link_content']; ?>
                                     <?php } else { ?>
@@ -29,7 +29,7 @@
                                     <?php } ?> 
                                 </div> 
                                 
-                                <div class="small indent-bid lowercase">
+                                <div class="small indent-big lowercase">
                                     <a class="green" rel="nofollow noreferrer" href="<?= $link['link_url']; ?>">
                                         <?= favicon_img($link['link_id'], $link['link_url_domain']); ?>
                                         <span class="green"><?= $link['link_url']; ?></span>

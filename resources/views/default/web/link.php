@@ -88,7 +88,7 @@
                         </a>
 
                         <?php if($post['post_url_domain']) { ?> 
-                            <a class="indent small indent-bid" href="/domain/<?= $post['post_url_domain']; ?>">
+                            <a class="indent small indent-big" href="/domain/<?= $post['post_url_domain']; ?>">
                                 <i class="icon link"></i> <?= $post['post_url_domain']; ?>
                             </a> 
                         <?php } ?>

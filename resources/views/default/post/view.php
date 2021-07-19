@@ -39,13 +39,13 @@
                                 <?php } ?>
                         </h1>
                         <div class="small lowercase">
-                            <a href="/u/<?= $post['login']; ?>">
+                            <a class="gray" href="/u/<?= $post['login']; ?>">
                                 <?= user_avatar_img($post['avatar'], 'small', $post['login'], 'ava'); ?>
                                 <span class="indent">
                                     <?= $post['login']; ?>
                                 </span> 
                             </a> 
-                            <span class="indent"> 
+                            <span class="indent gray"> 
                                 <?= $post['post_date_lang']; ?>
                                 <?php if($post['modified']) { ?> 
                                     (<?= lang('ed'); ?>) 
@@ -54,7 +54,8 @@
                             <?php if ($uid['id']) { ?>
                                 <?php if($uid['login'] == $post['login']  || $uid['trust_level'] == 5) { ?>
                                     <span class="indent">
-                                        <a href="/post/edit/<?= $post['post_id']; ?>">
+                                    <span class="indent"></span>
+                                        <a class="gray" href="/post/edit/<?= $post['post_id']; ?>">
                                             <i class="icon pencil"></i>  
                                         </a>
                                     </span>
@@ -62,17 +63,17 @@
                                 <?php if($uid['login'] == $post['login']) { ?>    
                                     <?php if($post['post_draft'] == 0) { ?>
                                         <?php if($post['my_post'] == $post['post_id']) { ?>
-                                                <span class="mu_post">+ <?= lang('in-the-profile'); ?></span>
+                                                <span class="mu_post gray">+ <?= lang('in-the-profile'); ?></span>
                                                 <span class="indent"> &#183; </span>
                                         <?php } else { ?> 
-                                            <a class="user-mypost indent" data-opt="1" data-post="<?= $post['post_id']; ?>">
+                                            <a class="user-mypost indent gray" data-opt="1" data-post="<?= $post['post_id']; ?>">
                                                 <span class="mu_post"><?= lang('in-the-profile'); ?></span>
                                                 <span class="indent"> &#183;  </span>
                                             </a>
                                         <?php } ?> 
                                     <?php } ?>    
                                 <?php } ?> 
-                                <span class="add-favorite indent" data-id="<?= $post['post_id']; ?>" data-type="post">
+                                <span class="add-favorite indent gray" data-id="<?= $post['post_id']; ?>" data-type="post">
                                     <?php if ($post['favorite_post']){ ?>
                                         <?= lang('remove-favorites'); ?>
                                     <?php } else { ?>
@@ -83,7 +84,7 @@
                                 <?php if($uid['trust_level'] ==5) { ?>
                                     <span class="indent"> &#183; </span>
                                     <span id="cm_dell" class="cm_add_link indent">
-                                        <a data-type="post" data-id="<?= $post['post_id']; ?>" class="type-action">
+                                        <a data-type="post" data-id="<?= $post['post_id']; ?>" class="type-action gray">
                                             <?php if($post['post_is_deleted'] == 1) { ?>
                                                 <?= lang('Recover'); ?>
                                             <?php } else { ?>
@@ -91,7 +92,7 @@
                                             <?php } ?>
                                         </a>
                                     </span>
-                                    <small> - (<?= $post['post_hits_count']; ?>)</small>
+                                    <small> &#183; <?= $post['post_hits_count']; ?></small>
                                 <?php } ?>
                                 
                             <?php } ?>

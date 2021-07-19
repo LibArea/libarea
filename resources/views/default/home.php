@@ -77,17 +77,17 @@
       
         <div class="post-telo white-box">
           <div class="post-header small">
-            <a href="/u/<?= $post['login']; ?>">
+            <a class="gray" href="/u/<?= $post['login']; ?>">
                 <?= user_avatar_img($post['avatar'], 'small', $post['login'], 'ava'); ?>
                 <span class="indent"></span> 
                 <?= $post['login']; ?>
             </a> 
 
             <span class="indent"></span> 
-            <a href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
+            <a class="gray" href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
               <?= $post['space_name']; ?>
             </a> 
-            <span class="indent">
+            <span class="indent gray">
                <?= $post['post_date'] ?>
             </span>
           </div>
@@ -129,12 +129,12 @@
             </a>
             
             <?php if($post['post_url_domain']) { ?> 
-              <a class="gray small indent-bid" href="/domain/<?= $post['post_url_domain']; ?>">
+              <a class="gray small indent-big" href="/domain/<?= $post['post_url_domain']; ?>">
                 <i class="icon link"></i> <?= $post['post_url_domain']; ?>
               </a> 
             <?php } ?>
             
-            <?= html_topic($post['topic_list'], 'gray small indent-bid'); ?>
+            <?= html_topic($post['topic_list'], 'gray small indent-big'); ?>
 
             <div class="post-details">
               <div class="show_add_<?= $post['post_id']; ?>">
@@ -157,7 +157,7 @@
               <?= votes($uid['id'], $post, 'post'); ?> 
           
               <?php if($post['post_answers_count'] !=0) { ?> 
-                <a class="right" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
+                <a class="right gray" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
                   <?php if($post['post_type'] ==0) { ?>
                      <i class="icon bubbles"></i> 
                      <?= $post['post_answers_count'] + $post['post_comments_count']; ?> 

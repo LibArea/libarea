@@ -37,7 +37,7 @@
                             <?php if($post['post_closed'] == 0) { ?> 
                             <?php if($post['post_is_deleted'] == 0 || $uid['trust_level'] == 5) { ?>
                                 <span id="cm_add_link<?= $answer['answer_id']; ?>" class="cm_add_link indent">
-                                    <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment"><?= lang('Reply'); ?></a>
+                                    <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray"><?= lang('Reply'); ?></a>
                                 </span>
                             <?php } ?>
                             <?php } ?>
@@ -45,14 +45,14 @@
                             
                             <?php if($uid['id'] == $answer['answer_user_id'] || $uid['trust_level'] == 5) { ?>
                                 <span id="answer_edit" class="answer_add_link indent">
-                                    <a class="editansw" href="/answer/edit/<?= $answer['answer_id']; ?>">
+                                    <a class="editansw gray" href="/answer/edit/<?= $answer['answer_id']; ?>">
                                         <?= lang('Edit'); ?>
                                     </a>
                                 </span>
                             <?php } ?>
                 
                             <?php if ($uid['id']) { ?>
-                               <span class="add-favorite indent" data-id="<?= $answer['answer_id']; ?>" data-type="answer">
+                               <span class="add-favorite gray indent" data-id="<?= $answer['answer_id']; ?>" data-type="answer">
                                     <?php if ($answer['favorite_user_id']){ ?>
                                         <?= lang('remove-favorites'); ?>
                                     <?php } else { ?>
@@ -64,7 +64,7 @@
                             <?php if($uid['trust_level'] == 5) { ?>
                                 <span class="indent"></span>
                                 <span id="answer_dell" class="answer_add_link indent">
-                                    <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action">
+                                    <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray">
                                     <?= lang('Remove'); ?>
                                     </a>
                                 </span>

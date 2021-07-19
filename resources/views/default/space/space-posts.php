@@ -91,15 +91,14 @@
             
                 <div class="post-telo white-box">
                     <div class="post-header small">
-                        <?= user_avatar_img($post['avatar'], 'small', $post['login'], 'ava'); ?>
+                        <a class="gray" href="/u/<?= $post['login']; ?>">
+                            <?= user_avatar_img($post['avatar'], 'small', $post['login'], 'ava'); ?>
+                            <span class="indent"></span> 
+                            <?= $post['login']; ?>
+                        </a> 
+                        
                         <span class="indent"></span> 
-                        <span class="user"> 
-                            <a href="/u/<?= $post['login']; ?>">
-                                <?= $post['login']; ?>
-                            </a> 
-                        </span>
-                        <span class="indent"></span> 
-                          <span class="date"> 
+                        <span class="gray"> 
                            <?= $post['post_date'] ?>
                         </span>
                     </div>
@@ -141,12 +140,12 @@
                         </a>
 
                         <?php if($post['post_url_domain']) { ?> 
-                            <a class="indent small indent-bid" href="/domain/<?= $post['post_url_domain']; ?>">
+                            <a class="indent small indent-big" href="/domain/<?= $post['post_url_domain']; ?>">
                                 <i class="icon link"></i> <?= $post['post_url_domain']; ?>
                             </a> 
                         <?php } ?>
                         
-                        <?= html_topic($post['topic_list'], 'date small indent-bid'); ?>
+                        <?= html_topic($post['topic_list'], 'gray small indent-big'); ?>
                         
                         <div class="post-details">
                             <div class="show_add_<?= $post['post_id']; ?>">
