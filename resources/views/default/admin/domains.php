@@ -3,14 +3,14 @@
     <main class="admin">
         <div class="white-box">
             <div class="inner-padding">
-                <a class="right v-ots" title="<?= lang('Add'); ?>" href="/web/add"><i class="icon plus"></i></a>
+                <a class="right vertical-ind" title="<?= lang('Add'); ?>" href="/web/add"><i class="icon plus"></i></a>
                 <?= breadcrumb('/admin', lang('Admin'), null, null, $data['meta_title']); ?>
 
                 <div class="domains">
                     <?php if (!empty($domains)) { ?>
                   
                         <?php foreach ($domains as $key => $link) { ?>  
-                            <div class="domain-box v-ots">
+                            <div class="domain-box vertical-ind">
                                 <span class="add-favicon right small" data-id="<?= $link['link_id']; ?>">
                                     +фавикон
                                 </span>

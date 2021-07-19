@@ -37,15 +37,14 @@
             
                 <div class="post-telo white-box">
                     <div class="post-header small">
-                        <?= user_avatar_img($post['avatar'], 'small', $post['login'], 'ava'); ?>
+                        <a class="gray" href="/u/<?= $post['login']; ?>">
+                            <?= user_avatar_img($post['avatar'], 'small', $post['login'], 'ava'); ?>
+                            <span class="indent"></span>
+                            <?= $post['login']; ?>
+                        </a> 
+
                         <span class="indent"></span> 
-                        <span class="user"> 
-                            <a href="/u/<?= $post['login']; ?>">
-                                <?= $post['login']; ?>
-                            </a> 
-                        </span>
-                        <span class="indent"></span> 
-                        <a href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
+                        <a class="gray" href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
                             <?= $post['space_name']; ?>
                         </a> 
                         
@@ -70,7 +69,7 @@
                                     <i class="icon pin red"></i>
                                 <?php } ?>
                                 <?php if($post['post_lo'] > 0) { ?> 
-                                    <i class="icon trophy lo"></i>
+                                    <i class="icon trophy red"></i>
                                 <?php } ?>
                                 <?php if($post['post_type'] == 1) { ?> 
                                     <i class="icon question green"></i>
@@ -88,7 +87,7 @@
                         </a>
 
                         <?php if($post['post_url_domain']) { ?> 
-                            <a class="indent small indent-big" href="/domain/<?= $post['post_url_domain']; ?>">
+                            <a class="gray small indent-big" href="/domain/<?= $post['post_url_domain']; ?>">
                                 <i class="icon link"></i> <?= $post['post_url_domain']; ?>
                             </a> 
                         <?php } ?>
@@ -114,7 +113,7 @@
                             <?= votes($uid['id'], $post, 'post'); ?>
                     
                             <?php if($post['post_answers_count'] !=0) { ?> 
-                                <a class="right" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
+                                <a class="right gray" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
                                     <?php if($post['post_type'] ==0) { ?>
                                        <i class="icon bubbles"></i> 
                                        <?= $post['post_answers_count'] + $post['post_comments_count']; ?> 

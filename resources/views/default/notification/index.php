@@ -3,7 +3,7 @@
     <main>
         <div class="white-box">
             <div class="inner-padding">
-                <a class="right small button v-ots" href="/notifications/delete"><?= lang('I read'); ?></a>
+                <a class="right small button vertical-ind" href="/notifications/delete"><?= lang('I read'); ?></a>
                 <?= breadcrumb('/', lang('Home'), '/u/' . $uid['login'], lang('Profile'), $data['h1']); ?>
                  
                 <?php if (!empty($list)) { ?>

@@ -122,7 +122,7 @@
                                     <i class="icon pin red"></i>
                                 <?php } ?>
                                 <?php if($post['post_lo'] > 0) { ?> 
-                                    <i class="icon trophy lo"></i>
+                                    <i class="icon trophy red"></i>
                                 <?php } ?>
                                 <?php if($post['post_type'] == 1) { ?> 
                                     <i class="icon question green"></i>
@@ -168,7 +168,7 @@
                             <?= votes($uid['id'], $post, 'post'); ?>
                     
                             <?php if($post['post_answers_count'] !=0) { ?> 
-                                <a class="right" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
+                                <a class="right gray" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
                                     <?php if($post['post_type'] ==0) { ?>
                                        <i class="icon bubbles"></i> 
                                        <?= $post['post_answers_count'] + $post['post_comments_count']; ?> 

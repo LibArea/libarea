@@ -18,7 +18,7 @@
                                 <div class="boxline">
                                     <label class="form-label" for="post_title">URL</label>
                                     <input id="link" class="form-input" type="text" name="post_url" />
-                                    <input id="graburl" readonly="readonly" class="right center v-ots" type="submit_url" name="submit_url" value="<?= lang('To extract'); ?>" />
+                                    <input id="graburl" readonly="readonly" class="right center vertical-ind" type="submit_url" name="submit_url" value="<?= lang('To extract'); ?>" />
                                     <br>
                                 </div>
                             <?php } ?>

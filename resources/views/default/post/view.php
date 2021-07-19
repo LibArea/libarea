@@ -24,7 +24,7 @@
                                     <i class="icon pin red"></i>
                                 <?php } ?>
                                 <?php if($post['post_lo'] > 0) { ?> 
-                                    <i class="icon trophy lo"></i>
+                                    <i class="icon trophy red"></i>
                                 <?php } ?>
                                 <?php if($post['post_tl'] > 0) { ?> 
                                     <span class="trust-level small">tl<?= $post['post_tl']; ?></span>
@@ -109,7 +109,7 @@
                         </div> 
                         <?php if($lo) { ?>
                             <div class="lo-post">
-                                <h3 class="lo">ЛО</h3>
+                                <h3 class="recommend">ЛО</h3>
                                 <span class="right">
                                     <a rel="nofollow" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#comment_<?= $lo['comment_id']; ?>">
                                         <i class="icon arrow-down"></i>

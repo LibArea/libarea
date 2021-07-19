@@ -93,11 +93,11 @@
                         <li class="comment_subtree" id="comment_<?= $comment['comment_id']; ?>">
                             <div class="line-qa"></div>
                             <div class="comm-telo">
-                                <div class="comm-telo-body">
+                                <div class="small comm-body">
                                     <?= $comment['comment_content'] ?>  
-                                    <span class="qa-comm-info"> 
-                                        —  <a class="qa-user" href="/u/<?= $comment['login']; ?>"><?= $comment['login']; ?></a> 
-                                        <span class="lowercase"> 
+                                    <span class="gray"> 
+                                        —  <a class="gray" href="/u/<?= $comment['login']; ?>"><?= $comment['login']; ?></a> 
+                                        <span class="lowercase gray"> 
                                             &nbsp; <?= lang_date($comment['comment_date']); ?>
                                         </span>    
                                         <?php if ($uid['trust_level'] == 5) { ?> 
@@ -109,7 +109,7 @@
                                     <?php if($post['post_closed'] == 0) { ?>
                                     <?php if($post['post_is_deleted'] == 0 || $uid['trust_level'] == 5) { ?>
                                         <span id="cm_add_link<?= $comment['comment_id']; ?>" class="cm_add_link">
-                                            <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment-re bar">
+                                            <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment-re gray">
                                                 <?= lang('Reply'); ?>
                                             </a>
                                         </span>
@@ -119,7 +119,7 @@
                                     
                                     <?php if($uid['id'] == $comment['comment_user_id'] || $uid['trust_level'] == 5) { ?>
                                         <span id="comment_edit" class="cm_add_link">
-                                            <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm bar">
+                                            <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray">
                                                 <?= lang('Edit'); ?>
                                             </a>
                                         </span>
@@ -127,7 +127,7 @@
 
                                     <?php if($uid['trust_level'] == 5) { ?>
                                         <span id="comment_dell" class="cm_add_link">
-                                            <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action">
+                                            <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray">
                                                 <?= lang('Remove'); ?>
                                             </a>
                                         </span>
@@ -150,14 +150,18 @@
 <?php } else { ?>
     <?php if($post['post_closed'] != 1) { ?>
         <div class="no-content">
-            <i class="icon info"></i> <?= lang('no-answer'); ?>... 
+            <i class="icon info"></i> 
+            <?= lang('no-answer'); ?>... 
         </div>
     <?php } ?>
 <?php } ?>
 
 <?php if(!empty($otvet)) { ?>
 
-    <div class="no-content"><?= lang('you-question-no'); ?>...</div>
+    <div class="no-content">
+        <i class="icon info"></i>
+        <?= lang('you-question-no'); ?>...
+    </div>
 
 <?php } else { ?>
     <?php if ($uid['id']) { ?>

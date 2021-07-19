@@ -5,7 +5,7 @@
             <div class="inner-padding">
                 <?php if($uid['id'] > 0) { ?>
                     <?php if($add_space_button === true) { ?>
-                        <a class="right v-ots small" href="/space/add">
+                        <a class="right vertical-ind small" href="/space/add">
                             <i class="icon plus red"></i> 
                             <?= lang('To create'); ?>
                         </a>

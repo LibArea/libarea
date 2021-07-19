@@ -19,7 +19,7 @@
                                     <a class="search-title" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug'] ?>"><?= $post['post_title']; ?></a> 
                                     <span class="no-md"><?= $post['post_content']; ?>...</span>
                             </div>
-                            <div class="v-ots"></div>
+                            <div class="vertical-ind"></div>
                         <?php } ?> 
                     <?php } else { ?>
                         <?php foreach ($result as  $post) { ?>
@@ -32,7 +32,7 @@
                                     <a class="search-title" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug'] ?>"><?= $post['_title']; ?></a><br>
                                     <span class="no-md"><?= $post['_content']; ?></span>
                                </div>
-                           <div class="v-ots"></div>
+                           <div class="vertical-ind"></div>
                         <?php } ?> 
                     <?php } ?>
 

@@ -181,20 +181,23 @@
                         <h2><?= $onepost['post_title']; ?></h2>
                     </a>
 
-                    <div class="lowercase"> 
-                        <?= user_avatar_img($user['avatar'], 'small', $user['login'], 'ava'); ?>
-                        <a class="date" href="/u/<?= $user['login']; ?>"><?= $user['login']; ?></a> 
+                    <div class="small lowercase"> 
+                        <a class="gray" href="/u/<?= $user['login']; ?>">
+                            <?= user_avatar_img($user['avatar'], 'small', $user['login'], 'ava'); ?>
+                            <span class="indent"></span> 
+                            <?= $user['login']; ?>
+                        </a> 
                         
                         <span class="indent"> &#183; </span> 
-                        <span class="date"><?= $onepost['post_date'] ?></span>
+                        <span class="gray"><?= $onepost['post_date'] ?></span>
                         
                         <span class="indent"> &#183; </span> 
-                        <a class="date"  href="/s/<?= $onepost['space_slug']; ?>" title="<?= $onepost['space_name']; ?>">
+                        <a class="gray"  href="/s/<?= $onepost['space_slug']; ?>" title="<?= $onepost['space_name']; ?>">
                             <?= $onepost['space_name']; ?>
                         </a> 
                         
                         <?php if($onepost['post_answers_count'] !=0) { ?> 
-                            <a class="date right" href="/post/<?= $onepost['post_id']; ?>/<?= $onepost['post_slug']; ?>">
+                            <a class="gray right" href="/post/<?= $onepost['post_id']; ?>/<?= $onepost['post_slug']; ?>">
                                 <i class="icon bubbles"></i> <?= $onepost['post_answers_count']; ?>  
                             </a>
                         <?php } ?>

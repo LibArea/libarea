@@ -111,7 +111,7 @@
                   <i class="icon pin red"></i>
                 <?php } ?>
                 <?php if($post['post_lo'] > 0) { ?> 
-                  <i class="icon trophy lo"></i>
+                  <i class="icon trophy red"></i>
                 <?php } ?>
                 <?php if($post['post_type'] == 1) { ?> 
                   <i class="icon question green"></i>
