@@ -1,0 +1,114 @@
+@charset "UTF-8";
+.show-html-hint {
+  border-bottom: 1px dashed #4481ff;
+  cursor: help;
+}
+
+.html-hint .html-hint-content {
+  border-radius: 5px;
+  background-color: #fff;
+  box-sizing: border-box;
+  padding: .5em .75em .7em;
+  font: normal normal 12px -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+  box-shadow: 0 0 0 1px #ccc, 0 0 10px #ccc;
+}
+
+.html-hint .html-hint-content * {
+  max-width: 100%;
+}
+
+.html-hint .html-hint-content img {
+  margin-top: .25em;
+  margin-bottom: .5em;
+}
+
+.html-hint .html-hint-pin {
+  border-top: 8px solid #000;
+  border-bottom: 0 solid #000;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  margin-left: -6px;
+  bottom: -8px;
+}
+
+.html-hint .html-hint-pin:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  border-top: 8px solid #fff;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 0 solid #fff;
+  margin-left: -6px;
+}
+
+.html-hint.position-bottom .html-hint-pin {
+  border-top-width: 0;
+  border-bottom-width: 8px;
+  top: -8px;
+  bottom: auto;
+}
+
+.html-hint.position-bottom .html-hint-pin:after {
+  border-top-width: 0;
+  border-bottom-width: 8px;
+  top: 0;
+  bottom: auto;
+}
+
+.html-hint.close-button .html-hint-content {
+  padding-right: 30px;
+}
+
+.html-hint.close-button .html-hint-close {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: #f22;
+  right: 4px;
+  top: 4px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.html-hint.close-button .html-hint-close:hover {
+  background-color: #f00;
+}
+
+.html-hint.close-button .html-hint-close:after {
+  content: '×';
+  font-size: 24px;
+  text-align: center;
+  line-height: 20px;
+  position: absolute;
+  color: #ffffff;
+  width: 100%;
+}
+
+.html-hint.dark .html-hint-content {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  font-size: 11px;
+  box-shadow: none;
+}
+
+.html-hint.dark .html-hint-pin {
+  border-top-color: rgba(0, 0, 0, 0.8);
+  border-bottom-color: rgba(0, 0, 0, 0.8);
+}
+
+.html-hint.dark .html-hint-pin:after {
+  display: none;
+}
+
+.html-hint.animate {
+  transition: transform .3s ease, opacity .3s ease;
+}
+
+.html-hint-link {
+  display: none;
+}
+
+.html-hint-link * {
+  max-width: 100%;
+}

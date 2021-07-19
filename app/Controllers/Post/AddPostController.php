@@ -73,14 +73,15 @@ class AddPostController extends \MainController
             $post_url_domain    = $parse['host']; 
             $link_url           = $parse['scheme'] . '://' . $parse['host'];
 
-            // Мы должны добавить домен, который появился в системе
-            // Далее мы можем менять ему статус, запрещать и т.д.
-            $link = WebModel::getLinkOne($post_url_domain);
+            // Если домена нет, то добавим его
+            $link = WebModel::getLinkOne($post_url_domain, $uid['id']);
             if (!$link) {
-                // Запишем минимальные данный для дальнешей работы
+                // Запишем минимальные данный
                 $data = [
                     'link_url'          => $link_url,
                     'link_url_domain'   => $post_url_domain,
+                    'link_title'        => $post_title,
+                    'link_content'      => $post_content,
                     'link_user_id'      => $uid['id'],
                     'link_type'         => 0,
                     'link_status'       => 200,

@@ -58,9 +58,9 @@ Route::endGroup();
 Route::before('Authorization@noAuth')->getGroup();
     Route::getType('post');
         Route::get('/status/action')->controller('ActionController@deletingAndRestoring');
-        Route::get('/post/grabtitle')->controller('PostController@grabMeta');
+        Route::get('/post/grabtitle')->controller('Post\AddPostController@grabMeta');
         Route::get('/comment/editform')->controller('Comment\EditCommentController@edit');
-        Route::get('/post/addpostprof')->controller('PostController@addPostProfile');
+        Route::get('/post/addpostprof')->controller('Post\PostController@addPostProfile');
         Route::get('/favorite/post')->controller('FavoriteController', ['post']);
         Route::get('/favorite/answer')->controller('FavoriteController', ['answer']);
         Route::get('/space/focus')->controller('Space\SpaceController@focus');
@@ -86,7 +86,7 @@ Route::before('Authorization@noAuth')->getGroup();
             Route::endProtect(); // Завершение защиты
     Route::endType();  // Завершение getType('post')
 
-    Route::get('/post/img/{id}/remove')->controller('PostController@imgPostRemove')->where(['id' => '[0-9]+']);
+    Route::get('/post/img/{id}/remove')->controller('Post\EditPostController@imgPostRemove')->where(['id' => '[0-9]+']);
 
     // Форма добавления, общий случай: post | topic | space | web
     Route::get('/{controller}/add')->controller('<controller>\Add<controller>Controller@add');
@@ -161,7 +161,7 @@ Route::getType('post');
 Route::endType();
 
 // Другие страницы без авторизии
-Route::get('/post/{id}')->controller('PostController')->where(['id' => '[0-9-]+']);
+Route::get('/post/{id}')->controller('Post\PostController')->where(['id' => '[0-9-]+']);
 Route::get('/post/{id}/{slug}')->controller('Post\PostController')->where(['id' => '[0-9-]+', 'slug' => '[A-Za-z0-9-_]+']);
 
 Route::get('/info')->controller('InfoController');

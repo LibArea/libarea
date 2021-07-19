@@ -184,9 +184,11 @@ h1.topics {
 
 code {
   color: #9b4f5e;
-  background: #f5f2f0;
-  padding: 1px 4px;
-  font-size: 1.1em;
+  border: 1px solid #ddd;
+  background: #f6f6f6;
+  padding: 3px;
+  border-radius: 3px;
+  font-size: 14px;
 }
 
 pre code {

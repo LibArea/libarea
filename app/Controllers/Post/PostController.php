@@ -101,7 +101,6 @@ class PostController extends \MainController
             $content_img  = Config::get(Config::PARAM_URL) . '/uploads/posts/cover/' . $post['post_content_img'];
         } 
        
-        // title, description
         $desc  = mb_strcut(strip_tags($post['post_content']), 0, 180);
         $meta_desc = $desc . ' — ' . $post['space_name'];
         $meta_title = strip_tags($post['post_title']) . ' — ' . strip_tags($post['space_name']) .' | '. Config::get(Config::PARAM_NAME);
@@ -110,11 +109,13 @@ class PostController extends \MainController
         Request::getResources()->addBottomScript('/assets/js/shares.js');
         Request::getResources()->addBottomScript('/assets/js/jquery.magnific-popup.min.js');
         
+        Request::getResources()->addBottomStyles('/assets/css/hint.css');
+        Request::getResources()->addBottomScript('/assets/js/hint.js');
+  
         if ($post['post_is_deleted'] == 1) {
             \Request::getHead()->addMeta('robots', 'noindex');
         }
         
-        // + для Q&A другая разметка (в планах)
         $sheet = 'article';
         
         if ($post['post_related']) {

@@ -142,7 +142,7 @@ $(function(){
         }).done(function(data) {
             let review = JSON.parse(data);
             document.getElementById('title').value = review.title
-            document.getElementById('wmd-input').value = review.description
+            document.getElementById('md-redactor').value = review.description
         });
     });
     // Edit comment

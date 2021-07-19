@@ -6,9 +6,7 @@
  
     <main>
         <article class="post-full">
-
             <?php if($post['post_is_deleted'] == 0 || $uid['trust_level'] == 5) { ?>
-       
                 <div class="white-box telo-detail-post<?php if($post['post_is_deleted'] == 1) { ?> dell<?php } ?>">
 
                     <div class="post-body">
@@ -146,7 +144,7 @@
                         <div class="related"> 
                         <h3 class="style small"><?= lang('Topics'); ?>:</h3>
                             <?php foreach ($topics as $topic) { ?>
-                                <a class="tags" href="/topic/<?= $topic['topic_slug']; ?>">
+                                <a data-hint="<?= $topic['topic_description']; ?>" class="tags" href="/topic/<?= $topic['topic_slug']; ?>">
                                     <?= $topic['topic_title']; ?>
                                 </a>
                             <?php } ?>
@@ -187,7 +185,6 @@
                             <?php } ?>
                         <?php } ?>
                     </div>
-                   
                 </div>
 
             <?php } else { ?>
@@ -275,6 +272,9 @@ $(document).ready(function() {
       src: '/uploads/posts/cover/<?= $post['post_content_img']; ?>'
     },
     type: 'image'
+  });
+  document.getElementsByClassName('tags').hint({
+    pin: true
   });
 });
 </script>  
