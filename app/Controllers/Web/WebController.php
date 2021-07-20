@@ -43,11 +43,15 @@ class WebController extends \MainController
     {
         $domain     = \Request::get('domain');
         $uid        = Base::getUid();
- 
+        $page       = \Request::getInt('page'); 
+        $page       = $page == 0 ? 1 : $page;
+        
         $link      = WebModel::getLinkOne($domain, $uid['id']);
         Base::PageError404($link);
         
-        $post       = WebModel::listPostsByDomain($domain, $uid['id']);        
+        $limit      = 2;
+        $pagesCount = WebModel::getLinksAllCount($domain, $uid['id']); 
+        $post       = WebModel::listPostsByDomain($page, $limit, $domain, $uid['id']);        
             
         $result = Array();
         foreach ($post as $ind => $row) {
@@ -69,7 +73,9 @@ class WebController extends \MainController
             'canonical'     => Config::get(Config::PARAM_URL) . '/domain/' . $domain,
             'sheet'         => 'domain',
             'meta_title'    => $meta_title,
-            'meta_desc'     => $meta_desc, 
+            'meta_desc'     => $meta_desc,
+            'pagesCount'    => ceil($pagesCount / $limit),
+            'pNum'          => $page,
         ];
         
         return view(PR_VIEW_DIR . '/web/link', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'domains' => $domains, 'link' => $link]);

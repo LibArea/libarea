@@ -29,7 +29,6 @@
                                 <div class="box_h"><?= lang('format-cover-post'); ?>.</div>
                             </div>
                         </div>  
-                        
                         <div class="boxline">
                             <?php include TEMPLATE_DIR . '/post/editor.php'; ?>
                         </div>

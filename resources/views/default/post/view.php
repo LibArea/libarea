@@ -274,7 +274,7 @@ $(document).ready(function() {
     type: 'image'
   });
   document.getElementsByClassName('tags').hint({
-    pin: true
+    pin: true, animate: true
   });
 });
 </script>  

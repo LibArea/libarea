@@ -8,7 +8,7 @@
   border-radius: 5px;
   background-color: #fff;
   box-sizing: border-box;
-  padding: .5em .75em .7em;
+  padding: 0.5em 0.75em 0.7em;
   font: normal normal 12px -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
   box-shadow: 0 0 0 1px #ccc, 0 0 10px #ccc;
 }
@@ -18,8 +18,8 @@
 }
 
 .html-hint .html-hint-content img {
-  margin-top: .25em;
-  margin-bottom: .5em;
+  margin-top: 0.25em;
+  margin-bottom: 0.5em;
 }
 
 .html-hint .html-hint-pin {
@@ -101,8 +101,13 @@
   display: none;
 }
 
+.dark .html-hint .html-hint-content {
+  background-color: #282828;
+  box-shadow: 0 0 0 1px #666, 0 0 10px #666;
+}
+
 .html-hint.animate {
-  transition: transform .3s ease, opacity .3s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .html-hint-link {

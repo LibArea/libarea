@@ -143,7 +143,7 @@ class AnswerController extends \MainController
             'meta_desc'     => 'Ответы  учасника сообщества ' . $login .' '. Config::get(Config::PARAM_HOME_TITLE),
         ];
         
-        return view(PR_VIEW_DIR . '/answer/user-answer', ['data' => $data, 'uid' => $uid, 'answers' => $result]);
+        return view(PR_VIEW_DIR . '/answer/answer-user', ['data' => $data, 'uid' => $uid, 'answers' => $result]);
     }
 
     // Помещаем комментарий в закладки

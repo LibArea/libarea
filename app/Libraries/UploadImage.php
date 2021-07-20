@@ -142,13 +142,13 @@ class UploadImage
     }
     
     // Обложка поста
-    public static function cover_post($cover, $post)
+    public static function cover_post($cover, $post, $redirect)
     {   
         // Проверка ширину
         $width_h  = getimagesize($cover['tmp_name'][0]);
         if ($width_h['0'] < 500) {
             $valid = false;
-            Base::addMsg('Ширина меньше 600 пикселей', 'error');
+            Base::addMsg('Ширина меньше 500 пикселей', 'error');
             redirect($redirect);
         }
 

@@ -141,7 +141,7 @@ class CommentController extends \MainController
             'meta_desc'     => lang('Comments-n') . ' ' . $login .' '. Config::get(Config::PARAM_HOME_TITLE),
         ];
         
-        return view(PR_VIEW_DIR . '/comment/user-comment', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
+        return view(PR_VIEW_DIR . '/comment/comment-user', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
     }
 
 }

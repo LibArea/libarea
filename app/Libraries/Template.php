@@ -229,18 +229,20 @@ function pagination($pNum, $pagesCount, $sheet, $other)
     }
 
     $other = empty($other) ? '' : $other;
-
+    $first = empty($other) ? '/' : $other;
+    
     if ($sheet == 'all' || $sheet == 'top' ) {
-        $page = $other . '/' . $sheet;
+        $page  = $other . '/' . $sheet;
+        $first = $other . '/' . $sheet;
     } else {
         $page = $other . '';
     }
-
+    
     $html = '<div class="pagination">';
     
     if ($pNum != 1) {  
         if (($pNum - 1) == 1) { 
-             $html .= '<a class="link" href="'. $page .'"> << '.lang('Page').' '. ($pNum - 1) .'</a>';
+             $html .= '<a class="link" href="'. $first .'"> << '.lang('Page').' '. ($pNum - 1) .'</a>';
         } else {
              $html .= '<a class="link" href="'. $page .'/page/'.($pNum - 1).'"> << '. lang('Page') .' '. ($pNum - 1) .'</a>';
         }

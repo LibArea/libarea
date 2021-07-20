@@ -46,18 +46,58 @@ class WebModel extends \MainModel
     }
     
     // Данные по url
-    public static function listPostsByDomain($url, $uid)
+    public static function listPostsByDomain($page, $limit, $url, $user_id)
     {
-        $q = XD::select('*')->from(['posts']);
-        $query = $q->leftJoin(['users'])->on(['id'], '=', ['post_user_id'])
-                ->leftJoin(['space'])->on(['space_id'], '=', ['post_space_id'])
-                ->leftJoin(['votes_post'])->on(['votes_post_item_id'], '=', ['post_id'])
-                ->and(['votes_post_user_id'], '=', $uid)
-                ->where(['post_is_deleted'], '=', 0)
-                ->and(['post_url_domain'], '=', $url)
-                ->orderBy(['post_id'])->desc();
+        $start  = ($page-1) * $limit;
+        $sql = "SELECT 
+                    post_id,
+                    post_title,
+                    post_slug,
+                    post_type,
+                    post_translation,
+                    post_draft,
+                    post_space_id,
+                    post_date,
+                    post_published,
+                    post_user_id,
+                    post_votes,
+                    post_answers_count,
+                    post_comments_count,
+                    post_content,
+                    post_content_img,
+                    post_thumb_img,
+                    post_merged_id,
+                    post_closed,
+                    post_tl,
+                    post_lo,
+                    post_top,
+                    post_url_domain,
+                    post_is_deleted,
+                    space_id, 
+                    space_name, 
+                    space_slug, 
+                    id,
+                    login,
+                    avatar,
+                    votes_post_item_id, 
+                    votes_post_user_id
+                        FROM posts  
+                        LEFT JOIN users ON id = post_user_id
+                        LEFT JOIN space ON space_id = post_space_id
+                        LEFT JOIN votes_post ON votes_post_item_id = post_id
+                        AND votes_post_user_id = :user_id
+                        WHERE post_is_deleted = 0 AND post_url_domain = :url
+                        ORDER BY post_id DESC LIMIT $start, $limit";
 
-        return $query->getSelect();
+       return DB::run($sql, ['user_id' => $user_id, 'url' => $url])->fetchAll(PDO::FETCH_ASSOC);  
+    }
+    
+    public static function getlistPostsByDomainCount($url, $user_id)
+    {
+        $sql = "SELECT post_id, link_is_deleted, post_url_domain FROM posts 
+                    WHERE post_is_deleted = 0 AND post_url_domain = :url";
+
+        return DB::run($sql, ['url' => $url])->rowCount(); 
     }
     
     // Данные по id

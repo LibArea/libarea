@@ -1,5 +1,5 @@
 .my_space {
-  background: #e7672e;
+  background-color: #e7672e;
   width: 5px;
   height: 5px;
   position: absolute;
@@ -39,7 +39,7 @@ h1.space a {
 .restricted {
   font-size: 14px;
   padding: 5px 10px;
-  background: #f1f1f1;
+  background-color: #f1f1f1;
   text-align: center;
   display: block;
   color: #666;
@@ -47,7 +47,7 @@ h1.space a {
 
 .no-space,
 .yes-space {
-  background: #f1f1f1;
+  background-color: #f1f1f1;
   color: #666;
   font-size: 14px;
   border-radius: 20px;
@@ -56,7 +56,7 @@ h1.space a {
 }
 
 .yes-space {
-  background: #f4d85d;
+  background-color: #f4d85d;
   color: #333;
 }
 
@@ -175,7 +175,7 @@ h1.space a {
   margin-top: 30px;
   padding-bottom: 13px;
   width: 70%;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.65), transparent);
+  background-color: linear-gradient(to right, rgba(0, 0, 0, 0.65), transparent);
 }
 
 .space-text-sb p {
@@ -183,7 +183,7 @@ h1.space a {
 }
 
 .space-no-user {
-  background: #f0f0df;
+  background-color: #f0f0df;
   color: #666;
   font-size: 13px;
   margin-bottom: 20px;
@@ -235,7 +235,7 @@ h1.space a {
 }
 
 a.add-space-post {
-  background: #1ca1f3;
+  background-color: #1ca1f3;
   border: 1px solid #1ca1f3;
   padding: 5px 14px 5px 22px;
   color: #fff;
@@ -244,7 +244,7 @@ a.add-space-post {
 }
 
 a.add-space-post:hover {
-  background: #fff;
+  background-color: #fff;
   color: #1ca1f3;
 }
 

@@ -1,58 +1,38 @@
 <?php
-// https://phphleb.ru/ru/v1/types/
+// https://phphleb.ru/ru/v1/groups/
 
+Route::prefix('/admin');
 Route::before('Authorization@admin')->getGroup();
+    Route::get('/')->controller('AdminController');
+
     Route::getType('post');
-        Route::get('/admin/space/ban')->controller('AdminController@delSpace');
-        Route::get('/admin/ban')->controller('AdminController@banUser');
-        Route::get('/admin/favicon/add')->controller('Web\WebController@favicon');
-        Route::get('/admin/word/del')->controller('AdminController@deleteWord');
-        Route::get('/admin/audit/status')->controller('AdminController@status');
+        Route::get('/space/ban')->controller('AdminController@delSpace');
+        Route::get('/ban')->controller('AdminController@banUser');
+        Route::get('/favicon/add')->controller('Web\WebController@favicon');
+        Route::get('/word/del')->controller('AdminController@deleteWord');
+        Route::get('/audit/status')->controller('AdminController@status');
         
         Route::getProtect();
-            Route::get('/admin/badge/user/add')->controller('AdminController@addBadgeUser');
-            Route::get('/admin/badge/add')->controller('AdminController@badgeAdd');
-            Route::get('/admin/word/add')->controller('AdminController@wordAdd');
-            Route::get('/admin/user/edit/{id}')->controller('AdminController@userEdit')->where(['id' => '[0-9]+']);
-            Route::get('/admin/domain/edit/{id}')->controller('AdminController@domainEdit')->where(['id' => '[0-9]+']);
-            Route::get('/admin/badge/edit/{id}')->controller('AdminController@badgeEdit')->where(['id' => '[0-9]+']);
+            Route::get('/badge/user/add')->controller('AdminController@addBadgeUser');
+            Route::get('/badge/add')->controller('AdminController@badgeAdd');
+            Route::get('/word/add')->controller('AdminController@wordAdd');
+            Route::get('/user/edit/{id}')->controller('AdminController@userEdit')->where(['id' => '[0-9]+']);
+            Route::get('/domain/edit/{id}')->controller('AdminController@domainEdit')->where(['id' => '[0-9]+']);
+            Route::get('/badge/edit/{id}')->controller('AdminController@badgeEdit')->where(['id' => '[0-9]+']);
         Route::endProtect();
     Route::endType();
   
-    Route::get('/admin')->controller('AdminController', ['all']);
-    Route::get('/admin/all/page/{page?}')->controller('AdminController', ['all'])->where(['page' => '[0-9]+']);
-    Route::get('/admin/ban')->controller('AdminController', ['ban']);
-    Route::get('/admin/ban/page/{page?}')->controller('AdminController', ['ban'])->where(['page' => '[0-9]+']);
-    Route::get('/admin/user/{id}/edit')->controller('AdminController@userEditPage')->where(['id' => '[0-9]+']);
-    Route::get('/admin/logip/{ip}')->controller('AdminController@logsIp')->where(['ip' => '[0-9].+']);
-    
-    Route::get('/admin/words')->controller('AdminController@words');
-    Route::get('/admin/wordadd')->controller('AdminController@wordsAddForm');
-    
-    Route::get('/admin/audit')->controller('AdminController@audit', ['all']);
-    Route::get('/admin/audit/approved')->controller('AdminController@audit', ['approved']);
+    Route::get('/{method}')->controller('AdminController@<method>', ['all']);
+    Route::get('/{method}/ban')->controller('AdminController@<method>', ['ban']);
 
-    Route::get('/admin/topics')->controller('AdminController@topics');
-    Route::get('/admin/topics/page/{page?}')->controller('AdminController@topics')->where(['page' => '[0-9]+']);
-
-    Route::get('/admin/spaces')->controller('AdminController@spaces');
-    Route::get('/admin/spaces/page/{page?}')->controller('AdminController@spaces')->where(['page' => '[0-9]+']);
- 
-    Route::get('/admin/comments')->controller('AdminController@comments');
-    Route::get('/admin/comments/page/{page?}')->controller('AdminController@comments')->where(['page' => '[0-9]+']);
-    
-    Route::get('/admin/answers')->controller('AdminController@answers');
-    Route::get('/admin/answers/page/{page?}')->controller('AdminController@answers')->where(['page' => '[0-9]+']);
-    
-    Route::get('/admin/invitations')->controller('AdminController@invitations');
-    
-    Route::get('/admin/domains')->controller('AdminController@domains');
-    Route::get('/admin/domains/page/{page?}')->controller('AdminController@domains')->where(['page' => '[0-9]+']);
-
-    Route::get('/admin/badges')->controller('AdminController@badges');
-    Route::get('/admin/badge/add')->controller('AdminController@addBadgeForm');
-    Route::get('/admin/badge/user/add/{id}')->controller('AdminController@addBadgeUserForm')->where(['id' => '[0-9]+']);
-    Route::get('/admin/badge/{id}/edit')->controller('AdminController@editBadgeForm')->where(['id' => '[0-9]+']);
+    Route::get('/users/page/{page?}')->controller('AdminController@users', ['all'])->where(['page' => '[0-9]+']);
+    Route::get('/user/{id}/edit')->controller('AdminController@userEditPage')->where(['id' => '[0-9]+']);
+    Route::get('/logip/{ip}')->controller('AdminController@logsIp')->where(['ip' => '[0-9].+']);
+    Route::get('/words/add')->controller('AdminController@wordsAddForm');
+    Route::get('/audit/approved')->controller('AdminController@audit', ['approved']);
+    Route::get('/badge/add')->controller('AdminController@addBadgeForm');
+    Route::get('/badge/user/add/{id}')->controller('AdminController@addBadgeUserForm')->where(['id' => '[0-9]+']);
+    Route::get('/badge/{id}/edit')->controller('AdminController@editBadgeForm')->where(['id' => '[0-9]+']);
 Route::endGroup();
 
 Route::before('Authorization@noAuth')->getGroup();
@@ -71,6 +51,7 @@ Route::before('Authorization@noAuth')->getGroup();
         Route::get('/votes/{type}')->controller('VotesController')->where(['type' => '[a-z]+']); 
         
             Route::getProtect(); // Начало защиты
+                Route::get('/invitation/create')->controller('UserController@invitationCreate');
                 Route::get('/messages/send')->controller('MessagesController@send');
                 Route::get('/space/logo/edit')->controller('Space\EditSpaceController@logoEdit');
                 Route::get('/users/setting/edit')->controller('UserController@settingEdit');
@@ -79,7 +60,7 @@ Route::before('Authorization@noAuth')->getGroup();
                 Route::get('/users/setting/edit')->controller('UserController@settingEdit');
                 Route::get('/users/setting/avatar/edit')->controller('UserController@settingAvatarEdit');
                 Route::get('/users/setting/security/edit')->controller('UserController@settingSecurityEdit');
-                // post | comment | answer| topic | space | invitation
+                // post | comment | answer| topic | space
                 Route::get('/{controller}/create')->controller('<controller>\Add<controller>Controller');
                 // post | comment | answer| topic |space
                 Route::get('/{controller}/edit')->controller('<controller>\Edit<controller>Controller');
@@ -104,24 +85,19 @@ Route::before('Authorization@noAuth')->getGroup();
 
     Route::get('/logout')->controller('AuthController@logout');
 
-	// Личные сообщения 
     Route::get('/u/{login}/messages')->controller('MessagesController')->where(['login' => '[A-Za-z0-9]+']);   
-
     Route::get('/messages/read/{id}')->controller('MessagesController@dialog')->where(['id' => '[0-9]+']); 
     Route::get('/u/{login}/mess')->controller('MessagesController@profilMessages')->where(['login' => '[A-Za-z0-9]+']); 
 
-	// Уведомления 
 	Route::get('/u/{login}/notifications')->controller('NotificationsController')->where(['login' => '[A-Za-z0-9]+']); 
     Route::get('/notifications/read/{id}')->controller('NotificationsController@read')->where(['id' => '[0-9]+']);  
     Route::get('/notifications/delete')->controller('NotificationsController@remove');  
     
     Route::get('/update/count')->controller('Topic\EditTopicController@updateQuantity'); 
     
-    // Избранное и черновики
     Route::get('/u/{login}/favorite')->controller('UserController@userFavorites')->where(['login' => '[A-Za-z0-9]+']);
     Route::get('/u/{login}/drafts')->controller('UserController@userDrafts')->where(['login' => '[A-Za-z0-9]+']);
 
-	//Изменяем Логотип пространство
     Route::get('/space/logo/{slug}/edit')->controller('Space\EditSpaceController@logo')->where(['slug' => '[A-Za-z0-9_]+']);  
     Route::get('/space/{slug}/delete/cover')->controller('Space\EditSpaceController@coverRemove')->where(['slug' => '[A-Za-z0-9_]+']);
     Route::get('/space/my')->controller('Space\SpaceController@spaseUser');
@@ -199,6 +175,7 @@ Route::get('/topic/{slug}/page/{page?}')->controller('Topic\TopicController@topi
 Route::get('/web')->controller('Web\WebController');
 Route::get('/web/page/{page?}')->controller('Web\WebController')->where(['page' => '[0-9]+']);
 Route::get('/domain/{domain}')->controller('Web\WebController@domainPostList')->where(['domain' => '[A-Za-z0-9-.]+']);
+Route::get('/domain/{domain}/page/{page?}')->controller('Web\WebController@domainPostList')->where(['domain' => '[A-Za-z0-9-.]+', 'page' => '[0-9]+']);
 
 Route::get('/')->controller('HomeController', ['feed']);
 Route::get('/page/{page?}')->controller('HomeController', ['feed'])->where(['page' => '[0-9]+']);

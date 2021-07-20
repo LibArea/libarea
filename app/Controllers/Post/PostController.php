@@ -150,8 +150,11 @@ class PostController extends \MainController
         
         $result = Array();
         foreach ($posts_user as $ind => $row) {
-            $row['post_date']   = lang_date($row['post_date']);
-            $result[$ind]       = $row;
+            $text                           = explode("\n", $row['post_content']);
+            $row['post_content_preview']    = Content::text($text[0], 'line');
+            $row['lang_num_answers']        = word_form($row['post_answers_count'], lang('Answer'), lang('Answers-m'), lang('Answers'));
+            $row['post_date']               = lang_date($row['post_date']);
+            $result[$ind]                   = $row;
         }
 
         $h1 = lang('Posts') . ' ' . $login;

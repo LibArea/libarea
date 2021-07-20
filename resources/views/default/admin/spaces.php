@@ -24,7 +24,7 @@
                                         <?= $sp['space_id']; ?>
                                     </span>  
                                     <span class="t-td width-30 center">
-                                        <?= spase_logo_img($sp['space_img'], 'max', $sp['space_slug'], 'ava-94'); ?>
+                                        <?= spase_logo_img($sp['space_img'], 'max', $sp['space_slug'], 'ava-64'); ?>
                                     </span>
                                     <span class="t-td">
                                         <a title="<?= $sp['space_name']; ?>" href="/s/<?= $sp['space_slug']; ?>">

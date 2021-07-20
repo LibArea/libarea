@@ -146,7 +146,7 @@ class SpaceController extends \MainController
             'meta_desc'     => $space['space_description'] .$num. $s_title .' '. Config::get(Config::PARAM_HOME_TITLE),
         ];
 
-        return view(PR_VIEW_DIR . '/space/space-posts', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'space_info' => $space, 'space_signed' => $space_signed]);
+        return view(PR_VIEW_DIR . '/space/space', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'space_info' => $space, 'space_signed' => $space_signed]);
     }
 
     // Форма изменения пространства

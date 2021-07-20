@@ -5,21 +5,21 @@
             <div class="inner-padding">
                  <?= breadcrumb('/', lang('Home'), '/u/' .$uid['login'], lang('Profile'), $data['h1']); ?>
                  
-                 <?php if($uid['trust_level'] > 1) { ?>
+                 <?php if ($uid['trust_level'] > 1) { ?>
                  
                     <form method="post" action="/invitation/create">
                     <?php csrf_field(); ?>
 
                         <div class="boxline">
-                            <input id="link" class="add-email" type="email" name="email">
-                            <input id="graburl" type="submit" name="submit" value="Создать">
-                            <br>
+                            <input id="link" class="form-input" type="email" name="email">
+                            <input class="button right" type="submit" name="submit" value="<?= lang('To create'); ?>">
+                            <div class="box_h"><?= lang('Enter'); ?> e-mail</div>
                         </div>
-                         Осталось приглашений <?= 5 - $uid['invitation_available']; ?> 
+                         <?= lang('Invitations left'); ?> <?= 5 - $uid['invitation_available']; ?> 
 
                     </form>
                      
-                    <h3>Приглашенные</h3>
+                    <h3><?= lang('Invited guests'); ?></h3>
                      
                     <?php if (!empty($result)) { ?> 
 
@@ -28,20 +28,20 @@
                                 <div class="comm-header">
                                     <?= user_avatar_img($inv['avatar'], 'small', $inv['login'], 'ava'); ?>
                                     <a href="<?= $inv['login']; ?>"><?= $inv['login']; ?></a>
-                                    - зарегистрировался
+                                    - <?= lang('registered'); ?>
                                 </div>
                                 
                                     <?php if($uid['trust_level'] == 5) { ?>
-                                        Была использована ссылка для: <?= $inv['invitation_email']; ?> <br>
+                                        <?= lang('The link was used to'); ?>: <?= $inv['invitation_email']; ?> <br>
                                         <code> 
                                             <?= Lori\Config::get(Lori\Config::PARAM_URL); ?>/register/invite/ <?= $inv['invitation_code']; ?> 
                                         </code>
                                     <?php } ?>
                                     
-                                <small>Ссылка была использована</small>
+                                <small><?= lang('Link has been used'); ?></small>
                             <?php } else { ?>
                             
-                                Для   (<?= $inv['invitation_email']; ?>) можно отправить эту ссылку: <br>
+                                <?= lang('For'); ?>   (<?= $inv['invitation_email']; ?>) <?= lang('can send this link'); ?>: <br>
                             
                                 <code> 
                                     <?= Lori\Config::get(Lori\Config::PARAM_URL); ?>/register/invite/ <?= $inv['invitation_code']; ?>
@@ -53,11 +53,11 @@
                         <?php } ?> 
                         
                     <?php } else { ?>
-                        Пока нет приглашений
+                        <?= lang('No invitations'); ?>
                     <?php } ?>
                 
                 <?php } else { ?>
-                    Ваш уровень доверия пока не позволяет использовать инвайты.
+                    <?= lang('limit_tl_invitation'); ?>.
                 <?php } ?>
             </div>
         </div>

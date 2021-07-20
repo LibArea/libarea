@@ -16,14 +16,29 @@ use Lori\Base;
 
 class AdminController extends \MainController
 {
-	public function index($sheet)
+	public function index()
 	{
-
+        $uid    = Base::getUid();
+      
+        $size = disk_total_space(HLEB_GLOBAL_DIRECTORY);
+        $bytes = number_format($size / 1048576, 2) . ' MB';
+      
+        $data = [
+            'meta_title'    => lang('Admin'),
+            'sheet'         => 'admin',
+            'bytes'         => $bytes,
+        ]; 
+        
+        return view(PR_VIEW_DIR . '/admin/index', ['data' => $data, 'uid' => $uid]);
+	}
+    
+	public function users($sheet)
+	{
         $uid    = Base::getUid();
         $page   = \Request::getInt('page'); 
         $page   = $page == 0 ? 1 : $page;
 
-        $limit = 55;
+        $limit = 50;
         $pagesCount = AdminModel::getUsersListForAdminCount($sheet);
         $user_all   = AdminModel::getUsersListForAdmin($page, $limit, $sheet);
 
@@ -36,17 +51,22 @@ class AdminController extends \MainController
             $result[$ind]       = $row;
         } 
         
+        $title = lang('Users');
+        if ($sheet == 'ban') {
+            $title = lang('Banned');
+        }
+        
         $data = [
             'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
             'users'         => $result,
-            'meta_title'    => lang('Admin'),
+            'meta_title'    => $title,
             'sheet'         => $sheet,
         ]; 
 
         Request::getResources()->addBottomScript('/assets/js/admin.js'); 
         
-        return view(PR_VIEW_DIR . '/admin/index', ['data' => $data, 'uid' => $uid, 'alluser' => $result]);
+        return view(PR_VIEW_DIR . '/admin/user/users', ['data' => $data, 'uid' => $uid, 'alluser' => $result]);
 	}
     
     // Повторы IP
@@ -85,7 +105,7 @@ class AdminController extends \MainController
     }
     
     // Удалёные комментарии
-    public function comments()
+    public function comments($sheet)
     {
         $uid    = Base::getUid();
         $page   = \Request::getInt('page'); 
@@ -115,7 +135,7 @@ class AdminController extends \MainController
     }
      
     // Удалёные ответы
-    public function answers()
+    public function answers($sheet)
     {
         $uid    = Base::getUid();
         $page   = \Request::getInt('page'); 
@@ -145,7 +165,7 @@ class AdminController extends \MainController
     }
      
     // Показываем дерево приглашенных
-    public function invitations()
+    public function invitations($sheet)
     {
         $uid    = Base::getUid();
         $invite = AdminModel::getInvitations();
@@ -166,7 +186,7 @@ class AdminController extends \MainController
     }
     
     // Пространства
-    public function spaces()
+    public function spaces($sheet)
     {
         $uid    = Base::getUid();
         $page   = \Request::getInt('page'); 
@@ -199,7 +219,7 @@ class AdminController extends \MainController
     }
     
     // Все награды
-    public function Badges()
+    public function badges($sheet)
     {
         $uid    = Base::getUid();
         $badges = AdminModel::getBadgesAll();
@@ -432,7 +452,7 @@ class AdminController extends \MainController
     }
     
     // Страница стоп-слов
-    public function words()
+    public function words($sheet)
     {
         $uid    = Base::getUid();
         $pg     = \Request::getInt('page'); 
@@ -452,7 +472,7 @@ class AdminController extends \MainController
     }
     
     // Все пространства
-    public function topics() 
+    public function topics($sheet) 
     {
         $uid    = Base::getUid();
         $page   = \Request::getInt('page'); 

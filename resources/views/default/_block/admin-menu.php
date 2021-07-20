@@ -5,7 +5,10 @@
                 <a <?php if ($uid['uri'] == '/admin') { ?> class="active"<?php } ?> title="<?= lang('Aadmin'); ?>" href="/admin">
                     ~ <?= lang('Admin'); ?>
                 </a>
-                <a <?php if ($uid['uri'] == '/admin/audit') { ?> class="active"<?php } ?> title="<?= lang('Audit'); ?>" href="/admin/audit">
+                <a <?php if ($uid['uri'] == '/admin/users' || $uid['uri'] == '/admin/users/ban') { ?> class="active"<?php } ?> title="<?= lang('Users'); ?>" href="/admin/users">
+                    ~ <?= lang('Users'); ?>
+                </a>
+                <a <?php if ($uid['uri'] == '/admin/audit' || $uid['uri'] == '/admin/audit/approved') { ?> class="active"<?php } ?> title="<?= lang('Audit'); ?>" href="/admin/audit">
                     ~ <?= lang('Audit'); ?>
                 </a>
                 <a <?php if ($uid['uri'] == '/admin/spaces') { ?> class="active"<?php } ?> title="<?= lang('Spaces'); ?>" href="/admin/spaces">

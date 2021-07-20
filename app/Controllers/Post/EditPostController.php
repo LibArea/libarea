@@ -92,7 +92,7 @@ class EditPostController extends \MainController
         $cover          = $_FILES['images'];
         $check_cover    = $_FILES['images']['name'][0];
         if($check_cover) {
-           $post_img = UploadImage::cover_post($cover, $post);
+           $post_img = UploadImage::cover_post($cover, $post, $redirect);
         } 
         
         $post_img = empty($post_img) ? $post['post_content_img'] : $post_img;

@@ -21,7 +21,7 @@
                                         <?= $topic['topic_id']; ?>
                                     </span>  
                                     <span class="t-td width-30 center">
-                                        <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'ava-94'); ?>
+                                        <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'ava-64'); ?>
                                     </span>                            
                                     <span class="t-td">
                                         <a rel="nofollow noreferrer" href="/topic/<?= $topic['topic_slug']; ?>">
