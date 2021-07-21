@@ -138,7 +138,7 @@ class PostController extends \MainController
     }
 
     // Посты участника
-    public function userPosts($sheet)
+    public function posts($sheet)
     {
         $uid    = Base::getUid();
         $login  = \Request::get('login');

@@ -40,8 +40,8 @@ class WebController extends \MainController
         return view(PR_VIEW_DIR . '/web/links', ['data' => $data, 'uid' => $uid, 'links' => $links]);
     }
     
-    // Выборка по домену
-    public function domainPostList($sheet) 
+    // Посты по домену
+    public function posts($sheet) 
     {
         $domain     = \Request::get('domain');
         $uid        = Base::getUid();

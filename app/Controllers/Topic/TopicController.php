@@ -52,8 +52,8 @@ class TopicController extends \MainController
         return view(PR_VIEW_DIR . '/topic/topics', ['data' => $data, 'uid' => $uid, 'topics' => $result, 'news' => $news]);
     }
     
-    // Страница темы (посты)
-    public function topic($sheet)
+    // Посты по теме
+    public function posts($sheet)
     {
         $uid    = Base::getUid();
         $page   = \Request::getInt('page'); 

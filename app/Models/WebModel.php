@@ -31,6 +31,13 @@ class WebModel extends \MainModel
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);  
     }
     
+    public static function getLinksAllCount()
+    {
+        $sql = "SELECT link_id, link_is_deleted FROM links WHERE link_is_deleted = 0";
+
+        return DB::run($sql)->rowCount(); 
+    }
+    
     // 5 популярных доменов
     public static function getLinksTop($domain)
     {
