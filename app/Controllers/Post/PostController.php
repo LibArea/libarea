@@ -171,7 +171,7 @@ class PostController extends \MainController
             'sheet'         => 'user-post',
             'h1'            => lang('Posts') . ' ' . $login,
             'meta_title'    => lang('Posts') . ' ' . $login . ' | ' . Config::get(Config::PARAM_NAME),
-            'meta_desc'     => $meta_desc,
+            'meta_desc'     => $meta_desc . ' '. Config::get(Config::PARAM_HOME_TITLE),
         ]; 
         
         return view(PR_VIEW_DIR . '/post/post-user', ['data' => $data, 'uid' => $uid, 'posts' => $result]);

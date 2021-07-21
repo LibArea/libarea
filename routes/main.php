@@ -133,7 +133,7 @@ Route::getType('post');
     // Пост в ленте и полный пост
     Route::get('/post/shown')->controller('Post\PostController@shownPost');
     // Вызов формы комментария и поиск
-    Route::get('/comments/addform')->controller('Comment\CommentController@addForm');
+    Route::get('/comments/addform')->controller('Comment\AddCommentController@add');
 Route::endType();
 
 // Другие страницы без авторизии

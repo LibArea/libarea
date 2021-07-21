@@ -41,7 +41,7 @@ class FeedModel extends \MainModel
                 $trust_level = "AND post_tl = 0";
             } 
             
-            $display = "AND post_is_deleted = 0 AND space_feed = 0 $trust_level";
+            $display = "AND post_is_deleted = 0 $trust_level";
         } 
 
         // По времени или по количеству ответов 
