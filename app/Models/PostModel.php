@@ -107,23 +107,6 @@ class PostModel extends \MainModel
         return $query->getSelect();
     }
     
-    // Страница постов участника
-    public static function userPosts($login, $uid)
-    {
-        $q = XD::select('*')->from(['posts']);
-        $query = $q->leftJoin(['users'])->on(['id'], '=', ['post_user_id'])
-                ->leftJoin(['space'])->on(['space_id'], '=', ['post_space_id'])
-                ->leftJoin(['votes_post'])->on(['votes_post_item_id'], '=', ['post_id'])
-                ->and(['votes_post_user_id'], '=', $uid)
-                ->where(['login'], '=', $login)
-                ->and(['post_is_deleted'], '=', 0)
-                ->and(['post_draft'], '=', 0)
-                ->and(['post_tl'], '=', 0)
-                ->orderBy(['post_date'])->desc();
-  
-        return $query->getSelect();
-    } 
-    
     // Пересчитываем количество
     // $type (comments / answers / hits)
     public static function updateCount($post_id, $type) 

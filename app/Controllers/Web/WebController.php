@@ -4,6 +4,7 @@ namespace App\Controllers\Web;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Models\WebModel;
+use App\Models\FeedModel;
 use Lori\Content;
 use Lori\Config;
 use Lori\Base;
@@ -19,9 +20,10 @@ class WebController extends \MainController
         $limit  = 25;
         $pagesCount = WebModel::getLinksAllCount();  
         $links      = WebModel::getLinksAll($page, $limit, $uid['id']);
-        
+
         $num = ' | ';
-        if ($page > 1) { 
+        if ($page > 1) 
+        { 
             $num = sprintf(lang('page-number'), $page) . ' | ';
         } 
         
@@ -39,22 +41,24 @@ class WebController extends \MainController
     }
     
     // Выборка по домену
-    public function domainPostList() 
+    public function domainPostList($sheet) 
     {
         $domain     = \Request::get('domain');
         $uid        = Base::getUid();
         $page       = \Request::getInt('page'); 
         $page       = $page == 0 ? 1 : $page;
         
-        $link      = WebModel::getLinkOne($domain, $uid['id']);
+        $link       = WebModel::getLinkOne($domain, $uid['id']);
         Base::PageError404($link);
         
-        $limit      = 2;
-        $pagesCount = WebModel::getLinksAllCount($domain, $uid['id']); 
-        $post       = WebModel::listPostsByDomain($page, $limit, $domain, $uid['id']);        
+        $limit      = 25;
+        $data       = ['link_url_domain' => $link['link_url_domain']];
+        $posts      = FeedModel::feed($page, $limit, $uid, $sheet, 'link', $data);
+        $pagesCount = FeedModel::feedCount($uid, 'link', $data);
             
         $result = Array();
-        foreach ($post as $ind => $row) {
+        foreach ($posts as $ind => $row) 
+        {
             $text = explode("\n", $row['post_content']);
             $row['post_content_preview']    = Content::text($text[0], 'line');
             $row['post_date']               = lang_date($row['post_date']);
@@ -94,20 +98,23 @@ class WebController extends \MainController
         $link_id    = \Request::getPostInt('id');
         $uid        = Base::getUid();
 
-        if ($uid['trust_level'] != 5) {
+        if ($uid['trust_level'] != 5) 
+        {
             return false;
         }
         
         $link = WebModel::getLinkId($link_id);
         
-        if (!$link) {
+        if (!$link) 
+        {
             return false;
         }
         
         $puth = HLEB_PUBLIC_DIR. '/uploads/favicons/' . $link["link_id"] . '.png';
         $dirF = HLEB_PUBLIC_DIR. '/uploads/favicons/';
 
-        if (!file_exists($puth)) {  
+        if (!file_exists($puth)) 
+        {  
             $urls = self::getFavicon($link['link_url_domain']);       
             copy($urls, $puth); 
         } 

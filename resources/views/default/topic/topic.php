@@ -46,7 +46,6 @@
        <?php include TEMPLATE_DIR . '/_block/post.php'; ?>
        
        <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/topic/' . $topic['topic_slug']); ?>
-                
 
     </main>
     <aside>

@@ -9,12 +9,10 @@
             <?= $post['login']; ?>
         </a> 
         
-        <?php if (!empty($post['space_name'])) { ?>
-            <span class="indent"></span> 
-            <a class="gray" href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
-              <?= $post['space_name']; ?>
-            </a> 
-        <?php } ?>
+        <span class="indent"></span> 
+        <a class="gray" href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
+          <?= $post['space_name']; ?>
+        </a> 
         
         <span class="indent gray">
            <?= $post['post_date'] ?>
@@ -63,9 +61,7 @@
           </a> 
         <?php } ?>
         
-        <?php if (!empty($post['topic_list'])) { ?>
-            <?= html_topic($post['topic_list'], 'gray small indent-big'); ?>
-        <?php } ?>
+        <?= html_topic($post['topic_list'], 'gray small indent-big'); ?>
 
         <div class="post-details">
           <div class="show_add_<?= $post['post_id']; ?>">

@@ -4,6 +4,7 @@ namespace App\Controllers\Post;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\UserModel;
 use App\Models\PostModel;
+use App\Models\FeedModel;
 use App\Models\AnswerModel;
 use App\Models\CommentModel;
 use App\Models\FavoriteModel;
@@ -137,19 +138,24 @@ class PostController extends \MainController
     }
 
     // Посты участника
-    public function userPosts()
+    public function userPosts($sheet)
     {
-        $uid        = Base::getUid();
-        $login      = \Request::get('login');
+        $uid    = Base::getUid();
+        $login  = \Request::get('login');
+        $page   = \Request::getInt('page'); 
+        $page   = $page == 0 ? 1 : $page;
         
         // Если нет такого пользователя 
         $user   = UserModel::getUser($login, 'slug');
         Base::PageError404($user);
         
-        $posts_user  = PostModel::userPosts($login, $uid['id']); 
-        
+        $limit = 100; 
+        $data       = ['post_user_id' => $user['id']];
+        $posts      = FeedModel::feed($page, $limit, $uid, $sheet, 'user', $data);
+        $pagesCount = FeedModel::feedCount($uid, 'user', $data);
+  
         $result = Array();
-        foreach ($posts_user as $ind => $row) {
+        foreach ($posts as $ind => $row) {
             $text                           = explode("\n", $row['post_content']);
             $row['post_content_preview']    = Content::text($text[0], 'line');
             $row['lang_num_answers']        = word_form($row['post_answers_count'], lang('Answer'), lang('Answers-m'), lang('Answers'));

@@ -78,105 +78,6 @@ class TopicModel extends \MainModel
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
     
-    // Информация список постов
-    public static function getPostsListByTopic($page, $limit, $topic_id, $uid)
-    {
-        // Условия: удаленный пост, запрещенный к показу в ленте
-        // И ограниченный по TL
-        if ($uid['trust_level'] != 5) {  
-            if ($uid['id'] == 0) { 
-                $tl = 'AND post_tl = 0';
-            } else {
-                $tl = 'AND post_tl <= '.$uid['trust_level'].'';
-            }
-            $display = 'AND post_is_deleted = 0 '.$tl.'';
-        } else {
-            $display = ''; 
-        }
-        
-        $start  = ($page-1) * $limit; 
-        $sql = "SELECT
-                    post_id,
-                    post_title,
-                    post_slug,
-                    post_type,
-                    post_translation,
-                    post_draft,
-                    post_space_id,
-                    post_date,
-                    post_published,
-                    post_user_id,
-                    post_votes,
-                    post_answers_count,
-                    post_comments_count,
-                    post_content,
-                    post_content_img,
-                    post_thumb_img,
-                    post_merged_id,
-                    post_closed,
-                    post_tl,
-                    post_lo,
-                    post_top,
-                    post_url_domain,
-                    post_is_deleted,
-                    topic_id,
-                    topic_title,
-                    topic_slug,
-                    relation_post_id, 
-                    relation_topic_id,
-                    id, 
-                    login, 
-                    avatar,
-                    space_id, 
-                    space_slug, 
-                    space_name,
-                    votes_post_item_id, 
-                    votes_post_user_id
-                        FROM topic AS t
-                        INNER JOIN topic_post_relation ON relation_topic_id = topic_id
-                        INNER JOIN posts ON post_id = relation_post_id
-                        INNER JOIN space ON space_id = post_space_id
-                        INNER JOIN users ON id = post_user_id
-                        LEFT JOIN votes_post ON votes_post_item_id = post_id 
-                        AND votes_post_user_id = ".$uid['id']."
-                        WHERE topic_id  = $topic_id
-                        $display ORDER BY post_top DESC, post_date DESC LIMIT $start, $limit ";
-
-        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
-    }
-
-    // Информация список постов
-    public static function getPostsListByTopicCount($topic_id, $uid)
-    {
-        // Условия: удаленный пост, запрещенный к показу в ленте
-        // И ограниченный по TL
-        if ($uid['trust_level'] != 5) {  
-            if ($uid['id'] == 0) { 
-                $tl = 'AND post_tl = 0';
-            } else {
-                $tl = 'AND post_tl <= '.$uid['trust_level'].'';
-            }
-            $display = 'AND post_is_deleted = 0 '.$tl.'';
-        } else {
-            $display = ''; 
-        }
-        
-        $sql = "SELECT 
-                    post_id,
-                    post_tl,
-                    post_is_deleted,
-                    topic_id,                    
-                    relation_post_id, 
-                    relation_topic_id
-                        FROM topic
-                        INNER JOIN topic_post_relation ON relation_topic_id = topic_id
-                        INNER JOIN posts ON post_id = relation_post_id
-                        WHERE topic_id  = :topic_id
-                        $display ";
-
-        return DB::run($sql, ['topic_id' =>$topic_id])->rowCount(); 
-    }
-
     // Есть пост в темах
     public static function getRelationId($id)
     {
@@ -185,12 +86,14 @@ class TopicModel extends \MainModel
         return DB::run($sql, ['id' => $id])->fetch(PDO::FETCH_ASSOC); 
     }
     
- 
     public static function addPostTopics($rows, $post_id)
     {
         self::deletePostRelation($post_id);
-        foreach ($rows as $row) {
-            $sql = "INSERT INTO topic_post_relation (relation_topic_id, relation_post_id) VALUES ($row[0], $row[1])";
+        foreach ($rows as $row) 
+        {
+            $sql = "INSERT INTO topic_post_relation (relation_topic_id, relation_post_id) 
+                        VALUES ($row[0], $row[1])";
+                    
             DB::run($sql);
         }
 

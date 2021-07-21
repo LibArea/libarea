@@ -148,7 +148,7 @@ Route::get('/users')->controller('UserController');
 Route::get('/users/page/{page?}')->controller('UserController')->where(['page' => '[0-9]+']);
 Route::get('/u/{login}')->controller('UserController@profile')->where(['login' => '[A-Za-z0-9]+']);
 
-Route::get('/u/{login}/posts')->controller('Post\PostController@userPosts')->where(['login' => '[A-Za-z0-9]+']);
+Route::get('/u/{login}/posts')->controller('Post\PostController@userPosts', ['feed'])->where(['login' => '[A-Za-z0-9]+']);
 Route::get('/u/{login}/answers')->controller('Answer\AnswerController@userAnswers')->where(['login' => '[A-Za-z0-9]+']);
 Route::get('/u/{login}/comments')->controller('Comment\CommentController@userComments')->where(['login' => '[A-Za-z0-9]+']);
 
@@ -168,14 +168,14 @@ Route::get('/moderations')->controller('ActionController@moderation');
 
 Route::get('/topics')->controller('Topic\TopicController')->where(['page' => '[0-9]+']);
 Route::get('/topics/page/{page?}')->controller('Topic\TopicController')->where(['page' => '[0-9]+']);
-Route::get('/topic/{slug}')->controller('Topic\TopicController@topic')->where(['slug' => '[A-Za-z0-9-]+']);
+Route::get('/topic/{slug}')->controller('Topic\TopicController@topic', ['feed'])->where(['slug' => '[A-Za-z0-9-]+']);
 Route::get('/topic/{slug}/info')->controller('Topic\TopicController@info')->where(['slug' => '[A-Za-z0-9-]+']);
-Route::get('/topic/{slug}/page/{page?}')->controller('Topic\TopicController@topic')->where(['slug' => '[A-Za-z0-9-]+', 'page' => '[0-9]+']);
+Route::get('/topic/{slug}/page/{page?}')->controller('Topic\TopicController@topic', ['feed'])->where(['slug' => '[A-Za-z0-9-]+', 'page' => '[0-9]+']);
 
 Route::get('/web')->controller('Web\WebController');
 Route::get('/web/page/{page?}')->controller('Web\WebController')->where(['page' => '[0-9]+']);
-Route::get('/domain/{domain}')->controller('Web\WebController@domainPostList')->where(['domain' => '[A-Za-z0-9-.]+']);
-Route::get('/domain/{domain}/page/{page?}')->controller('Web\WebController@domainPostList')->where(['domain' => '[A-Za-z0-9-.]+', 'page' => '[0-9]+']);
+Route::get('/domain/{domain}')->controller('Web\WebController@domainPostList', ['feed'])->where(['domain' => '[A-Za-z0-9-.]+']);
+Route::get('/domain/{domain}/page/{page?}')->controller('Web\WebController@domainPostList', ['feed'])->where(['domain' => '[A-Za-z0-9-.]+', 'page' => '[0-9]+']);
 
 Route::get('/')->controller('HomeController', ['feed']);
 Route::get('/page/{page?}')->controller('HomeController', ['feed'])->where(['page' => '[0-9]+']);
