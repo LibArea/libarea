@@ -16,6 +16,7 @@
                                     <option value="<?= $badge['badge_id']; ?>"> <?= $badge['badge_title']; ?></option>
                                 <?php } ?>
                             </select>
+                             <input type="hidden" name="user_id" id="post_id" value="<?= $user['id']; ?>">
                         </div>         
                         <input type="submit" class="button" name="submit" value="<?= lang('Add'); ?>" />
                     </form>

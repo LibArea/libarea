@@ -249,13 +249,13 @@ class AdminController extends \MainController
     {
         $uid        = Base::getUid();
         $user_id    = \Request::getInt('id');
-        
+
         if ($user_id > 0) {
             $user   = UserModel::getUser($user_id, 'id');
         } else {
             $user   = null;
         }
-        
+
         $badges = AdminModel::getBadgesAll();
         
         $data = [

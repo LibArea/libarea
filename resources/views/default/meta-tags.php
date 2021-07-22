@@ -32,7 +32,11 @@
 <?php } elseif ($data['sheet'] == 'space') { ?> 
   <meta property="og:type" content="website"/>
   <meta property="og:image" content="<?= $data['img']; ?>"/>
-  <meta property="og:image:type" content="image/jpeg"/>  
+  <meta property="og:image:type" content="image/jpeg"/> 
+<?php } elseif ($data['sheet'] == 'topic') { ?> 
+  <meta property="og:type" content="website"/>
+  <meta property="og:image" content="<?= $data['img']; ?>"/>
+  <meta property="og:image:type" content="image/jpeg"/>
 <?php } elseif ($data['sheet'] == 'feed') { ?> 
   <meta property="og:type" content="website"/>
   <meta property="og:image" content="<?= $data['img']; ?>"/>

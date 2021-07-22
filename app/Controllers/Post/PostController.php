@@ -116,6 +116,9 @@ class PostController extends \MainController
         if ($post['post_is_deleted'] == 1) {
             \Request::getHead()->addMeta('robots', 'noindex');
         }
+
+        Request::getResources()->addBottomScript('/assets/js/prism.js');
+        Request::getResources()->addBottomStyles('/assets/css/prism.css');
         
         $sheet = 'article';
         

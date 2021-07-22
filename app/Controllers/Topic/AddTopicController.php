@@ -48,9 +48,9 @@ class AddTopicController extends \MainController
             'topic_count'       => 0, 
         ];
         
-        TopicModel::add($data);
+        $topic_id = TopicModel::add($data);
         
-        redirect('/admin/topics/');  
+        redirect('/topic/edit/' . $topic_id);  
     }
     
     // Форма добавить topic

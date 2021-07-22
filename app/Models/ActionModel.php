@@ -98,7 +98,7 @@ class ActionModel extends \MainModel
             $sql = "SELECT id, login FROM users WHERE login LIKE :login";
         }
         
-        $result = DB::run($sql, [$field_name => $search."%"]);
+        $result = DB::run($sql, [$field_name => "%".$search."%"]);
         $lists  = $result->fetchall(PDO::FETCH_ASSOC);
     
         $response = array();

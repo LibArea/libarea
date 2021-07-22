@@ -206,8 +206,7 @@ code {
 }
 
 pre code {
-  background-color: #3c464d;
-  color: var(--secondary);
+  background-color: #F0F0F0;
   padding: 2px 14px 2px 10px;
   border-radius: 3px;
   display: inline-block;
@@ -737,7 +736,7 @@ img.img-post,
   max-width: 100%;
 }
 
-.post-body img {
+.post-body .post-img img {
   margin-top: 5px;
 }
 

@@ -60,8 +60,6 @@ class EditAnswerController extends \MainController
 
         Request::getResources()->addBottomStyles('/assets/editor/editormd.css');
         Request::getResources()->addBottomScript('/assets/editor/editormd.js');
-        Request::getResources()->addBottomScript('/assets/editor/lib/marked.min.js');
-        Request::getResources()->addBottomScript('/assets/editor/lib/prettify.min.js');
         Request::getResources()->addBottomScript('/assets/editor/config.js');
         
         $data = [

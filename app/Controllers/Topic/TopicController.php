@@ -83,8 +83,7 @@ class TopicController extends \MainController
         $text = explode("\n", $topic['topic_description']);
         $topic['topic_cropped']    = Content::text($text[0], 'line');
  
-        $limit = 5;  
-        
+        $limit = 25;  
         $data       = ['topic_slug' => $topic['topic_slug']];
         $posts      = FeedModel::feed($page, $limit, $uid, $sheet, 'topic', $data);
         $pagesCount = FeedModel::feedCount($uid, 'topic', $data);
@@ -111,7 +110,8 @@ class TopicController extends \MainController
             'canonical'     => Config::get(Config::PARAM_URL) . '/topic/' . $topic['topic_slug'],
             'sheet'         => 'topic', 
             'meta_title'    => $meta_title .' | '. Config::get(Config::PARAM_NAME),
-            'meta_desc'     => $topic['topic_description'] .'. '. Config::get(Config::PARAM_HOME_TITLE),            
+            'meta_desc'     => $topic['topic_description'] .'. '. Config::get(Config::PARAM_HOME_TITLE),   
+            'img'           => Config::get(Config::PARAM_URL) . '/uploads/topics/' . $topic['topic_img'],     
         ];
 
         return view(PR_VIEW_DIR . '/topic/topic', ['data' => $data, 'uid' => $uid, 'topic' => $topic, 'posts' => $result, 'topic_related' => $topic_related, 'topic_signed' => $topic_signed, 'main_topic' => $main_topic, 'subtopics' => $subtopics]);
