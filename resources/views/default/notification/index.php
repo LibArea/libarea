@@ -14,9 +14,9 @@
                         
                         <?php if($notif['action_type'] == 1) { ?>
                             <?php if($notif['read_flag'] == 0) { ?>
-                                <span class="red"><i class="icon envelope"></i></span>
+                                <i class="light-icon-mail middle red"></i>
                             <?php } else { ?>
-                                <i class="icon envelope"></i>
+                                <i class="light-icon-mail middle"></i>
                             <?php } ?>
                            
                             <a href="/u/<?= $notif['login']; ?>"><?= $notif['login']; ?></a> 
@@ -30,11 +30,11 @@
                          
                         <?php if($notif['action_type'] == 3) { ?>
                             <?= lang('Replied to post'); ?>
-                            <i class="icon action-undo"></i>
+                            <i class="light-icon-book middle"></i>
                         <?php } ?>  
                          
                         <?php if($notif['action_type'] == 10 || $notif['action_type'] == 11 || $notif['action_type'] == 12) { ?>
-                            <i class="icon user"></i> 
+                            <i class="light-icon-user middle"></i>
                             <a href="/u/<?= $notif['login']; ?>">@<?= $notif['login']; ?></a> 
                             <?= lang('appealed to you'); ?>
                             <a class="ntf2 lowercase" href="/notifications/read/<?= $notif['notification_id']; ?>">
@@ -49,7 +49,7 @@
                         <?php } ?> 
                         <?php if($notif['action_type'] == 15) { ?>
                             <a class="ntf2 lowercase" href="/notifications/read/<?= $notif['notification_id']; ?>">
-                                <i class="icon red shield"></i>
+                                <i class="light-icon-activity middle red"></i>
                                 <?= lang('Audit'); ?>
                             </a>
                             |
@@ -64,9 +64,9 @@
                         <span class="lowercase">
                             <?php if($notif['action_type'] == 4) { ?>
                                 <?php if($notif['read_flag'] == 0) { ?>
-                                    <i class="icon bubbles red"></i>
+                                    <i class="light-icon-messages middle red"></i>
                                 <?php } else { ?>
-                                    <i class="icon bubbles"></i>
+                                    <i class="light-icon-messages middle"></i>
                                 <?php } ?>
                                 <a href="/u/<?= $notif['login']; ?>"><?= $notif['login']; ?></a> 
                                     <?= lang('Wrote'); ?>  
@@ -76,7 +76,7 @@
                                 <?= lang('to your answer'); ?> 
                             <?php } ?>
                         </span>
-                            <span class="date"> —  <?= $notif['add_time']; ?></span>
+                            <span class="small gray"> —  <?= $notif['add_time']; ?></span>
                             <?php if($notif['read_flag'] == 0) { ?>&nbsp;<sup class="red">✔</sup><?php } ?>
                         </div>
                     <?php } ?>

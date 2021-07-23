@@ -15,7 +15,7 @@
                             <div class="boxline">
                                 <button type="submit" class="button-primary"><?= lang('Sign in'); ?></button>
                                 <small>
-                                    <span class="menu-lf"><a href="/recover"><?= lang('forgot-password'); ?>?</a></span>
+                                    <span class="menu-lf"><a href="/recover"><?= lang('Forgot your password'); ?>?</a></span>
                                 </small>
                             </div>
                         </div>

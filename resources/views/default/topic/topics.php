@@ -6,7 +6,7 @@
                 <h1><?= $data['h1']; ?>
                     <?php if($uid['trust_level'] == 5) { ?>
                         <a class="right" href="/admin/topics"> 
-                            <i class="icon pencil"></i>          
+                            <i class="light-icon-edit middle"></i>          
                         </a>
                     <?php } ?>
                 </h1>
@@ -34,7 +34,10 @@
                     <?php } ?>
                     </div>
                 <?php } else { ?>
-                    <div class="no-content"><i class="icon info"></i> <?= lang('Topics no'); ?>...</div>
+                    <p class="no-content gray">
+                        <i class="light-icon-info-square middle"></i> 
+                        <span class="middle"><?= lang('Topics no'); ?>...</span>
+                    </p>
                 <?php } ?>
                 
                 <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/topics'); ?>

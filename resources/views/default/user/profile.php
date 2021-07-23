@@ -18,12 +18,12 @@
                 <?php if($uid['login'] != $user['login']) { ?>
                     <?php if($button_pm === true) { ?>            
                         <a class="right pm" href="/u/<?= $user['login']; ?>/mess">
-                            <i class="icon envelope"></i>
+                            <i class="light-icon-mail"></i>
                         </a>
                     <?php } ?>    
                 <?php } else { ?>
                     <a class="right pm"  href="/u/<?= $uid['login']; ?>/setting">
-                        <i class="icon pencil"></i>
+                        <i class="light-icon-edit"></i>
                     </a> 
                 <?php } ?>
             </div>
@@ -104,9 +104,11 @@
         </div>
     
         <div class="profile-about">
-            <i class="icon calendar"></i>
-            <span class="ts"><?= $user['created_at']; ?></span>  —  
-            <?= $data['trust_level']['trust_name']; ?> <sup class="date">TL<?= $user['trust_level']; ?></sup>
+            <i class="light-icon-calendar middle"></i>
+            <span class="middle">
+                <span class="ts"><?= $user['created_at']; ?></span>  —  
+                <?= $data['trust_level']['trust_name']; ?> <sup class="date">TL<?= $user['trust_level']; ?></sup>
+            </span>
         </div>
 
         <h2><?= lang('Contacts'); ?></h2>
@@ -198,7 +200,9 @@
                         
                         <?php if($onepost['post_answers_count'] !=0) { ?> 
                             <a class="gray right" href="/post/<?= $onepost['post_id']; ?>/<?= $onepost['post_slug']; ?>">
-                                <i class="icon bubbles"></i> <?= $onepost['post_answers_count']; ?>  
+                                <span class="indent"></span> 
+                                <i class="light-icon-messages middle"></i> 
+                                <?= $onepost['post_answers_count']; ?>  
                             </a>
                         <?php } ?>
                     </div>
@@ -215,7 +219,7 @@
                 <h3 class="badge"><?= lang('Badges'); ?></h3>
                 <div class="profile-badge">
                     <?php if($user['id'] < 50) { ?>
-                        <i title="<?= lang('Joined in the early days'); ?>" class="icon badge"></i>
+                        <i title="<?= lang('Joined in the early days'); ?>" class="light-icon-award middle green"></i> 
                     <?php } ?>
                     <?php foreach ($data['badges'] as $badge) { ?>
                         <?= $badge['badge_icon']; ?>
@@ -228,16 +232,16 @@
                 <div class="inner-padding">
                     <h3 class="badge"><?= lang('Admin'); ?></h3>
                     <div class="menu-info">
-                        <a href="/admin/user/<?= $user['id']; ?>/edit">
-                            <i class="icon settings red"></i>
-                            <?= lang('Edit'); ?>
+                        <a class="gray" href="/admin/user/<?= $user['id']; ?>/edit">
+                            <i class="light-icon-settings middle"></i>
+                            <span class="middle"><?= lang('Edit'); ?></span>
                         </a>
-                        <a href="/admin/badge/user/add/<?= $user['id']; ?>">
-                            <i class="icon badge"></i>
-                            <?= lang('Reward the user'); ?>
+                        <a class="gray" href="/admin/badge/user/add/<?= $user['id']; ?>">
+                            <i class="light-icon-award middle"></i>
+                            <span class="middle"><?= lang('Reward the user'); ?></span>
                         </a>
                         <hr>
-                        id<?= $user['id']; ?> | <?= $user['email']; ?>
+                        <span class="gray">id<?= $user['id']; ?> | <?= $user['email']; ?></span>
                     </div>
                 </div>
             </div>            

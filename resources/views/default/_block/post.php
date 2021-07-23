@@ -29,19 +29,19 @@
         <a href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
           <h2 class="title"><?= $post['post_title']; ?>
             <?php if ($post['post_is_deleted'] == 1) { ?> 
-              <i class="icon trash red"></i>
+              <i class="light-icon-trash red"></i>
             <?php } ?>
             <?php if($post['post_closed'] == 1) { ?> 
-              <i class="icon lock"></i>
+              <i class="light-icon-lock"></i>
             <?php } ?>
             <?php if($post['post_top'] == 1) { ?> 
-              <i class="icon pin red"></i>
+              <i class="light-icon-arrow-narrow-up red"></i>
             <?php } ?>
             <?php if($post['post_lo'] > 0) { ?> 
-              <i class="icon trophy red"></i>
+              <i class="light-icon-checks red"></i>
             <?php } ?>
             <?php if($post['post_type'] == 1) { ?> 
-              <i class="icon question green"></i>
+              <i class="light-icon-language green"></i>
             <?php } ?>
             <?php if($post['post_translation'] == 1) { ?> 
               <span class="translation small lowercase"><?= lang('Translation'); ?></span>
@@ -50,14 +50,14 @@
               <span class="trust-level small">tl<?= $post['post_tl']; ?></span>
             <?php } ?>
             <?php if($post['post_merged_id'] > 0) { ?> 
-              <i class="icon graph red"></i>
+              <i class="light-icon-arrow-forward-up red"></i>
             <?php } ?>
           </h2>
         </a>
         
         <?php if($post['post_url_domain']) { ?> 
           <a class="gray small indent-big" href="/domain/<?= $post['post_url_domain']; ?>">
-            <i class="icon link"></i> <?= $post['post_url_domain']; ?>
+            <i class="light-icon-link middle"></i> <?= $post['post_url_domain']; ?>
           </a> 
         <?php } ?>
         
@@ -86,10 +86,10 @@
           <?php if($post['post_answers_count'] !=0) { ?> 
             <a class="right gray" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
               <?php if($post['post_type'] ==0) { ?>
-                 <i class="icon bubbles"></i> 
+                 <i class="light-icon-messages middle"></i>
                  <?= $post['post_answers_count'] + $post['post_comments_count']; ?> 
-              <?php } else { ?>    
-                 <i class="icon bubbles"></i> 
+              <?php } else { ?>  
+                 <i class="light-icon-message middle"></i>              
                  <?= $post['post_answers_count']; ?>  <?= $post['lang_num_answers']; ?>   
               <?php } ?>
             </a>
@@ -101,5 +101,5 @@
     <?php } ?>
 
 <?php } else { ?>
-    <div class="no-content"><?= lang('no-post'); ?>...</div>
+    <div class="no-content"><?= lang('There are no posts'); ?>...</div>
 <?php } ?>

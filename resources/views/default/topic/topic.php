@@ -13,7 +13,7 @@
                         <?= $data['h1']; ?>
                         <?php if($uid['trust_level'] == 5) { ?>
                             <a class="right" href="/topic/edit/<?= $topic['topic_id']; ?>"> 
-                                <i class="icon pencil"></i>          
+                                <i class="light-icon-edit middle"></i>          
                             </a>
                         <?php } ?>
                     </h1>
@@ -33,7 +33,7 @@
                             <?php } ?>   
                         <?php } ?> 
                         <a title="<?= lang('Info'); ?>" class="small lowercase right gray" href="/topic/<?= $topic['topic_slug']; ?>/info">
-                            <i class="icon book-open"></i>
+                            <i class="light-icon-info-square"></i>
                         </a>
                     </div>    
                 </div>

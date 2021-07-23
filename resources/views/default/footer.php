@@ -31,7 +31,7 @@
           <path d="M8.5 17c0 1 -1.356 3 -1.832 3c-1.429 0 -2.698 -1.667 -3.333 -3c-.635 -1.667 -.476 -5.833 1.428 -11.5c1.388 -1.015 2.782 -1.34 4.237 -1.5l1 2.5" />
         </svg></a>
       <a rel="nofollow noopener" class="github" title="GitHub" href="https://github.com/LoriUp/loriup">
-        <i class="icon github"></i>
+        <i class="light-icon-brand-github"></i>
       </a>
        
       <div class="small">
@@ -41,7 +41,7 @@
     </div>
   </div>
 </footer>
-
+ 
 <script async src="/assets/js/common.js"></script>
 <script src="/assets/js/sweetalert2.min.js"></script> 
 <link rel="stylesheet" href="/assets/css/sweetalert2.min.css">

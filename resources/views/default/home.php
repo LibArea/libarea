@@ -3,7 +3,7 @@
 <?php if(!$uid['id']) { ?>
   <div class="banner">
     <div class="wrap-header">
-      <h1><?= Lori\Config::get(Lori\Config::PARAM_BANNER_TITLE); ?></h1>
+      <h1 class="red"><?= Lori\Config::get(Lori\Config::PARAM_BANNER_TITLE); ?></h1>
       <span><?= Lori\Config::get(Lori\Config::PARAM_BANNER_DESC); ?>...</span>
     </div>
   </div>
@@ -65,8 +65,9 @@
 
     <?php if($uid['uri'] == '/' && $uid['id'] > 0 && empty($space_user)) { ?>
         <div class="white-box">
-            <div class="inner-padding big center">
-                <i class="icon bulb red"></i> <?= lang('space-subscription'); ?>...
+            <div class="inner-padding big center gray">
+                <i class="light-icon-bulb middle red"></i> 
+                <span class="middle"><?= lang('space-subscription'); ?>...</span>
             </div>
         </div>
     <?php } ?>
@@ -81,9 +82,9 @@
       <?php if(!empty($space_user)) { ?>
         <div class="white-box">
           <div class="inner-padding"> 
+            <a class="right" title="<?= lang('Spaces'); ?>" href="/spaces"><i class="light-icon-chevron-right"></i></a>
             <div class="bar-title small">
                 <?= lang('Signed'); ?>
-                <a class="right" title="<?= lang('Spaces'); ?>" href="/spaces"><i class="icon arrow-right"></i></a>
             </div>  
             <?php foreach ($space_user as  $sig) { ?>
               <a class="bar-space-telo" href="/s/<?= $sig['space_slug']; ?>" title="<?= $sig['space_name']; ?>">

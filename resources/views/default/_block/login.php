@@ -21,7 +21,7 @@
                 Продолжая, вы соглашаетесь с <a href="/info/privacy">Условиями использования</a> сайта
             </div>
             <div class="login-nav center small">
-                <a class="recover" href="/recover"><?= lang('forgot-password'); ?>?</a>
+                <a class="recover" href="/recover"><?= lang('Forgot your password'); ?>?</a>
                 <hr>
             </div>
             <div class="login-nav center small">

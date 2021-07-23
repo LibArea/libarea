@@ -3,7 +3,9 @@
     <main class="admin">
         <div class="white-box">
             <div class="inner-padding">
-                <a class="right vertical-ind" title="<?= lang('Add'); ?>" href="/admin/words/add"><i class="icon plus"></i></a>
+                <a class="right vertical-ind" title="<?= lang('Add'); ?>" href="/admin/words/add">
+                    <i class="light-icon-plus middle"></i>
+                </a>
                 <?= breadcrumb('/admin', lang('Admin'), null, null, $data['meta_title']); ?>
 
                 <div class="words">

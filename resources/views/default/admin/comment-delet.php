@@ -22,8 +22,7 @@
                                 </a>
 
                                 <?php if($comment['post_type'] == 1) { ?> 
-                                    <span class="indent"></span>
-                                    <i class="icon question green"></i>
+                                    <i class="light-icon-messages middle"></i>
                                 <?php } ?>
                             </div>
                             <div class="comm-telo-body">
@@ -41,7 +40,7 @@
                     <?php } ?>
                     
                 <?php } else { ?>
-                    <div class="no-content"><?= lang('no-comment'); ?>...</div>
+                    <div class="no-content"><?= lang('There are no comments'); ?>...</div>
                 <?php } ?>
             </div>
         </div>

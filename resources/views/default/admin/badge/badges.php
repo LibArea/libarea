@@ -3,7 +3,9 @@
     <main class="admin">
         <div class="white-box">
             <div class="inner-padding">
-                <a class="right vertical-ind" title="<?= lang('Add'); ?>" href="/admin/badge/add"><i class="icon plus"></i></a>
+                <a class="right vertical-ind" title="<?= lang('Add'); ?>" href="/admin/badge/add">
+                <i class="light-icon-plus middle"></i>
+                </a>
                 <?= breadcrumb('/admin', lang('Admin'), null, null, $data['meta_title']); ?>
 
                 <div class="badges">
@@ -32,7 +34,7 @@
                                     </span>
                                     <span class="t-td center">
                                         <a title="<?= lang('Edit'); ?>" href="/admin/badge/<?= $bg['badge_id']; ?>/edit">
-                                            <i class="icon pencil"></i>
+                                            <i class="light-icon-edit middle"></i>
                                         </a>
                                     </span>
                                 </div>
@@ -42,6 +44,8 @@
                         <div class="no-content"><?= lang('No'); ?>...</div>
                     <?php } ?>
                 </div>
+                <br>
+                — https://icons.lightvue.org/icons
             </div>
         </div>
     </main>

@@ -57,7 +57,7 @@ CREATE TABLE `badge` (
 --
 
 INSERT INTO `badge` (`badge_id`, `badge_icon`, `badge_tl`, `badge_score`, `badge_title`, `badge_description`) VALUES
-(1, '<i title=\"Тестер\" class=\"icon energy\"></i>', 0, 0, 'Тестер', 'Сообщение об ошибке, которое понравилось команде сайта.');
+(1, '<i title=\"Тестер\" class=\"light-icon-bug\"></i>', 0, 0, 'Тестер', 'Сообщение об ошибке, которое понравилось команде сайта.');
 
 -- --------------------------------------------------------
 

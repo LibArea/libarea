@@ -211,8 +211,9 @@
     </div>
 <?php } else { ?>
     <?php if($post['post_closed'] != 1) { ?>
-        <div class="no-content">
-            <i class="icon info"></i> <?= lang('no-comment'); ?>...
+        <div class="no-content gray">
+            <i class="light-icon-info-square green middle"></i> 
+            <span class="middle"><?= lang('There are no comments'); ?>...</span>
         </div>
     <?php } ?>
 <?php } ?>

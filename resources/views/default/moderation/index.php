@@ -25,8 +25,7 @@
                                         <?= $mod['post_title']; ?>
                                     </a>
                                     <?php if($mod['post_type'] == 1) { ?> 
-                                        <span class="indent"></span>
-                                        <i class="icon question green"></i>
+                                        <i class="light-icon-language green"></i>
                                     <?php } ?>
                                 </div>
                                 <div class="small">
@@ -36,7 +35,10 @@
                         <?php } ?>
                     </div>
                 <?php } else { ?>
-                    <div class="no-content"><i class="icon info"></i> <?= lang('No moderation logs'); ?>...</div>
+                    <p class="no-content gray">
+                        <i class="light-icon-info-square middle"></i> 
+                        <span class="middle"><?= lang('No moderation logs'); ?>...</span>
+                    </p>
                 <?php } ?>
             </div>
         </div>

@@ -3,7 +3,9 @@
     <main class="admin">
         <div class="white-box">
             <div class="inner-padding">
-                <a class="right vertical-ind" title="<?= lang('Add'); ?>" href="/topic/add"><i class="icon plus"></i></a>
+                <a class="right vertical-ind" title="<?= lang('Add'); ?>" href="/topic/add">
+                <i class="light-icon-pkus middle"></i>
+                </a>
                 <?= breadcrumb('/admin', lang('Admin'), null, null, $data['meta_title']); ?>
                 
                 <div class="space">
@@ -26,7 +28,7 @@
                                     <span class="t-td">
                                         <a rel="nofollow noreferrer" href="/topic/<?= $topic['topic_slug']; ?>">
                                             <?= $topic['topic_title']; ?>
-                                            <i class="icon share-alt"></i>
+                                            <i class="light-icon-external-link middle"></i>
                                         </a>
                                         | <span class="green">topic/<?= $topic['topic_slug']; ?></span>
                                         | <?= $topic['topic_count']; ?>
@@ -42,7 +44,7 @@
                                     </span> 
                                     <span class="t-td width-30 center">
                                         <a title="<?= lang('Edit'); ?>" href="/topic/edit/<?= $topic['topic_id']; ?>">
-                                           <i class="icon pencil"></i>
+                                           <i class="light-icon-edit middle"></i>
                                         </a>
                                     </span>
                                 </div>

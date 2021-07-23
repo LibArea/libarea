@@ -18,7 +18,7 @@
                                 </div>
                             </div> 
                             <div class="clear">
-                                <p><?= lang('select-file-up'); ?>: 240x240px (jpg, jpeg, png)</p>
+                                <p><?= lang('Recommended size'); ?>: 240x240px (jpg, jpeg, png)</p>
                                 <p><input type="submit" class="button" value="<?= lang('Download'); ?>"/></p>
                             </div>
                             <div class="boxline">

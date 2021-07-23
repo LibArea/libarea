@@ -22,7 +22,7 @@
                             <div class="box_h">>= 8 <?= lang('characters'); ?></div>
                         </div>
                          <div class="boxline">
-                            <label class="form-label" for="password_confirm"><?= lang('repeat-password'); ?></label>
+                            <label class="form-label" for="password_confirm"><?= lang('Repeat the password'); ?></label>
                             <input type="password" class="form-input" minlength="8" name="password_confirm" id="password_confirm">
                         </div>    
                         <?php if (Lori\Config::get(Lori\Config::PARAM_CAPTCHA)) { ?>

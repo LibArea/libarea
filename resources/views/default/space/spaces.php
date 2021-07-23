@@ -5,9 +5,8 @@
             <div class="inner-padding">
                 <?php if($uid['id'] > 0) { ?>
                     <?php if($add_space_button === true) { ?>
-                        <a class="right vertical-ind small" href="/space/add">
-                            <i class="icon plus red"></i> 
-                            <?= lang('To create'); ?>
+                        <a title="<?= lang('To create'); ?>" class="right vertical-ind small" href="/space/add">
+                            <i class="light-icon-plus red"></i> 
                         </a>
                     <?php } ?> 
                 <?php } ?>
@@ -99,7 +98,10 @@
                     <?php } ?>
                     </div>
                 <?php } else { ?>
-                    <div class="no-content"><i class="icon info"></i> <?= lang('No spaces'); ?></div>
+                    <p class="no-content gray">
+                        <i class="light-icon-info-square middle"></i> 
+                        <span class="middle"><?= lang('No spaces'); ?>...</span>
+                    </p>
                 <?php } ?>
             </div>
         </div>

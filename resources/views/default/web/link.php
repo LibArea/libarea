@@ -11,7 +11,7 @@
                         <?php if($uid['trust_level'] > 4) { ?>
                             <span class="indent"></span>
                             <a class="small" title="<?= lang('Edit'); ?>" href="/web/edit/<?= $link['link_id']; ?>">
-                                <i class="icon pencil"></i>
+                                <i class="light-icon-edit middle"></i>
                             </a>
                         <?php } ?>
                     </h1>
@@ -43,8 +43,8 @@
                 <?php if (!empty($domains)) { ?>
                     <div class="bar-title small"><?= lang('Domains'); ?></div>
                     <?php foreach ($domains as  $domain) { ?>
-                        <a class="date small" href="/domain/<?= $domain['link_url_domain']; ?>">
-                            <i class="icon link"></i> <?= $domain['link_url_domain']; ?> 
+                        <a class="date small gray" href="/domain/<?= $domain['link_url_domain']; ?>">
+                            <i class="light-icon-link middle"></i> <?= $domain['link_url_domain']; ?> 
                             <sup class="date small"><?= $domain['link_count']; ?></sup>
                         </a><br>
                     <?php } ?>

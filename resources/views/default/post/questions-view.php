@@ -149,18 +149,18 @@
     </div>
 <?php } else { ?>
     <?php if($post['post_closed'] != 1) { ?>
-        <div class="no-content">
-            <i class="icon info"></i> 
-            <?= lang('no-answer'); ?>... 
+        <div class="no-content gray">
+            <i class="light-icon-info-square green middle"></i> 
+            <span class="middle"><?= lang('No answers'); ?>... </span>
         </div>
     <?php } ?>
 <?php } ?>
 
 <?php if(!empty($otvet)) { ?>
 
-    <div class="no-content">
-        <i class="icon info"></i>
-        <?= lang('you-question-no'); ?>...
+    <div class="no-content gray">
+        <i class="light-icon-info-square green middle"></i>
+        <span class="middle"><?= lang('you-question-no'); ?>...</span>
     </div>
 
 <?php } else { ?>

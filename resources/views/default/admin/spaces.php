@@ -3,7 +3,9 @@
     <main class="admin">
         <div class="white-box">
             <div class="inner-padding">
-                <a class="right vertical-ind" title="<?= lang('Add'); ?>" href="/space/add"><i class="icon plus"></i></a>
+                <a class="right vertical-ind" title="<?= lang('Add'); ?>" href="/space/add">
+                <i class="light-icon-plus middle"></i>
+                </a>
                 <?= breadcrumb('/admin', lang('Admin'), null, null, $data['meta_title']); ?>
                 
                 <div class="space">
@@ -60,7 +62,7 @@
                                     </span>
                                     <span class="t-td center">
                                         <a title="<?= lang('Edit'); ?>" href="/space/edit/<?= $sp['space_id']; ?>">
-                                            <i class="icon pencil"></i>
+                                            <i class="light-icon-edit middle"></i>
                                         </a>
                                     </span>
                                 
@@ -70,7 +72,10 @@
                         * <?= lang('Ban-space-info-posts'); ?>...
                         
                     <?php } else { ?>
-                        <div class="no-content"><?= lang('No'); ?>...</div>
+                        <div class="no-content gray">
+                            <i class="light-icon-info-square green middle"></i>
+                            <span class="middle"><?= lang('No'); ?>...</span>
+                        </div>
                     <?php } ?>
                 </div>
             </div>

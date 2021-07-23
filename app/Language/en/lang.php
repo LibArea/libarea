@@ -3,12 +3,8 @@ return [
     'home-desc'         => 'Community home page, forum, posts',
     'site-banner'       => 'Community of interests',
     'site-banner-txt'   => 'The site is under development',
-    'no-post'           => 'Unfortunately there are no posts',
-    'no-comment'        => 'Unfortunately there are no comments', 
-    'no-answer'         => 'Unfortunately there are no answers',
     'comments-desc'     => 'All comments are in order of priority on the site',
     'answers-desc'      => 'All responses (to posts) in order of priority in the community',
-    'post-closed'       => 'The post is closed',
     'no-auth-comm'      => 'You must be logged in to leave a comment',
     'no-auth-answ'      => 'You must be logged in to leave an answer to the question',
     'write-something'   => 'Write something',
@@ -17,12 +13,8 @@ return [
     'in-the-profile'    => 'go to profile',
     'add-favorites'     => 'Add to Favorites',
     'remove-favorites'  => 'Remove from favorites',
-    'forgot-password'   => 'Forgot your password',
-    'repeat-password'   => 'Repeat the password',
     'ban-space'         => 'This space is blocked',
     'no-cover'          => 'No cover. Download it',
-    
-    'select-file-up'    => 'Select the file to upload',
     'format-cover-post' => 'Width, more than 500px. The orientation is horizontal',
     
     /* Info */
@@ -60,16 +52,6 @@ return [
     'topic-desc'            => 'Topics of content, posts. Popular, best, global selection. Topics of the day.',
     'page-number'           => ' — page %1$s | ',
     
-    /* For notification and chat */
-    'add_comment'           => 'added a comment',
-    'add_answer'            => 'added a answer',
-    'add_chat'              => 'added a message to the chat',
-    'add_post'              => 'added a post',
-    'vote_post'             => 'I liked the post',
-    'vote_answer'           => 'I liked the answer',
-    'vote_comment'          => 'liked the comment',
-    'vote_link'             => 'liked the link',
-    
     'domain-desc'           => 'Grouping posts by domain',
     'domains-title'         => 'Sites in the system',
     'domains-desc'          => 'Statistics on domains, links that are used to compile publications on the site. Most visited, popular sites', 
@@ -94,7 +76,7 @@ return [
     'Ban-space-info-posts'  => 'A space ban will result in the unavailability of all posts',
     'meta-moderation'       => 'Actions of the participant and moderators to delete and restore the content in the community.',
 
-    'space-subscription'    => '<a href="/spaces">Subscribe to spaces</a> and read them in the feed',
+    'space-subscription'    => '<a class="gray" href="/spaces">Subscribe to spaces and read them in the feed</a>',
 
     'deleted-post'          => 'Deleted post',
     'restored-post'         => 'Restored post',

@@ -21,14 +21,14 @@
 
                             <?php if ($val['uid'] == $uid['id']) { ?>
                             
-                                <?= user_avatar_img($uid['avatar'], 'max', $uid['login'], 'avatar left'); ?>
+                                <?= user_avatar_img($uid['avatar'], 'max', $uid['login'], 'message-avatar left'); ?>
                                
                             <div class="message left">
                                 
                             <?php } else { ?>
 
                                 <a class="right" href="/u/<?= $val['login']; ?>">
-                                    <?= user_avatar_img($val['avatar'], 'max', $val['login'], 'avatar left'); ?>
+                                    <?= user_avatar_img($val['avatar'], 'max', $val['login'], 'message-avatar left'); ?>
                                 </a> 
 
                             <div class="message right">

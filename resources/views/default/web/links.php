@@ -5,7 +5,7 @@
             <div class="inner-padding space-tags">
                 <?php if ($uid['trust_level'] == 5) { ?>
                     <a title="<?= lang('Add'); ?>" class="right vertical-ind" href="/web/add">
-                        <i class="icon plus"></i>
+                        <i class="light-icon-plus middle"></i>
                     </a>
                 <?php } ?>    
                 <h1><?= $data['h1']; ?></h1>
@@ -23,7 +23,7 @@
                                         <?php if($uid['trust_level'] == 5) { ?>
                                             <span class="indent"></span>
                                             <a class="small" title="<?= lang('Edit'); ?>" href="/web/edit/<?= $link['link_id']; ?>">
-                                                <i class="icon pencil"></i>
+                                                <i class="light-icon-edit"></i>
                                             </a>
                                         <?php } ?>
                                     </h2>

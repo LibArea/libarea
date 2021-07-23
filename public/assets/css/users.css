@@ -43,12 +43,12 @@ h1.profile {
   color: #333;
 }
 
-.right.pm {
+.right.pm i {
   color: #fff;
   position: absolute;
   top: 30px;
   right: 8px;
-  font-size: 24px;
+  font-size: 32px;
 }
 
 .stats {
@@ -76,6 +76,10 @@ h1.profile {
   background-color: #f3f3f3;
   padding: 10px;
   display: table;
+}
+
+.profile-badge i {
+  font-size: 32px; 
 }
 
 h3.badge {
@@ -119,14 +123,6 @@ h3.badge {
 
 .profile-box-telo .box.wide label {
   width: 9.5em;
-}
-
-.profile-badge i.icon {
-  font-size: 21px;
-}
-
-.icon.badge {
-  color: #390;
 }
 
 .profile-about blockquote {

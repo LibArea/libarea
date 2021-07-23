@@ -20,7 +20,7 @@
                             <input type="password" class="form-input" name="password" id="password">
                         </div>
                          <div class="boxline">
-                            <label class="form-label" for="password_confirm"><?= lang('repeat-password'); ?></label>
+                            <label class="form-label" for="password_confirm"><?= lang('Repeat the password'); ?></label>
                             <input type="password" class="form-input" name="password_confirm" id="password_confirm">
                         </div> 
                         <div class="boxline">

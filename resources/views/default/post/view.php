@@ -1,7 +1,9 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 <div class="wrap">
     <div id="stHeader">
-        <a href="/"><i class="icon home"></i></a> <span class="slash">\</span> <?= $post['post_title']; ?>
+        <a href="/"><i class="light-icon-home middle"></i></a> 
+        <span class="separator middle">\</span>  
+        <span class="middle"><?= $post['post_title']; ?></span>
     </div>
  
     <main>
@@ -12,29 +14,30 @@
                     <div class="post-body">
                         <h1 class="title">
                             <?= $post['post_title']; ?> 
-                                <?php if ($post['post_is_deleted'] == 1) { ?> 
-                                    <i class="icon trash"></i>
-                                <?php } ?>
-                                <?php if($post['post_closed'] == 1) { ?> 
-                                    <i class="icon lock"></i>
-                                <?php } ?>
-                                <?php if($post['post_top'] == 1) { ?> 
-                                    <i class="icon pin red"></i>
-                                <?php } ?>
-                                <?php if($post['post_lo'] > 0) { ?> 
-                                    <i class="icon trophy red"></i>
-                                <?php } ?>
-                                <?php if($post['post_tl'] > 0) { ?> 
-                                    <span class="trust-level small">tl<?= $post['post_tl']; ?></span>
-                                <?php } ?>
-                                <?php if($post['post_type'] == 1) { ?> 
-                                    <i class="icon question green"></i>
-                                <?php } ?>
-                                <?php if($post['post_url_domain']) { ?> 
-                                    <a class="date small" href="/domain/<?= $post['post_url_domain']; ?>">
-                                        <?= $post['post_url_domain']; ?>
-                                    </a> 
-                                <?php } ?>
+                            <?php if ($post['post_is_deleted'] == 1) { ?> 
+                              <i class="light-icon-trash red"></i>
+                            <?php } ?>
+                            <?php if($post['post_closed'] == 1) { ?> 
+                              <i class="light-icon-lock"></i>
+                            <?php } ?>
+                            <?php if($post['post_top'] == 1) { ?> 
+                              <i class="light-icon-arrow-narrow-up red"></i>
+                            <?php } ?>
+                            <?php if($post['post_lo'] > 0) { ?> 
+                              <i class="light-icon-checks red"></i>
+                            <?php } ?>
+                            <?php if($post['post_type'] == 1) { ?> 
+                              <i class="light-icon-language green"></i>
+                            <?php } ?>
+                            <?php if($post['post_translation'] == 1) { ?> 
+                              <span class="translation small lowercase"><?= lang('Translation'); ?></span>
+                            <?php } ?>
+                            <?php if($post['post_tl'] > 0) { ?> 
+                              <span class="trust-level small">tl<?= $post['post_tl']; ?></span>
+                            <?php } ?>
+                            <?php if($post['post_merged_id'] > 0) { ?> 
+                              <i class="light-icon-arrow-forward-up red"></i>
+                            <?php } ?>
                         </h1>
                         <div class="small lowercase">
                             <a class="gray" href="/u/<?= $post['login']; ?>">
@@ -54,7 +57,7 @@
                                     <span class="indent">
                                     <span class="indent"></span>
                                         <a class="gray" href="/post/edit/<?= $post['post_id']; ?>">
-                                            <i class="icon pencil"></i>  
+                                            <i class="light-icon-edit middle"></i> 
                                         </a>
                                     </span>
                                 <?php } ?>     
@@ -110,7 +113,7 @@
                                 <h3 class="recommend">ЛО</h3>
                                 <span class="right">
                                     <a rel="nofollow" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#comment_<?= $lo['comment_id']; ?>">
-                                        <i class="icon arrow-down"></i>
+                                        <i class="light-icon-checks red"></i>
                                     </a>
                                 </span>
                                 <?= $lo['comment_content']; ?> 
@@ -156,7 +159,7 @@
                         <?= votes($uid['id'], $post, 'post'); ?> 
                         
                         <span class="right">
-                            <i class="icon bubbles"></i>
+                            <i class="light-icon-messages middle"></i>
                             <?= $post['post_answers_count'] + $post['post_comments_count'] ?>
                         </span>
                         
@@ -197,16 +200,25 @@
                 <?php if($post['post_type'] == 0) { ?> 
                     <?php include TEMPLATE_DIR . '/post/comment-view.php'; ?>
                     <?php if($post['post_closed'] == 1) { ?> 
-                        <p class="no-content"> <i class="icon info"></i> <?= lang('post-closed'); ?>...</p>
+                        <p class="no-content gray"> 
+                            <i class="light-icon-lock middle"></i> 
+                            <span class="middle"><?= lang('The post is closed'); ?>...</span>
+                        </p>
                     <?php } ?>
                 <?php } else { ?>
                     <?php include TEMPLATE_DIR . '/post/questions-view.php'; ?>
                     <?php if($post['post_closed'] == 1) { ?>
-                        <p class="no-content"><i class="icon lock"></i> <?= lang('The question is closed'); ?>...</p>
+                        <p class="no-content gray">
+                            <i class="light-icon-lock middle"></i> 
+                            <span class="middle"><?= lang('The question is closed'); ?>...</span>
+                        </p>
                     <?php } ?>
                 <?php } ?> 
             <?php } else { ?>   
-                <p class="no-content red"><i class="icon info"></i> <?= lang('This is a draft'); ?>...</p>
+                <p class="no-content gray">
+                    <i class="light-icon-info-square middle"></i> 
+                    <span class="middle"><?= lang('This is a draft'); ?>...</span>
+                </p>
             <?php } ?>   
         </article>
     </main> 
@@ -234,10 +246,11 @@
             <div class="inner-padding"> 
                 <h3 class="recommend small"><?= lang('To share'); ?></h3> 
                 <div class="social center" data-url="<?= Lori\Config::get(Lori\Config::PARAM_URL) . '/post/' . $post['post_id'] . '/' . $post['post_slug']; ?>" data-title="<?= $post['post_title']; ?>">		
-                    <a class="push facebook" data-id="fb"><i class="icon social-facebook"></i></a>
-                    <a class="push vkontakte" data-id="vk"><i class="icon social-vkontakte"></i></a>
-                    <a class="push twitter" data-id="tw"><i class="icon twitter"></i></a>
-                    <a class="push pinterest" data-id="pin"><i class="icon social-pinterest"></i></a>
+                    <a class="push gray" data-id="fb"><i class="light-icon-brand-facebook"></i></a>
+                    <a class="push gray" data-id="vk">
+                        <svg class="vk" xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24"><path class="st0" d="M13.162 18.994c.609 0 .858-.406.851-.915-.031-1.917.714-2.949 2.059-1.604 1.488 1.488 1.796 2.519 3.603 2.519h3.2c.808 0 1.126-.26 1.126-.668 0-.863-1.421-2.386-2.625-3.504-1.686-1.565-1.765-1.602-.313-3.486 1.801-2.339 4.157-5.336 2.073-5.336h-3.981c-.772 0-.828.435-1.103 1.083-.995 2.347-2.886 5.387-3.604 4.922-.751-.485-.407-2.406-.35-5.261.015-.754.011-1.271-1.141-1.539-.629-.145-1.241-.205-1.809-.205-2.273 0-3.841.953-2.95 1.119 1.571.293 1.42 3.692 1.054 5.16-.638 2.556-3.036-2.024-4.035-4.305-.241-.548-.315-.974-1.175-.974h-3.255c-.492 0-.787.16-.787.516 0 .602 2.96 6.72 5.786 9.77 2.756 2.975 5.48 2.708 7.376 2.708z"/></svg>
+                    </a>
+                    <a class="push gray" data-id="tw"><i class="light-icon-brand-twitter"></i></a>
                 </div>
             </div>
         </div>

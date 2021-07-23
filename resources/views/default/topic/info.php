@@ -8,7 +8,7 @@
                 <h1 class="topics"><a href="/topic/<?= $topic['topic_slug']; ?>"><?= $data['h1']; ?></a>
                     <?php if($uid['trust_level'] == 5) { ?>
                         <a class="right" href="/topic/edit/<?= $topic['topic_id']; ?>"> 
-                            <i class="icon pencil"></i>          
+                            <i class="light-icon-edit middle"></i>          
                         </a>
                     <?php } ?></h1>
   
@@ -50,7 +50,8 @@
                 </center>
                 <hr>
                 <div class="sb-created">
-                    <i class="icon calendar"></i> <?= $topic['topic_add_date']; ?> 
+                    <i class="light-icon-calendar middle"></i> 
+                    <span class="middle"><?= $topic['topic_add_date']; ?></span> 
                 </div>
             </div>
         </div>

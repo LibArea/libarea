@@ -39,7 +39,10 @@
             <?php } ?>
 
         <?php } else { ?>
-            <div class="no-content"><i class="icon info"></i> <?= lang('no-comment'); ?>...</div>
+            <p class="no-content gray">
+                <i class="light-icon-info-square middle"></i> 
+                <span class="middle"><?= lang('There are no comments'); ?>...</span>
+            </p>
         <?php } ?>
  
     </main>

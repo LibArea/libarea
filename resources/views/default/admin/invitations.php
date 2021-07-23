@@ -21,7 +21,7 @@
                         <?php } ?>
                         
                     <?php } else { ?>
-                        <div class="no-content"><?= lang('no-comment'); ?>...</div>
+                        <div class="no-content"><?= lang('There are no comments'); ?>...</div>
                     <?php } ?>
                 </div>
             </div>

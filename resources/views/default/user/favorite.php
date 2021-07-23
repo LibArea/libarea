@@ -38,7 +38,7 @@
                                         <?php if($fav['post_answers_count'] !=0) { ?> 
                                             <span class="indent"></span>
                                             <a class="indent gray" href="/post/<?= $fav['post_id']; ?>/<?= $fav['post_slug']; ?>">    
-                                                <i class="icon bubbles"></i>  <?= $fav['post_answers_count'] ?> 
+                                               <i class="light-icon-messages middle"></i>  <?= $fav['post_answers_count'] ?> 
                                             </a>     
                                         <?php } ?>
                                         <?php if($uid['id'] > 0) { ?>
@@ -78,7 +78,10 @@
                             <?php } ?>
                         <?php } ?>
                     <?php } else { ?>
-                        <p class="no-content"><i class="icon info"></i> <?= lang('There are no favorites'); ?>...</p>
+                        <p class="no-content gray">
+                            <i class="light-icon-info-square middle"></i> 
+                            <span class="middle"><?= lang('There are no favorites'); ?>...</span>
+                        </p>
                     <?php } ?>
                     <br>
                 </div>

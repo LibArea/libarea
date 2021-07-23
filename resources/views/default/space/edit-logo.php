@@ -28,7 +28,7 @@
                                     </div>
                                 </div> 
                                 <div class="clear"> 
-                                    <p><?= lang('select-file-up'); ?>: 120x120px (jpg, jpeg, png)</p>
+                                    <p><?= lang('Recommended size'); ?>: 120x120px (jpg, jpeg, png)</p>
                                     <input type="hidden" name="space_id" id="space_id" value="<?= $space['space_id']; ?>">
                                     <input type="submit" class="button" name="submit" value="<?= lang('Edit'); ?>" />
                                     <br><br>
@@ -51,7 +51,7 @@
                                 </div> 
                                 <div class="clear"> 
                                     <p>
-                                    <?= lang('select-file-up'); ?>: 1920x300px (jpg, jpeg, png)
+                                    <?= lang('Recommended size'); ?>: 1920x300px (jpg, jpeg, png)
                                     </p>
                                 </div> 
                             </div>

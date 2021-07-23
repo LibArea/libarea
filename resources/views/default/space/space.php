@@ -117,13 +117,14 @@
                 <hr>
                 
                 <div class="sb-created">
-                    <i class="icon calendar"></i> <?= $space_info['space_date']; ?>
+                    <i class="light-icon-calendar middle"></i> 
+                    <span class="middle"><?= $space_info['space_date']; ?></span>
                 </div>
                 
                 <?php if(!$uid['id']) { ?> 
                     <div class="sb-add-space-post center">
                         <a class="add-space-post" href="/login"> 
-                            <i class="icon pencil"></i>    
+                            <i class="light-icon-edit middle"></i>    
                             <?= lang('Create Post'); ?>
                         </a>
                     </div>    
@@ -165,11 +166,10 @@
 </div>
 <?php } else { ?>
     <main class="w-100">
-        <center>
-            <br>
-            <i class="icon shield red ban-space"></i>
-            <div class="no-content red"><?= lang('ban-space'); ?>...</div>
-        </center>
+        <p class="no-content gray">
+            <i class="light-icon-info-square middle"></i> 
+            <span class="middle"><?= lang('ban-space'); ?>...</span>
+        </p>
     </main>
 <?php } ?> 
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

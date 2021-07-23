@@ -25,7 +25,7 @@
                                 <?php if(!Lori\Config::get(Lori\Config::PARAM_INVITE)) { ?>
                                     <span class="indent"><a href="/register"><?= lang('Sign up'); ?></a></span>
                                 <?php } ?>
-                                <span class="indent"><a href="/recover"><?= lang('forgot-password'); ?>?</a></span>
+                                <span class="indent"><a href="/recover"><?= lang('Forgot your password'); ?>?</a></span>
                             </small>
                         </div>
                     </form>
