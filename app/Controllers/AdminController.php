@@ -385,7 +385,7 @@ class AdminController extends \MainController
     {
         $user_id    = \Request::getInt('id');
         
-        $redirect = '/admin';
+        $redirect = '/admin/users';
         if (!UserModel::getUser($user_id, 'id')) {
             redirect($redirect);
         }
@@ -395,6 +395,7 @@ class AdminController extends \MainController
         $name           = \Request::getPost('name');
         $about          = \Request::getPost('about');
         $activated      = \Request::getPostInt('activated');
+        $limiting_mode  = \Request::getPostInt('limiting_mode');
         $trust_level    = \Request::getPostInt('trust_level');
         $website        = \Request::getPost('website');
         $location       = \Request::getPost('location');
@@ -412,6 +413,7 @@ class AdminController extends \MainController
             'login'         => $login,
             'name'          => empty($name) ? '' : $name,
             'activated'     => $activated,
+            'limiting_mode' => $limiting_mode,
             'trust_level'   => $trust_level,
             'about'         => empty($about) ? '' : $about,
             'website'       => empty($website) ? '' : $website,

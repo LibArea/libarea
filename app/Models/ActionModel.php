@@ -112,4 +112,32 @@ class ActionModel extends \MainModel
         echo json_encode($response);
     }
  
+    // Режим заморозки
+    public static function addLimitingMode($user_id)
+    {
+        return XD::update(['users'])->set(['limiting_mode'], '=', 1)->where(['id'], '=', $user_id)->run();
+    }
+    
+    public static function deleteLimitingMode($user_id)
+    {
+        return XD::update(['users'])->set(['limiting_mode'], '=', 0)->where(['id'], '=', $user_id)->run();
+    }
+ 
+    // Общий вклад
+    public static function ceneralContributionCount($user_id)   
+    {
+        $sql = "SELECT
+                (SELECT COUNT(*) FROM 
+                    posts WHERE post_user_id = :user_id and post_is_deleted = 0) AS t1Count,
+                (SELECT COUNT(*) FROM 
+                    answers WHERE answer_user_id = :user_id and answer_is_deleted = 0) AS t2Count,
+                (SELECT COUNT(*) FROM 
+                    comments WHERE comment_user_id = :user_id and comment_is_deleted = 0) AS t3Count";
+
+        $result = DB::run($sql, ['user_id' => $user_id]);
+        $lists  = $result->fetch(PDO::FETCH_ASSOC);
+        
+        return $lists['t1Count'] + $lists['t2Count'] + $lists['t3Count'];
+    }
+ 
 }

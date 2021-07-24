@@ -39,8 +39,19 @@
                             <?php } else { ?> 
                                 ---
                             <?php } ?>   
-                        </div>
-                        
+                        </div>  
+                        <hr> 
+                       <div class="boxline">
+                            <?php if($user['limiting_mode'] == 1) { ?>
+                                <span class="red"><?= lang('Dumb mode'); ?>!</span><br>
+                            <?php } ?>
+                            <label class="form-label" for="post_content">
+                                <?= lang('Dumb mode'); ?>?
+                            </label>
+                            <input type="radio" name="limiting_mode" <?php if($user['limiting_mode'] == 0) { ?>checked<?php } ?> value="0"> <?= lang('No'); ?>
+                            <input type="radio" name="limiting_mode" <?php if($user['limiting_mode'] == 1) { ?>checked<?php } ?> value="1" > <?= lang('Yes'); ?>
+                       </div>
+                       <hr>
                        <div class="boxline"> 
                            <?php if($data['posts_count'] != 0) { ?>
                                 <label class="required"><?= lang('Posts-m'); ?>:</label>
@@ -77,7 +88,7 @@
                                 </span>     
                             <?php } ?>
                         </div>
-                        
+                        <hr>
                         <div class="boxline">
                             <label class="form-label" for="post_title"><?= lang('Badge'); ?></label>
                             <a class="lowercase" href="/admin/badge/user/add/<?= $user['id']; ?>">

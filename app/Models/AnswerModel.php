@@ -179,7 +179,7 @@ class AnswerModel extends \MainModel
         return  DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
     
-    // Количество
+    // Количество удаленных ответов
     public static function getAnswersDeletedCount()
     {
         $sql = "SELECT answer_id, answer_is_deleted FROM answers WHERE answer_is_deleted = 1";

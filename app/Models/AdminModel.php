@@ -191,6 +191,7 @@ class AdminModel extends \MainModel
             ['login'], '=', $data['login'], ',',
             ['name'], '=', $data['name'], ',', 
             ['activated'], '=', $data['activated'], ',',
+            ['limiting_mode'], '=', $data['limiting_mode'], ',',
             ['about'], '=', $data['about'], ',', 
             ['trust_level'], '=', $data['trust_level'], ',',
             ['website'], '=', $data['website'], ',',

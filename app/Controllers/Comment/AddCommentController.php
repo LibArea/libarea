@@ -33,6 +33,11 @@ class AddCommentController extends \MainController
         // Проверяем длину тела
         Base::Limits($comment_content, lang('Comments-m'), '6', '2024', $redirect);
 
+        if ($uid['limiting_mode'] == 1) {
+            Base::addMsg(lang('limiting_mode_1'), 'error');
+            redirect('/');
+        }
+
         // Участник с нулевым уровнем доверия должен быть ограничен в добавлении комментариев
         if ($uid['trust_level'] < Config::get(Config::PARAM_TL_ADD_COMM)) {
             $num_comm =  CommentModel::getCommentSpeed($uid['id']);
@@ -43,7 +48,17 @@ class AddCommentController extends \MainController
         }
 
         $comment_published = 1;
-        if(Content::stopWordsExists($comment_content)) {
+        if(Content::stopWordsExists($comment_content)) 
+        {
+            // Если меньше 2 комментариев и если контент попал в стоп лист, то заморозка
+            $all_count = ActionModel::ceneralContributionCount($uid['id']);
+            if ($all_count < 2) 
+            {
+                ActionModel::addLimitingMode($uid['id']);
+                Base::addMsg(lang('limiting_mode_1'), 'error');
+                redirect('/');
+            }
+            
             $comment_published = 0;
             Base::addMsg(lang('comment_audit'), 'error');
         }

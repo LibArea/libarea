@@ -55,7 +55,10 @@
                     <?php if($user['invitation_id'] !=0) { ?><sup>+ inv. id<?= $user['invitation_id']; ?></sup><?php } ?>
                     <div class="small">
                       <?= $user['email']; ?>
-                    </div>
+                    </div>  
+                    <?php if($user['limiting_mode'] == 1) { ?>
+                          <div class="red"><?= lang('Dumb mode'); ?></div>
+                    <?php } ?>  
                   </span>
                   <span class="t-td center"> 
                     <?php if($user['trust_level'] != 5) { ?>         

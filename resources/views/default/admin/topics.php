@@ -4,7 +4,7 @@
         <div class="white-box">
             <div class="inner-padding">
                 <a class="right vertical-ind" title="<?= lang('Add'); ?>" href="/topic/add">
-                <i class="light-icon-pkus middle"></i>
+                <i class="light-icon-plus middle"></i>
                 </a>
                 <?= breadcrumb('/admin', lang('Admin'), null, null, $data['meta_title']); ?>
                 

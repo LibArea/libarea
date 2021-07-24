@@ -25,17 +25,34 @@ class AddAnswerController extends \MainController
         $redirect = '/post/' . $post['post_id'] . '/' . $post['post_slug'];
         Base::Limits($answer_content, lang('Bodies'), '6', '5000', $redirect);
         
+        if ($uid['limiting_mode'] == 1) 
+        {
+            Base::addMsg(lang('limiting_mode_1'), 'error');
+            redirect('/');
+        }
+        
         // Ограничим частоту добавления (зависит от TL)
-        if ($uid['trust_level'] < 2) {
-            $num_answ =  AnswerModel::getAnswerSpeed($uid['id']);
-            if (count($num_answ) > 10) {
+        if ($uid['trust_level'] < 2) 
+        {
+            $num_answer =  AnswerModel::getAnswerSpeed($uid['id']);
+            if (count($num_answer) > 10) {
                 Base::addMsg(lang('limit_answer_day'), 'error');
                 redirect('/');
             }
         }
-        
+
         $answer_published = 1;
-        if(Content::stopWordsExists($answer_content)) {
+        if(Content::stopWordsExists($answer_content)) 
+        {
+            // Если меньше 2 ответов и если контент попал в стоп лист, то заморозка
+            $all_count = ActionModel::ceneralContributionCount($uid['id']);
+            if ($all_count < 2) 
+            {
+                ActionModel::addLimitingMode($uid['id']);
+                Base::addMsg(lang('limiting_mode_1'), 'error');
+                redirect('/');
+            }
+            
             $answer_published = 0;
             Base::addMsg(lang('answer_audit'), 'error');
         }

@@ -28,12 +28,13 @@ class Base
                 redirect('/info/restriction');
             }
 
-            $uid['id']          = $user['id'];
-            $uid['login']       = $user['login']; 
-            $uid['trust_level'] = $user['trust_level'];
-            $uid['notif']       = NotificationsModel::usersNotification($user['id']); 
-            $uid['avatar']      = $user['avatar'];
-            $uid['hits_count']  = $user['hits_count'];
+            $uid['id']              = $user['id'];
+            $uid['login']           = $user['login'];
+            $uid['limiting_mode']   = $user['limiting_mode'];
+            $uid['trust_level']     = $user['trust_level'];
+            $uid['notif']           = NotificationsModel::usersNotification($user['id']); 
+            $uid['avatar']          = $user['avatar'];
+            $uid['hits_count']      = $user['hits_count'];
             $uid['invitation_available'] = $user['invitation_available'];
              
             Request::getResources()->addBottomScript('/assets/js/app.js');

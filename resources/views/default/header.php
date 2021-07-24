@@ -50,6 +50,18 @@
           <a class="gray" title="<?= lang('Sign in'); ?>" href="/login"><?= lang('Sign in'); ?></a>
         </div> 
       <?php } else { ?> 
+        <?php if($uid['notif']) { ?> 
+          <div class="nav notif">  
+            <a href="/u/<?= $uid['login']; ?>/notifications"> 
+              <?php if($uid['notif']['action_type'] == 1) { ?>
+                <i class="light-icon-mail-opened red"></i> 
+              <?php } else { ?>  
+                <i class="light-icon-bell red"></i> 
+              <?php } ?>
+            </a>
+          </div>  
+        <?php } ?>  
+      
         <div class="nav add-post">  
             <a title="<?= lang('Add post'); ?>" href="/post/add"> 
                 <i class="light-icon-plus blue middle"></i>      
@@ -105,18 +117,6 @@
             </a>
           </div>
         </div>
- 
-        <?php if($uid['notif']) { ?> 
-          <div class="nav notif">  
-            <a href="/u/<?= $uid['login']; ?>/notifications"> 
-              <?php if($uid['notif']['action_type'] == 1) { ?>
-                <i class="light-icon-mail-opened red"></i> 
-              <?php } else { ?>  
-                <i class="light-icon-bell red"></i> 
-              <?php } ?>
-            </a>
-          </div>  
-        <?php } ?>  
       <?php } ?>  
     </div>
 </header>

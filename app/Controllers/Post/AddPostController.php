@@ -54,6 +54,11 @@ class AddPostController extends \MainController
             redirect($redirect);
         }
 
+        if ($uid['limiting_mode'] == 1) {
+            Base::addMsg(lang('limiting_mode_1'), 'error');
+            redirect('/');
+        }
+
         // Если стоит ограничение: публиковать может только автор
         if ($space['space_permit_users'] == 1) {
             // Кроме персонала и владельца
@@ -124,6 +129,16 @@ class AddPostController extends \MainController
         // Стоп слова (и другие условия) + оповещение
         $post_published = 1;
         if(Content::stopWordsExists($post_content)) {
+            
+            // Если меньше 2 постов и если контент попал в стоп лист, то заморозка
+            $all_count = ActionModel::ceneralContributionCount($uid['id']);
+            if ($all_count < 2) 
+            {
+                ActionModel::addLimitingMode($uid['id']);
+                Base::addMsg(lang('limiting_mode_1'), 'error');
+                redirect('/');
+            }
+            
             $post_published = 0;
             Base::addMsg(lang('post_audit'), 'error');
         }

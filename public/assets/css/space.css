@@ -139,8 +139,7 @@ h1.space a {
   float: left;
   width: 48px;
   height: 48px;
-  border: 2px solid #fff;
-  margin: 0 15px 0 0;
+  margin: 3px 15px 0 0;
 }
 
 .space-cover-box .space-box-img,

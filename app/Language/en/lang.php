@@ -22,6 +22,8 @@ return [
     'info-desc'         => 'Information, help. Rules, privacy policy, site archive, and technology.',
     
     'no-invate-txt'     => 'Not a user yet? Signup is by invitation only to combat spam and increase accountability. If you know a <a href="/users">current user</a> of the site, ask them for an invitation.',
+
+    'limiting_mode_1'   => 'You cannot post content, your account is being verified',
     
     /* MSG */
     'about-info-err'        => 'About me should be less characters long',    
