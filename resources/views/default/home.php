@@ -107,13 +107,8 @@
     <?php if (!empty($data['latest_answers'])) { ?>
       <div class="last-comm white-box sticky"> 
         <div class="inner-padding">
-          <?php $num = 1; ?>
           <?php foreach ($data['latest_answers'] as  $answer)  { ?>
-            <?php $num++; ?>
-            <style nonce="<?= $_SERVER['nonce']; ?>">
-             .comm-space-color_<?= $num; ?> {border-left: 2px solid <?= $answer['space_color']; ?>;}
-            </style>
-            <div class="sb-telo comm-space-color_<?= $num; ?>">
+            <div class="sb-telo" style="border-left: 2px solid <?= $answer['space_color']; ?>;">
               <div class="sb-date small"> 
                 <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava'); ?>
                 <span class="indent"></span>

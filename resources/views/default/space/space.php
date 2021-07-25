@@ -3,18 +3,10 @@
 <?php if ($space_info['space_is_delete'] == 0) { ?>
 
     <?php if($space_info['space_cover_art'] != 'space_cover_no.jpeg') { ?>
-
-        <style nonce="<?= $_SERVER['nonce']; ?>">
-        .space-cover-box {background-image: url(/uploads/spaces/cover/<?= $space_info['space_cover_art']; ?>); background-position: 50% 50%;min-height: 300px;}
-        </style>
-        <div class="space-cover-box">
+        <div class="space-cover-box" style="background-image: url(/uploads/spaces/cover/<?= $space_info['space_cover_art']; ?>); background-position: 50% 50%;min-height: 300px;">
         <div class="wrap">
     <?php } else { ?> 
-
-        <style nonce="<?= $_SERVER['nonce']; ?>">
-        .space-box {background:<?= $space_info['space_color']; ?>;}
-        </style>
-        <div class="space-box" >
+        <div class="space-box" style="background:<?= $space_info['space_color']; ?>;">
         <div class="wrap">
     <?php } ?>   
     

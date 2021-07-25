@@ -25,11 +25,7 @@ class AddAnswerController extends \MainController
         $redirect = '/post/' . $post['post_id'] . '/' . $post['post_slug'];
         Base::Limits($answer_content, lang('Bodies'), '6', '5000', $redirect);
         
-        if ($uid['limiting_mode'] == 1) 
-        {
-            Base::addMsg(lang('limiting_mode_1'), 'error');
-            redirect('/');
-        }
+        Content::stopContentQuietМode($uid);
         
         // Ограничим частоту добавления (зависит от TL)
         if ($uid['trust_level'] < 2) 

@@ -5,6 +5,7 @@ namespace App\Controllers\Comment;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\CommentModel;
 use App\Models\PostModel;
+use Lori\Content;
 use Lori\Base;
 
 class EditCommentController extends \MainController
@@ -27,6 +28,8 @@ class EditCommentController extends \MainController
         if (!accessСheck($comment, 'comment', $uid, 0, 0)) {
             redirect('/');
         }  
+        
+        Content::stopContentQuietМode($uid);
         
         $redirect   = '/post/' . $post['post_id'] . '/' . $post['post_slug'] . '#comment_' . $comment['comment_id'];
         

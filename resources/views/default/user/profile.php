@@ -1,10 +1,7 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 
 <?php if($user['cover_art'] != 'cover_art.jpeg') { ?>
-    <style nonce="<?= $_SERVER['nonce']; ?>">
-    .profile-box-cover {background-image: url(<?= user_cover_url($user['cover_art']); ?>); background-position: 50% 50%;min-height: 310px;}
-    </style>
-    <div class="profile-box-cover">
+    <div class="profile-box-cover" style="background-image: url(<?= user_cover_url($user['cover_art']); ?>); background-position: 50% 50%;min-height: 310px;">
     <div class="wrap">      
 <?php } else { ?>
     <style nonce="<?= $_SERVER['nonce']; ?>">

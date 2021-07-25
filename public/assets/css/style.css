@@ -1492,6 +1492,7 @@ i.light-icon-brand-github:hover {
   background-color: #282828;
 }
 
+.dark .form-input,
 .dark input.form-search,
 .dark .banner,
 .dark textarea,
@@ -1520,6 +1521,7 @@ i.light-icon-brand-github:hover {
   color: #fff;
 }
 
+.dark .layui-layer-dialog,
 .dark .gray,
 .dark .indent,
 .dark a.gray {

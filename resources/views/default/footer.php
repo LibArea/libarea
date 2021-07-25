@@ -41,29 +41,18 @@
     </div>
   </div>
 </footer>
- 
+
 <script async src="/assets/js/common.js"></script>
-<script src="/assets/js/sweetalert2.min.js"></script> 
-<link rel="stylesheet" href="/assets/css/sweetalert2.min.css">
+<script src="/assets/js/layer/layer.js"></script> 
 
 <?php if ($uid['msg']) { ?>
   <?php foreach ($uid['msg'] as $message) { ?>
     <script nonce="<?= $_SERVER['nonce']; ?>">
-      const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer)
-        toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-      })
-      Toast.fire({
-        icon: '<?= $message[1]; ?>',
-        title: '<?= $message[0]; ?>'
-      })
+        layer.msg('<?= $message[0]; ?>', {
+          icon: <?= $message[1]; ?>,
+          time: 3000,
+          skin: 'layui-layer-molv',
+        });
     </script>
   <?php } ?>
 <?php } ?>

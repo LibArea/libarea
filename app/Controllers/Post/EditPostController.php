@@ -6,6 +6,7 @@ use App\Models\PostModel;
 use App\Models\UserModel;
 use App\Models\SpaceModel;
 use App\Models\TopicModel;
+use Lori\Content;
 use Lori\Config;
 use Lori\Base;
 use Lori\UploadImage;
@@ -44,6 +45,8 @@ class EditPostController extends \MainController
         if (!accessСheck($post, 'post', $uid, 0, 0)) {
             redirect('/');
         }  
+        
+        Content::stopContentQuietМode($uid);
         
         // Получаем информацию по пространству
         $space = SpaceModel::getSpace($post_space_id, 'id');

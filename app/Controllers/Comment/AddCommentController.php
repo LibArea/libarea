@@ -33,10 +33,7 @@ class AddCommentController extends \MainController
         // Проверяем длину тела
         Base::Limits($comment_content, lang('Comments-m'), '6', '2024', $redirect);
 
-        if ($uid['limiting_mode'] == 1) {
-            Base::addMsg(lang('limiting_mode_1'), 'error');
-            redirect('/');
-        }
+        Content::stopContentQuietМode($uid);
 
         // Участник с нулевым уровнем доверия должен быть ограничен в добавлении комментариев
         if ($uid['trust_level'] < Config::get(Config::PARAM_TL_ADD_COMM)) {

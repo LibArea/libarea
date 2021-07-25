@@ -237,8 +237,8 @@
         </div>
         <?php if($post['post_content_img']) { ?>
           <div class="space-info white-box">
-            <div class="inner-padding big"> 
-              <?= post_cover_img($post['post_content_img'], $post['post_title'], 'img-post'); ?>
+            <div id="layer-photos" class="layer-photos inner-padding big">
+                <img class="img-post" layer-src="/uploads/posts/cover/<?= $post['post_content_img']; ?>" alt="<?= $post['post_title']; ?>" src="/uploads/posts/cover/<?= $post['post_content_img']; ?>">
             </div>
           </div>
         <?php } ?>    
@@ -280,12 +280,9 @@
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
 $(document).ready(function() {
-  $('.img-post').magnificPopup({
-    items: {
-      src: '/uploads/posts/cover/<?= $post['post_content_img']; ?>'
-    },
-    type: 'image'
-  });
+    layer.photos ({
+        photos: '#layer-photos', anim: 4
+    });
   document.getElementsByClassName('tags').hint({
     pin: true, animate: true
   });

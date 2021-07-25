@@ -204,8 +204,9 @@ class Base
     }
 
     // Добавляем сообщение
-    public static function addMsg($msg, $class='info')
-    {
+    public static function addMsg($msg, $class)
+    {   
+        $class = ($class == 'error') ? 2 : 1;
         $_SESSION['msg'][] = array($msg, $class);
     }
   

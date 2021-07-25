@@ -9,90 +9,119 @@ class ActionModel extends \MainModel
 {
     public static function addAudit($audit_type, $audit_user_id, $audit_content_id)
     { 
-        XD::insertInto(['audits'], '(', ['audit_type'], ',', 
-            ['audit_user_id'], ',',
-            ['audit_content_id'], ',', 
-            ['audit_read_flag'], ')')->values( '(', 
-        
-        XD::setList([
-            $audit_type, 
-            $audit_user_id,
-            $audit_content_id,            
-            0]), ')' )->run();
+        $params = [
+            'audit_type'        => $audit_type,
+            'audit_user_id'     => $audit_user_id,
+            'audit_content_id'  => $audit_content_id,
+        ];
+
+        $sql = "INSERT INTO audits(audit_type, audit_user_id, audit_content_id, audit_read_flag) 
+                    VALUES(:audit_type, :audit_user_id, :audit_content_id, 0)";
+                    
+        return DB::run($sql,$params);
     }
     
     // Получим информацию по контенту в зависимости от типа
     public static function getInfoTypeContent($type_id, $type)
     { 
-       return XD::select('*')->from([$type . 's'])->where([$type . '_id'], '=', $type_id)->getSelectOne();
+        $sql = "select * from ".$type."s where ".$type."_id = ".$type_id."";
+      
+        return DB::run($sql)->fetch(PDO::FETCH_ASSOC);
     } 
  
     // Удаление / восстановление контента
     public static function setDeletingAndRestoring($type, $type_id, $status)
     { 
-        if ($status == 1) {
-            XD::update([$type . 's'])->set([$type . '_is_deleted'], '=', 0)->where([$type . '_id'], '=', $type_id)->run();
-        } else {
-            XD::update([$type . 's'])->set([$type . '_is_deleted'], '=', 1)->where([$type . '_id'], '=', $type_id)->run();
+        if ($status == 1) 
+        {
+            $sql = "UPDATE ".$type."s SET ".$type."_is_deleted = 0 where ".$type."_id = :type_id";
+        } 
+        else 
+        {
+            $sql = "UPDATE ".$type."s SET ".$type."_is_deleted = 1 where ".$type."_id = :type_id";
         }
+
+        DB::run($sql, ['type_id' => $type_id]);
     } 
     
     public static function getModerations()
     {
-        $q = XD::select('*')->from(['moderations']);
-        $query = $q->leftJoin(['users'])->on(['id'], '=', ['mod_moderates_user_id'])
-                ->leftJoin(['posts'])->on(['post_id'], '=', ['mod_post_id'])
-                ->orderBy(['mod_id'])->desc()->limit(25);
-
-        $result = $query->getSelect();
-
-        return $result; 
+        $sql = "SELECT 
+                    mod_id,
+                    mod_post_id,
+                    mod_moderates_user_id,
+                    mod_created_at,
+                    mod_action,
+                    id,
+                    login,
+                    avatar,
+                    post_id,
+                    post_title,
+                    post_slug,
+                    post_type
+                        FROM moderations
+                        LEFT JOIN users ON id = mod_moderates_user_id
+                        LEFT JOIN posts ON post_id = mod_post_id
+                        ORDER BY mod_id DESC LIMIT 25";
+                
+        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
     
     public static function moderationsAdd($data) 
     {
-       XD::insertInto(['moderations'], '(', 
-            ['mod_moderates_user_id'], ',', 
-            ['mod_moderates_user_tl'], ',', 
-            ['mod_created_at'], ',',
-            ['mod_post_id'], ',',  
-            ['mod_content_id'], ',',
-            ['mod_action'], ',', 
-            ['mod_reason'], ')')->values( '(', 
+        $params = [
+            'mod_moderates_user_id' => $data['user_id'],
+            'mod_moderates_user_tl' => $data['user_tl'],
+            'mod_created_at'        => $data['created_at'],
+            'mod_post_id'           => $data['post_id'],
+            'mod_content_id'        => $data['content_id'],
+            'mod_action'            => $data['action'],
+            'mod_reason'            => $data['reason'],
+        ];
 
-        XD::setList([
-            $data['user_id'], 
-            $data['user_tl'], 
-            $data['created_at'], 
-            $data['post_id'], 
-            $data['content_id'], 
-            $data['action'], 
-            $data['reason']]), ')' )->run();
-
-        return true; 
+        $sql = "INSERT INTO moderations(mod_moderates_user_id, 
+                        mod_moderates_user_tl, 
+                        mod_created_at, 
+                        mod_post_id, 
+                        mod_content_id, 
+                        mod_action, 
+                        mod_reason) 
+                            VALUES(:mod_moderates_user_id, 
+                                :mod_moderates_user_tl, 
+                                :mod_created_at, 
+                                :mod_post_id, 
+                                :mod_content_id, 
+                                :mod_action, 
+                                :mod_reason)";
+        
+        return DB::run($sql,$params); 
     }
  
     // Поиск контента для форм
     public static function getSearch($search, $type)
     {   
         $field_id = $type . '_id';
-        if ($type == 'post') {
+        if ($type == 'post') 
+        {
             $field_name = 'post_title'; 
             $sql = "SELECT post_id, post_title, post_is_deleted, post_tl FROM posts WHERE post_title LIKE :post_title AND post_is_deleted = 0 AND post_tl = 0 ORDER BY post_id LIMIT 8";
-            
-        } elseif ($type == 'topic') {
-            
+        } 
+        elseif ($type == 'topic') 
+        {
             $field_name = 'topic_title';
             $sql = "SELECT topic_id, topic_title FROM topic 
                     WHERE topic_title LIKE :topic_title ORDER BY topic_id LIMIT 8";
-            
-        } elseif ($type == 'main') {
+        } 
+        elseif ($type == 'main') 
+        {
             $field_id = 'topic_id';
             $field_name = 'topic_title';
             $sql = "SELECT topic_id, topic_title FROM topic 
                     WHERE topic_is_parent !=0 AND topic_title LIKE :topic_title ORDER BY topic_id LIMIT 8";
             
-        } else {
+        } 
+        else 
+        {
             $field_id = 'id';
             $field_name = 'login';
             $sql = "SELECT id, login FROM users WHERE login LIKE :login";
@@ -102,7 +131,8 @@ class ActionModel extends \MainModel
         $lists  = $result->fetchall(PDO::FETCH_ASSOC);
     
         $response = array();
-        foreach ($lists as $list) {
+        foreach ($lists as $list) 
+        {
            $response[] = array(
               "id" => $list[$field_id],
               "text" => $list[$field_name]
@@ -115,12 +145,16 @@ class ActionModel extends \MainModel
     // Режим заморозки
     public static function addLimitingMode($user_id)
     {
-        return XD::update(['users'])->set(['limiting_mode'], '=', 1)->where(['id'], '=', $user_id)->run();
+        $sql = "UPDATE users SET limiting_mode = 1 where id = :user_id";
+        
+        return  DB::run($sql, ['user_id' => $user_id]);
     }
     
     public static function deleteLimitingMode($user_id)
     {
-        return XD::update(['users'])->set(['limiting_mode'], '=', 0)->where(['id'], '=', $user_id)->run();
+        $sql = "UPDATE users SET limiting_mode = 0 where id = :user_id";
+        
+        return DB::run($sql, ['user_id' => $user_id]);
     }
  
     // Общий вклад

@@ -5,6 +5,7 @@ namespace App\Controllers\Answer;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\AnswerModel;
 use App\Models\PostModel;
+use Lori\Content;
 use Lori\Config;
 use Lori\Base;
 
@@ -32,6 +33,8 @@ class EditAnswerController extends \MainController
         if (!accessСheck($answer, 'answer', $uid, 0, 0)) {
             redirect('/');
         }        
+        
+        Content::stopContentQuietМode($uid);
         
         Base::Limits($answer_content, lang('Bodies'), '6', '5000', '/' . $url);
 
@@ -70,7 +73,6 @@ class EditAnswerController extends \MainController
             'answer_content'    => $answer['answer_content'],
             'sheet'             => 'edit-answers', 
             'meta_title'        => lang('Edit answer') .' | '. Config::get(Config::PARAM_NAME),
-            'meta_desc'         => lang('answers-desc'),  
         ]; 
         
         return view(PR_VIEW_DIR . '/answer/edit-form-answer', ['data' => $data, 'uid' => $uid, 'post' => $post]);

@@ -106,10 +106,7 @@ class PostController extends \MainController
         $meta_desc = $desc . ' — ' . $post['space_name'];
         $meta_title = strip_tags($post['post_title']) . ' — ' . strip_tags($post['space_name']) .' | '. Config::get(Config::PARAM_NAME);
 
-        Request::getResources()->addBottomStyles('/assets/css/magnific-popup.css');
         Request::getResources()->addBottomScript('/assets/js/shares.js');
-        Request::getResources()->addBottomScript('/assets/js/jquery.magnific-popup.min.js');
-        
         Request::getResources()->addBottomStyles('/assets/css/hint.css');
         Request::getResources()->addBottomScript('/assets/js/hint.js');
   

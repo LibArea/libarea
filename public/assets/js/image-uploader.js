@@ -138,8 +138,7 @@
                 $button = $('<button>', {class: 'delete-image'}).appendTo($container),
 
                 // Create the delete icon
-                $i = $('<i>', {class: 'icon close'}).appendTo($button);
-
+                $i = $('<i>', {class: 'light-icon-arrows-minimize'}).appendTo($button);
 
             // If the image is preloaded
             if (preloaded) {

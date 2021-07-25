@@ -3,7 +3,6 @@
 namespace Lori;
 
 use App\Models\ContentModel;
-use App\Models\UserModel;
 use MyParsedown;
 
 class Content
@@ -52,17 +51,6 @@ class Content
 		return false;
 	}
     
-    
-    // Длина строки и количество символов 
-    public static function rowData($string, $charset = 'UTF-8')
-    {
-        if (function_exists('mb_strlen')) {
-            return mb_strlen($string, $charset);
-        } else {
-            return iconv_strlen($string, $charset);
-        }
-    }
-
     // Для URL отслеживания
     // Пока вернем (см. метод estimationUrl) 
     public static function parseUrl($content) 
@@ -115,10 +103,10 @@ class Content
                 
                 // Добавим по id, нужна будет для notif
 				if (preg_match('/^[0-9]+$/', $login)) {
-					$user_info = UserModel::getUser($login, 'id');
+					$user_info = ContentModel::getUsers($login, 'id');
 				}
 				else {
-					$user_info = UserModel::getUser($login, 'slug');
+					$user_info = ContentModel::getUsers($login, 'slug');
 				}
 
 				if ($user_info) {
@@ -145,4 +133,16 @@ class Content
 
 		return $content;
 	}
+    
+    // Остановим изменение (добавление) контента
+    public static function stopContentQuietМode($uid)
+    {
+        if ($uid['limiting_mode'] == 1) 
+        {
+            Base::addMsg(lang('limiting_mode_1'), 'error');
+            redirect('/');
+        }
+        
+        return true;
+    }
 }

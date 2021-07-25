@@ -19,7 +19,7 @@ class HomeController extends \MainController
         $limit  = 25;
         $space_user         = HomeModel::getSubscriptionSpaces($uid['id']);
         $latest_answers     = HomeModel::latestAnswers($uid);
-        
+
         $pagesCount = HomeModel::feedCount($space_user, $uid); 
         $posts      = HomeModel::feed($page, $limit, $space_user, $uid, $sheet);
         Base::PageError404($posts);
