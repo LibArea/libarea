@@ -24,7 +24,7 @@ class AddTopicController extends \MainController
         $topic_merged_id    = \Request::getPost('topic_merged_id');
         $topic_related      = \Request::getPost('topic_related');
         
-        $redirect = '/admin/topic/add';
+        $redirect = '/topic/add';
 
         Base::Limits($topic_title , lang('Title'), '3', '64', $redirect);
         Base::Limits($topic_description, lang('Meta Description'), '44', '225', $redirect);

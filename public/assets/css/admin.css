@@ -3,7 +3,8 @@
 body {
   line-height: 1.6;
   color: #333;
-  font: 14px Helvetica, Helvetica, Tahoma,Arial,sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+  font-size: 15px;
   margin: 0;
   padding: 0;
   background-color: #f3f3f3;
@@ -311,16 +312,13 @@ textarea {
   padding: 0.35rem 0.4rem;
   position: relative;
   width: 100%;
+  max-width: 40rem;
 }
 
 .form-input:focus,
 textarea:focus {
   box-shadow: 0 0 0 0.1rem rgba(38, 139, 210, 0.2);
   border-color: #268bd2;
-}
-
-.form-input {
-  max-width: 40rem;
 }
 
 .button {
@@ -354,4 +352,3 @@ textarea:focus {
   border: none;
   color: #5b7083;
 }
- 

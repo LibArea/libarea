@@ -48,8 +48,6 @@ class SearchController extends \MainController
             $result = '';
         }
    
-        Request::getResources()->addBottomStyles('/assets/css/info.css'); 
-        
         $uid  = Base::getUid();
         $data = [
             'h1'            => lang('Search'),

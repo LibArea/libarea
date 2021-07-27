@@ -586,8 +586,7 @@ textarea:focus {
 
 /* Поиск */
 input.form-search {
-  border: 1px solid #e6ecf0;
-  background-color: #e6ecf0;
+  border: 1px solid #ebebeb;
   border-radius: 10em;
   padding: 2px 0 2px 10px;
   height: 25px;
@@ -598,12 +597,14 @@ input.form-search {
 
 input.form-search:hover {
   border: 1px solid #e6ecf0;
-  background-color: #fff;
 }
 
 input.form-search:focus {
-  border: 1px solid #1ca1f3;
-  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+::placeholder {
+  color: #888;
 }
 
 form.form {
@@ -1510,8 +1511,15 @@ i.light-icon-brand-github:hover {
   font-size: 24px;
 }
 
-.video-object { width: 640px; height: 360px; }
-.answ-telo .video-object { width: 290px; height: 160px; }
+.video-object {
+  width: 640px;
+  height: 360px;
+}
+
+.answ-telo .video-object {
+  width: 290px;
+  height: 160px;
+}
 
 @media (max-width: 880px) {
   .no-mob,
@@ -1536,5 +1544,4 @@ i.light-icon-brand-github:hover {
   form.form { display: none; }
   .topic-box-list { grid-template-columns: repeat(auto-fit, minmax(99%, 1fr)); }
 }
-
  
