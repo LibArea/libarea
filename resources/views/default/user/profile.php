@@ -216,7 +216,7 @@
                 <h3 class="badge"><?= lang('Badges'); ?></h3>
                 <div class="profile-badge">
                     <?php if($user['id'] < 50) { ?>
-                        <i title="<?= lang('Joined in the early days'); ?>" class="light-icon-award middle green"></i> 
+                        <i title="<?= lang('Joined in the early days'); ?>" class="light-icon-award green"></i> 
                     <?php } ?>
                     <?php foreach ($data['badges'] as $badge) { ?>
                         <?= $badge['badge_icon']; ?>

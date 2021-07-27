@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Controllers;
+namespace Modules\Admin;
+
 use Hleb\Constructor\Handlers\Request;
 use App\Models\SpaceModel;
 use App\Models\PostModel;
 use App\Models\UserModel;
 use App\Models\WebModel;
-use App\Models\AdminModel;
 use App\Models\TopicModel;
 use App\Models\CommentModel;
 use App\Models\AnswerModel;
@@ -14,8 +14,9 @@ use App\Models\ContentModel;
 use Lori\Content;
 use Lori\Base;
 
-class AdminController extends \MainController
+class Controller extends \MainController
 {
+    
 	public function index()
 	{
         $uid    = Base::getUid();
@@ -29,7 +30,7 @@ class AdminController extends \MainController
             'bytes'         => $bytes,
         ]; 
         
-        return view(PR_VIEW_DIR . '/admin/index', ['data' => $data, 'uid' => $uid]);
+        return view('/templates/index', ['data' => $data, 'uid' => $uid]);
 	}
     
 	public function users($sheet)
@@ -39,34 +40,28 @@ class AdminController extends \MainController
         $page   = $page == 0 ? 1 : $page;
 
         $limit = 50;
-        $pagesCount = AdminModel::getUsersListForAdminCount($sheet);
-        $user_all   = AdminModel::getUsersListForAdmin($page, $limit, $sheet);
+        $pagesCount = Model::getUsersListForAdminCount($sheet);
+        $user_all   = Model::getUsersListForAdmin($page, $limit, $sheet);
 
         $result = Array();
-        foreach ($user_all as $ind => $row) {
-            $row['replayIp']    = AdminModel::replayIp($row['reg_ip']);
-            $row['isBan']       = AdminModel::isBan($row['id']);
-            $row['logs']        = AdminModel::userLogId($row['id']);
+        foreach ($user_all as $ind => $row) 
+        {
+            $row['replayIp']    = Model::replayIp($row['reg_ip']);
+            $row['isBan']       = Model::isBan($row['id']);
+            $row['logs']        = Model::userLogId($row['id']);
             $row['created_at']  = lang_date($row['created_at']); 
             $result[$ind]       = $row;
         } 
-        
-        $title = lang('Users');
-        if ($sheet == 'ban') {
-            $title = lang('Banned');
-        }
-        
+
         $data = [
             'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
             'users'         => $result,
-            'meta_title'    => $title,
-            'sheet'         => $sheet,
+            'meta_title'    => lang('Users'),
+            'sheet'         => $sheet == 'ban' ? 'banuser' : 'userall',
         ]; 
-
-        Request::getResources()->addBottomScript('/assets/js/admin.js'); 
-        
-        return view(PR_VIEW_DIR . '/admin/user/users', ['data' => $data, 'uid' => $uid, 'alluser' => $result]);
+ 
+        return view('/templates/user/users', ['data' => $data, 'uid' => $uid, 'alluser' => $result]);
 	}
     
     // Повторы IP
@@ -74,12 +69,13 @@ class AdminController extends \MainController
     {
         $uid        = Base::getUid();
         $user_ip    = \Request::get('ip');
-        $user_all   = AdminModel::getUserLogsId($user_ip);
+        $user_all   = Model::getUserLogsId($user_ip);
  
         $results = Array();
-        foreach ($user_all as $ind => $row) {
-            $row['replayIp']    = AdminModel::replayIp($row['reg_ip']);
-            $row['isBan']       = AdminModel::isBan($row['id']);
+        foreach ($user_all as $ind => $row) 
+        {
+            $row['replayIp']    = Model::replayIp($row['reg_ip']);
+            $row['isBan']       = Model::isBan($row['id']);
             $results[$ind]      = $row;
         } 
         
@@ -89,9 +85,7 @@ class AdminController extends \MainController
             'sheet'         => 'admin',
         ]; 
 
-        Request::getResources()->addBottomScript('/assets/js/admin.js'); 
-
-        return view(PR_VIEW_DIR . '/admin/user/logip', ['data' => $data, 'uid' => $uid, 'alluser' => $results]); 
+        return view('/templates/user/logip', ['data' => $data, 'uid' => $uid, 'alluser' => $results]); 
     }
     
     // Бан участнику
@@ -99,7 +93,7 @@ class AdminController extends \MainController
     {
         $user_id    = \Request::getPostInt('id');
         
-        AdminModel::setBanUser($user_id);
+        Model::setBanUser($user_id);
         
         return true;
     }
@@ -116,7 +110,8 @@ class AdminController extends \MainController
         $comments   = CommentModel::getCommentsDeleted($page, $limit);
 
         $result = Array();
-        foreach ($comments  as $ind => $row) {
+        foreach ($comments  as $ind => $row) 
+        {
             $row['content'] = Content::text($row['comment_content'], 'text');
             $row['date']    = lang_date($row['comment_date']);
             $result[$ind]   = $row;
@@ -129,9 +124,7 @@ class AdminController extends \MainController
             'pNum'          => $page,
         ]; 
 
-        Request::getResources()->addBottomScript('/assets/js/admin.js'); 
- 
-        return view(PR_VIEW_DIR . '/admin/comment-delet', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
+        return view('/templates/comment-delet', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
     }
      
     // Удалёные ответы
@@ -146,7 +139,8 @@ class AdminController extends \MainController
         $answers    = AnswerModel::getAnswersDeleted($page, $limit);
 
         $result = Array();
-        foreach ($answers  as $ind => $row) {
+        foreach ($answers  as $ind => $row) 
+        {
             $row['content'] = Content::text($row['answer_content'], 'text');
             $row['date']    = lang_date($row['answer_date']);
             $result[$ind]   = $row;
@@ -159,19 +153,18 @@ class AdminController extends \MainController
             'pNum'          => $page,
         ]; 
 
-        Request::getResources()->addBottomScript('/assets/js/admin.js'); 
- 
-        return view(PR_VIEW_DIR . '/admin/answer-delet', ['data' => $data, 'uid' => $uid, 'answers' => $result]);
+        return view('/templates/answer-delet', ['data' => $data, 'uid' => $uid, 'answers' => $result]);
     }
      
     // Показываем дерево приглашенных
     public function invitations($sheet)
     {
         $uid    = Base::getUid();
-        $invite = AdminModel::getInvitations();
+        $invite = Model::getInvitations();
  
         $result = Array();
-        foreach ($invite  as $ind => $row) {
+        foreach ($invite  as $ind => $row) 
+        {
             $row['uid']         = UserModel::getUser($row['uid'], 'id');  
             $row['active_time'] = $row['active_time'];
             $result[$ind]       = $row;
@@ -182,7 +175,7 @@ class AdminController extends \MainController
             'sheet'         => 'invitations',
         ]; 
 
-        return view(PR_VIEW_DIR . '/admin/invitations', ['data' => $data, 'uid' => $uid, 'invitations' => $result]);
+        return view('/templates/invitations', ['data' => $data, 'uid' => $uid, 'invitations' => $result]);
     }
     
     // Пространства
@@ -198,14 +191,12 @@ class AdminController extends \MainController
   
         $data = [
             'meta_title'    => lang('Spaces'),
-            'sheet'         => 'admin',
+            'sheet'         => 'spaces',
             'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
         ]; 
 
-        Request::getResources()->addBottomScript('/assets/js/admin.js'); 
- 
-        return view(PR_VIEW_DIR . '/admin/spaces', ['data' => $data, 'uid' => $uid, 'spaces' => $spaces]);
+        return view('/templates/spaces', ['data' => $data, 'uid' => $uid, 'spaces' => $spaces]);
     }
     
     // Удаление / восстановление пространства
@@ -222,18 +213,18 @@ class AdminController extends \MainController
     public function badges($sheet)
     {
         $uid    = Base::getUid();
-        $badges = AdminModel::getBadgesAll();
+        $badges = Model::getBadgesAll();
         
         $data = [
             'meta_title'    => lang('Badges'),
             'sheet'         => 'badges',
         ]; 
 
-        return view(PR_VIEW_DIR . '/admin/badge/badges', ['data' => $data, 'uid' => $uid, 'badges' => $badges]);
+        return view('/templates/badge/badges', ['data' => $data, 'uid' => $uid, 'badges' => $badges]);
     }
     
     // Форма добавления награды
-    public function addBadgeForm()
+    public function addBadgePage()
     {
         $uid  = Base::getUid();
         $data = [
@@ -241,29 +232,32 @@ class AdminController extends \MainController
             'sheet'         => 'badges',
         ]; 
 
-        return view(PR_VIEW_DIR . '/admin/badge/add', ['data' => $data, 'uid' => $uid]);
+        return view('/templates/badge/add', ['data' => $data, 'uid' => $uid]);
     }
     
     // Форма награждения участинка
-    public function addBadgeUserForm()
+    public function addBadgeUserPage()
     {
         $uid        = Base::getUid();
         $user_id    = \Request::getInt('id');
 
-        if ($user_id > 0) {
+        if ($user_id > 0) 
+        {
             $user   = UserModel::getUser($user_id, 'id');
-        } else {
+        } 
+        else 
+        {
             $user   = null;
         }
 
-        $badges = AdminModel::getBadgesAll();
+        $badges = Model::getBadgesAll();
         
         $data = [
             'meta_title'    => lang('Reward the user'),
             'sheet'         => 'admin',
         ]; 
 
-        return view(PR_VIEW_DIR . '/admin/badge/user-add', ['data' => $data, 'uid' => $uid, 'user' => $user, 'badges' => $badges]);    
+        return view('/templates/badge/user-add', ['data' => $data, 'uid' => $uid, 'user' => $user, 'badges' => $badges]);    
     }
     
     // Награждение
@@ -272,36 +266,37 @@ class AdminController extends \MainController
         $user_id    = \Request::getPostInt('user_id');
         $badge_id   = \Request::getPostInt('badge_id');
 
-        AdminModel::badgeUserAdd($user_id, $badge_id);
+        Model::badgeUserAdd($user_id, $badge_id);
 
         Base::addMsg(lang('Reward added'), 'success');
         redirect('/admin/user/' . $user_id . '/edit');
     }
 
     // Форма изменения награды
-    public function editBadgeForm()
+    public function editBadgePage()
     {
         $uid        = Base::getUid();
         $badge_id   = \Request::getInt('id');
-        $badge      = AdminModel::getBadgeId($badge_id);        
+        $badge      = Model::getBadgeId($badge_id);        
 
-        if (!$badge['badge_id']) {
+        if (!$badge['badge_id']) 
+        {
             redirect('/admin/badges');
         }
 
         $data = [
             'meta_title'    => lang('Edit badge'),
-            'sheet'         => 'admin',
+            'sheet'         => 'badges',
         ]; 
 
-        return view(PR_VIEW_DIR . '/admin/badge/edit', ['data' => $data, 'uid' => $uid, 'badge' => $badge]);
+        return view('/templates/badge/edit', ['data' => $data, 'uid' => $uid, 'badge' => $badge]);
     }
     
     // Измененяем награду
     public function badgeEdit()
     {
         $badge_id   = \Request::getInt('id');
-        $badge      = AdminModel::getBadgeId($badge_id);
+        $badge      = Model::getBadgeId($badge_id);
         
         $redirect = '/admin/badges';
         if (!$badge['badge_id']) {
@@ -323,7 +318,7 @@ class AdminController extends \MainController
             'badge_icon'        => $badge_icon,
         ];
         
-        AdminModel::setEditBadge($data);
+        Model::setEditBadge($data);
         redirect($redirect);  
     }
     
@@ -347,7 +342,7 @@ class AdminController extends \MainController
             'badge_score'       => 0,
         ];
         
-        AdminModel::setAddBadge($data);
+        Model::setAddBadge($data);
         redirect($redirect);  
     }
     
@@ -361,9 +356,9 @@ class AdminController extends \MainController
            redirect('/admin'); 
         }
         
-        $user['isBan']      = AdminModel::isBan($user_id);
-        $user['replayIp']   = AdminModel::replayIp($user_id);
-        $user['logs']       = AdminModel::userLogId($user_id);
+        $user['isBan']      = Model::isBan($user_id);
+        $user['replayIp']   = Model::replayIp($user_id);
+        $user['logs']       = Model::userLogId($user_id);
         $user['badges']     = UserModel::getBadgeUserAll($user_id);
          
         $data = [
@@ -375,9 +370,7 @@ class AdminController extends \MainController
             'spaces_user'       => SpaceModel::getUserCreatedSpaces($user_id),
         ]; 
 
-        Request::getResources()->addBottomScript('/assets/js/admin.js'); 
-        
-        return view(PR_VIEW_DIR . '/admin/user/edit', ['data' => $data, 'uid' => $uid, 'user' => $user]);
+        return view('/templates/user/edit', ['data' => $data, 'uid' => $uid, 'user' => $user]);
     }
     
     // Редактировать участника
@@ -386,7 +379,8 @@ class AdminController extends \MainController
         $user_id    = \Request::getInt('id');
         
         $redirect = '/admin/users';
-        if (!UserModel::getUser($user_id, 'id')) {
+        if (!UserModel::getUser($user_id, 'id')) 
+        {
             redirect($redirect);
         }
         
@@ -425,7 +419,7 @@ class AdminController extends \MainController
             'vk'            => empty($vk) ? '' : $vk,
         ];
         
-        AdminModel::setUserEdit($data);
+        Model::setUserEdit($data);
         
         redirect($redirect);
     }
@@ -448,9 +442,7 @@ class AdminController extends \MainController
             'pNum'          => $page,
         ]; 
 
-        Request::getResources()->addBottomScript('/assets/js/admin.js'); 
-        
-        return view(PR_VIEW_DIR . '/admin/domains', ['data' => $data, 'uid' => $uid, 'domains' => $domains]);
+        return view('/templates/domains', ['data' => $data, 'uid' => $uid, 'domains' => $domains]);
     }
     
     // Страница стоп-слов
@@ -468,9 +460,7 @@ class AdminController extends \MainController
             'sheet'         => 'words',
         ]; 
 
-        Request::getResources()->addBottomScript('/assets/js/admin.js'); 
-        
-        return view(PR_VIEW_DIR . '/admin/word/words', ['data' => $data, 'uid' => $uid, 'words' => $words]);
+        return view('/templates/word/words', ['data' => $data, 'uid' => $uid, 'words' => $words]);
     }
     
     // Все пространства
@@ -491,13 +481,11 @@ class AdminController extends \MainController
             'pNum'          => $page,
         ]; 
         
-        Request::getResources()->addBottomScript('/assets/js/admin.js'); 
-        
-        return view(PR_VIEW_DIR . '/admin/topics', ['data' => $data, 'uid' => $uid, 'topics' => $topics]);
+        return view('/templates/topics', ['data' => $data, 'uid' => $uid, 'topics' => $topics]);
     }
     
     // Форма добавления стоп-слова
-    public function wordsAddForm()
+    public function wordsAddPage()
     {
         $uid  = Base::getUid();
         $data = [
@@ -506,7 +494,7 @@ class AdminController extends \MainController
             'sheet'         => 'words',
         ]; 
 
-        return view(PR_VIEW_DIR . '/admin/word/add-word', ['data' => $data, 'uid' => $uid]);
+        return view('/templates/word/add-word', ['data' => $data, 'uid' => $uid]);
     }
     
     // Добавление стоп-слова
@@ -541,17 +529,25 @@ class AdminController extends \MainController
         $page   = $page == 0 ? 1 : $page;
         
         $limit  = 55;
-        $pagesCount = AdminModel::getAuditsAllCount($sheet); 
-        $audits     = AdminModel::getAuditsAll($page, $limit, $sheet);
+        $pagesCount = Model::getAuditsAllCount($sheet); 
+        $audits     = Model::getAuditsAll($page, $limit, $sheet);
         
         $result = Array();
-        foreach ($audits  as $ind => $row) {
+        foreach ($audits  as $ind => $row) 
+        {
             
-            if ($row['audit_type'] == 'post') {
+            if ($row['audit_type'] == 'post') 
+            {
                 $row['content'] = PostModel::getPostId($row['audit_content_id']);
-            } elseif ($row['audit_type'] == 'answer') {
+            } 
+            elseif ($row['audit_type'] == 'answer') 
+            {
                 $row['content'] = AnswerModel::getAnswerId($row['audit_content_id']); 
-            } elseif ($row['audit_type'] == 'comment') {
+                
+                $row['post'] = PostModel::getPostId($row['content']['answer_post_id']);
+            } 
+            elseif ($row['audit_type'] == 'comment') 
+            {
                 $row['content'] = CommentModel::getCommentsId($row['audit_content_id']); 
             }
 
@@ -565,9 +561,7 @@ class AdminController extends \MainController
             'pNum'          => $page,
         ]; 
         
-        Request::getResources()->addBottomScript('/assets/js/admin.js'); 
-        
-        return view(PR_VIEW_DIR . '/admin/audits', ['data' => $data, 'uid' => $uid, 'audits' => $result]);
+        return view('/templates/audits', ['data' => $data, 'uid' => $uid, 'audits' => $result]);
     } 
     
     // Восстановление после аудита
@@ -577,8 +571,45 @@ class AdminController extends \MainController
         $status = preg_split('/(@)/', $st);
        
         // id, type
-        AdminModel::recoveryAudit($status[0], $status[1]);
+        Model::recoveryAudit($status[0], $status[1]);
       
+        return true;
+    }
+ 
+    // Получим Favicon
+    public static function getFavicon($url)
+    {
+        $url = str_replace("https://", '', $url);
+        return "https://www.google.com/s2/favicons?domain=".$url;
+    }
+    
+    // Запишем Favicon
+    public function favicon()
+    {
+        $link_id    = \Request::getPostInt('id');
+        $uid        = Base::getUid();
+
+        if ($uid['trust_level'] != 5) 
+        {
+            return false;
+        }
+        
+        $link = WebModel::getLinkId($link_id);
+        
+        if (!$link) 
+        {
+            return false;
+        }
+        
+        $puth = HLEB_PUBLIC_DIR. '/uploads/favicons/' . $link["link_id"] . '.png';
+        $dirF = HLEB_PUBLIC_DIR. '/uploads/favicons/';
+
+        if (!file_exists($puth)) 
+        {  
+            $urls = self::getFavicon($link['link_url_domain']);       
+            copy($urls, $puth); 
+        } 
+        
         return true;
     }
  

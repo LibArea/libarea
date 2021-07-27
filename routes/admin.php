@@ -1,34 +1,35 @@
 <?php
+
 Route::prefix('/admin');
 Route::before('Authorization@admin')->getGroup();
-    Route::get('/')->controller('AdminController');
+    Route::get('/')->module('admin', 'Controller');
 
     Route::getType('post');
-        Route::get('/space/ban')->controller('AdminController@delSpace');
-        Route::get('/ban')->controller('AdminController@banUser');
-        Route::get('/favicon/add')->controller('Web\WebController@favicon');
-        Route::get('/word/del')->controller('AdminController@deleteWord');
-        Route::get('/audit/status')->controller('AdminController@status');
+        Route::get('/space/ban')->module('admin', 'Controller@delSpace');
+        Route::get('/ban')->module('admin', 'Controller@banUser');
+        Route::get('/favicon/add')->module('admin', 'Controller@favicon');
+        Route::get('/word/del')->module('admin', 'Controller@deleteWord');
+        Route::get('/audit/status')->module('admin', 'Controller@status');
         
         Route::getProtect();
-            Route::get('/badge/user/add')->controller('AdminController@addBadgeUser');
-            Route::get('/badge/add')->controller('AdminController@badgeAdd');
-            Route::get('/word/add')->controller('AdminController@wordAdd');
-            Route::get('/user/edit/{id}')->controller('AdminController@userEdit')->where(['id' => '[0-9]+']);
-            Route::get('/domain/edit/{id}')->controller('AdminController@domainEdit')->where(['id' => '[0-9]+']);
-            Route::get('/badge/edit/{id}')->controller('AdminController@badgeEdit')->where(['id' => '[0-9]+']);
+            Route::get('/badge/user/add')->module('admin', 'Controller@addBadgeUser');
+            Route::get('/badge/add')->module('admin', 'Controller@badgeAdd');
+            Route::get('/word/add')->module('admin', 'Controller@wordAdd');
+            Route::get('/user/edit/{id}')->module('admin', 'Controller@userEdit')->where(['id' => '[0-9]+']);
+            Route::get('/domain/edit/{id}')->module('admin', 'Controller@domainEdit')->where(['id' => '[0-9]+']);
+            Route::get('/badge/edit/{id}')->module('admin', 'Controller@badgeEdit')->where(['id' => '[0-9]+']);
         Route::endProtect();
     Route::endType();
   
-    Route::get('/{method}')->controller('AdminController@<method>', ['all']);
-    Route::get('/{method}/ban')->controller('AdminController@<method>', ['ban']);
+    Route::get('/{method}')->module('admin', 'Controller@<method>', ['all']);
+    Route::get('/{method}/ban')->module('admin', 'Controller@<method>', ['ban']);
 
-    Route::get('/users/page/{page?}')->controller('AdminController@users', ['all'])->where(['page' => '[0-9]+']);
-    Route::get('/user/{id}/edit')->controller('AdminController@userEditPage')->where(['id' => '[0-9]+']);
-    Route::get('/logip/{ip}')->controller('AdminController@logsIp')->where(['ip' => '[0-9].+']);
-    Route::get('/words/add')->controller('AdminController@wordsAddForm');
-    Route::get('/audit/approved')->controller('AdminController@audit', ['approved']);
-    Route::get('/badge/add')->controller('AdminController@addBadgeForm');
-    Route::get('/badge/user/add/{id}')->controller('AdminController@addBadgeUserForm')->where(['id' => '[0-9]+']);
-    Route::get('/badge/{id}/edit')->controller('AdminController@editBadgeForm')->where(['id' => '[0-9]+']);
+    Route::get('/users/page/{page?}')->module('admin', 'Controller@users', ['all'])->where(['page' => '[0-9]+']);
+    Route::get('/user/{id}/edit')->module('admin', 'Controller@userEditPage')->where(['id' => '[0-9]+']);
+    Route::get('/logip/{ip}')->module('admin', 'Controller@logsIp')->where(['ip' => '[0-9].+']);
+    Route::get('/words/add')->module('admin', 'Controller@wordsAddPage');
+    Route::get('/audit/approved')->module('admin', 'Controller@audit', ['approved']);
+    Route::get('/badge/add')->module('admin', 'Controller@addBadgePage');
+    Route::get('/badge/user/add/{id}')->module('admin', 'Controller@addBadgeUserPage')->where(['id' => '[0-9]+']);
+    Route::get('/badge/{id}/edit')->module('admin', 'Controller@editBadgePage')->where(['id' => '[0-9]+']);
 Route::endGroup();

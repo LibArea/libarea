@@ -1,4 +1,4 @@
-<?php include TEMPLATE_DIR . '/header.php'; ?>
+<?php include TEMPLATE_ADMIN_DIR . '/_block/header-admin.php'; ?>
 <div class="wrap">
     <main class="admin">
         <div class="white-box">
@@ -9,15 +9,13 @@
                     <?php if (!empty($invitations)) { ?>
                   
                         <?php foreach ($invitations as $key => $inv) { ?>  
-
-                            <a href="/u/<?= $inv['uid']['login']; ?>"><?= $inv['uid']['login']; ?></a> <sup>id<?= $inv['uid']['id']; ?></sup>
-                            => 
-                            <a href="/u/<?= $inv['login']; ?>"><?= $inv['login']; ?></a> <sup>id<?= $inv['active_uid']; ?></sup> 
-                            
-                            <span class="date"><small> - <?= $inv['active_time']; ?></small></span>
-                             
-                            <br>
-
+                            <div class="content-telo">
+                                <a href="/u/<?= $inv['uid']['login']; ?>"><?= $inv['uid']['login']; ?></a> <sup>id<?= $inv['uid']['id']; ?></sup>
+                                => 
+                                <a href="/u/<?= $inv['login']; ?>"><?= $inv['login']; ?></a> <sup>id<?= $inv['active_uid']; ?></sup> 
+                                
+                                <span class="date"><small> - <?= $inv['active_time']; ?></small></span>
+                            </div>
                         <?php } ?>
                         
                     <?php } else { ?>
@@ -27,6 +25,5 @@
             </div>
         </div>
     </main>
-    <?php include TEMPLATE_DIR . '/_block/admin-menu.php'; ?>
 </div>
-<?php include TEMPLATE_DIR . '/footer.php'; ?>
+<?php include TEMPLATE_ADMIN_DIR . '/_block/footer-admin.php'; ?>

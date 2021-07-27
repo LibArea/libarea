@@ -14,7 +14,8 @@ class Content
         $Parsedown->setSafeMode(true); //безопасность
          
         if ($type  == 'text') {
-            $text   = $Parsedown->text($content);
+             $text   = $Parsedown->text($content);
+             $text   = self::parseVideo($text); 
         } else {
             $text   = $Parsedown->line($content);
         }
@@ -72,6 +73,25 @@ class Content
         } 
         return true;
     }
+    
+    public static function parseVideo($content)
+    { 
+        $regex  = '/https:\/\/(www\.|m\.){0,1}(youtube\.com\/watch\?v=|youtu\.be)([^< \n]+)/mi'; 
+        $info   = preg_match($regex, $content, $matches);
+        if ($info) 
+        {
+            $id  = $matches[3];
+            $url = "https://www.youtube.com/embed/" . basename($id);
+            $bodyvideo =
+                "<div class='video'>".
+                "<object class='video-object' data='$url'></object>".
+                "</div>";
+      
+            return str_replace($matches[0], $bodyvideo, $content);
+        }
+        
+        return  $content;
+    } 
     
     // Парсинг user login / uid
     public static function parseUser($content, $with_user = false, $to_uid = false)

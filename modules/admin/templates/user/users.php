@@ -1,4 +1,4 @@
-<?php include TEMPLATE_DIR . '/header.php'; ?>
+<?php include TEMPLATE_ADMIN_DIR . '/_block/header-admin.php'; ?>
 <div class="wrap">
   <main class="admin">
     <div class="white-box">
@@ -6,7 +6,7 @@
         <?= breadcrumb('/admin', lang('Admin'), '/admin/users',lang('Users'), $data['meta_title']); ?>
         
         <ul class="nav-tabs">
-            <?php if($data['sheet'] == 'all') { ?>
+            <?php if($data['sheet'] == 'userall') { ?>
                 <li class="active">
                     <span><?= lang('All'); ?></span>
                 </li>
@@ -15,7 +15,7 @@
                         <span><?= lang('Banned'); ?></span>
                     </a>
                 </li>
-            <?php } elseif($data['sheet'] == 'ban') { ?>
+            <?php } elseif($data['sheet'] == 'banuser') { ?>
                 <li>
                     <a href="/admin/users">
                         <span><?= lang('All'); ?></span>
@@ -39,6 +39,7 @@
           </div>
           <?php if($alluser) {  ?>
               <?php foreach ($alluser as $user) {  ?>
+              
                 <div class="t-tr">
                   <span class="t-td width-30 center">
                     <?= $user['id']; ?>
@@ -58,7 +59,11 @@
                     </div>  
                     <?php if($user['limiting_mode'] == 1) { ?>
                           <div class="red"><?= lang('Dumb mode'); ?></div>
-                    <?php } ?>  
+                    <?php } ?> 
+
+                    <?php if (!empty($user['isBan']['banlist_int_num'])) { ?>
+                          bans: <?= $user['isBan']['banlist_int_num']; ?>
+                    <?php } ?>
                   </span>
                   <span class="t-td center"> 
                     <?php if($user['trust_level'] != 5) { ?>         
@@ -120,6 +125,5 @@
       </div>
     </div>   
   </main> 
-  <?php include TEMPLATE_DIR . '/_block/admin-menu.php'; ?>
 </div>
-<?php include TEMPLATE_DIR . '/footer.php'; ?>
+<?php include TEMPLATE_ADMIN_DIR . '/_block/footer-admin.php'; ?>

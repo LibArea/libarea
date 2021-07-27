@@ -1,9 +1,9 @@
-<?php include TEMPLATE_DIR . '/header.php'; ?>
+<?php include TEMPLATE_ADMIN_DIR . '/_block/header-admin.php'; ?>
 <div class="wrap">
     <main class="admin">
         <div class="white-box">
             <div class="inner-padding">
-                <a class="right vertical-ind" title="<?= lang('Add'); ?>" href="/web/add">
+                <a class="right" title="<?= lang('Add'); ?>" href="/web/add">
                     <i class="light-icon-plus middle"></i>
                 </a>
                 <?= breadcrumb('/admin', lang('Admin'), null, null, $data['meta_title']); ?>
@@ -12,18 +12,18 @@
                     <?php if (!empty($domains)) { ?>
                   
                         <?php foreach ($domains as $key => $link) { ?>  
-                            <div class="domain-box vertical-ind">
+                            <div class="domain-box">
                                 <span class="add-favicon right small" data-id="<?= $link['link_id']; ?>">
                                     +фавикон
                                 </span>
-                                <h2 class="title">
+                                <div class="title">
                                     <?php if($link['link_title']) { ?>
                                         <?= $link['link_title']; ?>
                                     <?php } else { ?>
                                         Add title...                                    
                                     <?php } ?> 
-                                </h2>
-                                <div class="indent-big gray">
+                                </div>
+                                <div class="content-telo">
                                     <?php if($link['link_content']) { ?>
                                         <?= $link['link_content']; ?>
                                     <?php } else { ?>
@@ -31,19 +31,22 @@
                                     <?php } ?> 
                                 </div> 
                                 
-                                <div class="small indent-big lowercase">
+                                <div class="content-footer">
                                     <a class="green" rel="nofollow noreferrer" href="<?= $link['link_url']; ?>">
                                         <?= favicon_img($link['link_id'], $link['link_url_domain']); ?>
                                         <span class="green"><?= $link['link_url']; ?></span>
                                     </a> | 
-                                    id<?= $link['link_id']; ?> |
-                                    <?= $link['link_url_domain']; ?> |
+                                    id<?= $link['link_id']; ?> 
+                                    <span class="indent"> &#183; </span>
+                                    <?= $link['link_url_domain']; ?> 
                                     
+                                    <span class="indent"> &#183; </span>
                                     <?php if($link['link_is_deleted'] == 0) { ?>
                                         active
                                     <?php } else { ?>
                                         <span class="red">Ban</span>                                  
-                                    <?php } ?> |
+                                    <?php } ?> 
+                                    <span class="indent"> &#183; </span>
                                     <a href="/web/edit/<?= $link['link_id']; ?>"><?= lang('Edit'); ?></a>
                                     <span class="right heart-link red">
                                          +<?= $link['link_count']; ?>
@@ -59,6 +62,5 @@
             </div>
         </div>
     </main>
-    <?php include TEMPLATE_DIR . '/_block/admin-menu.php'; ?>
 </div>
-<?php include TEMPLATE_DIR . '/footer.php'; ?>
+<?php include TEMPLATE_ADMIN_DIR . '/_block/footer-admin.php'; ?>

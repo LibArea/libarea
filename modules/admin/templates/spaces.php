@@ -1,9 +1,9 @@
-<?php include TEMPLATE_DIR . '/header.php'; ?>
+<?php include TEMPLATE_ADMIN_DIR . '/_block/header-admin.php'; ?>
 <div class="wrap">
     <main class="admin">
         <div class="white-box">
             <div class="inner-padding">
-                <a class="right vertical-ind" title="<?= lang('Add'); ?>" href="/space/add">
+                <a class="right" title="<?= lang('Add'); ?>" href="/space/add">
                     <i class="light-icon-plus middle"></i>
                 </a>
                 <?= breadcrumb('/admin', lang('Admin'), null, null, $data['meta_title']); ?>
@@ -14,7 +14,7 @@
                         <div class="t-table">
                             <div class="t-th">
                                 <span class="t-td center">Id</span>
-                                <span class="t-td"><?= lang('Logo'); ?></span>
+                                <span class="t-td center"><?= lang('Logo'); ?></span>
                                 <span class="t-td"><?= lang('Info'); ?></span>
                                 <span class="t-td center">Ban</span>
                                 <span class="t-td center"><?= lang('Action'); ?></span>
@@ -28,10 +28,11 @@
                                     <span class="t-td width-30 center">
                                         <?= spase_logo_img($sp['space_img'], 'max', $sp['space_slug'], 'ava-64'); ?>
                                     </span>
-                                    <span class="t-td">
-                                        <a title="<?= $sp['space_name']; ?>" href="/s/<?= $sp['space_slug']; ?>">
+                                    <span class="t-td small">
+                                        <a class="title" title="<?= $sp['space_name']; ?>" href="/s/<?= $sp['space_slug']; ?>">
                                             <?= $sp['space_name']; ?> (s/<?= $sp['space_slug']; ?>)
-                                        </a>  
+                                        </a> 
+                                                                            
                                         <sup>
                                             <?php if($sp['space_type'] == 1) {  ?>
                                                 <span class="red"><?= lang('official'); ?></span>
@@ -40,16 +41,17 @@
                                             <?php } ?>
                                         </sup>
                                         
-                                        <br>
+                                        <div class="content-telo">
+                                            <?= $sp['space_description']; ?> 
+                                        </div>
+
+                                        <?= $sp['space_date']; ?> 
+                                        <span class="indent"> &#183; </span>
+                                        <?= user_avatar_img($sp['avatar'], 'small', $sp['login'], 'ava'); ?>
+                                        <a target="_blank" rel="noopener" href="/u/<?= $sp['login']; ?>">
+                                            <?= $sp['login']; ?>
+                                        </a>
                                         
-                                        <?= $sp['space_description']; ?> <br>
-                                        <small>
-                                            <?= $sp['space_date']; ?> 
-                                            <?= user_avatar_img($sp['avatar'], 'small', $sp['login'], 'ava-small'); ?>
-                                            <a target="_blank" rel="noopener" href="/u/<?= $sp['login']; ?>">
-                                                <?= $sp['login']; ?>
-                                            </a>
-                                        </small>
                                     </span>
                                     <span class="t-td center">
                                         <?php if($sp['space_is_delete']) { ?>
@@ -82,6 +84,5 @@
         </div>
         <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/admin/spaces'); ?>
     </main>
-    <?php include TEMPLATE_DIR . '/_block/admin-menu.php'; ?>
 </div>
-<?php include TEMPLATE_DIR . '/footer.php'; ?>
+<?php include TEMPLATE_ADMIN_DIR . '/_block/footer-admin.php'; ?>

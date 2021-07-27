@@ -106,14 +106,11 @@ class PostController extends \MainController
         $meta_desc = $desc . ' — ' . $post['space_name'];
         $meta_title = strip_tags($post['post_title']) . ' — ' . strip_tags($post['space_name']) .' | '. Config::get(Config::PARAM_NAME);
 
-        Request::getResources()->addBottomScript('/assets/js/shares.js');
-        Request::getResources()->addBottomStyles('/assets/css/hint.css');
-        Request::getResources()->addBottomScript('/assets/js/hint.js');
-  
         if ($post['post_is_deleted'] == 1) {
             \Request::getHead()->addMeta('robots', 'noindex');
         }
 
+        Request::getResources()->addBottomScript('/assets/js/shares.js');
         Request::getResources()->addBottomScript('/assets/js/prism.js');
         Request::getResources()->addBottomStyles('/assets/css/prism.css');
         

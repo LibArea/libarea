@@ -1,9 +1,9 @@
-<?php include TEMPLATE_DIR . '/header.php'; ?>
+<?php include TEMPLATE_ADMIN_DIR . '/_block/header-admin.php'; ?>
 <div class="wrap">
     <main class="admin">
         <div class="white-box">
             <div class="inner-padding">
-                <a class="right vertical-ind" title="<?= lang('Add'); ?>" href="/topic/add">
+                <a class="right" title="<?= lang('Add'); ?>" href="/topic/add">
                 <i class="light-icon-plus middle"></i>
                 </a>
                 <?= breadcrumb('/admin', lang('Admin'), null, null, $data['meta_title']); ?>
@@ -26,19 +26,22 @@
                                         <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'ava-64'); ?>
                                     </span>                            
                                     <span class="t-td">
-                                        <a rel="nofollow noreferrer" href="/topic/<?= $topic['topic_slug']; ?>">
+                                        <a class="title" rel="nofollow noreferrer" href="/topic/<?= $topic['topic_slug']; ?>">
                                             <?= $topic['topic_title']; ?>
-                                            <i class="light-icon-external-link middle"></i>
                                         </a>
-                                        | <span class="green">topic/<?= $topic['topic_slug']; ?></span>
-                                        | <?= $topic['topic_count']; ?>
+                                        <span class="indent"> &#183; </span>
+                                        <span class="green">topic/<?= $topic['topic_slug']; ?></span>
+                                        <span class="indent"> &#183; </span>
+                                        <?= $topic['topic_count']; ?>
                                         <?php if ($topic['topic_is_parent'] == 1) { ?>
-                                            |  <span class="red"><?= lang('Root'); ?></span>
+                                            <span class="indent"> &#183; </span>
+                                            <span class="red"><?= lang('Root'); ?></span>
                                         <?php } ?>
                                         <?php if ($topic['topic_parent_id'] != 0) { ?>
-                                            |  <span class="green"><?= lang('Subtopic'); ?></span>
+                                            <span class="indent"> &#183; </span>
+                                            <span class="green"><?= lang('Subtopic'); ?></span>
                                         <?php } ?>
-                                        <div class="gray">
+                                        <div class="content-telo">
                                             <?= $topic['topic_description']; ?>
                                         </div>
                                     </span> 
@@ -59,6 +62,5 @@
         </div>
         <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/admin/topics'); ?>
     </main>
-    <?php include TEMPLATE_DIR . '/_block/admin-menu.php'; ?>
 </div>
-<?php include TEMPLATE_DIR . '/footer.php'; ?>
+<?php include TEMPLATE_ADMIN_DIR . '/_block/footer-admin.php'; ?>

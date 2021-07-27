@@ -147,7 +147,7 @@
                         <div class="related"> 
                         <h3 class="style small"><?= lang('Topics'); ?>:</h3>
                             <?php foreach ($topics as $topic) { ?>
-                                <a data-hint="<?= $topic['topic_description']; ?>" class="tags" href="/topic/<?= $topic['topic_slug']; ?>">
+                                <a class="tags" href="/topic/<?= $topic['topic_slug']; ?>">
                                     <?= $topic['topic_title']; ?>
                                 </a>
                             <?php } ?>
@@ -283,9 +283,6 @@ $(document).ready(function() {
     layer.photos ({
         photos: '#layer-photos', anim: 4
     });
-  document.getElementsByClassName('tags').hint({
-    pin: true, animate: true
-  });
 });
 </script>  
 <?php include TEMPLATE_DIR . '/footer.php'; ?> 

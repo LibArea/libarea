@@ -45,6 +45,12 @@
             </div>
         </div>
     </main>
-    <?php include TEMPLATE_DIR . '/_block/admin-menu.php'; ?>
+     <aside>
+        <div class="white-box">
+            <div class="inner-padding big">
+                <?= lang('info_space_edit'); ?>
+            </div>
+        </div>
+    </aside>
 </div>
 <?php include TEMPLATE_DIR . '/footer.php'; ?> 

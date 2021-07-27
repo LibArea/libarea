@@ -48,11 +48,15 @@
 <?php if ($uid['msg']) { ?>
   <?php foreach ($uid['msg'] as $message) { ?>
     <script nonce="<?= $_SERVER['nonce']; ?>">
+    layui.use('layer', function() {
+        var layer = layui.layer;
+  
         layer.msg('<?= $message[0]; ?>', {
           icon: <?= $message[1]; ?>,
           time: 3000,
           skin: 'layui-layer-molv',
         });
+    });  
     </script>
   <?php } ?>
 <?php } ?>

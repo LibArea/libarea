@@ -1,4 +1,4 @@
-<?php include TEMPLATE_DIR . '/header.php'; ?>
+<?php include TEMPLATE_ADMIN_DIR . '/_block/header-admin.php'; ?>
 <div class="wrap">
     <main class="admin">
         <div class="white-box">
@@ -13,7 +13,7 @@
                             <div class="small">
                                 <?= user_avatar_img($comment['avatar'], 'small', $comment['login'], 'ava'); ?>
                                 <a class="date" href="/u/<?= $comment['login']; ?>"><?= $comment['login']; ?></a> 
-                                
+                                <span class="indent"> &#183; </span>
                                 <span class="date"><?= $comment['date']; ?></span>
 
                                 <span class="indent"> &#183; </span>
@@ -28,7 +28,7 @@
                             <div class="comm-telo-body">
                                 <?= $comment['content']; ?> 
                             </div>
-                           <div class="post-full-footer date">
+                           <div class="content-footer">
                                + <?= $comment['comment_votes']; ?>
                                <span id="cm_dell" class="right comment_link small">
                                     <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action">
@@ -46,6 +46,5 @@
         </div>
         <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/admin/comments'); ?>
     </main>
-    <?php include TEMPLATE_DIR . '/_block/admin-menu.php'; ?>
 </div>
-<?php include TEMPLATE_DIR . '/footer.php'; ?>  
+<?php include TEMPLATE_ADMIN_DIR . '/_block/footer-admin.php'; ?>

@@ -1,4 +1,4 @@
-<?php include TEMPLATE_DIR . '/header.php'; ?>
+<?php include TEMPLATE_ADMIN_DIR . '/_block/header-admin.php'; ?>
 <div class="wrap">
     <main class="admin">
         <div class="white-box">
@@ -43,21 +43,33 @@
                                     <span class="t-td width-30 center">
                                         <?= $audit['audit_id']; ?>
                                     </span>  
-                                    <span class="t-td">
-                                        <?= lang('Type'); ?>: <b><?= $audit['audit_type']; ?></b>
+                                    <span class="t-td small">
+                                        <div class="content-telo">
+                                            <?= $audit['content'][$audit['audit_type'] . '_content']; ?>
+                                        </div> 
+                                        
+                                        <a href="/admin/user/<?= $audit['content'][$audit['audit_type'] . '_user_id']; ?>/edit">
+                                            <?= lang('Author'); ?>
+                                        </a> 
+                                        (id: <?= $audit['content'][$audit['audit_type'] . '_user_id']; ?>)
+                                        — <?= $audit['content'][$audit['audit_type'] . '_date']; ?>
+                                        
+                                        <span class="indent"> &#183; </span>
+                                        
+                                        <?= lang('Type'); ?>: <i><?= $audit['audit_type']; ?></i>
                                         <?php if($audit['content'][$audit['audit_type'] . '_is_deleted'] == 1) { ?>
                                              <span class="red"><?= lang('Deleted'); ?> </span>
                                         <?php } ?>
-                                        <br>
-                                        <?= $audit['content'][$audit['audit_type'] . '_content']; ?>
-                                        <hr>
-                                        <span class="small">
-                                            <a href="/admin/user/<?= $audit['content']['answer_user_id']; ?>/edit">
-                                                <?= lang('Author'); ?>
-                                            </a> 
-                                            (id: <?= $audit['content'][$audit['audit_type'] . '_user_id']; ?>)
-                                            — <?= $audit['content'][$audit['audit_type'] . '_date']; ?>
-                                        </span>
+                                        
+                                        <?php if (!empty($audit['post'])) { ?>
+                                            <?php if ($audit['post']['post_slug']) { ?> 
+                                               <span class="indent"> &#183; </span>
+                                                <a href="/post/<?= $audit['post']['post_id']; ?>/<?= $audit['post']['post_slug']; ?>">
+                                                    <?= $audit['post']['post_title']; ?>
+                                                </a>   
+                                            <?php } ?>
+                                        <?php } ?>
+                                         
                                     </span>
                                     <span class="t-td width-30 center">
                                         <a data-id="<?= $audit['content'][$audit['audit_type'] . '_id']; ?>" data-type="<?= $audit['audit_type']; ?>" class="type-action small">
@@ -94,6 +106,5 @@
         </div>
         <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/admin/audits'); ?>
     </main>
-    <?php include TEMPLATE_DIR . '/_block/admin-menu.php'; ?>
 </div>
-<?php include TEMPLATE_DIR . '/footer.php'; ?>
+<?php include TEMPLATE_ADMIN_DIR . '/_block/footer-admin.php'; ?>

@@ -85,41 +85,4 @@ class WebController extends \MainController
         return view(PR_VIEW_DIR . '/web/link', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'domains' => $domains, 'link' => $link]);
     }
 
-    // Получим Favicon
-    public static function getFavicon($url)
-    {
-        $url = str_replace("https://", '', $url);
-        return "https://www.google.com/s2/favicons?domain=".$url;
-    }
-    
-    // Запишем Favicon
-    public function favicon()
-    {
-        $link_id    = \Request::getPostInt('id');
-        $uid        = Base::getUid();
-
-        if ($uid['trust_level'] != 5) 
-        {
-            return false;
-        }
-        
-        $link = WebModel::getLinkId($link_id);
-        
-        if (!$link) 
-        {
-            return false;
-        }
-        
-        $puth = HLEB_PUBLIC_DIR. '/uploads/favicons/' . $link["link_id"] . '.png';
-        $dirF = HLEB_PUBLIC_DIR. '/uploads/favicons/';
-
-        if (!file_exists($puth)) 
-        {  
-            $urls = self::getFavicon($link['link_url_domain']);       
-            copy($urls, $puth); 
-        } 
-        
-        return true;
-    }
-
 }

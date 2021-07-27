@@ -198,6 +198,7 @@ define( 'HLEB_PROJECT_VALIDITY_URL', "/^[a-zA-Z0-9а-яё\_\-\/\.]+$/u" );
  */
 define( 'PR_VIEW_DIR', 'default' );
 define( 'TEMPLATE_DIR', __DIR__ .'/resources/views/default' );
+define( 'TEMPLATE_ADMIN_DIR', __DIR__ .'/modules/admin/templates' );
 
 
 /*
