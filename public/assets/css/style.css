@@ -333,7 +333,7 @@ hr {
   clear: both;
 }
 
-/* Формы и кнопки */
+/* Forms and buttons */
 textarea {
   width: 100%;
   border: 0.05rem solid #caced7;
@@ -408,7 +408,7 @@ textarea:focus {
   color: var(--tertiary);
 }
 
-/* Подписка на темы */
+/* Subscribe to topics */
 .focus-topic {
   padding: 4px 14px;
   border-radius: 10em;
@@ -455,7 +455,7 @@ textarea:focus {
   flex-basis: 100%;
 }
 
-/* Форма авторизации */
+/* Authorization form*/
 .login-nav {
   width: 100%;
   margin-bottom: 20px;
@@ -535,7 +535,7 @@ textarea:focus {
   background-color: #fff;
 }
 
-/* ЛС */
+/* PM */
 .message {
   padding: 1em 1.5em;
   border-radius: 1em;
@@ -584,7 +584,7 @@ textarea:focus {
   background-color: lightyellow;
 }
 
-/* Поиск */
+/* Search */
 input.form-search {
   border: 1px solid #ebebeb;
   border-radius: 10em;
@@ -627,7 +627,7 @@ aside a.my.active {
   color: #1ca1f3;
 }
 
-/* Урезанный пост на главной */
+/* Abbreviated post in the feed */
 .showpost {
   margin: 10px 0 5px 0;
   display: block;
@@ -683,7 +683,7 @@ img.thumb {
   color: var(--tertiary);
 }
 
-/* Посты */
+/* Posts */
 .post-header {
   padding: 15px 15px 0 15px;
   overflow: hidden;
@@ -865,7 +865,7 @@ img.img-post,
   margin: 8px 0 0;
 }
 
-/* Ответы */
+/* Answers */
 .line {
   border-top: 2px dotted #ddd;
   margin-bottom: 20px;
@@ -895,7 +895,7 @@ ol.dell.answer-telo {
   height: 24px;
 }
 
-/* Комментарии */
+/* Comments */
 .reply {
   display: none;
 }
@@ -1018,7 +1018,7 @@ ol.comment-telo {
   margin-left: 15px;
 }
 
-/* голосование */
+/* Voting */
 .post-footer .voters {
   margin-top: 3px;
 }
@@ -1083,7 +1083,7 @@ ol.comment-telo {
   width: 16px;
 }
 
-/* Горизонтальное меню */
+/* Horizontal menu */
 .nav-tabs {
   position: relative;
   z-index: 1;
@@ -1215,7 +1215,7 @@ a.tags.avtive {
   color: #275ec2;
 }
 
-/* Info пространство и рекомендовано в посте */
+/* Info space and recommended in the post */
 .space-info-img {
   margin: 10px 0;
 }
@@ -1500,7 +1500,7 @@ i.light-icon-brand-github:hover {
   color: #eee;
 }
 
-/* Прокрутка */
+/* Scrolling */
 #scroll_top {
   bottom: 150px;
   display: none;
