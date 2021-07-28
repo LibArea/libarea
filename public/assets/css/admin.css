@@ -97,6 +97,7 @@ img.ava-64 { width: 64px; }
 h1 {
   font-weight: 400;
   font-size: 1.2rem;
+  margin-top: 0;
 }
 
 hr {
@@ -312,7 +313,6 @@ textarea {
   padding: 0.35rem 0.4rem;
   position: relative;
   width: 100%;
-  max-width: 40rem;
 }
 
 .form-input:focus,

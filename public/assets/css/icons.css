@@ -7,7 +7,8 @@
   font-display: swap;
 }
 
-[class^="light-icon-"], [class*="light-icon-"] {
+[class^="light-icon-"],
+[class*="light-icon-"] {
   font-family: 'light-icon';
   font-style: normal;
   font-size: 21px;

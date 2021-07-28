@@ -24,9 +24,9 @@ class HomeModel extends \MainModel
                 $string = "WHERE post_draft = 0"; 
             } else {    
                 if ($result) {
-                    $string = "WHERE post_space_id IN(1, ".implode(',', $result).") AND post_draft  = 0";
+                    $string = "WHERE post_space_id IN(1, ".implode(',', $result).") AND post_draft = 0";
                 } else {
-                   $string = "WHERE post_space_id IN(1) AND post_draft  = 0"; 
+                   $string = "WHERE post_space_id IN(1) AND post_draft = 0"; 
                 }
             }    
         }        
@@ -38,7 +38,11 @@ class HomeModel extends \MainModel
             if ($uid['id'] == 0) { 
                 $tl = "AND post_tl = 0";
             } 
+            
             $display = "AND post_is_deleted = 0 AND space_feed = 0 $tl";
+            if ($type == 'all') {
+                $display = "AND post_is_deleted = 0 $tl";
+            }
         } 
          
         $sort = "ORDER BY post_answers_count DESC"; 

@@ -86,7 +86,7 @@ class EditTopicController extends \MainController
         TopicModel::edit($data);
         
         Base::addMsg(lang('Changes saved'), 'success');
-        redirect($redirect);  
+        redirect('/topic/' . $topic_slug);  
     }
     
     // Форма редактирования topic

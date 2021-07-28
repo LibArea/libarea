@@ -1533,8 +1533,16 @@ i.light-icon-brand-github:hover {
     margin-right: 0;
   }
 
-  .video-object {  width: 320px;  height: 210px; }
-  .answ-telo .video-object { width: 280px; height: 155px; }
+  .video-object {
+    width: 320px;
+    height: 210px;
+  }
+
+  .answ-telo .video-object {
+    width: 280px;
+    height: 155px;
+  }
+
   .text-oth { width: 40%; }
   .text-info { width: 57%; }
   .nav { margin-left: 15px; }
@@ -1544,4 +1552,3 @@ i.light-icon-brand-github:hover {
   form.form { display: none; }
   .topic-box-list { grid-template-columns: repeat(auto-fit, minmax(99%, 1fr)); }
 }
- 
