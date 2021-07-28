@@ -1389,7 +1389,8 @@ i.light-icon-brand-github:hover {
   color: var(--tertiary);
   display: block;
   padding: 1px 9px 1px 6px;
-  font-size: 15px;
+  font-size: 13px;
+  font-weight: 500;
 }
 
 .dr-menu:hover {

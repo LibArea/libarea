@@ -157,7 +157,7 @@ class EditPostController extends \MainController
         Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
 
         Request::getResources()->addBottomStyles('/assets/editor/editormd.css');
-        Request::getResources()->addBottomScript('/assets/editor/editormd.js');
+        Request::getResources()->addBottomScript('/assets/editor/editormd.min.js');
         Request::getResources()->addBottomScript('/assets/editor/config.js');
         
         if ($uid['trust_level'] > 0) {
@@ -197,4 +197,30 @@ class EditPostController extends \MainController
         Base::addMsg(lang('Cover removed'), 'success');
         redirect('/post/edit/' . $post['post_id']);
     }
+    
+    public function uploadimage()
+    {
+        // Фотографии в тело поста
+        $img         = $_FILES['editormd-image-file'];
+        $name_img    = $_FILES['editormd-image-file']['name'];
+        if($name_img) 
+        {
+            $post_img = UploadImage::post_img($img);
+            $response = array(
+                "url"     => $post_img,
+                "message" => lang('Successful download'),
+                "success" => 1,
+            );
+      
+            return json_encode($response);
+        } 
+       
+        $response = array(
+            "message" => lang('Error in loading'),
+            "success" => 0,
+        );
+        
+        return json_encode($response);
+    }
+    
 }

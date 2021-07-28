@@ -1,17 +1,5 @@
-/*
- * Editor.md
- *
- * @file        editormd.css 
- * @version     v1.5.0 
- * @description Open source online markdown editor.
- * @license     MIT License
- * @author      Pandao
- * {@link       https://github.com/pandao/editor.md}
- * @updateTime  2015-06-09
- */
-
 @charset "UTF-8";
-/*! prefixes.scss v0.1.0 | Author: Pandao | https://github.com/pandao/prefixes.scss | MIT license | Copyright (c) 2015 */
+
 .editormd {
   width: 90%;
   height: 640px;
@@ -66,23 +54,9 @@
 }
 .editormd ::-webkit-scrollbar-thumb {
   background: rgba(0, 0, 0, 0.3);
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  -ms-border-radius: 6px;
-  -o-border-radius: 6px;
   border-radius: 6px;
 }
 .editormd ::-webkit-scrollbar-thumb:hover {
-  -webkit-box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.25);
-  /* Webkit browsers */
-  -moz-box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.25);
-  /* Firefox */
-  -ms-box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.25);
-  /* IE9 */
-  -o-box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.25);
-  /* Opera(Old) */
-  box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.25);
-  /* IE9+, News */
   background-color: rgba(0, 0, 0, 0.4);
 }
 
@@ -142,10 +116,6 @@
   font-size: 16px;
   text-decoration: none;
   text-align: center;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -o-border-radius: 2px;
   border-radius: 2px;
   border: 1px solid #fff;
   -webkit-transition: all 300ms ease-out;
@@ -177,16 +147,7 @@
   top: 33px;
   left: 0;
   z-index: 100;
-  -webkit-box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.15);
-  /* Webkit browsers */
-  -moz-box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.15);
-  /* Firefox */
-  -ms-box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.15);
-  /* IE9 */
-  -o-box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.15);
-  /* Opera(Old) */
   box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.15);
-  /* IE9+, News */
 }
 .editormd-dropdown-menu:before, .editormd-dropdown-menu:after {
   width: 0;
@@ -242,21 +203,8 @@
   position: fixed;
   z-index: 99999;
   display: none;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  -ms-border-radius: 3px;
-  -o-border-radius: 3px;
   border-radius: 3px;
-  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  /* Webkit browsers */
-  -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  /* Firefox */
-  -ms-box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  /* IE9 */
-  -o-box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  /* Opera(Old) */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  /* IE9+, News */
   background: #fff;
   font-size: 14px;
 }
@@ -366,30 +314,19 @@
 .editormd-dialog-mask-bg {
   background: #fff;
   opacity: 0.5;
-  filter: alpha(opacity=50);
 }
 
 .editormd-mask {
   position: fixed;
   background: #000;
   opacity: 0.2;
-  /* W3C */
-  filter: alpha(opacity=20);
-  /* IE */
   z-index: 99998;
 }
 
 .editormd-container-mask,
 .editormd-dialog-mask-con {
   background: url(./images/loading.gif) no-repeat center center;
-  -webkit-background-size: 32px 32px;
-  /* Chrome, iOS, Safari */
-  -moz-background-size: 32px 32px;
-  /* Firefox 3.6~4.0 */
-  -o-background-size: 32px 32px;
-  /* Opera 9.5 */
   background-size: 32px 32px;
-  /* IE9+, New */
 }
 
 .editormd-container-mask {
@@ -480,15 +417,7 @@
   text-decoration: none;
   margin-bottom: -1px;
   border: 1px solid #ddd;
-  -webkit-border-top-left-radius: 3px;
-  -moz-border-top-left-radius: 3px;
-  -ms-border-top-left-radius: 3px;
-  -o-border-top-left-radius: 3px;
   border-top-left-radius: 3px;
-  -webkit-border-top-right-radius: 3px;
-  -moz-border-top-right-radius: 3px;
-  -ms-border-top-right-radius: 3px;
-  -o-border-top-right-radius: 3px;
   border-top-right-radius: 3px;
   background: #f6f6f6;
   -webkit-transition: all 300ms ease-out;
@@ -585,10 +514,6 @@
   background: #fff;
   padding: 7px 10px;
   border: 1px solid #ddd;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  -ms-border-radius: 3px;
-  -o-border-radius: 3px;
   border-radius: 3px;
   -webkit-transition: background 300ms ease-out;
   /* Safari, Chrome */
@@ -712,8 +637,6 @@
 
 /*! github-markdown-css | The MIT License (MIT) | Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com) | https://github.com/sindresorhus/github-markdown-css */
 .markdown-body {
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
   color: #333;
   overflow: hidden;
   font-size: 16px;
@@ -906,11 +829,6 @@
   line-height: 1;
   display: inline-block;
   text-decoration: none;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
@@ -1407,10 +1325,6 @@
   border: 1px solid #ddd;
   background: #f6f6f6;
   padding: 10px;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  -ms-border-radius: 3px;
-  -o-border-radius: 3px;
   border-radius: 3px;
 }
 .editormd-preview-container pre code, .editormd-html-preview pre code {
@@ -1607,10 +1521,6 @@ li.L9 {
 }
 .editormd-preview-container .editormd-toc-menu > .markdown-toc, .editormd-html-preview .editormd-toc-menu > .markdown-toc {
   position: relative;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  -o-border-radius: 4px;
   border-radius: 4px;
   border: 1px solid #ddd;
   display: inline-block;
@@ -1627,21 +1537,8 @@ li.L9 {
   display: none;
   background: #fff;
   border: 1px solid #ddd;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  -o-border-radius: 4px;
   border-radius: 4px;
-  -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-  /* Webkit browsers */
-  -moz-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-  /* Firefox */
-  -ms-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-  /* IE9 */
-  -o-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-  /* Opera(Old) */
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-  /* IE9+, News */
 }
 .editormd-preview-container .editormd-toc-menu > .markdown-toc > ul > li ul, .editormd-html-preview .editormd-toc-menu > .markdown-toc > ul > li ul {
   width: 100%;
@@ -1649,10 +1546,6 @@ li.L9 {
   border: 1px solid #ddd;
   display: none;
   background: #fff;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  -o-border-radius: 4px;
   border-radius: 4px;
 }
 .editormd-preview-container .editormd-toc-menu > .markdown-toc > ul > li a, .editormd-html-preview .editormd-toc-menu > .markdown-toc > ul > li a {
@@ -1677,19 +1570,9 @@ li.L9 {
   top: 32px;
   left: 10%;
   display: none;
-  -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-  /* Webkit browsers */
-  -moz-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-  /* Firefox */
-  -ms-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-  /* IE9 */
-  -o-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-  /* Opera(Old) */
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-  /* IE9+, News */
 }
 .editormd-preview-container .editormd-toc-menu > .markdown-toc li > ul:before, .editormd-preview-container .editormd-toc-menu > .markdown-toc li > ul:after, .editormd-html-preview .editormd-toc-menu > .markdown-toc li > ul:before, .editormd-html-preview .editormd-toc-menu > .markdown-toc li > ul:after {
-  pointer-events: pointer-events;
   position: absolute;
   left: 15px;
   top: -6px;
@@ -1778,10 +1661,6 @@ hr.editormd-page-break {
   color: #333;
   padding: 4px 6px;
   font-size: 18px;
-  -webkit-border-radius: 500px;
-  -moz-border-radius: 500px;
-  -ms-border-radius: 500px;
-  -o-border-radius: 500px;
   border-radius: 500px;
   display: none;
   position: absolute;
@@ -1822,10 +1701,6 @@ hr.editormd-page-break {
 .editormd-preview-theme-dark .editormd-preview-container abbr {
   color: #fff;
   padding: 1px 3px;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  -ms-border-radius: 3px;
-  -o-border-radius: 3px;
   border-radius: 3px;
   background: #ff9900;
 }
@@ -1833,10 +1708,6 @@ hr.editormd-page-break {
   color: #fff;
   border: none;
   padding: 1px 3px;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  -ms-border-radius: 3px;
-  -o-border-radius: 3px;
   border-radius: 3px;
   background: #5A9600;
 }

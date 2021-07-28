@@ -139,7 +139,7 @@ class ActionModel extends \MainModel
            );
         }
 
-        echo json_encode($response);
+        return json_encode($response);
     }
  
     // Режим заморозки
@@ -147,7 +147,7 @@ class ActionModel extends \MainModel
     {
         $sql = "UPDATE users SET limiting_mode = 1 where id = :user_id";
         
-        return  DB::run($sql, ['user_id' => $user_id]);
+        return DB::run($sql, ['user_id' => $user_id]);
     }
     
     public static function deleteLimitingMode($user_id)

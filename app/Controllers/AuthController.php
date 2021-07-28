@@ -89,7 +89,7 @@ class AuthController extends \MainController
             redirect($url);
         }
 
-        Base::Limits($login, lang('Nickname'), '4', '10', $url);
+        Base::Limits($login, lang('Nickname'), '3', '10', $url);
         Base::Limits($password, lang('Password'), '8', '32', $url);
         
         if (is_numeric(substr($login, 0, 1)))

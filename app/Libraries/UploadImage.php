@@ -85,6 +85,40 @@ class UploadImage
        
     }
     
+    public static function post_img($img)
+    {
+        $path_img   = HLEB_PUBLIC_DIR. '/uploads/posts/content/';
+        $year       = date('Y') . '/';
+        $month      = date('n') . '/';
+        $file       = $img['tmp_name'];
+        $filename   = 'post-' . time();
+       
+        if (!is_dir($path_img . $year . $month)) { @mkdir($path_img . $year . $month); }             
+        
+        $image = new  SimpleImage();
+        
+        // Обрежем больше 850
+        $width_h  = getimagesize($file);
+        if ($width_h[0] > 850) 
+        {
+            $image
+                ->fromFile($file)  // load image.jpg
+                ->autoOrient()     // adjust orientation based on exif data
+                ->resize(850, null)
+                ->toFile($path_img . $year . $month . $filename .'.jpeg', 'image/jpeg');
+          
+            return '/uploads/posts/content/' . $year . $month . $filename . '.jpeg';
+        }
+        
+        $image
+            ->fromFile($file)
+            ->autoOrient()   
+            ->toFile($path_img . $year . $month . $filename .'.jpeg', 'image/jpeg');
+      
+        return '/uploads/posts/content/' . $year . $month . $filename . '.jpeg';
+    }
+    
+    
     // Обложка участника
     public static function cover_user($cover, $content_id, $type)
     {

@@ -1,6 +1,6 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 
-<?php if(!$uid['id']) { ?>
+<?php if ($uid['id'] == 0) { ?>
   <div class="banner">
     <div class="wrap-header">
       <h1 class="red"><?= Lori\Config::get(Lori\Config::PARAM_BANNER_TITLE); ?></h1>

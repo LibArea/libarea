@@ -4,27 +4,27 @@ var editor = editormd("test-markdown-view", {
     height: "400px",
     emoji                : true, 
     toolbarIcons  : [
-        "bold", "italic", "del", "quote",  "h3", "list-ul", "|",  "hr", "image",  "link", "|", "code", "preformatted-text", "|", "fullscreen", "preview", "help",
+        "bold", "italic", "del", "quote",  "h3", "list-ul", "|",  "hr", "image",  "link", "|", "code", "code-block", "|", "fullscreen", "preview", "help",
     ],
     
-    toolbarCustomIcons   : {               // using html tag create toolbar icon, unused default <a> tag.
-        quote: "<a href=\"javascript:;\" title=\"Цитата\" unselectable=\"on\">«»</a>",
-        del: "<a href=\"javascript:;\" title=\"Зачеркнуть\" unselectable=\"on\"><i class=\"fa\" name=\"del\">~</i></a>" 
-    },
+    // toolbarCustomIcons   : { // using html tag create toolbar icon, unused default <a> tag.
+    //   quote: "<a href=\"javascript:;\" title=\"Цитата\" unselectable=\"on\">«»</a>",
+    //   del: "<a href=\"javascript:;\" title=\"Зачеркнуть\" unselectable=\"on\"><i class=\"fa\" name=\"del\">~</i></a>" 
+    // },
 
-    // imageUpload: true,
-    // imageFormats : ["jpg","jpeg","gif","png","bmp","webp"],
-    // imageUploadURL:"{{url('backend/uploadimage')}}",
+     imageUpload: true,
+     imageFormats : ["jpg","jpeg","gif","png","webp"],
+     imageUploadURL: "/backend/uploadimage", //"{{url('/backend/uploadimage')}}",
 
     toolbarIconsClass    : {
         undo             : "fa-undo",
         redo             : "fa-repeat",
         bold             : "light-icon-bold",
-        del              : "fa-strikethrough",
+        del              : "light-icon-strikethrough",
         italic           : "light-icon-italic",
-        quote            : "icon bubble",
+        quote            : "light-icon-message-circle",
         uppercase        : "fa-font",
-        h3               : editormd.classPrefix + "bold",
+        h3               : editormd.classPrefix + "light-icon-message-circle",
         h4               : editormd.classPrefix + "bold",
         "list-ul"        : "light-icon-list",
         "list-ol"        : "fa-list-ol",
@@ -34,7 +34,7 @@ var editor = editormd("test-markdown-view", {
         image            : "light-icon-camera",
         code             : "light-icon-code",
         "preformatted-text" : "light-icon-terminal",
-        "code-block"     : "fa-file-code-o",
+        "code-block"     : "light-icon-terminal",
         table            : "fa-table",
         datetime         : "fa-clock-o",
         emoji            : "icon crop",
@@ -119,7 +119,7 @@ var editor = editormd("test-markdown-view", {
                 url      : "URL",
                 link     : "Ссылка",
                 alt      : "Описание",
-                uploadButton     : "С компа",
+                uploadButton     : "Загрузить",
                 imageURLEmpty    : "Адрес изображения не может быть пустым",
                 uploadFileEmpty  : "Изображение не может быть пустым",
                 formatNotAllowed : "Разрешено загружать только： "

@@ -3,6 +3,7 @@
 
 Route::before('Authorization@noAuth')->getGroup();
     Route::getType('post');
+        Route::get('/backend/uploadimage')->controller('Post\EditPostController@uploadimage');
         Route::get('/status/action')->controller('ActionController@deletingAndRestoring');
         Route::get('/post/grabtitle')->controller('Post\AddPostController@grabMeta');
         Route::get('/comment/editform')->controller('Comment\EditCommentController@edit');
@@ -15,7 +16,6 @@ Route::before('Authorization@noAuth')->getGroup();
         Route::get('/search/{type}')->controller('ActionController@select')->where(['type' => '[a-z]+']);
         // @ post | answer | comment | link
         Route::get('/votes/{type}')->controller('VotesController')->where(['type' => '[a-z]+']); 
-        
             Route::getProtect(); // Начало защиты
                 Route::get('/invitation/create')->controller('UserController@invitationCreate');
                 Route::get('/messages/send')->controller('MessagesController@send');
@@ -34,7 +34,6 @@ Route::before('Authorization@noAuth')->getGroup();
     Route::endType();  // Завершение getType('post')
 
     Route::get('/post/img/{id}/remove')->controller('Post\EditPostController@imgPostRemove')->where(['id' => '[0-9]+']);
-
     // Форма добавления, общий случай: post | topic | space | web
     Route::get('/{controller}/add')->controller('<controller>\Add<controller>Controller@add');
     // Из пространства

@@ -116,6 +116,8 @@ return [
     'Remove'            => 'Удалить',
     'Recover'           => 'Восстановить',
     'Download'          => 'Загрузить',
+    'Successful download' => 'Успешная загрузка',
+    'Error in loading'  => 'Ошибка в загрузке',
     'Password Recovery' => 'Восстановление пароля',
     'Draft'             => 'Черновик',
     'Drafts'            => 'Черновики',
