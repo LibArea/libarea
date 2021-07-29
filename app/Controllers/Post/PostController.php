@@ -25,7 +25,8 @@ class PostController extends \MainController
 
         // Проверим (id, slug)
         Base::PageError404($post_new);
-        if ($slug != $post_new['post_slug']) {
+        if ($slug != $post_new['post_slug']) 
+        {
             redirect('/post/' . $post_new['post_id'] . '/' . $post_new['post_slug']);
         }
 
@@ -33,16 +34,19 @@ class PostController extends \MainController
         Base::PageError404($post);
 
         // Редирект для слияния
-        if ($post['post_merged_id'] > 0) {
+        if ($post['post_merged_id'] > 0) 
+        {
             redirect('/post/' . $post['post_merged_id']);
         }
 
         // Просмотры поста
-        if (!isset($_SESSION['pagenumbers'])) {
+        if (!isset($_SESSION['pagenumbers'])) 
+        {
             $_SESSION['pagenumbers'] = array();
         }
 
-        if (!isset($_SESSION['pagenumbers'][$post['post_id']])) {
+        if (!isset($_SESSION['pagenumbers'][$post['post_id']])) 
+        {
             PostModel::updateCount($post['post_id'], 'hits'); 
             $_SESSION['pagenumbers'][$post['post_id']] = $post['post_id'];
         }
@@ -57,7 +61,8 @@ class PostController extends \MainController
         $topics = PostModel::getPostTopic($post['post_id']);
         
         // Покажем черновик только автору
-        if ($post['post_draft'] == 1 && $post['post_user_id'] != $uid['id']) {
+        if ($post['post_draft'] == 1 && $post['post_user_id'] != $uid['id']) 
+        {
             redirect('/');
         }
      
@@ -79,15 +84,18 @@ class PostController extends \MainController
         // Возможно нам стоит просто поднять ответ на первое место?
         // Изменив порядок сортировки при выбора LO, что позволит удрать это
         $lo = null;
-        if ($post['post_lo'] > 0) {
+        if ($post['post_lo'] > 0) 
+        {
             $lo = AnswerModel::getAnswerLo($post['post_id']);
             $lo['answer_content'] = $lo['answer_content'];
         } 
 
         $answers = Array();
-        foreach ($post_answers as $ind => $row) {
+        foreach ($post_answers as $ind => $row) 
+        {
             
-            if (strtotime($row['answer_modified']) < strtotime($row['answer_date'])) {
+            if (strtotime($row['answer_modified']) < strtotime($row['answer_date'])) 
+            {
                 $row['edit'] = 1;
             }
 
@@ -106,7 +114,8 @@ class PostController extends \MainController
         $meta_desc = $desc . ' — ' . $post['space_name'];
         $meta_title = strip_tags($post['post_title']) . ' — ' . strip_tags($post['space_name']) .' | '. Config::get(Config::PARAM_NAME);
 
-        if ($post['post_is_deleted'] == 1) {
+        if ($post['post_is_deleted'] == 1) 
+        {
             \Request::getHead()->addMeta('robots', 'noindex');
         }
 
@@ -114,9 +123,17 @@ class PostController extends \MainController
         Request::getResources()->addBottomScript('/assets/js/prism.js');
         Request::getResources()->addBottomStyles('/assets/css/prism.css');
         
+        if ($uid['id'] > 0)
+        {
+            Request::getResources()->addBottomStyles('/assets/editor/editormd.css');
+            Request::getResources()->addBottomScript('/assets/editor/editormd.min.js');
+            Request::getResources()->addBottomScript('/assets/editor/config-no-preview.js');
+        }
+        
         $sheet = 'article';
         
-        if ($post['post_related']) {
+        if ($post['post_related']) 
+        {
             $post_related = PostModel::postRelated($post['post_related']);
         }
         $post_related = empty($post_related) ? '' : $post_related;
@@ -152,7 +169,8 @@ class PostController extends \MainController
         $pagesCount = FeedModel::feedCount($uid, 'user', $data);
   
         $result = Array();
-        foreach ($posts as $ind => $row) {
+        foreach ($posts as $ind => $row) 
+        {
             $text                           = explode("\n", $row['post_content']);
             $row['post_content_preview']    = Content::text($text[0], 'line');
             $row['lang_num_answers']        = word_form($row['post_answers_count'], lang('Answer'), lang('Answers-m'), lang('Answers'));
@@ -183,12 +201,14 @@ class PostController extends \MainController
         $post = PostModel::getPostId($post_id); 
         
         // Проверка доступа 
-        if (!accessСheck($post, 'post', $uid, 0, 0)) {
+        if (!accessСheck($post, 'post', $uid, 0, 0)) 
+        {
             redirect('/');
         }  
         
         // Запретим добавлять черновик в профиль
-        if ($post['post_draft'] == 1) {
+        if ($post['post_draft'] == 1) 
+        {
             return false;
         }
 

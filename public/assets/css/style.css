@@ -793,7 +793,7 @@ img.img-post,
   width: 100%;
   border-bottom: 1px solid #eee;
   background-color: #fff;
-  z-index: 999;
+  z-index: 444;
   font-size: 18px;
   padding: 5px;
 }
@@ -805,6 +805,10 @@ img.img-post,
 #stHeader .separator {
   margin: 0 5px;
   color: var(--tertiary);
+}
+
+.bd.redactor #stHeader.sticky {
+  display: none;
 }
 
 .search-info,

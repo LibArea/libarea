@@ -2621,7 +2621,7 @@
                 state.fullscreen = true;
 
                 $("html,body").css("overflow", "hidden");
-            
+                $("body").addClass("redactor");
                 
                 editor.css({
                     width    : $(window).width(),
