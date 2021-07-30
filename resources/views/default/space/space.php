@@ -20,11 +20,13 @@
                 <div class="right"> 
                     <?php if($space_signed == 1) { ?>
                         <div data-id="<?= $space_info['space_id']; ?>" class="hide-space-id no-space">
-                            <?= lang('Unsubscribe'); ?>
+                            <i class="light-icon-check middle"></i>
+                            <span class="middle"><?= lang('Unsubscribe'); ?></span>
                         </div>
                     <?php } else { ?> 
                         <div data-id="<?= $space_info['space_id']; ?>" class="hide-space-id yes-space">
-                            + <?= lang('Read'); ?>
+                            <i class="light-icon-plus middle"></i>
+                            <span class="middle"><?= lang('Read'); ?></span>
                         </div>
                     <?php } ?>   
                 </div>
@@ -35,14 +37,13 @@
 
         <?= spase_logo_img($space_info['space_img'], 'max', $space_info['space_name'], 'space-box-img'); ?>
         
-        <div class="fons">
-            <a title="<?= $space_info['space_name']; ?>" href="/s/<?= $space_info['space_slug']; ?>">
-                <h1><?= $space_info['space_name']; ?></h1>
-            </a>  
-            <div class="space-slug">
-                s/<?= $space_info['space_slug']; ?>
-            </div> 
-        </div>    
+        <a title="<?= $space_info['space_name']; ?>" href="/s/<?= $space_info['space_slug']; ?>">
+            <h1><?= $space_info['space_name']; ?></h1>
+        </a>  
+        <div class="space-slug">
+            s/<?= $space_info['space_slug']; ?>
+        </div> 
+ 
     </div>
     </div>
 </div>

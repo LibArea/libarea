@@ -22,6 +22,8 @@ class SpaceModel extends \MainModel
                 space_description,
                 space_slug, 
                 space_img,
+                space_cover_art,
+                space_color,
                 space_date,
                 space_type,
                 space_user_id,

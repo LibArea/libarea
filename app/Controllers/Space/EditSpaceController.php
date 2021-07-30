@@ -156,7 +156,7 @@ class EditSpaceController extends \MainController
         $cover          = $_FILES['cover'];
         $check_cover    = $_FILES['cover']['name'][0];
         if($check_cover) {
-            UploadImage::cover_user($cover, $space['space_id'], 'space');
+            UploadImage::cover($cover, $space['space_id'], 'space');
         } 
  
         Base::addMsg(lang('Change saved'), 'success');
@@ -169,7 +169,6 @@ class EditSpaceController extends \MainController
         $uid    = Base::getUid();
         $slug   = \Request::get('slug');
         
-
         $space = SpaceModel::getSpace($slug, 'slug');
         
         // Проверка доступа 

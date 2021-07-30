@@ -240,7 +240,7 @@ class UserController extends \MainController
         $cover          = $_FILES['cover'];
         $check_cover    = $_FILES['cover']['name'][0];
         if($check_cover) {
-            UploadImage::cover_user($cover, $uid['id'], 'user');
+            UploadImage::cover($cover, $uid['id'], 'user');
         } 
         
         Base::addMsg(lang('Change saved'), 'success');

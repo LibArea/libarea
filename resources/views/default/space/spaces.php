@@ -39,61 +39,67 @@
                     <?php } ?>
                 </ul>
 
-                <?php if (!empty($space)) { ?>
-                    <div class="oblong-box-list space-box-list">
-                    <?php foreach ($space as  $sp) { ?>  
-                        <div class="oblong-box">
-                            <a title="<?= $sp['space_name']; ?>" class="img-box" href="/s/<?= $sp['space_slug']; ?>">
-                                <?= spase_logo_img($sp['space_img'], 'max', $sp['space_name'], 'ava-54'); ?>
-                            </a>
-                            <?php if($sp['space_user_id'] == $uid['id']) { ?>
-                                <div class="my_space all"></div>
-                            <?php } ?>
+                <?php if (!empty($spaces)) { ?>
+                    <div class="flex all-box-spaces">
+                    <?php foreach ($spaces as  $sp) { ?>  
+                        <?php if($sp['space_cover_art'] != 'space_cover_no.jpeg') { ?>
+                            <div class="fons">
+                            <div class="space-info-box" style="background-image: url(/uploads/spaces/cover/small/<?= $sp['space_cover_art']; ?>)">
+                             
+                        <?php } else { ?> 
+                            <div class="fon">
+                            <div class="space-info-box" style="background:<?= $sp['space_color']; ?>;">
                             
-                            <span class="space-name"> 
-                                <a title="<?= $sp['space_name']; ?>" class="space-s" href="/s/<?= $sp['space_slug']; ?>">
-                                    <?= $sp['space_name']; ?>
-                                </a> 
-                            </span> 
+                        <?php } ?> 
+                                <?php if($sp['space_id'] != 1) { ?>
+                                     <span class="white">+ <?= $sp['users'] ?></span>
+                                <?php } ?>
                             
-                            <?php if($sp['space_type'] == 1) { ?>
-                                 <small><span class="red">— <?= lang('official'); ?></span></small> 
-                            <?php } ?>
-                            
-                            <?php if($sp['space_id'] != 1) { ?>
-                                <sup>+ <?= $sp['users'] ?></sup>
-                            <?php } ?>
-
+                                <a title="<?= $sp['space_name']; ?>" class="space-img-box" href="/s/<?= $sp['space_slug']; ?>">
+                                    <?= spase_logo_img($sp['space_img'], 'max', $sp['space_name'], 'ava-54'); ?>
+                                </a>
+     
+                                <span class="space-name"> 
+                                    <a title="<?= $sp['space_name']; ?>" class="space-s" href="/s/<?= $sp['space_slug']; ?>">
+                                       <span class="space-name"> <?= $sp['space_name']; ?></span>
+                                    </a> 
+                                </span> 
+                        
                             <?php if(!$uid['id']) { ?> 
-                                <div class="right"> 
-                                    <a href="/login"><div class="hide-space-id yes-space">+ <?= lang('Read'); ?></div></a>
+                                <div class="top-15-px"> 
+                                    <a href="/login">
+                                    <div class="hide-space-id yes-space">
+                                        <i class="light-icon-plus middle"></i>
+                                        <span class="middle"><?= lang('Read'); ?></span>
+                                    </div>
+                                    </a>
                                 </div>
                             <?php } else { ?>
                                 <?php if($sp['space_id'] !=1) { ?>
                                     <?php if($sp['space_user_id'] != $uid['id']) { ?>
-                                        <div class="right"> 
+                                        <div class="top-15-px"> 
                                             <?php if($sp['signed_space_id'] >= 1) { ?>
-                                                <div data-id="<?= $sp['space_id']; ?>" class="hide-space-id no-space">
-                                                    <?= lang('Unsubscribe'); ?>
+                                                <div data-id="<?= $sp['space_id']; ?>" class="hide-space-id absolute">
+                                                    <i class="light-icon-check middle"></i>
+                                                    <span class="middle"><?= lang('Unsubscribe'); ?></span>
                                                 </div>
                                             <?php } else { ?> 
-                                                <div data-id="<?= $sp['space_id']; ?>" class="hide-space-id yes-space">
-                                                    + <?= lang('Read'); ?>
+                                                <div data-id="<?= $sp['space_id']; ?>" class="hide-space-id absolute">
+                                                    <i class="light-icon-plus middle"></i>
+                                                    <span class="middle"><?= lang('Read'); ?></span>
                                                 </div>
-                                            <?php } ?>   
+                                            <?php } ?>  
                                         </div> 
                                     <?php } ?>    
+                                        <?php if($sp['space_user_id'] == $uid['id']) { ?>
+                                            <div class="hide-space-id absolute">
+                                                <i class="light-icon-checks middle"></i>
+                                                <span class="middle"><?= lang('Created by'); ?></span>
+                                            </div>            
+                                        <?php } ?>    
                                 <?php } ?>                        
                             <?php } ?> 
-
-                            <div class="small">
-                                <?php if($sp['space_description']) { ?> 
-                                    <?= $sp['space_description']; ?> 
-                                <?php } else { ?> 
-                                    <?= lang('Description is formed'); ?>
-                                <?php } ?>    
-                            </div>
-
+                        </div>
                         </div>
                     <?php } ?>
                     </div>

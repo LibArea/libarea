@@ -45,21 +45,6 @@ h1.space a {
   color: #666;
 }
 
-.no-space,
-.yes-space {
-  background-color: #f1f1f1;
-  color: #666;
-  font-size: 14px;
-  border-radius: 20px;
-  padding: 5px 10px;
-  text-align: center;
-}
-
-.yes-space {
-  background-color: #f4d85d;
-  color: #333;
-}
-
 .space-tags .menu-m {
   margin: 0 0 5px 0;
   letter-spacing: 1px;
@@ -245,6 +230,84 @@ a.add-space-post {
 a.add-space-post:hover {
   background-color: #fff;
   color: #1ca1f3;
+}
+
+.all-box-spaces {
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+}
+
+.space-info-box {
+  height: 120px;
+  padding: 10px;
+  border-radius: 2px; 
+}
+
+.fons,
+.fon {
+  position: relative;
+  flex: 0 1 48%;
+  border-radius: 2px; 
+}
+
+.fons::before {
+  background: linear-gradient(77.64deg, #000000 1.67%, rgba(0, 0, 0, 0.25) 49.6%);
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.space-img-box {
+  position: absolute;
+  left: 10px;
+}
+
+.all-box-spaces img.ava-54 {
+  border: 1px solid #fff;
+  margin-right: 5px;
+  border-radius: 2px;
+}
+
+.white {
+  color: #fff;
+  position: absolute;
+  right: 10px;
+}
+
+.space-s {
+  color: #fff;
+  font-size: 21px;
+  position: absolute;
+  left: 76px;
+  top: 21px;
+}
+
+.space-s:hover {
+  color: #eee;
+}
+
+.hide-space-id {
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 20px;
+  bottom: 10px;
+}
+
+.hide-space-id.absolute {
+  position: absolute;
+}
+
+.hide-space-id:hover {
+  background: hsla(0,0%,100%,.2);
+  padding: 2px 8px;
+}
+
+@media (max-width: 980px) {
+  .fons,
+  .fon { flex: 0 1 100%; }
 }
 
 @media (max-width: 880px) {

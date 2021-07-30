@@ -54,8 +54,7 @@
              <span class="post-space-color" style="background-color: <?= $post['space_color']; ?>;"></span> 
              <?= $post['space_name']; ?> 
             </a> 
-            <span class="indent-big"></span> 
-            <?= html_topic($post['topic_list'], 'gray small'); ?>
+            <?= html_topic($post['topic_list'], 'gray small indent-big'); ?>
             <?php if($post['post_url_domain']) { ?> 
               <span class="indent"></span> 
               <a class="gray small" href="/domain/<?= $post['post_url_domain']; ?>">

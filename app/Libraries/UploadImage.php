@@ -119,16 +119,18 @@ class UploadImage
     }
     
     
-    // Обложка участника
-    public static function cover_user($cover, $content_id, $type)
+    // Обложка участника и пространств
+    public static function cover($cover, $content_id, $type)
     {
         if($type == 'user') {
             // 1920px / 350px
-            $path_cover_img       = HLEB_PUBLIC_DIR. '/uploads/users/cover/';
+            $path_cover_img     = HLEB_PUBLIC_DIR. '/uploads/users/cover/';
+            $path_cover_small   = HLEB_PUBLIC_DIR. '/uploads/users/cover/small/';
             $pref = 'cover-';
             $default_img = 'cover_art.jpeg';
         } elseif ($type == 'space') {
-            $path_cover_img       = HLEB_PUBLIC_DIR. '/uploads/spaces/cover/';
+            $path_cover_img     = HLEB_PUBLIC_DIR. '/uploads/spaces/cover/';
+            $path_cover_small   = HLEB_PUBLIC_DIR. '/uploads/spaces/cover/small/';
             $pref = 'cover-';
             $default_img = 'space_cover_no.jpeg';
         }
@@ -144,7 +146,9 @@ class UploadImage
                 ->fromFile($file_cover)  // load image.jpg
                 ->autoOrient()     // adjust orientation based on exif data
                 ->resize(1920, 350)
-                ->toFile($path_cover_img . $filename .'.jpeg', 'image/jpeg');
+                ->toFile($path_cover_img . $filename .'.jpeg', 'image/jpeg')
+                ->resize(390, 124)
+                ->toFile($path_cover_small . $filename .'.jpeg', 'image/jpeg');
                     
             $new_cover  = $filename . '.jpeg';
             if ($type == 'user') {
@@ -159,6 +163,8 @@ class UploadImage
             if ($cover_art != $default_img && $cover_art != $new_cover) {
                 chmod($path_cover_img . $cover_art, 0777);
                 unlink($path_cover_img . $cover_art);
+                chmod($path_cover_small . $foto, 0777);
+                unlink($path_cover_small . $cover_art);
             }            
             
             if ($type == 'user') {

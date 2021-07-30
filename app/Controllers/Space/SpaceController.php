@@ -49,7 +49,7 @@ class SpaceController extends \MainController
             'meta_desc'     => lang('all-space-desc') .' '. Config::get(Config::PARAM_HOME_TITLE),
         ];
         
-        return view(PR_VIEW_DIR . '/space/spaces', ['data' => $data, 'uid' => $uid, 'space' => $result, 'add_space_button' => $add_space_button]);
+        return view(PR_VIEW_DIR . '/space/spaces', ['data' => $data, 'uid' => $uid, 'spaces' => $result, 'add_space_button' => $add_space_button]);
     }
 
     // Пространства участника
@@ -87,7 +87,7 @@ class SpaceController extends \MainController
             'meta_desc'     => lang('I read space') .' '. Config::get(Config::PARAM_HOME_TITLE),
         ];
         
-        return view(PR_VIEW_DIR . '/space/spaces', ['data' => $data, 'uid' => $uid, 'space' => $result, 'add_space_button' => $add_space_button]);
+        return view(PR_VIEW_DIR . '/space/spaces', ['data' => $data, 'uid' => $uid, 'spaces' => $result, 'add_space_button' => $add_space_button]);
     }
 
     // Посты по пространству
