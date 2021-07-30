@@ -14,10 +14,10 @@
                                 <div class="small">
                                     <a class="gray" href="/u/<?= $comment['login']; ?>">
                                         <?= user_avatar_img($comment['avatar'], 'small', $comment['login'], 'ava'); ?>
-                                        <span class="indent"></span> 
-                                        <?= $comment['login']; ?>
+                                        <span class="indent"> 
+                                            <?= $comment['login']; ?>
+                                        </span>
                                     </a> 
-                                    <span class="indent"></span>  
                                     <span class="gray lowercase"><?= $comment['date']; ?></span>
                                     
                                     <span class="indent"> &#183; </span>

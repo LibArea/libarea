@@ -5,11 +5,11 @@
       <div class="post-header small flex">
         <a class="gray" href="/u/<?= $post['login']; ?>">
             <?= user_avatar_img($post['avatar'], 'small', $post['login'], 'ava'); ?>
-            <span class="indent"></span> 
-            <?= $post['login']; ?>
+            <span class="indent"> 
+                <?= $post['login']; ?>
+            </span>
         </a> 
-        <span class="indent"></span> 
-        <span class="gray lowercase">
+        <span class="gray lowercase indent">
            <?= $post['post_date'] ?>
         </span>
       </div>

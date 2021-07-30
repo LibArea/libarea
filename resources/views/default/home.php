@@ -88,10 +88,8 @@
             </div>  
             <?php foreach ($space_user as  $sig) { ?>
               <a class="bar-space-telo" href="/s/<?= $sig['space_slug']; ?>" title="<?= $sig['space_name']; ?>">
-              
-                <?= spase_logo_img($sig['space_img'], 'small', $sig['space_name'], 'img-space'); ?>
-                
-                <span class="bar-name small"><?= $sig['space_name']; ?></span>
+                <?= spase_logo_img($sig['space_img'], 'small', $sig['space_name'], 'ava-24'); ?>
+                <span class="indent small"><?= $sig['space_name']; ?></span>
                 <?php if($sig['space_user_id'] == $uid['id']) { ?>
                   <sup class="red indent">+</sup>
                 <?php } ?>

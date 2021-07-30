@@ -56,7 +56,7 @@
                                 <?php if($uid['login'] == $post['login']  || $uid['trust_level'] == 5) { ?>
                                     <span class="indent">&#183;</span>
                                         <a class="gray" href="/post/edit/<?= $post['post_id']; ?>">
-                                            <?= lang('Remove'); ?>
+                                            <?= lang('Edit'); ?>
                                         </a>
                                 <?php } ?>     
                                 <?php if($uid['login'] == $post['login']) { ?>    
@@ -225,25 +225,25 @@
     </main> 
  
     <aside>
-        <div class="space-info white-box">
+        <div class="white-box">
             <div class="inner-padding"> 
                 <div class="space-info-img">
-                    <a title="<?= $post['space_name']; ?>" class="space-info-title" href="/s/<?= $post['space_slug']; ?>">
-                        <?= spase_logo_img($post['space_img'], 'max', $post['space_slug'], 'img-space'); ?>
-                        <?= $post['space_name']; ?>
+                    <a title="<?= $post['space_name']; ?>" href="/s/<?= $post['space_slug']; ?>">
+                        <?= spase_logo_img($post['space_img'], 'max', $post['space_slug'], 'ava-24'); ?>
+                        <span class="indent"><?= $post['space_name']; ?></span>
                     </a> 
                 </div>    
-                <div class="space-info-desc small"><?= $post['space_short_text']; ?></div> 
+                <div class="gray small"><?= $post['space_short_text']; ?></div> 
             </div>
         </div>
         <?php if($post['post_content_img']) { ?>
-          <div class="space-info white-box">
+          <div class="white-box">
             <div id="layer-photos" class="layer-photos inner-padding big">
                <?= post_img($post['post_content_img'], $post['post_title'], 'img-post', 'cover', $post['post_content_img']); ?>
             </div>
           </div>
         <?php } ?>    
-        <div class="space-info white-box">
+        <div class="white-box">
             <div class="inner-padding"> 
                 <h3 class="recommend small"><?= lang('To share'); ?></h3> 
                 <div class="social center" data-url="<?= Lori\Config::get(Lori\Config::PARAM_URL) . '/post/' . $post['post_id'] . '/' . $post['post_slug']; ?>" data-title="<?= $post['post_title']; ?>">		

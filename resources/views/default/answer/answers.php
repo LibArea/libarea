@@ -13,11 +13,9 @@
                                 <div class="answ-telo_bottom">
                                     <div class="flex small">
                                         <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava'); ?>
-                                        <span class="indent"></span>
-                                        <a class="gray" href="/u/<?= $answer['login']; ?>">
+                                        <a class="gray indent" href="/u/<?= $answer['login']; ?>">
                                             <?= $answer['login']; ?>
                                         </a> 
-                                        <span class="indent"></span>
                                         <span class="gray lowercase"><?= $answer['date']; ?></span>
                                         <span class="indent"> &#183; </span>
                                         <a href="/post/<?= $answer['post_id']; ?>/<?= $answer['post_slug']; ?>#answer_<?= $answer['answer_id']; ?>">
