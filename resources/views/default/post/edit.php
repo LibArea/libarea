@@ -27,7 +27,8 @@
                              
                              <?php if($post['post_content_img']) { ?> 
                                 <div class="img-post-edit">
-                                    <?= post_cover_img($post['post_content_img'], $post['post_title'], 'img-post'); ?>
+                                    <?= post_img($post['post_content_img'], $post['post_title'], 'img-post' , 'cover'); ?>
+                                    
                                     <input type="hidden" name="content_img" value="<?= $post['post_content_img']; ?>">
                                     
                                     <a class="img-remove" href="/post/img/<?= $post['post_id']; ?>/remove">
@@ -37,7 +38,7 @@
                             <?php } ?>
 
                             <?php if($post['post_thumb_img']) { ?> 
-                                <img class="thumb" alt="<?= $post['post_title']; ?>" src="/uploads/posts/thumbnails/<?= $post['post_thumb_img']; ?>">
+                                <?= post_img($post['post_thumb_img'], $post['post_title'], 'thumb' , 'thumbnails'); ?>
                             <?php } ?> 
                              
                             <div class="boxline post">    

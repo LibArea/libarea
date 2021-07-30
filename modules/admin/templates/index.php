@@ -2,6 +2,7 @@
 <div class="wrap">
   <main class="admin">
     <div class="white-box">
+    
       <div class="inner-padding">
         <?= breadcrumb('/admin', lang('Admin'), null, null, $data['meta_title']); ?>
         <h3><?= lang('All'); ?></h3> 
@@ -15,7 +16,7 @@
         </ul> 
         <hr>
         <div class="boxline">
-            <label for="name">ОС:</label>
+            <label for="name">PC:</label>
             <?= php_uname('s'); ?> <?php echo php_uname('r'); ?>
         </div>
         <div class="boxline">

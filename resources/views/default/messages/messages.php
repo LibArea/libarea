@@ -10,12 +10,12 @@
                     <?php foreach ($data['messages'] as  $msg) { ?>
 
                         <div class="msg-telo<?php if (!$msg['unread'] > 0) { ?> active<?php } ?>">
-                            <?php if($msg['sender_uid'] == $uid['id']) {  ?>
-                                <div class="small">
-                                    <?= lang('You'); ?>  |  <?= $msg['update_time']; ?>
-                                </div>    
-                            <?php } else { ?>
-                                <div class="small">
+                            <div class="small flex">
+                                <?php if($msg['sender_uid'] == $uid['id']) {  ?>
+                                    <?= lang('You'); ?>
+                                    <span class="indent"></span>
+                                    <?= $msg['update_time']; ?>
+                                <?php } else { ?>
                                     <?= lang('From'); ?>
                                     <span class="indent"></span>
                                     <?= user_avatar_img($msg['msg_user']['avatar'], 'small', $msg['msg_user']['login'], 'ava'); ?>
@@ -23,15 +23,17 @@
                                     <a href="/u/<?= $msg['msg_user']['login']; ?>">
                                        <?= $msg['msg_user']['login']; ?> 
                                     </a>
-                                    <span class="date"><?= $msg['update_time']; ?></span>
-                                 </div>
-                            <?php } ?>
-                            
+                                    <span class="indent-big"></span>
+                                    <span class="gray lowercase">
+                                        <?= $msg['update_time']; ?>
+                                    </span>
+                                <?php } ?>
+                            </div>
                             <div class="message one">
                                 <?= $msg['message']['message']; ?>
                             </div>
                             
-                            <a class="lowercase" href="/messages/read/<?= $msg['id']; ?>">
+                            <a class="lowercase small right" href="/messages/read/<?= $msg['id']; ?>">
                                 <?php if ($msg['unread']) { ?>
                                     <?= lang('There are'); ?> <?= $msg['count']; ?> <?= $msg['unread_num']; ?>
                                 <?php } else { ?>

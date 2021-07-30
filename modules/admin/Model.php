@@ -12,7 +12,8 @@ class Model extends \MainModel
     public static function getUsersListForAdmin($page, $limit, $sheet)
     {
         $string = "WHERE ban_list > 0";
-        if ($sheet == 'all') {
+        if ($sheet == 'all') 
+        {
             $string = "";
         } 
         
@@ -39,9 +40,11 @@ class Model extends \MainModel
     public static function getUsersListForAdminCount($sheet)
     {
         $string = "WHERE ban_list > 0";
-        if ($sheet == 'all') {
+        if ($sheet == 'all') 
+        {
             $string = "";
-        } 
+        }
+        
         $sql = "SELECT id FROM users $string";
 
         return DB::run($sql)->rowCount(); 
@@ -355,7 +358,8 @@ class Model extends \MainModel
     public static function getAuditsAll($page, $limit, $sheet)
     {
         $sort = "audit_read_flag = 0";
-        if ($sheet == 'approved') {
+        if ($sheet == 'approved') 
+        {
             $sort = "audit_read_flag = 1";
         }
         
@@ -375,7 +379,8 @@ class Model extends \MainModel
     public static function getAuditsAllCount($sheet)
     {
         $sort = "audit_read_flag = 0";
-        if ($sheet == 'approved') {
+        if ($sheet == 'approved') 
+        {
             $sort = "audit_read_flag = 1";
         }
         
@@ -405,4 +410,51 @@ class Model extends \MainModel
         
         return  DB::run($sql, ['id' => $id]);
     }
+    
+    
+    // Пространства открытые / забаненные
+    public static function getSpaces($page, $limit, $sort) 
+    {
+        $signet = "space_is_delete = 0";
+        if ($sort == 'ban') 
+        { 
+            $signet = "space_is_delete = 1"; 
+        } 
+        
+        $start  = ($page-1) * $limit;
+        $sql = "SELECT 
+                space_id, 
+                space_name, 
+                space_description,
+                space_slug, 
+                space_img,
+                space_date,
+                space_type,
+                space_user_id,
+                space_is_delete,
+                id,
+                login,
+                avatar
+                    FROM space  
+                    LEFT JOIN users ON id = space_user_id
+                    WHERE $signet
+                    ORDER BY space_id DESC LIMIT $start, $limit";
+
+       return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);  
+    }
+
+    // Количество
+    public static function getSpacesCount($sort)
+    {
+        $signet = "space_is_delete = 0";
+        if ($sort == 'ban') 
+        { 
+            $signet = "space_is_delete = 1"; 
+        } 
+        
+        $sql = "SELECT space_id, space_is_delete FROM space WHERE $signet";
+
+        return DB::run($sql)->rowCount(); 
+    }
+    
 }

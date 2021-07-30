@@ -8,6 +8,28 @@
                 </a>
                 <?= breadcrumb('/admin', lang('Admin'), null, null, $data['meta_title']); ?>
                 
+        <ul class="nav-tabs">
+            <?php if($data['sheet'] == 'allspaces') { ?>
+                <li class="active">
+                    <span><?= lang('All'); ?></span>
+                </li>
+                <li>
+                    <a href="/admin/spaces/ban">
+                        <span><?= lang('Banned'); ?></span>
+                    </a>
+                </li>
+            <?php } elseif($data['sheet'] == 'banspaces') { ?>
+                <li>
+                    <a href="/admin/spaces">
+                        <span><?= lang('All'); ?></span>
+                    </a>
+                </li>
+                <li class="active">
+                    <span><?= lang('Banned'); ?></span>
+                </li>
+            <?php } ?>  
+        </ul>
+                
                 <div class="space">
                     <?php if (!empty($spaces)) { ?>
                   

@@ -4,19 +4,21 @@
         <div class="white-box">
             <div class="inner-padding">
                 <h1><?= $data['h1']; ?></h1>
-
+                <br>
                 <div class="telo">
                     <?php if (!empty($answers)) { ?>
                   
                         <?php foreach ($answers as $answer) { ?>  
                             <?php if($answer['answer_is_deleted'] == 0) { ?>
                                 <div class="answ-telo_bottom">
-                                    <div class="answ-header small">
+                                    <div class="flex small">
                                         <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava'); ?>
-                                        <a class="date" href="/u/<?= $answer['login']; ?>">
+                                        <span class="indent"></span>
+                                        <a class="gray" href="/u/<?= $answer['login']; ?>">
                                             <?= $answer['login']; ?>
                                         </a> 
-                                        <span class="date"><?= $answer['date']; ?></span>
+                                        <span class="indent"></span>
+                                        <span class="gray lowercase"><?= $answer['date']; ?></span>
                                         <span class="indent"> &#183; </span>
                                         <a href="/post/<?= $answer['post_id']; ?>/<?= $answer['post_slug']; ?>#answer_<?= $answer['answer_id']; ?>">
                                             <?= $answer['post_title']; ?>
@@ -27,7 +29,7 @@
                                         <?= $answer['answer_content']; ?> 
                                     </div>
                                
-                                    <div class="post-full-footer date">
+                                    <div class="post-full-footer gray">
                                      + <?= $answer['answer_votes']; ?>                            
                                     </div>
                                 </div>

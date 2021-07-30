@@ -56,7 +56,7 @@
                 <div class="inner-padding big"> 
                     <h3 class="style small"><?= lang('New ones'); ?></h3>
                     <?php foreach ($news as $new) { ?>
-                        <a title="<?= $new['topic_title']; ?>" class="tags" href="/topic/<?= $new['topic_slug']; ?>">
+                        <a title="<?= $new['topic_title']; ?>" class="tags snall" href="/topic/<?= $new['topic_slug']; ?>">
                             <?= $new['topic_title']; ?>
                         </a><br>
                     <?php } ?>

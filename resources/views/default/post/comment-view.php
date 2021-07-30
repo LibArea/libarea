@@ -10,7 +10,7 @@
                     <li class="answers_subtree" id="answer_<?= $answer['answer_id']; ?>">
                         <div class="container">
                             <div class="answ-telo">
-                                <div class="small">
+                                <div class="flex small">
                                     <a class="gray" href="/u/<?= $answer['login']; ?>">
                                         <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava'); ?>
                                         <span class="indent"> 
@@ -18,7 +18,7 @@
                                         </span>
                                     </a> 
                                     
-                                    <span class="indent gray">  
+                                    <span class="indent gray lowercase">  
                                        <?= $answer['answer_date']; ?>
                                     </span>
                                     <?php if (empty($answer['edit'])) { ?> 
@@ -44,7 +44,7 @@
                                     <?= $answer['answer_content'] ?> 
                                 </div>
                             </div>
-                            <div class="comm-footer small">
+                            <div class="comm-footer flex small">
                                 <?= votes($uid['id'], $answer, 'answer'); ?> 
 
                                 <?php if($post['post_closed'] == 0) { ?> 
@@ -120,7 +120,7 @@
                             <li class="comment_subtree" id="comment_<?= $comment['comment_id']; ?>">
                                 <div class="container">
                                     <div class="comm-telo">
-                                        <div class="small"> 
+                                        <div class="small flex"> 
                                             <a class="gray" href="/u/<?= $comment['login']; ?>">
                                                <?= user_avatar_img($comment['avatar'], 'small', $comment['login'], 'ava'); ?>
                                                <span class="indent"> 
@@ -128,7 +128,7 @@
                                                </span>
                                             </a> 
                                             
-                                            <span class="indent gray">  
+                                            <span class="indent gray lowercase">  
                                                <?= lang_date($comment['comment_date']); ?>
                                             </span>
                                             <?php if ($post['post_user_id'] == $comment['comment_user_id']) { ?>

@@ -186,12 +186,12 @@ class Controller extends \MainController
         $page   = $page == 0 ? 1 : $page;
 
         $limit = 25;
-        $pagesCount = SpaceModel::getSpacesAllCount(); 
-        $spaces     = SpaceModel::getSpacesAll($page, $limit, $uid['id'], 'all');
+        $pagesCount = Model::getSpacesCount($sheet); 
+        $spaces     = Model::getSpaces($page, $limit, $sheet);
   
         $data = [
             'meta_title'    => lang('Spaces'),
-            'sheet'         => 'spaces',
+            'sheet'         => $sheet == 'ban' ? 'banspaces' : 'allspaces',
             'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
         ]; 

@@ -12,13 +12,13 @@
                         <?php if($comment['comment_is_deleted'] == 0) { ?>
                             <div class="comm-telo_bottom">
                                 <div class="small">
-                                    <a class="indent" href="/u/<?= $comment['login']; ?>">
+                                    <a class="gray" href="/u/<?= $comment['login']; ?>">
                                         <?= user_avatar_img($comment['avatar'], 'small', $comment['login'], 'ava'); ?>
                                         <span class="indent"></span> 
                                         <?= $comment['login']; ?>
                                     </a> 
-                                     
-                                    <span class="indent"><?= $comment['date']; ?></span>
+                                    <span class="indent"></span>  
+                                    <span class="gray lowercase"><?= $comment['date']; ?></span>
                                     
                                     <span class="indent"> &#183; </span>
                                     <a href="/post/<?= $comment['post_id']; ?>/<?= $comment['post_slug']; ?>#comment_<?= $comment['comment_id']; ?>">

@@ -7,7 +7,7 @@
                     <div class="right heart-link">
                         <?= votes($uid['id'], $link, 'link'); ?> 
                     </div>
-                    <h1 class="domain"><?= $link['link_title']; ?>
+                    <h1><?= $link['link_title']; ?>
                         <?php if($uid['trust_level'] > 4) { ?>
                             <span class="indent"></span>
                             <a class="small" title="<?= lang('Edit'); ?>" href="/web/edit/<?= $link['link_id']; ?>">

@@ -79,7 +79,7 @@ class FeedModel extends \MainModel
                     rel.*,
                     votes_post_item_id, votes_post_user_id,
                     id, login, avatar, 
-                    space_id, space_slug, space_name
+                    space_id, space_slug, space_name, space_color
                     
                         FROM posts
                         LEFT JOIN

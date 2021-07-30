@@ -84,16 +84,11 @@
                             </div>
                                 <div class="boxline">
                                     <label class="form-label" for="post_content"><?= lang('Topics'); ?></label>
-                                    <select name="post_topics[]" multiple="multiple" id='selTopics'>
-                                        <?php foreach ($post_topics as $topic) { ?>
-                                            <option selected value="<?= $topic['topic_id']; ?>"><?= $topic['topic_title']; ?></option>
-                                        <?php } ?>
-                                    </select>
+                                    <select name="post_topics[]" multiple="multiple" id='selTopics'></select>
                                 </div>                                  
                                 <div class="boxline">  
                                     <label class="form-label" for="post_content"><?= lang('Related'); ?></label>
-                                    <select name="post_related[]" multiple="multiple" id='selLinked'>
-                                    </select>
+                                    <select name="post_related[]" multiple="multiple" id='selLinked'></select>
                                     <script nonce="<?= $_SERVER['nonce']; ?>">
                                         $(document).ready(function(){
                                             $("#selTopics").select2({

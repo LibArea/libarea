@@ -87,7 +87,7 @@ img {
 
 img.ava-94 {
   width: 94px;
-  margin-top: 5px;
+  margin-top: 8px;
 }
 
 img.ava { width: 18px; }
@@ -95,7 +95,7 @@ img.ava-24 { width: 24px; }
 img.ava-54 { width: 54px; }
 img.ava-64 { width: 64px; }
 
-.indent { margin: 0 3px; }
+.indent { margin: 0 5px; }
 .indent-big { margin: 0 0 0 15px; }
 .vertical-ind { margin: 15px 0; }
 .max-width { max-width: 780px; }
@@ -114,10 +114,10 @@ img.ava-64 { width: 64px; }
 .flex { display: flex; }
 .justify-content-between { justify-content: space-between; }
 .align-items-center { align-items: center; }
+.italic { font-style: italic; }
 
 .translation,
 .trust-level {
-  font-style: italic;
   background-color: #f5efe3;
   color: #47340c;
   padding: 2px 4px;
@@ -182,18 +182,7 @@ main.w-100 {
 h1 {
   font-weight: 400;
   font-size: 1.2rem;
-}
-
-h1.domain {
-  font-weight: 400;
-  font-size: 1.2rem;
   margin: 5px 0;
-}
-
-h1.topics {
-  font-weight: 400;
-  font-size: 1.2rem;
-  margin: 0;
 }
 
 code {
@@ -455,7 +444,7 @@ textarea:focus {
   flex-basis: 100%;
 }
 
-/* Authorization form*/
+/* Authorization form */
 .login-nav {
   width: 100%;
   margin-bottom: 20px;
@@ -575,7 +564,6 @@ textarea:focus {
   color: #919191;
   text-transform: lowercase;
   margin: 5px 0 0 0;
-  font-size: 13px;
 }
 
 .no-content {
@@ -709,6 +697,13 @@ img.img-post,
   margin-top: 5px;
 }
 
+.post-space-color {
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+  margin-right: 3px;
+}
+
 .inner-padding img:hover,
 .post-img a:hover > img,
 .thumb.no-mob:hover {
@@ -722,12 +717,6 @@ img.img-post,
   margin: 10px 0;
 }
 
-.post_url_detal {
-  margin: 0 0 20px 0;
-  display: block;
-  font-style: italic;
-}
-
 .telo-detail-post.dell {
   background-color: rgb(246, 196, 184);
   padding-left: 10px;
@@ -736,10 +725,6 @@ img.img-post,
 .telo-detail-post,
 .answers {
   padding: 15px;
-}
-
-.telo-detail-post .title {
-  padding: 0;
 }
 
 .post-full-footer {
@@ -770,12 +755,9 @@ img.img-post,
 }
 
 .title {
-  margin: 3px 0 0 0;
   font-size: 21px;
-  padding: 0 15px;
-  margin-right: 4px;
   font-weight: 500;
-  color: #333;
+  color: #111;
 }
 
 .post-telo .title:hover {
@@ -918,6 +900,10 @@ ol.dell.answer-telo {
   list-style: none;
 }
 
+.answers_subtree img {
+  max-width: 98%;
+}
+
 .delleted {
   background-color: rgb(246, 196, 184);
 }
@@ -1043,7 +1029,7 @@ ol.comment-telo {
 
 .answer-telo .voters,
 .comm-telo .voters {
-  margin: 0 10px 0 0;
+  margin: 0 5px 0 0;
 }
 
 .voters .up-id {
@@ -1076,10 +1062,6 @@ ol.comment-telo {
 
 .heart-link .voters {
   padding-top: 5px;
-}
-
-.domain-telo {
-  margin: 0 0 25px 0;
 }
 
 .favicon {
@@ -1194,18 +1176,12 @@ ul.breadcrumb {
   text-transform: uppercase;
 }
 
-.box-flex {
-  box-sizing: border-box;
-  display: flex;
-}
-
 /* Topic */
 a.tags {
   position: relative;
   display: inline-block;
   height: 30px;
   padding: 0 12px;
-  font-size: 13px;
   line-height: 30px;
   vertical-align: top;
   border-radius: 10em;
@@ -1393,7 +1369,6 @@ i.light-icon-brand-github:hover {
   color: var(--tertiary);
   display: block;
   padding: 1px 9px 1px 6px;
-  font-size: 13px;
   font-weight: 500;
 }
 
@@ -1401,10 +1376,6 @@ i.light-icon-brand-github:hover {
   background-color: rgba(0, 154, 97, 0.08);
   color: var(--quaternary);
   text-decoration: none;
-}
-
-.tel-topics {
-  font-size: 13px;
 }
 
 .topic-list {

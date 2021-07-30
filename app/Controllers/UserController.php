@@ -451,7 +451,6 @@ class UserController extends \MainController
         }
         
         // + Повторная отправка
-        
         $add_time           = date('Y-m-d H:i:s');
         $invitation_code    = Base::randomString('crypto', 25);
         $add_ip             = Request::getRemoteAddress();

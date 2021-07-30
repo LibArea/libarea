@@ -77,8 +77,10 @@
                                 <div class="boxline">
                                     <label class="form-label" for="topic_content"><?= lang('Root'); ?></label>
                                     <select name="topic_parent_id[]" multiple="multiple" id='selMainLinked'>
-                                        <?php foreach ($topic_parent_id as $parent) { ?>
-                                            <option selected value="<?= $parent['topic_id']; ?>"><?= $parent['topic_title']; ?></option>
+                                        <?php if (!empty($topic_parent_id)) { ?>
+                                            <?php foreach ($topic_parent_id as $parent) { ?>
+                                                <option selected value="<?= $parent['topic_id']; ?>"><?= $parent['topic_title']; ?></option>
+                                            <?php } ?>
                                         <?php } ?>
                                     </select>
                                 </div>

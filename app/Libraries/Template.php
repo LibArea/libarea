@@ -63,20 +63,33 @@ function user_avatar_img($file, $size='small', $alt, $style)
     return $img;
 }
 
-// The cover of the post
-function post_cover_img($file, $alt, $style) 
-{
-    $src = '/uploads/posts/cover/' . $file;
-    $img = '<img class="'.$style.'" src="'.$src.'" alt="'.$alt.'">';
-    
-    return $img;
-}
 
 // User's Cover art
 function user_cover_url($file) 
 {
     return '/uploads/users/cover/' . $file;
 }
+
+
+// User's Cover art or thumbnails
+function post_img($file, $alt, $style, $type, $attributes = '') 
+{
+    $src = '/uploads/posts/cover/' . $file;
+    if ($type == 'thumbnails')
+    {
+       $src = '/uploads/posts/thumbnails/' . $file; 
+    }
+    
+    if ($attributes) 
+    {
+        $attributes = 'layer-src="'.$src.'"';
+    }
+    
+    $img = '<img class="'.$style.'" '.$attributes.' src="'.$src.'" alt="'.$alt.'">';
+    
+    return $img;
+}
+
 
 // Favicon 
 function favicon_img($link_id, $alt) 

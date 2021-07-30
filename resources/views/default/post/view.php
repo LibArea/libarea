@@ -30,23 +30,23 @@
                               <i class="light-icon-language green"></i>
                             <?php } ?>
                             <?php if($post['post_translation'] == 1) { ?> 
-                              <span class="translation small lowercase"><?= lang('Translation'); ?></span>
+                              <span class="translation small italic lowercase"><?= lang('Translation'); ?></span>
                             <?php } ?>
                             <?php if($post['post_tl'] > 0) { ?> 
-                              <span class="trust-level small">tl<?= $post['post_tl']; ?></span>
+                              <span class="trust-level italic small">tl<?= $post['post_tl']; ?></span>
                             <?php } ?>
                             <?php if($post['post_merged_id'] > 0) { ?> 
                               <i class="light-icon-arrow-forward-up red"></i>
                             <?php } ?>
                         </h1>
-                        <div class="small lowercase">
+                        <div class="small lowercase flex">
                             <a class="gray" href="/u/<?= $post['login']; ?>">
                                 <?= user_avatar_img($post['avatar'], 'small', $post['login'], 'ava'); ?>
                                 <span class="indent">
                                     <?= $post['login']; ?>
                                 </span> 
                             </a> 
-                            <span class="indent gray"> 
+                            <span class="gray"> 
                                 <?= $post['post_date_lang']; ?>
                                 <?php if($post['modified']) { ?> 
                                     (<?= lang('ed'); ?>) 
@@ -54,27 +54,25 @@
                             </span>
                             <?php if ($uid['id']) { ?>
                                 <?php if($uid['login'] == $post['login']  || $uid['trust_level'] == 5) { ?>
-                                    <span class="indent">
-                                    <span class="indent"></span>
+                                    <span class="indent">&#183;</span>
                                         <a class="gray" href="/post/edit/<?= $post['post_id']; ?>">
-                                            <i class="light-icon-edit middle"></i> 
+                                            <?= lang('Remove'); ?>
                                         </a>
-                                    </span>
                                 <?php } ?>     
                                 <?php if($uid['login'] == $post['login']) { ?>    
                                     <?php if($post['post_draft'] == 0) { ?>
+                                        <span class="indent">&#183;</span>
                                         <?php if($post['my_post'] == $post['post_id']) { ?>
                                                 <span class="mu_post gray">+ <?= lang('in-the-profile'); ?></span>
-                                                <span class="indent"> &#183; </span>
                                         <?php } else { ?> 
-                                            <a class="user-mypost indent gray" data-opt="1" data-post="<?= $post['post_id']; ?>">
+                                            <a class="user-mypost gray" data-opt="1" data-post="<?= $post['post_id']; ?>">
                                                 <span class="mu_post"><?= lang('in-the-profile'); ?></span>
-                                                <span class="indent"> &#183;  </span>
                                             </a>
                                         <?php } ?> 
                                     <?php } ?>    
                                 <?php } ?> 
-                                <span class="add-favorite indent gray" data-id="<?= $post['post_id']; ?>" data-type="post">
+                                <span class="add-favorite gray" data-id="<?= $post['post_id']; ?>" data-type="post">
+                                    <span class="indent">&#183;</span>
                                     <?php if ($post['favorite_post']){ ?>
                                         <?= lang('remove-favorites'); ?>
                                     <?php } else { ?>
@@ -84,7 +82,7 @@
                                 
                                 <?php if($uid['trust_level'] ==5) { ?>
                                     <span class="indent"> &#183; </span>
-                                    <span id="cm_dell" class="cm_add_link indent">
+                                    <span id="cm_dell" class="cm_add_link">
                                         <a data-type="post" data-id="<?= $post['post_id']; ?>" class="type-action gray">
                                             <?php if($post['post_is_deleted'] == 1) { ?>
                                                 <?= lang('Recover'); ?>
@@ -93,7 +91,10 @@
                                             <?php } ?>
                                         </a>
                                     </span>
-                                    <small> &#183; <?= $post['post_hits_count']; ?></small>
+                                    <span class="small">
+                                        <span class="indent"> &#183; </span>
+                                        <?= $post['post_hits_count']; ?>
+                                    </span>
                                 <?php } ?>
                                 
                             <?php } ?>
@@ -103,7 +104,7 @@
                         <div class="post">
                        
                             <?php if($post['post_thumb_img']) { ?> 
-                                <img class="thumb" alt="<?= $post['post_title']; ?>" src="/uploads/posts/thumbnails/<?= $post['post_thumb_img']; ?>">
+                                <?= post_img($post['post_thumb_img'], $post['post_title'],  'thumb', 'thumbnails'); ?>
                             <?php } ?>
                         
                             <?= $post['post_content']; ?> 
@@ -120,11 +121,11 @@
                             </div>     
                         <?php } ?>    
                         <?php if($post['post_url_domain']) { ?> 
-                            <span class="post_url_detal">
+                            <div class="italic vertical-ind">
                                 <?= lang('Website'); ?>: <a rel="nofollow noreferrer ugc" href="<?= $post['post_url']; ?>">
                                    <?= $post['post_url_domain']; ?>
                                 </a>
-                            </span> 
+                            </div> 
                         <?php } ?>
                         
                     <?php if(!empty($post_related)) { ?>
@@ -147,7 +148,7 @@
                         <div class="related"> 
                         <h3 class="style small"><?= lang('Topics'); ?>:</h3>
                             <?php foreach ($topics as $topic) { ?>
-                                <a class="tags" href="/topic/<?= $topic['topic_slug']; ?>">
+                                <a class="tags small" href="/topic/<?= $topic['topic_slug']; ?>">
                                     <?= $topic['topic_title']; ?>
                                 </a>
                             <?php } ?>
@@ -238,7 +239,7 @@
         <?php if($post['post_content_img']) { ?>
           <div class="space-info white-box">
             <div id="layer-photos" class="layer-photos inner-padding big">
-                <img class="img-post" layer-src="/uploads/posts/cover/<?= $post['post_content_img']; ?>" alt="<?= $post['post_title']; ?>" src="/uploads/posts/cover/<?= $post['post_content_img']; ?>">
+               <?= post_img($post['post_content_img'], $post['post_title'], 'img-post', 'cover', $post['post_content_img']); ?>
             </div>
           </div>
         <?php } ?>    

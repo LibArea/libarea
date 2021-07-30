@@ -36,7 +36,8 @@ class AuthController extends \MainController
  
         // Проверяем код
         $invate = UserModel::InvitationAvailable($code);
-        if (!$invate) {
+        if (!$invate) 
+        {
             Base::addMsg(lang('The code is incorrect'), 'error');
             redirect('/');   
         }
@@ -276,8 +277,8 @@ class AuthController extends \MainController
         if (empty($result)) {
            AuthModel::insertToken($data);
         } 
-        // Если есть, то обновление
-        else {
+        else 
+        {   // Если есть, то обновление
             AuthModel::updateToken($data, $user_id);
         }
         
@@ -317,20 +318,23 @@ class AuthController extends \MainController
             }
         }
         
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) 
+        {
            Base::addMsg(lang('Invalid') . ' email', 'error');
            redirect('/recover');
         }
         
         $uInfo = UserModel::userInfo($email);
 
-        if (empty($uInfo['email'])) {
+        if (empty($uInfo['email'])) 
+        {
             Base::addMsg(lang('There is no such e-mail on the site'), 'error');
             redirect('/recover');
         }
         
         // Проверка на заблокированный аккаунт
-        if ($uInfo['ban_list'] == 1) {
+        if ($uInfo['ban_list'] == 1) 
+        {
             Base::addMsg(lang('Your account is under review'), 'error');
             redirect('/recover');
         }
@@ -356,7 +360,8 @@ class AuthController extends \MainController
  
         // Проверяем код
         $user_id = UserModel::getPasswordActivate($code);
-        if (!$user_id) {
+        if (!$user_id) 
+        {
             Base::addMsg(lang('code-incorrect'), 'error');
             redirect('/recover');   
         }
@@ -384,7 +389,8 @@ class AuthController extends \MainController
  
         // Проверяем код
         $avtivate_email = UserModel::getEmailActivate($code);
-        if (!$avtivate_email) {
+        if (!$avtivate_email) 
+        {
             Base::addMsg(lang('code-used'), 'error');
             redirect('/');   
         }

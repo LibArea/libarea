@@ -41,7 +41,7 @@
          
                                 <?= $val['message']; ?>
 
-                                <div class="date">
+                                <div class="small gray">
                                     <?= $val['add_time']; ?> 
                                     
                                     <?php if ($val['receipt'] AND $val['uid'] == $uid['id']) { ?> 

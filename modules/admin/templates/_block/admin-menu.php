@@ -21,7 +21,7 @@
                 <span class="middle"><?= lang('Audit'); ?></span>
             </a>
         </li>  
-        <li class="nav<?php if ($data['sheet'] == 'spaces') { ?> active<?php } ?>">    
+        <li class="nav<?php if ($data['sheet'] == 'allspaces' || $data['sheet'] == 'banspaces') { ?> active<?php } ?>">    
             <a class="light-gray" title="<?= lang('Spaces'); ?>" href="/admin/spaces">
                 <i class="light-icon-infinity middle"></i>
                 <span class="middle"><?= lang('Spaces'); ?></span>

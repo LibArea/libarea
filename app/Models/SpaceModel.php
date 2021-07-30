@@ -51,20 +51,31 @@ class SpaceModel extends \MainModel
     // Для форм добавления и изменения поста
     public static function getSpaceSelect($user_id, $trust_level)
     {
+        $spaces = self::getSubscription($user_id);
+        
+        $result = Array();
+        foreach ($spaces as $ind => $row) 
+        {
+            $result[$ind] = $row['signed_space_id'];
+        } 
+        
         $sql = "SELECT 
                     space_id,
                     space_name,
                     space_user_id,
                     space_permit_users
                         FROM space 
-                        WHERE space_permit_users = 0 or space_user_id = :user_id ORDER BY space_id DESC";
-                        
-        if ($trust_level == 5) {
+                        WHERE space_id IN(".implode(',', $result).") AND
+                        space_permit_users = 0 or space_user_id = :user_id AND space_is_delete != 1  
+                        ORDER BY space_id DESC";
+                      
+        if ($trust_level == 5) 
+        {
             $sql = "SELECT 
                     space_id,
                     space_name,
                     space_user_id
-                        FROM space";
+                        FROM space WHERE space_is_delete != 1";
         }
 
         return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC); 
@@ -123,6 +134,25 @@ class SpaceModel extends \MainModel
        return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);  
     }
 
+    // Пространства все / подписан
+    public static function getSubscription($user_id) 
+    {
+        $sql = "SELECT 
+                    space_id, 
+                    space_slug, 
+                    space_name,
+                    space_img,
+                    space_user_id,
+                    space_is_delete,
+                    signed_space_id, 
+                    signed_user_id
+                        FROM space 
+                        LEFT JOIN space_signed ON signed_space_id = space_id AND signed_user_id = :user_id 
+                        WHERE space_is_delete != 1 AND signed_user_id = :user_id";
+
+       return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);  
+    } 
+    
     // Количество читающих
     public static function numSpaceSubscribers($space_id)
     {
