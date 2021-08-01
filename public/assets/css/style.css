@@ -1187,12 +1187,13 @@ a.tags {
   border-radius: 10em;
   background-color: #0066ff1a;
   margin: 0 0 10px 0;
+  color: #777;
 }
 
 a.tags:hover,
 a.tags.avtive {
-  background-color: rgba(0, 102, 255, 0.15);
-  color: #275ec2;
+  background-color: #5FB878;
+  color: #fff;
 }
 
 /* Info space and recommended in the post */

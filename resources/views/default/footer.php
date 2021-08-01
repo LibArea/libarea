@@ -5,7 +5,7 @@
       <h4 class="p-head two"><?= lang('Info'); ?></h4>
       <a class="footer small" title="<?= lang('Spaces'); ?>" href="/spaces"><?= lang('Spaces'); ?></a>
       <a class="footer small" title="<?= lang('Topics'); ?>" href="/topics"><?= lang('Topics'); ?></a>
-      <a class="footer small" title="<?= lang('Users'); ?>" href="/users"><?= lang('Users'); ?></a> 
+      <a class="footer small" title="<?= lang('Users'); ?>" href="/users"><?= lang('Users'); ?></a>
     </div>
     <div class="text-info no-mob">
       <h4 class="p-head three"><?= lang('Other'); ?></h4>
@@ -15,14 +15,14 @@
     </div>
     <div class="text-info">
       <h4 class="p-head one"><?= lang('Help'); ?></h4>
-      <a class="footer small" title="<?= lang('Info'); ?>" href="/info"><?= lang('Info'); ?></a> 
+      <a class="footer small" title="<?= lang('Info'); ?>" href="/info"><?= lang('Info'); ?></a>
       <a class="footer small no-mob" title="<?= lang('Privacy'); ?>" href="/info/privacy"><?= lang('Privacy'); ?></a>
     </div>
     <div class="text-oth ots">
-      <h4 class="p-head-n"><?= lang('Social networks'); ?></h4> 
+      <h4 class="p-head-n"><?= lang('Social networks'); ?></h4>
       <a rel="nofollow noopener" class="discord" title="DISCORD" href="https://discord.gg/dw47aNx5nU">
         <svg class="md-icon discord">
-          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
           <circle cx="9" cy="12" r="1" />
           <circle cx="15" cy="12" r="1" />
           <path d="M7.5 7.5c3.5-1 5.5-1 9 0" />
@@ -33,26 +33,26 @@
       <a rel="nofollow noopener" class="github" title="GitHub" href="https://github.com/LoriUp/loriup">
         <i class="light-icon-brand-github"></i>
       </a>
-       
+
       <div class="small">
-        Loriup &copy; <?= date('Y'); ?> 
-        <span class="no-mob">— <?= lang('community'); ?></span> 
-      </div> 
+        Loriup &copy; <?= date('Y'); ?>
+        <span class="no-mob">— <?= lang('community'); ?></span>
+      </div>
     </div>
   </div>
 </footer>
 
 <script async src="/assets/js/common.js"></script>
-<script src="/assets/js/layer/layer.js"></script> 
+<script src="/assets/js/layer/layer.js"></script>
 
 <?php if ($uid['msg']) { ?>
   <?php foreach ($uid['msg'] as $message) { ?>
     <script nonce="<?= $_SERVER['nonce']; ?>">
-        layer.msg('<?= $message[0]; ?>', {
-          icon: <?= $message[1]; ?>,
-          time: 3000,
-          skin: 'layui-layer-molv',
-        });
+      layer.msg('<?= $message[0]; ?>', {
+        icon: <?= $message[1]; ?>,
+        time: 3000,
+        skin: 'layui-layer-molv',
+      });
     </script>
   <?php } ?>
 <?php } ?>
@@ -62,4 +62,5 @@
 
 <a id="scroll_top" title="Наверх">&#8593;</a>
 </body>
-</html> 
+
+</html>

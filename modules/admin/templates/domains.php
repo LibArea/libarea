@@ -10,46 +10,46 @@
 
                 <div class="domains">
                     <?php if (!empty($domains)) { ?>
-                  
-                        <?php foreach ($domains as $key => $link) { ?>  
+
+                        <?php foreach ($domains as $key => $link) { ?>
                             <div class="domain-box">
                                 <span class="add-favicon right small" data-id="<?= $link['link_id']; ?>">
                                     +фавикон
                                 </span>
                                 <div class="title">
-                                    <?php if($link['link_title']) { ?>
+                                    <?php if ($link['link_title']) { ?>
                                         <?= $link['link_title']; ?>
                                     <?php } else { ?>
-                                        Add title...                                    
-                                    <?php } ?> 
+                                        Add title...
+                                    <?php } ?>
                                 </div>
                                 <div class="content-telo">
-                                    <?php if($link['link_content']) { ?>
+                                    <?php if ($link['link_content']) { ?>
                                         <?= $link['link_content']; ?>
                                     <?php } else { ?>
-                                        Add content...                                    
-                                    <?php } ?> 
-                                </div> 
-                                
+                                        Add content...
+                                    <?php } ?>
+                                </div>
+
                                 <div class="content-footer">
                                     <a class="green" rel="nofollow noreferrer" href="<?= $link['link_url']; ?>">
                                         <?= favicon_img($link['link_id'], $link['link_url_domain']); ?>
                                         <span class="green"><?= $link['link_url']; ?></span>
-                                    </a> | 
-                                    id<?= $link['link_id']; ?> 
+                                    </a> |
+                                    id<?= $link['link_id']; ?>
                                     <span class="indent"> &#183; </span>
-                                    <?= $link['link_url_domain']; ?> 
-                                    
+                                    <?= $link['link_url_domain']; ?>
+
                                     <span class="indent"> &#183; </span>
-                                    <?php if($link['link_is_deleted'] == 0) { ?>
+                                    <?php if ($link['link_is_deleted'] == 0) { ?>
                                         active
                                     <?php } else { ?>
-                                        <span class="red">Ban</span>                                  
-                                    <?php } ?> 
+                                        <span class="red">Ban</span>
+                                    <?php } ?>
                                     <span class="indent"> &#183; </span>
                                     <a href="/web/edit/<?= $link['link_id']; ?>"><?= lang('Edit'); ?></a>
                                     <span class="right heart-link red">
-                                         +<?= $link['link_count']; ?>
+                                        +<?= $link['link_count']; ?>
                                     </span>
                                 </div>
                             </div>

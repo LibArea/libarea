@@ -1,25 +1,25 @@
-<?php include TEMPLATE_DIR . '/header.php'; ?>
+<?php include TEMPLATE_ADMIN_DIR . '/_block/header-admin.php'; ?>
 <div class="wrap">
     <main class="admin">
         <div class="white-box">
             <div class="inner-padding">
-                <?= breadcrumb('/topics', lang('Topics'), '/topic/' . $topic['topic_slug'], $topic['topic_title'], $data['meta_title']); ?>
-                
+                <?= breadcrumb('/admin', lang('Admin'), '/admin/topics', lang('Topics'), $data['meta_title']); ?>
+
                 <div class="telo topic">
                     <div class="box create ">
-                    
+
                         <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'img-topic-edit'); ?>
-                        <form action="/topic/edit" method="post" enctype="multipart/form-data">
+                        <form action="/admin/topic/edit/<?= $topic['topic_id']; ?>" method="post" enctype="multipart/form-data">
                             <?= csrf_field() ?>
-                             
-                            <div class="box-form-img"> 
+
+                            <div class="box-form-img">
                                 <div class="boxline">
                                     <div class="input-images"></div>
                                 </div>
-                            </div> 
+                            </div>
                             <div class="clear">
                                 <p><?= lang('Recommended size'); ?>: 240x240px (jpg, jpeg, png)</p>
-                                <p><input type="submit" class="button" value="<?= lang('Download'); ?>"/></p>
+                                <p><input type="submit" class="button" value="<?= lang('Download'); ?>" /></p>
                             </div>
                             <div class="boxline">
                                 <label class="form-label" for="topic_content">
@@ -35,31 +35,31 @@
                                 <input class="form-input" minlength="4" name="topic_seo_title" value="<?= $topic['topic_seo_title']; ?>">
                                 <div class="box_h">4 - 225 <?= lang('characters'); ?></div>
                             </div>
-                             <div class="boxline">
+                            <div class="boxline">
                                 <label class="form-label" for="topic_content">
                                     <?= lang('Slug'); ?><sup class="red">*</sup>
                                 </label>
                                 <input class="form-input" minlength="3" type="text" name="topic_slug" value="<?= $topic['topic_slug']; ?>">
                                 <div class="box_h">3 - 32 <?= lang('characters'); ?></div>
                             </div>
-                             <div class="boxline">
+                            <div class="boxline">
                                 <label class="form-label" for="topic_content">
                                     <?= lang('topic-count'); ?><sup class="red">*</sup>
                                 </label>
-                                <input class="form-input"  type="text" name="topic_count" value="<?= $topic['topic_count']; ?>">
+                                <input class="form-input" type="text" name="topic_count" value="<?= $topic['topic_count']; ?>">
                             </div>
-                            <?php if($topic['topic_parent_id'] > 0) { ?>
+                            <?php if ($topic['topic_parent_id'] > 0) { ?>
                                 <div class="boxline">
                                     <label for="topic_content"><?= lang('Корневая'); ?>?</label>
                                     ----
-                                </div>    
+                                </div>
                             <?php } else { ?>
-                                <div class="boxline"> 
+                                <div class="boxline">
                                     <label for="topic_content"><?= lang('Корневая'); ?>?</label>
-                                    <input type="radio" name="topic_is_parent" <?php if($topic['topic_is_parent'] == 0) { ?>checked<?php } ?> value="0"> <?= lang('No'); ?>
-                                    <input type="radio" name="topic_is_parent" <?php if($topic['topic_is_parent'] == 1) { ?>checked<?php } ?> value="1" >  <?= lang('Yes'); ?>
+                                    <input type="radio" name="topic_is_parent" <?php if ($topic['topic_is_parent'] == 0) { ?>checked<?php } ?> value="0"> <?= lang('No'); ?>
+                                    <input type="radio" name="topic_is_parent" <?php if ($topic['topic_is_parent'] == 1) { ?>checked<?php } ?> value="1"> <?= lang('Yes'); ?>
                                     <div class="box_h"><?= lang('root-help'); ?></div>
-                                </div> 
+                                </div>
                             <?php } ?>
                             <div class="boxline">
                                 <label for="topic_content">
@@ -73,7 +73,7 @@
                                 <textarea class="add" rows="6" name="topic_info"><?= $topic['topic_info']; ?></textarea>
                                 <div class="box_h">Markdown, > 14 <?= lang('characters'); ?></div>
                             </div>
-                            <?php if($topic['topic_is_parent'] != 1) { ?>
+                            <?php if ($topic['topic_is_parent'] != 1) { ?>
                                 <div class="boxline">
                                     <label class="form-label" for="topic_content"><?= lang('Root'); ?></label>
                                     <select name="topic_parent_id[]" multiple="multiple" id='selMainLinked'>
@@ -85,8 +85,8 @@
                                     </select>
                                 </div>
                             <?php } ?>
-                            
-                            <div class="boxline">  
+
+                            <div class="boxline">
                                 <label class="form-label" for="post_content">
                                     <?= lang('Related'); ?> post
                                 </label>
@@ -95,7 +95,7 @@
                                         <option selected value="<?= $related['post_id']; ?>"><?= $related['post_title']; ?></option>
                                     <?php } ?>
                                 </select>
-                            <div class="boxline">  
+                                <div class="boxline">
                                     <label class="form-label" for="topic_content">
                                         <?= lang('Related'); ?> topic
                                     </label>
@@ -105,23 +105,23 @@
                                         <?php } ?>
                                     </select>
                                     <script nonce="<?= $_SERVER['nonce']; ?>">
-                                        $(document).ready(function(){
+                                        $(document).ready(function() {
                                             $("#topicRelated").select2({
                                                 width: '70%',
-                                                ajax: { 
+                                                ajax: {
                                                     url: "/search/topic",
                                                     type: "post",
                                                     dataType: 'json',
                                                     delay: 250,
-                                                    data: function (params) {
+                                                    data: function(params) {
                                                         return {
-                                                          searchTerm: params.term 
+                                                            searchTerm: params.term
                                                         };
                                                     },
-                                                    processResults: function (response) {
-                                                     return {
-                                                        results: response
-                                                     };
+                                                    processResults: function(response) {
+                                                        return {
+                                                            results: response
+                                                        };
                                                     },
                                                     cache: true
                                                 }
@@ -129,20 +129,20 @@
                                             $("#selMainLinked").select2({
                                                 width: '70%',
                                                 maximumSelectionLength: 1,
-                                                ajax: { 
+                                                ajax: {
                                                     url: "/search/main",
                                                     type: "post",
                                                     dataType: 'json',
                                                     delay: 250,
-                                                    data: function (params) {
+                                                    data: function(params) {
                                                         return {
-                                                          searchTerm: params.term 
+                                                            searchTerm: params.term
                                                         };
                                                     },
-                                                    processResults: function (response) {
-                                                     return {
-                                                        results: response
-                                                     };
+                                                    processResults: function(response) {
+                                                        return {
+                                                            results: response
+                                                        };
                                                     },
                                                     cache: true
                                                 }
@@ -150,43 +150,36 @@
                                             $("#postRelated").select2({
                                                 width: '70%',
                                                 maximumSelectionLength: 5,
-                                                ajax: { 
+                                                ajax: {
                                                     url: "/search/post",
                                                     type: "post",
                                                     dataType: 'json',
                                                     delay: 250,
-                                                    data: function (params) {
+                                                    data: function(params) {
                                                         return {
-                                                          searchTerm: params.term 
+                                                            searchTerm: params.term
                                                         };
                                                     },
-                                                    processResults: function (response) {
-                                                     return {
-                                                        results: response
-                                                     };
+                                                    processResults: function(response) {
+                                                        return {
+                                                            results: response
+                                                        };
                                                     },
                                                     cache: true
                                                 }
                                             });
                                         });
                                     </script>
-                                </div>  
-                            <div class="boxline">
-                                <input type="hidden" name="topic_id" value="<?= $topic['topic_id']; ?>">
-                                <input type="submit" name="submit"  class="button" value="<?= lang('Add'); ?>" />
-                            </div>    
+                                </div>
+                                <div class="boxline">
+                                    <input type="hidden" name="topic_id" value="<?= $topic['topic_id']; ?>">
+                                    <input type="submit" name="submit" class="button" value="<?= lang('Add'); ?>" />
+                                </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </main>
-    <aside>
-        <div class="white-box">
-            <div class="inner-padding big">
-                <?= lang('info_space_edit'); ?>
-            </div>
-        </div>
-    </aside>
 </div>
-<?php include TEMPLATE_DIR . '/footer.php'; ?> 
+<?php include TEMPLATE_ADMIN_DIR . '/_block/footer-admin.php'; ?>

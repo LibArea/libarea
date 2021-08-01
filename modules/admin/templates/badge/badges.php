@@ -3,14 +3,14 @@
     <main class="admin">
         <div class="white-box">
             <div class="inner-padding">
-                <a class="right" title="<?= lang('Add'); ?>" href="/admin/badge/add">
-                <i class="light-icon-plus middle"></i>
+                <a class="right" title="<?= lang('Add'); ?>" href="/admin/badges/add">
+                    <i class="light-icon-plus middle"></i>
                 </a>
                 <?= breadcrumb('/admin', lang('Admin'), null, null, $data['meta_title']); ?>
 
                 <div class="badges">
                     <?php if (!empty($badges)) { ?>
-                  
+
                         <div class="t-table">
                             <div class="t-th">
                                 <span class="t-td center">Id</span>
@@ -19,21 +19,21 @@
                                 <span class="t-td center"><?= lang('Action'); ?></span>
                             </div>
 
-                            <?php foreach ($badges as $key => $bg) { ?>  
+                            <?php foreach ($badges as $key => $bg) { ?>
                                 <div class="t-tr">
                                     <span class="t-td width-30 center">
                                         <?= $bg['badge_id']; ?>
-                                    </span>  
+                                    </span>
                                     <span class="t-td width-30 center">
                                         <?= $bg['badge_icon']; ?>
                                     </span>
                                     <span class="t-td">
-                                        <b><?= $bg['badge_title']; ?></b> 
+                                        <b><?= $bg['badge_title']; ?></b>
                                         <br>
                                         <?= $bg['badge_description']; ?>
                                     </span>
                                     <span class="t-td center">
-                                        <a title="<?= lang('Edit'); ?>" href="/admin/badge/<?= $bg['badge_id']; ?>/edit">
+                                        <a title="<?= lang('Edit'); ?>" href="/admin/badges/<?= $bg['badge_id']; ?>/edit">
                                             <i class="light-icon-edit middle"></i>
                                         </a>
                                     </span>

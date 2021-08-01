@@ -3,8 +3,8 @@
     <main>
         <div class="white-box">
             <div class="inner-padding big">
-                <?= breadcrumb('/', lang('Home'), '/u/'. $uid['login'], lang('Profile'), $data['h1']); ?>
-            
+                <?= breadcrumb('/', lang('Home'), '/u/' . $uid['login'], lang('Profile'), $data['h1']); ?>
+
                 <ul class="nav-tabs">
                     <li class="active">
                         <span><?= lang('Setting profile'); ?></span>
@@ -23,7 +23,7 @@
 
                 <div class="box setting">
                     <form action="/users/setting/edit" method="post" enctype="multipart/form-data">
-                    <?php csrf_field(); ?>
+                        <?php csrf_field(); ?>
                         <div class="boxline">
                             <span class="name"><?= lang('Nickname'); ?></span>
                             <?= user_avatar_img($user['avatar'], 'small', $user['login'], 'mini indent ava'); ?>
@@ -33,32 +33,32 @@
                             <span class="name">E-mail</span>
                             <span class="indent"><?= $user['email']; ?></span>
                         </div>
-                    
+
                         <div class="boxline">
                             <label class="form-label" for="name"><?= lang('Name'); ?><sup class="red">*</sup></label>
                             <input type="text" required class="form-input" name="name" id="name" value="<?= $user['name']; ?>">
                         </div>
-                       
+
                         <div class="boxline">
                             <label class="form-label" for="about"><?= lang('About me'); ?></label>
                             <textarea type="text" rows="4" name="about" id="about"><?= $user['about']; ?></textarea>
                             <div class="box_h">0 - 255 <?= lang('characters'); ?></div>
                         </div>
-                       
+
                         <div id="box" class="boxline">
                             <label class="form-label" for="post_content"><?= lang('Color'); ?></label>
                             <input type="color" value="<?= $user['color']; ?>" id="colorPicker">
                             <input type="hidden" name="color" value="" id="color">
                         </div>
-                        
-                       <h3><?= lang('Contacts'); ?></h3>
-                       
+
+                        <h3><?= lang('Contacts'); ?></h3>
+
                         <div class="boxline">
                             <label class="form-label" for="name"><?= lang('URL'); ?></label>
                             <input type="text" class="form-input" name="website" id="name" value="<?= $user['website']; ?>">
                             <div class="box_h">https://site.ru</div>
                         </div>
-                              
+
                         <div class="boxline">
                             <label class="form-label" for="name"><?= lang('City'); ?></label>
                             <input type="text" class="form-input" name="location" id="name" value="<?= $user['location']; ?>">
@@ -93,8 +93,8 @@
                             <label class="form-label" for="name"><?= lang('VK'); ?></label>
                             <input type="text" class="form-input" name="vk" id="name" value="<?= $user['vk']; ?>">
                             <div class="box_h">https://vk.com/<b>NICK / id</b></div>
-                        </div>       
-                       
+                        </div>
+
                         <div class="boxline">
                             <input type="hidden" name="nickname" id="nickname" value="">
                             <button type="submit" class="button"><?= lang('Edit'); ?></button>
@@ -102,7 +102,7 @@
                     </form>
                 </div>
             </div>
-        </div>            
+        </div>
     </main>
     <aside>
         <div class="white-box">
@@ -111,5 +111,5 @@
             </div>
         </div>
     </aside>
-</div>    
+</div>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

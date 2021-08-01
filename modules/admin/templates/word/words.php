@@ -10,10 +10,10 @@
 
                 <div class="words">
                     <?php if (!empty($words)) { ?>
-                  
-                        <?php foreach ($words as $key => $word) { ?>  
+
+                        <?php foreach ($words as $key => $word) { ?>
                             <div class="content-telo">
-                                <?= $word['stop_word']; ?> | 
+                                <?= $word['stop_word']; ?> |
                                 <a data-id="<?= $word['stop_id']; ?>" class="delete-word lowercase small">
                                     <?= lang('Remove'); ?>
                                 </a>

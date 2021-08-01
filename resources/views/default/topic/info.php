@@ -4,24 +4,25 @@
         <div class="white-box">
             <div class="inner-padding">
                 <a class="small" title="<?= lang('All topics'); ?>" href="/topics"> ← <?= lang('Topics'); ?></a>
-                
+
                 <h1 class="topics"><a href="/topic/<?= $topic['topic_slug']; ?>"><?= $data['h1']; ?></a>
-                    <?php if($uid['trust_level'] == 5) { ?>
-                        <a class="right" href="/topic/edit/<?= $topic['topic_id']; ?>"> 
-                            <i class="light-icon-edit middle"></i>          
+                    <?php if ($uid['trust_level'] == 5) { ?>
+                        <a class="right" href="/admin/topics/<?= $topic['topic_id']; ?>/edit">
+                            <i class="light-icon-edit middle"></i>
                         </a>
-                    <?php } ?></h1>
-  
-                <h3><?= lang('Info'); ?></h3>  
-               
+                    <?php } ?>
+                </h1>
+
+                <h3><?= lang('Info'); ?></h3>
+
                 <?= $topic['topic_info']; ?>
             </div>
         </div>
-        
-        <?php if(!empty($post_related)) { ?>
+
+        <?php if (!empty($post_related)) { ?>
             <div class="white-box">
                 <div class="inner-padding">
-                    <div class="related"> 
+                    <div class="related">
                         <h3 class="style small"><?= lang('By topic'); ?>:</h3>
                         <?php $num = 0; ?>
                         <?php foreach ($post_related as $related) { ?>
@@ -31,13 +32,13 @@
                                 <a href="/post/<?= $related['post_id']; ?>/<?= $related['post_slug']; ?>">
                                     <?= $related['post_title']; ?>
                                 </a>
-                           </div> 
+                            </div>
                         <?php } ?>
                     </div>
                 </div>
             </div>
         <?php } ?>
-        
+
     </main>
     <aside>
         <div class="white-box">
@@ -45,62 +46,62 @@
                 <center>
                     <a title="<?= $topic['topic_title']; ?>" href="/topic/<?= $topic['topic_slug']; ?>">
                         <div><?= $topic['topic_title']; ?><div>
-                        <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'topic-img'); ?>
-                    </a>    
+                                <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'topic-img'); ?>
+                    </a>
                 </center>
                 <hr>
                 <div class="sb-created">
-                    <i class="light-icon-calendar middle"></i> 
-                    <span class="middle"><?= $topic['topic_add_date']; ?></span> 
+                    <i class="light-icon-calendar middle"></i>
+                    <span class="middle"><?= $topic['topic_add_date']; ?></span>
                 </div>
             </div>
         </div>
-        
-         
-        <?php if(!empty($main_topic)) { ?>
+
+
+        <?php if (!empty($main_topic)) { ?>
             <div class="white-box">
-                <div class="inner-padding big"> 
+                <div class="inner-padding big">
                     <h3 class="style small"><?= lang('Root'); ?></h3>
                     <div class="related-box">
                         <a class="tags small" href="/topic/<?= $main_topic['topic_slug']; ?>">
                             <?= $main_topic['topic_title']; ?>
                         </a>
-                   </div> 
+                    </div>
                 </div>
             </div>
-        <?php } ?> 
-         
-        <?php if(!empty($subtopics)) { ?>
+        <?php } ?>
+
+        <?php if (!empty($subtopics)) { ?>
             <div class="white-box">
-                <div class="inner-padding big"> 
+                <div class="inner-padding big">
                     <h3 class="style small"><?= lang('Subtopics'); ?></h3>
                     <?php foreach ($subtopics as $sub) { ?>
                         <div class="related-box">
                             <a class="tags small" href="/topic/<?= $sub['topic_slug']; ?>">
                                 <?= $sub['topic_title']; ?>
                             </a>
-                       </div> 
+                        </div>
                     <?php } ?>
                 </div>
             </div>
         <?php } ?>
 
-       
-        <?php if(!empty($topic_related)) { ?>
+
+        <?php if (!empty($topic_related)) { ?>
             <div class="white-box">
-                <div class="inner-padding big"> 
+                <div class="inner-padding big">
                     <h3 class="style small"><?= lang('Related'); ?></h3>
                     <?php foreach ($topic_related as $related) { ?>
                         <div class="related-box">
                             <a class="tags small" href="/topic/<?= $related['topic_slug']; ?>">
                                 <?= $related['topic_title']; ?>
                             </a>
-                       </div> 
+                        </div>
                     <?php } ?>
                 </div>
             </div>
         <?php } ?>
-           
+
     </aside>
-</div>    
-<?php include TEMPLATE_DIR . '/footer.php'; ?>        
+</div>
+<?php include TEMPLATE_DIR . '/footer.php'; ?>

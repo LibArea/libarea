@@ -14,21 +14,21 @@
                                     </a>
                                 </div>
                                 <div class="box-footer">
-                                <a href="/u/<?= $user['login']; ?>"><?= $user['login']; ?></a>
-                                <br>
-                                <?php if($user['name']) { ?>
-                                   <small> <?= $user['name']; ?> </small>
-                                <?php } else { ?>
-                                    
-                                <?php } ?>
+                                    <a href="/u/<?= $user['login']; ?>"><?= $user['login']; ?></a>
+                                    <br>
+                                    <?php if ($user['name']) { ?>
+                                        <small> <?= $user['name']; ?> </small>
+                                    <?php } else { ?>
+
+                                    <?php } ?>
                                 </div>
-                            </div>    
-                        </div>        
+                            </div>
+                        </div>
                     <?php } ?>
                 </div>
             </div>
         </div>
-         <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/users'); ?>
+        <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/users'); ?>
     </main>
     <aside>
         <?php if ($uid['id'] == 0) { ?>
@@ -36,10 +36,10 @@
         <?php } else { ?>
             <div class="white-box">
                 <div class="inner-padding big">
-                    <?= lang('info_users'); ?> 
+                    <?= lang('info_users'); ?>
                 </div>
             </div>
-        <?php } ?> 
-    </aside>    
-</div>    
+        <?php } ?>
+    </aside>
+</div>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

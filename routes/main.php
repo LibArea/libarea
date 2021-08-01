@@ -58,8 +58,6 @@ Route::before('Authorization@noAuth')->getGroup();
     Route::get('/notifications/read/{id}')->controller('NotificationsController@read')->where(['id' => '[0-9]+']);  
     Route::get('/notifications/delete')->controller('NotificationsController@remove');  
     
-    Route::get('/update/count')->controller('Topic\EditTopicController@updateQuantity'); 
-    
     Route::get('/u/{login}/favorite')->controller('UserController@userFavorites')->where(['login' => '[A-Za-z0-9]+']);
     Route::get('/u/{login}/drafts')->controller('UserController@userDrafts')->where(['login' => '[A-Za-z0-9]+']);
 

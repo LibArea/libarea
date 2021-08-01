@@ -29,7 +29,7 @@
             <div class="inner-padding big">
                 <?= lang('Under development'); ?>...
             </div>
-        </div>   
+        </div>
     </aside>
 </div>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers\Comment;
+
 use Hleb\Constructor\Handlers\Request;
 use App\Models\CommentModel;
 use App\Models\UserModel;
@@ -15,31 +16,31 @@ class CommentController extends \MainController
     public function index()
     {
         $uid    = Base::getUid();
-        $page   = \Request::getInt('page'); 
+        $page   = \Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
-        
+
         $limit  = 25;
-        $pagesCount = CommentModel::getCommentAllCount();  
+        $pagesCount = CommentModel::getCommentAllCount();
         $comments   = CommentModel::getCommentsAll($page, $limit, $uid);
 
-        $result = Array();
+        $result = array();
         foreach ($comments  as $ind => $row) {
             $row['date']                = lang_date($row['comment_date']);
             $row['comment_content']     = Content::text($row['comment_content'], 'line');
             $result[$ind]   = $row;
         }
-        
+
         $num = ' | ';
-        if ($page > 1) { 
+        if ($page > 1) {
             $num = sprintf(lang('page-number'), $page) . ' | ';
-        } 
-        
+        }
+
         $data = [
             'h1'            => lang('All comments'),
             'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
-            'canonical'     => Config::get(Config::PARAM_URL) . '/comments', 
-            'sheet'         => 'comments', 
+            'canonical'     => Config::get(Config::PARAM_URL) . '/comments',
+            'sheet'         => 'comments',
             'meta_title'    => lang('All comments') . $num . Config::get(Config::PARAM_NAME),
             'meta_desc'     => lang('comments-desc') . $num . Config::get(Config::PARAM_HOME_TITLE),
         ];
@@ -55,26 +56,25 @@ class CommentController extends \MainController
         // Если нет такого пользователя 
         $user   = UserModel::getUser($login, 'slug');
         Base::PageError404($user);
-        
-        $comm  = CommentModel::userComments($login); 
-        
-        $result = Array();
+
+        $comm  = CommentModel::userComments($login);
+
+        $result = array();
         foreach ($comm as $ind => $row) {
             $row['comment_content'] = Content::text($row['comment_content'], 'line');
             $row['date']            = lang_date($row['comment_date']);
             $result[$ind]           = $row;
         }
-        
+
         $uid  = Base::getUid();
         $data = [
             'h1'            => lang('Comments-n') . ' ' . $login,
-            'canonical'     => Config::get(Config::PARAM_URL) . '/u/' . $login . '/comments', 
-            'sheet'         => 'user-comments', 
-            'meta_title'    => lang('Comments-n') . ' ' . $login .' | '. Config::get(Config::PARAM_NAME),
-            'meta_desc'     => lang('Comments-n') . ' ' . $login .' '. Config::get(Config::PARAM_HOME_TITLE),
+            'canonical'     => Config::get(Config::PARAM_URL) . '/u/' . $login . '/comments',
+            'sheet'         => 'user-comments',
+            'meta_title'    => lang('Comments-n') . ' ' . $login . ' | ' . Config::get(Config::PARAM_NAME),
+            'meta_desc'     => lang('Comments-n') . ' ' . $login . ' ' . Config::get(Config::PARAM_HOME_TITLE),
         ];
-        
+
         return view(PR_VIEW_DIR . '/comment/comment-user', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
     }
-
 }

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers;
+
 use Hleb\Constructor\Handlers\Request;
 use App\Models\UserModel;
 use App\Models\PostModel;
@@ -16,27 +17,27 @@ class UserController extends \MainController
     function index()
     {
         $uid    = Base::getUid();
-        $page   = \Request::getInt('page'); 
+        $page   = \Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
-        
+
         $limit = 40;
-        $usersCount = UserModel::getUsersAllCount(); 
+        $usersCount = UserModel::getUsersAllCount();
         $users      = UserModel::getUsersAll($page, $limit, $uid['id']);
-        
+
         Base::PageError404($users);
-        
+
         $data = [
             'h1'            => lang('Users'),
             'canonical'     => Config::get(Config::PARAM_URL) . '/users',
-            'sheet'         => 'users', 
+            'sheet'         => 'users',
             'pagesCount'    => ceil($usersCount / $limit),
             'pNum'          => $page,
-            'meta_title'    => lang('Users') .' | '. Config::get(Config::PARAM_NAME),
-            'meta_desc'     => lang('desc-user-all') .' '. Config::get(Config::PARAM_HOME_TITLE),   
+            'meta_title'    => lang('Users') . ' | ' . Config::get(Config::PARAM_NAME),
+            'meta_desc'     => lang('desc-user-all') . ' ' . Config::get(Config::PARAM_HOME_TITLE),
         ];
 
-        Request::getHead()->addStyles('/assets/css/users.css'); 
-        
+        Request::getHead()->addStyles('/assets/css/users.css');
+
         return view(PR_VIEW_DIR . '/user/users', ['data' => $data, 'uid' => $uid, 'users' => $users]);
     }
 
@@ -50,13 +51,13 @@ class UserController extends \MainController
         Base::PageError404($user);
 
         $post = PostModel::getPostId($user['my_post']);
-        
-        if (!$user['about']) { 
+
+        if (!$user['about']) {
             $user['about'] = lang('Riddle') . '...';
-        } 
+        }
 
         $site_name = Config::get(Config::PARAM_NAME);
-        $meta_title = sprintf(lang('title-profile'), $user['login'], $user['name'], $site_name); 
+        $meta_title = sprintf(lang('title-profile'), $user['login'], $user['name'], $site_name);
         $meta_desc  = sprintf(lang('desc-profile'), $user['login'], $user['about'], $site_name);
 
         \Request::getHead()->addStyles('/assets/css/users.css');
@@ -64,30 +65,30 @@ class UserController extends \MainController
         if ($user['ban_list'] == 1) {
             \Request::getHead()->addMeta('robots', 'noindex');
         }
-        
+
         // Просмотры профиля
         if (!isset($_SESSION['usernumbers'])) {
             $_SESSION['usernumbers'] = array();
         }
 
         if (!isset($_SESSION['usernumbers'][$user['id']])) {
-            UserModel::userHits($user['id']); 
+            UserModel::userHits($user['id']);
             $_SESSION['usernumbers'][$user['id']] = $user['id'];
         }
 
         $uid        = Base::getUid();
-        
+
         // Ограничение на показ кнопки отправить Pm (ЛС, личные сообщения)
         $button_pm  = accessPm($uid, $user['id'], Config::get(Config::PARAM_TL_ADD_PM));
 
-        $data =[
+        $data = [
             'h1'                => $user['login'],
             'sheet'             => 'profile',
             'created_at'        => lang_date($user['created_at']),
             'trust_level'       => UserModel::getUserTrust($user['id']),
             'posts_count'       => UserModel::contentCount($user['id'], 'posts'),
             'answers_count'     => UserModel::contentCount($user['id'], 'answers'),
-            'comments_count'    => UserModel::contentCount($user['id'], 'comments'), 
+            'comments_count'    => UserModel::contentCount($user['id'], 'comments'),
             'spaces_user'       => SpaceModel::getUserCreatedSpaces($user['id']),
             'badges'            => UserModel::getBadgeUserAll($user['id']),
             'canonical'         => Config::get(Config::PARAM_URL) . '/u/' . $user['login'],
@@ -97,7 +98,7 @@ class UserController extends \MainController
         ];
 
         return view(PR_VIEW_DIR . '/user/profile', ['data' => $data, 'uid' => $uid, 'user' => $user, 'onepost' => $post, 'button_pm' => $button_pm]);
-    }  
+    }
 
     // Форма настройки профиля
     function settingForm()
@@ -106,21 +107,21 @@ class UserController extends \MainController
         $login  = \Request::get('login');
         $uid    = Base::getUid();
         $user   = UserModel::getUser($uid['login'], 'slug');
-   
+
         // Ошибочный Slug в Url
         if ($login != $user['login']) {
             redirect('/u/' . $user['login'] . '/setting');
         }
-        
+
         $data = [
             'h1'            => lang('Setting profile'),
-            'sheet'         => 'setting', 
+            'sheet'         => 'setting',
             'meta_title'    => lang('Setting profile'),
         ];
 
         return view(PR_VIEW_DIR . '/user/setting', ['data' => $data, 'uid' => $uid, 'user' => $user]);
     }
-    
+
     // Изменение профиля
     function settingEdit()
     {
@@ -134,10 +135,10 @@ class UserController extends \MainController
         $twitter        = \Request::getPost('twitter');
         $telegram       = \Request::getPost('telegram');
         $vk             = \Request::getPost('vk');
-        
-  
+
+
         if (!$color) {
-           $color  = '#339900'; 
+            $color  = '#339900';
         }
 
         $uid        = Base::getUid();
@@ -148,12 +149,12 @@ class UserController extends \MainController
         if (!filter_var($public_email, FILTER_VALIDATE_EMAIL)) {
             $public_email = '';
         }
-        
+
         $skype      = substr($skype, 0, 25);
         $twitter    = substr($twitter, 0, 25);
         $telegram   = substr($telegram, 0, 25);
         $vk         = substr($vk, 0, 25);
-  
+
         $data = [
             'id'            => $uid['id'],
             'name'          => $name,
@@ -169,11 +170,11 @@ class UserController extends \MainController
         ];
 
         UserModel::editProfile($data);
-        
+
         Base::addMsg(lang('Changes saved'), 'success');
         redirect($redirect);
     }
-    
+
     // Форма загрузки аватарки
     function settingAvatarForm()
     {
@@ -186,20 +187,20 @@ class UserController extends \MainController
         }
 
         $userInfo           = UserModel::getUser($uid['login'], 'slug');
-        
+
         $data = [
             'h1'            => lang('Change avatar'),
-            'sheet'         => 'setting-ava', 
+            'sheet'         => 'setting-ava',
             'meta_title'    => lang('Change avatar'),
             'meta_desc'     => lang('Change avatar page') . ' | ' . Config::get(Config::PARAM_NAME),
         ];
 
-        Request::getHead()->addStyles('/assets/css/image-uploader.css'); 
+        Request::getHead()->addStyles('/assets/css/image-uploader.css');
         Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
 
         return view(PR_VIEW_DIR . '/user/setting-avatar', ['data' => $data, 'uid' => $uid, 'user' => $userInfo]);
     }
-    
+
     // Форма изменение пароля
     function settingSecurityForm()
     {
@@ -210,43 +211,43 @@ class UserController extends \MainController
         if ($login != $uid['login']) {
             redirect('/u/' . $uid['login'] . '/setting/security');
         }
-        
+
         $data = [
             'h1'            => lang('Change password'),
             'password'      => '',
             'password2'     => '',
             'password3'     => '',
-            'sheet'         => 'setting-pass', 
+            'sheet'         => 'setting-pass',
             'meta_title'    => lang('Change password') . ' | ' . Config::get(Config::PARAM_NAME),
         ];
 
         return view(PR_VIEW_DIR . '/user/setting-security', ['data' => $data, 'uid' => $uid]);
     }
-    
+
     // Изменение аватарки
-    function settingAvatarEdit() 
+    function settingAvatarEdit()
     {
         $uid        = Base::getUid();
         $redirect   = '/u/' . $uid['login'] . '/setting/avatar';
-        
+
         // Запишем img
         $img        = $_FILES['images'];
         $check_img  = $_FILES['images']['name'][0];
-        if($check_img) {
+        if ($check_img) {
             UploadImage::img($img, $uid['id'], 'user');
-        } 
+        }
 
         // Баннер
         $cover          = $_FILES['cover'];
         $check_cover    = $_FILES['cover']['name'][0];
-        if($check_cover) {
+        if ($check_cover) {
             UploadImage::cover($cover, $uid['id'], 'user');
-        } 
-        
+        }
+
         Base::addMsg(lang('Change saved'), 'success');
         redirect($redirect);
     }
-    
+
     // Изменение пароля
     function settingSecurityEdit()
     {
@@ -260,7 +261,7 @@ class UserController extends \MainController
             Base::addMsg(lang('pass-match-err'), 'error');
             redirect($redirect);
         }
-        
+
         if (substr_count($password2, ' ') > 0) {
             Base::addMsg(lang('pass-gap-err'), 'error');
             redirect($redirect);
@@ -270,28 +271,28 @@ class UserController extends \MainController
             Base::addMsg(lang('pass-length-err'), 'error');
             redirect($redirect);
         }
-        
+
         // Данные участника
         $account = \Request::getSession('account');
         $userInfo = UserModel::userInfo($account['email']);
-       
+
         if (!password_verify($password, $userInfo['password'])) {
             Base::addMsg(lang('old-password-err'), 'error');
             redirect($redirect);
         }
-        
+
         $newpass = password_hash($password2, PASSWORD_BCRYPT);
         UserModel::editPassword($account['user_id'], $newpass);
 
         Base::addMsg(lang('Password changed'), 'success');
         redirect($redirect);
     }
-    
+
     // Страница закладок участника
     function userFavorites()
     {
         $login  = \Request::get('login');
-        
+
         $uid    = Base::getUid();
         $user   = UserModel::getUser($uid['login'], 'slug');
 
@@ -299,10 +300,10 @@ class UserController extends \MainController
         if ($login != $uid['login']) {
             redirect('/u/' . $user['login'] . '/favorite');
         }
-  
+
         $fav = UserModel::userFavorite($user['id']);
-   
-        $result = Array();
+
+        $result = array();
         foreach ($fav as $ind => $row) {
             $row['post_date']       = (empty($row['post_date'])) ? $row['post_date'] : lang_date($row['post_date']);
             $row['answer_content']  = Content::text($row['answer_content'], 'text');
@@ -310,23 +311,23 @@ class UserController extends \MainController
             $row['post']            = PostModel::getPostId($row['answer_post_id']);
             $result[$ind]           = $row;
         }
-        
+
         $data = [
-            'sheet'         => 'favorites', 
+            'sheet'         => 'favorites',
             'h1'            => lang('Favorites') . ' ' . $login,
             'meta_title'    => lang('Favorites') . ' ' . $login . ' | ' . Config::get(Config::PARAM_NAME),
         ];
 
-        return view(PR_VIEW_DIR . '/user/favorite', ['data' => $data, 'uid' => $uid, 'favorite' => $result]);   
+        return view(PR_VIEW_DIR . '/user/favorite', ['data' => $data, 'uid' => $uid, 'favorite' => $result]);
     }
-    
+
     // Удаление обложки
     function userCoverRemove()
     {
         $uid        = Base::getUid();
         $login      = \Request::get('login');
         $redirect   = '/u/' . $uid['login'] . '/setting/avatar';
-        
+
         // Ошибочный Slug в Url
         if ($login != $uid['login'] && $uid['trust_level'] != 5) {
             redirect($redirect);
@@ -338,22 +339,22 @@ class UserController extends \MainController
         if ($user['id'] != $uid['id'] && $uid['trust_level'] != 5) {
             redirect('/');
         }
-        
-        $path_img = HLEB_PUBLIC_DIR. '/uploads/users/cover/';
+
+        $path_img = HLEB_PUBLIC_DIR . '/uploads/users/cover/';
 
         // Удалим, кроме дефолтной
         if ($user['cover_art'] != 'cover_art.jpeg') {
             unlink($path_img . $user['cover_art']);
-        }  
-        
+        }
+
         UserModel::userCoverRemove($user['id']);
         Base::addMsg(lang('Cover removed'), 'success');
-        
+
         // Если удаляет администрация
         if ($uid['trust_level'] == 5) {
-            redirect('/admin/user/'.$user['id'].'/edit');
+            redirect('/admin/user/' . $user['id'] . '/edit');
         }
-        
+
         redirect($redirect);
     }
 
@@ -361,7 +362,7 @@ class UserController extends \MainController
     function userDrafts()
     {
         $login  = \Request::get('login');
-        
+
         $uid    = Base::getUid();
         $user   = UserModel::getUser($uid['login'], 'slug');
 
@@ -369,16 +370,16 @@ class UserController extends \MainController
         if ($login != $uid['login']) {
             redirect('/u/' . $user['login'] . '/drafts');
         }
-  
+
         $drafts = UserModel::userDraftPosts($user['id']);
-   
+
         $data = [
-            'sheet'         => 'drafts', 
+            'sheet'         => 'drafts',
             'h1'            => lang('Drafts') . ' ' . $login,
             'meta_title'    => lang('Drafts') . ' ' . $login . ' | ' . Config::get(Config::PARAM_NAME)
         ];
 
-        return view(PR_VIEW_DIR . '/user/draft-post', ['data' => $data, 'uid' => $uid, 'drafts' => $drafts]);   
+        return view(PR_VIEW_DIR . '/user/draft-post', ['data' => $data, 'uid' => $uid, 'drafts' => $drafts]);
     }
 
 
@@ -389,76 +390,75 @@ class UserController extends \MainController
         $uid  = Base::getUid();
         $data = [
             'h1'            => lang('Invite'),
-            'sheet'         => 'invite', 
+            'sheet'         => 'invite',
             'meta_title'    => lang('Invite'),
         ];
 
-        return view(PR_VIEW_DIR . '/user/invite', ['data' => $data, 'uid' => $uid]);    
+        return view(PR_VIEW_DIR . '/user/invite', ['data' => $data, 'uid' => $uid]);
     }
-   
+
     // Страница инвайтов пользователя
-    function invitationPage() 
+    function invitationPage()
     {
         // Страница участника и данные
         $uid    = Base::getUid();
         $login      = \Request::get('login');
-  
+
         // Запретим смотреть инвайты чужого профиля
         if ($login != $uid['login']) {
             redirect('/u/' . $uid['login'] . '/invitation');
         }
 
         $Invitation = UserModel::InvitationResult($uid['id']);
- 
+
         $data = [
             'h1'          => lang('Invites'),
-            'sheet'         => 'invites', 
-            'meta_title'    => lang('Invites'). ' | ' . Config::get(Config::PARAM_NAME)
+            'sheet'         => 'invites',
+            'meta_title'    => lang('Invites') . ' | ' . Config::get(Config::PARAM_NAME)
         ];
 
-        return view(PR_VIEW_DIR . '/user/invitation', ['data' => $data, 'uid' => $uid, 'result' => $Invitation]);  
+        return view(PR_VIEW_DIR . '/user/invitation', ['data' => $data, 'uid' => $uid, 'result' => $Invitation]);
     }
-    
+
     // Создать инвайт
-    function invitationCreate() 
+    function invitationCreate()
     {
         // Данные участника
         $uid    = Base::getUid();
-        
+
         $invitation_email = \Request::getPost('email');
-        
+
         $redirect = '/u/' . $uid['login'] . '/invitation';
-        
+
         if (!filter_var($invitation_email, FILTER_VALIDATE_EMAIL)) {
-           Base::addMsg(lang('Invalid') . ' email', 'error');
-           redirect($redirect);
+            Base::addMsg(lang('Invalid') . ' email', 'error');
+            redirect($redirect);
         }
-        
+
         $uInfo = UserModel::userInfo($invitation_email);
         if (!empty($uInfo['email'])) {
-            
+
             if ($uInfo['email']) {
                 Base::addMsg(lang('user-already'), 'error');
                 redirect($redirect);
             }
-        } 
-        
+        }
+
         $inv_user = UserModel::InvitationOne($uid['id']);
- 
+
         if ($inv_user['invitation_email'] == $invitation_email) {
             Base::addMsg(lang('invate-to-replay'), 'error');
             redirect($redirect);
         }
-        
+
         // + Повторная отправка
         $add_time           = date('Y-m-d H:i:s');
         $invitation_code    = Base::randomString('crypto', 25);
         $add_ip             = Request::getRemoteAddress();
-        
+
         UserModel::addInvitation($uid['id'], $invitation_code, $invitation_email, $add_time, $add_ip);
 
         Base::addMsg(lang('Invite created'), 'success');
-        redirect($redirect); 
+        redirect($redirect);
     }
-    
 }

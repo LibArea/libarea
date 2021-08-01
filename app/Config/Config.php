@@ -10,13 +10,13 @@ class Config
     const PARAM_META_DESC       = "parameters.metadesc";
     const PARAM_BANNER_TITLE    = "parameters.bannertitle";
     const PARAM_BANNER_DESC     = "parameters.bannerdesc";
-    
+
     const PARAM_URL             = "parameters.url";
     const PARAM_MODE            = "parameters.mode";
     const PARAM_INVITE          = "parameters.invite";
-    
+
     const PARAM_PRIVATE         = "parameters.private";
-    
+
     const PARAM_SEARCH          = "parameters.search";
 
     const PARAM_SITE_OFF        = "parameters.siteoff";
@@ -26,8 +26,8 @@ class Config
     const PARAM_SMTP_PASS       = "parameters.smtppass";
     const PARAM_SMTP_HOST       = "parameters.smtphost";
     const PARAM_SMTP_POST       = "parameters.smtpport";
- 
-    const PARAM_CAPTCHA         = "parameters.captcha"; 
+
+    const PARAM_CAPTCHA         = "parameters.captcha";
     const PARAM_PUBLIC_KEY      = "parameters.public_key";
     const PARAM_PRICATE_KEY     = "parameters.private_key";
 

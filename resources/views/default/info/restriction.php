@@ -20,4 +20,4 @@
         </div>
     </main>
 </div>
-<?php include TEMPLATE_DIR . '/footer.php'; ?> 
+<?php include TEMPLATE_DIR . '/footer.php'; ?>

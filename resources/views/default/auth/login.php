@@ -22,7 +22,7 @@
                         <div class="boxline">
                             <button type="submit" class="button"><?= lang('Sign in'); ?></button>
                             <small>
-                                <?php if(!Lori\Config::get(Lori\Config::PARAM_INVITE)) { ?>
+                                <?php if (!Lori\Config::get(Lori\Config::PARAM_INVITE)) { ?>
                                     <span class="indent"><a href="/register"><?= lang('Sign up'); ?></a></span>
                                 <?php } ?>
                                 <span class="indent"><a href="/recover"><?= lang('Forgot your password'); ?>?</a></span>
@@ -30,11 +30,11 @@
                         </div>
                     </form>
 
-                    <?php if(Lori\Config::get(Lori\Config::PARAM_INVITE)) { ?>
-                        <?= lang('no-invate-txt'); ?> 
+                    <?php if (Lori\Config::get(Lori\Config::PARAM_INVITE)) { ?>
+                        <?= lang('no-invate-txt'); ?>
                     <?php } ?>
-                </div> 
-            </div>        
+                </div>
+            </div>
         </div>
     </main>
     <aside>
@@ -44,5 +44,5 @@
             </div>
         </div>
     </aside>
-</div>    
+</div>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

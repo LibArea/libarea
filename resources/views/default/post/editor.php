@@ -5,6 +5,5 @@
         <?php } else { ?>
             <textarea id="md-redactor" name="post_content" minlength="6"></textarea>
         <?php } ?>
-    </div> 
-</div> 
-
+    </div>
+</div>

@@ -12,12 +12,12 @@
 <div class="wrap">
   <main class="telo">
     <ul class="nav-tabs">
-      <?php if($data['sheet'] == 'feed') { ?>
+      <?php if ($data['sheet'] == 'feed') { ?>
         <li class="active">
           <span><?= lang('Feed'); ?></span>
         </li>
-        <?php if($uid['id']) { ?>
-          <li>  
+        <?php if ($uid['id']) { ?>
+          <li>
             <a href="/all">
               <span><?= lang('All'); ?></span>
             </a>
@@ -28,13 +28,13 @@
             <span>Top</span>
           </a>
         </li>
-      <?php } elseif($data['sheet'] == 'all') { ?>
-        <li>  
+      <?php } elseif ($data['sheet'] == 'all') { ?>
+        <li>
           <a href="/">
             <span><?= lang('Feed'); ?></span>
           </a>
         </li>
-        <?php if($uid['id']) { ?>
+        <?php if ($uid['id']) { ?>
           <li class="active">
             <span><?= lang('All'); ?></span>
           </li>
@@ -45,80 +45,80 @@
           </a>
         </li>
       <?php } else { ?>
-        <li>  
+        <li>
           <a href="/">
             <span><?= lang('Feed'); ?></span>
           </a>
         </li>
-        <?php if($uid['id']) { ?>
-          <li>  
+        <?php if ($uid['id']) { ?>
+          <li>
             <a href="/all">
               <span><?= lang('All'); ?></span>
             </a>
           </li>
-        <?php } ?>        
+        <?php } ?>
         <li class="active">
           <span>Top</span>
         </li>
-      <?php } ?>    
+      <?php } ?>
     </ul>
 
-    <?php if($uid['uri'] == '/' && $uid['id'] > 0 && empty($space_user)) { ?>
-        <div class="white-box">
-            <div class="inner-padding big center gray">
-                <i class="light-icon-bulb middle red"></i> 
-                <span class="middle"><?= lang('space-subscription'); ?>...</span>
-            </div>
+    <?php if ($uid['uri'] == '/' && $uid['id'] > 0 && empty($space_user)) { ?>
+      <div class="white-box">
+        <div class="inner-padding big center gray">
+          <i class="light-icon-bulb middle red"></i>
+          <span class="middle"><?= lang('space-subscription'); ?>...</span>
         </div>
+      </div>
     <?php } ?>
 
     <?php include TEMPLATE_DIR . '/_block/post.php'; ?>
-    
+
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], null); ?>
-    
+
   </main>
   <aside>
     <?php if ($uid['id']) { ?>
-      <?php if(!empty($space_user)) { ?>
+      <?php if (!empty($space_user)) { ?>
         <div class="white-box">
-          <div class="inner-padding"> 
+          <div class="inner-padding">
             <a class="right" title="<?= lang('Spaces'); ?>" href="/spaces"><i class="light-icon-chevron-right"></i></a>
             <div class="bar-title small">
-                <?= lang('Signed'); ?>
-            </div>  
+              <?= lang('Signed'); ?>
+            </div>
             <?php foreach ($space_user as  $sig) { ?>
               <a class="bar-space-telo" href="/s/<?= $sig['space_slug']; ?>" title="<?= $sig['space_name']; ?>">
                 <?= spase_logo_img($sig['space_img'], 'small', $sig['space_name'], 'ava-24'); ?>
                 <span class="indent small"><?= $sig['space_name']; ?></span>
-                <?php if($sig['space_user_id'] == $uid['id']) { ?>
+                <?php if ($sig['space_user_id'] == $uid['id']) { ?>
                   <sup class="red indent">+</sup>
                 <?php } ?>
               </a>
             <?php } ?>
-          </div> 
-        </div>   
+          </div>
+        </div>
       <?php } ?>
     <?php } else { ?>
       <?php include TEMPLATE_DIR . '/_block/login.php'; ?>
     <?php } ?>
-    
+
     <?php if (!empty($data['latest_answers'])) { ?>
-      <div class="last-comm white-box sticky"> 
+      <div class="last-comm white-box sticky">
         <div class="inner-padding">
-          <?php foreach ($data['latest_answers'] as  $answer)  { ?>
+          <?php foreach ($data['latest_answers'] as  $answer) { ?>
             <div class="sb-telo" style="border-left: 2px solid <?= $answer['space_color']; ?>;">
-              <div class="sb-date small"> 
+              <div class="sb-date small">
                 <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava'); ?>
                 <span class="indent"></span>
                 <?= $answer['answer_date']; ?>
-              </div> 
+              </div>
               <a href="/post/<?= $answer['post_id']; ?>/<?= $answer['post_slug']; ?>#answer_<?= $answer['answer_id']; ?>">
-                <?= $answer['answer_content']; ?>...  
+                <?= $answer['answer_content']; ?>...
               </a>
-             </div>
+            </div>
           <?php } ?>
-        </div> 
-      </div> 
+        </div>
+      </div>
     <?php } ?>
   </aside>
 </div>

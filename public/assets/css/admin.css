@@ -43,13 +43,19 @@ main {
 }
 
 .wrap {
-  padding: 0.7rem 0.8rem;
   width: calc(100% - 260px);
   float: right;
   position: relative;
   display: flex;
-  background-color: #fff;
   margin-top: 65px;
+}
+
+.white-box {
+  padding: 0.7rem 0.8rem;
+  background-color: #fff;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
+  overflow: hidden;
+  margin-bottom: 20px;
 }
 
 a {
@@ -66,6 +72,8 @@ li { list-style-type: none; }
 .red { color: #e45735; }
 .green { color: #390; }
 .gray { color: #5b7083; }
+.blue { color: #3096f0; }
+.brown { color: #ce7c54; }
 .light-gray { color: #e3e3e3; }
 .light-gray:hover { color: #fff; }
 .middle { vertical-align: middle; }
@@ -75,6 +83,9 @@ li { list-style-type: none; }
 .admin-menu { padding: 0; }
 .ava { vertical-align: middle; }
 .lowercase { text-transform: lowercase; }
+.flex { display: flex; }
+.center { text-align: center; }
+.max-width { max-width: 800px; }
 img { vertical-align: middle; }
 img.ava { width: 18px; }
 img.ava-64 { width: 64px; }
@@ -97,7 +108,13 @@ img.ava-64 { width: 64px; }
 h1 {
   font-weight: 400;
   font-size: 1.2rem;
-  margin-top: 0;
+  margin: 0;
+}
+
+h3 {
+  font-weight: 400;
+  font-size: 1rem;
+  margin: 0 5px;
 }
 
 hr {
@@ -158,6 +175,39 @@ hr.footer {
   color: #5b7083;
   margin-top: 5px;
   font-size: 13px;
+}
+
+.box-number {
+  -webkit-box-flex: 1;
+  flex: 1 1;
+}
+
+.box-number a {
+  color: #333;
+}
+
+.box-number:hover,
+.box-number:hover > a {
+  color: #e45735;
+  background-color: #f0fafd;
+}
+
+.box-number small {
+  color: #666;
+}
+
+.box-number i {
+  font-size: 38px;
+}
+
+.box-number sup {
+  position: absolute;
+  font-size: 13px;
+  color: #919191;
+}
+
+.stat-height {
+  height: 52px;
 }
 
 /* Горизонтальное меню */
@@ -351,4 +401,21 @@ textarea:focus {
   background-color: transparent;
   border: none;
   color: #5b7083;
+}
+
+.shown_post {
+  background-color: #eff3f6;
+  padding: 1px 15px;
+  color: #333;
+}
+
+.show_detail.hide {
+  display: none;
+}
+
+@media (max-width: 704px) {
+  aside { display: none; }
+  main { margin-right: 0; }
+  .wrap { width: 100%; }
+  .pagination { margin: 0 0 10px 10px; }
 }

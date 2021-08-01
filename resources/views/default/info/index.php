@@ -11,9 +11,9 @@
                         <a title="<?= lang('Info'); ?>" href="/info"><?= lang('Info'); ?></a>
                     </li>
                 </ul>
-                
+
                 <h1><?= $data['h1']; ?></h1>
-                
+
                 <?= $data['content']; ?>
             </div>
         </div>
@@ -22,4 +22,4 @@
         <?php include TEMPLATE_DIR . '/_block/info-page-menu.php'; ?>
     </aside>
 </div>
-<?php include TEMPLATE_DIR . '/footer.php'; ?> 
+<?php include TEMPLATE_DIR . '/footer.php'; ?>

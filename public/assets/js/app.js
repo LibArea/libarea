@@ -1,61 +1,61 @@
-// Personal drop-down menu
-let hamburger = document.querySelector('.dropbtn');
-if(hamburger){
-    let menu = document.querySelector('.dropdown-menu');
-    const toggleMenu = () => {
-        menu.classList.toggle('show');
-    };
-    hamburger.addEventListener('click', e => {
-        e.stopPropagation();
-        toggleMenu();
-    });
-    document.addEventListener('click', e => {
-        let target = e.target;
-        let its_menu = target == menu || menu.contains(target);
-        let its_hamburger = target == hamburger;
-        let menu_is_active = menu.classList.contains('show');
-
-        if (!its_menu && !its_hamburger && menu_is_active) {
-            toggleMenu();
-        }
-    });
-}
-
-// Цвет обложки для профиля
-let colorPicker = document.getElementById("colorPicker");
-if(colorPicker){
-    let box = document.getElementById("box");
-    let color = document.getElementById("color");
-
-    box.style.borderColor = colorPicker.value;
-
-    colorPicker.addEventListener("input", function(event) {
-      box.style.borderColor = event.target.value;
-    }, false);
-
-    colorPicker.addEventListener("change", function(event) {
-      color.value = colorPicker.value;
-    }, false);
-}
-
-// Цвета пространств
-let colorSpace = document.getElementById("colorSpace");
-if(colorSpace){
-    let box = document.getElementById("box");
-    let color = document.getElementById("color");
-
-    box.style.borderColor = colorSpace.value;
-
-    colorSpace.addEventListener("input", function(event) {
-      box.style.borderColor = event.target.value;
-    }, false);
-
-    colorSpace.addEventListener("change", function(event) {
-      color.value = colorSpace.value;
-    }, false);
-}
-
 $(function(){
+    let hamburger = document.querySelector('.dropbtn');
+    if (hamburger) {
+        let menu = document.querySelector('.dropdown-menu');
+        const toggleMenu = () => {
+            menu.classList.toggle('show');
+        };
+        hamburger.addEventListener('click', e => {
+            e.stopPropagation();
+            toggleMenu();
+        });
+        document.addEventListener('click', e => {
+            let target = e.target;
+            let its_menu = target == menu || menu.contains(target);
+            let its_hamburger = target == hamburger;
+            let menu_is_active = menu.classList.contains('show');
+
+            if (!its_menu && !its_hamburger && menu_is_active) {
+                toggleMenu();
+            }
+        });
+    }
+
+    // Цвет обложки для профиля
+    let colorPicker = document.getElementById("colorPicker");
+    if (colorPicker) {
+        let box = document.getElementById("box");
+        let color = document.getElementById("color");
+
+        box.style.borderColor = colorPicker.value;
+
+        colorPicker.addEventListener("input", function(event) {
+          box.style.borderColor = event.target.value;
+        }, false);
+
+        colorPicker.addEventListener("change", function(event) {
+          color.value = colorPicker.value;
+        }, false);
+    }
+
+    // Цвета пространств
+    let colorSpace = document.getElementById("colorSpace");
+    if (colorSpace) {
+        let box = document.getElementById("box");
+        let color = document.getElementById("color");
+
+        box.style.borderColor = colorSpace.value;
+
+        colorSpace.addEventListener("input", function(event) {
+          box.style.borderColor = event.target.value;
+        }, false);
+
+        colorSpace.addEventListener("change", function(event) {
+          color.value = colorSpace.value;
+        }, false);
+    }
+
+ 
     // Subscribe to a topic
     $(document).on("click", ".focus-topic", function(){      
         let topic_id  = $(this).data('id');  

@@ -1,7 +1,7 @@
-<div class="login-nav-home white-box"> 
+<div class="login-nav-home white-box">
     <div class="inner-padding big">
         <form class="" action="/login" method="post">
-            <?php csrf_field(); ?>           
+            <?php csrf_field(); ?>
             <div class="login-nav">
                 <label for="email">Email</label>
                 <input type="email" placeholder="<?= lang('Enter'); ?>  e-mail" name="email" id="email">
@@ -29,6 +29,6 @@
                 <br>
                 <a href="/register"><?= lang('Sign up'); ?></a>
             </div>
-         </form>
+        </form>
     </div>
-</div> 
+</div>

@@ -7,46 +7,46 @@
                 <br>
                 <div class="telo">
                     <?php if (!empty($answers)) { ?>
-                  
-                        <?php foreach ($answers as $answer) { ?>  
-                            <?php if($answer['answer_is_deleted'] == 0) { ?>
+
+                        <?php foreach ($answers as $answer) { ?>
+                            <?php if ($answer['answer_is_deleted'] == 0) { ?>
                                 <div class="answ-telo_bottom">
                                     <div class="flex small">
                                         <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava'); ?>
                                         <a class="gray indent" href="/u/<?= $answer['login']; ?>">
                                             <?= $answer['login']; ?>
-                                        </a> 
+                                        </a>
                                         <span class="gray lowercase"><?= $answer['date']; ?></span>
                                         <span class="indent"> &#183; </span>
                                         <a href="/post/<?= $answer['post_id']; ?>/<?= $answer['post_slug']; ?>#answer_<?= $answer['answer_id']; ?>">
                                             <?= $answer['post_title']; ?>
                                         </a>
                                     </div>
-                                   
+
                                     <div class="answ-telo-body">
-                                        <?= $answer['answer_content']; ?> 
+                                        <?= $answer['answer_content']; ?>
                                     </div>
-                               
+
                                     <div class="post-full-footer gray">
-                                     + <?= $answer['answer_votes']; ?>                            
+                                        + <?= $answer['answer_votes']; ?>
                                     </div>
                                 </div>
-                            <?php } else { ?>    
-                                <div class="dell answ-telo_bottom"> 
+                            <?php } else { ?>
+                                <div class="dell answ-telo_bottom">
                                     <div class="voters"></div>
                                     ~ <?= lang('Answer deleted'); ?>
                                 </div>
-                            <?php } ?> 
+                            <?php } ?>
                         <?php } ?>
-                        
-                    <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/answers'); ?>
-                        
+
+                        <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/answers'); ?>
+
                     <?php } else { ?>
                         <div class="no-content"><?= lang('There are no comments'); ?>...</div>
                     <?php } ?>
                 </div>
-            </div>    
-        </div>        
+            </div>
+        </div>
     </main>
     <aside>
         <div class="white-box">
@@ -59,4 +59,4 @@
         <?php } ?>
     </aside>
 </div>
-<?php include TEMPLATE_DIR . '/footer.php'; ?>   
+<?php include TEMPLATE_DIR . '/footer.php'; ?>

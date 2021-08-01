@@ -152,39 +152,4 @@ class AnswerModel extends \MainModel
         return  DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
   
-    // Удаленные ответы
-    public static function getAnswersDeleted($page, $limit) 
-    {
-        $start  = ($page-1) * $limit;
-        $sql = "SELECT 
-                    answer_id, 
-                    answer_user_id, 
-                    answer_date,
-                    answer_content,
-                    answer_votes,
-                    answer_is_deleted,
-                    id,
-                    login,
-                    avatar,
-                    post_id,
-                    post_title,
-                    post_type,
-                    post_slug
-                        FROM answers
-                        LEFT JOIN users ON id = answer_user_id
-                        LEFT JOIN posts ON post_id = answer_post_id
-                        WHERE answer_is_deleted = 1
-                        ORDER BY answer_id DESC LIMIT $start, $limit";
-                
-        return  DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
-    }
-    
-    // Количество удаленных ответов
-    public static function getAnswersDeletedCount()
-    {
-        $sql = "SELECT answer_id, answer_is_deleted FROM answers WHERE answer_is_deleted = 1";
-
-        return DB::run($sql)->rowCount(); 
-    }
-
 }

@@ -149,40 +149,4 @@ class CommentModel extends \MainModel
         return  DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
 
-    // Удаленные
-    public static function getCommentsDeleted($page, $limit) 
-    {
-        $start  = ($page-1) * $limit;
-        $sql = "SELECT 
-                    comment_id, 
-                    comment_user_id, 
-                    comment_date,
-                    comment_content,
-                    comment_votes,
-                    comment_is_deleted,
-                    id,
-                    login,
-                    avatar,
-                    post_id,
-                    post_title,
-                    post_type,
-                    post_slug
-                        FROM comments 
-                        LEFT JOIN users ON id = comment_user_id
-                        LEFT JOIN posts ON post_id = comment_post_id
-                        WHERE comment_is_deleted = 1
-                        ORDER BY comment_id DESC LIMIT $start, $limit";
-                
-        return  DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
-    }
-    
-    // Количество
-    public static function getCommentsDeletedCount()
-    {
-        $sql = "SELECT comment_id, comment_is_deleted FROM comments WHERE comment_is_deleted = 1";
-
-        return DB::run($sql)->rowCount(); 
-    }
-  
-
 }

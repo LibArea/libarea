@@ -6,7 +6,7 @@
                 <h1>
                     <a href="/admin"><?= lang('Admin'); ?></a> / <span class="red"><?= $data['meta_title']; ?> - IP</span>
                 </h1>
-                
+
                 <div class="t-table">
                     <div class="t-th">
                         <span class="t-td center">N</span>
@@ -25,52 +25,52 @@
                             <span class="t-td">
                                 <?= user_avatar_img($user['avatar'], 'small', $user['login'], 'ava'); ?>
                                 <a href="/u/<?= $user['login']; ?>"><?= $user['login']; ?></a>
-                                <?php if($user['name']) { ?>
-                                    (<?= $user['name']; ?>) 
+                                <?php if ($user['name']) { ?>
+                                    (<?= $user['name']; ?>)
                                 <?php } ?>
                                 <sup class="red">TL:<?= $user['trust_level']; ?></sup>
-                                <?php if($user['invitation_id'] !=0) { ?><sup>+ inv. id<?= $user['invitation_id']; ?></sup><?php } ?> <br>
-                            </span>              
-                            <span class="t-td">
-                                 <span class="date"><?= $user['email']; ?></span>
+                                <?php if ($user['invitation_id'] != 0) { ?><sup>+ inv. id<?= $user['invitation_id']; ?></sup><?php } ?> <br>
                             </span>
                             <span class="t-td">
-                                 <?= $user['created_at']; ?> 
+                                <span class="date"><?= $user['email']; ?></span>
                             </span>
                             <span class="t-td">
-                                 <?= $user['reg_ip']; ?>  <?php if($user['replayIp'] > 1) { ?>
-                                   <sup class="red">(<?= $user['replayIp']; ?>)</sup>
-                                 <?php } ?>
+                                <?= $user['created_at']; ?>
                             </span>
-                            <span class="t-td center"> 
-                                <?php if($user['trust_level'] != 5) { ?>                 
-                                    <?php if($user['isBan']) { ?>
+                            <span class="t-td">
+                                <?= $user['reg_ip']; ?> <?php if ($user['replayIp'] > 1) { ?>
+                                    <sup class="red">(<?= $user['replayIp']; ?>)</sup>
+                                <?php } ?>
+                            </span>
+                            <span class="t-td center">
+                                <?php if ($user['trust_level'] != 5) { ?>
+                                    <?php if ($user['isBan']) { ?>
                                         <div class="user-ban" data-id="<?= $user['id']; ?>">
                                             <span class="red"><?= lang('Unban'); ?></span>
                                         </div>
                                     <?php } else { ?>
                                         <div class="user-ban" data-id="<?= $user['id']; ?>"><?= lang('Ban it'); ?></div>
                                     <?php } ?>
-                                <?php } else { ?> 
+                                <?php } else { ?>
                                     ---
-                                <?php } ?> 
+                                <?php } ?>
                             </span>
                             <span class="t-td center">
-                                <?php if($user['trust_level'] != 5) { ?> 
+                                <?php if ($user['trust_level'] != 5) { ?>
                                     <a title="<?= lang('Edit'); ?>" href="/admin/user/<?= $user['id']; ?>/edit">
                                         <i class="light-icon-edit middle"></i>
                                     </a>
-                                <?php } else { ?> 
+                                <?php } else { ?>
                                     ---
-                                <?php } ?>                     
+                                <?php } ?>
                             </span>
-                          
-                          <br><br>
-                        </div> 
-                    <?php } ?> 
+
+                            <br><br>
+                        </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>
-    </main> 
+    </main>
 </div>
 <?php include TEMPLATE_ADMIN_DIR . '/_block/footer-admin.php'; ?>

@@ -21,10 +21,10 @@
                             <input type="password" class="form-input" minlength="8" name="password" id="password">
                             <div class="box_h">>= 8 <?= lang('characters'); ?></div>
                         </div>
-                         <div class="boxline">
+                        <div class="boxline">
                             <label class="form-label" for="password_confirm"><?= lang('Repeat the password'); ?></label>
                             <input type="password" class="form-input" minlength="8" name="password_confirm" id="password_confirm">
-                        </div>    
+                        </div>
                         <?php if (Lori\Config::get(Lori\Config::PARAM_CAPTCHA)) { ?>
                             <div class="boxline captcha_data">
                                 <div class="captcha_wrap">
@@ -44,7 +44,7 @@
                     </form>
                 </div>
             </div>
-        </div>    
+        </div>
     </main>
     <aside>
         <div class="white-box">
@@ -53,5 +53,5 @@
             </div>
         </div>
     </aside>
-</div>    
+</div>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

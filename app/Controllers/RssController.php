@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers;
+
 use App\Models\RssModel;
 use Lori\Content;
 use Lori\Config;
@@ -12,7 +13,7 @@ class RssController extends \MainController
     {
         $spaces = RssModel::getSpacesSitemap();
         $posts  = RssModel::getPostsSitemap();
-        
+
         $data = [
             'url'       => Config::get(Config::PARAM_URL),
             'spaces'    => $spaces,
@@ -21,15 +22,15 @@ class RssController extends \MainController
 
         includeCachedTemplate(PR_VIEW_DIR . '/rss/sitemap', ['data' => $data]);
     }
- 
+
     public function turboFeed()
     {
         $space_id   = \Request::getInt('id');
         $space      = RssModel::getSpaceId($space_id);
         Base::PageError404($space);
-        
+
         $posts  = RssModel::getPostsFeed($space_id);
-        $result = Array();
+        $result = array();
         foreach ($posts as $ind => $row) {
             $row['post_content']  = Content::text($row['post_content'], 'text');
             $result[$ind]         = $row;

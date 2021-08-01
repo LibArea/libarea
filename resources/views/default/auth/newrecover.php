@@ -11,7 +11,7 @@
                                 <?php csrf_field(); ?>
                                 <div class="boxline">
                                     <label for="password"><?= lang('New password'); ?></label>
-                                    <input type="text" name="password" id="password"> 
+                                    <input type="text" name="password" id="password">
                                 </div>
                                 <div class="row">
                                     <div class="boxline">
@@ -19,7 +19,7 @@
                                         <input type="hidden" name="user_id" id="user_id" value="<?= $data['user_id']; ?>">
                                         <button type="submit" class="button-primary"><?= lang('Reset'); ?></button>
                                         <small>
-                                            <?php if(!Lori\Config::get(Lori\Config::PARAM_INVITE)) { ?>
+                                            <?php if (!Lori\Config::get(Lori\Config::PARAM_INVITE)) { ?>
                                                 <span class="indent"><a href="/register"><?= lang('Sign up'); ?></a></span>
                                             <?php } ?>
                                             <span class="indent"><a href="/login"><?= lang('Sign in'); ?></a></span>
@@ -33,5 +33,5 @@
             </div>
         </div>
     </main>
-</div>    
+</div>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

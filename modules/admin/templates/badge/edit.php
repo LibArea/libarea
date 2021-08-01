@@ -14,10 +14,11 @@
                         </div>
                         <div class="boxline max-width">
                             <label class="form-label" for="post_title">Title</label>
-                            <input class="form-input" type="text" name="badge_title" value="<?= $badge['badge_title']; ?>" required>
+                            <input class="form-input" minlength="4" type="text" name="badge_title" value="<?= $badge['badge_title']; ?>" required>
+                            <div class="box_h">4 - 25 <?= lang('characters'); ?></div>
                         </div>
                         <div class="boxline max-width">
-                            <label class="form-label" for="post_title">Icon</label>            
+                            <label class="form-label" for="post_title">Icon</label>
                             <textarea class="add" name="badge_icon" required><?= $badge['badge_icon']; ?></textarea>
                             <div class="box_h"><?= lang('For example'); ?>: &lt;i title="<?= lang('Title'); ?>" class="light-icon-brush"&gt;&lt;/i&gt; https://icons.lightvue.org/icons</div>
                         </div>
@@ -33,7 +34,8 @@
                         </div>
                         <div class="boxline max-width">
                             <label class="form-label" for="post_title"><?= lang('Description'); ?></label>
-                            <textarea class="add" name="badge_description" required><?= $badge['badge_description']; ?></textarea>
+                            <textarea class="add" minlength="12" name="badge_description" required><?= $badge['badge_description']; ?></textarea>
+                            <div class="box_h">12 - 250 <?= lang('characters'); ?></div>
                         </div>
                         <input type="submit" class="button" name="submit" value="<?= lang('Edit'); ?>" />
                     </form>

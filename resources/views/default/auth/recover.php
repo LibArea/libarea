@@ -17,13 +17,13 @@
                                     <div class="g-recaptcha" data-theme="light" data-size="normal" data-callback="captcha_ready" data-sitekey="<?= Lori\Config::get(Lori\Config::PARAM_PUBLIC_KEY); ?>"></div>
                                     <script async defer nonce="" src="https://www.google.com/recaptcha/api.js?hl=ru"></script>
                                 </div>
-                            </div>  <br /> 
+                            </div> <br />
                         <?php } ?>
                         <div class="row">
                             <div class="boxline">
                                 <button type="submit" class="button"><?= lang('Reset'); ?></button>
                                 <small>
-                                    <?php if(!Lori\Config::get(Lori\Config::PARAM_INVITE)) { ?>
+                                    <?php if (!Lori\Config::get(Lori\Config::PARAM_INVITE)) { ?>
                                         <span class="indent"><a href="/register"><?= lang('Sign up'); ?></a></span>
                                     <?php } ?>
                                     <span class="indent"><a href="/login"><?= lang('Sign in'); ?></a></span>
@@ -33,7 +33,7 @@
                     </form>
                 </div>
             </div>
-        </div>            
+        </div>
     </main>
     <aside>
         <div class="white-box">
@@ -42,5 +42,5 @@
             </div>
         </div>
     </aside>
-</div>    
+</div>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

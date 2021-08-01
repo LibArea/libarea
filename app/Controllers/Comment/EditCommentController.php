@@ -21,26 +21,26 @@ class EditCommentController extends \MainController
         // Получим относительный url поста для возрата
         $post       = PostModel::getPostId($post_id);
         Base::PageRedirection($post);
-        
+
         $comment = CommentModel::getCommentsId($comment_id);
-        
+
         // Проверка доступа 
         if (!accessСheck($comment, 'comment', $uid, 0, 0)) {
             redirect('/');
-        }  
-        
+        }
+
         Content::stopContentQuietМode($uid);
-        
+
         $redirect   = '/post/' . $post['post_id'] . '/' . $post['post_slug'] . '#comment_' . $comment['comment_id'];
-        
+
         // Редактируем комментарий
         CommentModel::CommentEdit($comment['comment_id'], $comment_content);
-        redirect($redirect); 
-	}
-    
-   // Покажем форму
-	public function edit()
-	{
+        redirect($redirect);
+    }
+
+    // Покажем форму
+    public function edit()
+    {
         $comment_id     = \Request::getPostInt('comment_id');
         $post_id        = \Request::getPostInt('post_id');
         $uid            = Base::getUid();
@@ -57,9 +57,8 @@ class EditCommentController extends \MainController
             'post_id'           => $post_id,
             'user_id'           => $uid['id'],
             'comment_content'   => $comment['comment_content'],
-        ]; 
-        
+        ];
+
         return view(PR_VIEW_DIR . '/comment/edit-form-comment', ['data' => $data]);
     }
-
 }

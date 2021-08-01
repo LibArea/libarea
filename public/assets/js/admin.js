@@ -2,7 +2,7 @@ $(function(){
     // Забанить / разбанить участника
     $(document).on('click', '.user-ban', function() {
         let user_id  = $(this).data('id');
-        fetch("/admin/ban", { 
+        fetch("/admin/user/ban", { 
             method: "POST",
             body: "id=" + user_id,
             headers:{'Content-Type': 'application/x-www-form-urlencoded'} 

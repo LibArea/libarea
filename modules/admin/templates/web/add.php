@@ -1,22 +1,13 @@
-<?php include TEMPLATE_DIR . '/header.php'; ?>
+<?php include TEMPLATE_ADMIN_DIR . '/_block/header-admin.php'; ?>
 <div class="wrap">
     <main>
         <div class="white-box">
             <div class="inner-padding">
-                <ul class="breadcrumb">
-                    <li class="breadcrumb-item">
-                        <a title="<?= lang('Admin'); ?>" href="/admin"><?= lang('Admin'); ?></a>
-                    </li>
-                    <li class="breadcrumb-item">
-                        <a title="<?= lang('Domains'); ?>" href="/admin/domains"><?= lang('Domains'); ?></a>
-                    </li>
-                    <li class="breadcrumb-item">
-                        <span class="red"><?= $data['meta_title']; ?></span>
-                    </li>
-                </ul>
+                <?= breadcrumb('/admin', lang('Admin'), '/admin/webs', lang('Domains'), $data['meta_title']); ?>
+
                 <div class="telo space">
                     <div class="box create">
-                        <form action="/web/create" method="post">
+                        <form action="/admin/web/add" method="post">
                             <?= csrf_field() ?>
                             <div class="boxline max-width">
                                 <label class="form-label" for="post_title">URL</label>
@@ -28,23 +19,16 @@
                                 <div class="box_h">24 - 250 <?= lang('characters'); ?> («Газета.Ru» — интернет-газета)</div>
                             </div>
                             <div class="boxline max-width">
-                                <label class="form-label"  for="post_title"><?= lang('Description'); ?></label>            
+                                <label class="form-label" for="post_title"><?= lang('Description'); ?></label>
                                 <textarea name="link_content" required></textarea>
                                 <div class="box_h">24 - 1500 <?= lang('characters'); ?></div>
                             </div>
                             <input type="submit" class="button" name="submit" value="<?= lang('Add'); ?>" />
                         </form>
                     </div>
-                </div> 
+                </div>
             </div>
         </div>
     </main>
-    <aside>
-        <div class="white-box">
-            <div class="inner-padding big">
-                <?= lang('info-url-edit'); ?>
-            </div>
-        </div>
-    </aside>
-</div>    
-<?php include TEMPLATE_DIR . '/footer.php'; ?>
+</div>
+<?php include TEMPLATE_ADMIN_DIR . '/_block/footer-admin.php'; ?>

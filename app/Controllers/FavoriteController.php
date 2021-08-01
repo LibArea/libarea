@@ -15,17 +15,17 @@ class FavoriteController extends \MainController
         $uid        = Base::getUid();
         $content_id = \Request::getPostInt('content_id');
 
-        if($type == 'post') {
-            $content    = PostModel::getPostId($content_id); 
+        if ($type == 'post') {
+            $content    = PostModel::getPostId($content_id);
         } else {
-            $content    = AnswerModel::getAnswerId($content_id); 
+            $content    = AnswerModel::getAnswerId($content_id);
         }
 
         Base::PageRedirection($content);
-        
+
         $type_content = $type == 'post' ? 1 : 2;
         FavoriteModel::setFavorite($content_id, $uid['id'], $type_content);
-       
+
         return true;
-    } 
+    }
 }

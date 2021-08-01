@@ -3,11 +3,11 @@
     <main class="admin">
         <div class="white-box">
             <div class="inner-padding">
-                <a class="right" title="<?= lang('Add'); ?>" href="/topic/add">
-                <i class="light-icon-plus middle"></i>
+                <a class="right" title="<?= lang('Add'); ?>" href="/admin/topics/add">
+                    <i class="light-icon-plus middle"></i>
                 </a>
                 <?= breadcrumb('/admin', lang('Admin'), null, null, $data['meta_title']); ?>
-                
+
                 <div class="space">
                     <?php if (!empty($topics)) { ?>
                         <div class="t-table">
@@ -17,14 +17,14 @@
                                 <span class="t-td"><?= lang('Info'); ?></span>
                                 <span class="t-td center"><?= lang('Action'); ?></span>
                             </div>
-                            <?php foreach ($topics as $key => $topic) { ?> 
+                            <?php foreach ($topics as $key => $topic) { ?>
                                 <div class="t-tr">
                                     <span class="t-td width-30 center">
                                         <?= $topic['topic_id']; ?>
-                                    </span>  
+                                    </span>
                                     <span class="t-td width-30 center">
                                         <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'ava-64'); ?>
-                                    </span>                            
+                                    </span>
                                     <span class="t-td">
                                         <a class="title" rel="nofollow noreferrer" href="/topic/<?= $topic['topic_slug']; ?>">
                                             <?= $topic['topic_title']; ?>
@@ -44,16 +44,16 @@
                                         <div class="content-telo">
                                             <?= $topic['topic_description']; ?>
                                         </div>
-                                    </span> 
+                                    </span>
                                     <span class="t-td width-30 center">
-                                        <a title="<?= lang('Edit'); ?>" href="/topic/edit/<?= $topic['topic_id']; ?>">
-                                           <i class="light-icon-edit middle"></i>
+                                        <a title="<?= lang('Edit'); ?>" href="topics/<?= $topic['topic_id']; ?>/edit">
+                                            <i class="light-icon-edit middle"></i>
                                         </a>
                                     </span>
                                 </div>
                             <?php } ?>
                         </div>
-                        
+
                     <?php } else { ?>
                         <div class="no-content"><?= lang('No'); ?>...</div>
                     <?php } ?>

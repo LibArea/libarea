@@ -3,31 +3,29 @@
     <main class="admin">
         <div class="white-box">
             <div class="inner-padding">
-                <h1>
-                    <a href="/admin"><?= lang('Admin'); ?></a> / <span class="red"><?= $data['meta_title']; ?></span>
-                </h1>
+                <?= breadcrumb('/admin', lang('Admin'), '/admin/users', lang('Users'), $data['meta_title']); ?>
 
                 <div class="box badges">
                     <form action="/admin/user/edit/<?= $user['id']; ?>" method="post">
                         <?= csrf_field() ?>
-                        <?php if($user['cover_art'] != 'cover_art.jpeg') { ?> 
+                        <?php if ($user['cover_art'] != 'cover_art.jpeg') { ?>
                             <a class="right" href="/u/<?= $user['login']; ?>/delete/cover">
                                 <small><?= lang('Remove'); ?></small>
                             </a>
                             <br>
-                        <?php } ?>    
+                        <?php } ?>
                         <img width="325" class="right" src="<?= user_cover_url($user['cover_art']); ?>">
-                        <?= user_avatar_img($user['avatar'], 'max', $user['login'], 'avatar'); ?> 
+                        <?= user_avatar_img($user['avatar'], 'max', $user['login'], 'avatar'); ?>
 
                         <div class="boxline">
                             <label class="form-label" for="post_title">
-                                Id<?= $user['id']; ?> | 
+                                Id<?= $user['id']; ?> |
                                 <a target="_blank" rel="noopener noreferrer" href="/u/<?= $user['login']; ?>">
                                     <?= $user['login']; ?>
                                 </a>
                             </label>
-                            <?php if($user['trust_level'] != 5) { ?>                 
-                                <?php if($user['isBan']) { ?>
+                            <?php if ($user['trust_level'] != 5) { ?>
+                                <?php if ($user['isBan']) { ?>
                                     <span class="user-ban" data-id="<?= $user['id']; ?>">
                                         <span class="red"><?= lang('Unban'); ?></span>
                                     </span>
@@ -36,45 +34,45 @@
                                         <span class="green">+ <?= lang('Ban it'); ?></span>
                                     </span>
                                 <?php } ?>
-                            <?php } else { ?> 
+                            <?php } else { ?>
                                 ---
-                            <?php } ?>   
-                        </div>  
-                        <hr> 
-                       <div class="boxline">
-                            <?php if($user['limiting_mode'] == 1) { ?>
+                            <?php } ?>
+                        </div>
+                        <hr>
+                        <div class="boxline">
+                            <?php if ($user['limiting_mode'] == 1) { ?>
                                 <span class="red"><?= lang('Dumb mode'); ?>!</span><br>
                             <?php } ?>
                             <label class="form-label" for="post_content">
                                 <?= lang('Dumb mode'); ?>?
                             </label>
-                            <input type="radio" name="limiting_mode" <?php if($user['limiting_mode'] == 0) { ?>checked<?php } ?> value="0"> <?= lang('No'); ?>
-                            <input type="radio" name="limiting_mode" <?php if($user['limiting_mode'] == 1) { ?>checked<?php } ?> value="1" > <?= lang('Yes'); ?>
-                       </div>
-                       <hr>
-                       <div class="boxline"> 
-                           <?php if($data['posts_count'] != 0) { ?>
+                            <input type="radio" name="limiting_mode" <?php if ($user['limiting_mode'] == 0) { ?>checked<?php } ?> value="0"> <?= lang('No'); ?>
+                            <input type="radio" name="limiting_mode" <?php if ($user['limiting_mode'] == 1) { ?>checked<?php } ?> value="1"> <?= lang('Yes'); ?>
+                        </div>
+                        <hr>
+                        <div class="boxline">
+                            <?php if ($data['posts_count'] != 0) { ?>
                                 <label class="required"><?= lang('Posts-m'); ?>:</label>
                                 <a target="_blank" rel="noopener noreferrer" title="<?= lang('Posts-m'); ?> <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/posts">
                                     <?= $data['posts_count']; ?>
                                 </a>
                                 <br>
                             <?php } ?>
-                            <?php if($data['answers_count'] != 0) { ?>
+                            <?php if ($data['answers_count'] != 0) { ?>
                                 <label class="required"><?= lang('Answers'); ?>:</label>
                                 <a target="_blank" rel="noopener noreferrer" title="<?= lang('Answers'); ?> <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/answers">
                                     <?= $data['answers_count']; ?>
                                 </a>
                                 <br>
                             <?php } ?>
-                            <?php if($data['comments_count'] != 0) { ?>
+                            <?php if ($data['comments_count'] != 0) { ?>
                                 <label class="required"><?= lang('Comments'); ?>:</label>
-                                    <a target="_blank" rel="noopener noreferrer" title="<?= lang('Comments'); ?> <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/comments">
-                                        <?= $data['comments_count']; ?>
-                                    </a>
+                                <a target="_blank" rel="noopener noreferrer" title="<?= lang('Comments'); ?> <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/comments">
+                                    <?= $data['comments_count']; ?>
+                                </a>
                                 <br>
                             <?php } ?>
-                            <?php if($data['spaces_user']) { ?>
+                            <?php if ($data['spaces_user']) { ?>
                                 <br>
                                 <label class="required"><?= lang('Created by'); ?>:</label>
                                 <br>
@@ -82,10 +80,10 @@
                                     <?php foreach ($data['spaces_user'] as  $space) { ?>
                                         <div class="profile-space">
                                             <?= spase_logo_img($space['space_img'], 'small', $space['space_name'], 'space_img'); ?>
-                                            <a href="/s/<?= $space['space_slug'];?>"><?= $space['space_name'];?></a> 
+                                            <a href="/s/<?= $space['space_slug']; ?>"><?= $space['space_name']; ?></a>
                                         </div>
                                     <?php } ?>
-                                </span>     
+                                </span>
                             <?php } ?>
                         </div>
                         <hr>
@@ -101,7 +99,7 @@
                                 <?php foreach ($user['badges'] as $badge) { ?>
                                     <?= $badge['badge_icon']; ?>
                                 <?php } ?>
-                            <?php } else { ?>    
+                            <?php } else { ?>
                                 ---
                             <?php } ?>
                         </div>
@@ -111,28 +109,28 @@
                         </div>
                         <div class="boxline">
                             <label class="form-label" for="post_title"><?= lang('Sign up'); ?></label>
-                            <?= $user['created_at']; ?> | 
-                            <?= $user['reg_ip']; ?>  
-                            <?php if($user['replayIp'] > 1) { ?>
-                            <sup class="red">(<?= $user['replayIp']; ?>)</sup>
-                            <?php } ?> 
+                            <?= $user['created_at']; ?> |
+                            <?= $user['reg_ip']; ?>
+                            <?php if ($user['replayIp'] > 1) { ?>
+                                <sup class="red">(<?= $user['replayIp']; ?>)</sup>
+                            <?php } ?>
                         </div>
                         <hr>
                         <div class="boxline">
                             <label class="form-label" for="post_title">E-mail</label>
                             <input class="form-input" type="text" name="email" value="<?= $user['email']; ?>" required>
                         </div>
-                        <div class="boxline"> 
+                        <div class="boxline">
                             <label class="form-label" for="post_content"><?= lang('Email activated'); ?>?</label>
-                            <input type="radio" name="activated" <?php if($user['activated'] == 0) { ?>checked<?php } ?> value="0"> <?= lang('No'); ?>
-                            <input type="radio" name="activated" <?php if($user['activated'] == 1) { ?>checked<?php } ?> value="1" > <?= lang('Yes'); ?>
-                        </div> 
+                            <input type="radio" name="activated" <?php if ($user['activated'] == 0) { ?>checked<?php } ?> value="0"> <?= lang('No'); ?>
+                            <input type="radio" name="activated" <?php if ($user['activated'] == 1) { ?>checked<?php } ?> value="1"> <?= lang('Yes'); ?>
+                        </div>
                         <hr>
                         <div class="boxline">
                             <label class="form-label" for="post_title">TL</label>
                             <select name="trust_level">
-                                <?php for($i=0; $i<=5; $i++) {  ?>
-                                    <option <?php if($user['trust_level'] == $i) { ?>selected<?php } ?> value="<?= $i; ?>">
+                                <?php for ($i = 0; $i <= 5; $i++) {  ?>
+                                    <option <?php if ($user['trust_level'] == $i) { ?>selected<?php } ?> value="<?= $i; ?>">
                                         <?= $i; ?>
                                     </option>
                                 <?php } ?>
@@ -144,7 +142,7 @@
                             <input class="form-input" type="text" name="login" value="<?= $user['login']; ?>" required>
                         </div>
                         <div class="boxline">
-                            <label class="form-label" for="post_title"><?= lang('Name'); ?></label>            
+                            <label class="form-label" for="post_title"><?= lang('Name'); ?></label>
                             <input class="form-input" type="text" name="name" value="<?= $user['name']; ?>">
                         </div>
                         <div class="boxline">
@@ -158,7 +156,7 @@
                             <input type="text" class="form-input" name="website" id="name" value="<?= $user['website']; ?>">
                             <div class="box_h">https://site.ru</div>
                         </div>
-                              
+
                         <div class="boxline">
                             <label class="form-label" for="name"><?= lang('City'); ?></label>
                             <input type="text" class="form-input" name="location" id="name" value="<?= $user['location']; ?>">
@@ -193,8 +191,8 @@
                             <label class="form-label" for="name"><?= lang('VK'); ?></label>
                             <input type="text" class="form-input" name="vk" id="name" value="<?= $user['vk']; ?>">
                             <div class="box_h">https://vk.com/<b>NICK / id</b></div>
-                        </div>  
-                        
+                        </div>
+
                         <input type="submit" class="button" name="submit" value="<?= lang('Edit'); ?>" />
                     </form>
                 </div>

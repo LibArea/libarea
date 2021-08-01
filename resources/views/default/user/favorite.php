@@ -3,16 +3,18 @@
     <main>
         <div class="white-box">
             <div class="inner-padding">
-                <?= breadcrumb('/', lang('Home'), '/u/' .$uid['login'], lang('Profile'), $data['h1']); ?>
+                <?= breadcrumb('/', lang('Home'), '/u/' . $uid['login'], lang('Profile'), $data['h1']); ?>
 
                 <div class="favorite max-width">
                     <?php if (!empty($favorite)) { ?>
-                  
-                        <?php $counter = 0; foreach ($favorite as $fav) { $counter++; ?> 
-                        
-                            <?php if ($fav['favorite_type'] == 1) { ?> 
+
+                        <?php $counter = 0;
+                        foreach ($favorite as $fav) {
+                            $counter++; ?>
+
+                            <?php if ($fav['favorite_type'] == 1) { ?>
                                 <div class="voters-fav">
-                                   <div class="score"><?= $counter; ?>.</div> 
+                                    <div class="score"><?= $counter; ?>.</div>
                                 </div>
                                 <div class="vertical-ind">
                                     <a href="/post/<?= $fav['post_id']; ?>/<?= $fav['post_slug']; ?>">
@@ -20,56 +22,56 @@
                                     </a>
 
                                     <div class="lowercase small">
-                                        <a class="indent gray"  href="/u/<?= $fav['login']; ?>">
+                                        <a class="indent gray" href="/u/<?= $fav['login']; ?>">
                                             <?= user_avatar_img($fav['avatar'], 'small', $fav['login'], 'ava'); ?>
                                             <span class="indent"></span>
                                             <?= $fav['login']; ?>
-                                        
-                                        </a> 
+
+                                        </a>
 
                                         <span class="indent gray">
                                             <?= $fav['date']; ?>
                                         </span>
-                                        
-                                        <span class="indent"> </span> 
+
+                                        <span class="indent"> </span>
                                         <a class="indent gray" href="/s/<?= $fav['space_slug']; ?>" title="<?= $fav['space_name']; ?>">
                                             <?= $fav['space_name']; ?>
-                                        </a> 
-                                        <?php if($fav['post_answers_count'] !=0) { ?> 
+                                        </a>
+                                        <?php if ($fav['post_answers_count'] != 0) { ?>
                                             <span class="indent"></span>
-                                            <a class="indent gray" href="/post/<?= $fav['post_id']; ?>/<?= $fav['post_slug']; ?>">    
-                                               <i class="light-icon-messages middle"></i>  <?= $fav['post_answers_count'] ?> 
-                                            </a>     
+                                            <a class="indent gray" href="/post/<?= $fav['post_id']; ?>/<?= $fav['post_slug']; ?>">
+                                                <i class="light-icon-messages middle"></i> <?= $fav['post_answers_count'] ?>
+                                            </a>
                                         <?php } ?>
-                                        <?php if($uid['id'] > 0) { ?>
-                                            <?php if($uid['id'] == $fav['favorite_user_id']) { ?>
-                                                <span class="indent"> </span> 
+                                        <?php if ($uid['id'] > 0) { ?>
+                                            <?php if ($uid['id'] == $fav['favorite_user_id']) { ?>
+                                                <span class="indent"> </span>
                                                 <span class="add-favorite right" data-id="<?= $fav['post_id']; ?>" data-type="post">
-                                                     <span class="date"><?= lang('Remove'); ?></span>
-                                                </span>  
-                                            <?php } ?>                                
+                                                    <span class="date"><?= lang('Remove'); ?></span>
+                                                </span>
+                                            <?php } ?>
                                         <?php } ?>
-                                    </div>  
+                                    </div>
                                 </div>
                             <?php } ?>
-                            <?php if ($fav['favorite_type'] == 2) { ?> 
+                            <?php if ($fav['favorite_type'] == 2) { ?>
                                 <div class="voters-fav">
-                                   <div class="score"><?= $counter; ?>.</div> 
+                                    <div class="score"><?= $counter; ?>.</div>
                                 </div>
                                 <div class="post-telo fav-answ">
                                     <a href="/post/<?= $fav['post']['post_id']; ?>/<?= $fav['post']['post_slug']; ?>#answer_<?= $fav['answer_id']; ?>">
-                                       <h3 class="title"><?= $fav['post']['post_title']; ?></h3>
+                                        <h3 class="title"><?= $fav['post']['post_title']; ?></h3>
                                     </a>
                                     <div class="space-color space_<?= $fav['post']['space_color'] ?>"></div>
                                     <a class="indent gray small" href="/s/<?= $fav['post']['space_slug']; ?>" title="<?= $fav['post']['space_name']; ?>">
                                         <?= $fav['post']['space_name']; ?>
                                     </a>
-                                    <?php if($uid['id'] > 0) { ?>
-                                        <?php if($uid['id'] == $fav['favorite_user_id']) { ?>
+                                    <?php if ($uid['id'] > 0) { ?>
+                                        <?php if ($uid['id'] == $fav['favorite_user_id']) { ?>
                                             <span class="add-favorite right" data-id="<?= $fav['answer_id']; ?>" data-type="answer">
-                                                 <span class="small date"><?= lang('Remove'); ?></span>
-                                            </span>  
-                                        <?php } ?>                                
+                                                <span class="small date"><?= lang('Remove'); ?></span>
+                                            </span>
+                                        <?php } ?>
                                     <?php } ?>
                                     <div class="telo-fav-answ">
                                         <?= $fav['answer_content']; ?>
@@ -79,7 +81,7 @@
                         <?php } ?>
                     <?php } else { ?>
                         <p class="no-content gray">
-                            <i class="light-icon-info-square middle"></i> 
+                            <i class="light-icon-info-square middle"></i>
                             <span class="middle"><?= lang('There are no favorites'); ?>...</span>
                         </p>
                     <?php } ?>
@@ -93,7 +95,7 @@
             <div class="inner-padding big">
                 <?= lang('Under development'); ?>...
             </div>
-        </div>   
+        </div>
     </aside>
-</div>    
-<?php include TEMPLATE_DIR . '/footer.php'; ?> 
+</div>
+<?php include TEMPLATE_DIR . '/footer.php'; ?>

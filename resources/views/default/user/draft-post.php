@@ -7,22 +7,24 @@
 
                 <div class="drafts max-width">
                     <?php if (!empty($drafts)) { ?>
-                  
-                        <?php $counter = 0; foreach ($drafts as $dr) { $counter++; ?> 
-                                <div class="voters-fav">
-                                   <div class="score"><?= $counter; ?>.</div> 
+
+                        <?php $counter = 0;
+                        foreach ($drafts as $dr) {
+                            $counter++; ?>
+                            <div class="voters-fav">
+                                <div class="score"><?= $counter; ?>.</div>
+                            </div>
+                            <div class="post-telo">
+                                <a href="/post/<?= $dr['post_id']; ?>/<?= $dr['post_slug']; ?>">
+                                    <h3 class="title"><?= $dr['post_title']; ?></h3>
+                                </a>
+                                <div class="footer">
+                                    <span class="date">
+                                        <?= $dr['post_date']; ?> |
+                                        <a href="/post/edit/<?= $dr['post_id']; ?>"><?= lang('Edit'); ?></a>
+                                    </span>
                                 </div>
-                                <div class="post-telo">
-                                    <a href="/post/<?= $dr['post_id']; ?>/<?= $dr['post_slug']; ?>">
-                                        <h3 class="title"><?= $dr['post_title']; ?></h3>
-                                    </a>
-                                    <div class="footer">
-                                        <span class="date"> 
-                                            <?= $dr['post_date']; ?> | 
-                                            <a href="/post/edit/<?= $dr['post_id']; ?>"><?= lang('Edit'); ?></a>
-                                        </span>
-                                    </div>  
-                                </div>
+                            </div>
                         <?php } ?>
 
                     <?php } else { ?>
@@ -39,7 +41,7 @@
             <div class="inner-padding big">
                 <?= lang('Under development'); ?>...
             </div>
-        </div>   
+        </div>
     </aside>
-</div>    
-<?php include TEMPLATE_DIR . '/footer.php'; ?> 
+</div>
+<?php include TEMPLATE_DIR . '/footer.php'; ?>

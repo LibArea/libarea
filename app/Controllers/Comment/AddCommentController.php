@@ -22,9 +22,9 @@ class AddCommentController extends \MainController
         $post_id            = \Request::getPostInt('post_id');   // в каком посту ответ
         $answer_id          = \Request::getPostInt('answer_id');   // на какой ответ
         $comment_id         = \Request::getPostInt('comment_id');   // на какой комментарий
-        
+
         $uid        = Base::getUid();
-        $ip         = \Request::getRemoteAddress(); 
+        $ip         = \Request::getRemoteAddress();
         $post       = PostModel::getPostId($post_id);
         Base::PageError404($post);
 
@@ -45,24 +45,22 @@ class AddCommentController extends \MainController
         }
 
         $comment_published = 1;
-        if(Content::stopWordsExists($comment_content)) 
-        {
+        if (Content::stopWordsExists($comment_content)) {
             // Если меньше 2 комментариев и если контент попал в стоп лист, то заморозка
             $all_count = ActionModel::ceneralContributionCount($uid['id']);
-            if ($all_count < 2) 
-            {
+            if ($all_count < 2) {
                 ActionModel::addLimitingMode($uid['id']);
                 Base::addMsg(lang('limiting_mode_1'), 'error');
                 redirect('/');
             }
-            
+
             $comment_published = 0;
             Base::addMsg(lang('comment_audit'), 'error');
         }
 
         $data = [
             'comment_post_id'       => $post_id,
-            'comment_answer_id'     => $answer_id, 
+            'comment_answer_id'     => $answer_id,
             'comment_comment_id'    => $comment_id,
             'comment_content'       => $comment_content,
             'comment_published'     => $comment_published,
@@ -71,7 +69,7 @@ class AddCommentController extends \MainController
         ];
 
         $last_comment_id    = CommentModel::addComment($data);
-        $url_comment        = $redirect . '#comment_' . $last_comment_id; 
+        $url_comment        = $redirect . '#comment_' . $last_comment_id;
 
         if ($comment_published == 0) {
             ActionModel::addAudit('comment', $uid['id'], $last_comment_id);
@@ -79,11 +77,11 @@ class AddCommentController extends \MainController
             $type = 15; // Упоминания в посте  
             $user_id  = 1; // админу
             NotificationsModel::send($uid['id'], $user_id, $type, $last_comment_id, $url_comment, 1);
-        } 
+        }
 
         // Пересчитываем количество комментариев для поста + 1
         PostModel::updateCount($post_id, 'comments');
-        
+
         // Оповещение автору ответа, что есть комментарий
         if ($answer_id) {
             // Себе не записываем (перенести в общий, т.к. ничего для себя не пишем в notf)
@@ -93,10 +91,9 @@ class AddCommentController extends \MainController
                 NotificationsModel::send($uid['id'], $answ['answer_user_id'], $type, $last_comment_id, $url_comment, 1);
             }
         }
-        
+
         // Уведомление (@login)
-        if ($message = Content::parseUser($comment, true, true)) 
-        {
+        if ($message = Content::parseUser($comment, true, true)) {
             foreach ($message as $user_id) {
                 // Запретим отправку себе и автору ответа (оповщение ему выше)
                 if ($user_id == $uid['id'] || $user_id == $answ['answer_user_id']) {
@@ -106,26 +103,24 @@ class AddCommentController extends \MainController
                 NotificationsModel::send($uid['id'], $user_id, $type, $last_comment_id, $url_comment, 1);
             }
         }
-        
-        redirect($url_comment); 
+
+        redirect($url_comment);
     }
 
-	// Покажем форму
-	public function add()
-	{
+    // Покажем форму
+    public function add()
+    {
         $post_id    = \Request::getPostInt('post_id');
         $answer_id  = \Request::getPostInt('answer_id');
         $comment_id = \Request::getPostInt('comment_id');
-        
+
         $uid  = Base::getUid();
         $data = [
             'answer_id'     => $answer_id,
             'post_id'       => $post_id,
             'comment_id'    => $comment_id,
-        ]; 
-        
+        ];
+
         return view(PR_VIEW_DIR . '/comment/add-form-answer-comment', ['data' => $data, 'uid' => $uid]);
     }
-
-
 }

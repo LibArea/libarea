@@ -100,54 +100,6 @@ class TopicModel extends \MainModel
         return true;
     }
  
-    // Добавим Topic
-    public static function add($data)
-    {
-        XD::insertInto(['topic'], '(', 
-            ['topic_title'], ',', 
-            ['topic_description'], ',', 
-            ['topic_slug'], ',', 
-            ['topic_img'], ',',  
-            ['topic_add_date'], ',',
-            ['topic_seo_title'], ',', 
-            ['topic_merged_id'], ',',
-            ['topic_related'], ',',
-            ['topic_count'],')')->values( '(', 
-        
-        XD::setList([
-            $data['topic_title'], 
-            $data['topic_description'],
-            $data['topic_slug'], 
-            $data['topic_img'], 
-            $data['topic_add_date'],
-            $data['topic_seo_title'],
-            $data['topic_merged_id'],
-            $data['topic_related'],
-            $data['topic_count']]), ')' )->run();
-
-        return XD::select()->last_insert_id('()')->getSelectValue(); 
-    } 
-    
-    // Edit Topic
-    public static function edit($data)
-    {
-           XD::update(['topic'])->set(['topic_title'], '=', $data['topic_title'], ',', 
-            ['topic_description'], '=', $data['topic_description'], ',', 
-            ['topic_info'], '=', $data['topic_info'], ',', 
-            ['topic_slug'], '=', $data['topic_slug'], ',', 
-            ['topic_seo_title'], '=', $data['topic_seo_title'], ',', 
-            ['topic_merged_id'], '=', $data['topic_merged_id'], ',', 
-            ['topic_parent_id'], '=', $data['topic_parent_id'], ',',
-            ['topic_is_parent'], '=', $data['topic_is_parent'], ',',
-            ['topic_post_related'], '=', $data['topic_post_related'], ',',
-            ['topic_related'], '=', $data['topic_related'], ',', 
-            ['topic_count'], '=', $data['topic_count'])
-            ->where(['topic_id'], '=', $data['topic_id'])->run(); 
-
-        return true;
-    } 
-    
-    
     // Удалить записи id поста из таблицы связи
     public static function deletePostRelation($post_id)
     {

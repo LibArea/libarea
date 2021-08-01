@@ -6,20 +6,20 @@
                 <h1><?= $data['h1']; ?></h1>
 
                 <?php if (!empty($comments)) { ?>
-              
-                    <?php foreach ($comments as $comment) { ?>  
-                    
-                        <?php if($comment['comment_is_deleted'] == 0) { ?>
+
+                    <?php foreach ($comments as $comment) { ?>
+
+                        <?php if ($comment['comment_is_deleted'] == 0) { ?>
                             <div class="comm-telo_bottom">
                                 <div class="small">
                                     <a class="gray" href="/u/<?= $comment['login']; ?>">
                                         <?= user_avatar_img($comment['avatar'], 'small', $comment['login'], 'ava'); ?>
-                                        <span class="indent"> 
+                                        <span class="indent">
                                             <?= $comment['login']; ?>
                                         </span>
-                                    </a> 
+                                    </a>
                                     <span class="gray lowercase"><?= $comment['date']; ?></span>
-                                    
+
                                     <span class="indent"> &#183; </span>
                                     <a href="/post/<?= $comment['post_id']; ?>/<?= $comment['post_slug']; ?>#comment_<?= $comment['comment_id']; ?>">
                                         <?= $comment['post_title']; ?>
@@ -27,23 +27,23 @@
                                 </div>
 
                                 <div class="comm-telo-body">
-                                    <?= $comment['comment_content']; ?> 
+                                    <?= $comment['comment_content']; ?>
                                 </div>
-                           
+
                                 <div class="post-full-footer date">
-                                 + <?= $comment['comment_votes']; ?>                            
+                                    + <?= $comment['comment_votes']; ?>
                                 </div>
                             </div>
-                        <?php } else { ?>    
-                            <div class="dell comm-telo_bottom"> 
+                        <?php } else { ?>
+                            <div class="dell comm-telo_bottom">
                                 <div class="voters"></div>
                                 ~ <?= lang('Comment deleted'); ?>
                             </div>
-                        <?php } ?> 
+                        <?php } ?>
                     <?php } ?>
-                    
-                <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/comments'); ?>
-                    
+
+                    <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/comments'); ?>
+
                 <?php } else { ?>
                     <div class="no-content"><?= lang('There are no comments'); ?>...</div>
                 <?php } ?>
@@ -61,5 +61,5 @@
             <?php include TEMPLATE_DIR . '/_block/login.php'; ?>
         <?php } ?>
     </aside>
-</div>    
-<?php include TEMPLATE_DIR . '/footer.php'; ?>   
+</div>
+<?php include TEMPLATE_DIR . '/footer.php'; ?>

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers;
+
 use Hleb\Constructor\Handlers\Request;
 use App\Models\SearchModel;
 use Lori\Content;
@@ -12,12 +13,12 @@ class SearchController extends \MainController
     public function index()
     {
         if (Request::getPost()) {
-            
+
             $qa =  \Request::getPost('q');
 
-            $query = preg_replace('/[^a-zA-Zа-яА-Я0-9]/ui', '',$qa);
+            $query = preg_replace('/[^a-zA-Zа-яА-Я0-9]/ui', '', $qa);
 
-            if (!empty($query)) { 
+            if (!empty($query)) {
 
                 Base::Limits($query, lang('Too short'), '3', '128', '/search');
 
@@ -25,29 +26,27 @@ class SearchController extends \MainController
                 // Далее индивидуально расширим (+ лайки, просмотры и т.д.)
                 if (Config::get(Config::PARAM_SEARCH) == 0) {
                     $qa =  SearchModel::getSearch($query);
-                    $result = Array();
+                    $result = array();
                     foreach ($qa as $ind => $row) {
                         $row['post_content']  = Content::text(Base::cutWords($row['post_content'], 220, '...'), 'text');
-                        $result[$ind]         = $row; 
-                    }  
+                        $result[$ind]         = $row;
+                    }
                 } else {
                     $qa =  SearchModel::getSearchServer($query);
-                    $result = Array();
+                    $result = array();
                     foreach ($qa as $ind => $row) {
-                        $result[$ind]         = $row; 
-                    } 
+                        $result[$ind]         = $row;
+                    }
                 }
-                
             } else {
                 Base::addMsg(lang('Empty request'), 'error');
                 redirect('/search');
-            } 
-            
+            }
         } else {
             $query  = '';
             $result = '';
         }
-   
+
         $uid  = Base::getUid();
         $data = [
             'h1'            => lang('Search'),

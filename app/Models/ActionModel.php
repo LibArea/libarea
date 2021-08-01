@@ -40,7 +40,7 @@ class ActionModel extends \MainModel
         {
             $sql = "UPDATE ".$type."s SET ".$type."_is_deleted = 1 where ".$type."_id = :type_id";
         }
-
+      
         DB::run($sql, ['type_id' => $type_id]);
     } 
     
