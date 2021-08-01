@@ -65,7 +65,7 @@
         <?php } ?>
 
         <?php if ($data['sheet'] == 'topics' && $uid['trust_level'] > 4) { ?>
-            <a class="right small button" href="/update/count"><?= lang('Update the data'); ?></a>
+            <a class="right small button" href="/admin/update/count"><?= lang('Update the data'); ?></a>
         <?php } ?>
     </aside>
 </div>

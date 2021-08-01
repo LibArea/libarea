@@ -37,7 +37,7 @@ Route::before('Authorization@admin')->getGroup();
     Route::get('/topics/page/{page?}')->module('admin', 'Controllers\TopicsController', ['all'])->where(['page' => '[0-9]+']);
     Route::get('/topics/add')->module('admin', 'Controllers\TopicsController@addPage');
     Route::get('/topics/{id}/edit')->module('admin', 'Controllers\TopicsController@editPage')->where(['id' => '[0-9]+']);
-    Route::get('/update/count')->module('Controllers\TopicsController@updateQuantity'); 
+    Route::get('/update/count')->module('admin', 'Controllers\TopicsController@updateQuantity'); 
    
     Route::get('/invitations')->module('admin', 'Controllers\InvitationsController', ['all']);
    

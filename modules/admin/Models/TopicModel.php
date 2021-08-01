@@ -158,4 +158,12 @@ class TopicModel extends \MainModel
 
         return  DB::run($sql, $params);
     }
+    
+    // Обновим данные
+    public static function setUpdateQuantity()
+    {
+        $sql = "UPDATE topic SET topic_count = (SELECT count(relation_post_id) FROM topic_post_relation where relation_topic_id = topic_id )";
+
+        return DB::run($sql); 
+    }
 }
