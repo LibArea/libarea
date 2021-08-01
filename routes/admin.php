@@ -12,7 +12,7 @@ Route::before('Authorization@admin')->getGroup();
         Route::get('/audit/status')->module('admin', 'Controllers\AuditsController@status');
         
         Route::getProtect();
-            Route::get('/badge/user/add')->module('admin', 'Controllers\UsersController@addBadgeUser');
+            Route::get('/badge/user/add')->module('admin', 'Controllers\BadgesController@addUser');
             Route::get('/badge/add')->module('admin', 'Controllers\BadgesController@add');
             Route::get('/badge/edit/{id}')->module('admin', 'Controllers\BadgesController@edit')->where(['id' => '[0-9]+']);
             Route::get('/word/add')->module('admin', 'Controllers\WordsController@add');

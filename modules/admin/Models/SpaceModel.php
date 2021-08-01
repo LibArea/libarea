@@ -49,4 +49,31 @@ class SpaceModel extends \MainModel
 
         return DB::run($sql)->rowCount();
     }
+    
+    // Удалено пространство или нет
+    public static function isTheSpaceDeleted($space_id) 
+    {
+        $sql = "SELECT space_id, space_is_delete FROM space WHERE space_id = :space_id";
+        
+        $result = DB::run($sql, ['space_id' =>$space_id])->fetch(PDO::FETCH_ASSOC);
+        
+        return $result['space_is_delete'];
+    }
+    
+    // Удаление, восстановление пространства
+    public static  function SpaceDelete($space_id)
+    {
+        if (self::isTheSpaceDeleted($space_id) == 1) {
+
+             $sql = "UPDATE space
+                            SET space_is_delete = 0
+                                WHERE space_id = :space_id";
+        } else {
+             $sql = "UPDATE space
+                            SET space_is_delete = 1
+                                WHERE space_id = :space_id";
+        }
+        
+        return DB::run($sql, ['space_id' => $space_id]);
+    } 
 }

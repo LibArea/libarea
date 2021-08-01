@@ -248,7 +248,7 @@ a.add-space-post:hover {
 .fon {
   position: relative;
   flex: 0 1 48%;
-  border-radius: 2px; 
+  border-radius: 2px;
 }
 
 .fons::before {

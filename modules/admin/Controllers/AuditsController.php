@@ -52,8 +52,6 @@ class AuditsController extends \MainController
     {
         $st     = \Request::getPost('status');
         $status = preg_split('/(@)/', $st);
-        print_r($st);
-        exit;
         // id, type
         AuditModel::recoveryAudit($status[0], $status[1]);
 

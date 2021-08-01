@@ -89,7 +89,7 @@
                         <hr>
                         <div class="boxline">
                             <label class="form-label" for="post_title"><?= lang('Badge'); ?></label>
-                            <a class="lowercase" href="/admin/badge/user/add/<?= $user['id']; ?>">
+                            <a class="lowercase" href="/admin/badges/user/add/<?= $user['id']; ?>">
                                 <?= lang('Reward the user'); ?>
                             </a>
                         </div>

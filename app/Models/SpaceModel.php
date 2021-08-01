@@ -222,25 +222,6 @@ class SpaceModel extends \MainModel
                 ->where(['space_id'], '=', $space_id)->run();
     }
 
-    // Удалено пространство или нет
-    public static function isTheSpaceDeleted($space_id) 
-    {
-        $result = XD::select('*')->from(['space'])->where(['space_id'], '=', $space_id)->getSelectOne();
-        
-        return $result['space_is_delete'];
-    }
-    
-    // Удаление, восстановление пространства
-    public static  function SpaceDelete($space_id)
-    {
-        if (self::isTheSpaceDeleted($space_id) == 1) {
-            XD::update(['space'])->set(['space_is_delete'], '=', 0)->where(['space_id'], '=', $space_id)->run();
-        } else {
-            XD::update(['space'])->set(['space_is_delete'], '=', 1)->where(['space_id'], '=', $space_id)->run();
-        }
-        return true;
-    } 
-    
     // Добавляем пространства
     public static function AddSpace($data) 
     {

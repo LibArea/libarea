@@ -110,7 +110,8 @@ class BadgesController extends \MainController
         BadgeModel::badgeUserAdd($user_id, $badge_id);
 
         Base::addMsg(lang('Reward added'), 'success');
-        redirect('/admin/user/' . $user_id . '/edit');
+        
+        redirect('/admin/users/' . $user_id . '/edit');
     }
 
 
