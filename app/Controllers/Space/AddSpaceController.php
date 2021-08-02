@@ -28,10 +28,8 @@ class AddSpaceController extends \MainController
         $space_tl       = \Request::getPostInt('space_tl');
 
         $redirect   = '/space/add';
-        if (!preg_match('/^[a-zA-Z0-9_]+$/u', $space_slug)) {
-            Base::addMsg(lang('url-latin'), 'error');
-            redirect($redirect);
-        }
+        
+        Base::charset_slug($space_slug, 'URL', $redirect);
 
         Base::Limits($space_name, lang('titles'), '4', '18', $redirect);
         Base::Limits($space_slug, 'slug (URL)', '3', '12', $redirect);

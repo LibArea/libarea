@@ -40,7 +40,7 @@
                                     <?= lang('Slug'); ?><sup class="red">*</sup>
                                 </label>
                                 <input class="form-input" minlength="3" type="text" name="topic_slug" value="<?= $topic['topic_slug']; ?>">
-                                <div class="box_h">3 - 32 <?= lang('characters'); ?></div>
+                                <div class="box_h">3 - 32 <?= lang('characters'); ?> (a-zA-Z0-9)</div>
                             </div>
                             <div class="boxline">
                                 <label class="form-label" for="topic_content">
@@ -65,7 +65,7 @@
                                 <label for="topic_content">
                                     <?= lang('Meta Description'); ?><sup class="red">*</sup>
                                 </label>
-                                <textarea class="add" rows="6" name="topic_description"><?= $topic['topic_description']; ?></textarea>
+                                <textarea class="add" rows="6" minlength="44" name="topic_description"><?= $topic['topic_description']; ?></textarea>
                                 <div class="box_h">> 44 <?= lang('characters'); ?></div>
                             </div>
                             <div class="boxline">

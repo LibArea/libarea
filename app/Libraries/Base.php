@@ -12,17 +12,19 @@ use Lori\Config;
 
 class Base
 {
-    public static function getUid() 
+    public static function getUid()
     {
         $account = Request::getSession('account') ?? [];
         $uid = [];
- 
+
         if (!empty($account['user_id'])) {
 
             $user = UserModel::getUser($account['user_id'], 'id');
- 
+
             if ($user['ban_list'] == 1) {
-                if (!isset($_SESSION)) { session_start(); } 
+                if (!isset($_SESSION)) {
+                    session_start();
+                }
                 session_destroy();
                 AuthModel::deleteTokenByUserId($user['id']);
                 redirect('/info/restriction');
@@ -32,23 +34,22 @@ class Base
             $uid['login']           = $user['login'];
             $uid['limiting_mode']   = $user['limiting_mode'];
             $uid['trust_level']     = $user['trust_level'];
-            $uid['notif']           = NotificationsModel::usersNotification($user['id']); 
+            $uid['notif']           = NotificationsModel::usersNotification($user['id']);
             $uid['avatar']          = $user['avatar'];
             $uid['hits_count']      = $user['hits_count'];
             $uid['invitation_available'] = $user['invitation_available'];
-             
+
             Request::getResources()->addBottomScript('/assets/js/app.js');
-            
         } else {
- 
+
             self::checkCookie();
             $uid['id']          = 0;
             $uid['trust_level'] = null;
-            
+
             // Если сайт полностью приватен
-            if (Config::get(Config::PARAM_PRIVATE) == 1) { 
-               include HLEB_GLOBAL_DIRECTORY . '/app/Optional/login.php';
-               hl_preliminary_exit();
+            if (Config::get(Config::PARAM_PRIVATE) == 1) {
+                include HLEB_GLOBAL_DIRECTORY . '/app/Optional/login.php';
+                hl_preliminary_exit();
             }
         }
 
@@ -56,9 +57,9 @@ class Base
         $uid['msg']     = self::getMsg();
         return $uid;
     }
- 
- 
-     // Проверяет, устанавливался ли когда-либо файл cookie «запомнить меня»
+
+
+    // Проверяет, устанавливался ли когда-либо файл cookie «запомнить меня»
     // Если мы найдем, проверьте его по нашей таблице users_auth_tokens и  
     // если мы найдем совпадение, и оно все ещё в силе.
     public static function checkCookie()
@@ -76,7 +77,7 @@ class Base
         $validator = hash('sha256', $validator);
 
         $token = AuthModel::getAuthTokenBySelector($selector);
- 
+
         if (empty($token)) {
 
             return false;
@@ -87,7 +88,7 @@ class Base
 
             return false;
         }
- 
+
         // Получение данных по id
         $user = UserModel::getUser($token['auth_user_id'], 'id');
 
@@ -109,7 +110,7 @@ class Base
 
             if (rand(1, 100) < $forceLogin) {
 
-                AuthModel::deleteTokenByUserId($token['auth_user_id']);               
+                AuthModel::deleteTokenByUserId($token['auth_user_id']);
 
                 return;
             }
@@ -122,9 +123,9 @@ class Base
         redirect('/');
         return true;
     }
- 
+
     public static function setUserSession($user)
-    {   
+    {
         $data = [
             'user_id'       => $user['id'],
             'login'         => $user['login'],
@@ -136,12 +137,12 @@ class Base
             'isLoggedIn'    => true,
             'ipaddress'     => Request::getRemoteAddress(),
         ];
-       
+
         $_SESSION['account'] = $data;
 
         return true;
     }
- 
+
     // Каждый раз, когда пользователь входит в систему, используя свой файл cookie «запомнить меня»
     // Сбросить валидатор и обновить БД
     public static function rememberMeReset($user_id, $selector)
@@ -182,8 +183,8 @@ class Base
 
         setcookie("remember", $token, $expires);
     }
- 
- 
+
+
     // Возвращает массив сообщений
     public static function getMsg()
     {
@@ -200,46 +201,55 @@ class Base
     // Очищает очередь сообщений
     public static function clearMsg()
     {
-       unset($_SESSION['msg']);
+        unset($_SESSION['msg']);
     }
 
     // Добавляем сообщение
     public static function addMsg($msg, $class)
-    {   
+    {
         $class = ($class == 'error') ? 2 : 1;
         $_SESSION['msg'][] = array($msg, $class);
     }
-  
+
     // Длина строки
     public static function getStrlen($str)
     {
         return mb_strlen($str, "utf-8");
     }
-    
+
     // Создать случайную строку
-	public static function randomString($type, int $len = 8)
-	{
-		if ($type = 'crypto') {
+    public static function randomString($type, int $len = 8)
+    {
+        if ($type = 'crypto') {
             return bin2hex(random_bytes($len / 2));
         } else {
             // sha1
             return sha1(uniqid((string) mt_rand(), true));
-        }    
-	}
-    
-    // Пределы
+        }
+    }
+
     public static function Limits($name, $content, $min, $max, $redirect)
     {
-        if (self::getStrlen($name) < $min || self::getStrlen($name) > $max)
-        {
-            $text = sprintf(lang('text-string-length'), '«'. $content . '»', $min, $max);
-            
+        if (self::getStrlen($name) < $min || self::getStrlen($name) > $max) {
+
+            $text = sprintf(lang('text-string-length'), '«' . $content . '»', $min, $max);
             self::addMsg($text, 'error');
             redirect($redirect);
         }
         return true;
     }
-    
+
+    public static function charset_slug($slug, $text, $redirect)
+    {
+        if (!preg_match('/^[a-zA-Z0-9]+$/u', $slug)) {
+
+            $text = sprintf(lang('text-charset-slug'), '«' . $text . '»');
+            Base::addMsg($text, 'error');
+            redirect($redirect);
+        }
+        return true;
+    }
+
     public static function PageError404($variable)
     {
         if (!$variable) {
@@ -248,7 +258,7 @@ class Base
         }
         return true;
     }
-    
+
     public static function PageRedirection($variable)
     {
         if (!$variable) {
@@ -256,22 +266,22 @@ class Base
         }
         return true;
     }
-    
+
     // Обрезка текста по словам
     public static function  cutWords($content, $maxlen)
-    {  
+    {
         $text       = strip_tags($content);
-        $len        = (mb_strlen($text) > $maxlen)? mb_strripos(mb_substr($text, 0, $maxlen), ' ') : $maxlen;
+        $len        = (mb_strlen($text) > $maxlen) ? mb_strripos(mb_substr($text, 0, $maxlen), ' ') : $maxlen;
         $cutStr     = mb_substr($text, 0, $len);
-        $content    = (mb_strlen($text) > $maxlen)? $cutStr. '' : $cutStr;
+        $content    = (mb_strlen($text) > $maxlen) ? $cutStr . '' : $cutStr;
         $code_match = array('>', '*', '!', '[ADD:');
         $content    = str_replace($code_match, '', $content);
-        
+
         return $content;
-    } 
-    
+    }
+
     // https://github.com/JacksonJeans/php-mail
-    public static function mailText($email, $subject='', $message='')
+    public static function mailText($email, $subject = '', $message = '')
     {
         $mail = new Mail('smtp', [
             'host'      => 'ssl://' . Config::get(Config::PARAM_SMTP_HOST),
@@ -286,16 +296,15 @@ class Base
             ->setText($message)
             ->send();
     }
-    
-    // Работа с Captcha v2
-    private static function callApi($params) 
-    {
-       $api_url = 'https://www.google.com/recaptcha/api/siteverify';
-       
-       if (!function_exists('curl_init')) {
-         
-            $data = @file_get_contents($api_url.'?'.http_build_query($params));
 
+    // Работа с Captcha v2
+    private static function callApi($params)
+    {
+        $api_url = 'https://www.google.com/recaptcha/api/siteverify';
+
+        if (!function_exists('curl_init')) {
+
+            $data = @file_get_contents($api_url . '?' . http_build_query($params));
         } else {
 
             $curl = curl_init();
@@ -314,59 +323,62 @@ class Base
             $data = curl_exec($curl);
 
             curl_close($curl);
-
         }
 
-        if (!$data) { return false; }
+        if (!$data) {
+            return false;
+        }
         $data = json_decode($data, true);
 
         return !empty($data['success']);
     }
-    
+
     // Проверка в AuthControllerе
-    public static function checkCaptchaCode() 
+    public static function checkCaptchaCode()
     {
         $response = Request::getPost('g-recaptcha-response');
 
-        if (!$response) { return false; }
-        
-        $private_key = Config::get(Config::PARAM_PRICATE_KEY); 
-        
+        if (!$response) {
+            return false;
+        }
+
+        $private_key = Config::get(Config::PARAM_PRICATE_KEY);
+
         return self::callApi(array(
             'secret'   => $private_key,
             'response' => $response,
             'remoteip' => $_SERVER['REMOTE_ADDR']
         ));
-    } 
+    }
 
     // Discord
     public static function AddWebhook($text, $title, $url)
     {
         $text = strip_tags($text, '<p>');
-        $text = preg_replace(array('/(<p>)/','(<\/p>)'), array('','\n'), $text);
+        $text = preg_replace(array('/(<p>)/', '(<\/p>)'), array('', '\n'), $text);
 
         // Проверяем имя бота и YOUR_WEBHOOK_URL
         if (!$webhookurl = Config::get(Config::PARAM_WEBHOOK_URL)) {
-           return false;
+            return false;
         }
         if (!$usernamebot = Config::get(Config::PARAM_NAME_BOT)) {
             return false;
-        } 
-        
-        $content    = lang('Post added');   
-        $color      = hexdec( "3366ff" );
+        }
+
+        $content    = lang('Post added');
+        $color      = hexdec("3366ff");
 
         // Формируем даты
         $timestamp  = date("c", strtotime("now"));
 
         $json_data  = json_encode([
-        
+
             // Сообщение над телом
             "content" => $content,
-         
+
             // Ник бота который отправляет сообщение
             "username" => $usernamebot,
-          
+
             // URL Аватара.
             // Можно использовать аватар загруженный при создании бота
             "avatar_url" => Config::get(Config::PARAM_ICON_URL),
@@ -406,19 +418,18 @@ class Base
                 ]
             ]
 
-        ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
+        ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
-        $ch = curl_init( $webhookurl );
-        curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-type: application/json'));
-        curl_setopt( $ch, CURLOPT_POST, 1);
-        curl_setopt( $ch, CURLOPT_POSTFIELDS, $json_data);
-        curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1);
-        curl_setopt( $ch, CURLOPT_HEADER, 0);
-        curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
+        $ch = curl_init($webhookurl);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/json'));
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
-        $response = curl_exec( $ch );
+        $response = curl_exec($ch);
         // echo $response;
-        curl_close( $ch );
+        curl_close($ch);
     }
-
 }

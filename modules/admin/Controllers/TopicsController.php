@@ -86,10 +86,6 @@ class TopicsController extends \MainController
     public function edit()
     {
         $uid    = Base::getUid();
-        $tl     = validTl($uid['trust_level'], 5, 0, 1);
-        if ($tl === false) {
-            redirect('/');
-        }
 
         $topic_id           = \Request::getPostInt('topic_id');
         $topic_title        = \Request::getPost('topic_title');
@@ -118,8 +114,10 @@ class TopicsController extends \MainController
             TopicModel::clearBinding($topic['topic_id']);
         }
 
-        $redirect = '/topic/edit/' . $topic['topic_id'];
+        $redirect = '/admin/topics/' . $topic['topic_id'] . '/edit';
 
+        Base::charset_slug($topic_slug, 'Slug (url)', $redirect);
+        
         Base::Limits($topic_title, lang('Title'), '3', '64', $redirect);
         Base::Limits($topic_slug, lang('Slug'), '3', '43', $redirect);
         Base::Limits($topic_seo_title, lang('Name SEO'), '4', '225', $redirect);
@@ -177,7 +175,9 @@ class TopicsController extends \MainController
         $topic_merged_id    = \Request::getPost('topic_merged_id');
         $topic_related      = \Request::getPost('topic_related');
 
-        $redirect = '/topic/add';
+        $redirect = '/admin/topics/add';
+
+        Base::charset_slug($topic_slug, 'Slug (url)', $redirect);
 
         Base::Limits($topic_title, lang('Title'), '3', '64', $redirect);
         Base::Limits($topic_description, lang('Meta Description'), '44', '225', $redirect);
@@ -201,9 +201,9 @@ class TopicsController extends \MainController
             'topic_count'       => 0,
         ];
 
-        $topics = TopicModel::add($data);
+        $topic = TopicModel::add($data);
 
-        redirect('/admin/topics/' . $topics['topic_id'] . '/edit');
+        redirect('/admin/topics/' . $topic['topic_id'] . '/edit');
     }
 
     // Обновление

@@ -16,17 +16,17 @@ return [
     'ban-space'         => 'This space is blocked',
     'no-cover'          => 'No cover. Download it',
     'format-cover-post' => 'Width, more than 500px. The orientation is horizontal',
-    
+
     /* Info */
-    'privacy-desc'      => 'The sites Privacy Policy. Site rules.', 
+    'privacy-desc'      => 'The sites Privacy Policy. Site rules.',
     'info-desc'         => 'Information, help. Rules, privacy policy, site archive, and technology.',
-    
+
     'no-invate-txt'     => 'Not a user yet? Signup is by invitation only to combat spam and increase accountability. If you know a <a href="/users">current user</a> of the site, ask them for an invitation.',
 
     'limiting_mode_1'   => 'You cannot post content, your account is being verified',
-    
+
     /* MSG */
-    'about-info-err'        => 'About me should be less characters long',    
+    'about-info-err'        => 'About me should be less characters long',
     'name-info-err'         => 'Name must be between 3 and ~ 10 characters long',
     'pass-length-err'       => 'The password must be between 8 and 32 characters long',
     'old-password-err'      => 'The old password is not correct',
@@ -35,13 +35,12 @@ return [
     'user-already'          => 'The user is already on the site',
     'invate-to-replay'      => 'You have already sent an invitation to this user',
     'text-string-length'    => 'Length  %1$s should be from  %2$s - %3$s characters',
-    'url-already-exists'    => 'This space URL already exists', 
-    'url-latin'             => 'You can use only Latin characters in the URL, numbers',
+    'url-already-exists'    => 'This space URL already exists',
     'url-gaps'              => 'Spaces are not allowed in the URL',
     'space-add-success'     => 'Space added successfully',
     'you-question-no'       => 'You have already answered this question',
     'no-auth-login'         => 'To respond, you can <a href="/login">log in</a>',
-    
+
     /* Meta - desc */
     'desc-user-all'         => 'List of all participants sorted by date of registration on the site',
     'title-profile'         => '%1$s %2$s | Profile on %3$s',
@@ -53,15 +52,15 @@ return [
     'search-desc'           => 'Site search. By title and text of posts. By spaces and participants',
     'topic-desc'            => 'Topics of content, posts. Popular, best, global selection. Topics of the day.',
     'page-number'           => ' — page %1$s | ',
-    
+
     'domain-desc'           => 'Grouping posts by domain',
     'domains-title'         => 'Sites in the system',
-    'domains-desc'          => 'Statistics on domains, links that are used to compile publications on the site. Most visited, popular sites', 
+    'domains-desc'          => 'Statistics on domains, links that are used to compile publications on the site. Most visited, popular sites',
     'info-url-edit'         => 'Changes to the data become visible instantly. Be careful!',
     'code-incorrect'        => 'The code is incorrect or has already been used. Go through the recovery procedure again.',
-    'yes-email-pass'        => 'Now you can use your email and password.', 
-    'code-used'             => 'The code is incorrect or has already been used.',    
-    
+    'yes-email-pass'        => 'Now you can use your email and password.',
+    'code-used'             => 'The code is incorrect or has already been used.',
+
     /* Setting */
     'info_setting'          => 'Fill in your name to help participants address you by your first name. <br> <br> Tell me something about yourself. You have a great opportunity to open up to please others and seem like an interesting person.',
     'info_avatar'           => 'Upload an avatar and cover image for your profile. <br><br> When each user has a unique avatar, it becomes much easier to follow the discussions!',
@@ -86,21 +85,20 @@ return [
     'restored-comment'      => 'Restored comment',
     'deleted-answer'        => 'Deleted answer',
     'restored-answer'       => 'Restored answer',
-    
+
     'post_audit'            => 'Your post has been sent for moderation.',
     'answer_audit'          => 'Your response has been sent for moderation.',
     'comment_audit'         => 'Your comment has been sent for moderation.',
     'limit_answer_day'      => 'You have reached the limit of 10 answers for today.',
     'limit_comment_day'     => 'You have reached the limit of comments (10) for today.',
-    
+
     'nickname-replay'                       => 'This nickname is already on the site',
     'e-mail-replay'                         => 'This e-mail is already available on the site',
     'multiple-accounts'                     => 'Do not register multiple accounts',
     'password-spaces'                       => 'The password cannot contain spaces',
-    'only-latin-numbers'                    => 'In the nickname, you can only use Latin letters, numbers',
     'nickname-no-start'                     => 'A nickname can*t start with a number',
     'nickname-repeats-characters'           => 'The nickname has too many duplicate characters',
     'The code is incorrect'                 => 'The code is incorrect, or it has already been used',
-    
+
     'tl-limitation'                         => 'Your trust level (TL) does not allow you to perform this action',
 ];

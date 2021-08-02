@@ -80,11 +80,7 @@ class AuthController extends \MainController
             redirect($url);
         }
 
-        // Упростить и в метод
-        if (!preg_match('/^[a-zA-Z0-9]+$/u', $login)) {
-            Base::addMsg(lang('only-latin-numbers'), 'error');
-            redirect($url);
-        }
+        Base::charset_slug($login, lang('Nickname'), $redirect);
 
         Base::Limits($login, lang('Nickname'), '3', '10', $url);
         Base::Limits($password, lang('Password'), '8', '32', $url);

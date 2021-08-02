@@ -32,14 +32,12 @@ class EditSpaceController extends \MainController
         $space_short_text   = \Request::getPost('space_short_text');
 
         $redirect   = '/space/edit/' . $space['space_id'];
-        if (!preg_match('/^[a-zA-Z0-9_]+$/u', $space_slug)) {
-            Base::addMsg(lang('url-latin'), 'error');
-            redirect($redirect);
-        }
+        
+        Base::charset_slug($space_slug, 'URL', $redirect);
 
         Base::Limits($space_name, lang('titles'), '4', '18', $redirect);
         Base::Limits($space_description, 'Meta-', '60', '190', $redirect);
-        Base::Limits($space_slug, 'SLUG', '3', '12', $redirect);
+        Base::Limits($space_slug, 'URL', '3', '12', $redirect);
         Base::Limits($space_short_text, 'TEXT', '10', '250', $redirect);
 
         $space_color = \Request::getPost('color');

@@ -68,7 +68,7 @@ class TopicModel extends \MainModel
     // Есть пост в темах
     public static function getRelationId($id)
     {
-        $sql = "SELECT r.* FROM topic_post_relation AS r WHERE r.relation_post_id = :id";
+        $sql = "SELECT relation_topic_id, relation_post_id FROM topic_post_relation WHERE relation_post_id = :id";
 
         return DB::run($sql, ['id' => $id])->fetch(PDO::FETCH_ASSOC);
     }
@@ -76,15 +76,27 @@ class TopicModel extends \MainModel
     // Связанные темы
     public static function topicRelated($topic_related)
     {
-        $sql = "SELECT * FROM topic WHERE topic_id IN(0, " . $topic_related . ") ";
+        $sql = "SELECT topic_id, topic_title FROM topic WHERE topic_id IN(0, " . $topic_related . ") ";
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // Связанные посты для детальной информации по теме
     public static function topicPostRelated($topic_post_related)
     {
-        $sql = "SELECT * FROM posts WHERE post_id IN(0, " . $topic_post_related . ") ";
+        $sql = "SELECT post_id, post_title, post_slug FROM posts WHERE post_id IN(0, " . $topic_post_related . ") ";
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Выбор корневой темы при редактирование (если они есть)
+    public static function topicMain($topic_id)
+    {
+        $sql = "SELECT 
+                    topic_id, 
+                    topic_slug, 
+                    topic_is_parent 
+                        FROM topic WHERE topic_id = :topic_id AND topic_is_parent = 1";
+
+        return DB::run($sql, ['topic_id' => $topic_id])->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function add($data)
@@ -122,9 +134,7 @@ class TopicModel extends \MainModel
 
         DB::run($sql, $params);
 
-        $sql = "SELECT topic_id FROM topic ORDER BY topic_id DESC";
-
-        return DB::run($sql)->fetch(PDO::FETCH_ASSOC);
+        return  DB::run("SELECT LAST_INSERT_ID() as topic_id")->fetch(PDO::FETCH_ASSOC);
     }
 
     public static function edit($data)
@@ -158,12 +168,12 @@ class TopicModel extends \MainModel
 
         return  DB::run($sql, $params);
     }
-    
+
     // Обновим данные
     public static function setUpdateQuantity()
     {
         $sql = "UPDATE topic SET topic_count = (SELECT count(relation_post_id) FROM topic_post_relation where relation_topic_id = topic_id )";
 
-        return DB::run($sql); 
+        return DB::run($sql);
     }
 }
