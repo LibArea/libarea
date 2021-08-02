@@ -40,7 +40,7 @@
                         <?= spase_logo_img($space_info['space_img'], 'max', $space_info['space_name'], 'space-box-img'); ?>
 
                         <a title="<?= $space_info['space_name']; ?>" href="/s/<?= $space_info['space_slug']; ?>">
-                            <h1><?= $space_info['space_name']; ?></h1>
+                            <h1 class="size-21"><?= $space_info['space_name']; ?></h1>
                         </a>
                         <div class="space-slug">
                             s/<?= $space_info['space_slug']; ?>

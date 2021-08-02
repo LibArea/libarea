@@ -76,44 +76,44 @@
             <span class="st"></span>
             <a class="dr-menu" href="/u/<?= $uid['login']; ?>">
               <i class="light-icon-user middle"></i>
-              <span class="middle small"><?= lang('Profile'); ?></span>
+              <span class="middle size-13"><?= lang('Profile'); ?></span>
             </a>
             <a class="dr-menu" href="/u/<?= $uid['login']; ?>/setting">
               <i class="light-icon-settings middle"></i>
-              <span class="middle small"><?= lang('Settings'); ?></span>
+              <span class="middle size-13"><?= lang('Settings'); ?></span>
             </a>
             <a class="dr-menu" href="/u/<?= $uid['login']; ?>/drafts">
               <i class="light-icon-note middle"></i>
-              <span class="middle small"><?= lang('Drafts'); ?></span>
+              <span class="middle size-13"><?= lang('Drafts'); ?></span>
             </a>
             <a class="dr-menu" href="/u/<?= $uid['login']; ?>/notifications">
               <i class="light-icon-notification middle"></i>
-              <span class="middle small"><?= lang('Notifications'); ?></span>
+              <span class="middle size-13"><?= lang('Notifications'); ?></span>
             </a>
             <a class="dr-menu" href="/u/<?= $uid['login']; ?>/messages">
               <i class="light-icon-mail middle"></i>
-              <span class="middle small"><?= lang('Messages-m'); ?></span>
+              <span class="middle size-13"><?= lang('Messages-m'); ?></span>
             </a>
             <a class="dr-menu" href="/u/<?= $uid['login']; ?>/favorite">
               <i class="light-icon-bookmark middle"></i>
-              <span class="middle small"><?= lang('Favorites'); ?></span>
+              <span class="middle size-13"><?= lang('Favorites'); ?></span>
             </a>
             <?php if ($uid['trust_level'] > 1) { ?>
               <a class="dr-menu" href="/u/<?= $uid['login']; ?>/invitation">
                 <i class="light-icon-wind middle"></i>
-                <span class="middle small"><?= lang('Invites'); ?></span>
+                <span class="middle size-13"><?= lang('Invites'); ?></span>
               </a>
             <?php } ?>
             <?php if ($uid['trust_level'] == 5) { ?>
               <a class="dr-menu" href="/admin" target="_black">
                 <i class="light-icon-key middle"></i>
-                <span class="middle small"><?= lang('Admin'); ?></span>
+                <span class="middle size-13"><?= lang('Admin'); ?></span>
               </a>
             <?php } ?>
             <hr>
             <a class="dr-menu" href="/logout" class="logout" title="<?= lang('Sign out'); ?>">
               <i class="light-icon-logout middle"></i>
-              <span class="middle small"><?= lang('Sign out'); ?></span>
+              <span class="middle size-13"><?= lang('Sign out'); ?></span>
             </a>
           </div>
         </div>

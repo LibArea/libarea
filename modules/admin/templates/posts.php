@@ -36,7 +36,7 @@
             </a>
 
             <div class="answ-telo_bottom" id="post_<?= $post['post_id']; ?>">
-              <div class="small">
+              <div class="size-13">
                 <?= user_avatar_img($post['avatar'], 'small', $post['login'], 'ava'); ?>
                 <span class="indent"></span>
                 <a class="date" href="/u/<?= $post['login']; ?>"><?= $post['login']; ?></a>
@@ -58,7 +58,7 @@
               <div class="content-footer">
                 + <?= $post['post_votes']; ?>
 
-                <span id="cm_dell" class="right comment_link small">
+                <span id="cm_dell" class="right comment_link size-13">
                   <a data-type="post" data-id="<?= $post['post_id']; ?>" class="type-action">
                     <?php if ($data['sheet'] == 'postban') { ?>
                       <?= lang('Recover'); ?>

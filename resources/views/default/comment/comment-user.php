@@ -10,7 +10,7 @@
             <?php foreach ($comments as $comm) { ?>
                 <?php if ($comm['comment_is_deleted'] == 0) { ?>
                     <div class="white-box">
-                        <div class="post-header small">
+                        <div class="post-header size-13">
                             <a class="gray" href="/u/<?= $comm['login']; ?>">
                                 <?= user_avatar_img($comm['avatar'], 'max', $comm['login'], 'ava'); ?>
                                 <span class="indent"></span>

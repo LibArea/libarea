@@ -17,14 +17,14 @@
             <div class="login-nav">
                 <button type="submit" class="button-primary"><?= lang('Sign in'); ?></button>
             </div>
-            <div class="login-nav center small">
+            <div class="login-nav center size-13">
                 Продолжая, вы соглашаетесь с <a href="/info/privacy">Условиями использования</a> сайта
             </div>
-            <div class="login-nav center small">
+            <div class="login-nav center size-13">
                 <a class="recover" href="/recover"><?= lang('Forgot your password'); ?>?</a>
                 <hr>
             </div>
-            <div class="login-nav center small">
+            <div class="login-nav center size-13">
                 <?= lang('No account available'); ?>?
                 <br>
                 <a href="/register"><?= lang('Sign up'); ?></a>

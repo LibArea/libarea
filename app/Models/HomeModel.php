@@ -13,7 +13,7 @@ class HomeModel extends \MainModel
         foreach ($space_user as $ind => $row) {
             $result[$ind] = $row['signed_space_id'];
         } 
-        
+
         // Мы должны сформировать список пространств по умолчанию (в config)
         // и добавить условие показа постов, рейтинг которых достигает > N+ значения
         // в первый час размещения, но не вошедшие в пространства по умолчанию к показу
@@ -45,7 +45,7 @@ class HomeModel extends \MainModel
             }
         } 
          
-        $sort = "ORDER BY post_answers_count DESC"; 
+        $sort = "ORDER BY post_votes DESC"; 
         if ($type == 'feed' || $type == 'all') { 
             $sort = "ORDER BY post_top DESC, post_date DESC";
         }  

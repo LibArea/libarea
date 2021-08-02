@@ -10,7 +10,7 @@
                     <?php foreach ($data['messages'] as  $msg) { ?>
 
                         <div class="msg-telo<?php if (!$msg['unread'] > 0) { ?> active<?php } ?>">
-                            <div class="small flex">
+                            <div class="size-13 flex">
                                 <?php if ($msg['sender_uid'] == $uid['id']) {  ?>
                                     <?= lang('You'); ?>
                                     <span class="indent"></span>
@@ -33,7 +33,7 @@
                                 <?= $msg['message']['message']; ?>
                             </div>
 
-                            <a class="lowercase small right" href="/messages/read/<?= $msg['id']; ?>">
+                            <a class="lowercase size-13 right" href="/messages/read/<?= $msg['id']; ?>">
                                 <?php if ($msg['unread']) { ?>
                                     <?= lang('There are'); ?> <?= $msg['count']; ?> <?= $msg['unread_num']; ?>
                                 <?php } else { ?>

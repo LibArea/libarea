@@ -9,8 +9,8 @@
                     <form action="/admin/user/edit/<?= $user['id']; ?>" method="post">
                         <?= csrf_field() ?>
                         <?php if ($user['cover_art'] != 'cover_art.jpeg') { ?>
-                            <a class="right" href="/u/<?= $user['login']; ?>/delete/cover">
-                                <small><?= lang('Remove'); ?></small>
+                            <a class="right size-13" href="/u/<?= $user['login']; ?>/delete/cover">
+                                <?= lang('Remove'); ?>
                             </a>
                             <br>
                         <?php } ?>

@@ -16,7 +16,7 @@
             <?php foreach ($links as $key => $link) { ?>
                 <div class="white-box">
                     <a href="/domain/<?= $link['link_url_domain']; ?>">
-                        <h2 class="title indent-big">
+                        <h2 class="title size-21 indent-big">
                             <?php if ($link['link_title']) { ?>
                                 <?= $link['link_title']; ?>
                             <?php } else { ?>
@@ -25,7 +25,7 @@
                         </h2>
                     </a>
                     <?php if ($uid['trust_level'] == 5) { ?>
-                        <a class="small right" title="<?= lang('Edit'); ?>" href="/admin/webs/<?= $link['link_id']; ?>/edit">
+                        <a class="size-13 right" title="<?= lang('Edit'); ?>" href="/admin/webs/<?= $link['link_id']; ?>/edit">
                             <i class="light-icon-edit"></i>
                         </a>
                     <?php } ?>

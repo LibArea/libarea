@@ -59,7 +59,10 @@ class AnswerModel extends \MainModel
     // Количество ответов
     public static function getAnswersAllCount()
     {
-        $sql = "SELECT answer_id, answer_is_deleted FROM answers WHERE answer_is_deleted = 0";
+        $sql = "SELECT 
+                    answer_id, 
+                    answer_is_deleted 
+                        FROM answers WHERE answer_is_deleted = 0";
 
         return DB::run($sql)->rowCount(); 
     }
@@ -144,10 +147,13 @@ class AnswerModel extends \MainModel
     // Частота размещения ответа участника 
     public static function getAnswerSpeed($uid)
     {
-        $sql = "SELECT answer_id, answer_user_id, answer_date
-                fROM answers 
-                WHERE answer_user_id = ".$uid."
-                AND answer_date >= DATE_SUB(NOW(), INTERVAL 1 DAY)";
+        $sql = "SELECT 
+                    answer_id, 
+                    answer_user_id, 
+                    answer_date
+                        fROM answers 
+                            WHERE answer_user_id = ".$uid."
+                            AND answer_date >= DATE_SUB(NOW(), INTERVAL 1 DAY)";
                 
         return  DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }

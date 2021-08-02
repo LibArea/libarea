@@ -43,7 +43,7 @@
                                     <span class="t-td width-30 center">
                                         <?= $audit['audit_id']; ?>
                                     </span>
-                                    <span class="t-td small">
+                                    <span class="t-td size-13">
                                         <div class="content-telo">
                                             <?= $audit['content'][$audit['audit_type'] . '_content']; ?>
                                         </div>
@@ -72,7 +72,7 @@
 
                                     </span>
                                     <span class="t-td width-30 center">
-                                        <a data-id="<?= $audit['content'][$audit['audit_type'] . '_id']; ?>" data-type="<?= $audit['audit_type']; ?>" class="type-action small">
+                                        <a data-id="<?= $audit['content'][$audit['audit_type'] . '_id']; ?>" data-type="<?= $audit['audit_type']; ?>" class="type-action size-13">
                                             <?php if ($audit['content'][$audit['audit_type'] . '_is_deleted'] == 1) { ?>
                                                 <span class="red"><?= lang('Recover'); ?></span>
                                             <?php } else { ?>
@@ -88,7 +88,7 @@
                                                 <?= $audit['audit_user_id']; ?>
                                             </a>
                                         <?php } else { ?>
-                                            <a data-status="<?= $audit['audit_type']; ?>" data-id="<?= $audit['content'][$audit['audit_type'] . '_id']; ?>" class="audit-status small">
+                                            <a data-status="<?= $audit['audit_type']; ?>" data-id="<?= $audit['content'][$audit['audit_type'] . '_id']; ?>" class="audit-status size-13">
                                                 <?= lang('To approve'); ?>
                                             </a>
                                         <?php } ?>

@@ -114,7 +114,6 @@ h1.space a {
 .space-text h1 {
   padding: 0;
   margin: 0;
-  font-size: 21px;
   font-weight: 400;
   color: #fff;
 }
@@ -164,19 +163,6 @@ h1.space a {
 
 .space-text-sb p {
   margin-top: 0;
-}
-
-.space-no-user {
-  background-color: #f0f0df;
-  color: #666;
-  font-size: 13px;
-  margin-bottom: 20px;
-  padding: 5px 5px 5px 10px;
-  border-radius: 1px;
-}
-
-.space-no-user i.icon {
-  color: #f56400;
 }
 
 .info-space {
@@ -279,7 +265,6 @@ a.add-space-post:hover {
 
 .space-s {
   color: #fff;
-  font-size: 21px;
   position: absolute;
   left: 76px;
   top: 21px;

@@ -54,7 +54,7 @@
                   <?php } ?>
                   <sup class="red">TL:<?= $user['trust_level']; ?></sup>
                   <?php if ($user['invitation_id'] != 0) { ?><sup>+ inv. id<?= $user['invitation_id']; ?></sup><?php } ?>
-                  <div class="small">
+                  <div class="size-13">
                     <?= $user['email']; ?>
                   </div>
                   <?php if ($user['limiting_mode'] == 1) { ?>
@@ -78,26 +78,26 @@
                     ---
                   <?php } ?>
                 </span>
-                <span class="t-td">
+                <span class="t-td size-13">
                   <?= $user['reg_ip']; ?>
                   <?php if ($user['replayIp'] > 1) { ?>
                     <sup class="red">(<?= $user['replayIp']; ?>)</sup>
                   <?php } ?> <br>
-                  <small><?= $user['created_at']; ?></small>
+                  <?= $user['created_at']; ?>
                 </span>
-                <span class="t-td">
+                <span class="t-td size-13">
                   <?php if (!empty($user['logs']['logs_ip_address'])) { ?>
                     <a href="/admin/logip/<?= $user['logs']['logs_ip_address']; ?>">
                       <?= $user['logs']['logs_ip_address']; ?>
                     </a>
                     <br>
-                    <small><?= $user['logs']['logs_date']; ?></small>
+                   <?= $user['logs']['logs_date']; ?>
                   <?php } ?>
 
                   <?php if ($user['activated'] == 1) { ?>
-                    <div class="small"><?= lang('Email activated'); ?></div>
+                    <div><?= lang('Email activated'); ?></div>
                   <?php } else { ?>
-                    <small class="red"><?= lang('Not activated'); ?> e-mail</small>
+                    <span class="red"><?= lang('Not activated'); ?> e-mail</span>
                   <?php } ?>
                 </span>
 

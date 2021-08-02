@@ -1,6 +1,8 @@
 <?php if (!empty($answers)) { ?>
     <div class="answers white-box">
-        <h2 class="lowercase"> <?= $post['post_answers_count'] ?> <?= $post['num_answers'] ?></h2>
+        <h2 class="lowercase size-21">
+            <?= $post['post_answers_count'] ?> <?= $post['num_answers'] ?>
+        </h2>
 
         <?php foreach ($answers as  $answer) { ?>
             <div class="block-answer">
@@ -32,7 +34,7 @@
 
                                 <?= $answer['answer_content'] ?>
                             </div>
-                            <div class="answer-footer small">
+                            <div class="answer-footer size-13">
                                 <?php if ($uid['trust_level'] >= Lori\Config::get(Lori\Config::PARAM_TL_ADD_COMM_QA)) { ?>
                                     <?php if ($post['post_closed'] == 0) { ?>
                                         <?php if ($post['post_is_deleted'] == 0 || $uid['trust_level'] == 5) { ?>
@@ -93,7 +95,7 @@
                         <li class="comment_subtree" id="comment_<?= $comment['comment_id']; ?>">
                             <div class="line-qa"></div>
                             <div class="comm-telo">
-                                <div class="small comm-body">
+                                <div class="size-13 comm-body">
                                     <?= $comment['comment_content'] ?>
                                     <span class="gray">
                                         — <a class="gray" href="/u/<?= $comment['login']; ?>"><?= $comment['login']; ?></a>
@@ -180,9 +182,7 @@
 
         <?php } ?>
     <?php } else { ?>
-        <br />
-        <textarea rows="5" disabled="disabled" placeholder="<?= lang('no-auth-answ'); ?>" name="answer" id="answer"></textarea>
-        <div>
+        <div class="no-content gray">
             <?= lang('no-auth-login'); ?>...
         </div>
     <?php } ?>

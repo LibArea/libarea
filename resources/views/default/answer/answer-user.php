@@ -11,7 +11,7 @@
             <?php foreach ($answers as $answer) { ?>
                 <?php if ($answer['answer_is_deleted'] == 0) { ?>
                     <div class="white-box">
-                        <div class="post-header small">
+                        <div class="post-header size-13">
                             <a class="gray" href="/u/<?= $answer['login']; ?>">
                                 <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava'); ?>
                                 <span class="indent"></span>

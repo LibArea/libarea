@@ -3,20 +3,20 @@
   <div class="wrap">
     <div class="text-info no-mob">
       <h4 class="p-head two"><?= lang('Info'); ?></h4>
-      <a class="footer small" title="<?= lang('Spaces'); ?>" href="/spaces"><?= lang('Spaces'); ?></a>
-      <a class="footer small" title="<?= lang('Topics'); ?>" href="/topics"><?= lang('Topics'); ?></a>
-      <a class="footer small" title="<?= lang('Users'); ?>" href="/users"><?= lang('Users'); ?></a>
+      <a class="footer size-13" title="<?= lang('Spaces'); ?>" href="/spaces"><?= lang('Spaces'); ?></a>
+      <a class="footer size-13" title="<?= lang('Topics'); ?>" href="/topics"><?= lang('Topics'); ?></a>
+      <a class="footer size-13" title="<?= lang('Users'); ?>" href="/users"><?= lang('Users'); ?></a>
     </div>
     <div class="text-info no-mob">
       <h4 class="p-head three"><?= lang('Other'); ?></h4>
-      <a class="footer small" title="<?= lang('All answers'); ?>" href="/answers"><?= lang('Answers-n'); ?></a>
-      <a class="footer small" title="<?= lang('All comments'); ?>" href="/comments"><?= lang('Comments-n'); ?></a>
-      <a class="footer small" title="<?= lang('All domains'); ?>" href="/web"><?= lang('Domains'); ?></a>
+      <a class="footer size-13" title="<?= lang('All answers'); ?>" href="/answers"><?= lang('Answers-n'); ?></a>
+      <a class="footer size-13" title="<?= lang('All comments'); ?>" href="/comments"><?= lang('Comments-n'); ?></a>
+      <a class="footer size-13" title="<?= lang('All domains'); ?>" href="/web"><?= lang('Domains'); ?></a>
     </div>
     <div class="text-info">
       <h4 class="p-head one"><?= lang('Help'); ?></h4>
-      <a class="footer small" title="<?= lang('Info'); ?>" href="/info"><?= lang('Info'); ?></a>
-      <a class="footer small no-mob" title="<?= lang('Privacy'); ?>" href="/info/privacy"><?= lang('Privacy'); ?></a>
+      <a class="footer size-13" title="<?= lang('Info'); ?>" href="/info"><?= lang('Info'); ?></a>
+      <a class="footer size-13 no-mob" title="<?= lang('Privacy'); ?>" href="/info/privacy"><?= lang('Privacy'); ?></a>
     </div>
     <div class="text-oth ots">
       <h4 class="p-head-n"><?= lang('Social networks'); ?></h4>
@@ -31,10 +31,10 @@
           <path d="M8.5 17c0 1 -1.356 3 -1.832 3c-1.429 0 -2.698 -1.667 -3.333 -3c-.635 -1.667 -.476 -5.833 1.428 -11.5c1.388 -1.015 2.782 -1.34 4.237 -1.5l1 2.5" />
         </svg></a>
       <a rel="nofollow noopener" class="github" title="GitHub" href="https://github.com/LoriUp/loriup">
-        <i class="light-icon-brand-github"></i>
+        <i class="light-icon-brand-github size-21"></i>
       </a>
 
-      <div class="small">
+      <div class="size-13">
         Loriup &copy; <?= date('Y'); ?>
         <span class="no-mob">— <?= lang('community'); ?></span>
       </div>

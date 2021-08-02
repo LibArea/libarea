@@ -68,7 +68,8 @@ a:hover {
 }
 
 li { list-style-type: none; }
-.small { font-size: 13px; }
+.size-13 { font-size: 13px; }
+.size-21 { font-size: 21px; }
 .red { color: #e45735; }
 .green { color: #390; }
 .gray { color: #5b7083; }
@@ -87,8 +88,8 @@ li { list-style-type: none; }
 .center { text-align: center; }
 .max-width { max-width: 800px; }
 img { vertical-align: middle; }
-img.ava { width: 18px; }
-img.ava-64 { width: 64px; }
+.ava { width: 18px; }
+.ava-64 { width: 64px; }
 .nav a i { margin-right: 10px; }
 .nav:hover { background-color: #3a3d4b; }
 .nav.active { background-color: #009688; }

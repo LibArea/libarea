@@ -11,7 +11,7 @@
 
                         <?php if ($comment['comment_is_deleted'] == 0) { ?>
                             <div class="comm-telo_bottom">
-                                <div class="small">
+                                <div class="size-13">
                                     <a class="gray" href="/u/<?= $comment['login']; ?>">
                                         <?= user_avatar_img($comment['avatar'], 'small', $comment['login'], 'ava'); ?>
                                         <span class="indent">

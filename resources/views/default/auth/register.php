@@ -36,9 +36,7 @@
                         <div class="boxline">
                             <div class="boxline">
                                 <button type="submit" class="button"><?= lang('Sign up'); ?></button>
-                                <small>
-                                    <span class="indent"><a href="/login"><?= lang('Sign in'); ?></a></span>
-                                </small>
+                                <span class="indent size-13"><a href="/login"><?= lang('Sign in'); ?></a></span>
                             </div>
                         </div>
                     </form>

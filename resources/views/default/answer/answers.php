@@ -11,7 +11,7 @@
                         <?php foreach ($answers as $answer) { ?>
                             <?php if ($answer['answer_is_deleted'] == 0) { ?>
                                 <div class="answ-telo_bottom">
-                                    <div class="flex small">
+                                    <div class="flex size-13">
                                         <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava'); ?>
                                         <a class="gray indent" href="/u/<?= $answer['login']; ?>">
                                             <?= $answer['login']; ?>

@@ -12,7 +12,7 @@
                 <div class="white-box telo-detail-post<?php if ($post['post_is_deleted'] == 1) { ?> dell<?php } ?>">
 
                     <div class="post-body">
-                        <h1 class="title">
+                        <h1 class="title size-21">
                             <?= $post['post_title']; ?>
                             <?php if ($post['post_is_deleted'] == 1) { ?>
                                 <i class="light-icon-trash red"></i>
@@ -30,16 +30,16 @@
                                 <i class="light-icon-language green"></i>
                             <?php } ?>
                             <?php if ($post['post_translation'] == 1) { ?>
-                                <span class="translation small italic lowercase"><?= lang('Translation'); ?></span>
+                                <span class="translation size-13 italic lowercase"><?= lang('Translation'); ?></span>
                             <?php } ?>
                             <?php if ($post['post_tl'] > 0) { ?>
-                                <span class="trust-level italic small">tl<?= $post['post_tl']; ?></span>
+                                <span class="trust-level italic size-13">tl<?= $post['post_tl']; ?></span>
                             <?php } ?>
                             <?php if ($post['post_merged_id'] > 0) { ?>
                                 <i class="light-icon-arrow-forward-up red"></i>
                             <?php } ?>
                         </h1>
-                        <div class="small lowercase flex">
+                        <div class="size-13 lowercase flex">
                             <a class="gray" href="/u/<?= $post['login']; ?>">
                                 <?= user_avatar_img($post['avatar'], 'small', $post['login'], 'ava'); ?>
                                 <span class="indent">
@@ -91,7 +91,7 @@
                                             <?php } ?>
                                         </a>
                                     </span>
-                                    <span class="small">
+                                    <span class="size-13">
                                         <span class="indent"> &#183; </span>
                                         <?= $post['post_hits_count']; ?>
                                     </span>
@@ -130,7 +130,7 @@
 
                         <?php if (!empty($post_related)) { ?>
                             <div class="related">
-                                <h3 class="style small"><?= lang('Related'); ?>:</h3>
+                                <h3 class="style size-13"><?= lang('Related'); ?>:</h3>
                                 <?php $num = 0; ?>
                                 <?php foreach ($post_related as $related) { ?>
                                     <div class="related-box-num">
@@ -146,9 +146,9 @@
 
                         <?php if (!empty($topics)) { ?>
                             <div class="related">
-                                <h3 class="style small"><?= lang('Topics'); ?>:</h3>
+                                <h3 class="style size-13"><?= lang('Topics'); ?>:</h3>
                                 <?php foreach ($topics as $topic) { ?>
-                                    <a class="tags small" href="/topic/<?= $topic['topic_slug']; ?>">
+                                    <a class="tags size-13" href="/topic/<?= $topic['topic_slug']; ?>">
                                         <?= $topic['topic_title']; ?>
                                     </a>
                                 <?php } ?>
@@ -233,7 +233,7 @@
                         <span class="indent"><?= $post['space_name']; ?></span>
                     </a>
                 </div>
-                <div class="gray small"><?= $post['space_short_text']; ?></div>
+                <div class="gray size-13"><?= $post['space_short_text']; ?></div>
             </div>
         </div>
         <?php if ($post['post_content_img']) { ?>
@@ -245,7 +245,7 @@
         <?php } ?>
         <div class="white-box">
             <div class="inner-padding">
-                <h3 class="recommend small"><?= lang('To share'); ?></h3>
+                <h3 class="recommend size-13"><?= lang('To share'); ?></h3>
                 <div class="social center" data-url="<?= Lori\Config::get(Lori\Config::PARAM_URL) . '/post/' . $post['post_id'] . '/' . $post['post_slug']; ?>" data-title="<?= $post['post_title']; ?>">
                     <a class="push gray" data-id="fb"><i class="light-icon-brand-facebook"></i></a>
                     <a class="push gray" data-id="vk">
@@ -261,7 +261,7 @@
         <?php if ($recommend) { ?>
             <div class="white-box sticky recommend">
                 <div class="inner-padding">
-                    <h3 class="recommend small"><?= lang('Recommended'); ?></h3>
+                    <h3 class="recommend size-13"><?= lang('Recommended'); ?></h3>
                     <?php $n = 0;
                     foreach ($recommend as  $rec_post) {
                         $n++; ?>

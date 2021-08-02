@@ -1,6 +1,8 @@
 <?php if (!empty($answers)) { ?>
     <div class="answers white-box">
-        <h2 class="lowercase"><?= $post['post_answers_count'] + $post['post_comments_count'] ?> <?= $post['num_comments'] ?></h2>
+        <h2 class="lowercase size-21">
+            <?= $post['post_answers_count'] + $post['post_comments_count'] ?> <?= $post['num_comments'] ?>
+        </h2>
 
         <?php foreach ($answers as  $answer) { ?>
             <div class="block-answer">
@@ -10,7 +12,7 @@
                         <li class="answers_subtree" id="answer_<?= $answer['answer_id']; ?>">
                             <div class="container">
                                 <div class="answ-telo">
-                                    <div class="flex small">
+                                    <div class="flex size-13">
                                         <a class="gray" href="/u/<?= $answer['login']; ?>">
                                             <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava'); ?>
                                             <span class="indent">
@@ -44,7 +46,7 @@
                                         <?= $answer['answer_content'] ?>
                                     </div>
                                 </div>
-                                <div class="comm-footer flex small">
+                                <div class="comm-footer flex size-13">
                                     <?= votes($uid['id'], $answer, 'answer'); ?>
 
                                     <?php if ($post['post_closed'] == 0) { ?>
@@ -91,7 +93,7 @@
                 <?php } else { ?>
 
                     <?php if ($uid['trust_level'] == 5) { ?>
-                        <ol class="delleted small comm-telo">
+                        <ol class="delleted size-13 comm-telo">
                             <li class="comments_subtree" id="comment_<?= $answer['answer_id']; ?>">
                                 <span class="comm-deletes nick">
                                     <?= $answer['answer_content']; ?>
@@ -120,7 +122,7 @@
                         <li class="comment_subtree" id="comment_<?= $comment['comment_id']; ?>">
                             <div class="container">
                                 <div class="comm-telo">
-                                    <div class="small flex">
+                                    <div class="size-13 flex">
                                         <a class="gray" href="/u/<?= $comment['login']; ?>">
                                             <?= user_avatar_img($comment['avatar'], 'small', $comment['login'], 'ava'); ?>
                                             <span class="indent">
@@ -158,7 +160,7 @@
                                         <?= lori\Content::text($comment['comment_content'], 'line'); ?>
                                     </div>
                                 </div>
-                                <div class="comm-footer small">
+                                <div class="comm-footer size-13">
                                     <?= votes($uid['id'], $comment, 'comment'); ?>
 
                                     <?php if ($post['post_closed'] == 0) { ?>
@@ -192,7 +194,7 @@
 
                 <?php } else { ?>
                     <?php if (accessСheck($comment, 'comment', $uid, 1, 30) === true) { ?>
-                        <ol class="delleted small comm-telo<?php if ($comment['comment_comment_id'] > 0) { ?> step<?php } ?>">
+                        <ol class="delleted size-13 comm-telo<?php if ($comment['comment_comment_id'] > 0) { ?> step<?php } ?>">
                             <li class="comments_subtree" id="comment_<?= $comment['comment_id']; ?>">
                                 <span class="comm-deletes nick">
                                     <?= lori\Content::text($comment['comment_content'], 'line'); ?>

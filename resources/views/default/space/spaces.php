@@ -5,7 +5,7 @@
             <div class="inner-padding">
                 <?php if ($uid['id'] > 0) { ?>
                     <?php if ($add_space_button === true) { ?>
-                        <a title="<?= lang('To create'); ?>" class="right vertical-ind small" href="/space/add">
+                        <a title="<?= lang('To create'); ?>" class="right vertical-ind size-13" href="/space/add">
                             <i class="light-icon-plus red"></i>
                         </a>
                     <?php } ?>
@@ -60,7 +60,7 @@
                                             </a>
 
                                             <span class="space-name">
-                                                <a title="<?= $sp['space_name']; ?>" class="space-s" href="/s/<?= $sp['space_slug']; ?>">
+                                                <a title="<?= $sp['space_name']; ?>" class="space-s size-21" href="/s/<?= $sp['space_slug']; ?>">
                                                     <span class="space-name"> <?= $sp['space_name']; ?></span>
                                                 </a>
                                             </span>

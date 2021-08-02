@@ -115,7 +115,7 @@ class PostController extends \MainController
         Request::getResources()->addBottomScript('/assets/js/prism.js');
         Request::getResources()->addBottomStyles('/assets/css/prism.css');
 
-        if ($uid['id'] > 0) {
+        if ($uid['id'] > 0 && $post['post_closed'] == 0) {
             Request::getResources()->addBottomStyles('/assets/editor/editormd.css');
             Request::getResources()->addBottomScript('/assets/editor/editormd.min.js');
             Request::getResources()->addBottomScript('/assets/editor/config-no-preview.js');

@@ -22,12 +22,10 @@
                         <div class="row">
                             <div class="boxline">
                                 <button type="submit" class="button"><?= lang('Reset'); ?></button>
-                                <small>
-                                    <?php if (!Lori\Config::get(Lori\Config::PARAM_INVITE)) { ?>
-                                        <span class="indent"><a href="/register"><?= lang('Sign up'); ?></a></span>
-                                    <?php } ?>
-                                    <span class="indent"><a href="/login"><?= lang('Sign in'); ?></a></span>
-                                </small>
+                                <?php if (!Lori\Config::get(Lori\Config::PARAM_INVITE)) { ?>
+                                    <span class="indent size-13"><a href="/register"><?= lang('Sign up'); ?></a></span>
+                                <?php } ?>
+                                <span class="indent size-13"><a href="/login"><?= lang('Sign in'); ?></a></span>
                             </div>
                         </div>
                     </form>

@@ -31,7 +31,7 @@
           <?php foreach ($comments as $comment) { ?>
 
             <div class="comm-telo_bottom" id="comment_<?= $comment['comment_id']; ?>">
-              <div class="small">
+              <div class="size-13">
                 <?= user_avatar_img($comment['avatar'], 'small', $comment['login'], 'ava'); ?>
                 <a class="date" href="/u/<?= $comment['login']; ?>"><?= $comment['login']; ?></a>
                 <span class="indent"> &#183; </span>
@@ -51,7 +51,7 @@
               </div>
               <div class="content-footer">
                 + <?= $comment['comment_votes']; ?>
-                <span id="cm_dell" class="right comment_link small">
+                <span id="cm_dell" class="right comment_link size-13">
                   <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action">
                     <?php if ($data['sheet'] == 'commentban') { ?>
                       <?= lang('Recover'); ?>

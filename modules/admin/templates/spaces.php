@@ -50,7 +50,7 @@
                                     <span class="t-td width-30 center">
                                         <?= spase_logo_img($sp['space_img'], 'max', $sp['space_slug'], 'ava-64'); ?>
                                     </span>
-                                    <span class="t-td small">
+                                    <span class="t-td size-13">
                                         <a class="title" title="<?= $sp['space_name']; ?>" href="/s/<?= $sp['space_slug']; ?>">
                                             <?= $sp['space_name']; ?> (s/<?= $sp['space_slug']; ?>)
                                         </a>

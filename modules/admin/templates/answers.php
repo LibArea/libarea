@@ -32,7 +32,7 @@
           <?php foreach ($answers as $answer) { ?>
 
             <div class="answ-telo_bottom" id="answer_<?= $answer['answer_id']; ?>">
-              <div class="small">
+              <div class="size-13">
                 <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava'); ?>
                 <a class="date" href="/u/<?= $answer['login']; ?>"><?= $answer['login']; ?></a>
                 <span class="indent"> &#183; </span>
@@ -53,7 +53,7 @@
               <div class="content-footer">
                 + <?= $answer['answer_votes']; ?>
 
-                <span id="cm_dell" class="right comment_link small">
+                <span id="cm_dell" class="right comment_link size-13">
                   <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action">
                     <?php if ($data['sheet'] == 'answerban') { ?>
                       <?= lang('Recover'); ?>

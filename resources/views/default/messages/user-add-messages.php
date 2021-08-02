@@ -5,7 +5,7 @@
             <div class="inner-padding">
                 <h1>
                     <?= $data['h1']; ?>
-                    <a class="right small" href="/u/<?= $uid['login']; ?>/messages"><?= lang('All messages'); ?></a>
+                    <a class="right size-13" href="/u/<?= $uid['login']; ?>/messages"><?= lang('All messages'); ?></a>
                 </h1>
                 <form action="/messages/send" method="post">
                     <?= csrf_field() ?>

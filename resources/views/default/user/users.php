@@ -13,11 +13,11 @@
                                         <?= user_avatar_img($user['avatar'], 'max', $user['login'], 'gr small'); ?>
                                     </a>
                                 </div>
-                                <div class="box-footer">
+                                <div class="box-footer size-13">
                                     <a href="/u/<?= $user['login']; ?>"><?= $user['login']; ?></a>
                                     <br>
                                     <?php if ($user['name']) { ?>
-                                        <small> <?= $user['name']; ?> </small>
+                                        <?= $user['name']; ?>
                                     <?php } else { ?>
 
                                     <?php } ?>

@@ -13,7 +13,7 @@
 
                         <?php foreach ($domains as $key => $link) { ?>
                             <div class="domain-box">
-                                <span class="add-favicon right small" data-id="<?= $link['link_id']; ?>">
+                                <span class="add-favicon right size-13" data-id="<?= $link['link_id']; ?>">
                                     +фавикон
                                 </span>
                                 <div class="title">

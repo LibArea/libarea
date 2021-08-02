@@ -26,9 +26,9 @@
                                     <span class="indent"></span>
                                     <sup class="gray">x<?= $topic['topic_count']; ?></sup>
                                     <?php if ($topic['topic_is_parent'] == 1 && $uid['trust_level'] == 5) { ?>
-                                        <sup class="red small">root</sup>
+                                        <sup class="red size-13">root</sup>
                                     <?php } ?>
-                                    <div class="small"><?= $topic['topic_cropped']; ?>...</div>
+                                    <div class="size-13"><?= $topic['topic_cropped']; ?>...</div>
                                 </div>
                             </div>
                         <?php } ?>
@@ -54,9 +54,9 @@
         <?php if (!empty($news)) { ?>
             <div class="white-box">
                 <div class="inner-padding big">
-                    <h3 class="style small"><?= lang('New ones'); ?></h3>
+                    <h3 class="style size-13"><?= lang('New ones'); ?></h3>
                     <?php foreach ($news as $new) { ?>
-                        <a title="<?= $new['topic_title']; ?>" class="tags small" href="/topic/<?= $new['topic_slug']; ?>">
+                        <a title="<?= $new['topic_title']; ?>" class="tags size-13" href="/topic/<?= $new['topic_slug']; ?>">
                             <?= $new['topic_title']; ?>
                         </a><br>
                     <?php } ?>
@@ -65,7 +65,7 @@
         <?php } ?>
 
         <?php if ($data['sheet'] == 'topics' && $uid['trust_level'] > 4) { ?>
-            <a class="right small button" href="/admin/update/count"><?= lang('Update the data'); ?></a>
+            <a class="right size-13 button" href="/admin/update/count"><?= lang('Update the data'); ?></a>
         <?php } ?>
     </aside>
 </div>

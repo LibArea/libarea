@@ -45,7 +45,7 @@ body {
 header {
   z-index: 10;
   box-shadow: 0 1px 3px rgb(18 18 18 / 10%);
-  background-color: #fff;
+  background-color: var(--secondary);
   color: var(--tertiary);
   margin: 0 auto;
   padding: 10px 15px;
@@ -85,24 +85,27 @@ img {
   vertical-align: middle;
 }
 
-img.ava-94 {
+.ava { width: 18px; }
+.ava-24 { width: 24px; }
+.ava-54 { width: 54px; }
+.ava-64 { width: 64px; }
+
+.ava-94 {
   width: 94px;
   margin-top: 8px;
 }
 
-img.ava { width: 18px; }
-img.ava-24 { width: 24px; }
-img.ava-54 { width: 54px; }
-img.ava-64 { width: 64px; }
 
 .indent { margin: 0 5px; }
 .indent-big { margin: 0 0 0 15px; }
+.vertical { margin: 5px 0; }
 .vertical-ind { margin: 15px 0; }
 .max-width { max-width: 780px; }
 .clear { clear: both; }
 .right { float: right; }
 .left { float: left; }
-.small { font-size: 13px; }
+.size-13 { font-size: 13px; }
+.size-21 { font-size: 21px; }
 .center { text-align: center; }
 .middle { vertical-align: middle; }
 .lowercase { text-transform: lowercase; }
@@ -155,7 +158,7 @@ img.ava-64 { width: 64px; }
 }
 
 .white-box {
-  background-color: #fff;
+  background-color: var(--secondary);
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
   overflow: hidden;
   margin-bottom: 20px;
@@ -205,14 +208,14 @@ pre code {
   background-color: #54b9f7;
   border: 1px solid #54b9f7;
   padding: 5px 14px 5px 14px;
-  color: #fff;
+  color: var(--secondary);
   border-radius: 3px;
 }
 
 .button:hover {
   background-color: #439cd3;
   border: 1px solid #439cd3;
-  color: #fff;
+  color: var(--secondary);
 }
 
 .nick span {
@@ -236,7 +239,6 @@ pre code {
 .banner h1 {
   letter-spacing: 2px;
   text-transform: uppercase;
-  font-size: 21px;
   font-weight: 400;
   margin: 0 0 5px 0;
 }
@@ -248,7 +250,6 @@ pre code {
 .answers h2 {
   margin: 0 0 0 4px;
   font-weight: 300;
-  font-size: 21px;
 }
 
 blockquote {
@@ -353,7 +354,7 @@ textarea {
 .form-input {
   transition: all 0.2s ease;
   appearance: none;
-  background-color: #fff;
+  background-color: var(--secondary);
   background-image: none;
   border: 0.05rem solid #caced7;
   border-radius: 0;
@@ -501,12 +502,12 @@ textarea:focus {
 
 .login-nav.register a {
   line-height: 11px;
-  color: #5b7083;
+  color: var(--tertiary);
   text-transform: uppercase;
 }
 
 .login-nav button {
-  color: #fff;
+  color: var(--secondary);
   background-color: #1ca1f3;
   border: 1px solid #1ca1f3;
   outline: 0;
@@ -521,7 +522,7 @@ textarea:focus {
 
 .login-nav button:hover {
   color: #1ca1f3;
-  background-color: #fff;
+  background-color: var(--secondary);
 }
 
 /* PM */
@@ -739,23 +740,7 @@ img.img-post,
   margin: 15px 0 0 0;
 }
 
-.telo-fav-answ {
-  background-color: #f3f3f3;
-  padding: 1px 15px;
-  max-width: 700px;
-  color: var(--tertiary);
-  margin: 0 0 0 30px;
-}
-
-.voters-fav {
-  float: left;
-  width: 30px;
-  height: 45px;
-  margin: 3px 0 0 0;
-}
-
 .title {
-  font-size: 21px;
   font-weight: 500;
   color: #111;
 }
@@ -774,7 +759,7 @@ img.img-post,
   top: 0;
   width: 100%;
   border-bottom: 1px solid #eee;
-  background-color: #fff;
+  background-color: var(--secondary);
   z-index: 444;
   font-size: 18px;
   padding: 5px;
@@ -802,11 +787,6 @@ img.img-post,
 
 .search-info img {
   margin-right: 5px;
-}
-
-.search-title {
-  font-size: 21px;
-  margin-bottom: 10px;
 }
 
 .search {
@@ -1078,7 +1058,7 @@ ol.comment-telo {
   padding: 13px 15px 15px 0;
   list-style: none;
   color: #667d99;
-  background-color: #fff;
+  background-color: var(--secondary);
   margin-bottom: 20px;
   border-radius: 2px;
 }
@@ -1193,7 +1173,7 @@ a.tags {
 a.tags:hover,
 a.tags.avtive {
   background-color: #5fb878;
-  color: #fff;
+  color: var(--secondary);
 }
 
 /* Info space and recommended in the post */
@@ -1266,7 +1246,7 @@ footer {
   padding: 10px 20px 20px 20px;
   overflow: hidden;
   margin-top: 20px;
-  color: #fff;
+  color: var(--secondary);
 }
 
 .text-info {
@@ -1288,7 +1268,7 @@ footer {
 footer a.footer {
   display: block;
   margin-bottom: 3px;
-  color: #fff;
+  color: var(--secondary);
 }
 
 .p-head-n {
@@ -1320,13 +1300,12 @@ footer a.footer {
   width: 31px;
   height: 37px;
   fill: none;
-  stroke: #fff;
+  stroke: var(--secondary);
   vertical-align: middle;
 }
 
 .github .light-icon-brand-github {
-  font-size: 21px;
-  color: #fff;
+  color: var(--secondary);
 }
 
 footer a.footer:hover,
@@ -1408,7 +1387,7 @@ i.light-icon-brand-github:hover {
 
 /* dark */
 .dark {
-  background-color: #222;
+  background-color: var(--primary);
   color: var(--secondary);
 }
 
@@ -1438,7 +1417,7 @@ i.light-icon-brand-github:hover {
 .dark .comment_subtree.edit,
 .dark .answers_subtree:target {
   background-color: #111;
-  color: #fff;
+  color: var(--secondary);
   padding: 5px;
 }
 
@@ -1450,7 +1429,7 @@ i.light-icon-brand-github:hover {
 .dark .nick span,
 .dark .banner,
 .dark .nav-tabs > li.active span {
-  color: #fff;
+  color: var(--secondary);
 }
 
 .dark .layui-layer-dialog,

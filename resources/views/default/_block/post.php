@@ -2,7 +2,7 @@
   <?php foreach ($posts as  $post) { ?>
 
     <div class="post-telo white-box">
-      <div class="post-header small flex">
+      <div class="post-header size-13 flex">
         <a class="gray" href="/u/<?= $post['login']; ?>">
           <?= user_avatar_img($post['avatar'], 'small', $post['login'], 'ava'); ?>
           <span class="indent">
@@ -22,7 +22,7 @@
 
       <div class="post-body">
         <a href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
-          <h2 class="title indent-big"><?= $post['post_title']; ?>
+          <h2 class="title size-21 indent-big"><?= $post['post_title']; ?>
             <?php if ($post['post_is_deleted'] == 1) { ?>
               <i class="light-icon-trash red"></i>
             <?php } ?>
@@ -39,10 +39,10 @@
               <i class="light-icon-language green"></i>
             <?php } ?>
             <?php if ($post['post_translation'] == 1) { ?>
-              <span class="translation small italic lowercase"><?= lang('Translation'); ?></span>
+              <span class="translation size-13 italic lowercase"><?= lang('Translation'); ?></span>
             <?php } ?>
             <?php if ($post['post_tl'] > 0) { ?>
-              <span class="trust-level italic small">tl<?= $post['post_tl']; ?></span>
+              <span class="trust-level italic size-13">tl<?= $post['post_tl']; ?></span>
             <?php } ?>
             <?php if ($post['post_merged_id'] > 0) { ?>
               <i class="light-icon-arrow-forward-up red"></i>
@@ -50,15 +50,15 @@
           </h2>
         </a>
         <div class="flex indent-big">
-          <a class="gray small" href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
+          <a class="gray size-13" href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
             <span class="post-space-color" style="background-color: <?= $post['space_color']; ?>;"></span>
             <?= $post['space_name']; ?>
           </a>
-          <?= html_topic($post['topic_list'], 'gray small indent-big'); ?>
+          <?= html_topic($post['topic_list'], 'gray size-13 indent-big'); ?>
           <?php if ($post['post_url_domain']) { ?>
             <span class="indent"></span>
-            <a class="gray small" href="/domain/<?= $post['post_url_domain']; ?>">
-              <i class="light-icon-link small middle"></i> <?= $post['post_url_domain']; ?>
+            <a class="gray size-13" href="/domain/<?= $post['post_url_domain']; ?>">
+              <i class="light-icon-link size-13 middle"></i> <?= $post['post_url_domain']; ?>
             </a>
           <?php } ?>
         </div>

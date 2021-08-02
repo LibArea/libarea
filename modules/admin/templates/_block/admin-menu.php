@@ -77,7 +77,7 @@
         </li>
     </ul>
     <hr class="footer">
-    <div class="footer small">
+    <div class="footer size-13">
         Loriup &copy; <?= date('Y'); ?>
     </div>
 </aside>

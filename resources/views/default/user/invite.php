@@ -14,9 +14,7 @@
                         <div class="row">
                             <div class="boxline">
                                 <button type="submit" class="button-primary"><?= lang('Sign in'); ?></button>
-                                <small>
-                                    <span class="menu-lf"><a href="/recover"><?= lang('Forgot your password'); ?>?</a></span>
-                                </small>
+                                <span class="menu-lf size-13"><a href="/recover"><?= lang('Forgot your password'); ?>?</a></span>
                             </div>
                         </div>
                     </form>

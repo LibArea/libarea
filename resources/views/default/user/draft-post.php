@@ -16,7 +16,7 @@
                             </div>
                             <div class="post-telo">
                                 <a href="/post/<?= $dr['post_id']; ?>/<?= $dr['post_slug']; ?>">
-                                    <h3 class="title"><?= $dr['post_title']; ?></h3>
+                                    <h3 class="title size-21"><?= $dr['post_title']; ?></h3>
                                 </a>
                                 <div class="footer">
                                     <span class="date">

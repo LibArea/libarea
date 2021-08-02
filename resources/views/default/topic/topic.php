@@ -17,7 +17,7 @@
                                 </a>
                             <?php } ?>
                         </h1>
-                        <div class="small"><?= $topic['topic_description']; ?></div>
+                        <div class="size-13"><?= $topic['topic_description']; ?></div>
                         <div class="topics-footer">
                             <?php if (!$uid['id']) { ?>
                                 <a href="/login">
@@ -34,7 +34,7 @@
                                     </div>
                                 <?php } ?>
                             <?php } ?>
-                            <a title="<?= lang('Info'); ?>" class="small lowercase right gray" href="/topic/<?= $topic['topic_slug']; ?>/info">
+                            <a title="<?= lang('Info'); ?>" class="size-13 lowercase right gray" href="/topic/<?= $topic['topic_slug']; ?>/info">
                                 <i class="light-icon-info-square"></i>
                             </a>
                         </div>
@@ -55,11 +55,11 @@
             <div class="inner-padding big">
                 <div class="flex">
                     <div class="box-post center box-number">
-                        <div class="style small gray lowercase"><?= lang('Posts-m'); ?></div>
+                        <div class="style size-13 gray lowercase"><?= lang('Posts-m'); ?></div>
                         <?= $topic['topic_count']; ?>
                     </div>
                     <div class="box-fav center box-number">
-                        <div class="style small gray lowercase"><?= lang('Reads'); ?></div>
+                        <div class="style size-13 gray lowercase"><?= lang('Reads'); ?></div>
                         <?= $topic['topic_focus_count']; ?>
                     </div>
                 </div>
@@ -69,9 +69,9 @@
         <?php if (!empty($main_topic)) { ?>
             <div class="white-box">
                 <div class="inner-padding big">
-                    <h3 class="style small"><?= lang('Root'); ?></h3>
+                    <h3 class="style size-13"><?= lang('Root'); ?></h3>
                     <div class="related-box">
-                        <a class="tags small" href="/topic/<?= $main_topic['topic_slug']; ?>">
+                        <a class="tags size-13" href="/topic/<?= $main_topic['topic_slug']; ?>">
                             <?= $main_topic['topic_title']; ?>
                         </a>
                     </div>
@@ -82,10 +82,10 @@
         <?php if (!empty($subtopics)) { ?>
             <div class="white-box">
                 <div class="inner-padding big">
-                    <h3 class="style small"><?= lang('Subtopics'); ?></h3>
+                    <h3 class="style size-13"><?= lang('Subtopics'); ?></h3>
                     <?php foreach ($subtopics as $sub) { ?>
                         <div class="related-box">
-                            <a class="tags small" href="/topic/<?= $sub['topic_slug']; ?>">
+                            <a class="tags size-13" href="/topic/<?= $sub['topic_slug']; ?>">
                                 <?= $sub['topic_title']; ?>
                             </a>
                         </div>
@@ -98,10 +98,10 @@
         <?php if (!empty($topic_related)) { ?>
             <div class="white-box">
                 <div class="inner-padding big">
-                    <h3 class="style small"><?= lang('Related'); ?></h3>
+                    <h3 class="style size-13"><?= lang('Related'); ?></h3>
                     <?php foreach ($topic_related as $related) { ?>
                         <div class="related-box">
-                            <a class="tags small" href="/topic/<?= $related['topic_slug']; ?>">
+                            <a class="tags size-13" href="/topic/<?= $related['topic_slug']; ?>">
                                 <?= $related['topic_title']; ?>
                             </a>
                         </div>

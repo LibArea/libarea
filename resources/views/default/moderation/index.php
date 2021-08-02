@@ -9,7 +9,7 @@
 
                         <?php foreach ($moderations as  $mod) { ?>
                             <div class="post-telo white-box">
-                                <div class="post-footer-full small lowercase">
+                                <div class="post-footer-full size-13 lowercase">
                                     <a href="/u/<?= $mod['login']; ?>">
                                         <?= user_avatar_img($mod['avatar'], 'small', $mod['login'], 'ava'); ?>
                                         <span class="indent">
@@ -28,7 +28,7 @@
                                         <i class="light-icon-language green"></i>
                                     <?php } ?>
                                 </div>
-                                <div class="small">
+                                <div class="size-13">
                                     <?= lang('Action'); ?>: <b><?= lang($mod['mod_action']); ?></b>
                                 </div>
                             </div>

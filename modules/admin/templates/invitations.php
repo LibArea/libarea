@@ -14,7 +14,7 @@
                                 =>
                                 <a href="/u/<?= $inv['login']; ?>"><?= $inv['login']; ?></a> <sup>id<?= $inv['active_uid']; ?></sup>
 
-                                <span class="date"><small> - <?= $inv['active_time']; ?></small></span>
+                                <span class="size-13"> - <?= $inv['active_time']; ?></span>
                             </div>
                         <?php } ?>
 

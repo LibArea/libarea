@@ -3,7 +3,7 @@
 <?php if ($uid['id'] == 0) { ?>
   <div class="banner">
     <div class="wrap-header">
-      <h1 class="red"><?= Lori\Config::get(Lori\Config::PARAM_BANNER_TITLE); ?></h1>
+      <h1 class="red size-21"><?= Lori\Config::get(Lori\Config::PARAM_BANNER_TITLE); ?></h1>
       <span><?= Lori\Config::get(Lori\Config::PARAM_BANNER_DESC); ?>...</span>
     </div>
   </div>
@@ -83,13 +83,13 @@
         <div class="white-box">
           <div class="inner-padding">
             <a class="right" title="<?= lang('Spaces'); ?>" href="/spaces"><i class="light-icon-chevron-right"></i></a>
-            <div class="bar-title small">
+            <div class="bar-title size-13">
               <?= lang('Signed'); ?>
             </div>
             <?php foreach ($space_user as  $sig) { ?>
               <a class="bar-space-telo" href="/s/<?= $sig['space_slug']; ?>" title="<?= $sig['space_name']; ?>">
                 <?= spase_logo_img($sig['space_img'], 'small', $sig['space_name'], 'ava-24'); ?>
-                <span class="indent small"><?= $sig['space_name']; ?></span>
+                <span class="indent size-13"><?= $sig['space_name']; ?></span>
                 <?php if ($sig['space_user_id'] == $uid['id']) { ?>
                   <sup class="red indent">+</sup>
                 <?php } ?>
@@ -107,7 +107,7 @@
         <div class="inner-padding">
           <?php foreach ($data['latest_answers'] as  $answer) { ?>
             <div class="sb-telo" style="border-left: 2px solid <?= $answer['space_color']; ?>;">
-              <div class="sb-date small">
+              <div class="sb-date size-13">
                 <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava'); ?>
                 <span class="indent"></span>
                 <?= $answer['answer_date']; ?>

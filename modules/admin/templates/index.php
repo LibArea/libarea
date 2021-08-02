@@ -14,8 +14,8 @@
                         <div class="stat-height">
                             <i class="light-icon-book gray"></i><sup><?= $stats['posts_count']; ?></sup>
                         </div>
-                        <div>
-                            <small><?= lang('Posts'); ?></small>
+                        <div class="size-13">
+                            <?= lang('Posts'); ?>
                         </div>
                     </a>
                 </div>
@@ -24,8 +24,8 @@
                         <div class="stat-height">
                             <i class="light-icon-message gray"></i><sup><?= $stats['answers_count']; ?></sup>
                         </div>
-                        <div>
-                            <small><?= lang('Answers-n'); ?></small>
+                        <div class="size-13">
+                            <?= lang('Answers-n'); ?>
                         </div>
                     </a>
                 </div>
@@ -34,8 +34,8 @@
                         <div class="stat-height">
                             <i class="light-icon-messages gray"></i><sup><?= $stats['comments_count']; ?></sup>
                         </div>
-                        <div>
-                            <small><?= lang('Comments-n'); ?></small>
+                        <div class="size-13">
+                            <?= lang('Comments-n'); ?>
                         </div>
                     </a>
                 </div>
@@ -45,8 +45,8 @@
                         <div class="stat-height">
                             <i class="light-icon-users red"></i><sup><?= $stats['users_count']; ?></sup>
                         </div>
-                        <div>
-                            <small><?= lang('Users'); ?></small>
+                        <div class="size-13">
+                            <?= lang('Users'); ?>
                         </div>
                     </a>
                 </div>
@@ -55,8 +55,8 @@
                         <div class="stat-height">
                             <i class="light-icon-infinity green"></i><sup><?= $stats['spaces_count']; ?></sup>
                         </div>
-                        <div>
-                            <small><?= lang('Spaces'); ?></small>
+                        <div class="size-13">
+                            <?= lang('Spaces'); ?>
                         </div>
                     </a>
                 </div>
@@ -65,8 +65,8 @@
                         <div class="stat-height">
                             <i class="light-icon-layers-subtract brown"></i><sup><?= $stats['topics_count']; ?></sup>
                         </div>
-                        <div>
-                            <small><?= lang('Topics'); ?></small>
+                        <div class="size-13">
+                            <?= lang('Topics'); ?>
                         </div>
                     </a>
                 </div>
@@ -75,8 +75,8 @@
                         <div class="stat-height">
                             <i class="light-icon-link blue"></i><sup><?= $stats['links_count']; ?></sup>
                         </div>
-                        <div>
-                            <small><?= lang('Domains'); ?></small>
+                        <div class="size-13">
+                            <?= lang('Domains'); ?>
                         </div>
                     </a>
                 </div>

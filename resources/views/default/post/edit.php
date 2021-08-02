@@ -31,8 +31,8 @@
 
                                     <input type="hidden" name="content_img" value="<?= $post['post_content_img']; ?>">
 
-                                    <a class="img-remove" href="/post/img/<?= $post['post_id']; ?>/remove">
-                                        <small><?= lang('Remove'); ?></small>
+                                    <a class="img-remove size-13" href="/post/img/<?= $post['post_id']; ?>/remove">
+                                        <?= lang('Remove'); ?>
                                     </a>
                                 </div>
                             <?php } ?>

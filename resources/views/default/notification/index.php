@@ -3,7 +3,7 @@
     <main>
         <div class="white-box">
             <div class="inner-padding">
-                <a class="right small button vertical-ind" href="/notifications/delete"><?= lang('I read'); ?></a>
+                <a class="right size-13 button vertical-ind" href="/notifications/delete"><?= lang('I read'); ?></a>
                 <?= breadcrumb('/', lang('Home'), '/u/' . $uid['login'], lang('Profile'), $data['h1']); ?>
 
                 <?php if (!empty($list)) { ?>
@@ -76,7 +76,7 @@
                                     <?= lang('to your answer'); ?>
                                 <?php } ?>
                             </span>
-                            <span class="small gray"> — <?= $notif['add_time']; ?></span>
+                            <span class="size-13 gray"> — <?= $notif['add_time']; ?></span>
                             <?php if ($notif['read_flag'] == 0) { ?>&nbsp;<sup class="red">✔</sup><?php } ?>
                         </div>
                     <?php } ?>

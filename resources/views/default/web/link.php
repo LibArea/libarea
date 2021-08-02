@@ -10,7 +10,7 @@
                     <h1><?= $link['link_title']; ?>
                         <?php if ($uid['trust_level'] > 4) { ?>
                             <span class="indent"></span>
-                            <a class="small" title="<?= lang('Edit'); ?>" href="/admin/webs/<?= $link['link_id']; ?>/edit">
+                            <a class="size-13" title="<?= lang('Edit'); ?>" href="/admin/webs/<?= $link['link_id']; ?>/edit">
                                 <i class="light-icon-edit middle"></i>
                             </a>
                         <?php } ?>
@@ -41,11 +41,11 @@
         <div class="white-box">
             <div class="inner-padding space-tags">
                 <?php if (!empty($domains)) { ?>
-                    <div class="bar-title small"><?= lang('Domains'); ?></div>
+                    <div class="bar-title size-13"><?= lang('Domains'); ?></div>
                     <?php foreach ($domains as  $domain) { ?>
-                        <a class="date small gray" href="/domain/<?= $domain['link_url_domain']; ?>">
+                        <a class="size-13 gray" href="/domain/<?= $domain['link_url_domain']; ?>">
                             <i class="light-icon-link middle"></i> <?= $domain['link_url_domain']; ?>
-                            <sup class="date small"><?= $domain['link_count']; ?></sup>
+                            <sup class="size-13"><?= $domain['link_count']; ?></sup>
                         </a><br>
                     <?php } ?>
                 <?php } else { ?>

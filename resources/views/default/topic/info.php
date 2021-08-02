@@ -3,7 +3,7 @@
     <main>
         <div class="white-box">
             <div class="inner-padding">
-                <a class="small" title="<?= lang('All topics'); ?>" href="/topics"> ← <?= lang('Topics'); ?></a>
+                <a class="size-13" title="<?= lang('All topics'); ?>" href="/topics"> ← <?= lang('Topics'); ?></a>
 
                 <h1 class="topics"><a href="/topic/<?= $topic['topic_slug']; ?>"><?= $data['h1']; ?></a>
                     <?php if ($uid['trust_level'] == 5) { ?>
@@ -23,7 +23,7 @@
             <div class="white-box">
                 <div class="inner-padding">
                     <div class="related">
-                        <h3 class="style small"><?= lang('By topic'); ?>:</h3>
+                        <h3 class="style size-13"><?= lang('By topic'); ?>:</h3>
                         <?php $num = 0; ?>
                         <?php foreach ($post_related as $related) { ?>
                             <div class="related-box-num">
@@ -61,9 +61,9 @@
         <?php if (!empty($main_topic)) { ?>
             <div class="white-box">
                 <div class="inner-padding big">
-                    <h3 class="style small"><?= lang('Root'); ?></h3>
+                    <h3 class="style size-13"><?= lang('Root'); ?></h3>
                     <div class="related-box">
-                        <a class="tags small" href="/topic/<?= $main_topic['topic_slug']; ?>">
+                        <a class="tags size-13" href="/topic/<?= $main_topic['topic_slug']; ?>">
                             <?= $main_topic['topic_title']; ?>
                         </a>
                     </div>
@@ -74,10 +74,10 @@
         <?php if (!empty($subtopics)) { ?>
             <div class="white-box">
                 <div class="inner-padding big">
-                    <h3 class="style small"><?= lang('Subtopics'); ?></h3>
+                    <h3 class="style size-13"><?= lang('Subtopics'); ?></h3>
                     <?php foreach ($subtopics as $sub) { ?>
                         <div class="related-box">
-                            <a class="tags small" href="/topic/<?= $sub['topic_slug']; ?>">
+                            <a class="tags size-13" href="/topic/<?= $sub['topic_slug']; ?>">
                                 <?= $sub['topic_title']; ?>
                             </a>
                         </div>
@@ -90,10 +90,10 @@
         <?php if (!empty($topic_related)) { ?>
             <div class="white-box">
                 <div class="inner-padding big">
-                    <h3 class="style small"><?= lang('Related'); ?></h3>
+                    <h3 class="style size-13"><?= lang('Related'); ?></h3>
                     <?php foreach ($topic_related as $related) { ?>
                         <div class="related-box">
-                            <a class="tags small" href="/topic/<?= $related['topic_slug']; ?>">
+                            <a class="tags size-13" href="/topic/<?= $related['topic_slug']; ?>">
                                 <?= $related['topic_title']; ?>
                             </a>
                         </div>

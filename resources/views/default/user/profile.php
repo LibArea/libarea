@@ -78,13 +78,13 @@
 
                                     <?php if ($data['spaces_user']) { ?>
                                         <br>
-                                        <div class="bar-title small"><?= lang('Created by'); ?></div>
+                                        <div class="bar-title size-13"><?= lang('Created by'); ?></div>
                                         <span class="d">
                                             <?php foreach ($data['spaces_user'] as  $space) { ?>
                                                 <div class="profile-space">
                                                     <a class="bar-space-telo" href="/s/<?= $space['space_slug']; ?>">
                                                         <?= spase_logo_img($space['space_img'], 'small', $space['space_name'], 'space-logo'); ?>
-                                                        <span class="bar-name small"><?= $space['space_name']; ?></span>
+                                                        <span class="bar-name size-13"><?= $space['space_name']; ?></span>
                                                     </a>
                                                 </div>
                                             <?php } ?>
@@ -183,7 +183,7 @@
                                                 <h2><?= $onepost['post_title']; ?></h2>
                                             </a>
 
-                                            <div class="small lowercase">
+                                            <div class="size-13 lowercase">
                                                 <a class="gray" href="/u/<?= $user['login']; ?>">
                                                     <?= user_avatar_img($user['avatar'], 'small', $user['login'], 'ava'); ?>
                                                     <span class="indent"></span>
