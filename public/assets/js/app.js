@@ -57,12 +57,12 @@ $(function(){
 
     // Subscribe to a topic / space / post
     $(document).on("click", ".focus-id", function(){      
-        let focus_id  = $(this).data('id');
+        let content_id  = $(this).data('id');
         let type_content    = $(this).data('type');
         $.ajax({
             url: '/focus/' + type_content,
             type: 'POST',
-            data: {focus_id: focus_id},
+            data: {content_id: content_id},
         }).done(function(data) {
             location.reload();
         });
