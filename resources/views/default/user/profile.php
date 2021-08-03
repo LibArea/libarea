@@ -236,7 +236,7 @@
                                         <i class="light-icon-settings middle"></i>
                                         <span class="middle"><?= lang('Edit'); ?></span>
                                     </a>
-                                    <a class="gray" href="/admin/badge/user/add/<?= $user['id']; ?>">
+                                    <a class="gray" href="/admin/badges/user/add/<?= $user['id']; ?>">
                                         <i class="light-icon-award middle"></i>
                                         <span class="middle"><?= lang('Reward the user'); ?></span>
                                     </a>

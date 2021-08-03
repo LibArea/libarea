@@ -52,15 +52,15 @@
 
                                             <?php } ?>
                                             <?php if ($sp['space_id'] != 1) { ?>
-                                                <span class="white">+ <?= $sp['users'] ?></span>
+                                                <span class="white absolute right-10">+ <?= $sp['users'] ?></span>
                                             <?php } ?>
 
-                                            <a title="<?= $sp['space_name']; ?>" class="space-img-box" href="/s/<?= $sp['space_slug']; ?>">
+                                            <a title="<?= $sp['space_name']; ?>" class="space-img-box absolute" href="/s/<?= $sp['space_slug']; ?>">
                                                 <?= spase_logo_img($sp['space_img'], 'max', $sp['space_name'], 'ava-54'); ?>
                                             </a>
 
                                             <span class="space-name">
-                                                <a title="<?= $sp['space_name']; ?>" class="space-s size-21" href="/s/<?= $sp['space_slug']; ?>">
+                                                <a title="<?= $sp['space_name']; ?>" class="space-s absolute size-21" href="/s/<?= $sp['space_slug']; ?>">
                                                     <span class="space-name"> <?= $sp['space_name']; ?></span>
                                                 </a>
                                             </span>
@@ -68,7 +68,7 @@
                                             <?php if (!$uid['id']) { ?>
                                                 <div class="top-15-px">
                                                     <a href="/login">
-                                                        <div class="hide-space-id yes-space">
+                                                        <div class="focus-space yes-space">
                                                             <i class="light-icon-plus middle"></i>
                                                             <span class="middle"><?= lang('Read'); ?></span>
                                                         </div>
@@ -79,12 +79,12 @@
                                                     <?php if ($sp['space_user_id'] != $uid['id']) { ?>
                                                         <div class="top-15-px">
                                                             <?php if ($sp['signed_space_id'] >= 1) { ?>
-                                                                <div data-id="<?= $sp['space_id']; ?>" class="hide-space-id absolute">
+                                                                <div data-id="<?= $sp['space_id']; ?>" data-type="space" class="focus-id focus-space absolute">
                                                                     <i class="light-icon-check middle"></i>
                                                                     <span class="middle"><?= lang('Unsubscribe'); ?></span>
                                                                 </div>
                                                             <?php } else { ?>
-                                                                <div data-id="<?= $sp['space_id']; ?>" class="hide-space-id absolute">
+                                                                <div data-id="<?= $sp['space_id']; ?>" data-type="space" class="focus-id focus-space absolute">
                                                                     <i class="light-icon-plus middle"></i>
                                                                     <span class="middle"><?= lang('Read'); ?></span>
                                                                 </div>
@@ -92,7 +92,7 @@
                                                         </div>
                                                     <?php } ?>
                                                     <?php if ($sp['space_user_id'] == $uid['id']) { ?>
-                                                        <div class="hide-space-id absolute">
+                                                        <div class="focus-space absolute">
                                                             <i class="light-icon-checks middle"></i>
                                                             <span class="middle"><?= lang('Created by'); ?></span>
                                                         </div>

@@ -13,22 +13,24 @@ class UploadImage
     // Запишем img
     public static function img($img, $content_id, $type)
     {
-        if ($type == 'topic') {
-            // 160px и 24px
+        switch ($type) {
+        case 'topic':
             $path_img       = HLEB_PUBLIC_DIR . '/uploads/topics/';
             $path_img_small = HLEB_PUBLIC_DIR . '/uploads/topics/small/';
             $pref = 't-';
             $default_img = 'topic-default.png';
-        } elseif ($type == 'user') {
-            $path_img       = HLEB_PUBLIC_DIR . '/uploads/users/avatars/';
-            $path_img_small = HLEB_PUBLIC_DIR . '/uploads/users/avatars/small/';
-            $pref =  'a-';
-            $default_img = 'noavatar.png';
-        } elseif ($type == 'space') {
+            break;
+        case 'space':
             $path_img       = HLEB_PUBLIC_DIR . '/uploads/spaces/logos/';
             $path_img_small = HLEB_PUBLIC_DIR . '/uploads/spaces/logos/small/';
             $pref =  's-';
             $default_img = 'space_no.png';
+            break;
+        default: 
+            $path_img       = HLEB_PUBLIC_DIR . '/uploads/users/avatars/';
+            $path_img_small = HLEB_PUBLIC_DIR . '/uploads/users/avatars/small/';
+            $pref =  'a-';
+            $default_img = 'noavatar.png';
         }
 
         $name = $img['name'][0];
@@ -52,12 +54,12 @@ class UploadImage
             if ($type == 'topic') {
                 $images     = TopicModel::getTopic($content_id, 'id');
                 $foto       = $images['topic_img'];
-            } elseif ($type == 'user') {
-                $images     = UserModel::getUser($content_id, 'id');
-                $foto       = $images['avatar'];
             } elseif ($type == 'space') {
                 $images     = SpaceModel::getSpace($content_id, 'id');
                 $foto       = $images['space_img'];
+            } else {
+                $images     = UserModel::getUser($content_id, 'id');
+                $foto       = $images['avatar'];
             }
 
             // Удалим старую аватарку, кроме дефолтной
@@ -69,12 +71,11 @@ class UploadImage
             }
 
             if ($type == 'topic') {
-                // Запишем новую 
                 TopicModel::setImg($content_id, $new_img);
-            } elseif ($type == 'user') {
-                UserModel::setImg($content_id, $new_img);
             } elseif ($type == 'space') {
                 SpaceModel::setImg($content_id, $new_img);
+            } else {
+                UserModel::setImg($content_id, $new_img);
             }
 
             return true;
@@ -121,13 +122,13 @@ class UploadImage
     // Обложка участника и пространств
     public static function cover($cover, $content_id, $type)
     {
-        if ($type == 'user') {
-            // 1920px / 350px
-            $path_cover_img     = HLEB_PUBLIC_DIR . '/uploads/users/cover/';
-            $path_cover_small   = HLEB_PUBLIC_DIR . '/uploads/users/cover/small/';
-            $pref = 'cover-';
-            $default_img = 'cover_art.jpeg';
-        } elseif ($type == 'space') {
+        // 1920px / 350px
+        $path_cover_img     = HLEB_PUBLIC_DIR . '/uploads/users/cover/';
+        $path_cover_small   = HLEB_PUBLIC_DIR . '/uploads/users/cover/small/';
+        $pref = 'cover-';
+        $default_img = 'cover_art.jpeg';
+            
+        if ($type == 'space') {
             $path_cover_img     = HLEB_PUBLIC_DIR . '/uploads/spaces/cover/';
             $path_cover_small   = HLEB_PUBLIC_DIR . '/uploads/spaces/cover/small/';
             $pref = 'cover-';

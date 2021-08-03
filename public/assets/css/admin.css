@@ -67,7 +67,15 @@ a:hover {
   color: #e45735;
 }
 
+
+img { vertical-align: middle; }
 li { list-style-type: none; }
+
+.ava {
+  vertical-align: middle;
+  width: 18px;
+}
+
 .size-13 { font-size: 13px; }
 .size-21 { font-size: 21px; }
 .red { color: #e45735; }
@@ -82,13 +90,11 @@ li { list-style-type: none; }
 .left { float: left; }
 .indent { margin: 0 3px; }
 .admin-menu { padding: 0; }
-.ava { vertical-align: middle; }
 .lowercase { text-transform: lowercase; }
 .flex { display: flex; }
 .center { text-align: center; }
 .max-width { max-width: 800px; }
-img { vertical-align: middle; }
-.ava { width: 18px; }
+.ava-24 { width: 24px; }
 .ava-64 { width: 64px; }
 .nav a i { margin-right: 10px; }
 .nav:hover { background-color: #3a3d4b; }

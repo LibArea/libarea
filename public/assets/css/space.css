@@ -1,18 +1,3 @@
-.my_space {
-  background-color: #e7672e;
-  width: 5px;
-  height: 5px;
-  position: absolute;
-  border: 1px solid #fff;
-  left: 13px;
-  top: 6px;
-}
-
-.my_space.all {
-  left: 49px;
-  top: 19px;
-}
-
 .space-text a {
   color: #fff;
 }
@@ -247,7 +232,6 @@ a.add-space-post:hover {
 }
 
 .space-img-box {
-  position: absolute;
   left: 10px;
 }
 
@@ -257,15 +241,8 @@ a.add-space-post:hover {
   border-radius: 2px;
 }
 
-.white {
-  color: #fff;
-  position: absolute;
-  right: 10px;
-}
-
 .space-s {
   color: #fff;
-  position: absolute;
   left: 76px;
   top: 21px;
 }
@@ -274,18 +251,15 @@ a.add-space-post:hover {
   color: #eee;
 }
 
-.hide-space-id {
+/* signed */
+.focus-space {
   color: #fff;
   padding: 2px 8px;
   border-radius: 20px;
   bottom: 10px;
 }
 
-.hide-space-id.absolute {
-  position: absolute;
-}
-
-.hide-space-id:hover {
+.focus-space:hover {
   background: hsla(0, 0%, 100%, 0.2);
   padding: 2px 8px;
 }

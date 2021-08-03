@@ -664,6 +664,26 @@ CREATE TABLE `votes_post` (
   `votes_post_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `post_signed`
+--
+
+CREATE TABLE `post_signed` (
+  `signed_id` int(11) NOT NULL,
+  `signed_post_id` int(11) NOT NULL,
+  `signed_user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+ALTER TABLE `post_signed`
+  ADD PRIMARY KEY (`signed_id`);
+
+
+ALTER TABLE `post_signed`
+  MODIFY `signed_id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- Индексы сохранённых таблиц
 --

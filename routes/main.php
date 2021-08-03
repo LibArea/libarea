@@ -10,8 +10,8 @@ Route::before('Authorization@noAuth')->getGroup();
         Route::get('/post/addpostprof')->controller('Post\PostController@addPostProfile');
         Route::get('/favorite/post')->controller('FavoriteController', ['post']);
         Route::get('/favorite/answer')->controller('FavoriteController', ['answer']);
-        Route::get('/space/focus')->controller('Space\SpaceController@focus');
-        Route::get('/topic/focus')->controller('Topic\TopicController@focus');
+        Route::get('/focus/space')->controller('Space\SpaceController@focus');
+        Route::get('/focus/topic')->controller('Topic\TopicController@focus');
         // @ users | posts | topics | mains 
         Route::get('/search/{type}')->controller('ActionController@select')->where(['type' => '[a-z]+']);
         // @ post | answer | comment | link

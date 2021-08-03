@@ -55,14 +55,14 @@ $(function(){
         }, false);
     }
 
- 
-    // Subscribe to a topic
-    $(document).on("click", ".focus-topic", function(){      
-        let topic_id  = $(this).data('id');  
+    // Subscribe to a topic / space / post
+    $(document).on("click", ".focus-id", function(){      
+        let focus_id  = $(this).data('id');
+        let type_content    = $(this).data('type');
         $.ajax({
-            url: '/topic/focus',
+            url: '/focus/' + type_content,
             type: 'POST',
-            data: {topic_id: topic_id},
+            data: {focus_id: focus_id},
         }).done(function(data) {
             location.reload();
         });
@@ -80,18 +80,7 @@ $(function(){
             $('#up' + up_id).find('.score').html('+');
         });
     });
-    // Subscribe to the blog
-    $(document).on("click", ".hide-space-id", function(){      
-        let space_id  = $(this).data('id');  
-        $.ajax({
-            url: '/space/focus',
-            type: 'POST',
-            data: {space_id: space_id},
-        }).done(function(data) {
-            location.reload();
-        });
-    }); 
-    // Add a post to your profile
+     // Add a post to your profile
     $(document).on("click", ".user-mypost", function(){  
         let post_id = $(this).data('post'); 
         let opt     = $(this).data('opt');

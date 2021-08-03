@@ -13,7 +13,7 @@
                     <?php if (!$uid['id']) { ?>
                         <div class="right">
                             <a href="/login">
-                                <div class="hide-space-id yes-space">+ <?= lang('Read'); ?></div>
+                                <div class="focus-space yes-space">+ <?= lang('Read'); ?></div>
                             </a>
                         </div>
                     <?php } else { ?>
@@ -21,12 +21,12 @@
                             <?php if ($space_info['space_user_id'] != $uid['id']) { ?>
                                 <div class="right">
                                     <?php if ($space_signed == 1) { ?>
-                                        <div data-id="<?= $space_info['space_id']; ?>" class="hide-space-id no-space">
+                                        <div data-id="<?= $space_info['space_id']; ?>" data-type="space" class="focus-id focus-space no-space">
                                             <i class="light-icon-check middle"></i>
                                             <span class="middle"><?= lang('Unsubscribe'); ?></span>
                                         </div>
                                     <?php } else { ?>
-                                        <div data-id="<?= $space_info['space_id']; ?>" class="hide-space-id yes-space">
+                                        <div data-id="<?= $space_info['space_id']; ?>" data-type="space" class="focus-id focus-space yes-space">
                                             <i class="light-icon-plus middle"></i>
                                             <span class="middle"><?= lang('Read'); ?></span>
                                         </div>

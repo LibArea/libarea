@@ -100,10 +100,6 @@
                     <?= PHP_VERSION; ?>
                 </div>
                 <div class="boxline">
-                    <label for="name">MySQL:</label>
-                    <?= mysqli_get_client_info(); ?>
-                </div>
-                <div class="boxline">
                     <label for="name"><?= lang('Freely'); ?>:</label>
                     <?= $data['bytes']; ?>
                 </div>

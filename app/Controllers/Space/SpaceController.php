@@ -155,7 +155,7 @@ class SpaceController extends \MainController
     public function focus()
     {
         $uid        = Base::getUid();
-        $space_id   = \Request::getPostInt('space_id');
+        $space_id   = \Request::getPostInt('focus_id');
 
         // Запретим, если участник создал пространство
         $sp_info    = SpaceModel::getSpace($space_id, 'id');

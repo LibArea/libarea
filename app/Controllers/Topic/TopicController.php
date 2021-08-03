@@ -156,7 +156,7 @@ class TopicController extends \MainController
     public function focus()
     {
         $uid        = Base::getUid();
-        $topic_id   = \Request::getPostInt('topic_id');
+        $topic_id   = \Request::getPostInt('focus_id');
 
         TopicModel::focus($topic_id, $uid['id']);
 

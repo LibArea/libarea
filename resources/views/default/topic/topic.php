@@ -25,11 +25,11 @@
                                 </a>
                             <?php } else { ?>
                                 <?php if ($topic_signed == 1) { ?>
-                                    <div data-id="<?= $topic['topic_id']; ?>" class="del-focus focus-topic">
+                                    <div data-id="<?= $topic['topic_id']; ?>" data-type="topic" class="focus-id del-focus focus-topic">
                                         <?= lang('Unsubscribe'); ?>
                                     </div>
                                 <?php } else { ?>
-                                    <div data-id="<?= $topic['topic_id']; ?>" class="add-focus focus-topic">
+                                    <div data-id="<?= $topic['topic_id']; ?>" data-type="topic" class="focus-id add-focus focus-topic">
                                         + <?= lang('Read'); ?>
                                     </div>
                                 <?php } ?>

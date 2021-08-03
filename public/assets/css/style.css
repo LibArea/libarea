@@ -95,7 +95,6 @@ img {
   margin-top: 8px;
 }
 
-
 .indent { margin: 0 5px; }
 .indent-big { margin: 0 0 0 15px; }
 .vertical { margin: 5px 0; }
@@ -104,6 +103,7 @@ img {
 .clear { clear: both; }
 .right { float: right; }
 .left { float: left; }
+.right-10 { right: 10px; }
 .size-13 { font-size: 13px; }
 .size-21 { font-size: 21px; }
 .center { text-align: center; }
@@ -112,12 +112,14 @@ img {
 .green { color: #390; }
 .blue { color: #54b9f7; }
 .gray { color: var(--tertiary); }
-.comm-body { padding: 5px 5px 5px 15px; }
+.white { color: var(--secondary); }
 .red { color: var(--quaternary); }
+.comm-body { padding: 5px 5px 5px 15px; }
 .flex { display: flex; }
 .justify-content-between { justify-content: space-between; }
 .align-items-center { align-items: center; }
 .italic { font-style: italic; }
+.absolute { position: absolute; }
 
 .translation,
 .trust-level {
@@ -1319,7 +1321,6 @@ i.light-icon-brand-github:hover {
 
 .dropdown-menu {
   display: none;
-  position: absolute;
   background-color: var(--secondary);
   min-width: 155px;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
@@ -1362,7 +1363,6 @@ i.light-icon-brand-github:hover {
 }
 
 .img-box {
-  position: absolute;
   left: 5px;
   top: 17px;
 }

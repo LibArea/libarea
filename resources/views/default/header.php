@@ -72,7 +72,7 @@
             <?= user_avatar_img($uid['avatar'], 'small', $uid['login'], 'ava'); ?>
             <i class="light-icon-chevron-down middle"></i>
           </div>
-          <div class="dropdown-menu">
+          <div class="dropdown-menu absolute">
             <span class="st"></span>
             <a class="dr-menu" href="/u/<?= $uid['login']; ?>">
               <i class="light-icon-user middle"></i>
