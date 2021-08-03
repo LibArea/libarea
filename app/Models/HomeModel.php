@@ -91,15 +91,15 @@ class HomeModel extends \MainModel
                                 relation_post_id,
 
                                 GROUP_CONCAT(topic_slug, '@', topic_title SEPARATOR '@') AS topic_list
-                                FROM topic  
-                                LEFT JOIN topic_post_relation 
+                                FROM topics  
+                                LEFT JOIN topics_post_relation 
                                     on topic_id = relation_topic_id
                                 GROUP BY relation_post_id
                         ) AS rel
                             ON rel.relation_post_id = post_id 
 
             INNER JOIN users ON id = post_user_id
-            INNER JOIN space ON space_id = post_space_id
+            INNER JOIN spaces ON space_id = post_space_id
             LEFT JOIN votes_post ON votes_post_item_id = post_id AND votes_post_user_id = ". $uid['id'] ."
             
             $string $display $sort LIMIT $start, $limit"; 
@@ -137,7 +137,7 @@ class HomeModel extends \MainModel
      
         $sql = "SELECT post_id, post_space_id, space_id
                 FROM posts
-                INNER JOIN space ON space_id = post_space_id
+                INNER JOIN spaces ON space_id = post_space_id
                 $string $display";
 
         return DB::run($sql)->rowCount(); 
@@ -175,7 +175,7 @@ class HomeModel extends \MainModel
                         FROM answers 
                         LEFT JOIN posts ON post_id = answer_post_id
                         LEFT JOIN users ON id = answer_user_id
-                        LEFT JOIN space ON post_space_id = space_id 
+                        LEFT JOIN spaces ON post_space_id = space_id 
                         WHERE answer_is_deleted = 0 
                         $user_answer 
                         ORDER BY answer_id DESC LIMIT 5";
@@ -196,8 +196,8 @@ class HomeModel extends \MainModel
                     signed_space_id, 
                     signed_user_id
  
-                        FROM space 
-                        LEFT JOIN space_signed ON signed_space_id = space_id AND signed_user_id = :user_id 
+                        FROM spaces 
+                        LEFT JOIN spaces_signed ON signed_space_id = space_id AND signed_user_id = :user_id 
                         WHERE space_is_delete != 1 AND signed_user_id = :user_id";
 
        return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);  

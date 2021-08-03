@@ -3,6 +3,7 @@
 namespace App\Controllers\Space;
 
 use Hleb\Constructor\Handlers\Request;
+use App\Models\SubscriptionModel;
 use App\Models\SpaceModel;
 use App\Models\FeedModel;
 use Lori\Content;
@@ -121,7 +122,7 @@ class SpaceController extends \MainController
         $space['users'] = SpaceModel::numSpaceSubscribers($space['space_id']);
 
         // Отписан участник от пространства или нет
-        $space_signed = SpaceModel::getMyFocus($space['space_id'], $uid['id']);
+        $space_signed = SubscriptionModel::getFocus($space['space_id'], $uid['id'], 'space');
 
         if ($sheet == 'feed') {
             $s_title = lang('space-feed-title');
@@ -149,22 +150,5 @@ class SpaceController extends \MainController
         ];
 
         return view(PR_VIEW_DIR . '/space/space', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'space_info' => $space, 'space_signed' => $space_signed]);
-    }
-
-    // Подписка / отписка от пространств
-    public function focus()
-    {
-        $uid        = Base::getUid();
-        $space_id   = \Request::getPostInt('focus_id');
-
-        // Запретим, если участник создал пространство
-        $sp_info    = SpaceModel::getSpace($space_id, 'id');
-        if ($sp_info['space_user_id'] == $uid['id']) {
-            return false;
-        }
-
-        SpaceModel::focus($space_id, $uid['id']);
-
-        return true;
     }
 }

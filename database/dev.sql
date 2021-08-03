@@ -40,10 +40,10 @@ CREATE TABLE `audits` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `badge`
+-- Структура таблицы `badges`
 --
 
-CREATE TABLE `badge` (
+CREATE TABLE `badges` (
   `badge_id` int(11) NOT NULL,
   `badge_icon` varchar(550) NOT NULL,
   `badge_tl` int(6) DEFAULT NULL,
@@ -53,19 +53,19 @@ CREATE TABLE `badge` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Дамп данных таблицы `badge`
+-- Дамп данных таблицы `badges`
 --
 
-INSERT INTO `badge` (`badge_id`, `badge_icon`, `badge_tl`, `badge_score`, `badge_title`, `badge_description`) VALUES
+INSERT INTO `badges` (`badge_id`, `badge_icon`, `badge_tl`, `badge_score`, `badge_title`, `badge_description`) VALUES
 (1, '<i title=\"Тестер\" class=\"light-icon-bug\"></i>', 0, 0, 'Тестер', 'Сообщение об ошибке, которое понравилось команде сайта.');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `badge_user`
+-- Структура таблицы `badges_user`
 --
 
-CREATE TABLE `badge_user` (
+CREATE TABLE `badges_user` (
   `bu_id` int(11) NOT NULL,
   `bu_badge_id` int(6) NOT NULL,
   `bu_user_id` int(6) NOT NULL
@@ -96,10 +96,10 @@ CREATE TABLE `comments` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `favorite`
+-- Структура таблицы `favorites`
 --
 
-CREATE TABLE `favorite` (
+CREATE TABLE `favorites` (
   `favorite_id` mediumint(8) NOT NULL,
   `favorite_user_id` mediumint(8) NOT NULL,
   `favorite_tid` int(11) NOT NULL,
@@ -109,10 +109,10 @@ CREATE TABLE `favorite` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `invitation`
+-- Структура таблицы `invitations`
 --
 
-CREATE TABLE `invitation` (
+CREATE TABLE `invitations` (
   `invitation_id` int(10) UNSIGNED NOT NULL,
   `uid` int(11) DEFAULT 0,
   `invitation_code` varchar(32) DEFAULT NULL,
@@ -206,10 +206,10 @@ CREATE TABLE `moderations` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `notification`
+-- Структура таблицы `notifications`
 --
 
-CREATE TABLE `notification` (
+CREATE TABLE `notifications` (
   `notification_id` int(11) NOT NULL,
   `sender_uid` int(11) DEFAULT NULL COMMENT 'Отправитель',
   `recipient_uid` int(11) DEFAULT 0 COMMENT 'Получает ID',
@@ -272,10 +272,10 @@ INSERT INTO `posts` (`post_id`, `post_title`, `post_slug`, `post_type`, `post_tr
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `report`
+-- Структура таблицы `reports`
 --
 
-CREATE TABLE `report` (
+CREATE TABLE `reports` (
   `report_id` int(11) NOT NULL,
   `report_user_id` int(11) NOT NULL DEFAULT 0 COMMENT 'Индификатор участника id',
   `report_type` varchar(50) NOT NULL COMMENT 'Тип контента',
@@ -289,10 +289,10 @@ CREATE TABLE `report` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `space`
+-- Структура таблицы `spaces`
 --
 
-CREATE TABLE `space` (
+CREATE TABLE `spaces` (
   `space_id` int(11) NOT NULL,
   `space_name` varchar(250) NOT NULL,
   `space_slug` varchar(128) NOT NULL,
@@ -313,10 +313,10 @@ CREATE TABLE `space` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Дамп данных таблицы `space`
+-- Дамп данных таблицы `spaces`
 --
 
-INSERT INTO `space` (`space_id`, `space_name`, `space_slug`, `space_description`, `space_img`, `space_cover_art`, `space_text`, `space_short_text`, `space_date`, `space_color`, `space_category_id`, `space_user_id`, `space_type`, `space_permit_users`, `space_feed`, `space_tl`, `space_is_delete`) VALUES
+INSERT INTO `spaces` (`space_id`, `space_name`, `space_slug`, `space_description`, `space_img`, `space_cover_art`, `space_text`, `space_short_text`, `space_date`, `space_color`, `space_category_id`, `space_user_id`, `space_type`, `space_permit_users`, `space_feed`, `space_tl`, `space_is_delete`) VALUES
 (1, 'meta', 'meta', 'Мета-обсуждение самого сайта, включая вопросы, предложения и отчеты об ошибках.', 'space_no.png', 'space_cover_no.jpeg', 'тест 1...', 'Короткое описание...', '2021-02-28 06:15:58', '#339900', 1, 1, 1, 0, 0, 0, 0),
 (2, 'Вопросы', 'qa', 'Вопросы по скрипту и не только', 'space_no.png', 'space_cover_no.jpeg', 'Вопросы по скрипту и не только', 'Короткое описание...', '2021-02-28 06:15:58', '#333333', 1, 1, 1, 0, 0, 0, 0),
 (3, 'флуд', 'flud', 'Просто обычные разговоры', 'space_no.png', 'space_cover_no.jpeg', 'тест 3...', 'Короткое описание...', '2021-02-28 06:15:58', '#f56400', 1, 1, 0, 0, 0, 0, 0);
@@ -324,20 +324,20 @@ INSERT INTO `space` (`space_id`, `space_name`, `space_slug`, `space_description`
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `space_signed`
+-- Структура таблицы `spaces_signed`
 --
 
-CREATE TABLE `space_signed` (
+CREATE TABLE `spaces_signed` (
   `signed_id` int(11) NOT NULL,
   `signed_space_id` int(11) NOT NULL,
   `signed_user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Дамп данных таблицы `space_signed`
+-- Дамп данных таблицы `spaces_signed`
 --
 
-INSERT INTO `space_signed` (`signed_id`, `signed_space_id`, `signed_user_id`) VALUES
+INSERT INTO `spaces_signed` (`signed_id`, `signed_space_id`, `signed_user_id`) VALUES
 (1, 1, 1),
 (2, 2, 1),
 (3, 3, 1);
@@ -359,10 +359,10 @@ CREATE TABLE `stop_words` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `topic`
+-- Структура таблицы `topics`
 --
 
-CREATE TABLE `topic` (
+CREATE TABLE `topics` (
   `topic_id` int(11) NOT NULL,
   `topic_title` varchar(64) DEFAULT NULL,
   `topic_description` varchar(255) DEFAULT NULL,
@@ -383,20 +383,20 @@ CREATE TABLE `topic` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Дамп данных таблицы `topic`
+-- Дамп данных таблицы `topics`
 --
 
-INSERT INTO `topic` (`topic_id`, `topic_title`, `topic_description`, `topic_info`, `topic_slug`, `topic_img`, `topic_add_date`, `topic_seo_title`, `topic_merged_id`, `topic_parent_id`, `topic_is_parent`, `topic_tl`, `topic_related`, `topic_post_related`, `topic_space_related`, `topic_focus_count`, `topic_count`) VALUES
+INSERT INTO `topics` (`topic_id`, `topic_title`, `topic_description`, `topic_info`, `topic_slug`, `topic_img`, `topic_add_date`, `topic_seo_title`, `topic_merged_id`, `topic_parent_id`, `topic_is_parent`, `topic_tl`, `topic_related`, `topic_post_related`, `topic_space_related`, `topic_focus_count`, `topic_count`) VALUES
 (1, 'SEO', 'Поисковая оптимизация — это комплекс мер по внутренней и внешней оптимизации для поднятия позиций сайта в результатах выдачи поисковых систем.\r\n', 'Комплекс мер по внутренней и внешней оптимизации для поднятия позиций сайта в результатах выдачи поисковых систем по определённым запросам пользователей.\r\n\r\n**Поисковая оптимизация** — это способ использования правил поиска поисковых систем для улучшения текущего естественного ранжирования веб-сайтов в соответствующих поисковых системах. \r\n\r\nЦелью SEO является предоставление экологического решения для саморекламы для веб-сайта, позволяющего веб-сайту занимать лидирующие позиции в отрасли, чтобы получить преимущества бренда. \r\n\r\nSEO включает как внешнее, так и внутреннее SEO. \r\n\r\nSEO средства получить от поисковых систем больше бесплатного трафика, разумное планирование с точки зрения структуры веб-сайта, плана построения контента, взаимодействия с пользователем и общения, страниц и т.д., чтобы сделать веб-сайт более подходящим для принципов индексации поисковых систем. \r\n\r\nПовышение пригодности веб-сайтов для поисковых систем также называется Оптимизацией для поисковых систем, может не только улучшить эффект SEO, но и сделать информацию, относящуюся к веб-сайту, отображаемую в поисковой системе, более привлекательной для пользователей.', 'seo', 't-1-1625149922.jpeg', '2021-06-29 03:29:20', 'Поисковая оптимизация (SEO)', 0, 0, 0, 0, '', NULL, NULL, 0, 1),
 (2, 'Интересные сайты', 'Интересные сайты в Интернете. Обзоры, интересные материалы, переводы. Статьи.', 'Интересные сайты в Интернете. Обзоры, интересные материалы, переводы. Статьи.\r\n\r\nПросто вводная страница... В разработке...', 'sites', 't-2-1625149821.jpeg', '2021-06-29 03:29:20', 'Интересные сайты', 0, 0, 0, 0, '1', '3', NULL, 0, 1);
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `topic_merge`
+-- Структура таблицы `topics_merge`
 --
 
-CREATE TABLE `topic_merge` (
+CREATE TABLE `topics_merge` (
   `merge_id` int(11) NOT NULL,
   `merge_add_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `merge_source_id` int(11) NOT NULL DEFAULT 0,
@@ -407,19 +407,19 @@ CREATE TABLE `topic_merge` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `topic_post_relation`
+-- Структура таблицы `topics_post_relation`
 --
 
-CREATE TABLE `topic_post_relation` (
+CREATE TABLE `topics_post_relation` (
   `relation_topic_id` int(11) DEFAULT 0,
   `relation_post_id` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Дамп данных таблицы `topic_post_relation`
+-- Дамп данных таблицы `topics_post_relation`
 --
 
-INSERT INTO `topic_post_relation` (`relation_topic_id`, `relation_post_id`) VALUES
+INSERT INTO `topics_post_relation` (`relation_topic_id`, `relation_post_id`) VALUES
 (1, 1),
 (2, 2),
 (3, 2);
@@ -427,10 +427,10 @@ INSERT INTO `topic_post_relation` (`relation_topic_id`, `relation_post_id`) VALU
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `topic_signed`
+-- Структура таблицы `topics_signed`
 --
 
-CREATE TABLE `topic_signed` (
+CREATE TABLE `topics_signed` (
   `signed_id` int(11) NOT NULL,
   `signed_topic_id` int(11) NOT NULL,
   `signed_user_id` int(11) NOT NULL
@@ -670,18 +670,18 @@ CREATE TABLE `votes_post` (
 -- Структура таблицы `post_signed`
 --
 
-CREATE TABLE `post_signed` (
+CREATE TABLE `posts_signed` (
   `signed_id` int(11) NOT NULL,
   `signed_post_id` int(11) NOT NULL,
   `signed_user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
-ALTER TABLE `post_signed`
+ALTER TABLE `posts_signed`
   ADD PRIMARY KEY (`signed_id`);
 
 
-ALTER TABLE `post_signed`
+ALTER TABLE `posts_signed`
   MODIFY `signed_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -708,15 +708,15 @@ ALTER TABLE `audits`
   ADD KEY `audit_content_id` (`audit_content_id`);
 
 --
--- Индексы таблицы `badge`
+-- Индексы таблицы `badges`
 --
-ALTER TABLE `badge`
+ALTER TABLE `badges`
   ADD PRIMARY KEY (`badge_id`);
 
 --
--- Индексы таблицы `badge_user`
+-- Индексы таблицы `badges_user`
 --
-ALTER TABLE `badge_user`
+ALTER TABLE `badges_user`
   ADD PRIMARY KEY (`bu_id`),
   ADD KEY `bu_badge_id` (`bu_badge_id`),
   ADD KEY `bu_user_id` (`bu_user_id`);
@@ -731,17 +731,17 @@ ALTER TABLE `comments`
   ADD KEY `comment_user_id` (`comment_user_id`,`comment_date`);
 
 --
--- Индексы таблицы `favorite`
+-- Индексы таблицы `favorites`
 --
-ALTER TABLE `favorite`
+ALTER TABLE `favorites`
   ADD PRIMARY KEY (`favorite_id`),
   ADD KEY `favorite_user_id` (`favorite_id`),
   ADD KEY `favorite_id` (`favorite_tid`);
 
 --
--- Индексы таблицы `invitation`
+-- Индексы таблицы `invitations`
 --
-ALTER TABLE `invitation`
+ALTER TABLE `invitations`
   ADD PRIMARY KEY (`invitation_id`),
   ADD KEY `uid` (`uid`),
   ADD KEY `invitation_code` (`invitation_code`),
@@ -784,9 +784,9 @@ ALTER TABLE `moderations`
   ADD PRIMARY KEY (`mod_id`);
 
 --
--- Индексы таблицы `notification`
+-- Индексы таблицы `notifications`
 --
-ALTER TABLE `notification`
+ALTER TABLE `notifications`
   ADD PRIMARY KEY (`notification_id`),
   ADD KEY `recipient_read_flag` (`recipient_uid`,`read_flag`),
   ADD KEY `sender_uid` (`sender_uid`),
@@ -802,22 +802,22 @@ ALTER TABLE `posts`
   ADD KEY `post_user_id` (`post_user_id`,`post_date`);
 
 --
--- Индексы таблицы `report`
+-- Индексы таблицы `reports`
 --
-ALTER TABLE `report`
+ALTER TABLE `reports`
   ADD PRIMARY KEY (`report_id`),
   ADD KEY `status` (`report_status`);
 
 --
--- Индексы таблицы `space`
+-- Индексы таблицы `spaces`
 --
-ALTER TABLE `space`
+ALTER TABLE `spaces`
   ADD PRIMARY KEY (`space_id`);
 
 --
--- Индексы таблицы `space_signed`
+-- Индексы таблицы `spaces_signed`
 --
-ALTER TABLE `space_signed`
+ALTER TABLE `spaces_signed`
   ADD PRIMARY KEY (`signed_id`);
 
 --
@@ -827,33 +827,33 @@ ALTER TABLE `stop_words`
   ADD PRIMARY KEY (`stop_id`);
 
 --
--- Индексы таблицы `topic`
+-- Индексы таблицы `topics`
 --
-ALTER TABLE `topic`
+ALTER TABLE `topics`
   ADD PRIMARY KEY (`topic_id`),
   ADD KEY `topic_slug` (`topic_slug`),
   ADD KEY `topic_merged_id` (`topic_merged_id`);
 
 --
--- Индексы таблицы `topic_merge`
+-- Индексы таблицы `topics_merge`
 --
-ALTER TABLE `topic_merge`
+ALTER TABLE `topics_merge`
   ADD PRIMARY KEY (`merge_id`),
   ADD KEY `merge_source_id` (`merge_source_id`),
   ADD KEY `merge_target_id` (`merge_target_id`),
   ADD KEY `merge_user_id` (`merge_user_id`);
 
 --
--- Индексы таблицы `topic_post_relation`
+-- Индексы таблицы `topics_post_relation`
 --
-ALTER TABLE `topic_post_relation`
+ALTER TABLE `topics_post_relation`
   ADD KEY `relation_topic_id` (`relation_topic_id`),
   ADD KEY `relation_content_id` (`relation_post_id`);
 
 --
--- Индексы таблицы `topic_signed`
+-- Индексы таблицы `topics_signed`
 --
-ALTER TABLE `topic_signed`
+ALTER TABLE `topics_signed`
   ADD PRIMARY KEY (`signed_id`);
 
 --
@@ -960,15 +960,15 @@ ALTER TABLE `audits`
   MODIFY `audit_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `badge`
+-- AUTO_INCREMENT для таблицы `badges`
 --
-ALTER TABLE `badge`
+ALTER TABLE `badges`
   MODIFY `badge_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT для таблицы `badge_user`
+-- AUTO_INCREMENT для таблицы `badges_user`
 --
-ALTER TABLE `badge_user`
+ALTER TABLE `badges_user`
   MODIFY `bu_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -978,15 +978,15 @@ ALTER TABLE `comments`
   MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `favorite`
+-- AUTO_INCREMENT для таблицы `favorites`
 --
-ALTER TABLE `favorite`
+ALTER TABLE `favorites`
   MODIFY `favorite_id` mediumint(8) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `invitation`
+-- AUTO_INCREMENT для таблицы `invitations`
 --
-ALTER TABLE `invitation`
+ALTER TABLE `invitations`
   MODIFY `invitation_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -1014,9 +1014,9 @@ ALTER TABLE `moderations`
   MODIFY `mod_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `notification`
+-- AUTO_INCREMENT для таблицы `notifications`
 --
-ALTER TABLE `notification`
+ALTER TABLE `notifications`
   MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -1026,21 +1026,21 @@ ALTER TABLE `posts`
   MODIFY `post_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT для таблицы `report`
+-- AUTO_INCREMENT для таблицы `reports`
 --
-ALTER TABLE `report`
+ALTER TABLE `reports`
   MODIFY `report_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `space`
+-- AUTO_INCREMENT для таблицы `spaces`
 --
-ALTER TABLE `space`
+ALTER TABLE `spaces`
   MODIFY `space_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT для таблицы `space_signed`
+-- AUTO_INCREMENT для таблицы `spaces_signed`
 --
-ALTER TABLE `space_signed`
+ALTER TABLE `spaces_signed`
   MODIFY `signed_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
@@ -1050,21 +1050,21 @@ ALTER TABLE `stop_words`
   MODIFY `stop_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `topic`
+-- AUTO_INCREMENT для таблицы `topics`
 --
-ALTER TABLE `topic`
+ALTER TABLE `topics`
   MODIFY `topic_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT для таблицы `topic_merge`
+-- AUTO_INCREMENT для таблицы `topics_merge`
 --
-ALTER TABLE `topic_merge`
+ALTER TABLE `topics_merge`
   MODIFY `merge_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `topic_signed`
+-- AUTO_INCREMENT для таблицы `topics_signed`
 --
-ALTER TABLE `topic_signed`
+ALTER TABLE `topics_signed`
   MODIFY `signed_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --

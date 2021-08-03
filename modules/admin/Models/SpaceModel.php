@@ -29,7 +29,7 @@ class SpaceModel extends \MainModel
                 id,
                 login,
                 avatar
-                    FROM space  
+                    FROM spaces
                     LEFT JOIN users ON id = space_user_id
                     WHERE $signet
                     ORDER BY space_id DESC LIMIT $start, $limit";
@@ -45,7 +45,7 @@ class SpaceModel extends \MainModel
             $signet = "space_is_delete = 1";
         }
 
-        $sql = "SELECT space_id, space_is_delete FROM space WHERE $signet";
+        $sql = "SELECT space_id, space_is_delete FROM spaces WHERE $signet";
 
         return DB::run($sql)->rowCount();
     }
@@ -53,7 +53,7 @@ class SpaceModel extends \MainModel
     // Удалено пространство или нет
     public static function isTheSpaceDeleted($space_id)
     {
-        $sql = "SELECT space_id, space_is_delete FROM space WHERE space_id = :space_id";
+        $sql = "SELECT space_id, space_is_delete FROM spaces WHERE space_id = :space_id";
 
         $result = DB::run($sql, ['space_id' => $space_id])->fetch(PDO::FETCH_ASSOC);
 
@@ -65,11 +65,11 @@ class SpaceModel extends \MainModel
     {
         if (self::isTheSpaceDeleted($space_id) == 1) {
 
-            $sql = "UPDATE space
+            $sql = "UPDATE spaces
                             SET space_is_delete = 0
                                 WHERE space_id = :space_id";
         } else {
-            $sql = "UPDATE space
+            $sql = "UPDATE spaces
                             SET space_is_delete = 1
                                 WHERE space_id = :space_id";
         }

@@ -55,15 +55,15 @@ class PostModel extends \MainModel
                                 relation_post_id,
 
                                 GROUP_CONCAT(topic_slug, '@', topic_title SEPARATOR '@') AS topic_list
-                                FROM topic  
-                                LEFT JOIN topic_post_relation 
+                                FROM topics  
+                                LEFT JOIN topics_post_relation 
                                     on topic_id = relation_topic_id
                                 GROUP BY relation_post_id
                         ) AS rel
                             ON rel.relation_post_id = post_id 
 
             INNER JOIN users ON id = post_user_id
-            INNER JOIN space ON space_id = post_space_id
+            INNER JOIN spaces ON space_id = post_space_id
             $sort ORDER BY post_top DESC, post_date DESC LIMIT $start, $limit";
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
@@ -79,7 +79,7 @@ class PostModel extends \MainModel
 
         $sql = "SELECT post_id, post_space_id, space_id
                 FROM posts
-                INNER JOIN space ON space_id = post_space_id $sort";
+                INNER JOIN spaces ON space_id = post_space_id $sort";
 
         return DB::run($sql)->rowCount();
     }

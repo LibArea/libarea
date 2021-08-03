@@ -20,15 +20,15 @@
                         <?php if ($space_info['space_id'] != 1) { ?>
                             <?php if ($space_info['space_user_id'] != $uid['id']) { ?>
                                 <div class="right">
-                                    <?php if ($space_signed == 1) { ?>
+                                    <?php if (is_array($space_signed)) { ?>
                                         <div data-id="<?= $space_info['space_id']; ?>" data-type="space" class="focus-id focus-space no-space">
                                             <i class="light-icon-check middle"></i>
-                                            <span class="middle"><?= lang('Unsubscribe'); ?></span>
+                                            <span class="middle">1<?= lang('Unsubscribe'); ?></span>
                                         </div>
-                                    <?php } else { ?>
+                                    <?php } else { ?> 
                                         <div data-id="<?= $space_info['space_id']; ?>" data-type="space" class="focus-id focus-space yes-space">
                                             <i class="light-icon-plus middle"></i>
-                                            <span class="middle"><?= lang('Read'); ?></span>
+                                            <span class="middle">2<?= lang('Read'); ?></span>
                                         </div>
                                     <?php } ?>
                                 </div>

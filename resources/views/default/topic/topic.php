@@ -3,7 +3,6 @@
     <main>
         <div class="white-box">
             <div class="inner-padding">
-
                 <div class="flex">
                     <div>
                         <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'ava-94'); ?>
@@ -24,7 +23,7 @@
                                     <div class="add-focus focus-topic">+ <?= lang('Read'); ?></div>
                                 </a>
                             <?php } else { ?>
-                                <?php if ($topic_signed == 1) { ?>
+                                <?php if (is_array($topic_signed)) { ?>
                                     <div data-id="<?= $topic['topic_id']; ?>" data-type="topic" class="focus-id del-focus focus-topic">
                                         <?= lang('Unsubscribe'); ?>
                                     </div>
@@ -39,9 +38,7 @@
                             </a>
                         </div>
                     </div>
-
                 </div>
-
             </div>
         </div>
 

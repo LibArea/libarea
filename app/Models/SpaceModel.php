@@ -33,9 +33,9 @@ class SpaceModel extends \MainModel
                 avatar,
                 signed_space_id, 
                 signed_user_id
-                    FROM space  
+                    FROM spaces 
                     LEFT JOIN users ON id = space_user_id
-                    LEFT JOIN space_signed ON signed_space_id = space_id AND signed_user_id = :user_id 
+                    LEFT JOIN spaces_signed ON signed_space_id = space_id AND signed_user_id = :user_id 
                     WHERE space_is_delete != 1 $signet
                     ORDER BY space_id DESC LIMIT $start, $limit";
 
@@ -45,7 +45,7 @@ class SpaceModel extends \MainModel
     // Количество
     public static function getSpacesAllCount()
     {
-        $sql = "SELECT space_id, space_is_delete FROM space WHERE space_is_delete != 1";
+        $sql = "SELECT space_id, space_is_delete FROM spaces WHERE space_is_delete != 1";
 
         return DB::run($sql)->rowCount(); 
     }
@@ -66,7 +66,7 @@ class SpaceModel extends \MainModel
                     space_name,
                     space_user_id,
                     space_permit_users
-                        FROM space 
+                        FROM spaces 
                         WHERE space_id IN(".implode(',', $result).") AND
                         space_permit_users = 0 or space_user_id = :user_id AND space_is_delete != 1  
                         ORDER BY space_id DESC";
@@ -77,7 +77,7 @@ class SpaceModel extends \MainModel
                     space_id,
                     space_name,
                     space_user_id
-                        FROM space WHERE space_is_delete != 1";
+                        FROM spaces WHERE space_is_delete != 1";
         }
 
         return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC); 
@@ -112,7 +112,7 @@ class SpaceModel extends \MainModel
                     id,
                     login,
                     avatar
-                        FROM space 
+                        FROM spaces 
                         LEFT JOIN users ON space_user_id = id
                         WHERE $sort";
 
@@ -130,7 +130,7 @@ class SpaceModel extends \MainModel
                 space_user_id,
                 space_is_delete
  
-                    FROM space  
+                    FROM spaces  
                     WHERE space_user_id = :user_id AND space_is_delete != 1";
 
        return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);  
@@ -148,8 +148,8 @@ class SpaceModel extends \MainModel
                     space_is_delete,
                     signed_space_id, 
                     signed_user_id
-                        FROM space 
-                        LEFT JOIN space_signed ON signed_space_id = space_id AND signed_user_id = :user_id 
+                        FROM spaces 
+                        LEFT JOIN spaces_signed ON signed_space_id = space_id AND signed_user_id = :user_id 
                         WHERE space_is_delete != 1 AND signed_user_id = :user_id";
 
        return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);  
@@ -158,40 +158,15 @@ class SpaceModel extends \MainModel
     // Количество читающих
     public static function numSpaceSubscribers($space_id)
     {
-        $sql = "SELECT signed_id, signed_space_id FROM space_signed WHERE signed_space_id = $space_id";
+        $sql = "SELECT signed_id, signed_space_id FROM spaces_signed WHERE signed_space_id = $space_id";
 
         return DB::run($sql)->rowCount(); 
     } 
 
-    // Подписан пользователь на пространство или нет
-    public static function getMyFocus($space_id, $user_id) 
-    {
-        $result = XD::select('*')->from(['space_signed'])->where(['signed_space_id'], '=', $space_id)->and(['signed_user_id'], '=', $user_id)->getSelect();
-
-        if ($result) {
-            return true;
-        } 
-        return false;
-    }
-    
-    // Подписка / отписка от пространства
-    public static function focus($space_id, $user_id)
-    {
-        $result  = self::getMyFocus($space_id, $user_id);
-          
-        if ($result === true) {
-           XD::deleteFrom(['space_signed'])->where(['signed_space_id'], '=', $space_id)->and(['signed_user_id'], '=', $user_id)->run(); 
-        } else {
-            XD::insertInto(['space_signed'], '(', ['signed_space_id'], ',', ['signed_user_id'], ')')->values( '(', XD::setList([$space_id, $user_id]), ')' )->run(); 
-        }
-        
-        return true;
-    }
-    
     // Изменение пространства
     public static function edit($data)
     {
-        XD::update(['space'])->set(['space_slug'], '=', $data['space_slug'], ',', 
+        XD::update(['spaces'])->set(['space_slug'], '=', $data['space_slug'], ',', 
                 ['space_name'], '=', $data['space_name'], ',', 
                 ['space_description'], '=', $data['space_description'], ',', 
                 ['space_color'], '=', $data['space_color'], ',', 
@@ -207,25 +182,25 @@ class SpaceModel extends \MainModel
     // Изменение фото / обложки
     public static function setImg($space_id, $img)
     {
-        return XD::update(['space'])->set(['space_img'], '=', $img)->where(['space_id'], '=', $space_id)->run();
+        return XD::update(['spaces'])->set(['space_img'], '=', $img)->where(['space_id'], '=', $space_id)->run();
     }
 
     public static function setCover($space_id, $cover)
     {
-        return XD::update(['space'])->set(['space_cover_art'], '=', $cover)->where(['space_id'], '=', $space_id)->run();
+        return XD::update(['spaces'])->set(['space_cover_art'], '=', $cover)->where(['space_id'], '=', $space_id)->run();
     }
  
     // Удалим обложку для пространства
     public static function CoverRemove($space_id)
     {
-        return XD::update(['space'])->set(['space_cover_art'], '=', 'space_cover_no.jpeg')
+        return XD::update(['spaces'])->set(['space_cover_art'], '=', 'space_cover_no.jpeg')
                 ->where(['space_id'], '=', $space_id)->run();
     }
 
     // Добавляем пространства
     public static function AddSpace($data) 
     {
-        XD::insertInto(['space'], '(', 
+        XD::insertInto(['spaces'], '(', 
             ['space_name'], ',', 
             ['space_slug'], ',', 
             ['space_description'], ',', 
@@ -263,7 +238,7 @@ class SpaceModel extends \MainModel
         $space_id = XD::select()->last_insert_id('()')->getSelectValue();
 
         // Подписываем на созданное пространство   
-        XD::insertInto(['space_signed'], '(', ['signed_space_id'], ',', ['signed_user_id'], ')')->values( '(', XD::setList([$space_id, $data['space_user_id']]), ')' )->run(); 
+        XD::insertInto(['spaces_signed'], '(', ['signed_space_id'], ',', ['signed_user_id'], ')')->values( '(', XD::setList([$space_id, $data['space_user_id']]), ')' )->run(); 
 
         return true; 
     }

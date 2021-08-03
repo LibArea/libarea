@@ -17,7 +17,7 @@ class BadgeModel extends \MainModel
                     badge_score,
                     badge_title,
                     badge_description
-                        FROM badge";
+                        FROM badges";
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -32,7 +32,7 @@ class BadgeModel extends \MainModel
                     badge_score,
                     badge_title,
                     badge_description
-                        FROM badge 
+                        FROM badges 
                         WHERE badge_id = :badge_id";
 
         return DB::run($sql, ['badge_id' => $badge_id])->fetch(PDO::FETCH_ASSOC);
@@ -48,7 +48,7 @@ class BadgeModel extends \MainModel
             'badge_id'          => $data['badge_id'],
         ];
 
-        $sql = "UPDATE badge 
+        $sql = "UPDATE badges 
                     SET badge_title = :badge_title,  
                     badge_description = :badge_description, 
                     badge_icon = :badge_icon 
@@ -68,7 +68,7 @@ class BadgeModel extends \MainModel
             'badge_icon'        => $data['badge_icon'],
         ];
 
-        $sql = "INSERT INTO badge(badge_tl, 
+        $sql = "INSERT INTO badges(badge_tl, 
                         badge_score, 
                         badge_title, 
                         badge_description, 
@@ -90,7 +90,7 @@ class BadgeModel extends \MainModel
             'badge_id'  => $badge_id,
         ];
 
-        $sql = "INSERT INTO badge_user(bu_user_id, bu_badge_id) 
+        $sql = "INSERT INTO badges_user(bu_user_id, bu_badge_id) 
                     VALUES(:user_id, :badge_id)";
 
         return DB::run($sql, $params);
@@ -109,8 +109,8 @@ class BadgeModel extends \MainModel
                     badge_title,
                     badge_icon,
                     badge_description
-                        FROM badge_user
-                        LEFT JOIN badge ON badge_id = bu_badge_id
+                        FROM badges_user
+                        LEFT JOIN badges ON badge_id = bu_badge_id
                         WHERE bu_user_id = :user_id";
 
         return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);

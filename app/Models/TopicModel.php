@@ -20,7 +20,7 @@ class TopicModel extends \MainModel
                     topic_is_parent,
                     topic_count
         
-                FROM topic ORDER BY topic_count DESC LIMIT $start, $limit";
+                FROM topics ORDER BY topic_count DESC LIMIT $start, $limit";
                         
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
@@ -28,7 +28,7 @@ class TopicModel extends \MainModel
     // Количество
     public static function getTopicsAllCount()
     {
-        $sql = "SELECT topic_id FROM topic";
+        $sql = "SELECT topic_id FROM topics";
 
         return DB::run($sql)->rowCount(); 
     }
@@ -60,7 +60,7 @@ class TopicModel extends \MainModel
                     topic_focus_count,
                     topic_count
         
-                FROM topic WHERE $sort";
+                FROM topics WHERE $sort";
 
         return DB::run($sql, ['params' => $params])->fetch(PDO::FETCH_ASSOC); 
     }
@@ -73,7 +73,7 @@ class TopicModel extends \MainModel
                     topic_title,
                     topic_slug
                 
-                FROM topic ORDER BY topic_id DESC LIMIT 10";
+                FROM topics ORDER BY topic_id DESC LIMIT 10";
                         
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
@@ -81,7 +81,7 @@ class TopicModel extends \MainModel
     // Есть пост в темах
     public static function getRelationId($id)
     {
-        $sql = "SELECT r.* FROM topic_post_relation AS r WHERE r.relation_post_id = :id";
+        $sql = "SELECT r.* FROM topics_post_relation AS r WHERE r.relation_post_id = :id";
         
         return DB::run($sql, ['id' => $id])->fetch(PDO::FETCH_ASSOC); 
     }
@@ -91,7 +91,7 @@ class TopicModel extends \MainModel
         self::deletePostRelation($post_id);
         foreach ($rows as $row) 
         {
-            $sql = "INSERT INTO topic_post_relation (relation_topic_id, relation_post_id) 
+            $sql = "INSERT INTO topics_post_relation (relation_topic_id, relation_post_id) 
                         VALUES ($row[0], $row[1])";
                     
             DB::run($sql);
@@ -103,7 +103,7 @@ class TopicModel extends \MainModel
     // Удалить записи id поста из таблицы связи
     public static function deletePostRelation($post_id)
     {
-        $sql = "DELETE FROM topic_post_relation WHERE relation_post_id =  $post_id";
+        $sql = "DELETE FROM topics_post_relation WHERE relation_post_id =  $post_id";
         
         DB::run($sql);
         
@@ -113,13 +113,13 @@ class TopicModel extends \MainModel
     // Изменение img
     public static function setImg($topic_id, $img)
     {
-        return XD::update(['topic'])->set(['topic_img'], '=', $img)->where(['topic_id'], '=', $topic_id)->run();
+        return XD::update(['topics'])->set(['topic_img'], '=', $img)->where(['topic_id'], '=', $topic_id)->run();
     }
     
     // Связанные темы
     public static function topicRelated($topic_related)
     {
-        $sql = "SELECT * FROM topic WHERE topic_id IN(0, ".$topic_related.") ";
+        $sql = "SELECT * FROM topics WHERE topic_id IN(0, ".$topic_related.") ";
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
     
@@ -130,53 +130,21 @@ class TopicModel extends \MainModel
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
     }
     
-    // Подписан пользователь на topic
-    public static function getMyFocus($topic_id, $user_id) 
-    {
-        $result = XD::select('*')->from(['topic_signed'])->where(['signed_topic_id'], '=', $topic_id)->and(['signed_user_id'], '=', $user_id)->getSelect();
-
-        if ($result) {
-            return true;
-        } 
-        return false;
-    }
-    
-    // Подписка / отписка
-    public static function focus($topic_id, $user_id)
-    {
-        $result  = self::getMyFocus($topic_id, $user_id);
-          
-        if ($result === true) {
-            XD::deleteFrom(['topic_signed'])->where(['signed_topic_id'], '=', $topic_id)->and(['signed_user_id'], '=', $user_id)->run();
-            
-            $sql = "UPDATE topic SET topic_focus_count = (topic_focus_count - 1) WHERE topic_id = :topic_id";
-            DB::run($sql,['topic_id' => $topic_id]); 
-            
-        } else {
-            XD::insertInto(['topic_signed'], '(', ['signed_topic_id'], ',', ['signed_user_id'], ')')->values( '(', XD::setList([$topic_id, $user_id]), ')' )->run();
-
-            $sql = "UPDATE topic SET topic_focus_count = (topic_focus_count + 1) WHERE topic_id = :topic_id";
-            DB::run($sql,['topic_id' => $topic_id]);            
-        }
-        
-        return true;
-    }
-    
     // Выбор корневой темы при редактирование (если они есть)
     public static function topicMain($topic_id)
     {
-        return XD::select('*')->from(['topic'])->where(['topic_id'], '=', $topic_id)->and(['topic_is_parent'], '=', 1)->getSelect();
+        return XD::select('*')->from(['topics'])->where(['topic_id'], '=', $topic_id)->and(['topic_is_parent'], '=', 1)->getSelect();
     } 
     
     // Выведем подтемы
     public static function subTopics($topic_id)
     { 
-        return XD::select('*')->from(['topic'])->where(['topic_parent_id'], '=', $topic_id)->getSelect();
+        return XD::select('*')->from(['topics'])->where(['topic_parent_id'], '=', $topic_id)->getSelect();
     }
     
     // Очистим привязку при изменение корневой темы
     public static function clearBinding($topic_id)
     {
-        return XD::update(['topic'])->set(['topic_parent_id'], '=', 0)->where(['topic_parent_id'], '=', $topic_id)->run();
+        return XD::update(['topics'])->set(['topic_parent_id'], '=', 0)->where(['topic_parent_id'], '=', $topic_id)->run();
     }
 }

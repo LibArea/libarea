@@ -109,14 +109,14 @@ class ActionModel extends \MainModel
         elseif ($type == 'topic') 
         {
             $field_name = 'topic_title';
-            $sql = "SELECT topic_id, topic_title FROM topic 
+            $sql = "SELECT topic_id, topic_title FROM topics 
                     WHERE topic_title LIKE :topic_title ORDER BY topic_id LIMIT 8";
         } 
         elseif ($type == 'main') 
         {
             $field_id = 'topic_id';
             $field_name = 'topic_title';
-            $sql = "SELECT topic_id, topic_title FROM topic 
+            $sql = "SELECT topic_id, topic_title FROM topics 
                     WHERE topic_is_parent !=0 AND topic_title LIKE :topic_title ORDER BY topic_id LIMIT 8";
             
         } 

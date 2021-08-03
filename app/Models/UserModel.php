@@ -152,9 +152,10 @@ class UserModel extends \MainModel
     }  
 
     // Страница закладок участника (комментарии и посты)
-    public static function userFavorite($uid)
+    public static function userFavorite($user_id)
     {
         $sql = "SELECT 
+                    favorite_id,
                     favorite_user_id, 
                     favorite_type,
                     favorite_tid,
@@ -173,14 +174,14 @@ class UserModel extends \MainModel
                     space_id,
                     space_name,
                     space_slug
-                        fROM favorite
+                        fROM favorites
                         LEFT JOIN users ON id = favorite_user_id
                         LEFT JOIN posts ON post_id = favorite_tid AND favorite_type = 1
                         LEFT JOIN answers ON answer_id = favorite_tid AND favorite_type = 2
-                        LEFT JOIN space ON  space_id = post_space_id
-                        WHERE favorite_user_id = $uid LIMIT 25 "; 
+                        LEFT JOIN spaces ON  space_id = post_space_id
+                        WHERE favorite_user_id = :user_id ORDER BY favorite_id DESC LIMIT 100"; 
                         
-        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
+        return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC); 
     } 
 
     // Страница черновиков
@@ -305,19 +306,19 @@ class UserModel extends \MainModel
         
         DB::run($sql,['user_id' => $user_id]); 
 
-        return  XD::insertInto(['invitation'], '(', ['uid'], ',', ['invitation_code'], ',', ['invitation_email'], ',', ['add_time'], ',', ['add_ip'], ')')->values( '(', XD::setList([$user_id, $invitation_code, $invitation_email, $add_time, $add_ip]), ')' )->run();
+        return  XD::insertInto(['invitations'], '(', ['uid'], ',', ['invitation_code'], ',', ['invitation_email'], ',', ['add_time'], ',', ['add_ip'], ')')->values( '(', XD::setList([$user_id, $invitation_code, $invitation_email, $add_time, $add_ip]), ')' )->run();
 	}
     
     // Проверим на повтор
 	public static function InvitationOne($uid)
 	{
-        return XD::select('*')->from(['invitation'])->where(['uid'], '=', $uid)->getSelectOne();
+        return XD::select('*')->from(['invitations'])->where(['uid'], '=', $uid)->getSelectOne();
 	} 
     
     // Все инвайты участинка
     public static function InvitationResult($uid) 
     {
-        $q      = XD::select('*')->from(['invitation']);
+        $q      = XD::select('*')->from(['invitations']);
         $query  = $q->leftJoin(['users'])->on(['id'], '=', ['active_uid'])
                   ->where(['uid'], '=', $uid)->getSelect();
                   
@@ -327,7 +328,7 @@ class UserModel extends \MainModel
     // Проверим не активированный инвайт
     public static function InvitationAvailable($invitation_code)
 	{
-        return XD::select('*')->from(['invitation'])
+        return XD::select('*')->from(['invitations'])
                 ->where(['invitation_code'], '=', $invitation_code)
                 ->and(['active_status'], '=', 0)
                 ->getSelectOne();
@@ -338,7 +339,7 @@ class UserModel extends \MainModel
 	{
         $active_time = date('Y-m-d H:i:s');
 
-        XD::update(['invitation'])->set(['active_status'], '=', 1, ',', ['active_ip'], '=', $reg_ip, ',', ['active_time'], '=', $active_time, ',', ['active_uid'], '=', $active_uid)
+        XD::update(['invitations'])->set(['active_status'], '=', 1, ',', ['active_ip'], '=', $reg_ip, ',', ['active_time'], '=', $active_time, ',', ['active_uid'], '=', $active_uid)
         ->where(['invitation_code'], '=', $inv_code)
         ->and(['uid'], '=', $inv_uid)
         ->run();
@@ -379,8 +380,8 @@ class UserModel extends \MainModel
     // Все награды участника
     public static function getBadgeUserAll($user_id)
     {
-        $query  = XD::select('*')->from(['badge_user']);
-        $result = $query->leftJoin(['badge'])->on(['badge_id'], '=', ['bu_badge_id'])
+        $query  = XD::select('*')->from(['badges_user']);
+        $result = $query->leftJoin(['badges'])->on(['badge_id'], '=', ['bu_badge_id'])
                   ->where(['bu_user_id'], '=', $user_id)->getSelect();
         
         return $result;

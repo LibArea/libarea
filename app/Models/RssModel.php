@@ -16,7 +16,7 @@ class RssModel extends \MainModel
     // Все пространства для Sitemap
     public static function getSpacesSitemap()
     {
-        return XD::select(['space_slug', 'space_is_delete'])->from(['space'])
+        return XD::select(['space_slug', 'space_is_delete'])->from(['spaces'])
                     ->where(['space_is_delete'], '!=', 1)->getSelect();
     } 
     
@@ -33,6 +33,6 @@ class RssModel extends \MainModel
     // Информация по самому пространству для rss
     public static function getSpaceId($space_id)
     {
-        return XD::select('*')->from(['space'])->where(['space_id'], '=', $space_id)->getSelectOne();
+        return XD::select('*')->from(['spaces'])->where(['space_id'], '=', $space_id)->getSelectOne();
     }
 }

@@ -106,7 +106,7 @@ class AnswerModel extends \MainModel
                         LEFT JOIN users ON id = answer_user_id
                         LEFT JOIN votes_answer ON votes_answer_item_id = answer_id
                             AND votes_answer_user_id = $user_id
-                        LEFT JOIN favorite ON favorite_tid = answer_id
+                        LEFT JOIN favorites ON favorite_tid = answer_id
                             AND favorite_user_id  = $user_id
                             AND favorite_type = 2
                             WHERE answer_post_id = $post_id

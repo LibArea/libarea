@@ -21,14 +21,14 @@ class TopicModel extends \MainModel
                     topic_is_parent,
                     topic_count
         
-                FROM topic ORDER BY topic_id DESC LIMIT $start, $limit";
+                FROM topics ORDER BY topic_id DESC LIMIT $start, $limit";
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function getTopicsAllCount()
     {
-        $sql = "SELECT topic_id FROM topic";
+        $sql = "SELECT topic_id FROM topics";
 
         return DB::run($sql)->rowCount();
     }
@@ -60,7 +60,7 @@ class TopicModel extends \MainModel
                     topic_focus_count,
                     topic_count
         
-                FROM topic WHERE $sort";
+                FROM topics WHERE $sort";
 
         return DB::run($sql, ['params' => $params])->fetch(PDO::FETCH_ASSOC);
     }
@@ -68,7 +68,7 @@ class TopicModel extends \MainModel
     // Есть пост в темах
     public static function getRelationId($id)
     {
-        $sql = "SELECT relation_topic_id, relation_post_id FROM topic_post_relation WHERE relation_post_id = :id";
+        $sql = "SELECT relation_topic_id, relation_post_id FROM topics_post_relation WHERE relation_post_id = :id";
 
         return DB::run($sql, ['id' => $id])->fetch(PDO::FETCH_ASSOC);
     }
@@ -76,7 +76,7 @@ class TopicModel extends \MainModel
     // Связанные темы
     public static function topicRelated($topic_related)
     {
-        $sql = "SELECT topic_id, topic_title FROM topic WHERE topic_id IN(0, " . $topic_related . ") ";
+        $sql = "SELECT topic_id, topic_title FROM topics WHERE topic_id IN(0, " . $topic_related . ") ";
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -94,7 +94,7 @@ class TopicModel extends \MainModel
                     topic_id, 
                     topic_slug, 
                     topic_is_parent 
-                        FROM topic WHERE topic_id = :topic_id AND topic_is_parent = 1";
+                        FROM topics WHERE topic_id = :topic_id AND topic_is_parent = 1";
 
         return DB::run($sql, ['topic_id' => $topic_id])->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -113,7 +113,7 @@ class TopicModel extends \MainModel
             'topic_count'       => $data['topic_count'],
         ];
 
-        $sql = "INSERT INTO topic(topic_title, 
+        $sql = "INSERT INTO topics(topic_title, 
                         topic_description, 
                         topic_slug, 
                         topic_img,
@@ -153,7 +153,7 @@ class TopicModel extends \MainModel
             'topic_id'              => $data['topic_id'],
         ];
 
-        $sql = "UPDATE topic 
+        $sql = "UPDATE topics 
                     SET topic_title     = :topic_title,  
                     topic_description   = :topic_description, 
                     topic_info          = :topic_info, 
@@ -172,7 +172,7 @@ class TopicModel extends \MainModel
     // Обновим данные
     public static function setUpdateQuantity()
     {
-        $sql = "UPDATE topic SET topic_count = (SELECT count(relation_post_id) FROM topic_post_relation where relation_topic_id = topic_id )";
+        $sql = "UPDATE topics SET topic_count = (SELECT count(relation_post_id) FROM topics_post_relation where relation_topic_id = topic_id )";
 
         return DB::run($sql);
     }

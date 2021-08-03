@@ -75,7 +75,7 @@ class PostModel extends \MainModel
         
         $q = XD::select('*')->from(['posts']);
         $query = $q->leftJoin(['users'])->on(['id'], '=', ['post_user_id'])
-                 ->leftJoin(['space'])->on(['space_id'], '=', ['post_space_id'])
+                 ->leftJoin(['spaces'])->on(['space_id'], '=', ['post_space_id'])
                 ->leftJoin(['votes_post'])->on(['votes_post_item_id'], '=', ['post_id'])
                 ->and(['votes_post_user_id'], '=', $user_id)
                 ->where(['post_slug'], '=', $slug)
@@ -89,7 +89,7 @@ class PostModel extends \MainModel
     {
         if (!$id) { $id = 0; }  
         $q = XD::select('*')->from(['posts']);
-        $query = $q->leftJoin(['space'])->on(['space_id'], '=', ['post_space_id'])->where(['post_id'], '=', $id);
+        $query = $q->leftJoin(['spaces'])->on(['space_id'], '=', ['post_space_id'])->where(['post_id'], '=', $id);
         
         return $query->getSelectOne();
     }
@@ -189,8 +189,8 @@ class PostModel extends \MainModel
     public static function getPostTopic($post_id)
     {
         $sql = "SELECT *
-                fROM topic  
-                INNER JOIN topic_post_relation  ON relation_topic_id = topic_id
+                fROM topics  
+                INNER JOIN topics_post_relation  ON relation_topic_id = topic_id
                 WHERE relation_post_id  = ".$post_id." ";
                 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 

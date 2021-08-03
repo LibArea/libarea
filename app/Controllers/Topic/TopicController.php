@@ -5,6 +5,7 @@ namespace App\Controllers\Topic;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\TopicModel;
 use App\Models\FeedModel;
+use App\Models\SubscriptionModel;
 use Lori\Content;
 use Lori\Config;
 use Lori\Base;
@@ -94,8 +95,7 @@ class TopicController extends \MainController
         }
 
         $topic_related  = TopicModel::topicRelated($topic['topic_related']);
-        $topic_signed   = TopicModel::getMyFocus($topic['topic_id'], $uid['id']);
-
+        $topic_signed   = SubscriptionModel::getFocus($topic['topic_id'], $uid['id'], 'topic');
 
         $meta_title = $topic['topic_seo_title'] . ' — ' .  lang('Topic');
         $data = [
@@ -150,16 +150,5 @@ class TopicController extends \MainController
         ];
 
         return view(PR_VIEW_DIR . '/topic/info', ['data' => $data, 'uid' => $uid, 'topic' => $topic, 'topic_related' => $topic_related, 'post_related' => $post_related, 'subtopics' => $subtopics, 'main_topic' => $main_topic]);
-    }
-
-    // Подписка / отписка от тем
-    public function focus()
-    {
-        $uid        = Base::getUid();
-        $topic_id   = \Request::getPostInt('focus_id');
-
-        TopicModel::focus($topic_id, $uid['id']);
-
-        return true;
     }
 }

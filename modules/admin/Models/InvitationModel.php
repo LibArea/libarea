@@ -16,7 +16,7 @@ class InvitationModel extends \MainModel
                     uid,
                     active_uid,
                     active_time
-                        FROM invitation 
+                        FROM invitations 
                         LEFT JOIN users ON active_uid = id ORDER BY id DESC";
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
