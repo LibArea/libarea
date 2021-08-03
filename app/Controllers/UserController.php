@@ -101,7 +101,7 @@ class UserController extends \MainController
     }
 
     // Форма настройки профиля
-    function settingForm()
+    function settingPage()
     {
         // Данные участника
         $login  = \Request::get('login');
@@ -176,7 +176,7 @@ class UserController extends \MainController
     }
 
     // Форма загрузки аватарки
-    function settingAvatarForm()
+    function settingAvatarPage()
     {
         $uid    = Base::getUid();
         $login  = \Request::get('login');
@@ -202,7 +202,7 @@ class UserController extends \MainController
     }
 
     // Форма изменение пароля
-    function settingSecurityForm()
+    function settingSecurityPage()
     {
         $uid  = Base::getUid();
         $login  = \Request::get('login');
@@ -460,5 +460,26 @@ class UserController extends \MainController
 
         Base::addMsg(lang('Invite created'), 'success');
         redirect($redirect);
+    }
+    
+    public function preferencesPage() 
+    {
+
+        $uid    = Base::getUid();
+        $login      = \Request::get('login');
+
+        // Запретим смотреть инвайты чужого профиля
+        if ($login != $uid['login']) {
+            redirect('/u/' . $uid['login'] . '/invitation');
+        }
+        
+        $data = [
+            'h1'          => lang('Preferences'),
+            'sheet'         => 'preferences',
+            'meta_title'    => lang('Preferences') . ' | ' . Config::get(Config::PARAM_NAME)
+        ];
+
+        return view(PR_VIEW_DIR . '/user/preferences', ['data' => $data, 'uid' => $uid]);
+        
     }
 }

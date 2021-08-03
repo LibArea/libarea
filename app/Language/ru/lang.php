@@ -28,6 +28,7 @@ return [
     'All answers'       => 'Все ответы',
     'Recommended'       => 'Рекомендовано',
     'Notifications'     => 'Уведомления',
+    'Preferences'       => 'Предпочтения',
     'Action'            => 'Действие',
     'Domain'            => 'Домен',
     'Domains'           => 'Домены',

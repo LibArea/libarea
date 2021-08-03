@@ -1089,7 +1089,7 @@
             // append the char to the output
             $output .= $c;
           }
-        } else if (mb_strpos($okChars, $c) !== false) {
+        } elseif ($okChars && $c && mb_strpos($okChars, $c) !== false) {
           // if the unicode chars are not allowed in URLs
           // and the character does exist in 'okChars'
           // append the char to the output

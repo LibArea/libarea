@@ -23,12 +23,12 @@
                                     <?php if (is_array($space_signed)) { ?>
                                         <div data-id="<?= $space_info['space_id']; ?>" data-type="space" class="focus-id focus-space no-space">
                                             <i class="light-icon-check middle"></i>
-                                            <span class="middle">1<?= lang('Unsubscribe'); ?></span>
+                                            <span class="middle"><?= lang('Unsubscribe'); ?></span>
                                         </div>
                                     <?php } else { ?> 
                                         <div data-id="<?= $space_info['space_id']; ?>" data-type="space" class="focus-id focus-space yes-space">
                                             <i class="light-icon-plus middle"></i>
-                                            <span class="middle">2<?= lang('Read'); ?></span>
+                                            <span class="middle"><?= lang('Read'); ?></span>
                                         </div>
                                     <?php } ?>
                                 </div>

@@ -40,10 +40,11 @@ Route::before('Authorization@noAuth')->getGroup();
     // Форма изменения, общий случай: post | topic | space | answer
     Route::get('/{controller}/edit/{id}')->controller('<controller>\Edit<controller>Controller@edit')->where(['id' => '[0-9]+']);
    
-    Route::get('/u/{login}/invitation')->controller('UserController@invitationPage')->where(['login' => '[A-Za-z0-9]+']); 
-    Route::get('/u/{login}/setting')->controller('UserController@settingForm')->where(['login' => '[A-Za-z0-9]+']); 
-    Route::get('/u/{login}/setting/avatar')->controller('UserController@settingAvatarForm')->where(['login' => '[A-Za-z0-9]+']);
-    Route::get('/u/{login}/setting/security')->controller('UserController@settingSecurityForm')->where(['login' => '[A-Za-z0-9]+']); 
+    Route::get('/u/{login}/invitation')->controller('UserController@invitationPage')->where(['login' => '[A-Za-z0-9]+']);
+    Route::get('/u/{login}/preferences')->controller('UserController@preferencesPage')->where(['login' => '[A-Za-z0-9]+']); 
+    Route::get('/u/{login}/setting')->controller('UserController@settingPage')->where(['login' => '[A-Za-z0-9]+']); 
+    Route::get('/u/{login}/setting/avatar')->controller('UserController@settingAvatarPage')->where(['login' => '[A-Za-z0-9]+']);
+    Route::get('/u/{login}/setting/security')->controller('UserController@settingSecurityPage')->where(['login' => '[A-Za-z0-9]+']); 
     
     Route::get('/u/{login}/delete/cover')->controller('UserController@userCoverRemove')->where(['login' => '[A-Za-z0-9]+']); 
 

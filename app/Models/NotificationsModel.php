@@ -80,6 +80,13 @@ class NotificationsModel extends \MainModel
 		return true;
 	}
     
+    // Кто подписан на данный вопрос / пост
+    public static function gerFocusUsersPost($post_id)
+    {
+        return XD::select(['signed_post_id', 'signed_user_id'])->from(['posts_signed'])
+                ->where(['signed_post_id'], '=', $post_id)->getSelect();  
+    } 
+    
     // Оповещение просмотрено
     public static function updateMessagesUnread($uid, $notif_id)
     {

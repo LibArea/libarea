@@ -80,6 +80,18 @@ class AddAnswerController extends \MainController
                 NotificationsModel::send($uid['id'], $user_id, $type, $last_answer_id, $url_answer, 1);
             }
         }
+        
+        // Кто подписан на данный вопрос / пост
+        if ($focus_all = NotificationsModel::gerFocusUsersPost($post['post_id'])) {
+            
+            foreach ($focus_all as $focus_user) {
+                if ($focus_user['signed_user_id'] != $uid['id']) {
+                    $type = 3; // Ответ на пост
+                    NotificationsModel::send($uid['id'], $focus_user['signed_user_id'], $type, $last_answer_id, $url_answer, 1);
+                }
+            }
+            
+        }
 
         // Пересчитываем количество ответов для поста + 1
         PostModel::updateCount($post_id, 'answers');

@@ -159,12 +159,28 @@
                     <div class="post-full-footer">
                         <?= votes($uid['id'], $post, 'post'); ?>
 
-                        <span class="right">
+                       <span class="right">
                             <i class="light-icon-messages middle"></i>
                             <?= $post['post_answers_count'] + $post['post_comments_count'] ?>
                         </span>
 
                     </div>
+                    <?php if (!$uid['id']) { ?>
+                        <a class="right size-13 vertical-bottom add-focus focus-topic" href="/login">
+                            + <?= lang('Read'); ?>
+                        </a>
+                    <?php } else { ?>
+                        <?php if (is_array($post_signed)) { ?>
+                            <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id size-13 right vertical-bottom del-focus focus-topic">
+                                <?= lang('Unsubscribe'); ?>
+                            </div>
+                        <?php } else { ?>
+                            <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id size-13 right vertical-bottom add-focus focus-topic">
+                                + <?= lang('Read'); ?>
+                            </div>
+                        <?php } ?>
+                    <?php } ?>
+                    
                     <div>
                         <?php if ($post['post_type'] == 0 && $post['post_draft'] == 0) { ?>
                             <?php if ($uid['id'] > 0) { ?>

@@ -4,6 +4,7 @@ namespace App\Controllers\Post;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Models\NotificationsModel;
+use App\Models\SubscriptionModel;
 use App\Models\ActionModel;
 use App\Models\SpaceModel;
 use App\Models\WebModel;
@@ -198,6 +199,8 @@ class AddPostController extends \MainController
                 Base::AddWebhook($post_content, $post_title, $url_post);
             }
         }
+
+        SubscriptionModel::focus($last_post_id, $uid['id'], 'post');
 
         redirect($url_post);
     }

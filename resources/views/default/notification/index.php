@@ -18,8 +18,8 @@
                                 <?php } else { ?>
                                     <i class="light-icon-mail middle"></i>
                                 <?php } ?>
-
-                                <a href="/u/<?= $notif['login']; ?>"><?= $notif['login']; ?></a>
+                                <span class="indent"></span>
+                                <a class="gray" href="/u/<?= $notif['login']; ?>"><?= $notif['login']; ?></a>
                                 <?= lang('Wrote to you'); ?>
                                 <a href="/notifications/read/<?= $notif['notification_id']; ?>"><?= lang('Message'); ?></a>
                             <?php } ?>
@@ -29,13 +29,18 @@
                             <?php } ?>
 
                             <?php if ($notif['action_type'] == 3) { ?>
-                                <?= lang('Replied to post'); ?>
                                 <i class="light-icon-book middle"></i>
+                                <span class="indent"></span>
+                                <a class="gray" href="/u/<?= $notif['login']; ?>">@<?= $notif['login']; ?></a>
+                                <a class="ntf2 lowercase" href="/notifications/read/<?= $notif['notification_id']; ?>">
+                                    <?= lang('Replied to post'); ?>
+                                </a>
                             <?php } ?>
 
                             <?php if ($notif['action_type'] == 10 || $notif['action_type'] == 11 || $notif['action_type'] == 12) { ?>
                                 <i class="light-icon-user middle"></i>
-                                <a href="/u/<?= $notif['login']; ?>">@<?= $notif['login']; ?></a>
+                                <span class="indent"></span>
+                                <a class="gray" href="/u/<?= $notif['login']; ?>">@<?= $notif['login']; ?></a>
                                 <?= lang('appealed to you'); ?>
                                 <a class="ntf2 lowercase" href="/notifications/read/<?= $notif['notification_id']; ?>">
                                     <?php if ($notif['action_type'] == 10) { ?>
@@ -50,6 +55,7 @@
                             <?php if ($notif['action_type'] == 15) { ?>
                                 <a class="ntf2 lowercase" href="/notifications/read/<?= $notif['notification_id']; ?>">
                                     <i class="light-icon-activity middle red"></i>
+                                    <span class="indent"></span>
                                     <?= lang('Audit'); ?>
                                 </a>
                                 |
@@ -68,7 +74,8 @@
                                     <?php } else { ?>
                                         <i class="light-icon-messages middle"></i>
                                     <?php } ?>
-                                    <a href="/u/<?= $notif['login']; ?>"><?= $notif['login']; ?></a>
+                                    <span class="indent"></span>
+                                    <a class="gray" href="/u/<?= $notif['login']; ?>"><?= $notif['login']; ?></a>
                                     <?= lang('Wrote'); ?>
                                     <a class="ntf2" href="/notifications/read/<?= $notif['notification_id']; ?>">
                                         <?= lang('Comment'); ?>

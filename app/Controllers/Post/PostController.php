@@ -3,6 +3,7 @@
 namespace App\Controllers\Post;
 
 use Hleb\Constructor\Handlers\Request;
+use App\Models\SubscriptionModel;
 use App\Models\UserModel;
 use App\Models\PostModel;
 use App\Models\FeedModel;
@@ -103,6 +104,8 @@ class PostController extends \MainController
             $content_img  = Config::get(Config::PARAM_URL) . '/uploads/posts/cover/' . $post['post_content_img'];
         }
 
+        $post_signed   = SubscriptionModel::getFocus($post['post_id'], $uid['id'], 'post');
+
         $desc  = mb_strcut(strip_tags($post['post_content']), 0, 180);
         $meta_desc = $desc . ' — ' . $post['space_name'];
         $meta_title = strip_tags($post['post_title']) . ' — ' . strip_tags($post['space_name']) . ' | ' . Config::get(Config::PARAM_NAME);
@@ -138,7 +141,7 @@ class PostController extends \MainController
             'meta_desc'     => $meta_desc,
         ];
 
-        return view(PR_VIEW_DIR . '/post/view', ['data' => $data, 'post' => $post, 'answers' => $answers,  'uid' => $uid,  'recommend' => $recommend,  'lo' => $lo, 'post_related' => $post_related, 'topics' => $topics]);
+        return view(PR_VIEW_DIR . '/post/view', ['data' => $data, 'post' => $post, 'answers' => $answers,  'uid' => $uid,  'recommend' => $recommend,  'lo' => $lo, 'post_related' => $post_related, 'topics' => $topics, 'post_signed' => $post_signed]);
     }
 
     // Посты участника
