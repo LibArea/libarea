@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use Hleb\Constructor\Handlers\Request;
+use App\Models\NotificationsModel;
 use App\Models\UserModel;
 use App\Models\PostModel;
 use App\Models\SpaceModel;
@@ -205,12 +206,7 @@ class UserController extends \MainController
     function settingSecurityPage()
     {
         $uid  = Base::getUid();
-        $login  = \Request::get('login');
-
-        // Ошибочный Slug в Url
-        if ($login != $uid['login']) {
-            redirect('/u/' . $uid['login'] . '/setting/security');
-        }
+        self::accessPage(\Request::get('login'), $uid, '/setting/security');
 
         $data = [
             'h1'            => lang('Change password'),
@@ -291,15 +287,10 @@ class UserController extends \MainController
     // Страница закладок участника
     function userFavorites()
     {
-        $login  = \Request::get('login');
-
         $uid    = Base::getUid();
         $user   = UserModel::getUser($uid['login'], 'slug');
 
-        // Ошибочный Slug в Url
-        if ($login != $uid['login']) {
-            redirect('/u/' . $user['login'] . '/favorite');
-        }
+        self::accessPage(\Request::get('login'), $uid, '/favorite');
 
         $fav = UserModel::userFavorite($user['id']);
 
@@ -314,8 +305,8 @@ class UserController extends \MainController
 
         $data = [
             'sheet'         => 'favorites',
-            'h1'            => lang('Favorites') . ' ' . $login,
-            'meta_title'    => lang('Favorites') . ' ' . $login . ' | ' . Config::get(Config::PARAM_NAME),
+            'h1'            => lang('Favorites') . ' ' . $uid['login'],
+            'meta_title'    => lang('Favorites') . ' ' . $uid['login'] . ' | ' . Config::get(Config::PARAM_NAME),
         ];
 
         return view(PR_VIEW_DIR . '/user/favorite', ['data' => $data, 'uid' => $uid, 'favorite' => $result]);
@@ -325,15 +316,12 @@ class UserController extends \MainController
     function userCoverRemove()
     {
         $uid        = Base::getUid();
-        $login      = \Request::get('login');
+
         $redirect   = '/u/' . $uid['login'] . '/setting/avatar';
+        
+        self::accessPage(\Request::get('login'), $uid, $redirect);
 
-        // Ошибочный Slug в Url
-        if ($login != $uid['login'] && $uid['trust_level'] != 5) {
-            redirect($redirect);
-        }
-
-        $user = UserModel::getUser($login, 'slug');
+        $user = UserModel::getUser($uid['login'], 'slug');
 
         // Удалять может только автор и админ
         if ($user['id'] != $uid['id'] && $uid['trust_level'] != 5) {
@@ -361,22 +349,17 @@ class UserController extends \MainController
     // Страница черновиков участника
     function userDrafts()
     {
-        $login  = \Request::get('login');
-
         $uid    = Base::getUid();
         $user   = UserModel::getUser($uid['login'], 'slug');
 
-        // Ошибочный Slug в Url
-        if ($login != $uid['login']) {
-            redirect('/u/' . $user['login'] . '/drafts');
-        }
+        self::accessPage(\Request::get('login'), $uid, '/drafts');
 
         $drafts = UserModel::userDraftPosts($user['id']);
 
         $data = [
             'sheet'         => 'drafts',
-            'h1'            => lang('Drafts') . ' ' . $login,
-            'meta_title'    => lang('Drafts') . ' ' . $login . ' | ' . Config::get(Config::PARAM_NAME)
+            'h1'            => lang('Drafts') . ' ' . $user['login'],
+            'meta_title'    => lang('Drafts') . ' ' . $user['login'] . ' | ' . Config::get(Config::PARAM_NAME)
         ];
 
         return view(PR_VIEW_DIR . '/user/draft-post', ['data' => $data, 'uid' => $uid, 'drafts' => $drafts]);
@@ -402,12 +385,8 @@ class UserController extends \MainController
     {
         // Страница участника и данные
         $uid    = Base::getUid();
-        $login      = \Request::get('login');
 
-        // Запретим смотреть инвайты чужого профиля
-        if ($login != $uid['login']) {
-            redirect('/u/' . $uid['login'] . '/invitation');
-        }
+        self::accessPage(\Request::get('login'), $uid, '/invitation');
 
         $Invitation = UserModel::InvitationResult($uid['id']);
 
@@ -464,13 +443,19 @@ class UserController extends \MainController
     
     public function preferencesPage() 
     {
-
         $uid    = Base::getUid();
-        $login      = \Request::get('login');
 
-        // Запретим смотреть инвайты чужого профиля
-        if ($login != $uid['login']) {
-            redirect('/u/' . $uid['login'] . '/invitation');
+        self::accessPage(\Request::get('login'), $uid, '/preferences');
+
+        $focus_posts = NotificationsModel::getFocusPostsListUser($uid['id']);
+        
+        $result = array();
+        foreach ($focus_posts as $ind => $row) {
+            $text                           = explode("\n", $row['post_content']);
+            $row['post_content_preview']    = Content::text($text[0], 'line');
+            $row['lang_num_answers']        = word_form($row['post_answers_count'], lang('Answer'), lang('Answers-m'), lang('Answers'));
+            $row['post_date']               = lang_date($row['post_date']);
+            $result[$ind]                   = $row;
         }
         
         $data = [
@@ -479,7 +464,15 @@ class UserController extends \MainController
             'meta_title'    => lang('Preferences') . ' | ' . Config::get(Config::PARAM_NAME)
         ];
 
-        return view(PR_VIEW_DIR . '/user/preferences', ['data' => $data, 'uid' => $uid]);
+        return view(PR_VIEW_DIR . '/user/preferences', ['data' => $data, 'uid' => $uid, 'posts' => $result]);
         
     }
+    
+    public function accessPage($login, $uid, $redirect) 
+    {
+        if ($login != $uid['login']) {
+            redirect('/u/' . $uid['login'] . $redirect);
+        }    
+    }
+    
 }

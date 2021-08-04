@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Models;
-use XdORM\XD;
+
 use App\Models\UserModel;
+use XdORM\XD;
+use DB;
+use PDO;
 
 class NotificationsModel extends \MainModel
 {
@@ -81,11 +84,84 @@ class NotificationsModel extends \MainModel
 	}
     
     // Кто подписан на данный вопрос / пост
-    public static function gerFocusUsersPost($post_id)
+    public static function getFocusUsersPost($post_id)
     {
         return XD::select(['signed_post_id', 'signed_user_id'])->from(['posts_signed'])
                 ->where(['signed_post_id'], '=', $post_id)->getSelect();  
     } 
+    
+    // Список читаемых постов
+    public static function getFocusPostUser($user_id)
+    {
+        return XD::select(['signed_post_id', 'signed_user_id'])->from(['posts_signed'])
+                ->where(['signed_user_id'], '=', $user_id)->getSelect();    
+    } 
+    
+    public static function getFocusPostsListUser($user_id)
+    {
+        $focus_posts = self::getFocusPostUser($user_id);
+       
+        $result = Array();
+        foreach ($focus_posts as $ind => $row) {
+            $result[$ind] = $row['signed_post_id'];
+        } 
+        
+        $string = "WHERE post_id IN(".implode(',', $result).") AND post_draft = 0";
+        
+               $sql = "SELECT 
+                    post_id,
+                    post_title,
+                    post_slug,
+                    post_type,
+                    post_translation,
+                    post_draft,
+                    post_space_id,
+                    post_date,
+                    post_published,
+                    post_user_id,
+                    post_votes,
+                    post_answers_count,
+                    post_comments_count,
+                    post_content,
+                    post_content_img,
+                    post_thumb_img,
+                    post_merged_id,
+                    post_closed,
+                    post_tl,
+                    post_lo,
+                    post_top,
+                    post_url_domain,
+                    post_is_deleted,
+                    rel.*,
+                    votes_post_item_id, votes_post_user_id,
+                    id, login, avatar, 
+                    space_id, space_slug, space_name, space_color
+                    
+                        FROM posts
+                        LEFT JOIN
+                        (
+                            SELECT 
+                                MAX(topic_id), 
+                                MAX(topic_slug), 
+                                MAX(topic_title),
+                                MAX(relation_topic_id), 
+                                relation_post_id,
+
+                                GROUP_CONCAT(topic_slug, '@', topic_title SEPARATOR '@') AS topic_list
+                                FROM topics  
+                                LEFT JOIN topics_post_relation 
+                                    on topic_id = relation_topic_id
+                                GROUP BY relation_post_id
+                        ) AS rel
+                            ON rel.relation_post_id = post_id 
+
+            INNER JOIN users ON id = post_user_id
+            INNER JOIN spaces ON space_id = post_space_id
+            LEFT JOIN votes_post ON votes_post_item_id = post_id AND votes_post_user_id = :user_id
+            $string  LIMIT 100"; 
+
+        return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC); 
+    }   
     
     // Оповещение просмотрено
     public static function updateMessagesUnread($uid, $notif_id)

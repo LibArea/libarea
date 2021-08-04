@@ -76,6 +76,8 @@ return [
     'info_recover'          => 'fter you click the "Reset" button, check your e-mail...',
     'Ban-space-info-posts'  => 'A space ban will result in the unavailability of all posts',
     'meta-moderation'       => 'Actions of the participant and moderators to delete and restore the content in the community.',
+    'info_favorite'         => 'Posts, comments and questions that you follow',
+    'info_preferences'      => 'Posts that you have subscribed to. You will receive notifications about all new responses',
 
     'space-subscription'    => '<a class="gray" href="/spaces">Subscribe to spaces and read them in the feed</a>',
 

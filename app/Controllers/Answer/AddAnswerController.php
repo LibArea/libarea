@@ -82,7 +82,7 @@ class AddAnswerController extends \MainController
         }
         
         // Кто подписан на данный вопрос / пост
-        if ($focus_all = NotificationsModel::gerFocusUsersPost($post['post_id'])) {
+        if ($focus_all = NotificationsModel::getFocusUsersPost($post['post_id'])) {
             
             foreach ($focus_all as $focus_user) {
                 if ($focus_user['signed_user_id'] != $uid['id']) {

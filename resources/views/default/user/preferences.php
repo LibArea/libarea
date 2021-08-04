@@ -4,15 +4,38 @@
         <div class="white-box">
             <div class="inner-padding">
                 <?= breadcrumb('/', lang('Home'), '/u/' . $uid['login'], lang('Profile'), $data['h1']); ?>
-
-                <?= lang('Under development'); ?>...
+                
+                <ul class="nav-tabs">
+                  <?php if ($data['sheet'] == 'favorite') { ?>
+                    <li class="active">
+                      <span><?= lang('Favorites'); ?></span>
+                    </li>
+                    <li>
+                      <a href="/u/<?= $uid['login']; ?>/preferences">
+                        <span><?= lang('Preferences'); ?></span>
+                      </a>
+                    </li>
+                  <?php } elseif ($data['sheet'] == 'preferences') { ?>
+                    <li>
+                      <a href="/u/<?= $uid['login']; ?>/favorite">
+                        <span><?= lang('Favorites'); ?></span>
+                      </a>
+                    </li>
+                    <li class="active">
+                      <span><?= lang('Preferences'); ?></span>
+                    </li>
+                  <?php } ?>
+                </ul>
             </div>
         </div>
+
+        <?php include TEMPLATE_DIR . '/_block/post.php'; ?>
+
     </main>
     <aside>
         <div class="white-box">
             <div class="inner-padding big">
-                <?= lang('Under development'); ?>...
+                <?= lang('info_preferences'); ?>...
             </div>
         </div>
     </aside>

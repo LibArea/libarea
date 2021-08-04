@@ -12,6 +12,11 @@
         <span class="gray lowercase indent">
           <?= $post['post_date'] ?>
         </span>
+       <?php if ($data['sheet'] == 'preferences') { ?>
+            <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id size-13 right">
+                 <span class="indent"> &#183; </span> <?= lang('Unsubscribe'); ?>
+            </div>
+       <?php } ?>
       </div>
 
       <?php if ($post['post_thumb_img']) { ?>
@@ -93,7 +98,7 @@
             </a>
           <?php } ?>
         </div>
-
+        
       </div>
     </div>
   <?php } ?>
