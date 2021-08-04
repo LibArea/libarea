@@ -184,14 +184,9 @@ img {
   top: 15px;
 }
 
-.sticky.recommend {
-  top: 45px;
-}
-
 .white-box {
   background-color: var(--secondary);
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
-  overflow: hidden;
   margin-bottom: 20px;
   border-radius: 2px;
 }
@@ -295,11 +290,6 @@ a.logo:hover {
 
 a.home {
   color: #888;
-}
-
-.sb-date {
-  margin-left: 20px;
-  color: var(--tertiary);
 }
 
 .sb-telo a {
@@ -1025,12 +1015,10 @@ ol.comment-telo {
   position: relative;
   z-index: 1;
   height: 45px;
-  margin: 0;
   padding: 13px 15px 15px 0;
   list-style: none;
   color: #667d99;
   background-color: var(--secondary);
-  margin-bottom: 20px;
   border-radius: 2px;
 }
 

@@ -24,7 +24,6 @@ class VotesController extends \MainController
         if ($up_id <= 0) {
             return false;
         }
-
         // Получаем id автора контента и проверяем, чтобы участник не голосовал за свой контент
         // $type = post / answer / comment / link
         $author_id = VotesModel::authorId($up_id, $type);

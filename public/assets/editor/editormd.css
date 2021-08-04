@@ -1863,4 +1863,7 @@ i.icon {
      display: none !important;
    }
    .editormd-menu > li { padding: 5px 1px; }
+   .editormd-menu > li:nth-last-child(12n) { display: none; }
+   .editormd-menu > li:nth-last-child(4) { display: none; }
+   .editormd-menu > li:nth-last-child(1) { display: none; }
 }

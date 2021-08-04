@@ -26,7 +26,6 @@
         <a class="gray nav no-mob" title="<?= lang('Topics'); ?>" href="/topics">
           <i class="light-icon-layers-subtract"></i>
         </a>
-        <span class="ml15"></span>
         <a class="gray nav no-mob" title="<?= lang('Spaces'); ?>" href="/spaces">
           <i class="light-icon-infinity"></i>
         </a>

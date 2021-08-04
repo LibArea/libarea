@@ -11,7 +11,7 @@
 
 <div class="wrap">
   <main class="telo">
-    <ul class="nav-tabs">
+    <ul class="nav-tabs mt0 mb15">
       <?php if ($data['sheet'] == 'feed') { ?>
         <li class="active">
           <span><?= lang('Feed'); ?></span>
@@ -106,13 +106,13 @@
       <div class="last-comm white-box sticky">
         <div class="pt5 pr15 pb5 pl15">
           <?php foreach ($data['latest_answers'] as  $answer) { ?>
-            <div class="mt15 mr0 mb15 ml0" style="border-left: 2px solid <?= $answer['space_color']; ?>;">
-              <div class="sb-date size-13">
+            <div class="mt15 mr0 mb15 ml0 pl15" style="border-left: 2px solid <?= $answer['space_color']; ?>;">
+              <div class="size-13">
                 <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava'); ?>
                 <span class="mr5 ml5"></span>
                 <?= $answer['answer_date']; ?>
               </div>
-              <a class="sb-date" href="/post/<?= $answer['post_id']; ?>/<?= $answer['post_slug']; ?>#answer_<?= $answer['answer_id']; ?>">
+              <a class="gray" href="/post/<?= $answer['post_id']; ?>/<?= $answer['post_slug']; ?>#answer_<?= $answer['answer_id']; ?>">
                 <?= $answer['answer_content']; ?>...
               </a>
             </div>

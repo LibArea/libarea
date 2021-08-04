@@ -71,13 +71,15 @@ $(function(){
     $(document).on('click', '.up-id', function() {
         let up_id           = $(this).data('id');
         let type_content    = $(this).data('type');
+        let count           = $(this).data('count');
         $.ajax({
             url: '/votes/' + type_content,
             type: 'POST',
             data: {up_id: up_id},
         }).done(function(data) {
+            let new_cont = '+' + (parseInt(count) + parseInt(1));
             $('#up' + up_id + '.voters').addClass('active');
-            $('#up' + up_id).find('.score').html('+');
+            $('#up' + up_id).find('.score').html(new_cont);
         });
     });
      // Add a post to your profile

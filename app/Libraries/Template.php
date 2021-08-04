@@ -314,8 +314,9 @@ function votes($user_id, $content, $type)
                             ' . $count . '
                         </div></div>';
         } else {
+            $num_count = empty($count) ? 0 : $count;
             $html .= '<div id="up' . $content[$type . '_id'] . '" class="voters">
-                        <div data-id="' . $content[$type . '_id'] . '" data-type="' . $type . '" class="up-id"></div>
+                        <div data-id="' . $content[$type . '_id'] . '" data-count="' . $num_count . '" data-type="' . $type . '" class="up-id"></div>
                         <div class="score">
                             ' . $count . '
                         </div></div>';
