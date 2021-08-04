@@ -2,19 +2,19 @@
   <?php foreach ($posts as  $post) { ?>
 
     <div class="post-telo white-box">
-      <div class="post-header size-13 flex">
+      <div class="pt15 pr15 pb0 pl15 size-13 flex">
         <a class="gray" href="/u/<?= $post['login']; ?>">
           <?= user_avatar_img($post['avatar'], 'small', $post['login'], 'ava'); ?>
-          <span class="indent">
+          <span class="mr5 ml5">
             <?= $post['login']; ?>
           </span>
         </a>
-        <span class="gray lowercase indent">
+        <span class="gray lowercase mr5 ml5">
           <?= $post['post_date'] ?>
         </span>
        <?php if ($data['sheet'] == 'preferences') { ?>
             <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id size-13 right">
-                 <span class="indent"> &#183; </span> <?= lang('Unsubscribe'); ?>
+                 <span class="mr5 ml5"> &#183; </span> <?= lang('Unsubscribe'); ?>
             </div>
        <?php } ?>
       </div>
@@ -27,7 +27,7 @@
 
       <div class="post-body">
         <a href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
-          <h2 class="title size-21 indent-big"><?= $post['post_title']; ?>
+          <h2 class="title size-21 ml15 mt0 mb0"><?= $post['post_title']; ?>
             <?php if ($post['post_is_deleted'] == 1) { ?>
               <i class="light-icon-trash red"></i>
             <?php } ?>
@@ -54,20 +54,20 @@
             <?php } ?>
           </h2>
         </a>
-        <div class="flex indent-big">
+        <div class="flex ml15">
           <a class="gray size-13" href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
             <span class="post-space-color" style="background-color: <?= $post['space_color']; ?>;"></span>
             <?= $post['space_name']; ?>
           </a>
-          <?= html_topic($post['topic_list'], 'gray size-13 indent-big'); ?>
+          <?= html_topic($post['topic_list'], 'gray size-13 ml15'); ?>
           <?php if ($post['post_url_domain']) { ?>
-            <span class="indent"></span>
+            <span class="mr5 ml5"></span>
             <a class="gray size-13" href="/domain/<?= $post['post_url_domain']; ?>">
               <i class="light-icon-link size-13 middle"></i> <?= $post['post_url_domain']; ?>
             </a>
           <?php } ?>
         </div>
-        <div class="post-details">
+        <div class="pl15">
           <div class="show_add_<?= $post['post_id']; ?>">
             <div data-post_id="<?= $post['post_id']; ?>" class="showpost">
               <?= $post['post_content_preview']; ?>
@@ -84,7 +84,7 @@
           </div>
         <?php } ?>
 
-        <div class="post-footer lowercase">
+        <div class="pt5 pr15 pb5 pl15 hidden lowercase">
           <?= votes($uid['id'], $post, 'post'); ?>
           <?php if ($post['post_answers_count'] != 0) { ?>
             <a class="right gray" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">

@@ -2,7 +2,7 @@
 <div class="wrap">
     <main>
         <div class="white-box">
-            <div class="inner-padding">
+            <div class="pt5 pr15 pb5 pl15">
                 <h1><?= $data['h1']; ?>
                     <?php if ($uid['trust_level'] == 5) { ?>
                         <a class="right" href="/admin/topics">
@@ -23,7 +23,7 @@
                                         <?= $topic['topic_title']; ?>
                                     </a>
 
-                                    <span class="indent"></span>
+                                    <span class="mr5 ml5"></span>
                                     <sup class="gray">x<?= $topic['topic_count']; ?></sup>
                                     <?php if ($topic['topic_is_parent'] == 1 && $uid['trust_level'] == 5) { ?>
                                         <sup class="red size-13">root</sup>
@@ -47,13 +47,13 @@
     </main>
     <aside>
         <div class="white-box">
-            <div class="inner-padding big">
+            <div class="p15">
                 <?= lang('topic_info'); ?>
             </div>
         </div>
         <?php if (!empty($news)) { ?>
             <div class="white-box">
-                <div class="inner-padding big">
+                <div class="p15">
                     <h3 class="style size-13"><?= lang('New ones'); ?></h3>
                     <?php foreach ($news as $new) { ?>
                         <a title="<?= $new['topic_title']; ?>" class="tags size-13" href="/topic/<?= $new['topic_slug']; ?>">

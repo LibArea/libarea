@@ -2,7 +2,7 @@
 <div class="wrap">
     <main>
         <div class="white-box">
-            <div class="inner-padding">
+            <div class="pt5 pr15 pb5 pl15">
                 <h1><?= $data['h1']; ?></h1>
                 <div class="form mini">
                     <form class="" action="/login" method="post">
@@ -22,9 +22,9 @@
                         <div class="boxline">
                             <button type="submit" class="button"><?= lang('Sign in'); ?></button>
                             <?php if (!Lori\Config::get(Lori\Config::PARAM_INVITE)) { ?>
-                                <span class="indent size-13"><a href="/register"><?= lang('Sign up'); ?></a></span>
+                                <span class="mr5 ml5 size-13"><a href="/register"><?= lang('Sign up'); ?></a></span>
                             <?php } ?>
-                            <span class="indent size-13"><a href="/recover"><?= lang('Forgot your password'); ?>?</a></span>
+                            <span class="mr5 ml5 size-13"><a href="/recover"><?= lang('Forgot your password'); ?>?</a></span>
                         </div>
                     </form>
 
@@ -37,7 +37,7 @@
     </main>
     <aside>
         <div class="white-box">
-            <div class="inner-padding big">
+            <div class="p15">
                 <?= lang('info_login'); ?>
             </div>
         </div>

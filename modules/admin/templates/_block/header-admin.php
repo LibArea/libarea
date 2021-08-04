@@ -4,6 +4,7 @@
 <head>
     <title><?= $data['meta_title']; ?></title>
     <?php getRequestHead()->output(); ?>
+    <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/assets/css/admin.css">
     <script src="/assets/js/jquery-3.6.0.min.js"></script>
 </head>
@@ -11,10 +12,10 @@
 <body>
 
     <header>
-        <div class="header-left">
+        <div class="header-left p15">
             IP: <?= Request::getRemoteAddress(); ?>
         </div>
-        <div class="header-right">
+        <div class="right p15">
             <a title="<?= lang('Home'); ?>" rel="noreferrer" href="/">
                 <i class="light-icon-arrow-bar-right"></i>
             </a>

@@ -2,7 +2,7 @@
 <div class="wrap">
   <main class="admin">
     <div class="white-box">
-      <div class="inner-padding">
+      <div class="pt5 pr15 pb5 pl15">
         <?= breadcrumb('/admin', lang('Admin'), null, null, $data['meta_title']); ?>
 
         <ul class="nav-tabs">
@@ -35,10 +35,10 @@
               <div class="size-13">
                 <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava'); ?>
                 <a class="date" href="/u/<?= $answer['login']; ?>"><?= $answer['login']; ?></a>
-                <span class="indent"> &#183; </span>
+                <span class="mr5 ml5"> &#183; </span>
                 <?= $answer['date']; ?>
 
-                <span class="indent"> &#183; </span>
+                <span class="mr5 ml5"> &#183; </span>
                 <a href="/post/<?= $answer['post_id']; ?>/<?= $answer['post_slug']; ?>">
                   <?= $answer['post_title']; ?>
                 </a>
@@ -50,7 +50,7 @@
               <div class="answ-telo-body max-width">
                 <?= $answer['content']; ?>
               </div>
-              <div class="content-footer">
+              <div class="content-footer mb15 mt5 pb5 size-13 hidden gray">
                 + <?= $answer['answer_votes']; ?>
 
                 <span id="cm_dell" class="right comment_link size-13">

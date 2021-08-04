@@ -2,7 +2,7 @@
 <div class="wrap">
     <main>
         <div class="white-box">
-            <div class="inner-padding">
+            <div class="pt5 pr15 pb5 pl15">
                 <h1>
                     <?= $data['h1']; ?>
                     <a class="right size-13" href="/u/<?= $uid['login']; ?>/messages"><?= lang('All messages'); ?></a>
@@ -19,7 +19,7 @@
     </main>
     <aside>
         <div class="white-box">
-            <div class="inner-padding big">
+            <div class="p15">
                 <?= lang('Under development'); ?>...
             </div>
         </div>

@@ -2,21 +2,21 @@
 <div class="wrap">
     <main>
         <div class="white-box">
-            <div class="inner-padding">
+            <div class="pt5 pr15 pb5 pl15">
                 <h1><?= $data['h1']; ?></h1>
                 <?php if (!empty($moderations)) { ?>
                     <div class="moderations">
 
                         <?php foreach ($moderations as  $mod) { ?>
                             <div class="post-telo white-box">
-                                <div class="post-footer-full size-13 lowercase">
+                                <div class="size-13 lowercase">
                                     <a href="/u/<?= $mod['login']; ?>">
                                         <?= user_avatar_img($mod['avatar'], 'small', $mod['login'], 'ava'); ?>
-                                        <span class="indent">
+                                        <span class="mr5 ml5">
                                             <?= $mod['login']; ?>
                                         </span>
                                     </a>
-                                    <span class="indent">
+                                    <span class="mr5 ml5">
                                         <?= $mod['mod_created_at']; ?>
                                     </span>
                                 </div>
@@ -45,7 +45,7 @@
     </main>
     <aside>
         <div class="white-box">
-            <div class="inner-padding big">
+            <div class="p15">
                 <?= lang('meta-moderation'); ?>
             </div>
         </div>

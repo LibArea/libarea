@@ -2,7 +2,7 @@
 <div class="wrap">
     <main class="w-100">
         <div class="white-box">
-            <div class="inner-padding">
+            <div class="pt5 pr15 pb5 pl15">
                 <?= breadcrumb('/', lang('Home'), null, null, $data['h1']); ?>
 
                 <div class="box create">
@@ -18,7 +18,7 @@
                                 <div class="boxline">
                                     <label class="form-label" for="post_title">URL</label>
                                     <input id="link" class="form-input" type="text" name="post_url" />
-                                    <input id="graburl" readonly="readonly" class="right center vertical-ind" type="submit_url" name="submit_url" value="<?= lang('To extract'); ?>" />
+                                    <input id="graburl" readonly="readonly" class="right center mt15 mb15" type="submit_url" name="submit_url" value="<?= lang('To extract'); ?>" />
                                     <br>
                                 </div>
                             <?php } ?>

@@ -2,7 +2,7 @@
 <div class="wrap">
     <main>
         <div class="white-box">
-            <div class="inner-padding">
+            <div class="pt5 pr15 pb5 pl15">
                 <h1><?= $data['h1']; ?></h1>
                 <div class="all-users">
                     <?php foreach ($users as $ind => $user) { ?>
@@ -35,7 +35,7 @@
             <?php include TEMPLATE_DIR . '/_block/login.php'; ?>
         <?php } else { ?>
             <div class="white-box">
-                <div class="inner-padding big">
+                <div class="p15">
                     <?= lang('info_users'); ?>
                 </div>
             </div>

@@ -26,7 +26,7 @@
         <a class="gray nav no-mob" title="<?= lang('Topics'); ?>" href="/topics">
           <i class="light-icon-layers-subtract"></i>
         </a>
-        <span class="indent-big"></span>
+        <span class="ml15"></span>
         <a class="gray nav no-mob" title="<?= lang('Spaces'); ?>" href="/spaces">
           <i class="light-icon-infinity"></i>
         </a>
@@ -68,8 +68,9 @@
           </a>
         </div>
         <div class="dropbtn nav">
-          <div class="nick" title=""><span><?= $uid['login']; ?></span>
-            <?= user_avatar_img($uid['avatar'], 'small', $uid['login'], 'ava'); ?>
+          <div class="nick gray" title="<?= $uid['login']; ?>">
+            <?= $uid['login']; ?>
+            <?= user_avatar_img($uid['avatar'], 'small', $uid['login'], 'ava ml5'); ?>
             <i class="light-icon-chevron-down middle"></i>
           </div>
           <div class="dropdown-menu absolute">

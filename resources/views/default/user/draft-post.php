@@ -2,7 +2,7 @@
 <div class="wrap">
     <main>
         <div class="white-box">
-            <div class="inner-padding">
+            <div class="pt5 pr15 pb5 pl15">
                 <?= breadcrumb('/', lang('Home'), '/u/' . $uid['login'], lang('Profile'), $data['h1']); ?>
 
                 <div class="drafts max-width">
@@ -38,7 +38,7 @@
     </main>
     <aside>
         <div class="white-box">
-            <div class="inner-padding big">
+            <div class="p15">
                 <?= lang('Under development'); ?>...
             </div>
         </div>

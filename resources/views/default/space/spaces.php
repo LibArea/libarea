@@ -2,10 +2,10 @@
 <div class="wrap">
     <main>
         <div class="white-box">
-            <div class="inner-padding">
+            <div class="pt5 pr15 pb5 pl15">
                 <?php if ($uid['id'] > 0) { ?>
                     <?php if ($add_space_button === true) { ?>
-                        <a title="<?= lang('To create'); ?>" class="right vertical-ind size-13" href="/space/add">
+                        <a title="<?= lang('To create'); ?>" class="right mt15 mb15 size-13" href="/space/add">
                             <i class="light-icon-plus red"></i>
                         </a>
                     <?php } ?>
@@ -115,7 +115,7 @@
     </main>
     <aside>
         <div class="white-box">
-            <div class="inner-padding big">
+            <div class="p15">
                 <?php if ($data['sheet'] == 'spaces') { ?>
                     <?= lang('info_space'); ?>
                 <?php } else { ?>

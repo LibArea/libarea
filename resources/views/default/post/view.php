@@ -9,7 +9,7 @@
     <main>
         <article class="post-full">
             <?php if ($post['post_is_deleted'] == 0 || $uid['trust_level'] == 5) { ?>
-                <div class="white-box telo-detail-post<?php if ($post['post_is_deleted'] == 1) { ?> dell<?php } ?>">
+                <div class="white-box p15<?php if ($post['post_is_deleted'] == 1) { ?> delleted pl15<?php } ?>">
 
                     <div class="post-body">
                         <h1 class="title size-21">
@@ -42,7 +42,7 @@
                         <div class="size-13 lowercase flex">
                             <a class="gray" href="/u/<?= $post['login']; ?>">
                                 <?= user_avatar_img($post['avatar'], 'small', $post['login'], 'ava'); ?>
-                                <span class="indent">
+                                <span class="mr5 ml5">
                                     <?= $post['login']; ?>
                                 </span>
                             </a>
@@ -54,14 +54,14 @@
                             </span>
                             <?php if ($uid['id']) { ?>
                                 <?php if ($uid['login'] == $post['login']  || $uid['trust_level'] == 5) { ?>
-                                    <span class="indent">&#183;</span>
+                                    <span class="mr5 ml5">&#183;</span>
                                     <a class="gray" href="/post/edit/<?= $post['post_id']; ?>">
                                         <?= lang('Edit'); ?>
                                     </a>
                                 <?php } ?>
                                 <?php if ($uid['login'] == $post['login']) { ?>
                                     <?php if ($post['post_draft'] == 0) { ?>
-                                        <span class="indent">&#183;</span>
+                                        <span class="mr5 ml5">&#183;</span>
                                         <?php if ($post['my_post'] == $post['post_id']) { ?>
                                             <span class="mu_post gray">+ <?= lang('in-the-profile'); ?></span>
                                         <?php } else { ?>
@@ -72,7 +72,7 @@
                                     <?php } ?>
                                 <?php } ?>
                                 <span class="add-favorite gray" data-id="<?= $post['post_id']; ?>" data-type="post">
-                                    <span class="indent">&#183;</span>
+                                    <span class="mr5 ml5">&#183;</span>
                                     <?php if ($post['favorite_post']) { ?>
                                         <?= lang('remove-favorites'); ?>
                                     <?php } else { ?>
@@ -81,7 +81,7 @@
                                 </span>
 
                                 <?php if ($uid['trust_level'] == 5) { ?>
-                                    <span class="indent"> &#183; </span>
+                                    <span class="mr5 ml5"> &#183; </span>
                                     <span id="cm_dell" class="cm_add_link">
                                         <a data-type="post" data-id="<?= $post['post_id']; ?>" class="type-action gray">
                                             <?php if ($post['post_is_deleted'] == 1) { ?>
@@ -92,7 +92,7 @@
                                         </a>
                                     </span>
                                     <span class="size-13">
-                                        <span class="indent"> &#183; </span>
+                                        <span class="mr5 ml5"> &#183; </span>
                                         <?= $post['post_hits_count']; ?>
                                     </span>
                                 <?php } ?>
@@ -121,7 +121,7 @@
                             </div>
                         <?php } ?>
                         <?php if ($post['post_url_domain']) { ?>
-                            <div class="italic vertical-ind">
+                            <div class="italic mt15 mb15">
                                 <?= lang('Website'); ?>: <a rel="nofollow noreferrer ugc" href="<?= $post['post_url']; ?>">
                                     <?= $post['post_url_domain']; ?>
                                 </a>
@@ -166,16 +166,16 @@
 
                     </div>
                     <?php if (!$uid['id']) { ?>
-                        <a class="right size-13 vertical-bottom add-focus focus-topic" href="/login">
+                        <a class="right size-13 mb15 add-focus focus-topic" href="/login">
                             + <?= lang('Read'); ?>
                         </a>
                     <?php } else { ?>
                         <?php if (is_array($post_signed)) { ?>
-                            <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id size-13 right vertical-bottom del-focus focus-topic">
+                            <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id size-13 right mb15 del-focus focus-topic">
                                 <?= lang('Unsubscribe'); ?>
                             </div>
                         <?php } else { ?>
-                            <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id size-13 right vertical-bottom add-focus focus-topic">
+                            <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id size-13 right mb15 add-focus focus-topic">
                                 + <?= lang('Read'); ?>
                             </div>
                         <?php } ?>
@@ -208,7 +208,7 @@
                 </div>
 
             <?php } else { ?>
-                <div class="telo-detail-post dell">
+                <div class="telo-detail-post delleted">
                     <?= lang('Post deleted'); ?>...
                 </div>
             <?php } ?>
@@ -242,11 +242,11 @@
 
     <aside>
         <div class="white-box">
-            <div class="inner-padding">
+            <div class="pt5 pr15 pb5 pl15">
                 <div class="space-info-img">
                     <a title="<?= $post['space_name']; ?>" href="/s/<?= $post['space_slug']; ?>">
                         <?= spase_logo_img($post['space_img'], 'max', $post['space_slug'], 'ava-24'); ?>
-                        <span class="indent"><?= $post['space_name']; ?></span>
+                        <span class="mr5 ml5"><?= $post['space_name']; ?></span>
                     </a>
                 </div>
                 <div class="gray size-13"><?= $post['space_short_text']; ?></div>
@@ -254,13 +254,13 @@
         </div>
         <?php if ($post['post_content_img']) { ?>
             <div class="white-box">
-                <div id="layer-photos" class="layer-photos inner-padding big">
+                <div id="layer-photos" class="layer-photos p15">
                     <?= post_img($post['post_content_img'], $post['post_title'], 'img-post', 'cover', $post['post_content_img']); ?>
                 </div>
             </div>
         <?php } ?>
         <div class="white-box">
-            <div class="inner-padding">
+            <div class="pt5 pr15 pb5 pl15">
                 <h3 class="recommend size-13"><?= lang('To share'); ?></h3>
                 <div class="social center" data-url="<?= Lori\Config::get(Lori\Config::PARAM_URL) . '/post/' . $post['post_id'] . '/' . $post['post_slug']; ?>" data-title="<?= $post['post_title']; ?>">
                     <a class="push gray" data-id="fb"><i class="light-icon-brand-facebook"></i></a>
@@ -276,7 +276,7 @@
 
         <?php if ($recommend) { ?>
             <div class="white-box sticky recommend">
-                <div class="inner-padding">
+                <div class="pt5 pr15 pb5 pl15">
                     <h3 class="recommend size-13"><?= lang('Recommended'); ?></h3>
                     <?php $n = 0;
                     foreach ($recommend as  $rec_post) {

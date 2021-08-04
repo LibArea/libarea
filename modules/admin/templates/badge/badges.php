@@ -2,7 +2,7 @@
 <div class="wrap">
     <main class="admin">
         <div class="white-box">
-            <div class="inner-padding">
+            <div class="pt5 pr15 pb5 pl15">
                 <a class="right" title="<?= lang('Add'); ?>" href="/admin/badges/add">
                     <i class="light-icon-plus middle"></i>
                 </a>

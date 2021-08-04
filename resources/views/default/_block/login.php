@@ -1,5 +1,5 @@
 <div class="login-nav-home white-box">
-    <div class="inner-padding big">
+    <div class="pt5 pr15 pb5 pl15 big">
         <form class="" action="/login" method="post">
             <?php csrf_field(); ?>
             <div class="login-nav">

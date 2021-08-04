@@ -2,7 +2,7 @@
 <div class="wrap">
     <main>
         <div class="white-box">
-            <div class="inner-padding big">
+            <div class="p15">
                 <?= breadcrumb('/', lang('Home'), '/u/' . $uid['login'], lang('Profile'), $data['h1']); ?>
 
                 <ul class="nav-tabs">
@@ -26,12 +26,12 @@
                         <?php csrf_field(); ?>
                         <div class="boxline">
                             <span class="name"><?= lang('Nickname'); ?></span>
-                            <?= user_avatar_img($user['avatar'], 'small', $user['login'], 'mini indent ava'); ?>
-                            <span class="indent"><?= $user['login']; ?></span>
+                            <?= user_avatar_img($user['avatar'], 'small', $user['login'], 'mini mr5 ml5 ava'); ?>
+                            <span class="mr5 ml5"><?= $user['login']; ?></span>
                         </div>
                         <div class="boxline">
                             <span class="name">E-mail</span>
-                            <span class="indent"><?= $user['email']; ?></span>
+                            <span class="mr5 ml5"><?= $user['email']; ?></span>
                         </div>
 
                         <div class="boxline">
@@ -106,7 +106,7 @@
     </main>
     <aside>
         <div class="white-box">
-            <div class="inner-padding big">
+            <div class="p15">
                 <?= lang('info_setting'); ?>
             </div>
         </div>

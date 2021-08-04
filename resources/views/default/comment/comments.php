@@ -2,7 +2,7 @@
 <div class="wrap">
     <main>
         <div class="white-box">
-            <div class="inner-padding">
+            <div class="pt5 pr15 pb5 pl15">
                 <h1><?= $data['h1']; ?></h1>
 
                 <?php if (!empty($comments)) { ?>
@@ -14,13 +14,13 @@
                                 <div class="size-13">
                                     <a class="gray" href="/u/<?= $comment['login']; ?>">
                                         <?= user_avatar_img($comment['avatar'], 'small', $comment['login'], 'ava'); ?>
-                                        <span class="indent">
+                                        <span class="mr5 ml5">
                                             <?= $comment['login']; ?>
                                         </span>
                                     </a>
                                     <span class="gray lowercase"><?= $comment['date']; ?></span>
 
-                                    <span class="indent"> &#183; </span>
+                                    <span class="mr5 ml5"> &#183; </span>
                                     <a href="/post/<?= $comment['post_id']; ?>/<?= $comment['post_slug']; ?>#comment_<?= $comment['comment_id']; ?>">
                                         <?= $comment['post_title']; ?>
                                     </a>
@@ -35,7 +35,7 @@
                                 </div>
                             </div>
                         <?php } else { ?>
-                            <div class="dell comm-telo_bottom">
+                            <div class="delleted comm-telo_bottom">
                                 <div class="voters"></div>
                                 ~ <?= lang('Comment deleted'); ?>
                             </div>
@@ -53,7 +53,7 @@
     </main>
     <aside>
         <div class="white-box">
-            <div class="inner-padding big">
+            <div class="p15">
                 <?= lang('comments-desc'); ?>
             </div>
         </div>

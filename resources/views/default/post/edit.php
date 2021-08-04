@@ -2,7 +2,7 @@
 <div class="wrap">
     <main class="w-100">
         <div class="white-box">
-            <div class="inner-padding">
+            <div class="pt5 pr15 pb5 pl15">
                 <?= breadcrumb('/', lang('Home'), '/post/' . $post['post_id'] . '/' . $post['post_slug'], $post['post_title'], $data['h1']); ?>
 
                 <div class="box edit-post">

@@ -2,7 +2,7 @@
 <div class="wrap">
     <main>
         <div class="white-box">
-            <div class="inner-padding">
+            <div class="pt5 pr15 pb5 pl15">
                 <h1><?= $data['h1']; ?></h1>
 
                 <?php if (!empty($result)) { ?>
@@ -21,7 +21,7 @@
                                 </a>
                                 <span class="no-md"><?= $post['post_content']; ?>...</span>
                             </div>
-                            <div class="vertical-ind"></div>
+                            <div class="mt15 mb15"></div>
                         <?php } ?>
                     <?php } else { ?>
                         <?php foreach ($result as  $post) { ?>
@@ -34,7 +34,7 @@
                                 <a class="search-title" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug'] ?>"><?= $post['_title']; ?></a><br>
                                 <span class="no-md"><?= $post['_content']; ?></span>
                             </div>
-                            <div class="vertical-ind"></div>
+                            <div class="mt15 mb15"></div>
                         <?php } ?>
                     <?php } ?>
 
@@ -47,7 +47,7 @@
     </main>
     <aside>
         <div class="white-box">
-            <div class="inner-padding big">
+            <div class="p15">
                 <?= lang('info_search'); ?>
 
                 <i><?= lang('Under development'); ?></i>

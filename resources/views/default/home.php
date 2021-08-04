@@ -2,9 +2,9 @@
 
 <?php if ($uid['id'] == 0) { ?>
   <div class="banner">
-    <div class="wrap-header">
+    <div class="pt15 pb5">
       <h1 class="red size-21"><?= Lori\Config::get(Lori\Config::PARAM_BANNER_TITLE); ?></h1>
-      <span><?= Lori\Config::get(Lori\Config::PARAM_BANNER_DESC); ?>...</span>
+      <div class="pb5"><?= Lori\Config::get(Lori\Config::PARAM_BANNER_DESC); ?>...</div>
     </div>
   </div>
 <?php } ?>
@@ -65,7 +65,7 @@
 
     <?php if ($uid['uri'] == '/' && $uid['id'] > 0 && empty($space_user)) { ?>
       <div class="white-box">
-        <div class="inner-padding big center gray">
+        <div class="pt5 pr15 pb5 pl15 big center gray">
           <i class="light-icon-bulb middle red"></i>
           <span class="middle"><?= lang('space-subscription'); ?>...</span>
         </div>
@@ -81,7 +81,7 @@
     <?php if ($uid['id']) { ?>
       <?php if (!empty($space_user)) { ?>
         <div class="white-box">
-          <div class="inner-padding">
+          <div class="pt5 pr15 pb5 pl15">
             <a class="right" title="<?= lang('Spaces'); ?>" href="/spaces"><i class="light-icon-chevron-right"></i></a>
             <div class="bar-title size-13">
               <?= lang('Signed'); ?>
@@ -89,9 +89,9 @@
             <?php foreach ($space_user as  $sig) { ?>
               <a class="bar-space-telo" href="/s/<?= $sig['space_slug']; ?>" title="<?= $sig['space_name']; ?>">
                 <?= spase_logo_img($sig['space_img'], 'small', $sig['space_name'], 'ava-24'); ?>
-                <span class="indent size-13"><?= $sig['space_name']; ?></span>
+                <span class="mr5 ml5 size-13"><?= $sig['space_name']; ?></span>
                 <?php if ($sig['space_user_id'] == $uid['id']) { ?>
-                  <sup class="red indent">+</sup>
+                  <sup class="red mr5 ml5">+</sup>
                 <?php } ?>
               </a>
             <?php } ?>
@@ -104,15 +104,15 @@
 
     <?php if (!empty($data['latest_answers'])) { ?>
       <div class="last-comm white-box sticky">
-        <div class="inner-padding">
+        <div class="pt5 pr15 pb5 pl15">
           <?php foreach ($data['latest_answers'] as  $answer) { ?>
-            <div class="sb-telo" style="border-left: 2px solid <?= $answer['space_color']; ?>;">
+            <div class="mt15 mr0 mb15 ml0" style="border-left: 2px solid <?= $answer['space_color']; ?>;">
               <div class="sb-date size-13">
                 <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava'); ?>
-                <span class="indent"></span>
+                <span class="mr5 ml5"></span>
                 <?= $answer['answer_date']; ?>
               </div>
-              <a href="/post/<?= $answer['post_id']; ?>/<?= $answer['post_slug']; ?>#answer_<?= $answer['answer_id']; ?>">
+              <a class="sb-date" href="/post/<?= $answer['post_id']; ?>/<?= $answer['post_slug']; ?>#answer_<?= $answer['answer_id']; ?>">
                 <?= $answer['answer_content']; ?>...
               </a>
             </div>

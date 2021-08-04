@@ -2,7 +2,7 @@
 <div class="wrap">
     <main class="admin">
         <div class="white-box">
-            <div class="inner-padding">
+            <div class="pt5 pr15 pb5 pl15">
                 <?= breadcrumb('/admin', lang('Admin'), null, null, $data['meta_title']); ?>
 
                 <ul class="nav-tabs">
@@ -54,7 +54,7 @@
                                         (id: <?= $audit['content'][$audit['audit_type'] . '_user_id']; ?>)
                                         — <?= $audit['content'][$audit['audit_type'] . '_date']; ?>
 
-                                        <span class="indent"> &#183; </span>
+                                        <span class="mr5 ml5"> &#183; </span>
 
                                         <?= lang('Type'); ?>: <i><?= $audit['audit_type']; ?></i>
                                         <?php if ($audit['content'][$audit['audit_type'] . '_is_deleted'] == 1) { ?>
@@ -63,7 +63,7 @@
 
                                         <?php if (!empty($audit['post'])) { ?>
                                             <?php if ($audit['post']['post_slug']) { ?>
-                                                <span class="indent"> &#183; </span>
+                                                <span class="mr5 ml5"> &#183; </span>
                                                 <a href="/post/<?= $audit['post']['post_id']; ?>/<?= $audit['post']['post_slug']; ?>">
                                                     <?= $audit['post']['post_title']; ?>
                                                 </a>

@@ -2,7 +2,7 @@
 <div class="wrap">
     <main>
         <div class="white-box">
-            <div class="inner-padding space-tags">
+            <div class="pt5 pr15 pb5 pl15 space-tags">
                 <?php if ($uid['trust_level'] == 5) { ?>
                     <a title="<?= lang('Add'); ?>" class="right" href="/web/add">
                         <i class="light-icon-plus middle"></i>
@@ -16,7 +16,7 @@
             <?php foreach ($links as $key => $link) { ?>
                 <div class="white-box">
                     <a href="/domain/<?= $link['link_url_domain']; ?>">
-                        <h2 class="title size-21 indent-big">
+                        <h2 class="title size-21 ml15">
                             <?php if ($link['link_title']) { ?>
                                 <?= $link['link_title']; ?>
                             <?php } else { ?>
@@ -29,18 +29,18 @@
                             <i class="light-icon-edit"></i>
                         </a>
                     <?php } ?>
-                    <span class="green indent-big">
+                    <span class="green ml15">
                         <?= favicon_img($link['link_id'], $link['link_url_domain']); ?>
                         <?= $link['link_url_domain']; ?>
                     </span>
-                    <div class="gray indent-big">
+                    <div class="gray ml15">
                         <?php if ($link['link_content']) { ?>
                             <?= $link['link_content']; ?>
                         <?php } else { ?>
                             Add content...
                         <?php } ?>
                     </div>
-                    <div class="post-footer lowercase">
+                    <div class="pt5 pr15 pb5 pl15 hidden lowercase">
                         <?= votes($uid['id'], $link, 'link'); ?>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
     </main>
     <aside>
         <div class="white-box">
-            <div class="inner-padding space-tags">
+            <div class="pt5 pr15 pb5 pl15 space-tags">
                 <?= lang('domains-desc'); ?>.
             </div>
         </div>

@@ -89,7 +89,7 @@
 
                     <aside>
                         <div class="info-space white-box">
-                            <div class="inner-padding">
+                            <div class="pt5 pr15 pb5 pl15">
                                 <div class="sb-space-short">
                                     <?= $space_info['space_short_text']; ?>
                                 </div>
@@ -152,7 +152,7 @@
                         </div>
 
                         <div class="space-text-sb white-box">
-                            <div class="inner-padding">
+                            <div class="pt5 pr15 pb5 pl15">
                                 <?= $space_info['space_text']; ?>
                             </div>
                         </div>

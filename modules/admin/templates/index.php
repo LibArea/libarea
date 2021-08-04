@@ -2,17 +2,18 @@
 <div class="wrap">
     <main class="admin">
         <div class="white-box">
-            <div class="inner-padding">
+            <div class="pt5 pr15 pb5 pl15">
                 <?= breadcrumb('/admin', lang('Admin'), null, null, $data['meta_title']); ?>
             </div>
         </div>
 
         <div class="white-box">
-            <div class="inner-padding flex center">
+            <div class="pt5 pr15 pb5 pl15 flex center">
                 <div class="box-number center">
                     <a rel="noreferrer" href="/admin/posts">
                         <div class="stat-height">
-                            <i class="light-icon-book gray"></i><sup><?= $stats['posts_count']; ?></sup>
+                            <i class="light-icon-book gray"></i>
+                            <sup class="size-13 gray absolute"><?= $stats['posts_count']; ?></sup>
                         </div>
                         <div class="size-13">
                             <?= lang('Posts'); ?>
@@ -22,7 +23,8 @@
                 <div class="box-number center">
                     <a rel="noreferrer" href="/admin/answers">
                         <div class="stat-height">
-                            <i class="light-icon-message gray"></i><sup><?= $stats['answers_count']; ?></sup>
+                            <i class="light-icon-message gray"></i>
+                            <sup class="size-13 gray absolute"><?= $stats['answers_count']; ?></sup>
                         </div>
                         <div class="size-13">
                             <?= lang('Answers-n'); ?>
@@ -32,7 +34,8 @@
                 <div class="box-number center">
                     <a rel="noreferrer" href="/admin/comments">
                         <div class="stat-height">
-                            <i class="light-icon-messages gray"></i><sup><?= $stats['comments_count']; ?></sup>
+                            <i class="light-icon-messages gray"></i>
+                            <sup class="size-13 gray absolute"><?= $stats['comments_count']; ?></sup>
                         </div>
                         <div class="size-13">
                             <?= lang('Comments-n'); ?>
@@ -43,7 +46,8 @@
                 <div class="box-number center">
                     <a rel="noreferrer" href="/admin/users">
                         <div class="stat-height">
-                            <i class="light-icon-users red"></i><sup><?= $stats['users_count']; ?></sup>
+                            <i class="light-icon-users red"></i>
+                            <sup class="size-13 gray absolute"><?= $stats['users_count']; ?></sup>
                         </div>
                         <div class="size-13">
                             <?= lang('Users'); ?>
@@ -53,7 +57,8 @@
                 <div class="box-number center">
                     <a rel="noreferrer" href="/admin/spaces">
                         <div class="stat-height">
-                            <i class="light-icon-infinity green"></i><sup><?= $stats['spaces_count']; ?></sup>
+                            <i class="light-icon-infinity green"></i>
+                            <sup class="size-13 gray absolute"><?= $stats['spaces_count']; ?></sup>
                         </div>
                         <div class="size-13">
                             <?= lang('Spaces'); ?>
@@ -63,7 +68,8 @@
                 <div class="box-number center">
                     <a rel="noreferrer" href="/admin/topics">
                         <div class="stat-height">
-                            <i class="light-icon-layers-subtract brown"></i><sup><?= $stats['topics_count']; ?></sup>
+                            <i class="light-icon-layers-subtract brown"></i>
+                            <sup class="size-13 gray absolute"><?= $stats['topics_count']; ?></sup>
                         </div>
                         <div class="size-13">
                             <?= lang('Topics'); ?>
@@ -73,7 +79,8 @@
                 <div class="box-number center">
                     <a rel="noreferrer" href="/admin/webs">
                         <div class="stat-height">
-                            <i class="light-icon-link blue"></i><sup><?= $stats['links_count']; ?></sup>
+                            <i class="light-icon-link blue"></i>
+                            <sup class="size-13 gray absolute"><?= $stats['links_count']; ?></sup>
                         </div>
                         <div class="size-13">
                             <?= lang('Domains'); ?>
@@ -84,7 +91,7 @@
         </div>
 
         <div class="white-box">
-            <div class="inner-padding">
+            <div class="pt5 pr15 pb5 pl15">
 
                 <h3><?= lang('Help'); ?>:</h3>
                 <i class="light-icon-point middle"></i> <a rel="noreferrer" href="https://loriup.ru">LoriUP.ru</a></br>

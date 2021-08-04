@@ -2,7 +2,7 @@
 <div class="wrap">
     <main>
         <div class="white-box">
-            <div class="inner-padding">
+            <div class="pt5 pr15 pb5 pl15">
                 <a class="size-13" title="<?= lang('All topics'); ?>" href="/topics"> ← <?= lang('Topics'); ?></a>
 
                 <h1 class="topics"><a href="/topic/<?= $topic['topic_slug']; ?>"><?= $data['h1']; ?></a>
@@ -21,7 +21,7 @@
 
         <?php if (!empty($post_related)) { ?>
             <div class="white-box">
-                <div class="inner-padding">
+                <div class="pt5 pr15 pb5 pl15">
                     <div class="related">
                         <h3 class="style size-13"><?= lang('By topic'); ?>:</h3>
                         <?php $num = 0; ?>
@@ -42,7 +42,7 @@
     </main>
     <aside>
         <div class="white-box">
-            <div class="inner-padding big">
+            <div class="p15">
                 <center>
                     <a title="<?= $topic['topic_title']; ?>" href="/topic/<?= $topic['topic_slug']; ?>">
                         <div><?= $topic['topic_title']; ?><div>
@@ -60,7 +60,7 @@
 
         <?php if (!empty($main_topic)) { ?>
             <div class="white-box">
-                <div class="inner-padding big">
+                <div class="p15">
                     <h3 class="style size-13"><?= lang('Root'); ?></h3>
                     <div class="related-box">
                         <a class="tags size-13" href="/topic/<?= $main_topic['topic_slug']; ?>">
@@ -73,7 +73,7 @@
 
         <?php if (!empty($subtopics)) { ?>
             <div class="white-box">
-                <div class="inner-padding big">
+                <div class="p15">
                     <h3 class="style size-13"><?= lang('Subtopics'); ?></h3>
                     <?php foreach ($subtopics as $sub) { ?>
                         <div class="related-box">
@@ -89,7 +89,7 @@
 
         <?php if (!empty($topic_related)) { ?>
             <div class="white-box">
-                <div class="inner-padding big">
+                <div class="p15">
                     <h3 class="style size-13"><?= lang('Related'); ?></h3>
                     <?php foreach ($topic_related as $related) { ?>
                         <div class="related-box">

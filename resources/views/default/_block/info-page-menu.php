@@ -1,5 +1,5 @@
 <div class="white-box menu-info sticky">
-  <div class="inner-padding big">
+  <div class="p15">
     <a title="<?= lang('Info'); ?>" class="gray<?php if ($uid['uri'] == '/info') { ?> active<?php } ?>" href="/info">
       <i class="light-icon-point middle"></i>
       <span class="middle"><?= lang('Info'); ?></span>

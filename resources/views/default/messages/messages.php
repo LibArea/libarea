@@ -2,7 +2,7 @@
 <div class="wrap">
     <main>
         <div class="white-box">
-            <div class="inner-padding">
+            <div class="pt5 pr15 pb5 pl15">
                 <?= breadcrumb('/', lang('Home'), '/u/' . $uid['login'], lang('Profile'), $data['h1']); ?>
 
                 <?php if (!empty($data['messages'])) { ?>
@@ -13,17 +13,17 @@
                             <div class="size-13 flex">
                                 <?php if ($msg['sender_uid'] == $uid['id']) {  ?>
                                     <?= lang('You'); ?>
-                                    <span class="indent"></span>
+                                    <span class="mr5 ml5"></span>
                                     <?= $msg['update_time']; ?>
                                 <?php } else { ?>
                                     <?= lang('From'); ?>
-                                    <span class="indent"></span>
+                                    <span class="mr5 ml5"></span>
                                     <?= user_avatar_img($msg['msg_user']['avatar'], 'small', $msg['msg_user']['login'], 'ava'); ?>
-                                    <span class="indent"></span>
+                                    <span class="mr5 ml5"></span>
                                     <a href="/u/<?= $msg['msg_user']['login']; ?>">
                                         <?= $msg['msg_user']['login']; ?>
                                     </a>
-                                    <span class="indent-big"></span>
+                                    <span class="ml15"></span>
                                     <span class="gray lowercase">
                                         <?= $msg['update_time']; ?>
                                     </span>
@@ -55,7 +55,7 @@
     </main>
     <aside>
         <div class="white-box">
-            <div class="inner-padding big">
+            <div class="p15">
                 <?= lang('Under development'); ?>...
             </div>
         </div>

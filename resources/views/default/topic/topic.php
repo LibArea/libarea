@@ -2,12 +2,12 @@
 <div class="wrap">
     <main>
         <div class="white-box">
-            <div class="inner-padding">
+            <div class="pt5 pr15 pb5 pl15">
                 <div class="flex">
                     <div>
-                        <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'ava-94'); ?>
+                        <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'ava-94 mt5'); ?>
                     </div>
-                    <div class="indent-big box-100">
+                    <div class="ml15 box-100">
                         <h1>
                             <?= $data['h1']; ?>
                             <?php if ($uid['trust_level'] == 5) { ?>
@@ -17,7 +17,7 @@
                             <?php } ?>
                         </h1>
                         <div class="size-13"><?= $topic['topic_description']; ?></div>
-                        <div class="topics-footer">
+                        <div class="mt15">
                             <?php if (!$uid['id']) { ?>
                                 <a href="/login">
                                     <div class="add-focus focus-topic">+ <?= lang('Read'); ?></div>
@@ -49,7 +49,7 @@
     </main>
     <aside>
         <div class="white-box">
-            <div class="inner-padding big">
+            <div class="p15">
                 <div class="flex">
                     <div class="box-post center box-number">
                         <div class="style size-13 gray lowercase"><?= lang('Posts-m'); ?></div>
@@ -65,7 +65,7 @@
 
         <?php if (!empty($main_topic)) { ?>
             <div class="white-box">
-                <div class="inner-padding big">
+                <div class="p15">
                     <h3 class="style size-13"><?= lang('Root'); ?></h3>
                     <div class="related-box">
                         <a class="tags size-13" href="/topic/<?= $main_topic['topic_slug']; ?>">
@@ -78,7 +78,7 @@
 
         <?php if (!empty($subtopics)) { ?>
             <div class="white-box">
-                <div class="inner-padding big">
+                <div class="p15">
                     <h3 class="style size-13"><?= lang('Subtopics'); ?></h3>
                     <?php foreach ($subtopics as $sub) { ?>
                         <div class="related-box">
@@ -94,7 +94,7 @@
 
         <?php if (!empty($topic_related)) { ?>
             <div class="white-box">
-                <div class="inner-padding big">
+                <div class="p15">
                     <h3 class="style size-13"><?= lang('Related'); ?></h3>
                     <?php foreach ($topic_related as $related) { ?>
                         <div class="related-box">

@@ -2,15 +2,15 @@
 <div class="wrap">
     <main>
         <div class="white-box">
-            <div class="inner-padding">
-                <a class="right size-13 button vertical-ind" href="/notifications/delete"><?= lang('I read'); ?></a>
+            <div class="pt5 pr15 pb5 pl15">
+                <a class="right size-13 button mt15 mb15" href="/notifications/delete"><?= lang('I read'); ?></a>
                 <?= breadcrumb('/', lang('Home'), '/u/' . $uid['login'], lang('Profile'), $data['h1']); ?>
 
                 <?php if (!empty($list)) { ?>
 
                     <?php foreach ($list as  $notif) { ?>
 
-                        <div class="fl<?php if ($notif['read_flag'] == 0) { ?> active<?php } ?>">
+                        <div class="p5<?php if ($notif['read_flag'] == 0) { ?> active-notif<?php } ?>">
 
                             <?php if ($notif['action_type'] == 1) { ?>
                                 <?php if ($notif['read_flag'] == 0) { ?>
@@ -18,7 +18,7 @@
                                 <?php } else { ?>
                                     <i class="light-icon-mail middle"></i>
                                 <?php } ?>
-                                <span class="indent"></span>
+                                <span class="mr5 ml5"></span>
                                 <a class="gray" href="/u/<?= $notif['login']; ?>"><?= $notif['login']; ?></a>
                                 <?= lang('Wrote to you'); ?>
                                 <a href="/notifications/read/<?= $notif['notification_id']; ?>"><?= lang('Message'); ?></a>
@@ -30,7 +30,7 @@
 
                             <?php if ($notif['action_type'] == 3) { ?>
                                 <i class="light-icon-book middle"></i>
-                                <span class="indent"></span>
+                                <span class="mr5 ml5"></span>
                                 <a class="gray" href="/u/<?= $notif['login']; ?>">@<?= $notif['login']; ?></a>
                                 <a class="ntf2 lowercase" href="/notifications/read/<?= $notif['notification_id']; ?>">
                                     <?= lang('Replied to post'); ?>
@@ -39,7 +39,7 @@
 
                             <?php if ($notif['action_type'] == 10 || $notif['action_type'] == 11 || $notif['action_type'] == 12) { ?>
                                 <i class="light-icon-user middle"></i>
-                                <span class="indent"></span>
+                                <span class="mr5 ml5"></span>
                                 <a class="gray" href="/u/<?= $notif['login']; ?>">@<?= $notif['login']; ?></a>
                                 <?= lang('appealed to you'); ?>
                                 <a class="ntf2 lowercase" href="/notifications/read/<?= $notif['notification_id']; ?>">
@@ -55,7 +55,7 @@
                             <?php if ($notif['action_type'] == 15) { ?>
                                 <a class="ntf2 lowercase" href="/notifications/read/<?= $notif['notification_id']; ?>">
                                     <i class="light-icon-activity middle red"></i>
-                                    <span class="indent"></span>
+                                    <span class="mr5 ml5"></span>
                                     <?= lang('Audit'); ?>
                                 </a>
                                 |
@@ -74,7 +74,7 @@
                                     <?php } else { ?>
                                         <i class="light-icon-messages middle"></i>
                                     <?php } ?>
-                                    <span class="indent"></span>
+                                    <span class="mr5 ml5"></span>
                                     <a class="gray" href="/u/<?= $notif['login']; ?>"><?= $notif['login']; ?></a>
                                     <?= lang('Wrote'); ?>
                                     <a class="ntf2" href="/notifications/read/<?= $notif['notification_id']; ?>">
@@ -96,7 +96,7 @@
     </main>
     <aside>
         <div class="white-box">
-            <div class="inner-padding big">
+            <div class="p15">
                 <?= lang('info_notifications'); ?>
             </div>
         </div>

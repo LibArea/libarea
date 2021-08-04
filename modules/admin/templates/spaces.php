@@ -2,7 +2,7 @@
 <div class="wrap">
     <main class="admin">
         <div class="white-box">
-            <div class="inner-padding">
+            <div class="pt5 pr15 pb5 pl15">
                 <a class="right" title="<?= lang('Add'); ?>" href="/space/add">
                     <i class="light-icon-plus middle"></i>
                 </a>
@@ -51,7 +51,7 @@
                                         <?= spase_logo_img($sp['space_img'], 'max', $sp['space_slug'], 'ava-64'); ?>
                                     </span>
                                     <span class="t-td size-13">
-                                        <a class="title" title="<?= $sp['space_name']; ?>" href="/s/<?= $sp['space_slug']; ?>">
+                                        <a class="size-21" title="<?= $sp['space_name']; ?>" href="/s/<?= $sp['space_slug']; ?>">
                                             <?= $sp['space_name']; ?> (s/<?= $sp['space_slug']; ?>)
                                         </a>
 
@@ -68,7 +68,7 @@
                                         </div>
 
                                         <?= $sp['space_date']; ?>
-                                        <span class="indent"> &#183; </span>
+                                        <span class="mr5 ml5"> &#183; </span>
                                         <?= user_avatar_img($sp['avatar'], 'small', $sp['login'], 'ava'); ?>
                                         <a target="_blank" rel="noopener" href="/u/<?= $sp['login']; ?>">
                                             <?= $sp['login']; ?>

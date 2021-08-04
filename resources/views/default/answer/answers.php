@@ -2,7 +2,7 @@
 <div class="wrap">
     <main>
         <div class="white-box">
-            <div class="inner-padding">
+            <div class="pt5 pr15 pb5 pl15">
                 <h1><?= $data['h1']; ?></h1>
                 <br>
                 <div class="telo">
@@ -13,11 +13,11 @@
                                 <div class="answ-telo_bottom">
                                     <div class="flex size-13">
                                         <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava'); ?>
-                                        <a class="gray indent" href="/u/<?= $answer['login']; ?>">
+                                        <a class="gray mr5 ml5" href="/u/<?= $answer['login']; ?>">
                                             <?= $answer['login']; ?>
                                         </a>
                                         <span class="gray lowercase"><?= $answer['date']; ?></span>
-                                        <span class="indent"> &#183; </span>
+                                        <span class="mr5 ml5"> &#183; </span>
                                         <a href="/post/<?= $answer['post_id']; ?>/<?= $answer['post_slug']; ?>#answer_<?= $answer['answer_id']; ?>">
                                             <?= $answer['post_title']; ?>
                                         </a>
@@ -32,7 +32,7 @@
                                     </div>
                                 </div>
                             <?php } else { ?>
-                                <div class="dell answ-telo_bottom">
+                                <div class="delleted answ-telo_bottom">
                                     <div class="voters"></div>
                                     ~ <?= lang('Answer deleted'); ?>
                                 </div>
@@ -50,7 +50,7 @@
     </main>
     <aside>
         <div class="white-box">
-            <div class="inner-padding big">
+            <div class="p15">
                 <?= lang('answers-desc'); ?>
             </div>
         </div>

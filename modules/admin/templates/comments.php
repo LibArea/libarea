@@ -2,7 +2,7 @@
 <div class="wrap">
   <main class="admin">
     <div class="white-box">
-      <div class="inner-padding">
+      <div class="pt5 pr15 pb5 pl15">
         <?= breadcrumb('/admin', lang('Admin'), null, null, $data['meta_title']); ?>
 
         <ul class="nav-tabs">
@@ -34,10 +34,10 @@
               <div class="size-13">
                 <?= user_avatar_img($comment['avatar'], 'small', $comment['login'], 'ava'); ?>
                 <a class="date" href="/u/<?= $comment['login']; ?>"><?= $comment['login']; ?></a>
-                <span class="indent"> &#183; </span>
+                <span class="mr5 ml5"> &#183; </span>
                 <span class="date"><?= $comment['date']; ?></span>
 
-                <span class="indent"> &#183; </span>
+                <span class="mr5 ml5"> &#183; </span>
                 <a href="/post/<?= $comment['post_id']; ?>/<?= $comment['post_slug']; ?>">
                   <?= $comment['post_title']; ?>
                 </a>
@@ -49,7 +49,7 @@
               <div class="comm-telo-body">
                 <?= $comment['content']; ?>
               </div>
-              <div class="content-footer">
+              <div class="content-footer mb15 mt5 pb5 size-13 hidden gray">
                 + <?= $comment['comment_votes']; ?>
                 <span id="cm_dell" class="right comment_link size-13">
                   <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action">

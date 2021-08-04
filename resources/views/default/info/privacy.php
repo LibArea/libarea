@@ -2,7 +2,7 @@
 <div class="wrap">
     <main>
         <div class="white-box">
-            <div class="inner-padding">
+            <div class="pt5 pr15 pb5 pl15">
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item">
                         <a title="<?= lang('Home'); ?>" href="/"><?= lang('Home'); ?></a>

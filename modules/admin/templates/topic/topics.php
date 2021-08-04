@@ -2,7 +2,7 @@
 <div class="wrap">
     <main class="admin">
         <div class="white-box">
-            <div class="inner-padding">
+            <div class="pt5 pr15 pb5 pl15">
                 <a class="right" title="<?= lang('Add'); ?>" href="/admin/topics/add">
                     <i class="light-icon-plus middle"></i>
                 </a>
@@ -26,19 +26,19 @@
                                         <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'ava-64'); ?>
                                     </span>
                                     <span class="t-td">
-                                        <a class="title" rel="nofollow noreferrer" href="/topic/<?= $topic['topic_slug']; ?>">
+                                        <a class="size-21" rel="nofollow noreferrer" href="/topic/<?= $topic['topic_slug']; ?>">
                                             <?= $topic['topic_title']; ?>
                                         </a>
-                                        <span class="indent"> &#183; </span>
+                                        <span class="mr5 ml5"> &#183; </span>
                                         <span class="green">topic/<?= $topic['topic_slug']; ?></span>
-                                        <span class="indent"> &#183; </span>
+                                        <span class="mr5 ml5"> &#183; </span>
                                         <?= $topic['topic_count']; ?>
                                         <?php if ($topic['topic_is_parent'] == 1) { ?>
-                                            <span class="indent"> &#183; </span>
+                                            <span class="mr5 ml5"> &#183; </span>
                                             <span class="red"><?= lang('Root'); ?></span>
                                         <?php } ?>
                                         <?php if ($topic['topic_parent_id'] != 0) { ?>
-                                            <span class="indent"> &#183; </span>
+                                            <span class="mr5 ml5"> &#183; </span>
                                             <span class="green"><?= lang('Subtopic'); ?></span>
                                         <?php } ?>
                                         <div class="content-telo">

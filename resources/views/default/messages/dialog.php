@@ -2,7 +2,7 @@
 <div class="wrap">
     <main>
         <div class="white-box">
-            <div class="inner-padding">
+            <div class="pt5 pr15 pb5 pl15">
                 <?= breadcrumb('/', lang('Home'), '/u/' . $uid['login'] . '/messages', lang('All messages'), $data['h1']); ?>
 
                 <form action="/messages/send" method="post">
@@ -58,7 +58,7 @@
     </main>
     <aside>
         <div class="white-box">
-            <div class="inner-padding big">
+            <div class="p15">
                 <?= lang('Under development'); ?>...
             </div>
         </div>

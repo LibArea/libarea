@@ -1,5 +1,5 @@
 <div class="white-box sticky">
-    <div class="inner-padding big">
+    <div class="p15">
         <div class="menu-info">
             <a title="<?= lang('Profile'); ?>" class="gray" href="/u/<?= Request::get('login'); ?>">
                 <i class="light-icon-user middle"></i>

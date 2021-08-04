@@ -1,5 +1,5 @@
 <?php if (!empty($answers)) { ?>
-    <div class="answers white-box">
+    <div class="white-box p15">
         <h2 class="lowercase size-21">
             <?= $post['post_answers_count'] ?> <?= $post['num_answers'] ?>
         </h2>
@@ -13,7 +13,7 @@
                     <div class="line"></div>
                     <ol class="answer-telo">
                         <li class="answers_subtree" id="answer_<?= $answer['answer_id']; ?>">
-                            <div class="answ-telo qa-answ">
+                            <div class="answ-telo hidden">
                                 <div class="qa-footer">
                                     <div class="qa-ava">
                                         <?= user_avatar_img($answer['avatar'], 'max', $answer['login'], 'avatar'); ?>
@@ -38,7 +38,7 @@
                                 <?php if ($uid['trust_level'] >= Lori\Config::get(Lori\Config::PARAM_TL_ADD_COMM_QA)) { ?>
                                     <?php if ($post['post_closed'] == 0) { ?>
                                         <?php if ($post['post_is_deleted'] == 0 || $uid['trust_level'] == 5) { ?>
-                                            <span id="cm_add_link<?= $answer['answer_id']; ?>" class="cm_add_link indent">
+                                            <span id="cm_add_link<?= $answer['answer_id']; ?>" class="cm_add_link mr5 ml5">
                                                 <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray"><?= lang('Reply'); ?></a>
                                             </span>
                                         <?php } ?>
@@ -46,7 +46,7 @@
                                 <?php } ?>
 
                                 <?php if ($uid['id'] == $answer['answer_user_id'] || $uid['trust_level'] == 5) { ?>
-                                    <span id="answer_edit" class="answer_add_link indent">
+                                    <span id="answer_edit" class="answer_add_link mr5 ml5">
                                         <a class="editansw gray" href="/answer/edit/<?= $answer['answer_id']; ?>">
                                             <?= lang('Edit'); ?>
                                         </a>
@@ -54,7 +54,7 @@
                                 <?php } ?>
 
                                 <?php if ($uid['id']) { ?>
-                                    <span class="add-favorite gray indent" data-id="<?= $answer['answer_id']; ?>" data-type="answer">
+                                    <span class="add-favorite gray mr5 ml5" data-id="<?= $answer['answer_id']; ?>" data-type="answer">
                                         <?php if ($answer['favorite_user_id']) { ?>
                                             <?= lang('remove-favorites'); ?>
                                         <?php } else { ?>
@@ -64,8 +64,8 @@
                                 <?php } ?>
 
                                 <?php if ($uid['trust_level'] == 5) { ?>
-                                    <span class="indent"></span>
-                                    <span id="answer_dell" class="answer_add_link indent">
+                                    <span class="mr5 ml5"></span>
+                                    <span id="answer_dell" class="answer_add_link mr5 ml5">
                                         <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray">
                                             <?= lang('Remove'); ?>
                                         </a>
@@ -80,7 +80,7 @@
                     </ol>
 
                 <?php } else { ?>
-                    <ol class="dell answer-telo">
+                    <ol class="delleted answer-telo m5 size-13">
                         <li class="answers_subtree" id="answer_<?= $answer['answer_id']; ?>">
                             <span class="answ-deletes">~ <?= lang('Answer deleted'); ?></span>
                         </li>
@@ -95,7 +95,7 @@
                         <li class="comment_subtree" id="comment_<?= $comment['comment_id']; ?>">
                             <div class="line-qa"></div>
                             <div class="comm-telo">
-                                <div class="size-13 comm-body">
+                                <div class="size-13 pt5 pr5 pb5 pl15">
                                     <?= $comment['comment_content'] ?>
                                     <span class="gray">
                                         — <a class="gray" href="/u/<?= $comment['login']; ?>"><?= $comment['login']; ?></a>

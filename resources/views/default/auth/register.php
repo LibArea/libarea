@@ -2,7 +2,7 @@
 <div class="wrap">
     <main>
         <div class="white-box">
-            <div class="inner-padding">
+            <div class="pt5 pr15 pb5 pl15">
                 <h1><?= $data['h1']; ?></h1>
                 <div class="form mini">
                     <form class="" action="/register/add" method="post">
@@ -36,7 +36,7 @@
                         <div class="boxline">
                             <div class="boxline">
                                 <button type="submit" class="button"><?= lang('Sign up'); ?></button>
-                                <span class="indent size-13"><a href="/login"><?= lang('Sign in'); ?></a></span>
+                                <span class="mr5 ml5 size-13"><a href="/login"><?= lang('Sign in'); ?></a></span>
                             </div>
                         </div>
                     </form>
@@ -46,7 +46,7 @@
     </main>
     <aside>
         <div class="white-box">
-            <div class="inner-padding big">
+            <div class="p15">
                 <?= lang('info_security'); ?>
             </div>
         </div>

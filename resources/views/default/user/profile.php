@@ -37,7 +37,7 @@
             <div class="wrap">
                 <main>
                     <div class="profile-box-telo white-box">
-                        <div class="inner-padding">
+                        <div class="pt5 pr15 pb5 pl15">
 
                             <div class="profile-header-telo">
                                 <h1 class="profile">
@@ -117,34 +117,34 @@
                                     <div class="boxline">
                                         <label for="name"><?= lang('URL'); ?>:</label>
                                         <a href="<?= $user['website']; ?>" rel="noopener nofollow ugc">
-                                            <span class="indent"><?= $user['website']; ?></span>
+                                            <span class="mr5 ml5"><?= $user['website']; ?></span>
                                         </a>
                                     </div>
                                 <?php } ?>
                                 <?php if ($user['location']) { ?>
                                     <div class="boxline">
                                         <label for="name"><?= lang('City'); ?>:</label>
-                                        <span class="indent"><?= $user['location']; ?></span>
+                                        <span class="mr5 ml5"><?= $user['location']; ?></span>
                                     </div>
                                 <?php } else { ?>
                                     <div class="boxline">
                                         <label for="name"><?= lang('City'); ?>:</label>
-                                        <span class="indent">...</span>
+                                        <span class="mr5 ml5">...</span>
                                     </div>
                                 <?php } ?>
                                 <?php if ($user['public_email']) { ?>
                                     <div class="boxline">
                                         <label for="name"><?= lang('E-mail'); ?>:</label>
                                         <a href="mailto:<?= $user['public_email']; ?>" rel="noopener nofollow ugc">
-                                            <span class="indent"><?= $user['public_email']; ?></span>
+                                            <span class="mr5 ml5"><?= $user['public_email']; ?></span>
                                         </a>
                                     </div>
                                 <?php } ?>
                                 <?php if ($user['skype']) { ?>
                                     <div class="boxline">
                                         <label for="name"><?= lang('Skype'); ?>:</label>
-                                        <a class="indent" href="skype:<?= $user['skype']; ?>" rel="noopener nofollow ugc">
-                                            <span class="indent"><?= $user['skype']; ?></span>
+                                        <a class="mr5 ml5" href="skype:<?= $user['skype']; ?>" rel="noopener nofollow ugc">
+                                            <span class="mr5 ml5"><?= $user['skype']; ?></span>
                                         </a>
                                     </div>
                                 <?php } ?>
@@ -152,7 +152,7 @@
                                     <div class="boxline">
                                         <label for="name"><?= lang('Twitter'); ?>:</label>
                                         <a href="https://twitter.com/<?= $user['twitter']; ?>" rel="noopener nofollow ugc">
-                                            <span class="indent"><?= $user['twitter']; ?></span>
+                                            <span class="mr5 ml5"><?= $user['twitter']; ?></span>
                                         </a>
                                     </div>
                                 <?php } ?>
@@ -160,7 +160,7 @@
                                     <div class="boxline">
                                         <label for="name"><?= lang('Telegram'); ?>:</label>
                                         <a href="tg://resolve?domain=<?= $user['telegram']; ?>" rel="noopener nofollow ugc">
-                                            <span class="indent"><?= $user['telegram']; ?></span>
+                                            <span class="mr5 ml5"><?= $user['telegram']; ?></span>
                                         </a>
                                     </div>
                                 <?php } ?>
@@ -168,7 +168,7 @@
                                     <div class="boxline">
                                         <label for="name"><?= lang('VK'); ?>:</label>
                                         <a href="https://vk.com/<?= $user['vk']; ?>" rel="noopener nofollow ugc">
-                                            <span class="indent"><?= $user['vk']; ?></span>
+                                            <span class="mr5 ml5"><?= $user['vk']; ?></span>
                                         </a>
                                     </div>
                                 <?php } ?>
@@ -186,21 +186,21 @@
                                             <div class="size-13 lowercase">
                                                 <a class="gray" href="/u/<?= $user['login']; ?>">
                                                     <?= user_avatar_img($user['avatar'], 'small', $user['login'], 'ava'); ?>
-                                                    <span class="indent"></span>
+                                                    <span class="mr5 ml5"></span>
                                                     <?= $user['login']; ?>
                                                 </a>
 
-                                                <span class="indent"> &#183; </span>
+                                                <span class="mr5 ml5"> &#183; </span>
                                                 <span class="gray"><?= $onepost['post_date'] ?></span>
 
-                                                <span class="indent"> &#183; </span>
+                                                <span class="mr5 ml5"> &#183; </span>
                                                 <a class="gray" href="/s/<?= $onepost['space_slug']; ?>" title="<?= $onepost['space_name']; ?>">
                                                     <?= $onepost['space_name']; ?>
                                                 </a>
 
                                                 <?php if ($onepost['post_answers_count'] != 0) { ?>
                                                     <a class="gray right" href="/post/<?= $onepost['post_id']; ?>/<?= $onepost['post_slug']; ?>">
-                                                        <span class="indent"></span>
+                                                        <span class="mr5 ml5"></span>
                                                         <i class="light-icon-messages middle"></i>
                                                         <?= $onepost['post_answers_count']; ?>
                                                     </a>
@@ -215,7 +215,7 @@
                 </main>
                 <aside>
                     <div class="profile-box-telo white-box">
-                        <div class="inner-padding">
+                        <div class="pt5 pr15 pb5 pl15">
                             <h3 class="badge"><?= lang('Badges'); ?></h3>
                             <div class="profile-badge">
                                 <?php if ($user['id'] < 50) { ?>
@@ -229,7 +229,7 @@
                     </div>
                     <?php if ($uid['trust_level'] > 4) { ?>
                         <div class="profile-box-telo white-box">
-                            <div class="inner-padding">
+                            <div class="pt5 pr15 pb5 pl15">
                                 <h3 class="badge"><?= lang('Admin'); ?></h3>
                                 <div class="menu-info">
                                     <a class="gray" href="/admin/user/<?= $user['id']; ?>/edit">

@@ -1,8 +1,8 @@
 <aside>
-    <div class="logo">
+    <div class="logo size-21">
         <a class="light-gray" href="/admin">Admin</a>
     </div>
-    <ul class="admin-menu">
+    <ul class="p0">
         <li class="nav<?php if ($data['sheet'] == 'admin') { ?> active<?php } ?>">
             <a class="light-gray" title="<?= lang('Aadmin'); ?>" href="/admin">
                 <i class="light-icon-building-pavilon middle"></i>
@@ -76,8 +76,10 @@
             </a>
         </li>
     </ul>
-    <hr class="footer">
-    <div class="footer size-13">
+     
+    <div class="center gray size-13">
+        ------------------------
+        <br>
         Loriup &copy; <?= date('Y'); ?>
     </div>
 </aside>
