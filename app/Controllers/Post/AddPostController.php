@@ -209,7 +209,7 @@ class AddPostController extends \MainController
     public function add()
     {
         $uid        = Base::getUid();
-        $space      = SpaceModel::getSpaceSelect($uid['id'], $uid['trust_level']);
+        $spaces     = SpaceModel::getSpaceSelect($uid['id'], $uid['trust_level']);
 
         $space_id   = \Request::getInt('space_id');
 
@@ -232,7 +232,7 @@ class AddPostController extends \MainController
             Request::getResources()->addBottomScript('/assets/js/select2.min.js');
         }
 
-        return view(PR_VIEW_DIR . '/post/add', ['data' => $data, 'uid' => $uid, 'space' => $space, 'space_id' => $space_id]);
+        return view(PR_VIEW_DIR . '/post/add', ['data' => $data, 'uid' => $uid, 'spaces' => $spaces, 'space_id' => $space_id]);
     }
 
     // Парсинг

@@ -7,7 +7,7 @@
                     <div>
                         <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'ava-94 mt5'); ?>
                     </div>
-                    <div class="ml15 box-100">
+                    <div class="ml15 flex-100">
                         <h1>
                             <?= $data['h1']; ?>
                             <?php if ($uid['trust_level'] == 5) { ?>

@@ -1,1 +1,1 @@
-<div class="shown_post"><?= $post['post_content']; ?></div>
+<div class="shown_post mr15"><?= $post['post_content']; ?></div>
