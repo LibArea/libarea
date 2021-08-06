@@ -94,10 +94,10 @@ class TopicModel extends \MainModel
             $sql = "INSERT INTO topics_post_relation (relation_topic_id, relation_post_id) 
                         VALUES ($row[0], $row[1])";
 
-            return DB::run($sql);
+            DB::run($sql);
         }
 
-        return false;
+        return true;
     }
 
     // Удалить записи id поста из таблицы связи

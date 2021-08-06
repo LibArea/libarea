@@ -195,16 +195,16 @@ class AnswerModel extends \MainModel
     }
 
     // Частота размещения ответа участника 
-    public static function getAnswerSpeed($uid)
+    public static function getAnswerSpeed($user_id)
     {
         $sql = "SELECT 
                     answer_id, 
                     answer_user_id, 
                     answer_date
                         fROM answers 
-                            WHERE answer_user_id = " . $uid . "
+                            WHERE answer_user_id = :user_id
                             AND answer_date >= DATE_SUB(NOW(), INTERVAL 1 DAY)";
 
-        return  DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
+        return  DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
     }
 }

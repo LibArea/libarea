@@ -963,7 +963,7 @@ ol.comment-telo {
 
 .voters .score {
   float: left;
-  margin: 0 2px 0 7px;
+  margin: 0 5px 0 2px;
   color: var(--tertiary);
   display: inline-block;
 }
