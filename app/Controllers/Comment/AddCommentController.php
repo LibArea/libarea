@@ -58,6 +58,8 @@ class AddCommentController extends \MainController
             Base::addMsg(lang('comment_audit'), 'error');
         }
 
+        $comment_content = Content::change($comment_content);
+
         $data = [
             'comment_post_id'       => $post_id,
             'comment_answer_id'     => $answer_id,
@@ -93,7 +95,7 @@ class AddCommentController extends \MainController
         }
 
         // Уведомление (@login)
-        if ($message = Content::parseUser($comment, true, true)) {
+        if ($message = Content::parseUser($comment_content, true, true)) {
             foreach ($message as $user_id) {
                 // Запретим отправку себе и автору ответа (оповщение ему выше)
                 if ($user_id == $uid['id'] || $user_id == $answ['answer_user_id']) {

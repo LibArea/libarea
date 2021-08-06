@@ -23,7 +23,6 @@ class MainConnector implements Connector
 
             // ... or, if a specific class is added,
             "DB"                            => "database/DB.php",
-            "XdORM\XD"                      => "vendor/phphleb/xdorm/XD.php",
             // "Phphleb\Debugpan\DPanel"    => "vendor/phphleb/debugpan/DPanel.php",
 
             "Lori\Base"                     => "app/Libraries/Base.php",

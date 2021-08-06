@@ -159,4 +159,19 @@ class Content
 
         return true;
     }
+
+    public static function change($content)
+    {
+        $StringArray = [
+            '(c)' => '©',
+            '(r)' => '®',
+            '+/-' => '±'
+        ];
+
+        foreach ($StringArray as $Key => $Val) {
+            $content = str_replace($Key, $Val, $content);
+        }
+
+        return $content;
+    }
 }

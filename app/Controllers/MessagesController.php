@@ -24,7 +24,7 @@ class MessagesController extends \MainController
 
         if ($messages_dialog = MessagesModel::getMessages($uid['id'])) {
 
-            $messages_total_rows = MessagesModel::getMessagesTotal($uid['id']);
+            // $messages_total_rows = MessagesModel::getMessagesTotal($uid['id']);
             foreach ($messages_dialog as $val) {
                 $dialog_ids = $val['id'];
             }

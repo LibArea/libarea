@@ -1,8 +1,7 @@
 <?php
 
 namespace App\Models;
-use Hleb\Constructor\Handlers\Request;
-use XdORM\XD;
+
 use DB;
 use PDO;
 
@@ -11,68 +10,120 @@ class AuthModel extends \MainModel
     // Проверка Логина на дубликаты
     public static function replayLogin($login)
     {
-        $result = XD::select('*')->from(['users'])->where(['login'], '=', $login)->getSelectOne();
-        
-        if ($result) {
-            return false;
-        }
-        return true;
+        $sql = "SELECT 
+                    login  
+                        FROM users 
+                        WHERE login = :login";
+
+        return DB::run($sql, ['login' => $login])->fetch(PDO::FETCH_ASSOC);
     }
-    
+
     // Проверка Email на дубликаты
     public static function replayEmail($email)
     {
-        $result = XD::select('*')->from(['users'])->where(['email'], '=', $email)->getSelectOne();
-        
-        if ($result) {
-            return false;
-        }
-        return true;
+        $sql = "SELECT 
+                    email  
+                        FROM users 
+                        WHERE email = :email";
+
+        return DB::run($sql, ['email' => $email])->fetch(PDO::FETCH_ASSOC);
     }
-    
+
     // Login забанен и бан не снят, то запретить и ip
     public static function repeatIpBanRegistration($ip)
     {
-        $result = XD::select('*')->from(['users_banlist'])->where(['banlist_ip'], '=', $ip)->and(['banlist_status'], '=', 1)->getSelectOne();
+        $sql = "SELECT
+                    banlist_ip,
+                    banlist_status
+                        FROM users_banlist
+                        WHERE banlist_ip = :ip AND banlist_status = 1";
 
-        if ($result) {
-            return false;
-        }
-        return true;
+        return DB::run($sql, ['ip' => $ip])->fetch(PDO::FETCH_ASSOC);
     }
-    
-    // Поля в таблице users_auth_tokens
-    // auth_id,	auth_user_id,	auth_selector,	auth_hashedvalidator,	auth_expires	
+
     public static function getAuthTokenByUserId($user_id)
     {
-        return XD::select('*')->from(['users_auth_tokens'])
-                ->where(['auth_user_id'], '=', $user_id)->getSelectOne();
+        $sql = "SELECT
+                    auth_id,
+                    auth_user_id,
+                    auth_selector,
+                    auth_hashedvalidator,
+                    auth_expires
+                        FROM users_auth_tokens
+                        WHERE auth_user_id = :user_id";
+
+        return DB::run($sql, ['user_id' => $user_id])->fetch(PDO::FETCH_ASSOC);
     }
-    
+
     public static function insertToken($data)
     {
-        return  XD::insertInto(['users_auth_tokens'], '(', ['auth_user_id'], ',', ['auth_selector'], ',', ['auth_hashedvalidator'], ',', ['auth_expires'], ')')->values( '(', XD::setList([$data['user_id'], $data['selector'], $data['hashedvalidator'], $data['expires']]), ')' )->run();
+        $params = [
+            'auth_user_id'          => $data['user_id'],
+            'auth_selector'         => $data['selector'],
+            'auth_hashedvalidator'  => $data['hashedvalidator'],
+            'auth_expires'          => $data['expires'],
+        ];
+
+        $sql = "INSERT INTO users_auth_tokens(auth_user_id, auth_selector, auth_hashedvalidator, auth_expires) 
+                       VALUES(:auth_user_id, :auth_selector, :auth_hashedvalidator, :auth_expires)";
+
+        return DB::run($sql, $params);
     }
-    
-    public static function updateToken($data, $uid)
+
+    public static function updateToken($data, $user_id)
     {
-        return  XD::update(['users_auth_tokens'])->set(['auth_user_id'], '=', $data['user_id'], ',', ['auth_selector'], '=', $data['selector'], ',', ['auth_hashedvalidator'], '=', $data['hashedvalidator'], ',', ['auth_expires'], '=', $data['expires'])->where(['auth_user_id'], '=', $uid)->run();
+        $params = [
+            'auth_user_id'          => $data['user_id'],
+            'auth_selector'         => $data['selector'],
+            'auth_hashedvalidator'  => $data['hashedvalidator'],
+            'auth_expires'          => $data['expires'],
+            'auth_user_id'          => $user_id,
+        ];
+
+        $sql = "UPDATE users_auth_tokens 
+                    SET auth_user_id = :auth_user_id, 
+                        auth_selector = :auth_selector, 
+                        auth_hashedvalidator = :auth_hashedvalidator, 
+                        auth_expires = :auth_expires
+                            WHERE auth_user_id = :auth_user_id";
+
+        return DB::run($sql, $params);
     }
-    
-    public static function deleteTokenByUserId($uid)
+
+    public static function deleteTokenByUserId($user_id)
     {
-        return XD::deleteFrom(['users_auth_tokens'])->where(['auth_user_id'], '=', $uid)->run(); 
+        $sql = "DELETE FROM users_auth_tokens WHERE auth_user_id = :user_id";
+
+        return DB::run($sql, ['user_id' => $user_id]);
     }
-    
+
     // Получаем токен аутентификации по селектору
     public static function getAuthTokenBySelector($selector)
     {
-        return XD::select('*')->from(['users_auth_tokens'])->where(['auth_selector'], '=', $selector)->getSelectOne();
+        $sql = "SELECT
+                    auth_id,
+                    auth_user_id,
+                    auth_selector,
+                    auth_hashedvalidator,
+                    auth_expires
+                        FROM users_auth_tokens
+                        WHERE auth_selector = :auth_selector";
+
+        return DB::run($sql, ['auth_selector' => $selector])->fetch(PDO::FETCH_ASSOC);
     }
-    
+
     public static function UpdateSelector($data, $selector)
     {
-       return  XD::update(['users_auth_tokens'])->set(['auth_hashedvalidator'], '=', $data['hashedvalidator'], ',', ['auth_expires'], '=', $data['expires'])->where(['auth_selector'], '=', $selector)->run();
+        $params = [
+            'auth_hashedvalidator'  => $data['hashedvalidator'],
+            'auth_expires'          => $data['expires'],
+            'auth_selector'         => $selector,
+        ];
+
+        $sql = "UPDATE users_auth_tokens 
+                    SET auth_hashedvalidator = :auth_hashedvalidator,  auth_expires = :auth_expires
+                        WHERE auth_selector = :auth_selector";
+
+        return DB::run($sql, $params);
     }
-    
 }

@@ -102,6 +102,8 @@ class EditPostController extends \MainController
         $post_img = empty($post_img) ? $post['post_content_img'] : $post_img;
         $post_img = empty($post_img) ? '' : $post_img;
 
+        $post_content = Content::change($post_content);
+
         $data = [
             'post_id'               => $post_id,
             'post_title'            => $post_title,

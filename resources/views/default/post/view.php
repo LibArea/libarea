@@ -73,7 +73,7 @@
                                 <?php } ?>
                                 <span class="add-favorite gray" data-id="<?= $post['post_id']; ?>" data-type="post">
                                     <span class="mr5 ml5">&#183;</span>
-                                    <?php if ($post['favorite_post']) { ?>
+                                    <?php if (is_array($post['favorite_post'])) { ?>
                                         <?= lang('remove-favorites'); ?>
                                     <?php } else { ?>
                                         <?= lang('add-favorites'); ?>

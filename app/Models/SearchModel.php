@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-use XdORM\XD;
+
 use DB;
 use PDO;
 
@@ -17,10 +17,8 @@ class SearchModel extends \MainModel
                     post_content  
                         FROM posts WHERE post_content 
                         LIKE :qa1 OR post_title LIKE :qa2 ORDER BY post_id LIMIT 15";
-        
-        $result_q = DB::run($sql,['qa1' => "%".$query."%", 'qa2' => "%".$query."%"]);
-        
-        return $result_q->fetchall(PDO::FETCH_ASSOC);
+
+        return DB::run($sql, ['qa1' => "%" . $query . "%", 'qa2' => "%" . $query . "%"])->fetchall(PDO::FETCH_ASSOC);
     }
 
     // Для Sphinx 
@@ -38,7 +36,6 @@ class SearchModel extends \MainModel
                     SNIPPET(post_content, :qa) AS _content 
                         FROM postind WHERE MATCH(:qa)";
 
-        $result = DB::run($sql, ['qa' => $query], 'mysql.sphinx-search');
-        return  $result->fetchall(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['qa' => $query], 'mysql.sphinx-search')->fetchall(PDO::FETCH_ASSOC);
     }
 }

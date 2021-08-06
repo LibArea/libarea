@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+
 use DB;
 use PDO;
 
@@ -9,49 +10,39 @@ class FeedModel extends \MainModel
     // Получаем посты по условиям
     public static function feed($page, $limit, $uid, $sheet, $type, $data)
     {
-        if ($type == 'space') 
-        {
+        if ($type == 'space') {
             $selection   = $data['space_id'];
-            $string     = "WHERE post_space_id = :selection"; 
-        } 
-        elseif ($type == 'topic') 
-        {
+            $string     = "WHERE post_space_id = :selection";
+        } elseif ($type == 'topic') {
             $qa         = $data['topic_slug'];
             $string     = "WHERE topic_list LIKE :qa";
-        }
-        elseif ($type == 'link') 
-        {
+        } elseif ($type == 'link') {
             $selection   = $data['link_url_domain'];
             $string     = "WHERE post_url_domain  = :selection";
-        }
-        else 
-        {
+        } else {
             $selection   = $data['post_user_id'];
-            $string     = "WHERE post_user_id  = :selection";   
+            $string     = "WHERE post_user_id  = :selection";
         }
-        
-        
+
+
         // Удаленный пост, запрещенный к показу в ленте и ограниченный по TL (trust_level)
         $display = '';
-        if ($uid['trust_level'] != 5) 
-        {
+        if ($uid['trust_level'] != 5) {
             $trust_level = "AND post_tl <= " . $uid['trust_level'];
-            if ($uid['id'] == 0) 
-            { 
+            if ($uid['id'] == 0) {
                 $trust_level = "AND post_tl = 0";
-            } 
-            
+            }
+
             $display = "AND post_is_deleted = 0 $trust_level";
-        } 
+        }
 
         // По времени или по количеству ответов 
-        $sort = "ORDER BY post_answers_count DESC"; 
-        if ($sheet == 'feed' || $sheet == 'all') 
-        { 
+        $sort = "ORDER BY post_answers_count DESC";
+        if ($sheet == 'feed' || $sheet == 'all') {
             $sort = "ORDER BY post_top DESC, post_date DESC";
-        }  
-        
-        $start  = ($page-1) * $limit;
+        }
+
+        $start  = ($page - 1) * $limit;
         $sql = "SELECT 
                     post_id,
                     post_title,
@@ -102,71 +93,59 @@ class FeedModel extends \MainModel
                             INNER JOIN users ON id = post_user_id
                             INNER JOIN spaces ON space_id = post_space_id
                             LEFT JOIN votes_post ON votes_post_item_id = post_id 
-                                AND votes_post_user_id = ". $uid['id'] ."
+                                AND votes_post_user_id = " . $uid['id'] . "
             
                         $string 
                         $display 
-                        $sort LIMIT $start, $limit"; 
+                        $sort LIMIT $start, $limit";
 
-        if ($type == 'topic') 
-        {
-            $request = ['qa' => "%".$qa."%"];
-        } 
-        else 
-        {
-            $request = ['selection' => $selection]; 
+        if ($type == 'topic') {
+            $request = ['qa' => "%" . $qa . "%"];
+        } else {
+            $request = ['selection' => $selection];
         }
 
-        return DB::run($sql, $request)->fetchAll(PDO::FETCH_ASSOC); 
+        return DB::run($sql, $request)->fetchAll(PDO::FETCH_ASSOC);
     }
-    
+
     // Количество постов
     public static function feedCount($uid, $type, $data)
     {
-        if ($type == 'space') 
-        {
+        if ($type == 'space') {
             $selection   = $data['space_id'];
-            $string     = "WHERE post_space_id = :selection"; 
-        } 
-        elseif ($type == 'topic') 
-        {
+            $string     = "WHERE post_space_id = :selection";
+        } elseif ($type == 'topic') {
             $qa         = $data['topic_slug'];
             $string     = "WHERE topic_list LIKE :qa";
-        }
-        elseif ($type == 'link') 
-        {
+        } elseif ($type == 'link') {
             $selection   = $data['link_url_domain'];
             $string     = "WHERE post_url_domain  = :selection";
-        } 
-        else 
-        {
+        } else {
             $selection   = $data['post_user_id'];
-            $string     = "WHERE post_user_id  = :selection";   
+            $string     = "WHERE post_user_id  = :selection";
         }
 
         // Удаленный пост, запрещенный к показу в ленте и ограниченный по TL (trust_level)
         $display = '';
-        if ($uid['trust_level'] != 5) 
-        {
+        if ($uid['trust_level'] != 5) {
             $trust_level = "AND post_tl <= " . $uid['trust_level'];
-            if ($uid['id'] == 0) 
-            { 
+            if ($uid['id'] == 0) {
                 $trust_level = "AND post_tl = 0";
-            } 
-            
+            }
+
             $display = "AND post_is_deleted = 0 AND space_feed = 0 $trust_level";
-        } 
+        }
 
         // Учитываем TL
-        $display = ''; 
-        if ($uid['trust_level'] != 5) {   
+        $display = '';
+        if ($uid['trust_level'] != 5) {
             $tl = "AND post_tl <= " . $uid['trust_level'];
-            if ($uid['id'] == 0) { 
+            if ($uid['id'] == 0) {
                 $tl = "AND post_tl = 0";
-            } 
+            }
             $display = "AND post_is_deleted = 0 AND space_feed = 0 $tl";
-        } 
-     
+        }
+
         $sql = "SELECT 
                     post_id,
                     post_title,
@@ -217,18 +196,14 @@ class FeedModel extends \MainModel
                             INNER JOIN spaces ON space_id = post_space_id
             
                     $string 
-                    $display "; 
+                    $display ";
 
-        if ($type == 'topic') 
-        {
-            $request = ['qa' => "%".$qa."%"];
-        } 
-        else 
-        {
-            $request = ['selection' => $selection]; 
+        if ($type == 'topic') {
+            $request = ['qa' => "%" . $qa . "%"];
+        } else {
+            $request = ['selection' => $selection];
         }
 
-        return DB::run($sql, $request)->rowCount(); 
+        return DB::run($sql, $request)->rowCount();
     }
-   
- }
+}

@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\UserModel;
-use XdORM\XD;
 use DB;
 use PDO;
 
@@ -23,92 +21,107 @@ class NotificationsModel extends \MainModel
     // 15 -  аудит
 
     // Лист уведомлений
-    public static function listNotification($user_uid)
+    public static function listNotification($user_id)
     {
-        $query = XD::select('*')->from(['notifications'])
-                ->leftJoin(['users'])->on(['id'], '=', ['sender_uid'])
-                ->where(['recipient_uid'], '=', $user_uid)
-                ->orderBy(['notification_id'])->desc();
+        $sql = "SELECT
+                    notification_id,
+                    sender_uid,
+                    recipient_uid,
+                    action_type,
+                    connection_type,
+                    url,
+                    add_time,
+                    read_flag,
+                    is_del,
+                    id, 
+                    login, 
+                    avatar
+                        FROM notifications
+                        JOIN users ON id = sender_uid
+                        WHERE recipient_uid = :user_id
+                        ORDER BY notification_id DESC LIMIT 100";
 
-        return $query->getSelect();
-    }  
+        return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     // Уведомление
-    public static function usersNotification($user_uid)
+    public static function usersNotification($user_id)
     {
-        $query = XD::select('*')->from(['notifications'])
-                ->where(['recipient_uid'], '=', $user_uid)
-                ->and(['read_flag'], '=', 0);  
+        $sql = "SELECT
+                    notification_id,
+                    sender_uid,
+                    recipient_uid,
+                    action_type,
+                    connection_type,
+                    url,
+                    add_time,
+                    read_flag,
+                    is_del
+                        FROM notifications
+                        WHERE recipient_uid = :user_id
+                        AND read_flag = 0";
 
-        return  $query->getSelectOne();
-    }  
+        return DB::run($sql, ['user_id' => $user_id])->fetch(PDO::FETCH_ASSOC);
+    }
 
+    // Отправка
+    public static function send($sender_uid, $recipient_uid, $action_type, $connection_type, $url, $model_type = 0)
+    {
+        if (!$recipient_uid) {
+            return false;
+        }
 
-	// Уведомление
-    // Пример: 2 - ответы
-    // NotificationsModel::send($sender_uid, $recipient_uid, $type, $messages_dialog_id, $url, 1);
-	public static function send($sender_uid, $recipient_uid, $action_type, $connection_type, $url, $model_type = 0)
-	{
-		if (!$recipient_uid)
-		{
-			return false;
-		}
+        $params = [
+            'sender_uid'        => $sender_uid,
+            'recipient_uid'     => $recipient_uid,
+            'action_type'       => $action_type,
+            'connection_type'   => $connection_type,
+            'url'               => $url,
+            'read_flag'         => 0,
+        ];
 
-        // Настройки участника
-		if (!$action_type OR !self::check_notification_setting($recipient_uid, $action_type))
-		{
-			// return false; 
-		} 
+        $sql = "INSERT INTO notifications(sender_uid, recipient_uid, action_type, connection_type, url, read_flag) 
+                       VALUES(:sender_uid, :recipient_uid, :action_type, :connection_type, :url, :read_flag)";
 
-        XD::insertInto(['notifications'], '(', ['sender_uid'], ',', ['recipient_uid'], ',', ['action_type'], ',', ['connection_type'], ',', ['url'], ',', ['read_flag'], ')')->values( '(', XD::setList([$sender_uid, $recipient_uid,$action_type, $connection_type, $url, 0]), ')' )->run();
-       
-		return true;
-	}
+        return DB::run($sql, $params);
+    }
 
-	// Проверить настройки уведомлений указанного пользователя 
-	public static function check_notification_setting($recipient_uid, $action_type)
-	{
-		if (!$action_type)
-		{
-			return false;
-		}
-         
-		$notification_setting = UserModel::getNotificationSettingByUid($recipient_uid);
-
-		if ($action_type)
-		{
-			return false;
-		}
-
-		return true;
-	}
-    
     // Кто подписан на данный вопрос / пост
     public static function getFocusUsersPost($post_id)
     {
-        return XD::select(['signed_post_id', 'signed_user_id'])->from(['posts_signed'])
-                ->where(['signed_post_id'], '=', $post_id)->getSelect();  
-    } 
-    
+        $sql = "SELECT
+                    signed_post_id,
+                    signed_user_id
+                        FROM posts_signed
+                        WHERE signed_post_id = :post_id";
+
+        return DB::run($sql, ['post_id' => $post_id])->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     // Список читаемых постов
     public static function getFocusPostUser($user_id)
     {
-        return XD::select(['signed_post_id', 'signed_user_id'])->from(['posts_signed'])
-                ->where(['signed_user_id'], '=', $user_id)->getSelect();    
-    } 
-    
+        $sql = "SELECT
+                    signed_post_id,
+                    signed_user_id
+                        FROM posts_signed
+                        WHERE signed_user_id' = :user_id";
+
+        return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public static function getFocusPostsListUser($user_id)
     {
         $focus_posts = self::getFocusPostUser($user_id);
-       
-        $result = Array();
+
+        $result = array();
         foreach ($focus_posts as $ind => $row) {
             $result[$ind] = $row['signed_post_id'];
-        } 
-        
-        $string = "WHERE post_id IN(".implode(',', $result).") AND post_draft = 0";
-        
-               $sql = "SELECT 
+        }
+
+        $string = "WHERE post_id IN(" . implode(',', $result) . ") AND post_draft = 0";
+
+        $sql = "SELECT 
                     post_id,
                     post_title,
                     post_slug,
@@ -158,32 +171,41 @@ class NotificationsModel extends \MainModel
             INNER JOIN users ON id = post_user_id
             INNER JOIN spaces ON space_id = post_space_id
             LEFT JOIN votes_post ON votes_post_item_id = post_id AND votes_post_user_id = :user_id
-            $string  LIMIT 100"; 
+            $string  LIMIT 100";
 
-        return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC); 
-    }   
-    
+        return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     // Оповещение просмотрено
-    public static function updateMessagesUnread($uid, $notif_id)
+    public static function updateMessagesUnread($user_id, $notif_id)
     {
-        XD::update(['notifications'])->set(['read_flag'], '=', 1)
-                                 ->where(['recipient_uid'], '=', $uid)
-                                 ->and(['notification_id'], '=', $notif_id)
-                                 ->run();
-        return true;
-    } 
-    
+        $sql = "UPDATE notifications SET read_flag = 1 WHERE recipient_uid = :user_id AND notification_id = :notif_id";
+
+        return DB::run($sql, ['user_id' => $user_id, 'notif_id' => $notif_id]);
+    }
+
     public static function getNotification($id)
     {
-        return  XD::select('*')->from(['notifications'])
-                ->where(['notification_id'], '=', $id)->getSelectOne();
-    }  
+        $sql = "SELECT
+                    notification_id,
+                    sender_uid,
+                    recipient_uid,
+                    action_type,
+                    connection_type,
+                    url,
+                    add_time,
+                    read_flag,
+                    is_del
+                        FROM notifications
+                            WHERE notification_id = :id";
+
+        return DB::run($sql, ['id' => $id])->fetch(PDO::FETCH_ASSOC);
+    }
 
     public static function setRemove($user_id)
     {
-        XD::update(['notifications'])->set(['read_flag'], '=', 1)
-                                 ->where(['recipient_uid'], '=', $user_id)
-                                 ->run();
-        return true;
+        $sql = "UPDATE notifications SET read_flag = 1 WHERE recipient_uid = :user_id";
+
+        return DB::run($sql, ['user_id' => $user_id]);
     }
 }

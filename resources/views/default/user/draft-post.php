@@ -8,12 +8,7 @@
                 <div class="drafts max-width">
                     <?php if (!empty($drafts)) { ?>
 
-                        <?php $counter = 0;
-                        foreach ($drafts as $dr) {
-                            $counter++; ?>
-                            <div class="voters-fav">
-                                <div class="score"><?= $counter; ?>.</div>
-                            </div>
+                        <?php foreach ($drafts as $dr) { ?>
                             <div class="post-telo">
                                 <a href="/post/<?= $dr['post_id']; ?>/<?= $dr['post_slug']; ?>">
                                     <h3 class="title size-21"><?= $dr['post_title']; ?></h3>

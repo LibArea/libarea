@@ -66,13 +66,11 @@ function user_avatar_img($file, $size = 'small', $alt, $style)
     return $img;
 }
 
-
 // User's Cover art
 function user_cover_url($file)
 {
     return '/uploads/users/cover/' . $file;
 }
-
 
 // User's Cover art or thumbnails
 function post_img($file, $alt, $style, $type, $attributes = '')
@@ -90,7 +88,6 @@ function post_img($file, $alt, $style, $type, $attributes = '')
 
     return $img;
 }
-
 
 // Favicon 
 function favicon_img($link_id, $alt)

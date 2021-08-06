@@ -75,7 +75,7 @@ class WebsController extends \MainController
             'link_cat_id'       => 1,
         ];
 
-        WebModel::addLink($data);
+        WebModel::add($data);
 
         redirect($redirect);
     }

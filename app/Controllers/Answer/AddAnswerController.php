@@ -50,6 +50,8 @@ class AddAnswerController extends \MainController
             Base::addMsg(lang('answer_audit'), 'error');
         }
 
+        $answer_content = Content::change($answer_content);
+
         $data = [
             'answer_post_id'    => $post_id,
             'answer_content'    => $answer_content,
@@ -58,26 +60,26 @@ class AddAnswerController extends \MainController
             'answer_user_id'    => $uid['id'],
         ];
 
-        $last_answer_id = AnswerModel::addAnswer($data);
-        $url_answer     = $redirect . '#answer_' . $last_answer_id;
+        $last_id    = AnswerModel::addAnswer($data);
+        $url_answer = $redirect . '#answer_' . $last_id;
 
         // Оповещение админу
         if ($answer_published == 0) {
-            ActionModel::addAudit('answer', $uid['id'], $last_answer_id);
+            ActionModel::addAudit('answer', $uid['id'], $last_id);
             $type = 15; // Упоминания в посте  
             $user_id  = 1;
-            NotificationsModel::send($uid['id'], $user_id, $type, $last_answer_id, $url_answer, 1);
+            NotificationsModel::send($uid['id'], $user_id, $type, $last_id, $url_answer, 1);
         }
 
         // Уведомление (@login)
-        if ($message = Content::parseUser($content, true, true)) {
+        if ($message = Content::parseUser($answer_content, true, true)) {
             foreach ($message as $user_id) {
                 // Запретим отправку себе
                 if ($user_id == $uid['id']) {
                     continue;
                 }
                 $type = 11; // Упоминания в ответе      
-                NotificationsModel::send($uid['id'], $user_id, $type, $last_answer_id, $url_answer, 1);
+                NotificationsModel::send($uid['id'], $user_id, $type, $last_id, $url_answer, 1);
             }
         }
         
@@ -87,7 +89,7 @@ class AddAnswerController extends \MainController
             foreach ($focus_all as $focus_user) {
                 if ($focus_user['signed_user_id'] != $uid['id']) {
                     $type = 3; // Ответ на пост
-                    NotificationsModel::send($uid['id'], $focus_user['signed_user_id'], $type, $last_answer_id, $url_answer, 1);
+                    NotificationsModel::send($uid['id'], $focus_user['signed_user_id'], $type, $last_id, $url_answer, 1);
                 }
             }
             

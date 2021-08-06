@@ -68,7 +68,7 @@
                                             <?php if (!$uid['id']) { ?>
                                                 <div class="top-15-px">
                                                     <a href="/login">
-                                                        <div class="focus-space yes-space">
+                                                        <div class="focus-space yes-space absolute">
                                                             <i class="light-icon-plus middle"></i>
                                                             <span class="middle"><?= lang('Read'); ?></span>
                                                         </div>

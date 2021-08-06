@@ -37,7 +37,7 @@
                                 <?php if ($msg['unread']) { ?>
                                     <?= lang('There are'); ?> <?= $msg['count']; ?> <?= $msg['unread_num']; ?>
                                 <?php } else { ?>
-                                    <?= lang('View'); ?>
+                                    <span class="red"><?= lang('View'); ?></span>
                                     <?php if ($msg['count'] != 0) { ?>
                                         <?= $msg['count']; ?> <?= $msg['count_num']; ?>
                                     <?php } ?>

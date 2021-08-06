@@ -276,6 +276,7 @@ return [
     'Wrote a post'          => 'Написал пост',
     'Wrote to you'          => 'написал вам',
     'Replied to post'       => 'Ответил на пост',
+    'Successfully, log in'  => 'Успешно, войдите в систему',
     'appealed to you'       => 'обратился к вам',
     'in post'               => 'в посте',
     'in answer'             => 'в ответе',
@@ -410,10 +411,11 @@ return [
     'Your account is under review'          => 'Ваш аккаунт находится на рассмотрении',
     'Invalid email address'                 => 'Недопустимый e-mail',
     'There is no such e-mail on the site'   => 'Такого e-mail нет на сайте',
-    'New password has been sent to e-mail'  => 'Новый пароль отправлен на e-mail', 
     
-    'tl-limitation'                         => 'Ваш уровень доверия (TL) не позволяет совершить это действие',
-    'Who will be able to post posts'        => 'Кто сможет размещать посты',
-    'Long name from'                        => 'Длинное название от',
-    'Posts will not be visible in the feed' => 'Если нет, то посты не будут видны в ленте (на главной)'
+    'New password has been sent to e-mail'          => 'Новый пароль отправлен на e-mail', 
+    'Check your e-mail to activate your account'    => 'Проверьте e-mail почту для активации аккаунта',
+    'tl-limitation'                                 => 'Ваш уровень доверия (TL) не позволяет совершить это действие',
+    'Who will be able to post posts'                => 'Кто сможет размещать посты',
+    'Long name from'                                => 'Длинное название от',
+    'Posts will not be visible in the feed'         => 'Если нет, то посты не будут видны в ленте (на главной)'
 ];

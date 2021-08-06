@@ -1,6 +1,7 @@
 <?php
+
 namespace App\Models;
-use XdORM\XD;
+
 use DB;
 use PDO;
 
@@ -8,32 +9,34 @@ class AnswerModel extends \MainModel
 {
     // Добавляем ответ
     public static function addAnswer($data)
-    { 
-        XD::insertInto(['answers'], '(', ['answer_post_id'], ',', 
-            ['answer_content'], ',', 
-            ['answer_published'], ',', 
-            ['answer_ip'], ',', 
-            ['answer_user_id'], ')')->values( '(', 
-        
-        XD::setList([
-            $data['answer_post_id'], 
-            $data['answer_content'], 
-            $data['answer_published'],
-            $data['answer_ip'], 
-            $data['answer_user_id']]), ')' )->run();
-       
-       return XD::select()->last_insert_id('()')->getSelectValue();
+    {
+        $params = [
+            'answer_post_id'    => $data['answer_post_id'],
+            'answer_content'    => $data['answer_content'],
+            'answer_published'  => $data['answer_published'],
+            'answer_ip'         => $data['answer_ip'],
+            'answer_user_id'    => $data['answer_user_id'],
+        ];
+
+        $sql = "INSERT INTO answers(answer_post_id, answer_content, answer_published, answer_ip, answer_user_id) 
+                       VALUES(:answer_post_id, :answer_content, :answer_published, :answer_ip, :answer_user_id)";
+
+        DB::run($sql, $params);
+
+        $sql_last_id =  DB::run("SELECT LAST_INSERT_ID() as last_id")->fetch(PDO::FETCH_ASSOC);
+
+        return $sql_last_id['last_id'];
     }
-    
+
     // Все ответы
     public static function getAnswersAll($page, $limit, $uid)
     {
         $tl = 'AND post_tl = 0';
-        if ($uid['trust_level']) { 
-                $tl = 'AND post_tl <= '.$uid['trust_level'].'';
-        } 
-        
-        $start  = ($page-1) * $limit;
+        if ($uid['trust_level']) {
+            $tl = 'AND post_tl <= ' . $uid['trust_level'] . '';
+        }
+
+        $start  = ($page - 1) * $limit;
         $sql = "SELECT 
                     post_id,
                     post_title,
@@ -50,12 +53,12 @@ class AnswerModel extends \MainModel
                     avatar
                         FROM answers
                         INNER JOIN users ON id = answer_user_id
-                        INNER JOIN posts ON answer_post_id = post_id AND answer_is_deleted = 0 ".$tl."
+                        INNER JOIN posts ON answer_post_id = post_id AND answer_is_deleted = 0 " . $tl . "
                         ORDER BY answer_id DESC LIMIT $start, $limit ";
-                        
-        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
+
+        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
-    
+
     // Количество ответов
     public static function getAnswersAllCount()
     {
@@ -64,25 +67,40 @@ class AnswerModel extends \MainModel
                     answer_is_deleted 
                         FROM answers WHERE answer_is_deleted = 0";
 
-        return DB::run($sql)->rowCount(); 
+        return DB::run($sql)->rowCount();
     }
-    
+
     // Получаем лучший комментарий (LO)
     public static function getAnswerLo($post_id)
     {
-        return XD::select('*')->from(['answers'])
-                ->where(['answer_post_id'], '=', $post_id)
-                ->and(['answer_lo'], '>', 0)->getSelectOne();
+        $sql = "SELECT 
+                    answer_id,
+                    answer_post_id,
+                    answer_user_id,
+                    answer_date,
+                    answer_modified,
+                    answer_published,
+                    answer_ip,
+                    answer_order,
+                    answer_after,
+                    answer_votes,
+                    answer_content,
+                    answer_lo,
+                    answer_is_deleted
+                        FROM answers 
+                            WHERE answer_post_id = :post_id AND answer_lo > 0";
+
+        return  DB::run($sql, ['post_id' => $post_id])->fetch(PDO::FETCH_ASSOC);
     }
-    
+
     // Получаем ответы в посте
     public static function getAnswersPost($post_id, $user_id, $type)
-    { 
+    {
         $sort = "";
         if ($type == 1) {
             $sort = 'ORDER BY answer_votes DESC ';
-        }    
-        
+        }
+
         $sql = "SELECT 
                     answer_id,
                     answer_user_id,
@@ -112,38 +130,70 @@ class AnswerModel extends \MainModel
                             WHERE answer_post_id = $post_id
                             $sort ";
 
-        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
+        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // Страница ответов участника
     public static function userAnswers($slug)
     {
-        $q = XD::select('*')->from(['answers']);
-        $query = $q->leftJoin(['users'])->on(['id'], '=', ['answer_user_id'])
-                ->leftJoin(['posts'])->on(['answer_post_id'], '=', ['post_id'])
-                ->where(['login'], '=', $slug)
-                ->and(['answer_is_deleted'], '=', 0)
-                ->and(['post_tl'], '=', 0)
-                ->orderBy(['answer_id'])->desc();
-        
-        return $query->getSelect();
-    } 
-   
+        $sql = "SELECT 
+                    answer_id,
+                    answer_user_id,
+                    answer_post_id,
+                    answer_date,
+                    answer_content,
+                    answer_modified,
+                    answer_ip,
+                    answer_votes,
+                    answer_after,
+                    answer_is_deleted,
+                    post_id,
+                    post_title,
+                    post_slug,
+                    id, 
+                    login, 
+                    avatar
+                        FROM answers
+                        LEFT JOIN users ON id = answer_user_id
+                        LEFT JOIN posts ON answer_post_id = post_id
+                        WHERE login = :slug
+                        AND answer_is_deleted = 0 AND post_tl = 0 AND post_tl = 0
+                        ORDER BY answer_id DESC";
+
+        return DB::run($sql, ['slug' => $slug])->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     // Информацию по id ответа
     public static function getAnswerId($answer_id)
     {
-       return XD::select('*')->from(['answers'])->where(['answer_id'], '=', $answer_id)->getSelectOne();
+        $sql = "SELECT 
+                    answer_id,
+                    answer_post_id,
+                    answer_user_id,
+                    answer_date,
+                    answer_modified,
+                    answer_published,
+                    answer_ip,
+                    answer_order,
+                    answer_after,
+                    answer_votes,
+                    answer_content,
+                    answer_lo,
+                    answer_is_deleted
+                        FROM answers 
+                            WHERE answer_id = :answer_id";
+
+        return  DB::run($sql, ['answer_id' => $answer_id])->fetch(PDO::FETCH_ASSOC);
     }
-    
+
     // Редактируем ответ
-    public static function AnswerEdit($comment_id, $answer)
+    public static function AnswerEdit($answer_id, $content)
     {
-        $data = date("Y-m-d H:i:s"); 
-        
-        return  XD::update(['answers'])->set(['answer_content'], '=', $answer, ',', ['answer_modified'], '=', $data)
-        ->where(['answer_id'], '=', $comment_id)->run();
+        $sql_two = "UPDATE answers SET answer_content = :content, answer_modified = :date WHERE answer_id = :answer_id";
+
+        return DB::run($sql_two, ['answer_id' => $answer_id, 'content' => $content, 'date' => date("Y-m-d H:i:s")]);
     }
-    
+
     // Частота размещения ответа участника 
     public static function getAnswerSpeed($uid)
     {
@@ -152,10 +202,9 @@ class AnswerModel extends \MainModel
                     answer_user_id, 
                     answer_date
                         fROM answers 
-                            WHERE answer_user_id = ".$uid."
+                            WHERE answer_user_id = " . $uid . "
                             AND answer_date >= DATE_SUB(NOW(), INTERVAL 1 DAY)";
-                
-        return  DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
+
+        return  DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
-  
 }

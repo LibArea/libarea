@@ -39,7 +39,7 @@
 
                                     <?php } ?>
 
-                                    <?= $val['message']; ?>
+                                    <?= $val['message']; ?> 
 
                                     <div class="size-13 gray">
                                         <?= $val['add_time']; ?>

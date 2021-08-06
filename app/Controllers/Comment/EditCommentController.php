@@ -33,6 +33,8 @@ class EditCommentController extends \MainController
 
         $redirect   = '/post/' . $post['post_id'] . '/' . $post['post_slug'] . '#comment_' . $comment['comment_id'];
 
+        $comment_content = Content::change($comment_content);
+
         // Редактируем комментарий
         CommentModel::CommentEdit($comment['comment_id'], $comment_content);
         redirect($redirect);

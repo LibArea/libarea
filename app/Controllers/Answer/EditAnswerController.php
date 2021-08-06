@@ -38,6 +38,8 @@ class EditAnswerController extends \MainController
 
         Base::Limits($answer_content, lang('Bodies'), '6', '5000', '/' . $url);
 
+        $answer_content = Content::change($answer_content);
+
         // Редактируем комментарий
         AnswerModel::AnswerEdit($answer_id, $answer_content);
 

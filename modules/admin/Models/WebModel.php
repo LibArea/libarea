@@ -41,7 +41,6 @@ class WebModel extends \MainModel
     // Данные по id
     public static function getLinkId($link_id)
     {
-        // return XD::select('*')->from(['links'])->where(['link_id'], '=', $link_id)->getSelectOne();
         $sql = "SELECT
                     link_id,
                     link_title,
@@ -99,31 +98,6 @@ class WebModel extends \MainModel
         $sql = "SELECT link_id FROM links ORDER BY link_id DESC";
 
         return DB::run($sql)->fetch(PDO::FETCH_ASSOC);
-
-        /*  XD::insertInto(['links'], '(', 
-            ['link_url'], ',', 
-            ['link_url_domain'], ',', 
-            ['link_title'], ',', 
-            ['link_content'], ',',  
-            ['link_user_id'], ',',
-            ['link_type'], ',', 
-            ['link_status'], ',',
-            ['link_cat_id'], ',',
-            ['link_count'],')')->values( '(', 
-        
-        XD::setList([
-            $data['link_url'], 
-            $data['link_url_domain'],
-            $data['link_title'],
-            $data['link_content'],
-            $data['link_user_id'],
-            $data['link_type'],
-            $data['link_status'],
-            $data['link_cat_id'],
-            0]), ')' )->run();
-
-        // id домена
-        return XD::select()->last_insert_id('()')->getSelectValue(); */
     }
 
     // Количество в системе 

@@ -59,28 +59,32 @@ class AuthController extends \MainController
         $email      = \Request::getPost('email');
         $login      = \Request::getPost('login');
         $inv_code   = \Request::getPost('invitation_code');
-        $inv_uid    = \Request::getPost('invitation_id');
+        $inv_uid    = \Request::getPostInt('invitation_id');
         $password   = \Request::getPost('password');
         $reg_ip     = \Request::getRemoteAddress();
 
         $url = $inv_code ? '/register/invite/' . $inv_code : '/register';
+        
+        if ($inv_uid <= 0) {
+            redirect($url);
+        }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             Base::addMsg(lang('Invalid') . ' email', 'error');
             redirect($url);
         }
 
-        if (!AuthModel::replayEmail($email)) {
+        if (is_array(AuthModel::replayEmail($email))) {
             Base::addMsg(lang('e-mail-replay'), 'error');
             redirect($url);
         }
 
-        if (!AuthModel::repeatIpBanRegistration($reg_ip)) {
+        if (is_array(AuthModel::repeatIpBanRegistration($reg_ip))) {
             Base::addMsg(lang('multiple-accounts'), 'error');
             redirect($url);
         }
 
-        Base::charset_slug($login, lang('Nickname'), $redirect);
+        Base::charset_slug($login, lang('Nickname'), '/register');
 
         Base::Limits($login, lang('Nickname'), '3', '10', $url);
         Base::Limits($password, lang('Password'), '8', '32', $url);
@@ -98,13 +102,13 @@ class AuthController extends \MainController
         }
 
         // Запретим 
-        $disabled = ['admin', 'support', 'lori', 'loriup', 'dev', 'docs', 'meta', 'email', 'login'];
+        $disabled = ['admin', 'support', 'lori', 'loriup', 'dev', 'docs', 'meta', 'email', 'mail', 'login'];
         if (in_array($login, $disabled)) {
             Base::addMsg(lang('nickname-replay'), 'error');
             redirect($url);
         }
 
-        if (!AuthModel::replayLogin($login)) {
+        if (is_array(AuthModel::replayLogin($login))) {
             Base::addMsg(lang('nickname-replay'), 'error');
             redirect($url);
         }
@@ -127,12 +131,14 @@ class AuthController extends \MainController
             $invitation_id = $inv_uid;
         }
 
-        // id удастника
+        // id участника
         $active_uid = UserModel::createUser($login, $email, $password, $reg_ip, $invitation_id);
 
-        if ($inv_code) {
+        if ($invitation_id > 0) {
             // Если регистрация по инвайту, то записываем данные
-            UserModel::sendInvitationEmail($inv_code, $inv_uid, $reg_ip, $active_uid);
+            UserModel::sendInvitationEmail($inv_code, $invitation_id, $reg_ip, $active_uid);
+            Base::addMsg(lang('Successfully, log in'), 'success');
+            redirect('/login');
         } else {
             // Активация e-mail
             // Если будет раскомм. то в методе createUser изм. $activated с 1 на 0
@@ -146,7 +152,8 @@ class AuthController extends \MainController
             Base::mailText($email, Config::get(Config::PARAM_NAME) . ' - email', $mail_message);
         }
 
-        Base::addMsg('Проверьте e-mail почту для активации аккаунта.', 'success');
+        Base::addMsg(lang('Check your e-mail to activate your account'), 'success');
+        
         redirect('/login');
     }
 

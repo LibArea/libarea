@@ -25,7 +25,7 @@
 
                         <?php foreach ($result as $inv) { ?>
                             <?php if ($inv['active_status'] == 1) { ?>
-                                <div class="comm-header">
+                                <div class="size-13 gray">
                                     <?= user_avatar_img($inv['avatar'], 'small', $inv['login'], 'ava'); ?>
                                     <a href="<?= $inv['login']; ?>"><?= $inv['login']; ?></a>
                                     - <?= lang('registered'); ?>
@@ -34,17 +34,17 @@
                                 <?php if ($uid['trust_level'] == 5) { ?>
                                     <?= lang('The link was used to'); ?>: <?= $inv['invitation_email']; ?> <br>
                                     <code>
-                                        <?= Lori\Config::get(Lori\Config::PARAM_URL); ?>/register/invite/ <?= $inv['invitation_code']; ?>
+                                        <?= Lori\Config::get(Lori\Config::PARAM_URL); ?>/register/invite/<?= $inv['invitation_code']; ?>
                                     </code>
                                 <?php } ?>
 
-                                <small><?= lang('Link has been used'); ?></small>
+                                <span class="size-13 gray"><?= lang('Link has been used'); ?></span>
                             <?php } else { ?>
 
                                 <?= lang('For'); ?> (<?= $inv['invitation_email']; ?>) <?= lang('can send this link'); ?>: <br>
 
                                 <code>
-                                    <?= Lori\Config::get(Lori\Config::PARAM_URL); ?>/register/invite/ <?= $inv['invitation_code']; ?>
+                                    <?= Lori\Config::get(Lori\Config::PARAM_URL); ?>/register/invite/<?= $inv['invitation_code']; ?>
                                 </code>
 
                             <?php } ?>

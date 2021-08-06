@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+
 use DB;
 use PDO;
 
@@ -9,48 +10,48 @@ class HomeModel extends \MainModel
     // Посты на центральной странице
     public static function feed($page, $limit, $space_user, $uid, $type)
     {
-        $result = Array();
+        $result = array();
         foreach ($space_user as $ind => $row) {
             $result[$ind] = $row['signed_space_id'];
-        } 
+        }
 
         // Мы должны сформировать список пространств по умолчанию (в config)
         // и добавить условие показа постов, рейтинг которых достигает > N+ значения
         // в первый час размещения, но не вошедшие в пространства по умолчанию к показу
         if ($uid['id'] == 0) {
-           $string = "WHERE post_draft = 0";
+            $string = "WHERE post_draft = 0";
         } else {
             if ($type == 'all') {
-                $string = "WHERE post_draft = 0"; 
-            } else {    
+                $string = "WHERE post_draft = 0";
+            } else {
                 if ($result) {
-                    $string = "WHERE post_space_id IN(1, ".implode(',', $result).") AND post_draft = 0";
+                    $string = "WHERE post_space_id IN(1, " . implode(',', $result) . ") AND post_draft = 0";
                 } else {
-                   $string = "WHERE post_space_id IN(1) AND post_draft = 0"; 
+                    $string = "WHERE post_space_id IN(1) AND post_draft = 0";
                 }
-            }    
-        }        
+            }
+        }
 
         // Удаленный пост, запрещенный к показу в ленте и ограниченный по TL
         $display = '';
-        if ($uid['trust_level'] != 5) {  
+        if ($uid['trust_level'] != 5) {
             $tl = "AND post_tl <= " . $uid['trust_level'];
-            if ($uid['id'] == 0) { 
+            if ($uid['id'] == 0) {
                 $tl = "AND post_tl = 0";
-            } 
-            
+            }
+
             $display = "AND post_is_deleted = 0 AND space_feed = 0 $tl";
             if ($type == 'all') {
                 $display = "AND post_is_deleted = 0 $tl";
             }
-        } 
-         
-        $sort = "ORDER BY post_votes DESC"; 
-        if ($type == 'feed' || $type == 'all') { 
+        }
+
+        $sort = "ORDER BY post_votes DESC";
+        if ($type == 'feed' || $type == 'all') {
             $sort = "ORDER BY post_top DESC, post_date DESC";
-        }  
-        
-        $start  = ($page-1) * $limit;
+        }
+
+        $start  = ($page - 1) * $limit;
         $sql = "SELECT 
                     post_id,
                     post_title,
@@ -100,61 +101,61 @@ class HomeModel extends \MainModel
 
             INNER JOIN users ON id = post_user_id
             INNER JOIN spaces ON space_id = post_space_id
-            LEFT JOIN votes_post ON votes_post_item_id = post_id AND votes_post_user_id = ". $uid['id'] ."
+            LEFT JOIN votes_post ON votes_post_item_id = post_id AND votes_post_user_id = " . $uid['id'] . "
             
-            $string $display $sort LIMIT $start, $limit"; 
+            $string $display $sort LIMIT $start, $limit";
 
-        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
+        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
-    
+
     // Количество постов
     public static function feedCount($space_user, $uid)
     {
-        $result = Array();
+        $result = array();
         foreach ($space_user as $ind => $row) {
             $result[$ind] = $row['signed_space_id'];
-        }   
-        
-        $string = "WHERE post_space_id IN(1)"; 
+        }
+
+        $string = "WHERE post_space_id IN(1)";
         if ($result) {
-                $string = "WHERE post_space_id IN(1, ".implode(',', $result).")";
-        } 
+            $string = "WHERE post_space_id IN(1, " . implode(',', $result) . ")";
+        }
 
         // Учитываем подписку на пространства
         if ($uid['id'] == 0) {
-           $string = '';
-        } 
-            
+            $string = '';
+        }
+
         // Учитываем TL
-        $display = ''; 
-        if ($uid['trust_level'] != 5) {   
+        $display = '';
+        if ($uid['trust_level'] != 5) {
             $tl = "AND post_tl <= " . $uid['trust_level'];
-            if ($uid['id'] == 0) { 
+            if ($uid['id'] == 0) {
                 $tl = "AND post_tl = 0";
-            } 
+            }
             $display = "AND post_is_deleted = 0 AND space_feed = 0 $tl";
-        } 
-     
+        }
+
         $sql = "SELECT post_id, post_space_id, space_id
                 FROM posts
                 INNER JOIN spaces ON space_id = post_space_id
                 $string $display";
 
-        return DB::run($sql)->rowCount(); 
+        return DB::run($sql)->rowCount();
     }
-   
+
     // Последние 5 ответа на главной
-    public static function latestAnswers($uid) 
+    public static function latestAnswers($uid)
     {
         $user_answer = "AND space_feed = 0 AND post_tl = 0";
-        if ($uid['id']) { 
-            $user_answer = "AND space_feed = 0 AND answer_user_id != ". $uid['id'] ." AND post_tl <= " . $uid['trust_level'];
-         
-            if ($uid['trust_level'] != 5) { 
-                 $user_answer = "AND answer_user_id != " . $uid['id'];
-            } 
+        if ($uid['id']) {
+            $user_answer = "AND space_feed = 0 AND answer_user_id != " . $uid['id'] . " AND post_tl <= " . $uid['trust_level'];
+
+            if ($uid['trust_level'] != 5) {
+                $user_answer = "AND answer_user_id != " . $uid['id'];
+            }
         }
-        
+
         $sql = "SELECT 
                     answer_id,
                     answer_post_id,
@@ -180,11 +181,11 @@ class HomeModel extends \MainModel
                         $user_answer 
                         ORDER BY answer_id DESC LIMIT 5";
 
-        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC); 
+        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
-    
+
     // Пространства все / подписан
-    public static function getSubscriptionSpaces($user_id) 
+    public static function getSubscriptionSpaces($user_id)
     {
         $sql = "SELECT 
                     space_id, 
@@ -200,7 +201,6 @@ class HomeModel extends \MainModel
                         LEFT JOIN spaces_signed ON signed_space_id = space_id AND signed_user_id = :user_id 
                         WHERE space_is_delete != 1 AND signed_user_id = :user_id";
 
-       return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);  
-    }   
-
+        return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

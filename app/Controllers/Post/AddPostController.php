@@ -139,6 +139,8 @@ class AddPostController extends \MainController
             Base::addMsg(lang('post_audit'), 'error');
         }
 
+        $post_content = Content::change($post_content);
+
         $data = [
             'post_title'            => $post_title,
             'post_content'          => $post_content,
