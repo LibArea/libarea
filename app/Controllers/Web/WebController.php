@@ -81,4 +81,5 @@ class WebController extends \MainController
 
         return view(PR_VIEW_DIR . '/web/link', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'domains' => $domains, 'link' => $link]);
     }
+  
 }

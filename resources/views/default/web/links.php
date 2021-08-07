@@ -16,7 +16,7 @@
             <?php foreach ($links as $key => $link) { ?>
                 <div class="white-box">
                     <a href="/domain/<?= $link['link_url_domain']; ?>">
-                        <h2 class="title size-21 ml15">
+                        <h2 class="title size-21 pt15 ml15 mb0">
                             <?php if ($link['link_title']) { ?>
                                 <?= $link['link_title']; ?>
                             <?php } else { ?>

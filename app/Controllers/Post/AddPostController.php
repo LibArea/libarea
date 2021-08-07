@@ -45,11 +45,9 @@ class AddPostController extends \MainController
         $uid            = Base::getUid();
         $post_ip_int    = \Request::getRemoteAddress();
 
-        // Получаем id пространства
-        $space_id   = \Request::getPostInt('space_id');
-
         // Получаем информацию по пространству
-        $space = SpaceModel::getSpace($space_id, 'id');
+        $space_id   = \Request::getPostInt('space_id');
+        $space      = SpaceModel::getSpace($space_id, 'id');
         if (!$space) {
             Base::addMsg(lang('Select space'), 'error');
             redirect($redirect);
@@ -184,7 +182,6 @@ class AddPostController extends \MainController
 
         // Уведомление (@login)
         if ($message = Content::parseUser($post_content, true, true)) {
-
             foreach ($message as $user_id) {
                 // Запретим отправку себе
                 if ($user_id == $post_user_id) {
@@ -279,7 +276,6 @@ class AddPostController extends \MainController
 
         // Проверка доступа 
         $info_type = ActionModel::getInfoTypeContent($type_id, $type);
-
         if (!accessСheck($info_type, $type, $uid, 1, 30)) {
             redirect('/');
         }
@@ -291,11 +287,10 @@ class AddPostController extends \MainController
             $status = 'restored-' . $type;
         }
 
+        $info_post_id = $info_type[$type . '_post_id'];
         if ($type == 'post') {
             $info_post_id = $info_type[$type . '_id'];
-        } else {
-            $info_post_id = $info_type[$type . '_post_id'];
-        }
+        } 
 
         $data = [
             'user_id'       => $uid['id'],
@@ -315,12 +310,12 @@ class AddPostController extends \MainController
     // Журнал логирования удалений / восстановлений контента
     public function moderation()
     {
-        $moderations_log      = ActionModel::getModerations();
+        $moderations_log    = ActionModel::getModerations();
 
         $result = array();
         foreach ($moderations_log as $ind => $row) {
             $row['mod_created_at']    = lang_date($row['mod_created_at']);
-            $result[$ind]         = $row;
+            $result[$ind]   = $row;
         }
 
         $uid  = Base::getUid();

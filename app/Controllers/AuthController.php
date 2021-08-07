@@ -64,11 +64,7 @@ class AuthController extends \MainController
         $reg_ip     = \Request::getRemoteAddress();
 
         $url = $inv_code ? '/register/invite/' . $inv_code : '/register';
-        
-        if ($inv_uid <= 0) {
-            redirect($url);
-        }
-
+    
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             Base::addMsg(lang('Invalid') . ' email', 'error');
             redirect($url);
@@ -78,16 +74,14 @@ class AuthController extends \MainController
             Base::addMsg(lang('e-mail-replay'), 'error');
             redirect($url);
         }
-
+ 
         if (is_array(AuthModel::repeatIpBanRegistration($reg_ip))) {
             Base::addMsg(lang('multiple-accounts'), 'error');
             redirect($url);
         }
 
         Base::charset_slug($login, lang('Nickname'), '/register');
-
         Base::Limits($login, lang('Nickname'), '3', '10', $url);
-        Base::Limits($password, lang('Password'), '8', '32', $url);
 
         if (is_numeric(substr($login, 0, 1))) {
             Base::addMsg(lang('nickname-no-start'), 'error');
@@ -95,13 +89,13 @@ class AuthController extends \MainController
         }
 
         for ($i = 0, $l = Base::getStrlen($login); $i < $l; $i++) {
-            if (self::textCount($login, Base::getStrlen($login, $i, 1)) > 4) {
+            if (Base::textCount($login, Base::getStrlen($login, $i, 1)) > 4) {
                 Base::addMsg(lang('nickname-repeats-characters'), 'error');
                 redirect($url);
             }
         }
 
-        // Запретим 
+        // Запретим, хотя лучшая практика занять нужные (пр. GitHub)
         $disabled = ['admin', 'support', 'lori', 'loriup', 'dev', 'docs', 'meta', 'email', 'mail', 'login'];
         if (in_array($login, $disabled)) {
             Base::addMsg(lang('nickname-replay'), 'error');
@@ -113,11 +107,12 @@ class AuthController extends \MainController
             redirect($url);
         }
 
+        Base::Limits($password, lang('Password'), '8', '32', $url);
         if (substr_count($password, ' ') > 0) {
             Base::addMsg(lang('password-spaces'), 'error');
             redirect($url);
         }
-
+ 
         if (!$inv_code) {
             if (Config::get(Config::PARAM_CAPTCHA)) {
                 if (!Base::checkCaptchaCode()) {
@@ -125,33 +120,29 @@ class AuthController extends \MainController
                     redirect('/register');
                 }
             }
-            // Кто пригласил (нам нужны будут данные в таблице users)
-            $invitation_id = 0;
-        } else {
-            $invitation_id = $inv_uid;
+            // Если хакинг формы
+            $inv_uid = 0;
         }
 
-        // id участника
-        $active_uid = UserModel::createUser($login, $email, $password, $reg_ip, $invitation_id);
+        // id участника после регистрации
+        $active_uid = UserModel::createUser($login, $email, $password, $reg_ip, $inv_uid);
 
-        if ($invitation_id > 0) {
-            // Если регистрация по инвайту, то записываем данные
-            UserModel::sendInvitationEmail($inv_code, $invitation_id, $reg_ip, $active_uid);
+        if ($inv_uid > 0) {
+            // Если регистрация по инвайту, активируем емайл
+            UserModel::sendInvitationEmail($inv_code, $inv_uid, $reg_ip, $active_uid);
             Base::addMsg(lang('Successfully, log in'), 'success');
             redirect('/login');
-        } else {
-            // Активация e-mail
-            // Если будет раскомм. то в методе createUser изм. $activated с 1 на 0
-            // $active_uid - id участника
-            $email_code = Base::randomString('crypto', 20);
-            UserModel::sendActivateEmail($active_uid, $email_code);
+        } 
+        
+        // Активация e-mail
+        $email_code = Base::randomString('crypto', 20);
+        UserModel::sendActivateEmail($active_uid, $email_code);
 
-            // Добавим текс письма тут
-            $newpass_link = 'https://' . HLEB_MAIN_DOMAIN . '/email/avtivate/' . $email_code;
-            $mail_message = "Activate E-mail: \n" . $newpass_link . "\n\n";
-            Base::mailText($email, Config::get(Config::PARAM_NAME) . ' - email', $mail_message);
-        }
-
+        // Добавим текс письма тут
+        $newpass_link = 'https://' . HLEB_MAIN_DOMAIN . '/email/avtivate/' . $email_code;
+        $mail_message = "Activate E-mail: \n" . $newpass_link . "\n\n";
+        Base::mailText($email, Config::get(Config::PARAM_NAME) . ' - email', $mail_message);
+        
         Base::addMsg(lang('Check your e-mail to activate your account'), 'success');
         
         redirect('/login');
@@ -207,42 +198,35 @@ class AuthController extends \MainController
         if (!password_verify($password, $uInfo['password'])) {
             Base::addMsg(lang('E-mail or password is not correct'), 'error');
             redirect($url);
-        } else {
+        } 
 
-            // Если нажал "Запомнить" 
-            // Устанавливает сеанс пользователя и регистрирует его
-            if ($rememberMe == 1) {
-                self::rememberMe($uInfo['id']);
-            }
-
-            $data = [
-                'user_id'       => $uInfo['id'],
-                'login'         => $uInfo['login'],
-                'email'         => $uInfo['email'],
-                'name'          => $uInfo['name'],
-                'login'         => $uInfo['login'],
-                'avatar'        => $uInfo['avatar'],
-                'trust_level'   => $uInfo['trust_level'],
-            ];
-
-            $last_ip = Request::getRemoteAddress();
-            UserModel::setUserLastLogs($uInfo['id'], $uInfo['login'], $uInfo['trust_level'], $last_ip);
-
-            $_SESSION['account'] = $data;
-            redirect('/');
+        // Если нажал "Запомнить" 
+        // Устанавливает сеанс пользователя и регистрирует его
+        if ($rememberMe == 1) {
+            self::rememberMe($uInfo['id']);
         }
+
+        $data = [
+            'user_id'       => $uInfo['id'],
+            'login'         => $uInfo['login'],
+            'email'         => $uInfo['email'],
+            'name'          => $uInfo['name'],
+            'login'         => $uInfo['login'],
+            'avatar'        => $uInfo['avatar'],
+            'trust_level'   => $uInfo['trust_level'],
+        ];
+
+        $last_ip = Request::getRemoteAddress();
+        UserModel::setUserLastLogs($uInfo['id'], $uInfo['login'], $uInfo['trust_level'], $last_ip);
+
+        $_SESSION['account'] = $data;
+        redirect('/');
+       
     }
 
-    ////// ЗАПОМНИТЬ МЕНЯ
-    ////// Работа с токенами и куки 
+    // ЗАПОМНИТЬ МЕНЯ
     public static function rememberMe($user_id)
     {
-        // НАСТРОЕМ НАШ СЕЛЕКТОР, ВАЛИДАТОР И СРОК ДЕЙСТВИЯ 
-        // Селектор действует как уникальный идентификатор, поэтому нам не нужно 
-        // сохранять идентификатор пользователя в нашем файле cookie
-        // валидатор сохраняется в виде обычного текста в файле cookie, но хэшируется в бд
-        // если селектор (id) найден в таблице auth_tokens, мы затем сопоставляем валидаторы
-
         $rememberMeExpire = 30;
         $selector = Base::randomString('crypto', 12);
         $validator = Base::randomString('crypto', 20);
@@ -260,11 +244,6 @@ class AuthController extends \MainController
         ];
 
         // ПРОВЕРИМ, ЕСТЬ ЛИ У ИДЕНТИФИКАТОРА ПОЛЬЗОВАТЕЛЯ УЖЕ НАБОР ТОКЕНОВ
-        // Мы действительно не хотим иметь несколько токенов и селекторов для
-        // одного и того же идентификатора пользователя. В этом нет необходимости, 
-        // так как валидатор обновляется при каждом входе в систему
-        // поэтому проверим, есть ли уже маркер, и перепишем, если он есть.
-        // Следует немного снизить уровень обслуживания БД и устранить необходимость в спорадических чистках.
         $result = AuthModel::getAuthTokenByUserId($user_id);
 
         // Записываем
@@ -415,9 +394,4 @@ class AuthController extends \MainController
         redirect('/login');
     }
 
-    // Вхождение подстроки
-    private function textCount($str, $needle)
-    {
-        return mb_substr_count($str, $needle, 'utf-8');
-    }
 }

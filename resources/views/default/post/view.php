@@ -203,6 +203,8 @@
                                     <input type="submit" name="answit" value="<?= lang('Reply'); ?>" class="button" disabled="disabled">
                                 </div>
                             <?php } ?>
+                        <?php } else { ?>
+                            <br>
                         <?php } ?>
                     </div>
                 </div>

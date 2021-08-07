@@ -79,13 +79,11 @@ class Base
         $token = AuthModel::getAuthTokenBySelector($selector);
 
         if (empty($token)) {
-
             return false;
         }
 
         // Хэш не соответствует
         if (!hash_equals($token['auth_hashedvalidator'], $validator)) {
-
             return false;
         }
 
@@ -94,7 +92,6 @@ class Base
 
         // Нет пользователя
         if (empty($user)) {
-
             return false;
         }
 
@@ -118,7 +115,6 @@ class Base
 
         // Сессия участника
         self::setUserSession($user);
-
         self::rememberMeReset($token['auth_user_id'], $selector);
         redirect('/');
         return true;
@@ -209,6 +205,12 @@ class Base
     {
         $class = ($class == 'error') ? 2 : 1;
         $_SESSION['msg'][] = array($msg, $class);
+    }
+
+    // Вхождение подстроки
+    public static function textCount($str, $needle)
+    {
+        return mb_substr_count($str, $needle, 'utf-8');
     }
 
     // Длина строки

@@ -63,7 +63,7 @@
       <?php } ?>
     </ul>
 
-    <?php if ($uid['uri'] == '/' && $uid['id'] > 0 && empty($space_user)) { ?>
+    <?php if ($uid['uri'] == '/' && $uid['id'] > 0 && empty($data['space_user'])) { ?>
       <div class="white-box">
         <div class="pt5 pr15 pb5 pl15 big center gray">
           <i class="light-icon-bulb middle red"></i>
@@ -79,14 +79,14 @@
   </main>
   <aside>
     <?php if ($uid['id']) { ?>
-      <?php if (!empty($space_user)) { ?>
+      <?php if (!empty($data['space_user'])) { ?>
         <div class="white-box">
           <div class="pt5 pr15 pb5 pl15">
             <a class="right" title="<?= lang('Spaces'); ?>" href="/spaces"><i class="light-icon-chevron-right"></i></a>
             <div class="bar-title size-13">
               <?= lang('Signed'); ?>
             </div>
-            <?php foreach ($space_user as  $sig) { ?>
+            <?php foreach ($data['space_user'] as  $sig) { ?>
               <a class="bar-space-telo" href="/s/<?= $sig['space_slug']; ?>" title="<?= $sig['space_name']; ?>">
                 <?= spase_logo_img($sig['space_img'], 'small', $sig['space_name'], 'ava-24'); ?>
                 <span class="mr5 ml5 size-13"><?= $sig['space_name']; ?></span>

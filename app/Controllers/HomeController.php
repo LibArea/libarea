@@ -34,11 +34,11 @@ class HomeController extends \MainController
             $result[$ind]                   = $row;
         }
 
-        $result_comm = array();
+        $result_answers = array();
         foreach ($latest_answers as $ind => $row) {
             $row['answer_content']      = Base::cutWords($row['answer_content'], 81);
             $row['answer_date']         = lang_date($row['answer_date']);
-            $result_comm[$ind]          = $row;
+            $result_answers[$ind]          = $row;
         }
 
         $num = '';
@@ -61,7 +61,6 @@ class HomeController extends \MainController
         }
 
         $data = [
-            'latest_answers'    => $result_comm,
             'pagesCount'        => ceil($pagesCount / $limit),
             'pNum'              => $page,
             'sheet'             => $sheet,
@@ -69,8 +68,10 @@ class HomeController extends \MainController
             'img'               => Config::get(Config::PARAM_URL) . '/assets/images/areadev.webp',
             'meta_title'        => $meta_title,
             'meta_desc'         => $meta_desc,
+            'latest_answers'    => $result_answers,
+            'space_user'        => $space_user,
         ];
 
-        return view(PR_VIEW_DIR . '/home', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'space_user' => $space_user]);
+        return view(PR_VIEW_DIR . '/home', ['data' => $data, 'uid' => $uid, 'posts' => $result]);
     }
 }
