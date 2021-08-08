@@ -176,7 +176,9 @@ class CommentModel extends \MainModel
         $sql = "SELECT 
                     comment_id,
                     comment_content,
-                    comment_user_id
+                    comment_user_id,
+                    comment_date,
+                    comment_is_deleted
                         FROM comments WHERE comment_id = :comment_id";
 
         return DB::run($sql, ['comment_id' => $comment_id])->fetch(PDO::FETCH_ASSOC);

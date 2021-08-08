@@ -30,7 +30,7 @@
                         </div>
                     </div>
                 <?php } else { ?>
-                    <div class="delleted comm-telo_bottom">
+                    <div class="delleted mb20">
                         <div class="voters"></div>
                         ~ <?= lang('Comment deleted'); ?>
                     </div>

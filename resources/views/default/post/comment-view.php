@@ -13,18 +13,18 @@
                             <div class="container">
                                 <div class="answ-telo">
                                     <div class="flex size-13">
-                                        <a class="gray" href="/u/<?= $answer['login']; ?>">
+                                        <a class="gray-light" href="/u/<?= $answer['login']; ?>">
                                             <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava'); ?>
                                             <span class="mr5 ml5">
                                                 <?= $answer['login']; ?>
                                             </span>
                                         </a>
 
-                                        <span class="mr5 ml5 gray lowercase">
+                                        <span class="mr5 ml5 gray-light lowercase">
                                             <?= $answer['answer_date']; ?>
                                         </span>
                                         <?php if (empty($answer['edit'])) { ?>
-                                            <span class="mr5 ml5 gray">
+                                            <span class="mr5 ml5 gray-light">
                                                 (<?= lang('ed'); ?>.)
                                             </span>
                                         <?php } ?>
@@ -34,10 +34,10 @@
                                             </span>
                                         <?php } ?>
                                         <span class="mr5 ml5">
-                                            <a rel="nofollow" class="gray" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#answer_<?= $answer['answer_id']; ?>">#</a>
+                                            <a rel="nofollow" class="gray-light" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#answer_<?= $answer['answer_id']; ?>">#</a>
                                         </span>
                                         <?php if ($uid['trust_level'] == 5) { ?>
-                                            <span class="mr5 ml5 gray">
+                                            <span class="mr5 ml5 gray-light">
                                                 <?= $answer['answer_ip']; ?>
                                             </span>
                                         <?php } ?>
@@ -51,7 +51,7 @@
 
                                     <?php if ($post['post_closed'] == 0) { ?>
                                         <?php if ($post['post_is_deleted'] == 0 || $uid['trust_level'] == 5) { ?>
-                                            <span id="cm_add_link<?= $answer['answer_id']; ?>" class="cm_add_link mr5 ml5">
+                                            <span class="mr5 ml5">
                                                 <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray"><?= lang('Reply'); ?></a>
                                             </span>
                                         <?php } ?>
@@ -59,7 +59,7 @@
 
                                     <?php if ($uid['id'] == $answer['answer_user_id'] || $uid['trust_level'] == 5) { ?>
                                         <?php if ($answer['answer_after'] == 0 || $uid['trust_level'] == 5) { ?>
-                                            <span id="answer_edit" class="answer_add_link mr5 ml5">
+                                            <span id="answer_edit" class="mr5 ml5">
                                                 <a class="editansw gray" href="/answer/edit/<?= $answer['answer_id']; ?>"> <?= lang('Edit'); ?>
                                                 </a>
                                             </span>
@@ -77,7 +77,7 @@
                                     <?php } ?>
 
                                     <?php if ($uid['trust_level'] == 5) { ?>
-                                        <span id="answer_dell" class="answer_add_link mr5 ml5">
+                                        <span id="answer_dell" class="mr5 ml5">
                                             <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray">
                                                 <?= lang('Remove'); ?>
                                             </a>
@@ -121,14 +121,14 @@
                             <div class="container">
                                 <div class="comm-telo">
                                     <div class="size-13 flex">
-                                        <a class="gray" href="/u/<?= $comment['login']; ?>">
+                                        <a class="gray-light" href="/u/<?= $comment['login']; ?>">
                                             <?= user_avatar_img($comment['avatar'], 'small', $comment['login'], 'ava'); ?>
                                             <span class="mr5 ml5">
                                                 <?= $comment['login']; ?>
                                             </span>
                                         </a>
 
-                                        <span class="mr5 ml5 gray lowercase">
+                                        <span class="mr5 ml5 gray-light lowercase">
                                             <?= lang_date($comment['comment_date']); ?>
                                         </span>
                                         <?php if ($post['post_user_id'] == $comment['comment_user_id']) { ?>
@@ -138,23 +138,23 @@
                                         <?php } ?>
                                         <?php if ($comment['comment_comment_id'] > 0) { ?>
                                             <span class="mr5 ml5">
-                                                <a class="gray" rel="nofollow" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#comment_<?= $comment['comment_comment_id']; ?>">&uarr;</a>
+                                                <a class="gray-light" rel="nofollow" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#comment_<?= $comment['comment_comment_id']; ?>">&uarr;</a>
                                             </span>
                                         <?php } else { ?>
                                             <span class="mr5 ml5">
-                                                <a class="gray" rel="nofollow" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#answer_<?= $comment['comment_answer_id']; ?>">&uarr;</a>
+                                                <a class="gray-light" rel="nofollow" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#answer_<?= $comment['comment_answer_id']; ?>">&uarr;</a>
                                             </span>
                                         <?php } ?>
                                         <span class="mr5 ml5">
-                                            <a class="gray" rel="nofollow" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#comment_<?= $comment['comment_id']; ?>">#</a>
+                                            <a class="gray-light" rel="nofollow" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#comment_<?= $comment['comment_id']; ?>">#</a>
                                         </span>
                                         <?php if ($uid['trust_level'] == 5) { ?>
-                                            <span class="mr5 ml5 gray">
+                                            <span class="mr5 ml5 gray-light">
                                                 <?= $comment['comment_ip']; ?>
                                             </span>
                                         <?php } ?>
                                     </div>
-                                    <div class="comm-telo-body">
+                                    <div class="comm-telo-body size-15 mt5 mb5">
                                         <?= lori\Content::text($comment['comment_content'], 'line'); ?>
                                     </div>
                                 </div>
@@ -163,7 +163,7 @@
 
                                     <?php if ($post['post_closed'] == 0) { ?>
                                         <?php if ($post['post_is_deleted'] == 0 || $uid['trust_level'] == 5) { ?>
-                                            <span id="cm_add_link<?= $comment['comment_id']; ?>" class="cm_add_link mr5 ml5">
+                                            <span class="mr5 ml5">
                                                 <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment-re gray">
                                                     <?= lang('Reply'); ?>
                                                 </a>
@@ -172,13 +172,13 @@
                                     <?php } ?>
 
                                     <?php if (accessСheck($comment, 'comment', $uid, 1, 30) === true) { ?>
-                                        <span id="comment_edit" class="cm_add_link mr5 ml5">
+                                        <span id="comment_edit" class="mr5 ml5">
                                             <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray">
                                                 <?= lang('Edit'); ?>
                                             </a>
                                         </span>
 
-                                        <span id="comment_dell" class="cm_add_link mr5 ml5">
+                                        <span id="comment_dell" class="mr5 ml5">
                                             <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray">
                                                 <?= lang('Remove'); ?>
                                             </a>

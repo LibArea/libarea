@@ -2,7 +2,7 @@
 <div class="wrap">
     <div id="stHeader">
         <a href="/"><i class="light-icon-home middle"></i></a>
-        <span class="separator middle">\</span>
+        <span class="separator gray middle mr5 ml5">\</span>
         <span class="middle"><?= $post['post_title']; ?></span>
     </div>
 
@@ -39,14 +39,14 @@
                                 <i class="light-icon-arrow-forward-up red"></i>
                             <?php } ?>
                         </h1>
-                        <div class="size-13 lowercase flex">
+                        <div class="size-13 lowercase flex gray-light">
                             <a class="gray" href="/u/<?= $post['login']; ?>">
                                 <?= user_avatar_img($post['avatar'], 'small', $post['login'], 'ava'); ?>
                                 <span class="mr5 ml5">
                                     <?= $post['login']; ?>
                                 </span>
                             </a>
-                            <span class="gray">
+                            <span class="gray-light">
                                 <?= $post['post_date_lang']; ?>
                                 <?php if ($post['modified']) { ?>
                                     (<?= lang('ed'); ?>)
@@ -55,7 +55,7 @@
                             <?php if ($uid['id']) { ?>
                                 <?php if ($uid['login'] == $post['login']  || $uid['trust_level'] == 5) { ?>
                                     <span class="mr5 ml5">&#183;</span>
-                                    <a class="gray" href="/post/edit/<?= $post['post_id']; ?>">
+                                    <a class="gray-light" href="/post/edit/<?= $post['post_id']; ?>">
                                         <?= lang('Edit'); ?>
                                     </a>
                                 <?php } ?>
@@ -63,15 +63,15 @@
                                     <?php if ($post['post_draft'] == 0) { ?>
                                         <span class="mr5 ml5">&#183;</span>
                                         <?php if ($post['my_post'] == $post['post_id']) { ?>
-                                            <span class="mu_post gray">+ <?= lang('in-the-profile'); ?></span>
+                                            <span class="mu_post gray-light">+ <?= lang('in-the-profile'); ?></span>
                                         <?php } else { ?>
-                                            <a class="user-mypost gray" data-opt="1" data-post="<?= $post['post_id']; ?>">
+                                            <a class="user-mypost gray-light" data-opt="1" data-post="<?= $post['post_id']; ?>">
                                                 <span class="mu_post"><?= lang('in-the-profile'); ?></span>
                                             </a>
                                         <?php } ?>
                                     <?php } ?>
                                 <?php } ?>
-                                <span class="add-favorite gray" data-id="<?= $post['post_id']; ?>" data-type="post">
+                                <span class="add-favorite gray-light" data-id="<?= $post['post_id']; ?>" data-type="post">
                                     <span class="mr5 ml5">&#183;</span>
                                     <?php if (is_array($post['favorite_post'])) { ?>
                                         <?= lang('remove-favorites'); ?>
@@ -82,8 +82,8 @@
 
                                 <?php if ($uid['trust_level'] == 5) { ?>
                                     <span class="mr5 ml5"> &#183; </span>
-                                    <span id="cm_dell" class="cm_add_link">
-                                        <a data-type="post" data-id="<?= $post['post_id']; ?>" class="type-action gray">
+                                    <span id="cm_dell">
+                                        <a data-type="post" data-id="<?= $post['post_id']; ?>" class="type-action gray-light">
                                             <?php if ($post['post_is_deleted'] == 1) { ?>
                                                 <?= lang('Recover'); ?>
                                             <?php } else { ?>
@@ -130,12 +130,12 @@
 
                         <?php if (!empty($post_related)) { ?>
                             <div class="related">
-                                <h3 class="style size-13"><?= lang('Related'); ?>:</h3>
+                                <h3 class="uppercase mb5 mt0 fw300 size-13 gray"><?= lang('Related'); ?>:</h3>
                                 <?php $num = 0; ?>
                                 <?php foreach ($post_related as $related) { ?>
-                                    <div class="related-box-num">
+                                    <div class="mb5">
                                         <?php $num++; ?>
-                                        <span><?= $num; ?></span>
+                                        <span class="related-count gray-light size-15"><?= $num; ?></span>
                                         <a href="/post/<?= $related['post_id']; ?>/<?= $related['post_slug']; ?>">
                                             <?= $related['post_title']; ?>
                                         </a>
@@ -146,9 +146,9 @@
 
                         <?php if (!empty($topics)) { ?>
                             <div class="related">
-                                <h3 class="style size-13"><?= lang('Topics'); ?>:</h3>
+                                <h3 class="uppercase mb5 mt0 fw300 size-13 gray"><?= lang('Topics'); ?>:</h3>
                                 <?php foreach ($topics as $topic) { ?>
-                                    <a class="tags size-13" href="/topic/<?= $topic['topic_slug']; ?>">
+                                    <a class="tags gray size-13" href="/topic/<?= $topic['topic_slug']; ?>">
                                         <?= $topic['topic_title']; ?>
                                     </a>
                                 <?php } ?>
@@ -156,10 +156,10 @@
                         <?php } ?>
 
                     </div>
-                    <div class="post-full-footer">
+                    <div class="post-full-footer gray">
                         <?= votes($uid['id'], $post, 'post'); ?>
 
-                       <span class="right">
+                       <span class="right gray-light">
                             <i class="light-icon-messages middle"></i>
                             <?= $post['post_answers_count'] + $post['post_comments_count'] ?>
                         </span>

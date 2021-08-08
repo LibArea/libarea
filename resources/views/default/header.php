@@ -9,12 +9,12 @@
   <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 
-<body class="bd<?php if (Request::getCookie('dayNight') == 'dark') { ?> dark<?php } ?>">
+<body class="black<?php if (Request::getCookie('dayNight') == 'dark') { ?> dark<?php } ?>">
 
-  <header class="flex justify-content-between align-items-center">
+  <header class="flex justify-content-between align-items-center gray">
     <div class="flex align-items-center">
       <div>
-        <a title="<?= lang('Home'); ?>" class="logo" href="/">LORI<span>UP</span></a>
+        <a title="<?= lang('Home'); ?>" class="logo" href="/">LORI<span class="red">UP</span></a>
       </div>
       <div>
         <form class="form" method="post" action="/search">
@@ -74,44 +74,44 @@
           </div>
           <div class="dropdown-menu absolute">
             <span class="st"></span>
-            <a class="dr-menu" href="/u/<?= $uid['login']; ?>">
+            <a class="dr-menu gray" href="/u/<?= $uid['login']; ?>">
               <i class="light-icon-user middle"></i>
               <span class="middle size-13"><?= lang('Profile'); ?></span>
             </a>
-            <a class="dr-menu" href="/u/<?= $uid['login']; ?>/setting">
+            <a class="dr-menu gray" href="/u/<?= $uid['login']; ?>/setting">
               <i class="light-icon-settings middle"></i>
               <span class="middle size-13"><?= lang('Settings'); ?></span>
             </a>
-            <a class="dr-menu" href="/u/<?= $uid['login']; ?>/drafts">
+            <a class="dr-menu gray" href="/u/<?= $uid['login']; ?>/drafts">
               <i class="light-icon-note middle"></i>
               <span class="middle size-13"><?= lang('Drafts'); ?></span>
             </a>
-            <a class="dr-menu" href="/u/<?= $uid['login']; ?>/notifications">
+            <a class="dr-menu gray" href="/u/<?= $uid['login']; ?>/notifications">
               <i class="light-icon-notification middle"></i>
               <span class="middle size-13"><?= lang('Notifications'); ?></span>
             </a>
-            <a class="dr-menu" href="/u/<?= $uid['login']; ?>/messages">
+            <a class="dr-menu gray" href="/u/<?= $uid['login']; ?>/messages">
               <i class="light-icon-mail middle"></i>
               <span class="middle size-13"><?= lang('Messages-m'); ?></span>
             </a>
-            <a class="dr-menu" href="/u/<?= $uid['login']; ?>/favorite">
+            <a class="dr-menu gray" href="/u/<?= $uid['login']; ?>/favorite">
               <i class="light-icon-bookmark middle"></i>
               <span class="middle size-13"><?= lang('Favorites'); ?></span>
             </a>
             <?php if ($uid['trust_level'] > 1) { ?>
-              <a class="dr-menu" href="/u/<?= $uid['login']; ?>/invitation">
+              <a class="dr-menu gray" href="/u/<?= $uid['login']; ?>/invitation">
                 <i class="light-icon-wind middle"></i>
                 <span class="middle size-13"><?= lang('Invites'); ?></span>
               </a>
             <?php } ?>
             <?php if ($uid['trust_level'] == 5) { ?>
-              <a class="dr-menu" href="/admin" target="_black">
+              <a class="dr-menu gray" href="/admin" target="_black">
                 <i class="light-icon-key middle"></i>
                 <span class="middle size-13"><?= lang('Admin'); ?></span>
               </a>
             <?php } ?>
             <hr>
-            <a class="dr-menu" href="/logout" class="logout" title="<?= lang('Sign out'); ?>">
+            <a class="dr-menu gray" href="/logout" class="logout" title="<?= lang('Sign out'); ?>">
               <i class="light-icon-logout middle"></i>
               <span class="middle size-13"><?= lang('Sign out'); ?></span>
             </a>

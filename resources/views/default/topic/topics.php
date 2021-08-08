@@ -54,9 +54,9 @@
         <?php if (!empty($news)) { ?>
             <div class="white-box">
                 <div class="p15">
-                    <h3 class="style size-13"><?= lang('New ones'); ?></h3>
+                    <h3 class="uppercase mb5 mt0 fw300 size-13 gray"><?= lang('New ones'); ?></h3>
                     <?php foreach ($news as $new) { ?>
-                        <a title="<?= $new['topic_title']; ?>" class="tags size-13" href="/topic/<?= $new['topic_slug']; ?>">
+                        <a title="<?= $new['topic_title']; ?>" class="tags gray size-13" href="/topic/<?= $new['topic_slug']; ?>">
                             <?= $new['topic_title']; ?>
                         </a><br>
                     <?php } ?>

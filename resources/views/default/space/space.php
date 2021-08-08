@@ -7,7 +7,7 @@
             <div class="wrap">
             <?php } else { ?>
                 <div class="space-box" style="background:<?= $space_info['space_color']; ?>;">
-                    <div class="wrap">
+                    <div class="p0 ml5">
                     <?php } ?>
 
                     <?php if (!$uid['id']) { ?>
@@ -35,12 +35,12 @@
                             <?php } ?>
                         <?php } ?>
                     <?php } ?>
-                    <div class="space-text">
+                    <div class="space-text white">
 
                         <?= spase_logo_img($space_info['space_img'], 'max', $space_info['space_name'], 'space-box-img'); ?>
 
                         <a title="<?= $space_info['space_name']; ?>" href="/s/<?= $space_info['space_slug']; ?>">
-                            <h1 class="size-21"><?= $space_info['space_name']; ?></h1>
+                            <h1 class="size-21 white"><?= $space_info['space_name']; ?></h1>
                         </a>
                         <div class="space-slug">
                             s/<?= $space_info['space_slug']; ?>
@@ -52,7 +52,7 @@
 
                 <div class="wrap">
                     <main>
-                        <ul class="nav-tabs">
+                        <ul class="nav-tabs mt0">
                             <?php if ($data['sheet'] == 'feed') { ?>
                                 <li class="active">
                                     <span><?= lang('Feed'); ?></span>
@@ -88,16 +88,16 @@
                     </main>
 
                     <aside>
-                        <div class="info-space white-box">
-                            <div class="pt5 pr15 pb5 pl15">
-                                <div class="sb-space-short">
+                        <div class="size-15 white-box">
+                            <div class="pt15 pr15 pb5 pl15">
+                                <div class="mt15">
                                     <?= $space_info['space_short_text']; ?>
                                 </div>
 
                                 <div class="sb-space-stat">
                                     <div class="_bl">
                                         <p class="bl-n"><a href="/u/<?= $space_info['login']; ?>"><?= $space_info['login']; ?></a></p>
-                                        <p class="bl-t"><?= lang('Created by'); ?></p>
+                                        <p class="bl-t gray-light"><?= lang('Created by'); ?></p>
                                     </div>
                                     <div class="_bl">
                                         <?php if ($space_info['space_id'] != 1) { ?>
@@ -105,26 +105,26 @@
                                         <?php } else { ?>
                                             <p class="bl-n">***</p>
                                         <?php } ?>
-                                        <p class="bl-t"><?= lang('Reads'); ?></p>
+                                        <p class="bl-t gray-light"><?= lang('Reads'); ?></p>
                                     </div>
                                 </div>
 
                                 <hr>
 
-                                <div class="sb-created">
+                                <div class="gray-light">
                                     <i class="light-icon-calendar middle"></i>
                                     <span class="middle"><?= $space_info['space_date']; ?></span>
                                 </div>
 
                                 <?php if (!$uid['id']) { ?>
                                     <div class="sb-add-space-post center">
-                                        <a class="add-space-post" href="/login">
+                                        <a class="mt15 mb20 white" href="/login">
                                             <i class="light-icon-edit middle"></i>
                                             <?= lang('Create Post'); ?>
                                         </a>
                                     </div>
                                 <?php } else { ?>
-                                    <div class="sb-add-space-post center">
+                                    <div class="mt15 mb20 white center">
                                         <?php if ($space_info['space_user_id'] == $uid['id']) { ?>
                                             <a class="add-space-post" href="/post/add/space/<?= $space_info['space_id']; ?>">
                                                 <?= lang('Create Post'); ?>

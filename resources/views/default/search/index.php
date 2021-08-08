@@ -15,7 +15,7 @@
 
                     <?php if (Lori\Config::get(Lori\Config::PARAM_SEARCH) == 0) { ?>
                         <?php foreach ($result as  $post) { ?>
-                            <div class="search max-width">
+                            <div class="search max-width mb20">
                                 <a class="search-title size-21" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug'] ?>">
                                     <?= $post['post_title']; ?>
                                 </a>
@@ -25,10 +25,10 @@
                         <?php } ?>
                     <?php } else { ?>
                         <?php foreach ($result as  $post) { ?>
-                            <div class="search max-width">
-                                <div class="search-info size-13">
-                                    <?= spase_logo_img($post['space_img'], 'small', $post['space_name'], 'ava'); ?>
-                                    <a class="search-info" href="/s/<?= $post['space_slug']; ?>"><?= $post['space_name']; ?></a>
+                            <div class="search max-width mb20">
+                                <div class="search-info gray size-13 lowercase">
+                                    <?= spase_logo_img($post['space_img'], 'small', $post['space_name'], 'ava mr5'); ?>
+                                    <a class="search-info gray lowercase" href="/s/<?= $post['space_slug']; ?>"><?= $post['space_name']; ?></a>
                                     — <?= lang('Like'); ?> <?= $post['post_votes']; ?>
                                 </div>
                                 <a class="search-title" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug'] ?>"><?= $post['_title']; ?></a><br>

@@ -3,16 +3,7 @@
     <main>
         <div class="white-box">
             <div class="pt5 pr15 pb5 pl15">
-                <ul class="breadcrumb">
-                    <li class="breadcrumb-item">
-                        <a title="<?= lang('Home'); ?>" href="/"><?= lang('Home'); ?></a>
-                    </li>
-                    <li class="breadcrumb-item">
-                        <a title="<?= lang('Info'); ?>" href="/info"><?= lang('Info'); ?></a>
-                    </li>
-                </ul>
-
-                <h1><?= $data['h1']; ?></h1>
+                <?= breadcrumb('/', lang('Home'), '/info', lang('Info'), $data['h1']); ?>
 
                 <?= $data['content']; ?>
             </div>

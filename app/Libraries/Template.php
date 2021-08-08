@@ -276,17 +276,17 @@ function breadcrumb($path_home, $title_home, $path_intermediate, $title_intermed
 {
 
     $html = '<ul class="breadcrumb">';
-    $html .= '<li class="breadcrumb-item">
+    $html .= '<li class="breadcrumb-item gray">
                 <a title="' . $title_home . '" href="' . $path_home . '">' . $title_home . '</a>
                 </li>';
 
     if ($path_intermediate) {
-        $html .= '<li class="breadcrumb-item">
+        $html .= '<li class="breadcrumb-item gray">
                     <a title="' . $title_intermediate . '" href="' . $path_intermediate . '">' . $title_intermediate . '</a>
                     </li>';
     }
 
-    $html .= '<li class="breadcrumb-item">
+    $html .= '<li class="breadcrumb-item gray">
                 <span class="red">' . $title_page . '</span>
                 </li>
                 </ul>
@@ -307,21 +307,21 @@ function votes($user_id, $content, $type)
         if ($content['votes_' . $type . '_user_id'] || $user_id == $content[$type . '_user_id']) {
             $html .= '<div class="voters active">
                         <div class="up-id"></div>
-                        <div class="score">
+                        <div class="score gray">
                             ' . $count . '
                         </div></div>';
         } else {
             $num_count = empty($count) ? 0 : $count;
             $html .= '<div id="up' . $content[$type . '_id'] . '" class="voters">
                         <div data-id="' . $content[$type . '_id'] . '" data-count="' . $num_count . '" data-type="' . $type . '" class="up-id"></div>
-                        <div class="score">
+                        <div class="score gray">
                             ' . $count . '
                         </div></div>';
         }
     } else {
         $html .= '<div class="voters">
                     <a rel="nofollow" href="/login"><div class="up-id"></div></a>
-                    <div class="score">
+                    <div class="score gray">
                          ' . $count . '                
                     </div></div>';
     }

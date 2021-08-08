@@ -1,22 +1,3 @@
-.space-text a {
-  color: #fff;
-}
-
-.space-tags a {
-  margin-bottom: 5px;
-}
-
-h1.space {
-  font-size: 16px;
-  margin: 0 0 0 67px;
-  letter-spacing: 1px;
-  color: #2562dc;
-}
-
-h1.space a {
-  color: #2562dc;
-}
-
 .space-tags {
   margin: 25px 0 0 4px;
 }
@@ -67,31 +48,12 @@ h1.space a {
   float: left;
 }
 
-.space-des {
-  margin-left: 10px;
-}
-
-.space-des.all {
-  margin-left: 50px;
-  font-size: 14px;
-  color: #888;
-}
-
-.space-box .wrap {
-  padding: 0;
-}
-
-.sb-space-short {
-  margin-top: 15px;
-}
-
 .space-box .yes-space,
 .space-box .no-space {
   margin-top: 21px;
 }
 
 .space-text {
-  color: #fff;
   padding: 10px 6px 9px 6px;
   overflow: hidden;
 }
@@ -100,7 +62,6 @@ h1.space a {
   padding: 0;
   margin: 0;
   font-weight: 400;
-  color: #fff;
 }
 
 .space-box .space-box-img,
@@ -121,14 +82,9 @@ h1.space a {
 }
 
 .space-cover-box .space-text {
-  color: #fff;
   font-size: 16px;
   padding: 160px 6px 9px 6px;
   overflow: hidden;
-}
-
-.space-cover-box .space-text a {
-  color: #fff;
 }
 
 .space-cover-box .space-text h1 {
@@ -136,7 +92,6 @@ h1.space a {
   margin: 0;
   font-size: 32px;
   font-weight: 400;
-  color: #fff;
 }
 
 .space-cover-box .space-text .fons {
@@ -150,18 +105,10 @@ h1.space a {
   margin-top: 0;
 }
 
-.info-space {
-  font-size: 14px;
-}
-
 .space-text-sb {
   clear: both;
   padding-top: 20px;
   font-size: 14px;
-}
-
-.sb-add-space-post {
-  margin: 20px 0;
 }
 
 .sb-space-stat {
@@ -182,11 +129,6 @@ h1.space a {
 
 .bl-n {
   font-size: 16px;
-}
-
-.sb-created,
-.bl-t {
-  color: #666;
 }
 
 a.add-space-post {
@@ -242,7 +184,6 @@ a.add-space-post:hover {
 }
 
 .space-s {
-  color: #fff;
   left: 76px;
   top: 21px;
 }

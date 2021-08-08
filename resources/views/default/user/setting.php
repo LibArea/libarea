@@ -43,7 +43,7 @@
                     <div class="boxline">
                         <label class="form-label" for="about"><?= lang('About me'); ?></label>
                         <textarea type="text" rows="4" name="about" id="about"><?= $user['about']; ?></textarea>
-                        <div class="box_h">0 - 255 <?= lang('characters'); ?></div>
+                        <div class="box_h gray">0 - 255 <?= lang('characters'); ?></div>
                     </div>
 
                     <div id="box" class="boxline">
@@ -57,43 +57,43 @@
                     <div class="boxline">
                         <label class="form-label" for="name"><?= lang('URL'); ?></label>
                         <input type="text" class="form-input" name="website" id="name" value="<?= $user['website']; ?>">
-                        <div class="box_h">https://site.ru</div>
+                        <div class="box_h gray">https://site.ru</div>
                     </div>
 
                     <div class="boxline">
                         <label class="form-label" for="name"><?= lang('City'); ?></label>
                         <input type="text" class="form-input" name="location" id="name" value="<?= $user['location']; ?>">
-                        <div class="box_h">Москва</div>
+                        <div class="box_h gray">Москва</div>
                     </div>
 
                     <div class="boxline">
                         <label class="form-label" for="name"><?= lang('E-mail'); ?></label>
                         <input type="text" class="form-input" name="public_email" id="name" value="<?= $user['public_email']; ?>">
-                        <div class="box_h">**@**.ru</div>
+                        <div class="box_h gray">**@**.ru</div>
                     </div>
 
                     <div class="boxline">
                         <label class="form-label" for="name"><?= lang('Skype'); ?></label>
                         <input type="text" class="form-input" name="skype" id="name" value="<?= $user['skype']; ?>">
-                        <div class="box_h">skype:<b>NICK</b></div>
+                        <div class="box_h gray">skype:<b>NICK</b></div>
                     </div>
 
                     <div class="boxline">
                         <label class="form-label" for="name"><?= lang('Twitter'); ?></label>
                         <input type="text" class="form-input" name="twitter" id="name" value="<?= $user['twitter']; ?>">
-                        <div class="box_h">https://twitter.com/<b>NICK</b></div>
+                        <div class="box_h gray">https://twitter.com/<b>NICK</b></div>
                     </div>
 
                     <div class="boxline">
                         <label class="form-label" for="name"><?= lang('Telegram'); ?></label>
                         <input type="text" class="form-input" name="telegram" id="name" value="<?= $user['telegram']; ?>">
-                        <div class="box_h">tg://resolve?domain=<b>NICK</b></div>
+                        <div class="box_h gray">tg://resolve?domain=<b>NICK</b></div>
                     </div>
 
                     <div class="boxline">
                         <label class="form-label" for="name"><?= lang('VK'); ?></label>
                         <input type="text" class="form-input" name="vk" id="name" value="<?= $user['vk']; ?>">
-                        <div class="box_h">https://vk.com/<b>NICK / id</b></div>
+                        <div class="box_h gray">https://vk.com/<b>NICK / id</b></div>
                     </div>
 
                     <div class="boxline">

@@ -12,7 +12,7 @@
                             <div class="boxline">
                                 <label class="form-label" for="post_title">Заголовок<sup class="red">*</sup></label>
                                 <input class="form-input" minlength="6" maxlength="250" type="text" value="<?= htmlspecialchars($post['post_title']); ?>" name="post_title" />
-                                <div class="box_h">6 - 250 <?= lang('characters'); ?></div>
+                                <div class="box_h gray">6 - 250 <?= lang('characters'); ?></div>
                             </div>
                             <?php if ($uid['trust_level'] == 5) { ?>
                                 <div class="boxline">

@@ -3,13 +3,13 @@
 
     <div class="post-telo white-box">
       <div class="pt15 pr15 pb0 pl15 size-13 flex">
-        <a class="gray" href="/u/<?= $post['login']; ?>">
+        <a class="gray-light" href="/u/<?= $post['login']; ?>">
           <?= user_avatar_img($post['avatar'], 'small', $post['login'], 'ava'); ?>
           <span class="mr5 ml5">
             <?= $post['login']; ?>
           </span>
         </a>
-        <span class="gray lowercase mr5 ml5">
+        <span class="gray-light lowercase mr5 ml5">
           <?= $post['post_date'] ?>
         </span>
        <?php if ($data['sheet'] == 'preferences') { ?>
@@ -55,14 +55,14 @@
           </h2>
         </a>
         <div class="flex ml15">
-          <a class="gray size-13" href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
+          <a class="gray-light size-13" href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
             <span class="post-space-color" style="background-color: <?= $post['space_color']; ?>;"></span>
             <?= $post['space_name']; ?>
           </a>
-          <?= html_topic($post['topic_list'], 'gray size-13 ml15'); ?>
+          <?= html_topic($post['topic_list'], 'gray-light size-13 ml15'); ?>
           <?php if ($post['post_url_domain']) { ?>
             <span class="mr5 ml5"></span>
-            <a class="gray size-13" href="/domain/<?= $post['post_url_domain']; ?>">
+            <a class="gray-light size-13" href="/domain/<?= $post['post_url_domain']; ?>">
               <i class="light-icon-link size-13 middle"></i> <?= $post['post_url_domain']; ?>
             </a>
           <?php } ?>
@@ -87,7 +87,7 @@
         <div class="pt5 pr15 pb5 pl15 hidden lowercase">
           <?= votes($uid['id'], $post, 'post'); ?>
           <?php if ($post['post_answers_count'] != 0) { ?>
-            <a class="right gray" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
+            <a class="right gray-light" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
               <?php if ($post['post_type'] == 0) { ?>
                 <i class="light-icon-messages middle"></i>
                 <?= $post['post_answers_count'] + $post['post_comments_count']; ?>

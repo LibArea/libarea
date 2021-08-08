@@ -1,7 +1,7 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 
 <?php if ($uid['id'] == 0) { ?>
-  <div class="banner">
+  <div class="banner size-15">
     <div class="pt15 pb5">
       <h1 class="red size-21"><?= Lori\Config::get(Lori\Config::PARAM_BANNER_TITLE); ?></h1>
       <div class="pb5"><?= Lori\Config::get(Lori\Config::PARAM_BANNER_DESC); ?>...</div>
@@ -87,7 +87,7 @@
               <?= lang('Signed'); ?>
             </div>
             <?php foreach ($data['space_user'] as  $sig) { ?>
-              <a class="bar-space-telo" href="/s/<?= $sig['space_slug']; ?>" title="<?= $sig['space_name']; ?>">
+              <a class="bar-space-telo gray" href="/s/<?= $sig['space_slug']; ?>" title="<?= $sig['space_name']; ?>">
                 <?= spase_logo_img($sig['space_img'], 'small', $sig['space_name'], 'ava-24'); ?>
                 <span class="mr5 ml5 size-13"><?= $sig['space_name']; ?></span>
                 <?php if ($sig['space_user_id'] == $uid['id']) { ?>

@@ -52,11 +52,11 @@
             <div class="p15">
                 <div class="flex">
                     <div class="box-post center box-number">
-                        <div class="style size-13 gray lowercase"><?= lang('Posts-m'); ?></div>
+                        <div class="uppercase mb5 size-13 gray"><?= lang('Posts-m'); ?></div>
                         <?= $topic['topic_count']; ?>
                     </div>
                     <div class="box-fav center box-number">
-                        <div class="style size-13 gray lowercase"><?= lang('Reads'); ?></div>
+                        <div class="uppercase mb5 size-13 gray"><?= lang('Reads'); ?></div>
                         <?= $topic['topic_focus_count']; ?>
                     </div>
                 </div>
@@ -66,9 +66,9 @@
         <?php if (!empty($main_topic)) { ?>
             <div class="white-box">
                 <div class="p15">
-                    <h3 class="style size-13"><?= lang('Root'); ?></h3>
+                    <h3 class="uppercase mb5 mt0 fw300 size-13 gray"><?= lang('Root'); ?></h3>
                     <div class="related-box">
-                        <a class="tags size-13" href="/topic/<?= $main_topic['topic_slug']; ?>">
+                        <a class="tags gray size-13" href="/topic/<?= $main_topic['topic_slug']; ?>">
                             <?= $main_topic['topic_title']; ?>
                         </a>
                     </div>
@@ -79,10 +79,10 @@
         <?php if (!empty($subtopics)) { ?>
             <div class="white-box">
                 <div class="p15">
-                    <h3 class="style size-13"><?= lang('Subtopics'); ?></h3>
+                    <h3 class="uppercase mb5 mt0 fw300 size-13 gray"><?= lang('Subtopics'); ?></h3>
                     <?php foreach ($subtopics as $sub) { ?>
                         <div class="related-box">
-                            <a class="tags size-13" href="/topic/<?= $sub['topic_slug']; ?>">
+                            <a class="tags gray size-13" href="/topic/<?= $sub['topic_slug']; ?>">
                                 <?= $sub['topic_title']; ?>
                             </a>
                         </div>
@@ -95,10 +95,10 @@
         <?php if (!empty($topic_related)) { ?>
             <div class="white-box">
                 <div class="p15">
-                    <h3 class="style size-13"><?= lang('Related'); ?></h3>
+                    <h3 class="uppercase mb5 mt0 fw300 size-13 gray"><?= lang('Related'); ?></h3>
                     <?php foreach ($topic_related as $related) { ?>
                         <div class="related-box">
-                            <a class="tags size-13" href="/topic/<?= $related['topic_slug']; ?>">
+                            <a class="tags gray size-13" href="/topic/<?= $related['topic_slug']; ?>">
                                 <?= $related['topic_title']; ?>
                             </a>
                         </div>

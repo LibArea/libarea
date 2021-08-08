@@ -22,34 +22,34 @@
                             <div class="boxline">
                                 <label class="form-label" for="post_title">URL<sup class="red">*</sup></label>
                                 <input class="form-input" minlength="3" maxlength="12" type="text" value="<?= $space['space_slug']; ?>" name="space_slug" />
-                                <div class="box_h">3 - 12 <?= lang('characters'); ?></div>
+                                <div class="box_h gray">3 - 12 <?= lang('characters'); ?></div>
                             </div>
                             <div class="boxline">
                                 <label class="form-label" for="post_title"><?= lang('Title'); ?><sup class="red">*</sup></label>
                                 <input class="form-input" minlength="4" maxlength="18" type="text" value="<?= $space['space_name']; ?>" name="space_name" />
-                                <div class="box_h">4 - 18 <?= lang('characters'); ?></div>
+                                <div class="box_h gray">4 - 18 <?= lang('characters'); ?></div>
                             </div>
                             <div class="boxline">
                                 <label class="form-label" for="post_content"><?= lang('Long'); ?><sup class="red">*</sup></label>
                                 <input class="form-input" minlength="10" maxlength="250" type="text" name="space_short_text" value="<?= $space['space_short_text']; ?>">
-                                <div class="box_h"><?= lang('Long name from'); ?> 10 - 250 <?= lang('characters'); ?></div>
+                                <div class="box_h gray"><?= lang('Long name from'); ?> 10 - 250 <?= lang('characters'); ?></div>
                             </div>
                             <div class="boxline">
                                 <label class="form-label" for="post_content"><?= lang('Publications'); ?><sup class="red">*</sup></label>
                                 <input type="radio" name="permit" <?php if ($space['space_permit_users'] == 0) { ?>checked<?php } ?> value="0"> <?= lang('All'); ?>
                                 <input type="radio" name="permit" <?php if ($space['space_permit_users'] == 1) { ?>checked<?php } ?> value="1"> <?= lang('Just me'); ?>
-                                <div class="box_h"><?= lang('Who will be able to post posts'); ?></div>
+                                <div class="box_h gray"><?= lang('Who will be able to post posts'); ?></div>
                             </div>
                             <div class="boxline">
                                 <label class="form-label" for="post_content"><?= lang('Show'); ?><sup class="red">*</sup></label>
                                 <input type="radio" name="feed" <?php if ($space['space_feed'] == 0) { ?>checked<?php } ?> value="0"> <?= lang('Yes'); ?>
                                 <input type="radio" name="feed" <?php if ($space['space_feed'] == 1) { ?>checked<?php } ?> value="1"> <?= lang('No'); ?>
-                                <div class="box_h"><?= lang('Posts will not be visible in the feed'); ?></b></div>
+                                <div class="box_h gray"><?= lang('Posts will not be visible in the feed'); ?></b></div>
                             </div>
                             <div class="boxline">
                                 <label class="form-label" for="post_content">Meta-<sup class="red">*</sup></label>
                                 <input class="form-input" minlength="60" type="text" name="space_description" value="<?= $space['space_description']; ?>">
-                                <div class="box_h">Description: 60 - 180 <?= lang('characters'); ?></div>
+                                <div class="box_h gray">Description: 60 - 180 <?= lang('characters'); ?></div>
                             </div>
                             <div id="box" class="boxline">
                                 <label class="form-label" for="post_content"><?= lang('Color'); ?></label>
@@ -59,7 +59,7 @@
                             <div class="boxline">
                                 <label class="form-label" for="post_content"><?= lang('Text'); ?> (Sidebar)</label>
                                 <textarea rows="6" cols="60" name="space_text"><?= $space['space_text']; ?></textarea>
-                                <div class="box_h">Markdown</div>
+                                <div class="box_h gray">Markdown</div>
                             </div>
                             <div class="boxline">
                                 <input type="hidden" name="space_id" id="space_id" value="<?= $space['space_id']; ?>">

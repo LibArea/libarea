@@ -13,7 +13,7 @@
                                 <div class="boxline">  
                                     <label class="form-label"><?= lang('Heading'); ?><sup class="red">*</sup></label>
                                     <input id="title" class="form-input" minlength="6" maxlength="250" type="text" name="post_title" />
-                                    <div class="box_h">6 - 250 <?= lang('characters'); ?></div>
+                                    <div class="box_h gray">6 - 250 <?= lang('characters'); ?></div>
                                 </div>
                                 <?php if ($uid['trust_level'] > Lori\Config::get(Lori\Config::PARAM_TL_ADD_URL)) { ?>
                                     <div class="boxline">
@@ -27,7 +27,7 @@
                                     <div class="boxline">
                                         <div class="input-images"></div>
                                     </div>
-                                    <div class="box_h"><?= lang('format-cover-post'); ?>.</div>
+                                    <div class="box_h gray"><?= lang('format-cover-post'); ?>.</div>
                                 </div>
                             </div>
                             <div class="boxline">

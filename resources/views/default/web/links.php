@@ -4,7 +4,7 @@
         <div class="white-box">
             <div class="pt5 pr15 pb5 pl15 space-tags">
                 <?php if ($uid['trust_level'] == 5) { ?>
-                    <a title="<?= lang('Add'); ?>" class="right" href="/web/add">
+                    <a title="<?= lang('Add'); ?>" class="right mb5" href="/web/add">
                         <i class="light-icon-plus middle"></i>
                     </a>
                 <?php } ?>

@@ -19,7 +19,7 @@
                                         <?= user_avatar_img($answer['avatar'], 'max', $answer['login'], 'avatar'); ?>
                                     </div>
                                     <div class="qa-ava-info">
-                                        <div class="qa-data-info">
+                                        <div class="size-13 gray-light">
                                             <?= $answer['answer_date']; ?>
                                             <?php if (empty($answer['edit'])) { ?>
                                                 (<?= lang('ed'); ?>.)
@@ -38,7 +38,7 @@
                                 <?php if ($uid['trust_level'] >= Lori\Config::get(Lori\Config::PARAM_TL_ADD_COMM_QA)) { ?>
                                     <?php if ($post['post_closed'] == 0) { ?>
                                         <?php if ($post['post_is_deleted'] == 0 || $uid['trust_level'] == 5) { ?>
-                                            <span id="cm_add_link<?= $answer['answer_id']; ?>" class="cm_add_link mr5 ml5">
+                                            <span class="mr5 ml5">
                                                 <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray"><?= lang('Reply'); ?></a>
                                             </span>
                                         <?php } ?>
@@ -46,7 +46,7 @@
                                 <?php } ?>
 
                                 <?php if ($uid['id'] == $answer['answer_user_id'] || $uid['trust_level'] == 5) { ?>
-                                    <span id="answer_edit" class="answer_add_link mr5 ml5">
+                                    <span id="answer_edit" class="mr5 ml5">
                                         <a class="editansw gray" href="/answer/edit/<?= $answer['answer_id']; ?>">
                                             <?= lang('Edit'); ?>
                                         </a>
@@ -65,7 +65,7 @@
 
                                 <?php if ($uid['trust_level'] == 5) { ?>
                                     <span class="mr5 ml5"></span>
-                                    <span id="answer_dell" class="answer_add_link mr5 ml5">
+                                    <span id="answer_dell" class="mr5 ml5">
                                         <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray">
                                             <?= lang('Remove'); ?>
                                         </a>
@@ -110,7 +110,7 @@
                                     <?php if ($uid['trust_level'] >= Lori\Config::get(Lori\Config::PARAM_TL_ADD_COMM_QA)) { ?>
                                         <?php if ($post['post_closed'] == 0) { ?>
                                             <?php if ($post['post_is_deleted'] == 0 || $uid['trust_level'] == 5) { ?>
-                                                <span id="cm_add_link<?= $comment['comment_id']; ?>" class="cm_add_link">
+                                                <span class="ml5">
                                                     <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment-re gray">
                                                         <?= lang('Reply'); ?>
                                                     </a>
@@ -120,7 +120,7 @@
                                     <?php } ?>
 
                                     <?php if ($uid['id'] == $comment['comment_user_id'] || $uid['trust_level'] == 5) { ?>
-                                        <span id="comment_edit" class="cm_add_link">
+                                        <span id="comment_edit" class="ml5">
                                             <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray">
                                                 <?= lang('Edit'); ?>
                                             </a>
@@ -128,7 +128,7 @@
                                     <?php } ?>
 
                                     <?php if ($uid['trust_level'] == 5) { ?>
-                                        <span id="comment_dell" class="cm_add_link">
+                                        <span id="comment_dell" class="ml5">
                                             <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray">
                                                 <?= lang('Remove'); ?>
                                             </a>

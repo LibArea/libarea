@@ -60,7 +60,7 @@
                                             </a>
 
                                             <span class="space-name">
-                                                <a title="<?= $sp['space_name']; ?>" class="space-s absolute size-21" href="/s/<?= $sp['space_slug']; ?>">
+                                                <a title="<?= $sp['space_name']; ?>" class="space-s white absolute size-21" href="/s/<?= $sp['space_slug']; ?>">
                                                     <span class="space-name"> <?= $sp['space_name']; ?></span>
                                                 </a>
                                             </span>

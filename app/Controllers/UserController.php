@@ -196,8 +196,7 @@ class UserController extends \MainController
         $data = [
             'h1'            => lang('Change avatar'),
             'sheet'         => 'setting-ava',
-            'meta_title'    => lang('Change avatar'),
-            'meta_desc'     => lang('Change avatar page') . ' | ' . Config::get(Config::PARAM_NAME),
+            'meta_title'    => lang('Change avatar')
         ];
 
         Request::getHead()->addStyles('/assets/css/image-uploader.css');

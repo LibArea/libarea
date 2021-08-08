@@ -10,7 +10,7 @@
                     <?php foreach ($comments as $comment) { ?>
 
                         <?php if ($comment['comment_is_deleted'] == 0) { ?>
-                            <div class="comm-telo_bottom">
+                            <div class="mb20">
                                 <div class="size-13">
                                     <a class="gray" href="/u/<?= $comment['login']; ?>">
                                         <?= user_avatar_img($comment['avatar'], 'small', $comment['login'], 'ava'); ?>
@@ -26,16 +26,16 @@
                                     </a>
                                 </div>
 
-                                <div class="comm-telo-body">
+                                <div class="comm-telo-body size-15 mt5 mb5">
                                     <?= $comment['comment_content']; ?>
                                 </div>
 
-                                <div class="post-full-footer date">
+                                <div class="post-full-footer gray">
                                     + <?= $comment['comment_votes']; ?>
                                 </div>
                             </div>
                         <?php } else { ?>
-                            <div class="delleted comm-telo_bottom">
+                            <div class="delleted mb20">
                                 <div class="voters"></div>
                                 ~ <?= lang('Comment deleted'); ?>
                             </div>

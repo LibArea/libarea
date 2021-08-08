@@ -10,7 +10,7 @@
                         <div class="boxline">
                             <label class="form-label" for="login"><?= lang('Nickname'); ?></label>
                             <input type="text" class="form-input" name="login" id="login" minlength="3" pattern="^[a-zA-Z0-9\s]+$">
-                            <div class="box_h">>= 3 <?= lang('characters'); ?></div>
+                            <div class="box_h gray">>= 3 <?= lang('characters'); ?></div>
                         </div>
                         <div class="boxline">
                             <label class="form-label" for="email">Email</label>
@@ -19,7 +19,7 @@
                         <div class="boxline">
                             <label class="form-label" for="password"><?= lang('Password'); ?></label>
                             <input type="password" class="form-input" minlength="8" name="password" id="password">
-                            <div class="box_h">>= 8 <?= lang('characters'); ?></div>
+                            <div class="box_h gray">>= 8 <?= lang('characters'); ?></div>
                         </div>
                         <div class="boxline">
                             <label class="form-label" for="password_confirm"><?= lang('Repeat the password'); ?></label>
