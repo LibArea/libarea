@@ -5,6 +5,7 @@ namespace App\Controllers\Answer;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\AnswerModel;
 use App\Models\PostModel;
+use App\Models\UserModel;
 use Lori\Content;
 use Lori\Config;
 use Lori\Base;
@@ -27,14 +28,17 @@ class EditAnswerController extends \MainController
         $uid        = Base::getUid();
         $user_id    = $uid['id'];
 
+        // Если пользователь забанен / заморожен
+        $user = UserModel::getUser($uid['id'], 'id');
+        Base::accountBan($user);
+        Content::stopContentQuietМode($user);
+
         $answer = AnswerModel::getAnswerId($answer_id);
 
         // Проверка доступа
         if (!accessСheck($answer, 'answer', $uid, 0, 0)) {
             redirect('/');
         }
-
-        Content::stopContentQuietМode($uid);
 
         Base::Limits($answer_content, lang('Bodies'), '6', '5000', '/' . $url);
 

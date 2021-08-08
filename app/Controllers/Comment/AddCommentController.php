@@ -8,6 +8,7 @@ use App\Models\ActionModel;
 use App\Models\AnswerModel;
 use App\Models\CommentModel;
 use App\Models\PostModel;
+use App\Models\UserModel;
 use Lori\Content;
 use Lori\Config;
 use Lori\Base;
@@ -28,12 +29,15 @@ class AddCommentController extends \MainController
         $post       = PostModel::getPostId($post_id);
         Base::PageError404($post);
 
+        // Если пользователь забанен / заморожен
+        $user = UserModel::getUser($uid['id'], 'id');
+        Base::accountBan($user);
+        Content::stopContentQuietМode($user);
+
         $redirect = '/post/' . $post['post_id'] . '/' . $post['post_slug'];
 
         // Проверяем длину тела
         Base::Limits($comment_content, lang('Comments-m'), '6', '2024', $redirect);
-
-        Content::stopContentQuietМode($uid);
 
         // Участник с нулевым уровнем доверия должен быть ограничен в добавлении комментариев
         if ($uid['trust_level'] < Config::get(Config::PARAM_TL_ADD_COMM)) {

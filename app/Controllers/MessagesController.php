@@ -5,12 +5,12 @@ namespace App\Controllers;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\MessagesModel;
 use App\Models\UserModel;
+use Lori\Content;
 use Lori\Config;
 use Lori\Base;
 
 class MessagesController extends \MainController
 {
-
     public function index()
     {
         // Страница участника и данные
@@ -162,6 +162,11 @@ class MessagesController extends \MainController
         $uid            = Base::getUid();
         $message        = Request::getPost('message');
         $recipient_uid  = Request::getPost('recipient');
+
+        // Если пользователь забанен / заморожен
+        $user = UserModel::getUser($uid['id'], 'id');
+        Base::accountBan($user);
+        Content::stopContentQuietМode($user);
 
         // Введите содержание сообщения
         if ($message == '') {

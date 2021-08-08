@@ -47,7 +47,10 @@ class EditPostController extends \MainController
             redirect('/');
         }
 
-        Content::stopContentQuietМode($uid);
+        // Если пользователь забанен / заморожен
+        $user = UserModel::getUser($uid['id'], 'id');
+        Base::accountBan($user);
+        Content::stopContentQuietМode($user);
 
         // Получаем информацию по пространству
         $space = SpaceModel::getSpace($post_space_id, 'id');

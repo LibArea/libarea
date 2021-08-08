@@ -7,6 +7,7 @@ use App\Models\NotificationsModel;
 use App\Models\ActionModel;
 use App\Models\AnswerModel;
 use App\Models\PostModel;
+use App\Models\UserModel;
 use Lori\Content;
 use Lori\Base;
 
@@ -22,10 +23,13 @@ class AddAnswerController extends \MainController
         $ip             = \Request::getRemoteAddress();
         $uid            = Base::getUid();
 
+        // Если пользователь забанен / заморожен
+        $user = UserModel::getUser($uid['id'], 'id');
+        Base::accountBan($user);
+        Content::stopContentQuietМode($user);
+
         $redirect = '/post/' . $post['post_id'] . '/' . $post['post_slug'];
         Base::Limits($answer_content, lang('Bodies'), '6', '5000', $redirect);
-
-        Content::stopContentQuietМode($uid);
 
         // Ограничим частоту добавления (зависит от TL)
         if ($uid['trust_level'] < 2) {
@@ -82,17 +86,16 @@ class AddAnswerController extends \MainController
                 NotificationsModel::send($uid['id'], $user_id, $type, $last_id, $url_answer, 1);
             }
         }
-        
+
         // Кто подписан на данный вопрос / пост
         if ($focus_all = NotificationsModel::getFocusUsersPost($post['post_id'])) {
-            
+
             foreach ($focus_all as $focus_user) {
                 if ($focus_user['signed_user_id'] != $uid['id']) {
                     $type = 3; // Ответ на пост
                     NotificationsModel::send($uid['id'], $focus_user['signed_user_id'], $type, $last_id, $url_answer, 1);
                 }
             }
-            
         }
 
         // Пересчитываем количество ответов для поста + 1

@@ -14,23 +14,23 @@ class UploadImage
     public static function img($img, $content_id, $type)
     {
         switch ($type) {
-        case 'topic':
-            $path_img       = HLEB_PUBLIC_DIR . '/uploads/topics/';
-            $path_img_small = HLEB_PUBLIC_DIR . '/uploads/topics/small/';
-            $pref = 't-';
-            $default_img = 'topic-default.png';
-            break;
-        case 'space':
-            $path_img       = HLEB_PUBLIC_DIR . '/uploads/spaces/logos/';
-            $path_img_small = HLEB_PUBLIC_DIR . '/uploads/spaces/logos/small/';
-            $pref =  's-';
-            $default_img = 'space_no.png';
-            break;
-        default: 
-            $path_img       = HLEB_PUBLIC_DIR . '/uploads/users/avatars/';
-            $path_img_small = HLEB_PUBLIC_DIR . '/uploads/users/avatars/small/';
-            $pref =  'a-';
-            $default_img = 'noavatar.png';
+            case 'topic':
+                $path_img       = HLEB_PUBLIC_DIR . '/uploads/topics/';
+                $path_img_small = HLEB_PUBLIC_DIR . '/uploads/topics/small/';
+                $pref = 't-';
+                $default_img = 'topic-default.png';
+                break;
+            case 'space':
+                $path_img       = HLEB_PUBLIC_DIR . '/uploads/spaces/logos/';
+                $path_img_small = HLEB_PUBLIC_DIR . '/uploads/spaces/logos/small/';
+                $pref =  's-';
+                $default_img = 'space_no.png';
+                break;
+            default:
+                $path_img       = HLEB_PUBLIC_DIR . '/uploads/users/avatars/';
+                $path_img_small = HLEB_PUBLIC_DIR . '/uploads/users/avatars/small/';
+                $pref =  'a-';
+                $default_img = 'noavatar.png';
         }
 
         $name = $img['name'][0];
@@ -78,7 +78,7 @@ class UploadImage
                 UserModel::setImg($content_id, $new_img);
             }
 
-            return true;
+            return $new_img;
         }
 
         return false;
@@ -127,7 +127,7 @@ class UploadImage
         $path_cover_small   = HLEB_PUBLIC_DIR . '/uploads/users/cover/small/';
         $pref = 'cover-';
         $default_img = 'cover_art.jpeg';
-            
+
         if ($type == 'space') {
             $path_cover_img     = HLEB_PUBLIC_DIR . '/uploads/spaces/cover/';
             $path_cover_small   = HLEB_PUBLIC_DIR . '/uploads/spaces/cover/small/';

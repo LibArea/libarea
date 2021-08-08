@@ -114,6 +114,10 @@ class UserController extends \MainController
             redirect('/u/' . $user['login'] . '/setting');
         }
 
+        // Если пользователь забанен
+        $user = UserModel::getUser($uid['id'], 'id');
+        Base::accountBan($user);
+
         $data = [
             'h1'            => lang('Setting profile'),
             'sheet'         => 'setting',
@@ -230,7 +234,8 @@ class UserController extends \MainController
         $img        = $_FILES['images'];
         $check_img  = $_FILES['images']['name'][0];
         if ($check_img) {
-            UploadImage::img($img, $uid['id'], 'user');
+            $new_img = UploadImage::img($img, $uid['id'], 'user');
+            $_SESSION['account']['avatar'] = $new_img;
         }
 
         // Баннер
@@ -318,7 +323,7 @@ class UserController extends \MainController
         $uid        = Base::getUid();
 
         $redirect   = '/u/' . $uid['login'] . '/setting/avatar';
-        
+
         self::accessPage(\Request::get('login'), $uid, $redirect);
 
         $user = UserModel::getUser($uid['login'], 'slug');
@@ -385,18 +390,23 @@ class UserController extends \MainController
     {
         // Страница участника и данные
         $uid    = Base::getUid();
-
         self::accessPage(\Request::get('login'), $uid, '/invitation');
 
-        $Invitation = UserModel::InvitationResult($uid['id']);
+        $invitations = UserModel::InvitationResult($uid['id']);
+
+        // Если пользователь забанен
+        $user = UserModel::getUser($uid['id'], 'id');
+        Base::accountBan($user);
 
         $data = [
-            'h1'          => lang('Invites'),
+            'h1'            => lang('Invites'),
             'sheet'         => 'invites',
-            'meta_title'    => lang('Invites') . ' | ' . Config::get(Config::PARAM_NAME)
+            'meta_title'    => lang('Invites') . ' | ' . Config::get(Config::PARAM_NAME),
+            'invitations'   => $invitations,
+            'count_invites' => $user['invitation_available'],
         ];
 
-        return view(PR_VIEW_DIR . '/user/invitation', ['data' => $data, 'uid' => $uid, 'result' => $Invitation]);
+        return view(PR_VIEW_DIR . '/user/invitation', ['data' => $data, 'uid' => $uid]);
     }
 
     // Создать инвайт
@@ -440,15 +450,15 @@ class UserController extends \MainController
         Base::addMsg(lang('Invite created'), 'success');
         redirect($redirect);
     }
-    
-    public function preferencesPage() 
+
+    public function preferencesPage()
     {
         $uid    = Base::getUid();
 
         self::accessPage(\Request::get('login'), $uid, '/preferences');
 
         $focus_posts = NotificationsModel::getFocusPostsListUser($uid['id']);
-        
+
         $result = array();
         foreach ($focus_posts as $ind => $row) {
             $text                           = explode("\n", $row['post_content']);
@@ -457,7 +467,7 @@ class UserController extends \MainController
             $row['post_date']               = lang_date($row['post_date']);
             $result[$ind]                   = $row;
         }
-        
+
         $data = [
             'h1'          => lang('Preferences'),
             'sheet'         => 'preferences',
@@ -465,14 +475,12 @@ class UserController extends \MainController
         ];
 
         return view(PR_VIEW_DIR . '/user/preferences', ['data' => $data, 'uid' => $uid, 'posts' => $result]);
-        
     }
-    
-    public function accessPage($login, $uid, $redirect) 
+
+    public function accessPage($login, $uid, $redirect)
     {
         if ($login != $uid['login']) {
             redirect('/u/' . $uid['login'] . $redirect);
-        }    
+        }
     }
-    
 }

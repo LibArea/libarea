@@ -5,7 +5,6 @@ namespace App\Controllers\Comment;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\CommentModel;
 use App\Models\UserModel;
-use App\Models\PostModel;
 use Lori\Content;
 use Lori\Config;
 use Lori\Base;

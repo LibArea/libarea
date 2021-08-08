@@ -5,6 +5,7 @@ namespace App\Controllers\Comment;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\CommentModel;
 use App\Models\PostModel;
+use App\Models\UserModel;
 use Lori\Content;
 use Lori\Base;
 
@@ -29,7 +30,10 @@ class EditCommentController extends \MainController
             redirect('/');
         }
 
-        Content::stopContentQuietМode($uid);
+        // Если пользователь забанен / заморожен
+        $user = UserModel::getUser($uid['id'], 'id');
+        Base::accountBan($user);
+        Content::stopContentQuietМode($user);
 
         $redirect   = '/post/' . $post['post_id'] . '/' . $post['post_slug'] . '#comment_' . $comment['comment_id'];
 

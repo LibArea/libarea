@@ -20,7 +20,7 @@ class VotesController extends \MainController
         if (!in_array($type, $allowed)) {
             return false;
         }
- 
+
         if ($up_id <= 0) {
             return false;
         }
@@ -35,7 +35,7 @@ class VotesController extends \MainController
         $info = VotesModel::voteStatus($up_id, $user_id, $type);
         if ($info) {
             return false;
-        } 
+        }
 
         $date = date("Y-m-d H:i:s");
         $ip = Request::getRemoteAddress();

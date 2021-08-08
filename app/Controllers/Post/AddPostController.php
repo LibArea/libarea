@@ -10,6 +10,7 @@ use App\Models\SpaceModel;
 use App\Models\WebModel;
 use App\Models\PostModel;
 use App\Models\TopicModel;
+use App\Models\UserModel;
 use Lori\UploadImage;
 use Lori\Content;
 use Lori\Config;
@@ -45,6 +46,11 @@ class AddPostController extends \MainController
         $uid            = Base::getUid();
         $post_ip_int    = \Request::getRemoteAddress();
 
+        // Если пользователь забанен / заморожен
+        $user = UserModel::getUser($uid['id'], 'id');
+        Base::accountBan($user);
+        Content::stopContentQuietМode($user);
+
         // Получаем информацию по пространству
         $space_id   = \Request::getPostInt('space_id');
         $space      = SpaceModel::getSpace($space_id, 'id');
@@ -52,8 +58,6 @@ class AddPostController extends \MainController
             Base::addMsg(lang('Select space'), 'error');
             redirect($redirect);
         }
-
-        Content::stopContentQuietМode($uid);
 
         // Если стоит ограничение: публиковать может только автор
         if ($space['space_permit_users'] == 1) {
@@ -290,7 +294,7 @@ class AddPostController extends \MainController
         $info_post_id = $info_type[$type . '_post_id'];
         if ($type == 'post') {
             $info_post_id = $info_type[$type . '_id'];
-        } 
+        }
 
         $data = [
             'user_id'       => $uid['id'],

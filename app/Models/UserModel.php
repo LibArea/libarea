@@ -248,7 +248,8 @@ class UserModel extends \MainModel
                    name,
                    avatar,
                    trust_level,
-                   ban_list
+                   ban_list,
+                   limiting_mode
                         FROM users 
                         WHERE email = :email";
 
@@ -510,24 +511,25 @@ class UserModel extends \MainModel
     public static function getEmailActivate($code)
     {
         $sql = "SELECT
+                    user_id,
                     email_code,
                     email_activate_flag
                         FROM users_email_activate
-                        WHERE email_code = :code AND email_activate_flag != 1";
+                        WHERE email_code = :code AND email_activate_flag != :flag";
 
-        return DB::run($sql, ['code' => $code])->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['code' => $code, 'flag' => 1])->fetch(PDO::FETCH_ASSOC);
     }
 
     // Активируем e-mail
     public static function EmailActivate($user_id)
     {
-        $sql = "UPDATE users_email_activate SET email_activate_flag = 1 WHERE user_id = :user_id";
+        $sql = "UPDATE users_email_activate SET email_activate_flag = :flag WHERE user_id = :user_id";
 
-        DB::run($sql, ['user_id' => $user_id]);
+        DB::run($sql, ['user_id' => $user_id, 'flag' => 1]);
 
-        $sql = "UPDATE users SET activated = 1 WHERE id = :user_id";
+        $sql = "UPDATE users SET activated = :flag WHERE id = :user_id";
 
-        return DB::run($sql, ['user_id' => $user_id]);
+        return DB::run($sql, ['user_id' => $user_id, 'flag' => 1]);
     }
 
     // Все награды участника

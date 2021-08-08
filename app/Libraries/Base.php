@@ -19,25 +19,12 @@ class Base
 
         if (!empty($account['user_id'])) {
 
-            $user = UserModel::getUser($account['user_id'], 'id');
-
-            if ($user['ban_list'] == 1) {
-                if (!isset($_SESSION)) {
-                    session_start();
-                }
-                session_destroy();
-                AuthModel::deleteTokenByUserId($user['id']);
-                redirect('/info/restriction');
-            }
-
-            $uid['id']              = $user['id'];
-            $uid['login']           = $user['login'];
-            $uid['limiting_mode']   = $user['limiting_mode'];
-            $uid['trust_level']     = $user['trust_level'];
-            $uid['notif']           = NotificationsModel::usersNotification($user['id']);
-            $uid['avatar']          = $user['avatar'];
-            $uid['hits_count']      = $user['hits_count'];
-            $uid['invitation_available'] = $user['invitation_available'];
+            $uid['id']              = $account['user_id'];
+            $uid['login']           = $account['login'];
+            $uid['trust_level']     = $account['trust_level'];
+            $uid['notif']           = NotificationsModel::usersNotification($account['user_id']);
+            $uid['avatar']          = $account['avatar'];
+            $uid['ban_list']        = $account['ban_list'];
 
             Request::getResources()->addBottomScript('/assets/js/app.js');
         } else {
@@ -95,6 +82,11 @@ class Base
             return false;
         }
 
+        // В бан листе
+        if ($user['ban_list'] == 1) {
+            return false;
+        }
+
         // ПРОСТО ПЕРЕД УСТАНОВКОЙ ДАННЫХ СЕССИИ И ВХОДОМ ПОЛЬЗОВАТЕЛЯ
         // ДАВАЙТЕ ПРОВЕРИМ, НУЖЕН ЛИ ИХ ПРИНУДИТЕЛЬНЫЙ ВХОД
         // Перенесем в конфиг?
@@ -125,13 +117,11 @@ class Base
         $data = [
             'user_id'       => $user['id'],
             'login'         => $user['login'],
-            'name'          => $user['name'],
             'email'         => $user['email'],
-            'trust_level'   => $user['trust_level'],
-            'about'         => $user['about'],
             'avatar'        => $user['avatar'],
-            'isLoggedIn'    => true,
-            'ipaddress'     => Request::getRemoteAddress(),
+            'trust_level'   => $user['trust_level'],
+            'ban_list'      => $user['ban_list'],
+            'limiting_mode' => $user['limiting_mode'],
         ];
 
         $_SESSION['account'] = $data;
@@ -194,17 +184,28 @@ class Base
         return $msg;
     }
 
-    // Очищает очередь сообщений
     public static function clearMsg()
     {
         unset($_SESSION['msg']);
     }
 
-    // Добавляем сообщение
     public static function addMsg($msg, $class)
     {
         $class = ($class == 'error') ? 2 : 1;
         $_SESSION['msg'][] = array($msg, $class);
+    }
+
+    // Бан
+    public static function accountBan($user)
+    {
+        if ($user['ban_list'] == 1) {
+            if (!isset($_SESSION)) {
+                session_start();
+            }
+            session_destroy();
+            AuthModel::deleteTokenByUserId($user['id']);
+            redirect('/info/restriction');
+        }
     }
 
     // Вхождение подстроки

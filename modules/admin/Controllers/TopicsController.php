@@ -117,7 +117,7 @@ class TopicsController extends \MainController
         $redirect = '/admin/topics/' . $topic['topic_id'] . '/edit';
 
         Base::charset_slug($topic_slug, 'Slug (url)', $redirect);
-        
+
         Base::Limits($topic_title, lang('Title'), '3', '64', $redirect);
         Base::Limits($topic_slug, lang('Slug'), '3', '43', $redirect);
         Base::Limits($topic_seo_title, lang('Name SEO'), '4', '225', $redirect);

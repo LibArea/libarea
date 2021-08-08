@@ -64,7 +64,7 @@ class AuthController extends \MainController
         $reg_ip     = \Request::getRemoteAddress();
 
         $url = $inv_code ? '/register/invite/' . $inv_code : '/register';
-    
+
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             Base::addMsg(lang('Invalid') . ' email', 'error');
             redirect($url);
@@ -74,7 +74,7 @@ class AuthController extends \MainController
             Base::addMsg(lang('e-mail-replay'), 'error');
             redirect($url);
         }
- 
+
         if (is_array(AuthModel::repeatIpBanRegistration($reg_ip))) {
             Base::addMsg(lang('multiple-accounts'), 'error');
             redirect($url);
@@ -112,7 +112,7 @@ class AuthController extends \MainController
             Base::addMsg(lang('password-spaces'), 'error');
             redirect($url);
         }
- 
+
         if (!$inv_code) {
             if (Config::get(Config::PARAM_CAPTCHA)) {
                 if (!Base::checkCaptchaCode()) {
@@ -132,8 +132,8 @@ class AuthController extends \MainController
             UserModel::sendInvitationEmail($inv_code, $inv_uid, $reg_ip, $active_uid);
             Base::addMsg(lang('Successfully, log in'), 'success');
             redirect('/login');
-        } 
-        
+        }
+
         // Активация e-mail
         $email_code = Base::randomString('crypto', 20);
         UserModel::sendActivateEmail($active_uid, $email_code);
@@ -142,9 +142,9 @@ class AuthController extends \MainController
         $newpass_link = 'https://' . HLEB_MAIN_DOMAIN . '/email/avtivate/' . $email_code;
         $mail_message = "Activate E-mail: \n" . $newpass_link . "\n\n";
         Base::mailText($email, Config::get(Config::PARAM_NAME) . ' - email', $mail_message);
-        
+
         Base::addMsg(lang('Check your e-mail to activate your account'), 'success');
-        
+
         redirect('/login');
     }
 
@@ -198,7 +198,7 @@ class AuthController extends \MainController
         if (!password_verify($password, $uInfo['password'])) {
             Base::addMsg(lang('E-mail or password is not correct'), 'error');
             redirect($url);
-        } 
+        }
 
         // Если нажал "Запомнить" 
         // Устанавливает сеанс пользователя и регистрирует его
@@ -206,22 +206,12 @@ class AuthController extends \MainController
             self::rememberMe($uInfo['id']);
         }
 
-        $data = [
-            'user_id'       => $uInfo['id'],
-            'login'         => $uInfo['login'],
-            'email'         => $uInfo['email'],
-            'name'          => $uInfo['name'],
-            'login'         => $uInfo['login'],
-            'avatar'        => $uInfo['avatar'],
-            'trust_level'   => $uInfo['trust_level'],
-        ];
-
         $last_ip = Request::getRemoteAddress();
         UserModel::setUserLastLogs($uInfo['id'], $uInfo['login'], $uInfo['trust_level'], $last_ip);
 
-        $_SESSION['account'] = $data;
+        Base::setUserSession($uInfo);
+
         redirect('/');
-       
     }
 
     // ЗАПОМНИТЬ МЕНЯ
@@ -393,5 +383,4 @@ class AuthController extends \MainController
         Base::addMsg(lang('Password changed'), 'success');
         redirect('/login');
     }
-
 }
