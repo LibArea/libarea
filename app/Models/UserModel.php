@@ -536,7 +536,10 @@ class UserModel extends \MainModel
     public static function getBadgeUserAll($user_id)
     {
         $sql = "SELECT 
-                   badge_id,  
+                   badge_id,
+                   badge_icon,
+                   badge_title,
+                   badge_description,
                    bu_badge_id,                   
                    bu_user_id
                         FROM badges_user

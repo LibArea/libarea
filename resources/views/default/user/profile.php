@@ -232,7 +232,7 @@
                             <div class="pt5 pr15 pb5 pl15">
                                 <h3 class="badge"><?= lang('Admin'); ?></h3>
                                 <div class="menu-info">
-                                    <a class="gray" href="/admin/user/<?= $user['id']; ?>/edit">
+                                    <a class="gray" href="/admin/users/<?= $user['id']; ?>/edit">
                                         <i class="light-icon-settings middle"></i>
                                         <span class="middle"><?= lang('Edit'); ?></span>
                                     </a>
