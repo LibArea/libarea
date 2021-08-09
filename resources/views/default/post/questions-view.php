@@ -11,7 +11,7 @@
                     <?php if ($uid['id'] == $answer['answer_user_id']) { ?> <?php $otvet = 1; ?> <?php } ?>
 
                     <div class="line"></div>
-                    <ol class="answer-telo">
+                    <ol class="p0 m0">
                         <li class="answers_subtree" id="answer_<?= $answer['answer_id']; ?>">
                             <div class="answ-telo hidden">
                                 <div class="qa-footer">
@@ -34,7 +34,9 @@
 
                                 <?= $answer['answer_content'] ?>
                             </div>
-                            <div class="answer-footer size-13">
+                            <div class="answer-footer flex size-13">
+                                <?= votes($uid['id'], $answer, 'answer'); ?>
+                            
                                 <?php if ($uid['trust_level'] >= Lori\Config::get(Lori\Config::PARAM_TL_ADD_COMM_QA)) { ?>
                                     <?php if ($post['post_closed'] == 0) { ?>
                                         <?php if ($post['post_is_deleted'] == 0 || $uid['trust_level'] == 5) { ?>
@@ -71,9 +73,6 @@
                                         </a>
                                     </span>
                                 <?php } ?>
-
-                                <?= votes($uid['id'], $answer, 'answer'); ?>
-
                             </div>
                             <div id="answer_addentry<?= $answer['answer_id']; ?>" class="reply"></div>
                         </li>
@@ -91,9 +90,9 @@
             <?php foreach ($answer['comm'] as  $comment) { ?>
                 <?php if ($comment['comment_is_deleted'] == 0) { ?>
 
-                    <ol class="comm-telo qa-comm">
+                    <ol class="comm-telo mb0 mt0 qa-comm2">
                         <li class="comment_subtree" id="comment_<?= $comment['comment_id']; ?>">
-                            <div class="line-qa"></div>
+                            <div class="line-qa ml15"></div>
                             <div class="comm-telo">
                                 <div class="size-13 pt5 pr5 pb5 pl15">
                                     <?= $comment['comment_content'] ?>
@@ -152,7 +151,7 @@
 <?php } else { ?>
     <?php if ($post['post_closed'] != 1) { ?>
         <div class="no-content gray">
-            <i class="light-icon-info-square green middle"></i>
+            <i class="icon-info green middle"></i>
             <span class="middle"><?= lang('No answers'); ?>... </span>
         </div>
     <?php } ?>
@@ -161,7 +160,7 @@
 <?php if (!empty($otvet)) { ?>
 
     <div class="no-content gray">
-        <i class="light-icon-info-square green middle"></i>
+        <i class="icon-info green middle"></i>
         <span class="middle"><?= lang('you-question-no'); ?>...</span>
     </div>
 

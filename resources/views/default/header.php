@@ -11,7 +11,7 @@
 
 <body class="black<?php if (Request::getCookie('dayNight') == 'dark') { ?> dark<?php } ?>">
 
-  <header class="flex justify-content-between align-items-center gray">
+  <header class="flex justify-content-between align-items-center gray-light-2">
     <div class="flex align-items-center">
       <div>
         <a title="<?= lang('Home'); ?>" class="logo" href="/">LORI<span class="red">UP</span></a>
@@ -23,18 +23,18 @@
         </form>
       </div>
       <div>
-        <a class="gray nav no-mob" title="<?= lang('Topics'); ?>" href="/topics">
-          <i class="light-icon-layers-subtract"></i>
+        <a class="gray-light-2 nav no-mob" title="<?= lang('Topics'); ?>" href="/topics">
+          <i class="icon-clone"></i>
         </a>
-        <a class="gray nav no-mob" title="<?= lang('Spaces'); ?>" href="/spaces">
-          <i class="light-icon-infinity"></i>
+        <a class="gray-light-2 nav no-mob" title="<?= lang('Spaces'); ?>" href="/spaces">
+          <i class="icon-infinity"></i>
         </a>
       </div>
     </div>
     <div class="flex align-items-center">
       <div class="nav">
         <span id="toggledark" class="my-color-m">
-          <i class="light-icon-brightness-up"></i>
+          <i class="icon-sun"></i>
         </span>
       </div>
       <?php if (!$uid['id']) { ?>
@@ -53,9 +53,9 @@
           <div class="nav notif">
             <a href="/u/<?= $uid['login']; ?>/notifications">
               <?php if ($uid['notif']['action_type'] == 1) { ?>
-                <i class="light-icon-mail-opened red"></i>
+                <i class="icon-mail-opened red"></i>
               <?php } else { ?>
-                <i class="light-icon-bell red"></i>
+                <i class="icon-bell red"></i>
               <?php } ?>
             </a>
           </div>
@@ -63,56 +63,56 @@
 
         <div class="nav add-post">
           <a title="<?= lang('Add post'); ?>" href="/post/add">
-            <i class="light-icon-plus blue middle"></i>
+            <i class="icon-plus blue middle"></i>
           </a>
         </div>
         <div class="dropbtn nav">
           <div class="nick gray" title="<?= $uid['login']; ?>">
             <?= $uid['login']; ?>
             <?= user_avatar_img($uid['avatar'], 'small', $uid['login'], 'ava ml5'); ?>
-            <i class="light-icon-chevron-down middle"></i>
+            <i class="icon-down-dir middle"></i>
           </div>
           <div class="dropdown-menu absolute">
             <span class="st"></span>
-            <a class="dr-menu gray" href="/u/<?= $uid['login']; ?>">
-              <i class="light-icon-user middle"></i>
+            <a class="dr-menu mb5 gray" href="/u/<?= $uid['login']; ?>">
+              <i class="icon-user-o middle"></i>
               <span class="middle size-13"><?= lang('Profile'); ?></span>
             </a>
-            <a class="dr-menu gray" href="/u/<?= $uid['login']; ?>/setting">
-              <i class="light-icon-settings middle"></i>
+            <a class="dr-menu mb5 gray" href="/u/<?= $uid['login']; ?>/setting">
+              <i class="icon-cog-outline middle"></i>
               <span class="middle size-13"><?= lang('Settings'); ?></span>
             </a>
-            <a class="dr-menu gray" href="/u/<?= $uid['login']; ?>/drafts">
-              <i class="light-icon-note middle"></i>
+            <a class="dr-menu mb5 gray" href="/u/<?= $uid['login']; ?>/drafts">
+              <i class="icon-edit middle"></i>
               <span class="middle size-13"><?= lang('Drafts'); ?></span>
             </a>
-            <a class="dr-menu gray" href="/u/<?= $uid['login']; ?>/notifications">
-              <i class="light-icon-notification middle"></i>
+            <a class="dr-menu mb5 gray" href="/u/<?= $uid['login']; ?>/notifications">
+              <i class="icon-lightbulb middle"></i>
               <span class="middle size-13"><?= lang('Notifications'); ?></span>
             </a>
-            <a class="dr-menu gray" href="/u/<?= $uid['login']; ?>/messages">
-              <i class="light-icon-mail middle"></i>
+            <a class="dr-menu mb5 gray" href="/u/<?= $uid['login']; ?>/messages">
+              <i class="icon-mail middle"></i>
               <span class="middle size-13"><?= lang('Messages-m'); ?></span>
             </a>
-            <a class="dr-menu gray" href="/u/<?= $uid['login']; ?>/favorite">
-              <i class="light-icon-bookmark middle"></i>
+            <a class="dr-menu mb5 gray" href="/u/<?= $uid['login']; ?>/favorite">
+              <i class="icon-bookmark-empty middle"></i>
               <span class="middle size-13"><?= lang('Favorites'); ?></span>
             </a>
             <?php if ($uid['trust_level'] > 1) { ?>
-              <a class="dr-menu gray" href="/u/<?= $uid['login']; ?>/invitation">
-                <i class="light-icon-wind middle"></i>
+              <a class="dr-menu mb5 gray" href="/u/<?= $uid['login']; ?>/invitation">
+                <i class="icon-user-add-outline middle"></i>
                 <span class="middle size-13"><?= lang('Invites'); ?></span>
               </a>
             <?php } ?>
             <?php if ($uid['trust_level'] == 5) { ?>
-              <a class="dr-menu gray" href="/admin" target="_black">
-                <i class="light-icon-key middle"></i>
+              <a class="dr-menu mb5 gray" href="/admin" target="_black">
+                <i class="icon-tools middle"></i>
                 <span class="middle size-13"><?= lang('Admin'); ?></span>
               </a>
             <?php } ?>
             <hr>
-            <a class="dr-menu gray" href="/logout" class="logout" title="<?= lang('Sign out'); ?>">
-              <i class="light-icon-logout middle"></i>
+            <a class="dr-menu mb5 gray" href="/logout" class="logout" title="<?= lang('Sign out'); ?>">
+              <i class="icon-logout middle"></i>
               <span class="middle size-13"><?= lang('Sign out'); ?></span>
             </a>
           </div>

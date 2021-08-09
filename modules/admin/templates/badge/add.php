@@ -16,7 +16,7 @@
                         <div class="boxline max-width">
                             <label class="form-label" for="post_title">Icon</label>
                             <textarea class="add" name="badge_icon" required></textarea>
-                            <div class="box_h"><?= lang('For example'); ?>: &lt;i title="<?= lang('Title'); ?>" class="light-icon-brush"&gt;&lt;/i&gt;</div>
+                            <div class="box_h"><?= lang('For example'); ?>: &lt;i title="<?= lang('Title'); ?>" class="icon-trophy"&gt;&lt;/i&gt;</div>
                         </div>
                         <div class="boxline">
                             <label class="form-label" for="post_title">Tl</label>

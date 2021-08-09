@@ -4,7 +4,7 @@
         <div class="white-box">
             <div class="pt5 pr15 pb5 pl15">
                 <a class="right" title="<?= lang('Add'); ?>" href="/admin/words/add">
-                    <i class="light-icon-plus middle"></i>
+                    <i class="icon-plus middle"></i>
                 </a>
                 <?= breadcrumb('/admin', lang('Admin'), null, null, $data['meta_title']); ?>
 

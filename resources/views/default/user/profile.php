@@ -18,12 +18,12 @@
                         <?php if ($uid['login'] != $user['login']) { ?>
                             <?php if ($button_pm === true) { ?>
                                 <a class="right pm" href="/u/<?= $user['login']; ?>/mess">
-                                    <i class="light-icon-mail"></i>
+                                    <i class="icon-mail"></i>
                                 </a>
                             <?php } ?>
                         <?php } else { ?>
                             <a class="right pm" href="/u/<?= $uid['login']; ?>/setting">
-                                <i class="light-icon-edit"></i>
+                                <i class="icon-pencil size-21"></i>
                             </a>
                         <?php } ?>
                     </div>
@@ -78,7 +78,7 @@
 
                                     <?php if ($data['spaces_user']) { ?>
                                         <br>
-                                        <div class="bar-title size-13"><?= lang('Created by'); ?></div>
+                                        <div class="uppercase mb5 mt5 size-13"><?= lang('Created by'); ?></div>
                                         <span class="d">
                                             <?php foreach ($data['spaces_user'] as  $space) { ?>
                                                 <div class="profile-space">
@@ -104,7 +104,7 @@
                                 </div>
 
                                 <div class="profile-about">
-                                    <i class="light-icon-calendar middle"></i>
+                                    <i class="icon-calendar middle"></i>
                                     <span class="middle">
                                         <span class="ts"><?= $user['created_at']; ?></span> —
                                         <?= $data['trust_level']['trust_name']; ?> <sup class="date">TL<?= $user['trust_level']; ?></sup>
@@ -201,7 +201,7 @@
                                                 <?php if ($onepost['post_answers_count'] != 0) { ?>
                                                     <a class="gray right" href="/post/<?= $onepost['post_id']; ?>/<?= $onepost['post_slug']; ?>">
                                                         <span class="mr5 ml5"></span>
-                                                        <i class="light-icon-messages middle"></i>
+                                                        <i class="icon-comment-empty middle"></i>
                                                         <?= $onepost['post_answers_count']; ?>
                                                     </a>
                                                 <?php } ?>
@@ -219,7 +219,7 @@
                             <h3 class="badge"><?= lang('Badges'); ?></h3>
                             <div class="profile-badge">
                                 <?php if ($user['id'] < 50) { ?>
-                                    <i title="<?= lang('Joined in the early days'); ?>" class="light-icon-award green"></i>
+                                    <i title="<?= lang('Joined in the early days'); ?>" class="icon-award green"></i>
                                 <?php } ?>
                                 <?php foreach ($data['badges'] as $badge) { ?>
                                     <?= $badge['badge_icon']; ?>
@@ -233,11 +233,11 @@
                                 <h3 class="badge"><?= lang('Admin'); ?></h3>
                                 <div class="menu-info">
                                     <a class="gray" href="/admin/users/<?= $user['id']; ?>/edit">
-                                        <i class="light-icon-settings middle"></i>
+                                        <i class="icon-cog-outline middle"></i>
                                         <span class="middle"><?= lang('Edit'); ?></span>
                                     </a>
                                     <a class="gray" href="/admin/badges/user/add/<?= $user['id']; ?>">
-                                        <i class="light-icon-award middle"></i>
+                                        <i class="icon-award middle"></i>
                                         <span class="middle"><?= lang('Reward the user'); ?></span>
                                     </a>
                                     <hr>

@@ -44,7 +44,7 @@
                 </a>
 
                 <?php if ($answer['post_type'] == 1) { ?>
-                  <i class="light-icon-language green"></i>
+                  <i class="icon-help green"></i>
                 <?php } ?>
               </div>
               <div class="answ-telo-body max-width">
@@ -68,7 +68,7 @@
 
         <?php } else { ?>
           <p class="no-content gray">
-            <i class="light-icon-info-square middle"></i>
+            <i class="icon-info middle"></i>
             <span class="middle"><?= lang('No'); ?>...</span>
           </p>
         <?php } ?>

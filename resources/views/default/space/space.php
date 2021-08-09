@@ -22,12 +22,12 @@
                                 <div class="right">
                                     <?php if (is_array($space_signed)) { ?>
                                         <div data-id="<?= $space_info['space_id']; ?>" data-type="space" class="focus-id focus-space no-space">
-                                            <i class="light-icon-check middle"></i>
+                                            <i class="icon-ok-outline middle"></i>
                                             <span class="middle"><?= lang('Unsubscribe'); ?></span>
                                         </div>
                                     <?php } else { ?> 
                                         <div data-id="<?= $space_info['space_id']; ?>" data-type="space" class="focus-id focus-space yes-space">
-                                            <i class="light-icon-plus middle"></i>
+                                            <i class="icon-plus middle"></i>
                                             <span class="middle"><?= lang('Read'); ?></span>
                                         </div>
                                     <?php } ?>
@@ -112,14 +112,14 @@
                                 <hr>
 
                                 <div class="gray-light">
-                                    <i class="light-icon-calendar middle"></i>
+                                    <i class="icon-calendar middle"></i>
                                     <span class="middle"><?= $space_info['space_date']; ?></span>
                                 </div>
 
                                 <?php if (!$uid['id']) { ?>
                                     <div class="sb-add-space-post center">
                                         <a class="mt15 mb20 white" href="/login">
-                                            <i class="light-icon-edit middle"></i>
+                                            <i class="icon-pencil size-15"></i>
                                             <?= lang('Create Post'); ?>
                                         </a>
                                     </div>
@@ -130,7 +130,7 @@
                                                 <?= lang('Create Post'); ?>
                                             </a>
                                         <?php } else { ?>
-                                            <?php if ($space_signed == 1) { ?>
+                                            <?php if ($space_signed) { ?>
                                                 <?php if ($space_info['space_permit_users'] == 1) { ?>
                                                     <?php if ($uid['trust_level'] == 5 || $space_info['space_user_id'] == $uid['id']) { ?>
                                                         <a class="add-space-post" href="/post/add/space/<?= $space_info['space_id']; ?>">
@@ -162,7 +162,7 @@
             <?php } else { ?>
                 <main class="w-100">
                     <p class="no-content gray">
-                        <i class="light-icon-info-square middle"></i>
+                        <i class="icon-info middle"></i>
                         <span class="middle"><?= lang('ban-space'); ?>...</span>
                     </p>
                 </main>

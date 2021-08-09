@@ -66,7 +66,7 @@
     <?php if ($uid['uri'] == '/' && $uid['id'] > 0 && empty($data['space_user'])) { ?>
       <div class="white-box">
         <div class="pt5 pr15 pb5 pl15 big center gray">
-          <i class="light-icon-bulb middle red"></i>
+          <i class="icon-lightbulb middle red"></i>
           <span class="middle"><?= lang('space-subscription'); ?>...</span>
         </div>
       </div>
@@ -82,8 +82,10 @@
       <?php if (!empty($data['space_user'])) { ?>
         <div class="white-box">
           <div class="pt5 pr15 pb5 pl15">
-            <a class="right" title="<?= lang('Spaces'); ?>" href="/spaces"><i class="light-icon-chevron-right"></i></a>
-            <div class="bar-title size-13">
+            <a class="right" title="<?= lang('Spaces'); ?>" href="/spaces">
+                <i class="icon-right-open-big middle size-13"></i>
+            </a>
+            <div class="uppercase mb5 mt5 size-13">
               <?= lang('Signed'); ?>
             </div>
             <?php foreach ($data['space_user'] as  $sig) { ?>

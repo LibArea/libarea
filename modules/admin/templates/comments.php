@@ -43,7 +43,7 @@
                 </a>
 
                 <?php if ($comment['post_type'] == 1) { ?>
-                  <i class="light-icon-messages middle"></i>
+                  <i class="icon-commenting-o middle"></i>
                 <?php } ?>
               </div>
               <div class="comm-telo-body">

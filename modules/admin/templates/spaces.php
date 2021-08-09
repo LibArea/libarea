@@ -4,7 +4,7 @@
         <div class="white-box">
             <div class="pt5 pr15 pb5 pl15">
                 <a class="right" title="<?= lang('Add'); ?>" href="/space/add">
-                    <i class="light-icon-plus middle"></i>
+                    <i class="icon-plus middle"></i>
                 </a>
                 <?= breadcrumb('/admin', lang('Admin'), null, null, $data['meta_title']); ?>
 
@@ -86,7 +86,7 @@
                                     </span>
                                     <span class="t-td center">
                                         <a title="<?= lang('Edit'); ?>" href="/space/edit/<?= $sp['space_id']; ?>">
-                                            <i class="light-icon-edit middle"></i>
+                                            <i class="icon-pencil size-15"></i>
                                         </a>
                                     </span>
 
@@ -97,7 +97,7 @@
 
                     <?php } else { ?>
                         <div class="no-content gray">
-                            <i class="light-icon-info-square green middle"></i>
+                            <i class="icon-info green middle"></i>
                             <span class="middle"><?= lang('No'); ?>...</span>
                         </div>
                     <?php } ?>

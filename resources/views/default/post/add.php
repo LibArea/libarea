@@ -145,7 +145,7 @@
                     </div>
                 <?php } else { ?>
                     <div class="no-content gray">
-                        <i class="light-icon-info-square green middle"></i>
+                        <i class="icon-info green middle"></i>
                         <span class="middle"><?= lang('no-space-to-add'); ?>...</span>
                     </div>
                 <?php } ?>

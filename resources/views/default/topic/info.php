@@ -9,8 +9,8 @@
 
                 <h1 class="topics"><a href="/topic/<?= $topic['topic_slug']; ?>"><?= $data['h1']; ?></a>
                     <?php if ($uid['trust_level'] == 5) { ?>
-                        <a class="right" href="/admin/topics/<?= $topic['topic_id']; ?>/edit">
-                            <i class="light-icon-edit middle"></i>
+                        <a class="right gray-light" href="/admin/topics/<?= $topic['topic_id']; ?>/edit">
+                            <i class="icon-pencil size-15"></i>
                         </a>
                     <?php } ?>
                 </h1>
@@ -23,7 +23,7 @@
         <?php if (!empty($post_related)) { ?>
             <div class="white-box">
                 <div class="pt5 pr15 pb5 pl15">
-                    <div class="related">
+                    <div class="mb20">
                         <h3 class="uppercase mb5 mt0 fw300 size-13 gray"><?= lang('By topic'); ?>:</h3>
                         <?php $num = 0; ?>
                         <?php foreach ($post_related as $related) { ?>
@@ -52,7 +52,7 @@
                 </center>
                 <hr>
                 <div class="gray-light">
-                    <i class="light-icon-calendar middle"></i>
+                    <i class="icon-calendar middle"></i>
                     <span class="middle"><?= $topic['topic_add_date']; ?></span>
                 </div>
             </div>

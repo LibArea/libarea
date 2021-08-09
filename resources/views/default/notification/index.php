@@ -14,9 +14,9 @@
 
                             <?php if ($notif['action_type'] == 1) { ?>
                                 <?php if ($notif['read_flag'] == 0) { ?>
-                                    <i class="light-icon-mail middle red"></i>
+                                    <i class="icon-mail middle red"></i>
                                 <?php } else { ?>
-                                    <i class="light-icon-mail middle"></i>
+                                    <i class="icon-mail middle"></i>
                                 <?php } ?>
                                 <span class="mr5 ml5"></span>
                                 <a class="gray" href="/u/<?= $notif['login']; ?>"><?= $notif['login']; ?></a>
@@ -29,7 +29,7 @@
                             <?php } ?>
 
                             <?php if ($notif['action_type'] == 3) { ?>
-                                <i class="light-icon-book middle"></i>
+                                <i class="icon-book-open middle"></i>
                                 <span class="mr5 ml5"></span>
                                 <a class="gray" href="/u/<?= $notif['login']; ?>">@<?= $notif['login']; ?></a>
                                 <a class="ntf2 lowercase" href="/notifications/read/<?= $notif['notification_id']; ?>">
@@ -38,7 +38,7 @@
                             <?php } ?>
 
                             <?php if ($notif['action_type'] == 10 || $notif['action_type'] == 11 || $notif['action_type'] == 12) { ?>
-                                <i class="light-icon-user middle"></i>
+                                <i class="icon-user-o middle"></i>
                                 <span class="mr5 ml5"></span>
                                 <a class="gray" href="/u/<?= $notif['login']; ?>">@<?= $notif['login']; ?></a>
                                 <?= lang('appealed to you'); ?>
@@ -54,7 +54,7 @@
                             <?php } ?>
                             <?php if ($notif['action_type'] == 15) { ?>
                                 <a class="ntf2 lowercase" href="/notifications/read/<?= $notif['notification_id']; ?>">
-                                    <i class="light-icon-activity middle red"></i>
+                                    <i class="icon-lightbulb middle red"></i>
                                     <span class="mr5 ml5"></span>
                                     <?= lang('Audit'); ?>
                                 </a>
@@ -70,9 +70,9 @@
                             <span class="lowercase">
                                 <?php if ($notif['action_type'] == 4) { ?>
                                     <?php if ($notif['read_flag'] == 0) { ?>
-                                        <i class="light-icon-messages middle red"></i>
+                                        <i class="icon-commenting-o middle red"></i>
                                     <?php } else { ?>
-                                        <i class="light-icon-messages middle"></i>
+                                        <i class="icon-commenting-o middle"></i>
                                     <?php } ?>
                                     <span class="mr5 ml5"></span>
                                     <a class="gray" href="/u/<?= $notif['login']; ?>"><?= $notif['login']; ?></a>

@@ -5,8 +5,8 @@
             <div class="pt5 pr15 pb5 pl15">
                 <?php if ($uid['id'] > 0) { ?>
                     <?php if ($add_space_button === true) { ?>
-                        <a title="<?= lang('To create'); ?>" class="right mt15 mb15 size-13" href="/space/add">
-                            <i class="light-icon-plus red"></i>
+                        <a title="<?= lang('To create'); ?>" class="right mt5 mb15 size-21" href="/space/add">
+                            <i class="icon-plus red"></i>
                         </a>
                     <?php } ?>
                 <?php } ?>
@@ -69,7 +69,7 @@
                                                 <div class="top-15-px">
                                                     <a href="/login">
                                                         <div class="focus-space yes-space absolute">
-                                                            <i class="light-icon-plus middle"></i>
+                                                            <i class="icon-plus middle"></i>
                                                             <span class="middle"><?= lang('Read'); ?></span>
                                                         </div>
                                                     </a>
@@ -80,12 +80,12 @@
                                                         <div class="top-15-px">
                                                             <?php if ($sp['signed_space_id'] >= 1) { ?>
                                                                 <div data-id="<?= $sp['space_id']; ?>" data-type="space" class="focus-id focus-space absolute">
-                                                                    <i class="light-icon-check middle"></i>
+                                                                    <i class="icon-ok-outline middle"></i>
                                                                     <span class="middle"><?= lang('Unsubscribe'); ?></span>
                                                                 </div>
                                                             <?php } else { ?>
                                                                 <div data-id="<?= $sp['space_id']; ?>" data-type="space" class="focus-id focus-space absolute">
-                                                                    <i class="light-icon-plus middle"></i>
+                                                                    <i class="icon-plus middle"></i>
                                                                     <span class="middle"><?= lang('Read'); ?></span>
                                                                 </div>
                                                             <?php } ?>
@@ -93,7 +93,7 @@
                                                     <?php } ?>
                                                     <?php if ($sp['space_user_id'] == $uid['id']) { ?>
                                                         <div class="focus-space absolute">
-                                                            <i class="light-icon-checks middle"></i>
+                                                            <i class="icon-ok-outline middle"></i>
                                                             <span class="middle"><?= lang('Created by'); ?></span>
                                                         </div>
                                                     <?php } ?>
@@ -105,7 +105,7 @@
                                     </div>
                                 <?php } else { ?>
                                     <p class="no-content gray">
-                                        <i class="light-icon-info-square middle"></i>
+                                        <i class="icon-help middle"></i>
                                         <span class="middle"><?= lang('No spaces'); ?>...</span>
                                     </p>
                                 <?php } ?>

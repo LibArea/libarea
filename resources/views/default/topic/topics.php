@@ -5,8 +5,8 @@
             <div class="pt5 pr15 pb5 pl15">
                 <h1><?= $data['h1']; ?>
                     <?php if ($uid['trust_level'] == 5) { ?>
-                        <a class="right" href="/admin/topics">
-                            <i class="light-icon-edit middle"></i>
+                        <a class="right gray-light" href="/admin/topics">
+                            <i class="icon-pencil size-15"></i>
                         </a>
                     <?php } ?>
                 </h1>
@@ -35,7 +35,7 @@
                     </div>
                 <?php } else { ?>
                     <p class="no-content gray">
-                        <i class="light-icon-info-square middle"></i>
+                        <i class="icon-info middle"></i>
                         <span class="middle"><?= lang('Topics no'); ?>...</span>
                     </p>
                 <?php } ?>

@@ -5,7 +5,7 @@
             <div class="pt5 pr15 pb5 pl15 space-tags">
                 <?php if ($uid['trust_level'] == 5) { ?>
                     <a title="<?= lang('Add'); ?>" class="right mb5" href="/web/add">
-                        <i class="light-icon-plus middle"></i>
+                        <i class="icon-plus middle"></i>
                     </a>
                 <?php } ?>
                 <h1><?= $data['h1']; ?></h1>
@@ -26,7 +26,7 @@
                     </a>
                     <?php if ($uid['trust_level'] == 5) { ?>
                         <a class="size-13 right" title="<?= lang('Edit'); ?>" href="/admin/webs/<?= $link['link_id']; ?>/edit">
-                            <i class="light-icon-edit"></i>
+                            <i class="icon-pencil size-15"></i>
                         </a>
                     <?php } ?>
                     <span class="green ml15">

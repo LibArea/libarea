@@ -4,7 +4,7 @@
         <div class="white-box">
             <div class="pt5 pr15 pb5 pl15">
                 <a class="right" title="<?= lang('Add'); ?>" href="/admin/topics/add">
-                    <i class="light-icon-plus middle"></i>
+                    <i class="icon-plus middle"></i>
                 </a>
                 <?= breadcrumb('/admin', lang('Admin'), null, null, $data['meta_title']); ?>
 
@@ -47,7 +47,7 @@
                                     </span>
                                     <span class="t-td width-30 center">
                                         <a title="<?= lang('Edit'); ?>" href="topics/<?= $topic['topic_id']; ?>/edit">
-                                            <i class="light-icon-edit middle"></i>
+                                            <i class="icon-pencil size-15"></i>
                                         </a>
                                     </span>
                                 </div>

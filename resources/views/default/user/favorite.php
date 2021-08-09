@@ -64,7 +64,7 @@
                                     </a>
                                     <?php if ($fav['post_answers_count'] != 0) { ?>
                                         <a class="mr5 gray" href="/post/<?= $fav['post_id']; ?>/<?= $fav['post_slug']; ?>">
-                                            <i class="light-icon-messages middle"></i> <?= $fav['post_answers_count'] ?>
+                                            <i class="icon-commenting-o middle"></i> <?= $fav['post_answers_count'] ?>
                                         </a>
                                     <?php } ?>
                                 </div>
@@ -98,7 +98,7 @@
             <?php } ?>
         <?php } else { ?>
             <p class="no-content gray">
-                <i class="light-icon-info-square middle"></i>
+                <i class="icon-info middle"></i>
                 <span class="middle"><?= lang('There are no favorites'); ?>...</span>
             </p>
         <?php } ?>

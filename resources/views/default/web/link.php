@@ -11,7 +11,7 @@
                         <?php if ($uid['trust_level'] > 4) { ?>
                             <span class="mr5 ml5"></span>
                             <a class="size-13" title="<?= lang('Edit'); ?>" href="/admin/webs/<?= $link['link_id']; ?>/edit">
-                                <i class="light-icon-edit middle"></i>
+                                <i class="icon-pencil size-15"></i>
                             </a>
                         <?php } ?>
                     </h1>
@@ -41,10 +41,10 @@
         <div class="white-box">
             <div class="pt5 pr15 pb5 pl15 space-tags">
                 <?php if (!empty($domains)) { ?>
-                    <div class="bar-title size-13"><?= lang('Domains'); ?></div>
+                    <div class="uppercase mb5 mt5 size-13"><?= lang('Domains'); ?></div>
                     <?php foreach ($domains as  $domain) { ?>
                         <a class="size-13 gray" href="/domain/<?= $domain['link_url_domain']; ?>">
-                            <i class="light-icon-link middle"></i> <?= $domain['link_url_domain']; ?>
+                            <i class="icon-link middle"></i> <?= $domain['link_url_domain']; ?>
                             <sup class="size-13"><?= $domain['link_count']; ?></sup>
                         </a><br>
                     <?php } ?>

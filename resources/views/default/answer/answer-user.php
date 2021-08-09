@@ -39,7 +39,7 @@
 
         <?php } else { ?>
             <p class="no-content gray">
-                <i class="light-icon-info-square middle"></i>
+                <i class="icon-info middle"></i>
                 <span class="middle"><?= lang('No answers'); ?>...</span>
             </p>
         <?php } ?>

@@ -58,7 +58,7 @@
                             <span class="t-td center">
                                 <?php if ($user['trust_level'] != 5) { ?>
                                     <a title="<?= lang('Edit'); ?>" href="/admin/user/<?= $user['id']; ?>/edit">
-                                        <i class="light-icon-edit middle"></i>
+                                        <i class="icon-pencil size-15"></i>
                                     </a>
                                 <?php } else { ?>
                                     ---

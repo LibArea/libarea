@@ -1,7 +1,7 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 <div class="wrap">
     <div id="stHeader">
-        <a href="/"><i class="light-icon-home middle"></i></a>
+        <a title="<?= lang('Home'); ?>" href="/"><i class="icon-home-outline"></i></a>
         <span class="separator gray middle mr5 ml5">\</span>
         <span class="middle"><?= $post['post_title']; ?></span>
     </div>
@@ -15,19 +15,19 @@
                         <h1 class="title size-21">
                             <?= $post['post_title']; ?>
                             <?php if ($post['post_is_deleted'] == 1) { ?>
-                                <i class="light-icon-trash red"></i>
+                                <i class="icon-trash-empty red"></i>
                             <?php } ?>
                             <?php if ($post['post_closed'] == 1) { ?>
-                                <i class="light-icon-lock"></i>
+                                <i class="icon-closed"></i>
                             <?php } ?>
                             <?php if ($post['post_top'] == 1) { ?>
-                                <i class="light-icon-arrow-narrow-up red"></i>
+                                <i class="icon-pin-outline red"></i>
                             <?php } ?>
                             <?php if ($post['post_lo'] > 0) { ?>
-                                <i class="light-icon-checks red"></i>
+                                <i class="icon-diamond red"></i>
                             <?php } ?>
                             <?php if ($post['post_type'] == 1) { ?>
-                                <i class="light-icon-language green"></i>
+                                <i class="icon-help green"></i>
                             <?php } ?>
                             <?php if ($post['post_translation'] == 1) { ?>
                                 <span class="translation size-13 italic lowercase"><?= lang('Translation'); ?></span>
@@ -36,7 +36,7 @@
                                 <span class="trust-level italic size-13">tl<?= $post['post_tl']; ?></span>
                             <?php } ?>
                             <?php if ($post['post_merged_id'] > 0) { ?>
-                                <i class="light-icon-arrow-forward-up red"></i>
+                                <i class="link-link-ext red"></i>
                             <?php } ?>
                         </h1>
                         <div class="size-13 lowercase flex gray-light">
@@ -114,7 +114,7 @@
                                 <h3 class="recommend">ЛО</h3>
                                 <span class="right">
                                     <a rel="nofollow" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#comment_<?= $lo['comment_id']; ?>">
-                                        <i class="light-icon-checks red"></i>
+                                        <i class="icon-diamond red"></i>
                                     </a>
                                 </span>
                                 <?= $lo['comment_content']; ?>
@@ -129,7 +129,7 @@
                         <?php } ?>
 
                         <?php if (!empty($post_related)) { ?>
-                            <div class="related">
+                            <div class="mb20">
                                 <h3 class="uppercase mb5 mt0 fw300 size-13 gray"><?= lang('Related'); ?>:</h3>
                                 <?php $num = 0; ?>
                                 <?php foreach ($post_related as $related) { ?>
@@ -145,7 +145,7 @@
                         <?php } ?>
 
                         <?php if (!empty($topics)) { ?>
-                            <div class="related">
+                            <div class="mb20">
                                 <h3 class="uppercase mb5 mt0 fw300 size-13 gray"><?= lang('Topics'); ?>:</h3>
                                 <?php foreach ($topics as $topic) { ?>
                                     <a class="tags gray size-13" href="/topic/<?= $topic['topic_slug']; ?>">
@@ -160,7 +160,7 @@
                         <?= votes($uid['id'], $post, 'post'); ?>
 
                        <span class="right gray-light">
-                            <i class="light-icon-messages middle"></i>
+                            <i class="icon-commenting-o middle"></i>
                             <?= $post['post_answers_count'] + $post['post_comments_count'] ?>
                         </span>
 
@@ -220,7 +220,7 @@
                     <?php include TEMPLATE_DIR . '/post/comment-view.php'; ?>
                     <?php if ($post['post_closed'] == 1) { ?>
                         <p class="no-content gray">
-                            <i class="light-icon-lock middle"></i>
+                            <i class="icon-lock middle"></i>
                             <span class="middle"><?= lang('The post is closed'); ?>...</span>
                         </p>
                     <?php } ?>
@@ -228,14 +228,14 @@
                     <?php include TEMPLATE_DIR . '/post/questions-view.php'; ?>
                     <?php if ($post['post_closed'] == 1) { ?>
                         <p class="no-content gray">
-                            <i class="light-icon-lock middle"></i>
+                            <i class="icon-lock middle"></i>
                             <span class="middle"><?= lang('The question is closed'); ?>...</span>
                         </p>
                     <?php } ?>
                 <?php } ?>
             <?php } else { ?>
                 <p class="no-content gray">
-                    <i class="light-icon-info-square middle"></i>
+                    <i class="icon-info middle"></i>
                     <span class="middle"><?= lang('This is a draft'); ?>...</span>
                 </p>
             <?php } ?>
@@ -262,16 +262,12 @@
             </div>
         <?php } ?>
         <div class="white-box">
-            <div class="pt5 pr15 pb5 pl15">
+            <div class="pt5 pr15 pb10 pl15">
                 <h3 class="recommend size-13"><?= lang('To share'); ?></h3>
                 <div class="social center" data-url="<?= Lori\Config::get(Lori\Config::PARAM_URL) . '/post/' . $post['post_id'] . '/' . $post['post_slug']; ?>" data-title="<?= $post['post_title']; ?>">
-                    <a class="push gray" data-id="fb"><i class="light-icon-brand-facebook"></i></a>
-                    <a class="push gray" data-id="vk">
-                        <svg class="vk" xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24">
-                            <path class="st0" d="M13.162 18.994c.609 0 .858-.406.851-.915-.031-1.917.714-2.949 2.059-1.604 1.488 1.488 1.796 2.519 3.603 2.519h3.2c.808 0 1.126-.26 1.126-.668 0-.863-1.421-2.386-2.625-3.504-1.686-1.565-1.765-1.602-.313-3.486 1.801-2.339 4.157-5.336 2.073-5.336h-3.981c-.772 0-.828.435-1.103 1.083-.995 2.347-2.886 5.387-3.604 4.922-.751-.485-.407-2.406-.35-5.261.015-.754.011-1.271-1.141-1.539-.629-.145-1.241-.205-1.809-.205-2.273 0-3.841.953-2.95 1.119 1.571.293 1.42 3.692 1.054 5.16-.638 2.556-3.036-2.024-4.035-4.305-.241-.548-.315-.974-1.175-.974h-3.255c-.492 0-.787.16-.787.516 0 .602 2.96 6.72 5.786 9.77 2.756 2.975 5.48 2.708 7.376 2.708z" />
-                        </svg>
-                    </a>
-                    <a class="push gray" data-id="tw"><i class="light-icon-brand-twitter"></i></a>
+                    <a class="size-21 pl15 pr15 gray-light-2" data-id="fb"><i class="icon-facebook"></i></a>
+                    <a class="size-21 pl15 pr15 gray-light-2" data-id="vk"><i class="icon-vkontakte"></i></a>
+                    <a class="size-21 pl15 pr15 gray-light-2" data-id="tw"><i class="icon-twitter"></i></a>
                 </div>
             </div>
         </div>

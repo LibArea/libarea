@@ -11,8 +11,8 @@
                         <h1>
                             <?= $data['h1']; ?>
                             <?php if ($uid['trust_level'] == 5) { ?>
-                                <a class="right" href="/admin/topics/<?= $topic['topic_id']; ?>/edit">
-                                    <i class="light-icon-edit middle"></i>
+                                <a class="right gray-light" href="/admin/topics/<?= $topic['topic_id']; ?>/edit">
+                                    <i class="icon-pencil size-15"></i>
                                 </a>
                             <?php } ?>
                         </h1>
@@ -34,7 +34,7 @@
                                 <?php } ?>
                             <?php } ?>
                             <a title="<?= lang('Info'); ?>" class="size-13 lowercase right gray" href="/topic/<?= $topic['topic_slug']; ?>/info">
-                                <i class="light-icon-info-square"></i>
+                                <i class="icon-info"></i>
                             </a>
                         </div>
                     </div>

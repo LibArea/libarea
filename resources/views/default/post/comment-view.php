@@ -8,7 +8,7 @@
             <div class="block-answer">
                 <?php if ($answer['answer_is_deleted'] == 0) { ?>
                     <div class="line"></div>
-                    <ol class="answer-telo">
+                    <ol class="p0 m0">
                         <li class="answers_subtree" id="answer_<?= $answer['answer_id']; ?>">
                             <div class="container">
                                 <div class="answ-telo">
@@ -105,7 +105,7 @@
                             </li>
                         </ol>
                     <?php } else { ?>
-                        <div class="gray answer-telo m5 p5 size-13">
+                        <div class="gray m5 p5 size-13">
                             <span class="answ-deletes">~ <?= lang('Comment deleted'); ?></span>
                         </div>
                     <?php } ?>
@@ -118,7 +118,7 @@
 
                     <ol class="pl15<?php if ($comment['comment_comment_id'] > 0) { ?> step<?php } ?>">
                         <li class="comment_subtree" id="comment_<?= $comment['comment_id']; ?>">
-                            <div class="container">
+                            <div class="p5">
                                 <div class="comm-telo">
                                     <div class="size-13 flex">
                                         <a class="gray-light" href="/u/<?= $comment['login']; ?>">
@@ -158,7 +158,7 @@
                                         <?= lori\Content::text($comment['comment_content'], 'line'); ?>
                                     </div>
                                 </div>
-                                <div class="comm-footer size-13">
+                                <div class="comm-footer size-13 flex">
                                     <?= votes($uid['id'], $comment, 'comment'); ?>
 
                                     <?php if ($post['post_closed'] == 0) { ?>
@@ -212,7 +212,7 @@
 <?php } else { ?>
     <?php if ($post['post_closed'] != 1) { ?>
         <div class="no-content gray">
-            <i class="light-icon-info-square green middle"></i>
+            <i class="icon-info green middle"></i>
             <span class="middle"><?= lang('There are no comments'); ?>...</span>
         </div>
     <?php } ?>

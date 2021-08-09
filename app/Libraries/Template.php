@@ -305,23 +305,23 @@ function votes($user_id, $content, $type)
 
     if ($user_id > 0) {
         if ($content['votes_' . $type . '_user_id'] || $user_id == $content[$type . '_user_id']) {
-            $html .= '<div class="voters active">
-                        <div class="up-id"></div>
-                        <div class="score gray">
+            $html .= '<div class="voters active flex">
+                        <div class="up-id gray-light-2 icon-up-bold"></div>
+                        <div class="score gray mr5">
                             ' . $count . '
                         </div></div>';
         } else {
             $num_count = empty($count) ? 0 : $count;
-            $html .= '<div id="up' . $content[$type . '_id'] . '" class="voters">
-                        <div data-id="' . $content[$type . '_id'] . '" data-count="' . $num_count . '" data-type="' . $type . '" class="up-id"></div>
-                        <div class="score gray">
+            $html .= '<div id="up' . $content[$type . '_id'] . '" class="voters flex">
+                        <div data-id="' . $content[$type . '_id'] . '" data-count="' . $num_count . '" data-type="' . $type . '" class="up-id gray-light-2 icon-up-bold"></div>
+                        <div class="score gray mr5">
                             ' . $count . '
                         </div></div>';
         }
     } else {
-        $html .= '<div class="voters">
-                    <a rel="nofollow" href="/login"><div class="up-id"></div></a>
-                    <div class="score gray">
+        $html .= '<div class="voters flex">
+                    <a rel="nofollow" href="/login"><div class="up-id gray-light-2 icon-up-bold"></div></a>
+                    <div class="score gray mr5">
                          ' . $count . '                
                     </div></div>';
     }

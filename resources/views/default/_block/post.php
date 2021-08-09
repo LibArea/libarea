@@ -29,19 +29,19 @@
         <a href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
           <h2 class="title size-21 ml15 mt0 mb0"><?= $post['post_title']; ?>
             <?php if ($post['post_is_deleted'] == 1) { ?>
-              <i class="light-icon-trash red"></i>
+              <i class="icon-trash red"></i>
             <?php } ?>
             <?php if ($post['post_closed'] == 1) { ?>
-              <i class="light-icon-lock"></i>
+              <i class="icon-lock gray"></i>
             <?php } ?>
             <?php if ($post['post_top'] == 1) { ?>
-              <i class="light-icon-arrow-narrow-up red"></i>
+              <i class="icon-pin-outline red"></i>
             <?php } ?>
             <?php if ($post['post_lo'] > 0) { ?>
-              <i class="light-icon-checks red"></i>
+              <i class="icon-diamond red"></i>
             <?php } ?>
             <?php if ($post['post_type'] == 1) { ?>
-              <i class="light-icon-language green"></i>
+              <i class="icon-help green"></i>
             <?php } ?>
             <?php if ($post['post_translation'] == 1) { ?>
               <span class="translation size-13 italic lowercase"><?= lang('Translation'); ?></span>
@@ -50,7 +50,7 @@
               <span class="trust-level italic size-13">tl<?= $post['post_tl']; ?></span>
             <?php } ?>
             <?php if ($post['post_merged_id'] > 0) { ?>
-              <i class="light-icon-arrow-forward-up red"></i>
+              <i class="icon-link-ext red"></i>
             <?php } ?>
           </h2>
         </a>
@@ -63,7 +63,7 @@
           <?php if ($post['post_url_domain']) { ?>
             <span class="mr5 ml5"></span>
             <a class="gray-light size-13" href="/domain/<?= $post['post_url_domain']; ?>">
-              <i class="light-icon-link size-13 middle"></i> <?= $post['post_url_domain']; ?>
+              <i class="icon-link size-13 middle"></i> <?= $post['post_url_domain']; ?>
             </a>
           <?php } ?>
         </div>
@@ -84,15 +84,15 @@
           </div>
         <?php } ?>
 
-        <div class="pt5 pr15 pb5 pl15 hidden lowercase">
+        <div class="pt5 pr10 pb5 pl10 hidden lowercase flex-100">
           <?= votes($uid['id'], $post, 'post'); ?>
           <?php if ($post['post_answers_count'] != 0) { ?>
             <a class="right gray-light" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
               <?php if ($post['post_type'] == 0) { ?>
-                <i class="light-icon-messages middle"></i>
+                <i class="icon-commenting-o"></i>
                 <?= $post['post_answers_count'] + $post['post_comments_count']; ?>
               <?php } else { ?>
-                <i class="light-icon-message middle"></i>
+                <i class="icon-commenting-o"></i>
                 <?= $post['post_answers_count']; ?> <?= $post['lang_num_answers']; ?>
               <?php } ?>
             </a>
