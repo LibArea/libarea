@@ -2,8 +2,8 @@
 
 namespace Lori;
 
-use App\Models\NotificationsModel;
 use Hleb\Constructor\Handlers\Request;
+use App\Models\NotificationsModel;
 use App\Models\UserModel;
 use App\Models\AuthModel;
 use JacksonJeans\Mail;

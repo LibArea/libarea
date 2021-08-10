@@ -16,15 +16,13 @@ Route::before('Authorization@noAuth')->getGroup();
         // @ post | answer | comment | link
         Route::get('/votes/{type}')->controller('VotesController')->where(['type' => '[a-z]+']); 
             Route::getProtect(); // Начало защиты
-                Route::get('/invitation/create')->controller('UserController@invitationCreate');
+                Route::get('/invitation/create')->controller('User\InvitationsUserController@invitationCreate');
                 Route::get('/messages/send')->controller('MessagesController@send');
                 Route::get('/space/logo/edit')->controller('Space\EditSpaceController@logoEdit');
-                Route::get('/users/setting/edit')->controller('UserController@settingEdit');
-                Route::get('/users/setting/avatar/edit')->controller('UserController@settingAvatarEdit');
-                Route::get('/users/setting/security/edit')->controller('UserController@settingSecurityEdit');
-                Route::get('/users/setting/edit')->controller('UserController@settingEdit');
-                Route::get('/users/setting/avatar/edit')->controller('UserController@settingAvatarEdit');
-                Route::get('/users/setting/security/edit')->controller('UserController@settingSecurityEdit');
+                Route::get('/users/setting/edit')->controller('User\SettingController@edit');
+                Route::get('/users/setting/avatar/edit')->controller('User\SettingController@avatarEdit');
+                Route::get('/users/setting/security/edit')->controller('User\SettingController@securityEdit');
+                Route::get('/users/setting/avatar/edit')->controller('User\SettingController@avatarEdit');
                 // post | comment | answer| topic | space
                 Route::get('/{controller}/create')->controller('<controller>\Add<controller>Controller');
                 // post | comment | answer| topic |space
@@ -32,7 +30,6 @@ Route::before('Authorization@noAuth')->getGroup();
             Route::endProtect(); // Завершение защиты
     Route::endType();  // Завершение getType('post')
 
-    Route::get('/post/img/{id}/remove')->controller('Post\EditPostController@imgPostRemove')->where(['id' => '[0-9]+']);
     // Форма добавления, общий случай: post | topic | space | web
     Route::get('/{controller}/add')->controller('<controller>\Add<controller>Controller@add');
     // Из пространства
@@ -40,16 +37,17 @@ Route::before('Authorization@noAuth')->getGroup();
     // Форма изменения, общий случай: post | topic | space | answer
     Route::get('/{controller}/edit/{id}')->controller('<controller>\Edit<controller>Controller@edit')->where(['id' => '[0-9]+']);
    
-    Route::get('/u/{login}/invitation')->controller('UserController@invitationPage')->where(['login' => '[A-Za-z0-9]+']);
-    Route::get('/u/{login}/preferences')->controller('UserController@preferencesPage')->where(['login' => '[A-Za-z0-9]+']); 
-    Route::get('/u/{login}/setting')->controller('UserController@settingPage')->where(['login' => '[A-Za-z0-9]+']); 
-    Route::get('/u/{login}/setting/avatar')->controller('UserController@settingAvatarPage')->where(['login' => '[A-Za-z0-9]+']);
-    Route::get('/u/{login}/setting/security')->controller('UserController@settingSecurityPage')->where(['login' => '[A-Za-z0-9]+']); 
+    Route::get('/u/{login}/invitation')->controller('User\InvitationsUserController@invitationForm')->where(['login' => '[A-Za-z0-9]+']);
+    Route::get('/u/{login}/setting')->controller('User\SettingController@settingForm')->where(['login' => '[A-Za-z0-9]+']); 
+    Route::get('/u/{login}/setting/avatar')->controller('User\SettingController@avatarForm')->where(['login' => '[A-Za-z0-9]+']);
+    Route::get('/u/{login}/setting/security')->controller('User\SettingController@securityForm')->where(['login' => '[A-Za-z0-9]+']); 
     
-    Route::get('/u/{login}/delete/cover')->controller('UserController@userCoverRemove')->where(['login' => '[A-Za-z0-9]+']); 
+    Route::get('/post/img/{id}/remove')->controller('Post\EditPostController@imgPostRemove')->where(['id' => '[0-9]+']);
+    Route::get('/u/{login}/delete/cover')->controller('User\SettingController@userCoverRemove')->where(['login' => '[A-Za-z0-9]+']); 
 
-    Route::get('/logout')->controller('AuthController@logout');
+    Route::get('/logout')->controller('Auth\LogoutController');
 
+    Route::get('/u/{login}/preferences')->controller('User\UserController@preferencesPage')->where(['login' => '[A-Za-z0-9]+']); 
     Route::get('/u/{login}/messages')->controller('MessagesController')->where(['login' => '[A-Za-z0-9]+']);   
     Route::get('/messages/read/{id}')->controller('MessagesController@dialog')->where(['id' => '[0-9]+']); 
     Route::get('/u/{login}/mess')->controller('MessagesController@profilMessages')->where(['login' => '[A-Za-z0-9]+']); 
@@ -58,8 +56,8 @@ Route::before('Authorization@noAuth')->getGroup();
     Route::get('/notifications/read/{id}')->controller('NotificationsController@read')->where(['id' => '[0-9]+']);  
     Route::get('/notifications/delete')->controller('NotificationsController@remove');  
     
-    Route::get('/u/{login}/favorite')->controller('UserController@userFavorites')->where(['login' => '[A-Za-z0-9]+']);
-    Route::get('/u/{login}/drafts')->controller('UserController@userDrafts')->where(['login' => '[A-Za-z0-9]+']);
+    Route::get('/u/{login}/favorite')->controller('User\UserController@userFavorites')->where(['login' => '[A-Za-z0-9]+']);
+    Route::get('/u/{login}/drafts')->controller('User\UserController@userDrafts')->where(['login' => '[A-Za-z0-9]+']);
 
     Route::get('/space/logo/{slug}/edit')->controller('Space\EditSpaceController@logo')->where(['slug' => '[A-Za-z0-9_]+']);  
     Route::get('/space/{slug}/delete/cover')->controller('Space\EditSpaceController@coverRemove')->where(['slug' => '[A-Za-z0-9_]+']);
@@ -73,22 +71,22 @@ Route::endGroup();
 Route::before('Authorization@yesAuth')->getGroup();
     Route::getType('post');
         Route::getProtect();
-            Route::get('/recover/send')->controller('AuthController@sendRecover'); 
-            Route::get('/recover/send/pass')->controller('AuthController@remindNew'); 
-            Route::get('/register/add')->controller('AuthController@register');
-            Route::get('/login')->controller('AuthController@login');
+            Route::get('/recover/send')->controller('Auth\RecoverController'); 
+            Route::get('/recover/send/pass')->controller('Auth\RecoverController@remindNew'); 
+            Route::get('/register/add')->controller('Auth\RegisterController');
+            Route::get('/login')->controller('Auth\LoginController');
         Route::endProtect();
     Route::endType();
 
-    Route::get('/invite')->controller('UserController@inviteForm');
-	Route::get('/register')->controller('AuthController@registerForm');
+    Route::get('/invite')->controller('User\InvitationsUserController@inviteForm');
+	Route::get('/register')->controller('Auth\RegisterController@showRegisterForm');
     
     Route::getType('get');
-        Route::get('/register/invite/{code}')->controller('AuthController@registerInviteForm')->where(['code' => '[a-z0-9-]+']);
-        Route::get('/recover')->controller('AuthController@recoverForm');  
-        Route::get('/recover/remind/{code}')->controller('AuthController@RemindForm')->where(['code' => '[A-Za-z0-9-]+']);
-        Route::get('/email/avtivate/{code}')->controller('AuthController@AvtivateEmail')->where(['code' => '[A-Za-z0-9-]+']);
-        Route::get('/login')->controller('AuthController@loginForm'); 
+        Route::get('/register/invite/{code}')->controller('Auth\RegisterController@showInviteForm')->where(['code' => '[a-z0-9-]+']);
+        Route::get('/recover')->controller('Auth\RecoverController@showPasswordForm');  
+        Route::get('/recover/remind/{code}')->controller('Auth\RecoverController@showRemindForm')->where(['code' => '[A-Za-z0-9-]+']);
+        Route::get('/email/avtivate/{code}')->controller('Auth\RecoverController@AvtivateEmail')->where(['code' => '[A-Za-z0-9-]+']);
+        Route::get('/login')->controller('Auth\LoginController@showLoginForm'); 
     Route::endType();
 Route::endGroup();
 
@@ -107,9 +105,9 @@ Route::get('/info')->controller('InfoController');
 Route::get('/info/privacy')->controller('InfoController@privacy');
 Route::get('/info/restriction')->controller('InfoController@restriction');
 
-Route::get('/users')->controller('UserController');
-Route::get('/users/page/{page?}')->controller('UserController')->where(['page' => '[0-9]+']);
-Route::get('/u/{login}')->controller('UserController@profile')->where(['login' => '[A-Za-z0-9]+']);
+Route::get('/users')->controller('User\UserController');
+Route::get('/users/page/{page?}')->controller('User\UserController')->where(['page' => '[0-9]+']);
+Route::get('/u/{login}')->controller('User\UserController@profile')->where(['login' => '[A-Za-z0-9]+']);
 
 Route::get('/u/{login}/posts')->controller('Post\PostController@posts', ['feed'])->where(['login' => '[A-Za-z0-9]+']);
 Route::get('/u/{login}/answers')->controller('Answer\AnswerController@userAnswers')->where(['login' => '[A-Za-z0-9]+']);

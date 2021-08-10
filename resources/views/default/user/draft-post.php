@@ -11,13 +11,11 @@
                         <?php foreach ($drafts as $dr) { ?>
                             <div class="post-telo">
                                 <a href="/post/<?= $dr['post_id']; ?>/<?= $dr['post_slug']; ?>">
-                                    <h3 class="title size-21"><?= $dr['post_title']; ?></h3>
+                                    <h3 class="title m0 size-21"><?= $dr['post_title']; ?></h3>
                                 </a>
-                                <div class="footer">
-                                    <span class="date">
-                                        <?= $dr['post_date']; ?> |
-                                        <a href="/post/edit/<?= $dr['post_id']; ?>"><?= lang('Edit'); ?></a>
-                                    </span>
+                                <div class="mr5 size-13 gray-light lowercase">
+                                    <?= $dr['post_date']; ?> |
+                                    <a href="/post/edit/<?= $dr['post_id']; ?>"><?= lang('Edit'); ?></a>
                                 </div>
                             </div>
                         <?php } ?>

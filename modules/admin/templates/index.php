@@ -13,7 +13,7 @@
                     <a rel="noreferrer gray" href="/admin/posts">
                         <div class="stat-height">
                             <i class="icon-book-open gray"></i>
-                            <sup class="size-13 absolute"><?= $stats['posts_count']; ?></sup>
+                            <sup class="size-13 gray absolute"><?= $stats['posts_count']; ?></sup>
                         </div>
                         <div class="size-13 gray">
                             <?= lang('Posts'); ?>

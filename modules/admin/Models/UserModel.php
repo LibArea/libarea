@@ -296,18 +296,24 @@ class UserModel extends \MainModel
     }
 
     // Количество контента участника
-    public static function contentCount($user_id, $type)
+    public static function contentCount($user_id)
     {
-        if ($type == 'posts') {
-
-            $sql = "SELECT post_id, post_draft, post_is_deleted 
-                    FROM posts WHERE post_user_id = :user_id and post_draft = 0 and post_is_deleted = 0";
-        } elseif ($type == 'comments') {
-            $sql = "SELECT comment_id, comment_user_id, comment_is_deleted FROM comments WHERE comment_user_id = :user_id and comment_is_deleted = 0";
-        } else {
-            $sql = "SELECT answer_id, answer_user_id, answer_is_deleted FROM answers WHERE answer_user_id = :user_id and answer_is_deleted = 0";
-        }
-
-        return  DB::run($sql, ['user_id' => $user_id])->rowCount();
+        $sql = "SELECT 
+                    (SELECT COUNT(post_id) 
+                        FROM posts 
+                        WHERE post_user_id = :user_id and post_draft = 0 and post_is_deleted = 0) 
+                            AS count_posts,
+                  
+                    (SELECT COUNT(answer_id) 
+                        FROM answers 
+                        WHERE answer_user_id = :user_id and answer_is_deleted = 0) 
+                            AS count_answers,
+                  
+                    (SELECT COUNT(comment_id) 
+                        FROM comments 
+                        WHERE comment_user_id = :user_id and comment_is_deleted = 0) 
+                            AS count_comments";
+        
+        return DB::run($sql, ['user_id' => $user_id])->fetch(PDO::FETCH_ASSOC);
     }
 }

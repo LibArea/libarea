@@ -1,6 +1,6 @@
 <?php if (!empty($answers)) { ?>
     <div class="white-box p15">
-        <h2 class="lowercase size-21">
+        <h2 class="lowercase m0 size-21">
             <?= $post['post_answers_count'] ?> <?= $post['num_answers'] ?>
         </h2>
 

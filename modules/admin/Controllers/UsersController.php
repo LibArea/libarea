@@ -88,12 +88,14 @@ class UsersController extends \MainController
         $user['logs']       = UserModel::userLogId($user_id);
         $user['badges']     = BadgeModel::getBadgeUserAll($user_id);
 
+        $counts =   UserModel::contentCount($user_id);
+
         $data = [
             'meta_title'        => lang('Edit user'),
             'sheet'             => 'edit-user',
-            'posts_count'       => UserModel::contentCount($user['id'], 'posts'),
-            'answers_count'     => UserModel::contentCount($user['id'], 'answers'),
-            'comments_count'    => UserModel::contentCount($user['id'], 'comments'),
+            'posts_count'       => $counts['count_posts'],
+            'answers_count'     => $counts['count_answers'],
+            'comments_count'    => $counts['count_comments'],
             'spaces_user'       => SpaceModel::getUserCreatedSpaces($user_id),
         ];
 

@@ -2,10 +2,10 @@
 <div class="wrap">
     <main>
         <div class="white-box">
-            <div class="pt5 pr15 pb5 pl15">
+            <div class="pt5 pr15 pb0 pl15">
                 <?= breadcrumb('/', lang('Home'), '/u/' . $uid['login'], lang('Profile'), $data['h1']); ?>
                 
-                <ul class="nav-tabs">
+                <ul class="nav-tabs mt0 mb15">
                   <?php if ($data['sheet'] == 'favorite') { ?>
                     <li class="active">
                       <span><?= lang('Favorites'); ?></span>
