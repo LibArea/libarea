@@ -1,6 +1,7 @@
 <?php
 return [
-    'Home'              => 'Главная', 
+    'Home'              => 'Главная',
+    'To the website'    => 'На сайт', 
     'TOP'               => 'TOP',
     'Space'             => 'Пространство',
     'Spaces'            => 'Пространства',

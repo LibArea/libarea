@@ -92,8 +92,7 @@
 
         <div class="white-box">
             <div class="pt5 pr15 pb5 pl15">
-
-                <h3><?= lang('Help'); ?>:</h3>
+                <h3 class="mt0"><?= lang('Help'); ?>:</h3>
                 <i class="icon-record-outline gray-light"></i> <a rel="noreferrer" href="https://loriup.ru">LoriUP.ru</a></br>
                 <i class="icon-record-outline gray-light"></i> <a rel="noreferrer" href="https://phphleb.ru/">PHP Micro-Framework HLEB</a></br>
                 </ul>

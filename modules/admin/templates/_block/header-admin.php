@@ -17,7 +17,7 @@
         </div>
         <div class="right p15">
             <a title="<?= lang('Home'); ?>" rel="noreferrer gray" href="/">
-                На сайт <i class="icon-right-open-big"></i>
+                <?= lang('To the website'); ?> <i class="icon-right-open-big"></i>
             </a>
         </div>
     </header>
