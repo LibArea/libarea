@@ -63,8 +63,8 @@ main {
 }
 
 li { list-style-type: none; }
-.count { font-size: 2.2rem;}
-.box-index { color: #fff;}
+.count { font-size: 2.2rem; }
+.box-index { color: #fff; }
 .box-index i { font-size: 38px; }
 
 .box-index:hover {
