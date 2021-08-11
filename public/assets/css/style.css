@@ -94,6 +94,12 @@ img {
 .mb5 { margin-bottom: 5px; }
 .ml5 { margin-left: 5px; }
 
+.m10 { margin: 10px; }
+.mt10 { margin-top: 10px; }
+.mr10 { margin-right: 10px; }
+.mb10 { margin-bottom: 10px; }
+.ml10 { margin-left: 10px; }
+
 .m115 { margin: 15px; }
 .mt15 { margin-top: 15px; }
 .mr15 { margin-right: 15px; }

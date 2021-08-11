@@ -13,6 +13,7 @@ return [
     'The post'          => 'Поста',
     'Bodies'            => 'Тела',
     'Freely'            => 'Свободно',
+    'Useful resources'  => 'Полезные ресурсы',
     'Comment deleted'   => 'Комментарий удален',
     'Post deleted'      => 'Пост удален',
     'Answer deleted'    => 'Ответ удален',
