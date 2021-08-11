@@ -31,16 +31,14 @@ class EditPostController extends \MainController
         $post_merged_id         = \Request::getPostInt('post_merged_id');
         $post_tl                = \Request::getPostInt('post_tl');
 
-        $uid    = Base::getUid();
-
         // Связанные посты и темы
         $related        = empty($_POST['post_related']) ? '' : $_POST['post_related'];
         $post_related   = empty($related) ? '' : implode(',', $related);
         $topics         = empty($_POST['post_topics']) ? '' : $_POST['post_topics'];
 
-        $post = PostModel::getPostId($post_id);
-
-        $redirect = '/post/edit/' . $post_id;
+        $uid        = Base::getUid();
+        $post       = PostModel::getPostId($post_id);
+        $redirect   = '/post/edit/' . $post_id;
 
         // Проверка доступа 
         if (!accessСheck($post, 'post', $uid, 0, 0)) {

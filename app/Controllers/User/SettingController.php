@@ -41,22 +41,11 @@ class SettingController extends \MainController
     {
         $name           = \Request::getPost('name');
         $about          = \Request::getPost('about');
-        $color          = \Request::getPost('color');
-        $website        = \Request::getPost('website');
-        $location       = \Request::getPost('location');
         $public_email   = \Request::getPost('public_email');
-        $skype          = \Request::getPost('skype');
-        $twitter        = \Request::getPost('twitter');
-        $telegram       = \Request::getPost('telegram');
-        $vk             = \Request::getPost('vk');
 
-
-        if (!$color) {
-            $color  = '#339900';
-        }
-
-        $uid        = Base::getUid();
-        $redirect   = '/u/' . $uid['login'] . '/setting';
+        $uid            = Base::getUid();
+        $redirect       = '/u/' . $uid['login'] . '/setting';
+        
         Base::Limits($name, lang('Name'), '3', '11', $redirect);
         Base::Limits($about, lang('About me'), '0', '255', $redirect);
 
@@ -64,23 +53,18 @@ class SettingController extends \MainController
             $public_email = '';
         }
 
-        $skype      = substr($skype, 0, 25);
-        $twitter    = substr($twitter, 0, 25);
-        $telegram   = substr($telegram, 0, 25);
-        $vk         = substr($vk, 0, 25);
-
         $data = [
             'id'            => $uid['id'],
             'name'          => $name,
-            'color'         => $color,
-            'about'         => empty($about) ? '' : $about,
-            'website'       => empty($website) ? '' : $website,
-            'location'      => empty($location) ? '' : $location,
-            'public_email'  => empty($public_email) ? '' : $public_email,
-            'skype'         => empty($skype) ? '' : $skype,
-            'twitter'       => empty($twitter) ? '' : $twitter,
-            'telegram'      => empty($telegram) ? '' : $telegram,
-            'vk'            => empty($vk) ? '' : $vk,
+            'color'         => \Request::getPostString('color', '#339900'),
+            'about'         => $about,
+            'website'       => \Request::getPostString('website', ''),
+            'location'      => \Request::getPostString('location', ''),
+            'public_email'  => $public_email,
+            'skype'         => \Request::getPostString('skype', ''),
+            'twitter'       => \Request::getPostString('twitter', ''),
+            'telegram'      => \Request::getPostString('telegram', ''),
+            'vk'            => \Request::getPostString('vk', ''),
         ];
 
         UserModel::editProfile($data);
