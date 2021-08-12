@@ -1,35 +1,47 @@
-**ATTENTION:** you are on the README file of an unstable branch of Loriup specifically meant for the development of future releases. This means that the code on this branch is potentially unstable, and breaking change may happen without any prior notice. Do not use it in production environments or use it at your own risk!
+**ATTENTION:** you are on the README file of an unstable branch of Loriup specifically meant for the development of future releases. This means that the code on this branch is potentially unstable, and breaking change may happen without any prior notice. Do not use it in production environments or use it at your own risk! This is a test version, a training project!
 
 # Loriup
-Скрипт сообщества, создаваемого на PHP Micro-Framework HLEB
+
+Discussion (forum) and Q&A platform. Community based on PHP Micro-Framework HLEB.
 
 ## PHP Micro-Framework HLEB
+
 https://github.com/phphleb/hleb
 
-Отличительной особенностью микро-фреймворка HLEB является минимализм кода и скорость работы. Выбор этого фреймворка позволяет запустить полноценный продукт с минимальными временными затратами и обращениями к документации; это легко, просто и быстро. В то же время он решает типичные задачи, такие как маршрутизация, перенос действий на контроллеры, поддержка моделей, а значит, базовая реализация MVC. Это самый минимум, необходимый для быстрого запуска приложения.
+Routing > Controllers > Models > Page Builder > Debug Panel
 
-Сайт: https://phphleb.ru/
+A distinctive feature of the micro-framework HLEB is the minimalism of the code and the speed of work.
 
-### Демонстрация
+### Demonstration
 
 ![Loriup](https://raw.githubusercontent.com/Toxu-ru/AreaDev/main/public/assets/images/areadev.jpg)
 
 https://loriup.ru/
 
-### Тестирование
+### For testing
 
-*   Требуется: php 7*+, HTTPS 
-*   Корневая папка проекта: public (настройте сервер)
-*   Залейте: database/dev.sql
-*   Пропишите настройки: database/dbase.config.php
-*   Войдите в аккаунт используя данные администратора: `ss@sdf.ru` / `qwer14qwer14`
-*   Или участника: `test@test.ru` / `test@test.ru`
+*   Required: php 7*+, HTTPS 
+*   Project root folder: public (configure the server )
+*   database/dev.sql
+*   settings: database/dbase.config.php and config.ini
+*   Log in to your account using administrator credentials: `ss@sdf.ru` / `qwer14qwer14`
+*   Or user: `test@test.ru` / `test@test.ru`
 
-#### ВАЖНО
+To change the translation, in the file: `start.hleb.php` find:
 
-Это тестовая версия!
+```
+define('SITE_LANG', 'ru' );
+```
 
-Идеи, минимализм, дизайн был взят из того, что мне нравится:
+Edit:
+
+```
+define('SITE_LANG', 'en' );
+```
+
+#### Ideas
+
+Ideas, minimalism, design was taken from what I like:
 
 *   https://news.ycombinator.com/
 *   https://lobste.rs/
@@ -38,7 +50,6 @@ https://loriup.ru/
 *   https://tildes.net/
 *   https://subreply.com/
 
-Это учебный проект!
 
 ...
 
