@@ -53,7 +53,7 @@
           <div class="ml30 notif">
             <a href="/u/<?= $uid['login']; ?>/notifications">
               <?php if ($uid['notif']['action_type'] == 1) { ?>
-                <i class="icon-mail-opened red"></i>
+                <i class="icon-mail red"></i>
               <?php } else { ?>
                 <i class="icon-bell red"></i>
               <?php } ?>
@@ -67,7 +67,7 @@
           </a>
         </div>
         <div class="dropbtn ml30">
-          <div class="nick gray" title="<?= $uid['login']; ?>">
+          <div class="nick size-15 gray" title="<?= $uid['login']; ?>">
             <?= $uid['login']; ?>
             <?= user_avatar_img($uid['avatar'], 'small', $uid['login'], 'ava ml5'); ?>
             <i class="icon-down-dir middle"></i>
