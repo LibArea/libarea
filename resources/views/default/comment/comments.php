@@ -30,7 +30,7 @@
                                     <?= $comment['comment_content']; ?>
                                 </div>
 
-                                <div class="post-full-footer gray">
+                                <div class="post-full-footer hidden gray">
                                     + <?= $comment['comment_votes']; ?>
                                 </div>
                             </div>

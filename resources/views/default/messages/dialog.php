@@ -17,7 +17,7 @@
                 <?php if ($data['list']) { ?>
                     <?php foreach ($data['list'] as $key => $val) { ?>
 
-                        <div class="msg-telo">
+                        <div class="hidden mb15">
 
                             <?php if ($val['uid'] == $uid['id']) { ?>
 

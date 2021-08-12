@@ -93,11 +93,11 @@ function post_img($file, $alt, $style, $type, $attributes = '')
 function favicon_img($link_id, $alt)
 {
     if (file_exists(HLEB_PUBLIC_DIR . '/uploads/favicons/' . $link_id . '.png')) {
-        $img = '<img class="favicon" src="/uploads/favicons/' . $link_id . '.png" alt="' . $alt . '">';
+        $img = '<img class="mr5" src="/uploads/favicons/' . $link_id . '.png" alt="' . $alt . '">';
         return $img;
     }
 
-    $img = '<img class="favicon" src="/uploads/favicons/no-link.png" alt="' . $alt . '">';
+    $img = '<img class="mr5" src="/uploads/favicons/no-link.png" alt="' . $alt . '">';
     return $img;
 }
 

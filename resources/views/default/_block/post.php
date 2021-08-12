@@ -84,15 +84,15 @@
           </div>
         <?php } ?>
 
-        <div class="pt5 pr10 pb5 pl10 hidden lowercase flex-100">
+        <div class="pt5 pr10 pb5 mt5 pl10 hidden lowercase flex justify-content-between">
           <?= votes($uid['id'], $post, 'post'); ?>
           <?php if ($post['post_answers_count'] != 0) { ?>
-            <a class="right gray-light" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
+            <a class="flex gray-light" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
               <?php if ($post['post_type'] == 0) { ?>
-                <i class="icon-commenting-o"></i>
+                <i class="icon-commenting-o mr5"></i>
                 <?= $post['post_answers_count'] + $post['post_comments_count']; ?>
               <?php } else { ?>
-                <i class="icon-commenting-o"></i>
+                <i class="icon-commenting-o mr5"></i>
                 <?= $post['post_answers_count']; ?> <?= $post['lang_num_answers']; ?>
               <?php } ?>
             </a>

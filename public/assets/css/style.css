@@ -107,6 +107,7 @@ img {
 .ml15 { margin-left: 15px; }
 
 .mb20 { margin-bottom: 20px; }
+.ml30 { margin-left: 30px; }
 
 .p0 { padding: 0; }
 .pt0 { padding-top: 0; }
@@ -152,7 +153,6 @@ img {
 .center { text-align: center; }
 .middle { vertical-align: middle; }
 .lowercase { text-transform: lowercase; }
-.flex { display: flex; }
 .justify-content-between { justify-content: space-between; }
 .align-items-center { align-items: center; }
 .italic { font-style: italic; }
@@ -160,6 +160,11 @@ img {
 .hidden { overflow: hidden; }
 .uppercase { text-transform: uppercase; }
 .fw300 { font-weight: 300; }
+
+.flex {
+  display: flex;
+  align-items: center;
+}
 
 .translation,
 .trust-level {
@@ -256,7 +261,6 @@ pre code {
   color: rgba(33, 32, 31, 0.5);
   border-radius: 2px;
   text-align: center;
-  overflow: hidden;
 }
 
 .banner h1 {
@@ -293,11 +297,6 @@ a.logo {
 
 a.logo:hover {
   opacity: 0.8;
-}
-
-.nav {
-  float: right;
-  margin-left: 30px;
 }
 
 hr {
@@ -425,10 +424,6 @@ textarea:focus {
   flex: 1 1;
 }
 
-.flex-100 {
-  flex-basis: 100%;
-}
-
 /* Authorization form */
 .login-nav-home label {
   line-height: 13px;
@@ -518,11 +513,6 @@ textarea:focus {
   border-radius: 50%;
 }
 
-.msg-telo {
-  margin-bottom: 15px;
-  overflow: hidden;
-}
-
 .no-content {
   padding: 10px 15px;
   margin: 10px 0;
@@ -579,9 +569,9 @@ form.form {
 
 .post-body img.thumb,
 img.thumb {
-  margin: 5px 15px 10px 30px;
+  margin: 5px 15px 0 30px;
   float: right;
-  width: 140px;
+  width: 120px;
   max-height: 100px;
 }
 
@@ -617,7 +607,6 @@ img.img-post,
 
 .post-full-footer {
   border-bottom: 1px solid #ddd;
-  overflow: hidden;
   margin-bottom: 20px;
   padding-bottom: 5px;
 }
@@ -664,7 +653,6 @@ img.img-post,
   width: 140px;
   text-decoration: none;
   white-space: nowrap;
-  overflow: hidden;
   text-overflow: ellipsis;
   position: relative;
 }
@@ -737,10 +725,6 @@ ol.comment-telo {
   padding-left: 23px;
 }
 
-.step {
-  margin-left: 30px;
-}
-
 .comm-telo-body p {
   margin: 8px 0;
 }
@@ -762,13 +746,9 @@ ol.comment-telo {
 
 .qa-footer {
   width: 130px;
-  margin: 10px 0 0;
-  padding: 10px 0 10px 0;
   border-radius: 3px;
   border: 1px solid #ddd;
   float: right;
-  overflow: hidden;
-  text-align: center;
 }
 
 .qa-ava img {
@@ -777,12 +757,6 @@ ol.comment-telo {
 }
 
 /* Voting */
-.voters,
-.voters .icon-up-bold,
-.voters .score {
-  display: inline-block;
-}
-
 .icon-up-bold {
   font-size: 1.2em;
 }
@@ -790,11 +764,6 @@ ol.comment-telo {
 .voters.active .icon-up-bold,
 .voters .icon-up-bold:hover {
   color: #e45735;
-}
-
-.favicon {
-  margin: 0 5px 0 0;
-  width: 16px;
 }
 
 /* Horizontal menu */
@@ -909,15 +878,6 @@ a.tags.avtive {
 }
 
 /* Info space and recommended in the post */
-.space-info-img {
-  margin: 10px 0;
-}
-
-.l-rec-small {
-  margin-bottom: 10px;
-  overflow: hidden;
-}
-
 .l-rec {
   font-size: 26px;
   float: left;
@@ -969,8 +929,6 @@ footer {
   background-color: #3c464d;
   clear: both;
   padding: 10px 20px 20px 20px;
-  overflow: hidden;
-  margin-top: 20px;
 }
 
 .text-info {
@@ -1206,7 +1164,6 @@ footer a.footer:hover {
 
   .text-oth { width: 40%; }
   .text-info { width: 57%; }
-  .nav { margin-left: 15px; }
 }
 
 @media (max-width: 704px) {

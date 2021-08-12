@@ -92,6 +92,10 @@ class UploadImage
         $file       = $img['tmp_name'];
         $filename   = 'post-' . time();
 
+        if (!is_dir($path_img . $year)) {
+            @mkdir($path_img . $year);
+        }
+
         if (!is_dir($path_img . $year . $month)) {
             @mkdir($path_img . $year . $month);
         }

@@ -1,5 +1,5 @@
 <div class="clear"></div>
-<footer>
+<footer class="footer mt15">
   <div class="wrap white">
     <div class="text-info no-mob">
       <h4 class="p-head two"><?= lang('Info'); ?></h4>

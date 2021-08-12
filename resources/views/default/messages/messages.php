@@ -9,7 +9,7 @@
 
                     <?php foreach ($data['messages'] as  $msg) { ?>
 
-                        <div class="msg-telo<?php if (!$msg['unread'] > 0) { ?> active<?php } ?>">
+                        <div class="hidden mb15<?php if (!$msg['unread'] > 0) { ?> msg-active<?php } ?>">
                             <div class="size-13 flex">
                                 <?php if ($msg['sender_uid'] == $uid['id']) {  ?>
                                     <?= lang('You'); ?>

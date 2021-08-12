@@ -156,7 +156,7 @@
                         <?php } ?>
 
                     </div>
-                    <div class="post-full-footer gray">
+                    <div class="post-full-footer hidden flex justify-content-between gray">
                         <?= votes($uid['id'], $post, 'post'); ?>
 
                        <span class="right gray-light">
@@ -245,7 +245,7 @@
     <aside>
         <div class="white-box">
             <div class="pt5 pr15 pb5 pl15">
-                <div class="space-info-img">
+                <div class="mt10 mb10">
                     <a title="<?= $post['space_name']; ?>" href="/s/<?= $post['space_slug']; ?>">
                         <?= spase_logo_img($post['space_img'], 'max', $post['space_slug'], 'ava-24'); ?>
                         <span class="mr5 ml5"><?= $post['space_name']; ?></span>
@@ -279,7 +279,7 @@
                     <?php $n = 0;
                     foreach ($recommend as  $rec_post) {
                         $n++; ?>
-                        <div class="l-rec-small">
+                        <div class="mb10 hidden">
                             <div class="l-rec">0<?= $n; ?></div>
                             <div class="l-rec-telo">
                                 <a class="edit-bl" href="/post/<?= $rec_post['post_id']; ?>/<?= $rec_post['post_slug']; ?>">

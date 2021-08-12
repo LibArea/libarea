@@ -59,7 +59,7 @@
 
                                     <?php if ($uid['id'] == $answer['answer_user_id'] || $uid['trust_level'] == 5) { ?>
                                         <?php if ($answer['answer_after'] == 0 || $uid['trust_level'] == 5) { ?>
-                                            <span id="answer_edit" class="mr5 ml5">
+                                            <span id="answer_edit" class="mr10 ml10">
                                                 <a class="editansw gray" href="/answer/edit/<?= $answer['answer_id']; ?>"> <?= lang('Edit'); ?>
                                                 </a>
                                             </span>
@@ -77,7 +77,7 @@
                                     <?php } ?>
 
                                     <?php if ($uid['trust_level'] == 5) { ?>
-                                        <span id="answer_dell" class="mr5 ml5">
+                                        <span id="answer_dell" class="ml10">
                                             <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray">
                                                 <?= lang('Remove'); ?>
                                             </a>
@@ -116,7 +116,7 @@
             <?php foreach ($answer['comm'] as  $comment) { ?>
                 <?php if ($comment['comment_is_deleted'] == 0) { ?>
 
-                    <ol class="pl15<?php if ($comment['comment_comment_id'] > 0) { ?> step<?php } ?>">
+                    <ol class="pl15<?php if ($comment['comment_comment_id'] > 0) { ?> ml30<?php } ?>">
                         <li class="comment_subtree" id="comment_<?= $comment['comment_id']; ?>">
                             <div class="p5">
                                 <div class="comm-telo">
@@ -172,7 +172,7 @@
                                     <?php } ?>
 
                                     <?php if (accessСheck($comment, 'comment', $uid, 1, 30) === true) { ?>
-                                        <span id="comment_edit" class="mr5 ml5">
+                                        <span id="comment_edit" class="mr10 ml10">
                                             <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray">
                                                 <?= lang('Edit'); ?>
                                             </a>
@@ -192,7 +192,7 @@
 
                 <?php } else { ?>
                     <?php if (accessСheck($comment, 'comment', $uid, 1, 30) === true) { ?>
-                        <ol class="delleted size-13 comm-telo<?php if ($comment['comment_comment_id'] > 0) { ?> step<?php } ?>">
+                        <ol class="delleted size-13 comm-telo<?php if ($comment['comment_comment_id'] > 0) { ?> ml30<?php } ?>">
                             <li class="comments_subtree" id="comment_<?= $comment['comment_id']; ?>">
                                 <span class="comm-deletes gray">
                                     <?= lori\Content::text($comment['comment_content'], 'line'); ?>

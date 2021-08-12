@@ -23,34 +23,34 @@
         </form>
       </div>
       <div>
-        <a class="gray-light-2 nav no-mob" title="<?= lang('Topics'); ?>" href="/topics">
+        <a class="gray-light-2 ml30 no-mob" title="<?= lang('Topics'); ?>" href="/topics">
           <i class="icon-clone"></i>
         </a>
-        <a class="gray-light-2 nav no-mob" title="<?= lang('Spaces'); ?>" href="/spaces">
+        <a class="gray-light-2 ml30 no-mob" title="<?= lang('Spaces'); ?>" href="/spaces">
           <i class="icon-infinity"></i>
         </a>
       </div>
     </div>
     <div class="flex align-items-center">
-      <div class="nav">
+      <div class="ml30">
         <span id="toggledark" class="my-color-m">
           <i class="icon-sun"></i>
         </span>
       </div>
       <?php if (!$uid['id']) { ?>
         <?php if (!Lori\Config::get(Lori\Config::PARAM_INVITE)) { ?>
-          <div class="nav register">
-            <a class="green" title="<?= lang('Sign up'); ?>" href="/register">
+          <div class="ml30 register">
+            <a class="green size-15" title="<?= lang('Sign up'); ?>" href="/register">
               <?= lang('Sign up'); ?>
             </a>
           </div>
         <?php } ?>
-        <div class="nav no-pc login">
+        <div class="ml30 no-pc login">
           <a class="gray" title="<?= lang('Sign in'); ?>" href="/login"><?= lang('Sign in'); ?></a>
         </div>
       <?php } else { ?>
         <?php if ($uid['notif']) { ?>
-          <div class="nav notif">
+          <div class="ml30 notif">
             <a href="/u/<?= $uid['login']; ?>/notifications">
               <?php if ($uid['notif']['action_type'] == 1) { ?>
                 <i class="icon-mail-opened red"></i>
@@ -61,12 +61,12 @@
           </div>
         <?php } ?>
 
-        <div class="nav add-post">
+        <div class="ml30 add-post">
           <a title="<?= lang('Add post'); ?>" href="/post/add">
             <i class="icon-plus blue middle"></i>
           </a>
         </div>
-        <div class="dropbtn nav">
+        <div class="dropbtn ml30">
           <div class="nick gray" title="<?= $uid['login']; ?>">
             <?= $uid['login']; ?>
             <?= user_avatar_img($uid['avatar'], 'small', $uid['login'], 'ava ml5'); ?>
