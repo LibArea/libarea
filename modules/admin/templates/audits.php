@@ -6,7 +6,7 @@
                 <?= breadcrumb('/admin', lang('Admin'), null, null, $data['meta_title']); ?>
 
                 <ul class="nav-tabs">
-                    <?php if ($data['sheet'] == 'all') { ?>
+                    <?php if ($data['sheet'] == 'approved') { ?>
                         <li class="active">
                             <span><?= lang('New ones'); ?></span>
                         </li>
@@ -15,7 +15,7 @@
                                 <span><?= lang('Approved'); ?></span>
                             </a>
                         </li>
-                    <?php } else { ?>
+                    <?php } elseif ($data['sheet'] == 'audits') {  ?>
                         <li>
                             <a href="/admin/audits">
                                 <span><?= lang('New ones'); ?></span>

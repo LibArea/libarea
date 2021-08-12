@@ -33,7 +33,7 @@ class AnswersController extends \MainController
 
         $data = [
             'meta_title'    => $meta_title,
-            'sheet'         => $sheet == 'ban' ? 'answerban' : 'answerall',
+            'sheet'         => $sheet == 'all' ? 'answers' : 'answers-ban',
             'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
         ];

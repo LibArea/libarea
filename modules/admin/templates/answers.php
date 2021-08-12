@@ -6,7 +6,7 @@
         <?= breadcrumb('/admin', lang('Admin'), null, null, $data['meta_title']); ?>
 
         <ul class="nav-tabs">
-          <?php if ($data['sheet'] == 'answerall') { ?>
+          <?php if ($data['sheet'] == 'answers') { ?>
             <li class="active">
               <span><?= lang('All'); ?></span>
             </li>
@@ -15,7 +15,7 @@
                 <span><?= lang('Deleted answers'); ?></span>
               </a>
             </li>
-          <?php } elseif ($data['sheet'] == 'answerban') { ?>
+          <?php } elseif ($data['sheet'] == 'answers-ban') { ?>
             <li>
               <a href="/admin/answers">
                 <span><?= lang('All'); ?></span>

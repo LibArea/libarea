@@ -9,7 +9,7 @@
                 <?= breadcrumb('/admin', lang('Admin'), null, null, $data['meta_title']); ?>
 
                 <ul class="nav-tabs">
-                    <?php if ($data['sheet'] == 'allspaces') { ?>
+                    <?php if ($data['sheet'] == 'spaces') { ?>
                         <li class="active">
                             <span><?= lang('All'); ?></span>
                         </li>
@@ -18,7 +18,7 @@
                                 <span><?= lang('Banned'); ?></span>
                             </a>
                         </li>
-                    <?php } elseif ($data['sheet'] == 'banspaces') { ?>
+                    <?php } elseif ($data['sheet'] == 'spaces-ban') { ?>
                         <li>
                             <a href="/admin/spaces">
                                 <span><?= lang('All'); ?></span>

@@ -39,7 +39,7 @@ class AuditsController extends \MainController
 
         $data = [
             'meta_title'    => lang('Audit'),
-            'sheet'         => $sheet,
+            'sheet'         => $sheet == 'approved' ? 'audits' : 'approved',
             'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
         ];

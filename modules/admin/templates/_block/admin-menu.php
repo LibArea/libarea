@@ -17,25 +17,25 @@
                 <span class="size-15 middle"><?= lang('Admin'); ?></span>
             </a>
         <li>
-        <li class="nav<?php if ($data['sheet'] == 'userall' || $data['sheet'] == 'banuser') { ?> active<?php } ?>">
+        <li class="nav<?php if ($data['sheet'] == 'users' || $data['sheet'] == 'users-ban') { ?> active<?php } ?>">
             <a title="<?= lang('Users'); ?>" href="/admin/users">
                 <i class="icon-user-o middle"></i>
                 <span class="size-15 middle"><?= lang('Users'); ?></span>
             </a>
         </li>
-        <li class="nav<?php if ($data['sheet'] == 'all' || $data['sheet'] == 'ban') { ?> active<?php } ?>">
+        <li class="nav<?php if ($data['sheet'] == 'audits' || $data['sheet'] == 'audits') { ?> active<?php } ?>">
             <a title="<?= lang('Audit'); ?>" href="/admin/audits">
                 <i class="icon-lightbulb middle"></i>
                 <span class="size-15 middle"><?= lang('Audit'); ?></span>
             </a>
         </li>
-        <li class="nav<?php if ($data['sheet'] == 'allspaces' || $data['sheet'] == 'banspaces') { ?> active<?php } ?>">
+        <li class="nav<?php if ($data['sheet'] == 'spaces' || $data['sheet'] == 'spaces-ban') { ?> active<?php } ?>">
             <a title="<?= lang('Spaces'); ?>" href="/admin/spaces">
                 <i class="icon-infinity middle"></i>
                 <span class="size-15 middle"><?= lang('Spaces'); ?></span>
             </a>
         </li>
-        <li class="nav<?php if ($data['sheet'] == 'topics') { ?> active<?php } ?>">
+        <li class="nav<?php if ($data['sheet'] == 'topics' || $data['sheet'] == 'topics-add') { ?> active<?php } ?>">
             <a title="<?= lang('Topics'); ?>" href="/admin/topics">
                 <i class="icon-clone middle"></i>
                 <span class="size-15 middle"><?= lang('Topics'); ?></span>
@@ -47,19 +47,19 @@
                 <span class="size-15 middle"><?= lang('Invites'); ?></span>
             </a>
         </li>
-        <li class="nav<?php if ($data['sheet'] == 'postall' || $data['sheet'] == 'postban') { ?> active<?php } ?>">
+        <li class="nav<?php if ($data['sheet'] == 'posts' || $data['sheet'] == 'posts-ban') { ?> active<?php } ?>">
             <a title="<?= lang('Invites'); ?>" href="/admin/posts">
                 <i class="icon-book-open middle"></i>
                 <span class="size-15 middle"><?= lang('Posts'); ?></span>
             </a>
         </li>
-        <li class="nav<?php if ($data['sheet'] == 'commentall' || $data['sheet'] == 'commentban') { ?> active<?php } ?>">
+        <li class="nav<?php if ($data['sheet'] == 'comments' || $data['sheet'] == 'comments-ban') { ?> active<?php } ?>">
             <a title="<?= lang('Comments-n'); ?>" href="/admin/comments">
                 <i class="icon-commenting-o middle"></i>
                 <span class="size-15 middle"><?= lang('Comments-n'); ?></span>
             </a>
         </li>
-        <li class="nav<?php if ($data['sheet'] == 'answerall' || $data['sheet'] == 'answerban') { ?> active<?php } ?>">
+        <li class="nav<?php if ($data['sheet'] == 'answers' || $data['sheet'] == 'answers-ban') { ?> active<?php } ?>">
             <a title="<?= lang('Answers-n'); ?>" href="/admin/answers">
                 <i class="icon-comment-empty middle"></i>
                 <span class="size-15 middle"><?= lang('Answers-n'); ?></span>
@@ -71,7 +71,7 @@
                 <span class="size-15 middle"><?= lang('Badges'); ?></span>
             </a>
         </li>
-        <li class="nav<?php if ($data['sheet'] == 'domains') { ?> active<?php } ?>">
+        <li class="nav<?php if ($data['sheet'] == 'domains' || $data['sheet'] == 'domains-add') { ?> active<?php } ?>">
             <a title="<?= lang('Domains'); ?>" href="/admin/webs">
                 <i class="icon-link middle"></i>
                 <span class="size-15 middle"><?= lang('Domains'); ?></span>

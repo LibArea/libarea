@@ -34,7 +34,7 @@ class UsersController extends \MainController
             'pNum'          => $page,
             'users'         => $result,
             'meta_title'    => lang('Users'),
-            'sheet'         => $sheet == 'ban' ? 'banuser' : 'userall',
+            'sheet'         => $sheet == 'all' ? 'users' : 'users-ban',
         ];
 
         return view('/templates/user/users', ['data' => $data, 'uid' => $uid, 'alluser' => $result]);

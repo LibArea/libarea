@@ -17,9 +17,8 @@ class WordsController extends \MainController
         $words = WordsModel::getStopWords();
 
         $data = [
-            'h1'            => lang('Stop words'),
             'meta_title'    => lang('Stop words'),
-            'sheet'         => 'words',
+            'sheet'         => $sheet == 'all' ? 'words' : $sheet,
         ];
 
         return view('/templates/word/words', ['data' => $data, 'uid' => $uid, 'words' => $words]);

@@ -6,7 +6,7 @@
         <?= breadcrumb('/admin', lang('Admin'), '/admin/users', lang('Users'), $data['meta_title']); ?>
 
         <ul class="nav-tabs">
-          <?php if ($data['sheet'] == 'userall') { ?>
+          <?php if ($data['sheet'] == 'users') { ?>
             <li class="active">
               <span><?= lang('All'); ?></span>
             </li>
@@ -15,7 +15,7 @@
                 <span><?= lang('Banned'); ?></span>
               </a>
             </li>
-          <?php } elseif ($data['sheet'] == 'banuser') { ?>
+          <?php } elseif ($data['sheet'] == 'users-ban') { ?>
             <li>
               <a href="/admin/users">
                 <span><?= lang('All'); ?></span>

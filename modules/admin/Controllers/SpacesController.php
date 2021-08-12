@@ -20,7 +20,7 @@ class SpacesController extends \MainController
 
         $data = [
             'meta_title'    => lang('Spaces'),
-            'sheet'         => $sheet == 'ban' ? 'banspaces' : 'allspaces',
+            'sheet'         => $sheet == 'all' ? 'spaces' : 'spaces-ban',
             'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
         ];

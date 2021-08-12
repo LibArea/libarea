@@ -22,7 +22,7 @@ class TopicsController extends \MainController
 
         $data = [
             'meta_title'    => lang('Topics'),
-            'sheet'         => 'topics',
+            'sheet'         => $sheet == 'all' ? 'topics' : $sheet,
             'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
         ];
@@ -41,7 +41,7 @@ class TopicsController extends \MainController
 
         $data = [
             'meta_title'    => lang('Add topic'),
-            'sheet'         => 'topics',
+            'sheet'         => 'topics-add',
         ];
 
         return view('/templates/topic/add', ['data' => $data, 'uid' => $uid]);

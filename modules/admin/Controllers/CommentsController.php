@@ -33,7 +33,7 @@ class CommentsController extends \MainController
 
         $data = [
             'meta_title'    => $meta_title,
-            'sheet'         => $sheet == 'ban' ? 'commentban' : 'commentall',
+            'sheet'         => $sheet == 'all' ? 'comments' : 'comments-ban',
             'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
         ];

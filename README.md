@@ -29,13 +29,13 @@ https://loriup.ru/
 
 To change the translation, in the file: `start.hleb.php` find:
 
-```
+```php
 define('SITE_LANG', 'ru' );
 ```
 
 Edit:
 
-```
+```php
 define('SITE_LANG', 'en' );
 ```
 

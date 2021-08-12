@@ -6,7 +6,7 @@
         <?= breadcrumb('/admin', lang('Admin'), null, null, $data['meta_title']); ?>
 
         <ul class="nav-tabs">
-          <?php if ($data['sheet'] == 'commentall') { ?>
+          <?php if ($data['sheet'] == 'comments') { ?>
             <li class="active">
               <span><?= lang('All'); ?></span>
             </li>
@@ -15,7 +15,7 @@
                 <span><?= lang('Deleted comments'); ?></span>
               </a>
             </li>
-          <?php } elseif ($data['sheet'] == 'commentban') { ?>
+          <?php } elseif ($data['sheet'] == 'comments-ban') { ?>
             <li>
               <a href="/admin/comments">
                 <span><?= lang('All'); ?></span>

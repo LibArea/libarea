@@ -6,7 +6,7 @@
         <?= breadcrumb('/admin', lang('Admin'), null, null, $data['meta_title']); ?>
 
         <ul class="nav-tabs">
-          <?php if ($data['sheet'] == 'postall') { ?>
+          <?php if ($data['sheet'] == 'posts') { ?>
             <li class="active">
               <span><?= lang('All'); ?></span>
             </li>
@@ -15,7 +15,7 @@
                 <span><?= lang('Deleted posts'); ?></span>
               </a>
             </li>
-          <?php } elseif ($data['sheet'] == 'postban') { ?>
+          <?php } elseif ($data['sheet'] == 'posts-ban') { ?>
             <li>
               <a href="/admin/posts">
                 <span><?= lang('All'); ?></span>

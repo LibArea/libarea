@@ -20,7 +20,7 @@ class WebsController extends \MainController
 
         $data = [
             'meta_title'    => lang('Domains'),
-            'sheet'         => 'domains',
+            'sheet'         => $sheet == 'all' ? 'domains' : $sheet,
             'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
         ];
@@ -35,7 +35,7 @@ class WebsController extends \MainController
 
         $data = [
             'meta_title'    => lang('Add a website'),
-            'sheet'         => 'web-add',
+            'sheet'         => 'domains-add',
         ];
 
         return view('/templates/web/add', ['data' => $data, 'uid' => $uid]);

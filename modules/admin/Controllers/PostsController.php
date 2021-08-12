@@ -34,7 +34,7 @@ class PostsController extends \MainController
 
         $data = [
             'meta_title'    => $meta_title,
-            'sheet'         => $sheet == 'ban' ? 'postban' : 'postall',
+            'sheet'         => $sheet == 'all' ? 'posts' : 'posts-ban',
             'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
         ];

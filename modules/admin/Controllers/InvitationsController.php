@@ -23,7 +23,7 @@ class InvitationsController extends \MainController
 
         $data = [
             'meta_title'    => lang('Invites'),
-            'sheet'         => 'invitations',
+            'sheet'         => $sheet == 'all' ? 'invitations' : $sheet,
         ];
 
         return view('/templates/invitations', ['data' => $data, 'uid' => $uid, 'invitations' => $result]);

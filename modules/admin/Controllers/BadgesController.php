@@ -17,7 +17,7 @@ class BadgesController extends \MainController
 
         $data = [
             'meta_title'    => lang('Badges'),
-            'sheet'         => 'badges',
+            'sheet'         => $sheet == 'all' ? 'badges' : $sheet,
         ];
 
         return view('/templates/badge/badges', ['data' => $data, 'uid' => $uid, 'badges' => $badges]);
