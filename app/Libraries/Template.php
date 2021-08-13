@@ -249,7 +249,7 @@ function pagination($pNum, $pagesCount, $sheet, $other)
         $page = $other . '';
     }
 
-    $html = '<div class="pagination">';
+    $html = '<div class="left mt5 mb5 gray">';
 
     if ($pNum != 1) {
         if (($pNum - 1) == 1) {

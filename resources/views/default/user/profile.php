@@ -82,8 +82,8 @@
                                         <span class="d">
                                             <?php foreach ($data['spaces_user'] as  $space) { ?>
                                                 <div class="profile-space">
-                                                    <a class="bar-space-telo hidden gray" href="/s/<?= $space['space_slug']; ?>">
-                                                        <?= spase_logo_img($space['space_img'], 'small', $space['space_name'], 'space-logo'); ?>
+                                                    <a class="bar-space-telo pt5 pb5 hidden gray" href="/s/<?= $space['space_slug']; ?>">
+                                                        <?= spase_logo_img($space['space_img'], 'small', $space['space_name'], 'space-logo mr5'); ?>
                                                         <span class="bar-name size-13"><?= $space['space_name']; ?></span>
                                                     </a>
                                                 </div>
@@ -232,11 +232,11 @@
                             <div class="pt5 pr15 pb5 pl15">
                                 <h3 class="badge"><?= lang('Admin'); ?></h3>
                                 <div class="menu-info">
-                                    <a class="gray" href="/admin/users/<?= $user['id']; ?>/edit">
+                                    <a class="gray size-15 block" href="/admin/users/<?= $user['id']; ?>/edit">
                                         <i class="icon-cog-outline middle"></i>
                                         <span class="middle"><?= lang('Edit'); ?></span>
                                     </a>
-                                    <a class="gray" href="/admin/badges/user/add/<?= $user['id']; ?>">
+                                    <a class="gray size-15 block" href="/admin/badges/user/add/<?= $user['id']; ?>">
                                         <i class="icon-award middle"></i>
                                         <span class="middle"><?= lang('Reward the user'); ?></span>
                                     </a>

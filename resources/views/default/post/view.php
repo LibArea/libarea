@@ -110,7 +110,7 @@
                             <?= $post['post_content']; ?>
                         </div>
                         <?php if ($lo) { ?>
-                            <div class="lo-post">
+                            <div class="lo-post pt5 pr5 pb5 pl10 mt10 mb10">
                                 <h3 class="recommend">ЛО</h3>
                                 <span class="right">
                                     <a rel="nofollow" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#comment_<?= $lo['comment_id']; ?>">
@@ -156,7 +156,7 @@
                         <?php } ?>
 
                     </div>
-                    <div class="post-full-footer hidden flex justify-content-between gray">
+                    <div class="post-full-footer mb20 pb5 hidden flex justify-content-between gray">
                         <?= votes($uid['id'], $post, 'post'); ?>
 
                        <span class="right gray-light">

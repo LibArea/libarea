@@ -9,12 +9,12 @@
 
                     <?php foreach ($data['messages'] as  $msg) { ?>
 
-                        <div class="hidden mb15<?php if (!$msg['unread'] > 0) { ?> msg-active<?php } ?>">
+                        <div class="hidden mb15<?php if (!$msg['unread'] > 0) { ?> active-notif<?php } ?>">
                             <div class="size-13 flex">
                                 <?php if ($msg['sender_uid'] == $uid['id']) {  ?>
                                     <?= lang('You'); ?>
                                     <span class="mr5 ml5"></span>
-                                    <?= $msg['update_time']; ?>
+                                    <?= lang_date($msg['update_time']); ?>
                                 <?php } else { ?>
                                     <?= lang('From'); ?>
                                     <span class="mr5 ml5"></span>
@@ -25,11 +25,11 @@
                                     </a>
                                     <span class="ml15"></span>
                                     <span class="gray lowercase">
-                                        <?= $msg['update_time']; ?>
+                                        <?= lang_date($msg['update_time']); ?>
                                     </span>
                                 <?php } ?>
                             </div>
-                            <div class="message one">
+                            <div class="message one gray">
                                 <?= $msg['message']['message']; ?>
                             </div>
 

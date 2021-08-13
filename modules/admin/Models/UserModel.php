@@ -73,7 +73,15 @@ class UserModel extends \MainModel
                     logs_trust_level,
                     logs_ip_address,
                     logs_date,
-                    id
+                    id,
+                    login,
+                    name,
+                    email,
+                    avatar,
+                    created_at,
+                    reg_ip,
+                    invitation_id,
+                    trust_level
                         FROM users_logs 
                         LEFT JOIN users ON id = logs_user_id
                         WHERE logs_ip_address = :ip";

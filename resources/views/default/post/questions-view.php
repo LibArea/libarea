@@ -90,7 +90,7 @@
             <?php foreach ($answer['comm'] as  $comment) { ?>
                 <?php if ($comment['comment_is_deleted'] == 0) { ?>
 
-                    <ol class="comm-telo mb0 mt0 qa-comm2">
+                    <ol class="comm-telo mb0 mt0">
                         <li class="comment_subtree" id="comment_<?= $comment['comment_id']; ?>">
                             <div class="line-qa ml15"></div>
                             <div class="comm-telo">

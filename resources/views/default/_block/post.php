@@ -69,7 +69,7 @@
         </div>
         <div class="pl15">
           <div class="show_add_<?= $post['post_id']; ?>">
-            <div data-post_id="<?= $post['post_id']; ?>" class="showpost">
+            <div data-post_id="<?= $post['post_id']; ?>" class="showpost mt10 mb5">
               <?= $post['post_content_preview']; ?>
               <span class="s_<?= $post['post_id']; ?> show_detail"></span>
             </div>

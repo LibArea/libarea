@@ -160,6 +160,8 @@ img {
 .hidden { overflow: hidden; }
 .uppercase { text-transform: uppercase; }
 .fw300 { font-weight: 300; }
+.block { display: block; }
+
 
 .flex {
   display: flex;
@@ -238,11 +240,6 @@ pre code {
   max-width: 100%;
 }
 
-.active-notif {
-  background-color: rgba(82, 186, 213, 0.1);
-  display: table;
-}
-
 .button {
   background-color: #54b9f7;
   border: 1px solid #54b9f7;
@@ -304,12 +301,6 @@ hr {
   clear: both;
   background-color: #ddd;
   height: 1px;
-}
-
-.pagination {
-  margin: 5px 10px 10px 0;
-  float: left;
-  clear: both;
 }
 
 /* Forms and buttons */
@@ -488,24 +479,29 @@ textarea:focus {
   border-radius: 1em;
   position: relative;
   line-height: 1.5em;
-  width: calc(90% - 45px);
 }
 
 .message.left {
   margin: 0 0 0 25px;
   background-color: rgba(128, 175, 255, 0.2);
   color: #506788;
+  width: calc(90% - 45px);
 }
 
 .message.right {
   margin: 0 25px 0 0;
   background-color: rgba(247, 206, 70, 0.2);
   color: #67614b;
+  width: calc(90% - 45px);
 }
 
 .message.one {
   background-color: #f3f1ed;
-  color: rgba(33, 32, 31, 0.5);
+}
+
+.active-notif,
+.active-notif .message.one {
+  background-color: rgba(82, 186, 213, 0.1);
 }
 
 .message-avatar {
@@ -547,12 +543,6 @@ form.form {
 }
 
 /* Abbreviated post in the feed */
-.showpost {
-  margin: 10px 0 5px 0;
-  display: block;
-  font-size: 16px;
-}
-
 .show_detail.hide {
   display: none;
 }
@@ -601,14 +591,10 @@ img.img-post,
 .lo-post {
   max-width: 660px;
   background-color: #f3f3f3;
-  padding: 5px 5px 5px 10px;
-  margin: 10px 0;
 }
 
 .post-full-footer {
   border-bottom: 1px solid #ddd;
-  margin-bottom: 20px;
-  padding-bottom: 5px;
 }
 
 .title {
@@ -648,19 +634,12 @@ img.img-post,
 .bar-space-telo {
   display: flex;
   align-items: center;
-  padding: 5px 0;
   margin-bottom: 3px;
   width: 140px;
   text-decoration: none;
   white-space: nowrap;
   text-overflow: ellipsis;
   position: relative;
-}
-
-.bar-space-telo img {
-  margin-right: 6px;
-  width: 21px;
-  height: 21px;
 }
 
 /* Answers */
@@ -727,15 +706,6 @@ ol.comment-telo {
 
 .comm-telo-body p {
   margin: 8px 0;
-}
-
-.qa-comm .comm-telo-body {
-  margin: 2px 0 2px 0;
-}
-
-.answers .comm-telo.qa-comm {
-  margin-top: 1px;
-  margin-bottom: 1px;
 }
 
 .comments .comm-telo {
@@ -897,11 +867,6 @@ a.tags.avtive {
   font-size: 15px;
 }
 
-.l-rec-footer {
-  color: #666;
-  margin-top: 3px;
-}
-
 h3.recommend {
   border-bottom: 1px solid #ddd;
   padding: 12px 0 10px 0;
@@ -909,11 +874,6 @@ h3.recommend {
   letter-spacing: 1px;
   text-transform: uppercase;
   font-weight: 400;
-}
-
-.menu-info a {
-  display: block;
-  font-size: 15px;
 }
 
 .menu-info a.active {

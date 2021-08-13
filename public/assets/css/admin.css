@@ -76,7 +76,6 @@ li { list-style-type: none; }
 .bg-success { background-color: #28a745; }
 .bg-warning { background-color: #ffc107; }
 .bg-danger { background-color: #dc3545; }
-.nav a i { margin-right: 10px; }
 .nav:hover { background-color: #3f4449; }
 .nav.active { background-color: #007bff; }
 .nav.active > a { color: #fff; }
@@ -127,7 +126,6 @@ li { list-style-type: none; }
   aside { display: none; }
   main { margin-right: 0; }
   .wrap { width: 100%; }
-  .pagination { margin: 0 0 10px 10px; }
 }
 
 @media (min-width: 1104px) {
