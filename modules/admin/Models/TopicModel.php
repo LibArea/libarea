@@ -91,7 +91,8 @@ class TopicModel extends \MainModel
     public static function topicMain($topic_id)
     {
         $sql = "SELECT 
-                    topic_id, 
+                    topic_id,
+                    topic_title,
                     topic_slug, 
                     topic_is_parent 
                         FROM topics WHERE topic_id = :topic_id AND topic_is_parent = 1";

@@ -142,6 +142,7 @@ img {
 .white { color: #fff; }
 .red { color: #e45735; }
 .max-width { max-width: 780px; }
+.width-100 { width: 100%; }
 .clear { clear: both; }
 .right { float: right; }
 .left { float: left; }
