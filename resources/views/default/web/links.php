@@ -46,7 +46,7 @@
                 </div>
             <?php } ?>
         <?php } else { ?>
-            <div class="no-content"><?= lang('No'); ?>...</div>
+            <?= no_content('No'); ?>
         <?php } ?>
 
         <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/domains'); ?>

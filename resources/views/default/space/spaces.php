@@ -104,10 +104,7 @@
                                     <?php } ?>
                                     </div>
                                 <?php } else { ?>
-                                    <p class="no-content gray">
-                                        <i class="icon-help middle"></i>
-                                        <span class="middle"><?= lang('No spaces'); ?>...</span>
-                                    </p>
+                                    <?= no_content('No spaces'); ?>
                                 <?php } ?>
                                 </div>
                     </div>

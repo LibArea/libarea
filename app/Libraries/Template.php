@@ -253,18 +253,30 @@ function pagination($pNum, $pagesCount, $sheet, $other)
 
     if ($pNum != 1) {
         if (($pNum - 1) == 1) {
-            $html .= '<a class="link" href="' . $first . '"> << ' . lang('Page') . ' ' . ($pNum - 1) . '</a>';
+            $html .= '<a class="pr5 mr5" href="' . $first . '"><< '. ($pNum - 1) . '</a>';
         } else {
-            $html .= '<a class="link" href="' . $page . '/page/' . ($pNum - 1) . '"> << ' . lang('Page') . ' ' . ($pNum - 1) . '</a>';
+            $html .= '<a class="pr5 mr5" href="' . $page . '/page/'. ($pNum - 1) .'"><< '. ($pNum - 1) . '</a>';
         }
     }
-
-    if ($pagesCount != $pNum && $pNum != 1) {
-        $html .= ' | ';
-    }
-
+    
     if ($pagesCount > $pNum) {
-        $html .= '<a class="link" href="' . $page . '/page/' . ($pNum + 1) . '">' . lang('Page') . ' ' . ($pNum + 1) . ' >></a>';
+        $html .= '<span class="pagination-active ml5 mr5 size-15">' . ($pNum) . '</span>';
+    }
+    
+    if ($pagesCount > $pNum) {
+        if ($pagesCount > $pNum + 1) {
+            $html .= '<a class="p5" href="' . $page . '/page/' . ($pNum + 1) . '"> ' . ($pNum + 1) . ' </a>';
+        }
+
+        if ($pagesCount > $pNum + 2) {
+            $html .= '<a class="p5" href="' . $page . '/page/' . ($pNum + 2) . '"> ' . ($pNum + 2) . '</a>';
+        }
+
+        if ($pagesCount > $pNum + 3) {
+            $html .= '...';
+        }
+
+        $html .= '<a class="p5 ml5 size-15 lowercase gray-light" href="' . $page . '/page/' . ($pNum + 1) . '">' . lang('Page') . ' ' . ($pNum + 1) . ' >></a>';
     }
 
     $html .= '</div>';
@@ -325,6 +337,16 @@ function votes($user_id, $content, $type)
                          ' . $count . '                
                     </div></div>';
     }
+
+    return $html;
+}
+
+function no_content($lang)
+{
+    $html = '<div class="mt10 mb10 pt10 pr15 pb10 pl15 bg-lightyellow gray">
+                <i class="icon-info green middle"></i>
+                <span class="middle">'. lang($lang). '...</span>
+            </div>';
 
     return $html;
 }

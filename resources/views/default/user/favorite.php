@@ -97,10 +97,7 @@
                 </div>
             <?php } ?>
         <?php } else { ?>
-            <p class="no-content gray">
-                <i class="icon-info middle"></i>
-                <span class="middle"><?= lang('There are no favorites'); ?>...</span>
-            </p>
+            <?= no_content('There are no favorites'); ?>
         <?php } ?>
     </main>
     <aside>

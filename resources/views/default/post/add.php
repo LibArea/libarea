@@ -144,10 +144,7 @@
                         </form>
                     </div>
                 <?php } else { ?>
-                    <div class="no-content gray">
-                        <i class="icon-info green middle"></i>
-                        <span class="middle"><?= lang('no-space-to-add'); ?>...</span>
-                    </div>
+                    <?= no_content('no-space-to-add'); ?>
                 <?php } ?>
             </div>
         </div>

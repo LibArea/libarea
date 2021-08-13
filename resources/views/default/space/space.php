@@ -159,10 +159,7 @@
         </div>
 <?php } else { ?>
     <main class="w-100">
-        <p class="no-content gray">
-            <i class="icon-info middle"></i>
-            <span class="middle"><?= lang('ban-space'); ?>...</span>
-        </p>
+        <?= no_content('ban-space'); ?>
     </main>
 <?php } ?>
 <?php include TEMPLATE_DIR . '/footer.php'; ?>

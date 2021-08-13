@@ -48,7 +48,7 @@
                     <?php } ?>
 
                 <?php } else { ?>
-                    <div class="no-content"><?= lang('No dialogs'); ?>...</div>
+                    <?= no_content('No dialogs'); ?>
                 <?php } ?>
             </div>
         </div>

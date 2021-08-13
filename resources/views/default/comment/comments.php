@@ -45,7 +45,7 @@
                     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/comments'); ?>
 
                 <?php } else { ?>
-                    <div class="no-content"><?= lang('There are no comments'); ?>...</div>
+                    <?= no_content('There are no comments'); ?>
                 <?php } ?>
 
             </div>

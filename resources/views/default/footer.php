@@ -1,7 +1,7 @@
 <div class="clear"></div>
-<footer class="footer mt15">
+<footer class="footer mt15 pt10 mr20 mb20 ml20">
   <div class="wrap white">
-    <div class="text-info no-mob">
+    <div class="text-info left no-mob">
       <h4 class="p-head two"><?= lang('Info'); ?></h4>
       <a class="footer white size-13" title="<?= lang('Spaces'); ?>" href="/spaces"><?= lang('Spaces'); ?></a>
       <a class="footer white size-13" title="<?= lang('Topics'); ?>" href="/topics"><?= lang('Topics'); ?></a>
@@ -18,8 +18,8 @@
       <a class="footer white size-13" title="<?= lang('Info'); ?>" href="/info"><?= lang('Info'); ?></a>
       <a class="footer white size-13 no-mob" title="<?= lang('Privacy'); ?>" href="/info/privacy"><?= lang('Privacy'); ?></a>
     </div>
-    <div class="text-oth ots">
-      <h4 class="p-head-n"><?= lang('Social networks'); ?></h4>
+    <div class="text-oth left ots">
+      <h4 class="mt5 mb5"><?= lang('Social networks'); ?></h4>
       <a rel="nofollow noopener" class="white" title="DISCORD" href="https://discord.gg/dw47aNx5nU">
         <i class="icon-wechat size-21 mr5"></i>
       </a>
@@ -27,7 +27,7 @@
         <i class="icon-github-circled size-21"></i>
       </a>
 
-      <div class="size-13">
+      <div class="size-13 mt5">
         Loriup &copy; <?= date('Y'); ?>
         <span class="no-mob">— <?= lang('community'); ?></span>
       </div>

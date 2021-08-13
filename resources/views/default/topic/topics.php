@@ -14,7 +14,7 @@
                 <?php if (!empty($topics)) { ?>
                     <div class="oblong-box-list topic-box-list">
                         <?php foreach ($topics as $topic) { ?>
-                            <div class="oblong-box">
+                            <div class="oblong-box left">
                                 <a title="<?= $topic['topic_title']; ?>" class="img-box absolute" href="/topic/<?= $topic['topic_slug']; ?>">
                                     <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'ava-54'); ?>
                                 </a>
@@ -34,10 +34,7 @@
                         <?php } ?>
                     </div>
                 <?php } else { ?>
-                    <p class="no-content gray">
-                        <i class="icon-info middle"></i>
-                        <span class="middle"><?= lang('Topics no'); ?>...</span>
-                    </p>
+                    <?= no_content('Topics no'); ?>
                 <?php } ?>
 
                 <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/topics'); ?>

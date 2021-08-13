@@ -38,10 +38,7 @@
             <?php } ?>
 
         <?php } else { ?>
-            <p class="no-content gray">
-                <i class="icon-info middle"></i>
-                <span class="middle"><?= lang('No answers'); ?>...</span>
-            </p>
+            <?= no_content('No answers'); ?>
         <?php } ?>
 
     </main>

@@ -10,7 +10,7 @@
 
                     <?php if ($uid['id'] == $answer['answer_user_id']) { ?> <?php $otvet = 1; ?> <?php } ?>
 
-                    <div class="line"></div>
+                    <div class="line mb20"></div>
                     <ol class="p0 m0">
                         <li class="answers_subtree" id="answer_<?= $answer['answer_id']; ?>">
                             <div class="answ-telo hidden">
@@ -87,14 +87,16 @@
                 <?php } ?>
             </div>
 
-            <?php foreach ($answer['comm'] as  $comment) { ?>
+            <?php $n = 0;
+            foreach ($answer['comm'] as  $comment) { 
+                $n++; ?>
                 <?php if ($comment['comment_is_deleted'] == 0) { ?>
-
+                    <div class="line-qa<?php if ($n > 1) { ?> ml30<?php } ?>"></div>
                     <ol class="comm-telo mb0 mt0">
                         <li class="comment_subtree" id="comment_<?= $comment['comment_id']; ?>">
-                            <div class="line-qa ml15"></div>
+                            
                             <div class="comm-telo">
-                                <div class="size-13 pt5 pr5 pb5 pl15">
+                                <div class="size-13 pt5 pr5 pb5 pl5">
                                     <?= $comment['comment_content'] ?>
                                     <span class="gray">
                                         — <a class="gray" href="/u/<?= $comment['login']; ?>"><?= $comment['login']; ?></a>
@@ -150,20 +152,12 @@
     </div>
 <?php } else { ?>
     <?php if ($post['post_closed'] != 1) { ?>
-        <div class="no-content gray">
-            <i class="icon-info green middle"></i>
-            <span class="middle"><?= lang('No answers'); ?>... </span>
-        </div>
+        <?= no_content('No answers'); ?>
     <?php } ?>
 <?php } ?>
 
 <?php if (!empty($otvet)) { ?>
-
-    <div class="no-content gray">
-        <i class="icon-info green middle"></i>
-        <span class="middle"><?= lang('you-question-no'); ?>...</span>
-    </div>
-
+    <?= no_content('you-question-no'); ?>
 <?php } else { ?>
     <?php if ($uid['id']) { ?>
         <?php if ($post['post_closed'] == 0) { ?>
@@ -181,8 +175,6 @@
 
         <?php } ?>
     <?php } else { ?>
-        <div class="no-content gray">
-            <?= lang('no-auth-login'); ?>...
-        </div>
+        <?= no_content('no-auth-login'); ?>
     <?php } ?>
 <?php }  ?>

@@ -3,11 +3,14 @@
         <h2 class="lowercase m0 size-21">
             <?= $post['post_answers_count'] + $post['post_comments_count'] ?> <?= $post['num_comments'] ?>
         </h2>
-
-        <?php foreach ($answers as  $answer) { ?>
+        <div class="line-qa mt5 mb10"></div>
+        <?php $n = 0;
+        foreach ($answers as  $answer) {
+            $n++; ?>
+            
             <div class="block-answer">
                 <?php if ($answer['answer_is_deleted'] == 0) { ?>
-                    <div class="line"></div>
+                    <?php if ($n != 1) { ?><div class="line mt10 mb10"></div><?php } ?>
                     <ol class="p0 m0">
                         <li class="answers_subtree" id="answer_<?= $answer['answer_id']; ?>">
                             <div class="container">
@@ -30,7 +33,7 @@
                                         <?php } ?>
                                         <?php if ($post['post_user_id'] == $answer['answer_user_id']) { ?>
                                             <span class="mr5 ml5">
-                                                <span class="authorpost">&#x21af;</span>
+                                                <span class="red">&#x21af;</span>
                                             </span>
                                         <?php } ?>
                                         <span class="mr5 ml5">
@@ -133,7 +136,7 @@
                                         </span>
                                         <?php if ($post['post_user_id'] == $comment['comment_user_id']) { ?>
                                             <span class="mr5 ml5">
-                                                <span class="authorpost">&#x21af;</span>
+                                                <span class="red">&#x21af;</span>
                                             </span>
                                         <?php } ?>
                                         <?php if ($comment['comment_comment_id'] > 0) { ?>
@@ -210,10 +213,7 @@
         <?php } ?>
     </div>
 <?php } else { ?>
-    <?php if ($post['post_closed'] != 1) { ?>
-        <div class="no-content gray">
-            <i class="icon-info green middle"></i>
-            <span class="middle"><?= lang('There are no comments'); ?>...</span>
-        </div>
+    <?php if ($post['post_closed'] != 1) { ?> 
+       <?= no_content('There are no comments'); ?>
     <?php } ?>
 <?php } ?>

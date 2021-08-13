@@ -141,7 +141,6 @@ img {
 .blue { color: #54b9f7; }
 .white { color: #fff; }
 .red { color: #e45735; }
-
 .max-width { max-width: 780px; }
 .clear { clear: both; }
 .right { float: right; }
@@ -161,7 +160,7 @@ img {
 .uppercase { text-transform: uppercase; }
 .fw300 { font-weight: 300; }
 .block { display: block; }
-
+.bg-lightyellow { background-color: lightyellow; }
 
 .flex {
   display: flex;
@@ -509,10 +508,18 @@ textarea:focus {
   border-radius: 50%;
 }
 
-.no-content {
-  padding: 10px 15px;
-  margin: 10px 0;
-  background-color: lightyellow;
+.to-user {
+  background: #e7edf3;
+  color: #667d99;
+  border-radius: 4px;
+  padding: 2px 5px;
+  font-size: 14px;
+}
+
+.pagination-active {
+  background-color: #e45735;
+  color: #fff;
+  padding: 2px 6px;
 }
 
 /* Search */
@@ -588,15 +595,6 @@ img.img-post,
   opacity: 0.8;
 }
 
-.lo-post {
-  max-width: 660px;
-  background-color: #f3f3f3;
-}
-
-.post-full-footer {
-  border-bottom: 1px solid #ddd;
-}
-
 .title {
   font-weight: 500;
   color: #111;
@@ -642,10 +640,18 @@ img.img-post,
   position: relative;
 }
 
+.lo-post {
+  max-width: 660px;
+  background-color: #f3f3f3;
+}
+
+.post-full-footer {
+  border-bottom: 1px solid #ddd;
+}
+
 /* Answers */
 .line {
   border-top: 2px dotted #ddd;
-  margin-bottom: 20px;
 }
 
 .line-qa {
@@ -668,10 +674,6 @@ img.img-post,
 
 .reply.active {
   display: block;
-}
-
-.authorpost {
-  color: #f8a853;
 }
 
 ol,
@@ -850,7 +852,6 @@ a.tags.avtive {
 /* Info space and recommended in the post */
 .l-rec {
   font-size: 26px;
-  float: left;
   color: rgba(48, 41, 41, 0.51);
   margin-top: 2px;
 }
@@ -876,29 +877,18 @@ h3.recommend {
   font-weight: 400;
 }
 
-.menu-info a.active {
-  color: #e45735;
-}
-
-#myChart {
-  max-width: 96%;
-}
-
 /* Footer */
 footer {
   background-color: #3c464d;
   clear: both;
-  padding: 10px 20px 20px 20px;
 }
 
 .text-info {
   width: 20%;
-  float: left;
 }
 
 .text-oth {
   width: 36%;
-  float: left;
 }
 
 .p-head,
@@ -910,10 +900,6 @@ footer {
 footer a.footer {
   display: block;
   margin-bottom: 3px;
-}
-
-.p-head-n {
-  margin-bottom: 10px;
 }
 
 .p-head::before {
@@ -989,7 +975,6 @@ footer a.footer:hover {
 
 .oblong-box {
   position: relative;
-  float: left;
   padding: 10px 5px 10px 68px;
   border-bottom: 1px solid #f2f2f2;
   min-height: 60px;

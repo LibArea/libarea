@@ -219,25 +219,16 @@
                 <?php if ($post['post_type'] == 0) { ?>
                     <?php include TEMPLATE_DIR . '/post/comment-view.php'; ?>
                     <?php if ($post['post_closed'] == 1) { ?>
-                        <p class="no-content gray">
-                            <i class="icon-lock middle"></i>
-                            <span class="middle"><?= lang('The post is closed'); ?>...</span>
-                        </p>
+                        <?= no_content('The post is closed'); ?>
                     <?php } ?>
                 <?php } else { ?>
                     <?php include TEMPLATE_DIR . '/post/questions-view.php'; ?>
                     <?php if ($post['post_closed'] == 1) { ?>
-                        <p class="no-content gray">
-                            <i class="icon-lock middle"></i>
-                            <span class="middle"><?= lang('The question is closed'); ?>...</span>
-                        </p>
+                        <?= no_content('The question is closed'); ?>
                     <?php } ?>
                 <?php } ?>
             <?php } else { ?>
-                <p class="no-content gray">
-                    <i class="icon-info middle"></i>
-                    <span class="middle"><?= lang('This is a draft'); ?>...</span>
-                </p>
+                <?= no_content('This is a draft'); ?>
             <?php } ?>
         </article>
     </main>
@@ -280,7 +271,7 @@
                     foreach ($recommend as  $rec_post) {
                         $n++; ?>
                         <div class="mb10 hidden">
-                            <div class="l-rec">0<?= $n; ?></div>
+                            <div class="l-rec left">0<?= $n; ?></div>
                             <div class="l-rec-telo">
                                 <a class="edit-bl" href="/post/<?= $rec_post['post_id']; ?>/<?= $rec_post['post_slug']; ?>">
                                     <?= $rec_post['post_title']; ?>

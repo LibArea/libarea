@@ -104,5 +104,5 @@
   <?php } ?>
 
 <?php } else { ?>
-  <div class="no-content"><?= lang('There are no posts'); ?>...</div>
+    <?= no_content('There are no posts'); ?>
 <?php } ?>
