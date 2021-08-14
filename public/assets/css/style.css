@@ -144,8 +144,8 @@ img {
 .max-width { max-width: 780px; }
 .width-100 { width: 100%; }
 .clear { clear: both; }
-.right { float: right; }
 .left { float: left; }
+.right { float: right; }
 .right-10 { right: 10px; }
 .size-13 { font-size: 13px; }
 .size-15 { font-size: 15px; }
@@ -161,6 +161,7 @@ img {
 .uppercase { text-transform: uppercase; }
 .fw300 { font-weight: 300; }
 .block { display: block; }
+.relative { position: relative; }
 .bg-lightyellow { background-color: lightyellow; }
 
 .flex {
@@ -443,8 +444,6 @@ textarea:focus {
 .login-nav-home input#rememberme {
   height: 12px;
   width: 12px;
-  float: left;
-  margin-right: 5px;
 }
 
 .login-nav-home label#rem-text {
@@ -560,11 +559,6 @@ form.form {
   padding: 1px 15px;
 }
 
-.post-telo.full {
-  overflow: hidden;
-  margin-bottom: 22px;
-}
-
 .post-body img.thumb,
 img.thumb {
   margin: 5px 15px 0 30px;
@@ -601,7 +595,7 @@ img.img-post,
   color: #111;
 }
 
-.post-telo .title:hover {
+.title:hover {
   color: #e45735;
 }
 
@@ -631,14 +625,12 @@ img.img-post,
 }
 
 .bar-space-telo {
-  display: flex;
   align-items: center;
   margin-bottom: 3px;
   width: 140px;
   text-decoration: none;
   white-space: nowrap;
   text-overflow: ellipsis;
-  position: relative;
 }
 
 .lo-post {
@@ -721,7 +713,6 @@ ol.comment-telo {
   width: 130px;
   border-radius: 3px;
   border: 1px solid #ddd;
-  float: right;
 }
 
 .qa-ava img {
@@ -892,11 +883,7 @@ footer {
   width: 36%;
 }
 
-.p-head,
-.p-head-n {
-  position: relative;
-  margin: 5px 0 20px 0;
-}
+.p-head { margin: 5px 0 20px 0; }
 
 footer a.footer {
   display: block;
@@ -975,7 +962,6 @@ footer a.footer:hover {
 }
 
 .oblong-box {
-  position: relative;
   padding: 10px 5px 10px 68px;
   border-bottom: 1px solid #f2f2f2;
   min-height: 60px;

@@ -11,7 +11,7 @@
                 <input type="password" placeholder="<?= lang('Enter your password'); ?>" name="password" id="password">
             </div>
             <div class="mb20">
-                <input type="checkbox" id="rememberme" name="rememberme" value="1">
+                <input type="checkbox" id="rememberme" class="left mr5" name="rememberme" value="1">
                 <label id="rem-text" class="form-check-label" for="rememberme"><?= lang('Remember me'); ?></label>
             </div>
             <div class="mb20">

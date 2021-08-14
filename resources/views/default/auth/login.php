@@ -16,7 +16,7 @@
                             <input type="password" class="form-input" name="password" id="password" value="">
                         </div>
                         <div class="boxline">
-                            <input type="checkbox" id="rememberme" name="rememberme" value="1">
+                            <input type="checkbox" class="left mr5" id="rememberme" name="rememberme" value="1">
                             <label class="form-check-label" for="rememberme"><?= lang('Remember me'); ?></label>
                         </div>
                         <div class="boxline">

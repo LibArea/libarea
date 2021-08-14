@@ -2,19 +2,19 @@
 <footer class="footer mt15 pt10 mr20 mb20 ml20">
   <div class="wrap white">
     <div class="text-info left no-mob">
-      <h4 class="p-head two"><?= lang('Info'); ?></h4>
+      <h4 class="p-head relative two"><?= lang('Info'); ?></h4>
       <a class="footer white size-13" title="<?= lang('Spaces'); ?>" href="/spaces"><?= lang('Spaces'); ?></a>
       <a class="footer white size-13" title="<?= lang('Topics'); ?>" href="/topics"><?= lang('Topics'); ?></a>
       <a class="footer white size-13" title="<?= lang('Users'); ?>" href="/users"><?= lang('Users'); ?></a>
     </div>
     <div class="text-info no-mob">
-      <h4 class="p-head three"><?= lang('Other'); ?></h4>
+      <h4 class="p-head relative three"><?= lang('Other'); ?></h4>
       <a class="footer white size-13" title="<?= lang('All answers'); ?>" href="/answers"><?= lang('Answers-n'); ?></a>
       <a class="footer white size-13" title="<?= lang('All comments'); ?>" href="/comments"><?= lang('Comments-n'); ?></a>
       <a class="footer white size-13" title="<?= lang('All domains'); ?>" href="/web"><?= lang('Domains'); ?></a>
     </div>
     <div class="text-info">
-      <h4 class="p-head one"><?= lang('Help'); ?></h4>
+      <h4 class="p-head relative one"><?= lang('Help'); ?></h4>
       <a class="footer white size-13" title="<?= lang('Info'); ?>" href="/info"><?= lang('Info'); ?></a>
       <a class="footer white size-13 no-mob" title="<?= lang('Privacy'); ?>" href="/info/privacy"><?= lang('Privacy'); ?></a>
     </div>

@@ -8,7 +8,7 @@
                     <div class="moderations">
 
                         <?php foreach ($moderations as  $mod) { ?>
-                            <div class="post-telo white-box">
+                            <div class="white-box">
                                 <div class="size-13 lowercase">
                                     <a href="/u/<?= $mod['login']; ?>">
                                         <?= user_avatar_img($mod['avatar'], 'small', $mod['login'], 'ava'); ?>

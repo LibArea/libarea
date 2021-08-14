@@ -14,7 +14,7 @@
                 <?php if (!empty($topics)) { ?>
                     <div class="oblong-box-list topic-box-list">
                         <?php foreach ($topics as $topic) { ?>
-                            <div class="oblong-box left">
+                            <div class="oblong-box relative left">
                                 <a title="<?= $topic['topic_title']; ?>" class="img-box absolute" href="/topic/<?= $topic['topic_slug']; ?>">
                                     <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'ava-54'); ?>
                                 </a>

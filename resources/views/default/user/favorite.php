@@ -71,7 +71,7 @@
                             </div> 
                         <?php } ?>
                         <?php if ($fav['favorite_type'] == 2) { ?>
-                            <div class="post-telo fav-answ">
+                            <div>
                                 <?php if ($uid['id'] == $fav['favorite_user_id']) { ?>
                                     <span class="add-favorite right size-13" data-id="<?= $fav['answer_id']; ?>" data-type="answer">
                                         <?= lang('Remove'); ?>

@@ -89,9 +89,9 @@
               <?= lang('Signed'); ?>
             </div>
             <?php foreach ($data['space_user'] as  $sig) { ?>
-              <a class="bar-space-telo pt5 pb5 hidden gray" href="/s/<?= $sig['space_slug']; ?>" title="<?= $sig['space_name']; ?>">
+              <a class="bar-space-telo flex relative pt5 pb5 hidden gray" href="/s/<?= $sig['space_slug']; ?>" title="<?= $sig['space_name']; ?>">
                 <?= spase_logo_img($sig['space_img'], 'small', $sig['space_name'], 'ava-24 mr5'); ?>
-                <span class="mr5 ml5 size-13"><?= $sig['space_name']; ?></span>
+                <span class="ml5 size-13"><?= $sig['space_name']; ?></span>
                 <?php if ($sig['space_user_id'] == $uid['id']) { ?>
                   <sup class="red mr5 ml5">+</sup>
                 <?php } ?>

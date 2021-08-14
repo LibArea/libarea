@@ -36,7 +36,7 @@
 
             <div class="wrap">
                 <main>
-                    <div class="profile-box-telo white-box">
+                    <div class="profile-box-telo hidden white-box">
                         <div class="pt5 pr15 pb5 pl15">
 
                             <div class="profile-header-telo">
@@ -46,43 +46,45 @@
                                 </h1>
                             </div>
 
-                            <div class="stats<?php if ($user['cover_art'] == 'cover_art.jpeg') { ?> no-cover<?php } ?>">
+                            <div class="left mt10 stats<?php if ($user['cover_art'] == 'cover_art.jpeg') { ?> no-cover<?php } ?>">
                                 <?php if ($user['ban_list'] == 0) { ?>
                                     <?php if ($data['posts_count'] > 0) { ?>
-                                        <label class="required"><?= lang('Posts-m'); ?>:</label>
-                                        <span class="right">
-                                            <a title="<?= lang('Posts-m'); ?> <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/posts">
-                                                <?= $data['posts_count']; ?>
-                                            </a>
-                                        </span>
-                                        <br>
+                                        <div class="mb5">
+                                            <label class="required"><?= lang('Posts-m'); ?>:</label>
+                                            <span class="right">
+                                                <a title="<?= lang('Posts-m'); ?> <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/posts">
+                                                    <?= $data['posts_count']; ?>
+                                                </a>
+                                            </span>
+                                        </div>
                                     <?php } ?>
                                     <?php if ($data['answers_count'] > 0) { ?>
-                                        <label class="required"><?= lang('Answers'); ?>:</label>
-                                        <span class="right">
-                                            <a title="<?= lang('Answers'); ?> <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/answers">
-                                                <?= $data['answers_count']; ?>
-                                            </a>
-                                        </span>
-                                        <br>
+                                        <div class="mb5">
+                                            <label class="required"><?= lang('Answers'); ?>:</label>
+                                            <span class="right">
+                                                <a title="<?= lang('Answers'); ?> <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/answers">
+                                                    <?= $data['answers_count']; ?>
+                                                </a>
+                                            </span>
+                                        </div>
                                     <?php } ?>
                                     <?php if ($data['comments_count'] > 0) { ?>
-                                        <label class="required"><?= lang('Comments'); ?>:</label>
-                                        <span class="right">
-                                            <a title="<?= lang('Comments'); ?> <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/comments">
-                                                <?= $data['comments_count']; ?>
-                                            </a>
-                                        </span>
-                                        <br>
+                                        <div class="mb5">
+                                            <label class="required"><?= lang('Comments'); ?>:</label>
+                                            <span class="right">
+                                                <a title="<?= lang('Comments'); ?> <?= $user['login']; ?>" href="/u/<?= $user['login']; ?>/comments">
+                                                    <?= $data['comments_count']; ?>
+                                                </a>
+                                            </span>
+                                        </div>
                                     <?php } ?>
 
                                     <?php if ($data['spaces_user']) { ?>
-                                        <br>
                                         <div class="uppercase mb5 mt5 size-13"><?= lang('Created by'); ?></div>
                                         <span class="d">
                                             <?php foreach ($data['spaces_user'] as  $space) { ?>
-                                                <div class="profile-space">
-                                                    <a class="bar-space-telo pt5 pb5 hidden gray" href="/s/<?= $space['space_slug']; ?>">
+                                                <div class="mt5 mb5">
+                                                    <a class="bar-space-telo flex relative pt5 pb5 hidden gray" href="/s/<?= $space['space_slug']; ?>">
                                                         <?= spase_logo_img($space['space_img'], 'small', $space['space_name'], 'space-logo mr5'); ?>
                                                         <span class="bar-name size-13"><?= $space['space_name']; ?></span>
                                                     </a>
@@ -95,15 +97,15 @@
                                 <?php } ?>
                             </div>
 
-                            <div class="box profile-telo">
+                            <div class="box profile-telo left">
 
-                                <div class="profile-about">
+                                <div class="mb20">
                                     <blockquote>
                                         <?= $user['about']; ?>...
                                     </blockquote>
                                 </div>
 
-                                <div class="profile-about">
+                                <div class="mb20">
                                     <i class="icon-calendar middle"></i>
                                     <span class="middle">
                                         <span class="ts"><?= $user['created_at']; ?></span> —
@@ -111,7 +113,7 @@
                                     </span>
                                 </div>
 
-                                <h2><?= lang('Contacts'); ?></h2>
+                                <h2 class="mb5 uppercase pt15 size-13"><?= lang('Contacts'); ?></h2>
 
                                 <?php if ($user['website']) { ?>
                                     <div class="boxline">
@@ -174,38 +176,35 @@
                                 <?php } ?>
 
                                 <?php if ($user['my_post'] != 0) { ?>
-                                    <br>
-                                    <h3><?= lang('Selected Post'); ?></h3>
+                                    <h3 class="mb5 uppercase pt15 size-13"><?= lang('Selected Post'); ?></h3>
 
-                                    <div class="post-telo">
-                                        <div class="post-body">
-                                            <a href="/post/<?= $onepost['post_id']; ?>/<?= $onepost['post_slug']; ?>">
-                                                <h2><?= $onepost['post_title']; ?></h2>
+                                    <div class="post-body mb15">
+                                        <a class="title" href="/post/<?= $onepost['post_id']; ?>/<?= $onepost['post_slug']; ?>">
+                                            <?= $onepost['post_title']; ?>
+                                        </a>
+
+                                        <div class="size-13 lowercase">
+                                            <a class="gray" href="/u/<?= $user['login']; ?>">
+                                                <?= user_avatar_img($user['avatar'], 'small', $user['login'], 'ava'); ?>
+                                                <span class="mr5 ml5"></span>
+                                                <?= $user['login']; ?>
                                             </a>
 
-                                            <div class="size-13 lowercase">
-                                                <a class="gray" href="/u/<?= $user['login']; ?>">
-                                                    <?= user_avatar_img($user['avatar'], 'small', $user['login'], 'ava'); ?>
+                                            <span class="mr5 ml5"> &#183; </span>
+                                            <span class="gray"><?= $onepost['post_date'] ?></span>
+
+                                            <span class="mr5 ml5"> &#183; </span>
+                                            <a class="gray" href="/s/<?= $onepost['space_slug']; ?>" title="<?= $onepost['space_name']; ?>">
+                                                <?= $onepost['space_name']; ?>
+                                            </a>
+
+                                            <?php if ($onepost['post_answers_count'] != 0) { ?>
+                                                <a class="gray right" href="/post/<?= $onepost['post_id']; ?>/<?= $onepost['post_slug']; ?>">
                                                     <span class="mr5 ml5"></span>
-                                                    <?= $user['login']; ?>
+                                                    <i class="icon-comment-empty middle"></i>
+                                                    <?= $onepost['post_answers_count']; ?>
                                                 </a>
-
-                                                <span class="mr5 ml5"> &#183; </span>
-                                                <span class="gray"><?= $onepost['post_date'] ?></span>
-
-                                                <span class="mr5 ml5"> &#183; </span>
-                                                <a class="gray" href="/s/<?= $onepost['space_slug']; ?>" title="<?= $onepost['space_name']; ?>">
-                                                    <?= $onepost['space_name']; ?>
-                                                </a>
-
-                                                <?php if ($onepost['post_answers_count'] != 0) { ?>
-                                                    <a class="gray right" href="/post/<?= $onepost['post_id']; ?>/<?= $onepost['post_slug']; ?>">
-                                                        <span class="mr5 ml5"></span>
-                                                        <i class="icon-comment-empty middle"></i>
-                                                        <?= $onepost['post_answers_count']; ?>
-                                                    </a>
-                                                <?php } ?>
-                                            </div>
+                                            <?php } ?>
                                         </div>
                                     </div>
                                 <?php } ?>
@@ -214,9 +213,9 @@
                     </div>
                 </main>
                 <aside>
-                    <div class="profile-box-telo white-box">
+                    <div class="profile-box-telo relative white-box">
                         <div class="pt5 pr15 pb5 pl15">
-                            <h3 class="badge"><?= lang('Badges'); ?></h3>
+                            <h3 class="mt0 mb5 uppercase pt10 size-13"><?= lang('Badges'); ?></h3>
                             <div class="profile-badge">
                                 <?php if ($user['id'] < 50) { ?>
                                     <i title="<?= lang('Joined in the early days'); ?>" class="icon-award green"></i>
@@ -230,9 +229,9 @@
                     <?php if ($uid['trust_level'] > 4) { ?>
                         <div class="profile-box-telo white-box">
                             <div class="pt5 pr15 pb5 pl15">
-                                <h3 class="badge"><?= lang('Admin'); ?></h3>
-                                <div class="menu-info">
-                                    <a class="gray size-15 block" href="/admin/users/<?= $user['id']; ?>/edit">
+                                <h3 class="mt0 mb10 uppercase pt10 size-13"><?= lang('Admin'); ?></h3>
+                                <div class="mb5">
+                                    <a class="gray size-15 mb5 block" href="/admin/users/<?= $user['id']; ?>/edit">
                                         <i class="icon-cog-outline middle"></i>
                                         <span class="middle"><?= lang('Edit'); ?></span>
                                     </a>

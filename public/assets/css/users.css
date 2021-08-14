@@ -1,7 +1,3 @@
-.profile-box-telo {
-  position: relative;
-}
-
 .profile-header-telo {
   margin: 10px 0 0 184px;
   color: #666;
@@ -25,12 +21,6 @@
   top: 20px;
 }
 
-.profile-cover {
-  position: relative;
-  height: 240px;
-  overflow: hidden;
-}
-
 .profile-ava img.ava {
   width: 160px;
   height: 160px;
@@ -52,8 +42,6 @@ h1.profile {
 }
 
 .stats {
-  float: left;
-  margin: 10px 0 0 0;
   width: 165px;
 }
 
@@ -63,45 +51,16 @@ h1.profile {
 
 .box.profile-telo {
   width: calc(100% - 230px);
-  float: left;
-  margin: 18px 0 0 50px;
-}
-
-.box.profile-telo .post-body {
-  margin-left: 0;
-}
-
-.box.profile-telo .post-telo {
-  margin-bottom: 12px;
-  background-color: #f3f3f3;
-  padding: 10px;
-  display: table;
+  margin: 5px 0 0 50px;
 }
 
 .profile-badge i {
   font-size: 32px;
 }
 
-h3.badge {
-  border-bottom: 1px solid #ddd;
-  padding: 5px 0 10px 0;
-  margin: 0 0 10px 0;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  font-size: 13px;
-  color: #333;
+h2,
+h3 {
   font-weight: 400;
-}
-
-.box.profile-telo h2,
-.box.profile-telo h3 {
-  font-weight: 400;
-  font-size: 18px;
-  margin: 0 0 10px 0;
-}
-
-.profile-space {
-  margin: 8px 0 8px 0;
 }
 
 .all-users {
@@ -121,11 +80,7 @@ h3.badge {
   border-radius: 50%;
 }
 
-.profile-box-telo .box.wide label {
-  width: 9.5em;
-}
-
-.profile-about blockquote {
+.profile-telo blockquote {
   margin: 0.8em 0 0.8em 0;
 }
 

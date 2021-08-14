@@ -9,7 +9,7 @@
                     <?php if (!empty($drafts)) { ?>
 
                         <?php foreach ($drafts as $dr) { ?>
-                            <div class="post-telo">
+                            <div class="mb10">
                                 <a href="/post/<?= $dr['post_id']; ?>/<?= $dr['post_slug']; ?>">
                                     <h3 class="title m0 size-21"><?= $dr['post_title']; ?></h3>
                                 </a>
