@@ -33,8 +33,8 @@
 
             <div class="answ-telo_bottom" id="answer_<?= $answer['answer_id']; ?>">
               <div class="size-13">
-                <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava'); ?>
-                <a class="date" href="/u/<?= $answer['login']; ?>"><?= $answer['login']; ?></a>
+                <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'ava'); ?>
+                <a class="date" href="/u/<?= $answer['user_login']; ?>"><?= $answer['user_login']; ?></a>
                 <span class="mr5 ml5"> &#183; </span>
                 <?= $answer['date']; ?>
 

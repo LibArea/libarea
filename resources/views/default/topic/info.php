@@ -8,7 +8,7 @@
                 </a>
 
                 <h1 class="topics"><a href="/topic/<?= $topic['topic_slug']; ?>"><?= $data['h1']; ?></a>
-                    <?php if ($uid['trust_level'] == 5) { ?>
+                    <?php if ($uid['user_trust_level'] == 5) { ?>
                         <a class="right gray-light" href="/admin/topics/<?= $topic['topic_id']; ?>/edit">
                             <i class="icon-pencil size-15"></i>
                         </a>

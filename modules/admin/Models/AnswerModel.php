@@ -28,11 +28,11 @@ class AnswerModel extends \MainModel
                     answer_post_id,
                     answer_votes,
                     answer_is_deleted,
-                    id, 
-                    login, 
-                    avatar
+                    user_id, 
+                    user_login, 
+                    user_avatar
                         FROM answers
-                        INNER JOIN users ON id = answer_user_id
+                        INNER JOIN users ON user_id = answer_user_id
                         INNER JOIN posts ON answer_post_id = post_id
                         $sort
                         ORDER BY answer_id DESC LIMIT $start, $limit ";

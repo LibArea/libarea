@@ -8,7 +8,7 @@
 
     <main>
         <article class="post-full">
-            <?php if ($post['post_is_deleted'] == 0 || $uid['trust_level'] == 5) { ?>
+            <?php if ($post['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
                 <div class="white-box p15<?php if ($post['post_is_deleted'] == 1) { ?> delleted pl15<?php } ?>">
 
                     <div class="post-body">
@@ -40,10 +40,10 @@
                             <?php } ?>
                         </h1>
                         <div class="size-13 lowercase flex gray-light">
-                            <a class="gray" href="/u/<?= $post['login']; ?>">
-                                <?= user_avatar_img($post['avatar'], 'small', $post['login'], 'ava'); ?>
+                            <a class="gray" href="/u/<?= $post['user_login']; ?>">
+                                <?= user_avatar_img($post['user_avatar'], 'small', $post['user_login'], 'ava'); ?>
                                 <span class="mr5 ml5">
-                                    <?= $post['login']; ?>
+                                    <?= $post['user_login']; ?>
                                 </span>
                             </a>
                             <span class="gray-light">
@@ -52,17 +52,17 @@
                                     (<?= lang('ed'); ?>)
                                 <?php } ?>
                             </span>
-                            <?php if ($uid['id']) { ?>
-                                <?php if ($uid['login'] == $post['login']  || $uid['trust_level'] == 5) { ?>
+                            <?php if ($uid['user_id']) { ?>
+                                <?php if ($uid['user_login'] == $post['user_login']  || $uid['user_trust_level'] == 5) { ?>
                                     <span class="mr5 ml5">&#183;</span>
                                     <a class="gray-light" href="/post/edit/<?= $post['post_id']; ?>">
                                         <?= lang('Edit'); ?>
                                     </a>
                                 <?php } ?>
-                                <?php if ($uid['login'] == $post['login']) { ?>
+                                <?php if ($uid['user_login'] == $post['user_login']) { ?>
                                     <?php if ($post['post_draft'] == 0) { ?>
                                         <span class="mr5 ml5">&#183;</span>
-                                        <?php if ($post['my_post'] == $post['post_id']) { ?>
+                                        <?php if ($post['user_my_post'] == $post['post_id']) { ?>
                                             <span class="mu_post gray-light">+ <?= lang('in-the-profile'); ?></span>
                                         <?php } else { ?>
                                             <a class="user-mypost gray-light" data-opt="1" data-post="<?= $post['post_id']; ?>">
@@ -80,7 +80,7 @@
                                     <?php } ?>
                                 </span>
 
-                                <?php if ($uid['trust_level'] == 5) { ?>
+                                <?php if ($uid['user_trust_level'] == 5) { ?>
                                     <span class="mr5 ml5"> &#183; </span>
                                     <span id="cm_dell">
                                         <a data-type="post" data-id="<?= $post['post_id']; ?>" class="type-action gray-light">
@@ -157,7 +157,7 @@
 
                     </div>
                     <div class="post-full-footer mb20 pb5 hidden flex justify-content-between gray">
-                        <?= votes($uid['id'], $post, 'post'); ?>
+                        <?= votes($uid['user_id'], $post, 'post'); ?>
 
                        <span class="right gray-light">
                             <i class="icon-commenting-o middle"></i>
@@ -165,7 +165,7 @@
                         </span>
 
                     </div>
-                    <?php if (!$uid['id']) { ?>
+                    <?php if (!$uid['user_id']) { ?>
                         <a class="right size-13 mb15 add-focus focus-topic" href="/login">
                             + <?= lang('Read'); ?>
                         </a>
@@ -183,7 +183,7 @@
                     
                     <div>
                         <?php if ($post['post_type'] == 0 && $post['post_draft'] == 0) { ?>
-                            <?php if ($uid['id'] > 0) { ?>
+                            <?php if ($uid['user_id'] > 0) { ?>
                                 <?php if ($post['post_closed'] == 0) { ?>
                                     <form id="add_answ" class="new_answer" action="/answer/create" accept-charset="UTF-8" method="post">
                                         <?= csrf_field() ?>

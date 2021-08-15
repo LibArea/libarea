@@ -12,10 +12,10 @@
                 <?php if ($answer['answer_is_deleted'] == 0) { ?>
                     <div class="white-box">
                         <div class="pt15 pr15 pb0 pl15 size-13">
-                            <a class="gray" href="/u/<?= $answer['login']; ?>">
-                                <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava'); ?>
+                            <a class="gray" href="/u/<?= $answer['user_login']; ?>">
+                                <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'ava'); ?>
                                 <span class="mr5 ml5"></span>
-                                <?= $answer['login']; ?>
+                                <?= $answer['user_login']; ?>
                             </a>
                             <span class="mr5 ml5 gray lowercase">
                                 <?= $answer['date']; ?>

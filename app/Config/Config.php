@@ -20,7 +20,6 @@ class Config
     const PARAM_SEARCH          = "parameters.search";
 
     const PARAM_SITE_OFF        = "parameters.siteoff";
-    const PARAM_OFF_TEXT        = "parameters.offtext";
 
     const PARAM_SMTP_USER       = "parameters.smtpuser";
     const PARAM_SMTP_PASS       = "parameters.smtppass";

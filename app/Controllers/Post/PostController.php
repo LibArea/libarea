@@ -25,13 +25,13 @@ class PostController extends \MainController
 
         $post_new   = PostModel::getPostId($post_id);
 
-        // Проверим (id, slug)
+        // Проверим (user_id, user_slug)
         Base::PageError404($post_new);
         if ($slug != $post_new['post_slug']) {
             redirect('/post/' . $post_new['post_id'] . '/' . $post_new['post_slug']);
         }
 
-        $post = PostModel::getPostSlug($slug, $uid['id'], $uid['trust_level']);
+        $post = PostModel::getPostSlug($slug, $uid['user_id'], $uid['user_trust_level']);
         Base::PageError404($post);
 
         // Редирект для слияния
@@ -50,7 +50,7 @@ class PostController extends \MainController
         }
 
         // Рекомендованные посты
-        $recommend = PostModel::postsSimilar($post['post_id'], $post['post_space_id'], $uid['id'], 5);
+        $recommend = PostModel::postsSimilar($post['post_id'], $post['post_space_id'], $uid['user_id'], 5);
 
         // Выводить или нет? Что дает просмотр даты изменения?
         // Учитывать ли изменение в сортировки и в оповещение в будущем...
@@ -59,7 +59,7 @@ class PostController extends \MainController
         $topics = PostModel::getPostTopic($post['post_id']);
 
         // Покажем черновик только автору
-        if ($post['post_draft'] == 1 && $post['post_user_id'] != $uid['id']) {
+        if ($post['post_draft'] == 1 && $post['post_user_id'] != $uid['user_id']) {
             redirect('/');
         }
 
@@ -71,11 +71,11 @@ class PostController extends \MainController
         $comment_n = $post['post_comments_count'] + $post['post_answers_count'];
         $post['num_comments']   = word_form($comment_n, lang('Comment'), lang('Comments-m'), lang('Comments'));
 
-        $post['favorite_post']  = FavoriteModel::getUserFavorite($post['post_id'], $uid['id'], 1);
+        $post['favorite_post']  = FavoriteModel::getUserFavorite($post['post_id'], $uid['user_id'], 1);
 
         // Получим ответы
         // post_type: 0 - дискуссия, 1 - Q&A
-        $post_answers = AnswerModel::getAnswersPost($post['post_id'], $uid['id'], $post['post_type']);
+        $post_answers = AnswerModel::getAnswersPost($post['post_id'], $uid['user_id'], $post['post_type']);
 
         // Получим ЛО (временно)
         // Возможно нам стоит просто поднять ответ на первое место?
@@ -93,7 +93,7 @@ class PostController extends \MainController
                 $row['edit'] = 1;
             }
 
-            $row['comm']            = CommentModel::getComments($row['answer_id'], $uid['id']);
+            $row['comm']            = CommentModel::getComments($row['answer_id'], $uid['user_id']);
             $row['answer_content']  = Content::text($row['answer_content'], 'text');
             $row['answer_date']     = lang_date($row['answer_date']);
             $answers[$ind]          = $row;
@@ -104,7 +104,7 @@ class PostController extends \MainController
             $content_img  = Config::get(Config::PARAM_URL) . '/uploads/posts/cover/' . $post['post_content_img'];
         }
 
-        $post_signed   = SubscriptionModel::getFocus($post['post_id'], $uid['id'], 'post');
+        $post_signed   = SubscriptionModel::getFocus($post['post_id'], $uid['user_id'], 'post');
 
         $desc  = mb_strcut(strip_tags($post['post_content']), 0, 180);
         $meta_desc = $desc . ' — ' . $post['space_name'];
@@ -118,7 +118,7 @@ class PostController extends \MainController
         Request::getResources()->addBottomScript('/assets/js/prism.js');
         Request::getResources()->addBottomStyles('/assets/css/prism.css');
 
-        if ($uid['id'] > 0 && $post['post_closed'] == 0) {
+        if ($uid['user_id'] > 0 && $post['post_closed'] == 0) {
             Request::getResources()->addBottomStyles('/assets/editor/editormd.css');
             Request::getResources()->addBottomScript('/assets/editor/editormd.min.js');
             Request::getResources()->addBottomScript('/assets/editor/config-no-preview.js');
@@ -157,7 +157,7 @@ class PostController extends \MainController
         Base::PageError404($user);
 
         $limit = 100;
-        $data       = ['post_user_id' => $user['id']];
+        $data       = ['post_user_id' => $user['user_id']];
         $posts      = FeedModel::feed($page, $limit, $uid, $sheet, 'user', $data);
         $pagesCount = FeedModel::feedCount($uid, 'user', $data);
 
@@ -202,7 +202,7 @@ class PostController extends \MainController
             return false;
         }
 
-        PostModel::addPostProfile($post_id, $uid['id']);
+        PostModel::addPostProfile($post_id, $uid['user_id']);
 
         return true;
     }
@@ -216,7 +216,7 @@ class PostController extends \MainController
 
         Base::PageRedirection($post);
 
-        PostModel::setPostFavorite($post_id, $uid['id']);
+        PostModel::setPostFavorite($post_id, $uid['user_id']);
 
         return true;
     }

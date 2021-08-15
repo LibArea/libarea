@@ -136,7 +136,7 @@ CREATE TABLE `links` (
   `link_id` int(11) NOT NULL,
   `link_url` varchar(255) DEFAULT NULL,
   `link_url_domain` varchar(255) DEFAULT NULL,
-  `link_title` varchar(250) NOT NULL,
+  `link_title` varchar(255) NOT NULL,
   `link_content` text NOT NULL,
   `link_add_uid` int(11) NOT NULL DEFAULT 0 COMMENT 'Кто добавил',
   `link_user_id` int(11) NOT NULL DEFAULT 0,
@@ -157,14 +157,14 @@ CREATE TABLE `links` (
 --
 
 CREATE TABLE `messages` (
-  `id` int(11) NOT NULL,
-  `uid` int(11) DEFAULT NULL COMMENT 'Отправитель',
-  `dialog_id` int(11) DEFAULT NULL,
-  `message` text DEFAULT NULL,
-  `add_time` timestamp NOT NULL DEFAULT current_timestamp(),
-  `sender_remove` tinyint(1) DEFAULT 0,
-  `recipient_remove` tinyint(1) DEFAULT 0,
-  `receipt` timestamp NOT NULL DEFAULT current_timestamp()
+  `message_id` int(11) NOT NULL,
+  `message_sender_id` int(11) DEFAULT NULL COMMENT 'Отправитель',
+  `message_dialog_id` int(11) DEFAULT NULL,
+  `message_content` text DEFAULT NULL,
+  `message_add_time` timestamp NOT NULL DEFAULT current_timestamp(),
+  `message_sender_remove` tinyint(1) DEFAULT 0,
+  `message_recipient_remove` tinyint(1) DEFAULT 0,
+  `message_receipt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -174,15 +174,15 @@ CREATE TABLE `messages` (
 --
 
 CREATE TABLE `messages_dialog` (
-  `id` int(11) NOT NULL,
-  `sender_uid` int(11) DEFAULT NULL COMMENT 'Отправитель',
-  `sender_unread` int(11) DEFAULT NULL COMMENT 'Отправитель, 0 непрочитано',
-  `recipient_uid` int(11) DEFAULT NULL COMMENT 'Получатель',
-  `recipient_unread` int(11) DEFAULT NULL COMMENT 'Получатель, 0 непрочитано',
-  `add_time` timestamp NOT NULL DEFAULT current_timestamp(),
-  `update_time` timestamp NOT NULL DEFAULT current_timestamp(),
-  `sender_count` int(11) DEFAULT NULL COMMENT 'Отправитель кол.',
-  `recipient_count` int(11) DEFAULT NULL COMMENT 'Получатель кол.'
+  `dialog_id` int(11) NOT NULL,
+  `dialog_sender_id` int(11) DEFAULT NULL COMMENT 'Отправитель',
+  `dialog_sender_unread` int(11) DEFAULT NULL COMMENT 'Отправитель, 0 непрочитано',
+  `dialog_recipient_id` int(11) DEFAULT NULL COMMENT 'Получатель',
+  `dialog_recipient_unread` int(11) DEFAULT NULL COMMENT 'Получатель, 0 непрочитано',
+  `dialog_add_time` timestamp NOT NULL DEFAULT current_timestamp(),
+  `dialog_update_time` timestamp NOT NULL DEFAULT current_timestamp(),
+  `dialog_sender_count` int(11) DEFAULT NULL COMMENT 'Отправитель кол.',
+  `dialog_recipient_count` int(11) DEFAULT NULL COMMENT 'Получатель кол.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -199,8 +199,8 @@ CREATE TABLE `moderations` (
   `mod_updated_at` datetime NOT NULL DEFAULT current_timestamp(),
   `mod_post_id` int(11) NOT NULL DEFAULT 0 COMMENT 'id поста',
   `mod_content_id` int(11) NOT NULL DEFAULT 0 COMMENT 'id контента',
-  `mod_action` varchar(250) NOT NULL COMMENT 'deleted, restored и т.д.',
-  `mod_reason` varchar(250) NOT NULL
+  `mod_action` varchar(255) NOT NULL COMMENT 'deleted, restored и т.д.',
+  `mod_reason` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -211,14 +211,14 @@ CREATE TABLE `moderations` (
 
 CREATE TABLE `notifications` (
   `notification_id` int(11) NOT NULL,
-  `sender_uid` int(11) DEFAULT NULL COMMENT 'Отправитель',
-  `recipient_uid` int(11) DEFAULT 0 COMMENT 'Получает ID',
-  `action_type` int(4) DEFAULT NULL COMMENT 'Тип оповещения',
-  `connection_type` int(11) DEFAULT NULL COMMENT 'Данные источника',
-  `url` varchar(250) DEFAULT NULL COMMENT 'URL источника',
-  `add_time` timestamp NOT NULL DEFAULT current_timestamp(),
-  `read_flag` tinyint(1) DEFAULT 0 COMMENT 'Состояние прочтения',
-  `is_del` tinyint(1) UNSIGNED DEFAULT 0 COMMENT 'Стоит ли удалять'
+  `notification_sender_id` int(11) DEFAULT NULL COMMENT 'Отправитель',
+  `notification_recipient_id` int(11) DEFAULT 0 COMMENT 'Получает ID',
+  `notification_action_type` int(4) DEFAULT NULL COMMENT 'Тип оповещения',
+  `notification_connection_type` int(11) DEFAULT NULL COMMENT 'Данные источника',
+  `notification_url` varchar(255) DEFAULT NULL COMMENT 'URL источника',
+  `notification_add_time` timestamp NOT NULL DEFAULT current_timestamp(),
+  `notification_read_flag` tinyint(1) DEFAULT 0 COMMENT 'Состояние прочтения',
+  `notification_is_deleted` tinyint(1) UNSIGNED DEFAULT 0 COMMENT 'Удаление'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -229,7 +229,7 @@ CREATE TABLE `notifications` (
 
 CREATE TABLE `posts` (
   `post_id` int(10) UNSIGNED NOT NULL,
-  `post_title` varchar(250) NOT NULL,
+  `post_title` varchar(255) NOT NULL,
   `post_slug` varchar(128) NOT NULL,
   `post_type` smallint(1) NOT NULL DEFAULT 0,
   `post_translation` smallint(1) NOT NULL DEFAULT 0,
@@ -247,16 +247,16 @@ CREATE TABLE `posts` (
   `post_comments_count` int(11) DEFAULT 0,
   `post_hits_count` int(11) DEFAULT 0,
   `post_content` text NOT NULL,
-  `post_content_img` varchar(250) DEFAULT NULL,
-  `post_thumb_img` varchar(250) DEFAULT NULL,
-  `post_related` varchar(250) DEFAULT NULL,
+  `post_content_img` varchar(255) DEFAULT NULL,
+  `post_thumb_img` varchar(255) DEFAULT NULL,
+  `post_related` varchar(255) DEFAULT NULL,
   `post_merged_id` int(11) NOT NULL DEFAULT 0 COMMENT 'id с чем объединен',
   `post_closed` tinyint(1) NOT NULL DEFAULT 0 COMMENT '1 - пост закрыт',
   `post_tl` smallint(1) NOT NULL DEFAULT 0 COMMENT 'Видимость по уровню доверия',
   `post_lo` int(11) NOT NULL DEFAULT 0 COMMENT 'Id лучшего ответа',
   `post_top` tinyint(1) NOT NULL DEFAULT 0 COMMENT '1 - пост поднят',
-  `post_url` varchar(250) DEFAULT NULL,
-  `post_url_domain` varchar(250) DEFAULT NULL,
+  `post_url` varchar(255) DEFAULT NULL,
+  `post_url_domain` varchar(255) DEFAULT NULL,
   `post_is_deleted` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -294,13 +294,13 @@ CREATE TABLE `reports` (
 
 CREATE TABLE `spaces` (
   `space_id` int(11) NOT NULL,
-  `space_name` varchar(250) NOT NULL,
+  `space_name` varchar(255) NOT NULL,
   `space_slug` varchar(128) NOT NULL,
-  `space_description` varchar(250) NOT NULL,
-  `space_img` varchar(250) NOT NULL DEFAULT 'space_no.png',
-  `space_cover_art` varchar(250) NOT NULL DEFAULT 'space_cover_no.jpeg',
+  `space_description` varchar(255) NOT NULL,
+  `space_img` varchar(255) NOT NULL DEFAULT 'space_no.png',
+  `space_cover_art` varchar(255) NOT NULL DEFAULT 'space_cover_no.jpeg',
   `space_text` text NOT NULL,
-  `space_short_text` varchar(250) NOT NULL,
+  `space_short_text` varchar(255) NOT NULL,
   `space_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `space_color` varchar(12) NOT NULL DEFAULT '#f56400',
   `space_category_id` int(11) NOT NULL DEFAULT 1,
@@ -443,42 +443,42 @@ CREATE TABLE `topics_signed` (
 --
 
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `login` varchar(50) NOT NULL,
-  `name` varchar(50) DEFAULT NULL,
-  `email` varchar(100) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `activated` tinyint(1) DEFAULT 0,
-  `limiting_mode` tinyint(1) DEFAULT 0,
-  `reg_ip` varchar(45) DEFAULT NULL,
-  `trust_level` int(11) NOT NULL COMMENT 'Уровень доверия. По умолчанию 0 (5 - админ)',
-  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `invitation_available` int(10) NOT NULL DEFAULT 0,
-  `invitation_id` int(11) NOT NULL DEFAULT 0,
-  `avatar` varchar(250) NOT NULL DEFAULT 'noavatar.png',
-  `cover_art` varchar(250) NOT NULL DEFAULT 'cover_art.jpeg',
-  `color` varchar(12) NOT NULL DEFAULT '#f56400',
-  `about` varchar(250) DEFAULT NULL,
-  `website` varchar(50) DEFAULT NULL,
-  `location` varchar(50) DEFAULT NULL,
-  `public_email` varchar(50) DEFAULT NULL,
-  `skype` varchar(50) DEFAULT NULL,
-  `twitter` varchar(50) DEFAULT NULL,
-  `telegram` varchar(50) DEFAULT NULL,
-  `vk` varchar(50) DEFAULT NULL,
-  `rating` int(11) DEFAULT 0,
-  `my_post` int(11) DEFAULT 0 COMMENT 'Пост выведенный в профиль',
-  `ban_list` tinyint(1) DEFAULT 0,
-  `hits_count` int(11) DEFAULT 0,
-  `is_deleted` tinyint(1) DEFAULT 0
+  `user_id` int(11) NOT NULL,
+  `user_login` varchar(50) NOT NULL,
+  `user_name` varchar(50) DEFAULT NULL,
+  `user_email` varchar(100) NOT NULL,
+  `user_password` varchar(255) NOT NULL,
+  `user_activated` tinyint(1) DEFAULT 0,
+  `user_limiting_mode` tinyint(1) DEFAULT 0,
+  `user_reg_ip` varchar(45) DEFAULT NULL,
+  `user_trust_level` int(11) NOT NULL COMMENT 'Уровень доверия. По умолчанию 0 (5 - админ)',
+  `user_created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `user_updated_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `user_invitation_available` int(10) NOT NULL DEFAULT 0,
+  `user_invitation_id` int(11) NOT NULL DEFAULT 0,
+  `user_avatar` varchar(255) NOT NULL DEFAULT 'noavatar.png',
+  `user_cover_art` varchar(255) NOT NULL DEFAULT 'cover_art.jpeg',
+  `user_color` varchar(12) NOT NULL DEFAULT '#f56400',
+  `user_about` varchar(250) DEFAULT NULL,
+  `user_website` varchar(50) DEFAULT NULL,
+  `user_location` varchar(50) DEFAULT NULL,
+  `user_public_email` varchar(50) DEFAULT NULL,
+  `user_skype` varchar(50) DEFAULT NULL,
+  `user_twitter` varchar(50) DEFAULT NULL,
+  `user_telegram` varchar(50) DEFAULT NULL,
+  `user_vk` varchar(50) DEFAULT NULL,
+  `user_rating` int(11) DEFAULT 0,
+  `user_my_post` int(11) DEFAULT 0 COMMENT 'Пост выведенный в профиль',
+  `user_ban_list` tinyint(1) DEFAULT 0,
+  `user_hits_count` int(11) DEFAULT 0,
+  `user_is_deleted` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`id`, `login`, `name`, `email`, `password`, `activated`, `limiting_mode`, `reg_ip`, `trust_level`, `created_at`, `updated_at`, `invitation_available`, `invitation_id`, `avatar`, `cover_art`, `color`, `about`, `website`, `location`, `public_email`, `skype`, `twitter`, `telegram`, `vk`, `rating`, `my_post`, `ban_list`, `hits_count`, `is_deleted`) VALUES
+INSERT INTO `users` (`user_id`, `user_login`, `user_name`, `user_email`, `user_password`, `user_activated`, `user_limiting_mode`, `user_reg_ip`, `user_trust_level`, `user_created_at`, `user_updated_at`, `user_invitation_available`, `user_invitation_id`, `user_avatar`, `user_cover_art`, `user_color`, `user_about`, `user_website`, `user_location`, `user_public_email`, `user_skype`, `user_twitter`, `user_telegram`, `user_vk`, `user_rating`, `user_my_post`, `user_ban_list`, `user_hits_count`, `user_is_deleted`) VALUES
 (1, 'AdreS', 'Олег', 'ss@sdf.ru', '$2y$10$oR5VZ.zk7IN/og70gQq/f.0Sb.GQJ33VZHIES4pyIpU3W2vF6aiaW', 1, 0, '127.0.0.1', 5, '2021-03-08 21:37:04', '2021-03-08 21:37:04', 0, 0, 'img_1.jpg', 'cover_art.jpeg', '#f56400', 'Тестовый аккаунт', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0),
 (2, 'test', NULL, 'test@test.ru', '$2y$10$Iahcsh3ima0kGqgk6S/SSui5/ETU5bQueYROFhOsjUU/z1.xynR7W', 1, 0, '127.0.0.1', 1, '2021-04-30 07:42:52', '2021-04-30 07:42:52', 0, 0, 'noavatar.png', 'cover_art.jpeg', '#339900', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0);
 
@@ -759,23 +759,23 @@ ALTER TABLE `links`
 -- Индексы таблицы `messages`
 --
 ALTER TABLE `messages`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `dialog_id` (`dialog_id`),
-  ADD KEY `uid` (`uid`),
-  ADD KEY `add_time` (`add_time`),
-  ADD KEY `sender_remove` (`sender_remove`),
-  ADD KEY `recipient_remove` (`recipient_remove`),
-  ADD KEY `sender_receipt` (`receipt`);
+  ADD PRIMARY KEY (`message_id`),
+  ADD KEY `message_dialog_id` (`message_dialog_id`),
+  ADD KEY `message_sender_id` (`message_sender_id`),
+  ADD KEY `message_add_time` (`message_add_time`),
+  ADD KEY `message_sender_remove` (`message_sender_remove`),
+  ADD KEY `message_recipient_remove` (`message_recipient_remove`),
+  ADD KEY `message_sender_receipt` (`message_receipt`);
 
 --
 -- Индексы таблицы `messages_dialog`
 --
 ALTER TABLE `messages_dialog`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `recipient_uid` (`recipient_uid`),
-  ADD KEY `sender_uid` (`sender_uid`),
-  ADD KEY `update_time` (`update_time`),
-  ADD KEY `add_time` (`add_time`);
+  ADD PRIMARY KEY (`dialog_id`),
+  ADD KEY `dialog_recipient_id` (`dialog_recipient_id`),
+  ADD KEY `dialog_sender_id` (`dialog_sender_id`),
+  ADD KEY `dialog_update_time` (`dialog_update_time`),
+  ADD KEY `dialog_add_time` (`dialog_add_time`);
 
 --
 -- Индексы таблицы `moderations`
@@ -788,10 +788,10 @@ ALTER TABLE `moderations`
 --
 ALTER TABLE `notifications`
   ADD PRIMARY KEY (`notification_id`),
-  ADD KEY `recipient_read_flag` (`recipient_uid`,`read_flag`),
-  ADD KEY `sender_uid` (`sender_uid`),
-  ADD KEY `action_type` (`action_type`),
-  ADD KEY `add_time` (`add_time`);
+  ADD KEY `notification_recipient_read_flag` (`notification_recipient_id`,`notification_read_flag`),
+  ADD KEY `notification_sender_id` (`notification_sender_id`),
+  ADD KEY `notification_action_type` (`notification_action_type`),
+  ADD KEY `notification_add_time` (`notification_add_time`);
 
 --
 -- Индексы таблицы `posts`
@@ -860,7 +860,7 @@ ALTER TABLE `topics_signed`
 -- Индексы таблицы `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`user_id`);
 
 --
 -- Индексы таблицы `users_activate`
@@ -999,13 +999,13 @@ ALTER TABLE `links`
 -- AUTO_INCREMENT для таблицы `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `messages_dialog`
 --
 ALTER TABLE `messages_dialog`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `dialog_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `moderations`
@@ -1071,7 +1071,7 @@ ALTER TABLE `topics_signed`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `users_activate`

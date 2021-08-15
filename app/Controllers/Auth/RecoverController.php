@@ -40,19 +40,19 @@ class RecoverController extends \MainController
 
         $uInfo = UserModel::userInfo($email);
 
-        if (empty($uInfo['email'])) {
+        if (empty($uInfo['user_email'])) {
             Base::addMsg(lang('There is no such e-mail on the site'), 'error');
             redirect('/recover');
         }
 
         // Проверка на заблокированный аккаунт
-        if ($uInfo['ban_list'] == 1) {
+        if ($uInfo['user_ban_list'] == 1) {
             Base::addMsg(lang('Your account is under review'), 'error');
             redirect('/recover');
         }
 
-        $code = $uInfo['id'] . '-' . Base::randomString('crypto', 25);
-        UserModel::initRecover($uInfo['id'], $code);
+        $code = $uInfo['user_id'] . '-' . Base::randomString('crypto', 25);
+        UserModel::initRecover($uInfo['user_id'], $code);
 
         // Добавим текс письма тут
         $newpass_link = 'https://' . HLEB_MAIN_DOMAIN . '/recover/remind/' . $code;

@@ -9,15 +9,15 @@
                         <div class="column">
                             <div class="user_card">
                                 <div>
-                                    <a href="/u/<?= $user['login']; ?>">
-                                        <?= user_avatar_img($user['avatar'], 'max', $user['login'], 'gr small'); ?>
+                                    <a href="/u/<?= $user['user_login']; ?>">
+                                        <?= user_avatar_img($user['user_avatar'], 'max', $user['user_login'], 'gr small'); ?>
                                     </a>
                                 </div>
                                 <div class="box-footer size-13">
-                                    <a href="/u/<?= $user['login']; ?>"><?= $user['login']; ?></a>
+                                    <a href="/u/<?= $user['user_login']; ?>"><?= $user['user_login']; ?></a>
                                     <br>
-                                    <?php if ($user['name']) { ?>
-                                        <?= $user['name']; ?>
+                                    <?php if ($user['user_name']) { ?>
+                                        <?= $user['user_name']; ?>
                                     <?php } else { ?>
 
                                     <?php } ?>
@@ -31,7 +31,7 @@
         <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/users'); ?>
     </main>
     <aside>
-        <?php if ($uid['id'] == 0) { ?>
+        <?php if ($uid['user_id'] == 0) { ?>
             <?php include TEMPLATE_DIR . '/_block/login.php'; ?>
         <?php } else { ?>
             <div class="white-box">

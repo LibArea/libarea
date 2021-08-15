@@ -10,10 +10,10 @@
                         <?php foreach ($moderations as  $mod) { ?>
                             <div class="white-box">
                                 <div class="size-13 lowercase">
-                                    <a href="/u/<?= $mod['login']; ?>">
-                                        <?= user_avatar_img($mod['avatar'], 'small', $mod['login'], 'ava'); ?>
+                                    <a href="/u/<?= $mod['user_login']; ?>">
+                                        <?= user_avatar_img($mod['user_avatar'], 'small', $mod['user_login'], 'ava'); ?>
                                         <span class="mr5 ml5">
-                                            <?= $mod['login']; ?>
+                                            <?= $mod['user_login']; ?>
                                         </span>
                                     </a>
                                     <span class="mr5 ml5">

@@ -37,7 +37,7 @@
           <i class="icon-sun"></i>
         </span>
       </div>
-      <?php if (!$uid['id']) { ?>
+      <?php if (!$uid['user_id']) { ?>
         <?php if (!Lori\Config::get(Lori\Config::PARAM_INVITE)) { ?>
           <div class="ml30 register">
             <a class="green size-15" title="<?= lang('Sign up'); ?>" href="/register">
@@ -51,8 +51,8 @@
       <?php } else { ?>
         <?php if ($uid['notif']) { ?>
           <div class="ml30 notif">
-            <a href="/u/<?= $uid['login']; ?>/notifications">
-              <?php if ($uid['notif']['action_type'] == 1) { ?>
+            <a href="/u/<?= $uid['user_login']; ?>/notifications">
+              <?php if ($uid['notif']['notification_action_type'] == 1) { ?>
                 <i class="icon-mail red"></i>
               <?php } else { ?>
                 <i class="icon-bell red"></i>
@@ -67,44 +67,44 @@
           </a>
         </div>
         <div class="dropbtn ml30">
-          <div class="nick size-15 gray" title="<?= $uid['login']; ?>">
-            <?= $uid['login']; ?>
-            <?= user_avatar_img($uid['avatar'], 'small', $uid['login'], 'ava ml5'); ?>
+          <div class="nick size-15 gray" title="<?= $uid['user_login']; ?>">
+            <?= $uid['user_login']; ?>
+            <?= user_avatar_img($uid['user_avatar'], 'small', $uid['user_login'], 'ava ml5'); ?>
             <i class="icon-down-dir middle"></i>
           </div>
           <div class="dropdown-menu absolute">
             <span class="st"></span>
-            <a class="dr-menu mb5 gray" href="/u/<?= $uid['login']; ?>">
+            <a class="dr-menu mb5 gray" href="/u/<?= $uid['user_login']; ?>">
               <i class="icon-user-o middle"></i>
               <span class="middle size-13"><?= lang('Profile'); ?></span>
             </a>
-            <a class="dr-menu mb5 gray" href="/u/<?= $uid['login']; ?>/setting">
+            <a class="dr-menu mb5 gray" href="/u/<?= $uid['user_login']; ?>/setting">
               <i class="icon-cog-outline middle"></i>
               <span class="middle size-13"><?= lang('Settings'); ?></span>
             </a>
-            <a class="dr-menu mb5 gray" href="/u/<?= $uid['login']; ?>/drafts">
+            <a class="dr-menu mb5 gray" href="/u/<?= $uid['user_login']; ?>/drafts">
               <i class="icon-edit middle"></i>
               <span class="middle size-13"><?= lang('Drafts'); ?></span>
             </a>
-            <a class="dr-menu mb5 gray" href="/u/<?= $uid['login']; ?>/notifications">
+            <a class="dr-menu mb5 gray" href="/u/<?= $uid['user_login']; ?>/notifications">
               <i class="icon-lightbulb middle"></i>
               <span class="middle size-13"><?= lang('Notifications'); ?></span>
             </a>
-            <a class="dr-menu mb5 gray" href="/u/<?= $uid['login']; ?>/messages">
+            <a class="dr-menu mb5 gray" href="/u/<?= $uid['user_login']; ?>/messages">
               <i class="icon-mail middle"></i>
               <span class="middle size-13"><?= lang('Messages-m'); ?></span>
             </a>
-            <a class="dr-menu mb5 gray" href="/u/<?= $uid['login']; ?>/favorite">
+            <a class="dr-menu mb5 gray" href="/u/<?= $uid['user_login']; ?>/favorite">
               <i class="icon-bookmark-empty middle"></i>
               <span class="middle size-13"><?= lang('Favorites'); ?></span>
             </a>
-            <?php if ($uid['trust_level'] > 1) { ?>
-              <a class="dr-menu mb5 gray" href="/u/<?= $uid['login']; ?>/invitation">
+            <?php if ($uid['user_trust_level'] > 1) { ?>
+              <a class="dr-menu mb5 gray" href="/u/<?= $uid['user_login']; ?>/invitation">
                 <i class="icon-user-add-outline middle"></i>
                 <span class="middle size-13"><?= lang('Invites'); ?></span>
               </a>
             <?php } ?>
-            <?php if ($uid['trust_level'] == 5) { ?>
+            <?php if ($uid['user_trust_level'] == 5) { ?>
               <a class="dr-menu mb5 gray" href="/admin" target="_black">
                 <i class="icon-tools middle"></i>
                 <span class="middle size-13"><?= lang('Admin'); ?></span>

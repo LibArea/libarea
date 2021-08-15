@@ -22,10 +22,10 @@ class UsersController extends \MainController
 
         $result = array();
         foreach ($user_all as $ind => $row) {
-            $row['replayIp']    = UserModel::replayIp($row['reg_ip']);
-            $row['isBan']       = UserModel::isBan($row['id']);
-            $row['logs']        = UserModel::userLogId($row['id']);
-            $row['created_at']  = lang_date($row['created_at']);
+            $row['replayIp']    = UserModel::replayIp($row['user_reg_ip']);
+            $row['isBan']       = UserModel::isBan($row['user_id']);
+            $row['logs']        = UserModel::userLogId($row['user_id']);
+            $row['created_at']  = lang_date($row['user_created_at']);
             $result[$ind]       = $row;
         }
 
@@ -49,8 +49,8 @@ class UsersController extends \MainController
 
         $results = array();
         foreach ($user_all as $ind => $row) {
-            $row['replayIp']    = UserModel::replayIp($row['reg_ip']);
-            $row['isBan']       = UserModel::isBan($row['id']);
+            $row['replayIp']    = UserModel::replayIp($row['user_reg_ip']);
+            $row['isBan']       = UserModel::isBan($row['user_id']);
             $results[$ind]      = $row;
         }
 
@@ -130,21 +130,21 @@ class UsersController extends \MainController
         Base::Limits($login, lang('Login'), '4', '11', $redirect);
 
         $data = [
-            'id'            => $user_id,
-            'email'         => $email,
-            'login'         => $login,
-            'name'          => empty($name) ? '' : $name,
-            'activated'     => $activated,
-            'limiting_mode' => $limiting_mode,
-            'trust_level'   => $trust_level,
-            'about'         => empty($about) ? '' : $about,
-            'website'       => empty($website) ? '' : $website,
-            'location'      => empty($location) ? '' : $location,
-            'public_email'  => empty($public_email) ? '' : $public_email,
-            'skype'         => empty($skype) ? '' : $skype,
-            'twitter'       => empty($twitter) ? '' : $twitter,
-            'telegram'      => empty($telegram) ? '' : $telegram,
-            'vk'            => empty($vk) ? '' : $vk,
+            'user_id'            => $user_id,
+            'user_email'         => $email,
+            'user_login'         => $login,
+            'user_name'          => empty($name) ? '' : $name,
+            'user_activated'     => $activated,
+            'user_limiting_mode' => $limiting_mode,
+            'user_trust_level'   => $trust_level,
+            'user_about'         => empty($about) ? '' : $about,
+            'user_website'       => empty($website) ? '' : $website,
+            'user_location'      => empty($location) ? '' : $location,
+            'user_public_email'  => empty($public_email) ? '' : $public_email,
+            'user_skype'         => empty($skype) ? '' : $skype,
+            'user_twitter'       => empty($twitter) ? '' : $twitter,
+            'user_telegram'      => empty($telegram) ? '' : $telegram,
+            'user_vk'            => empty($vk) ? '' : $vk,
         ];
 
         UserModel::setUserEdit($data);

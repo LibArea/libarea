@@ -3,7 +3,7 @@
     <main>
         <div class="white-box">
             <div class="pt5 pr15 pb0 pl15">
-                <?= breadcrumb('/', lang('Home'), '/u/' . $uid['login'], lang('Profile'), $data['h1']); ?>
+                <?= breadcrumb('/', lang('Home'), '/u/' . $uid['user_login'], lang('Profile'), $data['h1']); ?>
                 
                 <ul class="nav-tabs mt0 mb15">
                   <?php if ($data['sheet'] == 'favorite') { ?>
@@ -11,13 +11,13 @@
                       <span><?= lang('Favorites'); ?></span>
                     </li>
                     <li>
-                      <a href="/u/<?= $uid['login']; ?>/preferences">
+                      <a href="/u/<?= $uid['user_login']; ?>/preferences">
                         <span><?= lang('Preferences'); ?></span>
                       </a>
                     </li>
                   <?php } elseif ($data['sheet'] == 'preferences') { ?>
                     <li>
-                      <a href="/u/<?= $uid['login']; ?>/favorite">
+                      <a href="/u/<?= $uid['user_login']; ?>/favorite">
                         <span><?= lang('Favorites'); ?></span>
                       </a>
                     </li>

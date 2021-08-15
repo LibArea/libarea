@@ -182,12 +182,12 @@ function validTl($trust_level, $allowed_tl, $count_content, $count_total)
 function accessPm($uid, $user_id, $add_tl)
 {
     // Запретим отправку себе
-    if ($uid['id'] == $user_id) {
+    if ($uid['user_id'] == $user_id) {
         return false;
     }
 
     // Если уровень доверия меньше установленного
-    if ($add_tl > $uid['trust_level']) {
+    if ($add_tl > $uid['user_trust_level']) {
         return false;
     }
 
@@ -206,13 +206,13 @@ function accessСheck($content, $type, $uid, $after, $stop_time)
     }
 
     // Редактировать может только автор и админ
-    if ($content[$type . '_user_id'] != $uid['id'] && $uid['trust_level'] != 5) {
+    if ($content[$type . '_user_id'] != $uid['user_id'] && $uid['user_trust_level'] != 5) {
         return false;
     }
 
     // Запретим удаление если есть ответ
     // И если прошло 30 минут
-    if ($uid['trust_level'] != 5) {
+    if ($uid['user_trust_level'] != 5) {
 
         if ($after > 0) {
             if ($content[$type . '_after'] > 0) {

@@ -13,14 +13,14 @@ class UserModel extends \MainModel
     {
         $start  = ($page - 1) * $limit;
         $sql = "SELECT  
-                    id,
-                    login,
-                    name, 
-                    avatar,
-                    is_deleted
+                    user_id,
+                    user_login,
+                    user_name, 
+                    user_avatar,
+                    user_is_deleted
                         FROM users 
-                        WHERE is_deleted != 1 and ban_list != 1
-                        ORDER BY id = :user_id DESC, trust_level DESC LIMIT $start, $limit";
+                        WHERE user_is_deleted != 1 and user_ban_list != 1
+                        ORDER BY user_id = :user_id DESC, user_trust_level DESC LIMIT $start, $limit";
 
         return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -29,10 +29,10 @@ class UserModel extends \MainModel
     public static function getUsersAllCount()
     {
         $sql = "SELECT 
-                    id, 
-                    is_deleted
+                    user_id, 
+                    user_is_deleted
                         FROM users
-                        WHERE is_deleted = 0";
+                        WHERE user_is_deleted = 0";
 
         return  DB::run($sql)->rowCount();
     }
@@ -40,37 +40,37 @@ class UserModel extends \MainModel
     // Информация по участнику (id, slug)
     public static function getUser($params, $name)
     {
-        $sort = "id = :params";
+        $sort = "user_id = :params";
         if ($name == 'slug') {
-            $sort = "login = :params";
+            $sort = "user_login = :params";
         }
 
         $sql = "SELECT 
-                    id,
-                    login,
-                    name,
-                    activated,
-                    limiting_mode,
-                    reg_ip,
-                    email,
-                    avatar,
-                    trust_level,
-                    cover_art,
-                    color,
-                    invitation_available,
-                    about,
-                    website,
-                    location,
-                    public_email,
-                    skype,
-                    twitter,
-                    telegram,
-                    vk,
-                    created_at,
-                    my_post,
-                    ban_list,
-                    hits_count,
-                    is_deleted 
+                    user_id,
+                    user_login,
+                    user_name,
+                    user_activated,
+                    user_limiting_mode,
+                    user_reg_ip,
+                    user_email,
+                    user_avatar,
+                    user_trust_level,
+                    user_cover_art,
+                    user_color,
+                    user_invitation_available,
+                    user_about,
+                    user_website,
+                    user_location,
+                    user_public_email,
+                    user_skype,
+                    user_twitter,
+                    user_telegram,
+                    user_vk,
+                    user_created_at,
+                    user_my_post,
+                    user_ban_list,
+                    user_hits_count,
+                    user_is_deleted 
                         FROM users WHERE $sort";
 
         $result = DB::run($sql, ['params' => $params]);
@@ -82,7 +82,7 @@ class UserModel extends \MainModel
     public static function createUser($login, $email, $password, $reg_ip, $invitation_id)
     {
         // количество участников 
-        $sql    = "SELECT id, is_deleted FROM users WHERE is_deleted = 0";
+        $sql    = "SELECT user_id, user_is_deleted FROM users WHERE user_is_deleted = 0";
         $count  = DB::run($sql)->rowCount();
 
         // Для "режима запуска" первые 50 участников получают trust_level = 1 
@@ -99,33 +99,33 @@ class UserModel extends \MainModel
         }
 
         $params = [
-            'login'         => $login,
-            'email'         => $email,
-            'password'      => $password,
-            'limiting_mode' => 0, // Режим заморозки выключен
-            'activated'     => $activated,
-            'reg_ip'        => $reg_ip,
-            'trust_level'   => $trust_level,
-            'invitation_id' => $invitation_id,
+            'user_login'         => $login,
+            'user_email'         => $email,
+            'user_password'      => $password,
+            'user_limiting_mode' => 0, // Режим заморозки выключен
+            'user_activated'     => $activated,
+            'user_reg_ip'        => $reg_ip,
+            'user_trust_level'   => $trust_level,
+            'user_invitation_id' => $invitation_id,
         ];
 
-        $sql = "INSERT INTO users(login, 
-                                    email, 
-                                    password, 
-                                    limiting_mode, 
-                                    activated, 
-                                    reg_ip, 
-                                    trust_level, 
-                                    invitation_id) 
+        $sql = "INSERT INTO users(user_login, 
+                                    user_email, 
+                                    user_password, 
+                                    user_limiting_mode, 
+                                    user_activated, 
+                                    user_reg_ip, 
+                                    user_trust_level, 
+                                    user_invitation_id) 
                                     
-                            VALUES(:login, 
-                                    :email, 
-                                    :password, 
-                                    :limiting_mode, 
-                                    :activated, 
-                                    :reg_ip, 
-                                    :trust_level, 
-                                    :invitation_id)";
+                            VALUES(:user_login, 
+                                    :user_email, 
+                                    :user_password, 
+                                    :user_limiting_mode, 
+                                    :user_activated, 
+                                    :user_reg_ip, 
+                                    :user_trust_level, 
+                                    :user_invitation_id)";
 
         DB::run($sql, $params);
 
@@ -137,7 +137,7 @@ class UserModel extends \MainModel
     // Изменение пароля
     public static function editPassword($user_id, $password)
     {
-        $sql = "UPDATE users SET password = :password WHERE id = :user_id";
+        $sql = "UPDATE users SET user_password = :password WHERE user_id = :user_id";
 
         return  DB::run($sql, ['user_id' => $user_id, 'password' => $password]);
     }
@@ -145,7 +145,7 @@ class UserModel extends \MainModel
     // Просмотры  
     public static function userHits($user_id)
     {
-        $sql = "UPDATE users SET hits_count = (hits_count + 1) WHERE id = :user_id";
+        $sql = "UPDATE users SET user_hits_count = (user_hits_count + 1) WHERE user_id = :user_id";
 
         return  DB::run($sql, ['user_id' => $user_id]);
     }
@@ -153,14 +153,14 @@ class UserModel extends \MainModel
     // Изменение аватарки / обложки
     public static function setImg($user_id, $img)
     {
-        $sql = "UPDATE users SET avatar = :img WHERE id = :user_id";
+        $sql = "UPDATE users SET user_avatar = :img WHERE user_id = :user_id";
 
         return  DB::run($sql, ['user_id' => $user_id, 'img' => $img]);
     }
 
     public static function setCover($user_id, $img)
     {
-        $sql = "UPDATE users SET cover_art = :img WHERE id = :user_id";
+        $sql = "UPDATE users SET user_cover_art = :img WHERE user_id = :user_id";
 
         return  DB::run($sql, ['user_id' => $user_id, 'img' => $img]);
     }
@@ -169,13 +169,13 @@ class UserModel extends \MainModel
     public static function getUserTrust($user_id)
     {
         $sql = "SELECT 
-                    id,
-                    trust_level, 
+                    user_id,
+                    user_trust_level, 
                     trust_id,
                     trust_name                    
                         FROM users_trust_level
-                        LEFT JOIN users ON trust_level = trust_id
-                        WHERE id = :user_id";
+                        LEFT JOIN users ON user_trust_level = trust_id
+                        WHERE user_id = :user_id";
 
         return DB::run($sql, ['user_id' => $user_id])->fetch(PDO::FETCH_ASSOC);
     }
@@ -188,9 +188,9 @@ class UserModel extends \MainModel
                     favorite_user_id, 
                     favorite_type,
                     favorite_tid,
-                    id, 
-                    login,
-                    avatar, 
+                    user_id, 
+                    user_login,
+                    user_avatar, 
                     post_id,
                     post_title,
                     post_slug,
@@ -204,7 +204,7 @@ class UserModel extends \MainModel
                     space_name,
                     space_slug
                         FROM favorites
-                        LEFT JOIN users ON id = favorite_user_id
+                        LEFT JOIN users ON user_id = favorite_user_id
                         LEFT JOIN posts ON post_id = favorite_tid AND favorite_type = 1
                         LEFT JOIN answers ON answer_id = favorite_tid AND favorite_type = 2
                         LEFT JOIN spaces ON  space_id = post_space_id
@@ -224,13 +224,13 @@ class UserModel extends \MainModel
                    post_draft,
                    post_is_deleted,
                    post_date,
-                   id, 
-                   login,
-                   name,
-                   avatar
+                   user_id, 
+                   user_login,
+                   user_name,
+                   user_avatar
                        FROM posts
-                       LEFT JOIN users ON id = post_user_id
-                           WHERE id = :user_id 
+                       LEFT JOIN users ON user_id = post_user_id
+                           WHERE user_id = :user_id 
                            AND post_draft = 1 AND post_is_deleted = 0
                            ORDER BY post_id DESC";
 
@@ -241,17 +241,17 @@ class UserModel extends \MainModel
     public static function userInfo($email)
     {
         $sql = "SELECT 
-                   id, 
-                   email, 
-                   password,
-                   login,
-                   name,
-                   avatar,
-                   trust_level,
-                   ban_list,
-                   limiting_mode
+                   user_id, 
+                   user_email, 
+                   user_password,
+                   user_login,
+                   user_name,
+                   user_avatar,
+                   user_trust_level,
+                   user_ban_list,
+                   user_limiting_mode
                         FROM users 
-                        WHERE email = :email";
+                        WHERE user_email = :email";
 
         return DB::run($sql, ['email' => $email])->fetch(PDO::FETCH_ASSOC);
     }
@@ -282,31 +282,31 @@ class UserModel extends \MainModel
     public static function editProfile($data)
     {
         $params = [
-            'name'          => $data['name'],
-            'color'         => $data['color'],
-            'about'         => $data['about'],
-            'website'       => $data['website'],
-            'location'      => $data['location'],
-            'public_email'  => $data['public_email'],
-            'skype'         => $data['skype'],
-            'twitter'       => $data['twitter'],
-            'telegram'      => $data['telegram'],
-            'vk'            => $data['vk'],
-            'id'            => $data['id'],
+            'user_name'          => $data['user_name'],
+            'user_color'         => $data['user_color'],
+            'user_about'         => $data['user_about'],
+            'user_website'       => $data['user_website'],
+            'user_location'      => $data['user_location'],
+            'user_public_email'  => $data['user_public_email'],
+            'user_skype'         => $data['user_skype'],
+            'user_twitter'       => $data['user_twitter'],
+            'user_telegram'      => $data['user_telegram'],
+            'user_vk'            => $data['user_vk'],
+            'user_id'            => $data['user_id'],
         ];
 
         $sql = "UPDATE users SET 
-                    name            = :name,
-                    color           = :color,
-                    about           = :about,
-                    website         = :website,
-                    location        = :location,
-                    public_email    = :public_email,
-                    skype           = :skype,
-                    twitter         = :twitter,
-                    telegram        = :telegram,
-                    vk              = :vk
-                        WHERE id    = :id";
+                    user_name            = :user_name,
+                    user_color           = :user_color,
+                    user_about           = :user_about,
+                    user_website         = :user_website,
+                    user_location        = :user_location,
+                    user_public_email    = :user_public_email,
+                    user_skype           = :user_skype,
+                    user_twitter         = :user_twitter,
+                    user_telegram        = :user_telegram,
+                    user_vk              = :user_vk
+                        WHERE user_id    = :user_id";
 
         return DB::run($sql, $params);
     }
@@ -314,7 +314,7 @@ class UserModel extends \MainModel
     // Удалим обложку для профиля
     public static function userCoverRemove($user_id)
     {
-        $sql = "UPDATE users SET cover_art = 'cover_art.jpeg' WHERE id = :user_id";
+        $sql = "UPDATE users SET user_cover_art = 'cover_art.jpeg' WHERE user_id = :user_id";
 
         return DB::run($sql, ['user_id' => $user_id]);
     }
@@ -351,10 +351,10 @@ class UserModel extends \MainModel
     public static function isLimitingMode($user_id)
     {
         $sql = "SELECT
-                    id,
-                    limiting_mode
+                    user_id,
+                    user_limiting_mode
                         FROM users
-                        WHERE id = :user_id AND limiting_mode = 1";
+                        WHERE user_id = :user_id AND user_limiting_mode = 1";
 
         return DB::run($sql, ['user_id' => $user_id])->fetch(PDO::FETCH_ASSOC);
     }
@@ -363,10 +363,10 @@ class UserModel extends \MainModel
     public static function isActivated($user_id)
     {
         $sql = "SELECT
-                    id,
-                    activated
+                    user_id,
+                    user_activated
                         FROM users
-                        WHERE id = :user_id AND activated = 1";
+                        WHERE user_id = :user_id AND user_activated = 1";
 
         return DB::run($sql, ['user_id' => $user_id])->fetch(PDO::FETCH_ASSOC);
     }
@@ -449,11 +449,11 @@ class UserModel extends \MainModel
                    add_time,
                    invitation_email,
                    invitation_code,                  
-                   id,
-                   avatar,
-                   login
+                   user_id,
+                   user_avatar,
+                   user_login
                         FROM invitations
-                            LEFT JOIN users ON id = active_uid
+                            LEFT JOIN users ON user_id = active_uid
                             WHERE uid = :user_id
                             ORDER BY add_time DESC";
 
@@ -532,7 +532,7 @@ class UserModel extends \MainModel
 
         DB::run($sql, ['user_id' => $user_id, 'flag' => 1]);
 
-        $sql = "UPDATE users SET activated = :flag WHERE id = :user_id";
+        $sql = "UPDATE users SET user_activated = :flag WHERE user_id = :user_id";
 
         return DB::run($sql, ['user_id' => $user_id, 'flag' => 1]);
     }

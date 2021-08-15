@@ -95,7 +95,7 @@ class TopicController extends \MainController
         }
 
         $topic_related  = TopicModel::topicRelated($topic['topic_related']);
-        $topic_signed   = SubscriptionModel::getFocus($topic['topic_id'], $uid['id'], 'topic');
+        $topic_signed   = SubscriptionModel::getFocus($topic['topic_id'], $uid['user_id'], 'topic');
 
         $meta_title = $topic['topic_seo_title'] . ' — ' .  lang('Topic');
         $data = [

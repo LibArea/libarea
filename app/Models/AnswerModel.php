@@ -32,8 +32,8 @@ class AnswerModel extends \MainModel
     public static function getAnswersAll($page, $limit, $uid)
     {
         $tl = 'AND post_tl = 0';
-        if ($uid['trust_level']) {
-            $tl = 'AND post_tl <= ' . $uid['trust_level'] . '';
+        if ($uid['user_trust_level']) {
+            $tl = 'AND post_tl <= ' . $uid['user_trust_level'] . '';
         }
 
         $start  = ($page - 1) * $limit;
@@ -48,11 +48,11 @@ class AnswerModel extends \MainModel
                     answer_post_id,
                     answer_votes,
                     answer_is_deleted,
-                    id, 
-                    login, 
-                    avatar
+                    user_id, 
+                    user_login, 
+                    user_avatar
                         FROM answers
-                        INNER JOIN users ON id = answer_user_id
+                        INNER JOIN users ON user_id = answer_user_id
                         INNER JOIN posts ON answer_post_id = post_id AND answer_is_deleted = 0 " . $tl . "
                         ORDER BY answer_id DESC LIMIT $start, $limit ";
 
@@ -117,11 +117,11 @@ class AnswerModel extends \MainModel
                     favorite_tid,
                     favorite_user_id,
                     favorite_type,
-                    id, 
-                    login, 
-                    avatar
+                    user_id, 
+                    user_login, 
+                    user_avatar
                         FROM answers
-                        LEFT JOIN users ON id = answer_user_id
+                        LEFT JOIN users ON user_id = answer_user_id
                         LEFT JOIN votes_answer ON votes_answer_item_id = answer_id
                             AND votes_answer_user_id = $user_id
                         LEFT JOIN favorites ON favorite_tid = answer_id
@@ -150,13 +150,13 @@ class AnswerModel extends \MainModel
                     post_id,
                     post_title,
                     post_slug,
-                    id, 
-                    login, 
-                    avatar
+                    user_id, 
+                    user_login, 
+                    user_avatar
                         FROM answers
-                        LEFT JOIN users ON id = answer_user_id
+                        LEFT JOIN users ON user_id = answer_user_id
                         LEFT JOIN posts ON answer_post_id = post_id
-                        WHERE login = :slug
+                        WHERE user_login = :slug
                         AND answer_is_deleted = 0 AND post_tl = 0 AND post_tl = 0
                         ORDER BY answer_id DESC";
 

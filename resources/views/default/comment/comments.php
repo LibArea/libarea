@@ -12,10 +12,10 @@
                         <?php if ($comment['comment_is_deleted'] == 0) { ?>
                             <div class="mb20">
                                 <div class="size-13">
-                                    <a class="gray" href="/u/<?= $comment['login']; ?>">
-                                        <?= user_avatar_img($comment['avatar'], 'small', $comment['login'], 'ava'); ?>
+                                    <a class="gray" href="/u/<?= $comment['user_login']; ?>">
+                                        <?= user_avatar_img($comment['user_avatar'], 'small', $comment['user_login'], 'ava'); ?>
                                         <span class="mr5 ml5">
-                                            <?= $comment['login']; ?>
+                                            <?= $comment['user_login']; ?>
                                         </span>
                                     </a>
                                     <span class="gray lowercase"><?= $comment['date']; ?></span>
@@ -57,7 +57,7 @@
                 <?= lang('comments-desc'); ?>
             </div>
         </div>
-        <?php if ($uid['id'] == 0) { ?>
+        <?php if ($uid['user_id'] == 0) { ?>
             <?php include TEMPLATE_DIR . '/_block/login.php'; ?>
         <?php } ?>
     </aside>

@@ -24,7 +24,7 @@ class AddAnswerController extends \MainController
         $uid            = Base::getUid();
 
         // Если пользователь забанен / заморожен
-        $user = UserModel::getUser($uid['id'], 'id');
+        $user = UserModel::getUser($uid['user_id'], 'id');
         Base::accountBan($user);
         Content::stopContentQuietМode($user);
 
@@ -32,8 +32,8 @@ class AddAnswerController extends \MainController
         Base::Limits($answer_content, lang('Bodies'), '6', '5000', $redirect);
 
         // Ограничим частоту добавления (зависит от TL)
-        if ($uid['trust_level'] < 2) {
-            $num_answer =  AnswerModel::getAnswerSpeed($uid['id']);
+        if ($uid['user_trust_level'] < 2) {
+            $num_answer =  AnswerModel::getAnswerSpeed($uid['user_id']);
             if (count($num_answer) > 10) {
                 Base::addMsg(lang('limit_answer_day'), 'error');
                 redirect('/');
@@ -43,9 +43,9 @@ class AddAnswerController extends \MainController
         $answer_published = 1;
         if (Content::stopWordsExists($answer_content)) {
             // Если меньше 2 ответов и если контент попал в стоп лист, то заморозка
-            $all_count = ActionModel::ceneralContributionCount($uid['id']);
+            $all_count = ActionModel::ceneralContributionCount($uid['user_id']);
             if ($all_count < 2) {
-                ActionModel::addLimitingMode($uid['id']);
+                ActionModel::addLimitingMode($uid['user_id']);
                 Base::addMsg(lang('limiting_mode_1'), 'error');
                 redirect('/');
             }
@@ -61,7 +61,7 @@ class AddAnswerController extends \MainController
             'answer_content'    => $answer_content,
             'answer_published'  => $answer_published,
             'answer_ip'         => $ip,
-            'answer_user_id'    => $uid['id'],
+            'answer_user_id'    => $uid['user_id'],
         ];
 
         $last_id    = AnswerModel::addAnswer($data);
@@ -69,31 +69,31 @@ class AddAnswerController extends \MainController
 
         // Оповещение админу
         if ($answer_published == 0) {
-            ActionModel::addAudit('answer', $uid['id'], $last_id);
+            ActionModel::addAudit('answer', $uid['user_id'], $last_id);
             $type = 15; // Упоминания в посте  
             $user_id  = 1;
-            NotificationsModel::send($uid['id'], $user_id, $type, $last_id, $url_answer, 1);
+            NotificationsModel::send($uid['user_id'], $user_id, $type, $last_id, $url_answer, 1);
         }
 
         // Уведомление (@login)
         if ($message = Content::parseUser($answer_content, true, true)) {
             foreach ($message as $user_id) {
                 // Запретим отправку себе
-                if ($user_id == $uid['id']) {
+                if ($user_id == $uid['user_id']) {
                     continue;
                 }
                 $type = 11; // Упоминания в ответе      
-                NotificationsModel::send($uid['id'], $user_id, $type, $last_id, $url_answer, 1);
+                NotificationsModel::send($uid['user_id'], $user_id, $type, $last_id, $url_answer, 1);
             }
         }
-
+ 
         // Кто подписан на данный вопрос / пост
         if ($focus_all = NotificationsModel::getFocusUsersPost($post['post_id'])) {
 
             foreach ($focus_all as $focus_user) {
-                if ($focus_user['signed_user_id'] != $uid['id']) {
+                if ($focus_user['signed_user_id'] != $uid['user_id']) {
                     $type = 3; // Ответ на пост
-                    NotificationsModel::send($uid['id'], $focus_user['signed_user_id'], $type, $last_id, $url_answer, 1);
+                    NotificationsModel::send($uid['user_id'], $focus_user['signed_user_id'], $type, $last_id, $url_answer, 1);
                 }
             }
         }

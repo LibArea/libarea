@@ -29,11 +29,11 @@ class CommentModel extends \MainModel
                     comment_user_id,
                     comment_votes,
                     comment_is_deleted,
-                    id, 
-                    login, 
-                    avatar
+                    user_id, 
+                    user_login, 
+                    user_avatar
                         FROM comments 
-                        JOIN users ON id = comment_user_id
+                        JOIN users ON user_id = comment_user_id
                         JOIN posts ON comment_post_id = post_id
                         $sort
                         ORDER BY comment_id DESC LIMIT $start, $limit ";

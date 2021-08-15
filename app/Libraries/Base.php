@@ -17,21 +17,29 @@ class Base
         $account = Request::getSession('account') ?? [];
         $uid = [];
 
+        // Если сайт обновляется (выключен)
+        if (Config::get(Config::PARAM_SITE_OFF) == 1) {
+            if (!empty($account['user_trust_level']) != 5) { 
+                include HLEB_GLOBAL_DIRECTORY . '/app/Optional/site_off.php';
+                hl_preliminary_exit();
+            } 
+        }
+            
         if (!empty($account['user_id'])) {
 
-            $uid['id']              = $account['user_id'];
-            $uid['login']           = $account['login'];
-            $uid['trust_level']     = $account['trust_level'];
-            $uid['notif']           = NotificationsModel::usersNotification($account['user_id']);
-            $uid['avatar']          = $account['avatar'];
-            $uid['ban_list']        = $account['ban_list'];
+            $uid['user_id']              = $account['user_id'];
+            $uid['user_login']           = $account['user_login'];
+            $uid['user_trust_level']     = $account['user_trust_level'];
+            $uid['user_avatar']          = $account['user_avatar'];
+            $uid['user_ban_list']        = $account['user_ban_list'];
+            $uid['notif']                = NotificationsModel::usersNotification($account['user_id']);
 
             Request::getResources()->addBottomScript('/assets/js/app.js');
         } else {
 
             self::checkCookie();
-            $uid['id']          = 0;
-            $uid['trust_level'] = null;
+            $uid['user_id']     = 0;
+            $uid['user_trust_level'] = null;
 
             // Если сайт полностью приватен
             if (Config::get(Config::PARAM_PRIVATE) == 1) {
@@ -83,7 +91,7 @@ class Base
         }
 
         // В бан листе
-        if ($user['ban_list'] == 1) {
+        if ($user['user_ban_list'] == 1) {
             return false;
         }
 
@@ -96,7 +104,6 @@ class Base
             // ПОЛУЧАЕТ СЛУЧАЙНОЕ ЧИСЛО ОТ 1 до 100
             // ЕСЛИ ЭТО НОМЕР МЕНЬШЕ ЧЕМ НОМЕР В НАСТРОЙКАХ ПРИНУДИТЕЛЬНОГО ВХОДА
             // УДАЛИТЬ ТОКЕН ИЗ БД
-
             if (rand(1, 100) < $forceLogin) {
 
                 AuthModel::deleteTokenByUserId($token['auth_user_id']);
@@ -115,13 +122,13 @@ class Base
     public static function setUserSession($user)
     {
         $data = [
-            'user_id'       => $user['id'],
-            'login'         => $user['login'],
-            'email'         => $user['email'],
-            'avatar'        => $user['avatar'],
-            'trust_level'   => $user['trust_level'],
-            'ban_list'      => $user['ban_list'],
-            'limiting_mode' => $user['limiting_mode'],
+            'user_id'            => $user['user_id'],
+            'user_login'         => $user['user_login'],
+            'user_email'         => $user['user_email'],
+            'user_avatar'        => $user['user_avatar'],
+            'user_trust_level'   => $user['user_trust_level'],
+            'user_ban_list'      => $user['user_ban_list'],
+            'user_limiting_mode' => $user['user_limiting_mode'],
         ];
 
         $_SESSION['account'] = $data;
@@ -170,7 +177,6 @@ class Base
         setcookie("remember", $token, $expires);
     }
 
-
     // Возвращает массив сообщений
     public static function getMsg()
     {
@@ -198,7 +204,7 @@ class Base
     // Бан
     public static function accountBan($user)
     {
-        if ($user['ban_list'] == 1) {
+        if ($user['user_ban_list'] == 1) {
             if (!isset($_SESSION)) {
                 session_start();
             }

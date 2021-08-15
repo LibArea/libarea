@@ -998,7 +998,8 @@ footer a.footer:hover {
 
 .dark header,
 .dark #stHeader.sticky,
-.dark footer {
+.dark footer,
+.dark .bg-lightyellow {
   background-color: #111;
 }
 
@@ -1041,7 +1042,9 @@ footer a.footer:hover {
 
 .dark .layui-layer-dialog,
 .dark .gray,
+.dark .gray-light,
 .dark .indent,
+.dark a.gray-light,
 .dark a.gray {
   color: #919191;
 }

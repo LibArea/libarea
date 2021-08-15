@@ -10,14 +10,14 @@ class InvitationModel extends \MainModel
     public static function getInvitations()
     {
         $sql = "SELECT 
-                    id,
-                    login,
-                    avatar,
+                    user_id,
+                    user_login,
+                    user_avatar,
                     uid,
                     active_uid,
                     active_time
                         FROM invitations 
-                        LEFT JOIN users ON active_uid = id ORDER BY id DESC";
+                        LEFT JOIN users ON active_uid = user_id ORDER BY user_id DESC";
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }

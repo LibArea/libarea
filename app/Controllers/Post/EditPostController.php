@@ -46,7 +46,7 @@ class EditPostController extends \MainController
         }
 
         // Если пользователь забанен / заморожен
-        $user = UserModel::getUser($uid['id'], 'id');
+        $user = UserModel::getUser($uid['user_id'], 'id');
         Base::accountBan($user);
         Content::stopContentQuietМode($user);
 
@@ -60,7 +60,7 @@ class EditPostController extends \MainController
         // Если стоит ограничение: публиковать может только автор
         if ($space['space_permit_users'] == 1) {
             // Кроме персонала и владельца
-            if ($uid['trust_level'] != 5 && $space['space_user_id'] != $uid['id']) {
+            if ($uid['user_trust_level'] != 5 && $space['space_user_id'] != $uid['user_id']) {
                 Base::addMsg(lang('You dont have access'), 'error');
                 redirect($redirect);
             }
@@ -68,7 +68,7 @@ class EditPostController extends \MainController
 
         // Если есть смена post_user_id и это TL5
         if ($post['post_user_id'] != $post_user_new) {
-            if ($uid['trust_level'] != 5) {
+            if ($uid['user_trust_level'] != 5) {
                 $post_user_id = $post['post_user_id'];
             } else {
                 $post_user_id = $post_user_new;
@@ -153,7 +153,7 @@ class EditPostController extends \MainController
             redirect('/');
         }
 
-        $space = SpaceModel::getSpaceSelect($uid['id'], $uid['trust_level']);
+        $space = SpaceModel::getSpaceSelect($uid['user_id'], $uid['user_trust_level']);
         $user  = UserModel::getUser($post['post_user_id'], 'id');
 
         Request::getHead()->addStyles('/assets/css/image-uploader.css');
@@ -164,7 +164,7 @@ class EditPostController extends \MainController
         Request::getResources()->addBottomScript('/assets/editor/editormd.min.js');
         Request::getResources()->addBottomScript('/assets/editor/config.js');
 
-        if ($uid['trust_level'] > 0) {
+        if ($uid['user_trust_level'] > 0) {
             Request::getResources()->addBottomScript('/assets/js/select2.min.js');
         }
 

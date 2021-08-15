@@ -10,7 +10,7 @@
                     <div class="ml15 width-100">
                         <h1>
                             <?= $data['h1']; ?>
-                            <?php if ($uid['trust_level'] == 5) { ?>
+                            <?php if ($uid['user_trust_level'] == 5) { ?>
                                 <a class="right gray-light" href="/admin/topics/<?= $topic['topic_id']; ?>/edit">
                                     <i class="icon-pencil size-15"></i>
                                 </a>
@@ -18,7 +18,7 @@
                         </h1>
                         <div class="size-13"><?= $topic['topic_description']; ?></div>
                         <div class="mt15">
-                            <?php if (!$uid['id']) { ?>
+                            <?php if (!$uid['user_id']) { ?>
                                 <a href="/login">
                                     <div class="add-focus focus-topic">+ <?= lang('Read'); ?></div>
                                 </a>

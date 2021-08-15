@@ -74,6 +74,10 @@ body {
   stroke: #9e9e9e;
 }
 
+.telo-indent {
+  margin-top: 70px;
+}
+
 @media screen and (max-width: 695px) {
   .telo {
     text-align: center;

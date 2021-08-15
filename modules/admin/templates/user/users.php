@@ -32,9 +32,9 @@
             <span class="t-td center">N</span>
             <span class="t-td"><?= lang('Avatar'); ?></span>
             <span class="t-td"><?= lang('Information'); ?></span>
-            <span class="t-td center">Ban</span>
             <span class="t-td">IP <?= lang('registrations'); ?></span>
             <span class="t-td"><?= lang('Last'); ?></span>
+            <span class="t-td center">Ban</span>
             <span class="t-td center"><?= lang('Action'); ?></span>
           </div>
           <?php if ($alluser) {  ?>
@@ -42,22 +42,22 @@
 
               <div class="t-tr">
                 <span class="t-td width-30 center">
-                  <?= $user['id']; ?>
+                  <?= $user['user_id']; ?>
                 </span>
                 <span class="t-td width-30 center">
-                  <?= user_avatar_img($user['avatar'], 'max', $user['login'], 'ava-64'); ?>
+                  <?= user_avatar_img($user['user_avatar'], 'max', $user['user_login'], 'ava-64'); ?>
                 </span>
                 <span class="t-td">
-                  <a href="/u/<?= $user['login']; ?>"><?= $user['login']; ?></a>
-                  <?php if ($user['name']) { ?>
-                    (<?= $user['name']; ?>)
+                  <a href="/u/<?= $user['user_login']; ?>"><?= $user['user_login']; ?></a>
+                  <?php if ($user['user_name']) { ?>
+                    (<?= $user['user_name']; ?>)
                   <?php } ?>
-                  <sup class="red">TL:<?= $user['trust_level']; ?></sup>
-                  <?php if ($user['invitation_id'] != 0) { ?><sup>+ inv. id<?= $user['invitation_id']; ?></sup><?php } ?>
+                  <sup class="red">TL:<?= $user['user_trust_level']; ?></sup>
+                  <?php if ($user['user_invitation_id'] != 0) { ?><sup>+ inv. id<?= $user['user_invitation_id']; ?></sup><?php } ?>
                   <div class="size-13">
-                    <?= $user['email']; ?>
+                    <?= $user['user_email']; ?>
                   </div>
-                  <?php if ($user['limiting_mode'] == 1) { ?>
+                  <?php if ($user['user_limiting_mode'] == 1) { ?>
                     <div class="red"><?= lang('Dumb mode'); ?></div>
                   <?php } ?>
 
@@ -65,21 +65,8 @@
                     bans: <?= $user['isBan']['banlist_int_num']; ?>
                   <?php } ?>
                 </span>
-                <span class="t-td center">
-                  <?php if ($user['trust_level'] != 5) { ?>
-                    <?php if ($user['isBan']) { ?>
-                      <span class="user-ban" data-id="<?= $user['id']; ?>">
-                        <span class="red"><?= lang('Unban'); ?></span>
-                      </span>
-                    <?php } else { ?>
-                      <span class="user-ban" data-id="<?= $user['id']; ?>"><?= lang('Ban it'); ?></span>
-                    <?php } ?>
-                  <?php } else { ?>
-                    ---
-                  <?php } ?>
-                </span>
                 <span class="t-td size-13">
-                  <?= $user['reg_ip']; ?>
+                  <?= $user['user_reg_ip']; ?>
                   <?php if ($user['replayIp'] > 1) { ?>
                     <sup class="red">(<?= $user['replayIp']; ?>)</sup>
                   <?php } ?> <br>
@@ -94,16 +81,28 @@
                    <?= $user['logs']['logs_date']; ?>
                   <?php } ?>
 
-                  <?php if ($user['activated'] == 1) { ?>
+                  <?php if ($user['user_activated'] == 1) { ?>
                     <div><?= lang('Email activated'); ?></div>
                   <?php } else { ?>
                     <span class="red"><?= lang('Not activated'); ?> e-mail</span>
                   <?php } ?>
                 </span>
-
                 <span class="t-td center">
-                  <?php if ($user['trust_level'] != 5) { ?>
-                    <a title="<?= lang('Edit'); ?>" href="/admin/users/<?= $user['id']; ?>/edit">
+                  <?php if ($user['user_trust_level'] != 5) { ?>
+                    <?php if ($user['isBan']) { ?>
+                      <span class="user-ban" data-id="<?= $user['user_id']; ?>">
+                        <span class="red"><?= lang('Unban'); ?></span>
+                      </span>
+                    <?php } else { ?>
+                      <span class="user-ban" data-id="<?= $user['user_id']; ?>"><?= lang('Ban it'); ?></span>
+                    <?php } ?>
+                  <?php } else { ?>
+                    ---
+                  <?php } ?>
+                </span>
+                <span class="t-td center">
+                  <?php if ($user['user_trust_level'] != 5) { ?>
+                    <a title="<?= lang('Edit'); ?>" href="/admin/users/<?= $user['user_id']; ?>/edit">
                       <i class="icon-pencil size-15"></i>
                     </a>
                   <?php } else { ?>

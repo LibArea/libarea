@@ -43,8 +43,8 @@ class ActionController extends \MainController
         }
 
         $data = [
-            'user_id'       => $uid['id'],
-            'user_tl'       => $uid['trust_level'],
+            'user_id'       => $uid['user_id'],
+            'user_tl'       => $uid['user_trust_level'],
             'created_at'    => date("Y-m-d H:i:s"),
             'post_id'       => $info_post_id,
             'content_id'    => $info_type[$type . '_id'],

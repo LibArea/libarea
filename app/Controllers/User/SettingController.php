@@ -16,15 +16,15 @@ class SettingController extends \MainController
         // Данные участника
         $login  = \Request::get('login');
         $uid    = Base::getUid();
-        $user   = UserModel::getUser($uid['login'], 'slug');
+        $user   = UserModel::getUser($uid['user_login'], 'slug');
 
         // Ошибочный Slug в Url
-        if ($login != $user['login']) {
-            redirect('/u/' . $user['login'] . '/setting');
+        if ($login != $user['user_login']) {
+            redirect('/u/' . $user['user_login'] . '/setting');
         }
 
         // Если пользователь забанен
-        $user = UserModel::getUser($uid['id'], 'id');
+        $user = UserModel::getUser($uid['user_id'], 'id');
         Base::accountBan($user);
 
         $data = [
@@ -44,7 +44,7 @@ class SettingController extends \MainController
         $public_email   = \Request::getPost('public_email');
 
         $uid            = Base::getUid();
-        $redirect       = '/u/' . $uid['login'] . '/setting';
+        $redirect       = '/u/' . $uid['user_login'] . '/setting';
         
         Base::Limits($name, lang('Name'), '3', '11', $redirect);
         Base::Limits($about, lang('About me'), '0', '255', $redirect);
@@ -54,17 +54,17 @@ class SettingController extends \MainController
         }
 
         $data = [
-            'id'            => $uid['id'],
-            'name'          => $name,
-            'color'         => \Request::getPostString('color', '#339900'),
-            'about'         => $about,
-            'website'       => \Request::getPostString('website', ''),
-            'location'      => \Request::getPostString('location', ''),
-            'public_email'  => $public_email,
-            'skype'         => \Request::getPostString('skype', ''),
-            'twitter'       => \Request::getPostString('twitter', ''),
-            'telegram'      => \Request::getPostString('telegram', ''),
-            'vk'            => \Request::getPostString('vk', ''),
+            'user_id'            => $uid['user_id'],
+            'user_name'          => $name,
+            'user_color'         => \Request::getPostString('color', '#339900'),
+            'user_about'         => $about,
+            'user_website'       => \Request::getPostString('website', ''),
+            'user_location'      => \Request::getPostString('location', ''),
+            'user_public_email'  => $public_email,
+            'user_skype'         => \Request::getPostString('skype', ''),
+            'user_twitter'       => \Request::getPostString('twitter', ''),
+            'user_telegram'      => \Request::getPostString('telegram', ''),
+            'user_vk'            => \Request::getPostString('vk', ''),
         ];
 
         UserModel::editProfile($data);
@@ -80,11 +80,11 @@ class SettingController extends \MainController
         $login  = \Request::get('login');
 
         // Ошибочный Slug в Url
-        if ($login != $uid['login']) {
-            redirect('/u/' . $uid['login'] . '/setting/avatar');
+        if ($login != $uid['user_login']) {
+            redirect('/u/' . $uid['user_login'] . '/setting/avatar');
         }
 
-        $userInfo           = UserModel::getUser($uid['login'], 'slug');
+        $userInfo           = UserModel::getUser($uid['user_login'], 'slug');
 
         $data = [
             'h1'            => lang('Change avatar'),
@@ -104,8 +104,8 @@ class SettingController extends \MainController
         $uid  = Base::getUid();
         $login  = \Request::get('login');
 
-        if ($login != $uid['login']) {
-            redirect('/u/' . $uid['login'] . '/setting/security');
+        if ($login != $uid['user_login']) {
+            redirect('/u/' . $uid['user_login'] . '/setting/security');
         }
 
         $data = [
@@ -124,21 +124,21 @@ class SettingController extends \MainController
     function avatarEdit()
     {
         $uid        = Base::getUid();
-        $redirect   = '/u/' . $uid['login'] . '/setting/avatar';
+        $redirect   = '/u/' . $uid['user_login'] . '/setting/avatar';
 
         // Запишем img
         $img        = $_FILES['images'];
         $check_img  = $_FILES['images']['name'][0];
         if ($check_img) {
-            $new_img = UploadImage::img($img, $uid['id'], 'user');
-            $_SESSION['account']['avatar'] = $new_img;
+            $new_img = UploadImage::img($img, $uid['user_id'], 'user');
+            $_SESSION['account']['user_avatar'] = $new_img;
         }
 
         // Баннер
         $cover          = $_FILES['cover'];
         $check_cover    = $_FILES['cover']['name'][0];
         if ($check_cover) {
-            UploadImage::cover($cover, $uid['id'], 'user');
+            UploadImage::cover($cover, $uid['user_id'], 'user');
         }
 
         Base::addMsg(lang('Change saved'), 'success');
@@ -153,7 +153,7 @@ class SettingController extends \MainController
         $password2   = \Request::getPost('password2');
         $password3   = \Request::getPost('password3');
 
-        $redirect = '/u/' . $uid['login'] . '/setting/security';
+        $redirect = '/u/' . $uid['user_login'] . '/setting/security';
         if ($password2 != $password3) {
             Base::addMsg(lang('pass-match-err'), 'error');
             redirect($redirect);
@@ -190,30 +190,30 @@ class SettingController extends \MainController
     {
         $uid        = Base::getUid();
 
-        if ($login != $uid['login']) {
-            redirect('/u/' . $uid['login'] . '/setting/avatar');
+        if ($login != $uid['user_login']) {
+            redirect('/u/' . $uid['user_login'] . '/setting/avatar');
         }
 
-        $user = UserModel::getUser($uid['login'], 'slug');
+        $user = UserModel::getUser($uid['user_login'], 'slug');
 
         // Удалять может только автор и админ
-        if ($user['id'] != $uid['id'] && $uid['trust_level'] != 5) {
+        if ($user['user_id'] != $uid['user_id'] && $uid['user_trust_level'] != 5) {
             redirect('/');
         }
 
         $path_img = HLEB_PUBLIC_DIR . '/uploads/users/cover/';
 
         // Удалим, кроме дефолтной
-        if ($user['cover_art'] != 'cover_art.jpeg') {
-            unlink($path_img . $user['cover_art']);
+        if ($user['user_cover_art'] != 'cover_art.jpeg') {
+            unlink($path_img . $user['user_cover_art']);
         }
 
         UserModel::userCoverRemove($user['id']);
         Base::addMsg(lang('Cover removed'), 'success');
 
         // Если удаляет администрация
-        if ($uid['trust_level'] == 5) {
-            redirect('/admin/user/' . $user['id'] . '/edit');
+        if ($uid['user_trust_level'] == 5) {
+            redirect('/admin/user/' . $user['user_id'] . '/edit');
         }
 
         redirect($redirect);

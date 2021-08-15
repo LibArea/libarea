@@ -3,10 +3,10 @@
     <main>
         <div class="white-box">
             <div class="pt5 pr15 pb0 pl15">
-                <?= breadcrumb('/', lang('Home'), '/u/' . $uid['login'], lang('Profile'), $data['h1']); ?>
+                <?= breadcrumb('/', lang('Home'), '/u/' . $uid['user_login'], lang('Profile'), $data['h1']); ?>
                 <ul class="nav-tabs mt0 mb15">
                     <li>
-                        <a href="/u/<?= $uid['login']; ?>/setting">
+                        <a href="/u/<?= $uid['user_login']; ?>/setting">
                             <span><?= lang('Setting profile'); ?></span>
                         </a>
                     </li>
@@ -14,7 +14,7 @@
                         <span><?= lang('Avatar'); ?> / <?= lang('Cover art'); ?></span>
                     </li>
                     <li>
-                        <a href="/u/<?= $uid['login']; ?>/setting/security">
+                        <a href="/u/<?= $uid['user_login']; ?>/setting/security">
                             <span><?= lang('Password'); ?></span>
                         </a>
                     </li>
@@ -23,7 +23,7 @@
         </div>             
         <div class="white-box">
             <div class="pt15 pr15 pb5 pl15 box setting avatar">
-                <?= user_avatar_img($user['avatar'], 'max', $user['login'], 'ava'); ?>
+                <?= user_avatar_img($user['user_avatar'], 'max', $user['user_login'], 'ava'); ?>
                 <form method="POST" action="/users/setting/avatar/edit" enctype="multipart/form-data">
                     <?= csrf_field() ?>
                     <div class="box-form-img">
@@ -36,9 +36,9 @@
                         <p><input type="submit" class="button" value="<?= lang('Download'); ?>" /></p>
                     </div>
                     <br>
-                    <?php if ($user['cover_art'] != 'cover_art.jpeg') { ?>
-                        <img class="cover" src="<?= user_cover_url($user['cover_art']); ?>">
-                        <a class="right size-13" href="/u/<?= $uid['login']; ?>/delete/cover">
+                    <?php if ($user['user_cover_art'] != 'cover_art.jpeg') { ?>
+                        <img class="cover" src="<?= user_cover_url($user['user_cover_art']); ?>">
+                        <a class="right size-13" href="/u/<?= $uid['user_login']; ?>/delete/cover">
                             <?= lang('Remove'); ?>
                         </a>
                     <?php } else { ?>

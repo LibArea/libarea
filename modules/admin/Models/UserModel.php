@@ -10,26 +10,26 @@ class UserModel extends \MainModel
     // Страница участников
     public static function getUsersListForAdmin($page, $limit, $sheet)
     {
-        $string = "WHERE ban_list > 0";
+        $string = "WHERE user_ban_list > 0";
         if ($sheet == 'all') {
             $string = "";
         }
 
         $start  = ($page - 1) * $limit;
         $sql = "SELECT 
-                    id,
-                    login,
-                    email,
-                    name,
-                    avatar,
-                    created_at,
-                    trust_level,
-                    activated,
-                    invitation_id,
-                    limiting_mode,
-                    reg_ip,
-                    ban_list
-                        FROM users $string ORDER BY id DESC LIMIT $start, $limit";
+                    user_id,
+                    user_login,
+                    user_email,
+                    user_name,
+                    user_avatar,
+                    user_created_at,
+                    user_trust_level,
+                    user_activated,
+                    user_invitation_id,
+                    user_limiting_mode,
+                    user_reg_ip,
+                    user_ban_list
+                        FROM users $string ORDER BY user_id DESC LIMIT $start, $limit";
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -37,12 +37,12 @@ class UserModel extends \MainModel
     // Количество участинков
     public static function getUsersListForAdminCount($sheet)
     {
-        $string = "WHERE ban_list > 0";
+        $string = "WHERE user_ban_list > 0";
         if ($sheet == 'all') {
             $string = "";
         }
 
-        $sql = "SELECT id FROM users $string";
+        $sql = "SELECT user_id FROM users $string";
 
         return DB::run($sql)->rowCount();
     }
@@ -73,17 +73,17 @@ class UserModel extends \MainModel
                     logs_trust_level,
                     logs_ip_address,
                     logs_date,
-                    id,
-                    login,
-                    name,
-                    email,
-                    avatar,
-                    created_at,
-                    reg_ip,
-                    invitation_id,
-                    trust_level
+                    user_id,
+                    user_login,
+                    user_name,
+                    user_email,
+                    user_avatar,
+                    user_created_at,
+                    user_reg_ip,
+                    user_invitation_id,
+                    user_trust_level
                         FROM users_logs 
-                        LEFT JOIN users ON id = logs_user_id
+                        LEFT JOIN users ON user_id = logs_user_id
                         WHERE logs_ip_address = :ip";
 
         return DB::run($sql, ['ip' => $ip])->fetchAll(PDO::FETCH_ASSOC);
@@ -93,9 +93,9 @@ class UserModel extends \MainModel
     public static function replayIp($ip)
     {
         $sql = "SELECT 
-                    id, 
-                    reg_ip 
-                        FROM users WHERE reg_ip = :ip";
+                    user_id, 
+                    user_reg_ip 
+                        FROM users WHERE user_reg_ip = :ip";
 
         return DB::run($sql, ['ip' => $ip])->rowCount();
     }
@@ -153,15 +153,15 @@ class UserModel extends \MainModel
         } else {
             // Занесем ip регистрации    
             $sql = "SELECT 
-                        id, 
-                        reg_ip
-                            FROM users WHERE id = :user_id";
+                        user_id, 
+                        user_reg_ip
+                            FROM users WHERE user_id = :user_id";
 
             $user = DB::run($sql, ['user_id' => $user_id])->fetch(PDO::FETCH_ASSOC);
 
             $params = [
                 'banlist_user_id'       => $user_id,
-                'banlist_ip'            => $user['reg_ip'],
+                'banlist_ip'            => $user['user_reg_ip'],
                 'banlist_bandate'       => date("Y-m-d H:i:s"),
                 'banlist_int_num'       => 1,
                 'banlist_int_period'    => '',
@@ -199,8 +199,8 @@ class UserModel extends \MainModel
     public static function setUserBanList($user_id, $status)
     {
         $sql = "UPDATE users 
-                    SET ban_list = :status
-                        WHERE id = :user_id";
+                    SET user_ban_list = :status
+                        WHERE user_id = :user_id";
 
         return  DB::run($sql, ['status' => $status, 'user_id' => $user_id]);
     }
@@ -209,14 +209,14 @@ class UserModel extends \MainModel
     public static function getInvitations()
     {
         $sql = "SELECT 
-                    id,
-                    login,
-                    avatar,
-                    uid,
-                    active_uid,
-                    active_time
+                    user_id,
+                    user_login,
+                    user_avatar,
+                    user_uid,
+                    user_active_uid,
+                    user_active_time
                         FROM invitations
-                        LEFT JOIN users ON active_uid = id ORDER BY id DESC";
+                        LEFT JOIN users ON active_uid = user_id ORDER BY id DESC";
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -225,39 +225,39 @@ class UserModel extends \MainModel
     public static function setUserEdit($data)
     {
         $params = [
-            'id'            => $data['id'],
-            'email'         => $data['email'],
-            'login'         => $data['login'],
-            'name'          => $data['name'],
-            'activated'     => $data['activated'],
-            'limiting_mode' => $data['limiting_mode'],
-            'about'         => $data['about'],
-            'trust_level'   => $data['trust_level'],
-            'website'       => $data['website'],
-            'location'      => $data['location'],
-            'public_email'  => $data['public_email'],
-            'skype'         => $data['skype'],
-            'twitter'       => $data['twitter'],
-            'telegram'      => $data['telegram'],
-            'vk'            => $data['vk'],
+            'user_id'            => $data['user_id'],
+            'user_email'         => $data['user_email'],
+            'user_login'         => $data['user_login'],
+            'user_name'          => $data['user_name'],
+            'user_activated'     => $data['user_activated'],
+            'user_limiting_mode' => $data['user_limiting_mode'],
+            'user_about'         => $data['user_about'],
+            'user_trust_level'   => $data['user_trust_level'],
+            'user_website'       => $data['user_website'],
+            'user_location'      => $data['user_location'],
+            'user_public_email'  => $data['user_public_email'],
+            'user_skype'         => $data['user_skype'],
+            'user_twitter'       => $data['user_twitter'],
+            'user_telegram'      => $data['user_telegram'],
+            'user_vk'            => $data['user_vk'],
         ];
 
-        $sql = "UPDATE users 
-                    SET email       = :email,  
-                    login           = :login, 
-                    name            = :name,
-                    activated       = :activated,
-                    limiting_mode   = :limiting_mode,
-                    about           = :about,
-                    trust_level     = :trust_level,
-                    website         = :website,
-                    location        = :location,
-                    public_email    = :public_email,
-                    skype           = :skype,
-                    twitter         = :twitter,
-                    telegram        = :telegram,
-                    vk              =:vk
-                        WHERE id = :id";
+        $sql = "UPDATE users SET 
+                    user_email           = :user_email,  
+                    user_login           = :user_login, 
+                    user_name            = :user_name,
+                    user_activated       = :user_activated,
+                    user_limiting_mode   = :user_limiting_mode,
+                    user_about           = :user_about,
+                    user_trust_level     = :user_trust_level,
+                    user_website         = :user_website,
+                    user_location        = :user_location,
+                    user_public_email    = :user_public_email,
+                    user_skype           = :user_skype,
+                    user_twitter         = :user_twitter,
+                    user_telegram        = :user_telegram,
+                    user_vk              = :user_vk
+                        WHERE user_id    = :user_id";
 
         return  DB::run($sql, $params);
     }
@@ -265,37 +265,37 @@ class UserModel extends \MainModel
     // Информация по участнику (id, slug)
     public static function getUser($params, $name)
     {
-        $sort = "id = :params";
+        $sort = "user_id = :params";
         if ($name == 'slug') {
-            $sort = "login = :params";
+            $sort = "user_login = :params";
         }
 
         $sql = "SELECT 
-                    id,
-                    login,
-                    name,
-                    activated,
-                    limiting_mode,
-                    reg_ip,
-                    email,
-                    avatar,
-                    trust_level,
-                    cover_art,
-                    color,
-                    invitation_available,
-                    about,
-                    website,
-                    location,
-                    public_email,
-                    skype,
-                    twitter,
-                    telegram,
-                    vk,
-                    created_at,
-                    my_post,
-                    ban_list,
-                    hits_count,
-                    is_deleted 
+                    user_id,
+                    user_login,
+                    user_name,
+                    user_activated,
+                    user_limiting_mode,
+                    user_reg_ip,
+                    user_email,
+                    user_avatar,
+                    user_trust_level,
+                    user_cover_art,
+                    user_color,
+                    user_invitation_available,
+                    user_about,
+                    user_website,
+                    user_location,
+                    user_public_email,
+                    user_skype,
+                    user_twitter,
+                    user_telegram,
+                    user_vk,
+                    user_created_at,
+                    user_my_post,
+                    user_ban_list,
+                    user_hits_count,
+                    user_is_deleted 
                         FROM users WHERE $sort";
 
         $result = DB::run($sql, ['params' => $params]);

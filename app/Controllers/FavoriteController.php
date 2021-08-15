@@ -24,7 +24,7 @@ class FavoriteController extends \MainController
         Base::PageRedirection($content);
 
         $type_content = $type == 'post' ? 1 : 2;
-        FavoriteModel::setFavorite($content_id, $uid['id'], $type_content);
+        FavoriteModel::setFavorite($content_id, $uid['user_id'], $type_content);
 
         return true;
     }

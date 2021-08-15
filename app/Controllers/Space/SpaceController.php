@@ -21,15 +21,15 @@ class SpaceController extends \MainController
 
         $limit = 25;
         $pagesCount = SpaceModel::getSpacesAllCount();
-        $spaces     = SpaceModel::getSpacesAll($page, $limit, $uid['id'], 'all');
+        $spaces     = SpaceModel::getSpacesAll($page, $limit, $uid['user_id'], 'all');
 
         Base::PageError404($spaces);
 
         // Введем ограничение на количество создаваемых пространств (кроме tl5)
-        $sp                 = SpaceModel::getUserCreatedSpaces($uid['id']);
+        $sp                 = SpaceModel::getUserCreatedSpaces($uid['user_id']);
         $count_space        = count($sp);
-        $total_allowed = $uid['trust_level'] == 5 ? 999 : 3;
-        $add_space_button   = validTl($uid['trust_level'], Config::get(Config::PARAM_TL_ADD_SPACE), $count_space, $total_allowed);
+        $total_allowed = $uid['user_trust_level'] == 5 ? 999 : 3;
+        $add_space_button   = validTl($uid['user_trust_level'], Config::get(Config::PARAM_TL_ADD_SPACE), $count_space, $total_allowed);
 
         $result = array();
         foreach ($spaces as $ind => $row) {
@@ -61,12 +61,12 @@ class SpaceController extends \MainController
         $limit  = 25;
 
         $pagesCount = SpaceModel::getSpacesAllCount();
-        $space      = SpaceModel::getSpacesAll($page, $limit, $uid['id'], 'subscription');
+        $space      = SpaceModel::getSpacesAll($page, $limit, $uid['user_id'], 'subscription');
 
         // Введем ограничение на количество создаваемых пространств
-        $all_space          = SpaceModel::getUserCreatedSpaces($uid['id']);
+        $all_space          = SpaceModel::getUserCreatedSpaces($uid['user_id']);
         $count_space        = count($all_space);
-        $add_space_button   = validTl($uid['trust_level'], Config::get(Config::PARAM_TL_ADD_SPACE), $count_space, 3);
+        $add_space_button   = validTl($uid['user_trust_level'], Config::get(Config::PARAM_TL_ADD_SPACE), $count_space, 3);
 
         $result = array();
         foreach ($space as $ind => $row) {
@@ -122,7 +122,7 @@ class SpaceController extends \MainController
         $space['users'] = SpaceModel::numSpaceSubscribers($space['space_id']);
 
         // Отписан участник от пространства или нет
-        $space_signed = SubscriptionModel::getFocus($space['space_id'], $uid['id'], 'space');
+        $space_signed = SubscriptionModel::getFocus($space['space_id'], $uid['user_id'], 'space');
 
         if ($sheet == 'feed') {
             $s_title = lang('space-feed-title');

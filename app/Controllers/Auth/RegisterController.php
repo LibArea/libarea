@@ -22,6 +22,7 @@ class RegisterController extends \MainController
         $data = [
             'h1'            => lang('Sign up'),
             'sheet'         => 'register',
+            'canonical'     => Config::get(Config::PARAM_URL) . '/register',
             'meta_title'    => lang('Sign up') . ' | ' . Config::get(Config::PARAM_NAME),
             'meta_desc'     => lang('info_security'),
         ];

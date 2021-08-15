@@ -85,7 +85,7 @@ class AnswerController extends \MainController
 
         Base::PageRedirection($answer);
 
-        AnswerModel::setAnswerFavorite($answer_id, $uid['id']);
+        AnswerModel::setAnswerFavorite($answer_id, $uid['user_id']);
 
         return true;
     }

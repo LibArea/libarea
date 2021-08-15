@@ -18,27 +18,27 @@ class NotificationsModel extends \MainModel
     // 10 - обращение в постах (@login)
     // 11 - в ответах (@login)
     // 12 - в комментариях (@login)
-    // 15 -  аудит
+    // 15 - аудит
 
     // Лист уведомлений
     public static function listNotification($user_id)
     {
         $sql = "SELECT
                     notification_id,
-                    sender_uid,
-                    recipient_uid,
-                    action_type,
-                    connection_type,
-                    url,
-                    add_time,
-                    read_flag,
-                    is_del,
-                    id, 
-                    login, 
-                    avatar
+                    notification_sender_id,
+                    notification_recipient_id,
+                    notification_action_type,
+                    notification_connection_type,
+                    notification_url,
+                    notification_add_time,
+                    notification_read_flag,
+                    notification_is_deleted,
+                    user_id, 
+                    user_login, 
+                    user_avatar
                         FROM notifications
-                        JOIN users ON id = sender_uid
-                        WHERE recipient_uid = :user_id
+                        JOIN users ON user_id = notification_sender_id
+                        WHERE notification_recipient_id = :user_id
                         ORDER BY notification_id DESC LIMIT 100";
 
         return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
@@ -49,39 +49,49 @@ class NotificationsModel extends \MainModel
     {
         $sql = "SELECT
                     notification_id,
-                    sender_uid,
-                    recipient_uid,
-                    action_type,
-                    connection_type,
-                    url,
-                    add_time,
-                    read_flag,
-                    is_del
+                    notification_sender_id,
+                    notification_recipient_id,
+                    notification_action_type,
+                    notification_connection_type,
+                    notification_url,
+                    notification_add_time,
+                    notification_read_flag,
+                    notification_is_deleted
                         FROM notifications
-                        WHERE recipient_uid = :user_id
-                        AND read_flag = 0";
+                        WHERE notification_recipient_id = :user_id
+                        AND notification_read_flag = 0";
 
         return DB::run($sql, ['user_id' => $user_id])->fetch(PDO::FETCH_ASSOC);
     }
 
     // Отправка
-    public static function send($sender_uid, $recipient_uid, $action_type, $connection_type, $url, $model_type = 0)
+    public static function send($sender_id, $recipient_id, $action_type, $connection_type, $url, $model_type = 0)
     {
-        if (!$recipient_uid) {
+        if (!$recipient_id) {
             return false;
         }
 
         $params = [
-            'sender_uid'        => $sender_uid,
-            'recipient_uid'     => $recipient_uid,
-            'action_type'       => $action_type,
-            'connection_type'   => $connection_type,
-            'url'               => $url,
-            'read_flag'         => 0,
+            'notification_sender_id'        => $sender_id,
+            'notification_recipient_id'     => $recipient_id,
+            'notification_action_type'      => $action_type,
+            'notification_connection_type'  => $connection_type,
+            'notification_url'              => $url,
+            'notification_read_flag'        => 0,
         ];
 
-        $sql = "INSERT INTO notifications(sender_uid, recipient_uid, action_type, connection_type, url, read_flag) 
-                       VALUES(:sender_uid, :recipient_uid, :action_type, :connection_type, :url, :read_flag)";
+        $sql = "INSERT INTO notifications(notification_sender_id, 
+                                notification_recipient_id, 
+                                notification_action_type, 
+                                notification_connection_type, 
+                                notification_url, 
+                                notification_read_flag) 
+                       VALUES(:notification_sender_id, 
+                               :notification_recipient_id, 
+                               :notification_action_type, 
+                               :notification_connection_type, 
+                               :notification_url, 
+                               :notification_read_flag)";
 
         return DB::run($sql, $params);
     }
@@ -147,7 +157,7 @@ class NotificationsModel extends \MainModel
                     post_is_deleted,
                     rel.*,
                     votes_post_item_id, votes_post_user_id,
-                    id, login, avatar, 
+                    user_id, user_login, user_avatar, 
                     space_id, space_slug, space_name, space_color
                     
                         FROM posts
@@ -168,7 +178,7 @@ class NotificationsModel extends \MainModel
                         ) AS rel
                             ON rel.relation_post_id = post_id 
 
-            INNER JOIN users ON id = post_user_id
+            INNER JOIN users ON user_id = post_user_id
             INNER JOIN spaces ON space_id = post_space_id
             LEFT JOIN votes_post ON votes_post_item_id = post_id AND votes_post_user_id = :user_id
             $string  LIMIT 100";
@@ -179,7 +189,7 @@ class NotificationsModel extends \MainModel
     // Оповещение просмотрено
     public static function updateMessagesUnread($user_id, $notif_id)
     {
-        $sql = "UPDATE notifications SET read_flag = 1 WHERE recipient_uid = :user_id AND notification_id = :notif_id";
+        $sql = "UPDATE notifications SET notification_read_flag = 1 WHERE notification_recipient_id = :user_id AND notification_id = :notif_id";
 
         return DB::run($sql, ['user_id' => $user_id, 'notif_id' => $notif_id]);
     }
@@ -188,14 +198,14 @@ class NotificationsModel extends \MainModel
     {
         $sql = "SELECT
                     notification_id,
-                    sender_uid,
-                    recipient_uid,
-                    action_type,
-                    connection_type,
-                    url,
-                    add_time,
-                    read_flag,
-                    is_del
+                    notification_sender_id,
+                    notification_recipient_id,
+                    notification_action_type,
+                    notification_connection_type,
+                    notification_url,
+                    notification_add_time,
+                    notification_read_flag,
+                    notification_is_deleted
                         FROM notifications
                             WHERE notification_id = :id";
 
@@ -204,7 +214,8 @@ class NotificationsModel extends \MainModel
 
     public static function setRemove($user_id)
     {
-        $sql = "UPDATE notifications SET read_flag = 1 WHERE recipient_uid = :user_id";
+        $sql = "UPDATE notifications SET notification_read_flag = 1 
+                        WHERE notification_recipient_id = :user_id";
 
         return DB::run($sql, ['user_id' => $user_id]);
     }

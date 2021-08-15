@@ -47,7 +47,7 @@ class AddPostController extends \MainController
         $post_ip_int    = \Request::getRemoteAddress();
 
         // Если пользователь забанен / заморожен
-        $user = UserModel::getUser($uid['id'], 'id');
+        $user = UserModel::getUser($uid['user_id'], 'id');
         Base::accountBan($user);
         Content::stopContentQuietМode($user);
 
@@ -62,7 +62,7 @@ class AddPostController extends \MainController
         // Если стоит ограничение: публиковать может только автор
         if ($space['space_permit_users'] == 1) {
             // Кроме персонала и владельца
-            if ($uid['trust_level'] != 5 && $space['space_user_id'] != $uid['id']) {
+            if ($uid['user_trust_level'] != 5 && $space['space_user_id'] != $uid['user_id']) {
                 Base::addMsg(lang('You dont have access'), 'error');
                 redirect($redirect);
             }
@@ -79,7 +79,7 @@ class AddPostController extends \MainController
             $link_url           = $parse['scheme'] . '://' . $parse['host'];
 
             // Если домена нет, то добавим его
-            $link = WebModel::getLinkOne($post_url_domain, $uid['id']);
+            $link = WebModel::getLinkOne($post_url_domain, $uid['user_id']);
             if (!$link) {
                 // Запишем минимальные данный
                 $data = [
@@ -87,7 +87,7 @@ class AddPostController extends \MainController
                     'link_url_domain'   => $post_url_domain,
                     'link_title'        => $post_title,
                     'link_content'      => $post_content,
-                    'link_user_id'      => $uid['id'],
+                    'link_user_id'      => $uid['user_id'],
                     'link_type'         => 0,
                     'link_status'       => 200,
                     'link_cat_id'       => 1,
@@ -113,8 +113,8 @@ class AddPostController extends \MainController
         $og_img             = empty($og_img) ? '' : $og_img;
 
         // Участник с нулевым уровнем доверия должен быть ограничен в добавлении ответов
-        if ($uid['trust_level'] < Config::get(Config::PARAM_TL_ADD_POST)) {
-            $num_post =  PostModel::getPostSpeed($uid['id']);
+        if ($uid['user_trust_level'] < Config::get(Config::PARAM_TL_ADD_POST)) {
+            $num_post =  PostModel::getPostSpeed($uid['user_id']);
             if (count($num_post) > 2) {
                 Base::addMsg(lang('limit-post-day'), 'error');
                 redirect('/');
@@ -130,9 +130,9 @@ class AddPostController extends \MainController
         $post_published = 1;
         if (Content::stopWordsExists($post_content)) {
             // Если меньше 2 постов и если контент попал в стоп лист, то заморозка
-            $all_count = ActionModel::ceneralContributionCount($uid['id']);
+            $all_count = ActionModel::ceneralContributionCount($uid['user_id']);
             if ($all_count < 2) {
-                ActionModel::addLimitingMode($uid['id']);
+                ActionModel::addLimitingMode($uid['user_id']);
                 Base::addMsg(lang('limiting_mode_1'), 'error');
                 redirect('/');
             }
@@ -157,7 +157,7 @@ class AddPostController extends \MainController
             'post_draft'            => $post_draft,
             'post_ip_int'           => $post_ip_int,
             'post_published'        => $post_published,
-            'post_user_id'          => $uid['id'],
+            'post_user_id'          => $uid['user_id'],
             'post_space_id'         => $space_id,
             'post_url'              => $post_url,
             'post_url_domain'       => $post_url_domain,
@@ -169,11 +169,11 @@ class AddPostController extends \MainController
         $url_post       = '/post/' . $last_post_id . '/' . $post_slug;
 
         if ($post_published == 0) {
-            ActionModel::addAudit('post', $uid['id'], $last_post_id);
+            ActionModel::addAudit('post', $uid['user_id'], $last_post_id);
             // Оповещение админу
             $type = 15; // Упоминания в посте  
             $user_id  = 1; // админу        
-            NotificationsModel::send($uid['id'], $user_id, $type, $last_post_id, $url_post, 1);
+            NotificationsModel::send($uid['user_id'], $user_id, $type, $last_post_id, $url_post, 1);
         }
 
         if (!empty($topics)) {
@@ -203,7 +203,7 @@ class AddPostController extends \MainController
             }
         }
 
-        SubscriptionModel::focus($last_post_id, $uid['id'], 'post');
+        SubscriptionModel::focus($last_post_id, $uid['user_id'], 'post');
 
         redirect($url_post);
     }
@@ -212,7 +212,7 @@ class AddPostController extends \MainController
     public function add()
     {
         $uid        = Base::getUid();
-        $spaces     = SpaceModel::getSpaceSelect($uid['id'], $uid['trust_level']);
+        $spaces     = SpaceModel::getSpaceSelect($uid['user_id'], $uid['user_trust_level']);
 
         $space_id   = \Request::getInt('space_id');
 
@@ -231,7 +231,7 @@ class AddPostController extends \MainController
 
         Request::getResources()->addBottomStyles('/assets/css/select2.css');
 
-        if ($uid['trust_level'] > 0) {
+        if ($uid['user_trust_level'] > 0) {
             Request::getResources()->addBottomScript('/assets/js/select2.min.js');
         }
 
@@ -297,8 +297,8 @@ class AddPostController extends \MainController
         }
 
         $data = [
-            'user_id'       => $uid['id'],
-            'user_tl'       => $uid['trust_level'],
+            'user_id'       => $uid['user_id'],
+            'user_tl'       => $uid['user_trust_level'],
             'created_at'    => date("Y-m-d H:i:s"),
             'post_id'       => $info_post_id,
             'content_id'    => $info_type[$type . '_id'],

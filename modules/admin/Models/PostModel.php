@@ -41,7 +41,7 @@ class PostModel extends \MainModel
                     post_url_domain,
                     post_is_deleted,
                     rel.*,
-                    id, login, avatar, 
+                    user_id, user_login, user_avatar, 
                     space_id, space_slug, space_name, space_color
                     
                         FROM posts
@@ -62,7 +62,7 @@ class PostModel extends \MainModel
                         ) AS rel
                             ON rel.relation_post_id = post_id 
 
-            INNER JOIN users ON id = post_user_id
+            INNER JOIN users ON user_id = post_user_id
             INNER JOIN spaces ON space_id = post_space_id
             $sort ORDER BY post_top DESC, post_date DESC LIMIT $start, $limit";
 

@@ -32,8 +32,8 @@
 
             <div class="comm-telo_bottom" id="comment_<?= $comment['comment_id']; ?>">
               <div class="size-13">
-                <?= user_avatar_img($comment['avatar'], 'small', $comment['login'], 'ava'); ?>
-                <a class="date" href="/u/<?= $comment['login']; ?>"><?= $comment['login']; ?></a>
+                <?= user_avatar_img($comment['user_avatar'], 'small', $comment['user_login'], 'ava'); ?>
+                <a class="date" href="/u/<?= $comment['user_login']; ?>"><?= $comment['user_login']; ?></a>
                 <span class="mr5 ml5"> &#183; </span>
                 <span class="date"><?= $comment['date']; ?></span>
 

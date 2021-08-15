@@ -1,6 +1,6 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 
-<?php if ($uid['id'] == 0) { ?>
+<?php if ($uid['user_id'] == 0) { ?>
   <div class="banner hidden size-15">
     <div class="pt15 pb5">
       <h1 class="red size-21"><?= Lori\Config::get(Lori\Config::PARAM_BANNER_TITLE); ?></h1>
@@ -16,7 +16,7 @@
         <li class="active">
           <span><?= lang('Feed'); ?></span>
         </li>
-        <?php if ($uid['id']) { ?>
+        <?php if ($uid['user_id']) { ?>
           <li>
             <a href="/all">
               <span><?= lang('All'); ?></span>
@@ -34,7 +34,7 @@
             <span><?= lang('Feed'); ?></span>
           </a>
         </li>
-        <?php if ($uid['id']) { ?>
+        <?php if ($uid['user_id']) { ?>
           <li class="active">
             <span><?= lang('All'); ?></span>
           </li>
@@ -50,7 +50,7 @@
             <span><?= lang('Feed'); ?></span>
           </a>
         </li>
-        <?php if ($uid['id']) { ?>
+        <?php if ($uid['user_id']) { ?>
           <li>
             <a href="/all">
               <span><?= lang('All'); ?></span>
@@ -63,7 +63,7 @@
       <?php } ?>
     </ul>
 
-    <?php if ($uid['uri'] == '/' && $uid['id'] > 0 && empty($data['space_user'])) { ?>
+    <?php if ($uid['uri'] == '/' && $uid['user_id'] > 0 && empty($data['space_user'])) { ?>
       <div class="white-box">
         <div class="pt5 pr15 pb5 pl15 big center gray">
           <i class="icon-lightbulb middle red"></i>
@@ -78,7 +78,7 @@
 
   </main>
   <aside>
-    <?php if ($uid['id']) { ?>
+    <?php if ($uid['user_id']) { ?>
       <?php if (!empty($data['space_user'])) { ?>
         <div class="white-box">
           <div class="pt5 pr15 pb5 pl15">
@@ -92,7 +92,7 @@
               <a class="bar-space-telo flex relative pt5 pb5 hidden gray" href="/s/<?= $sig['space_slug']; ?>" title="<?= $sig['space_name']; ?>">
                 <?= spase_logo_img($sig['space_img'], 'small', $sig['space_name'], 'ava-24 mr5'); ?>
                 <span class="ml5 size-13"><?= $sig['space_name']; ?></span>
-                <?php if ($sig['space_user_id'] == $uid['id']) { ?>
+                <?php if ($sig['space_user_id'] == $uid['user_id']) { ?>
                   <sup class="red mr5 ml5">+</sup>
                 <?php } ?>
               </a>
@@ -110,7 +110,7 @@
           <?php foreach ($data['latest_answers'] as  $answer) { ?>
             <div class="mt15 mr0 mb15 ml0 pl15" style="border-left: 2px solid <?= $answer['space_color']; ?>;">
               <div class="size-13">
-                <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava'); ?>
+                <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'ava'); ?>
                 <span class="mr5 ml5"></span>
                 <?= $answer['answer_date']; ?>
               </div>

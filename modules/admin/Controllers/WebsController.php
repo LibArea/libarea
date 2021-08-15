@@ -16,7 +16,7 @@ class WebsController extends \MainController
 
         $limit  = 25;
         $pagesCount = WebModel::getLinksAllCount();
-        $domains    = WebModel::getLinksAll($page, $limit, $uid['id']);
+        $domains    = WebModel::getLinksAll($page, $limit, $uid['user_id']);
 
         $data = [
             'meta_title'    => lang('Domains'),
@@ -55,7 +55,7 @@ class WebsController extends \MainController
         $link_url           = $parse['scheme'] . '://' . $parse['host'];
 
         $redirect = '/web';
-        $link = WebModel::getLinkOne($link_url_domain, $uid['id']);
+        $link = WebModel::getLinkOne($link_url_domain, $uid['user_id']);
         if ($link) {
             Base::addMsg(lang('The site is already there'), 'error');
             redirect($redirect);
@@ -69,7 +69,7 @@ class WebsController extends \MainController
             'link_url_domain'   => $link_url_domain,
             'link_title'        => $link_title,
             'link_content'      => $link_content,
-            'link_user_id'      => $uid['id'],
+            'link_user_id'      => $uid['user_id'],
             'link_type'         => 0,
             'link_status'       => 200,
             'link_cat_id'       => 1,
@@ -127,7 +127,7 @@ class WebsController extends \MainController
             'link_url_domain'   => $url_domain,
             'link_title'        => $link_title,
             'link_content'      => $link_content,
-            'link_user_id'      => $uid['id'],
+            'link_user_id'      => $uid['user_id'],
             'link_type'         => 0,
             'link_status'       => 200,
             'link_cat_id'       => 1,

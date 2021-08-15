@@ -26,24 +26,24 @@ class LoginController extends \MainController
 
         $uid = UserModel::userInfo($email);
 
-        if (empty($uid['id'])) {
+        if (empty($uid['user_id'])) {
             Base::addMsg(lang('Member does not exist'), 'error');
             redirect($url);
         }
 
         // Находится ли в бан- листе
-        if (UserModel::isBan($uid['id'])) {
+        if (UserModel::isBan($uid['user_id'])) {
             Base::addMsg(lang('Your account is under review'), 'error');
             redirect($url);
         }
 
         // Активирован ли E-mail
-        if (!UserModel::isActivated($uid['id'])) {
+        if (!UserModel::isActivated($uid['user_id'])) {
             Base::addMsg(lang('Your account is not activated'), 'error');
             redirect($url);
         }
 
-        if (!password_verify($password, $uid['password'])) {
+        if (!password_verify($password, $uid['user_password'])) {
             Base::addMsg(lang('E-mail or password is not correct'), 'error');
             redirect($url);
         }
@@ -51,11 +51,11 @@ class LoginController extends \MainController
         // Если нажал "Запомнить" 
         // Устанавливает сеанс пользователя и регистрирует его
         if ($rememberMe == 1) {
-            self::rememberMe($uid['id']);
+            self::rememberMe($uid['user_id']);
         }
 
         $last_ip = Request::getRemoteAddress();
-        UserModel::setUserLastLogs($uid['id'], $uid['login'], $uid['trust_level'], $last_ip);
+        UserModel::setUserLastLogs($uid['user_id'], $uid['user_login'], $uid['user_trust_level'], $last_ip);
 
         Base::setUserSession($uid);
 
@@ -69,6 +69,7 @@ class LoginController extends \MainController
         $data = [
             'h1'            => lang('Sign in'),
             'sheet'         => 'login',
+            'canonical'     => Config::get(Config::PARAM_URL) . '/login',
             'meta_title'    => lang('Sign in') . ' | ' . Config::get(Config::PARAM_NAME),
             'meta_desc'     => lang('info_login'),
         ];

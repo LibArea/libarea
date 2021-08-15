@@ -18,7 +18,7 @@ class HomeModel extends \MainModel
         // Мы должны сформировать список пространств по умолчанию (в config)
         // и добавить условие показа постов, рейтинг которых достигает > N+ значения
         // в первый час размещения, но не вошедшие в пространства по умолчанию к показу
-        if ($uid['id'] == 0) {
+        if ($uid['user_id'] == 0) {
             $string = "WHERE post_draft = 0";
         } else {
             if ($type == 'all') {
@@ -34,9 +34,9 @@ class HomeModel extends \MainModel
 
         // Удаленный пост, запрещенный к показу в ленте и ограниченный по TL
         $display = '';
-        if ($uid['trust_level'] != 5) {
-            $tl = "AND post_tl <= " . $uid['trust_level'];
-            if ($uid['id'] == 0) {
+        if ($uid['user_trust_level'] != 5) {
+            $tl = "AND post_tl <= " . $uid['user_trust_level'];
+            if ($uid['user_id'] == 0) {
                 $tl = "AND post_tl = 0";
             }
 
@@ -78,7 +78,7 @@ class HomeModel extends \MainModel
                     post_is_deleted,
                     rel.*,
                     votes_post_item_id, votes_post_user_id,
-                    id, login, avatar, 
+                    user_id, user_login, user_avatar, 
                     space_id, space_slug, space_name, space_color
                     
                         FROM posts
@@ -99,13 +99,13 @@ class HomeModel extends \MainModel
                         ) AS rel
                             ON rel.relation_post_id = post_id 
 
-            INNER JOIN users ON id = post_user_id
+            INNER JOIN users ON user_id = post_user_id
             INNER JOIN spaces ON space_id = post_space_id
-            LEFT JOIN votes_post ON votes_post_item_id = post_id AND votes_post_user_id = " . $uid['id'] . "
+            LEFT JOIN votes_post ON votes_post_item_id = post_id AND votes_post_user_id = :user_id
             
             $string $display $sort LIMIT $start, $limit";
 
-        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['user_id' => $uid['user_id']])->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // Количество постов
@@ -122,15 +122,15 @@ class HomeModel extends \MainModel
         }
 
         // Учитываем подписку на пространства
-        if ($uid['id'] == 0) {
+        if ($uid['user_id'] == 0) {
             $string = '';
         }
 
         // Учитываем TL
         $display = '';
-        if ($uid['trust_level'] != 5) {
-            $tl = "AND post_tl <= " . $uid['trust_level'];
-            if ($uid['id'] == 0) {
+        if ($uid['user_trust_level'] != 5) {
+            $tl = "AND post_tl <= " . $uid['user_trust_level'];
+            if ($uid['user_id'] == 0) {
                 $tl = "AND post_tl = 0";
             }
             $display = "AND post_is_deleted = 0 AND space_feed = 0 $tl";
@@ -148,11 +148,11 @@ class HomeModel extends \MainModel
     public static function latestAnswers($uid)
     {
         $user_answer = "AND space_feed = 0 AND post_tl = 0";
-        if ($uid['id']) {
-            $user_answer = "AND space_feed = 0 AND answer_user_id != " . $uid['id'] . " AND post_tl <= " . $uid['trust_level'];
+        if ($uid['user_id']) {
+            $user_answer = "AND space_feed = 0 AND answer_user_id != :user_id AND post_tl <=" . $uid['user_trust_level'];
 
-            if ($uid['trust_level'] != 5) {
-                $user_answer = "AND answer_user_id != " . $uid['id'];
+            if ($uid['user_trust_level'] != 5) {
+                $user_answer = "AND answer_user_id != :user_id";
             }
         }
 
@@ -167,21 +167,21 @@ class HomeModel extends \MainModel
                     post_tl,
                     post_slug,
                     post_space_id,
-                    id,
-                    login,
-                    avatar,
+                    user_id,
+                    user_login,
+                    user_avatar,
                     space_id,
                     space_color,
                     space_feed
                         FROM answers 
                         LEFT JOIN posts ON post_id = answer_post_id
-                        LEFT JOIN users ON id = answer_user_id
+                        LEFT JOIN users ON user_id = answer_user_id
                         LEFT JOIN spaces ON post_space_id = space_id 
                         WHERE answer_is_deleted = 0 
                         $user_answer 
                         ORDER BY answer_id DESC LIMIT 5";
 
-        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['user_id' =>$uid['user_id']])->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // Пространства все / подписан

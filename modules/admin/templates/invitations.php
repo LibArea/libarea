@@ -10,9 +10,9 @@
 
                         <?php foreach ($invitations as $key => $inv) { ?>
                             <div class="content-telo">
-                                <a href="/u/<?= $inv['uid']['login']; ?>"><?= $inv['uid']['login']; ?></a> <sup>id<?= $inv['uid']['id']; ?></sup>
+                                <a href="/u/<?= $inv['uid']['user_login']; ?>"><?= $inv['uid']['user_login']; ?></a> <sup>id<?= $inv['uid']['user_id']; ?></sup>
                                 =>
-                                <a href="/u/<?= $inv['login']; ?>"><?= $inv['login']; ?></a> <sup>id<?= $inv['active_uid']; ?></sup>
+                                <a href="/u/<?= $inv['user_login']; ?>"><?= $inv['user_login']; ?></a> <sup>id<?= $inv['active_uid']; ?></sup>
 
                                 <span class="size-13"> - <?= $inv['active_time']; ?></span>
                             </div>

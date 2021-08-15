@@ -4,9 +4,9 @@
     </div>
     <div class="ml15 gray size-13">--------------------------------------------</div>
     <div class="logo size-15 flex">
-        <a title="<?= lang('in-the-profile'); ?>" class="light-gray" href="/u/<?= $uid['login']; ?>">
-            <?= user_avatar_img($uid['avatar'], 'max', $uid['id'], 'ava-24 mr5 ml15'); ?>
-            <?= $uid['login']; ?>
+        <a title="<?= lang('in-the-profile'); ?>" class="light-gray" href="/u/<?= $uid['user_login']; ?>">
+            <?= user_avatar_img($uid['user_avatar'], 'max', $uid['user_id'], 'ava-24 mr5 ml15'); ?>
+            <?= $uid['user_login']; ?>
         </a>
     </div>
     <div class="ml15 gray size-13">--------------------------------------------</div>

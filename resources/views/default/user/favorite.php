@@ -3,20 +3,20 @@
     <main>
         <div class="white-box">
             <div class="pt5 pr15 pb0 pl15">
-                <?= breadcrumb('/', lang('Home'), '/u/' . $uid['login'], lang('Profile'), $data['h1']); ?>
+                <?= breadcrumb('/', lang('Home'), '/u/' . $uid['user_login'], lang('Profile'), $data['h1']); ?>
                 <ul class="nav-tabs mt0 mb15">
                   <?php if ($data['sheet'] == 'favorites') { ?>
                     <li class="active">
                       <span><?= lang('Favorites'); ?></span>
                     </li>
                     <li>
-                      <a href="/u/<?= $uid['login']; ?>/preferences">
+                      <a href="/u/<?= $uid['user_login']; ?>/preferences">
                         <span><?= lang('Preferences'); ?></span>
                       </a>
                     </li>
                   <?php } elseif ($data['sheet'] == 'preferences') { ?>
                     <li>
-                      <a href="/u/<?= $uid['login']; ?>/favorite">
+                      <a href="/u/<?= $uid['user_login']; ?>/favorite">
                         <span><?= lang('Favorites'); ?></span>
                       </a>
                     </li>
@@ -34,7 +34,7 @@
                     <div class="pt5 pr15 pb5 pl15">
                         <?php if ($fav['favorite_type'] == 1) { ?>
                             <div class="mt15 mb15">
-                                <?php if ($uid['id'] == $fav['favorite_user_id']) { ?>
+                                <?php if ($uid['user_id'] == $fav['favorite_user_id']) { ?>
                                     <span class="add-favorite size-13 right" data-id="<?= $fav['post_id']; ?>" data-type="post">
                                         <?= lang('Remove'); ?>
                                     </span>
@@ -48,11 +48,10 @@
                                     </a>
                                 </div>
                                 <div class="lowercase size-13">
-                                    <a class="mr5 gray" href="/u/<?= $fav['login']; ?>">
-                                        <?= user_avatar_img($fav['avatar'], 'small', $fav['login'], 'ava'); ?>
+                                    <a class="mr5 gray" href="/u/<?= $fav['user_login']; ?>">
+                                        <?= user_avatar_img($fav['user_avatar'], 'small', $fav['user_login'], 'ava'); ?>
                                         <span class="mr5"></span>
-                                        <?= $fav['login']; ?>
-
+                                        <?= $fav['user_login']; ?>
                                     </a>
 
                                     <span class="mr5 gray">
@@ -72,7 +71,7 @@
                         <?php } ?>
                         <?php if ($fav['favorite_type'] == 2) { ?>
                             <div>
-                                <?php if ($uid['id'] == $fav['favorite_user_id']) { ?>
+                                <?php if ($uid['user_id'] == $fav['favorite_user_id']) { ?>
                                     <span class="add-favorite right size-13" data-id="<?= $fav['answer_id']; ?>" data-type="answer">
                                         <?= lang('Remove'); ?>
                                     </span>

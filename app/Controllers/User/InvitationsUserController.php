@@ -29,14 +29,14 @@ class InvitationsUserController extends \MainController
         $uid    = Base::getUid();
         $login  = \Request::get('login');
 
-        if ($login != $uid['login']) {
-            redirect('/u/' . $uid['login'] . '/invitation');
+        if ($login != $uid['user_login']) {
+            redirect('/u/' . $uid['user_login'] . '/invitation');
         }
 
-        $invitations = UserModel::InvitationResult($uid['id']);
+        $invitations = UserModel::InvitationResult($uid['user_id']);
 
         // Если пользователь забанен
-        $user = UserModel::getUser($uid['id'], 'id');
+        $user = UserModel::getUser($uid['user_id'], 'id');
         Base::accountBan($user);
 
         $data = [
@@ -44,7 +44,7 @@ class InvitationsUserController extends \MainController
             'sheet'         => 'invites',
             'meta_title'    => lang('Invites') . ' | ' . Config::get(Config::PARAM_NAME),
             'invitations'   => $invitations,
-            'count_invites' => $user['invitation_available'],
+            'count_invites' => $user['user_invitation_available'],
         ];
 
         return view(PR_VIEW_DIR . '/user/invitation', ['data' => $data, 'uid' => $uid]);
@@ -58,23 +58,23 @@ class InvitationsUserController extends \MainController
 
         $invitation_email = \Request::getPost('email');
 
-        $redirect = '/u/' . $uid['login'] . '/invitation';
+        $redirect = '/u/' . $uid['user_login'] . '/invitation';
 
         if (!filter_var($invitation_email, FILTER_VALIDATE_EMAIL)) {
             Base::addMsg(lang('Invalid') . ' email', 'error');
             redirect($redirect);
         }
 
-        $uInfo = UserModel::userInfo($invitation_email);
-        if (!empty($uInfo['email'])) {
+        $user = UserModel::userInfo($invitation_email);
+        if (!empty($user['user_email'])) {
 
-            if ($uInfo['email']) {
+            if ($user['user_email']) {
                 Base::addMsg(lang('user-already'), 'error');
                 redirect($redirect);
             }
         }
 
-        $inv_user = UserModel::InvitationOne($uid['id']);
+        $inv_user = UserModel::InvitationOne($uid['user_id']);
 
         if ($inv_user['invitation_email'] == $invitation_email) {
             Base::addMsg(lang('invate-to-replay'), 'error');
@@ -86,7 +86,7 @@ class InvitationsUserController extends \MainController
         $invitation_code    = Base::randomString('crypto', 25);
         $add_ip             = Request::getRemoteAddress();
 
-        UserModel::addInvitation($uid['id'], $invitation_code, $invitation_email, $add_time, $add_ip);
+        UserModel::addInvitation($uid['user_id'], $invitation_code, $invitation_email, $add_time, $add_ip);
 
         Base::addMsg(lang('Invite created'), 'success');
         redirect($redirect);

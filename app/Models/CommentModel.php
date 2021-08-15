@@ -75,10 +75,10 @@ class CommentModel extends \MainModel
     // Все комментарии
     public static function getCommentsAll($page, $limit, $uid)
     {
-        if (!$uid['trust_level']) {
+        if (!$uid['user_trust_level']) {
             $tl = 'AND post_tl = 0';
         } else {
-            $tl = 'AND post_tl <= ' . $uid['trust_level'] . '';
+            $tl = 'AND post_tl <= ' . $uid['user_trust_level'] . '';
         }
 
         $start  = ($page - 1) * $limit;
@@ -94,11 +94,11 @@ class CommentModel extends \MainModel
                     comment_user_id,
                     comment_votes,
                     comment_is_deleted,
-                    id, 
-                    login, 
-                    avatar
+                    user_id, 
+                    user_login, 
+                    user_avatar
                         FROM comments 
-                        JOIN users ON id = comment_user_id
+                        JOIN users ON user_id = comment_user_id
                         JOIN posts ON comment_post_id = post_id AND comment_is_deleted = 0 " . $tl . "
                         ORDER BY comment_id DESC LIMIT $start, $limit ";
 
@@ -129,11 +129,11 @@ class CommentModel extends \MainModel
                     comment_is_deleted,
                     votes_comment_item_id, 
                     votes_comment_user_id,
-                    id, 
-                    login, 
-                    avatar
+                    user_id, 
+                    user_login, 
+                    user_avatar
                         FROM comments 
-                        LEFT JOIN users  ON id = comment_user_id
+                        LEFT JOIN users  ON user_id = comment_user_id
                         LEFT JOIN votes_comment  ON votes_comment_item_id = comment_id 
                         AND votes_comment_user_id = $user_id
                         WHERE comment_answer_id = " . $answer_id;
@@ -158,13 +158,13 @@ class CommentModel extends \MainModel
                     post_id, 
                     post_slug,
                     post_title,
-                    id, 
-                    login, 
-                    avatar
+                    user_id, 
+                    user_login, 
+                    user_avatar
                         FROM comments 
-                        LEFT JOIN users  ON id = comment_user_id
+                        LEFT JOIN users  ON user_id = comment_user_id
                         LEFT JOIN posts  ON comment_post_id = post_id 
-                        WHERE login = :slug AND comment_is_deleted = 0 AND post_tl = 0
+                        WHERE user_login = :slug AND comment_is_deleted = 0 AND post_tl = 0
                         ORDER BY comment_id DESC LIMIT 100";
 
         return DB::run($sql, ['slug' => $slug])->fetchAll(PDO::FETCH_ASSOC);

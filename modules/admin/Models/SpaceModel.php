@@ -26,11 +26,11 @@ class SpaceModel extends \MainModel
                 space_type,
                 space_user_id,
                 space_is_delete,
-                id,
-                login,
-                avatar
+                user_id,
+                user_login,
+                user_avatar
                     FROM spaces
-                    LEFT JOIN users ON id = space_user_id
+                    LEFT JOIN users ON user_id = space_user_id
                     WHERE $signet
                     ORDER BY space_id DESC LIMIT $start, $limit";
 

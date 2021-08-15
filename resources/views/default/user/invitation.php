@@ -3,9 +3,9 @@
     <main>
         <div class="white-box">
             <div class="pt5 pr15 pb5 pl15">
-                <?= breadcrumb('/', lang('Home'), '/u/' . $uid['login'], lang('Profile'), $data['h1']); ?>
+                <?= breadcrumb('/', lang('Home'), '/u/' . $uid['user_login'], lang('Profile'), $data['h1']); ?>
 
-                <?php if ($uid['trust_level'] > 1) { ?>
+                <?php if ($uid['user_trust_level'] > 1) { ?>
 
                     <form method="post" action="/invitation/create">
                         <?php csrf_field(); ?>
@@ -26,12 +26,12 @@
                         <?php foreach ($data['invitations'] as $invite) { ?>
                             <?php if ($invite['active_status'] == 1) { ?>
                                 <div class="size-13 gray">
-                                    <?= user_avatar_img($invite['avatar'], 'small', $invite['login'], 'ava'); ?>
-                                    <a href="<?= $invite['login']; ?>"><?= $invite['login']; ?></a>
+                                    <?= user_avatar_img($invite['user_avatar'], 'small', $invite['user_login'], 'ava'); ?>
+                                    <a href="<?= $invite['user_login']; ?>"><?= $invite['user_login']; ?></a>
                                     - <?= lang('registered'); ?>
                                 </div>
 
-                                <?php if ($uid['trust_level'] == 5) { ?>
+                                <?php if ($uid['user_trust_level'] == 5) { ?>
                                     <?= lang('The link was used to'); ?>: <?= $invite['invitation_email']; ?> <br>
                                     <code>
                                         <?= Lori\Config::get(Lori\Config::PARAM_URL); ?>/register/invite/<?= $invite['invitation_code']; ?>

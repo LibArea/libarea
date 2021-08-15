@@ -1,12 +1,12 @@
 <?php if (!empty($posts)) { ?>
-  <?php foreach ($posts as  $post) { ?>
+  <?php foreach ($posts as $post) { ?>
 
     <div class="white-box">
       <div class="pt15 pr15 pb0 pl15 size-13 flex">
-        <a class="gray-light" href="/u/<?= $post['login']; ?>">
-          <?= user_avatar_img($post['avatar'], 'small', $post['login'], 'ava'); ?>
+        <a class="gray-light" href="/u/<?= $post['user_login']; ?>">
+          <?= user_avatar_img($post['user_avatar'], 'small', $post['user_login'], 'ava'); ?>
           <span class="mr5 ml5">
-            <?= $post['login']; ?>
+            <?= $post['user_login']; ?>
           </span>
         </a>
         <span class="gray-light lowercase mr5 ml5">
@@ -85,7 +85,7 @@
         <?php } ?>
 
         <div class="pt5 pr10 pb5 mt5 pl10 hidden lowercase flex justify-content-between">
-          <?= votes($uid['id'], $post, 'post'); ?>
+          <?= votes($uid['user_id'], $post, 'post'); ?>
           <?php if ($post['post_answers_count'] != 0) { ?>
             <a class="flex gray-light" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
               <?php if ($post['post_type'] == 0) { ?>

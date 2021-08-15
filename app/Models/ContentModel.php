@@ -24,17 +24,17 @@ class ContentModel extends \MainModel
     // Информация по участнику (id, slug)
     public static function getUsers($params, $name)
     {
-        $sort = "id = :params";
+        $sort = "user_id = :params";
         if ($name == 'slug') {
-            $sort = "login = :params";
+            $sort = "user_login = :params";
         }
 
         $sql = "SELECT 
-                    id,
-                    login,
-                    activated,
-                    is_deleted 
-                        FROM users WHERE $sort AND activated = 1 AND is_deleted = 0";
+                    user_id,
+                    user_login,
+                    user_activated,
+                    user_is_deleted 
+                        FROM users WHERE $sort AND user_activated = 1 AND user_is_deleted = 0";
 
         $result = DB::run($sql, ['params' => $params]);
 

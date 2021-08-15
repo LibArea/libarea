@@ -8,7 +8,7 @@
             <div class="block-answer">
                 <?php if ($answer['answer_is_deleted'] == 0) { ?>
 
-                    <?php if ($uid['id'] == $answer['answer_user_id']) { ?> <?php $otvet = 1; ?> <?php } ?>
+                    <?php if ($uid['user_id'] == $answer['answer_user_id']) { ?> <?php $otvet = 1; ?> <?php } ?>
 
                     <div class="line mb20"></div>
                     <ol class="p0 m0">
@@ -16,7 +16,7 @@
                             <div class="answ-telo hidden">
                                 <div class="qa-footer right mt10 pt10 pb10 hidden center">
                                     <div class="qa-ava">
-                                        <?= user_avatar_img($answer['avatar'], 'max', $answer['login'], 'avatar'); ?>
+                                        <?= user_avatar_img($answer['user_avatar'], 'max', $answer['user_login'], 'avatar'); ?>
                                     </div>
                                     <div class="qa-ava-info">
                                         <div class="size-13 gray-light">
@@ -24,22 +24,22 @@
                                             <?php if (empty($answer['edit'])) { ?>
                                                 (<?= lang('ed'); ?>.)
                                             <?php } ?>
-                                            <?php if ($uid['trust_level'] == 5) { ?>
+                                            <?php if ($uid['user_trust_level'] == 5) { ?>
                                                 <?= $answer['answer_ip']; ?>
                                             <?php } ?>
                                         </div>
-                                        <a class="qa-login" href="/u/<?= $answer['login']; ?>"><?= $answer['login']; ?></a>
+                                        <a class="qa-login" href="/u/<?= $answer['user_login']; ?>"><?= $answer['user_login']; ?></a>
                                     </div>
                                 </div>
 
                                 <?= $answer['answer_content'] ?>
                             </div>
                             <div class="answer-footer flex size-13">
-                                <?= votes($uid['id'], $answer, 'answer'); ?>
+                                <?= votes($uid['user_id'], $answer, 'answer'); ?>
                             
-                                <?php if ($uid['trust_level'] >= Lori\Config::get(Lori\Config::PARAM_TL_ADD_COMM_QA)) { ?>
+                                <?php if ($uid['user_trust_level'] >= Lori\Config::get(Lori\Config::PARAM_TL_ADD_COMM_QA)) { ?>
                                     <?php if ($post['post_closed'] == 0) { ?>
-                                        <?php if ($post['post_is_deleted'] == 0 || $uid['trust_level'] == 5) { ?>
+                                        <?php if ($post['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
                                             <span class="mr5 ml5">
                                                 <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray"><?= lang('Reply'); ?></a>
                                             </span>
@@ -47,7 +47,7 @@
                                     <?php } ?>
                                 <?php } ?>
 
-                                <?php if ($uid['id'] == $answer['answer_user_id'] || $uid['trust_level'] == 5) { ?>
+                                <?php if ($uid['user_id'] == $answer['answer_user_id'] || $uid['user_trust_level'] == 5) { ?>
                                     <span id="answer_edit" class="mr5 ml5">
                                         <a class="editansw gray" href="/answer/edit/<?= $answer['answer_id']; ?>">
                                             <?= lang('Edit'); ?>
@@ -55,7 +55,7 @@
                                     </span>
                                 <?php } ?>
 
-                                <?php if ($uid['id']) { ?>
+                                <?php if ($uid['user_id']) { ?>
                                     <span class="add-favorite gray mr5 ml5" data-id="<?= $answer['answer_id']; ?>" data-type="answer">
                                         <?php if ($answer['favorite_user_id']) { ?>
                                             <?= lang('remove-favorites'); ?>
@@ -65,7 +65,7 @@
                                     </span>
                                 <?php } ?>
 
-                                <?php if ($uid['trust_level'] == 5) { ?>
+                                <?php if ($uid['user_trust_level'] == 5) { ?>
                                     <span class="mr5 ml5"></span>
                                     <span id="answer_dell" class="mr5 ml5">
                                         <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray">
@@ -99,18 +99,18 @@
                                 <div class="size-13 pt5 pr5 pb5 pl5">
                                     <?= $comment['comment_content'] ?>
                                     <span class="gray">
-                                        — <a class="gray" href="/u/<?= $comment['login']; ?>"><?= $comment['login']; ?></a>
+                                        — <a class="gray" href="/u/<?= $comment['user_login']; ?>"><?= $comment['user_login']; ?></a>
                                         <span class="lowercase gray">
                                             &nbsp; <?= lang_date($comment['comment_date']); ?>
                                         </span>
-                                        <?php if ($uid['trust_level'] == 5) { ?>
+                                        <?php if ($uid['user_trust_level'] == 5) { ?>
                                             &nbsp; <?= $comment['comment_ip']; ?>
                                         <?php } ?>
                                     </span>
 
-                                    <?php if ($uid['trust_level'] >= Lori\Config::get(Lori\Config::PARAM_TL_ADD_COMM_QA)) { ?>
+                                    <?php if ($uid['user_trust_level'] >= Lori\Config::get(Lori\Config::PARAM_TL_ADD_COMM_QA)) { ?>
                                         <?php if ($post['post_closed'] == 0) { ?>
-                                            <?php if ($post['post_is_deleted'] == 0 || $uid['trust_level'] == 5) { ?>
+                                            <?php if ($post['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
                                                 <span class="ml5">
                                                     <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment-re gray">
                                                         <?= lang('Reply'); ?>
@@ -120,7 +120,7 @@
                                         <?php } ?>
                                     <?php } ?>
 
-                                    <?php if ($uid['id'] == $comment['comment_user_id'] || $uid['trust_level'] == 5) { ?>
+                                    <?php if ($uid['user_id'] == $comment['comment_user_id'] || $uid['user_trust_level'] == 5) { ?>
                                         <span id="comment_edit" class="ml5">
                                             <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray">
                                                 <?= lang('Edit'); ?>
@@ -128,7 +128,7 @@
                                         </span>
                                     <?php } ?>
 
-                                    <?php if ($uid['trust_level'] == 5) { ?>
+                                    <?php if ($uid['user_trust_level'] == 5) { ?>
                                         <span id="comment_dell" class="ml5">
                                             <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray">
                                                 <?= lang('Remove'); ?>
@@ -159,7 +159,7 @@
 <?php if (!empty($otvet)) { ?>
     <?= no_content('you-question-no'); ?>
 <?php } else { ?>
-    <?php if ($uid['id']) { ?>
+    <?php if ($uid['user_id']) { ?>
         <?php if ($post['post_closed'] == 0) { ?>
             <form id="add_answ" action="/answer/create" accept-charset="UTF-8" method="post">
                 <?= csrf_field() ?>

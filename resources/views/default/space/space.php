@@ -10,7 +10,7 @@
             <div class="p0 ml5">
     <?php } ?>
 
-                <?php if (!$uid['id']) { ?>
+                <?php if (!$uid['user_id']) { ?>
                     <div class="right">
                         <a href="/login">
                             <div class="focus-space yes-space">+ <?= lang('Read'); ?></div>
@@ -18,7 +18,7 @@
                     </div>
                 <?php } else { ?>
                     <?php if ($space_info['space_id'] != 1) { ?>
-                        <?php if ($space_info['space_user_id'] != $uid['id']) { ?>
+                        <?php if ($space_info['space_user_id'] != $uid['user_id']) { ?>
                             <div class="right">
                                 <?php if (is_array($space_signed)) { ?>
                                     <div data-id="<?= $space_info['space_id']; ?>" data-type="space" class="focus-id focus-space no-space">
@@ -72,7 +72,7 @@
                             <span>Top</span>
                         </li>
                     <?php } ?>
-                    <?php if ($uid['trust_level'] == 5 || $space_info['space_user_id'] == $uid['id']) { ?>
+                    <?php if ($uid['user_trust_level'] == 5 || $space_info['space_user_id'] == $uid['user_id']) { ?>
                         <li class="right">
                             <a class="edit-space" href="/space/edit/<?= $space_info['space_id']; ?>">
                                 <span><?= lang('Edit'); ?></span>
@@ -96,7 +96,7 @@
 
                         <div class="sb-space-stat">
                             <div class="_bl">
-                                <p class="bl-n"><a href="/u/<?= $space_info['login']; ?>"><?= $space_info['login']; ?></a></p>
+                                <p class="bl-n"><a href="/u/<?= $space_info['user_login']; ?>"><?= $space_info['user_login']; ?></a></p>
                                 <p class="bl-t gray-light"><?= lang('Created by'); ?></p>
                             </div>
                             <div class="_bl">
@@ -116,7 +116,7 @@
                             <span class="middle"><?= $space_info['space_date']; ?></span>
                         </div>
 
-                        <?php if (!$uid['id']) { ?>
+                        <?php if (!$uid['user_id']) { ?>
                             <div class="sb-add-space-post center">
                                 <a class="mt15 mb20 white" href="/login">
                                     <i class="icon-pencil size-15"></i>
@@ -125,14 +125,14 @@
                             </div>
                         <?php } else { ?>
                             <div class="mt15 mb20 white center">
-                                <?php if ($space_info['space_user_id'] == $uid['id']) { ?>
+                                <?php if ($space_info['space_user_id'] == $uid['user_id']) { ?>
                                     <a class="add-space-post" href="/post/add/space/<?= $space_info['space_id']; ?>">
                                         <?= lang('Create Post'); ?>
                                     </a>
                                 <?php } else { ?>
                                     <?php if ($space_signed) { ?>
                                         <?php if ($space_info['space_permit_users'] == 1) { ?>
-                                            <?php if ($uid['trust_level'] == 5 || $space_info['space_user_id'] == $uid['id']) { ?>
+                                            <?php if ($uid['user_trust_level'] == 5 || $space_info['space_user_id'] == $uid['user_id']) { ?>
                                                 <a class="add-space-post" href="/post/add/space/<?= $space_info['space_id']; ?>">
                                                     <?= lang('Create Post'); ?>
                                                 </a>

@@ -14,7 +14,7 @@
                                 <input class="form-input" minlength="6" maxlength="250" type="text" value="<?= htmlspecialchars($post['post_title']); ?>" name="post_title" />
                                 <div class="box_h gray">6 - 250 <?= lang('characters'); ?></div>
                             </div>
-                            <?php if ($uid['trust_level'] == 5) { ?>
+                            <?php if ($uid['user_trust_level'] == 5) { ?>
                                 <div class="boxline">
                                     <label class="form-label" for="post_title">URL</label>
                                     <?php if ($post['post_url']) { ?>
@@ -58,11 +58,11 @@
                                     <input type="radio" name="post_draft" <?php if ($post['post_draft'] == 1) { ?>checked<?php } ?> value="1"> <?= lang('Yes'); ?>
                                 </div>
                             <?php } ?>
-                            <?php if ($uid['trust_level'] > 0) { ?>
+                            <?php if ($uid['user_trust_level'] > 0) { ?>
                                 <div class="boxline">
                                     <label class="form-label" for="post_content"><?= lang('For'); ?> TL</label>
                                     <select class="form-input" name="post_tl">
-                                        <?php for ($i = 0; $i <= $uid['trust_level']; $i++) {  ?>
+                                        <?php for ($i = 0; $i <= $uid['user_trust_level']; $i++) {  ?>
                                             <option <?php if ($post['post_tl'] == $i) { ?>selected<?php } ?> value="<?= $i; ?>"><?= $i; ?></option>
                                         <?php } ?>
                                     </select>
@@ -83,7 +83,7 @@
                                 <input type="radio" name="translation" <?php if ($post['post_translation'] == 0) { ?>checked<?php } ?> value="0"> <?= lang('No'); ?>
                                 <input type="radio" name="translation" <?php if ($post['post_translation'] == 1) { ?>checked<?php } ?> value="1"> <?= lang('Yes'); ?>
                             </div>
-                            <?php if ($uid['trust_level'] > 2) { ?>
+                            <?php if ($uid['user_trust_level'] > 2) { ?>
                                 <div class="boxline">
                                     <label class="form-label" for="post_content"><?= lang('Raise'); ?>?</label>
                                     <input type="radio" name="top" <?php if ($post['post_top'] == 0) { ?>checked<?php } ?> value="0"> <?= lang('No'); ?>
@@ -104,11 +104,11 @@
                                 <input type="hidden" name="draft" id="draft" value="1">
                             <?php } ?>
 
-                            <?php if ($uid['trust_level'] > 4) { ?>
+                            <?php if ($uid['user_trust_level'] > 4) { ?>
                                 <div class="boxline">
                                     <label class="form-label" for="post_content"><?= lang('Author'); ?></label>
                                     <select name="post_user_new" id='selUser'>
-                                        <option value="<?= $user['id']; ?>"><?= $user['login']; ?></option>
+                                        <option value="<?= $user['user_id']; ?>"><?= $user['user_login']; ?></option>
                                     </select>
                                 </div>
                             <?php } ?>

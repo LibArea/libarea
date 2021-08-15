@@ -27,9 +27,9 @@ class FeedModel extends \MainModel
 
         // Удаленный пост, запрещенный к показу в ленте и ограниченный по TL (trust_level)
         $display = '';
-        if ($uid['trust_level'] != 5) {
-            $trust_level = "AND post_tl <= " . $uid['trust_level'];
-            if ($uid['id'] == 0) {
+        if ($uid['user_trust_level'] != 5) {
+            $trust_level = "AND post_tl <= " . $uid['user_trust_level'];
+            if ($uid['user_id'] == 0) {
                 $trust_level = "AND post_tl = 0";
             }
 
@@ -69,7 +69,7 @@ class FeedModel extends \MainModel
                     post_is_deleted,
                     rel.*,
                     votes_post_item_id, votes_post_user_id,
-                    id, login, avatar, 
+                    user_id, user_login, user_avatar, 
                     space_id, space_slug, space_name, space_color
                     
                         FROM posts
@@ -90,10 +90,10 @@ class FeedModel extends \MainModel
                         ) AS rel
                             ON rel.relation_post_id = post_id 
                             
-                            INNER JOIN users ON id = post_user_id
+                            INNER JOIN users ON user_id = post_user_id
                             INNER JOIN spaces ON space_id = post_space_id
                             LEFT JOIN votes_post ON votes_post_item_id = post_id 
-                                AND votes_post_user_id = " . $uid['id'] . "
+                                AND votes_post_user_id = " . $uid['user_id'] . "
             
                         $string 
                         $display 
@@ -127,23 +127,13 @@ class FeedModel extends \MainModel
 
         // Удаленный пост, запрещенный к показу в ленте и ограниченный по TL (trust_level)
         $display = '';
-        if ($uid['trust_level'] != 5) {
-            $trust_level = "AND post_tl <= " . $uid['trust_level'];
-            if ($uid['id'] == 0) {
+        if ($uid['user_trust_level'] != 5) {
+            $trust_level = "AND post_tl <= " . $uid['user_trust_level'];
+            if ($uid['user_id'] == 0) {
                 $trust_level = "AND post_tl = 0";
             }
 
             $display = "AND post_is_deleted = 0 AND space_feed = 0 $trust_level";
-        }
-
-        // Учитываем TL
-        $display = '';
-        if ($uid['trust_level'] != 5) {
-            $tl = "AND post_tl <= " . $uid['trust_level'];
-            if ($uid['id'] == 0) {
-                $tl = "AND post_tl = 0";
-            }
-            $display = "AND post_is_deleted = 0 AND space_feed = 0 $tl";
         }
 
         $sql = "SELECT 
@@ -171,7 +161,7 @@ class FeedModel extends \MainModel
                     post_url_domain,
                     post_is_deleted,
                     rel.*,
-                    id, login, avatar, 
+                    user_id, user_login, user_avatar, 
                     space_id, space_slug, space_name
                     
                         FROM posts
@@ -192,7 +182,7 @@ class FeedModel extends \MainModel
                         ) AS rel
                             ON rel.relation_post_id = post_id 
                             
-                            INNER JOIN users ON id = post_user_id
+                            INNER JOIN users ON user_id = post_user_id
                             INNER JOIN spaces ON space_id = post_space_id
             
                     $string 

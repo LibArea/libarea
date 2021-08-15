@@ -5,7 +5,7 @@ header($_SERVER["SERVER_PROTOCOL"] . " 404 Not Found");
 ?><html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Ошибка 404</title>
+        <title>Disabled (отключен)</title>
         <link href="/assets/css/404.css" rel="stylesheet" type="text/css">
         <link rel="icon" href="/favicon.ico" type="image/png">
     </head>
@@ -18,12 +18,9 @@ header($_SERVER["SERVER_PROTOCOL"] . " 404 Not Found");
             </div>
             <div class="telo">
                 <div class="telo-r">
-                    <div class="telo-txt">Страница не существует</div>
-                    <div class="telo-404">404</div>
-                    <div class="telo-txt-desc">
-                        Вы можете найти (почти) что угодно на сайте - очевидно, даже страницу, которой не существует. Может быть, этот случай, приведет вас в новое место?
-                    </div>
-                    <br><a href="/">Перейти на главную</a> 
+                    <div class="telo-txt">Сайт находится на реконструкции</div>
+                    <div class="telo-indent"></div>
+                    <div class="telo-404"><small>Disabled</small></div>
                 </div>
                 <div class="telo-l">
                     <svg xmlns="http://www.w3.org/2000/svg" class="svg-404" viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">

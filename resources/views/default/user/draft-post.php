@@ -3,8 +3,7 @@
     <main>
         <div class="white-box">
             <div class="pt5 pr15 pb5 pl15">
-                <?= breadcrumb('/', lang('Home'), '/u/' . $uid['login'], lang('Profile'), $data['h1']); ?>
-
+                <?= breadcrumb('/', lang('Home'), '/u/' . $uid['user_login'], lang('Profile'), $data['h1']); ?>
                 <div class="drafts max-width">
                     <?php if (!empty($drafts)) { ?>
 

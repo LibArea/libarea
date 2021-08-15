@@ -15,7 +15,7 @@
                                     <input id="title" class="form-input" minlength="6" maxlength="250" type="text" name="post_title" />
                                     <div class="box_h gray">6 - 250 <?= lang('characters'); ?></div>
                                 </div>
-                                <?php if ($uid['trust_level'] > Lori\Config::get(Lori\Config::PARAM_TL_ADD_URL)) { ?>
+                                <?php if ($uid['user_trust_level'] > Lori\Config::get(Lori\Config::PARAM_TL_ADD_URL)) { ?>
                                     <div class="boxline">
                                         <label class="form-label" for="post_title">URL</label>
                                         <input id="link" class="form-input" type="text" name="post_url" />
@@ -40,12 +40,12 @@
                                     <input type="radio" name="post_draft" checked value="0"> <?= lang('No'); ?>
                                     <input type="radio" name="post_draft" value="1"> <?= lang('Yes'); ?>
                                 </div>
-                                <?php if ($uid['trust_level'] > 0) { ?>
+                                <?php if ($uid['user_trust_level'] > 0) { ?>
                                     <div class="boxline">
                                         <label class="form-label" for="post_content"><?= lang('For'); ?> TL</label>
                                         <select class="form-input" name="post_tl">
                                             <option selected value="0">0</option>
-                                            <?php for ($i = 1; $i <= $uid['trust_level']; $i++) {  ?>
+                                            <?php for ($i = 1; $i <= $uid['user_trust_level']; $i++) {  ?>
                                                 <option value="<?= $i; ?>"><?= $i; ?></option>
                                             <?php } ?>
                                         </select>
@@ -66,7 +66,7 @@
                                     <input type="radio" name="translation" checked value="0"> <?= lang('No'); ?>
                                     <input type="radio" name="translation" value="1"> <?= lang('Yes'); ?>
                                 </div>
-                                <?php if ($uid['trust_level'] > 2) { ?>
+                                <?php if ($uid['user_trust_level'] > 2) { ?>
                                     <div class="boxline">
                                         <label class="form-label" for="post_content"><?= lang('Raise'); ?>?</label>
                                         <input type="radio" name="top" checked value="0"> <?= lang('No'); ?>

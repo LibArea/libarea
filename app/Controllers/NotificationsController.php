@@ -16,20 +16,20 @@ class NotificationsController extends \MainController
         $login  = \Request::get('login');
 
         $uid    = Base::getUid();
-        $user   = UserModel::getUser($uid['login'], 'slug');
+        $user   = UserModel::getUser($uid['user_login'], 'slug');
 
         // Если страница закладок не участника
-        if ($login != $uid['login']) {
-            redirect('/u/' . $user['login'] . '/notifications');
+        if ($login != $uid['user_login']) {
+            redirect('/u/' . $user['user_login'] . '/notifications');
         }
 
         // Данные участника и список уведомлений
-        $list = NotificationsModel::listNotification($uid['id']);
+        $list = NotificationsModel::listNotification($uid['user_id']);
 
         $result = array();
         foreach ($list as $ind => $row) {
 
-            $row['add_time']        = lang_date($row['add_time']);
+            $row['add_time']        = lang_date($row['notification_add_time']);
             $result[$ind]           = $row;
         }
 
@@ -48,26 +48,26 @@ class NotificationsController extends \MainController
         $uid        = Base::getUid();
         $notif_id   = \Request::getInt('id');
         $info       = NotificationsModel::getNotification($notif_id);
-
-        if ($uid['id'] != $info['recipient_uid']) {
+ 
+        if ($uid['user_id'] != $info['notification_recipient_id']) {
             return false;
         }
 
         // Если личные сообщения 
-        if ($info['action_type'] == 1) {
-            $info['url'] = 'messages/read/' . $info['connection_type'];
+        if ($info['notification_action_type'] == 1) {
+            $info['notification_url'] = 'messages/read/' . $info['notification_connection_type'];
         }
 
-        NotificationsModel::updateMessagesUnread($uid['id'], $notif_id);
-
-        redirect('/' .  $info['url']);
+        NotificationsModel::updateMessagesUnread($uid['user_id'], $notif_id);
+  
+        redirect('/' .  $info['notification_url']);
     }
 
     // Удаляем уведомления
     public function remove()
     {
         $uid    = Base::getUid();
-        NotificationsModel::setRemove($uid['id']);
-        redirect('/u/' . $uid['login'] . '/notifications');
+        NotificationsModel::setRemove($uid['user_id']);
+        redirect('/u/' . $uid['user_login'] . '/notifications');
     }
 }

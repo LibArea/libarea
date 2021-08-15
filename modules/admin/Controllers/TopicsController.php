@@ -34,7 +34,7 @@ class TopicsController extends \MainController
     public function addPage()
     {
         $uid    = Base::getUid();
-        $tl     = validTl($uid['trust_level'], 5, 0, 1);
+        $tl     = validTl($uid['user_trust_level'], 5, 0, 1);
         if ($tl === false) {
             redirect('/');
         }
@@ -51,7 +51,7 @@ class TopicsController extends \MainController
     public function editPage()
     {
         $uid    = Base::getUid();
-        $tl     = validTl($uid['trust_level'], 5, 0, 1);
+        $tl     = validTl($uid['user_trust_level'], 5, 0, 1);
         if ($tl === false) {
             redirect('/');
         }
@@ -163,7 +163,7 @@ class TopicsController extends \MainController
     public function add()
     {
         $uid    = Base::getUid();
-        $tl     = validTl($uid['trust_level'], 5, 0, 1);
+        $tl     = validTl($uid['user_trust_level'], 5, 0, 1);
         if ($tl === false) {
             redirect('/');
         }

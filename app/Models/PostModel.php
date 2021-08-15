@@ -129,10 +129,10 @@ class PostModel extends \MainModel
                     post_url_domain,
                     post_hits_count,
                     post_is_deleted,
-                    id,
-                    login,
-                    avatar,
-                    my_post,
+                    user_id,
+                    user_login,
+                    user_avatar,
+                    user_my_post,
                     space_id, 
                     space_slug, 
                     space_name,
@@ -141,7 +141,7 @@ class PostModel extends \MainModel
                     votes_post_item_id,
                     votes_post_user_id
                         FROM posts
-                        LEFT JOIN users ON id = post_user_id
+                        LEFT JOIN users ON user_id = post_user_id
                         LEFT JOIN spaces ON space_id = post_space_id
                         LEFT JOIN votes_post ON votes_post_item_id = post_id AND votes_post_user_id = :user_id
                             WHERE post_slug = :slug AND post_tl <= :trust_level";
@@ -290,7 +290,7 @@ class PostModel extends \MainModel
     // Добавить пост в профиль
     public static function addPostProfile($post_id, $user_id)
     {
-        $sql_two = "UPDATE users SET my_post = :post_id WHERE id = :user_id";
+        $sql_two = "UPDATE users SET user_my_post = :post_id WHERE id = :user_id";
 
         return DB::run($sql_two, ['post_id' => $post_id, 'user_id' => $user_id]);
     }

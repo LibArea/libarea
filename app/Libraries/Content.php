@@ -125,14 +125,14 @@ class Content
                 }
 
                 if ($user_info) {
-                    $content = str_replace('@' . $login, '<a href="/u/' . $user_info['login'] . '" class="to-user">@' . $user_info['login'] . '</a>', $content);
+                    $content = str_replace('@' . $login, '<a href="/u/' . $user_info['user_login'] . '" class="to-user">@' . $user_info['user_login'] . '</a>', $content);
 
                     if ($to_uid) {
-                        $content_uid = str_replace('@' . $login, '@' . $user_info['id'], $content_uid);
+                        $content_uid = str_replace('@' . $login, '@' . $user_info['user_id'], $content_uid);
                     }
 
                     if ($with_user) {
-                        $all_users[] = $user_info['id'];
+                        $all_users[] = $user_info['user_id'];
                     }
                 }
             }
@@ -152,7 +152,7 @@ class Content
     // Остановим изменение (добавление) контента
     public static function stopContentQuietМode($uid)
     {
-        if ($uid['limiting_mode'] == 1) {
+        if ($uid['user_limiting_mode'] == 1) {
             Base::addMsg(lang('limiting_mode_1'), 'error');
             redirect('/');
         }

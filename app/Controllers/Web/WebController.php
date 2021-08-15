@@ -19,7 +19,7 @@ class WebController extends \MainController
 
         $limit  = 25;
         $pagesCount = WebModel::getLinksAllCount();
-        $links      = WebModel::getLinksAll($page, $limit, $uid['id']);
+        $links      = WebModel::getLinksAll($page, $limit, $uid['user_id']);
 
         $num = ' | ';
         if ($page > 1) {
@@ -47,7 +47,7 @@ class WebController extends \MainController
         $page       = \Request::getInt('page');
         $page       = $page == 0 ? 1 : $page;
 
-        $link       = WebModel::getLinkOne($domain, $uid['id']);
+        $link       = WebModel::getLinkOne($domain, $uid['user_id']);
         Base::PageError404($link);
 
         $limit      = 25;

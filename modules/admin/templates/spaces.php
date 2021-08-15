@@ -69,9 +69,9 @@
 
                                         <?= $sp['space_date']; ?>
                                         <span class="mr5 ml5"> &#183; </span>
-                                        <?= user_avatar_img($sp['avatar'], 'small', $sp['login'], 'ava'); ?>
-                                        <a target="_blank" rel="noopener" href="/u/<?= $sp['login']; ?>">
-                                            <?= $sp['login']; ?>
+                                        <?= user_avatar_img($sp['user_avatar'], 'small', $sp['user_login'], 'ava'); ?>
+                                        <a target="_blank" rel="noopener" href="/u/<?= $sp['user_login']; ?>">
+                                            <?= $sp['user_login']; ?>
                                         </a>
 
                                     </span>

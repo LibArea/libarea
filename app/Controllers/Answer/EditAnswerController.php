@@ -26,10 +26,10 @@ class EditAnswerController extends \MainController
 
         // id того, кто редактирует
         $uid        = Base::getUid();
-        $user_id    = $uid['id'];
+        $user_id    = $uid['user_id'];
 
         // Если пользователь забанен / заморожен
-        $user = UserModel::getUser($uid['id'], 'id');
+        $user = UserModel::getUser($uid['user_id'], 'id');
         Base::accountBan($user);
         Content::stopContentQuietМode($user);
 
@@ -75,7 +75,7 @@ class EditAnswerController extends \MainController
             'h1'                => lang('Edit answer'),
             'answer_id'         => $answer['answer_id'],
             'post_id'           => $post['post_id'],
-            'user_id'           => $uid['id'],
+            'user_id'           => $uid['user_id'],
             'answer_content'    => $answer['answer_content'],
             'sheet'             => 'edit-answers',
             'meta_title'        => lang('Edit answer') . ' | ' . Config::get(Config::PARAM_NAME),

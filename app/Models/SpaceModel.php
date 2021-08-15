@@ -28,13 +28,13 @@ class SpaceModel extends \MainModel
                 space_type,
                 space_user_id,
                 space_is_delete,
-                id,
-                login,
-                avatar,
+                user_id,
+                user_login,
+                user_avatar,
                 signed_space_id, 
                 signed_user_id
                     FROM spaces 
-                    LEFT JOIN users ON id = space_user_id
+                    LEFT JOIN users ON user_id = space_user_id
                     LEFT JOIN spaces_signed ON signed_space_id = space_id AND signed_user_id = :user_id 
                     WHERE space_is_delete != 1 $signet
                     ORDER BY space_id DESC LIMIT $start, $limit";
@@ -107,11 +107,11 @@ class SpaceModel extends \MainModel
                     space_feed,
                     space_tl,
                     space_is_delete,
-                    id,
-                    login,
-                    avatar
+                    user_id,
+                    user_login,
+                    user_avatar
                         FROM spaces 
-                        LEFT JOIN users ON space_user_id = id
+                        LEFT JOIN users ON space_user_id = user_id
                         WHERE $sort";
 
         return DB::run($sql, ['params' => $params])->fetch(PDO::FETCH_ASSOC);
@@ -127,7 +127,6 @@ class SpaceModel extends \MainModel
                 space_img,
                 space_user_id,
                 space_is_delete
- 
                     FROM spaces  
                     WHERE space_user_id = :user_id AND space_is_delete != 1";
 

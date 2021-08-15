@@ -13,10 +13,10 @@ class AddSpaceController extends \MainController
     public function index()
     {
         $uid            = Base::getUid();
-        $space          = SpaceModel::getUserCreatedSpaces($uid['id']);
+        $space          = SpaceModel::getUserCreatedSpaces($uid['user_id']);
         $count_space    = count($space);
 
-        $valid = validTl($uid['trust_level'], Config::get(Config::PARAM_TL_ADD_SPACE), $count_space, 3);
+        $valid = validTl($uid['user_trust_level'], Config::get(Config::PARAM_TL_ADD_SPACE), $count_space, 3);
         if ($valid === false) {
             // redirect('/');
         }
@@ -57,7 +57,7 @@ class AddSpaceController extends \MainController
             'space_short_text'      => '',
             'space_date'            => date("Y-m-d H:i:s"),
             'space_category_id'     => 1,
-            'space_user_id'         => $uid['id'],
+            'space_user_id'         => $uid['user_id'],
             'space_type'            => 0,
             'space_permit_users'    => $space_permit,
             'space_feed'            => $space_feed,
@@ -78,10 +78,10 @@ class AddSpaceController extends \MainController
         $uid  = Base::getUid();
 
         // Если пользователь уже создал пространство, то ограничим их количество (кроме TL5)
-        $space          = SpaceModel::getUserCreatedSpaces($uid['id']);
+        $space          = SpaceModel::getUserCreatedSpaces($uid['user_id']);
         $count_space    = count($space);
-        $total_allowed  = $uid['trust_level'] == 5 ? 999 : 3;
-        $valid = validTl($uid['trust_level'], Config::get(Config::PARAM_TL_ADD_SPACE), $count_space, $total_allowed);
+        $total_allowed  = $uid['user_trust_level'] == 5 ? 999 : 3;
+        $valid = validTl($uid['user_trust_level'], Config::get(Config::PARAM_TL_ADD_SPACE), $count_space, $total_allowed);
         if ($valid === false) {
             redirect('/');
         }

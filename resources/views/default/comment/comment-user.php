@@ -11,10 +11,10 @@
                 <?php if ($comm['comment_is_deleted'] == 0) { ?>
                     <div class="white-box">
                         <div class="pt15 pr15 pb0 pl15 size-13">
-                            <a class="gray" href="/u/<?= $comm['login']; ?>">
-                                <?= user_avatar_img($comm['avatar'], 'max', $comm['login'], 'ava'); ?>
+                            <a class="gray" href="/u/<?= $comm['user_login']; ?>">
+                                <?= user_avatar_img($comm['user_avatar'], 'max', $comm['user_login'], 'ava'); ?>
                                 <span class="mr5 ml5"></span>
-                                <?= $comm['login']; ?>
+                                <?= $comm['user_login']; ?>
                             </a>
                             <span class="gray">
                                 <?= $comm['date']; ?>

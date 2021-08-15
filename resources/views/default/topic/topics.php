@@ -4,7 +4,7 @@
         <div class="white-box">
             <div class="pt5 pr15 pb5 pl15">
                 <h1><?= $data['h1']; ?>
-                    <?php if ($uid['trust_level'] == 5) { ?>
+                    <?php if ($uid['user_trust_level'] == 5) { ?>
                         <a class="right gray-light" href="/admin/topics">
                             <i class="icon-pencil size-15"></i>
                         </a>
@@ -25,7 +25,7 @@
 
                                     <span class="mr5 ml5"></span>
                                     <sup class="gray">x<?= $topic['topic_count']; ?></sup>
-                                    <?php if ($topic['topic_is_parent'] == 1 && $uid['trust_level'] == 5) { ?>
+                                    <?php if ($topic['topic_is_parent'] == 1 && $uid['user_trust_level'] == 5) { ?>
                                         <sup class="red size-13">root</sup>
                                     <?php } ?>
                                     <div class="size-13"><?= $topic['topic_cropped']; ?>...</div>
@@ -61,7 +61,7 @@
             </div>
         <?php } ?>
 
-        <?php if ($data['sheet'] == 'topics' && $uid['trust_level'] > 4) { ?>
+        <?php if ($data['sheet'] == 'topics' && $uid['user_trust_level'] > 4) { ?>
             <a class="right size-13 button" href="/admin/update/count"><?= lang('Update the data'); ?></a>
         <?php } ?>
     </aside>

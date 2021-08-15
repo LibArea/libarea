@@ -37,9 +37,9 @@
 
             <div class="answ-telo_bottom" id="post_<?= $post['post_id']; ?>">
               <div class="size-13">
-                <?= user_avatar_img($post['avatar'], 'small', $post['login'], 'ava'); ?>
+                <?= user_avatar_img($post['user_avatar'], 'small', $post['user_login'], 'ava'); ?>
                 <span class="mr5 ml5"></span>
-                <a class="date" href="/u/<?= $post['login']; ?>"><?= $post['login']; ?></a>
+                <a class="date" href="/u/<?= $post['user_login']; ?>"><?= $post['user_login']; ?></a>
                 <span class="mr5 ml5"> &#183; </span>
                 <?= $post['date']; ?>
 

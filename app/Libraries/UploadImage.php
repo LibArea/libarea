@@ -57,9 +57,9 @@ class UploadImage
             } elseif ($type == 'space') {
                 $images     = SpaceModel::getSpace($content_id, 'id');
                 $foto       = $images['space_img'];
-            } else {
+            } else { 
                 $images     = UserModel::getUser($content_id, 'id');
-                $foto       = $images['avatar'];
+                $foto       = $images['user_avatar'];
             }
 
             // Удалим старую аватарку, кроме дефолтной
@@ -157,7 +157,7 @@ class UploadImage
             $new_cover  = $filename . '.jpeg';
             if ($type == 'user') {
                 $user      = UserModel::getUser($content_id, 'id');
-                $cover_art  = $user['cover_art'];
+                $cover_art  = $user['user_cover_art'];
             } elseif ($type == 'space') {
                 $space      = SpaceModel::getSpace($content_id, 'id');
                 $cover_art  = $space['space_cover_art'];

@@ -22,7 +22,7 @@ class UserController extends \MainController
 
         $limit = 40;
         $usersCount = UserModel::getUsersAllCount();
-        $users      = UserModel::getUsersAll($page, $limit, $uid['id']);
+        $users      = UserModel::getUsersAll($page, $limit, $uid['user_id']);
 
         Base::PageError404($users);
 
@@ -50,19 +50,19 @@ class UserController extends \MainController
         // Покажем 404
         Base::PageError404($user);
 
-        $post = PostModel::getPostId($user['my_post']);
+        $post = PostModel::getPostId($user['user_my_post']);
 
-        if (!$user['about']) {
-            $user['about'] = lang('Riddle') . '...';
+        if (!$user['user_about']) {
+            $user['user_about'] = lang('Riddle') . '...';
         }
 
         $site_name = Config::get(Config::PARAM_NAME);
-        $meta_title = sprintf(lang('title-profile'), $user['login'], $user['name'], $site_name);
-        $meta_desc  = sprintf(lang('desc-profile'), $user['login'], $user['about'], $site_name);
+        $meta_title = sprintf(lang('title-profile'), $user['user_login'], $user['user_name'], $site_name);
+        $meta_desc  = sprintf(lang('desc-profile'), $user['user_login'], $user['user_about'], $site_name);
 
         \Request::getHead()->addStyles('/assets/css/users.css');
 
-        if ($user['ban_list'] == 1) {
+        if ($user['user_ban_list'] == 1) {
             \Request::getHead()->addMeta('robots', 'noindex');
         }
 
@@ -71,30 +71,30 @@ class UserController extends \MainController
             $_SESSION['usernumbers'] = array();
         }
 
-        if (!isset($_SESSION['usernumbers'][$user['id']])) {
-            UserModel::userHits($user['id']);
-            $_SESSION['usernumbers'][$user['id']] = $user['id'];
+        if (!isset($_SESSION['usernumbers'][$user['user_id']])) {
+            UserModel::userHits($user['user_id']);
+            $_SESSION['usernumbers'][$user['user_id']] = $user['user_id'];
         }
 
         $uid    = Base::getUid();
 
         // Ограничение на показ кнопки отправить Pm (ЛС, личные сообщения)
-        $button_pm  = accessPm($uid, $user['id'], Config::get(Config::PARAM_TL_ADD_PM));
+        $button_pm  = accessPm($uid, $user['user_id'], Config::get(Config::PARAM_TL_ADD_PM));
 
-        $counts = UserModel::contentCount($user['id']);
+        $counts = UserModel::contentCount($user['user_id']);
 
         $data = [
-            'h1'                => $user['login'],
+            'h1'                => $user['user_login'],
             'sheet'             => 'profile',
-            'created_at'        => lang_date($user['created_at']),
-            'trust_level'       => UserModel::getUserTrust($user['id']),
+            'user_created_at'   => lang_date($user['user_created_at']),
+            'user_trust_level'  => UserModel::getUserTrust($user['user_id']),
             'posts_count'       => $counts['count_posts'],
             'answers_count'     => $counts['count_answers'],
             'comments_count'    => $counts['count_comments'],
-            'spaces_user'       => SpaceModel::getUserCreatedSpaces($user['id']),
-            'badges'            => UserModel::getBadgeUserAll($user['id']),
-            'canonical'         => Config::get(Config::PARAM_URL) . '/u/' . $user['login'],
-            'img'               => Config::get(Config::PARAM_URL) . '/uploads/users/avatars/' . $user['avatar'],
+            'spaces_user'       => SpaceModel::getUserCreatedSpaces($user['user_id']),
+            'badges'            => UserModel::getBadgeUserAll($user['user_id']),
+            'canonical'         => Config::get(Config::PARAM_URL) . '/u/' . $user['user_login'],
+            'img'               => Config::get(Config::PARAM_URL) . '/uploads/users/avatars/' . $user['user_avatar'],
             'meta_title'        => $meta_title,
             'meta_desc'         => $meta_desc,
         ];
@@ -108,11 +108,11 @@ class UserController extends \MainController
         $uid    = Base::getUid();
         $login  = \Request::get('login');
 
-        if ($login != $uid['login']) {
-            redirect('/u/' . $uid['login'] . '/favorite');
+        if ($login != $uid['user_login']) {
+            redirect('/u/' . $uid['user_login'] . '/favorite');
         }
 
-        $fav = UserModel::userFavorite($uid['id']);
+        $fav = UserModel::userFavorite($uid['user_id']);
 
         $result = array();
         foreach ($fav as $ind => $row) {
@@ -125,8 +125,8 @@ class UserController extends \MainController
 
         $data = [
             'sheet'         => 'favorites',
-            'h1'            => lang('Favorites') . ' ' . $uid['login'],
-            'meta_title'    => lang('Favorites') . ' ' . $uid['login'] . ' | ' . Config::get(Config::PARAM_NAME),
+            'h1'            => lang('Favorites') . ' ' . $uid['user_login'],
+            'meta_title'    => lang('Favorites') . ' ' . $uid['user_login'] . ' | ' . Config::get(Config::PARAM_NAME),
         ];
 
         return view(PR_VIEW_DIR . '/user/favorite', ['data' => $data, 'uid' => $uid, 'favorite' => $result]);
@@ -138,16 +138,16 @@ class UserController extends \MainController
         $uid    = Base::getUid();
         $login  = \Request::get('login');
 
-        if ($login != $uid['login']) {
-            redirect('/u/' . $uid['login'] . '/drafts');
+        if ($login != $uid['user_login']) {
+            redirect('/u/' . $uid['user_login'] . '/drafts');
         }
 
-        $drafts = UserModel::userDraftPosts($uid['id']);
+        $drafts = UserModel::userDraftPosts($uid['user_id']);
 
         $data = [
             'sheet'         => 'drafts',
-            'h1'            => lang('Drafts') . ' ' . $uid['login'],
-            'meta_title'    => lang('Drafts') . ' ' . $uid['login'] . ' | ' . Config::get(Config::PARAM_NAME)
+            'h1'            => lang('Drafts') . ' ' . $uid['user_login'],
+            'meta_title'    => lang('Drafts') . ' ' . $uid['user_login'] . ' | ' . Config::get(Config::PARAM_NAME)
         ];
 
         return view(PR_VIEW_DIR . '/user/draft-post', ['data' => $data, 'uid' => $uid, 'drafts' => $drafts]);
@@ -159,11 +159,11 @@ class UserController extends \MainController
         $uid    = Base::getUid();
         $login  = \Request::get('login');
 
-        if ($login != $uid['login']) {
-            redirect('/u/' . $uid['login'] . '/preferences');
+        if ($login != $uid['user_login']) {
+            redirect('/u/' . $uid['user_login'] . '/preferences');
         }
 
-        $focus_posts = NotificationsModel::getFocusPostsListUser($uid['id']);
+        $focus_posts = NotificationsModel::getFocusPostsListUser($uid['user_id']);
 
         $result = array();
         foreach ($focus_posts as $ind => $row) {

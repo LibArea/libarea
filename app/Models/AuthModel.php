@@ -11,9 +11,9 @@ class AuthModel extends \MainModel
     public static function replayLogin($login)
     {
         $sql = "SELECT 
-                    login  
+                    user_login  
                         FROM users 
-                        WHERE login = :login";
+                        WHERE user_login = :login";
 
         return DB::run($sql, ['login' => $login])->fetch(PDO::FETCH_ASSOC);
     }
@@ -22,9 +22,9 @@ class AuthModel extends \MainModel
     public static function replayEmail($email)
     {
         $sql = "SELECT 
-                    email  
+                    user_email  
                         FROM users 
-                        WHERE email = :email";
+                        WHERE user_email = :email";
 
         return DB::run($sql, ['email' => $email])->fetch(PDO::FETCH_ASSOC);
     }

@@ -18,7 +18,7 @@ class HomeController extends \MainController
         $page   = $page == 0 ? 1 : $page;
 
         $limit  = 25;
-        $space_user         = HomeModel::getSubscriptionSpaces($uid['id']);
+        $space_user         = HomeModel::getSubscriptionSpaces($uid['user_id']);
         $latest_answers     = HomeModel::latestAnswers($uid);
 
         $pagesCount = HomeModel::feedCount($space_user, $uid);

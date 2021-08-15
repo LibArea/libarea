@@ -49,15 +49,15 @@ class ActionModel extends \MainModel
                     mod_moderates_user_id,
                     mod_created_at,
                     mod_action,
-                    id,
-                    login,
-                    avatar,
+                    user_id,
+                    user_login,
+                    user_avatar,
                     post_id,
                     post_title,
                     post_slug,
                     post_type
                         FROM moderations
-                        LEFT JOIN users ON id = mod_moderates_user_id
+                        LEFT JOIN users ON user_id = mod_moderates_user_id
                         LEFT JOIN posts ON post_id = mod_post_id
                         ORDER BY mod_id DESC LIMIT 25";
 
@@ -113,7 +113,7 @@ class ActionModel extends \MainModel
         } else {
             $field_id = 'id';
             $field_name = 'login';
-            $sql = "SELECT id, login FROM users WHERE login LIKE :login";
+            $sql = "SELECT id, login FROM users WHERE user_login LIKE :login";
         }
 
         $result = DB::run($sql, [$field_name => "%" . $search . "%"]);
@@ -133,14 +133,14 @@ class ActionModel extends \MainModel
     // Режим заморозки
     public static function addLimitingMode($user_id)
     {
-        $sql = "UPDATE users SET limiting_mode = 1 where id = :user_id";
+        $sql = "UPDATE users SET user_limiting_mode = 1 where user_id = :user_id";
 
         return DB::run($sql, ['user_id' => $user_id]);
     }
 
     public static function deleteLimitingMode($user_id)
     {
-        $sql = "UPDATE users SET limiting_mode = 0 where id = :user_id";
+        $sql = "UPDATE users SET user_limiting_mode = 0 where user_id = :user_id";
 
         return DB::run($sql, ['user_id' => $user_id]);
     }

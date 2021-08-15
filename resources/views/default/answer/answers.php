@@ -12,9 +12,9 @@
                             <?php if ($answer['answer_is_deleted'] == 0) { ?>
                                 <div class="answ-telo_bottom">
                                     <div class="flex size-13">
-                                        <?= user_avatar_img($answer['avatar'], 'small', $answer['login'], 'ava'); ?>
-                                        <a class="gray mr5 ml5" href="/u/<?= $answer['login']; ?>">
-                                            <?= $answer['login']; ?>
+                                        <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'ava'); ?>
+                                        <a class="gray mr5 ml5" href="/u/<?= $answer['user_login']; ?>">
+                                            <?= $answer['user_login']; ?>
                                         </a>
                                         <span class="gray lowercase"><?= $answer['date']; ?></span>
                                         <span class="mr5 ml5"> &#183; </span>
@@ -54,7 +54,7 @@
                 <?= lang('answers-desc'); ?>
             </div>
         </div>
-        <?php if ($uid['id'] == 0) { ?>
+        <?php if ($uid['user_id'] == 0) { ?>
             <?php include TEMPLATE_DIR . '/_block/login.php'; ?>
         <?php } ?>
     </aside>

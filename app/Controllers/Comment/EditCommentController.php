@@ -31,7 +31,7 @@ class EditCommentController extends \MainController
         }
 
         // Если пользователь забанен / заморожен
-        $user = UserModel::getUser($uid['id'], 'id');
+        $user = UserModel::getUser($uid['user_id'], 'id');
         Base::accountBan($user);
         Content::stopContentQuietМode($user);
 
@@ -59,9 +59,9 @@ class EditCommentController extends \MainController
         }
 
         $data = [
-            'comment_id'           => $comment_id,
+            'comment_id'        => $comment_id,
             'post_id'           => $post_id,
-            'user_id'           => $uid['id'],
+            'user_id'           => $uid['user_id'],
             'comment_content'   => $comment['comment_content'],
         ];
 

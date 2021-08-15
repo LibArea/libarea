@@ -5,10 +5,10 @@
             <div class="pt5 pr15 pb5 pl15 space-tags">
                 <?php if ($link['link_title']) { ?>
                     <div class="right heart-link">
-                        <?= votes($uid['id'], $link, 'link'); ?>
+                        <?= votes($uid['user_id'], $link, 'link'); ?>
                     </div>
                     <h1><?= $link['link_title']; ?>
-                        <?php if ($uid['trust_level'] > 4) { ?>
+                        <?php if ($uid['user_trust_level'] > 4) { ?>
                             <span class="mr5 ml5"></span>
                             <a class="size-13" title="<?= lang('Edit'); ?>" href="/admin/webs/<?= $link['link_id']; ?>/edit">
                                 <i class="icon-pencil size-15"></i>
