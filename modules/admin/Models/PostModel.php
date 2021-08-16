@@ -34,6 +34,7 @@ class PostModel extends \MainModel
                     post_content_img,
                     post_thumb_img,
                     post_merged_id,
+                    post_ip,
                     post_closed,
                     post_tl,
                     post_lo,

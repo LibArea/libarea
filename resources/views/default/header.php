@@ -23,11 +23,13 @@
         </form>
       </div>
       <div>
-        <a class="gray-light-2 ml30 no-mob" title="<?= lang('Topics'); ?>" href="/topics">
-          <i class="icon-clone"></i>
-        </a>
         <a class="gray-light-2 ml30 no-mob" title="<?= lang('Spaces'); ?>" href="/spaces">
           <i class="icon-infinity"></i>
+          <span class="size-15"><?= lang('Spaces'); ?></span>
+        </a>
+        <a class="gray-light-2 ml30 no-mob" title="<?= lang('Topics'); ?>" href="/topics">
+          <i class="icon-clone"></i>
+          <span class="size-15"><?= lang('Topics'); ?></span>
         </a>
       </div>
     </div>

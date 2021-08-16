@@ -42,7 +42,8 @@
                 <a class="date" href="/u/<?= $post['user_login']; ?>"><?= $post['user_login']; ?></a>
                 <span class="mr5 ml5"> &#183; </span>
                 <?= $post['date']; ?>
-
+                <span class="mr5 ml5"> &#183; </span>
+                <?= $post['post_ip']; ?>
                 <?php if ($post['post_type'] == 1) { ?>
                   <i class="icon-help green"></i>
                 <?php } ?>

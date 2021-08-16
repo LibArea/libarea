@@ -84,7 +84,7 @@ class UserModel extends \MainModel
                     user_trust_level
                         FROM users_logs 
                         LEFT JOIN users ON user_id = logs_user_id
-                        WHERE logs_ip_address = :ip";
+                        WHERE logs_ip_address = :ip OR user_reg_ip = :ip";
 
         return DB::run($sql, ['ip' => $ip])->fetchAll(PDO::FETCH_ASSOC);
     }

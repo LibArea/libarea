@@ -20,44 +20,44 @@
                     <?php foreach ($alluser as $user) {  ?>
                         <div class="t-tr">
                             <span class="t-td width-30 center">
-                                <?= $user['id']; ?>
+                                <?= $user['user_id']; ?>
                             </span>
                             <span class="t-td">
-                                <?= user_avatar_img($user['avatar'], 'small', $user['login'], 'ava'); ?>
-                                <a href="/u/<?= $user['login']; ?>"><?= $user['login']; ?></a>
-                                <?php if ($user['name']) { ?>
-                                    (<?= $user['name']; ?>)
+                                <?= user_avatar_img($user['user_avatar'], 'small', $user['user_login'], 'ava'); ?>
+                                <a href="/u/<?= $user['user_login']; ?>"><?= $user['user_login']; ?></a>
+                                <?php if ($user['user_name']) { ?>
+                                    (<?= $user['user_name']; ?>)
                                 <?php } ?>
-                                <sup class="red">TL:<?= $user['trust_level']; ?></sup>
-                                <?php if ($user['invitation_id'] != 0) { ?><sup>+ inv. id<?= $user['invitation_id']; ?></sup><?php } ?> <br>
+                                <sup class="red">TL:<?= $user['user_trust_level']; ?></sup>
+                                <?php if ($user['user_invitation_id'] != 0) { ?><sup>+ inv. id<?= $user['user_invitation_id']; ?></sup><?php } ?> <br>
                             </span>
                             <span class="t-td">
-                                <span class="date"><?= $user['email']; ?></span>
+                                <span class="date"><?= $user['user_email']; ?></span>
                             </span>
                             <span class="t-td">
-                                <?= $user['created_at']; ?>
+                                <?= $user['user_created_at']; ?>
                             </span>
                             <span class="t-td">
-                                <?= $user['reg_ip']; ?> <?php if ($user['replayIp'] > 1) { ?>
+                                <?= $user['user_reg_ip']; ?> <?php if ($user['replayIp'] > 1) { ?>
                                     <sup class="red">(<?= $user['replayIp']; ?>)</sup>
                                 <?php } ?>
                             </span>
                             <span class="t-td center">
-                                <?php if ($user['trust_level'] != 5) { ?>
+                                <?php if ($user['user_trust_level'] != 5) { ?>
                                     <?php if ($user['isBan']) { ?>
                                         <div class="user-ban" data-id="<?= $user['id']; ?>">
                                             <span class="red"><?= lang('Unban'); ?></span>
                                         </div>
                                     <?php } else { ?>
-                                        <div class="user-ban" data-id="<?= $user['id']; ?>"><?= lang('Ban it'); ?></div>
+                                        <div class="user-ban" data-id="<?= $user['user_id']; ?>"><?= lang('Ban it'); ?></div>
                                     <?php } ?>
                                 <?php } else { ?>
                                     ---
                                 <?php } ?>
                             </span>
                             <span class="t-td center">
-                                <?php if ($user['trust_level'] != 5) { ?>
-                                    <a title="<?= lang('Edit'); ?>" href="/admin/user/<?= $user['id']; ?>/edit">
+                                <?php if ($user['user_trust_level'] != 5) { ?>
+                                    <a title="<?= lang('Edit'); ?>" href="/admin/user/<?= $user['user_id']; ?>/edit">
                                         <i class="icon-pencil size-15"></i>
                                     </a>
                                 <?php } else { ?>

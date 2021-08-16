@@ -559,12 +559,11 @@ form.form {
   padding: 1px 15px;
 }
 
-.post-body img.thumb,
 img.thumb {
-  margin: 5px 15px 0 30px;
+  margin: 0 15px 0 30px;
   float: right;
-  width: 120px;
-  max-height: 100px;
+  max-width: 120px;
+  max-height: 86px;
 }
 
 /* Posts */

@@ -19,7 +19,7 @@ class AuditModel extends \MainModel
         $sql = "SELECT 
                     audit_id,
                     audit_type,
-                    audit_data,
+                    audit_date,
                     audit_user_id,
                     audit_content_id,
                     audit_read_flag

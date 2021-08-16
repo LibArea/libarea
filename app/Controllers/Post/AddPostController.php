@@ -43,8 +43,8 @@ class AddPostController extends \MainController
         $redirect = '/post/add';
 
         // Данные кто добавляет
-        $uid            = Base::getUid();
-        $post_ip_int    = \Request::getRemoteAddress();
+        $uid        = Base::getUid();
+        $post_ip    = \Request::getRemoteAddress();
 
         // Если пользователь забанен / заморожен
         $user = UserModel::getUser($uid['user_id'], 'id');
@@ -155,7 +155,7 @@ class AddPostController extends \MainController
             'post_type'             => $post_type,
             'post_translation'      => $post_translation,
             'post_draft'            => $post_draft,
-            'post_ip_int'           => $post_ip_int,
+            'post_ip'               => $post_ip,
             'post_published'        => $post_published,
             'post_user_id'          => $uid['user_id'],
             'post_space_id'         => $space_id,
@@ -251,12 +251,15 @@ class AddPostController extends \MainController
     public static function grabOgImg($post_url)
     {
         $result = URLScraper::get($post_url);
+
         if ($result['image']) {
             $image = $result['image'];
         } elseif ($result['tags_meta']['twitter:image']) {
             $image = $result['tags_meta']['twitter:image'];
         } elseif ($result['tags_meta']['og:image']) {
             $image = $result['tags_meta']['og:image'];
+        } elseif ($result['tags_my']['image']) {
+            $image = $result['tags_my']['image'];
         } else {
             $image = $result['tags_meta']['image'];
         }

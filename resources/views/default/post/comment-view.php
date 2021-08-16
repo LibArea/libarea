@@ -40,8 +40,10 @@
                                             <a rel="nofollow" class="gray-light" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#answer_<?= $answer['answer_id']; ?>">#</a>
                                         </span>
                                         <?php if ($uid['user_trust_level'] == 5) { ?>
-                                            <span class="mr5 ml5 gray-light">
+                                            <span class="mr5 ml5">
+                                                <a class="gray-light" href="/admin/logip/<?= $answer['answer_ip']; ?>">
                                                 <?= $answer['answer_ip']; ?>
+                                                </a>
                                             </span>
                                         <?php } ?>
                                     </div>
@@ -152,8 +154,10 @@
                                             <a class="gray-light" rel="nofollow" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#comment_<?= $comment['comment_id']; ?>">#</a>
                                         </span>
                                         <?php if ($uid['user_trust_level'] == 5) { ?>
-                                            <span class="mr5 ml5 gray-light">
+                                            <span class="mr5 ml5">
+                                                <a class="gray-light" href="/admin/logip/<?= $comment['comment_ip']; ?>">
                                                 <?= $comment['comment_ip']; ?>
+                                                </a>
                                             </span>
                                         <?php } ?>
                                     </div>
