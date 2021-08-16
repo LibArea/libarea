@@ -12,7 +12,7 @@
                 </h1>
 
                 <?php if (!empty($topics)) { ?>
-                    <div class="oblong-box-list topic-box-list">
+                    <div class="oblong-box-list topic-box-list pb15">
                         <?php foreach ($topics as $topic) { ?>
                             <div class="oblong-box relative left">
                                 <a title="<?= $topic['topic_title']; ?>" class="img-box absolute" href="/topic/<?= $topic['topic_slug']; ?>">

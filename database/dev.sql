@@ -144,7 +144,7 @@ CREATE TABLE `links` (
   `link_type` int(6) NOT NULL DEFAULT 0 COMMENT 'Тип сайта (0 - общий, 1 - блог, 2 - энциклопедия)',
   `link_status` int(6) NOT NULL DEFAULT 200 COMMENT 'Статус сайта (200, 403, 404)',
   `link_status_date` datetime NOT NULL DEFAULT current_timestamp() COMMENT 'Когда была проверка статуса',
-  `link_cat_id` int(11) DEFAULT 0 COMMENT 'Категория сайта',
+  `link_category_id` int(11) DEFAULT 0 COMMENT 'Категория сайта',
   `link_votes` int(6) DEFAULT 0,
   `link_count` int(6) DEFAULT 0,
   `link_is_deleted` tinyint(1) DEFAULT 0

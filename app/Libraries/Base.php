@@ -250,7 +250,7 @@ class Base
 
     public static function charset_slug($slug, $text, $redirect)
     {
-        if (!preg_match('/^[a-zA-Z0-9]+$/u', $slug)) {
+        if (!preg_match('/^[a-zA-Z0-9-]+$/u', $slug)) {
 
             $text = sprintf(lang('text-charset-slug'), '«' . $text . '»');
             Base::addMsg($text, 'error');

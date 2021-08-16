@@ -3,7 +3,7 @@
     <main class="admin">
         <div class="white-box">
             <div class="pt5 pr15 pb5 pl15">
-                <?= breadcrumb('/admin', lang('Admin'), '/admin/badges', lang('Badges'), $data['meta_title'] . ' ' . $user['login']); ?>
+                <?= breadcrumb('/admin', lang('Admin'), '/admin/badges', lang('Badges'), $data['meta_title'] . ' ' . $user['user_login']); ?>
 
                 <div class="box badges">
                     <form action="/admin/badge/user/add" method="post">
@@ -16,7 +16,7 @@
                                     <option value="<?= $badge['badge_id']; ?>"> <?= $badge['badge_title']; ?></option>
                                 <?php } ?>
                             </select>
-                            <input type="hidden" name="user_id" id="post_id" value="<?= $user['id']; ?>">
+                            <input type="hidden" name="user_id" id="post_id" value="<?= $user['user_id']; ?>">
                         </div>
                         <input type="submit" class="button" name="submit" value="<?= lang('Add'); ?>" />
                     </form>
