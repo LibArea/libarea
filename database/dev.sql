@@ -35,7 +35,7 @@ INSERT INTO `answers` (`answer_id`, `answer_post_id`, `answer_user_id`, `answer_
 CREATE TABLE `audits` (
   `audit_id` int(11) NOT NULL,
   `audit_type` varchar(16) DEFAULT NULL COMMENT 'Посты, ответы, комментарии',
-  `audit_data` timestamp NOT NULL DEFAULT current_timestamp(),
+  `audit_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `audit_user_id` int(11) NOT NULL DEFAULT 0,
   `audit_content_id` int(11) NOT NULL DEFAULT 0,
   `audit_read_flag` tinyint(1) DEFAULT 0 COMMENT 'Состояние прочтения'
