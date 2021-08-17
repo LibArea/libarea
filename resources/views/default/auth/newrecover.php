@@ -8,14 +8,16 @@
                     <form class="" action="/recover/send/pass" method="post">
                         <?php csrf_field(); ?>
                         <div class="boxline">
-                            <label for="password"><?= lang('New password'); ?></label>
-                            <input type="text" name="password" id="password">
+                            <label class="form-label" for="password">
+                                <?= lang('New password'); ?>
+                            </label>
+                            <input class="form-input" type="text" name="password" id="password">
                         </div>
                         <div class="row">
                             <div class="boxline">
                                 <input type="hidden" name="code" id="code" value="<?= $data['code']; ?>">
                                 <input type="hidden" name="user_id" id="user_id" value="<?= $data['user_id']; ?>">
-                                <button type="submit" class="button-primary"><?= lang('Reset'); ?></button>
+                                <button type="submit" class="button"><?= lang('Reset'); ?></button>
                                 <?php if (!Lori\Config::get(Lori\Config::PARAM_INVITE)) { ?>
                                     <span class="mr5 ml5 size-13"><a href="/register"><?= lang('Sign up'); ?></a></span>
                                 <?php } ?>

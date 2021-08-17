@@ -398,6 +398,9 @@ class UserModel extends \MainModel
     public static function getPasswordActivate($code)
     {
         $sql = "SELECT
+                    activate_id,
+                    activate_date,
+                    activate_user_id,
                     activate_code,
                     activate_flag
                         FROM users_activate
