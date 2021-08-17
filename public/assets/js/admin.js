@@ -1,4 +1,16 @@
 $(function(){
+    // Я читал флаг
+    $(document).on('click', '.report-status', function() {
+        let report_id  = $(this).data('id');
+        fetch("/admin/reports/status", { 
+            method: "POST",
+            body: "id=" + report_id,
+            headers:{'Content-Type': 'application/x-www-form-urlencoded'} 
+            })
+            .then((response) => {
+                location.reload();                
+            }) 
+    });
     // Забанить / разбанить участника
     $(document).on('click', '.user-ban', function() {
         let user_id  = $(this).data('id');

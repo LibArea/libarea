@@ -47,6 +47,15 @@
                                     <?php } ?>
                                 </a>
                             <?php } ?>
+                            <?php if ($notif['notification_action_type'] == 20) { ?>
+                                <i class="icon-warning-empty middle red"></i>
+                                <span class="mr5 ml5"></span>
+                                <a class="gray" href="/u/<?= $notif['user_login']; ?>"><?= $notif['user_login']; ?></a>
+                                <?= lang('complained about'); ?>
+                                <a class="ntf2 lowercase" href="/notifications/read/<?= $notif['notification_id']; ?>">
+                                    <?= lang('Comment'); ?>
+                                </a>
+                            <?php } ?>
                             <?php if ($notif['notification_action_type'] == 15) { ?>
                                 <a class="ntf2 lowercase" href="/notifications/read/<?= $notif['notification_id']; ?>">
                                     <i class="icon-lightbulb middle red"></i>

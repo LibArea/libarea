@@ -23,6 +23,12 @@
                 <span class="size-15 middle"><?= lang('Users'); ?></span>
             </a>
         </li>
+        <li class="nav<?php if ($data['sheet'] == 'reports') { ?> active<?php } ?>">
+            <a title="<?= lang('Reports'); ?>" href="/admin/reports">
+                <i class="icon-warning-empty middle mr10"></i>
+                <span class="size-15 middle"><?= lang('Reports'); ?></span>
+            </a>
+        </li>
         <li class="nav<?php if ($data['sheet'] == 'audits' || $data['sheet'] == 'audits') { ?> active<?php } ?>">
             <a title="<?= lang('Audit'); ?>" href="/admin/audits">
                 <i class="icon-lightbulb middle mr10"></i>
@@ -84,7 +90,7 @@
             </a>
         </li>
     </ul>
-     
+
     <div class="center gray size-13">
         ------------------------
         <br>

@@ -10,8 +10,13 @@ return [
     'Create Post'       => 'Написать пост',
     'Create'            => 'Написать',
     'Reads'             => 'Читают',
+    'Saw'               => 'Видел',
     'The post'          => 'Поста',
     'Bodies'            => 'Тела',
+    'Thanks'            => 'Спасибо',
+    'Report'            => 'Флаг',
+    'Reports'           => 'Флаги',
+    'complained about'  => 'пожаловался на',
     'Freely'            => 'Свободно',
     'Useful resources'  => 'Полезные ресурсы',
     'Comment deleted'   => 'Комментарий удален',
@@ -313,6 +318,8 @@ return [
     'invate-to-replay'      => 'Вы уже отсылали приглашение этому пользователю',
     'limit-post-day'        => 'Вы исчерпали лимит постов на сегодня',
     'Registration by invite'=> 'Регистрация по инвайту',
+    
+    'Breaking the rules'    => 'Нарушение правил',
 
     /* Meta - desc */
     'desc-user-all'         => 'Список всех участников сортированных по дате регистрации на сайте',

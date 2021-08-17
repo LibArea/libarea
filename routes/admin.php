@@ -10,6 +10,7 @@ Route::before('Authorization@admin')->getGroup();
         Route::get('/favicon/add')->module('admin', 'Controllers\WebsController@favicon');
         Route::get('/word/del')->module('admin', 'Controllers\WordsController@deletes');
         Route::get('/audit/status')->module('admin', 'Controllers\AuditsController@status');
+        Route::get('/reports/status')->module('admin', 'Controllers\ReportsController@status');
         
         Route::getProtect();
             Route::get('/badge/user/add')->module('admin', 'Controllers\BadgesController@addUser');
@@ -67,4 +68,7 @@ Route::before('Authorization@admin')->getGroup();
     
     Route::get('/words/add')->module('admin', 'Controllers\WordsController@addPage');
     Route::get('/words')->module('admin', 'Controllers\WordsController', ['all']);
+    
+    Route::get('/reports')->module('admin', 'Controllers\ReportsController');
+    Route::get('/reports/page/{page?}')->module('admin', 'Controllers\ReportsController')->where(['page' => '[0-9]+']);
 Route::endGroup();

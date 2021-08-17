@@ -40,7 +40,7 @@
                                 <?php if ($uid['user_trust_level'] >= Lori\Config::get(Lori\Config::PARAM_TL_ADD_COMM_QA)) { ?>
                                     <?php if ($post['post_closed'] == 0) { ?>
                                         <?php if ($post['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
-                                            <span class="mr5 ml5">
+                                            <span class="ml15">
                                                 <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray"><?= lang('Reply'); ?></a>
                                             </span>
                                         <?php } ?>
@@ -48,7 +48,7 @@
                                 <?php } ?>
 
                                 <?php if ($uid['user_id'] == $answer['answer_user_id'] || $uid['user_trust_level'] == 5) { ?>
-                                    <span id="answer_edit" class="mr5 ml5">
+                                    <span id="answer_edit" class="ml15">
                                         <a class="editansw gray" href="/answer/edit/<?= $answer['answer_id']; ?>">
                                             <?= lang('Edit'); ?>
                                         </a>
@@ -56,7 +56,7 @@
                                 <?php } ?>
 
                                 <?php if ($uid['user_id']) { ?>
-                                    <span class="add-favorite gray mr5 ml5" data-id="<?= $answer['answer_id']; ?>" data-type="answer">
+                                    <span class="add-favorite gray ml15" data-id="<?= $answer['answer_id']; ?>" data-type="answer">
                                         <?php if ($answer['favorite_user_id']) { ?>
                                             <?= lang('remove-favorites'); ?>
                                         <?php } else { ?>
@@ -67,9 +67,16 @@
 
                                 <?php if ($uid['user_trust_level'] == 5) { ?>
                                     <span class="mr5 ml5"></span>
-                                    <span id="answer_dell" class="mr5 ml5">
+                                    <span id="answer_dell" class="ml15">
                                         <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray">
                                             <?= lang('Remove'); ?>
+                                        </a>
+                                    </span>
+                                <?php } ?>
+                                <?php if ($uid['user_trust_level'] > 0) { ?>
+                                    <span id="answer_dell" class="ml15">
+                                        <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray">
+                                            <?= lang('Report'); ?>
                                         </a>
                                     </span>
                                 <?php } ?>
@@ -135,7 +142,13 @@
                                             </a>
                                         </span>
                                     <?php } ?>
-
+                                    <?php if ($uid['user_trust_level'] > 0) { ?>
+                                        <span id="answer_dell" class="ml5">
+                                            <a data-post_id="<?= $post['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray">
+                                                <?= lang('Report'); ?>
+                                            </a>
+                                        </span>
+                                    <?php } ?>
                                 </div>
                             </div>
                             <div id="comment_addentry<?= $comment['comment_id']; ?>" class="reply"></div>

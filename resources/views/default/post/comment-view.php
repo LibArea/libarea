@@ -88,6 +88,13 @@
                                             </a>
                                         </span>
                                     <?php } ?>
+                                    <?php if ($uid['user_trust_level'] > 0) { ?>
+                                        <span id="answer_dell" class="ml15">
+                                            <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray">
+                                                <?= lang('Report'); ?>
+                                            </a>
+                                        </span>
+                                    <?php } ?>
                                 </div>
                             </div>
                             <div id="answer_addentry<?= $answer['answer_id']; ?>" class="reply"></div>
@@ -184,10 +191,16 @@
                                                 <?= lang('Edit'); ?>
                                             </a>
                                         </span>
-
                                         <span id="comment_dell" class="mr5 ml5">
                                             <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray">
                                                 <?= lang('Remove'); ?>
+                                            </a>
+                                        </span>
+                                    <?php } ?>
+                                    <?php if ($uid['user_trust_level'] > 0) { ?>
+                                        <span id="answer_dell" class="ml15">
+                                            <a data-post_id="<?= $post['post_id']; ?>"data-type="comment"  data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray">
+                                                <?= lang('Report'); ?>
                                             </a>
                                         </span>
                                     <?php } ?>

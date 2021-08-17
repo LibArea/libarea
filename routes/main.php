@@ -3,6 +3,7 @@
 
 Route::before('Authorization@noAuth')->getGroup();
     Route::getType('post');
+        Route::get('/flag/repost')->controller('ReportController');
         Route::get('/backend/uploadimage')->controller('Post\EditPostController@uploadimage');
         Route::get('/status/action')->controller('ActionController@deletingAndRestoring');
         Route::get('/post/grabtitle')->controller('Post\AddPostController@grabMeta');

@@ -4,6 +4,7 @@
  * MIT License
  * https://github.com/BertMaurau/php-url-scraper
  * @author Bert Maurau
+ * См. https://github.com/orcnd/parseMetaTags
  */
 
 class URLScraper
