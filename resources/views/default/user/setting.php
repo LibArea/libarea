@@ -27,7 +27,7 @@
                     <?php csrf_field(); ?>
                     <div class="boxline">
                         <span class="name"><?= lang('Nickname'); ?></span>
-                        <?= user_avatar_img($user['user_avatar'], 'small', $user['user_login'], 'mini mr5 ml5 ava'); ?>
+                        <?= user_avatar_img($user['user_avatar'], 'small', $user['user_login'], 'mr5 ml5 ava'); ?>
                         <span class="mr5 ml5"><?= $user['user_login']; ?></span>
                     </div>
                     <div class="boxline">

@@ -111,7 +111,7 @@
             <div class="mt15 mr0 mb15 ml0 pl15" style="border-left: 2px solid <?= $answer['space_color']; ?>;">
               <div class="size-13">
                 <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'ava'); ?>
-                <span class="mr5 ml5"></span>
+                <span class="ml5"></span>
                 <?= $answer['answer_date']; ?>
               </div>
               <a class="gray" href="/post/<?= $answer['post_id']; ?>/<?= $answer['post_slug']; ?>#answer_<?= $answer['answer_id']; ?>">

@@ -21,7 +21,7 @@
 
       <?php if ($post['post_thumb_img']) { ?>
         <a title="<?= $post['post_title']; ?>" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
-          <?= post_img($post['post_thumb_img'], $post['post_title'],  'thumb no-mob', 'thumbnails'); ?>
+          <?= post_img($post['post_thumb_img'], $post['post_title'],  'thumb no-mob right', 'thumbnails'); ?>
         </a>
       <?php } ?>
 

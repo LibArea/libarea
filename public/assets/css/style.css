@@ -267,10 +267,6 @@ pre code {
   font-weight: 400;
 }
 
-.comm-telo-body a {
-  text-decoration: underline;
-}
-
 .answer-footer,
 .comm-footer {
   line-height: 17px;
@@ -282,10 +278,10 @@ pre code {
 }
 
 blockquote {
-  font-style: italic;
-  margin: 0.8em 0 0.8em 0.5em;
-  border-left: 2px solid gray;
-  padding-left: 15px;
+  margin-left: 15px;
+  background-color: #f3f3f6;
+  padding: 0.1rem 1rem;
+  border-left: 3px solid #d2d6dd;
 }
 
 a.logo {
@@ -561,7 +557,6 @@ form.form {
 
 img.thumb {
   margin: 0 15px 0 30px;
-  float: right;
   max-width: 120px;
   max-height: 86px;
 }
@@ -732,13 +727,10 @@ ol.comment-telo {
 /* Horizontal menu */
 .nav-tabs {
   position: relative;
-  z-index: 1;
   height: 45px;
   padding: 13px 15px 15px 0;
   list-style: none;
   color: #667d99;
-  background-color: #fff;
-  border-radius: 2px;
 }
 
 .nav-tabs > li {

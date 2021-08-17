@@ -87,17 +87,12 @@ li { list-style-type: none; }
 .t-td {
   display: table-cell;
   border: none;
-  border: 1px solid #e3e3e3;
   vertical-align: middle;
 }
 
-.t-td:not(.no-p) {
-  padding: 4px;
-}
-
-.w-30 {
-  width: 30px;
-}
+.t-td:not(.no-p) { padding: 8px; }
+.t-tr:nth-of-type(2n) { background-color: #f3f3f6; }
+.w-30 { width: 30px; }
 
 @media (max-width: 704px) {
   aside { display: none; }

@@ -73,7 +73,7 @@
                                         </a>
                                     </span>
                                 <?php } ?>
-                                <?php if ($uid['user_trust_level'] > 0) { ?>
+                                <?php if ($uid['user_id'] != $answer['answer_user_id'] && $uid['user_trust_level'] > 0) { ?>
                                     <span id="answer_dell" class="ml15">
                                         <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray">
                                             <?= lang('Report'); ?>
@@ -142,7 +142,7 @@
                                             </a>
                                         </span>
                                     <?php } ?>
-                                    <?php if ($uid['user_trust_level'] > 0) { ?>
+                                    <?php if ($uid['user_id'] != $comment['comment_user_id'] && $uid['user_trust_level'] > 0) { ?>
                                         <span id="answer_dell" class="ml5">
                                             <a data-post_id="<?= $post['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray">
                                                 <?= lang('Report'); ?>

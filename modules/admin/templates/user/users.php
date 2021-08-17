@@ -30,7 +30,7 @@
         <div class="t-table">
           <div class="t-th">
             <span class="t-td center">N</span>
-            <span class="t-td"><?= lang('Avatar'); ?></span>
+            <span class="t-td center"><?= lang('Avatar'); ?></span>
             <span class="t-td"><?= lang('Information'); ?></span>
             <span class="t-td">IP <?= lang('registrations'); ?></span>
             <span class="t-td"><?= lang('Last'); ?></span>

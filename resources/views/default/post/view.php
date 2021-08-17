@@ -107,7 +107,7 @@
                         </div>
                     </div>
                     <?php if ($post['post_thumb_img']) { ?>
-                        <?= post_img($post['post_thumb_img'], $post['post_title'],  'thumb', 'thumbnails'); ?>
+                        <?= post_img($post['post_thumb_img'], $post['post_title'],  'thumb right', 'thumbnails'); ?>
                     <?php } ?>
                     <div class="post-body full">
                         <div class="post">
