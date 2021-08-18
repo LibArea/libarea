@@ -2,11 +2,12 @@
 
 namespace App\Controllers\User;
 
+use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{NotificationsModel, UserModel, SpaceModel, PostModel};
 use Lori\{Content, Config, Base};
 
-class UserController extends \MainController
+class UserController extends MainController
 {
     // Все пользователи
     function index()

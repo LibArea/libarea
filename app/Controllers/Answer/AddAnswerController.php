@@ -2,16 +2,17 @@
 
 namespace App\Controllers\Answer;
 
+use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{NotificationsModel, ActionModel, AnswerModel, PostModel, UserModel};
 use Lori\{Content, Base};
 
-class AddAnswerController extends \MainController
+class AddAnswerController extends MainController
 {
     public function index()
     {
-        $post_id    = Request::getPostInt('post_id');
-        $post       = PostModel::getPostId($post_id);
+        $post_id = Request::getPostInt('post_id');
+        $post    = PostModel::getPostId($post_id);
         Base::PageError404($post);
 
         $answer_content = $_POST['answer'];                 // не фильтруем (для Markdown)
@@ -27,9 +28,9 @@ class AddAnswerController extends \MainController
         Base::Limits($answer_content, lang('Bodies'), '6', '5000', $redirect);
 
         // Ограничим частоту добавления (зависит от TL)
-        if ($uid['user_trust_level'] < 2) {
+        if ($uid['user_trust_level'] < 1) {
             $num_answer =  AnswerModel::getAnswerSpeed($uid['user_id']);
-            if (count($num_answer) > 10) {
+            if ($num_answer > 10) {
                 Base::addMsg(lang('limit_answer_day'), 'error');
                 redirect('/');
             }

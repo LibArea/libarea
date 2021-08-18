@@ -2,6 +2,7 @@
 
 namespace App\Controllers\Post;
 
+use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\SubscriptionModel;
 use App\Models\UserModel;
@@ -12,7 +13,7 @@ use App\Models\CommentModel;
 use App\Models\FavoriteModel;
 use Lori\{Content, Config, Base};
 
-class PostController extends \MainController
+class PostController extends MainController
 {
     // Полный пост
     public function index()
@@ -201,20 +202,6 @@ class PostController extends \MainController
         }
 
         PostModel::addPostProfile($post_id, $uid['user_id']);
-
-        return true;
-    }
-
-    // Помещаем пост в закладки
-    public function addPostFavorite()
-    {
-        $uid     = Base::getUid();
-        $post_id = Request::getPostInt('post_id');
-        $post    = PostModel::getPostId($post_id);
-
-        Base::PageRedirection($post);
-
-        PostModel::setPostFavorite($post_id, $uid['user_id']);
 
         return true;
     }

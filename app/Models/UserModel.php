@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use Hleb\Scheme\App\Models\MainModel;
 use Lori\Config;
 use DB;
 use PDO;
 
-class UserModel extends \MainModel
+class UserModel extends MainModel
 {
     // Страница участников
     public static function getUsersAll($page, $limit, $user_id)

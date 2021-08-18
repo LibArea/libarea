@@ -2,12 +2,13 @@
 
 namespace Modules\Admin\Controllers;
 
+use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Admin\Models\AuditModel;
 use App\Models\{PostModel, AnswerModel, CommentModel};
 use Lori\Base;
 
-class AuditsController extends \MainController
+class AuditsController extends MainController
 {
     public function index($sheet)
     {

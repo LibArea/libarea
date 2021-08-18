@@ -2,11 +2,12 @@
 
 namespace App\Controllers\Auth;
 
+use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{UserModel, AuthModel};
-use Lori\{Config, Base};
+use Lori\{Config, Base, Integration};
 
-class RegisterController extends \MainController
+class RegisterController extends MainController
 {
     // Показ формы регистрации
     public function showRegisterForm()
@@ -90,7 +91,7 @@ class RegisterController extends \MainController
 
         if (!$inv_code) {
             if (Config::get(Config::PARAM_CAPTCHA)) {
-                if (!Base::checkCaptchaCode()) {
+                if (!Integration::checkCaptchaCode()) {
                     Base::addMsg(lang('Code error'), 'error');
                     redirect('/register');
                 }

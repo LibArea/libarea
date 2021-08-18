@@ -2,11 +2,12 @@
 
 namespace App\Controllers;
 
+use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{NotificationsModel, PostModel, ReportModel};
 use Lori\Base;
 
-class ReportController extends \MainController
+class ReportController extends MainController
 {
     public function index()
     {
@@ -15,8 +16,12 @@ class ReportController extends \MainController
         $post_id        = Request::getPostInt('post_id');
         $content_id     = Request::getPostInt('content_id');
 
-        if ($uid['user_trust_level'] < 1) {
-            return false;
+        // Ограничим флаги начального уровня
+        if ($uid['user_trust_level'] < 2) {
+            $num_report =  ReportModel::getSpeed($uid['user_id']);
+            if ($num_report > 3) {
+                return 1;
+            }
         }
 
         $post   = PostModel::getPostId($post_id);

@@ -303,10 +303,14 @@
             let post_id     = $(this).data('post_id');
             let content_id  = $(this).data('content_id');
             let type        = $(this).data('type');
-            layer.confirm('Это нарушает правила сайта?', 
+            layer.confirm('<?= lang('Does this violate site rules'); ?>?', 
                 {icon: 5, title: '<?= lang('Report'); ?>', 
                 btn: ['<?= lang('Yes'); ?>', '<?= lang('No'); ?>']}, function(index) {
                 $.post('/flag/repost', {type, post_id, content_id}, function(str){
+                    if (str == 1) {
+                        layer.msg('<?= lang('Flag not included'); ?>!');
+                        return false;
+                    }
                    layer.msg('<?= lang('Thanks'); ?>!');
                 });
             });

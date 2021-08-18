@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use Hleb\Scheme\App\Models\MainModel;
 use DB;
 use PDO;
 
-class AuthModel extends \MainModel
+class AuthModel extends MainModel
 {
     // Проверка Логина на дубликаты
     public static function replayLogin($login)

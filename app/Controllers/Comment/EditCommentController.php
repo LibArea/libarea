@@ -2,11 +2,12 @@
 
 namespace App\Controllers\Comment;
 
+use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{CommentModel, PostModel, UserModel};
 use Lori\{Content, Base};
 
-class EditCommentController extends \MainController
+class EditCommentController extends MainController
 {
     // Редактируем комментарий
     public function index()

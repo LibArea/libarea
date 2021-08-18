@@ -2,10 +2,11 @@
 
 namespace Modules\Admin\Models;
 
+use Hleb\Scheme\App\Models\MainModel;
 use DB;
 use PDO;
 
-class ReportModel extends \MainModel
+class ReportModel extends MainModel
 {
     public static function get($page, $limit)
     {

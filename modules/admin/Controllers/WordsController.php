@@ -2,11 +2,12 @@
 
 namespace Modules\Admin\Controllers;
 
+use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Admin\Models\WordsModel;
 use Lori\Base;
 
-class WordsController extends \MainController
+class WordsController extends MainController
 {
     public function index($sheet)
     {

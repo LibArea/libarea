@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use Hleb\Scheme\App\Models\MainModel;
 use DB;
 use PDO;
 
-class AnswerModel extends \MainModel
+class AnswerModel extends MainModel
 {
     // Добавляем ответ
     public static function addAnswer($data)
@@ -205,6 +206,6 @@ class AnswerModel extends \MainModel
                             WHERE answer_user_id = :user_id
                             AND answer_date >= DATE_SUB(NOW(), INTERVAL 1 DAY)";
 
-        return  DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
+        return  DB::run($sql, ['user_id' => $user_id])->rowCount();
     }
 }

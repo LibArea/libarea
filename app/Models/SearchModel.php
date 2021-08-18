@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use Hleb\Scheme\App\Models\MainModel;
 use DB;
 use PDO;
 
-class SearchModel extends \MainModel
+class SearchModel extends MainModel
 {
     public static function getSearch($query)
     {

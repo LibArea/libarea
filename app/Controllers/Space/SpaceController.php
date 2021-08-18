@@ -2,11 +2,12 @@
 
 namespace App\Controllers\Space;
 
+use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{SubscriptionModel, SpaceModel, FeedModel};
 use Lori\{Content, Config, Base};
 
-class SpaceController extends \MainController
+class SpaceController extends MainController
 {
     // Все пространства сайта
     public function index()

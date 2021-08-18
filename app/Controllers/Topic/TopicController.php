@@ -2,11 +2,12 @@
 
 namespace App\Controllers\Topic;
 
+use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{TopicModel, FeedModel, SubscriptionModel};
 use Lori\{Content, Config, Base};
 
-class TopicController extends \MainController
+class TopicController extends MainController
 {
     // Все темы
     public function index()

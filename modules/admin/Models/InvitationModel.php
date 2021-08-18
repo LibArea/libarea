@@ -2,10 +2,11 @@
 
 namespace Modules\Admin\Models;
 
+use Hleb\Scheme\App\Models\MainModel;
 use DB;
 use PDO;
 
-class InvitationModel extends \MainModel
+class InvitationModel extends MainModel
 {
     public static function getInvitations()
     {

@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use Hleb\Scheme\App\Models\MainModel;
 use DB;
 use PDO;
 
-class HomeModel extends \MainModel
+class HomeModel extends MainModel
 {
     // Посты на центральной странице
     public static function feed($page, $limit, $space_user, $uid, $type)

@@ -2,10 +2,11 @@
 
 namespace Modules\Admin\Models;
 
+use Hleb\Scheme\App\Models\MainModel;
 use DB;
 use PDO;
 
-class PostModel extends \MainModel
+class PostModel extends MainModel
 {
     // Все ответы
     public static function getPostsAll($page, $limit, $sheet)

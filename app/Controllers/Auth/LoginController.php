@@ -2,12 +2,13 @@
 
 namespace App\Controllers\Auth;
 
+use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{UserModel, AuthModel};
 use Lori\{Config, Base};
 
 
-class LoginController extends \MainController
+class LoginController extends MainController
 {
     // Отправка запроса авторизации
     public function index()

@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use Hleb\Scheme\App\Models\MainModel;
 use DB;
 use PDO;
 
-class TopicModel extends \MainModel
+class TopicModel extends MainModel
 {
     // Все темы
     public static function getTopicsAll($page, $limit)
@@ -138,13 +139,5 @@ class TopicModel extends \MainModel
         $sql = "SELECT topic_id, topic_title, topic_slug, topic_parent_id FROM topics WHERE topic_parent_id = :topic_id";
 
         return DB::run($sql, ['topic_id' => $topic_id])->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    // Очистим привязку при изменение корневой темы
-    public static function clearBinding($topic_id)
-    {
-        $sql = "UPDATE topics SET topic_parent_id = 0 WHERE topic_parent_id = :topic_id";
-
-        return DB::run($sql, ['topic_id' => $topic_id]);
     }
 }

@@ -2,11 +2,12 @@
 
 namespace App\Controllers\Web;
 
+use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{WebModel, FeedModel};
 use Lori\{Content, Config, Base};
 
-class WebController extends \MainController
+class WebController extends MainController
 {
     public function index()
     {

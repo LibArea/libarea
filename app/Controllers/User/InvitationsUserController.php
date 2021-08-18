@@ -2,11 +2,12 @@
 
 namespace App\Controllers\User;
 
+use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\UserModel;
 use Lori\{Config, Base};
 
-class InvitationsUserController extends \MainController
+class InvitationsUserController extends MainController
 {
     // Показ формы создания инвайта
     public function inviteForm()

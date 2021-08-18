@@ -2,11 +2,12 @@
 
 namespace App\Controllers;
 
+use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\SearchModel;
 use Lori\{Content, Config, Base};
 
-class SearchController extends \MainController
+class SearchController extends MainController
 {
     public function index()
     {

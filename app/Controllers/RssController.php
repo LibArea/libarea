@@ -2,10 +2,12 @@
 
 namespace App\Controllers;
 
+use Hleb\Scheme\App\Controllers\MainController;
+use Hleb\Constructor\Handlers\Request;
 use App\Models\RssModel;
 use Lori\{Content, Config, Base};
 
-class RssController extends \MainController
+class RssController extends MainController
 {
     public function index()
     {

@@ -2,10 +2,11 @@
 
 namespace Modules\Admin\Models;
 
+use Hleb\Scheme\App\Models\MainModel;
 use DB;
 use PDO;
 
-class TopicModel extends \MainModel
+class TopicModel extends MainModel
 {
     // All topics
     public static function getTopicsAll($page, $limit)
@@ -176,5 +177,13 @@ class TopicModel extends \MainModel
         $sql = "UPDATE topics SET topic_count = (SELECT count(relation_post_id) FROM topics_post_relation where relation_topic_id = topic_id )";
 
         return DB::run($sql);
+    }
+
+    // Очистим привязку при изменение корневой темы
+    public static function clearBinding($topic_id)
+    {
+        $sql = "UPDATE topics SET topic_parent_id = 0 WHERE topic_parent_id = :topic_id";
+
+        return DB::run($sql, ['topic_id' => $topic_id]);
     }
 }

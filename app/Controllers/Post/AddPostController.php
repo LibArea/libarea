@@ -2,20 +2,14 @@
 
 namespace App\Controllers\Post;
 
+use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\NotificationsModel;
-use App\Models\SubscriptionModel;
-use App\Models\ActionModel;
-use App\Models\SpaceModel;
-use App\Models\WebModel;
-use App\Models\PostModel;
-use App\Models\TopicModel;
-use App\Models\UserModel;
-use Lori\{Content, Config, Base, UploadImage};
+use App\Models\{NotificationsModel, SubscriptionModel, ActionModel, SpaceModel, WebModel, PostModel, TopicModel, UserModel};
+use Lori\{Content, Config, Base, UploadImage, Integration};
 use UrlRecord;
 use URLScraper;
 
-class AddPostController extends \MainController
+class AddPostController extends MainController
 {
     // Добавим пост
     public function index()
@@ -99,7 +93,7 @@ class AddPostController extends \MainController
         $cover          = $_FILES['images'];
         $check_cover    = $_FILES['images']['name'][0];
         if ($check_cover) {
-            $post_img = UploadImage::cover_post($cover, $post, $redirect);
+            $post_img = UploadImage::cover_post($cover, $space_id, $redirect);
         }
 
         // Проверяем url для > TL1
@@ -112,7 +106,7 @@ class AddPostController extends \MainController
         // Участник с нулевым уровнем доверия должен быть ограничен в добавлении ответов
         if ($uid['user_trust_level'] < Config::get(Config::PARAM_TL_ADD_POST)) {
             $num_post =  PostModel::getPostSpeed($uid['user_id']);
-            if (count($num_post) > 2) {
+            if ($num_post > 2) {
                 Base::addMsg(lang('limit-post-day'), 'error');
                 redirect('/');
             }
@@ -185,18 +179,18 @@ class AddPostController extends \MainController
         if ($message = Content::parseUser($post_content, true, true)) {
             foreach ($message as $user_id) {
                 // Запретим отправку себе
-                if ($user_id == $post_user_id) {
+                if ($user_id == $uid['user_id']) {
                     continue;
                 }
                 $type = 10; // Упоминания в посте      
-                NotificationsModel::send($post_user_id, $user_id, $type, $last_post_id, $url_post, 1);
+                NotificationsModel::send($uid['user_id'], $user_id, $type, $last_post_id, $url_post, 1);
             }
         }
 
         // Отправим в Discord
         if (Config::get(Config::PARAM_DISCORD) == 1) {
             if ($post_tl == 0 && $post_draft == 0) {
-                Base::AddWebhook($post_content, $post_title, $url_post);
+                Integration::AddWebhook($post_content, $post_title, $url_post);
             }
         }
 

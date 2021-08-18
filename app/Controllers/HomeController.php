@@ -2,11 +2,12 @@
 
 namespace App\Controllers;
 
+use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\HomeModel;
 use Lori\{Content, Config, Base};
 
-class HomeController extends \MainController
+class HomeController extends MainController
 {
     // Главная страница
     public function index($sheet)

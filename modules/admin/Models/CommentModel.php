@@ -2,10 +2,11 @@
 
 namespace Modules\Admin\Models;
 
+use Hleb\Scheme\App\Models\MainModel;
 use DB;
 use PDO;
 
-class CommentModel extends \MainModel
+class CommentModel extends MainModel
 {
     // Все комментарии
     public static function getCommentsAll($page, $limit, $sheet)

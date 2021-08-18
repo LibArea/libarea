@@ -2,10 +2,11 @@
 
 namespace Modules\Admin\Models;
 
+use Hleb\Scheme\App\Models\MainModel;
 use DB;
 use PDO;
 
-class SpaceModel extends \MainModel
+class SpaceModel extends MainModel
 {
     // Пространства открытые / забаненные
     public static function getSpaces($page, $limit, $sort)

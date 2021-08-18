@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use Hleb\Scheme\App\Models\MainModel;
 use DB;
 use PDO;
 
-class VotesModel extends \MainModel
+class VotesModel extends MainModel
 {
     // Информация по контенту
     public static function authorId($content_id, $type)

@@ -2,11 +2,12 @@
 
 namespace Modules\Admin\Controllers;
 
+use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Admin\Models\CommentModel;
 use Lori\{Content, Base};
 
-class CommentsController extends \MainController
+class CommentsController extends MainController
 {
     public function index($sheet)
     {

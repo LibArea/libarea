@@ -2,11 +2,12 @@
 
 namespace App\Controllers\Comment;
 
+use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{NotificationsModel, ActionModel, AnswerModel, CommentModel, PostModel, UserModel};
 use Lori\{Content, Config, Base};
 
-class AddCommentController extends \MainController
+class AddCommentController extends MainController
 {
 
     // Добавление комментария
@@ -35,7 +36,7 @@ class AddCommentController extends \MainController
         // Участник с нулевым уровнем доверия должен быть ограничен в добавлении комментариев
         if ($uid['user_trust_level'] < Config::get(Config::PARAM_TL_ADD_COMM)) {
             $num_comm =  CommentModel::getCommentSpeed($uid['user_id']);
-            if (count($num_comm) > 9) {
+            if ($num_comm > 9) {
                 Base::addMsg(lang('limit_comment_day'), 'error');
                 redirect('/');
             }

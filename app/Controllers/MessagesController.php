@@ -2,11 +2,12 @@
 
 namespace App\Controllers;
 
+use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{MessagesModel, UserModel};
 use Lori\{Content, Config, Base};
 
-class MessagesController extends \MainController
+class MessagesController extends MainController
 {
     public function index()
     {

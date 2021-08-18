@@ -2,10 +2,11 @@
 
 namespace Modules\Admin\Models;
 
+use Hleb\Scheme\App\Models\MainModel;
 use DB;
 use PDO;
 
-class AnswerModel extends \MainModel
+class AnswerModel extends MainModel
 {
     // Все ответы
     public static function getAnswersAll($page, $limit, $sheet)

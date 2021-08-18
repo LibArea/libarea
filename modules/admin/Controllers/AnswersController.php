@@ -2,12 +2,13 @@
 
 namespace Modules\Admin\Controllers;
 
+use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Admin\Models\AnswerModel;
 use Lori\Content;
 use Lori\Base;
 
-class AnswersController extends \MainController
+class AnswersController extends MainController
 {
     public function index($sheet)
     {

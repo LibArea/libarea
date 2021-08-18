@@ -2,11 +2,12 @@
 
 namespace App\Controllers;
 
+use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{FavoriteModel, PostModel, AnswerModel};
 use Lori\Base;
 
-class FavoriteController extends \MainController
+class FavoriteController extends MainController
 {
     public function index($type)
     {

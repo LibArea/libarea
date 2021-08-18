@@ -2,12 +2,13 @@
 
 namespace Modules\Admin\Controllers;
 
+use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Admin\Models\{UserModel, BadgeModel};
 use App\Models\SpaceModel;
 use Lori\Base;
 
-class UsersController extends \MainController
+class UsersController extends MainController
 {
     public function index($sheet)
     {

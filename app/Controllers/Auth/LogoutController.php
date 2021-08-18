@@ -2,7 +2,9 @@
 
 namespace App\Controllers\Auth;
 
-class LogoutController extends \MainController
+use Hleb\Scheme\App\Controllers\MainController;
+
+class LogoutController extends MainController
 {
     public function index()
     {

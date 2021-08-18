@@ -2,10 +2,11 @@
 
 namespace Modules\Admin\Models;
 
+use Hleb\Scheme\App\Models\MainModel;
 use DB;
 use PDO;
 
-class AuditModel extends \MainModel
+class AuditModel extends MainModel
 {
     // Страница аудита
     public static function getAuditsAll($page, $limit, $sheet)

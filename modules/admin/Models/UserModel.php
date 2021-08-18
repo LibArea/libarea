@@ -2,10 +2,11 @@
 
 namespace Modules\Admin\Models;
 
+use Hleb\Scheme\App\Models\MainModel;
 use DB;
 use PDO;
 
-class UserModel extends \MainModel
+class UserModel extends MainModel
 {
     // Страница участников
     public static function getUsersListForAdmin($page, $limit, $sheet)

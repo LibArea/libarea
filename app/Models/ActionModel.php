@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use Hleb\Scheme\App\Models\MainModel;
 use DB;
 use PDO;
 
-class ActionModel extends \MainModel
+class ActionModel extends MainModel
 {
     public static function addAudit($audit_type, $audit_user_id, $audit_content_id)
     {

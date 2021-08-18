@@ -2,11 +2,12 @@
 
 namespace App\Controllers\Answer;
 
+use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{UserModel, AnswerModel};
 use Lori\{Content, Config, Base};
 
-class AnswerController extends \MainController
+class AnswerController extends MainController
 {
     // Все ответы
     public function index()
@@ -71,19 +72,5 @@ class AnswerController extends \MainController
         ];
 
         return view(PR_VIEW_DIR . '/answer/answer-user', ['data' => $data, 'uid' => $uid, 'answers' => $result]);
-    }
-
-    // Помещаем комментарий в закладки
-    public function addAnswerFavorite()
-    {
-        $uid        = Base::getUid();
-        $answer_id  = Request::getPostInt('answer_id');
-        $answer     = AnswerModel::getAnswerId($answer_id);
-
-        Base::PageRedirection($answer);
-
-        AnswerModel::setAnswerFavorite($answer_id, $uid['user_id']);
-
-        return true;
     }
 }

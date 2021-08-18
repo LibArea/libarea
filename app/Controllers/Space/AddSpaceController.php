@@ -2,11 +2,12 @@
 
 namespace App\Controllers\Space;
 
+use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\SpaceModel;
 use Lori\{Config, Base};
 
-class AddSpaceController extends \MainController
+class AddSpaceController extends MainController
 {
     // Добавления пространства
     public function index()

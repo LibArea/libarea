@@ -2,9 +2,10 @@
 
 namespace App\Controllers;
 
+use Hleb\Scheme\App\Controllers\MainController;
 use Lori\{Content, Config, Base};
 
-class InfoController extends \MainController
+class InfoController extends MainController
 {
     // Далее методы по названию страниц
     public function index()

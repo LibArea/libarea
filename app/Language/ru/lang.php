@@ -428,5 +428,7 @@ return [
     'tl-limitation'                                 => 'Ваш уровень доверия (TL) не позволяет совершить это действие',
     'Who will be able to post posts'                => 'Кто сможет размещать посты',
     'Long name from'                                => 'Длинное название от',
-    'Posts will not be visible in the feed'         => 'Если нет, то посты не будут видны в ленте (на главной)'
+    'Posts will not be visible in the feed'         => 'Если нет, то посты не будут видны в ленте (на главной)',
+    'Does this violate site rules'      => 'Это нарушает правила сайта',
+    'Flag not included'                 => 'Флаг не учтен, не используйте его часто',
 ];

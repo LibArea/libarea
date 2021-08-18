@@ -2,11 +2,12 @@
 
 namespace Modules\Admin\Controllers;
 
+use Hleb\Scheme\App\Controllers\MainController;
 use Modules\Admin\Models\InvitationModel;
 use App\Models\UserModel;
 use Lori\Base;
 
-class InvitationsController extends \MainController
+class InvitationsController extends MainController
 {
     public function index($sheet)
     {

@@ -2,11 +2,12 @@
 
 namespace App\Controllers;
 
+use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{NotificationsModel, UserModel};
 use Lori\{Config, Base};
 
-class NotificationsController extends \MainController
+class NotificationsController extends MainController
 {
     // Страница уведомлений участника
     public function index()

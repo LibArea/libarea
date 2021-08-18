@@ -2,18 +2,19 @@
 
 namespace Modules\Admin\Controllers;
 
+use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Admin\Models\TopicModel;
 use App\Models\PostModel;
 use Lori\UploadImage;
 use Lori\Base;
 
-class TopicsController extends \MainController
+class TopicsController extends MainController
 {
     public function index($sheet)
     {
         $uid    = Base::getUid();
-        $page   = \Request::getInt('page');
+        $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
         $limit  = 15;
@@ -56,7 +57,7 @@ class TopicsController extends \MainController
             redirect('/');
         }
 
-        $topic_id   = \Request::getInt('id');
+        $topic_id   = Request::getInt('id');
         $topic      = TopicModel::getTopic($topic_id, 'id');
 
         Base::PageError404($topic);
@@ -87,15 +88,15 @@ class TopicsController extends \MainController
     {
         $uid    = Base::getUid();
 
-        $topic_id           = \Request::getPostInt('topic_id');
-        $topic_title        = \Request::getPost('topic_title');
-        $topic_description  = \Request::getPost('topic_description');
-        $topic_info         = \Request::getPost('topic_info');
-        $topic_slug         = \Request::getPost('topic_slug');
-        $topic_seo_title    = \Request::getPost('topic_seo_title');
-        $topic_merged_id    = \Request::getPostInt('topic_merged_id');
-        $topic_is_parent    = \Request::getPostInt('topic_is_parent');
-        $topic_count        = \Request::getPostInt('topic_count');
+        $topic_id           = Request::getPostInt('topic_id');
+        $topic_title        = Request::getPost('topic_title');
+        $topic_description  = Request::getPost('topic_description');
+        $topic_info         = Request::getPost('topic_info');
+        $topic_slug         = Request::getPost('topic_slug');
+        $topic_seo_title    = Request::getPost('topic_seo_title');
+        $topic_merged_id    = Request::getPostInt('topic_merged_id');
+        $topic_is_parent    = Request::getPostInt('topic_is_parent');
+        $topic_count        = Request::getPostInt('topic_count');
 
         $topic = TopicModel::getTopic($topic_id, 'id');
         Base::PageError404($topic);
@@ -168,12 +169,12 @@ class TopicsController extends \MainController
             redirect('/');
         }
 
-        $topic_title        = \Request::getPost('topic_title');
-        $topic_description  = \Request::getPost('topic_description');
-        $topic_slug         = \Request::getPost('topic_slug');
-        $topic_seo_title    = \Request::getPost('topic_seo_title');
-        $topic_merged_id    = \Request::getPost('topic_merged_id');
-        $topic_related      = \Request::getPost('topic_related');
+        $topic_title        = Request::getPost('topic_title');
+        $topic_description  = Request::getPost('topic_description');
+        $topic_slug         = Request::getPost('topic_slug');
+        $topic_seo_title    = Request::getPost('topic_seo_title');
+        $topic_merged_id    = Request::getPost('topic_merged_id');
+        $topic_related      = Request::getPost('topic_related');
 
         $redirect = '/admin/topics/add';
 

@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use Hleb\Scheme\App\Models\MainModel;
 use DB;
 use PDO;
 
-class CommentModel extends \MainModel
+class CommentModel extends MainModel
 {
     // Добавляем комментарий
     public static function addComment($data)
@@ -196,16 +197,16 @@ class CommentModel extends \MainModel
     }
 
     // Частота размещения комментариев участника 
-    public static function getCommentSpeed($uid)
+    public static function getCommentSpeed($user_id)
     {
         $sql = "SELECT 
                     comment_id, 
                     comment_user_id, 
                     comment_date
                     FROM comments 
-                        WHERE comment_user_id = " . $uid . "
+                        WHERE comment_user_id = :user_id
                         AND comment_date >= DATE_SUB(NOW(), INTERVAL 1 DAY)";
 
-        return  DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
+        return  DB::run($sql, ['user_id' => $user_id])->rowCount();
     }
 }

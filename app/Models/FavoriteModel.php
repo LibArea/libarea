@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use Hleb\Scheme\App\Models\MainModel;
 use DB;
 use PDO;
 
-class FavoriteModel extends \MainModel
+class FavoriteModel extends MainModel
 {
     // Добавить / удалить из закладок
     public static function setFavorite($content_id, $user_id, $type)

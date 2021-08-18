@@ -2,10 +2,11 @@
 
 namespace Modules\Admin\Models;
 
+use Hleb\Scheme\App\Models\MainModel;
 use DB;
 use PDO;
 
-class WebModel extends \MainModel
+class WebModel extends MainModel
 {
     // Все сайты
     public static function getLinksAll($page, $limit, $user_id)

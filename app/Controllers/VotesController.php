@@ -2,10 +2,11 @@
 
 namespace App\Controllers;
 
+use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\VotesModel;
 
-class VotesController extends \MainController
+class VotesController extends MainController
 {
     // Голосование за пост
     public function index()

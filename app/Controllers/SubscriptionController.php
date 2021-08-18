@@ -2,10 +2,11 @@
 
 namespace App\Controllers;
 
+use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{SubscriptionModel, SpaceModel};
 
-class SubscriptionController extends \MainController
+class SubscriptionController extends MainController
 {
     public function index()
     {

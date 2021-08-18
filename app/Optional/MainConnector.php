@@ -28,6 +28,7 @@ class MainConnector implements Connector
             "Lori\Base"                     => "app/Libraries/Base.php",
             "Lori\Content"                  => "app/Libraries/Content.php",
             "Lori\UploadImage"              => "app/Libraries/UploadImage.php",
+            "Lori\Integration"              => "app/Libraries/Integration.php",
             "Lori\Config"                   => "app/Config/Config.php",
 
             "UrlRecord"                     => "app/ThirdParty/UrlRecord/UrlRecord.php",

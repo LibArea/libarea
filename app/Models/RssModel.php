@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use Hleb\Scheme\App\Models\MainModel;
 use DB;
 use PDO;
 
-class RssModel extends \MainModel
+class RssModel extends MainModel
 {
     // Все посты для Sitemap
     public static function getPostsSitemap()

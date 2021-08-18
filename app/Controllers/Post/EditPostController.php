@@ -2,11 +2,12 @@
 
 namespace App\Controllers\Post;
 
+use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{PostModel, UserModel, SpaceModel, TopicModel};
 use Lori\{Content, Config, Base, UploadImage};
 
-class EditPostController extends \MainController
+class EditPostController extends MainController
 {
     // Изменяем пост
     public function index()
@@ -137,7 +138,7 @@ class EditPostController extends \MainController
     // Покажем форму
     public function edit()
     {
-        $post_id    = \Request::getInt('id');
+        $post_id    = Request::getInt('id');
         $uid        = Base::getUid();
 
         $post   = PostModel::getPostId($post_id);

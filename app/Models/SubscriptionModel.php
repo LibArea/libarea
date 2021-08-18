@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use Hleb\Scheme\App\Models\MainModel;
 use DB;
 use PDO;
 
-class SubscriptionModel extends \MainModel
+class SubscriptionModel extends MainModel
 {
 
     // Подписан ли участник

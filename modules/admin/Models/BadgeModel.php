@@ -2,10 +2,11 @@
 
 namespace Modules\Admin\Models;
 
+use Hleb\Scheme\App\Models\MainModel;
 use DB;
 use PDO;
 
-class BadgeModel extends \MainModel
+class BadgeModel extends MainModel
 {
     // Все награды
     public static function getBadgesAll()

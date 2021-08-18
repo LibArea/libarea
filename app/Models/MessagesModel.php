@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use Hleb\Scheme\App\Models\MainModel;
 use App\Models\NotificationsModel;
 use DB;
 use PDO;
 
-class MessagesModel extends \MainModel
+class MessagesModel extends MainModel
 {
     // Все диалоги
     public static function getMessages($user_id)

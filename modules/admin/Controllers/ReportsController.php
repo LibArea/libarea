@@ -2,12 +2,13 @@
 
 namespace Modules\Admin\Controllers;
 
+use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Admin\Models\ReportModel;
 use App\Models\UserModel;
 use Lori\Base;
 
-class ReportsController extends \MainController
+class ReportsController extends MainController
 {
     public function index()
     {

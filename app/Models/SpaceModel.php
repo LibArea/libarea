@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use Hleb\Scheme\App\Models\MainModel;
 use DB;
 use PDO;
 
-class SpaceModel extends \MainModel
+class SpaceModel extends MainModel
 {
     // Пространства все / подписан
     public static function getSpacesAll($page, $limit, $user_id, $sort)

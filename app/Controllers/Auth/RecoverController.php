@@ -2,11 +2,12 @@
 
 namespace App\Controllers\Auth;
 
+use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\UserModel;
-use Lori\{Config, Base};
+use Lori\{Config, Base, Integration};
 
-class RecoverController extends \MainController
+class RecoverController extends MainController
 {
     public function showPasswordForm()
     {
@@ -25,7 +26,7 @@ class RecoverController extends \MainController
         $email = Request::getPost('email');
 
         if (Config::get(Config::PARAM_CAPTCHA)) {
-            if (!Base::checkCaptchaCode()) {
+            if (!Integration::checkCaptchaCode()) {
                 Base::addMsg(lang('Code error'), 'error');
                 redirect('/recover');
             }

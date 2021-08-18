@@ -2,11 +2,12 @@
 
 namespace App\Controllers\User;
 
+use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\UserModel;
 use Lori\{Config, Base, UploadImage};
 
-class SettingController extends \MainController
+class SettingController extends MainController
 {
     // Форма настройки профиля
     function settingForm()
@@ -186,7 +187,9 @@ class SettingController extends \MainController
     // Удаление обложки
     function userCoverRemove()
     {
-        $uid    = Base::getUid();
+        $uid        = Base::getUid();
+        $login      = Request::get('login');
+        $redirect   = '/u/' . $uid['user_login'] . '/setting/avatar';
 
         if ($login != $uid['user_login']) {
             redirect('/u/' . $uid['user_login'] . '/setting/avatar');

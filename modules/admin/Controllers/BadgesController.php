@@ -2,12 +2,13 @@
 
 namespace Modules\Admin\Controllers;
 
+use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Admin\Models\BadgeModel;
 use App\Models\UserModel;
 use Lori\Base;
 
-class BadgesController extends \MainController
+class BadgesController extends MainController
 {
     // Все награды
     public function index($sheet)
@@ -40,7 +41,7 @@ class BadgesController extends \MainController
     public function editPage()
     {
         $uid        = Base::getUid();
-        $badge_id   = \Request::getInt('id');
+        $badge_id   = Request::getInt('id');
         $badge      = BadgeModel::getBadgeId($badge_id);
 
         if (!$badge['badge_id']) {
@@ -58,8 +59,8 @@ class BadgesController extends \MainController
     // Добавляем награду
     public function add()
     {
-        $badge_title         = \Request::getPost('badge_title');
-        $badge_description   = \Request::getPost('badge_description');
+        $badge_title         = Request::getPost('badge_title');
+        $badge_description   = Request::getPost('badge_description');
         $badge_icon          = $_POST['badge_icon']; // не фильтруем
 
         $redirect = '/admin/badges';
@@ -83,7 +84,7 @@ class BadgesController extends \MainController
     public function addUserPage()
     {
         $uid        = Base::getUid();
-        $user_id    = \Request::getInt('id');
+        $user_id    = Request::getInt('id');
 
         if ($user_id > 0) {
             $user   = UserModel::getUser($user_id, 'id');
@@ -104,8 +105,8 @@ class BadgesController extends \MainController
     // Награждение
     public function addUser()
     {
-        $user_id    = \Request::getPostInt('user_id');
-        $badge_id   = \Request::getPostInt('badge_id');
+        $user_id    = Request::getPostInt('user_id');
+        $badge_id   = Request::getPostInt('badge_id');
 
         BadgeModel::badgeUserAdd($user_id, $badge_id);
 
@@ -119,7 +120,7 @@ class BadgesController extends \MainController
     // Измененяем награду
     public function edit()
     {
-        $badge_id   = \Request::getInt('id');
+        $badge_id   = Request::getInt('id');
         $badge      = BadgeModel::getBadgeId($badge_id);
 
         $redirect = '/admin/badges';
@@ -127,8 +128,8 @@ class BadgesController extends \MainController
             redirect($redirect);
         }
 
-        $badge_title         = \Request::getPost('badge_title');
-        $badge_description   = \Request::getPost('badge_description');
+        $badge_title         = Request::getPost('badge_title');
+        $badge_description   = Request::getPost('badge_description');
         $badge_icon          = $_POST['badge_icon']; // не фильтруем
 
         Base::Limits($badge_title, lang('Title'), '4', '25', $redirect);

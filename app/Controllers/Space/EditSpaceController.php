@@ -2,11 +2,12 @@
 
 namespace App\Controllers\Space;
 
+use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\SpaceModel;
 use Lori\{UploadImage, Base};
 
-class EditSpaceController extends \MainController
+class EditSpaceController extends MainController
 {
     // Изменение пространства
     public function index()

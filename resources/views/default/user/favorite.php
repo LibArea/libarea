@@ -87,9 +87,7 @@
                                 <a class="mr5 ml5 gray size-13" href="/s/<?= $fav['post']['space_slug']; ?>" title="<?= $fav['post']['space_name']; ?>">
                                     <?= $fav['post']['space_name']; ?>
                                 </a>
-                                <blockquote>
-                                    <?= $fav['answer_content']; ?>
-                                </blockquote>
+                                <?= $fav['answer_content']; ?>
                             </div>
                         <?php } ?>
                     </div>

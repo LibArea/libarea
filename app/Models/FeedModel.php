@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use Hleb\Scheme\App\Models\MainModel;
 use DB;
 use PDO;
 
-class FeedModel extends \MainModel
+class FeedModel extends MainModel
 {
     // Получаем посты по условиям
     public static function feed($page, $limit, $uid, $sheet, $type, $data)

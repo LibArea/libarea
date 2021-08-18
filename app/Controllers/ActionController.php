@@ -2,11 +2,12 @@
 
 namespace App\Controllers;
 
+use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\ActionModel;
 use Lori\{Config, Base};
 
-class ActionController extends \MainController
+class ActionController extends MainController
 {
     // Удаление и восстановление контента
     public function deletingAndRestoring()

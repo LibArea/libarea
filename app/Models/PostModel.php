@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use Hleb\Scheme\App\Models\MainModel;
 use DB;
 use PDO;
 
-class PostModel extends \MainModel
+class PostModel extends MainModel
 {
     // Добавляем пост
     public static function addPost($data)
@@ -319,7 +320,7 @@ class PostModel extends \MainModel
                             WHERE post_user_id = :user_id
                             AND post_date >= DATE_SUB(NOW(), INTERVAL 1 DAY)";
 
-        return  DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
+        return  DB::run($sql, ['user_id' => $user_id])->rowCount();
     }
 
     public static function getPostTopic($post_id)

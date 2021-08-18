@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use Hleb\Scheme\App\Models\MainModel;
 use DB;
 use PDO;
 
-class ContentModel extends \MainModel
+class ContentModel extends MainModel
 {
     // Получим список запрещенных стоп-слов
     public static function getStopWords()
