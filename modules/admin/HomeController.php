@@ -2,17 +2,13 @@
 
 namespace Modules\Admin;
 
+use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Admin\Models\UserModel;
-use App\Models\SpaceModel;
-use App\Models\HomeModel;
-use App\Models\AnswerModel;
-use App\Models\CommentModel;
-use App\Models\WebModel;
-use App\Models\TopicModel;
+use App\Models\{SpaceModel, HomeModel, AnswerModel, CommentModel, WebModel, TopicModel};
 use Lori\Base;
 
-class HomeController extends \MainController
+class HomeController extends MainController
 {
     public function index()
     {
