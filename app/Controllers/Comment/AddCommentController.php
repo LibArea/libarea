@@ -3,15 +3,8 @@
 namespace App\Controllers\Comment;
 
 use Hleb\Constructor\Handlers\Request;
-use App\Models\NotificationsModel;
-use App\Models\ActionModel;
-use App\Models\AnswerModel;
-use App\Models\CommentModel;
-use App\Models\PostModel;
-use App\Models\UserModel;
-use Lori\Content;
-use Lori\Config;
-use Lori\Base;
+use App\Models\{NotificationsModel, ActionModel, AnswerModel, CommentModel, PostModel, UserModel};
+use Lori\{Content, Config, Base};
 
 class AddCommentController extends \MainController
 {
@@ -19,13 +12,13 @@ class AddCommentController extends \MainController
     // Добавление комментария
     public function index()
     {
-        $comment_content    = \Request::getPost('comment');
-        $post_id            = \Request::getPostInt('post_id');   // в каком посту ответ
-        $answer_id          = \Request::getPostInt('answer_id');   // на какой ответ
-        $comment_id         = \Request::getPostInt('comment_id');   // на какой комментарий
+        $comment_content    = Request::getPost('comment');
+        $post_id            = Request::getPostInt('post_id');   // в каком посту ответ
+        $answer_id          = Request::getPostInt('answer_id');   // на какой ответ
+        $comment_id         = Request::getPostInt('comment_id');   // на какой комментарий
 
         $uid        = Base::getUid();
-        $ip         = \Request::getRemoteAddress();
+        $ip         = Request::getRemoteAddress();
         $post       = PostModel::getPostId($post_id);
         Base::PageError404($post);
 
@@ -80,8 +73,8 @@ class AddCommentController extends \MainController
         if ($comment_published == 0) {
             ActionModel::addAudit('comment', $uid['user_id'], $last_comment_id);
             // Оповещение админу
-            $type = 15; // Упоминания в посте  
-            $user_id  = 1; // админу
+            $type       = 15; // Упоминания в посте  
+            $user_id    = 1;  // админу
             NotificationsModel::send($uid['user_id'], $user_id, $type, $last_comment_id, $url_comment, 1);
         }
 
@@ -116,15 +109,11 @@ class AddCommentController extends \MainController
     // Покажем форму
     public function add()
     {
-        $post_id    = \Request::getPostInt('post_id');
-        $answer_id  = \Request::getPostInt('answer_id');
-        $comment_id = \Request::getPostInt('comment_id');
-
         $uid  = Base::getUid();
         $data = [
-            'answer_id'     => $answer_id,
-            'post_id'       => $post_id,
-            'comment_id'    => $comment_id,
+            'answer_id'     => Request::getPostInt('answer_id'),
+            'post_id'       => Request::getPostInt('post_id'),
+            'comment_id'    => Request::getPostInt('comment_id'),
         ];
 
         return view(PR_VIEW_DIR . '/comment/add-form-answer-comment', ['data' => $data, 'uid' => $uid]);

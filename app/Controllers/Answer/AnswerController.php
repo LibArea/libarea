@@ -3,11 +3,8 @@
 namespace App\Controllers\Answer;
 
 use Hleb\Constructor\Handlers\Request;
-use App\Models\UserModel;
-use App\Models\AnswerModel;
-use Lori\Content;
-use Lori\Config;
-use Lori\Base;
+use App\Models\{UserModel, AnswerModel};
+use Lori\{Content, Config, Base};
 
 class AnswerController extends \MainController
 {
@@ -15,7 +12,7 @@ class AnswerController extends \MainController
     public function index()
     {
         $uid    = Base::getUid();
-        $page   = \Request::getInt('page');
+        $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
         $limit  = 25;
@@ -50,7 +47,7 @@ class AnswerController extends \MainController
     // Ответы участника
     public function userAnswers()
     {
-        $login  = \Request::get('login');
+        $login  = Request::get('login');
         $user   = UserModel::getUser($login, 'slug');
 
         Base::PageError404($user);
@@ -80,7 +77,7 @@ class AnswerController extends \MainController
     public function addAnswerFavorite()
     {
         $uid        = Base::getUid();
-        $answer_id  = \Request::getPostInt('answer_id');
+        $answer_id  = Request::getPostInt('answer_id');
         $answer     = AnswerModel::getAnswerId($answer_id);
 
         Base::PageRedirection($answer);

@@ -3,12 +3,8 @@
 namespace App\Controllers\Topic;
 
 use Hleb\Constructor\Handlers\Request;
-use App\Models\TopicModel;
-use App\Models\FeedModel;
-use App\Models\SubscriptionModel;
-use Lori\Content;
-use Lori\Config;
-use Lori\Base;
+use App\Models\{TopicModel, FeedModel, SubscriptionModel};
+use Lori\{Content, Config, Base};
 
 class TopicController extends \MainController
 {
@@ -16,7 +12,7 @@ class TopicController extends \MainController
     public function index()
     {
         $uid    = Base::getUid();
-        $page   = \Request::getInt('page');
+        $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
         $limit = 30;
@@ -55,10 +51,10 @@ class TopicController extends \MainController
     public function posts($sheet)
     {
         $uid    = Base::getUid();
-        $page   = \Request::getInt('page');
+        $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
-        $slug   = \Request::get('slug');
+        $slug   = Request::get('slug');
 
         $topic  = TopicModel::getTopic($slug, 'slug');
         Base::PageError404($topic);
@@ -115,7 +111,7 @@ class TopicController extends \MainController
     // Информация по теме
     public function info()
     {
-        $slug   = \Request::get('slug');
+        $slug   = Request::get('slug');
         $uid    = Base::getUid();
 
         $topic  = TopicModel::getTopic($slug, 'slug');

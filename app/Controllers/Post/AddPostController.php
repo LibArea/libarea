@@ -11,10 +11,7 @@ use App\Models\WebModel;
 use App\Models\PostModel;
 use App\Models\TopicModel;
 use App\Models\UserModel;
-use Lori\UploadImage;
-use Lori\Content;
-use Lori\Config;
-use Lori\Base;
+use Lori\{Content, Config, Base, UploadImage};
 use UrlRecord;
 use URLScraper;
 
@@ -24,16 +21,16 @@ class AddPostController extends \MainController
     public function index()
     {
         // Получаем title и содержание
-        $post_title             = \Request::getPost('post_title');
+        $post_title             = Request::getPost('post_title');
         $post_content           = $_POST['post_content']; // не фильтруем
-        $post_url               = \Request::getPost('post_url');
-        $post_closed            = \Request::getPostInt('closed');
-        $post_draft             = \Request::getPostInt('post_draft');
-        $post_top               = \Request::getPostInt('top');
-        $post_type              = \Request::getPostInt('post_type');
-        $post_translation       = \Request::getPostInt('translation');
-        $post_merged_id         = \Request::getPostInt('post_merged_id');
-        $post_tl                = \Request::getPostInt('post_tl');
+        $post_url               = Request::getPost('post_url');
+        $post_closed            = Request::getPostInt('closed');
+        $post_draft             = Request::getPostInt('post_draft');
+        $post_top               = Request::getPostInt('top');
+        $post_type              = Request::getPostInt('post_type');
+        $post_translation       = Request::getPostInt('translation');
+        $post_merged_id         = Request::getPostInt('post_merged_id');
+        $post_tl                = Request::getPostInt('post_tl');
 
         $related        = empty($_POST['post_related']) ? '' : $_POST['post_related'];
         $post_related   = empty($related) ? '' : implode(',', $related);
@@ -44,7 +41,7 @@ class AddPostController extends \MainController
 
         // Данные кто добавляет
         $uid        = Base::getUid();
-        $post_ip    = \Request::getRemoteAddress();
+        $post_ip    = Request::getRemoteAddress();
 
         // Если пользователь забанен / заморожен
         $user = UserModel::getUser($uid['user_id'], 'id');
@@ -52,7 +49,7 @@ class AddPostController extends \MainController
         Content::stopContentQuietМode($user);
 
         // Получаем информацию по пространству
-        $space_id   = \Request::getPostInt('space_id');
+        $space_id   = Request::getPostInt('space_id');
         $space      = SpaceModel::getSpace($space_id, 'id');
         if (!$space) {
             Base::addMsg(lang('Select space'), 'error');
@@ -213,8 +210,7 @@ class AddPostController extends \MainController
     {
         $uid        = Base::getUid();
         $spaces     = SpaceModel::getSpaceSelect($uid['user_id'], $uid['user_trust_level']);
-
-        $space_id   = \Request::getInt('space_id');
+        $space_id   = Request::getInt('space_id');
 
         $data = [
             'sheet'         => 'add-post',
@@ -241,7 +237,7 @@ class AddPostController extends \MainController
     // Парсинг
     public function grabMeta()
     {
-        $url    = \Request::getPost('uri');
+        $url    = Request::getPost('uri');
         $result = URLScraper::get($url);
 
         return json_encode($result);
@@ -271,7 +267,7 @@ class AddPostController extends \MainController
     public function deletingAndRestoring()
     {
         $uid        = Base::getUid();
-        $info       = \Request::getPost('info');
+        $info       = Request::getPost('info');
         $status     = preg_split('/(@)/', $info);
         $type_id    = (int)$status[0]; // id конткнта
         $type       = $status[1];      // тип контента

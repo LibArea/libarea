@@ -4,9 +4,7 @@ namespace App\Controllers;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Models\SearchModel;
-use Lori\Content;
-use Lori\Config;
-use Lori\Base;
+use Lori\{Content, Config, Base};
 
 class SearchController extends \MainController
 {
@@ -14,7 +12,7 @@ class SearchController extends \MainController
     {
         if (Request::getPost()) {
 
-            $qa =  \Request::getPost('q');
+            $qa =  Request::getPost('q');
 
             $query = preg_replace('/[^a-zA-Zа-яА-Я0-9]/ui', '', $qa);
 

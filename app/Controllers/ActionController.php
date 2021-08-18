@@ -4,8 +4,7 @@ namespace App\Controllers;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Models\ActionModel;
-use Lori\Config;
-use Lori\Base;
+use Lori\{Config, Base};
 
 class ActionController extends \MainController
 {
@@ -13,7 +12,7 @@ class ActionController extends \MainController
     public function deletingAndRestoring()
     {
         $uid        = Base::getUid();
-        $info       = \Request::getPost('info');
+        $info       = Request::getPost('info');
         $status     = preg_split('/(@)/', $info);
         $type_id    = (int)$status[0]; // id конткнта
         $type       = $status[1];      // тип контента
@@ -60,7 +59,7 @@ class ActionController extends \MainController
     // Журнал логирования удалений / восстановлений контента
     public function moderation()
     {
-        $moderations_log      = ActionModel::getModerations();
+        $moderations_log    = ActionModel::getModerations();
 
         $result = array();
         foreach ($moderations_log as $ind => $row) {
@@ -83,8 +82,8 @@ class ActionController extends \MainController
     // Связанные посты и выбор автора
     public function select()
     {
-        $type   =  \Request::get('type');
-        $search =  \Request::getPost('searchTerm');
+        $type   =  Request::get('type');
+        $search =  Request::getPost('searchTerm');
         $search = preg_replace('/[^a-zA-ZА-Яа-я0-9 ]/ui', '', $search);
 
         return ActionModel::getSearch($search, $type);

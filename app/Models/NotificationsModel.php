@@ -114,9 +114,9 @@ class NotificationsModel extends \MainModel
     {
         $sql = "SELECT
                     signed_post_id,
-                    signed_user_id
+                    signed_user_id 
                         FROM posts_signed
-                        WHERE signed_user_id' = :user_id";
+                        WHERE signed_user_id = :user_id";
 
         return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
     }

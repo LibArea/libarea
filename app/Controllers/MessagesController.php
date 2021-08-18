@@ -3,17 +3,14 @@
 namespace App\Controllers;
 
 use Hleb\Constructor\Handlers\Request;
-use App\Models\MessagesModel;
-use App\Models\UserModel;
-use Lori\Content;
-use Lori\Config;
-use Lori\Base;
+use App\Models\{MessagesModel, UserModel};
+use Lori\{Content, Config, Base};
 
 class MessagesController extends \MainController
 {
     public function index()
     {
-        $login  = \Request::get('login');
+        $login  = Request::get('login');
         $uid    = Base::getUid();
 
         // Ошибочный Slug в Url
@@ -45,7 +42,7 @@ class MessagesController extends \MainController
                     $row['unread']   = $row['dialog_recipient_unread'];
                     $row['count']    = $row['dialog_recipient_count'];
 
-                // Отправляющий  AND $row['dialog_sender_count']    
+                    // Отправляющий  AND $row['dialog_sender_count']    
                 } else if ($row['dialog_sender_id'] == $uid['user_id']) {
                     $row['unread']   = $row['dialog_sender_unread'];
                     $row['count']    = $row['dialog_sender_count'];

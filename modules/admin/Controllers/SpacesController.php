@@ -11,10 +11,10 @@ class SpacesController extends \MainController
     public function index($sheet)
     {
         $uid    = Base::getUid();
-        $page   = \Request::getInt('page');
+        $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
-        $limit = 25;
+        $limit      = 25;
         $pagesCount = SpaceModel::getSpacesCount($sheet);
         $spaces     = SpaceModel::getSpaces($page, $limit, $sheet);
 
@@ -31,7 +31,7 @@ class SpacesController extends \MainController
     // Удаление / восстановление пространства
     public function delSpace()
     {
-        $space_id   = \Request::getPostInt('id');
+        $space_id   = Request::getPostInt('id');
 
         SpaceModel::SpaceDelete($space_id);
 

@@ -4,15 +4,14 @@ namespace Modules\Admin\Controllers;
 
 use Hleb\Constructor\Handlers\Request;
 use Modules\Admin\Models\PostModel;
-use Lori\Content;
-use Lori\Base;
+use Lori\{Content, Base};
 
 class PostsController extends \MainController
 {
     public function index($sheet)
     {
         $uid    = Base::getUid();
-        $page   = \Request::getInt('page');
+        $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
         $limit      = 100;

@@ -4,9 +4,7 @@ namespace Modules\Admin\Controllers;
 
 use Hleb\Constructor\Handlers\Request;
 use Modules\Admin\Models\AuditModel;
-use App\Models\PostModel;
-use App\Models\AnswerModel;
-use App\Models\CommentModel;
+use App\Models\{PostModel, AnswerModel, CommentModel};
 use Lori\Base;
 
 class AuditsController extends \MainController
@@ -14,7 +12,7 @@ class AuditsController extends \MainController
     public function index($sheet)
     {
         $uid    = Base::getUid();
-        $page   = \Request::getInt('page');
+        $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
         $limit  = 55;
@@ -50,7 +48,7 @@ class AuditsController extends \MainController
     // Восстановление после аудита
     public function status()
     {
-        $st     = \Request::getPost('status');
+        $st     = Request::getPost('status');
         $status = preg_split('/(@)/', $st);
         // id, type
         AuditModel::recoveryAudit($status[0], $status[1]);

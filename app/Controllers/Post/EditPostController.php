@@ -3,33 +3,27 @@
 namespace App\Controllers\Post;
 
 use Hleb\Constructor\Handlers\Request;
-use App\Models\PostModel;
-use App\Models\UserModel;
-use App\Models\SpaceModel;
-use App\Models\TopicModel;
-use Lori\Content;
-use Lori\Config;
-use Lori\Base;
-use Lori\UploadImage;
+use App\Models\{PostModel, UserModel, SpaceModel, TopicModel};
+use Lori\{Content, Config, Base, UploadImage};
 
 class EditPostController extends \MainController
 {
     // Изменяем пост
     public function index()
     {
-        $post_id                = \Request::getPostInt('post_id');
-        $post_title             = \Request::getPost('post_title');
+        $post_id                = Request::getPostInt('post_id');
+        $post_title             = Request::getPost('post_title');
         $post_content           = $_POST['post_content']; // не фильтруем 
-        $post_type              = \Request::getPostInt('post_type');
-        $post_translation       = \Request::getPostInt('translation');
-        $post_draft             = \Request::getPostInt('post_draft');
-        $post_closed            = \Request::getPostInt('closed');
-        $post_top               = \Request::getPostInt('top');
-        $post_space_id          = \Request::getPostInt('space_id');
-        $draft                  = \Request::getPost('draft');
-        $post_user_new          = \Request::getPost('post_user_new');
-        $post_merged_id         = \Request::getPostInt('post_merged_id');
-        $post_tl                = \Request::getPostInt('post_tl');
+        $post_type              = Request::getPostInt('post_type');
+        $post_translation       = Request::getPostInt('translation');
+        $post_draft             = Request::getPostInt('post_draft');
+        $post_closed            = Request::getPostInt('closed');
+        $post_top               = Request::getPostInt('top');
+        $post_space_id          = Request::getPostInt('space_id');
+        $draft                  = Request::getPost('draft');
+        $post_user_new          = Request::getPost('post_user_new');
+        $post_merged_id         = Request::getPostInt('post_merged_id');
+        $post_tl                = Request::getPostInt('post_tl');
 
         // Связанные посты и темы
         $related        = empty($_POST['post_related']) ? '' : $_POST['post_related'];
@@ -183,7 +177,7 @@ class EditPostController extends \MainController
     // Удаление обложки
     function imgPostRemove()
     {
-        $post_id    = \Request::getInt('id');
+        $post_id    = Request::getInt('id');
         $uid        = Base::getUid();
 
         $post = PostModel::getPostId($post_id);

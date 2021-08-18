@@ -3,12 +3,8 @@
 namespace App\Controllers\Space;
 
 use Hleb\Constructor\Handlers\Request;
-use App\Models\SubscriptionModel;
-use App\Models\SpaceModel;
-use App\Models\FeedModel;
-use Lori\Content;
-use Lori\Config;
-use Lori\Base;
+use App\Models\{SubscriptionModel, SpaceModel, FeedModel};
+use Lori\{Content, Config, Base};
 
 class SpaceController extends \MainController
 {
@@ -16,7 +12,7 @@ class SpaceController extends \MainController
     public function index()
     {
         $uid    = Base::getUid();
-        $page   = \Request::getInt('page');
+        $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
         $limit = 25;
@@ -28,7 +24,7 @@ class SpaceController extends \MainController
         // Введем ограничение на количество создаваемых пространств (кроме tl5)
         $sp                 = SpaceModel::getUserCreatedSpaces($uid['user_id']);
         $count_space        = count($sp);
-        $total_allowed = $uid['user_trust_level'] == 5 ? 999 : 3;
+        $total_allowed      = $uid['user_trust_level'] == 5 ? 999 : 3;
         $add_space_button   = validTl($uid['user_trust_level'], Config::get(Config::PARAM_TL_ADD_SPACE), $count_space, $total_allowed);
 
         $result = array();
@@ -56,7 +52,7 @@ class SpaceController extends \MainController
     public function spaseUser()
     {
         $uid    = Base::getUid();
-        $page   = \Request::getInt('page');
+        $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
         $limit  = 25;
 
@@ -93,8 +89,8 @@ class SpaceController extends \MainController
     public function posts($sheet)
     {
         $uid    = Base::getUid();
-        $slug   = \Request::get('slug');
-        $page   = \Request::getInt('page');
+        $slug   = Request::get('slug');
+        $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
         $space = SpaceModel::getSpace($slug, 'slug');

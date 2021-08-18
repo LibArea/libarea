@@ -4,9 +4,7 @@ namespace App\Controllers\User;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Models\UserModel;
-use Lori\Config;
-use Lori\Base;
-use Lori\UploadImage;
+use Lori\{Config, Base, UploadImage};
 
 class SettingController extends \MainController
 {
@@ -14,7 +12,7 @@ class SettingController extends \MainController
     function settingForm()
     {
         // Данные участника
-        $login  = \Request::get('login');
+        $login  = Request::get('login');
         $uid    = Base::getUid();
         $user   = UserModel::getUser($uid['user_login'], 'slug');
 
@@ -39,13 +37,13 @@ class SettingController extends \MainController
     // Изменение профиля
     function edit()
     {
-        $name           = \Request::getPost('name');
-        $about          = \Request::getPost('about');
-        $public_email   = \Request::getPost('public_email');
+        $name           = Request::getPost('name');
+        $about          = Request::getPost('about');
+        $public_email   = Request::getPost('public_email');
 
         $uid            = Base::getUid();
         $redirect       = '/u/' . $uid['user_login'] . '/setting';
-        
+
         Base::Limits($name, lang('Name'), '3', '11', $redirect);
         Base::Limits($about, lang('About me'), '0', '255', $redirect);
 
@@ -56,15 +54,15 @@ class SettingController extends \MainController
         $data = [
             'user_id'            => $uid['user_id'],
             'user_name'          => $name,
-            'user_color'         => \Request::getPostString('color', '#339900'),
+            'user_color'         => Request::getPostString('color', '#339900'),
             'user_about'         => $about,
-            'user_website'       => \Request::getPostString('website', ''),
-            'user_location'      => \Request::getPostString('location', ''),
+            'user_website'       => Request::getPostString('website', ''),
+            'user_location'      => Request::getPostString('location', ''),
             'user_public_email'  => $public_email,
-            'user_skype'         => \Request::getPostString('skype', ''),
-            'user_twitter'       => \Request::getPostString('twitter', ''),
-            'user_telegram'      => \Request::getPostString('telegram', ''),
-            'user_vk'            => \Request::getPostString('vk', ''),
+            'user_skype'         => Request::getPostString('skype', ''),
+            'user_twitter'       => Request::getPostString('twitter', ''),
+            'user_telegram'      => Request::getPostString('telegram', ''),
+            'user_vk'            => Request::getPostString('vk', ''),
         ];
 
         UserModel::editProfile($data);
@@ -77,7 +75,7 @@ class SettingController extends \MainController
     function avatarForm()
     {
         $uid    = Base::getUid();
-        $login  = \Request::get('login');
+        $login  = Request::get('login');
 
         // Ошибочный Slug в Url
         if ($login != $uid['user_login']) {
@@ -101,8 +99,8 @@ class SettingController extends \MainController
     // Форма изменение пароля
     function securityForm()
     {
-        $uid  = Base::getUid();
-        $login  = \Request::get('login');
+        $uid    = Base::getUid();
+        $login  = Request::get('login');
 
         if ($login != $uid['user_login']) {
             redirect('/u/' . $uid['user_login'] . '/setting/security');
@@ -149,9 +147,9 @@ class SettingController extends \MainController
     function securityEdit()
     {
         $uid  = Base::getUid();
-        $password    = \Request::getPost('password');
-        $password2   = \Request::getPost('password2');
-        $password3   = \Request::getPost('password3');
+        $password    = Request::getPost('password');
+        $password2   = Request::getPost('password2');
+        $password3   = Request::getPost('password3');
 
         $redirect = '/u/' . $uid['user_login'] . '/setting/security';
         if ($password2 != $password3) {
@@ -170,8 +168,8 @@ class SettingController extends \MainController
         }
 
         // Данные участника
-        $account = \Request::getSession('account');
-        $userInfo = UserModel::userInfo($account['email']);
+        $account    = Request::getSession('account');
+        $userInfo   = UserModel::userInfo($account['email']);
 
         if (!password_verify($password, $userInfo['password'])) {
             Base::addMsg(lang('old-password-err'), 'error');
@@ -188,7 +186,7 @@ class SettingController extends \MainController
     // Удаление обложки
     function userCoverRemove()
     {
-        $uid        = Base::getUid();
+        $uid    = Base::getUid();
 
         if ($login != $uid['user_login']) {
             redirect('/u/' . $uid['user_login'] . '/setting/avatar');

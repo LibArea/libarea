@@ -10,9 +10,7 @@ use App\Models\FeedModel;
 use App\Models\AnswerModel;
 use App\Models\CommentModel;
 use App\Models\FavoriteModel;
-use Lori\Content;
-use Lori\Config;
-use Lori\Base;
+use Lori\{Content, Config, Base};
 
 class PostController extends \MainController
 {
@@ -20,8 +18,8 @@ class PostController extends \MainController
     public function index()
     {
         $uid        = Base::getUid();
-        $slug       = \Request::get('slug');
-        $post_id    = \Request::getInt('id');
+        $slug       = Request::get('slug');
+        $post_id    = Request::getInt('id');
 
         $post_new   = PostModel::getPostId($post_id);
 
@@ -111,7 +109,7 @@ class PostController extends \MainController
         $meta_title = strip_tags($post['post_title']) . ' — ' . strip_tags($post['space_name']) . ' | ' . Config::get(Config::PARAM_NAME);
 
         if ($post['post_is_deleted'] == 1) {
-            \Request::getHead()->addMeta('robots', 'noindex');
+            Request::getHead()->addMeta('robots', 'noindex');
         }
 
         Request::getResources()->addBottomScript('/assets/js/shares.js');
@@ -148,8 +146,8 @@ class PostController extends \MainController
     public function posts($sheet)
     {
         $uid    = Base::getUid();
-        $login  = \Request::get('login');
-        $page   = \Request::getInt('page');
+        $login  = Request::get('login');
+        $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
         // Если нет такого пользователя 
@@ -188,7 +186,7 @@ class PostController extends \MainController
     public function addPostProfile()
     {
         $uid     = Base::getUid();
-        $post_id = \Request::getPostInt('post_id');
+        $post_id = Request::getPostInt('post_id');
 
         $post = PostModel::getPostId($post_id);
 
@@ -211,7 +209,7 @@ class PostController extends \MainController
     public function addPostFavorite()
     {
         $uid     = Base::getUid();
-        $post_id = \Request::getPostInt('post_id');
+        $post_id = Request::getPostInt('post_id');
         $post    = PostModel::getPostId($post_id);
 
         Base::PageRedirection($post);
@@ -224,7 +222,7 @@ class PostController extends \MainController
     // Просмотр поста с титульной страницы
     public function shownPost()
     {
-        $post_id = \Request::getPostInt('post_id');
+        $post_id = Request::getPostInt('post_id');
         $post    = PostModel::getPostId($post_id);
 
         if (!$post) {

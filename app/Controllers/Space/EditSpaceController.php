@@ -2,10 +2,9 @@
 
 namespace App\Controllers\Space;
 
-use App\Models\SpaceModel;
 use Hleb\Constructor\Handlers\Request;
-use Lori\UploadImage;
-use Lori\Base;
+use App\Models\SpaceModel;
+use Lori\{UploadImage, Base};
 
 class EditSpaceController extends \MainController
 {
@@ -13,11 +12,11 @@ class EditSpaceController extends \MainController
     public function index()
     {
         $uid            = Base::getUid();
-        $space_slug     = \Request::getPost('space_slug');
-        $space_id       = \Request::getPostInt('space_id');
-        $space_permit   = \Request::getPostInt('permit');
-        $space_feed     = \Request::getPostInt('feed');
-        $space_tl       = \Request::getPostInt('space_tl');
+        $space_slug     = Request::getPost('space_slug');
+        $space_id       = Request::getPostInt('space_id');
+        $space_permit   = Request::getPostInt('permit');
+        $space_feed     = Request::getPostInt('feed');
+        $space_tl       = Request::getPostInt('space_tl');
 
         $space = SpaceModel::getSpace($space_id, 'id');
 
@@ -26,10 +25,10 @@ class EditSpaceController extends \MainController
             redirect('/');
         }
 
-        $space_name         = \Request::getPost('space_name');
-        $space_description  = \Request::getPost('space_description');
-        $space_text         = \Request::getPost('space_text');
-        $space_short_text   = \Request::getPost('space_short_text');
+        $space_name         = Request::getPost('space_name');
+        $space_description  = Request::getPost('space_description');
+        $space_text         = Request::getPost('space_text');
+        $space_short_text   = Request::getPost('space_short_text');
 
         $redirect   = '/space/edit/' . $space['space_id'];
         
@@ -40,7 +39,7 @@ class EditSpaceController extends \MainController
         Base::Limits($space_slug, 'URL', '3', '12', $redirect);
         Base::Limits($space_short_text, 'TEXT', '10', '250', $redirect);
 
-        $space_color = \Request::getPost('color');
+        $space_color = Request::getPost('color');
         $space_color = empty($space_color) ? $space['space_color'] : $space_color;
 
         $space_text  = empty($space_text) ? '' : $space_text;
@@ -81,7 +80,7 @@ class EditSpaceController extends \MainController
     public function edit()
     {
         $uid        = Base::getUid();
-        $space_id   = \Request::getInt('id');
+        $space_id   = Request::getInt('id');
 
         $space = SpaceModel::getSpace($space_id, 'id');
 
@@ -106,7 +105,7 @@ class EditSpaceController extends \MainController
     public function logo()
     {
         $uid    = Base::getUid();
-        $slug   = \Request::get('slug');
+        $slug   = Request::get('slug');
 
         $space = SpaceModel::getSpace($slug, 'slug');
 
@@ -131,8 +130,8 @@ class EditSpaceController extends \MainController
     public function logoEdit()
     {
         $uid            = Base::getUid();
-        $space_slug     = \Request::getPost('space_slug');
-        $space_id       = \Request::getPost('space_id');
+        $space_slug     = Request::getPost('space_slug');
+        $space_id       = Request::getPost('space_id');
 
         $space = SpaceModel::getSpace($space_id, 'id');
 
@@ -165,7 +164,7 @@ class EditSpaceController extends \MainController
     public function coverRemove()
     {
         $uid    = Base::getUid();
-        $slug   = \Request::get('slug');
+        $slug   = Request::get('slug');
 
         $space = SpaceModel::getSpace($slug, 'slug');
 

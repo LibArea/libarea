@@ -3,13 +3,8 @@
 namespace App\Controllers\User;
 
 use Hleb\Constructor\Handlers\Request;
-use App\Models\NotificationsModel;
-use App\Models\UserModel;
-use App\Models\PostModel;
-use App\Models\SpaceModel;
-use Lori\Content;
-use Lori\Config;
-use Lori\Base;
+use App\Models\{NotificationsModel, UserModel, SpaceModel, PostModel};
+use Lori\{Content, Config, Base};
 
 class UserController extends \MainController
 {
@@ -17,10 +12,10 @@ class UserController extends \MainController
     function index()
     {
         $uid    = Base::getUid();
-        $page   = \Request::getInt('page');
+        $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
-        $limit = 40;
+        $limit = 42;
         $usersCount = UserModel::getUsersAllCount();
         $users      = UserModel::getUsersAll($page, $limit, $uid['user_id']);
 
@@ -44,7 +39,7 @@ class UserController extends \MainController
     // Страница участника
     function profile()
     {
-        $login = \Request::get('login');
+        $login = Request::get('login');
         $user  = UserModel::getUser($login, 'slug');
 
         // Покажем 404
@@ -60,10 +55,10 @@ class UserController extends \MainController
         $meta_title = sprintf(lang('title-profile'), $user['user_login'], $user['user_name'], $site_name);
         $meta_desc  = sprintf(lang('desc-profile'), $user['user_login'], $user['user_about'], $site_name);
 
-        \Request::getHead()->addStyles('/assets/css/users.css');
+        Request::getHead()->addStyles('/assets/css/users.css');
 
         if ($user['user_ban_list'] == 1) {
-            \Request::getHead()->addMeta('robots', 'noindex');
+            Request::getHead()->addMeta('robots', 'noindex');
         }
 
         // Просмотры профиля
@@ -106,7 +101,7 @@ class UserController extends \MainController
     function userFavorites()
     {
         $uid    = Base::getUid();
-        $login  = \Request::get('login');
+        $login  = Request::get('login');
 
         if ($login != $uid['user_login']) {
             redirect('/u/' . $uid['user_login'] . '/favorite');
@@ -136,7 +131,7 @@ class UserController extends \MainController
     function userDrafts()
     {
         $uid    = Base::getUid();
-        $login  = \Request::get('login');
+        $login  = Request::get('login');
 
         if ($login != $uid['user_login']) {
             redirect('/u/' . $uid['user_login'] . '/drafts');
@@ -157,7 +152,7 @@ class UserController extends \MainController
     public function preferencesPage()
     {
         $uid    = Base::getUid();
-        $login  = \Request::get('login');
+        $login  = Request::get('login');
 
         if ($login != $uid['user_login']) {
             redirect('/u/' . $uid['user_login'] . '/preferences');
@@ -175,7 +170,7 @@ class UserController extends \MainController
         }
 
         $data = [
-            'h1'          => lang('Preferences'),
+            'h1'            => lang('Preferences'),
             'sheet'         => 'preferences',
             'meta_title'    => lang('Preferences') . ' | ' . Config::get(Config::PARAM_NAME)
         ];

@@ -2,8 +2,8 @@
 
 namespace App\Controllers;
 
-use App\Models\VotesModel;
 use Hleb\Constructor\Handlers\Request;
+use App\Models\VotesModel;
 
 class VotesController extends \MainController
 {
@@ -13,8 +13,8 @@ class VotesController extends \MainController
         $account = Request::getSession('account');
         $user_id = $account['user_id'];
 
-        $up_id  = \Request::getPostInt('up_id');
-        $type   = \Request::get('type');
+        $up_id  = Request::getPostInt('up_id');
+        $type   = Request::get('type');
 
         $allowed = ['post', 'comment', 'answer', 'link'];
         if (!in_array($type, $allowed)) {

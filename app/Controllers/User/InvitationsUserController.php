@@ -4,8 +4,7 @@ namespace App\Controllers\User;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Models\UserModel;
-use Lori\Config;
-use Lori\Base;
+use Lori\{Config, Base};
 
 class InvitationsUserController extends \MainController
 {
@@ -27,7 +26,7 @@ class InvitationsUserController extends \MainController
     {
         // Страница участника и данные
         $uid    = Base::getUid();
-        $login  = \Request::get('login');
+        $login  = Request::get('login');
 
         if ($login != $uid['user_login']) {
             redirect('/u/' . $uid['user_login'] . '/invitation');
@@ -56,7 +55,7 @@ class InvitationsUserController extends \MainController
         // Данные участника
         $uid    = Base::getUid();
 
-        $invitation_email = \Request::getPost('email');
+        $invitation_email = Request::getPost('email');
 
         $redirect = '/u/' . $uid['user_login'] . '/invitation';
 

@@ -3,19 +3,18 @@
 namespace App\Controllers\Auth;
 
 use Hleb\Constructor\Handlers\Request;
-use App\Models\UserModel;
-use App\Models\AuthModel;
-use Lori\Config;
-use Lori\Base;
+use App\Models\{UserModel, AuthModel};
+use Lori\{Config, Base};
+
 
 class LoginController extends \MainController
 {
     // Отправка запроса авторизации
     public function index()
     {
-        $email      = \Request::getPost('email');
-        $password   = \Request::getPost('password');
-        $rememberMe = \Request::getPostInt('rememberme');
+        $email      = Request::getPost('email');
+        $password   = Request::getPost('password');
+        $rememberMe = Request::getPostInt('rememberme');
 
         $url = '/login';
 
@@ -96,7 +95,7 @@ class LoginController extends \MainController
             'expires' => date('Y-m-d H:i:s', $expires),
         ];
 
-        // ПРОВЕРИМ, ЕСТЬ ЛИ У ИДЕНТИФИКАТОРА ПОЛЬЗОВАТЕЛЯ УЖЕ НАБОР ТОКЕНОВ
+        // Проверим, есть ли у пользователя уже набор токенов
         $result = AuthModel::getAuthTokenByUserId($user_id);
 
         // Записываем

@@ -3,24 +3,19 @@
 namespace App\Controllers\Answer;
 
 use Hleb\Constructor\Handlers\Request;
-use App\Models\NotificationsModel;
-use App\Models\ActionModel;
-use App\Models\AnswerModel;
-use App\Models\PostModel;
-use App\Models\UserModel;
-use Lori\Content;
-use Lori\Base;
+use App\Models\{NotificationsModel, ActionModel, AnswerModel, PostModel, UserModel};
+use Lori\{Content, Base};
 
 class AddAnswerController extends \MainController
 {
     public function index()
     {
-        $post_id    = \Request::getPostInt('post_id');
+        $post_id    = Request::getPostInt('post_id');
         $post       = PostModel::getPostId($post_id);
         Base::PageError404($post);
 
         $answer_content = $_POST['answer'];                 // не фильтруем (для Markdown)
-        $ip             = \Request::getRemoteAddress();
+        $ip             = Request::getRemoteAddress();
         $uid            = Base::getUid();
 
         // Если пользователь забанен / заморожен
@@ -86,7 +81,7 @@ class AddAnswerController extends \MainController
                 NotificationsModel::send($uid['user_id'], $user_id, $type, $last_id, $url_answer, 1);
             }
         }
- 
+
         // Кто подписан на данный вопрос / пост
         if ($focus_all = NotificationsModel::getFocusUsersPost($post['post_id'])) {
 

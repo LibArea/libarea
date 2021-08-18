@@ -4,9 +4,7 @@ namespace App\Controllers;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Models\HomeModel;
-use Lori\Content;
-use Lori\Config;
-use Lori\Base;
+use Lori\{Content, Config, Base};
 
 class HomeController extends \MainController
 {
@@ -14,7 +12,7 @@ class HomeController extends \MainController
     public function index($sheet)
     {
         $uid    = Base::getUid();
-        $page   = \Request::getInt('page');
+        $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
         $limit  = 25;

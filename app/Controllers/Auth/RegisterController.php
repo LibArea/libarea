@@ -3,10 +3,8 @@
 namespace App\Controllers\Auth;
 
 use Hleb\Constructor\Handlers\Request;
-use App\Models\UserModel;
-use App\Models\AuthModel;
-use Lori\Config;
-use Lori\Base;
+use App\Models\{UserModel, AuthModel};
+use Lori\{Config, Base};
 
 class RegisterController extends \MainController
 {
@@ -33,12 +31,12 @@ class RegisterController extends \MainController
     // Отправка запроса для регистрации
     public function index()
     {
-        $email      = \Request::getPost('email');
-        $login      = \Request::getPost('login');
-        $inv_code   = \Request::getPost('invitation_code');
-        $inv_uid    = \Request::getPostInt('invitation_id');
-        $password   = \Request::getPost('password');
-        $reg_ip     = \Request::getRemoteAddress();
+        $email      = Request::getPost('email');
+        $login      = Request::getPost('login');
+        $inv_code   = Request::getPost('invitation_code');
+        $inv_uid    = Request::getPostInt('invitation_id');
+        $password   = Request::getPost('password');
+        $reg_ip     = Request::getRemoteAddress();
 
         $url = $inv_code ? '/register/invite/' . $inv_code : '/register';
 
@@ -129,7 +127,7 @@ class RegisterController extends \MainController
     public function showInviteForm()
     {
         // Код активации
-        $code = \Request::get('code');
+        $code = Request::get('code');
 
         // Проверяем код
         $invate = UserModel::InvitationAvailable($code);

@@ -80,7 +80,7 @@ class WebModel extends \MainModel
 
         return DB::run($sql, ['domain' => $domain, 'user_id' => $user_id])->fetch(PDO::FETCH_ASSOC);
     }
-    
+
     // Добавим домен
     public static function addLink($data)
     {
@@ -118,10 +118,10 @@ class WebModel extends \MainModel
 
         return  DB::run($sql, $params);
     }
-    
+
     public static function addLinkCount($domain)
     {
         $sql = "UPDATE links SET link_count = (link_count + 1) WHERE link_url_domain = :domain";
-        DB::run($sql, ['domain' => $domain]); 
+        DB::run($sql, ['domain' => $domain]);
     }
 }

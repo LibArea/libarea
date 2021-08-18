@@ -4,12 +4,10 @@ namespace App\Controllers\Auth;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Models\UserModel;
-use Lori\Config;
-use Lori\Base;
+use Lori\{Config, Base};
 
 class RecoverController extends \MainController
 {
-
     public function showPasswordForm()
     {
         $uid  = Base::getUid();
@@ -24,7 +22,7 @@ class RecoverController extends \MainController
 
     public function index()
     {
-        $email = \Request::getPost('email');
+        $email = Request::getPost('email');
 
         if (Config::get(Config::PARAM_CAPTCHA)) {
             if (!Base::checkCaptchaCode()) {
@@ -68,7 +66,7 @@ class RecoverController extends \MainController
     public function showRemindForm()
     {
         // Код активации
-        $code = \Request::get('code');
+        $code = Request::get('code');
 
         // Проверяем код
         $user_id = UserModel::getPasswordActivate($code);
@@ -94,9 +92,9 @@ class RecoverController extends \MainController
 
     public function remindNew()
     {
-        $password   = \Request::getPost('password');
-        $code       = \Request::getPost('code');
-        $user_id    = \Request::getPost('user_id');
+        $password   = Request::getPost('password');
+        $code       = Request::getPost('code');
+        $user_id    = Request::getPost('user_id');
 
         if (!$user_id) {
             return false;
@@ -121,7 +119,7 @@ class RecoverController extends \MainController
     public function AvtivateEmail()
     {
         // Код активации
-        $code = \Request::get('code');
+        $code = Request::get('code');
 
         // Проверяем код
         $avtivate_email = UserModel::getEmailActivate($code);

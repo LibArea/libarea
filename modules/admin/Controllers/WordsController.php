@@ -11,7 +11,7 @@ class WordsController extends \MainController
     public function index($sheet)
     {
         $uid    = Base::getUid();
-        $pg     = \Request::getInt('page');
+        $pg     = Request::getInt('page');
         $page   = (!$pg) ? 1 : $pg;
 
         $words = WordsModel::getStopWords();
@@ -39,7 +39,7 @@ class WordsController extends \MainController
     // Добавление стоп-слова
     public function add()
     {
-        $word = \Request::getPost('word');
+        $word = Request::getPost('word');
         $data = [
             'stop_word'     => $word,
             'stop_add_uid'  => 1,
@@ -54,7 +54,7 @@ class WordsController extends \MainController
     // Удаление стоп-слова
     public function deletes()
     {
-        $word_id    = \Request::getPostInt('id');
+        $word_id    = Request::getPostInt('id');
 
         WordsModel::deleteStopWord($word_id);
 

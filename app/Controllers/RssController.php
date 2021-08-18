@@ -3,9 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\RssModel;
-use Lori\Content;
-use Lori\Config;
-use Lori\Base;
+use Lori\{Content, Config, Base};
 
 class RssController extends \MainController
 {
@@ -25,7 +23,7 @@ class RssController extends \MainController
 
     public function turboFeed()
     {
-        $space_id   = \Request::getInt('id');
+        $space_id   = Request::getInt('id');
         $space      = RssModel::getSpaceId($space_id);
         Base::PageError404($space);
 

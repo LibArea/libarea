@@ -2,10 +2,7 @@
 
 namespace App\Controllers;
 
-use Hleb\Constructor\Handlers\Request;
-use Lori\Content;
-use Lori\Config;
-use Lori\Base;
+use Lori\{Content, Config, Base};
 
 class InfoController extends \MainController
 {

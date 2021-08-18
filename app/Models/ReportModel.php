@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\NotificationsModel;
 use DB;
 
 class ReportModel extends \MainModel

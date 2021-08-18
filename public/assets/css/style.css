@@ -832,25 +832,6 @@ a.tags.avtive {
   color: #fff;
 }
 
-/* Info space and recommended in the post */
-.l-rec {
-  font-size: 26px;
-  color: rgba(48, 41, 41, 0.51);
-  margin-top: 2px;
-}
-
-.l-rec-telo {
-  margin-left: 42px;
-  padding-top: 5px;
-  line-height: 1.2;
-  word-wrap: break-word;
-}
-
-.l-rec-telo a {
-  color: #333;
-  font-size: 15px;
-}
-
 h3.recommend {
   border-bottom: 1px solid #ddd;
   padding: 12px 0 10px 0;
@@ -981,6 +962,22 @@ footer a.footer:hover {
   grid-template-columns: repeat(auto-fit, minmax(99%, 1fr));
 }
 
+.up-box-post {
+  padding: 3px 0;
+  white-space: nowrap;
+  width: 38px;
+  color: #fff;
+}
+
+.green-box {
+  background: #5cb379;
+}
+
+.gray-box {
+  background: #f1f1f1;
+  color: #666;
+}
+
 /* dark */
 .dark {
   background-color: #222;
@@ -1040,8 +1037,7 @@ footer a.footer:hover {
   color: #919191;
 }
 
-.dark a:hover,
-.dark .l-rec {
+.dark a:hover {
   color: #eee;
 }
 

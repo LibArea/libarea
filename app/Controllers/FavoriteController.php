@@ -3,9 +3,7 @@
 namespace App\Controllers;
 
 use Hleb\Constructor\Handlers\Request;
-use App\Models\FavoriteModel;
-use App\Models\PostModel;
-use App\Models\AnswerModel;
+use App\Models\{FavoriteModel, PostModel, AnswerModel};
 use Lori\Base;
 
 class FavoriteController extends \MainController
@@ -13,7 +11,7 @@ class FavoriteController extends \MainController
     public function index($type)
     {
         $uid        = Base::getUid();
-        $content_id = \Request::getPostInt('content_id');
+        $content_id = Request::getPostInt('content_id');
 
         if ($type == 'post') {
             $content    = PostModel::getPostId($content_id);

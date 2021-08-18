@@ -2,9 +2,7 @@
 
 namespace Lori;
 
-use App\Models\UserModel;
-use App\Models\TopicModel;
-use App\Models\SpaceModel;
+use App\Models\{UserModel, TopicModel, SpaceModel};
 use SimpleImage;
 use Lori\Base;
 
@@ -57,7 +55,7 @@ class UploadImage
             } elseif ($type == 'space') {
                 $images     = SpaceModel::getSpace($content_id, 'id');
                 $foto       = $images['space_img'];
-            } else { 
+            } else {
                 $images     = UserModel::getUser($content_id, 'id');
                 $foto       = $images['user_avatar'];
             }

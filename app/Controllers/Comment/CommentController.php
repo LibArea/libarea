@@ -3,11 +3,8 @@
 namespace App\Controllers\Comment;
 
 use Hleb\Constructor\Handlers\Request;
-use App\Models\CommentModel;
-use App\Models\UserModel;
-use Lori\Content;
-use Lori\Config;
-use Lori\Base;
+use App\Models\{CommentModel, UserModel};
+use Lori\{Content, Config, Base};
 
 class CommentController extends \MainController
 {
@@ -15,7 +12,7 @@ class CommentController extends \MainController
     public function index()
     {
         $uid    = Base::getUid();
-        $page   = \Request::getInt('page');
+        $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
         $limit  = 25;
@@ -50,9 +47,7 @@ class CommentController extends \MainController
     // Комментарии участника
     public function userComments()
     {
-        $login = \Request::get('login');
-
-        // Если нет такого пользователя 
+        $login  = Request::get('login');
         $user   = UserModel::getUser($login, 'slug');
         Base::PageError404($user);
 

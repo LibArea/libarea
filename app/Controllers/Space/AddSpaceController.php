@@ -4,8 +4,7 @@ namespace App\Controllers\Space;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Models\SpaceModel;
-use Lori\Config;
-use Lori\Base;
+use Lori\{Config, Base};
 
 class AddSpaceController extends \MainController
 {
@@ -21,13 +20,13 @@ class AddSpaceController extends \MainController
             // redirect('/');
         }
 
-        $space_slug     = \Request::getPost('space_slug');
-        $space_name     = \Request::getPost('space_name');
-        $space_permit   = \Request::getPostInt('permit');
-        $space_feed     = \Request::getPostInt('feed');
-        $space_tl       = \Request::getPostInt('space_tl');
+        $space_slug     = Request::getPost('space_slug');
+        $space_name     = Request::getPost('space_name');
+        $space_permit   = Request::getPostInt('permit');
+        $space_feed     = Request::getPostInt('feed');
+        $space_tl       = Request::getPostInt('space_tl');
 
-        $redirect   = '/space/add';
+        $redirect       = '/space/add';
         
         Base::charset_slug($space_slug, 'URL', $redirect);
 

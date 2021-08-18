@@ -271,19 +271,20 @@
             <div class="white-box sticky recommend">
                 <div class="pt5 pr15 pb5 pl15">
                     <h3 class="recommend size-13"><?= lang('Recommended'); ?></h3>
-                    <?php $n = 0;
-                    foreach ($recommend as  $rec_post) {
-                        $n++; ?>
-                        <div class="mb10 hidden">
-                            <div class="l-rec left">0<?= $n; ?></div>
-                            <div class="l-rec-telo">
-                                <a class="edit-bl" href="/post/<?= $rec_post['post_id']; ?>/<?= $rec_post['post_slug']; ?>">
-                                    <?= $rec_post['post_title']; ?>
-                                </a>
-                                <?php if ($rec_post['post_answers_count'] != 0) { ?>
-                                    <span class="green">+<?= $rec_post['post_answers_count'] ?></span>
+                    <?php foreach ($recommend as  $rec_post) { ?>
+                        <div class="mb15 hidden flex">
+                            <a class="gray size-15" href="/post/<?= $rec_post['post_id']; ?>/<?= $rec_post['post_slug']; ?>">
+                                <?php if ($rec_post['post_answers_count'] > 0) { ?>
+                                    <div class="up-box-post green-box size-13 center mr15">
+                                        <?= $rec_post['post_answers_count'] ?>
+                                    </div>
+                                <?php } else { ?>
+                                    <div class="up-box-post gray-box size-13 center mr15">0</div>
                                 <?php } ?>
-                            </div>
+                            </a>
+                            <a class="gray size-13" href="/post/<?= $rec_post['post_id']; ?>/<?= $rec_post['post_slug']; ?>">
+                                <?= $rec_post['post_title']; ?>
+                            </a>
                         </div>
                     <?php } ?>
                 </div>

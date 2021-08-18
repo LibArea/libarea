@@ -4,18 +4,17 @@ namespace Modules\Admin\Controllers;
 
 use Hleb\Constructor\Handlers\Request;
 use Modules\Admin\Models\CommentModel;
-use Lori\Content;
-use Lori\Base;
+use Lori\{Content, Base};
 
 class CommentsController extends \MainController
 {
     public function index($sheet)
     {
         $uid    = Base::getUid();
-        $page   = \Request::getInt('page');
+        $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
-        $limit = 100;
+        $limit      = 100;
         $pagesCount = CommentModel::getCommentsAllCount($sheet);
         $comments   = CommentModel::getCommentsAll($page, $limit, $sheet);
 

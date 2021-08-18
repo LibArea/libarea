@@ -3,18 +3,15 @@
 namespace App\Controllers;
 
 use Hleb\Constructor\Handlers\Request;
-use App\Models\NotificationsModel;
-use App\Models\UserModel;
-use Lori\Config;
-use Lori\Base;
+use App\Models\{NotificationsModel, UserModel};
+use Lori\{Config, Base};
 
 class NotificationsController extends \MainController
 {
     // Страница уведомлений участника
     public function index()
     {
-        $login  = \Request::get('login');
-
+        $login  = Request::get('login');
         $uid    = Base::getUid();
         $user   = UserModel::getUser($uid['user_login'], 'slug');
 
@@ -46,9 +43,9 @@ class NotificationsController extends \MainController
     public function read()
     {
         $uid        = Base::getUid();
-        $notif_id   = \Request::getInt('id');
+        $notif_id   = Request::getInt('id');
         $info       = NotificationsModel::getNotification($notif_id);
- 
+
         if ($uid['user_id'] != $info['notification_recipient_id']) {
             return false;
         }
@@ -59,7 +56,7 @@ class NotificationsController extends \MainController
         }
 
         NotificationsModel::updateMessagesUnread($uid['user_id'], $notif_id);
-  
+
         redirect('/' .  $info['notification_url']);
     }
 

@@ -3,18 +3,15 @@
 namespace App\Controllers\Web;
 
 use Hleb\Constructor\Handlers\Request;
-use App\Models\WebModel;
-use App\Models\FeedModel;
-use Lori\Content;
-use Lori\Config;
-use Lori\Base;
+use App\Models\{WebModel, FeedModel};
+use Lori\{Content, Config, Base};
 
 class WebController extends \MainController
 {
     public function index()
     {
         $uid    = Base::getUid();
-        $page   = \Request::getInt('page');
+        $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
         $limit  = 25;
@@ -42,9 +39,9 @@ class WebController extends \MainController
     // Посты по домену
     public function posts($sheet)
     {
-        $domain     = \Request::get('domain');
+        $domain     = Request::get('domain');
         $uid        = Base::getUid();
-        $page       = \Request::getInt('page');
+        $page       = Request::getInt('page');
         $page       = $page == 0 ? 1 : $page;
 
         $link       = WebModel::getLinkOne($domain, $uid['user_id']);

@@ -3,9 +3,7 @@
 namespace App\Controllers;
 
 use Hleb\Constructor\Handlers\Request;
-use App\Models\NotificationsModel;
-use App\Models\PostModel;
-use App\Models\ReportModel;
+use App\Models\{NotificationsModel, PostModel, ReportModel};
 use Lori\Base;
 
 class ReportController extends \MainController
@@ -13,9 +11,9 @@ class ReportController extends \MainController
     public function index()
     {
         $uid            = Base::getUid();
-        $content_type   = \Request::getPost('type');
-        $post_id        = \Request::getPostInt('post_id');
-        $content_id     = \Request::getPostInt('content_id');
+        $content_type   = Request::getPost('type');
+        $post_id        = Request::getPostInt('post_id');
+        $content_id     = Request::getPostInt('content_id');
 
         if ($uid['user_trust_level'] < 1) {
             return false;

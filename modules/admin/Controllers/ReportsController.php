@@ -12,7 +12,7 @@ class ReportsController extends \MainController
     public function index()
     {
         $uid    = Base::getUid();
-        $page   = \Request::getInt('page');
+        $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
         $limit = 50;
@@ -21,9 +21,9 @@ class ReportsController extends \MainController
 
         $result = array();
         foreach ($reports as $ind => $row) {
-            $row['user']  = UserModel::getUser($row['report_user_id'], 'id');
-            $row['date']     = lang_date($row['report_date']);
-            $result[$ind]           = $row;
+            $row['user']    = UserModel::getUser($row['report_user_id'], 'id');
+            $row['date']    = lang_date($row['report_date']);
+            $result[$ind]   = $row;
         }
 
         $data = [
@@ -39,7 +39,7 @@ class ReportsController extends \MainController
     // Ознакомился
     public function status()
     {
-        $report_id    = \Request::getPostInt('id');
+        $report_id  = Request::getPostInt('id');
 
         ReportModel::setStatus($report_id);
 

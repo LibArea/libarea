@@ -3,16 +3,15 @@
 namespace App\Controllers;
 
 use Hleb\Constructor\Handlers\Request;
-use App\Models\SubscriptionModel;
-use App\Models\SpaceModel;
+use App\Models\{SubscriptionModel, SpaceModel};
 
 class SubscriptionController extends \MainController
 {
     public function index()
     {
-        $account    = \Request::getSession('account');
-        $content_id = \Request::getPostInt('content_id');
-        $type       = \Request::get('type');
+        $account    = Request::getSession('account');
+        $content_id = Request::getPostInt('content_id');
+        $type       = Request::get('type');
 
         $user_id    = $account['user_id'];
 
