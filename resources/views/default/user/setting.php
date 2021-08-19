@@ -68,7 +68,7 @@
 
                     <div class="boxline">
                         <label class="form-label" for="name"><?= lang('E-mail'); ?></label>
-                        <input type="text" class="form-input" name="public_email" id="name" value="<?= $user['user_public_email']; ?>">
+                        <input type="email" class="form-input" name="public_email" id="name" value="<?= $user['user_public_email']; ?>">
                         <div class="box_h gray">**@**.ru</div>
                     </div>
 

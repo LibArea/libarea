@@ -5,7 +5,7 @@ namespace App\Controllers\Auth;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{UserModel, AuthModel};
-use Lori\{Config, Base};
+use Lori\{Config, Base, Validation};
 
 
 class LoginController extends MainController
@@ -17,41 +17,38 @@ class LoginController extends MainController
         $password   = Request::getPost('password');
         $rememberMe = Request::getPostInt('rememberme');
 
-        $url = '/login';
+        $redirect = '/login';
 
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            Base::addMsg(lang('Invalid email address'), 'error');
-            redirect($url);
-        }
+        Validation::checkEmail($email, $redirect);
 
         $uid = UserModel::userInfo($email);
 
         if (empty($uid['user_id'])) {
             Base::addMsg(lang('Member does not exist'), 'error');
-            redirect($url);
+            redirect($redirect);
         }
 
         // Находится ли в бан- листе
         if (UserModel::isBan($uid['user_id'])) {
             Base::addMsg(lang('Your account is under review'), 'error');
-            redirect($url);
+            redirect($redirect);
         }
 
         // Активирован ли E-mail
         if (!UserModel::isActivated($uid['user_id'])) {
             Base::addMsg(lang('Your account is not activated'), 'error');
-            redirect($url);
+            redirect($redirect);
         }
 
         if (!password_verify($password, $uid['user_password'])) {
             Base::addMsg(lang('E-mail or password is not correct'), 'error');
-            redirect($url);
+            redirect($redirect);
         }
 
         // Если нажал "Запомнить" 
         // Устанавливает сеанс пользователя и регистрирует его
         if ($rememberMe == 1) {
-            self::rememberMe($uid['user_id']);
+            Base::rememberMe($uid['user_id']);
         }
 
         $last_ip = Request::getRemoteAddress();
@@ -75,38 +72,5 @@ class LoginController extends MainController
         ];
 
         return view(PR_VIEW_DIR . '/auth/login', ['data' => $data, 'uid' => $uid]);
-    }
-
-    // ЗАПОМНИТЬ МЕНЯ
-    public static function rememberMe($user_id)
-    {
-        $rememberMeExpire = 30;
-        $selector = Base::randomString('crypto', 12);
-        $validator = Base::randomString('crypto', 20);
-        $expires = time() + 60 * 60 * 24 * $rememberMeExpire;
-
-        // Установим токен
-        $token = $selector . ':' . $validator;
-
-        // Массив данных
-        $data = [
-            'user_id' => $user_id,
-            'selector' => $selector,
-            'hashedvalidator' => hash('sha256', $validator),
-            'expires' => date('Y-m-d H:i:s', $expires),
-        ];
-
-        // Проверим, есть ли у пользователя уже набор токенов
-        $result = AuthModel::getAuthTokenByUserId($user_id);
-
-        // Записываем
-        if (empty($result)) {
-            AuthModel::insertToken($data);
-        } else {   // Если есть, то обновление
-            AuthModel::updateToken($data, $user_id);
-        }
-
-        // set_Cookie
-        setcookie("remember", $token, $expires);
     }
 }

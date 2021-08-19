@@ -5,7 +5,7 @@ namespace App\Controllers\Answer;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{NotificationsModel, ActionModel, AnswerModel, PostModel, UserModel};
-use Lori\{Content, Base};
+use Lori\{Content, Base, Validation};
 
 class AddAnswerController extends MainController
 {
@@ -25,10 +25,10 @@ class AddAnswerController extends MainController
         Content::stopContentQuietМode($user);
 
         $redirect = '/post/' . $post['post_id'] . '/' . $post['post_slug'];
-        Base::Limits($answer_content, lang('Bodies'), '6', '5000', $redirect);
+        Validation::Limits($answer_content, lang('Bodies'), '6', '5000', $redirect);
 
         // Ограничим частоту добавления (зависит от TL)
-        if ($uid['user_trust_level'] < 1) {
+        if ($uid['user_trust_level'] < 2) {
             $num_answer =  AnswerModel::getAnswerSpeed($uid['user_id']);
             if ($num_answer > 10) {
                 Base::addMsg(lang('limit_answer_day'), 'error');

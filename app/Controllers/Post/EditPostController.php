@@ -5,7 +5,7 @@ namespace App\Controllers\Post;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{PostModel, UserModel, SpaceModel, TopicModel};
-use Lori\{Content, Config, Base, UploadImage};
+use Lori\{Content, Config, Base, UploadImage, Validation};
 
 class EditPostController extends MainController
 {
@@ -72,8 +72,8 @@ class EditPostController extends MainController
             $post_user_id = $post['post_user_id'];
         }
 
-        Base::Limits($post_title, lang('Title'), '6', '250', $redirect);
-        Base::Limits($post_content, lang('The post'), '6', '25000', $redirect);
+        Validation::Limits($post_title, lang('Title'), '6', '250', $redirect);
+        Validation::Limits($post_content, lang('The post'), '6', '25000', $redirect);
 
         // Проверим хакинг формы
         if ($post['post_draft'] == 0) {

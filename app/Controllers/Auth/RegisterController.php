@@ -5,7 +5,7 @@ namespace App\Controllers\Auth;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{UserModel, AuthModel};
-use Lori\{Config, Base, Integration};
+use Lori\{Config, Base, Integration, Validation};
 
 class RegisterController extends MainController
 {
@@ -39,54 +39,44 @@ class RegisterController extends MainController
         $password   = Request::getPost('password');
         $reg_ip     = Request::getRemoteAddress();
 
-        $url = $inv_code ? '/register/invite/' . $inv_code : '/register';
+        $redirect = $inv_code ? '/register/invite/' . $inv_code : '/register';
 
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            Base::addMsg(lang('Invalid') . ' email', 'error');
-            redirect($url);
-        }
+        Validation::checkEmail($email, $redirect);
 
         if (is_array(AuthModel::replayEmail($email))) {
             Base::addMsg(lang('e-mail-replay'), 'error');
-            redirect($url);
+            redirect($redirect);
         }
 
         if (is_array(AuthModel::repeatIpBanRegistration($reg_ip))) {
             Base::addMsg(lang('multiple-accounts'), 'error');
-            redirect($url);
+            redirect($redirect);
         }
 
-        Base::charset_slug($login, lang('Nickname'), '/register');
-        Base::Limits($login, lang('Nickname'), '3', '10', $url);
+        Validation::charset_slug($login, lang('Nickname'), '/register');
+        Validation::Limits($login, lang('Nickname'), '3', '10', $redirect);
 
-        if (is_numeric(substr($login, 0, 1))) {
-            Base::addMsg(lang('nickname-no-start'), 'error');
-            redirect($url);
+        if (preg_match('/(\w)\1{3,}/', $login)) {
+            Base::addMsg(lang('nickname-repeats-characters'), 'error');
+            redirect($redirect);
         }
-
-        for ($i = 0, $l = Base::getStrlen($login); $i < $l; $i++) {
-            if (Base::textCount($login, Base::getStrlen($login, $i, 1)) > 4) {
-                Base::addMsg(lang('nickname-repeats-characters'), 'error');
-                redirect($url);
-            }
-        }
-
+       
         // Запретим, хотя лучшая практика занять нужные (пр. GitHub)
         $disabled = ['admin', 'support', 'lori', 'loriup', 'dev', 'docs', 'meta', 'email', 'mail', 'login'];
         if (in_array($login, $disabled)) {
             Base::addMsg(lang('nickname-replay'), 'error');
-            redirect($url);
+            redirect($redirect);
         }
 
         if (is_array(AuthModel::replayLogin($login))) {
             Base::addMsg(lang('nickname-replay'), 'error');
-            redirect($url);
+            redirect($redirect);
         }
 
-        Base::Limits($password, lang('Password'), '8', '32', $url);
+        Validation::Limits($password, lang('Password'), '8', '32', $redirect);
         if (substr_count($password, ' ') > 0) {
             Base::addMsg(lang('password-spaces'), 'error');
-            redirect($url);
+            redirect($redirect);
         }
 
         if (!$inv_code) {

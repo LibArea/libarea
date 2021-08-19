@@ -5,7 +5,7 @@ namespace App\Controllers\Space;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\SpaceModel;
-use Lori\{UploadImage, Base};
+use Lori\{UploadImage, Base, Validation};
 
 class EditSpaceController extends MainController
 {
@@ -33,12 +33,11 @@ class EditSpaceController extends MainController
 
         $redirect   = '/space/edit/' . $space['space_id'];
         
-        Base::charset_slug($space_slug, 'URL', $redirect);
-
-        Base::Limits($space_name, lang('titles'), '4', '18', $redirect);
-        Base::Limits($space_description, 'Meta-', '60', '190', $redirect);
-        Base::Limits($space_slug, 'URL', '3', '12', $redirect);
-        Base::Limits($space_short_text, 'TEXT', '10', '250', $redirect);
+        Validation::charset_slug($space_slug, 'URL', $redirect);
+        Validation::Limits($space_name, lang('titles'), '4', '18', $redirect);
+        Validation::Limits($space_description, 'Meta-', '60', '190', $redirect);
+        Validation::Limits($space_slug, 'URL', '3', '12', $redirect);
+        Validation::Limits($space_short_text, 'TEXT', '10', '250', $redirect);
 
         $space_color = Request::getPost('color');
         $space_color = empty($space_color) ? $space['space_color'] : $space_color;

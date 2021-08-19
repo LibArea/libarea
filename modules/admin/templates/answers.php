@@ -55,7 +55,7 @@
 
                 <span id="cm_dell" class="right comment_link size-13">
                   <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action">
-                    <?php if ($data['sheet'] == 'answerban') { ?>
+                    <?php if ($data['sheet'] == 'answers-ban') { ?>
                       <?= lang('Recover'); ?>
                     <?php } else { ?>
                       <?= lang('Remove'); ?>

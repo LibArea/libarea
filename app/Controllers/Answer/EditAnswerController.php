@@ -5,7 +5,7 @@ namespace App\Controllers\Answer;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{AnswerModel, PostModel, UserModel};
-use Lori\{Content, Config, Base};
+use Lori\{Content, Config, Base, Validation};
 
 class EditAnswerController extends MainController
 {
@@ -34,7 +34,7 @@ class EditAnswerController extends MainController
             redirect('/');
         }
 
-        Base::Limits($answer_content, lang('Bodies'), '6', '5000', '/' . $url);
+        Validation::Limits($answer_content, lang('Bodies'), '6', '5000', '/' . $url);
 
         $answer_content = Content::change($answer_content);
 

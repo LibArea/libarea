@@ -5,7 +5,7 @@ namespace App\Controllers\Auth;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\UserModel;
-use Lori\{Config, Base, Integration};
+use Lori\{Config, Base, Integration, Validation};
 
 class RecoverController extends MainController
 {
@@ -14,7 +14,7 @@ class RecoverController extends MainController
         $uid  = Base::getUid();
         $data = [
             'h1'            => lang('Password Recovery'),
-            'sheet'         => 'login',
+            'sheet'         => 'recover',
             'meta_title'    => lang('Password Recovery') . ' | ' . Config::get(Config::PARAM_NAME),
         ];
 
@@ -32,10 +32,7 @@ class RecoverController extends MainController
             }
         }
 
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            Base::addMsg(lang('Invalid') . ' email', 'error');
-            redirect('/recover');
-        }
+        Validation::checkEmail($email, '/recover');
 
         $uInfo = UserModel::userInfo($email);
 
@@ -101,7 +98,7 @@ class RecoverController extends MainController
             return false;
         }
 
-        Base::Limits($password, lang('Password'), '8', '32', '/recover/remind/' . $code);
+        Validation::Limits($password, lang('Password'), '8', '32', '/recover/remind/' . $code);
 
         $newpass  = password_hash($password, PASSWORD_BCRYPT);
         $news     = UserModel::editPassword($user_id, $newpass);

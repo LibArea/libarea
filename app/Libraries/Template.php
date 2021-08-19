@@ -154,85 +154,6 @@ function word_form($num, $form_for_1, $form_for_2, $form_for_5)
     return $form_for_5;
 }
 
-//******************** Доступ ********************//
-
-// Права для TL
-// $trust_leve - уровень доверие участника
-// $allowed_tl - с какого TL разрешено
-// $count_content - сколько уже создал
-// $count_total - сколько разрешено
-function validTl($trust_level, $allowed_tl, $count_content, $count_total)
-{
-
-    if ($trust_level < $allowed_tl) {
-        return false;
-    }
-
-    if ($count_content >= $count_total) {
-        return false;
-    }
-
-    return true;
-}
-
-// Отправки личных сообщений (ЛС)
-// $uid - кто отправляет
-// $user_id - кому
-// $add_tl -  с какого уровня доверия
-function accessPm($uid, $user_id, $add_tl)
-{
-    // Запретим отправку себе
-    if ($uid['user_id'] == $user_id) {
-        return false;
-    }
-
-    // Если уровень доверия меньше установленного
-    if ($add_tl > $uid['user_trust_level']) {
-        return false;
-    }
-
-    return true;
-}
-
-// Проверка доступа
-// $content
-// $type -  post / answer / comment
-// $after - есть ли ответы
-// $stop_time - разрешенное время
-function accessСheck($content, $type, $uid, $after, $stop_time)
-{
-    if (!$content) {
-        return false;
-    }
-
-    // Редактировать может только автор и админ
-    if ($content[$type . '_user_id'] != $uid['user_id'] && $uid['user_trust_level'] != 5) {
-        return false;
-    }
-
-    // Запретим удаление если есть ответ
-    // И если прошло 30 минут
-    if ($uid['user_trust_level'] != 5) {
-
-        if ($after > 0) {
-            if ($content[$type . '_after'] > 0) {
-                return false;
-            }
-        }
-
-        if ($stop_time > 0) {
-            $diff = strtotime(date("Y-m-d H:i:s")) - strtotime($content[$type . '_date']);
-            $time = floor($diff / 60);
-
-            if ($time > $stop_time) {
-                return false;
-            }
-        }
-    }
-
-    return true;
-}
-
 function pagination($pNum, $pagesCount, $sheet, $other)
 {
     if ($pNum > $pagesCount) {
@@ -349,4 +270,43 @@ function no_content($lang)
             </div>';
 
     return $html;
+}
+
+// Проверка доступа
+// $content
+// $type -  post / answer / comment
+// $after - есть ли ответы
+// $stop_time - разрешенное время
+function accessСheck($content, $type, $uid, $after, $stop_time)
+{
+    if (!$content) {
+        return false;
+    }
+
+    // Редактировать может только автор и админ
+    if ($content[$type . '_user_id'] != $uid['user_id'] && $uid['user_trust_level'] != 5) {
+        return false;
+    }
+
+    // Запретим удаление если есть ответ
+    // И если прошло 30 минут
+    if ($uid['user_trust_level'] != 5) {
+
+        if ($after > 0) {
+            if ($content[$type . '_after'] > 0) {
+                return false;
+            }
+        }
+
+        if ($stop_time > 0) {
+            $diff = strtotime(date("Y-m-d H:i:s")) - strtotime($content[$type . '_date']);
+            $time = floor($diff / 60);
+
+            if ($time > $stop_time) {
+                return false;
+            }
+        }
+    }
+
+    return true;
 }

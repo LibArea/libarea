@@ -5,7 +5,7 @@ namespace App\Controllers\User;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\UserModel;
-use Lori\{Config, Base};
+use Lori\{Config, Base, Validation};
 
 class InvitationsUserController extends MainController
 {
@@ -60,10 +60,7 @@ class InvitationsUserController extends MainController
 
         $redirect = '/u/' . $uid['user_login'] . '/invitation';
 
-        if (!filter_var($invitation_email, FILTER_VALIDATE_EMAIL)) {
-            Base::addMsg(lang('Invalid') . ' email', 'error');
-            redirect($redirect);
-        }
+        Validation::checkEmail($invitation_email, $redirect);
 
         $user = UserModel::userInfo($invitation_email);
         if (!empty($user['user_email'])) {

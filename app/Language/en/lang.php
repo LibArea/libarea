@@ -29,7 +29,6 @@ return [
     /* MSG */
     'about-info-err'        => 'About me should be less characters long',
     'name-info-err'         => 'Name must be between 3 and ~ 10 characters long',
-    'pass-length-err'       => 'The password must be between 8 and 32 characters long',
     'old-password-err'      => 'The old password is not correct',
     'pass-match-err'        => 'Passwords don*t match',
     'pass-gap-err'          => 'The password cannot contain spaces',
@@ -99,7 +98,6 @@ return [
     'e-mail-replay'                         => 'This e-mail is already available on the site',
     'multiple-accounts'                     => 'Do not register multiple accounts',
     'password-spaces'                       => 'The password cannot contain spaces',
-    'nickname-no-start'                     => 'A nickname can*t start with a number',
     'nickname-repeats-characters'           => 'The nickname has too many duplicate characters',
     'The code is incorrect'                 => 'The code is incorrect, or it has already been used',
 

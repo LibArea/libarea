@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Admin\Models\BadgeModel;
 use App\Models\UserModel;
-use Lori\Base;
+use Lori\{Base, Validation};
 
 class BadgesController extends MainController
 {
@@ -64,9 +64,9 @@ class BadgesController extends MainController
         $badge_icon          = $_POST['badge_icon']; // не фильтруем
 
         $redirect = '/admin/badges';
-        Base::Limits($badge_title, lang('Title'), '4', '25', $redirect);
-        Base::Limits($badge_description, lang('Description'), '12', '250', $redirect);
-        Base::Limits($badge_icon, lang('Icon'), '12', '250', $redirect);
+        Validation::Limits($badge_title, lang('Title'), '4', '25', $redirect);
+        Validation::Limits($badge_description, lang('Description'), '12', '250', $redirect);
+        Validation::Limits($badge_icon, lang('Icon'), '12', '250', $redirect);
 
         $data = [
             'badge_title'       => $badge_title,
@@ -132,9 +132,9 @@ class BadgesController extends MainController
         $badge_description   = Request::getPost('badge_description');
         $badge_icon          = $_POST['badge_icon']; // не фильтруем
 
-        Base::Limits($badge_title, lang('Title'), '4', '25', $redirect);
-        Base::Limits($badge_description, lang('Description'), '12', '250', $redirect);
-        Base::Limits($badge_icon, lang('Icon'), '12', '250', $redirect);
+        Validation::Limits($badge_title, lang('Title'), '4', '25', $redirect);
+        Validation::Limits($badge_description, lang('Description'), '12', '250', $redirect);
+        Validation::Limits($badge_icon, lang('Icon'), '12', '250', $redirect);
 
         $data = [
             'badge_id'          => $badge_id,

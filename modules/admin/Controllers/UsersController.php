@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Admin\Models\{UserModel, BadgeModel};
 use App\Models\SpaceModel;
-use Lori\Base;
+use Lori\{Base, Validation};
 
 class UsersController extends MainController
 {
@@ -127,7 +127,7 @@ class UsersController extends MainController
         $telegram       = Request::getPost('telegram');
         $vk             = Request::getPost('vk');
 
-        Base::Limits($login, lang('Login'), '4', '11', $redirect);
+        Validation::Limits($login, lang('Login'), '4', '11', $redirect);
 
         $data = [
             'user_id'            => $user_id,

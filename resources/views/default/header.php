@@ -47,8 +47,8 @@
             </a>
           </div>
         <?php } ?>
-        <div class="ml30 no-pc login">
-          <a class="gray" title="<?= lang('Sign in'); ?>" href="/login"><?= lang('Sign in'); ?></a>
+        <div class="ml30 login mr5">
+          <a class="gray size-15" title="<?= lang('Sign in'); ?>" href="/login"><?= lang('Sign in'); ?></a>
         </div>
       <?php } else { ?>
         <?php if ($uid['notif']) { ?>

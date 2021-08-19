@@ -59,7 +59,7 @@
 
                 <span id="cm_dell" class="right comment_link">
                   <a data-type="post" data-id="<?= $post['post_id']; ?>" class="type-action">
-                    <?php if ($data['sheet'] == 'postban') { ?>
+                    <?php if ($data['sheet'] == 'posts-ban') { ?>
                       <?= lang('Recover'); ?>
                     <?php } else { ?>
                       <?= lang('Remove'); ?>

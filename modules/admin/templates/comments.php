@@ -53,7 +53,7 @@
                 + <?= $comment['comment_votes']; ?>
                 <span id="cm_dell" class="right comment_link size-13">
                   <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action">
-                    <?php if ($data['sheet'] == 'commentban') { ?>
+                    <?php if ($data['sheet'] == 'comments-ban') { ?>
                       <?= lang('Recover'); ?>
                     <?php } else { ?>
                       <?= lang('Remove'); ?>

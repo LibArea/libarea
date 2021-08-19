@@ -5,7 +5,7 @@ namespace App\Controllers\Comment;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{NotificationsModel, ActionModel, AnswerModel, CommentModel, PostModel, UserModel};
-use Lori\{Content, Config, Base};
+use Lori\{Content, Config, Base, Validation};
 
 class AddCommentController extends MainController
 {
@@ -31,7 +31,7 @@ class AddCommentController extends MainController
         $redirect = '/post/' . $post['post_id'] . '/' . $post['post_slug'];
 
         // Проверяем длину тела
-        Base::Limits($comment_content, lang('Comments-m'), '6', '2024', $redirect);
+        Validation::Limits($comment_content, lang('Comments-m'), '6', '2024', $redirect);
 
         // Участник с нулевым уровнем доверия должен быть ограничен в добавлении комментариев
         if ($uid['user_trust_level'] < Config::get(Config::PARAM_TL_ADD_COMM)) {

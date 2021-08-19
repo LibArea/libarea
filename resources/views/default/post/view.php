@@ -268,7 +268,7 @@
         </div>
 
         <?php if ($recommend) { ?>
-            <div class="white-box sticky recommend">
+            <div class="white-box post-view sticky recommend">
                 <div class="pt5 pr15 pb5 pl15">
                     <h3 class="recommend size-13"><?= lang('Recommended'); ?></h3>
                     <?php foreach ($recommend as  $rec_post) { ?>

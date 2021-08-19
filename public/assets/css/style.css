@@ -200,7 +200,11 @@ img {
 
 .sticky {
   position: sticky;
-  top: 15px;
+  top: 17px;
+}
+
+.post-view.sticky {
+  top: 48px;
 }
 
 .white-box {
@@ -797,10 +801,6 @@ ul.breadcrumb {
   color: #e83e8c;
 }
 
-.no-pc {
-  display: none;
-}
-
 .related-count {
   background-color: #eef0f1;
   width: 21px;
@@ -1067,7 +1067,6 @@ footer a.footer:hover {
   .no-mob,
   aside { display: none; }
   footer { padding: 8px; }
-  .no-pc { display: block; }
 
   main,
   main.w-75 {

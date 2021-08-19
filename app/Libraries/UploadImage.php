@@ -165,7 +165,7 @@ class UploadImage
             if ($cover_art != $default_img && $cover_art != $new_cover) {
                 chmod($path_cover_img . $cover_art, 0777);
                 unlink($path_cover_img . $cover_art);
-                chmod($path_cover_small . $foto, 0777);
+                chmod($path_cover_small . $cover_art, 0777);
                 unlink($path_cover_small . $cover_art);
             }
 

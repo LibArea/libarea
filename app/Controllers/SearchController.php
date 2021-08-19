@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\SearchModel;
-use Lori\{Content, Config, Base};
+use Lori\{Content, Config, Base, Validation};
 
 class SearchController extends MainController
 {
@@ -19,7 +19,7 @@ class SearchController extends MainController
 
             if (!empty($query)) {
 
-                Base::Limits($query, lang('Too short'), '3', '128', '/search');
+                Validation::Limits($query, lang('Too short'), '3', '128', '/search');
 
                 // Успех и определим, что будем использовать
                 // Далее индивидуально расширим (+ лайки, просмотры и т.д.)

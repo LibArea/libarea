@@ -5,7 +5,7 @@ namespace App\Controllers\Post;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{NotificationsModel, SubscriptionModel, ActionModel, SpaceModel, WebModel, PostModel, TopicModel, UserModel};
-use Lori\{Content, Config, Base, UploadImage, Integration};
+use Lori\{Content, Config, Base, UploadImage, Integration, Validation};
 use UrlRecord;
 use URLScraper;
 
@@ -45,10 +45,7 @@ class AddPostController extends MainController
         // Получаем информацию по пространству
         $space_id   = Request::getPostInt('space_id');
         $space      = SpaceModel::getSpace($space_id, 'id');
-        if (!$space) {
-            Base::addMsg(lang('Select space'), 'error');
-            redirect($redirect);
-        }
+        Base::PageRedirection($space, $redirect);
 
         // Если стоит ограничение: публиковать может только автор
         if ($space['space_permit_users'] == 1) {
@@ -59,8 +56,8 @@ class AddPostController extends MainController
             }
         }
 
-        Base::Limits($post_title, lang('Title'), '6', '250', $redirect);
-        Base::Limits($post_content, lang('The post'), '6', '25000', $redirect);
+        Validation::Limits($post_title, lang('Title'), '6', '250', $redirect);
+        Validation::Limits($post_content, lang('The post'), '6', '25000', $redirect);
 
         if ($post_url) {
             // Поскольку это для поста, то получим превью 

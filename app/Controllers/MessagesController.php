@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{MessagesModel, UserModel};
-use Lori\{Content, Config, Base};
+use Lori\{Content, Config, Base, Validation};
 
 class MessagesController extends MainController
 {
@@ -131,7 +131,7 @@ class MessagesController extends MainController
         }
 
         // Участник с нулевым уровнем доверия должен быть ограничен в добавлении ЛС
-        $add_pm  = accessPm($uid, $user['user_id'], Config::get(Config::PARAM_TL_ADD_PM));
+        $add_pm  = Validation::accessPm($uid, $user['user_id'], Config::get(Config::PARAM_TL_ADD_PM));
         if ($add_pm === false) {
             redirect('/');
         }
@@ -167,13 +167,10 @@ class MessagesController extends MainController
 
         // Этого пользователь не существует
         $user  = UserModel::getUser($uid['user_id'], 'id');
-        if (!$user) {
-            Base::addMsg(lang('Member does not exist'), 'error');
-            redirect('/u/' . $uid['user_login'] . '/messages');
-        }
+        Base::PageRedirection($user, '/u/' . $uid['user_login'] . '/messages');
 
         // Участник с нулевым уровнем доверия должен быть ограничен в добавлении ЛС
-        $add_pm  = accessPm($uid, $recipient_id, Config::get(Config::PARAM_TL_ADD_PM));
+        $add_pm  = Validation::accessPm($uid, $recipient_id, Config::get(Config::PARAM_TL_ADD_PM));
         if ($add_pm === false) {
             redirect('/');
         }

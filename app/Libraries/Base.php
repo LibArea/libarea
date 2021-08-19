@@ -144,7 +144,6 @@ class Base
         $existingToken = AuthModel::getAuthTokenBySelector($selector);
 
         if (empty($existingToken)) {
-
             return self::rememberMe($user_id);
         }
 
@@ -174,6 +173,38 @@ class Base
 
         AuthModel::UpdateSelector($data, $selector);
 
+        setcookie("remember", $token, $expires);
+    }
+
+    // Запомнить меня
+    public static function rememberMe($user_id)
+    {
+        $rememberMeExpire   = 30;
+        $selector           = self::randomString('crypto', 12);
+        $validator          = self::randomString('crypto', 20);
+        $expires            = time() + 60 * 60 * 24 * $rememberMeExpire;
+
+        // Установим токен
+        $token = $selector . ':' . $validator;
+
+        $data = [
+            'user_id'           => $user_id,
+            'selector'          => $selector,
+            'hashedvalidator'   => hash('sha256', $validator),
+            'expires'           => date('Y-m-d H:i:s', $expires),
+        ];
+
+        // Проверим, есть ли у пользователя уже набор токенов
+        $result = AuthModel::getAuthTokenByUserId($user_id);
+
+        // Записываем
+        if (empty($result)) {
+            AuthModel::insertToken($data);
+        } else {   // Если есть, то обновление
+            AuthModel::updateToken($data, $user_id);
+        }
+
+        // set_Cookie
         setcookie("remember", $token, $expires);
     }
 
@@ -214,18 +245,6 @@ class Base
         }
     }
 
-    // Вхождение подстроки
-    public static function textCount($str, $needle)
-    {
-        return mb_substr_count($str, $needle, 'utf-8');
-    }
-
-    // Длина строки
-    public static function getStrlen($str)
-    {
-        return mb_strlen($str, "utf-8");
-    }
-
     // Создать случайную строку
     public static function randomString($type, int $len = 8)
     {
@@ -237,28 +256,6 @@ class Base
         }
     }
 
-    public static function Limits($name, $content, $min, $max, $redirect)
-    {
-        if (self::getStrlen($name) < $min || self::getStrlen($name) > $max) {
-
-            $text = sprintf(lang('text-string-length'), '«' . $content . '»', $min, $max);
-            self::addMsg($text, 'error');
-            redirect($redirect);
-        }
-        return true;
-    }
-
-    public static function charset_slug($slug, $text, $redirect)
-    {
-        if (!preg_match('/^[a-zA-Z0-9-]+$/u', $slug)) {
-
-            $text = sprintf(lang('text-charset-slug'), '«' . $text . '»');
-            Base::addMsg($text, 'error');
-            redirect($redirect);
-        }
-        return true;
-    }
-
     public static function PageError404($variable)
     {
         if (!$variable) {
@@ -268,10 +265,10 @@ class Base
         return true;
     }
 
-    public static function PageRedirection($variable)
+    public static function PageRedirection($variable, $redirect)
     {
         if (!$variable) {
-            redirect('/');
+            redirect($redirect);
         }
         return true;
     }

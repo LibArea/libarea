@@ -1,6 +1,6 @@
 User-agent: *
 Disallow: /search
-Disallow: /comments
+Disallow: /recover
 Disallow: /top
 Disallow: /s/*/top*
 Disallow: /s/flud/*

@@ -5,7 +5,7 @@ namespace App\Controllers\User;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\UserModel;
-use Lori\{Config, Base, UploadImage};
+use Lori\{Config, Base, UploadImage, Validation};
 
 class SettingController extends MainController
 {
@@ -45,12 +45,10 @@ class SettingController extends MainController
         $uid            = Base::getUid();
         $redirect       = '/u/' . $uid['user_login'] . '/setting';
 
-        Base::Limits($name, lang('Name'), '3', '11', $redirect);
-        Base::Limits($about, lang('About me'), '0', '255', $redirect);
+        Validation::Limits($name, lang('Name'), '3', '11', $redirect);
+        Validation::Limits($about, lang('About me'), '0', '255', $redirect);
 
-        if (!filter_var($public_email, FILTER_VALIDATE_EMAIL)) {
-            $public_email = '';
-        }
+        Validation::checkEmail($public_email, $redirect);
 
         $data = [
             'user_id'            => $uid['user_id'],
@@ -163,10 +161,7 @@ class SettingController extends MainController
             redirect($redirect);
         }
 
-        if (Base::getStrlen($password2) < 8 || Base::getStrlen($password2) > 32) {
-            Base::addMsg(lang('pass-length-err'), 'error');
-            redirect($redirect);
-        }
+        Validation::Limits($password2, lang('Password'), 8, 32, $redirect);
 
         // Данные участника
         $account    = Request::getSession('account');
@@ -192,7 +187,7 @@ class SettingController extends MainController
         $redirect   = '/u/' . $uid['user_login'] . '/setting/avatar';
 
         if ($login != $uid['user_login']) {
-            redirect('/u/' . $uid['user_login'] . '/setting/avatar');
+            redirect($redirect);
         }
 
         $user = UserModel::getUser($uid['user_login'], 'slug');

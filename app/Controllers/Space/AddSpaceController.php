@@ -5,7 +5,7 @@ namespace App\Controllers\Space;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\SpaceModel;
-use Lori\{Config, Base};
+use Lori\{Config, Base, Validation};
 
 class AddSpaceController extends MainController
 {
@@ -16,7 +16,7 @@ class AddSpaceController extends MainController
         $space          = SpaceModel::getUserCreatedSpaces($uid['user_id']);
         $count_space    = count($space);
 
-        $valid = validTl($uid['user_trust_level'], Config::get(Config::PARAM_TL_ADD_SPACE), $count_space, 3);
+        $valid = Validation::validTl($uid['user_trust_level'], Config::get(Config::PARAM_TL_ADD_SPACE), $count_space, 3);
         if ($valid === false) {
             // redirect('/');
         }
@@ -29,10 +29,9 @@ class AddSpaceController extends MainController
 
         $redirect       = '/space/add';
         
-        Base::charset_slug($space_slug, 'URL', $redirect);
-
-        Base::Limits($space_name, lang('titles'), '4', '18', $redirect);
-        Base::Limits($space_slug, 'slug (URL)', '3', '12', $redirect);
+        Validation::charset_slug($space_slug, 'URL', $redirect);
+        Validation::Limits($space_name, lang('titles'), '4', '18', $redirect);
+        Validation::Limits($space_slug, 'slug (URL)', '3', '12', $redirect);
 
         if (preg_match('/\s/', $space_slug) || strpos($space_slug, ' ')) {
             Base::addMsg(lang('url-gaps'), 'error');
@@ -81,7 +80,7 @@ class AddSpaceController extends MainController
         $space          = SpaceModel::getUserCreatedSpaces($uid['user_id']);
         $count_space    = count($space);
         $total_allowed  = $uid['user_trust_level'] == 5 ? 999 : 3;
-        $valid = validTl($uid['user_trust_level'], Config::get(Config::PARAM_TL_ADD_SPACE), $count_space, $total_allowed);
+        $valid = Validation::validTl($uid['user_trust_level'], Config::get(Config::PARAM_TL_ADD_SPACE), $count_space, $total_allowed);
         if ($valid === false) {
             redirect('/');
         }

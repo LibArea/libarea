@@ -6,8 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Admin\Models\TopicModel;
 use App\Models\PostModel;
-use Lori\UploadImage;
-use Lori\Base;
+use Lori\{Base, UploadImage, Validation};
 
 class TopicsController extends MainController
 {
@@ -35,7 +34,7 @@ class TopicsController extends MainController
     public function addPage()
     {
         $uid    = Base::getUid();
-        $tl     = validTl($uid['user_trust_level'], 5, 0, 1);
+        $tl     = Validation::validTl($uid['user_trust_level'], 5, 0, 1);
         if ($tl === false) {
             redirect('/');
         }
@@ -52,7 +51,7 @@ class TopicsController extends MainController
     public function editPage()
     {
         $uid    = Base::getUid();
-        $tl     = validTl($uid['user_trust_level'], 5, 0, 1);
+        $tl     = Validation::validTl($uid['user_trust_level'], 5, 0, 1);
         if ($tl === false) {
             redirect('/');
         }
@@ -117,13 +116,12 @@ class TopicsController extends MainController
 
         $redirect = '/admin/topics/' . $topic['topic_id'] . '/edit';
 
-        Base::charset_slug($topic_slug, 'Slug (url)', $redirect);
-
-        Base::Limits($topic_title, lang('Title'), '3', '64', $redirect);
-        Base::Limits($topic_slug, lang('Slug'), '3', '43', $redirect);
-        Base::Limits($topic_seo_title, lang('Name SEO'), '4', '225', $redirect);
-        Base::Limits($topic_description, lang('Meta Description'), '44', '225', $redirect);
-        Base::Limits($topic_info, lang('Info'), '14', '5000', $redirect);
+        Validation::charset_slug($topic_slug, 'Slug (url)', $redirect);
+        Validation::Limits($topic_title, lang('Title'), '3', '64', $redirect);
+        Validation::Limits($topic_slug, lang('Slug'), '3', '43', $redirect);
+        Validation::Limits($topic_seo_title, lang('Name SEO'), '4', '225', $redirect);
+        Validation::Limits($topic_description, lang('Meta Description'), '44', '225', $redirect);
+        Validation::Limits($topic_info, lang('Info'), '14', '5000', $redirect);
 
         $topic_merged_id    = empty($topic_merged_id) ? 0 : $topic_merged_id;
         $topic_parent_id    = empty($topic_parent_id) ? 0 : $topic_parent_id;
@@ -164,7 +162,7 @@ class TopicsController extends MainController
     public function add()
     {
         $uid    = Base::getUid();
-        $tl     = validTl($uid['user_trust_level'], 5, 0, 1);
+        $tl     = Validation::validTl($uid['user_trust_level'], 5, 0, 1);
         if ($tl === false) {
             redirect('/');
         }
@@ -178,12 +176,11 @@ class TopicsController extends MainController
 
         $redirect = '/admin/topics/add';
 
-        Base::charset_slug($topic_slug, 'Slug (url)', $redirect);
-
-        Base::Limits($topic_title, lang('Title'), '3', '64', $redirect);
-        Base::Limits($topic_description, lang('Meta Description'), '44', '225', $redirect);
-        Base::Limits($topic_slug, lang('Slug'), '3', '43', $redirect);
-        Base::Limits($topic_seo_title, lang('Slug'), '4', '225', $redirect);
+        Validation::charset_slug($topic_slug, 'Slug (url)', $redirect);
+        Validation::Limits($topic_title, lang('Title'), '3', '64', $redirect);
+        Validation::Limits($topic_description, lang('Meta Description'), '44', '225', $redirect);
+        Validation::Limits($topic_slug, lang('Slug'), '3', '43', $redirect);
+        Validation::Limits($topic_seo_title, lang('Slug'), '4', '225', $redirect);
 
         $topic_merged_id    = empty($topic_merged_id) ? 0 : $topic_merged_id;
         $topic_related      = empty($topic_related) ? '' : $topic_related;

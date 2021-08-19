@@ -5,7 +5,7 @@ namespace App\Controllers\Space;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{SubscriptionModel, SpaceModel, FeedModel};
-use Lori\{Content, Config, Base};
+use Lori\{Content, Config, Base, Validation};
 
 class SpaceController extends MainController
 {
@@ -26,7 +26,7 @@ class SpaceController extends MainController
         $sp                 = SpaceModel::getUserCreatedSpaces($uid['user_id']);
         $count_space        = count($sp);
         $total_allowed      = $uid['user_trust_level'] == 5 ? 999 : 3;
-        $add_space_button   = validTl($uid['user_trust_level'], Config::get(Config::PARAM_TL_ADD_SPACE), $count_space, $total_allowed);
+        $add_space_button   = Validation::validTl($uid['user_trust_level'], Config::get(Config::PARAM_TL_ADD_SPACE), $count_space, $total_allowed);
 
         $result = array();
         foreach ($spaces as $ind => $row) {
@@ -63,7 +63,7 @@ class SpaceController extends MainController
         // Введем ограничение на количество создаваемых пространств
         $all_space          = SpaceModel::getUserCreatedSpaces($uid['user_id']);
         $count_space        = count($all_space);
-        $add_space_button   = validTl($uid['user_trust_level'], Config::get(Config::PARAM_TL_ADD_SPACE), $count_space, 3);
+        $add_space_button   = Validation::validTl($uid['user_trust_level'], Config::get(Config::PARAM_TL_ADD_SPACE), $count_space, 3);
 
         $result = array();
         foreach ($space as $ind => $row) {

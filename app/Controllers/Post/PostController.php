@@ -106,6 +106,11 @@ class PostController extends MainController
         $post_signed   = SubscriptionModel::getFocus($post['post_id'], $uid['user_id'], 'post');
 
         $desc  = mb_strcut(strip_tags($post['post_content']), 0, 180);
+        
+        if ($desc == '') {
+            $desc = strip_tags($post['post_title']);
+        }
+        
         $meta_desc = $desc . ' — ' . $post['space_name'];
         $meta_title = strip_tags($post['post_title']) . ' — ' . strip_tags($post['space_name']) . ' | ' . Config::get(Config::PARAM_NAME);
 

@@ -29,6 +29,7 @@ class MainConnector implements Connector
             "Lori\Content"                  => "app/Libraries/Content.php",
             "Lori\UploadImage"              => "app/Libraries/UploadImage.php",
             "Lori\Integration"              => "app/Libraries/Integration.php",
+            "Lori\Validation"               => "app/Libraries/Validation.php",
             "Lori\Config"                   => "app/Config/Config.php",
 
             "UrlRecord"                     => "app/ThirdParty/UrlRecord/UrlRecord.php",
@@ -38,6 +39,7 @@ class MainConnector implements Connector
             
             "SimpleImage"                   => "app/ThirdParty/SimpleImage.php",
             "URLScraper"                    => "app/ThirdParty/URLScraper.php",
+            
             // https://github.com/JacksonJeans/php-mail
             "JacksonJeans\MailException"    => "app/ThirdParty/php-mail/src/JacksonJeans/MailException.class.php",
             "JacksonJeans\Mail"             => "app/ThirdParty/php-mail/src/JacksonJeans/Mail.class.php",

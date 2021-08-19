@@ -5,7 +5,7 @@ namespace Modules\Admin\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Admin\Models\WebModel;
-use Lori\Base;
+use Lori\{Base, Validation};
 
 class WebsController extends MainController
 {
@@ -61,8 +61,8 @@ class WebsController extends MainController
             redirect($redirect);
         }
 
-        Base::Limits($link_title, lang('Title'), '24', '250', $redirect);
-        Base::Limits($link_content, lang('Description'), '24', '1500', $redirect);
+        Validation::Limits($link_title, lang('Title'), '24', '250', $redirect);
+        Validation::Limits($link_content, lang('Description'), '24', '1500', $redirect);
 
         $data = [
             'link_url'          => $link_url,
@@ -112,8 +112,8 @@ class WebsController extends MainController
         $url_domain     = Request::getPost('link_domain');
         $link_status    = Request::getPostInt('link_status');
 
-        Base::Limits($link_title, lang('Title'), '24', '250', $redirect);
-        Base::Limits($link_content, lang('Description'), '24', '1500', $redirect);
+        Validation::Limits($link_title, lang('Title'), '24', '250', $redirect);
+        Validation::Limits($link_content, lang('Description'), '24', '1500', $redirect);
 
         $data = [
             'link_id'           => $link['link_id'],

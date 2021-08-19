@@ -19,7 +19,7 @@ class EditCommentController extends MainController
 
         // Получим относительный url поста для возрата
         $post       = PostModel::getPostId($post_id);
-        Base::PageRedirection($post);
+        Base::PageRedirection($post, '/');
 
         $comment = CommentModel::getCommentsId($comment_id);
 

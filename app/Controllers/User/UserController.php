@@ -5,7 +5,7 @@ namespace App\Controllers\User;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{NotificationsModel, UserModel, SpaceModel, PostModel};
-use Lori\{Content, Config, Base};
+use Lori\{Content, Config, Base, Validation};
 
 class UserController extends MainController
 {
@@ -75,7 +75,7 @@ class UserController extends MainController
         $uid    = Base::getUid();
 
         // Ограничение на показ кнопки отправить Pm (ЛС, личные сообщения)
-        $button_pm  = accessPm($uid, $user['user_id'], Config::get(Config::PARAM_TL_ADD_PM));
+        $button_pm  = Validation::accessPm($uid, $user['user_id'], Config::get(Config::PARAM_TL_ADD_PM));
 
         $counts = UserModel::contentCount($user['user_id']);
 
