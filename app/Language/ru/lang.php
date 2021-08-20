@@ -34,6 +34,7 @@ return [
     'All comments'      => 'Все комментарии',
     'All answers'       => 'Все ответы',
     'Recommended'       => 'Рекомендовано',
+    'notification'      => 'уведомление',
     'Notifications'     => 'Уведомления',
     'Preferences'       => 'Предпочтения',
     'Action'            => 'Действие',
@@ -371,8 +372,14 @@ return [
     
     'Email Notification'    => 'Уведомлять по E-mail',
     'info_notifications'    => 'Вы можете отписаться от всех уведомлений на E-mail в этом разделе',
-    'When the message came to PM' => 'Когда пришло сообщение на PM',
-    'When you contacted me via @' => 'Когда обратились ко мне через @',
+    
+    'When the message came to PM'       => 'Когда пришло сообщение на PM',
+    'When you contacted me via @'       => 'Когда обратились ко мне через @',
+    'You were mentioned (@), see'       => 'Вас упомянули (@), посмотреть',
+    'Your link to change your password' => 'Ваша ссылка для изменения пароля',
+    'changing your password'            => 'изменение пароля',
+    'Activate E-mail'                   => 'Ссылка для активации E-mail',
+    'checking e-mail'                   => 'проверка e-mail',
     
     'There are no domains'  => 'Доменов нет',
     'Change the site'       => 'Изменить сайт',

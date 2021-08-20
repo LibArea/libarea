@@ -101,6 +101,7 @@ class AddCommentController extends MainController
                 }
                 $type = 12; // Упоминания в комментарии      
                 NotificationsModel::send($uid['user_id'], $user_id, $type, $last_comment_id, $url_comment, 1);
+                Base::mailText($user_id, 'appealed');
             }
         }
 

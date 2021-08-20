@@ -104,10 +104,10 @@ class RegisterController extends MainController
         $email_code = Base::randomString('crypto', 20);
         UserModel::sendActivateEmail($active_uid, $email_code);
 
-        // Добавим текс письма тут
-        $newpass_link = 'https://' . HLEB_MAIN_DOMAIN . '/email/avtivate/' . $email_code;
-        $mail_message = "Activate E-mail: \n" . $newpass_link . "\n\n";
-        Base::mailText($email, Config::get(Config::PARAM_NAME) . ' - email', $mail_message);
+        // Отправка e-mail
+        $link = 'https://' . HLEB_MAIN_DOMAIN . '/email/avtivate/' . $email_code;
+        $mail_message = lang('Activate E-mail') . ": \n" . $link . "\n\n";
+        Base::sendMail($email, Config::get(Config::PARAM_NAME) . ' — ' . lang('checking e-mail'), $mail_message);
 
         Base::addMsg(lang('Check your e-mail to activate your account'), 'success');
 

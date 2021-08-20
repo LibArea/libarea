@@ -286,8 +286,27 @@ class Base
     }
 
     // https://github.com/JacksonJeans/php-mail
-    public static function mailText($email, $subject = '', $message = '')
+    public static function mailText($user_id, $type)
     {
+        // TODO: Let's check the e-mail at the mention
+        if ($type == 'appealed') {
+           $setting = NotificationsModel::getUserSetting($user_id);
+           if ($setting) {
+                if ($setting['setting_email_appealed'] == 1) {
+                    $user = UserModel::getUser($user_id, 'id');
+                    $link = 'https://' . HLEB_MAIN_DOMAIN . '/u/' . $user['user_login'] . '/notifications';
+                    $message = lang('You were mentioned (@), see') . ": \n" . $link . "\n\n" . HLEB_MAIN_DOMAIN;
+                    self::sendMail($user['user_email'], Config::get(Config::PARAM_NAME) . ' - ' . lang('notification'), $message);
+                }
+           }
+        }
+      
+        return true;
+    }
+    
+    public static function sendMail($email, $subject = '', $message = '')
+    {
+        
         $mail = new Mail('smtp', [
             'host'      => 'ssl://' . Config::get(Config::PARAM_SMTP_HOST),
             'port'      => Config::get(Config::PARAM_SMTP_POST),
@@ -299,6 +318,7 @@ class Base
             ->setTo($email)
             ->setSubject($subject)
             ->setText($message)
-            ->send();
-    }
+            ->send();  
+
+    }   
 }

@@ -181,6 +181,7 @@ class AddPostController extends MainController
                 }
                 $type = 10; // Упоминания в посте      
                 NotificationsModel::send($uid['user_id'], $user_id, $type, $last_post_id, $url_post, 1);
+                Base::mailText($user_id, 'appealed');
             }
         }
 

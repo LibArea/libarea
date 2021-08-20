@@ -80,6 +80,7 @@ class AddAnswerController extends MainController
                 }
                 $type = 11; // Упоминания в ответе      
                 NotificationsModel::send($uid['user_id'], $user_id, $type, $last_id, $url_answer, 1);
+                Base::mailText($user_id, 'appealed');
             }
         }
 

@@ -50,11 +50,10 @@ class RecoverController extends MainController
         $code = $uInfo['user_id'] . '-' . Base::randomString('crypto', 25);
         UserModel::initRecover($uInfo['user_id'], $code);
 
-        // Добавим текс письма тут
+        // Отправка e-mail
         $newpass_link = 'https://' . HLEB_MAIN_DOMAIN . '/recover/remind/' . $code;
-        $mail_message = "Your link to change your password: \n" . $newpass_link . "\n\n";
-
-        Base::mailText($email, Config::get(Config::PARAM_NAME) . ' - changing your password', $mail_message);
+        $mail_message = lang('Your link to change your password'). ": \n" . $newpass_link . "\n\n";
+        Base::sendMail($email, Config::get(Config::PARAM_NAME) . ' — ' . lang('changing your password'), $mail_message);
 
         Base::addMsg(lang('New password has been sent to e-mail'), 'success');
         redirect('/login');
