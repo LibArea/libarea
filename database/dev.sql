@@ -587,13 +587,17 @@ INSERT INTO `users_logs` (`logs_id`, `logs_user_id`, `logs_login`, `logs_trust_l
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `users_notification_setting`
+-- Структура таблицы `users_setting`
 --
 
-CREATE TABLE `users_notification_setting` (
-  `notice_setting_id` int(11) NOT NULL,
-  `uid` int(11) NOT NULL,
-  `data` text DEFAULT NULL COMMENT 'Информация'
+CREATE TABLE `users_setting` (
+  `setting_id` int(11) NOT NULL,
+  `setting_user_id` int(11) UNSIGNED NOT NULL,
+  `setting_email_pm` tinyint(1) UNSIGNED DEFAULT NULL COMMENT 'Написал ПМ',
+  `setting_email_appealed` tinyint(1) UNSIGNED DEFAULT NULL COMMENT 'Обратился @',
+  `setting_email_post` tinyint(1) UNSIGNED DEFAULT NULL COMMENT 'Написал пост',
+  `setting_email_answer` tinyint(1) UNSIGNED DEFAULT NULL COMMENT 'Ответил',
+  `setting_email_comment` tinyint(1) UNSIGNED DEFAULT NULL COMMENT 'Прокомментировал'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -904,11 +908,11 @@ ALTER TABLE `users_logs`
   ADD PRIMARY KEY (`logs_id`);
 
 --
--- Индексы таблицы `users_notification_setting`
+-- Индексы таблицы `users_setting`
 --
-ALTER TABLE `users_notification_setting`
-  ADD PRIMARY KEY (`notice_setting_id`),
-  ADD KEY `uid` (`uid`);
+ALTER TABLE `users_setting`
+  ADD PRIMARY KEY (`setting_id`),
+  ADD KEY `setting_user_id` (`setting_user_id`);
 
 --
 -- Индексы таблицы `users_trust_level`
@@ -1119,10 +1123,10 @@ ALTER TABLE `users_logs`
   MODIFY `logs_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT для таблицы `users_notification_setting`
+-- AUTO_INCREMENT для таблицы `users_setting`
 --
-ALTER TABLE `users_notification_setting`
-  MODIFY `notice_setting_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `users_setting`
+  MODIFY `setting_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `votes_answer`

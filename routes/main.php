@@ -24,6 +24,7 @@ Route::before('Authorization@noAuth')->getGroup();
                 Route::get('/users/setting/avatar/edit')->controller('User\SettingController@avatarEdit');
                 Route::get('/users/setting/security/edit')->controller('User\SettingController@securityEdit');
                 Route::get('/users/setting/avatar/edit')->controller('User\SettingController@avatarEdit');
+                Route::get('/users/setting/notifications/edit')->controller('User\SettingController@notificationsEdit');
                 // post | comment | answer| topic | space
                 Route::get('/{controller}/create')->controller('<controller>\Add<controller>Controller');
                 // post | comment | answer| topic |space
@@ -37,18 +38,19 @@ Route::before('Authorization@noAuth')->getGroup();
     Route::get('/post/add/space/{space_id}')->controller('Post\AddPostController@add')->where(['space_id' => '[0-9]+']);
     // Форма изменения, общий случай: post | topic | space | answer
     Route::get('/{controller}/edit/{id}')->controller('<controller>\Edit<controller>Controller@edit')->where(['id' => '[0-9]+']);
-   
+
     Route::get('/u/{login}/invitation')->controller('User\InvitationsUserController@invitationForm')->where(['login' => '[A-Za-z0-9]+']);
     Route::get('/u/{login}/setting')->controller('User\SettingController@settingForm')->where(['login' => '[A-Za-z0-9]+']); 
     Route::get('/u/{login}/setting/avatar')->controller('User\SettingController@avatarForm')->where(['login' => '[A-Za-z0-9]+']);
-    Route::get('/u/{login}/setting/security')->controller('User\SettingController@securityForm')->where(['login' => '[A-Za-z0-9]+']); 
-    
+    Route::get('/u/{login}/setting/security')->controller('User\SettingController@securityForm')->where(['login' => '[A-Za-z0-9]+']);
+    Route::get('/u/{login}/setting/notifications')->controller('User\SettingController@notificationsForm')->where(['login' => '[A-Za-z0-9]+']);
+
     Route::get('/post/img/{id}/remove')->controller('Post\EditPostController@imgPostRemove')->where(['id' => '[0-9]+']);
     Route::get('/u/{login}/delete/cover')->controller('User\SettingController@userCoverRemove')->where(['login' => '[A-Za-z0-9]+']); 
 
     Route::get('/logout')->controller('Auth\LogoutController');
 
-    Route::get('/u/{login}/preferences')->controller('User\UserController@preferencesPage')->where(['login' => '[A-Za-z0-9]+']); 
+    Route::get('/u/{login}/subscribed')->controller('User\UserController@subscribedPage')->where(['login' => '[A-Za-z0-9]+']); 
     Route::get('/u/{login}/messages')->controller('MessagesController')->where(['login' => '[A-Za-z0-9]+']);   
     Route::get('/messages/read/{id}')->controller('MessagesController@dialog')->where(['id' => '[0-9]+']); 
     Route::get('/u/{login}/mess')->controller('MessagesController@profilMessages')->where(['login' => '[A-Za-z0-9]+']); 

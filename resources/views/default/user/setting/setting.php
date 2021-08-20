@@ -4,21 +4,7 @@
         <div class="white-box">
             <div class="pt5 pr15 pb0 pl15">
                 <?= breadcrumb('/', lang('Home'), '/u/' . $uid['user_login'], lang('Profile'), $data['h1']); ?>
-                <ul class="nav-tabs mt0 mb15">
-                    <li class="active">
-                        <span><?= lang('Setting profile'); ?></span>
-                    </li>
-                    <li>
-                        <a href="/u/<?= $uid['user_login']; ?>/setting/avatar">
-                            <span><?= lang('Avatar'); ?> / <?= lang('Cover art'); ?></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/u/<?= $uid['user_login']; ?>/setting/security">
-                            <span><?= lang('Password'); ?></span>
-                        </a>
-                    </li>
-                </ul>
+                <?php include TEMPLATE_DIR . '/_block/setting-nav.php'; ?>
              </div> 
         </div>             
         <div class="white-box">

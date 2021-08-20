@@ -221,4 +221,75 @@ class NotificationsModel extends MainModel
 
         return DB::run($sql, ['user_id' => $user_id]);
     }
+   
+    // Есть или нет записи в личных настройках
+    public static function countUserSetting($user_id)
+    {
+                $sql = "SELECT 
+                            setting_id, 
+                            setting_user_id
+                                FROM users_setting WHERE setting_user_id = :user_id";
+
+        return DB::run($sql, ['user_id' => $user_id])->rowCount();
+
+    }
+    
+    // Записываем личные настройки уведомлений, если их нет. Или обновляем.
+    public static function setUserSetting($data, $user_id)
+    {
+
+        $params = [
+            'setting_user_id'           => $user_id,
+            'setting_email_pm'          => $data['setting_email_pm'],
+            'setting_email_appealed'    => $data['setting_email_appealed'],
+            'setting_email_post'        => 0,
+            'setting_email_answer'      => 0,
+            'setting_email_comment'     => 0,
+        ];
+       
+        if (!self::countUserSetting($user_id)) {
+            $sql = "INSERT INTO users_setting(setting_user_id, 
+                            setting_email_pm, 
+                            setting_email_appealed,
+                            setting_email_post,
+                            setting_email_answer,
+                            setting_email_comment) 
+                                VALUES(:setting_user_id, 
+                                    :setting_email_pm, 
+                                    :setting_email_appealed,
+                                    :setting_email_post,
+                                    :setting_email_answer,
+                                    :setting_email_comment)";
+
+            DB::run($sql, $params);
+            
+        } else {
+            $sql = "UPDATE users_setting SET 
+                            setting_email_pm        = :setting_email_pm,
+                            setting_email_appealed  = :setting_email_appealed,
+                            setting_email_post      = :setting_email_post,
+                            setting_email_answer    = :setting_email_answer,
+                            setting_email_comment   = :setting_email_comment
+                                WHERE setting_user_id = :setting_user_id";
+
+            DB::run($sql, $params);
+        }
+
+        return true;
+    }
+    
+    // Получаем настроки уведомлений
+    public static function getUserSetting($user_id)
+    {
+        $sql = "SELECT 
+                    setting_id, 
+                    setting_user_id,
+                    setting_email_pm,
+                    setting_email_appealed
+                        FROM users_setting WHERE setting_user_id = :user_id";
+
+        return DB::run($sql, ['user_id' => $user_id])->fetch(PDO::FETCH_ASSOC); 
+       
+    }
+    
 }

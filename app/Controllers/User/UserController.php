@@ -150,13 +150,13 @@ class UserController extends MainController
     }
 
     // Страница предпочтений пользователя
-    public function preferencesPage()
+    public function subscribedPage()
     {
         $uid    = Base::getUid();
         $login  = Request::get('login');
 
         if ($login != $uid['user_login']) {
-            redirect('/u/' . $uid['user_login'] . '/preferences');
+            redirect('/u/' . $uid['user_login'] . '/subscribed');
         }
 
         $focus_posts = NotificationsModel::getFocusPostsListUser($uid['user_id']);
@@ -171,11 +171,11 @@ class UserController extends MainController
         }
 
         $data = [
-            'h1'            => lang('Preferences'),
-            'sheet'         => 'preferences',
-            'meta_title'    => lang('Preferences') . ' | ' . Config::get(Config::PARAM_NAME)
+            'h1'            => lang('Subscribed') . ' ' . $uid['user_login'],
+            'sheet'         => 'subscribed',
+            'meta_title'    => lang('Subscribed') . ' ' . $uid['user_login'] . ' | ' . Config::get(Config::PARAM_NAME)
         ];
 
-        return view(PR_VIEW_DIR . '/user/preferences', ['data' => $data, 'uid' => $uid, 'posts' => $result]);
+        return view(PR_VIEW_DIR . '/user/subscribed', ['data' => $data, 'uid' => $uid, 'posts' => $result]);
     }
 }

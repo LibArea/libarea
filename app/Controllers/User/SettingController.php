@@ -4,7 +4,7 @@ namespace App\Controllers\User;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\UserModel;
+use App\Models\{UserModel, NotificationsModel};
 use Lori\{Config, Base, UploadImage, Validation};
 
 class SettingController extends MainController
@@ -32,7 +32,7 @@ class SettingController extends MainController
             'meta_title'    => lang('Setting profile'),
         ];
 
-        return view(PR_VIEW_DIR . '/user/setting', ['data' => $data, 'uid' => $uid, 'user' => $user]);
+        return view(PR_VIEW_DIR . '/user/setting/setting', ['data' => $data, 'uid' => $uid, 'user' => $user]);
     }
 
     // Изменение профиля
@@ -85,14 +85,14 @@ class SettingController extends MainController
 
         $data = [
             'h1'            => lang('Change avatar'),
-            'sheet'         => 'setting-ava',
+            'sheet'         => 'avatar',
             'meta_title'    => lang('Change avatar')
         ];
 
         Request::getHead()->addStyles('/assets/css/image-uploader.css');
         Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
 
-        return view(PR_VIEW_DIR . '/user/setting-avatar', ['data' => $data, 'uid' => $uid, 'user' => $userInfo]);
+        return view(PR_VIEW_DIR . '/user/setting/avatar', ['data' => $data, 'uid' => $uid, 'user' => $userInfo]);
     }
 
     // Форма изменение пароля
@@ -110,11 +110,11 @@ class SettingController extends MainController
             'password'      => '',
             'password2'     => '',
             'password3'     => '',
-            'sheet'         => 'setting-pass',
+            'sheet'         => 'security',
             'meta_title'    => lang('Change password') . ' | ' . Config::get(Config::PARAM_NAME),
         ];
 
-        return view(PR_VIEW_DIR . '/user/setting-security', ['data' => $data, 'uid' => $uid]);
+        return view(PR_VIEW_DIR . '/user/setting/security', ['data' => $data, 'uid' => $uid]);
     }
 
     // Изменение аватарки
@@ -213,5 +213,49 @@ class SettingController extends MainController
         }
 
         redirect($redirect);
+    }
+    
+    // Форма настройки предпочтений участника
+    function notificationsForm()
+    {
+        // Данные участника
+        $login  = Request::get('login');
+        $uid    = Base::getUid();
+        $user   = UserModel::getUser($uid['user_login'], 'slug');
+
+        // Ошибочный Slug в Url
+        if ($login != $user['user_login']) {
+            redirect('/u/' . $user['user_login'] . '/setting');
+        }
+
+        // Если пользователь забанен
+        $user = UserModel::getUser($uid['user_id'], 'id');
+        Base::accountBan($user);
+
+        $setting = NotificationsModel::getUserSetting($uid['user_id']);
+        
+        $data = [
+            'h1'            => lang('Notifications'),
+            'sheet'         => 'notifications',
+            'meta_title'    => lang('Notifications'),
+        ];
+
+        return view(PR_VIEW_DIR . '/user/setting/notifications', 
+                ['data' => $data, 'uid' => $uid, 'user' => $user, 'setting' => $setting]);
+    }
+    
+    function notificationsEdit()
+    {
+        $uid                        = Base::getUid();
+        $data = [
+            'setting_user_id'           => $uid['user_id'],
+            'setting_email_pm'          => Request::getPostInt('setting_email_pm'),
+            'setting_email_appealed'    => Request::getPostInt('setting_email_appealed'),
+        ];
+        
+        NotificationsModel::setUserSetting($data, $uid['user_id']);
+        Base::addMsg(lang('Change saved'), 'success');
+       
+        redirect('/u/' . $uid['user_login'] . '/setting/notifications');
     }
 }

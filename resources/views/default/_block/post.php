@@ -12,7 +12,7 @@
         <span class="gray-light lowercase mr5 ml5">
           <?= $post['post_date'] ?>
         </span>
-       <?php if ($data['sheet'] == 'preferences') { ?>
+       <?php if ($data['sheet'] == 'subscribed') { ?>
             <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id size-13 right">
                  <span class="mr5 ml5"> &#183; </span> <?= lang('Unsubscribe'); ?>
             </div>

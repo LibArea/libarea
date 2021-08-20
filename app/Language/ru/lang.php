@@ -114,6 +114,7 @@ return [
     'No users'          => 'Пользователей нет',
     'Page'              => 'Страница',
     'Read'              => 'Подписаться',
+    'Subscribed'        => 'Подписан',
     'Unsubscribed'      => 'Отписан',
     'Unsubscribe'       => 'Вы подписаны',
     'Subscribe'         => 'Подпишитесь',
@@ -367,7 +368,12 @@ return [
 
     'info_favorite'         => 'Посты, комментарии и вопросы за которыми вы следите',
     'info_preferences'      => 'Посты, на которые вы подписаны. Вы будете получать уведомления о всех новых ответах',
-
+    
+    'Email Notification'    => 'Уведомлять по E-mail',
+    'info_notifications'    => 'Вы можете отписаться от всех уведомлений на E-mail в этом разделе',
+    'When the message came to PM' => 'Когда пришло сообщение на PM',
+    'When you contacted me via @' => 'Когда обратились ко мне через @',
+    
     'There are no domains'  => 'Доменов нет',
     'Change the site'       => 'Изменить сайт',
     'Add a website'         => 'Добавить сайт',

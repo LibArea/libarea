@@ -25,6 +25,7 @@ return [
 
     'limiting_mode_1'   => 'You cannot post content, your account is being verified',
     'no-space-to-add'   => 'You have no space to add a post. <a href="/spaces">Subscribe</a> to space',
+    'info_notifications'=> 'You can unsubscribe from all notifications by E-mail in this section',
 
     /* MSG */
     'about-info-err'        => 'About me should be less characters long',

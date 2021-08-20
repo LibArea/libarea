@@ -1,5 +1,5 @@
 <div class="clear"></div>
-<footer class="footer mt15 pt10 mr20 mb20 ml20">
+<footer class="footer mt15 pt10 pb10 mr20 mb20 ml20">
   <div class="wrap white">
     <div class="text-info left no-mob">
       <h4 class="p-head relative two"><?= lang('Info'); ?></h4>
