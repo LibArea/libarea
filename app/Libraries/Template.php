@@ -89,6 +89,11 @@ function post_img($file, $alt, $style, $type, $attributes = '')
     return $img;
 }
 
+function post_url($post)
+{
+    return '/post/' . $post['post_id'] . '/' . $post['post_slug'];
+}
+
 // Favicon 
 function favicon_img($link_id, $alt)
 {

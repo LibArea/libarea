@@ -29,7 +29,7 @@ class TopicController extends MainController
 
         $result = array();
         foreach ($topics as $ind => $row) {
-            $row['topic_cropped']   = Base::cutWords($row['topic_description'], 81);
+            $row['topic_cropped']   = Base::cutWords($row['topic_description'], 9);
             $result[$ind]           = $row;
         }
 

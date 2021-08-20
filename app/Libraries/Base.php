@@ -274,16 +274,15 @@ class Base
     }
 
     // Обрезка текста по словам
-    public static function  cutWords($content, $maxlen)
+    public static function cutWords($content, $maxlen)
     {
-        $text       = strip_tags($content);
-        $len        = (mb_strlen($text) > $maxlen) ? mb_strripos(mb_substr($text, 0, $maxlen), ' ') : $maxlen;
-        $cutStr     = mb_substr($text, 0, $len);
-        $content    = (mb_strlen($text) > $maxlen) ? $cutStr . '' : $cutStr;
+        $words = preg_split('#[\s\r\n]+#um', $content);
+        if ($maxlen < count($words)) {
+            $words = array_slice($words, 0, $maxlen);
+        }
         $code_match = array('>', '*', '!', '[ADD:');
-        $content    = str_replace($code_match, '', $content);
-
-        return $content;
+        $words      = str_replace($code_match, '', $words);
+        return join(' ', $words);
     }
 
     // https://github.com/JacksonJeans/php-mail

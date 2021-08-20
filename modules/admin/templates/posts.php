@@ -31,7 +31,7 @@
 
           <?php foreach ($posts as $post) { ?>
 
-            <a href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
+            <a href="<?= post_url($post); ?>">
               <b><?= $post['post_title']; ?></b>
             </a>
 

@@ -17,7 +17,7 @@
     <?php } ?>
     <?php foreach ($data['posts'] as $post) { ?>
         <url>
-            <loc><?= $data['url']; ?>/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?></loc>
+            <loc><?= $data['url']; ?><?= post_url($post); ?></loc>
             <priority>0.5</priority>
             <changefreq>daily</changefreq>
         </url>

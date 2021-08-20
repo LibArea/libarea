@@ -117,7 +117,7 @@
                             <div class="lo-post pt5 pr5 pb5 pl10 mt10 mb10">
                                 <h3 class="recommend">ЛО</h3>
                                 <span class="right">
-                                    <a rel="nofollow" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#comment_<?= $lo['comment_id']; ?>">
+                                    <a rel="nofollow" href="<?= post_url($post); ?>#comment_<?= $lo['comment_id']; ?>">
                                         <i class="icon-diamond red"></i>
                                     </a>
                                 </span>

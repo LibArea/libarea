@@ -37,7 +37,7 @@
                                             </span>
                                         <?php } ?>
                                         <span class="mr5 ml5">
-                                            <a rel="nofollow" class="gray-light" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#answer_<?= $answer['answer_id']; ?>">#</a>
+                                            <a rel="nofollow" class="gray-light" href="<?= post_url($post); ?>#answer_<?= $answer['answer_id']; ?>">#</a>
                                         </span>
                                         <?php if ($uid['user_trust_level'] == 5) { ?>
                                             <span class="mr5 ml5">
@@ -144,24 +144,24 @@
                                             <?= lang_date($comment['comment_date']); ?>
                                         </span>
                                         <?php if ($post['post_user_id'] == $comment['comment_user_id']) { ?>
-                                            <span class="mr5 ml5">
+                                            <span class="mr10 ml10">
                                                 <span class="red">&#x21af;</span>
                                             </span>
                                         <?php } ?>
                                         <?php if ($comment['comment_comment_id'] > 0) { ?>
-                                            <span class="mr5 ml5">
-                                                <a class="gray-light" rel="nofollow" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#comment_<?= $comment['comment_comment_id']; ?>">&uarr;</a>
+                                            <span class="mr10 ml10">
+                                                <a class="gray-light" rel="nofollow" href="<?= post_url($post); ?>#comment_<?= $comment['comment_comment_id']; ?>">&uarr;</a>
                                             </span>
                                         <?php } else { ?>
-                                            <span class="mr5 ml5">
-                                                <a class="gray-light" rel="nofollow" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#answer_<?= $comment['comment_answer_id']; ?>">&uarr;</a>
+                                            <span class="mr10 ml10">
+                                                <a class="gray-light" rel="nofollow" href="<?= post_url($post); ?>#answer_<?= $comment['comment_answer_id']; ?>">&uarr;</a>
                                             </span>
                                         <?php } ?>
-                                        <span class="mr5 ml5">
-                                            <a class="gray-light" rel="nofollow" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>#comment_<?= $comment['comment_id']; ?>">#</a>
+                                        <span class="mr10 ml10">
+                                            <a class="gray-light" rel="nofollow" href="<?= post_url($post); ?>#comment_<?= $comment['comment_id']; ?>">#</a>
                                         </span>
                                         <?php if ($uid['user_trust_level'] == 5) { ?>
-                                            <span class="mr5 ml5">
+                                            <span class="ml10">
                                                 <a class="gray-light" href="/admin/logip/<?= $comment['comment_ip']; ?>">
                                                 <?= $comment['comment_ip']; ?>
                                                 </a>

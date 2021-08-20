@@ -27,7 +27,7 @@ class SearchController extends MainController
                     $qa =  SearchModel::getSearch($query);
                     $result = array();
                     foreach ($qa as $ind => $row) {
-                        $row['post_content']  = Content::text(Base::cutWords($row['post_content'], 220, '...'), 'text');
+                        $row['post_content']  = Content::text(Base::cutWords($row['post_content'], 32, '...'), 'text');
                         $result[$ind]         = $row;
                     }
                 } else {

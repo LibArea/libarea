@@ -10,7 +10,6 @@
 </head>
 
 <body class="black<?php if (Request::getCookie('dayNight') == 'dark') { ?> dark<?php } ?>">
-
   <header class="flex justify-content-between align-items-center gray-light-2">
     <div class="flex align-items-center">
       <div>

@@ -20,13 +20,13 @@
       </div>
 
       <?php if ($post['post_thumb_img']) { ?>
-        <a title="<?= $post['post_title']; ?>" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
+        <a title="<?= $post['post_title']; ?>" href="<?= post_url($post); ?>">
           <?= post_img($post['post_thumb_img'], $post['post_title'],  'thumb no-mob right', 'thumbnails'); ?>
         </a>
       <?php } ?>
 
       <div class="post-body">
-        <a href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
+        <a href="<?= post_url($post); ?>">
           <h2 class="title size-21 ml15 mt0 mb0"><?= $post['post_title']; ?>
             <?php if ($post['post_is_deleted'] == 1) { ?>
               <i class="icon-trash red"></i>
@@ -78,7 +78,7 @@
 
         <?php if ($post['post_content_img']) { ?>
           <div class="post-img">
-            <a title="<?= $post['post_title']; ?>" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
+            <a title="<?= $post['post_title']; ?>" href="<?= post_url($post); ?>">
               <?= post_img($post['post_content_img'], $post['post_title'], 'img-post', 'cover'); ?>
             </a>
           </div>
@@ -87,7 +87,7 @@
         <div class="pt5 pr10 pb5 mt5 pl10 hidden lowercase flex justify-content-between">
           <?= votes($uid['user_id'], $post, 'post'); ?>
           <?php if ($post['post_answers_count'] != 0) { ?>
-            <a class="flex gray-light" href="/post/<?= $post['post_id']; ?>/<?= $post['post_slug']; ?>">
+            <a class="flex gray-light" href="<?= post_url($post); ?>">
               <?php if ($post['post_type'] == 0) { ?>
                 <i class="icon-commenting-o mr5"></i>
                 <?= $post['post_answers_count'] + $post['post_comments_count']; ?>

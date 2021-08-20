@@ -35,7 +35,7 @@ class HomeController extends MainController
 
         $result_answers = array();
         foreach ($latest_answers as $ind => $row) {
-            $row['answer_content']      = Base::cutWords($row['answer_content'], 81);
+            $row['answer_content']      = Base::cutWords($row['answer_content'], 8);
             $row['answer_date']         = lang_date($row['answer_date']);
             $result_answers[$ind]          = $row;
         }
