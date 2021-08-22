@@ -14,7 +14,7 @@
                     <ol class="p0 m0">
                         <li class="answers_subtree" id="answer_<?= $answer['answer_id']; ?>">
                             <div class="answ-telo hidden">
-                                <div class="qa-footer right mt10 pt10 pb10 hidden center">
+                                <div class="qa-footer right mt10 pt10 ml10 pb10 hidden center">
                                     <div class="qa-ava">
                                         <?= user_avatar_img($answer['user_avatar'], 'max', $answer['user_login'], 'avatar'); ?>
                                     </div>

@@ -3,7 +3,7 @@
     <main class="admin">
         <div class="pt5 pb5 flex">
             <div class="box-number mr10">
-                <div class="bg-info p10">
+                <div class="bg-yellow-500 p10">
                     <a class="box-index" rel="noreferrer gray" href="/admin/posts">
                         <div class="size-13 right">
                             <i class="icon-book-open"></i>
@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="box-number">
-                <div class="bg-warning p10 mr10">
+                <div class="bg-indigo-300 p10 mr10">
                     <a class="box-index" rel="noreferrer gray" href="/admin/answers">
                         <div class="size-13 right">
                             <i class="icon-comment-empty"></i>
@@ -25,7 +25,7 @@
                 </div>
             </div>
             <div class="box-number">
-                <div class="bg-danger p10 mr10">
+                <div class="bg-red-500 p10 mr10">
                     <a class="box-index" rel="noreferrer" href="/admin/users">
                         <div class="size-13 right">
                             <i class="icon-user-o icon"></i>
@@ -36,7 +36,7 @@
                 </div>
             </div>
             <div class="box-number">
-                <div class="bg-success p10">
+                <div class="bg-blue-400 p10">
                     <a class="box-index" rel="noreferrer" href="/admin/comments">
                         <div class="size-13 right">
                             <i class="icon-commenting-o"></i>

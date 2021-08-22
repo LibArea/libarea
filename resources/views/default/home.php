@@ -1,10 +1,10 @@
 <?php include TEMPLATE_DIR . '/header.php'; ?>
 
 <?php if ($uid['user_id'] == 0) { ?>
-  <div class="banner hidden size-15">
+  <div class="banner bg-blue-100 hidden size-15">
     <div class="pt15 pb5">
       <h1 class="red size-21"><?= Lori\Config::get(Lori\Config::PARAM_BANNER_TITLE); ?></h1>
-      <div class="pb5"><?= Lori\Config::get(Lori\Config::PARAM_BANNER_DESC); ?>...</div>
+      <div class="pb15"><?= Lori\Config::get(Lori\Config::PARAM_BANNER_DESC); ?>...</div>
     </div>
   </div>
 <?php } ?>

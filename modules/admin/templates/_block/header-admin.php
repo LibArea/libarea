@@ -11,7 +11,7 @@
 
 <body>
 
-    <header>
+    <header class="fixed p0 width-100">
         <div class="header-left p15">
             IP: <?= Request::getRemoteAddress(); ?>
         </div>

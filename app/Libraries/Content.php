@@ -20,6 +20,7 @@ class Content
             $text   = $Parsedown->line($content);
         }
         $text   = self::parseUser($text);
+
         return self::parseUrl($text);
     }
 

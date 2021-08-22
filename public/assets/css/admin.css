@@ -1,17 +1,11 @@
 aside {
-  padding: 0;
-  float: left;
   width: 240px;
-  background-color: #343a40;
-  position: fixed;
   height: 100%;
   z-index: 888;
 }
 
 header {
   position: fixed;
-  width: 100%;
-  padding: 0;
 }
 
 main {
@@ -53,10 +47,6 @@ li { list-style-type: none; }
   opacity: 0.8;
 }
 
-.bg-info { background-color: #17a2b8; }
-.bg-success { background-color: #28a745; }
-.bg-warning { background-color: #ffc107; }
-.bg-danger { background-color: #dc3545; }
 .nav:hover { background-color: #3f4449; }
 .nav.active { background-color: #007bff; }
 .nav.active > a { color: #fff; }

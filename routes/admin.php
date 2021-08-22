@@ -8,7 +8,7 @@ Route::before('Authorization@admin')->getGroup();
         Route::get('/space/ban')->module('admin', 'Controllers\SpacesController@delSpace');
         Route::get('/user/ban')->module('admin', 'Controllers\UsersController@banUser');
         Route::get('/favicon/add')->module('admin', 'Controllers\WebsController@favicon');
-        Route::get('/word/del')->module('admin', 'Controllers\WordsController@deletes');
+        Route::get('/word/ban')->module('admin', 'Controllers\WordsController@deletes');
         Route::get('/audit/status')->module('admin', 'Controllers\AuditsController@status');
         Route::get('/reports/status')->module('admin', 'Controllers\ReportsController@status');
         

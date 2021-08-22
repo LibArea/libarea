@@ -11,19 +11,6 @@ $(function(){
                 location.reload();                
             }) 
     });
-    // Забанить / разбанить участника
-    $(document).on('click', '.user-ban', function() {
-        let user_id  = $(this).data('id');
-        fetch("/admin/user/ban", { 
-            method: "POST",
-            body: "id=" + user_id,
-            headers:{'Content-Type': 'application/x-www-form-urlencoded'} 
-            })
-            .then((response) => {
-                location.reload();                
-            })
-    });  
-   
     // Запишем Favicon
     $(document).on('click', '.add-favicon', function() {
         let link_id  = $(this).data('id');
@@ -36,33 +23,19 @@ $(function(){
                 location.reload();                
             }) 
     });
-   
-    // Удалим стоп-слово
-    $(document).on('click', '.delete-word', function() {
-        let word_id  = $(this).data('id');
-        fetch("/admin/word/del", { 
+    // Забанить / разбанить: user / word / space
+    $(document).on('click', '.type-ban', function() {
+        let type_id  = $(this).data('id');
+        let type = $(this).data('type');
+        fetch("/admin/"+type+"/ban", { 
             method: "POST",
-            body: "id=" + word_id,
+            body: "id=" + type_id,
             headers:{'Content-Type': 'application/x-www-form-urlencoded'} 
             })
             .then((response) => {
                 location.reload();                
-            }) 
-    });
-
-    // Удаление / восстановление пространства
-    $(document).on('click', '.space-ban', function() {
-        let space_id  = $(this).data('id');
-        fetch("/admin/space/ban", { 
-            method: "POST",
-            body: "id=" + space_id,
-            headers:{'Content-Type': 'application/x-www-form-urlencoded'} 
             })
-            .then((response) => {
-                location.reload();                
-            }) 
-    });
-    
+    }); 
     // Восстановление контента
     $(document).on('click', '.audit-status', function() {
         let status_id  = $(this).data('id');

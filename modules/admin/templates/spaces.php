@@ -77,11 +77,13 @@
                                     </span>
                                     <span class="t-td center">
                                         <?php if ($sp['space_is_delete']) { ?>
-                                            <span class="space-ban" data-id="<?= $sp['space_id']; ?>">
+                                            <span class="type-ban" data-type="space" data-id="<?= $sp['space_id']; ?>">
                                                 <span class="red"><?= lang('Unban'); ?></span>
                                             </span>
                                         <?php } else { ?>
-                                            <span class="space-ban" data-id="<?= $sp['space_id']; ?>"><?= lang('Ban it'); ?></span>
+                                            <span class="type-ban" data-type="space" data-id="<?= $sp['space_id']; ?>">
+                                                <?= lang('Ban it'); ?>
+                                            </span>
                                         <?php } ?>
                                     </span>
                                     <span class="t-td center">

@@ -26,11 +26,11 @@
                             </label>
                             <?php if ($user['user_trust_level'] != 5) { ?>
                                 <?php if ($user['isBan']) { ?>
-                                    <span class="user-ban" data-id="<?= $user['user_id']; ?>">
+                                    <span class="type-ban" data-id="<?= $user['user_id']; ?>" data-type="user">
                                         <span class="red"><?= lang('Unban'); ?></span>
                                     </span>
                                 <?php } else { ?>
-                                    <span class="user-ban" data-id="<?= $user['user_id']; ?>">
+                                    <span class="type-ban" data-id="<?= $user['user_id']; ?>" data-type="user">
                                         <span class="green">+ <?= lang('Ban it'); ?></span>
                                     </span>
                                 <?php } ?>

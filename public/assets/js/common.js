@@ -150,3 +150,22 @@ function getCookie(cname) {
     }
     return "";
 }
+
+// Modal windows for photos in a post
+$(document).ready(function(){
+    $('.post-body.full .post img').on('click',function(e){
+        let src = $(this).attr('src'); 
+            if (src) {
+                let img = '<img src="'+src+'">';
+                  layer.open({
+                      type: 1,
+                      title: false,
+                      closeBtn: 0,
+                      area: ['auto'],
+                      skin: 'layui-layer-nobg',
+                      shadeClose: true,
+                      content: img
+                    });
+            }
+    });
+});

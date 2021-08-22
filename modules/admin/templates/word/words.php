@@ -14,7 +14,7 @@
                         <?php foreach ($words as $key => $word) { ?>
                             <div class="content-telo">
                                 <?= $word['stop_word']; ?> |
-                                <a data-id="<?= $word['stop_id']; ?>" class="delete-word lowercase size-13">
+                                <a data-id="<?= $word['stop_id']; ?>" data-type="word" class="type-ban lowercase size-13">
                                     <?= lang('Remove'); ?>
                                 </a>
                             </div>

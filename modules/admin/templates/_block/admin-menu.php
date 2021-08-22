@@ -1,4 +1,4 @@
-<aside>
+<aside class="left p0 bg-gray-800 fixed">
     <div class="mt15 mr15 mb5 ml15 gray size-21">
         <a title="<?= lang('Admin'); ?>" class="light-gray" href="/admin"><?= lang('Admin'); ?></a>
     </div>
