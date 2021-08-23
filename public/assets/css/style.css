@@ -149,7 +149,7 @@ img {
 .bg-orange-300 { background-color: #f6b65c; }
 .bg-yellow-100 { background-color: #fffde4; }
 .bg-yellow-300 { background-color: #f6da52; }
-.bg-yellow-500  { background-color: #d29507; }
+.bg-yellow-500 { background-color: #d29507; }
 .bg-green-100 { background-color: #e1f7eb; }
 .bg-green-300 { background-color: #98d9b7; }
 .bg-green-500 { background-color: #44a675; }
@@ -291,7 +291,7 @@ pre code {
 }
 
 .banner {
-  color: rgba(32,35,51,0.7);
+  color: rgba(32, 35, 51, 0.7);
   border-radius: 2px;
   text-align: center;
 }

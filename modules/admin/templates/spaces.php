@@ -98,10 +98,7 @@
                         * <?= lang('Ban-space-info-posts'); ?>...
 
                     <?php } else { ?>
-                        <div class="no-content gray">
-                            <i class="icon-info green middle"></i>
-                            <span class="middle"><?= lang('No'); ?>...</span>
-                        </div>
+                        <?= no_content('No'); ?>
                     <?php } ?>
                 </div>
             </div>

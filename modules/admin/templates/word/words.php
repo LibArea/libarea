@@ -21,7 +21,7 @@
                         <?php } ?>
 
                     <?php } else { ?>
-                        <div class="no-content"><?= lang('Stop words no'); ?>...</div>
+                        <?= no_content('Stop words no'); ?>
                     <?php } ?>
                 </div>
             </div>

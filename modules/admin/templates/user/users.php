@@ -115,10 +115,7 @@
             <?php } ?>
 
           <?php } else { ?>
-            <p class="no-content gray">
-              <i class="icon-info green middle"></i>
-              <span class="middle"><?= lang('No users'); ?>...</span>
-            </p>
+            <?= no_content('No users'); ?>
           <?php } ?>
         </div>
 

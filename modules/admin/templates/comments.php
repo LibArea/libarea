@@ -65,7 +65,7 @@
           <?php } ?>
 
         <?php } else { ?>
-          <div class="no-content"><?= lang('There are no comments'); ?>...</div>
+          <?= no_content('There are no comments'); ?>
         <?php } ?>
       </div>
     </div>

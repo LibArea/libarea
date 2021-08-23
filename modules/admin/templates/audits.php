@@ -99,7 +99,7 @@
                         </div>
 
                     <?php } else { ?>
-                        <div class="no-content"><?= lang('No'); ?>...</div>
+                        <?= no_content('No'); ?>
                     <?php } ?>
                 </div>
             </div>
