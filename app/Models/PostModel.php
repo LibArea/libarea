@@ -264,7 +264,7 @@ class PostModel extends MainModel
         return DB::run($sql, $params);
     }
 
-    // Связанные посты для поста
+    // Связанные посты
     public static function postRelated($post_related)
     {
         $sql = "SELECT 

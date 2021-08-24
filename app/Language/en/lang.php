@@ -15,7 +15,8 @@ return [
     'remove-favorites'  => 'Remove from favorites',
     'ban-space'         => 'This space is blocked',
     'no-cover'          => 'No cover. Download it',
-    'format-cover-post' => 'Width, more than 500px. The orientation is horizontal',
+    'format-cover-post' => 'Width, more than 500px. The orientation is horizontal',    
+    'views-n'           => 'Views',
 
     /* Info */
     'privacy-desc'      => 'The sites Privacy Policy. Site rules.',
@@ -47,12 +48,13 @@ return [
     'title-profile'         => '%1$s %2$s | Profile on %3$s',
     'desc-profile'          => '%1$s - profile page. %2$s Posts, comments, awards on %3$s',
     'top-desc'              => 'List of popular posts in the community (by number of responses)',
-    'space-feed-title'      => 'Feed of posts by space',
-    'space-top-title'       => 'Popular posts by Space',
+    'space-feed-title'      => 'feed of posts by space',
+    'space-top-title'       => 'popular posts by Space',
+    'space-writers-title'   => 'writers in space',
     'all-space-desc'        => 'All community spaces. Subscribe, official spaces, number of participants',
     'search-desc'           => 'Site search. By title and text of posts. By spaces and participants',
     'topic-desc'            => 'Topics of content, posts. Popular, best, global selection. Topics of the day.',
-    'page-number'           => ' — page %1$s | ',
+    'page-number'           => ' Page %1$s ',
 
     'domain-desc'           => 'Grouping posts by domain',
     'domains-title'         => 'Sites in the system',

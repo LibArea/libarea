@@ -50,7 +50,6 @@ li { list-style-type: none; }
 .nav:hover { background-color: #3f4449; }
 .nav.active { background-color: #007bff; }
 .nav.active > a { color: #fff; }
-.content-footer { border-bottom: 1px solid #ddd; }
 .light-gray { color: #e3e3e3; }
 
 .light-gray:hover,

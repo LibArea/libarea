@@ -10,7 +10,6 @@
         <article class="post-full">
             <?php if ($post['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
                 <div class="white-box p15<?php if ($post['post_is_deleted'] == 1) { ?> delleted pl15<?php } ?>">
-
                     <div class="post-body">
                         <h1 class="title size-21">
                             <?= $post['post_title']; ?>
@@ -131,7 +130,6 @@
                                 </a>
                             </div>
                         <?php } ?>
-
                         <?php if (!empty($post_related)) { ?>
                             <div class="mb20">
                                 <h3 class="uppercase mb5 mt0 fw300 size-13 gray"><?= lang('Related'); ?>:</h3>
@@ -147,7 +145,6 @@
                                 <?php } ?>
                             </div>
                         <?php } ?>
-
                         <?php if (!empty($topics)) { ?>
                             <div class="mb20">
                                 <h3 class="uppercase mb5 mt0 fw300 size-13 gray"><?= lang('Topics'); ?>:</h3>
@@ -158,16 +155,13 @@
                                 <?php } ?>
                             </div>
                         <?php } ?>
-
                     </div>
                     <div class="post-full-footer mb20 pb5 hidden flex justify-content-between gray">
                         <?= votes($uid['user_id'], $post, 'post'); ?>
-
-                       <span class="right gray-light">
+                        <span class="right gray-light">
                             <i class="icon-commenting-o middle"></i>
                             <?= $post['post_answers_count'] + $post['post_comments_count'] ?>
                         </span>
-
                     </div>
                     <?php if (!$uid['user_id']) { ?>
                         <a class="right size-13 mb15 add-focus focus-topic" href="/login">
@@ -184,7 +178,6 @@
                             </div>
                         <?php } ?>
                     <?php } ?>
-                    
                     <div>
                         <?php if ($post['post_type'] == 0 && $post['post_draft'] == 0) { ?>
                             <?php if ($uid['user_id'] > 0) { ?>

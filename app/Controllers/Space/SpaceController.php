@@ -121,20 +121,27 @@ class SpaceController extends MainController
         // Отписан участник от пространства или нет
         $space_signed = SubscriptionModel::getFocus($space['space_id'], $uid['user_id'], 'space');
 
+        $num = '';
+        if ($page > 1) {
+            $num =  sprintf(lang('page-number'), $page);
+        }
+
+        $writers = []; 
         if ($sheet == 'feed') {
-            $s_title = lang('space-feed-title');
+            $title          = $space['space_name'] . ' — ' . lang('space-feed-title') . '. ' . $num;
+            $description    = $space['space_name'] . '. ' . $space['space_description'];
+        } elseif ($sheet == 'writers') {
+            // Получим список (top 10) популярных авторов
+            $writers = SpaceModel::getWriters($space['space_id']);
+            $title          = $space['space_name'] . ' — ' . lang('space-writers-title') . '. ' . $num;
+            $description    = $title . '. ' . $space['space_description']; 
         } else {
-            $s_title = lang('space-top-title');
+            $title          = $space['space_name'] . ' — ' . lang('space-top-title') . '. ' . $num;
+            $description    = $title . '. ' . $space['space_description'];
         }
 
         Request::getHead()->addStyles('/assets/css/space.css');
-
-
-        $num = ' | ';
-        if ($page > 1) {
-            $num = sprintf(lang('page-number'), $page);
-        }
-
+        
         $data = [
             'h1'            => $space['space_name'],
             'canonical'     => Config::get(Config::PARAM_URL) . '/s/' . $space['space_slug'],
@@ -142,10 +149,11 @@ class SpaceController extends MainController
             'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
             'sheet'         => $sheet,
-            'meta_title'    => $space['space_name'] . $num . $s_title . ' | ' . Config::get(Config::PARAM_NAME),
-            'meta_desc'     => $space['space_description'] . $num . $s_title . ' ' . Config::get(Config::PARAM_HOME_TITLE),
+            'meta_title'    => $title . Config::get(Config::PARAM_NAME),
+            'meta_desc'     => $description . ' ' . Config::get(Config::PARAM_HOME_TITLE),
         ];
 
-        return view(PR_VIEW_DIR . '/space/space', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'space_info' => $space, 'space_signed' => $space_signed]);
-    }
+        return view(PR_VIEW_DIR . '/space/space', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'space' => $space, 'signed' => $space_signed, 'writers' => $writers]);
+    } 
+    
 }

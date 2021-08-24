@@ -172,6 +172,8 @@ img {
 .bg-gray-800 { background-color: #343a40; }
 .bg-gray-900 { background-color: #212529; }
 
+.border-bottom { border-bottom: 1px solid #ddd; }
+
 .max-width { max-width: 780px; }
 .width-100 { width: 100%; }
 .clear { clear: both; }

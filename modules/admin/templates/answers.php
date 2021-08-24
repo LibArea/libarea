@@ -50,7 +50,7 @@
               <div class="answ-telo-body max-width">
                 <?= $answer['content']; ?>
               </div>
-              <div class="content-footer mb15 mt5 pb5 size-13 hidden gray">
+              <div class="border-bottom mb15 mt5 pb5 size-13 hidden gray">
                 + <?= $answer['answer_votes']; ?>
 
                 <span id="cm_dell" class="right comment_link size-13">

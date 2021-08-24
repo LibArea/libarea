@@ -88,7 +88,7 @@ Route::before('Authorization@yesAuth')->getGroup();
         Route::get('/register/invite/{code}')->controller('Auth\RegisterController@showInviteForm')->where(['code' => '[a-z0-9-]+']);
         Route::get('/recover')->controller('Auth\RecoverController@showPasswordForm');  
         Route::get('/recover/remind/{code}')->controller('Auth\RecoverController@showRemindForm')->where(['code' => '[A-Za-z0-9-]+']);
-        Route::get('/email/avtivate/{code}')->controller('Auth\RecoverController@AvtivateEmail')->where(['code' => '[A-Za-z0-9-]+']);
+        Route::get('/email/acvtivate/{code}')->controller('Auth\RecoverController@AcvtivateEmail')->where(['code' => '[A-Za-z0-9-]+']);
         Route::get('/login')->controller('Auth\LoginController@showLoginForm'); 
     Route::endType();
 Route::endGroup();
@@ -127,6 +127,8 @@ Route::get('/s/{slug}')->controller('Space\SpaceController@posts', ['feed'])->wh
 Route::get('/s/{slug}/page/{page?}')->controller('Space\SpaceController@posts', ['feed'])->where(['slug' => '[A-Za-z0-9_]+', 'page' => '[0-9]+']);
 Route::get('/s/{slug}/top')->controller('Space\SpaceController@posts', ['top'])->where(['slug' => '[A-Za-z0-9_]+']);
 Route::get('/s/{slug}/top/page/{page?}')->controller('Space\SpaceController@posts', ['top'])->where(['slug' => '[A-Za-z0-9_]+', 'page' => '[0-9]+']);
+Route::get('/s/{slug}/writers')->controller('Space\SpaceController@posts', ['writers'])->where(['slug' => '[A-Za-z0-9_]+']);
+
 
 Route::get('/moderations')->controller('ActionController@moderation');
 

@@ -49,7 +49,7 @@
               <div class="comm-telo-body">
                 <?= $comment['content']; ?>
               </div>
-              <div class="content-footer mb15 mt5 pb5 size-13 hidden gray">
+              <div class="border-bottom mb15 mt5 pb5 size-13 hidden gray">
                 + <?= $comment['comment_votes']; ?>
                 <span id="cm_dell" class="right comment_link size-13">
                   <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action">

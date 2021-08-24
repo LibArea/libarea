@@ -282,4 +282,34 @@ class SpaceModel extends MainModel
 
         return DB::run($sql, $params);
     }
+    
+    // TOP авторов пространства. Limit 10
+    public static function getWriters($space_id)
+    {
+        $sql = "SELECT
+            user_id,
+            user_login,
+            user_avatar,
+            user_about,
+            rel.*
+                FROM users
+                    LEFT JOIN
+                        ( SELECT 
+                            MAX(post_id),
+                            MAX(post_user_id),
+                            MAX(post_space_id),
+                            SUM(post_hits_count) AS sum,
+                            MAX(user_id) as id
+                                FROM posts 
+                                LEFT JOIN users ON user_id = post_user_id
+                                WHERE post_space_id = :space_id
+                                GROUP BY post_user_id
+                            ) AS rel
+                                    ON rel.id = user_id 
+                                WHERE rel.sum != 0
+                                ORDER BY rel.sum DESC LIMIT 10";
+
+        return DB::run($sql, ['space_id' => $space_id])->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
 }

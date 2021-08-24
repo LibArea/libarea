@@ -31,7 +31,7 @@
                                     <?php } ?>
                                 </div>
 
-                                <div class="content-footer mb15 mt5 pb5 size-13 hidden gray">
+                                <div class="border-bottom mb15 mt5 pb5 size-13 hidden gray">
                                     <a class="green" rel="nofollow noreferrer" href="<?= $link['link_url']; ?>">
                                         <?= favicon_img($link['link_id'], $link['link_url_domain']); ?>
                                         <span class="green"><?= $link['link_url']; ?></span>

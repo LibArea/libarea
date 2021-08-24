@@ -54,7 +54,7 @@
                   <span class="s_<?= $post['post_id']; ?> show_detail"></span>
                 </div>
               </div>
-              <div class="content-footer mb15 mt5 pb5 size-13 hidden gray">
+              <div class="border-bottom mb15 mt5 pb5 size-13 hidden gray">
                 + <?= $post['post_votes']; ?>
 
                 <span id="cm_dell" class="right comment_link">

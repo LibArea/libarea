@@ -113,19 +113,19 @@ class RecoverController extends MainController
     }
 
     // Проверка корректности E-mail
-    public function AvtivateEmail()
+    public function ActivateEmail()
     {
         // Код активации
         $code = Request::get('code');
 
         // Проверяем код
-        $avtivate_email = UserModel::getEmailActivate($code);
-        if (!$avtivate_email) {
+        $activate_email = UserModel::getEmailActivate($code);
+        if (!$activate_email) {
             Base::addMsg(lang('code-used'), 'error');
             redirect('/');
         }
 
-        UserModel::EmailActivate($avtivate_email['user_id']);
+        UserModel::EmailActivate($activate_email['user_id']);
 
         Base::addMsg(lang('yes-email-pass'), 'success');
         redirect('/login');

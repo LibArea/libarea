@@ -105,7 +105,7 @@ class RegisterController extends MainController
         UserModel::sendActivateEmail($active_uid, $email_code);
 
         // Отправка e-mail
-        $link = 'https://' . HLEB_MAIN_DOMAIN . '/email/avtivate/' . $email_code;
+        $link = 'https://' . HLEB_MAIN_DOMAIN . '/email/activate/' . $email_code;
         $mail_message = lang('Activate E-mail') . ": \n" . $link . "\n\n";
         Base::sendMail($email, Config::get(Config::PARAM_NAME) . ' — ' . lang('checking e-mail'), $mail_message);
 

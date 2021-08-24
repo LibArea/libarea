@@ -92,14 +92,14 @@ h3 {
 }
 
 @media (max-width: 890px) {
-  .profile-ava { top: 130px;} 
+  .profile-ava { top: 130px; }
     
   .profile-ava img.ava {
     width: 110px;
     height: 110px;
+    margin-top: -10px;
   }
-  
-  .profile-ava img.ava { margin-top: -10px; }  
+
   .profile-box-cover .profile-ava img.ava { margin-top: -60px; }
 
   .box.profile-telo {
