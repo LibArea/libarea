@@ -11,7 +11,7 @@
                     <?php if ($uid['user_id'] == $answer['answer_user_id']) { ?> <?php $otvet = 1; ?> <?php } ?>
 
                     <div class="line mb20"></div>
-                    <ol class="p0 m0">
+                    <ol class="p0 m0 list-none">
                         <li class="answers_subtree" id="answer_<?= $answer['answer_id']; ?>">
                             <div class="answ-telo hidden">
                                 <div class="qa-footer right mt10 pt10 ml10 pb10 hidden center">
@@ -86,7 +86,7 @@
                     </ol>
 
                 <?php } else { ?>
-                    <ol class="delleted answer-telo m5 size-13">
+                    <ol class="delleted answer-telo m5 list-none size-13">
                         <li class="answers_subtree" id="answer_<?= $answer['answer_id']; ?>">
                             <span class="answ-deletes">~ <?= lang('Answer deleted'); ?></span>
                         </li>
@@ -99,7 +99,7 @@
                 $n++; ?>
                 <?php if ($comment['comment_is_deleted'] == 0) { ?>
                     <div class="line-qa<?php if ($n > 1) { ?> ml30<?php } ?>"></div>
-                    <ol class="comm-telo mb0 mt0">
+                    <ol class="comm-telo list-none mb0 mt0">
                         <li class="comment_subtree" id="comment_<?= $comment['comment_id']; ?>">
                             
                             <div class="comm-telo">

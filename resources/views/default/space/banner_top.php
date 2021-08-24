@@ -32,16 +32,13 @@
             <?php } ?>
         <?php } ?>
         <div class="space-text white">
-
             <?= spase_logo_img($space['space_img'], 'max', $space['space_name'], 'space-box-img'); ?>
-
             <a title="<?= $space['space_name']; ?>" href="/s/<?= $space['space_slug']; ?>">
-                <h1 class="size-21 white"><?= $space['space_name']; ?></h1>
+                <h1 class="size-31 mt5 mr0 mb10 ml0 p0 white"><?= $space['space_name']; ?></h1>
             </a>
             <div class="space-slug">
                 s/<?= $space['space_slug']; ?>
             </div>
-
         </div>
     </div>
 </div>

@@ -5,7 +5,7 @@
             <div class="pt5 pr15 pb5 pl15">
                 <?= breadcrumb('/', lang('Home'), '/s/' . $space['space_slug'], $space['space_name'], $data['h1']); ?>
 
-                <ul class="nav-tabs">
+                <ul class="nav-tabs list-none">
                     <li class="active">
                         <span><?= lang('Edit'); ?></span>
                     </li>

@@ -4,20 +4,20 @@
             <div class="mt15">
                 <?= $space['space_short_text']; ?>
             </div>
-            <div class="sb-space-stat">
+            <div class="flex w-100 mt15 mb10">
                 <div class="_bl">
-                    <p class="bl-n"><a href="/u/<?= $space['user_login']; ?>">
+                    <p class="bl-n m0"><a href="/u/<?= $space['user_login']; ?>">
                         <?= $space['user_login']; ?>
                     </a></p>
-                    <p class="bl-t gray-light"><?= lang('Created by'); ?></p>
+                    <p class="bl-t m0 size-15 lowercase gray-light"><?= lang('Created by'); ?></p>
                 </div>
                 <div class="_bl">
                     <?php if ($space['space_id'] != 1) { ?>
-                        <p class="bl-n"><?= $space['users']; ?></p>
+                        <p class="bl-n m0"><?= $space['users']; ?></p>
                     <?php } else { ?>
-                        <p class="bl-n">***</p>
+                        <p class="bl-n m0">***</p>
                     <?php } ?>
-                    <p class="bl-t gray-light"><?= lang('Reads'); ?></p>
+                    <p class="bl-t size-15 lowercase m0 gray-light"><?= lang('Reads'); ?></p>
                 </div>
             </div>
             <hr>
@@ -26,30 +26,32 @@
                 <span class="middle"><?= $space['space_date']; ?></span>
             </div>
             <?php if (!$uid['user_id']) { ?>
-                <div class="sb-add-space-post center">
-                    <a class="mt15 mb20 white" href="/login">
+                <div class="white mt15 mb10 center">
+                    <a class="mt15 button block mb15 white" href="/login">
                         <i class="icon-pencil size-15"></i>
                         <?= lang('Create Post'); ?>
                     </a>
                 </div>
             <?php } else { ?>
-                <div class="mt15 mb20 white center">
+                <div class="mt15 mb15 white center">
                     <?php if ($space['space_user_id'] == $uid['user_id']) { ?>
-                        <a class="add-space-post" href="/post/add/space/<?= $space['space_id']; ?>">
+                        <a class="mt15 button block mb15 white" href="/post/add/space/<?= $space['space_id']; ?>">
                             <?= lang('Create Post'); ?>
                         </a>
                     <?php } else { ?>
                         <?php if ($signed) { ?>
                             <?php if ($space['space_permit_users'] == 1) { ?>
                                 <?php if ($uid['user_trust_level'] == 5 || $space['space_user_id'] == $uid['user_id']) { ?>
-                                    <a class="add-space-post" href="/post/add/space/<?= $space['space_id']; ?>">
+                                    <a class="mt15 button block mb15 white" href="/post/add/space/<?= $space['space_id']; ?>">
                                         <?= lang('Create Post'); ?>
                                     </a>
                                 <?php } else { ?>
-                                    <span class="restricted"><?= lang('The owner restricted the publication'); ?></span>
+                                    <div class="p5 pr15 pb5 pl15 text-center size-15 bg-gray-200 gray">
+                                        <?= lang('The owner restricted the publication'); ?>
+                                    </div>
                                 <?php } ?>
                             <?php } else { ?>
-                                <a class="add-space-post" href="/post/add/space/<?= $space['space_id']; ?>">
+                                <a class="mt15 button block mb15 white" href="/post/add/space/<?= $space['space_id']; ?>">
                                     <?= lang('Create Post'); ?>
                                 </a>
                             <?php } ?>

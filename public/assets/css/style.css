@@ -28,7 +28,7 @@ body.scroll {
 }
 
 body {
-  line-height: 1.46;
+  line-height: 1.5rem;
   font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif;
   min-height: 100%;
   background-color: #f3f3f3;
@@ -183,6 +183,7 @@ img {
 .size-13 { font-size: 13px; }
 .size-15 { font-size: 15px; }
 .size-21 { font-size: 21px; }
+.size-31 { font-size: 31px; }
 .center { text-align: center; }
 .middle { vertical-align: middle; }
 .lowercase { text-transform: lowercase; }
@@ -196,6 +197,7 @@ img {
 .block { display: block; }
 .relative { position: relative; }
 .bg-lightyellow { background-color: lightyellow; }
+.list-none { list-style: none; }
 
 .flex {
   display: flex;
@@ -700,13 +702,6 @@ img.img-post,
   display: block;
 }
 
-ol,
-.comments_subtree,
-.answers_subtree {
-  position: relative;
-  list-style: none;
-}
-
 .answers_subtree .answ-telo-body img {
   max-width: 98%;
   max-height: 500px;
@@ -766,7 +761,6 @@ ol.comment-telo {
   position: relative;
   height: 45px;
   padding: 13px 15px 15px 0;
-  list-style: none;
   color: #667d99;
 }
 

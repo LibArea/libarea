@@ -5,7 +5,7 @@
       <div class="pt5 pr15 pb5 pl15">
         <?= breadcrumb('/admin', lang('Admin'), '/admin/users', lang('Users'), $data['meta_title']); ?>
 
-        <ul class="nav-tabs">
+        <ul class="nav-tabs list-none">
           <?php if ($data['sheet'] == 'users') { ?>
             <li class="active">
               <span><?= lang('All'); ?></span>

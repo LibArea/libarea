@@ -8,7 +8,7 @@
                 </a>
                 <?= breadcrumb('/admin', lang('Admin'), null, null, $data['meta_title']); ?>
 
-                <ul class="nav-tabs">
+                <ul class="nav-tabs list-none">
                     <?php if ($data['sheet'] == 'spaces') { ?>
                         <li class="active">
                             <span><?= lang('All'); ?></span>

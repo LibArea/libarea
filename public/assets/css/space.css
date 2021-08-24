@@ -2,26 +2,6 @@
   margin: 25px 0 0 4px;
 }
 
-.restricted {
-  font-size: 14px;
-  padding: 5px 10px;
-  background-color: #f1f1f1;
-  text-align: center;
-  display: block;
-  color: #666;
-}
-
-.space-tags .menu-m {
-  margin: 0 0 5px 0;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  font-size: 11px;
-}
-
-.space-tags a.space-u.tag-u {
-  display: table;
-}
-
 .space-color {
   width: 3px;
   height: 9px;
@@ -31,21 +11,10 @@
   padding: 0;
 }
 
-.color-box-telo {
-  position: relative;
-}
-
 .space-color.box {
   display: block;
   width: 22px;
   height: 15px;
-}
-
-.color-box {
-  text-align: center;
-  width: 20px;
-  margin-left: 20px;
-  float: left;
 }
 
 .space-box .yes-space,
@@ -56,12 +25,6 @@
 .space-text {
   padding: 10px 6px 9px 6px;
   overflow: hidden;
-}
-
-.space-text h1 {
-  padding: 0;
-  margin: 0;
-  font-weight: 400;
 }
 
 .space-box .space-box-img,
@@ -82,61 +45,12 @@
 }
 
 .space-cover-box .space-text {
-  font-size: 16px;
   padding: 160px 6px 9px 6px;
   overflow: hidden;
 }
 
-.space-cover-box .space-text h1 {
-  padding: 0;
-  margin: 0;
-  font-size: 32px;
-  font-weight: 400;
-}
-
-.space-cover-box .space-text .fons {
-  margin-top: 30px;
-  padding-bottom: 13px;
-  width: 70%;
-  background-color: linear-gradient(to right, rgba(0, 0, 0, 0.65), transparent);
-}
-
-.space-text-sb p {
-  margin-top: 0;
-}
-
-.sb-space-stat {
-  display: flex;
-  margin: 20px 0 10px 0;
-  width: 100%;
-}
-
 ._bl {
   flex: auto;
-}
-
-.bl-t,
-.bl-n {
-  margin: 0;
-  font-size: 14px;
-}
-
-.bl-n {
-  font-size: 16px;
-}
-
-a.add-space-post {
-  background-color: #1ca1f3;
-  border: 1px solid #1ca1f3;
-  padding: 5px 14px 5px 22px;
-  color: #fff;
-  border-radius: 2px;
-  display: block;
-}
-
-a.add-space-post:hover {
-  background-color: #fff;
-  color: #1ca1f3;
 }
 
 .all-box-spaces {

@@ -5,7 +5,7 @@
     <?php include TEMPLATE_DIR . '/space/banner_top.php'; ?>
     <div class="wrap">
         <main>
-            <ul class="nav-tabs mt0">
+            <ul class="nav-tabs list-none mt0">
                 <?php if ($data['sheet'] == 'feed') { ?>
                     <li class="active">
                         <span><?= lang('Feed'); ?></span>

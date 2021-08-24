@@ -13,7 +13,7 @@
 
                 <h1><?= $data['h1']; ?></h1>
 
-                <ul class="nav-tabs">
+                <ul class="nav-tabs list-none">
                     <?php if ($data['sheet'] == 'spaces') { ?>
                         <li class="active">
                             <span><?= lang('All'); ?></span>

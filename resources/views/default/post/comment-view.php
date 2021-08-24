@@ -11,7 +11,7 @@
             <div class="block-answer">
                 <?php if ($answer['answer_is_deleted'] == 0) { ?>
                     <?php if ($n != 1) { ?><div class="line mt10 mb10"></div><?php } ?>
-                    <ol class="p0 m0">
+                    <ol class="p0 m0 list-none">
                         <li class="answers_subtree" id="answer_<?= $answer['answer_id']; ?>">
                             <div class="container">
                                 <div class="answ-telo">
@@ -105,7 +105,7 @@
                 <?php } else { ?>
 
                     <?php if ($uid['user_trust_level'] == 5) { ?>
-                        <ol class="delleted size-13 comm-telo">
+                        <ol class="delleted size-13 comm-telo list-none">
                             <li class="comments_subtree" id="comment_<?= $answer['answer_id']; ?>">
                                 <span class="comm-deletes nick">
                                     <?= $answer['answer_content']; ?>
@@ -128,7 +128,7 @@
             <?php foreach ($answer['comm'] as  $comment) { ?>
                 <?php if ($comment['comment_is_deleted'] == 0) { ?>
 
-                    <ol class="pl15<?php if ($comment['comment_comment_id'] > 0) { ?> ml30<?php } ?>">
+                    <ol class="pl15 list-none<?php if ($comment['comment_comment_id'] > 0) { ?> ml30<?php } ?>">
                         <li class="comment_subtree" id="comment_<?= $comment['comment_id']; ?>">
                             <div class="p5">
                                 <div class="comm-telo">
@@ -212,7 +212,7 @@
 
                 <?php } else { ?>
                     <?php if (accessСheck($comment, 'comment', $uid, 1, 30) === true) { ?>
-                        <ol class="delleted size-13 comm-telo<?php if ($comment['comment_comment_id'] > 0) { ?> ml30<?php } ?>">
+                        <ol class="delleted size-13 list-none comm-telo<?php if ($comment['comment_comment_id'] > 0) { ?> ml30<?php } ?>">
                             <li class="comments_subtree" id="comment_<?= $comment['comment_id']; ?>">
                                 <span class="comm-deletes gray">
                                     <?= lori\Content::text($comment['comment_content'], 'line'); ?>

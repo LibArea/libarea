@@ -1,4 +1,4 @@
-<ul class="nav-tabs mt0 mb15">
+<ul class="nav-tabs list-none mt0 mb15">
     <?php if ($data['sheet'] == 'setting') { ?>
         <li class="active">
             <span><?= lang('Setting profile'); ?></span>
