@@ -306,9 +306,30 @@ pre code {
   font-weight: 400;
 }
 
-.answer-footer,
-.comm-footer {
-  line-height: 17px;
+table {
+  margin-bottom: 1.5rem;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  
+}
+
+table td,
+table th {
+  font-size: 14px;
+}
+
+table tr:nth-of-type(2n) {
+  background-color: #f3f3f6;
+}
+
+table thead th {
+  border-bottom: 2px solid rgba(222,226,230,0.5);
+}
+
+td,
+th {
+ padding: 5px;  
 }
 
 .answers h2 {
@@ -675,7 +696,6 @@ img.img-post,
   border-bottom: 1px solid #ddd;
 }
 
-/* Answers */
 .line {
   border-top: 2px dotted #ddd;
 }
@@ -689,11 +709,6 @@ img.img-post,
   font-size: 15px;
 }
 
-.answer-footer {
-  height: 24px;
-}
-
-/* Comments */
 .reply {
   display: none;
 }
@@ -746,7 +761,6 @@ ol.comment-telo {
   width: 64px;
 }
 
-/* Voting */
 .icon-up-bold {
   font-size: 1.2em;
 }
@@ -756,7 +770,6 @@ ol.comment-telo {
   color: #e45735;
 }
 
-/* Horizontal menu */
 .nav-tabs {
   position: relative;
   height: 45px;
@@ -791,7 +804,6 @@ ol.comment-telo {
   color: #646464;
 }
 
-/* Bread crumbs */
 ul.breadcrumb {
   padding: 0;
   font-family: sans-serif;
@@ -840,7 +852,6 @@ ul.breadcrumb {
   flex-shrink: 0;
 }
 
-/* Topic */
 a.tags {
   position: relative;
   display: inline-block;
@@ -868,7 +879,6 @@ h3.recommend {
   font-weight: 400;
 }
 
-/* Footer */
 .text-info {
   width: 20%;
 }
@@ -1064,7 +1074,6 @@ footer a.footer:hover {
   color: #eee;
 }
 
-/* Scrolling */
 #scroll_top {
   bottom: 150px;
   display: none;

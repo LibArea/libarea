@@ -8,42 +8,38 @@
                 </a>
                 <?= breadcrumb('/admin', lang('Admin'), null, null, $data['meta_title']); ?>
 
-                <div class="badges">
-                    <?php if (!empty($badges)) { ?>
-
-                        <div class="t-table">
-                            <div class="t-th">
-                                <span class="t-td center">Id</span>
-                                <span class="t-td center">Icon</span>
-                                <span class="t-td"><?= lang('Title'); ?>&nbsp;/&nbsp;<?= lang('Description'); ?></span>
-                                <span class="t-td center"><?= lang('Action'); ?></span>
-                            </div>
-
-                            <?php foreach ($badges as $key => $bg) { ?>
-                                <div class="t-tr">
-                                    <span class="t-td width-30 center">
-                                        <?= $bg['badge_id']; ?>
-                                    </span>
-                                    <span class="t-td width-30 center">
-                                        <?= $bg['badge_icon']; ?>
-                                    </span>
-                                    <span class="t-td">
-                                        <b><?= $bg['badge_title']; ?></b>
-                                        <br>
-                                        <?= $bg['badge_description']; ?>
-                                    </span>
-                                    <span class="t-td center">
-                                        <a title="<?= lang('Edit'); ?>" href="/admin/badges/<?= $bg['badge_id']; ?>/edit">
-                                            <i class="icon-pencil size-15"></i>
-                                        </a>
-                                    </span>
-                                </div>
-                            <?php } ?>
-                        </div>
-                    <?php } else { ?>
-                        <?= no_content('No'); ?>
-                    <?php } ?>
-                </div>
+                <?php if (!empty($badges)) { ?>
+                    <table>
+                        <thead>
+                            <th>Id</th>
+                            <th>Icon</th>
+                            <th><?= lang('Title'); ?>&nbsp;/&nbsp;<?= lang('Description'); ?></th>
+                            <th><?= lang('Action'); ?></th>
+                        </thead>
+                        <?php foreach ($badges as $key => $bg) { ?>
+                            <tr>
+                                <td class="width-30 center">
+                                    <?= $bg['badge_id']; ?>
+                                </td>
+                                <td class="width-30 center">
+                                    <?= $bg['badge_icon']; ?>
+                                </td>
+                                <td>
+                                    <b><?= $bg['badge_title']; ?></b>
+                                    <br>
+                                    <?= $bg['badge_description']; ?>
+                                </td>
+                                <td class="center">
+                                    <a title="<?= lang('Edit'); ?>" href="/admin/badges/<?= $bg['badge_id']; ?>/edit">
+                                        <i class="icon-pencil size-15"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </table>
+                <?php } else { ?>
+                    <?= no_content('No'); ?>
+                <?php } ?>
             </div>
         </div>
     </main>

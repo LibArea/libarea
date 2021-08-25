@@ -34,7 +34,7 @@
 
                                 <?= $answer['answer_content'] ?>
                             </div>
-                            <div class="answer-footer flex size-13">
+                            <div class="flex size-13">
                                 <?= votes($uid['user_id'], $answer, 'answer'); ?>
                             
                                 <?php if ($uid['user_trust_level'] >= Lori\Config::get(Lori\Config::PARAM_TL_ADD_COMM_QA)) { ?>

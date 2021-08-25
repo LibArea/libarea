@@ -39,7 +39,6 @@ main {
 
 li { list-style-type: none; }
 .count { font-size: 2.2rem; }
-.box-index { color: #fff; }
 .box-index i { font-size: 38px; }
 
 .box-index:hover {
@@ -57,30 +56,6 @@ li { list-style-type: none; }
   color: #fff;
 }
 
-.t-table {
-  display: table;
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.t-tr,
-.t-th {
-  display: table-row;
-}
-
-.t-th {
-  background-color: #e6ecf0;
-  color: #5b7083;
-}
-
-.t-td {
-  display: table-cell;
-  border: none;
-  vertical-align: middle;
-}
-
-.t-td:not(.no-p) { padding: 8px; }
-.t-tr:nth-of-type(2n) { background-color: #f3f3f6; }
 .w-30 { width: 30px; }
 
 @media (max-width: 704px) {

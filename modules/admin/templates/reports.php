@@ -5,26 +5,26 @@
       <div class="pt5 pr15 pb5 pl15">
         <?= breadcrumb('/admin', lang('Admin'), '/admin/users', lang('Users'), $data['meta_title']); ?>
 
-        <div class="t-table">
-          <div class="t-th">
-            <span class="t-td center">N</span>
-            <span class="t-td"><?= lang('Avatar'); ?></span>
-            <span class="t-td"><?= lang('Information'); ?></span>
-            <span class="t-td center"><?= lang('Saw'); ?></span>
-          </div>
-          <?php if ($reports) {  ?>
+          <?php if ($reports) { ?>
+            <table>
+              <thead>
+                <th class="center">N</th>
+                <th><?= lang('Avatar'); ?></th>
+                <th><?= lang('Information'); ?></th>
+                <th><?= lang('Saw'); ?></th>
+              </thead>
             <?php foreach ($reports as $report) {  ?>
-              <div class="t-tr">
-                <span class="t-td width-30 center">
+              <tr>
+                <td class="width-30 center">
                   <?= $report['report_id']; ?>
                 </span>
-                <span class="t-td width-30">
+                <td class="width-30">
                   <a class="gray" href="/u/<?= $report['user']['user_login']; ?>">
                     <?= user_avatar_img($report['user']['user_avatar'], 'max', $report['user']['user_login'], 'ava-24 mr5'); ?>
                     <?= $report['user']['user_login']; ?>
                   </a>
-                </span>
-                <span class="t-td">
+                </td>
+                <td>
                   <div class="size-13 gray lowercase">
                     <?= $report['report_type']; ?>
                     <span class="mr5 ml5"> &#183; </span>
@@ -33,20 +33,19 @@
                   <div class="mt5">
                     <a href="<?= $report['report_url']; ?>"><?= $report['report_url']; ?></a>
                   </div>
-                </span>
-                <span class="t-td center<?php if ($report['report_status'] == 0) { ?> delleted<?php } ?>">
+                </td>
+                <td class="center<?php if ($report['report_status'] == 0) { ?> delleted<?php } ?>">
                   <span class="report-status" data-id="<?= $report['report_id']; ?>">
                     <i class="icon-air gray size-21"></i>
                   </span>
-                </span>
-              </div>
+                </td>
+              </tr>
             <?php } ?>
-
+            </table>
           <?php } else { ?>
-            <?= no_content('No users'); ?>
+              <?= no_content('No users'); ?>
           <?php } ?>
         </div>
-
         <?= pagination($data['pNum'], $data['pagesCount'], null, '/admin/reports'); ?>
       </div>
     </div>

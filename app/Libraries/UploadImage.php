@@ -90,6 +90,10 @@ class UploadImage
         $file       = $img['tmp_name'];
         $filename   = 'post-' . time();
 
+        if (!is_dir($path_img)) {
+            @mkdir($path_img);
+        }
+
         if (!is_dir($path_img . $year)) {
             @mkdir($path_img . $year);
         }
@@ -200,7 +204,7 @@ class UploadImage
         $filename = 'c-' . time();
 
         if (!is_dir($path . $year)) {
-            @mkdir($path . $year);
+           mkdir($path . $year, 0777, true);
         }
 
         // https://github.com/claviska/SimpleImage

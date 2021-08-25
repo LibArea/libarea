@@ -6,23 +6,23 @@
                 <h1>
                     <a href="/admin"><?= lang('Admin'); ?></a> / <span class="red"><?= $data['meta_title']; ?> - IP</span>
                 </h1>
-
-                <div class="t-table">
-                    <div class="t-th">
-                        <span class="t-td center">N</span>
-                        <span class="t-td"><?= lang('Information'); ?></span>
-                        <span class="t-td">E-mail</span>
-                        <span class="t-td"><?= lang('Sign up'); ?></span>
-                        <span class="t-td">IP <?= lang('registrations'); ?></span>
-                        <span class="t-td center">Ban</span>
-                        <span class="t-td center"><?= lang('Action'); ?></span>
-                    </div>
-                    <?php foreach ($alluser as $user) {  ?>
-                        <div class="t-tr">
-                            <span class="t-td width-30 center">
+                
+                <table>
+                    <thead>
+                        <th>N</th>
+                        <th><?= lang('Information'); ?></th>
+                        <th>E-mail</th>
+                        <th><?= lang('Sign up'); ?></th>
+                        <th>IP <?= lang('registrations'); ?></th>
+                        <th>Ban</th>
+                        <th><?= lang('Action'); ?></th>
+                    </thead>
+                <?php foreach ($alluser as $user) {  ?>
+                         <tr>
+                            <td class="width-30 center">
                                 <?= $user['user_id']; ?>
-                            </span>
-                            <span class="t-td">
+                            </td>
+                            <td>
                                 <?= user_avatar_img($user['user_avatar'], 'small', $user['user_login'], 'ava'); ?>
                                 <a href="/u/<?= $user['user_login']; ?>"><?= $user['user_login']; ?></a>
                                 <?php if ($user['user_name']) { ?>
@@ -30,19 +30,19 @@
                                 <?php } ?>
                                 <sup class="red">TL:<?= $user['user_trust_level']; ?></sup>
                                 <?php if ($user['user_invitation_id'] != 0) { ?><sup>+ inv. id<?= $user['user_invitation_id']; ?></sup><?php } ?> <br>
-                            </span>
-                            <span class="t-td">
+                            </td>
+                            <td>
                                 <span class="date"><?= $user['user_email']; ?></span>
-                            </span>
-                            <span class="t-td">
+                            </td>
+                            <td>
                                 <?= $user['user_created_at']; ?>
-                            </span>
-                            <span class="t-td">
+                            </td>
+                            <td>
                                 <?= $user['user_reg_ip']; ?> <?php if ($user['replayIp'] > 1) { ?>
                                     <sup class="red">(<?= $user['replayIp']; ?>)</sup>
                                 <?php } ?>
-                            </span>
-                            <span class="t-td center">
+                            </td>
+                            <td class="center">
                                 <?php if ($user['user_trust_level'] != 5) { ?>
                                     <?php if ($user['isBan']) { ?>
                                         <div class="type-ban" data-id="<?= $user['user_id']; ?>" data-type="user">
@@ -56,8 +56,8 @@
                                 <?php } else { ?>
                                     ---
                                 <?php } ?>
-                            </span>
-                            <span class="t-td center">
+                            </td>
+                            <td class="center">
                                 <?php if ($user['user_trust_level'] != 5) { ?>
                                     <a title="<?= lang('Edit'); ?>" href="/admin/user/<?= $user['user_id']; ?>/edit">
                                         <i class="icon-pencil size-15"></i>
@@ -65,12 +65,10 @@
                                 <?php } else { ?>
                                     ---
                                 <?php } ?>
-                            </span>
-
-                            <br><br>
-                        </div>
+                            </td>
+                        </tr>
                     <?php } ?>
-                </div>
+                </table>
             </div>
         </div>
     </main>

@@ -51,7 +51,7 @@
                                         <?= $answer['answer_content'] ?>
                                     </div>
                                 </div>
-                                <div class="comm-footer flex size-13">
+                                <div class="flex size-13">
                                     <?= votes($uid['user_id'], $answer, 'answer'); ?>
 
                                     <?php if ($post['post_closed'] == 0) { ?>
@@ -172,7 +172,7 @@
                                         <?= lori\Content::text($comment['comment_content'], 'line'); ?>
                                     </div>
                                 </div>
-                                <div class="comm-footer size-13 flex">
+                                <div class="size-13 flex">
                                     <?= votes($uid['user_id'], $comment, 'comment'); ?>
 
                                     <?php if ($post['post_closed'] == 0) { ?>
