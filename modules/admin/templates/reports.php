@@ -5,19 +5,19 @@
       <div class="pt5 pr15 pb5 pl15">
         <?= breadcrumb('/admin', lang('Admin'), '/admin/users', lang('Users'), $data['meta_title']); ?>
 
-          <?php if ($reports) { ?>
-            <table>
-              <thead>
-                <th class="center">N</th>
-                <th><?= lang('Avatar'); ?></th>
-                <th><?= lang('Information'); ?></th>
-                <th><?= lang('Saw'); ?></th>
-              </thead>
+        <?php if ($reports) { ?>
+          <table>
+            <thead>
+              <th class="center">N</th>
+              <th><?= lang('Avatar'); ?></th>
+              <th><?= lang('Information'); ?></th>
+              <th><?= lang('Saw'); ?></th>
+            </thead>
             <?php foreach ($reports as $report) {  ?>
               <tr>
                 <td class="width-30 center">
                   <?= $report['report_id']; ?>
-                </span>
+                  </span>
                 <td class="width-30">
                   <a class="gray" href="/u/<?= $report['user']['user_login']; ?>">
                     <?= user_avatar_img($report['user']['user_avatar'], 'max', $report['user']['user_login'], 'ava-24 mr5'); ?>
@@ -41,14 +41,14 @@
                 </td>
               </tr>
             <?php } ?>
-            </table>
-          <?php } else { ?>
-              <?= no_content('No users'); ?>
-          <?php } ?>
-        </div>
-        <?= pagination($data['pNum'], $data['pagesCount'], null, '/admin/reports'); ?>
+          </table>
+        <?php } else { ?>
+          <?= no_content('No users'); ?>
+        <?php } ?>
       </div>
+      <?= pagination($data['pNum'], $data['pagesCount'], null, '/admin/reports'); ?>
     </div>
-  </main>
+</div>
+</main>
 </div>
 <?php include TEMPLATE_ADMIN_DIR . '/_block/footer-admin.php'; ?>

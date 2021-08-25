@@ -47,7 +47,7 @@
                   <i class="icon-help green"></i>
                 <?php } ?>
               </div>
-              <div class="answ-telo-body max-width">
+              <div class="mt5 mr0 mb10 ml0 size-15 max-width">
                 <?= $answer['content']; ?>
               </div>
               <div class="border-bottom mb15 mt5 pb5 size-13 hidden gray">

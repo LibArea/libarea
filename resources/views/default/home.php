@@ -83,7 +83,7 @@
         <div class="white-box">
           <div class="pt5 pr15 pb5 pl15">
             <a class="right" title="<?= lang('Spaces'); ?>" href="/spaces">
-                <i class="icon-right-open-big middle size-13"></i>
+              <i class="icon-right-open-big middle size-13"></i>
             </a>
             <div class="uppercase mb5 mt5 size-13">
               <?= lang('Signed'); ?>

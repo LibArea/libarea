@@ -71,7 +71,7 @@
           <?php } ?>
 
         <?php } else { ?>
-            <?= no_content('No'); ?>
+          <?= no_content('No'); ?>
         <?php } ?>
 
       </div>

@@ -26,17 +26,17 @@
             </li>
           <?php } ?>
         </ul>
-          <?php if ($alluser) {  ?>
-            <table>
-              <thead>
-                <th>N</th>
-                <th><?= lang('Avatar'); ?></th>
-                <th><?= lang('Information'); ?></th>
-                <th>IP <?= lang('registrations'); ?></th>
-                <td><?= lang('Last'); ?></th>
-                <th>Ban</th>
-                <th><?= lang('Action'); ?></th>
-              </thead>
+        <?php if ($alluser) {  ?>
+          <table>
+            <thead>
+              <th>N</th>
+              <th><?= lang('Avatar'); ?></th>
+              <th><?= lang('Information'); ?></th>
+              <th>IP <?= lang('registrations'); ?></th>
+              <td><?= lang('Last'); ?></th>
+              <th>Ban</th>
+              <th><?= lang('Action'); ?></th>
+            </thead>
             <?php foreach ($alluser as $user) {  ?>
               <tr>
                 <td class="width-30 center">
@@ -76,7 +76,7 @@
                       <?= $user['logs']['logs_ip_address']; ?>
                     </a>
                     <br>
-                   <?= $user['logs']['logs_date']; ?>
+                    <?= $user['logs']['logs_date']; ?>
                   <?php } ?>
 
                   <?php if ($user['user_activated'] == 1) { ?>
@@ -111,14 +111,14 @@
                 </td>
               </tr>
             <?php } ?>
-           </table>
-          <?php } else { ?>
-              <?= no_content('No users'); ?>
-          <?php } ?>
-        </div>
-        <?= pagination($data['pNum'], $data['pagesCount'], null, '/admin/users'); ?>
+          </table>
+        <?php } else { ?>
+          <?= no_content('No users'); ?>
+        <?php } ?>
       </div>
+      <?= pagination($data['pNum'], $data['pagesCount'], null, '/admin/users'); ?>
     </div>
-  </main>
+</div>
+</main>
 </div>
 <?php include TEMPLATE_ADMIN_DIR . '/_block/footer-admin.php'; ?>

@@ -311,7 +311,6 @@ table {
   width: 100%;
   border-collapse: collapse;
   border-spacing: 0;
-  
 }
 
 table td,
@@ -324,12 +323,12 @@ table tr:nth-of-type(2n) {
 }
 
 table thead th {
-  border-bottom: 2px solid rgba(222,226,230,0.5);
+  border-bottom: 2px solid rgba(222, 226, 230, 0.5);
 }
 
 td,
 th {
- padding: 5px;  
+  padding: 5px;
 }
 
 .answers h2 {
@@ -704,11 +703,6 @@ img.img-post,
   border-top: 1px solid #eee;
 }
 
-.answ-telo-body p {
-  margin: 5px 0 10px 0;
-  font-size: 15px;
-}
-
 .reply {
   display: none;
 }
@@ -744,12 +738,6 @@ ol.comment-telo {
   margin: 8px 0;
 }
 
-.comments .comm-telo {
-  padding: 3px 0 0 0;
-  font-size: 10.5pt;
-  max-width: 800px;
-}
-
 .qa-footer {
   width: 130px;
   border-radius: 3px;
@@ -780,10 +768,6 @@ ol.comment-telo {
 .nav-tabs > li {
   margin: 0 10px 0 0;
   float: left;
-}
-
-.nav-tabs > li.right {
-  float: right;
 }
 
 .nav-tabs > li > a {
