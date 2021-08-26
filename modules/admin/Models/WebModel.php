@@ -71,18 +71,18 @@ class WebModel extends MainModel
             'link_user_id'      => $data['link_user_id'],
             'link_type'         => $data['link_type'],
             'link_status'       => $data['link_status'],
-            'link_cat_id'       => $data['link_cat_id'],
+            'link_category_id'  => $data['link_category_id'],
             'link_count'        => 0,
         ];
-
-        $sql = "INSERT INTO links(link_url, 
+ 
+        $sql = "INSERT INTO links(link_url,
                         link_url_domain, 
                         link_title, 
                         link_content,
                         link_user_id,
                         link_type,
                         link_status,
-                        link_cat_id,
+                        link_category_id,
                         link_count) 
                             VALUES(:link_url, 
                                 :link_url_domain, 
@@ -91,14 +91,12 @@ class WebModel extends MainModel
                                 :link_user_id,
                                 :link_type,
                                 :link_status,
-                                :link_cat_id,
+                                :link_category_id,
                                 :link_count)";
-
+    
         DB::run($sql, $params);
 
-        $sql = "SELECT link_id FROM links ORDER BY link_id DESC";
-
-        return DB::run($sql)->fetch(PDO::FETCH_ASSOC);
+        return DB::run("SELECT LAST_INSERT_ID() as last_id")->fetch(PDO::FETCH_ASSOC);
     }
 
     // Количество в системе 

@@ -72,7 +72,7 @@ class WebsController extends MainController
             'link_user_id'      => $uid['user_id'],
             'link_type'         => 0,
             'link_status'       => 200,
-            'link_cat_id'       => 1,
+            'link_category_id'  => 1,
         ];
 
         WebModel::add($data);
