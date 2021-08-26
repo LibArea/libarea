@@ -9,7 +9,7 @@
         <?php if (!empty($list)) { ?>
           <?php foreach ($list as  $notif) { ?>
 
-            <div class="p5<?php if ($notif['notification_read_flag'] == 0) { ?> active-notif<?php } ?>">
+            <div class="border-bottom p5<?php if ($notif['notification_read_flag'] == 0) { ?> active-notif<?php } ?>">
 
               <?php if ($notif['notification_action_type'] == 1) { ?>
                 <i class="icon-mail middle"></i>

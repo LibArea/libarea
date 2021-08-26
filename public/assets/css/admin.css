@@ -56,8 +56,6 @@ li { list-style-type: none; }
   color: #fff;
 }
 
-.w-30 { width: 30px; }
-
 @media (max-width: 704px) {
   aside { display: none; }
   main { margin-right: 0; }

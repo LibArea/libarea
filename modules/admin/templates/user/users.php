@@ -39,10 +39,10 @@
             </thead>
             <?php foreach ($alluser as $user) {  ?>
               <tr>
-                <td class="width-30 center">
+                <td class="center">
                   <?= $user['user_id']; ?>
                 </td>
-                <td class="width-30 center">
+                <td class="center">
                   <?= user_avatar_img($user['user_avatar'], 'max', $user['user_login'], 'ava-64'); ?>
                 </td>
                 <td>

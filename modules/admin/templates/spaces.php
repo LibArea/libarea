@@ -41,10 +41,10 @@
             </thead>
             <?php foreach ($spaces as $key => $sp) { ?>
               <tr>
-                <td class="width-30 center">
+                <td class="center">
                   <?= $sp['space_id']; ?>
                 </td>
-                <td class="width-30 center">
+                <td class="center">
                   <?= spase_logo_img($sp['space_img'], 'max', $sp['space_slug'], 'ava-64'); ?>
                 </td>
                 <td class="size-13">

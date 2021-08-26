@@ -37,7 +37,7 @@
             </thead>
             <?php foreach ($audits as $key => $audit) { ?>
               <tr>
-                <td class="width-30 center">
+                <td class="center">
                   <?= $audit['audit_id']; ?>
                 </td>
                 <td class="size-13">
@@ -67,7 +67,7 @@
                     <?php } ?>
                   <?php } ?>
                 </td>
-                <td class="width-30 center">
+                <td class="center">
                   <a data-id="<?= $audit['content'][$audit['audit_type'] . '_id']; ?>" data-type="<?= $audit['audit_type']; ?>" class="type-action size-13">
                     <?php if ($audit['content'][$audit['audit_type'] . '_is_deleted'] == 1) { ?>
                       <span class="red"><?= lang('Recover'); ?></span>
@@ -76,7 +76,7 @@
                     <?php } ?>
                   </a>
                 </td>
-                <td class="width-30 center">
+                <td class="center">
                   <?php if ($audit['audit_read_flag'] == 1) { ?>
                     id:
                     <a href="/admin/user/<?= $audit['audit_user_id']; ?>/edit">

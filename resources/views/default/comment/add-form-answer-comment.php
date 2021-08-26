@@ -12,7 +12,7 @@
       </div>
     </form>
   <?php } else { ?>
-    <textarea rows="5" disabled="disabled" class="darkening" placeholder="<?= lang('no-auth-comm'); ?>." name="content" id="content"></textarea>
+    <textarea rows="5" disabled="disabled" class="bg-gray-000" placeholder="<?= lang('no-auth-comm'); ?>." name="content" id="content"></textarea>
     <div>
       <input type="hidden" name="post_id" id="post_id" value="<?= $data['post_id']; ?>">
       <input type="hidden" name="answer_id" id="answer_id" value="<?= $data['answer_id']; ?>">

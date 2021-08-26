@@ -18,10 +18,10 @@
             </thead>
             <?php foreach ($badges as $key => $bg) { ?>
               <tr>
-                <td class="width-30 center">
+                <td class="center">
                   <?= $bg['badge_id']; ?>
                 </td>
-                <td class="width-30 center">
+                <td class="center">
                   <?= $bg['badge_icon']; ?>
                 </td>
                 <td>

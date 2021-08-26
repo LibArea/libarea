@@ -19,7 +19,7 @@
           </thead>
           <?php foreach ($alluser as $user) {  ?>
             <tr>
-              <td class="width-30 center">
+              <td class="center">
                 <?= $user['user_id']; ?>
               </td>
               <td>

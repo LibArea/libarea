@@ -3,7 +3,7 @@
     <h2 class="lowercase m0 size-21">
       <?= $post['post_answers_count'] + $post['post_comments_count'] ?> <?= $post['num_comments'] ?>
     </h2>
-    <div class="line-qa mt5 mb10"></div>
+    <div class="border-bottom mt5 mb10"></div>
     <?php $n = 0;
     foreach ($answers as  $answer) {
       $n++; ?>

@@ -27,7 +27,7 @@
                     <?= $answer['answer_content']; ?>
                   </div>
 
-                  <div class="post-full-footer mb20 pb5 hidden gray">
+                  <div class="border-bottom mb20 pb5 hidden gray">
                     + <?= $answer['answer_votes']; ?>
                   </div>
                 </div>

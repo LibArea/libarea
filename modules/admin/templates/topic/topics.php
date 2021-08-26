@@ -18,10 +18,10 @@
             </thead>
             <?php foreach ($topics as $key => $topic) { ?>
               <tr>
-                <td class="width-30 center">
+                <td class="center">
                   <?= $topic['topic_id']; ?>
                 </td>
-                <td class="width-30 center">
+                <td class="center">
                   <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'ava-64'); ?>
                 </td>
                 <td>
@@ -44,7 +44,7 @@
                     <?= $topic['topic_description']; ?>
                   </div>
                 </td>
-                <td class="width-30 center">
+                <td class="center">
                   <a title="<?= lang('Edit'); ?>" href="topics/<?= $topic['topic_id']; ?>/edit">
                     <i class="icon-pencil size-15"></i>
                   </a>

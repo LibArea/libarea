@@ -15,10 +15,10 @@
             </thead>
             <?php foreach ($reports as $report) {  ?>
               <tr>
-                <td class="width-30 center">
+                <td class="center">
                   <?= $report['report_id']; ?>
                   </span>
-                <td class="width-30">
+                <td>
                   <a class="gray" href="/u/<?= $report['user']['user_login']; ?>">
                     <?= user_avatar_img($report['user']['user_avatar'], 'max', $report['user']['user_login'], 'ava-24 mr5'); ?>
                     <?= $report['user']['user_login']; ?>

@@ -42,6 +42,7 @@ return [
     'space-add-success'     => 'Space added successfully',
     'you-question-no'       => 'You have already answered this question',
     'no-auth-login'         => 'To respond, you can <a href="/login">log in</a>',
+    'login-use-condition'   => 'By continuing, you agree to <a href="/info/privacy">Terms of Use</a> the site',
 
     /* Meta - desc */
     'desc-user-all'         => 'List of all participants sorted by date of registration on the site',

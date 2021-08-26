@@ -156,7 +156,7 @@
               </div>
             <?php } ?>
           </div>
-          <div class="post-full-footer mb20 pb5 hidden flex justify-content-between gray">
+          <div class="border-bottom mb20 pb5 hidden flex justify-content-between gray">
             <?= votes($uid['user_id'], $post, 'post'); ?>
             <span class="right gray-light">
               <i class="icon-commenting-o middle"></i>
@@ -195,7 +195,7 @@
                   </form>
                 <?php } ?>
               <?php } else { ?>
-                <textarea rows="5" class="darkening" disabled="disabled" placeholder="<?= lang('no-auth-comm'); ?>" name="answer" id="answer"></textarea>
+                <textarea rows="5" class="bg-gray-000" disabled="disabled" placeholder="<?= lang('no-auth-comm'); ?>" name="answer" id="answer"></textarea>
                 <div>
                   <input type="submit" name="answit" value="<?= lang('Reply'); ?>" class="button" disabled="disabled">
                 </div>
