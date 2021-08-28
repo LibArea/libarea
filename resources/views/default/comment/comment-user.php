@@ -1,4 +1,3 @@
-<?php include TEMPLATE_DIR . '/header.php'; ?>
 <div class="wrap">
   <main>
     <div class="white-box">
@@ -6,8 +5,8 @@
         <?= breadcrumb('/', lang('Home'), '/u/' . Request::get('login'), lang('Profile'), $data['h1']); ?>
       </div>
     </div>
-    <?php if (!empty($comments)) { ?>
-      <?php foreach ($comments as $comm) { ?>
+    <?php if (!empty($data['comments'])) { ?>
+      <?php foreach ($data['comments'] as $comm) { ?>
         <?php if ($comm['comment_is_deleted'] == 0) { ?>
           <div class="white-box">
             <div class="pt15 pr15 pb0 pl15 size-13">
@@ -47,4 +46,3 @@
     <?php include TEMPLATE_DIR . '/_block/user-menu.php'; ?>
   </aside>
 </div>
-<?php include TEMPLATE_DIR . '/footer.php'; ?>

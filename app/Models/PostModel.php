@@ -267,6 +267,11 @@ class PostModel extends MainModel
     // Связанные посты
     public static function postRelated($post_related)
     {
+        $string = "post_id IN(0) AND";
+        if ($post_related) {
+            $string = "post_id IN(0, " . $post_related . ") AND";
+        }
+        
         $sql = "SELECT 
                     post_id, 
                     post_title, 
@@ -276,7 +281,7 @@ class PostModel extends MainModel
                     post_related, 
                     post_is_deleted
                         FROM posts 
-                            WHERE post_id IN(0, " . $post_related . ") AND post_is_deleted = 0 AND post_tl = 0";
+                            WHERE $string post_is_deleted = 0 AND post_tl = 0";
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -292,9 +297,9 @@ class PostModel extends MainModel
     // Добавить пост в профиль
     public static function addPostProfile($post_id, $user_id)
     {
-        $sql_two = "UPDATE users SET user_my_post = :post_id WHERE id = :user_id";
+        $sql = "UPDATE users SET user_my_post = :post_id WHERE user_id = :user_id";
 
-        return DB::run($sql_two, ['post_id' => $post_id, 'user_id' => $user_id]);
+        return DB::run($sql, ['post_id' => $post_id, 'user_id' => $user_id]);
     }
 
     // Удален пост или нет

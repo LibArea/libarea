@@ -1,7 +1,7 @@
-<?php if ($writers) { ?>
+<?php if ($data['writers']) { ?>
   <div class="white-box">
     <div class="p15">
-      <?php foreach ($writers as  $writer) { ?>
+      <?php foreach ($data['writers'] as  $writer) { ?>
         <div class="flex border-bottom">
           <div class="mr15">
             <?= $writer['sum']; ?>

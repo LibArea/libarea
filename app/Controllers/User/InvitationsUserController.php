@@ -12,14 +12,12 @@ class InvitationsUserController extends MainController
     // Показ формы создания инвайта
     public function inviteForm()
     {
-        $uid  = Base::getUid();
-        $data = [
-            'h1'            => lang('Invite'),
+        $meta = [
             'sheet'         => 'invite',
             'meta_title'    => lang('Invite'),
         ];
 
-        return view(PR_VIEW_DIR . '/user/invite', ['data' => $data, 'uid' => $uid]);
+        return view('/user/invite', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => []]);
     }
 
     // Страница инвайтов пользователя
@@ -33,21 +31,21 @@ class InvitationsUserController extends MainController
             redirect('/u/' . $uid['user_login'] . '/invitation');
         }
 
-        $invitations = UserModel::InvitationResult($uid['user_id']);
-
         // Если пользователь забанен
         $user = UserModel::getUser($uid['user_id'], 'id');
         Base::accountBan($user);
 
-        $data = [
-            'h1'            => lang('Invites'),
+        $meta = [
             'sheet'         => 'invites',
             'meta_title'    => lang('Invites') . ' | ' . Config::get(Config::PARAM_NAME),
-            'invitations'   => $invitations,
+        ];
+
+        $data = [
+            'invitations'   => UserModel::InvitationResult($uid['user_id']),
             'count_invites' => $user['user_invitation_available'],
         ];
 
-        return view(PR_VIEW_DIR . '/user/invitation', ['data' => $data, 'uid' => $uid]);
+        return view('/user/invitation', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
 
     // Создать инвайт

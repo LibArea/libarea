@@ -37,7 +37,7 @@ class UsersController extends MainController
             'sheet'         => $sheet == 'all' ? 'users' : 'users-ban',
         ];
 
-        return view('/templates/user/users', ['data' => $data, 'uid' => $uid, 'alluser' => $result]);
+        includeTemplate('/templates/user/users', ['data' => $data, 'uid' => $uid, 'alluser' => $result]);
     }
 
     // Повторы IP
@@ -60,7 +60,7 @@ class UsersController extends MainController
             'sheet'         => 'admin',
         ];
 
-        return view('/templates/user/logip', ['data' => $data, 'uid' => $uid, 'alluser' => $results]);
+        includeTemplate('/templates/user/logip', ['data' => $data, 'uid' => $uid, 'alluser' => $results]);
     }
 
     // Бан участнику
@@ -99,7 +99,7 @@ class UsersController extends MainController
             'spaces_user'       => SpaceModel::getUserCreatedSpaces($user_id),
         ];
 
-        return view('/templates/user/edit', ['data' => $data, 'uid' => $uid, 'user' => $user]);
+        includeTemplate('/templates/user/edit', ['data' => $data, 'uid' => $uid, 'user' => $user]);
     }
 
     // Редактировать участника

@@ -261,6 +261,7 @@ CREATE TABLE `posts` (
   `post_top` tinyint(1) NOT NULL DEFAULT 0 COMMENT '1 - пост поднят',
   `post_url` varchar(255) DEFAULT NULL,
   `post_url_domain` varchar(255) DEFAULT NULL,
+  `post_focus_count` int(11) DEFAULT 0,
   `post_is_deleted` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -268,10 +269,10 @@ CREATE TABLE `posts` (
 -- Дамп данных таблицы `posts`
 --
 
-INSERT INTO `posts` (`post_id`, `post_title`, `post_slug`, `post_type`, `post_translation`, `post_draft`, `post_space_id`, `post_date`, `post_modified`, `post_published`, `post_user_id`, `post_ip`, `post_after`, `post_votes`, `post_karma`, `post_answers_count`, `post_comments_count`, `post_hits_count`, `post_content`, `post_content_img`, `post_thumb_img`, `post_related`, `post_merged_id`, `post_closed`, `post_tl`, `post_lo`, `post_top`, `post_url`, `post_url_domain`, `post_is_deleted`) VALUES
-(1, 'Ответы на некоторые вопросы (FAQ)', 'answer-qa', 0, 0, 0, 1, '2021-02-28 03:08:09', '2021-08-16 13:45:36', 1, 1, 0x3132372e302e302e31, 0, 0, 0, 1, 0, 3, 'Превью поста на главной странице сайта формируется из первого абзаца текста. Мы забираем первый абзац и делаем превью. Сайт испольлзует MVC модель, если кто знаком с ней, то не особо трудно будет разобраться.\r\n\r\n### Где находятся конфиг сайта?\r\n\r\nЭто файл `config.ini`. \r\n\r\n### Где находятся шаблоны сайта?\r\n\r\n```\r\n/resources/views/default\r\n```\r\n\r\n### Как мне изменить страницы с документацией?\r\n\r\nСлужебные страницы на этом сайте находятся: [/info](/info)\r\n\r\nА сам текст в Markdown разметке:\r\n\r\n```txt\r\n/resources/views/default/info/md/index.md\r\n```\r\n\r\n### Как мне поменять язык сайта?\r\n\r\nПо умолчанию в шаблонах используется английский язык.\r\n\r\nПереводы находится в этой папке:  `/app/Language/`\r\n\r\nВы можете переключать языки, в файле: `start.hleb.php` \r\n\r\nНайти:\r\n```php\r\ndefine(\'SITE_LANG\', \'ru\' );\r\n```\r\n\r\nИзменить на:\r\n\r\n```php\r\ndefine(\'SITE_LANG\', \'en\' );\r\n```\r\n\r\n---\r\n\r\nTo change the translation, in the file: `start.hleb.php` find:\r\n\r\n```php\r\ndefine(\'SITE_LANG\', \'ru\' );\r\n```\r\n\r\nEdit:\r\n\r\n```php\r\ndefine(\'SITE_LANG\', \'en\' );\r\n```\r\n\r\nThe transfers themselves are stored: `/app/Language/`', '', NULL, '2', 0, 0, 0, 0, 0, NULL, NULL, 0),
-(2, 'Где можно почитать документацию?', 'docs-post', 0, 0, 0, 2, '2021-02-28 03:15:58', '2021-08-16 13:50:01', 1, 2, 0x3132372e302e302e31, 0, 1, 0, 0, 0, 3, 'Страница документации Loruup находится в стадии разработки... Как она появится, об этом будет сообщено дополнительно. Сам сайт создан на PHP Микрофреймворк HLEB. Все основные настройки, объяснения можно найти на этом сайте:\r\n\r\n[https://phphleb.ru/ru/v1/](https://phphleb.ru/ru/v1/)\r\n\r\n', '', NULL, '', 0, 0, 0, 0, 0, NULL, NULL, 0),
-(3, 'Medium — платформа для создания контента', 'medium-where-good-ideas-find-you', 0, 0, 0, 2, '2021-04-29 19:35:13', '2021-04-29 19:35:13', 1, 1, 0x3132372e302e302e31, 0, 0, 0, 1, 0, 1, 'Medium — это платформа для создания контента, основанная соучредителем Blogger и Twitter Эван Уильямсом. Многие компании используют Medium в качестве платформы для публикации...', '2021/c-1624954734.webp', NULL, NULL, 0, 0, 0, 0, 0, NULL, NULL, 0);
+INSERT INTO `posts` (`post_id`, `post_title`, `post_slug`, `post_type`, `post_translation`, `post_draft`, `post_space_id`, `post_date`, `post_modified`, `post_published`, `post_user_id`, `post_ip`, `post_after`, `post_votes`, `post_karma`, `post_answers_count`, `post_comments_count`, `post_hits_count`, `post_content`, `post_content_img`, `post_thumb_img`, `post_related`, `post_merged_id`, `post_closed`, `post_tl`, `post_lo`, `post_top`, `post_url`, `post_url_domain`, `post_focus_count`, `post_is_deleted`) VALUES
+(1, 'Ответы на некоторые вопросы (FAQ)', 'answer-qa', 0, 0, 0, 1, '2021-02-28 03:08:09', '2021-08-16 13:45:36', 1, 1, 0x3132372e302e302e31, 0, 0, 0, 1, 0, 3, 'Превью поста на главной странице сайта формируется из первого абзаца текста. Мы забираем первый абзац и делаем превью. Сайт испольлзует MVC модель, если кто знаком с ней, то не особо трудно будет разобраться.\r\n\r\n### Где находятся конфиг сайта?\r\n\r\nЭто файл `config.ini`. \r\n\r\n### Где находятся шаблоны сайта?\r\n\r\n```\r\n/resources/views/default\r\n```\r\n\r\n### Как мне изменить страницы с документацией?\r\n\r\nСлужебные страницы на этом сайте находятся: [/info](/info)\r\n\r\nА сам текст в Markdown разметке:\r\n\r\n```txt\r\n/resources/views/default/info/md/index.md\r\n```\r\n\r\n### Как мне поменять язык сайта?\r\n\r\nПо умолчанию в шаблонах используется английский язык.\r\n\r\nПереводы находится в этой папке:  `/app/Language/`\r\n\r\nВы можете переключать языки, в файле: `start.hleb.php` \r\n\r\nНайти:\r\n```php\r\ndefine(\'SITE_LANG\', \'ru\' );\r\n```\r\n\r\nИзменить на:\r\n\r\n```php\r\ndefine(\'SITE_LANG\', \'en\' );\r\n```\r\n\r\n---\r\n\r\nTo change the translation, in the file: `start.hleb.php` find:\r\n\r\n```php\r\ndefine(\'SITE_LANG\', \'ru\' );\r\n```\r\n\r\nEdit:\r\n\r\n```php\r\ndefine(\'SITE_LANG\', \'en\' );\r\n```\r\n\r\nThe transfers themselves are stored: `/app/Language/`', '', NULL, '2', 0, 0, 0, 0, 0, NULL, NULL, 0, 0),
+(2, 'Где можно почитать документацию?', 'docs-post', 0, 0, 0, 2, '2021-02-28 03:15:58', '2021-08-16 13:50:01', 1, 2, 0x3132372e302e302e31, 0, 1, 0, 0, 0, 3, 'Страница документации Loruup находится в стадии разработки... Как она появится, об этом будет сообщено дополнительно. Сам сайт создан на PHP Микрофреймворк HLEB. Все основные настройки, объяснения можно найти на этом сайте:\r\n\r\n[https://phphleb.ru/ru/v1/](https://phphleb.ru/ru/v1/)\r\n\r\n', '', NULL, '', 0, 0, 0, 0, 0, NULL, NULL, 0, 0),
+(3, 'Medium — платформа для создания контента', 'medium-where-good-ideas-find-you', 0, 0, 0, 2, '2021-04-29 19:35:13', '2021-04-29 19:35:13', 1, 1, 0x3132372e302e302e31, 0, 0, 0, 1, 0, 1, 'Medium — это платформа для создания контента, основанная соучредителем Blogger и Twitter Эван Уильямсом. Многие компании используют Medium в качестве платформы для публикации...', '2021/c-1624954734.webp', NULL, NULL, 0, 0, 0, 0, 0, NULL, NULL, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -325,6 +326,7 @@ CREATE TABLE `spaces` (
   `space_permit_users` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 - могут писать все, 1 - только автор',
   `space_feed` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 - показывать в ленте, 1 - нет',
   `space_tl` int(11) NOT NULL DEFAULT 0 COMMENT 'Видимость по уровню доверия',
+  `space_focus_count` int(11) DEFAULT 0,
   `space_is_delete` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -332,10 +334,10 @@ CREATE TABLE `spaces` (
 -- Дамп данных таблицы `spaces`
 --
 
-INSERT INTO `spaces` (`space_id`, `space_name`, `space_slug`, `space_description`, `space_img`, `space_cover_art`, `space_text`, `space_short_text`, `space_date`, `space_color`, `space_category_id`, `space_user_id`, `space_type`, `space_permit_users`, `space_feed`, `space_tl`, `space_is_delete`) VALUES
-(1, 'meta', 'meta', 'Мета-обсуждение самого сайта, включая вопросы, предложения и отчеты об ошибках.', 'space_no.png', 'space_cover_no.jpeg', 'тест 1...', 'Короткое описание...', '2021-02-28 03:15:58', '#339900', 1, 1, 1, 0, 0, 0, 0),
-(2, 'Вопросы', 'qa', 'Вопросы по скрипту и не только', 'space_no.png', 'space_cover_no.jpeg', 'Вопросы по скрипту и не только', 'Короткое описание...', '2021-02-28 03:15:58', '#333333', 1, 1, 1, 0, 0, 0, 0),
-(3, 'флуд', 'flud', 'Просто обычные разговоры', 'space_no.png', 'space_cover_no.jpeg', 'тест 3...', 'Короткое описание...', '2021-02-28 03:15:58', '#f56400', 1, 1, 0, 0, 0, 0, 0);
+INSERT INTO `spaces` (`space_id`, `space_name`, `space_slug`, `space_description`, `space_img`, `space_cover_art`, `space_text`, `space_short_text`, `space_date`, `space_color`, `space_category_id`, `space_user_id`, `space_type`, `space_permit_users`, `space_feed`, `space_tl`, `space_focus_count`, `space_is_delete`) VALUES
+(1, 'meta', 'meta', 'Мета-обсуждение самого сайта, включая вопросы, предложения и отчеты об ошибках.', 'space_no.png', 'space_cover_no.jpeg', 'тест 1...', 'Короткое описание...', '2021-02-28 03:15:58', '#339900', 1, 1, 1, 0, 0, 0, 0, 0),
+(2, 'Вопросы', 'qa', 'Вопросы по скрипту и не только', 'space_no.png', 'space_cover_no.jpeg', 'Вопросы по скрипту и не только', 'Короткое описание...', '2021-02-28 03:15:58', '#333333', 1, 1, 1, 0, 0, 0, 0, 0),
+(3, 'флуд', 'flud', 'Просто обычные разговоры', 'space_no.png', 'space_cover_no.jpeg', 'тест 3...', 'Короткое описание...', '2021-02-28 03:15:58', '#f56400', 1, 1, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 

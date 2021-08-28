@@ -17,8 +17,7 @@ class RegisterController extends MainController
             redirect('/invite');
         }
 
-        $uid  = Base::getUid();
-        $data = [
+        $meta = [
             'h1'            => lang('Sign up'),
             'sheet'         => 'register',
             'canonical'     => Config::get(Config::PARAM_URL) . '/register',
@@ -26,7 +25,7 @@ class RegisterController extends MainController
             'meta_desc'     => lang('info_security'),
         ];
 
-        return view(PR_VIEW_DIR . '/auth/register', ['data' => $data, 'uid' => $uid]);
+        return view( '/auth/register', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => []]);
     }
 
     // Отправка запроса для регистрации
@@ -117,24 +116,23 @@ class RegisterController extends MainController
     // Показ формы регистрации с инвайтом
     public function showInviteForm()
     {
-        // Код активации
-        $code = Request::get('code');
-
-        // Проверяем код
+        $code   = Request::get('code');
         $invate = UserModel::InvitationAvailable($code);
+        
         if (!$invate) {
             Base::addMsg(lang('The code is incorrect'), 'error');
             redirect('/');
         }
 
-        // http://***/register/invite/61514d8913558958c659b713
-        $uid  = Base::getUid();
-        $data = [
-            'h1'            => lang('Registration by invite'),
+        $meta = [
             'sheet'         => 'register',
             'meta_title'    => lang('Registration by invite') . ' | ' . Config::get(Config::PARAM_NAME),
         ];
 
-        return view(PR_VIEW_DIR . '/auth/register-invate', ['data' => $data, 'uid' => $uid, 'invate' => $invate]);
+        $data = [
+            'invate' => $invate,
+        ];
+
+        return view('/auth/register-invate', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
     }
 }

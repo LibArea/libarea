@@ -1,13 +1,12 @@
-<?php include TEMPLATE_DIR . '/header.php'; ?>
 <div class="wrap">
   <main>
     <div class="white-box">
       <div class="pt5 pr15 pb5 pl15">
         <a class="right size-13 button mt15 mb15" href="/notifications/delete"><?= lang('I read'); ?></a>
-        <?= breadcrumb('/', lang('Home'), '/u/' . $uid['user_login'], lang('Profile'), $data['h1']); ?>
+        <?= breadcrumb('/', lang('Home'), '/u/' . $uid['user_login'], lang('Profile'), lang('Notifications')); ?>
 
-        <?php if (!empty($list)) { ?>
-          <?php foreach ($list as  $notif) { ?>
+        <?php if (!empty($data['notifications'])) { ?>
+          <?php foreach ($data['notifications'] as  $notif) { ?>
 
             <div class="border-bottom p5<?php if ($notif['notification_read_flag'] == 0) { ?> active-notif<?php } ?>">
 
@@ -102,4 +101,3 @@
     </div>
   </aside>
 </div>
-<?php include TEMPLATE_DIR . '/footer.php'; ?>

@@ -111,13 +111,12 @@ class AddCommentController extends MainController
     // Покажем форму
     public function add()
     {
-        $uid  = Base::getUid();
         $data = [
             'answer_id'     => Request::getPostInt('answer_id'),
             'post_id'       => Request::getPostInt('post_id'),
             'comment_id'    => Request::getPostInt('comment_id'),
         ];
 
-        return view(PR_VIEW_DIR . '/comment/add-form-answer-comment', ['data' => $data, 'uid' => $uid]);
+        return show('/comment/add-form-answer-comment', ['data' => $data, 'uid' => Base::getUid()]);
     }
 }

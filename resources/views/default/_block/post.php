@@ -1,5 +1,5 @@
-<?php if (!empty($posts)) { ?>
-  <?php foreach ($posts as $post) { ?>
+<?php if (!empty($data['posts'])) { ?>
+  <?php foreach ($data['posts'] as $post) { ?>
 
     <div class="white-box">
       <div class="pt15 pr15 pb0 pl15 size-13 flex">

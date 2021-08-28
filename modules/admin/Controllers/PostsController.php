@@ -39,6 +39,6 @@ class PostsController extends MainController
             'pNum'          => $page,
         ];
 
-        return view('/templates/posts', ['data' => $data, 'uid' => $uid, 'posts' => $result]);
+        includeTemplate('/templates/posts', ['data' => $data, 'uid' => $uid, 'posts' => $result]);
     }
 }

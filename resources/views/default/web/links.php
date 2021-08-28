@@ -1,4 +1,3 @@
-<?php include TEMPLATE_DIR . '/header.php'; ?>
 <div class="wrap">
   <main>
     <div class="white-box">
@@ -8,12 +7,12 @@
             <i class="icon-plus middle"></i>
           </a>
         <?php } ?>
-        <h1><?= $data['h1']; ?></h1>
+        <h1><?= lang('domains-title'); ?></h1>
       </div>
     </div>
 
-    <?php if (!empty($links)) { ?>
-      <?php foreach ($links as $key => $link) { ?>
+    <?php if (!empty($data['links'])) { ?>
+      <?php foreach ($data['links'] as $key => $link) { ?>
         <div class="white-box">
           <a href="/domain/<?= $link['link_url_domain']; ?>">
             <h2 class="title size-21 pt15 ml15 mb0">
@@ -59,4 +58,3 @@
     </div>
   </aside>
 </div>
-<?php include TEMPLATE_DIR . '/footer.php'; ?>

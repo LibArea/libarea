@@ -1,9 +1,8 @@
-<?php include TEMPLATE_DIR . '/header.php'; ?>
 <div class="wrap">
   <main>
     <div class="white-box">
       <div class="pt5 pr15 pb5 pl15">
-        <h1><?= $data['h1']; ?></h1>
+        <h1><?= lang('Sign in'); ?></h1>
         <div class="form mini">
           <form class="" action="/login" method="post">
             <?php csrf_field(); ?>
@@ -43,4 +42,3 @@
     </div>
   </aside>
 </div>
-<?php include TEMPLATE_DIR . '/footer.php'; ?>

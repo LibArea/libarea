@@ -1,13 +1,11 @@
-<?php include TEMPLATE_DIR . '/header.php'; ?>
 <div class="wrap">
   <main>
     <div class="white-box">
       <div class="pt5 pr15 pb5 pl15">
-        <h1><?= $data['h1']; ?></h1>
-        <?php if (!empty($moderations)) { ?>
-          <div class="moderations">
-
-            <?php foreach ($moderations as  $mod) { ?>
+        <h1><?= lang('Moderation Log'); ?></h1>
+        <?php if (!empty($data['moderations'])) { ?>
+          <div class="mt15">
+            <?php foreach ($data['moderations'] as  $mod) { ?>
               <div class="white-box">
                 <div class="size-13 lowercase">
                   <a href="/u/<?= $mod['user_login']; ?>">
@@ -48,4 +46,3 @@
     </div>
   </aside>
 </div>
-<?php include TEMPLATE_DIR . '/footer.php'; ?>

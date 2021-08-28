@@ -11,14 +11,12 @@ class RecoverController extends MainController
 {
     public function showPasswordForm()
     {
-        $uid  = Base::getUid();
-        $data = [
-            'h1'            => lang('Password Recovery'),
+        $meta = [
             'sheet'         => 'recover',
             'meta_title'    => lang('Password Recovery') . ' | ' . Config::get(Config::PARAM_NAME),
         ];
 
-        return view(PR_VIEW_DIR . '/auth/recover', ['data' => $data, 'uid' => $uid]);
+        return view('/auth/recover', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => []]);
     }
 
     public function index()
@@ -62,11 +60,9 @@ class RecoverController extends MainController
     // Страница установки нового пароля
     public function showRemindForm()
     {
-        // Код активации
-        $code = Request::get('code');
-
-        // Проверяем код
-        $user_id = UserModel::getPasswordActivate($code);
+        $code       = Request::get('code');
+        $user_id    = UserModel::getPasswordActivate($code);
+        
         if (!$user_id) {
             Base::addMsg(lang('code-incorrect'), 'error');
             redirect('/recover');
@@ -75,16 +71,18 @@ class RecoverController extends MainController
         $user = UserModel::getUser($user_id['activate_user_id'], 'id');
         Base::PageError404($user);
 
-        $uid  = Base::getUid();
-        $data = [
-            'h1'            => lang('Password Recovery'),
-            'code'          => $code,
-            'user_id'       => $user_id['activate_user_id'],
+        $meta = [
             'sheet'         => 'recovery',
             'meta_title'    => lang('Password Recovery') . ' | ' . Config::get(Config::PARAM_NAME),
         ];
+        
+        $data = [
+            'code'          => $code,
+            'user_id'       => $user_id['activate_user_id'],
+            'sheet'         => 'recovery',
+        ];
 
-        return view(PR_VIEW_DIR . '/auth/newrecover', ['data' => $data, 'uid' => $uid]);
+        return view('/auth/newrecover', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
     }
 
     public function remindNew()
@@ -115,11 +113,9 @@ class RecoverController extends MainController
     // Проверка корректности E-mail
     public function ActivateEmail()
     {
-        // Код активации
         $code = Request::get('code');
-
-        // Проверяем код
         $activate_email = UserModel::getEmailActivate($code);
+        
         if (!$activate_email) {
             Base::addMsg(lang('code-used'), 'error');
             redirect('/');

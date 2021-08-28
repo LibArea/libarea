@@ -36,7 +36,7 @@ class AuditModel extends MainModel
             $sort = "audit_read_flag = 1";
         }
 
-        $sql = "SELECT id FROM users WHERE $sort";
+        $sql = "SELECT audit_id, audit_read_flag FROM audits WHERE $sort";
 
         return DB::run($sql)->rowCount();
     }

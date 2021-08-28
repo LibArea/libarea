@@ -34,7 +34,7 @@ class ReportsController extends MainController
             'sheet'         => 'reports',
         ];
 
-        return view('/templates/reports', ['data' => $data, 'uid' => $uid, 'reports' => $result]);
+        includeTemplate('/templates/reports', ['data' => $data, 'uid' => $uid, 'reports' => $result]);
     }
 
     // Ознакомился

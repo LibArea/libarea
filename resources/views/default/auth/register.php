@@ -1,9 +1,8 @@
-<?php include TEMPLATE_DIR . '/header.php'; ?>
 <div class="wrap">
   <main>
     <div class="white-box">
       <div class="pt5 pr15 pb5 pl15">
-        <h1><?= $data['h1']; ?></h1>
+        <h1><?= lang('Sign up'); ?></h1>
         <div class="form mini">
           <form class="" action="/register/add" method="post">
             <?php csrf_field(); ?>
@@ -36,7 +35,7 @@
             <div class="boxline">
               <div class="boxline">
                 <button type="submit" class="button"><?= lang('Sign up'); ?></button>
-                <span class="mr5 ml5 size-13"><a href="/login"><?= lang('Sign in'); ?></a></span>
+                <span class="mr5 ml15 size-13"><a href="/login"><?= lang('Sign in'); ?></a></span>
               </div>
             </div>
           </form>
@@ -52,4 +51,3 @@
     </div>
   </aside>
 </div>
-<?php include TEMPLATE_DIR . '/footer.php'; ?>

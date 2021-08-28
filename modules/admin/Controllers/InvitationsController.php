@@ -26,6 +26,6 @@ class InvitationsController extends MainController
             'sheet'         => $sheet == 'all' ? 'invitations' : $sheet,
         ];
 
-        return view('/templates/invitations', ['data' => $data, 'uid' => $uid, 'invitations' => $result]);
+        includeTemplate('/templates/invitations', ['data' => $data, 'uid' => $uid, 'invitations' => $result]);
     }
 }

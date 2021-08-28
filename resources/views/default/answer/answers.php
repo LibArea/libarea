@@ -1,14 +1,12 @@
-<?php include TEMPLATE_DIR . '/header.php'; ?>
 <div class="wrap">
   <main>
     <div class="white-box">
       <div class="pt5 pr15 pb5 pl15">
-        <h1><?= $data['h1']; ?></h1>
+        <h1><?= lang('All answers'); ?></h1>
         <br>
         <div class="telo">
-          <?php if (!empty($answers)) { ?>
-
-            <?php foreach ($answers as $answer) { ?>
+          <?php if (!empty($data['answers'])) { ?>
+            <?php foreach ($data['answers'] as $answer) { ?>
               <?php if ($answer['answer_is_deleted'] == 0) { ?>
                 <div class="answ-telo_bottom">
                   <div class="flex size-13">
@@ -17,12 +15,10 @@
                       <?= $answer['user_login']; ?>
                     </a>
                     <span class="gray lowercase"><?= $answer['date']; ?></span>
-                    <span class="mr5 ml5"> &#183; </span>
+                  </div>
                     <a href="/post/<?= $answer['post_id']; ?>/<?= $answer['post_slug']; ?>#answer_<?= $answer['answer_id']; ?>">
                       <?= $answer['post_title']; ?>
                     </a>
-                  </div>
-
                   <div class="answ-telo-body">
                     <?= $answer['answer_content']; ?>
                   </div>
@@ -59,4 +55,3 @@
     <?php } ?>
   </aside>
 </div>
-<?php include TEMPLATE_DIR . '/footer.php'; ?>

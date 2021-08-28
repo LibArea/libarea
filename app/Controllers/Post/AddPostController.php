@@ -78,7 +78,7 @@ class AddPostController extends MainController
                     'link_user_id'      => $uid['user_id'],
                     'link_type'         => 0,
                     'link_status'       => 200,
-                    'link_cat_id'       => 1,
+                    'link_category_id'  => 1,
                 ];
                 WebModel::addLink($data);
             } else {
@@ -199,16 +199,12 @@ class AddPostController extends MainController
 
     // Форма добавление поста
     public function add()
-    {
-        $uid        = Base::getUid();
+    { 
+        $uid        = Base::getUid(); 
+        
+      
         $spaces     = SpaceModel::getSpaceSelect($uid['user_id'], $uid['user_trust_level']);
         $space_id   = Request::getInt('space_id');
-
-        $data = [
-            'sheet'         => 'add-post',
-            'h1'            => lang('Add post'),
-            'meta_title'    => lang('Add post') . ' | ' . Config::get(Config::PARAM_NAME),
-        ];
 
         Request::getHead()->addStyles('/assets/css/image-uploader.css');
         Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
@@ -223,7 +219,17 @@ class AddPostController extends MainController
             Request::getResources()->addBottomScript('/assets/js/select2.min.js');
         }
 
-        return view(PR_VIEW_DIR . '/post/add', ['data' => $data, 'uid' => $uid, 'spaces' => $spaces, 'space_id' => $space_id]);
+        $meta = [
+            'sheet'         => 'add-post',
+            'meta_title'    => lang('Add post') . ' | ' . Config::get(Config::PARAM_NAME),
+        ];
+
+        $data = [
+            'spaces'    => $spaces,
+            'space_id'  => $space_id,
+        ];
+
+        return view('/post/add', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
 
     // Парсинг
@@ -300,28 +306,5 @@ class AddPostController extends MainController
         ActionModel::moderationsAdd($data);
 
         return true;
-    }
-
-    // Журнал логирования удалений / восстановлений контента
-    public function moderation()
-    {
-        $moderations_log    = ActionModel::getModerations();
-
-        $result = array();
-        foreach ($moderations_log as $ind => $row) {
-            $row['mod_created_at']    = lang_date($row['mod_created_at']);
-            $result[$ind]   = $row;
-        }
-
-        $uid  = Base::getUid();
-        $data = [
-            'h1'            => lang('Moderation Log'),
-            'canonical'     => '/moderations',
-            'sheet'         => 'moderations',
-            'meta_title'    => lang('Moderation Log') . ' | ' . Config::get(Config::PARAM_NAME),
-            'meta_desc'     => lang('meta-moderation') . ' ' . Config::get(Config::PARAM_HOME_TITLE),
-        ];
-
-        return view(PR_VIEW_DIR . '/moderation/index', ['data' => $data, 'uid' => $uid, 'moderations' => $result]);
     }
 }

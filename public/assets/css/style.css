@@ -713,8 +713,9 @@ ol.comment-telo {
   padding-left: 23px;
 }
 
-.comm-telo-body p {
-  margin: 8px 0;
+.comm-telo-body p,
+.answ-telo p {
+  margin: 5px 0;
 }
 
 .qa-footer {

@@ -1,11 +1,10 @@
-<?php include TEMPLATE_DIR . '/header.php'; ?>
 <div class="wrap">
   <main>
     <div class="white-box">
       <div class="pt5 pr15 pb5 pl15">
-        <h1><?= $data['h1']; ?></h1>
+        <h1><?= lang('Users'); ?></h1>
         <div class="all-users">
-          <?php foreach ($users as $ind => $user) { ?>
+          <?php foreach ($data['users'] as $ind => $user) { ?>
             <div class="column">
               <div class="user_card">
                 <div>
@@ -42,4 +41,3 @@
     <?php } ?>
   </aside>
 </div>
-<?php include TEMPLATE_DIR . '/footer.php'; ?>

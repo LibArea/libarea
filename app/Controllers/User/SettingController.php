@@ -26,13 +26,17 @@ class SettingController extends MainController
         $user = UserModel::getUser($uid['user_id'], 'id');
         Base::accountBan($user);
 
-        $data = [
-            'h1'            => lang('Setting profile'),
+        $meta = [
             'sheet'         => 'setting',
             'meta_title'    => lang('Setting profile'),
         ];
 
-        return view(PR_VIEW_DIR . '/user/setting/setting', ['data' => $data, 'uid' => $uid, 'user' => $user]);
+        $data = [
+            'sheet'         => 'setting',
+            'user'          => $user,
+        ];
+
+        return view('/user/setting/setting', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
 
     // Изменение профиля
@@ -81,18 +85,20 @@ class SettingController extends MainController
             redirect('/u/' . $uid['user_login'] . '/setting/avatar');
         }
 
-        $userInfo           = UserModel::getUser($uid['user_login'], 'slug');
-
-        $data = [
-            'h1'            => lang('Change avatar'),
-            'sheet'         => 'avatar',
-            'meta_title'    => lang('Change avatar')
-        ];
-
         Request::getHead()->addStyles('/assets/css/image-uploader.css');
         Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
 
-        return view(PR_VIEW_DIR . '/user/setting/avatar', ['data' => $data, 'uid' => $uid, 'user' => $userInfo]);
+        $meta = [
+            'sheet'         => 'avatar',
+            'meta_title'    => lang('Change avatar'),
+        ];
+
+        $data = [
+            'sheet' => 'avatar',
+            'user'  => UserModel::getUser($uid['user_login'], 'slug'),
+        ];
+
+        return view('/user/setting/avatar', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
 
     // Форма изменение пароля
@@ -105,16 +111,19 @@ class SettingController extends MainController
             redirect('/u/' . $uid['user_login'] . '/setting/security');
         }
 
-        $data = [
-            'h1'            => lang('Change password'),
-            'password'      => '',
-            'password2'     => '',
-            'password3'     => '',
+        $meta = [
             'sheet'         => 'security',
             'meta_title'    => lang('Change password') . ' | ' . Config::get(Config::PARAM_NAME),
         ];
 
-        return view(PR_VIEW_DIR . '/user/setting/security', ['data' => $data, 'uid' => $uid]);
+        $data = [
+            'password'      => '',
+            'password2'     => '',
+            'password3'     => '',
+            'sheet'         => 'security',
+        ];
+
+        return view('/user/setting/security', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
 
     // Изменение аватарки
@@ -214,7 +223,7 @@ class SettingController extends MainController
 
         redirect($redirect);
     }
-    
+
     // Форма настройки предпочтений участника
     function notificationsForm()
     {
@@ -232,18 +241,19 @@ class SettingController extends MainController
         $user = UserModel::getUser($uid['user_id'], 'id');
         Base::accountBan($user);
 
-        $setting = NotificationsModel::getUserSetting($uid['user_id']);
-        
-        $data = [
-            'h1'            => lang('Notifications'),
+        $meta = [
             'sheet'         => 'notifications',
             'meta_title'    => lang('Notifications'),
         ];
 
-        return view(PR_VIEW_DIR . '/user/setting/notifications', 
-                ['data' => $data, 'uid' => $uid, 'user' => $user, 'setting' => $setting]);
+        $data = [
+            'sheet'     => 'notifications',
+            'setting'   => NotificationsModel::getUserSetting($user['user_id']),
+        ];
+
+        return view('/user/setting/notifications', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
-    
+
     function notificationsEdit()
     {
         $uid                        = Base::getUid();
@@ -252,10 +262,10 @@ class SettingController extends MainController
             'setting_email_pm'          => Request::getPostInt('setting_email_pm'),
             'setting_email_appealed'    => Request::getPostInt('setting_email_appealed'),
         ];
-        
+
         NotificationsModel::setUserSetting($data, $uid['user_id']);
         Base::addMsg(lang('Change saved'), 'success');
-       
+
         redirect('/u/' . $uid['user_login'] . '/setting/notifications');
     }
 }

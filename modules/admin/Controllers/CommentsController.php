@@ -38,6 +38,6 @@ class CommentsController extends MainController
             'pNum'          => $page,
         ];
 
-        return view('/templates/comments', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
+        includeTemplate('/templates/comments', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
     }
 }

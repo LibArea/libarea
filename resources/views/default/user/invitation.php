@@ -1,9 +1,8 @@
-<?php include TEMPLATE_DIR . '/header.php'; ?>
 <div class="wrap">
   <main>
     <div class="white-box">
       <div class="pt5 pr15 pb5 pl15">
-        <?= breadcrumb('/', lang('Home'), '/u/' . $uid['user_login'], lang('Profile'), $data['h1']); ?>
+        <?= breadcrumb('/', lang('Home'), '/u/' . $uid['user_login'], lang('Profile'), lang('Invites')); ?>
 
         <?php if ($uid['user_trust_level'] > 1) { ?>
 
@@ -65,9 +64,8 @@
   <aside>
     <div class="white-box">
       <div class="p15">
-        <?= lang('Under development'); ?>...
+        <?= lang('You can invite your friends'); ?>...
       </div>
     </div>
   </aside>
 </div>
-<?php include TEMPLATE_DIR . '/footer.php'; ?>

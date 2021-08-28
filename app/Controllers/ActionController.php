@@ -69,15 +69,18 @@ class ActionController extends MainController
         }
 
         $uid  = Base::getUid();
-        $data = [
-            'h1'            => lang('Moderation Log'),
+        $meta = [
             'canonical'     => '/moderations',
             'sheet'         => 'moderations',
             'meta_title'    => lang('Moderation Log') . ' | ' . Config::get(Config::PARAM_NAME),
             'meta_desc'     => lang('meta-moderation') . ' ' . Config::get(Config::PARAM_HOME_TITLE),
         ];
 
-        return view(PR_VIEW_DIR . '/moderation/index', ['data' => $data, 'uid' => $uid, 'moderations' => $result]);
+        $data = [
+            'moderations'   => $result,
+        ];
+
+        return view('/moderation/index', ['data' => $data, 'meta' => $meta, 'uid' => $uid]);
     }
 
     // Связанные посты и выбор автора
@@ -89,5 +92,4 @@ class ActionController extends MainController
 
         return ActionModel::getSearch($search, $type);
     }
-   
 }

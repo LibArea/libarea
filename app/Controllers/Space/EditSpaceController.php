@@ -92,13 +92,16 @@ class EditSpaceController extends MainController
         Request::getHead()->addStyles('/assets/css/image-uploader.css');
         Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
 
-        $data = [
-            'h1'            => lang('Change') . ' — ' . $space['space_slug'],
+        $meta = [
             'sheet'         => 'edit-space',
             'meta_title'    => lang('Edit') . ' — ' . $space['space_slug'],
         ];
+        
+        $data = [
+            'space' => $space,
+        ];
 
-        return view(PR_VIEW_DIR . '/space/edit', ['data' => $data, 'uid' => $uid, 'space' => $space]);
+        return view('/space/edit', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
 
     // Форма изменения логотипа и обложки
@@ -117,13 +120,16 @@ class EditSpaceController extends MainController
         Request::getHead()->addStyles('/assets/css/image-uploader.css');
         Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
 
-        $data = [
-            'h1'            => lang('Logo') . ' - ' . $slug,
+        $meta = [
             'sheet'         => 'edit-logo',
             'meta_title'    => lang('Edit') . ' / ' . lang('Logo'),
         ];
+        
+        $data = [
+            'space' => $space,
+        ];
 
-        return view(PR_VIEW_DIR . '/space/edit-logo', ['data' => $data, 'uid' => $uid, 'space' => $space]);
+        return view('/space/edit-logo', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
 
     // Изменение логотипа и обложки

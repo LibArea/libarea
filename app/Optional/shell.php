@@ -8,10 +8,6 @@ declare(strict_types=1);
  * Сопоставление названий для используемых функций. При конфликте имен можно использовать другое имя.
  */
 
-function view($to, $data = null) { 
-    return hleb_v5ds34hop4nm1d_page_view($to, $data);
-}
-
 function render($name, $data = null) {
     return hleb_v10s20hdp8nm7c_render($name, $data);
 }
@@ -72,10 +68,6 @@ function getContentFromTemplate(string $template, array $params = []) {
     return hleb_e0b1036c1070101_template($template, $params, true);
 }
 
-function includeCachedTemplate(string $template, array $params = []) {
-    hleb_e0b1036c1070102_template($template, $params);
-}
-
 function includeOwnCachedTemplate(string $template, array $params = []) {
     hleb_ade9e72e1018c6_template($template, $params);
 }
@@ -103,5 +95,19 @@ function public_path() {
 function view_path() {
     return hleb_601e30l60p2ii1e0o469tl_view_path();
 }
+
+function includeCachedTemplate(string $template, array $params = []) {
+    hleb_e0b1036c1070102_template(PR_VIEW_DIR . $template, $params);
+}
+
+function show($to, $data = null) { 
+    return hleb_v5ds34hop4nm1d_page_view(PR_VIEW_DIR . $to, $data);
+}
+  
+function view(string $template, array $params = []) {
+   includeTemplate(PR_VIEW_DIR . '/header', ['uid' => $params['uid'], 'meta' => $params['meta']]);
+   includeTemplate(PR_VIEW_DIR . $template, ['uid' => $params['uid'], 'data' => $params['data']]);
+   includeTemplate(PR_VIEW_DIR . '/footer', ['uid' => $params['uid']]);
+} 
   
 hleb_require(HLEB_GLOBAL_DIRECTORY . '/app/Libraries/Template.php');

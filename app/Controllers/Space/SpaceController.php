@@ -28,25 +28,25 @@ class SpaceController extends MainController
         $total_allowed      = $uid['user_trust_level'] == 5 ? 999 : 3;
         $add_space_button   = Validation::validTl($uid['user_trust_level'], Config::get(Config::PARAM_TL_ADD_SPACE), $count_space, $total_allowed);
 
-        $result = array();
-        foreach ($spaces as $ind => $row) {
-            $row['users']   = SpaceModel::numSpaceSubscribers($row['space_id']);
-            $result[$ind]   = $row;
-        }
-
         Request::getHead()->addStyles('/assets/css/space.css');
 
-        $data = [
-            'h1'            => lang('All space'),
+        $meta = [
             'canonical'     => Config::get(Config::PARAM_URL) . '/spaces',
             'sheet'         => 'spaces',
-            'pagesCount'    => ceil($pagesCount / $limit),
-            'pNum'          => $page,
             'meta_title'    => lang('All space') . ' | ' . Config::get(Config::PARAM_NAME),
             'meta_desc'     => lang('all-space-desc') . ' ' . Config::get(Config::PARAM_HOME_TITLE),
         ];
 
-        return view(PR_VIEW_DIR . '/space/spaces', ['data' => $data, 'uid' => $uid, 'spaces' => $result, 'add_space_button' => $add_space_button]);
+        $data = [
+            'h1'                => lang('All space'),
+            'sheet'             => 'spaces',
+            'pagesCount'        => ceil($pagesCount / $limit),
+            'pNum'              => $page,
+            'spaces'            => $spaces, 
+            'add_space_button'  => $add_space_button
+        ];
+
+        return view('/space/spaces', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
 
     // Пространства участника
@@ -65,25 +65,25 @@ class SpaceController extends MainController
         $count_space        = count($all_space);
         $add_space_button   = Validation::validTl($uid['user_trust_level'], Config::get(Config::PARAM_TL_ADD_SPACE), $count_space, 3);
 
-        $result = array();
-        foreach ($space as $ind => $row) {
-            $row['users']   = SpaceModel::numSpaceSubscribers($row['space_id']);
-            $result[$ind]   = $row;
-        }
-
         Request::getHead()->addStyles('/assets/css/space.css');
 
-        $data = [
-            'h1'            => lang('I read space'),
+        $meta = [
             'canonical'     => Config::get(Config::PARAM_URL) . '/space/my',
             'sheet'         => 'my-space',
-            'pagesCount'    => ceil($pagesCount / $limit),
-            'pNum'          => $page,
             'meta_title'    => lang('I read space') . ' | ' . Config::get(Config::PARAM_NAME),
             'meta_desc'     => lang('I read space') . ' ' . Config::get(Config::PARAM_HOME_TITLE),
         ];
+        
+        $data = [
+            'h1'                => lang('I read space'),
+            'sheet'             => 'my-space',
+            'pagesCount'        => ceil($pagesCount / $limit),
+            'pNum'              => $page,
+            'spaces'            => $space, 
+            'add_space_button'  => $add_space_button,
+        ];
 
-        return view(PR_VIEW_DIR . '/space/spaces', ['data' => $data, 'uid' => $uid, 'spaces' => $result, 'add_space_button' => $add_space_button]);
+        return view('/space/spaces', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
 
     // Посты по пространству
@@ -107,16 +107,14 @@ class SpaceController extends MainController
         $space['space_cont_post']   = count($posts);
         $space['space_text']        = Content::text($space['space_text'], 'text');
 
-        $result = array();
+        $post_result = array();
         foreach ($posts as $ind => $row) {
             $text = explode("\n", $row['post_content']);
             $row['post_content_preview']    = Content::text($text[0], 'line');
             $row['lang_num_answers']        = word_form($row['post_answers_count'], lang('Answer'), lang('Answers-m'), lang('Answers'));
             $row['post_date']               = lang_date($row['post_date']);
-            $result[$ind]                   = $row;
+            $post_result[$ind]                   = $row;
         }
-
-        $space['users'] = SpaceModel::numSpaceSubscribers($space['space_id']);
 
         // Отписан участник от пространства или нет
         $space_signed = SubscriptionModel::getFocus($space['space_id'], $uid['user_id'], 'space');
@@ -142,18 +140,26 @@ class SpaceController extends MainController
 
         Request::getHead()->addStyles('/assets/css/space.css');
         
-        $data = [
-            'h1'            => $space['space_name'],
+        $meta = [
             'canonical'     => Config::get(Config::PARAM_URL) . '/s/' . $space['space_slug'],
             'img'           => Config::get(Config::PARAM_URL) . '/uploads/spaces/logos/' . $space['space_img'],
-            'pagesCount'    => ceil($pagesCount / $limit),
-            'pNum'          => $page,
             'sheet'         => $sheet,
             'meta_title'    => $title . Config::get(Config::PARAM_NAME),
             'meta_desc'     => $description . ' ' . Config::get(Config::PARAM_HOME_TITLE),
         ];
+        
+        $data = [
+            'h1'            => $space['space_name'],
+            'sheet'         => $sheet,
+            'pagesCount'    => ceil($pagesCount / $limit),
+            'pNum'          => $page,
+            'posts'         => $post_result,
+            'space'         => $space, 
+            'signed'        => $space_signed, 
+            'writers'       => $writers
+        ];
 
-        return view(PR_VIEW_DIR . '/space/space', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'space' => $space, 'signed' => $space_signed, 'writers' => $writers]);
+        return view('/space/space', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     } 
     
 }

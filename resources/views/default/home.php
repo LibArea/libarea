@@ -1,5 +1,3 @@
-<?php include TEMPLATE_DIR . '/header.php'; ?>
-
 <?php if ($uid['user_id'] == 0) { ?>
   <div class="banner bg-blue-100 hidden size-15">
     <div class="pt15 pb5">
@@ -124,4 +122,3 @@
     <?php } ?>
   </aside>
 </div>
-<?php include TEMPLATE_DIR . '/footer.php'; ?>

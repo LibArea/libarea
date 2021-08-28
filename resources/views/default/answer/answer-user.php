@@ -1,4 +1,3 @@
-<?php include TEMPLATE_DIR . '/header.php'; ?>
 <div class="wrap">
   <main>
     <div class="white-box">
@@ -6,9 +5,8 @@
         <?= breadcrumb('/', lang('Home'), '/u/' . Request::get('login'), lang('Profile'), $data['h1']); ?>
       </div>
     </div>
-
-    <?php if (!empty($answers)) { ?>
-      <?php foreach ($answers as $answer) { ?>
+    <?php if (!empty($data['answers'])) { ?>
+      <?php foreach ($data['answers'] as $answer) { ?>
         <?php if ($answer['answer_is_deleted'] == 0) { ?>
           <div class="white-box">
             <div class="pt15 pr15 pb0 pl15 size-13">
@@ -40,10 +38,8 @@
     <?php } else { ?>
       <?= no_content('No answers'); ?>
     <?php } ?>
-
   </main>
   <aside>
     <?php include TEMPLATE_DIR . '/_block/user-menu.php'; ?>
   </aside>
 </div>
-<?php include TEMPLATE_DIR . '/footer.php'; ?>

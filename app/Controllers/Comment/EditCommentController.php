@@ -21,9 +21,8 @@ class EditCommentController extends MainController
         $post       = PostModel::getPostId($post_id);
         Base::PageRedirection($post, '/');
 
-        $comment = CommentModel::getCommentsId($comment_id);
-
         // Проверка доступа 
+        $comment = CommentModel::getCommentsId($comment_id);
         if (!accessСheck($comment, 'comment', $uid, 0, 0)) {
             redirect('/');
         }
@@ -49,9 +48,8 @@ class EditCommentController extends MainController
         $post_id        = Request::getPostInt('post_id');
         $uid            = Base::getUid();
 
-        $comment = CommentModel::getCommentsId($comment_id);
-
         // Проверка доступа 
+        $comment = CommentModel::getCommentsId($comment_id);
         if (!accessСheck($comment, 'comment', $uid, 0, 0)) {
             redirect('/');
         }
@@ -59,10 +57,9 @@ class EditCommentController extends MainController
         $data = [
             'comment_id'        => $comment_id,
             'post_id'           => $post_id,
-            'user_id'           => $uid['user_id'],
             'comment_content'   => $comment['comment_content'],
         ];
 
-        return view(PR_VIEW_DIR . '/comment/edit-form-comment', ['data' => $data]);
+        return show('/comment/edit-form-comment', ['data' => $data, 'uid' => $uid]);
     }
 }

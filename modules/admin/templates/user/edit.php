@@ -60,7 +60,7 @@
               <?php } ?>
               <?php if ($data['answers_count'] != 0) { ?>
                 <label class="required"><?= lang('Answers'); ?>:</label>
-                <a target="_blank" rel="noopener noreferrer" title="<?= lang('Answers'); ?> <?= $user['login']; ?>" href="/u/<?= $user['user_login']; ?>/answers">
+                <a target="_blank" rel="noopener noreferrer" title="<?= lang('Answers'); ?> <?= $user['user_login']; ?>" href="/u/<?= $user['user_login']; ?>/answers">
                   <?= $data['answers_count']; ?>
                 </a>
                 <br>

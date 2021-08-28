@@ -11,6 +11,7 @@ class HomeModel extends MainModel
     // Посты на центральной странице
     public static function feed($page, $limit, $space_user, $uid, $type)
     {
+        
         $result = array();
         foreach ($space_user as $ind => $row) {
             $result[$ind] = $row['signed_space_id'];
@@ -148,16 +149,17 @@ class HomeModel extends MainModel
     // Последние 5 ответа на главной
     public static function latestAnswers($uid)
     {
-        $user_answer = "AND space_feed = 0 AND post_tl = 0";
+        $tl = $uid['user_trust_level']; 
+        $user_answer = "AND space_feed = :zero AND post_tl = :zero";
         if ($uid['user_id']) {
-            $user_answer = "AND space_feed = 0 AND answer_user_id != :user_id AND post_tl <=" . $uid['user_trust_level'];
+            $user_answer = "AND space_feed = :zero AND answer_user_id != :id AND post_tl <= $tl";
 
             if ($uid['user_trust_level'] != 5) {
-                $user_answer = "AND answer_user_id != :user_id";
+                $user_answer = "AND answer_user_id != :id";
             }
         }
 
-        $sql = "SELECT 
+         $sql = "SELECT 
                     answer_id,
                     answer_post_id,
                     answer_user_id,
@@ -178,11 +180,11 @@ class HomeModel extends MainModel
                         LEFT JOIN posts ON post_id = answer_post_id
                         LEFT JOIN users ON user_id = answer_user_id
                         LEFT JOIN spaces ON post_space_id = space_id 
-                        WHERE answer_is_deleted = 0 
+                        WHERE answer_is_deleted = :zero 
                         $user_answer 
                         ORDER BY answer_id DESC LIMIT 5";
 
-        return DB::run($sql, ['user_id' =>$uid['user_id']])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['id' => $uid['user_id'], 'zero' => 0])->fetchAll(PDO::FETCH_ASSOC); 
     }
 
     // Пространства все / подписан

@@ -1,15 +1,14 @@
-<?php include TEMPLATE_DIR . '/header.php'; ?>
 <div class="wrap">
   <main>
     <div class="white-box">
       <div class="pt5 pr15 pb0 pl15">
-        <?= breadcrumb('/', lang('Home'), '/u/' . $uid['user_login'], lang('Profile'), $data['h1']); ?>
+        <?= breadcrumb('/', lang('Home'), '/u/' . $uid['user_login'], lang('Profile'), lang('Change avatar')); ?>
         <?php include TEMPLATE_DIR . '/_block/setting-nav.php'; ?>
       </div>
     </div>
     <div class="white-box">
       <div class="pt15 pr15 pb5 pl15 box setting avatar">
-        <?= user_avatar_img($user['user_avatar'], 'max', $user['user_login'], 'ava'); ?>
+        <?= user_avatar_img($data['user']['user_avatar'], 'max', $data['user']['user_login'], 'ava'); ?>
         <form method="POST" action="/users/setting/avatar/edit" enctype="multipart/form-data">
           <?= csrf_field() ?>
           <div class="box-form-img">
@@ -22,8 +21,8 @@
             <p><input type="submit" class="button" value="<?= lang('Download'); ?>" /></p>
           </div>
           <br>
-          <?php if ($user['user_cover_art'] != 'cover_art.jpeg') { ?>
-            <img class="cover" src="<?= user_cover_url($user['user_cover_art']); ?>">
+          <?php if ($data['user']['user_cover_art'] != 'cover_art.jpeg') { ?>
+            <img class="cover" src="<?= user_cover_url($data['user']['user_cover_art']); ?>">
             <a class="right size-13" href="/u/<?= $uid['user_login']; ?>/delete/cover">
               <?= lang('Remove'); ?>
             </a>
@@ -53,4 +52,3 @@
     </div>
   </aside>
 </div>
-<?php include TEMPLATE_DIR . '/footer.php'; ?>

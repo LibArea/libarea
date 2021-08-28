@@ -1,15 +1,14 @@
-<?php include TEMPLATE_DIR . '/header.php'; ?>
 <div class="wrap">
   <main>
     <div class="white-box">
       <div class="pt5 pr15 pb0 pl15">
-        <?= breadcrumb('/', lang('Home'), '/u/' . $uid['user_login'], lang('Profile'), $data['h1']); ?>
+        <?= breadcrumb('/', lang('Home'), '/u/' . $uid['user_login'], lang('Profile'), lang('Favorites')); ?>
         <?php include TEMPLATE_DIR . '/_block/favorite-nav.php'; ?>
       </div>
     </div>
 
-    <?php if (!empty($favorite)) { ?>
-      <?php foreach ($favorite as $fav) { ?>
+    <?php if (!empty($data['favorites'])) { ?>
+      <?php foreach ($data['favorites'] as $fav) { ?>
         <div class="white-box">
           <div class="pt5 pr15 pb5 pl15">
             <?php if ($fav['favorite_type'] == 1) { ?>
@@ -85,4 +84,3 @@
     </div>
   </aside>
 </div>
-<?php include TEMPLATE_DIR . '/footer.php'; ?>

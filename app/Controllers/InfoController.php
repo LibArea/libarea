@@ -13,16 +13,18 @@ class InfoController extends MainController
         $text = file_get_contents(TEMPLATE_DIR . '/info/md/index.md');
 
         $uid  = Base::getUid();
-        $data = [
-            'h1'            => lang('Info'),
-            'content'       => Content::text($text, 'text'),
-            'canonical'     => Config::get(Config::PARAM_URL) . '/info',
+        $meta = [
             'sheet'         => 'info',
+            'canonical'     => Config::get(Config::PARAM_URL) . '/info',
             'meta_title'    => lang('Info') . ' | ' . Config::get(Config::PARAM_NAME),
             'meta_desc'     => lang('info-desc') . ' ' . Config::get(Config::PARAM_HOME_TITLE),
         ];
 
-        return view(PR_VIEW_DIR . '/info/index', ['data' => $data, 'uid' => $uid]);
+        $data = [
+            'content'       => Content::text($text, 'text'),
+        ];
+
+        return view('/info/index', ['data' => $data, 'meta' => $meta, 'uid' => $uid]);
     }
 
     public function privacy()
@@ -30,8 +32,7 @@ class InfoController extends MainController
         $text = file_get_contents(TEMPLATE_DIR . '/info/md/privacy.md');
 
         $uid  = Base::getUid();
-        $data = [
-            'h1'            => lang('Privacy Policy'),
+        $meta = [
             'content'       => Content::text($text, 'text'),
             'canonical'     => Config::get(Config::PARAM_URL) . '/info/privacy',
             'sheet'         => 'privacy',
@@ -39,20 +40,23 @@ class InfoController extends MainController
             'meta_desc'     => lang('privacy-desc') . ' ' . Config::get(Config::PARAM_HOME_TITLE),
         ];
 
-        return view(PR_VIEW_DIR . '/info/privacy', ['data' => $data, 'uid' => $uid]);
+        $data = [
+            'content'       => Content::text($text, 'text'),
+        ];
+
+        return view('/info/privacy', ['data' => $data, 'meta' => $meta, 'uid' => $uid]);
     }
 
     public function restriction()
     {
         $uid  = Base::getUid();
-        $data = [
-            'h1'            => lang('Restriction'),
+        $meta = [
             'canonical'     => Config::get(Config::PARAM_URL) . '/info/restriction',
             'sheet'         => 'info-restriction',
             'meta_title'    => lang('Restriction') . ' | ' . Config::get(Config::PARAM_NAME),
             'meta_desc'     => lang('Restriction') . ' ' . Config::get(Config::PARAM_HOME_TITLE),
         ];
 
-        return view(PR_VIEW_DIR . '/info/restriction', ['data' => $data, 'uid' => $uid]);
+        return view('/info/restriction', ['meta' => $meta, 'uid' => $uid]);
     }
 }

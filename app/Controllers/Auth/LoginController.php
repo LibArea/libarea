@@ -4,7 +4,7 @@ namespace App\Controllers\Auth;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\{UserModel, AuthModel};
+use App\Models\UserModel;
 use Lori\{Config, Base, Validation};
 
 
@@ -62,15 +62,13 @@ class LoginController extends MainController
     // Страница авторизации
     public function showLoginForm()
     {
-        $uid  = Base::getUid();
-        $data = [
-            'h1'            => lang('Sign in'),
+        $meta = [
             'sheet'         => 'login',
             'canonical'     => Config::get(Config::PARAM_URL) . '/login',
             'meta_title'    => lang('Sign in') . ' | ' . Config::get(Config::PARAM_NAME),
             'meta_desc'     => lang('info_login'),
         ];
 
-        return view(PR_VIEW_DIR . '/auth/login', ['data' => $data, 'uid' => $uid]);
+        return view('/auth/login', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => []]);
     }
 }

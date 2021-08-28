@@ -1,9 +1,8 @@
-<?php include TEMPLATE_DIR . '/header.php'; ?>
 <div class="wrap">
   <main>
     <div class="white-box">
       <div class="pt5 pr15 pb5 pl15">
-        <h1><?= $data['h1']; ?></h1>
+        <h1><?= lang('Password Recovery'); ?></h1>
         <div class="box wide">
           <form class="" action="/recover/send/pass" method="post">
             <?php csrf_field(); ?>
@@ -30,4 +29,3 @@
     </div>
   </main>
 </div>
-<?php include TEMPLATE_DIR . '/footer.php'; ?>

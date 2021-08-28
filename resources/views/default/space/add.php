@@ -1,9 +1,8 @@
-<?php include TEMPLATE_DIR . '/header.php'; ?>
 <div class="wrap">
   <main>
     <div class="white-box">
       <div class="pt5 pr15 pb5 pl15">
-        <?= breadcrumb('/', lang('Home'), '/spaces', lang('Spaces'), $data['h1']); ?>
+        <?= breadcrumb('/', lang('Home'), '/spaces', lang('Spaces'), lang('Add Space')); ?>
 
         <div class="max-width space">
           <div class="box create">
@@ -36,7 +35,7 @@
               </div>
             </form>
             <div class="boxline">
-              Вы можете добавить пространств: <b><?= $num_add_space; ?></b>
+              Вы можете добавить пространств: <b><?= $data['num_add_space']; ?></b>
             </div>
           </div>
         </div>
@@ -51,4 +50,3 @@
     </div>
   </aside>
 </div>
-<?php include TEMPLATE_DIR . '/footer.php'; ?>

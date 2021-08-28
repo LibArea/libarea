@@ -1,11 +1,12 @@
-<?php if (!empty($answers)) { ?>
+<?php if (!empty($data['answers'])) { ?>
   <div class="white-box p15">
     <h2 class="lowercase m0 size-21">
-      <?= $post['post_answers_count'] + $post['post_comments_count'] ?> <?= $post['num_comments'] ?>
+      <?= $data['post']['post_answers_count'] + $data['post']['post_comments_count'] ?> 
+      <?= $data['post']['num_comments'] ?>
     </h2>
     <div class="border-bottom mt5 mb10"></div>
     <?php $n = 0;
-    foreach ($answers as  $answer) {
+    foreach ($data['answers'] as  $answer) {
       $n++; ?>
 
       <div class="block-answer">
@@ -31,13 +32,13 @@
                         (<?= lang('ed'); ?>.)
                       </span>
                     <?php } ?>
-                    <?php if ($post['post_user_id'] == $answer['answer_user_id']) { ?>
+                    <?php if ($data['post']['post_user_id'] == $answer['answer_user_id']) { ?>
                       <span class="mr5 ml5">
                         <span class="red">&#x21af;</span>
                       </span>
                     <?php } ?>
                     <span class="mr5 ml5">
-                      <a rel="nofollow" class="gray-light" href="<?= post_url($post); ?>#answer_<?= $answer['answer_id']; ?>">#</a>
+                      <a rel="nofollow" class="gray-light" href="<?= post_url($data['post']); ?>#answer_<?= $answer['answer_id']; ?>">#</a>
                     </span>
                     <?php if ($uid['user_trust_level'] == 5) { ?>
                       <span class="mr5 ml5">
@@ -47,17 +48,17 @@
                       </span>
                     <?php } ?>
                   </div>
-                  <div class="mt5 mr0 mb10 ml0 size-15">
+                  <div class="mt0 mr0 mb5 ml0 size-15">
                     <?= $answer['answer_content'] ?>
                   </div>
                 </div>
                 <div class="flex size-13">
                   <?= votes($uid['user_id'], $answer, 'answer'); ?>
 
-                  <?php if ($post['post_closed'] == 0) { ?>
-                    <?php if ($post['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
+                  <?php if ($data['post']['post_closed'] == 0) { ?>
+                    <?php if ($data['post']['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
                       <span class="mr5 ml5">
-                        <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray"><?= lang('Reply'); ?></a>
+                        <a data-post_id="<?= $data['post']['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray"><?= lang('Reply'); ?></a>
                       </span>
                     <?php } ?>
                   <?php } ?>
@@ -90,7 +91,7 @@
                   <?php } ?>
                   <?php if ($uid['user_id'] != $answer['answer_user_id'] && $uid['user_trust_level'] > 0) { ?>
                     <span id="answer_dell" class="ml15">
-                      <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray">
+                      <a data-post_id="<?= $data['post']['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray">
                         <?= lang('Report'); ?>
                       </a>
                     </span>
@@ -143,22 +144,22 @@
                     <span class="mr5 ml5 gray-light lowercase">
                       <?= lang_date($comment['comment_date']); ?>
                     </span>
-                    <?php if ($post['post_user_id'] == $comment['comment_user_id']) { ?>
+                    <?php if ($data['post']['post_user_id'] == $comment['comment_user_id']) { ?>
                       <span class="mr10 ml10">
                         <span class="red">&#x21af;</span>
                       </span>
                     <?php } ?>
                     <?php if ($comment['comment_comment_id'] > 0) { ?>
                       <span class="mr10 ml10">
-                        <a class="gray-light" rel="nofollow" href="<?= post_url($post); ?>#comment_<?= $comment['comment_comment_id']; ?>">&uarr;</a>
+                        <a class="gray-light" rel="nofollow" href="<?= post_url($data['post']); ?>#comment_<?= $comment['comment_comment_id']; ?>">&uarr;</a>
                       </span>
                     <?php } else { ?>
                       <span class="mr10 ml10">
-                        <a class="gray-light" rel="nofollow" href="<?= post_url($post); ?>#answer_<?= $comment['comment_answer_id']; ?>">&uarr;</a>
+                        <a class="gray-light" rel="nofollow" href="<?= post_url($data['post']); ?>#answer_<?= $comment['comment_answer_id']; ?>">&uarr;</a>
                       </span>
                     <?php } ?>
                     <span class="mr10 ml10">
-                      <a class="gray-light" rel="nofollow" href="<?= post_url($post); ?>#comment_<?= $comment['comment_id']; ?>">#</a>
+                      <a class="gray-light" rel="nofollow" href="<?= post_url($data['post']); ?>#comment_<?= $comment['comment_id']; ?>">#</a>
                     </span>
                     <?php if ($uid['user_trust_level'] == 5) { ?>
                       <span class="ml10">
@@ -175,10 +176,10 @@
                 <div class="size-13 flex">
                   <?= votes($uid['user_id'], $comment, 'comment'); ?>
 
-                  <?php if ($post['post_closed'] == 0) { ?>
-                    <?php if ($post['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
+                  <?php if ($data['post']['post_closed'] == 0) { ?>
+                    <?php if ($data['post']['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
                       <span class="mr5 ml5">
-                        <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment-re gray">
+                        <a data-post_id="<?= $data['post']['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment-re gray">
                           <?= lang('Reply'); ?>
                         </a>
                       </span>
@@ -187,7 +188,7 @@
 
                   <?php if (accessСheck($comment, 'comment', $uid, 1, 30) === true) { ?>
                     <span id="comment_edit" class="mr10 ml10">
-                      <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray">
+                      <a data-post_id="<?= $data['post']['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray">
                         <?= lang('Edit'); ?>
                       </a>
                     </span>
@@ -199,7 +200,7 @@
                   <?php } ?>
                   <?php if ($uid['user_id'] != $comment['comment_user_id'] && $uid['user_trust_level'] > 0) { ?>
                     <span id="answer_dell" class="ml15">
-                      <a data-post_id="<?= $post['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray">
+                      <a data-post_id="<?= $data['post']['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray">
                         <?= lang('Report'); ?>
                       </a>
                     </span>
@@ -230,7 +231,7 @@
     <?php } ?>
   </div>
 <?php } else { ?>
-  <?php if ($post['post_closed'] != 1) { ?>
+  <?php if ($data['post']['post_closed'] != 1) { ?>
     <?= no_content('There are no comments'); ?>
   <?php } ?>
 <?php } ?>

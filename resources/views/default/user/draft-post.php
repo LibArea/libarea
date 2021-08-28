@@ -1,13 +1,11 @@
-<?php include TEMPLATE_DIR . '/header.php'; ?>
 <div class="wrap">
   <main>
     <div class="white-box">
       <div class="pt5 pr15 pb5 pl15">
-        <?= breadcrumb('/', lang('Home'), '/u/' . $uid['user_login'], lang('Profile'), $data['h1']); ?>
+        <?= breadcrumb('/', lang('Home'), '/u/' . $uid['user_login'], lang('Profile'), lang('Drafts')); ?>
         <div class="drafts max-width">
-          <?php if (!empty($drafts)) { ?>
-
-            <?php foreach ($drafts as $dr) { ?>
+          <?php if (!empty($data['drafts'])) { ?>
+            <?php foreach ($data['drafts'] as $dr) { ?>
               <div class="mb10">
                 <a href="/post/<?= $dr['post_id']; ?>/<?= $dr['post_slug']; ?>">
                   <h3 class="title m0 size-21"><?= $dr['post_title']; ?></h3>
@@ -18,11 +16,8 @@
                 </div>
               </div>
             <?php } ?>
-
           <?php } else { ?>
-
             <p><?= lang('There no drafts'); ?>...</p>
-            <br>
           <?php } ?>
         </div>
       </div>
@@ -36,4 +31,3 @@
     </div>
   </aside>
 </div>
-<?php include TEMPLATE_DIR . '/footer.php'; ?>

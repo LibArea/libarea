@@ -41,7 +41,7 @@ function topic_logo_img($file, $size, $alt, $style)
 }
 
 // Space logo img
-function spase_logo_img($file, $size = 'small', $alt, $style)
+function spase_logo_img($file, $size, $alt, $style)
 {
     $src = '/uploads/spaces/logos/' . $file;
     if ($size == 'small') {
@@ -54,7 +54,7 @@ function spase_logo_img($file, $size = 'small', $alt, $style)
 }
 
 // User's Avatar
-function user_avatar_img($file, $size = 'small', $alt, $style)
+function user_avatar_img($file, $size, $alt, $style)
 {
     $src = '/uploads/users/avatars/' . $file;
     if ($size == 'small') {

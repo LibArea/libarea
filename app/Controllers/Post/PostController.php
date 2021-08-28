@@ -5,12 +5,7 @@ namespace App\Controllers\Post;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\SubscriptionModel;
-use App\Models\UserModel;
-use App\Models\PostModel;
-use App\Models\FeedModel;
-use App\Models\AnswerModel;
-use App\Models\CommentModel;
-use App\Models\FavoriteModel;
+use App\Models\{UserModel, PostModel, FeedModel, AnswerModel, CommentModel, FavoriteModel};
 use Lori\{Content, Config, Base};
 
 class PostController extends MainController
@@ -106,11 +101,11 @@ class PostController extends MainController
         $post_signed   = SubscriptionModel::getFocus($post['post_id'], $uid['user_id'], 'post');
 
         $desc  = mb_strcut(strip_tags($post['post_content']), 0, 180);
-        
+
         if ($desc == '') {
             $desc = strip_tags($post['post_title']);
         }
-        
+
         $meta_desc = $desc . ' — ' . $post['space_name'];
         $meta_title = strip_tags($post['post_title']) . ' — ' . strip_tags($post['space_name']) . ' | ' . Config::get(Config::PARAM_NAME);
 
@@ -128,24 +123,31 @@ class PostController extends MainController
             Request::getResources()->addBottomScript('/assets/editor/config-no-preview.js');
         }
 
-        $sheet = 'article';
-
         if ($post['post_related']) {
             $post_related = PostModel::postRelated($post['post_related']);
         }
         $post_related = empty($post_related) ? '' : $post_related;
 
-        $data = [
-            'h1'            => lang('Post'),
+        $meta = [
             'canonical'     => Config::get(Config::PARAM_URL) . '/post/' . $post['post_id'] . '/' . $post['post_slug'],
-            'sheet'         => $sheet,
+            'sheet'         => 'article',
             'post_date'     => $post['post_date'],
             'img'           => $content_img,
             'meta_title'    => $meta_title,
             'meta_desc'     => $meta_desc,
         ];
 
-        return view(PR_VIEW_DIR . '/post/view', ['data' => $data, 'post' => $post, 'answers' => $answers,  'uid' => $uid,  'recommend' => $recommend,  'lo' => $lo, 'post_related' => $post_related, 'topics' => $topics, 'post_signed' => $post_signed]);
+        $data = [
+            'post'          => $post,
+            'answers'       => $answers,
+            'recommend'     => $recommend,
+            'lo'            => $lo,
+            'post_related'  => $post_related,
+            'post_signed'   => $post_signed,
+            'topics'        => $topics
+        ];
+
+        return view('/post/view', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
 
     // Посты участника
@@ -177,15 +179,20 @@ class PostController extends MainController
         $h1 = lang('Posts') . ' ' . $login;
         $meta_desc  = lang('Participant posts') . ' ' . $login;
 
-        $data = [
+        $meta = [
             'canonical'     => Config::get(Config::PARAM_URL) . '/u/' . $login . '/posts',
             'sheet'         => 'user-post',
-            'h1'            => lang('Posts') . ' ' . $login,
             'meta_title'    => lang('Posts') . ' ' . $login . ' | ' . Config::get(Config::PARAM_NAME),
             'meta_desc'     => $meta_desc . ' ' . Config::get(Config::PARAM_HOME_TITLE),
         ];
 
-        return view(PR_VIEW_DIR . '/post/post-user', ['data' => $data, 'uid' => $uid, 'posts' => $result]);
+        $data = [
+            'h1'    => lang('Posts') . ' ' . $login,
+            'sheet' => 'user-post',
+            'posts' => $result,
+        ];
+
+        return view('/post/post-user', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
 
     // Размещение своего поста у себя в профиле
@@ -223,6 +230,6 @@ class PostController extends MainController
 
         $post['post_content'] = Content::text($post['post_content'], 'text');
 
-        return view(PR_VIEW_DIR . '/post/postcode', ['post' => $post]);
+        return show('/post/postcode', ['post' => $post]);
     }
 }

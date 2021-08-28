@@ -20,7 +20,7 @@ class RssController extends MainController
             'posts'     => $posts,
         ];
 
-        includeCachedTemplate(PR_VIEW_DIR . '/rss/sitemap', ['data' => $data]);
+        includeCachedTemplate('/rss/sitemap', ['data' => $data]);
     }
 
     public function turboFeed()
@@ -41,6 +41,6 @@ class RssController extends MainController
             'posts'     => $result,
         ];
 
-        includeCachedTemplate(PR_VIEW_DIR . '/rss/turbo-feed', ['data' => $data, 'space' => $space]);
+        includeCachedTemplate('/rss/turbo-feed', ['data' => $data, 'space' => $space]);
     }
 }

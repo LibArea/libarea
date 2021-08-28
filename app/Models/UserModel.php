@@ -413,7 +413,7 @@ class UserModel extends MainModel
     // Создадим инвайт для участника
     public static function addInvitation($user_id, $invitation_code, $invitation_email, $add_time, $add_ip)
     {
-        $sql = "UPDATE users SET invitation_available = (invitation_available + 1) WHERE id = :user_id";
+        $sql = "UPDATE users SET user_invitation_available = (user_invitation_available + 1) WHERE user_id = :user_id";
 
         DB::run($sql, ['user_id' => $user_id]);
 

@@ -1,9 +1,8 @@
-<?php include TEMPLATE_DIR . '/header.php'; ?>
 <div class="wrap">
   <main>
     <div class="white-box">
       <div class="pt5 pr15 pb0 pl15">
-        <?= breadcrumb('/', lang('Home'), '/u/' . $uid['user_login'], lang('Profile'), $data['h1']); ?>
+        <?= breadcrumb('/', lang('Home'), '/u/' . $uid['user_login'], lang('Profile'), lang('Notifications')); ?>
         <?php include TEMPLATE_DIR . '/_block/setting-nav.php'; ?>
       </div>
     </div>
@@ -16,15 +15,15 @@
             <label class="form-label" for="post_content">
               <?= lang('When the message came to PM'); ?>
             </label>
-            <input type="radio" name="setting_email_pm" <?php if (!empty($setting['setting_email_pm']) == 0) { ?>checked<?php } ?> value="0"> <?= lang('No'); ?>
-            <input type="radio" name="setting_email_pm" <?php if (!empty($setting['setting_email_pm']) == 1) { ?>checked<?php } ?> value="1"> <?= lang('Yes'); ?>
+            <input type="radio" name="setting_email_pm" <?php if (!empty($data['setting']['setting_email_pm']) == 0) { ?>checked<?php } ?> value="0"> <?= lang('No'); ?>
+            <input type="radio" name="setting_email_pm" <?php if (!empty($data['setting']['setting_email_pm']) == 1) { ?>checked<?php } ?> value="1"> <?= lang('Yes'); ?>
           </div>
           <div class="boxline">
             <label class="form-label" for="post_content">
               <?= lang('When you contacted me via @'); ?>
             </label>
-            <input type="radio" name="setting_email_appealed" <?php if (!empty($setting['setting_email_appealed']) == 0) { ?>checked<?php } ?> value="0"> <?= lang('No'); ?>
-            <input type="radio" name="setting_email_appealed" <?php if (!empty($setting['setting_email_appealed']) == 1) { ?>checked<?php } ?> value="1"> <?= lang('Yes'); ?>
+            <input type="radio" name="setting_email_appealed" <?php if (!empty($data['setting']['setting_email_appealed']) == 0) { ?>checked<?php } ?> value="0"> <?= lang('No'); ?>
+            <input type="radio" name="setting_email_appealed" <?php if (!empty($data['setting']['setting_email_appealed']) == 1) { ?>checked<?php } ?> value="1"> <?= lang('Yes'); ?>
           </div>
           <div class="boxline">
             <input type="hidden" name="nickname" id="nickname" value="">
@@ -42,4 +41,3 @@
     </div>
   </aside>
 </div>
-<?php include TEMPLATE_DIR . '/footer.php'; ?>

@@ -33,6 +33,7 @@ class MessagesController extends MainController
             $last_message = MessagesModel::getLastMessages($dialog_ids);
         }
 
+        $result = [];
         if ($messages_dialog) {
 
             $result = array();
@@ -55,18 +56,20 @@ class MessagesController extends MainController
                 $row['count_num']   = word_form($row['count'], lang('Message'), lang('Messages-m'), lang('Messages'));
                 $result[$ind]       = $row;
             }
-        } else {
-            $result = [];
         }
 
-        $data = [
-            'h1'            => lang('Private messages'),
+        $meta = [
             'meta_title'    => lang('Private messages') . ' | ' . Config::get(Config::PARAM_NAME),
             'sheet'         => 'all-mess',
             'messages'      => $result,
         ];
 
-        return view(PR_VIEW_DIR . '/messages/messages', ['data' => $data, 'uid' => $uid]);
+        $data = [
+            'sheet'         => 'all-mess',
+            'messages'      => $result,
+        ];
+
+        return view('/messages/messages', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
 
     public function dialog()
@@ -109,15 +112,19 @@ class MessagesController extends MainController
             }
         }
 
+        $meta = [
+            'meta_title'        => lang('Dialogue') . ' | ' . Config::get(Config::PARAM_NAME),
+            'sheet'             => 'dialog',
+        ];
+
         $data = [
             'h1'                => lang('Dialogue') . ' - ' . $list[$key]['user_login'],
-            'meta_title'        => lang('Dialogue') . ' | ' . Config::get(Config::PARAM_NAME),
             'sheet'             => 'dialog',
             'list'              => $list,
             'recipient_user'    => $recipient_user,
         ];
 
-        return view(PR_VIEW_DIR . '/messages/dialog', ['data' => $data, 'uid' => $uid]);
+        return view('/messages/dialog', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
 
     // Форма отправки из профиля
@@ -136,14 +143,16 @@ class MessagesController extends MainController
             redirect('/');
         }
 
-        $data = [
-            'h1'            => lang('Send a message') . ': ' . $login,
+        $meta = [
             'meta_title'    => lang('Send a message') . ' | ' . Config::get(Config::PARAM_NAME),
             'sheet'         => 'profil-mess',
+        ];
+
+        $data = [
             'recipient_uid' => $user['user_id'],
         ];
 
-        return view(PR_VIEW_DIR . '/messages/user-add-messages', ['data' => $data, 'uid' => $uid]);
+        return view('/messages/user-add-messages', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
 
     // Отправка сообщения участнику

@@ -33,19 +33,22 @@ class TopicController extends MainController
             $result[$ind]           = $row;
         }
 
-        $news = TopicModel::getTopicNew();
-
-        $data = [
-            'h1'            => lang('All topics'),
+        $meta = [
             'sheet'         => 'topics',
-            'pagesCount'    => ceil($pagesCount / $limit),
-            'pNum'          => $page,
             'canonical'     => Config::get(Config::PARAM_URL) . '/topics',
             'meta_title'    => lang('All topics') . $num . Config::get(Config::PARAM_NAME),
             'meta_desc'     => lang('topic-desc') . $num . Config::get(Config::PARAM_HOME_TITLE),
         ];
 
-        return view(PR_VIEW_DIR . '/topic/topics', ['data' => $data, 'uid' => $uid, 'topics' => $result, 'news' => $news]);
+        $data = [
+            'sheet'         => 'topics',
+            'topics'        => $result,
+            'pagesCount'    => ceil($pagesCount / $limit),
+            'pNum'          => $page,
+            'news'          => TopicModel::getTopicNew(),
+        ];
+
+        return view('/topic/topics', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
 
     // Посты по теме
@@ -59,7 +62,7 @@ class TopicController extends MainController
 
         $topic  = TopicModel::getTopic($slug, 'slug');
         Base::PageError404($topic);
-
+ 
         // Показываем корневую тему на странице подтемы 
         $main_topic   = '';
         if ($topic['topic_parent_id']  != 0) {
@@ -91,14 +94,8 @@ class TopicController extends MainController
             $result[$ind]                   = $row;
         }
 
-        $topic_related  = TopicModel::topicRelated($topic['topic_related']);
-        $topic_signed   = SubscriptionModel::getFocus($topic['topic_id'], $uid['user_id'], 'topic');
-
         $meta_title = $topic['topic_seo_title'] . ' — ' .  lang('Topic');
-        $data = [
-            'h1'            => $topic['topic_seo_title'],
-            'pagesCount'    => ceil($pagesCount / $limit),
-            'pNum'          => $page,
+        $meta = [
             'canonical'     => Config::get(Config::PARAM_URL) . '/topic/' . $topic['topic_slug'],
             'sheet'         => 'topic',
             'meta_title'    => $meta_title . ' | ' . Config::get(Config::PARAM_NAME),
@@ -106,7 +103,19 @@ class TopicController extends MainController
             'img'           => Config::get(Config::PARAM_URL) . '/uploads/topics/' . $topic['topic_img'],
         ];
 
-        return view(PR_VIEW_DIR . '/topic/topic', ['data' => $data, 'uid' => $uid, 'topic' => $topic, 'posts' => $result, 'topic_related' => $topic_related, 'topic_signed' => $topic_signed, 'main_topic' => $main_topic, 'subtopics' => $subtopics]);
+        $data = [
+            'pagesCount'    => ceil($pagesCount / $limit),
+            'pNum'          => $page,
+            'sheet'         => 'topic',
+            'topic'         => $topic,
+            'posts'         => $result,
+            'topic_related' => TopicModel::topicRelated($topic['topic_related']),
+            'topic_signed'  => SubscriptionModel::getFocus($topic['topic_id'], $uid['user_id'], 'topic'),
+            'main_topic'    => $main_topic,
+            'subtopics'     => $subtopics
+        ];
+
+        return view('/topic/topic', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
 
     // Информация по теме
@@ -122,9 +131,6 @@ class TopicController extends MainController
 
         $topic['topic_info']   = Content::text($topic['topic_info'], 'text');
 
-        $topic_related  = TopicModel::topicRelated($topic['topic_related']);
-        $post_related   = TopicModel::topicPostRelated($topic['topic_post_related']);
-
         // Показываем корневую тему на странице подтемы  
         $main_topic   = '';
         if ($topic['topic_parent_id']  != 0) {
@@ -138,7 +144,7 @@ class TopicController extends MainController
         }
 
         $meta_title = $topic['topic_seo_title'] . ' — ' .  lang('Info');
-        $data = [
+        $meta = [
             'h1'            => $topic['topic_seo_title'],
             'canonical'     => Config::get(Config::PARAM_URL) . '/topic/' . $topic['topic_slug'] . '/info',
             'sheet'         => 'info',
@@ -146,6 +152,15 @@ class TopicController extends MainController
             'meta_desc'     => $topic['topic_description'] . '. ' . lang('Info') . ' ' . Config::get(Config::PARAM_HOME_TITLE),
         ];
 
-        return view(PR_VIEW_DIR . '/topic/info', ['data' => $data, 'uid' => $uid, 'topic' => $topic, 'topic_related' => $topic_related, 'post_related' => $post_related, 'subtopics' => $subtopics, 'main_topic' => $main_topic]);
+        $data = [
+            'sheet'         => 'info',
+            'topic'         => $topic,
+            'topic_related' => TopicModel::topicRelated($topic['topic_related']),
+            'post_related'  => TopicModel::topicPostRelated($topic['topic_post_related']),
+            'subtopics'     => $subtopics,
+            'main_topic'    => $main_topic
+        ];
+
+        return view('/topic/info', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
 }

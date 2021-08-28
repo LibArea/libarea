@@ -77,7 +77,13 @@ class TopicModel extends MainModel
     // Связанные темы
     public static function topicRelated($topic_related)
     {
-        $sql = "SELECT topic_id, topic_title FROM topics WHERE topic_id IN(0, " . $topic_related . ") ";
+        $string = "topic_id IN(0)";
+        if ($topic_related) {
+            $string = "topic_id IN(0, " . $topic_related . ")";
+        }
+        
+        $sql = "SELECT topic_id, topic_title FROM topics WHERE $string ";
+        
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 

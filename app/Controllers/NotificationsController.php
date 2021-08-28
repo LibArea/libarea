@@ -26,18 +26,21 @@ class NotificationsController extends MainController
 
         $result = array();
         foreach ($list as $ind => $row) {
-
             $row['add_time']        = lang_date($row['notification_add_time']);
             $result[$ind]           = $row;
         }
 
-        $data = [
-            'h1'            => lang('Notifications'),
+        $meta = [
             'meta_title'    => lang('Notifications') . ' | ' . Config::get(Config::PARAM_NAME),
             'sheet'         => 'notifications',
         ];
 
-        return view(PR_VIEW_DIR . '/notification/index', ['data' => $data, 'uid' => $uid, 'list' => $result]);
+        $data = [
+            'sheet'         => 'notifications',
+            'notifications' => $result,
+        ];
+
+        return view('/notification/index', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
 
     // Изменяем флаг подписки прочитан или нет (переход по ссылке)

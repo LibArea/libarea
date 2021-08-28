@@ -163,16 +163,25 @@ class EditPostController extends MainController
             Request::getResources()->addBottomScript('/assets/js/select2.min.js');
         }
 
-        $post_related = PostModel::postRelated($post['post_related']);
+        $post_related = PostModel::postRelated($post['post_related']); 
         $post_topics  = PostModel::getPostTopic($post['post_id']);
 
-        $data = [
+        $meta = [
             'sheet'         => 'edit-post',
-            'h1'            => lang('Edit post'),
             'meta_title'    => lang('Edit post') . ' | ' . Config::get(Config::PARAM_NAME),
         ];
 
-        return view(PR_VIEW_DIR . '/post/edit', ['data' => $data, 'uid' => $uid, 'post' => $post, 'post_related' => $post_related, 'space' => $space, 'user' => $user, 'post_topics' => $post_topics]);
+
+        $data = [
+            'sheet'         => 'edit-post',
+            'post'          => $post,
+            'post_related'  => $post_related,
+            'space'         => $space,
+            'user'          => $user,
+            'post_topics'   => $post_topics
+        ];
+
+        return view('/post/edit', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
 
     // Удаление обложки

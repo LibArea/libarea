@@ -1,9 +1,8 @@
-<?php include TEMPLATE_DIR . '/header.php'; ?>
 <div class="wrap">
   <main>
     <div class="white-box">
       <div class="pt5 pr15 pb5 pl15">
-        <h1><?= $data['h1']; ?></h1>
+        <h1><?= lang('Password Recovery'); ?></h1>
         <div class="form mini">
           <form class="" action="/recover/send" method="post">
             <?php csrf_field(); ?>
@@ -23,9 +22,9 @@
               <div class="boxline">
                 <button type="submit" class="button"><?= lang('Reset'); ?></button>
                 <?php if (!Lori\Config::get(Lori\Config::PARAM_INVITE)) { ?>
-                  <span class="mr5 ml5 size-13"><a href="/register"><?= lang('Sign up'); ?></a></span>
+                  <span class="mr5 ml15 size-13"><a href="/register"><?= lang('Sign up'); ?></a></span>
                 <?php } ?>
-                <span class="mr5 ml5 size-13"><a href="/login"><?= lang('Sign in'); ?></a></span>
+                <span class="mr5 ml15 size-13"><a href="/login"><?= lang('Sign in'); ?></a></span>
               </div>
             </div>
           </form>
@@ -41,4 +40,3 @@
     </div>
   </aside>
 </div>
-<?php include TEMPLATE_DIR . '/footer.php'; ?>

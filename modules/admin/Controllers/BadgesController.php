@@ -21,7 +21,7 @@ class BadgesController extends MainController
             'sheet'         => $sheet == 'all' ? 'badges' : $sheet,
         ];
 
-        return view('/templates/badge/badges', ['data' => $data, 'uid' => $uid, 'badges' => $badges]);
+        includeTemplate('/templates/badge/badges', ['data' => $data, 'uid' => $uid, 'badges' => $badges]);
     }
 
     // Форма добавления награды
@@ -33,7 +33,7 @@ class BadgesController extends MainController
             'sheet'         => 'badges',
         ];
 
-        return view('/templates/badge/add', ['data' => $data, 'uid' => $uid]);
+        includeTemplate('/templates/badge/add', ['data' => $data, 'uid' => $uid]);
     }
 
 
@@ -53,7 +53,7 @@ class BadgesController extends MainController
             'sheet'         => 'badges',
         ];
 
-        return view('/templates/badge/edit', ['data' => $data, 'uid' => $uid, 'badge' => $badge]);
+        includeTemplate('/templates/badge/edit', ['data' => $data, 'uid' => $uid, 'badge' => $badge]);
     }
 
     // Добавляем награду
@@ -99,7 +99,7 @@ class BadgesController extends MainController
             'sheet'         => 'admin',
         ];
 
-        return view('/templates/badge/user-add', ['data' => $data, 'uid' => $uid, 'user' => $user, 'badges' => $badges]);
+        includeTemplate('/templates/badge/user-add', ['data' => $data, 'uid' => $uid, 'user' => $user, 'badges' => $badges]);
     }
 
     // Награждение

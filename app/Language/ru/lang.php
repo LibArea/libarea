@@ -446,4 +446,8 @@ return [
     'Posts will not be visible in the feed'         => 'Если нет, то посты не будут видны в ленте (на главной)',
     'Does this violate site rules'      => 'Это нарушает правила сайта',
     'Flag not included'                 => 'Флаг не учтен, не используйте его часто',
+    'Someone invited you from the site' => 'Вас пригласил участник с этого сайта. Введите инвайт',
+    'You can invite your friends'       => 'Вы можете пригласить друзей',
+    'You were looking for' => 'Вы искали',
+    'The search has not given any results' => 'Поиск не дал результатов',
 ];

@@ -48,8 +48,9 @@ class Base
             }
         }
 
-        $uid['uri']     = Request::getUri();
-        $uid['msg']     = self::getMsg();
+        $uid['uri']     = Request::getUri(); 
+        $uid['msg']     = self::getMsg(); 
+
         return $uid;
     }
 

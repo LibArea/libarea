@@ -19,22 +19,25 @@ class UserController extends MainController
         $limit = 42;
         $usersCount = UserModel::getUsersAllCount();
         $users      = UserModel::getUsersAll($page, $limit, $uid['user_id']);
-
         Base::PageError404($users);
 
-        $data = [
-            'h1'            => lang('Users'),
+        $meta = [
             'canonical'     => Config::get(Config::PARAM_URL) . '/users',
             'sheet'         => 'users',
-            'pagesCount'    => ceil($usersCount / $limit),
-            'pNum'          => $page,
             'meta_title'    => lang('Users') . ' | ' . Config::get(Config::PARAM_NAME),
             'meta_desc'     => lang('desc-user-all') . ' ' . Config::get(Config::PARAM_HOME_TITLE),
         ];
 
+        $data = [
+            'sheet'         => 'users',
+            'pagesCount'    => ceil($usersCount / $limit),
+            'pNum'          => $page,
+            'users'         => $users
+        ];
+
         Request::getHead()->addStyles('/assets/css/users.css');
 
-        return view(PR_VIEW_DIR . '/user/users', ['data' => $data, 'uid' => $uid, 'users' => $users]);
+        return view('/user/users', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
 
     // Страница участника
@@ -46,13 +49,11 @@ class UserController extends MainController
         // Покажем 404
         Base::PageError404($user);
 
-        $post = PostModel::getPostId($user['user_my_post']);
-
         if (!$user['user_about']) {
             $user['user_about'] = lang('Riddle') . '...';
         }
 
-        $site_name = Config::get(Config::PARAM_NAME);
+        $site_name  = Config::get(Config::PARAM_NAME);
         $meta_title = sprintf(lang('title-profile'), $user['user_login'], $user['user_name'], $site_name);
         $meta_desc  = sprintf(lang('desc-profile'), $user['user_login'], $user['user_about'], $site_name);
 
@@ -72,30 +73,27 @@ class UserController extends MainController
             $_SESSION['usernumbers'][$user['user_id']] = $user['user_id'];
         }
 
-        $uid    = Base::getUid();
-
-        // Ограничение на показ кнопки отправить Pm (ЛС, личные сообщения)
-        $button_pm  = Validation::accessPm($uid, $user['user_id'], Config::get(Config::PARAM_TL_ADD_PM));
-
-        $counts = UserModel::contentCount($user['user_id']);
-
-        $data = [
-            'h1'                => $user['user_login'],
+        $uid = Base::getUid();
+        $meta = [
             'sheet'             => 'profile',
-            'user_created_at'   => lang_date($user['user_created_at']),
-            'user_trust_level'  => UserModel::getUserTrust($user['user_id']),
-            'posts_count'       => $counts['count_posts'],
-            'answers_count'     => $counts['count_answers'],
-            'comments_count'    => $counts['count_comments'],
-            'spaces_user'       => SpaceModel::getUserCreatedSpaces($user['user_id']),
-            'badges'            => UserModel::getBadgeUserAll($user['user_id']),
             'canonical'         => Config::get(Config::PARAM_URL) . '/u/' . $user['user_login'],
             'img'               => Config::get(Config::PARAM_URL) . '/uploads/users/avatars/' . $user['user_avatar'],
             'meta_title'        => $meta_title,
             'meta_desc'         => $meta_desc,
         ];
 
-        return view(PR_VIEW_DIR . '/user/profile', ['data' => $data, 'uid' => $uid, 'user' => $user, 'onepost' => $post, 'button_pm' => $button_pm]);
+        $data = [
+            'user_created_at'   => lang_date($user['user_created_at']),
+            'user_trust_level'  => UserModel::getUserTrust($user['user_id']),
+            'count'             => UserModel::contentCount($user['user_id']),
+            'spaces_user'       => SpaceModel::getUserCreatedSpaces($user['user_id']),
+            'badges'            => UserModel::getBadgeUserAll($user['user_id']),
+            'user'              => $user,
+            'onepost'           => PostModel::getPostId($user['user_my_post']),
+            'button_pm'         => Validation::accessPm($uid, $user['user_id'], Config::get(Config::PARAM_TL_ADD_PM))
+        ];
+
+        return view('/user/profile', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
 
     // Страница закладок участника
@@ -108,10 +106,10 @@ class UserController extends MainController
             redirect('/u/' . $uid['user_login'] . '/favorite');
         }
 
-        $fav = UserModel::userFavorite($uid['user_id']);
+        $favorites = UserModel::userFavorite($uid['user_id']);
 
         $result = array();
-        foreach ($fav as $ind => $row) {
+        foreach ($favorites as $ind => $row) {
             $row['post_date']       = (empty($row['post_date'])) ? $row['post_date'] : lang_date($row['post_date']);
             $row['answer_content']  = Content::text($row['answer_content'], 'text');
             $row['date']            = $row['post_date'];
@@ -119,13 +117,18 @@ class UserController extends MainController
             $result[$ind]           = $row;
         }
 
-        $data = [
+        $meta = [
             'sheet'         => 'favorites',
             'h1'            => lang('Favorites') . ' ' . $uid['user_login'],
             'meta_title'    => lang('Favorites') . ' ' . $uid['user_login'] . ' | ' . Config::get(Config::PARAM_NAME),
         ];
 
-        return view(PR_VIEW_DIR . '/user/favorite', ['data' => $data, 'uid' => $uid, 'favorite' => $result]);
+        $data = [
+            'sheet'     => 'favorites',
+            'favorites' => $result
+        ];
+
+        return view('/user/favorite', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
 
     // Страница черновиков участника
@@ -138,15 +141,17 @@ class UserController extends MainController
             redirect('/u/' . $uid['user_login'] . '/drafts');
         }
 
-        $drafts = UserModel::userDraftPosts($uid['user_id']);
-
-        $data = [
+        $meta = [
             'sheet'         => 'drafts',
             'h1'            => lang('Drafts') . ' ' . $uid['user_login'],
             'meta_title'    => lang('Drafts') . ' ' . $uid['user_login'] . ' | ' . Config::get(Config::PARAM_NAME)
         ];
 
-        return view(PR_VIEW_DIR . '/user/draft-post', ['data' => $data, 'uid' => $uid, 'drafts' => $drafts]);
+        $data = [
+            'drafts' => UserModel::userDraftPosts($uid['user_id']),
+        ];
+
+        return view('/user/draft-post', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
 
     // Страница предпочтений пользователя
@@ -170,12 +175,17 @@ class UserController extends MainController
             $result[$ind]                   = $row;
         }
 
-        $data = [
-            'h1'            => lang('Subscribed') . ' ' . $uid['user_login'],
+        $meta = [
             'sheet'         => 'subscribed',
             'meta_title'    => lang('Subscribed') . ' ' . $uid['user_login'] . ' | ' . Config::get(Config::PARAM_NAME)
         ];
 
-        return view(PR_VIEW_DIR . '/user/subscribed', ['data' => $data, 'uid' => $uid, 'posts' => $result]);
+        $data = [
+            'h1'    => lang('Subscribed') . ' ' . $uid['user_login'],
+            'sheet' => 'subscribed',
+            'posts' => $result
+        ];
+
+        return view('/user/subscribed', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
 }

@@ -1,11 +1,10 @@
-<?php include TEMPLATE_DIR . '/header.php'; ?>
 <div class="wrap">
   <main class="w-100">
     <div class="white-box">
       <div class="pt5 pr15 pb5 pl15">
-        <?= breadcrumb('/', lang('Home'), null, null, $data['h1']); ?>
+        <?= breadcrumb('/', lang('Home'), null, null, lang('Add post')); ?>
 
-        <?php if ($spaces) { ?>
+        <?php if ($data['spaces']) { ?>
           <div class="box create">
             <form action="/post/create" method="post" enctype="multipart/form-data">
               <?= csrf_field() ?>
@@ -76,8 +75,8 @@
                 <div class="boxline">
                   <label class="form-label" for="post_content"><?= lang('Space'); ?></label>
                   <select class="form-input" name="space_id">
-                    <?php foreach ($spaces as $space) { ?>
-                      <option <?php if ($space_id == $space['space_id']) { ?> selected<?php } ?> value="<?= $space['space_id']; ?>">
+                    <?php foreach ($data['spaces'] as $space) { ?>
+                      <option <?php if ($data['space_id'] == $space['space_id']) { ?> selected<?php } ?> value="<?= $space['space_id']; ?>">
                         <?= $space['space_name']; ?>
                       </option>
                     <?php } ?>
@@ -150,4 +149,3 @@
     </div>
   </main>
 </div>
-<?php include TEMPLATE_DIR . '/footer.php'; ?>

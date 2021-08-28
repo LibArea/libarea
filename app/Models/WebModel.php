@@ -93,7 +93,7 @@ class WebModel extends MainModel
             'link_user_id'      => $data['link_user_id'],
             'link_type'         => $data['link_type'],
             'link_status'       => $data['link_status'],
-            'link_cat_id'       => $data['link_cat_id'],
+            'link_category_id'       => $data['link_category_id'],
             'link_count'        => 0,
         ];
 
@@ -104,7 +104,7 @@ class WebModel extends MainModel
                             link_user_id, 
                             link_type, 
                             link_status, 
-                            link_cat_id,
+                            link_category_id,
                             link_count) 
                             
                        VALUES(:link_url, 
@@ -114,7 +114,7 @@ class WebModel extends MainModel
                        :link_user_id, 
                        :link_type, 
                        :link_status, 
-                       :link_cat_id, 
+                       :link_category_id, 
                        :link_count)";
 
         return  DB::run($sql, $params);

@@ -1,9 +1,8 @@
-<?php include TEMPLATE_DIR . '/header.php'; ?>
 <div class="wrap">
   <main>
     <div class="white-box">
       <div class="pt5 pr15 pb5 pl15">
-        <h1><?= $data['h1']; ?></h1>
+        <h1><?= lang('Registration by invite'); ?></h1>
         <div class="form mini">
           <form class="" action="/register/add" method="post">
             <?php csrf_field(); ?>
@@ -13,7 +12,7 @@
             </div>
             <div class="boxline">
               <label class="form-label" for="email">Email</label>
-              <input type="text" class="form-input" name="email" id="email" value="<?= $invate['invitation_email']; ?>">
+              <input type="text" class="form-input" name="email" id="email" value="<?= $data['invate']['invitation_email']; ?>">
             </div>
             <div class="boxline">
               <label class="form-label" for="password"><?= lang('Password'); ?></label>
@@ -25,8 +24,8 @@
             </div>
             <div class="boxline">
               <div class="boxline">
-                <input type="hidden" name="invitation_code" id="invitation_code" value="<?= $invate['invitation_code']; ?>">
-                <input type="hidden" name="invitation_id" id="invitation_id" value="<?= $invate['uid']; ?>">
+                <input type="hidden" name="invitation_code" id="invitation_code" value="<?= $data['invate']['invitation_code']; ?>">
+                <input type="hidden" name="invitation_id" id="invitation_id" value="<?= $data['invate']['uid']; ?>">
                 <button type="submit" class="button"><?= lang('Sign up'); ?></button>
               </div>
             </div>
@@ -36,4 +35,3 @@
     </div>
   </main>
 </div>
-<?php include TEMPLATE_DIR . '/footer.php'; ?>

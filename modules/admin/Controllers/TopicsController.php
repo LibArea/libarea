@@ -27,7 +27,7 @@ class TopicsController extends MainController
             'pNum'          => $page,
         ];
 
-        return view('/templates/topic/topics', ['data' => $data, 'uid' => $uid, 'topics' => $topics]);
+        includeTemplate('/templates/topic/topics', ['data' => $data, 'uid' => $uid, 'topics' => $topics]);
     }
 
     // Форма добавить topic
@@ -44,7 +44,7 @@ class TopicsController extends MainController
             'sheet'         => 'topics-add',
         ];
 
-        return view('/templates/topic/add', ['data' => $data, 'uid' => $uid]);
+        includeTemplate('/templates/topic/add', ['data' => $data, 'uid' => $uid]);
     }
 
     // Форма редактирования topic
@@ -79,7 +79,7 @@ class TopicsController extends MainController
             'sheet'         => 'topics',
         ];
 
-        return view('/templates/topic/edit', ['data' => $data, 'uid' => $uid, 'topic' => $topic, 'topic_related' => $topic_related, 'topic_parent_id' => $topic_parent_id, 'post_related' => $post_related]);
+        includeTemplate('/templates/topic/edit', ['data' => $data, 'uid' => $uid, 'topic' => $topic, 'topic_related' => $topic_related, 'topic_parent_id' => $topic_parent_id, 'post_related' => $post_related]);
     }
 
     // Edit topic

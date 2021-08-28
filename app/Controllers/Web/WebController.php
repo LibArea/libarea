@@ -24,17 +24,21 @@ class WebController extends MainController
             $num = sprintf(lang('page-number'), $page) . ' | ';
         }
 
-        $data = [
-            'h1'            => lang('domains-title'),
+        $meta = [
             'canonical'     => '/domains',
             'sheet'         => 'domains',
-            'pagesCount'    => ceil($pagesCount / $limit),
-            'pNum'          => $page,
             'meta_title'    => lang('domains-title') . $num . Config::get(Config::PARAM_NAME),
             'meta_desc'     => lang('domains-desc') . $num . Config::get(Config::PARAM_HOME_TITLE),
         ];
 
-        return view(PR_VIEW_DIR . '/web/links', ['data' => $data, 'uid' => $uid, 'links' => $links]);
+        $data = [
+            'sheet'         => 'domains',
+            'pagesCount'    => ceil($pagesCount / $limit),
+            'pNum'          => $page,
+            'links'         => $links
+        ];
+
+        return view('/web/links', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
 
     // Посты по домену
@@ -62,22 +66,25 @@ class WebController extends MainController
             $result[$ind]                   = $row;
         }
 
-        $domains    = WebModel::getLinksTop($domain);
-
         $meta_title = lang('Domain') . ': ' . $domain . ' | ' . Config::get(Config::PARAM_NAME);
-        $meta_desc = lang('domain-desc') . ': ' . $domain . ' ' . Config::get(Config::PARAM_HOME_TITLE);
+        $meta_desc  = lang('domain-desc') . ': ' . $domain . ' ' . Config::get(Config::PARAM_HOME_TITLE);
 
-        $data = [
-            'h1'            => lang('Domain') . ': ' . $domain,
+        $meta = [
             'canonical'     => Config::get(Config::PARAM_URL) . '/domain/' . $domain,
             'sheet'         => 'domain',
             'meta_title'    => $meta_title,
             'meta_desc'     => $meta_desc,
-            'pagesCount'    => ceil($pagesCount / $limit),
-            'pNum'          => $page,
         ];
 
-        return view(PR_VIEW_DIR . '/web/link', ['data' => $data, 'uid' => $uid, 'posts' => $result, 'domains' => $domains, 'link' => $link]);
+        $data = [
+            'sheet'         => 'domain',
+            'pagesCount'    => ceil($pagesCount / $limit),
+            'pNum'          => $page,
+            'posts'         => $result,
+            'domains'       => WebModel::getLinksTop($domain),
+            'link'          => $link
+        ];
+
+        return view('/web/link', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
-  
 }

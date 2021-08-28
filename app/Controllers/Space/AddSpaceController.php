@@ -87,12 +87,15 @@ class AddSpaceController extends MainController
 
         $num_add_space = $total_allowed - $count_space;
 
-        $data = [
-            'h1'            => lang('Add Space'),
+        $meta = [
             'sheet'         => 'add-space',
             'meta_title'    => lang('Add Space'),
         ];
-
-        return view(PR_VIEW_DIR . '/space/add', ['data' => $data, 'uid' => $uid, 'num_add_space' => $num_add_space]);
+        
+        $data = [
+            'num_add_space' => $num_add_space,
+        ];
+        
+        return view('/space/add', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
 }

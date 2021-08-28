@@ -26,7 +26,7 @@ class WebsController extends MainController
             'pNum'          => $page,
         ];
 
-        return view('/templates/web/webs', ['data' => $data, 'uid' => $uid, 'domains' => $domains]);
+        includeTemplate('/templates/web/webs', ['data' => $data, 'uid' => $uid, 'domains' => $domains]);
     }
 
     // Форма добавление домена
@@ -38,7 +38,7 @@ class WebsController extends MainController
             'sheet'         => 'domains-add',
         ];
 
-        return view('/templates/web/add', ['data' => $data, 'uid' => $uid]);
+        includeTemplate('/templates/web/add', ['data' => $data, 'uid' => $uid]);
     }
 
     // Добавление домена
@@ -92,7 +92,7 @@ class WebsController extends MainController
             'sheet'         => 'admin',
         ];
 
-        return view('/templates/web/edit', ['data' => $data, 'uid' => $uid, 'domain' => $domain]);
+        includeTemplate('/templates/web/edit', ['data' => $data, 'uid' => $uid, 'domain' => $domain]);
     }
 
     // Изменение домена
@@ -124,7 +124,7 @@ class WebsController extends MainController
             'link_user_id'      => $uid['user_id'],
             'link_type'         => 0,
             'link_status'       => 200,
-            'link_cat_id'       => 1,
+            'link_category_id'  => 1,
         ];
 
         WebModel::editLink($data);

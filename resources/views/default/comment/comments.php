@@ -1,13 +1,12 @@
-<?php include TEMPLATE_DIR . '/header.php'; ?>
 <div class="wrap">
   <main>
     <div class="white-box">
       <div class="pt5 pr15 pb5 pl15">
-        <h1><?= $data['h1']; ?></h1>
+        <h1><?= lang('All comments'); ?></h1>
 
-        <?php if (!empty($comments)) { ?>
+        <?php if (!empty($data['comments'])) { ?>
 
-          <?php foreach ($comments as $comment) { ?>
+          <?php foreach ($data['comments'] as $comment) { ?>
 
             <?php if ($comment['comment_is_deleted'] == 0) { ?>
               <div class="mb20">
@@ -62,4 +61,3 @@
     <?php } ?>
   </aside>
 </div>
-<?php include TEMPLATE_DIR . '/footer.php'; ?>

@@ -1,12 +1,11 @@
-<?php include TEMPLATE_DIR . '/header.php'; ?>
 <div class="wrap">
   <main class="w-100">
     <div class="white-box">
       <div class="pt5 pr15 pb5 pl15">
-        <?= breadcrumb('/', lang('Home'), '/post/' . $post['post_id'] . '/' . $post['post_slug'], $post['post_title'], $data['h1']); ?>
+        <?= breadcrumb('/', lang('Home'), '/post/' . $data['post']['post_id'] . '/' . $data['post']['post_slug'], $data['post']['post_title'], lang('Edit answer')); ?>
 
         <div class="answer_addentry">
-          <?php if ($data['user_id'] > 0) : ?>
+          <?php if ($uid['user_id'] > 0) { ?>
             <form id="add_answ" action="/answer/edit" accept-charset="UTF-8" method="post">
               <?= csrf_field() ?>
               <div class="redactor">
@@ -23,10 +22,9 @@
                 <input type="submit" class="button" name="answit" value="<?= lang('Edit'); ?>" class="button">
               </div>
             </form>
-          <?php endif; ?>
+          <?php } ?>
         </div>
       </div>
     </div>
   </main>
 </div>
-<?php include TEMPLATE_DIR . '/footer.php'; ?>

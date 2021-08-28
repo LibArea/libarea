@@ -1,10 +1,9 @@
-<?php include TEMPLATE_DIR . '/header.php'; ?>
 <div class="wrap">
   <main>
     <div class="white-box">
       <div class="pt5 pr15 pb5 pl15">
         <?php if ($uid['user_id'] > 0) { ?>
-          <?php if ($add_space_button === true) { ?>
+          <?php if ($data['add_space_button'] === true) { ?>
             <a title="<?= lang('To create'); ?>" class="right mt5 mb15 size-21" href="/space/add">
               <i class="icon-plus red"></i>
             </a>
@@ -39,9 +38,9 @@
           <?php } ?>
         </ul>
 
-        <?php if (!empty($spaces)) { ?>
+        <?php if (!empty($data['spaces'])) { ?>
           <div class="flex all-box-spaces">
-            <?php foreach ($spaces as  $sp) { ?>
+            <?php foreach ($data['spaces'] as  $sp) { ?>
               <?php if ($sp['space_cover_art'] != 'space_cover_no.jpeg') { ?>
                 <div class="fons">
                   <div class="space-info-box" style="background-image: url(/uploads/spaces/cover/small/<?= $sp['space_cover_art']; ?>)">
@@ -52,7 +51,7 @@
 
                       <?php } ?>
                       <?php if ($sp['space_id'] != 1) { ?>
-                        <span class="white absolute right-10">+ <?= $sp['users'] ?></span>
+                        <span class="white absolute right-10">+ <?= $sp['space_focus_count'] ?></span>
                       <?php } ?>
 
                       <a title="<?= $sp['space_name']; ?>" class="space-img-box absolute" href="/s/<?= $sp['space_slug']; ?>">
@@ -122,4 +121,3 @@
     </div>
   </aside>
 </div>
-<?php include TEMPLATE_DIR . '/footer.php'; ?>

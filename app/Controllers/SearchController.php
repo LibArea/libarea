@@ -11,11 +11,12 @@ class SearchController extends MainController
 {
     public function index()
     {
+        $query  = '';
+        $result = '';
         if (Request::getPost()) {
 
-            $qa =  Request::getPost('q');
-
-            $query = preg_replace('/[^a-zA-Zа-яА-Я0-9]/ui', '', $qa);
+            $qa     =  Request::getPost('q');
+            $query  = preg_replace('/[^a-zA-Zа-яА-Я0-9]/ui', '', $qa);
 
             if (!empty($query)) {
 
@@ -24,35 +25,35 @@ class SearchController extends MainController
                 // Успех и определим, что будем использовать
                 // Далее индивидуально расширим (+ лайки, просмотры и т.д.)
                 if (Config::get(Config::PARAM_SEARCH) == 0) {
-                    $qa =  SearchModel::getSearch($query);
+                    $qa     =  SearchModel::getSearch($query);
                     $result = array();
                     foreach ($qa as $ind => $row) {
                         $row['post_content']  = Content::text(Base::cutWords($row['post_content'], 32, '...'), 'text');
-                        $result[$ind]         = $row;
+                        $result[$ind]   = $row;
                     }
                 } else {
-                    $qa =  SearchModel::getSearchServer($query);
+                    $qa     =  SearchModel::getSearchServer($query);
                     $result = array();
                     foreach ($qa as $ind => $row) {
-                        $result[$ind]         = $row;
+                        $result[$ind]   = $row;
                     }
                 }
             } else {
                 Base::addMsg(lang('Empty request'), 'error');
                 redirect('/search');
             }
-        } else {
-            $query  = '';
-            $result = '';
         }
 
-        $uid  = Base::getUid();
-        $data = [
-            'h1'            => lang('Search'),
+        $meta = [
             'sheet'         => 'search',
             'meta_title'    => lang('Search'),
         ];
 
-        return view(PR_VIEW_DIR . '/search/index', ['data' => $data, 'uid' => $uid, 'result' => $result, 'query' => $query]);
+        $data = [
+            'result' => $result,
+            'query' => $query,
+        ];
+
+        return view('/search/index', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
     }
 }

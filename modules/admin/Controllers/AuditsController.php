@@ -16,7 +16,7 @@ class AuditsController extends MainController
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
-        $limit  = 55;
+        $limit  = 55; 
         $pagesCount = AuditModel::getAuditsAllCount($sheet);
         $audits     = AuditModel::getAuditsAll($page, $limit, $sheet);
 
@@ -43,7 +43,7 @@ class AuditsController extends MainController
             'pNum'          => $page,
         ];
 
-        return view('/templates/audits', ['data' => $data, 'uid' => $uid, 'audits' => $result]);
+        includeTemplate('/templates/audits', ['data' => $data, 'uid' => $uid, 'audits' => $result]);
     }
 
     // Восстановление после аудита

@@ -26,7 +26,7 @@ class SpacesController extends MainController
             'pNum'          => $page,
         ];
 
-        return view('/templates/spaces', ['data' => $data, 'uid' => $uid, 'spaces' => $spaces]);
+        includeTemplate('/templates/spaces', ['data' => $data, 'uid' => $uid, 'spaces' => $spaces]);
     }
 
     // Удаление / восстановление пространства

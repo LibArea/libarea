@@ -32,17 +32,21 @@ class CommentController extends MainController
             $num = sprintf(lang('page-number'), $page) . ' | ';
         }
 
-        $data = [
-            'h1'            => lang('All comments'),
-            'pagesCount'    => ceil($pagesCount / $limit),
-            'pNum'          => $page,
+        $meta = [
             'canonical'     => Config::get(Config::PARAM_URL) . '/comments',
             'sheet'         => 'comments',
             'meta_title'    => lang('All comments') . $num . Config::get(Config::PARAM_NAME),
             'meta_desc'     => lang('comments-desc') . $num . Config::get(Config::PARAM_HOME_TITLE),
         ];
+        
+        $data = [
+            'pagesCount'    => ceil($pagesCount / $limit),
+            'pNum'          => $page,
+            'sheet'         => 'comments',
+            'comments'      => $result
+        ];
 
-        return view(PR_VIEW_DIR . '/comment/comments', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
+        return view('/comment/comments', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
 
     // Комментарии участника
@@ -52,24 +56,29 @@ class CommentController extends MainController
         $user   = UserModel::getUser($login, 'slug');
         Base::PageError404($user);
 
-        $comm  = CommentModel::userComments($login);
+        $comments  = CommentModel::userComments($login);
 
         $result = array();
-        foreach ($comm as $ind => $row) {
+        foreach ($comments as $ind => $row) {
             $row['comment_content'] = Content::text($row['comment_content'], 'line');
             $row['date']            = lang_date($row['comment_date']);
             $result[$ind]           = $row;
         }
 
         $uid  = Base::getUid();
-        $data = [
-            'h1'            => lang('Comments-n') . ' ' . $login,
+        $meta = [
             'canonical'     => Config::get(Config::PARAM_URL) . '/u/' . $login . '/comments',
             'sheet'         => 'user-comments',
             'meta_title'    => lang('Comments-n') . ' ' . $login . ' | ' . Config::get(Config::PARAM_NAME),
             'meta_desc'     => lang('Comments-n') . ' ' . $login . ' ' . Config::get(Config::PARAM_HOME_TITLE),
         ];
 
-        return view(PR_VIEW_DIR . '/comment/comment-user', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
+        $data = [
+            'h1'            => lang('Comments-n') . ' ' . $login,
+            'sheet'         => 'user-comments',
+            'comments'      => $result
+        ];
+
+        return view('/comment/comment-user', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
 }

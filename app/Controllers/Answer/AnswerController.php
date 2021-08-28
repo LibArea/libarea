@@ -32,17 +32,21 @@ class AnswerController extends MainController
             $num = sprintf(lang('page-number'), $page) . ' | ';
         }
 
-        $data = [
-            'h1'            => lang('All answers'),
-            'pagesCount'    => ceil($pagesCount / $limit),
-            'pNum'          => $page,
+        $meta = [
             'canonical'     => Config::get(Config::PARAM_URL) . '/answers',
             'sheet'         => 'answers',
             'meta_title'    => lang('All answers') . $num . Config::get(Config::PARAM_NAME),
             'meta_desc'     => lang('answers-desc') . $num . Config::get(Config::PARAM_HOME_TITLE),
         ];
 
-        return view(PR_VIEW_DIR . '/answer/answers', ['data' => $data, 'uid' => $uid, 'answers' => $result]);
+        $data = [
+            'pagesCount'    => ceil($pagesCount / $limit),
+            'pNum'          => $page,
+            'sheet'         => 'answers',
+            'answers'       => $result,
+        ];
+
+        return view('/answer/answers', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
 
     // Ответы участника
@@ -63,14 +67,19 @@ class AnswerController extends MainController
         }
 
         $uid  = Base::getUid();
-        $data = [
-            'h1'            =>  lang('Answers-n') . ' ' . $login,
+        $meta = [
             'canonical'     => Config::get(Config::PARAM_URL) . '/u/' . $login . '/answers',
             'sheet'         => 'user-answers',
             'meta_title'    => lang('Answers') . ' ' . $login . ' | ' . Config::get(Config::PARAM_NAME),
             'meta_desc'     => 'Ответы  учасника сообщества ' . $login . ' ' . Config::get(Config::PARAM_HOME_TITLE),
         ];
 
-        return view(PR_VIEW_DIR . '/answer/answer-user', ['data' => $data, 'uid' => $uid, 'answers' => $result]);
+        $data = [
+            'h1'            =>  lang('Answers-n') . ' ' . $login,
+            'sheet'         => 'user-answers',
+            'answers'       => $result
+        ];
+
+        return view('/answer/answer-user', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
 }

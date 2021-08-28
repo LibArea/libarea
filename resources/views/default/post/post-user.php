@@ -1,4 +1,3 @@
-<?php include TEMPLATE_DIR . '/header.php'; ?>
 <div class="wrap">
   <main>
     <div class="white-box">
@@ -13,4 +12,3 @@
     <?php include TEMPLATE_DIR . '/_block/user-menu.php'; ?>
   </aside>
 </div>
-<?php include TEMPLATE_DIR . '/footer.php'; ?>

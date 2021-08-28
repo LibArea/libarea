@@ -32,6 +32,6 @@ class HomeController extends MainController
             'bytes'         => $bytes,
         ];
 
-        return view('/templates/index', ['data' => $data, 'uid' => $uid, 'stats' => $stats]);
+        includeTemplate('/templates/index', ['data' => $data, 'uid' => $uid, 'stats' => $stats]);
     }
 }

@@ -22,7 +22,7 @@ class WordsController extends MainController
             'sheet'         => $sheet == 'all' ? 'words' : $sheet,
         ];
 
-        return view('/templates/word/words', ['data' => $data, 'uid' => $uid, 'words' => $words]);
+        includeTemplate('/templates/word/words', ['data' => $data, 'uid' => $uid, 'words' => $words]);
     }
     // Форма добавления стоп-слова
     public function addPage()
@@ -34,7 +34,7 @@ class WordsController extends MainController
             'sheet'         => 'words',
         ];
 
-        return view('/templates/word/add', ['data' => $data, 'uid' => $uid]);
+        includeTemplate('/templates/word/add', ['data' => $data, 'uid' => $uid]);
     }
 
     // Добавление стоп-слова

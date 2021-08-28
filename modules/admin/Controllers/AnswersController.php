@@ -39,6 +39,6 @@ class AnswersController extends MainController
             'pNum'          => $page,
         ];
 
-        return view('/templates/answers', ['data' => $data, 'uid' => $uid, 'answers' => $result]);
+        includeTemplate('/templates/answers', ['data' => $data, 'uid' => $uid, 'answers' => $result]);
     }
 }

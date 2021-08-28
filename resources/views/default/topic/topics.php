@@ -1,9 +1,8 @@
-<?php include TEMPLATE_DIR . '/header.php'; ?>
 <div class="wrap">
   <main>
     <div class="white-box">
       <div class="pt5 pr15 pb5 pl15">
-        <h1><?= $data['h1']; ?>
+        <h1><?= lang('All topics'); ?>
           <?php if ($uid['user_trust_level'] == 5) { ?>
             <a class="right gray-light" href="/admin/topics">
               <i class="icon-pencil size-15"></i>
@@ -11,9 +10,9 @@
           <?php } ?>
         </h1>
 
-        <?php if (!empty($topics)) { ?>
+        <?php if (!empty($data['topics'])) { ?>
           <div class="oblong-box-list topic-box-list pb15">
-            <?php foreach ($topics as $topic) { ?>
+            <?php foreach ($data['topics'] as $topic) { ?>
               <div class="oblong-box relative left">
                 <a title="<?= $topic['topic_title']; ?>" class="img-box absolute" href="/topic/<?= $topic['topic_slug']; ?>">
                   <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'ava-54'); ?>
@@ -48,11 +47,11 @@
         <?= lang('topic_info'); ?>
       </div>
     </div>
-    <?php if (!empty($news)) { ?>
+    <?php if (!empty($data['news'])) { ?>
       <div class="white-box">
         <div class="p15">
           <h3 class="uppercase mb5 mt0 fw300 size-13 gray"><?= lang('New ones'); ?></h3>
-          <?php foreach ($news as $new) { ?>
+          <?php foreach ($data['news'] as $new) { ?>
             <a title="<?= $new['topic_title']; ?>" class="tags gray size-13" href="/topic/<?= $new['topic_slug']; ?>">
               <?= $new['topic_title']; ?>
             </a><br>
@@ -60,10 +59,8 @@
         </div>
       </div>
     <?php } ?>
-
     <?php if ($data['sheet'] == 'topics' && $uid['user_trust_level'] > 4) { ?>
       <a class="right size-13 button" href="/admin/update/count"><?= lang('Update the data'); ?></a>
     <?php } ?>
   </aside>
 </div>
-<?php include TEMPLATE_DIR . '/footer.php'; ?>
