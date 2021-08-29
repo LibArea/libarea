@@ -54,7 +54,7 @@
                         <span class="white absolute right-10">+ <?= $sp['space_focus_count'] ?></span>
                       <?php } ?>
 
-                      <a title="<?= $sp['space_name']; ?>" class="space-img-box absolute" href="/s/<?= $sp['space_slug']; ?>">
+                      <a title="<?= $sp['space_name']; ?>" class="absolute" href="/s/<?= $sp['space_slug']; ?>">
                         <?= spase_logo_img($sp['space_img'], 'max', $sp['space_name'], 'ava-54'); ?>
                       </a>
 

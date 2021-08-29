@@ -14,7 +14,7 @@
           <div class="oblong-box-list topic-box-list pb15">
             <?php foreach ($data['topics'] as $topic) { ?>
               <div class="oblong-box relative left">
-                <a title="<?= $topic['topic_title']; ?>" class="img-box absolute" href="/topic/<?= $topic['topic_slug']; ?>">
+                <a title="<?= $topic['topic_title']; ?>" class="absolute" href="/topic/<?= $topic['topic_slug']; ?>">
                   <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'ava-54'); ?>
                 </a>
                 <div class="item-desc">
