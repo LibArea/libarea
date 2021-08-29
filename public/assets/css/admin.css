@@ -1,6 +1,10 @@
+body {
+  padding-top: 0;
+  display: flex;
+}
+
 aside {
   width: 240px;
-  height: 100%;
   z-index: 888;
 }
 

@@ -35,9 +35,10 @@ class TopicModel extends MainModel
     // Информация по теме (id, slug)
     public static function getTopic($params, $name)
     {
-        $sort = "topic_id = :params";
         if ($name == 'slug') {
             $sort = "topic_slug = :params";
+        } else {
+            $sort = "topic_id = :params";
         }
 
         $sql = "SELECT 
@@ -141,7 +142,12 @@ class TopicModel extends MainModel
     // Выведем подтемы
     public static function subTopics($topic_id)
     {
-        $sql = "SELECT topic_id, topic_title, topic_slug, topic_parent_id FROM topics WHERE topic_parent_id = :topic_id";
+        $sql = "SELECT 
+                    topic_id, 
+                    topic_title, 
+                    topic_slug, 
+                    topic_parent_id 
+                        FROM topics WHERE topic_parent_id = :topic_id";
 
         return DB::run($sql, ['topic_id' => $topic_id])->fetchAll(PDO::FETCH_ASSOC);
     }

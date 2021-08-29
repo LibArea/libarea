@@ -33,18 +33,25 @@
             <?php } ?>
           <?php } ?>
         <?php } else { ?>
-          <p><?= lang('The search has not given any results'); ?>
-          <p>
-          <?php } ?>
+          <p><?= lang('The search has not given any results'); ?><p>
+        <?php } ?>
       </div>
     </div>
   </main>
   <aside>
     <div class="white-box">
-      <div class="p15">
+      <div class="p15 mb15">
         <?= lang('info_search'); ?>
         <i><?= lang('Under development'); ?></i>
       </div>
-    </div>
+    </div>  
+      <?php foreach ($data['tags'] as $key => $tag) { ?>
+        <div class="search max-width mb15 ml10">
+           <a class="tags gray size-13" href="/topic/<?= $tag['topic_slug'] ?>">
+             <?= $tag['topic_title']; ?>
+           </a>
+           <sup class="gray">x<?= $tag['topic_count']; ?></sup>
+        </div>
+      <?php } ?>
   </aside>
 </div>

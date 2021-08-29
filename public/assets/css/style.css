@@ -34,14 +34,19 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif;
   min-height: 100%;
   background-color: #f3f3f3;
+  padding-top: 50px;
 }
 
 header {
-  z-index: 10;
+  z-index: 888;
   box-shadow: 0 1px 3px rgb(18 18 18 / 10%);
   background-color: #fff;
   margin: 0 auto;
   padding: 10px 15px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  height: 50px;
 }
 
 main {
@@ -221,6 +226,10 @@ img {
   color: rgba(33, 32, 31, 0.5);
 }
 
+.header-wrap {
+  
+}
+
 .wrap {
   padding: 0.7rem 0.4rem 0.3rem 0.4rem;
   margin: 0 auto;
@@ -239,7 +248,7 @@ img {
 
 .sticky {
   position: sticky;
-  top: 17px;
+  top: 67px;
 }
 
 .post-view.sticky {
@@ -302,6 +311,7 @@ pre code {
   color: rgba(32, 35, 51, 0.7);
   border-radius: 2px;
   text-align: center;
+  background: linear-gradient( -90deg , #f5f7d7, #e4f2f7);
 }
 
 .banner h1 {
@@ -639,27 +649,6 @@ img.img-post,
   color: #e45735;
 }
 
-#stHeader,
-.black.redactor #stHeader.sticky {
-  display: none;
-}
-
-#stHeader.sticky {
-  display: block;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  border-bottom: 1px solid #eee;
-  background-color: #fff;
-  z-index: 444;
-  font-size: 18px;
-  padding: 5px;
-}
-
-#stHeader.sticky a {
-  color: #e45735;
-}
-
 .no-md p {
   margin: 2px 0;
 }
@@ -707,6 +696,8 @@ img.img-post,
   -webkit-background-clip: content-box;
   background-clip: content-box;
   background-color: lightyellow;
+  margin-top: -50px;
+  padding-top: 50px;
 }
 
 ol.comment-telo {
@@ -973,7 +964,6 @@ footer a.footer:hover {
 }
 
 .dark header,
-.dark #stHeader.sticky,
 .dark footer,
 .dark .banner,
 .dark .bg-lightyellow {
@@ -1051,7 +1041,7 @@ footer a.footer:hover {
   height: 160px;
 }
 
-@media (max-width: 880px) {
+@media (max-width: 910px) {
   .no-mob,
   aside { display: none; }
   footer { padding: 8px; }

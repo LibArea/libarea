@@ -25,7 +25,7 @@
         </div>
       </div>
       <div class="box-number">
-        <div class="bg-red-500 p10 mr10">
+        <div class="bg-green-500 p10 mr10">
           <a class="white" rel="noreferrer" href="/admin/users">
             <div class="size-13 right">
               <i class="icon-user-o icon"></i>

@@ -23,7 +23,7 @@ class SearchModel extends MainModel
     }
 
     // Для Sphinx 
-    public static function getSearchServer($query)
+    public static function getSearchPostServer($query)
     {
         $sql = "SELECT 
                     id as post_id, 
@@ -35,8 +35,20 @@ class SearchModel extends MainModel
                     post_votes, 
                     SNIPPET(post_title, :qa) as _title, 
                     SNIPPET(post_content, :qa) AS _content 
-                        FROM postind WHERE MATCH(:qa)";
+                        FROM postind WHERE MATCH(:qa) LIMIT 50";
 
         return DB::run($sql, ['qa' => $query], 'mysql.sphinx-search')->fetchall(PDO::FETCH_ASSOC);
     }
+    
+    public static function getSearchTagsServer($query)
+    {
+        $sql = "SELECT 
+                    topic_slug, 
+                    topic_count, 
+                    topic_title
+                        FROM tagind WHERE MATCH(:qa) LIMIT 10";
+
+        return DB::run($sql, ['qa' => $query], 'mysql.sphinx-search')->fetchall(PDO::FETCH_ASSOC);
+    }
+    
 }

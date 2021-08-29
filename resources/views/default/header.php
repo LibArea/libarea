@@ -9,6 +9,7 @@
 </head>
 
 <body class="black<?php if (Request::getCookie('dayNight') == 'dark') { ?> dark<?php } ?>">
+<div class="header-wrap">
   <header class="flex justify-content-between align-items-center gray-light-2">
     <div class="flex align-items-center">
       <div>
@@ -22,19 +23,19 @@
       </div>
       <div>
         <a class="gray-light-2 ml30 no-mob" title="<?= lang('Spaces'); ?>" href="/spaces">
-          <i class="icon-infinity"></i>
-          <span class="size-15"><?= lang('Spaces'); ?></span>
+          <i class="icon-infinity size-21"></i>
+          <span><?= lang('Spaces'); ?></span>
         </a>
         <a class="gray-light-2 ml30 no-mob" title="<?= lang('Topics'); ?>" href="/topics">
-          <i class="icon-clone"></i>
-          <span class="size-15"><?= lang('Topics'); ?></span>
+          <i class="icon-clone size-21"></i>
+          <spa><?= lang('Topics'); ?></span>
         </a>
       </div>
     </div>
     <div class="flex align-items-center">
       <div class="ml30">
         <span id="toggledark" class="my-color-m">
-          <i class="icon-sun"></i>
+          <i class="icon-sun size-21"></i>
         </span>
       </div>
       <?php if (!$uid['user_id']) { ?>
@@ -53,9 +54,9 @@
           <div class="ml30 notif">
             <a href="/u/<?= $uid['user_login']; ?>/notifications">
               <?php if ($uid['notif']['notification_action_type'] == 1) { ?>
-                <i class="icon-mail red"></i>
+                <i class="icon-mail size-21 red"></i>
               <?php } else { ?>
-                <i class="icon-bell red"></i>
+                <i class="icon-bell size-21 red"></i>
               <?php } ?>
             </a>
           </div>
@@ -63,13 +64,13 @@
 
         <div class="ml30 add-post">
           <a title="<?= lang('Add post'); ?>" href="/post/add">
-            <i class="icon-plus blue middle"></i>
+            <i class="icon-plus blue size-21 middle"></i>
           </a>
         </div>
         <div class="dropbtn ml30">
-          <div class="nick size-15 gray" title="<?= $uid['user_login']; ?>">
+          <div class="nick gray" title="<?= $uid['user_login']; ?>">
             <?= $uid['user_login']; ?>
-            <?= user_avatar_img($uid['user_avatar'], 'small', $uid['user_login'], 'ava ml5'); ?>
+            <?= user_avatar_img($uid['user_avatar'], 'small', $uid['user_login'], 'ava-24 ml5'); ?>
             <i class="icon-down-dir middle"></i>
           </div>
           <div class="dropdown-menu absolute">
@@ -120,3 +121,4 @@
       <?php } ?>
     </div>
   </header>
+ </div>  

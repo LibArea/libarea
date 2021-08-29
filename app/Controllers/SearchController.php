@@ -31,12 +31,12 @@ class SearchController extends MainController
                         $row['post_content']  = Content::text(Base::cutWords($row['post_content'], 32, '...'), 'text');
                         $result[$ind]   = $row;
                     }
+                    
+                    $tags = [];
+                    
                 } else {
-                    $qa     =  SearchModel::getSearchServer($query);
-                    $result = array();
-                    foreach ($qa as $ind => $row) {
-                        $result[$ind]   = $row;
-                    }
+                    $result = SearchModel::getSearchPostServer($query);
+                    $tags   = SearchModel::getSearchTagsServer($query);
                 }
             } else {
                 Base::addMsg(lang('Empty request'), 'error');
@@ -50,8 +50,9 @@ class SearchController extends MainController
         ];
 
         $data = [
-            'result' => $result,
-            'query' => $query,
+            'result'    => $result,
+            'query'     => $query,
+            'tags'      => $tags,
         ];
 
         return view('/search/index', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);

@@ -59,7 +59,6 @@ class TopicController extends MainController
         $page   = $page == 0 ? 1 : $page;
 
         $slug   = Request::get('slug');
-
         $topic  = TopicModel::getTopic($slug, 'slug');
         Base::PageError404($topic);
  

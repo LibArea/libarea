@@ -1,10 +1,4 @@
 <div class="wrap">
-  <div id="stHeader">
-    <a title="<?= lang('Home'); ?>" href="/"><i class="icon-home-outline"></i></a>
-    <span class="separator gray middle mr5 ml5">\</span>
-    <span class="middle"><?= $data['post']['post_title']; ?></span>
-  </div>
-
   <main>
     <article class="post-full">
       <?php if ($data['post']['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
