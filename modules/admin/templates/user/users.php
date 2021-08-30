@@ -3,28 +3,15 @@
   <main class="admin">
     <div class="white-box pt5 pr15 pb5 pl15">
       <?= breadcrumb('/admin', lang('Admin'), '/admin/users', lang('Users'), $data['meta_title']); ?>
-
-      <ul class="nav-tabs list-none">
-        <?php if ($data['sheet'] == 'users') { ?>
-          <li class="active">
-            <span><?= lang('All'); ?></span>
-          </li>
-          <li>
-            <a href="/admin/users/ban">
-              <span><?= lang('Banned'); ?></span>
-            </a>
-          </li>
-        <?php } elseif ($data['sheet'] == 'users-ban') { ?>
-          <li>
-            <a href="/admin/users">
-              <span><?= lang('All'); ?></span>
-            </a>
-          </li>
-          <li class="active">
-            <span><?= lang('Banned'); ?></span>
-          </li>
-        <?php } ?>
-      </ul>
+ 
+      <?php
+      $pages = array(
+        array('id' => 'users', 'url' => '/admin/users', 'content' => lang('All')),
+        array('id' => 'users-ban', 'url' => '/admin/users/ban', 'content' => lang('Banned')),
+      );
+      echo tabs_nav($pages, $data['sheet'], $uid);
+      ?>
+ 
       <?php if ($alluser) {  ?>
         <table>
           <thead>

@@ -9,31 +9,14 @@
         <?php } ?>
       <?php } ?>
       <h1><?= $data['h1']; ?></h1>
-      <ul class="nav-tabs list-none">
-        <?php if ($data['sheet'] == 'spaces') { ?>
-          <li class="active">
-            <span><?= lang('All'); ?></span>
-          </li>
-          <?php if ($uid['user_id'] > 0) { ?>
-            <li>
-              <a href="/space/my">
-                <span><?= lang('Signed'); ?></span>
-              </a>
-            </li>
-          <?php } ?>
-        <?php } else { ?>
-          <li>
-            <a href="/spaces">
-              <span><?= lang('All'); ?></span>
-            </a>
-          </li>
-          <?php if ($uid['user_id'] > 0) { ?>
-            <li class="active">
-              <span><?= lang('Signed'); ?></span>
-            </li>
-          <?php } ?>
-        <?php } ?>
-      </ul>
+
+      <?php
+      $pages = array(
+        array('id' => 'spaces', 'url' => '/spaces', 'content' => lang('All')),
+        array('id' => 'my-space', 'url' => '/space/my', 'content' => lang('Signed'), 'auth' => 'yes'),
+      );
+      echo tabs_nav($pages, $data['sheet'], $uid);
+      ?>
 
       <?php if (!empty($data['spaces'])) { ?>
         <div class="flex all-box-spaces">

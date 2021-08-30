@@ -5,29 +5,13 @@
       <a class="right" title="<?= lang('Add'); ?>" href="/space/add">
         <i class="icon-plus middle"></i>
       </a>
-      <?= breadcrumb('/admin', lang('Admin'), null, null, $data['meta_title']); ?>
-
-      <ul class="nav-tabs list-none">
-        <?php if ($data['sheet'] == 'spaces') { ?>
-          <li class="active">
-            <span><?= lang('All'); ?></span>
-          </li>
-          <li>
-            <a href="/admin/spaces/ban">
-              <span><?= lang('Banned'); ?></span>
-            </a>
-          </li>
-        <?php } elseif ($data['sheet'] == 'spaces-ban') { ?>
-          <li>
-            <a href="/admin/spaces">
-              <span><?= lang('All'); ?></span>
-            </a>
-          </li>
-          <li class="active">
-            <span><?= lang('Banned'); ?></span>
-          </li>
-        <?php } ?>
-      </ul>
+      <?= breadcrumb('/admin', lang('Admin'), null, null, $data['meta_title']);
+      $pages = array(
+        array('id' => 'spaces', 'url' => '/admin/spaces', 'content' => lang('All')),
+        array('id' => 'spaces-ban', 'url' => '/admin/spaces/ban', 'content' => lang('Banned')),
+      );
+      echo tabs_nav($pages, $data['sheet'], $uid);
+      ?>
 
       <?php if (!empty($spaces)) { ?>
         <table>

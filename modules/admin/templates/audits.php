@@ -2,29 +2,13 @@
 <div class="wrap">
   <main class="admin">
     <div class="white-box pt5 pr15 pb5 pl15">
-      <?= breadcrumb('/admin', lang('Admin'), null, null, $data['meta_title']); ?>
-
-      <ul class="nav-tabs list-none">
-        <?php if ($data['sheet'] == 'approved') { ?>
-          <li class="active">
-            <span><?= lang('New ones'); ?></span>
-          </li>
-          <li>
-            <a href="/admin/audits/approved">
-              <span><?= lang('Approved'); ?></span>
-            </a>
-          </li>
-        <?php } elseif ($data['sheet'] == 'audits') {  ?>
-          <li>
-            <a href="/admin/audits">
-              <span><?= lang('New ones'); ?></span>
-            </a>
-          </li>
-          <li class="active">
-            <span><?= lang('Approved'); ?></span>
-          </li>
-        <?php } ?>
-      </ul>
+      <?= breadcrumb('/admin', lang('Admin'), null, null, $data['meta_title']);
+      $pages = array(
+        array('id' => 'approved', 'url' => '/admin/audits', 'content' => lang('New ones')),
+        array('id' => 'audits', 'url' => '/admin/audits/approved', 'content' => lang('Approved')),
+      );
+      echo tabs_nav($pages, $data['sheet'], $uid);
+      ?>
 
       <?php if (!empty($audits)) { ?>
         <table>

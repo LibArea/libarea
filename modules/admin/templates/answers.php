@@ -2,34 +2,16 @@
 <div class="wrap">
   <main class="admin">
     <div class="white-box pt5 pr15 pb5 pl15">
-      <?= breadcrumb('/admin', lang('Admin'), null, null, $data['meta_title']); ?>
-
-      <ul class="nav-tabs list-none">
-        <?php if ($data['sheet'] == 'answers') { ?>
-          <li class="active">
-            <span><?= lang('All'); ?></span>
-          </li>
-          <li>
-            <a href="/admin/answers/ban">
-              <span><?= lang('Deleted answers'); ?></span>
-            </a>
-          </li>
-        <?php } elseif ($data['sheet'] == 'answers-ban') { ?>
-          <li>
-            <a href="/admin/answers">
-              <span><?= lang('All'); ?></span>
-            </a>
-          </li>
-          <li class="active">
-            <span><?= lang('Deleted answers'); ?></span>
-          </li>
-        <?php } ?>
-      </ul>
+      <?= breadcrumb('/admin', lang('Admin'), null, null, $data['meta_title']);
+      $pages = array(
+        array('id' => 'answers', 'url' => '/admin/answers', 'content' => lang('All')),
+        array('id' => 'answers-ban', 'url' => '/admin/answers/ban', 'content' => lang('Deleted answers')),
+      );
+      echo tabs_nav($pages, $data['sheet'], $uid);
+      ?>
 
       <?php if (!empty($answers)) { ?>
-
         <?php foreach ($answers as $answer) { ?>
-
           <div class="answ-telo_bottom" id="answer_<?= $answer['answer_id']; ?>">
             <div class="size-13">
               <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'ava'); ?>
@@ -64,7 +46,6 @@
             </div>
           </div>
         <?php } ?>
-
       <?php } else { ?>
         <?= no_content('No'); ?>
       <?php } ?>

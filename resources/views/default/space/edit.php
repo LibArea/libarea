@@ -3,7 +3,7 @@
     <div class="white-box pt5 pr15 pb5 pl15">
       <?= breadcrumb('/', lang('Home'), '/s/' . $data['space']['space_slug'], $data['space']['space_name'], lang('Change') . ' — ' . $data['space']['space_slug']); ?>
 
-      <ul class="nav-tabs list-none">
+      <ul class="nav-tabs list-none mt0 pt10 pr15 pb15 pl0">
         <li class="active">
           <span><?= lang('Edit'); ?></span>
         </li>

@@ -720,7 +720,6 @@ ol.comment-telo {
 .nav-tabs {
   position: relative;
   height: 45px;
-  padding: 13px 15px 15px 0;
   color: #667d99;
 }
 
@@ -730,7 +729,7 @@ ol.comment-telo {
 }
 
 .nav-tabs > li > a {
-  padding: 10px 15px;
+  padding: 10px 15px 8px 15px;
   cursor: pointer;
   color: #969696;
   border-bottom: 2px solid transparent;
@@ -742,7 +741,7 @@ ol.comment-telo {
 }
 
 .nav-tabs > li.active span {
-  padding: 10px 15px;
+  padding: 10px 15px 8px 15px;
   border-bottom: 2px solid #e45735;
   color: #646464;
 }

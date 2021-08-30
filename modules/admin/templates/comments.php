@@ -2,29 +2,13 @@
 <div class="wrap">
   <main class="admin">
     <div class="white-box pt5 pr15 pb5 pl15">
-      <?= breadcrumb('/admin', lang('Admin'), null, null, $data['meta_title']); ?>
-
-      <ul class="nav-tabs list-none">
-        <?php if ($data['sheet'] == 'comments') { ?>
-          <li class="active">
-            <span><?= lang('All'); ?></span>
-          </li>
-          <li>
-            <a href="/admin/comments/ban">
-              <span><?= lang('Deleted comments'); ?></span>
-            </a>
-          </li>
-        <?php } elseif ($data['sheet'] == 'comments-ban') { ?>
-          <li>
-            <a href="/admin/comments">
-              <span><?= lang('All'); ?></span>
-            </a>
-          </li>
-          <li class="active">
-            <span><?= lang('Deleted comments'); ?></span>
-          </li>
-        <?php } ?>
-      </ul>
+      <?= breadcrumb('/admin', lang('Admin'), null, null, $data['meta_title']);
+      $pages = array(
+        array('id' => 'comments', 'url' => '/admin/comments', 'content' => lang('All')),
+        array('id' => 'comments-ban', 'url' => '/admin/comments/ban', 'content' => lang('Deleted comments')),
+      );
+      echo tabs_nav($pages, $data['sheet'], $uid);
+      ?>
 
       <?php if (!empty($comments)) { ?>
         <?php foreach ($comments as $comment) { ?>

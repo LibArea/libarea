@@ -315,3 +315,20 @@ function accessСheck($content, $type, $uid, $after, $stop_time)
 
     return true;
 }
+
+function tabs_nav($pages, $sheet, $uid)
+{
+    $html = '<ul class="nav-tabs list-none mt0 pt15 pr15 pb15 pl0">';
+    foreach ($pages as $page) { 
+        if ( empty($page['auth']) == 'no' || $uid['user_id'] > 0) {
+            if ($page['id'] == $sheet) { 
+                $html .= '<li class="active"><span>'.$page['content'].'</span></li>';
+            } else { 
+                $html .= '<li><a href="'.$page['url'].'"><span>'.$page['content'].'</span></a></li>';
+            }
+        }        
+    } 
+    $html .= '</ul>';
+    
+    return $html;
+}

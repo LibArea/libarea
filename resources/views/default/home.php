@@ -12,25 +12,11 @@
     <?php
     $pages = array(
       array('id' => 'feed', 'url' => '/', 'content' => lang('Feed')),
-      array('id' => 'all', 'url' => '/all', 'content' => lang('All')),
+      array('id' => 'all', 'url' => '/all', 'content' => lang('All'), 'auth' => 'yes'),
       array('id' => 'top', 'url' => '/top', 'content' => lang('Top')),
     );
+    echo tabs_nav($pages, $data['sheet'], $uid);
     ?>
-    <ul class="nav-tabs list-none mt0 pt0 mb15">
-      <?php foreach ($pages as $page) { ?>
-        <?php if ($uid['user_id'] || $page['id'] != 'all') { ?>
-          <?php if ($page['id'] == $data['sheet']) { ?>
-            <li class="active">
-              <span> <?= $page['content']; ?></span>
-            </li>
-          <?php } else { ?>
-            <li>
-              <a href="<?= $page['url']; ?>"><span><?= $page['content']; ?></span></a>
-            </li>
-          <?php } ?>
-        <?php } ?>
-      <?php } ?>
-    </ul>
 
     <?php if ($uid['uri'] == '/' && $uid['user_id'] > 0 && empty($data['space_user'])) { ?>
       <div class="white-box">

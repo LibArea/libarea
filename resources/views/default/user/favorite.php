@@ -1,10 +1,14 @@
 <div class="wrap">
   <main>
     <div class="white-box pt5 pr15 pb0 pl15">
-      <?= breadcrumb('/', lang('Home'), '/u/' . $uid['user_login'], lang('Profile'), lang('Favorites')); ?>
-      <?php include TEMPLATE_DIR . '/_block/favorite-nav.php'; ?>
+      <?= breadcrumb('/', lang('Home'), '/u/' . $uid['user_login'], lang('Profile'), lang('Favorites'));
+      $pages = array(
+        array('id' => 'favorites', 'url' => '/u/' . $uid['user_login'] . '/favorite', 'content' => lang('Favorites')),
+        array('id' => 'subscribed', 'url' => '/u/' . $uid['user_login'] . '/subscribed', 'content' => lang('Subscribed')),
+      );
+      echo tabs_nav($pages, $data['sheet'], $uid);
+      ?>
     </div>
-
     <?php if (!empty($data['favorites'])) { ?>
       <?php foreach ($data['favorites'] as $fav) { ?>
         <div class="white-box pt5 pr15 pb5 pl15">
@@ -29,11 +33,9 @@
                   <span class="mr5"></span>
                   <?= $fav['user_login']; ?>
                 </a>
-
                 <span class="mr5 gray">
                   <?= $fav['date']; ?>
                 </span>
-
                 <a class="mr5 gray" href="/s/<?= $fav['space_slug']; ?>" title="<?= $fav['space_name']; ?>">
                   <?= $fav['space_name']; ?>
                 </a>
