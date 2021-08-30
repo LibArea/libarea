@@ -48,25 +48,23 @@
       </div>
     </div>
 
-    <div class="white-box mt10">
-      <div class="pt5 pr15 pb5 pl15">
-        <h4 class="mt5"><?= lang('Useful resources'); ?></h4>
-        <i class="icon-record-outline gray-light"></i> <a rel="noreferrer" href="https://loriup.ru">LoriUP.ru</a></br>
-        <i class="icon-record-outline gray-light"></i> <a rel="noreferrer" href="https://phphleb.ru/">PHP Micro-Framework HLEB</a></br>
-        </ul>
-        <hr>
-        <div class="boxline">
-          <label for="name">PC:</label>
-          <?= php_uname('s'); ?> <?php echo php_uname('r'); ?>
-        </div>
-        <div class="boxline">
-          <label for="name">PHP:</label>
-          <?= PHP_VERSION; ?>
-        </div>
-        <div class="boxline">
-          <label for="name"><?= lang('Freely'); ?>:</label>
-          <?= $data['bytes']; ?>
-        </div>
+    <div class="white-box mt10 pt5 pr15 pb5 pl15">
+      <h4 class="mt5"><?= lang('Useful resources'); ?></h4>
+      <i class="icon-record-outline gray-light"></i> <a rel="noreferrer" href="https://loriup.ru">LoriUP.ru</a></br>
+      <i class="icon-record-outline gray-light"></i> <a rel="noreferrer" href="https://phphleb.ru/">PHP Micro-Framework HLEB</a></br>
+      </ul>
+      <hr>
+      <div class="boxline">
+        <label for="name">PC:</label>
+        <?= php_uname('s'); ?> <?php echo php_uname('r'); ?>
+      </div>
+      <div class="boxline">
+        <label for="name">PHP:</label>
+        <?= PHP_VERSION; ?>
+      </div>
+      <div class="boxline">
+        <label for="name"><?= lang('Freely'); ?>:</label>
+        <?= $data['bytes']; ?>
       </div>
     </div>
   </main>

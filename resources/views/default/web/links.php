@@ -51,10 +51,8 @@
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/domains'); ?>
   </main>
   <aside>
-    <div class="white-box">
-      <div class="pt5 pr15 pb5 pl15 space-tags">
-        <?= lang('domains-desc'); ?>.
-      </div>
+    <div class="white-box p15">
+      <?= lang('domains-desc'); ?>.
     </div>
   </aside>
 </div>

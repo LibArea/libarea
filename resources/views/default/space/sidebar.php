@@ -1,9 +1,9 @@
 <aside>
   <div class="size-15 white-box">
     <div class="pt15 pr15 pb5 pl15">
-      <div class="mt15">
+      <h3 class="mt0">
         <?= $data['space']['space_short_text']; ?>
-      </div>
+      </h3>
       <div class="flex w-100 mt15 mb10">
         <div class="_bl">
           <p class="bl-n m0"><a href="/u/<?= $data['space']['user_login']; ?>">

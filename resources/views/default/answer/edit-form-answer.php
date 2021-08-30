@@ -2,7 +2,8 @@
   <main class="w-100">
     <div class="white-box">
       <div class="pt5 pr15 pb5 pl15">
-        <?= breadcrumb('/', lang('Home'), '/post/' . $data['post']['post_id'] . '/' . $data['post']['post_slug'], $data['post']['post_title'], lang('Edit answer')); ?>
+        <?= breadcrumb('/', lang('Home'), null, null, lang('Edit answer')); ?>
+        <a class="mb5 block" href="<?= post_url($data['post']); ?>"><?= $data['post']['post_title']; ?></a>
 
         <div class="answer_addentry">
           <?php if ($uid['user_id'] > 0) { ?>

@@ -78,24 +78,22 @@
   <aside>
     <?php if ($uid['user_id']) { ?>
       <?php if (!empty($data['space_user'])) { ?>
-        <div class="white-box">
-          <div class="pt5 pr15 pb5 pl15">
-            <a class="right" title="<?= lang('Spaces'); ?>" href="/spaces">
-              <i class="icon-right-open-big middle size-13"></i>
-            </a>
-            <div class="uppercase mb5 mt5 size-13">
-              <?= lang('Signed'); ?>
-            </div>
-            <?php foreach ($data['space_user'] as  $sig) { ?>
-              <a class="bar-space-telo flex relative pt5 pb5 hidden gray" href="/s/<?= $sig['space_slug']; ?>" title="<?= $sig['space_name']; ?>">
-                <?= spase_logo_img($sig['space_img'], 'small', $sig['space_name'], 'ava-24 mr5'); ?>
-                <span class="ml5 size-13"><?= $sig['space_name']; ?></span>
-                <?php if ($sig['space_user_id'] == $uid['user_id']) { ?>
-                  <sup class="red mr5 ml5">+</sup>
-                <?php } ?>
-              </a>
-            <?php } ?>
+        <div class="white-box pt5 pr15 pb5 pl15">
+          <a class="right" title="<?= lang('Spaces'); ?>" href="/spaces">
+            <i class="icon-right-open-big middle size-13"></i>
+          </a>
+          <div class="uppercase mb5 mt5 size-13">
+            <?= lang('Signed'); ?>
           </div>
+          <?php foreach ($data['space_user'] as  $sig) { ?>
+            <a class="bar-space-telo flex relative pt5 pb5 hidden gray" href="/s/<?= $sig['space_slug']; ?>" title="<?= $sig['space_name']; ?>">
+              <?= spase_logo_img($sig['space_img'], 'small', $sig['space_name'], 'ava-24 mr5'); ?>
+              <span class="ml5 size-13"><?= $sig['space_name']; ?></span>
+              <?php if ($sig['space_user_id'] == $uid['user_id']) { ?>
+                <sup class="red mr5 ml5">+</sup>
+              <?php } ?>
+            </a>
+          <?php } ?>
         </div>
       <?php } ?>
     <?php } else { ?>
@@ -103,21 +101,19 @@
     <?php } ?>
 
     <?php if (!empty($data['latest_answers'])) { ?>
-      <div class="last-comm white-box sticky">
-        <div class="pt5 pr15 pb5 pl15">
-          <?php foreach ($data['latest_answers'] as  $answer) { ?>
-            <div class="mt15 mr0 mb15 ml0 pl15" style="border-left: 2px solid <?= $answer['space_color']; ?>;">
-              <div class="size-13">
-                <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'ava'); ?>
-                <span class="ml5"></span>
-                <?= $answer['answer_date']; ?>
-              </div>
-              <a class="gray" href="/post/<?= $answer['post_id']; ?>/<?= $answer['post_slug']; ?>#answer_<?= $answer['answer_id']; ?>">
-                <?= $answer['answer_content']; ?>...
-              </a>
+      <div class="last-comm white-box sticky pt5 pr15 pb5 pl15">
+        <?php foreach ($data['latest_answers'] as  $answer) { ?>
+          <div class="mt15 mr0 mb15 ml0 pl15" style="border-left: 2px solid <?= $answer['space_color']; ?>;">
+            <div class="size-13">
+              <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'ava'); ?>
+              <span class="ml5"></span>
+              <?= $answer['answer_date']; ?>
             </div>
-          <?php } ?>
-        </div>
+            <a class="gray" href="/post/<?= $answer['post_id']; ?>/<?= $answer['post_slug']; ?>#answer_<?= $answer['answer_id']; ?>">
+              <?= $answer['answer_content']; ?>...
+            </a>
+          </div>
+        <?php } ?>
       </div>
     <?php } ?>
   </aside>

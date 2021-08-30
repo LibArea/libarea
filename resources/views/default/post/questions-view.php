@@ -1,10 +1,10 @@
-<?php if (!empty($answers)) { ?>
+<?php if (!empty($data['answers'])) { ?>
   <div class="white-box p15">
     <h2 class="lowercase m0 size-21">
-      <?= $post['post_answers_count'] ?> <?= $post['num_answers'] ?>
+      <?= $data['post']['post_answers_count'] ?> <?= $data['post']['num_answers'] ?>
     </h2>
 
-    <?php foreach ($answers as  $answer) { ?>
+    <?php foreach ($data['answers'] as  $answer) { ?>
       <div class="block-answer">
         <?php if ($answer['answer_is_deleted'] == 0) { ?>
 
@@ -38,10 +38,10 @@
                 <?= votes($uid['user_id'], $answer, 'answer'); ?>
 
                 <?php if ($uid['user_trust_level'] >= Lori\Config::get(Lori\Config::PARAM_TL_ADD_COMM_QA)) { ?>
-                  <?php if ($post['post_closed'] == 0) { ?>
-                    <?php if ($post['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
+                  <?php if ($data['post']['post_closed'] == 0) { ?>
+                    <?php if ($data['post']['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
                       <span class="ml15">
-                        <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray"><?= lang('Reply'); ?></a>
+                        <a data-post_id="<?= $data['post']['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray"><?= lang('Reply'); ?></a>
                       </span>
                     <?php } ?>
                   <?php } ?>
@@ -75,7 +75,7 @@
                 <?php } ?>
                 <?php if ($uid['user_id'] != $answer['answer_user_id'] && $uid['user_trust_level'] > 0) { ?>
                   <span id="answer_dell" class="ml15">
-                    <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray">
+                    <a data-post_id="<?= $data['post']['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray">
                       <?= lang('Report'); ?>
                     </a>
                   </span>
@@ -116,10 +116,10 @@
                   </span>
 
                   <?php if ($uid['user_trust_level'] >= Lori\Config::get(Lori\Config::PARAM_TL_ADD_COMM_QA)) { ?>
-                    <?php if ($post['post_closed'] == 0) { ?>
-                      <?php if ($post['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
+                    <?php if ($data['post']['post_closed'] == 0) { ?>
+                      <?php if ($data['post']['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
                         <span class="ml5">
-                          <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment-re gray">
+                          <a data-post_id="<?= $data['post']['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment-re gray">
                             <?= lang('Reply'); ?>
                           </a>
                         </span>
@@ -129,7 +129,7 @@
 
                   <?php if ($uid['user_id'] == $comment['comment_user_id'] || $uid['user_trust_level'] == 5) { ?>
                     <span id="comment_edit" class="ml5">
-                      <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray">
+                      <a data-post_id="<?= $data['post']['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray">
                         <?= lang('Edit'); ?>
                       </a>
                     </span>
@@ -144,7 +144,7 @@
                   <?php } ?>
                   <?php if ($uid['user_id'] != $comment['comment_user_id'] && $uid['user_trust_level'] > 0) { ?>
                     <span id="answer_dell" class="ml5">
-                      <a data-post_id="<?= $post['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray">
+                      <a data-post_id="<?= $data['post']['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray">
                         <?= lang('Report'); ?>
                       </a>
                     </span>
@@ -152,10 +152,8 @@
                 </div>
               </div>
               <div id="comment_addentry<?= $comment['comment_id']; ?>" class="reply"></div>
-
             </li>
           </ol>
-
         <?php } else { ?>
 
         <?php } ?>
@@ -164,7 +162,7 @@
     <?php } ?>
   </div>
 <?php } else { ?>
-  <?php if ($post['post_closed'] != 1) { ?>
+  <?php if ($data['post']['post_closed'] != 1) { ?>
     <?= no_content('No answers'); ?>
   <?php } ?>
 <?php } ?>
@@ -173,19 +171,18 @@
   <?= no_content('you-question-no'); ?>
 <?php } else { ?>
   <?php if ($uid['user_id']) { ?>
-    <?php if ($post['post_closed'] == 0) { ?>
+    <?php if ($data['post']['post_closed'] == 0) { ?>
       <form id="add_answ" action="/answer/create" accept-charset="UTF-8" method="post">
         <?= csrf_field() ?>
         <div id="test-markdown-view-post">
           <textarea minlength="6" class="wmd-input h-150 w-95" rows="5" name="answer" id="wmd-input"></textarea>
         </div>
         <div class="clear">
-          <input type="hidden" name="post_id" id="post_id" value="<?= $post['post_id']; ?>">
+          <input type="hidden" name="post_id" id="post_id" value="<?= $data['post']['post_id']; ?>">
           <input type="hidden" name="answer_id" id="answer_id" value="0">
           <input type="submit" name="answit" value="<?= lang('Reply'); ?>" class="button">
         </div>
       </form>
-
     <?php } ?>
   <?php } else { ?>
     <?= no_content('no-auth-login'); ?>

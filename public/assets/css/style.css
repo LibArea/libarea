@@ -207,6 +207,7 @@ img {
 .relative { position: relative; }
 .bg-lightyellow { background-color: lightyellow; }
 .list-none { list-style: none; }
+.left-5 { left: 5px; }
 
 .flex {
   display: flex;
@@ -912,11 +913,6 @@ footer a.footer:hover {
   padding: 10px 5px 10px 68px;
   border-bottom: 1px solid #f2f2f2;
   min-height: 60px;
-}
-
-.img-box {
-  left: 5px;
-  top: 17px;
 }
 
 .oblong-box-list {

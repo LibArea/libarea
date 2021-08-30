@@ -1,7 +1,7 @@
 <?php if (!empty($data['answers'])) { ?>
   <div class="white-box p15">
     <h2 class="lowercase m0 size-21">
-      <?= $data['post']['post_answers_count'] + $data['post']['post_comments_count'] ?> 
+      <?= $data['post']['post_answers_count'] + $data['post']['post_comments_count'] ?>
       <?= $data['post']['num_comments'] ?>
     </h2>
     <div class="border-bottom mt5 mb10"></div>

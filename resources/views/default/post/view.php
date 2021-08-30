@@ -2,7 +2,7 @@
   <main>
     <article class="post-full">
       <?php if ($data['post']['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
-        <div class="white-box p15<?php if ($data['post']['post_is_deleted'] == 1) { ?> delleted pl15<?php } ?>">
+        <div class="white-box pt10 pr15 pb15 pl15<?php if ($data['post']['post_is_deleted'] == 1) { ?> delleted<?php } ?>">
           <div class="post-body">
             <h1 class="title size-21">
               <?= $data['post']['post_title']; ?>
@@ -224,16 +224,14 @@
   </main>
 
   <aside>
-    <div class="white-box">
-      <div class="pt5 pr15 pb5 pl15">
-        <div class="mt10 mb10">
-          <a title="<?= $data['post']['space_name']; ?>" href="/s/<?= $data['post']['space_slug']; ?>">
-            <?= spase_logo_img($data['post']['space_img'], 'max', $data['post']['space_slug'], 'ava-24'); ?>
-            <span class="mr5 ml5"><?= $data['post']['space_name']; ?></span>
-          </a>
-        </div>
-        <div class="gray size-13"><?= $data['post']['space_short_text']; ?></div>
+    <div class="white-box pt5 pr15 pb5 pl15">
+      <div class="mt10 mb10">
+        <a title="<?= $data['post']['space_name']; ?>" href="/s/<?= $data['post']['space_slug']; ?>">
+          <?= spase_logo_img($data['post']['space_img'], 'max', $data['post']['space_slug'], 'ava-24'); ?>
+          <span class="mr5 ml5"><?= $data['post']['space_name']; ?></span>
+        </a>
       </div>
+      <div class="gray size-13"><?= $data['post']['space_short_text']; ?></div>
     </div>
     <?php if ($data['post']['post_content_img']) { ?>
       <div class="white-box">
@@ -242,38 +240,34 @@
         </div>
       </div>
     <?php } ?>
-    <div class="white-box">
-      <div class="pt5 pr15 pb10 pl15">
-        <h3 class="recommend size-13"><?= lang('To share'); ?></h3>
-        <div class="social center" data-url="<?= Lori\Config::get(Lori\Config::PARAM_URL) . '/post/' . $data['post']['post_id'] . '/' . $data['post']['post_slug']; ?>" data-title="<?= $data['post']['post_title']; ?>">
-          <a class="size-21 pl15 pr15 gray-light-2" data-id="fb"><i class="icon-facebook"></i></a>
-          <a class="size-21 pl15 pr15 gray-light-2" data-id="vk"><i class="icon-vkontakte"></i></a>
-          <a class="size-21 pl15 pr15 gray-light-2" data-id="tw"><i class="icon-twitter"></i></a>
-        </div>
+    <div class="white-box pt0 pr15 pb5 pl15">
+      <h3 class="recommend size-13"><?= lang('To share'); ?></h3>
+      <div class="social center" data-url="<?= Lori\Config::get(Lori\Config::PARAM_URL) . '/post/' . $data['post']['post_id'] . '/' . $data['post']['post_slug']; ?>" data-title="<?= $data['post']['post_title']; ?>">
+        <a class="size-21 pl15 pr15 gray-light-2" data-id="fb"><i class="icon-facebook"></i></a>
+        <a class="size-21 pl15 pr15 gray-light-2" data-id="vk"><i class="icon-vkontakte"></i></a>
+        <a class="size-21 pl15 pr15 gray-light-2" data-id="tw"><i class="icon-twitter"></i></a>
       </div>
     </div>
 
     <?php if ($data['recommend']) { ?>
-      <div class="white-box post-view sticky recommend">
-        <div class="pt5 pr15 pb5 pl15">
-          <h3 class="recommend size-13"><?= lang('Recommended'); ?></h3>
-          <?php foreach ($data['recommend'] as  $rec_post) { ?>
-            <div class="mb15 hidden flex">
-              <a class="gray size-15" href="/post/<?= $rec_post['post_id']; ?>/<?= $rec_post['post_slug']; ?>">
-                <?php if ($rec_post['post_answers_count'] > 0) { ?>
-                  <div class="up-box-post green-box size-13 center mr15">
-                    <?= $rec_post['post_answers_count'] ?>
-                  </div>
-                <?php } else { ?>
-                  <div class="up-box-post gray-box size-13 center mr15">0</div>
-                <?php } ?>
-              </a>
-              <a class="gray size-13" href="/post/<?= $rec_post['post_id']; ?>/<?= $rec_post['post_slug']; ?>">
-                <?= $rec_post['post_title']; ?>
-              </a>
-            </div>
-          <?php } ?>
-        </div>
+      <div class="white-box post-view sticky recommend pt5 pr15 pb5 pl15">
+        <h3 class="recommend size-13"><?= lang('Recommended'); ?></h3>
+        <?php foreach ($data['recommend'] as  $rec_post) { ?>
+          <div class="mb15 hidden flex">
+            <a class="gray size-15" href="/post/<?= $rec_post['post_id']; ?>/<?= $rec_post['post_slug']; ?>">
+              <?php if ($rec_post['post_answers_count'] > 0) { ?>
+                <div class="up-box-post green-box size-13 center mr15">
+                  <?= $rec_post['post_answers_count'] ?>
+                </div>
+              <?php } else { ?>
+                <div class="up-box-post gray-box size-13 center mr15">0</div>
+              <?php } ?>
+            </a>
+            <a class="gray size-13" href="/post/<?= $rec_post['post_id']; ?>/<?= $rec_post['post_slug']; ?>">
+              <?= $rec_post['post_title']; ?>
+            </a>
+          </div>
+        <?php } ?>
       </div>
     <?php } ?>
   </aside>
