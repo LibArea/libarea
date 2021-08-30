@@ -9,55 +9,26 @@
 
 <div class="wrap">
   <main class="telo">
-    <ul class="nav-tabs list-none mt0 mb15">
-      <?php if ($data['sheet'] == 'feed') { ?>
-        <li class="active">
-          <span><?= lang('Feed'); ?></span>
-        </li>
-        <?php if ($uid['user_id']) { ?>
-          <li>
-            <a href="/all">
-              <span><?= lang('All'); ?></span>
-            </a>
-          </li>
+    <?php
+    $pages = array(
+      array('id' => 'feed', 'url' => '/', 'content' => lang('Feed')),
+      array('id' => 'all', 'url' => '/all', 'content' => lang('All')),
+      array('id' => 'top', 'url' => '/top', 'content' => lang('Top')),
+    );
+    ?>
+    <ul class="nav-tabs list-none mt0 pt0 mb15">
+      <?php foreach ($pages as $page) { ?>
+        <?php if ($uid['user_id'] || $page['id'] != 'all') { ?>
+          <?php if ($page['id'] == $data['sheet']) { ?>
+            <li class="active">
+              <span> <?= $page['content']; ?></span>
+            </li>
+          <?php } else { ?>
+            <li>
+              <a href="<?= $page['url']; ?>"><span><?= $page['content']; ?></span></a>
+            </li>
+          <?php } ?>
         <?php } ?>
-        <li>
-          <a href="/top">
-            <span>Top</span>
-          </a>
-        </li>
-      <?php } elseif ($data['sheet'] == 'all') { ?>
-        <li>
-          <a href="/">
-            <span><?= lang('Feed'); ?></span>
-          </a>
-        </li>
-        <?php if ($uid['user_id']) { ?>
-          <li class="active">
-            <span><?= lang('All'); ?></span>
-          </li>
-        <?php } ?>
-        <li>
-          <a href="/top">
-            <span>Top</span>
-          </a>
-        </li>
-      <?php } else { ?>
-        <li>
-          <a href="/">
-            <span><?= lang('Feed'); ?></span>
-          </a>
-        </li>
-        <?php if ($uid['user_id']) { ?>
-          <li>
-            <a href="/all">
-              <span><?= lang('All'); ?></span>
-            </a>
-          </li>
-        <?php } ?>
-        <li class="active">
-          <span>Top</span>
-        </li>
       <?php } ?>
     </ul>
 
@@ -71,9 +42,7 @@
     <?php } ?>
 
     <?php include TEMPLATE_DIR . '/_block/post.php'; ?>
-
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], null); ?>
-
   </main>
   <aside>
     <?php if ($uid['user_id']) { ?>
@@ -86,7 +55,7 @@
             <?= lang('Signed'); ?>
           </div>
           <?php foreach ($data['space_user'] as  $sig) { ?>
-            <a class="bar-space-telo flex relative pt5 pb5 hidden gray" href="/s/<?= $sig['space_slug']; ?>" title="<?= $sig['space_name']; ?>">
+            <a class="flex relative pt5 pb5 hidden gray" href="/s/<?= $sig['space_slug']; ?>" title="<?= $sig['space_name']; ?>">
               <?= spase_logo_img($sig['space_img'], 'small', $sig['space_name'], 'ava-24 mr5'); ?>
               <span class="ml5 size-13"><?= $sig['space_name']; ?></span>
               <?php if ($sig['space_user_id'] == $uid['user_id']) { ?>

@@ -650,15 +650,6 @@ img.img-post,
   margin: 2px 0;
 }
 
-.bar-space-telo {
-  align-items: center;
-  margin-bottom: 3px;
-  width: 140px;
-  text-decoration: none;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
 .lo-post {
   max-width: 660px;
   background-color: #f3f3f3;

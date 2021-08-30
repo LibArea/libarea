@@ -80,7 +80,7 @@
                   <span class="d">
                     <?php foreach ($data['spaces_user'] as  $space) { ?>
                       <div class="mt5 mb5">
-                        <a class="bar-space-telo flex relative pt5 pb5 hidden gray" href="/s/<?= $space['space_slug']; ?>">
+                        <a class="flex relative pt5 pb5 hidden gray" href="/s/<?= $space['space_slug']; ?>">
                           <?= spase_logo_img($space['space_img'], 'small', $space['space_name'], 'space-logo mr5'); ?>
                           <span class="bar-name size-13"><?= $space['space_name']; ?></span>
                         </a>

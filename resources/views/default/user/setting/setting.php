@@ -45,7 +45,7 @@
         <div class="boxline">
           <label class="form-label" for="name"><?= lang('City'); ?></label>
           <input type="text" class="form-input" name="location" value="<?= $data['user']['user_location']; ?>">
-          <div class="box_h gray">Москва</div>
+          <div class="box_h gray">Moscow...</div>
         </div>
 
         <div class="boxline">

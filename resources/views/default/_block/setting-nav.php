@@ -1,46 +1,21 @@
-<ul class="nav-tabs list-none mt0 mb15">
-  <?php if ($data['sheet'] == 'setting') { ?>
-    <li class="active">
-      <span><?= lang('Setting profile'); ?></span>
-    </li>
-  <?php } else { ?>
-    <li>
-      <a href="/u/<?= $uid['user_login']; ?>/setting">
-        <span><?= lang('Setting profile'); ?></span>
-      </a>
-    </li>
-  <?php } ?>
-  <?php if ($data['sheet'] == 'avatar') { ?>
-    <li class="active">
-      <span><?= lang('Avatar'); ?></span>
-    </li>
-  <?php } else { ?>
-    <li>
-      <a href="/u/<?= $uid['user_login']; ?>/setting/avatar">
-        <span><?= lang('Avatar'); ?></span>
-      </a>
-    </li>
-  <?php } ?>
-  <?php if ($data['sheet'] == 'security') { ?>
-    <li class="active">
-      <span><?= lang('Password'); ?></span>
-    </li>
-  <?php } else { ?>
-    <li>
-      <a href="/u/<?= $uid['user_login']; ?>/setting/security">
-        <span><?= lang('Password'); ?></span>
-      </a>
-    </li>
-  <?php } ?>
-  <?php if ($data['sheet'] == 'notifications') { ?>
-    <li class="active">
-      <span><?= lang('Notifications'); ?></span>
-    </li>
-  <?php } else { ?>
-    <li>
-      <a href="/u/<?= $uid['user_login']; ?>/setting/notifications">
-        <span><?= lang('Notifications'); ?></span>
-      </a>
-    </li>
+<?php
+$pages = array(
+  array('id' => 'setting', 'url' => '/u/' . $uid['user_login'] . '/setting', 'content' => lang('Setting profile')),
+  array('id' => 'avatar', 'url' => '/u/' . $uid['user_login'] . '/setting/avatar', 'content' => lang('Avatar')),
+  array('id' => 'security', 'url' => '/u/' . $uid['user_login'] . '/setting/security', 'content' => lang('Password')),
+  array('id' => 'notifications', 'url' => '/u/' . $uid['user_login'] . '/setting/notifications', 'content' => lang('Notifications')),
+);
+?>
+<ul class="nav-tabs list-none mt0 pt0 mb15">
+  <?php foreach ($pages as $page) { ?>
+    <?php if ($page['id'] == $data['sheet']) { ?>
+      <li class="active">
+        <span><?= $page['content']; ?></span>
+      </li>
+    <?php } else { ?>
+      <li>
+        <a href="<?= $page['url']; ?>"><span><?= $page['content']; ?></span></a>
+      </li>
+    <?php } ?>
   <?php } ?>
 </ul>
