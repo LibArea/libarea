@@ -8,8 +8,7 @@
           </div>
           <h1><?= $data['link']['link_title']; ?>
             <?php if ($uid['user_trust_level'] > 4) { ?>
-              <span class="mr5 ml5"></span>
-              <a class="size-13" title="<?= lang('Edit'); ?>" href="/admin/webs/<?= $data['link']['link_id']; ?>/edit">
+              <a class="size-13 ml5" title="<?= lang('Edit'); ?>" href="/admin/webs/<?= $data['link']['link_id']; ?>/edit">
                 <i class="icon-pencil size-15"></i>
               </a>
             <?php } ?>
@@ -23,7 +22,7 @@
               <?= $data['link']['link_url']; ?>
             </a>
 
-            <span class="right"><?= $data['link']['link_count']; ?></span>
+            <span class="right gray"><?= $data['link']['link_count']; ?></span>
           </div>
         <?php } else { ?>
           <h1><?= lang('Domain') . ': ' . $data['domain']; ?></h1>

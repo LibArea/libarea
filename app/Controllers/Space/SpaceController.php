@@ -156,7 +156,7 @@ class SpaceController extends MainController
             'posts'         => $post_result,
             'space'         => $space, 
             'signed'        => $space_signed, 
-            'writers'       => $writers
+            'writers'       => $writers,
         ];
 
         return view('/space/space', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);

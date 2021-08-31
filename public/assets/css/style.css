@@ -189,10 +189,6 @@ img {
 .left { float: left; }
 .right { float: right; }
 .right-10 { right: 10px; }
-.size-13 { font-size: 13px; }
-.size-15 { font-size: 15px; }
-.size-21 { font-size: 21px; }
-.size-31 { font-size: 31px; }
 .center { text-align: center; }
 .middle { vertical-align: middle; }
 .lowercase { text-transform: lowercase; }
@@ -208,6 +204,15 @@ img {
 .bg-lightyellow { background-color: lightyellow; }
 .list-none { list-style: none; }
 .left-5 { left: 5px; }
+.size-13 { font-size: 13px; }
+.size-15 { font-size: 15px; }
+.size-21 { font-size: 21px; }
+.size-31 { font-size: 31px; }
+
+.size-24 {
+  font-size: 24px;
+  line-height: 1.8rem;
+}
 
 .flex {
   display: flex;

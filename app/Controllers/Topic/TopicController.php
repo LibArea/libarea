@@ -142,6 +142,8 @@ class TopicController extends MainController
             $subtopics  = TopicModel::subTopics($topic['topic_id']);
         }
 
+        $post_related = empty($topic['topic_post_related']) ? 0 : $topic['topic_post_related'];
+
         $meta_title = $topic['topic_seo_title'] . ' — ' .  lang('Info');
         $meta = [
             'h1'            => $topic['topic_seo_title'],
@@ -155,7 +157,7 @@ class TopicController extends MainController
             'sheet'         => 'info',
             'topic'         => $topic,
             'topic_related' => TopicModel::topicRelated($topic['topic_related']),
-            'post_related'  => TopicModel::topicPostRelated($topic['topic_post_related']),
+            'post_related'  => TopicModel::topicPostRelated($post_related),
             'subtopics'     => $subtopics,
             'main_topic'    => $main_topic
         ];

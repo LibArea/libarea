@@ -27,7 +27,7 @@
             <div class="mb5">
               <?php $num++; ?>
               <span class="related-count gray-light size-15"><?= $num; ?></span>
-              <a href="/post/<?= $related['post_id']; ?>/<?= $related['post_slug']; ?>">
+              <a href="<?= post_url($related); ?>">
                 <?= $related['post_title']; ?>
               </a>
             </div>

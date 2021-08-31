@@ -7,7 +7,6 @@
     <?php foreach ($data['answers'] as  $answer) { ?>
       <div class="block-answer">
         <?php if ($answer['answer_is_deleted'] == 0) { ?>
-
           <?php if ($uid['user_id'] == $answer['answer_user_id']) { ?> <?php $otvet = 1; ?> <?php } ?>
 
           <div class="line mb20"></div>
@@ -18,18 +17,14 @@
                   <div class="qa-ava">
                     <?= user_avatar_img($answer['user_avatar'], 'max', $answer['user_login'], 'avatar'); ?>
                   </div>
-                  <div class="qa-ava-info">
-                    <div class="size-13 gray-light">
-                      <?= $answer['answer_date']; ?>
-                      <?php if (empty($answer['edit'])) { ?>
-                        (<?= lang('ed'); ?>.)
-                      <?php } ?>
-                      <?php if ($uid['user_trust_level'] == 5) { ?>
-                        <?= $answer['answer_ip']; ?>
-                      <?php } ?>
-                    </div>
-                    <a class="qa-login" href="/u/<?= $answer['user_login']; ?>"><?= $answer['user_login']; ?></a>
+                  <div class="size-13 gray-light">
+                    <?= $answer['answer_date']; ?>
+                    <?php if (empty($answer['edit'])) { ?>
+                      (<?= lang('ed'); ?>.)
+                    <?php } ?>
+                    <?= content_ip($answer['answer_ip'], $uid); ?>
                   </div>
+                  <a class="qa-login size-15" href="/u/<?= $answer['user_login']; ?>"><?= $answer['user_login']; ?></a>
                 </div>
 
                 <?= $answer['answer_content'] ?>
@@ -40,19 +35,15 @@
                 <?php if ($uid['user_trust_level'] >= Lori\Config::get(Lori\Config::PARAM_TL_ADD_COMM_QA)) { ?>
                   <?php if ($data['post']['post_closed'] == 0) { ?>
                     <?php if ($data['post']['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
-                      <span class="ml15">
-                        <a data-post_id="<?= $data['post']['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray"><?= lang('Reply'); ?></a>
-                      </span>
+                      <a data-post_id="<?= $data['post']['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray ml10"><?= lang('Reply'); ?></a>
                     <?php } ?>
                   <?php } ?>
                 <?php } ?>
 
                 <?php if ($uid['user_id'] == $answer['answer_user_id'] || $uid['user_trust_level'] == 5) { ?>
-                  <span id="answer_edit" class="ml15">
-                    <a class="editansw gray" href="/answer/edit/<?= $answer['answer_id']; ?>">
-                      <?= lang('Edit'); ?>
-                    </a>
-                  </span>
+                  <a class="editansw gray ml15" href="/answer/edit/<?= $answer['answer_id']; ?>">
+                    <?= lang('Edit'); ?>
+                  </a>
                 <?php } ?>
 
                 <?php if ($uid['user_id']) { ?>
@@ -66,19 +57,14 @@
                 <?php } ?>
 
                 <?php if ($uid['user_trust_level'] == 5) { ?>
-                  <span class="mr5 ml5"></span>
-                  <span id="answer_dell" class="ml15">
-                    <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray">
-                      <?= lang('Remove'); ?>
-                    </a>
-                  </span>
+                  <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray ml15 mr5">
+                    <?= lang('Remove'); ?>
+                  </a>
                 <?php } ?>
                 <?php if ($uid['user_id'] != $answer['answer_user_id'] && $uid['user_trust_level'] > 0) { ?>
-                  <span id="answer_dell" class="ml15">
-                    <a data-post_id="<?= $data['post']['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray">
-                      <?= lang('Report'); ?>
-                    </a>
-                  </span>
+                  <a data-post_id="<?= $data['post']['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray ml15">
+                    <?= lang('Report'); ?>
+                  </a>
                 <?php } ?>
               </div>
               <div id="answer_addentry<?= $answer['answer_id']; ?>" class="reply"></div>
@@ -110,44 +96,34 @@
                     <span class="lowercase gray">
                       &nbsp; <?= lang_date($comment['comment_date']); ?>
                     </span>
-                    <?php if ($uid['user_trust_level'] == 5) { ?>
-                      &nbsp; <?= $comment['comment_ip']; ?>
-                    <?php } ?>
+                    <?= content_ip($comment['comment_ip'], $uid); ?>
                   </span>
 
                   <?php if ($uid['user_trust_level'] >= Lori\Config::get(Lori\Config::PARAM_TL_ADD_COMM_QA)) { ?>
                     <?php if ($data['post']['post_closed'] == 0) { ?>
                       <?php if ($data['post']['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
-                        <span class="ml5">
-                          <a data-post_id="<?= $data['post']['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment-re gray">
-                            <?= lang('Reply'); ?>
-                          </a>
-                        </span>
+                        <a data-post_id="<?= $data['post']['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment-re gray ml5">
+                          <?= lang('Reply'); ?>
+                        </a>
                       <?php } ?>
                     <?php } ?>
                   <?php } ?>
 
                   <?php if ($uid['user_id'] == $comment['comment_user_id'] || $uid['user_trust_level'] == 5) { ?>
-                    <span id="comment_edit" class="ml5">
-                      <a data-post_id="<?= $data['post']['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray">
-                        <?= lang('Edit'); ?>
-                      </a>
-                    </span>
+                    <a data-post_id="<?= $data['post']['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray ml5">
+                      <?= lang('Edit'); ?>
+                    </a>
                   <?php } ?>
 
                   <?php if ($uid['user_trust_level'] == 5) { ?>
-                    <span id="comment_dell" class="ml5">
-                      <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray">
-                        <?= lang('Remove'); ?>
-                      </a>
-                    </span>
+                    <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray ml5">
+                      <?= lang('Remove'); ?>
+                    </a>
                   <?php } ?>
                   <?php if ($uid['user_id'] != $comment['comment_user_id'] && $uid['user_trust_level'] > 0) { ?>
-                    <span id="answer_dell" class="ml5">
-                      <a data-post_id="<?= $data['post']['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray">
-                        <?= lang('Report'); ?>
-                      </a>
-                    </span>
+                    <a data-post_id="<?= $data['post']['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray ml5">
+                      <?= lang('Report'); ?>
+                    </a>
                   <?php } ?>
                 </div>
               </div>

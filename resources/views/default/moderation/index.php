@@ -18,7 +18,7 @@
                 </span>
               </div>
               <div>
-                <a href="/post/<?= $mod['post_id']; ?>/<?= $mod['post_slug']; ?>">
+                <a href="<?= post_url($mod); ?>">
                   <?= $mod['post_title']; ?>
                 </a>
                 <?php if ($mod['post_type'] == 1) { ?>

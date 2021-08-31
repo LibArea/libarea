@@ -17,7 +17,9 @@
                 <?= $answer['date']; ?>
               </span>
             </div>
-            <a class="mr5 block" href="/post/<?= $answer['post_id']; ?>/<?= $answer['post_slug']; ?>"><?= $answer['post_title']; ?></a>
+            <a class="mr5 block" href="<?= post_url($answer); ?>">
+                <?= $answer['post_title']; ?>
+            </a>
             <?= $answer['content']; ?>
             <div class="pr15 pb5 hidden gray">
               <div class="up-id"></div> + <?= $answer['answer_votes']; ?>
@@ -30,7 +32,6 @@
           </div>
         <?php } ?>
       <?php } ?>
-
     <?php } else { ?>
       <?= no_content('No answers'); ?>
     <?php } ?>

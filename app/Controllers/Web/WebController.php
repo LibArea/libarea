@@ -25,7 +25,7 @@ class WebController extends MainController
         }
 
         $meta = [
-            'canonical'     => '/domains',
+            'canonical'     => '/web',
             'sheet'         => 'domains',
             'meta_title'    => lang('domains-title') . $num . Config::get(Config::PARAM_NAME),
             'meta_desc'     => lang('domains-desc') . $num . Config::get(Config::PARAM_HOME_TITLE),

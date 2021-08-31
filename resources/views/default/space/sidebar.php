@@ -39,7 +39,7 @@
               <?= lang('Create Post'); ?>
             </a>
           <?php } else { ?>
-            <?php if ($signed) { ?>
+            <?php if ($data['signed']) { ?>
               <?php if ($data['space']['space_permit_users'] == 1) { ?>
                 <?php if ($uid['user_trust_level'] == 5 || $space['space_user_id'] == $uid['user_id']) { ?>
                   <a class="mt15 button block mb15 white" href="/post/add/space/<?= $data['space']['space_id']; ?>">

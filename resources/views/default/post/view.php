@@ -4,7 +4,7 @@
       <?php if ($data['post']['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
         <div class="white-box pt10 pr15 pb15 pl15<?php if ($data['post']['post_is_deleted'] == 1) { ?> delleted<?php } ?>">
           <div class="post-body">
-            <h1 class="title size-21">
+            <h1 class="title size-24">
               <?= $data['post']['post_title']; ?>
               <?php if ($data['post']['post_is_deleted'] == 1) { ?>
                 <i class="icon-trash-empty red"></i>
@@ -46,55 +46,41 @@
               </span>
               <?php if ($uid['user_id']) { ?>
                 <?php if ($uid['user_login'] == $data['post']['user_login']  || $uid['user_trust_level'] == 5) { ?>
-                  <span class="mr5 ml5">&#183;</span>
-                  <a class="gray-light" href="/post/edit/<?= $data['post']['post_id']; ?>">
+                  <a class="gray-light mr10 ml10" href="/post/edit/<?= $data['post']['post_id']; ?>">
                     <?= lang('Edit'); ?>
                   </a>
                 <?php } ?>
                 <?php if ($uid['user_login'] == $data['post']['user_login']) { ?>
                   <?php if ($data['post']['post_draft'] == 0) { ?>
-                    <span class="mr5 ml5">&#183;</span>
                     <?php if ($data['post']['user_my_post'] == $data['post']['post_id']) { ?>
-                      <span class="mu_post gray-light">+ <?= lang('in-the-profile'); ?></span>
+                      <span class="mu_post gray-light mr10 ml10">+ <?= lang('in-the-profile'); ?></span>
                     <?php } else { ?>
-                      <a class="user-mypost gray-light" data-opt="1" data-post="<?= $data['post']['post_id']; ?>">
+                      <a class="user-mypost gray-light mr10 ml10" data-opt="1" data-post="<?= $data['post']['post_id']; ?>">
                         <span class="mu_post"><?= lang('in-the-profile'); ?></span>
                       </a>
                     <?php } ?>
                   <?php } ?>
                 <?php } ?>
-                <span class="add-favorite gray-light" data-id="<?= $data['post']['post_id']; ?>" data-type="post">
-                  <span class="mr5 ml5">&#183;</span>
+                <span class="add-favorite gray-light mr10 ml10" data-id="<?= $data['post']['post_id']; ?>" data-type="post">
                   <?php if (is_array($data['post']['favorite_post'])) { ?>
                     <?= lang('remove-favorites'); ?>
                   <?php } else { ?>
                     <?= lang('add-favorites'); ?>
                   <?php } ?>
                 </span>
-
                 <?php if ($uid['user_trust_level'] == 5) { ?>
-                  <span class="mr5 ml5"> &#183; </span>
-                  <span id="cm_dell">
-                    <a data-type="post" data-id="<?= $data['post']['post_id']; ?>" class="type-action gray-light">
-                      <?php if ($data['post']['post_is_deleted'] == 1) { ?>
-                        <?= lang('Recover'); ?>
-                      <?php } else { ?>
-                        <?= lang('Remove'); ?>
-                      <?php } ?>
-                    </a>
-                  </span>
-                  <span class="size-13">
-                    <span class="mr5 ml5"> &#183; </span>
+                  <a data-type="post" data-id="<?= $data['post']['post_id']; ?>" class="type-action gray-light mr10 ml10">
+                    <?php if ($data['post']['post_is_deleted'] == 1) { ?>
+                      <?= lang('Recover'); ?>
+                    <?php } else { ?>
+                      <?= lang('Remove'); ?>
+                    <?php } ?>
+                  </a>
+                  <span class="size-13 mr5 ml10">
                     <?= $data['post']['post_hits_count']; ?>
                   </span>
-                  <span class="size-13">
-                    <span class="mr5 ml5"> &#183; </span>
-                    <a class="gray-light" href="/admin/logip/<?= $data['post']['post_ip']; ?>">
-                      <?= $data['post']['post_ip']; ?>
-                    </a>
-                  </span>
                 <?php } ?>
-
+                <?= content_ip($data['post']['post_ip'], $uid); ?>
               <?php } ?>
             </div>
           </div>
@@ -107,13 +93,14 @@
             </div>
             <?php if ($data['lo']) { ?>
               <div class="lo-post pt5 pr5 pb5 pl10 mt10 mb10">
-                <h3 class="recommend">ЛО</h3>
-                <span class="right">
-                  <a rel="nofollow" href="<?= post_url($data['post']); ?>#comment_<?= $data['lo']['comment_id']; ?>">
-                    <i class="icon-diamond red"></i>
-                  </a>
-                </span>
-                <?= $data['lo']['comment_content']; ?>
+                <h3 class="recommend">ЛО
+                  <span class="right">
+                    <a rel="nofollow" href="<?= post_url($data['post']); ?>#answer_<?= $data['lo']['answer_id']; ?>">
+                      <i class="icon-diamond red"></i>
+                    </a>
+                  </span>
+                </h3>
+                <?= $data['lo']['answer_content']; ?>
               </div>
             <?php } ?>
             <?php if ($data['post']['post_url_domain']) { ?>
@@ -131,7 +118,7 @@
                   <div class="mb5">
                     <?php $num++; ?>
                     <span class="related-count gray-light size-15"><?= $num; ?></span>
-                    <a href="/post/<?= $related['post_id']; ?>/<?= $related['post_slug']; ?>">
+                    <a href="<?= post_url($related); ?>">
                       <?= $related['post_title']; ?>
                     </a>
                   </div>
@@ -254,7 +241,7 @@
         <h3 class="recommend size-13"><?= lang('Recommended'); ?></h3>
         <?php foreach ($data['recommend'] as  $rec_post) { ?>
           <div class="mb15 hidden flex">
-            <a class="gray size-15" href="/post/<?= $rec_post['post_id']; ?>/<?= $rec_post['post_slug']; ?>">
+            <a class="gray size-15" href="<?= post_url($rec_post); ?>">
               <?php if ($rec_post['post_answers_count'] > 0) { ?>
                 <div class="up-box-post green-box size-13 center mr15">
                   <?= $rec_post['post_answers_count'] ?>
@@ -263,7 +250,7 @@
                 <div class="up-box-post gray-box size-13 center mr15">0</div>
               <?php } ?>
             </a>
-            <a class="gray size-13" href="/post/<?= $rec_post['post_id']; ?>/<?= $rec_post['post_slug']; ?>">
+            <a class="gray size-13" href="<?= post_url($rec_post); ?>">
               <?= $rec_post['post_title']; ?>
             </a>
           </div>

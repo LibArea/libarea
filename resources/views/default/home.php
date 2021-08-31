@@ -64,7 +64,7 @@
               <span class="ml5"></span>
               <?= $answer['answer_date']; ?>
             </div>
-            <a class="gray" href="/post/<?= $answer['post_id']; ?>/<?= $answer['post_slug']; ?>#answer_<?= $answer['answer_id']; ?>">
+            <a class="gray" href="<?= post_url($answer); ?>#answer_<?= $answer['answer_id']; ?>">
               <?= $answer['answer_content']; ?>...
             </a>
           </div>

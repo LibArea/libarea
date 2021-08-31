@@ -27,7 +27,7 @@
 
       <div class="post-body">
         <a href="<?= post_url($post); ?>">
-          <h2 class="title size-21 ml15 mt0 mb0"><?= $post['post_title']; ?>
+          <h2 class="title size-24 ml15 mt0 mb0"><?= $post['post_title']; ?>
             <?php if ($post['post_is_deleted'] == 1) { ?>
               <i class="icon-trash red"></i>
             <?php } ?>
@@ -61,9 +61,8 @@
           </a>
           <?= html_topic($post['topic_list'], 'gray-light size-13 ml15'); ?>
           <?php if ($post['post_url_domain']) { ?>
-            <span class="mr5 ml5"></span>
-            <a class="gray-light size-13" href="/domain/<?= $post['post_url_domain']; ?>">
-              <i class="icon-link size-13 middle"></i> <?= $post['post_url_domain']; ?>
+            <a class="gray-light size-13 middle ml10" href="/domain/<?= $post['post_url_domain']; ?>">
+              <i class="icon-link"></i> <?= $post['post_url_domain']; ?>
             </a>
           <?php } ?>
         </div>

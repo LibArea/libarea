@@ -9,7 +9,6 @@
 
       <div class="domains">
         <?php if (!empty($domains)) { ?>
-
           <?php foreach ($domains as $key => $link) { ?>
             <div class="domain-box">
               <span class="add-favicon right size-13" data-id="<?= $link['link_id']; ?>">
@@ -53,7 +52,6 @@
               </div>
             </div>
           <?php } ?>
-
         <?php } else { ?>
           <?= no_content('No'); ?>
         <?php } ?>

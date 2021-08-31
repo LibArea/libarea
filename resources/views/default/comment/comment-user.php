@@ -17,7 +17,9 @@
                 <?= $comm['date']; ?>
               </span>
             </div>
-            <a class="mr5 mb5 block" href="/post/<?= $comm['post_id']; ?>/<?= $comm['post_slug']; ?>"><?= $comm['post_title']; ?></a>
+            <a class="mr5 mb5 block" href="<?= post_url($comm); ?>">
+                <?= $comm['post_title']; ?>
+            </a>
             <p><?= $comm['comment_content']; ?></p>
             <div class="pr15 pb5 hidden gray">
               + <?= $comm['comment_votes']; ?>

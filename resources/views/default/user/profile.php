@@ -171,28 +171,24 @@
                 <h3 class="mb5 uppercase pt15 size-13"><?= lang('Selected Post'); ?></h3>
 
                 <div class="post-body mb15">
-                  <a class="title" href="/post/<?= $data['onepost']['post_id']; ?>/<?= $data['onepost']['post_slug']; ?>">
+                  <a class="title" href="<?= post_url($data['onepost']); ?>">
                     <?= $data['onepost']['post_title']; ?>
                   </a>
 
                   <div class="size-13 lowercase">
-                    <a class="gray" href="/u/<?= $data['user']['user_login']; ?>">
-                      <?= user_avatar_img($data['user']['user_avatar'], 'small', $data['user']['user_login'], 'ava'); ?>
-                      <span class="mr5 ml5"></span>
+                    <a class="gray ml5" href="/u/<?= $data['user']['user_login']; ?>">
+                      <?= user_avatar_img($data['user']['user_avatar'], 'small', $data['user']['user_login'], 'ava mr5'); ?>
                       <?= $data['user']['user_login']; ?>
                     </a>
 
-                    <span class="mr5 ml5"> &#183; </span>
-                    <span class="gray"><?= $data['onepost']['post_date'] ?></span>
+                    <span class="gray ml5"><?= $data['onepost']['post_date'] ?></span>
 
-                    <span class="mr5 ml5"> &#183; </span>
-                    <a class="gray" href="/s/<?= $data['onepost']['space_slug']; ?>" title="<?= $data['onepost']['space_name']; ?>">
+                    <a class="gray ml5" href="/s/<?= $data['onepost']['space_slug']; ?>" title="<?= $data['onepost']['space_name']; ?>">
                       <?= $data['onepost']['space_name']; ?>
                     </a>
 
                     <?php if ($data['onepost']['post_answers_count'] != 0) { ?>
                       <a class="gray right" href="<?= post_url($data['onepost']); ?>">
-                        <span class="mr5 ml5"></span>
                         <i class="icon-comment-empty middle"></i>
                         <?= $data['onepost']['post_answers_count']; ?>
                       </a>

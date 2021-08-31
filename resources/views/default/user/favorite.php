@@ -21,7 +21,7 @@
               <?php } ?>
 
               <div>
-                <a href="/post/<?= $fav['post_id']; ?>/<?= $fav['post_slug']; ?>">
+                <a href="<?= post_url($fav); ?>">
                   <h3 class="title size-21 mt5 mb5">
                     <?= $fav['post_title']; ?>
                   </h3>
@@ -40,7 +40,7 @@
                   <?= $fav['space_name']; ?>
                 </a>
                 <?php if ($fav['post_answers_count'] != 0) { ?>
-                  <a class="mr5 gray" href="/post/<?= $fav['post_id']; ?>/<?= $fav['post_slug']; ?>">
+                  <a class="mr5 gray" href="<?= post_url($fav); ?>">
                     <i class="icon-commenting-o middle"></i> <?= $fav['post_answers_count'] ?>
                   </a>
                 <?php } ?>
@@ -55,7 +55,7 @@
                 </span>
               <?php } ?>
               <div>
-                <a href="/post/<?= $fav['post']['post_id']; ?>/<?= $fav['post']['post_slug']; ?>#answer_<?= $fav['answer_id']; ?>">
+                <a href="<?= post_url($fav); ?>#answer_<?= $fav['answer_id']; ?>">
                   <h3 class="title size-21 vertical">
                     <?= $fav['post']['post_title']; ?>
                   </h3>

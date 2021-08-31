@@ -320,7 +320,7 @@ function tabs_nav($pages, $sheet, $uid)
 {
     $html = '<ul class="nav-tabs list-none mt0 pt15 pr15 pb15 pl0">';
     foreach ($pages as $page) { 
-        if ( empty($page['auth']) == 'no' || $uid['user_id'] > 0) {
+        if ( empty($page['auth']) != false || $uid['user_id'] > 0) {
             if ($page['id'] == $sheet) { 
                 $html .= '<li class="active"><span>'.$page['content'].'</span></li>';
             } else { 
@@ -332,3 +332,16 @@ function tabs_nav($pages, $sheet, $uid)
     
     return $html;
 }
+
+function content_ip($ip, $uid)
+{
+    if ($uid['user_trust_level'] != 5) {
+        return false;
+    }
+    $html = '<a class="gray-light ml10" href="/admin/logip/'. $ip . '">
+                ' . $ip . '
+            </a>';
+    
+    return $html;
+}
+ 
