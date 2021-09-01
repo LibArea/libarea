@@ -11,30 +11,32 @@ class WordsController extends MainController
 {
     public function index($sheet)
     {
-        $uid    = Base::getUid();
-        $pg     = Request::getInt('page');
-        $page   = (!$pg) ? 1 : $pg;
+        $page   = Request::getInt('page');
+        $page   = $page == 0 ? 1 : $page;
 
         $words = WordsModel::getStopWords();
 
-        $data = [
+        $meta = [
             'meta_title'    => lang('Stop words'),
             'sheet'         => $sheet == 'all' ? 'words' : $sheet,
         ];
 
-        includeTemplate('/templates/word/words', ['data' => $data, 'uid' => $uid, 'words' => $words]);
+        $data = [
+            'words'     => $words,
+        ];
+
+        return view('/word/words', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
     }
+
     // Форма добавления стоп-слова
     public function addPage()
     {
-        $uid  = Base::getUid();
-        $data = [
-            'h1'            => lang('Add a stop word'),
+        $meta = [
             'meta_title'    => lang('Add a stop word'),
             'sheet'         => 'words',
         ];
 
-        includeTemplate('/templates/word/add', ['data' => $data, 'uid' => $uid]);
+        return view('/word/add', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => []]);
     }
 
     // Добавление стоп-слова

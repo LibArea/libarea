@@ -109,7 +109,6 @@
 
       <?php foreach ($answer['comm'] as  $comment) { ?>
         <?php if ($comment['comment_is_deleted'] == 0) { ?>
-
           <ol class="pl15 list-none<?php if ($comment['comment_comment_id'] > 0) { ?> ml30<?php } ?>">
             <li class="comment_subtree" id="comment_<?= $comment['comment_id']; ?>">
               <div class="p5">
@@ -121,7 +120,6 @@
                         <?= $comment['user_login']; ?>
                       </span>
                     </a>
-
                     <span class="mr5 ml5 gray-light lowercase">
                       <?= lang_date($comment['comment_date']); ?>
                     </span>
@@ -150,25 +148,19 @@
                       </a>
                     <?php } ?>
                   <?php } ?>
-
+ 
                   <?php if (accessСheck($comment, 'comment', $uid, 1, 30) === true) { ?>
-                    <span id="comment_edit" class="mr10 ml10">
-                      <a data-post_id="<?= $data['post']['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray">
-                        <?= lang('Edit'); ?>
-                      </a>
-                    </span>
-                    <span id="comment_dell" class="mr5 ml5">
-                      <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray">
-                        <?= lang('Remove'); ?>
-                      </a>
-                    </span>
+                    <a data-post_id="<?= $data['post']['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray mr10 ml10">
+                      <?= lang('Edit'); ?>
+                    </a>
+                    <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray mr5 ml5">
+                      <?= lang('Remove'); ?>
+                    </a>
                   <?php } ?>
                   <?php if ($uid['user_id'] != $comment['comment_user_id'] && $uid['user_trust_level'] > 0) { ?>
-                    <span id="answer_dell" class="ml15">
-                      <a data-post_id="<?= $data['post']['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray">
-                        <?= lang('Report'); ?>
-                      </a>
-                    </span>
+                    <a data-post_id="<?= $data['post']['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray ml15">
+                      <?= lang('Report'); ?>
+                    </a>
                   <?php } ?>
                 </div>
               </div>

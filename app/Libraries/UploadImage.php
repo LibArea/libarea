@@ -4,7 +4,6 @@ namespace Lori;
 
 use App\Models\{UserModel, TopicModel, SpaceModel};
 use SimpleImage;
-use Lori\Base;
 
 class UploadImage
 {
@@ -193,7 +192,7 @@ class UploadImage
         $width_h  = getimagesize($cover['tmp_name'][0]);
         if ($width_h['0'] < 500) {
             $valid = false;
-            Base::addMsg('Ширина меньше 500 пикселей', 'error');
+            addMsg('Ширина меньше 500 пикселей', 'error');
             redirect($redirect);
         }
 
@@ -204,7 +203,7 @@ class UploadImage
         $filename = 'c-' . time();
 
         if (!is_dir($path . $year)) {
-           mkdir($path . $year, 0777, true);
+            mkdir($path . $year, 0777, true);
         }
 
         // https://github.com/claviska/SimpleImage

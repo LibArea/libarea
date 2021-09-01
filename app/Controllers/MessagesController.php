@@ -79,12 +79,12 @@ class MessagesController extends MainController
         $id     = Request::getInt('id');
 
         if (!$dialog = MessagesModel::getDialogById($id)) {
-            Base::addMsg(lang('The dialog does not exist'), 'error');
+            addMsg(lang('The dialog does not exist'), 'error');
             redirect('/messages');
         }
 
         if ($dialog['dialog_recipient_id'] != $uid['user_id'] and $dialog['dialog_sender_id'] != $uid['user_id']) {
-            Base::addMsg(lang('The topic does not exist'), 'error');
+            addMsg(lang('The topic does not exist'), 'error');
             redirect('/u/' . $uid['user_login'] . '/messages');
         }
 
@@ -133,7 +133,7 @@ class MessagesController extends MainController
         $uid        = Base::getUid();
         $login      = Request::get('login');
         if (!$user  = UserModel::getUser($login, 'slug')) {
-            Base::addMsg(lang('Member does not exist'), 'error');
+            addMsg(lang('Member does not exist'), 'error');
             redirect('/');
         }
 
@@ -170,7 +170,7 @@ class MessagesController extends MainController
 
         // Введите содержание сообщения
         if ($content == '') {
-            Base::addMsg(lang('Enter content'), 'error');
+            addMsg(lang('Enter content'), 'error');
             redirect('/u/' . $uid['user_login'] . '/messages');
         }
 

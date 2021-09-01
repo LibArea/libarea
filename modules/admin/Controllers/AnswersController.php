@@ -32,13 +32,18 @@ class AnswersController extends MainController
             $meta_title = lang('Deleted answers');
         }
 
-        $data = [
+        $meta = [
             'meta_title'    => $meta_title,
+            'sheet'         => 'answers',
+        ];
+
+        $data = [
             'sheet'         => $sheet == 'all' ? 'answers' : 'answers-ban',
             'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
+            'answers'       => $result,
         ];
 
-        includeTemplate('/templates/answers', ['data' => $data, 'uid' => $uid, 'answers' => $result]);
+        return view('/answer/answers', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
 }

@@ -11,7 +11,6 @@ class InvitationsController extends MainController
 {
     public function index($sheet)
     {
-        $uid    = Base::getUid();
         $invite = InvitationModel::getInvitations();
 
         $result = array();
@@ -21,11 +20,16 @@ class InvitationsController extends MainController
             $result[$ind]       = $row;
         }
 
-        $data = [
+        $meta = [
             'meta_title'    => lang('Invites'),
-            'sheet'         => $sheet == 'all' ? 'invitations' : $sheet,
+            'sheet'         => 'invitations',
         ];
-
-        includeTemplate('/templates/invitations', ['data' => $data, 'uid' => $uid, 'invitations' => $result]);
+        
+        $data = [
+            'sheet'         => $sheet == 'all' ? 'invitations' : $sheet,
+            'invitations'   => $result,
+        ];
+        
+        return view('/invitation/invitations', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
     }
 }

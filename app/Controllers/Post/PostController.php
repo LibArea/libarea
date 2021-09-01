@@ -100,8 +100,8 @@ class PostController extends MainController
 
         $post_signed   = SubscriptionModel::getFocus($post['post_id'], $uid['user_id'], 'post');
 
-        $desc  = mb_strcut(strip_tags($post['post_content']), 0, 180);
-
+        $desc  = explode("\n", $post['post_content']);
+        $desc  = strip_tags($desc[0]);
         if ($desc == '') {
             $desc = strip_tags($post['post_title']);
         }
@@ -230,6 +230,6 @@ class PostController extends MainController
 
         $post['post_content'] = Content::text($post['post_content'], 'text');
 
-        return show('/post/postcode', ['post' => $post]);
+        includeTemplate('/post/postcode', ['post' => $post]);
     }
 }

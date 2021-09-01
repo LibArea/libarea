@@ -37,6 +37,6 @@
     <?php } ?>
   </main>
   <aside>
-    <?php include TEMPLATE_DIR . '/_block/user-menu.php'; ?>
+    <?php includeTemplate('/_block/user-menu', ['uid' => $uid]); ?>
   </aside>
 </div>

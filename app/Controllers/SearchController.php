@@ -39,7 +39,7 @@ class SearchController extends MainController
                     $tags   = SearchModel::getSearchTagsServer($query);
                 }
             } else {
-                Base::addMsg(lang('Empty request'), 'error');
+                addMsg(lang('Empty request'), 'error');
                 redirect('/search');
             }
         }

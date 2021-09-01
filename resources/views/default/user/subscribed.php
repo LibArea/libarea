@@ -9,7 +9,7 @@
       echo tabs_nav($pages, $data['sheet'], $uid);
       ?>
     </div>
-    <?php include TEMPLATE_DIR . '/_block/post.php'; ?>
+    <?php includeTemplate('/_block/post', ['data' => $data, 'uid' => $uid]); ?>
   </main>
   <aside>
     <div class="white-box p15">

@@ -2,7 +2,7 @@
   <main>
     <div class="white-box pt5 pr15 pb0 pl15">
       <?= breadcrumb('/', lang('Home'), '/u/' . $uid['user_login'], lang('Profile'), lang('Change avatar')); ?>
-      <?php include TEMPLATE_DIR . '/_block/setting-nav.php'; ?>
+      <?php includeTemplate('/_block/setting-nav', ['data' => $data, 'uid' => $uid]); ?>
     </div>
     <div class="white-box pt15 pr15 pb5 pl15 box setting avatar">
       <?= user_avatar_img($data['user']['user_avatar'], 'max', $data['user']['user_login'], 'ava'); ?>

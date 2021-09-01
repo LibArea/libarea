@@ -34,11 +34,11 @@ class AddSpaceController extends MainController
         Validation::Limits($space_slug, 'slug (URL)', '3', '12', $redirect);
 
         if (preg_match('/\s/', $space_slug) || strpos($space_slug, ' ')) {
-            Base::addMsg(lang('url-gaps'), 'error');
+            addMsg(lang('url-gaps'), 'error');
             redirect($redirect);
         }
         if (SpaceModel::getSpace($space_slug, 'slug')) {
-            Base::addMsg(lang('url-already-exists'), 'error');
+            addMsg(lang('url-already-exists'), 'error');
             redirect($redirect);
         }
 
@@ -67,7 +67,7 @@ class AddSpaceController extends MainController
         // Добавляем пространство
         SpaceModel::AddSpace($data);
 
-        Base::addMsg(lang('space-add-success'), 'success');
+        addMsg(lang('space-add-success'), 'success');
         redirect('/s/' . $space_slug);
     }
 

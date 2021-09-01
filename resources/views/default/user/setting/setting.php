@@ -2,7 +2,7 @@
   <main>
     <div class="white-box pt5 pr15 pb0 pl15">
       <?= breadcrumb('/', lang('Home'), '/u/' . $uid['user_login'], lang('Profile'), lang('Setting profile')); ?>
-      <?php include TEMPLATE_DIR . '/_block/setting-nav.php'; ?>
+      <?php includeTemplate('/_block/setting-nav', ['data' => $data, 'uid' => $uid]); ?>
     </div>
     <div class="white-box pt15 pr15 pb5 pl15 setting">
       <form action="/users/setting/edit" method="post" enctype="multipart/form-data">

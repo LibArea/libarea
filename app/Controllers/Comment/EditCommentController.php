@@ -60,6 +60,6 @@ class EditCommentController extends MainController
             'comment_content'   => $comment['comment_content'],
         ];
 
-        return show('/comment/edit-form-comment', ['data' => $data, 'uid' => $uid]);
+        includeTemplate('/_block/edit-form-comment', ['data' => $data, 'uid' => $uid]);
     }
 }

@@ -373,10 +373,10 @@ return [
 
     'info_favorite'         => 'Посты, комментарии и вопросы за которыми вы следите',
     'info_preferences'      => 'Посты, на которые вы подписаны. Вы будете получать уведомления о всех новых ответах',
-    
+
     'Email Notification'    => 'Уведомлять по E-mail',
     'info_notifications'    => 'Вы можете отписаться от всех уведомлений на E-mail в этом разделе',
-    
+
     'When the message came to PM'       => 'Когда пришло сообщение на PM',
     'When you contacted me via @'       => 'Когда обратились ко мне через @',
     'You were mentioned (@), see'       => 'Вас упомянули (@), посмотреть',
@@ -384,7 +384,7 @@ return [
     'changing your password'            => 'изменение пароля',
     'Activate E-mail'                   => 'Ссылка для активации E-mail',
     'checking e-mail'                   => 'проверка e-mail',
-    
+
     'There are no domains'  => 'Доменов нет',
     'Change the site'       => 'Изменить сайт',
     'Add a website'         => 'Добавить сайт',

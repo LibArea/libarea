@@ -29,7 +29,7 @@
   </main>
   <aside>
     <?php if ($uid['user_id'] == 0) { ?>
-      <?php include TEMPLATE_DIR . '/_block/login.php'; ?>
+      <?php includeTemplate('/_block/login'); ?>
     <?php } else { ?>
       <div class="white-box p15">
         <?= lang('info_users'); ?>

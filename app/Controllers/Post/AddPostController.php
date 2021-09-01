@@ -51,7 +51,7 @@ class AddPostController extends MainController
         if ($space['space_permit_users'] == 1) {
             // Кроме персонала и владельца
             if ($uid['user_trust_level'] != 5 && $space['space_user_id'] != $uid['user_id']) {
-                Base::addMsg(lang('You dont have access'), 'error');
+                addMsg(lang('You dont have access'), 'error');
                 redirect($redirect);
             }
         }
@@ -104,7 +104,7 @@ class AddPostController extends MainController
         if ($uid['user_trust_level'] < Config::get(Config::PARAM_TL_ADD_POST)) {
             $num_post =  PostModel::getPostSpeed($uid['user_id']);
             if ($num_post > 2) {
-                Base::addMsg(lang('limit-post-day'), 'error');
+                addMsg(lang('limit-post-day'), 'error');
                 redirect('/');
             }
         }
@@ -121,12 +121,12 @@ class AddPostController extends MainController
             $all_count = ActionModel::ceneralContributionCount($uid['user_id']);
             if ($all_count < 2) {
                 ActionModel::addLimitingMode($uid['user_id']);
-                Base::addMsg(lang('limiting_mode_1'), 'error');
+                addMsg(lang('limiting_mode_1'), 'error');
                 redirect('/');
             }
 
             $post_published = 0;
-            Base::addMsg(lang('post_audit'), 'error');
+            addMsg(lang('post_audit'), 'error');
         }
 
         $post_content = Content::change($post_content);

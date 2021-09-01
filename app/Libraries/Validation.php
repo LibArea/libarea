@@ -2,25 +2,23 @@
 
 namespace Lori;
 
-use Lori\Base;
-
 class Validation
 {
     public static function checkEmail($email, $redirect)
     {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            Base::addMsg(lang('Invalid email address'), 'error');
+            addMsg(lang('Invalid email address'), 'error');
             redirect($redirect);
         }
         return true;
     }
-    
+
     public static function Limits($name, $content, $min, $max, $redirect)
     {
         if (self::getStrlen($name) < $min || self::getStrlen($name) > $max) {
 
             $text = sprintf(lang('text-string-length'), '«' . $content . '»', $min, $max);
-            Base::addMsg($text, 'error');
+            addMsg($text, 'error');
             redirect($redirect);
         }
         return true;
@@ -31,12 +29,12 @@ class Validation
         if (!preg_match('/^[a-zA-Z0-9-]+$/u', $slug)) {
 
             $text = sprintf(lang('text-charset-slug'), '«' . $text . '»');
-            Base::addMsg($text, 'error');
+            addMsg($text, 'error');
             redirect($redirect);
         }
         return true;
     }
-    
+
     // Длина строки
     public static function getStrlen($str)
     {
@@ -80,5 +78,4 @@ class Validation
 
         return true;
     }
-
 }

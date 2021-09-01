@@ -12,7 +12,6 @@ class ReportsController extends MainController
 {
     public function index()
     {
-        $uid    = Base::getUid();
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
@@ -27,14 +26,19 @@ class ReportsController extends MainController
             $result[$ind]   = $row;
         }
 
-        $data = [
-            'pagesCount'    => ceil($pagesCount / $limit),
-            'pNum'          => $page,
+        $meta = [
             'meta_title'    => lang('Reports'),
             'sheet'         => 'reports',
         ];
+        
+        $data = [
+            'pagesCount'    => ceil($pagesCount / $limit),
+            'pNum'          => $page,
+            'sheet'         => 'reports',
+            'reports'       => $result,
+        ];
 
-        includeTemplate('/templates/reports', ['data' => $data, 'uid' => $uid, 'reports' => $result]);
+        return view('/report/reports', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
     }
 
     // Ознакомился

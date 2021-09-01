@@ -194,12 +194,12 @@
 
       <?php if ($data['post']['post_draft'] == 0) { ?>
         <?php if ($data['post']['post_type'] == 0) { ?>
-          <?php include TEMPLATE_DIR . '/post/comment-view.php'; ?>
+          <?php includeTemplate('/post/comment-view', ['data' => $data, 'uid' => $uid]); ?>
           <?php if ($data['post']['post_closed'] == 1) { ?>
             <?= no_content('The post is closed'); ?>
           <?php } ?>
         <?php } else { ?>
-          <?php include TEMPLATE_DIR . '/post/questions-view.php'; ?>
+          <?php includeTemplate('/post/questions-view', ['data' => $data, 'uid' => $uid]); ?>
           <?php if ($data['post']['post_closed'] == 1) { ?>
             <?= no_content('The question is closed'); ?>
           <?php } ?>

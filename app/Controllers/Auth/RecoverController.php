@@ -25,7 +25,7 @@ class RecoverController extends MainController
 
         if (Config::get(Config::PARAM_CAPTCHA)) {
             if (!Integration::checkCaptchaCode()) {
-                Base::addMsg(lang('Code error'), 'error');
+                addMsg(lang('Code error'), 'error');
                 redirect('/recover');
             }
         }
@@ -35,13 +35,13 @@ class RecoverController extends MainController
         $uInfo = UserModel::userInfo($email);
 
         if (empty($uInfo['user_email'])) {
-            Base::addMsg(lang('There is no such e-mail on the site'), 'error');
+            addMsg(lang('There is no such e-mail on the site'), 'error');
             redirect('/recover');
         }
 
         // Проверка на заблокированный аккаунт
         if ($uInfo['user_ban_list'] == 1) {
-            Base::addMsg(lang('Your account is under review'), 'error');
+            addMsg(lang('Your account is under review'), 'error');
             redirect('/recover');
         }
 
@@ -53,7 +53,7 @@ class RecoverController extends MainController
         $mail_message = lang('Your link to change your password'). ": \n" . $newpass_link . "\n\n";
         Base::sendMail($email, Config::get(Config::PARAM_NAME) . ' — ' . lang('changing your password'), $mail_message);
 
-        Base::addMsg(lang('New password has been sent to e-mail'), 'success');
+        addMsg(lang('New password has been sent to e-mail'), 'success');
         redirect('/login');
     }
 
@@ -64,7 +64,7 @@ class RecoverController extends MainController
         $user_id    = UserModel::getPasswordActivate($code);
         
         if (!$user_id) {
-            Base::addMsg(lang('code-incorrect'), 'error');
+            addMsg(lang('code-incorrect'), 'error');
             redirect('/recover');
         }
 
@@ -106,7 +106,7 @@ class RecoverController extends MainController
 
         UserModel::editRecoverFlag($user_id);
 
-        Base::addMsg(lang('Password changed'), 'success');
+        addMsg(lang('Password changed'), 'success');
         redirect('/login');
     }
 
@@ -117,13 +117,13 @@ class RecoverController extends MainController
         $activate_email = UserModel::getEmailActivate($code);
         
         if (!$activate_email) {
-            Base::addMsg(lang('code-used'), 'error');
+            addMsg(lang('code-used'), 'error');
             redirect('/');
         }
 
         UserModel::EmailActivate($activate_email['user_id']);
 
-        Base::addMsg(lang('yes-email-pass'), 'success');
+        addMsg(lang('yes-email-pass'), 'success');
         redirect('/login');
     }
 }

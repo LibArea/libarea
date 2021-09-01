@@ -29,7 +29,7 @@
               </div>
             </div>
             <div class="boxline">
-              <?php include TEMPLATE_DIR . '/post/editor.php'; ?>
+              <?php includeTemplate('/_block/post-editor'); ?>
             </div>
 
             <div class="form">

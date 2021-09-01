@@ -48,7 +48,7 @@
       <?= lang('comments-desc'); ?>
     </div>
     <?php if ($uid['user_id'] == 0) { ?>
-      <?php include TEMPLATE_DIR . '/_block/login.php'; ?>
+      <?php includeTemplate('/_block/login'); ?>
     <?php } ?>
   </aside>
 </div>

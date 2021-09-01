@@ -18,7 +18,7 @@
     echo tabs_nav($pages, $data['sheet'], $uid);
     ?>
 
-    <?php if ($uid['uri'] == '/' && $uid['user_id'] > 0 && empty($data['space_user'])) { ?>
+    <?php if (Request::getUri() == '/' && $uid['user_id'] > 0 && empty($data['space_user'])) { ?>
       <div class="white-box">
         <div class="pt5 pr15 pb5 pl15 big center gray">
           <i class="icon-lightbulb middle red"></i>
@@ -27,7 +27,7 @@
       </div>
     <?php } ?>
 
-    <?php include TEMPLATE_DIR . '/_block/post.php'; ?>
+    <?php includeTemplate('/_block/post', ['data' => $data, 'uid' => $uid]); ?>
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], null); ?>
   </main>
   <aside>
@@ -52,7 +52,7 @@
         </div>
       <?php } ?>
     <?php } else { ?>
-      <?php include TEMPLATE_DIR . '/_block/login.php'; ?>
+      <?php includeTemplate('/_block/login'); ?>
     <?php } ?>
 
     <?php if (!empty($data['latest_answers'])) { ?>

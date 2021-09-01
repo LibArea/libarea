@@ -19,26 +19,30 @@ class WebsController extends MainController
         $pagesCount = WebModel::getLinksAllCount();
         $domains    = WebModel::getLinksAll($page, $limit, $uid['user_id']);
 
-        $data = [
+        $meta = [
             'meta_title'    => lang('Domains'),
+            'sheet'         => 'domains',
+        ];
+
+        $data = [
             'sheet'         => $sheet == 'all' ? 'domains' : $sheet,
             'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
+            'domains'       => $domains,
         ];
 
-        includeTemplate('/templates/web/webs', ['data' => $data, 'uid' => $uid, 'domains' => $domains]);
+        return view('/web/webs', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
 
     // Форма добавление домена
     public function addPage()
     {
-        $uid    = Base::getUid();
-        $data = [
+        $meta = [
             'meta_title'    => lang('Add a website'),
-            'sheet'         => 'domains-add',
+            'sheet'         => 'domains',
         ];
 
-        includeTemplate('/templates/web/add', ['data' => $data, 'uid' => $uid]);
+        return view('/web/add', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => []]);
     }
 
     // Добавление домена
@@ -57,7 +61,7 @@ class WebsController extends MainController
         $redirect = '/web';
         $link = WebModel::getLinkOne($link_url_domain, $uid['user_id']);
         if ($link) {
-            Base::addMsg(lang('The site is already there'), 'error');
+            addMsg(lang('The site is already there'), 'error');
             redirect($redirect);
         }
 
@@ -83,16 +87,19 @@ class WebsController extends MainController
     // Форма редактирование домена
     public function editPage()
     {
-        $uid        = Base::getUid();
         $domain_id  = Request::getInt('id');
         $domain     = WebModel::getLinkId($domain_id);
 
-        $data = [
+        $meta = [
             'meta_title'    => lang('Change the site') . ' | ' . $domain['link_url_domain'],
-            'sheet'         => 'admin',
+            'sheet'         => 'domains',
         ];
 
-        includeTemplate('/templates/web/edit', ['data' => $data, 'uid' => $uid, 'domain' => $domain]);
+        $data = [
+            'domain'        => $domain,
+        ];
+
+        return view('/web/edit', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
     }
 
     // Изменение домена

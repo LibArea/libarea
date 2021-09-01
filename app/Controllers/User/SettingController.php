@@ -51,9 +51,11 @@ class SettingController extends MainController
 
         Validation::Limits($name, lang('Name'), '3', '11', $redirect);
         Validation::Limits($about, lang('About me'), '0', '255', $redirect);
-
-        Validation::checkEmail($public_email, $redirect);
-
+        
+        if ($public_email) {
+            Validation::checkEmail($public_email, $redirect);
+        }
+        
         $data = [
             'user_id'            => $uid['user_id'],
             'user_name'          => $name,
@@ -70,7 +72,7 @@ class SettingController extends MainController
 
         UserModel::editProfile($data);
 
-        Base::addMsg(lang('Changes saved'), 'success');
+        addMsg(lang('Changes saved'), 'success');
         redirect($redirect);
     }
 
@@ -147,7 +149,7 @@ class SettingController extends MainController
             UploadImage::cover($cover, $uid['user_id'], 'user');
         }
 
-        Base::addMsg(lang('Change saved'), 'success');
+        addMsg(lang('Change saved'), 'success');
         redirect($redirect);
     }
 
@@ -161,12 +163,12 @@ class SettingController extends MainController
 
         $redirect = '/u/' . $uid['user_login'] . '/setting/security';
         if ($password2 != $password3) {
-            Base::addMsg(lang('pass-match-err'), 'error');
+            addMsg(lang('pass-match-err'), 'error');
             redirect($redirect);
         }
 
         if (substr_count($password2, ' ') > 0) {
-            Base::addMsg(lang('pass-gap-err'), 'error');
+            addMsg(lang('pass-gap-err'), 'error');
             redirect($redirect);
         }
 
@@ -177,14 +179,14 @@ class SettingController extends MainController
         $userInfo   = UserModel::userInfo($account['email']);
 
         if (!password_verify($password, $userInfo['password'])) {
-            Base::addMsg(lang('old-password-err'), 'error');
+            addMsg(lang('old-password-err'), 'error');
             redirect($redirect);
         }
 
         $newpass = password_hash($password2, PASSWORD_BCRYPT);
         UserModel::editPassword($account['user_id'], $newpass);
 
-        Base::addMsg(lang('Password changed'), 'success');
+        addMsg(lang('Password changed'), 'success');
         redirect($redirect);
     }
 
@@ -214,7 +216,7 @@ class SettingController extends MainController
         }
 
         UserModel::userCoverRemove($user['id']);
-        Base::addMsg(lang('Cover removed'), 'success');
+        addMsg(lang('Cover removed'), 'success');
 
         // Если удаляет администрация
         if ($uid['user_trust_level'] == 5) {
@@ -264,7 +266,7 @@ class SettingController extends MainController
         ];
 
         NotificationsModel::setUserSetting($data, $uid['user_id']);
-        Base::addMsg(lang('Change saved'), 'success');
+        addMsg(lang('Change saved'), 'success');
 
         redirect('/u/' . $uid['user_login'] . '/setting/notifications');
     }

@@ -31,13 +31,18 @@ class CommentsController extends MainController
             $meta_title = lang('Deleted comments');
         }
 
-        $data = [
+        $meta = [
             'meta_title'    => $meta_title,
+            'sheet'         => 'comments',
+        ];
+        
+        $data = [
             'sheet'         => $sheet == 'all' ? 'comments' : 'comments-ban',
             'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
+            'comments'      => $result,
         ];
-
-        includeTemplate('/templates/comments', ['data' => $data, 'uid' => $uid, 'comments' => $result]);
+        
+        return view('/comment/comments', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
 }

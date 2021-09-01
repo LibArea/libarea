@@ -64,7 +64,7 @@ class InvitationsUserController extends MainController
         if (!empty($user['user_email'])) {
 
             if ($user['user_email']) {
-                Base::addMsg(lang('user-already'), 'error');
+                addMsg(lang('user-already'), 'error');
                 redirect($redirect);
             }
         }
@@ -72,7 +72,7 @@ class InvitationsUserController extends MainController
         $inv_user = UserModel::InvitationOne($uid['user_id']);
 
         if ($inv_user['invitation_email'] == $invitation_email) {
-            Base::addMsg(lang('invate-to-replay'), 'error');
+            addMsg(lang('invate-to-replay'), 'error');
             redirect($redirect);
         }
 
@@ -83,7 +83,7 @@ class InvitationsUserController extends MainController
 
         UserModel::addInvitation($uid['user_id'], $invitation_code, $invitation_email, $add_time, $add_ip);
 
-        Base::addMsg(lang('Invite created'), 'success');
+        addMsg(lang('Invite created'), 'success');
         redirect($redirect);
     }
 }

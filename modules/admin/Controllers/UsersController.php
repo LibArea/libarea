@@ -28,16 +28,20 @@ class UsersController extends MainController
             $row['created_at']  = lang_date($row['user_created_at']);
             $result[$ind]       = $row;
         }
-
+        
+        $meta = [
+            'meta_title'    => lang('Users'),
+            'sheet'         => 'users',
+        ];
+        
         $data = [
             'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
-            'users'         => $result,
-            'meta_title'    => lang('Users'),
+            'alluser'       => $result,
             'sheet'         => $sheet == 'all' ? 'users' : 'users-ban',
         ];
 
-        includeTemplate('/templates/user/users', ['data' => $data, 'uid' => $uid, 'alluser' => $result]);
+        return view('/user/users', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
 
     // Повторы IP
@@ -53,14 +57,17 @@ class UsersController extends MainController
             $row['isBan']       = UserModel::isBan($row['user_id']);
             $results[$ind]      = $row;
         }
-
+        
+        $meta = [
+            'meta_title'        => lang('Search'),
+            'sheet'             => 'users',
+        ];
+        
         $data = [
-            'h1'            => lang('Search'),
-            'meta_title'    => lang('Search'),
-            'sheet'         => 'admin',
+            'alluser'       => $results,
         ];
 
-        includeTemplate('/templates/user/logip', ['data' => $data, 'uid' => $uid, 'alluser' => $results]);
+        return view('/user/logip', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
 
     // Бан участнику
@@ -89,17 +96,22 @@ class UsersController extends MainController
         $user['badges']     = BadgeModel::getBadgeUserAll($user_id);
 
         $counts =   UserModel::contentCount($user_id);
-
-        $data = [
+        
+        $meta = [
             'meta_title'        => lang('Edit user'),
+            'sheet'             => 'users',
+        ];
+        
+        $data = [
             'sheet'             => 'edit-user',
             'posts_count'       => $counts['count_posts'],
             'answers_count'     => $counts['count_answers'],
             'comments_count'    => $counts['count_comments'],
             'spaces_user'       => SpaceModel::getUserCreatedSpaces($user_id),
+            'user'              => $user,
         ];
 
-        includeTemplate('/templates/user/edit', ['data' => $data, 'uid' => $uid, 'user' => $user]);
+        return view('/user/edit', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
 
     // Редактировать участника

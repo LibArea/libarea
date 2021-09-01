@@ -43,12 +43,12 @@ class RegisterController extends MainController
         Validation::checkEmail($email, $redirect);
 
         if (is_array(AuthModel::replayEmail($email))) {
-            Base::addMsg(lang('e-mail-replay'), 'error');
+            addMsg(lang('e-mail-replay'), 'error');
             redirect($redirect);
         }
 
         if (is_array(AuthModel::repeatIpBanRegistration($reg_ip))) {
-            Base::addMsg(lang('multiple-accounts'), 'error');
+            addMsg(lang('multiple-accounts'), 'error');
             redirect($redirect);
         }
 
@@ -56,32 +56,32 @@ class RegisterController extends MainController
         Validation::Limits($login, lang('Nickname'), '3', '10', $redirect);
 
         if (preg_match('/(\w)\1{3,}/', $login)) {
-            Base::addMsg(lang('nickname-repeats-characters'), 'error');
+            addMsg(lang('nickname-repeats-characters'), 'error');
             redirect($redirect);
         }
        
         // Запретим, хотя лучшая практика занять нужные (пр. GitHub)
         $disabled = ['admin', 'support', 'lori', 'loriup', 'dev', 'docs', 'meta', 'email', 'mail', 'login'];
         if (in_array($login, $disabled)) {
-            Base::addMsg(lang('nickname-replay'), 'error');
+            addMsg(lang('nickname-replay'), 'error');
             redirect($redirect);
         }
 
         if (is_array(AuthModel::replayLogin($login))) {
-            Base::addMsg(lang('nickname-replay'), 'error');
+            addMsg(lang('nickname-replay'), 'error');
             redirect($redirect);
         }
 
         Validation::Limits($password, lang('Password'), '8', '32', $redirect);
         if (substr_count($password, ' ') > 0) {
-            Base::addMsg(lang('password-spaces'), 'error');
+            addMsg(lang('password-spaces'), 'error');
             redirect($redirect);
         }
 
         if (!$inv_code) {
             if (Config::get(Config::PARAM_CAPTCHA)) {
                 if (!Integration::checkCaptchaCode()) {
-                    Base::addMsg(lang('Code error'), 'error');
+                    addMsg(lang('Code error'), 'error');
                     redirect('/register');
                 }
             }
@@ -95,7 +95,7 @@ class RegisterController extends MainController
         if ($inv_uid > 0) {
             // Если регистрация по инвайту, активируем емайл
             UserModel::sendInvitationEmail($inv_code, $inv_uid, $reg_ip, $active_uid);
-            Base::addMsg(lang('Successfully, log in'), 'success');
+            addMsg(lang('Successfully, log in'), 'success');
             redirect('/login');
         }
 
@@ -108,7 +108,7 @@ class RegisterController extends MainController
         $mail_message = lang('Activate E-mail') . ": \n" . $link . "\n\n";
         Base::sendMail($email, Config::get(Config::PARAM_NAME) . ' — ' . lang('checking e-mail'), $mail_message);
 
-        Base::addMsg(lang('Check your e-mail to activate your account'), 'success');
+        addMsg(lang('Check your e-mail to activate your account'), 'success');
 
         redirect('/login');
     }
@@ -120,7 +120,7 @@ class RegisterController extends MainController
         $invate = UserModel::InvitationAvailable($code);
         
         if (!$invate) {
-            Base::addMsg(lang('The code is incorrect'), 'error');
+            addMsg(lang('The code is incorrect'), 'error');
             redirect('/');
         }
 

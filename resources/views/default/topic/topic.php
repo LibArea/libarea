@@ -39,7 +39,7 @@
       </div>
     </div>
 
-    <?php include TEMPLATE_DIR . '/_block/post.php'; ?>
+    <?php includeTemplate('/_block/post', ['data' => $data, 'uid' => $uid]); ?>
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/topic/' . $data['topic']['topic_slug']); ?>
 
   </main>

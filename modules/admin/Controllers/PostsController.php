@@ -11,7 +11,6 @@ class PostsController extends MainController
 {
     public function index($sheet)
     {
-        $uid    = Base::getUid();
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
@@ -32,13 +31,18 @@ class PostsController extends MainController
             $meta_title = lang('Deleted posts');
         }
 
-        $data = [
+        $meta = [
             'meta_title'    => $meta_title,
+            'sheet'         => 'posts',
+        ];
+        
+        $data = [
             'sheet'         => $sheet == 'all' ? 'posts' : 'posts-ban',
             'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
+            'posts'         => $result,
         ];
-
-        includeTemplate('/templates/posts', ['data' => $data, 'uid' => $uid, 'posts' => $result]);
+        
+        return view('/post/posts', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
     }
 }

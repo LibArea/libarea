@@ -24,24 +24,24 @@ class LoginController extends MainController
         $uid = UserModel::userInfo($email);
 
         if (empty($uid['user_id'])) {
-            Base::addMsg(lang('Member does not exist'), 'error');
+            addMsg(lang('Member does not exist'), 'error');
             redirect($redirect);
         }
 
         // Находится ли в бан- листе
         if (UserModel::isBan($uid['user_id'])) {
-            Base::addMsg(lang('Your account is under review'), 'error');
+            addMsg(lang('Your account is under review'), 'error');
             redirect($redirect);
         }
 
         // Активирован ли E-mail
         if (!UserModel::isActivated($uid['user_id'])) {
-            Base::addMsg(lang('Your account is not activated'), 'error');
+            addMsg(lang('Your account is not activated'), 'error');
             redirect($redirect);
         }
 
         if (!password_verify($password, $uid['user_password'])) {
-            Base::addMsg(lang('E-mail or password is not correct'), 'error');
+            addMsg(lang('E-mail or password is not correct'), 'error');
             redirect($redirect);
         }
 

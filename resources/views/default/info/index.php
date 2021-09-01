@@ -6,6 +6,6 @@
     </div>
   </main>
   <aside>
-    <?php include TEMPLATE_DIR . '/_block/info-page-menu.php'; ?>
+    <?php includeTemplate('/_block/info-page-menu', ['uid' => $uid]); ?>
   </aside>
 </div>

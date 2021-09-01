@@ -13,34 +13,36 @@ class BadgesController extends MainController
     // Все награды
     public function index($sheet)
     {
-        $uid    = Base::getUid();
         $badges = BadgeModel::getBadgesAll();
 
-        $data = [
+        $meta = [
             'meta_title'    => lang('Badges'),
-            'sheet'         => $sheet == 'all' ? 'badges' : $sheet,
+            'sheet'         => 'badges',
         ];
-
-        includeTemplate('/templates/badge/badges', ['data' => $data, 'uid' => $uid, 'badges' => $badges]);
+        
+        $data = [
+            'sheet'         => $sheet == 'all' ? 'badges' : $sheet,
+            'badges'        => $badges,
+        ];
+        
+        return view('/badge/badges', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
     }
 
     // Форма добавления награды
     public function addPage()
     {
-        $uid  = Base::getUid();
-        $data = [
+        $meta = [
             'meta_title'    => lang('Add badge'),
             'sheet'         => 'badges',
         ];
-
-        includeTemplate('/templates/badge/add', ['data' => $data, 'uid' => $uid]);
+        
+        return view('/badge/add', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => []]);
     }
 
 
     // Форма изменения награды
     public function editPage()
     {
-        $uid        = Base::getUid();
         $badge_id   = Request::getInt('id');
         $badge      = BadgeModel::getBadgeId($badge_id);
 
@@ -48,12 +50,16 @@ class BadgesController extends MainController
             redirect('/admin/badges');
         }
 
-        $data = [
+        $meta = [
             'meta_title'    => lang('Edit badge'),
             'sheet'         => 'badges',
         ];
-
-        includeTemplate('/templates/badge/edit', ['data' => $data, 'uid' => $uid, 'badge' => $badge]);
+        
+        $data = [
+            'badge'         => $badge
+        ];
+        
+        return view('/badge/edit', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
     }
 
     // Добавляем награду
@@ -83,9 +89,7 @@ class BadgesController extends MainController
     // Форма награждения участинка
     public function addUserPage()
     {
-        $uid        = Base::getUid();
         $user_id    = Request::getInt('id');
-
         if ($user_id > 0) {
             $user   = UserModel::getUser($user_id, 'id');
         } else {
@@ -94,12 +98,18 @@ class BadgesController extends MainController
 
         $badges = BadgeModel::getBadgesAll();
 
-        $data = [
+        $meta = [
             'meta_title'    => lang('Reward the user'),
             'sheet'         => 'admin',
         ];
-
-        includeTemplate('/templates/badge/user-add', ['data' => $data, 'uid' => $uid, 'user' => $user, 'badges' => $badges]);
+        
+        $data = [
+            'sheet'         => 'admin',
+            'user'          => $user,
+            'badges'        => $badges,
+        ];
+        
+        return view('/badge/user-add', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
     }
 
     // Награждение
@@ -110,7 +120,7 @@ class BadgesController extends MainController
 
         BadgeModel::badgeUserAdd($user_id, $badge_id);
 
-        Base::addMsg(lang('Reward added'), 'success');
+        addMsg(lang('Reward added'), 'success');
 
         redirect('/admin/users/' . $user_id . '/edit');
     }

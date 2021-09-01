@@ -10,9 +10,7 @@ class InfoController extends MainController
     // Далее методы по названию страниц
     public function index()
     {
-        $text = file_get_contents(TEMPLATE_DIR . '/info/md/index.md');
-
-        $uid  = Base::getUid();
+        $text = file_get_contents(HLEB_GLOBAL_DIRECTORY . '/resources/views/' . PR_VIEW_DIR . '/info/md/index.md');
         $meta = [
             'sheet'         => 'info',
             'canonical'     => Config::get(Config::PARAM_URL) . '/info',
@@ -24,14 +22,12 @@ class InfoController extends MainController
             'content'       => Content::text($text, 'text'),
         ];
 
-        return view('/info/index', ['data' => $data, 'meta' => $meta, 'uid' => $uid]);
+        return view('/info/index', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
     }
 
     public function privacy()
     {
-        $text = file_get_contents(TEMPLATE_DIR . '/info/md/privacy.md');
-
-        $uid  = Base::getUid();
+        $text = file_get_contents(HLEB_GLOBAL_DIRECTORY . '/resources/views/' . PR_VIEW_DIR . '/info/md/privacy.md');
         $meta = [
             'content'       => Content::text($text, 'text'),
             'canonical'     => Config::get(Config::PARAM_URL) . '/info/privacy',
@@ -44,12 +40,11 @@ class InfoController extends MainController
             'content'       => Content::text($text, 'text'),
         ];
 
-        return view('/info/privacy', ['data' => $data, 'meta' => $meta, 'uid' => $uid]);
+        return view('/info/privacy', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
     }
 
     public function restriction()
     {
-        $uid  = Base::getUid();
         $meta = [
             'canonical'     => Config::get(Config::PARAM_URL) . '/info/restriction',
             'sheet'         => 'info-restriction',
@@ -57,6 +52,10 @@ class InfoController extends MainController
             'meta_desc'     => lang('Restriction') . ' ' . Config::get(Config::PARAM_HOME_TITLE),
         ];
 
-        return view('/info/restriction', ['meta' => $meta, 'uid' => $uid]);
+        $data = [
+            'sheet'       => 'info-restriction',
+        ];
+
+        return view('/info/restriction', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
     }
 }

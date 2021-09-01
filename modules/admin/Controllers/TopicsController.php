@@ -12,7 +12,6 @@ class TopicsController extends MainController
 {
     public function index($sheet)
     {
-        $uid    = Base::getUid();
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
@@ -20,14 +19,19 @@ class TopicsController extends MainController
         $pagesCount = TopicModel::getTopicsAllCount();
         $topics     = TopicModel::getTopicsAll($page, $limit);
 
-        $data = [
+        $meta = [
             'meta_title'    => lang('Topics'),
+            'sheet'         => 'topics',
+        ];
+        
+        $data = [
             'sheet'         => $sheet == 'all' ? 'topics' : $sheet,
             'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
-        ];
-
-        includeTemplate('/templates/topic/topics', ['data' => $data, 'uid' => $uid, 'topics' => $topics]);
+            'topics'        => $topics,
+        ];  
+        
+        return view('/topic/topics', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
     }
 
     // Форма добавить topic
@@ -39,12 +43,12 @@ class TopicsController extends MainController
             redirect('/');
         }
 
-        $data = [
+        $meta = [
             'meta_title'    => lang('Add topic'),
-            'sheet'         => 'topics-add',
+            'sheet'         => 'topics',
         ];
-
-        includeTemplate('/templates/topic/add', ['data' => $data, 'uid' => $uid]);
+        
+        return view('/topic/add', ['meta' => $meta, 'uid' => $uid, 'data' => []]);
     }
 
     // Форма редактирования topic
@@ -74,12 +78,19 @@ class TopicsController extends MainController
             $topic_parent_id    = TopicModel::topicMain($topic['topic_parent_id']);
         }
 
-        $data = [
-            'meta_title'    => lang('Edit topic') . ' — ' . $topic['topic_title'],
-            'sheet'         => 'topics',
+        $meta = [
+            'meta_title'        => lang('Edit topic') . ' | ' . $topic['topic_title'],
+            'sheet'             => 'topics',
         ];
-
-        includeTemplate('/templates/topic/edit', ['data' => $data, 'uid' => $uid, 'topic' => $topic, 'topic_related' => $topic_related, 'topic_parent_id' => $topic_parent_id, 'post_related' => $post_related]);
+        
+        $data = [
+            'topic'             => $topic, 
+            'topic_related'     => $topic_related, 
+            'topic_parent_id'   => $topic_parent_id, 
+            'post_related'      => $post_related,
+        ];
+        
+        return view('/topic/edit', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
 
     // Edit topic
@@ -154,7 +165,7 @@ class TopicsController extends MainController
 
         TopicModel::edit($data);
 
-        Base::addMsg(lang('Changes saved'), 'success');
+        addMsg(lang('Changes saved'), 'success');
         redirect('/topic/' . $topic_slug);
     }
 

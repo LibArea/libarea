@@ -12,11 +12,10 @@ class AuditsController extends MainController
 {
     public function index($sheet)
     {
-        $uid    = Base::getUid();
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
-        $limit  = 55; 
+        $limit  = 55;
         $pagesCount = AuditModel::getAuditsAllCount($sheet);
         $audits     = AuditModel::getAuditsAll($page, $limit, $sheet);
 
@@ -36,14 +35,19 @@ class AuditsController extends MainController
             $result[$ind]       = $row;
         }
 
-        $data = [
+        $meta = [
             'meta_title'    => lang('Audit'),
+            'sheet'         => 'audits',
+        ];
+
+        $data = [
             'sheet'         => $sheet == 'approved' ? 'audits' : 'approved',
             'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
+            'audits'        => $result,
         ];
 
-        includeTemplate('/templates/audits', ['data' => $data, 'uid' => $uid, 'audits' => $result]);
+        return view('/audit/audits', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
     }
 
     // Восстановление после аудита

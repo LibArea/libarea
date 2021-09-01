@@ -60,10 +60,6 @@ function print_r2($data, $desc = null) {
     hleb_a581cdd66c107015_print_r2($data, $desc);
 }
 
-function includeTemplate(string $template, array $params = []) {
-    return hleb_e0b1036c1070101_template($template, $params);
-}
-
 function getContentFromTemplate(string $template, array $params = []) {
     return hleb_e0b1036c1070101_template($template, $params, true);
 }
@@ -100,14 +96,14 @@ function includeCachedTemplate(string $template, array $params = []) {
     hleb_e0b1036c1070102_template(PR_VIEW_DIR . $template, $params);
 }
 
-function show($to, $data = null) { 
-    return hleb_v5ds34hop4nm1d_page_view(PR_VIEW_DIR . $to, $data);
+function includeTemplate(string $template, array $params = []) {
+    return hleb_e0b1036c1070101_template(PR_VIEW_DIR . $template, $params);
 }
-  
+
 function view(string $template, array $params = []) {
-   includeTemplate(PR_VIEW_DIR . '/header', ['uid' => $params['uid'], 'meta' => $params['meta']]);
-   includeTemplate(PR_VIEW_DIR . $template, ['uid' => $params['uid'], 'data' => $params['data']]);
-   includeTemplate(PR_VIEW_DIR . '/footer', ['uid' => $params['uid']]);
+   includeTemplate('/header', ['uid' => $params['uid'], 'meta' => $params['meta']]);
+   includeTemplate($template, ['uid' => $params['uid'], 'data' => $params['data']]);
+   includeTemplate('/footer');
 } 
   
 hleb_require(HLEB_GLOBAL_DIRECTORY . '/app/Libraries/Template.php');

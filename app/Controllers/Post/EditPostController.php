@@ -48,7 +48,7 @@ class EditPostController extends MainController
         // Получаем информацию по пространству
         $space = SpaceModel::getSpace($post_space_id, 'id');
         if (!$space) {
-            Base::addMsg(lang('Select space'), 'error');
+            addMsg(lang('Select space'), 'error');
             redirect($redirect);
         }
 
@@ -56,7 +56,7 @@ class EditPostController extends MainController
         if ($space['space_permit_users'] == 1) {
             // Кроме персонала и владельца
             if ($uid['user_trust_level'] != 5 && $space['space_user_id'] != $uid['user_id']) {
-                Base::addMsg(lang('You dont have access'), 'error');
+                addMsg(lang('You dont have access'), 'error');
                 redirect($redirect);
             }
         }
@@ -202,7 +202,7 @@ class EditPostController extends MainController
         PostModel::setPostImgRemove($post['post_id']);
         unlink($path_img);
 
-        Base::addMsg(lang('Cover removed'), 'success');
+        addMsg(lang('Cover removed'), 'success');
         redirect('/post/edit/' . $post['post_id']);
     }
 

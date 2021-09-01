@@ -47,7 +47,7 @@ class Config
     public static function get(string $name): string
     {
         if (is_null(self::$data)) {
-            self::$data = parse_ini_file(CONFIG_FILE_PATH);
+            self::$data = parse_ini_file(HLEB_GLOBAL_DIRECTORY . '/config.ini');
         }
         return self::$data[$name];
     }

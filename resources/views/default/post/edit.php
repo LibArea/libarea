@@ -26,9 +26,7 @@
             <?php if ($data['post']['post_content_img']) { ?>
               <div class="img-post-edit">
                 <?= post_img($data['post']['post_content_img'], $data['post']['post_title'], 'img-post', 'cover'); ?>
-
                 <input type="hidden" name="content_img" value="<?= $data['post']['post_content_img']; ?>">
-
                 <a class="img-remove size-13" href="/post/img/<?= $data['post']['post_id']; ?>/remove">
                   <?= lang('Remove'); ?>
                 </a>
@@ -46,7 +44,7 @@
             </div>
           </div>
           <div class="boxline">
-            <?php include TEMPLATE_DIR . '/post/editor.php'; ?>
+            <?php includeTemplate('/_block/post-editor', ['post' => $data['post']]); ?>
           </div>
           <div class="form">
             <?php if ($data['post']['post_draft'] == 1) { ?>

@@ -48,7 +48,7 @@ class EditSpaceController extends MainController
 
         if ($slug['space_slug'] != $space['space_slug']) {
             if ($slug) {
-                Base::addMsg(lang('url-already-exists'), 'error');
+                addMsg(lang('url-already-exists'), 'error');
                 redirect('/s/' . $space['space_slug']);
             }
         }
@@ -72,7 +72,7 @@ class EditSpaceController extends MainController
 
         SpaceModel::edit($data);
 
-        Base::addMsg(lang('Change saved'), 'success');
+        addMsg(lang('Change saved'), 'success');
         redirect('/s/' . $space_slug);
     }
 
@@ -162,7 +162,7 @@ class EditSpaceController extends MainController
             UploadImage::cover($cover, $space['space_id'], 'space');
         }
 
-        Base::addMsg(lang('Change saved'), 'success');
+        addMsg(lang('Change saved'), 'success');
         redirect($redirect);
     }
 
@@ -193,7 +193,7 @@ class EditSpaceController extends MainController
 
         SpaceModel::CoverRemove($space['space_id']);
 
-        Base::addMsg(lang('Cover removed'), 'success');
+        addMsg(lang('Cover removed'), 'success');
         redirect($redirect);
     }
 }

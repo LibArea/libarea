@@ -38,8 +38,8 @@
 <script async src="/assets/js/common.js"></script>
 <script src="/assets/js/layer/layer.js"></script>
 
-<?php if ($uid['msg']) { ?>
-  <?php foreach ($uid['msg'] as $message) { ?>
+<?php if ($msg = getMsg()) { ?>
+  <?php foreach ($msg as $message) { ?>
     <script nonce="<?= $_SERVER['nonce']; ?>">
       layer.msg('<?= $message[0]; ?>', {
         icon: <?= $message[1]; ?>,
@@ -55,5 +55,4 @@
 
 <a id="scroll_top" class="red" title="Наверх">&#8593;</a>
 </body>
-
 </html>

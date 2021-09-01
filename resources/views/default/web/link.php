@@ -30,7 +30,7 @@
       </div>
     </div>
 
-    <?php include TEMPLATE_DIR . '/_block/post.php'; ?>
+    <?php includeTemplate('/_block/post', ['data' => $data, 'uid' => $uid]); ?>
 
     <?= pagination($data['pNum'], $data['pagesCount'], null, '/domain/' . $data['link']['link_url_domain']); ?>
 

@@ -11,7 +11,6 @@ class SpacesController extends MainController
 {
     public function index($sheet)
     {
-        $uid    = Base::getUid();
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
@@ -19,14 +18,19 @@ class SpacesController extends MainController
         $pagesCount = SpaceModel::getSpacesCount($sheet);
         $spaces     = SpaceModel::getSpaces($page, $limit, $sheet);
 
-        $data = [
+        $meta = [
             'meta_title'    => lang('Spaces'),
+            'sheet'         => 'spaces',
+        ];
+        
+        $data = [
             'sheet'         => $sheet == 'all' ? 'spaces' : 'spaces-ban',
             'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
+            'spaces'        => $spaces,
         ];
-
-        includeTemplate('/templates/spaces', ['data' => $data, 'uid' => $uid, 'spaces' => $spaces]);
+        
+        return view('/space/spaces', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
     }
 
     // Удаление / восстановление пространства

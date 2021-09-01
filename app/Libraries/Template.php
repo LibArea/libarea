@@ -212,7 +212,6 @@ function pagination($pNum, $pagesCount, $sheet, $other)
 
 function breadcrumb($path_home, $title_home, $path_intermediate, $title_intermediate, $title_page)
 {
-
     $html = '<ul class="breadcrumb">';
     $html .= '<li class="breadcrumb-item gray">
                 <a title="' . $title_home . '" href="' . $path_home . '">' . $title_home . '</a>
@@ -319,17 +318,17 @@ function accessСheck($content, $type, $uid, $after, $stop_time)
 function tabs_nav($pages, $sheet, $uid)
 {
     $html = '<ul class="nav-tabs list-none mt0 pt15 pr15 pb15 pl0">';
-    foreach ($pages as $page) { 
-        if ( empty($page['auth']) != false || $uid['user_id'] > 0) {
-            if ($page['id'] == $sheet) { 
-                $html .= '<li class="active"><span>'.$page['content'].'</span></li>';
-            } else { 
-                $html .= '<li><a href="'.$page['url'].'"><span>'.$page['content'].'</span></a></li>';
+    foreach ($pages as $page) {
+        if (empty($page['auth']) != false || $uid['user_id'] > 0) {
+            if ($page['id'] == $sheet) {
+                $html .= '<li class="active"><span>' . $page['content'] . '</span></li>';
+            } else {
+                $html .= '<li><a href="' . $page['url'] . '"><span>' . $page['content'] . '</span></a></li>';
             }
-        }        
-    } 
+        }
+    }
     $html .= '</ul>';
-    
+
     return $html;
 }
 
@@ -338,10 +337,32 @@ function content_ip($ip, $uid)
     if ($uid['user_trust_level'] != 5) {
         return false;
     }
-    $html = '<a class="gray-light ml10" href="/admin/logip/'. $ip . '">
+    $html = '<a class="gray-light ml10" href="/admin/logip/' . $ip . '">
                 ' . $ip . '
             </a>';
-    
+
     return $html;
 }
- 
+
+function getMsg()
+{
+    if (isset($_SESSION['msg'])) {
+        $msg = $_SESSION['msg'];
+    } else {
+        $msg = false;
+    }
+
+    clearMsg();
+    return $msg;
+}
+
+function clearMsg()
+{
+    unset($_SESSION['msg']);
+}
+
+function addMsg($msg, $class)
+{
+    $class = ($class == 'error') ? 2 : 1;
+    $_SESSION['msg'][] = array($msg, $class);
+}

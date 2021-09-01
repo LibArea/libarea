@@ -19,14 +19,13 @@ class Base
 
         // Если сайт обновляется (выключен)
         if (Config::get(Config::PARAM_SITE_OFF) == 1) {
-            if (!empty($account['user_trust_level']) != 5) { 
+            if (!empty($account['user_trust_level']) != 5) {
                 include HLEB_GLOBAL_DIRECTORY . '/app/Optional/site_off.php';
                 hl_preliminary_exit();
-            } 
+            }
         }
-            
-        if (!empty($account['user_id'])) {
 
+        if (!empty($account['user_id'])) {
             $uid['user_id']              = $account['user_id'];
             $uid['user_login']           = $account['user_login'];
             $uid['user_trust_level']     = $account['user_trust_level'];
@@ -36,7 +35,6 @@ class Base
 
             Request::getResources()->addBottomScript('/assets/js/app.js');
         } else {
-
             self::checkCookie();
             $uid['user_id']     = 0;
             $uid['user_trust_level'] = null;
@@ -48,12 +46,8 @@ class Base
             }
         }
 
-        $uid['uri']     = Request::getUri(); 
-        $uid['msg']     = self::getMsg(); 
-
         return $uid;
     }
-
 
     // Проверяет, устанавливался ли когда-либо файл cookie «запомнить меня»
     // Если мы найдем, проверьте его по нашей таблице users_auth_tokens и  
@@ -209,30 +203,6 @@ class Base
         setcookie("remember", $token, $expires);
     }
 
-    // Возвращает массив сообщений
-    public static function getMsg()
-    {
-        if (isset($_SESSION['msg'])) {
-            $msg = $_SESSION['msg'];
-        } else {
-            $msg = false;
-        }
-
-        self::clearMsg();
-        return $msg;
-    }
-
-    public static function clearMsg()
-    {
-        unset($_SESSION['msg']);
-    }
-
-    public static function addMsg($msg, $class)
-    {
-        $class = ($class == 'error') ? 2 : 1;
-        $_SESSION['msg'][] = array($msg, $class);
-    }
-
     // Бан
     public static function accountBan($user)
     {
@@ -291,23 +261,22 @@ class Base
     {
         // TODO: Let's check the e-mail at the mention
         if ($type == 'appealed') {
-           $setting = NotificationsModel::getUserSetting($user_id);
-           if ($setting) {
+            $setting = NotificationsModel::getUserSetting($user_id);
+            if ($setting) {
                 if ($setting['setting_email_appealed'] == 1) {
                     $user = UserModel::getUser($user_id, 'id');
                     $link = 'https://' . HLEB_MAIN_DOMAIN . '/u/' . $user['user_login'] . '/notifications';
                     $message = lang('You were mentioned (@), see') . ": \n" . $link . "\n\n" . HLEB_MAIN_DOMAIN;
                     self::sendMail($user['user_email'], Config::get(Config::PARAM_NAME) . ' - ' . lang('notification'), $message);
                 }
-           }
+            }
         }
-      
+
         return true;
     }
-    
+
     public static function sendMail($email, $subject = '', $message = '')
     {
-        
         $mail = new Mail('smtp', [
             'host'      => 'ssl://' . Config::get(Config::PARAM_SMTP_HOST),
             'port'      => Config::get(Config::PARAM_SMTP_POST),
@@ -319,7 +288,6 @@ class Base
             ->setTo($email)
             ->setSubject($subject)
             ->setText($message)
-            ->send();  
-
-    }   
+            ->send();
+    }
 }

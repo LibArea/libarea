@@ -154,7 +154,7 @@ class Content
     public static function stopContentQuietМode($uid)
     {
         if ($uid['user_limiting_mode'] == 1) {
-            Base::addMsg(lang('limiting_mode_1'), 'error');
+            addMsg(lang('limiting_mode_1'), 'error');
             redirect('/');
         }
 
