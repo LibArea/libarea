@@ -83,7 +83,6 @@
                 </select>
               </div>
             <?php } ?>
-
             <div class="boxline">
               <label class="form-label" for="post_content">
                 <?= lang('Related'); ?> post

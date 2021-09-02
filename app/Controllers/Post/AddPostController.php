@@ -26,9 +26,9 @@ class AddPostController extends MainController
         $post_merged_id         = Request::getPostInt('post_merged_id');
         $post_tl                = Request::getPostInt('post_tl');
 
-        $related        = empty($_POST['post_related']) ? '' : $_POST['post_related'];
+        $related        = empty($_POST['post_select']) ? '' : $_POST['post_select'];
         $post_related   = empty($related) ? '' : implode(',', $related);
-        $topics         = empty($_POST['post_topics']) ? '' : $_POST['post_topics'];
+        $topics         = empty($_POST['topic_select']) ? '' : $_POST['topic_select'];
 
         // Используем для возврата
         $redirect = '/post/add';

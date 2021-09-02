@@ -258,7 +258,7 @@ class SettingController extends MainController
 
     function notificationsEdit()
     {
-        $uid                        = Base::getUid();
+        $uid    = Base::getUid();
         $data = [
             'setting_user_id'           => $uid['user_id'],
             'setting_email_pm'          => Request::getPostInt('setting_email_pm'),

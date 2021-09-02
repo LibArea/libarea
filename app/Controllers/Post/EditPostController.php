@@ -22,14 +22,14 @@ class EditPostController extends MainController
         $post_top               = Request::getPostInt('top');
         $post_space_id          = Request::getPostInt('space_id');
         $draft                  = Request::getPost('draft');
-        $post_user_new          = Request::getPost('post_user_new');
+        $post_user_new          = Request::getPost('user_select');
         $post_merged_id         = Request::getPostInt('post_merged_id');
         $post_tl                = Request::getPostInt('post_tl');
 
         // Связанные посты и темы
-        $related        = empty($_POST['post_related']) ? '' : $_POST['post_related'];
+        $related        = empty($_POST['post_select']) ? '' : $_POST['post_select'];
         $post_related   = empty($related) ? '' : implode(',', $related);
-        $topics         = empty($_POST['post_topics']) ? '' : $_POST['post_topics'];
+        $topics         = empty($_POST['topic_select']) ? '' : $_POST['topic_select'];
 
         $uid        = Base::getUid();
         $post       = PostModel::getPostId($post_id);
@@ -164,7 +164,7 @@ class EditPostController extends MainController
         }
 
         $post_related = PostModel::postRelated($post['post_related']); 
-        $post_topics  = PostModel::getPostTopic($post['post_id']);
+        $topic_select  = PostModel::getPostTopic($post['post_id']);
 
         $meta = [
             'sheet'         => 'edit-post',
@@ -178,7 +178,7 @@ class EditPostController extends MainController
             'post_related'  => $post_related,
             'space'         => $space,
             'user'          => $user,
-            'post_topics'   => $post_topics
+            'topic_select'  => $topic_select
         ];
 
         return view('/post/edit', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);

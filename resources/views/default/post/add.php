@@ -83,57 +83,11 @@
               </div>
               <div class="boxline">
                 <label class="form-label" for="post_content"><?= lang('Topics'); ?></label>
-                <select name="post_topics[]" multiple="multiple" id='selTopics'></select>
+                <?php includeTemplate('/_block/select-content', ['content' => 'topic', 'data' => $data, 'action' => 'add']); ?>
               </div>
               <div class="boxline">
                 <label class="form-label" for="post_content"><?= lang('Related'); ?></label>
-                <select name="post_related[]" multiple="multiple" id='selLinked'></select>
-                <script nonce="<?= $_SERVER['nonce']; ?>">
-                  $(document).ready(function() {
-                    $("#selTopics").select2({
-                      width: '70%',
-                      maximumSelectionLength: 3,
-                      ajax: {
-                        url: "/search/topic",
-                        type: "post",
-                        dataType: 'json',
-                        delay: 250,
-                        data: function(params) {
-                          return {
-                            searchTerm: params.term
-                          };
-                        },
-                        processResults: function(response) {
-                          return {
-                            results: response
-                          };
-                        },
-                        cache: true
-                      }
-                    });
-                    $("#selLinked").select2({
-                      width: '70%',
-                      maximumSelectionLength: 5,
-                      ajax: {
-                        url: "/search/post",
-                        type: "post",
-                        dataType: 'json',
-                        delay: 250,
-                        data: function(params) {
-                          return {
-                            searchTerm: params.term
-                          };
-                        },
-                        processResults: function(response) {
-                          return {
-                            results: response
-                          };
-                        },
-                        cache: true
-                      }
-                    });
-                  });
-                </script>
+                <?php includeTemplate('/_block/select-content', ['content' => 'post', 'data' => $data, 'action' => 'add']); ?>
               </div>
             </div>
             <div class="boxline">

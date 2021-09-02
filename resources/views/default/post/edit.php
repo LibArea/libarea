@@ -95,108 +95,25 @@
                 <?php } ?>
               </select>
             </div>
-
             <?php if ($data['post']['post_draft'] == 1) { ?>
               <input type="hidden" name="draft" id="draft" value="1">
             <?php } ?>
-
             <?php if ($uid['user_trust_level'] > 4) { ?>
               <div class="boxline">
                 <label class="form-label" for="post_content"><?= lang('Author'); ?></label>
-                <select name="post_user_new" id='selUser'>
-                  <option value="<?= $data['user']['user_id']; ?>"><?= $data['user']['user_login']; ?></option>
-                </select>
+                <?php includeTemplate('/_block/select-content', ['content' => 'user', 'data' => $data, 'action' => 'edit']); ?>
               </div>
             <?php } ?>
-
             <div class="boxline">
               <label class="form-label" for="post_content"><?= lang('Topics'); ?></label>
-              <select name="post_topics[]" multiple="multiple" id='selTopics'>
-                <?php foreach ($data['post_topics'] as $topic) { ?>
-                  <option selected value="<?= $topic['topic_id']; ?>"><?= $topic['topic_title']; ?></option>
-                <?php } ?>
-              </select>
+              <?php includeTemplate('/_block/select-content', ['content' => 'topic', 'data' => $data, 'action' => 'edit']); ?>
             </div>
-
             <div class="boxline">
               <label class="form-label" for="post_content"><?= lang('Related'); ?></label>
-              <select name="post_related[]" multiple="multiple" id='selLinked'>
-                <?php foreach ($data['post_related'] as $related) { ?>
-                  <option selected value="<?= $related['post_id']; ?>"><?= $related['post_title']; ?></option>
-                <?php } ?>
-              </select>
-              <script nonce="<?= $_SERVER['nonce']; ?>">
-                $(document).ready(function() {
-                  $("#selTopics").select2({
-                    width: '70%',
-                    maximumSelectionLength: 3,
-                    ajax: {
-                      url: "/search/topic",
-                      type: "post",
-                      dataType: 'json',
-                      delay: 250,
-                      data: function(params) {
-                        return {
-                          searchTerm: params.term
-                        };
-                      },
-                      processResults: function(response) {
-                        return {
-                          results: response
-                        };
-                      },
-                      cache: true
-                    }
-                  });
-                  $("#selLinked").select2({
-                    width: '70%',
-                    maximumSelectionLength: 5,
-                    ajax: {
-                      url: "/search/post",
-                      type: "post",
-                      dataType: 'json',
-                      delay: 250,
-                      data: function(params) {
-                        return {
-                          searchTerm: params.term
-                        };
-                      },
-                      processResults: function(response) {
-                        return {
-                          results: response
-                        };
-                      },
-                      cache: true
-                    }
-                  });
-
-                  // Смена владельца
-                  $("#selUser").select2({
-                    ajax: {
-                      url: "/search/user",
-                      type: "post",
-                      dataType: 'json',
-                      delay: 250,
-                      data: function(params) {
-                        return {
-                          searchTerm: params.term
-                        };
-                      },
-                      processResults: function(response) {
-                        return {
-                          results: response
-                        };
-                      },
-                      cache: true
-                    }
-                  });
-                });
-              </script>
+              <?php includeTemplate('/_block/select-content', ['content' => 'post', 'data' => $data, 'action' => 'edit']); ?>
             </div>
-
           </div>
           <div class="boxline">
-            <br>
             <input type="hidden" name="post_id" id="post_id" value="<?= $data['post']['post_id']; ?>">
             <input type="submit" class="button" name="submit" value="<?= lang('Edit'); ?>" />
           </div>

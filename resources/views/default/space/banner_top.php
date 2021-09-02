@@ -9,7 +9,7 @@
         <?php if (!$uid['user_id']) { ?>
           <div class="right">
             <a href="/login">
-              <div class="focus-space yes-space">+ <?= lang('Read'); ?></div>
+              <div class="focus-space yes-space mr10">+ <?= lang('Read'); ?></div>
             </a>
           </div>
         <?php } else { ?>
