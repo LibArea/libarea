@@ -8,7 +8,6 @@
       <?php foreach ($data['answers'] as $answer) { ?>
         <div class="white-box pt5 pr15 pb5 pl15">
           <?php if ($answer['answer_is_deleted'] == 0) { ?>
-            <div class="answ-telo_bottom">
               <div class="flex size-13">
                 <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'ava'); ?>
                 <a class="gray mr5 ml5" href="/u/<?= $answer['user_login']; ?>">
@@ -26,9 +25,8 @@
               <div class="hidden gray">
                 + <?= $answer['answer_votes']; ?>
               </div>
-            </div>
           <?php } else { ?>
-            <div class="delleted answ-telo_bottom">
+            <div class="bg-red-300">
               <div class="voters"></div>
               ~ <?= lang('Answer deleted'); ?>
             </div>

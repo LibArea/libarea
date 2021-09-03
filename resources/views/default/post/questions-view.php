@@ -72,7 +72,7 @@
           </ol>
 
         <?php } else { ?>
-          <ol class="delleted answer-telo m5 list-none size-13">
+          <ol class="bg-red-300 answer-telo m5 list-none size-13">
             <li class="answers_subtree" id="answer_<?= $answer['answer_id']; ?>">
               <span class="answ-deletes">~ <?= lang('Answer deleted'); ?></span>
             </li>

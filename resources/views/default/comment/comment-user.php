@@ -26,7 +26,7 @@
             </div>
           </div>
         <?php } else { ?>
-          <div class="delleted mb20">
+          <div class="bg-red-300 mb20">
             <div class="voters"></div>
             ~ <?= lang('Comment deleted'); ?>
           </div>

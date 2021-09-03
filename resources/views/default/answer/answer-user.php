@@ -26,7 +26,7 @@
             </div>
           </div>
         <?php } else { ?>
-          <div class="delleted answ-telo_bottom">
+          <div class="bg-red-300">
             <div class="voters"></div>
             ~ <?= lang('Answer deleted'); ?>
           </div>

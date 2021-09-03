@@ -32,7 +32,7 @@
                   <a href="<?= $report['report_url']; ?>"><?= $report['report_url']; ?></a>
                 </div>
               </td>
-              <td class="center<?php if ($report['report_status'] == 0) { ?> delleted<?php } ?>">
+              <td class="center<?php if ($report['report_status'] == 0) { ?> bg-red-100<?php } ?>">
                 <span class="report-status" data-id="<?= $report['report_id']; ?>">
                   <i class="icon-air gray size-21"></i>
                 </span>

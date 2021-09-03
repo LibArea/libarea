@@ -87,7 +87,7 @@
         <?php } else { ?>
 
           <?php if ($uid['user_trust_level'] == 5) { ?>
-            <ol class="delleted size-13 pr5 list-none">
+            <ol class="bg-red-300 size-13 pr5 list-none">
               <li class="comments_subtree" id="comment_<?= $answer['answer_id']; ?>">
                 <span class="comm-deletes nick">
                   <?= $answer['answer_content']; ?>
@@ -170,7 +170,7 @@
 
         <?php } else { ?>
           <?php if (accessСheck($comment, 'comment', $uid, 1, 30) === true) { ?>
-            <ol class="delleted size-13 list-none max-width size-15<?php if ($comment['comment_comment_id'] > 0) { ?> ml30<?php } ?>">
+            <ol class="bg-red-300 size-13 list-none max-width size-15<?php if ($comment['comment_comment_id'] > 0) { ?> ml30<?php } ?>">
               <li class="pr5" id="comment_<?= $comment['comment_id']; ?>">
                 <span class="comm-deletes gray">
                   <?= lori\Content::text($comment['comment_content'], 'line'); ?>

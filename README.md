@@ -22,7 +22,7 @@ https://loriup.ru/
 
 ### For testing
 
-*   Required: php 7*+, HTTPS 
+*   Required: php 7.4+, HTTPS 
 *   Project root folder: public (configure the server )
 *   database/dev.sql
 *   settings: database/dbase.config.php and config.ini

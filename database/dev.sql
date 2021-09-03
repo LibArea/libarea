@@ -327,7 +327,7 @@ CREATE TABLE `spaces` (
   `space_permit_users` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 - могут писать все, 1 - только автор',
   `space_feed` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 - показывать в ленте, 1 - нет',
   `space_tl` int(11) NOT NULL DEFAULT 0 COMMENT 'Видимость по уровню доверия',
-  `space_focus_count` int(11) DEFAULT 0,
+  `space_focus_count` int(11) DEFAULT 1,
   `space_is_delete` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -336,9 +336,9 @@ CREATE TABLE `spaces` (
 --
 
 INSERT INTO `spaces` (`space_id`, `space_name`, `space_slug`, `space_description`, `space_img`, `space_cover_art`, `space_text`, `space_wiki`, `space_short_text`, `space_date`, `space_color`, `space_category_id`, `space_user_id`, `space_type`, `space_permit_users`, `space_feed`, `space_tl`, `space_focus_count`, `space_is_delete`) VALUES
-(1, 'meta', 'meta', 'Мета-обсуждение самого сайта, включая вопросы, предложения и отчеты об ошибках.', 'space_no.png', 'space_cover_no.jpeg', 'тест 1...', '', 'Короткое описание...', '2021-02-28 03:15:58', '#339900', 1, 1, 1, 0, 0, 0, 0, 0),
-(2, 'Вопросы', 'qa', 'Вопросы по скрипту и не только', 'space_no.png', 'space_cover_no.jpeg', 'Вопросы по скрипту и не только', '', 'Короткое описание...', '2021-02-28 03:15:58', '#333333', 1, 1, 1, 0, 0, 0, 0, 0),
-(3, 'флуд', 'flud', 'Просто обычные разговоры', 'space_no.png', 'space_cover_no.jpeg', 'тест 3...', '', 'Короткое описание...', '2021-02-28 03:15:58', '#f56400', 1, 1, 0, 0, 0, 0, 0, 0);
+(1, 'meta', 'meta', 'Мета-обсуждение самого сайта, включая вопросы, предложения и отчеты об ошибках.', 'space_no.png', 'space_cover_no.jpeg', 'тест 1...', '', 'Короткое описание...', '2021-02-28 03:15:58', '#339900', 1, 1, 1, 0, 0, 0, 1, 0),
+(2, 'Вопросы', 'qa', 'Вопросы по скрипту и не только', 'space_no.png', 'space_cover_no.jpeg', 'Вопросы по скрипту и не только', '', 'Короткое описание...', '2021-02-28 03:15:58', '#333333', 1, 1, 1, 0, 0, 0, 1, 0),
+(3, 'флуд', 'flud', 'Просто обычные разговоры', 'space_no.png', 'space_cover_no.jpeg', 'тест 3...', '', 'Короткое описание...', '2021-02-28 03:15:58', '#f56400', 1, 1, 0, 0, 0, 0, 1, 0);
 
 -- --------------------------------------------------------
 

@@ -443,6 +443,7 @@ return [
     'Who will be able to post'              => 'Кто сможет размещать посты',
     'You can add spaces'                    => 'Вы можете добавить пространств',
     'Posts will not be visible in the feed' => 'Если нет, то посты не будут видны в ленте (на главной)',
+    'Work e-mail (to activate your account)'=> 'Рабочий е-mail (для <b>активации</b> аккаунта)',
 
     'New password has been sent to e-mail'          => 'Новый пароль отправлен на e-mail',
     'Check your e-mail to activate your account'    => 'Проверьте e-mail почту для активации аккаунта',

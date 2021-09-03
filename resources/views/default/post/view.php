@@ -2,7 +2,7 @@
   <main>
     <article class="post-full">
       <?php if ($data['post']['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
-        <div class="white-box pt10 pr15 pb15 pl15<?php if ($data['post']['post_is_deleted'] == 1) { ?> delleted<?php } ?>">
+        <div class="white-box pt10 pr15 pb15 pl15<?php if ($data['post']['post_is_deleted'] == 1) { ?> bg-red-300<?php } ?>">
           <div class="post-body">
             <h1 class="title size-24">
               <?= $data['post']['post_title']; ?>
@@ -92,7 +92,7 @@
               <?= $data['post']['post_content']; ?>
             </div>
             <?php if ($data['lo']) { ?>
-              <div class="lo-post pt5 pr5 pb5 pl10 mt10 mb10">
+              <div class="bg-yellow-100 pt5 pr5 pb5 pl10 mt10 mb10">
                 <h3 class="recommend">ЛО
                   <span class="right">
                     <a rel="nofollow" href="<?= post_url($data['post']); ?>#answer_<?= $data['lo']['answer_id']; ?>">
@@ -187,7 +187,7 @@
         </div>
 
       <?php } else { ?>
-        <div class="telo-detail-post delleted">
+        <div class="bg-red-300">
           <?= lang('Post deleted'); ?>...
         </div>
       <?php } ?>

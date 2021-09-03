@@ -13,6 +13,7 @@
           <div class="boxline">
             <label class="form-label" for="email">Email</label>
             <input type="email" class="form-input" name="email" id="email">
+            <div class="box_h gray"><?= lang('Work e-mail (to activate your account)'); ?></div>
           </div>
           <div class="boxline">
             <label class="form-label" for="password"><?= lang('Password'); ?></label>

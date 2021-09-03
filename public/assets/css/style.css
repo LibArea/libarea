@@ -66,6 +66,13 @@ body > main {
   padding: 0.4rem 0.4rem;
 }
 
+.white-box {
+  background-color: #fff;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
+  margin-bottom: 20px;
+  border-radius: 3px;
+}
+
 a {
   color: #275ec2;
   cursor: pointer;
@@ -254,13 +261,6 @@ img {
 }
 
 .post-view.sticky { top: 48px; }
-
-.white-box {
-  background-color: #fff;
-  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
-  margin-bottom: 20px;
-  border-radius: 3px;
-}
 
 a:hover > img {
   opacity: 0.8;
@@ -595,11 +595,6 @@ img.img-post,
   margin: 2px 0;
 }
 
-.lo-post {
-  max-width: 660px;
-  background-color: #f3f3f3;
-}
-
 .line {
   border-top: 2px dotted #ddd;
 }
@@ -612,14 +607,10 @@ img.img-post,
   display: block;
 }
 
-.answers_subtree .answ-telo img {
+.answers_subtree .answ-telo img p {
   max-width: 98%;
   max-height: 500px;
   display: block;
-}
-
-.delleted {
-  background-color: rgb(246, 196, 184);
 }
 
 .comment_subtree:target,
