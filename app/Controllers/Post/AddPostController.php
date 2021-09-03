@@ -121,12 +121,12 @@ class AddPostController extends MainController
             $all_count = ActionModel::ceneralContributionCount($uid['user_id']);
             if ($all_count < 2) {
                 ActionModel::addLimitingMode($uid['user_id']);
-                addMsg(lang('limiting_mode_1'), 'error');
+                addMsg(lang('limiting-mode-1'), 'error');
                 redirect('/');
             }
 
             $post_published = 0;
-            addMsg(lang('post_audit'), 'error');
+            addMsg(lang('post-audit'), 'error');
         }
 
         $post_content = Content::change($post_content);
@@ -201,23 +201,16 @@ class AddPostController extends MainController
     public function add()
     { 
         $uid        = Base::getUid(); 
-        
-      
         $spaces     = SpaceModel::getSpaceSelect($uid['user_id'], $uid['user_trust_level']);
         $space_id   = Request::getInt('space_id');
 
         Request::getHead()->addStyles('/assets/css/image-uploader.css');
         Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
-
         Request::getResources()->addBottomStyles('/assets/editor/editormd.css');
         Request::getResources()->addBottomScript('/assets/editor/editormd.min.js');
         Request::getResources()->addBottomScript('/assets/editor/config.js');
-
         Request::getResources()->addBottomStyles('/assets/css/select2.css');
-
-        if ($uid['user_trust_level'] > 0) {
-            Request::getResources()->addBottomScript('/assets/js/select2.min.js');
-        }
+        Request::getResources()->addBottomScript('/assets/js/select2.min.js');
 
         $meta = [
             'sheet'         => 'add-post',

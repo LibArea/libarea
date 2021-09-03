@@ -113,7 +113,7 @@ class SpaceController extends MainController
             $row['post_content_preview']    = Content::text($text[0], 'line');
             $row['lang_num_answers']        = word_form($row['post_answers_count'], lang('Answer'), lang('Answers-m'), lang('Answers'));
             $row['post_date']               = lang_date($row['post_date']);
-            $post_result[$ind]                   = $row;
+            $post_result[$ind]              = $row;
         }
 
         // Отписан участник от пространства или нет
@@ -125,27 +125,21 @@ class SpaceController extends MainController
         }
 
         $writers = []; 
-        if ($sheet == 'feed') {
-            $title          = $space['space_name'] . ' — ' . lang('space-feed-title') . '. ' . $num;
-            $description    = $space['space_name'] . '. ' . $space['space_description'];
-        } elseif ($sheet == 'writers') {
-            // Получим список (top 10) популярных авторов
+        if ($sheet == 'writers') {
             $writers = SpaceModel::getWriters($space['space_id']);
-            $title          = $space['space_name'] . ' — ' . lang('space-writers-title') . '. ' . $num;
-            $description    = $title . '. ' . $space['space_description']; 
-        } else {
-            $title          = $space['space_name'] . ' — ' . lang('space-top-title') . '. ' . $num;
-            $description    = $title . '. ' . $space['space_description'];
         }
-
+        
         Request::getHead()->addStyles('/assets/css/space.css');
         
+        $meta_title = $space['space_name']. ' — ' . lang('space-' . $sheet . '-title') . ' ' . $num;
+        $meta_desc  = $meta_title . $space['space_description']; 
+      
         $meta = [
             'canonical'     => Config::get(Config::PARAM_URL) . '/s/' . $space['space_slug'],
             'img'           => Config::get(Config::PARAM_URL) . '/uploads/spaces/logos/' . $space['space_img'],
             'sheet'         => $sheet,
-            'meta_title'    => $title . Config::get(Config::PARAM_NAME),
-            'meta_desc'     => $description . ' ' . Config::get(Config::PARAM_HOME_TITLE),
+            'meta_title'    => $meta_title . ' ' . Config::get(Config::PARAM_NAME),
+            'meta_desc'     => $meta_desc . ' ' . Config::get(Config::PARAM_NAME),
         ];
         
         $data = [
@@ -161,5 +155,4 @@ class SpaceController extends MainController
 
         return view('/space/space', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     } 
-    
 }

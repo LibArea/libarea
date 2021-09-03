@@ -70,7 +70,7 @@
   </main>
   <aside>
     <div class="white-box p15">
-      <?= lang('info_space_edit'); ?>
+      <?= lang('info-space-edit'); ?>
     </div>
   </aside>
 </div>

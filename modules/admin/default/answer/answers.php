@@ -11,7 +11,7 @@
 
       <?php if (!empty($data['answers'])) { ?>
         <?php foreach ($data['answers'] as $answer) { ?>
-          <div class="answ-telo_bottom" id="answer_<?= $answer['answer_id']; ?>">
+          <div id="answer_<?= $answer['answer_id']; ?>">
             <div class="size-13">
               <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'ava'); ?>
               <a class="date" href="/u/<?= $answer['user_login']; ?>"><?= $answer['user_login']; ?></a>

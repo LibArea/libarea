@@ -92,9 +92,9 @@
   <aside>
     <div class="white-box p15">
       <?php if ($data['sheet'] == 'spaces') { ?>
-        <?= lang('info_space'); ?>
+        <?= lang('info-space'); ?>
       <?php } else { ?>
-        <?= lang('my_info_space'); ?>
+        <?= lang('my-info-space'); ?>
       <?php } ?>
     </div>
   </aside>

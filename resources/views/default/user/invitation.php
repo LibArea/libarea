@@ -53,7 +53,7 @@
         <?php } ?>
 
       <?php } else { ?>
-        <?= lang('limit_tl_invitation'); ?>.
+        <?= lang('limit-tl-invitation'); ?>.
       <?php } ?>
     </div>
   </main>

@@ -14,7 +14,7 @@
           <a href="<?= post_url($post); ?>">
             <b><?= $post['post_title']; ?></b>
           </a>
-          <div class="answ-telo_bottom" id="post_<?= $post['post_id']; ?>">
+          <div id="post_<?= $post['post_id']; ?>">
             <div class="size-13">
               <?= user_avatar_img($post['user_avatar'], 'small', $post['user_login'], 'ava'); ?>
               <span class="mr5 ml5"></span>

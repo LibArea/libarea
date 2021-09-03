@@ -22,7 +22,7 @@ class RegisterController extends MainController
             'sheet'         => 'register',
             'canonical'     => Config::get(Config::PARAM_URL) . '/register',
             'meta_title'    => lang('Sign up') . ' | ' . Config::get(Config::PARAM_NAME),
-            'meta_desc'     => lang('info_security'),
+            'meta_desc'     => lang('info-security'),
         ];
 
         return view( '/auth/register', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => []]);

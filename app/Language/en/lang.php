@@ -24,10 +24,6 @@ return [
 
     'no-invate-txt'     => 'Not a user yet? Signup is by invitation only to combat spam and increase accountability. If you know a <a href="/users">current user</a> of the site, ask them for an invitation.',
 
-    'limiting_mode_1'   => 'You cannot post content, your account is being verified',
-    'no-space-to-add'   => 'You have no space to add a post. <a href="/spaces">Subscribe</a> to space',
-    'info_notifications'=> 'You can unsubscribe from all notifications by E-mail in this section',
-
     /* MSG */
     'about-info-err'        => 'About me should be less characters long',
     'name-info-err'         => 'Name must be between 3 and ~ 10 characters long',
@@ -66,23 +62,25 @@ return [
     'code-used'             => 'The code is incorrect or has already been used.',
 
     /* Setting */
-    'info_setting'          => 'Fill in your name to help participants address you by your first name. <br> <br> Tell me something about yourself. You have a great opportunity to open up to please others and seem like an interesting person.',
-    'info_avatar'           => 'Upload an avatar and cover image for your profile. <br><br> When each user has a unique avatar, it becomes much easier to follow the discussions!',
-    'info_security'         => 'Make sure that all your passwords have 8 characters or more, ideally a lot more. <br><br>Passwords must contain large letters, small letters, numbers, and special characters.',
-    'info_space'            => '«Spaces» are communities on a site dedicated to a specific topic. <br> <br> There are many spaces. They allow members to focus on a specific interest or topic when posting content.',
-    'my_info_space'            => '«Spaces», which i read . <br><br>Created spaces and signed.',
-    'info_users'            => 'List of participants sorted in order of activity on the site.',
-    'info_search'           => 'To refine the search, try to find a more accurate query.',
-    'info_notifications'    => 'You can mark all the ads as read, click on the link: «I read».',
-    'info_space_edit'       => 'Fill in all the required fields. Some fields determine how your space will be visible in search engines.',
-    'info_space_logo'       => 'A lot depends on the logo. It should most accurately display the theme of the space.',
-    'info_login'            => 'Authorization gives you the ability to post, reply, and comment.<br><br>You can vote for other publications and have your own profile.',
-    'info_recover'          => 'fter you click the "Reset" button, check your e-mail...',
+    'info-setting'          => 'Fill in your name to help participants address you by your first name. <br> <br> Tell me something about yourself. You have a great opportunity to open up to please others and seem like an interesting person.',
+    'info-avatar'           => 'Upload an avatar and cover image for your profile. <br><br> When each user has a unique avatar, it becomes much easier to follow the discussions!',
+    'info-security'         => 'Make sure that all your passwords have 8 characters or more, ideally a lot more. <br><br>Passwords must contain large letters, small letters, numbers, and special characters.',
+    'info-space'            => '«Spaces» are communities on a site dedicated to a specific topic. <br> <br> There are many spaces. They allow members to focus on a specific interest or topic when posting content.',
+    'my-info-space'            => '«Spaces», which i read . <br><br>Created spaces and signed.',
+    'info-users'            => 'List of participants sorted in order of activity on the site.',
+    'info-search'           => 'To refine the search, try to find a more accurate query.',
+    'info-space-edit'       => 'Fill in all the required fields. Some fields determine how your space will be visible in search engines.',
+    'info-space-logo'       => 'A lot depends on the logo. It should most accurately display the theme of the space.',
+    'info-login'            => 'Authorization gives you the ability to post, reply, and comment.<br><br>You can vote for other publications and have your own profile.',
+    'info-recover'          => 'fter you click the "Reset" button, check your e-mail...',
     'Ban-space-info-posts'  => 'A space ban will result in the unavailability of all posts',
     'meta-moderation'       => 'Actions of the participant and moderators to delete and restore the content in the community.',
-    'info_favorite'         => 'Posts, comments and questions that you follow',
-    'info_preferences'      => 'Posts that you have subscribed to. You will receive notifications about all new responses',
-
+    'info-favorite'         => 'Posts, comments and questions that you follow',
+    'info-preferences'      => 'Posts that you have subscribed to. You will receive notifications about all new responses',
+    'limiting-mode-1'       => 'You cannot post content, your account is being verified',
+    'no-space-to-add'       => 'You have no space to add a post. <a href="/spaces">Subscribe</a> to space',
+    'info-notifications'    => 'You can mark all the ads as read, click on the link: «I read».',
+    'info-notification'    => 'You can unsubscribe from all notifications by E-mail in this section',
     'space-subscription'    => '<a class="gray" href="/spaces">Subscribe to spaces and read them in the feed</a>',
 
     'deleted-post'          => 'Deleted post',
@@ -92,11 +90,11 @@ return [
     'deleted-answer'        => 'Deleted answer',
     'restored-answer'       => 'Restored answer',
 
-    'post_audit'            => 'Your post has been sent for moderation.',
-    'answer_audit'          => 'Your response has been sent for moderation.',
-    'comment_audit'         => 'Your comment has been sent for moderation.',
-    'limit_answer_day'      => 'You have reached the limit of 10 answers for today.',
-    'limit_comment_day'     => 'You have reached the limit of comments (10) for today.',
+    'post-audit'            => 'Your post has been sent for moderation.',
+    'answer-audit'          => 'Your response has been sent for moderation.',
+    'comment-audit'         => 'Your comment has been sent for moderation.',
+    'limit-answer-day'      => 'You have reached the limit of 10 answers for today.',
+    'limit-comment-day'     => 'You have reached the limit of comments (10) for today.',
 
     'nickname-replay'                       => 'This nickname is already on the site',
     'e-mail-replay'                         => 'This e-mail is already available on the site',

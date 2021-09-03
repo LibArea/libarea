@@ -62,7 +62,7 @@
   </main>
   <aside>
     <div class="white-box p15">
-      <?= lang('info_space_logo'); ?>
+      <?= lang('info-space-logo'); ?>
     </div>
   </aside>
 </div>

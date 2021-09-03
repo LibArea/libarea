@@ -31,7 +31,7 @@ class AddAnswerController extends MainController
         if ($uid['user_trust_level'] < 2) {
             $num_answer =  AnswerModel::getAnswerSpeed($uid['user_id']);
             if ($num_answer > 10) {
-                addMsg(lang('limit_answer_day'), 'error');
+                addMsg(lang('limit-answer-day'), 'error');
                 redirect('/');
             }
         }
@@ -42,12 +42,12 @@ class AddAnswerController extends MainController
             $all_count = ActionModel::ceneralContributionCount($uid['user_id']);
             if ($all_count < 2) {
                 ActionModel::addLimitingMode($uid['user_id']);
-                addMsg(lang('limiting_mode_1'), 'error');
+                addMsg(lang('limiting-mode-1'), 'error');
                 redirect('/');
             }
 
             $answer_published = 0;
-            addMsg(lang('answer_audit'), 'error');
+            addMsg(lang('answer-audit'), 'error');
         }
 
         $answer_content = Content::change($answer_content);

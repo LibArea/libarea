@@ -12,7 +12,7 @@
       <?php if (!empty($data['comments'])) { ?>
         <?php foreach ($data['comments'] as $comment) { ?>
 
-          <div class="comm-telo_bottom" id="comment_<?= $comment['comment_id']; ?>">
+          <div id="comment_<?= $comment['comment_id']; ?>">
             <div class="size-13">
               <?= user_avatar_img($comment['user_avatar'], 'small', $comment['user_login'], 'ava'); ?>
               <a class="date" href="/u/<?= $comment['user_login']; ?>"><?= $comment['user_login']; ?></a>

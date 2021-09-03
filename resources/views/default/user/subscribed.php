@@ -13,7 +13,7 @@
   </main>
   <aside>
     <div class="white-box p15">
-      <?= lang('info_preferences'); ?>...
+      <?= lang('info-preferences'); ?>...
     </div>
   </aside>
 </div>

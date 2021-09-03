@@ -38,7 +38,7 @@
   </main>
   <aside>
     <div class="white-box p15">
-      <?= lang('topic_info'); ?>
+      <?= lang('topic-info'); ?>
     </div>
     <?php if (!empty($data['news'])) { ?>
       <div class="white-box p15">

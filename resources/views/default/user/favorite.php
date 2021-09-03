@@ -76,7 +76,7 @@
   </main>
   <aside>
     <div class="white-box p15">
-      <?= lang('info_favorite'); ?>...
+      <?= lang('info-favorite'); ?>...
     </div>
   </aside>
 </div>

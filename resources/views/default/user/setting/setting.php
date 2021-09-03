@@ -87,7 +87,7 @@
   </main>
   <aside>
     <div class="white-box p15">
-      <?= lang('info_setting'); ?>
+      <?= lang('info-setting'); ?>
     </div>
   </aside>
 </div>

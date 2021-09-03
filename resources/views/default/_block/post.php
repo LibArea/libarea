@@ -29,7 +29,7 @@
         <a href="<?= post_url($post); ?>">
           <h2 class="title size-24 ml15 mt0 mb0"><?= $post['post_title']; ?>
             <?php if ($post['post_is_deleted'] == 1) { ?>
-              <i class="icon-trash red"></i>
+              <i class="icon-trash-empty red"></i>
             <?php } ?>
             <?php if ($post['post_closed'] == 1) { ?>
               <i class="icon-lock gray"></i>

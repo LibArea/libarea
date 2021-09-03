@@ -41,8 +41,7 @@
   </main>
   <aside>
     <div class="white-box p15 mb15">
-      <?= lang('info_search'); ?>
-      <i><?= lang('Under development'); ?></i>
+      <?= lang('info-search'); ?>
     </div>
     <?php foreach ($data['tags'] as $key => $tag) { ?>
       <div class="search max-width mb15 ml10">

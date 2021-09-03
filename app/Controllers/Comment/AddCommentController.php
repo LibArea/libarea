@@ -37,7 +37,7 @@ class AddCommentController extends MainController
         if ($uid['user_trust_level'] < Config::get(Config::PARAM_TL_ADD_COMM)) {
             $num_comm =  CommentModel::getCommentSpeed($uid['user_id']);
             if ($num_comm > 9) {
-                addMsg(lang('limit_comment_day'), 'error');
+                addMsg(lang('limit-comment-day'), 'error');
                 redirect('/');
             }
         }
@@ -48,12 +48,12 @@ class AddCommentController extends MainController
             $all_count = ActionModel::ceneralContributionCount($uid['user_id']);
             if ($all_count < 2) {
                 ActionModel::addLimitingMode($uid['user_id']);
-                addMsg(lang('limiting_mode_1'), 'error');
+                addMsg(lang('limiting-mode-1'), 'error');
                 redirect('/');
             }
 
             $comment_published = 0;
-            addMsg(lang('comment_audit'), 'error');
+            addMsg(lang('comment-audit'), 'error');
         }
 
         $comment_content = Content::change($comment_content);

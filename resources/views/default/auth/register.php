@@ -44,7 +44,7 @@
   </main>
   <aside>
     <div class="white-box p15">
-      <?= lang('info_security'); ?>
+      <?= lang('info-security'); ?>
     </div>
   </aside>
 </div>

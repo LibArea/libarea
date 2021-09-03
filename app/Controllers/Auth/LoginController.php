@@ -66,7 +66,7 @@ class LoginController extends MainController
             'sheet'         => 'login',
             'canonical'     => Config::get(Config::PARAM_URL) . '/login',
             'meta_title'    => lang('Sign in') . ' | ' . Config::get(Config::PARAM_NAME),
-            'meta_desc'     => lang('info_login'),
+            'meta_desc'     => lang('info-login'),
         ];
 
         return view('/auth/login', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => []]);

@@ -42,7 +42,7 @@
   </main>
   <aside>
     <div class="white-box p15">
-      <?= lang('info_avatar'); ?>
+      <?= lang('info-avatar'); ?>
     </div>
   </aside>
 </div>

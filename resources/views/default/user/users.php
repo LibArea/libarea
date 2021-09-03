@@ -29,7 +29,7 @@
   </main>
   <aside>
     <div class="white-box p15">
-      <?= lang('info_users'); ?>
+      <?= lang('info-users'); ?>
     </div>
   </aside>
 </div>
