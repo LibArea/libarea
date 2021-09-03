@@ -112,6 +112,8 @@ return [
     'community'         => 'сообщество',
     'Trust level'       => 'Уровень доверия',
     'Search'            => 'Поиск',
+    'To find'           => 'Найти',
+    'Up'                => 'Наверх',
     'User'              => 'Участник',
     'Users'             => 'Участники',
     'No users'          => 'Пользователей нет',
@@ -350,7 +352,6 @@ return [
 
     'space-subscription'    => '<a class="gray" href="/spaces">Подпишитесь на пространства и читайте их в ленте</a>',
 
-    'No account available'  => 'Нет учетной записи',
     'Description is formed' => 'Описание формируется',
     'Under development'     => 'В стадии разработки',
     'Activity'              => 'Активность',
@@ -403,7 +404,7 @@ return [
     'comment_audit'         => 'Ваш комментарий отправлен на модерацию.',
     'limit_answer_day'      => 'Вы исчерпали лимит ответов (10) на сегодня.',
     'limit_comment_day'     => 'Вы исчерпали лимит комментариев (10) на сегодня.',
-
+    
     'No invitations'        => 'Пока нет приглашений',
     'limit_tl_invitation'   => 'Ваш уровень доверия пока не позволяет использовать инвайты',
     'can send this link'    => 'можно отправить эту ссылку',
@@ -437,6 +438,11 @@ return [
     'Your account is under review'          => 'Ваш аккаунт находится на рассмотрении',
     'Invalid email address'                 => 'Недопустимый e-mail',
     'There is no such e-mail on the site'   => 'Такого e-mail нет на сайте',
+
+    'english'                               => 'английский',
+    'Who will be able to post'              => 'Кто сможет размещать посты',
+    'You can add spaces'                    => 'Вы можете добавить пространств',
+    'Posts will not be visible in the feed' => 'Если нет, то посты не будут видны в ленте (на главной)',
 
     'New password has been sent to e-mail'          => 'Новый пароль отправлен на e-mail',
     'Check your e-mail to activate your account'    => 'Проверьте e-mail почту для активации аккаунта',

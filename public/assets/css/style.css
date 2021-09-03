@@ -250,12 +250,10 @@ img {
 
 .sticky {
   position: sticky;
-  top: 67px;
+  top: 17px;
 }
 
-.post-view.sticky {
-  top: 48px;
-}
+.post-view.sticky { top: 48px; }
 
 .white-box {
   background-color: #fff;
@@ -307,19 +305,6 @@ pre code {
   background-color: #439cd3;
   border: 1px solid #439cd3;
   color: #fff;
-}
-
-.banner {
-  color: rgba(32, 35, 51, 0.7);
-  border-radius: 3px;
-  text-align: center;
-  background: linear-gradient(-90deg, #f5f7d7, #e4f2f7);
-}
-
-.banner h1 {
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  font-weight: 400;
 }
 
 table {
@@ -483,51 +468,6 @@ textarea:focus {
   flex: 1 1;
 }
 
-/* Authorization form */
-.login-nav-home input {
-  height: 26px;
-  border: none;
-  border-radius: 3px;
-  background-color: #f5f8fa;
-  border-bottom: 2px solid #e6ecf0;
-  box-shadow: none;
-  outline: 0;
-  color: #004874;
-  width: 100%;
-  padding-left: 3px;
-}
-
-.login-nav-home input:hover {
-  border-bottom: 2px solid #1ca1f3;
-  background-color: #eff3f6;
-}
-
-.login-nav-home input#rememberme {
-  height: 15px;
-  width: 12px;
-}
-
-.login-nav-home hr {
-  width: 60%;
-  margin-top: 22px;
-}
-
-.login-nav-home button {
-  background-color: #1ca1f3;
-  border: 1px solid #1ca1f3;
-  outline: 0;
-  line-height: 13px;
-  font-weight: 500;
-  width: 100%;
-  text-transform: uppercase;
-  border-radius: 10em;
-}
-
-.login-nav-home button:hover {
-  color: #1ca1f3;
-  background-color: #fff;
-}
-
 /* PM */
 .message {
   padding: 1em 1.5em;
@@ -672,7 +612,7 @@ img.img-post,
   display: block;
 }
 
-.answers_subtree .answ-telo-body img {
+.answers_subtree .answ-telo img {
   max-width: 98%;
   max-height: 500px;
   display: block;
@@ -947,7 +887,6 @@ footer a.footer:hover {
 
 .dark header,
 .dark footer,
-.dark .banner,
 .dark .bg-lightyellow {
   background-color: #111;
 }
@@ -985,7 +924,6 @@ footer a.footer:hover {
 .dark a.logo,
 .dark a.link,
 .dark .nick span,
-.dark .banner,
 .dark .nav-tabs > li.active span {
   color: #fff;
 }

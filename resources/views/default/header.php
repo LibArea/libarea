@@ -8,8 +8,17 @@
   <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 
-<body class="black<?php if (Request::getCookie('dayNight') == 'dark') { ?> dark<?php } ?>">
-  <header class="flex justify-content-between align-items-center gray-light-2">
+<?php if ($uid['user_id'] == 0) { ?>
+    <?php if ($meta['sheet'] == 'feed') { ?>
+      <body class="black pt0<?php if (Request::getCookie('dayNight') == 'dark') { ?> dark<?php } ?>">
+      <link rel="stylesheet" href="/assets/css/banner.css">
+    <?php } ?>
+    <header class="flex justify-content-between align-items-center gray-light-2 banner banner-bg">
+<?php } else { ?>
+    <body class="black<?php if (Request::getCookie('dayNight') == 'dark') { ?> dark<?php } ?>">
+    <header class="flex justify-content-between align-items-center gray-light-2">
+<?php } ?>
+
     <div class="flex align-items-center">
       <div>
         <a title="<?= lang('Home'); ?>" class="logo" href="/">LORI<span class="red">UP</span></a>
@@ -17,7 +26,7 @@
       <div>
         <form class="form" method="post" action="/search">
           <?= csrf_field() ?>
-          <input type="text" name="q" id="search" placeholder="Найти..." class="form-search">
+          <input type="text" name="q" id="search" placeholder="<?= lang('To find'); ?>..." class="form-search">
         </form>
       </div>
       <div>
@@ -27,7 +36,7 @@
         </a>
         <a class="gray-light-2 ml30 no-mob" title="<?= lang('Topics'); ?>" href="/topics">
           <i class="icon-clone size-21"></i>
-          <spa><?= lang('Topics'); ?></span>
+          <span><?= lang('Topics'); ?></span>
         </a>
       </div>
     </div>
@@ -60,7 +69,6 @@
             </a>
           </div>
         <?php } ?>
-
         <div class="ml30 add-post">
           <a title="<?= lang('Add post'); ?>" href="/post/add">
             <i class="icon-plus blue size-21 middle"></i>

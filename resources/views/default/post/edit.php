@@ -8,7 +8,7 @@
           <?= csrf_field() ?>
           <div class="form">
             <div class="boxline">
-              <label class="form-label" for="post_title">Заголовок<sup class="red">*</sup></label>
+              <label class="form-label" for="post_title"><?= lang('Heading'); ?><sup class="red">*</sup></label>
               <input class="form-input" minlength="6" maxlength="250" type="text" value="<?= htmlspecialchars($data['post']['post_title']); ?>" name="post_title" />
               <div class="box_h gray">6 - 250 <?= lang('characters'); ?></div>
             </div>

@@ -28,12 +28,8 @@
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/users'); ?>
   </main>
   <aside>
-    <?php if ($uid['user_id'] == 0) { ?>
-      <?php includeTemplate('/_block/login'); ?>
-    <?php } else { ?>
-      <div class="white-box p15">
-        <?= lang('info_users'); ?>
-      </div>
-    <?php } ?>
+    <div class="white-box p15">
+      <?= lang('info_users'); ?>
+    </div>
   </aside>
 </div>

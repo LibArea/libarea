@@ -47,8 +47,5 @@
     <div class="white-box p15">
       <?= lang('comments-desc'); ?>
     </div>
-    <?php if ($uid['user_id'] == 0) { ?>
-      <?php includeTemplate('/_block/login'); ?>
-    <?php } ?>
   </aside>
 </div>

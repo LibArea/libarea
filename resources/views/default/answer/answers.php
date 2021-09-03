@@ -19,7 +19,7 @@
               <a href="<?= post_url($answer); ?>#answer_<?= $answer['answer_id']; ?>">
                 <?= $answer['post_title']; ?>
               </a>
-              <div class="answ-telo-body">
+              <div class="answ-telo">
                 <?= $answer['answer_content']; ?>
               </div>
 
@@ -46,8 +46,5 @@
     <div class="white-box p15">
       <?= lang('answers-desc'); ?>
     </div>
-    <?php if ($uid['user_id'] == 0) { ?>
-      <?php includeTemplate('/_block/login'); ?>
-    <?php } ?>
   </aside>
 </div>

@@ -21,6 +21,8 @@ class Config
 
     const PARAM_SITE_OFF        = "parameters.siteoff";
 
+    const PARAM_EMAIL           = "parameters.email";
+    const PARAM_SMTP            = "parameters.smtp";
     const PARAM_SMTP_USER       = "parameters.smtpuser";
     const PARAM_SMTP_PASS       = "parameters.smtppass";
     const PARAM_SMTP_HOST       = "parameters.smtphost";

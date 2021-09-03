@@ -1,8 +1,13 @@
 <?php if ($uid['user_id'] == 0) { ?>
-  <div class="banner bg-blue-100 hidden size-15">
-    <div class="pt15 pb5">
-      <h1 class="red size-21"><?= Lori\Config::get(Lori\Config::PARAM_BANNER_TITLE); ?></h1>
-      <div class="pb15"><?= Lori\Config::get(Lori\Config::PARAM_BANNER_DESC); ?>...</div>
+  <div class="banner banner-bg justify-content-between hidden size-15 flex">
+    <div class="wrap flex">
+    <div class="pb5 text">
+      <h1 class="size-31"><?= Lori\Config::get(Lori\Config::PARAM_BANNER_TITLE); ?></h1>
+      <div class="size-21 pb15"><?= Lori\Config::get(Lori\Config::PARAM_BANNER_DESC); ?>...</div>
+    </div>
+    <div class="pb5">
+      <?php includeTemplate('/_block/banner-login'); ?>
+    </div>
     </div>
   </div>
 <?php } ?>
@@ -31,7 +36,7 @@
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], null); ?>
   </main>
   <aside>
-    <?php if ($uid['user_id']) { ?>
+    <?php if ($uid['user_id'] > 0) { ?>
       <?php if (!empty($data['space_user'])) { ?>
         <div class="white-box pt5 pr15 pb5 pl15">
           <a class="right" title="<?= lang('Spaces'); ?>" href="/spaces">
@@ -51,8 +56,6 @@
           <?php } ?>
         </div>
       <?php } ?>
-    <?php } else { ?>
-      <?php includeTemplate('/_block/login'); ?>
     <?php } ?>
 
     <?php if (!empty($data['latest_answers'])) { ?>

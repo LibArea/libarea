@@ -53,6 +53,6 @@
 <?= getRequestResources()->getBottomStyles(); ?>
 <?= getRequestResources()->getBottomScripts(); ?>
 
-<a id="scroll_top" class="red" title="Наверх">&#8593;</a>
+<a id="scroll_top" class="red" title="<?= lang('Up'); ?>">&#8593;</a>
 </body>
 </html>

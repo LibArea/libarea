@@ -277,17 +277,27 @@ class Base
 
     public static function sendMail($email, $subject = '', $message = '')
     {
-        $mail = new Mail('smtp', [
-            'host'      => 'ssl://' . Config::get(Config::PARAM_SMTP_HOST),
-            'port'      => Config::get(Config::PARAM_SMTP_POST),
-            'username'  => Config::get(Config::PARAM_SMTP_USER),
-            'password'  => Config::get(Config::PARAM_SMTP_PASS)
-        ]);
+        if (Config::get(Config::PARAM_SMTP) == 1) {
+            $mail = new Mail('smtp', [
+                'host'      => 'ssl://' . Config::get(Config::PARAM_SMTP_HOST),
+                'port'      => Config::get(Config::PARAM_SMTP_POST),
+                'username'  => Config::get(Config::PARAM_SMTP_USER),
+                'password'  => Config::get(Config::PARAM_SMTP_PASS)
+            ]);
 
-        $mail->setFrom(Config::get(Config::PARAM_SMTP_USER))
-            ->setTo($email)
-            ->setSubject($subject)
-            ->setText($message)
-            ->send();
+            $mail->setFrom(Config::get(Config::PARAM_SMTP_USER))
+                ->setTo($email)
+                ->setSubject($subject)
+                ->setText($message)
+                ->send();
+       } else {
+            $mail = new Mail();
+            $mail->setFrom(Config::get(Config::PARAM_EMAIL), Config::get(Config::PARAM_HOME_TITLE));
+             
+            $mail->to($email)
+                ->setSubject($subject)
+                ->setHTML($message, true)
+                ->send();
+       }
     }
 }
