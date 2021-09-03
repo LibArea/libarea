@@ -1,5 +1,5 @@
 .banner-bg {
-  background-color: #7BC8A4;
+  background-color: #7bc8a4;
   animation-name: col;
   animation-duration: 10s;
 }
@@ -10,9 +10,9 @@
 }
 
 .dark .banner .login-nav-home button {
-    background-color: #333;
-    border: 1px solid #333;
-    color: #fff;
+  background-color: #333;
+  border: 1px solid #333;
+  color: #fff;
 }
 
 .banner .login-nav-home {
@@ -21,11 +21,11 @@
 }
 
 @keyframes col {
-  0%   { background-color: #7BC8A4; }
-  25%  { background-color: #40415A; }
-  50%  { background-color: #40415A; }
-  75% { background-color: #F99A66; }
-  100% { background-color: #F99A66; }
+  0% { background-color: #7bc8a4; }
+  25% { background-color: #40415a; }
+  50% { background-color: #40415a; }
+  75% { background-color: #f99a66; }
+  100% { background-color: #f99a66; }
 }
 
 .banner .text {
@@ -38,9 +38,9 @@
 .banner { color: #fff; }
 
 header.banner-bg {
- box-shadow: none;
- position: relative;
- padding-top: -50px;
+  box-shadow: none;
+  position: relative;
+  padding-top: -50px;
 }
 
 header .gray-light-2,
@@ -61,11 +61,11 @@ header a.logo .red {
   border-radius: 3px;
 }
 
-.banner .login-nav-home a { color: #2A8B9D; }
+.banner .login-nav-home a { color: #2a8b9d; }
 
 .login-nav-home button {
-  background-color: #2A8B9D;
-  border: 1px solid #2A8B9D;
+  background-color: #2a8b9d;
+  border: 1px solid #2a8b9d;
   outline: 0;
   line-height: 13px;
   font-weight: 500;
@@ -76,12 +76,12 @@ header a.logo .red {
 }
 
 .login-nav-home button:hover {
-  color: #2A8B9D;
+  color: #2a8b9d;
   background-color: #fff;
-  border: 1px solid #67B892;
+  border: 1px solid #67b892;
 }
 
-input[type=checkbox], input[type=radio] {
+input[type=checkbox] {
   display: none;
 }
 

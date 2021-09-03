@@ -16,6 +16,8 @@ A distinctive feature of the micro-framework HLEB is the minimalism of the code 
 
 ![Loriup](https://raw.githubusercontent.com/Toxu-ru/AreaDev/main/public/assets/images/areadev.jpg)
 
+![Loriup](https://raw.githubusercontent.com/Toxu-ru/AreaDev/main/public/assets/images/areadev2.jpg)
+
 https://loriup.ru/
 
 ### For testing
