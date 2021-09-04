@@ -1,6 +1,5 @@
 <?php
 return [
-    'home-desc'         => 'Community home page, forum, posts',
     'site-banner'       => 'Community of interests',
     'site-banner-txt'   => 'The site is under development',
     'comments-desc'     => 'All comments are in order of priority on the site',
@@ -41,10 +40,13 @@ return [
     'login-use-condition'   => 'By continuing, you agree to <a href="/info/privacy">Terms of Use</a> the site',
 
     /* Meta - desc */
+    'top-title'             => 'Popular posts. ',
+    'top-desc'              => 'A list of popular posts in the community feed (by the number of responses). Spaces based on interests. Conversations, questions and answers, comments. ',
+    'all-title'             => 'All posts. ',
+    'all-desc'              => 'A list of all posts in the community feed (by the number of responses). Conversations, questions and answers, comments. ',
     'desc-user-all'         => 'List of all participants sorted by date of registration on the site',
     'title-profile'         => '%1$s %2$s | Profile on %3$s',
     'desc-profile'          => '%1$s - profile page. %2$s Posts, comments, awards on %3$s',
-    'top-desc'              => 'List of popular posts in the community (by number of responses)',
     'space-feed-title'      => 'feed of posts by space',
     'space-top-title'       => 'popular posts by Space',
     'space-writers-title'   => 'writers in space',

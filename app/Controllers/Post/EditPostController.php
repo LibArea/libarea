@@ -154,17 +154,13 @@ class EditPostController extends MainController
         Request::getHead()->addStyles('/assets/css/image-uploader.css');
         Request::getResources()->addBottomStyles('/assets/css/select2.css');
         Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
-
         Request::getResources()->addBottomStyles('/assets/editor/editormd.css');
         Request::getResources()->addBottomScript('/assets/editor/editormd.min.js');
         Request::getResources()->addBottomScript('/assets/editor/config.js');
+        Request::getResources()->addBottomScript('/assets/js/select2.min.js');
 
-        if ($uid['user_trust_level'] > 0) {
-            Request::getResources()->addBottomScript('/assets/js/select2.min.js');
-        }
-
-        $post_related = PostModel::postRelated($post['post_related']); 
-        $topic_select  = PostModel::getPostTopic($post['post_id']);
+        $post_related   = PostModel::postRelated($post['post_related']); 
+        $topic_select   = PostModel::getPostTopic($post['post_id']);
 
         $meta = [
             'sheet'         => 'edit-post',
@@ -175,7 +171,7 @@ class EditPostController extends MainController
         $data = [
             'sheet'         => 'edit-post',
             'post'          => $post,
-            'post_related'  => $post_related,
+            'post_select'   => $post_related,
             'space'         => $space,
             'user'          => $user,
             'topic_select'  => $topic_select

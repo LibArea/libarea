@@ -40,28 +40,21 @@ class HomeController extends MainController
             $result_answers[$ind]          = $row;
         }
 
-        $num = '';
-        if ($page > 1) {
-            $num = ' | ' . Config::get(Config::PARAM_NAME) . sprintf(lang('page-number'), $page);
-        }
-
+        $num        = $page > 1 ? sprintf(lang('page-number'), $page) : '';
         $meta_title = Config::get(Config::PARAM_HOME_TITLE) . $num;
         $meta_desc  = Config::get(Config::PARAM_META_DESC) . $num;
-        $canonical  = Config::get(Config::PARAM_URL);
-
-        if ($sheet == 'top') {
-            $meta_title = lang('TOP') . $num . Config::get(Config::PARAM_HOME_TITLE) . $num;
-            $meta_desc  = lang('top-desc') . $num . Config::get(Config::PARAM_HOME_TITLE);
-            $canonical  = Config::get(Config::PARAM_URL) . '/top';
-        }
-
-        if ($sheet == 'all') {
-            $meta_title = lang('All') . ' ' . $num . Config::get(Config::PARAM_HOME_TITLE) . $num;
+        
+        $url        = Config::get(Config::PARAM_URL);
+        $canonical  = $sheet == 'top' ? $url . '/top' : $url;
+        
+        if ($sheet == 'top' || $sheet == 'all') {
+            $meta_title = lang($sheet . '-title') . $num . Config::get(Config::PARAM_HOME_TITLE);
+            $meta_desc  = lang($sheet . '-desc') . $num . Config::get(Config::PARAM_NAME);
         }
 
         $meta = [
             'canonical'         => $canonical,
-            'img'               => Config::get(Config::PARAM_URL) . '/assets/images/areadev.webp',
+            'img'               => $url . '/assets/images/areadev.webp',
             'meta_title'        => $meta_title,
             'meta_desc'         => $meta_desc,
             'sheet'             => $sheet,

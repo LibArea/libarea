@@ -9,7 +9,8 @@
 </head>
 
 <?php if ($uid['user_id'] == 0) { ?>
-    <?php if ($meta['sheet'] == 'feed') { ?>
+     <?php if ($meta['sheet'] == 'feed' || $meta['sheet'] == 'top') { ?>
+      <link rel="stylesheet" href="/assets/css/banner.css">
       <body class="black pt0<?php if (Request::getCookie('dayNight') == 'dark') { ?> dark<?php } ?>">
       <link rel="stylesheet" href="/assets/css/banner.css">
     <?php } ?>
