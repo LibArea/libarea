@@ -18,7 +18,7 @@
             </div>
             <div class="boxline max-width">
               <label class="form-label" for="post_title"><?= lang('Description'); ?></label>
-              <textarea name="link_content" required></textarea>
+              <textarea rows="4" name="link_content" required></textarea>
               <div class="box_h">24 - 1500 <?= lang('characters'); ?></div>
             </div>
             <input type="submit" class="button" name="submit" value="<?= lang('Add'); ?>" />

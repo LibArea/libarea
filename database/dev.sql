@@ -150,7 +150,7 @@ CREATE TABLE `links` (
   `link_status_date` datetime NOT NULL DEFAULT current_timestamp() COMMENT 'Когда была проверка статуса',
   `link_category_id` int(11) DEFAULT 0 COMMENT 'Категория сайта',
   `link_votes` int(6) DEFAULT 0,
-  `link_count` int(6) DEFAULT 0,
+  `link_count` int(6) DEFAULT 1,
   `link_is_deleted` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

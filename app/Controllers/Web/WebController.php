@@ -19,23 +19,27 @@ class WebController extends MainController
         $pagesCount = WebModel::getLinksAllCount();
         $links      = WebModel::getLinksAll($page, $limit, $uid['user_id']);
 
-        $num = ' | ';
-        if ($page > 1) {
-            $num = sprintf(lang('page-number'), $page) . ' | ';
+        $result = array();
+        foreach ($links as $ind => $row) {
+            $text = explode("\n", $row['link_content']);
+            $row['link_content']    = Content::text($text[0], 'line');
+            $result[$ind]           = $row;
         }
+
+        $num = $page > 1 ? sprintf(lang('page-number'), $page) : '';
 
         $meta = [
             'canonical'     => '/web',
             'sheet'         => 'domains',
-            'meta_title'    => lang('domains-title') . $num . Config::get(Config::PARAM_NAME),
-            'meta_desc'     => lang('domains-desc') . $num . Config::get(Config::PARAM_HOME_TITLE),
+            'meta_title'    => lang('domains-title') . ' ' . $num . Config::get(Config::PARAM_NAME),
+            'meta_desc'     => lang('domains-desc') . ' ' . $num . Config::get(Config::PARAM_HOME_TITLE),
         ];
 
         $data = [
             'sheet'         => 'domains',
             'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
-            'links'         => $links
+            'links'         => $result
         ];
 
         return view('/web/links', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
@@ -51,6 +55,8 @@ class WebController extends MainController
 
         $link       = WebModel::getLinkOne($domain, $uid['user_id']);
         Base::PageError404($link);
+ 
+        $link['link_content'] = Content::text($link['link_content'], 'line');
 
         $limit      = 25;
         $data       = ['link_url_domain' => $link['link_url_domain']];

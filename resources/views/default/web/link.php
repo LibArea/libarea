@@ -16,13 +16,12 @@
           <div class="gray">
             <?= $data['link']['link_content']; ?>
           </div>
-          <div class="domain-footer-small">
+          <div class="gray">
             <a class="green" rel="nofollow noreferrer ugc" href="<?= $data['link']['link_url']; ?>">
               <?= favicon_img($data['link']['link_id'], $data['link']['link_url_domain']); ?>
               <?= $data['link']['link_url']; ?>
             </a>
-
-            <span class="right gray"><?= $data['link']['link_count']; ?></span>
+            <span class="right"><?= $data['link']['link_count']; ?></span>
           </div>
         <?php } else { ?>
           <h1><?= lang('Domain') . ': ' . $data['domain']; ?></h1>

@@ -18,12 +18,12 @@
       <?= $data['topic']['topic_info']; ?>
     </div>
 
-    <?php if (!empty($data['post_related'])) { ?>
+    <?php if (!empty($data['post_select'])) { ?>
       <div class="white-box pt5 pr15 pb5 pl15">
         <div class="mb20">
           <h3 class="uppercase mb5 mt0 fw300 size-13 gray"><?= lang('By topic'); ?>:</h3>
           <?php $num = 0; ?>
-          <?php foreach ($data['post_related'] as $related) { ?>
+          <?php foreach ($data['post_select'] as $related) { ?>
             <div class="mb5">
               <?php $num++; ?>
               <span class="related-count gray-light size-15"><?= $num; ?></span>

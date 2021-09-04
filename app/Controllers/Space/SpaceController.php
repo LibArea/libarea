@@ -119,10 +119,7 @@ class SpaceController extends MainController
         // Отписан участник от пространства или нет
         $space_signed = SubscriptionModel::getFocus($space['space_id'], $uid['user_id'], 'space');
 
-        $num = '';
-        if ($page > 1) {
-            $num =  sprintf(lang('page-number'), $page);
-        }
+        $num = $page > 1 ? sprintf(lang('page-number'), $page) : '';
 
         $writers = [];
         if ($sheet == 'writers') {

@@ -62,7 +62,6 @@ class TopicsController extends MainController
 
         $topic_id   = Request::getInt('id');
         $topic      = TopicModel::getTopic($topic_id, 'id');
-
         Base::PageError404($topic);
 
         Request::getResources()->addBottomStyles('/assets/css/select2.css');
@@ -159,7 +158,7 @@ class TopicsController extends MainController
             'topic_parent_id'       => $topic_parent_id,
             'topic_is_parent'       => $topic_is_parent,
             'topic_post_related'    => $topic_post_related,
-            'topic_related'         => $topic_related,
+            'post_select'           => $topic_related,
             'topic_count'           => $topic_count,
         ];
 

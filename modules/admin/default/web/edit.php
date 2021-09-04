@@ -30,7 +30,7 @@
             </div>
             <div class="boxline max-width">
               <label class="form-label" for="post_title"><?= lang('Description'); ?></label>
-              <textarea name="link_content" required><?= $data['domain']['link_content']; ?></textarea>
+              <textarea name="link_content" rows="4" required><?= $data['domain']['link_content']; ?></textarea>
               <div class="box_h">24 - 1500 <?= lang('characters'); ?></div>
             </div>
             <input type="hidden" name="link_id" value="<?= $data['domain']['link_id']; ?>">

@@ -5,7 +5,7 @@ namespace Modules\Admin\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Admin\Models\WebModel;
-use Lori\{Base, Validation};
+use Lori\{Base, Content, Validation};
 
 class WebsController extends MainController
 {
@@ -19,6 +19,12 @@ class WebsController extends MainController
         $pagesCount = WebModel::getLinksAllCount();
         $domains    = WebModel::getLinksAll($page, $limit, $uid['user_id']);
 
+        $result = array();
+        foreach ($domains as $ind => $row) {
+            $row['link_content']    = Content::text($row['link_content'], 'line');
+            $result[$ind]           = $row;
+        }
+
         $meta = [
             'meta_title'    => lang('Domains'),
             'sheet'         => 'domains',
@@ -28,7 +34,7 @@ class WebsController extends MainController
             'sheet'         => $sheet == 'all' ? 'domains' : $sheet,
             'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
-            'domains'       => $domains,
+            'domains'       => $result,
         ];
 
         return view('/web/webs', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
@@ -137,5 +143,30 @@ class WebsController extends MainController
         WebModel::editLink($data);
 
         redirect($redirect);
+    }
+    
+    public function favicon()
+    {
+        $link_id    = \Request::getPostInt('id');
+        $uid        = Base::getUid();
+
+        $link = WebModel::getLinkId($link_id);
+        Base::PageError404($link);
+        
+        $puth = HLEB_PUBLIC_DIR. '/uploads/favicons/' . $link["link_id"] . '.png';
+        $dirF = HLEB_PUBLIC_DIR. '/uploads/favicons/';
+
+        if (!file_exists($puth)) {  
+            $urls = self::getFavicon($link['link_url_domain']);       
+            copy($urls, $puth); 
+        } 
+        
+        return true;
+    }
+    
+    public static function getFavicon($url)
+    {
+        $url = str_replace("https://", '', $url);
+        return "https://www.google.com/s2/favicons?domain=".$url;
     }
 }
