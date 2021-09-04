@@ -197,6 +197,7 @@ img {
 .right { float: right; }
 .right-10 { right: 10px; }
 .center { text-align: center; }
+.align-right { text-align: right; }
 .middle { vertical-align: middle; }
 .lowercase { text-transform: lowercase; }
 .justify-content-between { justify-content: space-between; }

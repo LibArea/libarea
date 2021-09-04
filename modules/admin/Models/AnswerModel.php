@@ -27,6 +27,7 @@ class AnswerModel extends MainModel
                     answer_date,
                     answer_user_id,
                     answer_post_id,
+                    answer_ip,
                     answer_votes,
                     answer_is_deleted,
                     user_id, 

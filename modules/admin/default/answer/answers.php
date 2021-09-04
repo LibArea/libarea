@@ -11,28 +11,28 @@
 
       <?php if (!empty($data['answers'])) { ?>
         <?php foreach ($data['answers'] as $answer) { ?>
+          <a href="<?= post_url($answer); ?>">
+            <b><?= $answer['post_title']; ?></b>
+          </a>
           <div id="answer_<?= $answer['answer_id']; ?>">
-            <div class="size-13">
-              <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'ava'); ?>
-              <a class="date" href="/u/<?= $answer['user_login']; ?>"><?= $answer['user_login']; ?></a>
-              <span class="mr5 ml5"> &#183; </span>
-              <?= $answer['date']; ?>
-
-              <span class="mr5 ml5"> &#183; </span>
-              <a href="/post/<?= $answer['post_id']; ?>/<?= $answer['post_slug']; ?>">
-                <?= $answer['post_title']; ?>
+            <div class="size-13 gray">
+              <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'ava mr5'); ?>
+              <a class="date mr5" href="/u/<?= $answer['user_login']; ?>">
+                <?= $answer['user_login']; ?>
               </a>
-
+              <span class="mr5">
+                <?= $answer['date']; ?>
+              </span>
+              <?= content_ip($answer['answer_ip'], $uid); ?>
               <?php if ($answer['post_type'] == 1) { ?>
                 <i class="icon-help green"></i>
               <?php } ?>
             </div>
-            <div class="mt5 mr0 mb10 ml0 size-15 max-width">
+            <div class="size-15 max-width">
               <?= $answer['content']; ?>
             </div>
-            <div class="border-bottom mb15 mt5 pb5 size-13 hidden gray">
+            <div class="border-bottom mb15 pb5 size-13 hidden gray">
               + <?= $answer['answer_votes']; ?>
-
               <span id="cm_dell" class="right comment_link size-13">
                 <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action">
                   <?php if ($data['sheet'] == 'answers-ban') { ?>

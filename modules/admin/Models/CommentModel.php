@@ -28,6 +28,7 @@ class CommentModel extends MainModel
                     comment_content,
                     comment_post_id,
                     comment_user_id,
+                    comment_ip,
                     comment_votes,
                     comment_is_deleted,
                     user_id, 

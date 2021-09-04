@@ -2,14 +2,14 @@
   <main class="admin">
     <div class="white-box pt5 pr15 pb5 pl15">
       <?= breadcrumb('/admin', lang('Admin'), '/admin/users', lang('Users'), lang('Users')); ?>
-       <?php
+      <?php
       $pages = array(
         array('id' => 'users', 'url' => '/admin/users', 'content' => lang('All')),
         array('id' => 'users-ban', 'url' => '/admin/users/ban', 'content' => lang('Banned')),
       );
       echo tabs_nav($pages, $data['sheet'], $uid);
       ?>
- 
+
       <?php if ($data['alluser']) {  ?>
         <table>
           <thead>
@@ -17,7 +17,7 @@
             <th><?= lang('Avatar'); ?></th>
             <th><?= lang('Information'); ?></th>
             <th>IP <?= lang('registrations'); ?></th>
-            <td><?= lang('Last'); ?></th>
+            <th><?= lang('Last'); ?></th>
             <th>Ban</th>
             <th><?= lang('Action'); ?></th>
           </thead>
@@ -47,22 +47,20 @@
                   bans: <?= $user['isBan']['banlist_int_num']; ?>
                 <?php } ?>
               </td>
-              <td class="size-13">
-                <?= $user['user_reg_ip']; ?>
+              <td class="size-13 align-right">
+                <?= content_ip($user['user_reg_ip'], $uid); ?>
                 <?php if ($user['replayIp'] > 1) { ?>
                   <sup class="red">(<?= $user['replayIp']; ?>)</sup>
-                <?php } ?> <br>
+                <?php } ?>
+                <br>
                 <?= $user['created_at']; ?>
               </td>
-              <td class="size-13">
+              <td class="size-13 align-right">
                 <?php if (!empty($user['logs']['logs_ip_address'])) { ?>
-                  <a href="/admin/logip/<?= $user['logs']['logs_ip_address']; ?>">
-                    <?= $user['logs']['logs_ip_address']; ?>
-                  </a>
+                  <?= content_ip($user['logs']['logs_ip_address'], $uid); ?>
                   <br>
                   <?= $user['logs']['logs_date']; ?>
                 <?php } ?>
-
                 <?php if ($user['user_activated'] == 1) { ?>
                   <div><?= lang('Email activated'); ?></div>
                 <?php } else { ?>

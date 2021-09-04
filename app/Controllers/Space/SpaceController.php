@@ -143,7 +143,6 @@ class SpaceController extends MainController
         ];
 
         $data = [
-            'h1'            => $space['space_name'],
             'sheet'         => $sheet,
             'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
@@ -154,5 +153,28 @@ class SpaceController extends MainController
         ];
 
         return view('/space/space', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+    }
+    
+    public function wiki()
+    {
+        // Under development
+        $wiki = [];
+        
+        Request::getHead()->addStyles('/assets/css/space.css');
+
+        $meta = [
+            'canonical'     => Config::get(Config::PARAM_URL) . '/s/' . $space['space_slug'] . '/wiki',
+            'sheet'         => 'wiki',
+            'meta_title'    => lang('Wiki space') . ' | ' . Config::get(Config::PARAM_NAME),
+            'meta_desc'     => lang('wiki-space-desc') . ' ' . Config::get(Config::PARAM_HOME_TITLE),
+        ];
+
+        $data = [
+            'h1'            => lang('Wiki space'),
+            'sheet'         => 'wiki',
+            'wiki'          => $wiki,
+        ];
+
+        return view('/space/wiki', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
     }
 }

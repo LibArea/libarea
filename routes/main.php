@@ -128,7 +128,7 @@ Route::get('/s/{slug}/page/{page?}')->controller('Space\SpaceController@posts', 
 Route::get('/s/{slug}/top')->controller('Space\SpaceController@posts', ['top'])->where(['slug' => '[A-Za-z0-9_]+']);
 Route::get('/s/{slug}/top/page/{page?}')->controller('Space\SpaceController@posts', ['top'])->where(['slug' => '[A-Za-z0-9_]+', 'page' => '[0-9]+']);
 Route::get('/s/{slug}/writers')->controller('Space\SpaceController@posts', ['writers'])->where(['slug' => '[A-Za-z0-9_]+']);
-
+Route::get('/s/{slug}/wiki')->controller('Space\SpaceController@wiki')->where(['slug' => '[A-Za-z0-9_]+']);
 
 Route::get('/moderations')->controller('ActionController@moderation');
 

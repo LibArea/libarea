@@ -11,19 +11,19 @@
 
       <?php if (!empty($data['comments'])) { ?>
         <?php foreach ($data['comments'] as $comment) { ?>
-
+          <a href="<?= post_url($comment); ?>">
+            <b><?= $comment['post_title']; ?></b>
+          </a>
           <div id="comment_<?= $comment['comment_id']; ?>">
-            <div class="size-13">
-              <?= user_avatar_img($comment['user_avatar'], 'small', $comment['user_login'], 'ava'); ?>
-              <a class="date" href="/u/<?= $comment['user_login']; ?>"><?= $comment['user_login']; ?></a>
-              <span class="mr5 ml5"> &#183; </span>
-              <span class="date"><?= $comment['date']; ?></span>
-
-              <span class="mr5 ml5"> &#183; </span>
-              <a href="/post/<?= $comment['post_id']; ?>/<?= $comment['post_slug']; ?>">
-                <?= $comment['post_title']; ?>
+            <div class="size-13 gray">
+              <?= user_avatar_img($comment['user_avatar'], 'small', $comment['user_login'], 'ava mr5'); ?>
+              <a class="date mr5" href="/u/<?= $comment['user_login']; ?>">
+                <?= $comment['user_login']; ?>
               </a>
-
+              <span class="date mr5">
+                <?= $comment['date']; ?>
+              </span>
+              <?= content_ip($comment['comment_ip'], $uid); ?>
               <?php if ($comment['post_type'] == 1) { ?>
                 <i class="icon-commenting-o middle"></i>
               <?php } ?>
