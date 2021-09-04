@@ -42,7 +42,7 @@ class SpaceController extends MainController
             'sheet'             => 'spaces',
             'pagesCount'        => ceil($pagesCount / $limit),
             'pNum'              => $page,
-            'spaces'            => $spaces, 
+            'spaces'            => $spaces,
             'add_space_button'  => $add_space_button
         ];
 
@@ -73,13 +73,13 @@ class SpaceController extends MainController
             'meta_title'    => lang('I read space') . ' | ' . Config::get(Config::PARAM_NAME),
             'meta_desc'     => lang('I read space') . ' ' . Config::get(Config::PARAM_HOME_TITLE),
         ];
-        
+
         $data = [
             'h1'                => lang('I read space'),
             'sheet'             => 'my-space',
             'pagesCount'        => ceil($pagesCount / $limit),
             'pNum'              => $page,
-            'spaces'            => $space, 
+            'spaces'            => $space,
             'add_space_button'  => $add_space_button,
         ];
 
@@ -124,16 +124,16 @@ class SpaceController extends MainController
             $num =  sprintf(lang('page-number'), $page);
         }
 
-        $writers = []; 
+        $writers = [];
         if ($sheet == 'writers') {
             $writers = SpaceModel::getWriters($space['space_id']);
         }
-        
+
         Request::getHead()->addStyles('/assets/css/space.css');
-        
-        $meta_title = $space['space_name']. ' — ' . lang('space-' . $sheet . '-title') . ' ' . $num;
-        $meta_desc  = $meta_title . $space['space_description']; 
-      
+
+        $meta_title = $space['space_name'] . ' — ' . lang('space-' . $sheet . '-title') . ' ' . $num;
+        $meta_desc  = $meta_title . $space['space_description'];
+
         $meta = [
             'canonical'     => Config::get(Config::PARAM_URL) . '/s/' . $space['space_slug'],
             'img'           => Config::get(Config::PARAM_URL) . '/uploads/spaces/logos/' . $space['space_img'],
@@ -141,18 +141,18 @@ class SpaceController extends MainController
             'meta_title'    => $meta_title . ' ' . Config::get(Config::PARAM_NAME),
             'meta_desc'     => $meta_desc . ' ' . Config::get(Config::PARAM_NAME),
         ];
-        
+
         $data = [
             'h1'            => $space['space_name'],
             'sheet'         => $sheet,
             'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
             'posts'         => $post_result,
-            'space'         => $space, 
-            'signed'        => $space_signed, 
+            'space'         => $space,
+            'signed'        => $space_signed,
             'writers'       => $writers,
         ];
 
         return view('/space/space', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
-    } 
+    }
 }

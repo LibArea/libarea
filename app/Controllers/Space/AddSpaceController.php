@@ -28,7 +28,7 @@ class AddSpaceController extends MainController
         $space_tl       = Request::getPostInt('space_tl');
 
         $redirect       = '/space/add';
-        
+
         Validation::charset_slug($space_slug, 'URL', $redirect);
         Validation::Limits($space_name, lang('titles'), '4', '18', $redirect);
         Validation::Limits($space_slug, 'slug (URL)', '3', '12', $redirect);
@@ -91,11 +91,11 @@ class AddSpaceController extends MainController
             'sheet'         => 'add-space',
             'meta_title'    => lang('Add Space'),
         ];
-        
+
         $data = [
             'num_add_space' => $num_add_space,
         ];
-        
+
         return view('/space/add', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
 }

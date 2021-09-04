@@ -32,7 +32,7 @@ class EditSpaceController extends MainController
         $space_short_text   = Request::getPost('space_short_text');
 
         $redirect   = '/space/edit/' . $space['space_id'];
-        
+
         Validation::charset_slug($space_slug, 'URL', $redirect);
         Validation::Limits($space_name, lang('titles'), '4', '18', $redirect);
         Validation::Limits($space_description, 'Meta-', '60', '190', $redirect);
@@ -96,7 +96,7 @@ class EditSpaceController extends MainController
             'sheet'         => 'edit-space',
             'meta_title'    => lang('Edit') . ' — ' . $space['space_slug'],
         ];
-        
+
         $data = [
             'space' => $space,
         ];
@@ -124,7 +124,7 @@ class EditSpaceController extends MainController
             'sheet'         => 'edit-logo',
             'meta_title'    => lang('Edit') . ' / ' . lang('Logo'),
         ];
-        
+
         $data = [
             'space' => $space,
         ];

@@ -148,7 +148,7 @@
                       </a>
                     <?php } ?>
                   <?php } ?>
- 
+
                   <?php if (accessСheck($comment, 'comment', $uid, 1, 30) === true) { ?>
                     <a data-post_id="<?= $data['post']['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray mr10 ml10">
                       <?= lang('Edit'); ?>

@@ -1,13 +1,13 @@
 <?php if ($uid['user_id'] == 0) { ?>
   <div class="banner banner-bg justify-content-between hidden size-15 flex">
     <div class="wrap flex">
-    <div class="pb5 text">
-      <h1 class="size-31"><?= Lori\Config::get(Lori\Config::PARAM_BANNER_TITLE); ?></h1>
-      <div class="size-21 pb15"><?= Lori\Config::get(Lori\Config::PARAM_BANNER_DESC); ?>...</div>
-    </div>
-    <div class="pb5">
-      <?php includeTemplate('/_block/banner-login'); ?>
-    </div>
+      <div class="pb5 text">
+        <h1 class="size-31"><?= Lori\Config::get(Lori\Config::PARAM_BANNER_TITLE); ?></h1>
+        <div class="size-21 pb15"><?= Lori\Config::get(Lori\Config::PARAM_BANNER_DESC); ?>...</div>
+      </div>
+      <div class="pb5">
+        <?php includeTemplate('/_block/banner-login'); ?>
+      </div>
     </div>
   </div>
 <?php } ?>

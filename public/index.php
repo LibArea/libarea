@@ -23,6 +23,7 @@ header("X-Frame-Options: SAMEORIGIN");
 
 // Initialization.
 // Инициализация.
-require __DIR__ . '/../vendor/phphleb/framework/bootstrap.php';
+define('HLEB_VENDOR_DIR_NAME', '/app/ThirdParty/');
+require __DIR__ . '/../app/ThirdParty/phphleb/framework/bootstrap.php';
 
 exit();

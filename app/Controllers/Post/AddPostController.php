@@ -199,8 +199,8 @@ class AddPostController extends MainController
 
     // Форма добавление поста
     public function add()
-    { 
-        $uid        = Base::getUid(); 
+    {
+        $uid        = Base::getUid();
         $spaces     = SpaceModel::getSpaceSelect($uid['user_id'], $uid['user_trust_level']);
         $space_id   = Request::getInt('space_id');
 

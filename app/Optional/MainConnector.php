@@ -23,7 +23,7 @@ class MainConnector implements Connector
 
             // ... or, if a specific class is added,
             "DB"                            => "database/DB.php",
-            // "Phphleb\Debugpan\DPanel"    => "vendor/phphleb/debugpan/DPanel.php",
+            // "Phphleb\Debugpan\DPanel"    => "app/ThirdParty/phphleb/debugpan/DPanel.php",
 
             "Lori\Base"                     => "app/Libraries/Base.php",
             "Lori\Content"                  => "app/Libraries/Content.php",
@@ -33,14 +33,10 @@ class MainConnector implements Connector
             "Lori\Config"                   => "app/Config/Config.php",
 
             "UrlRecord"                     => "app/ThirdParty/UrlRecord/UrlRecord.php",
-            
             "Parsedown"                     => "app/ThirdParty/Parsedown/Parsedown.php",
             "MyParsedown"                   => "app/ThirdParty/Parsedown/MyParsedown.php",
-            
             "SimpleImage"                   => "app/ThirdParty/SimpleImage.php",
             "URLScraper"                    => "app/ThirdParty/URLScraper.php",
-            
-            // https://github.com/JacksonJeans/php-mail
             "JacksonJeans\MailException"    => "app/ThirdParty/php-mail/src/JacksonJeans/MailException.class.php",
             "JacksonJeans\Mail"             => "app/ThirdParty/php-mail/src/JacksonJeans/Mail.class.php",
         ];

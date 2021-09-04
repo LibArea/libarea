@@ -159,7 +159,7 @@ class EditPostController extends MainController
         Request::getResources()->addBottomScript('/assets/editor/config.js');
         Request::getResources()->addBottomScript('/assets/js/select2.min.js');
 
-        $post_related   = PostModel::postRelated($post['post_related']); 
+        $post_related   = PostModel::postRelated($post['post_related']);
         $topic_select   = PostModel::getPostTopic($post['post_id']);
 
         $meta = [

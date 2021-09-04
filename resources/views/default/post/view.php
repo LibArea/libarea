@@ -136,33 +136,35 @@
               </div>
             <?php } ?>
           </div>
-          <div class="border-bottom mb20 pb5 hidden flex justify-content-between gray">
+          <div class="border-bottom mb10 pb5 hidden flex justify-content-between gray">
             <?= votes($uid['user_id'], $data['post'], 'post'); ?>
             <span class="right gray-light">
               <i class="icon-commenting-o middle"></i>
               <?= $data['post']['post_answers_count'] + $data['post']['post_comments_count'] ?>
             </span>
           </div>
-          <?php if (!$uid['user_id']) { ?>
-            <a class="right size-13 mb15 add-focus focus-topic" href="/login">
-              + <?= lang('Read'); ?>
-            </a>
-          <?php } else { ?>
-            <?php if (is_array($data['post_signed'])) { ?>
-              <div data-id="<?= $data['post']['post_id']; ?>" data-type="post" class="focus-id size-13 right mb15 del-focus focus-topic">
-                <?= lang('Unsubscribe'); ?>
-              </div>
-            <?php } else { ?>
-              <div data-id="<?= $data['post']['post_id']; ?>" data-type="post" class="focus-id size-13 right mb15 add-focus focus-topic">
+          <div class="hidden">
+            <?php if (!$uid['user_id']) { ?>
+              <a class="right size-13 mt5 add-focus focus-topic" href="/login">
                 + <?= lang('Read'); ?>
-              </div>
+              </a>
+            <?php } else { ?>
+              <?php if (is_array($data['post_signed'])) { ?>
+                <div data-id="<?= $data['post']['post_id']; ?>" data-type="post" class="focus-id size-13 right mt5 del-focus focus-topic">
+                  <?= lang('Unsubscribe'); ?>
+                </div>
+              <?php } else { ?>
+                <div data-id="<?= $data['post']['post_id']; ?>" data-type="post" class="focus-id size-13 right mt5 add-focus focus-topic">
+                  + <?= lang('Read'); ?>
+                </div>
+              <?php } ?>
             <?php } ?>
-          <?php } ?>
+          </div>
           <div>
             <?php if ($data['post']['post_type'] == 0 && $data['post']['post_draft'] == 0) { ?>
               <?php if ($uid['user_id'] > 0) { ?>
                 <?php if ($data['post']['post_closed'] == 0) { ?>
-                  <form id="add_answ" class="new_answer" action="/answer/create" accept-charset="UTF-8" method="post">
+                  <form id="add_answ" class="new_answer mt15" action="/answer/create" accept-charset="UTF-8" method="post">
                     <?= csrf_field() ?>
                     <div id="test-markdown-view-post">
                       <textarea minlength="6" class="md-post" rows="5" placeholder="<?= lang('write-something'); ?>..." name="answer" id="wmd-input"></textarea>
@@ -175,13 +177,13 @@
                   </form>
                 <?php } ?>
               <?php } else { ?>
-                <textarea rows="5" class="bg-gray-000" disabled="disabled" placeholder="<?= lang('no-auth-comm'); ?>" name="answer" id="answer"></textarea>
+                <textarea rows="5" class="bg-gray-000 mt15" disabled="disabled" placeholder="<?= lang('no-auth-comm'); ?>" name="answer" id="answer"></textarea>
                 <div>
                   <input type="submit" name="answit" value="<?= lang('Reply'); ?>" class="button" disabled="disabled">
                 </div>
               <?php } ?>
             <?php } else { ?>
-              <br>
+              <!-- draft -->
             <?php } ?>
           </div>
         </div>
