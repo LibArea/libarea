@@ -104,15 +104,25 @@
               </div>
             <?php } ?>
             <?php if ($data['post']['post_url_domain']) { ?>
-              <div class="italic mt15 mb15">
-                <?= lang('Website'); ?>: <a rel="nofollow noreferrer ugc" href="<?= $data['post']['post_url']; ?>">
-                  <?= $data['post']['post_url_domain']; ?>
-                </a>
+              <h3 class="uppercase mb5 mt0 fw300 size-13 gray"><?= lang('Website'); ?></h3>
+              <div class="italic m15 mb15 p10 size-13 bg-gray-100 table gray">
+                <div>
+                  <i class="icon-link"></i>
+                  <a class="gray" href="/domain/<?= $data['post']['post_url_domain']; ?>">
+                    /domain/<?= $data['post']['post_url_domain']; ?>
+                  </a>
+                </div>
+                <div>
+                   <i class="icon-link-ext green"></i>
+                   <a rel="nofollow noreferrer ugc" class="green" href="<?= $data['post']['post_url']; ?>">
+                    <?= $data['post']['post_url_domain']; ?>
+                  </a>
+                </div>
               </div>
             <?php } ?>
             <?php if (!empty($data['post_related'])) { ?>
               <div class="mb20">
-                <h3 class="uppercase mb5 mt0 fw300 size-13 gray"><?= lang('Related'); ?>:</h3>
+                <h3 class="uppercase mb5 mt0 fw300 size-13 gray"><?= lang('Related'); ?></h3>
                 <?php $num = 0; ?>
                 <?php foreach ($data['post_related'] as $related) { ?>
                   <div class="mb5">
@@ -215,9 +225,9 @@
   <aside>
     <div class="white-box pt5 pr15 pb5 pl15">
       <div class="mt10 mb10">
-        <a title="<?= $data['post']['space_name']; ?>" href="/s/<?= $data['post']['space_slug']; ?>">
-          <?= spase_logo_img($data['post']['space_img'], 'max', $data['post']['space_slug'], 'ava-24'); ?>
-          <span class="mr5 ml5"><?= $data['post']['space_name']; ?></span>
+        <a class="flex" title="<?= $data['post']['space_name']; ?>" href="/s/<?= $data['post']['space_slug']; ?>">
+          <?= spase_logo_img($data['post']['space_img'], 'max', $data['post']['space_slug'], 'ava-24 mr5'); ?>
+          <span class="ml5"><?= $data['post']['space_name']; ?></span>
         </a>
       </div>
       <div class="gray size-13"><?= $data['post']['space_short_text']; ?></div>
@@ -245,11 +255,11 @@
           <div class="mb15 hidden flex">
             <a class="gray size-15" href="<?= post_url($rec_post); ?>">
               <?php if ($rec_post['post_answers_count'] > 0) { ?>
-                <div class="up-box-post green-box size-13 center mr15">
+                <div class="up-box-post bg-green-400 size-13 center mr15">
                   <?= $rec_post['post_answers_count'] ?>
                 </div>
               <?php } else { ?>
-                <div class="up-box-post gray-box size-13 center mr15">0</div>
+                <div class="up-box-post bg-gray-200 gray size-13 center mr15">0</div>
               <?php } ?>
             </a>
             <a class="gray size-13" href="<?= post_url($rec_post); ?>">

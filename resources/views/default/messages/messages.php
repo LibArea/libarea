@@ -27,7 +27,7 @@
                 </span>
               <?php } ?>
             </div>
-            <div class="message one gray">
+            <div class="message bg-blue-100 gray">
               <?= $msg['message']['message_content']; ?>
             </div>
 

@@ -19,13 +19,13 @@
             <?php if ($val['message_sender_id'] == $uid['user_id']) { ?>
               <?= user_avatar_img($uid['user_avatar'], 'max', $uid['user_login'], 'message-avatar left'); ?>
 
-              <div class="message left">
+              <div class="message bg-gray-100 black left">
               <?php } else { ?>
                 <a class="right" href="/u/<?= $val['user_login']; ?>">
                   <?= user_avatar_img($val['user_avatar'], 'max', $val['user_login'], 'message-avatar left'); ?>
                 </a>
 
-                <div class="message right">
+                <div class="message right black bg-yellow-100">
 
                   <a class="left" href="/u/<?= $val['user_login']; ?>">
                     <?= $val['user_login']; ?>: &nbsp;
