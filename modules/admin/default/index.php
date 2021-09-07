@@ -46,7 +46,6 @@
         </div>
       </div>
     </div>
-
     <div class="white-box mt10 pt5 pr15 pb5 pl15">
       <h4 class="mt5"><?= lang('Useful resources'); ?></h4>
       <i class="icon-record-outline gray-light"></i> <a rel="noreferrer" href="https://loriup.ru">LoriUP.ru</a></br>

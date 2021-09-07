@@ -17,10 +17,9 @@
           <span class="mr5 ml5"><?= $data['user']['user_email']; ?></span>
         </div>
 
-        <div class="boxline">
-          <label class="form-label" for="name"><?= lang('Name'); ?><sup class="red">*</sup></label>
-          <input type="text" required class="form-input" name="name" value="<?= $data['user']['user_name']; ?>">
-        </div>
+        <?php field_input(array(
+          array('title' => lang('Heading'), 'type' => 'text', 'name' => 'name', 'value' => $data['user']['user_name'], 'min' => 3, 'max' => 11, 'help' => '3 - 11 ' . lang('characters')),
+        )); ?>
 
         <div class="boxline">
           <label class="form-label" for="about"><?= lang('About me'); ?></label>
@@ -36,47 +35,15 @@
 
         <h3><?= lang('Contacts'); ?></h3>
 
-        <div class="boxline">
-          <label class="form-label" for="name"><?= lang('URL'); ?></label>
-          <input type="text" class="form-input" name="website" value="<?= $data['user']['user_website']; ?>">
-          <div class="box_h gray">https://site.ru</div>
-        </div>
-
-        <div class="boxline">
-          <label class="form-label" for="name"><?= lang('City'); ?></label>
-          <input type="text" class="form-input" name="location" value="<?= $data['user']['user_location']; ?>">
-          <div class="box_h gray">Moscow...</div>
-        </div>
-
-        <div class="boxline">
-          <label class="form-label" for="name"><?= lang('E-mail'); ?></label>
-          <input type="email" class="form-input" name="public_email" value="<?= $data['user']['user_public_email']; ?>">
-          <div class="box_h gray">**@**.ru</div>
-        </div>
-
-        <div class="boxline">
-          <label class="form-label" for="name"><?= lang('Skype'); ?></label>
-          <input type="text" class="form-input" name="skype" value="<?= $data['user']['user_skype']; ?>">
-          <div class="box_h gray">skype:<b>NICK</b></div>
-        </div>
-
-        <div class="boxline">
-          <label class="form-label" for="name"><?= lang('Twitter'); ?></label>
-          <input type="text" class="form-input" name="twitter" value="<?= $data['user']['user_twitter']; ?>">
-          <div class="box_h gray">https://twitter.com/<b>NICK</b></div>
-        </div>
-
-        <div class="boxline">
-          <label class="form-label" for="name"><?= lang('Telegram'); ?></label>
-          <input type="text" class="form-input" name="telegram" value="<?= $data['user']['user_telegram']; ?>">
-          <div class="box_h gray">tg://resolve?domain=<b>NICK</b></div>
-        </div>
-
-        <div class="boxline">
-          <label class="form-label" for="name"><?= lang('VK'); ?></label>
-          <input type="text" class="form-input" name="vk" value="<?= $data['user']['user_vk']; ?>">
-          <div class="box_h gray">https://vk.com/<b>NICK / id</b></div>
-        </div>
+        <?php field_input(array(
+          array('title' => lang('URL'), 'type' => 'text', 'name' => 'website', 'value' => $data['user']['user_website'], 'max' => 150, 'help' => 'https://site.ru'),
+          array('title' => lang('City'), 'type' => 'text', 'name' => 'location', 'value' => $data['user']['user_location'], 'max' => 150, 'help' => 'Moscow...'),
+          array('title' => lang('E-mail'), 'type' => 'text', 'name' => 'public_email', 'value' => $data['user']['user_public_email'], 'max' => 150, 'help' => '**@**.ru'),
+          array('title' => lang('Skype'), 'type' => 'text', 'name' => 'skype', 'value' => $data['user']['user_skype'], 'max' => 150, 'help' => 'skype:<b>NICK</b>'),
+          array('title' => lang('Twitter'), 'type' => 'text', 'name' => 'twitter', 'value' => $data['user']['user_twitter'], 'max' => 150, 'help' => 'https://twitter.com/<b>NICK</b>'),
+          array('title' => lang('Telegram'), 'type' => 'text', 'name' => 'telegram', 'value' => $data['user']['user_telegram'], 'max' => 150, 'help' => 'tg://resolve?domain=<b>NICK</b>'),
+          array('title' => lang('VK'), 'type' => 'text', 'name' => 'vk', 'value' => $data['user']['user_vk'], 'max' => 150, 'help' => 'https://vk.com/<b>NICK / id</b>'),
+        )); ?>
 
         <div class="boxline">
           <input type="hidden" name="nickname" id="nickname" value="">

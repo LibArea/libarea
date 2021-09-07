@@ -4,7 +4,6 @@
       <?= breadcrumb('/', lang('Home'), null,  null, lang('All comments')); ?>
     </div>
     <?php if (!empty($data['comments'])) { ?>
-
       <?php foreach ($data['comments'] as $comment) { ?>
         <div class="white-box pt5 pr15 pb5 pl15">
           <?php if ($comment['comment_is_deleted'] == 0) { ?>
@@ -23,7 +22,6 @@
             <div class="comm-telo-body size-15 mt5 mb5">
               <?= $comment['comment_content']; ?>
             </div>
-
             <div class="hidden gray">
               + <?= $comment['comment_votes']; ?>
             </div>
@@ -41,7 +39,6 @@
     <?php } else { ?>
       <?= no_content('There are no comments'); ?>
     <?php } ?>
-
   </main>
   <aside>
     <div class="white-box p15">

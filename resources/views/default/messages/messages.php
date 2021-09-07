@@ -1,10 +1,8 @@
 <div class="wrap">
-  <main>
-    <div class="white-box pt5 pr15 pb5 pl15">
+  <main class="white-box pt5 pr15 pb5 pl15">
       <?= breadcrumb('/', lang('Home'), '/u/' . $uid['user_login'], lang('Profile'), lang('Private messages')); ?>
 
       <?php if (!empty($data['messages'])) { ?>
-
         <?php foreach ($data['messages'] as  $msg) { ?>
 
           <div class="hidden mb15<?php if (!$msg['unread'] > 0) { ?> active-notif<?php } ?>">
@@ -48,7 +46,6 @@
       <?php } else { ?>
         <?= no_content('No dialogs'); ?>
       <?php } ?>
-    </div>
   </main>
   <aside>
     <div class="white-box p15">

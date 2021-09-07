@@ -98,23 +98,19 @@ class ActionModel extends MainModel
     // Поиск контента для форм
     public static function getSearch($search, $type)
     {
-        $field_id = $type . '_id';
+        $field_id   = $type . '_id';
+        $field_name = $type . '_title';
         if ($type == 'post') {
-            $field_name = 'post_title';
             $sql = "SELECT post_id, post_title, post_is_deleted, post_tl FROM posts WHERE post_title LIKE :post_title AND post_is_deleted = 0 AND post_tl = 0 ORDER BY post_id LIMIT 8";
         } elseif ($type == 'topic') {
-            $field_name = 'topic_title';
             $sql = "SELECT topic_id, topic_title FROM topics 
                     WHERE topic_title LIKE :topic_title ORDER BY topic_id LIMIT 8";
         } elseif ($type == 'main') {
-            $field_id = 'topic_id';
-            $field_name = 'topic_title';
             $sql = "SELECT topic_id, topic_title FROM topics 
                     WHERE topic_is_parent !=0 AND topic_title LIKE :topic_title ORDER BY topic_id LIMIT 8";
         } else {
-            $field_id = 'id';
-            $field_name = 'login';
-            $sql = "SELECT id, login FROM users WHERE user_login LIKE :login";
+            $field_name = 'user_login';
+            $sql = "SELECT user_id, user_login FROM users WHERE user_login LIKE :user_login";
         }
 
         $result = DB::run($sql, [$field_name => "%" . $search . "%"]);

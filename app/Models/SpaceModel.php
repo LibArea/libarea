@@ -56,6 +56,7 @@ class SpaceModel extends MainModel
     public static function getSpaceSelect($user_id, $trust_level)
     {
         $spaces = self::getSubscription($user_id);
+ 
 
         $result = array();
         foreach ($spaces as $ind => $row) {
@@ -70,6 +71,10 @@ class SpaceModel extends MainModel
                         FROM spaces WHERE space_is_delete != 1";
                         
             return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);             
+        }
+
+        if (!$result) {
+            return false;
         }
 
         $sql = "SELECT 

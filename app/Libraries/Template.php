@@ -366,3 +366,33 @@ function addMsg($msg, $class)
     $class = ($class == 'error') ? 2 : 1;
     $_SESSION['msg'][] = array($msg, $class);
 }
+
+function editor($data)
+{
+    return includeTemplate('/_block/form/post-editor', $data);
+}
+
+function select($data)
+{
+    return includeTemplate('/_block/form/select-content', $data);
+} 
+
+function select_space($data)
+{
+    return includeTemplate('/_block/form/select-space', $data);
+} 
+
+function select_tl($data)
+{
+    return includeTemplate('/_block/form/select-post-tl', $data);
+}
+
+function field_radio($data)
+{
+    return includeTemplate('/_block/form/field-radio', ['data' => $data]);
+}
+
+function field_input($data)
+{
+    return includeTemplate('/_block/form/field-input', ['data' => $data]);
+}

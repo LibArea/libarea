@@ -6,7 +6,6 @@
     <priority>1.0</priority>
     <changefreq>daily</changefreq>
   </url>
-
   <!-- Sitemap -->
   <?php foreach ($data['spaces'] as $space) { ?>
     <url>
@@ -32,5 +31,4 @@
     <priority>0.5</priority>
     <changefreq>daily</changefreq>
   </url>
-
 </urlset>

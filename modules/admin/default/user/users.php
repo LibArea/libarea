@@ -9,7 +9,6 @@
       );
       echo tabs_nav($pages, $data['sheet'], $uid);
       ?>
-
       <?php if ($data['alluser']) {  ?>
         <table>
           <thead>

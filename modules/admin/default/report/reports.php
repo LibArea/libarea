@@ -1,6 +1,5 @@
 <div class="wrap">
-  <main class="admin">
-    <div class="white-box pt5 pr15 pb5 pl15">
+  <main class="admin white-box pt5 pr15 pb5 pl15">
       <?= breadcrumb('/admin', lang('Admin'), '/admin/users', lang('Users'), lang('Reports')); ?>
 
       <?php if ($data['reports']) { ?>
@@ -44,7 +43,6 @@
         <?= no_content('No users'); ?>
       <?php } ?>
       <?= pagination($data['pNum'], $data['pagesCount'], null, '/admin/reports'); ?>
-    </div>
 </div>
 </main>
 </div>

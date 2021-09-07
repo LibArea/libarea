@@ -117,6 +117,6 @@ class AddCommentController extends MainController
             'comment_id'    => Request::getPostInt('comment_id'),
         ];
 
-        includeTemplate('/_block/add-form-answer-and-comment', ['data' => $data, 'uid' => Base::getUid()]);
+        includeTemplate('/_block/form/add-form-answer-and-comment', ['data' => $data, 'uid' => Base::getUid()]);
     }
 }

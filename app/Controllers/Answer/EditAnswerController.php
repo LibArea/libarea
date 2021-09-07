@@ -16,9 +16,7 @@ class EditAnswerController extends MainController
         $post_id        = Request::getPostInt('post_id');
         $answer_content = $_POST['answer']; // не фильтруем
 
-        $post = PostModel::getPostId($post_id);
-
-        // Получим относительный url поста для возрата
+        $post           = PostModel::getPostId($post_id);
         $url = '/post/' . $post['post_id'] . '/' . $post['post_slug'];
 
         // Если кто редактирует забанен / заморожен

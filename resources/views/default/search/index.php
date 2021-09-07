@@ -1,6 +1,5 @@
 <div class="wrap">
-  <main>
-    <div class="white-box pt5 pr15 pb5 pl15">
+  <main class="white-box pt5 pr15 pb5 pl15">
       <h1><?= lang('Search'); ?></h1>
       <?php if (!empty($data['result'])) { ?>
         <div><?= lang('You were looking for'); ?>: <b><?= $data['query']; ?></b></div>
@@ -37,7 +36,6 @@
         <p><?= lang('The search has not given any results'); ?>
         <p>
         <?php } ?>
-    </div>
   </main>
   <aside>
     <div class="white-box p15 mb15">

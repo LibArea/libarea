@@ -2,7 +2,6 @@
   <main class="admin">
     <div class="white-box pt5 pr15 pb5 pl15">
       <?= breadcrumb('/admin', lang('Admin'), '/admin/users', lang('Users'), lang('Search')); ?>
-
       <table>
         <thead>
           <th>N</th>

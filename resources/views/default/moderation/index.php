@@ -1,6 +1,5 @@
 <div class="wrap">
-  <main>
-    <div class="white-box pt5 pr15 pb5 pl15">
+  <main class="white-box pt5 pr15 pb5 pl15">
       <h1><?= lang('Moderation Log'); ?></h1>
       <?php if (!empty($data['moderations'])) { ?>
         <div class="mt15">
@@ -34,7 +33,6 @@
       <?php } else { ?>
         <?= no_content('No moderation logs'); ?>
       <?php } ?>
-    </div>
   </main>
   <aside>
     <div class="white-box p15">

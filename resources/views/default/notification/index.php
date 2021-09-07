@@ -1,6 +1,5 @@
 <div class="wrap">
-  <main>
-    <div class="white-box pt5 pr15 pb5 pl15">
+  <main class="white-box pt5 pr15 pb5 pl15">
       <a class="right size-13 button mt15 mb15" href="/notifications/delete"><?= lang('I read'); ?></a>
       <?= breadcrumb('/', lang('Home'), '/u/' . $uid['user_login'], lang('Profile'), lang('Notifications')); ?>
 
@@ -8,7 +7,6 @@
         <?php foreach ($data['notifications'] as  $notif) { ?>
 
           <div class="border-bottom p5<?php if ($notif['notification_read_flag'] == 0) { ?> active-notif<?php } ?>">
-
             <?php if ($notif['notification_action_type'] == 1) { ?>
               <i class="icon-mail middle"></i>
               <a class="gray ml5" href="/u/<?= $notif['user_login']; ?>"><?= $notif['user_login']; ?></a>
@@ -83,7 +81,6 @@
       <?php } else { ?>
         <?= lang('No notifications yet'); ?>...
       <?php } ?>
-    </div>
   </main>
   <aside>
     <div class="white-box p15">

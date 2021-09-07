@@ -99,6 +99,7 @@ class EditSpaceController extends MainController
 
         $data = [
             'space' => $space,
+            'sheet' => 'edit-space',
         ];
 
         return view('/space/edit', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
@@ -127,6 +128,7 @@ class EditSpaceController extends MainController
 
         $data = [
             'space' => $space,
+            'sheet' => 'logo',
         ];
 
         return view('/space/edit-logo', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);

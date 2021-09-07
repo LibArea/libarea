@@ -26,17 +26,13 @@
                 <a class="size-21" rel="nofollow noreferrer" href="/topic/<?= $topic['topic_slug']; ?>">
                   <?= $topic['topic_title']; ?>
                 </a>
-                <span class="mr5 ml5"> &#183; </span>
-                <span class="green">topic/<?= $topic['topic_slug']; ?></span>
-                <span class="mr5 ml5"> &#183; </span>
-                <?= $topic['topic_count']; ?>
+                <span class="green mr5 ml5">topic/<?= $topic['topic_slug']; ?></span>
+                <span class="mr5 ml5">posts: <?= $topic['topic_count']; ?></span>
                 <?php if ($topic['topic_is_parent'] == 1) { ?>
-                  <span class="mr5 ml5"> &#183; </span>
-                  <span class="red"><?= lang('Root'); ?></span>
+                  <span class="red mr5 ml5"><?= lang('Root'); ?></span>
                 <?php } ?>
                 <?php if ($topic['topic_parent_id'] != 0) { ?>
-                  <span class="mr5 ml5"> &#183; </span>
-                  <span class="green"><?= lang('Subtopic'); ?></span>
+                  <span class="green mr5 ml5"><?= lang('Subtopic'); ?></span>
                 <?php } ?>
                 <div class="content-telo">
                   <?= $topic['topic_description']; ?>

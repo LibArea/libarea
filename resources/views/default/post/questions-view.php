@@ -8,7 +8,6 @@
       <div class="block-answer">
         <?php if ($answer['answer_is_deleted'] == 0) { ?>
           <?php if ($uid['user_id'] == $answer['answer_user_id']) { ?> <?php $otvet = 1; ?> <?php } ?>
-
           <div class="line mb20"></div>
           <ol class="p0 m0 list-none">
             <li class="answers_subtree" id="answer_<?= $answer['answer_id']; ?>">
@@ -26,7 +25,6 @@
                   </div>
                   <a class="qa-login size-15" href="/u/<?= $answer['user_login']; ?>"><?= $answer['user_login']; ?></a>
                 </div>
-
                 <?= $answer['answer_content'] ?>
               </div>
               <div class="flex size-13">

@@ -1,14 +1,12 @@
 <div class="wrap">
   <main>
-    <div class="white-box">
-      <div class="pt5 pr15 pb5 pl15 space-tags">
+    <div class="white-box pt5 pr15 pb5 pl15 space-tags">
         <?php if ($uid['user_trust_level'] == 5) { ?>
           <a title="<?= lang('Add'); ?>" class="right mt5" href="/admin/webs/add">
             <i class="icon-plus middle"></i>
           </a>
         <?php } ?>
         <h1><?= lang('domains-title'); ?></h1>
-      </div>
     </div>
 
     <?php if (!empty($data['links'])) { ?>

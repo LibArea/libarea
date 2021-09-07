@@ -9,8 +9,7 @@
           <div class="white-box pt15 pr15 pb0 pl15 ">
             <div class="size-13">
               <a class="gray" href="/u/<?= $answer['user_login']; ?>">
-                <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'ava'); ?>
-                <span class="mr5 ml5"></span>
+                <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'ava mr5'); ?>
                 <?= $answer['user_login']; ?>
               </a>
               <span class="mr5 ml5 gray lowercase">
@@ -18,7 +17,7 @@
               </span>
             </div>
             <a class="mr5 block" href="<?= post_url($answer); ?>">
-                <?= $answer['post_title']; ?>
+              <?= $answer['post_title']; ?>
             </a>
             <?= $answer['content']; ?>
             <div class="pr15 pb5 hidden gray">

@@ -80,7 +80,6 @@
                 </div>
               </div>
               <div id="answer_addentry<?= $answer['answer_id']; ?>" class="reply"></div>
-
             </li>
           </ol>
 

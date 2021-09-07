@@ -1,6 +1,5 @@
 <div class="wrap">
-  <main>
-    <div class="white-box pt5 pr15 pb5 pl15">
+  <main class="white-box pt5 pr15 pb5 pl15">
       <?= breadcrumb('/', lang('Home'), '/u/' . $uid['user_login'] . '/messages', lang('All messages'), $data['h1']); ?>
 
       <form action="/messages/send" method="post">
@@ -14,7 +13,6 @@
 
       <?php if ($data['list']) { ?>
         <?php foreach ($data['list'] as $key => $val) { ?>
-
           <div class="hidden mb15">
             <?php if ($val['message_sender_id'] == $uid['user_id']) { ?>
               <?= user_avatar_img($uid['user_avatar'], 'max', $uid['user_login'], 'message-avatar left'); ?>
@@ -26,7 +24,6 @@
                 </a>
 
                 <div class="message right black bg-yellow-100">
-
                   <a class="left" href="/u/<?= $val['user_login']; ?>">
                     <?= $val['user_login']; ?>: &nbsp;
                   </a>
@@ -36,16 +33,14 @@
 
                 <div class="size-13 gray">
                   <?= $val['message_add_time']; ?>
-
                   <?php if ($val['message_receipt'] and $val['message_sender_id'] == $uid['user_id']) { ?>
                     <?= lang('It was read'); ?> (<?= $val['message_receipt']; ?>)
                   <?php } ?>
                 </div>
-                </div>
+              </div>
               </div>
             <?php } ?>
           <?php } ?>
-          </div>
   </main>
   <aside>
     <div class="white-box p15">

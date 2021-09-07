@@ -197,7 +197,6 @@
             <?php } ?>
           </div>
         </div>
-
       <?php } else { ?>
         <div class="bg-red-300">
           <?= lang('Post deleted'); ?>...
@@ -271,7 +270,6 @@
     <?php } ?>
   </aside>
 </div>
-
 <script nonce="<?= $_SERVER['nonce']; ?>">
   $(document).ready(function() {
     layer.photos({

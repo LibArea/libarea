@@ -149,47 +149,15 @@
           </div>
 
           <h3><?= lang('Contacts'); ?></h3>
-          <div class="boxline">
-            <label class="form-label" for="name"><?= lang('URL'); ?></label>
-            <input type="text" class="form-input" name="website" id="name" value="<?= $data['user']['user_website']; ?>">
-            <div class="box_h">https://site.ru</div>
-          </div>
-
-          <div class="boxline">
-            <label class="form-label" for="name"><?= lang('City'); ?></label>
-            <input type="text" class="form-input" name="location" id="name" value="<?= $data['user']['user_location']; ?>">
-            <div class="box_h">Москва</div>
-          </div>
-
-          <div class="boxline">
-            <label class="form-label" for="name"><?= lang('E-mail'); ?></label>
-            <input type="text" class="form-input" name="public_email" id="name" value="<?= $data['user']['user_public_email']; ?>">
-            <div class="box_h">**@**.ru</div>
-          </div>
-
-          <div class="boxline">
-            <label class="form-label" for="name"><?= lang('Skype'); ?></label>
-            <input type="text" class="form-input" name="skype" id="name" value="<?= $data['user']['user_skype']; ?>">
-            <div class="box_h">skype:<b>NICK</b></div>
-          </div>
-
-          <div class="boxline">
-            <label class="form-label" for="name"><?= lang('Twitter'); ?></label>
-            <input type="text" class="form-input" name="twitter" id="name" value="<?= $data['user']['user_twitter']; ?>">
-            <div class="box_h">https://twitter.com/<b>NICK</b></div>
-          </div>
-
-          <div class="boxline">
-            <label class="form-label" for="name"><?= lang('Telegram'); ?></label>
-            <input type="text" class="form-input" name="telegram" id="name" value="<?= $data['user']['user_telegram']; ?>">
-            <div class="box_h">tg://resolve?domain=<b>NICK</b></div>
-          </div>
-
-          <div class="boxline">
-            <label class="form-label" for="name"><?= lang('VK'); ?></label>
-            <input type="text" class="form-input" name="vk" id="name" value="<?= $data['user']['user_vk']; ?>">
-            <div class="box_h">https://vk.com/<b>NICK / id</b></div>
-          </div>
+          <?php field_input(array(
+            array('title' => lang('URL'), 'type' => 'text', 'name' => 'website', 'value' => $data['user']['user_website'], 'max' => 150, 'help' => 'https://site.ru'),
+            array('title' => lang('City'), 'type' => 'text', 'name' => 'location', 'value' => $data['user']['user_location'], 'max' => 150, 'help' => 'Moscow...'),
+            array('title' => lang('E-mail'), 'type' => 'text', 'name' => 'public_email', 'value' => $data['user']['user_public_email'], 'max' => 150, 'help' => '**@**.ru'),
+            array('title' => lang('Skype'), 'type' => 'text', 'name' => 'skype', 'value' => $data['user']['user_skype'], 'max' => 150, 'help' => 'skype:<b>NICK</b>'),
+            array('title' => lang('Twitter'), 'type' => 'text', 'name' => 'twitter', 'value' => $data['user']['user_twitter'], 'max' => 150, 'help' => 'https://twitter.com/<b>NICK</b>'),
+            array('title' => lang('Telegram'), 'type' => 'text', 'name' => 'telegram', 'value' => $data['user']['user_telegram'], 'max' => 150, 'help' => 'tg://resolve?domain=<b>NICK</b>'),
+            array('title' => lang('VK'), 'type' => 'text', 'name' => 'vk', 'value' => $data['user']['user_vk'], 'max' => 150, 'help' => 'https://vk.com/<b>NICK / id</b>'),
+          )); ?>
 
           <input type="submit" class="button" name="submit" value="<?= lang('Edit'); ?>" />
         </form>

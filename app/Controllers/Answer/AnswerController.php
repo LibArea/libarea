@@ -66,7 +66,6 @@ class AnswerController extends MainController
             $result[$ind]   = $row;
         }
 
-        $uid  = Base::getUid();
         $meta = [
             'canonical'     => Config::get(Config::PARAM_URL) . '/u/' . $login . '/answers',
             'sheet'         => 'user-answers',
@@ -80,6 +79,6 @@ class AnswerController extends MainController
             'answers'       => $result
         ];
 
-        return view('/answer/answer-user', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+        return view('/answer/answer-user', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
     }
 }

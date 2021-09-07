@@ -8,20 +8,12 @@
       <form action="/users/setting/notifications/edit" method="post">
         <?php csrf_field(); ?>
         <b><?= lang('Email Notification'); ?>?</b>
-        <div class="boxline">
-          <label class="form-label" for="post_content">
-            <?= lang('When the message came to PM'); ?>
-          </label>
-          <input type="radio" name="setting_email_pm" <?php if (!empty($data['setting']['setting_email_pm']) == 0) { ?>checked<?php } ?> value="0"> <?= lang('No'); ?>
-          <input type="radio" name="setting_email_pm" <?php if (!empty($data['setting']['setting_email_pm']) == 1) { ?>checked<?php } ?> value="1"> <?= lang('Yes'); ?>
-        </div>
-        <div class="boxline">
-          <label class="form-label" for="post_content">
-            <?= lang('When you contacted me via @'); ?>
-          </label>
-          <input type="radio" name="setting_email_appealed" <?php if (!empty($data['setting']['setting_email_appealed']) == 0) { ?>checked<?php } ?> value="0"> <?= lang('No'); ?>
-          <input type="radio" name="setting_email_appealed" <?php if (!empty($data['setting']['setting_email_appealed']) == 1) { ?>checked<?php } ?> value="1"> <?= lang('Yes'); ?>
-        </div>
+
+        <?php field_radio(array(
+          array('title' => lang('When the message came to PM'), 'name' => 'setting_email_pm', 'checked' => !empty($data['setting']['setting_email_pm'])),
+          array('title' => lang('When you contacted me via @'), 'name' => 'setting_email_appealed', 'checked' => !empty($data['setting']['setting_email_appealed'])),
+        )); ?>
+
         <div class="boxline">
           <input type="hidden" name="nickname" id="nickname" value="">
           <button type="submit" class="button"><?= lang('Edit'); ?></button>

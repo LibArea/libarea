@@ -1,6 +1,5 @@
 <div class="wrap">
-  <main class="w-100">
-    <div class="white-box pt5 pr15 pb5 pl15">
+  <main class="w-100 white-box pt5 pr15 pb5 pl15">
         <?= breadcrumb('/', lang('Home'), null, null, lang('Edit answer')); ?>
         <a class="mb5 block" href="<?= post_url($data['post']); ?>"><?= $data['post']['post_title']; ?></a>
         <div class="answer_addentry">
@@ -21,6 +20,5 @@
             </form>
           <?php } ?>
         </div>
-    </div>
   </main>
 </div>

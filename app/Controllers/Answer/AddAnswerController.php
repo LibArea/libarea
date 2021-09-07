@@ -16,7 +16,6 @@ class AddAnswerController extends MainController
         Base::PageError404($post);
 
         $answer_content = $_POST['answer'];                 // не фильтруем (для Markdown)
-        $ip             = Request::getRemoteAddress();
         $uid            = Base::getUid();
 
         // Если пользователь забанен / заморожен
@@ -56,7 +55,7 @@ class AddAnswerController extends MainController
             'answer_post_id'    => $post_id,
             'answer_content'    => $answer_content,
             'answer_published'  => $answer_published,
-            'answer_ip'         => $ip,
+            'answer_ip'         => Request::getRemoteAddress(),
             'answer_user_id'    => $uid['user_id'],
         ];
 

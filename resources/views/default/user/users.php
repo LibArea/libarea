@@ -16,8 +16,6 @@
                 <br>
                 <?php if ($user['user_name']) { ?>
                   <?= $user['user_name']; ?>
-                <?php } else { ?>
-
                 <?php } ?>
               </div>
             </div>

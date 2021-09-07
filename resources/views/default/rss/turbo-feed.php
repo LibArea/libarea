@@ -11,9 +11,9 @@
         <pubDate><?= $post['post_date']; ?></pubDate>
         <turbo:content>
           <![CDATA[
-						<header>
-							<h1><?= $post['post_title']; ?></h1>
-						</header>
+             <header>
+                <h1><?= $post['post_title']; ?></h1>
+             </header>
               <?php if ($post['post_content_img']) { ?>
                   <figure>
                       <?= post_img($post['post_content_img'], $post['post_title'], 'img-post', 'cover'); ?>

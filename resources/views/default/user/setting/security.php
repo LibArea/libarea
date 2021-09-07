@@ -7,18 +7,13 @@
     <div class="white-box pt15 pr15 pb5 pl15">
       <form action="/users/setting/security/edit" method="post" enctype="multipart/form-data">
         <?php csrf_field(); ?>
-        <div class="boxline">
-          <label class="form-label" for="name"><?= lang('Old'); ?></label>
-          <input type="text" class="form-input" name="password" id="password" value="<?= $data['password']; ?>">
-        </div>
-        <div class="boxline">
-          <label class="form-label" for="name"><?= lang('New'); ?></label>
-          <input type="text" minlength="8" class="form-input" name="password2" id="password2" value="<?= $data['password2']; ?>">
-        </div>
-        <div class="boxline">
-          <label class="form-label" for="name"><?= lang('Repeat'); ?></label>
-          <input type="text" minlength="8" class="form-input" name="password3" id="password3" value="<?= $data['password3']; ?>">
-        </div>
+
+        <?php field_input(array(
+          array('title' => lang('Old'), 'type' => 'text', 'name' => 'password', 'value' => $data['password']),
+          array('title' => lang('New'), 'type' => 'text', 'name' => 'password2', 'value' => $data['password2'], 'min' => 6, 'max' => 32, 'help' => '6 - 250 ' . lang('characters')),
+          array('title' => lang('Repeat'), 'type' => 'text', 'name' => 'password3', 'value' => $data['password3']),
+        )); ?>
+
         <div class="boxline">
           <input type="hidden" name="nickname" id="nickname" value="">
           <button type="submit" class="button"><?= lang('Edit'); ?></button>

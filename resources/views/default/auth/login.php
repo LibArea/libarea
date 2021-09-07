@@ -1,36 +1,30 @@
 <div class="wrap">
-  <main>
-    <div class="white-box pt5 pr15 pb5 pl15">
-      <h1><?= lang('Sign in'); ?></h1>
-      <div class="form mini">
-        <form class="" action="/login" method="post">
-          <?php csrf_field(); ?>
-          <div class="boxline">
-            <label class="form-label" for="email">Email</label>
-            <input type="email" class="form-input" name="email" id="email" value="">
-          </div>
-          <div class="boxline">
-            <label class="form-label" for="password"><?= lang('Password'); ?></label>
-            <input type="password" class="form-input" name="password" id="password" value="">
-          </div>
-          <div class="boxline">
-            <input type="checkbox" class="left mr5" id="rememberme" name="rememberme" value="1">
-            <label class="form-check-label" for="rememberme"><?= lang('Remember me'); ?></label>
-          </div>
-          <div class="boxline">
-            <button type="submit" class="button"><?= lang('Sign in'); ?></button>
-            <?php if (!Lori\Config::get(Lori\Config::PARAM_INVITE)) { ?>
-              <span class="mr5 ml5 size-13"><a href="/register"><?= lang('Sign up'); ?></a></span>
-            <?php } ?>
-            <span class="mr5 ml5 size-13"><a href="/recover"><?= lang('Forgot your password'); ?>?</a></span>
-          </div>
-        </form>
+  <main class="white-box pt5 pr15 pb5 pl15 mini">
+    <h1><?= lang('Sign in'); ?></h1>
+    <form class="" action="/login" method="post">
+      <?php csrf_field(); ?>
 
-        <?php if (Lori\Config::get(Lori\Config::PARAM_INVITE)) { ?>
-          <?= lang('no-invate-txt'); ?>
-        <?php } ?>
+      <?php field_input(array(
+        array('title' => lang('Email'), 'type' => 'email', 'name' => 'email', 'value' => ''),
+        array('title' => lang('Password'), 'type' => 'password', 'name' => 'password', 'value' => ''),
+      )); ?>
+
+      <div class="boxline">
+        <input type="checkbox" class="left mr5" id="rememberme" name="rememberme" value="1">
+        <label class="form-check-label" for="rememberme"><?= lang('Remember me'); ?></label>
       </div>
-    </div>
+      <div class="boxline">
+        <button type="submit" class="button"><?= lang('Sign in'); ?></button>
+        <?php if (!Lori\Config::get(Lori\Config::PARAM_INVITE)) { ?>
+          <span class="mr5 ml5 size-13"><a href="/register"><?= lang('Sign up'); ?></a></span>
+        <?php } ?>
+        <span class="mr5 ml5 size-13"><a href="/recover"><?= lang('Forgot your password'); ?>?</a></span>
+      </div>
+    </form>
+
+    <?php if (Lori\Config::get(Lori\Config::PARAM_INVITE)) { ?>
+      <?= lang('no-invate-txt'); ?>
+    <?php } ?>
   </main>
   <aside>
     <div class="white-box p15">

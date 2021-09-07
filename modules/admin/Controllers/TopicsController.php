@@ -158,7 +158,7 @@ class TopicsController extends MainController
             'topic_parent_id'       => $topic_parent_id,
             'topic_is_parent'       => $topic_is_parent,
             'topic_post_related'    => $topic_post_related,
-            'post_select'           => $topic_related,
+            'topic_related'         => $topic_related,
             'topic_count'           => $topic_count,
         ];
 

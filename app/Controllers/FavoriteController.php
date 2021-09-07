@@ -11,9 +11,7 @@ class FavoriteController extends MainController
 {
     public function index($type)
     {
-        $uid        = Base::getUid();
         $content_id = Request::getPostInt('content_id');
-
         if ($type == 'post') {
             $content    = PostModel::getPostId($content_id);
         } else {
@@ -22,7 +20,8 @@ class FavoriteController extends MainController
 
         Base::PageRedirection($content, '/');
 
-        $type_content = $type == 'post' ? 1 : 2;
+        $uid            = Base::getUid();
+        $type_content   = $type == 'post' ? 1 : 2;
         FavoriteModel::setFavorite($content_id, $uid['user_id'], $type_content);
 
         return true;

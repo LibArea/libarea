@@ -356,9 +356,6 @@ textarea {
   padding: 1px 6px;
 }
 
-.form { max-width: 40rem; }
-.form.mini { max-width: 20rem; }
-
 .form-label {
   max-width: 40rem;
   display: block;
@@ -392,12 +389,13 @@ textarea:focus {
   border-color: #268bd2;
 }
 
-.form-input { max-width: 40rem; }
-
 .boxline {
   clear: both;
   margin-bottom: 0.9rem;
+  max-width: 40rem;
 }
+
+.mini .boxline { max-width: 19rem; }
 
 .box_h {
   font-size: 0.8rem;
