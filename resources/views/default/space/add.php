@@ -9,7 +9,7 @@
 
           <?php field_input(array(
             array('title' => 'URL (slug)', 'type' => 'text', 'name' => 'space_slug', 'value' => '', 'min' => 3, 'max' => 12, 'help' => '3 - 12 ' . lang('characters') . ' (' . lang('english') . ')'),
-            array('title' => lang('Title'), 'type' => 'text', 'name' => 'space_name', 'value' => '', 'min' => 4, 'max' => 18, 'help' => '4 - 18 ' . lang('characters') . ' (' . lang('english') . ')'),
+            array('title' => lang('Title'), 'type' => 'text', 'name' => 'space_name', 'value' => '', 'min' => 4, 'max' => 18, 'help' => '4 - 18 ' . lang('characters')),
           )); ?>
 
           <?php field_radio(array(

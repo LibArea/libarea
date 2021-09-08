@@ -22,7 +22,7 @@
 Способы оплаты: *ЮMoney - * 4100140143763
 
 ### Как с вами связаться?
-По e-mail: *budo1@yandex.com*
+По e-mail: *admin@loriup.ru*
         
 *Мы в Discord:* [discord.gg/dw47aNx5nU](https://discord.gg/dw47aNx5nU)
          

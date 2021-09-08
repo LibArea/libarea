@@ -53,6 +53,7 @@ class AddSpaceController extends MainController
             'space_color'           => '#fa6807',
             'space_img'             => 'space_no.png',
             'space_text'            => '',
+            'space_wiki'            => '',
             'space_short_text'      => '',
             'space_date'            => date("Y-m-d H:i:s"),
             'space_category_id'     => 1,

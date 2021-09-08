@@ -257,7 +257,7 @@ function votes($user_id, $content, $type)
         }
     } else {
         $html .= '<div class="voters flex">
-                    <a rel="nofollow" href="/login"><div class="up-id gray-light-2 icon-up-bold"></div></a>
+                    <div class="up-id gray-light-2 icon-up-bold click-no-auth"></div>
                     <div class="score gray mr5">
                          ' . $count . '                
                     </div></div>';

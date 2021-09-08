@@ -6,6 +6,13 @@
   <?php getRequestHead()->output(); ?>
   <script src="/assets/js/jquery-3.6.0.min.js"></script>
   <link rel="stylesheet" href="/assets/css/style.css">
+  <?php if ($uid['user_id'] == 0) { ?>
+    <script nonce="<?= $_SERVER['nonce']; ?>">
+       $(document).on('click', '.click-no-auth', function () {
+         layer.msg('<?= lang('You need to log in'); ?>');
+       });
+    </script>
+   <?php } ?>
 </head>
 
 <?php if ($uid['user_id'] == 0) { ?>

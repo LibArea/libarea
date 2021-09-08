@@ -11,22 +11,7 @@
       <div class="profile-box">
         <div class="wrap">
         <?php } ?>
-        <?php if ($uid['user_id'] > 0) { ?>
-          <div class="profile-header">
-            <?php if ($uid['user_login'] != $data['user']['user_login']) { ?>
-              <?php if ($data['button_pm'] === true) { ?>
-                <a class="right pm" href="/u/<?= $data['user']['user_login']; ?>/mess">
-                  <i class="icon-mail"></i>
-                </a>
-              <?php } ?>
-            <?php } else { ?>
-              <a class="right pm" href="/u/<?= $uid['user_login']; ?>/setting">
-                <i class="icon-pencil size-21"></i>
-              </a>
-            <?php } ?>
-          </div>
-        <?php } ?>
-        <div class="profile-ava">
+        <div class="profile-ava stats center">
           <?= user_avatar_img($data['user']['user_avatar'], 'max', $data['user']['user_login'], 'ava'); ?>
         </div>
         </div>
@@ -43,6 +28,23 @@
             </div>
 
             <div class="left mt10 stats<?php if ($data['user']['user_cover_art'] == 'cover_art.jpeg') { ?> no-cover<?php } ?>">
+
+              <?php if ($uid['user_id'] > 0) { ?>
+                <div class="mt0">
+                  <?php if ($uid['user_login'] != $data['user']['user_login']) { ?>
+                    <?php if ($data['button_pm'] === true) { ?>
+                      <a class="button block center size-13 mb15" href="/u/<?= $data['user']['user_login']; ?>/mess">
+                        <?= lang('Write a message'); ?>
+                      </a>
+                    <?php } ?>
+                  <?php } else { ?>
+                    <a class="button block center mb15" href="/u/<?= $uid['user_login']; ?>/setting">
+                      <?= lang('Settings'); ?>
+                    </a>
+                  <?php } ?>
+                </div>
+              <?php } ?>
+
               <?php if ($data['user']['user_ban_list'] == 0) { ?>
                 <?php if ($data['count']['count_posts'] > 0) { ?>
                   <div class="mb5 size-15">
