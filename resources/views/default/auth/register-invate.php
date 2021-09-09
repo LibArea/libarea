@@ -5,12 +5,12 @@
       <form class="" action="/register/add" method="post">
         <?php csrf_field(); ?>
 
-        <?php field_input(array(
-          array('title' => lang('Nickname'), 'type' => 'text', 'name' => 'login', 'value' => '', 'min' => 3, 'max' => 10, 'help' => '3 - 10 ' . lang('characters')),
-          array('title' => lang('Email'), 'type' => 'email', 'name' => 'email', 'value' => $data['invate']['invitation_email']),
-          array('title' => lang('Password'), 'type' => 'password', 'name' => 'password', 'value' => '', 'min' => 8, 'max' => 32, 'help' => '8 - 32 ' . lang('characters')),
-          array('title' => lang('Repeat the password'), 'type' => 'password', 'name' => 'password_confirm', 'value' => ''),
-        )); ?>
+        <?php field('input', [
+          ['title' => lang('Nickname'), 'type' => 'text', 'name' => 'login', 'value' => '', 'min' => 3, 'max' => 10, 'help' => '3 - 10 ' . lang('characters')],
+          ['title' => lang('Email'), 'type' => 'email', 'name' => 'email', 'value' => $data['invate']['invitation_email']],
+          ['title' => lang('Password'), 'type' => 'password', 'name' => 'password', 'value' => '', 'min' => 8, 'max' => 32, 'help' => '8 - 32 ' . lang('characters')],
+          ['title' => lang('Repeat the password'), 'type' => 'password', 'name' => 'password_confirm', 'value' => ''],
+        ]); ?>
 
         <div class="boxline">
           <input type="hidden" name="invitation_code" id="invitation_code" value="<?= $data['invate']['invitation_code']; ?>">

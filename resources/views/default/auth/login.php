@@ -4,10 +4,10 @@
     <form class="" action="/login" method="post">
       <?php csrf_field(); ?>
 
-      <?php field_input(array(
-        array('title' => lang('Email'), 'type' => 'email', 'name' => 'email', 'value' => ''),
-        array('title' => lang('Password'), 'type' => 'password', 'name' => 'password', 'value' => ''),
-      )); ?>
+      <?php field('input', [
+        ['title' => lang('Email'), 'type' => 'email', 'name' => 'email', 'value' => ''],
+        ['title' => lang('Password'), 'type' => 'password', 'name' => 'password', 'value' => ''],
+      ]); ?>
 
       <div class="boxline">
         <input type="checkbox" class="left mr5" id="rememberme" name="rememberme" value="1">

@@ -590,19 +590,14 @@ ol.comment-telo { padding-left: 23px; }
   color: #e45735;
 }
 
-.nav-tabs {
-  position: relative;
-  height: 45px;
-  color: #667d99;
-}
-
 .nav-tabs > li {
   margin: 0 10px 0 0;
   float: left;
 }
 
 .nav-tabs > li > a {
-  padding: 10px 15px 8px 15px;
+  padding: 10px 0 5px 0;
+  margin: 0 15px 0 0;
   cursor: pointer;
   color: #969696;
   border-bottom: 2px solid transparent;
@@ -614,7 +609,8 @@ ol.comment-telo { padding-left: 23px; }
 }
 
 .nav-tabs > li.active span {
-  padding: 10px 15px 8px 15px;
+  padding: 10px 0 5px 0;
+  margin: 0 15px 0 0;
   border-bottom: 2px solid #e45735;
   color: #646464;
 }

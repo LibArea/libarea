@@ -317,7 +317,7 @@ function accessСheck($content, $type, $uid, $after, $stop_time)
 
 function tabs_nav($pages, $sheet, $uid)
 {
-    $html = '<ul class="nav-tabs list-none mt0 pt15 pr15 pb15 pl0">';
+    $html = '<ul class="nav-tabs hidden list-none mt0 pt5 pr15 pb10 pl0">';
     foreach ($pages as $page) {
         if (empty($page['auth']) != false || $uid['user_id'] > 0) {
             if ($page['id'] == $sheet) {
@@ -367,32 +367,33 @@ function addMsg($msg, $class)
     $_SESSION['msg'][] = array($msg, $class);
 }
 
-function editor($data)
+function editor($type, $data)
 {
-    return includeTemplate('/_block/form/post-editor', $data);
+    if ($type == 'post') {
+        return includeTemplate('/_block/form/post-editor', $data);
+    }
+    return includeTemplate('/_block/form/textarea', $data);
 }
 
-function select($data)
+function select($type, $data)
 {
+    if ($type == 'space') {
+        return includeTemplate('/_block/form/select-space', $data);
+    } elseif ($type == 'trust_level') {
+        return includeTemplate('/_block/form/select-post-tl', $data);
+    }
     return includeTemplate('/_block/form/select-content', $data);
 } 
 
-function select_space($data)
+function field($type, $data)
 {
-    return includeTemplate('/_block/form/select-space', $data);
-} 
-
-function select_tl($data)
-{
-    return includeTemplate('/_block/form/select-post-tl', $data);
-}
-
-function field_radio($data)
-{
-    return includeTemplate('/_block/form/field-radio', ['data' => $data]);
-}
-
-function field_input($data)
-{
+    if ($type == 'radio') {
+        return includeTemplate('/_block/form/field-radio', ['data' => $data]);
+    }
     return includeTemplate('/_block/form/field-input', ['data' => $data]);
+}
+
+function captcha()
+{
+    return includeTemplate('/_block/form/captcha');
 }

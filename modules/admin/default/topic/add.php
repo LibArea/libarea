@@ -7,11 +7,11 @@
         <form action="/admin/topic/add" method="post" enctype="multipart/form-data">
           <?= csrf_field() ?>
 
-          <?php field_input(array(
-            array('title' => lang('Title'), 'type' => 'text', 'name' => 'topic_title', 'value' => '', 'min' => 3, 'max' => 64, 'help' => '3 - 64 ' . lang('characters')),
-            array('title' => lang('Title') . ' (SEO)', 'type' => 'text', 'name' => 'topic_seo_title', 'value' => '', 'min' => 4, 'max' => 225, 'help' => '4 - 225 ' . lang('characters')),
-            array('title' => lang('Slug'), 'type' => 'text', 'name' => 'topic_slug', 'value' => '', 'min' => 3, 'max' => 32, 'help' => '3 - 32 ' . lang('characters') . ' (a-zA-Z0-9)'),
-          )); ?>
+          <?php field('input', [
+            ['title' => lang('Title'), 'type' => 'text', 'name' => 'topic_title', 'value' => '', 'min' => 3, 'max' => 64, 'help' => '3 - 64 ' . lang('characters')],
+            ['title' => lang('Title') . ' (SEO)', 'type' => 'text', 'name' => 'topic_seo_title', 'value' => '', 'min' => 4, 'max' => 225, 'help' => '4 - 225 ' . lang('characters')],
+            ['title' => lang('Slug'), 'type' => 'text', 'name' => 'topic_slug', 'value' => '', 'min' => 3, 'max' => 32, 'help' => '3 - 32 ' . lang('characters') . ' (a-zA-Z0-9)'],
+          ]); ?>
 
           <div class="boxline">
             <label for="post_content">

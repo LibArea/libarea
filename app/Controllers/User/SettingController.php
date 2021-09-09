@@ -160,7 +160,7 @@ class SettingController extends MainController
         $password    = Request::getPost('password');
         $password2   = Request::getPost('password2');
         $password3   = Request::getPost('password3');
-
+ 
         $redirect = '/u/' . $uid['user_login'] . '/setting/security';
         if ($password2 != $password3) {
             addMsg(lang('pass-match-err'), 'error');
@@ -176,9 +176,9 @@ class SettingController extends MainController
 
         // Данные участника
         $account    = Request::getSession('account');
-        $userInfo   = UserModel::userInfo($account['email']);
+        $userInfo   = UserModel::userInfo($account['user_email']);
 
-        if (!password_verify($password, $userInfo['password'])) {
+        if (!password_verify($password, $userInfo['user_password'])) {
             addMsg(lang('old-password-err'), 'error');
             redirect($redirect);
         }

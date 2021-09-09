@@ -1,5 +1,5 @@
 <div class="wrap">
-  <main class="white-box pt5 pr15 pb5 pl15">
+  <main class="white-box pt5 pr15 pb10 pl15">
       <h1>
         <?= lang('Send a message'); ?> - <?= $uid['user_login']; ?>
         <a class="right size-13" href="/u/<?= $uid['user_login']; ?>/messages"><?= lang('All messages'); ?></a>

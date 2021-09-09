@@ -19,12 +19,12 @@
             <p><input type="submit" class="button" value="<?= lang('Download'); ?>" /></p>
           </div>
 
-          <?php field_input(array(
-            array('title' => lang('Title'), 'type' => 'text', 'name' => 'topic_title', 'value' => $data['topic']['topic_title'], 'min' => 3, 'max' => 64, 'help' => '3 - 64 ' . lang('characters')),
-            array('title' => lang('Title') . ' (SEO)', 'type' => 'text', 'name' => 'topic_seo_title', 'value' => $data['topic']['topic_seo_title'], 'min' => 4, 'max' => 225, 'help' => '4 - 225 ' . lang('characters')),
-            array('title' => lang('Slug'), 'type' => 'text', 'name' => 'topic_slug', 'value' => $data['topic']['topic_slug'], 'min' => 3, 'max' => 32, 'help' => '3 - 32 ' . lang('characters') . ' (a-zA-Z0-9)'),
-            array('title' => lang('topic-count'), 'type' => 'text', 'name' => 'topic_count', 'value' => $data['topic']['topic_count'], 'min' => 3, 'max' => 32, 'help' => '3 - 32 ' . lang('characters') . ' (a-zA-Z0-9)'),
-          )); ?>
+          <?php field('input', [
+            ['title' => lang('Title'), 'type' => 'text', 'name' => 'topic_title', 'value' => $data['topic']['topic_title'], 'min' => 3, 'max' => 64, 'help' => '3 - 64 ' . lang('characters')],
+            ['title' => lang('Title') . ' (SEO)', 'type' => 'text', 'name' => 'topic_seo_title', 'value' => $data['topic']['topic_seo_title'], 'min' => 4, 'max' => 225, 'help' => '4 - 225 ' . lang('characters')],
+            ['title' => lang('Slug'), 'type' => 'text', 'name' => 'topic_slug', 'value' => $data['topic']['topic_slug'], 'min' => 3, 'max' => 32, 'help' => '3 - 32 ' . lang('characters') . ' (a-zA-Z0-9)'],
+            ['title' => lang('topic-count'), 'type' => 'text', 'name' => 'topic_count', 'value' => $data['topic']['topic_count'], 'min' => 3, 'max' => 32, 'help' => '3 - 32 ' . lang('characters') . ' (a-zA-Z0-9)'],
+          ]); ?>
 
           <?php if ($data['topic']['topic_parent_id'] > 0) { ?>
             <div class="boxline">

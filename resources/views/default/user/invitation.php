@@ -1,6 +1,6 @@
 <div class="wrap">
   <main>
-    <div class="white-box pt5 pr15 pb5 pl15">
+    <div class="white-box pt5 pr15 pb10 pl15">
       <?= breadcrumb('/', lang('Home'), '/u/' . $uid['user_login'], lang('Profile'), lang('Invites')); ?>
 
       <?php if ($uid['user_trust_level'] > 1) { ?>
