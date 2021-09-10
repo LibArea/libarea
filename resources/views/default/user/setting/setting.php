@@ -47,9 +47,5 @@
       </div>
     </form>
   </main>
-  <aside>
-    <div class="white-box p15">
-      <?= lang('info-setting'); ?>
-    </div>
-  </aside>
+  <?= aside('lang', ['lang' => lang('info-setting')]); ?>
 </div>

@@ -7,12 +7,12 @@
         <?= csrf_field() ?>
 
         <?php field('input', [
-          ['title' => lang('Heading'), 'type' => 'text', 'name' => 'post_title', 'value' => null, 'min' => 6, 'max' => 250, 'help' => '6 - 250 ' . lang('characters')],
+          ['title' => lang('Heading'), 'type' => 'text', 'name' => 'post_title', 'value' => null, 'min' => 6, 'max' => 250, 'id' => 'title', 'help' => '6 - 250 ' . lang('characters')],
         ]); ?>
 
         <?php select('space', ['spaces' => $data['spaces'], 'space_id' => $data['space_id']]); ?>
 
-        <?php if ($uid['user_trust_level'] > Lori\Config::get(Lori\Config::PARAM_TL_ADD_URL)) { ?>
+        <?php if ($uid['user_trust_level'] >= Lori\Config::get(Lori\Config::PARAM_TL_ADD_URL)) { ?>
           <div class="boxline">
             <label class="form-label" for="post_title">URL</label>
             <input id="link" class="form-input" type="text" name="post_url" />

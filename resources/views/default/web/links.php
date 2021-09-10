@@ -48,9 +48,5 @@
 
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/domains'); ?>
   </main>
-  <aside>
-    <div class="white-box p15">
-      <?= lang('domains-desc'); ?>.
-    </div>
-  </aside>
+  <?= aside('lang', ['lang' => lang('domains-desc')]); ?>
 </div>

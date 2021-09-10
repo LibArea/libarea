@@ -215,12 +215,12 @@ class SettingController extends MainController
             unlink($path_img . $user['user_cover_art']);
         }
 
-        UserModel::userCoverRemove($user['id']);
+        UserModel::userCoverRemove($user['user_id']);
         addMsg(lang('Cover removed'), 'success');
 
         // Если удаляет администрация
         if ($uid['user_trust_level'] == 5) {
-            redirect('/admin/user/' . $user['user_id'] . '/edit');
+            redirect('/admin/users/' . $user['user_id'] . '/edit');
         }
 
         redirect($redirect);

@@ -74,9 +74,5 @@
       <?= no_content('There are no favorites'); ?>
     <?php } ?>
   </main>
-  <aside>
-    <div class="white-box p15">
-      <?= lang('info-favorite'); ?>...
-    </div>
-  </aside>
+  <?= aside('lang', ['lang' => lang('info-favorite')]); ?>
 </div>

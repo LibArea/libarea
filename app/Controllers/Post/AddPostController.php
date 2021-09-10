@@ -229,29 +229,22 @@ class AddPostController extends MainController
     public function grabMeta()
     {
         $url    = Request::getPost('uri');
-        $result = URLScraper::get($url);
-
-        return json_encode($result);
+        
+        $meta   = new URLScraper($url);
+        $meta->parse();
+        $metaData = $meta->finalize();
+        
+        return json_encode($metaData);
     }
 
     // Получаем данные Open Graph Protocol 
     public static function grabOgImg($post_url)
     {
-        $result = URLScraper::get($post_url);
-
-        if ($result['image']) {
-            $image = $result['image'];
-        } elseif ($result['tags_meta']['twitter:image']) {
-            $image = $result['tags_meta']['twitter:image'];
-        } elseif ($result['tags_meta']['og:image']) {
-            $image = $result['tags_meta']['og:image'];
-        } elseif ($result['tags_my']['image']) {
-            $image = $result['tags_my']['image'];
-        } else {
-            $image = $result['tags_meta']['image'];
-        }
-
-        return UploadImage::thumb_post($image);
+        $meta = new URLScraper($post_url);
+        $meta->parse();
+        $metaData = $meta->finalize();
+ 
+        return UploadImage::thumb_post($metaData->image);
     }
 
     // Удаление и восстановление контента

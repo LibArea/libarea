@@ -36,13 +36,10 @@
 
               <span class="size-13 gray"><?= lang('Link has been used'); ?></span>
             <?php } else { ?>
-
               <?= lang('For'); ?> (<?= $invite['invitation_email']; ?>) <?= lang('can send this link'); ?>: <br>
-
               <code>
                 <?= Lori\Config::get(Lori\Config::PARAM_URL); ?>/register/invite/<?= $invite['invitation_code']; ?>
               </code>
-
             <?php } ?>
 
             <br><br>
@@ -57,9 +54,5 @@
       <?php } ?>
     </div>
   </main>
-  <aside>
-    <div class="white-box p15">
-      <?= lang('You can invite your friends'); ?>...
-    </div>
-  </aside>
+  <?= aside('lang', ['lang' => lang('You can invite your friends')]); ?>
 </div>

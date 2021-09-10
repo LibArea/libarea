@@ -11,9 +11,5 @@
     </div>
     <?php includeTemplate('/_block/post', ['data' => $data, 'uid' => $uid]); ?>
   </main>
-  <aside>
-    <div class="white-box p15">
-      <?= lang('info-preferences'); ?>...
-    </div>
-  </aside>
+  <?= aside('lang', ['lang' => lang('info-preferences')]); ?>
 </div>

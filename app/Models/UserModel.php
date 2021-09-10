@@ -312,7 +312,7 @@ class UserModel extends MainModel
         return DB::run($sql, $params);
     }
 
-    // Удалим обложку для профиля
+    // При удаление обложки запишем дефолтную
     public static function userCoverRemove($user_id)
     {
         $sql = "UPDATE users SET user_cover_art = 'cover_art.jpeg' WHERE user_id = :user_id";

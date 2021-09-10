@@ -375,25 +375,34 @@ function editor($type, $data)
     return includeTemplate('/_block/form/textarea', $data);
 }
 
-function select($type, $data)
+function select($type, array $params = [])
 {
     if ($type == 'space') {
-        return includeTemplate('/_block/form/select-space', $data);
+        return includeTemplate('/_block/form/select-space', $params);
     } elseif ($type == 'trust_level') {
-        return includeTemplate('/_block/form/select-post-tl', $data);
+        return includeTemplate('/_block/form/select-post-tl', $params);
     }
-    return includeTemplate('/_block/form/select-content', $data);
+    return includeTemplate('/_block/form/select-content', $params);
 } 
 
-function field($type, $data)
+function field($type, array $params = [])
 {
     if ($type == 'radio') {
-        return includeTemplate('/_block/form/field-radio', ['data' => $data]);
+        return includeTemplate('/_block/form/field-radio', ['data' => $params]);
     }
-    return includeTemplate('/_block/form/field-input', ['data' => $data]);
+    return includeTemplate('/_block/form/field-input', ['data' => $params]);
 }
 
 function captcha()
 {
     return includeTemplate('/_block/form/captcha');
 }
+
+function aside($type, array $params = [])
+{
+    if ($type == 'lang') {
+        return includeTemplate('/_block/aside', ['type' => $type, 'params' => $params]);
+    }
+    
+    return true;
+}    

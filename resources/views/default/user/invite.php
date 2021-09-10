@@ -15,9 +15,5 @@
       </form>
     </div>
   </main>
-  <aside>
-    <div class="white-box p15">
-      <?= lang('Someone invited you from the site'); ?>...
-    </div>
-  </aside>
+  <?= aside('lang', ['lang' => lang('Someone invited you from the site')]); ?>
 </div>
