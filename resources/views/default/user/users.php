@@ -25,9 +25,5 @@
     </div>
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/users'); ?>
   </main>
-  <aside>
-    <div class="white-box p15">
-      <?= lang('info-users'); ?>
-    </div>
-  </aside>
+  <?= aside('lang', ['lang' => lang('info-users')]); ?>
 </div>
