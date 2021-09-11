@@ -89,13 +89,9 @@
               </div>
               <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/spaces'); ?>
   </main>
-  <aside>
-    <div class="white-box p15">
-      <?php if ($data['sheet'] == 'spaces') { ?>
-        <?= lang('info-space'); ?>
-      <?php } else { ?>
-        <?= lang('my-info-space'); ?>
-      <?php } ?>
-    </div>
-  </aside>
+  <?php if ($data['sheet'] == 'spaces') { ?>
+    <?= aside('lang', ['lang' => lang('info-space')]); ?>
+  <?php } else { ?>
+    <?= aside('lang', ['lang' => lang('my-info-space')]); ?>
+  <?php } ?>
 </div>

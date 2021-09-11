@@ -26,9 +26,5 @@
       <?= lang('no-invate-txt'); ?>
     <?php } ?>
   </main>
-  <aside>
-    <div class="white-box p15">
-      <?= lang('info-login'); ?>
-    </div>
-  </aside>
+  <?= aside('lang', ['lang' => lang('info-login')]); ?>
 </div>

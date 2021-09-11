@@ -327,7 +327,7 @@ return [
     'invate-to-replay'      => 'Вы уже отсылали приглашение этому пользователю',
     'limit-post-day'        => 'Вы исчерпали лимит постов на сегодня',
     'Registration by invite' => 'Регистрация по инвайту',
-
+    'Details are here'      => 'Подробности здесь',
     'Breaking the rules'    => 'Нарушение правил',
 
     /* Meta - desc */

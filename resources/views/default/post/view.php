@@ -7,16 +7,16 @@
             <h1 class="title size-24">
               <?= $data['post']['post_title']; ?>
               <?php if ($data['post']['post_is_deleted'] == 1) { ?>
-                <i class="icon-trash-empty red"></i>
+                <i class="icon-trash-empty blue"></i>
               <?php } ?>
               <?php if ($data['post']['post_closed'] == 1) { ?>
                 <i class="icon-closed"></i>
               <?php } ?>
               <?php if ($data['post']['post_top'] == 1) { ?>
-                <i class="icon-pin-outline red"></i>
+                <i class="icon-pin-outline blue"></i>
               <?php } ?>
               <?php if ($data['post']['post_lo'] > 0) { ?>
-                <i class="icon-diamond red"></i>
+                <i class="icon-diamond blue"></i>
               <?php } ?>
               <?php if ($data['post']['post_type'] == 1) { ?>
                 <i class="icon-help green"></i>
@@ -28,7 +28,7 @@
                 <span class="trust-level italic size-13">tl<?= $data['post']['post_tl']; ?></span>
               <?php } ?>
               <?php if ($data['post']['post_merged_id'] > 0) { ?>
-                <i class="link-link-ext red"></i>
+                <i class="link-link-ext blue"></i>
               <?php } ?>
             </h1>
             <div class="size-13 lowercase flex gray-light">
@@ -91,6 +91,15 @@
             <div class="post">
               <?= $data['post']['post_content']; ?>
             </div>
+            
+            <?php if ($data['post']['post_url_domain']) { ?>
+              <div class="mb15">
+               <a rel="nofollow noreferrer ugc" target="_blank" class="button" href="<?= $data['post']['post_url']; ?>">
+                  <?= lang('Details are here'); ?> <i class="icon-link-ext ml5"></i>
+               </a>
+              </div>
+            <?php } ?>
+            
             <?php if ($data['lo']) { ?>
               <div class="bg-yellow-100 pt5 pr5 pb5 pl10 mt10 mb10">
                 <h3 class="recommend">ЛО
@@ -109,12 +118,6 @@
                 <div>
                   <i class="icon-link"></i>
                   <a class="gray" href="/domain/<?= $data['post']['post_url_domain']; ?>">
-                    /domain/<?= $data['post']['post_url_domain']; ?>
-                  </a>
-                </div>
-                <div>
-                   <i class="icon-link-ext green"></i>
-                   <a rel="nofollow noreferrer ugc" class="green" href="<?= $data['post']['post_url']; ?>">
                     <?= $data['post']['post_url_domain']; ?>
                   </a>
                 </div>

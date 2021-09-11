@@ -1,15 +1,15 @@
 Этот раздел содержит справочную информацию.  
 
 ### Где мне можно скачать архив сайта?
-Скачайте архив *loriup с GitHub:* [github.com/LoriUp/loriup](https://github.com/LoriUp/loriup)
+Скачайте архив *agouti с GitHub:* [github.com/LoriUp/loriup](https://github.com/agoutiDev/agouti)
 
 Код сайта имеет лицензию [MIT](https://ru.wikipedia.org/wiki/%D0%9B%D0%B8%D1%86%D0%B5%D0%BD%D0%B7%D0%B8%D1%8F_MIT).  
 
 ### Какие технологии используются на сайте?
-В разделе документация есть статья: [Какие технологии использует сайт?](https://docs.loriup.ru/info/hleb)
+В разделе документация есть статья: [Какие технологии использует сайт?](https://agouti.info/info/hleb)
 
 ### Где можно подробней ознакомится с документацией?
-В разделе документация: [docs.loriup.ru](https://docs.loriup.ru)
+В разделе документация: [agouti.info](https://agouti.info)
 
 ### Как я могу помочь сайту?
 

@@ -23,12 +23,12 @@
       <a rel="nofollow noopener" class="white" title="DISCORD" href="https://discord.gg/dw47aNx5nU">
         <i class="icon-wechat size-21 mr5"></i>
       </a>
-      <a rel="nofollow noopener" class="white" title="GitHub" href="https://github.com/LoriUp/loriup">
+      <a rel="nofollow noopener" class="white" title="GitHub" href="https://github.com/agoutiDev/agouti">
         <i class="icon-github-circled size-21"></i>
       </a>
 
       <div class="size-13 mt5">
-        Loriup &copy; <?= date('Y'); ?>
+        Agouti &copy; <?= date('Y'); ?>
         <span class="no-mob">— <?= lang('community'); ?></span>
       </div>
     </div>

@@ -29,16 +29,16 @@
         <a href="<?= post_url($post); ?>">
           <h2 class="title size-24 ml15 mt0 mb0"><?= $post['post_title']; ?>
             <?php if ($post['post_is_deleted'] == 1) { ?>
-              <i class="icon-trash-empty red"></i>
+              <i class="icon-trash-empty blue"></i>
             <?php } ?>
             <?php if ($post['post_closed'] == 1) { ?>
               <i class="icon-lock gray"></i>
             <?php } ?>
             <?php if ($post['post_top'] == 1) { ?>
-              <i class="icon-pin-outline red"></i>
+              <i class="icon-pin-outline blue"></i>
             <?php } ?>
             <?php if ($post['post_lo'] > 0) { ?>
-              <i class="icon-diamond red"></i>
+              <i class="icon-diamond blue"></i>
             <?php } ?>
             <?php if ($post['post_type'] == 1) { ?>
               <i class="icon-help green"></i>
@@ -50,7 +50,7 @@
               <span class="trust-level italic size-13">tl<?= $post['post_tl']; ?></span>
             <?php } ?>
             <?php if ($post['post_merged_id'] > 0) { ?>
-              <i class="icon-link-ext red"></i>
+              <i class="icon-link-ext blue"></i>
             <?php } ?>
           </h2>
         </a>

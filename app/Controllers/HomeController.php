@@ -54,7 +54,7 @@ class HomeController extends MainController
 
         $meta = [
             'canonical'         => $canonical,
-            'img'               => $url . '/assets/images/areadev.webp',
+            'img'               => $url . '/assets/images/agouti.webp',
             'meta_title'        => $meta_title,
             'meta_desc'         => $meta_desc,
             'sheet'             => $sheet,

@@ -1,6 +1,6 @@
-**ATTENTION:** you are on the README file of an unstable branch of Loriup specifically meant for the development of future releases. This means that the code on this branch is potentially unstable, and breaking change may happen without any prior notice. Do not use it in production environments or use it at your own risk! This is a test version, a training project!
+**ATTENTION:** you are on the README file of an unstable branch of Agouti specifically meant for the development of future releases. This means that the code on this branch is potentially unstable, and breaking change may happen without any prior notice. Do not use it in production environments or use it at your own risk! This is a test version, a training project!
 
-# Loriup
+# Agouti
 
 Discussion (forum) and Q&A platform. Community based on PHP Micro-Framework HLEB.
 
@@ -14,11 +14,13 @@ A distinctive feature of the micro-framework HLEB is the minimalism of the code 
 
 ### Demonstration
 
-![Loriup](https://raw.githubusercontent.com/Toxu-ru/AreaDev/main/public/assets/images/areadev.jpg)
+![Agouti](https://raw.githubusercontent.com/Toxu-ru/AreaDev/main/public/assets/images/areadev.jpg)
 
-![Loriup](https://raw.githubusercontent.com/Toxu-ru/AreaDev/main/public/assets/images/areadev2.jpg)
+![Agouti spaces](https://raw.githubusercontent.com/Toxu-ru/AreaDev/main/public/assets/images/areadev2.jpg)
 
-https://loriup.ru/
+![Agouti topics](https://raw.githubusercontent.com/Toxu-ru/AreaDev/main/public/assets/images/areadev3.jpg)
+
+Demo: https://agouti.ru/
 
 ### For testing
 
@@ -29,17 +31,8 @@ https://loriup.ru/
 *   Log in to your account using administrator credentials: `ss@sdf.ru` / `qwer14qwer14`
 *   Or user: `test@test.ru` / `test@test.ru`
 
-To change the translation, in the file: `start.hleb.php` find:
+More information (rus.): https://agouti.info/
 
-```php
-define('SITE_LANG', 'ru' );
-```
-
-Edit:
-
-```php
-define('SITE_LANG', 'en' );
-```
 
 #### Ideas
 
@@ -57,4 +50,4 @@ Ideas, minimalism, design was taken from what I like:
 
 #### MIT License
 
-https://github.com/LoriUp/loriup/blob/main/LICENSE 
+https://github.com/AgoutiDev/agouti/blob/main/LICENSE 

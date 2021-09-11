@@ -40,9 +40,5 @@
       <?= no_content('There are no comments'); ?>
     <?php } ?>
   </main>
-  <aside>
-    <div class="white-box p15">
-      <?= lang('comments-desc'); ?>
-    </div>
-  </aside>
+  <?= aside('lang', ['lang' => lang('comments-desc')]); ?>
 </div>

@@ -40,5 +40,5 @@
     <?php } ?>
 <?php } ?>
 
-<link rel="icon" sizes="16x16" href="/favicon-16.ico" type="image/x-icon">
+<link rel="icon" sizes="16x16" href="/favicon.ico" type="image/x-icon">
 <link rel="icon" sizes="48x48" href="/favicon-48.ico" type="image/x-icon">

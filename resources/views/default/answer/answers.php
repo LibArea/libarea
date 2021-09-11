@@ -8,23 +8,23 @@
       <?php foreach ($data['answers'] as $answer) { ?>
         <div class="white-box pt5 pr15 pb5 pl15">
           <?php if ($answer['answer_is_deleted'] == 0) { ?>
-              <div class="flex size-13">
-                <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'ava'); ?>
-                <a class="gray mr5 ml5" href="/u/<?= $answer['user_login']; ?>">
-                  <?= $answer['user_login']; ?>
-                </a>
-                <span class="gray lowercase"><?= $answer['date']; ?></span>
-              </div>
-              <a href="<?= post_url($answer); ?>#answer_<?= $answer['answer_id']; ?>">
-                <?= $answer['post_title']; ?>
+            <div class="flex size-13">
+              <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'ava'); ?>
+              <a class="gray mr5 ml5" href="/u/<?= $answer['user_login']; ?>">
+                <?= $answer['user_login']; ?>
               </a>
-              <div class="answ-telo">
-                <?= $answer['answer_content']; ?>
-              </div>
+              <span class="gray lowercase"><?= $answer['date']; ?></span>
+            </div>
+            <a href="<?= post_url($answer); ?>#answer_<?= $answer['answer_id']; ?>">
+              <?= $answer['post_title']; ?>
+            </a>
+            <div class="answ-telo">
+              <?= $answer['answer_content']; ?>
+            </div>
 
-              <div class="hidden gray">
-                + <?= $answer['answer_votes']; ?>
-              </div>
+            <div class="hidden gray">
+              + <?= $answer['answer_votes']; ?>
+            </div>
           <?php } else { ?>
             <div class="bg-red-300">
               <div class="voters"></div>
@@ -40,9 +40,5 @@
       <?= no_content('There are no comments'); ?>
     <?php } ?>
   </main>
-  <aside>
-    <div class="white-box p15">
-      <?= lang('answers-desc'); ?>
-    </div>
-  </aside>
+  <?= aside('lang', ['lang' => lang('answers-desc')]); ?>
 </div>

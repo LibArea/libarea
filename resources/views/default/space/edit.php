@@ -32,9 +32,5 @@
       </div>
     </form>
   </main>
-  <aside>
-    <div class="white-box p15">
-      <?= lang('info-space-edit'); ?>
-    </div>
-  </aside>
+  <?= aside('lang', ['lang' => lang('info-space-edit')]); ?>
 </div>

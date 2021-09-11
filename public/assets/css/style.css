@@ -152,7 +152,7 @@ img {
 .gray-light { color: #666; }
 .gray-light-2 { color: #919191; }
 .green { color: #318407; }
-.blue { color: #54b9f7; }
+.blue { color: #0d9fe6; }
 .white { color: #fff; }
 .red { color: #e45735; }
 
@@ -587,7 +587,7 @@ ol.comment-telo { padding-left: 23px; }
 
 .voters.active .icon-up-bold,
 .voters .icon-up-bold:hover {
-  color: #e45735;
+  color: #0d9fe6;
 }
 
 .nav-tabs > li {
@@ -611,8 +611,8 @@ ol.comment-telo { padding-left: 23px; }
 .nav-tabs > li.active span {
   padding: 10px 0 5px 0;
   margin: 0 15px 0 0;
-  border-bottom: 2px solid #e45735;
-  color: #646464;
+  border-bottom: 2px solid #0d9fe6;
+  color: #0d9fe6;
 }
 
 ul.breadcrumb {
