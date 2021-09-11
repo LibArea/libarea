@@ -14,11 +14,11 @@ A distinctive feature of the micro-framework HLEB is the minimalism of the code 
 
 ### Demonstration
 
-![Agouti](https://raw.githubusercontent.com/Toxu-ru/AreaDev/main/public/assets/images/areadev.jpg)
+![Agouti](https://raw.githubusercontent.com/AgoutiDev/agouti/main/public/assets/images/agouti.jpg)
 
-![Agouti spaces](https://raw.githubusercontent.com/Toxu-ru/AreaDev/main/public/assets/images/areadev2.jpg)
+![Agouti spaces](https://raw.githubusercontent.com/AgoutiDev/agouti/main/public/assets/images/agouti2.jpg)
 
-![Agouti topics](https://raw.githubusercontent.com/Toxu-ru/AreaDev/main/public/assets/images/areadev3.jpg)
+![Agouti topics](https://raw.githubusercontent.com/AgoutiDev/agouti/main/public/assets/images/agouti3.jpg)
 
 Demo: https://agouti.ru/
 
