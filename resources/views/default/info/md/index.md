@@ -1,7 +1,7 @@
 Этот раздел содержит справочную информацию.  
 
 ### Где мне можно скачать архив сайта?
-Скачайте архив *agouti с GitHub:* [github.com/LoriUp/loriup](https://github.com/agoutiDev/agouti)
+Скачайте архив *agouti с GitHub:* [github.com/agoutiDev/agouti](https://github.com/agoutiDev/agouti)
 
 Код сайта имеет лицензию [MIT](https://ru.wikipedia.org/wiki/%D0%9B%D0%B8%D1%86%D0%B5%D0%BD%D0%B7%D0%B8%D1%8F_MIT).  
 
@@ -22,7 +22,7 @@
 Способы оплаты: *ЮMoney - * 4100140143763
 
 ### Как с вами связаться?
-По e-mail: *admin@loriup.ru*
+По e-mail: *admin@agouti.ru*
         
 *Мы в Discord:* [discord.gg/dw47aNx5nU](https://discord.gg/dw47aNx5nU)
          

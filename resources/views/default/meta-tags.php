@@ -41,4 +41,4 @@
 <?php } ?>
 
 <link rel="icon" sizes="16x16" href="/favicon.ico" type="image/x-icon">
-<link rel="icon" sizes="48x48" href="/favicon-48.ico" type="image/x-icon">
+<link rel="icon" sizes="120x120" href="/favicon-120.ico" type="image/x-icon">

@@ -30,11 +30,9 @@
         <?php } ?>
 
         <div class="flex align-items-center">
-          <div>
             <a title="<?= lang('Home'); ?>" class="logo" href="/">
-              <img alt="logo" alt="Agouti" class="brand-logo ng-star-inserted" src="/assets/svg/agouti.svg">
+              AGOUTI
             </a>
-          </div>
           <div>
             <form class="form" method="post" action="/search">
               <?= csrf_field() ?>
