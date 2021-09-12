@@ -8,7 +8,7 @@
           <label class="form-label" for="password">
             <?= lang('New password'); ?>
           </label>
-          <input class="form-input" type="text" name="password" id="password">
+          <input class="form-input" type="password" name="password" id="password">
         </div>
         <div class="boxline">
           <input type="hidden" name="code" id="code" value="<?= $data['code']; ?>">

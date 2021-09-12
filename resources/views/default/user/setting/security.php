@@ -8,8 +8,8 @@
 
       <?php field('input', [
         ['title' => lang('Old'), 'type' => 'text', 'name' => 'password', 'value' => ''],
-        ['title' => lang('New'), 'type' => 'text', 'name' => 'password2', 'value' => '', 'min' => 6, 'max' => 32, 'help' => '6 - 250 ' . lang('characters')],
-        ['title' => lang('Repeat'), 'type' => 'text', 'name' => 'password3', 'value' => ''],
+        ['title' => lang('New'), 'type' => 'password', 'name' => 'password2', 'value' => '', 'min' => 6, 'max' => 32, 'help' => '6 - 250 ' . lang('characters')],
+        ['title' => lang('Repeat'), 'type' => 'password', 'name' => 'password3', 'value' => ''],
       ]); ?>
 
       <div class="boxline">

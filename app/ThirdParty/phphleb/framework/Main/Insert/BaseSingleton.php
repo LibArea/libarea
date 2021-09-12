@@ -1,6 +1,8 @@
 <?php
 
+
 namespace Hleb\Main\Insert;
+
 
 class BaseSingleton
 {

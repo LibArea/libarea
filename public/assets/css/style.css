@@ -341,12 +341,13 @@ th {
   padding: 5px;
 }
 
-a.logo {
+.logo {
   color: #333;
   font-size: 18px;
+  letter-spacing: 1px
 }
 
-a.logo:hover { opacity: 0.8; }
+.logo:hover { opacity: 0.8; }
 
 /* Forms and buttons */
 textarea {
@@ -567,8 +568,8 @@ img.img-post,
 
 ol.comment-telo { padding-left: 23px; }
 
-.comm-telo-body p,
-.answ-telo p {
+.comm-telo-body p:first-child,
+.answ-telo p:first-child {
   margin: 5px 0;
 }
 

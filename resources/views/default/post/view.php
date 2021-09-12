@@ -261,7 +261,7 @@
                   <?= $rec_post['post_answers_count'] ?>
                 </div>
               <?php } else { ?>
-                <div class="up-box-post bg-gray-200 gray size-13 center mr15">0</div>
+                <div class="up-box-post bg-gray-300 gray size-13 center mr15">0</div>
               <?php } ?>
             </a>
             <a class="gray size-13" href="<?= post_url($rec_post); ?>">
