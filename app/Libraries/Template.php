@@ -243,25 +243,45 @@ function votes($user_id, $content, $type)
     if ($user_id > 0) {
         if ($content['votes_' . $type . '_user_id'] || $user_id == $content[$type . '_user_id']) {
             $html .= '<div class="voters active flex">
-                        <div class="up-id gray-light-2 icon-up-bold"></div>
+                        <div class="up-id gray-light-2 icon-up-bold feed-icon"></div>
                         <div class="score gray mr5">
                             ' . $count . '
                         </div></div>';
         } else {
             $num_count = empty($count) ? 0 : $count;
             $html .= '<div id="up' . $content[$type . '_id'] . '" class="voters flex">
-                        <div data-id="' . $content[$type . '_id'] . '" data-count="' . $num_count . '" data-type="' . $type . '" class="up-id gray-light-2 icon-up-bold"></div>
+                        <div data-id="' . $content[$type . '_id'] . '" data-count="' . $num_count . '" data-type="' . $type . '" class="up-id gray-light-2 icon-up-bold feed-icon"></div>
                         <div class="score gray mr5">
                             ' . $count . '
                         </div></div>';
         }
     } else {
         $html .= '<div class="voters flex">
-                    <div class="up-id gray-light-2 icon-up-bold click-no-auth"></div>
+                    <div class="up-id gray-light-2 icon-up-bold feed-icon click-no-auth"></div>
                     <div class="score gray mr5">
                          ' . $count . '                
                     </div></div>';
     }
+
+    return $html;
+}
+
+function favorite_post($user_id, $post_id, $favorite_tid)
+{
+    $html  = '';
+    if ($user_id > 0) {
+        $html .= '<span class="add-favorite gray-light feed-icon" data-id="' . $post_id . '" data-type="post">';
+            if ($favorite_tid) { 
+                $html .= '<i class="icon-bookmark-empty blue middle"></i>';
+             } else { 
+                $html .= '<i class="icon-bookmark-empty middle"></i>';
+            } 
+        $html .= '</span>';
+    } else {
+        $html .= '<span class="click-no-auth gray-light feed-icon">
+                    <i class="icon-bookmark-empty middle"></i>
+                        </span>'; 
+    }     
 
     return $html;
 }

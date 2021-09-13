@@ -65,8 +65,6 @@ class PostController extends MainController
         $comment_n = $post['post_comments_count'] + $post['post_answers_count'];
         $post['num_comments']   = word_form($comment_n, lang('Comment'), lang('Comments-m'), lang('Comments'));
 
-        $post['favorite_post']  = FavoriteModel::getUserFavorite($post['post_id'], $uid['user_id'], 1);
-
         // Получим ответы
         // post_type: 0 - дискуссия, 1 - Q&A
         $post_answers = AnswerModel::getAnswersPost($post['post_id'], $uid['user_id'], $post['post_type']);

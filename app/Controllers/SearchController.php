@@ -35,8 +35,14 @@ class SearchController extends MainController
                     $tags = [];
                     
                 } else {
-                    $result = SearchModel::getSearchPostServer($query);
+                    $qa     = SearchModel::getSearchPostServer($query);
                     $tags   = SearchModel::getSearchTagsServer($query);
+                    
+                    $result = array();
+                    foreach ($qa as $ind => $row) {
+                        $row['_content'] = Content::noMarkdown($row['_content']);
+                        $result[$ind]    = $row;
+                    }
                 }
             } else {
                 addMsg(lang('Empty request'), 'error');

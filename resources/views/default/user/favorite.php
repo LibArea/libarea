@@ -14,12 +14,6 @@
         <div class="white-box pt5 pr15 pb5 pl15">
           <?php if ($fav['favorite_type'] == 1) { ?>
             <div class="mt15 mb15">
-              <?php if ($uid['user_id'] == $fav['favorite_user_id']) { ?>
-                <span class="add-favorite size-13 right" data-id="<?= $fav['post_id']; ?>" data-type="post">
-                  <?= lang('Remove'); ?>
-                </span>
-              <?php } ?>
-
               <div>
                 <a href="<?= post_url($fav); ?>">
                   <h3 class="title size-21 mt5 mb5">
@@ -43,6 +37,11 @@
                   <a class="mr5 gray" href="<?= post_url($fav); ?>">
                     <i class="icon-commenting-o middle"></i> <?= $fav['post_answers_count'] ?>
                   </a>
+                <?php } ?>
+                <?php if ($uid['user_id'] == $fav['favorite_user_id']) { ?>
+                <span class="add-favorite size-13 right" data-id="<?= $fav['post_id']; ?>" data-type="post">
+                  <?= lang('Remove'); ?>
+                </span>
                 <?php } ?>
               </div>
             </div>

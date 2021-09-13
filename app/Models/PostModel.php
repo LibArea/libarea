@@ -141,10 +141,14 @@ class PostModel extends MainModel
                     space_img,
                     space_short_text,
                     votes_post_item_id,
-                    votes_post_user_id
+                    votes_post_user_id,
+                    favorite_tid, 
+                    favorite_user_id, 
+                    favorite_type
                         FROM posts
                         LEFT JOIN users ON user_id = post_user_id
                         LEFT JOIN spaces ON space_id = post_space_id
+                        LEFT JOIN favorites ON favorite_tid = post_id AND favorite_user_id = :user_id AND favorite_type = 1 
                         LEFT JOIN votes_post ON votes_post_item_id = post_id AND votes_post_user_id = :user_id
                             WHERE post_slug = :slug AND post_tl <= :trust_level";
 

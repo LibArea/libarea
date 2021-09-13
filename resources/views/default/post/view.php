@@ -61,13 +61,6 @@
                     <?php } ?>
                   <?php } ?>
                 <?php } ?>
-                <span class="add-favorite gray-light mr10 ml10" data-id="<?= $data['post']['post_id']; ?>" data-type="post">
-                  <?php if (is_array($data['post']['favorite_post'])) { ?>
-                    <?= lang('remove-favorites'); ?>
-                  <?php } else { ?>
-                    <?= lang('add-favorites'); ?>
-                  <?php } ?>
-                </span>
                 <?php if ($uid['user_trust_level'] == 5) { ?>
                   <a data-type="post" data-id="<?= $data['post']['post_id']; ?>" class="type-action gray-light mr10 ml10">
                     <?php if ($data['post']['post_is_deleted'] == 1) { ?>
@@ -151,10 +144,14 @@
           </div>
           <div class="border-bottom mb10 pb5 hidden flex justify-content-between gray">
             <?= votes($uid['user_id'], $data['post'], 'post'); ?>
-            <span class="right gray-light">
+            <?php $cout = $data['post']['post_answers_count'] + $data['post']['post_comments_count']; ?>
+            <span class="right gray-light feed-icon">
               <i class="icon-commenting-o middle"></i>
-              <?= $data['post']['post_answers_count'] + $data['post']['post_comments_count'] ?>
+              <?php if ($cout > 0) { ?>
+                <?= $data['post']['post_answers_count'] + $data['post']['post_comments_count']; ?>
+              <?php } ?>
             </span>
+            <?= favorite_post($uid['user_id'], $data['post']['post_id'], $data['post']['favorite_tid']); ?>
           </div>
           <div class="hidden">
             <?php if (!$uid['user_id']) { ?>

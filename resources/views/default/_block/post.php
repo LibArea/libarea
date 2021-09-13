@@ -68,13 +68,12 @@
         </div>
         <div class="pl15">
           <div class="show_add_<?= $post['post_id']; ?>">
-            <div data-post_id="<?= $post['post_id']; ?>" class="showpost mt10 mb5">
+            <div data-post_id="<?= $post['post_id']; ?>" class="showpost mt10 mb5 gray-light">
               <?= $post['post_content_preview']; ?>
               <span class="s_<?= $post['post_id']; ?> show_detail"></span>
             </div>
           </div>
         </div>
-
         <?php if ($post['post_content_img']) { ?>
           <div class="post-img">
             <a title="<?= $post['post_title']; ?>" href="<?= post_url($post); ?>">
@@ -82,11 +81,10 @@
             </a>
           </div>
         <?php } ?>
-
-        <div class="pt5 pr10 pb5 mt5 pl10 hidden lowercase flex justify-content-between">
+        <div class="pt5 pr10 pb10 mt5 pl10 hidden lowercase flex justify-content-between">
           <?= votes($uid['user_id'], $post, 'post'); ?>
           <?php if ($post['post_answers_count'] != 0) { ?>
-            <a class="flex gray-light" href="<?= post_url($post); ?>">
+            <a class="flex gray-light feed-icon" href="<?= post_url($post); ?>">
               <?php if ($post['post_type'] == 0) { ?>
                 <i class="icon-commenting-o mr5"></i>
                 <?= $post['post_answers_count'] + $post['post_comments_count']; ?>
@@ -96,6 +94,7 @@
               <?php } ?>
             </a>
           <?php } ?>
+          <?= favorite_post($uid['user_id'], $post['post_id'], $post['favorite_tid']); ?>
         </div>
       </div>
     </div>

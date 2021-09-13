@@ -34,7 +34,7 @@
       <?php } ?>
     </main>
 
-    <?php includeTemplate('/space/sidebar', ['data' => $data, 'uid' => $uid]); ?>
+    <?php includeTemplate('/space/space-sidebar', ['data' => $data, 'uid' => $uid]); ?>
 
   </div>
 <?php } else { ?>

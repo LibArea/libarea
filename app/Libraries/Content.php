@@ -175,4 +175,12 @@ class Content
 
         return $content;
     }
+    
+    public static function noMarkdown($content)
+    {
+        $md = '/(?:__|[*#])|\[(.*?)\]\(.*?\)/';
+        $content = preg_replace($md, "", $content);
+        
+        return $content;
+    }
 }

@@ -31,7 +31,7 @@ body.scroll {
 
 body {
   line-height: 1.5rem;
-  font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
   min-height: 100%;
   background-color: #f3f3f3;
   padding-top: 50px;
@@ -466,11 +466,6 @@ textarea:focus {
   width: calc(90% - 45px);
 }
 
-.active-notif,
-.active-notif .message.one {
-  background-color: rgba(82, 186, 213, 0.1);
-}
-
 .message-avatar {
   width: 35px;
   border-radius: 50%;
@@ -584,7 +579,7 @@ ol.comment-telo { padding-left: 23px; }
   width: 64px;
 }
 
-.icon-up-bold { font-size: 1.2em; }
+.feed-icon { font-size: 1.2em; }
 
 .voters.active .icon-up-bold,
 .voters .icon-up-bold:hover {

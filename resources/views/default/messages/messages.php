@@ -4,31 +4,26 @@
 
     <?php if (!empty($data['messages'])) { ?>
       <?php foreach ($data['messages'] as  $msg) { ?>
-
-        <div class="hidden mb15<?php if (!$msg['unread'] > 0) { ?> active-notif<?php } ?>">
+         <div class="hidden mt15 mb15<?php if (!$msg['unread'] > 0) { ?> bg-yellow-100<?php } ?>">
           <div class="size-13 flex">
-            <?php if ($msg['dialog_sender_id'] == $uid['user_id']) {  ?>
-              <?= lang('You'); ?>
-              <span class="mr5 ml5"></span>
-              <?= lang_date($msg['dialog_update_time']); ?>
+            <?php if ($msg['dialog_sender_id'] == $uid['user_id']) { ?> 
+              <a href="/u/<?= $msg['msg_to_user']['user_login']; ?>">
+                <?= user_avatar_img($msg['msg_to_user']['user_avatar'], 'small', $msg['msg_to_user']['user_login'], 'ava mr5 ml5'); ?>
+                <?= $msg['msg_to_user']['user_login']; ?>
+              </a>
             <?php } else { ?>
-              <?= lang('From'); ?>
-              <span class="mr5 ml5"></span>
-              <?= user_avatar_img($msg['msg_user']['user_avatar'], 'small', $msg['msg_user']['user_login'], 'ava'); ?>
-              <span class="mr5 ml5"></span>
-              <a href="/u/<?= $msg['msg_user']['user_login']; ?>">
+              <a class="mr5" href="/u/<?= $msg['msg_to_user']['user_login']; ?>">
+                <?= user_avatar_img($msg['msg_user']['user_avatar'], 'small', $msg['msg_user']['user_login'], 'ava mr5 ml5'); ?>
                 <?= $msg['msg_user']['user_login']; ?>
               </a>
-              <span class="ml15"></span>
-              <span class="gray lowercase">
-                <?= lang_date($msg['dialog_update_time']); ?>
-              </span>
             <?php } ?>
+            <span class="gray ml10 lowercase">
+                <?= lang_date($msg['dialog_update_time']); ?>
+            </span>
           </div>
-          <div class="message bg-blue-100 gray">
+          <div class="message bg-blue-100<?php if (!$msg['unread'] > 0) { ?> bg-purple-100<?php } ?> gray">
             <?= $msg['message']['message_content']; ?>
           </div>
-
           <a class="lowercase size-13 right" href="/messages/read/<?= $msg['dialog_id']; ?>">
             <?php if ($msg['unread']) { ?>
               <?= lang('There are'); ?> <?= $msg['count']; ?> <?= $msg['unread_num']; ?>
@@ -39,7 +34,6 @@
               <?php } ?>
             <?php } ?>
           </a>
-
         </div>
       <?php } ?>
 
@@ -47,5 +41,5 @@
       <?= no_content('No dialogs'); ?>
     <?php } ?>
   </main>
-  <?= aside('lang', ['lang' => lang('Under development')]); ?>
+  <?= aside('lang', ['lang' => lang('Personal messages with site participants')]); ?>
 </div>

@@ -51,6 +51,7 @@ class MessagesController extends MainController
                 }
 
                 $row['msg_user']    = UserModel::getUser($row['dialog_sender_id'], 'id');
+                $row['msg_to_user'] = UserModel::getUser($row['dialog_recipient_id'], 'id');
                 $row['message']     = MessagesModel::getMessageOne($row['dialog_id']);
                 $row['unread_num']  = word_form($row['unread'], lang('Message'), lang('Messages-m'), lang('Messages'));
                 $row['count_num']   = word_form($row['count'], lang('Message'), lang('Messages-m'), lang('Messages'));
