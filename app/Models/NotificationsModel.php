@@ -160,7 +160,8 @@ class NotificationsModel extends MainModel
                     rel.*,
                     votes_post_item_id, votes_post_user_id,
                     user_id, user_login, user_avatar, 
-                    space_id, space_slug, space_name, space_color
+                    space_id, space_slug, space_name, space_color,
+                    favorite_tid, favorite_user_id, favorite_type
                     
                         FROM posts
                         LEFT JOIN
@@ -183,6 +184,7 @@ class NotificationsModel extends MainModel
             INNER JOIN users ON user_id = post_user_id
             INNER JOIN spaces ON space_id = post_space_id
             LEFT JOIN votes_post ON votes_post_item_id = post_id AND votes_post_user_id = :user_id
+            LEFT JOIN favorites ON favorite_tid = post_id AND favorite_user_id = :user_id AND favorite_type = 1
             $string  LIMIT 100";
 
         return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);

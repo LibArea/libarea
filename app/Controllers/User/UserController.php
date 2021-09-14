@@ -110,9 +110,12 @@ class UserController extends MainController
 
         $result = array();
         foreach ($favorites as $ind => $row) {
-            $row['post_date']       = (empty($row['post_date'])) ? $row['post_date'] : lang_date($row['post_date']);
+           
+            if ($row['favorite_type'] == 1) {
+                $row['answer_post_id'] = $row['post_id'];
+            }
+            
             $row['answer_content']  = Content::text($row['answer_content'], 'text');
-            $row['date']            = $row['post_date'];
             $row['post']            = PostModel::getPostId($row['answer_post_id']);
             $result[$ind]           = $row;
         }

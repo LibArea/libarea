@@ -186,9 +186,13 @@ class PostModel extends MainModel
                     post_is_deleted,
                     space_id, 
                     space_slug, 
-                    space_name
+                    space_name,
+                    user_id,
+                    user_login,
+                    user_avatar
                         FROM posts
                         LEFT JOIN spaces ON space_id = post_space_id
+                        LEFT JOIN users ON user_id = post_user_id
                             WHERE post_id = :post_id";
 
         return DB::run($sql, ['post_id' => $post_id])->fetch(PDO::FETCH_ASSOC);
