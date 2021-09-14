@@ -6,12 +6,12 @@
         array('id' => 'answers', 'url' => '/admin/answers', 'content' => lang('All')),
         array('id' => 'answers-ban', 'url' => '/admin/answers/ban', 'content' => lang('Deleted answers')),
       );
-      echo tabs_nav($pages, $data['sheet'], $uid);
+      echo returnBlock('tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
       ?>
 
       <?php if (!empty($data['answers'])) { ?>
         <?php foreach ($data['answers'] as $answer) { ?>
-          <a href="<?= post_url($answer); ?>">
+          <a href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>">
             <b><?= $answer['post_title']; ?></b>
           </a>
           <div id="answer_<?= $answer['answer_id']; ?>">

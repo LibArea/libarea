@@ -1,5 +1,5 @@
 <?php if ($data['space']['space_is_delete'] == 0) { ?>
-  <?php includeTemplate('/space/banner_top', ['data' => $data, 'uid' => $uid]); ?>
+  <?= returnBlock('/space-banner-top', ['data' => $data, 'uid' => $uid]); ?>
   <div class="wrap">
     <main>
       <?php
@@ -27,14 +27,14 @@
       </ul>
 
       <?php if ($data['sheet'] == 'writers') { ?>
-        <?php includeTemplate('/space/writers', ['data' => $data]); ?>
+        <?= returnBlock('/writers', ['data' => $data]); ?>
       <?php } else { ?>
-        <?php includeTemplate('/_block/post', ['data' => $data, 'uid' => $uid]); ?>
+        <?= returnBlock('/post', ['data' => $data, 'uid' => $uid]); ?>
         <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/s/' . $data['space']['space_slug']); ?>
       <?php } ?>
     </main>
 
-    <?php includeTemplate('/space/space-sidebar', ['data' => $data, 'uid' => $uid]); ?>
+    <?= returnBlock('/space-sidebar', ['data' => $data, 'uid' => $uid]); ?>
 
   </div>
 <?php } else { ?>

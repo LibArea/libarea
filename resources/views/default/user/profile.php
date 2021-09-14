@@ -173,7 +173,7 @@
                 <h3 class="mb5 uppercase pt15 size-13"><?= lang('Selected Post'); ?></h3>
 
                 <div class="post-body mb15">
-                  <a class="title" href="<?= post_url($data['onepost']); ?>">
+                  <a class="title" href="<?= getUrlByName('post', ['id' => $data['onepost']['post_id'], 'slug' => $data['onepost']['post_slug']]); ?>">
                     <?= $data['onepost']['post_title']; ?>
                   </a>
 
@@ -190,7 +190,7 @@
                     </a>
 
                     <?php if ($data['onepost']['post_answers_count'] != 0) { ?>
-                      <a class="gray right" href="<?= post_url($data['onepost']); ?>">
+                      <a class="gray right" href="<?= getUrlByName('post', ['id' => $data['onepost']['post_id'], 'slug' => $data['onepost']['post_slug']]); ?>">
                         <i class="icon-comment-empty middle"></i>
                         <?= $data['onepost']['post_answers_count']; ?>
                       </a>

@@ -16,7 +16,7 @@
                 <?= $comm['date']; ?>
               </span>
             </div>
-            <a class="mr5 mb5 block" href="<?= post_url($comm); ?>">
+            <a class="mr5 mb5 block" href="<?= getUrlByName('post', ['id' => $comm['post_id'], 'slug' => $comm['post_slug']]); ?>">
               <?= $comm['post_title']; ?>
             </a>
             <p><?= $comm['comment_content']; ?></p>
@@ -38,6 +38,6 @@
     <?php } ?>
   </main>
   <aside>
-    <?php includeTemplate('/_block/user-menu', ['uid' => $uid]); ?>
+    <?= returnBlock('/user-menu', ['uid' => $uid]); ?>
   </aside>
 </div>

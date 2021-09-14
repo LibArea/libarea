@@ -7,7 +7,9 @@
     <div class="border-bottom mt5 mb10"></div>
     <?php $n = 0;
     foreach ($data['answers'] as  $answer) {
-      $n++; ?>
+      $n++; 
+      $post_url = getUrlByName('post', ['id' => $data['post']['post_id'], 'slug' => $data['post']['post_slug']]);
+      ?>
 
       <div class="block-answer">
         <?php if ($answer['answer_is_deleted'] == 0) { ?>
@@ -34,7 +36,7 @@
                     <?php if ($data['post']['post_user_id'] == $answer['answer_user_id']) { ?>
                       <span class="red mr5 ml0">&#x21af;</span>
                     <?php } ?>
-                    <a rel="nofollow" class="gray-light mr5 ml10" href="<?= post_url($data['post']); ?>#answer_<?= $answer['answer_id']; ?>">#</a>
+                    <a rel="nofollow" class="gray-light mr5 ml10" href="<?= $post_url; ?>#answer_<?= $answer['answer_id']; ?>">#</a>
                     <?= content_ip($answer['answer_ip'], $uid); ?>
                   </div>
                   <div class="mt0 mr0 mb5 ml0 size-15">
@@ -126,11 +128,11 @@
                       <span class="red mr10 ml10">&#x21af;</span>
                     <?php } ?>
                     <?php if ($comment['comment_comment_id'] > 0) { ?>
-                      <a class="gray-light mr10 ml10" rel="nofollow" href="<?= post_url($data['post']); ?>#comment_<?= $comment['comment_comment_id']; ?>">&uarr;</a>
+                      <a class="gray-light mr10 ml10" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_comment_id']; ?>">&uarr;</a>
                     <?php } else { ?>
-                      <a class="gray-light mr10 ml10" rel="nofollow" href="<?= post_url($data['post']); ?>#answer_<?= $comment['comment_answer_id']; ?>">&uarr;</a>
+                      <a class="gray-light mr10 ml10" rel="nofollow" href="<?= $post_url; ?>#answer_<?= $comment['comment_answer_id']; ?>">&uarr;</a>
                     <?php } ?>
-                    <a class="gray-light mr5 ml10" rel="nofollow" href="<?= post_url($data['post']); ?>#comment_<?= $comment['comment_id']; ?>">#</a>
+                    <a class="gray-light mr5 ml10" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_id']; ?>">#</a>
                     <?= content_ip($comment['comment_ip'], $uid); ?>
                   </div>
                   <div class="comm-telo-body size-15 mt5 mb5">

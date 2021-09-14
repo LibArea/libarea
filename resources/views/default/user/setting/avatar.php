@@ -1,7 +1,7 @@
 <div class="wrap">
   <main class="white-box pt15 pr15 pb5 pl15 box setting avatar">
     <?= breadcrumb('/', lang('Home'), '/u/' . $uid['user_login'], lang('Profile'), lang('Change avatar')); ?>
-    <?php includeTemplate('/_block/setting-nav', ['data' => $data, 'uid' => $uid]); ?>
+    <?= returnBlock('/setting-nav', ['data' => $data, 'uid' => $uid]); ?>
 
     <form class="pt10" method="POST" action="/users/setting/avatar/edit" enctype="multipart/form-data">
       <?= csrf_field() ?>

@@ -1,7 +1,7 @@
 <div class="wrap">
   <main class="w-100 white-box pt5 pr15 pb5 pl15">
         <?= breadcrumb('/', lang('Home'), null, null, lang('Edit answer')); ?>
-        <a class="mb5 block" href="<?= post_url($data['post']); ?>"><?= $data['post']['post_title']; ?></a>
+        <a class="mb5 block" href="<?= getUrlByName('post', ['id' => $data['post']['post_id'], 'slug' => $data['post']['post_slug']]); ?>"><?= $data['post']['post_title']; ?></a>
         <div class="answer_addentry">
           <?php if ($uid['user_id'] > 0) { ?>
             <form id="add_answ" action="/answer/edit" accept-charset="UTF-8" method="post">

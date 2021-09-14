@@ -6,7 +6,7 @@
         array('id' => 'favorites', 'url' => '/u/' . $uid['user_login'] . '/favorite', 'content' => lang('Favorites')),
         array('id' => 'subscribed', 'url' => '/u/' . $uid['user_login'] . '/subscribed', 'content' => lang('Subscribed')),
       );
-      echo tabs_nav($pages, $data['sheet'], $uid);
+      echo returnBlock('tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
       ?>
     </div>
     <?php if (!empty($data['favorites'])) { ?>
@@ -25,14 +25,14 @@
                 <span class="add-favorite size-13 ml15 right" data-id="<?= $content['post_id']; ?>" data-type="post">
                   <i class="icon-trash-empty size-21 red"></i>
                 </span>
-              <a class="title" href="<?= post_url($content); ?>">
+              <a class="title" href="<?= getUrlByName('post', ['id' => $content['post_id'], 'slug' => $content['post_slug']]); ?>">
                  <?= $content['post_title']; ?>
               </a>
             <?php } else { ?>
                 <span class="add-favorite right  ml15 size-13" data-id="<?= $content['answer_id']; ?>" data-type="answer">
                   <i class="icon-trash-empty  size-21 red"></i>
                 </span>
-              <a class="title"  href="<?= post_url($content['post']); ?>#answer_<?= $content['answer_id']; ?>">
+              <a class="title"  href="<?= getUrlByName('post', ['id' => $content['post']['post_id'], 'slug' => $content['post']['post_slug']]); ?>#answer_<?= $content['answer_id']; ?>">
                 <?= $content['post']['post_title']; ?>
               </a>
             <?php } ?>

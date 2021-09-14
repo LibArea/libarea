@@ -9,7 +9,7 @@
         array('id' => 'spaces', 'url' => '/admin/spaces', 'content' => lang('All')),
         array('id' => 'spaces-ban', 'url' => '/admin/spaces/ban', 'content' => lang('Banned')),
       );
-      echo tabs_nav($pages, $data['sheet'], $uid);
+      echo returnBlock('tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
       ?>
 
       <?php if (!empty($data['spaces'])) { ?>

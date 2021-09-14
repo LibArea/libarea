@@ -89,11 +89,6 @@ function post_img($file, $alt, $style, $type, $attributes = '')
     return $img;
 }
 
-function post_url($post)
-{
-    return '/post/' . $post['post_id'] . '/' . $post['post_slug'];
-}
-
 // Favicon 
 function favicon_img($link_id, $alt)
 {
@@ -335,21 +330,9 @@ function accessСheck($content, $type, $uid, $after, $stop_time)
     return true;
 }
 
-function tabs_nav($pages, $sheet, $uid)
+function returnBlock($tpl_file, array $params = [])
 {
-    $html = '<ul class="nav-tabs hidden list-none mt0 pt5 pr15 pb10 pl0">';
-    foreach ($pages as $page) {
-        if (empty($page['auth']) != false || $uid['user_id'] > 0) {
-            if ($page['id'] == $sheet) {
-                $html .= '<li class="active"><span>' . $page['content'] . '</span></li>';
-            } else {
-                $html .= '<li><a href="' . $page['url'] . '"><span>' . $page['content'] . '</span></a></li>';
-            }
-        }
-    }
-    $html .= '</ul>';
-
-    return $html;
+    return includeTemplate('/_block/' . $tpl_file, $params);
 }
 
 function content_ip($ip, $uid)

@@ -1,7 +1,7 @@
 <div class="wrap">
   <main class="w-100 white-box pt5 pr15 pb5 pl15 edit-post">
-    <?= breadcrumb('/', lang('Home'), post_url($data['post']), $data['post']['post_title'], lang('Edit post')); ?>
-
+    <?= breadcrumb('/', lang('Home'), getUrlByName('post', ['id' => $data['post']['post_id'], 'slug' => $data['post']['post_slug']]), $data['post']['post_title'], lang('Edit post')); ?>
+ 
     <form action="/post/edit" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
 

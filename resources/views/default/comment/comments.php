@@ -16,7 +16,7 @@
               </a>
               <span class="gray lowercase"><?= $comment['date']; ?></span>
             </div>
-            <a href="<?= post_url($comment); ?>#comment_<?= $comment['comment_id']; ?>">
+            <a href="<?= getUrlByName('post', ['id' => $comment['post_id'], 'slug' => $comment['post_slug']]); ?>#comment_<?= $comment['comment_id']; ?>">
               <?= $comment['post_title']; ?>
             </a>
             <div class="comm-telo-body size-15 mt5 mb5">

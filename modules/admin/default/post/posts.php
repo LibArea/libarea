@@ -6,12 +6,12 @@
         array('id' => 'posts', 'url' => '/admin/posts', 'content' => lang('All')),
         array('id' => 'posts-ban', 'url' => '/admin/posts/ban', 'content' => lang('Deleted posts')),
       );
-      echo tabs_nav($pages, $data['sheet'], $uid);
+      echo returnBlock('tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
       ?>
 
       <?php if (!empty($data['posts'])) { ?>
         <?php foreach ($data['posts'] as $post) { ?>
-          <a href="<?= post_url($post); ?>">
+          <a href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
             <b><?= $post['post_title']; ?></b>
           </a>
           <div id="post_<?= $post['post_id']; ?>">

@@ -4,6 +4,6 @@
     <?= $data['content']; ?>
   </main>
   <aside>
-    <?php includeTemplate('/_block/info-page-menu', ['uid' => $uid]); ?>
+    <?= returnBlock('/info-page-menu', ['uid' => $uid]); ?>
   </aside>
 </div>

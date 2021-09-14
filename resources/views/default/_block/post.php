@@ -1,9 +1,9 @@
 <?php if (!empty($data['posts'])) { ?>
   <?php foreach ($data['posts'] as $post) { ?>
-
+  <?php $post_url = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
     <div class="white-box">
       <div class="pt15 pr15 pb0 pl15 size-13 flex">
-        <a class="gray-light" href="/u/<?= $post['user_login']; ?>">
+        <a class="gray-light" href="<?= getUrlByName('user', ['login' => $post['user_login']]); ?>">
           <?= user_avatar_img($post['user_avatar'], 'small', $post['user_login'], 'ava'); ?>
           <span class="mr5 ml5">
             <?= $post['user_login']; ?>
@@ -20,13 +20,13 @@
       </div>
 
       <?php if ($post['post_thumb_img']) { ?>
-        <a title="<?= $post['post_title']; ?>" href="<?= post_url($post); ?>">
+        <a title="<?= $post['post_title']; ?>" href="<?= $post_url; ?>">
           <?= post_img($post['post_thumb_img'], $post['post_title'],  'thumb no-mob right', 'thumbnails'); ?>
         </a>
       <?php } ?>
 
       <div class="post-body">
-        <a href="<?= post_url($post); ?>">
+        <a href="<?= $post_url; ?>">
           <h2 class="title size-24 ml15 mt0 mb0"><?= $post['post_title']; ?>
             <?php if ($post['post_is_deleted'] == 1) { ?>
               <i class="icon-trash-empty blue"></i>
@@ -76,7 +76,7 @@
         </div>
         <?php if ($post['post_content_img']) { ?>
           <div class="post-img">
-            <a title="<?= $post['post_title']; ?>" href="<?= post_url($post); ?>">
+            <a title="<?= $post['post_title']; ?>" href="<?= $post_url; ?>">
               <?= post_img($post['post_content_img'], $post['post_title'], 'img-post', 'cover'); ?>
             </a>
           </div>
@@ -84,7 +84,7 @@
         <div class="pt5 pr10 pb10 mt5 pl10 hidden lowercase flex justify-content-between">
           <?= votes($uid['user_id'], $post, 'post'); ?>
           <?php if ($post['post_answers_count'] != 0) { ?>
-            <a class="flex gray-light feed-icon" href="<?= post_url($post); ?>">
+            <a class="flex gray-light feed-icon" href="<?= $post_url; ?>">
               <?php if ($post['post_type'] == 0) { ?>
                 <i class="icon-commenting-o mr5"></i>
                 <?= $post['post_answers_count'] + $post['post_comments_count']; ?>
@@ -99,7 +99,6 @@
       </div>
     </div>
   <?php } ?>
-
 <?php } else { ?>
   <?= no_content('There are no posts'); ?>
 <?php } ?>

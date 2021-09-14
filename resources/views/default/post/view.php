@@ -4,7 +4,7 @@
       <?php if ($data['post']['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
         <div class="white-box pt10 pr15 pb15 pl15<?php if ($data['post']['post_is_deleted'] == 1) { ?> bg-red-300<?php } ?>">
           <div class="post-body">
-            <h1 class="title size-24">
+            <h1 class="title mb0 size-24">
               <?= $data['post']['post_title']; ?>
               <?php if ($data['post']['post_is_deleted'] == 1) { ?>
                 <i class="icon-trash-empty blue"></i>
@@ -97,7 +97,7 @@
               <div class="bg-yellow-100 pt5 pr5 pb5 pl10 mt10 mb10">
                 <h3 class="recommend">ЛО
                   <span class="right">
-                    <a rel="nofollow" href="<?= post_url($data['post']); ?>#answer_<?= $data['lo']['answer_id']; ?>">
+                    <a rel="nofollow" href="<?= getUrlByName('post', ['id' => $data['post']['post_id'], 'slug' => $data['post']['post_slug']]); ?>#answer_<?= $data['lo']['answer_id']; ?>">
                       <i class="icon-diamond red"></i>
                     </a>
                   </span>
@@ -124,7 +124,7 @@
                   <div class="mb5">
                     <?php $num++; ?>
                     <span class="related-count gray-light size-15"><?= $num; ?></span>
-                    <a href="<?= post_url($related); ?>">
+                    <a href="<?= getUrlByName('post', ['id' => $related['post_id'], 'slug' => $related['post_slug']]); ?>">
                       <?= $related['post_title']; ?>
                     </a>
                   </div>
@@ -205,12 +205,12 @@
 
       <?php if ($data['post']['post_draft'] == 0) { ?>
         <?php if ($data['post']['post_type'] == 0) { ?>
-          <?php includeTemplate('/post/comment-view', ['data' => $data, 'uid' => $uid]); ?>
+          <?= returnBlock('/comments-view', ['data' => $data, 'uid' => $uid]); ?>
           <?php if ($data['post']['post_closed'] == 1) { ?>
             <?= no_content('The post is closed'); ?>
           <?php } ?>
         <?php } else { ?>
-          <?php includeTemplate('/post/questions-view', ['data' => $data, 'uid' => $uid]); ?>
+          <?= returnBlock('/questions-view', ['data' => $data, 'uid' => $uid]); ?>
           <?php if ($data['post']['post_closed'] == 1) { ?>
             <?= no_content('The question is closed'); ?>
           <?php } ?>
@@ -252,7 +252,7 @@
         <h3 class="recommend size-13"><?= lang('Recommended'); ?></h3>
         <?php foreach ($data['recommend'] as  $rec_post) { ?>
           <div class="mb15 hidden flex">
-            <a class="gray size-15" href="<?= post_url($rec_post); ?>">
+            <a class="gray size-15" href="<?= getUrlByName('post', ['id' => $rec_post['post_id'], 'slug' => $rec_post['post_slug']]); ?>">
               <?php if ($rec_post['post_answers_count'] > 0) { ?>
                 <div class="up-box-post bg-green-400 size-13 center mr15">
                   <?= $rec_post['post_answers_count'] ?>
@@ -261,7 +261,7 @@
                 <div class="up-box-post bg-gray-300 gray size-13 center mr15">0</div>
               <?php } ?>
             </a>
-            <a class="gray size-13" href="<?= post_url($rec_post); ?>">
+            <a class="gray size-13" href="<?= getUrlByName('post', ['id' => $rec_post['post_id'], 'slug' => $rec_post['post_slug']]); ?>">
               <?= $rec_post['post_title']; ?>
             </a>
           </div>

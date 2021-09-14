@@ -6,12 +6,12 @@
         array('id' => 'comments', 'url' => '/admin/comments', 'content' => lang('All')),
         array('id' => 'comments-ban', 'url' => '/admin/comments/ban', 'content' => lang('Deleted comments')),
       );
-      echo tabs_nav($pages, $data['sheet'], $uid);
+      echo returnBlock('tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
       ?>
 
       <?php if (!empty($data['comments'])) { ?>
         <?php foreach ($data['comments'] as $comment) { ?>
-          <a href="<?= post_url($comment); ?>">
+          <a href="<?= getUrlByName('post', ['id' => $comment['post_id'], 'slug' => $comment['post_slug']]); ?>">
             <b><?= $comment['post_title']; ?></b>
           </a>
           <div id="comment_<?= $comment['comment_id']; ?>">

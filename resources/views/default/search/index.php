@@ -9,7 +9,7 @@
         <?php if (Lori\Config::get(Lori\Config::PARAM_SEARCH) == 0) { ?>
           <?php foreach ($data['result'] as  $post) { ?>
             <div class="search max-width mb20">
-              <a class="search-title size-21" href="<?= post_url($post); ?>">
+              <a class="search-title size-21" href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
                 <?= $post['post_title']; ?>
               </a>
               <span class="no-md"><?= $post['post_content']; ?>...</span>
@@ -24,7 +24,7 @@
                 <a class="search-info gray lowercase" href="/s/<?= $post['space_slug']; ?>"><?= $post['space_name']; ?></a>
                 — <?= lang('Like'); ?> <?= $post['post_votes']; ?>
               </div>
-              <a class="search-title" href="<?= post_url($post); ?>">
+              <a class="search-title" href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
                 <?= $post['_title']; ?>
               </a>
               <div class="no-md"><?= $post['_content']; ?></div>

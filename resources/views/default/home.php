@@ -6,7 +6,7 @@
         <div class="size-21 pb15"><?= Lori\Config::get(Lori\Config::PARAM_BANNER_DESC); ?>...</div>
       </div>
       <div class="pb5">
-        <?php includeTemplate('/_block/banner-login'); ?>
+        <?= returnBlock('banner-login'); ?>
       </div>
     </div>
   </div>
@@ -14,13 +14,12 @@
 
 <div class="wrap">
   <main class="telo">
-    <?php
-    $pages = array(
-      array('id' => 'feed', 'url' => '/', 'content' => lang('Feed')),
-      array('id' => 'all', 'url' => '/all', 'content' => lang('All'), 'auth' => 'yes'),
-      array('id' => 'top', 'url' => '/top', 'content' => lang('Top')),
-    );
-    echo tabs_nav($pages, $data['sheet'], $uid);
+    <?php $pages = array(
+          array('id' => 'feed', 'url' => '/', 'content' => lang('Feed')),
+          array('id' => 'all', 'url' => '/all', 'content' => lang('All'), 'auth' => 'yes'),
+          array('id' => 'top', 'url' => '/top', 'content' => lang('Top')),
+        );
+        echo returnBlock('tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
     ?>
 
     <?php if (Request::getUri() == '/' && $uid['user_id'] > 0 && empty($data['space_user'])) { ?>
@@ -32,7 +31,7 @@
       </div>
     <?php } ?>
 
-    <?php includeTemplate('/_block/post', ['data' => $data, 'uid' => $uid]); ?>
+    <?= returnBlock('/post', ['data' => $data, 'uid' => $uid]); ?>
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], null); ?>
   </main>
   <aside>
@@ -67,7 +66,7 @@
               <span class="ml5"></span>
               <?= $answer['answer_date']; ?>
             </div>
-            <a class="gray" href="<?= post_url($answer); ?>#answer_<?= $answer['answer_id']; ?>">
+            <a class="gray" href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">
               <?= $answer['answer_content']; ?>...
             </a>
           </div>

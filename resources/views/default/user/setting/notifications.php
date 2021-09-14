@@ -1,7 +1,7 @@
 <div class="wrap">
   <main class="white-box pt15 pr15 pb5 pl15">
     <?= breadcrumb('/', lang('Home'), '/u/' . $uid['user_login'], lang('Profile'), lang('Notifications')); ?>
-    <?php includeTemplate('/_block/setting-nav', ['data' => $data, 'uid' => $uid]); ?>
+    <?= returnBlock('/setting-nav', ['data' => $data, 'uid' => $uid]); ?>
 
     <form class="pt10" action="/users/setting/notifications/edit" method="post">
       <?php csrf_field(); ?>

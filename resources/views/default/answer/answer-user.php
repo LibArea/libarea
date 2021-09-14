@@ -16,7 +16,7 @@
                 <?= $answer['date']; ?>
               </span>
             </div>
-            <a class="mr5 block" href="<?= post_url($answer); ?>">
+            <a class="mr5 block" href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>">
               <?= $answer['post_title']; ?>
             </a>
             <?= $answer['content']; ?>
@@ -36,6 +36,6 @@
     <?php } ?>
   </main>
   <aside>
-    <?php includeTemplate('/_block/user-menu', ['uid' => $uid]); ?>
+    <?= returnBlock('/user-menu', ['uid' => $uid]); ?>
   </aside>
 </div>

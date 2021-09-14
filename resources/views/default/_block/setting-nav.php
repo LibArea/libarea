@@ -5,5 +5,5 @@ $pages = array(
   array('id' => 'security', 'url' => '/u/' . $uid['user_login'] . '/setting/security', 'content' => lang('Password')),
   array('id' => 'notifications', 'url' => '/u/' . $uid['user_login'] . '/setting/notifications', 'content' => lang('Notifications')),
 );
-echo tabs_nav($pages, $data['sheet'], $uid);
+echo returnBlock('tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
 ?>

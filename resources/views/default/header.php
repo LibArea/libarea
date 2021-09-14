@@ -2,7 +2,7 @@
 <html lang="ru" prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
 
 <head>
-  <?php includeTemplate('/meta-tags', ['meta' => $meta]); ?>
+  <?= returnBlock('/meta-tags', ['meta' => $meta]); ?>
   <?php getRequestHead()->output(); ?>
   <script src="/assets/js/jquery-3.6.0.min.js"></script>
   <link rel="stylesheet" href="/assets/css/style.css">

@@ -1,7 +1,7 @@
 <div class="wrap">
   <main class="white-box pt5 pr15 pb5 pl15">
     <?= breadcrumb('/', lang('Home'), '/s/' . $data['space']['space_slug'], $data['space']['space_name'], lang('Logo') . ' - ' . $data['space']['space_slug']); ?>
-    <?php includeTemplate('/_block/space-nav', ['data' => $data, 'uid' => $uid]); ?>
+    <?= returnBlock('/space-nav', ['data' => $data, 'uid' => $uid]); ?>
 
     <div class="box create setting space">
       <form action="/space/logo/edit" method="post" enctype="multipart/form-data">

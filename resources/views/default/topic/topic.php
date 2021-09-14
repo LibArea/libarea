@@ -39,7 +39,7 @@
       </div>
     </div>
 
-    <?php includeTemplate('/_block/post', ['data' => $data, 'uid' => $uid]); ?>
+    <?= returnBlock('/post', ['data' => $data, 'uid' => $uid]); ?>
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/topic/' . $data['topic']['topic_slug']); ?>
 
   </main>
@@ -57,6 +57,6 @@
       </div>
     </div>
 
-    <?php includeTemplate('/topic/topic-sidebar', ['data' => $data, 'uid' => $uid]); ?>
+    <?= returnBlock('/topic-sidebar', ['data' => $data, 'uid' => $uid]); ?>
   </aside>
 </div>

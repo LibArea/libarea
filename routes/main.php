@@ -102,7 +102,7 @@ Route::endType();
 
 // Другие страницы без авторизии
 Route::get('/post/{id}')->controller('Post\PostController')->where(['id' => '[0-9-]+']);
-Route::get('/post/{id}/{slug}')->controller('Post\PostController')->where(['id' => '[0-9-]+', 'slug' => '[A-Za-z0-9-_]+']);
+Route::get('/post/{id}/{slug}')->controller('Post\PostController')->where(['id' => '[0-9-]+', 'slug' => '[A-Za-z0-9-_]+'])->name('post');
 
 Route::get('/info')->controller('InfoController');
 Route::get('/info/privacy')->controller('InfoController@privacy');
@@ -110,7 +110,7 @@ Route::get('/info/restriction')->controller('InfoController@restriction');
 
 Route::get('/users')->controller('User\UserController');
 Route::get('/users/page/{page?}')->controller('User\UserController')->where(['page' => '[0-9]+']);
-Route::get('/u/{login}')->controller('User\UserController@profile')->where(['login' => '[A-Za-z0-9]+']);
+Route::get('/u/{login}')->controller('User\UserController@profile')->where(['login' => '[A-Za-z0-9]+'])->name('user');
 
 Route::get('/u/{login}/posts')->controller('Post\PostController@posts', ['feed'])->where(['login' => '[A-Za-z0-9]+']);
 Route::get('/u/{login}/answers')->controller('Answer\AnswerController@userAnswers')->where(['login' => '[A-Za-z0-9]+']);
@@ -123,7 +123,7 @@ Route::get('/answers/page/{page?}')->controller('Answer\AnswerController')->wher
 
 Route::get('/spaces')->controller('Space\SpaceController');
 Route::get('/spaces/page/{page?}')->controller('Space\SpaceController')->where(['page' => '[0-9]+']);
-Route::get('/s/{slug}')->controller('Space\SpaceController@posts', ['feed'])->where(['slug' => '[A-Za-z0-9_]+']);
+Route::get('/s/{slug}')->controller('Space\SpaceController@posts', ['feed'])->where(['slug' => '[A-Za-z0-9_]+'])->name('space');
 Route::get('/s/{slug}/page/{page?}')->controller('Space\SpaceController@posts', ['feed'])->where(['slug' => '[A-Za-z0-9_]+', 'page' => '[0-9]+']);
 Route::get('/s/{slug}/top')->controller('Space\SpaceController@posts', ['top'])->where(['slug' => '[A-Za-z0-9_]+']);
 Route::get('/s/{slug}/top/page/{page?}')->controller('Space\SpaceController@posts', ['top'])->where(['slug' => '[A-Za-z0-9_]+', 'page' => '[0-9]+']);
@@ -134,13 +134,13 @@ Route::get('/moderations')->controller('ActionController@moderation');
 
 Route::get('/topics')->controller('Topic\TopicController')->where(['page' => '[0-9]+']);
 Route::get('/topics/page/{page?}')->controller('Topic\TopicController')->where(['page' => '[0-9]+']);
-Route::get('/topic/{slug}')->controller('Topic\TopicController@posts', ['feed'])->where(['slug' => '[A-Za-z0-9-]+']);
+Route::get('/topic/{slug}')->controller('Topic\TopicController@posts', ['feed'])->where(['slug' => '[A-Za-z0-9-]+'])->name('topic');
 Route::get('/topic/{slug}/page/{page?}')->controller('Topic\TopicController@posts', ['feed'])->where(['slug' => '[A-Za-z0-9-]+', 'page' => '[0-9]+']);
 Route::get('/topic/{slug}/info')->controller('Topic\TopicController@info')->where(['slug' => '[A-Za-z0-9-]+']);
 
 Route::get('/web')->controller('Web\WebController');
 Route::get('/web/page/{page?}')->controller('Web\WebController')->where(['page' => '[0-9]+']);
-Route::get('/domain/{domain}')->controller('Web\WebController@posts', ['feed'])->where(['domain' => '[A-Za-z0-9-.]+']);
+Route::get('/domain/{domain}')->controller('Web\WebController@posts', ['feed'])->where(['domain' => '[A-Za-z0-9-.]+'])->name('domain');
 Route::get('/domain/{domain}/page/{page?}')->controller('Web\WebController@posts', ['feed'])->where(['domain' => '[A-Za-z0-9-.]+', 'page' => '[0-9]+']);
 
 Route::get('/')->controller('HomeController', ['feed']);

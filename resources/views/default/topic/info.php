@@ -27,7 +27,7 @@
             <div class="mb5">
               <?php $num++; ?>
               <span class="related-count gray-light size-15"><?= $num; ?></span>
-              <a href="<?= post_url($related); ?>">
+              <a href="<?= getUrlByName('post', ['id' => $related['post_id'], 'slug' => $related['post_slug']]); ?>">
                 <?= $related['post_title']; ?>
               </a>
             </div>
@@ -52,6 +52,6 @@
       </div>
     </div>
 
-    <?php includeTemplate('/topic/topic-sidebar', ['data' => $data, 'uid' => $uid]); ?>
+    <?= returnBlock('/topic-sidebar', ['data' => $data, 'uid' => $uid]); ?>
   </aside>
 </div>

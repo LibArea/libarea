@@ -1,7 +1,7 @@
 <div class="wrap">
   <main class="white-box pt15 pr15 pb5 pl15">
     <?= breadcrumb('/', lang('Home'), '/u/' . $uid['user_login'], lang('Profile'), lang('Change password')); ?>
-    <?php includeTemplate('/_block/setting-nav', ['data' => $data, 'uid' => $uid]); ?>
+    <?= returnBlock('/setting-nav', ['data' => $data, 'uid' => $uid]); ?>
 
     <form class="pt10" action="/users/setting/security/edit" method="post" enctype="multipart/form-data">
       <?php csrf_field(); ?>

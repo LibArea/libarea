@@ -15,7 +15,7 @@
         array('id' => 'spaces', 'url' => '/spaces', 'content' => lang('All')),
         array('id' => 'my-space', 'url' => '/space/my', 'content' => lang('Signed'), 'auth' => 'yes'),
       );
-      echo tabs_nav($pages, $data['sheet'], $uid);
+      echo returnBlock('tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
       ?>
 
       <?php if (!empty($data['spaces'])) { ?>

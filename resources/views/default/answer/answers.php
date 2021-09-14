@@ -15,7 +15,7 @@
               </a>
               <span class="gray lowercase"><?= $answer['date']; ?></span>
             </div>
-            <a href="<?= post_url($answer); ?>#answer_<?= $answer['answer_id']; ?>">
+            <a href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">
               <?= $answer['post_title']; ?>
             </a>
             <div class="answ-telo">

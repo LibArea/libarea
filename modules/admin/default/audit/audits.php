@@ -6,7 +6,7 @@
         array('id' => 'approved', 'url' => '/admin/audits', 'content' => lang('New ones')),
         array('id' => 'audits', 'url' => '/admin/audits/approved', 'content' => lang('Approved')),
       );
-      echo tabs_nav($pages, $data['sheet'], $uid);
+      echo returnBlock('tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
       ?>
 
       <?php if (!empty($data['audits'])) { ?>
