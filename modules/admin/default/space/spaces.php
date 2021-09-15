@@ -30,10 +30,9 @@
                 <?= spase_logo_img($sp['space_img'], 'max', $sp['space_slug'], 'ava-64'); ?>
               </td>
               <td class="size-13">
-                <a class="size-21" title="<?= $sp['space_name']; ?>" href="/s/<?= $sp['space_slug']; ?>">
+                <a class="size-21" title="<?= $sp['space_name']; ?>" href="<?= getUrlByName('space', ['slug' => $sp['space_slug']]); ?>">
                   <?= $sp['space_name']; ?> (s/<?= $sp['space_slug']; ?>)
                 </a>
-
                 <sup>
                   <?php if ($sp['space_type'] == 1) {  ?>
                     <span class="red"><?= lang('official'); ?></span>
@@ -41,15 +40,13 @@
                     <?= lang('All'); ?>
                   <?php } ?>
                 </sup>
-
                 <div class="content-telo">
                   <?= $sp['space_description']; ?>
                 </div>
-
                 <?= $sp['space_date']; ?>
                 <span class="mr5 ml5"> &#183; </span>
                 <?= user_avatar_img($sp['user_avatar'], 'small', $sp['user_login'], 'ava'); ?>
-                <a target="_blank" rel="noopener" href="/u/<?= $sp['user_login']; ?>">
+                <a target="_blank" rel="noopener" href="<?= getUrlByName('user', ['login' => $sp['user_login']]); ?>">
                   <?= $sp['user_login']; ?>
                 </a>
               </td>
@@ -74,7 +71,7 @@
         </table>
         * <?= lang('Ban-space-info-posts'); ?>...
       <?php } else { ?>
-        <?= no_content('No'); ?>
+        <?= returnBlock('no-content', ['lang' => 'No']); ?>
       <?php } ?>
     </div>
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/admin/spaces'); ?>

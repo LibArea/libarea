@@ -32,7 +32,7 @@
               <?php } ?>
             </h1>
             <div class="size-13 lowercase flex gray-light">
-              <a class="gray" href="/u/<?= $data['post']['user_login']; ?>">
+              <a class="gray" href="<?= getUrlByName('user', ['login' => $data['post']['user_login']]); ?>">
                 <?= user_avatar_img($data['post']['user_avatar'], 'small', $data['post']['user_login'], 'ava'); ?>
                 <span class="mr5 ml5">
                   <?= $data['post']['user_login']; ?>
@@ -73,7 +73,7 @@
                     <?= $data['post']['post_hits_count']; ?>
                   </span>
                 <?php } ?>
-                <?= content_ip($data['post']['post_ip'], $uid); ?>
+                <?= returnBlock('show-ip', ['ip' => $data['post']['post_ip'], 'user_trust_level' => $uid['user_trust_level']]); ?>
               <?php } ?>
             </div>
           </div>
@@ -135,7 +135,7 @@
               <div class="mb20">
                 <h3 class="uppercase mb5 mt0 fw300 size-13 gray"><?= lang('Topics'); ?>:</h3>
                 <?php foreach ($data['topics'] as $topic) { ?>
-                  <a class="tags gray size-13" href="/topic/<?= $topic['topic_slug']; ?>">
+                  <a class="tags gray size-13" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
                     <?= $topic['topic_title']; ?>
                   </a>
                 <?php } ?>
@@ -207,16 +207,16 @@
         <?php if ($data['post']['post_type'] == 0) { ?>
           <?= returnBlock('/comments-view', ['data' => $data, 'uid' => $uid]); ?>
           <?php if ($data['post']['post_closed'] == 1) { ?>
-            <?= no_content('The post is closed'); ?>
+            <?= returnBlock('no-content', ['lang' => 'The post is closed']); ?>
           <?php } ?>
         <?php } else { ?>
           <?= returnBlock('/questions-view', ['data' => $data, 'uid' => $uid]); ?>
           <?php if ($data['post']['post_closed'] == 1) { ?>
-            <?= no_content('The question is closed'); ?>
+            <?= returnBlock('no-content', ['lang' => 'The question is closed']); ?>
           <?php } ?>
         <?php } ?>
       <?php } else { ?>
-        <?= no_content('This is a draft'); ?>
+        <?= returnBlock('no-content', ['lang' => 'This is a draft']); ?>
       <?php } ?>
     </article>
   </main>
@@ -224,7 +224,7 @@
   <aside>
     <div class="white-box pt5 pr15 pb5 pl15">
       <div class="mt10 mb10">
-        <a class="flex" title="<?= $data['post']['space_name']; ?>" href="/s/<?= $data['post']['space_slug']; ?>">
+        <a class="flex" title="<?= $data['post']['space_name']; ?>" href="<?= getUrlByName('space', ['slug' => $data['post']['space_slug']]); ?>">
           <?= spase_logo_img($data['post']['space_img'], 'max', $data['post']['space_slug'], 'ava-24 mr5'); ?>
           <span class="ml5"><?= $data['post']['space_name']; ?></span>
         </a>

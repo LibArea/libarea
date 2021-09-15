@@ -33,12 +33,12 @@
                 <div class="mt0">
                   <?php if ($uid['user_login'] != $data['user']['user_login']) { ?>
                     <?php if ($data['button_pm'] === true) { ?>
-                      <a class="button block center size-13 mb15" href="/u/<?= $data['user']['user_login']; ?>/mess">
+                      <a class="button block center size-13 mb15" href="<?= getUrlByName('user', ['login' => $data['user']['user_login']]); ?>/mess">
                         <?= lang('Write a message'); ?>
                       </a>
                     <?php } ?>
                   <?php } else { ?>
-                    <a class="button block center mb15" href="/u/<?= $uid['user_login']; ?>/setting">
+                    <a class="button block center mb15" href="<?= getUrlByName('user', ['login' => $data['user']['user_login']]); ?>/setting">
                       <?= lang('Settings'); ?>
                     </a>
                   <?php } ?>
@@ -50,7 +50,7 @@
                   <div class="mb5 size-15">
                     <label class="required"><?= lang('Posts-m'); ?>:</label>
                     <span class="right">
-                      <a title="<?= lang('Posts-m'); ?> <?= $data['user']['user_login']; ?>" href="/u/<?= $data['user']['user_login']; ?>/posts">
+                      <a title="<?= lang('Posts-m'); ?> <?= $data['user']['user_login']; ?>" href="<?= getUrlByName('posts-user', ['login' => $data['user']['user_login']]); ?>">
                         <?= $data['count']['count_posts']; ?>
                       </a>
                     </span>
@@ -60,7 +60,7 @@
                   <div class="mb5 size-15">
                     <label class="required"><?= lang('Answers'); ?>:</label>
                     <span class="right">
-                      <a title="<?= lang('Answers'); ?> <?= $data['user']['user_login']; ?>" href="/u/<?= $data['user']['user_login']; ?>/answers">
+                      <a title="<?= lang('Answers'); ?> <?= $data['user']['user_login']; ?>" href="<?= getUrlByName('answers-user', ['login' => $data['user']['user_login']]); ?>">
                         <?= $data['count']['count_answers']; ?>
                       </a>
                     </span>
@@ -70,7 +70,7 @@
                   <div class="mb5 size-15">
                     <label class="required"><?= lang('Comments'); ?>:</label>
                     <span class="right">
-                      <a title="<?= lang('Comments'); ?> <?= $data['user']['user_login']; ?>" href="/u/<?= $data['user']['user_login']; ?>/comments">
+                      <a title="<?= lang('Comments'); ?> <?= $data['user']['user_login']; ?>" href="<?= getUrlByName('comments-user', ['login' => $data['user']['user_login']]); ?>">
                         <?= $data['count']['count_comments']; ?>
                       </a>
                     </span>
@@ -82,7 +82,7 @@
                   <span class="d">
                     <?php foreach ($data['spaces_user'] as  $space) { ?>
                       <div class="mt5 mb5">
-                        <a class="flex relative pt5 pb5 hidden gray" href="/s/<?= $space['space_slug']; ?>">
+                        <a class="flex relative pt5 pb5 hidden gray" href="<?= getUrlByName('space', ['slug' => $space['space_slug']]); ?>" title="<?= $space['space_name']; ?>">
                           <?= spase_logo_img($space['space_img'], 'small', $space['space_name'], 'space-logo mr5'); ?>
                           <span class="bar-name size-13"><?= $space['space_name']; ?></span>
                         </a>
@@ -178,14 +178,14 @@
                   </a>
 
                   <div class="size-13 lowercase">
-                    <a class="gray ml5" href="/u/<?= $data['user']['user_login']; ?>">
+                    <a class="gray ml5" href="<?= getUrlByName('user', ['login' => $data['user']['user_login']]); ?>">
                       <?= user_avatar_img($data['user']['user_avatar'], 'small', $data['user']['user_login'], 'ava mr5'); ?>
                       <?= $data['user']['user_login']; ?>
                     </a>
 
                     <span class="gray ml5"><?= $data['onepost']['post_date'] ?></span>
 
-                    <a class="gray ml5" href="/s/<?= $data['onepost']['space_slug']; ?>" title="<?= $data['onepost']['space_name']; ?>">
+                    <a class="gray ml5" href="<?= getUrlByName('space', ['slug' => $data['onepost']['space_slug']]); ?>" title="<?= $data['onepost']['space_name']; ?>">
                       <?= $data['onepost']['space_name']; ?>
                     </a>
 

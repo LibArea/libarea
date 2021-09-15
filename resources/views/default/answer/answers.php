@@ -10,7 +10,7 @@
           <?php if ($answer['answer_is_deleted'] == 0) { ?>
             <div class="flex size-13">
               <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'ava'); ?>
-              <a class="gray mr5 ml5" href="/u/<?= $answer['user_login']; ?>">
+              <a class="gray mr5 ml5" href="<?= getUrlByName('user', ['login' => $answer['user_login']]); ?>">
                 <?= $answer['user_login']; ?>
               </a>
               <span class="gray lowercase"><?= $answer['date']; ?></span>
@@ -37,8 +37,8 @@
       <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/answers'); ?>
 
     <?php } else { ?>
-      <?= no_content('There are no comments'); ?>
+      <?= returnBlock('no-content', ['lang' => 'There are no comments']); ?>
     <?php } ?>
   </main>
-  <?= aside('lang', ['lang' => lang('answers-desc')]); ?>
+  <?= returnBlock('aside-lang', ['lang' => lang('answers-desc')]); ?>
 </div>

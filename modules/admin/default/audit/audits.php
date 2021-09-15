@@ -74,7 +74,7 @@
           <?php } ?>
         </table>
       <?php } else { ?>
-        <?= no_content('No'); ?>
+        <?= returnBlock('no-content', ['lang' => 'No']); ?>
       <?php } ?>
     </div>
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/admin/audits'); ?>

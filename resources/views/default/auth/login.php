@@ -26,5 +26,5 @@
       <?= lang('no-invate-txt'); ?>
     <?php } ?>
   </main>
-  <?= aside('lang', ['lang' => lang('info-login')]); ?>
+  <?= returnBlock('aside-lang', ['lang' => lang('info-login')]); ?>
 </div>

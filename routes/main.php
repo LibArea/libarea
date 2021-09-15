@@ -40,10 +40,10 @@ Route::before('Authorization@noAuth')->getGroup();
     Route::get('/{controller}/edit/{id}')->controller('<controller>\Edit<controller>Controller@edit')->where(['id' => '[0-9]+']);
 
     Route::get('/u/{login}/invitation')->controller('User\InvitationsUserController@invitationForm')->where(['login' => '[A-Za-z0-9]+']);
-    Route::get('/u/{login}/setting')->controller('User\SettingController@settingForm')->where(['login' => '[A-Za-z0-9]+']); 
-    Route::get('/u/{login}/setting/avatar')->controller('User\SettingController@avatarForm')->where(['login' => '[A-Za-z0-9]+']);
-    Route::get('/u/{login}/setting/security')->controller('User\SettingController@securityForm')->where(['login' => '[A-Za-z0-9]+']);
-    Route::get('/u/{login}/setting/notifications')->controller('User\SettingController@notificationsForm')->where(['login' => '[A-Za-z0-9]+']);
+    Route::get('/u/{login}/setting')->controller('User\SettingController@settingForm')->where(['login' => '[A-Za-z0-9]+'])->name('setting'); 
+    Route::get('/u/{login}/setting/avatar')->controller('User\SettingController@avatarForm')->where(['login' => '[A-Za-z0-9]+'])->name('setting-avatar');
+    Route::get('/u/{login}/setting/security')->controller('User\SettingController@securityForm')->where(['login' => '[A-Za-z0-9]+'])->name('setting-security');
+    Route::get('/u/{login}/setting/notifications')->controller('User\SettingController@notificationsForm')->where(['login' => '[A-Za-z0-9]+'])->name('setting-notifications');
 
     Route::get('/post/img/{id}/remove')->controller('Post\EditPostController@imgPostRemove')->where(['id' => '[0-9]+']);
     Route::get('/u/{login}/delete/cover')->controller('User\SettingController@userCoverRemove')->where(['login' => '[A-Za-z0-9]+']); 
@@ -110,11 +110,11 @@ Route::get('/info/restriction')->controller('InfoController@restriction');
 
 Route::get('/users')->controller('User\UserController');
 Route::get('/users/page/{page?}')->controller('User\UserController')->where(['page' => '[0-9]+']);
-Route::get('/u/{login}')->controller('User\UserController@profile')->where(['login' => '[A-Za-z0-9]+'])->name('user');
 
-Route::get('/u/{login}/posts')->controller('Post\PostController@posts', ['feed'])->where(['login' => '[A-Za-z0-9]+']);
-Route::get('/u/{login}/answers')->controller('Answer\AnswerController@userAnswers')->where(['login' => '[A-Za-z0-9]+']);
-Route::get('/u/{login}/comments')->controller('Comment\CommentController@userComments')->where(['login' => '[A-Za-z0-9]+']);
+Route::get('/u/{login}')->controller('User\UserController@profile')->where(['login' => '[A-Za-z0-9]+'])->name('user');
+Route::get('/u/{login}/posts')->controller('Post\PostController@posts', ['feed'])->where(['login' => '[A-Za-z0-9]+'])->name('posts-user');
+Route::get('/u/{login}/answers')->controller('Answer\AnswerController@userAnswers')->where(['login' => '[A-Za-z0-9]+'])->name('answers-user');
+Route::get('/u/{login}/comments')->controller('Comment\CommentController@userComments')->where(['login' => '[A-Za-z0-9]+'])->name('comments-user');
 
 Route::get('/comments')->controller('Comment\CommentController');
 Route::get('/comments/page/{page?}')->controller('Comment\CommentController')->where(['page' => '[0-9]+']);

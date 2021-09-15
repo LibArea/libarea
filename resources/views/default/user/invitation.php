@@ -1,10 +1,9 @@
 <div class="wrap">
   <main>
     <div class="white-box pt5 pr15 pb10 pl15">
-      <?= breadcrumb('/', lang('Home'), '/u/' . $uid['user_login'], lang('Profile'), lang('Invites')); ?>
-
+      <?= breadcrumb('/', lang('Home'), getUrlByName('user', ['login' => $uid['user_login']]), lang('Profile'), lang('Invites')); ?>
+      
       <?php if ($uid['user_trust_level'] > 1) { ?>
-
         <form method="post" action="/invitation/create">
           <?php csrf_field(); ?>
           <div class="boxline">
@@ -54,5 +53,5 @@
       <?php } ?>
     </div>
   </main>
-  <?= aside('lang', ['lang' => lang('You can invite your friends')]); ?>
+  <?= returnBlock('aside-lang', ['lang' => lang('You can invite your friends')]); ?>
 </div>

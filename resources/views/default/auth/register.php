@@ -11,15 +11,13 @@
           ['title' => lang('Repeat the password'), 'type' => 'password', 'name' => 'password_confirm', 'value' => '', 'min' => 8, 'max' => 32],
         ]); ?>
 
-        <?php captcha(); ?>
+        <?= returnBlock('captcha'); ?>
 
         <div class="boxline">
-          <div class="boxline">
-            <button type="submit" class="button"><?= lang('Sign up'); ?></button>
-            <span class="mr5 ml15 size-13"><a href="/login"><?= lang('Sign in'); ?></a></span>
-          </div>
+          <button type="submit" class="button"><?= lang('Sign up'); ?></button>
+          <span class="mr5 ml15 size-13"><a href="/login"><?= lang('Sign in'); ?></a></span>
         </div>
       </form>
   </main>
-  <?= aside('lang', ['lang' => lang('info-security')]); ?>
+  <?= returnBlock('aside-lang', ['lang' => lang('info-security')]); ?>
 </div>

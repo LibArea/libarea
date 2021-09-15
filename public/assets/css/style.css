@@ -32,7 +32,6 @@ body.scroll {
 body {
   line-height: 1.5rem;
   font-family: Inter, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
-  min-height: 100%;
   background-color: #f3f3f3;
   padding-top: 50px;
 }
@@ -192,6 +191,7 @@ img {
 .width-20 { width: 20%; }
 .width-30 { width: 30%; }
 .width-40 { width: 40%; }
+.width-50 { width: 50%; }
 .width-100 { width: 100%; }
 .clear { clear: both; }
 .left { float: left; }
@@ -218,6 +218,7 @@ img {
 .size-15 { font-size: 15px; }
 .size-21 { font-size: 21px; }
 .size-31 { font-size: 31px; }
+.size-150 { font-size: 150px; }
 
 .size-24 {
   font-size: 24px;
@@ -260,6 +261,11 @@ img {
 
 .sticky {
   position: sticky;
+  top: 67px;
+}
+
+.pt0 .sticky {
+  position: sticky;
   top: 17px;
 }
 
@@ -274,7 +280,7 @@ main.w-100 {
 h1 {
   font-weight: 400;
   font-size: 1.2rem;
-  margin: 5px 0;
+  margin: 5px 0 15px 0;
 }
 
 code {
@@ -544,8 +550,8 @@ img.img-post,
 .reply { display: none; }
 .reply.active { display: block; }
 
-.answers_subtree .answ-telo img p {
-  max-width: 98%;
+.answers_subtree .answ-telo p img {
+  max-width: 99%;
   max-height: 500px;
   display: block;
 }
@@ -723,8 +729,9 @@ footer a.footer:hover { color: #ddd; }
 
 .dr-menu {
   display: block;
-  padding: 1px 9px 1px 6px;
+  padding: 3px 9px 3px 6px;
   font-weight: 500;
+  color: #5b7083;
 }
 
 .dr-menu:hover {
@@ -846,13 +853,14 @@ footer a.footer:hover { color: #ddd; }
   .no-mob,
   aside { display: none; }
   footer { padding: 8px; }
+  .telo-404 .width-40.ml15 { width: 100%; } 
 
   main,
   main.w-75 {
     width: 100%;
     margin-right: 0;
   }
-
+ 
   .video-object {
     width: 320px;
     height: 210px;

@@ -23,7 +23,7 @@
                 <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'ava-64'); ?>
               </td>
               <td>
-                <a class="size-21" rel="nofollow noreferrer" href="/topic/<?= $topic['topic_slug']; ?>">
+                <a class="size-21" rel="nofollow noreferrer" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
                   <?= $topic['topic_title']; ?>
                 </a>
                 <span class="green mr5 ml5">topic/<?= $topic['topic_slug']; ?></span>
@@ -47,7 +47,7 @@
           <?php } ?>
         </table>
       <?php } else { ?>
-        <?= no_content('No'); ?>
+        <?= returnBlock('no-content', ['lang' => 'No']); ?>
       <?php } ?>
     </div>
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/admin/topics'); ?>

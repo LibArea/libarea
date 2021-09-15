@@ -70,7 +70,7 @@
           <?php } else { ?>
             <?php if ($uid['notif']) { ?>
               <div class="ml30 notif">
-                <a href="/u/<?= $uid['user_login']; ?>/notifications">
+                <a href="<?= getUrlByName('user', ['login' => $uid['user_login']]); ?>/notifications">
                   <?php if ($uid['notif']['notification_action_type'] == 1) { ?>
                     <i class="icon-mail size-21 red"></i>
                   <?php } else { ?>
@@ -92,44 +92,44 @@
               </div>
               <div class="dropdown-menu absolute">
                 <span class="st"></span>
-                <a class="dr-menu mb5 gray" href="/u/<?= $uid['user_login']; ?>">
+                <a class="dr-menu" href="<?= getUrlByName('user', ['login' => $uid['user_login']]); ?>">
                   <i class="icon-user-o middle"></i>
                   <span class="middle size-13"><?= lang('Profile'); ?></span>
                 </a>
-                <a class="dr-menu mb5 gray" href="/u/<?= $uid['user_login']; ?>/setting">
+                <a class="dr-menu" href="<?= getUrlByName('setting', ['login' => $uid['user_login']]); ?>">
                   <i class="icon-cog-outline middle"></i>
                   <span class="middle size-13"><?= lang('Settings'); ?></span>
                 </a>
-                <a class="dr-menu mb5 gray" href="/u/<?= $uid['user_login']; ?>/drafts">
+                <a class="dr-menu" href="<?= getUrlByName('user', ['login' => $uid['user_login']]); ?>/drafts">
                   <i class="icon-edit middle"></i>
                   <span class="middle size-13"><?= lang('Drafts'); ?></span>
                 </a>
-                <a class="dr-menu mb5 gray" href="/u/<?= $uid['user_login']; ?>/notifications">
+                <a class="dr-menu" href="<?= getUrlByName('user', ['login' => $uid['user_login']]); ?>/notifications">
                   <i class="icon-lightbulb middle"></i>
                   <span class="middle size-13"><?= lang('Notifications'); ?></span>
                 </a>
-                <a class="dr-menu mb5 gray" href="/u/<?= $uid['user_login']; ?>/messages">
+                <a class="dr-menu" href="<?= getUrlByName('user', ['login' => $uid['user_login']]); ?>/messages">
                   <i class="icon-mail middle"></i>
                   <span class="middle size-13"><?= lang('Messages-m'); ?></span>
                 </a>
-                <a class="dr-menu mb5 gray" href="/u/<?= $uid['user_login']; ?>/favorite">
+                <a class="dr-menu" href="<?= getUrlByName('user', ['login' => $uid['user_login']]); ?>/favorite">
                   <i class="icon-bookmark-empty middle"></i>
                   <span class="middle size-13"><?= lang('Favorites'); ?></span>
                 </a>
                 <?php if ($uid['user_trust_level'] > 1) { ?>
-                  <a class="dr-menu mb5 gray" href="/u/<?= $uid['user_login']; ?>/invitation">
+                  <a class="dr-menu" href="<?= getUrlByName('user', ['login' => $uid['user_login']]); ?>/invitation">
                     <i class="icon-user-add-outline middle"></i>
                     <span class="middle size-13"><?= lang('Invites'); ?></span>
                   </a>
                 <?php } ?>
                 <?php if ($uid['user_trust_level'] == 5) { ?>
-                  <a class="dr-menu mb5 gray" href="/admin" target="_black">
+                  <a class="dr-menu" href="/admin" target="_black">
                     <i class="icon-tools middle"></i>
                     <span class="middle size-13"><?= lang('Admin'); ?></span>
                   </a>
                 <?php } ?>
                 <hr>
-                <a class="dr-menu mb5 gray" href="/logout" class="logout" title="<?= lang('Sign out'); ?>">
+                <a class="dr-menu" href="/logout" class="logout" title="<?= lang('Sign out'); ?>">
                   <i class="icon-logout middle"></i>
                   <span class="middle size-13"><?= lang('Sign out'); ?></span>
                 </a>

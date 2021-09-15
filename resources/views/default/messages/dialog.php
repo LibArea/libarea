@@ -1,6 +1,6 @@
 <div class="wrap">
   <main class="white-box pt5 pr15 pb5 pl15">
-    <?= breadcrumb('/', lang('Home'), '/u/' . $uid['user_login'] . '/messages', lang('All messages'), $data['h1']); ?>
+    <?= breadcrumb('/', lang('Home'), getUrlByName('user', ['login' => $uid['user_login']]) . '/messages', lang('All messages'), $data['h1']); ?>
 
     <form action="/messages/send" method="post">
       <?= csrf_field() ?>
@@ -19,12 +19,12 @@
 
             <div class="message bg-gray-100 black left">
             <?php } else { ?>
-              <a class="right" href="/u/<?= $val['user_login']; ?>">
+              <a class="right" href="<?= getUrlByName('user', ['login' => $val['user_login']]); ?>">
                 <?= user_avatar_img($val['user_avatar'], 'max', $val['user_login'], 'message-avatar left'); ?>
               </a>
 
               <div class="message right black bg-yellow-100">
-                <a class="left" href="/u/<?= $val['user_login']; ?>">
+                <a class="left" href="<?= getUrlByName('user', ['login' => $val['user_login']]); ?>">
                   <?= $val['user_login']; ?>: &nbsp;
                 </a>
               <?php } ?>
@@ -42,5 +42,5 @@
           <?php } ?>
         <?php } ?>
   </main>
-  <?= aside('lang', ['lang' => lang('Under development')]); ?>
+  <?= returnBlock('aside-lang', ['lang' => lang('Under development')]); ?>
 </div>

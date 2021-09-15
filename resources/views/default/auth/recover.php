@@ -8,7 +8,7 @@
         ['title' => lang('Email'), 'type' => 'email', 'name' => 'email', 'value' => ''],
       ]); ?>
 
-      <?php captcha(); ?>
+      <?= returnBlock('captcha'); ?>
 
       <div class="boxline">
         <button type="submit" class="button"><?= lang('Reset'); ?></button>
@@ -19,5 +19,5 @@
       </div>
     </form>
   </main>
-  <?= aside('lang', ['lang' => lang('info-recover')]); ?>
+  <?= returnBlock('aside-lang', ['lang' => lang('info-recover')]); ?>
 </div>

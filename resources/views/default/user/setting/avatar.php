@@ -1,6 +1,6 @@
 <div class="wrap">
   <main class="white-box pt15 pr15 pb5 pl15 box setting avatar">
-    <?= breadcrumb('/', lang('Home'), '/u/' . $uid['user_login'], lang('Profile'), lang('Change avatar')); ?>
+    <?= breadcrumb('/', lang('Home'), getUrlByName('user', ['login' => $uid['user_login']]), lang('Profile'), lang('Change avatar')); ?>
     <?= returnBlock('/setting-nav', ['data' => $data, 'uid' => $uid]); ?>
 
     <form class="pt10" method="POST" action="/users/setting/avatar/edit" enctype="multipart/form-data">
@@ -20,7 +20,7 @@
 
       <?php if ($data['user']['user_cover_art'] != 'cover_art.jpeg') { ?>
         <img class="cover" src="<?= user_cover_url($data['user']['user_cover_art']); ?>">
-        <a class="right size-13" href="/u/<?= $uid['user_login']; ?>/delete/cover">
+        <a class="right size-13" href="<?= getUrlByName('user', ['login' => $uid['user_login']]); ?>/delete/cover">
           <?= lang('Remove'); ?>
         </a>
       <?php } else { ?>
@@ -39,5 +39,5 @@
       </div>
     </form>
   </main>
-  <?= aside('lang', ['lang' => lang('info-avatar')]); ?>
+  <?= returnBlock('aside-lang', ['lang' => lang('info-avatar')]); ?>
 </div>

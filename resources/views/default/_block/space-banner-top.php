@@ -7,11 +7,9 @@
         <?php } ?>
 
         <?php if (!$uid['user_id']) { ?>
-          <div class="right">
-            <a href="/login">
-              <div class="focus-space yes-space mr10">+ <?= lang('Read'); ?></div>
-            </a>
-          </div>
+          <a class="right" href="/login">
+            <div class="focus-space yes-space mr10">+ <?= lang('Read'); ?></div>
+          </a>
         <?php } else { ?>
           <?php if ($data['space']['space_id'] != 1) { ?>
             <?php if ($data['space']['space_user_id'] != $uid['user_id']) { ?>
@@ -33,7 +31,7 @@
         <?php } ?>
         <div class="space-text white">
           <?= spase_logo_img($data['space']['space_img'], 'max', $data['space']['space_name'], 'space-box-img'); ?>
-          <a title="<?= $data['space']['space_name']; ?>" href="/s/<?= $data['space']['space_slug']; ?>">
+          <a title="<?= $data['space']['space_name']; ?>" href="<?= getUrlByName('space', ['slug' => $data['space']['space_slug']]); ?>">
             <h1 class="size-31 mt5 mr0 mb10 ml0 p0 white"><?= $data['space']['space_name']; ?></h1>
           </a>
           <div class="space-slug">

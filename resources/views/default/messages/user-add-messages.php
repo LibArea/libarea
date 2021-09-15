@@ -2,7 +2,7 @@
   <main class="white-box pt5 pr15 pb10 pl15">
     <h1>
       <?= lang('Send a message'); ?> - <?= $uid['user_login']; ?>
-      <a class="right size-13" href="/u/<?= $uid['user_login']; ?>/messages"><?= lang('All messages'); ?></a>
+      <a class="right size-13" href="<?= getUrlByName('user', ['login' => $uid['user_login']]); ?>/messages"><?= lang('All messages'); ?></a>
     </h1>
     <form action="/messages/send" method="post">
       <?= csrf_field() ?>
@@ -11,5 +11,5 @@
       <input type="submit" name="submit" value="<?= lang('Send'); ?>" class="button">
     </form>
   </main>
-  <?= aside('lang', ['lang' => lang('Under development')]); ?>
+  <?= returnBlock('aside-lang', ['lang' => lang('Under development')]); ?>
 </div>

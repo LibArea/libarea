@@ -39,6 +39,6 @@
   </div>
 <?php } else { ?>
   <main class="w-100">
-    <?= no_content('ban-space'); ?>
+    <?= returnBlock('no-content', ['lang' => 'ban-space']); ?>
   </main>
 <?php } ?>

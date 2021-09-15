@@ -16,7 +16,7 @@
                 <?= $report['report_id']; ?>
                 </span>
               <td>
-                <a class="gray" href="/u/<?= $report['user']['user_login']; ?>">
+                <a class="gray" href="<?= getUrlByName('user', ['login' => $report['user']['user_login']]); ?>">
                   <?= user_avatar_img($report['user']['user_avatar'], 'max', $report['user']['user_login'], 'ava-24 mr5'); ?>
                   <?= $report['user']['user_login']; ?>
                 </a>
@@ -40,7 +40,7 @@
           <?php } ?>
         </table>
       <?php } else { ?>
-        <?= no_content('No users'); ?>
+        <?= returnBlock('no-content', ['lang' => 'No users']); ?>
       <?php } ?>
       <?= pagination($data['pNum'], $data['pagesCount'], null, '/admin/reports'); ?>
 </div>

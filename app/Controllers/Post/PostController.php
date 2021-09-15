@@ -44,7 +44,7 @@ class PostController extends MainController
         }
 
         // Рекомендованные посты
-        $recommend = PostModel::postsSimilar($post['post_id'], $post['post_space_id'], $uid['user_id'], 5);
+        $recommend = PostModel::postsSimilar($post['post_id'], $post['post_space_id'], $uid, 5);
 
         // Выводить или нет? Что дает просмотр даты изменения?
         // Учитывать ли изменение в сортировки и в оповещение в будущем...
@@ -178,7 +178,7 @@ class PostController extends MainController
         $meta_desc  = lang('Participant posts') . ' ' . $login;
 
         $meta = [
-            'canonical'     => Config::get(Config::PARAM_URL) . '/u/' . $login . '/posts',
+            'canonical'     => Config::get(Config::PARAM_URL) . getUrlByName('posts-user', ['login' => $login]),
             'sheet'         => 'user-post',
             'meta_title'    => lang('Posts') . ' ' . $login . ' | ' . Config::get(Config::PARAM_NAME),
             'meta_desc'     => $meta_desc . ' ' . Config::get(Config::PARAM_HOME_TITLE),

@@ -17,13 +17,15 @@
           <div id="post_<?= $post['post_id']; ?>">
             <div class="size-13 gray">
               <?= user_avatar_img($post['user_avatar'], 'small', $post['user_login'], 'ava mr5'); ?>
-              <a class="date mr5" href="/u/<?= $post['user_login']; ?>">
+              <a class="date mr5" href="<?= getUrlByName('user', ['login' => $post['user_login']]); ?>">
                 <?= $post['user_login']; ?>
               </a>
               <span class="mr55">
                 <?= $post['date']; ?>
               </span>
-              <?= content_ip($post['post_ip'], $uid); ?>
+              <a class="gray-light ml10" href="/admin/logip/<?= $post['post_ip']; ?>">
+                <?= $post['post_ip']; ?>
+              </a>
               <?php if ($post['post_type'] == 1) { ?>
                 <i class="icon-help green"></i>
               <?php } ?>
@@ -49,7 +51,7 @@
           </div>
         <?php } ?>
       <?php } else { ?>
-        <?= no_content('No'); ?>
+        <?= returnBlock('no-content', ['lang' => 'No']); ?>
       <?php } ?>
     </div>
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/admin/answers'); ?>

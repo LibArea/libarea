@@ -32,5 +32,5 @@
       </div>
     </form>
   </main>
-  <?= aside('lang', ['lang' => lang('info-space-edit')]); ?>
+  <?= returnBlock('aside-lang', ['lang' => lang('info-space-edit')]); ?>
 </div>

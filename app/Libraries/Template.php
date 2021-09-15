@@ -22,7 +22,7 @@ function html_topic($topic, $css)
 
     $result = array();
     foreach (array_chunk($topic, 2) as $ind => $row) {
-        $result[] = '<a class="' . $css . '" href="/topic/' . $row[0] . '">' . $row[1] . '</a>';
+        $result[] = '<a class="' . $css . '" href="' . getUrlByName('topic', ['slug' => $row[0]]) . '">' . $row[1] . '</a>';
     }
     return implode($result);
 }
@@ -281,16 +281,6 @@ function favorite_post($user_id, $post_id, $favorite_tid)
     return $html;
 }
 
-function no_content($lang)
-{
-    $html = '<div class="mt10 mb10 pt10 pr15 pb10 pl15 bg-lightyellow gray">
-                <i class="icon-info green middle"></i>
-                <span class="middle">' . lang($lang) . '...</span>
-            </div>';
-
-    return $html;
-}
-
 // Проверка доступа
 // $content
 // $type -  post / answer / comment
@@ -333,18 +323,6 @@ function accessСheck($content, $type, $uid, $after, $stop_time)
 function returnBlock($tpl_file, array $params = [])
 {
     return includeTemplate('/_block/' . $tpl_file, $params);
-}
-
-function content_ip($ip, $uid)
-{
-    if ($uid['user_trust_level'] != 5) {
-        return false;
-    }
-    $html = '<a class="gray-light ml10" href="/admin/logip/' . $ip . '">
-                ' . $ip . '
-            </a>';
-
-    return $html;
 }
 
 function getMsg()
@@ -394,18 +372,4 @@ function field($type, array $params = [])
         return includeTemplate('/_block/form/field-radio', ['data' => $params]);
     }
     return includeTemplate('/_block/form/field-input', ['data' => $params]);
-}
-
-function captcha()
-{
-    return includeTemplate('/_block/form/captcha');
-}
-
-function aside($type, array $params = [])
-{
-    if ($type == 'lang') {
-        return includeTemplate('/_block/aside', ['type' => $type, 'params' => $params]);
-    }
-    
-    return true;
-}    
+}  

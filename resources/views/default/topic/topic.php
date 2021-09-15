@@ -31,7 +31,7 @@
                 </div>
               <?php } ?>
             <?php } ?>
-            <a title="<?= lang('Info'); ?>" class="size-13 lowercase right gray" href="/topic/<?= $data['topic']['topic_slug']; ?>/info">
+            <a title="<?= lang('Info'); ?>" class="size-13 lowercase right gray" href="<?= getUrlByName('topic', ['slug' => $data['topic']['topic_slug']]); ?>/info">
               <i class="icon-info"></i>
             </a>
           </div>
@@ -40,7 +40,7 @@
     </div>
 
     <?= returnBlock('/post', ['data' => $data, 'uid' => $uid]); ?>
-    <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/topic/' . $data['topic']['topic_slug']); ?>
+    <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('topic', ['slug' => $data['topic']['topic_slug']])); ?>
 
   </main>
   <aside>

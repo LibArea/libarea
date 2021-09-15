@@ -1,7 +1,7 @@
 <div class="wrap">
   <main>
     <div class="white-box pt5 pr15 pb5 pl15">
-      <?= breadcrumb('/', lang('Home'), '/u/' . $uid['user_login'], lang('Profile'), lang('Drafts')); ?>
+      <?= breadcrumb('/', lang('Home'), getUrlByName('user', ['login' => $uid['user_login']]), lang('Profile'), lang('Drafts')); ?>
     </div>
     <?php if (!empty($data['drafts'])) { ?>
       <?php foreach ($data['drafts'] as $draft) { ?>
@@ -16,8 +16,8 @@
         </div>
       <?php } ?>
     <?php } else { ?>
-      <?= no_content('There no drafts'); ?>
+      <?= returnBlock('no-content', ['lang' => 'There no drafts']); ?>
     <?php } ?>
   </main>
-  <?= aside('lang', ['lang' => lang('Under development')]); ?>
+  <?= returnBlock('aside-lang', ['lang' => lang('Under development')]); ?>
 </div>

@@ -43,10 +43,10 @@
         </div>
       <?php } ?>
     <?php } else { ?>
-      <?= no_content('No'); ?>
+      <?= returnBlock('no-content', ['lang' => 'No']); ?>
     <?php } ?>
 
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/domains'); ?>
   </main>
-  <?= aside('lang', ['lang' => lang('domains-desc')]); ?>
+  <?= returnBlock('aside-lang', ['lang' => lang('domains-desc')]); ?>
 </div>

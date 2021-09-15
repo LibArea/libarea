@@ -1,10 +1,10 @@
 <div class="wrap">
   <main>
     <div class="white-box pt5 pr15 pb5 pl15">
-      <?= breadcrumb('/', lang('Home'), '/u/' . $uid['user_login'], lang('Profile'), lang('Favorites'));
+      <?= breadcrumb('/', lang('Home'), getUrlByName('user', ['login' => $uid['user_login']]), lang('Profile'), lang('Favorites'));
       $pages = array(
-        array('id' => 'favorites', 'url' => '/u/' . $uid['user_login'] . '/favorite', 'content' => lang('Favorites')),
-        array('id' => 'subscribed', 'url' => '/u/' . $uid['user_login'] . '/subscribed', 'content' => lang('Subscribed')),
+        array('id' => 'favorites', 'url' => getUrlByName('user', ['login' => $uid['user_login']]) . '/favorite', 'content' => lang('Favorites')),
+        array('id' => 'subscribed', 'url' => getUrlByName('user', ['login' => $uid['user_login']]) . '/subscribed', 'content' => lang('Subscribed')),
       );
       echo returnBlock('tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
       ?>
@@ -43,8 +43,8 @@
         </div>
       <?php } ?>
     <?php } else { ?>
-      <?= no_content('There are no favorites'); ?>
+      <?= returnBlock('no-content', ['lang' => 'There are no favorites']); ?>
     <?php } ?>
   </main>
-  <?= aside('lang', ['lang' => lang('info-favorite')]); ?>
+  <?= returnBlock('aside-lang', ['lang' => lang('info-favorite')]); ?>
 </div>

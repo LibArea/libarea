@@ -9,8 +9,8 @@
         <div class="p15">
           <?= user_avatar_img($writer['user_avatar'], 'max', $writer['user_login'], 'ava-54'); ?>
         </div>
-        <div class="">
-          <a href="/u/<?= $writer['user_login']; ?>"><?= $writer['user_login']; ?></a>
+        <div>
+          <a href="<?= getUrlByName('user', ['login' => $writer['user_login']]); ?>"><?= $writer['user_login']; ?></a>
           <div class="mr13 gray-light size-15 mr15">
             <?php if ($writer['user_about']) { ?>
               <?= $writer['user_about']; ?>
@@ -23,5 +23,5 @@
     <?php } ?>
   </div>
 <?php } else { ?>
-  <?= no_content('No'); ?>
+  <?= returnBlock('no-content', ['lang' => 'No']); ?>
 <?php } ?>

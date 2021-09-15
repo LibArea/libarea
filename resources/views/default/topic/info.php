@@ -5,7 +5,7 @@
         ← <?= lang('Topics'); ?>
       </a>
       <h1 class="topics">
-        <a href="/topic/<?= $data['topic']['topic_slug']; ?>">
+        <a href="<?= getUrlByName('topic', ['slug' => $data['topic']['topic_slug']]); ?>">
           <?= $data['topic']['topic_seo_title']; ?>
         </a>
         <?php if ($uid['user_trust_level'] == 5) { ?>
@@ -40,7 +40,7 @@
   <aside>
     <div class="white-box p15 size-15">
       <center>
-        <a title="<?= $data['topic']['topic_title']; ?>" href="/topic/<?= $data['topic']['topic_slug']; ?>">
+        <a title="<?= $data['topic']['topic_title']; ?>" href="<?= getUrlByName('topic', ['slug' => $data['topic']['topic_slug']]); ?>">
           <div><?= $data['topic']['topic_title']; ?></div>
           <?= topic_logo_img($data['topic']['topic_img'], 'max', $data['topic']['topic_title'], 'topic-img'); ?>
         </a>

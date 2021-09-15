@@ -60,7 +60,7 @@
         </div>
       </form>
     <?php } else { ?>
-      <?= no_content('no-space-to-add'); ?>
+      <?= returnBlock('no-content', ['lang' => 'no-space-to-add']); ?>
     <?php } ?>
   </main>
 </div>

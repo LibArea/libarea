@@ -1,6 +1,6 @@
 <div class="wrap">
   <main class="white-box pt15 pr15 pb5 pl15">
-    <?= breadcrumb('/', lang('Home'), '/u/' . $uid['user_login'], lang('Profile'), lang('Notifications')); ?>
+    <?= breadcrumb('/', lang('Home'), getUrlByName('user', ['login' => $uid['user_login']]), lang('Profile'), lang('Notifications')); ?>
     <?= returnBlock('/setting-nav', ['data' => $data, 'uid' => $uid]); ?>
 
     <form class="pt10" action="/users/setting/notifications/edit" method="post">
@@ -18,5 +18,5 @@
       </div>
     </form>
   </main>
-  <?= aside('lang', ['lang' => lang('info-notification')]); ?>
+  <?= returnBlock('aside-lang', ['lang' => lang('info-notification')]); ?>
 </div>

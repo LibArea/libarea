@@ -55,7 +55,7 @@
           </h2>
         </a>
         <div class="flex ml15">
-          <a class="gray-light size-13" href="/s/<?= $post['space_slug']; ?>" title="<?= $post['space_name']; ?>">
+          <a class="gray-light size-13" href="<?= getUrlByName('space', ['slug' => $post['space_slug']]); ?>" title="<?= $post['space_name']; ?>">
             <span class="post-space-color" style="background-color: <?= $post['space_color']; ?>;"></span>
             <?= $post['space_name']; ?>
           </a>
@@ -100,5 +100,5 @@
     </div>
   <?php } ?>
 <?php } else { ?>
-  <?= no_content('There are no posts'); ?>
+  <?= returnBlock('no-content', ['lang' => 'There are no posts']); ?>
 <?php } ?>

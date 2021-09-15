@@ -2,7 +2,7 @@
   <div class="logo size-15 mt15 ml15 flex">
     <a title="<?= lang('Admin'); ?>" class="light-gray" href="/admin"><?= lang('Admin'); ?></a> 
     <span class="gray ml15 mr15">|</span>
-    <a title="<?= lang('in-the-profile'); ?> <?= $uid['user_login']; ?>" class="light-gray size-15" href="/u/<?= $uid['user_login']; ?>">
+    <a title="<?= lang('in-the-profile'); ?> <?= $uid['user_login']; ?>" class="light-gray size-15" href="<?= getUrlByName('user', ['login' => $uid['user_login']]); ?>">
       <?= user_avatar_img($uid['user_avatar'], 'max', $uid['user_id'], 'ava-24 mr5'); ?>
       <?= $uid['user_login']; ?>
     </a>

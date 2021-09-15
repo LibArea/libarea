@@ -6,16 +6,20 @@
       <?php if (!empty($data['invitations'])) { ?>
         <?php foreach ($data['invitations'] as $key => $inv) { ?>
           <div class="content-telo">
-            <a href="/u/<?= $inv['uid']['user_login']; ?>"><?= $inv['uid']['user_login']; ?></a>
+            <a href="<?= getUrlByName('user', ['login' => $inv['uid']['user_login']]); ?>">
+              <?= $inv['uid']['user_login']; ?>
+            </a>
             <sup>id<?= $inv['uid']['user_id']; ?></sup>
             =>
-            <a href="/u/<?= $inv['user_login']; ?>"><?= $inv['user_login']; ?></a>
+            <a href="<?= getUrlByName('user', ['login' => $inv['user_login']]); ?>">
+              <?= $inv['user_login']; ?>
+            </a>
             <sup>id<?= $inv['active_uid']; ?></sup>
             <span class="size-13"> - <?= $inv['active_time']; ?></span>
           </div>
         <?php } ?>
       <?php } else { ?>
-        <?= no_content('There are no comments'); ?>
+        <?= returnBlock('no-content', ['lang' => 'There are no comments']); ?>
       <?php } ?>
     </div>
   </main>

@@ -199,13 +199,20 @@ class PostModel extends MainModel
     }
 
     // Рекомендованные посты
-    public static function postsSimilar($post_id, $space_id, $user_id, $quantity)
+    public static function postsSimilar($post_id, $space_id, $uid, $quantity)
     {
+
+        $tl = $uid['user_trust_level'];
+        if ($uid['user_trust_level'] == null) {
+            $tl = 0;
+        }
+
         $sql = "SELECT 
                     post_id,
                     post_title,
                     post_slug,
                     post_type,
+                    post_tl,
                     post_answers_count,
                     post_space_id,
                     post_user_id,
@@ -213,11 +220,12 @@ class PostModel extends MainModel
                         FROM posts
                             WHERE post_id < :post_id 
                                 AND post_space_id = :space_id 
-                                AND post_is_deleted = 0 
+                                AND post_is_deleted = 0
+                                AND post_tl <= :tl 
                                 AND post_user_id != :user_id
                                 ORDER BY post_id DESC LIMIT $quantity";
 
-        return DB::run($sql, ['post_id' => $post_id, 'space_id' => $space_id, 'user_id' => $user_id])->fetchall(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['post_id' => $post_id, 'space_id' => $space_id, 'user_id' => $uid['user_id'], 'tl' => $tl])->fetchall(PDO::FETCH_ASSOC);
     }
 
     // Пересчитываем количество

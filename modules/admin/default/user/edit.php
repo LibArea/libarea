@@ -6,7 +6,7 @@
       <form action="/admin/user/edit/<?= $data['user']['user_id']; ?>" method="post">
         <?= csrf_field() ?>
         <?php if ($data['user']['user_cover_art'] != 'cover_art.jpeg') { ?>
-          <a class="right size-13" href="/u/<?= $data['user']['user_login']; ?>/delete/cover">
+          <a class="right size-13" href="<?= getUrlByName('user', ['login' => $data['user']['user_login']]); ?>/delete/cover">
             <?= lang('Remove'); ?>
           </a>
           <br>
@@ -17,7 +17,7 @@
         <div class="boxline">
           <label class="form-label" for="post_title">
             Id<?= $data['user']['user_id']; ?> |
-            <a target="_blank" rel="noopener noreferrer" href="/u/<?= $data['user']['user_login']; ?>">
+            <a target="_blank" rel="noopener noreferrer" href="<?= getUrlByName('user', ['login' => $data['user']['user_login']]); ?>">
               <?= $data['user']['user_login']; ?>
             </a>
           </label>
@@ -50,21 +50,21 @@
         <div class="boxline">
           <?php if ($data['posts_count'] != 0) { ?>
             <label class="required"><?= lang('Posts-m'); ?>:</label>
-            <a target="_blank" rel="noopener noreferrer" title="<?= lang('Posts-m'); ?> <?= $data['user']['user_login']; ?>" href="/u/<?= $data['user']['user_login']; ?>/posts">
+            <a target="_blank" rel="noopener noreferrer" title="<?= lang('Posts-m'); ?> <?= $data['user']['user_login']; ?>" href="<?= getUrlByName('posts-user', ['login' => $data['user']['user_login']]); ?>">
               <?= $data['posts_count']; ?>
             </a>
             <br>
           <?php } ?>
           <?php if ($data['answers_count'] != 0) { ?>
             <label class="required"><?= lang('Answers'); ?>:</label>
-            <a target="_blank" rel="noopener noreferrer" title="<?= lang('Answers'); ?> <?= $data['user']['user_login']; ?>" href="/u/<?= $data['user']['user_login']; ?>/answers">
+            <a target="_blank" rel="noopener noreferrer" title="<?= lang('Answers'); ?> <?= $data['user']['user_login']; ?>" href="<?= getUrlByName('answers-user', ['login' => $data['user']['user_login']]); ?>">
               <?= $data['answers_count']; ?>
             </a>
             <br>
           <?php } ?>
           <?php if ($data['comments_count'] != 0) { ?>
             <label class="required"><?= lang('Comments'); ?>:</label>
-            <a target="_blank" rel="noopener noreferrer" title="<?= lang('Comments'); ?> <?= $data['user']['user_login']; ?>" href="/u/<?= $data['user']['user_login']; ?>/comments">
+            <a target="_blank" rel="noopener noreferrer" title="<?= lang('Comments'); ?> <?= $data['user']['user_login']; ?>" href="<?= getUrlByName('comments-user', ['login' => $data['user']['user_login']]); ?>">
               <?= $data['comments_count']; ?>
             </a>
             <br>
@@ -77,7 +77,7 @@
               <?php foreach ($data['spaces_user'] as  $space) { ?>
                 <div class="profile-space">
                   <?= spase_logo_img($space['space_img'], 'small', $space['space_name'], 'ava-24'); ?>
-                  <a href="/s/<?= $space['space_slug']; ?>"><?= $space['space_name']; ?></a>
+                  <a href="<?= getUrlByName('space', ['slug' => $space['space_slug']]); ?>"><?= $space['space_name']; ?></a>
                 </div>
               <?php } ?>
             </span>

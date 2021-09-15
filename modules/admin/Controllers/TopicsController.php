@@ -165,7 +165,8 @@ class TopicsController extends MainController
         TopicModel::edit($data);
 
         addMsg(lang('Changes saved'), 'success');
-        redirect('/topic/' . $topic_slug);
+        
+        redirect(getUrlByName('topic', ['slug' => $topic_slug]));
     }
 
     // Добавим topic

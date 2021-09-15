@@ -19,7 +19,9 @@
             </td>
             <td>
               <?= user_avatar_img($user['user_avatar'], 'small', $user['user_login'], 'ava'); ?>
-              <a href="/u/<?= $user['user_login']; ?>"><?= $user['user_login']; ?></a>
+              <a href="<?= getUrlByName('user', ['login' => $user['user_login']]); ?>">
+                <?= $user['user_login']; ?>
+              </a>
               <?php if ($user['user_name']) { ?>
                 (<?= $user['user_name']; ?>)
               <?php } ?>

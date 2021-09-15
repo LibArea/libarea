@@ -29,7 +29,7 @@
                 <?= user_avatar_img($user['user_avatar'], 'max', $user['user_login'], 'ava-64'); ?>
               </td>
               <td>
-                <a href="/u/<?= $user['user_login']; ?>"><?= $user['user_login']; ?></a>
+                <a href="<?= getUrlByName('user', ['login' => $user['user_login']]); ?>"><?= $user['user_login']; ?></a>
                 <?php if ($user['user_name']) { ?>
                   (<?= $user['user_name']; ?>)
                 <?php } ?>
@@ -47,7 +47,9 @@
                 <?php } ?>
               </td>
               <td class="size-13 align-right">
-                <?= content_ip($user['user_reg_ip'], $uid); ?>
+                <a class="gray-light ml10" href="/admin/logip/<?= $user['user_reg_ip']; ?>">
+                  <?= $user['user_reg_ip']; ?>
+                </a>
                 <?php if ($user['replayIp'] > 1) { ?>
                   <sup class="red">(<?= $user['replayIp']; ?>)</sup>
                 <?php } ?>
@@ -56,7 +58,9 @@
               </td>
               <td class="size-13 align-right">
                 <?php if (!empty($user['logs']['logs_ip_address'])) { ?>
-                  <?= content_ip($user['logs']['logs_ip_address'], $uid); ?>
+                  <a class="gray-light ml10" href="/admin/logip/<?= $user['logs']['logs_ip_address']; ?>">
+                    <?= $user['logs']['logs_ip_address']; ?>
+                  </a>
                   <br>
                   <?= $user['logs']['logs_date']; ?>
                 <?php } ?>
@@ -94,7 +98,7 @@
           <?php } ?>
         </table>
       <?php } else { ?>
-        <?= no_content('No users'); ?>
+        <?= returnBlock('no-content', ['lang' => 'No users']); ?>
       <?php } ?>
       <?= pagination($data['pNum'], $data['pagesCount'], null, '/admin/users'); ?>
     </div>

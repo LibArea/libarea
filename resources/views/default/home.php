@@ -23,11 +23,9 @@
     ?>
 
     <?php if (Request::getUri() == '/' && $uid['user_id'] > 0 && empty($data['space_user'])) { ?>
-      <div class="white-box">
-        <div class="pt5 pr15 pb5 pl15 big center gray">
-          <i class="icon-lightbulb middle red"></i>
-          <span class="middle"><?= lang('space-subscription'); ?>...</span>
-        </div>
+      <div class="white-box pt5 pr15 pb5 pl15 big center gray">
+        <i class="icon-lightbulb middle red"></i>
+        <span class="middle"><?= lang('space-subscription'); ?>...</span>
       </div>
     <?php } ?>
 
@@ -35,26 +33,24 @@
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], null); ?>
   </main>
   <aside>
-    <?php if ($uid['user_id'] > 0) { ?>
-      <?php if (!empty($data['space_user'])) { ?>
-        <div class="white-box pt5 pr15 pb5 pl15">
+    <?php if ($uid['user_id'] > 0 && !empty($data['space_user'])) { ?>
+        <div class="white-box pt5 pr15 pb5 pl15 size-13">
           <a class="right" title="<?= lang('Spaces'); ?>" href="/spaces">
-            <i class="icon-right-open-big middle size-13"></i>
+            <i class="icon-right-open-big middle"></i>
           </a>
-          <div class="uppercase mb5 mt5 size-13">
+          <div class="uppercase mb5 mt5">
             <?= lang('Signed'); ?>
           </div>
           <?php foreach ($data['space_user'] as  $sig) { ?>
-            <a class="flex relative pt5 pb5 hidden gray" href="/s/<?= $sig['space_slug']; ?>" title="<?= $sig['space_name']; ?>">
+            <a class="flex relative pt5 pb5 hidden gray" href="<?= getUrlByName('space', ['slug' => $sig['space_slug']]); ?>" title="<?= $sig['space_name']; ?>">
               <?= spase_logo_img($sig['space_img'], 'small', $sig['space_name'], 'ava-24 mr5'); ?>
-              <span class="ml5 size-13"><?= $sig['space_name']; ?></span>
+              <span class="ml5"><?= $sig['space_name']; ?></span>
               <?php if ($sig['space_user_id'] == $uid['user_id']) { ?>
                 <sup class="red mr5 ml5">+</sup>
               <?php } ?>
             </a>
           <?php } ?>
         </div>
-      <?php } ?>
     <?php } ?>
 
     <?php if (!empty($data['latest_answers'])) { ?>

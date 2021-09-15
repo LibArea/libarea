@@ -93,8 +93,8 @@ class WebModel extends MainModel
             'link_user_id'      => $data['link_user_id'],
             'link_type'         => $data['link_type'],
             'link_status'       => $data['link_status'],
-            'link_category_id'       => $data['link_category_id'],
-            'link_count'        => 0,
+            'link_category_id'  => $data['link_category_id'],
+            'link_count'        => 1,
         ];
 
         $sql = "INSERT INTO links(link_url, 

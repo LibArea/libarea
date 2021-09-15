@@ -8,7 +8,7 @@
         <div class="white-box pt5 pr15 pb5 pl15">
           <?php if ($comment['comment_is_deleted'] == 0) { ?>
             <div class="size-13">
-              <a class="gray" href="/u/<?= $comment['user_login']; ?>">
+              <a class="gray" href="<?= getUrlByName('user', ['login' => $comment['user_login']]); ?>">
                 <?= user_avatar_img($comment['user_avatar'], 'small', $comment['user_login'], 'ava'); ?>
                 <span class="mr5 ml5">
                   <?= $comment['user_login']; ?>
@@ -37,8 +37,8 @@
       <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/comments'); ?>
 
     <?php } else { ?>
-      <?= no_content('There are no comments'); ?>
+      <?= returnBlock('no-content', ['lang' => 'There are no comments']); ?>
     <?php } ?>
   </main>
-  <?= aside('lang', ['lang' => lang('comments-desc')]); ?>
+  <?= returnBlock('aside-lang', ['lang' => lang('comments-desc')]); ?>
 </div>

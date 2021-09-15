@@ -17,13 +17,15 @@
           <div id="comment_<?= $comment['comment_id']; ?>">
             <div class="size-13 gray">
               <?= user_avatar_img($comment['user_avatar'], 'small', $comment['user_login'], 'ava mr5'); ?>
-              <a class="date mr5" href="/u/<?= $comment['user_login']; ?>">
+              <a class="date mr5" href="<?= getUrlByName('user', ['login' => $comment['user_login']]); ?>">
                 <?= $comment['user_login']; ?>
               </a>
               <span class="date mr5">
                 <?= $comment['date']; ?>
               </span>
-              <?= content_ip($comment['comment_ip'], $uid); ?>
+              <a class="gray-light ml10" href="/admin/logip/<?= $comment['comment_ip']; ?>">
+                <?= $comment['comment_ip']; ?>
+              </a>
               <?php if ($comment['post_type'] == 1) { ?>
                 <i class="icon-commenting-o middle"></i>
               <?php } ?>
@@ -47,7 +49,7 @@
         <?php } ?>
 
       <?php } else { ?>
-        <?= no_content('There are no comments'); ?>
+        <?= returnBlock('no-content', ['lang' => 'There are no comments']); ?>
       <?php } ?>
     </div>
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/admin/comments'); ?>

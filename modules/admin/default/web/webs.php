@@ -52,7 +52,7 @@
             </div>
           <?php } ?>
         <?php } else { ?>
-          <?= no_content('No'); ?>
+          <?= returnBlock('no-content', ['lang' => 'No']); ?>
         <?php } ?>
       </div>
     </div>

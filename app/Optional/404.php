@@ -7,28 +7,17 @@ header($_SERVER["SERVER_PROTOCOL"] . " 404 Not Found");
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>Ошибка 404</title>
-  <link href="/assets/css/404.css" rel="stylesheet" type="text/css">
+  <link href="/assets/css/style.css" rel="stylesheet" type="text/css">
   <link rel="icon" href="/favicon.ico" type="image/png">
 </head>
 
-<body>
-  <div class="container">
-    <div class="header">
-      <div class="logo">
-        <a title="На главную" href="/">DEV</a>
-      </div>
+<body class="bg-gray-000 pt0">
+    <div class="mt10 ml15">
+      <a class="logo" title="На главную" href="/">Agouti</a>
     </div>
-    <div class="telo">
-      <div class="telo-r">
-        <div class="telo-txt">Страница не существует</div>
-        <div class="telo-404">404</div>
-        <div class="telo-txt-desc">
-          Вы можете найти (почти) что угодно на сайте - очевидно, даже страницу, которой не существует. Может быть, этот случай, приведет вас в новое место?
-        </div>
-        <br><a href="/">Перейти на главную</a>
-      </div>
-      <div class="telo-l">
-        <svg xmlns="http://www.w3.org/2000/svg" class="svg-404" viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+     <div class="telo-404 flex">
+      <div class="width-50 no-mob">
+        <svg xmlns="http://www.w3.org/2000/svg" class="svg-404" stroke="#9e9e9e" width="70%" viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
           <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
           <path d="M6 17.6l-2 -1.1v-2.5"></path>
           <path d="M4 10v-2.5l2 -1.1"></path>
@@ -44,8 +33,17 @@ header($_SERVER["SERVER_PROTOCOL"] . " 404 Not Found");
           <line x1="6" y1="8.6" x2="4" y2="7.5"></line>
         </svg>
       </div>
+      <div class="width-40 ml15">
+        <h1 class="uppercase gray-light-2 size-13 mt15">Страница не существует</h1>
+        <h2 class="size-150 gray-light-2">404</h1>
+        <div class="mt15 size-21">
+          Вы можете найти (почти) что угодно на сайте - очевидно, даже страницу, которой не существует. Может быть, этот случай, приведет вас в новое место?
+        </div>
+        <div class="mt15 ml0 mb15">
+          <a href="/">Перейти на главную</a>
+        </div>
+      </div>
     </div>
-  </div>
 </body>
 
 </html>

@@ -34,12 +34,12 @@
                       <span class="white absolute right-10">+ <?= $sp['space_focus_count'] ?></span>
                     <?php } ?>
 
-                    <a title="<?= $sp['space_name']; ?>" class="absolute" href="/s/<?= $sp['space_slug']; ?>">
+                    <a title="<?= $sp['space_name']; ?>" class="absolute" href="<?= getUrlByName('space', ['slug' => $sp['space_slug']]); ?>">
                       <?= spase_logo_img($sp['space_img'], 'max', $sp['space_name'], 'ava-54'); ?>
                     </a>
 
                     <span class="space-name">
-                      <a title="<?= $sp['space_name']; ?>" class="space-s white absolute size-21" href="/s/<?= $sp['space_slug']; ?>">
+                      <a title="<?= $sp['space_name']; ?>" class="space-s white absolute size-21" href="<?= getUrlByName('space', ['slug' => $sp['space_slug']]); ?>">
                         <span class="space-name"> <?= $sp['space_name']; ?></span>
                       </a>
                     </span>
@@ -83,15 +83,15 @@
                 <?php } ?>
                 </div>
               <?php } else { ?>
-                <?= no_content('No spaces'); ?>
+                <?= returnBlock('no-content', ['lang' => 'No spaces']); ?>
               <?php } ?>
 
               </div>
               <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/spaces'); ?>
   </main>
   <?php if ($data['sheet'] == 'spaces') { ?>
-    <?= aside('lang', ['lang' => lang('info-space')]); ?>
+    <?= returnBlock('aside-lang', ['lang' => lang('info-space')]); ?>
   <?php } else { ?>
-    <?= aside('lang', ['lang' => lang('my-info-space')]); ?>
+    <?= returnBlock('aside-lang', ['lang' => lang('my-info-space')]); ?>
   <?php } ?>
 </div>

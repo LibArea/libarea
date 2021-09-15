@@ -16,7 +16,7 @@
           </div>
         <?php } ?>
       <?php } else { ?>
-        <?= no_content('Stop words no'); ?>
+        <?= returnBlock('no-content', ['lang' => 'Stop words no']); ?>
       <?php } ?>
     </div>
   </main>

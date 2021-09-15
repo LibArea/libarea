@@ -1,18 +1,18 @@
 <div class="wrap">
   <main class="white-box pt5 pr15 pb5 pl15">
-    <?= breadcrumb('/', lang('Home'), '/u/' . $uid['user_login'], lang('Profile'), lang('Private messages')); ?>
+    <?= breadcrumb('/', lang('Home'), getUrlByName('user', ['login' => $uid['user_login']]), lang('Profile'), lang('Private messages')); ?>
 
     <?php if (!empty($data['messages'])) { ?>
       <?php foreach ($data['messages'] as  $msg) { ?>
          <div class="hidden mt15 mb15<?php if (!$msg['unread'] > 0) { ?> bg-yellow-100<?php } ?>">
           <div class="size-13 flex">
             <?php if ($msg['dialog_sender_id'] == $uid['user_id']) { ?> 
-              <a href="/u/<?= $msg['msg_to_user']['user_login']; ?>">
+              <a href="<?= getUrlByName('user', ['login' => $msg['msg_to_user']['user_login']]); ?>">
                 <?= user_avatar_img($msg['msg_to_user']['user_avatar'], 'small', $msg['msg_to_user']['user_login'], 'ava mr5 ml5'); ?>
                 <?= $msg['msg_to_user']['user_login']; ?>
               </a>
             <?php } else { ?>
-              <a class="mr5" href="/u/<?= $msg['msg_to_user']['user_login']; ?>">
+              <a class="mr5" href="<?= getUrlByName('user', ['login' => $msg['msg_to_user']['user_login']]); ?>">
                 <?= user_avatar_img($msg['msg_user']['user_avatar'], 'small', $msg['msg_user']['user_login'], 'ava mr5 ml5'); ?>
                 <?= $msg['msg_user']['user_login']; ?>
               </a>
@@ -38,8 +38,8 @@
       <?php } ?>
 
     <?php } else { ?>
-      <?= no_content('No dialogs'); ?>
+      <?= returnBlock('no-content', ['lang' => 'No dialogs']); ?>
     <?php } ?>
   </main>
-  <?= aside('lang', ['lang' => lang('Personal messages with site participants')]); ?>
+  <?= returnBlock('aside-lang', ['lang' => lang('Personal messages with site participants')]); ?>
 </div>

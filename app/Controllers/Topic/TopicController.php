@@ -95,7 +95,7 @@ class TopicController extends MainController
 
         $meta_title = $topic['topic_seo_title'] . ' — ' .  lang('Topic');
         $meta = [
-            'canonical'     => Config::get(Config::PARAM_URL) . '/topic/' . $topic['topic_slug'],
+            'canonical'     => Config::get(Config::PARAM_URL) . getUrlByName('topic', ['slug' => $topic['topic_slug']]),
             'sheet'         => 'topic',
             'meta_title'    => $meta_title . ' | ' . Config::get(Config::PARAM_NAME),
             'meta_desc'     => $topic['topic_description'] . '. ' . Config::get(Config::PARAM_HOME_TITLE),
@@ -147,7 +147,7 @@ class TopicController extends MainController
         $meta_title = $topic['topic_seo_title'] . ' — ' .  lang('Info');
         $meta = [
             'h1'            => $topic['topic_seo_title'],
-            'canonical'     => Config::get(Config::PARAM_URL) . '/topic/' . $topic['topic_slug'] . '/info',
+            'canonical'     => Config::get(Config::PARAM_URL) . getUrlByName('topic', ['slug' => $topic['topic_slug']]) . '/info',
             'sheet'         => 'info',
             'meta_title'    => $meta_title . ' | ' . Config::get(Config::PARAM_NAME),
             'meta_desc'     => $topic['topic_description'] . '. ' . lang('Info') . ' ' . Config::get(Config::PARAM_HOME_TITLE),

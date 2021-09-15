@@ -6,7 +6,7 @@
       </h3>
       <div class="flex w-100 mt15 mb10">
         <div class="_bl">
-          <p class="bl-n m0"><a href="/u/<?= $data['space']['user_login']; ?>">
+          <p class="bl-n m0"><a href="<?= getUrlByName('user', ['login' => $data['space']['user_login']]); ?>">
               <?= $data['space']['user_login']; ?>
             </a></p>
           <p class="bl-t m0 size-15 lowercase gray-light"><?= lang('Created by'); ?></p>

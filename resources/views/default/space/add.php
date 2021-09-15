@@ -23,5 +23,5 @@
       <?= lang('You can add spaces'); ?>: <b><?= $data['num_add_space']; ?></b>
     </div>
   </main>
-  <?= aside('lang', ['lang' => lang('Under development')]); ?>
+  <?= returnBlock('aside-lang', ['lang' => lang('Under development')]); ?>
 </div>

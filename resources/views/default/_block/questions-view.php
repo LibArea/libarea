@@ -21,9 +21,9 @@
                     <?php if (empty($answer['edit'])) { ?>
                       (<?= lang('ed'); ?>.)
                     <?php } ?>
-                    <?= content_ip($answer['answer_ip'], $uid); ?>
+                    <?= returnBlock('show-ip', ['ip' => $answer['answer_ip'], 'user_trust_level' => $uid['user_trust_level']]); ?>
                   </div>
-                  <a class="qa-login size-15" href="/u/<?= $answer['user_login']; ?>"><?= $answer['user_login']; ?></a>
+                  <a class="qa-login size-15" href="<?= getUrlByName('user', ['login' => $answer['user_login']]); ?>"><?= $answer['user_login']; ?></a>
                 </div>
                 <?= $answer['answer_content'] ?>
               </div>
@@ -85,45 +85,42 @@
           <div class="border-bottom<?php if ($n > 1) { ?> ml30<?php } ?>"></div>
           <ol class="max-width size-15 list-none mb0 mt0">
             <li class="comment_subtree" id="comment_<?= $comment['comment_id']; ?>">
-
-              <div class="max-width">
-                <div class="size-13 pt5 pr5 pb5 pl5">
-                  <?= $comment['comment_content'] ?>
-                  <span class="gray">
-                    — <a class="gray" href="/u/<?= $comment['user_login']; ?>"><?= $comment['user_login']; ?></a>
-                    <span class="lowercase gray">
-                      &nbsp; <?= lang_date($comment['comment_date']); ?>
-                    </span>
-                    <?= content_ip($comment['comment_ip'], $uid); ?>
+              <div class="size-13 pt5 pr5 pb5 pl5">
+                <?= $comment['comment_content'] ?>
+                <span class="gray">
+                  — <a class="gray" href="<?= getUrlByName('user', ['login' => $comment['user_login']]); ?>"><?= $comment['user_login']; ?></a>
+                  <span class="lowercase gray">
+                    &nbsp; <?= lang_date($comment['comment_date']); ?>
                   </span>
+                  <?= returnBlock('show-ip', ['ip' => $comment['comment_ip'], 'user_trust_level' => $uid['user_trust_level']]); ?>
+                </span>
 
-                  <?php if ($uid['user_trust_level'] >= Lori\Config::get(Lori\Config::PARAM_TL_ADD_COMM_QA)) { ?>
-                    <?php if ($data['post']['post_closed'] == 0) { ?>
-                      <?php if ($data['post']['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
-                        <a data-post_id="<?= $data['post']['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment-re gray ml5">
-                          <?= lang('Reply'); ?>
-                        </a>
-                      <?php } ?>
+                <?php if ($uid['user_trust_level'] >= Lori\Config::get(Lori\Config::PARAM_TL_ADD_COMM_QA)) { ?>
+                  <?php if ($data['post']['post_closed'] == 0) { ?>
+                    <?php if ($data['post']['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
+                      <a data-post_id="<?= $data['post']['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment-re gray ml5">
+                        <?= lang('Reply'); ?>
+                      </a>
                     <?php } ?>
                   <?php } ?>
+                <?php } ?>
 
-                  <?php if ($uid['user_id'] == $comment['comment_user_id'] || $uid['user_trust_level'] == 5) { ?>
-                    <a data-post_id="<?= $data['post']['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray ml5">
-                      <?= lang('Edit'); ?>
-                    </a>
-                  <?php } ?>
+                <?php if ($uid['user_id'] == $comment['comment_user_id'] || $uid['user_trust_level'] == 5) { ?>
+                  <a data-post_id="<?= $data['post']['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray ml5">
+                    <?= lang('Edit'); ?>
+                  </a>
+                <?php } ?>
 
-                  <?php if ($uid['user_trust_level'] == 5) { ?>
-                    <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray ml5">
-                      <?= lang('Remove'); ?>
-                    </a>
-                  <?php } ?>
-                  <?php if ($uid['user_id'] != $comment['comment_user_id'] && $uid['user_trust_level'] > 0) { ?>
-                    <a data-post_id="<?= $data['post']['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray ml5">
-                      <?= lang('Report'); ?>
-                    </a>
-                  <?php } ?>
-                </div>
+                <?php if ($uid['user_trust_level'] == 5) { ?>
+                  <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray ml5">
+                    <?= lang('Remove'); ?>
+                  </a>
+                <?php } ?>
+                <?php if ($uid['user_id'] != $comment['comment_user_id'] && $uid['user_trust_level'] > 0) { ?>
+                  <a data-post_id="<?= $data['post']['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray ml5">
+                    <?= lang('Report'); ?>
+                  </a>
+                <?php } ?>
               </div>
               <div id="comment_addentry<?= $comment['comment_id']; ?>" class="reply"></div>
             </li>
@@ -137,12 +134,12 @@
   </div>
 <?php } else { ?>
   <?php if ($data['post']['post_closed'] != 1) { ?>
-    <?= no_content('No answers'); ?>
+    <?= returnBlock('no-content', ['lang' => 'No answers']); ?>
   <?php } ?>
 <?php } ?>
 
 <?php if (!empty($otvet)) { ?>
-  <?= no_content('you-question-no'); ?>
+  <?= returnBlock('no-content', ['lang' => 'you-question-no']); ?>
 <?php } else { ?>
   <?php if ($uid['user_id']) { ?>
     <?php if ($data['post']['post_closed'] == 0) { ?>
@@ -159,6 +156,6 @@
       </form>
     <?php } ?>
   <?php } else { ?>
-    <?= no_content('no-auth-login'); ?>
+    <?= returnBlock('no-content', ['lang' => 'no-auth-login']); ?>
   <?php } ?>
 <?php }  ?>

@@ -15,5 +15,5 @@
       </form>
     </div>
   </main>
-  <?= aside('lang', ['lang' => lang('Someone invited you from the site')]); ?>
+  <?= returnBlock('aside-lang', ['lang' => lang('Someone invited you from the site')]); ?>
 </div>
