@@ -19,7 +19,7 @@
 
       <div class="wrap">
         <main>
-          <div class="profile-box-telo hidden white-box pt5 pr15 pb5 pl15">
+          <div class="hidden white-box pt5 pr15 pb5 pl15">
             <div class="profile-header-telo">
               <h1 class="profile">
                 <?= $data['user']['user_login']; ?>
@@ -50,7 +50,7 @@
                   <div class="mb5 size-15">
                     <label class="required"><?= lang('Posts-m'); ?>:</label>
                     <span class="right">
-                      <a title="<?= lang('Posts-m'); ?> <?= $data['user']['user_login']; ?>" href="<?= getUrlByName('posts-user', ['login' => $data['user']['user_login']]); ?>">
+                      <a title="<?= lang('Posts-m'); ?> <?= $data['user']['user_login']; ?>" href="<?= getUrlByName('posts.user', ['login' => $data['user']['user_login']]); ?>">
                         <?= $data['count']['count_posts']; ?>
                       </a>
                     </span>
@@ -60,7 +60,7 @@
                   <div class="mb5 size-15">
                     <label class="required"><?= lang('Answers'); ?>:</label>
                     <span class="right">
-                      <a title="<?= lang('Answers'); ?> <?= $data['user']['user_login']; ?>" href="<?= getUrlByName('answers-user', ['login' => $data['user']['user_login']]); ?>">
+                      <a title="<?= lang('Answers'); ?> <?= $data['user']['user_login']; ?>" href="<?= getUrlByName('answers.user', ['login' => $data['user']['user_login']]); ?>">
                         <?= $data['count']['count_answers']; ?>
                       </a>
                     </span>
@@ -70,7 +70,7 @@
                   <div class="mb5 size-15">
                     <label class="required"><?= lang('Comments'); ?>:</label>
                     <span class="right">
-                      <a title="<?= lang('Comments'); ?> <?= $data['user']['user_login']; ?>" href="<?= getUrlByName('comments-user', ['login' => $data['user']['user_login']]); ?>">
+                      <a title="<?= lang('Comments'); ?> <?= $data['user']['user_login']; ?>" href="<?= getUrlByName('comments.user', ['login' => $data['user']['user_login']]); ?>">
                         <?= $data['count']['count_comments']; ?>
                       </a>
                     </span>
@@ -202,7 +202,7 @@
           </div>
         </main>
         <aside>
-          <div class="profile-box-telo relative white-box pt5 pr15 pb10 pl15">
+          <div class="relative white-box pt5 pr15 pb10 pl15">
             <h3 class="mt0 mb5 uppercase pt5 size-13"><?= lang('Badges'); ?></h3>
             <div class="profile-badge">
               <?php if ($data['user']['user_id'] < 50) { ?>
@@ -214,14 +214,14 @@
             </div>
           </div>
           <?php if ($uid['user_trust_level'] > 4) { ?>
-            <div class="profile-box-telo white-box pt5 pr15 pb5 pl15">
+            <div class="white-box pt5 pr15 pb5 pl15">
               <h3 class="mt0 mb10 uppercase pt10 size-13"><?= lang('Admin'); ?></h3>
               <div class="mb5">
-                <a class="gray size-15 mb5 block" href="/admin/users/<?= $data['user']['user_id']; ?>/edit">
+                <a class="gray size-15 mb5 block" href="<?= getUrlByName('admin.user.edit', ['id' => $data['user']['user_id']]); ?>">
                   <i class="icon-cog-outline middle"></i>
                   <span class="middle"><?= lang('Edit'); ?></span>
                 </a>
-                <a class="gray size-15 block" href="/admin/badges/user/add/<?= $data['user']['user_id']; ?>">
+                <a class="gray size-15 block" href="<?= getUrlByName('admin.badges.user.add', ['id' => $data['user']['user_id']]); ?>">
                   <i class="icon-award middle"></i>
                   <span class="middle"><?= lang('Reward the user'); ?></span>
                 </a>

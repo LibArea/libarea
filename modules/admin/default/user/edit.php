@@ -50,21 +50,21 @@
         <div class="boxline">
           <?php if ($data['posts_count'] != 0) { ?>
             <label class="required"><?= lang('Posts-m'); ?>:</label>
-            <a target="_blank" rel="noopener noreferrer" title="<?= lang('Posts-m'); ?> <?= $data['user']['user_login']; ?>" href="<?= getUrlByName('posts-user', ['login' => $data['user']['user_login']]); ?>">
+            <a target="_blank" rel="noopener noreferrer" title="<?= lang('Posts-m'); ?> <?= $data['user']['user_login']; ?>" href="<?= getUrlByName('posts.user', ['login' => $data['user']['user_login']]); ?>">
               <?= $data['posts_count']; ?>
             </a>
             <br>
           <?php } ?>
           <?php if ($data['answers_count'] != 0) { ?>
             <label class="required"><?= lang('Answers'); ?>:</label>
-            <a target="_blank" rel="noopener noreferrer" title="<?= lang('Answers'); ?> <?= $data['user']['user_login']; ?>" href="<?= getUrlByName('answers-user', ['login' => $data['user']['user_login']]); ?>">
+            <a target="_blank" rel="noopener noreferrer" title="<?= lang('Answers'); ?> <?= $data['user']['user_login']; ?>" href="<?= getUrlByName('answers.user', ['login' => $data['user']['user_login']]); ?>">
               <?= $data['answers_count']; ?>
             </a>
             <br>
           <?php } ?>
           <?php if ($data['comments_count'] != 0) { ?>
             <label class="required"><?= lang('Comments'); ?>:</label>
-            <a target="_blank" rel="noopener noreferrer" title="<?= lang('Comments'); ?> <?= $data['user']['user_login']; ?>" href="<?= getUrlByName('comments-user', ['login' => $data['user']['user_login']]); ?>">
+            <a target="_blank" rel="noopener noreferrer" title="<?= lang('Comments'); ?> <?= $data['user']['user_login']; ?>" href="<?= getUrlByName('comments.user', ['login' => $data['user']['user_login']]); ?>">
               <?= $data['comments_count']; ?>
             </a>
             <br>

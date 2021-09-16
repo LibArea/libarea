@@ -84,7 +84,7 @@ class SettingController extends MainController
 
         // Ошибочный Slug в Url
         if ($login != $uid['user_login']) {
-            redirect(getUrlByName('setting-avatar', ['login' => $uid['user_login']]));
+            redirect(getUrlByName('setting.avatar', ['login' => $uid['user_login']]));
         }
 
         Request::getHead()->addStyles('/assets/css/image-uploader.css');
@@ -110,7 +110,7 @@ class SettingController extends MainController
         $login  = Request::get('login');
 
         if ($login != $uid['user_login']) {
-            redirect(getUrlByName('setting-security', ['login' => $uid['user_login']]));
+            redirect(getUrlByName('setting.security', ['login' => $uid['user_login']]));
         }
 
         $meta = [
@@ -132,7 +132,7 @@ class SettingController extends MainController
     function avatarEdit()
     {
         $uid        = Base::getUid();
-        $redirect   = getUrlByName('setting-avatar', ['login' => $uid['user_login']]);
+        $redirect   = getUrlByName('setting.avatar', ['login' => $uid['user_login']]);
 
         // Запишем img
         $img        = $_FILES['images'];
@@ -161,7 +161,7 @@ class SettingController extends MainController
         $password2   = Request::getPost('password2');
         $password3   = Request::getPost('password3');
  
-        $redirect = getUrlByName('setting-security', ['login' => $uid['user_login']]);
+        $redirect = getUrlByName('setting.security', ['login' => $uid['user_login']]);
         if ($password2 != $password3) {
             addMsg(lang('pass-match-err'), 'error');
             redirect($redirect);
@@ -195,7 +195,7 @@ class SettingController extends MainController
     {
         $uid        = Base::getUid();
         $login      = Request::get('login');
-        $redirect   = getUrlByName('setting-avatar', ['login' => $uid['user_login']]);
+        $redirect   = getUrlByName('setting.avatar', ['login' => $uid['user_login']]);
 
         if ($login != $uid['user_login']) {
             redirect($redirect);
@@ -236,7 +236,7 @@ class SettingController extends MainController
 
         // Ошибочный Slug в Url
         if ($login != $user['user_login']) {
-            redirect(getUrlByName('setting-notifications', ['login' => $user['user_login']]));
+            redirect(getUrlByName('setting.notifications', ['login' => $user['user_login']]));
         }
 
         // Если пользователь забанен
@@ -268,6 +268,6 @@ class SettingController extends MainController
         NotificationsModel::setUserSetting($data, $uid['user_id']);
         addMsg(lang('Change saved'), 'success');
 
-        redirect(getUrlByName('setting-notifications', ['login' => $uid['user_login']]));
+        redirect(getUrlByName('setting.notifications', ['login' => $uid['user_login']]));
     }
 }

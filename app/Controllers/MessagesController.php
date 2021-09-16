@@ -16,7 +16,7 @@ class MessagesController extends MainController
 
         // Ошибочный Slug в Url
         if ($login != $uid['user_login']) {
-            redirect('/u/' . $uid['user_login'] . '/messages');
+            redirect(getUrlByName('messages', ['login' => $uid['user_login']]));
         }
 
         if ($messages_dialog = MessagesModel::getMessages($uid['user_id'])) {
@@ -81,12 +81,12 @@ class MessagesController extends MainController
 
         if (!$dialog = MessagesModel::getDialogById($id)) {
             addMsg(lang('The dialog does not exist'), 'error');
-            redirect('/messages');
+            redirect(getUrlByName('messages', ['login' => $uid['user_login']]));
         }
 
         if ($dialog['dialog_recipient_id'] != $uid['user_id'] and $dialog['dialog_sender_id'] != $uid['user_id']) {
             addMsg(lang('The topic does not exist'), 'error');
-            redirect('/u/' . $uid['user_login'] . '/messages');
+            redirect(getUrlByName('messages', ['login' => $uid['user_login']]));
         }
 
         // обновляем просмотры и т.д.
@@ -172,12 +172,12 @@ class MessagesController extends MainController
         // Введите содержание сообщения
         if ($content == '') {
             addMsg(lang('Enter content'), 'error');
-            redirect('/u/' . $uid['user_login'] . '/messages');
+            redirect(getUrlByName('messages', ['login' => $uid['user_login']]));
         }
 
         // Этого пользователь не существует
         $user  = UserModel::getUser($uid['user_id'], 'id');
-        Base::PageRedirection($user, '/u/' . $uid['user_login'] . '/messages');
+        Base::PageRedirection($user, getUrlByName('messages', ['login' => $uid['user_login']]));
 
         // Участник с нулевым уровнем доверия должен быть ограничен в добавлении ЛС
         $add_pm  = Validation::accessPm($uid, $recipient_id, Config::get(Config::PARAM_TL_ADD_PM));
@@ -187,6 +187,6 @@ class MessagesController extends MainController
 
         MessagesModel::sendMessage($uid['user_id'], $recipient_id, $content);
 
-        redirect('/u/' . $uid['user_login'] . '/messages');
+        redirect(getUrlByName('messages', ['login' => $uid['user_login']]));
     }
 }

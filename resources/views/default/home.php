@@ -15,11 +15,11 @@
 <div class="wrap">
   <main class="telo">
     <?php $pages = array(
-          array('id' => 'feed', 'url' => '/', 'content' => lang('Feed')),
-          array('id' => 'all', 'url' => '/all', 'content' => lang('All'), 'auth' => 'yes'),
-          array('id' => 'top', 'url' => '/top', 'content' => lang('Top')),
-        );
-        echo returnBlock('tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
+      array('id' => 'feed', 'url' => '/', 'content' => lang('Feed')),
+      array('id' => 'all', 'url' => '/all', 'content' => lang('All'), 'auth' => 'yes'),
+      array('id' => 'top', 'url' => '/top', 'content' => lang('Top')),
+    );
+    echo returnBlock('tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
     ?>
 
     <?php if (Request::getUri() == '/' && $uid['user_id'] > 0 && empty($data['space_user'])) { ?>
@@ -34,23 +34,23 @@
   </main>
   <aside>
     <?php if ($uid['user_id'] > 0 && !empty($data['space_user'])) { ?>
-        <div class="white-box pt5 pr15 pb5 pl15 size-13">
-          <a class="right" title="<?= lang('Spaces'); ?>" href="/spaces">
-            <i class="icon-right-open-big middle"></i>
-          </a>
-          <div class="uppercase mb5 mt5">
-            <?= lang('Signed'); ?>
-          </div>
-          <?php foreach ($data['space_user'] as  $sig) { ?>
-            <a class="flex relative pt5 pb5 hidden gray" href="<?= getUrlByName('space', ['slug' => $sig['space_slug']]); ?>" title="<?= $sig['space_name']; ?>">
-              <?= spase_logo_img($sig['space_img'], 'small', $sig['space_name'], 'ava-24 mr5'); ?>
-              <span class="ml5"><?= $sig['space_name']; ?></span>
-              <?php if ($sig['space_user_id'] == $uid['user_id']) { ?>
-                <sup class="red mr5 ml5">+</sup>
-              <?php } ?>
-            </a>
-          <?php } ?>
+      <div class="white-box pt5 pr15 pb5 pl15 size-13">
+        <a class="right" title="<?= lang('Spaces'); ?>" href="/spaces">
+          <i class="icon-right-open-big middle"></i>
+        </a>
+        <div class="uppercase mb5 mt5">
+          <?= lang('Signed'); ?>
         </div>
+        <?php foreach ($data['space_user'] as  $sig) { ?>
+          <a class="flex relative pt5 pb5 hidden gray" href="<?= getUrlByName('space', ['slug' => $sig['space_slug']]); ?>" title="<?= $sig['space_name']; ?>">
+            <?= spase_logo_img($sig['space_img'], 'small', $sig['space_name'], 'ava-24 mr5'); ?>
+            <span class="ml5"><?= $sig['space_name']; ?></span>
+            <?php if ($sig['space_user_id'] == $uid['user_id']) { ?>
+              <sup class="red mr5 ml5">+</sup>
+            <?php } ?>
+          </a>
+        <?php } ?>
+      </div>
     <?php } ?>
 
     <?php if (!empty($data['latest_answers'])) { ?>

@@ -27,7 +27,7 @@
       </div>
       <?php if (!$uid['user_id']) { ?>
         <div class="white mt15 mb10 center">
-          <a class="mt15 button block mb15 white" href="/login">
+          <a class="mt15 button block mb15 white" href="<?= getUrlByName('login'); ?>">
             <i class="icon-pencil size-15"></i>
             <?= lang('Create Post'); ?>
           </a>

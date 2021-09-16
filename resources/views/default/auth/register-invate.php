@@ -2,7 +2,7 @@
   <main class="white-box pt5 pr15 pb5 pl15">
     <h1><?= lang('Registration by invite'); ?></h1>
     <div class="form mini">
-      <form class="" action="/register/add" method="post">
+      <form class="" action="<?= getUrlByName('register'); ?>/add" method="post">
         <?php csrf_field(); ?>
 
         <?php field('input', [

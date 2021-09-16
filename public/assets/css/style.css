@@ -304,6 +304,7 @@ blockquote {
   background-color: #f3f3f6;
   padding: 0.1rem 1rem;
   border-left: 3px solid #d2d6dd;
+  display: table;
 }
 
 hr {
@@ -350,7 +351,7 @@ th {
 .logo {
   color: #333;
   font-size: 18px;
-  letter-spacing: 1px
+  letter-spacing: 1px;
 }
 
 .logo:hover { opacity: 0.8; }

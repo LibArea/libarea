@@ -21,40 +21,41 @@ class RecoverController extends MainController
 
     public function index()
     {
-        $email = Request::getPost('email');
-
+        $email          = Request::getPost('email');
+        $recover_uri    = getUrlByName('recover');
+        
         if (Config::get(Config::PARAM_CAPTCHA)) {
             if (!Integration::checkCaptchaCode()) {
                 addMsg(lang('Code error'), 'error');
-                redirect('/recover');
+                redirect($recover_uri);
             }
         }
 
-        Validation::checkEmail($email, '/recover');
+        Validation::checkEmail($email, $recover_uri);
 
         $uInfo = UserModel::userInfo($email);
 
         if (empty($uInfo['user_email'])) {
             addMsg(lang('There is no such e-mail on the site'), 'error');
-            redirect('/recover');
+            redirect($recover_uri);
         }
 
         // Проверка на заблокированный аккаунт
         if ($uInfo['user_ban_list'] == 1) {
             addMsg(lang('Your account is under review'), 'error');
-            redirect('/recover');
+            redirect($recover_uri);
         }
 
         $code = $uInfo['user_id'] . '-' . Base::randomString('crypto', 25);
         UserModel::initRecover($uInfo['user_id'], $code);
 
         // Отправка e-mail
-        $newpass_link = 'https://' . HLEB_MAIN_DOMAIN . '/recover/remind/' . $code;
+        $newpass_link = 'https://' . HLEB_MAIN_DOMAIN . $recover_uri . '/remind/' . $code;
         $mail_message = lang('Your link to change your password'). ": \n" . $newpass_link . "\n\n";
         Base::sendMail($email, Config::get(Config::PARAM_NAME) . ' — ' . lang('changing your password'), $mail_message);
 
         addMsg(lang('New password has been sent to e-mail'), 'success');
-        redirect('/login');
+        redirect(getUrlByName('login'));
     }
 
     // Страница установки нового пароля
@@ -65,7 +66,7 @@ class RecoverController extends MainController
         
         if (!$user_id) {
             addMsg(lang('code-incorrect'), 'error');
-            redirect('/recover');
+            redirect(getUrlByName('recover'));
         }
 
         $user = UserModel::getUser($user_id['activate_user_id'], 'id');
@@ -95,7 +96,7 @@ class RecoverController extends MainController
             return false;
         }
 
-        Validation::Limits($password, lang('Password'), '8', '32', '/recover/remind/' . $code);
+        Validation::Limits($password, lang('Password'), '8', '32', getUrlByName('recover') . '/remind/' . $code);
 
         $newpass  = password_hash($password, PASSWORD_BCRYPT);
         $news     = UserModel::editPassword($user_id, $newpass);
@@ -107,7 +108,7 @@ class RecoverController extends MainController
         UserModel::editRecoverFlag($user_id);
 
         addMsg(lang('Password changed'), 'success');
-        redirect('/login');
+        redirect(getUrlByName('login'));
     }
 
     // Проверка корректности E-mail
@@ -124,6 +125,6 @@ class RecoverController extends MainController
         UserModel::EmailActivate($activate_email['user_id']);
 
         addMsg(lang('yes-email-pass'), 'success');
-        redirect('/login');
+        redirect(getUrlByName('login'));
     }
 }

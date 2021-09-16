@@ -1,7 +1,7 @@
 <div class="wrap">
   <main class="admin">
     <div class="white-box pt5 pr15 pb5 pl15">
-      <a class="right" title="<?= lang('Add'); ?>" href="/admin/topics/add">
+      <a class="right" title="<?= lang('Add'); ?>" href="<?= getUrlByName('admin.topic.add'); ?>">
         <i class="icon-plus middle"></i>
       </a>
       <?= breadcrumb('/admin', lang('Admin'), null, null, lang('Topics')); ?>
@@ -39,7 +39,7 @@
                 </div>
               </td>
               <td class="center">
-                <a title="<?= lang('Edit'); ?>" href="topics/<?= $topic['topic_id']; ?>/edit">
+                <a title="<?= lang('Edit'); ?>" href="<?= getUrlByName('admin.topic.edit', ['id' => $topic['topic_id']]); ?>">
                   <i class="icon-pencil size-15"></i>
                 </a>
               </td>

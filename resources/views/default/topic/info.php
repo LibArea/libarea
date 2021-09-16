@@ -9,7 +9,7 @@
           <?= $data['topic']['topic_seo_title']; ?>
         </a>
         <?php if ($uid['user_trust_level'] == 5) { ?>
-          <a class="right gray-light" href="/admin/topics/<?= $data['topic']['topic_id']; ?>/edit">
+          <a class="right gray-light" href="<?= getUrlByName('admin.topic.edit', ['id' => $data['topic']['topic_id']]); ?>">
             <i class="icon-pencil size-15"></i>
           </a>
         <?php } ?>

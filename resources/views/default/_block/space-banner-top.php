@@ -7,7 +7,7 @@
         <?php } ?>
 
         <?php if (!$uid['user_id']) { ?>
-          <a class="right" href="/login">
+          <a class="right" href="<?= getUrlByName('login'); ?>">
             <div class="focus-space yes-space mr10">+ <?= lang('Read'); ?></div>
           </a>
         <?php } else { ?>

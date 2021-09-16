@@ -46,7 +46,7 @@
 
                     <?php if (!$uid['user_id']) { ?>
                       <div class="top-15-px">
-                        <a href="/login">
+                        <a href="<?= getUrlByName('login'); ?>">
                           <div class="focus-space yes-space absolute">
                             <i class="icon-plus middle"></i>
                             <span class="middle"><?= lang('Read'); ?></span>

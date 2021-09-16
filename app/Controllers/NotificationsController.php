@@ -18,7 +18,7 @@ class NotificationsController extends MainController
 
         // Если страница закладок не участника
         if ($login != $uid['user_login']) {
-            redirect('/u/' . $user['user_login'] . '/notifications');
+            redirect(getUrlByName('notifications', ['login' => $user['user_login']]));
         }
 
         // Данные участника и список уведомлений
@@ -69,6 +69,6 @@ class NotificationsController extends MainController
     {
         $uid    = Base::getUid();
         NotificationsModel::setRemove($uid['user_id']);
-        redirect('/u/' . $uid['user_login'] . '/notifications');
+        redirect(getUrlByName('notifications', ['login' => $uid['user_login']]));
     }
 }

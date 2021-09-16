@@ -178,7 +178,7 @@ class PostController extends MainController
         $meta_desc  = lang('Participant posts') . ' ' . $login;
 
         $meta = [
-            'canonical'     => Config::get(Config::PARAM_URL) . getUrlByName('posts-user', ['login' => $login]),
+            'canonical'     => Config::get(Config::PARAM_URL) . getUrlByName('posts.user', ['login' => $login]),
             'sheet'         => 'user-post',
             'meta_title'    => lang('Posts') . ' ' . $login . ' | ' . Config::get(Config::PARAM_NAME),
             'meta_desc'     => $meta_desc . ' ' . Config::get(Config::PARAM_HOME_TITLE),

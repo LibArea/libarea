@@ -28,7 +28,7 @@ class InvitationsUserController extends MainController
         $login  = Request::get('login');
 
         if ($login != $uid['user_login']) {
-            redirect('/u/' . $uid['user_login'] . '/invitation');
+            redirect(getUrlByName('invitations', ['login' => $uid['user_login']]));
         }
 
         // Если пользователь забанен
@@ -56,7 +56,7 @@ class InvitationsUserController extends MainController
 
         $invitation_email = Request::getPost('email');
 
-        $redirect = '/u/' . $uid['user_login'] . '/invitation';
+        $redirect = getUrlByName('invitations', ['login' => $uid['user_login']]);
 
         Validation::checkEmail($invitation_email, $redirect);
 

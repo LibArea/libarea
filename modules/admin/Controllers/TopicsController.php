@@ -124,7 +124,7 @@ class TopicsController extends MainController
             TopicModel::clearBinding($topic['topic_id']);
         }
 
-        $redirect = '/admin/topics/' . $topic['topic_id'] . '/edit';
+        $redirect = getUrlByName('admin.topic.edit', ['id' => $topic['topic_id']]);
 
         Validation::charset_slug($topic_slug, 'Slug (url)', $redirect);
         Validation::Limits($topic_title, lang('Title'), '3', '64', $redirect);
@@ -185,7 +185,7 @@ class TopicsController extends MainController
         $topic_merged_id    = Request::getPost('topic_merged_id');
         $topic_related      = Request::getPost('topic_related');
 
-        $redirect = '/admin/topics/add';
+        $redirect = getUrlByName('admin.topic.add');
 
         Validation::charset_slug($topic_slug, 'Slug (url)', $redirect);
         Validation::Limits($topic_title, lang('Title'), '3', '64', $redirect);
@@ -212,7 +212,7 @@ class TopicsController extends MainController
 
         $topic = TopicModel::add($data);
 
-        redirect('/admin/topics/' . $topic['topic_id'] . '/edit');
+        redirect(getUrlByName('admin.topic.edit', ['id' => $topic['topic_id']]));
     }
 
     // Обновление

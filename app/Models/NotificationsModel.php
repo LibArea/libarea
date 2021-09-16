@@ -131,7 +131,11 @@ class NotificationsModel extends MainModel
             $result[$ind] = $row['signed_post_id'];
         }
 
-        $string = "WHERE post_id IN(" . implode(',', $result) . ") AND post_draft = 0";
+        if ($result) {
+            $string = "WHERE post_id IN(" . implode(',', $result) . ") AND post_draft = 0";
+        } else {
+            $string = "WHERE post_id IN(0) AND post_draft = 0";
+        }
 
         $sql = "SELECT 
                     post_id,

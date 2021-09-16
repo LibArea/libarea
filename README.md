@@ -33,7 +33,6 @@ Demo: https://agouti.ru/
 
 More information (rus.): https://agouti.info/
 
-
 #### Ideas
 
 Ideas, minimalism, design was taken from what I like:
@@ -44,7 +43,6 @@ Ideas, minimalism, design was taken from what I like:
 *   https://discuss.flarum.org/
 *   https://tildes.net/
 *   https://subreply.com/
-
 
 ...
 

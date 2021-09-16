@@ -96,7 +96,7 @@ class RegisterController extends MainController
             // Если регистрация по инвайту, активируем емайл
             UserModel::sendInvitationEmail($inv_code, $inv_uid, $reg_ip, $active_uid);
             addMsg(lang('Successfully, log in'), 'success');
-            redirect('/login');
+            redirect(getUrlByName('login'));
         }
 
         // Активация e-mail
@@ -110,7 +110,7 @@ class RegisterController extends MainController
 
         addMsg(lang('Check your e-mail to activate your account'), 'success');
 
-        redirect('/login');
+        redirect(getUrlByName('login'));
     }
 
     // Показ формы регистрации с инвайтом

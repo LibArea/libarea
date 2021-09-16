@@ -103,7 +103,7 @@ class UserController extends MainController
         $login  = Request::get('login');
 
         if ($login != $uid['user_login']) {
-            redirect('/u/' . $uid['user_login'] . '/favorite');
+            redirect(getUrlByName('favorites', ['login' => $uid['user_login']]));
         }
 
         $favorites = UserModel::userFavorite($uid['user_id']);
@@ -164,7 +164,7 @@ class UserController extends MainController
         $login  = Request::get('login');
 
         if ($login != $uid['user_login']) {
-            redirect('/u/' . $uid['user_login'] . '/subscribed');
+            redirect(getUrlByName('subscribed', ['login' => $uid['user_login']]));
         }
 
         $focus_posts = NotificationsModel::getFocusPostsListUser($uid['user_id']);

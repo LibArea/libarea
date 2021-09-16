@@ -37,8 +37,8 @@ class MainConnector implements Connector
             "MyParsedown"                   => "app/ThirdParty/Parsedown/MyParsedown.php",
             "SimpleImage"                   => "app/ThirdParty/SimpleImage.php",
             "URLScraper"                    => "app/ThirdParty/URLScraper.php",
-            "JacksonJeans\MailException"    => "app/ThirdParty/php-mail/src/JacksonJeans/MailException.class.php",
-            "JacksonJeans\Mail"             => "app/ThirdParty/php-mail/src/JacksonJeans/Mail.class.php",
+            "JacksonJeans\MailException"    => "app/ThirdParty/php-mail/MailException.class.php",
+            "JacksonJeans\Mail"             => "app/ThirdParty/php-mail/Mail.class.php",
         ];
 
     }

@@ -2,7 +2,7 @@
   <main>
     <div class="white-box pt5 pr15 pb10 pl15">
       <?= breadcrumb('/', lang('Home'), getUrlByName('user', ['login' => $uid['user_login']]), lang('Profile'), lang('Invites')); ?>
-      
+
       <?php if ($uid['user_trust_level'] > 1) { ?>
         <form method="post" action="/invitation/create">
           <?php csrf_field(); ?>
@@ -29,7 +29,7 @@
               <?php if ($uid['user_trust_level'] == 5) { ?>
                 <?= lang('The link was used to'); ?>: <?= $invite['invitation_email']; ?> <br>
                 <code>
-                  <?= Lori\Config::get(Lori\Config::PARAM_URL); ?>/register/invite/<?= $invite['invitation_code']; ?>
+                  <?= Lori\Config::get(Lori\Config::PARAM_URL); ?><?= getUrlByName('register'); ?>/invite/<?= $invite['invitation_code']; ?>
                 </code>
               <?php } ?>
 
@@ -37,7 +37,7 @@
             <?php } else { ?>
               <?= lang('For'); ?> (<?= $invite['invitation_email']; ?>) <?= lang('can send this link'); ?>: <br>
               <code>
-                <?= Lori\Config::get(Lori\Config::PARAM_URL); ?>/register/invite/<?= $invite['invitation_code']; ?>
+                <?= Lori\Config::get(Lori\Config::PARAM_URL); ?><?= getUrlByName('register'); ?>/invite/<?= $invite['invitation_code']; ?>
               </code>
             <?php } ?>
 

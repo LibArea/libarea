@@ -1,13 +1,13 @@
 <div class="wrap">
   <main class="w-100 white-box pt5 pr15 pb5 pl15 edit-post">
     <?= breadcrumb('/', lang('Home'), getUrlByName('post', ['id' => $data['post']['post_id'], 'slug' => $data['post']['post_slug']]), $data['post']['post_title'], lang('Edit post')); ?>
- 
+
     <form action="/post/edit" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
 
       <?php field('input', [
         ['title' => lang('Heading'), 'type' => 'text', 'name' => 'post_title', 'value' => $data['post']['post_title'], 'min' => 6, 'max' => 250, 'help' => '6 - 250 ' . lang('characters')],
-        ]); ?>
+      ]); ?>
 
       <?php select('space', ['spaces' => $data['space'], 'space_id' => $data['post']['space_id']]); ?>
 

@@ -75,8 +75,8 @@ class WebController extends MainController
         $meta_title = lang('Domain') . ': ' . $domain . ' | ' . Config::get(Config::PARAM_NAME);
         $meta_desc  = lang('domain-desc') . ': ' . $domain . ' ' . Config::get(Config::PARAM_HOME_TITLE);
 
-        $meta = [
-            'canonical'     => Config::get(Config::PARAM_URL) . '/domain/' . $domain,
+        $meta = [  
+            'canonical'     => Config::get(Config::PARAM_URL) . getUrlByName('domain', ['domain' => $domain]),
             'sheet'         => 'domain',
             'meta_title'    => $meta_title,
             'meta_desc'     => $meta_desc,

@@ -10,7 +10,9 @@
         </div>
         <div class="boxline">
           <button type="submit" class="button"><?= lang('Sign in'); ?></button>
-          <span class="ml15 size-13"><a href="/recover"><?= lang('Forgot your password'); ?>?</a></span>
+          <span class="ml15 size-13"><a href="<?= getUrlByName('recover'); ?>">
+              <?= lang('Forgot your password'); ?>?</a>
+          </span>
         </div>
       </form>
     </div>

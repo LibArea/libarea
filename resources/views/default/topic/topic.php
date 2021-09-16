@@ -9,7 +9,7 @@
           <h1>
             <?= $data['topic']['topic_seo_title']; ?>
             <?php if ($uid['user_trust_level'] == 5) { ?>
-              <a class="right gray-light" href="/admin/topics/<?= $data['topic']['topic_id']; ?>/edit">
+              <a class="right gray-light" href="<?= getUrlByName('admin.topic.edit', ['id' => $data['topic']['topic_id']]); ?>">
                 <i class="icon-pencil size-15"></i>
               </a>
             <?php } ?>
@@ -17,7 +17,7 @@
           <div class="size-13"><?= $data['topic']['topic_description']; ?></div>
           <div class="mt15">
             <?php if (!$uid['user_id']) { ?>
-              <a href="/login">
+              <a href="<?= getUrlByName('login'); ?>">
                 <div class="add-focus focus-topic">+ <?= lang('Read'); ?></div>
               </a>
             <?php } else { ?>

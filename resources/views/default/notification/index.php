@@ -79,7 +79,7 @@
       <?php } ?>
 
     <?php } else { ?>
-      <?= lang('No notifications yet'); ?>...
+      <?= returnBlock('no-content', ['lang' => 'No notifications yet']); ?>
     <?php } ?>
   </main>
   <?= returnBlock('aside-lang', ['lang' => lang('info-notifications')]); ?>

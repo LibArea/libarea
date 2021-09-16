@@ -1,7 +1,7 @@
 <div class="wrap">
   <main>
     <div class="white-box pt5 pr15 pb5 pl15">
-      <?= breadcrumb('/admin', lang('Admin'), '/admin/webs', lang('Domains'), lang('Add a website')); ?>
+      <?= breadcrumb('/admin', lang('Admin'), getUrlByName('admin.webs'), lang('Domains'), lang('Add a website')); ?>
 
       <div class="telo space">
         <div class="box create">

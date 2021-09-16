@@ -19,6 +19,7 @@ class InfoController extends MainController
         ];
 
         $data = [
+            'sheet'         => 'info',
             'content'       => Content::text($text, 'text'),
         ];
 
@@ -37,6 +38,7 @@ class InfoController extends MainController
         ];
 
         $data = [
+            'sheet'         => 'privacy',
             'content'       => Content::text($text, 'text'),
         ];
 
@@ -47,13 +49,13 @@ class InfoController extends MainController
     {
         $meta = [
             'canonical'     => Config::get(Config::PARAM_URL) . '/info/restriction',
-            'sheet'         => 'info-restriction',
+            'sheet'         => 'restriction',
             'meta_title'    => lang('Restriction') . ' | ' . Config::get(Config::PARAM_NAME),
             'meta_desc'     => lang('Restriction') . ' ' . Config::get(Config::PARAM_HOME_TITLE),
         ];
 
         $data = [
-            'sheet'       => 'info-restriction',
+            'sheet'       => 'restriction',
         ];
 
         return view('/info/restriction', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);

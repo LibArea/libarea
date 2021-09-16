@@ -17,7 +17,7 @@ class LoginController extends MainController
         $password   = Request::getPost('password');
         $rememberMe = Request::getPostInt('rememberme');
 
-        $redirect = '/login';
+        $redirect = getUrlByName('login');
 
         Validation::checkEmail($email, $redirect);
 
@@ -64,7 +64,7 @@ class LoginController extends MainController
     {
         $meta = [
             'sheet'         => 'login',
-            'canonical'     => Config::get(Config::PARAM_URL) . '/login',
+            'canonical'     => Config::get(Config::PARAM_URL) . getUrlByName('login'),
             'meta_title'    => lang('Sign in') . ' | ' . Config::get(Config::PARAM_NAME),
             'meta_desc'     => lang('info-login'),
         ];

@@ -67,7 +67,7 @@ class CommentController extends MainController
 
         $uid  = Base::getUid();
         $meta = [
-            'canonical'     => Config::get(Config::PARAM_URL) . getUrlByName('comments-user', ['login' => $login]),
+            'canonical'     => Config::get(Config::PARAM_URL) . getUrlByName('comments.user', ['login' => $login]),
             'sheet'         => 'user-comments',
             'meta_title'    => lang('Comments-n') . ' ' . $login . ' | ' . Config::get(Config::PARAM_NAME),
             'meta_desc'     => lang('Comments-n') . ' ' . $login . ' ' . Config::get(Config::PARAM_HOME_TITLE),

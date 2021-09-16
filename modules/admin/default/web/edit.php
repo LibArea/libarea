@@ -1,7 +1,7 @@
 <div class="wrap">
   <main>
     <div class="white-box pt5 pr15 pb5 pl15">
-      <?= breadcrumb('/admin', lang('Admin'), '/admin/webs', lang('Domains'), lang('Change the site') . ' | ' . $data['domain']['link_url_domain']); ?>
+      <?= breadcrumb('/admin', lang('Admin'), getUrlByName('admin.webs'), lang('Domains'), lang('Change the site') . ' | ' . $data['domain']['link_url_domain']); ?>
 
       <div class="telo space">
         <div class="box create">

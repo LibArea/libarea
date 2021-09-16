@@ -84,15 +84,15 @@
             <div class="post">
               <?= $data['post']['post_content']; ?>
             </div>
-            
+
             <?php if ($data['post']['post_url_domain']) { ?>
               <div class="mb15">
-               <a rel="nofollow noreferrer ugc" target="_blank" class="button" href="<?= $data['post']['post_url']; ?>">
+                <a rel="nofollow noreferrer ugc" target="_blank" class="button" href="<?= $data['post']['post_url']; ?>">
                   <?= lang('Details are here'); ?> <i class="icon-link-ext ml5"></i>
-               </a>
+                </a>
               </div>
             <?php } ?>
-            
+
             <?php if ($data['lo']) { ?>
               <div class="bg-yellow-100 pt5 pr5 pb5 pl10 mt10 mb10">
                 <h3 class="recommend">ЛО
@@ -110,7 +110,7 @@
               <div class="italic m15 mb15 p10 size-13 bg-gray-100 table gray">
                 <div>
                   <i class="icon-link"></i>
-                  <a class="gray" href="/domain/<?= $data['post']['post_url_domain']; ?>">
+                  <a class="gray" href="<?= getUrlByName('domain', ['domain' => $data['post']['post_url_domain']]); ?>">
                     <?= $data['post']['post_url_domain']; ?>
                   </a>
                 </div>
@@ -155,7 +155,7 @@
           </div>
           <div class="hidden">
             <?php if (!$uid['user_id']) { ?>
-              <a class="right size-13 mt5 add-focus focus-topic" href="/login">
+              <a class="right size-13 mt5 add-focus focus-topic" href="<?= getUrlByName('login'); ?>">
                 + <?= lang('Read'); ?>
               </a>
             <?php } else { ?>

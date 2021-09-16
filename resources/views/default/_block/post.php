@@ -1,6 +1,6 @@
 <?php if (!empty($data['posts'])) { ?>
   <?php foreach ($data['posts'] as $post) { ?>
-  <?php $post_url = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
+    <?php $post_url = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
     <div class="white-box">
       <div class="pt15 pr15 pb0 pl15 size-13 flex">
         <a class="gray-light" href="<?= getUrlByName('user', ['login' => $post['user_login']]); ?>">
@@ -61,7 +61,7 @@
           </a>
           <?= html_topic($post['topic_list'], 'gray-light size-13 ml15'); ?>
           <?php if ($post['post_url_domain']) { ?>
-            <a class="gray-light size-13 middle ml10" href="/domain/<?= $post['post_url_domain']; ?>">
+            <a class="gray-light size-13 middle ml10" href="<?= getUrlByName('domain', ['domain' => $post['post_url_domain']]); ?>">
               <i class="icon-link"></i> <?= $post['post_url_domain']; ?>
             </a>
           <?php } ?>

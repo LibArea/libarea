@@ -1,7 +1,7 @@
 <div class="wrap">
   <main class="admin">
     <div class="white-box pt5 pr15 pb5 pl15">
-      <a class="right" title="<?= lang('Add'); ?>" href="/admin/webs/add">
+      <a class="right" title="<?= lang('Add'); ?>" href="<?= getUrlByName('link-add'); ?>">
         <i class="icon-plus middle"></i>
       </a>
       <?= breadcrumb('/admin', lang('Admin'), null, null, lang('Domains')); ?>
@@ -11,7 +11,7 @@
           <?php foreach ($data['domains'] as $key => $link) { ?>
             <div class="domain-box">
               <span class="add-favicon right size-13" data-id="<?= $link['link_id']; ?>">
-                +фавикон
+                + favicon
               </span>
               <div class="size-21">
                 <?php if ($link['link_title']) { ?>
@@ -44,7 +44,9 @@
                   <span class="red">Ban</span>
                 <?php } ?>
                 <span class="mr5 ml5"> &#183; </span>
-                <a href="/admin/webs/<?= $link['link_id']; ?>/edit"><?= lang('Edit'); ?></a>
+                <a href="<?= getUrlByName('link-edit', ['id' => $link['link_id']]); ?>">
+                  <?= lang('Edit'); ?>
+                </a>
                 <span class="right heart-link red">
                   +<?= $link['link_count']; ?>
                 </span>
