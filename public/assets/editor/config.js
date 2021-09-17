@@ -2,16 +2,12 @@
 var editor = editormd("test-markdown-view", {
     width: "100%",
     height: "400px",
+   // autoLoadModules      : true,   
    // emoji                : true, 
     toolbarIcons  : [
         "bold", "italic", "del", "quote",  "h3", "list-ul", "|",  "hr", "image",  "link", "|", "code", "code-block", "|", "fullscreen", "help",
     ],
     
-    // toolbarCustomIcons   : { // using html tag create toolbar icon, unused default <a> tag.
-    //   quote: "<a href=\"javascript:;\" title=\"Цитата\" unselectable=\"on\">«»</a>",
-    //   del: "<a href=\"javascript:;\" title=\"Зачеркнуть\" unselectable=\"on\"><i class=\"fa\" name=\"del\">~</i></a>" 
-    // },
-
      imageUpload: true,
      imageFormats : ["jpg","jpeg","gif","png","webp"],
      imageUploadURL: "/backend/uploadimage", //"{{url('/backend/uploadimage')}}",

@@ -156,7 +156,7 @@ class HomeModel extends MainModel
             $user_answer = "AND space_feed = :zero AND answer_user_id != :id AND post_tl <= $tl";
 
             if ($uid['user_trust_level'] != 5) {
-                $user_answer = "AND answer_user_id != :id";
+                $user_answer = "AND answer_user_id != :id AND post_tl <= $tl";
             }
         }
 
@@ -184,7 +184,7 @@ class HomeModel extends MainModel
                         WHERE answer_is_deleted = :zero 
                         $user_answer 
                         ORDER BY answer_id DESC LIMIT 5";
-
+ 
         return DB::run($sql, ['id' => $uid['user_id'], 'zero' => 0])->fetchAll(PDO::FETCH_ASSOC); 
     }
 
@@ -200,10 +200,10 @@ class HomeModel extends MainModel
                     space_is_delete,
                     signed_space_id, 
                     signed_user_id
- 
                         FROM spaces 
                         LEFT JOIN spaces_signed ON signed_space_id = space_id AND signed_user_id = :user_id 
-                        WHERE space_is_delete != 1 AND signed_user_id = :user_id";
+                        WHERE space_is_delete != 1 AND signed_user_id = :user_id
+                        ORDER BY space_user_id = :user_id DESC LIMIT 16";
 
         return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
     }

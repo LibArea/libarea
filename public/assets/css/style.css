@@ -854,14 +854,14 @@ footer a.footer:hover { color: #ddd; }
   .no-mob,
   aside { display: none; }
   footer { padding: 8px; }
-  .telo-404 .width-40.ml15 { width: 100%; } 
+  .telo-404 .width-40.ml15 { width: 100%; }
 
   main,
   main.w-75 {
     width: 100%;
     margin-right: 0;
   }
- 
+
   .video-object {
     width: 320px;
     height: 210px;

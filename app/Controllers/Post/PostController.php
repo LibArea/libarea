@@ -117,7 +117,7 @@ class PostController extends MainController
 
         if ($uid['user_id'] > 0 && $post['post_closed'] == 0) {
             Request::getResources()->addBottomStyles('/assets/editor/editormd.css');
-            Request::getResources()->addBottomScript('/assets/editor/editormd.min.js');
+            Request::getResources()->addBottomScript('/assets/editor/meditor.min.js');
             Request::getResources()->addBottomScript('/assets/editor/config-no-preview.js');
         }
 

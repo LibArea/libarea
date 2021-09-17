@@ -106,4 +106,13 @@ return [
     'The code is incorrect'                 => 'The code is incorrect, or it has already been used',
 
     'tl-limitation'                         => 'Your trust level (TL) does not allow you to perform this action',
+    
+    'welcome-info' => '<p>Thank you for registering! Here you will find brief information on how to use this site. .</p>
+    <p>This site consists of <a href="/spaces">spaces </a>. You only automatically subscribe to one space  — <a href="/s/meta">/s/meta</a>. Posts from which you will see (after authorization) on the main page of the site (in the feed). </p>
+    <p><i class="icon-lightbulb red"></i> To see other posts from other spaces in the feed, <b>you need <a href="/spaces">subscribe</a></b> to those of interest to you. </p>
+    <p>As you participate, remember that each <a href="/spaces">space</a> has its own unique personality and rules, which are usually found in the sidebar. These are the basics!  </p>
+    <p><b>By the way... </b></p>
+    <p>Once you done some digging around the site, feel free to check out a more  <a href="https://agouti.info">detailed explanation</a> of how things work here.</p>
+    <p><img alt="Agouti" class="footer-img clear no-mob block" src="/assets/images/agouti_footer.gif"></p>',
+    
 ];

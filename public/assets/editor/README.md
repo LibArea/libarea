@@ -1,15 +1,21 @@
-# Editor.md
+# MEditorJS
 
-![](https://pandao.github.io/editor.md/images/logos/editormd-logo-180x180.png)
+![](https://gitlab.com/cobalt-os-team/MeditorJS/-/raw/master/images/logos/MeditorJS_logo.png)
 
-![](https://img.shields.io/github/stars/pandao/editor.md.svg)
-![](https://img.shields.io/github/forks/pandao/editor.md.svg)
-![](https://img.shields.io/github/tag/pandao/editor.md.svg)
-![](https://img.shields.io/github/release/pandao/editor.md.svg)
-![](https://img.shields.io/github/issues/pandao/editor.md.svg)
-![](https://img.shields.io/bower/v/editor.md.svg)
+> This is a fork of [Editor.md](https://github.com/Pandao/Editor.md) "The open source embeddable online markdown editor (component), based on CodeMirror & jQuery & Marked."
 
-**Editor.md** : The open source embeddable online markdown editor (component), based on CodeMirror & jQuery & Marked.
+**MEditorJS** is an online markdown editor and viewer.
+
+### Download
+
+Go to [releases page](https://gitlab.com/cobalt-os-team/MeditorJS/-/releases), choose your version, go to `Assets` and click on `MeditorJS` under `Packages`, once the download is done unzip the folder and put `MeditorJS` in your project folder.
+
+### Require
+
+```html
+<script src="MeditorJS/meditor.min.js"></script> 
+```
+# Editor.md README :
 
 ### Features
 

@@ -34,7 +34,7 @@
 | Ctrl + Shift + O                                | Упорядоченный список                      | Insert ordered list                                |
 | Ctrl + Shift + P                                | PRE вставка                 | Open Preformatted text dialog                      |
 | Ctrl + Shift + Q                                | Вставьте ссылку                          | Insert blockquotes                                 |
-| Ctrl + Shift + R / Shift + Command + Option + F | Заменить все                          | Replace all                                        |
+| Ctrl + Shift + R / Shift + Command + Option + F | Заменить всё                          | Replace all                                        |
 | Ctrl + Shift + S                                | Зачеркнуто                        | Insert strikethrough                               |
 | Ctrl + Shift + T                                | Таблица                | Open table dialog                                  |
 | Ctrl + Shift + U                                | Заглавные буквы                | Selection text convert to uppercase                |

@@ -50,6 +50,11 @@
             <?php } ?>
           </a>
         <?php } ?>
+        <?php if (count($data['space_user']) > 15) { ?>
+          <a class="gray" title="<?= lang('Spaces'); ?>" href="/spaces">
+            <?= lang('See more'); ?> <i class="icon-right-open-big middle"></i>
+          </a>
+        <?php } ?>
       </div>
     <?php } ?>
 
