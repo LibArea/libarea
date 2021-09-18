@@ -92,7 +92,7 @@ function post_img($file, $alt, $style, $type, $attributes = '')
 // Favicon 
 function favicon_img($link_id, $alt)
 {
-    if (file_exists(AG_PATH_FAVICONS . $link_id . '.png')) {
+    if (file_exists(HLEB_PUBLIC_DIR . AG_PATH_FAVICONS . $link_id . '.png')) {
         $img = '<img class="mr5" src="'. AG_PATH_FAVICONS . $link_id . '.png" alt="' . $alt . '">';
         return $img;
     }
