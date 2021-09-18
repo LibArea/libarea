@@ -177,7 +177,7 @@ error_reporting(E_ALL);
  | Изначально: "/^[a-z0-9а-яё\_\-\/\.]+$/u"
  |
  */
-define( 'HLEB_PROJECT_VALIDITY_URL', "/^[a-zA-Z0-9а-яё\_\-\/\.]+$/u" );
+define( 'HLEB_PROJECT_VALIDITY_URL', "/^[А-Яа-яa-zA-Z0-9\_\-\/\.]+$/u" );
 
 /*
  |-----------------------------------------------------------------------------
@@ -212,4 +212,40 @@ define( 'PR_VIEW_DIR', 'default' );
  | Локализация по умолчанию русская (ru)
  |
  */
-define( 'LANG', include_once(__DIR__ . '/app/Language/ru/lang.php') );
+define( 'LANG', include_once(__DIR__ .'/app/Language/ru/lang.php') );
+
+/*
+ |-----------------------------------------------------------------------------
+ | File paths
+ |-----------------------------------------------------------------------------
+ |
+ | File paths for storing avatars, banners, etc.
+ |
+ |-----------------------------------------------------------------------------
+ | Пути к файлам
+ |-----------------------------------------------------------------------------
+ |
+ | Пути к файлам для хранения аватарок, баннеров и т.д.
+ |
+ */
+ 
+define('AG_PATH_USERS_COVER', '/uploads/users/cover/');
+define('AG_PATH_USERS_SMALL_COVER', '/uploads/users/cover/small/'); 
+ 
+define('AG_PATH_SPACES_COVER', '/uploads/spaces/cover/');
+define('AG_PATH_SPACES_SMALL_COVER', '/uploads/spaces/cover/small/');  
+ 
+define('AG_PATH_USERS_AVATARS', '/uploads/users/avatars/');
+define('AG_PATH_USERS_SMALL_AVATARS', '/uploads/users/avatars/small/');
+
+define('AG_PATH_TOPICS_LOGOS', '/uploads/topics/');
+define('AG_PATH_TOPICS_SMALL_LOGOS', '/uploads/topics/small/');
+
+define('AG_PATH_SPACES_LOGOS', '/uploads/spaces/logos/');
+define('AG_PATH_SPACES_SMALL_LOGOS', '/uploads/spaces/logos/small/');
+
+define('AG_PATH_POSTS_CONTENT', '/uploads/posts/content/');
+define('AG_PATH_POSTS_COVER', '/uploads/posts/cover/');
+define('AG_PATH_POSTS_THUMB', '/uploads/posts/thumbnails/');
+
+define('AG_PATH_FAVICONS', '/uploads/favicons/');

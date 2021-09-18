@@ -5,7 +5,7 @@ namespace Modules\Admin\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Admin\Models\PostModel;
-use Lori\{Content, Base};
+use Agouti\{Content, Base};
 
 class PostsController extends MainController
 {

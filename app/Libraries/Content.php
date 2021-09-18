@@ -1,6 +1,6 @@
 <?php
 
-namespace Lori;
+namespace Agouti;
 
 use App\Models\ContentModel;
 use MyParsedown;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Lori;
+namespace Agouti;
 
 use App\Models\{UserModel, TopicModel, SpaceModel};
 use SimpleImage;
@@ -12,20 +12,20 @@ class UploadImage
     {
         switch ($type) {
             case 'topic':
-                $path_img       = HLEB_PUBLIC_DIR . '/uploads/topics/';
-                $path_img_small = HLEB_PUBLIC_DIR . '/uploads/topics/small/';
+                $path_img       = HLEB_PUBLIC_DIR . AG_PATH_TOPICS_LOGOS;
+                $path_img_small = HLEB_PUBLIC_DIR . AG_PATH_TOPICS_SMALL_LOGOS;
                 $pref = 't-';
                 $default_img = 'topic-default.png';
                 break;
             case 'space':
-                $path_img       = HLEB_PUBLIC_DIR . '/uploads/spaces/logos/';
-                $path_img_small = HLEB_PUBLIC_DIR . '/uploads/spaces/logos/small/';
+                $path_img       = HLEB_PUBLIC_DIR . AG_PATH_SPACES_LOGOS;
+                $path_img_small = HLEB_PUBLIC_DIR . AG_PATH_SPACES_SMALL_LOGOS;
                 $pref =  's-';
                 $default_img = 'space_no.png';
                 break;
             default:
-                $path_img       = HLEB_PUBLIC_DIR . '/uploads/users/avatars/';
-                $path_img_small = HLEB_PUBLIC_DIR . '/uploads/users/avatars/small/';
+                $path_img       = HLEB_PUBLIC_DIR . AG_PATH_USERS_AVATARS;
+                $path_img_small = HLEB_PUBLIC_DIR . AG_PATH_USERS_SMALL_AVATARS;
                 $pref =  'a-';
                 $default_img = 'noavatar.png';
         }
@@ -83,7 +83,7 @@ class UploadImage
 
     public static function post_img($img)
     {
-        $path_img   = HLEB_PUBLIC_DIR . '/uploads/posts/content/';
+        $path_img   = HLEB_PUBLIC_DIR . AG_PATH_POSTS_CONTENT;
         $year       = date('Y') . '/';
         $month      = date('n') . '/';
         $file       = $img['tmp_name'];
@@ -112,7 +112,7 @@ class UploadImage
                 ->resize(850, null)
                 ->toFile($path_img . $year . $month . $filename . '.jpeg', 'image/jpeg');
 
-            return '/uploads/posts/content/' . $year . $month . $filename . '.jpeg';
+            return AG_PATH_POSTS_CONTENT . $year . $month . $filename . '.jpeg';
         }
 
         $image
@@ -120,7 +120,7 @@ class UploadImage
             ->autoOrient()
             ->toFile($path_img . $year . $month . $filename . '.jpeg', 'image/jpeg');
 
-        return '/uploads/posts/content/' . $year . $month . $filename . '.jpeg';
+        return AG_PATH_POSTS_CONTENT . $year . $month . $filename . '.jpeg';
     }
 
 
@@ -128,14 +128,14 @@ class UploadImage
     public static function cover($cover, $content_id, $type)
     {
         // 1920px / 350px
-        $path_cover_img     = HLEB_PUBLIC_DIR . '/uploads/users/cover/';
-        $path_cover_small   = HLEB_PUBLIC_DIR . '/uploads/users/cover/small/';
+        $path_cover_img     = HLEB_PUBLIC_DIR . AG_PATH_USERS_COVER;
+        $path_cover_small   = HLEB_PUBLIC_DIR . AG_PATH_USERS_SMALL_COVER;
         $pref = 'cover-';
         $default_img = 'cover_art.jpeg';
 
         if ($type == 'space') {
-            $path_cover_img     = HLEB_PUBLIC_DIR . '/uploads/spaces/cover/';
-            $path_cover_small   = HLEB_PUBLIC_DIR . '/uploads/spaces/cover/small/';
+            $path_cover_img     = HLEB_PUBLIC_DIR . AG_PATH_SPACES_COVER;
+            $path_cover_small   = HLEB_PUBLIC_DIR . AG_PATH_SPACES_SMALL_COVER;
             $pref = 'cover-';
             $default_img = 'space_cover_no.jpeg';
         }
@@ -171,7 +171,7 @@ class UploadImage
                 chmod($path_cover_small . $cover_art, 0777);
                 unlink($path_cover_small . $cover_art);
             }
-
+            
             if ($type == 'user') {
                 // Запишем обложку 
                 UserModel::setCover($content_id, $new_cover);
@@ -197,7 +197,7 @@ class UploadImage
         }
 
         $image = new  SimpleImage();
-        $path = HLEB_PUBLIC_DIR . '/uploads/posts/cover/';
+        $path = HLEB_PUBLIC_DIR . AG_PATH_POSTS_COVER;
         $year = date('Y') . '/';
         $file = $cover['tmp_name'][0];
         $filename = 'c-' . time();
@@ -230,7 +230,7 @@ class UploadImage
         $ext = pathinfo(parse_url($image, PHP_URL_PATH), PATHINFO_EXTENSION);
         if (in_array($ext, array('jpg', 'jpeg', 'png'))) {
 
-            $path = HLEB_PUBLIC_DIR . '/uploads/posts/thumbnails/';
+            $path = HLEB_PUBLIC_DIR . AG_PATH_POSTS_THUMB;
             $year = date('Y') . '/';
             $filename = 'p-' . time() . '.' . $ext;
             $file = 'p-' . time();

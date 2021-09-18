@@ -57,7 +57,7 @@
             </span>
           </div>
           <?php if (!$uid['user_id']) { ?>
-            <?php if (!Lori\Config::get(Lori\Config::PARAM_INVITE)) { ?>
+            <?php if (!Agouti\Config::get(Agouti\Config::PARAM_INVITE)) { ?>
               <div class="ml30 register">
                 <a class="green size-15" title="<?= lang('Sign up'); ?>" href="<?= getUrlByName('register'); ?>">
                   <?= lang('Sign up'); ?>

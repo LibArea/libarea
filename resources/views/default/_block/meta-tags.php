@@ -10,7 +10,7 @@
 <?php } ?>
 
 <meta property="og:title" content="<?= $meta['meta_title']; ?>" />
-<meta property="og:site_name" content="<?= Lori\Config::get(Lori\Config::PARAM_HOME_TITLE); ?>" />
+<meta property="og:site_name" content="<?= Agouti\Config::get(Agouti\Config::PARAM_HOME_TITLE); ?>" />
 
 <?php if (!empty($meta['canonical'])) {  ?>
   <meta property="og:url" content="<?= $meta['canonical']; ?>" />

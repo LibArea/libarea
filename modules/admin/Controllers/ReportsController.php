@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Admin\Models\ReportModel;
 use App\Models\UserModel;
-use Lori\Base;
+use Agouti\Base;
 
 class ReportsController extends MainController
 {

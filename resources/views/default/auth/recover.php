@@ -12,7 +12,7 @@
 
       <div class="boxline">
         <button type="submit" class="button"><?= lang('Reset'); ?></button>
-        <?php if (!Lori\Config::get(Lori\Config::PARAM_INVITE)) { ?>
+        <?php if (!Agouti\Config::get(Agouti\Config::PARAM_INVITE)) { ?>
           <span class="mr5 ml15 size-13"><a href="<?= getUrlByName('register'); ?>"><?= lang('Sign up'); ?></a></span>
         <?php } ?>
         <span class="mr5 ml15 size-13"><a href="<?= getUrlByName('login'); ?>"><?= lang('Sign in'); ?></a></span>

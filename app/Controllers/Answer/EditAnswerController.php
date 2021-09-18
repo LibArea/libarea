@@ -5,7 +5,7 @@ namespace App\Controllers\Answer;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{AnswerModel, PostModel, UserModel};
-use Lori\{Content, Config, Base, Validation};
+use Agouti\{Content, Config, Base, Validation};
 
 class EditAnswerController extends MainController
 {

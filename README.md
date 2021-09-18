@@ -4,15 +4,7 @@
 
 Discussion (forum) and Q&A platform. Community based on PHP Micro-Framework HLEB.
 
-## PHP Micro-Framework HLEB
-
-https://github.com/phphleb/hleb
-
-Routing > Controllers > Models > Page Builder > Debug Panel
-
-A distinctive feature of the micro-framework HLEB is the minimalism of the code and the speed of work.
-
-### Demonstration
+## Demonstration
 
 ![Agouti](https://raw.githubusercontent.com/AgoutiDev/agouti/main/public/assets/images/agouti.jpg)
 
@@ -24,12 +16,13 @@ Demo: https://agouti.ru/
 
 ### For testing
 
-*   Required: php 7.4+, HTTPS 
 *   Project root folder: public (configure the server )
 *   database/dev.sql
 *   settings: database/dbase.config.php and config.ini
 *   Log in to your account using administrator credentials: `ss@sdf.ru` / `qwer14qwer14`
 *   Or user: `test@test.ru` / `test@test.ru`
+
+PHP 7 >= 7.4.0 required due to use of built-in [mb_str_split](https://www.php.net/manual/en/function.mb-str-split.php) function.
 
 More information (rus.): https://agouti.info/
 
@@ -45,6 +38,14 @@ Ideas, minimalism, design was taken from what I like:
 *   https://subreply.com/
 
 ...
+
+#### PHP Micro-Framework HLEB
+
+https://github.com/phphleb/hleb
+
+Routing > Controllers > Models > Page Builder > Debug Panel
+
+A distinctive feature of the micro-framework HLEB is the minimalism of the code and the speed of work.
 
 #### MIT License
 

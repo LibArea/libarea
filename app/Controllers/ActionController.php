@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\ActionModel;
-use Lori\{Config, Base};
+use Agouti\{Config, Base};
 
 class ActionController extends MainController
 {

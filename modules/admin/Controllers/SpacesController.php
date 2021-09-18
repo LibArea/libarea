@@ -5,7 +5,7 @@ namespace Modules\Admin\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Admin\Models\SpaceModel;
-use Lori\Base;
+use Agouti\Base;
 
 class SpacesController extends MainController
 {

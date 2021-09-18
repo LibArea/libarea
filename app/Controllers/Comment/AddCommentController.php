@@ -5,7 +5,7 @@ namespace App\Controllers\Comment;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{NotificationsModel, ActionModel, AnswerModel, CommentModel, PostModel, UserModel};
-use Lori\{Content, Config, Base, Validation};
+use Agouti\{Content, Config, Base, Validation};
 
 class AddCommentController extends MainController
 {

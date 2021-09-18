@@ -5,7 +5,7 @@ namespace App\Controllers\Comment;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{CommentModel, PostModel, UserModel};
-use Lori\{Content, Base};
+use Agouti\{Content, Base};
 
 class EditCommentController extends MainController
 {

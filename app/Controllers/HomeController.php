@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\HomeModel;
-use Lori\{Content, Config, Base};
+use Agouti\{Content, Config, Base};
 
 class HomeController extends MainController
 {

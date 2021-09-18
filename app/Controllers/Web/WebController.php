@@ -5,7 +5,7 @@ namespace App\Controllers\Web;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{WebModel, FeedModel};
-use Lori\{Content, Config, Base};
+use Agouti\{Content, Config, Base};
 
 class WebController extends MainController
 {

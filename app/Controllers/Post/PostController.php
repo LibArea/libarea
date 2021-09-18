@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\SubscriptionModel;
 use App\Models\{UserModel, PostModel, FeedModel, AnswerModel, CommentModel, FavoriteModel};
-use Lori\{Content, Config, Base};
+use Agouti\{Content, Config, Base};
 
 class PostController extends MainController
 {

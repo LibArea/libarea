@@ -1,6 +1,6 @@
 <?php
 
-namespace Lori;
+namespace Agouti;
 
 use Hleb\Constructor\Handlers\Request;
 use App\Models\NotificationsModel;
@@ -8,7 +8,7 @@ use App\Models\UserModel;
 use App\Models\AuthModel;
 use JacksonJeans\Mail;
 use JacksonJeans\MailException;
-use Lori\Config;
+use Agouti\Config;
 
 class Base
 {

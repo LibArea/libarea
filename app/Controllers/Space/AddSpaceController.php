@@ -5,7 +5,7 @@ namespace App\Controllers\Space;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\SpaceModel;
-use Lori\{Config, Base, Validation};
+use Agouti\{Config, Base, Validation};
 
 class AddSpaceController extends MainController
 {

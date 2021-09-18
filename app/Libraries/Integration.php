@@ -1,9 +1,9 @@
 <?php
 
-namespace Lori;
+namespace Agouti;
 
 use Hleb\Constructor\Handlers\Request;
-use Lori\Config;
+use Agouti\Config;
 
 class Integration
 {

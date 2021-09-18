@@ -134,7 +134,7 @@
                     <?= returnBlock('show-ip', ['ip' => $comment['comment_ip'], 'user_trust_level' => $uid['user_trust_level']]); ?>
                   </div>
                   <div class="comm-telo-body size-15 mt5 mb5">
-                    <?= lori\Content::text($comment['comment_content'], 'line'); ?>
+                    <?= Agouti\Content::text($comment['comment_content'], 'line'); ?>
                   </div>
                 </div>
                 <div class="size-13 flex">
@@ -172,7 +172,7 @@
             <ol class="bg-red-300 size-13 list-none max-width size-15<?php if ($comment['comment_comment_id'] > 0) { ?> ml30<?php } ?>">
               <li class="pr5" id="comment_<?= $comment['comment_id']; ?>">
                 <span class="comm-deletes gray">
-                  <?= lori\Content::text($comment['comment_content'], 'line'); ?>
+                  <?= Agouti\Content::text($comment['comment_content'], 'line'); ?>
                   — <?= $comment['user_login']; ?>
                   <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action right size-13">
                     <?= lang('Recover'); ?>

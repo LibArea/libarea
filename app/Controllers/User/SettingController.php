@@ -5,7 +5,7 @@ namespace App\Controllers\User;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{UserModel, NotificationsModel};
-use Lori\{Config, Base, UploadImage, Validation};
+use Agouti\{Config, Base, UploadImage, Validation};
 
 class SettingController extends MainController
 {
@@ -208,11 +208,10 @@ class SettingController extends MainController
             redirect('/');
         }
 
-        $path_img = HLEB_PUBLIC_DIR . '/uploads/users/cover/';
-
         // Удалим, кроме дефолтной
         if ($user['user_cover_art'] != 'cover_art.jpeg') {
-            unlink($path_img . $user['user_cover_art']);
+            unlink(HLEB_PUBLIC_DIR . AG_PATH_USERS_COVER . $user['user_cover_art']);
+            unlink(HLEB_PUBLIC_DIR . AG_PATH_USERS_SMALL_COVER . $user['user_cover_art']);
         }
 
         UserModel::userCoverRemove($user['user_id']);

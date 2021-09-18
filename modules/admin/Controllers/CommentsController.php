@@ -5,7 +5,7 @@ namespace Modules\Admin\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Admin\Models\CommentModel;
-use Lori\{Content, Base};
+use Agouti\{Content, Base};
 
 class CommentsController extends MainController
 {

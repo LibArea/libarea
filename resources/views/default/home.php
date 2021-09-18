@@ -2,8 +2,8 @@
   <div class="banner banner-bg justify-content-between hidden size-15 flex">
     <div class="wrap flex">
       <div class="pb5 text">
-        <h1 class="size-31"><?= Lori\Config::get(Lori\Config::PARAM_BANNER_TITLE); ?></h1>
-        <div class="size-21 pb15"><?= Lori\Config::get(Lori\Config::PARAM_BANNER_DESC); ?>...</div>
+        <h1 class="size-31"><?= Agouti\Config::get(Agouti\Config::PARAM_BANNER_TITLE); ?></h1>
+        <div class="size-21 pb15"><?= Agouti\Config::get(Agouti\Config::PARAM_BANNER_DESC); ?>...</div>
       </div>
       <div class="pb5">
         <?= returnBlock('banner-login'); ?>

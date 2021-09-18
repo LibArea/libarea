@@ -25,12 +25,12 @@ class MainConnector implements Connector
             "DB"                            => "database/DB.php",
             // "Phphleb\Debugpan\DPanel"    => "app/ThirdParty/phphleb/debugpan/DPanel.php",
 
-            "Lori\Base"                     => "app/Libraries/Base.php",
-            "Lori\Content"                  => "app/Libraries/Content.php",
-            "Lori\UploadImage"              => "app/Libraries/UploadImage.php",
-            "Lori\Integration"              => "app/Libraries/Integration.php",
-            "Lori\Validation"               => "app/Libraries/Validation.php",
-            "Lori\Config"                   => "app/Config/Config.php",
+            "Agouti\Base"                     => "app/Libraries/Base.php",
+            "Agouti\Content"                  => "app/Libraries/Content.php",
+            "Agouti\UploadImage"              => "app/Libraries/UploadImage.php",
+            "Agouti\Integration"              => "app/Libraries/Integration.php",
+            "Agouti\Validation"               => "app/Libraries/Validation.php",
+            "Agouti\Config"                   => "app/Config/Config.php",
 
             "UrlRecord"                     => "app/ThirdParty/UrlRecord/UrlRecord.php",
             "Parsedown"                     => "app/ThirdParty/Parsedown/Parsedown.php",

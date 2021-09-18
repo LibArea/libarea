@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use Hleb\Scheme\App\Controllers\MainController;
-use Lori\{Content, Config, Base};
+use Agouti\{Content, Config, Base};
 
 class InfoController extends MainController
 {

@@ -5,7 +5,7 @@ namespace App\Controllers\Auth;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\UserModel;
-use Lori\{Config, Base, Integration, Validation};
+use Agouti\{Config, Base, Integration, Validation};
 
 class RecoverController extends MainController
 {

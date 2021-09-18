@@ -5,7 +5,7 @@ namespace App\Controllers\Space;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{SubscriptionModel, SpaceModel, FeedModel};
-use Lori\{Content, Config, Base, Validation};
+use Agouti\{Content, Config, Base, Validation};
 
 class SpaceController extends MainController
 {

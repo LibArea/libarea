@@ -5,7 +5,7 @@ namespace App\Controllers\Answer;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{UserModel, AnswerModel};
-use Lori\{Content, Config, Base};
+use Agouti\{Content, Config, Base};
 
 class AnswerController extends MainController
 {

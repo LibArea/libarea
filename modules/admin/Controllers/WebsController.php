@@ -5,7 +5,7 @@ namespace Modules\Admin\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Admin\Models\WebModel;
-use Lori\{Base, Content, Validation};
+use Agouti\{Base, Content, Validation};
 
 class WebsController extends MainController
 {

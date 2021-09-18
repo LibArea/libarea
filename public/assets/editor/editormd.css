@@ -4,7 +4,6 @@
   height: 640px;
   margin: 0 auto;
   text-align: left;
-  overflow: hidden;
   position: relative;
   margin-bottom: 15px;
   border: 1px solid #ddd;
@@ -917,8 +916,8 @@ hr.editormd-page-break {
   padding: 40px;
 }
 
-.editormd-preview-container p {
-  margin: 0;  
+.editormd-preview-container p:first-child {
+  margin-top: 0;  
 }
 
 /* Dark theme */

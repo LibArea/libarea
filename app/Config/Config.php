@@ -1,6 +1,6 @@
 <?php
 
-namespace Lori;
+namespace Agouti;
 
 class Config
 {

@@ -48,8 +48,8 @@
     </div>
     <div class="white-box mt10 pt5 pr15 pb5 pl15">
       <h4 class="mt5"><?= lang('Useful resources'); ?></h4>
-      <i class="icon-record-outline gray-light"></i> <a rel="noreferrer" href="https://loriup.ru">LoriUP.ru</a></br>
-      <i class="icon-record-outline gray-light"></i> <a rel="noreferrer" href="https://phphleb.ru/">PHP Micro-Framework HLEB</a></br>
+      <i class="icon-record-outline gray-light"></i> <a rel="noreferrer" href="https://agouti.ru">Agouti.ru</a></br>
+      <i class="icon-record-outline gray-light"></i> <a rel="noreferrer" href="https://discord.gg/dw47aNx5nU">Discord</a></br>
       </ul>
       <hr>
       <div class="boxline">

@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Hleb\Scheme\App\Models\MainModel;
-use Lori\Config;
+use Agouti\Config;
 use DB;
 use PDO;
 

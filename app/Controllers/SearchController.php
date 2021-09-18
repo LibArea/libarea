@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\SearchModel;
-use Lori\{Content, Config, Base, Validation};
+use Agouti\{Content, Config, Base, Validation};
 
 class SearchController extends MainController
 {

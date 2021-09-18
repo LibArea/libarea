@@ -5,7 +5,7 @@ namespace App\Controllers\Answer;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{NotificationsModel, ActionModel, AnswerModel, PostModel, UserModel};
-use Lori\{Content, Base, Validation};
+use Agouti\{Content, Base, Validation};
 
 class AddAnswerController extends MainController
 {

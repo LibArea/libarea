@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Admin\Models\BadgeModel;
 use App\Models\UserModel;
-use Lori\{Base, Validation};
+use Agouti\{Base, Validation};
 
 class BadgesController extends MainController
 {

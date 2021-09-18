@@ -6,7 +6,7 @@
     <?php } ?>
     <br>
     <?php if (!empty($data['result'])) { ?>
-      <?php if (Lori\Config::get(Lori\Config::PARAM_SEARCH) == 0) { ?>
+      <?php if (Agouti\Config::get(Agouti\Config::PARAM_SEARCH) == 0) { ?>
         <?php foreach ($data['result'] as  $post) { ?>
           <div class="search max-width mb20">
             <a class="search-title size-21" href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">

@@ -5,7 +5,7 @@ namespace Modules\Admin\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Modules\Admin\Models\InvitationModel;
 use App\Models\UserModel;
-use Lori\Base;
+use Agouti\Base;
 
 class InvitationsController extends MainController
 {

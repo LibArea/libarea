@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{NotificationsModel, PostModel, ReportModel};
-use Lori\Base;
+use Agouti\Base;
 
 class ReportController extends MainController
 {

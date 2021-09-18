@@ -5,7 +5,7 @@ namespace Modules\Admin;
 use Hleb\Scheme\App\Controllers\MainController;
 use Modules\Admin\Models\UserModel;
 use App\Models\{SpaceModel, HomeModel, AnswerModel, CommentModel, WebModel, TopicModel};
-use Lori\Base;
+use Agouti\Base;
 
 class HomeController extends MainController
 {

@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\RssModel;
-use Lori\{Content, Config, Base};
+use Agouti\{Content, Config, Base};
 
 class RssController extends MainController
 {

@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{FavoriteModel, PostModel, AnswerModel};
-use Lori\Base;
+use Agouti\Base;
 
 class FavoriteController extends MainController
 {

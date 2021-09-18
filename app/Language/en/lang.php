@@ -1,7 +1,6 @@
 <?php
 return [
     'site-banner'       => 'Community of interests',
-    'site-banner-txt'   => 'The site is under development',
     'comments-desc'     => 'All comments are in order of priority on the site',
     'answers-desc'      => 'All responses (to posts) in order of priority in the community',
     'no-auth-comm'      => 'You must be logged in to leave a comment',

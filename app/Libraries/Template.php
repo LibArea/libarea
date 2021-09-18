@@ -30,9 +30,9 @@ function html_topic($topic, $css)
 // Topic logo img
 function topic_logo_img($file, $size, $alt, $style)
 {
-    $src = '/uploads/topics/' . $file;
+    $src = AG_PATH_TOPICS_LOGOS . $file;
     if ($size == 'small') {
-        $src = '/uploads/topics/small/' . $file;
+        $src = AG_PATH_TOPICS_SMALL_LOGOS . $file;
     }
 
     $img = '<img class="' . $style . '" src="' . $src . '" alt="' . $alt . '">';
@@ -43,9 +43,9 @@ function topic_logo_img($file, $size, $alt, $style)
 // Space logo img
 function spase_logo_img($file, $size, $alt, $style)
 {
-    $src = '/uploads/spaces/logos/' . $file;
+    $src = AG_PATH_SPACES_LOGOS . $file;
     if ($size == 'small') {
-        $src = '/uploads/spaces/logos/small/' . $file;
+        $src = AG_PATH_SPACES_SMALL_LOGOS . $file;
     }
 
     $img = '<img class="' . $style . '" src="' . $src . '" alt="' . $alt . '">';
@@ -56,9 +56,9 @@ function spase_logo_img($file, $size, $alt, $style)
 // User's Avatar
 function user_avatar_img($file, $size, $alt, $style)
 {
-    $src = '/uploads/users/avatars/' . $file;
+    $src = AG_PATH_USERS_AVATARS . $file;
     if ($size == 'small') {
-        $src = '/uploads/users/avatars/small/' . $file;
+        $src = AG_PATH_USERS_SMALL_AVATARS . $file;
     }
 
     $img = '<img class="' . $style . '" src="' . $src . '" alt="' . $alt . '">';
@@ -69,15 +69,15 @@ function user_avatar_img($file, $size, $alt, $style)
 // User's Cover art
 function user_cover_url($file)
 {
-    return '/uploads/users/cover/' . $file;
+    return AG_PATH_USERS_COVER . $file;
 }
 
 // User's Cover art or thumbnails
 function post_img($file, $alt, $style, $type, $attributes = '')
 {
-    $src = '/uploads/posts/cover/' . $file;
+    $src = AG_PATH_POSTS_COVER . $file;
     if ($type == 'thumbnails') {
-        $src = '/uploads/posts/thumbnails/' . $file;
+        $src = AG_PATH_POSTS_THUMB . $file;
     }
 
     if ($attributes) {
@@ -92,12 +92,12 @@ function post_img($file, $alt, $style, $type, $attributes = '')
 // Favicon 
 function favicon_img($link_id, $alt)
 {
-    if (file_exists(HLEB_PUBLIC_DIR . '/uploads/favicons/' . $link_id . '.png')) {
-        $img = '<img class="mr5" src="/uploads/favicons/' . $link_id . '.png" alt="' . $alt . '">';
+    if (file_exists(AG_PATH_FAVICONS . $link_id . '.png')) {
+        $img = '<img class="mr5" src="'. AG_PATH_FAVICONS . $link_id . '.png" alt="' . $alt . '">';
         return $img;
     }
 
-    $img = '<img class="mr5" src="/uploads/favicons/no-link.png" alt="' . $alt . '">';
+    $img = '<img class="mr5" src="'. AG_PATH_FAVICONS . 'no-link.png" alt="' . $alt . '">';
     return $img;
 }
 

@@ -5,7 +5,7 @@ namespace App\Controllers\User;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{NotificationsModel, UserModel, SpaceModel, PostModel};
-use Lori\{Content, Config, Base, Validation};
+use Agouti\{Content, Config, Base, Validation};
 
 class UserController extends MainController
 {
@@ -191,4 +191,6 @@ class UserController extends MainController
 
         return view('/user/subscribed', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
+    
+    function avatar($size, $img) { }
 }

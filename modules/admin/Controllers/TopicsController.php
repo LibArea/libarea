@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Admin\Models\TopicModel;
 use App\Models\PostModel;
-use Lori\{Base, UploadImage, Validation};
+use Agouti\{Base, UploadImage, Validation};
 
 class TopicsController extends MainController
 {

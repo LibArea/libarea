@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use Modules\Admin\Models\{UserModel, BadgeModel};
 use App\Models\SpaceModel;
-use Lori\{Base, Validation};
+use Agouti\{Base, Validation};
 
 class UsersController extends MainController
 {
