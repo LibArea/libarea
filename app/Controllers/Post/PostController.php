@@ -10,6 +10,7 @@ use Agouti\{Content, Config, Base};
 
 class PostController extends MainController
 {
+    
     // Полный пост
     public function index()
     {
@@ -17,14 +18,13 @@ class PostController extends MainController
         $slug       = Request::get('slug');
         $post_id    = Request::getInt('id');
 
-        $post_new   = PostModel::getPostId($post_id);
-
         // Проверим (user_id, user_slug)
+        $post_new   = PostModel::getPostId($post_id);
         Base::PageError404($post_new);
         if ($slug != $post_new['post_slug']) {
-            redirect('/post/' . $post_new['post_id'] . '/' . $post_new['post_slug']);
+            redirect(getUrlByName('post', ['id' => $post_new['post_id'], 'slug' => $post_new['post_slug']]));
         }
-
+ 
         $post = PostModel::getPostSlug($slug, $uid['user_id'], $uid['user_trust_level']);
         Base::PageError404($post);
 
@@ -93,7 +93,7 @@ class PostController extends MainController
 
         $content_img  = null;
         if ($post['post_content_img']) {
-            $content_img  = Config::get(Config::PARAM_URL) . '/uploads/posts/cover/' . $post['post_content_img'];
+            $content_img  = Config::get(Config::PARAM_URL) . AG_PATH_POSTS_COVER . $post['post_content_img'];
         }
 
         $post_signed   = SubscriptionModel::getFocus($post['post_id'], $uid['user_id'], 'post');
@@ -124,10 +124,9 @@ class PostController extends MainController
         if ($post['post_related']) {
             $post_related = PostModel::postRelated($post['post_related']);
         }
-        $post_related = empty($post_related) ? '' : $post_related;
 
         $meta = [
-            'canonical'     => Config::get(Config::PARAM_URL) . '/post/' . $post['post_id'] . '/' . $post['post_slug'],
+            'canonical'     => Config::get(Config::PARAM_URL) . getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]),
             'sheet'         => 'article',
             'post_date'     => $post['post_date'],
             'img'           => $content_img,
@@ -140,7 +139,7 @@ class PostController extends MainController
             'answers'       => $answers,
             'recommend'     => $recommend,
             'lo'            => $lo,
-            'post_related'  => $post_related,
+            'post_related'  => $post_related ?? '',
             'post_signed'   => $post_signed,
             'topics'        => $topics
         ];
@@ -196,12 +195,11 @@ class PostController extends MainController
     // Размещение своего поста у себя в профиле
     public function addPostProfile()
     {
+        $post_id    = Request::getPostInt('post_id');
+        $post       = PostModel::getPostId($post_id);
+
+        // Проверка доступа
         $uid     = Base::getUid();
-        $post_id = Request::getPostInt('post_id');
-
-        $post = PostModel::getPostId($post_id);
-
-        // Проверка доступа 
         if (!accessСheck($post, 'post', $uid, 0, 0)) {
             redirect('/');
         }
@@ -221,10 +219,6 @@ class PostController extends MainController
     {
         $post_id = Request::getPostInt('post_id');
         $post    = PostModel::getPostId($post_id);
-
-        if (!$post) {
-            return false;
-        }
 
         $post['post_content'] = Content::text($post['post_content'], 'text');
 

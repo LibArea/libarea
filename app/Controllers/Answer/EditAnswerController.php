@@ -9,29 +9,34 @@ use Agouti\{Content, Config, Base, Validation};
 
 class EditAnswerController extends MainController
 {
+    private $uid;
+    
+    public function __construct() 
+    {
+        $this->uid  = Base::getUid();
+    }
+    
     // Редактируем ответ
     public function index()
     {
         $answer_id      = Request::getPostInt('answer_id');
         $post_id        = Request::getPostInt('post_id');
-        $answer_content = $_POST['answer']; // не фильтруем
-
+        $answer_content = $_POST['answer']; // для Markdown
         $post           = PostModel::getPostId($post_id);
-        $url = '/post/' . $post['post_id'] . '/' . $post['post_slug'];
 
         // Если кто редактирует забанен / заморожен
-        $uid    = Base::getUid();
-        $user   = UserModel::getUser($uid['user_id'], 'id');
+        $user   = UserModel::getUser($this->uid['user_id'], 'id');
         Base::accountBan($user);
         Content::stopContentQuietМode($user);
 
         $answer = AnswerModel::getAnswerId($answer_id);
 
         // Проверка доступа
-        if (!accessСheck($answer, 'answer', $uid, 0, 0)) {
+        if (!accessСheck($answer, 'answer', $this->uid, 0, 0)) {
             redirect('/');
         }
-
+        
+        $url = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
         Validation::Limits($answer_content, lang('Bodies'), '6', '5000', '/' . $url);
 
         $answer_content = Content::change($answer_content);
@@ -45,13 +50,10 @@ class EditAnswerController extends MainController
     // Покажем форму
     public function edit()
     {
-        $answer_id  = Request::getInt('id');
-        $post_id    = Request::getInt('post_id');
-        $uid        = Base::getUid();
-
         // Проверка доступа 
+        $answer_id  = Request::getInt('id');
         $answer = AnswerModel::getAnswerId($answer_id);
-        if (!accessСheck($answer, 'answer', $uid, 0, 0)) {
+        if (!accessСheck($answer, 'answer', $this->uid, 0, 0)) {
             redirect('/');
         }
 
@@ -59,7 +61,7 @@ class EditAnswerController extends MainController
         Base::PageError404($post);
 
         Request::getResources()->addBottomStyles('/assets/editor/editormd.css');
-        Request::getResources()->addBottomScript('/assets/editor/editormd.js');
+        Request::getResources()->addBottomScript('/assets/editor/meditor.min.js');
         Request::getResources()->addBottomScript('/assets/editor/config.js');
 
         $meta = [
@@ -75,6 +77,6 @@ class EditAnswerController extends MainController
             'post'              => $post,
         ];
 
-        return view('/answer/edit-form-answer', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+        return view('/answer/edit-form-answer', ['meta' => $meta, 'uid' => $this->uid, 'data' => $data]);
     }
 }

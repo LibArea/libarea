@@ -11,6 +11,13 @@ use URLScraper;
 
 class AddPostController extends MainController
 {
+    private $uid;
+    
+    public function __construct() 
+    {
+        $this->uid  = Base::getUid();
+    }
+    
     // Добавим пост
     public function index()
     {
@@ -26,19 +33,15 @@ class AddPostController extends MainController
         $post_merged_id         = Request::getPostInt('post_merged_id');
         $post_tl                = Request::getPostInt('post_tl');
 
-        $related        = empty($_POST['post_select']) ? '' : $_POST['post_select'];
-        $post_related   = empty($related) ? '' : implode(',', $related);
-        $topics         = empty($_POST['topic_select']) ? '' : $_POST['topic_select'];
+        $post_fields    = Request::getPost() ?? [];
+        $post_related   = implode(',', $post_fields['post_select'] ?? []);
+        $topics         = $post_fields['topic_select'] ?? [];
 
         // Используем для возврата
         $redirect = '/post/add';
 
-        // Данные кто добавляет
-        $uid        = Base::getUid();
-        $post_ip    = Request::getRemoteAddress();
-
         // Если пользователь забанен / заморожен
-        $user = UserModel::getUser($uid['user_id'], 'id');
+        $user = UserModel::getUser($this->uid['user_id'], 'id');
         Base::accountBan($user);
         Content::stopContentQuietМode($user);
 
@@ -50,7 +53,7 @@ class AddPostController extends MainController
         // Если стоит ограничение: публиковать может только автор
         if ($space['space_permit_users'] == 1) {
             // Кроме персонала и владельца
-            if ($uid['user_trust_level'] != 5 && $space['space_user_id'] != $uid['user_id']) {
+            if ($this->uid['user_trust_level'] != 5 && $space['space_user_id'] != $this->uid['user_id']) {
                 addMsg(lang('You dont have access'), 'error');
                 redirect($redirect);
             }
@@ -67,7 +70,7 @@ class AddPostController extends MainController
             $link_url           = $parse['scheme'] . '://' . $parse['host'];
 
             // Если домена нет, то добавим его
-            $link = WebModel::getLinkOne($post_url_domain, $uid['user_id']);
+            $link = WebModel::getLinkOne($post_url_domain, $this->uid['user_id']);
             if (!$link) {
                 // Запишем минимальные данный
                 $data = [
@@ -75,7 +78,7 @@ class AddPostController extends MainController
                     'link_url_domain'   => $post_url_domain,
                     'link_title'        => $post_title,
                     'link_content'      => $post_content,
-                    'link_user_id'      => $uid['user_id'],
+                    'link_user_id'      => $this->uid['user_id'],
                     'link_type'         => 0,
                     'link_status'       => 200,
                     'link_category_id'  => 1,
@@ -87,22 +90,14 @@ class AddPostController extends MainController
         }
 
         // Обложка поста
-        $cover          = $_FILES['images'];
-        $check_cover    = $_FILES['images']['name'][0];
-        if ($check_cover) {
+        $cover  = $_FILES['images'];
+        if ($_FILES['images']['name'][0]) {
             $post_img = UploadImage::cover_post($cover, $space_id, $redirect);
         }
 
-        // Проверяем url для > TL1
-        // Ввести проверку дублей и запрещенных, для img повторов
-        $post_url           = empty($post_url) ? '' : $post_url;
-        $post_url_domain    = empty($post_url_domain) ? '' : $post_url_domain;
-        $post_content_img   = empty($post_img) ? '' : $post_img;
-        $og_img             = empty($og_img) ? '' : $og_img;
-
         // Участник с нулевым уровнем доверия должен быть ограничен в добавлении ответов
-        if ($uid['user_trust_level'] < Config::get(Config::PARAM_TL_ADD_POST)) {
-            $num_post =  PostModel::getPostSpeed($uid['user_id']);
+        if ($this->uid['user_trust_level'] < Config::get(Config::PARAM_TL_ADD_POST)) {
+            $num_post =  PostModel::getPostSpeed($this->uid['user_id']);
             if ($num_post > 2) {
                 addMsg(lang('limit-post-day'), 'error');
                 redirect('/');
@@ -118,9 +113,9 @@ class AddPostController extends MainController
         $post_published = 1;
         if (Content::stopWordsExists($post_content)) {
             // Если меньше 2 постов и если контент попал в стоп лист, то заморозка
-            $all_count = ActionModel::ceneralContributionCount($uid['user_id']);
+            $all_count = ActionModel::ceneralContributionCount($this->uid['user_id']);
             if ($all_count < 2) {
-                ActionModel::addLimitingMode($uid['user_id']);
+                ActionModel::addLimitingMode($this->uid['user_id']);
                 addMsg(lang('limiting-mode-1'), 'error');
                 redirect('/');
             }
@@ -129,13 +124,11 @@ class AddPostController extends MainController
             addMsg(lang('post-audit'), 'error');
         }
 
-        $post_content = Content::change($post_content);
-
         $data = [
             'post_title'            => $post_title,
-            'post_content'          => $post_content,
-            'post_content_img'      => $post_content_img,
-            'post_thumb_img'        => $og_img,
+            'post_content'          => Content::change($post_content),
+            'post_content_img'      => $post_img ?? '',
+            'post_thumb_img'        => $og_img ?? '',
             'post_related'          => $post_related,
             'post_merged_id'        => $post_merged_id,
             'post_tl'               => $post_tl,
@@ -143,25 +136,25 @@ class AddPostController extends MainController
             'post_type'             => $post_type,
             'post_translation'      => $post_translation,
             'post_draft'            => $post_draft,
-            'post_ip'               => $post_ip,
+            'post_ip'               => Request::getRemoteAddress(),
             'post_published'        => $post_published,
-            'post_user_id'          => $uid['user_id'],
+            'post_user_id'          => $this->uid['user_id'],
             'post_space_id'         => $space_id,
-            'post_url'              => $post_url,
-            'post_url_domain'       => $post_url_domain,
+            'post_url'              => $post_url ?? '',
+            'post_url_domain'       => $post_url_domain ?? '',
             'post_closed'           => $post_closed,
             'post_top'              => $post_top,
         ];
 
         $last_post_id   = PostModel::AddPost($data);
-        $url_post       = '/post/' . $last_post_id . '/' . $post_slug;
-
+        $url_post       = getUrlByName('post', ['id' => $last_post_id, 'slug' => $post_slug]);
+ 
         if ($post_published == 0) {
-            ActionModel::addAudit('post', $uid['user_id'], $last_post_id);
+            ActionModel::addAudit('post', $this->uid['user_id'], $last_post_id);
             // Оповещение админу
             $type = 15; // Упоминания в посте  
             $user_id  = 1; // админу        
-            NotificationsModel::send($uid['user_id'], $user_id, $type, $last_post_id, $url_post, 1);
+            NotificationsModel::send($this->uid['user_id'], $user_id, $type, $last_post_id, $url_post, 1);
         }
 
         if (!empty($topics)) {
@@ -176,11 +169,11 @@ class AddPostController extends MainController
         if ($message = Content::parseUser($post_content, true, true)) {
             foreach ($message as $user_id) {
                 // Запретим отправку себе
-                if ($user_id == $uid['user_id']) {
+                if ($user_id == $this->uid['user_id']) {
                     continue;
                 }
                 $type = 10; // Упоминания в посте      
-                NotificationsModel::send($uid['user_id'], $user_id, $type, $last_post_id, $url_post, 1);
+                NotificationsModel::send($this->uid['user_id'], $user_id, $type, $last_post_id, $url_post, 1);
                 Base::mailText($user_id, 'appealed');
             }
         }
@@ -192,7 +185,7 @@ class AddPostController extends MainController
             }
         }
 
-        SubscriptionModel::focus($last_post_id, $uid['user_id'], 'post');
+        SubscriptionModel::focus($last_post_id, $this->uid['user_id'], 'post');
 
         redirect($url_post);
     }
@@ -200,10 +193,6 @@ class AddPostController extends MainController
     // Форма добавление поста
     public function add()
     {
-        $uid        = Base::getUid();
-        $spaces     = SpaceModel::getSpaceSelect($uid['user_id'], $uid['user_trust_level']);
-        $space_id   = Request::getInt('space_id');
-
         Request::getHead()->addStyles('/assets/css/image-uploader.css');
         Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
         Request::getResources()->addBottomStyles('/assets/editor/editormd.css');
@@ -218,18 +207,17 @@ class AddPostController extends MainController
         ];
 
         $data = [
-            'spaces'    => $spaces,
-            'space_id'  => $space_id,
+            'spaces'    => SpaceModel::getSpaceSelect($this->uid['user_id'], $this->uid['user_trust_level']),
+            'space_id'  => Request::getInt('space_id'),
         ];
 
-        return view('/post/add', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+        return view('/post/add', ['meta' => $meta, 'uid' => $this->uid, 'data' => $data]);
     }
 
     // Парсинг
     public function grabMeta()
     {
         $url    = Request::getPost('uri');
-        
         $meta   = new URLScraper($url);
         $meta->parse();
         $metaData = $meta->finalize();
@@ -250,7 +238,6 @@ class AddPostController extends MainController
     // Удаление и восстановление контента
     public function deletingAndRestoring()
     {
-        $uid        = Base::getUid();
         $info       = Request::getPost('info');
         $status     = preg_split('/(@)/', $info);
         $type_id    = (int)$status[0]; // id конткнта
@@ -263,7 +250,7 @@ class AddPostController extends MainController
 
         // Проверка доступа 
         $info_type = ActionModel::getInfoTypeContent($type_id, $type);
-        if (!accessСheck($info_type, $type, $uid, 1, 30)) {
+        if (!accessСheck($info_type, $type, $this->uid, 1, 30)) {
             redirect('/');
         }
 
@@ -280,8 +267,8 @@ class AddPostController extends MainController
         }
 
         $data = [
-            'user_id'       => $uid['user_id'],
-            'user_tl'       => $uid['user_trust_level'],
+            'user_id'       => $this->uid['user_id'],
+            'user_tl'       => $this->uid['user_trust_level'],
             'created_at'    => date("Y-m-d H:i:s"),
             'post_id'       => $info_post_id,
             'content_id'    => $info_type[$type . '_id'],

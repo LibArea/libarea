@@ -9,12 +9,19 @@ use Agouti\{Content, Config, Base, UploadImage, Validation};
 
 class EditPostController extends MainController
 {
+    private $uid;
+    
+    public function __construct() 
+    {
+        $this->uid  = Base::getUid();
+    }
+    
     // Изменяем пост
     public function index()
     {
         $post_id                = Request::getPostInt('post_id');
         $post_title             = Request::getPost('post_title');
-        $post_content           = $_POST['post_content']; // не фильтруем 
+        $post_content           = $_POST['post_content']; // для Markdown
         $post_type              = Request::getPostInt('post_type');
         $post_translation       = Request::getPostInt('translation');
         $post_draft             = Request::getPostInt('post_draft');
@@ -27,24 +34,23 @@ class EditPostController extends MainController
         $post_tl                = Request::getPostInt('post_tl');
 
         // Связанные посты и темы
-        $related        = empty($_POST['post_select']) ? '' : $_POST['post_select'];
-        $post_related   = empty($related) ? '' : implode(',', $related);
-        $topics         = empty($_POST['topic_select']) ? '' : $_POST['topic_select'];
-
-        $uid        = Base::getUid();
-        $post       = PostModel::getPostId($post_id);
-        $redirect   = '/post/edit/' . $post_id;
-
+        $post_fields    = Request::getPost() ?? [];
+        $post_related   = implode(',', $post_fields['post_select'] ?? []);
+        $topics         = $post_fields['topic_select'] ?? [];
+        
         // Проверка доступа 
-        if (!accessСheck($post, 'post', $uid, 0, 0)) {
+        $post   = PostModel::getPostId($post_id);
+        if (!accessСheck($post, 'post', $this->uid, 0, 0)) {
             redirect('/');
         }
 
         // Если пользователь забанен / заморожен
-        $user = UserModel::getUser($uid['user_id'], 'id');
+        $user = UserModel::getUser($this->uid['user_id'], 'id');
         Base::accountBan($user);
         Content::stopContentQuietМode($user);
 
+        $redirect   = '/post/edit/' . $post_id;
+        
         // Получаем информацию по пространству
         $space = SpaceModel::getSpace($post_space_id, 'id');
         if (!$space) {
@@ -55,7 +61,7 @@ class EditPostController extends MainController
         // Если стоит ограничение: публиковать может только автор
         if ($space['space_permit_users'] == 1) {
             // Кроме персонала и владельца
-            if ($uid['user_trust_level'] != 5 && $space['space_user_id'] != $uid['user_id']) {
+            if ($this->uid['user_trust_level'] != 5 && $space['space_user_id'] != $this->uid['user_id']) {
                 addMsg(lang('You dont have access'), 'error');
                 redirect($redirect);
             }
@@ -63,7 +69,7 @@ class EditPostController extends MainController
 
         // Если есть смена post_user_id и это TL5
         if ($post['post_user_id'] != $post_user_new) {
-            if ($uid['user_trust_level'] != 5) {
+            if ($this->uid['user_trust_level'] != 5) {
                 $post_user_id = $post['post_user_id'];
             } else {
                 $post_user_id = $post_user_new;
@@ -80,25 +86,18 @@ class EditPostController extends MainController
             $draft = 0;
         }
 
-        // $draft = 1 // это черновик
-        // $post_draft = 0 // изменили
+        $post_date = $post['post_date'];
         if ($draft == 1 && $post_draft == 0) {
             $post_date = date("Y-m-d H:i:s");
-        } else {
-            $post_date = $post['post_date'];
-        }
-
+        } 
+        
         // Обложка поста
         $cover          = $_FILES['images'];
-        $check_cover    = $_FILES['images']['name'][0];
-        if ($check_cover) {
+        if ($_FILES['images']['name'][0]) {
             $post_img = UploadImage::cover_post($cover, $post, $redirect);
         }
 
-        $post_img = empty($post_img) ? $post['post_content_img'] : $post_img;
-        $post_img = empty($post_img) ? '' : $post_img;
-
-        $post_content = Content::change($post_content);
+        $post_img = $post_img ?? $post['post_content_img'];
 
         $data = [
             'post_id'               => $post_id,
@@ -109,8 +108,8 @@ class EditPostController extends MainController
             'post_user_id'          => $post_user_id,
             'post_draft'            => $post_draft,
             'post_space_id'         => $post_space_id,
-            'post_content'          => $post_content,
-            'post_content_img'      => $post_img,
+            'post_content'          => Content::change($post_content),
+            'post_content_img'      => $post_img ?? '',
             'post_related'          => $post_related,
             'post_merged_id'        => $post_merged_id,
             'post_tl'               => $post_tl,
@@ -131,25 +130,19 @@ class EditPostController extends MainController
             }
             TopicModel::addPostTopics($arr, $post_id);
         }
-
-        redirect('/post/' . $post['post_id'] . '/' . $post['post_slug']);
+        
+        redirect(getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]));
     }
 
     // Покажем форму
     public function edit()
     {
-        $post_id    = Request::getInt('id');
-        $uid        = Base::getUid();
-
-        $post   = PostModel::getPostId($post_id);
-
         // Проверка доступа 
-        if (!accessСheck($post, 'post', $uid, 0, 0)) {
+        $post_id    = Request::getInt('id');
+        $post       = PostModel::getPostId($post_id);
+        if (!accessСheck($post, 'post', $this->uid, 0, 0)) {
             redirect('/');
         }
-
-        $space = SpaceModel::getSpaceSelect($uid['user_id'], $uid['user_trust_level']);
-        $user  = UserModel::getUser($post['post_user_id'], 'id');
 
         Request::getHead()->addStyles('/assets/css/image-uploader.css');
         Request::getResources()->addBottomStyles('/assets/css/select2.css');
@@ -159,41 +152,33 @@ class EditPostController extends MainController
         Request::getResources()->addBottomScript('/assets/editor/config.js');
         Request::getResources()->addBottomScript('/assets/js/select2.min.js');
 
-        $post_related   = PostModel::postRelated($post['post_related']);
-        $topic_select   = PostModel::getPostTopic($post['post_id']);
-
         $meta = [
             'sheet'         => 'edit-post',
             'meta_title'    => lang('Edit post') . ' | ' . Config::get(Config::PARAM_NAME),
         ];
 
-
         $data = [
             'sheet'         => 'edit-post',
             'post'          => $post,
-            'post_select'   => $post_related,
-            'space'         => $space,
-            'user'          => $user,
-            'topic_select'  => $topic_select
+            'post_select'   => PostModel::postRelated($post['post_related']),
+            'space'         => SpaceModel::getSpaceSelect($this->uid['user_id'], $this->uid['user_trust_level']),
+            'user'          => UserModel::getUser($post['post_user_id'], 'id'),
+            'topic_select'  => PostModel::getPostTopic($post['post_id']),
         ];
 
-        return view('/post/edit', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+        return view('/post/edit', ['meta' => $meta, 'uid' => $this->uid, 'data' => $data]);
     }
 
     // Удаление обложки
     function imgPostRemove()
     {
         $post_id    = Request::getInt('id');
-        $uid        = Base::getUid();
-
         $post = PostModel::getPostId($post_id);
-
-        // Проверка доступа 
-        if (!accessСheck($post, 'post', $uid, 0, 0)) {
+        if (!accessСheck($post, 'post', $this->uid, 0, 0)) {
             redirect('/');
         }
 
-        $path_img = HLEB_PUBLIC_DIR . '/uploads/posts/cover/' . $post['post_content_img'];
+        $path_img = HLEB_PUBLIC_DIR . AG_PATH_POSTS_COVER . $post['post_content_img'];
 
         PostModel::setPostImgRemove($post['post_id']);
         unlink($path_img);
@@ -206,8 +191,7 @@ class EditPostController extends MainController
     {
         // Фотографии в тело поста
         $img         = $_FILES['editormd-image-file'];
-        $name_img    = $_FILES['editormd-image-file']['name'];
-        if ($name_img) {
+        if ($_FILES['editormd-image-file']['name']) {
             $post_img = UploadImage::post_img($img);
             $response = array(
                 "url"     => $post_img,

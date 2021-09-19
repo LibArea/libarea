@@ -218,7 +218,7 @@ class UploadImage
         // Удалим если есть старая
         if ($post['post_content_img'] != $post_img) {
             chmod($path . $post['post_content_img'], 0777);
-            unlink($path . $post['post_content_img']);
+            @unlink($path . $post['post_content_img']);
         }
 
         return $post_img;
