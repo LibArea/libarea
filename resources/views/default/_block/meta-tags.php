@@ -23,6 +23,8 @@
     <meta property="article:published_time" content="<?= $meta['post_date']; ?>" />
     <meta property="og:image" content="<?= $meta['img']; ?>" />
     <meta property="og:image:type" content="image/webp" />
+    <meta property="og:image:width" content="820" /> 
+    <meta property="og:image:height" content="320" />
   <?php } elseif ($meta['sheet'] == 'profile') { ?>
     <meta property="og:type" content="profile" />
     <meta property="og:image" content="<?= $meta['img']; ?>" />

@@ -38,7 +38,7 @@
         </div>
       </div>
 
-      <?php editor('post', ['post' => $data['post']]); ?>
+      <?= returnBlock('editor/post-editor', ['post_id' => $data['post']['post_id'], 'type' => 'post', 'conten' => $data['post']['post_content']]); ?>
 
       <?php if ($data['post']['post_draft'] == 1) { ?>
         <?php field('radio', [

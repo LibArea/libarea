@@ -149,7 +149,6 @@ class EditPostController extends MainController
         Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
         Request::getResources()->addBottomStyles('/assets/editor/editormd.css');
         Request::getResources()->addBottomScript('/assets/editor/meditor.min.js');
-        Request::getResources()->addBottomScript('/assets/editor/config.js');
         Request::getResources()->addBottomScript('/assets/js/select2.min.js');
 
         $meta = [
@@ -187,11 +186,16 @@ class EditPostController extends MainController
         redirect('/post/edit/' . $post['post_id']);
     }
 
-    public function uploadimage()
+    public function uploadContentImage()
     {
-        // Фотографии в тело поста
+        $user_id    = $this->uid['user_id'];
+        $type       = Request::getGet('type');
+        $post_id    = Request::getGet('post_id');
+         
+        // Фотографии в тело контента
         $img         = $_FILES['editormd-image-file'];
         if ($_FILES['editormd-image-file']['name']) {
+
             $post_img = UploadImage::post_img($img);
             $response = array(
                 "url"     => $post_img,

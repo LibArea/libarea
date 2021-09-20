@@ -62,8 +62,7 @@ class EditAnswerController extends MainController
 
         Request::getResources()->addBottomStyles('/assets/editor/editormd.css');
         Request::getResources()->addBottomScript('/assets/editor/meditor.min.js');
-        Request::getResources()->addBottomScript('/assets/editor/config.js');
-
+ 
         $meta = [
             'sheet'             => 'edit-answers',
             'meta_title'        => lang('Edit answer') . ' | ' . Config::get(Config::PARAM_NAME),

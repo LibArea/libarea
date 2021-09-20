@@ -318,6 +318,14 @@ class PostModel extends MainModel
         return DB::run($sql, ['post_id' => $post_id, 'user_id' => $user_id]);
     }
 
+    // Удаление поста в профиле
+    public static function deletePostProfile($post_id, $user_id)
+    {
+        $sql = "UPDATE users SET user_my_post = '' WHERE user_id = :user_id AND user_my_post = :post_id";
+
+        return DB::run($sql, ['post_id' => $post_id, 'user_id' => $user_id]);
+    }
+
     // Удален пост или нет
     public static function isThePostDeleted($post_id)
     {

@@ -4,11 +4,12 @@
 Route::before('Authorization@noAuth')->getGroup();
     Route::getType('post');
         Route::get('/flag/repost')->controller('ReportController');
-        Route::get('/backend/uploadimage')->controller('Post\EditPostController@uploadimage');
+        Route::get('/backend/upload/image')->controller('Post\EditPostController@uploadContentImage');
         Route::get('/status/action')->controller('ActionController@deletingAndRestoring');
         Route::get('/post/grabtitle')->controller('Post\AddPostController@grabMeta');
         Route::get('/comment/editform')->controller('Comment\EditCommentController@edit');
-        Route::get('/post/addpostprof')->controller('Post\PostController@addPostProfile');
+        Route::get('/post/add/profile')->controller('Post\PostController@addPostProfile');
+        Route::get('/post/delete/profile')->controller('Post\PostController@deletePostProfile');
         Route::get('/favorite/post')->controller('FavoriteController', ['post']);
         Route::get('/favorite/answer')->controller('FavoriteController', ['answer']);
         Route::get('/focus/{type}')->controller('SubscriptionController')->where(['type' => '[a-z]+']);

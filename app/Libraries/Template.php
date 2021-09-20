@@ -3,8 +3,8 @@
 // Localization
 function lang($text)
 {
-    if (isset(LANG[$text])) {
-        return LANG[$text];
+    if (isset(FILE_LANG[$text])) {
+        return FILE_LANG[$text];
     }
     return $text;
 }
@@ -292,7 +292,7 @@ function accessСheck($content, $type, $uid, $after, $stop_time)
         return false;
     }
 
-    // Редактировать может только автор и админ
+    // Доступ получает только автор и админ
     if ($content[$type . '_user_id'] != $uid['user_id'] && $uid['user_trust_level'] != 5) {
         return false;
     }
@@ -320,11 +320,6 @@ function accessСheck($content, $type, $uid, $after, $stop_time)
     return true;
 }
 
-function returnBlock($tpl_file, array $params = [])
-{
-    return includeTemplate('/_block/' . $tpl_file, $params);
-}
-
 function getMsg()
 {
     if (isset($_SESSION['msg'])) {
@@ -348,12 +343,9 @@ function addMsg($msg, $class)
     $_SESSION['msg'][] = array($msg, $class);
 }
 
-function editor($type, $data)
+function returnBlock($tpl_file, array $params = [])
 {
-    if ($type == 'post') {
-        return includeTemplate('/_block/form/post-editor', $data);
-    }
-    return includeTemplate('/_block/form/textarea', $data);
+    return includeTemplate('/_block/' . $tpl_file, $params);
 }
 
 function select($type, array $params = [])

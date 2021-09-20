@@ -9,13 +9,19 @@ use Agouti\{Config, Base, UploadImage, Validation};
 
 class SettingController extends MainController
 {
+    private $uid;
+    
+    public function __construct() 
+    {
+        $this->uid  = Base::getUid();
+    }
+    
     // Форма настройки профиля
     function settingForm()
     {
         // Данные участника
         $login  = Request::get('login');
-        $uid    = Base::getUid();
-        $user   = UserModel::getUser($uid['user_login'], 'slug');
+        $user   = UserModel::getUser($this->uid['user_login'], 'slug');
 
         // Ошибочный Slug в Url
         if ($login != $user['user_login']) {
@@ -23,7 +29,7 @@ class SettingController extends MainController
         }
 
         // Если пользователь забанен
-        $user = UserModel::getUser($uid['user_id'], 'id');
+        $user = UserModel::getUser($this->uid['user_id'], 'id');
         Base::accountBan($user);
 
         $meta = [
@@ -36,7 +42,7 @@ class SettingController extends MainController
             'user'          => $user,
         ];
 
-        return view('/user/setting/setting', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+        return view('/user/setting/setting', ['meta' => $meta, 'uid' => $this->uid, 'data' => $data]);
     }
 
     // Изменение профиля
@@ -46,8 +52,7 @@ class SettingController extends MainController
         $about          = Request::getPost('about');
         $public_email   = Request::getPost('public_email');
 
-        $uid            = Base::getUid();
-        $redirect       = getUrlByName('setting', ['login' => $uid['user_login']]);
+        $redirect       = getUrlByName('setting', ['login' => $this->uid['user_login']]);
 
         Validation::Limits($name, lang('Name'), '3', '11', $redirect);
         Validation::Limits($about, lang('About me'), '0', '255', $redirect);
@@ -57,7 +62,7 @@ class SettingController extends MainController
         }
         
         $data = [
-            'user_id'            => $uid['user_id'],
+            'user_id'            => $this->uid['user_id'],
             'user_name'          => $name,
             'user_color'         => Request::getPostString('color', '#339900'),
             'user_about'         => $about,
@@ -79,12 +84,12 @@ class SettingController extends MainController
     // Форма загрузки аватарки
     function avatarForm()
     {
-        $uid    = Base::getUid();
+
         $login  = Request::get('login');
 
         // Ошибочный Slug в Url
-        if ($login != $uid['user_login']) {
-            redirect(getUrlByName('setting.avatar', ['login' => $uid['user_login']]));
+        if ($login != $this->uid['user_login']) {
+            redirect(getUrlByName('setting.avatar', ['login' => $this->uid['user_login']]));
         }
 
         Request::getHead()->addStyles('/assets/css/image-uploader.css');
@@ -97,20 +102,19 @@ class SettingController extends MainController
 
         $data = [
             'sheet' => 'avatar',
-            'user'  => UserModel::getUser($uid['user_login'], 'slug'),
+            'user'  => UserModel::getUser($this->uid['user_login'], 'slug'),
         ];
 
-        return view('/user/setting/avatar', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+        return view('/user/setting/avatar', ['meta' => $meta, 'uid' => $this->uid, 'data' => $data]);
     }
 
     // Форма изменение пароля
     function securityForm()
     {
-        $uid    = Base::getUid();
         $login  = Request::get('login');
 
-        if ($login != $uid['user_login']) {
-            redirect(getUrlByName('setting.security', ['login' => $uid['user_login']]));
+        if ($login != $this->uid['user_login']) {
+            redirect(getUrlByName('setting.security', ['login' => $this->uid['user_login']]));
         }
 
         $meta = [
@@ -125,20 +129,19 @@ class SettingController extends MainController
             'sheet'         => 'security',
         ];
 
-        return view('/user/setting/security', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+        return view('/user/setting/security', ['meta' => $meta, 'uid' => $this->uid, 'data' => $data]);
     }
 
     // Изменение аватарки
     function avatarEdit()
     {
-        $uid        = Base::getUid();
-        $redirect   = getUrlByName('setting.avatar', ['login' => $uid['user_login']]);
+        $redirect   = getUrlByName('setting.avatar', ['login' => $this->uid['user_login']]);
 
         // Запишем img
         $img        = $_FILES['images'];
         $check_img  = $_FILES['images']['name'][0];
         if ($check_img) {
-            $new_img = UploadImage::img($img, $uid['user_id'], 'user');
+            $new_img = UploadImage::img($img, $this->uid['user_id'], 'user');
             $_SESSION['account']['user_avatar'] = $new_img;
         }
 
@@ -146,7 +149,7 @@ class SettingController extends MainController
         $cover          = $_FILES['cover'];
         $check_cover    = $_FILES['cover']['name'][0];
         if ($check_cover) {
-            UploadImage::cover($cover, $uid['user_id'], 'user');
+            UploadImage::cover($cover, $this->uid['user_id'], 'user');
         }
 
         addMsg(lang('Change saved'), 'success');
@@ -156,12 +159,11 @@ class SettingController extends MainController
     // Изменение пароля
     function securityEdit()
     {
-        $uid  = Base::getUid();
         $password    = Request::getPost('password');
         $password2   = Request::getPost('password2');
         $password3   = Request::getPost('password3');
  
-        $redirect = getUrlByName('setting.security', ['login' => $uid['user_login']]);
+        $redirect = getUrlByName('setting.security', ['login' => $this->uid['user_login']]);
         if ($password2 != $password3) {
             addMsg(lang('pass-match-err'), 'error');
             redirect($redirect);
@@ -193,18 +195,17 @@ class SettingController extends MainController
     // Удаление обложки
     function userCoverRemove()
     {
-        $uid        = Base::getUid();
         $login      = Request::get('login');
-        $redirect   = getUrlByName('setting.avatar', ['login' => $uid['user_login']]);
+        $redirect   = getUrlByName('setting.avatar', ['login' => $this->uid['user_login']]);
 
-        if ($login != $uid['user_login']) {
+        if ($login != $this->uid['user_login']) {
             redirect($redirect);
         }
 
-        $user = UserModel::getUser($uid['user_login'], 'slug');
+        $user = UserModel::getUser($this->uid['user_login'], 'slug');
 
         // Удалять может только автор и админ
-        if ($user['user_id'] != $uid['user_id'] && $uid['user_trust_level'] != 5) {
+        if ($user['user_id'] != $this->uid['user_id'] && $this->uid['user_trust_level'] != 5) {
             redirect('/');
         }
 
@@ -218,7 +219,7 @@ class SettingController extends MainController
         addMsg(lang('Cover removed'), 'success');
 
         // Если удаляет администрация
-        if ($uid['user_trust_level'] == 5) {
+        if ($this->uid['user_trust_level'] == 5) {
             redirect('/admin/users/' . $user['user_id'] . '/edit');
         }
 
@@ -230,8 +231,7 @@ class SettingController extends MainController
     {
         // Данные участника
         $login  = Request::get('login');
-        $uid    = Base::getUid();
-        $user   = UserModel::getUser($uid['user_login'], 'slug');
+        $user   = UserModel::getUser($this->uid['user_login'], 'slug');
 
         // Ошибочный Slug в Url
         if ($login != $user['user_login']) {
@@ -239,7 +239,7 @@ class SettingController extends MainController
         }
 
         // Если пользователь забанен
-        $user = UserModel::getUser($uid['user_id'], 'id');
+        $user = UserModel::getUser($this->uid['user_id'], 'id');
         Base::accountBan($user);
 
         $meta = [
@@ -252,21 +252,20 @@ class SettingController extends MainController
             'setting'   => NotificationsModel::getUserSetting($user['user_id']),
         ];
 
-        return view('/user/setting/notifications', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+        return view('/user/setting/notifications', ['meta' => $meta, 'uid' => $this->uid, 'data' => $data]);
     }
 
     function notificationsEdit()
     {
-        $uid    = Base::getUid();
         $data = [
-            'setting_user_id'           => $uid['user_id'],
+            'setting_user_id'           => $this->uid['user_id'],
             'setting_email_pm'          => Request::getPostInt('setting_email_pm'),
             'setting_email_appealed'    => Request::getPostInt('setting_email_appealed'),
         ];
 
-        NotificationsModel::setUserSetting($data, $uid['user_id']);
+        NotificationsModel::setUserSetting($data, $this->uid['user_id']);
         addMsg(lang('Change saved'), 'success');
 
-        redirect(getUrlByName('setting.notifications', ['login' => $uid['user_login']]));
+        redirect(getUrlByName('setting.notifications', ['login' => $this->uid['user_login']]));
     }
 }

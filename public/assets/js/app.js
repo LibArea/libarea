@@ -83,15 +83,25 @@ $(function () {
     });
   });
   // Add a post to your profile
-  $(document).on("click", ".user-mypost", function () {
+  $(document).on("click", ".add-post-profile", function () {
     let post_id = $(this).data('post');
-    let opt = $(this).data('opt');
     $.ajax({
-      url: '/post/addpostprof',
+      url: '/post/add/profile',
       type: 'POST',
       data: { post_id: post_id },
     }).done(function (data) {
-      $('.user-mypost').find('.mu_post').html('+ в профиле');
+      $('.add-post-profile').find('.mu_post').html('+ в профиле');
+    });
+  });
+  // Delete a post from your profile
+  $(document).on("click", ".del-post-profile", function () {
+    let post_id = $(this).data('post');
+    $.ajax({
+      url: '/post/delete/profile',
+      type: 'POST',
+      data: { post_id: post_id },
+    }).done(function (data) {
+      location.reload();
     });
   });
   // Add / Remove from favorites
@@ -133,7 +143,7 @@ $(function () {
     }).done(function (data) {
       let review = JSON.parse(data);
       document.getElementById('title').value = review.title
-      // document.getElementById('parser').value = review.description
+      document.getElementById('md-redactor').value = review.description
     });
   });
   // Edit comment

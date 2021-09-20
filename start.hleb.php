@@ -21,7 +21,7 @@
  | Изначально: true
  |
  */
-define( 'HLEB_PROJECT_DEBUG', false );
+define('HLEB_PROJECT_DEBUG', false);
 
 /*
  |-----------------------------------------------------------------------------
@@ -40,7 +40,7 @@ define( 'HLEB_PROJECT_DEBUG', false );
  | Изначально: true
  |
  */
-define( 'HLEB_TEMPLATE_CACHE', true );
+define('HLEB_TEMPLATE_CACHE', true);
 
 /*
  |-----------------------------------------------------------------------------
@@ -64,7 +64,7 @@ define( 'HLEB_TEMPLATE_CACHE', true );
  | Изначально: true
  |
  */
-define( 'HLEB_PROJECT_CLASSES_AUTOLOAD', true );
+define('HLEB_PROJECT_CLASSES_AUTOLOAD', true);
 
 /*
  |-----------------------------------------------------------------------------
@@ -110,7 +110,7 @@ define('HLEB_PROJECT_ENDING_URL', false);
  | Изначально: true
  |
  */
-define( 'HLEB_PROJECT_LOG_ON', true );
+define('HLEB_PROJECT_LOG_ON', true);
 
 /*
  |-----------------------------------------------------------------------------
@@ -177,7 +177,7 @@ error_reporting(E_ALL);
  | Изначально: "/^[a-z0-9а-яё\_\-\/\.]+$/u"
  |
  */
-define( 'HLEB_PROJECT_VALIDITY_URL', "/^[А-Яа-яa-zA-Z0-9\_\-\/\.]+$/u" );
+define('HLEB_PROJECT_VALIDITY_URL', "/^[А-Яа-яa-zA-Z0-9\_\-\/\.]+$/u");
 
 /*
  |-----------------------------------------------------------------------------
@@ -196,7 +196,7 @@ define( 'HLEB_PROJECT_VALIDITY_URL', "/^[А-Яа-яa-zA-Z0-9\_\-\/\.]+$/u" );
  | Шаблон по умолчанию: default
  |
  */
-define( 'PR_VIEW_DIR', 'default' );
+define('PR_VIEW_DIR', 'default');
 
 /*
  |-----------------------------------------------------------------------------
@@ -204,15 +204,18 @@ define( 'PR_VIEW_DIR', 'default' );
  |-----------------------------------------------------------------------------
  |
  | The default localization is Russian (ru)
+ | Available for the editor: ru, en, zh
  |
  |-----------------------------------------------------------------------------
  | Загружаем файл локализации
  |-----------------------------------------------------------------------------
  |
  | Локализация по умолчанию русская (ru)
+ | Для редактора доступно: ru, en, zh
  |
  */
-define( 'LANG', include_once(__DIR__ .'/app/Language/ru/lang.php') );
+define('LANG', 'ru'); // To change the localization, change
+define('FILE_LANG', include_once(__DIR__ . '/app/Language/' . LANG . '/lang.php'));
 
 /*
  |-----------------------------------------------------------------------------
@@ -228,13 +231,13 @@ define( 'LANG', include_once(__DIR__ .'/app/Language/ru/lang.php') );
  | Пути к файлам для хранения аватарок, баннеров и т.д.
  |
  */
- 
+
 define('AG_PATH_USERS_COVER', '/uploads/users/cover/');
-define('AG_PATH_USERS_SMALL_COVER', '/uploads/users/cover/small/'); 
- 
+define('AG_PATH_USERS_SMALL_COVER', '/uploads/users/cover/small/');
+
 define('AG_PATH_SPACES_COVER', '/uploads/spaces/cover/');
-define('AG_PATH_SPACES_SMALL_COVER', '/uploads/spaces/cover/small/');  
- 
+define('AG_PATH_SPACES_SMALL_COVER', '/uploads/spaces/cover/small/');
+
 define('AG_PATH_USERS_AVATARS', '/uploads/users/avatars/');
 define('AG_PATH_USERS_SMALL_AVATARS', '/uploads/users/avatars/small/');
 

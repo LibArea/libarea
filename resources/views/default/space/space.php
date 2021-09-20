@@ -39,6 +39,11 @@
   </div>
 <?php } else { ?>
   <main class="w-100">
-    <?= returnBlock('no-content', ['lang' => 'ban-space']); ?>
+    <center class="m15 p15">
+      <i class="size-150 icon-gg block gray"></i>
+      <div class="mt15 pt15 mb20">
+        <?= lang('ban-space'); ?>...
+      </div>
+    </center>
   </main>
 <?php } ?>

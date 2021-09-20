@@ -10,7 +10,6 @@ use Agouti\{Content, Config, Base};
 
 class PostController extends MainController
 {
-    
     // Полный пост
     public function index()
     {
@@ -118,7 +117,6 @@ class PostController extends MainController
         if ($uid['user_id'] > 0 && $post['post_closed'] == 0) {
             Request::getResources()->addBottomStyles('/assets/editor/editormd.css');
             Request::getResources()->addBottomScript('/assets/editor/meditor.min.js');
-            Request::getResources()->addBottomScript('/assets/editor/config-no-preview.js');
         }
 
         if ($post['post_related']) {
@@ -210,6 +208,23 @@ class PostController extends MainController
         }
 
         PostModel::addPostProfile($post_id, $uid['user_id']);
+
+        return true;
+    }
+    
+    // Удаление поста в профиле
+    public function deletePostProfile()
+    {
+        $post_id    = Request::getPostInt('post_id');
+        $post       = PostModel::getPostId($post_id);
+
+        // Проверка доступа
+        $uid     = Base::getUid();
+        if (!accessСheck($post, 'post', $uid, 0, 0)) {
+            redirect('/');
+        }
+
+        PostModel::deletePostProfile($post_id, $uid['user_id']);
 
         return true;
     }

@@ -28,7 +28,7 @@
           <div class="box_h gray"><?= lang('format-cover-post'); ?>.</div>
         </div>
 
-        <?php editor('post', ['post' => null]); ?>
+        <?= returnBlock('editor/post-editor', ['post_id' => null, 'type' => 'post']); ?>
 
         <?php field('radio', [
           ['title' => lang('Is this a draft?'), 'name' => 'post_draft', 'checked' => 0],

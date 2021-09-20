@@ -31,16 +31,16 @@
 
               <?php if ($uid['user_id'] > 0) { ?>
                 <div class="mt0">
-                  <?php if ($uid['user_login'] != $data['user']['user_login']) { ?>
+                  <?php if ($uid['user_login'] == $data['user']['user_login']) { ?>
+                    <a class="button block center mb15" href="<?= getUrlByName('user', ['login' => $data['user']['user_login']]); ?>/setting">
+                      <?= lang('Settings'); ?>
+                    </a>
+                  <?php } else { ?>
                     <?php if ($data['button_pm'] === true) { ?>
                       <a class="button block center size-13 mb15" href="<?= getUrlByName('user', ['login' => $data['user']['user_login']]); ?>/mess">
                         <?= lang('Write a message'); ?>
                       </a>
                     <?php } ?>
-                  <?php } else { ?>
-                    <a class="button block center mb15" href="<?= getUrlByName('user', ['login' => $data['user']['user_login']]); ?>/setting">
-                      <?= lang('Settings'); ?>
-                    </a>
                   <?php } ?>
                 </div>
               <?php } ?>
@@ -176,7 +176,13 @@
                   <a class="title" href="<?= getUrlByName('post', ['id' => $data['onepost']['post_id'], 'slug' => $data['onepost']['post_slug']]); ?>">
                     <?= $data['onepost']['post_title']; ?>
                   </a>
-
+                  <?php if ($uid['user_id'] > 0) { ?>
+                    <?php if ($uid['user_login'] == $data['user']['user_login']) { ?>
+                      <a class="del-post-profile ml10" data-post="<?= $data['onepost']['post_id']; ?>">
+                        <i class="icon-trash-empty red"></i>
+                      </a>
+                    <?php } ?>
+                  <?php } ?>
                   <div class="size-13 lowercase">
                     <a class="gray ml5" href="<?= getUrlByName('user', ['login' => $data['user']['user_login']]); ?>">
                       <?= user_avatar_img($data['user']['user_avatar'], 'small', $data['user']['user_login'], 'ava mr5'); ?>

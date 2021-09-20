@@ -21,7 +21,7 @@
         ['title' => lang('Name'), 'type' => 'text', 'name' => 'name', 'value' => $data['user']['user_name'], 'min' => 3, 'max' => 11, 'help' => '3 - 11 ' . lang('characters')],
       ]); ?>
 
-      <?php editor('text', ['title' => lang('About me'), 'type' => 'text', 'name' => 'about', 'content' => $data['user']['user_about'], 'min' => 0, 'max' => 255, 'help' => '0 - 255 ' . lang('characters')]); ?>
+      <?php returnBlock('editor/textarea', ['title' => lang('About me'), 'type' => 'text', 'name' => 'about', 'content' => $data['user']['user_about'], 'min' => 0, 'max' => 255, 'help' => '0 - 255 ' . lang('characters')]); ?>
 
       <div id="box" class="boxline">
         <label class="form-label" for="post_content"><?= lang('Color'); ?></label>

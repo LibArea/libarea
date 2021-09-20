@@ -197,7 +197,6 @@ class AddPostController extends MainController
         Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
         Request::getResources()->addBottomStyles('/assets/editor/editormd.css');
         Request::getResources()->addBottomScript('/assets/editor/meditor.min.js');
-        Request::getResources()->addBottomScript('/assets/editor/config.js');
         Request::getResources()->addBottomStyles('/assets/css/select2.css');
         Request::getResources()->addBottomScript('/assets/js/select2.min.js');
 

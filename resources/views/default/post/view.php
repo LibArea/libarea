@@ -55,7 +55,7 @@
                     <?php if ($data['post']['user_my_post'] == $data['post']['post_id']) { ?>
                       <span class="mu_post gray-light mr10 ml10">+ <?= lang('in-the-profile'); ?></span>
                     <?php } else { ?>
-                      <a class="user-mypost gray-light mr10 ml10" data-opt="1" data-post="<?= $data['post']['post_id']; ?>">
+                      <a class="add-post-profile gray-light mr10 ml10" data-post="<?= $data['post']['post_id']; ?>">
                         <span class="mu_post"><?= lang('in-the-profile'); ?></span>
                       </a>
                     <?php } ?>
@@ -174,17 +174,7 @@
             <?php if ($data['post']['post_type'] == 0 && $data['post']['post_draft'] == 0) { ?>
               <?php if ($uid['user_id'] > 0) { ?>
                 <?php if ($data['post']['post_closed'] == 0) { ?>
-                  <form id="add_answ" class="new_answer mt15" action="/answer/create" accept-charset="UTF-8" method="post">
-                    <?= csrf_field() ?>
-                    <div id="test-markdown-view-post">
-                      <textarea minlength="6" class="md-post" rows="5" placeholder="<?= lang('write-something'); ?>..." name="answer" id="wmd-input"></textarea>
-                    </div>
-                    <div class="boxline">
-                      <input type="hidden" name="post_id" id="post_id" value="<?= $data['post']['post_id']; ?>">
-                      <input type="hidden" name="answer_id" id="answer_id" value="0">
-                      <input type="submit" class="button" name="answit" value="<?= lang('Reply'); ?>" class="button">
-                    </div>
-                  </form>
+                  <?= returnBlock('editor/answer-create-editor', ['post_id' => $data['post']['post_id'], 'type' => 'answer']); ?>
                 <?php } ?>
               <?php } else { ?>
                 <textarea rows="5" class="bg-gray-000 mt15" disabled="disabled" placeholder="<?= lang('no-auth-comm'); ?>" name="answer" id="answer"></textarea>

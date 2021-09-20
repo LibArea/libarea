@@ -24,7 +24,7 @@
         <input type="hidden" name="color" value="" id="color">
       </div>
 
-      <?php editor('text', ['title' => lang('Text') . ' (Sidebar)', 'type' => 'text', 'name' => 'space_text', 'content' => $data['space']['space_text'], 'help' => lang('Markdown')]); ?>
+      <?php returnBlock('editor/textarea', ['title' => lang('Text') . ' (Sidebar)', 'type' => 'text', 'name' => 'space_text', 'content' => $data['space']['space_text'], 'help' => lang('Markdown')]); ?>
 
       <div class="boxline">
         <input type="hidden" name="space_id" id="space_id" value="<?= $data['space']['space_id']; ?>">
