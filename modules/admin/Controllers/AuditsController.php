@@ -32,7 +32,7 @@ class AuditsController extends MainController
                 $row['content'] = CommentModel::getCommentsId($row['audit_content_id']);
             }
 
-            $result[$ind]       = $row;
+            $result[$ind]   = $row;
         }
 
         $meta = [

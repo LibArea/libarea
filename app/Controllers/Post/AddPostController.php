@@ -23,7 +23,7 @@ class AddPostController extends MainController
     {
         // Получаем title и содержание
         $post_title             = Request::getPost('post_title');
-        $post_content           = $_POST['post_content']; // не фильтруем
+        $post_content           = $_POST['post_content']; // для Markdown
         $post_url               = Request::getPost('post_url');
         $post_closed            = Request::getPostInt('closed');
         $post_draft             = Request::getPostInt('post_draft');

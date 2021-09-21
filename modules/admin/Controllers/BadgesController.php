@@ -67,7 +67,7 @@ class BadgesController extends MainController
     {
         $badge_title         = Request::getPost('badge_title');
         $badge_description   = Request::getPost('badge_description');
-        $badge_icon          = $_POST['badge_icon']; // не фильтруем
+        $badge_icon          = $_POST['badge_icon']; // для Markdown
 
         $redirect = '/admin/badges';
         Validation::Limits($badge_title, lang('Title'), '4', '25', $redirect);
@@ -140,7 +140,7 @@ class BadgesController extends MainController
 
         $badge_title         = Request::getPost('badge_title');
         $badge_description   = Request::getPost('badge_description');
-        $badge_icon          = $_POST['badge_icon']; // не фильтруем
+        $badge_icon          = $_POST['badge_icon']; // для Markdown
 
         Validation::Limits($badge_title, lang('Title'), '4', '25', $redirect);
         Validation::Limits($badge_description, lang('Description'), '12', '250', $redirect);

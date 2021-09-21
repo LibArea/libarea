@@ -15,7 +15,7 @@ class AddAnswerController extends MainController
         $post    = PostModel::getPostId($post_id);
         Base::PageError404($post);
 
-        $answer_content = $_POST['answer'];                 // не фильтруем (для Markdown)
+        $answer_content = $_POST['answer']; // для Markdown
         $uid            = Base::getUid();
 
         // Если пользователь забанен / заморожен

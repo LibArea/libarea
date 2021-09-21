@@ -114,9 +114,9 @@ class TopicsController extends MainController
         Base::PageError404($topic);
 
         $post_fields        = Request::getPost() ?? [];
-        $topic_parent_id    = implode(',', $_POST['topic_parent_id'] ?? []);
-        $topic_related      = implode(',', $_POST['topic_related'] ?? []);
-        $topic_post_related = implode(',', $_POST['post_related'] ?? []);
+        $topic_parent_id    = implode(',', $post_fields['topic_parent_id'] ?? []);
+        $topic_related      = implode(',', $post_fields['topic_related'] ?? []);
+        $topic_post_related = implode(',', $post_fields['post_related'] ?? []);
 
         // Если убираем тему из корневой, то должны очистеть те темы, которые были подтемами
         if ($topic['topic_is_parent'] == 1 && $topic_is_parent == 0) {
