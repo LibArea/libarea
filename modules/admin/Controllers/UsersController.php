@@ -12,7 +12,6 @@ class UsersController extends MainController
 {
     public function index($sheet)
     {
-        $uid    = Base::getUid();
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
@@ -22,11 +21,12 @@ class UsersController extends MainController
 
         $result = array();
         foreach ($user_all as $ind => $row) {
-            $row['replayIp']    = UserModel::replayIp($row['user_reg_ip']);
-            $row['isBan']       = UserModel::isBan($row['user_id']);
-            $row['logs']        = UserModel::userLogId($row['user_id']);
-            $row['created_at']  = lang_date($row['user_created_at']);
-            $result[$ind]       = $row;
+            $row['replayIp']        = UserModel::replayIp($row['user_reg_ip']);
+            $row['isBan']           = UserModel::isBan($row['user_id']);
+            $row['logs']            = UserModel::userLogId($row['user_id']);
+            $row['created_at']      = lang_date($row['user_created_at']);
+            $row['user_updated_at'] = lang_date($row['user_updated_at']);
+            $result[$ind]           = $row;
         }
         
         $meta = [
@@ -41,13 +41,12 @@ class UsersController extends MainController
             'sheet'         => $sheet == 'all' ? 'users' : 'users-ban',
         ];
 
-        return view('/user/users', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+        return view('/user/users', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
     }
 
     // Повторы IP
     public function logsIp()
     {
-        $uid        = Base::getUid();
         $user_ip    = Request::get('ip');
         $user_all   = UserModel::getUserLogsId($user_ip);
 
@@ -67,7 +66,7 @@ class UsersController extends MainController
             'alluser'       => $results,
         ];
 
-        return view('/user/logip', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+        return view('/user/logip', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
     }
 
     // Бан участнику
@@ -83,7 +82,6 @@ class UsersController extends MainController
     // Страница редактиорование участника
     public function userEditPage()
     {
-        $uid        = Base::getUid();
         $user_id    = Request::getInt('id');
 
         if (!$user = UserModel::getUser($user_id, 'id')) {
@@ -111,7 +109,7 @@ class UsersController extends MainController
             'user'              => $user,
         ];
 
-        return view('/user/edit', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+        return view('/user/edit', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
     }
 
     // Редактировать участника

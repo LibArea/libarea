@@ -62,17 +62,18 @@ class SettingController extends MainController
         }
         
         $data = [
-            'user_id'            => $this->uid['user_id'],
-            'user_name'          => $name,
-            'user_color'         => Request::getPostString('color', '#339900'),
-            'user_about'         => $about,
-            'user_website'       => Request::getPostString('website', ''),
-            'user_location'      => Request::getPostString('location', ''),
-            'user_public_email'  => $public_email,
-            'user_skype'         => Request::getPostString('skype', ''),
-            'user_twitter'       => Request::getPostString('twitter', ''),
-            'user_telegram'      => Request::getPostString('telegram', ''),
-            'user_vk'            => Request::getPostString('vk', ''),
+            'user_id'           => $this->uid['user_id'],
+            'user_name'         => $name,
+            'user_updated_at'   => date('Y-m-d H:i:s'),
+            'user_color'        => Request::getPostString('color', '#339900'),
+            'user_about'        => $about,
+            'user_website'      => Request::getPostString('website', ''),
+            'user_location'     => Request::getPostString('location', ''),
+            'user_public_email' => $public_email,
+            'user_skype'        => Request::getPostString('skype', ''),
+            'user_twitter'      => Request::getPostString('twitter', ''),
+            'user_telegram'     => Request::getPostString('telegram', ''),
+            'user_vk'           => Request::getPostString('vk', ''),
         ];
 
         UserModel::editProfile($data);
@@ -215,7 +216,8 @@ class SettingController extends MainController
             unlink(HLEB_PUBLIC_DIR . AG_PATH_USERS_SMALL_COVER . $user['user_cover_art']);
         }
 
-        UserModel::userCoverRemove($user['user_id']);
+        $date = date('Y-m-d H:i:s');
+        UserModel::userCoverRemove($user['user_id'], $date);
         addMsg(lang('Cover removed'), 'success');
 
         // Если удаляет администрация

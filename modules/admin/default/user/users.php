@@ -54,7 +54,8 @@
                   <sup class="red">(<?= $user['replayIp']; ?>)</sup>
                 <?php } ?>
                 <br>
-                <?= $user['created_at']; ?>
+                <?= $user['created_at']; ?> 
+                (<?= lang('ed')?>. <?= $user['user_updated_at']; ?>)
               </td>
               <td class="size-13 align-right">
                 <?php if (!empty($user['logs']['logs_ip_address'])) { ?>

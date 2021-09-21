@@ -9,15 +9,21 @@ use Agouti\{Base, Content, Validation};
 
 class WebsController extends MainController
 {
+    private $uid;
+    
+    public function __construct() 
+    {
+        $this->uid  = Base::getUid();
+    }
+    
     public function index($sheet)
     {
-        $uid    = Base::getUid();
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
         $limit      = 25;
         $pagesCount = WebModel::getLinksAllCount();
-        $domains    = WebModel::getLinksAll($page, $limit, $uid['user_id']);
+        $domains    = WebModel::getLinksAll($page, $limit, $this->uid['user_id']);
 
         $result = array();
         foreach ($domains as $ind => $row) {
@@ -37,7 +43,7 @@ class WebsController extends MainController
             'domains'       => $result,
         ];
 
-        return view('/web/webs', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+        return view('/web/webs', ['meta' => $meta, 'uid' => $this->uid, 'data' => $data]);
     }
 
     // Форма добавление домена
@@ -48,14 +54,12 @@ class WebsController extends MainController
             'sheet'         => 'domains',
         ];
 
-        return view('/web/add', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => []]);
+        return view('/web/add', ['meta' => $meta, 'uid' => $this->uid, 'data' => []]);
     }
 
     // Добавление домена
     public function add()
     {
-        $uid    = Base::getUid();
-
         $link_url           = Request::getPost('link_url');
         $link_title         = Request::getPost('link_title');
         $link_content       = Request::getPost('link_content');
@@ -65,7 +69,7 @@ class WebsController extends MainController
         $link_url           = $parse['scheme'] . '://' . $parse['host'];
 
         $redirect = '/web';
-        $link = WebModel::getLinkOne($link_url_domain, $uid['user_id']);
+        $link = WebModel::getLinkOne($link_url_domain, $this->uid['user_id']);
         if ($link) {
             addMsg(lang('The site is already there'), 'error');
             redirect($redirect);
@@ -79,7 +83,7 @@ class WebsController extends MainController
             'link_url_domain'   => $link_url_domain,
             'link_title'        => $link_title,
             'link_content'      => $link_content,
-            'link_user_id'      => $uid['user_id'],
+            'link_user_id'      => $this->uid['user_id'],
             'link_type'         => 0,
             'link_status'       => 200,
             'link_category_id'  => 1,
@@ -105,17 +109,15 @@ class WebsController extends MainController
             'domain'        => $domain,
         ];
 
-        return view('/web/edit', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
+        return view('/web/edit', ['meta' => $meta, 'uid' => $this->uid, 'data' => $data]);
     }
 
     // Изменение домена
     public function edit()
     {
-        $uid     = Base::getUid();
-        $link_id = Request::getPostInt('link_id');
-
-        $redirect = '/web';
-        if (!$link = WebModel::getLinkId($link_id)) {
+        $redirect   = '/web';
+        $link_id    = Request::getPostInt('link_id');
+        if (!$link  = WebModel::getLinkId($link_id)) {
             redirect($redirect);
         }
 
@@ -134,7 +136,7 @@ class WebsController extends MainController
             'link_url_domain'   => $url_domain,
             'link_title'        => $link_title,
             'link_content'      => $link_content,
-            'link_user_id'      => $uid['user_id'],
+            'link_user_id'      => $this->uid['user_id'],
             'link_type'         => 0,
             'link_status'       => 200,
             'link_category_id'  => 1,
@@ -148,9 +150,7 @@ class WebsController extends MainController
     public function favicon()
     {
         $link_id    = \Request::getPostInt('id');
-        $uid        = Base::getUid();
-
-        $link = WebModel::getLinkId($link_id);
+        $link       = WebModel::getLinkId($link_id);
         Base::PageError404($link);
         
         $puth = HLEB_PUBLIC_DIR. '/uploads/favicons/' . $link["link_id"] . '.png';

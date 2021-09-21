@@ -321,9 +321,9 @@ class PostModel extends MainModel
     // Удаление поста в профиле
     public static function deletePostProfile($post_id, $user_id)
     {
-        $sql = "UPDATE users SET user_my_post = '' WHERE user_id = :user_id AND user_my_post = :post_id";
+        $sql = "UPDATE users SET user_my_post = :my_post_id WHERE user_id = :user_id AND user_my_post = :post_id";
 
-        return DB::run($sql, ['post_id' => $post_id, 'user_id' => $user_id]);
+        return DB::run($sql, ['post_id' => $post_id, 'user_id' => $user_id, 'my_post_id' => 0]);
     }
 
     // Удален пост или нет

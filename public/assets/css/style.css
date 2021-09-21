@@ -17,11 +17,6 @@ body {
   padding: 0;
 }
 
-body.scroll {
-  margin-left: calc(100vw - 100%);
-  margin-right: 0;
-}
-
 :active,
 :hover,
 :focus {
@@ -31,7 +26,7 @@ body.scroll {
 
 body {
   line-height: 1.5rem;
-  font-family: Inter, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif;
   background-color: #f3f3f3;
   padding-top: 50px;
 }
@@ -59,10 +54,6 @@ aside {
   position: relative;
   float: right;
   width: 300px;
-}
-
-body > main {
-  padding: 0.4rem 0.4rem;
 }
 
 .white-box {
@@ -534,7 +525,6 @@ img.img-post,
   margin-right: 3px;
 }
 
-.inner-padding img:hover,
 .post-img a:hover > img,
 .thumb.no-mob:hover {
   opacity: 0.8;
@@ -703,16 +693,7 @@ footer a.footer {
 .p-head.two::before { background-color: #d6ae01; }
 .p-head.three::before { background-color: #f56400; }
 
-.md-icon.discord {
-  width: 31px;
-  height: 37px;
-  fill: none;
-  stroke: #fff;
-  vertical-align: middle;
-}
-
 footer a.footer:hover { color: #ddd; }
-.md-icon.discord:hover { stroke: #ddd; }
 
 .dropdown-menu {
   display: none;
@@ -720,8 +701,7 @@ footer a.footer:hover { color: #ddd; }
   min-width: 155px;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   z-index: 21;
-  right: 6px;
-  top: 36px;
+  right: 10px;
   padding: 2px 4px 4px 4px;
   border-radius: 3px;
 }

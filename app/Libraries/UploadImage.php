@@ -72,7 +72,8 @@ class UploadImage
             } elseif ($type == 'space') {
                 SpaceModel::setImg($content_id, $new_img);
             } else {
-                UserModel::setImg($content_id, $new_img);
+                $date = date('Y-m-d H:i:s');
+                UserModel::setImg($content_id, $new_img, $date);
             }
 
             return $new_img;
@@ -174,7 +175,8 @@ class UploadImage
             
             if ($type == 'user') {
                 // Запишем обложку 
-                UserModel::setCover($content_id, $new_cover);
+                $date = date('Y-m-d H:i:s');
+                UserModel::setCover($content_id, $new_cover, $date);
             } elseif ($type == 'space') {
                 SpaceModel::setCover($content_id, $new_cover);
             }

@@ -712,6 +712,27 @@ INSERT INTO `votes_post` (`votes_post_id`, `votes_post_item_id`, `votes_post_poi
 (1, 2, 1, '127.0.0.1', 1, '2021-08-16 16:29:32');
 
 --
+-- Структура таблицы  и индексы `users_sessions`
+--
+
+CREATE TABLE `users_sessions` (
+  `session_id` int UNSIGNED NOT NULL,
+  `session_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `session_user_id` int UNSIGNED NOT NULL,
+  `session_user_browser` varchar(64) NOT NULL,
+  `session_user_os` varchar(64) NOT NULL,
+  `session_user_ip` varchar(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC; 
+
+ALTER TABLE `users_sessions`
+  ADD PRIMARY KEY (`session_id`),
+  ADD KEY `session_user_ip` (`session_user_ip`);
+  
+ALTER TABLE `users_sessions`
+  MODIFY `session_id` int UNSIGNED NOT NULL AUTO_INCREMENT;  
+
+
+--
 -- Индексы сохранённых таблиц
 --
 

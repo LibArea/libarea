@@ -152,18 +152,34 @@ class UserModel extends MainModel
     }
 
     // Изменение аватарки / обложки
-    public static function setImg($user_id, $img)
+    public static function setImg($user_id, $new_img, $date)
     {
-        $sql = "UPDATE users SET user_avatar = :img WHERE user_id = :user_id";
+        $params = [
+            'user_id'           => $user_id,
+            'user_avatar'       => $new_img,
+            'user_updated_at'   => $date,
+        ];
+        
+        $sql = "UPDATE users 
+                    SET user_avatar = :user_avatar, user_updated_at = :user_updated_at 
+                    WHERE user_id = :user_id";
 
-        return  DB::run($sql, ['user_id' => $user_id, 'img' => $img]);
+        return  DB::run($sql, $params);
     }
 
-    public static function setCover($user_id, $img)
+    public static function setCover($user_id, $new_cover, $date)
     {
-        $sql = "UPDATE users SET user_cover_art = :img WHERE user_id = :user_id";
+        $params = [
+            'user_id'           => $user_id,
+            'user_cover_art'    => $new_cover,
+            'user_updated_at'   => $date,
+        ];
+        
+        $sql = "UPDATE users 
+                    SET user_cover_art = :user_cover_art, user_updated_at = :user_updated_at 
+                    WHERE user_id = :user_id";
 
-        return  DB::run($sql, ['user_id' => $user_id, 'img' => $img]);
+        return  DB::run($sql, $params);
     }
 
     // TL - название
@@ -284,6 +300,7 @@ class UserModel extends MainModel
     {
         $params = [
             'user_name'          => $data['user_name'],
+            'user_updated_at'    => $data['user_updated_at'],
             'user_color'         => $data['user_color'],
             'user_about'         => $data['user_about'],
             'user_website'       => $data['user_website'],
@@ -298,6 +315,7 @@ class UserModel extends MainModel
 
         $sql = "UPDATE users SET 
                     user_name            = :user_name,
+                    user_updated_at      = :user_updated_at,
                     user_color           = :user_color,
                     user_about           = :user_about,
                     user_website         = :user_website,
@@ -313,11 +331,18 @@ class UserModel extends MainModel
     }
 
     // При удаление обложки запишем дефолтную
-    public static function userCoverRemove($user_id)
+    public static function userCoverRemove($user_id, $date)
     {
-        $sql = "UPDATE users SET user_cover_art = 'cover_art.jpeg' WHERE user_id = :user_id";
+        $params = [
+            'user_id'           => $user_id,
+            'user_updated_at'   => $date,
+        ];
+        
+        $sql = "UPDATE users 
+                    SET user_cover_art = 'cover_art.jpeg', user_updated_at = :user_updated_at 
+                    WHERE user_id = :user_id";
 
-        return DB::run($sql, ['user_id' => $user_id]);
+        return DB::run($sql, $params);
     }
 
     // Записываем последние данные авторизации

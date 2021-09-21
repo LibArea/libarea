@@ -24,6 +24,7 @@ class UserModel extends MainModel
                     user_name,
                     user_avatar,
                     user_created_at,
+                    user_updated_at,
                     user_trust_level,
                     user_activated,
                     user_invitation_id,

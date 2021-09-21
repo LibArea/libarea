@@ -10,6 +10,13 @@ use Agouti\{Base, UploadImage, Validation};
 
 class TopicsController extends MainController
 {
+    private $uid;
+    
+    public function __construct() 
+    {
+        $this->uid  = Base::getUid();
+    }
+    
     public function index($sheet)
     {
         $page   = Request::getInt('page');
@@ -31,14 +38,13 @@ class TopicsController extends MainController
             'topics'        => $topics,
         ];  
         
-        return view('/topic/topics', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
+        return view('/topic/topics', ['meta' => $meta, 'uid' => $this->uid, 'data' => $data]);
     }
 
     // Форма добавить topic
     public function addPage()
     {
-        $uid    = Base::getUid();
-        $tl     = Validation::validTl($uid['user_trust_level'], 5, 0, 1);
+        $tl     = Validation::validTl($this->uid['user_trust_level'], 5, 0, 1);
         if ($tl === false) {
             redirect('/');
         }
@@ -48,14 +54,13 @@ class TopicsController extends MainController
             'sheet'         => 'topics',
         ];
         
-        return view('/topic/add', ['meta' => $meta, 'uid' => $uid, 'data' => []]);
+        return view('/topic/add', ['meta' => $meta, 'uid' => $this->uid, 'data' => []]);
     }
 
     // Форма редактирования topic
     public function editPage()
     {
-        $uid    = Base::getUid();
-        $tl     = Validation::validTl($uid['user_trust_level'], 5, 0, 1);
+        $tl     = Validation::validTl($this->uid['user_trust_level'], 5, 0, 1);
         if ($tl === false) {
             redirect('/');
         }
@@ -89,14 +94,12 @@ class TopicsController extends MainController
             'post_related'      => $post_related,
         ];
         
-        return view('/topic/edit', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+        return view('/topic/edit', ['meta' => $meta, 'uid' => $this->uid, 'data' => $data]);
     }
 
     // Edit topic
     public function edit()
     {
-        $uid    = Base::getUid();
-
         $topic_id           = Request::getPostInt('topic_id');
         $topic_title        = Request::getPost('topic_title');
         $topic_description  = Request::getPost('topic_description');
@@ -110,14 +113,10 @@ class TopicsController extends MainController
         $topic = TopicModel::getTopic($topic_id, 'id');
         Base::PageError404($topic);
 
-        $parent_id          = empty($_POST['topic_parent_id']) ? '' : $_POST['topic_parent_id'];
-        $topic_parent_id    = empty($parent_id) ? 0 : implode(',', $parent_id);
-
-        $related            = empty($_POST['topic_related']) ? '' : $_POST['topic_related'];
-        $topic_related      = empty($related) ? '' : implode(',', $related);
-
-        $related_post       = empty($_POST['post_related']) ? '' : $_POST['post_related'];
-        $topic_post_related = empty($related_post) ? '' : implode(',', $related_post);
+        $post_fields        = Request::getPost() ?? [];
+        $topic_parent_id    = implode(',', $_POST['topic_parent_id'] ?? []);
+        $topic_related      = implode(',', $_POST['topic_related'] ?? []);
+        $topic_post_related = implode(',', $_POST['post_related'] ?? []);
 
         // Если убираем тему из корневой, то должны очистеть те темы, которые были подтемами
         if ($topic['topic_is_parent'] == 1 && $topic_is_parent == 0) {
@@ -133,10 +132,10 @@ class TopicsController extends MainController
         Validation::Limits($topic_description, lang('Meta Description'), '44', '225', $redirect);
         Validation::Limits($topic_info, lang('Info'), '14', '5000', $redirect);
 
-        $topic_merged_id    = empty($topic_merged_id) ? 0 : $topic_merged_id;
-        $topic_parent_id    = empty($topic_parent_id) ? 0 : $topic_parent_id;
-        $topic_is_parent    = empty($topic_is_parent) ? 0 : $topic_is_parent;
-        $topic_count        = empty($topic_count) ? 0 : $topic_count;
+        $topic_merged_id    = $topic_merged_id ?? 0;
+        $topic_parent_id    = $topic_parent_id ?? 0;
+        $topic_is_parent    = $topic_is_parent ?? 0;
+        $topic_count        = $topic_count ?? 0;
 
         // Запишем img
         $img = $_FILES['images'];
@@ -172,8 +171,7 @@ class TopicsController extends MainController
     // Добавим topic
     public function add()
     {
-        $uid    = Base::getUid();
-        $tl     = Validation::validTl($uid['user_trust_level'], 5, 0, 1);
+        $tl     = Validation::validTl($this->uid['user_trust_level'], 5, 0, 1);
         if ($tl === false) {
             redirect('/');
         }
@@ -193,8 +191,8 @@ class TopicsController extends MainController
         Validation::Limits($topic_slug, lang('Slug'), '3', '43', $redirect);
         Validation::Limits($topic_seo_title, lang('Slug'), '4', '225', $redirect);
 
-        $topic_merged_id    = empty($topic_merged_id) ? 0 : $topic_merged_id;
-        $topic_related      = empty($topic_related) ? '' : $topic_related;
+        $topic_merged_id    = $topic_merged_id ?? 0;
+        $topic_related      = $topic_related ?? '';
         $topic_img          = 'topic-default.png';
 
         $topic_add_date = date("Y-m-d H:i:s");
