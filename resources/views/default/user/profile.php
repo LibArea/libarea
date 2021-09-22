@@ -231,6 +231,11 @@
                   <i class="icon-award middle"></i>
                   <span class="middle"><?= lang('Reward the user'); ?></span>
                 </a>
+                <?php if ($data['user']['user_whisper']) { ?>
+                   <div class="tips size-13 pt15 pb10 gray-light">
+                     <i class="icon-info green"></i> <?= $data['user']['user_whisper']; ?>
+                   </div>
+                <?php } ?>
                 <hr>
                 <span class="gray">id<?= $data['user']['user_id']; ?> | <?= $data['user']['user_email']; ?></span>
               </div>

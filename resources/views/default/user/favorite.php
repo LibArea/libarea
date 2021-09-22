@@ -1,6 +1,6 @@
 <div class="wrap">
   <main>
-    <div class="white-box pt5 pr15 pb5 pl15">
+    <div class="white-box pt5 pr15 pb0 pl15">
       <?= breadcrumb('/', lang('Home'), getUrlByName('user', ['login' => $uid['user_login']]), lang('Profile'), lang('Favorites'));
       $pages = array(
         array('id' => 'favorites', 'url' => getUrlByName('favorites', ['login' => $uid['user_login']]), 'content' => lang('Favorites')),

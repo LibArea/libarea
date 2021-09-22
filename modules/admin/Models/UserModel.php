@@ -24,7 +24,9 @@ class UserModel extends MainModel
                     user_name,
                     user_avatar,
                     user_created_at,
+                    user_whisper,
                     user_updated_at,
+                    user_whisper,
                     user_trust_level,
                     user_activated,
                     user_invitation_id,
@@ -47,59 +49,6 @@ class UserModel extends MainModel
         $sql = "SELECT user_id FROM users $string";
 
         return DB::run($sql)->rowCount();
-    }
-
-    // По логам
-    public static function userLogId($user_id)
-    {
-        $sql = "SELECT 
-                    logs_id,
-                    logs_user_id,
-                    logs_login,
-                    logs_trust_level,
-                    logs_ip_address,
-                    logs_date
-                        FROM users_logs 
-                        WHERE logs_user_id = :user_id ORDER BY logs_user_id DESC";
-
-        return DB::run($sql, ['user_id' => $user_id])->fetch(PDO::FETCH_ASSOC);
-    }
-
-    // Получение информации по ip для сопоставления
-    public static function getUserLogsId($ip)
-    {
-        $sql = "SELECT 
-                    logs_id,
-                    logs_user_id,
-                    logs_login,
-                    logs_trust_level,
-                    logs_ip_address,
-                    logs_date,
-                    user_id,
-                    user_login,
-                    user_name,
-                    user_email,
-                    user_avatar,
-                    user_created_at,
-                    user_reg_ip,
-                    user_invitation_id,
-                    user_trust_level
-                        FROM users_logs 
-                        LEFT JOIN users ON user_id = logs_user_id
-                        WHERE logs_ip_address = :ip OR user_reg_ip = :ip";
-
-        return DB::run($sql, ['ip' => $ip])->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    // Проверка IP на дубликаты
-    public static function replayIp($ip)
-    {
-        $sql = "SELECT 
-                    user_id, 
-                    user_reg_ip 
-                        FROM users WHERE user_reg_ip = :ip";
-
-        return DB::run($sql, ['ip' => $ip])->rowCount();
     }
 
     // Находит ли пользователь в бан- листе и рабанен ли был он
@@ -230,6 +179,7 @@ class UserModel extends MainModel
             'user_id'            => $data['user_id'],
             'user_email'         => $data['user_email'],
             'user_login'         => $data['user_login'],
+            'user_whisper'       => $data['user_whisper'],
             'user_name'          => $data['user_name'],
             'user_activated'     => $data['user_activated'],
             'user_limiting_mode' => $data['user_limiting_mode'],
@@ -247,6 +197,7 @@ class UserModel extends MainModel
         $sql = "UPDATE users SET 
                     user_email           = :user_email,  
                     user_login           = :user_login, 
+                    user_whisper         = :user_whisper, 
                     user_name            = :user_name,
                     user_activated       = :user_activated,
                     user_limiting_mode   = :user_limiting_mode,
@@ -280,6 +231,7 @@ class UserModel extends MainModel
                     user_limiting_mode,
                     user_reg_ip,
                     user_email,
+                    user_whisper,
                     user_avatar,
                     user_trust_level,
                     user_cover_art,
@@ -294,6 +246,7 @@ class UserModel extends MainModel
                     user_telegram,
                     user_vk,
                     user_created_at,
+                    user_updated_at,
                     user_my_post,
                     user_ban_list,
                     user_hits_count,

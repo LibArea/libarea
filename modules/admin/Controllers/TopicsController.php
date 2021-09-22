@@ -113,11 +113,6 @@ class TopicsController extends MainController
         $topic = TopicModel::getTopic($topic_id, 'id');
         Base::PageError404($topic);
 
-        $post_fields        = Request::getPost() ?? [];
-        $topic_parent_id    = implode(',', $post_fields['topic_parent_id'] ?? []);
-        $topic_related      = implode(',', $post_fields['topic_related'] ?? []);
-        $topic_post_related = implode(',', $post_fields['post_related'] ?? []);
-
         // Если убираем тему из корневой, то должны очистеть те темы, которые были подтемами
         if ($topic['topic_is_parent'] == 1 && $topic_is_parent == 0) {
             TopicModel::clearBinding($topic['topic_id']);
@@ -132,11 +127,6 @@ class TopicsController extends MainController
         Validation::Limits($topic_description, lang('Meta Description'), '44', '225', $redirect);
         Validation::Limits($topic_info, lang('Info'), '14', '5000', $redirect);
 
-        $topic_merged_id    = $topic_merged_id ?? 0;
-        $topic_parent_id    = $topic_parent_id ?? 0;
-        $topic_is_parent    = $topic_is_parent ?? 0;
-        $topic_count        = $topic_count ?? 0;
-
         // Запишем img
         $img = $_FILES['images'];
         $check_img  = $_FILES['images']['name'][0];
@@ -144,23 +134,21 @@ class TopicsController extends MainController
             UploadImage::img($img, $topic['topic_id'], 'topic');
         }
 
-        $topic_add_date = date("Y-m-d H:i:s");
+        $post_fields        = Request::getPost() ?? [];
         $data = [
             'topic_id'              => $topic_id,
             'topic_title'           => $topic_title,
             'topic_description'     => $topic_description,
             'topic_info'            => $topic_info,
             'topic_slug'            => $topic_slug,
-            'topic_add_date'        => $topic_add_date,
             'topic_seo_title'       => $topic_seo_title,
-            'topic_merged_id'       => $topic_merged_id,
-            'topic_parent_id'       => $topic_parent_id,
+            'topic_parent_id'       => implode(',', $post_fields['topic_parent_id'] ?? ['0']),
             'topic_is_parent'       => $topic_is_parent,
-            'topic_post_related'    => $topic_post_related,
-            'topic_related'         => $topic_related,
+            'topic_post_related'    => implode(',', $post_fields['topic_post_related'] ?? ['0']),
+            'topic_related'         => implode(',', $post_fields['topic_related'] ?? ['0']),
             'topic_count'           => $topic_count,
         ];
-
+        
         TopicModel::edit($data);
 
         addMsg(lang('Changes saved'), 'success');
@@ -191,20 +179,15 @@ class TopicsController extends MainController
         Validation::Limits($topic_slug, lang('Slug'), '3', '43', $redirect);
         Validation::Limits($topic_seo_title, lang('Slug'), '4', '225', $redirect);
 
-        $topic_merged_id    = $topic_merged_id ?? 0;
-        $topic_related      = $topic_related ?? '';
-        $topic_img          = 'topic-default.png';
-
-        $topic_add_date = date("Y-m-d H:i:s");
         $data = [
             'topic_title'       => $topic_title,
             'topic_description' => $topic_description,
             'topic_slug'        => $topic_slug,
-            'topic_img'         => $topic_img,
-            'topic_add_date'    => $topic_add_date,
+            'topic_img'         => 'topic-default.png',
+            'topic_add_date'    =>  date("Y-m-d H:i:s"),
             'topic_seo_title'   => $topic_seo_title,
-            'topic_merged_id'   => $topic_merged_id,
-            'topic_related'     => $topic_related,
+            'topic_merged_id'   => $topic_merged_id ?? 0,
+            'topic_related'     => $topic_related ?? 0,
             'topic_count'       => 0,
         ];
 

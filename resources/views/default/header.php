@@ -42,11 +42,11 @@
           <div>
             <a class="gray-light-2 ml30 no-mob" title="<?= lang('Spaces'); ?>" href="<?= getUrlByName('spaces'); ?>">
               <i class="icon-infinity size-21"></i>
-              <span><?= lang('Spaces'); ?></span>
+              <span class="no-mob-max"><?= lang('Spaces'); ?></span>
             </a>
             <a class="gray-light-2 ml30 no-mob" title="<?= lang('Topics'); ?>" href="<?= getUrlByName('topics'); ?>">
               <i class="icon-clone size-21"></i>
-              <span><?= lang('Topics'); ?></span>
+              <span class="no-mob-max"><?= lang('Topics'); ?></span>
             </a>
           </div>
         </div>

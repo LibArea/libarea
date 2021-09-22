@@ -32,7 +32,7 @@
               <?php } ?>
             <?php } ?>
             <a title="<?= lang('Info'); ?>" class="size-13 lowercase right gray" href="<?= getUrlByName('topic', ['slug' => $data['topic']['topic_slug']]); ?>/info">
-              <i class="icon-info"></i>
+              <i class="icon-info green"></i>
             </a>
           </div>
         </div>

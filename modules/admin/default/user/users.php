@@ -35,40 +35,45 @@
                 <?php } ?>
                 <sup class="red">TL:<?= $user['user_trust_level']; ?></sup>
                 <?php if ($user['user_invitation_id'] != 0) { ?><sup>+ inv. id<?= $user['user_invitation_id']; ?></sup><?php } ?>
+                <?php if ($user['user_whisper']) { ?>
+                   <span data-id="<?= $user['user_whisper']; ?>" class="tips size-13 gray-light">
+                     <i class="icon-info green"></i>
+                   </span>
+                <?php } ?>
                 <div class="size-13">
                   <?= $user['user_email']; ?>
+                <?php if ($user['user_activated'] == 1) { ?>
+                  <div class="gray-light"><?= lang('Email activated'); ?></div>
+                <?php } else { ?>
+                  <div class="red"><?= lang('Not activated'); ?> e-mail</div>
+                <?php } ?>
                 </div>
                 <?php if ($user['user_limiting_mode'] == 1) { ?>
                   <div class="red"><?= lang('Dumb mode'); ?></div>
                 <?php } ?>
-
                 <?php if (!empty($user['isBan']['banlist_int_num'])) { ?>
                   bans: <?= $user['isBan']['banlist_int_num']; ?>
                 <?php } ?>
               </td>
               <td class="size-13 align-right">
-                <a class="gray-light ml10" href="/admin/logip/<?= $user['user_reg_ip']; ?>">
-                  <?= $user['user_reg_ip']; ?>
+                <a class="gray-light ml10" href="/admin/regip/<?= $user['user_reg_ip']; ?>">
+                  <?= $user['user_reg_ip']; ?>  
                 </a>
-                <?php if ($user['replayIp'] > 1) { ?>
-                  <sup class="red">(<?= $user['replayIp']; ?>)</sup>
+                <?php if ($user['duplicat_ip_reg'] > 1) { ?>
+                  <sup class="red">(<?= $user['duplicat_ip_reg']; ?>)</sup>
                 <?php } ?>
                 <br>
                 <?= $user['created_at']; ?> 
-                (<?= lang('ed')?>. <?= $user['user_updated_at']; ?>)
               </td>
               <td class="size-13 align-right">
-                <?php if (!empty($user['logs']['logs_ip_address'])) { ?>
-                  <a class="gray-light ml10" href="/admin/logip/<?= $user['logs']['logs_ip_address']; ?>">
-                    <?= $user['logs']['logs_ip_address']; ?>
+                <?php if (!empty($user['last_visit_logs']['latest_ip'])) { ?>
+                  <a class="gray-light ml10" href="/admin/logip/<?= $user['last_visit_logs']['latest_ip']; ?>">
+                    <?= $user['last_visit_logs']['latest_ip']; ?>
                   </a>
                   <br>
-                  <?= $user['logs']['logs_date']; ?>
                 <?php } ?>
-                <?php if ($user['user_activated'] == 1) { ?>
-                  <div><?= lang('Email activated'); ?></div>
-                <?php } else { ?>
-                  <span class="red"><?= lang('Not activated'); ?> e-mail</span>
+                <?php if (!empty($user['last_visit_logs']['latest_date'])) { ?>
+                    <?= $user['last_visit_logs']['latest_date']; ?>
                 <?php } ?>
               </td>
               <td class="center">

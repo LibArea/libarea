@@ -4,7 +4,7 @@ namespace Modules\Admin;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Modules\Admin\Models\UserModel;
-use App\Models\{SpaceModel, HomeModel, AnswerModel, CommentModel, WebModel, TopicModel};
+use App\Models\{SpaceModel, HomeModel, AnswerModel, CommentModel, WebModel, TopicModel, AgentModel};
 use Agouti\Base;
 
 class HomeController extends MainController
@@ -28,6 +28,7 @@ class HomeController extends MainController
             'answers_count'     => AnswerModel::getAnswersAllCount(),
             'comments_count'    => CommentModel::getCommentAllCount(),
             'links_count'       => WebModel::getLinksAllCount(),
+            'last_visit'        => AgentModel::getLastVisit(),
             'bytes'             => $bytes,
         ];
         

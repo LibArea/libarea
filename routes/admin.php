@@ -29,8 +29,9 @@ Route::before('Authorization@admin')->getGroup();
     Route::get('/users/ban')->module('admin', 'Controllers\UsersController', ['ban']);
     Route::get('/users/{id}/edit')->module('admin', 'Controllers\UsersController@userEditPage')->where(['id' => '[0-9]+'])->name('admin.user.edit');
     Route::get('/users/page/{page?}')->module('admin', 'Controllers\UsersController', ['all'])->where(['page' => '[0-9]+']);
-    Route::get('/logip/{ip}')->module('admin', 'Controllers\UsersController@logsIp')->where(['ip' => '[0-9].+']);
-  
+    Route::get('/logip/{ip}')->module('admin', 'Controllers\UsersController@logsIp', ['logs'])->where(['ip' => '[0-9].+']);
+    Route::get('/regip/{ip}')->module('admin', 'Controllers\UsersController@logsIp', ['reg'])->where(['ip' => '[0-9].+']);
+    
     Route::get('/audits')->module('admin', 'Controllers\AuditsController', ['all'])->name('admin.audits');
     Route::get('/audits/approved')->module('admin', 'Controllers\AuditsController', ['approved']);
    

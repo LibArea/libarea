@@ -51,10 +51,8 @@ class LoginController extends MainController
             Base::rememberMe($uid['user_id']);
         }
 
-        $last_ip = Request::getRemoteAddress();
-        UserModel::setUserLastLogs($uid['user_id'], $uid['user_login'], $uid['user_trust_level'], $last_ip);
-
         Base::setUserSession($uid);
+        $set = (new \App\Controllers\AgentController())->set();
 
         redirect('/');
     }

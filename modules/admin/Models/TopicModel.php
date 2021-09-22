@@ -174,7 +174,7 @@ class TopicModel extends MainModel
                     topic_related       = :topic_related, 
                     topic_count         = :topic_count 
                         WHERE topic_id  = :topic_id";
-
+ 
         return  DB::run($sql, $params);
     }
 

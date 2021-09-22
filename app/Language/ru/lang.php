@@ -18,6 +18,7 @@ return [
     'The post'          => 'Поста',
     'Bodies'            => 'Тела',
     'Thanks'            => 'Спасибо',
+    'Whisper'           => 'Шёпот',
     'Report'            => 'Флаг',
     'Reports'           => 'Флаги',
     'complained about'  => 'пожаловался на',

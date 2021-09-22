@@ -8,11 +8,17 @@
           <th><?= lang('Information'); ?></th>
           <th>E-mail</th>
           <th><?= lang('Sign up'); ?></th>
-          <th>IP <?= lang('registrations'); ?></th>
+          <th>
+              <?php if ($data['option'] == 'logs') { ?>
+                  <?= lang('Last'); ?>
+              <?php } else { ?>
+                  IP
+              <?php } ?>
+          </th>
           <th>Ban</th>
           <th><?= lang('Action'); ?></th>
         </thead>
-        <?php foreach ($data['alluser'] as $user) {  ?>
+        <?php foreach ($data['results'] as $user) {  ?>
           <tr>
             <td class="center">
               <?= $user['user_id']; ?>
@@ -26,7 +32,7 @@
                 (<?= $user['user_name']; ?>)
               <?php } ?>
               <sup class="red">TL:<?= $user['user_trust_level']; ?></sup>
-              <?php if ($user['user_invitation_id'] != 0) { ?><sup>+ inv. id<?= $user['user_invitation_id']; ?></sup><?php } ?> <br>
+            
             </td>
             <td>
               <span class="date"><?= $user['user_email']; ?></span>
@@ -34,10 +40,16 @@
             <td>
               <?= $user['user_created_at']; ?>
             </td>
-            <td>
-              <?= $user['user_reg_ip']; ?> <?php if ($user['replayIp'] > 1) { ?>
-                <sup class="red">(<?= $user['replayIp']; ?>)</sup>
+            <td> 
+             <?php if ($data['option'] == 'logs') { ?>
+                  <?= $user['latest_date']; ?>
+              <?php } else { ?>
+                  <?= $user['user_reg_ip']; ?>
               <?php } ?>
+                
+                <?php if ($user['duplicat_ip_reg'] > 1) { ?>
+                  <br> <sup class="red">(<?= $user['duplicat_ip_reg']; ?>)</sup>
+                <?php } ?>
             </td>
             <td class="center">
               <?php if ($user['user_trust_level'] != 5) { ?>

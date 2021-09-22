@@ -5,7 +5,7 @@
   margin: 0 auto;
   text-align: left;
   position: relative;
-  margin-bottom: 15px;
+  margin: 15px 0 15px 0;
   border: 1px solid #ddd;
   z-index: 333;
 }

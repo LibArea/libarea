@@ -488,8 +488,10 @@ CREATE TABLE `users` (
   `user_trust_level` int(11) NOT NULL COMMENT 'Уровень доверия. По умолчанию 0 (5 - админ)',
   `user_created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `user_updated_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `user_invitation_available` int(10) NOT NULL DEFAULT 0,
+  `user_invitation_available` int(11) NOT NULL DEFAULT 0,
   `user_invitation_id` int(11) NOT NULL DEFAULT 0,
+  `user_design_is_minimal` tinyint(1) DEFAULT 0,
+  `user_whisper` varchar(255) NOT NULL,
   `user_avatar` varchar(255) NOT NULL DEFAULT 'noavatar.png',
   `user_cover_art` varchar(255) NOT NULL DEFAULT 'cover_art.jpeg',
   `user_color` varchar(12) NOT NULL DEFAULT '#f56400',
@@ -512,9 +514,9 @@ CREATE TABLE `users` (
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`user_id`, `user_login`, `user_name`, `user_email`, `user_password`, `user_activated`, `user_limiting_mode`, `user_reg_ip`, `user_trust_level`, `user_created_at`, `user_updated_at`, `user_invitation_available`, `user_invitation_id`, `user_avatar`, `user_cover_art`, `user_color`, `user_about`, `user_website`, `user_location`, `user_public_email`, `user_skype`, `user_twitter`, `user_telegram`, `user_vk`, `user_rating`, `user_my_post`, `user_ban_list`, `user_hits_count`, `user_is_deleted`) VALUES
-(1, 'AdreS', 'Олег', 'ss@sdf.ru', '$2y$10$oR5VZ.zk7IN/og70gQq/f.0Sb.GQJ33VZHIES4pyIpU3W2vF6aiaW', 1, 0, '127.0.0.1', 5, '2021-03-08 21:37:04', '2021-03-08 21:37:04', 0, 0, 'img_1.jpg', 'cover_art.jpeg', '#f56400', 'Тестовый аккаунт', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0),
-(2, 'test', NULL, 'test@test.ru', '$2y$10$Iahcsh3ima0kGqgk6S/SSui5/ETU5bQueYROFhOsjUU/z1.xynR7W', 1, 0, '127.0.0.1', 1, '2021-04-30 07:42:52', '2021-04-30 07:42:52', 0, 0, 'noavatar.png', 'cover_art.jpeg', '#339900', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0);
+INSERT INTO `users` (`user_id`, `user_login`, `user_name`, `user_email`, `user_password`, `user_activated`, `user_limiting_mode`, `user_reg_ip`, `user_trust_level`, `user_created_at`, `user_updated_at`, `user_invitation_available`, `user_invitation_id`, `user_design_is_minimal`, `user_whisper`, `user_avatar`, `user_cover_art`, `user_color`, `user_about`, `user_website`, `user_location`, `user_public_email`, `user_skype`, `user_twitter`, `user_telegram`, `user_vk`, `user_rating`, `user_my_post`, `user_ban_list`, `user_hits_count`, `user_is_deleted`) VALUES
+(1, 'AdreS', 'Олег', 'ss@sdf.ru', '$2y$10$oR5VZ.zk7IN/og70gQq/f.0Sb.GQJ33VZHIES4pyIpU3W2vF6aiaW', 1, 0, '127.0.0.1', 5, '2021-03-08 21:37:04', '2021-03-08 21:37:04', 0, 0, 0, '', 'img_1.jpg', 'cover_art.jpeg', '#f56400', 'Тестовый аккаунт', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0),
+(2, 'test', NULL, 'test@test.ru', '$2y$10$Iahcsh3ima0kGqgk6S/SSui5/ETU5bQueYROFhOsjUU/z1.xynR7W', 1, 0, '127.0.0.1', 1, '2021-04-30 07:42:52', '2021-04-30 07:42:52', 0, 0, 0, '', 'noavatar.png', 'cover_art.jpeg', '#339900', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -575,34 +577,6 @@ CREATE TABLE `users_email_activate` (
   `email_code` varchar(50) NOT NULL,
   `email_activate_flag` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `users_logs`
---
-
-CREATE TABLE `users_logs` (
-  `logs_id` int(11) NOT NULL,
-  `logs_user_id` int(11) NOT NULL,
-  `logs_login` varchar(255) NOT NULL,
-  `logs_trust_level` int(11) NOT NULL,
-  `logs_ip_address` varchar(45) NOT NULL,
-  `logs_date` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Дамп данных таблицы `users_logs`
---
-
-INSERT INTO `users_logs` (`logs_id`, `logs_user_id`, `logs_login`, `logs_trust_level`, `logs_ip_address`, `logs_date`) VALUES
-(1, 1, 'AdreS', 5, '127.0.0.1', '2021-04-30 07:19:27'),
-(2, 2, 'test', 1, '127.0.0.1', '2021-04-30 07:43:04'),
-(3, 1, 'AdreS', 5, '127.0.0.1', '2021-07-02 07:33:25'),
-(4, 2, 'test', 1, '127.0.0.1', '2021-07-02 07:34:26'),
-(5, 1, 'AdreS', 5, '127.0.0.1', '2021-07-02 07:35:28'),
-(6, 1, 'AdreS', 5, '127.0.0.1', '2021-08-16 17:23:55'),
-(7, 1, 'AdreS', 5, '127.0.0.1', '2021-09-18 16:57:18');
 
 -- --------------------------------------------------------
 
@@ -710,6 +684,32 @@ CREATE TABLE `votes_post` (
 
 INSERT INTO `votes_post` (`votes_post_id`, `votes_post_item_id`, `votes_post_points`, `votes_post_ip`, `votes_post_user_id`, `votes_post_date`) VALUES
 (1, 2, 1, '127.0.0.1', 1, '2021-08-16 16:29:32');
+
+
+--
+-- Дамп, данные и индексы таблицы `users_agent_logs`
+--
+
+CREATE TABLE `users_agent_logs` (
+  `log_id` int(10) UNSIGNED NOT NULL,
+  `log_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `log_user_id` int(10) UNSIGNED NOT NULL,
+  `log_user_browser` varchar(64) NOT NULL,
+  `log_user_os` varchar(64) NOT NULL,
+  `log_user_ip` varchar(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+
+INSERT INTO `users_agent_logs` (`log_id`, `log_date`, `log_user_id`, `log_user_browser`, `log_user_os`, `log_user_ip`) VALUES
+(1, '2021-09-21 13:09:38', 1, 'Firefox 92.0', 'Windows', '127.0.0.1'),
+(2, '2021-09-21 13:57:57', 2, 'Chrome 93.0.4577.82', 'Windows', '127.0.0.1');
+
+ALTER TABLE `users_agent_logs`
+  ADD PRIMARY KEY (`log_id`),
+  ADD KEY `log_user_ip` (`log_user_ip`);
+
+ALTER TABLE `users_agent_logs`
+  MODIFY `log_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 
 --
 -- Индексы сохранённых таблиц
@@ -930,12 +930,6 @@ ALTER TABLE `users_email_activate`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `users_logs`
---
-ALTER TABLE `users_logs`
-  ADD PRIMARY KEY (`logs_id`);
-
---
 -- Индексы таблицы `users_setting`
 --
 ALTER TABLE `users_setting`
@@ -1149,12 +1143,6 @@ ALTER TABLE `users_banlist`
 --
 ALTER TABLE `users_email_activate`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT для таблицы `users_logs`
---
-ALTER TABLE `users_logs`
-  MODIFY `logs_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT для таблицы `users_setting`

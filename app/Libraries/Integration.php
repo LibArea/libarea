@@ -12,6 +12,7 @@ class Integration
     {
         $api_url = 'https://www.google.com/recaptcha/api/siteverify';
 
+        // https://github.com/php-mod/curl
         if (!function_exists('curl_init')) {
 
             $data = @file_get_contents($api_url . '?' . http_build_query($params));

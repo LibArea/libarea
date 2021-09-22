@@ -20,4 +20,12 @@
 <?= getRequestResources()->getBottomScripts(); ?>
 <script src="/assets/js/admin.js"></script>
 
+<script nonce="<?= $_SERVER['nonce']; ?>">
+$(document).on('click', '.tips', function () {
+  let title = $(this).data('id');
+  layer.tips (title, '.tips', {
+    tips: [1, '#339900']
+  });
+});
+</script>
 </html>

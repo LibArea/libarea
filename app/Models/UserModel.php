@@ -50,6 +50,7 @@ class UserModel extends MainModel
                     user_id,
                     user_login,
                     user_name,
+                    user_whisper,
                     user_activated,
                     user_limiting_mode,
                     user_reg_ip,
@@ -100,18 +101,22 @@ class UserModel extends MainModel
         }
 
         $params = [
-            'user_login'         => $login,
-            'user_email'         => $email,
-            'user_password'      => $password,
-            'user_limiting_mode' => 0, // Режим заморозки выключен
-            'user_activated'     => $activated,
-            'user_reg_ip'        => $reg_ip,
-            'user_trust_level'   => $trust_level,
-            'user_invitation_id' => $invitation_id,
+            'user_login'                => $login,
+            'user_email'                => $email,
+            'user_design_is_minimal'    => 0, // По умолчанию, дизайн блоговый
+            'user_whisper'              => '',
+            'user_password'             => $password,
+            'user_limiting_mode'        => 0, // Режим заморозки выключен
+            'user_activated'            => $activated,
+            'user_reg_ip'               => $reg_ip,
+            'user_trust_level'          => $trust_level,
+            'user_invitation_id'        => $invitation_id,
         ];
 
         $sql = "INSERT INTO users(user_login, 
-                                    user_email, 
+                                    user_email,
+                                    user_design_is_minimal,
+                                    user_whisper,
                                     user_password, 
                                     user_limiting_mode, 
                                     user_activated, 
@@ -121,6 +126,8 @@ class UserModel extends MainModel
                                     
                             VALUES(:user_login, 
                                     :user_email, 
+                                    :user_design_is_minimal,
+                                    :user_whisper,
                                     :user_password, 
                                     :user_limiting_mode, 
                                     :user_activated, 
@@ -341,22 +348,6 @@ class UserModel extends MainModel
         $sql = "UPDATE users 
                     SET user_cover_art = 'cover_art.jpeg', user_updated_at = :user_updated_at 
                     WHERE user_id = :user_id";
-
-        return DB::run($sql, $params);
-    }
-
-    // Записываем последние данные авторизации
-    public static function setUserLastLogs($user_id, $login, $trust_level, $last_ip)
-    {
-        $params = [
-            'logs_user_id'      => $user_id,
-            'logs_login'        => $login,
-            'logs_trust_level'  => $trust_level,
-            'logs_ip_address'   => $last_ip,
-        ];
-
-        $sql = "INSERT INTO users_logs(logs_user_id, logs_login, logs_trust_level, logs_ip_address) 
-                       VALUES(:logs_user_id, :logs_login, :logs_trust_level, :logs_ip_address)";
 
         return DB::run($sql, $params);
     }

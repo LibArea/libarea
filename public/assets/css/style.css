@@ -830,6 +830,11 @@ footer a.footer:hover { color: #ddd; }
   height: 160px;
 }
 
+
+@media (max-width: 1150px) {
+  .no-mob-max { display: none; }
+}
+
 @media (max-width: 910px) {
   .no-mob,
   aside { display: none; }

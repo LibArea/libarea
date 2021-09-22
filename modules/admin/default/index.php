@@ -47,6 +47,17 @@
       </div>
     </div>
     <div class="white-box mt10 pt5 pr15 pb5 pl15">
+      <h4 class="mt5"><?= lang('Users'); ?> <small>(15)</small></h4>
+      <?php foreach ($data['last_visit'] as $user) { ?>
+        <div class="gray size-15">
+          id<?= $user['user_id']; ?> 
+          <a href="/u/<?= $user['user_login']; ?>"><?= $user['user_login']; ?></a> 
+          <span class="size-13"> — <?= $user['latest_date']; ?></span>
+        </div>
+      <?php } ?>
+    </div>
+    
+    <div class="white-box mt10 pt5 pr15 pb5 pl15">
       <h4 class="mt5"><?= lang('Useful resources'); ?></h4>
       <i class="icon-record-outline gray-light"></i> <a rel="noreferrer" href="https://agouti.ru">Agouti.ru</a></br>
       <i class="icon-record-outline gray-light"></i> <a rel="noreferrer" href="https://discord.gg/dw47aNx5nU">Discord</a></br>

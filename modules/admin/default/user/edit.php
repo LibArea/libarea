@@ -61,6 +61,8 @@
               <?= $data['answers_count']; ?>
             </a>
             <br>
+          <?php } else { ?>
+           ---
           <?php } ?>
           <?php if ($data['comments_count'] != 0) { ?>
             <label class="required"><?= lang('Comments'); ?>:</label>
@@ -68,6 +70,8 @@
               <?= $data['comments_count']; ?>
             </a>
             <br>
+          <?php } else { ?>
+           ---
           <?php } ?>
           <?php if ($data['spaces_user']) { ?>
             <br>
@@ -81,6 +85,8 @@
                 </div>
               <?php } ?>
             </span>
+          <?php } else { ?>
+           ---
           <?php } ?>
         </div>
         <hr>
@@ -101,6 +107,10 @@
           <?php } ?>
         </div>
         <div class="boxline">
+          <label class="form-label" for="post_title"><?= lang('Whisper'); ?></label>
+          <input class="form-input" type="text" name="whisper" value="<?= $data['user']['user_whisper']; ?>">
+        </div>
+        <div class="boxline">
           <label for="post_title"><?= lang('Views'); ?></label>
           <?= $data['user']['user_hits_count']; ?>
         </div>
@@ -108,9 +118,10 @@
           <label class="form-label" for="post_title"><?= lang('Sign up'); ?></label>
           <?= $data['user']['user_created_at']; ?> |
           <?= $data['user']['user_reg_ip']; ?>
-          <?php if ($data['user']['replayIp'] > 1) { ?>
-            <sup class="red">(<?= $data['user']['replayIp']; ?>)</sup>
+          <?php if ($data['user']['duplicat_ip_reg'] > 1) { ?>
+            <sup class="red">(<?= $data['user']['duplicat_ip_reg']; ?>)</sup>
           <?php } ?>
+          (<?= lang('ed')?>. <?= $data['user']['user_updated_at']; ?>)
         </div>
         <hr>
         <div class="boxline">

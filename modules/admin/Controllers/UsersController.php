@@ -4,7 +4,7 @@ namespace Modules\Admin\Controllers;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use Modules\Admin\Models\{UserModel, BadgeModel};
+use Modules\Admin\Models\{UserModel, BadgeModel, AgentModel};
 use App\Models\SpaceModel;
 use Agouti\{Base, Validation};
 
@@ -21,9 +21,9 @@ class UsersController extends MainController
 
         $result = array();
         foreach ($user_all as $ind => $row) {
-            $row['replayIp']        = UserModel::replayIp($row['user_reg_ip']);
+            $row['duplicat_ip_reg'] = AgentModel::duplicatesRegistrationCount($row['user_reg_ip']);
             $row['isBan']           = UserModel::isBan($row['user_id']);
-            $row['logs']            = UserModel::userLogId($row['user_id']);
+            $row['last_visit_logs'] = AgentModel::lastVisitLogs($row['user_id']);
             $row['created_at']      = lang_date($row['user_created_at']);
             $row['user_updated_at'] = lang_date($row['user_updated_at']);
             $result[$ind]           = $row;
@@ -45,25 +45,31 @@ class UsersController extends MainController
     }
 
     // Повторы IP
-    public function logsIp()
+    public function logsIp($option)
     {
         $user_ip    = Request::get('ip');
-        $user_all   = UserModel::getUserLogsId($user_ip);
+        
+        if ($option == 'logs') {
+            $user_all   = AgentModel::getUserLogsId($user_ip);
+        } else {
+            $user_all   = AgentModel::getUserRegsId($user_ip);
+        }
 
         $results = array();
         foreach ($user_all as $ind => $row) {
-            $row['replayIp']    = UserModel::replayIp($row['user_reg_ip']);
+            $row['duplicat_ip_reg']    = AgentModel::duplicatesRegistrationCount($row['user_id']);
             $row['isBan']       = UserModel::isBan($row['user_id']);
             $results[$ind]      = $row;
         }
-        
+
         $meta = [
             'meta_title'        => lang('Search'),
             'sheet'             => 'users',
         ];
         
         $data = [
-            'alluser'       => $results,
+            'results'       => $results,
+            'option'        => $option,
         ];
 
         return view('/user/logip', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
@@ -88,10 +94,10 @@ class UsersController extends MainController
             redirect('/admin');
         }
 
-        $user['isBan']      = UserModel::isBan($user_id);
-        $user['replayIp']   = UserModel::replayIp($user_id);
-        $user['logs']       = UserModel::userLogId($user_id);
-        $user['badges']     = BadgeModel::getBadgeUserAll($user_id);
+        $user['isBan']              = UserModel::isBan($user_id);
+        $user['duplicat_ip_reg']    = AgentModel::duplicatesRegistrationCount($user_id);
+        $user['last_visit_logs']    = AgentModel::lastVisitLogs($user_id);
+        $user['badges']             = BadgeModel::getBadgeUserAll($user_id);
 
         $counts =   UserModel::contentCount($user_id);
         
@@ -126,6 +132,7 @@ class UsersController extends MainController
         $login          = Request::getPost('login');
         $name           = Request::getPost('name');
         $about          = Request::getPost('about');
+        $whisper        = Request::getPost('whisper');
         $activated      = Request::getPostInt('activated');
         $limiting_mode  = Request::getPostInt('limiting_mode');
         $trust_level    = Request::getPostInt('trust_level');
@@ -143,18 +150,19 @@ class UsersController extends MainController
             'user_id'            => $user_id,
             'user_email'         => $email,
             'user_login'         => $login,
-            'user_name'          => empty($name) ? '' : $name,
+            'user_whisper'       => $whisper ?? '',
+            'user_name'          => $name ?? '',
             'user_activated'     => $activated,
             'user_limiting_mode' => $limiting_mode,
             'user_trust_level'   => $trust_level,
-            'user_about'         => empty($about) ? '' : $about,
-            'user_website'       => empty($website) ? '' : $website,
-            'user_location'      => empty($location) ? '' : $location,
-            'user_public_email'  => empty($public_email) ? '' : $public_email,
-            'user_skype'         => empty($skype) ? '' : $skype,
-            'user_twitter'       => empty($twitter) ? '' : $twitter,
-            'user_telegram'      => empty($telegram) ? '' : $telegram,
-            'user_vk'            => empty($vk) ? '' : $vk,
+            'user_about'         => $about ?? '',
+            'user_website'       => $website ?? '',
+            'user_location'      => $location ?? '',
+            'user_public_email'  => $public_email ?? '',
+            'user_skype'         => $skype ?? '',
+            'user_twitter'       => $twitter ?? '',
+            'user_telegram'      => $telegram ?? '',
+            'user_vk'            => $vk ?? '',
         ];
 
         UserModel::setUserEdit($data);

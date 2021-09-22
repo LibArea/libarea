@@ -14,6 +14,7 @@ return [
     'The post'          => 'Post',
     'Bodies'            => 'Corp',
     'Thanks'            => 'Mulțumiri',
+    'Whisper'           => 'șoaptă',
     'Report'            => 'Steag',
     'Reports'           => 'Steaguri',
     'complained about'  => 'S-a plâns',
