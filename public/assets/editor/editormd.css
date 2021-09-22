@@ -552,6 +552,7 @@
   display: none;
   background: #fff;
 }
+.CodeMirror-scroll { width: 100%; }
 
 .editormd .CodeMirror {
   z-index: 10;
@@ -565,30 +566,17 @@
   font-size: 14px;
   padding: 0 12px;
 }
-.editormd .CodeMirror-linenumbers {
-  padding: 0 5px;
-}
-.editormd .CodeMirror-selected {
-  background: #70B7FF;
-}
-.editormd .CodeMirror-focused .CodeMirror-selected {
-  background: #70B7FF;
-}
-.editormd .CodeMirror, .editormd .CodeMirror-scroll, .editormd .editormd-preview {
-  -webkit-overflow-scrolling: touch;
-}
-.editormd .styled-background {
-  background-color: #ff7;
-}
+.editormd .CodeMirror-linenumbers { padding: 0 5px; }
+.editormd .CodeMirror-selected { background: #70B7FF; }
+.editormd .CodeMirror-focused .CodeMirror-selected { background: #70B7FF; }
+.editormd .CodeMirror, .editormd .CodeMirror-scroll, .editormd .editormd-preview { -webkit-overflow-scrolling: touch; }
+.editormd .styled-background { background-color: #ff7; }
+.editormd .CodeMirror-empty.CodeMirror-focused { outline: none; }
+.editormd .CodeMirror pre.CodeMirror-placeholder { color: #999; }
+
 .editormd .CodeMirror-focused .cm-matchhighlight {
   background-position: bottom;
   background-repeat: repeat-x;
-}
-.editormd .CodeMirror-empty.CodeMirror-focused {
-  outline: none;
-}
-.editormd .CodeMirror pre.CodeMirror-placeholder {
-  color: #999;
 }
 .editormd .cm-trailingspace {
   background-position: bottom left;
