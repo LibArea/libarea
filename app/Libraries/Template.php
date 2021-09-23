@@ -265,13 +265,8 @@ function favorite_post($user_id, $post_id, $favorite_tid)
 {
     $html  = '';
     if ($user_id > 0) {
-        $html .= '<span class="add-favorite gray-light feed-icon" data-id="' . $post_id . '" data-type="post">';
-            if ($favorite_tid) { 
-                $html .= '<i class="icon-bookmark-empty blue middle"></i>';
-             } else { 
-                $html .= '<i class="icon-bookmark-empty middle"></i>';
-            } 
-        $html .= '</span>';
+        $blue = $favorite_tid ? 'blue' : '';
+        $html .= '<span id="favorite_'. $post_id .'" class="add-favorite '. $blue .' gray-light feed-icon" data-id="' . $post_id . '" data-type="post"><i class="icon-bookmark-empty middle"></i></span>';
     } else {
         $html .= '<span class="click-no-auth gray-light feed-icon">
                     <i class="icon-bookmark-empty middle"></i>

@@ -8,8 +8,8 @@
           <?php csrf_field(); ?>
           <div class="boxline">
             <input id="link" class="form-input" type="email" name="email">
-            <input class="button right" type="submit" name="submit" value="<?= lang('To create'); ?>">
-            <div class="box_h gray"><?= lang('Enter'); ?> e-mail</div>
+            <input class="button right mt5" type="submit" name="submit" value="<?= lang('Send'); ?>">
+            <div class="box_h gray"><?= lang('Enter'); ?> E-mail</div>
           </div>
           <?= lang('Invitations left'); ?> <?= 5 - $data['count_invites']; ?>
         </form>

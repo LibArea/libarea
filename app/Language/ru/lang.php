@@ -212,6 +212,8 @@ return [
     'Stop words no'     => 'Стоп-слов нет',
     'Add a stop word'   => 'Добавить стоп-слово',
     'See more'          => 'См. ещё',
+    'Bookmark added'    => 'Закладка добавлена',
+    'Bookmark deleted'  => 'Закладка удалена',
     
     'Repeat the password'   => 'Повторите пароль',
     'The post is closed'    => 'Пост закрыт',
@@ -418,6 +420,7 @@ return [
     'can send this link'    => 'можно отправить эту ссылку',
     'Link has been used'    => 'Ссылка была использована',
     'The link was used to'  => 'Была использована ссылка для',
+    'Medal for registration'=> 'Медаль за регистрацию',
     'registered'            => 'зарегистрировался',
     'Invitations left'      => 'Осталось приглашений',
     'no-space-to-add'       => 'У вас нет пространств для добавления поста. <a href="/spaces">Подпишитесь</a> на пространста',
@@ -462,6 +465,7 @@ return [
     'You were looking for'                          => 'Вы искали',
     'The search has not given any results'          => 'Поиск не дал результатов',
     'Personal messages with site participants'      => 'Личные сообщения с участниками сайта',
+    'Responses from community members'              => 'Ответы участников сообщества',
     
     'welcome-info' => '<p>Спасибо за регистрацию! Здесь вы найдете краткую информацию о том, как пользоваться этим сайтом.</p>
     <p>Этот сайт состоит из <a href="/spaces">пространств</a>. Вы автоматически подписываетесь только на одно пространство — <a href="/s/meta">/s/meta</a>. Посты из которого вы и будете видеть (после авторизации) на главной странице сайта (в ленте).</p>

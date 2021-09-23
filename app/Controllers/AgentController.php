@@ -14,15 +14,15 @@ class AgentController extends MainController
         $uid        = Base::getUid();
         $limit      = 100;
         $ua_info    = AgentModel::getAll($limit);
-        
+
         return $ua_info;
     }
-    
+
     public function set()
     {
         // https://github.com/donatj/PhpUserAgent
-        require_once HLEB_GLOBAL_DIRECTORY .'/app/ThirdParty/PhpUserAgent/UserAgentParser.php';
-        
+        require_once HLEB_GLOBAL_DIRECTORY . '/app/ThirdParty/PhpUserAgent/UserAgentParser.php';
+
         $uid        = Base::getUid();
         $ua_info    = parse_user_agent();
         $data = [
@@ -32,7 +32,7 @@ class AgentController extends MainController
             'log_user_os'       => $ua_info['platform'],
             'log_user_ip'       => Request::getRemoteAddress(),
         ];
-        
+
         AgentModel::setLog($data);
     }
 }

@@ -58,24 +58,26 @@
                   <?php } ?>
                 <?php } ?>
 
+                <?php if ($uid['user_trust_level'] == 5) { ?>
+                  <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray ml10 mr5">
+                    <i title="<?= lang('Remove'); ?>" class="icon-trash-empty"></i>
+                  </a>
+                <?php } ?>
+
                 <?php if ($uid['user_id']) { ?>
-                  <a class="add-favorite mr5 ml5 gray" data-id="<?= $answer['answer_id']; ?>" data-type="answer">
+                  <?php $blue = $answer['favorite_user_id'] ? 'blue' : 'gray'; ?>
+                  <a id="fav-comm_<?= $answer['answer_id']; ?>" class="add-favorite mr5 ml15 gray <?= $blue; ?>" data-id="<?= $answer['answer_id']; ?>" data-type="answer">
                     <?php if ($answer['favorite_user_id']) { ?>
-                      <?= lang('remove-favorites'); ?>
+                      <i title="<?= lang('remove-favorites'); ?>" class="icon-bookmark-empty"></i>
                     <?php } else { ?>
-                      <?= lang('add-favorites'); ?>
+                      <i title="<?= lang('add-favorites'); ?>" class="icon-bookmark-empty"></i>
                     <?php } ?>
                   </a>
                 <?php } ?>
 
-                <?php if ($uid['user_trust_level'] == 5) { ?>
-                  <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray ml10">
-                    <?= lang('Remove'); ?>
-                  </a>
-                <?php } ?>
                 <?php if ($uid['user_id'] != $answer['answer_user_id'] && $uid['user_trust_level'] > 0) { ?>
                   <a data-post_id="<?= $data['post']['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray ml15">
-                    <?= lang('Report'); ?>
+                    <i title="<?= lang('Report'); ?>" class="icon-flag-empty"></i>
                   </a>
                 <?php } ?>
               </div>

@@ -211,6 +211,7 @@
           <div class="relative white-box pt5 pr15 pb10 pl15">
             <h3 class="mt0 mb5 uppercase pt5 size-13"><?= lang('Badges'); ?></h3>
             <div class="profile-badge">
+                <i title="<?= lang('Medal for registration'); ?>" class="icon-gift blue"></i>
               <?php if ($data['user']['user_id'] < 50) { ?>
                 <i title="<?= lang('Joined in the early days'); ?>" class="icon-award green"></i>
               <?php } ?>

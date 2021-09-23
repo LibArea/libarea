@@ -292,6 +292,8 @@ return [
     'in answer'             => 'în raspuns',
     'in the comment'        => 'în comentariu',
     'to your answer'        => 'la răspunsul tău',
+    'Bookmark added'        => 'Marcaj adăugat',
+    'Bookmark deleted'      => 'Marcajul a fost șters',
 
     /* MSG */
     'text-string-length'    => 'Lungimea %1$s trebuie să aibă între %2$s și %3$s caractere',
@@ -443,4 +445,6 @@ return [
     'Posts will not be visible in the feed'         => 'Dacă nu, postările nu vor fi vizibile în flux (pe pagina principală)',
     'Does this violate site rules'      => 'Acest lucru încalcă regulile site-ului.',
     'Flag not included'                 => 'Semnalizați-l lăsat, nu îl folosiți des',
+    'Medal for registration'            => 'Medalie pentru înregistrare',
+    'Responses from community members'  => 'Răspunsurile comunității',
 ];

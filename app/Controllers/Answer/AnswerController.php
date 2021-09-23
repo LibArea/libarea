@@ -70,7 +70,7 @@ class AnswerController extends MainController
             'canonical'     => Config::get(Config::PARAM_URL) . getUrlByName('answers.user', ['login' => $login]),
             'sheet'         => 'user-answers',
             'meta_title'    => lang('Answers') . ' ' . $login . ' | ' . Config::get(Config::PARAM_NAME),
-            'meta_desc'     => 'Ответы  учасника сообщества ' . $login . ' ' . Config::get(Config::PARAM_HOME_TITLE),
+            'meta_desc'     => lang('Responses from community members') . ' ' . $login . ' ' . Config::get(Config::PARAM_HOME_TITLE),
         ];
 
         $data = [

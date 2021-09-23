@@ -37,16 +37,16 @@ class HomeController extends MainController
         foreach ($latest_answers as $ind => $row) {
             $row['answer_content']      = Base::cutWords($row['answer_content'], 8);
             $row['answer_date']         = lang_date($row['answer_date']);
-            $result_answers[$ind]          = $row;
+            $result_answers[$ind]       = $row;
         }
 
         $num        = $page > 1 ? sprintf(lang('page-number'), $page) : '';
         $meta_title = Config::get(Config::PARAM_HOME_TITLE) . $num;
         $meta_desc  = Config::get(Config::PARAM_META_DESC) . $num;
-        
+
         $url        = Config::get(Config::PARAM_URL);
         $canonical  = $sheet == 'top' ? $url . '/top' : $url;
-        
+
         if ($sheet == 'top' || $sheet == 'all') {
             $meta_title = lang($sheet . '-title') . $num . Config::get(Config::PARAM_HOME_TITLE);
             $meta_desc  = lang($sheet . '-desc') . $num . Config::get(Config::PARAM_NAME);

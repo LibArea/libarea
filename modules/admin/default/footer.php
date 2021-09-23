@@ -24,7 +24,7 @@
 $(document).on('click', '.tips', function () {
   let title = $(this).data('id');
   layer.tips (title, '.tips', {
-    tips: [1, '#339900']
+    tips: [1, '#318407']
   });
 });
 </script>

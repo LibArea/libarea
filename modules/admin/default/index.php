@@ -52,7 +52,7 @@
         <div class="gray size-15">
           id<?= $user['user_id']; ?> 
           <a href="/u/<?= $user['user_login']; ?>"><?= $user['user_login']; ?></a> 
-          <span class="size-13"> — <?= $user['latest_date']; ?></span>
+          <span class="size-13"> — <?= lang_date($user['latest_date']); ?> (<?= $user['os']; ?>)</span>
         </div>
       <?php } ?>
     </div>

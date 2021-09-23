@@ -18,9 +18,9 @@ class AgentModel extends MainModel
                         log_user_ip
                             FROM users_agent_logs ORDER BY log_id DESC LIMIT :limit";
 
-        return  DB::run($sql, ['limit' =>$limit])->fetchAll(PDO::FETCH_ASSOC);
+        return  DB::run($sql, ['limit' => $limit])->fetchAll(PDO::FETCH_ASSOC);
     }
-    
+
     public static function getUser($user_id)
     {
         $sql = "SELECT log_id,
@@ -33,7 +33,7 @@ class AgentModel extends MainModel
 
         return  DB::run($sql, ['user_id' => $user_id])->fetch(PDO::FETCH_ASSOC);
     }
-    
+
     public static function setLog($data)
     {
         $params = [
@@ -57,13 +57,12 @@ class AgentModel extends MainModel
                                 :log_user_ip)";
 
         return DB::run($sql, $params);
-
     }
-    
+
     // Последние визиты
     public static function getLastVisit()
     {
-         $sql = "SELECT 
+        $sql = "SELECT 
                     user_id,
                     user_login,
                     user_name,
@@ -73,10 +72,12 @@ class AgentModel extends MainModel
                     user_reg_ip,
                     user_invitation_id,
                     user_trust_level,
-                    latest_date
+                    latest_date,
+                    os
                         FROM users
                         JOIN 
                         ( SELECT 
+                            MAX(log_user_os) as os,
                             MAX(log_date) as latest_date,
                             log_user_id
                             FROM users_agent_logs 
@@ -87,5 +88,4 @@ class AgentModel extends MainModel
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
-
 }

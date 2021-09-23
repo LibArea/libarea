@@ -61,7 +61,7 @@ class RegisterController extends MainController
         }
        
         // Запретим, хотя лучшая практика занять нужные (пр. GitHub)
-        $disabled = ['admin', 'support', 'lori', 'loriup', 'dev', 'docs', 'meta', 'email', 'mail', 'login'];
+        $disabled = ['admin', 'support', 'lori', 'loriup', 'mod', 'docs', 'meta', 'email', 'mail', 'login'];
         if (in_array($login, $disabled)) {
             addMsg(lang('nickname-replay'), 'error');
             redirect($redirect);

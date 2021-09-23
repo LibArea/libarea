@@ -17,7 +17,9 @@ class FavoriteModel extends MainModel
 
             $sql = "DELETE FROM favorites WHERE favorite_tid =  :content_id AND favorite_user_id = :user_id";
 
-            return DB::run($sql, ['content_id' => $content_id, 'user_id' => $user_id]);
+            DB::run($sql, ['content_id' => $content_id, 'user_id' => $user_id]);
+            
+            return 'del';
         }
 
         $params = [
@@ -29,7 +31,9 @@ class FavoriteModel extends MainModel
         $sql = "INSERT INTO favorites(favorite_tid, favorite_user_id, favorite_type) 
                        VALUES(:favorite_tid, :favorite_user_id, :favorite_type)";
 
-        return DB::run($sql, $params);
+        DB::run($sql, $params);
+        
+        return 'add';
     }
 
     public static function getUserFavorite($content_id, $user_id, $type)

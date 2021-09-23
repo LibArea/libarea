@@ -84,7 +84,7 @@ class AddCommentController extends MainController
 
         // Оповещение автору ответа, что есть комментарий
         if ($answer_id) {
-            // Себе не записываем (перенести в общий, т.к. ничего для себя не пишем в notf)
+            // Себе не записываем
             $answ = AnswerModel::getAnswerId($answer_id);
             if ($uid['user_id'] != $answ['answer_user_id']) {
                 $type = 4; // Ответ на пост        

@@ -54,7 +54,6 @@ $(function () {
       color.value = colorSpace.value;
     }, false);
   }
-
   // Subscribe to a topic / space / post
   $(document).on("click", ".focus-id", function () {
     let content_id = $(this).data('id');
@@ -108,12 +107,22 @@ $(function () {
   $(document).on("click", ".add-favorite", function () {
     let content_id = $(this).data('id');
     let content_type = $(this).data('type');
+    let front = $(this).data('front');
     $.ajax({
       url: '/favorite/' + content_type,
       type: 'POST',
       data: { content_id: content_id },
     }).done(function (data) {
-      location.reload();
+      if (front == 'personal') {
+        location.reload();
+      } else {
+        if (content_type == 'post') {
+          document.getElementById("favorite_" + content_id).classList.toggle("blue");
+        } else {
+          document.getElementById("fav-comm_" + content_id).classList.toggle("blue");
+        }
+      }
+      layer.msg(data);
     });
   });
   // Deleting / restoring content

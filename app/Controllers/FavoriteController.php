@@ -22,8 +22,13 @@ class FavoriteController extends MainController
 
         $uid            = Base::getUid();
         $type_content   = $type == 'post' ? 1 : 2;
-        FavoriteModel::setFavorite($content_id, $uid['user_id'], $type_content);
-
-        return true;
+        $action = FavoriteModel::setFavorite($content_id, $uid['user_id'], $type_content);
+ 
+        $lang = lang('Bookmark deleted');
+        if ($action == 'add') {
+            $lang = lang('Bookmark added');
+        } 
+         
+        return $lang;
     }
 }

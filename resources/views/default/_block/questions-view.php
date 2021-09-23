@@ -37,31 +37,29 @@
                     <?php } ?>
                   <?php } ?>
                 <?php } ?>
-
                 <?php if ($uid['user_id'] == $answer['answer_user_id'] || $uid['user_trust_level'] == 5) { ?>
-                  <a class="editansw gray ml15" href="/answer/edit/<?= $answer['answer_id']; ?>">
+                  <a class="editansw gray ml15 mr5" href="/answer/edit/<?= $answer['answer_id']; ?>">
                     <?= lang('Edit'); ?>
                   </a>
                 <?php } ?>
-
+                <?php if ($uid['user_trust_level'] == 5) { ?>
+                  <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray ml15 mr5">
+                    <i title="<?= lang('Remove'); ?>" class="icon-trash-empty"></i>
+                  </a>
+                <?php } ?>
                 <?php if ($uid['user_id']) { ?>
-                  <span class="add-favorite gray ml15" data-id="<?= $answer['answer_id']; ?>" data-type="answer">
+                  <?php $blue = $answer['favorite_user_id'] ? 'blue' : 'gray'; ?>
+                  <span id="fav-comm_<?= $answer['answer_id']; ?>" class="add-favorite gray ml15 mr5 <?= $blue; ?>" data-id="<?= $answer['answer_id']; ?>" data-type="answer">
                     <?php if ($answer['favorite_user_id']) { ?>
-                      <?= lang('remove-favorites'); ?>
+                      <i title="<?= lang('remove-favorites'); ?>" class="icon-bookmark-empty middle"></i>
                     <?php } else { ?>
-                      <?= lang('add-favorites'); ?>
+                      <i title="<?= lang('add-favorites'); ?>" class="icon-bookmark-empty middle"></i>
                     <?php } ?>
                   </span>
                 <?php } ?>
-
-                <?php if ($uid['user_trust_level'] == 5) { ?>
-                  <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray ml15 mr5">
-                    <?= lang('Remove'); ?>
-                  </a>
-                <?php } ?>
                 <?php if ($uid['user_id'] != $answer['answer_user_id'] && $uid['user_trust_level'] > 0) { ?>
                   <a data-post_id="<?= $data['post']['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray ml15">
-                    <?= lang('Report'); ?>
+                    <i title="<?= lang('Report'); ?>" class="icon-flag-empty"></i>
                   </a>
                 <?php } ?>
               </div>
@@ -98,7 +96,7 @@
                 <?php if ($uid['user_trust_level'] >= Agouti\Config::get(Agouti\Config::PARAM_TL_ADD_COMM_QA)) { ?>
                   <?php if ($data['post']['post_closed'] == 0) { ?>
                     <?php if ($data['post']['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
-                      <a data-post_id="<?= $data['post']['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment-re gray ml5">
+                      <a data-post_id="<?= $data['post']['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment-re gray ml5 mr5">
                         <?= lang('Reply'); ?>
                       </a>
                     <?php } ?>
@@ -106,14 +104,14 @@
                 <?php } ?>
 
                 <?php if ($uid['user_id'] == $comment['comment_user_id'] || $uid['user_trust_level'] == 5) { ?>
-                  <a data-post_id="<?= $data['post']['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray ml5">
-                    <?= lang('Edit'); ?>
+                  <a data-post_id="<?= $data['post']['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray ml10 mr5">
+                    <i title="<?= lang('Edit'); ?>" class="icon-edit"></i>
                   </a>
                 <?php } ?>
 
                 <?php if ($uid['user_trust_level'] == 5) { ?>
-                  <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray ml5">
-                    <?= lang('Remove'); ?>
+                  <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray ml10">
+                    <i title="<?= lang('Remove'); ?>" class="icon-trash-empty"></i>
                   </a>
                 <?php } ?>
                 <?php if ($uid['user_id'] != $comment['comment_user_id'] && $uid['user_trust_level'] > 0) { ?>
