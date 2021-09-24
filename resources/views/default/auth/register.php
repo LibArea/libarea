@@ -1,7 +1,7 @@
 <div class="wrap">
   <main class="white-box pt5 pr15 pb5 pl15">
     <h1><?= lang('Sign up'); ?></h1>
-    <form class="form mini" action="<?= getUrlByName('register'); ?>/add" method="post">
+    <form class="mini" action="<?= getUrlByName('register'); ?>/add" method="post">
       <?php csrf_field(); ?>
 
       <?php field('input', [
