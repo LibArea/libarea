@@ -466,6 +466,7 @@ textarea:focus {
 
 input.form-search {
   border: 1px solid #ebebeb;
+  background-color: #f5f7fa;
   padding: 2px 0 2px 10px;
   height: 40px;
 }
@@ -646,7 +647,7 @@ a.tags.avtive {
     width: 100%;
     height: auto;
   }
-  
+
   .flex-auto {
     flex-wrap: wrap;
     flex: 1 1 auto;
@@ -673,4 +674,3 @@ a.tags.avtive {
     height: 155px;
   }
 }
- 

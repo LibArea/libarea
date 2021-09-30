@@ -63,8 +63,8 @@ class UsersController extends MainController
         }
 
         $meta = [
-            'meta_title'        => lang('search'),
-            'sheet'             => 'users',
+            'meta_title'    => lang('search'),
+            'sheet'         => 'users',
         ];
 
         $data = [
@@ -99,7 +99,7 @@ class UsersController extends MainController
         $user['last_visit_logs']    = AgentModel::lastVisitLogs($user_id);
         $user['badges']             = BadgeModel::getBadgeUserAll($user_id);
 
-        $counts =   UserModel::contentCount($user_id);
+        $counts = UserModel::contentCount($user_id);
 
         $meta = [
             'meta_title'        => lang('edit user'),

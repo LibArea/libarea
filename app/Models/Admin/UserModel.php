@@ -156,22 +156,6 @@ class UserModel extends MainModel
         return  DB::run($sql, ['status' => $status, 'user_id' => $user_id]);
     }
 
-    // Дерева инвайтов
-    public static function getInvitations()
-    {
-        $sql = "SELECT 
-                    user_id,
-                    user_login,
-                    user_avatar,
-                    user_uid,
-                    user_active_uid,
-                    user_active_time
-                        FROM invitations
-                        LEFT JOIN users ON active_uid = user_id ORDER BY id DESC";
-
-        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
-    }
-
     // Редактирование участника
     public static function setUserEdit($data)
     {

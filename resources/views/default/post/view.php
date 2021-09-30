@@ -194,7 +194,7 @@
         <?php } ?>
       </div>
     <?php } else { ?>
-      <div class="bg-red-300">
+      <div class="bg-red-300 p15 center mr10">
         <?= lang('post deleted'); ?>...
       </div>
     <?php } ?>
@@ -273,10 +273,10 @@
       let post_id = $(this).data('post_id');
       let content_id = $(this).data('content_id');
       let type = $(this).data('type');
-      layer.confirm('<?= lang('Does this violate site rules'); ?>?', {
+      layer.confirm('<?= lang('does this violate site rules'); ?>?', {
         icon: 5,
-        title: '<?= lang('Report'); ?>',
-        btn: ['<?= lang('Yes'); ?>', '<?= lang('No'); ?>']
+        title: '<?= lang('report'); ?>',
+        btn: ['<?= lang('yes'); ?>', '<?= lang('No'); ?>']
       }, function(index) {
         $.post('/flag/repost', {
           type,
@@ -284,10 +284,10 @@
           content_id
         }, function(str) {
           if (str == 1) {
-            layer.msg('<?= lang('Flag not included'); ?>!');
+            layer.msg('<?= lang('flag not included'); ?>!');
             return false;
           }
-          layer.msg('<?= lang('Thanks'); ?>!');
+          layer.msg('<?= lang('thanks'); ?>!');
         });
       });
     });

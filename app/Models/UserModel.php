@@ -577,4 +577,19 @@ class UserModel extends MainModel
 
         return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
     }
+    
+    public static function getInvitations()
+    {
+        $sql = "SELECT 
+                    user_id,
+                    user_login,
+                    user_avatar,
+                    uid,
+                    active_uid,
+                    active_time
+                        FROM invitations 
+                        LEFT JOIN users ON active_uid = user_id ORDER BY user_id DESC";
+
+        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

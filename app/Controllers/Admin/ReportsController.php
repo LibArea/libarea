@@ -4,7 +4,7 @@ namespace App\Controllers\Admin;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\{UserModel, Admin\ReportModel};
+use App\Models\{UserModel, ReportModel};
 use Agouti\Base;
 
 class ReportsController extends MainController

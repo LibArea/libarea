@@ -11,7 +11,7 @@ class AuditModel extends MainModel
     // Страница аудита
     public static function getAuditsAll($page, $limit, $sheet)
     {
-        $sort = "audit_read_flag = 0";
+        $sort = "audit_id != 0";
         if ($sheet == 'approved') {
             $sort = "audit_read_flag = 1";
         }
