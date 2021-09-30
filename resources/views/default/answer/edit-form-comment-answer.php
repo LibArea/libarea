@@ -7,8 +7,8 @@
         <input type="hidden" name="post_id" id="post_id" value="<?= $data['post_id']; ?>">
         <input type="hidden" name="answer_id" id="answer_id" value="<?= $data['answer_id']; ?>">
         <div class="boxline">
-          <input type="submit" class="button" name="answit" value="<?= lang('Edit'); ?>" class="button">
-          <input id="cancel_answ" class="cancel gray" type="button" value="<?= lang('Cancel'); ?>">
+          <input type="submit" class="button block br-rd-5 white" name="answit" value="<?= lang('edit'); ?>">
+          <input id="cancel_answ" class="cancel gray" type="button" value="<?= lang('cancel'); ?>">
         </div>
       </div>
     </form>

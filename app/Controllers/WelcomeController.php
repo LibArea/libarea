@@ -11,7 +11,7 @@ class WelcomeController extends MainController
     {
         $meta = [
             'sheet'         => 'welcome',
-            'meta_title'    => lang('Welcome') . ' | ' . Config::get(Config::PARAM_NAME),
+            'meta_title'    => lang('welcome') . ' | ' . Config::get(Config::PARAM_NAME),
         ];
 
         $data = [

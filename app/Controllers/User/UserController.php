@@ -24,7 +24,7 @@ class UserController extends MainController
         $meta = [
             'canonical'     => Config::get(Config::PARAM_URL) . '/users',
             'sheet'         => 'users',
-            'meta_title'    => lang('Users') . ' | ' . Config::get(Config::PARAM_NAME),
+            'meta_title'    => lang('users') . ' | ' . Config::get(Config::PARAM_NAME),
             'meta_desc'     => lang('desc-user-all') . ' ' . Config::get(Config::PARAM_HOME_TITLE),
         ];
 
@@ -34,8 +34,6 @@ class UserController extends MainController
             'pNum'          => $page,
             'users'         => $users
         ];
-
-        Request::getHead()->addStyles('/assets/css/users.css');
 
         return view('/user/users', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
@@ -50,14 +48,12 @@ class UserController extends MainController
         Base::PageError404($user);
 
         if (!$user['user_about']) {
-            $user['user_about'] = lang('Riddle') . '...';
+            $user['user_about'] = lang('riddle') . '...';
         }
 
         $site_name  = Config::get(Config::PARAM_NAME);
         $meta_title = sprintf(lang('title-profile'), $user['user_login'], $user['user_name'], $site_name);
         $meta_desc  = sprintf(lang('desc-profile'), $user['user_login'], $user['user_about'], $site_name);
-
-        Request::getHead()->addStyles('/assets/css/users.css');
 
         if ($user['user_ban_list'] == 1) {
             Request::getHead()->addMeta('robots', 'noindex');
@@ -122,8 +118,8 @@ class UserController extends MainController
 
         $meta = [
             'sheet'         => 'favorites',
-            'h1'            => lang('Favorites') . ' ' . $uid['user_login'],
-            'meta_title'    => lang('Favorites') . ' ' . $uid['user_login'] . ' | ' . Config::get(Config::PARAM_NAME),
+            'h1'            => lang('favorites') . ' ' . $uid['user_login'],
+            'meta_title'    => lang('favorites') . ' ' . $uid['user_login'] . ' | ' . Config::get(Config::PARAM_NAME),
         ];
 
         $data = [
@@ -146,8 +142,8 @@ class UserController extends MainController
 
         $meta = [
             'sheet'         => 'drafts',
-            'h1'            => lang('Drafts') . ' ' . $uid['user_login'],
-            'meta_title'    => lang('Drafts') . ' ' . $uid['user_login'] . ' | ' . Config::get(Config::PARAM_NAME)
+            'h1'            => lang('drafts') . ' ' . $uid['user_login'],
+            'meta_title'    => lang('drafts') . ' ' . $uid['user_login'] . ' | ' . Config::get(Config::PARAM_NAME)
         ];
 
         $data = [
@@ -173,18 +169,18 @@ class UserController extends MainController
         foreach ($focus_posts as $ind => $row) {
             $text                           = explode("\n", $row['post_content']);
             $row['post_content_preview']    = Content::text($text[0], 'line');
-            $row['lang_num_answers']        = word_form($row['post_answers_count'], lang('Answer'), lang('Answers-m'), lang('Answers'));
+            $row['lang_num_answers']        = word_form($row['post_answers_count'], lang('answer'), lang('answers-m'), lang('answers'));
             $row['post_date']               = lang_date($row['post_date']);
             $result[$ind]                   = $row;
         }
 
         $meta = [
             'sheet'         => 'subscribed',
-            'meta_title'    => lang('Subscribed') . ' ' . $uid['user_login'] . ' | ' . Config::get(Config::PARAM_NAME)
+            'meta_title'    => lang('subscribed') . ' ' . $uid['user_login'] . ' | ' . Config::get(Config::PARAM_NAME)
         ];
 
         $data = [
-            'h1'    => lang('Subscribed') . ' ' . $uid['user_login'],
+            'h1'    => lang('subscribed') . ' ' . $uid['user_login'],
             'sheet' => 'subscribed',
             'posts' => $result
         ];
@@ -192,5 +188,4 @@ class UserController extends MainController
         return view('/user/subscribed', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
     
-    function avatar($size, $img) { }
 }

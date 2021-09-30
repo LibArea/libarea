@@ -54,7 +54,7 @@ class EditPostController extends MainController
         // Получаем информацию по пространству
         $space = SpaceModel::getSpace($post_space_id, 'id');
         if (!$space) {
-            addMsg(lang('Select space'), 'error');
+            addMsg(lang('select space'), 'error');
             redirect($redirect);
         }
 
@@ -62,7 +62,7 @@ class EditPostController extends MainController
         if ($space['space_permit_users'] == 1) {
             // Кроме персонала и владельца
             if ($this->uid['user_trust_level'] != 5 && $space['space_user_id'] != $this->uid['user_id']) {
-                addMsg(lang('You dont have access'), 'error');
+                addMsg(lang('you dont have access'), 'error');
                 redirect($redirect);
             }
         }
@@ -78,8 +78,8 @@ class EditPostController extends MainController
             $post_user_id = $post['post_user_id'];
         }
 
-        Validation::Limits($post_title, lang('Title'), '6', '250', $redirect);
-        Validation::Limits($post_content, lang('The post'), '6', '25000', $redirect);
+        Validation::Limits($post_title, lang('title'), '6', '250', $redirect);
+        Validation::Limits($post_content, lang('the post'), '6', '25000', $redirect);
 
         // Проверим хакинг формы
         if ($post['post_draft'] == 0) {
@@ -153,7 +153,7 @@ class EditPostController extends MainController
 
         $meta = [
             'sheet'         => 'edit-post',
-            'meta_title'    => lang('Edit post') . ' | ' . Config::get(Config::PARAM_NAME),
+            'meta_title'    => lang('edit post') . ' | ' . Config::get(Config::PARAM_NAME),
         ];
 
         $data = [
@@ -182,7 +182,7 @@ class EditPostController extends MainController
         PostModel::setPostImgRemove($post['post_id']);
         unlink($path_img);
 
-        addMsg(lang('Cover removed'), 'success');
+        addMsg(lang('cover removed'), 'success');
         redirect('/post/edit/' . $post['post_id']);
     }
 
@@ -199,7 +199,7 @@ class EditPostController extends MainController
             $post_img = UploadImage::post_img($img);
             $response = array(
                 "url"     => $post_img,
-                "message" => lang('Successful download'),
+                "message" => lang('successful download'),
                 "success" => 1,
             );
 
@@ -207,7 +207,7 @@ class EditPostController extends MainController
         }
 
         $response = array(
-            "message" => lang('Error in loading'),
+            "message" => lang('error in loading'),
             "success" => 0,
         );
 

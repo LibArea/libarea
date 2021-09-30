@@ -37,7 +37,7 @@ class EditAnswerController extends MainController
         }
         
         $url = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
-        Validation::Limits($answer_content, lang('Bodies'), '6', '5000', '/' . $url);
+        Validation::Limits($answer_content, lang('bodies'), '6', '5000', '/' . $url);
 
         $answer_content = Content::change($answer_content);
 
@@ -65,7 +65,7 @@ class EditAnswerController extends MainController
  
         $meta = [
             'sheet'             => 'edit-answers',
-            'meta_title'        => lang('Edit answer') . ' | ' . Config::get(Config::PARAM_NAME),
+            'meta_title'        => lang('edit answer') . ' | ' . Config::get(Config::PARAM_NAME),
         ];
 
         $data = [

@@ -18,14 +18,17 @@ class RegisterController extends MainController
         }
 
         $meta = [
-            'h1'            => lang('Sign up'),
-            'sheet'         => 'register',
+            'sheet'         => 'sign up',
             'canonical'     => Config::get(Config::PARAM_URL) . '/register',
-            'meta_title'    => lang('Sign up') . ' | ' . Config::get(Config::PARAM_NAME),
+            'meta_title'    => lang('sign up') . ' | ' . Config::get(Config::PARAM_NAME),
             'meta_desc'     => lang('info-security'),
         ];
+        
+        $data = [
+            'sheet'         => 'sign up',
+        ];
 
-        return view( '/auth/register', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => []]);
+        return view( '/auth/register', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
     }
 
     // Отправка запроса для регистрации
@@ -52,8 +55,8 @@ class RegisterController extends MainController
             redirect($redirect);
         }
 
-        Validation::charset_slug($login, lang('Nickname'), '/register');
-        Validation::Limits($login, lang('Nickname'), '3', '10', $redirect);
+        Validation::charset_slug($login, lang('nickname'), '/register');
+        Validation::Limits($login, lang('nickname'), '3', '10', $redirect);
 
         if (preg_match('/(\w)\1{3,}/', $login)) {
             addMsg(lang('nickname-repeats-characters'), 'error');
@@ -72,7 +75,7 @@ class RegisterController extends MainController
             redirect($redirect);
         }
 
-        Validation::Limits($password, lang('Password'), '8', '32', $redirect);
+        Validation::Limits($password, lang('password'), '8', '32', $redirect);
         if (substr_count($password, ' ') > 0) {
             addMsg(lang('password-spaces'), 'error');
             redirect($redirect);
@@ -81,7 +84,7 @@ class RegisterController extends MainController
         if (!$inv_code) {
             if (Config::get(Config::PARAM_CAPTCHA)) {
                 if (!Integration::checkCaptchaCode()) {
-                    addMsg(lang('Code error'), 'error');
+                    addMsg(lang('code error'), 'error');
                     redirect('/register');
                 }
             }
@@ -95,7 +98,7 @@ class RegisterController extends MainController
         if ($inv_uid > 0) {
             // Если регистрация по инвайту, активируем емайл
             UserModel::sendInvitationEmail($inv_code, $inv_uid, $reg_ip, $active_uid);
-            addMsg(lang('Successfully, log in'), 'success');
+            addMsg(lang('successfully, log in'), 'success');
             redirect(getUrlByName('login'));
         }
 
@@ -105,10 +108,10 @@ class RegisterController extends MainController
 
         // Отправка e-mail
         $link = 'https://' . HLEB_MAIN_DOMAIN . '/email/activate/' . $email_code;
-        $mail_message = lang('Activate E-mail') . ": \n" . $link . "\n\n";
+        $mail_message = lang('activate e-mail') . ": \n" . $link . "\n\n";
         Base::sendMail($email, Config::get(Config::PARAM_NAME) . ' — ' . lang('checking e-mail'), $mail_message);
 
-        addMsg(lang('Check your e-mail to activate your account'), 'success');
+        addMsg(lang('check your e-mail to activate your account'), 'success');
 
         redirect(getUrlByName('login'));
     }
@@ -120,13 +123,13 @@ class RegisterController extends MainController
         $invate = UserModel::InvitationAvailable($code);
         
         if (!$invate) {
-            addMsg(lang('The code is incorrect'), 'error');
+            addMsg(lang('the code is incorrect'), 'error');
             redirect('/');
         }
 
         $meta = [
             'sheet'         => 'register',
-            'meta_title'    => lang('Registration by invite') . ' | ' . Config::get(Config::PARAM_NAME),
+            'meta_title'    => lang('registration by invite') . ' | ' . Config::get(Config::PARAM_NAME),
         ];
 
         $data = [

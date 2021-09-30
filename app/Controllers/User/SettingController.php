@@ -33,12 +33,12 @@ class SettingController extends MainController
         Base::accountBan($user);
 
         $meta = [
-            'sheet'         => 'setting',
-            'meta_title'    => lang('Setting profile'),
+            'sheet'         => 'settings',
+            'meta_title'    => lang('setting'),
         ];
 
         $data = [
-            'sheet'         => 'setting',
+            'sheet'         => 'settings',
             'user'          => $user,
         ];
 
@@ -48,37 +48,41 @@ class SettingController extends MainController
     // Изменение профиля
     function edit()
     {
-        $name           = Request::getPost('name');
-        $about          = Request::getPost('about');
-        $public_email   = Request::getPost('public_email');
+        $name               = Request::getPost('name');
+        $about              = Request::getPost('about');
+        $public_email       = Request::getPost('public_email');
+        $design_is_minimal  = Request::getPostInt('design_is_minimal');
 
         $redirect       = getUrlByName('setting', ['login' => $this->uid['user_login']]);
 
-        Validation::Limits($name, lang('Name'), '3', '11', $redirect);
-        Validation::Limits($about, lang('About me'), '0', '255', $redirect);
+        Validation::Limits($name, lang('name'), '3', '11', $redirect);
+        Validation::Limits($about, lang('about me'), '0', '255', $redirect);
         
         if ($public_email) {
             Validation::checkEmail($public_email, $redirect);
         }
         
+        $_SESSION['account']['user_design_is_minimal'] = $design_is_minimal;
+        
         $data = [
-            'user_id'           => $this->uid['user_id'],
-            'user_name'         => $name,
-            'user_updated_at'   => date('Y-m-d H:i:s'),
-            'user_color'        => Request::getPostString('color', '#339900'),
-            'user_about'        => $about,
-            'user_website'      => Request::getPostString('website', ''),
-            'user_location'     => Request::getPostString('location', ''),
-            'user_public_email' => $public_email,
-            'user_skype'        => Request::getPostString('skype', ''),
-            'user_twitter'      => Request::getPostString('twitter', ''),
-            'user_telegram'     => Request::getPostString('telegram', ''),
-            'user_vk'           => Request::getPostString('vk', ''),
+            'user_id'                   => $this->uid['user_id'],
+            'user_name'                 => $name,
+            'user_updated_at'           => date('Y-m-d H:i:s'),
+            'user_color'                => Request::getPostString('color', '#339900'),
+            'user_about'                => $about,
+            'user_design_is_minimal'    => $design_is_minimal,
+            'user_website'              => Request::getPostString('website', ''),
+            'user_location'             => Request::getPostString('location', ''),
+            'user_public_email'         => $public_email,
+            'user_skype'                => Request::getPostString('skype', ''),
+            'user_twitter'              => Request::getPostString('twitter', ''),
+            'user_telegram'             => Request::getPostString('telegram', ''),
+            'user_vk'                   => Request::getPostString('vk', ''),
         ];
 
         UserModel::editProfile($data);
 
-        addMsg(lang('Changes saved'), 'success');
+        addMsg(lang('changes saved'), 'success');
         redirect($redirect);
     }
 
@@ -98,7 +102,7 @@ class SettingController extends MainController
 
         $meta = [
             'sheet'         => 'avatar',
-            'meta_title'    => lang('Change avatar'),
+            'meta_title'    => lang('change avatar'),
         ];
 
         $data = [
@@ -120,7 +124,7 @@ class SettingController extends MainController
 
         $meta = [
             'sheet'         => 'security',
-            'meta_title'    => lang('Change password') . ' | ' . Config::get(Config::PARAM_NAME),
+            'meta_title'    => lang('change password') . ' | ' . Config::get(Config::PARAM_NAME),
         ];
 
         $data = [
@@ -153,7 +157,7 @@ class SettingController extends MainController
             UploadImage::cover($cover, $this->uid['user_id'], 'user');
         }
 
-        addMsg(lang('Change saved'), 'success');
+        addMsg(lang('change saved'), 'success');
         redirect($redirect);
     }
 
@@ -175,7 +179,7 @@ class SettingController extends MainController
             redirect($redirect);
         }
 
-        Validation::Limits($password2, lang('Password'), 8, 32, $redirect);
+        Validation::Limits($password2, lang('password'), 8, 32, $redirect);
 
         // Данные участника
         $account    = Request::getSession('account');
@@ -189,7 +193,7 @@ class SettingController extends MainController
         $newpass = password_hash($password2, PASSWORD_BCRYPT);
         UserModel::editPassword($account['user_id'], $newpass);
 
-        addMsg(lang('Password changed'), 'success');
+        addMsg(lang('password changed'), 'success');
         redirect($redirect);
     }
 
@@ -218,7 +222,7 @@ class SettingController extends MainController
 
         $date = date('Y-m-d H:i:s');
         UserModel::userCoverRemove($user['user_id'], $date);
-        addMsg(lang('Cover removed'), 'success');
+        addMsg(lang('cover removed'), 'success');
 
         // Если удаляет администрация
         if ($this->uid['user_trust_level'] == 5) {
@@ -246,7 +250,7 @@ class SettingController extends MainController
 
         $meta = [
             'sheet'         => 'notifications',
-            'meta_title'    => lang('Notifications'),
+            'meta_title'    => lang('notifications'),
         ];
 
         $data = [
@@ -266,7 +270,7 @@ class SettingController extends MainController
         ];
 
         NotificationsModel::setUserSetting($data, $this->uid['user_id']);
-        addMsg(lang('Change saved'), 'success');
+        addMsg(lang('change saved'), 'success');
 
         redirect(getUrlByName('setting.notifications', ['login' => $this->uid['user_login']]));
     }

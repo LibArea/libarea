@@ -13,10 +13,14 @@ class RecoverController extends MainController
     {
         $meta = [
             'sheet'         => 'recover',
-            'meta_title'    => lang('Password Recovery') . ' | ' . Config::get(Config::PARAM_NAME),
+            'meta_title'    => lang('password Recovery') . ' | ' . Config::get(Config::PARAM_NAME),
         ];
 
-        return view('/auth/recover', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => []]);
+        $data = [
+            'sheet'         => 'recover',
+        ];
+
+        return view('/auth/recover', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
     }
 
     public function index()
@@ -26,7 +30,7 @@ class RecoverController extends MainController
         
         if (Config::get(Config::PARAM_CAPTCHA)) {
             if (!Integration::checkCaptchaCode()) {
-                addMsg(lang('Code error'), 'error');
+                addMsg(lang('code error'), 'error');
                 redirect($recover_uri);
             }
         }
@@ -36,13 +40,13 @@ class RecoverController extends MainController
         $uInfo = UserModel::userInfo($email);
 
         if (empty($uInfo['user_email'])) {
-            addMsg(lang('There is no such e-mail on the site'), 'error');
+            addMsg(lang('there is no such e-mail on the site'), 'error');
             redirect($recover_uri);
         }
 
         // Проверка на заблокированный аккаунт
         if ($uInfo['user_ban_list'] == 1) {
-            addMsg(lang('Your account is under review'), 'error');
+            addMsg(lang('your account is under review'), 'error');
             redirect($recover_uri);
         }
 
@@ -51,10 +55,10 @@ class RecoverController extends MainController
 
         // Отправка e-mail
         $newpass_link = 'https://' . HLEB_MAIN_DOMAIN . $recover_uri . '/remind/' . $code;
-        $mail_message = lang('Your link to change your password'). ": \n" . $newpass_link . "\n\n";
+        $mail_message = lang('your link to change your password'). ": \n" . $newpass_link . "\n\n";
         Base::sendMail($email, Config::get(Config::PARAM_NAME) . ' — ' . lang('changing your password'), $mail_message);
 
-        addMsg(lang('New password has been sent to e-mail'), 'success');
+        addMsg(lang('new password has been sent to e-mail'), 'success');
         redirect(getUrlByName('login'));
     }
 
@@ -74,7 +78,7 @@ class RecoverController extends MainController
 
         $meta = [
             'sheet'         => 'recovery',
-            'meta_title'    => lang('Password Recovery') . ' | ' . Config::get(Config::PARAM_NAME),
+            'meta_title'    => lang('password Recovery') . ' | ' . Config::get(Config::PARAM_NAME),
         ];
         
         $data = [
@@ -96,7 +100,7 @@ class RecoverController extends MainController
             return false;
         }
 
-        Validation::Limits($password, lang('Password'), '8', '32', getUrlByName('recover') . '/remind/' . $code);
+        Validation::Limits($password, lang('password'), '8', '32', getUrlByName('recover') . '/remind/' . $code);
 
         $newpass  = password_hash($password, PASSWORD_BCRYPT);
         $news     = UserModel::editPassword($user_id, $newpass);
@@ -107,7 +111,7 @@ class RecoverController extends MainController
 
         UserModel::editRecoverFlag($user_id);
 
-        addMsg(lang('Password changed'), 'success');
+        addMsg(lang('password changed'), 'success');
         redirect(getUrlByName('login'));
     }
 

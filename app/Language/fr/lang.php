@@ -1,5 +1,5 @@
 <?php
 return [
-    'Home'              => 'Domicile',
-    'City'              => 'Ville',
+    'home'              => 'Domicile',
+    'city'              => 'Ville',
 ];

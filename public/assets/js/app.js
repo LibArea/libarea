@@ -20,7 +20,7 @@ $(function () {
       }
     });
   }
-
+  
   // Цвет обложки для профиля
   let colorPicker = document.getElementById("colorPicker");
   if (colorPicker) {

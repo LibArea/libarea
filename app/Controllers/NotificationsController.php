@@ -31,7 +31,7 @@ class NotificationsController extends MainController
         }
 
         $meta = [
-            'meta_title'    => lang('Notifications') . ' | ' . Config::get(Config::PARAM_NAME),
+            'meta_title'    => lang('notifications') . ' | ' . Config::get(Config::PARAM_NAME),
             'sheet'         => 'notifications',
         ];
 

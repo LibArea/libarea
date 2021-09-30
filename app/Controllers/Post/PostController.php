@@ -58,11 +58,11 @@ class PostController extends MainController
 
         $post['post_content']   = Content::text($post['post_content'], 'text');
         $post['post_date_lang'] = lang_date($post['post_date']);
-        $post['num_answers']    = word_form($post['post_answers_count'], lang('Answer'), lang('Answers-m'), lang('Answers'));
+        $post['num_answers']    = word_form($post['post_answers_count'], lang('answer'), lang('answers-m'), lang('answers'));
 
         // общее количество (для модели - беседа)
         $comment_n = $post['post_comments_count'] + $post['post_answers_count'];
-        $post['num_comments']   = word_form($comment_n, lang('Comment'), lang('Comments-m'), lang('Comments'));
+        $post['num_comments']   = word_form($comment_n, lang('comment'), lang('comments-m'), lang('comments'));
 
         // Получим ответы
         // post_type: 0 - дискуссия, 1 - Q&A
@@ -113,7 +113,7 @@ class PostController extends MainController
         Request::getResources()->addBottomScript('/assets/js/shares.js');
         Request::getResources()->addBottomScript('/assets/js/prism.js');
         Request::getResources()->addBottomStyles('/assets/css/prism.css');
-
+        
         if ($uid['user_id'] > 0 && $post['post_closed'] == 0) {
             Request::getResources()->addBottomStyles('/assets/editor/editormd.css');
             Request::getResources()->addBottomScript('/assets/editor/meditor.min.js');
@@ -139,7 +139,8 @@ class PostController extends MainController
             'lo'            => $lo,
             'post_related'  => $post_related ?? '',
             'post_signed'   => $post_signed,
-            'topics'        => $topics
+            'topics'        => $topics,
+            'sheet'         => 'article',
         ];
 
         return view('/post/view', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
@@ -166,23 +167,23 @@ class PostController extends MainController
         foreach ($posts as $ind => $row) {
             $text                           = explode("\n", $row['post_content']);
             $row['post_content_preview']    = Content::text($text[0], 'line');
-            $row['lang_num_answers']        = word_form($row['post_answers_count'], lang('Answer'), lang('Answers-m'), lang('Answers'));
+            $row['lang_num_answers']        = word_form($row['post_answers_count'], lang('answer'), lang('answers-m'), lang('answers'));
             $row['post_date']               = lang_date($row['post_date']);
             $result[$ind]                   = $row;
         }
 
-        $h1 = lang('Posts') . ' ' . $login;
-        $meta_desc  = lang('Participant posts') . ' ' . $login;
+        $h1 = lang('posts') . ' ' . $login;
+        $meta_desc  = lang('participant posts') . ' ' . $login;
 
         $meta = [
             'canonical'     => Config::get(Config::PARAM_URL) . getUrlByName('posts.user', ['login' => $login]),
             'sheet'         => 'user-post',
-            'meta_title'    => lang('Posts') . ' ' . $login . ' | ' . Config::get(Config::PARAM_NAME),
+            'meta_title'    => lang('posts') . ' ' . $login . ' | ' . Config::get(Config::PARAM_NAME),
             'meta_desc'     => $meta_desc . ' ' . Config::get(Config::PARAM_HOME_TITLE),
         ];
 
         $data = [
-            'h1'    => lang('Posts') . ' ' . $login,
+            'h1'    => lang('posts') . ' ' . $login,
             'sheet' => 'user-post',
             'posts' => $result,
         ];

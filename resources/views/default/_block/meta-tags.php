@@ -24,7 +24,7 @@
     <?php if (!empty($meta['img'])) { ?>
       <meta property="og:image" content="<?= $meta['img']; ?>" />
       <meta property="og:image:type" content="image/webp" />
-      <meta property="og:image:width" content="820" /> 
+      <meta property="og:image:width" content="820" />
       <meta property="og:image:height" content="320" />
     <?php } ?>
   <?php } elseif ($meta['sheet'] == 'profile') { ?>
@@ -45,10 +45,10 @@
 <?php } ?>
 
 <?php if (empty($meta['img'])) { ?>
-   <meta name="twitter:image" content="<?= Agouti\Config::get(Agouti\Config::PARAM_URL); ?>/apple-touch-icon-144.png">
-   <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144.png">
-   <meta property="og:image" content="/apple-touch-icon-144.png" />
-   <meta property="og:image:type" content="image/png" />
+  <meta name="twitter:image" content="<?= Agouti\Config::get(Agouti\Config::PARAM_URL); ?>/apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144.png">
+  <meta property="og:image" content="/apple-touch-icon-144.png" />
+  <meta property="og:image:type" content="image/png" />
 <?php } ?>
 <link rel="icon" sizes="16x16" href="/favicon.ico" type="image/x-icon">
 <link rel="icon" sizes="120x120" href="/favicon-120.ico" type="image/x-icon">

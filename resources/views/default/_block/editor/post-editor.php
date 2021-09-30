@@ -7,4 +7,4 @@
     <?php } ?>
   </div>
 </div>
-<?= returnBlock('editor/config-editor', ['post_id' => $post_id, 'type' => $type, 'width100' => 'yes']); ?>
+<?= includeTemplate('/_block/editor/config-editor', ['post_id' => $post_id, 'type' => $type, 'width100' => 'yes']); ?>

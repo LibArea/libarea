@@ -72,7 +72,7 @@ class EditSpaceController extends MainController
 
         SpaceModel::edit($data);
 
-        addMsg(lang('Change saved'), 'success');
+        addMsg(lang('change saved'), 'success');
         redirect('/s/' . $space_slug);
     }
 
@@ -93,13 +93,13 @@ class EditSpaceController extends MainController
         Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
 
         $meta = [
-            'sheet'         => 'edit-space',
-            'meta_title'    => lang('Edit') . ' — ' . $space['space_slug'],
+            'sheet'         => 'edit',
+            'meta_title'    => lang('edit') . ' — ' . $space['space_slug'],
         ];
 
         $data = [
             'space' => $space,
-            'sheet' => 'edit-space',
+            'sheet' => 'edit',
         ];
 
         return view('/space/edit', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
@@ -123,7 +123,7 @@ class EditSpaceController extends MainController
 
         $meta = [
             'sheet'         => 'edit-logo',
-            'meta_title'    => lang('Edit') . ' / ' . lang('Logo'),
+            'meta_title'    => lang('edit') . ' / ' . lang('logo'),
         ];
 
         $data = [
@@ -164,7 +164,7 @@ class EditSpaceController extends MainController
             UploadImage::cover($cover, $space['space_id'], 'space');
         }
 
-        addMsg(lang('Change saved'), 'success');
+        addMsg(lang('change saved'), 'success');
         redirect($redirect);
     }
 
@@ -195,7 +195,7 @@ class EditSpaceController extends MainController
 
         SpaceModel::CoverRemove($space['space_id']);
 
-        addMsg(lang('Cover removed'), 'success');
+        addMsg(lang('cover removed'), 'success');
         redirect($redirect);
     }
 }

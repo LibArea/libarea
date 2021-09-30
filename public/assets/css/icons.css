@@ -72,16 +72,19 @@
 .icon-scissors:before { content: '\e826'; } /* '' */
 .icon-gift:before { content: '\e827'; } /* '' */
 .icon-chart-bar:before { content: '\e828'; } /* '' */
+.icon-menu:before { content: '\e829'; } /* '' */
+.icon-bookmark:before { content: '\e82a'; } /* '' */
 .icon-search:before { content: '\e82b'; } /* '' */
 .icon-heart-empty:before { content: '\e82c'; } /* '' */
 .icon-star-empty:before { content: '\e82d'; } /* '' */
 .icon-cancel:before { content: '\e82e'; } /* '' */
 .icon-book:before { content: '\e82f'; } /* '' */
-.icon-comment:before { content: '\e830'; } /* '' */
+.icon-picture:before { content: '\e830'; } /* '' */
 .icon-eye:before { content: '\e831'; } /* '' */
 .icon-thumbs-up-1:before { content: '\e832'; } /* '' */
 .icon-cog-alt:before { content: '\e833'; } /* '' */
 .icon-wrench:before { content: '\e834'; } /* '' */
+.icon-heart:before { content: '\e835'; } /* '' */
 .icon-move:before { content: '\f047'; } /* '' */
 .icon-link-ext:before { content: '\f08e'; } /* '' */
 .icon-check-empty:before { content: '\f096'; } /* '' */
@@ -92,7 +95,9 @@
 .icon-docs:before { content: '\f0c5'; } /* '' */
 .icon-list-bullet:before { content: '\f0ca'; } /* '' */
 .icon-strike:before { content: '\f0cc'; } /* '' */
+.icon-mail-alt:before { content: '\f0e0'; } /* '' */
 .icon-comment-empty:before { content: '\f0e5'; } /* '' */
+.icon-bell-alt:before { content: '\f0f3'; } /* '' */
 .icon-coffee:before { content: '\f0f4'; } /* '' */
 .icon-doc-text:before { content: '\f0f6'; } /* '' */
 .icon-folder-empty:before { content: '\f114'; } /* '' */
@@ -122,6 +127,7 @@
 .icon-wechat:before { content: '\f1d7'; } /* '' */
 .icon-header:before { content: '\f1dc'; } /* '' */
 .icon-at:before { content: '\f1fa'; } /* '' */
+.icon-chart-line:before { content: '\f201'; } /* '' */
 .icon-diamond:before { content: '\f219'; } /* '' */
 .icon-pinterest:before { content: '\f231'; } /* '' */
 .icon-medium:before { content: '\f23a'; } /* '' */
@@ -139,6 +145,7 @@
 .icon-internet-explorer:before { content: '\f26b'; } /* '' */
 .icon-television:before { content: '\f26c'; } /* '' */
 .icon-commenting-o:before { content: '\f27b'; } /* '' */
+.icon-hashtag:before { content: '\f292'; } /* '' */
 .icon-user-o:before { content: '\f2c0'; } /* '' */
 .icon-id-card-o:before { content: '\f2c3'; } /* '' */
 .icon-quora:before { content: '\f2c4'; } /* '' */

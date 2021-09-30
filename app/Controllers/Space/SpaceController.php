@@ -28,17 +28,15 @@ class SpaceController extends MainController
         $total_allowed      = $uid['user_trust_level'] == 5 ? 999 : 3;
         $add_space_button   = Validation::validTl($uid['user_trust_level'], Config::get(Config::PARAM_TL_ADD_SPACE), $count_space, $total_allowed);
 
-        Request::getHead()->addStyles('/assets/css/space.css');
-
         $meta = [
             'canonical'     => Config::get(Config::PARAM_URL) . '/spaces',
             'sheet'         => 'spaces',
-            'meta_title'    => lang('All space') . ' | ' . Config::get(Config::PARAM_NAME),
+            'meta_title'    => lang('all space') . ' | ' . Config::get(Config::PARAM_NAME),
             'meta_desc'     => lang('all-space-desc') . ' ' . Config::get(Config::PARAM_HOME_TITLE),
         ];
 
         $data = [
-            'h1'                => lang('All space'),
+            'h1'                => lang('all space'),
             'sheet'             => 'spaces',
             'pagesCount'        => ceil($pagesCount / $limit),
             'pNum'              => $page,
@@ -65,17 +63,15 @@ class SpaceController extends MainController
         $count_space        = count($all_space);
         $add_space_button   = Validation::validTl($uid['user_trust_level'], Config::get(Config::PARAM_TL_ADD_SPACE), $count_space, 3);
 
-        Request::getHead()->addStyles('/assets/css/space.css');
-
         $meta = [
             'canonical'     => Config::get(Config::PARAM_URL) . '/space/my',
             'sheet'         => 'my-space',
-            'meta_title'    => lang('I read space') . ' | ' . Config::get(Config::PARAM_NAME),
-            'meta_desc'     => lang('I read space') . ' ' . Config::get(Config::PARAM_HOME_TITLE),
+            'meta_title'    => lang('i read space') . ' | ' . Config::get(Config::PARAM_NAME),
+            'meta_desc'     => lang('i read space') . ' ' . Config::get(Config::PARAM_HOME_TITLE),
         ];
 
         $data = [
-            'h1'                => lang('I read space'),
+            'h1'                => lang('i read space'),
             'sheet'             => 'my-space',
             'pagesCount'        => ceil($pagesCount / $limit),
             'pNum'              => $page,
@@ -111,7 +107,7 @@ class SpaceController extends MainController
         foreach ($posts as $ind => $row) {
             $text = explode("\n", $row['post_content']);
             $row['post_content_preview']    = Content::text($text[0], 'line');
-            $row['lang_num_answers']        = word_form($row['post_answers_count'], lang('Answer'), lang('Answers-m'), lang('Answers'));
+            $row['lang_num_answers']        = word_form($row['post_answers_count'], lang('answer'), lang('answers-m'), lang('answers'));
             $row['post_date']               = lang_date($row['post_date']);
             $post_result[$ind]              = $row;
         }
@@ -125,8 +121,6 @@ class SpaceController extends MainController
         if ($sheet == 'writers') {
             $writers = SpaceModel::getWriters($space['space_id']);
         }
-
-        Request::getHead()->addStyles('/assets/css/space.css');
 
         $meta_title = $space['space_name'] . ' — ' . lang('space-' . $sheet . '-title') . ' ' . $num;
         $meta_desc  = $meta_title . $space['space_description'];
@@ -157,17 +151,15 @@ class SpaceController extends MainController
         // Under development
         $wiki = [];
         
-        Request::getHead()->addStyles('/assets/css/space.css');
-
         $meta = [
             'canonical'     => Config::get(Config::PARAM_URL) . '/s/' . $space['space_slug'] . '/wiki',
             'sheet'         => 'wiki',
-            'meta_title'    => lang('Wiki space') . ' | ' . Config::get(Config::PARAM_NAME),
+            'meta_title'    => lang('wiki space') . ' | ' . Config::get(Config::PARAM_NAME),
             'meta_desc'     => lang('wiki-space-desc') . ' ' . Config::get(Config::PARAM_HOME_TITLE),
         ];
 
         $data = [
-            'h1'            => lang('Wiki space'),
+            'h1'            => lang('wiki space'),
             'sheet'         => 'wiki',
             'wiki'          => $wiki,
         ];

@@ -90,7 +90,7 @@ class AddSpaceController extends MainController
 
         $meta = [
             'sheet'         => 'add-space',
-            'meta_title'    => lang('Add Space'),
+            'meta_title'    => lang('add Space'),
         ];
 
         $data = [

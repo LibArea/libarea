@@ -8,102 +8,148 @@ declare(strict_types=1);
  * Сопоставление названий для используемых функций. При конфликте имен можно использовать другое имя.
  */
 
-function render($name, $data = null) {
+// use App\Optional\Data; 
+
+function render($name, $data = null)
+{
     return hleb_v10s20hdp8nm7c_render($name, $data);
 }
 
-function data() {
+function data()
+{
     return hleb_to0me1cd6vo7gd_data();
 }
 
-function csrf_field() {
+function csrf_field()
+{
     echo hleb_ds5bol10m0bep2_csrf_field();
 }
 
-function csrf_token() {
+function csrf_token()
+{
     return hleb_c3dccfa0da1a3e_csrf_token();
 }
 
-function redirectToSite($url) {
+function redirectToSite($url)
+{
     hleb_ba5c9de48cba78c_redirectToSite($url);
 }
 
-function redirect(string $url, int $code = 303) {
+function redirect(string $url, int $code = 303)
+{
     hleb_ad7371873a6ad40_redirect($url, $code);
 }
 
-function getProtectUrl($url) {
+function getProtectUrl($url)
+{
     return hleb_ba5c9de48cba78c_getProtectUrl($url);
 }
 
-function getFullUrl($url) {
+function getFullUrl($url)
+{
     return hleb_e0b1036cd5b501_getFullUrl($url);
 }
 
-function getMainUrl() {
+function getMainUrl()
+{
     return hleb_e2d3aeb0253b7_getMainUrl();
 }
 
-function getMainClearUrl() {
+function getMainClearUrl()
+{
     return hleb_daa581cdd6323_getMainClearUrl();
 }
 
-function getUrlByName($name, $args = []) {
+function getUrlByName($name, $args = [])
+{
     return hleb_i245eaa1a3b6d_getByName($name, $args);
 }
 
-function getStandardUrl(string $name) {
+function getStandardUrl(string $name)
+{
     return hleb_a1a3b6di245ea_getStandardUrl($name);
 }
 
-function print_r2($data, $desc = null) {
+function print_r2($data, $desc = null)
+{
     hleb_a581cdd66c107015_print_r2($data, $desc);
 }
 
-function getContentFromTemplate(string $template, array $params = []) {
+function getContentFromTemplate(string $template, array $params = [])
+{
     return hleb_e0b1036c1070101_template($template, $params, true);
 }
 
-function includeOwnCachedTemplate(string $template, array $params = []) {
+function includeOwnCachedTemplate(string $template, array $params = [])
+{
     hleb_ade9e72e1018c6_template($template, $params);
 }
 
-function getRequestResources() {
+function getRequestResources()
+{
     return hleb_ra3le00te0m01n_request_resources();
 }
 
-function getRequestHead() {
+function getRequestHead()
+{
     return hleb_t0ulb902e69thp_request_head();
 }
 
-function getRequest() {
+function getRequest()
+{
     return hleb_e70c10c1057hn11cc8il2_get_request();
 }
 
-function storage_path() {
+function storage_path()
+{
     return hleb_6iopl942e103te6i10600l_storage_path();
 }
 
-function public_path() {
+function public_path()
+{
     return hleb_10p134l66o0il0e0t92e6i_public_path();
 }
 
-function view_path() {
+function view_path()
+{
     return hleb_601e30l60p2ii1e0o469tl_view_path();
 }
 
-function includeCachedTemplate(string $template, array $params = []) {
+function includeCachedTemplate(string $template, array $params = [])
+{
     hleb_e0b1036c1070102_template(PR_VIEW_DIR . $template, $params);
 }
 
-function includeTemplate(string $template, array $params = []) {
+function includeTemplate(string $template, array $params = [])
+{
     return hleb_e0b1036c1070101_template(PR_VIEW_DIR . $template, $params);
+    /* $account = \Request::getSession('account') ?? [];
+    $design  = $account['user_design_is_minimal'] ?? 0;
+    if ($design == 1) {
+        return hleb_e0b1036c1070101_template(PR_MIN_VIEW_DIR . $template, $params);
+    } else {
+        return hleb_e0b1036c1070101_template(PR_VIEW_DIR . $template, $params);
+    } */
 }
 
-function view(string $template, array $params = []) {
-   includeTemplate('/header', ['uid' => $params['uid'], 'meta' => $params['meta']]);
-   includeTemplate($template, ['uid' => $params['uid'], 'data' => $params['data']]);
-   includeTemplate('/footer');
-} 
-  
+function view(string $template, array $params = [])
+{
+    includeTemplate('/header', ['uid' => $params['uid'], 'meta' => $params['meta']]);
+    includeTemplate($template, ['uid' => $params['uid'], 'data' => $params['data']]);
+    includeTemplate('/footer');
+}
+// Следующая часть работы...
+/* function includeBaseBlock(string $templateFile, array $params = []) {
+    $data = Data::getData();
+    $uid  = Data::getValue('uid');
+    $templates = [
+        'footer' => ['data' => $data, 'uid' => $uid],
+        'body' =>   ['data' => $data, 'uid' => $uid, 'other' => Data::getValue('other')],
+        'header' => ['data' => $data, 'uid' => $uid],
+        // ...
+    ];
+    $params += isset($templates[$templateFile]) ? $templates[$templateFile] : [];
+    includeTemplate('/_block/' . trim($templateFile, '\\/ '), $params);
+} */
+
 hleb_require(HLEB_GLOBAL_DIRECTORY . '/app/Libraries/Template.php');

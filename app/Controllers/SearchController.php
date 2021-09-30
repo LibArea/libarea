@@ -20,7 +20,7 @@ class SearchController extends MainController
 
             if (!empty($query)) {
 
-                Validation::Limits($query, lang('Too short'), '3', '128', '/search');
+                Validation::Limits($query, lang('too short'), '3', '128', '/search');
 
                 // Успех и определим, что будем использовать
                 // Далее индивидуально расширим (+ лайки, просмотры и т.д.)
@@ -31,13 +31,12 @@ class SearchController extends MainController
                         $row['post_content']  = Content::text(Base::cutWords($row['post_content'], 32, '...'), 'text');
                         $result[$ind]   = $row;
                     }
-                    
+
                     $tags = [];
-                    
                 } else {
                     $qa     = SearchModel::getSearchPostServer($query);
                     $tags   = SearchModel::getSearchTagsServer($query);
-                    
+
                     $result = array();
                     foreach ($qa as $ind => $row) {
                         $row['_content'] = Content::noMarkdown($row['_content']);
@@ -45,14 +44,14 @@ class SearchController extends MainController
                     }
                 }
             } else {
-                addMsg(lang('Empty request'), 'error');
+                addMsg(lang('empty request'), 'error');
                 redirect('/search');
             }
         }
 
         $meta = [
             'sheet'         => 'search',
-            'meta_title'    => lang('Search'),
+            'meta_title'    => lang('search'),
         ];
 
         $data = [

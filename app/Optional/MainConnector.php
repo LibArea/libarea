@@ -12,18 +12,20 @@ use Hleb\Scheme\Home\Main\Connector;
 
 class MainConnector implements Connector
 {
-    public function add() {
+    public function add()
+    {
         return [
             "App\Controllers\*"             => "app/Controllers/",
             "Models\*"                      => "app/Models/",
             "App\Middleware\Before\*"       => "app/Middleware/Before/",
             "App\Middleware\After\*"        => "app/Middleware/After/",
-            "Modules\*"                     => "modules/",
+            //  "Modules\*"                     => "modules/",
             "App\Commands\*"                => "app/Commands/",
 
             // ... or, if a specific class is added,
             "DB"                            => "database/DB.php",
             // "Phphleb\Debugpan\DPanel"    => "app/ThirdParty/phphleb/debugpan/DPanel.php",
+            // "App\Optional\Data"             => "app/Optional/Data.php",
 
             "Agouti\Base"                     => "app/Libraries/Base.php",
             "Agouti\Content"                  => "app/Libraries/Content.php",
@@ -40,7 +42,5 @@ class MainConnector implements Connector
             "JacksonJeans\MailException"    => "app/ThirdParty/php-mail/MailException.class.php",
             "JacksonJeans\Mail"             => "app/ThirdParty/php-mail/Mail.class.php",
         ];
-
     }
 }
-

@@ -1,15 +1,20 @@
-<div class="wrap">
-  <main>
-    <div class="white-box pt5 pr15 pb0 pl15">
-      <?= breadcrumb('/', lang('Home'), getUrlByName('user', ['login' => $uid['user_login']]), lang('Profile'), lang('Favorites'));
-      $pages = array(
-        array('id' => 'favorites', 'url' => getUrlByName('favorites', ['login' => $uid['user_login']]), 'content' => lang('Favorites')),
-        array('id' => 'subscribed', 'url' => getUrlByName('subscribed', ['login' => $uid['user_login']]), 'content' => lang('Subscribed')),
-      );
-      echo returnBlock('tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
-      ?>
-    </div>
-    <?= returnBlock('/post', ['data' => $data, 'uid' => $uid]); ?>
-  </main>
-  <?= returnBlock('aside-lang', ['lang' => lang('info-preferences')]); ?>
+<div class="sticky col-span-2 justify-between no-mob">
+  <?= includeTemplate('/_block/menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
+<main class="col-span-7 mb-col-12">
+  <?= breadcrumb('/', lang('home'), getUrlByName('user', ['login' => $uid['user_login']]), lang('profile'), lang('favorites')); ?>
+
+  <div class="bg-white flex flex-row items-center justify-between border-box-1 br-rd-5 p15 mb15">
+    <p class="m0"><?= lang($data['sheet']); ?></p>
+    <?php $pages = array(
+      array('id' => 'favorites', 'url' => getUrlByName('favorites', ['login' => $uid['user_login']]), 'content' => lang('favorites'), 'icon' => 'icon-lightbulb'),
+      array('id' => 'subscribed', 'url' => getUrlByName('subscribed', ['login' => $uid['user_login']]), 'content' => lang('subscribed'), 'icon' => 'icon-lightbulb'),
+    );
+    includeTemplate('/_block/tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
+    ?>
+  </div>
+  <div class="mt10">
+    <?= includeTemplate('/_block/post', ['data' => $data, 'uid' => $uid]); ?>
+  </div>
+</main>
+<?= includeTemplate('/_block/aside-lang', ['lang' => lang('info-preferences')]); ?>

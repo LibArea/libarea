@@ -125,13 +125,13 @@ function lang_date($string)
     $today = date('Ymd');  //20210421
     if (($a[0] . $a[1] . $a[2]) == $today) {
         //Если сегодня
-        return (lang('Today') . ' ' . $a[3] . ':' . $a[4]);
+        return (lang('today') . ' ' . $a[3] . ':' . $a[4]);
     } else {
         $b = explode('-', date("Y-m-d"));
         $tom = date('Ymd', mktime(0, 0, 0, $b[1], $b[2] - 1, $b[0]));
         if (($a[0] . $a[1] . $a[2]) == $tom) {
             //Если вчера
-            return (lang('Yesterday') . ' ' . $a[3] . ':' . $a[4]);
+            return (lang('yesterday') . ' ' . $a[3] . ':' . $a[4]);
         } else {
             //Если позже
             $mm = intval($a[1]);
@@ -181,7 +181,7 @@ function pagination($pNum, $pagesCount, $sheet, $other)
     }
 
     if ($pagesCount > $pNum) {
-        $html .= '<span class="pagination-active ml5 mr5 size-15">' . ($pNum) . '</span>';
+        $html .= '<span class="bg-red-700 pt5 pr10 pb5 pl10 white ml5 mr5 size-15">' . ($pNum) . '</span>';
     }
 
     if ($pagesCount > $pNum) {
@@ -197,7 +197,7 @@ function pagination($pNum, $pagesCount, $sheet, $other)
             $html .= '...';
         }
 
-        $html .= '<a class="p5 ml5 size-15 lowercase gray-light" href="' . $page . '/page/' . ($pNum + 1) . '">' . lang('Page') . ' ' . ($pNum + 1) . ' >></a>';
+        $html .= '<a class="p5 ml5 size-15 lowercase gray-light" href="' . $page . '/page/' . ($pNum + 1) . '">' . lang('page') . ' ' . ($pNum + 1) . ' >></a>';
     }
 
     $html .= '</div>';
@@ -207,22 +207,22 @@ function pagination($pNum, $pagesCount, $sheet, $other)
 
 function breadcrumb($path_home, $title_home, $path_intermediate, $title_intermediate, $title_page)
 {
-    $html = '<ul class="breadcrumb">';
-    $html .= '<li class="breadcrumb-item gray">
+    $html = '<ul class="breadcrumb size-14 p0 mt5">';
+    $html .= '<li class="breadcrumb-item inline m0 pt5 pr0 pn5 pl0 gray">
                 <a title="' . $title_home . '" href="' . $path_home . '">' . $title_home . '</a>
-                </li>';
+              </li>';
 
     if ($path_intermediate) {
-        $html .= '<li class="breadcrumb-item gray">
+        $html .= '<li class="breadcrumb-item inline m0 pt5 pr0 pn5 pl0 gray">
                     <a title="' . $title_intermediate . '" href="' . $path_intermediate . '">' . $title_intermediate . '</a>
-                    </li>';
+                  </li>';
     }
 
-    $html .= '<li class="breadcrumb-item gray">
+    $html .= '<li class="breadcrumb-item inline m0 pt5 pr0 pn5 pl0 gray">
                 <span class="red">' . $title_page . '</span>
                 </li>
-                </ul>
-                <h1>' . $title_page . '</h1>';
+                </ul>';
+            //  <h1>' . $title_page . '</h1>';
 
     return $html;
 }
@@ -232,28 +232,28 @@ function votes($user_id, $content, $type)
     $html  = '';
     $count = '';
     if ($content[$type . '_votes'] > 0) {
-        $count = '+' . $content[$type . '_votes'];
+        $count = $content[$type . '_votes'];
     }
 
     if ($user_id > 0) {
         if ($content['votes_' . $type . '_user_id'] || $user_id == $content[$type . '_user_id']) {
-            $html .= '<div class="voters active flex">
-                        <div class="up-id gray-light-2 icon-up-bold feed-icon"></div>
-                        <div class="score gray mr5">
+            $html .= '<div class="voters active flex flex-center">
+                        <div class="up-id gray-light-2 icon-heart"></div>
+                        <div class="score gray-light-2 ml5">
                             ' . $count . '
                         </div></div>';
         } else {
             $num_count = empty($count) ? 0 : $count;
-            $html .= '<div id="up' . $content[$type . '_id'] . '" class="voters flex">
-                        <div data-id="' . $content[$type . '_id'] . '" data-count="' . $num_count . '" data-type="' . $type . '" class="up-id gray-light-2 icon-up-bold feed-icon"></div>
-                        <div class="score gray mr5">
+            $html .= '<div id="up' . $content[$type . '_id'] . '" class="voters flex flex-center">
+                        <div data-id="' . $content[$type . '_id'] . '" data-count="' . $num_count . '" data-type="' . $type . '" class="up-id gray-light-2 icon-heart-empty"></div>
+                        <div class="score gray-light-2 ml5">
                             ' . $count . '
                         </div></div>';
         }
     } else {
-        $html .= '<div class="voters flex">
-                    <div class="up-id gray-light-2 icon-up-bold feed-icon click-no-auth"></div>
-                    <div class="score gray mr5">
+        $html .= '<div class="voters flex flex-center">
+                    <div class="up-id gray-light-2 icon-heart-empty click-no-auth"></div>
+                    <div class="score gray-light-2 ml5">
                          ' . $count . '                
                     </div></div>';
     }
@@ -266,7 +266,8 @@ function favorite_post($user_id, $post_id, $favorite_tid)
     $html  = '';
     if ($user_id > 0) {
         $blue = $favorite_tid ? 'blue' : '';
-        $html .= '<span id="favorite_'. $post_id .'" class="add-favorite '. $blue .' gray-light feed-icon" data-id="' . $post_id . '" data-type="post"><i class="icon-bookmark-empty middle"></i></span>';
+        $icon = $favorite_tid ? 'icon-bookmark' : 'icon-bookmark-empty';
+        $html .= '<span id="favorite_'. $post_id .'" class="add-favorite '. $blue .' gray-light feed-icon" data-id="' . $post_id . '" data-type="post"><i class="'. $icon .' middle"></i></span>';
     } else {
         $html .= '<span class="click-no-auth gray-light feed-icon">
                     <i class="icon-bookmark-empty middle"></i>
@@ -337,26 +338,3 @@ function addMsg($msg, $class)
     $class = ($class == 'error') ? 2 : 1;
     $_SESSION['msg'][] = array($msg, $class);
 }
-
-function returnBlock($tpl_file, array $params = [])
-{
-    return includeTemplate('/_block/' . $tpl_file, $params);
-}
-
-function select($type, array $params = [])
-{
-    if ($type == 'space') {
-        return includeTemplate('/_block/form/select-space', $params);
-    } elseif ($type == 'trust_level') {
-        return includeTemplate('/_block/form/select-post-tl', $params);
-    }
-    return includeTemplate('/_block/form/select-content', $params);
-} 
-
-function field($type, array $params = [])
-{
-    if ($type == 'radio') {
-        return includeTemplate('/_block/form/field-radio', ['data' => $params]);
-    }
-    return includeTemplate('/_block/form/field-input', ['data' => $params]);
-}  

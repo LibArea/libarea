@@ -35,7 +35,7 @@ class CommentController extends MainController
         $meta = [
             'canonical'     => Config::get(Config::PARAM_URL) . '/comments',
             'sheet'         => 'comments',
-            'meta_title'    => lang('All comments') . $num . Config::get(Config::PARAM_NAME),
+            'meta_title'    => lang('all comments') . $num . Config::get(Config::PARAM_NAME),
             'meta_desc'     => lang('comments-desc') . $num . Config::get(Config::PARAM_HOME_TITLE),
         ];
         
@@ -69,12 +69,12 @@ class CommentController extends MainController
         $meta = [
             'canonical'     => Config::get(Config::PARAM_URL) . getUrlByName('comments.user', ['login' => $login]),
             'sheet'         => 'user-comments',
-            'meta_title'    => lang('Comments-n') . ' ' . $login . ' | ' . Config::get(Config::PARAM_NAME),
-            'meta_desc'     => lang('Comments-n') . ' ' . $login . ' ' . Config::get(Config::PARAM_HOME_TITLE),
+            'meta_title'    => lang('comments-n') . ' ' . $login . ' | ' . Config::get(Config::PARAM_NAME),
+            'meta_desc'     => lang('comments-n') . ' ' . $login . ' ' . Config::get(Config::PARAM_HOME_TITLE),
         ];
 
         $data = [
-            'h1'            => lang('Comments-n') . ' ' . $login,
+            'h1'            => lang('comments-n') . ' ' . $login,
             'sheet'         => 'user-comments',
             'comments'      => $result
         ];

@@ -1,9 +1,6 @@
-<div class="wrap">
-  <main class="white-box pt5 pr15 pb5 pl15">
-    <?= breadcrumb('/', lang('Home'), getUrlByName('info'), lang('Info'), lang('Privacy Policy')); ?>
+<main class="col-span-9 mb-col-12 bg-white br-rd-5 border-box-1 pt5 pr15 pb5 pl15">
+    <?= breadcrumb('/', lang('home'), getUrlByName('info'), lang('info'), lang('privacy policy')); ?>
+    <h1><?= lang('privacy policy'); ?></h1>
     <?= $data['content']; ?>
-  </main>
-  <aside>
-    <?= returnBlock('/info-page-menu', ['uid' => $uid, 'sheet' => $data['sheet']]); ?>
-  </aside>
-</div>
+</main>
+<?= includeTemplate('/_block/info-page-menu', ['uid' => $uid, 'sheet' => $data['sheet']]); ?>

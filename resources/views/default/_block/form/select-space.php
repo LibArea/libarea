@@ -1,5 +1,5 @@
 <div class="boxline">
-  <label class="form-label" for="post_content"><?= lang('Space'); ?></label>
+  <label class="form-label" for="post_content"><?= lang('space'); ?></label>
   <select class="form-input" name="space_id">
     <?php foreach ($spaces as $space) { ?>
       <option <?php if ($space_id == $space['space_id']) { ?> selected<?php } ?> value="<?= $space['space_id']; ?>">

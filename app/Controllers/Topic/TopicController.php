@@ -36,7 +36,7 @@ class TopicController extends MainController
         $meta = [
             'sheet'         => 'topics',
             'canonical'     => Config::get(Config::PARAM_URL) . '/topics',
-            'meta_title'    => lang('All topics') . $num . Config::get(Config::PARAM_NAME),
+            'meta_title'    => lang('all topics') . $num . Config::get(Config::PARAM_NAME),
             'meta_desc'     => lang('topic-desc') . $num . Config::get(Config::PARAM_HOME_TITLE),
         ];
 
@@ -88,12 +88,12 @@ class TopicController extends MainController
         foreach ($posts as $ind => $row) {
             $text = explode("\n", $row['post_content']);
             $row['post_content_preview']    = Content::text($text[0], 'line');
-            $row['lang_num_answers']        = word_form($row['post_answers_count'], lang('Answer'), lang('Answers-m'), lang('Answers'));
+            $row['lang_num_answers']        = word_form($row['post_answers_count'], lang('answer'), lang('answers-m'), lang('answers'));
             $row['post_date']               = lang_date($row['post_date']);
             $result[$ind]                   = $row;
         }
 
-        $meta_title = $topic['topic_seo_title'] . ' — ' .  lang('Topic');
+        $meta_title = $topic['topic_seo_title'] . ' — ' .  lang('topic');
         $meta = [
             'canonical'     => Config::get(Config::PARAM_URL) . getUrlByName('topic', ['slug' => $topic['topic_slug']]),
             'sheet'         => 'topic',
@@ -144,13 +144,13 @@ class TopicController extends MainController
 
         $topic_select = empty($topic['topic_post_related']) ? 0 : $topic['topic_post_related'];
 
-        $meta_title = $topic['topic_seo_title'] . ' — ' .  lang('Info');
+        $meta_title = $topic['topic_seo_title'] . ' — ' .  lang('info');
         $meta = [
             'h1'            => $topic['topic_seo_title'],
             'canonical'     => Config::get(Config::PARAM_URL) . getUrlByName('topic', ['slug' => $topic['topic_slug']]) . '/info',
             'sheet'         => 'info',
             'meta_title'    => $meta_title . ' | ' . Config::get(Config::PARAM_NAME),
-            'meta_desc'     => $topic['topic_description'] . '. ' . lang('Info') . ' ' . Config::get(Config::PARAM_HOME_TITLE),
+            'meta_desc'     => $topic['topic_description'] . '. ' . lang('info') . ' ' . Config::get(Config::PARAM_HOME_TITLE),
         ];
 
         $data = [

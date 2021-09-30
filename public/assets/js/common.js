@@ -12,6 +12,28 @@ $(function () {
   });
 });
 
+let lateral = document.querySelector('.lateral');
+if (lateral) {
+    let menu = document.querySelector('.lateral-menu');
+    const toggleMenu = () => {
+      menu.classList.toggle('show');
+    };
+    lateral.addEventListener('click', e => {
+      e.stopPropagation();
+      toggleMenu();
+    });
+    document.addEventListener('click', e => {
+      let target = e.target;
+      let its_menu = target == menu || menu.contains(target);
+      let its_hamburger = target == lateral;
+      let menu_is_active = menu.classList.contains('show');
+
+      if (!its_menu && !its_hamburger && menu_is_active) {
+        toggleMenu();
+      }
+    });
+  }
+
 // Call the form for adding a comment
 document.querySelectorAll(".add-comment")
   .forEach(el => el.addEventListener("click", function (e) {
@@ -81,10 +103,13 @@ document.querySelectorAll(".showpost")
 
     let post_id = this.dataset.post_id;
     let post = document.querySelector('.s_' + post_id);
+    let article = document.querySelector('.article_' + post_id);
     post.classList.remove("hide");
+    article.classList.add("preview");
 
     if (!e.target.classList.contains('showpost')) {
       post.classList.add("hide");
+      article.classList.remove("preview");
     }
 
     fetch("/post/shown", {

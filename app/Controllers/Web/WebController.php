@@ -68,11 +68,11 @@ class WebController extends MainController
             $text = explode("\n", $row['post_content']);
             $row['post_content_preview']    = Content::text($text[0], 'line');
             $row['post_date']               = lang_date($row['post_date']);
-            $row['lang_num_answers']        = word_form($row['post_answers_count'], lang('Answer'), lang('Answers-m'), lang('Answers'));
+            $row['lang_num_answers']        = word_form($row['post_answers_count'], lang('answer'), lang('answers-m'), lang('answers'));
             $result[$ind]                   = $row;
         }
 
-        $meta_title = lang('Domain') . ': ' . $domain . ' | ' . Config::get(Config::PARAM_NAME);
+        $meta_title = lang('domain') . ': ' . $domain . ' | ' . Config::get(Config::PARAM_NAME);
         $meta_desc  = lang('domain-desc') . ': ' . $domain . ' ' . Config::get(Config::PARAM_HOME_TITLE);
 
         $meta = [  

@@ -59,6 +59,7 @@ class UserModel extends MainModel
                     user_trust_level,
                     user_cover_art,
                     user_color,
+                    user_design_is_minimal,
                     user_invitation_available,
                     user_about,
                     user_website,
@@ -270,6 +271,7 @@ class UserModel extends MainModel
                    user_password,
                    user_login,
                    user_name,
+                   user_design_is_minimal,
                    user_avatar,
                    user_trust_level,
                    user_ban_list,
@@ -306,33 +308,35 @@ class UserModel extends MainModel
     public static function editProfile($data)
     {
         $params = [
-            'user_name'          => $data['user_name'],
-            'user_updated_at'    => $data['user_updated_at'],
-            'user_color'         => $data['user_color'],
-            'user_about'         => $data['user_about'],
-            'user_website'       => $data['user_website'],
-            'user_location'      => $data['user_location'],
-            'user_public_email'  => $data['user_public_email'],
-            'user_skype'         => $data['user_skype'],
-            'user_twitter'       => $data['user_twitter'],
-            'user_telegram'      => $data['user_telegram'],
-            'user_vk'            => $data['user_vk'],
-            'user_id'            => $data['user_id'],
+            'user_name'                 => $data['user_name'],
+            'user_updated_at'           => $data['user_updated_at'],
+            'user_color'                => $data['user_color'],
+            'user_about'                => $data['user_about'],
+            'user_design_is_minimal'    => $data['user_design_is_minimal'],
+            'user_website'              => $data['user_website'],
+            'user_location'             => $data['user_location'],
+            'user_public_email'         => $data['user_public_email'],
+            'user_skype'                => $data['user_skype'],
+            'user_twitter'              => $data['user_twitter'],
+            'user_telegram'             => $data['user_telegram'],
+            'user_vk'                   => $data['user_vk'],
+            'user_id'                   => $data['user_id'],
         ];
 
         $sql = "UPDATE users SET 
-                    user_name            = :user_name,
-                    user_updated_at      = :user_updated_at,
-                    user_color           = :user_color,
-                    user_about           = :user_about,
-                    user_website         = :user_website,
-                    user_location        = :user_location,
-                    user_public_email    = :user_public_email,
-                    user_skype           = :user_skype,
-                    user_twitter         = :user_twitter,
-                    user_telegram        = :user_telegram,
-                    user_vk              = :user_vk
-                        WHERE user_id    = :user_id";
+                    user_name               = :user_name,
+                    user_updated_at         = :user_updated_at,
+                    user_color              = :user_color,
+                    user_about              = :user_about,
+                    user_design_is_minimal  = :user_design_is_minimal,
+                    user_website            = :user_website,
+                    user_location           = :user_location,
+                    user_public_email       = :user_public_email,
+                    user_skype              = :user_skype,
+                    user_twitter            = :user_twitter,
+                    user_telegram           = :user_telegram,
+                    user_vk                 = :user_vk
+                        WHERE user_id       = :user_id";
 
         return DB::run($sql, $params);
     }

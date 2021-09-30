@@ -14,7 +14,7 @@ class InfoController extends MainController
         $meta = [
             'sheet'         => 'info',
             'canonical'     => Config::get(Config::PARAM_URL) . '/info',
-            'meta_title'    => lang('Info') . ' | ' . Config::get(Config::PARAM_NAME),
+            'meta_title'    => lang('info') . ' | ' . Config::get(Config::PARAM_NAME),
             'meta_desc'     => lang('info-desc') . ' ' . Config::get(Config::PARAM_HOME_TITLE),
         ];
 
@@ -33,7 +33,7 @@ class InfoController extends MainController
             'content'       => Content::text($text, 'text'),
             'canonical'     => Config::get(Config::PARAM_URL) . '/info/privacy',
             'sheet'         => 'privacy',
-            'meta_title'    => lang('Privacy Policy') . ' | ' . Config::get(Config::PARAM_NAME),
+            'meta_title'    => lang('privacy Policy') . ' | ' . Config::get(Config::PARAM_NAME),
             'meta_desc'     => lang('privacy-desc') . ' ' . Config::get(Config::PARAM_HOME_TITLE),
         ];
 
@@ -50,8 +50,8 @@ class InfoController extends MainController
         $meta = [
             'canonical'     => Config::get(Config::PARAM_URL) . '/info/restriction',
             'sheet'         => 'restriction',
-            'meta_title'    => lang('Restriction') . ' | ' . Config::get(Config::PARAM_NAME),
-            'meta_desc'     => lang('Restriction') . ' ' . Config::get(Config::PARAM_HOME_TITLE),
+            'meta_title'    => lang('restriction') . ' | ' . Config::get(Config::PARAM_NAME),
+            'meta_desc'     => lang('restriction') . ' ' . Config::get(Config::PARAM_HOME_TITLE),
         ];
 
         $data = [

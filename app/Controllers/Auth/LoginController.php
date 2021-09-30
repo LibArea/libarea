@@ -24,24 +24,24 @@ class LoginController extends MainController
         $uid = UserModel::userInfo($email);
 
         if (empty($uid['user_id'])) {
-            addMsg(lang('Member does not exist'), 'error');
+            addMsg(lang('member does not exist'), 'error');
             redirect($redirect);
         }
 
         // Находится ли в бан- листе
         if (UserModel::isBan($uid['user_id'])) {
-            addMsg(lang('Your account is under review'), 'error');
+            addMsg(lang('your account is under review'), 'error');
             redirect($redirect);
         }
 
         // Активирован ли E-mail
         if (!UserModel::isActivated($uid['user_id'])) {
-            addMsg(lang('Your account is not activated'), 'error');
+            addMsg(lang('your account is not activated'), 'error');
             redirect($redirect);
         }
 
         if (!password_verify($password, $uid['user_password'])) {
-            addMsg(lang('E-mail or password is not correct'), 'error');
+            addMsg(lang('e-mail or password is not correct'), 'error');
             redirect($redirect);
         }
 
@@ -61,12 +61,17 @@ class LoginController extends MainController
     public function showLoginForm()
     {
         $meta = [
-            'sheet'         => 'login',
+            'sheet'         => 'sign up',
             'canonical'     => Config::get(Config::PARAM_URL) . getUrlByName('login'),
-            'meta_title'    => lang('Sign in') . ' | ' . Config::get(Config::PARAM_NAME),
+            'meta_title'    => lang('sign up') . ' | ' . Config::get(Config::PARAM_NAME),
             'meta_desc'     => lang('info-login'),
         ];
 
-        return view('/auth/login', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => []]);
+        $data = [
+            'sheet'         => 'sign up',
+        ];
+
+        return view('/auth/login', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
     }
+
 }

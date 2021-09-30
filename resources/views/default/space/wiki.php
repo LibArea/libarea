@@ -1,7 +1,7 @@
 <?php if ($data['wiki']) { ?>
-  <div class="white-box p15">
+  <div class="bg-white br-rd-5 border-box-1 p15">
     <!-- заглушка -->
   </div>
 <?php } else { ?>
-  <?= returnBlock('no-content', ['lang' => 'No']); ?>
+  <?= includeTemplate('/_block/no-content', ['lang' => 'no']); ?>
 <?php } ?>

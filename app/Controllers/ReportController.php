@@ -43,7 +43,7 @@ class ReportController extends MainController
             'report_user_id'    => $uid['user_id'],
             'report_type'       => $content_type,
             'report_content_id' => $content_id,
-            'report_reason'     => lang('Breaking the rules'),
+            'report_reason'     => lang('breaking the rules'),
             'report_url'        => $url_report,
             'report_date'       => date("Y-m-d H:i:s"),
             'report_status'     => 0,

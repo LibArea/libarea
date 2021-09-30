@@ -72,12 +72,13 @@ class ActionController extends MainController
         $meta = [
             'canonical'     => '/moderations',
             'sheet'         => 'moderations',
-            'meta_title'    => lang('Moderation Log') . ' | ' . Config::get(Config::PARAM_NAME),
+            'meta_title'    => lang('moderation log') . ' | ' . Config::get(Config::PARAM_NAME),
             'meta_desc'     => lang('meta-moderation') . ' ' . Config::get(Config::PARAM_HOME_TITLE),
         ];
 
         $data = [
             'moderations'   => $result,
+            'sheet'         => 'moderations',
         ];
 
         return view('/moderation/index', ['data' => $data, 'meta' => $meta, 'uid' => $uid]);

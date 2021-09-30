@@ -53,14 +53,14 @@ class MessagesController extends MainController
                 $row['msg_user']    = UserModel::getUser($row['dialog_sender_id'], 'id');
                 $row['msg_to_user'] = UserModel::getUser($row['dialog_recipient_id'], 'id');
                 $row['message']     = MessagesModel::getMessageOne($row['dialog_id']);
-                $row['unread_num']  = word_form($row['unread'], lang('Message'), lang('Messages-m'), lang('Messages'));
-                $row['count_num']   = word_form($row['count'], lang('Message'), lang('Messages-m'), lang('Messages'));
+                $row['unread_num']  = word_form($row['unread'], lang('message'), lang('messages-m'), lang('messages'));
+                $row['count_num']   = word_form($row['count'], lang('message'), lang('messages-m'), lang('messages'));
                 $result[$ind]       = $row;
             }
         }
 
         $meta = [
-            'meta_title'    => lang('Private messages') . ' | ' . Config::get(Config::PARAM_NAME),
+            'meta_title'    => lang('private messages') . ' | ' . Config::get(Config::PARAM_NAME),
             'sheet'         => 'all-mess',
             'messages'      => $result,
         ];
@@ -80,12 +80,12 @@ class MessagesController extends MainController
         $id     = Request::getInt('id');
 
         if (!$dialog = MessagesModel::getDialogById($id)) {
-            addMsg(lang('The dialog does not exist'), 'error');
+            addMsg(lang('the dialog does not exist'), 'error');
             redirect(getUrlByName('messages', ['login' => $uid['user_login']]));
         }
 
         if ($dialog['dialog_recipient_id'] != $uid['user_id'] and $dialog['dialog_sender_id'] != $uid['user_id']) {
-            addMsg(lang('The topic does not exist'), 'error');
+            addMsg(lang('the topic does not exist'), 'error');
             redirect(getUrlByName('messages', ['login' => $uid['user_login']]));
         }
 
@@ -114,12 +114,12 @@ class MessagesController extends MainController
         }
 
         $meta = [
-            'meta_title'        => lang('Dialogue') . ' | ' . Config::get(Config::PARAM_NAME),
+            'meta_title'        => lang('dialogue') . ' | ' . Config::get(Config::PARAM_NAME),
             'sheet'             => 'dialog',
         ];
 
         $data = [
-            'h1'                => lang('Dialogue') . ' - ' . $list[$key]['user_login'],
+            'h1'                => lang('dialogue') . ' - ' . $list[$key]['user_login'],
             'sheet'             => 'dialog',
             'list'              => $list,
             'recipient_user'    => $recipient_user,
@@ -134,7 +134,7 @@ class MessagesController extends MainController
         $uid        = Base::getUid();
         $login      = Request::get('login');
         if (!$user  = UserModel::getUser($login, 'slug')) {
-            addMsg(lang('Member does not exist'), 'error');
+            addMsg(lang('member does not exist'), 'error');
             redirect('/');
         }
 
@@ -145,7 +145,7 @@ class MessagesController extends MainController
         }
 
         $meta = [
-            'meta_title'    => lang('Send a message') . ' | ' . Config::get(Config::PARAM_NAME),
+            'meta_title'    => lang('send a message') . ' | ' . Config::get(Config::PARAM_NAME),
             'sheet'         => 'profil-mess',
         ];
 
@@ -171,7 +171,7 @@ class MessagesController extends MainController
 
         // Введите содержание сообщения
         if ($content == '') {
-            addMsg(lang('Enter content'), 'error');
+            addMsg(lang('enter content'), 'error');
             redirect(getUrlByName('messages', ['login' => $uid['user_login']]));
         }
 

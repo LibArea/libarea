@@ -14,7 +14,7 @@ class InvitationsUserController extends MainController
     {
         $meta = [
             'sheet'         => 'invite',
-            'meta_title'    => lang('Invite'),
+            'meta_title'    => lang('invite'),
         ];
 
         return view('/user/invite', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => []]);
@@ -37,7 +37,7 @@ class InvitationsUserController extends MainController
 
         $meta = [
             'sheet'         => 'invites',
-            'meta_title'    => lang('Invites') . ' | ' . Config::get(Config::PARAM_NAME),
+            'meta_title'    => lang('invites') . ' | ' . Config::get(Config::PARAM_NAME),
         ];
 
         $data = [
@@ -83,7 +83,7 @@ class InvitationsUserController extends MainController
 
         UserModel::addInvitation($uid['user_id'], $invitation_code, $invitation_email, $add_time, $add_ip);
 
-        addMsg(lang('Invite created'), 'success');
+        addMsg(lang('invite created'), 'success');
         redirect($redirect);
     }
 }

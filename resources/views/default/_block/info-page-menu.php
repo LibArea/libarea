@@ -1,10 +1,12 @@
-<div class="white-box menu-info p15">
-  <a title="<?= lang('Info'); ?>" class="size-15 block gray<?php if ($sheet == 'info') { ?> red<?php } ?>" href="<?= getUrlByName('info'); ?>">
-    <i class="icon-record-outline middle"></i>
-    <span class="middle"><?= lang('Info'); ?></span>
-  </a>
-  <a title="<?= lang('Privacy'); ?>" class="size-15 block gray<?php if ($sheet == 'privacy') { ?> red" <?php } ?>" href="<?= getUrlByName('info.privacy'); ?>">
-    <i class="icon-record-outline middle"></i>
-    <span class="middle"><?= lang('Privacy'); ?></span>
-  </a>
-</div>
+<aside class="col-span-3">
+  <div class="bg-white br-rd-5 border-box-1 menu-info p15">
+    <a title="<?= lang('info'); ?>" class="size-15 block mb5 gray<?php if ($sheet == 'info') { ?> red<?php } ?>" href="<?= getUrlByName('info'); ?>">
+      <i class="icon-record-outline middle"></i>
+      <span class="middle"><?= lang('info'); ?></span>
+    </a>
+    <a title="<?= lang('privacy'); ?>" class="size-15 block gray<?php if ($sheet == 'privacy') { ?> red" <?php } ?>" href="<?= getUrlByName('info.privacy'); ?>">
+      <i class="icon-record-outline middle"></i>
+      <span class="middle"><?= lang('privacy'); ?></span>
+    </a>
+  </div>
+</aside>

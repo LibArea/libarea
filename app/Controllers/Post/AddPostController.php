@@ -54,13 +54,13 @@ class AddPostController extends MainController
         if ($space['space_permit_users'] == 1) {
             // Кроме персонала и владельца
             if ($this->uid['user_trust_level'] != 5 && $space['space_user_id'] != $this->uid['user_id']) {
-                addMsg(lang('You dont have access'), 'error');
+                addMsg(lang('you dont have access'), 'error');
                 redirect($redirect);
             }
         }
 
-        Validation::Limits($post_title, lang('Title'), '6', '250', $redirect);
-        Validation::Limits($post_content, lang('The post'), '6', '25000', $redirect);
+        Validation::Limits($post_title, lang('title'), '6', '250', $redirect);
+        Validation::Limits($post_content, lang('the post'), '6', '25000', $redirect);
 
         if ($post_url) {
             // Поскольку это для поста, то получим превью 
@@ -202,7 +202,7 @@ class AddPostController extends MainController
 
         $meta = [
             'sheet'         => 'add-post',
-            'meta_title'    => lang('Add post') . ' | ' . Config::get(Config::PARAM_NAME),
+            'meta_title'    => lang('add post') . ' | ' . Config::get(Config::PARAM_NAME),
         ];
 
         $data = [

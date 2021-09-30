@@ -35,7 +35,7 @@ class AnswerController extends MainController
         $meta = [
             'canonical'     => Config::get(Config::PARAM_URL) . '/answers',
             'sheet'         => 'answers',
-            'meta_title'    => lang('All answers') . $num . Config::get(Config::PARAM_NAME),
+            'meta_title'    => lang('all answers') . $num . Config::get(Config::PARAM_NAME),
             'meta_desc'     => lang('answers-desc') . $num . Config::get(Config::PARAM_HOME_TITLE),
         ];
 
@@ -69,12 +69,12 @@ class AnswerController extends MainController
         $meta = [
             'canonical'     => Config::get(Config::PARAM_URL) . getUrlByName('answers.user', ['login' => $login]),
             'sheet'         => 'user-answers',
-            'meta_title'    => lang('Answers') . ' ' . $login . ' | ' . Config::get(Config::PARAM_NAME),
-            'meta_desc'     => lang('Responses from community members') . ' ' . $login . ' ' . Config::get(Config::PARAM_HOME_TITLE),
+            'meta_title'    => lang('answers') . ' ' . $login . ' | ' . Config::get(Config::PARAM_NAME),
+            'meta_desc'     => lang('responses from community members') . ' ' . $login . ' ' . Config::get(Config::PARAM_HOME_TITLE),
         ];
 
         $data = [
-            'h1'            =>  lang('Answers-n') . ' ' . $login,
+            'h1'            =>  lang('answers-n') . ' ' . $login,
             'sheet'         => 'user-answers',
             'answers'       => $result
         ];

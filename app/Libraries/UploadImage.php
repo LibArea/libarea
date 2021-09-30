@@ -43,7 +43,7 @@ class UploadImage
                 ->autoOrient()     // adjust orientation based on exif data
                 ->resize(160, 160)
                 ->toFile($path_img . $filename . '.jpeg', 'image/jpeg')
-                ->resize(24, 24)
+                ->resize(48, 48)
                 ->toFile($path_img_small . $filename . '.jpeg', 'image/jpeg');
 
             $new_img    = $filename . '.jpeg';
@@ -250,7 +250,7 @@ class UploadImage
             $image
                 ->fromFile($local)  // load image.jpg
                 ->autoOrient()      // adjust orientation based on exif data
-                ->resize(165, null)
+                ->resize(260, null)
                 ->toFile($path . $year . $file . '.webp', 'image/webp');
 
             if (file_exists($local)) {

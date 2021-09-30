@@ -1,22 +1,29 @@
-<div class="wrap">
-  <main class="white-box pt15 pr15 pb5 pl15">
-    <?= breadcrumb('/', lang('Home'), getUrlByName('user', ['login' => $uid['user_login']]), lang('Profile'), lang('Change password')); ?>
-    <?= returnBlock('/setting-nav', ['data' => $data, 'uid' => $uid]); ?>
+<div class="sticky col-span-2 justify-between no-mob">
+  <?= includeTemplate('/_block/menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+</div>
+<main class="col-span-7 mb-col-12 bg-white pt15 pr15 pb5 pl15">
 
-    <form class="pt10" action="/users/setting/security/edit" method="post" enctype="multipart/form-data">
+  <?= breadcrumb('/', lang('home'), getUrlByName('user', ['login' => $uid['user_login']]), lang('profile'), lang('change password')); ?>
+  <div class="bg-white flex flex-row items-center justify-between border-box-1 br-rd-5 p15 mb15">
+    <p class="m0"><?= lang($data['sheet']); ?></p>
+    <?= includeTemplate('/_block/setting-nav', ['data' => $data, 'uid' => $uid]); ?>
+  </div>
+
+  <div class=" bg-white border-box-1 pt15 pr15 pb5 pl15 box setting avatar">
+
+    <form class="pt20" action="/users/setting/security/edit" method="post" enctype="multipart/form-data">
       <?php csrf_field(); ?>
 
-      <?php field('input', [
-        ['title' => lang('Old'), 'type' => 'text', 'name' => 'password', 'value' => ''],
-        ['title' => lang('New'), 'type' => 'password', 'name' => 'password2', 'value' => '', 'min' => 6, 'max' => 32, 'help' => '6 - 250 ' . lang('characters')],
-        ['title' => lang('Repeat'), 'type' => 'password', 'name' => 'password3', 'value' => ''],
-      ]); ?>
+      <?= includeTemplate('/_block/form/field-input', ['data' => [
+        ['title' => lang('old'), 'type' => 'text', 'name' => 'password', 'value' => ''],
+        ['title' => lang('new'), 'type' => 'password', 'name' => 'password2', 'value' => '', 'min' => 6, 'max' => 32, 'help' => '6 - 32 ' . lang('characters')],
+        ['title' => lang('repeat'), 'type' => 'password', 'name' => 'password3', 'value' => ''],
+      ]]); ?>
 
       <div class="boxline">
         <input type="hidden" name="nickname" id="nickname" value="">
-        <button type="submit" class="button"><?= lang('Edit'); ?></button>
+        <button type="submit" class="button br-rd-5 white"><?= lang('edit'); ?></button>
       </div>
     </form>
-  </main>
-  <?= returnBlock('aside-lang', ['lang' => lang('info-security')]); ?>
-</div>
+</main>
+<?= includeTemplate('/_block/aside-lang', ['lang' => lang('info-security')]); ?>

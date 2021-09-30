@@ -26,12 +26,13 @@ class Base
         }
 
         if (!empty($account['user_id'])) {
-            $uid['user_id']              = $account['user_id'];
-            $uid['user_login']           = $account['user_login'];
-            $uid['user_trust_level']     = $account['user_trust_level'];
-            $uid['user_avatar']          = $account['user_avatar'];
-            $uid['user_ban_list']        = $account['user_ban_list'];
-            $uid['notif']                = NotificationsModel::usersNotification($account['user_id']);
+            $uid['user_id']                 = $account['user_id'];
+            $uid['user_login']              = $account['user_login'];
+            $uid['user_design_is_minimal']  = $account['user_design_is_minimal'];
+            $uid['user_trust_level']        = $account['user_trust_level'];
+            $uid['user_avatar']             = $account['user_avatar'];
+            $uid['user_ban_list']           = $account['user_ban_list'];
+            $uid['notif']                   = NotificationsModel::usersNotification($account['user_id']);
 
             Request::getResources()->addBottomScript('/assets/js/app.js');
         } else {
@@ -117,13 +118,14 @@ class Base
     public static function setUserSession($user)
     {
         $data = [
-            'user_id'            => $user['user_id'],
-            'user_login'         => $user['user_login'],
-            'user_email'         => $user['user_email'],
-            'user_avatar'        => $user['user_avatar'],
-            'user_trust_level'   => $user['user_trust_level'],
-            'user_ban_list'      => $user['user_ban_list'],
-            'user_limiting_mode' => $user['user_limiting_mode'],
+            'user_id'                   => $user['user_id'],
+            'user_login'                => $user['user_login'],
+            'user_email'                => $user['user_email'],
+            'user_avatar'               => $user['user_avatar'],
+            'user_trust_level'          => $user['user_trust_level'],
+            'user_ban_list'             => $user['user_ban_list'],
+            'user_limiting_mode'        => $user['user_limiting_mode'],
+            'user_design_is_minimal'    => $user['user_design_is_minimal'],
         ];
 
         $_SESSION['account'] = $data;
