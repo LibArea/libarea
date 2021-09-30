@@ -473,6 +473,7 @@ input.form-search {
 
 input.form-search:hover { border: 1px solid #e6ecf0; }
 input.form-search:focus { border: 1px solid #ddd; }
+::placeholder { color: #919191; }
 
 .no-pc { display: none; }
 .show_detail.hide { display: none; }

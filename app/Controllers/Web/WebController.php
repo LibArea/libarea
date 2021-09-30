@@ -39,7 +39,8 @@ class WebController extends MainController
             'sheet'         => 'domains',
             'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
-            'links'         => $result
+            'links'         => $result,
+            'domains'       => WebModel::getLinksTop('all'),
         ];
 
         return view('/web/links', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);

@@ -66,9 +66,8 @@ class ReportModel extends MainModel
                                     :report_content_id, 
                                     :report_reason, 
                                     :report_url, 
-                                    :report_date,                                     
+                                    :report_date,
                                     :report_status)";
-
         return DB::run($sql, $params);
     }
     

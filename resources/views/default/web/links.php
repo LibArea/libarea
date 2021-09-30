@@ -9,6 +9,16 @@
       </a>
     <?php } ?>
     <h1 class="mb5"><?= lang('domains-title'); ?></h1>
+    <?php if (!empty($data['domains'])) { ?>
+      <?php foreach ($data['domains'] as  $domain) { ?>
+        <a class="gray mr20" href="<?= getUrlByName('domain', ['domain' => $domain['link_url_domain']]); ?>">
+          <?= $domain['link_url_domain']; ?>
+          <sup class="size-14"><?= $domain['link_count']; ?></sup>
+        </a>
+      <?php } ?>
+    <?php } else { ?>
+      <p><?= lang('there are no domains'); ?>...</p>
+    <?php } ?>
   </div>
 
   <?php if (!empty($data['links'])) { ?>

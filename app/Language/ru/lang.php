@@ -402,7 +402,7 @@ return [
     'activate E-mail'                   => 'Ссылка для активации E-mail',
     'checking e-mail'                   => 'проверка e-mail',
 
-    'hhere are no domains'  => 'Доменов нет',
+    'there are no domains'  => 'Доменов нет',
     'change the site'       => 'Изменить сайт',
     'add a website'         => 'Добавить сайт',
     'domain-desc'           => 'Группировка постов в сообществе по домену',

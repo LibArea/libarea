@@ -33,7 +33,8 @@ class AuditsController extends MainController
 
             $result[$ind]   = $row;
         }
-
+        
+        Request::getResources()->addBottomScript('/assets/js/admin.js');
         $meta = [
             'meta_title'    => lang('audit'),
             'sheet'         => 'audits',
