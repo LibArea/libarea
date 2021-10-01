@@ -29,9 +29,9 @@
         <?php foreach ($data['spaces'] as  $sp) { ?>
           <div class="w-50 mb-w-100 mb10 flex flex-row">
             <?php if ($sp['space_cover_art'] != 'space_cover_no.jpeg') { ?>
-              <div class="h120 p20 w-100 m10" style="background-image: url(/uploads/spaces/cover/small/<?= $sp['space_cover_art']; ?>)">
+              <div class="h120 p10 w-100 m10" style="background-image: url(/uploads/spaces/cover/small/<?= $sp['space_cover_art']; ?>)">
               <?php } else { ?>
-                <div class="h120 p20 w-100 m10" style="background:<?= $sp['space_color']; ?>;">
+                <div class="h120 p10 w-100 m10" style="background:<?= $sp['space_color']; ?>;">
                 <?php } ?>
 
                 <?php if ($sp['space_id'] != 1) { ?>
@@ -41,7 +41,7 @@
                   <?= spase_logo_img($sp['space_img'], 'max', $sp['space_name'], 'w54 mr10'); ?>
                 </a>
                 <span class="space-name">
-                  <a title="<?= $sp['space_name']; ?>" class="white size-24" href="<?= getUrlByName('space', ['slug' => $sp['space_slug']]); ?>">
+                  <a title="<?= $sp['space_name']; ?>" class="white size-21" href="<?= getUrlByName('space', ['slug' => $sp['space_slug']]); ?>">
                     <span class="space-name"> <?= $sp['space_name']; ?></span>
                   </a>
                 </span>

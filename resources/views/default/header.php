@@ -24,7 +24,28 @@
           <i class="icon-menu size-18"></i>
           <div class="lateral-menu bg-white br-rd-3 p5 absolute">
             <div class="bg-white">
-              <?= includeTemplate('/_block/menu', ['sheet' => $meta['sheet'], 'uid' => $uid]); ?>
+                <nav class="justify-between mt0 ml0 pl0 t-81 sticky">
+                  <div class="size-15 mt5">
+                    <a class="block mb10" href="<?= getUrlByName('spaces'); ?>">
+                      <i class="icon-infinity gray-light-2 size-18"></i>
+                      <span class="black"><?= lang('spaces'); ?></span>
+                    </a>
+                    <a class="block mb10" href="<?= getUrlByName('topics'); ?>">
+                      <i class="icon-clone gray-light-2 size-18"></i>
+                      <span class="black"><?= lang('topics'); ?></span>
+                    </a>
+                    <a class="block mb10" href="<?= getUrlByName('users'); ?>">
+                      <i class="icon-user-o gray-light-2 size-18"></i>
+                      <span class="black"><?= lang('users'); ?></span>
+                    </a>
+                    <div class="header-menu-item mb5 only-icon">
+                      <span id="toggledark" class="my-color-m">
+                      <i class="icon-sun gray-light-2 size-18"></i>
+                      <span class="black"><?= lang('color'); ?></span>
+                      </span>
+                    </div>
+                  </div>
+                </nav>
             </div>
           </div>
         </div>
@@ -43,7 +64,7 @@
       <?php if ($uid['user_id'] == 0) { ?>
         <div class="col-span-5">
           <div class="flex right items-center">
-            <div class="header-menu-item only-icon p10 ml20 mb-ml-10">
+            <div class="header-menu-item no-mob only-icon p10 ml20 mb-ml-10">
               <span id="toggledark" class="my-color-m">
                 <i class="icon-sun gray-light-2 size-26"></i>
               </span>
@@ -55,25 +76,22 @@
                 </a>
               </div>
             <?php } ?>
-
             <div class="ml30 mr5">
               <a class="button-primary br-rd-5 pt5 pr10 pb5 pl10" title="<?= lang('sign in'); ?>" href="<?= getUrlByName('login'); ?>">
                 <?= lang('sign in'); ?>
               </a>
             </div>
-
           </div>
         </div>
       <?php } else { ?>
-
         <div class="col-span-5">
-          <div class="flex right items-center">
+          <div class="flex right nitems-center">
             <div class="center p10 no-pc">
               <a href="/post/add" class="blue">
-                <i class="icon-pencil size-21"></i>
+                <i class="icon-pencil size-26"></i>
               </a>
             </div>
-            <div class="header-menu-item only-icon p10 ml20 mb-ml-10">
+            <div class="header-menu-item only-icon no-mob p10 ml20 mb-ml-10">
               <span id="toggledark" class="my-color-m">
                 <i class="icon-sun gray-light-2 size-26"></i>
               </span>

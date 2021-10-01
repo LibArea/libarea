@@ -24,5 +24,4 @@
 <?= getRequestResources()->getBottomScripts(); ?>
 
 </body>
-<?= includeTemplate('/metrika'); ?>
 </html>

@@ -12,18 +12,18 @@
       array('id' => 'edit', 'url' => '/space/edit/' . $data['space']['space_id'], 'content' => lang('edit'), 'icon' => 'icon-cog-outline'),
     );
     ?>
-    <ul class="nav-tabs hidden list-none mt0 pt10 pr0 pb15 pl0">
+    <ul class="flex flex-row list-none mt10 p0 size-15">
       <?php foreach ($pages as $page) { ?>
         <?php if ($uid['user_trust_level'] == 5 || $data['space']['space_user_id'] == $uid['user_id'] || $page['id'] != 'edit') { ?>
           <?php if ($page['id'] == $data['sheet']) { ?>
-            <li class="active">
-              <i class="<?= $page['icon']; ?> gray-light-2"></i>
+            <li class="blue mr20">
+              <i class="<?= $page['icon']; ?>"></i>
               <span> <?= $page['content']; ?></span>
             </li>
           <?php } else { ?>
-            <li>
+            <li class="mr20">
               <i class="<?= $page['icon']; ?> gray-light-2"></i>
-              <a href="<?= $page['url']; ?>"><span><?= $page['content']; ?></span></a>
+              <a class="gray-light-2" href="<?= $page['url']; ?>"><span><?= $page['content']; ?></span></a>
             </li>
           <?php } ?>
         <?php } ?>
