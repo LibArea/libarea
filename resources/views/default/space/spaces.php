@@ -25,7 +25,7 @@
 
   <div class="pt5 bg-white border-box-1">
     <?php if (!empty($data['spaces'])) { ?>
-      <div class="flex flex-row flex-wrap w-full grid-cols-2 mb10">
+      <div class="flex flex-row flex-wrap grid-cols-2 mb10">
         <?php foreach ($data['spaces'] as  $sp) { ?>
           <div class="w-50 mb-w-100 mb10 flex flex-row">
             <?php if ($sp['space_cover_art'] != 'space_cover_no.jpeg') { ?>

@@ -17,7 +17,7 @@
 
 <body class="black bg-gray-100<?php if (Request::getCookie('dayNight') == 'dark') { ?> dark<?php } ?>">
 
-  <header class="bg-white border-bottom mt0 mb15 sticky z-30">
+  <header class="bg-white border-bottom mt0 mb15 sticky top0 z-30">
     <div class="col-span-12 wrap pr10 pl10 grid items-center grid-cols-12">
       <div class="col-span-7 flex items-center">
         <div class="lateral no-pc mr10 flex items-center">
@@ -114,9 +114,9 @@
 
             <div class="dropbtn relative p10 ml20 mb-ml-10">
               <a class="relative w-auto">
-                <?= user_avatar_img($uid['user_avatar'], 'small', $uid['user_login'], 'w44 br-rd-50'); ?>
+                <?= user_avatar_img($uid['user_avatar'], 'small', $uid['user_login'], 'w34 br-rd-50'); ?>
               </a>
-              <div class="dropdown-menu bg-white br-rd-3 p5 absolute">
+              <div class="dropdown-menu right0 bg-white br-rd-3 p5 absolute">
                 <div class="bg-white size-15">
                   <span class="st"></span>
                   <a class="dr-menu block" href="<?= getUrlByName('user', ['login' => $uid['user_login']]); ?>">

@@ -1,5 +1,5 @@
 <?php if (!empty($data['answers'])) { ?>
-  <div class="bg-white br-rd-5 border-box-1 mt15 mb15 p15">
+  <div class="bg-white br-rd-5 border-box-1 mt15 p15">
     <h2 class="lowercase m0 mb15 size-21">
       <?= $data['post']['post_answers_count'] + $data['post']['post_comments_count'] ?>
       <?= $data['post']['num_comments'] ?>
@@ -37,7 +37,7 @@
                   <a rel="nofollow" class="gray-light mr5 ml10" href="<?= $post_url; ?>#answer_<?= $answer['answer_id']; ?>">#</a>
                   <?= includeTemplate('/_block/show-ip', ['ip' => $answer['answer_ip'], 'user_trust_level' => $uid['user_trust_level']]); ?>
                 </div>
-                <div class="mt0 mr0 mb5 ml0 size-15">
+                <div class="mt0 mr0 mb5 ml0 size-15 max-width">
                   <?= $answer['answer_content'] ?>
                 </div>
               </div>

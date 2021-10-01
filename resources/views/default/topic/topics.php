@@ -11,7 +11,7 @@
       <?php } ?>
     </h1>
     <?php if (!empty($data['topics'])) { ?>
-      <div class="flex flex-row flex-wrap w-full grid-cols-2 mb20">
+      <div class="flex flex-row flex-wrap grid-cols-2 mb20">
         <?php foreach ($data['topics'] as $topic) { ?>
           <div class="w-50 mb-w-100 mb20 flex flex-row">
             <a title="<?= $topic['topic_title']; ?>" class="mt5 mr10" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">

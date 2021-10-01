@@ -259,3 +259,4 @@
         </div>
       </div>
 </main>
+<?= includeTemplate('/_block/wide-footer'); ?>

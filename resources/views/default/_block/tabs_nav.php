@@ -1,16 +1,18 @@
-<ul class="flex flex-row list-none m0 size-15">
+<ul class="flex flex-row list-none m0 p0 center size-15">
 <?php foreach ($pages as $page) { ?>
   <?php if (empty($page['auth']) != false || $user_id > 0) { ?>
     <?php if ($page['id'] == $sheet) { ?>
-      <li class="blue ml30">
+      <li class="blue ml30 mb-mr-5 mb-ml-0">
         <i class="<?= $page['icon']; ?>"></i>
-        <span><?= $page['content']; ?></span>
+        <span class="mb-size-13"><?= $page['content']; ?></span>
       </li>
     <?php } else { ?>
-      <li class="ml30"><a class="gray-light-2" href="<?= $page['url']; ?>">
+      <li class="ml30 mb-mr-5 mb-ml-0">
+        <a class="gray-light-2" href="<?= $page['url']; ?>">
           <i class="<?= $page['icon']; ?>"></i>
-          <span><?= $page['content']; ?></span>
-        </a></li>
+          <span class="mb-size-13"><?= $page['content']; ?></span>
+        </a>
+      </li>
     <?php } ?>
   <?php } ?>
 <?php } ?>

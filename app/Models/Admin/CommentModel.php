@@ -46,7 +46,6 @@ class CommentModel extends MainModel
     // Количество комментариев
     public static function getCommentsAllCount($sheet)
     {
-
         $sort = "WHERE comment_is_deleted = 0";
         if ($sheet == 'ban') {
             $sort = "WHERE comment_is_deleted = 1";

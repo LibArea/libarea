@@ -469,7 +469,7 @@ return [
     'someone invited you from the site'             => 'Вас пригласил участник с этого сайта. Введите инвайт',
     'you can invite your friends'                   => 'Вы можете пригласить друзей',
     'you were looking for'                          => 'Вы искали',
-    'hhe search has not given any results'          => 'Поиск не дал результатов',
+    'the search has not given any results'          => 'Поиск не дал результатов',
     'personal messages with site participants'      => 'Личные сообщения с участниками сайта',
     'responses from community members'              => 'Ответы участников сообщества',
     

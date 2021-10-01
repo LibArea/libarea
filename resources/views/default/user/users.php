@@ -6,7 +6,7 @@
     <h1 class="mt0 mb15 size-21"><?= lang('users'); ?></h1>
     <div class="wrap grid grid-cols-6 gap-4 justify-between">
       <?php foreach ($data['users'] as $ind => $user) { ?>
-        <div class="center pr10 pl10 ">
+        <div class="center pr10 pl10 mb-col-2">
           <div class="center">
             <a href="<?= getUrlByName('user', ['login' => $user['user_login']]); ?>">
               <?= user_avatar_img($user['user_avatar'], 'max', $user['user_login'], 'br-rd-50 w64'); ?>

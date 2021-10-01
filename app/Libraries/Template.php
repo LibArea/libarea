@@ -207,7 +207,7 @@ function pagination($pNum, $pagesCount, $sheet, $other)
 
 function breadcrumb($path_home, $title_home, $path_intermediate, $title_intermediate, $title_page)
 {
-    $html = '<ul class="breadcrumb size-14 p0 mt5">';
+    $html = '<ul class="breadcrumb size-14 p0 mt0 mb15">';
     $html .= '<li class="breadcrumb-item inline m0 pt5 pr0 pn5 pl0 gray">
                 <a title="' . $title_home . '" href="' . $path_home . '">' . $title_home . '</a>
               </li>';

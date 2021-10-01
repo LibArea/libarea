@@ -9,7 +9,7 @@
   </div>
 <?php } ?>
 
-<div class="sticky col-span-2 justify-between no-mob">
+<div class="sticky top0 col-span-2 justify-between no-mob">
   <?= includeTemplate('/_block/menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 
@@ -66,7 +66,7 @@
     </div>
   <?php } ?>
 
-  <div class="sticky t-81">
+  <div class="sticky top0 t-81">
     <?php if (!empty($data['latest_answers'])) { ?>
       <div class="last-comm border-box-1 p15 bg-white">
         <?php foreach ($data['latest_answers'] as  $answer) { ?>

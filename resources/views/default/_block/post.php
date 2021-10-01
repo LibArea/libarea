@@ -25,7 +25,7 @@
       </div>
  
       <div class="flex flex-row flex-auto">
-        <div class="w-full w-auto pc-mr-20">
+        <div class="w-auto pc-mr-20">
           <a href="<?= $post_url; ?>">
             <h2 class="font-normal black size-24 mt0 mb0"><?= $post['post_title']; ?>
               <?php if ($post['post_is_deleted'] == 1) { ?>

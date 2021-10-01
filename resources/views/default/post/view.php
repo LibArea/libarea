@@ -293,3 +293,4 @@
     });
   });
 </script>
+<?= includeTemplate('/_block/wide-footer'); ?>

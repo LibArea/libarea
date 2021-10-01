@@ -1,17 +1,16 @@
 <div class="sticky col-span-2 justify-between no-mob">
   <?= includeTemplate('/_block/menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
-<main class="col-span-7 mb-col-12 bg-white pt15 pr15 pb5 pl15">
-
+<main class="col-span-7 mb-col-12">
   <?= breadcrumb('/', lang('home'), getUrlByName('user', ['login' => $uid['user_login']]), lang('profile'), lang('settings')); ?>
-  <div class="bg-white flex flex-row items-center justify-between border-box-1 br-rd-5 p15 mb15">
-    <p class="m0"><?= lang($data['sheet']); ?></p>
+  <div class="bg-white flex flex-row center items-center justify-between border-box-1 br-rd-5 p15 mb15">
+    <p class="m0 no-mob"><?= lang($data['sheet']); ?></p>
     <?= includeTemplate('/_block/setting-nav', ['data' => $data, 'uid' => $uid]); ?>
   </div>
 
-  <div class=" bg-white border-box-1 pt15 pr15 pb5 pl15">
+  <div class="bg-white border-box-1 pt15 pr15 pb5 pl15">
 
-    <form class="pt20" action="/users/setting/edit" method="post" enctype="multipart/form-data">
+    <form action="/users/setting/edit" method="post" enctype="multipart/form-data">
       <?php csrf_field(); ?>
 
       <div class="boxline">

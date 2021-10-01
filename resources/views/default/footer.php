@@ -1,7 +1,6 @@
 </div>
-<div class="wrap grid grid-cols-12 gap-4 pr10 mt15 pl10 h20 justify-between">
-    &nbsp;
-  <a id="scroll_top" class="red fixed size-24" title="<?= lang('Up'); ?>">
+<div class="wrap grid grid-cols-12 gap-4 pr10 mt15 pl10 h10 justify-between">
+  <a id="scroll_top" class="red fixed right0 mr5 size-24" title="<?= lang('up'); ?>">
     &#8593;
   </a>
 </div>
