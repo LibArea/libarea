@@ -76,7 +76,7 @@
 
         </div>
         <?php if ($post['post_thumb_img']) { ?>
-          <div class="home-img mt15 flex-auto">
+          <div class="home-img mt15 flex-auto no-mob-max">
             <a title="<?= $post['post_title']; ?>" href="<?= $post_url; ?>">
               <?= post_img($post['post_thumb_img'], $post['post_title'],  'thumb no-mob br-rd-5 right', 'thumbnails'); ?>
             </a>
@@ -90,7 +90,6 @@
             </a>
           </div>
         <?php } ?>
-
       </div>
 
       <div class="flex flex-row items-center justify-between pt10">

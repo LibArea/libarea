@@ -237,23 +237,23 @@ function votes($user_id, $content, $type)
 
     if ($user_id > 0) {
         if ($content['votes_' . $type . '_user_id'] || $user_id == $content[$type . '_user_id']) {
-            $html .= '<div class="voters active flex flex-center">
-                        <div class="up-id gray-light-2 bi bi-heart"></div>
-                        <div class="score gray-light-2 ml5">
+            $html .= '<div class="voters active flex gray-light-2 flex-center">
+                        <div class="up-id bi bi-heart"></div>
+                        <div class="score ml5">
                             ' . $count . '
                         </div></div>';
         } else {
             $num_count = empty($count) ? 0 : $count;
-            $html .= '<div id="up' . $content[$type . '_id'] . '" class="voters flex flex-center">
-                        <div data-id="' . $content[$type . '_id'] . '" data-count="' . $num_count . '" data-type="' . $type . '" class="up-id gray-light-2 bi bi-heart"></div>
-                        <div class="score gray-light-2 ml5">
+            $html .= '<div id="up' . $content[$type . '_id'] . '" class="voters flex flex-center gray-light-2">
+                        <div data-id="' . $content[$type . '_id'] . '" data-count="' . $num_count . '" data-type="' . $type . '" class="up-id bi bi-heart"></div>
+                        <div class="score ml5">
                             ' . $count . '
                         </div></div>';
         }
     } else {
-        $html .= '<div class="voters flex flex-center">
-                    <div class="up-id gray-light-2 bi bi-heart click-no-auth"></div>
-                    <div class="score gray-light-2 ml5">
+        $html .= '<div class="voters flex flex-center gray-light-2">
+                    <div class="up-id bi bi-heart click-no-auth"></div>
+                    <div class="score ml5">
                          ' . $count . '                
                     </div></div>';
     }

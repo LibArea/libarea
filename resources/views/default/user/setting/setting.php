@@ -37,7 +37,7 @@
       </div>
 
       <?= includeTemplate('/_block/form/field-radio', ['data' => [
-        ['title' => lang('ninimal (experimental version)'), 'name' => 'design_is_minimal', 'checked' => $data['user']['user_design_is_minimal']],
+        ['title' => lang('minimal (experimental version)'), 'name' => 'design_is_minimal', 'checked' => $data['user']['user_design_is_minimal']],
       ]]); ?>
 
       <h3><?= lang('Contacts'); ?></h3>

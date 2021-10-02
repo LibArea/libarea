@@ -19,32 +19,28 @@
 
   <header class="bg-white border-bottom mt0 mb15 sticky top0 z-30">
     <div class="col-span-12 wrap pr10 pl10 grid items-center grid-cols-12">
-      <div class="col-span-7 flex items-center">
+      <div class="col-span-8 flex items-center">
         <div class="lateral no-pc mr10 flex items-center">
           <i class="bi bi-list gray-light-2 size-18"></i>
-          <div class="lateral-menu bg-white br-rd-3 p5 absolute">
-            <div class="bg-white">
-              <nav class="justify-between mt0 ml0 pl0 t-81 sticky">
-                <div class="size-15 mt5">
-                  <a class="pt5 pr10 pb5 pl10 gray block bg-hover-100" href="<?= getUrlByName('spaces'); ?>">
-                    <i class="bi bi-command middle"></i>
-                    <span class="ml5"><?= lang('spaces'); ?></span>
-                  </a>
-                  <a class="pt5 pr10 pb5 pl10 gray block bg-hover-100" href="<?= getUrlByName('topics'); ?>">
-                    <i class="bi bi-columns-gap middle"></i>
-                    <span class="ml5"><?= lang('topics'); ?></span>
-                  </a>
-                  <a class="pt5 pr10 pb5 pl10 gray block bg-hover-100" href="<?= getUrlByName('users'); ?>">
-                    <i class="bi bi-people middle"></i>
-                    <span class="ml5"><?= lang('users'); ?></span>
-                  </a>
-                  <a class="pt5 pr10 pb5 pl10 gray block bg-hover-100" href="<?= getUrlByName('domains'); ?>">
-                    <i class="bi bi-link-45deg middle"></i>
-                    <span class="ml5"><?= lang('domains'); ?></span>
-                  </a>
-                </div>
-              </nav>
-            </div>
+          <div class="lateral-menu bg-white br-rd-3 p5 bg-white absolute">
+            <nav class="justify-between mt0 ml0 pl0 t-81 sticky size-15 mt5">
+              <a class="pt5 pr10 pb5 pl10 gray block bg-hover-100" href="<?= getUrlByName('spaces'); ?>">
+                <i class="bi bi-command middle"></i>
+                <span class="ml5"><?= lang('spaces'); ?></span>
+              </a>
+              <a class="pt5 pr10 pb5 pl10 gray block bg-hover-100" href="<?= getUrlByName('topics'); ?>">
+                <i class="bi bi-columns-gap middle"></i>
+                <span class="ml5"><?= lang('topics'); ?></span>
+              </a>
+              <a class="pt5 pr10 pb5 pl10 gray block bg-hover-100" href="<?= getUrlByName('users'); ?>">
+                <i class="bi bi-people middle"></i>
+                <span class="ml5"><?= lang('users'); ?></span>
+              </a>
+              <a class="pt5 pr10 pb5 pl10 gray block bg-hover-100" href="<?= getUrlByName('domains'); ?>">
+                <i class="bi bi-link-45deg middle"></i>
+                <span class="ml5"><?= lang('domains'); ?></span>
+              </a>
+            </nav>
           </div>
         </div>
         <div class="mr20 flex items-center">
@@ -60,7 +56,7 @@
         </div>
       </div>
       <?php if ($uid['user_id'] == 0) { ?>
-        <div class="col-span-5">
+        <div class="col-span-4">
           <div class="flex right items-center">
             <div class="header-menu-item no-mob only-icon p10 ml20 mb-ml-10">
               <span id="toggledark" class="my-color-m">
@@ -82,7 +78,7 @@
           </div>
         </div>
       <?php } else { ?>
-        <div class="col-span-5">
+        <div class="col-span-4">
           <div class="flex right items-center">
             <div class="center p10 no-pc">
               <a href="/post/add" class="blue">
@@ -109,7 +105,6 @@
                 </a>
               </div>
             <?php } ?>
-
             <div class="dropbtn relative p10 ml20 mb-ml-10">
               <a class="relative w-auto">
                 <?= user_avatar_img($uid['user_avatar'], 'small', $uid['user_login'], 'w34 br-rd-50'); ?>
