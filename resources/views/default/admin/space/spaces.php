@@ -6,11 +6,11 @@
   <div class="bg-white flex flex-row items-center justify-between border-box-1 br-rd-5 p15 mb15">
     <p class="m0"><?= lang($data['sheet']); ?></p>
     <a class="right" title="<?= lang('add'); ?>" href="/space/add">
-      <i class="icon-plus middle"></i>
+      <i class="bi bi-plus-lg middle"></i>
     </a>
     <?php $pages = array(
-      array('id' => 'spaces', 'url' => '/admin/spaces', 'content' => lang('all'), 'icon' => 'icon-chart-bar'),
-      array('id' => 'spaces-ban', 'url' => '/admin/spaces/ban', 'content' => lang('banned'), 'icon' => 'icon-chart-bar'),
+      array('id' => 'spaces', 'url' => '/admin/spaces', 'content' => lang('all'), 'icon' => 'bi bi-record-circle'),
+      array('id' => 'spaces-ban', 'url' => '/admin/spaces/ban', 'content' => lang('banned'), 'icon' => 'bi bi-x-circle'),
     );
     includeTemplate('/_block/tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
     ?>
@@ -68,7 +68,7 @@
             </td>
             <td class="center">
               <a title="<?= lang('edit'); ?>" href="/space/edit/<?= $sp['space_id']; ?>">
-                <i class="icon-pencil size-15"></i>
+                <i class="bi bi-pencil size-15"></i>
               </a>
             </td>
           </tr>

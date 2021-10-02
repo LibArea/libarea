@@ -1,55 +1,55 @@
 <nav class="justify-between mt0 ml0 pl0 t-81 sticky size-15">
-  <a class="block mb5" title="<?= lang('admin'); ?>" href="<?= getUrlByName('admin'); ?>">
-    <i class="icon-tools<?= $sheet == 'admin' ? ' blue' : ' gray-light-2'; ?>  size-18"></i>
-    <span class="<?= $sheet == 'admin' ? 'blue' : 'black'; ?>"><?= lang('admin'); ?></span>
+  <a class="pt5 pr10 pb5 pl10 block gray bg-hover-100" title="<?= lang('admin'); ?>" href="<?= getUrlByName('admin'); ?>">
+    <i class="bi bi-shield-exclamation middle mr5<?= $sheet == 'admin' ? ' blue' : ''; ?>  size-18"></i>
+    <span class="<?= $sheet == 'admin' ? 'blue' : ''; ?>"><?= lang('admin'); ?></span>
   </a>
-  <a class="block mb5" title="<?= lang('users'); ?>" href="<?= getUrlByName('admin.users'); ?>">
-    <i class="icon-user-o<?= $sheet == 'users' ? ' blue' : ' gray-light-2'; ?>  size-18"></i>
-    <span class="<?= $sheet == 'users' ? 'blue' : 'black'; ?>"><?= lang('users'); ?></span>
+  <a class="pt5 pr10 pb5 pl10 block gray bg-hover-100" title="<?= lang('users'); ?>" href="<?= getUrlByName('admin.users'); ?>">
+    <i class="bi bi-people middle mr5<?= $sheet == 'users' ? ' blue' : ''; ?>  size-18"></i>
+    <span class="<?= $sheet == 'users' ? 'blue' : ''; ?>"><?= lang('users'); ?></span>
   </a>
-  <a class="block mb5" class="block mb5" title="<?= lang('reports'); ?>" href="<?= getUrlByName('admin.reports'); ?>">
-    <i class="icon-warning-empty<?= $sheet == 'reports' ? ' blue' : ' gray-light-2'; ?> size-18"></i>
-    <span class="<?= $sheet == 'reports' ? 'blue' : 'black'; ?>"><?= lang('reports'); ?></span>
+  <a class="pt5 pr10 pb5 pl10 block gray bg-hover-100" class="block mb5" title="<?= lang('reports'); ?>" href="<?= getUrlByName('admin.reports'); ?>">
+    <i class="bi bi-flag middle mr5<?= $sheet == 'reports' ? ' blue' : ''; ?> size-18"></i>
+    <span class="<?= $sheet == 'reports' ? 'blue' : ''; ?>"><?= lang('reports'); ?></span>
   </a>
-  <a class="block mb5" title="<?= lang('audits'); ?>" href="<?= getUrlByName('admin.audits'); ?>">
-    <i class="icon-lightbulb<?= $sheet == 'approved' ? ' blue' : ''; ?><?= $sheet == 'audits' ? ' blue' : ' gray-light-2'; ?> size-18"></i>
-    <span class="<?= $sheet == 'approved' ? ' blue' : ''; ?><?= $sheet == 'audits' ? 'blue' : 'black'; ?>"><?= lang('audits'); ?></span>
+  <a class="pt5 pr10 pb5 pl10 block gray bg-hover-100" title="<?= lang('audits'); ?>" href="<?= getUrlByName('admin.audits'); ?>">
+    <i class="bi bi-exclamation-diamond middle mr5<?= $sheet == 'approved' ? ' blue' : ''; ?><?= $sheet == 'audits' ? ' blue' : ''; ?>"></i>
+    <span class="<?= $sheet == 'approved' ? ' blue' : ''; ?><?= $sheet == 'audits' ? 'blue' : ''; ?>"><?= lang('audits'); ?></span>
   </a>
-  <a class="block mb5" title="<?= lang('spaces'); ?>" href="/admin/spaces">
-    <i class="icon-infinity<?= $sheet == 'spaces' ? ' blue' : ' gray-light-2'; ?>  size-18"></i>
-    <span class="<?= $sheet == 'spaces' ? 'blue' : 'black'; ?>"><?= lang('spaces'); ?></span>
+  <a class="pt5 pr10 pb5 pl10 block gray bg-hover-100" title="<?= lang('spaces'); ?>" href="/admin/spaces">
+    <i class="bi bi-command middle mr5<?= $sheet == 'spaces' ? ' blue' : ''; ?>"></i>
+    <span class="<?= $sheet == 'spaces' ? 'blue' : ''; ?>"><?= lang('spaces'); ?></span>
   </a>
-  <a class="block mb5" title="<?= lang('topics'); ?>" href="<?= getUrlByName('admin.topics'); ?>">
-    <i class="icon-clone<?= $sheet == 'topics' ? ' blue' : ' gray-light-2'; ?>  size-18"></i>
-    <span class="<?= $sheet == 'topics' ? 'blue' : 'black'; ?>"><?= lang('topics'); ?></span>
+  <a class="pt5 pr10 pb5 pl10 block gray bg-hover-100" title="<?= lang('topics'); ?>" href="<?= getUrlByName('admin.topics'); ?>">
+    <i class="bi bi-columns-gap middle mr5<?= $sheet == 'topics' ? ' blue' : ''; ?>"></i>
+    <span class="<?= $sheet == 'topics' ? 'blue' : ''; ?>"><?= lang('topics'); ?></span>
   </a>
-  <a class="block mb5" title="<?= lang('invites'); ?>" href="<?= getUrlByName('admin.invitations'); ?>">
-    <i class="icon-user-add-outline<?= $sheet == 'invitations' ? ' blue' : ' gray-light-2'; ?>  size-18"></i>
-    <span class="<?= $sheet == 'invitations' ? 'blue' : 'black'; ?>"><?= lang('invites'); ?></span>
+  <a class="pt5 pr10 pb5 pl10 block gray bg-hover-100" title="<?= lang('invites'); ?>" href="<?= getUrlByName('admin.invitations'); ?>">
+    <i class="bi bi-person-plus middle mr5<?= $sheet == 'invitations' ? ' blue' : ''; ?>"></i>
+    <span class="<?= $sheet == 'invitations' ? 'blue' : ''; ?>"><?= lang('invites'); ?></span>
   </a>
-  <a class="block mb5" title="<?= lang('posts'); ?>" href="<?= getUrlByName('admin.posts'); ?>">
-    <i class="icon-book-open<?= $sheet == 'posts-ban' ? ' blue' : ''; ?><?= $sheet == 'posts' ? ' blue' : ' gray-light-2'; ?> size-18"></i>
-    <span class="<?= $sheet == 'posts-ban' ? ' blue' : ''; ?><?= $sheet == 'posts' ? 'blue' : 'black'; ?>"><?= lang('posts'); ?></span>
+  <a class="pt5 pr10 pb5 pl10 block gray bg-hover-100" title="<?= lang('posts'); ?>" href="<?= getUrlByName('admin.posts'); ?>">
+    <i class="bi bi-journal-text middle mr5<?= $sheet == 'posts-ban' ? ' blue' : ''; ?><?= $sheet == 'posts' ? ' blue' : ' gray-light-2'; ?> size-18"></i>
+    <span class="<?= $sheet == 'posts-ban' ? ' blue' : ''; ?><?= $sheet == 'posts' ? 'blue' : ''; ?>"><?= lang('posts'); ?></span>
   </a>
-  <a class="block mb5" title="<?= lang('comments-n'); ?>" href="<?= getUrlByName('admin.comments'); ?>">
-    <i class="icon-commenting-o<?= $sheet == 'comments-n' ? ' blue' : ' gray-light-2'; ?>  size-18"></i>
-    <span class="<?= $sheet == 'comments-n' ? 'blue' : 'black'; ?>"><?= lang('comments-n'); ?></span>
+  <a class="pt5 pr10 pb5 pl10 block gray bg-hover-100" title="<?= lang('comments-n'); ?>" href="<?= getUrlByName('admin.comments'); ?>">
+    <i class="bi bi-chat-dots middle mr5<?= $sheet == 'comments-n' ? ' blue' : ' gray-light-2'; ?>  size-18"></i>
+    <span class="<?= $sheet == 'comments-n' ? 'blue' : ''; ?>"><?= lang('comments-n'); ?></span>
   </a>
-  <a class="block mb5" title="<?= lang('answers-n'); ?>" href="<?= getUrlByName('admin.answers'); ?>">
-    <i class="icon-comment-empty<?= $sheet == 'answers-n' ? ' blue' : ' gray-light-2'; ?>  size-18"></i>
-    <span class="<?= $sheet == 'answers-n' ? 'blue' : 'black'; ?>"><?= lang('answers-n'); ?></span>
+  <a class="pt5 pr10 pb5 pl10 block gray bg-hover-100" title="<?= lang('answers-n'); ?>" href="<?= getUrlByName('admin.answers'); ?>">
+    <i class="bi bi-chat-left-text middle mr5<?= $sheet == 'answers-n' ? ' blue' : ' gray-light-2'; ?>  size-18"></i>
+    <span class="<?= $sheet == 'answers-n' ? 'blue' : ''; ?>"><?= lang('answers-n'); ?></span>
   </a>
-  <a class="block mb5" title="<?= lang('badges'); ?>" href="<?= getUrlByName('admin.badges'); ?>">
-    <i class="icon-award<?= $sheet == 'badges' ? ' blue' : ' gray-light-2'; ?>  size-18"></i>
-    <span class="<?= $sheet == 'badges' ? 'blue' : 'black'; ?>"><?= lang('badges'); ?></span>
+  <a class="pt5 pr10 pb5 pl10 block gray bg-hover-100" title="<?= lang('badges'); ?>" href="<?= getUrlByName('admin.badges'); ?>">
+    <i class="bi bi-award middle mr5<?= $sheet == 'badges' ? ' blue' : ' gray-light-2'; ?>  size-18"></i>
+    <span class="<?= $sheet == 'badges' ? 'blue' : ''; ?>"><?= lang('badges'); ?></span>
   </a>
-  <a class="block mb5" title="<?= lang('domains'); ?>" href="<?= getUrlByName('admin.webs'); ?>">
-    <i class="icon-link<?= $sheet == 'domains' ? ' blue' : ' gray-light-2'; ?>  size-18"></i>
-    <span class="<?= $sheet == 'domains' ? 'blue' : 'black'; ?>"><?= lang('domains'); ?></span>
+  <a class="pt5 pr10 pb5 pl10 block gray bg-hover-100" title="<?= lang('domains'); ?>" href="<?= getUrlByName('admin.webs'); ?>">
+    <i class="bi bi-link-45deg middle mr5<?= $sheet == 'domains' ? ' blue' : ''; ?>"></i>
+    <span class="middle size-14<?= $sheet == 'domains' ? ' blue' : ''; ?>"><?= lang('domains'); ?></span>
   </a>
-  <a class="block mb5" title="<?= lang('stop words'); ?>" href="<?= getUrlByName('admin.words'); ?>">
-    <i class="icon-info<?= $sheet == 'words' ? ' blue' : ' gray-light-2'; ?>  size-18"></i>
-    <span class="<?= $sheet == 'words' ? 'blue' : 'black'; ?>"><?= lang('stop words'); ?></span>
+  <a class="pt5 pr10 pb5 pl10 block gray bg-hover-100" title="<?= lang('stop words'); ?>" href="<?= getUrlByName('admin.words'); ?>">
+    <i class="bi bi-badge-ad middle mr5<?= $sheet == 'words' ? ' blue' : ''; ?>  size-18"></i>
+    <span class="middle size-14<?= $sheet == 'words' ? ' blue' : ''; ?>"><?= lang('stop words'); ?></span>
   </a>
   <hr>
   Agouti &copy; <?= date('Y'); ?>

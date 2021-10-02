@@ -6,7 +6,7 @@
     <h1><?= lang('all topics'); ?>
       <?php if ($uid['user_trust_level'] == 5) { ?>
         <a class="right gray-light" href="/admin/topics">
-          <i class="icon-pencil size-15"></i>
+          <i class="bi bi-pencil size-15"></i>
         </a>
       <?php } ?>
     </h1>

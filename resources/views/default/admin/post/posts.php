@@ -6,8 +6,8 @@
   <div class="bg-white flex flex-row items-center justify-between border-box-1 br-rd-5 p15 mb15">
     <p class="m0"><?= lang($data['sheet']); ?></p>
     <?php $pages = array(
-      array('id' => 'posts', 'url' => '/admin/posts', 'content' => lang('all'), 'icon' => 'icon-chart-bar'),
-      array('id' => 'posts-ban', 'url' => '/admin/posts/ban', 'content' => lang('deleted posts'), 'icon' => 'icon-chart-bar'),
+      array('id' => 'posts', 'url' => '/admin/posts', 'content' => lang('all'), 'icon' => 'bi bi-record-circle'),
+      array('id' => 'posts-ban', 'url' => '/admin/posts/ban', 'content' => lang('deleted posts'), 'icon' => 'bi bi-x-circle'),
     );
     includeTemplate('/_block/tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
     ?>
@@ -32,7 +32,7 @@
               <?= $post['post_ip']; ?>
             </a>
             <?php if ($post['post_type'] == 1) { ?>
-              <i class="icon-help green"></i>
+              <i class="bi bi-question-lg green"></i>
             <?php } ?>
           </div>
           <div class="show_add_<?= $post['post_id']; ?>">

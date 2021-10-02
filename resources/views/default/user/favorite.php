@@ -6,8 +6,8 @@
   <div class="bg-white flex flex-row items-center justify-between border-box-1 br-rd-5 p15 mb15">
     <p class="m0"><?= lang($data['sheet']); ?></p>
     <?php $pages = array(
-      array('id' => 'favorites', 'url' => getUrlByName('favorites', ['login' => $uid['user_login']]), 'content' => lang('favorites'), 'icon' => 'icon-lightbulb'),
-      array('id' => 'subscribed', 'url' => getUrlByName('subscribed', ['login' => $uid['user_login']]), 'content' => lang('subscribed'), 'icon' => 'icon-lightbulb'),
+      array('id' => 'favorites', 'url' => getUrlByName('favorites', ['login' => $uid['user_login']]), 'content' => lang('favorites'), 'icon' => 'bi bi-bookmark'),
+      array('id' => 'subscribed', 'url' => getUrlByName('subscribed', ['login' => $uid['user_login']]), 'content' => lang('subscribed'), 'icon' => 'bi bi-bookmark-plus'),
     );
     includeTemplate('/_block/tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
     ?>
@@ -26,14 +26,14 @@
         <h3 class="size-24 mt0 mr15 mb0">
           <?php if ($content['favorite_type'] == 1) {  ?>
             <span id="favorite" class="add-favorite size-14 ml15 right" data-front="personal" data-id="<?= $content['post_id']; ?>" data-type="post">
-              <i class="icon-trash-empty size-21 red"></i>
+              <i class="bi bi-trash size-21 red"></i>
             </span>
             <a class="font-normal black size-24 mt0 mb0" href="<?= getUrlByName('post', ['id' => $content['post_id'], 'slug' => $content['post_slug']]); ?>">
               <?= $content['post_title']; ?>
             </a>
           <?php } else { ?>
             <span id="fav-comm" class="add-favorite right  ml15 size-14" data-front="personal" data-id="<?= $content['answer_id']; ?>" data-type="answer">
-              <i class="icon-trash-empty size-21 red"></i>
+              <i class="bi bi-trash size-21 red"></i>
             </span>
             <a class="title" href="<?= getUrlByName('post', ['id' => $content['post']['post_id'], 'slug' => $content['post']['post_slug']]); ?>#answer_<?= $content['answer_id']; ?>">
               <?= $content['post']['post_title']; ?>

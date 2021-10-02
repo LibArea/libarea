@@ -7,8 +7,8 @@
       <p class="m0"><?= lang($data['sheet']); ?></p>
       <?php
       $pages = array(
-        array('id' => 'users', 'url' => '/admin/users', 'content' => lang('all'), 'icon' => 'icon-air'),
-        array('id' => 'users-ban', 'url' => '/admin/users/ban', 'content' => lang('banned'), 'icon' => 'icon-air'),
+        array('id' => 'users', 'url' => '/admin/users', 'content' => lang('all'), 'icon' => 'bi bi-record-circle'),
+        array('id' => 'users-ban', 'url' => '/admin/users/ban', 'content' => lang('banned'), 'icon' => 'bi bi-x-circle'),
       );
       includeTemplate('/_block/tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
       ?>
@@ -43,7 +43,7 @@
                 <?php if ($user['user_invitation_id'] != 0) { ?><sup>+ inv. id<?= $user['user_invitation_id']; ?></sup><?php } ?>
                 <?php if ($user['user_whisper']) { ?>
                    <span data-id="<?= $user['user_whisper']; ?>" class="tips size-13 gray-light">
-                     <i class="icon-info green"></i>
+                     <i class="bi bi-info-square green"></i>
                    </span>
                 <?php } ?>
                 <div class="size-13">
@@ -100,7 +100,7 @@
               <td class="center">
                 <?php if ($user['user_trust_level'] != 5) { ?>
                   <a title="<?= lang('edit'); ?>" href="/admin/users/<?= $user['user_id']; ?>/edit">
-                    <i class="icon-pencil size-15"></i>
+                    <i class="bi bi-pencil size-15"></i>
                   </a>
                 <?php } else { ?>
                   ---

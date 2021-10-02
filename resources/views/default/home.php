@@ -17,16 +17,16 @@
   <div class="bg-white flex flex-row items-center justify-between border-box-1 br-rd-5 p15 mb15">
     <p class="m0 size-18"><?= lang($data['sheet']); ?></p>
     <?php $pages = array(
-      array('id' => 'feed', 'url' => '/', 'content' => lang('feed'), 'icon' => 'icon-air'),
-      array('id' => 'all', 'url' => '/all', 'content' => lang('all'), 'auth' => 'yes', 'icon' => 'icon-calendar'),
-      array('id' => 'top', 'url' => '/top', 'content' => lang('top'), 'icon' => 'icon-chart-bar'),
+      array('id' => 'feed', 'url' => '/', 'content' => lang('feed'), 'icon' => 'bi bi-sort-down'),
+      array('id' => 'all', 'url' => '/all', 'content' => lang('all'), 'auth' => 'yes', 'icon' => 'bi bi-app'),
+      array('id' => 'top', 'url' => '/top', 'content' => lang('top'), 'icon' => 'bi bi-bar-chart'),
     );
     includeTemplate('/_block/tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
     ?>
   </div>
   <?php if (Request::getUri() == '/' && $uid['user_id'] > 0 && empty($data['space_user'])) { ?>
     <div class="border-box-1 p15 big center gray">
-      <i class="icon-lightbulb middle red"></i>
+      <i class="bi bi-exclamation-lg middle red"></i>
       <span class="middle"><?= lang('space-subscription'); ?>...</span>
     </div>
   <?php } ?>
@@ -42,9 +42,9 @@
   <?php } ?>
 
   <?php if ($uid['user_id'] > 0 && !empty($data['space_user'])) { ?>
-    <div class="border-box-1 p15 mb15 br-rd-3 bg-white size-14">
+    <div class="border-box-1 p15 mb15 br-rd-5 bg-white size-14">
       <a class="right gray-light" title="<?= lang('spaces'); ?>" href="/spaces">
-        <i class="icon-right-open-big middle"></i>
+        <i class="bi bi-chevron-right middle"></i>
       </a>
       <div class="uppercase mt0 mb5">
         <?= lang('signed'); ?>
@@ -60,7 +60,7 @@
       <?php } ?>
       <?php if (count($data['space_user']) > 15) { ?>
         <a class="gray" title="<?= lang('spaces'); ?>" href="/spaces">
-          <?= lang('see more'); ?> <i class="icon-right-open-big middle"></i>
+          <?= lang('see more'); ?> <i class="bi bi-chevron-double-right middle"></i>
         </a>
       <?php } ?>
     </div>
@@ -68,7 +68,7 @@
 
   <div class="sticky top0 t-81">
     <?php if (!empty($data['latest_answers'])) { ?>
-      <div class="last-comm border-box-1 p15 bg-white">
+      <div class="last-comm border-box-1 p15 bg-white br-rd-5">
         <?php foreach ($data['latest_answers'] as  $answer) { ?>
           <div class="mt15 mr0 mb15 ml0 pl15" style="border-left: 2px solid <?= $answer['space_color']; ?>;">
             <div class="size-14 gray-light">

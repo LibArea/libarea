@@ -6,8 +6,8 @@
   <div class="bg-white flex flex-row items-center justify-between border-box-1 br-rd-5 p15 mb15">
     <p class="m0"><?= lang($data['sheet']); ?> -<?= $data['sheet']; ?>-</p>
     <?php $pages = array(
-      array('id' => 'comments-n', 'url' => '/admin/comments', 'content' => lang('all'), 'icon' => 'icon-chart-bar'),
-      array('id' => 'comments-ban', 'url' => '/admin/comments/ban', 'content' => lang('deleted comments'), 'icon' => 'icon-chart-bar'),
+      array('id' => 'comments-n', 'url' => '/admin/comments', 'content' => lang('all'), 'icon' => 'bi bi-record-circle'),
+      array('id' => 'comments-ban', 'url' => '/admin/comments/ban', 'content' => lang('deleted comments'), 'icon' => 'bi bi-x-circle'),
     );
     includeTemplate('/_block/tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
     ?>
@@ -31,7 +31,7 @@
               <?= $comment['comment_ip']; ?>
             </a>
             <?php if ($comment['post_type'] == 1) { ?>
-              <i class="icon-commenting-o middle"></i>
+              <i class="bi bi-chat-dots middle"></i>
             <?php } ?>
           </div>
           <div class="comm-telo-body">

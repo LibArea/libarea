@@ -36,13 +36,13 @@
     <div class="text-info col-span-3 mb-col-12">
       <h4 class="mb5 uppercase font-light"><?= lang('social networks'); ?></h4>
       <a rel="nofollow noopener" class="white" title="DISCORD" href="https://discord.gg/dw47aNx5nU">
-        <i class="icon-wechat size-21 mr5"></i>
+        <i class="bi bi-discord size-21 mr10"></i>
       </a>
       <a rel="nofollow noopener" class="white" title="GitHub" href="https://github.com/agoutiDev/agouti">
-        <i class="icon-github-circled size-21"></i>
+        <i class="bi bi-github size-21"></i>
       </a>
       <div class="size-13 mt5 mb5 gray-light-2">
-        Agouti &copy; <?= date('Y'); ?> — <?= lang('community'); ?> 
+        Agouti &copy; <?= date('Y'); ?> — <?= lang('community'); ?>
       </div>
     </div>
   </div>

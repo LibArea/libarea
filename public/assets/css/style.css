@@ -1,9 +1,8 @@
-@import "icons.css";
+@import "./font/bootstrap-icons.css";
 
 /*
  * Agouti (https://agouti.ru/)
- * Copyright 2021
- * @ Evg
+ * Copyright 2021 @Evg
  * Licensed under MIT (https://github.com/AgoutiDev/agouti/blob/main/LICENSE)
  */
 
@@ -47,13 +46,7 @@ a {
 a:hover,
 a:focus,
 a.active {
-  color: #e45735;
-}
-
-a.white:hover,
-a.white:focus,
-a.white.active {
-  color: #fff;
+  color: #3ea7e2;
 }
 
 img {
@@ -64,7 +57,7 @@ img {
 .top0 { top: 0; }
 .right0 { right: 0; }
 .bottom0 { bottom: 0; }
-.lleft0 { left: 0; }
+.left0 { left: 0; }
 
 .m0 { margin: 0; }
 .mt0 { margin-top: 0; }
@@ -174,6 +167,7 @@ img {
 .bg-gray-700 { background-color: #495057; }
 .bg-gray-800 { background-color: #343a40; }
 .bg-gray-900 { background-color: #212529; }
+.bg-hover-100:hover { background-color: rgba(0, 154, 97, 0.08); }
 
 .w-auto { width: auto; }
 .w-20 { width: 20%; }
@@ -195,6 +189,8 @@ img {
 .w130 { width: 130px; }
 .w160 { width: 160px; }
 
+.max-w-460 { max-width: 460px; }
+
 .z-10 { z-index:10; }
 .z-20 { z-index:20; }
 .z-30 { z-index:30; }
@@ -202,6 +198,9 @@ img {
 .z-50 { z-index:50; }
 
 .h10 { height: 10px; }
+.h20 { height: 20px; }
+.h30 { height: 30px; }
+.h40 { height: 40px; }
 .h120 { height: 120px; }
 
 .br-rd-3 { border-radius: 3px; }
@@ -341,7 +340,6 @@ hr {
 .button-primary {
   border: 1px solid #3ea7e2;
   color: #3ea7e2;
-  font-size: 1rem;
 }
 
 .button-primary:hover,
@@ -369,7 +367,6 @@ th { padding: 5px; }
 
 textarea {
   width: 100%;
-  border: 0.05rem solid #caced7;
   font-size: 16px;
   padding: 1px 6px;
 }
@@ -385,9 +382,7 @@ textarea {
 .form-input {
   transition: all 0.2s ease;
   appearance: none;
-  background-color: #fff;
   background-image: none;
-  border: 0.05rem solid #caced7;
   border-radius: 3px;
   color: #50596c;
   display: block;
@@ -402,10 +397,7 @@ textarea {
 }
 
 .form-input:focus,
-textarea:focus {
-  box-shadow: 0 0 0 0.1rem rgba(38, 139, 210, 0.2);
-  border-color: #268bd2;
-}
+textarea:focus { box-shadow: 0 0 0 0.1rem rgba(38, 139, 210, 0.2); }
 
 .boxline {
   clear: both;
@@ -465,15 +457,8 @@ textarea:focus {
   padding: 2px 8px;
 }
 
-input.form-search {
-  border: 1px solid #ebebeb;
-  background-color: #f5f7fa;
-  padding: 2px 0 2px 10px;
-  height: 40px;
-}
-
-input.form-search:hover { border: 1px solid #e6ecf0; }
-input.form-search:focus { border: 1px solid #ddd; }
+input { border: 1px solid #ebebeb; }
+input:focus { border: 1px solid #9ccdf8; }
 ::placeholder { color: #919191; }
 
 .no-pc { display: none; }
@@ -521,10 +506,8 @@ ol.comment-telo { padding-left: 23px; }
   margin: 5px 0;
 }
 
-.voters.active .icon-heart-empty,
-.voters.active .icon-heart,
-.voters .icon-heart:hover
-.voters .icon-heart-empty:hover {
+.voters.active .bi.bi-heart,
+.voters .bi.bi-heart:hover {
   color: #0d9fe6;
 }
 
@@ -578,26 +561,26 @@ a.tags.avtive {
 .dropdown-menu.show,
 .lateral-menu.show { display: block; }
 
-.dr-menu {
-  padding: 5px 9px;
-  color: #5b7083;
-}
-
-.dr-menu:hover {
-  background-color: rgba(0, 154, 97, 0.08);
-  color: #e45735;
-  text-decoration: none;
-}
-
 .dark {
   background-color: #111;
   color: #fff;
 }
 
+.dark .bg-yellow-100,
 .dark .bg-white {
   background-color: #232626;
   color: #fff;
   border: 1px solid #232626;
+}
+
+.dark .bg-gray-100,
+.dark .form-input,
+.dark textarea,
+.dark blockquote,
+.dark table tr:nth-of-type(2n) {
+  background-color: #111;
+  color: #fff;
+  border: 1px solid #000;
 }
 
 .dark .black {
@@ -656,7 +639,8 @@ a.tags.avtive {
 @media (max-width: 910px) {
   .mb-col-2 { grid-column: span 2 / span 2; }
   .mb-col-12 { grid-column: span 12 / span 12; }
-  .mb-size-13 { font-size: 13px; }
+  .mb-size-13 { font-size: 0.8125rem; }
+  .mb-size-18 { font-size: 1.125rem; }
   .mb-w-100 { width: 100%; }
   .mb-w-50 { width: 50%; }
   .mb-mt-15 { margin-top: 5px; }

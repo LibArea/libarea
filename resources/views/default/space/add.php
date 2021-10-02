@@ -7,7 +7,6 @@
 
     <form action="/space/create" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
-
       <?= includeTemplate('/_block/form/field-input', ['data' => [
         ['title' => 'URL (slug)', 'type' => 'text', 'name' => 'space_slug', 'value' => '', 'min' => 3, 'max' => 12, 'help' => '3 - 12 ' . lang('characters') . ' (' . lang('english') . ')'],
         ['title' => lang('title'), 'type' => 'text', 'name' => 'space_name', 'value' => '', 'min' => 4, 'max' => 18, 'help' => '4 - 18 ' . lang('characters')],

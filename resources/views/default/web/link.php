@@ -10,7 +10,7 @@
       <h1><?= $data['link']['link_title']; ?>
         <?php if ($uid['user_trust_level'] > 4) { ?>
           <a class="size-14 ml5" title="<?= lang('edit'); ?>" href="<?= getUrlByName('link-edit', ['id' => $data['link']['link_id']]); ?>">
-            <i class="icon-pencil size-15"></i>
+            <i class="bi bi-pencil size-15"></i>
           </a>
         <?php } ?>
       </h1>
@@ -38,7 +38,7 @@
       <div class="uppercase mb5 mt5 size-14"><?= lang('domains'); ?></div>
       <?php foreach ($data['domains'] as  $domain) { ?>
         <a class="size-14 gray" href="<?= getUrlByName('domain', ['domain' => $domain['link_url_domain']]); ?>">
-          <i class="icon-link middle"></i> <?= $domain['link_url_domain']; ?>
+          <i class="bi bi-link-45deg middle"></i> <?= $domain['link_url_domain']; ?>
           <sup class="size-14"><?= $domain['link_count']; ?></sup>
         </a><br>
       <?php } ?>

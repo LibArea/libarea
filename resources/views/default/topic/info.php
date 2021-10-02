@@ -12,7 +12,7 @@
       </a>
       <?php if ($uid['user_trust_level'] == 5) { ?>
         <a class="right gray-light" href="<?= getUrlByName('admin.topic.edit', ['id' => $data['topic']['topic_id']]); ?>">
-          <i class="icon-pencil size-15"></i>
+          <i class="bi bi-pencil size-15"></i>
         </a>
       <?php } ?>
     </h1>
@@ -49,7 +49,7 @@
     </center>
     <hr>
     <div class="gray-light">
-      <i class="icon-calendar middle"></i>
+      <i class="bi bi-calendar-week mr5 middle"></i>
       <span class="middle"><?= $data['topic']['topic_add_date']; ?></span>
     </div>
   </div>

@@ -12,7 +12,7 @@
           <?= $data['topic']['topic_seo_title']; ?>
           <?php if ($uid['user_trust_level'] == 5) { ?>
             <a class="right gray-light" href="<?= getUrlByName('admin.topic.edit', ['id' => $data['topic']['topic_id']]); ?>">
-              <i class="icon-pencil size-15"></i>
+              <i class="bi bi-pencil size-15"></i>
             </a>
           <?php } ?>
         </h1>
@@ -34,7 +34,7 @@
             <?php } ?>
           <?php } ?>
           <a title="<?= lang('info'); ?>" class="size-14 lowercase right gray" href="<?= getUrlByName('topic', ['slug' => $data['topic']['topic_slug']]); ?>/info">
-            <i class="icon-info green"></i>
+            <i class="bi bi-info-square green"></i>
           </a>
         </div>
       </div>

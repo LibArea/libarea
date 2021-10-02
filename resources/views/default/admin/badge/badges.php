@@ -4,7 +4,7 @@
 <main class="col-span-10 mb-col-12">
   <div class="white-box pt5 pr15 pb5 pl15">
     <a class="right" title="<?= lang('add'); ?>" href="/admin/badges/add">
-      <i class="icon-plus middle"></i>
+      <i class="bi bi-plus-lg middle"></i>
     </a>
     <?= breadcrumb('/admin', lang('admin'), null, null, lang('badges')); ?>
 
@@ -31,7 +31,7 @@
             </td>
             <td class="center">
               <a title="<?= lang('edit'); ?>" href="/admin/badges/<?= $bg['badge_id']; ?>/edit">
-                <i class="icon-pencil size-15"></i>
+                <i class="bi bi-pencil size-15"></i>
               </a>
             </td>
           </tr>

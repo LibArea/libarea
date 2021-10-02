@@ -1,7 +1,7 @@
 </div>
 <div class="wrap grid grid-cols-12 gap-4 pr10 mt15 pl10 h10 justify-between">
-  <a id="scroll_top" class="red fixed right0 mr5 size-24" title="<?= lang('up'); ?>">
-    &#8593;
+  <a id="scroll_top" class="red fixed right0 mr5" title="<?= lang('up'); ?>">
+    <i class="bi bi-arrow-up-short size-31"></i>
   </a>
 </div>
 <script async src="/assets/js/common.js"></script>
@@ -23,4 +23,5 @@
 <?= getRequestResources()->getBottomScripts(); ?>
 
 </body>
+
 </html>

@@ -117,7 +117,7 @@
             </blockquote>
           </div>
           <div class="mb20">
-            <i class="icon-calendar middle"></i>
+            <i class="bi bi-calendar-week middle"></i>
             <span class="middle">
               <span class="ts"><?= $data['user']['user_created_at']; ?></span> —
               <?= $data['user_trust_level']['trust_name']; ?> <sup class="date">TL<?= $data['user']['user_trust_level']; ?></sup>
@@ -191,9 +191,9 @@
               <?= lang('badges'); ?>
             </h3>
             <div class="m0 size-31">
-              <i title="<?= lang('medal for registration'); ?>" class="icon-gift blue"></i>
+              <i title="<?= lang('medal for registration'); ?>" class="bi bi-gift blue"></i>
               <?php if ($data['user']['user_id'] < 50) { ?>
-                <i title="<?= lang('joined in the early days'); ?>" class="icon-award green"></i>
+                <i title="<?= lang('joined in the early days'); ?>" class="bi bi-award green"></i>
               <?php } ?>
               <?php foreach ($data['badges'] as $badge) { ?>
                 <?= $badge['badge_icon']; ?>
@@ -211,7 +211,7 @@
               <?php if ($uid['user_id'] > 0) { ?>
                 <?php if ($uid['user_login'] == $data['user']['user_login']) { ?>
                   <a class="del-post-profile ml10" data-post="<?= $data['onepost']['post_id']; ?>">
-                    <i class="icon-trash-empty red"></i>
+                    <i class="bi bi-trash red"></i>
                   </a>
                 <?php } ?>
               <?php } ?>
@@ -226,7 +226,7 @@
                 </a>
                 <?php if ($data['onepost']['post_answers_count'] != 0) { ?>
                   <a class="gray right" href="<?= getUrlByName('post', ['id' => $data['onepost']['post_id'], 'slug' => $data['onepost']['post_slug']]); ?>">
-                    <i class="icon-comment-empty middle"></i>
+                    <i class="bi bi-chat-dots middle"></i>
                     <?= $data['onepost']['post_answers_count']; ?>
                   </a>
                 <?php } ?>
@@ -239,16 +239,16 @@
               <h3 class="mt0 mb10 uppercase pt10 size-14"><?= lang('admin'); ?></h3>
               <div class="mb5">
                 <a class="gray size-15 mb5 block" href="<?= getUrlByName('admin.user.edit', ['id' => $data['user']['user_id']]); ?>">
-                  <i class="icon-cog-outline middle"></i>
+                  <i class="bi bi-gear middle"></i>
                   <span class="middle"><?= lang('edit'); ?></span>
                 </a>
                 <a class="gray size-15 block" href="<?= getUrlByName('admin.badges.user.add', ['id' => $data['user']['user_id']]); ?>">
-                  <i class="icon-award middle"></i>
+                  <i class="bi bi-award middle"></i>
                   <span class="middle"><?= lang('reward the user'); ?></span>
                 </a>
                 <?php if ($data['user']['user_whisper']) { ?>
                   <div class="tips size-14 pt15 pb10 gray-light">
-                    <i class="icon-info green"></i> <?= $data['user']['user_whisper']; ?>
+                    <i class="bi bi-info-square green"></i> <?= $data['user']['user_whisper']; ?>
                   </div>
                 <?php } ?>
                 <hr>

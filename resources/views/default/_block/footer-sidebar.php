@@ -1,4 +1,4 @@
-<div class="last-comm br-rd-3 border-box-1 p15 mt15 bg-white">
+<div class="last-comm br-rd-5 border-box-1 p15 mt15 bg-white">
   <div class="flex flex-row flex-wrap mb-3 text-sm font-medium leading-snug tracking-tight whitespace-nowrap">
     <a class="block w-50 size-14 mb5 gray-light" title="<?= lang('all answers'); ?>" href="<?= getUrlByName('answers'); ?>">
       <?= lang('answers-n'); ?>
@@ -16,13 +16,10 @@
   <div class="mt10">
 
     <a rel="nofollow noopener" class="gray-light-2" title="DISCORD" href="https://discord.gg/dw47aNx5nU">
-      <i class="icon-wechat size-21 mr5"></i>
+      <i class="bi bi-discord size-21 mr10"></i>
     </a>
     <a rel="nofollow noopener" class="gray-light-2" title="GitHub" href="https://github.com/agoutiDev/agouti">
-      <i class="icon-github-circled size-21"></i>
-    </a>
-    <a rel="nofollow noopener" class="gray-light-2" title="Vk" href="#">
-      <i class=" icon-vkontakte size-21"></i>
+      <i class="bi bi-github size-21"></i>
     </a>
   </div>
 </div>

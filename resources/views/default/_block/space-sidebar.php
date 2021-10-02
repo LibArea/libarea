@@ -21,13 +21,13 @@
     </div>
     <hr>
     <div class="gray-light">
-      <i class="icon-calendar middle"></i>
+      <i class="bi bi-calendar-week mr5 middle"></i>
       <span class="middle"><?= $data['space']['space_date']; ?></span>
     </div>
     <?php if (!$uid['user_id']) { ?>
       <div class="white mt15 mb10 center">
         <a class="mt15 button block mb15 white" href="<?= getUrlByName('login'); ?>">
-          <i class="icon-pencil size-15"></i>
+          <i class="bi bi-pencil size-15"></i>
           <?= lang('create Post'); ?>
         </a>
       </div>

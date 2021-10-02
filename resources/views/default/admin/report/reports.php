@@ -35,7 +35,7 @@
           </td>
           <td class="center<?php if ($report['report_status'] == 0) { ?> bg-red-100<?php } ?>">
             <span class="report-status" data-id="<?= $report['report_id']; ?>">
-              <i class="icon-air gray size-21"></i>
+              <i class="bi bi-record-circle gray size-21"></i>
             </span>
           </td>
         </tr>

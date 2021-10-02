@@ -3,7 +3,7 @@
 </div>
 <main class="col-span-10 mb-col-12">
   <a class="right" title="<?= lang('add'); ?>" href="/admin/words/add">
-    <i class="icon-plus middle"></i>
+    <i class="bi bi-plus-lg middle"></i>
   </a>
   <?= breadcrumb('/admin', lang('admin'), null, null, lang('stop words')); ?>
 

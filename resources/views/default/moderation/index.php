@@ -23,7 +23,7 @@
               <?= $mod['post_title']; ?>
             </a>
             <?php if ($mod['post_type'] == 1) { ?>
-              <i class="icon-help green"></i>
+              <i class="bi bi-question-lg green"></i>
             <?php } ?>
           </div>
           <div class="size-14">

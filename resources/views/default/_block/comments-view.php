@@ -59,7 +59,7 @@
 
                 <?php if ($uid['user_trust_level'] == 5) { ?>
                   <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray ml10 mr5">
-                    <i title="<?= lang('remove'); ?>" class="icon-trash-empty"></i>
+                    <i title="<?= lang('remove'); ?>" class="bi bi-trash"></i>
                   </a>
                 <?php } ?>
 
@@ -67,16 +67,16 @@
                   <?php $blue = $answer['favorite_user_id'] ? 'blue' : 'gray'; ?>
                   <a id="fav-comm_<?= $answer['answer_id']; ?>" class="add-favorite mr5 ml15 gray <?= $blue; ?>" data-id="<?= $answer['answer_id']; ?>" data-type="answer">
                     <?php if ($answer['favorite_user_id']) { ?>
-                      <i title="<?= lang('remove-favorites'); ?>" class="icon-bookmark-empty"></i>
+                      <i title="<?= lang('remove-favorites'); ?>" class="bi bi-bookmark"></i>
                     <?php } else { ?>
-                      <i title="<?= lang('add-favorites'); ?>" class="icon-bookmark-empty"></i>
+                      <i title="<?= lang('add-favorites'); ?>" class="bi bi-bookmark"></i>
                     <?php } ?>
                   </a>
                 <?php } ?>
 
                 <?php if ($uid['user_id'] != $answer['answer_user_id'] && $uid['user_trust_level'] > 0) { ?>
                   <a data-post_id="<?= $data['post']['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray ml15">
-                    <i title="<?= lang('report'); ?>" class="icon-flag-empty"></i>
+                    <i title="<?= lang('report'); ?>" class="bi bi-flag"></i>
                   </a>
                 <?php } ?>
               </div>
@@ -159,7 +159,7 @@
                   <?php } ?>
                   <?php if ($uid['user_id'] != $comment['comment_user_id'] && $uid['user_trust_level'] > 0) { ?>
                     <a data-post_id="<?= $data['post']['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray ml15">
-                      <?= lang('report'); ?>
+                      <i title="<?= lang('report'); ?>" class="bi bi-flag"></i>
                     </a>
                   <?php } ?>
                 </div>

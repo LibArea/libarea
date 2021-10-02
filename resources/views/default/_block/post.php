@@ -2,46 +2,42 @@
   <?php foreach ($data['posts'] as $post) { ?>
     <?php $post_url = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
     <div class="border-box-1 bg-white p20 mb15 br-rd-5 article_<?= $post['post_id']; ?>">
-        <?php if ($data['sheet'] == 'subscribed') { ?>
-          <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id size-14 right">
-            <?= lang('unsubscribe'); ?>
-          </div>
-        <?php } ?>
-    
+      <?php if ($data['sheet'] == 'subscribed') { ?>
+        <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id size-14 right">
+          <?= lang('unsubscribe'); ?>
+        </div>
+      <?php } ?>
+
       <div class="flex mb15">
-        <a class="flex flex-center" href="<?= getUrlByName('user', ['login' => $post['user_login']]); ?>">
-          <div class="mr5">
-            <?= user_avatar_img($post['user_avatar'], 'max', $post['user_login'], 'w44 br-rd-50'); ?>
-          </div>
+        <a class="flex black flex-center" href="<?= getUrlByName('user', ['login' => $post['user_login']]); ?>">
+          <?= user_avatar_img($post['user_avatar'], 'max', $post['user_login'], 'w44 br-rd-50 mr5'); ?>
           <div class="ml5">
-            <div class="black">
-              <?= $post['user_login']; ?>
-            </div>
+            <?= $post['user_login']; ?>
             <div class="gray-light size-14">
               <?= $post['post_date'] ?>
             </div>
           </div>
         </a>
       </div>
- 
+
       <div class="flex flex-row flex-auto">
         <div class="w-auto pc-mr-20">
-          <a href="<?= $post_url; ?>">
-            <h2 class="font-normal black size-24 mt0 mb0"><?= $post['post_title']; ?>
+          <a class="black" href="<?= $post_url; ?>">
+            <h2 class="font-normal size-24 mt0 mb0"><?= $post['post_title']; ?>
               <?php if ($post['post_is_deleted'] == 1) { ?>
-                <i class="icon-trash-empty blue"></i>
+                <i class="bi bi-trash blue"></i>
               <?php } ?>
               <?php if ($post['post_closed'] == 1) { ?>
-                <i class="icon-lock gray"></i>
+                <i class="bi bi-lock gray"></i>
               <?php } ?>
               <?php if ($post['post_top'] == 1) { ?>
-                <i class="icon-pin-outline blue"></i>
+                <i class="bi bi-pin-angle blue"></i>
               <?php } ?>
               <?php if ($post['post_lo'] > 0) { ?>
-                <i class="icon-diamond blue"></i>
+                <i class="bi bi-award blue"></i>
               <?php } ?>
               <?php if ($post['post_type'] == 1) { ?>
-                <i class="icon-help green"></i>
+                <i class="bi bi-patch-question green"></i>
               <?php } ?>
               <?php if ($post['post_translation'] == 1) { ?>
                 <span class="pt5 pr10 pb5 pl10 gray-light bg-yellow-100 br-rd-3 size-14 italic lowercase">
@@ -54,7 +50,7 @@
                 </span>
               <?php } ?>
               <?php if ($post['post_merged_id'] > 0) { ?>
-                <i class="icon-link-ext blue"></i>
+                <i class="bi bi-link-45deg blue"></i>
               <?php } ?>
             </h2>
           </a>
@@ -65,8 +61,8 @@
             </a>
             <?= html_topic($post['topic_list'], 'gray-light size-14 ml15'); ?>
             <?php if ($post['post_url_domain']) { ?>
-              <a class="gray-light size-14 middle ml10" href="<?= getUrlByName('domain', ['domain' => $post['post_url_domain']]); ?>">
-                <i class="icon-link"></i> <?= $post['post_url_domain']; ?>
+              <a class="gray-light size-14 ml10" href="<?= getUrlByName('domain', ['domain' => $post['post_url_domain']]); ?>">
+                <i class="bi bi-link-45deg middle"></i> <?= $post['post_url_domain']; ?>
               </a>
             <?php } ?>
           </div>
@@ -82,7 +78,7 @@
         <?php if ($post['post_thumb_img']) { ?>
           <div class="home-img mt15 flex-auto">
             <a title="<?= $post['post_title']; ?>" href="<?= $post_url; ?>">
-              <?= post_img($post['post_thumb_img'], $post['post_title'],  'thumb no-mob right', 'thumbnails'); ?>
+              <?= post_img($post['post_thumb_img'], $post['post_title'],  'thumb no-mob br-rd-5 right', 'thumbnails'); ?>
             </a>
           </div>
         <?php } ?>
@@ -90,7 +86,7 @@
         <?php if ($post['post_content_img']) { ?>
           <div class="home-img mt15 flex-auto">
             <a title="<?= $post['post_title']; ?>" href="<?= $post_url; ?>">
-              <?= post_img($post['post_content_img'], $post['post_title'], 'home-img', 'cover'); ?>
+              <?= post_img($post['post_content_img'], $post['post_title'], 'home-img br-rd-5', 'cover'); ?>
             </a>
           </div>
         <?php } ?>
@@ -103,10 +99,10 @@
           <?php if ($post['post_answers_count'] != 0) { ?>
             <a class="flex gray-light-2 ml15" href="<?= $post_url; ?>">
               <?php if ($post['post_type'] == 0) { ?>
-                <i class="icon-commenting-o mr5"></i>
+                <i class="bi bi-chat-dots mr5"></i>
                 <?= $post['post_answers_count'] + $post['post_comments_count']; ?>
               <?php } else { ?>
-                <i class="icon-commenting-o mr5"></i>
+                <i class="bi bi-chat-dots mr5"></i>
                 <?= $post['post_answers_count']; ?> <?= $post['lang_num_answers']; ?>
               <?php } ?>
             </a>

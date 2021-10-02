@@ -71,7 +71,7 @@
             <td class="center">
               <?php if ($user['user_trust_level'] != 5) { ?>
                 <a title="<?= lang('edit'); ?>" href="/admin/user/<?= $user['user_id']; ?>/edit">
-                  <i class="icon-pencil size-15"></i>
+                  <i class="bi bi-pencil size-15"></i>
                 </a>
               <?php } else { ?>
                 ---

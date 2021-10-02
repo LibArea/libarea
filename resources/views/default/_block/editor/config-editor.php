@@ -4,6 +4,7 @@
       editormd.loadScript(path, function() {
          editor.lang = editormd.defaults.lang;
       });
+      
       var editor = editormd("markdown-view", {
          <?php if ($width100 == 'yes') { ?>
             width: "100%",
@@ -26,23 +27,23 @@
          type: "<?= $type; ?>",
 
          toolbarIconsClass: {
-            bold: "icon-bold",
-            del: "icon-strike",
-            italic: "icon-italic",
-            quote: "icon-quote",
-            h3: editormd.classPrefix + "light-icon-message-circle",
-            h4: editormd.classPrefix + "bold",
-            "list-ul": "icon-list-bullet",
-            hr: "icon-minus-outline",
-            link: "icon-link",
-            image: "icon-camera-outline",
-            code: "icon-terminal",
-            "preformatted-text": "icon-terminal",
-            "code-block": "icon-file-code",
-            emoji: "icon crop",
-            preview: "icon-device-desktop",
-            fullscreen: "icon-move",
-            help: "icon-info",
+            bold: "bi bi-type-bold",
+            del: "bi bi-type-strikethrough",
+            italic: "bi bi-type-italic",
+            quote: "bi bi-blockquote-right",
+            h3: editormd.classPrefix + "small",
+          //  h4: editormd.classPrefix + "bold",
+            "list-ul": "bi bi-list-task",
+            hr: "bi bi-hr",
+            link: "bi bi-link-45deg",
+            image: "bi bi-camera",
+            code: "bi bi-code-slash",
+            "preformatted-text": "bi bi-code-square",
+            "code-block": "bi bi-code-square",
+            emoji: "bi bi-emoji-wink",
+            preview: "bi bi-aspect-ratio",
+            fullscreen: "bi bi-arrows-fullscreen",
+            help: "bi bi-info-lg",
          },
          toolbarIconTexts: {},
          path: "/assets/editor/lib/"
