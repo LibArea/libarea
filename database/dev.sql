@@ -712,6 +712,19 @@ ALTER TABLE `users_agent_logs`
 
 
 --
+-- Структура и индексы таблицы `topics_link_relation`
+--
+
+CREATE TABLE `topics_link_relation` (
+  `relation_topic_id` int(11) DEFAULT 0,
+  `relation_link_id` int(11) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE `topics_link_relation`
+  ADD KEY `relation_topic_id` (`relation_topic_id`),
+  ADD KEY `relation_content_id` (`relation_link_id`);
+
+--
 -- Индексы сохранённых таблиц
 --
 
