@@ -90,7 +90,7 @@
         <?php if ($data['post']['post_url_domain']) { ?>
           <div class="mb15">
             <a rel="nofollow noreferrer ugc" target="_blank" class="button br-rd-5 white" href="<?= $data['post']['post_url']; ?>">
-              <?= lang('details are here'); ?> <i class="bi bi-link-45deg ml5"></i>
+              <?= lang('details are here'); ?> <i class="bi bi-folder-symlink ml5"></i>
             </a>
           </div>
         <?php } ?>

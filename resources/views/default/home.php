@@ -50,7 +50,7 @@
         <?= lang('signed'); ?>
       </div>
       <?php foreach ($data['space_user'] as  $sig) { ?>
-        <a class="flex relative pt5 pb5 hidden gray" href="<?= getUrlByName('space', ['slug' => $sig['space_slug']]); ?>" title="<?= $sig['space_name']; ?>">
+        <a class="flex relative pt5 pb5 items-center hidden gray" href="<?= getUrlByName('space', ['slug' => $sig['space_slug']]); ?>" title="<?= $sig['space_name']; ?>">
           <?= spase_logo_img($sig['space_img'], 'small', $sig['space_name'], 'w24 mr5'); ?>
           <span class="ml5"><?= $sig['space_name']; ?></span>
           <?php if ($sig['space_user_id'] == $uid['user_id']) { ?>

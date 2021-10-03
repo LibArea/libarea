@@ -3,6 +3,7 @@
   box-sizing: border-box;
   display: inline-block;
   margin: 0;
+  border: solid #ebebeb 1px;
   position: relative;
   vertical-align: middle; }
   .select2-container .select2-selection--single {
@@ -192,7 +193,7 @@
 
 .select2-container--default .select2-selection--multiple {
   background-color: white;
-  border: 1px solid #aaa;
+  border: 1px solid #ebebeb;
   border-radius: 4px;
   cursor: text;
   padding-bottom: 5px;
@@ -270,7 +271,7 @@
   margin-right: auto; }
 
 .select2-container--default.select2-container--focus .select2-selection--multiple {
-  border: solid #ddd 1px;
+  border: solid #ebebeb 1px;
   outline: 0; }
 
 .select2-container--default.select2-container--disabled .select2-selection--multiple {
@@ -542,3 +543,5 @@
   min-width: 100% !important;
   border: 1px solid #eee;
 }
+
+select { border: 1px solid #ebebeb; }

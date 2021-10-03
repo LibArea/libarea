@@ -369,6 +369,7 @@ textarea {
   width: 100%;
   font-size: 16px;
   padding: 1px 6px;
+  border: 1px solid #ebebeb;
 }
 
 .form-label {
