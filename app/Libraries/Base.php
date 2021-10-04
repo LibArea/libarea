@@ -3,12 +3,7 @@
 namespace Agouti;
 
 use Hleb\Constructor\Handlers\Request;
-use App\Models\NotificationsModel;
-use App\Models\UserModel;
-use App\Models\AuthModel;
-use JacksonJeans\Mail;
-use JacksonJeans\MailException;
-use Agouti\Config;
+use App\Models\{NotificationsModel, UserModel, AuthModel};
 
 class Base
 {
@@ -17,14 +12,9 @@ class Base
         $account = Request::getSession('account') ?? [];
         $uid = [];
 
-        // Если сайт обновляется (выключен)
-        if (Config::get(Config::PARAM_SITE_OFF) == 1) {
-            if (!empty($account['user_trust_level']) != 5) {
-                include HLEB_GLOBAL_DIRECTORY . '/app/Optional/site_off.php';
-                hl_preliminary_exit();
-            }
-        }
-
+        // Сайт отключен, кроме Tl5 (The site is disabled, except Tl5)
+        // enable - включен (disabled - выклчючен)
+        $site = 'enable';  
         if (!empty($account['user_id'])) {
             $uid['user_id']                 = $account['user_id'];
             $uid['user_login']              = $account['user_login'];
@@ -34,17 +24,23 @@ class Base
             $uid['user_ban_list']           = $account['user_ban_list'];
             $uid['notif']                   = NotificationsModel::usersNotification($account['user_id']);
 
+            if ($site == 'disabled') {
+                if ($account['user_trust_level'] != 5) {
+                    include HLEB_GLOBAL_DIRECTORY . '/app/Optional/site_off.php';
+                    hl_preliminary_exit();
+                } 
+            }
+
             Request::getResources()->addBottomScript('/assets/js/app.js');
         } else {
             self::checkCookie();
             $uid['user_id']     = 0;
             $uid['user_trust_level'] = null;
-
-            // Если сайт полностью приватен
-            if (Config::get(Config::PARAM_PRIVATE) == 1) {
-                include HLEB_GLOBAL_DIRECTORY . '/app/Optional/login.php';
+            
+            if ($site == 'disabled') {
+                include HLEB_GLOBAL_DIRECTORY . '/app/Optional/site_off.php';
                 hl_preliminary_exit();
-            }
+            }  
         }
 
         return $uid;
@@ -244,62 +240,5 @@ class Base
             redirect($redirect);
         }
         return true;
-    }
-
-    // Обрезка текста по словам
-    public static function cutWords($content, $maxlen)
-    {
-        $words = preg_split('#[\s\r\n]+#um', $content);
-        if ($maxlen < count($words)) {
-            $words = array_slice($words, 0, $maxlen);
-        }
-        $code_match = array('>', '*', '!', '[ADD:');
-        $words      = str_replace($code_match, '', $words);
-        return join(' ', $words);
-    }
-
-    // https://github.com/JacksonJeans/php-mail
-    public static function mailText($user_id, $type)
-    {
-        // TODO: Let's check the e-mail at the mention
-        if ($type == 'appealed') {
-            $setting = NotificationsModel::getUserSetting($user_id);
-            if ($setting) {
-                if ($setting['setting_email_appealed'] == 1) {
-                    $user = UserModel::getUser($user_id, 'id');
-                    $link = 'https://' . HLEB_MAIN_DOMAIN . '/u/' . $user['user_login'] . '/notifications';
-                    $message = lang('You were mentioned (@), see') . ": \n" . $link . "\n\n" . HLEB_MAIN_DOMAIN;
-                    self::sendMail($user['user_email'], Config::get(Config::PARAM_NAME) . ' - ' . lang('notification'), $message);
-                }
-            }
-        }
-
-        return true;
-    }
-
-    public static function sendMail($email, $subject = '', $message = '')
-    {
-        if (Config::get(Config::PARAM_SMTP) == 1) {
-            $mail = new Mail('smtp', [
-                'host'      => 'ssl://' . Config::get(Config::PARAM_SMTP_HOST),
-                'port'      => Config::get(Config::PARAM_SMTP_POST),
-                'username'  => Config::get(Config::PARAM_SMTP_USER),
-                'password'  => Config::get(Config::PARAM_SMTP_PASS)
-            ]);
-
-            $mail->setFrom(Config::get(Config::PARAM_SMTP_USER))
-                ->setTo($email)
-                ->setSubject($subject)
-                ->setText($message)
-                ->send();
-       } else {
-            $mail = new Mail();
-            $mail->setFrom(Config::get(Config::PARAM_EMAIL), Config::get(Config::PARAM_HOME_TITLE));
-             
-            $mail->to($email)
-                ->setSubject($subject)
-                ->setHTML($message, true)
-                ->send();
-       }
     }
 }

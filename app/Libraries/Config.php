@@ -15,11 +15,7 @@ class Config
     const PARAM_MODE            = "parameters.mode";
     const PARAM_INVITE          = "parameters.invite";
 
-    const PARAM_PRIVATE         = "parameters.private";
-
     const PARAM_SEARCH          = "parameters.search";
-
-    const PARAM_SITE_OFF        = "parameters.siteoff";
 
     const PARAM_EMAIL           = "parameters.email";
     const PARAM_SMTP            = "parameters.smtp";
@@ -49,7 +45,7 @@ class Config
     public static function get(string $name): string
     {
         if (is_null(self::$data)) {
-            self::$data = parse_ini_file(HLEB_GLOBAL_DIRECTORY . '/config.ini');
+            self::$data = parse_ini_file(HLEB_GLOBAL_DIRECTORY . '/config/config.ini');
         }
         return self::$data[$name];
     }

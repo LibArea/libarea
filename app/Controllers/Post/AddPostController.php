@@ -5,7 +5,7 @@ namespace App\Controllers\Post;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{NotificationsModel, SubscriptionModel, ActionModel, SpaceModel, WebModel, PostModel, TopicModel, UserModel};
-use Agouti\{Content, Config, Base, UploadImage, Integration, Validation};
+use Agouti\{Content, Config, Base, UploadImage, Integration, Validation, SendEmail};
 use UrlRecord;
 use URLScraper;
 
@@ -83,7 +83,7 @@ class AddPostController extends MainController
                     'link_status'       => 200,
                     'link_category_id'  => 1,
                 ];
-                WebModel::addLink($data);
+                WebModel::add($data);
             } else {
                 WebModel::addLinkCount($post_url_domain);
             }
@@ -174,7 +174,7 @@ class AddPostController extends MainController
                 }
                 $type = 10; // Упоминания в посте      
                 NotificationsModel::send($this->uid['user_id'], $user_id, $type, $last_post_id, $url_post, 1);
-                Base::mailText($user_id, 'appealed');
+                SendEmail::mailText($user_id, 'appealed');
             }
         }
 

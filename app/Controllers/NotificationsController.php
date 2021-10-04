@@ -4,8 +4,8 @@ namespace App\Controllers;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\{NotificationsModel, UserModel};
-use Agouti\{Config, Base};
+use App\Models\NotificationsModel;
+use Agouti\Base;
 
 class NotificationsController extends MainController
 {
@@ -14,7 +14,6 @@ class NotificationsController extends MainController
     {
         $login  = Request::get('login');
         $uid    = Base::getUid();
-        $user   = UserModel::getUser($uid['user_login'], 'slug');
 
         // Если страница закладок не участника
         if ($login != $uid['user_login']) {
@@ -31,7 +30,7 @@ class NotificationsController extends MainController
         }
 
         $meta = [
-            'meta_title'    => lang('notifications') . ' | ' . Config::get(Config::PARAM_NAME),
+            'meta_title'    => lang('notifications'),
             'sheet'         => 'notifications',
         ];
 

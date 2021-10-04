@@ -5,7 +5,7 @@ namespace App\Controllers\Auth;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\UserModel;
-use Agouti\{Config, Base, Integration, Validation};
+use Agouti\{Config, Base, Integration, Validation, SendEmail};
 
 class RecoverController extends MainController
 {
@@ -56,7 +56,7 @@ class RecoverController extends MainController
         // Отправка e-mail
         $newpass_link = 'https://' . HLEB_MAIN_DOMAIN . $recover_uri . '/remind/' . $code;
         $mail_message = lang('your link to change your password'). ": \n" . $newpass_link . "\n\n";
-        Base::sendMail($email, Config::get(Config::PARAM_NAME) . ' — ' . lang('changing your password'), $mail_message);
+        SendEmail::send($email, Config::get(Config::PARAM_NAME) . ' — ' . lang('changing your password'), $mail_message);
 
         addMsg(lang('new password has been sent to e-mail'), 'success');
         redirect(getUrlByName('login'));

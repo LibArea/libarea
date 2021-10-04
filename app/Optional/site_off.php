@@ -1,47 +1,40 @@
-<?php
-/* Actual 404 error page */
-/* Актуальная страница 404 ошибки */
-header($_SERVER["SERVER_PROTOCOL"] . " 404 Not Found");
-?><html>
+<html>
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>Disabled (отключен)</title>
-  <link href="/assets/css/404.css" rel="stylesheet" type="text/css">
+  <title><?= lang('site under reconstruction '); ?></title>
+  <link href="/assets/css/style.css" rel="stylesheet" type="text/css">
   <link rel="icon" href="/favicon.ico" type="image/png">
 </head>
 
-<body>
-  <div class="container">
-    <div class="header">
-      <div class="logo">
-        <a title="На главную" href="/">DEV</a>
-      </div>
+<body class="bg-gray-000 pb20 mb20">
+  <div class="wrap max-w-460 items-center mt20 pt20 mb20 pb20">
+    <div class="left mr20">
+      <h1 class="size-31 font-semibold gray mb0">Opss</h1>
+      <p class="gray-light"><?= lang('site under reconstruction'); ?>...</p>
     </div>
-    <div class="telo">
-      <div class="telo-r">
-        <div class="telo-txt">Сайт находится на реконструкции</div>
-        <div class="telo-indent"></div>
-        <div class="telo-404"><small>Disabled</small></div>
-      </div>
-      <div class="telo-l">
-        <svg xmlns="http://www.w3.org/2000/svg" class="svg-404" viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-          <path d="M6 17.6l-2 -1.1v-2.5"></path>
-          <path d="M4 10v-2.5l2 -1.1"></path>
-          <path d="M10 4.1l2 -1.1l2 1.1"></path>
-          <path d="M18 6.4l2 1.1v2.5"></path>
-          <path d="M20 14v2.5l-2 1.12"></path>
-          <path d="M14 19.9l-2 1.1l-2 -1.1"></path>
-          <line stroke="#ddd" x1="12" y1="12" x2="14" y2="10.9"></line>
-          <line x1="18" y1="8.6" x2="20" y2="7.5"></line>
-          <line stroke="#ddd" x1="12" y1="12" x2="12" y2="14.5"></line>
-          <line x1="12" y1="18.5" x2="12" y2="21"></line>
-          <path stroke="#ddd" d="M12 12l-2 -1.12"></path>
-          <line x1="6" y1="8.6" x2="4" y2="7.5"></line>
-        </svg>
-      </div>
+    <div class="left ml20 mt20 right">
+      <img class="mt15" src="/assets/images/agouti_footer.gif">
     </div>
+  </div>
+  <div class="block mt20 pt20 mb20 pb20"></div>
+  <div class="wrap max-w-460 items-center mt20 pt20 mb20 pb20">
+      <form class="" action="/login" method="post">
+        <?php csrf_field(); ?>
+        <div class="boxline">
+          <label for="email" class="form-label">E-mail</label>
+          <input type="text" class="form-input" placeholder="<?= lang('enter'); ?>  e-mail" name="email" id="email">
+        </div>
+        <div class="boxline">
+          <label for="password" class="form-label"><?= lang('password'); ?></label>
+          <input type="password" placeholder="<?= lang('enter your password'); ?>" name="password" id="password" class="form-input">
+        </div>
+        <div class="boxline">
+          <button type="submit" class="button-primary pt10 pr15 pb10 pl15 size-13 white">
+            <?= lang('sign in'); ?>
+          </button>
+        </div>
+      </form>
   </div>
 </body>
 

@@ -5,7 +5,7 @@ namespace App\Controllers\User;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\UserModel;
-use Agouti\{Config, Base, Validation};
+use Agouti\{Base, Validation};
 
 class InvitationsUserController extends MainController
 {
@@ -37,7 +37,7 @@ class InvitationsUserController extends MainController
 
         $meta = [
             'sheet'         => 'invites',
-            'meta_title'    => lang('invites') . ' | ' . Config::get(Config::PARAM_NAME),
+            'meta_title'    => lang('invites'),
         ];
 
         $data = [

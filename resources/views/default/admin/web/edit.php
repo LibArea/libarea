@@ -35,6 +35,7 @@
             <textarea name="link_content" rows="4" required><?= $data['domain']['link_content']; ?></textarea>
             <div class="size-14 gray-light-2">24 - 1500 <?= lang('characters'); ?></div>
           </div>
+          <?= includeTemplate('/_block/form/select-content', ['type' => 'topic', 'data' => $data, 'action' => 'edit', 'title' => lang('topics')]); ?>
           <input type="hidden" name="link_id" value="<?= $data['domain']['link_id']; ?>">
           <input type="submit" class="button block br-rd-5 white" name="submit" value="<?= lang('edit'); ?>" />
         </form>

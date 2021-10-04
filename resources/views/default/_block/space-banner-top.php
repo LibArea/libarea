@@ -30,7 +30,7 @@
     <?php } ?>
     <div class="flex flex-row gap-4 flex-auto">
       <?= spase_logo_img($data['space']['space_img'], 'max', $data['space']['space_name'], 'mr10 ml10 w110'); ?>
-      <a class="white" title="<?= $data['space']['space_name']; ?>" href="<?= getUrlByName('space', ['slug' => $data['space']['space_slug']]); ?>">
+      <a class="white white-hover" title="<?= $data['space']['space_name']; ?>" href="<?= getUrlByName('space', ['slug' => $data['space']['space_slug']]); ?>">
         <h1 class="size-31 mt5 mr0 mb10 ml0 p0 "><?= $data['space']['space_name']; ?></h1>
 
         s/<?= $data['space']['space_slug']; ?>

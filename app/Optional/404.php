@@ -3,7 +3,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>Ошибка 404</title>
+  <title>Error 404</title>
   <link href="/assets/css/style.css" rel="stylesheet" type="text/css">
   <link rel="icon" href="/favicon.ico" type="image/png">
 </head>
@@ -12,10 +12,10 @@
   <div class="wrap max-w-460 items-center pt60 pr10 pl10">
     <div class="left mr20">
       <h1 class="size-31 font-semibold gray mb0">404</h1>
-      <p class="gray-light">Страница не существует</p>
-      <a class="button br-rd-5 white" href="/">На главную</a>
+      <p class="gray-light"><?= lang('the page does not exist'); ?></p>
+      <a class="button br-rd-5 white" href="/"><?= lang('to main'); ?></a>
       <div class="mt15 size-14 gray-light-2">
-        Возможно она была удалена...
+        <?= lang('the page has been removed'); ?>...
       </div>
     </div>
     <div class="left ml20 right">

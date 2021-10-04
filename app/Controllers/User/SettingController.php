@@ -5,7 +5,7 @@ namespace App\Controllers\User;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{UserModel, NotificationsModel};
-use Agouti\{Config, Base, UploadImage, Validation};
+use Agouti\{Base, UploadImage, Validation};
 
 class SettingController extends MainController
 {
@@ -89,7 +89,6 @@ class SettingController extends MainController
     // Форма загрузки аватарки
     function avatarForm()
     {
-
         $login  = Request::get('login');
 
         // Ошибочный Slug в Url
@@ -124,7 +123,7 @@ class SettingController extends MainController
 
         $meta = [
             'sheet'         => 'security',
-            'meta_title'    => lang('change password') . ' | ' . Config::get(Config::PARAM_NAME),
+            'meta_title'    => lang('change password'),
         ];
 
         $data = [

@@ -102,6 +102,28 @@ class TopicModel extends MainModel
         return true;
     }
 
+    public static function addLinkTopics($rows, $link_id)
+    {
+        self::deleteLinkRelation($link_id);
+
+        foreach ($rows as $row) {
+            $sql = "INSERT INTO topics_link_relation (relation_topic_id, relation_link_id) 
+                        VALUES ($row[0], $row[1])";
+
+            DB::run($sql);
+        }
+
+        return true;
+    }
+
+    // Удалить записи id поста из таблицы связи
+    public static function deleteLinkRelation($link_id)
+    {
+        $sql = "DELETE FROM topics_link_relation WHERE relation_link_id =  $link_id";
+
+        return DB::run($sql);
+    }
+
     // Удалить записи id поста из таблицы связи
     public static function deletePostRelation($post_id)
     {

@@ -5,7 +5,7 @@ namespace App\Controllers\Auth;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{UserModel, AuthModel};
-use Agouti\{Config, Base, Integration, Validation};
+use Agouti\{Config, Base, Integration, Validation, SendEmail};
 
 class RegisterController extends MainController
 {
@@ -109,8 +109,8 @@ class RegisterController extends MainController
         // Отправка e-mail
         $link = 'https://' . HLEB_MAIN_DOMAIN . '/email/activate/' . $email_code;
         $mail_message = lang('activate e-mail') . ": \n" . $link . "\n\n";
-        Base::sendMail($email, Config::get(Config::PARAM_NAME) . ' — ' . lang('checking e-mail'), $mail_message);
-
+        SendEmail::send($email, Config::get(Config::PARAM_NAME) . ' — ' . lang('checking e-mail'), $mail_message);
+        
         addMsg(lang('check your e-mail to activate your account'), 'success');
 
         redirect(getUrlByName('login'));

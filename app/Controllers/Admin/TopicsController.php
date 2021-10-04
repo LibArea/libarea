@@ -95,6 +95,7 @@ class TopicsController extends MainController
             'topic_related'     => $topic_related,
             'topic_parent_id'   => $topic_parent_id,
             'post_related'      => $post_related,
+            'sheet'             => 'topics',
         ];
 
         return view('/admin/topic/edit', ['meta' => $meta, 'uid' => $this->uid, 'data' => $data]);

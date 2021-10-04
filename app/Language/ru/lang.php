@@ -168,6 +168,7 @@ return [
     'all'               => 'Все',
     'you'               => 'Вы',
     'from'              => 'От',
+    'by'                => 'по',
     'in'                => 'В',
     'on'                => 'на',
     'for'               => 'Для',
@@ -399,9 +400,9 @@ return [
     'you were mentioned (@), see'       => 'Вас упомянули (@), посмотреть',
     'your link to change your password' => 'Ваша ссылка для изменения пароля',
     'changing your password'            => 'изменение пароля',
-    'activate E-mail'                   => 'Ссылка для активации E-mail',
+    'activate e-mail'                   => 'Ссылка для активации E-mail',
     'checking e-mail'                   => 'проверка e-mail',
-
+    'sites'                 => 'Сайты',
     'there are no domains'  => 'Доменов нет',
     'change the site'       => 'Изменить сайт',
     'add a website'         => 'Добавить сайт',
@@ -429,7 +430,8 @@ return [
     'invitations left'      => 'Осталось приглашений',
     'no-space-to-add'       => 'У вас нет пространств для добавления поста. <a href="/spaces">Подпишитесь</a> на пространста',
 
-    'limiting-mode-1'       => 'Вы не можете публиковать материалы, ваш аккаунт проверяется',
+    'site under reconstruction'             => 'Сайт на реконструкции',
+    'limiting-mode-1'                       => 'Вы не можете публиковать материалы, ваш аккаунт проверяется',
     'the dialog does not exist'             => 'Указанного диалога не существует',
     'the topic does not exist'              => 'Указанной темы не существует',
     'the site is already there'             => 'Такой сайт уже есть в системе',
@@ -472,6 +474,9 @@ return [
     'the search has not given any results'          => 'Поиск не дал результатов',
     'personal messages with site participants'      => 'Личные сообщения с участниками сайта',
     'responses from community members'              => 'Ответы участников сообщества',
+    'the page does not exist'                       => 'Страница не существует',
+    'to main'                                       => 'На главную',
+    'the page has been removed'                     => 'Возможно она была удалена',
     
     'welcome-info' => '<p>Спасибо за регистрацию! Здесь вы найдете краткую информацию о том, как пользоваться этим сайтом.</p>
     <p>Этот сайт состоит из <a href="/spaces">пространств</a>. Вы автоматически подписываетесь только на одно пространство — <a href="/s/meta">/s/meta</a>. Посты из которого вы и будете видеть (после авторизации) на главной странице сайта (в ленте).</p>

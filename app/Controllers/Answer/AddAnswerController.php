@@ -5,7 +5,7 @@ namespace App\Controllers\Answer;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{NotificationsModel, ActionModel, AnswerModel, PostModel, UserModel};
-use Agouti\{Content, Base, Validation};
+use Agouti\{Content, Base, Validation, SendEmail};
 
 class AddAnswerController extends MainController
 {
@@ -79,7 +79,7 @@ class AddAnswerController extends MainController
                 }
                 $type = 11; // Упоминания в ответе      
                 NotificationsModel::send($uid['user_id'], $user_id, $type, $last_id, $url_answer, 1);
-                Base::mailText($user_id, 'appealed');
+                SendEmail::mailText($user_id, 'appealed');
             }
         }
 

@@ -59,6 +59,7 @@ img {
 .bottom0 { bottom: 0; }
 .left0 { left: 0; }
 
+.ml-auto { margin-left: auto; }
 .m0 { margin: 0; }
 .mt0 { margin-top: 0; }
 .mr0 { margin-right: 0; }
@@ -134,6 +135,7 @@ img {
 .blue { color: #3ea7e2; }
 .white { color: #fff; }
 .red { color: #e45735; }
+.white-hover:hover { color: #ece5e5; }
 
 .bg-white { background-color: #fff; }
 .bg-red-100 { background-color: #fde7e9; }

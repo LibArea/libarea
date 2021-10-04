@@ -5,7 +5,7 @@ namespace App\Controllers\Comment;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{NotificationsModel, ActionModel, AnswerModel, CommentModel, PostModel, UserModel};
-use Agouti\{Content, Config, Base, Validation};
+use Agouti\{Content, Config, Base, Validation, SendEmail};
 
 class AddCommentController extends MainController
 {
@@ -101,7 +101,7 @@ class AddCommentController extends MainController
                 }
                 $type = 12; // Упоминания в комментарии      
                 NotificationsModel::send($uid['user_id'], $user_id, $type, $last_comment_id, $url_comment, 1);
-                Base::mailText($user_id, 'appealed');
+                SendEmail::mailText($user_id, 'appealed');
             }
         }
 

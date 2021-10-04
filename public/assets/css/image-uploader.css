@@ -62,7 +62,8 @@ a.img-remove {
   background-color: #f3f3f3;
 }
 
-.img-topic-edit {
+.img-topic-edit,
+.edit-topic .uploaded-image img {
   float: left;
   border: 1px solid #d9d9d9;
   padding: 7px;

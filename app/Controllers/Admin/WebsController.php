@@ -4,7 +4,7 @@ namespace App\Controllers\Admin;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\Admin\WebModel;
+use App\Models\{WebModel, TopicModel};
 use Agouti\{Base, Content, Validation};
 
 class WebsController extends MainController
@@ -50,6 +50,9 @@ class WebsController extends MainController
     // Форма добавление домена
     public function addPage()
     {
+        Request::getResources()->addBottomStyles('/assets/css/select2.css');
+        Request::getResources()->addBottomScript('/assets/js/select2.min.js');
+
         $meta = [
             'meta_title'    => lang('add a website'),
             'sheet'         => 'domains',
@@ -105,6 +108,9 @@ class WebsController extends MainController
         $domain_id  = Request::getInt('id');
         $domain     = WebModel::getLinkId($domain_id);
 
+        Request::getResources()->addBottomStyles('/assets/css/select2.css');
+        Request::getResources()->addBottomScript('/assets/js/select2.min.js');
+
         $meta = [
             'meta_title'    => lang('change the site') . ' | ' . $domain['link_url_domain'],
             'sheet'         => 'domains',
@@ -113,6 +119,7 @@ class WebsController extends MainController
         $data = [
             'domain'        => $domain,
             'sheet'         => 'domains',
+            'topic_select'  => WebModel::getLinkTopic($domain['link_id']),
         ];
 
         return view('/admin/web/edit', ['meta' => $meta, 'uid' => $this->uid, 'data' => $data]);
@@ -133,6 +140,9 @@ class WebsController extends MainController
         $url_domain     = Request::getPost('link_domain');
         $link_status    = Request::getPostInt('link_status');
 
+        $post_fields    = Request::getPost() ?? [];
+        $topics         = $post_fields['topic_select'] ?? [];
+
         Validation::Limits($link_title, lang('title'), '24', '250', $redirect);
         Validation::Limits($link_content, lang('description'), '24', '1500', $redirect);
 
@@ -144,18 +154,27 @@ class WebsController extends MainController
             'link_content'      => $link_content,
             'link_user_id'      => $this->uid['user_id'],
             'link_type'         => 0,
-            'link_status'       => 200,
+            'link_status'       => $link_status,
             'link_category_id'  => 1,
         ];
 
         WebModel::editLink($data);
+
+        if (!empty($topics)) {
+            $arr = [];
+            foreach ($topics as $row) {
+                $arr[] = array($row, $link['link_id']);
+            }
+            TopicModel::addLinkTopics($arr, $link['link_id']);
+        }
+
 
         redirect($redirect);
     }
 
     public function favicon()
     {
-        $link_id    = \Request::getPostInt('id');
+        $link_id    = Request::getPostInt('id');
         $link       = WebModel::getLinkId($link_id);
         Base::PageError404($link);
 

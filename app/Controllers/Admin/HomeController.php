@@ -4,7 +4,8 @@ namespace App\Controllers\Admin;
 
 use Hleb\Scheme\App\Controllers\MainController;
 
-use App\Models\{Admin\UserModel, SpaceModel, HomeModel, AnswerModel, CommentModel, WebModel, TopicModel, AgentModel};
+use App\Models\{Admin\UserModel, SpaceModel, HomeModel, AnswerModel, CommentModel, TopicModel, AgentModel};
+use App\Models\WebModel;
 use Agouti\Base;
 
 class HomeController extends MainController

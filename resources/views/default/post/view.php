@@ -83,7 +83,7 @@
         <?= post_img($data['post']['post_thumb_img'], $data['post']['post_title'],  'thumb right', 'thumbnails'); ?>
       <?php } ?>
       <div class="post-body full">
-        <div class="post size-18">
+        <div class="post">
           <?= $data['post']['post_content']; ?>
         </div>
 

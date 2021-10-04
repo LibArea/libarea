@@ -11,7 +11,7 @@
       <div class="bg-white br-rd-5 mt15 border-box-1 pt5 pr15 pb5 pl15">
         <?php if ($answer['answer_is_deleted'] == 0) { ?>
           <div class="flex size-14">
-            <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'ava'); ?>
+            <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'w18'); ?>
             <a class="gray mr5 ml5" href="<?= getUrlByName('user', ['login' => $answer['user_login']]); ?>">
               <?= $answer['user_login']; ?>
             </a>

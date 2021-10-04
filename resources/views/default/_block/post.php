@@ -59,7 +59,7 @@
               <span class="w10 h10 inline mr5" style="background-color: <?= $post['space_color']; ?>;"></span>
               <?= $post['space_name']; ?>
             </a>
-            <?= html_topic($post['topic_list'], 'gray-light size-14 ml15'); ?>
+            <?= html_topic($post['topic_list'], 'topic', 'gray-light size-14 ml15'); ?>
             <?php if ($post['post_url_domain']) { ?>
               <a class="gray-light size-14 ml10" href="<?= getUrlByName('domain', ['domain' => $post['post_url_domain']]); ?>">
                 <i class="bi bi-link-45deg middle"></i> <?= $post['post_url_domain']; ?>
@@ -68,7 +68,7 @@
           </div>
 
           <div class="show_add_<?= $post['post_id']; ?>">
-            <div data-post_id="<?= $post['post_id']; ?>" class="size-18 showpost mt10 mb5 gray-light">
+            <div data-post_id="<?= $post['post_id']; ?>" class="showpost mt10 mb5 gray-light">
               <?= $post['post_content_preview']; ?>
               <span class="s_<?= $post['post_id']; ?> show_detail"></span>
             </div>
@@ -97,13 +97,8 @@
           <?= votes($uid['user_id'], $post, 'post'); ?>
           <?php if ($post['post_answers_count'] != 0) { ?>
             <a class="flex gray-light-2 ml15" href="<?= $post_url; ?>">
-              <?php if ($post['post_type'] == 0) { ?>
                 <i class="bi bi-chat-dots mr5"></i>
                 <?= $post['post_answers_count'] + $post['post_comments_count']; ?>
-              <?php } else { ?>
-                <i class="bi bi-chat-dots mr5"></i>
-                <?= $post['post_answers_count']; ?> <?= $post['lang_num_answers']; ?>
-              <?php } ?>
             </a>
           <?php } ?>
         </div>

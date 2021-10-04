@@ -4,7 +4,7 @@ namespace App\Controllers\Web;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\{WebModel, FeedModel};
+use App\Models\{WebModel, FeedModel, TopicModel};
 use Agouti\{Content, Config, Base};
 
 class WebController extends MainController
@@ -93,5 +93,46 @@ class WebController extends MainController
         ];
 
         return view('/web/link', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+    }
+
+    public function sites($sheet)
+    {
+        $slug       = Request::get('slug');
+        $uid        = Base::getUid();
+        $page       = Request::getInt('page');
+        $page       = $page == 0 ? 1 : $page;
+        
+        $topic = TopicModel::getTopic($slug, 'slug');
+        Base::PageError404($topic);
+
+        $limit      = 25;
+        $links      = WebModel::feedLink($page, $limit, $uid, $sheet, $topic['topic_slug']);
+        $pagesCount = WebModel::feedLinkCount($topic['topic_slug']);
+
+        $result = array();
+        foreach ($links as $ind => $row) {
+            // + данные
+            $result[$ind]   = $row;
+        }
+
+        $meta_title = lang('sites') . ': ' . $topic['topic_title'] . ' | ' . Config::get(Config::PARAM_NAME);
+        $meta_desc  = lang('sites') . ' ' . lang('by') . ' ' . $topic['topic_title'] . '. ' . $topic['topic_description'] .' ' . Config::get(Config::PARAM_HOME_TITLE); 
+
+        $meta = [  
+            'canonical' => Config::get(Config::PARAM_URL) . getUrlByName('web topic', ['slug' => $topic['topic_slug']]),
+            'sheet'         => 'sites-topic',
+            'meta_title'    => $meta_title,
+            'meta_desc'     => $meta_desc,
+        ];
+
+        $data = [
+            'sheet'         => 'sites-topic',
+            'pagesCount'    => ceil($pagesCount / $limit),
+            'pNum'          => $page,
+            'links'         => $result,
+            'topic'         => $topic
+        ];
+
+        return view('/web/sites', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
 }

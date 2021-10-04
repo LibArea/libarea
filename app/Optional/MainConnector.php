@@ -23,17 +23,18 @@ class MainConnector implements Connector
             "App\Commands\*"                => "app/Commands/",
 
             // ... or, if a specific class is added,
-            "DB"                            => "database/DB.php",
+            "DB"                            => "app/Libraries/DB.php",
             // "Phphleb\Debugpan\DPanel"    => "app/ThirdParty/phphleb/debugpan/DPanel.php",
-            // "App\Optional\Data"             => "app/Optional/Data.php",
+            // "App\Optional\Data"          => "app/Optional/Data.php",
 
-            "Agouti\Base"                     => "app/Libraries/Base.php",
-            "Agouti\Content"                  => "app/Libraries/Content.php",
-            "Agouti\UploadImage"              => "app/Libraries/UploadImage.php",
-            "Agouti\Integration"              => "app/Libraries/Integration.php",
-            "Agouti\Validation"               => "app/Libraries/Validation.php",
-            "Agouti\Config"                   => "app/Config/Config.php",
-
+            "Agouti\Base"                   => "app/Libraries/Base.php",
+            "Agouti\Content"                => "app/Libraries/Content.php",
+            "Agouti\UploadImage"            => "app/Libraries/UploadImage.php",
+            "Agouti\Integration"            => "app/Libraries/Integration.php",
+            "Agouti\Validation"             => "app/Libraries/Validation.php",
+            "Agouti\SendEmail"              => "app/Libraries/SendEmail.php",
+            "Agouti\Config"                 => "app/Libraries/Config.php",
+            
             "UrlRecord"                     => "app/ThirdParty/UrlRecord/UrlRecord.php",
             "Parsedown"                     => "app/ThirdParty/Parsedown/Parsedown.php",
             "MyParsedown"                   => "app/ThirdParty/Parsedown/MyParsedown.php",

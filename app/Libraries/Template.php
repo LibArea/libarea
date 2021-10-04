@@ -10,7 +10,7 @@ function lang($text)
 }
 
 // Topic for posts
-function html_topic($topic, $css)
+function html_topic($topic, $slug, $css)
 {
     if (!$topic) {
         return '';
@@ -22,7 +22,7 @@ function html_topic($topic, $css)
 
     $result = array();
     foreach (array_chunk($topic, 2) as $ind => $row) {
-        $result[] = '<a class="' . $css . '" href="' . getUrlByName('topic', ['slug' => $row[0]]) . '">' . $row[1] . '</a>';
+        $result[] = '<a class="' . $css . '" href="' . getUrlByName($slug, ['slug' => $row[0]]) . '">' . $row[1] . '</a>';
     }
     return implode($result);
 }
@@ -313,6 +313,18 @@ function accessСheck($content, $type, $uid, $after, $stop_time)
     }
 
     return true;
+}
+
+// Обрезка текста по словам
+function cutWords($content, $maxlen)
+{
+    $words = preg_split('#[\s\r\n]+#um', $content);
+    if ($maxlen < count($words)) {
+        $words = array_slice($words, 0, $maxlen);
+    }
+    $code_match = array('>', '*', '!', '[ADD:');
+    $words      = str_replace($code_match, '', $words);
+    return join(' ', $words);
 }
 
 function getMsg()

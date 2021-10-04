@@ -148,6 +148,8 @@ Route::get('/web')->controller('Web\WebController')->name('web');
 Route::get('/web/page/{page?}')->controller('Web\WebController')->where(['page' => '[0-9]+']);
 Route::get('/domain/{domain}')->controller('Web\WebController@posts', ['feed'])->where(['domain' => '[A-Za-z0-9-.]+'])->name('domain');
 Route::get('/domain/{domain}/page/{page?}')->controller('Web\WebController@posts', ['feed'])->where(['domain' => '[A-Za-z0-9-.]+', 'page' => '[0-9]+']);
+Route::get('/web/{slug}')->controller('Web\WebController@sites', ['feed'])->where(['slug' => '[A-Za-z0-9-]+'])->name('web topic');
+Route::get('/web/{slug}/page/{page?}')->controller('Web\WebController@sites', ['feed'])->where(['slug' => '[A-Za-z0-9-]+', 'page' => '[0-9]+']);
 
 Route::get('/')->controller('HomeController', ['feed']);
 Route::get('/page/{page?}')->controller('HomeController', ['feed'])->where(['page' => '[0-9]+']);

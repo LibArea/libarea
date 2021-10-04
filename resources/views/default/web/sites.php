@@ -8,8 +8,9 @@
         <i class="bi bi-plus-lg middle"></i>
       </a>
     <?php } ?>
-    <h1 class="mb5"><?= lang('domains-title'); ?></h1>
-    <div class="gray size-14 mb5"><?= lang('under development'); ?>...</div>
+    <a href="/web" class="size-14">← <?= lang('sites'); ?></a>
+    <h1 class="mb5"><?= $data['topic']['topic_title']; ?></h1>
+    <?= $data['topic']['topic_description']; ?>
   </div>
 
   <?php if (!empty($data['links'])) { ?>
@@ -58,11 +59,5 @@
 
   <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/domains'); ?>
 </main>
-<aside class="col-span-3">
-  <div class="bg-white p15  border-box-1">
-    <?= lang('domains-desc'); ?>...
-  </div>
-  <div class="bg-white br-rd-5 border-box-1 mt15 pt5 pr15 pb5 pl15 space-tags">
-    <?= includeTemplate('/_block/domains', ['data' => $data['domains']]); ?>
-  </div>
-</aside>
+<?= includeTemplate('/_block/aside-lang', ['lang' => lang('domains-desc')]); ?>
+</div>

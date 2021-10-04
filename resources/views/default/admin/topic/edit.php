@@ -10,7 +10,7 @@
       <form action="/admin/topic/edit/<?= $data['topic']['topic_id']; ?>" method="post" enctype="multipart/form-data">
         <?= csrf_field() ?>
 
-        <div class="box-form-img">
+        <div class="box-form-img edit-topic">
           <div class="boxline">
             <div class="input-images"></div>
           </div>

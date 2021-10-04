@@ -22,9 +22,27 @@ class WebModel extends MainModel
                     link_votes,
                     link_count,
                     link_is_deleted,
+                    rel.*,
                     votes_link_user_id, 
                     votes_link_item_id
-                        FROM links 
+                        FROM links
+                        LEFT JOIN
+                        (
+                            SELECT 
+                                MAX(topic_id), 
+                                MAX(topic_slug), 
+                                MAX(topic_title),
+                                MAX(relation_topic_id), 
+                                relation_link_id,
+
+                                GROUP_CONCAT(topic_slug, '@', topic_title SEPARATOR '@') AS topic_list
+                                FROM topics  
+                                LEFT JOIN topics_link_relation 
+                                    on topic_id = relation_topic_id
+                                GROUP BY relation_link_id
+                        ) AS rel
+                            ON rel.relation_link_id = link_id 
+
                         LEFT JOIN votes_link ON votes_link_item_id = link_id AND  votes_link_user_id = $user_id
                         WHERE link_is_deleted = 0
                         ORDER BY link_id DESC LIMIT $start, $limit ";
@@ -59,6 +77,79 @@ class WebModel extends MainModel
         return DB::run($sql, ['domain' => $domain])->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // Получаем домены по условиям
+    public static function feedLink($page, $limit, $uid, $sheet, $slug)
+    {
+        $start  = ($page - 1) * $limit;
+        $sql = "SELECT 
+                    link_id,
+                    link_title,
+                    link_content,
+                    link_user_id,
+                    link_url,
+                    link_url_domain,
+                    link_votes,
+                    link_count,
+                    link_is_deleted,
+                    rel.*,
+                    votes_link_item_id, votes_link_user_id,
+                    user_id, user_login, user_avatar
+                    
+                        FROM links
+                        LEFT JOIN
+                        (
+                            SELECT 
+                                MAX(topic_id), 
+                                MAX(topic_slug), 
+                                MAX(topic_title),
+                                MAX(relation_topic_id), 
+                                relation_link_id,
+
+                                GROUP_CONCAT(topic_slug, '@', topic_title SEPARATOR '@') AS topic_list
+                                FROM topics      
+                                LEFT JOIN topics_link_relation 
+                                    on topic_id = relation_topic_id
+                                GROUP BY relation_link_id  
+                        ) AS rel
+                            ON rel.relation_link_id = link_id 
+                            
+                            INNER JOIN users ON user_id = link_user_id
+                            LEFT JOIN votes_link ON votes_link_item_id = link_id 
+                                AND votes_link_user_id = " . $uid['user_id'] . "
+                                WHERE topic_list LIKE :slug     
+                                LIMIT $start, $limit";
+
+ 
+        return DB::run($sql, ['slug' => "%" . $slug . "%"])->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function feedLinkCount($slug)
+    {
+        $sql = "SELECT 
+                    link_id,
+                    rel.*
+                        FROM links
+                        LEFT JOIN
+                        (
+                            SELECT 
+                                MAX(topic_id), 
+                                MAX(topic_slug), 
+                                MAX(topic_title),
+                                MAX(relation_topic_id), 
+                                relation_link_id,
+
+                                GROUP_CONCAT(topic_slug, '@', topic_title SEPARATOR '@') AS topic_list
+                                FROM topics      
+                                LEFT JOIN topics_link_relation 
+                                    on topic_id = relation_topic_id
+                                GROUP BY relation_link_id  
+                        ) AS rel
+                            ON rel.relation_link_id = link_id 
+                            WHERE topic_list LIKE :slug";
+
+         return DB::run($sql, ['slug' => "%" . $slug . "%"])->rowCount();
+    }
+
     // Проверим наличие домена
     public static function getLinkOne($domain, $user_id)
     {
@@ -83,7 +174,7 @@ class WebModel extends MainModel
     }
 
     // Добавим домен
-    public static function addLink($data)
+    public static function add($data)
     {
         $params = [
             'link_url'          => $data['link_url'],
@@ -125,4 +216,62 @@ class WebModel extends MainModel
         $sql = "UPDATE links SET link_count = (link_count + 1) WHERE link_url_domain = :domain";
         DB::run($sql, ['domain' => $domain]);
     }
+    
+    // Изменим домен
+    public static function editLink($data)
+    {
+        $params = [
+            'link_url'      => $data['link_url'],
+            'link_title'    => $data['link_title'],
+            'link_content'  => $data['link_content'],
+            'link_status'   => $data['link_status'],
+            'link_id'       => $data['link_id'],
+        ];
+
+        $sql = "UPDATE links 
+                    SET link_url    = :link_url,  
+                    link_title      = :link_title, 
+                    link_content    = :link_content,
+                    link_status     = :link_status 
+                        WHERE link_id  = :link_id";
+
+        return  DB::run($sql, $params);
+    }
+    
+    // Данные по id
+    public static function getLinkId($link_id)
+    {
+        $sql = "SELECT
+                    link_id,
+                    link_title,
+                    link_content,
+                    link_user_id,
+                    link_url,
+                    link_url_domain,
+                    link_votes,
+                    link_count,
+                    link_status,
+                    link_is_deleted
+                        FROM links 
+                        WHERE link_id = :link_id AND link_is_deleted = 0";
+
+
+        return DB::run($sql, ['link_id' => $link_id])->fetch(PDO::FETCH_ASSOC);
+    }
+    
+    public static function getLinkTopic($link_id)
+    {
+        $sql = "SELECT
+                    topic_id,
+                    topic_title,
+                    topic_slug,
+                    relation_topic_id,
+                    relation_link_id
+                        FROM topics  
+                        INNER JOIN topics_link_relation ON relation_topic_id = topic_id
+                            WHERE relation_link_id  = :link_id";
+
+        return DB::run($sql, ['link_id' => $link_id])->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }

@@ -163,6 +163,7 @@ return [
     'from'              => 'Din',
     'in'                => 'In',
     'on'                => 'pe',
+    'by'                => 'mod',
     'for'               => 'Pentru',
     'by default'        => 'Mod implicit',
     'just me'           => 'Doar eu',
@@ -382,8 +383,9 @@ return [
     'you were mentioned (@), see'       => 'Menționat (@), vezi',
     'your link to change your password' => 'Link-ul dvs. pentru a vă schimba parola',
     'changing your password'            => 'schimbați parola',
-    'activate E-mail'                   => 'Link pentru activarea e-mailului',
+    'activate e-mail'                   => 'Link pentru activarea e-mailului',
     'checking e-mail'                   => 'verifica e-mail',
+    'site under reconstruction'         => 'Site în reconstrucție',
     
     'there are no domains'  => 'Fără domenii',
     'change the site'       => 'Schimbați site-ul',
@@ -415,9 +417,14 @@ return [
     'users-ban'             => 'Utilizatori',
     'posts-ban'             => 'Postări',
 
+    'sites'                 => 'Sites',
     'limiting_mode_1'       => 'Nu puteți posta conținut, contul dvs. este verificat',
     'the dialog does not exist'             => 'Caseta de dialog specificată nu există',
     'the topic does not exist'              => 'Subiectul specificat nu există',
+
+    'the page does not exist'               => 'Pagina nu există',
+    'to main'                               => 'La principal ',
+    'the page has been removed'             => 'Este posibil să fi fost șters',
 
     'the site is already there'             => 'Un astfel de site este deja în sistem',
     'joined in the early days'              => 'S-a alăturat în primele zile ale lansării comunității',

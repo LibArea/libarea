@@ -22,6 +22,7 @@
                 Add title...
               <?php } ?>
             </div>
+            <?= html_topic($link['topic_list'], 'web topic', 'gray-light size-14 mr10'); ?>
             <div class="content-telo">
               <?php if ($link['link_content']) { ?>
                 <?= $link['link_content']; ?>

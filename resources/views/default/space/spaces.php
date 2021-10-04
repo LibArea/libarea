@@ -37,7 +37,7 @@
                   <?= spase_logo_img($sp['space_img'], 'max', $sp['space_name'], 'w54 mr10'); ?>
                 </a>
                 <span class="space-name">
-                  <a title="<?= $sp['space_name']; ?>" class="white size-21" href="<?= getUrlByName('space', ['slug' => $sp['space_slug']]); ?>">
+                  <a title="<?= $sp['space_name']; ?>" class="white white-hover size-21" href="<?= getUrlByName('space', ['slug' => $sp['space_slug']]); ?>">
                     <span class="space-name"> <?= $sp['space_name']; ?></span>
                   </a>
                 </span>

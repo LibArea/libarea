@@ -37,7 +37,6 @@ class UploadImage
             $file = $img['tmp_name'][0];
 
             $image = new  SimpleImage();
-
             $image
                 ->fromFile($file)  // load image.jpg
                 ->autoOrient()     // adjust orientation based on exif data
@@ -61,10 +60,8 @@ class UploadImage
 
             // Удалим старую аватарку, кроме дефолтной
             if ($foto != $default_img && $foto != $new_img) {
-                chmod($path_img . $foto, 0777);
-                chmod($path_img_small . $foto, 0777);
-                unlink($path_img . $foto);
-                unlink($path_img_small . $foto);
+                @unlink($path_img . $foto);
+                @unlink($path_img_small . $foto);
             }
 
             if ($type == 'topic') {
@@ -90,17 +87,7 @@ class UploadImage
         $file       = $img['tmp_name'];
         $filename   = 'post-' . time();
 
-        if (!is_dir($path_img)) {
-            @mkdir($path_img);
-        }
-
-        if (!is_dir($path_img . $year)) {
-            @mkdir($path_img . $year);
-        }
-
-        if (!is_dir($path_img . $year . $month)) {
-            @mkdir($path_img . $year . $month);
-        }
+        self::createDir($path_img . $year . $month);
 
         $image = new  SimpleImage();
 
@@ -124,7 +111,6 @@ class UploadImage
         return AG_PATH_POSTS_CONTENT . $year . $month . $filename . '.jpeg';
     }
 
-
     // Обложка участника и пространств
     public static function cover($cover, $content_id, $type)
     {
@@ -147,7 +133,6 @@ class UploadImage
             $file_cover = $cover['tmp_name'][0];
 
             $image = new  SimpleImage();
-
             $image
                 ->fromFile($file_cover)  // load image.jpg
                 ->autoOrient()     // adjust orientation based on exif data
@@ -167,10 +152,8 @@ class UploadImage
 
             // Удалим старую аватарку, кроме дефолтной
             if ($cover_art != $default_img && $cover_art != $new_cover) {
-                chmod($path_cover_img . $cover_art, 0777);
-                unlink($path_cover_img . $cover_art);
-                chmod($path_cover_small . $cover_art, 0777);
-                unlink($path_cover_small . $cover_art);
+                @unlink($path_cover_img . $cover_art);
+                @unlink($path_cover_small . $cover_art);
             }
             
             if ($type == 'user') {
@@ -204,9 +187,7 @@ class UploadImage
         $file = $cover['tmp_name'][0];
         $filename = 'c-' . time();
 
-        if (!is_dir($path . $year)) {
-            mkdir($path . $year, 0777, true);
-        }
+        self::createDir($path . $year);
 
         // https://github.com/claviska/SimpleImage
         $image
@@ -219,7 +200,6 @@ class UploadImage
 
         // Удалим если есть старая
         if ($post['post_content_img'] != $post_img) {
-            chmod($path . $post['post_content_img'], 0777);
             @unlink($path . $post['post_content_img']);
         }
 
@@ -237,9 +217,7 @@ class UploadImage
             $filename = 'p-' . time() . '.' . $ext;
             $file = 'p-' . time();
 
-            if (!is_dir($path . $year)) {
-                @mkdir($path . $year);
-            }
+            self::createDir($path . $year);
             $local = $path . $year . $filename;
 
             if (!file_exists($local)) {
@@ -254,12 +232,19 @@ class UploadImage
                 ->toFile($path . $year . $file . '.webp', 'image/webp');
 
             if (file_exists($local)) {
-                unlink($local);
+                @unlink($local);
             }
 
             return $year . $file . '.webp';
         }
 
         return false;
+    }
+    
+    static function createDir($path) 
+    {
+        if (!is_dir($path)) {
+                mkdir($path, 0777, true);
+        }
     }
 }
