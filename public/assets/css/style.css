@@ -190,8 +190,11 @@ img {
 .w110 { width: 110px; }
 .w130 { width: 130px; }
 .w160 { width: 160px; }
+.w200 { width: 200px; }
 
-.max-w-460 { max-width: 460px; }
+.max-w170 { max-width: 170px; }
+.max-w460 { max-width: 460px; }
+.max-w780 { max-width: 780px; }
 
 .z-10 { z-index:10; }
 .z-20 { z-index:20; }
@@ -204,9 +207,11 @@ img {
 .h30 { height: 30px; }
 .h40 { height: 40px; }
 .h120 { height: 120px; }
+.h150 { height: 150px; }
 
 .br-rd-3 { border-radius: 3px; }
 .br-rd-5 { border-radius: 5px; }
+.br-rd-20 { border-radius: 20px; }
 .br-rd-50 { border-radius: 50%; }
 
 .size-14 { font-size: 0.875rem; }
@@ -282,8 +287,6 @@ img {
 
 .border-bottom { border-bottom: 1px solid #ddd; }
 .border-bottom:last-child { border: 0; }
-.max-width { max-width: 780px; }
-nav { max-width: 170px; }
 
 .t-81 { top: 81px; }
 .post-view.sticky { top: 75px; }
@@ -415,15 +418,6 @@ textarea:focus { box-shadow: 0 0 0 0.1rem rgba(38, 139, 210, 0.2); }
   border: none;
 }
 
-.focus-topic {
-  padding: 4px 14px;
-  border-radius: 10em;
-  align-items: center;
-  text-align: center;
-  display: inline;
-  max-width: 180px;
-}
-
 .add-focus {
   background-color: #ebf0ff;
   border: 1px solid #e0e6f9;
@@ -467,11 +461,6 @@ input:focus { border: 1px solid #9ccdf8; }
 .no-pc { display: none; }
 .show_detail.hide { display: none; }
 .shown_post img { width: 100%; }
-
-.post-body.full {
-  max-width: 800px;
-  line-height: 1.6em;
-}
 
 .post-body.full img {
   max-width: 100%;

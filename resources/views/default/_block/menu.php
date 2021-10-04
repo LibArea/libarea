@@ -1,4 +1,4 @@
-<nav class="justify-between mt0 ml0 pl0 t-81 sticky size-15">
+<nav class="justify-between mt0 ml0 pl0 t-81 sticky size-15 max-w170">
   <div class="center mb15 no-mob">
     <a href="/post/add" class="button block br-rd-5 white">
       <i class="bi bi-plus-lg mr5 middle"></i> <?= lang('create'); ?>

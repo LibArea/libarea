@@ -79,7 +79,7 @@
         $n++; ?>
         <?php if ($comment['comment_is_deleted'] == 0) { ?>
           <div class="border-bottom<?php if ($n > 1) { ?> ml30<?php } ?>"></div>
-          <ol class="max-width size-15 list-none mb0 mt0">
+          <ol class="max-w780 size-15 list-none mb0 mt0">
             <li class="comment_subtree" id="comment_<?= $comment['comment_id']; ?>">
               <div class="size-14 pt5 pr5 pb5 pl5">
                 <?= $comment['comment_content'] ?>

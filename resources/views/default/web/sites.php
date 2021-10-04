@@ -10,12 +10,10 @@
     <?php } ?>
     <a href="/web" class="size-14">← <?= lang('sites'); ?></a>
     <h1 class="mb5"><?= $data['topic']['topic_title']; ?></h1>
-    <?= $data['topic']['topic_description']; ?>
-  </div>
 
   <?php if (!empty($data['links'])) { ?>
     <?php foreach ($data['links'] as $key => $link) { ?>
-      <div class="bg-white br-rd-5 border-box-1 p20 mt15">
+      <div class="pt20 pb5">
         <?php if ($uid['user_trust_level'] == 5) { ?>
           <a class="size-14 mr10 right" title="<?= lang('edit'); ?>" href="<?= getUrlByName('link-edit', ['id' => $link['link_id']]); ?>">
             <i class="bi bi-pencil size-15"></i>
@@ -30,23 +28,23 @@
             <?php } ?>
           </h2>
         </a>
-        <div class="gray mt5">
+        <div class="size-15 mt5">
           <?php if ($link['link_content']) { ?>
             <?= $link['link_content']; ?>
           <?php } else { ?>
             Add content...
           <?php } ?>
         </div>
-        <div class="flex flex-row gap-2 items-center">
+        <div class="flex flex-row gap-2 mt10 items-center">
           <div class="w18">
             <?= favicon_img($link['link_id'], $link['link_url_domain']); ?>
           </div>
           <div class="green size-14 mr20">
             <?= $link['link_url_domain']; ?>
+            <div class="pt5 lowercase">
+            <?= html_topic($link['topic_list'], 'web topic', 'gray-light mr15'); ?>
+            </div>
           </div>
-          <div class="w-auto">
-            <?= html_topic($link['topic_list'], 'web topic', 'gray-light size-14 mr15'); ?>
-          </div> 
           <div class="pt10 hidden lowercase ml-auto">
           <?= votes($uid['user_id'], $link, 'link'); ?>
           </div>
@@ -56,8 +54,9 @@
   <?php } else { ?>
     <?= includeTemplate('/_block/no-content', ['lang' => 'no']); ?>
   <?php } ?>
-
+  </div>
   <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/domains'); ?>
 </main>
-<?= includeTemplate('/_block/aside-lang', ['lang' => lang('domains-desc')]); ?>
+<?= includeTemplate('/_block/aside-lang', ['lang' => $data['topic']['topic_description']]); ?>
 </div>
+<?= includeTemplate('/_block/wide-footer'); ?>

@@ -37,7 +37,7 @@
                   <a rel="nofollow" class="gray-light mr5 ml10" href="<?= $post_url; ?>#answer_<?= $answer['answer_id']; ?>">#</a>
                   <?= includeTemplate('/_block/show-ip', ['ip' => $answer['answer_ip'], 'user_trust_level' => $uid['user_trust_level']]); ?>
                 </div>
-                <div class="mt0 mr0 mb5 ml0 size-15 max-width">
+                <div class="mt0 mr0 mb5 ml0 size-15 max-w780">
                   <?= $answer['answer_content'] ?>
                 </div>
               </div>
@@ -112,7 +112,7 @@
           <ol class="pl15 list-none<?php if ($comment['comment_comment_id'] > 0) { ?> ml30<?php } ?>">
             <li class="comment_subtree" id="comment_<?= $comment['comment_id']; ?>">
               <div class="p5">
-                <div class="max-width size-15">
+                <div class="max-w780 size-15">
                   <div class="size-14 flex">
                     <a class="gray-light" href="<?= getUrlByName('user', ['login' => $comment['user_login']]); ?>">
                       <?= user_avatar_img($comment['user_avatar'], 'small', $comment['user_login'], 'w18'); ?>
@@ -170,7 +170,7 @@
 
         <?php } else { ?>
           <?php if (accessСheck($comment, 'comment', $uid, 1, 30) === true) { ?>
-            <ol class="bg-red-300 size-14 list-none max-width size-15<?php if ($comment['comment_comment_id'] > 0) { ?> ml30<?php } ?>">
+            <ol class="bg-red-300 size-14 list-none max-w780 size-15<?php if ($comment['comment_comment_id'] > 0) { ?> ml30<?php } ?>">
               <li class="pr5" id="comment_<?= $comment['comment_id']; ?>">
                 <span class="comm-deletes gray">
                   <?= Agouti\Content::text($comment['comment_content'], 'line'); ?>

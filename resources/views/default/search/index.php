@@ -7,7 +7,7 @@
   <?php if (!empty($data['result'])) { ?>
     <?php if (Agouti\Config::get(Agouti\Config::PARAM_SEARCH) == 0) { ?>
       <?php foreach ($data['result'] as  $post) { ?>
-        <div class="search max-width mb20">
+        <div class="search max-w780 mb20">
           <a class="search-title size-21" href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
             <?= $post['post_title']; ?>
           </a>
@@ -17,7 +17,7 @@
       <?php } ?>
     <?php } else { ?>
       <?php foreach ($data['result'] as  $post) { ?>
-        <div class="search max-width mb20">
+        <div class="search max-w780 mb20">
           <div class="search-info gray size-14 lowercase">
             <?= spase_logo_img($post['space_img'], 'small', $post['space_name'], 'w18 mr5'); ?>
             <a class="search-info gray lowercase" href="<?= getUrlByName('space', ['slug' => $post['space_slug']]); ?>"><?= $post['space_name']; ?></a>
@@ -41,7 +41,7 @@
     <?= lang('info-search'); ?>
   </div>
   <?php foreach ($data['tags'] as $key => $topic) { ?>
-    <div class="search max-width mb15 ml10">
+    <div class="search max-w780 mb15 ml10">
       <a class="tags inline gray size-14" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
         <?= $topic['topic_title']; ?>
       </a>

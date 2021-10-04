@@ -35,7 +35,7 @@
               <i class="bi bi-question-lg green"></i>
             <?php } ?>
           </div>
-          <div class="size-15 max-width">
+          <div class="size-15 max-w780">
             <?= $answer['content']; ?>
           </div>
           <div class="border-bottom mb15 pb5 size-13 hidden gray">

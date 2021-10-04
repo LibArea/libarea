@@ -1,10 +1,8 @@
 <?php if ($uid['user_id'] == 0) { ?>
   <div class="col-span-12 grid items-center grid-cols-12 mb5">
-    <div class="col-span-12 bg-white border-box-1 br-rd-5 p20">
-      <div class="center">
-        <h1 class="size-31"><?= Agouti\Config::get(Agouti\Config::PARAM_BANNER_TITLE); ?></h1>
-        <div class="size-18 gray-light pb15"><?= Agouti\Config::get(Agouti\Config::PARAM_BANNER_DESC); ?>...</div>
-      </div>
+    <div class="col-span-12 bg-white border-box-1 br-rd-5 p20 center">
+      <h1 class="size-31 mt0"><?= Agouti\Config::get(Agouti\Config::PARAM_BANNER_TITLE); ?></h1>
+      <div class="size-18 gray-light mb5"><?= Agouti\Config::get(Agouti\Config::PARAM_BANNER_DESC); ?>...</div>
     </div>
   </div>
 <?php } ?>
@@ -72,8 +70,7 @@
         <?php foreach ($data['latest_answers'] as  $answer) { ?>
           <div class="mt15 mr0 mb15 ml0 pl15" style="border-left: 2px solid <?= $answer['space_color']; ?>;">
             <div class="size-14 gray-light">
-              <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'w18'); ?>
-              <span class="ml5"></span>
+              <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'w18 ml5'); ?>
               <?= $answer['answer_date']; ?>
             </div>
             <a class="black" href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">
@@ -83,7 +80,6 @@
         <?php } ?>
       </div>
     <?php } ?>
-
     <?= includeTemplate('/_block/footer-sidebar'); ?>
   </div>
 </aside>

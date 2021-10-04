@@ -89,7 +89,6 @@ function post_img($file, $alt, $style, $type, $attributes = '')
     return $img;
 }
 
-// Favicon 
 function favicon_img($link_id, $alt)
 {
     if (file_exists(HLEB_PUBLIC_DIR . AG_PATH_FAVICONS . $link_id . '.png')) {
@@ -98,6 +97,17 @@ function favicon_img($link_id, $alt)
     }
 
     $img = '<img class="mr5" src="'. AG_PATH_FAVICONS . 'no-link.png" alt="' . $alt . '">';
+    return $img;
+}
+
+function thumbs_img($url_domain, $alt)
+{
+    if (file_exists(HLEB_PUBLIC_DIR . AG_PATH_THUMBS . $url_domain . '.png')) {
+        $img = '<img class="mr5 w200" src="'. AG_PATH_THUMBS . $url_domain . '.png" alt="' . $alt . '">';
+        return $img;
+    }
+
+    $img = '<img class="mr5 w200" src="'. AG_PATH_THUMBS . 'default.png" alt="' . $alt . '">';
     return $img;
 }
 

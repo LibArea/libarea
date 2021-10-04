@@ -2,7 +2,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title><?= lang('site under reconstruction '); ?></title>
+  <title><?= lang('site under reconstruction'); ?></title>
   <link href="/assets/css/style.css" rel="stylesheet" type="text/css">
   <link rel="icon" href="/favicon.ico" type="image/png">
 </head>

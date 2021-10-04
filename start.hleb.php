@@ -190,8 +190,7 @@ define('HLEB_PROJECT_VALIDITY_URL', "/^[А-Яа-яa-zA-Z0-9\_\-\/\.]+$/u");
  | Файлы конфигурации
  |-----------------------------------------------------------------------------
  |
- | Если вы хотите использовать свой шаблон, то измените название папки.
- | Шаблон по умолчанию: default
+ | Файлы конфигурации базы данных и общие настройки сайта
  |
  */
 
@@ -270,3 +269,4 @@ define('AG_PATH_POSTS_COVER', '/uploads/posts/cover/');
 define('AG_PATH_POSTS_THUMB', '/uploads/posts/thumbnails/');
 
 define('AG_PATH_FAVICONS', '/uploads/favicons/');
+define('AG_PATH_THUMBS', '/uploads/thumbs/');

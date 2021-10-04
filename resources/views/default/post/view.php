@@ -82,7 +82,7 @@
       <?php if ($data['post']['post_thumb_img']) { ?>
         <?= post_img($data['post']['post_thumb_img'], $data['post']['post_title'],  'thumb right', 'thumbnails'); ?>
       <?php } ?>
-      <div class="post-body full">
+      <div class="post-body max-w780 full">
         <div class="post">
           <?= $data['post']['post_content']; ?>
         </div>
@@ -162,16 +162,16 @@
       </div>
       <div class="hidden">
         <?php if (!$uid['user_id']) { ?>
-          <a class="right size-14 mt5 add-focus focus-topic" href="<?= getUrlByName('login'); ?>">
+          <a class="right size-14 mt5 add-focus br-rd-20 center pt5 pr15 pb5 pl15" href="<?= getUrlByName('login'); ?>">
             + <?= lang('Read'); ?>
           </a>
         <?php } else { ?>
           <?php if (is_array($data['post_signed'])) { ?>
-            <div data-id="<?= $data['post']['post_id']; ?>" data-type="post" class="focus-id size-14 right mt5 del-focus focus-topic">
+            <div data-id="<?= $data['post']['post_id']; ?>" data-type="post" class="focus-id size-14 right mt5 del-focus br-rd-20 center pt5 pr15 pb5 pl15">
               <?= lang('unsubscribe'); ?>
             </div>
           <?php } else { ?>
-            <div data-id="<?= $data['post']['post_id']; ?>" data-type="post" class="focus-id size-14 right mt5 add-focus focus-topic">
+            <div data-id="<?= $data['post']['post_id']; ?>" data-type="post" class="focus-id size-14 right mt5 add-focus br-rd-20 center pt5 pr15 pb5 pl15">
               + <?= lang('read'); ?>
             </div>
           <?php } ?>
