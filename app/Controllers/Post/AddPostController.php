@@ -4,7 +4,8 @@ namespace App\Controllers\Post;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\{NotificationsModel, SubscriptionModel, ActionModel, SpaceModel, WebModel, PostModel, TopicModel, UserModel};
+use App\Models\User\UserModel;
+use App\Models\{NotificationsModel, SubscriptionModel, ActionModel, SpaceModel, WebModel, PostModel, TopicModel};
 use Agouti\{Content, Config, Base, UploadImage, Integration, Validation, SendEmail};
 use UrlRecord;
 use URLScraper;

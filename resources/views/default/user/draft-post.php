@@ -1,4 +1,4 @@
-<main class="col-span-7 mb-col-12">
+<main class="col-span-9 mb-col-12">
   <div class="bg-white pt5 pr15 pb5 pl15">
     <?= breadcrumb('/', lang('home'), getUrlByName('user', ['login' => $uid['user_login']]), lang('profile'), lang('drafts')); ?>
   </div>

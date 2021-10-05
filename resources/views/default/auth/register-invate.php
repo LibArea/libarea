@@ -1,4 +1,4 @@
-<main class="bg-white br-rd-5 border-box-1 pt5 pr15 pb5 pl15">
+<main class="col-span-12 mb-col-12 bg-white br-rd-5 border-box-1 pt5 pr15 pb5 pl15">
   <h1><?= lang('registration by invite'); ?></h1>
   <div class="form mini">
     <form class="" action="<?= getUrlByName('register'); ?>/add" method="post">

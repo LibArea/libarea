@@ -444,7 +444,7 @@ return [
     'multiple-accounts'                     => 'Не регистрируйте множественные аккаунты',
     'password-spaces'                       => 'Пароль не может содержать пробелов',
     'nickname-repeats-characters'           => 'В никнейме слишком много повторяющихся символов',
-    'The code is incorrect'                 => 'Код неверен, или он уже использовался',
+    'the code is incorrect'                 => 'Код неверен, или он уже использовался',
     'interesting spaces'                    => 'пространства, которые вам интересны',
     'format-cover-post'                     => 'Ширина, больше 500px. Ориентация горизонтальная',
     'e-mail or password is not correct'     => 'E-mail или пароль не верен',

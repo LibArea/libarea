@@ -4,7 +4,7 @@ namespace App\Controllers\User;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\{UserModel, NotificationsModel};
+use App\Models\User\{SettingModel, UserModel};
 use Agouti\{Base, UploadImage, Validation};
 
 class SettingController extends MainController
@@ -29,7 +29,6 @@ class SettingController extends MainController
         }
 
         // Если пользователь забанен
-        $user = UserModel::getUser($this->uid['user_id'], 'id');
         Base::accountBan($user);
 
         $meta = [
@@ -53,8 +52,7 @@ class SettingController extends MainController
         $public_email       = Request::getPost('public_email');
         $design_is_minimal  = Request::getPostInt('design_is_minimal');
 
-        $redirect       = getUrlByName('setting', ['login' => $this->uid['user_login']]);
-
+        $redirect   = getUrlByName('setting', ['login' => $this->uid['user_login']]);
         Validation::Limits($name, lang('name'), '3', '11', $redirect);
         Validation::Limits($about, lang('about me'), '0', '255', $redirect);
         
@@ -64,13 +62,20 @@ class SettingController extends MainController
         
         $_SESSION['account']['user_design_is_minimal'] = $design_is_minimal;
         
+        $user   = UserModel::getUser($this->uid['user_id'], 'id');
         $data = [
             'user_id'                   => $this->uid['user_id'],
+            'user_email'                => $user['user_email'],
+            'user_login'                => $user['user_login'],
             'user_name'                 => $name,
+            'user_activated'            => $user['user_activated'],
+            'user_limiting_mode'        => $user['user_limiting_mode'],
+            'user_trust_level'          => $user['user_trust_level'],
             'user_updated_at'           => date('Y-m-d H:i:s'),
             'user_color'                => Request::getPostString('color', '#339900'),
             'user_about'                => $about,
             'user_design_is_minimal'    => $design_is_minimal,
+            'user_whisper'              => $user['user_whisper'],
             'user_website'              => Request::getPostString('website', ''),
             'user_location'             => Request::getPostString('location', ''),
             'user_public_email'         => $public_email,
@@ -80,7 +85,7 @@ class SettingController extends MainController
             'user_vk'                   => Request::getPostString('vk', ''),
         ];
 
-        UserModel::editProfile($data);
+        SettingModel::editProfile($data);
 
         addMsg(lang('changes saved'), 'success');
         redirect($redirect);
@@ -112,30 +117,6 @@ class SettingController extends MainController
         return view('/user/setting/avatar', ['meta' => $meta, 'uid' => $this->uid, 'data' => $data]);
     }
 
-    // Форма изменение пароля
-    function securityForm()
-    {
-        $login  = Request::get('login');
-
-        if ($login != $this->uid['user_login']) {
-            redirect(getUrlByName('setting.security', ['login' => $this->uid['user_login']]));
-        }
-
-        $meta = [
-            'sheet'         => 'security',
-            'meta_title'    => lang('change password'),
-        ];
-
-        $data = [
-            'password'      => '',
-            'password2'     => '',
-            'password3'     => '',
-            'sheet'         => 'security',
-        ];
-
-        return view('/user/setting/security', ['meta' => $meta, 'uid' => $this->uid, 'data' => $data]);
-    }
-
     // Изменение аватарки
     function avatarEdit()
     {
@@ -158,6 +139,30 @@ class SettingController extends MainController
 
         addMsg(lang('change saved'), 'success');
         redirect($redirect);
+    }
+
+    // Форма изменение пароля
+    function securityForm()
+    {
+        $login  = Request::get('login');
+
+        if ($login != $this->uid['user_login']) {
+            redirect(getUrlByName('setting.security', ['login' => $this->uid['user_login']]));
+        }
+
+        $meta = [
+            'sheet'         => 'security',
+            'meta_title'    => lang('change password'),
+        ];
+
+        $data = [
+            'password'      => '',
+            'password2'     => '',
+            'password3'     => '',
+            'sheet'         => 'security',
+        ];
+
+        return view('/user/setting/security', ['meta' => $meta, 'uid' => $this->uid, 'data' => $data]);
     }
 
     // Изменение пароля
@@ -190,14 +195,14 @@ class SettingController extends MainController
         }
 
         $newpass = password_hash($password2, PASSWORD_BCRYPT);
-        UserModel::editPassword($account['user_id'], $newpass);
+        SettingModel::editPassword($account['user_id'], $newpass);
 
         addMsg(lang('password changed'), 'success');
         redirect($redirect);
     }
 
     // Удаление обложки
-    function userCoverRemove()
+    function coverRemove()
     {
         $login      = Request::get('login');
         $redirect   = getUrlByName('setting.avatar', ['login' => $this->uid['user_login']]);
@@ -220,7 +225,7 @@ class SettingController extends MainController
         }
 
         $date = date('Y-m-d H:i:s');
-        UserModel::userCoverRemove($user['user_id'], $date);
+        SettingModel::coverRemove($user['user_id'], $date);
         addMsg(lang('cover removed'), 'success');
 
         // Если удаляет администрация
@@ -254,7 +259,7 @@ class SettingController extends MainController
 
         $data = [
             'sheet'     => 'notifications',
-            'setting'   => NotificationsModel::getUserSetting($user['user_id']),
+            'setting'   => SettingModel::getNotifications($user['user_id']),
         ];
 
         return view('/user/setting/notifications', ['meta' => $meta, 'uid' => $this->uid, 'data' => $data]);
@@ -268,7 +273,7 @@ class SettingController extends MainController
             'setting_email_appealed'    => Request::getPostInt('setting_email_appealed'),
         ];
 
-        NotificationsModel::setUserSetting($data, $this->uid['user_id']);
+        SettingModel::setNotifications($data, $this->uid['user_id']);
         addMsg(lang('change saved'), 'success');
 
         redirect(getUrlByName('setting.notifications', ['login' => $this->uid['user_login']]));

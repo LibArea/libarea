@@ -48,9 +48,9 @@
 
           <?php if ($data['user']['user_ban_list'] == 0) { ?>
             <?php if ($data['count']['count_posts'] > 0) { ?>
-              <div class="mb5 size-15">
+              <div class="mb5 size-14">
                 <label class="required"><?= lang('posts-m'); ?>:</label>
-                <span class="right">
+                <span class="right ml5">
                   <a title="<?= lang('posts-m'); ?> <?= $data['user']['user_login']; ?>" href="<?= getUrlByName('posts.user', ['login' => $data['user']['user_login']]); ?>">
                     <?= $data['count']['count_posts']; ?>
                   </a>
@@ -58,9 +58,9 @@
               </div>
             <?php } ?>
             <?php if ($data['count']['count_answers'] > 0) { ?>
-              <div class="mb5 size-15">
+              <div class="mb5 size-14">
                 <label class="required"><?= lang('answers'); ?>:</label>
-                <span class="right">
+                <span class="right ml5">
                   <a title="<?= lang('answers'); ?> <?= $data['user']['user_login']; ?>" href="<?= getUrlByName('answers.user', ['login' => $data['user']['user_login']]); ?>">
                     <?= $data['count']['count_answers']; ?>
                   </a>
@@ -73,9 +73,9 @@
               </div>
             <?php }  ?>
             <?php if ($data['count']['count_comments'] > 0) { ?>
-              <div class="mb5 size-15">
+              <div class="mb5 size-14">
                 <label class="required"><?= lang('comments'); ?>:</label>
-                <span class="right">
+                <span class="right ml5">
                   <a title="<?= lang('comments'); ?> <?= $data['user']['user_login']; ?>" href="<?= getUrlByName('comments.user', ['login' => $data['user']['user_login']]); ?>">
                     <?= $data['count']['count_comments']; ?>
                   </a>

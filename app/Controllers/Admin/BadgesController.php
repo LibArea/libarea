@@ -4,7 +4,8 @@ namespace App\Controllers\Admin;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\{UserModel, Admin\BadgeModel};
+use App\Models\User\UserModel;
+use App\Models\Admin\BadgeModel;
 use Agouti\{Base, Validation};
 
 class BadgesController extends MainController

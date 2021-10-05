@@ -4,7 +4,8 @@ namespace App\Controllers\User;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\{NotificationsModel, UserModel, SpaceModel, PostModel};
+use App\Models\User\UserModel;
+use App\Models\{NotificationsModel, SpaceModel, PostModel};
 use Agouti\{Content, Config, Base, Validation};
 
 class UserController extends MainController
@@ -17,8 +18,8 @@ class UserController extends MainController
         $page   = $page == 0 ? 1 : $page;
 
         $limit = 42;
-        $usersCount = UserModel::getUsersAllCount();
-        $users      = UserModel::getUsersAll($page, $limit, $uid['user_id']);
+        $usersCount = UserModel::getUsersAllCount('all');
+        $users      = UserModel::getUsersAll($page, $limit, $uid['user_id'], 'noban');
         Base::PageError404($users);
 
         $meta = [

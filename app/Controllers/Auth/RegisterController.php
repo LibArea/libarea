@@ -4,7 +4,8 @@ namespace App\Controllers\Auth;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\{UserModel, AuthModel};
+use App\Models\User\{InvitationModel, UserModel};
+use App\Models\AuthModel;
 use Agouti\{Config, Base, Integration, Validation, SendEmail};
 
 class RegisterController extends MainController
@@ -97,7 +98,7 @@ class RegisterController extends MainController
 
         if ($inv_uid > 0) {
             // Если регистрация по инвайту, активируем емайл
-            UserModel::sendInvitationEmail($inv_code, $inv_uid, $reg_ip, $active_uid);
+            InvitationModel::activate($inv_code, $inv_uid, $reg_ip, $active_uid);
             addMsg(lang('successfully, log in'), 'success');
             redirect(getUrlByName('login'));
         }
@@ -120,7 +121,7 @@ class RegisterController extends MainController
     public function showInviteForm()
     {
         $code   = Request::get('code');
-        $invate = UserModel::InvitationAvailable($code);
+        $invate = InvitationModel::available($code);
         
         if (!$invate) {
             addMsg(lang('the code is incorrect'), 'error');

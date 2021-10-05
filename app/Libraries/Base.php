@@ -3,7 +3,8 @@
 namespace Agouti;
 
 use Hleb\Constructor\Handlers\Request;
-use App\Models\{NotificationsModel, UserModel, AuthModel};
+use App\Models\User\UserModel;
+use App\Models\{NotificationsModel, AuthModel};
 
 class Base
 {

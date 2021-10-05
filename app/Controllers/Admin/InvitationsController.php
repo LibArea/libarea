@@ -3,14 +3,14 @@
 namespace App\Controllers\Admin;
 
 use Hleb\Scheme\App\Controllers\MainController;
-use App\Models\UserModel;
+use App\Models\User\{InvitationModel, UserModel};
 use Agouti\Base;
 
 class InvitationsController extends MainController
 {
     public function index($sheet)
     {
-        $invite = UserModel::getInvitations();
+        $invite = InvitationModel::get();
 
         $result = array();
         foreach ($invite  as $ind => $row) {

@@ -95,6 +95,7 @@ class AddSpaceController extends MainController
 
         $data = [
             'num_add_space' => $num_add_space,
+            'sheet'         => 'spaces',
         ];
 
         return view('/space/add', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);

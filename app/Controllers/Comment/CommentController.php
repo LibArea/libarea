@@ -4,7 +4,8 @@ namespace App\Controllers\Comment;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\{CommentModel, UserModel};
+use App\Models\User\UserModel;
+use App\Models\CommentModel;
 use Agouti\{Content, Config, Base};
 
 class CommentController extends MainController

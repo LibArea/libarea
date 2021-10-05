@@ -215,12 +215,14 @@ class PostModel extends MainModel
                     post_tl,
                     post_answers_count,
                     post_space_id,
+                    post_draft,
                     post_user_id,
                     post_is_deleted
                         FROM posts
                             WHERE post_id < :post_id 
                                 AND post_space_id = :space_id 
                                 AND post_is_deleted = 0
+                                AND post_draft = 0
                                 AND post_tl <= :tl 
                                 AND post_user_id != :user_id
                                 ORDER BY post_id DESC LIMIT $quantity";

@@ -2,7 +2,7 @@
 
 namespace Agouti;
 
-use App\Models\NotificationsModel;
+use App\Models\User\SettingModel;
 use JacksonJeans\Mail;
 use JacksonJeans\MailException;
 use Agouti\Config;
@@ -14,7 +14,7 @@ class SendEmail
     {
         // TODO: Let's check the e-mail at the mention
         if ($type == 'appealed') {
-            $setting = NotificationsModel::getUserSetting($user_id);
+            $setting = SettingModel::getNotifications($user_id);
             if ($setting) {
                 if ($setting['setting_email_appealed'] == 1) {
                     $user = UserModel::getUser($user_id, 'id');

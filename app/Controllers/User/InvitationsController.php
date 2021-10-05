@@ -4,10 +4,10 @@ namespace App\Controllers\User;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\UserModel;
+use App\Models\User\{InvitationModel, UserModel};
 use Agouti\{Base, Validation};
 
-class InvitationsUserController extends MainController
+class InvitationsController extends MainController
 {
     // Показ формы создания инвайта
     public function inviteForm()
@@ -41,7 +41,7 @@ class InvitationsUserController extends MainController
         ];
 
         $data = [
-            'invitations'   => UserModel::InvitationResult($uid['user_id']),
+            'invitations'   => InvitationModel::userResult($uid['user_id']),
             'count_invites' => $user['user_invitation_available'],
         ];
 
@@ -69,7 +69,7 @@ class InvitationsUserController extends MainController
             }
         }
 
-        $inv_user = UserModel::InvitationOne($uid['user_id']);
+        $inv_user = InvitationModel::duplicate($uid['user_id']);
 
         if ($inv_user['invitation_email'] == $invitation_email) {
             addMsg(lang('invate-to-replay'), 'error');
@@ -81,7 +81,7 @@ class InvitationsUserController extends MainController
         $invitation_code    = Base::randomString('crypto', 25);
         $add_ip             = Request::getRemoteAddress();
 
-        UserModel::addInvitation($uid['user_id'], $invitation_code, $invitation_email, $add_time, $add_ip);
+        InvitationModel::create($uid['user_id'], $invitation_code, $invitation_email, $add_time, $add_ip);
 
         addMsg(lang('invite created'), 'success');
         redirect($redirect);

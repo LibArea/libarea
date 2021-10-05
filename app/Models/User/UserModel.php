@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\User;
 
 use Hleb\Scheme\App\Models\MainModel;
 use Agouti\Config;
@@ -10,30 +10,54 @@ use PDO;
 class UserModel extends MainModel
 {
     // Страница участников
-    public static function getUsersAll($page, $limit, $user_id)
+    public static function getUsersAll($page, $limit, $user_id, $sheet)
     {
+        if ($sheet == 'all') {
+            $string = "ORDER BY user_id DESC LIMIT";
+        } elseif ($sheet == 'ban') {
+            $string = "WHERE user_ban_list > 0 ORDER BY user_id DESC LIMIT";
+        } else {
+            $string = "WHERE user_is_deleted != 1 and user_ban_list != 1
+                        ORDER BY user_id = $user_id DESC, user_trust_level DESC LIMIT";
+        }
+        
         $start  = ($page - 1) * $limit;
         $sql = "SELECT  
                     user_id,
                     user_login,
-                    user_name, 
+                    user_email,
+                    user_name,
                     user_avatar,
+                    user_created_at,
+                    user_whisper,
+                    user_updated_at,
+                    user_whisper,
+                    user_trust_level,
+                    user_activated,
+                    user_invitation_id,
+                    user_limiting_mode,
+                    user_reg_ip,
+                    user_ban_list,
                     user_is_deleted
                         FROM users 
-                        WHERE user_is_deleted != 1 and user_ban_list != 1
-                        ORDER BY user_id = :user_id DESC, user_trust_level DESC LIMIT $start, $limit";
+                        $string
+                        $start, $limit";
 
-        return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // Количество
-    public static function getUsersAllCount()
+    public static function getUsersAllCount($sheet)
     {
+        $string = "WHERE user_ban_list > 0";
+        if ($sheet == 'all') {
+            $string = "";
+        }
+        
         $sql = "SELECT 
-                    user_id, 
+                    user_id,
                     user_is_deleted
-                        FROM users
-                        WHERE user_is_deleted = 0";
+                        FROM users $string";
 
         return  DB::run($sql)->rowCount();
     }
@@ -143,51 +167,12 @@ class UserModel extends MainModel
         return $sql_last_id['last_id'];
     }
 
-    // Изменение пароля
-    public static function editPassword($user_id, $password)
-    {
-        $sql = "UPDATE users SET user_password = :password WHERE user_id = :user_id";
-
-        return  DB::run($sql, ['user_id' => $user_id, 'password' => $password]);
-    }
-
     // Просмотры  
     public static function userHits($user_id)
     {
         $sql = "UPDATE users SET user_hits_count = (user_hits_count + 1) WHERE user_id = :user_id";
 
         return  DB::run($sql, ['user_id' => $user_id]);
-    }
-
-    // Изменение аватарки / обложки
-    public static function setImg($user_id, $new_img, $date)
-    {
-        $params = [
-            'user_id'           => $user_id,
-            'user_avatar'       => $new_img,
-            'user_updated_at'   => $date,
-        ];
-        
-        $sql = "UPDATE users 
-                    SET user_avatar = :user_avatar, user_updated_at = :user_updated_at 
-                    WHERE user_id = :user_id";
-
-        return  DB::run($sql, $params);
-    }
-
-    public static function setCover($user_id, $new_cover, $date)
-    {
-        $params = [
-            'user_id'           => $user_id,
-            'user_cover_art'    => $new_cover,
-            'user_updated_at'   => $date,
-        ];
-        
-        $sql = "UPDATE users 
-                    SET user_cover_art = :user_cover_art, user_updated_at = :user_updated_at 
-                    WHERE user_id = :user_id";
-
-        return  DB::run($sql, $params);
     }
 
     // TL - название
@@ -304,58 +289,6 @@ class UserModel extends MainModel
         return DB::run($sql, ['user_id' => $user_id])->fetch(PDO::FETCH_ASSOC);
     }
 
-    // Редактирование профиля
-    public static function editProfile($data)
-    {
-        $params = [
-            'user_name'                 => $data['user_name'],
-            'user_updated_at'           => $data['user_updated_at'],
-            'user_color'                => $data['user_color'],
-            'user_about'                => $data['user_about'],
-            'user_design_is_minimal'    => $data['user_design_is_minimal'],
-            'user_website'              => $data['user_website'],
-            'user_location'             => $data['user_location'],
-            'user_public_email'         => $data['user_public_email'],
-            'user_skype'                => $data['user_skype'],
-            'user_twitter'              => $data['user_twitter'],
-            'user_telegram'             => $data['user_telegram'],
-            'user_vk'                   => $data['user_vk'],
-            'user_id'                   => $data['user_id'],
-        ];
-
-        $sql = "UPDATE users SET 
-                    user_name               = :user_name,
-                    user_updated_at         = :user_updated_at,
-                    user_color              = :user_color,
-                    user_about              = :user_about,
-                    user_design_is_minimal  = :user_design_is_minimal,
-                    user_website            = :user_website,
-                    user_location           = :user_location,
-                    user_public_email       = :user_public_email,
-                    user_skype              = :user_skype,
-                    user_twitter            = :user_twitter,
-                    user_telegram           = :user_telegram,
-                    user_vk                 = :user_vk
-                        WHERE user_id       = :user_id";
-
-        return DB::run($sql, $params);
-    }
-
-    // При удаление обложки запишем дефолтную
-    public static function userCoverRemove($user_id, $date)
-    {
-        $params = [
-            'user_id'           => $user_id,
-            'user_updated_at'   => $date,
-        ];
-        
-        $sql = "UPDATE users 
-                    SET user_cover_art = 'cover_art.jpeg', user_updated_at = :user_updated_at 
-                    WHERE user_id = :user_id";
-
-        return DB::run($sql, $params);
-    }
-
     // Находит ли пользователь в бан- листе
     public static function isBan($user_id)
     {
@@ -430,97 +363,6 @@ class UserModel extends MainModel
         return DB::run($sql, ['code' => $code])->fetch(PDO::FETCH_ASSOC);
     }
 
-    // Создадим инвайт для участника
-    public static function addInvitation($user_id, $invitation_code, $invitation_email, $add_time, $add_ip)
-    {
-        $sql = "UPDATE users SET user_invitation_available = (user_invitation_available + 1) WHERE user_id = :user_id";
-
-        DB::run($sql, ['user_id' => $user_id]);
-
-        $params = [
-            'uid'               => $user_id,
-            'invitation_code'   => $invitation_code,
-            'invitation_email'  => $invitation_email,
-            'add_time'          => $add_time,
-            'add_ip'            => $add_ip,
-        ];
-
-        $sql = "INSERT INTO invitations(uid, invitation_code, invitation_email, add_time, add_ip) 
-                       VALUES(:uid, :invitation_code, :invitation_email, :add_time, :add_ip)";
-
-        return DB::run($sql, $params);
-    }
-
-    // Проверим на повтор
-    public static function InvitationOne($user_id)
-    {
-        $sql = "SELECT
-                    uid,
-                    invitation_email
-                        FROM invitations
-                        WHERE uid = :user_id";
-
-        return DB::run($sql, ['user_id' => $user_id])->fetch(PDO::FETCH_ASSOC);
-    }
-
-    // Все инвайты участинка
-    public static function InvitationResult($user_id)
-    {
-        $sql = "SELECT 
-                   uid, 
-                   active_uid,
-                   active_status,
-                   add_time,
-                   invitation_email,
-                   invitation_code,                  
-                   user_id,
-                   user_avatar,
-                   user_login
-                        FROM invitations
-                            LEFT JOIN users ON user_id = active_uid
-                            WHERE uid = :user_id
-                            ORDER BY add_time DESC";
-
-        return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    // Проверим не активированный инвайт
-    public static function InvitationAvailable($invitation_code)
-    {
-        $sql = "SELECT
-                    uid,
-                    active_status,
-                    invitation_code,
-                    invitation_email
-                        FROM invitations
-                        WHERE invitation_code = :code AND active_status = 0";
-
-        return DB::run($sql, ['code' => $invitation_code])->fetch(PDO::FETCH_ASSOC);
-    }
-
-    // Проверим не активированный инвайт и поменяем статус
-    public static function sendInvitationEmail($inv_code, $inv_uid, $reg_ip, $active_uid)
-    {
-        $params = [
-            'active_status'     => 1,
-            'active_ip'         => $reg_ip,
-            'active_time'       => date('Y-m-d H:i:s'),
-            'active_uid'        => $active_uid,
-            'invitation_code'   => $inv_code,
-            'uid'               => $inv_uid,
-        ];
-
-        $sql = "UPDATE invitations SET 
-                    active_status   = :active_status,
-                    active_ip       = :active_ip,
-                    active_time     = :active_time,
-                    active_uid      = :active_uid
-                        WHERE invitation_code = :invitation_code
-                            AND uid = :uid";
-
-        DB::run($sql, $params);
-    }
-
     // Делаем запись в таблицу активации e-mail
     public static function sendActivateEmail($user_id, $email_code)
     {
@@ -576,20 +418,5 @@ class UserModel extends MainModel
                             WHERE bu_user_id = :user_id";
 
         return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
-    }
-    
-    public static function getInvitations()
-    {
-        $sql = "SELECT 
-                    user_id,
-                    user_login,
-                    user_avatar,
-                    uid,
-                    active_uid,
-                    active_time
-                        FROM invitations 
-                        LEFT JOIN users ON active_uid = user_id ORDER BY user_id DESC";
-
-        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 }

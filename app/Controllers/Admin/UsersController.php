@@ -4,7 +4,9 @@ namespace App\Controllers\Admin;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\{Admin\UserModel, Admin\BadgeModel, Admin\AgentModel, SpaceModel};
+use App\Models\User\UserModel;
+use App\Models\User\SettingModel;
+use App\Models\{Admin\BanUserModel, Admin\BadgeModel, Admin\AgentModel, SpaceModel};
 use Agouti\{Base, Validation};
 
 class UsersController extends MainController
@@ -13,10 +15,11 @@ class UsersController extends MainController
     {
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
+        $uid    = Base::getUid();
 
         $limit = 50;
-        $pagesCount = UserModel::getUsersListForAdminCount($sheet);
-        $user_all   = UserModel::getUsersListForAdmin($page, $limit, $sheet);
+        $pagesCount = UserModel::getUsersAllCount($sheet);
+        $user_all   = UserModel::getUsersAll($page, $limit, $uid['user_id'], $sheet);
 
         $result = array();
         foreach ($user_all as $ind => $row) {
@@ -41,7 +44,7 @@ class UsersController extends MainController
             'sheet'         => $sheet == 'all' ? 'users' : 'users-ban',
         ];
 
-        return view('/admin/user/users', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
+        return view('/admin/user/users', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
 
     // Повторы IP
@@ -58,7 +61,7 @@ class UsersController extends MainController
         $results = array();
         foreach ($user_all as $ind => $row) {
             $row['duplicat_ip_reg']    = AgentModel::duplicatesRegistrationCount($row['user_id']);
-            $row['isBan']       = UserModel::isBan($row['user_id']);
+            $row['isBan']       = BanUserModel::isBan($row['user_id']);
             $results[$ind]      = $row;
         }
 
@@ -70,6 +73,7 @@ class UsersController extends MainController
         $data = [
             'results'       => $results,
             'option'        => $option,
+            'sheet'         => 'users',
         ];
 
         return view('/admin/user/logip', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
@@ -80,7 +84,7 @@ class UsersController extends MainController
     {
         $user_id    = Request::getPostInt('id');
 
-        UserModel::setBanUser($user_id);
+        BanUserModel::setBanUser($user_id);
 
         return true;
     }
@@ -94,7 +98,7 @@ class UsersController extends MainController
             redirect('/admin');
         }
 
-        $user['isBan']              = UserModel::isBan($user_id);
+        $user['isBan']              = BanUserModel::isBan($user_id);
         $user['duplicat_ip_reg']    = AgentModel::duplicatesRegistrationCount($user_id);
         $user['last_visit_logs']    = AgentModel::lastVisitLogs($user_id);
         $user['badges']             = BadgeModel::getBadgeUserAll($user_id);
@@ -165,7 +169,7 @@ class UsersController extends MainController
             'user_vk'            => $vk ?? '',
         ];
 
-        UserModel::setUserEdit($data);
+        SettingModel::editProfile($data);
 
         redirect($redirect);
     }

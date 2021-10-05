@@ -3,6 +3,7 @@
 namespace Agouti;
 
 use App\Models\{UserModel, TopicModel, SpaceModel};
+use App\Models\User\SettingModel;
 use SimpleImage;
 
 class UploadImage
@@ -70,7 +71,7 @@ class UploadImage
                 SpaceModel::setImg($content_id, $new_img);
             } else {
                 $date = date('Y-m-d H:i:s');
-                UserModel::setImg($content_id, $new_img, $date);
+                SettingModel::setImg($content_id, $new_img, $date);
             }
 
             return $new_img;
@@ -159,7 +160,7 @@ class UploadImage
             if ($type == 'user') {
                 // Запишем обложку 
                 $date = date('Y-m-d H:i:s');
-                UserModel::setCover($content_id, $new_cover, $date);
+                SettingModel::setCover($content_id, $new_cover, $date);
             } elseif ($type == 'space') {
                 SpaceModel::setCover($content_id, $new_cover);
             }

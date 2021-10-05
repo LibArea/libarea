@@ -4,7 +4,7 @@ namespace App\Controllers\Auth;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\UserModel;
+use App\Models\User\{SettingModel, InvitationModel, UserModel};
 use Agouti\{Config, Base, Integration, Validation, SendEmail};
 
 class RecoverController extends MainController
@@ -103,7 +103,7 @@ class RecoverController extends MainController
         Validation::Limits($password, lang('password'), '8', '32', getUrlByName('recover') . '/remind/' . $code);
 
         $newpass  = password_hash($password, PASSWORD_BCRYPT);
-        $news     = UserModel::editPassword($user_id, $newpass);
+        $news     = SettingModel::editPassword($user_id, $newpass);
 
         if (!$news) {
             return false;

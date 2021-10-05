@@ -26,10 +26,12 @@
       </div>
 
       <?php if ($data['user']['user_cover_art'] != 'cover_art.jpeg') { ?>
-        <img class="cover" src="<?= user_cover_url($data['user']['user_cover_art']); ?>">
-        <a class="right size-14" href="<?= getUrlByName('user', ['login' => $uid['user_login']]); ?>/delete/cover">
-          <?= lang('remove'); ?>
-        </a>
+        <div class="relative size-15">
+          <img class="block max-w-100" src="<?= user_cover_url($data['user']['user_cover_art']); ?>">
+          <a class="right size-14" href="<?= getUrlByName('user', ['login' => $uid['user_login']]); ?>/delete/cover">
+            <?= lang('remove'); ?>
+          </a>
+       </div>   
       <?php } else { ?>
         <?= lang('no-cover'); ?>...
       <?php } ?>

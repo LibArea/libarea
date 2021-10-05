@@ -4,7 +4,8 @@ namespace App\Controllers\Post;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\{PostModel, UserModel, SpaceModel, TopicModel};
+use App\Models\User\UserModel;
+use App\Models\{PostModel, SpaceModel, TopicModel};
 use Agouti\{Content, Config, Base, UploadImage, Validation};
 
 class EditPostController extends MainController

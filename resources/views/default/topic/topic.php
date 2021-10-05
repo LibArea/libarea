@@ -20,15 +20,15 @@
         <div class="mt15">
           <?php if (!$uid['user_id']) { ?>
             <a href="<?= getUrlByName('login'); ?>">
-              <div class="add-focus br-rd-20 center pt5 pr15 pb5 pl15">+ <?= lang('read'); ?></div>
+              <div class="add-focus inline br-rd-20 center pt5 pr15 pb5 pl15">+ <?= lang('read'); ?></div>
             </a>
           <?php } else { ?>
             <?php if (is_array($data['topic_signed'])) { ?>
-              <div data-id="<?= $data['topic']['topic_id']; ?>" data-type="topic" class="focus-id del-focus br-rd-20 center pt5 pr15 pb5 pl15">
+              <div data-id="<?= $data['topic']['topic_id']; ?>" data-type="topic" class="focus-id del-focus inline br-rd-20 center pt5 pr15 pb5 pl15">
                 <?= lang('unsubscribe'); ?>
               </div>
             <?php } else { ?>
-              <div data-id="<?= $data['topic']['topic_id']; ?>" data-type="topic" class="focus-id add-focus br-rd-20 center pt5 pr15 pb5 pl15">
+              <div data-id="<?= $data['topic']['topic_id']; ?>" data-type="topic" class="focus-id add-focus inline br-rd-20 center pt5 pr15 pb5 pl15">
                 + <?= lang('read'); ?>
               </div>
             <?php } ?>

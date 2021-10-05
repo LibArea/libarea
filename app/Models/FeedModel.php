@@ -13,16 +13,16 @@ class FeedModel extends MainModel
     {
         if ($type == 'space') {
             $selection   = $data['space_id'];
-            $string     = "WHERE post_space_id = :selection";
+            $string     = "WHERE post_space_id = :selection AND post_draft = 0";
         } elseif ($type == 'topic') {
             $qa         = $data['topic_slug'];
             $string     = "WHERE topic_list LIKE :qa";
         } elseif ($type == 'link') {
             $selection   = $data['link_url_domain'];
-            $string     = "WHERE post_url_domain  = :selection";
+            $string     = "WHERE post_url_domain  = :selection AND post_draft = 0";
         } else {
             $selection   = $data['post_user_id'];
-            $string     = "WHERE post_user_id  = :selection";
+            $string     = "WHERE post_user_id  = :selection AND post_draft = 0";
         }
 
 

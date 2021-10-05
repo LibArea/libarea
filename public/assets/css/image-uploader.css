@@ -143,10 +143,6 @@ a.img-remove {
   width: 150px;
 }
 
-.setting.avatar img.cover {
-  max-width: 800px;
-}
-
 .image-uploader .uploaded .uploaded-image:hover .delete-image {
   display: block;
 }

@@ -4,7 +4,8 @@ namespace App\Controllers\Answer;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\{NotificationsModel, ActionModel, AnswerModel, PostModel, UserModel};
+use App\Models\User\UserModel;
+use App\Models\{NotificationsModel, ActionModel, AnswerModel, PostModel};
 use Agouti\{Content, Base, Validation, SendEmail};
 
 class AddAnswerController extends MainController

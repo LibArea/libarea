@@ -192,6 +192,7 @@ img {
 .w160 { width: 160px; }
 .w200 { width: 200px; }
 
+.max-w-100 { max-width: 100%; }
 .max-w170 { max-width: 170px; }
 .max-w460 { max-width: 460px; }
 .max-w780 { max-width: 780px; }

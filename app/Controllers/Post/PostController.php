@@ -5,7 +5,8 @@ namespace App\Controllers\Post;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\SubscriptionModel;
-use App\Models\{UserModel, PostModel, FeedModel, AnswerModel, CommentModel, FavoriteModel};
+use App\Models\User\UserModel;
+use App\Models\{PostModel, FeedModel, AnswerModel, CommentModel, FavoriteModel};
 use Agouti\{Content, Config, Base};
 
 class PostController extends MainController

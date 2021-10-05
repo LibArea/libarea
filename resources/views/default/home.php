@@ -66,11 +66,11 @@
 
   <div class="sticky top0 t-81">
     <?php if (!empty($data['latest_answers'])) { ?>
-      <div class="last-comm border-box-1 p15 bg-white br-rd-5">
+      <div class="last-comm border-box-1 p5 pr15 pb5 pl15 bg-white br-rd-5">
         <?php foreach ($data['latest_answers'] as  $answer) { ?>
           <div class="mt15 mr0 mb15 ml0 pl15" style="border-left: 2px solid <?= $answer['space_color']; ?>;">
             <div class="size-14 gray-light">
-              <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'w18 ml5'); ?>
+              <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'w18'); ?>
               <?= $answer['answer_date']; ?>
             </div>
             <a class="black" href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">

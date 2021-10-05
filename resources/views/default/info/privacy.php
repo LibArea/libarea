@@ -4,3 +4,4 @@
     <?= $data['content']; ?>
 </main>
 <?= includeTemplate('/_block/info-page-menu', ['uid' => $uid, 'sheet' => $data['sheet']]); ?>
+<?= includeTemplate('/_block/wide-footer'); ?>
