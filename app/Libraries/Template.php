@@ -278,7 +278,7 @@ function favorite_post($user_id, $post_id, $favorite_tid)
         $blue = $favorite_tid ? 'blue' : '';
         $html .= '<span id="favorite_'. $post_id .'" class="add-favorite '. $blue .' gray-light feed-icon" data-id="' . $post_id . '" data-type="post"><i class="bi bi-bookmark middle"></i></span>';
     } else {
-        $html .= '<span class="click-no-auth gray-light feed-icon">
+        $html .= '<span class="click-no-auth gray-light-2 feed-icon">
                     <i class="bi bi-bookmark middle"></i>
                         </span>'; 
     }     

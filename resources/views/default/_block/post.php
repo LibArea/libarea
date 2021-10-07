@@ -13,7 +13,7 @@
           <?= user_avatar_img($post['user_avatar'], 'max', $post['user_login'], 'w44 br-rd-50 mr5'); ?>
           <div class="ml5">
             <?= $post['user_login']; ?>
-            <div class="gray-light size-14">
+            <div class="gray-light-2 size-14">
               <?= $post['post_date'] ?>
             </div>
           </div>

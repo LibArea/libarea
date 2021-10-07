@@ -135,7 +135,8 @@ img {
 .blue { color: #3ea7e2; }
 .white { color: #fff; }
 .red { color: #e45735; }
-.white-hover:hover { color: #ece5e5; }
+.white-hover:hover { color: #fff; }
+.white-hover-gray:hover { color: #ece5e5; }
 
 .bg-white { background-color: #fff; }
 .bg-red-100 { background-color: #fde7e9; }
@@ -170,6 +171,7 @@ img {
 .bg-gray-800 { background-color: #343a40; }
 .bg-gray-900 { background-color: #212529; }
 .bg-hover-100:hover { background-color: rgba(0, 154, 97, 0.08); }
+.bg-hover-300:hover { background-color: #5fb878; }
 
 .w-auto { width: auto; }
 .w-20 { width: 20%; }
@@ -181,6 +183,7 @@ img {
 .w-100 { width: 100%; }
 .w10 { width: 10px; }
 .w18 { width: 18px; }
+.w21 { width: 21px; }
 .w24 { width: 24px; }
 .w34 { width: 34px; }
 .w44 { width: 44px; }
@@ -382,7 +385,8 @@ textarea {
   max-width: 40rem;
   display: block;
   line-height: 1rem;
-  padding: 0.4rem 0;
+  color: #5b7083;
+  padding: 0.2rem 0 0.4rem 0;
   font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
 }
 
@@ -457,7 +461,11 @@ textarea:focus { box-shadow: 0 0 0 0.1rem rgba(38, 139, 210, 0.2); }
 
 input { border: 1px solid #ebebeb; }
 input:focus { border: 1px solid #9ccdf8; }
-::placeholder { color: #919191; }
+
+::placeholder {
+  color: #919191;
+  font-size: 15px;
+}
 
 .no-pc { display: none; }
 .show_detail.hide { display: none; }
@@ -517,34 +525,6 @@ ol.comment-telo { padding-left: 23px; }
 
 .errors > ul > li { color: #e83e8c; }
 
-.related-count {
-  background-color: #eef0f1;
-  width: 21px;
-  height: 21px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  margin-right: 5px;
-  flex-shrink: 0;
-}
-
-a.tags {
-  height: 30px;
-  padding: 0 12px;
-  line-height: 30px;
-  vertical-align: top;
-  border-radius: 10em;
-  background-color: #0066ff1a;
-  margin: 0 0 10px 0;
-}
-
-a.tags:hover,
-a.tags.avtive {
-  background-color: #5fb878;
-  color: #fff;
-}
-
 .dropdown-menu,
 .lateral-menu {
   display: none;
@@ -601,6 +581,7 @@ a.tags.avtive {
 .home-img {
   width: 250px;
   height: 160px;
+  object-fit: cover;
 }
 
 .preview .home-img { display: none; }

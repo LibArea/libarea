@@ -42,7 +42,7 @@
   </div>
   <?php foreach ($data['tags'] as $key => $topic) { ?>
     <div class="search max-w780 mb15 ml10">
-      <a class="tags inline gray size-14" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
+      <a class="bg-blue-100 bg-hover-300 white-hover flex justify-center pt5 pr10 pb5 pl10 br-rd-20 blue inline size-14" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
         <?= $topic['topic_title']; ?>
       </a>
       <sup class="gray">x<?= $topic['topic_count']; ?></sup>

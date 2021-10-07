@@ -23,12 +23,14 @@
   <?php if (!empty($data['post_select'])) { ?>
     <div class="bg-white br-rd-5 border-box-1 pt5 pr15 pb5 pl15">
       <div class="mb20">
-        <h3 class="uppercase mb5 mt0 font-light size-14 gray"><?= lang('by topic'); ?>:</h3>
+        <h3 class="uppercase mb5 mt0 font-light size-14 gray"><?= lang('by topic'); ?></h3>
         <?php $num = 0; ?>
         <?php foreach ($data['post_select'] as $related) { ?>
-          <div class="mb5">
+          <div class="mb5 flex">
             <?php $num++; ?>
-            <span class="related-count gray-light size-15"><?= $num; ?></span>
+            <div class="flex justify-center bg-gray-200 w21 mr5 br-rd-50 size-15">
+              <span class="gray-light-2"><?= $num; ?></span>
+            </div>
             <a href="<?= getUrlByName('post', ['id' => $related['post_id'], 'slug' => $related['post_slug']]); ?>">
               <?= $related['post_title']; ?>
             </a>

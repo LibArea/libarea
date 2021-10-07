@@ -8,7 +8,7 @@
         </li>
       <?php } else { ?>
         <li class="ml30 mb-mr-5 mb-ml-10">
-          <a class="gray-light-2" href="<?= $page['url']; ?>">
+          <a class="gray" href="<?= $page['url']; ?>">
             <i class="<?= $page['icon']; ?> mr5"></i>
             <span class="mb-size-13"><?= $page['content']; ?></span>
           </a>

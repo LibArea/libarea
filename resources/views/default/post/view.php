@@ -33,19 +33,19 @@
             <i class="link-link-ext blue"></i>
           <?php } ?>
         </h1>
-        <div class="size-14 lowercase flex gray-light">
+        <div class="size-14 lowercase flex gray-light-2">
           <a class="gray" href="<?= getUrlByName('user', ['login' => $data['post']['user_login']]); ?>">
             <?= user_avatar_img($data['post']['user_avatar'], 'small', $data['post']['user_login'], 'w18'); ?>
             <span class="mr5 ml5">
               <?= $data['post']['user_login']; ?>
             </span>
           </a>
-          <span class="gray-light">
-            <?= $data['post']['post_date_lang']; ?>
-            <?php if ($data['post']['modified']) { ?>
-              (<?= lang('ed'); ?>)
-            <?php } ?>
-          </span>
+          <span class="blue mr10 ml5"><i class="bi bi-mic size-14"></i></span>
+          <?= $data['post']['post_date_lang']; ?>
+          <?php if ($data['post']['modified']) { ?>
+            (<?= lang('ed'); ?>)
+          <?php } ?>
+
           <?php if ($uid['user_id']) { ?>
             <?php if ($uid['user_login'] == $data['post']['user_login']  || $uid['user_trust_level'] == 5) { ?>
               <a class="gray-light mr10 ml10" href="/post/edit/<?= $data['post']['post_id']; ?>">
@@ -123,9 +123,11 @@
             <h3 class="uppercase mb5 mt0 font-light size-14 gray"><?= lang('related'); ?></h3>
             <?php $num = 0; ?>
             <?php foreach ($data['post_related'] as $related) { ?>
-              <div class="mb5">
+              <div class="mb5 flex">
                 <?php $num++; ?>
-                <span class="related-count gray-light size-15"><?= $num; ?></span>
+                <div class="flex justify-center bg-gray-200 w21 mr5 br-rd-50 size-15">
+                  <span class="gray-light-2"><?= $num; ?></span>
+                </div>
                 <a href="<?= getUrlByName('post', ['id' => $related['post_id'], 'slug' => $related['post_slug']]); ?>">
                   <?= $related['post_title']; ?>
                 </a>
@@ -137,7 +139,7 @@
           <div class="mb20">
             <h3 class="uppercase mb5 mt0 font-light size-14 gray"><?= lang('topics'); ?>:</h3>
             <?php foreach ($data['topics'] as $topic) { ?>
-              <a class="tags inline gray size-14" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
+              <a class="bg-blue-100 bg-hover-300 white-hover flex justify-center pt5 pr10 pb5 pl10 br-rd-20 blue inline size-14" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
                 <?= $topic['topic_title']; ?>
               </a>
             <?php } ?>
@@ -217,14 +219,14 @@
   <?php } ?>
 </main>
 <aside class="col-span-3 br-rd-5 no-mob">
-  <div class="border-box-1 bg-white br-rd-5 mb15 pt5 pr15 pb5 pl15">
-    <div class="mt10 mb10">
+  <div class="border-box-1 bg-white br-rd-5 mb15 pt5 pr15 pb10 pl15">
+    <div class="mt10 mb5">
       <a class="flex" title="<?= $data['post']['space_name']; ?>" href="<?= getUrlByName('space', ['slug' => $data['post']['space_slug']]); ?>">
         <?= spase_logo_img($data['post']['space_img'], 'max', $data['post']['space_slug'], 'w24 mr5'); ?>
         <span class="ml5"><?= $data['post']['space_name']; ?></span>
       </a>
     </div>
-    <div class="gray size-14"><?= $data['post']['space_short_text']; ?></div>
+    <div class="gray-light-2 size-14"><?= $data['post']['space_short_text']; ?></div>
   </div>
   <?php if ($data['post']['post_content_img']) { ?>
     <div class="border-box-1 bg-white br-rd-5 mb15">
@@ -255,7 +257,7 @@
               <div class="p5 pr10 pb5 pl10 bg-gray-300 br-rd-3 gray size-14 center mr15">0</div>
             <?php } ?>
           </a>
-          <a class="gray size-13" href="<?= getUrlByName('post', ['id' => $rec_post['post_id'], 'slug' => $rec_post['post_slug']]); ?>">
+          <a class="black size-14" href="<?= getUrlByName('post', ['id' => $rec_post['post_id'], 'slug' => $rec_post['post_slug']]); ?>">
             <?= $rec_post['post_title']; ?>
           </a>
         </div>

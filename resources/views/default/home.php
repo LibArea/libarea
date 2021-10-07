@@ -41,18 +41,18 @@
 
   <?php if ($uid['user_id'] > 0 && !empty($data['space_user'])) { ?>
     <div class="border-box-1 p15 mb15 br-rd-5 bg-white size-14">
-      <a class="right gray-light" title="<?= lang('spaces'); ?>" href="/spaces">
+      <a class="right gray-light-2" title="<?= lang('spaces'); ?>" href="/spaces">
         <i class="bi bi-chevron-right middle"></i>
       </a>
-      <div class="uppercase mt0 mb5">
+      <div class="uppercase gray mt5 mb5">
         <?= lang('signed'); ?>
       </div>
       <?php foreach ($data['space_user'] as  $sig) { ?>
-        <a class="flex relative pt5 pb5 items-center hidden gray" href="<?= getUrlByName('space', ['slug' => $sig['space_slug']]); ?>" title="<?= $sig['space_name']; ?>">
+        <a class="flex relative pt5 pb5 items-center hidden gray-light" href="<?= getUrlByName('space', ['slug' => $sig['space_slug']]); ?>" title="<?= $sig['space_name']; ?>">
           <?= spase_logo_img($sig['space_img'], 'small', $sig['space_name'], 'w24 mr5'); ?>
           <span class="ml5"><?= $sig['space_name']; ?></span>
           <?php if ($sig['space_user_id'] == $uid['user_id']) { ?>
-            <sup class="red mr5 ml5">+</sup>
+            <sup class="gray-light-2 ml5"><i class="bi bi-mic size-14"></i></sup>
           <?php } ?>
         </a>
       <?php } ?>
@@ -69,7 +69,7 @@
       <div class="last-comm border-box-1 p5 pr15 pb5 pl15 bg-white br-rd-5">
         <?php foreach ($data['latest_answers'] as  $answer) { ?>
           <div class="mt15 mr0 mb15 ml0 pl15" style="border-left: 2px solid <?= $answer['space_color']; ?>;">
-            <div class="size-14 gray-light">
+            <div class="size-14 gray-light-2">
               <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'w18'); ?>
               <?= $answer['answer_date']; ?>
             </div>

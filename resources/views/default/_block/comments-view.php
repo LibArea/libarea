@@ -23,6 +23,9 @@
                       <?= $answer['user_login']; ?>
                     </span>
                   </a>
+                  <?php if ($data['post']['post_user_id'] == $answer['answer_user_id']) { ?>
+                    <span class="blue mr5 ml0"><i class="bi bi-mic size-14"></i></span>
+                  <?php } ?>
                   <span class="mr5 ml5 gray-light lowercase">
                     <?= $answer['answer_date']; ?>
                   </span>
@@ -31,10 +34,7 @@
                       (<?= lang('ed'); ?>.)
                     </span>
                   <?php } ?>
-                  <?php if ($data['post']['post_user_id'] == $answer['answer_user_id']) { ?>
-                    <span class="red mr5 ml0">&#x21af;</span>
-                  <?php } ?>
-                  <a rel="nofollow" class="gray-light mr5 ml10" href="<?= $post_url; ?>#answer_<?= $answer['answer_id']; ?>">#</a>
+                  <a rel="nofollow" class="gray-light mr5 ml10" href="<?= $post_url; ?>#answer_<?= $answer['answer_id']; ?>"><i class="bi bi-hash"></i></a>
                   <?= includeTemplate('/_block/show-ip', ['ip' => $answer['answer_ip'], 'user_trust_level' => $uid['user_trust_level']]); ?>
                 </div>
                 <div class="mt0 mr0 mb5 ml0 size-15 max-w780">
@@ -120,18 +120,18 @@
                         <?= $comment['user_login']; ?>
                       </span>
                     </a>
-                    <span class="mr5 ml5 gray-light lowercase">
+                    <?php if ($data['post']['post_user_id'] == $comment['comment_user_id']) { ?>
+                      <span class="blue mr5"><i class="bi bi-mic size-14"></i></span>
+                    <?php } ?>
+                    <span class="mr5 ml5 gray-light-2 lowercase">
                       <?= lang_date($comment['comment_date']); ?>
                     </span>
-                    <?php if ($data['post']['post_user_id'] == $comment['comment_user_id']) { ?>
-                      <span class="red mr10 ml10">&#x21af;</span>
-                    <?php } ?>
                     <?php if ($comment['comment_comment_id'] > 0) { ?>
-                      <a class="gray-light mr10 ml10" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_comment_id']; ?>">&uarr;</a>
+                      <a class="gray-light-2 mr10 ml10" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_comment_id']; ?>"><i class="bi bi-arrow-up"></i></a>
                     <?php } else { ?>
-                      <a class="gray-light mr10 ml10" rel="nofollow" href="<?= $post_url; ?>#answer_<?= $comment['comment_answer_id']; ?>">&uarr;</a>
+                      <a class="gray-light-2 mr10 ml10" rel="nofollow" href="<?= $post_url; ?>#answer_<?= $comment['comment_answer_id']; ?>"><i class="bi bi-arrow-up"></i></a>
                     <?php } ?>
-                    <a class="gray-light mr5 ml10" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_id']; ?>">#</a>
+                    <a class="gray-light-2 mr5 ml5" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_id']; ?>"><i class="bi bi-hash"></i></a>
                     <?= includeTemplate('/_block/show-ip', ['ip' => $comment['comment_ip'], 'user_trust_level' => $uid['user_trust_level']]); ?>
                   </div>
                   <div class="comm-telo-body size-15 mt5 mb5">
