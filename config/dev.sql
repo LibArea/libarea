@@ -507,6 +507,7 @@ CREATE TABLE `users` (
   `user_my_post` int(11) DEFAULT 0 COMMENT 'Пост выведенный в профиль',
   `user_ban_list` tinyint(1) DEFAULT 0,
   `user_hits_count` int(11) DEFAULT 0,
+  `user_up_count` int(11) DEFAULT 0,
   `user_is_deleted` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -514,9 +515,9 @@ CREATE TABLE `users` (
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`user_id`, `user_login`, `user_name`, `user_email`, `user_password`, `user_activated`, `user_limiting_mode`, `user_reg_ip`, `user_trust_level`, `user_created_at`, `user_updated_at`, `user_invitation_available`, `user_invitation_id`, `user_design_is_minimal`, `user_whisper`, `user_avatar`, `user_cover_art`, `user_color`, `user_about`, `user_website`, `user_location`, `user_public_email`, `user_skype`, `user_twitter`, `user_telegram`, `user_vk`, `user_rating`, `user_my_post`, `user_ban_list`, `user_hits_count`, `user_is_deleted`) VALUES
-(1, 'AdreS', 'Олег', 'ss@sdf.ru', '$2y$10$oR5VZ.zk7IN/og70gQq/f.0Sb.GQJ33VZHIES4pyIpU3W2vF6aiaW', 1, 0, '127.0.0.1', 5, '2021-03-08 21:37:04', '2021-03-08 21:37:04', 0, 0, 0, '', 'img_1.jpg', 'cover_art.jpeg', '#f56400', 'Тестовый аккаунт', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0),
-(2, 'test', NULL, 'test@test.ru', '$2y$10$Iahcsh3ima0kGqgk6S/SSui5/ETU5bQueYROFhOsjUU/z1.xynR7W', 1, 0, '127.0.0.1', 1, '2021-04-30 07:42:52', '2021-04-30 07:42:52', 0, 0, 0, '', 'noavatar.png', 'cover_art.jpeg', '#339900', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0);
+INSERT INTO `users` (`user_id`, `user_login`, `user_name`, `user_email`, `user_password`, `user_activated`, `user_limiting_mode`, `user_reg_ip`, `user_trust_level`, `user_created_at`, `user_updated_at`, `user_invitation_available`, `user_invitation_id`, `user_design_is_minimal`, `user_whisper`, `user_avatar`, `user_cover_art`, `user_color`, `user_about`, `user_website`, `user_location`, `user_public_email`, `user_skype`, `user_twitter`, `user_telegram`, `user_vk`, `user_rating`, `user_my_post`, `user_ban_list`, `user_hits_count`, `user_up_count`, `user_is_deleted`) VALUES
+(1, 'AdreS', 'Олег', 'ss@sdf.ru', '$2y$10$oR5VZ.zk7IN/og70gQq/f.0Sb.GQJ33VZHIES4pyIpU3W2vF6aiaW', 1, 0, '127.0.0.1', 5, '2021-03-08 21:37:04', '2021-03-08 21:37:04', 0, 0, 0, '', 'img_1.jpg', 'cover_art.jpeg', '#f56400', 'Тестовый аккаунт', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0),
+(2, 'test', NULL, 'test@test.ru', '$2y$10$Iahcsh3ima0kGqgk6S/SSui5/ETU5bQueYROFhOsjUU/z1.xynR7W', 1, 0, '127.0.0.1', 1, '2021-04-30 07:42:52', '2021-04-30 07:42:52', 0, 0, 0, '', 'noavatar.png', 'cover_art.jpeg', '#339900', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 

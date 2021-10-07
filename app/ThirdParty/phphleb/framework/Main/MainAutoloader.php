@@ -15,14 +15,14 @@ final class MainAutoloader
     public static function get(string $class) {
         self::createData();
 
-        if (self::searchAndInclude($class, self::$homeList)) {
+        if (self::searchVendorAndInclude($class, self::$homeList)) {
             /* Checking inner classes. */
             /* Проверка внутренних классов. */
         } else if (self::searchAndInclude($class, self::$mainList)) {
             /* Checking custom classes. */
             /* Проверка пользовательских классов. */
         } else {
-            $clarification = '/';
+            $clarification = HLEB_GLOBAL_DIRECTORY;
             /* Reduce internal redirection. */
             /* Сокращение внутреннего перенаправления */
             $path = explode('\\', $class);
@@ -30,16 +30,16 @@ final class MainAutoloader
                 $path[0] = strtolower($path[0]);
                 if ($path[0] === 'hleb') {
                     $path[0] = 'phphleb/framework';
-                    $clarification = '/' . HLEB_VENDOR_DIR_NAME . '/';
+                    $clarification = HLEB_VENDOR_DIRECTORY;
                 } elseif ($path[0] === 'phphleb') {
-                    $clarification = '/' . HLEB_VENDOR_DIR_NAME . '/';
+                    $clarification = HLEB_VENDOR_DIRECTORY;
                 }
                 /* By the name of the library. */
                 /* По имени библиотеки. */
                 if (isset($path[2])) {
                     $pathToVendorName = HLEB_VENDOR_DIRECTORY . '/' . $path[0];
                     if (is_dir($pathToVendorName)) {
-                        $clarification = '/' . HLEB_VENDOR_DIR_NAME . '/';
+                        $clarification = HLEB_VENDOR_DIRECTORY;
                         if (is_dir($pathToVendorName . '/' . strtolower($path[1]))) {
                             $path[1] = strtolower($path[1]);
                         } else {
@@ -56,20 +56,30 @@ final class MainAutoloader
             }
             /* The class namespace corresponds to the file location in the project. */
             /* Namespace класса соответствует файловому расположению в проекте. */
-            self::init(HLEB_GLOBAL_DIRECTORY . $clarification . str_replace('\\', "/", $class) . '.php');
+            self::init($clarification . '/' . str_replace('\\', "/", $class) . '.php');
         }
 
     }
 
-    public static function search_and_include(string $class, Connector $connector): bool {
-        return self::searchAndInclude($class, $connector->add());
+    public static function search_and_include(string $class, Connector $connector, $vendorPath = false): bool {
+        return $vendorPath ? self::searchVendorAndInclude($class, $connector->add()) : self::searchAndInclude($class, $connector->add());
     }
 
-    private static function searchAndInclude(string $class, array $responding): bool {
+    private static function searchVendorAndInclude(string $class, array $responding) {
         /* If a class with a direct link is found. */
         /* Если найден класс с прямой ссылкой. */
         if (isset($responding[$class])) {
-            self::init(HLEB_GLOBAL_DIRECTORY . '/' . $responding[$class]);
+            self::init(HLEB_VENDOR_DIRECTORY . $responding[$class]);
+            return true;
+        }
+        return false;
+    }
+
+    private static function searchAndInclude(string $class, array $responding, bool $vendorPath = false): bool {
+        /* If a class with a direct link is found. */
+        /* Если найден класс с прямой ссылкой. */
+        if (isset($responding[$class])) {
+            self::init(HLEB_GLOBAL_DIRECTORY  . '/' . $responding[$class]);
             return true;
         }
 

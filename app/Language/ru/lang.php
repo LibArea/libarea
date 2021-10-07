@@ -6,6 +6,7 @@ return [
     'hi'                => 'Привет',
     'top'               => 'TOP',
     'admin'             => 'Админка',
+    'tools'             => 'Инструменты',
     'settings'          => 'Настройки',
     'security'          => 'Пароль',
     'avatar'            => 'Аватарка',
@@ -34,7 +35,6 @@ return [
     'deleted'           => 'Удалено',
     'email activated'   => 'Активирован e-mail',
     'not activated'     => 'Не активирован',
-    'like'              => 'Нравится',
     'like'              => 'Нравится',
     'i like comments'   => 'Нравятся комментарии',
     'i like posts'      => 'Нравятся посты',
@@ -456,8 +456,7 @@ return [
     'who will be able to post'              => 'Кто сможет размещать посты',
     'you can add spaces'                    => 'Вы можете добавить пространств',
     'minimal (experimental version)'        => 'Minimal (экспериментальный вариант дизайна)',
-    
-    
+    'test-email'                            => 'Тестирование системы обмена сообщениями',
     'posts will not be visible in the feed'         => 'Если нет, то посты не будут видны в ленте (на главной)',
     'work e-mail (to activate your account)'        => 'Рабочий е-mail (для <b>активации</b> аккаунта)',
     'new password has been sent to e-mail'          => 'Новый пароль отправлен на e-mail',
@@ -477,6 +476,7 @@ return [
     'the page does not exist'                       => 'Страница не существует',
     'to main'                                       => 'На главную',
     'the page has been removed'                     => 'Возможно она была удалена',
+    'the command is executed'                       => 'Команда выполнена',
     
     'welcome-info' => '<p>Спасибо за регистрацию! Здесь вы найдете краткую информацию о том, как пользоваться этим сайтом.</p>
     <p>Этот сайт состоит из <a href="/spaces">пространств</a>. Вы автоматически подписываетесь только на одно пространство — <a href="/s/meta">/s/meta</a>. Посты из которого вы и будете видеть (после авторизации) на главной странице сайта (в ленте).</p>

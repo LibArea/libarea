@@ -5,6 +5,7 @@ Route::before('Authorization@admin')->getGroup();
     Route::get('/')->controller('Admin\HomeController')->name('admin');
 
     Route::getType('post');
+        Route::get('/test/mail')->controller('Admin\СonsoleController@testMail')->name('admin.test.mail');
         Route::get('/space/ban')->controller('Admin\SpacesController@delSpace');
         Route::get('/user/ban')->controller('Admin\UsersController@banUser');
         Route::get('/favicon/add')->controller('Admin\WebsController@favicon');
@@ -25,6 +26,8 @@ Route::before('Authorization@admin')->getGroup();
         Route::endProtect();
     Route::endType();
   
+    Route::get('/tools')->controller('Admin\ToolsController')->name('admin.tools');
+  
     Route::get('/users')->controller('Admin\UsersController', ['all'])->name('admin.users');
     Route::get('/users/ban')->controller('Admin\UsersController', ['ban']);
     Route::get('/users/{id}/edit')->controller('Admin\UsersController@userEditPage')->where(['id' => '[0-9]+'])->name('admin.user.edit');
@@ -39,7 +42,9 @@ Route::before('Authorization@admin')->getGroup();
     Route::get('/topics/page/{page?}')->controller('Admin\TopicsController', ['all'])->where(['page' => '[0-9]+']);
     Route::get('/topics/add')->controller('Admin\TopicsController@addPage')->name('admin.topic.add');
     Route::get('/topics/{id}/edit')->controller('Admin\TopicsController@editPage')->where(['id' => '[0-9]+'])->name('admin.topic.edit');
-    Route::get('/update/count')->controller('Admin\TopicsController@updateQuantity'); 
+    
+    Route::get('/update/count/topic')->controller('Admin\СonsoleController@updateCountPostTopic')->name('admin.count.topic'); 
+    Route::get('/update/count/up')->controller('Admin\СonsoleController@updateCountUp')->name('admin.count.up');
    
     Route::get('/invitations')->controller('Admin\InvitationsController', ['all'])->name('admin.invitations');
    

@@ -51,6 +51,10 @@
     <i class="bi bi-badge-ad middle mr5<?= $sheet == 'words' ? ' blue' : ''; ?>  size-18"></i>
     <span class="middle size-14<?= $sheet == 'words' ? ' blue' : ''; ?>"><?= lang('stop words'); ?></span>
   </a>
+  <a class="pt5 pr10 pb5 pl10 block gray bg-hover-100" title="<?= lang('tools'); ?>" href="<?= getUrlByName('admin.tools'); ?>">
+    <i class="bi bi-tools middle mr5<?= $sheet == 'tools' ? ' blue' : ''; ?>  size-18"></i>
+    <span class="middle size-14<?= $sheet == 'tools' ? ' blue' : ''; ?>"><?= lang('tools'); ?></span>
+  </a>
   <hr>
   Agouti &copy; <?= date('Y'); ?>
 </nav>

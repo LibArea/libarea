@@ -8,7 +8,6 @@ class MyParsedown extends Parsedown
     function __construct()
     {
         $this->InlineTypes['{'][]= 'ColoredText';
-
         $this->inlineMarkerList .= '{';
     }
     
@@ -64,4 +63,5 @@ class MyParsedown extends Parsedown
 
         return true;
     }
+    
 }

@@ -51,7 +51,4 @@
       <?php } ?>
     </div>
   <?php } ?>
-  <?php if ($data['sheet'] == 'topics' && $uid['user_trust_level'] > 4) { ?>
-    <a class="right size-14 mt5 button white" href="/admin/update/count"><?= lang('update the data'); ?></a>
-  <?php } ?>
 </aside>

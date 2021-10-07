@@ -107,11 +107,19 @@
         </div>
 
         <div class="mt10 ml60 mb-ml-10">
-          <h1 class="size-24 mb20">
+          <h1 class="size-24 mb20 flex">
             <?= $data['user']['user_login']; ?>
             <?php if ($data['user']['user_name']) { ?> / <?= $data['user']['user_name']; ?><?php } ?>
-          </h1>
-          <div class="mb20">
+          
+          
+          <?php if ($data['user']['user_up_count'] > 0) { ?>
+            <div class="flex">
+              <div class="up-id bi bi-heart red mr10 ml20 size-14"></div> 
+              <div class="size-14 gray-light"><?= $data['user']['user_up_count']; ?></div>
+            </div>
+          <?php } ?>
+           </h1>
+          <div class="mb20">   
             <blockquote>
               <?= $data['user']['user_about']; ?>...
             </blockquote>

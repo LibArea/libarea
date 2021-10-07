@@ -97,6 +97,7 @@ class UserModel extends MainModel
                     user_my_post,
                     user_ban_list,
                     user_hits_count,
+                    user_up_count,
                     user_is_deleted 
                         FROM users WHERE $sort";
 

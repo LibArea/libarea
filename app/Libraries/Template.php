@@ -103,7 +103,7 @@ function favicon_img($link_id, $alt)
 function thumbs_img($url_domain, $alt)
 {
     if (file_exists(HLEB_PUBLIC_DIR . AG_PATH_THUMBS . $url_domain . '.png')) {
-        $img = '<img class="mr5 w200" src="'. AG_PATH_THUMBS . $url_domain . '.png" alt="' . $alt . '">';
+        $img = '<img class="mr5 w200 box-shadow" src="'. AG_PATH_THUMBS . $url_domain . '.png" alt="' . $alt . '">';
         return $img;
     }
 

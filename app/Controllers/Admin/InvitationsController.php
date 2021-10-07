@@ -20,7 +20,7 @@ class InvitationsController extends MainController
         }
 
         $meta = [
-            'meta_title'    => lang('Invites'),
+            'meta_title'    => lang('invites'),
             'sheet'         => 'invitations',
         ];
 

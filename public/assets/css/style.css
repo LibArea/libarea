@@ -230,7 +230,7 @@ img {
 .font-semibold { font-weight:600; }
 .font-bold { font-weight:700; }
 
-.box-shadow-bt { box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%); }
+.box-shadow { box-shadow: 0 0 0 1px rgb(0 0 0 / 10%); }
 .border-box-1 { border: 1px solid #ededed; }
 
 .grid { display:grid; }
@@ -468,6 +468,7 @@ input:focus { border: 1px solid #9ccdf8; }
   display: block;
 }
 
+.post-body.full img:hover { box-shadow: 0 1px 8px 0 rgb(0 0 0 / 20%); }
 .post-body .post-img img { margin-top: 5px; }
 
 .no-md p { margin: 2px 0; }

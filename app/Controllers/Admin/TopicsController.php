@@ -199,12 +199,4 @@ class TopicsController extends MainController
 
         redirect(getUrlByName('admin.topic.edit', ['id' => $topic['topic_id']]));
     }
-
-    // Обновление
-    public static function updateQuantity()
-    {
-        TopicModel::setUpdateQuantity();
-
-        redirect('/topics');
-    }
 }

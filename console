@@ -13,7 +13,6 @@ define('HLEB_PUBLIC_DIR', realpath(HLEB_GLOBAL_DIRECTORY . '/public'));
  define('HLEB_SEARCH_DBASE_CONFIG_FILE', realpath(HLEB_GLOBAL_DIRECTORY . '/database'));
  define('HLEB_STORAGE_DIRECTORY', realpath(HLEB_GLOBAL_DIRECTORY . '/storage'));
 */
+define('HLEB_SEARCH_DBASE_CONFIG_FILE', realpath(HLEB_GLOBAL_DIRECTORY . '/config'));
 
 require realpath(__DIR__ . '/app/ThirdParty/phphleb/framework/console.php');
-
-

@@ -5,6 +5,7 @@ return [
     'top'               => 'TOP',
     'space'             => 'Spaţiu',
     'spaces'            => 'Spații',
+    'tools'             => 'Instrumente',
     'no spaces'         => 'Din păcate nu există spații',
     'in space'          => 'In spatiu',
     'create Post'       => 'Scrie o postare',
@@ -421,7 +422,7 @@ return [
     'limiting_mode_1'       => 'Nu puteți posta conținut, contul dvs. este verificat',
     'the dialog does not exist'             => 'Caseta de dialog specificată nu există',
     'the topic does not exist'              => 'Subiectul specificat nu există',
-
+    'test-email'                            => 'Testarea sistemului de mesagerie',
     'the page does not exist'               => 'Pagina nu există',
     'to main'                               => 'La principal ',
     'the page has been removed'             => 'Este posibil să fi fost șters',
@@ -446,6 +447,7 @@ return [
     'your account is under review'          => 'Contul dvs. este în așteptare',
     'invalid email address'                 => 'E-mail invalid',
     'there is no such e-mail on the site'   => 'Acest e-mail nu se află pe site',
+    'the command is executed'               => 'Comanda este executată',
 
     'new password has been sent to e-mail'          => 'Noua parolă a fost trimisă prin e-mail',
     'check your e-mail to activate your account'    => 'Verificați-vă e-mailul pentru a vă activa contul',
