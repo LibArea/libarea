@@ -150,9 +150,6 @@ class SpaceController extends MainController
 
     public function wiki()
     {
-        // Under development
-        $wiki = [];
-
         $slug   = Request::get('slug');
         $space = SpaceModel::getSpace($slug, 'slug');
         Base::PageError404($space);
@@ -168,7 +165,7 @@ class SpaceController extends MainController
         $data = [
             'h1'            => lang('wiki space'),
             'sheet'         => 'wiki',
-            'wiki'          => $wiki,
+            'space'          => $space,
         ];
 
         return view('/space/wiki', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);

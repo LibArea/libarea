@@ -64,7 +64,7 @@ class EditAnswerController extends MainController
         Request::getResources()->addBottomStyles('/assets/editor/editormd.css');
         Request::getResources()->addBottomScript('/assets/editor/meditor.min.js');
  
-        $meta = meta($m =[], lang('edit answer']);
+        $meta = meta($m =[], lang('edit answer'));
         $data = [
             'answer_id'         => $answer['answer_id'],
             'post_id'           => $post['post_id'],

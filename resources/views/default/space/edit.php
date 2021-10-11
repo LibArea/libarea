@@ -31,6 +31,9 @@
     </div>
 
     <?php includeTemplate('/_block/editor/textarea', ['title' => lang('text') . ' (Sidebar)', 'type' => 'text', 'name' => 'space_text', 'content' => $data['space']['space_text'], 'help' => lang('markdown')]); ?>
+    
+    
+    <?php includeTemplate('/_block/editor/textarea', ['title' => lang('text') . ' (Wiki)', 'type' => 'text', 'name' => 'space_wiki', 'content' => $data['space']['space_wiki'], 'help' => lang('markdown')]); ?>
 
     <div class="boxline">
       <input type="hidden" name="space_id" id="space_id" value="<?= $data['space']['space_id']; ?>">

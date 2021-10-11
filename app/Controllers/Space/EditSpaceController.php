@@ -29,6 +29,7 @@ class EditSpaceController extends MainController
         $space_name         = Request::getPost('space_name');
         $space_description  = Request::getPost('space_description');
         $space_text         = Request::getPost('space_text');
+        $space_wiki         = Request::getPost('space_wiki');
         $space_short_text   = Request::getPost('space_short_text');
 
         $redirect   = '/space/edit/' . $space['space_id'];
@@ -64,6 +65,7 @@ class EditSpaceController extends MainController
             'space_description'     => $space_description,
             'space_color'           => $space_color,
             'space_text'            => $space_text,
+            'space_wiki'            => $space_wiki,
             'space_short_text'      => $space_short_text,
             'space_permit_users'    => $space_permit,
             'space_feed'            => $space_feed,
