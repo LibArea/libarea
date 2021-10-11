@@ -4,13 +4,13 @@
 <main class="col-span-7 mb-col-12">
   <div class="bg-white flex flex-row items-center justify-between border-box-1 br-rd-5 p15 mb15">
     <p class="m0 size-18"><?= $data['h1']; ?></p>
-      <?php if ($uid['user_id'] > 0) { ?>
-        <?php if ($data['add_space_button'] === true) { ?>
-          <a title="<?= lang('to create'); ?>" class="right mt5 ml15 size-18" href="/space/add">
-            <i class="bi bi bi-plus-lg red"></i>
-          </a>
-        <?php }  
-        }  
+    <?php if ($uid['user_id'] > 0) { ?>
+      <?php if ($data['add_space_button'] === true) { ?>
+        <a title="<?= lang('to create'); ?>" class="right mt5 ml15 size-18" href="/space/add">
+          <i class="bi bi bi-plus-lg red"></i>
+        </a>
+    <?php }
+    }
     $pages = array(
       array('id' => 'spaces', 'url' => '/spaces', 'content' => lang('all'), 'icon' => 'bi bi-broadcast'),
       array('id' => 'my-space', 'url' => '/space/my', 'content' => lang('signed'), 'auth' => 'yes', 'icon' => 'bi bi-broadcast-pin'),

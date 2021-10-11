@@ -123,13 +123,6 @@ function includeCachedTemplate(string $template, array $params = [])
 function includeTemplate(string $template, array $params = [])
 {
     return hleb_e0b1036c1070101_template(PR_VIEW_DIR . $template, $params);
-    /* $account = \Request::getSession('account') ?? [];
-    $design  = $account['user_design_is_minimal'] ?? 0;
-    if ($design == 1) {
-        return hleb_e0b1036c1070101_template(PR_MIN_VIEW_DIR . $template, $params);
-    } else {
-        return hleb_e0b1036c1070101_template(PR_VIEW_DIR . $template, $params);
-    } */
 }
 
 function view(string $template, array $params = [])
@@ -138,18 +131,6 @@ function view(string $template, array $params = [])
     includeTemplate($template, ['uid' => $params['uid'], 'data' => $params['data']]);
     includeTemplate('/footer');
 }
-// Следующая часть работы...
-/* function includeBaseBlock(string $templateFile, array $params = []) {
-    $data = Data::getData();
-    $uid  = Data::getValue('uid');
-    $templates = [
-        'footer' => ['data' => $data, 'uid' => $uid],
-        'body' =>   ['data' => $data, 'uid' => $uid, 'other' => Data::getValue('other')],
-        'header' => ['data' => $data, 'uid' => $uid],
-        // ...
-    ];
-    $params += isset($templates[$templateFile]) ? $templates[$templateFile] : [];
-    includeTemplate('/_block/' . trim($templateFile, '\\/ '), $params);
-} */
 
 hleb_require(HLEB_GLOBAL_DIRECTORY . '/app/Libraries/Template.php');
+hleb_require(HLEB_GLOBAL_DIRECTORY . '/app/Libraries/Meta.php');

@@ -7,7 +7,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use App\Models\{SpaceModel, HomeModel, AnswerModel, CommentModel, TopicModel, AgentModel};
 use App\Models\User\UserModel;
 use App\Models\WebModel;
-use Agouti\Base;
+use Base;
 
 class HomeController extends MainController
 {
@@ -17,18 +17,14 @@ class HomeController extends MainController
         $size   = disk_total_space(HLEB_GLOBAL_DIRECTORY);
         $bytes  = number_format($size / 1048576, 2) . ' MB';
 
-        $meta   = [
-            'meta_title'    => lang('admin'),
-            'sheet'         => 'admin',
-        ];
-
+        $meta = meta($m = [], lang('admin'));
         $data  = [
             'spaces_count'      => SpaceModel::getSpacesAllCount(),
             'topics_count'      => TopicModel::getTopicsAllCount(),
             'posts_count'       => HomeModel::feedCount([], $uid),
             'users_count'       => UserModel::getUsersAllCount('all'),
             'answers_count'     => AnswerModel::getAnswersAllCount(),
-            'comments_count'    => CommentModel::getCommentAllCount(),
+            'comments_count'    => CommentModel::getCommentsAllCount('all'),
             'links_count'       => WebModel::getLinksAllCount(),
             'last_visit'        => AgentModel::getLastVisit(),
             'bytes'             => $bytes,

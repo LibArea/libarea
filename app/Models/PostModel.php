@@ -340,20 +340,6 @@ class PostModel extends MainModel
         return $result['post_is_deleted'];
     }
 
-    // Частота размещения постов участника 
-    public static function getPostSpeed($user_id)
-    {
-        $sql = "SELECT 
-                    post_id, 
-                    post_user_id, 
-                    post_date
-                        FROM posts 
-                            WHERE post_user_id = :user_id
-                            AND post_date >= DATE_SUB(NOW(), INTERVAL 1 DAY)";
-
-        return  DB::run($sql, ['user_id' => $user_id])->rowCount();
-    }
-
     public static function getPostTopic($post_id)
     {
         $sql = "SELECT

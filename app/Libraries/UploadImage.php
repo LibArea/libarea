@@ -1,10 +1,7 @@
 <?php
 
-namespace Agouti;
-
-use App\Models\{UserModel, TopicModel, SpaceModel};
-use App\Models\User\SettingModel;
-use SimpleImage;
+use App\Models\{TopicModel, SpaceModel};
+use App\Models\User\{UserModel, SettingModel};
 
 class UploadImage
 {
@@ -156,7 +153,7 @@ class UploadImage
                 @unlink($path_cover_img . $cover_art);
                 @unlink($path_cover_small . $cover_art);
             }
-            
+
             if ($type == 'user') {
                 // Запишем обложку 
                 $date = date('Y-m-d H:i:s');
@@ -241,11 +238,11 @@ class UploadImage
 
         return false;
     }
-    
-    static function createDir($path) 
+
+    static function createDir($path)
     {
         if (!is_dir($path)) {
-                mkdir($path, 0777, true);
+            mkdir($path, 0777, true);
         }
     }
 }

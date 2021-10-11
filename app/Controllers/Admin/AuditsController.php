@@ -5,7 +5,7 @@ namespace App\Controllers\Admin;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{PostModel, AnswerModel, CommentModel, Admin\AuditModel};
-use Agouti\Base;
+use Base;
 
 class AuditsController extends MainController
 {
@@ -33,13 +33,10 @@ class AuditsController extends MainController
 
             $result[$ind]   = $row;
         }
-        
-        Request::getResources()->addBottomScript('/assets/js/admin.js');
-        $meta = [
-            'meta_title'    => lang('audit'),
-            'sheet'         => 'audits',
-        ];
 
+        Request::getResources()->addBottomScript('/assets/js/admin.js');
+
+        $meta = meta($m = [], lang('audit'));
         $data = [
             'sheet'         => $sheet == 'approved' ? 'approved' : 'audits',
             'pagesCount'    => ceil($pagesCount / $limit),

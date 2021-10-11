@@ -5,7 +5,7 @@ namespace App\Controllers\Web;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{WebModel, FeedModel, TopicModel};
-use Agouti\{Content, Config, Base};
+use Content, Base;
 
 class WebController extends MainController
 {
@@ -28,12 +28,13 @@ class WebController extends MainController
 
         $num = $page > 1 ? sprintf(lang('page-number'), $page) : '';
 
-        $meta = [
-            'canonical'     => '/web',
-            'sheet'         => 'domains',
-            'meta_title'    => lang('domains-title') . ' ' . $num . Config::get(Config::PARAM_NAME),
-            'meta_desc'     => lang('domains-desc') . ' ' . $num . Config::get(Config::PARAM_HOME_TITLE),
+        $m = [
+            'og'         => false,
+            'twitter'    => false,
+            'imgurl'     => false,
+            'url'        => getUrlByName('web'),
         ];
+        $meta = meta($m, lang('domains-title'), lang('domains-title'));
 
         $data = [
             'sheet'         => 'domains',
@@ -55,7 +56,7 @@ class WebController extends MainController
 
         $link       = WebModel::getLinkOne($domain, $uid['user_id']);
         Base::PageError404($link);
- 
+
         $link['link_content'] = Content::text($link['link_content'], 'line');
 
         $limit      = 25;
@@ -72,15 +73,13 @@ class WebController extends MainController
             $result[$ind]                   = $row;
         }
 
-        $meta_title = lang('domain') . ': ' . $domain . ' | ' . Config::get(Config::PARAM_NAME);
-        $meta_desc  = lang('domain-desc') . ': ' . $domain . ' ' . Config::get(Config::PARAM_HOME_TITLE);
-
-        $meta = [  
-            'canonical'     => Config::get(Config::PARAM_URL) . getUrlByName('domain', ['domain' => $domain]),
-            'sheet'         => 'domain',
-            'meta_title'    => $meta_title,
-            'meta_desc'     => $meta_desc,
+        $m = [
+            'og'         => false,
+            'twitter'    => false,
+            'imgurl'     => false,
+            'url'        => getUrlByName('domain', ['domain' => $domain]),
         ];
+        $meta = meta($m, lang('domain') . ': ' . $domain, lang('domain-desc') . ': ' . $domain);
 
         $data = [
             'sheet'         => 'domain',
@@ -100,7 +99,7 @@ class WebController extends MainController
         $uid        = Base::getUid();
         $page       = Request::getInt('page');
         $page       = $page == 0 ? 1 : $page;
-        
+
         $topic = TopicModel::getTopic($slug, 'slug');
         Base::PageError404($topic);
 
@@ -114,15 +113,14 @@ class WebController extends MainController
             $result[$ind]   = $row;
         }
 
-        $meta_title = lang('sites') . ': ' . $topic['topic_title'] . ' | ' . Config::get(Config::PARAM_NAME);
-        $meta_desc  = lang('sites') . ' ' . lang('by') . ' ' . $topic['topic_title'] . '. ' . $topic['topic_description'] .' ' . Config::get(Config::PARAM_HOME_TITLE); 
-
-        $meta = [  
-            'canonical' => Config::get(Config::PARAM_URL) . getUrlByName('web topic', ['slug' => $topic['topic_slug']]),
-            'sheet'         => 'sites-topic',
-            'meta_title'    => $meta_title,
-            'meta_desc'     => $meta_desc,
+        $m = [
+            'og'         => false,
+            'twitter'    => false,
+            'imgurl'     => false,
+            'url'        => getUrlByName('web.topic', ['slug' => $topic['topic_slug']]),
         ];
+        $desc  = lang('sites') . ' ' . lang('by') . ' ' . $topic['topic_title'] . '. ' . $topic['topic_description'];
+        $meta = meta($m, lang('sites') . ': ' . $topic['topic_title'], $desc);
 
         $data = [
             'sheet'         => 'sites-topic',

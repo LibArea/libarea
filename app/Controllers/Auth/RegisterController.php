@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\{InvitationModel, UserModel};
 use App\Models\AuthModel;
-use Agouti\{Config, Base, Integration, Validation, SendEmail};
+use Config, Base, Integration, Validation, SendEmail;
 
 class RegisterController extends MainController
 {
@@ -14,22 +14,23 @@ class RegisterController extends MainController
     public function showRegisterForm()
     {
         // Если включена инвайт система
-        if (Config::get(Config::PARAM_INVITE)) {
+        if (Config::get('general.invite') == 1) {
             redirect('/invite');
         }
 
-        $meta = [
-            'sheet'         => 'sign up',
-            'canonical'     => Config::get(Config::PARAM_URL) . '/register',
-            'meta_title'    => lang('sign up') . ' | ' . Config::get(Config::PARAM_NAME),
-            'meta_desc'     => lang('info-security'),
+        $m = [
+            'og'         => false,
+            'twitter'    => false,
+            'imgurl'     => false,
+            'url'        => getUrlByName('register'),
         ];
-        
+        $meta = meta($m, lang('sign up'), lang('info-security'));
+
         $data = [
             'sheet'         => 'sign up',
         ];
 
-        return view( '/auth/register', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
+        return view('/auth/register', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
     }
 
     // Отправка запроса для регистрации
@@ -51,6 +52,12 @@ class RegisterController extends MainController
             redirect($redirect);
         }
 
+        # Если домен указанной почты содержится в списке недопустимых
+        $domain = array_pop(explode('@', $email));
+        if (in_array($domain, Config::arr('stop-email'))) {
+            redirect($redirect);
+        }
+
         if (is_array(AuthModel::repeatIpBanRegistration($reg_ip))) {
             addMsg(lang('multiple-accounts'), 'error');
             redirect($redirect);
@@ -63,10 +70,9 @@ class RegisterController extends MainController
             addMsg(lang('nickname-repeats-characters'), 'error');
             redirect($redirect);
         }
-       
+
         // Запретим, хотя лучшая практика занять нужные (пр. GitHub)
-        $disabled = ['admin', 'support', 'lori', 'loriup', 'mod', 'docs', 'meta', 'email', 'mail', 'login'];
-        if (in_array($login, $disabled)) {
+        if (in_array($login, Config::arr('stop-nickname'))) {
             addMsg(lang('nickname-replay'), 'error');
             redirect($redirect);
         }
@@ -83,7 +89,7 @@ class RegisterController extends MainController
         }
 
         if (!$inv_code) {
-            if (Config::get(Config::PARAM_CAPTCHA)) {
+            if (Config::get('general.captcha')) {
                 if (!Integration::checkCaptchaCode()) {
                     addMsg(lang('code error'), 'error');
                     redirect('/register');
@@ -93,8 +99,16 @@ class RegisterController extends MainController
             $inv_uid = 0;
         }
 
+        $count =  UserModel::getUsersAllCount('all');
+        // Для "режима запуска" первые 50 участников получают trust_level = 1 
+        $tl = 0;
+        if ($count < 50 && Config::get('general.mode') == 1) {
+            $tl = 1;
+        }
+
+
         // id участника после регистрации
-        $active_uid = UserModel::createUser($login, $email, $password, $reg_ip, $inv_uid);
+        $active_uid = UserModel::createUser($login, $email, $password, $reg_ip, $inv_uid, $tl);
 
         if ($inv_uid > 0) {
             // Если регистрация по инвайту, активируем емайл
@@ -108,10 +122,10 @@ class RegisterController extends MainController
         UserModel::sendActivateEmail($active_uid, $email_code);
 
         // Отправка e-mail
-        $link = 'https://' . HLEB_MAIN_DOMAIN . '/email/activate/' . $email_code;
+        $link = Config::get('meta.url') . '/email/activate/' . $email_code;
         $mail_message = lang('activate e-mail') . ": \n" . $link . "\n\n";
-        SendEmail::send($email, Config::get(Config::PARAM_NAME) . ' — ' . lang('checking e-mail'), $mail_message);
-        
+        SendEmail::send($email, Config::get('meta.name') . ' — ' . lang('checking e-mail'), $mail_message);
+
         addMsg(lang('check your e-mail to activate your account'), 'success');
 
         redirect(getUrlByName('login'));
@@ -122,17 +136,13 @@ class RegisterController extends MainController
     {
         $code   = Request::get('code');
         $invate = InvitationModel::available($code);
-        
+
         if (!$invate) {
             addMsg(lang('the code is incorrect'), 'error');
             redirect('/');
         }
 
-        $meta = [
-            'sheet'         => 'register',
-            'meta_title'    => lang('registration by invite') . ' | ' . Config::get(Config::PARAM_NAME),
-        ];
-
+        $meta = meta($m = [], lang('registration by invite'));
         $data = [
             'invate' => $invate,
         ];

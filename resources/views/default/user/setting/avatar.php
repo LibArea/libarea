@@ -31,7 +31,7 @@
           <a class="right size-14" href="<?= getUrlByName('user', ['login' => $uid['user_login']]); ?>/delete/cover">
             <?= lang('remove'); ?>
           </a>
-       </div>   
+        </div>
       <?php } else { ?>
         <?= lang('no-cover'); ?>...
       <?php } ?>

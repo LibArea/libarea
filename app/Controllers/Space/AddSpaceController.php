@@ -5,7 +5,7 @@ namespace App\Controllers\Space;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\SpaceModel;
-use Agouti\{Config, Base, Validation};
+use Config, Base, Validation;
 
 class AddSpaceController extends MainController
 {
@@ -16,7 +16,7 @@ class AddSpaceController extends MainController
         $space          = SpaceModel::getUserCreatedSpaces($uid['user_id']);
         $count_space    = count($space);
 
-        $valid = Validation::validTl($uid['user_trust_level'], Config::get(Config::PARAM_TL_ADD_SPACE), $count_space, 3);
+        $valid = Validation::validTl($uid['user_trust_level'], Config::get('general.tl_add_space'), $count_space, 3);
         if ($valid === false) {
             // redirect('/');
         }
@@ -80,19 +80,15 @@ class AddSpaceController extends MainController
         // Если пользователь уже создал пространство, то ограничим их количество (кроме TL5)
         $space          = SpaceModel::getUserCreatedSpaces($uid['user_id']);
         $count_space    = count($space);
-        $total_allowed  = $uid['user_trust_level'] == 5 ? 999 : 3;
-        $valid = Validation::validTl($uid['user_trust_level'], Config::get(Config::PARAM_TL_ADD_SPACE), $count_space, $total_allowed);
+        $total_allowed  = $uid['user_trust_level'] == 5 ? 20 : Config::get('trust-levels.tl_add_space_limit');
+        $valid = Validation::validTl($uid['user_trust_level'], Config::get('trust-levels.tl_add_space'), $count_space, $total_allowed);
         if ($valid === false) {
             redirect('/');
         }
 
         $num_add_space = $total_allowed - $count_space;
 
-        $meta = [
-            'sheet'         => 'add-space',
-            'meta_title'    => lang('add Space'),
-        ];
-
+        $meta = meta($m = [], lang('add space'));
         $data = [
             'num_add_space' => $num_add_space,
             'sheet'         => 'spaces',

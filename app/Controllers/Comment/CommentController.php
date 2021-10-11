@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
 use App\Models\CommentModel;
-use Agouti\{Content, Config, Base};
+use Content, Base;
 
 class CommentController extends MainController
 {
@@ -18,8 +18,8 @@ class CommentController extends MainController
         $page   = $page == 0 ? 1 : $page;
 
         $limit  = 25;
-        $pagesCount = CommentModel::getCommentAllCount();
-        $comments   = CommentModel::getCommentsAll($page, $limit, $uid);
+        $pagesCount = CommentModel::getCommentsAllCount('user');
+        $comments   = CommentModel::getCommentsAll($page, $limit, $uid, 'user');
 
         $result = array();
         foreach ($comments  as $ind => $row) {
@@ -28,18 +28,14 @@ class CommentController extends MainController
             $result[$ind]   = $row;
         }
 
-        $num = ' | ';
-        if ($page > 1) {
-            $num = sprintf(lang('page-number'), $page) . ' | ';
-        }
-
-        $meta = [
-            'canonical'     => Config::get(Config::PARAM_URL) . '/comments',
-            'sheet'         => 'comments',
-            'meta_title'    => lang('all comments') . $num . Config::get(Config::PARAM_NAME),
-            'meta_desc'     => lang('comments-desc') . $num . Config::get(Config::PARAM_HOME_TITLE),
+        $m = [
+            'og'         => false,
+            'twitter'    => false,
+            'imgurl'     => false,
+            'url'        => getUrlByName('comments'),
         ];
-        
+        $meta = meta($m, lang('all comments'), lang('comments-desc'));
+
         $data = [
             'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
@@ -66,13 +62,13 @@ class CommentController extends MainController
             $result[$ind]           = $row;
         }
 
-        $uid  = Base::getUid();
-        $meta = [
-            'canonical'     => Config::get(Config::PARAM_URL) . getUrlByName('comments.user', ['login' => $login]),
-            'sheet'         => 'user-comments',
-            'meta_title'    => lang('comments-n') . ' ' . $login . ' | ' . Config::get(Config::PARAM_NAME),
-            'meta_desc'     => lang('comments-n') . ' ' . $login . ' ' . Config::get(Config::PARAM_HOME_TITLE),
+        $m = [
+            'og'         => false,
+            'twitter'    => false,
+            'imgurl'     => false,
+            'url'        => getUrlByName('comments.user', ['login' => $login]),
         ];
+        $meta = meta($m, lang('comments-n') . ' ' . $login, lang('comments-n') . ' ' . $login);
 
         $data = [
             'h1'            => lang('comments-n') . ' ' . $login,
@@ -80,6 +76,6 @@ class CommentController extends MainController
             'comments'      => $result
         ];
 
-        return view('/comment/comment-user', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+        return view('/comment/comment-user', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
     }
 }

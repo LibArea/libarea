@@ -110,16 +110,16 @@
           <h1 class="size-24 mb20 flex">
             <?= $data['user']['user_login']; ?>
             <?php if ($data['user']['user_name']) { ?> / <?= $data['user']['user_name']; ?><?php } ?>
-          
-          
-          <?php if ($data['user']['user_up_count'] > 0) { ?>
-            <div class="flex">
-              <div class="up-id bi bi-heart red mr10 ml20 size-14"></div> 
-              <div class="size-14 gray-light"><?= $data['user']['user_up_count']; ?></div>
-            </div>
-          <?php } ?>
-           </h1>
-          <div class="mb20">   
+
+
+              <?php if ($data['user']['user_up_count'] > 0) { ?>
+                <div class="flex">
+                  <div class="up-id bi bi-heart red mr10 ml20 size-14"></div>
+                  <div class="size-14 gray-light"><?= $data['user']['user_up_count']; ?></div>
+                </div>
+              <?php } ?>
+          </h1>
+          <div class="mb20">
             <blockquote>
               <?= $data['user']['user_about']; ?>...
             </blockquote>
@@ -246,17 +246,29 @@
             <div class="pt5 pr15 pb5">
               <h3 class="mt0 mb10 uppercase pt10 size-14"><?= lang('admin'); ?></h3>
               <div class="mb5">
+                <?php if ($data['isBan']) { ?>
+                  <span class="type-ban gray size-15 mb5 block" data-id="<?= $data['user']['user_id']; ?>" data-type="user">
+                    <i class="bi bi-person-x-fill red middle mr5"></i>
+                    <span class="red size-14"><?= lang('unban'); ?></span>
+                  </span>
+                <?php } else { ?>
+                  <span class="type-ban size-14 gray size-15 mb5 block" data-id="<?= $data['user']['user_id']; ?>" data-type="user">
+                    <i class="bi bi-person-x middle mr5"></i>
+                    <?= lang('ban it'); ?>
+                  </span>
+                <?php } ?>
                 <a class="gray size-15 mb5 block" href="<?= getUrlByName('admin.user.edit', ['id' => $data['user']['user_id']]); ?>">
-                  <i class="bi bi-gear middle"></i>
+                  <i class="bi bi-gear middle mr5"></i>
                   <span class="middle"><?= lang('edit'); ?></span>
                 </a>
                 <a class="gray size-15 block" href="<?= getUrlByName('admin.badges.user.add', ['id' => $data['user']['user_id']]); ?>">
-                  <i class="bi bi-award middle"></i>
+                  <i class="bi bi-award middle mr5"></i>
                   <span class="middle"><?= lang('reward the user'); ?></span>
                 </a>
                 <?php if ($data['user']['user_whisper']) { ?>
                   <div class="tips size-14 pt15 pb10 gray-light">
-                    <i class="bi bi-info-square green"></i> <?= $data['user']['user_whisper']; ?>
+                    <i class="bi bi-info-square green mr5"></i>
+                    <?= $data['user']['user_whisper']; ?>
                   </div>
                 <?php } ?>
                 <hr>

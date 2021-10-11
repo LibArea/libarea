@@ -7,19 +7,15 @@
     <div class="wrap grid grid-cols-6 gap-4 justify-between">
       <?php foreach ($data['users'] as $ind => $user) { ?>
         <div class="center pr10 pl10 mb-col-2">
-          <div class="center">
-            <a href="<?= getUrlByName('user', ['login' => $user['user_login']]); ?>">
-              <?= user_avatar_img($user['user_avatar'], 'max', $user['user_login'], 'br-rd-50 w64'); ?>
-            </a>
-          </div>
-          <div class="center mt5">
-            <a class="block black" href="<?= getUrlByName('user', ['login' => $user['user_login']]); ?>">
-              <?= $user['user_login']; ?>
-            </a>
-            <?php if ($user['user_name']) { ?>
-              <span class="gray size-14"><?= $user['user_name']; ?></span>
-            <?php } ?>
-          </div>
+          <a href="<?= getUrlByName('user', ['login' => $user['user_login']]); ?>">
+            <?= user_avatar_img($user['user_avatar'], 'max', $user['user_login'], 'br-rd-50 w64'); ?>
+          </a>
+          <a class="block black mt5" href="<?= getUrlByName('user', ['login' => $user['user_login']]); ?>">
+            <?= $user['user_login']; ?>
+          </a>
+          <?php if ($user['user_name']) { ?>
+            <span class="gray size-14"><?= $user['user_name']; ?></span>
+          <?php } ?>
         </div>
       <?php } ?>
     </div>

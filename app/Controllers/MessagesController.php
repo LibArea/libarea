@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
 use App\Models\MessagesModel;
-use Agouti\{Content, Config, Base, Validation};
+use Content, Config, Base, Validation;
 
 class MessagesController extends MainController
 {
@@ -60,12 +60,7 @@ class MessagesController extends MainController
             }
         }
 
-        $meta = [
-            'meta_title'    => lang('private messages') . ' | ' . Config::get(Config::PARAM_NAME),
-            'sheet'         => 'all-mess',
-            'messages'      => $result,
-        ];
-
+        $meta = meta($m = [], lang('private messages'));
         $data = [
             'sheet'         => 'all-mess',
             'messages'      => $result,
@@ -114,11 +109,7 @@ class MessagesController extends MainController
             }
         }
 
-        $meta = [
-            'meta_title'        => lang('dialogue') . ' | ' . Config::get(Config::PARAM_NAME),
-            'sheet'             => 'dialog',
-        ];
-
+        $meta = meta($m = [], lang('dialogue'));
         $data = [
             'h1'                => lang('dialogue') . ' - ' . $list[$key]['user_login'],
             'sheet'             => 'dialog',
@@ -140,16 +131,12 @@ class MessagesController extends MainController
         }
 
         // Участник с нулевым уровнем доверия должен быть ограничен в добавлении ЛС
-        $add_pm  = Validation::accessPm($uid, $user['user_id'], Config::get(Config::PARAM_TL_ADD_PM));
+        $add_pm  = Validation::accessPm($uid, $user['user_id'], Config::get('general.tl_add_pm'));
         if ($add_pm === false) {
             redirect('/');
         }
 
-        $meta = [
-            'meta_title'    => lang('send a message') . ' | ' . Config::get(Config::PARAM_NAME),
-            'sheet'         => 'profil-mess',
-        ];
-
+        $meta = meta($m = [], lang('send a message'));
         $data = [
             'recipient_uid' => $user['user_id'],
         ];
@@ -181,7 +168,7 @@ class MessagesController extends MainController
         Base::PageRedirection($user, getUrlByName('messages', ['login' => $uid['user_login']]));
 
         // Участник с нулевым уровнем доверия должен быть ограничен в добавлении ЛС
-        $add_pm  = Validation::accessPm($uid, $recipient_id, Config::get(Config::PARAM_TL_ADD_PM));
+        $add_pm  = Validation::accessPm($uid, $recipient_id, Config::get('general.tl_add_pm'));
         if ($add_pm === false) {
             redirect('/');
         }

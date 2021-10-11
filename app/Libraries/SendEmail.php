@@ -1,11 +1,9 @@
 <?php
 
-namespace Agouti;
-
-use App\Models\User\SettingModel;
+use App\Models\User\{SettingModel, UserModel};
 use JacksonJeans\Mail;
 use JacksonJeans\MailException;
-use Agouti\Config;
+use Config;
 
 class SendEmail
 {
@@ -18,9 +16,9 @@ class SendEmail
             if ($setting) {
                 if ($setting['setting_email_appealed'] == 1) {
                     $user = UserModel::getUser($user_id, 'id');
-                    $link = 'https://' . HLEB_MAIN_DOMAIN . '/u/' . $user['user_login'] . '/notifications';
-                    $message = lang('You were mentioned (@), see') . ": \n" . $link . "\n\n" . HLEB_MAIN_DOMAIN;
-                    self::send($user['user_email'], Config::get(Config::PARAM_NAME) . ' - ' . lang('notification'), $message);
+                    $link = Config::get('meta.url') . '/u/' . $user['user_login'] . '/notifications';
+                    $message = lang('You were mentioned (@), see') . ": \n" . $link . "\n\n" . Config::get('meta.url');
+                    self::send($user['user_email'], Config::get('meta.name') . ' - ' . lang('notification'), $message);
                 }
             }
         }
@@ -30,27 +28,27 @@ class SendEmail
 
     public static function send($email, $subject = '', $message = '')
     {
-        if (Config::get(Config::PARAM_SMTP) == 1) {
+        if (Config::get('general.smtp') == 1) {
             $mail = new Mail('smtp', [
-                'host'      => 'ssl://' . Config::get(Config::PARAM_SMTP_HOST),
-                'port'      => Config::get(Config::PARAM_SMTP_POST),
-                'username'  => Config::get(Config::PARAM_SMTP_USER),
-                'password'  => Config::get(Config::PARAM_SMTP_PASS)
+                'host'      => 'ssl://' . Config::get('general.smtphost'),
+                'port'      => Config::get('general.smtpport'),
+                'username'  => Config::get('general.smtpuser'),
+                'password'  => Config::get('general.smtppass')
             ]);
 
-            $mail->setFrom(Config::get(Config::PARAM_SMTP_USER))
+            $mail->setFrom(Config::get('general.smtpuser'))
                 ->setTo($email)
                 ->setSubject($subject)
                 ->setText($message)
                 ->send();
-       } else {
+        } else {
             $mail = new Mail();
-            $mail->setFrom(Config::get(Config::PARAM_EMAIL), Config::get(Config::PARAM_HOME_TITLE));
-             
+            $mail->setFrom(Config::get('general.email'), Config::get('meta.title'));
+
             $mail->to($email)
                 ->setSubject($subject)
                 ->setHTML($message, true)
                 ->send();
-       }
+        }
     }
 }

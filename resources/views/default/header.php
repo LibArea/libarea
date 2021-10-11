@@ -2,10 +2,15 @@
 <html lang="ru" prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
 
 <head>
-  <?= includeTemplate('/_block/meta-tags', ['meta' => $meta]); ?>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <?= $meta; ?>
   <?php getRequestHead()->output(); ?>
   <script src="/assets/js/jquery-3.6.0.min.js"></script>
   <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="icon" sizes="16x16" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" sizes="120x120" href="/favicon-120.ico" type="image/x-icon">
   <?php if ($uid['user_id'] == 0) { ?>
     <script nonce="<?= $_SERVER['nonce']; ?>">
       $(document).on('click', '.click-no-auth', function() {
@@ -42,8 +47,8 @@
           </nav>
         </div>
         <div class="mr20 flex items-center">
-          <a title="<?= lang('home'); ?>" class="size-21 mb-size-18 p5 black" href="/">
-            AGOUTI
+          <a title="<?= lang('home'); ?>" class="size-21 mb-size-18 p5 black uppercase" href="/">
+            <?= Config::get('meta.name'); ?>
           </a>
         </div>
         <div class="p10 ml20 no-mob w-100">
@@ -59,7 +64,7 @@
             <div id="toggledark" class="header-menu-item no-mob only-icon p10 ml20 mb-ml-10">
               <i class="bi bi-brightness-high gray-light-2 size-18"></i>
             </div>
-            <?php if (!Agouti\Config::get(Agouti\Config::PARAM_INVITE)) { ?>
+            <?php if (Config::get('general.invite') == 0) { ?>
               <a class="ml30 register gray size-15 block" title="<?= lang('sign up'); ?>" href="<?= getUrlByName('register'); ?>">
                 <?= lang('sign up'); ?>
               </a>

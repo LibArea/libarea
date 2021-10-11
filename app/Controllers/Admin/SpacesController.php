@@ -5,7 +5,7 @@ namespace App\Controllers\Admin;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\Admin\SpaceModel;
-use Agouti\Base;
+use Base;
 
 class SpacesController extends MainController
 {
@@ -18,12 +18,9 @@ class SpacesController extends MainController
         $pagesCount = SpaceModel::getSpacesCount($sheet);
         $spaces     = SpaceModel::getSpaces($page, $limit, $sheet);
 
-        $meta = [
-            'meta_title'    => lang('spaces'),
-            'sheet'         => 'spaces',
-        ];
-
         Request::getResources()->addBottomScript('/assets/js/admin.js');
+
+        $meta = meta($m = [], lang('spaces'));
         $data = [
             'sheet'         => $sheet == 'all' ? 'spaces' : 'spaces-ban',
             'pagesCount'    => ceil($pagesCount / $limit),

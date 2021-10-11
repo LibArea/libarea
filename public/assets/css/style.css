@@ -275,6 +275,7 @@ img {
 .align-right { text-align: right; }
 .middle { vertical-align: middle; }
 .lowercase { text-transform: lowercase; }
+.uppercase { text-transform: uppercase; }
 .justify-between { justify-content: space-between; }
 .justify-center { justify-content: center; }
 .items-center { align-items: center; }
@@ -283,7 +284,6 @@ img {
 .absolute { position: absolute; }
 .relative { position: relative; }
 .hidden { overflow: hidden; }
-.uppercase { text-transform: uppercase; }
 .block { display: block; }
 .table { display: table; }
 .inline { display: inline-block; }

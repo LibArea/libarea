@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
 use App\Models\ReportModel;
-use Agouti\Base;
+use Base;
 
 class ReportsController extends MainController
 {
@@ -27,11 +27,8 @@ class ReportsController extends MainController
         }
 
         Request::getResources()->addBottomScript('/assets/js/admin.js');
-        $meta = [
-            'meta_title'    => lang('Reports'),
-            'sheet'         => 'reports',
-        ];
 
+        $meta = meta($m = [], lang('reports'));
         $data = [
             'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,

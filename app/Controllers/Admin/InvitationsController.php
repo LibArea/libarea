@@ -4,7 +4,7 @@ namespace App\Controllers\Admin;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use App\Models\User\{InvitationModel, UserModel};
-use Agouti\Base;
+use Base;
 
 class InvitationsController extends MainController
 {
@@ -19,11 +19,7 @@ class InvitationsController extends MainController
             $result[$ind]       = $row;
         }
 
-        $meta = [
-            'meta_title'    => lang('invites'),
-            'sheet'         => 'invitations',
-        ];
-
+        $meta = meta($m = [], lang('invites'));
         $data = [
             'sheet'         => $sheet == 'all' ? 'invitations' : $sheet,
             'invitations'   => $result,

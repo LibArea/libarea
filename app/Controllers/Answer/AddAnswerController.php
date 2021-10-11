@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
 use App\Models\{NotificationsModel, ActionModel, AnswerModel, PostModel};
-use Agouti\{Content, Base, Validation, SendEmail};
+use Content, Base, Validation, SendEmail;
 
 class AddAnswerController extends MainController
 {
@@ -27,14 +27,8 @@ class AddAnswerController extends MainController
         $redirect = '/post/' . $post['post_id'] . '/' . $post['post_slug'];
         Validation::Limits($answer_content, lang('Bodies'), '6', '5000', $redirect);
 
-        // Ограничим частоту добавления (зависит от TL)
-        if ($uid['user_trust_level'] < 2) {
-            $num_answer =  AnswerModel::getAnswerSpeed($uid['user_id']);
-            if ($num_answer > 10) {
-                addMsg(lang('limit-answer-day'), 'error');
-                redirect('/');
-            }
-        }
+        // Ограничим добавления ответов (в день)
+        Validation::speedAdd($uid, 'answer');
 
         $answer_published = 1;
         if (Content::stopWordsExists($answer_content)) {

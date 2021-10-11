@@ -3,9 +3,7 @@
 namespace App\Models\User;
 
 use Hleb\Scheme\App\Models\MainModel;
-use Agouti\Config;
-use DB;
-use PDO;
+use DB, PDO;
 
 class SettingModel extends MainModel
 {
@@ -51,22 +49,6 @@ class SettingModel extends MainModel
     // Редактирование профиля
     public static function editProfile($data)
     {
-      /*  $params = [
-            'user_name'                 => $data['user_name'],
-            'user_updated_at'           => $data['user_updated_at'],
-            'user_color'                => $data['user_color'],
-            'user_about'                => $data['user_about'],
-            'user_design_is_minimal'    => $data['user_design_is_minimal'],
-            'user_website'              => $data['user_website'],
-            'user_location'             => $data['user_location'],
-            'user_public_email'         => $data['user_public_email'],
-            'user_skype'                => $data['user_skype'],
-            'user_twitter'              => $data['user_twitter'],
-            'user_telegram'             => $data['user_telegram'],
-            'user_vk'                   => $data['user_vk'],
-            'user_id'                   => $data['user_id'],
-        ]; */
-
         $params = [
             'user_id'            => $data['user_id'],
             'user_email'         => $data['user_email'],

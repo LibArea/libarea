@@ -86,7 +86,7 @@
         <?php if ($post['post_content_img']) { ?>
           <div class="home-img mt15 flex-auto">
             <a title="<?= $post['post_title']; ?>" href="<?= $post_url; ?>">
-              <?= post_img($post['post_content_img'], $post['post_title'], 'home-img br-rd-5', 'cover'); ?>
+              <?= post_img($post['post_content_img'], $post['post_title'], 'home-img right br-rd-5', 'cover'); ?>
             </a>
           </div>
         <?php } ?>

@@ -5,17 +5,17 @@ namespace App\Controllers\User;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\{SettingModel, UserModel};
-use Agouti\{Base, UploadImage, Validation};
+use Base, UploadImage, Validation;
 
 class SettingController extends MainController
 {
     private $uid;
-    
-    public function __construct() 
+
+    public function __construct()
     {
         $this->uid  = Base::getUid();
     }
-    
+
     // Форма настройки профиля
     function settingForm()
     {
@@ -31,11 +31,7 @@ class SettingController extends MainController
         // Если пользователь забанен
         Base::accountBan($user);
 
-        $meta = [
-            'sheet'         => 'settings',
-            'meta_title'    => lang('setting'),
-        ];
-
+        $meta = meta($m = [], lang('setting'));
         $data = [
             'sheet'         => 'settings',
             'user'          => $user,
@@ -55,13 +51,13 @@ class SettingController extends MainController
         $redirect   = getUrlByName('setting', ['login' => $this->uid['user_login']]);
         Validation::Limits($name, lang('name'), '3', '11', $redirect);
         Validation::Limits($about, lang('about me'), '0', '255', $redirect);
-        
+
         if ($public_email) {
             Validation::checkEmail($public_email, $redirect);
         }
-        
+
         $_SESSION['account']['user_design_is_minimal'] = $design_is_minimal;
-        
+
         $user   = UserModel::getUser($this->uid['user_id'], 'id');
         $data = [
             'user_id'                   => $this->uid['user_id'],
@@ -104,11 +100,7 @@ class SettingController extends MainController
         Request::getHead()->addStyles('/assets/css/image-uploader.css');
         Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
 
-        $meta = [
-            'sheet'         => 'avatar',
-            'meta_title'    => lang('change avatar'),
-        ];
-
+        $meta = meta($m = [], lang('change avatar'));
         $data = [
             'sheet' => 'avatar',
             'user'  => UserModel::getUser($this->uid['user_login'], 'slug'),
@@ -150,11 +142,7 @@ class SettingController extends MainController
             redirect(getUrlByName('setting.security', ['login' => $this->uid['user_login']]));
         }
 
-        $meta = [
-            'sheet'         => 'security',
-            'meta_title'    => lang('change password'),
-        ];
-
+        $meta = meta($m = [], lang('change password'));
         $data = [
             'password'      => '',
             'password2'     => '',
@@ -171,7 +159,7 @@ class SettingController extends MainController
         $password    = Request::getPost('password');
         $password2   = Request::getPost('password2');
         $password3   = Request::getPost('password3');
- 
+
         $redirect = getUrlByName('setting.security', ['login' => $this->uid['user_login']]);
         if ($password2 != $password3) {
             addMsg(lang('pass-match-err'), 'error');
@@ -252,11 +240,7 @@ class SettingController extends MainController
         $user = UserModel::getUser($this->uid['user_id'], 'id');
         Base::accountBan($user);
 
-        $meta = [
-            'sheet'         => 'notifications',
-            'meta_title'    => lang('notifications'),
-        ];
-
+        $meta = meta($m = [], lang('notifications'));
         $data = [
             'sheet'     => 'notifications',
             'setting'   => SettingModel::getNotifications($user['user_id']),

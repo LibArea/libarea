@@ -3,7 +3,6 @@
 namespace App\Models\User;
 
 use Hleb\Scheme\App\Models\MainModel;
-use Agouti\Config;
 use DB;
 use PDO;
 
@@ -107,20 +106,8 @@ class UserModel extends MainModel
     }
 
     // Регистрация участника
-    public static function createUser($login, $email, $password, $reg_ip, $invitation_id)
+    public static function createUser($login, $email, $password, $reg_ip, $invitation_id, $tl)
     {
-        // количество участников 
-        $sql    = "SELECT user_id, user_is_deleted FROM users WHERE user_is_deleted = 0";
-        $count  = DB::run($sql)->rowCount();
-
-        // Для "режима запуска" первые 50 участников получают trust_level = 1 
-        $trust_level = 0;
-        if ($count < 50 && Config::get(Config::PARAM_MODE) == 1) {
-            $trust_level = 1;
-        }
-
-        $password   = password_hash($password, PASSWORD_BCRYPT);
-
         $activated = 0; // Требуется активация по e-mail
         if ($invitation_id > 0) {
             $activated = 1;
@@ -131,11 +118,11 @@ class UserModel extends MainModel
             'user_email'                => $email,
             'user_design_is_minimal'    => 0, // По умолчанию, дизайн блоговый
             'user_whisper'              => '',
-            'user_password'             => $password,
+            'user_password'             => password_hash($password, PASSWORD_BCRYPT),
             'user_limiting_mode'        => 0, // Режим заморозки выключен
             'user_activated'            => $activated,
             'user_reg_ip'               => $reg_ip,
-            'user_trust_level'          => $trust_level,
+            'user_trust_level'          => $tl,
             'user_invitation_id'        => $invitation_id,
         ];
 

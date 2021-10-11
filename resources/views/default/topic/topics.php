@@ -45,10 +45,11 @@
     <div class="bg-white p15">
       <h3 class="uppercase mb5 mt0 font-light size-14 gray"><?= lang('new ones'); ?></h3>
       <?php foreach ($data['news'] as $new) { ?>
-        <a title="<?= $new['topic_title']; ?>" class="bg-blue-100 bg-hover-300 white-hover flex justify-center pt5 pr10 pb5 pl10 br-rd-20 blue inline size-14" href="<?= getUrlByName('topic', ['slug' => $new['topic_slug']]); ?>">
+        <a title="<?= $new['topic_title']; ?>" class="bg-blue-100 bg-hover-300 white-hover flex justify-center pt5 pr10 pb5 pl10 mb5 br-rd-20 blue inline size-14" href="<?= getUrlByName('topic', ['slug' => $new['topic_slug']]); ?>">
           <?= $new['topic_title']; ?>
         </a><br>
       <?php } ?>
     </div>
   <?php } ?>
 </aside>
+<?= includeTemplate('/_block/wide-footer'); ?>

@@ -4,8 +4,8 @@ namespace App\Controllers\Admin;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\Admin\WordsModel;
-use Agouti\Base;
+use App\Models\ContentModel;
+use Base;
 
 class WordsController extends MainController
 {
@@ -14,14 +14,11 @@ class WordsController extends MainController
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
-        $words = WordsModel::getStopWords();
+        $words = ContentModel::getStopWords();
 
         Request::getResources()->addBottomScript('/assets/js/admin.js');
-        $meta = [
-            'meta_title'    => lang('stop words'),
-            'sheet'         => $sheet == 'all' ? 'words' : $sheet,
-        ];
 
+        $meta = meta($m = [], lang('stop words'));
         $data = [
             'words'     => $words,
             'sheet'     => $sheet == 'all' ? 'words' : $sheet,
@@ -33,12 +30,12 @@ class WordsController extends MainController
     // Форма добавления стоп-слова
     public function addPage()
     {
-        $meta = [
-            'meta_title'    => lang('add a stop word'),
+        $meta = meta($m = [], lang('add a stop word'));
+        $data = [
             'sheet'         => 'words',
         ];
 
-        return view('/admin/word/add', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => []]);
+        return view('/admin/word/add', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
     }
 
     // Добавление стоп-слова
@@ -51,7 +48,7 @@ class WordsController extends MainController
             'stop_space_id' => 0, // Глобально
         ];
 
-        WordsModel::setStopWord($data);
+        ContentModel::setStopWord($data);
 
         redirect('/admin/words');
     }
@@ -61,7 +58,7 @@ class WordsController extends MainController
     {
         $word_id    = Request::getPostInt('id');
 
-        WordsModel::deleteStopWord($word_id);
+        ContentModel::deleteStopWord($word_id);
 
         redirect('/admin/words');
     }

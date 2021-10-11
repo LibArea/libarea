@@ -4,17 +4,20 @@ namespace App\Controllers\Auth;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\User\{SettingModel, InvitationModel, UserModel};
-use Agouti\{Config, Base, Integration, Validation, SendEmail};
+use App\Models\User\{SettingModel, UserModel};
+use Config, Base, Integration, Validation, SendEmail;
 
 class RecoverController extends MainController
 {
     public function showPasswordForm()
     {
-        $meta = [
-            'sheet'         => 'recover',
-            'meta_title'    => lang('password Recovery') . ' | ' . Config::get(Config::PARAM_NAME),
+        $m = [
+            'og'         => false,
+            'twitter'    => false,
+            'imgurl'     => false,
+            'url'        => getUrlByName('recover'),
         ];
+        $meta = meta($m, lang('password recovery'), lang('info-recover'));
 
         $data = [
             'sheet'         => 'recover',
@@ -27,8 +30,8 @@ class RecoverController extends MainController
     {
         $email          = Request::getPost('email');
         $recover_uri    = getUrlByName('recover');
-        
-        if (Config::get(Config::PARAM_CAPTCHA)) {
+
+        if (Config::get('general.captcha')) {
             if (!Integration::checkCaptchaCode()) {
                 addMsg(lang('code error'), 'error');
                 redirect($recover_uri);
@@ -54,9 +57,9 @@ class RecoverController extends MainController
         UserModel::initRecover($uInfo['user_id'], $code);
 
         // Отправка e-mail
-        $newpass_link = 'https://' . HLEB_MAIN_DOMAIN . $recover_uri . '/remind/' . $code;
-        $mail_message = lang('your link to change your password'). ": \n" . $newpass_link . "\n\n";
-        SendEmail::send($email, Config::get(Config::PARAM_NAME) . ' — ' . lang('changing your password'), $mail_message);
+        $newpass_link = Config::get('meta.url') . $recover_uri . '/remind/' . $code;
+        $mail_message = lang('your link to change your password') . ": \n" . $newpass_link . "\n\n";
+        SendEmail::send($email, Config::get('meta.name') . ' — ' . lang('changing your password'), $mail_message);
 
         addMsg(lang('new password has been sent to e-mail'), 'success');
         redirect(getUrlByName('login'));
@@ -67,7 +70,7 @@ class RecoverController extends MainController
     {
         $code       = Request::get('code');
         $user_id    = UserModel::getPasswordActivate($code);
-        
+
         if (!$user_id) {
             addMsg(lang('code-incorrect'), 'error');
             redirect(getUrlByName('recover'));
@@ -76,11 +79,8 @@ class RecoverController extends MainController
         $user = UserModel::getUser($user_id['activate_user_id'], 'id');
         Base::PageError404($user);
 
-        $meta = [
-            'sheet'         => 'recovery',
-            'meta_title'    => lang('password Recovery') . ' | ' . Config::get(Config::PARAM_NAME),
-        ];
-        
+        $meta = meta($m = [], lang('password recovery'), lang('info-recover'));
+
         $data = [
             'code'          => $code,
             'user_id'       => $user_id['activate_user_id'],
@@ -120,7 +120,7 @@ class RecoverController extends MainController
     {
         $code = Request::get('code');
         $activate_email = UserModel::getEmailActivate($code);
-        
+
         if (!$activate_email) {
             addMsg(lang('code-used'), 'error');
             redirect('/');

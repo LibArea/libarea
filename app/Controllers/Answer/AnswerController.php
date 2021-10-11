@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
 use App\Models\AnswerModel;
-use Agouti\{Content, Config, Base};
+use Content, Base;
 
 class AnswerController extends MainController
 {
@@ -28,17 +28,13 @@ class AnswerController extends MainController
             $result[$ind]           = $row;
         }
 
-        $num = ' | ';
-        if ($page > 1) {
-            $num = sprintf(lang('page-number'), $page) . ' | ';
-        }
-
-        $meta = [
-            'canonical'     => Config::get(Config::PARAM_URL) . '/answers',
-            'sheet'         => 'answers',
-            'meta_title'    => lang('all answers') . $num . Config::get(Config::PARAM_NAME),
-            'meta_desc'     => lang('answers-desc') . $num . Config::get(Config::PARAM_HOME_TITLE),
+        $m = [
+           'og'         => false,
+           'twitter'    => false,
+           'imgurl'     => false,
+           'url'        => getUrlByName('answers'),
         ];
+        $meta = meta($m, lang('all answers'), lang('answers-desc'));
 
         $data = [
             'pagesCount'    => ceil($pagesCount / $limit),
@@ -67,12 +63,13 @@ class AnswerController extends MainController
             $result[$ind]   = $row;
         }
 
-        $meta = [
-            'canonical'     => Config::get(Config::PARAM_URL) . getUrlByName('answers.user', ['login' => $login]),
-            'sheet'         => 'user-answers',
-            'meta_title'    => lang('answers') . ' ' . $login . ' | ' . Config::get(Config::PARAM_NAME),
-            'meta_desc'     => lang('responses from community members') . ' ' . $login . ' ' . Config::get(Config::PARAM_HOME_TITLE),
+        $m = [
+           'og'         => false,
+           'twitter'    => false,
+           'imgurl'     => false,
+           'url'        => getUrlByName('answers.user', ['login' => $login]),
         ];
+        $meta = meta($m, lang('answers') . ' ' . $login, lang('responses from community members') . ' ' . $login);
 
         $data = [
             'h1'            =>  lang('answers-n') . ' ' . $login,

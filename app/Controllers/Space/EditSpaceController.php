@@ -5,7 +5,7 @@ namespace App\Controllers\Space;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\SpaceModel;
-use Agouti\{UploadImage, Base, Validation};
+use UploadImage, Base, Validation;
 
 class EditSpaceController extends MainController
 {
@@ -92,11 +92,7 @@ class EditSpaceController extends MainController
         Request::getHead()->addStyles('/assets/css/image-uploader.css');
         Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
 
-        $meta = [
-            'sheet'         => 'edit',
-            'meta_title'    => lang('edit') . ' — ' . $space['space_slug'],
-        ];
-
+        $meta = meta($m = [], lang('edit') . ' — ' . $space['space_slug']);
         $data = [
             'space' => $space,
             'sheet' => 'edit',
@@ -121,11 +117,7 @@ class EditSpaceController extends MainController
         Request::getHead()->addStyles('/assets/css/image-uploader.css');
         Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
 
-        $meta = [
-            'sheet'         => 'edit-logo',
-            'meta_title'    => lang('edit') . ' / ' . lang('logo'),
-        ];
-
+        $meta = meta($m = [], lang('edit') . ' / ' . lang('logo'));
         $data = [
             'space' => $space,
             'sheet' => 'logo',

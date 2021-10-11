@@ -6,11 +6,10 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
 use App\Models\{NotificationsModel, ActionModel, AnswerModel, CommentModel, PostModel};
-use Agouti\{Content, Config, Base, Validation, SendEmail};
+use Content, Base, Validation, SendEmail;
 
 class AddCommentController extends MainController
 {
-
     // Добавление комментария
     public function index()
     {
@@ -34,14 +33,8 @@ class AddCommentController extends MainController
         // Проверяем длину тела
         Validation::Limits($comment_content, lang('Comments-m'), '6', '2024', $redirect);
 
-        // Участник с нулевым уровнем доверия должен быть ограничен в добавлении комментариев
-        if ($uid['user_trust_level'] < Config::get(Config::PARAM_TL_ADD_COMM)) {
-            $num_comm =  CommentModel::getCommentSpeed($uid['user_id']);
-            if ($num_comm > 9) {
-                addMsg(lang('limit-comment-day'), 'error');
-                redirect('/');
-            }
-        }
+        // Ограничим добавления комментариев (в день)
+        Validation::speedAdd($uid, 'comment');
 
         $comment_published = 1;
         if (Content::stopWordsExists($comment_content)) {

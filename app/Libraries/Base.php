@@ -1,7 +1,5 @@
 <?php
 
-namespace Agouti;
-
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
 use App\Models\{NotificationsModel, AuthModel};
@@ -15,7 +13,7 @@ class Base
 
         // Сайт отключен, кроме Tl5 (The site is disabled, except Tl5)
         // enable - включен (disabled - выклчючен)
-        $site = 'enable';  
+        $site = 'enable';
         if (!empty($account['user_id'])) {
             $uid['user_id']                 = $account['user_id'];
             $uid['user_login']              = $account['user_login'];
@@ -29,7 +27,7 @@ class Base
                 if ($account['user_trust_level'] != 5) {
                     include HLEB_GLOBAL_DIRECTORY . '/app/Optional/site_off.php';
                     hl_preliminary_exit();
-                } 
+                }
             }
 
             Request::getResources()->addBottomScript('/assets/js/app.js');
@@ -37,11 +35,11 @@ class Base
             self::checkCookie();
             $uid['user_id']     = 0;
             $uid['user_trust_level'] = null;
-            
+
             if ($site == 'disabled') {
                 include HLEB_GLOBAL_DIRECTORY . '/app/Optional/site_off.php';
                 hl_preliminary_exit();
-            }  
+            }
         }
 
         return $uid;

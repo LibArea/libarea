@@ -1,11 +1,12 @@
 <?php
-
+//static $values = [];
 // Localization
 function lang($text)
-{
+{ 
+    // print_r('1');
     if (isset(FILE_LANG[$text])) {
         return FILE_LANG[$text];
-    }
+    }  
     return $text;
 }
 

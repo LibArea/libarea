@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\NotificationsModel;
-use Agouti\Base;
+use Base;
 
 class NotificationsController extends MainController
 {
@@ -17,7 +17,7 @@ class NotificationsController extends MainController
 
         // Если страница закладок не участника
         if ($login != $uid['user_login']) {
-            redirect(getUrlByName('notifications', ['login' => $user['user_login']]));
+            redirect(getUrlByName('notifications', ['login' => $uid['user_login']]));
         }
 
         // Данные участника и список уведомлений
@@ -29,11 +29,7 @@ class NotificationsController extends MainController
             $result[$ind]           = $row;
         }
 
-        $meta = [
-            'meta_title'    => lang('notifications'),
-            'sheet'         => 'notifications',
-        ];
-
+        $meta = meta($m = [], lang('notifications'));
         $data = [
             'sheet'         => 'notifications',
             'notifications' => $result,

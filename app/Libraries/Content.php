@@ -1,9 +1,6 @@
 <?php
 
-namespace Agouti;
-
 use App\Models\ContentModel;
-use MyParsedown;
 
 class Content
 {
@@ -175,12 +172,12 @@ class Content
 
         return $content;
     }
-    
+
     public static function noMarkdown($content)
     {
         $md = '/(?:__|[*#])|\[(.*?)\]\(.*?\)/';
         $content = preg_replace($md, "", $content);
-        
+
         return $content;
     }
 }

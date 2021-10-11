@@ -74,12 +74,21 @@ class CommentModel extends MainModel
     }
 
     // Все комментарии
-    public static function getCommentsAll($page, $limit, $uid)
+    public static function getCommentsAll($page, $limit, $uid, $sheet)
     {
-        if (!$uid['user_trust_level']) {
-            $tl = 'AND post_tl = 0';
+        if ($sheet == 'user') {
+            if (!$uid['user_trust_level']) {
+                $tl = 'AND comment_is_deleted = 0 AND post_tl = 0';
+            } else {
+                $tl = 'AND comment_is_deleted = 0 AND post_tl <= ' . $uid['user_trust_level'] . '';
+            }
+            $sort = '';
         } else {
-            $tl = 'AND post_tl <= ' . $uid['user_trust_level'] . '';
+            $sort = "WHERE comment_is_deleted = 0";
+            if ($sheet == 'ban') {
+                $sort = "WHERE comment_is_deleted = 1";
+            }
+            $tl = '';
         }
 
         $start  = ($page - 1) * $limit;
@@ -88,7 +97,9 @@ class CommentModel extends MainModel
                     post_title,
                     post_slug,
                     post_tl,
+                    post_type,
                     comment_id,
+                    comment_ip,
                     comment_date,
                     comment_content,
                     comment_post_id,
@@ -100,16 +111,26 @@ class CommentModel extends MainModel
                     user_avatar
                         FROM comments 
                         JOIN users ON user_id = comment_user_id
-                        JOIN posts ON comment_post_id = post_id AND comment_is_deleted = 0 " . $tl . "
+                        JOIN posts ON comment_post_id = post_id " . $tl . "
+                        $sort
                         ORDER BY comment_id DESC LIMIT $start, $limit ";
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Количество комментариев
-    public static function getCommentAllCount()
+    // Количество комментариев 
+    public static function getCommentsAllCount($sheet)
     {
-        $sql = "SELECT comment_id, comment_is_deleted FROM comments WHERE comment_is_deleted = 0";
+        if ($sheet == 'user') {
+            $sort = "WHERE comment_is_deleted = 0";
+        } else {
+            $sort = "WHERE comment_is_deleted = 0";
+            if ($sheet == 'ban') {
+                $sort = "WHERE comment_is_deleted = 1";
+            }
+        }
+        
+        $sql = "SELECT comment_id, comment_is_deleted FROM comments $sort";
 
         return DB::run($sql)->rowCount();
     }
@@ -196,17 +217,4 @@ class CommentModel extends MainModel
         return DB::run($sql, ['comment_id' => $comment_id, 'comment' => $comment, 'data' => date("Y-m-d H:i:s")]);
     }
 
-    // Частота размещения комментариев участника 
-    public static function getCommentSpeed($user_id)
-    {
-        $sql = "SELECT 
-                    comment_id, 
-                    comment_user_id, 
-                    comment_date
-                    FROM comments 
-                        WHERE comment_user_id = :user_id
-                        AND comment_date >= DATE_SUB(NOW(), INTERVAL 1 DAY)";
-
-        return  DB::run($sql, ['user_id' => $user_id])->rowCount();
-    }
 }

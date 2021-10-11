@@ -20,14 +20,13 @@
         <button type="submit" class="button br-rd-5 white">
           <?= lang('sign in'); ?>
         </button>
-        <?php if (!Agouti\Config::get(Agouti\Config::PARAM_INVITE)) { ?>
+        <?php if (Config::get('general.invite') == 0) { ?>
           <span class="mr5 ml5 size-14"><a href="<?= getUrlByName('register'); ?>"><?= lang('sign up'); ?></a></span>
         <?php } ?>
         <span class="mr5 ml5 size-14"><a href="<?= getUrlByName('recover'); ?>"><?= lang('forgot your password'); ?>?</a></span>
       </div>
     </form>
-
-    <?php if (Agouti\Config::get(Agouti\Config::PARAM_INVITE)) { ?>
+    <?php if (Config::get('general.invite') == 1) { ?>
       <?= lang('no-invate-txt'); ?>
     <?php } ?>
 </main>

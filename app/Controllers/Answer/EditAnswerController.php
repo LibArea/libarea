@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
 use App\Models\{AnswerModel, PostModel};
-use Agouti\{Content, Config, Base, Validation};
+use Content, Config, Base, Validation;
 
 class EditAnswerController extends MainController
 {
@@ -64,11 +64,7 @@ class EditAnswerController extends MainController
         Request::getResources()->addBottomStyles('/assets/editor/editormd.css');
         Request::getResources()->addBottomScript('/assets/editor/meditor.min.js');
  
-        $meta = [
-            'sheet'             => 'edit-answers',
-            'meta_title'        => lang('edit answer') . ' | ' . Config::get(Config::PARAM_NAME),
-        ];
-
+        $meta = meta($m =[], lang('edit answer']);
         $data = [
             'answer_id'         => $answer['answer_id'],
             'post_id'           => $post['post_id'],

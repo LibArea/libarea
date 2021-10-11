@@ -1,5 +1,5 @@
-<main class="col-span-9 mb-col-12<?php if ($data['post']['post_is_deleted'] == 1) { ?> bg-red-300<?php } ?>">
-  <article class="post-full border-box-1 br-rd-5 bg-white pt0 pr5 pb5 pl15">
+<main class="col-span-9 mb-col-12">
+  <article class="post-full border-box-1 br-rd-5 bg-white<?php if ($data['post']['post_is_deleted'] == 1) { ?> bg-red-300<?php } ?> pt0 pr5 pb5 pl15">
     <?php if ($data['post']['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
       <div class="post-body">
         <h1 class="title mb0 size-24">
@@ -236,7 +236,7 @@
     </div>
   <?php } ?>
   <div class="border-box-1 bg-white br-rd-5 mb15 p15">
-    <div class="social center" data-url="<?= Agouti\Config::get(Agouti\Config::PARAM_URL) . '/post/' . $data['post']['post_id'] . '/' . $data['post']['post_slug']; ?>" data-title="<?= $data['post']['post_title']; ?>">
+    <div class="social center" data-url="<?= Config::get('meta.url') . getUrlByName('post', ['id' => $data['post']['post_id'], 'slug' => $data['post']['post_slug']]); ?>" data-title="<?= $data['post']['post_title']; ?>">
       <a class="size-21 pl15 pr15 gray-light-2" data-id="fb"><i class="bi bi-facebook"></i></a>
       <a class="size-21 pl15 pr15 gray-light-2" data-id="vk">VK</a>
       <a class="size-21 pl15 pr15 gray-light-2" data-id="tw"><i class="bi bi-twitter"></i></a>

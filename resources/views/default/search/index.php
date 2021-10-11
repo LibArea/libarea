@@ -1,11 +1,11 @@
-<main class="col-span-7 bg-white br-rd-5 border-box-1 pt5 pr15 pb5 pl15">
+<main class="col-span-9 bg-white br-rd-5 border-box-1 pt5 pr15 pb5 pl15">
   <h1><?= lang('search'); ?></h1>
   <?php if (!empty($data['result'])) { ?>
     <div><?= lang('you were looking for'); ?>: <b><?= $data['query']; ?></b></div>
   <?php } ?>
   <br>
   <?php if (!empty($data['result'])) { ?>
-    <?php if (Agouti\Config::get(Agouti\Config::PARAM_SEARCH) == 0) { ?>
+    <?php if (Config::get('general.search') == 0) { ?>
       <?php foreach ($data['result'] as  $post) { ?>
         <div class="search max-w780 mb20">
           <a class="search-title size-21" href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">

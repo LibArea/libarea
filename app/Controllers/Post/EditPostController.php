@@ -6,17 +6,17 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
 use App\Models\{PostModel, SpaceModel, TopicModel};
-use Agouti\{Content, Config, Base, UploadImage, Validation};
+use Content, Base, UploadImage, Validation;
 
 class EditPostController extends MainController
 {
     private $uid;
-    
-    public function __construct() 
+
+    public function __construct()
     {
         $this->uid  = Base::getUid();
     }
-    
+
     // Изменяем пост
     public function index()
     {
@@ -38,7 +38,7 @@ class EditPostController extends MainController
         $post_fields    = Request::getPost() ?? [];
         $post_related   = implode(',', $post_fields['post_select'] ?? []);
         $topics         = $post_fields['topic_select'] ?? [];
-        
+
         // Проверка доступа 
         $post   = PostModel::getPostId($post_id);
         if (!accessСheck($post, 'post', $this->uid, 0, 0)) {
@@ -51,7 +51,7 @@ class EditPostController extends MainController
         Content::stopContentQuietМode($user);
 
         $redirect   = '/post/edit/' . $post_id;
-        
+
         // Получаем информацию по пространству
         $space = SpaceModel::getSpace($post_space_id, 'id');
         if (!$space) {
@@ -90,8 +90,8 @@ class EditPostController extends MainController
         $post_date = $post['post_date'];
         if ($draft == 1 && $post_draft == 0) {
             $post_date = date("Y-m-d H:i:s");
-        } 
-        
+        }
+
         // Обложка поста
         $cover          = $_FILES['images'];
         if ($_FILES['images']['name'][0]) {
@@ -131,7 +131,7 @@ class EditPostController extends MainController
             }
             TopicModel::addPostTopics($arr, $post_id);
         }
-        
+
         redirect(getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]));
     }
 
@@ -152,11 +152,7 @@ class EditPostController extends MainController
         Request::getResources()->addBottomScript('/assets/editor/meditor.min.js');
         Request::getResources()->addBottomScript('/assets/js/select2.min.js');
 
-        $meta = [
-            'sheet'         => 'edit-post',
-            'meta_title'    => lang('edit post') . ' | ' . Config::get(Config::PARAM_NAME),
-        ];
-
+        $meta = meta($m = [], lang('edit post'));
         $data = [
             'sheet'         => 'edit-post',
             'post'          => $post,
@@ -192,7 +188,7 @@ class EditPostController extends MainController
         $user_id    = $this->uid['user_id'];
         $type       = Request::getGet('type');
         $post_id    = Request::getGet('post_id');
-         
+
         // Фотографии в тело контента
         $img         = $_FILES['editormd-image-file'];
         if ($_FILES['editormd-image-file']['name']) {

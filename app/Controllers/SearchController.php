@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\SearchModel;
-use Agouti\{Content, Config, Base, Validation};
+use Content, Config, Base, Validation;
 
 class SearchController extends MainController
 {
@@ -24,7 +24,7 @@ class SearchController extends MainController
 
                 // Успех и определим, что будем использовать
                 // Далее индивидуально расширим (+ лайки, просмотры и т.д.)
-                if (Config::get(Config::PARAM_SEARCH) == 0) {
+                if (Config::get('general.search') == 0) {
                     $qa     =  SearchModel::getSearch($query);
                     $result = array();
                     foreach ($qa as $ind => $row) {
@@ -49,11 +49,7 @@ class SearchController extends MainController
             }
         }
 
-        $meta = [
-            'sheet'         => 'search',
-            'meta_title'    => lang('search'),
-        ];
-
+        $meta = meta($m = [], lang('search'));
         $data = [
             'result'    => $result,
             'query'     => $query,

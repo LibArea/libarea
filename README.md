@@ -18,7 +18,7 @@ Demo: https://agouti.ru/
 
 *   Project root folder: public (configure the server )
 *   config/dev.sql
-*   settings: config/dbase.config.php and config.ini
+*   settings: config/dbase.config.php and other files in the directory
 *   Log in to your account using administrator credentials: `ss@sdf.ru` / `qwer14qwer14`
 *   Or user: `test@test.ru` / `test@test.ru`
 

@@ -5,7 +5,7 @@ namespace App\Controllers\Admin;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{WebModel, TopicModel};
-use Agouti\{Base, Content, Validation};
+use Base, Content, Validation;
 
 class WebsController extends MainController
 {
@@ -32,11 +32,8 @@ class WebsController extends MainController
         }
 
         Request::getResources()->addBottomScript('/assets/js/admin.js');
-        $meta = [
-            'meta_title'    => lang('domains'),
-            'sheet'         => 'domains',
-        ];
 
+        $meta = meta($m =[], lang('domains'));
         $data = [
             'sheet'         => $sheet == 'all' ? 'domains' : $sheet,
             'pagesCount'    => ceil($pagesCount / $limit),
@@ -53,11 +50,7 @@ class WebsController extends MainController
         Request::getResources()->addBottomStyles('/assets/css/select2.css');
         Request::getResources()->addBottomScript('/assets/js/select2.min.js');
 
-        $meta = [
-            'meta_title'    => lang('add a website'),
-            'sheet'         => 'domains',
-        ];
-
+        $meta = meta($m =[], lang('add a website'));
         $data = [
             'sheet'         => 'domains',
         ];
@@ -111,11 +104,7 @@ class WebsController extends MainController
         Request::getResources()->addBottomStyles('/assets/css/select2.css');
         Request::getResources()->addBottomScript('/assets/js/select2.min.js');
 
-        $meta = [
-            'meta_title'    => lang('change the site') . ' | ' . $domain['link_url_domain'],
-            'sheet'         => 'domains',
-        ];
-
+        $meta = meta($m =[], lang('change the site') . ' | ' . $domain['link_url_domain']);
         $data = [
             'domain'        => $domain,
             'sheet'         => 'domains',

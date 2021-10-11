@@ -4,10 +4,9 @@ namespace App\Controllers\Admin;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\User\UserModel;
-use App\Models\User\SettingModel;
+use App\Models\User\{UserModel, SettingModel};
 use App\Models\{Admin\BanUserModel, Admin\BadgeModel, Admin\AgentModel, SpaceModel};
-use Agouti\{Base, Validation};
+use Base, Validation;
 
 class UsersController extends MainController
 {
@@ -32,11 +31,8 @@ class UsersController extends MainController
         }
 
         Request::getResources()->addBottomScript('/assets/js/admin.js');
-        $meta = [
-            'meta_title'    => lang('users'),
-            'sheet'         => 'users',
-        ];
 
+        $meta = meta($m = [], lang('users'));
         $data = [
             'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
@@ -65,11 +61,7 @@ class UsersController extends MainController
             $results[$ind]      = $row;
         }
 
-        $meta = [
-            'meta_title'    => lang('search'),
-            'sheet'         => 'users',
-        ];
-
+        $meta = meta($m = [], lang('search'));
         $data = [
             'results'       => $results,
             'option'        => $option,
@@ -105,11 +97,7 @@ class UsersController extends MainController
 
         $counts = UserModel::contentCount($user_id);
 
-        $meta = [
-            'meta_title'        => lang('edit user'),
-            'sheet'             => 'users',
-        ];
-
+        $meta = meta($m = [], lang('edit user'));
         $data = [
             'sheet'             => 'edit-user',
             'posts_count'       => $counts['count_posts'],

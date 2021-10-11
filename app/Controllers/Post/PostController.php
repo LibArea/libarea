@@ -6,8 +6,9 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\SubscriptionModel;
 use App\Models\User\UserModel;
-use App\Models\{PostModel, FeedModel, AnswerModel, CommentModel, FavoriteModel};
-use Agouti\{Content, Config, Base};
+use App\Models\{PostModel, FeedModel, AnswerModel, CommentModel};
+use Content, Base;
+
 
 class PostController extends MainController
 {
@@ -24,9 +25,15 @@ class PostController extends MainController
         if ($slug != $post_new['post_slug']) {
             redirect(getUrlByName('post', ['id' => $post_new['post_id'], 'slug' => $post_new['post_slug']]));
         }
- 
+
         $post = PostModel::getPostSlug($slug, $uid['user_id'], $uid['user_trust_level']);
         Base::PageError404($post);
+
+        // Если пользователь забанен
+        if ($uid['user_id'] > 0) {
+            $user   = UserModel::getUser($uid['user_id'], 'id');
+            Base::accountBan($user);
+        }
 
         // Редирект для слияния
         if ($post['post_merged_id'] > 0) {
@@ -84,16 +91,16 @@ class PostController extends MainController
             if (strtotime($row['answer_modified']) < strtotime($row['answer_date'])) {
                 $row['edit'] = 1;
             }
-
+            // TODO: N+1 см. AnswerModel()
             $row['comm']            = CommentModel::getComments($row['answer_id'], $uid['user_id']);
             $row['answer_content']  = Content::text($row['answer_content'], 'text');
             $row['answer_date']     = lang_date($row['answer_date']);
             $answers[$ind]          = $row;
         }
 
-        $content_img  = null;
+        $content_img  = false;
         if ($post['post_content_img']) {
-            $content_img  = Config::get(Config::PARAM_URL) . AG_PATH_POSTS_COVER . $post['post_content_img'];
+            $content_img  = AG_PATH_POSTS_COVER . $post['post_content_img'];
         }
 
         $post_signed   = SubscriptionModel::getFocus($post['post_id'], $uid['user_id'], 'post');
@@ -104,9 +111,6 @@ class PostController extends MainController
             $desc = strip_tags($post['post_title']);
         }
 
-        $meta_desc = $desc . ' — ' . $post['space_name'];
-        $meta_title = strip_tags($post['post_title']) . ' — ' . strip_tags($post['space_name']) . ' | ' . Config::get(Config::PARAM_NAME);
-
         if ($post['post_is_deleted'] == 1) {
             Request::getHead()->addMeta('robots', 'noindex');
         }
@@ -114,7 +118,7 @@ class PostController extends MainController
         Request::getResources()->addBottomScript('/assets/js/shares.js');
         Request::getResources()->addBottomScript('/assets/js/prism.js');
         Request::getResources()->addBottomStyles('/assets/css/prism.css');
-        
+
         if ($uid['user_id'] > 0 && $post['post_closed'] == 0) {
             Request::getResources()->addBottomStyles('/assets/editor/editormd.css');
             Request::getResources()->addBottomScript('/assets/editor/meditor.min.js');
@@ -124,14 +128,13 @@ class PostController extends MainController
             $post_related = PostModel::postRelated($post['post_related']);
         }
 
-        $meta = [
-            'canonical'     => Config::get(Config::PARAM_URL) . getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]),
-            'sheet'         => 'article',
-            'post_date'     => $post['post_date'],
-            'img'           => $content_img,
-            'meta_title'    => $meta_title,
-            'meta_desc'     => $meta_desc,
+        $m = [
+            'og'         => true,
+            'twitter'    => true,
+            'imgurl'     => $content_img,
+            'url'        => getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]),
         ];
+        $meta = meta($m, strip_tags($post['post_title']) . ' — ' . strip_tags($post['space_name']), $desc . ' — ' . $post['space_name'], $date_article = $post['post_date']);
 
         $data = [
             'post'          => $post,
@@ -168,20 +171,17 @@ class PostController extends MainController
         foreach ($posts as $ind => $row) {
             $text                           = explode("\n", $row['post_content']);
             $row['post_content_preview']    = Content::text($text[0], 'line');
-            $row['lang_num_answers']        = word_form($row['post_answers_count'], lang('answer'), lang('answers-m'), lang('answers'));
             $row['post_date']               = lang_date($row['post_date']);
             $result[$ind]                   = $row;
         }
 
-        $h1 = lang('posts') . ' ' . $login;
-        $meta_desc  = lang('participant posts') . ' ' . $login;
-
-        $meta = [
-            'canonical'     => Config::get(Config::PARAM_URL) . getUrlByName('posts.user', ['login' => $login]),
-            'sheet'         => 'user-post',
-            'meta_title'    => lang('posts') . ' ' . $login . ' | ' . Config::get(Config::PARAM_NAME),
-            'meta_desc'     => $meta_desc . ' ' . Config::get(Config::PARAM_HOME_TITLE),
+        $m = [
+            'og'         => true,
+            'twitter'    => true,
+            'imgurl'     => '/uploads/users/avatars/' . $user['user_avatar'],
+            'url'        => getUrlByName('posts.user', ['login' => $login]),
         ];
+        $meta = meta($m, lang('posts') . ' ' . $login, lang('participant posts') . ' ' . $login);
 
         $data = [
             'h1'    => lang('posts') . ' ' . $login,
@@ -213,7 +213,7 @@ class PostController extends MainController
 
         return true;
     }
-    
+
     // Удаление поста в профиле
     public function deletePostProfile()
     {

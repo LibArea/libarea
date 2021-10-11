@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
 use App\Models\{NotificationsModel, SpaceModel, PostModel};
-use Agouti\{Content, Config, Base, Validation};
+use Content, Config, Base, Validation;
 
 class UserController extends MainController
 {
@@ -22,12 +22,13 @@ class UserController extends MainController
         $users      = UserModel::getUsersAll($page, $limit, $uid['user_id'], 'noban');
         Base::PageError404($users);
 
-        $meta = [
-            'canonical'     => Config::get(Config::PARAM_URL) . '/users',
-            'sheet'         => 'users',
-            'meta_title'    => lang('users') . ' | ' . Config::get(Config::PARAM_NAME),
-            'meta_desc'     => lang('desc-user-all') . ' ' . Config::get(Config::PARAM_HOME_TITLE),
+        $m = [
+            'og'         => false,
+            'twitter'    => false,
+            'imgurl'     => false,
+            'url'        => getUrlByName('users'),
         ];
+        $meta = meta($m, lang('users'), lang('desc-user-all'));
 
         $data = [
             'sheet'         => 'users',
@@ -52,7 +53,7 @@ class UserController extends MainController
             $user['user_about'] = lang('riddle') . '...';
         }
 
-        $site_name  = Config::get(Config::PARAM_NAME);
+        $site_name  = Config::get('meta.name');
         $meta_title = sprintf(lang('title-profile'), $user['user_login'], $user['user_name'], $site_name);
         $meta_desc  = sprintf(lang('desc-profile'), $user['user_login'], $user['user_about'], $site_name);
 
@@ -71,13 +72,19 @@ class UserController extends MainController
         }
 
         $uid = Base::getUid();
-        $meta = [
-            'sheet'             => 'profile',
-            'canonical'         => Config::get(Config::PARAM_URL) . '/u/' . $user['user_login'],
-            'img'               => Config::get(Config::PARAM_URL) . '/uploads/users/avatars/' . $user['user_avatar'],
-            'meta_title'        => $meta_title,
-            'meta_desc'         => $meta_desc,
+        $isBan = '';
+        if ($uid['user_trust_level'] > 4) {
+            Request::getResources()->addBottomScript('/assets/js/admin.js');
+            $isBan = UserModel::isBan($user['user_id']);
+        }
+
+        $m = [
+            'og'         => true,
+            'twitter'    => true,
+            'imgurl'     => '/uploads/users/avatars/' . $user['user_avatar'],
+            'url'        => getUrlByName('user', ['login' => $user['user_login']]),
         ];
+        $meta = meta($m, $meta_title, $meta_desc);
 
         $data = [
             'user_created_at'   => lang_date($user['user_created_at']),
@@ -86,8 +93,9 @@ class UserController extends MainController
             'spaces_user'       => SpaceModel::getUserCreatedSpaces($user['user_id']),
             'badges'            => UserModel::getBadgeUserAll($user['user_id']),
             'user'              => $user,
+            'isBan'             => $isBan,
             'onepost'           => PostModel::getPostId($user['user_my_post']),
-            'button_pm'         => Validation::accessPm($uid, $user['user_id'], Config::get(Config::PARAM_TL_ADD_PM))
+            'button_pm'         => Validation::accessPm($uid, $user['user_id'], Config::get('general.tl_add_pm'))
         ];
 
         return view('/user/profile', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
@@ -107,22 +115,17 @@ class UserController extends MainController
 
         $result = array();
         foreach ($favorites as $ind => $row) {
-           
+
             if ($row['favorite_type'] == 1) {
                 $row['answer_post_id'] = $row['post_id'];
             }
-            
+
             $row['answer_content']  = Content::text($row['answer_content'], 'text');
             $row['post']            = PostModel::getPostId($row['answer_post_id']);
             $result[$ind]           = $row;
         }
 
-        $meta = [
-            'sheet'         => 'favorites',
-            'h1'            => lang('favorites') . ' ' . $uid['user_login'],
-            'meta_title'    => lang('favorites') . ' ' . $uid['user_login'] . ' | ' . Config::get(Config::PARAM_NAME),
-        ];
-
+        $meta = meta($m = [], lang('favorites'));
         $data = [
             'sheet'     => 'favorites',
             'favorites' => $result
@@ -141,12 +144,7 @@ class UserController extends MainController
             redirect('/u/' . $uid['user_login'] . '/drafts');
         }
 
-        $meta = [
-            'sheet'         => 'drafts',
-            'h1'            => lang('drafts') . ' ' . $uid['user_login'],
-            'meta_title'    => lang('drafts') . ' ' . $uid['user_login'] . ' | ' . Config::get(Config::PARAM_NAME)
-        ];
-
+        $meta = meta($m = [], lang('drafts'));
         $data = [
             'drafts' => UserModel::userDraftPosts($uid['user_id']),
         ];
@@ -175,11 +173,7 @@ class UserController extends MainController
             $result[$ind]                   = $row;
         }
 
-        $meta = [
-            'sheet'         => 'subscribed',
-            'meta_title'    => lang('subscribed') . ' ' . $uid['user_login'] . ' | ' . Config::get(Config::PARAM_NAME)
-        ];
-
+        $meta = meta($m = [], lang('subscribed'));
         $data = [
             'h1'    => lang('subscribed') . ' ' . $uid['user_login'],
             'sheet' => 'subscribed',
@@ -188,5 +182,4 @@ class UserController extends MainController
 
         return view('/user/subscribed', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
-    
 }

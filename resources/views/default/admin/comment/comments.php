@@ -4,7 +4,7 @@
 <main class="col-span-10 mb-col-12">
   <?= breadcrumb('/admin', lang('admin'), null, null, lang('comments-n')); ?>
   <div class="bg-white flex flex-row items-center justify-between border-box-1 br-rd-5 p15 mb15">
-    <p class="m0"><?= lang($data['sheet']); ?> -<?= $data['sheet']; ?>-</p>
+    <p class="m0"><?= lang($data['sheet']); ?></p>
     <?php $pages = array(
       array('id' => 'comments-n', 'url' => '/admin/comments', 'content' => lang('all'), 'icon' => 'bi bi-record-circle'),
       array('id' => 'comments-ban', 'url' => '/admin/comments/ban', 'content' => lang('deleted comments'), 'icon' => 'bi bi-x-circle'),

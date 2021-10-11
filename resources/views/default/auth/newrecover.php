@@ -15,7 +15,7 @@
         <button type="submit" class="button block br-rd-5 white">
           <?= lang('reset'); ?>
         </button>
-        <?php if (!Agouti\Config::get(Agouti\Config::PARAM_INVITE)) { ?>
+        <?php if (Config::get('general.invite')) { ?>
           <span class="mr5 ml5 size-14"><a href="<?= getUrlByName('register'); ?>"><?= lang('sign up'); ?></a></span>
         <?php } ?>
         <span class="mr5 ml5 size-14"><a href="<?= getUrlByName('login'); ?>"><?= lang('sign in'); ?></a></span>

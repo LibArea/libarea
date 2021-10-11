@@ -5,7 +5,7 @@ namespace App\Controllers\Admin;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\Admin\PostModel;
-use Agouti\{Content, Base};
+use Content, Base;
 
 class PostsController extends MainController
 {
@@ -26,16 +26,7 @@ class PostsController extends MainController
             $result[$ind]   = $row;
         }
 
-        $meta_title = lang('posts');
-        if ($sheet == 'ban') {
-            $meta_title = lang('deleted posts');
-        }
-
-        $meta = [
-            'meta_title'    => $meta_title,
-            'sheet'         => 'posts',
-        ];
-
+        $meta = meta($m = [], $sheet == 'ban' ? lang('deleted posts') : lang('posts'));
         $data = [
             'sheet'         => $sheet == 'all' ? 'posts' : 'posts-ban',
             'pagesCount'    => ceil($pagesCount / $limit),

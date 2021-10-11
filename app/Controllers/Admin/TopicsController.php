@@ -5,7 +5,7 @@ namespace App\Controllers\Admin;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{PostModel, Admin\TopicModel};
-use Agouti\{Base, UploadImage, Validation};
+use Base, UploadImage, Validation;
 
 class TopicsController extends MainController
 {
@@ -25,11 +25,7 @@ class TopicsController extends MainController
         $pagesCount = TopicModel::getTopicsAllCount();
         $topics     = TopicModel::getTopicsAll($page, $limit);
 
-        $meta = [
-            'meta_title'    => lang('topics'),
-            'sheet'         => 'topics',
-        ];
-
+        $meta = meta($m = [], lang('topics'));
         $data = [
             'sheet'         => $sheet == 'all' ? 'topics' : $sheet,
             'pagesCount'    => ceil($pagesCount / $limit),
@@ -48,11 +44,7 @@ class TopicsController extends MainController
             redirect('/');
         }
 
-        $meta = [
-            'meta_title'    => lang('add topic'),
-            'sheet'         => 'topics',
-        ];
-
+        $meta = meta($m = [], lang('add topic'));
         $data = [
             'sheet'         => 'topics',
         ];
@@ -85,11 +77,7 @@ class TopicsController extends MainController
             $topic_parent_id    = TopicModel::topicMain($topic['topic_parent_id']);
         }
 
-        $meta = [
-            'meta_title'        => lang('edit topic') . ' | ' . $topic['topic_title'],
-            'sheet'             => 'topics',
-        ];
-
+        $meta = meta($m = [], lang('edit topic') . ' | ' . $topic['topic_title']);
         $data = [
             'topic'             => $topic,
             'topic_related'     => $topic_related,

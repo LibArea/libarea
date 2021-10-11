@@ -1,8 +1,14 @@
 <nav class="justify-between mt0 ml0 pl0 t-81 sticky size-15 max-w170">
   <div class="center pt5 mb15 no-mob">
-    <a href="/post/add" class="button block br-rd-5 white">
+    <?php if ($uid['user_id'] == 0) { ?>
+    <a href="/login" class="button block br-rd-5 white">
       <i class="bi bi-plus-lg mr5 middle"></i> <?= lang('create'); ?>
     </a>
+    <?php } else { ?>
+      <a href="/post/add" class="button block br-rd-5 white">
+        <i class="bi bi-plus-lg mr5 middle"></i> <?= lang('create'); ?>
+      </a>
+    <?php } ?>
   </div>
   <a class="pt5 pr10 pb5 pl10 gray block" title="<?= lang('feed'); ?>" href="/">
     <i class="bi bi-sort-down middle mr5<?= $sheet == 'feed' ? ' blue' : ''; ?>  size-18"></i>

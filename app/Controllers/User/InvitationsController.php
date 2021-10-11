@@ -5,17 +5,14 @@ namespace App\Controllers\User;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\{InvitationModel, UserModel};
-use Agouti\{Base, Validation};
+use Base, Validation;
 
 class InvitationsController extends MainController
 {
     // Показ формы создания инвайта
     public function inviteForm()
     {
-        $meta = [
-            'sheet'         => 'invite',
-            'meta_title'    => lang('invite'),
-        ];
+        $meta = meta($m = [], lang('invite'));
 
         return view('/user/invite', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => []]);
     }
@@ -35,11 +32,7 @@ class InvitationsController extends MainController
         $user = UserModel::getUser($uid['user_id'], 'id');
         Base::accountBan($user);
 
-        $meta = [
-            'sheet'         => 'invites',
-            'meta_title'    => lang('invites'),
-        ];
-
+        $meta = meta($m = [], lang('invites'));
         $data = [
             'invitations'   => InvitationModel::userResult($uid['user_id']),
             'count_invites' => $user['user_invitation_available'],

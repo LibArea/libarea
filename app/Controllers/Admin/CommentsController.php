@@ -4,8 +4,8 @@ namespace App\Controllers\Admin;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\Admin\CommentModel;
-use Agouti\{Content, Base};
+use App\Models\CommentModel;
+use Content, Base;
 
 class CommentsController extends MainController
 {
@@ -17,7 +17,7 @@ class CommentsController extends MainController
 
         $limit      = 100;
         $pagesCount = CommentModel::getCommentsAllCount($sheet);
-        $comments   = CommentModel::getCommentsAll($page, $limit, $sheet);
+        $comments   = CommentModel::getCommentsAll($page, $limit, $uid, $sheet);
 
         $result = array();
         foreach ($comments  as $ind => $row) {
@@ -26,16 +26,7 @@ class CommentsController extends MainController
             $result[$ind]   = $row;
         }
 
-        $meta_title = lang('comments-n');
-        if ($sheet == 'ban') {
-            $meta_title = lang('deleted comments');
-        }
-
-        $meta = [
-            'meta_title'    => $meta_title,
-            'sheet'         => 'comments-n',
-        ];
-
+        $meta = meta($m = [], $sheet == 'ban' ? lang('deleted comments') : lang('comments-n'));
         $data = [
             'sheet'         => $sheet == 'all' ? 'comments-n' : 'comments-ban',
             'pagesCount'    => ceil($pagesCount / $limit),

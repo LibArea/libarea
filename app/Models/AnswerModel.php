@@ -102,6 +102,13 @@ class AnswerModel extends MainModel
             $sort = 'ORDER BY answer_votes DESC ';
         }
 
+        // TODO: Сгруппировать комментарии по ответу (избавимся N+1)
+        // LEFT JOIN comments ON comment_answer_id = answer_id
+        // comment_answer_id,
+        // comment_user_id,
+        // comment_date,
+        // comment_ip,
+        // comment_content,
         $sql = "SELECT 
                     answer_id,
                     answer_user_id,
@@ -119,7 +126,7 @@ class AnswerModel extends MainModel
                     favorite_user_id,
                     favorite_type,
                     user_id, 
-                    user_login, 
+                    user_login,
                     user_avatar
                         FROM answers
                         LEFT JOIN users ON user_id = answer_user_id
@@ -193,19 +200,5 @@ class AnswerModel extends MainModel
         $sql_two = "UPDATE answers SET answer_content = :content, answer_modified = :date WHERE answer_id = :answer_id";
 
         return DB::run($sql_two, ['answer_id' => $answer_id, 'content' => $content, 'date' => date("Y-m-d H:i:s")]);
-    }
-
-    // Частота размещения ответа участника 
-    public static function getAnswerSpeed($user_id)
-    {
-        $sql = "SELECT 
-                    answer_id, 
-                    answer_user_id, 
-                    answer_date
-                        fROM answers 
-                            WHERE answer_user_id = :user_id
-                            AND answer_date >= DATE_SUB(NOW(), INTERVAL 1 DAY)";
-
-        return  DB::run($sql, ['user_id' => $user_id])->rowCount();
     }
 }

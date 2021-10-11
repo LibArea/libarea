@@ -5,7 +5,7 @@ namespace App\Controllers\Topic;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{TopicModel, FeedModel, SubscriptionModel};
-use Agouti\{Content, Config, Base};
+use Content, Base;
 
 class TopicController extends MainController
 {
@@ -33,12 +33,13 @@ class TopicController extends MainController
             $result[$ind]           = $row;
         }
 
-        $meta = [
-            'sheet'         => 'topics',
-            'canonical'     => Config::get(Config::PARAM_URL) . '/topics',
-            'meta_title'    => lang('all topics') . $num . Config::get(Config::PARAM_NAME),
-            'meta_desc'     => lang('topic-desc') . $num . Config::get(Config::PARAM_HOME_TITLE),
+        $m = [
+            'og'         => false,
+            'twitter'    => false,
+            'imgurl'     => false,
+            'url'        => getUrlByName('topics'),
         ];
+        $meta = meta($m, lang('all topics') . $num, lang('topic-desc') . $num);
 
         $data = [
             'sheet'         => 'topics',
@@ -61,7 +62,7 @@ class TopicController extends MainController
         $slug   = Request::get('slug');
         $topic  = TopicModel::getTopic($slug, 'slug');
         Base::PageError404($topic);
- 
+
         // Показываем корневую тему на странице подтемы 
         $main_topic   = '';
         if ($topic['topic_parent_id']  != 0) {
@@ -93,14 +94,13 @@ class TopicController extends MainController
             $result[$ind]                   = $row;
         }
 
-        $meta_title = $topic['topic_seo_title'] . ' — ' .  lang('topic');
-        $meta = [
-            'canonical'     => Config::get(Config::PARAM_URL) . getUrlByName('topic', ['slug' => $topic['topic_slug']]),
-            'sheet'         => 'topic',
-            'meta_title'    => $meta_title . ' | ' . Config::get(Config::PARAM_NAME),
-            'meta_desc'     => $topic['topic_description'] . '. ' . Config::get(Config::PARAM_HOME_TITLE),
-            'img'           => Config::get(Config::PARAM_URL) . '/uploads/topics/' . $topic['topic_img'],
+        $m = [
+            'og'         => true,
+            'twitter'    => true,
+            'imgurl'     => '/uploads/topics/logos/' . $topic['topic_img'],
+            'url'        => getUrlByName('topic', ['slug' => $topic['topic_slug']]),
         ];
+        $meta = meta($m, $topic['topic_seo_title'] . ' — ' .  lang('topic'), $topic['topic_description']);
 
         $data = [
             'pagesCount'    => ceil($pagesCount / $limit),
@@ -144,14 +144,13 @@ class TopicController extends MainController
 
         $topic_select = empty($topic['topic_post_related']) ? 0 : $topic['topic_post_related'];
 
-        $meta_title = $topic['topic_seo_title'] . ' — ' .  lang('info');
-        $meta = [
-            'h1'            => $topic['topic_seo_title'],
-            'canonical'     => Config::get(Config::PARAM_URL) . getUrlByName('topic', ['slug' => $topic['topic_slug']]) . '/info',
-            'sheet'         => 'info',
-            'meta_title'    => $meta_title . ' | ' . Config::get(Config::PARAM_NAME),
-            'meta_desc'     => $topic['topic_description'] . '. ' . lang('info') . ' ' . Config::get(Config::PARAM_HOME_TITLE),
+        $m = [
+            'og'         => true,
+            'twitter'    => true,
+            'imgurl'     => '/uploads/topics/logos/' . $topic['topic_img'],
+            'url'        => getUrlByName('topic.info', ['slug' => $topic['topic_slug']]),
         ];
+        $meta = meta($m, $topic['topic_seo_title'] . ' — ' .  lang('topic'), $topic['topic_description']);
 
         $data = [
             'sheet'         => 'info',

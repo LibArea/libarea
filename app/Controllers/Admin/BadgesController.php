@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
 use App\Models\Admin\BadgeModel;
-use Agouti\{Base, Validation};
+use Base, Validation;
 
 class BadgesController extends MainController
 {
@@ -15,11 +15,7 @@ class BadgesController extends MainController
     {
         $badges = BadgeModel::getBadgesAll();
 
-        $meta = [
-            'meta_title'    => lang('badges'),
-            'sheet'         => 'badges',
-        ];
-
+        $meta = meta($m = [], lang('badges'));
         $data = [
             'sheet'         => $sheet == 'all' ? 'badges' : $sheet,
             'badges'        => $badges,
@@ -31,11 +27,7 @@ class BadgesController extends MainController
     // Форма добавления награды
     public function addPage()
     {
-        $meta = [
-            'meta_title'    => lang('add badge'),
-            'sheet'         => 'badges',
-        ];
-
+        $meta = meta($m = [], lang('add badge'));
         $data = [
             'sheet'         => 'badges',
         ];
@@ -54,11 +46,7 @@ class BadgesController extends MainController
             redirect('/admin/badges');
         }
 
-        $meta = [
-            'meta_title'    => lang('edit badge'),
-            'sheet'         => 'badges',
-        ];
-
+        $meta = meta($m = [], lang('edit badge'));
         $data = [
             'badge'         => $badge,
             'sheet'         => 'badges',
@@ -103,11 +91,7 @@ class BadgesController extends MainController
 
         $badges = BadgeModel::getBadgesAll();
 
-        $meta = [
-            'meta_title'    => lang('reward the user'),
-            'sheet'         => 'admin',
-        ];
-
+        $meta = meta($m = [], lang('reward the user'));
         $data = [
             'sheet'         => 'admin',
             'user'          => $user,

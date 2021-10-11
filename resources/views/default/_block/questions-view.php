@@ -28,7 +28,7 @@
               <div class="flex size-14">
                 <?= votes($uid['user_id'], $answer, 'answer'); ?>
 
-                <?php if ($uid['user_trust_level'] >= Agouti\Config::get(Agouti\Config::PARAM_TL_ADD_COMM_QA)) { ?>
+                <?php if ($uid['user_trust_level'] >= Config::get('trust-levels.tl_add_comm_qa')) { ?>
                   <?php if ($data['post']['post_closed'] == 0) { ?>
                     <?php if ($data['post']['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
                       <a data-post_id="<?= $data['post']['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray ml10"><?= lang('reply'); ?></a>
@@ -91,7 +91,7 @@
                   <?= includeTemplate('/_block/show-ip', ['ip' => $comment['comment_ip'], 'user_trust_level' => $uid['user_trust_level']]); ?>
                 </span>
 
-                <?php if ($uid['user_trust_level'] >= Agouti\Config::get(Agouti\Config::PARAM_TL_ADD_COMM_QA)) { ?>
+                <?php if ($uid['user_trust_level'] >= Config::get('trust-levels.tl_add_comm_qa')) { ?>
                   <?php if ($data['post']['post_closed'] == 0) { ?>
                     <?php if ($data['post']['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
                       <a data-post_id="<?= $data['post']['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment-re gray ml5 mr5">

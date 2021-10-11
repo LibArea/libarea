@@ -74,6 +74,8 @@ Route::before('Authorization@noAuth')->getGroup();
     Route::get('/all')->controller('HomeController', ['all']);
     Route::get('/all/page/{page?}')->controller('HomeController', ['all'])->where(['page' => '[0-9]+']);
     
+    Route::get('/moderations')->controller('ActionController@moderation')->name('moderation');
+    
     Route::get('/welcome')->controller('WelcomeController')->name('welcome');
 Route::endGroup();
 
@@ -134,21 +136,19 @@ Route::get('/s/{slug}/page/{page?}')->controller('Space\SpaceController@posts', 
 Route::get('/s/{slug}/top')->controller('Space\SpaceController@posts', ['top'])->where(['slug' => '[A-Za-z0-9_]+']);
 Route::get('/s/{slug}/top/page/{page?}')->controller('Space\SpaceController@posts', ['top'])->where(['slug' => '[A-Za-z0-9_]+', 'page' => '[0-9]+']);
 Route::get('/s/{slug}/writers')->controller('Space\SpaceController@posts', ['writers'])->where(['slug' => '[A-Za-z0-9_]+']);
-Route::get('/s/{slug}/wiki')->controller('Space\SpaceController@wiki')->where(['slug' => '[A-Za-z0-9_]+']);
-
-Route::get('/moderations')->controller('ActionController@moderation')->name('moderation');
+Route::get('/s/{slug}/wiki')->controller('Space\SpaceController@wiki')->where(['slug' => '[A-Za-z0-9_]+'])->name('space.wiki');
 
 Route::get('/topics')->controller('Topic\TopicController')->where(['page' => '[0-9]+'])->name('topics');
 Route::get('/topics/page/{page?}')->controller('Topic\TopicController')->where(['page' => '[0-9]+']);
 Route::get('/topic/{slug}')->controller('Topic\TopicController@posts', ['feed'])->where(['slug' => '[A-Za-z0-9-]+'])->name('topic');
 Route::get('/topic/{slug}/page/{page?}')->controller('Topic\TopicController@posts', ['feed'])->where(['slug' => '[A-Za-z0-9-]+', 'page' => '[0-9]+']);
-Route::get('/topic/{slug}/info')->controller('Topic\TopicController@info')->where(['slug' => '[A-Za-z0-9-]+']);
+Route::get('/topic/{slug}/info')->controller('Topic\TopicController@info')->where(['slug' => '[A-Za-z0-9-]+'])->name('topic.info');
 
 Route::get('/web')->controller('Web\WebController')->name('web');
 Route::get('/web/page/{page?}')->controller('Web\WebController')->where(['page' => '[0-9]+']);
 Route::get('/domain/{domain}')->controller('Web\WebController@posts', ['feed'])->where(['domain' => '[A-Za-z0-9-.]+'])->name('domain');
 Route::get('/domain/{domain}/page/{page?}')->controller('Web\WebController@posts', ['feed'])->where(['domain' => '[A-Za-z0-9-.]+', 'page' => '[0-9]+']);
-Route::get('/web/{slug}')->controller('Web\WebController@sites', ['feed'])->where(['slug' => '[A-Za-z0-9-]+'])->name('web topic');
+Route::get('/web/{slug}')->controller('Web\WebController@sites', ['feed'])->where(['slug' => '[A-Za-z0-9-]+'])->name('web.topic');
 Route::get('/web/{slug}/page/{page?}')->controller('Web\WebController@sites', ['feed'])->where(['slug' => '[A-Za-z0-9-]+', 'page' => '[0-9]+']);
 
 Route::get('/')->controller('HomeController', ['feed']);

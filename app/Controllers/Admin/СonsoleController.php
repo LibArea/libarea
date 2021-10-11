@@ -5,7 +5,7 @@ namespace App\Controllers\Admin;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\Admin\СonsoleModel;
-use Agouti\SendEmail;
+use SendEmail;
 
 class СonsoleController extends MainController
 {
@@ -15,7 +15,7 @@ class СonsoleController extends MainController
 
         self::consoleRedirect();
     }
-    
+
     public static function updateCountUp()
     {
         $users_id = СonsoleModel::allUsers();
@@ -23,18 +23,18 @@ class СonsoleController extends MainController
             $row['count']   =  СonsoleModel::allUp($row['user_id']);
             СonsoleModel::setAllUp($row['user_id'], $row['count']);
         }
-        
+
         self::consoleRedirect();
     }
-    
+
     public static function testMail()
     {
         $email  = Request::getPost('mail');
         SendEmail::send($email, 'Testing mail', 'The body of the message...');
-        
+
         self::consoleRedirect();
     }
-    
+
     public static function consoleRedirect()
     {
         if (PHP_SAPI != 'cli') {

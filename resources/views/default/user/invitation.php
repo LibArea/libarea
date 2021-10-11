@@ -28,7 +28,7 @@
             <?php if ($uid['user_trust_level'] == 5) { ?>
               <?= lang('the link was used to'); ?>: <?= $invite['invitation_email']; ?> <br>
               <code>
-                <?= Agouti\Config::get(Agouti\Config::PARAM_URL); ?><?= getUrlByName('register'); ?>/invite/<?= $invite['invitation_code']; ?>
+                <?= Config::get('meta.url'); ?><?= getUrlByName('register'); ?>/invite/<?= $invite['invitation_code']; ?>
               </code>
             <?php } ?>
 
@@ -36,7 +36,7 @@
           <?php } else { ?>
             <?= lang('for'); ?> (<?= $invite['invitation_email']; ?>) <?= lang('can send this link'); ?>: <br>
             <code>
-              <?= Agouti\Config::get(Agouti\Config::PARAM_URL); ?><?= getUrlByName('register'); ?>/invite/<?= $invite['invitation_code']; ?>
+              <?= Config::get('meta.url'); ?><?= getUrlByName('register'); ?>/invite/<?= $invite['invitation_code']; ?>
             </code>
           <?php } ?>
 

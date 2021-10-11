@@ -5,7 +5,7 @@ namespace App\Controllers\Admin;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\Admin\AnswerModel;
-use Agouti\{Content, Base};
+use Content, Base;
 
 class AnswersController extends MainController
 {
@@ -26,16 +26,7 @@ class AnswersController extends MainController
             $result[$ind]   = $row;
         }
 
-        $meta_title = lang('answers-n');
-        if ($sheet == 'ban') {
-            $meta_title = lang('deleted answers');
-        }
-
-        $meta = [
-            'meta_title'    => $meta_title,
-            'sheet'         => 'answers',
-        ];
-
+        $meta = meta($m = [], $sheet == 'ban' ? lang('deleted answers') : lang('answers-n'));
         $data = [
             'sheet'         => $sheet == 'all' ? 'answers-n' : 'answers-ban',
             'pagesCount'    => ceil($pagesCount / $limit),

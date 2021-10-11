@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\HomeModel;
-use Agouti\{Content, Config, Base};
+use Content, Base, Config;
 
 class HomeController extends MainController
 {
@@ -40,24 +40,21 @@ class HomeController extends MainController
         }
 
         $num        = $page > 1 ? sprintf(lang('page-number'), $page) : '';
-        $meta_title = Config::get(Config::PARAM_HOME_TITLE) . $num;
-        $meta_desc  = Config::get(Config::PARAM_META_DESC) . $num;
-
-        $url        = Config::get(Config::PARAM_URL);
-        $canonical  = $sheet == 'top' ? $url . '/top' : $url;
+        $meta_title = Config::get('meta.title') . $num;
+        $meta_desc  = Config::get('meta.desc') . $num;
 
         if ($sheet == 'top' || $sheet == 'all') {
-            $meta_title = lang($sheet . '-title') . $num . Config::get(Config::PARAM_HOME_TITLE);
-            $meta_desc  = lang($sheet . '-desc') . $num . Config::get(Config::PARAM_NAME);
+            $meta_title = lang($sheet . '-title') . $num . Config::get('meta.title');
+            $meta_desc  = lang($sheet . '-desc') . $num . Config::get('meta.desc');
         }
 
-        $meta = [
-            'canonical'         => $canonical,
-            'img'               => $url . '/assets/images/agouti.webp',
-            'meta_title'        => $meta_title,
-            'meta_desc'         => $meta_desc,
-            'sheet'             => $sheet,
+        $m = [
+            'og'         => true,
+            'twitter'    => true,
+            'imgurl'     => '/assets/images/agouti.webp',
+            'url'        => $sheet == 'top' ? '/top' : '',
         ];
+        $meta = meta($m, $meta_title, $meta_desc);
 
         $data = [
             'pagesCount'        => ceil($pagesCount / $limit),

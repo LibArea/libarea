@@ -22,19 +22,20 @@ class MainConnector implements Connector
             //  "Modules\*"                     => "modules/",
             "App\Commands\*"                => "app/Commands/",
 
-            // ... or, if a specific class is added,
-            "DB"                            => "app/Libraries/DB.php",
-            // "Phphleb\Debugpan\DPanel"    => "app/ThirdParty/phphleb/debugpan/DPanel.php",
-            // "App\Optional\Data"          => "app/Optional/Data.php",
+            "DB"                            => "app/Config/DB.php",
+            "Config"                        => "app/Config/Config.php",
+            "ConfigSheaf"                    => "app/Config/ConfigSheaf.php",
 
-            "Agouti\Base"                   => "app/Libraries/Base.php",
-            "Agouti\Content"                => "app/Libraries/Content.php",
-            "Agouti\UploadImage"            => "app/Libraries/UploadImage.php",
-            "Agouti\Integration"            => "app/Libraries/Integration.php",
-            "Agouti\Validation"             => "app/Libraries/Validation.php",
-            "Agouti\SendEmail"              => "app/Libraries/SendEmail.php",
-            "Agouti\Config"                 => "app/Libraries/Config.php",
-            
+            // ... or, if a specific class is added,
+            // "Phphleb\Debugpan\DPanel"      => "app/ThirdParty/phphleb/debugpan/DPanel.php",
+
+            "Base"                          => "app/Libraries/Base.php",
+            "Content"                       => "app/Libraries/Content.php",
+            "UploadImage"                   => "app/Libraries/UploadImage.php",
+            "Integration"                   => "app/Libraries/Integration.php",
+            "Validation"                    => "app/Libraries/Validation.php",
+            "SendEmail"                     => "app/Libraries/SendEmail.php",
+
             "UrlRecord"                     => "app/ThirdParty/UrlRecord/UrlRecord.php",
             "Parsedown"                     => "app/ThirdParty/Parsedown/Parsedown.php",
             "MyParsedown"                   => "app/ThirdParty/Parsedown/MyParsedown.php",

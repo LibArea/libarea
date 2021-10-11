@@ -1,6 +1,6 @@
 <?php
 
-namespace Agouti;
+use App\Models\ContentModel;
 
 class Validation
 {
@@ -77,5 +77,30 @@ class Validation
         }
 
         return true;
+    }
+
+    // Частота добавления контента в день
+    public static function speedAdd($uid, $type)
+    {
+        $number =  ContentModel::getSpeed($uid['user_id'], $type);
+        if ($uid['user_trust_level'] >= 0 && $uid['user_trust_level'] <= 2) {
+
+            if ($number >= Config::get('trust-levels.tl_' . $uid['user_trust_level'] . '_add_' . $type)) {
+                self::inform($uid['user_trust_level'], $type . 's');
+            }
+        }
+
+        if ($number > Config::get('trust-levels.all_limit')) {
+            self::inform($uid['user_trust_level'], 'messages');
+        }
+
+        return true;
+    }
+
+    public static function inform($tl, $content)
+    {
+        $text = sprintf(lang('limit-content-day'), 'TL' . $tl, '«' . lang($content) . '»');
+        addMsg($text, 'error');
+        redirect('/');
     }
 }

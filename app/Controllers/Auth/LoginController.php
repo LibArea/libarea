@@ -5,7 +5,7 @@ namespace App\Controllers\Auth;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
-use Agouti\{Config, Base, Validation};
+use Base, Validation;
 
 
 class LoginController extends MainController
@@ -60,12 +60,13 @@ class LoginController extends MainController
     // Страница авторизации
     public function showLoginForm()
     {
-        $meta = [
-            'sheet'         => 'sign up',
-            'canonical'     => Config::get(Config::PARAM_URL) . getUrlByName('login'),
-            'meta_title'    => lang('sign up') . ' | ' . Config::get(Config::PARAM_NAME),
-            'meta_desc'     => lang('info-login'),
+        $m = [
+            'og'         => false,
+            'twitter'    => false,
+            'imgurl'     => false,
+            'url'        => getUrlByName('login'),
         ];
+        $meta = meta($m, lang('sign up'), lang('info-login'));
 
         $data = [
             'sheet'         => 'sign up',
@@ -73,5 +74,4 @@ class LoginController extends MainController
 
         return view('/auth/login', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
     }
-
 }

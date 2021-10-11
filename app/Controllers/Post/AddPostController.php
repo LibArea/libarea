@@ -6,19 +6,17 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
 use App\Models\{NotificationsModel, SubscriptionModel, ActionModel, SpaceModel, WebModel, PostModel, TopicModel};
-use Agouti\{Content, Config, Base, UploadImage, Integration, Validation, SendEmail};
-use UrlRecord;
-use URLScraper;
+use Content, Base, UploadImage, Integration, Validation, SendEmail, UrlRecord, URLScraper, Config;
 
 class AddPostController extends MainController
 {
     private $uid;
-    
-    public function __construct() 
+
+    public function __construct()
     {
         $this->uid  = Base::getUid();
     }
-    
+
     // Добавим пост
     public function index()
     {
@@ -96,14 +94,8 @@ class AddPostController extends MainController
             $post_img = UploadImage::cover_post($cover, $space_id, $redirect);
         }
 
-        // Участник с нулевым уровнем доверия должен быть ограничен в добавлении ответов
-        if ($this->uid['user_trust_level'] < Config::get(Config::PARAM_TL_ADD_POST)) {
-            $num_post =  PostModel::getPostSpeed($this->uid['user_id']);
-            if ($num_post > 2) {
-                addMsg(lang('limit-post-day'), 'error');
-                redirect('/');
-            }
-        }
+        // Ограничим добавления постов (в день)
+        Validation::speedAdd($this->uid, 'post');
 
         // Получаем SEO поста
         $slugGenerator  = new UrlRecord();
@@ -149,7 +141,7 @@ class AddPostController extends MainController
 
         $last_post_id   = PostModel::AddPost($data);
         $url_post       = getUrlByName('post', ['id' => $last_post_id, 'slug' => $post_slug]);
- 
+
         if ($post_published == 0) {
             ActionModel::addAudit('post', $this->uid['user_id'], $last_post_id);
             // Оповещение админу
@@ -180,7 +172,7 @@ class AddPostController extends MainController
         }
 
         // Отправим в Discord
-        if (Config::get(Config::PARAM_DISCORD) == 1) {
+        if (Config::get('general.discord') == 1) {
             if ($post_tl == 0 && $post_draft == 0) {
                 Integration::AddWebhook($post_content, $post_title, $url_post);
             }
@@ -201,11 +193,11 @@ class AddPostController extends MainController
         Request::getResources()->addBottomStyles('/assets/css/select2.css');
         Request::getResources()->addBottomScript('/assets/js/select2.min.js');
 
-        $meta = [
-            'sheet'         => 'add-post',
-            'meta_title'    => lang('add post') . ' | ' . Config::get(Config::PARAM_NAME),
-        ];
+        // Если пользователь забанен / заморожен
+        $user = UserModel::getUser($this->uid['user_id'], 'id');
+        Base::accountBan($user);
 
+        $meta = meta($m = [], lang('add post'));
         $data = [
             'spaces'    => SpaceModel::getSpaceSelect($this->uid['user_id'], $this->uid['user_trust_level']),
             'space_id'  => Request::getInt('space_id'),
@@ -221,7 +213,7 @@ class AddPostController extends MainController
         $meta   = new URLScraper($url);
         $meta->parse();
         $metaData = $meta->finalize();
-        
+
         return json_encode($metaData);
     }
 
@@ -231,7 +223,7 @@ class AddPostController extends MainController
         $meta = new URLScraper($post_url);
         $meta->parse();
         $metaData = $meta->finalize();
- 
+
         return UploadImage::thumb_post($metaData->image);
     }
 

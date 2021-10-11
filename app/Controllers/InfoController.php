@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use Hleb\Scheme\App\Controllers\MainController;
-use Agouti\{Content, Config, Base};
+use Content, Base;
 
 class InfoController extends MainController
 {
@@ -11,12 +11,14 @@ class InfoController extends MainController
     public function index()
     {
         $text = file_get_contents(HLEB_GLOBAL_DIRECTORY . '/resources/views/' . PR_VIEW_DIR . '/info/md/index.md');
-        $meta = [
-            'sheet'         => 'info',
-            'canonical'     => Config::get(Config::PARAM_URL) . '/info',
-            'meta_title'    => lang('info') . ' | ' . Config::get(Config::PARAM_NAME),
-            'meta_desc'     => lang('info-desc') . ' ' . Config::get(Config::PARAM_HOME_TITLE),
+
+        $m = [
+            'og'         => false,
+            'twitter'    => false,
+            'imgurl'     => false,
+            'url'        => getUrlByName('info'),
         ];
+        $meta = meta($m, lang('info'), lang('info-desc'));
 
         $data = [
             'sheet'         => 'info',
@@ -29,13 +31,14 @@ class InfoController extends MainController
     public function privacy()
     {
         $text = file_get_contents(HLEB_GLOBAL_DIRECTORY . '/resources/views/' . PR_VIEW_DIR . '/info/md/privacy.md');
-        $meta = [
-            'content'       => Content::text($text, 'text'),
-            'canonical'     => Config::get(Config::PARAM_URL) . '/info/privacy',
-            'sheet'         => 'privacy',
-            'meta_title'    => lang('privacy Policy') . ' | ' . Config::get(Config::PARAM_NAME),
-            'meta_desc'     => lang('privacy-desc') . ' ' . Config::get(Config::PARAM_HOME_TITLE),
+
+        $m = [
+            'og'         => false,
+            'twitter'    => false,
+            'imgurl'     => false,
+            'url'        => getUrlByName('info.privacy'),
         ];
+        $meta = meta($m, lang('privacy policy'), lang('privacy-desc'));
 
         $data = [
             'sheet'         => 'privacy',
@@ -47,12 +50,13 @@ class InfoController extends MainController
 
     public function restriction()
     {
-        $meta = [
-            'canonical'     => Config::get(Config::PARAM_URL) . '/info/restriction',
-            'sheet'         => 'restriction',
-            'meta_title'    => lang('restriction') . ' | ' . Config::get(Config::PARAM_NAME),
-            'meta_desc'     => lang('restriction') . ' ' . Config::get(Config::PARAM_HOME_TITLE),
+        $m = [
+            'og'         => false,
+            'twitter'    => false,
+            'imgurl'     => false,
+            'url'        => getUrlByName('info.restriction'),
         ];
+        $meta = meta($m, lang('restriction'), lang('the profile is being checked'));
 
         $data = [
             'sheet'       => 'restriction',

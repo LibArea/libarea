@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\RssModel;
-use Agouti\{Content, Config, Base};
+use Content, Config, Base;
 
 class RssController extends MainController
 {
@@ -15,7 +15,7 @@ class RssController extends MainController
         $posts  = RssModel::getPostsSitemap();
 
         $data = [
-            'url'       => Config::get(Config::PARAM_URL),
+            'url'       => Config::get('meta.url'),
             'spaces'    => $spaces,
             'posts'     => $posts,
         ];
@@ -37,7 +37,7 @@ class RssController extends MainController
         }
 
         $data = [
-            'url'       => Config::get(Config::PARAM_URL),
+            'url'       => Config::get('meta.url'),
             'posts'     => $result,
         ];
 

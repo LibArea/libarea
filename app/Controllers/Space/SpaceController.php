@@ -5,7 +5,7 @@ namespace App\Controllers\Space;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{SubscriptionModel, SpaceModel, FeedModel};
-use Agouti\{Content, Config, Base, Validation};
+use Content, Config, Base, Validation;
 
 class SpaceController extends MainController
 {
@@ -26,14 +26,15 @@ class SpaceController extends MainController
         $sp                 = SpaceModel::getUserCreatedSpaces($uid['user_id']);
         $count_space        = count($sp);
         $total_allowed      = $uid['user_trust_level'] == 5 ? 999 : 3;
-        $add_space_button   = Validation::validTl($uid['user_trust_level'], Config::get(Config::PARAM_TL_ADD_SPACE), $count_space, $total_allowed);
+        $add_space_button   = Validation::validTl($uid['user_trust_level'], Config::get('trust-levels.tl_add_space'), $count_space, $total_allowed);
 
-        $meta = [
-            'canonical'     => Config::get(Config::PARAM_URL) . '/spaces',
-            'sheet'         => 'spaces',
-            'meta_title'    => lang('all space') . ' | ' . Config::get(Config::PARAM_NAME),
-            'meta_desc'     => lang('all-space-desc') . ' ' . Config::get(Config::PARAM_HOME_TITLE),
+        $m = [
+            'og'         => false,
+            'twitter'    => false,
+            'imgurl'     => false,
+            'url'        => getUrlByName('spaces'),
         ];
+        $meta = meta($m, lang('all space'), lang('all-space-desc'));
 
         $data = [
             'h1'                => lang('all space'),
@@ -60,15 +61,15 @@ class SpaceController extends MainController
 
         // Введем ограничение на количество создаваемых пространств
         $all_space          = SpaceModel::getUserCreatedSpaces($uid['user_id']);
-        $count_space        = count($all_space);
-        $add_space_button   = Validation::validTl($uid['user_trust_level'], Config::get(Config::PARAM_TL_ADD_SPACE), $count_space, 3);
+        $add_space_button   = Validation::validTl($uid['user_trust_level'], Config::get('trust-levels.tl_add_space'), count($all_space), 3);
 
-        $meta = [
-            'canonical'     => Config::get(Config::PARAM_URL) . '/space/my',
-            'sheet'         => 'my-space',
-            'meta_title'    => lang('i read space') . ' | ' . Config::get(Config::PARAM_NAME),
-            'meta_desc'     => lang('i read space') . ' ' . Config::get(Config::PARAM_HOME_TITLE),
+        $m = [
+            'og'         => false,
+            'twitter'    => false,
+            'imgurl'     => false,
+            'url'        => false,
         ];
+        $meta = meta($m, lang('i read space'), $desc = '');
 
         $data = [
             'h1'                => lang('i read space'),
@@ -122,16 +123,17 @@ class SpaceController extends MainController
             $writers = SpaceModel::getWriters($space['space_id']);
         }
 
-        $meta_title = $space['space_name'] . ' — ' . lang('space-' . $sheet . '-title') . ' ' . $num;
-        $meta_desc  = $meta_title . $space['space_description'];
-
-        $meta = [
-            'canonical'     => Config::get(Config::PARAM_URL) . '/s/' . $space['space_slug'],
-            'img'           => Config::get(Config::PARAM_URL) . '/uploads/spaces/logos/' . $space['space_img'],
-            'sheet'         => $sheet,
-            'meta_title'    => $meta_title . ' ' . Config::get(Config::PARAM_NAME),
-            'meta_desc'     => $meta_desc . ' ' . Config::get(Config::PARAM_NAME),
+        $m = [
+            'og'         => true,
+            'twitter'    => true,
+            'imgurl'     => '/uploads/spaces/logos/' . $space['space_img'],
+            'url'        => getUrlByName('space', ['slug' => $space['space_slug']]),
         ];
+        $meta = meta(
+            $m,
+            $title = $space['space_name'] . ' — ' . lang('space-' . $sheet . '-title') . ' ' . $num,
+            $title . $space['space_description']
+        );
 
         $data = [
             'sheet'         => $sheet,
@@ -145,18 +147,23 @@ class SpaceController extends MainController
 
         return view('/space/space', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
     }
-    
+
     public function wiki()
     {
         // Under development
         $wiki = [];
-        
-        $meta = [
-            'canonical'     => Config::get(Config::PARAM_URL) . '/s/' . $space['space_slug'] . '/wiki',
-            'sheet'         => 'wiki',
-            'meta_title'    => lang('wiki space') . ' | ' . Config::get(Config::PARAM_NAME),
-            'meta_desc'     => lang('wiki-space-desc') . ' ' . Config::get(Config::PARAM_HOME_TITLE),
+
+        $slug   = Request::get('slug');
+        $space = SpaceModel::getSpace($slug, 'slug');
+        Base::PageError404($space);
+
+        $m = [
+            'og'         => false,
+            'twitter'    => false,
+            'imgurl'     => false,
+            'url'        => getUrlByName('space.wiki', ['slug' => $space['space_slug']]),
         ];
+        $meta = meta($m, lang('wiki space'), lang('wiki-space-desc'));
 
         $data = [
             'h1'            => lang('wiki space'),

@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\ActionModel;
-use Agouti\{Config, Base};
+use Base;
 
 class ActionController extends MainController
 {
@@ -68,20 +68,13 @@ class ActionController extends MainController
             $result[$ind]         = $row;
         }
 
-        $uid  = Base::getUid();
-        $meta = [
-            'canonical'     => '/moderations',
-            'sheet'         => 'moderations',
-            'meta_title'    => lang('moderation log') . ' | ' . Config::get(Config::PARAM_NAME),
-            'meta_desc'     => lang('meta-moderation') . ' ' . Config::get(Config::PARAM_HOME_TITLE),
-        ];
-
+        $meta = meta($m = [], lang('moderation log'));
         $data = [
             'moderations'   => $result,
             'sheet'         => 'moderations',
         ];
 
-        return view('/moderation/index', ['data' => $data, 'meta' => $meta, 'uid' => $uid]);
+        return view('/moderation/index', ['data' => $data, 'meta' => $meta, 'uid' => Base::getUid()]);
     }
 
     // Связанные посты и выбор автора

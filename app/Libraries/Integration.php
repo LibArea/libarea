@@ -1,9 +1,7 @@
 <?php
 
-namespace Agouti;
-
 use Hleb\Constructor\Handlers\Request;
-use Agouti\Config;
+use Config;
 
 class Integration
 {
@@ -53,10 +51,8 @@ class Integration
             return false;
         }
 
-        $private_key = Config::get(Config::PARAM_PRICATE_KEY);
-
         return self::callApi(array(
-            'secret'   => $private_key,
+            'secret'   => Config::get('general.private_key'),
             'response' => $response,
             'remoteip' => $_SERVER['REMOTE_ADDR']
         ));
@@ -69,10 +65,10 @@ class Integration
         $text = preg_replace(array('/(<p>)/', '(<\/p>)'), array('', '\n'), $text);
 
         // Проверяем имя бота и YOUR_WEBHOOK_URL
-        if (!$webhookurl = Config::get(Config::PARAM_WEBHOOK_URL)) {
+        if (!$webhookurl = Config::get('general.webhook_url')) {
             return false;
         }
-        if (!$usernamebot = Config::get(Config::PARAM_NAME_BOT)) {
+        if (!$usernamebot = Config::get('general.name_bot')) {
             return false;
         }
 
@@ -92,7 +88,7 @@ class Integration
 
             // URL Аватара.
             // Можно использовать аватар загруженный при создании бота
-            "avatar_url" => Config::get(Config::PARAM_ICON_URL),
+            "avatar_url" => Config::get('general.icon_url'),
 
             // Преобразование текста в речь
             "tts" => false,
@@ -113,7 +109,7 @@ class Integration
                     "description" => $text,
 
                     // Ссылка в заголовке url
-                    "url" => Config::get(Config::PARAM_URL) . $url,
+                    "url" => Config::get('meta.url') . $url,
 
                     // Таймштамп, обязательно в формате ISO8601
                     "timestamp" => $timestamp,
@@ -123,8 +119,8 @@ class Integration
 
                     // Подпись и аватар в подвале sitename
                     "footer" => [
-                        "text" => Config::get(Config::PARAM_NAME_BOT),
-                        "icon_url" => Config::get(Config::PARAM_ICON_URL),
+                        "text" => Config::get('general.name_bot'),
+                        "icon_url" => Config::get('general.icon_url'),
                     ],
                 ]
             ]

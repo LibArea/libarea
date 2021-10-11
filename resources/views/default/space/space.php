@@ -54,3 +54,4 @@
     </center>
   </main>
 <?php } ?>
+<?= includeTemplate('/_block/wide-footer'); ?>

@@ -58,3 +58,4 @@
 
   <?= includeTemplate('/_block/topic-sidebar', ['data' => $data, 'uid' => $uid]); ?>
 </aside>
+<?= includeTemplate('/_block/wide-footer'); ?>
