@@ -219,15 +219,7 @@
   <?php } ?>
 </main>
 <aside class="col-span-3 br-rd-5 no-mob">
-  <div class="border-box-1 bg-white br-rd-5 mb15 pt5 pr15 pb10 pl15">
-    <div class="mt10 mb5">
-      <a class="flex" title="<?= $data['post']['space_name']; ?>" href="<?= getUrlByName('space', ['slug' => $data['post']['space_slug']]); ?>">
-        <?= spase_logo_img($data['post']['space_img'], 'max', $data['post']['space_slug'], 'w24 mr5'); ?>
-        <span class="ml5"><?= $data['post']['space_name']; ?></span>
-      </a>
-    </div>
-    <div class="gray-light-2 size-14"><?= $data['post']['space_short_text']; ?></div>
-  </div>
+  <?= includeTemplate('/_block/space-info-sidebar', ['data' => $data['post']]); ?>
   <?php if ($data['post']['post_content_img']) { ?>
     <div class="border-box-1 bg-white br-rd-5 mb15">
       <div id="layer-photos" class="layer-photos p15">

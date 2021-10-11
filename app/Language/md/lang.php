@@ -337,6 +337,8 @@ return [
     'search-desc'           => 'Cautare site. După titlu și textul postărilor. După spații și participanți',
     'space-feed-title'      => 'spaţiu. Feeduri de postări',
     'space-top-title'       => 'Postări populare după spațiu',
+    'space-writers-title'   => 'scriitori în spațiu',
+    'wiki-space-desc'       => 'Pagină «%1$s» spaţiu. Informații detaliate, linkuri, documentație, sfaturi.',
     'add space'             => 'Adăugați spațiu',
     'seleted comments'      => 'Comentarii șterse',
     'edit answer'           => 'Schimbați răspunsul',

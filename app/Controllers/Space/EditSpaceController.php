@@ -44,6 +44,7 @@ class EditSpaceController extends MainController
         $space_color = empty($space_color) ? $space['space_color'] : $space_color;
 
         $space_text  = empty($space_text) ? '' : $space_text;
+        $space_wiki  = empty($space_wiki) ? '' : $space_wiki;
 
         $slug = SpaceModel::getSpace($space_slug, 'slug');
 

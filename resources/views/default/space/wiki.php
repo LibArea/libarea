@@ -13,4 +13,7 @@
     <?= includeTemplate('/_block/no-content', ['lang' => 'no']); ?>
   <?php } ?>
 </main>
-<?= includeTemplate('/_block/aside-lang', ['lang' => lang('under development')]); ?>
+<aside class="col-span-3 br-rd-5 no-mob">
+  <?= includeTemplate('/_block/space-info-sidebar', ['data' => $data['space']]); ?>
+  <?= includeTemplate('/_block/footer-sidebar'); ?>
+</aside>

@@ -151,21 +151,20 @@ class SpaceController extends MainController
     public function wiki()
     {
         $slug   = Request::get('slug');
-        $space = SpaceModel::getSpace($slug, 'slug');
+        $space  = SpaceModel::getSpace($slug, 'slug');
         Base::PageError404($space);
 
         $m = [
-            'og'         => false,
-            'twitter'    => false,
-            'imgurl'     => false,
-            'url'        => getUrlByName('space.wiki', ['slug' => $space['space_slug']]),
+            'og'        => false,
+            'twitter'   => false,
+            'imgurl'    => false,
+            'url'       => getUrlByName('space.wiki', ['slug' => $space['space_slug']]),
         ];
-        $meta = meta($m, lang('wiki space'), lang('wiki-space-desc'));
+        $meta = meta($m, lang('wiki space'), sprintf(lang('wiki-space-desc'), $space['space_name']));
 
         $data = [
-            'h1'            => lang('wiki space'),
-            'sheet'         => 'wiki',
-            'space'          => $space,
+            'sheet'     => 'wiki',
+            'space'     => $space,
         ];
 
         return view('/space/wiki', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
