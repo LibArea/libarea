@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Admin;
+namespace App\Models\User;
 
 use Hleb\Scheme\App\Models\MainModel;
 use DB;

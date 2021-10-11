@@ -93,6 +93,7 @@ class UserModel extends MainModel
                     user_telegram,
                     user_vk,
                     user_created_at,
+                    user_updated_at,
                     user_my_post,
                     user_ban_list,
                     user_hits_count,
@@ -389,22 +390,5 @@ class UserModel extends MainModel
         $sql = "UPDATE users SET user_activated = :flag WHERE user_id = :user_id";
 
         return DB::run($sql, ['user_id' => $user_id, 'flag' => 1]);
-    }
-
-    // Все награды участника
-    public static function getBadgeUserAll($user_id)
-    {
-        $sql = "SELECT 
-                   badge_id,
-                   badge_icon,
-                   badge_title,
-                   badge_description,
-                   bu_badge_id,                   
-                   bu_user_id
-                        FROM badges_user
-                            LEFT JOIN badges ON badge_id = bu_badge_id
-                            WHERE bu_user_id = :user_id";
-
-        return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
     }
 }

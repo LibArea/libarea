@@ -4,7 +4,8 @@ namespace App\Controllers\Admin;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\{PostModel, Admin\TopicModel};
+use App\Models\Admin\TopicModel;
+use App\Models\PostModel;
 use Base, UploadImage, Validation;
 
 class TopicsController extends MainController

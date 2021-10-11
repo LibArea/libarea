@@ -3,10 +3,8 @@
 namespace App\Controllers\Admin;
 
 use Hleb\Scheme\App\Controllers\MainController;
-
-use App\Models\{SpaceModel, HomeModel, AnswerModel, CommentModel, TopicModel, AgentModel};
+use App\Models\{SpaceModel, HomeModel, AnswerModel, CommentModel, TopicModel, AgentModel, WebModel};
 use App\Models\User\UserModel;
-use App\Models\WebModel;
 use Base;
 
 class HomeController extends MainController

@@ -4,8 +4,9 @@ namespace App\Controllers\Admin;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\User\{UserModel, SettingModel};
-use App\Models\{Admin\BanUserModel, Admin\BadgeModel, Admin\AgentModel, SpaceModel};
+use App\Models\User\{UserModel, SettingModel, BadgeModel};
+use App\Models\Admin\{BanUserModel, AgentModel};
+use App\Models\SpaceModel;
 use Base, Validation;
 
 class UsersController extends MainController
@@ -96,6 +97,8 @@ class UsersController extends MainController
         $user['badges']             = BadgeModel::getBadgeUserAll($user_id);
 
         $counts = UserModel::contentCount($user_id);
+
+        Request::getResources()->addBottomScript('/assets/js/admin.js');
 
         $meta = meta($m = [], lang('edit user'));
         $data = [

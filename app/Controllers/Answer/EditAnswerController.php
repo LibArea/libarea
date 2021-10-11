@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
 use App\Models\{AnswerModel, PostModel};
-use Content, Config, Base, Validation;
+use Content, Base, Validation;
 
 class EditAnswerController extends MainController
 {

@@ -147,8 +147,7 @@
           </select>
         </div>
         <div class="boxline">
-          <label for="post_title"><?= lang('nickname'); ?>:</label>
-          /u/***
+          <label class="form-label" for="post_title"><?= lang('nickname'); ?>: /u/***</label>
           <input class="form-input" type="text" name="login" value="<?= $data['user']['user_login']; ?>" required>
         </div>
         <div class="boxline">

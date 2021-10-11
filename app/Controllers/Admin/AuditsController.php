@@ -4,7 +4,8 @@ namespace App\Controllers\Admin;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\{PostModel, AnswerModel, CommentModel, Admin\AuditModel};
+use App\Models\Admin\AuditModel;
+use App\Models\{PostModel, AnswerModel, CommentModel};
 use Base;
 
 class AuditsController extends MainController

@@ -4,7 +4,7 @@ namespace App\Controllers\User;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\User\UserModel;
+use App\Models\User\{UserModel, BadgeModel};
 use App\Models\{NotificationsModel, SpaceModel, PostModel};
 use Content, Config, Base, Validation;
 
@@ -91,7 +91,7 @@ class UserController extends MainController
             'user_trust_level'  => UserModel::getUserTrust($user['user_id']),
             'count'             => UserModel::contentCount($user['user_id']),
             'spaces_user'       => SpaceModel::getUserCreatedSpaces($user['user_id']),
-            'badges'            => UserModel::getBadgeUserAll($user['user_id']),
+            'badges'            => BadgeModel::getBadgeUserAll($user['user_id']),
             'user'              => $user,
             'isBan'             => $isBan,
             'onepost'           => PostModel::getPostId($user['user_my_post']),
