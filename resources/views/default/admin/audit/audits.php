@@ -5,10 +5,10 @@
   <?= breadcrumb('/admin', lang('admin'), null, null, lang('audits')); ?>
   <div class="bg-white flex flex-row items-center justify-between border-box-1 br-rd-5 p15 mb15">
     <p class="m0"><?= lang($data['sheet']); ?></p>
-    <?php $pages = array(
-      array('id' => 'audits', 'url' => '/admin/audits', 'content' => lang('new ones'), 'icon' => 'bi bi-vinyl'),
-      array('id' => 'approved', 'url' => '/admin/audits/approved', 'content' => lang('approved'), 'icon' => 'bi bi-vinyl-fill'),
-    );
+    <?php $pages = [
+      ['id' => 'audits', 'url' => '/admin/audits', 'content' => lang('new ones'), 'icon' => 'bi bi-vinyl'],
+      ['id' => 'approved', 'url' => '/admin/audits/approved', 'content' => lang('approved'), 'icon' => 'bi bi-vinyl-fill'],
+    ];
     includeTemplate('/_block/tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
     ?>
   </div>

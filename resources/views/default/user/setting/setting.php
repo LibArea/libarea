@@ -33,24 +33,23 @@
       <div id="box" class="boxline">
         <label class="form-label" for="post_content"><?= lang('Color'); ?></label>
         <input type="color" value="<?= $data['user']['user_color']; ?>" id="colorPicker">
-        <input type="hidden" name="color" value="" id="color">
+        <input type="hidden" name="color" value="<?= $data['user']['user_color']; ?>" id="color">
       </div>
 
-      <?= includeTemplate('/_block/form/field-radio', ['data' => [
+      <!--?= includeTemplate('/_block/form/field-radio', ['data' => [
         ['title' => lang('minimal (experimental version)'), 'name' => 'design_is_minimal', 'checked' => $data['user']['user_design_is_minimal']],
-      ]]); ?>
+      ]]); ?-->
 
       <h3><?= lang('Contacts'); ?></h3>
-
-      <?= includeTemplate('/_block/form/field-input', ['data' => [
-        ['title' => lang('URL'), 'type' => 'text', 'name' => 'website', 'value' => $data['user']['user_website'], 'max' => 150, 'help' => 'https://site.ru'],
-        ['title' => lang('city'), 'type' => 'text', 'name' => 'location', 'value' => $data['user']['user_location'], 'max' => 150, 'help' => 'Moscow...'],
-        ['title' => lang('e-mail'), 'type' => 'text', 'name' => 'public_email', 'value' => $data['user']['user_public_email'], 'max' => 150, 'help' => '**@**.ru'],
-        ['title' => lang('Skype'), 'type' => 'text', 'name' => 'skype', 'value' => $data['user']['user_skype'], 'max' => 150, 'help' => 'skype:<b>NICK</b>'],
-        ['title' => lang('Twitter'), 'type' => 'text', 'name' => 'twitter', 'value' => $data['user']['user_twitter'], 'max' => 150, 'help' => 'https://twitter.com/<b>NICK</b>'],
-        ['title' => lang('Telegram'), 'type' => 'text', 'name' => 'telegram', 'value' => $data['user']['user_telegram'], 'max' => 150, 'help' => 'tg://resolve?domain=<b>NICK</b>'],
-        ['title' => lang('VK'), 'type' => 'text', 'name' => 'vk', 'value' => $data['user']['user_vk'], 'max' => 150, 'help' => 'https://vk.com/<b>NICK / id</b>'],
-      ]]); ?>
+       <?php foreach (Config::arr('fields-profile') as $block) { ?>
+         <div class="boxline">
+            <label class="form-label" for="post_title"><?= $block['lang']; ?></label>
+            <input class="form-input" maxlength="150" type="text" value="<?= $data['user'][$block['title']]; ?>" name="<?= $block['name']; ?>">
+            <?php if ($block['help']) { ?>
+                <div class="size-14 gray-light-2"><?= $block['help']; ?></div>
+            <?php } ?>
+          </div>
+        <?php } ?>
 
       <div class="boxline">
         <input type="hidden" name="nickname" id="nickname" value="">

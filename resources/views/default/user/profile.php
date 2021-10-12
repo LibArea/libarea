@@ -110,8 +110,6 @@
           <h1 class="size-24 mb20 flex">
             <?= $data['user']['user_login']; ?>
             <?php if ($data['user']['user_name']) { ?> / <?= $data['user']['user_name']; ?><?php } ?>
-
-
               <?php if ($data['user']['user_up_count'] > 0) { ?>
                 <div class="flex">
                   <div class="up-id bi bi-heart red mr10 ml20 size-14"></div>
@@ -119,11 +117,9 @@
                 </div>
               <?php } ?>
           </h1>
-          <div class="mb20">
-            <blockquote>
-              <?= $data['user']['user_about']; ?>...
-            </blockquote>
-          </div>
+          <blockquote class="mb20">
+            <?= $data['user']['user_about']; ?>...
+          </blockquote>
           <div class="mb20">
             <i class="bi bi-calendar-week middle"></i>
             <span class="middle">
@@ -134,67 +130,28 @@
           <h2 class="mb5 uppercase pt15 font-normal size-14">
             <?= lang('contacts'); ?>
           </h2>
-          <?php if ($data['user']['user_website']) { ?>
-            <div class="boxline">
-              <label for="name"><?= lang('URL'); ?>:</label>
-              <a href="<?= $data['user']['user_website']; ?>" rel="noopener nofollow ugc">
-                <span class="mr5 ml5"><?= $data['user']['user_website']; ?></span>
-              </a>
-            </div>
-          <?php } ?>
-          <?php if ($data['user']['user_location']) { ?>
-            <div class="boxline">
-              <label for="name"><?= lang('city'); ?>:</label>
-              <span class="mr5 ml5"><?= $data['user']['user_location']; ?></span>
-            </div>
-          <?php } else { ?>
-            <div class="boxline">
-              <label for="name"><?= lang('city'); ?>:</label>
-              <span class="mr5 ml5">...</span>
-            </div>
-          <?php } ?>
-          <?php if ($data['user']['user_public_email']) { ?>
-            <div class="boxline">
-              <label for="name"><?= lang('e-mail'); ?>:</label>
-              <a href="mailto:<?= $data['user']['user_public_email']; ?>" rel="noopener nofollow ugc">
-                <span class="mr5 ml5"><?= $data['user']['user_public_email']; ?></span>
-              </a>
-            </div>
-          <?php } ?>
-          <?php if ($data['user']['user_skype']) { ?>
-            <div class="boxline">
-              <label for="name"><?= lang('Skype'); ?>:</label>
-              <a class="mr5 ml5" href="skype:<?= $data['user']['user_skype']; ?>" rel="noopener nofollow ugc">
-                <span class="mr5 ml5"><?= $data['user']['user_skype']; ?></span>
-              </a>
-            </div>
-          <?php } ?>
-          <?php if ($data['user']['user_twitter']) { ?>
-            <div class="boxline">
-              <label for="name"><?= lang('Twitter'); ?>:</label>
-              <a href="https://twitter.com/<?= $data['user']['user_twitter']; ?>" rel="noopener nofollow ugc">
-                <span class="mr5 ml5"><?= $data['user']['user_twitter']; ?></span>
-              </a>
-            </div>
-          <?php } ?>
-          <?php if ($data['user']['user_telegram']) { ?>
-            <div class="boxline">
-              <label for="name"><?= lang('Telegram'); ?>:</label>
-              <a href="tg://resolve?domain=<?= $data['user']['user_telegram']; ?>" rel="noopener nofollow ugc">
-                <span class="mr5 ml5"><?= $data['user']['user_telegram']; ?></span>
-              </a>
-            </div>
-          <?php } ?>
-          <?php if ($data['user']['user_vk']) { ?>
-            <div class="boxline">
-              <label for="name"><?= lang('VK'); ?>:</label>
-              <a href="https://vk.com/<?= $data['user']['user_vk']; ?>" rel="noopener nofollow ugc">
-                <span class="mr5 ml5"><?= $data['user']['user_vk']; ?></span>
-              </a>
-            </div>
-          <?php } ?>
-
-          <div class="relative pt5 pr15 pb5">
+        <?php foreach (Config::arr('fields-profile') as $block) { ?>
+            <?php if ($data['user'][$block['title']]) { ?>
+                <div class="boxline">
+                  <label for="name"><?= $block['lang']; ?>:</label>
+                <?php if ($block['url']) { ?>  
+                  <a href="<?php if ($block['addition']) { ?><?= $block['addition']; ?><?php } ?><?= $data['user'][$block['url']]; ?>" rel="noopener nofollow ugc">
+                    <span class="mr5 ml5"><?= $data['user'][$block['title']]; ?></span>
+                  </a>
+                <?php } else { ?>        
+                   <span class="mr5 ml5"><?= $data['user'][$block['title']]; ?></span>
+                <?php } ?>
+                </div>
+             <?php } else { ?>
+                <?php if ('user_location' == $block['title']) { ?>
+                <div class="boxline">
+                  <label for="name"><?= $block['lang']; ?>:</label>
+                  ...
+                </div>
+                <?php } ?>
+             <?php } ?>
+        <?php } ?>
+          <div class="relative mt15 pt5 pr15 pb5">
             <h3 class="mt0 mb5 uppercase pt5 font-normal size-14">
               <?= lang('badges'); ?>
             </h3>
@@ -213,12 +170,12 @@
               <?= lang('selected post'); ?>
             </h3>
             <div class="post-body mb15">
-              <a class="title" href="<?= getUrlByName('post', ['id' => $data['onepost']['post_id'], 'slug' => $data['onepost']['post_slug']]); ?>">
-                <?= $data['onepost']['post_title']; ?>
+              <a class="title" href="<?= getUrlByName('post', ['id' => $data['post']['post_id'], 'slug' => $data['post']['post_slug']]); ?>">
+                <?= $data['post']['post_title']; ?>
               </a>
               <?php if ($uid['user_id'] > 0) { ?>
                 <?php if ($uid['user_login'] == $data['user']['user_login']) { ?>
-                  <a class="del-post-profile ml10" data-post="<?= $data['onepost']['post_id']; ?>">
+                  <a class="del-post-profile ml10" data-post="<?= $data['post']['post_id']; ?>">
                     <i class="bi bi-trash red"></i>
                   </a>
                 <?php } ?>
@@ -228,14 +185,14 @@
                   <?= user_avatar_img($data['user']['user_avatar'], 'small', $data['user']['user_login'], 'w18 mr5'); ?>
                   <?= $data['user']['user_login']; ?>
                 </a>
-                <span class="gray ml5"><?= $data['onepost']['post_date'] ?></span>
-                <a class="gray ml5" href="<?= getUrlByName('space', ['slug' => $data['onepost']['space_slug']]); ?>" title="<?= $data['onepost']['space_name']; ?>">
-                  <?= $data['onepost']['space_name']; ?>
+                <span class="gray ml5"><?= $data['post']['post_date'] ?></span>
+                <a class="gray ml5" href="<?= getUrlByName('space', ['slug' => $data['post']['space_slug']]); ?>" title="<?= $data['post']['space_name']; ?>">
+                  <?= $data['post']['space_name']; ?>
                 </a>
-                <?php if ($data['onepost']['post_answers_count'] != 0) { ?>
-                  <a class="gray right" href="<?= getUrlByName('post', ['id' => $data['onepost']['post_id'], 'slug' => $data['onepost']['post_slug']]); ?>">
+                <?php if ($data['post']['post_answers_count'] != 0) { ?>
+                  <a class="gray right" href="<?= getUrlByName('post', ['id' => $data['post']['post_id'], 'slug' => $data['post']['post_slug']]); ?>">
                     <i class="bi bi-chat-dots middle"></i>
-                    <?= $data['onepost']['post_answers_count']; ?>
+                    <?= $data['post']['post_answers_count']; ?>
                   </a>
                 <?php } ?>
               </div>
@@ -246,6 +203,7 @@
             <div class="pt5 pr15 pb5">
               <h3 class="mt0 mb10 uppercase pt10 size-14"><?= lang('admin'); ?></h3>
               <div class="mb5">
+                <?php if ($uid['user_trust_level'] != 5) { ?>
                 <?php if ($data['isBan']) { ?>
                   <span class="type-ban gray size-15 mb5 block" data-id="<?= $data['user']['user_id']; ?>" data-type="user">
                     <i class="bi bi-person-x-fill red middle mr5"></i>
@@ -256,6 +214,7 @@
                     <i class="bi bi-person-x middle mr5"></i>
                     <?= lang('ban it'); ?>
                   </span>
+                <?php } ?>
                 <?php } ?>
                 <a class="gray size-15 mb5 block" href="<?= getUrlByName('admin.user.edit', ['id' => $data['user']['user_id']]); ?>">
                   <i class="bi bi-gear middle mr5"></i>

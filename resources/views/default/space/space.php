@@ -4,13 +4,12 @@
 <?php if ($data['space']['space_is_delete'] == 0) { ?>
   <main class="col-span-10 mb-col-12">
     <?= includeTemplate('/_block/space-banner-top', ['data' => $data, 'uid' => $uid]); ?>
-    <?php
-    $pages = array(
-      array('id' => 'feed', 'url' => '/s/' . $data['space']['space_slug'], 'content' => lang('feed'), 'icon' => 'bi bi-sort-down'),
-      array('id' => 'top', 'url' => '/s/' . $data['space']['space_slug'] . '/top', 'content' => lang('top'), 'icon' => 'bi bi-bar-chart'),
-      array('id' => 'writers', 'url' => '/s/' . $data['space']['space_slug'] . '/writers', 'content' => lang('writers'), 'icon' => 'bi bi-people'),
-      array('id' => 'edit', 'url' => '/space/edit/' . $data['space']['space_id'], 'content' => lang('edit'), 'icon' => 'bi bi-gear'),
-    );
+    <?php $pages = [
+      ['id' => 'feed', 'url' => '/s/' . $data['space']['space_slug'], 'content' => lang('feed'), 'icon' => 'bi bi-sort-down'],
+      ['id' => 'top', 'url' => '/s/' . $data['space']['space_slug'] . '/top', 'content' => lang('top'), 'icon' => 'bi bi-bar-chart'],
+      ['id' => 'writers', 'url' => '/s/' . $data['space']['space_slug'] . '/writers', 'content' => lang('writers'), 'icon' => 'bi bi-people'],
+      ['id' => 'edit', 'url' => '/space/edit/' . $data['space']['space_id'], 'content' => lang('edit'), 'icon' => 'bi bi-gear'],
+    ];
     ?>
     <ul class="flex flex-row list-none mt10 p0 size-15">
       <?php foreach ($pages as $page) { ?>

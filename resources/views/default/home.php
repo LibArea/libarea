@@ -14,11 +14,11 @@
 <main class="col-span-7 mb-col-12">
   <div class="bg-white flex flex-row items-center justify-between border-box-1 br-rd-5 p15 mb15">
     <p class="m0 size-18"><?= lang($data['sheet']); ?></p>
-    <?php $pages = array(
-      array('id' => 'feed', 'url' => '/', 'content' => lang('feed'), 'icon' => 'bi bi-sort-down'),
-      array('id' => 'all', 'url' => '/all', 'content' => lang('all'), 'auth' => 'yes', 'icon' => 'bi bi-app'),
-      array('id' => 'top', 'url' => '/top', 'content' => lang('top'), 'icon' => 'bi bi-bar-chart'),
-    );
+    <?php $pages = [
+      ['id' => 'feed', 'url' => '/', 'content' => lang('feed'), 'icon' => 'bi bi-sort-down'],
+      ['id' => 'all', 'url' => '/all', 'content' => lang('all'), 'auth' => 'yes', 'icon' => 'bi bi-app'],
+      ['id' => 'top', 'url' => '/top', 'content' => lang('top'), 'icon' => 'bi bi-bar-chart'],
+    ];
     includeTemplate('/_block/tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
     ?>
   </div>

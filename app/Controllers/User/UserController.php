@@ -94,7 +94,7 @@ class UserController extends MainController
             'badges'            => BadgeModel::getBadgeUserAll($user['user_id']),
             'user'              => $user,
             'isBan'             => $isBan,
-            'onepost'           => PostModel::getPostId($user['user_my_post']),
+            'post'              => PostModel::getPostId($user['user_my_post']),
             'button_pm'         => Validation::accessPm($uid, $user['user_id'], Config::get('general.tl_add_pm'))
         ];
 

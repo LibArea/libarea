@@ -76,26 +76,23 @@
            ---
           <?php } ?>
           <?php if ($data['spaces_user']) { ?>
-            <br>
-            <label class="required"><?= lang('created by'); ?>:</label>
-            <br>
-            <span class="d">
-              <?php foreach ($data['spaces_user'] as  $space) { ?>
-                <div class="profile-space">
-                  <?= spase_logo_img($space['space_img'], 'small', $space['space_name'], 'w24'); ?>
-                  <a href="<?= getUrlByName('space', ['slug' => $space['space_slug']]); ?>"><?= $space['space_name']; ?></a>
-                </div>
-              <?php } ?>
-            </span>
+            <label class="form-label mt10"><?= lang('created by'); ?>:</label>
+            <?php foreach ($data['spaces_user'] as  $space) { ?>
+              <div class="mb5">
+                <?= spase_logo_img($space['space_img'], 'small', $space['space_name'], 'w24'); ?>
+                <a class="size-14" href="<?= getUrlByName('space', ['slug' => $space['space_slug']]); ?>">
+                  <?= $space['space_name']; ?>
+                </a>
+              </div>
+            <?php } ?>
           <?php } else { ?>
            ---
           <?php } ?>
         </div>
         <hr>
         <div class="boxline">
-          <label class="form-label" for="post_title"><?= lang('badge'); ?></label>
-          <a class="lowercase" href="/admin/badges/user/add/<?= $data['user']['user_id']; ?>">
-            <?= lang('reward the user'); ?>
+          <a class="size-14" href="/admin/badges/user/add/<?= $data['user']['user_id']; ?>">
+            + <?= lang('reward the user'); ?>
           </a>
         </div>
         <div class="boxline">
@@ -160,15 +157,15 @@
         </div>
 
         <h3><?= lang('contacts'); ?></h3>
-        <?= includeTemplate('/_block/form/field-input', ['data' => [
-          ['title' => lang('URL'), 'type' => 'text', 'name' => 'website', 'value' => $data['user']['user_website'], 'max' => 150, 'help' => 'https://site.ru'],
-          ['title' => lang('city'), 'type' => 'text', 'name' => 'location', 'value' => $data['user']['user_location'], 'max' => 150, 'help' => 'Moscow...'],
-          ['title' => lang('e-mail'), 'type' => 'text', 'name' => 'public_email', 'value' => $data['user']['user_public_email'], 'max' => 150, 'help' => '**@**.ru'],
-          ['title' => lang('Skype'), 'type' => 'text', 'name' => 'skype', 'value' => $data['user']['user_skype'], 'max' => 150, 'help' => 'skype:<b>NICK</b>'],
-          ['title' => lang('Twitter'), 'type' => 'text', 'name' => 'twitter', 'value' => $data['user']['user_twitter'], 'max' => 150, 'help' => 'https://twitter.com/<b>NICK</b>'],
-          ['title' => lang('Telegram'), 'type' => 'text', 'name' => 'telegram', 'value' => $data['user']['user_telegram'], 'max' => 150, 'help' => 'tg://resolve?domain=<b>NICK</b>'],
-          ['title' => lang('VK'), 'type' => 'text', 'name' => 'vk', 'value' => $data['user']['user_vk'], 'max' => 150, 'help' => 'https://vk.com/<b>NICK / id</b>'],
-        ]]); ?>
+       <?php foreach (Config::arr('fields-profile') as $block) { ?>
+         <div class="boxline">
+            <label class="form-label" for="post_title"><?= $block['lang']; ?></label>
+            <input class="form-input" maxlength="150" type="text" value="<?= $data['user'][$block['title']]; ?>" name="<?= $block['name']; ?>">
+            <?php if ($block['help']) { ?>
+                <div class="size-14 gray-light-2"><?= $block['help']; ?></div>
+            <?php } ?>
+          </div>
+        <?php } ?>
 
         <input type="submit" class="button block br-rd-5 white" name="submit" value="<?= lang('edit'); ?>" />
       </form>

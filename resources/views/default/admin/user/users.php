@@ -5,11 +5,10 @@
     <?= breadcrumb('/admin', lang('admin'), null, null, lang('users')); ?>
     <div class="bg-white flex flex-row items-center justify-between border-box-1 p15 mb15">
       <p class="m0"><?= lang($data['sheet']); ?></p>
-      <?php
-      $pages = array(
-        array('id' => 'users', 'url' => '/admin/users', 'content' => lang('all'), 'icon' => 'bi bi-record-circle'),
-        array('id' => 'users-ban', 'url' => '/admin/users/ban', 'content' => lang('banned'), 'icon' => 'bi bi-x-circle'),
-      );
+      <?php  $pages = [
+        ['id' => 'users', 'url' => '/admin/users', 'content' => lang('all'), 'icon' => 'bi bi-record-circle'],
+        ['id' => 'users-ban', 'url' => '/admin/users/ban', 'content' => lang('banned'), 'icon' => 'bi bi-x-circle'],
+      ];
       includeTemplate('/_block/tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
       ?>
     </div>
@@ -98,13 +97,9 @@
                 <?php } ?>
               </td>
               <td class="center">
-                <?php if ($user['user_trust_level'] != 5) { ?>
-                  <a title="<?= lang('edit'); ?>" href="/admin/users/<?= $user['user_id']; ?>/edit">
-                    <i class="bi bi-pencil size-15"></i>
-                  </a>
-                <?php } else { ?>
-                  ---
-                <?php } ?>
+                <a title="<?= lang('edit'); ?>" href="/admin/users/<?= $user['user_id']; ?>/edit">
+                  <i class="bi bi-pencil size-15"></i>
+                </a>
               </td>
             </tr>
           <?php } ?>

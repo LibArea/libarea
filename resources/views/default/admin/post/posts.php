@@ -5,10 +5,10 @@
   <?= breadcrumb('/admin', lang('admin'), null, null, lang('posts')); ?>
   <div class="bg-white flex flex-row items-center justify-between border-box-1 br-rd-5 p15 mb15">
     <p class="m0"><?= lang($data['sheet']); ?></p>
-    <?php $pages = array(
-      array('id' => 'posts', 'url' => '/admin/posts', 'content' => lang('all'), 'icon' => 'bi bi-record-circle'),
-      array('id' => 'posts-ban', 'url' => '/admin/posts/ban', 'content' => lang('deleted posts'), 'icon' => 'bi bi-x-circle'),
-    );
+    <?php $pages = [
+      ['id' => 'posts', 'url' => '/admin/posts', 'content' => lang('all'), 'icon' => 'bi bi-record-circle'],
+      ['id' => 'posts-ban', 'url' => '/admin/posts/ban', 'content' => lang('deleted posts'), 'icon' => 'bi bi-x-circle'],
+    ];
     includeTemplate('/_block/tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
     ?>
   </div>

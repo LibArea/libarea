@@ -11,10 +11,10 @@
         </a>
     <?php }
     }
-    $pages = array(
-      array('id' => 'spaces', 'url' => '/spaces', 'content' => lang('all'), 'icon' => 'bi bi-broadcast'),
-      array('id' => 'my-space', 'url' => '/space/my', 'content' => lang('signed'), 'auth' => 'yes', 'icon' => 'bi bi-broadcast-pin'),
-    );
+    $pages = [
+      ['id' => 'spaces', 'url' => '/spaces', 'content' => lang('all'), 'icon' => 'bi bi-broadcast'],
+      ['id' => 'my-space', 'url' => '/space/my', 'content' => lang('signed'), 'auth' => 'yes', 'icon' => 'bi bi-broadcast-pin'],
+    ];
     includeTemplate('/_block/tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
     ?>
   </div>

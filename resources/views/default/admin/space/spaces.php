@@ -8,10 +8,10 @@
     <a class="right" title="<?= lang('add'); ?>" href="/space/add">
       <i class="bi bi-plus-lg middle"></i>
     </a>
-    <?php $pages = array(
-      array('id' => 'spaces', 'url' => '/admin/spaces', 'content' => lang('all'), 'icon' => 'bi bi-record-circle'),
-      array('id' => 'spaces-ban', 'url' => '/admin/spaces/ban', 'content' => lang('banned'), 'icon' => 'bi bi-x-circle'),
-    );
+    <?php $pages = [
+      ['id' => 'spaces', 'url' => '/admin/spaces', 'content' => lang('all'), 'icon' => 'bi bi-record-circle'],
+      ['id' => 'spaces-ban', 'url' => '/admin/spaces/ban', 'content' => lang('banned'), 'icon' => 'bi bi-x-circle'],
+    ];
     includeTemplate('/_block/tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
     ?>
   </div>

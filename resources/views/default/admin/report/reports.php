@@ -2,7 +2,7 @@
   <?= includeTemplate('/admin/admin-menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-10 mb-col-12">
-  <?= breadcrumb('/admin', lang('admin'), '/admin/users', lang('users'), lang('Reports')); ?>
+  <?= breadcrumb('/admin', lang('admin'), '/admin/users', lang('users'), lang('reports')); ?>
 
   <?php if ($data['reports']) { ?>
     <table class="mt20">

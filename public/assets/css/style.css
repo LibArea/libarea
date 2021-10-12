@@ -1,11 +1,5 @@
 @import "./font/bootstrap-icons.css";
 
-/*
- * Agouti (https://agouti.ru/)
- * Copyright 2021 @Evg
- * Licensed under MIT (https://github.com/AgoutiDev/agouti/blob/main/LICENSE)
- */
-
 html {
   height: 100%;
   overflow-y: scroll;
