@@ -18,8 +18,8 @@ class AnswerController extends MainController
         $page   = $page == 0 ? 1 : $page;
 
         $limit  = 25;
-        $pagesCount = AnswerModel::getAnswersAllCount();
-        $answ       = AnswerModel::getAnswersAll($page, $limit, $uid);
+        $pagesCount = AnswerModel::getAnswersAllCount('user');
+        $answ       = AnswerModel::getAnswersAll($page, $limit, $uid, 'user');
 
         $result = array();
         foreach ($answ  as $ind => $row) {

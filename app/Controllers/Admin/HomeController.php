@@ -21,7 +21,7 @@ class HomeController extends MainController
             'topics_count'      => TopicModel::getTopicsAllCount(),
             'posts_count'       => HomeModel::feedCount([], $uid),
             'users_count'       => UserModel::getUsersAllCount('all'),
-            'answers_count'     => AnswerModel::getAnswersAllCount(),
+            'answers_count'     => AnswerModel::getAnswersAllCount('all'),
             'comments_count'    => CommentModel::getCommentsAllCount('all'),
             'links_count'       => WebModel::getLinksAllCount(),
             'last_visit'        => AgentModel::getLastVisit(),

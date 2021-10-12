@@ -2,7 +2,7 @@
   <?= includeTemplate('/admin/admin-menu', ['uid' => $uid, 'sheet' => $data['sheet']]); ?>
 </div>
 <main class="col-span-10 mb-col-12">
-    <?= breadcrumb('/admin', lang('admin'), '/admin/users', lang('users'), lang('users')); ?>
+    <?= breadcrumb('/admin', lang('admin'), null, null, lang('users')); ?>
     <div class="bg-white flex flex-row items-center justify-between border-box-1 p15 mb15">
       <p class="m0"><?= lang($data['sheet']); ?></p>
       <?php

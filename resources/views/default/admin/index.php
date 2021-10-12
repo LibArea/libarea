@@ -9,31 +9,31 @@
 
   <div class="grid grid-cols-12 gap-4 pr10 pl10 justify-between">
     <div class="col-span-3 bg-yellow-500 p10">
-      <a class="white" title="<?= lang('posts'); ?>" rel="noreferrer gray" href="/admin/posts">
+      <a class="white white-hover-gray size-21" title="<?= lang('posts'); ?>" rel="noreferrer gray" href="/admin/posts">
         <i class="bi bi-journal-text white right"></i>
-        <div class="count white"><?= $data['posts_count']; ?></div>
-        <div class="size-15 white"><?= lang('posts'); ?></div>
+        <?= $data['posts_count']; ?>
+        <div class="size-15"><?= lang('posts'); ?></div>
       </a>
     </div>
     <div class="col-span-3 bg-indigo-300 p10">
-      <a class="white" title="<?= lang('answers-n'); ?>" rel="noreferrer gray" href="/admin/answers">
+      <a class="white white-hover-gray size-21" title="<?= lang('answers-n'); ?>" rel="noreferrer gray" href="/admin/answers">
         <i class="bi bi-chat-left-text white right"></i>
-        <div class="count white"><?= $data['answers_count']; ?></div>
-        <div class="size-15 white"><?= lang('answers-n'); ?></div>
+        <?= $data['answers_count']; ?>
+        <div class="size-15"><?= lang('answers-n'); ?></div>
       </a>
     </div>
     <div class="col-span-3 bg-green-500 p10">
-      <a class="white" title="<?= lang('users'); ?>" rel="noreferrer" href="/admin/users">
+      <a class="white white-hover-gray size-21" title="<?= lang('users'); ?>" rel="noreferrer" href="/admin/users">
         <i class="bi bi-people white right"></i>
-        <div class="count white"><?= $data['users_count']; ?></div>
-        <div class="size-15 white"><?= lang('users'); ?></div>
+        <?= $data['users_count']; ?>
+        <div class="size-15"><?= lang('users'); ?></div>
       </a>
     </div>
     <div class="col-span-3 bg-blue-400 p10">
-      <a class="white" title="<?= lang('comments-n'); ?>" rel="noreferrer" href="/admin/comments">
+      <a class="white white-hover-gray size-21" title="<?= lang('comments-n'); ?>" rel="noreferrer" href="/admin/comments">
         <i class="bi bi-chat-dots white right"></i>
-        <div class="count white"><?= $data['comments_count']; ?></div>
-        <div class="size-15 white"><?= lang('comments-n'); ?></div>
+        <?= $data['comments_count']; ?>
+        <div class="size-15"><?= lang('comments-n'); ?></div>
       </a>
     </div>
   </div>

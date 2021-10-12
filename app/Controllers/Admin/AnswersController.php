@@ -4,7 +4,7 @@ namespace App\Controllers\Admin;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\Admin\AnswerModel;
+use App\Models\AnswerModel;
 use Content, Base;
 
 class AnswersController extends MainController
@@ -17,7 +17,7 @@ class AnswersController extends MainController
 
         $limit = 100;
         $pagesCount = AnswerModel::getAnswersAllCount($sheet);
-        $answers    = AnswerModel::getAnswersAll($page, $limit, $sheet);
+        $answers    = AnswerModel::getAnswersAll($page, $limit, $uid, $sheet);
 
         $result = array();
         foreach ($answers  as $ind => $row) {
