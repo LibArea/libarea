@@ -48,7 +48,6 @@ class UsersController extends MainController
     public function logsIp($option)
     {
         $user_ip    = Request::get('ip');
-
         if ($option == 'logs') {
             $user_all   = AgentModel::getUserLogsId($user_ip);
         } else {
@@ -86,26 +85,19 @@ class UsersController extends MainController
     public function userEditPage()
     {
         $user_id    = Request::getInt('id');
-
-        if (!$user = UserModel::getUser($user_id, 'id')) {
-            redirect('/admin');
-        }
+        if (!$user = UserModel::getUser($user_id, 'id')) redirect(getUrlByName('admin'));
 
         $user['isBan']              = BanUserModel::isBan($user_id);
         $user['duplicat_ip_reg']    = AgentModel::duplicatesRegistrationCount($user_id);
         $user['last_visit_logs']    = AgentModel::lastVisitLogs($user_id);
         $user['badges']             = BadgeModel::getBadgeUserAll($user_id);
 
-        $counts = UserModel::contentCount($user_id);
-
         Request::getResources()->addBottomScript('/assets/js/admin.js');
 
         $meta = meta($m = [], lang('edit user'));
         $data = [
             'sheet'             => 'edit-user',
-            'posts_count'       => $counts['count_posts'],
-            'answers_count'     => $counts['count_answers'],
-            'comments_count'    => $counts['count_comments'],
+            'count'             => UserModel::contentCount($user_id),
             'spaces_user'       => SpaceModel::getUserCreatedSpaces($user_id),
             'user'              => $user,
         ];
@@ -116,48 +108,31 @@ class UsersController extends MainController
     // Редактировать участника
     public function userEdit()
     {
+        $login      = Request::getPost('login');
         $user_id    = Request::getInt('id');
+        if (!UserModel::getUser($user_id, 'id')) redirect(getUrlByName('admin.users'));
 
-        $redirect = '/admin/users';
-        if (!UserModel::getUser($user_id, 'id')) {
-            redirect($redirect);
-        }
-
-        $email          = Request::getPost('email');
-        $login          = Request::getPost('login');
-        $name           = Request::getPost('name');
-        $about          = Request::getPost('about');
-        $whisper        = Request::getPost('whisper');
-        $activated      = Request::getPostInt('activated');
-        $limiting_mode  = Request::getPostInt('limiting_mode');
-        $trust_level    = Request::getPostInt('trust_level');
-        $website        = Request::getPost('website');
-        $location       = Request::getPost('location');
-        $public_email   = Request::getPost('public_email');
-        $skype          = Request::getPost('skype');
-        $twitter        = Request::getPost('twitter');
-        $telegram       = Request::getPost('telegram');
-        $vk             = Request::getPost('vk');
-
-        Validation::Limits($login, lang('login'), '4', '11', $redirect);
+        $redirect = getUrlByName('admin.user.edit', ['id' => $user_id]);
+        Validation::Limits($login, lang('login'), '3', '11', $redirect);
 
         $data = [
             'user_id'            => $user_id,
-            'user_email'         => $email,
             'user_login'         => $login,
-            'user_whisper'       => $whisper ?? '',
-            'user_name'          => $name ?? '',
-            'user_activated'     => $activated,
-            'user_limiting_mode' => $limiting_mode,
-            'user_trust_level'   => $trust_level,
-            'user_about'         => $about ?? '',
-            'user_website'       => $website ?? '',
-            'user_location'      => $location ?? '',
-            'user_public_email'  => $public_email ?? '',
-            'user_skype'         => $skype ?? '',
-            'user_twitter'       => $twitter ?? '',
-            'user_telegram'      => $telegram ?? '',
-            'user_vk'            => $vk ?? '',
+            'user_email'         => Request::getPost('email'),
+            'user_whisper'       => Request::getPost('whisper', ''),
+            'user_name'          => Request::getPost('name', ''),
+            'user_activated'     => Request::getPostInt('activated'),
+            'user_limiting_mode' => Request::getPostInt('limiting_mode'),
+            'user_trust_level'   => Request::getPostInt('trust_level'),
+            'user_color'         => Request::getPostString('color', '#339900'),
+            'user_about'         => Request::getPost('about', ''),
+            'user_website'       => Request::getPost('website', ''),
+            'user_location'      => Request::getPost('location', ''),
+            'user_public_email'  => Request::getPost('public_email', ''),
+            'user_skype'         => Request::getPost('skype', ''),
+            'user_twitter'       => Request::getPost('twitter', ''),
+            'user_telegram'      => Request::getPost('telegram', ''),
+            'user_vk'            => Request::getPost('vk', ''),
         ];
 
         SettingModel::editProfile($data);

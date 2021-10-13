@@ -14,13 +14,12 @@
       <?php csrf_field(); ?>
 
       <div class="boxline">
-        <span class="name"><?= lang('nickname'); ?></span>
         <?= user_avatar_img($data['user']['user_avatar'], 'small', $data['user']['user_login'], 'mr5 ml5 ava'); ?>
         <span class="mr5 ml5"><?= $data['user']['user_login']; ?></span>
       </div>
 
       <div class="boxline">
-        <span class="name">E-mail</span>
+        <span class="name gray">E-mail:</span>
         <span class="mr5 ml5"><?= $data['user']['user_email']; ?></span>
       </div>
 
@@ -31,7 +30,7 @@
       <?php includeTemplate('/_block/editor/textarea', ['title' => lang('about me'), 'type' => 'text', 'name' => 'about', 'content' => $data['user']['user_about'], 'min' => 0, 'max' => 255, 'help' => '0 - 255 ' . lang('characters')]); ?>
 
       <div id="box" class="boxline">
-        <label class="form-label" for="post_content"><?= lang('Color'); ?></label>
+        <label class="form-label" for="post_content"><?= lang('color'); ?></label>
         <input type="color" value="<?= $data['user']['user_color']; ?>" id="colorPicker">
         <input type="hidden" name="color" value="<?= $data['user']['user_color']; ?>" id="color">
       </div>
@@ -40,16 +39,16 @@
         ['title' => lang('minimal (experimental version)'), 'name' => 'design_is_minimal', 'checked' => $data['user']['user_design_is_minimal']],
       ]]); ?-->
 
-      <h3><?= lang('Contacts'); ?></h3>
-       <?php foreach (Config::arr('fields-profile') as $block) { ?>
-         <div class="boxline">
-            <label class="form-label" for="post_title"><?= $block['lang']; ?></label>
-            <input class="form-input" maxlength="150" type="text" value="<?= $data['user'][$block['title']]; ?>" name="<?= $block['name']; ?>">
-            <?php if ($block['help']) { ?>
-                <div class="size-14 gray-light-2"><?= $block['help']; ?></div>
-            <?php } ?>
-          </div>
-        <?php } ?>
+      <h3><?= lang('contacts'); ?></h3>
+      <?php foreach (Config::arr('fields-profile') as $block) { ?>
+        <div class="boxline">
+          <label class="form-label" for="post_title"><?= $block['lang']; ?></label>
+          <input class="form-input" maxlength="150" type="text" value="<?= $data['user'][$block['title']]; ?>" name="<?= $block['name']; ?>">
+          <?php if ($block['help']) { ?>
+            <div class="size-14 gray-light-2"><?= $block['help']; ?></div>
+          <?php } ?>
+        </div>
+      <?php } ?>
 
       <div class="boxline">
         <input type="hidden" name="nickname" id="nickname" value="">

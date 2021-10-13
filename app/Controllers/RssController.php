@@ -11,13 +11,10 @@ class RssController extends MainController
 {
     public function index()
     {
-        $spaces = RssModel::getSpacesSitemap();
-        $posts  = RssModel::getPostsSitemap();
-
         $data = [
             'url'       => Config::get('meta.url'),
-            'spaces'    => $spaces,
-            'posts'     => $posts,
+            'spaces'    => RssModel::getSpacesSitemap(),
+            'posts'     => RssModel::getPostsSitemap(),
         ];
 
         includeCachedTemplate('/rss/sitemap', ['data' => $data]);

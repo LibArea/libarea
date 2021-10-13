@@ -22,7 +22,7 @@
             <label class="form-label" for="post_title"><?= lang('description'); ?></label>
             <textarea rows="4" name="link_content" required></textarea>
             <div class="size-14 gray-light-2">24 - 1500 <?= lang('characters'); ?></div>
-          </div>       
+          </div>
           <?= includeTemplate('/_block/form/select-content', ['type' => 'topic', 'data' => $data, 'action' => 'add', 'title' => lang('topics')]); ?>
           <input type="submit" class="button block br-rd-5 white" name="submit" value="<?= lang('add'); ?>" />
         </form>

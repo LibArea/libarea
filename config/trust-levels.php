@@ -40,4 +40,13 @@ return [
     'tl_0_add_comment'  => 5,
     'tl_1_add_comment'  => 10,
     'tl_2_add_comment'  => 20,
+    
+    // Уровень TL, до которого (включая) отправка жалоб невозможна
+    // TL level, up to which (including) sending complaints is not possible
+    'tl_stop_report'  => 0, 
+    // Общее количество жалоб в сутки (общие ограничения)
+    // Total number of complaints per day (general restrictions)
+    'all_stop_report'  => 3, 
+
+    
 ]; 

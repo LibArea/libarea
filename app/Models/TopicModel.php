@@ -35,11 +35,10 @@ class TopicModel extends MainModel
     // Информация по теме (id, slug)
     public static function getTopic($params, $name)
     {
+        $sort = "topic_id = :params";
         if ($name == 'slug') {
             $sort = "topic_slug = :params";
-        } else {
-            $sort = "topic_id = :params";
-        }
+        } 
 
         $sql = "SELECT 
                     topic_id,

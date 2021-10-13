@@ -33,7 +33,8 @@ class EditCommentController extends MainController
         Base::accountBan($user);
         Content::stopContentQuietМode($user);
 
-        $redirect   = '/post/' . $post['post_id'] . '/' . $post['post_slug'] . '#comment_' . $comment['comment_id'];
+        $slug = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
+        $redirect   = $slug . '#comment_' . $comment['comment_id'];
 
         $comment_content = Content::change($comment_content);
 

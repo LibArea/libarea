@@ -28,7 +28,7 @@ class AddCommentController extends MainController
         Base::accountBan($user);
         Content::stopContentQuietМode($user);
 
-        $redirect = '/post/' . $post['post_id'] . '/' . $post['post_slug'];
+        $redirect = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
 
         // Проверяем длину тела
         Validation::Limits($comment_content, lang('Comments-m'), '6', '2024', $redirect);

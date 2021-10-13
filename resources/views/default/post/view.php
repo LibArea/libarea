@@ -80,7 +80,7 @@
         </div>
       </div>
       <?php if ($data['post']['post_thumb_img']) { ?>
-        <?= post_img($data['post']['post_thumb_img'], $data['post']['post_title'],  'thumb right', 'thumbnails'); ?>
+        <?= post_img($data['post']['post_thumb_img'], $data['post']['post_title'],  'thumb right ml15', 'thumbnails'); ?>
       <?php } ?>
       <div class="post-body max-w780 full">
         <div class="post">
