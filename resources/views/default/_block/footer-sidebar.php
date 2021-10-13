@@ -1,15 +1,15 @@
 <div class="last-comm br-rd-5 border-box-1 p15 mt15 bg-white">
-  <div class="flex flex-row flex-wrap mb-3 text-sm font-medium leading-snug tracking-tight whitespace-nowrap">
-    <a class="block w-50 size-14 mb5 gray-light" title="<?= lang('all answers'); ?>" href="<?= getUrlByName('answers'); ?>">
+  <div class="mb-3 size-14">
+    <a class="mr15 mb5 inline gray-light" title="<?= lang('all answers'); ?>" href="<?= getUrlByName('answers'); ?>">
       <?= lang('answers-n'); ?>
     </a>
-    <a class="block w-50 size-14 mb5 gray-light" title="<?= lang('all comments'); ?>" href="<?= getUrlByName('comments'); ?>">
+    <a class="mr15 mb5 inline gray-light" title="<?= lang('all comments'); ?>" href="<?= getUrlByName('comments'); ?>">
       <?= lang('comments-n'); ?>
     </a>
-    <a class="block w-50 size-14 mb5 gray-light" title="<?= lang('all domains'); ?>" href="<?= getUrlByName('web'); ?>">
+    <a class="mr15 mb5 inline gray-light" title="<?= lang('all domains'); ?>" href="<?= getUrlByName('web'); ?>">
       <?= lang('domains'); ?>
     </a>
-    <a class="block w-50 size-14 mb5 gray-light" title="<?= lang('info'); ?>" href="<?= getUrlByName('info'); ?>">
+    <a class="mb5 inline gray-light" title="<?= lang('info'); ?>" href="<?= getUrlByName('info'); ?>">
       <?= lang('info'); ?>
     </a>
   </div>
