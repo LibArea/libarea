@@ -14,7 +14,7 @@
 
     <?= includeTemplate('/_block/form/field-input', ['data' => [
       ['title' => 'URL (slug)', 'type' => 'text', 'name' => 'space_slug', 'value' => $data['space']['space_slug'], 'min' => 3, 'max' => 12, 'help' => '3 - 12 ' . lang('characters') . ' (' . lang('english') . ')'],
-      ['title' => lang('title'), 'type' => 'text', 'name' => 'space_name', 'value' => $data['space']['space_name'], 'min' => 4, 'max' => 18, 'help' => '4 - 18 ' . lang('characters') . ' (' . lang('english') . ')'],
+      ['title' => lang('title'), 'type' => 'text', 'name' => 'space_name', 'value' => $data['space']['space_name'], 'min' => 4, 'max' => 18, 'help' => '4 - 18 ' . lang('characters')],
       ['title' => lang('long'), 'type' => 'text', 'name' => 'space_short_text', 'value' => $data['space']['space_short_text'], 'min' => 10, 'max' => 250, 'help' => lang('long name from') . ' 10 - 250 ' . lang('characters')],
       ['title' => 'Meta-', 'type' => 'text', 'name' => 'space_description', 'value' => $data['space']['space_description'], 'min' => 60, 'max' => 180, 'help' => 'Description: 60 - 180 ' . lang('characters')],
     ]]); ?>
