@@ -8,27 +8,27 @@
     <form action="/admin/badge/add" method="post">
       <?= csrf_field() ?>
       <div class="boxline max-w780">
-        <label class="form-label" or="post_title">Title</label>
+        <label class="block" or="post_title">Title</label>
         <input type="text" minlength="4" class="form-input" name="badge_title" value="" required>
         <div class="size-14 gray-light-2">4 - 25 <?= lang('characters'); ?></div>
       </div>
       <div class="boxline max-w780">
-        <label class="form-label" for="post_title">Icon</label>
+        <label class="block" for="post_title">Icon</label>
         <textarea class="add" name="badge_icon" required></textarea>
         <div class="size-14 gray-light-2"><?= lang('for example'); ?>: &lt;i title="<?= lang('title'); ?>" class="bi bi-trophy"&gt;&lt;/i&gt;</div>
       </div>
       <div class="boxline">
-        <label class="form-label" for="post_title">Tl</label>
+        <label class="block" for="post_title">Tl</label>
         <input type="text" class="form-input" name="badge_tl" value="0" required>
         <div class="size-14 gray-light-2"><?= lang('for'); ?> TL (0 <?= lang('by default'); ?>)</div>
       </div>
       <div class="boxline">
-        <label class="form-label" for="post_title">Score</label>
+        <label class="block" for="post_title">Score</label>
         <input class="form-input" type="text" name="badge_score" value="10" required>
         <div class="size-14 gray-light-2"><?= lang('reward weight'); ?></div>
       </div>
       <div class="boxline max-w780">
-        <label class="form-label" for="post_title"><?= lang('description'); ?></label>
+        <label class="block" for="post_title"><?= lang('description'); ?></label>
         <textarea class="add" minlength="12" name="badge_description" required></textarea>
         <div class="size-14 gray-light-2">12 - 250 <?= lang('characters'); ?></div>
       </div>

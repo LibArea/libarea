@@ -24,7 +24,6 @@ class PostModel extends MainModel
                     post_type,
                     post_translation,
                     post_draft,
-                    post_space_id,
                     post_date,
                     post_published,
                     post_user_id,
@@ -43,8 +42,7 @@ class PostModel extends MainModel
                     post_url_domain,
                     post_is_deleted,
                     rel.*,
-                    user_id, user_login, user_avatar, 
-                    space_id, space_slug, space_name, space_color
+                    user_id, user_login, user_avatar
                     
                         FROM posts
                         LEFT JOIN
@@ -65,7 +63,6 @@ class PostModel extends MainModel
                             ON rel.relation_post_id = post_id 
 
             INNER JOIN users ON user_id = post_user_id
-            INNER JOIN spaces ON space_id = post_space_id
             $sort ORDER BY post_top DESC, post_date DESC LIMIT $start, $limit";
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
@@ -79,9 +76,8 @@ class PostModel extends MainModel
             $sort = "WHERE post_is_deleted = 1";
         }
 
-        $sql = "SELECT post_id, post_space_id, space_id
-                FROM posts
-                INNER JOIN spaces ON space_id = post_space_id $sort";
+        $sql = "SELECT post_id
+                FROM posts  $sort";
 
         return DB::run($sql)->rowCount();
     }

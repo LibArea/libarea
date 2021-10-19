@@ -87,7 +87,6 @@ class WebsController extends MainController
             'link_user_id'      => $this->uid['user_id'],
             'link_type'         => 0,
             'link_status'       => 200,
-            'link_category_id'  => 1,
         ];
 
         WebModel::add($data);
@@ -144,7 +143,6 @@ class WebsController extends MainController
             'link_user_id'      => $this->uid['user_id'],
             'link_type'         => 0,
             'link_status'       => $link_status,
-            'link_category_id'  => 1,
         ];
 
         WebModel::editLink($data);

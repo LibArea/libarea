@@ -25,7 +25,7 @@
           <a class="black" href="<?= $post_url; ?>">
             <h2 class="font-normal size-24 mt0 mb0"><?= $post['post_title']; ?>
               <?php if ($post['post_is_deleted'] == 1) { ?>
-                <i class="bi bi-trash blue"></i>
+                <i class="bi bi-trash red"></i>
               <?php } ?>
               <?php if ($post['post_closed'] == 1) { ?>
                 <i class="bi bi-lock gray"></i>
@@ -55,11 +55,7 @@
             </h2>
           </a>
           <div class="">
-            <a class="gray-light size-14" href="<?= getUrlByName('space', ['slug' => $post['space_slug']]); ?>" title="<?= $post['space_name']; ?>">
-              <span class="w10 h10 inline mr5" style="background-color: <?= $post['space_color']; ?>;"></span>
-              <?= $post['space_name']; ?>
-            </a>
-            <?= html_topic($post['topic_list'], 'topic', 'gray-light size-14 ml15'); ?>
+            <?= html_topic($post['topic_list'], 'topic', 'gray-light size-14 mr15'); ?>
             <?php if ($post['post_url_domain']) { ?>
               <a class="gray-light size-14 ml10" href="<?= getUrlByName('domain', ['domain' => $post['post_url_domain']]); ?>">
                 <i class="bi bi-link-45deg middle"></i> <?= $post['post_url_domain']; ?>
@@ -73,15 +69,7 @@
               <span class="s_<?= $post['post_id']; ?> show_detail"></span>
             </div>
           </div>
-
         </div>
-        <?php if ($post['post_thumb_img']) { ?>
-          <div class="home-img mt15 flex-auto no-mob-max">
-            <a title="<?= $post['post_title']; ?>" href="<?= $post_url; ?>">
-              <?= post_img($post['post_thumb_img'], $post['post_title'],  'thumb no-mob br-rd-5 right', 'thumbnails'); ?>
-            </a>
-          </div>
-        <?php } ?>
 
         <?php if ($post['post_content_img']) { ?>
           <div class="home-img mt15 flex-auto">
@@ -89,6 +77,14 @@
               <?= post_img($post['post_content_img'], $post['post_title'], 'home-img right br-rd-5', 'cover'); ?>
             </a>
           </div>
+        <?php } else { ?>  
+           <?php if ($post['post_thumb_img']) { ?>
+                <div class="home-img mt15 flex-auto no-mob-max">
+            <a title="<?= $post['post_title']; ?>" href="<?= $post_url; ?>">
+              <?= post_img($post['post_thumb_img'], $post['post_title'],  'thumb no-mob br-rd-5 right', 'thumbnails'); ?>
+            </a>
+          </div>
+            <?php } ?>
         <?php } ?>
       </div>
 
@@ -110,5 +106,8 @@
     </div>
   <?php } ?>
 <?php } else { ?>
-  <?= includeTemplate('/_block/no-content', ['lang' => 'there are no posts']); ?>
+  <?= includeTemplate('/_block/recommended-topics', ['data' => $data]); ?>
+  <div class="mt10 mb10 pt10 pr15 pb10 center pl15 bg-yellow-100 gray">
+    <?= lang('there are no posts'); ?>...
+  </div>
 <?php } ?>

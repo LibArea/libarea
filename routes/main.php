@@ -19,26 +19,25 @@ Route::before('Authorization@noAuth')->getGroup();
         Route::get('/votes/{type}')->controller('VotesController')->where(['type' => '[a-z]+']); 
         
             Route::getProtect(); // Начало защиты
+                Route::get('/topic/create')->controller('Topic\AddTopicController@add')->name('topic.create');
+                Route::get('/topic/edit/{id}')->controller('Topic\EditTopicController@edit')->where(['id' => '[0-9]+']);
                 Route::get('/invitation/create')->controller('User\InvitationsController@invitationCreate');
                 Route::get('/messages/send')->controller('MessagesController@send');
-                Route::get('/space/logo/edit')->controller('Space\EditSpaceController@logoEdit');
                 Route::get('/users/setting/edit')->controller('User\SettingController@edit');
                 Route::get('/users/setting/avatar/edit')->controller('User\SettingController@avatarEdit');
                 Route::get('/users/setting/security/edit')->controller('User\SettingController@securityEdit');
                 Route::get('/users/setting/avatar/edit')->controller('User\SettingController@avatarEdit');
                 Route::get('/users/setting/notifications/edit')->controller('User\SettingController@notificationsEdit');
-                // post | comment | answer| topic | space
+                // post | comment | answer| topic 
                 Route::get('/{controller}/create')->controller('<controller>\Add<controller>Controller');
-                // post | comment | answer| topic |space
+                // post | comment | answer| topic 
                 Route::get('/{controller}/edit')->controller('<controller>\Edit<controller>Controller');
             Route::endProtect(); // Завершение защиты
     Route::endType();  // Завершение getType('post')
 
-    // Форма добавления, общий случай: post | topic | space | web
+    // Форма добавления, общий случай: post | topic |  web
     Route::get('/{controller}/add')->controller('<controller>\Add<controller>Controller@add');
-    // Из пространства
-    Route::get('/post/add/space/{space_id}')->controller('Post\AddPostController@add')->where(['space_id' => '[0-9]+']);
-    // Форма изменения, общий случай: post | topic | space | answer
+    // Форма изменения, общий случай: post | topic | answer
     Route::get('/{controller}/edit/{id}')->controller('<controller>\Edit<controller>Controller@edit')->where(['id' => '[0-9]+']);
 
     Route::get('/u/{login}/setting')->controller('User\SettingController@settingForm')->where(['login' => '[A-Za-z0-9]+'])->name('setting'); 
@@ -66,10 +65,11 @@ Route::before('Authorization@noAuth')->getGroup();
     
     Route::get('/u/{login}/invitations')->controller('User\InvitationsController@invitationForm')->where(['login' => '[A-Za-z0-9]+'])->name('invitations');
 
-    Route::get('/space/logo/{slug}/edit')->controller('Space\EditSpaceController@logo')->where(['slug' => '[A-Za-z0-9_]+']);  
-    Route::get('/space/{slug}/delete/cover')->controller('Space\EditSpaceController@coverRemove')->where(['slug' => '[A-Za-z0-9_]+']);
-    Route::get('/space/my')->controller('Space\SpaceController@spaseUser');
-    Route::get('/space/my/page/{page?}')->controller('Space\SpaceController@spaseUser')->where(['page' => '[0-9]+']);
+    Route::get('/topics/my')->controller('Topic\TopicController@topicsUser')->name('topic.my');
+    Route::get('/topics/my/page/{page?}')->controller('Topic\TopicController@topicsUser')->where(['page' => '[0-9]+']);
+    Route::get('/topic/my/add')->controller('Topic\AddTopicController')->name('topic.add');
+    Route::get('/topic/{id}/edit')->controller('Topic\EditTopicController')->where(['id' => '[0-9]+'])->name('topic.edit'); 
+ 
  
     Route::get('/all')->controller('HomeController', ['all']);
     Route::get('/all/page/{page?}')->controller('HomeController', ['all'])->where(['page' => '[0-9]+']);
@@ -129,15 +129,6 @@ Route::get('/comments/page/{page?}')->controller('Comment\CommentController')->w
 Route::get('/answers')->controller('Answer\AnswerController')->name('answers');
 Route::get('/answers/page/{page?}')->controller('Answer\AnswerController')->where(['page' => '[0-9]+']);
 
-Route::get('/spaces')->controller('Space\SpaceController')->name('spaces');
-Route::get('/spaces/page/{page?}')->controller('Space\SpaceController')->where(['page' => '[0-9]+']);
-Route::get('/s/{slug}')->controller('Space\SpaceController@posts', ['feed'])->where(['slug' => '[A-Za-z0-9_]+'])->name('space');
-Route::get('/s/{slug}/page/{page?}')->controller('Space\SpaceController@posts', ['feed'])->where(['slug' => '[A-Za-z0-9_]+', 'page' => '[0-9]+']);
-Route::get('/s/{slug}/top')->controller('Space\SpaceController@posts', ['top'])->where(['slug' => '[A-Za-z0-9_]+']);
-Route::get('/s/{slug}/top/page/{page?}')->controller('Space\SpaceController@posts', ['top'])->where(['slug' => '[A-Za-z0-9_]+', 'page' => '[0-9]+']);
-Route::get('/s/{slug}/writers')->controller('Space\SpaceController@posts', ['writers'])->where(['slug' => '[A-Za-z0-9_]+']);
-Route::get('/s/{slug}/wiki')->controller('Space\SpaceController@wiki')->where(['slug' => '[A-Za-z0-9_]+'])->name('space.wiki');
-
 Route::get('/topics')->controller('Topic\TopicController')->where(['page' => '[0-9]+'])->name('topics');
 Route::get('/topics/page/{page?}')->controller('Topic\TopicController')->where(['page' => '[0-9]+']);
 Route::get('/topic/{slug}')->controller('Topic\TopicController@posts', ['feed'])->where(['slug' => '[A-Za-z0-9-]+'])->name('topic');
@@ -157,7 +148,7 @@ Route::get('/top')->controller('HomeController', ['top']);
 Route::get('/top/page/{page?}')->controller('HomeController', ['top'])->where(['page' => '[0-9]+']);
 
 Route::get('/sitemap.xml')->controller('RssController');
-Route::get('/turbo-feed/space/{id}')->controller('RssController@turboFeed')->where(['id' => '[0-9]+']);
+Route::get('/turbo-feed/topic/{slug}')->controller('RssController@turboFeed')->where(['slug' => '[A-Za-z0-9-]+']);
 
 Route::type(['get', 'post'])->get('/search')->controller('SearchController')->name('search');
 

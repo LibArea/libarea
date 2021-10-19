@@ -30,7 +30,7 @@
       <?php includeTemplate('/_block/editor/textarea', ['title' => lang('about me'), 'type' => 'text', 'name' => 'about', 'content' => $data['user']['user_about'], 'min' => 0, 'max' => 255, 'help' => '0 - 255 ' . lang('characters')]); ?>
 
       <div id="box" class="boxline">
-        <label class="form-label" for="post_content"><?= lang('color'); ?></label>
+        <label class="block" for="post_content"><?= lang('color'); ?></label>
         <input type="color" value="<?= $data['user']['user_color']; ?>" id="colorPicker">
         <input type="hidden" name="color" value="<?= $data['user']['user_color']; ?>" id="color">
       </div>
@@ -40,9 +40,9 @@
       ]]); ?-->
 
       <h3><?= lang('contacts'); ?></h3>
-      <?php foreach (Config::arr('fields-profile') as $block) { ?>
+      <?php foreach (Config::get('fields-profile') as $block) { ?>
         <div class="boxline">
-          <label class="form-label" for="post_title"><?= $block['lang']; ?></label>
+          <label class="block" for="post_title"><?= $block['lang']; ?></label>
           <input class="form-input" maxlength="150" type="text" value="<?= $data['user'][$block['title']]; ?>" name="<?= $block['name']; ?>">
           <?php if ($block['help']) { ?>
             <div class="size-14 gray-light-2"><?= $block['help']; ?></div>

@@ -30,12 +30,6 @@ return [
         'item'  => 'audits',
     ],
     [
-        'url'   => getUrlByName('admin.spaces'),
-        'name'  => lang('spaces'),
-        'icon'  => 'bi bi-command',
-        'item'  => 'spaces',
-    ],
-    [
         'url'   => getUrlByName('admin.topics'),
         'name'  => lang('topics'),
         'icon'  => 'bi bi-columns-gap',

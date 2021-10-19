@@ -11,7 +11,6 @@ return [
     'in-the-profile'    => 'go to profile',
     'add-favorites'     => 'Add to Favorites',
     'remove-favorites'  => 'Remove from favorites',
-    'ban-space'         => 'This space is blocked',
     'no-cover'          => 'No cover. Download it',
     'format-cover-post' => 'Width, more than 500px. The orientation is horizontal',    
     'views-n'           => 'Views',
@@ -33,7 +32,6 @@ return [
     'text-string-length'    => 'Length  %1$s should be from  %2$s - %3$s characters',
     'url-already-exists'    => 'This space URL already exists',
     'url-gaps'              => 'Spaces are not allowed in the URL',
-    'space-add-success'     => 'Space added successfully',
     'you-question-no'       => 'You have already answered this question',
     'no-auth-login'         => 'To respond, you can <a href="/login">log in</a>',
     'login-use-condition'   => 'By continuing, you agree to <a href="/info/privacy">Terms of Use</a> the site',
@@ -46,10 +44,6 @@ return [
     'desc-user-all'         => 'List of all participants sorted by date of registration on the site',
     'title-profile'         => '%1$s %2$s | Profile on %3$s',
     'desc-profile'          => '%1$s - profile page. %2$s Posts, comments, awards on %3$s',
-    'space-feed-title'      => 'feed of posts by space',
-    'space-top-title'       => 'popular posts by Space',
-    'space-writers-title'   => 'writers in space',
-    'all-space-desc'        => 'All community spaces. Subscribe, official spaces, number of participants',
     'search-desc'           => 'Site search. By title and text of posts. By spaces and participants',
     'topic-desc'            => 'Topics of content, posts. Popular, best, global selection. Topics of the day.',
     'page-number'           => ' Page %1$s ',
@@ -66,23 +60,16 @@ return [
     'info-setting'          => 'Fill in your name to help participants address you by your first name. <br> <br> Tell me something about yourself. You have a great opportunity to open up to please others and seem like an interesting person.',
     'info-avatar'           => 'Upload an avatar and cover image for your profile. <br><br> When each user has a unique avatar, it becomes much easier to follow the discussions!',
     'info-security'         => 'Make sure that all your passwords have 8 characters or more, ideally a lot more. <br><br>Passwords must contain large letters, small letters, numbers, and special characters.',
-    'info-space'            => '«Spaces» are communities on a site dedicated to a specific topic. <br> <br> There are many spaces. They allow members to focus on a specific interest or topic when posting content.',
-    'my-info-space'            => '«Spaces», which i read . <br><br>Created spaces and signed.',
     'info-users'            => 'List of participants sorted in order of activity on the site.',
     'info-search'           => 'To refine the search, try to find a more accurate query.',
-    'info-space-edit'       => 'Fill in all the required fields. Some fields determine how your space will be visible in search engines.',
-    'info-space-logo'       => 'A lot depends on the logo. It should most accurately display the theme of the space.',
     'info-login'            => 'Authorization gives you the ability to post, reply, and comment.<br><br>You can vote for other publications and have your own profile.',
     'info-recover'          => 'fter you click the "Reset" button, check your e-mail...',
-    'Ban-space-info-posts'  => 'A space ban will result in the unavailability of all posts',
     'meta-moderation'       => 'Actions of the participant and moderators to delete and restore the content in the community.',
     'info-favorite'         => 'Posts, comments and questions that you follow',
     'info-preferences'      => 'Posts that you have subscribed to. You will receive notifications about all new responses',
     'limiting-mode-1'       => 'You cannot post content, your account is being verified',
-    'no-space-to-add'       => 'You have no space to add a post. <a href="/spaces">Subscribe</a> to space',
     'info-notifications'    => 'You can mark all the ads as read, click on the link: «I read».',
     'info-notification'    => 'You can unsubscribe from all notifications by E-mail in this section',
-    'space-subscription'    => '<a class="gray" href="/spaces">Subscribe to spaces and read them in the feed</a>',
 
     'deleted-post'          => 'Deleted post',
     'restored-post'         => 'Restored post',
@@ -107,9 +94,8 @@ return [
     'tl-limitation'                         => 'Your trust level (TL) does not allow you to perform this action',
     
     'welcome-info' => '<p>Thank you for registering! Here you will find brief information on how to use this site. .</p>
-    <p>This site consists of <a href="/spaces">spaces </a>. You only automatically subscribe to one space  — <a href="/s/meta">/s/meta</a>. Posts from which you will see (after authorization) on the main page of the site (in the feed). </p>
-    <p><i class="icon-lightbulb red"></i> To see other posts from other spaces in the feed, <b>you need <a href="/spaces">subscribe</a></b> to those of interest to you. </p>
-    <p>As you participate, remember that each <a href="/spaces">space</a> has its own unique personality and rules, which are usually found in the sidebar. These are the basics!  </p>
+    <p>This site consists of <a href="/spaces">Topics</a>.</p>
+    <p><i class="icon-lightbulb red"></i> To see other posts from other spaces in the feed, <b>you need <a href="/topics">subscribe</a></b> to those of interest to you. </p>
     <p><b>By the way... </b></p>
     <p>Once you done some digging around the site, feel free to check out a more  <a href="https://agouti.info">detailed explanation</a> of how things work here.</p>
     <p><img alt="Agouti" class="footer-img clear no-mob block" src="/assets/images/agouti_footer.gif"></p>',

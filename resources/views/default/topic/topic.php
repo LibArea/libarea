@@ -11,7 +11,7 @@
         <h1 class="mt0">
           <?= $data['topic']['topic_seo_title']; ?>
           <?php if ($uid['user_trust_level'] == 5) { ?>
-            <a class="right gray-light" href="<?= getUrlByName('admin.topic.edit', ['id' => $data['topic']['topic_id']]); ?>">
+            <a class="right gray-light" href="<?= getUrlByName('topic.edit', ['id' => $data['topic']['topic_id']]); ?>">
               <i class="bi bi-pencil size-15"></i>
             </a>
           <?php } ?>
@@ -60,5 +60,19 @@
   </div>
 
   <?= includeTemplate('/_block/topic-sidebar', ['data' => $data, 'uid' => $uid]); ?>
+
+  <?php if (!empty($data['writers'])) { ?>
+    <div class="sticky top0 t-81">
+      <div class="border-box-1 mt15 p15 mb15 br-rd-5 bg-white size-14">
+        <div class="uppercase gray mt5 mb5"> <?= lang('writers'); ?></div>
+        <?php foreach ($data['writers'] as $ind => $row) { ?>
+          <a class="flex relative pt5 pb5 items-center hidden gray-light" href="<?= getUrlByName('user', ['login' => $row['user_login']]); ?>">
+            <?= user_avatar_img($row['user_avatar'], 'max', $row['user_login'], 'w24 mr5 br-rd-50'); ?><span class="ml5"><?= $row['user_login']; ?> (<?= $row['hits_count']; ?>) </span>
+          </a>
+        <?php } ?>
+      </div>
+    </div>
+  <?php } ?>
+
 </aside>
 <?= includeTemplate('/_block/wide-footer'); ?>

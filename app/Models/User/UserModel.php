@@ -194,19 +194,14 @@ class UserModel extends MainModel
                     post_title,
                     post_slug,
                     post_date,
-                    post_space_id,
                     post_answers_count,
                     answer_id,
                     answer_post_id,
-                    answer_content,
-                    space_id,
-                    space_name,
-                    space_slug
+                    answer_content
                         FROM favorites
                         LEFT JOIN users ON user_id = favorite_user_id
                         LEFT JOIN posts ON post_id = favorite_tid AND favorite_type = 1
                         LEFT JOIN answers ON answer_id = favorite_tid AND favorite_type = 2
-                        LEFT JOIN spaces ON  space_id = post_space_id
                         WHERE favorite_user_id = :user_id ORDER BY favorite_id DESC LIMIT 100";
 
         return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);

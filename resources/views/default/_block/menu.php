@@ -14,10 +14,6 @@
     <i class="bi bi-sort-down middle mr5<?= $sheet == 'feed' ? ' blue' : ''; ?>  size-18"></i>
     <span class="<?= $sheet == 'feed' ? 'blue' : ''; ?>"><?= lang('feed'); ?></span>
   </a>
-  <a class="pt5 pr10 pb5 pl10 gray block" title="<?= lang('spaces'); ?>" href="<?= getUrlByName('spaces'); ?>">
-    <i class="bi bi-command middle mr5<?= $sheet == 'spaces' ? ' blue' : '';  ?> size-18"></i>
-    <span class="<?= $sheet == 'spaces' ? 'blue' : ''; ?>"><?= lang('spaces'); ?></span>
-  </a>
   <a class="pt5 pr10 pb5 pl10 gray block" title="<?= lang('topics'); ?>" href="<?= getUrlByName('topics'); ?>">
     <i class="bi bi-columns-gap middle mr5<?= $sheet == 'topics' ? ' blue' : ''; ?> size-18"></i>
     <span class="<?= $sheet == 'topics' ? 'blue' : ''; ?>"><?= lang('topics'); ?></span>

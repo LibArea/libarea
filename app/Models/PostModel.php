@@ -31,7 +31,6 @@ class PostModel extends MainModel
             'post_ip'           =>  $data['post_ip'],
             'post_published'    =>  $data['post_published'],
             'post_user_id'      =>  $data['post_user_id'],
-            'post_space_id'     =>  $data['post_space_id'],
             'post_closed'       =>  $data['post_closed'],
             'post_top'          =>  $data['post_top'],
             'post_url'          =>  $data['post_url'],
@@ -52,7 +51,6 @@ class PostModel extends MainModel
                                     post_ip,
                                     post_published,
                                     post_user_id,
-                                    post_space_id,
                                     post_closed,
                                     post_top,
                                     post_url,
@@ -72,7 +70,6 @@ class PostModel extends MainModel
                                     :post_ip,
                                     :post_published,
                                     :post_user_id,
-                                    :post_space_id,
                                     :post_closed,
                                     :post_top,
                                     :post_url,
@@ -109,7 +106,6 @@ class PostModel extends MainModel
                     post_type,
                     post_translation,
                     post_draft,
-                    post_space_id,
                     post_date,
                     post_published,
                     post_user_id,
@@ -135,11 +131,6 @@ class PostModel extends MainModel
                     user_login,
                     user_avatar,
                     user_my_post,
-                    space_id, 
-                    space_slug, 
-                    space_name,
-                    space_img,
-                    space_short_text,
                     votes_post_item_id,
                     votes_post_user_id,
                     favorite_tid, 
@@ -147,7 +138,6 @@ class PostModel extends MainModel
                     favorite_type
                         FROM posts
                         LEFT JOIN users ON user_id = post_user_id
-                        LEFT JOIN spaces ON space_id = post_space_id
                         LEFT JOIN favorites ON favorite_tid = post_id AND favorite_user_id = :user_id AND favorite_type = 1 
                         LEFT JOIN votes_post ON votes_post_item_id = post_id AND votes_post_user_id = :user_id
                             WHERE post_slug = :slug AND post_tl <= :trust_level";
@@ -165,7 +155,6 @@ class PostModel extends MainModel
                     post_type,
                     post_translation,
                     post_draft,
-                    post_space_id,
                     post_date,
                     post_published,
                     post_user_id,
@@ -184,14 +173,10 @@ class PostModel extends MainModel
                     post_merged_id,
                     post_url_domain,
                     post_is_deleted,
-                    space_id, 
-                    space_slug, 
-                    space_name,
                     user_id,
                     user_login,
                     user_avatar
                         FROM posts
-                        LEFT JOIN spaces ON space_id = post_space_id
                         LEFT JOIN users ON user_id = post_user_id
                             WHERE post_id = :post_id";
 
@@ -199,7 +184,7 @@ class PostModel extends MainModel
     }
 
     // Рекомендованные посты
-    public static function postsSimilar($post_id, $space_id, $uid, $quantity)
+    public static function postsSimilar($post_id, $uid, $limit)
     {
 
         $tl = $uid['user_trust_level'];
@@ -214,20 +199,18 @@ class PostModel extends MainModel
                     post_type,
                     post_tl,
                     post_answers_count,
-                    post_space_id,
                     post_draft,
                     post_user_id,
                     post_is_deleted
                         FROM posts
                             WHERE post_id < :post_id 
-                                AND post_space_id = :space_id 
                                 AND post_is_deleted = 0
                                 AND post_draft = 0
                                 AND post_tl <= :tl 
                                 AND post_user_id != :user_id
-                                ORDER BY post_id DESC LIMIT $quantity";
+                                ORDER BY post_id DESC LIMIT $limit";
 
-        return DB::run($sql, ['post_id' => $post_id, 'space_id' => $space_id, 'user_id' => $uid['user_id'], 'tl' => $tl])->fetchall(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['post_id' => $post_id, 'user_id' => $uid['user_id'], 'tl' => $tl])->fetchall(PDO::FETCH_ASSOC);
     }
 
     // Пересчитываем количество
@@ -249,7 +232,6 @@ class PostModel extends MainModel
             'post_date'             => $data['post_date'],
             'post_user_id'          => $data['post_user_id'],
             'post_draft'            => $data['post_draft'],
-            'post_space_id'         => $data['post_space_id'],
             'post_modified'         => date("Y-m-d H:i:s"),
             'post_content'          => $data['post_content'],
             'post_content_img'      => $data['post_content_img'],
@@ -268,7 +250,6 @@ class PostModel extends MainModel
                     post_date             = :post_date,
                     post_user_id          = :post_user_id,
                     post_draft            = :post_draft,
-                    post_space_id         = :post_space_id,
                     post_modified         = :post_modified,
                     post_content          = :post_content,
                     post_content_img      = :post_content_img,
@@ -353,5 +334,39 @@ class PostModel extends MainModel
                             WHERE relation_post_id  = :post_id";
 
         return DB::run($sql, ['post_id' => $post_id])->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    // Кто ответил в посте
+    // TODO: эксперемент
+    public static function getReplyUserPost($post_id)
+    {
+        // TODO: временно проверим группировку
+        // user_id, 
+        // user_login,
+        // user_avatar,
+        // LEFT JOIN users ON user_id = answer_user_id OR user_id = comment_user_id
+        $sql = "SELECT 
+                  answer_id,
+                  answer_user_id,
+                  answer_post_id,
+                  answer_is_deleted, 
+                  rel.* 
+                      FROM answers
+                      LEFT JOIN
+                        ( SELECT 
+                              MAX(comment_id),
+                              MAX(comment_user_id),
+                              MAX(comment_post_id) as comm_post_id,
+                              MAX(comment_is_deleted),
+                              comment_answer_id 
+                                FROM comments  
+                                WHERE comment_is_deleted = 0  
+                                  GROUP BY comment_answer_id
+                        ) AS rel
+                            ON rel.comment_answer_id = answer_id
+ 
+                  WHERE answer_post_id = 312";
+
+        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 }

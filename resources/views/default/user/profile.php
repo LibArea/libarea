@@ -88,14 +88,14 @@
               </div>
             <?php }  ?>
 
-            <?php if ($data['spaces_user']) { ?>
-              <div class="uppercase mb5 mt15 size-14"><?= lang('created by'); ?></div>
+            <?php if ($data['topics']) { ?>
+              <div class="uppercase mb5 mt15 size-14"><?= lang('reads'); ?></div>
               <span class="d">
-                <?php foreach ($data['spaces_user'] as  $space) { ?>
+                <?php foreach ($data['topics'] as  $topic) { ?>
                   <div class="mt5 mb5">
-                    <a class="flex relative pt5 pb5 hidden gray" href="<?= getUrlByName('space', ['slug' => $space['space_slug']]); ?>" title="<?= $space['space_name']; ?>">
-                      <?= spase_logo_img($space['space_img'], 'small', $space['space_name'], 'w18 mr5'); ?>
-                      <span class="bar-name size-14"><?= $space['space_name']; ?></span>
+                    <a class="flex relative pt5 pb5 hidden gray" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>" title="<?= $topic['topic_title']; ?>">
+                      <?= topic_logo_img($topic['topic_img'], 'small', $topic['topic_title'], 'w18 mr10'); ?>
+                      <span class="bar-name size-14"><?= $topic['topic_title']; ?></span>
                     </a>
                   </div>
                 <?php } ?>
@@ -130,7 +130,7 @@
           <h2 class="mb5 uppercase pt15 font-normal size-14">
             <?= lang('contacts'); ?>
           </h2>
-        <?php foreach (Config::arr('fields-profile') as $block) { ?>
+        <?php foreach (Config::get('fields-profile') as $block) { ?>
             <?php if ($data['user'][$block['title']]) { ?>
                 <div class="boxline">
                   <label for="name"><?= $block['lang']; ?>:</label>
@@ -186,9 +186,6 @@
                   <?= $data['user']['user_login']; ?>
                 </a>
                 <span class="gray ml5"><?= $data['post']['post_date'] ?></span>
-                <a class="gray ml5" href="<?= getUrlByName('space', ['slug' => $data['post']['space_slug']]); ?>" title="<?= $data['post']['space_name']; ?>">
-                  <?= $data['post']['space_name']; ?>
-                </a>
                 <?php if ($data['post']['post_answers_count'] != 0) { ?>
                   <a class="gray right" href="<?= getUrlByName('post', ['id' => $data['post']['post_id'], 'slug' => $data['post']['post_slug']]); ?>">
                     <i class="bi bi-chat-dots middle"></i>
@@ -197,6 +194,17 @@
                 <?php } ?>
               </div>
             </div>
+          <?php } ?>
+          
+          <?php if (!empty($data['participation'][0]['topic_id'])) { ?>
+             <h3 class="mb5 uppercase pt10 font-normal size-14">
+              <?= lang('understands'); ?>
+            </h3>
+            <?php foreach ($data['participation'] as $part) { ?>
+               <a class="bg-blue-100 bg-hover-300 white-hover pt5 pr10 pb5 pl10 mb5 br-rd-20 blue inline size-14" href="<?= getUrlByName('topic', ['slug' => $part['topic_slug']]); ?>">
+                <?= $part['topic_title']; ?>
+                </a>
+            <?php } ?>
           <?php } ?>
 
           <?php if ($uid['user_trust_level'] > 4) { ?>

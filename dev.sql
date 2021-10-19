@@ -7,7 +7,7 @@ CREATE TABLE `answers` (
   `answer_post_id` int(11) NOT NULL DEFAULT 0,
   `answer_user_id` int(11) NOT NULL DEFAULT 0,
   `answer_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `answer_modified` timestamp NOT NULL DEFAULT '2020-12-30 21:00:00',
+  `answer_modified` timestamp NOT NULL DEFAULT '2020-12-30 18:00:00',
   `answer_published` tinyint(1) NOT NULL DEFAULT 1,
   `answer_ip` varbinary(16) DEFAULT NULL,
   `answer_order` smallint(6) NOT NULL DEFAULT 0,
@@ -23,8 +23,8 @@ CREATE TABLE `answers` (
 --
 
 INSERT INTO `answers` (`answer_id`, `answer_post_id`, `answer_user_id`, `answer_date`, `answer_modified`, `answer_published`, `answer_ip`, `answer_order`, `answer_after`, `answer_votes`, `answer_content`, `answer_lo`, `answer_is_deleted`) VALUES
-(1, 3, 1, '2021-04-29 16:41:27', '2020-12-30 21:00:00', 1, 0x3132372e302e302e31, 0, 0, 0, 'Первый ответ в теме', 0, 0),
-(2, 1, 2, '2021-07-01 19:34:52', '2021-08-16 10:50:53', 1, 0x3132372e302e302e31, 0, 0, 0, 'Интересно, спасибо. Вы забыли указать, что можно задавать вопросы в чате (ссылка в footer) этого сайта.', 0, 0);
+(1, 3, 1, '2021-04-29 13:41:27', '2020-12-30 18:00:00', 1, 0x3132372e302e302e31, 0, 0, 0, 'Первый ответ в теме', 0, 0),
+(2, 1, 2, '2021-07-01 16:34:52', '2021-08-16 07:50:53', 1, 0x3132372e302e302e31, 0, 0, 0, 'Интересно, спасибо. Вы забыли указать, что можно задавать вопросы в чате (ссылка в footer) этого сайта.', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -88,7 +88,7 @@ CREATE TABLE `comments` (
   `comment_comment_id` int(11) NOT NULL DEFAULT 0,
   `comment_user_id` int(11) NOT NULL DEFAULT 0,
   `comment_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `comment_modified` timestamp NOT NULL DEFAULT '2020-12-30 21:00:00',
+  `comment_modified` timestamp NOT NULL DEFAULT '2020-12-30 18:00:00',
   `comment_published` tinyint(1) NOT NULL DEFAULT 1,
   `comment_ip` varbinary(16) DEFAULT NULL,
   `comment_after` smallint(6) NOT NULL DEFAULT 0,
@@ -164,7 +164,6 @@ CREATE TABLE `links` (
   `link_type` int(6) NOT NULL DEFAULT 0 COMMENT 'Тип сайта (0 - общий, 1 - блог, 2 - энциклопедия)',
   `link_status` int(6) NOT NULL DEFAULT 200 COMMENT 'Статус сайта (200, 403, 404)',
   `link_status_date` datetime NOT NULL DEFAULT current_timestamp() COMMENT 'Когда была проверка статуса',
-  `link_category_id` int(11) DEFAULT 0 COMMENT 'Категория сайта',
   `link_votes` int(6) DEFAULT 0,
   `link_count` int(6) DEFAULT 1,
   `link_is_deleted` tinyint(1) DEFAULT 0
@@ -254,7 +253,6 @@ CREATE TABLE `posts` (
   `post_type` smallint(1) NOT NULL DEFAULT 0,
   `post_translation` smallint(1) NOT NULL DEFAULT 0,
   `post_draft` smallint(1) NOT NULL DEFAULT 0,
-  `post_space_id` int(11) NOT NULL DEFAULT 0,
   `post_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `post_modified` timestamp NOT NULL DEFAULT current_timestamp(),
   `post_published` tinyint(1) NOT NULL DEFAULT 1,
@@ -271,6 +269,7 @@ CREATE TABLE `posts` (
   `post_thumb_img` varchar(255) DEFAULT NULL,
   `post_related` varchar(255) DEFAULT NULL,
   `post_merged_id` int(11) NOT NULL DEFAULT 0 COMMENT 'id с чем объединен',
+  `post_is_recommend` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Рекомендованные посты',
   `post_closed` tinyint(1) NOT NULL DEFAULT 0 COMMENT '1 - пост закрыт',
   `post_tl` smallint(1) NOT NULL DEFAULT 0 COMMENT 'Видимость по уровню доверия',
   `post_lo` int(11) NOT NULL DEFAULT 0 COMMENT 'Id лучшего ответа',
@@ -285,10 +284,10 @@ CREATE TABLE `posts` (
 -- Дамп данных таблицы `posts`
 --
 
-INSERT INTO `posts` (`post_id`, `post_title`, `post_slug`, `post_type`, `post_translation`, `post_draft`, `post_space_id`, `post_date`, `post_modified`, `post_published`, `post_user_id`, `post_ip`, `post_after`, `post_votes`, `post_karma`, `post_answers_count`, `post_comments_count`, `post_hits_count`, `post_content`, `post_content_img`, `post_thumb_img`, `post_related`, `post_merged_id`, `post_closed`, `post_tl`, `post_lo`, `post_top`, `post_url`, `post_url_domain`, `post_focus_count`, `post_is_deleted`) VALUES
-(1, 'Ответы на некоторые вопросы (FAQ)', 'answer-qa', 0, 0, 0, 1, '2021-02-28 00:08:09', '2021-09-18 13:05:57', 1, 1, 0x3132372e302e302e31, 0, 0, 0, 1, 0, 4, 'Превью поста на главной странице сайта формируется из первого абзаца текста. Мы забираем первый абзац и делаем превью. Сайт испольлзует MVC модель, если кто знаком с ней, то не особо трудно будет разобраться.\r\n\r\n### Где находятся конфиг сайта?\r\n\r\nЕсть 3 файла конфигурации (There are 3 configuration files):\r\n\r\n* *dbase.config.php* — подключение к базе данных (connecting to the database)\r\n\r\n* *config.ini* — основные настройки (basic settings)\r\n\r\n* *start.hleb.php* — константы (constants)\r\n\r\n### Где находятся шаблоны сайта?\r\n\r\n```\r\n/resources/views/default\r\n```\r\n\r\n### Как мне изменить страницы с документацией?\r\n\r\nСлужебные страницы на этом сайте находятся: [/info](/info)\r\n\r\nА сам текст в Markdown разметке:\r\n\r\n```txt\r\n/resources/views/default/info/md/index.md\r\n```\r\n\r\n### Как мне поменять язык сайта?\r\n\r\nПо умолчанию на сайте используется русский язык.\r\n\r\nПереводы находится в папке:  `/app/Language/`\r\n\r\nВы можете переключать языки, в файле: `start.hleb.php` \r\n\r\nНайти:\r\n```php\r\ndefine( \'LANG\', include_once(__DIR__ .\'/app/Language/ru/lang.php\') );\r\n```\r\n\r\n---\r\n\r\nBy default, the site uses Russian.\r\n\r\nThe translations are located in the folder: `start.hleb.php` find:\r\n\r\n```php\r\ndefine( \'LANG\', include_once(__DIR__ .\'/app/Language/ru/lang.php\') );\r\n```\r\n\r\nThe transfers themselves are stored: `/app/Language/`', '', NULL, '2', 0, 0, 0, 0, 0, NULL, NULL, 0, 0),
-(2, 'Где можно почитать документацию?', 'docs-post', 0, 0, 0, 2, '2021-02-28 00:15:58', '2021-09-18 13:08:28', 1, 2, 0x3132372e302e302e31, 0, 1, 0, 0, 0, 4, 'Страница документации Loruup находится в стадии разработки... \r\n\r\n[https://agouti.info/](https://agouti.info/)\r\n\r\nКак она будет завершена, об этом будет сообщено дополнительно. Сам сайт создан на PHP Микрофреймворк HLEB. Все основные настройки,  можно найти на этом сайте:\r\n\r\n[https://phphleb.ru/ru/v1/](https://phphleb.ru/ru/v1/)\r\n\r\n', '', NULL, '1', 0, 0, 0, 0, 0, NULL, NULL, 0, 0),
-(3, 'Medium — платформа для создания контента', 'medium-where-good-ideas-find-you', 0, 0, 0, 2, '2021-04-29 16:35:13', '2021-04-29 16:35:13', 1, 1, 0x3132372e302e302e31, 0, 0, 0, 1, 0, 1, 'Medium — это платформа для создания контента, основанная соучредителем Blogger и Twitter Эван Уильямсом. Многие компании используют Medium в качестве платформы для публикации...', '2021/c-1624954734.webp', NULL, NULL, 0, 0, 0, 0, 0, NULL, NULL, 0, 0);
+INSERT INTO `posts` (`post_id`, `post_title`, `post_slug`, `post_type`, `post_translation`, `post_draft`, `post_date`, `post_modified`, `post_published`, `post_user_id`, `post_ip`, `post_after`, `post_votes`, `post_karma`, `post_answers_count`, `post_comments_count`, `post_hits_count`, `post_content`, `post_content_img`, `post_thumb_img`, `post_related`, `post_merged_id`, `post_is_recommend`, `post_closed`, `post_tl`, `post_lo`, `post_top`, `post_url`, `post_url_domain`, `post_focus_count`, `post_is_deleted`) VALUES
+(1, 'Ответы на некоторые вопросы (FAQ)', 'answer-qa', 0, 0, 0, '2021-02-27 21:08:09', '2021-10-19 04:44:48', 1, 1, 0x3132372e302e302e31, 0, 0, 0, 1, 0, 5, 'Превью поста на главной странице сайта формируется из первого абзаца текста. Мы забираем первый абзац и делаем превью. Сайт испольлзует MVC модель, если кто знаком с ней, то не особо трудно будет разобраться.\r\n\r\n### Где находятся конфиг сайта?\r\n\r\nЕсть 3 основополагающих файла конфигурации (There are 3 configuration files):\r\n\r\n* *dbase.config.php* — подключение к базе данных (connecting to the database)\r\n\r\n* *config.ini* — основные настройки (basic settings)\r\n\r\n* *start.hleb.php* — константы (constants)\r\n\r\n### Где находятся шаблоны сайта?\r\n\r\n```\r\n/resources/views/default\r\n```\r\n\r\n### Как мне изменить страницы с документацией?\r\n\r\nСлужебные страницы на этом сайте находятся: [/info](/info)\r\n\r\nА сам текст в Markdown разметке:\r\n\r\n```txt\r\n/resources/views/default/info/md/index.md\r\n```\r\n\r\n### Как мне поменять язык сайта?\r\n\r\nПо умолчанию на сайте используется русский язык.\r\n\r\nПереводы находится в папке:  `/app/Language/`\r\n\r\nВы можете переключать языки, в файле: `start.hleb.php` \r\n\r\nНайти:\r\n```php\r\ndefine( \'LANG\', include_once(__DIR__ .\'/app/Language/ru/lang.php\') );\r\n```\r\n\r\n---\r\n\r\nBy default, the site uses Russian.\r\n\r\nThe translations are located in the folder: `start.hleb.php` find:\r\n\r\n```php\r\ndefine( \'LANG\', include_once(__DIR__ .\'/app/Language/ru/lang.php\') );\r\n```\r\n\r\nThe transfers themselves are stored: `/app/Language/`', '', NULL, '2', 0, 0, 0, 0, 0, 0, NULL, NULL, 0, 0),
+(2, 'Где можно почитать документацию?', 'docs-post', 0, 0, 0, '2021-02-27 21:15:58', '2021-09-18 10:08:28', 1, 2, 0x3132372e302e302e31, 0, 1, 0, 0, 0, 5, 'Страница документации Loruup находится в стадии разработки... \r\n\r\n[https://agouti.info/](https://agouti.info/)\r\n\r\nКак она будет завершена, об этом будет сообщено дополнительно. Сам сайт создан на PHP Микрофреймворк HLEB. Все основные настройки,  можно найти на этом сайте:\r\n\r\n[https://phphleb.ru/ru/v1/](https://phphleb.ru/ru/v1/)\r\n\r\n', '', NULL, '1', 0, 0, 0, 0, 0, 0, NULL, NULL, 0, 0),
+(3, 'Medium — платформа для создания контента', 'medium-where-good-ideas-find-you', 0, 0, 0, '2021-04-29 13:35:13', '2021-04-29 13:35:13', 1, 1, 0x3132372e302e302e31, 0, 0, 0, 1, 0, 1, 'Medium — это платформа для создания контента, основанная соучредителем Blogger и Twitter Эван Уильямсом. Многие компании используют Medium в качестве платформы для публикации...', '2021/c-1624954734.webp', NULL, NULL, 0, 0, 0, 0, 0, 0, NULL, NULL, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -322,64 +321,6 @@ CREATE TABLE `reports` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `spaces`
---
-
-CREATE TABLE `spaces` (
-  `space_id` int(11) NOT NULL,
-  `space_name` varchar(255) NOT NULL,
-  `space_slug` varchar(128) NOT NULL,
-  `space_description` varchar(255) NOT NULL,
-  `space_img` varchar(255) NOT NULL DEFAULT 'space_no.png',
-  `space_cover_art` varchar(255) NOT NULL DEFAULT 'space_cover_no.jpeg',
-  `space_text` text NOT NULL,
-  `space_wiki` text NOT NULL,
-  `space_short_text` varchar(255) NOT NULL,
-  `space_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `space_color` varchar(12) NOT NULL DEFAULT '#f56400',
-  `space_category_id` int(11) NOT NULL DEFAULT 1,
-  `space_user_id` int(11) NOT NULL DEFAULT 1,
-  `space_type` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 - все пространства, 1 - официальные',
-  `space_permit_users` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 - могут писать все, 1 - только автор',
-  `space_feed` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 - показывать в ленте, 1 - нет',
-  `space_tl` int(11) NOT NULL DEFAULT 0 COMMENT 'Видимость по уровню доверия',
-  `space_focus_count` int(11) DEFAULT 1,
-  `space_is_delete` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Дамп данных таблицы `spaces`
---
-
-INSERT INTO `spaces` (`space_id`, `space_name`, `space_slug`, `space_description`, `space_img`, `space_cover_art`, `space_text`, `space_wiki`, `space_short_text`, `space_date`, `space_color`, `space_category_id`, `space_user_id`, `space_type`, `space_permit_users`, `space_feed`, `space_tl`, `space_focus_count`, `space_is_delete`) VALUES
-(1, 'meta', 'meta', 'Мета-обсуждение самого сайта, включая вопросы, предложения и отчеты об ошибках.', 'space_no.png', 'space_cover_no.jpeg', 'тест 1...', '', 'Короткое описание...', '2021-02-28 00:15:58', '#339900', 1, 1, 1, 0, 0, 0, 1, 0),
-(2, 'Вопросы', 'qa', 'Вопросы по скрипту и не только', 'space_no.png', 'space_cover_no.jpeg', 'Вопросы по скрипту и не только', '', 'Короткое описание...', '2021-02-28 00:15:58', '#333333', 1, 1, 1, 0, 0, 0, 1, 0),
-(3, 'флуд', 'flud', 'Просто обычные разговоры', 'space_no.png', 'space_cover_no.jpeg', 'тест 3...', '', 'Короткое описание...', '2021-02-28 00:15:58', '#f56400', 1, 1, 0, 0, 0, 0, 1, 0);
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `spaces_signed`
---
-
-CREATE TABLE `spaces_signed` (
-  `signed_id` int(11) NOT NULL,
-  `signed_space_id` int(11) NOT NULL,
-  `signed_user_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Дамп данных таблицы `spaces_signed`
---
-
-INSERT INTO `spaces_signed` (`signed_id`, `signed_space_id`, `signed_user_id`) VALUES
-(1, 1, 1),
-(2, 2, 1),
-(3, 3, 1);
-
--- --------------------------------------------------------
-
---
 -- Структура таблицы `stop_words`
 --
 
@@ -409,21 +350,35 @@ CREATE TABLE `topics` (
   `topic_merged_id` int(11) DEFAULT 0 COMMENT 'с кем слита',
   `topic_parent_id` int(11) DEFAULT 0 COMMENT 'id корневой темы',
   `topic_is_parent` tinyint(1) DEFAULT 0 COMMENT '1 - корневая',
+  `topic_user_id` int(11) NOT NULL DEFAULT 1,
   `topic_tl` tinyint(1) DEFAULT 0,
   `topic_related` varchar(255) DEFAULT NULL,
   `topic_post_related` varchar(255) DEFAULT NULL,
   `topic_space_related` varchar(255) DEFAULT NULL,
+  `topic_the_day` tinyint(1) NOT NULL DEFAULT 0,
   `topic_focus_count` int(11) DEFAULT 0,
-  `topic_count` int(11) DEFAULT 0
+  `topic_count` int(11) DEFAULT 0,
+  `topic_is_deleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Дамп данных таблицы `topics`
 --
 
-INSERT INTO `topics` (`topic_id`, `topic_title`, `topic_description`, `topic_info`, `topic_slug`, `topic_img`, `topic_add_date`, `topic_seo_title`, `topic_merged_id`, `topic_parent_id`, `topic_is_parent`, `topic_tl`, `topic_related`, `topic_post_related`, `topic_space_related`, `topic_focus_count`, `topic_count`) VALUES
-(1, 'SEO', 'Поисковая оптимизация — это комплекс мер по внутренней и внешней оптимизации для поднятия позиций сайта в результатах выдачи поисковых систем.\r\n', 'Комплекс мер по внутренней и внешней оптимизации для поднятия позиций сайта в результатах выдачи поисковых систем по определённым запросам пользователей.\r\n\r\n**Поисковая оптимизация** — это способ использования правил поиска поисковых систем для улучшения текущего естественного ранжирования веб-сайтов в соответствующих поисковых системах. \r\n\r\nЦелью SEO является предоставление экологического решения для саморекламы для веб-сайта, позволяющего веб-сайту занимать лидирующие позиции в отрасли, чтобы получить преимущества бренда. \r\n\r\nSEO включает как внешнее, так и внутреннее SEO. \r\n\r\nSEO средства получить от поисковых систем больше бесплатного трафика, разумное планирование с точки зрения структуры веб-сайта, плана построения контента, взаимодействия с пользователем и общения, страниц и т.д., чтобы сделать веб-сайт более подходящим для принципов индексации поисковых систем. \r\n\r\nПовышение пригодности веб-сайтов для поисковых систем также называется Оптимизацией для поисковых систем, может не только улучшить эффект SEO, но и сделать информацию, относящуюся к веб-сайту, отображаемую в поисковой системе, более привлекательной для пользователей.', 'seo', 't-1-1625149922.jpeg', '2021-06-28 21:29:20', 'Поисковая оптимизация (SEO)', 0, 0, 0, 0, '', NULL, NULL, 0, 1),
-(2, 'Интересные сайты', 'Интересные сайты в Интернете. Обзоры, интересные материалы, переводы. Статьи.', 'Интересные сайты в Интернете. Обзоры, интересные материалы, переводы. Статьи.\r\n\r\nПросто вводная страница... В разработке...', 'sites', 't-2-1625149821.jpeg', '2021-06-28 21:29:20', 'Интересные сайты', 0, 0, 0, 0, '1', '3', NULL, 0, 1);
+INSERT INTO `topics` (`topic_id`, `topic_title`, `topic_description`, `topic_info`, `topic_slug`, `topic_img`, `topic_add_date`, `topic_seo_title`, `topic_merged_id`, `topic_parent_id`, `topic_is_parent`, `topic_user_id`, `topic_tl`, `topic_related`, `topic_post_related`, `topic_space_related`, `topic_the_day`, `topic_focus_count`, `topic_count`, `topic_is_deleted`) VALUES
+(1, 'SEO', 'Поисковая оптимизация — это комплекс мер по внутренней и внешней оптимизации для поднятия позиций сайта в результатах выдачи поисковых систем.\r\n', 'Комплекс мер по внутренней и внешней оптимизации для поднятия позиций сайта в результатах выдачи поисковых систем по определённым запросам пользователей.\r\n\r\n**Поисковая оптимизация** — это способ использования правил поиска поисковых систем для улучшения текущего естественного ранжирования веб-сайтов в соответствующих поисковых системах. \r\n\r\nЦелью SEO является предоставление экологического решения для саморекламы для веб-сайта, позволяющего веб-сайту занимать лидирующие позиции в отрасли, чтобы получить преимущества бренда. \r\n\r\nSEO включает как внешнее, так и внутреннее SEO. \r\n\r\nSEO средства получить от поисковых систем больше бесплатного трафика, разумное планирование с точки зрения структуры веб-сайта, плана построения контента, взаимодействия с пользователем и общения, страниц и т.д., чтобы сделать веб-сайт более подходящим для принципов индексации поисковых систем. \r\n\r\nПовышение пригодности веб-сайтов для поисковых систем также называется Оптимизацией для поисковых систем, может не только улучшить эффект SEO, но и сделать информацию, относящуюся к веб-сайту, отображаемую в поисковой системе, более привлекательной для пользователей.', 'seo', 't-1-1625149922.jpeg', '2021-06-28 18:29:20', 'Поисковая оптимизация (SEO)', 0, 0, 0, 1, 0, '', NULL, NULL, 0, 1, 1, 0),
+(2, 'Интересные сайты', 'Интересные сайты в Интернете. Обзоры, интересные материалы, переводы. Статьи.', 'Интересные сайты в Интернете. Обзоры, интересные материалы, переводы. Статьи.\r\n\r\nПросто вводная страница... В разработке...', 'sites', 't-2-1625149821.jpeg', '2021-06-28 18:29:20', 'Интересные сайты', 0, 0, 0, 1, 0, '1', '3', NULL, 0, 1, 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `topics_link_relation`
+--
+
+CREATE TABLE `topics_link_relation` (
+  `relation_topic_id` int(11) DEFAULT 0,
+  `relation_link_id` int(11) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -455,8 +410,8 @@ CREATE TABLE `topics_post_relation` (
 --
 
 INSERT INTO `topics_post_relation` (`relation_topic_id`, `relation_post_id`) VALUES
-(1, 1),
-(2, 2);
+(2, 2),
+(1, 1);
 
 -- --------------------------------------------------------
 
@@ -469,6 +424,14 @@ CREATE TABLE `topics_signed` (
   `signed_topic_id` int(11) NOT NULL,
   `signed_user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Дамп данных таблицы `topics_signed`
+--
+
+INSERT INTO `topics_signed` (`signed_id`, `signed_topic_id`, `signed_user_id`) VALUES
+(1, 1, 1),
+(2, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -532,6 +495,30 @@ CREATE TABLE `users_activate` (
   `activate_code` varchar(50) NOT NULL,
   `activate_flag` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `users_agent_logs`
+--
+
+CREATE TABLE `users_agent_logs` (
+  `log_id` int(10) UNSIGNED NOT NULL,
+  `log_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `log_user_id` int(10) UNSIGNED NOT NULL,
+  `log_user_browser` varchar(64) NOT NULL,
+  `log_user_os` varchar(64) NOT NULL,
+  `log_user_ip` varchar(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Дамп данных таблицы `users_agent_logs`
+--
+
+INSERT INTO `users_agent_logs` (`log_id`, `log_date`, `log_user_id`, `log_user_browser`, `log_user_os`, `log_user_ip`) VALUES
+(1, '2021-09-21 10:09:38', 1, 'Firefox 92.0', 'Windows', '127.0.0.1'),
+(2, '2021-09-21 10:57:57', 2, 'Chrome 93.0.4577.82', 'Windows', '127.0.0.1'),
+(3, '2021-10-19 04:43:05', 1, 'Firefox 93.0', 'Windows', '127.0.0.1');
 
 -- --------------------------------------------------------
 
@@ -686,45 +673,6 @@ CREATE TABLE `votes_post` (
 INSERT INTO `votes_post` (`votes_post_id`, `votes_post_item_id`, `votes_post_points`, `votes_post_ip`, `votes_post_user_id`, `votes_post_date`) VALUES
 (1, 2, 1, '127.0.0.1', 1, '2021-08-16 16:29:32');
 
-
---
--- Дамп, данные и индексы таблицы `users_agent_logs`
---
-
-CREATE TABLE `users_agent_logs` (
-  `log_id` int(10) UNSIGNED NOT NULL,
-  `log_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `log_user_id` int(10) UNSIGNED NOT NULL,
-  `log_user_browser` varchar(64) NOT NULL,
-  `log_user_os` varchar(64) NOT NULL,
-  `log_user_ip` varchar(64) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
-
-INSERT INTO `users_agent_logs` (`log_id`, `log_date`, `log_user_id`, `log_user_browser`, `log_user_os`, `log_user_ip`) VALUES
-(1, '2021-09-21 13:09:38', 1, 'Firefox 92.0', 'Windows', '127.0.0.1'),
-(2, '2021-09-21 13:57:57', 2, 'Chrome 93.0.4577.82', 'Windows', '127.0.0.1');
-
-ALTER TABLE `users_agent_logs`
-  ADD PRIMARY KEY (`log_id`),
-  ADD KEY `log_user_ip` (`log_user_ip`);
-
-ALTER TABLE `users_agent_logs`
-  MODIFY `log_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
-
---
--- Структура и индексы таблицы `topics_link_relation`
---
-
-CREATE TABLE `topics_link_relation` (
-  `relation_topic_id` int(11) DEFAULT 0,
-  `relation_link_id` int(11) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-ALTER TABLE `topics_link_relation`
-  ADD KEY `relation_topic_id` (`relation_topic_id`),
-  ADD KEY `relation_content_id` (`relation_link_id`);
-
 --
 -- Индексы сохранённых таблиц
 --
@@ -864,18 +812,6 @@ ALTER TABLE `reports`
   ADD KEY `status` (`report_status`);
 
 --
--- Индексы таблицы `spaces`
---
-ALTER TABLE `spaces`
-  ADD PRIMARY KEY (`space_id`);
-
---
--- Индексы таблицы `spaces_signed`
---
-ALTER TABLE `spaces_signed`
-  ADD PRIMARY KEY (`signed_id`);
-
---
 -- Индексы таблицы `stop_words`
 --
 ALTER TABLE `stop_words`
@@ -888,6 +824,13 @@ ALTER TABLE `topics`
   ADD PRIMARY KEY (`topic_id`),
   ADD KEY `topic_slug` (`topic_slug`),
   ADD KEY `topic_merged_id` (`topic_merged_id`);
+
+--
+-- Индексы таблицы `topics_link_relation`
+--
+ALTER TABLE `topics_link_relation`
+  ADD KEY `relation_topic_id` (`relation_topic_id`),
+  ADD KEY `relation_content_id` (`relation_link_id`);
 
 --
 -- Индексы таблицы `topics_merge`
@@ -922,6 +865,13 @@ ALTER TABLE `users`
 --
 ALTER TABLE `users_activate`
   ADD PRIMARY KEY (`activate_id`);
+
+--
+-- Индексы таблицы `users_agent_logs`
+--
+ALTER TABLE `users_agent_logs`
+  ADD PRIMARY KEY (`log_id`),
+  ADD KEY `log_user_ip` (`log_user_ip`);
 
 --
 -- Индексы таблицы `users_auth_tokens`
@@ -1093,18 +1043,6 @@ ALTER TABLE `reports`
   MODIFY `report_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `spaces`
---
-ALTER TABLE `spaces`
-  MODIFY `space_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT для таблицы `spaces_signed`
---
-ALTER TABLE `spaces_signed`
-  MODIFY `signed_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
 -- AUTO_INCREMENT для таблицы `stop_words`
 --
 ALTER TABLE `stop_words`
@@ -1126,7 +1064,7 @@ ALTER TABLE `topics_merge`
 -- AUTO_INCREMENT для таблицы `topics_signed`
 --
 ALTER TABLE `topics_signed`
-  MODIFY `signed_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `signed_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
@@ -1139,6 +1077,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `users_activate`
   MODIFY `activate_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `users_agent_logs`
+--
+ALTER TABLE `users_agent_logs`
+  MODIFY `log_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `users_auth_tokens`
@@ -1187,3 +1131,4 @@ ALTER TABLE `votes_link`
 --
 ALTER TABLE `votes_post`
   MODIFY `votes_post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+COMMIT;

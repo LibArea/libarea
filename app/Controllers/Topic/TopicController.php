@@ -4,7 +4,8 @@ namespace App\Controllers\Topic;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\{TopicModel, FeedModel, SubscriptionModel};
+use App\Models\User\UserModel;
+use App\Models\{FeedModel, SubscriptionModel, TopicModel};
 use Content, Base;
 
 class TopicController extends MainController
@@ -16,9 +17,9 @@ class TopicController extends MainController
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
-        $limit = 30;
-        $pagesCount = TopicModel::getTopicsAllCount();
-        $topics     = TopicModel::getTopicsAll($page, $limit);
+        $limit = 20;
+        $pagesCount = TopicModel::getTopicsAllCount($uid['user_id'], 'all');
+        $topics     = TopicModel::getTopicsAll($page, $limit, $uid['user_id'], 'all');
 
         Base::PageError404($topics);
 
@@ -46,7 +47,43 @@ class TopicController extends MainController
             'topics'        => $result,
             'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
-            'news'          => TopicModel::getTopicNew(),
+            'news'          => TopicModel::getTopicNew(10),
+        ];
+
+        return view('/topic/topics', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+    }
+
+    // Темы участника
+    public function topicsUser()
+    {
+        $uid    = Base::getUid();
+        $page   = Request::getInt('page');
+        $page   = $page == 0 ? 1 : $page;
+        $limit  = 30;
+
+        $pagesCount = TopicModel::getTopicsAllCount($uid['user_id'], 'subscription');
+        $topics     = TopicModel::getTopicsAll($page, $limit, $uid['user_id'], 'subscription');
+
+        $result = array();
+        foreach ($topics as $ind => $row) {
+            $row['topic_cropped']   = cutWords($row['topic_description'], 9);
+            $result[$ind]           = $row;
+        }
+
+        $m = [
+            'og'         => false,
+            'twitter'    => false,
+            'imgurl'     => false,
+            'url'        => false,
+        ];
+        $meta = meta($m, lang('Читаю темы'), $desc = '');
+
+        $data = [
+            'h1'                => lang('Читаю темы'),
+            'sheet'             => 'my-topics',
+            'pagesCount'        => ceil($pagesCount / $limit),
+            'pNum'              => $page,
+            'topics'            => $result,
         ];
 
         return view('/topic/topics', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
@@ -102,6 +139,9 @@ class TopicController extends MainController
         ];
         $meta = meta($m, $topic['topic_seo_title'] . ' — ' .  lang('topic'), $topic['topic_description']);
 
+
+        $writers = TopicModel::getWriters($topic['topic_id']);
+
         $data = [
             'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
@@ -110,8 +150,10 @@ class TopicController extends MainController
             'posts'         => $result,
             'topic_related' => TopicModel::topicRelated($topic['topic_related']),
             'topic_signed'  => SubscriptionModel::getFocus($topic['topic_id'], $uid['user_id'], 'topic'),
+            'user'          => UserModel::getUser($topic['topic_user_id'], 'id'),
             'main_topic'    => $main_topic,
-            'subtopics'     => $subtopics
+            'subtopics'     => $subtopics,
+            'writers'       => $writers,
         ];
 
         return view('/topic/topic', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
@@ -158,6 +200,7 @@ class TopicController extends MainController
             'topic_related' => TopicModel::topicRelated($topic['topic_related']),
             'post_select'   => TopicModel::topicPostRelated($topic_select),
             'subtopics'     => $subtopics,
+            'user'          => UserModel::getUser($topic['topic_user_id'], 'id'),
             'main_topic'    => $main_topic
         ];
 

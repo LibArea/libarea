@@ -28,14 +28,9 @@ More information (rus.): https://agouti.info/
 
 #### Ideas
 
-Ideas, minimalism, design was taken from what I like:
+We like the classification system based on labels (tags), how it works in the example: [Stack Exchange](https://stackoverflow.com/), [Zhihu](https://www.zhihu.com/), [Quora](https://www.quora.com/) and a number of others.
 
-*   https://news.ycombinator.com/
-*   https://lobste.rs/
-*   https://meta.discourse.org/
-*   https://discuss.flarum.org/
-*   https://tildes.net/
-*   https://subreply.com/
+We are trying to study this.
 
 ...
 

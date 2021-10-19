@@ -13,8 +13,8 @@ class PostsController extends MainController
     {
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
+        $limit  = 100;
 
-        $limit      = 100;
         $pagesCount = PostModel::getPostsAllCount($sheet);
         $posts      = PostModel::getPostsAll($page, $limit, $sheet);
 

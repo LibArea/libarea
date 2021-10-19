@@ -41,19 +41,6 @@ function topic_logo_img($file, $size, $alt, $style)
     return $img;
 }
 
-// Space logo img
-function spase_logo_img($file, $size, $alt, $style)
-{
-    $src = AG_PATH_SPACES_LOGOS . $file;
-    if ($size == 'small') {
-        $src = AG_PATH_SPACES_SMALL_LOGOS . $file;
-    }
-
-    $img = '<img class="' . $style . '" src="' . $src . '" alt="' . $alt . '">';
-
-    return $img;
-}
-
 // User's Avatar
 function user_avatar_img($file, $size, $alt, $style)
 {
@@ -93,7 +80,7 @@ function post_img($file, $alt, $style, $type, $attributes = '')
 function favicon_img($link_id, $alt)
 {
     if (file_exists(HLEB_PUBLIC_DIR . AG_PATH_FAVICONS . $link_id . '.png')) {
-        $img = '<img class="mr5" src="'. AG_PATH_FAVICONS . $link_id . '.png" alt="' . $alt . '">';
+        $img = '<img class="mr5 ц18" src="'. AG_PATH_FAVICONS . $link_id . '.png" alt="' . $alt . '">';
         return $img;
     }
 

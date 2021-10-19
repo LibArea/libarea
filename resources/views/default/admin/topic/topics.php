@@ -3,11 +3,21 @@
 </div>
 <main class="col-span-10 mb-col-12">
   <div class="white-box pt5 pr15 pb5 pl15">
-    <a class="right" title="<?= lang('add'); ?>" href="<?= getUrlByName('admin.topic.add'); ?>">
+    <a class="right" title="<?= lang('add'); ?>" href="<?= getUrlByName('topic.add'); ?>">
       <i class="bi bi-plus-lg middle"></i>
     </a>
     <?= breadcrumb('/admin', lang('admin'), null, null, lang('topics')); ?>
-    <br>
+
+  <div class="bg-white flex flex-row items-center justify-between border-box-1 br-rd-5 p15 mb15">
+    <p class="m0"><?= lang($data['sheet']); ?></p>
+    <?php $pages = [
+      ['id' => 'topics', 'url' => '/admin/topics', 'content' => lang('all'), 'icon' => 'bi bi-record-circle'],
+      ['id' => 'parent', 'url' => '/admin/topics/parent', 'content' => lang('parent'), 'icon' => 'bi bi-x-circle'],
+    ];
+    includeTemplate('/_block/tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
+    ?>
+  </div>
+
     <?php if (!empty($data['topics'])) { ?>
       <table>
         <thead>
@@ -41,7 +51,7 @@
               </div>
             </td>
             <td class="center">
-              <a title="<?= lang('edit'); ?>" href="<?= getUrlByName('admin.topic.edit', ['id' => $topic['topic_id']]); ?>">
+              <a title="<?= lang('edit'); ?>" href="<?= getUrlByName('topic.edit', ['id' => $topic['topic_id']]); ?>">
                 <i class="bi bi-pencil size-15"></i>
               </a>
             </td>

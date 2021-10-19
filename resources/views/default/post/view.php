@@ -146,7 +146,7 @@
           </div>
         <?php } ?>
       </div>
-      <div class="border-bottom flex flex-row items-center justify-between mb5 pt10">
+      <div class="border-bottom flex flex-row items-center justify-between mb5 pb5 pt10">
         <div class="flex flex-row items-center">
           <?= votes($uid['user_id'], $data['post'], 'post'); ?>
           <?php $cout = $data['post']['post_answers_count'] + $data['post']['post_comments_count']; ?>
@@ -158,6 +158,17 @@
             <?php } ?>
           </span>
         </div>
+        <?php if (!empty($data['users'])) { ?>
+          <div class="flex flex-row items-center">
+            <span class="mr5 gray-light-2"><?= lang('answered'); ?>:</span>
+            <?php foreach ($data['users'] as $user) { ?>
+            <a href="/u/<?= $user['user_login']; ?>" title="<?= $user['user_login']; ?>">
+            <?= user_avatar_img($user['user_avatar'], 'small', $user['user_login'], 'w21 mr5'); ?>
+            </a>
+            <span class="mr15 gray-light-2"><?= $user['count']; ?></span>
+            <?php } ?>
+          </div>
+        <?php } ?>
         <div class="flex flex-row items-center">
           <?= favorite_post($uid['user_id'], $data['post']['post_id'], $data['post']['favorite_tid']); ?>
         </div>
@@ -219,7 +230,6 @@
   <?php } ?>
 </main>
 <aside class="col-span-3 br-rd-5 no-mob">
-  <?= includeTemplate('/_block/space-info-sidebar', ['data' => $data['post']]); ?>
   <?php if ($data['post']['post_content_img']) { ?>
     <div class="border-box-1 bg-white br-rd-5 mb15">
       <div id="layer-photos" class="layer-photos p15">

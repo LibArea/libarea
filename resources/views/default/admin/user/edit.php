@@ -17,7 +17,7 @@
       <?= user_avatar_img($data['user']['user_avatar'], 'max', $data['user']['user_login'], 'avatar'); ?>
 
       <div class="boxline">
-        <label class="form-label" for="post_title">
+        <label class="block" for="post_title">
           Id<?= $data['user']['user_id']; ?> |
           <a target="_blank" rel="noopener noreferrer" href="<?= getUrlByName('user', ['login' => $data['user']['user_login']]); ?>">
             <?= $data['user']['user_login']; ?>
@@ -41,7 +41,7 @@
         <i class="bi bi-eye"></i> <?= $data['user']['user_hits_count']; ?>
       </div>
       <div class="boxline">
-        <label class="form-label" for="post_title"><?= lang('sign up'); ?></label>
+        <label class="block" for="post_title"><?= lang('sign up'); ?></label>
         <?= $data['user']['user_created_at']; ?> |
         <?= $data['user']['user_reg_ip']; ?>
         <?php if ($data['user']['duplicat_ip_reg'] > 1) { ?>
@@ -54,7 +54,7 @@
         <?php if ($data['user']['user_limiting_mode'] == 1) { ?>
           <span class="red"><?= lang('dumb mode'); ?>!</span><br>
         <?php } ?>
-        <label class="form-label" for="post_content">
+        <label class="block" for="post_content">
           <?= lang('dumb mode'); ?>?
         </label>
         <input type="radio" name="limiting_mode" <?php if ($data['user']['user_limiting_mode'] == 0) { ?>checked<?php } ?> value="0"> <?= lang('no'); ?>
@@ -84,19 +84,6 @@
         <?php } else { ?>
           ---
         <?php } ?>
-        <?php if ($data['spaces_user']) { ?>
-          <label class="form-label mt10"><?= lang('created by'); ?>:</label>
-          <?php foreach ($data['spaces_user'] as  $space) { ?>
-            <div class="mb5">
-              <?= spase_logo_img($space['space_img'], 'small', $space['space_name'], 'w24'); ?>
-              <a class="size-14" href="<?= getUrlByName('space', ['slug' => $space['space_slug']]); ?>">
-                <?= $space['space_name']; ?>
-              </a>
-            </div>
-          <?php } ?>
-        <?php } else { ?>
-          ---
-        <?php } ?>
       </div>
       <hr>
       <div class="boxline">
@@ -105,7 +92,7 @@
         </a>
       </div>
       <div class="boxline">
-        <label class="form-label" for="post_title"><?= lang('badges'); ?></label>
+        <label class="block" for="post_title"><?= lang('badges'); ?></label>
         <?php if ($data['user']['badges']) { ?>
           <?php foreach ($data['user']['badges'] as $badge) { ?>
             <?= $badge['badge_icon']; ?>
@@ -115,22 +102,22 @@
         <?php } ?>
       </div>
       <div class="boxline">
-        <label class="form-label" for="post_title"><?= lang('whisper'); ?></label>
+        <label class="block" for="post_title"><?= lang('whisper'); ?></label>
         <input class="form-input" type="text" name="whisper" value="<?= $data['user']['user_whisper']; ?>">
       </div>
       <hr>
       <div class="boxline">
-        <label class="form-label" for="post_title">E-mail</label>
+        <label class="block" for="post_title">E-mail</label>
         <input class="form-input" type="text" name="email" value="<?= $data['user']['user_email']; ?>" required>
       </div>
       <div class="boxline">
-        <label class="form-label" for="post_content"><?= lang('email activated'); ?>?</label>
+        <label class="block" for="post_content"><?= lang('email activated'); ?>?</label>
         <input type="radio" name="activated" <?php if ($data['user']['user_activated'] == 0) { ?>checked<?php } ?> value="0"> <?= lang('no'); ?>
         <input type="radio" name="activated" <?php if ($data['user']['user_activated'] == 1) { ?>checked<?php } ?> value="1"> <?= lang('yes'); ?>
       </div>
       <hr>
       <div class="boxline">
-        <label class="form-label" for="post_title">TL</label>
+        <label class="block" for="post_title">TL</label>
         <select name="trust_level">
           <?php for ($i = 0; $i <= 5; $i++) {  ?>
             <option <?php if ($data['user']['user_trust_level'] == $i) { ?>selected<?php } ?> value="<?= $i; ?>">
@@ -140,22 +127,22 @@
         </select>
       </div>
       <div class="boxline">
-        <label class="form-label" for="post_title"><?= lang('nickname'); ?>: /u/***</label>
+        <label class="block" for="post_title"><?= lang('nickname'); ?>: /u/***</label>
         <input class="form-input" type="text" name="login" value="<?= $data['user']['user_login']; ?>" required>
       </div>
       <div class="boxline">
-        <label class="form-label" for="post_title"><?= lang('name'); ?></label>
+        <label class="block" for="post_title"><?= lang('name'); ?></label>
         <input class="form-input" type="text" name="name" value="<?= $data['user']['user_name']; ?>">
       </div>
       <div class="boxline">
-        <label class="form-label" for="post_title"><?= lang('about me'); ?></label>
+        <label class="block" for="post_title"><?= lang('about me'); ?></label>
         <textarea class="add" name="about"><?= $data['user']['user_about']; ?></textarea>
       </div>
 
       <h3><?= lang('contacts'); ?></h3>
-      <?php foreach (Config::arr('fields-profile') as $block) { ?>
+      <?php foreach (Config::get('fields-profile') as $block) { ?>
         <div class="boxline">
-          <label class="form-label" for="post_title"><?= $block['lang']; ?></label>
+          <label class="block" for="post_title"><?= $block['lang']; ?></label>
           <input class="form-input" maxlength="150" type="text" value="<?= $data['user'][$block['title']]; ?>" name="<?= $block['name']; ?>">
           <?php if ($block['help']) { ?>
             <div class="size-14 gray-light-2"><?= $block['help']; ?></div>

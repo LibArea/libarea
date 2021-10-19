@@ -28,10 +28,6 @@
         <div class="lateral no-pc mr10 flex items-center">
           <i class="bi bi-list gray-light-2 size-18"></i>
           <nav class="lateral-menu bg-white br-rd-3 p5 absolute justify-between mt0 ml0 pl0 sticky size-15">
-            <a class="pt5 pr10 pb5 pl10 gray block bg-hover-100" href="<?= getUrlByName('spaces'); ?>">
-              <i class="bi bi-command middle"></i>
-              <span class="ml5"><?= lang('spaces'); ?></span>
-            </a>
             <a class="pt5 pr10 pb5 pl10 gray block bg-hover-100" href="<?= getUrlByName('topics'); ?>">
               <i class="bi bi-columns-gap middle"></i>
               <span class="ml5"><?= lang('topics'); ?></span>

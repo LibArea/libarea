@@ -2,14 +2,27 @@
   <?= includeTemplate('/_block/menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-7 mb-col-12">
-  <div class="bg-white pt5 pr15 border-box-1 pb5 pl15">
-    <h1><?= lang('all topics'); ?>
+  <div class="bg-white flex flex-row items-center justify-between border-box-1 br-rd-5 p15 mb15">
+    <p class="m0 size-18"><?= lang('topics'); ?>
       <?php if ($uid['user_trust_level'] == 5) { ?>
-        <a class="right gray-light" href="/admin/topics">
-          <i class="bi bi-pencil size-15"></i>
+        <a class="ml15" href="/admin/topics">
+          <i class="bi bi-pencil"></i>
+        </a>
+        <a class="ml15" title="<?= lang('add'); ?>" href="<?= getUrlByName('topic.add'); ?>">
+          <i class="bi bi-plus-lg middle"></i>
         </a>
       <?php } ?>
-    </h1>
+    </p>
+
+    <?php $pages = [
+      ['id' => 'topics', 'url' => '/topics', 'content' => lang('all'), 'icon' => 'bi bi-broadcast'],
+      ['id' => 'my-topics', 'url' => '/topics/my', 'content' => lang('signed'), 'auth' => 'yes', 'icon' => 'bi bi-broadcast-pin'],
+    ];
+    includeTemplate('/_block/tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
+    ?>
+  </div>
+
+  <div class="bg-white p15 border-box-1">
     <?php if (!empty($data['topics'])) { ?>
       <div class="flex flex-row flex-wrap grid-cols-2 mb20">
         <?php foreach ($data['topics'] as $topic) { ?>
@@ -18,12 +31,24 @@
               <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'w54'); ?>
             </a>
             <div class="ml5">
+              <?php if ($uid['user_id']) { ?>
+                <?php if ($topic['signed_topic_id']) { ?>
+                  <div data-id="<?= $topic['topic_id']; ?>" data-type="topic" class="focus-id right inline br-rd-20 gray-light-2 center mr15 pr15">
+                    <sup><?= lang('unsubscribe'); ?></sup>
+                  </div>
+                <?php } else { ?>
+                  <div data-id="<?= $topic['topic_id']; ?>" data-type="topic" class="focus-id right inline br-rd-20 blue center mr15 pr15">
+                    <sup><i class="bi bi-plus"></i> <?= lang('read'); ?></sup>
+                  </div>
+                <?php } ?>
+              <?php } ?>
+
               <a title="<?= $topic['topic_title']; ?>" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
                 <?= $topic['topic_title']; ?>
               </a>
               <sup class="gray ml5">x<?= $topic['topic_count']; ?></sup>
               <?php if ($topic['topic_is_parent'] == 1 && $uid['user_trust_level'] == 5) { ?>
-                <sup class="red size-14">root</sup>
+                <sup class="red size-14">r</sup>
               <?php } ?>
               <div class="size-14 pr15"><?= $topic['topic_cropped']; ?>...</div>
             </div>

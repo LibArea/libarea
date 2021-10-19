@@ -12,7 +12,7 @@ class SubscriptionModel extends MainModel
     // Подписан ли участник
     public static function getFocus($content_id, $user_id, $type)
     {
-        // $type = post / space / topic
+        // $type = post / topic
         $sql = "SELECT signed_" . $type . "_id, signed_user_id FROM " . $type . "s_signed 
                     WHERE signed_" . $type . "_id = :content_id AND signed_user_id = :user_id";
 

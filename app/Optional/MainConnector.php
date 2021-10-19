@@ -24,7 +24,6 @@ class MainConnector implements Connector
 
             "DB"                            => "app/Config/DB.php",
             "Config"                        => "app/Config/Config.php",
-            "ConfigSheaf"                    => "app/Config/ConfigSheaf.php",
 
             // ... or, if a specific class is added,
             // "Phphleb\Debugpan\DPanel"      => "app/ThirdParty/phphleb/debugpan/DPanel.php",

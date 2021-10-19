@@ -11,7 +11,7 @@
         <?= $data['topic']['topic_seo_title']; ?>
       </a>
       <?php if ($uid['user_trust_level'] == 5) { ?>
-        <a class="right gray-light" href="<?= getUrlByName('admin.topic.edit', ['id' => $data['topic']['topic_id']]); ?>">
+        <a class="right gray-light" href="<?= getUrlByName('topic.edit', ['id' => $data['topic']['topic_id']]); ?>">
           <i class="bi bi-pencil size-15"></i>
         </a>
       <?php } ?>
@@ -21,7 +21,7 @@
   </div>
 
   <?php if (!empty($data['post_select'])) { ?>
-    <div class="bg-white br-rd-5 border-box-1 pt5 pr15 pb5 pl15">
+    <div class="bg-white br-rd-5 border-box-1 mt15 pt5 pr15 pb5 pl15">
       <div class="mb20">
         <h3 class="uppercase mb5 mt0 font-light size-14 gray"><?= lang('by topic'); ?></h3>
         <?php $num = 0; ?>

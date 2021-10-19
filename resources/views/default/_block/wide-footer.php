@@ -2,8 +2,8 @@
   <div class="col-span-12 wrap white pr10 pl10 size-14 grid grid-cols-12">
     <div class="text-info col-span-3 left no-mob">
       <h4 class="mb5 uppercase font-light"><?= lang('info'); ?></h4>
-      <a class="block white mb5" title="<?= lang('spaces'); ?>" href="<?= getUrlByName('spaces'); ?>">
-        <?= lang('spaces'); ?>
+      <a class="block white mb5" title="<?= lang('all domains'); ?>" href="<?= getUrlByName('web'); ?>">
+        <?= lang('domains'); ?>
       </a>
       <a class="block white mb5" title="<?= lang('topics'); ?>" href="<?= getUrlByName('topics'); ?>">
         <?= lang('topics'); ?>
@@ -19,9 +19,6 @@
       </a>
       <a class="block white mb5" title="<?= lang('all comments'); ?>" href="<?= getUrlByName('comments'); ?>">
         <?= lang('comments-n'); ?>
-      </a>
-      <a class="block white" title="<?= lang('all domains'); ?>" href="<?= getUrlByName('web'); ?>">
-        <?= lang('domains'); ?>
       </a>
     </div>
     <div class="text-info col-span-3 no-mob">

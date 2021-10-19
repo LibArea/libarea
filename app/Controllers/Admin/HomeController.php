@@ -3,7 +3,7 @@
 namespace App\Controllers\Admin;
 
 use Hleb\Scheme\App\Controllers\MainController;
-use App\Models\{SpaceModel, HomeModel, AnswerModel, CommentModel, TopicModel, AgentModel, WebModel};
+use App\Models\{HomeModel, AnswerModel, CommentModel, AgentModel, WebModel, TopicModel};
 use App\Models\User\UserModel;
 use Base;
 
@@ -17,9 +17,8 @@ class HomeController extends MainController
 
         $meta = meta($m = [], lang('admin'));
         $data  = [
-            'spaces_count'      => SpaceModel::getSpacesAllCount(),
-            'topics_count'      => TopicModel::getTopicsAllCount(),
-            'posts_count'       => HomeModel::feedCount([], $uid),
+            'topics_count'      => TopicModel::getTopicsAllCount($uid['user_id'], 'all'),
+            'posts_count'       => HomeModel::feedCount([], $uid, 'all'),
             'users_count'       => UserModel::getUsersAllCount('all'),
             'answers_count'     => AnswerModel::getAnswersAllCount('all'),
             'comments_count'    => CommentModel::getCommentsAllCount('all'),

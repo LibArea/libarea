@@ -2,11 +2,11 @@
   <form class="" action="<?= getUrlByName('login'); ?>" method="post">
     <?php csrf_field(); ?>
     <div class="mb20">
-      <label for="email" class="form-label">Email</label>
+      <label for="email" class="block">Email</label>
       <input type="email" id="email" placeholder="<?= lang('enter'); ?>  e-mail" name="email" class="form-input bg-gray-100">
     </div>
     <div class="mb20">
-      <label for="password" class="form-label"><?= lang('password'); ?></label>
+      <label for="password" class="block"><?= lang('password'); ?></label>
       <input type="password" id="password" placeholder="<?= lang('enter your password'); ?>" name="password" class="form-input bg-gray-100">
     </div>
     <div class="mb20 mb20 flex">

@@ -9,24 +9,26 @@ use Content, Config, Base;
 
 class RssController extends MainController
 {
+    // Route::get('/sitemap.xml')
     public function index()
     {
         $data = [
             'url'       => Config::get('meta.url'),
-            'spaces'    => RssModel::getSpacesSitemap(),
+            'topics'    => RssModel::getTopicsSitemap(),
             'posts'     => RssModel::getPostsSitemap(),
         ];
 
         includeCachedTemplate('/rss/sitemap', ['data' => $data]);
     }
 
+    // Route::get('/turbo-feed/topic/{id}')
     public function turboFeed()
     {
-        $space_id   = Request::getInt('id');
-        $space      = RssModel::getSpaceId($space_id);
-        Base::PageError404($space);
+        $topic_slug = Request::get('slug');
+        $topic      = RssModel::getTopicSlug($topic_slug);
+        Base::PageError404($topic);
 
-        $posts  = RssModel::getPostsFeed($space_id);
+        $posts  = RssModel::getPostsFeed($topic_slug);
         $result = array();
         foreach ($posts as $ind => $row) {
             $row['post_content']  = Content::text($row['post_content'], 'text');
@@ -38,6 +40,6 @@ class RssController extends MainController
             'posts'     => $result,
         ];
 
-        includeCachedTemplate('/rss/turbo-feed', ['data' => $data, 'space' => $space]);
+        includeCachedTemplate('/rss/turbo-feed', ['data' => $data, 'topic' => $topic]);
     }
 }

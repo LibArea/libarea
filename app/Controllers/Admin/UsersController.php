@@ -6,7 +6,6 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\{UserModel, SettingModel, BadgeModel};
 use App\Models\Admin\{BanUserModel, AgentModel};
-use App\Models\SpaceModel;
 use Base, Validation;
 
 class UsersController extends MainController
@@ -98,7 +97,6 @@ class UsersController extends MainController
         $data = [
             'sheet'             => 'edit-user',
             'count'             => UserModel::contentCount($user_id),
-            'spaces_user'       => SpaceModel::getUserCreatedSpaces($user_id),
             'user'              => $user,
         ];
 

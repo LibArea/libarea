@@ -22,22 +22,20 @@ class SearchController extends MainController
 
                 Validation::Limits($query, lang('too short'), '3', '128', '/search');
 
-                // Успех и определим, что будем использовать
-                // Далее индивидуально расширим (+ лайки, просмотры и т.д.)
                 if (Config::get('general.search') == 0) {
                     $qa     =  SearchModel::getSearch($query);
-                    $result = array();
+                    $result = [];
                     foreach ($qa as $ind => $row) {
                         $row['post_content']  = Content::text(cutWords($row['post_content'], 32, '...'), 'text');
                         $result[$ind]   = $row;
                     }
-
+                    $count  = count($qa); 
                     $tags = [];
                 } else {
                     $qa     = SearchModel::getSearchPostServer($query);
                     $tags   = SearchModel::getSearchTagsServer($query);
-
-                    $result = array();
+                    $count  = count($qa); 
+                    $result = [];
                     foreach ($qa as $ind => $row) {
                         $row['_content'] = Content::noMarkdown($row['_content']);
                         $result[$ind]    = $row;
@@ -45,7 +43,7 @@ class SearchController extends MainController
                 }
             } else {
                 addMsg(lang('empty request'), 'error');
-                redirect('/search');
+                redirect(getUrlByName('search'));
             }
         }
 
@@ -53,6 +51,7 @@ class SearchController extends MainController
         $data = [
             'result'    => $result,
             'query'     => $query,
+            'count'     => $count ?? 0,
             'tags'      => $tags,
         ];
 

@@ -7,9 +7,9 @@
     <changefreq>daily</changefreq>
   </url>
   <!-- Sitemap -->
-  <?php foreach ($data['spaces'] as $space) { ?>
+  <?php foreach ($data['topics'] as $topic) { ?>
     <url>
-      <loc><?= $data['url']; ?>/s/<?= $space['space_slug']; ?></loc>
+      <loc><?= $data['url']; ?>/topic/<?= $topic['topic_slug']; ?></loc>
       <priority>0.5</priority>
       <changefreq>daily</changefreq>
     </url>
@@ -23,11 +23,6 @@
   <?php } ?>
   <url>
     <loc><?= $data['url']; ?>/info</loc>
-    <priority>0.5</priority>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc><?= $data['url']; ?>/space</loc>
     <priority>0.5</priority>
     <changefreq>daily</changefreq>
   </url>

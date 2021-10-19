@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\HomeModel;
+use App\Models\{HomeModel, TopicModel};
 use Content, Base, Config;
 
 class HomeController extends MainController
@@ -15,14 +15,14 @@ class HomeController extends MainController
         $uid    = Base::getUid();
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
-
+ 
         $limit  = 25;
-        $space_user         = HomeModel::getSubscriptionSpaces($uid['user_id']);
+        $topics_user        = HomeModel::getSubscriptionTopics($uid['user_id']);
         $latest_answers     = HomeModel::latestAnswers($uid);
 
-        $pagesCount = HomeModel::feedCount($space_user, $uid);
-        $posts      = HomeModel::feed($page, $limit, $space_user, $uid, $sheet);
-        Base::PageError404($posts);
+        $pagesCount = HomeModel::feedCount($topics_user, $uid, $sheet);
+        $posts      = HomeModel::feed($page, $limit, $topics_user, $uid, $sheet);
+       // Base::PageError404($posts);
 
         $result_post = array();
         foreach ($posts as $ind => $row) {
@@ -52,17 +52,23 @@ class HomeController extends MainController
             'og'         => true,
             'twitter'    => true,
             'imgurl'     => '/assets/images/agouti.webp',
-            'url'        => $sheet == 'top' ? '/top' : '',
+            'url'        => $sheet == 'top' ? '/top' : '/',
         ];
         $meta = meta($m, $meta_title, $meta_desc);
-
+        
+        $topics = [];
+        if (count($topics_user) == 0) {
+           $topics = TopicModel::advice($uid['user_id']);
+        }
+        
         $data = [
             'pagesCount'        => ceil($pagesCount / $limit),
             'pNum'              => $page,
             'sheet'             => $sheet,
             'latest_answers'    => $result_answers,
-            'space_user'        => $space_user,
-            'posts'             => $result_post
+            'topics_user'       => $topics_user,
+            'posts'             => $result_post,
+            'topics'            => $topics,
         ];
 
         return view('/home', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);

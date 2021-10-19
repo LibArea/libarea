@@ -8,7 +8,7 @@
     <form action="/admin/word/add" method="post">
       <?= csrf_field() ?>
       <div class="boxline max-w780">
-        <label class="form-label" or="post_title"><?= lang('stop word'); ?></label>
+        <label class="block" or="post_title"><?= lang('stop word'); ?></label>
         <input type="text" class="form-input" name="word">
       </div>
       <input type="submit" class="button block br-rd-5 white" name="submit" value="<?= lang('add'); ?>" />

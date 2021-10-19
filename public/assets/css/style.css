@@ -375,15 +375,6 @@ textarea {
   border: 1px solid #ebebeb;
 }
 
-.form-label {
-  max-width: 40rem;
-  display: block;
-  line-height: 1rem;
-  color: #5b7083;
-  padding: 0.2rem 0 0.4rem 0;
-  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
-}
-
 .form-input {
   transition: all 0.2s ease;
   appearance: none;
@@ -439,18 +430,6 @@ textarea:focus { box-shadow: 0 0 0 0.1rem rgba(38, 139, 210, 0.2); }
   background-color: #ebf0ff;
   border: 1px solid #e0e6f9;
   color: #688ffb;
-}
-
-.focus-space {
-  color: #fff;
-  padding: 2px 8px;
-  border-radius: 20px;
-  bottom: 10px;
-}
-
-.focus-space:hover {
-  background: hsla(0, 0%, 100%, 0.2);
-  padding: 2px 8px;
 }
 
 input { border: 1px solid #ebebeb; }

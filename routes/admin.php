@@ -6,7 +6,6 @@ Route::before('Authorization@admin')->getGroup();
 
     Route::getType('post');
         Route::get('/test/mail')->controller('Admin\СonsoleController@testMail')->name('admin.test.mail');
-        Route::get('/space/ban')->controller('Admin\SpacesController@delSpace');
         Route::get('/user/ban')->controller('Admin\UsersController@banUser');
         Route::get('/favicon/add')->controller('Admin\WebsController@favicon');
         Route::get('/word/ban')->controller('Admin\WordsController@deletes');
@@ -21,8 +20,6 @@ Route::before('Authorization@admin')->getGroup();
             Route::get('/user/edit/{id}')->controller('Admin\UsersController@userEdit')->where(['id' => '[0-9]+']);
             Route::get('/web/add')->controller('Admin\WebsController@add');
             Route::get('/web/edit/{id}')->controller('Admin\WebsController@edit')->where(['id' => '[0-9]+']);
-            Route::get('/topic/add')->controller('Admin\TopicsController@add');
-            Route::get('/topic/edit/{id}')->controller('Admin\TopicsController@edit')->where(['id' => '[0-9]+']);
         Route::endProtect();
     Route::endType();
   
@@ -39,18 +36,14 @@ Route::before('Authorization@admin')->getGroup();
     Route::get('/audits/approved')->controller('Admin\AuditsController', ['approved']);
    
     Route::get('/topics')->controller('Admin\TopicsController', ['all'])->name('admin.topics');
+    Route::get('/topics/parent')->controller('Admin\TopicsController', ['parent'])->name('admin.parent');
     Route::get('/topics/page/{page?}')->controller('Admin\TopicsController', ['all'])->where(['page' => '[0-9]+']);
-    Route::get('/topics/add')->controller('Admin\TopicsController@addPage')->name('admin.topic.add');
-    Route::get('/topics/{id}/edit')->controller('Admin\TopicsController@editPage')->where(['id' => '[0-9]+'])->name('admin.topic.edit');
-    
+     
     Route::get('/update/count/topic')->controller('Admin\СonsoleController@updateCountPostTopic')->name('admin.count.topic'); 
     Route::get('/update/count/up')->controller('Admin\СonsoleController@updateCountUp')->name('admin.count.up');
    
     Route::get('/invitations')->controller('Admin\InvitationsController', ['all'])->name('admin.invitations');
    
-    Route::get('/spaces')->controller('Admin\SpacesController', ['all'])->name('admin.spaces');
-    Route::get('/spaces/ban')->controller('Admin\SpacesController', ['ban']); 
-
     Route::get('/posts')->controller('Admin\PostsController', ['all'])->name('admin.posts');
     Route::get('/posts/page/{page?}')->controller('Admin\PostsController', ['all'])->where(['page' => '[0-9]+']);
     Route::get('/posts/ban')->controller('Admin\PostsController', ['ban']); 

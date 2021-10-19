@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\{TopicModel, SpaceModel};
+use App\Models\TopicModel;
 use App\Models\User\{UserModel, SettingModel};
 
 class UploadImage
@@ -14,12 +14,6 @@ class UploadImage
                 $path_img_small = HLEB_PUBLIC_DIR . AG_PATH_TOPICS_SMALL_LOGOS;
                 $pref = 't-';
                 $default_img = 'topic-default.png';
-                break;
-            case 'space':
-                $path_img       = HLEB_PUBLIC_DIR . AG_PATH_SPACES_LOGOS;
-                $path_img_small = HLEB_PUBLIC_DIR . AG_PATH_SPACES_SMALL_LOGOS;
-                $pref =  's-';
-                $default_img = 'space_no.png';
                 break;
             default:
                 $path_img       = HLEB_PUBLIC_DIR . AG_PATH_USERS_AVATARS;
@@ -48,9 +42,6 @@ class UploadImage
             if ($type == 'topic') {
                 $images     = TopicModel::getTopic($content_id, 'id');
                 $foto       = $images['topic_img'];
-            } elseif ($type == 'space') {
-                $images     = SpaceModel::getSpace($content_id, 'id');
-                $foto       = $images['space_img'];
             } else {
                 $images     = UserModel::getUser($content_id, 'id');
                 $foto       = $images['user_avatar'];
@@ -64,8 +55,6 @@ class UploadImage
 
             if ($type == 'topic') {
                 TopicModel::setImg($content_id, $new_img);
-            } elseif ($type == 'space') {
-                SpaceModel::setImg($content_id, $new_img);
             } else {
                 $date = date('Y-m-d H:i:s');
                 SettingModel::setImg($content_id, $new_img, $date);
@@ -109,7 +98,7 @@ class UploadImage
         return AG_PATH_POSTS_CONTENT . $year . $month . $filename . '.jpeg';
     }
 
-    // Обложка участника и пространств
+    // Обложка участника
     public static function cover($cover, $content_id, $type)
     {
         // 1920px / 350px
@@ -117,13 +106,6 @@ class UploadImage
         $path_cover_small   = HLEB_PUBLIC_DIR . AG_PATH_USERS_SMALL_COVER;
         $pref = 'cover-';
         $default_img = 'cover_art.jpeg';
-
-        if ($type == 'space') {
-            $path_cover_img     = HLEB_PUBLIC_DIR . AG_PATH_SPACES_COVER;
-            $path_cover_small   = HLEB_PUBLIC_DIR . AG_PATH_SPACES_SMALL_COVER;
-            $pref = 'cover-';
-            $default_img = 'space_cover_no.jpeg';
-        }
 
         if ($cover) {
 
@@ -140,13 +122,9 @@ class UploadImage
                 ->toFile($path_cover_small . $filename . '.jpeg', 'image/jpeg');
 
             $new_cover  = $filename . '.jpeg';
-            if ($type == 'user') {
-                $user      = UserModel::getUser($content_id, 'id');
-                $cover_art  = $user['user_cover_art'];
-            } elseif ($type == 'space') {
-                $space      = SpaceModel::getSpace($content_id, 'id');
-                $cover_art  = $space['space_cover_art'];
-            }
+
+            $user      = UserModel::getUser($content_id, 'id');
+            $cover_art  = $user['user_cover_art'];
 
             // Удалим старую аватарку, кроме дефолтной
             if ($cover_art != $default_img && $cover_art != $new_cover) {
@@ -154,13 +132,9 @@ class UploadImage
                 @unlink($path_cover_small . $cover_art);
             }
 
-            if ($type == 'user') {
-                // Запишем обложку 
-                $date = date('Y-m-d H:i:s');
-                SettingModel::setCover($content_id, $new_cover, $date);
-            } elseif ($type == 'space') {
-                SpaceModel::setCover($content_id, $new_cover);
-            }
+            // Запишем обложку 
+            $date = date('Y-m-d H:i:s');
+            SettingModel::setCover($content_id, $new_cover, $date);
 
             return true;
         }

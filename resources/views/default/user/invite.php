@@ -4,7 +4,7 @@
     <form class="" action="/invite" method="post">
       <?php csrf_field(); ?>
       <div class="boxline">
-        <label class="form-label" for="email"><?= lang('code'); ?></label>
+        <label class="block" for="email"><?= lang('code'); ?></label>
         <input class="form-input" type="text" name="invite" id="invite">
       </div>
       <div class="boxline">

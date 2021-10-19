@@ -5,14 +5,14 @@
     <?= csrf_field() ?>
 
     <?= includeTemplate('/_block/form/field-input', ['data' => [
-      ['title' => lang('heading'), 'type' => 'text', 'name' => 'post_title', 'value' => $data['post']['post_title'], 'min' => 6, 'max' => 250, 'help' => '6 - 250 ' . lang('characters')],
+      ['title' => lang('heading'), 'type' => 'text', 'name' => 'post_title', 'value' => $data['post']['post_title'], 'min' => 6, 'max' => 250, 'help' => '6 - 250 ' . lang('characters'), 'red' => 'red'],
     ]]); ?>
 
-    <?= includeTemplate('/_block/form/select-space', ['spaces' => $data['space'], 'space_id' => $data['post']['space_id']]); ?>
-
+    <?= includeTemplate('/_block/form/select-topic-post', ['uid' => $uid,'data' => $data, 'action' => 'edit', 'title' => lang('topics'), 'help' => lang('necessarily'), 'red' => 'red']); ?>
+    
     <?php if ($data['post']['post_url']) { ?>
       <div class="boxline">
-        <label class="form-label" for="post_title">URL:</label>
+        <label class="block" for="post_title">URL:</label>
         <a target="_blank" rel="noreferrer ugc" href="<?= $data['post']['post_url']; ?>" class="size-14"><?= $data['post']['post_url']; ?></a>
       </div>
     <?php } ?>
@@ -46,7 +46,7 @@
     <?php } ?>
 
     <?php if ($uid['user_trust_level'] > 0) { ?>
-      <?= includeTemplate('/_block/form/select-post-tl', ['uid' => $uid, 'data' => $data['post']['post_tl']]); ?>
+      <?= includeTemplate('/_block/form/select-content-tl', ['uid' => $uid, 'data' => $data['post']['post_tl']]); ?>
       <?= includeTemplate('/_block/form/field-radio', ['data' => [
         ['title' => lang('format Q&A?'), 'name' => 'post_type', 'checked' => $data['post']['post_type']],
         ['title' => lang('to close?'), 'name' => 'closed', 'checked' => $data['post']['post_closed']],
@@ -67,7 +67,7 @@
       <?= includeTemplate('/_block/form/select-content', ['type' => 'user', 'data' => $data, 'action' => 'edit', 'title' => lang('author')]); ?>
     <?php } ?>
 
-    <?= includeTemplate('/_block/form/select-content', ['type' => 'topic', 'data' => $data, 'action' => 'edit', 'title' => lang('topics')]); ?>
+ 
     <?= includeTemplate('/_block/form/select-content', ['type' => 'post', 'data' => $data, 'action' => 'edit', 'title' => lang('related')]); ?>
 
     <div class="boxline">

@@ -8,7 +8,7 @@
     <form action="/admin/badge/user/add" method="post">
       <?= csrf_field() ?>
       <div class="boxline">
-        <label class="form-label" for="post_content"><?= lang('badge'); ?></label>
+        <label class="block" for="post_content"><?= lang('badge'); ?></label>
         <select class="form-input" name="badge_id">
           <?php foreach ($data['badges'] as $badge) { ?>
             <option value="<?= $badge['badge_id']; ?>"> <?= $badge['badge_title']; ?></option>

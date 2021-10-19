@@ -101,18 +101,22 @@ class ActionModel extends MainModel
         $field_id   = $type . '_id';
         $field_name = $type . '_title';
         if ($type == 'post') {
+            $field_tl = 'post_tl';
             $sql = "SELECT post_id, post_title, post_is_deleted, post_tl FROM posts WHERE post_title LIKE :post_title AND post_is_deleted = 0 AND post_tl = 0 ORDER BY post_id LIMIT 8";
         } elseif ($type == 'topic') {
-            $sql = "SELECT topic_id, topic_title FROM topics 
-                    WHERE topic_title LIKE :topic_title ORDER BY topic_id LIMIT 8";
+            $field_tl = 'topic_tl';
+            $sql = "SELECT topic_id, topic_title, topic_tl FROM topics 
+                    WHERE topic_title LIKE :topic_title ORDER BY topic_count DESC LIMIT 8";
         } elseif ($type == 'main') {
             $field_id   = 'topic_id';
             $field_name = 'topic_title';
-            $sql = "SELECT topic_id, topic_title, topic_is_parent FROM topics 
+            $field_tl = 'topic_tl';
+            $sql = "SELECT topic_id, topic_title, topic_is_parent, topic_tl FROM topics 
                     WHERE topic_is_parent !=0 AND topic_title LIKE :topic_title ORDER BY topic_id LIMIT 8";
         } else {
+            $field_tl = 'user_trust_level';
             $field_name = 'user_login';
-            $sql = "SELECT user_id, user_login FROM users WHERE user_login LIKE :user_login";
+            $sql = "SELECT user_id, user_login, user_trust_level FROM users WHERE user_login LIKE :user_login";
         }
 
         $result = DB::run($sql, [$field_name => "%" . $search . "%"]);
@@ -121,8 +125,9 @@ class ActionModel extends MainModel
         $response = array();
         foreach ($lists as $list) {
             $response[] = array(
-                "id" => $list[$field_id],
-                "text" => $list[$field_name]
+                "id"    => $list[$field_id],
+                "text"  => $list[$field_name],
+                "tl"    => $list[$field_tl]
             );
         }
 

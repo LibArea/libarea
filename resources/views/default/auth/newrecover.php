@@ -4,7 +4,7 @@
     <form class="" action="<?= getUrlByName('recover'); ?>/send/pass" method="post">
       <?php csrf_field(); ?>
       <div class="boxline">
-        <label class="form-label" for="password">
+        <label class="block" for="password">
           <?= lang('new password'); ?>
         </label>
         <input class="form-input" type="password" name="password" id="password">

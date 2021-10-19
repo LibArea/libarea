@@ -4,9 +4,8 @@ namespace App\Controllers\Post;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\SubscriptionModel;
 use App\Models\User\UserModel;
-use App\Models\{PostModel, FeedModel, AnswerModel, CommentModel};
+use App\Models\{PostModel, FeedModel, AnswerModel, CommentModel, SubscriptionModel};
 use Content, Base;
 
 
@@ -51,7 +50,7 @@ class PostController extends MainController
         }
 
         // Рекомендованные посты
-        $recommend = PostModel::postsSimilar($post['post_id'], $post['post_space_id'], $uid, 5);
+        $recommend = PostModel::postsSimilar($post['post_id'], $uid, 5);
 
         // Выводить или нет? Что дает просмотр даты изменения?
         // Учитывать ли изменение в сортировки и в оповещение в будущем...
@@ -127,6 +126,9 @@ class PostController extends MainController
         if ($post['post_related']) {
             $post_related = PostModel::postRelated($post['post_related']);
         }
+        
+        $users = [];
+        // PostModel::getReplyUserPost($post['post_id']);
 
         $m = [
             'og'         => true,
@@ -134,7 +136,9 @@ class PostController extends MainController
             'imgurl'     => $content_img,
             'url'        => getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]),
         ];
-        $meta = meta($m, strip_tags($post['post_title']) . ' — ' . strip_tags($post['space_name']), $desc . ' — ' . $post['space_name'], $date_article = $post['post_date']);
+        
+        $topic = $topics[0]['topic_title'] ?? 'agouti';
+        $meta = meta($m, strip_tags($post['post_title']) . ' — ' . $topic, $desc . ' — ' . $topic, $date_article = $post['post_date']);
 
         $data = [
             'post'          => $post,
@@ -144,6 +148,7 @@ class PostController extends MainController
             'post_related'  => $post_related ?? '',
             'post_signed'   => $post_signed,
             'topics'        => $topics,
+            'users'         => $users,
             'sheet'         => 'article',
         ];
 

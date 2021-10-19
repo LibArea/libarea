@@ -5,7 +5,7 @@ namespace App\Controllers\User;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\{UserModel, BadgeModel};
-use App\Models\{NotificationsModel, SpaceModel, PostModel};
+use App\Models\{TopicModel, NotificationsModel, PostModel};
 use Content, Config, Base, Validation;
 
 class UserController extends MainController
@@ -90,10 +90,11 @@ class UserController extends MainController
             'user_created_at'   => lang_date($user['user_created_at']),
             'user_trust_level'  => UserModel::getUserTrust($user['user_id']),
             'count'             => UserModel::contentCount($user['user_id']),
-            'spaces_user'       => SpaceModel::getUserCreatedSpaces($user['user_id']),
+            'topics'            => TopicModel::getTopicsAll(1, 10, $user['user_id'], 'subscription'),
             'badges'            => BadgeModel::getBadgeUserAll($user['user_id']),
             'user'              => $user,
             'isBan'             => $isBan,
+            'participation'     => TopicModel::participation($user['user_id']),
             'post'              => PostModel::getPostId($user['user_my_post']),
             'button_pm'         => Validation::accessPm($uid, $user['user_id'], Config::get('general.tl_add_pm'))
         ];

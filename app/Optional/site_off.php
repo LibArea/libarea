@@ -22,7 +22,7 @@
     <form class="" action="/login" method="post">
       <?php csrf_field(); ?>
       <div class="boxline">
-        <label for="email" class="form-label">E-mail</label>
+        <label for="email" class="block">E-mail</label>
         <input type="text" class="form-input" placeholder="<?= lang('enter'); ?>  e-mail" name="email" id="email">
       </div>
       <div class="boxline">

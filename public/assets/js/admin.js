@@ -23,7 +23,7 @@ $(function () {
         location.reload();
       })
   });
-  // Забанить / разбанить: user / word / space
+  // Забанить / разбанить: user / word 
   $(document).on('click', '.type-ban', function () {
     let type_id = $(this).data('id');
     let type = $(this).data('type');

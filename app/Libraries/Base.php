@@ -34,7 +34,7 @@ class Base
         } else {
             self::checkCookie();
             $uid['user_id']     = 0;
-            $uid['user_trust_level'] = null;
+            $uid['user_trust_level'] = 0;
 
             if ($site == 'disabled') {
                 include HLEB_GLOBAL_DIRECTORY . '/app/Optional/site_off.php';

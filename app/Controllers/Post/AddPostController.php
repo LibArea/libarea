@@ -5,7 +5,7 @@ namespace App\Controllers\Post;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
-use App\Models\{NotificationsModel, SubscriptionModel, ActionModel, SpaceModel, WebModel, PostModel, TopicModel};
+use App\Models\{NotificationsModel, SubscriptionModel, ActionModel, WebModel, PostModel, TopicModel};
 use Content, Base, UploadImage, Integration, Validation, SendEmail, UrlRecord, URLScraper, Config;
 
 class AddPostController extends MainController
@@ -44,19 +44,8 @@ class AddPostController extends MainController
         Base::accountBan($user);
         Content::stopContentQuietМode($user);
 
-        // Получаем информацию по пространству
-        $space_id   = Request::getPostInt('space_id');
-        $space      = SpaceModel::getSpace($space_id, 'id');
-        Base::PageRedirection($space, $redirect);
+        Base::PageRedirection($topics, $redirect);
 
-        // Если стоит ограничение: публиковать может только автор
-        if ($space['space_permit_users'] == 1) {
-            // Кроме персонала и владельца
-            if ($this->uid['user_trust_level'] != 5 && $space['space_user_id'] != $this->uid['user_id']) {
-                addMsg(lang('you dont have access'), 'error');
-                redirect($redirect);
-            }
-        }
 
         Validation::Limits($post_title, lang('title'), '6', '250', $redirect);
         Validation::Limits($post_content, lang('the post'), '6', '25000', $redirect);
@@ -80,7 +69,6 @@ class AddPostController extends MainController
                     'link_user_id'      => $this->uid['user_id'],
                     'link_type'         => 0,
                     'link_status'       => 200,
-                    'link_category_id'  => 1,
                 ];
                 WebModel::add($data);
             } else {
@@ -91,7 +79,7 @@ class AddPostController extends MainController
         // Обложка поста
         $cover  = $_FILES['images'];
         if ($_FILES['images']['name'][0]) {
-            $post_img = UploadImage::cover_post($cover, $space_id, $redirect);
+            $post_img = UploadImage::cover_post($cover, 0, $redirect);
         }
 
         // Ограничим добавления постов (в день)
@@ -132,7 +120,6 @@ class AddPostController extends MainController
             'post_ip'               => Request::getRemoteAddress(),
             'post_published'        => $post_published,
             'post_user_id'          => $this->uid['user_id'],
-            'post_space_id'         => $space_id,
             'post_url'              => $post_url ?? '',
             'post_url_domain'       => $post_url_domain ?? '',
             'post_closed'           => $post_closed,
@@ -198,12 +185,8 @@ class AddPostController extends MainController
         Base::accountBan($user);
 
         $meta = meta($m = [], lang('add post'));
-        $data = [
-            'spaces'    => SpaceModel::getSpaceSelect($this->uid['user_id'], $this->uid['user_trust_level']),
-            'space_id'  => Request::getInt('space_id'),
-        ];
 
-        return view('/post/add', ['meta' => $meta, 'uid' => $this->uid, 'data' => $data]);
+        return view('/post/add', ['meta' => $meta, 'uid' => $this->uid, 'data' => []]);
     }
 
     // Парсинг

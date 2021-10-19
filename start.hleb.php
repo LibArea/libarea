@@ -253,17 +253,11 @@ define('FILE_LANG', include_once(__DIR__ . '/app/Language/' . LANG . '/lang.php'
 define('AG_PATH_USERS_COVER', '/uploads/users/cover/');
 define('AG_PATH_USERS_SMALL_COVER', '/uploads/users/cover/small/');
 
-define('AG_PATH_SPACES_COVER', '/uploads/spaces/cover/');
-define('AG_PATH_SPACES_SMALL_COVER', '/uploads/spaces/cover/small/');
-
 define('AG_PATH_USERS_AVATARS', '/uploads/users/avatars/');
 define('AG_PATH_USERS_SMALL_AVATARS', '/uploads/users/avatars/small/');
 
 define('AG_PATH_TOPICS_LOGOS', '/uploads/topics/logos/');
 define('AG_PATH_TOPICS_SMALL_LOGOS', '/uploads/topics/logos/small/');
-
-define('AG_PATH_SPACES_LOGOS', '/uploads/spaces/logos/');
-define('AG_PATH_SPACES_SMALL_LOGOS', '/uploads/spaces/logos/small/');
 
 define('AG_PATH_POSTS_CONTENT', '/uploads/posts/content/');
 define('AG_PATH_POSTS_COVER', '/uploads/posts/cover/');

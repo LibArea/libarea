@@ -54,7 +54,7 @@ class RegisterController extends MainController
 
         # Если домен указанной почты содержится в списке недопустимых
         $domain = array_pop(explode('@', $email));
-        if (in_array($domain, Config::arr('stop-email'))) {
+        if (in_array($domain, Config::get('stop-email'))) {
             redirect($redirect);
         }
 
@@ -72,7 +72,7 @@ class RegisterController extends MainController
         }
 
         // Запретим, хотя лучшая практика занять нужные (пр. GitHub)
-        if (in_array($login, Config::arr('stop-nickname'))) {
+        if (in_array($login, Config::get('stop-nickname'))) {
             addMsg(lang('nickname-replay'), 'error');
             redirect($redirect);
         }

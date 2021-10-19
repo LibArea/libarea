@@ -5,7 +5,7 @@ namespace App\Controllers\Post;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
-use App\Models\{PostModel, SpaceModel, TopicModel};
+use App\Models\{TopicModel, PostModel};
 use Content, Base, UploadImage, Validation;
 
 class EditPostController extends MainController
@@ -28,11 +28,10 @@ class EditPostController extends MainController
         $post_draft             = Request::getPostInt('post_draft');
         $post_closed            = Request::getPostInt('closed');
         $post_top               = Request::getPostInt('top');
-        $post_space_id          = Request::getPostInt('space_id');
         $draft                  = Request::getPost('draft');
         $post_user_new          = Request::getPost('user_select');
         $post_merged_id         = Request::getPostInt('post_merged_id');
-        $post_tl                = Request::getPostInt('post_tl');
+        $post_tl                = Request::getPostInt('content_tl');
 
         // Связанные посты и темы
         $post_fields    = Request::getPost() ?? [];
@@ -53,31 +52,19 @@ class EditPostController extends MainController
         $redirect   = '/post/edit/' . $post_id;
 
         // Получаем информацию по пространству
-        $space = SpaceModel::getSpace($post_space_id, 'id');
-        if (!$space) {
-            addMsg(lang('select space'), 'error');
+        if (!$topics) {
+            addMsg(lang('select topic'), 'error');
             redirect($redirect);
         }
 
-        // Если стоит ограничение: публиковать может только автор
-        if ($space['space_permit_users'] == 1) {
-            // Кроме персонала и владельца
-            if ($this->uid['user_trust_level'] != 5 && $space['space_user_id'] != $this->uid['user_id']) {
-                addMsg(lang('you dont have access'), 'error');
-                redirect($redirect);
-            }
-        }
-
         // Если есть смена post_user_id и это TL5
+        $post_user_id = $post['post_user_id'];
         if ($post['post_user_id'] != $post_user_new) {
-            if ($this->uid['user_trust_level'] != 5) {
-                $post_user_id = $post['post_user_id'];
-            } else {
-                $post_user_id = $post_user_new;
-            }
-        } else {
             $post_user_id = $post['post_user_id'];
-        }
+            if ($this->uid['user_trust_level'] == 5) {
+                $post_user_id = $post_user_new;
+            } 
+        } 
 
         Validation::Limits($post_title, lang('title'), '6', '250', $redirect);
         Validation::Limits($post_content, lang('the post'), '6', '25000', $redirect);
@@ -108,7 +95,6 @@ class EditPostController extends MainController
             'post_date'             => $post_date,
             'post_user_id'          => $post_user_id,
             'post_draft'            => $post_draft,
-            'post_space_id'         => $post_space_id,
             'post_content'          => Content::change($post_content),
             'post_content_img'      => $post_img ?? '',
             'post_related'          => $post_related,
@@ -157,7 +143,6 @@ class EditPostController extends MainController
             'sheet'         => 'edit-post',
             'post'          => $post,
             'post_select'   => PostModel::postRelated($post['post_related']),
-            'space'         => SpaceModel::getSpaceSelect($this->uid['user_id'], $this->uid['user_trust_level']),
             'user'          => UserModel::getUser($post['post_user_id'], 'id'),
             'topic_select'  => PostModel::getPostTopic($post['post_id']),
         ];

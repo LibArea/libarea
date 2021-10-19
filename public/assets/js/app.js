@@ -38,23 +38,7 @@ $(function () {
     }, false);
   }
 
-  // Цвета пространств
-  let colorSpace = document.getElementById("colorSpace");
-  if (colorSpace) {
-    let box = document.getElementById("box");
-    let color = document.getElementById("color");
-
-    box.style.borderColor = colorSpace.value;
-
-    colorSpace.addEventListener("input", function (event) {
-      box.style.borderColor = event.target.value;
-    }, false);
-
-    colorSpace.addEventListener("change", function (event) {
-      color.value = colorSpace.value;
-    }, false);
-  }
-  // Subscribe to a topic / space / post
+  // Subscribe to a topic / post
   $(document).on("click", ".focus-id", function () {
     let content_id = $(this).data('id');
     let type_content = $(this).data('type');
