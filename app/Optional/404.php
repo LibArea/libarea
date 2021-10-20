@@ -13,7 +13,7 @@
     <div class="left mr20">
       <h1 class="size-31 font-semibold gray mb0">404</h1>
       <p class="gray-light"><?= lang('the page does not exist'); ?></p>
-      <a class="button br-rd-5 white" href="/"><?= lang('to main'); ?></a>
+      <a class="button br-rd5 white" href="/"><?= lang('to main'); ?></a>
       <div class="mt15 size-14 gray-light-2">
         <?= lang('the page has been removed'); ?>...
       </div>

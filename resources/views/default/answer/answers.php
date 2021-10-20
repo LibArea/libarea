@@ -2,13 +2,13 @@
   <?= includeTemplate('/_block/menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-7 mb-col-12">
-  <div class="bg-white br-rd-5 border-box-1 pt5 pr15 pb5 pl15">
+  <div class="bg-white br-rd5 border-box-1 pt5 pr15 pb5 pl15">
     <?= breadcrumb('/', lang('home'), null,  null, lang('all answers')); ?>
   </div>
 
   <?php if (!empty($data['answers'])) { ?>
     <?php foreach ($data['answers'] as $answer) { ?>
-      <div class="bg-white br-rd-5 mt15 border-box-1 pt5 pr15 pb5 pl15">
+      <div class="bg-white br-rd5 mt15 border-box-1 pt5 pr15 pb5 pl15">
         <?php if ($answer['answer_is_deleted'] == 0) { ?>
           <div class="flex size-14">
             <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'w18'); ?>

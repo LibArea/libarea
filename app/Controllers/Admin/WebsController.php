@@ -69,7 +69,7 @@ class WebsController extends MainController
         $link_url_domain    = $parse['host'];
         $link_url           = $parse['scheme'] . '://' . $parse['host'];
 
-        $redirect = '/web';
+        $redirect = getUrlByName('web');
         $link = WebModel::getLinkOne($link_url_domain, $this->uid['user_id']);
         if ($link) {
             addMsg(lang('the site is already there'), 'error');
@@ -116,7 +116,7 @@ class WebsController extends MainController
     // Изменение домена
     public function edit()
     {
-        $redirect   = '/web';
+        $redirect   = getUrlByName('web');
         $link_id    = Request::getPostInt('link_id');
         if (!$link  = WebModel::getLinkId($link_id)) {
             redirect($redirect);
@@ -155,7 +155,6 @@ class WebsController extends MainController
             TopicModel::addLinkTopics($arr, $link['link_id']);
         }
 
-
         redirect($redirect);
     }
 
@@ -165,8 +164,8 @@ class WebsController extends MainController
         $link       = WebModel::getLinkId($link_id);
         Base::PageError404($link);
 
-        $puth = HLEB_PUBLIC_DIR . '/uploads/favicons/' . $link["link_id"] . '.png';
-        $dirF = HLEB_PUBLIC_DIR . '/uploads/favicons/';
+        $puth = HLEB_PUBLIC_DIR . AG_PATH_FAVICONS . $link["link_id"] . '.png';
+        $dirF = HLEB_PUBLIC_DIR . AG_PATH_FAVICONS;
 
         if (!file_exists($puth)) {
             $urls = self::getFavicon($link['link_url_domain']);

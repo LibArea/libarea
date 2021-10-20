@@ -3,7 +3,7 @@
 </div>
 <main class="col-span-7 mb-col-12">
   <?= breadcrumb('/', lang('home'), getUrlByName('user', ['login' => $uid['user_login']]), lang('profile'), lang('settings')); ?>
-  <div class="bg-white flex flex-row center items-center justify-between border-box-1 br-rd-5 p15 mb15">
+  <div class="bg-white flex flex-row center items-center justify-between border-box-1 br-rd5 p15 mb15">
     <p class="m0 no-mob"><?= lang($data['sheet']); ?></p>
     <?= includeTemplate('/_block/setting-nav', ['data' => $data, 'uid' => $uid]); ?>
   </div>
@@ -43,7 +43,7 @@
       <?php foreach (Config::get('fields-profile') as $block) { ?>
         <div class="boxline">
           <label class="block" for="post_title"><?= $block['lang']; ?></label>
-          <input class="form-input" maxlength="150" type="text" value="<?= $data['user'][$block['title']]; ?>" name="<?= $block['name']; ?>">
+          <input class="w-100 h30" maxlength="150" type="text" value="<?= $data['user'][$block['title']]; ?>" name="<?= $block['name']; ?>">
           <?php if ($block['help']) { ?>
             <div class="size-14 gray-light-2"><?= $block['help']; ?></div>
           <?php } ?>
@@ -52,7 +52,7 @@
 
       <div class="boxline">
         <input type="hidden" name="nickname" id="nickname" value="">
-        <button type="submit" class="button br-rd-5 white"><?= lang('edit'); ?></button>
+        <button type="submit" class="button br-rd5 white"><?= lang('edit'); ?></button>
       </div>
     </form>
 </main>

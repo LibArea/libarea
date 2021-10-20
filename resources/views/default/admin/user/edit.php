@@ -103,12 +103,12 @@
       </div>
       <div class="boxline">
         <label class="block" for="post_title"><?= lang('whisper'); ?></label>
-        <input class="form-input" type="text" name="whisper" value="<?= $data['user']['user_whisper']; ?>">
+        <input class="w-100 h30" type="text" name="whisper" value="<?= $data['user']['user_whisper']; ?>">
       </div>
       <hr>
       <div class="boxline">
         <label class="block" for="post_title">E-mail</label>
-        <input class="form-input" type="text" name="email" value="<?= $data['user']['user_email']; ?>" required>
+        <input class="w-100 h30" type="text" name="email" value="<?= $data['user']['user_email']; ?>" required>
       </div>
       <div class="boxline">
         <label class="block" for="post_content"><?= lang('email activated'); ?>?</label>
@@ -128,11 +128,11 @@
       </div>
       <div class="boxline">
         <label class="block" for="post_title"><?= lang('nickname'); ?>: /u/***</label>
-        <input class="form-input" type="text" name="login" value="<?= $data['user']['user_login']; ?>" required>
+        <input class="w-100 h30" type="text" name="login" value="<?= $data['user']['user_login']; ?>" required>
       </div>
       <div class="boxline">
         <label class="block" for="post_title"><?= lang('name'); ?></label>
-        <input class="form-input" type="text" name="name" value="<?= $data['user']['user_name']; ?>">
+        <input class="w-100 h30" type="text" name="name" value="<?= $data['user']['user_name']; ?>">
       </div>
       <div class="boxline">
         <label class="block" for="post_title"><?= lang('about me'); ?></label>
@@ -143,14 +143,14 @@
       <?php foreach (Config::get('fields-profile') as $block) { ?>
         <div class="boxline">
           <label class="block" for="post_title"><?= $block['lang']; ?></label>
-          <input class="form-input" maxlength="150" type="text" value="<?= $data['user'][$block['title']]; ?>" name="<?= $block['name']; ?>">
+          <input class="w-100 h30" maxlength="150" type="text" value="<?= $data['user'][$block['title']]; ?>" name="<?= $block['name']; ?>">
           <?php if ($block['help']) { ?>
             <div class="size-14 gray-light-2"><?= $block['help']; ?></div>
           <?php } ?>
         </div>
       <?php } ?>
 
-      <input type="submit" class="button block br-rd-5 white" name="submit" value="<?= lang('edit'); ?>" />
+      <input type="submit" class="button block br-rd5 white" name="submit" value="<?= lang('edit'); ?>" />
     </form>
   </div>
 </main>

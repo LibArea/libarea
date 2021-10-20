@@ -2,7 +2,7 @@
   <?= includeTemplate('/_block/menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-7 mb-col-12">
-  <div class="bg-white br-rd-5 border-box-1 pt5 pr15 pb5 pl15">
+  <div class="bg-white br-rd5 border-box-1 pt5 pr15 pb5 pl15">
     <?php if ($uid['user_trust_level'] == 5) { ?>
       <a title="<?= lang('add'); ?>" class="right mt5" href="<?= getUrlByName('link-add'); ?>">
         <i class="bi bi-plus-lg middle"></i>

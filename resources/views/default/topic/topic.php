@@ -1,11 +1,12 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/_block/menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+  <?= includeTemplate('/_block/menu', ['sheet' => $data['sheet'], 'uid' => $uid, 'topic_id' => $data['topic']['topic_id']]); ?>
 </div>
+
 <main class="col-span-7 mb-col-12">
-  <div class="bg-white br-rd-5 border-box-1 mb15 p15">
+  <div class="bg-white br-rd5 border-box-1 mb15 p15">
     <div class="flex">
       <div>
-        <?= topic_logo_img($data['topic']['topic_img'], 'max', $data['topic']['topic_title'], 'w94'); ?>
+        <?= topic_logo_img($data['topic']['topic_img'], 'max', $data['topic']['topic_title'], 'w94 border-box-1'); ?>
       </div>
       <div class="ml15 w-100">
         <h1 class="mt0">
@@ -20,15 +21,15 @@
         <div class="mt15">
           <?php if (!$uid['user_id']) { ?>
             <a href="<?= getUrlByName('login'); ?>">
-              <div class="add-focus inline br-rd-20 center pt5 pr15 pb5 pl15">+ <?= lang('read'); ?></div>
+              <div class="add-focus inline br-rd20 center pt5 pr15 pb5 pl15">+ <?= lang('read'); ?></div>
             </a>
           <?php } else { ?>
             <?php if (is_array($data['topic_signed'])) { ?>
-              <div data-id="<?= $data['topic']['topic_id']; ?>" data-type="topic" class="focus-id del-focus inline br-rd-20 center pt5 pr15 pb5 pl15">
+              <div data-id="<?= $data['topic']['topic_id']; ?>" data-type="topic" class="focus-id del-focus inline br-rd20 center pt5 pr15 pb5 pl15">
                 <?= lang('unsubscribe'); ?>
               </div>
             <?php } else { ?>
-              <div data-id="<?= $data['topic']['topic_id']; ?>" data-type="topic" class="focus-id add-focus inline br-rd-20 center pt5 pr15 pb5 pl15">
+              <div data-id="<?= $data['topic']['topic_id']; ?>" data-type="topic" class="focus-id add-focus inline br-rd20 center pt5 pr15 pb5 pl15">
                 + <?= lang('read'); ?>
               </div>
             <?php } ?>
@@ -46,7 +47,7 @@
 
 </main>
 <aside class="col-span-3 no-mob">
-  <div class="bg-white br-rd-5 mb15 border-box-1 p15">
+  <div class="bg-white br-rd5 mb15 border-box-1 p15">
     <div class="flex justify-center">
       <div class="mr15 center box-number">
         <div class="uppercase mb5 size-14 gray"><?= lang('posts-m'); ?></div>
@@ -63,11 +64,12 @@
 
   <?php if (!empty($data['writers'])) { ?>
     <div class="sticky top0 t-81">
-      <div class="border-box-1 mt15 p15 mb15 br-rd-5 bg-white size-14">
+      <div class="border-box-1 mt15 p15 mb15 br-rd5 bg-white size-14">
         <div class="uppercase gray mt5 mb5"> <?= lang('writers'); ?></div>
         <?php foreach ($data['writers'] as $ind => $row) { ?>
           <a class="flex relative pt5 pb5 items-center hidden gray-light" href="<?= getUrlByName('user', ['login' => $row['user_login']]); ?>">
-            <?= user_avatar_img($row['user_avatar'], 'max', $row['user_login'], 'w24 mr5 br-rd-50'); ?><span class="ml5"><?= $row['user_login']; ?> (<?= $row['hits_count']; ?>) </span>
+            <?= user_avatar_img($row['user_avatar'], 'max', $row['user_login'], 'w24 mr5 br-rd-50'); ?>
+            <span class="ml5"><?= $row['user_login']; ?> (<?= $row['hits_count']; ?>) </span>
           </a>
         <?php } ?>
       </div>

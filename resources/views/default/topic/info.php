@@ -2,7 +2,7 @@
   <?= includeTemplate('/_block/menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-7 mb-col-12">
-  <div class="bg-white br-rd-5 border-box-1 pt5 pr15 pb5 pl15">
+  <div class="bg-white br-rd5 border-box-1 pt5 pr15 pb5 pl15">
     <a class="size-14" title="<?= lang('all topics'); ?>" href="/topics">
       ← <?= lang('topics'); ?>
     </a>
@@ -21,7 +21,7 @@
   </div>
 
   <?php if (!empty($data['post_select'])) { ?>
-    <div class="bg-white br-rd-5 border-box-1 mt15 pt5 pr15 pb5 pl15">
+    <div class="bg-white br-rd5 border-box-1 mt15 pt5 pr15 pb5 pl15">
       <div class="mb20">
         <h3 class="uppercase mb5 mt0 font-light size-14 gray"><?= lang('by topic'); ?></h3>
         <?php $num = 0; ?>
@@ -42,7 +42,7 @@
 
 </main>
 <aside class="col-span-3 no-mob">
-  <div class="bg-white br-rd-5 border-box-1 p15 mb15 size-15">
+  <div class="bg-white br-rd5 border-box-1 p15 mb15 size-15">
     <center>
       <a title="<?= $data['topic']['topic_title']; ?>" href="<?= getUrlByName('topic', ['slug' => $data['topic']['topic_slug']]); ?>">
         <div><?= $data['topic']['topic_title']; ?></div>

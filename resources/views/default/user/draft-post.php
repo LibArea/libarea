@@ -4,7 +4,7 @@
   </div>
   <?php if (!empty($data['drafts'])) { ?>
     <?php foreach ($data['drafts'] as $draft) { ?>
-      <div class="bg-white br-rd-5 border-box-1 pt5 pb5 pl15">
+      <div class="bg-white br-rd5 border-box-1 pt5 pb5 pl15">
         <a href="<?= getUrlByName('post', ['id' => $draft['post_id'], 'slug' => $draft['post_slug']]); ?>">
           <h3 class="title m0 size-21"><?= $draft['post_title']; ?></h3>
         </a>

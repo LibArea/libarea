@@ -1,11 +1,11 @@
 <nav class="justify-between mt0 ml0 pl0 t-81 sticky size-15 max-w170">
   <div class="center pt5 mb15 no-mob">
     <?php if ($uid['user_id'] == 0) { ?>
-    <a href="/login" class="button block br-rd-5 white">
+    <a href="/login" class="button block br-rd5 white">
       <i class="bi bi-plus-lg mr5 middle"></i> <?= lang('create'); ?>
     </a>
     <?php } else { ?>
-      <a href="/post/add" class="button block br-rd-5 white">
+      <a href="/post/add<?php if (!empty($topic_id)) { ?>/<?= $topic_id; ?><?php } ?>" class="button block br-rd5 white">
         <i class="bi bi-plus-lg mr5 middle"></i> <?= lang('create'); ?>
       </a>
     <?php } ?>

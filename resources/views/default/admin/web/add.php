@@ -10,11 +10,11 @@
           <?= csrf_field() ?>
           <div class="boxline max-w780">
             <label class="block" for="post_title">URL</label>
-            <input class="form-input" type="text" name="link_url" value="">
+            <input class="w-100 h30" type="text" name="link_url" value="">
           </div>
           <div class="boxline max-w780">
             <label class="block" for="post_title"><?= lang('title'); ?></label>
-            <input class="form-input" type="text" name="link_title" value="" required>
+            <input class="w-100 h30" type="text" name="link_title" value="" required>
             <div class="size-14 gray-light-2">24 - 250 <?= lang('characters'); ?> («Газета.Ru» — интернет-газета)</div>
           </div>
           <div class="boxline max-w780">
@@ -23,7 +23,7 @@
             <div class="size-14 gray-light-2">24 - 1500 <?= lang('characters'); ?></div>
           </div>
           <?= includeTemplate('/_block/form/select-content', ['type' => 'topic', 'data' => $data, 'action' => 'add', 'title' => lang('topics')]); ?>
-          <input type="submit" class="button block br-rd-5 white" name="submit" value="<?= lang('add'); ?>" />
+          <input type="submit" class="button block br-rd5 white" name="submit" value="<?= lang('add'); ?>" />
         </form>
     </div>
   </div>

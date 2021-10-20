@@ -3,7 +3,7 @@
 </div>
 <main class="col-span-10 mb-col-12">
   <?= breadcrumb('/admin', lang('admin'), null, null, lang('audits')); ?>
-  <div class="bg-white flex flex-row items-center justify-between border-box-1 br-rd-5 p15 mb15">
+  <div class="bg-white flex flex-row items-center justify-between border-box-1 br-rd5 p15 mb15">
     <p class="m0"><?= lang($data['sheet']); ?></p>
     <?php $pages = [
       ['id' => 'audits', 'url' => '/admin/audits', 'content' => lang('new ones'), 'icon' => 'bi bi-vinyl'],

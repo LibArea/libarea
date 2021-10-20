@@ -4,7 +4,7 @@
 <main class="col-span-7 mb-col-12">
   <?= breadcrumb('/', lang('home'), getUrlByName('user', ['login' => $uid['user_login']]), lang('profile'), lang('favorites')); ?>
 
-  <div class="bg-white flex flex-row items-center justify-between border-box-1 br-rd-5 p15 mb15">
+  <div class="bg-white flex flex-row items-center justify-between border-box-1 br-rd5 p15 mb15">
     <p class="m0"><?= lang($data['sheet']); ?></p>
     <?php $pages = [
       ['id' => 'favorites', 'url' => getUrlByName('favorites', ['login' => $uid['user_login']]), 'content' => lang('favorites'), 'icon' => 'bi bi-bookmark'],

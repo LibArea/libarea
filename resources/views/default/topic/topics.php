@@ -2,7 +2,7 @@
   <?= includeTemplate('/_block/menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-7 mb-col-12">
-  <div class="bg-white flex flex-row items-center justify-between border-box-1 br-rd-5 p15 mb15">
+  <div class="bg-white flex flex-row items-center justify-between border-box-1 br-rd5 p15 mb15">
     <p class="m0 size-18"><?= lang('topics'); ?>
       <?php if ($uid['user_trust_level'] == 5) { ?>
         <a class="ml15" href="/admin/topics">
@@ -33,11 +33,11 @@
             <div class="ml5">
               <?php if ($uid['user_id']) { ?>
                 <?php if ($topic['signed_topic_id']) { ?>
-                  <div data-id="<?= $topic['topic_id']; ?>" data-type="topic" class="focus-id right inline br-rd-20 gray-light-2 center mr15 pr15">
+                  <div data-id="<?= $topic['topic_id']; ?>" data-type="topic" class="focus-id right inline br-rd20 gray-light-2 center mr15 pr15">
                     <sup><?= lang('unsubscribe'); ?></sup>
                   </div>
                 <?php } else { ?>
-                  <div data-id="<?= $topic['topic_id']; ?>" data-type="topic" class="focus-id right inline br-rd-20 blue center mr15 pr15">
+                  <div data-id="<?= $topic['topic_id']; ?>" data-type="topic" class="focus-id right inline br-rd20 blue center mr15 pr15">
                     <sup><i class="bi bi-plus"></i> <?= lang('read'); ?></sup>
                   </div>
                 <?php } ?>
@@ -70,9 +70,10 @@
     <div class="bg-white p15">
       <h3 class="uppercase mb5 mt0 font-light size-14 gray"><?= lang('new ones'); ?></h3>
       <?php foreach ($data['news'] as $new) { ?>
-        <a title="<?= $new['topic_title']; ?>" class="bg-blue-100 bg-hover-300 white-hover flex justify-center pt5 pr10 pb5 pl10 mb5 br-rd-20 blue inline size-14" href="<?= getUrlByName('topic', ['slug' => $new['topic_slug']]); ?>">
+        <a title="<?= $new['topic_title']; ?>" class="flex relative pt5 pb5 items-center hidden gray-light" href="<?= getUrlByName('topic', ['slug' => $new['topic_slug']]); ?>">
+          <?= topic_logo_img($new['topic_img'], 'max', $new['topic_title'], 'w24 mr10'); ?>
           <?= $new['topic_title']; ?>
-        </a><br>
+        </a>
       <?php } ?>
     </div>
   <?php } ?>

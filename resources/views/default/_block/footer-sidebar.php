@@ -1,4 +1,4 @@
-<div class="last-comm br-rd-5 border-box-1 p15 mt15 bg-white">
+<div class="last-comm br-rd5 border-box-1 p15 mt15 bg-white">
   <div class="mb-3 size-14">
     <a class="mr15 mb5 inline gray-light" title="<?= lang('all answers'); ?>" href="<?= getUrlByName('answers'); ?>">
       <?= lang('answers-n'); ?>

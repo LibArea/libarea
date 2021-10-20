@@ -4,7 +4,7 @@
 <main class="col-span-7 mb-col-12">
 
   <?= breadcrumb('/', lang('home'), getUrlByName('user', ['login' => $uid['user_login']]), lang('profile'), lang('change avatar')); ?>
-  <div class="bg-white flex flex-row items-center justify-between border-box-1 br-rd-5 p15 mb15">
+  <div class="bg-white flex flex-row items-center justify-between border-box-1 br-rd5 p15 mb15">
     <p class="m0 no-mob"><?= lang($data['sheet']); ?></p>
     <?= includeTemplate('/_block/setting-nav', ['data' => $data, 'uid' => $uid]); ?>
   </div>
@@ -22,7 +22,7 @@
 
       <div class="clear gray size-15">
         <p><?= lang('recommended size'); ?>: 240x240px (jpg, jpeg, png)</p>
-        <p><input type="submit" class="button block br-rd-5 white" value="<?= lang('download'); ?>" /></p>
+        <p><input type="submit" class="button block br-rd5 white" value="<?= lang('download'); ?>" /></p>
       </div>
 
       <?php if ($data['user']['user_cover_art'] != 'cover_art.jpeg') { ?>

@@ -8,8 +8,8 @@
       ['title' => lang('heading'), 'type' => 'text', 'name' => 'post_title', 'value' => $data['post']['post_title'], 'min' => 6, 'max' => 250, 'help' => '6 - 250 ' . lang('characters'), 'red' => 'red'],
     ]]); ?>
 
-    <?= includeTemplate('/_block/form/select-topic-post', ['uid' => $uid,'data' => $data, 'action' => 'edit', 'title' => lang('topics'), 'help' => lang('necessarily'), 'red' => 'red']); ?>
-    
+    <?= includeTemplate('/_block/form/select-topic-post', ['uid' => $uid, 'data' => $data, 'action' => 'edit', 'title' => lang('topics'), 'help' => lang('necessarily'), 'red' => 'red']); ?>
+
     <?php if ($data['post']['post_url']) { ?>
       <div class="boxline">
         <label class="block" for="post_title">URL:</label>
@@ -32,9 +32,7 @@
     <?php } ?>
 
     <div class="boxline post">
-      <div class="boxline">
-        <div class="input-images"></div>
-      </div>
+      <div class="input-images"></div>
     </div>
 
     <?= includeTemplate('/_block/editor/post-editor', ['post_id' => $data['post']['post_id'], 'type' => 'post', 'conten' => $data['post']['post_content']]); ?>
@@ -67,7 +65,7 @@
       <?= includeTemplate('/_block/form/select-content', ['type' => 'user', 'data' => $data, 'action' => 'edit', 'title' => lang('author')]); ?>
     <?php } ?>
 
- 
+
     <?= includeTemplate('/_block/form/select-content', ['type' => 'post', 'data' => $data, 'action' => 'edit', 'title' => lang('related')]); ?>
 
     <div class="boxline">
@@ -75,7 +73,7 @@
         <input type="hidden" name="draft" id="draft" value="1">
       <?php } ?>
       <input type="hidden" name="post_id" id="post_id" value="<?= $data['post']['post_id']; ?>">
-      <input type="submit" class="button white br-rd-5" name="submit" value="<?= lang('edit'); ?>" />
+      <input type="submit" class="button white br-rd5" name="submit" value="<?= lang('edit'); ?>" />
     </div>
   </form>
 </main>

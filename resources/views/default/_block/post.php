@@ -1,7 +1,7 @@
 <?php if (!empty($data['posts'])) { ?>
   <?php foreach ($data['posts'] as $post) { ?>
     <?php $post_url = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
-    <div class="border-box-1 bg-white p20 mb15 br-rd-5 article_<?= $post['post_id']; ?>">
+    <div class="border-box-1 bg-white p20 mb15 br-rd5 article_<?= $post['post_id']; ?>">
       <?php if ($data['sheet'] == 'subscribed') { ?>
         <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id size-14 right">
           <?= lang('unsubscribe'); ?>
@@ -40,12 +40,12 @@
                 <i class="bi bi-patch-question green"></i>
               <?php } ?>
               <?php if ($post['post_translation'] == 1) { ?>
-                <span class="pt5 pr10 pb5 pl10 gray-light bg-yellow-100 br-rd-3 size-14 italic lowercase">
+                <span class="pt5 pr10 pb5 pl10 gray-light bg-yellow-100 br-rd3 size-14 italic lowercase">
                   <?= lang('translation'); ?>
                 </span>
               <?php } ?>
               <?php if ($post['post_tl'] > 0) { ?>
-                <span class="pt5 pr10 pb5 pl10 gray-light bg-orange-100 br-rd-3 italic size-14">
+                <span class="pt5 pr10 pb5 pl10 gray-light bg-orange-100 br-rd3 italic size-14">
                   tl<?= $post['post_tl']; ?>
                 </span>
               <?php } ?>
@@ -74,14 +74,14 @@
         <?php if ($post['post_content_img']) { ?>
           <div class="home-img mt15 flex-auto">
             <a title="<?= $post['post_title']; ?>" href="<?= $post_url; ?>">
-              <?= post_img($post['post_content_img'], $post['post_title'], 'home-img right br-rd-5', 'cover'); ?>
+              <?= post_img($post['post_content_img'], $post['post_title'], 'home-img right br-rd5', 'cover'); ?>
             </a>
           </div>
         <?php } else { ?>  
            <?php if ($post['post_thumb_img']) { ?>
                 <div class="home-img mt15 flex-auto no-mob-max">
             <a title="<?= $post['post_title']; ?>" href="<?= $post_url; ?>">
-              <?= post_img($post['post_thumb_img'], $post['post_title'],  'thumb no-mob br-rd-5 right', 'thumbnails'); ?>
+              <?= post_img($post['post_thumb_img'], $post['post_title'],  'thumb no-mob br-rd5 right', 'thumbnails'); ?>
             </a>
           </div>
             <?php } ?>

@@ -2,7 +2,7 @@
   <?= includeTemplate('/_block/menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-7 mb-col-12 bg-white pt5 pr15 pb5 pl15">
-  <a class="right size-14 button block br-rd-5 white mt5 pb15" href="/notifications/delete">
+  <a class="right size-14 button block br-rd5 white mt5 pb15" href="/notifications/delete">
     <?= lang('i read'); ?>
   </a>
   <?= breadcrumb('/', lang('home'), getUrlByName('user', ['login' => $uid['user_login']]), lang('profile'), lang('notifications')); ?>

@@ -27,7 +27,7 @@
       <div class="col-span-8 flex items-center">
         <div class="lateral no-pc mr10 flex items-center">
           <i class="bi bi-list gray-light-2 size-18"></i>
-          <nav class="lateral-menu bg-white br-rd-3 p5 absolute justify-between mt0 ml0 pl0 sticky size-15">
+          <nav class="lateral-menu bg-white br-rd3 p5 absolute justify-between mt0 ml0 pl0 sticky size-15">
             <a class="pt5 pr10 pb5 pl10 gray block bg-hover-100" href="<?= getUrlByName('topics'); ?>">
               <i class="bi bi-columns-gap middle"></i>
               <span class="ml5"><?= lang('topics'); ?></span>
@@ -50,7 +50,7 @@
         <div class="p10 ml20 no-mob w-100">
           <form class="form r" method="post" action="<?= getUrlByName('search'); ?>">
             <?= csrf_field() ?>
-            <input type="text" name="q" id="search" placeholder="<?= lang('to find'); ?>..." class="h40 bg-gray-100 p5 br-rd-5 size-18 gray w-100">
+            <input type="text" name="q" id="search" placeholder="<?= lang('to find'); ?>..." class="h40 bg-gray-100 p5 br-rd5 size-18 gray w-100">
           </form>
         </div>
       </div>
@@ -65,7 +65,7 @@
                 <?= lang('sign up'); ?>
               </a>
             <?php } ?>
-            <a class="button-primary size-15 br-rd-5 ml30 mr5 block pt5 pr10 pb5 pl10" title="<?= lang('sign in'); ?>" href="<?= getUrlByName('login'); ?>">
+            <a class="button-primary size-15 br-rd5 ml30 mr5 block pt5 pr10 pb5 pl10" title="<?= lang('sign in'); ?>" href="<?= getUrlByName('login'); ?>">
               <?= lang('sign in'); ?>
             </a>
           </div>
@@ -96,7 +96,7 @@
               <a class="relative w-auto">
                 <?= user_avatar_img($uid['user_avatar'], 'small', $uid['user_login'], 'w34 br-rd-50'); ?>
               </a>
-              <div class="dropdown-menu right0 bg-white size-15 br-rd-3 p5 absolute">
+              <div class="dropdown-menu right0 bg-white size-15 br-rd3 p5 absolute">
                 <a class="pt5 pr10 pb5 pl10 block gray bg-hover-100" href="<?= getUrlByName('user', ['login' => $uid['user_login']]); ?>">
                   <i class="bi bi-person middle mr5"></i>
                   <span class="middle size-14"><?= lang('profile'); ?></span>

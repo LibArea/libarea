@@ -37,6 +37,8 @@ Route::before('Authorization@noAuth')->getGroup();
 
     // Форма добавления, общий случай: post | topic |  web
     Route::get('/{controller}/add')->controller('<controller>\Add<controller>Controller@add');
+    // Из темы
+    Route::get('/post/add/{topic_id}')->controller('Post\AddPostController@add')->where(['topic_id' => '[0-9]+']);
     // Форма изменения, общий случай: post | topic | answer
     Route::get('/{controller}/edit/{id}')->controller('<controller>\Edit<controller>Controller@edit')->where(['id' => '[0-9]+']);
 

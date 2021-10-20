@@ -17,7 +17,7 @@
         </div>
         <div class="clear">
           <p><?= lang('recommended size'); ?>: 240x240px (jpg, jpeg, png)</p>
-          <p><input type="submit" class="button block br-rd-5 white" value="<?= lang('download'); ?>" /></p>
+          <p><input type="submit" class="button block br-rd5 white" value="<?= lang('download'); ?>" /></p>
         </div>
 
         <?= includeTemplate('/_block/form/field-input', [
@@ -192,7 +192,7 @@
 
         <div class="boxline">
           <input type="hidden" name="topic_id" value="<?= $data['topic']['topic_id']; ?>">
-          <input type="submit" name="submit" class="button block br-rd-5 white" value="<?= lang('add'); ?>" />
+          <input type="submit" name="submit" class="button block br-rd5 white" value="<?= lang('add'); ?>" />
         </div>
       </form>
     </div>

@@ -1,6 +1,6 @@
 <?php if ($uid['user_id'] == 0) { ?>
   <div class="col-span-12 grid items-center grid-cols-12 mb5">
-    <div class="col-span-12 bg-white border-box-1 br-rd-5 p20 center">
+    <div class="col-span-12 bg-white border-box-1 br-rd5 p20 center">
       <h1 class="size-31 mt0"><?= Config::get('meta.bannertitle'); ?></h1>
       <div class="size-18 gray-light mb5"><?= Config::get('meta.bannerdesc'); ?>...</div>
     </div>
@@ -12,7 +12,7 @@
 </div>
 
 <main class="col-span-7 mb-col-12">
-  <div class="bg-white flex flex-row items-center justify-between border-box-1 br-rd-5 p15 mb15">
+  <div class="bg-white flex flex-row items-center justify-between border-box-1 br-rd5 p15 mb15">
     <p class="m0 size-18"><?= lang($data['sheet']); ?></p>
     <?php $pages = [
       ['id' => 'feed', 'url' => '/', 'content' => lang('feed'), 'icon' => 'bi bi-sort-down'],
@@ -24,7 +24,7 @@
   </div>
   <?php if (Request::getUri() == '/' && $uid['user_id'] > 0 && empty($data['topics_user'])) { ?>
     <div class="center">
-      <a class="bg-blue-100 bg-hover-300 white-hover flex justify-center pt5 pr10 pb5 pl10 br-rd-5 p15 mb15 blue size-14" href="/topics">
+      <a class="bg-blue-100 bg-hover-300 white-hover flex justify-center pt5 pr10 pb5 pl10 br-rd5 p15 mb15 blue size-14" href="/topics">
         <i class="bi bi-lightbulb middle mr5"></i>
         <?= lang('topic-subscription'); ?>
       </a>
@@ -42,7 +42,7 @@
 
 
   <?php if ($uid['user_id'] > 0 && !empty($data['topics_user'])) { ?>
-    <div class="border-box-1 p15 mb15 br-rd-5 bg-white size-14">
+    <div class="border-box-1 p15 mb15 br-rd5 bg-white size-14">
       <a class="right gray-light-2" title="<?= lang('topics'); ?>" href="<?= getUrlByName('topic.my'); ?>">
         <i class="bi bi-chevron-right middle"></i>
       </a>
@@ -70,22 +70,22 @@
   
   
    <?php if ($uid['user_id'] == 0) { ?>
-    <div class="border-box-1 p15 mb15 br-rd-5 bg-white size-14">
+    <div class="border-box-1 p15 mb15 br-rd5 bg-white size-14">
        <div class="uppercase gray mt5 mb5">
         <?= lang('topics'); ?>
       </div>
         <?php foreach (Config::get('topics-default') as $key => $topic) { ?>
            <a class="flex relative pt5 pb5 items-center hidden gray-light" href="<?= $topic['url']; ?>">
-           <img class="w24 mr5" src="<?= $topic['img']; ?>" alt="<?= $topic['name']; ?>">
+            <img class="w24 mr5 border-box-1" src="<?= $topic['img']; ?>" alt="<?= $topic['name']; ?>">
             <span class="ml5"><?= $topic['name']; ?></span>
-            </a>
+           </a>
         <?php } ?>
       </div>
     <?php } ?>  
 
   <div class="sticky top0 t-81">
     <?php if (!empty($data['latest_answers'])) { ?>
-      <div class="last-comm border-box-1 p5 pr15 pb5 pl15 bg-white br-rd-5">
+      <div class="last-comm border-box-1 p5 pr15 pb5 pl15 bg-white br-rd5">
         <?php foreach ($data['latest_answers'] as $answer) { ?>
           <div class="mt15 mr0 mb15 ml0">
             <div class="size-14 gray-light-2">

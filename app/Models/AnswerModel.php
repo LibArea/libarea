@@ -33,14 +33,14 @@ class AnswerModel extends MainModel
     public static function getAnswersAll($page, $limit, $uid, $sheet)
     {
         if ($sheet == 'user') {
-            $sort = 'WHERE answer_is_deleted = 0 AND post_tl = 0';
+            $sort = 'WHERE answer_is_deleted = 0 AND post_tl = 0 AND post_is_deleted = 0';
             if ($uid['user_trust_level']) {
-                $sort = 'WHERE answer_is_deleted = 0 AND post_tl <= ' . $uid['user_trust_level'] . '';
+                $sort = 'WHERE answer_is_deleted = 0 AND post_is_deleted = 0 AND post_tl <= ' . $uid['user_trust_level'] . '';
             }
         } else {  
-            $sort = "WHERE answer_is_deleted = 0";
+            $sort = "WHERE answer_is_deleted = 0 AND post_is_deleted = 0";
             if ($sheet == 'ban') {
-                $sort = "WHERE answer_is_deleted = 1";
+                $sort = "WHERE answer_is_deleted = 1 OR post_is_deleted = 1";
             }        
         }
 
@@ -50,6 +50,7 @@ class AnswerModel extends MainModel
                     post_title,
                     post_slug,
                     post_type,
+                    post_is_deleted,
                     answer_id,
                     answer_content,
                     answer_date,
@@ -173,6 +174,7 @@ class AnswerModel extends MainModel
                     post_id,
                     post_title,
                     post_slug,
+                    post_is_deleted,
                     user_id, 
                     user_login, 
                     user_avatar
@@ -180,7 +182,7 @@ class AnswerModel extends MainModel
                         LEFT JOIN users ON user_id = answer_user_id
                         LEFT JOIN posts ON answer_post_id = post_id
                         WHERE user_login = :slug
-                        AND answer_is_deleted = 0 AND post_tl = 0 AND post_tl = 0
+                        AND answer_is_deleted = 0 AND post_is_deleted = 0 AND post_tl = 0 AND post_tl = 0
                         ORDER BY answer_id DESC";
 
         return DB::run($sql, ['slug' => $slug])->fetchAll(PDO::FETCH_ASSOC);

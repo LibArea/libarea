@@ -18,9 +18,9 @@
   <div class="boxline">
     <label class="required block pt15 pb5"><?= lang('Email'); ?></label>
     <form action="<?= getUrlByName('admin.test.mail');?>" method="post">
-        <input class="form-input" type="mail" name="mail" value="">
+        <input class="w-100 h30" type="mail" name="mail" value="">
         <div class="size-14 gray-light-2"><?= lang('test-email'); ?>...</div>
-        <input type="submit" class="button block mt5 br-rd-5 white" name="submit" value="<?= lang('send'); ?>" />
+        <input type="submit" class="button block mt5 br-rd5 white" name="submit" value="<?= lang('send'); ?>" />
     </form>
   </div>
 </main>

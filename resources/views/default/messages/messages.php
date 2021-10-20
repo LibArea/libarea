@@ -1,5 +1,5 @@
 <main class="col-span-7 mb-col-12">
-  <div class="bg-white br-rd-5 border-box-1 pt5 pr15 pb5 pl15">
+  <div class="bg-white br-rd5 border-box-1 pt5 pr15 pb5 pl15">
     <?= breadcrumb('/', lang('home'), getUrlByName('user', ['login' => $uid['user_login']]), lang('profile'), lang('private messages')); ?>
 
     <?php if (!empty($data['messages'])) { ?>
@@ -21,7 +21,7 @@
               <?= lang_date($msg['dialog_update_time']); ?>
             </span>
           </div>
-          <div class="p15 br-rd-5 mt5 relative bg-blue-100<?php if (!$msg['unread'] > 0) { ?> bg-purple-100<?php } ?> gray">
+          <div class="p15 br-rd5 mt5 relative bg-blue-100<?php if (!$msg['unread'] > 0) { ?> bg-purple-100<?php } ?> gray">
             <?= $msg['message']['message_content']; ?>
           </div>
           <a class="lowercase size-14 right" href="/messages/read/<?= $msg['dialog_id']; ?>">

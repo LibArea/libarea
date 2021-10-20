@@ -23,7 +23,7 @@
     <?php } else { ?>
       <div class="profile-box relative">
       <?php } ?>
-      <?= user_avatar_img($data['user']['user_avatar'], 'max', $data['user']['user_login'], 'w160 ml10 bottom-20 mt20 br-rd-5 absolute center'); ?>
+      <?= user_avatar_img($data['user']['user_avatar'], 'max', $data['user']['user_login'], 'w160 ml10 bottom-20 mt20 br-rd5 absolute center'); ?>
       </div>
 
       <div class="flex flex-row gap-4 mt20 flex-auto">
@@ -33,12 +33,12 @@
           <?php if ($uid['user_id'] > 0) { ?>
             <div class="pb15 mb15">
               <?php if ($uid['user_login'] == $data['user']['user_login']) { ?>
-                <a class="button block br-rd-5 white center mb15" href="<?= getUrlByName('user', ['login' => $data['user']['user_login']]); ?>/setting">
+                <a class="button block br-rd5 white center mb15" href="<?= getUrlByName('user', ['login' => $data['user']['user_login']]); ?>/setting">
                   <?= lang('settings'); ?>
                 </a>
               <?php } else { ?>
                 <?php if ($data['button_pm'] === true) { ?>
-                  <a class="button br-rd-5 white center size-14" href="<?= getUrlByName('user', ['login' => $data['user']['user_login']]); ?>/mess">
+                  <a class="button br-rd5 white center size-14" href="<?= getUrlByName('user', ['login' => $data['user']['user_login']]); ?>/mess">
                     <?= lang('write a message'); ?>
                   </a>
                 <?php } ?>
@@ -201,7 +201,7 @@
               <?= lang('understands'); ?>
             </h3>
             <?php foreach ($data['participation'] as $part) { ?>
-               <a class="bg-blue-100 bg-hover-300 white-hover pt5 pr10 pb5 pl10 mb5 br-rd-20 blue inline size-14" href="<?= getUrlByName('topic', ['slug' => $part['topic_slug']]); ?>">
+               <a class="bg-blue-100 bg-hover-300 white-hover pt5 pr10 pb5 pl10 mb5 br-rd20 blue inline size-14" href="<?= getUrlByName('topic', ['slug' => $part['topic_slug']]); ?>">
                 <?= $part['topic_title']; ?>
                 </a>
             <?php } ?>

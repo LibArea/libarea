@@ -7,7 +7,7 @@
         <input type="hidden" name="post_id" id="post_id" value="<?= $data['post_id']; ?>">
         <input type="hidden" name="answer_id" id="answer_id" value="<?= $data['answer_id']; ?>">
         <input type="hidden" name="comment_id" id="comment_id" value="<?= $data['comment_id']; ?>">
-        <input type="submit" class="button br-rd-5 white mt5" name="commit" value="<?= lang('comment'); ?>">
+        <input type="submit" class="button br-rd5 white mt5" name="commit" value="<?= lang('comment'); ?>">
         <input id="cancel_comment" class="cancel gray" type="button" value="<?= lang('cancel'); ?>">
       </div>
     </form>
@@ -16,7 +16,7 @@
     <div>
       <input type="hidden" name="post_id" id="post_id" value="<?= $data['post_id']; ?>">
       <input type="hidden" name="answer_id" id="answer_id" value="<?= $data['answer_id']; ?>">
-      <input type="submit" class="button br-rd-5 white mt5" name="commit" value="<?= lang('comment'); ?>">
+      <input type="submit" class="button br-rd5 white mt5" name="commit" value="<?= lang('comment'); ?>">
       <input id="cancel_comment" class="cancel gray" type="button" value="<?= lang('cancel'); ?>">
     </div>
   <?php } ?>

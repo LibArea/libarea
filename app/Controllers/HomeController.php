@@ -51,7 +51,7 @@ class HomeController extends MainController
         $m = [
             'og'         => true,
             'twitter'    => true,
-            'imgurl'     => '/assets/images/agouti.webp',
+            'imgurl'     => '/assets/images/agouti-max.png',
             'url'        => $sheet == 'top' ? '/top' : '/',
         ];
         $meta = meta($m, $meta_title, $meta_desc);

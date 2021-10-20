@@ -9,23 +9,9 @@
       <?php } ?>
     </select>
   <?php } else { ?>
-    <select name="topic_select[]" multiple="multiple" id='topic'></select>
+    <select name="topic_select[]" value="" multiple="multiple" id='topic'></select>
   <?php } ?>
 </div>
-
-<?php
-// Рекомендованные и / или предустановленные значения
-/* https://stackoverflow.com/questions/19639951/how-do-i-change-selected-value-of-select2-dropdown-with-jqgrid
-    <div id="change-trigger" class="inline blue mb20">факты</div>
-     
-    $('#change-trigger').on('click', function () {
-     let intValueOfFruit = 14;
-     let selectOption = new Option("Факты", intValueOfFruit, true, true);
-     $('#topic').append(selectOption).trigger('change');
-   }); */
-
-?>
-
 <script nonce="<?= $_SERVER['nonce']; ?>">
   <?php if (!empty($help)) { ?>
     let help = '<?= $help; ?>';
@@ -68,5 +54,10 @@
       return $state;
     };
 
+    <?php if (!empty($data['topic']['topic_id'])) { ?>
+      let intValueOfFruit = "<?= $data['topic']['topic_id']; ?>";
+      let selectOption = new Option("<?= $data['topic']['topic_title']; ?>", intValueOfFruit, true, true);
+      $('#topic').append(selectOption).trigger('change');
+    <?php } ?>
   });
 </script>

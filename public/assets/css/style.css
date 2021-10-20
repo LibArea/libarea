@@ -207,9 +207,10 @@ img {
 .h120 { height: 120px; }
 .h150 { height: 150px; }
 
-.br-rd-3 { border-radius: 3px; }
-.br-rd-5 { border-radius: 5px; }
-.br-rd-20 { border-radius: 20px; }
+.br-rd3 { border-radius: 3px; }
+.br-rd5 { border-radius: 5px; }
+.br-rd20 { border-radius: 20px; }
+.br-rd-42 { border-radius: 42%; }
 .br-rd-50 { border-radius: 50%; }
 
 .size-14 { font-size: 0.875rem; }
@@ -375,26 +376,6 @@ textarea {
   border: 1px solid #ebebeb;
 }
 
-.form-input {
-  transition: all 0.2s ease;
-  appearance: none;
-  background-image: none;
-  border-radius: 3px;
-  color: #50596c;
-  display: block;
-  font-size: 1rem;
-  height: 1.8rem;
-  line-height: 1rem;
-  max-width: 100%;
-  outline: none;
-  padding: 0.35rem 0.4rem;
-  position: relative;
-  width: 100%;
-}
-
-.form-input:focus,
-textarea:focus { box-shadow: 0 0 0 0.1rem rgba(38, 139, 210, 0.2); }
-
 .boxline {
   clear: both;
   margin-bottom: 0.9rem;
@@ -432,8 +413,9 @@ textarea:focus { box-shadow: 0 0 0 0.1rem rgba(38, 139, 210, 0.2); }
   color: #688ffb;
 }
 
-input { border: 1px solid #ebebeb; }
-input:focus { border: 1px solid #9ccdf8; }
+input { border: 1px solid #e2e6ed; }
+input:focus,
+textarea:focus { border: 1px solid #9ccdf8; }
 
 ::placeholder {
   color: #919191;
@@ -521,7 +503,6 @@ ol.comment-telo { padding-left: 23px; }
 }
 
 .dark .bg-gray-100,
-.dark .form-input,
 .dark textarea,
 .dark blockquote,
 .dark table tr:nth-of-type(2n) {

@@ -23,11 +23,11 @@
       <?php csrf_field(); ?>
       <div class="boxline">
         <label for="email" class="block">E-mail</label>
-        <input type="text" class="form-input" placeholder="<?= lang('enter'); ?>  e-mail" name="email" id="email">
+        <input type="text" class="w-100 h30" placeholder="<?= lang('enter'); ?>  e-mail" name="email" id="email">
       </div>
       <div class="boxline">
         <label for="password" class="form-label"><?= lang('password'); ?></label>
-        <input type="password" placeholder="<?= lang('enter your password'); ?>" name="password" id="password" class="form-input">
+        <input type="password" placeholder="<?= lang('enter your password'); ?>" name="password" id="password" class="w-100 h30">
       </div>
       <div class="boxline">
         <button type="submit" class="button-primary pt10 pr15 pb10 pl15 size-13 white">

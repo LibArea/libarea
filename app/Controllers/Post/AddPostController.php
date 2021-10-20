@@ -184,9 +184,13 @@ class AddPostController extends MainController
         $user = UserModel::getUser($this->uid['user_id'], 'id');
         Base::accountBan($user);
 
-        $meta = meta($m = [], lang('add post'));
+        // Добавление со странице темы
+        $topic_id   = Request::getInt('topic_id');
+        $topic      = TopicModel::getTopic($topic_id, 'id');
 
-        return view('/post/add', ['meta' => $meta, 'uid' => $this->uid, 'data' => []]);
+        $meta = meta($m = [], lang('add post'));
+        
+        return view('/post/add', ['meta' => $meta, 'uid' => $this->uid, 'data' => ['topic' => $topic]]);
     }
 
     // Парсинг

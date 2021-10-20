@@ -1,5 +1,5 @@
 <main class="col-span-9 mb-col-12">
-  <article class="post-full border-box-1 br-rd-5 bg-white<?php if ($data['post']['post_is_deleted'] == 1) { ?> bg-red-300<?php } ?> pt0 pr5 pb5 pl15">
+  <article class="post-full border-box-1 br-rd5 bg-white<?php if ($data['post']['post_is_deleted'] == 1) { ?> bg-red-300<?php } ?> pt0 pr5 pb5 pl15">
     <?php if ($data['post']['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
       <div class="post-body">
         <h1 class="title mb0 size-24">
@@ -20,12 +20,12 @@
             <i class="bi bi-patch-question green"></i>
           <?php } ?>
           <?php if ($data['post']['post_translation'] == 1) { ?>
-            <span class="pt5 pr10 pb5 pl10 gray-light bg-yellow-100 br-rd-3 size-14 italic lowercase">
+            <span class="pt5 pr10 pb5 pl10 gray-light bg-yellow-100 br-rd3 size-14 italic lowercase">
               <?= lang('translation'); ?>
             </span>
           <?php } ?>
           <?php if ($data['post']['post_tl'] > 0) { ?>
-            <span class="pt5 pr10 pb5 pl10 gray-light bg-orange-100 br-rd-3 italic size-14">
+            <span class="pt5 pr10 pb5 pl10 gray-light bg-orange-100 br-rd3 italic size-14">
               tl<?= $data['post']['post_tl']; ?>
             </span>
           <?php } ?>
@@ -89,7 +89,7 @@
 
         <?php if ($data['post']['post_url_domain']) { ?>
           <div class="mb15">
-            <a rel="nofollow noreferrer ugc" target="_blank" class="button br-rd-5 white" href="<?= $data['post']['post_url']; ?>">
+            <a rel="nofollow noreferrer ugc" target="_blank" class="button br-rd5 white" href="<?= $data['post']['post_url']; ?>">
               <?= lang('details are here'); ?> <i class="bi bi-folder-symlink ml5"></i>
             </a>
           </div>
@@ -139,7 +139,7 @@
           <div class="mb20">
             <h3 class="uppercase mb5 mt0 font-light size-14 gray"><?= lang('topics'); ?>:</h3>
             <?php foreach ($data['topics'] as $topic) { ?>
-              <a class="bg-blue-100 bg-hover-300 white-hover flex justify-center pt5 pr10 pb5 pl10 br-rd-20 blue inline size-14" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
+              <a class="bg-blue-100 bg-hover-300 white-hover flex justify-center pt5 pr10 pb5 pl10 br-rd20 blue inline size-14" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
                 <?= $topic['topic_title']; ?>
               </a>
             <?php } ?>
@@ -175,16 +175,16 @@
       </div>
       <div class="hidden">
         <?php if (!$uid['user_id']) { ?>
-          <a class="right size-14 mt5 add-focus br-rd-20 center pt5 pr15 pb5 pl15" href="<?= getUrlByName('login'); ?>">
+          <a class="right size-14 mt5 add-focus br-rd20 center pt5 pr15 pb5 pl15" href="<?= getUrlByName('login'); ?>">
             + <?= lang('Read'); ?>
           </a>
         <?php } else { ?>
           <?php if (is_array($data['post_signed'])) { ?>
-            <div data-id="<?= $data['post']['post_id']; ?>" data-type="post" class="focus-id size-14 right mt5 del-focus br-rd-20 center pt5 pr15 pb5 pl15">
+            <div data-id="<?= $data['post']['post_id']; ?>" data-type="post" class="focus-id size-14 right mt5 del-focus br-rd20 center pt5 pr15 pb5 pl15">
               <?= lang('unsubscribe'); ?>
             </div>
           <?php } else { ?>
-            <div data-id="<?= $data['post']['post_id']; ?>" data-type="post" class="focus-id size-14 right mt5 add-focus br-rd-20 center pt5 pr15 pb5 pl15">
+            <div data-id="<?= $data['post']['post_id']; ?>" data-type="post" class="focus-id size-14 right mt5 add-focus br-rd20 center pt5 pr15 pb5 pl15">
               + <?= lang('read'); ?>
             </div>
           <?php } ?>
@@ -199,7 +199,7 @@
           <?php } else { ?>
             <textarea rows="5" class="bg-gray-000 mt15" disabled="disabled" placeholder="<?= lang('no-auth-comm'); ?>" name="answer" id="answer"></textarea>
             <div>
-              <input type="submit" name="answit" value="<?= lang('reply'); ?>" class="button block br-rd-5 white" disabled="disabled">
+              <input type="submit" name="answit" value="<?= lang('reply'); ?>" class="button block br-rd5 white" disabled="disabled">
             </div>
           <?php } ?>
         <?php } else { ?>
@@ -229,15 +229,15 @@
     <?= includeTemplate('/_block/no-content', ['lang' => 'this is a draft']); ?>
   <?php } ?>
 </main>
-<aside class="col-span-3 br-rd-5 no-mob">
+<aside class="col-span-3 br-rd5 no-mob">
   <?php if ($data['post']['post_content_img']) { ?>
-    <div class="border-box-1 bg-white br-rd-5 mb15">
+    <div class="border-box-1 bg-white br-rd5 mb15">
       <div id="layer-photos" class="layer-photos p15">
-        <?= post_img($data['post']['post_content_img'], $data['post']['post_title'], 'w-100 br-rd-5', 'cover', $data['post']['post_content_img']); ?>
+        <?= post_img($data['post']['post_content_img'], $data['post']['post_title'], 'w-100 br-rd5', 'cover', $data['post']['post_content_img']); ?>
       </div>
     </div>
   <?php } ?>
-  <div class="border-box-1 bg-white br-rd-5 mb15 p15">
+  <div class="border-box-1 bg-white br-rd5 mb15 p15">
     <div class="social center" data-url="<?= Config::get('meta.url') . getUrlByName('post', ['id' => $data['post']['post_id'], 'slug' => $data['post']['post_slug']]); ?>" data-title="<?= $data['post']['post_title']; ?>">
       <a class="size-21 pl15 pr15 gray-light-2" data-id="fb"><i class="bi bi-facebook"></i></a>
       <a class="size-21 pl15 pr15 gray-light-2" data-id="vk">VK</a>
@@ -246,17 +246,17 @@
   </div>
 
   <?php if ($data['recommend']) { ?>
-    <div class="border-box-1 bg-white br-rd-5 mb15 post-view sticky recommend p15">
+    <div class="border-box-1 bg-white br-rd5 mb15 post-view sticky recommend p15">
       <h3 class="uppercase mb10 mt0 font-light size-14 gray"><?= lang('recommended'); ?></h3>
       <?php foreach ($data['recommend'] as  $rec_post) { ?>
         <div class="mb15 hidden flex">
           <a class="gray size-15" href="<?= getUrlByName('post', ['id' => $rec_post['post_id'], 'slug' => $rec_post['post_slug']]); ?>">
             <?php if ($rec_post['post_answers_count'] > 0) { ?>
-              <div class="p5 pr10 pb5 pl10 bg-green-400 br-rd-3 white size-14 center mr15">
+              <div class="p5 pr10 pb5 pl10 bg-green-400 br-rd3 white size-14 center mr15">
                 <?= $rec_post['post_answers_count'] ?>
               </div>
             <?php } else { ?>
-              <div class="p5 pr10 pb5 pl10 bg-gray-300 br-rd-3 gray size-14 center mr15">0</div>
+              <div class="p5 pr10 pb5 pl10 bg-gray-300 br-rd3 gray size-14 center mr15">0</div>
             <?php } ?>
           </a>
           <a class="black size-14" href="<?= getUrlByName('post', ['id' => $rec_post['post_id'], 'slug' => $rec_post['post_slug']]); ?>">

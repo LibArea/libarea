@@ -6,7 +6,7 @@
    <div class="clear">
      <input type="hidden" name="post_id" id="post_id" value="<?= $post_id; ?>">
      <input type="hidden" name="answer_id" id="answer_id" value="0">
-     <input type="submit" name="answit" value="<?= lang('reply'); ?>" class="button white br-rd-5 mt5">
+     <input type="submit" name="answit" value="<?= lang('reply'); ?>" class="button white br-rd5 mt5">
    </div>
  </form>
  <?= includeTemplate('/_block/editor/config-editor', ['post_id' => $post_id, 'type' => 'answer', 'width100' => 'no']); ?>

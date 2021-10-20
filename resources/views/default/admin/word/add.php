@@ -9,9 +9,9 @@
       <?= csrf_field() ?>
       <div class="boxline max-w780">
         <label class="block" or="post_title"><?= lang('stop word'); ?></label>
-        <input type="text" class="form-input" name="word">
+        <input type="text" class="w-100 h30" name="word">
       </div>
-      <input type="submit" class="button block br-rd-5 white" name="submit" value="<?= lang('add'); ?>" />
+      <input type="submit" class="button block br-rd5 white" name="submit" value="<?= lang('add'); ?>" />
     </form>
   </div>
 </main>

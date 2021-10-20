@@ -11,7 +11,7 @@ class WelcomeController extends MainController
     {
         $meta = meta($m = [], lang('welcome'));
         $data = [
-            'content'       => Content::text(lang('welcome-text'), 'text'),
+            'content'   => Content::text(lang('welcome-text'), 'text'),
         ];
 
         return view('/welcome/index', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);

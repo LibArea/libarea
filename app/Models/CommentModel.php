@@ -78,15 +78,15 @@ class CommentModel extends MainModel
     {
         if ($sheet == 'user') {
             if (!$uid['user_trust_level']) {
-                $tl = 'AND comment_is_deleted = 0 AND post_tl = 0';
+                $tl = 'AND comment_is_deleted = 0 AND post_tl = 0 AND post_is_deleted = 0';
             } else {
-                $tl = 'AND comment_is_deleted = 0 AND post_tl <= ' . $uid['user_trust_level'] . '';
+                $tl = 'AND comment_is_deleted = 0 AND post_is_deleted = 0 AND post_tl <= ' . $uid['user_trust_level'] . '';
             }
             $sort = '';
         } else {
-            $sort = "WHERE comment_is_deleted = 0";
+            $sort = "WHERE comment_is_deleted = 0 AND post_is_deleted = 0";
             if ($sheet == 'ban') {
-                $sort = "WHERE comment_is_deleted = 1";
+                $sort = "WHERE comment_is_deleted = 1 OR post_is_deleted = 1";
             }
             $tl = '';
         }
@@ -98,6 +98,7 @@ class CommentModel extends MainModel
                     post_slug,
                     post_tl,
                     post_type,
+                    post_is_deleted,
                     comment_id,
                     comment_ip,
                     comment_date,
@@ -180,13 +181,14 @@ class CommentModel extends MainModel
                     post_id, 
                     post_slug,
                     post_title,
+                    post_is_deleted,
                     user_id, 
                     user_login, 
                     user_avatar
                         FROM comments 
                         LEFT JOIN users  ON user_id = comment_user_id
                         LEFT JOIN posts  ON comment_post_id = post_id 
-                        WHERE user_login = :slug AND comment_is_deleted = 0 AND post_tl = 0
+                        WHERE user_login = :slug AND comment_is_deleted = 0 AND post_is_deleted = 0 AND post_tl = 0
                         ORDER BY comment_id DESC LIMIT 100";
 
         return DB::run($sql, ['slug' => $slug])->fetchAll(PDO::FETCH_ASSOC);

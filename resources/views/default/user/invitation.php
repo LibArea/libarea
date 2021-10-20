@@ -1,13 +1,13 @@
 <main class="col-span-9 mb-col-12">
-  <div class="bg-white br-rd-5 border-box-1 pt5 pr15 pb10 pl15">
+  <div class="bg-white br-rd5 border-box-1 pt5 pr15 pb10 pl15">
     <?= breadcrumb('/', lang('home'), getUrlByName('user', ['login' => $uid['user_login']]), lang('profile'), lang('invites')); ?>
 
     <?php if ($uid['user_trust_level'] > 1) { ?>
       <form method="post" action="/invitation/create">
         <?php csrf_field(); ?>
         <div class="boxline">
-          <input id="link" class="form-input" type="email" name="email">
-          <input class="button block br-rd-5 white right mt5" type="submit" name="submit" value="<?= lang('send'); ?>">
+          <input id="link" class="w-100 h30" type="email" name="email">
+          <input class="button block br-rd5 white right mt5" type="submit" name="submit" value="<?= lang('send'); ?>">
           <div class="size-14 gray-light-2"><?= lang('enter'); ?> E-mail</div>
         </div>
         <?= lang('invitations left'); ?> <?= 5 - $data['count_invites']; ?>

@@ -165,13 +165,14 @@ class HomeModel extends MainModel
                     post_id,
                     post_tl,
                     post_slug,
+                    post_is_deleted,
                     user_id,
                     user_login,
                     user_avatar
                         FROM answers 
                         LEFT JOIN posts ON post_id = answer_post_id
                         LEFT JOIN users ON user_id = answer_user_id
-                        WHERE answer_is_deleted = :zero 
+                        WHERE answer_is_deleted = :zero AND post_is_deleted = :zero
                         $user_answer 
                         ORDER BY answer_id DESC LIMIT 5";
  

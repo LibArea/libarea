@@ -24,7 +24,7 @@
         <textarea rows="6" class="add" minlength="44" name="topic_description"></textarea>
         <div class="size-14 gray-light-2">> 44 <?= lang('characters'); ?></div>
       </div>
-      <input type="submit" name="submit" class="button block br-rd-5 white" value="<?= lang('add'); ?>" />
+      <input type="submit" name="submit" class="button block br-rd5 white" value="<?= lang('add'); ?>" />
     </form>
   </div>
 </main>

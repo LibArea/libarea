@@ -9,7 +9,7 @@
   <div class="boxline">
     <input type="hidden" name="post_id" id="post_id" value="<?= $post_id; ?>">
     <input type="hidden" name="answer_id" id="answer_id" value="<?= $answer_id; ?>">
-    <input type="submit" class="button br-rd-5 white mt5" name="answit" value="<?= lang('edit'); ?>">
+    <input type="submit" class="button br-rd5 white mt5" name="answit" value="<?= lang('edit'); ?>">
   </div>
 </form>
 <?= includeTemplate('/_block/editor/config-editor', ['post_id' => $post_id, 'type' => 'answer', 'width100' => 'yes']); ?>

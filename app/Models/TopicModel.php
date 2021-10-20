@@ -93,7 +93,8 @@ class TopicModel extends MainModel
         $sql = "SELECT 
                     topic_id,
                     topic_title,
-                    topic_slug
+                    topic_slug,
+                    topic_img
                         FROM topics ORDER BY topic_id DESC LIMIT $count";
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
@@ -158,7 +159,7 @@ class TopicModel extends MainModel
             $string = "topic_id IN(0, " . $topic_related . ")";
         }
 
-        $sql = "SELECT topic_id, topic_title, topic_slug FROM topics WHERE $string ";
+        $sql = "SELECT topic_id, topic_title, topic_slug, topic_img FROM topics WHERE $string ";
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -177,7 +178,8 @@ class TopicModel extends MainModel
                     topic_id, 
                     topic_title, 
                     topic_slug, 
-                    topic_parent_id 
+                    topic_parent_id,
+                    topic_img                    
                         FROM topics WHERE topic_parent_id = :topic_id";
 
         return DB::run($sql, ['topic_id' => $topic_id])->fetchAll(PDO::FETCH_ASSOC);
