@@ -7,7 +7,7 @@
   <div class="box badges">
     <form action="/admin/badge/user/add" method="post">
       <?= csrf_field() ?>
-      <div class="boxline">
+      <div class="mb20">
         <label class="block" for="post_content"><?= lang('badge'); ?></label>
         <select class="w-100 h30" name="badge_id">
           <?php foreach ($data['badges'] as $badge) { ?>

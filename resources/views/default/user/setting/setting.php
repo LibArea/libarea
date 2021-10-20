@@ -10,15 +10,15 @@
 
   <div class="bg-white border-box-1 pt15 pr15 pb5 pl15">
 
-    <form action="/users/setting/edit" method="post" enctype="multipart/form-data">
+    <form class="max-w640" action="/users/setting/edit" method="post" enctype="multipart/form-data">
       <?php csrf_field(); ?>
 
-      <div class="boxline">
+      <div class="mb20">
         <?= user_avatar_img($data['user']['user_avatar'], 'small', $data['user']['user_login'], 'mr5 ml5 ava'); ?>
         <span class="mr5 ml5"><?= $data['user']['user_login']; ?></span>
       </div>
 
-      <div class="boxline">
+      <div class="mb20">
         <span class="name gray">E-mail:</span>
         <span class="mr5 ml5"><?= $data['user']['user_email']; ?></span>
       </div>
@@ -29,7 +29,7 @@
 
       <?php includeTemplate('/_block/editor/textarea', ['title' => lang('about me'), 'type' => 'text', 'name' => 'about', 'content' => $data['user']['user_about'], 'min' => 0, 'max' => 255, 'help' => '0 - 255 ' . lang('characters')]); ?>
 
-      <div id="box" class="boxline">
+      <div id="box" class="mb20">
         <label class="block" for="post_content"><?= lang('color'); ?></label>
         <input type="color" value="<?= $data['user']['user_color']; ?>" id="colorPicker">
         <input type="hidden" name="color" value="<?= $data['user']['user_color']; ?>" id="color">
@@ -41,7 +41,7 @@
 
       <h3><?= lang('contacts'); ?></h3>
       <?php foreach (Config::get('fields-profile') as $block) { ?>
-        <div class="boxline">
+        <div class="mb20">
           <label class="block" for="post_title"><?= $block['lang']; ?></label>
           <input class="w-100 h30" maxlength="150" type="text" value="<?= $data['user'][$block['title']]; ?>" name="<?= $block['name']; ?>">
           <?php if ($block['help']) { ?>
@@ -50,7 +50,7 @@
         </div>
       <?php } ?>
 
-      <div class="boxline">
+      <div class="mb20">
         <input type="hidden" name="nickname" id="nickname" value="">
         <button type="submit" class="button br-rd5 white"><?= lang('edit'); ?></button>
       </div>

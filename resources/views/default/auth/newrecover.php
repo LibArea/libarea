@@ -3,13 +3,13 @@
   <div class="box wide">
     <form class="" action="<?= getUrlByName('recover'); ?>/send/pass" method="post">
       <?php csrf_field(); ?>
-      <div class="boxline">
+      <div class="mb20">
         <label class="block" for="password">
           <?= lang('new password'); ?>
         </label>
         <input class="w-100 h30" type="password" name="password" id="password">
       </div>
-      <div class="boxline">
+      <div class="mb20">
         <input type="hidden" name="code" id="code" value="<?= $data['code']; ?>">
         <input type="hidden" name="user_id" id="user_id" value="<?= $data['user_id']; ?>">
         <button type="submit" class="button block br-rd5 white">

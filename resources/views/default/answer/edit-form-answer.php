@@ -1,4 +1,4 @@
-<main class="col-span-10 mb-col-12 bg-white br-rd5 border-box-1 pt5 pr15 pb5 pl15">
+<main class="col-span-12 mb-col-12 bg-white br-rd5 border-box-1 pt5 pr15 pb5 pl15">
   <?= breadcrumb('/', lang('home'), null, null, lang('edit answer')); ?>
   <a class="mb5 block" href="<?= getUrlByName('post', ['id' => $data['post']['post_id'], 'slug' => $data['post']['post_slug']]); ?>"><?= $data['post']['post_title']; ?></a>
   <div class="answer_addentry">

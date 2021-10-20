@@ -8,28 +8,28 @@
     <div class="box create">
         <form action="/admin/web/edit/<?= $data['domain']['link_id']; ?>" method="post">
           <?= csrf_field() ?>
-          <div class="boxline max-w780">
+          <div class="mb20 max-w780">
             <label for="post_title">Id:</label>
             <?= $data['domain']['link_id']; ?>
           </div>
-          <div class="boxline max-w780">
+          <div class="mb20 max-w780">
             <label for="post_title">Domain:</label>
             <input class="w-100 h30" type="text" name="link_domain" value="<?= $data['domain']['link_url_domain']; ?>">
           </div>
-          <div class="boxline max-w780">
+          <div class="mb20 max-w780">
             <label class="block" for="post_title">URL</label>
             <input class="w-100 h30" type="text" name="link_url" value="<?= $data['domain']['link_url']; ?>">
           </div>
-          <div class="boxline max-w780">
+          <div class="mb20 max-w780">
             <label class="block" for="post_title"><?= lang('status'); ?></label>
             <input class="w-100 h30" type="text" name="link_status" value="<?= $data['domain']['link_status']; ?>">
           </div>
-          <div class="boxline max-w780">
+          <div class="mb20 max-w780">
             <label class="block" for="post_title"><?= lang('title'); ?></label>
             <input class="w-100 h30" type="text" name="link_title" value="<?= $data['domain']['link_title']; ?>" required>
             <div class="size-14 gray-light-2">24 - 250 <?= lang('characters'); ?> («Газета.Ru» — интернет-газета)</div>
           </div>
-          <div class="boxline max-w780">
+          <div class="mb20 max-w780">
             <label class="block" for="post_title"><?= lang('description'); ?></label>
             <textarea name="link_content" rows="4" required><?= $data['domain']['link_content']; ?></textarea>
             <div class="size-14 gray-light-2">24 - 1500 <?= lang('characters'); ?></div>

@@ -15,7 +15,7 @@
 
       <?= user_avatar_img($data['user']['user_avatar'], 'max', $data['user']['user_login'], 'ava'); ?>
       <div class="box-form-img">
-        <div class="boxline">
+        <div class="mb20">
           <div class="input-images"></div>
         </div>
       </div>
@@ -37,7 +37,7 @@
       <?php } ?>
 
       <div class="box-form-img-cover">
-        <div class="boxline">
+        <div class="mb20">
           <div class="input-images-cover"></div>
         </div>
       </div>

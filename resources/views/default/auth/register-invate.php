@@ -1,7 +1,7 @@
 <main class="col-span-12 mb-col-12 bg-white br-rd5 border-box-1 pt5 pr15 pb5 pl15">
   <h1><?= lang('registration by invite'); ?></h1>
-  <div class="form mini">
-    <form class="" action="<?= getUrlByName('register'); ?>/add" method="post">
+  <div class="form">
+    <form class="max-w300" action="<?= getUrlByName('register'); ?>/add" method="post">
       <?php csrf_field(); ?>
 
       <?= includeTemplate('/_block/form/field-input', ['data' => [
@@ -11,7 +11,7 @@
         ['title' => lang('repeat the password'), 'type' => 'password', 'name' => 'password_confirm', 'value' => ''],
       ]]); ?>
 
-      <div class="boxline">
+      <div class="mb20">
         <input type="hidden" name="invitation_code" id="invitation_code" value="<?= $data['invate']['invitation_code']; ?>">
         <input type="hidden" name="invitation_id" id="invitation_id" value="<?= $data['invate']['uid']; ?>">
         <button type="submit" class="button block br-rd5 white"><?= lang('sign up'); ?></button>

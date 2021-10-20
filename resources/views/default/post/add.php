@@ -13,7 +13,7 @@
     <?= includeTemplate('/_block/form/select-topic-post', ['uid' => $uid, 'data' => $data, 'action' => 'add', 'title' => lang('topics'), 'help' => lang('necessarily'), 'red' => 'red']); ?>
 
     <?php if ($uid['user_trust_level'] >= Config::get('trust-levels.tl_add_url')) { ?>
-      <div class="boxline">
+      <div class="mb20 max-w640">
         <label class="block" for="post_title">URL</label>
         <input id="link" class="w-100 h30" type="text" name="post_url" />
         <input id="graburl" readonly="readonly" class="right center mt15 mb15" type="submit_url" name="submit_url" value="<?= lang('to extract'); ?>" />
@@ -21,7 +21,7 @@
       </div>
     <?php } ?>
 
-    <div class="boxline post">
+    <div class="mb20 post">
       <div class="input-images"></div>
       <div class="size-14 gray-light-2"><?= lang('format-cover-post'); ?>.</div>
     </div>
@@ -54,7 +54,7 @@
 
     <?= includeTemplate('/_block/form/select-content', ['type' => 'post', 'data' => $data, 'action' => 'add', 'title' => lang('related')]); ?>
 
-    <div class="boxline">
+    <div class="mb20">
       <input type="submit" class="button white br-rd5" name="submit" value="<?= lang('create'); ?>" />
     </div>
   </form>

@@ -24,7 +24,7 @@
   </div>
   <?php if (Request::getUri() == '/' && $uid['user_id'] > 0 && empty($data['topics_user'])) { ?>
     <div class="center">
-      <a class="bg-blue-100 bg-hover-300 white-hover flex justify-center pt5 pr10 pb5 pl10 br-rd5 p15 mb15 blue size-14" href="/topics">
+      <a class="bg-blue-100 bg-hover-green white-hover flex justify-center pt5 pr10 pb5 pl10 br-rd5 p15 mb15 blue size-14" href="/topics">
         <i class="bi bi-lightbulb middle mr5"></i>
         <?= lang('topic-subscription'); ?>
       </a>
@@ -35,7 +35,7 @@
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], null); ?>
   </div>
 </main>
-<aside class="col-span-3 mb-col-12 no-mob">
+<aside class="col-span-3 mb-col-12 relative no-mob">
   <?php if ($uid['user_id'] == 0) { ?>
     <?= includeTemplate('/_block/login'); ?>
   <?php } ?>

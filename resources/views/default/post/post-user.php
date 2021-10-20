@@ -9,6 +9,6 @@
     <?= includeTemplate('/_block/post', ['data' => $data, 'uid' => $uid]); ?>
   </div>
 </main>
-<aside class="col-span-3 no-mob">
+<aside class="col-span-3 relative no-mob">
   <?= includeTemplate('/_block/user-menu', ['uid' => $uid, 'sheet' => $data['sheet']]); ?>
 </aside>

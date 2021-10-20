@@ -23,7 +23,7 @@ class TopicController extends MainController
 
         Base::PageError404($topics);
 
-        $num = ' | ';
+        $num = ' ';
         if ($page > 1) {
             $num = sprintf(lang('page-number'), $page);
         }

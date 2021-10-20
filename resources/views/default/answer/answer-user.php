@@ -30,6 +30,6 @@
     <?= includeTemplate('/_block/no-content', ['lang' => 'no answers']); ?>
   <?php } ?>
 </main>
-<aside class="col-span-3 no-mob">
+<aside class="col-span-3 relative no-mob">
   <?= includeTemplate('/_block/user-menu', ['uid' => $uid, 'sheet' => $data['sheet']]); ?>
 </aside>

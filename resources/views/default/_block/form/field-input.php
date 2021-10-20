@@ -1,5 +1,5 @@
 <?php foreach ($data as $fl) { ?>
-  <div class="boxline">
+  <div class="mb20 max-w640">
     <label class="block" for="post_title"><?= $fl['title']; ?>
       <?php if (!empty($fl['red'])) { ?><sup class="red">*</sup><?php } ?>
     </label>

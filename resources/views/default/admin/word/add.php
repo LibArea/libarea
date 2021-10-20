@@ -7,7 +7,7 @@
   <div class="box badges">
     <form action="/admin/word/add" method="post">
       <?= csrf_field() ?>
-      <div class="boxline max-w780">
+      <div class="mb20 max-w780">
         <label class="block" or="post_title"><?= lang('stop word'); ?></label>
         <input type="text" class="w-100 h30" name="word">
       </div>

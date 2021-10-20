@@ -41,7 +41,7 @@
   <?php } ?>
 
 </main>
-<aside class="col-span-3 no-mob">
+<aside class="col-span-3 relative no-mob">
   <div class="bg-white br-rd5 border-box-1 p15 mb15 size-15">
     <center>
       <a title="<?= $data['topic']['topic_title']; ?>" href="<?= getUrlByName('topic', ['slug' => $data['topic']['topic_slug']]); ?>">

@@ -2,9 +2,9 @@
   <?= includeTemplate('/_block/menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-7 mb-col-12">
-  <div class="bg-white br-rd5 border-box-1 pt5 pr15 pb5 pl15 mini">
+  <div class="bg-white br-rd5 border-box-1 pt5 pr15 pb5 pl15">
     <h1><?= lang('authorization'); ?></h1>
-    <form class="" action="<?= getUrlByName('login'); ?>" method="post">
+    <form class="max-w300" action="<?= getUrlByName('login'); ?>" method="post">
       <?php csrf_field(); ?>
 
       <?= includeTemplate('/_block/form/field-input', ['data' =>  [
@@ -12,11 +12,11 @@
         ['title' => lang('password'), 'type' => 'password', 'name' => 'password', 'value' => ''],
       ]]); ?>
 
-      <div class="boxline">
+      <div class="mb20">
         <input type="checkbox" class="left mr5" id="rememberme" name="rememberme" value="1">
         <label class="form-check-label" for="rememberme"><?= lang('remember me'); ?></label>
       </div>
-      <div class="boxline">
+      <div class="mb20">
         <button type="submit" class="button br-rd5 white">
           <?= lang('sign in'); ?>
         </button>

@@ -18,7 +18,7 @@
         ['title' => lang('repeat'), 'type' => 'password', 'name' => 'password3', 'value' => ''],
       ]]); ?>
 
-      <div class="boxline">
+      <div class="mb20">
         <input type="hidden" name="nickname" id="nickname" value="">
         <button type="submit" class="button br-rd5 white"><?= lang('edit'); ?></button>
       </div>

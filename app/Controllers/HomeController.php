@@ -22,7 +22,6 @@ class HomeController extends MainController
 
         $pagesCount = HomeModel::feedCount($topics_user, $uid, $sheet);
         $posts      = HomeModel::feed($page, $limit, $topics_user, $uid, $sheet);
-       // Base::PageError404($posts);
 
         $result_post = array();
         foreach ($posts as $ind => $row) {

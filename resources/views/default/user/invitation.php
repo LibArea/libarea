@@ -5,7 +5,7 @@
     <?php if ($uid['user_trust_level'] > 1) { ?>
       <form method="post" action="/invitation/create">
         <?php csrf_field(); ?>
-        <div class="boxline">
+        <div class="mb20">
           <input id="link" class="w-100 h30" type="email" name="email">
           <input class="button block br-rd5 white right mt5" type="submit" name="submit" value="<?= lang('send'); ?>">
           <div class="size-14 gray-light-2"><?= lang('enter'); ?> E-mail</div>

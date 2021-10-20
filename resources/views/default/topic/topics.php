@@ -62,7 +62,7 @@
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/topics'); ?>
   </div>
 </main>
-<aside class="col-span-3">
+<aside class="col-span-3 relative">
   <div class="bg-white p15">
     <?= lang('topic-info'); ?>
   </div>

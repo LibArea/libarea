@@ -11,7 +11,7 @@
         <?= csrf_field() ?>
 
         <div class="box-form-img edit-topic">
-          <div class="boxline">
+          <div class="mb20">
             <div class="input-images"></div>
           </div>
         </div>
@@ -61,32 +61,32 @@
         ]); ?>
 
         <?php if ($data['topic']['topic_parent_id'] > 0) { ?>
-          <div class="boxline">
+          <div class="mb20">
             <label for="topic_content"><?= lang('root'); ?>?</label>
             ----
           </div>
         <?php } else { ?>
-          <div class="boxline">
+          <div class="mb20">
             <label for="topic_content"><?= lang('root'); ?>?</label>
             <input type="radio" name="topic_is_parent" <?php if ($data['topic']['topic_is_parent'] == 0) { ?>checked<?php } ?> value="0"> <?= lang('no'); ?>
             <input type="radio" name="topic_is_parent" <?php if ($data['topic']['topic_is_parent'] == 1) { ?>checked<?php } ?> value="1"> <?= lang('yes'); ?>
             <div class="size-14 gray-light-2"><?= lang('root-help'); ?></div>
           </div>
         <?php } ?>
-        <div class="boxline">
+        <div class="mb20">
           <label for="topic_content">
             <?= lang('meta description'); ?><sup class="red">*</sup>
           </label>
           <textarea class="add" rows="6" minlength="44" name="topic_description"><?= $data['topic']['topic_description']; ?></textarea>
           <div class="size-14 gray-light-2">> 44 <?= lang('characters'); ?></div>
         </div>
-        <div class="boxline">
+        <div class="mb20">
           <label for="topic_content"><?= lang('info'); ?><sup class="red">*</sup></label>
           <textarea class="add" rows="6" name="topic_info"><?= $data['topic']['topic_info']; ?></textarea>
           <div class="size-14 gray-light-2">Markdown, > 14 <?= lang('characters'); ?></div>
         </div>
         <?php if ($data['topic']['topic_is_parent'] != 1) { ?>
-          <div class="boxline">
+          <div class="mb20">
             <label class="block" for="topic_content"><?= lang('root'); ?></label>
             <select name="topic_parent_id[]" multiple="multiple" id='selMainLinked'>
               <?php if (!empty($data['topic_parent_id'])) { ?>
@@ -97,7 +97,7 @@
             </select>
           </div>
         <?php } ?>
-        <div class="boxline">
+        <div class="mb20">
           <label class="block" for="post_content">
             <?= lang('related'); ?> (post)
           </label>
@@ -107,7 +107,7 @@
             <?php } ?>
           </select>
         </div>
-        <div class="boxline">
+        <div class="mb20">
           <label class="block" for="topic_content">
             <?= lang('related'); ?> (topic)
           </label>
@@ -190,7 +190,7 @@
 
         <?php } ?>
 
-        <div class="boxline">
+        <div class="mb20">
           <input type="hidden" name="topic_id" value="<?= $data['topic']['topic_id']; ?>">
           <input type="submit" name="submit" class="button block br-rd5 white" value="<?= lang('add'); ?>" />
         </div>

@@ -21,15 +21,15 @@
         <div class="mt15">
           <?php if (!$uid['user_id']) { ?>
             <a href="<?= getUrlByName('login'); ?>">
-              <div class="add-focus inline br-rd20 center pt5 pr15 pb5 pl15">+ <?= lang('read'); ?></div>
+              <div class="bg-gray-200 bg-hover-gray mazarine border-box-1 inline br-rd20 center pt5 pr15 pb5 pl15">+ <?= lang('read'); ?></div>
             </a>
           <?php } else { ?>
             <?php if (is_array($data['topic_signed'])) { ?>
-              <div data-id="<?= $data['topic']['topic_id']; ?>" data-type="topic" class="focus-id del-focus inline br-rd20 center pt5 pr15 pb5 pl15">
+              <div data-id="<?= $data['topic']['topic_id']; ?>" data-type="topic" class="focus-id bg-gray-100 gray-light-2 border-box-1 inline br-rd20 center pt5 pr15 pb5 pl15">
                 <?= lang('unsubscribe'); ?>
               </div>
             <?php } else { ?>
-              <div data-id="<?= $data['topic']['topic_id']; ?>" data-type="topic" class="focus-id add-focus inline br-rd20 center pt5 pr15 pb5 pl15">
+              <div data-id="<?= $data['topic']['topic_id']; ?>" data-type="topic" class="focus-id bg-gray-200 bg-hover-gray mazarine border-box-1 inline br-rd20 center pt5 pr15 pb5 pl15">
                 + <?= lang('read'); ?>
               </div>
             <?php } ?>
@@ -46,7 +46,7 @@
   <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('topic', ['slug' => $data['topic']['topic_slug']])); ?>
 
 </main>
-<aside class="col-span-3 no-mob">
+<aside class="col-span-3 relative no-mob">
   <div class="bg-white br-rd5 mb15 border-box-1 p15">
     <div class="flex justify-center">
       <div class="mr15 center box-number">

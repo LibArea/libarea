@@ -139,7 +139,7 @@
           <div class="mb20">
             <h3 class="uppercase mb5 mt0 font-light size-14 gray"><?= lang('topics'); ?>:</h3>
             <?php foreach ($data['topics'] as $topic) { ?>
-              <a class="bg-blue-100 bg-hover-300 white-hover flex justify-center pt5 pr10 pb5 pl10 br-rd20 blue inline size-14" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
+              <a class="bg-blue-100 bg-hover-green white-hover flex justify-center pt5 pr10 pb5 pl10 br-rd20 blue inline size-14" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
                 <?= $topic['topic_title']; ?>
               </a>
             <?php } ?>
@@ -175,16 +175,16 @@
       </div>
       <div class="hidden">
         <?php if (!$uid['user_id']) { ?>
-          <a class="right size-14 mt5 add-focus br-rd20 center pt5 pr15 pb5 pl15" href="<?= getUrlByName('login'); ?>">
-            + <?= lang('Read'); ?>
+          <a class="right size-14 mt5 bg-gray-200 bg-hover-gray mazarine border-box-1 br-rd20 center pt5 pr15 pb5 pl15" href="<?= getUrlByName('login'); ?>">
+            + <?= lang('read'); ?>
           </a>
         <?php } else { ?>
           <?php if (is_array($data['post_signed'])) { ?>
-            <div data-id="<?= $data['post']['post_id']; ?>" data-type="post" class="focus-id size-14 right mt5 del-focus br-rd20 center pt5 pr15 pb5 pl15">
+            <div data-id="<?= $data['post']['post_id']; ?>" data-type="post" class="focus-id size-14 right mt5 bg-gray-100 gray-light-2 border-box-1 br-rd20 center pt5 pr15 pb5 pl15">
               <?= lang('unsubscribe'); ?>
             </div>
           <?php } else { ?>
-            <div data-id="<?= $data['post']['post_id']; ?>" data-type="post" class="focus-id size-14 right mt5 add-focus br-rd20 center pt5 pr15 pb5 pl15">
+            <div data-id="<?= $data['post']['post_id']; ?>" data-type="post" class="focus-id size-14 right mt5 bg-gray-200 bg-hover-gray mazarine border-box-1 br-rd20 center pt5 pr15 pb5 pl15">
               + <?= lang('read'); ?>
             </div>
           <?php } ?>
@@ -229,7 +229,7 @@
     <?= includeTemplate('/_block/no-content', ['lang' => 'this is a draft']); ?>
   <?php } ?>
 </main>
-<aside class="col-span-3 br-rd5 no-mob">
+<aside class="col-span-3 relative br-rd5 no-mob">
   <?php if ($data['post']['post_content_img']) { ?>
     <div class="border-box-1 bg-white br-rd5 mb15">
       <div id="layer-photos" class="layer-photos p15">

@@ -3,7 +3,7 @@
 </div>
 <main class="col-span-10 mb-col-12">
   <?= breadcrumb(getUrlByName('topics'), lang('topics'), null, null, lang('add topic')); ?>
-  <div class="boxline">
+  <div class="mb20">
     <?= lang('you can add more'); ?>:
     <span class="red"><?= $data['count_topic']; ?></span>
   </div>
@@ -17,7 +17,7 @@
         ['title' => lang('Slug'), 'type' => 'text', 'name' => 'topic_slug', 'value' => '', 'min' => 3, 'max' => 32, 'help' => '3 - 32 ' . lang('characters') . ' (a-zA-Z0-9)'],
       ]]); ?>
 
-      <div class="boxline">
+      <div class="mb20">
         <label for="post_content">
           <?= lang('meta description'); ?><sup class="red">*</sup>
         </label>

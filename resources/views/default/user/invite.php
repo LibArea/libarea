@@ -3,11 +3,11 @@
     <h1><?= lang('invite'); ?></h1>
     <form class="" action="/invite" method="post">
       <?php csrf_field(); ?>
-      <div class="boxline">
+      <div class="mb20">
         <label class="block" for="email"><?= lang('code'); ?></label>
         <input class="w-100 h30" type="text" name="invite" id="invite">
       </div>
-      <div class="boxline">
+      <div class="mb20">
         <button type="submit" class="button br-rd5 white"><?= lang('sign in'); ?></button>
         <span class="ml15 size-14"><a href="<?= getUrlByName('recover'); ?>">
             <?= lang('forgot your password'); ?>?</a>

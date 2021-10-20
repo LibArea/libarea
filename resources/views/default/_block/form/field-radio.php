@@ -1,5 +1,5 @@
 <?php foreach ($data as $value) { ?>
-  <div class="boxline">
+  <div class="mb20 max-w640">
     <label class="block"><?= $value['title']; ?></label>
     <input type="radio" name="<?= $value['name']; ?>" <?php if ($value['checked'] == 0) { ?>checked<?php } ?> value="0"> <?= lang('no'); ?>
     <input type="radio" name="<?= $value['name']; ?>" <?php if ($value['checked'] == 1) { ?>checked<?php } ?> value="1"> <?= lang('yes'); ?>

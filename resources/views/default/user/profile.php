@@ -132,7 +132,7 @@
           </h2>
         <?php foreach (Config::get('fields-profile') as $block) { ?>
             <?php if ($data['user'][$block['title']]) { ?>
-                <div class="boxline">
+                <div class="mb20">
                   <label for="name"><?= $block['lang']; ?>:</label>
                 <?php if ($block['url']) { ?>  
                   <a href="<?php if ($block['addition']) { ?><?= $block['addition']; ?><?php } ?><?= $data['user'][$block['url']]; ?>" rel="noopener nofollow ugc">
@@ -144,7 +144,7 @@
                 </div>
              <?php } else { ?>
                 <?php if ('user_location' == $block['title']) { ?>
-                <div class="boxline">
+                <div class="mb20">
                   <label for="name"><?= $block['lang']; ?>:</label>
                   ...
                 </div>
@@ -201,7 +201,7 @@
               <?= lang('understands'); ?>
             </h3>
             <?php foreach ($data['participation'] as $part) { ?>
-               <a class="bg-blue-100 bg-hover-300 white-hover pt5 pr10 pb5 pl10 mb5 br-rd20 blue inline size-14" href="<?= getUrlByName('topic', ['slug' => $part['topic_slug']]); ?>">
+               <a class="bg-blue-100 bg-hover-green white-hover pt5 pr10 pb5 pl10 mb5 br-rd20 blue inline size-14" href="<?= getUrlByName('topic', ['slug' => $part['topic_slug']]); ?>">
                 <?= $part['topic_title']; ?>
                 </a>
             <?php } ?>

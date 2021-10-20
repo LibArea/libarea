@@ -24,7 +24,7 @@ class AddAnswerController extends MainController
         Base::accountBan($user);
         Content::stopContentQuietМode($user);
 
-        $redirect = '/post/' . $post['post_id'] . '/' . $post['post_slug'];
+        $redirect = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
         Validation::Limits($answer_content, lang('Bodies'), '6', '5000', $redirect);
 
         // Ограничим добавления ответов (в день)

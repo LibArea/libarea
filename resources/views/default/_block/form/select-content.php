@@ -1,4 +1,4 @@
-<div class="boxline">
+<div class="mb20 max-w640">
   <label class="block" for="post_content"><?= $title; ?>
     <?php if (!empty($red)) { ?><sup class="red">*</sup><?php } ?>
   </label>

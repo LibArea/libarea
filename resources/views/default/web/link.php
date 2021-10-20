@@ -32,7 +32,7 @@
   <?= includeTemplate('/_block/post', ['data' => $data, 'uid' => $uid]); ?>
   <?= pagination($data['pNum'], $data['pagesCount'], null, getUrlByName('domain', ['domain' => $data['link']['link_url_domain']])); ?>
 </main>
-<aside class="col-span-3">
+<aside class="col-span-3 relative">
   <div class="bg-white br-rd5 border-box-1 pt5 pr15 pb5 pl15">
     <?= includeTemplate('/_block/domains', ['data' => $data['domains']]); ?>
   </div>

@@ -8,16 +8,16 @@
     <div class="box create">
         <form action="/admin/web/add" method="post">
           <?= csrf_field() ?>
-          <div class="boxline max-w780">
+          <div class="mb20 max-w780">
             <label class="block" for="post_title">URL</label>
             <input class="w-100 h30" type="text" name="link_url" value="">
           </div>
-          <div class="boxline max-w780">
+          <div class="mb20 max-w780">
             <label class="block" for="post_title"><?= lang('title'); ?></label>
             <input class="w-100 h30" type="text" name="link_title" value="" required>
             <div class="size-14 gray-light-2">24 - 250 <?= lang('characters'); ?> («Газета.Ru» — интернет-газета)</div>
           </div>
-          <div class="boxline max-w780">
+          <div class="mb20 max-w780">
             <label class="block" for="post_title"><?= lang('description'); ?></label>
             <textarea rows="4" name="link_content" required></textarea>
             <div class="size-14 gray-light-2">24 - 1500 <?= lang('characters'); ?></div>

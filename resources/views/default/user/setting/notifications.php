@@ -16,7 +16,7 @@
         ['title' => lang('when you contacted me via @'), 'name' => 'setting_email_appealed', 'checked' => !empty($data['setting']['setting_email_appealed'])],
       ]]); ?>
 
-      <div class="boxline">
+      <div class="mb20">
         <input type="hidden" name="nickname" id="nickname" value="">
         <button type="submit" class="button br-rd5 white"><?= lang('edit'); ?></button>
       </div>

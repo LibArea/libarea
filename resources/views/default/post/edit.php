@@ -11,7 +11,7 @@
     <?= includeTemplate('/_block/form/select-topic-post', ['uid' => $uid, 'data' => $data, 'action' => 'edit', 'title' => lang('topics'), 'help' => lang('necessarily'), 'red' => 'red']); ?>
 
     <?php if ($data['post']['post_url']) { ?>
-      <div class="boxline">
+      <div class="mb20">
         <label class="block" for="post_title">URL:</label>
         <a target="_blank" rel="noreferrer ugc" href="<?= $data['post']['post_url']; ?>" class="size-14"><?= $data['post']['post_url']; ?></a>
       </div>
@@ -31,7 +31,7 @@
       <?= post_img($data['post']['post_thumb_img'], $data['post']['post_title'], 'thumb right', 'thumbnails'); ?>
     <?php } ?>
 
-    <div class="boxline post">
+    <div class="mb20 post">
       <div class="input-images"></div>
     </div>
 
@@ -68,7 +68,7 @@
 
     <?= includeTemplate('/_block/form/select-content', ['type' => 'post', 'data' => $data, 'action' => 'edit', 'title' => lang('related')]); ?>
 
-    <div class="boxline">
+    <div class="mb20">
       <?php if ($data['post']['post_draft'] == 1) { ?>
         <input type="hidden" name="draft" id="draft" value="1">
       <?php } ?>

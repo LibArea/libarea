@@ -2,9 +2,9 @@
   <?= includeTemplate('/_block/menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-7 mb-col-12">
-  <div class="bg-white br-rd5 border-box-1 pt5 pr15 pb5 pl15 mini">
+  <div class="bg-white br-rd5 border-box-1 pt5 pr15 pb5 pl15">
     <h1><?= lang($data['sheet']); ?></h1>
-    <form class="form mini" action="<?= getUrlByName('register'); ?>/add" method="post">
+    <form class="form max-w300" action="<?= getUrlByName('register'); ?>/add" method="post">
       <?php csrf_field(); ?>
 
       <?= includeTemplate('/_block/form/field-input', ['data' => [
@@ -16,7 +16,7 @@
 
       <?= includeTemplate('/_block/captcha'); ?>
 
-      <div class="boxline">
+      <div class="mb20">
         <button type="submit" class="button br-rd5 white">
           <?= lang('sign up'); ?>
         </button>

@@ -21,13 +21,13 @@
   max-width: 450px;
 }
 
-.boxline.post .input-images img {
+.post .input-images img {
   max-width: 400px;
   padding: 20px;
   max-height: 130px;
 }
 
-.create .boxline.post .input-images img {
+.create .post .input-images img {
   max-height: 140px;
 }
 
