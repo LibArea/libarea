@@ -55,7 +55,6 @@ class EditTopicController extends MainController
         return view('/topic/edit', ['meta' => $meta, 'uid' => $this->uid, 'data' => $data]);
     }
 
-    // Edit topic
     public function edit()
     {
         $tl     = Validation::validTl($this->uid['user_trust_level'], 5, 0, 1);

@@ -17,8 +17,34 @@ class EditAnswerController extends MainController
         $this->uid  = Base::getUid();
     }
     
-    // Редактируем ответ
+    // Форма редактирования answer
     public function index()
+    {
+        $answer_id  = Request::getInt('id');
+        $answer = AnswerModel::getAnswerId($answer_id);
+        if (!accessСheck($answer, 'answer', $this->uid, 0, 0)) {
+            redirect('/');
+        }
+
+        $post = PostModel::getPostId($answer['answer_post_id']);
+        Base::PageError404($post);
+
+        Request::getResources()->addBottomStyles('/assets/editor/editormd.css');
+        Request::getResources()->addBottomScript('/assets/editor/meditor.min.js');
+ 
+        $meta = meta($m =[], lang('edit answer'));
+        $data = [
+            'answer_id'         => $answer['answer_id'],
+            'post_id'           => $post['post_id'],
+            'answer_content'    => $answer['answer_content'],
+            'sheet'             => 'edit-answers',
+            'post'              => $post,
+        ];
+
+        return view('/answer/edit-form-answer', ['meta' => $meta, 'uid' => $this->uid, 'data' => $data]);
+    }
+    
+    public function edit()
     {
         $answer_id      = Request::getPostInt('answer_id');
         $post_id        = Request::getPostInt('post_id');
@@ -48,31 +74,4 @@ class EditAnswerController extends MainController
         redirect('/' . $url . '#answer_' . $answer_id);
     }
 
-    // Покажем форму
-    public function edit()
-    {
-        // Проверка доступа 
-        $answer_id  = Request::getInt('id');
-        $answer = AnswerModel::getAnswerId($answer_id);
-        if (!accessСheck($answer, 'answer', $this->uid, 0, 0)) {
-            redirect('/');
-        }
-
-        $post = PostModel::getPostId($answer['answer_post_id']);
-        Base::PageError404($post);
-
-        Request::getResources()->addBottomStyles('/assets/editor/editormd.css');
-        Request::getResources()->addBottomScript('/assets/editor/meditor.min.js');
- 
-        $meta = meta($m =[], lang('edit answer'));
-        $data = [
-            'answer_id'         => $answer['answer_id'],
-            'post_id'           => $post['post_id'],
-            'answer_content'    => $answer['answer_content'],
-            'sheet'             => 'edit-answers',
-            'post'              => $post,
-        ];
-
-        return view('/answer/edit-form-answer', ['meta' => $meta, 'uid' => $this->uid, 'data' => $data]);
-    }
 }

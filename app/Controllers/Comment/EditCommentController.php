@@ -10,8 +10,27 @@ use Content, Base;
 
 class EditCommentController extends MainController
 {
-    // Редактируем комментарий
+    // Форма редактирования comment
     public function index()
+    {
+        $comment_id     = Request::getPostInt('comment_id');
+        $post_id        = Request::getPostInt('post_id');
+        $uid            = Base::getUid();
+
+        // Проверка доступа 
+        $comment = CommentModel::getCommentsId($comment_id);
+        if (!accessСheck($comment, 'comment', $uid, 0, 0)) return false;
+
+        $data = [
+            'comment_id'        => $comment_id,
+            'post_id'           => $post_id,
+            'comment_content'   => $comment['comment_content'],
+        ];
+
+        includeTemplate('/_block/form/edit-form-comment', ['data' => $data, 'uid' => $uid]);
+    }
+
+    public function edit()
     {
         $uid                = Base::getUid();
         $comment_id         = Request::getPostInt('comment_id');
@@ -43,25 +62,4 @@ class EditCommentController extends MainController
         redirect($redirect);
     }
 
-    // Покажем форму
-    public function edit()
-    {
-        $comment_id     = Request::getPostInt('comment_id');
-        $post_id        = Request::getPostInt('post_id');
-        $uid            = Base::getUid();
-
-        // Проверка доступа 
-        $comment = CommentModel::getCommentsId($comment_id);
-        if (!accessСheck($comment, 'comment', $uid, 0, 0)) {
-            redirect('/');
-        }
-
-        $data = [
-            'comment_id'        => $comment_id,
-            'post_id'           => $post_id,
-            'comment_content'   => $comment['comment_content'],
-        ];
-
-        includeTemplate('/_block/form/edit-form-comment', ['data' => $data, 'uid' => $uid]);
-    }
 }

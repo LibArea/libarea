@@ -7,7 +7,7 @@ Route::before('Authorization@noAuth')->getGroup();
         Route::get('/backend/upload/image')->controller('Post\EditPostController@uploadContentImage');
         Route::get('/status/action')->controller('ActionController@deletingAndRestoring');
         Route::get('/post/grabtitle')->controller('Post\AddPostController@grabMeta');
-        Route::get('/comment/editform')->controller('Comment\EditCommentController@edit');
+        Route::get('/comment/editform')->controller('Comment\EditCommentController');
         Route::get('/post/add/profile')->controller('Post\PostController@addPostProfile');
         Route::get('/post/delete/profile')->controller('Post\PostController@deletePostProfile');
         Route::get('/favorite/post')->controller('FavoriteController', ['post']);
@@ -18,9 +18,7 @@ Route::before('Authorization@noAuth')->getGroup();
         // @ post | answer | comment | link
         Route::get('/votes/{type}')->controller('VotesController')->where(['type' => '[a-z]+']); 
         
-            Route::getProtect(); // Начало защиты
-                Route::get('/topic/create')->controller('Topic\AddTopicController@add')->name('topic.create');
-                Route::get('/topic/edit/{id}')->controller('Topic\EditTopicController@edit')->where(['id' => '[0-9]+']);
+            Route::getProtect();
                 Route::get('/invitation/create')->controller('User\InvitationsController@invitationCreate');
                 Route::get('/messages/send')->controller('MessagesController@send');
                 Route::get('/users/setting/edit')->controller('User\SettingController@edit');
@@ -28,19 +26,18 @@ Route::before('Authorization@noAuth')->getGroup();
                 Route::get('/users/setting/security/edit')->controller('User\SettingController@securityEdit');
                 Route::get('/users/setting/avatar/edit')->controller('User\SettingController@avatarEdit');
                 Route::get('/users/setting/notifications/edit')->controller('User\SettingController@notificationsEdit');
-                // post | comment | answer| topic 
-                Route::get('/{controller}/create')->controller('<controller>\Add<controller>Controller');
-                // post | comment | answer| topic 
-                Route::get('/{controller}/edit')->controller('<controller>\Edit<controller>Controller');
-            Route::endProtect(); // Завершение защиты
-    Route::endType();  // Завершение getType('post')
+                // Add post | comment | answer| topic 
+                Route::get('/{controller}/create')->controller('<controller>\Add<controller>Controller@create');
+                // Edit post | comment | answer| topic 
+                Route::get('/{controller}/edit')->controller('<controller>\Edit<controller>Controller@edit');
+            Route::endProtect();
+    Route::endType();
 
-    // Форма добавления, общий случай: post | topic |  web
-    Route::get('/{controller}/add')->controller('<controller>\Add<controller>Controller@add');
-    // Из темы
-    Route::get('/post/add/{topic_id}')->controller('Post\AddPostController@add')->where(['topic_id' => '[0-9]+']);
-    // Форма изменения, общий случай: post | topic | answer
-    Route::get('/{controller}/edit/{id}')->controller('<controller>\Edit<controller>Controller@edit')->where(['id' => '[0-9]+']);
+    // The form of adding and changing: post | topic |  web
+    Route::get('/{controller}/add')->controller('<controller>\Add<controller>Controller');
+    Route::get('/{controller}/edit/{id}')->controller('<controller>\Edit<controller>Controller')->where(['id' => '[0-9]+']);
+    // Adding a post from a topic
+    Route::get('/post/add/{topic_id}')->controller('Post\AddPostController')->where(['topic_id' => '[0-9]+']);
 
     Route::get('/u/{login}/setting')->controller('User\SettingController@settingForm')->where(['login' => '[A-Za-z0-9]+'])->name('setting'); 
     Route::get('/u/{login}/setting/avatar')->controller('User\SettingController@avatarForm')->where(['login' => '[A-Za-z0-9]+'])->name('setting.avatar');
@@ -69,9 +66,6 @@ Route::before('Authorization@noAuth')->getGroup();
 
     Route::get('/topics/my')->controller('Topic\TopicController@topicsUser')->name('topic.my');
     Route::get('/topics/my/page/{page?}')->controller('Topic\TopicController@topicsUser')->where(['page' => '[0-9]+']);
-    Route::get('/topic/my/add')->controller('Topic\AddTopicController')->name('topic.add');
-    Route::get('/topic/{id}/edit')->controller('Topic\EditTopicController')->where(['id' => '[0-9]+'])->name('topic.edit'); 
- 
  
     Route::get('/all')->controller('HomeController', ['all']);
     Route::get('/all/page/{page?}')->controller('HomeController', ['all'])->where(['page' => '[0-9]+']);
@@ -104,13 +98,13 @@ Route::before('Authorization@yesAuth')->getGroup();
 Route::endGroup();
 
 Route::getType('post');
-    // Пост в ленте и полный пост
+    // Viewing a post in the feed
     Route::get('/post/shown')->controller('Post\PostController@shownPost');
-    // Вызов формы комментария и поиск
-    Route::get('/comments/addform')->controller('Comment\AddCommentController@add');
+    // Calling the Comment form
+    Route::get('/comments/addform')->controller('Comment\AddCommentController');
 Route::endType();
 
-// Другие страницы без авторизии
+// Other pages without authorization
 Route::get('/post/{id}')->controller('Post\PostController')->where(['id' => '[0-9-]+']);
 Route::get('/post/{id}/{slug}')->controller('Post\PostController')->where(['id' => '[0-9-]+', 'slug' => '[A-Za-z0-9-_]+'])->name('post');
 

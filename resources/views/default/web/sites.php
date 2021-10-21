@@ -4,7 +4,7 @@
 <main class="col-span-7 mb-col-12">
   <div class="bg-white br-rd5 border-box-1 pt5 pr15 pb5 pl15">
     <?php if ($uid['user_trust_level'] == 5) { ?>
-      <a title="<?= lang('add'); ?>" class="right mt5" href="<?= getUrlByName('link-add'); ?>">
+      <a title="<?= lang('add'); ?>" class="right mt5" href="/web/add">
         <i class="bi bi-plus-lg middle"></i>
       </a>
     <?php } ?>
@@ -15,7 +15,7 @@
       <?php foreach ($data['links'] as $key => $link) { ?>
         <div class="pt20 pb5">
           <?php if ($uid['user_trust_level'] == 5) { ?>
-            <a class="size-14 mr10 right" title="<?= lang('edit'); ?>" href="<?= getUrlByName('link-edit', ['id' => $link['link_id']]); ?>">
+            <a class="size-14 mr10 right" title="<?= lang('edit'); ?>" href="/web/edit/<?= $link['link_id']; ?>">rr
               <i class="bi bi-pencil size-15"></i>
             </a>
           <?php } ?>

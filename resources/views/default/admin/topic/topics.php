@@ -51,7 +51,7 @@
               </div>
             </td>
             <td class="center">
-              <a title="<?= lang('edit'); ?>" href="<?= getUrlByName('topic.edit', ['id' => $topic['topic_id']]); ?>">
+              <a title="<?= lang('edit'); ?>" href="/topic/edit/<?= $topic['topic_id']; ?>">
                 <i class="bi bi-pencil size-15"></i>
               </a>
             </td>

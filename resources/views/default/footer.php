@@ -1,9 +1,6 @@
 </div>
-<div class="wrap grid grid-cols-12 gap-4 pr10 mt15 pl10 h10 justify-between">
-  <a id="scroll_top" class="red fixed right0 mr5" title="<?= lang('up'); ?>">
-    <i class="bi bi-arrow-up-short size-31"></i>
-  </a>
-</div>
+<a class="up_down_btn" title="<?= lang('up'); ?>">&uarr;</a>
+
 <script async src="/assets/js/common.js"></script>
 <script src="/assets/js/layer/layer.js"></script>
 

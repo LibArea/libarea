@@ -7,7 +7,7 @@
   <div class="topic">
     <div class="box create">
       <?= topic_logo_img($data['topic']['topic_img'], 'max', $data['topic']['topic_title'], 'img-topic-edit'); ?>
-      <form action="/topic/edit/<?= $data['topic']['topic_id']; ?>" method="post" enctype="multipart/form-data">
+      <form action="/topic/edit" method="post" enctype="multipart/form-data">
         <?= csrf_field() ?>
 
         <div class="box-form-img edit-topic">

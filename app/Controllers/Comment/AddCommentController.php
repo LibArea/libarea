@@ -10,8 +10,20 @@ use Content, Base, Validation, SendEmail;
 
 class AddCommentController extends MainController
 {
-    // Добавление комментария
+    // Покажем форму
     public function index()
+    {
+        $data = [
+            'answer_id'     => Request::getPostInt('answer_id'),
+            'post_id'       => Request::getPostInt('post_id'),
+            'comment_id'    => Request::getPostInt('comment_id'),
+        ];
+
+        includeTemplate('/_block/form/add-form-answer-and-comment', ['data' => $data, 'uid' => Base::getUid()]);
+    }
+    
+    // Добавление комментария
+    public function create()
     {
         $comment_content    = Request::getPost('comment');
         $post_id            = Request::getPostInt('post_id');   // в каком посту ответ
@@ -102,15 +114,4 @@ class AddCommentController extends MainController
         redirect($url_comment);
     }
 
-    // Покажем форму
-    public function add()
-    {
-        $data = [
-            'answer_id'     => Request::getPostInt('answer_id'),
-            'post_id'       => Request::getPostInt('post_id'),
-            'comment_id'    => Request::getPostInt('comment_id'),
-        ];
-
-        includeTemplate('/_block/form/add-form-answer-and-comment', ['data' => $data, 'uid' => Base::getUid()]);
-    }
 }

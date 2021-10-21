@@ -8,7 +8,7 @@
         <a class="ml15" href="/admin/topics">
           <i class="bi bi-pencil"></i>
         </a>
-        <a class="ml15" title="<?= lang('add'); ?>" href="<?= getUrlByName('topic.add'); ?>">
+        <a class="ml15" title="<?= lang('add'); ?>" href="/topic/add">
           <i class="bi bi-plus-lg middle"></i>
         </a>
       <?php } ?>

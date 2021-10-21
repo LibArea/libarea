@@ -17,8 +17,35 @@ class EditPostController extends MainController
         $this->uid  = Base::getUid();
     }
 
-    // Изменяем пост
+    // Форма редактирования post
     public function index()
+    {
+        $post_id    = Request::getInt('id');
+        $post       = PostModel::getPostId($post_id);
+        if (!accessСheck($post, 'post', $this->uid, 0, 0)) {
+            redirect('/');
+        }
+
+        Request::getHead()->addStyles('/assets/css/image-uploader.css');
+        Request::getResources()->addBottomStyles('/assets/css/select2.css');
+        Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
+        Request::getResources()->addBottomStyles('/assets/editor/editormd.css');
+        Request::getResources()->addBottomScript('/assets/editor/meditor.min.js');
+        Request::getResources()->addBottomScript('/assets/js/select2.min.js');
+
+        $meta = meta($m = [], lang('edit post'));
+        $data = [
+            'sheet'         => 'edit-post',
+            'post'          => $post,
+            'post_select'   => PostModel::postRelated($post['post_related']),
+            'user'          => UserModel::getUser($post['post_user_id'], 'id'),
+            'topic_select'  => PostModel::getPostTopic($post['post_id']),
+        ];
+
+        return view('/post/edit', ['meta' => $meta, 'uid' => $this->uid, 'data' => $data]);
+    }
+
+    public function edit()
     {
         $post_id                = Request::getPostInt('post_id');
         $post_title             = Request::getPost('post_title');
@@ -119,35 +146,6 @@ class EditPostController extends MainController
         }
 
         redirect(getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]));
-    }
-
-    // Покажем форму
-    public function edit()
-    {
-        // Проверка доступа 
-        $post_id    = Request::getInt('id');
-        $post       = PostModel::getPostId($post_id);
-        if (!accessСheck($post, 'post', $this->uid, 0, 0)) {
-            redirect('/');
-        }
-
-        Request::getHead()->addStyles('/assets/css/image-uploader.css');
-        Request::getResources()->addBottomStyles('/assets/css/select2.css');
-        Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
-        Request::getResources()->addBottomStyles('/assets/editor/editormd.css');
-        Request::getResources()->addBottomScript('/assets/editor/meditor.min.js');
-        Request::getResources()->addBottomScript('/assets/js/select2.min.js');
-
-        $meta = meta($m = [], lang('edit post'));
-        $data = [
-            'sheet'         => 'edit-post',
-            'post'          => $post,
-            'post_select'   => PostModel::postRelated($post['post_related']),
-            'user'          => UserModel::getUser($post['post_user_id'], 'id'),
-            'topic_select'  => PostModel::getPostTopic($post['post_id']),
-        ];
-
-        return view('/post/edit', ['meta' => $meta, 'uid' => $this->uid, 'data' => $data]);
     }
 
     // Удаление обложки

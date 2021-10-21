@@ -2,13 +2,65 @@
 
 // + Parsedown
 // https://github.com/erusev/parsedown/wiki/Tutorial:-Create-Extensions#add-multi-line-element
+
 class MyParsedown extends Parsedown
 {
-    
     function __construct()
     {
         $this->InlineTypes['{'][]= 'ColoredText';
         $this->inlineMarkerList .= '{';
+    }
+    
+    protected function element(array $Element)
+    {
+        if ($this->safeMode) {
+            $Element = $this->sanitiseElement($Element);
+        }
+
+        $markup = '<' . $Element['name'];
+
+        if (isset($Element['name']) && $Element['name'] == 'a') {
+            $server_host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : null;
+            $href_host = isset($Element['attributes']['href']) ? parse_url($Element['attributes']['href'], PHP_URL_HOST) : null;
+
+            // Add a list of allowed urls to the config?
+            if ($server_host != $href_host) {
+                $Element['attributes']['target'] = '_blank';
+                $Element['attributes']['rel'] = 'noopener nofollow ugc';
+            }
+        }
+
+        if (isset($Element['attributes'])) {
+            foreach ($Element['attributes'] as $name => $value) {
+                if ($value === null) {
+                    continue;
+                }
+
+                $markup .= ' ' . $name . '="' . self::escape($value) . '"';
+            }
+        }
+
+        if (isset($Element['text'])) {
+            $markup .= '>';
+
+            if (!isset($Element['nonNestables'])) {
+                $Element['nonNestables'] = array();
+            }
+
+            if (isset($Element['handler'])) {
+                $markup .= $this->{$Element['handler']}($Element['text'], $Element['nonNestables']);
+            }
+            else {
+                $markup .= self::escape($Element['text'], true);
+            }
+
+            $markup .= '</' . $Element['name'] . '>';
+        }
+        else {
+            $markup .= ' />';
+        }
+
+        return $markup;
     }
     
     protected function inlineColoredText($excerpt)
@@ -31,37 +83,4 @@ class MyParsedown extends Parsedown
             );
         }
     }
-    
-    protected function inlineLink($Excerpt)
-    {
-        $link = parent::inlineLink($Excerpt);
-        if($link) {
-            if ($this->urlIsExternal($link['element']['attributes']['href'])) {
-                $link['element']['attributes'] += [
-                    'target' => '_blank',
-                    'rel'    => 'noopener nofollow ugc',
-                ];
-            }
-        }
-        return $link;
-    }
-
-    protected function urlIsExternal($url)
-    {
-        $scheme = parse_url($url, PHP_URL_SCHEME);
-        $host   = parse_url($url, PHP_URL_HOST);
-
-        if (!$scheme || !$host) {
-            return false;
-        }
-
-        if (strpos(strtolower($scheme), 'http') !== 0) {
-            return false;
-        }
-
-        // проверим хост и введем TL
-
-        return true;
-    }
-    
 }

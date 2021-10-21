@@ -385,7 +385,6 @@ return [
     'domain-desc'           => 'Gruparea postărilor într-o comunitate după domeniu',
     'domains-title'         => 'Site-uri web din sistem',
     'domains-desc'          => 'Statistici despre domenii, linkuri care sunt utilizate pentru a compila publicații pe site. Cele mai vizitate site-uri populare',
-    'info-url-edit'         => 'Modificările aduse datelor sunt vizibile instantaneu. Atenție!',
     'code-incorrect'        => 'Codul este incorect sau a fost deja utilizat. Parcurgeți din nou procedura de recuperare.',
     'yes-email-pass'        => 'Acum puteți utiliza adresa de e-mail și parola.',
     'code-used'             => 'Codul este incorect sau a fost deja utilizat.',

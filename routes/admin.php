@@ -18,8 +18,6 @@ Route::before('Authorization@admin')->getGroup();
             Route::get('/badge/edit/{id}')->controller('Admin\BadgesController@edit')->where(['id' => '[0-9]+']);
             Route::get('/word/add')->controller('Admin\WordsController@add');
             Route::get('/user/edit/{id}')->controller('Admin\UsersController@userEdit')->where(['id' => '[0-9]+']);
-            Route::get('/web/add')->controller('Admin\WebsController@add');
-            Route::get('/web/edit/{id}')->controller('Admin\WebsController@edit')->where(['id' => '[0-9]+']);
         Route::endProtect();
     Route::endType();
   
@@ -62,8 +60,6 @@ Route::before('Authorization@admin')->getGroup();
     Route::get('/badges/user/add/{id}')->controller('Admin\BadgesController@addUserPage')->where(['id' => '[0-9]+'])->name('admin.badges.user.add');
   
     Route::get('/webs')->controller('Admin\WebsController', ['all'])->name('admin.webs');
-    Route::get('/webs/add')->controller('Admin\WebsController@addPage', ['all'])->name('link-add');
-    Route::get('/webs/{id}/edit')->controller('Admin\WebsController@editPage')->where(['id' => '[0-9]+'])->name('link-edit');
     
     Route::get('/words/add')->controller('Admin\WordsController@addPage');
     Route::get('/words')->controller('Admin\WordsController', ['all'])->name('admin.words');

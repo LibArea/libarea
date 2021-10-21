@@ -37,7 +37,7 @@ class AddTopicController extends MainController
     }
 
     // Добавим topic
-    public function add()
+    public function create()
     {
         $tl     = Validation::validTl($this->uid['user_trust_level'], 5, 0, 1);
         if ($tl === false) {
@@ -79,6 +79,6 @@ class AddTopicController extends MainController
 
         $topic = TopicModel::add($data);
 
-        redirect(getUrlByName('topic.edit', ['id' => $topic['topic_id']]));
+        redirect(getUrlByName('topic', ['slug' => $topic_slug]));
     }
 }

@@ -3,7 +3,7 @@
 </div>
 <main class="col-span-10 mb-col-12">
   <div class="white-box pt5 pr15 pb5 pl15">
-    <a class="right" title="<?= lang('add'); ?>" href="<?= getUrlByName('link-add'); ?>">
+    <a class="right" title="<?= lang('add'); ?>" href="/web/add">
       <i class="bi bi-plus-lg middle"></i>
     </a>
     <?= breadcrumb('/admin', lang('admin'), null, null, lang('domains')); ?>
@@ -47,7 +47,7 @@
                 <span class="red">Ban</span>
               <?php } ?>
               <span class="mr5 ml5"> &#183; </span>
-              <a href="<?= getUrlByName('link-edit', ['id' => $link['link_id']]); ?>">
+              <a href="/web/edit/<?= $link['link_id']; ?>">
                 <?= lang('edit'); ?>
               </a>
               <span class="right heart-link red">

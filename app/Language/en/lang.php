@@ -51,7 +51,6 @@ return [
     'domain-desc'           => 'Grouping posts by domain',
     'domains-title'         => 'Sites in the system',
     'domains-desc'          => 'Statistics on domains, links that are used to compile publications on the site. Most visited, popular sites',
-    'info-url-edit'         => 'Changes to the data become visible instantly. Be careful!',
     'code-incorrect'        => 'The code is incorrect or has already been used. Go through the recovery procedure again.',
     'yes-email-pass'        => 'Now you can use your email and password.',
     'code-used'             => 'The code is incorrect or has already been used.',

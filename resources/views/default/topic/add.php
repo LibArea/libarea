@@ -8,7 +8,7 @@
     <span class="red"><?= $data['count_topic']; ?></span>
   </div>
   <div class="box create">
-    <form action="<?= getUrlByName('topic.create'); ?>" method="post" enctype="multipart/form-data">
+    <form action="/topic/create" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
 
       <?= includeTemplate('/_block/form/field-input', ['data' => [

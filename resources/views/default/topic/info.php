@@ -11,7 +11,7 @@
         <?= $data['topic']['topic_seo_title']; ?>
       </a>
       <?php if ($uid['user_trust_level'] == 5) { ?>
-        <a class="right gray-light" href="<?= getUrlByName('topic.edit', ['id' => $data['topic']['topic_id']]); ?>">
+        <a class="right gray-light" href="/topic/edit/<?= $topic['topic_id']; ?>">
           <i class="bi bi-pencil size-15"></i>
         </a>
       <?php } ?>

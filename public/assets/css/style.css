@@ -466,13 +466,6 @@ ol.comment-telo { padding-left: 23px; }
 
 .dark .black { color: #fff; }
 
-#scroll_top {
-  bottom: 150px;
-  display: none;
-  cursor: pointer;
-  padding: 7px;
-}
-
 .video-object {
   width: 640px;
   height: 360px;
@@ -494,6 +487,37 @@ ol.comment-telo { padding-left: 23px; }
 .wrap {
   width: 100%;
   margin: 0 auto;
+}
+
+.up_down_btn {
+  position: fixed;
+  bottom: 40px;
+  right: 10px;
+  z-index: 9999;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  background: #f5f5f5;
+  color: #444;
+  cursor: pointer;
+  border-radius: 2px;
+  display: none;
+}
+
+.up_down_btn:hover {
+  text-decoration: none;
+  background: #e9ebec;
+}
+
+.up_down_btn-show {
+  display: block;
+}
+
+.up_down_btn-disabled {
+  pointer-events: none;
+  cursor: default;
+  opacity: 0;
 }
 
 @media(min-width: 1636px) {

@@ -17,8 +17,31 @@ class AddPostController extends MainController
         $this->uid  = Base::getUid();
     }
 
-    // Добавим пост
+    // Форма добавление поста
     public function index()
+    {
+        Request::getHead()->addStyles('/assets/css/image-uploader.css');
+        Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
+        Request::getResources()->addBottomStyles('/assets/editor/editormd.css');
+        Request::getResources()->addBottomScript('/assets/editor/meditor.min.js');
+        Request::getResources()->addBottomStyles('/assets/css/select2.css');
+        Request::getResources()->addBottomScript('/assets/js/select2.min.js');
+
+        // Если пользователь забанен / заморожен
+        $user = UserModel::getUser($this->uid['user_id'], 'id');
+        Base::accountBan($user);
+
+        // Добавление со странице темы
+        $topic_id   = Request::getInt('topic_id');
+        $topic      = TopicModel::getTopic($topic_id, 'id');
+
+        $meta = meta($m = [], lang('add post'));
+        
+        return view('/post/add', ['meta' => $meta, 'uid' => $this->uid, 'data' => ['topic' => $topic]]);
+    }
+
+    // Добавим пост
+    public function create()
     {
         // Получаем title и содержание
         $post_title             = Request::getPost('post_title');
@@ -170,28 +193,6 @@ class AddPostController extends MainController
         redirect($url_post);
     }
 
-    // Форма добавление поста
-    public function add()
-    {
-        Request::getHead()->addStyles('/assets/css/image-uploader.css');
-        Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
-        Request::getResources()->addBottomStyles('/assets/editor/editormd.css');
-        Request::getResources()->addBottomScript('/assets/editor/meditor.min.js');
-        Request::getResources()->addBottomStyles('/assets/css/select2.css');
-        Request::getResources()->addBottomScript('/assets/js/select2.min.js');
-
-        // Если пользователь забанен / заморожен
-        $user = UserModel::getUser($this->uid['user_id'], 'id');
-        Base::accountBan($user);
-
-        // Добавление со странице темы
-        $topic_id   = Request::getInt('topic_id');
-        $topic      = TopicModel::getTopic($topic_id, 'id');
-
-        $meta = meta($m = [], lang('add post'));
-        
-        return view('/post/add', ['meta' => $meta, 'uid' => $this->uid, 'data' => ['topic' => $topic]]);
-    }
 
     // Парсинг
     public function grabMeta()
