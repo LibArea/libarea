@@ -9,7 +9,7 @@
       </div>
       <h1><?= $data['link']['link_title']; ?>
         <?php if ($uid['user_trust_level'] > 4) { ?>
-          <a class="size-14 ml5" title="<?= lang('edit'); ?>" href="<?= getUrlByName('link-edit', ['id' => $data['link']['link_id']]); ?>">
+          <a class="size-14 ml5" title="<?= lang('edit'); ?>" href="/web/edit/<?= $data['link']['link_id']; ?>">
             <i class="bi bi-pencil size-15"></i>
           </a>
         <?php } ?>

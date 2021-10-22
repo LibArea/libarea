@@ -8,7 +8,7 @@
       lang('home'),
       getUrlByName('user', ['login' => Request::get('login')]),
       lang('profile'),
-      lang('posts') . ' ' . $uid['user_login']
+      lang('posts') . ' ' . $data['user_login']
     ); ?>
   </div>
   <div class="mt15">

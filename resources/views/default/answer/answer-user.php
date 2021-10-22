@@ -8,7 +8,7 @@
       lang('home'),
       getUrlByName('user', ['login' => Request::get('login')]),
       lang('profile'),
-      lang('answers-n') . ' ' . $uid['user_login'],
+      lang('answers-n') . ' ' . $data['user_login'],
     ); ?>
   </div>
   <?php if (!empty($data['answers'])) { ?>

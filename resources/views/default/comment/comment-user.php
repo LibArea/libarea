@@ -8,7 +8,7 @@
       lang('home'),
       getUrlByName('user', ['login' => Request::get('login')]),
       lang('profile'),
-      lang('comments-n') . ' ' . $uid['user_login']
+      lang('comments-n') . ' ' . $data['user_login']
     ); ?>
   </div>
   <?php if (!empty($data['comments'])) { ?>

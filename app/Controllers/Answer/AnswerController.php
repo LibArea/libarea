@@ -73,7 +73,8 @@ class AnswerController extends MainController
 
         $data = [
             'sheet'         => 'user-answers',
-            'answers'       => $result
+            'answers'       => $result,
+            'user_login'    => $user['user_login'],
         ];
 
         return view('/answer/answer-user', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);

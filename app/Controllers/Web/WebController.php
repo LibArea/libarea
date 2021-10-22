@@ -62,7 +62,7 @@ class WebController extends MainController
         $limit      = 25;
         $data       = ['link_url_domain' => $link['link_url_domain']];
         $posts      = FeedModel::feed($page, $limit, $uid, $sheet, 'link', $data);
-        $pagesCount = FeedModel::feedCount($uid, 'link', $data);
+        $pagesCount = FeedModel::feedCount($uid, $sheet, 'link', $data);
 
         $result = array();
         foreach ($posts as $ind => $row) {

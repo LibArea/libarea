@@ -171,8 +171,9 @@ class PostController extends MainController
         $meta = meta($m, lang('posts') . ' ' . $login, lang('participant posts') . ' ' . $login);
 
         $data = [
-            'sheet' => 'user-post',
-            'posts' => $result,
+            'sheet'         => 'user-post',
+            'posts'         => $result,
+            'user_login'    => $user['user_login'],
         ];
 
         return view('/post/post-user', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);

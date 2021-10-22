@@ -72,7 +72,8 @@ class CommentController extends MainController
 
         $data = [
             'sheet'         => 'user-comments',
-            'comments'      => $result
+            'comments'      => $result,
+            'user_login'    => $user['user_login'],
         ];
 
         return view('/comment/comment-user', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
