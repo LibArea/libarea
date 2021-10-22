@@ -4,6 +4,7 @@ use App\Models\ContentModel;
 
 class Content
 {
+    
     // Работа с контентом (Parsedown)
     public static function text($content, $type)
     { 
@@ -73,10 +74,10 @@ class Content
 
     public static function parseVideo($content)
     {
-        $regex  = '/https:\/\/(www\.|m\.){0,1}(youtube\.com\/watch\?v=|youtu\.be)([^< \n]+)/mi';
+        $regex  = '/(?:(?:https?:)?(?:\/\/)?)(?:(?:www)?\.)?youtube\.(?:.+?)\/(?:(?:watch\?v=)|(?:embed\/))([a-zA-Z0-9_-]{11})/';
         $info   = preg_match($regex, $content, $matches);
         if ($info) {
-            $id  = $matches[3];
+            $id  = $matches[1];
             $url = "https://www.youtube.com/embed/" . basename($id);
             $bodyvideo =
                 "<div class='video'>" .
