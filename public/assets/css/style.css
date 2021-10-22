@@ -476,9 +476,10 @@ ol.comment-telo { padding-left: 23px; }
   height: 160px;
 }
 
-.home-img {
-  width: 250px;
-  height: 160px;
+.home-img,
+.thumb {
+  width: 260px;
+  height: 130px;
   object-fit: cover;
 }
 

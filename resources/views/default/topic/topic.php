@@ -34,14 +34,23 @@
               </div>
             <?php } ?>
           <?php } ?>
-          <a title="<?= lang('info'); ?>" class="size-14 lowercase right gray" href="<?= getUrlByName('topic', ['slug' => $data['topic']['topic_slug']]); ?>/info">
+          <a title="<?= lang('info'); ?>" class="size-14 lowercase right mt5 gray" href="<?= getUrlByName('topic', ['slug' => $data['topic']['topic_slug']]); ?>/info">
             <i class="bi bi-info-square green"></i>
           </a>
         </div>
       </div>
     </div>
   </div>
-
+  
+  <div class="bg-white flex flex-row items-center justify-between border-box-1 br-rd5 p15 mb15">
+  <p class="m0 size-18"><?= lang('feed'); ?></p>
+  <?php $pages = [
+      ['id' => 'topic', 'url' => getUrlByName('topic', ['slug' => $data['topic']['topic_slug']]), 'content' => lang('feed'), 'icon' => 'bi bi-sort-down'],
+      ['id' => 'recommend', 'url' => getUrlByName('topic', ['slug' => $data['topic']['topic_slug']]) . '/recommend', 'content' => lang('recommended'), 'icon' => 'bi bi-lightning'],
+    ];
+    includeTemplate('/_block/tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
+    ?>
+  </div>  
   <?= includeTemplate('/_block/post', ['data' => $data, 'uid' => $uid]); ?>
   <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('topic', ['slug' => $data['topic']['topic_slug']])); ?>
 

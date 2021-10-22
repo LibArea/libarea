@@ -87,6 +87,17 @@ $(function () {
       location.reload();
     });
   });
+  // Recommend a post
+  $(document).on("click", ".post-recommend", function () {
+    let post_id = $(this).data('id');
+    $.ajax({
+      url: '/post/recommend',
+      type: 'POST',
+      data: { post_id: post_id },
+    }).done(function (data) {
+      location.reload();
+    });
+  });
   // Add / Remove from favorites
   $(document).on("click", ".add-favorite", function () {
     let content_id = $(this).data('id');

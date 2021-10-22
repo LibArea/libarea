@@ -6,6 +6,7 @@ Route::before('Authorization@noAuth')->getGroup();
         Route::get('/flag/repost')->controller('ReportController');
         Route::get('/backend/upload/image')->controller('Post\EditPostController@uploadContentImage');
         Route::get('/status/action')->controller('ActionController@deletingAndRestoring');
+        Route::get('/post/recommend')->controller('Post\AddPostController@recommend');
         Route::get('/post/grabtitle')->controller('Post\AddPostController@grabMeta');
         Route::get('/comment/editform')->controller('Comment\EditCommentController');
         Route::get('/post/add/profile')->controller('Post\PostController@addPostProfile');
@@ -128,6 +129,10 @@ Route::get('/answers/page/{page?}')->controller('Answer\AnswerController')->wher
 Route::get('/topics')->controller('Topic\TopicController')->where(['page' => '[0-9]+'])->name('topics');
 Route::get('/topics/page/{page?}')->controller('Topic\TopicController')->where(['page' => '[0-9]+']);
 Route::get('/topic/{slug}')->controller('Topic\TopicController@posts', ['feed'])->where(['slug' => '[A-Za-z0-9-]+'])->name('topic');
+
+Route::get('/topic/{slug}/recommend')->controller('Topic\TopicController@posts', ['recommend'])->where(['slug' => '[A-Za-z0-9-]+'])->name('recommend');
+Route::get('/topic/{slug}/recommend/page/{page?}')->controller('Topic\TopicController@posts', ['recommend'])->where(['slug' => '[A-Za-z0-9-]+', 'page' => '[0-9]+']);
+ 
 Route::get('/topic/{slug}/page/{page?}')->controller('Topic\TopicController@posts', ['feed'])->where(['slug' => '[A-Za-z0-9-]+', 'page' => '[0-9]+']);
 Route::get('/topic/{slug}/info')->controller('Topic\TopicController@info')->where(['slug' => '[A-Za-z0-9-]+'])->name('topic.info');
 

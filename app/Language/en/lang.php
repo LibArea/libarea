@@ -92,6 +92,9 @@ return [
 
     'tl-limitation'                         => 'Your trust level (TL) does not allow you to perform this action',
     
+    'recommended posts' => 'recommended posts',
+    'recommended-posts' => 'Recommended posts in «%1$s» hand - selected. ',
+    
     'welcome-info' => '<p>Thank you for registering! Here you will find brief information on how to use this site. .</p>
     <p>This site consists of <a href="/spaces">Topics</a>.</p>
     <p><i class="icon-lightbulb red"></i> To see other posts from other spaces in the feed, <b>you need <a href="/topics">subscribe</a></b> to those of interest to you. </p>

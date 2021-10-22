@@ -14,6 +14,11 @@ class FeedModel extends MainModel
         if ($type == 'topic') {
             $qa         = $data['topic_slug'];
             $string     = "WHERE topic_list LIKE :qa";
+            if ($sheet == 'recommend') {
+                $qa         = $data['topic_slug'];
+                $string     = "WHERE topic_list LIKE :qa AND post_is_recommend = 1";
+            }
+            
         } elseif ($type == 'link') {
             $selection   = $data['link_url_domain'];
             $string     = "WHERE post_url_domain  = :selection AND post_draft = 0";
@@ -106,11 +111,15 @@ class FeedModel extends MainModel
     }
 
     // Количество постов
-    public static function feedCount($uid, $type, $data)
+    public static function feedCount($uid, $sheet, $type, $data)
     {
         if ($type == 'topic') {
             $qa         = $data['topic_slug'];
             $string     = "WHERE topic_list LIKE :qa";
+            if ($sheet == 'recommend') {
+                $qa         = $data['topic_slug'];
+                $string     = "WHERE topic_list LIKE :qa AND post_is_recommend = 1";
+            }
         } elseif ($type == 'link') {
             $selection   = $data['link_url_domain'];
             $string     = "WHERE post_url_domain  = :selection";

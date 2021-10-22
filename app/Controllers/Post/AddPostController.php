@@ -260,4 +260,24 @@ class AddPostController extends MainController
 
         return true;
     }
+    
+    // Рекомендовать пост
+    public function recommend()
+    {
+        $post_id = Request::getPostInt('post_id');
+
+        // Проверка доступа 
+        $tl     = Validation::validTl($this->uid['user_trust_level'], 5, 0, 1);
+        if ($tl === false) {
+            redirect('/');
+        }
+        
+        $post = PostModel::getPostId($post_id);
+        Base::PageError404($post);
+
+        ActionModel::setRecommend($post_id, $post['post_is_recommend']);
+
+        return true;
+    }
+    
 }

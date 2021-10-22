@@ -7,7 +7,6 @@
           <?= lang('unsubscribe'); ?>
         </div>
       <?php } ?>
-
       <div class="flex mb15">
         <a class="flex black flex-center" href="<?= getUrlByName('user', ['login' => $post['user_login']]); ?>">
           <?= user_avatar_img($post['user_avatar'], 'max', $post['user_login'], 'w44 br-rd-50 mr5'); ?>
@@ -19,7 +18,6 @@
           </div>
         </a>
       </div>
-
       <div class="flex flex-row flex-auto">
         <div class="w-auto pc-mr-20">
           <a class="black" href="<?= $post_url; ?>">
@@ -54,7 +52,7 @@
               <?php } ?>
             </h2>
           </a>
-          <div class="">
+          <div>
             <?= html_topic($post['topic_list'], 'topic', 'gray-light size-14 mr15'); ?>
             <?php if ($post['post_url_domain']) { ?>
               <a class="gray-light size-14 ml10" href="<?= getUrlByName('domain', ['domain' => $post['post_url_domain']]); ?>">
@@ -62,7 +60,6 @@
               </a>
             <?php } ?>
           </div>
-
           <div class="show_add_<?= $post['post_id']; ?>">
             <div data-post_id="<?= $post['post_id']; ?>" class="showpost mt10 mb5 gray-light">
               <?= $post['post_content_preview']; ?>
@@ -70,9 +67,8 @@
             </div>
           </div>
         </div>
-
         <?php if ($post['post_content_img']) { ?>
-          <div class="home-img mt15 flex-auto">
+          <div class="mt10 flex-auto">
             <a title="<?= $post['post_title']; ?>" href="<?= $post_url; ?>">
               <?= post_img($post['post_content_img'], $post['post_title'], 'home-img right br-rd5', 'cover'); ?>
             </a>
@@ -87,7 +83,6 @@
             <?php } ?>
         <?php } ?>
       </div>
-
       <div class="flex flex-row items-center justify-between pt10">
         <div class="flex flex-row items-center">
           <?= votes($uid['user_id'], $post, 'post'); ?>
@@ -102,7 +97,6 @@
           <?= favorite_post($uid['user_id'], $post['post_id'], $post['favorite_tid']); ?>
         </div>
       </div>
-
     </div>
   <?php } ?>
 <?php } else { ?>

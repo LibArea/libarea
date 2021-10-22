@@ -66,11 +66,18 @@
             <?php if ($uid['user_trust_level'] == 5) { ?>
               <a data-type="post" data-id="<?= $data['post']['post_id']; ?>" class="type-action gray-light mr10 ml10">
                 <?php if ($data['post']['post_is_deleted'] == 1) { ?>
-                  <?= lang('recover'); ?>
+                  <i class="bi bi-trash red"></i>
                 <?php } else { ?>
-                  <?= lang('remove'); ?>
+                  <i class="bi bi-trash"></i>
                 <?php } ?>
               </a>
+              <a data-id="<?= $data['post']['post_id']; ?>" class="post-recommend gray-light mr10 ml10">
+                <?php if ($data['post']['post_is_recommend'] == 1) { ?>
+                  <i class="bi bi-lightning blue"></i>
+                <?php } else { ?>
+                  <i class="bi bi-lightning"></i>
+                <?php } ?>
+              </a>   
               <span class="size-14 mr5 ml10">
                 <?= $data['post']['post_hits_count']; ?>
               </span>

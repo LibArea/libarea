@@ -436,6 +436,9 @@ return [
     'the command is executed'               => 'Comanda este executată',
     'you can add more'                      => 'Puteți adăuga mai multe',
 
+    'recommended posts' => 'postări recomandate ',
+    'recommended-posts' => 'Postări recomandate în  «%1$s» selectat manual. ',
+
     'new password has been sent to e-mail'          => 'Noua parolă a fost trimisă prin e-mail',
     'check your e-mail to activate your account'    => 'Verificați-vă e-mailul pentru a vă activa contul',
     'tl-limitation'                                 => 'Nivelul dvs. de încredere (TL) nu permite această acțiune',

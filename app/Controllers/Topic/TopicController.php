@@ -120,7 +120,7 @@ class TopicController extends MainController
         $limit = 25;
         $data       = ['topic_slug' => $topic['topic_slug']];
         $posts      = FeedModel::feed($page, $limit, $uid, $sheet, 'topic', $data);
-        $pagesCount = FeedModel::feedCount($uid, 'topic', $data);
+        $pagesCount = FeedModel::feedCount($uid, $sheet, 'topic', $data);
 
         $result = array();
         foreach ($posts as $ind => $row) {
@@ -131,13 +131,22 @@ class TopicController extends MainController
             $result[$ind]                   = $row;
         }
 
+        $url    = getUrlByName('topic', ['slug' => $topic['topic_slug']]);
+        $title  = $topic['topic_seo_title'] . ' — ' .  lang('topic');
+        $descr  = $topic['topic_description'];
+        if ($sheet == 'recommend') {
+            $url =  getUrlByName('recommend', ['slug' => $topic['topic_slug']]);
+            $title  = $topic['topic_seo_title'] . ' — ' .  lang('recommended posts');
+            $descr  = sprintf(lang('recommended-posts'), $topic['topic_seo_title']) . $topic['topic_description'];           
+        }
+
         $m = [
             'og'         => true,
             'twitter'    => true,
             'imgurl'     => '/uploads/topics/logos/' . $topic['topic_img'],
-            'url'        => getUrlByName('topic', ['slug' => $topic['topic_slug']]),
+            'url'        => $url,
         ];
-        $meta = meta($m, $topic['topic_seo_title'] . ' — ' .  lang('topic'), $topic['topic_description']);
+        $meta = meta($m, $title, $descr);
 
 
         $writers = TopicModel::getWriters($topic['topic_id']);
@@ -145,7 +154,7 @@ class TopicController extends MainController
         $data = [
             'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
-            'sheet'         => 'topic',
+            'sheet'         => $sheet == 'feed' ? 'topic' : 'recommend',
             'topic'         => $topic,
             'posts'         => $result,
             'topic_related' => TopicModel::topicRelated($topic['topic_related']),

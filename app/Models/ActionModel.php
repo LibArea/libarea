@@ -42,6 +42,18 @@ class ActionModel extends MainModel
         DB::run($sql, ['type_id' => $type_id]);
     }
 
+    // Рекомендованно
+    public static function setRecommend($post_id, $status)
+    {
+        if ($status == 1) {
+            $sql = "UPDATE posts SET post_is_recommend = 0 where post_id = :post_id";
+        } else {
+            $sql = "UPDATE posts SET post_is_recommend = 1 where post_id = :post_id";
+        }
+
+        DB::run($sql, ['post_id' => $post_id]);
+    }
+
     public static function getModerations()
     {
         $sql = "SELECT 
