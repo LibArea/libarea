@@ -101,6 +101,7 @@ return [
     'discussion'        => 'Обсуждение',
     'description'       => 'Описание',
     'meta description'  => 'Мета- описание',
+    'short description' => 'Краткое описание',
     'favorites'         => 'Закладки',
     'long'              => 'Длинное',
     'created by'        => 'Создал',

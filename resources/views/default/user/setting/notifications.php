@@ -2,7 +2,15 @@
   <?= includeTemplate('/_block/menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-7 mb-col-12">
-  <?= breadcrumb('/', lang('home'), getUrlByName('user', ['login' => $uid['user_login']]), lang('profile'), lang('notifications')); ?>
+
+  <?= breadcrumb(
+    '/',
+    lang('home'),
+    getUrlByName('user', ['login' => $uid['user_login']]),
+    lang('profile'),
+    lang('notifications')
+  ); ?>
+
   <div class="bg-white flex flex-row items-center justify-between border-box-1 br-rd5 p15 mb15">
     <p class="m0 no-mob"><?= lang($data['sheet']); ?></p>
     <?= includeTemplate('/_block/setting-nav', ['data' => $data, 'uid' => $uid]); ?>
@@ -12,8 +20,16 @@
       <?php csrf_field(); ?>
       <b><?= lang('e-mail notification'); ?>?</b>
       <?= includeTemplate('/_block/form/field-radio', ['data' => [
-        ['title' => lang('when the message came to PM'), 'name' => 'setting_email_pm', 'checked' => !empty($data['setting']['setting_email_pm'])],
-        ['title' => lang('when you contacted me via @'), 'name' => 'setting_email_appealed', 'checked' => !empty($data['setting']['setting_email_appealed'])],
+        [
+          'title' => lang('when the message came to PM'),
+          'name' => 'setting_email_pm',
+          'checked' => !empty($data['setting']['setting_email_pm'])
+        ],
+        [
+          'title' => lang('when you contacted me via @'),
+          'name' => 'setting_email_appealed',
+          'checked' => !empty($data['setting']['setting_email_appealed'])
+        ],
       ]]); ?>
 
       <div class="mb20">

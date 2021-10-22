@@ -3,7 +3,13 @@
 </div>
 <main class="col-span-7 mb-col-12">
   <div class="bg-white br-rd5 border-box-1 pt5 pr15 pb5 pl15">
-    <?= breadcrumb('/', lang('home'), getUrlByName('user', ['login' => Request::get('login')]), lang('profile'), $data['h1']); ?>
+    <?= breadcrumb(
+      '/',
+      lang('home'),
+      getUrlByName('user', ['login' => Request::get('login')]),
+      lang('profile'),
+      lang('comments-n') . ' ' . $uid['user_login']
+    ); ?>
   </div>
   <?php if (!empty($data['comments'])) { ?>
     <?php foreach ($data['comments'] as $comm) { ?>

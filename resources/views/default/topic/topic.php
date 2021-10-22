@@ -6,7 +6,7 @@
   <div class="bg-white br-rd5 border-box-1 mb15 p15">
     <div class="flex">
       <div>
-        <?= topic_logo_img($data['topic']['topic_img'], 'max', $data['topic']['topic_title'], 'w94 border-box-1'); ?>
+        <?= topic_logo_img($data['topic']['topic_img'], 'max', $data['topic']['topic_title'], 'w94 border-box-1 mt5'); ?>
       </div>
       <div class="ml15 w-100">
         <h1 class="mt0">
@@ -17,7 +17,7 @@
             </a>
           <?php } ?>
         </h1>
-        <div class="size-14"><?= $data['topic']['topic_description']; ?></div>
+        <div class="size-14 gray-light-2"><?= $data['topic']['topic_short_description']; ?></div>
         <div class="mt15">
           <?php if (!$uid['user_id']) { ?>
             <a href="<?= getUrlByName('login'); ?>">

@@ -8,7 +8,12 @@
       <?php csrf_field(); ?>
 
       <?= includeTemplate('/_block/form/field-input', ['data' => [
-        ['title' => lang('E-mail'), 'type' => 'email', 'name' => 'email', 'value' => ''],
+        [
+          'title' => lang('E-mail'),
+          'type' => 'email',
+          'name' => 'email',
+          'value' => ''
+        ],
       ]]); ?>
 
       <?= includeTemplate('/_block/captcha'); ?>

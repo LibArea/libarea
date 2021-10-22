@@ -8,8 +8,18 @@
       <?php csrf_field(); ?>
 
       <?= includeTemplate('/_block/form/field-input', ['data' =>  [
-        ['title' => lang('E-mail'), 'type' => 'email', 'name' => 'email', 'value' => ''],
-        ['title' => lang('password'), 'type' => 'password', 'name' => 'password', 'value' => ''],
+        [
+          'title' => lang('E-mail'),
+          'type' => 'email',
+          'name' => 'email',
+          'value' => ''
+        ],
+        [
+          'title' => lang('password'),
+          'type' => 'password',
+          'name' => 'password',
+          'value' => ''
+        ],
       ]]); ?>
 
       <div class="mb20">

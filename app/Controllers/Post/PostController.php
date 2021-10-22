@@ -49,9 +49,6 @@ class PostController extends MainController
             $_SESSION['pagenumbers'][$post['post_id']] = $post['post_id'];
         }
 
-        // Рекомендованные посты
-        $recommend = PostModel::postsSimilar($post['post_id'], $uid, 5);
-
         // Выводить или нет? Что дает просмотр даты изменения?
         // Учитывать ли изменение в сортировки и в оповещение в будущем...
         $post['modified'] = $post['post_date'] != $post['post_modified'] ? true : false;
@@ -71,18 +68,8 @@ class PostController extends MainController
         $comment_n = $post['post_comments_count'] + $post['post_answers_count'];
         $post['num_comments']   = word_form($comment_n, lang('comment'), lang('comments-m'), lang('comments'));
 
-        // Получим ответы
         // post_type: 0 - дискуссия, 1 - Q&A
         $post_answers = AnswerModel::getAnswersPost($post['post_id'], $uid['user_id'], $post['post_type']);
-
-        // Получим ЛО (временно)
-        // Возможно нам стоит просто поднять ответ на первое место?
-        // Изменив порядок сортировки при выбора LO, что позволит удрать это
-        $lo = null;
-        if ($post['post_lo'] > 0) {
-            $lo = AnswerModel::getAnswerLo($post['post_id']);
-            $lo['answer_content'] = $lo['answer_content'];
-        }
 
         $answers = array();
         foreach ($post_answers as $ind => $row) {
@@ -100,9 +87,9 @@ class PostController extends MainController
         $content_img  = false;
         if ($post['post_content_img']) {
             $content_img  = AG_PATH_POSTS_COVER . $post['post_content_img'];
+        } elseif ($post['post_thumb_img']) {
+            $content_img  = AG_PATH_POSTS_THUMB . $post['post_thumb_img'];
         }
-
-        $post_signed   = SubscriptionModel::getFocus($post['post_id'], $uid['user_id'], 'post');
 
         $desc  = explode("\n", $post['post_content']);
         $desc  = strip_tags($desc[0]);
@@ -127,9 +114,6 @@ class PostController extends MainController
             $post_related = PostModel::postRelated($post['post_related']);
         }
         
-        $users = [];
-        // PostModel::getReplyUserPost($post['post_id']);
-
         $m = [
             'og'         => true,
             'twitter'    => true,
@@ -143,12 +127,10 @@ class PostController extends MainController
         $data = [
             'post'          => $post,
             'answers'       => $answers,
-            'recommend'     => $recommend,
-            'lo'            => $lo,
+            'recommend'     => PostModel::postsSimilar($post['post_id'], $uid, 5),
             'post_related'  => $post_related ?? '',
-            'post_signed'   => $post_signed,
+            'post_signed'   => SubscriptionModel::getFocus($post['post_id'], $uid['user_id'], 'post'),
             'topics'        => $topics,
-            'users'         => $users,
             'sheet'         => 'article',
         ];
 
@@ -170,7 +152,7 @@ class PostController extends MainController
         $limit = 100;
         $data       = ['post_user_id' => $user['user_id']];
         $posts      = FeedModel::feed($page, $limit, $uid, $sheet, 'user', $data);
-        $pagesCount = FeedModel::feedCount($uid, 'user', $data);
+        $pagesCount = FeedModel::feedCount($uid, $sheet, 'user', $data);
 
         $result = array();
         foreach ($posts as $ind => $row) {
@@ -189,7 +171,6 @@ class PostController extends MainController
         $meta = meta($m, lang('posts') . ' ' . $login, lang('participant posts') . ' ' . $login);
 
         $data = [
-            'h1'    => lang('posts') . ' ' . $login,
             'sheet' => 'user-post',
             'posts' => $result,
         ];

@@ -62,17 +62,18 @@ class EditTopicController extends MainController
             redirect('/');
         }
 
-        $topic_id           = Request::getPostInt('topic_id');
-        $topic_title        = Request::getPost('topic_title');
-        $topic_description  = Request::getPost('topic_description');
-        $topic_info         = Request::getPost('topic_info');
-        $topic_slug         = Request::getPost('topic_slug');
-        $topic_seo_title    = Request::getPost('topic_seo_title');
-        $topic_merged_id    = Request::getPostInt('topic_merged_id');
-        $topic_is_parent    = Request::getPostInt('topic_is_parent');
-        $topic_count        = Request::getPostInt('topic_count');
-        $topic_user_new     = Request::getPost('user_select');
-        $topic_tl           = Request::getPostInt('content_tl');
+        $topic_id                   = Request::getPostInt('topic_id');
+        $topic_title                = Request::getPost('topic_title');
+        $topic_description          = Request::getPost('topic_description');
+        $topic_short_description    = Request::getPost('topic_short_description');
+        $topic_info                 = Request::getPost('topic_info');
+        $topic_slug                 = Request::getPost('topic_slug');
+        $topic_seo_title            = Request::getPost('topic_seo_title');
+        $topic_merged_id            = Request::getPostInt('topic_merged_id');
+        $topic_is_parent            = Request::getPostInt('topic_is_parent');
+        $topic_count                = Request::getPostInt('topic_count');
+        $topic_user_new             = Request::getPost('user_select');
+        $topic_tl                   = Request::getPostInt('content_tl');
 
         $topic = TopicModel::getTopic($topic_id, 'id');
         Base::PageError404($topic);
@@ -89,6 +90,7 @@ class EditTopicController extends MainController
         Validation::Limits($topic_slug, lang('slug'), '3', '43', $redirect);
         Validation::Limits($topic_seo_title, lang('name SEO'), '4', '225', $redirect);
         Validation::Limits($topic_description, lang('meta description'), '44', '225', $redirect);
+        Validation::Limits($topic_short_description, lang('short description'), '11', '160', $redirect);
         Validation::Limits($topic_info, lang('Info'), '14', '5000', $redirect);
 
         // Запишем img
@@ -107,21 +109,22 @@ class EditTopicController extends MainController
             }
         }
 
-        $post_fields        = Request::getPost() ?? [];
+        $post_fields    = Request::getPost() ?? [];
         $data = [
-            'topic_id'              => $topic_id,
-            'topic_title'           => $topic_title,
-            'topic_description'     => $topic_description,
-            'topic_info'            => $topic_info,
-            'topic_slug'            => $topic_slug,
-            'topic_seo_title'       => $topic_seo_title,
-            'topic_parent_id'       => implode(',', $post_fields['topic_parent_id'] ?? ['0']),
-            'topic_user_id'         => $topic_user_id,
-            'topic_tl'              => $topic_tl,
-            'topic_is_parent'       => $topic_is_parent,
-            'topic_post_related'    => implode(',', $post_fields['post_related'] ?? ['0']),
-            'topic_related'         => implode(',', $post_fields['topic_related'] ?? ['0']),
-            'topic_count'           => $topic_count,
+            'topic_id'                  => $topic_id,
+            'topic_title'               => $topic_title,
+            'topic_description'         => $topic_description,
+            'topic_short_description'   => $topic_short_description,
+            'topic_info'                => $topic_info,
+            'topic_slug'                => $topic_slug,
+            'topic_seo_title'           => $topic_seo_title,
+            'topic_parent_id'           => implode(',', $post_fields['topic_parent_id'] ?? ['0']),
+            'topic_user_id'             => $topic_user_id,
+            'topic_tl'                  => $topic_tl,
+            'topic_is_parent'           => $topic_is_parent,
+            'topic_post_related'        => implode(',', $post_fields['post_related'] ?? ['0']),
+            'topic_related'             => implode(',', $post_fields['topic_related'] ?? ['0']),
+            'topic_count'               => $topic_count,
         ];
 
         TopicModel::edit($data);

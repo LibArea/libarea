@@ -21,6 +21,7 @@ class TopicModel extends MainModel
                     topic_id,
                     topic_title,
                     topic_description,
+                    topic_short_description,
                     topic_slug,
                     topic_img,
                     topic_parent_id,
@@ -67,6 +68,7 @@ class TopicModel extends MainModel
                     topic_id,
                     topic_title,
                     topic_description,
+                    topic_short_description,
                     topic_info,
                     topic_slug,
                     topic_img,
@@ -276,20 +278,22 @@ class TopicModel extends MainModel
     public static function add($data)
     {
         $params = [
-            'topic_title'       => $data['topic_title'],
-            'topic_description' => $data['topic_description'],
-            'topic_slug'        => $data['topic_slug'],
-            'topic_img'         => $data['topic_img'],
-            'topic_add_date'    => $data['topic_add_date'],
-            'topic_seo_title'   => $data['topic_seo_title'],
-            'topic_merged_id'   => $data['topic_merged_id'],
-            'topic_user_id'     => $data['topic_user_id'],
-            'topic_related'     => $data['topic_related'],
-            'topic_count'       => $data['topic_count'],
+            'topic_title'               => $data['topic_title'],
+            'topic_description'         => $data['topic_description'],
+            'topic_short_description'   => $data['topic_short_description'],
+            'topic_slug'                => $data['topic_slug'],
+            'topic_img'                 => $data['topic_img'],
+            'topic_add_date'            => $data['topic_add_date'],
+            'topic_seo_title'           => $data['topic_seo_title'],
+            'topic_merged_id'           => $data['topic_merged_id'],
+            'topic_user_id'             => $data['topic_user_id'],
+            'topic_related'             => $data['topic_related'],
+            'topic_count'               => $data['topic_count'],
         ];
 
         $sql = "INSERT INTO topics(topic_title, 
                         topic_description, 
+                        topic_short_description,
                         topic_slug, 
                         topic_img,
                         topic_add_date,
@@ -300,6 +304,7 @@ class TopicModel extends MainModel
                         topic_count) 
                             VALUES(:topic_title, 
                                 :topic_description, 
+                                :topic_short_description, 
                                 :topic_slug, 
                                 :topic_img, 
                                 :topic_add_date,
@@ -317,35 +322,37 @@ class TopicModel extends MainModel
     public static function edit($data)
     {
         $params = [
-            'topic_title'           => $data['topic_title'],
-            'topic_description'     => $data['topic_description'],
-            'topic_info'            => $data['topic_info'],
-            'topic_slug'            => $data['topic_slug'],
-            'topic_seo_title'       => $data['topic_seo_title'],
-            'topic_parent_id'       => $data['topic_parent_id'],
-            'topic_is_parent'       => $data['topic_is_parent'],
-            'topic_user_id'         => $data['topic_user_id'],
-            'topic_tl'              => $data['topic_tl'],
-            'topic_post_related'    => $data['topic_post_related'],
-            'topic_related'         => $data['topic_related'],
-            'topic_count'           => $data['topic_count'],
-            'topic_id'              => $data['topic_id'],
+            'topic_title'               => $data['topic_title'],
+            'topic_description'         => $data['topic_description'],
+            'topic_short_description'   => $data['topic_short_description'],
+            'topic_info'                => $data['topic_info'],
+            'topic_slug'                => $data['topic_slug'],
+            'topic_seo_title'           => $data['topic_seo_title'],
+            'topic_parent_id'           => $data['topic_parent_id'],
+            'topic_is_parent'           => $data['topic_is_parent'],
+            'topic_user_id'             => $data['topic_user_id'],
+            'topic_tl'                  => $data['topic_tl'],
+            'topic_post_related'        => $data['topic_post_related'],
+            'topic_related'             => $data['topic_related'],
+            'topic_count'               => $data['topic_count'],
+            'topic_id'                  => $data['topic_id'],
         ];
 
         $sql = "UPDATE topics 
-                    SET topic_title     = :topic_title,  
-                    topic_description   = :topic_description, 
-                    topic_info          = :topic_info, 
-                    topic_slug          = :topic_slug, 
-                    topic_seo_title     = :topic_seo_title, 
-                    topic_parent_id     = :topic_parent_id,
-                    topic_user_id       = :topic_user_id, 
-                    topic_tl            = :topic_tl,                    
-                    topic_is_parent     = :topic_is_parent, 
-                    topic_post_related  = :topic_post_related, 
-                    topic_related       = :topic_related, 
-                    topic_count         = :topic_count 
-                        WHERE topic_id  = :topic_id";
+                    SET topic_title         = :topic_title,  
+                    topic_description       = :topic_description, 
+                    topic_short_description = :topic_short_description, 
+                    topic_info              = :topic_info, 
+                    topic_slug              = :topic_slug, 
+                    topic_seo_title         = :topic_seo_title, 
+                    topic_parent_id         = :topic_parent_id,
+                    topic_user_id           = :topic_user_id, 
+                    topic_tl                = :topic_tl,                    
+                    topic_is_parent         = :topic_is_parent, 
+                    topic_post_related      = :topic_post_related, 
+                    topic_related           = :topic_related, 
+                    topic_count             = :topic_count 
+                        WHERE topic_id      = :topic_id";
 
         return  DB::run($sql, $params);
     }

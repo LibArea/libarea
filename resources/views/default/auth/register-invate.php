@@ -5,10 +5,36 @@
       <?php csrf_field(); ?>
 
       <?= includeTemplate('/_block/form/field-input', ['data' => [
-        ['title' => lang('nickname'), 'type' => 'text', 'name' => 'login', 'value' => '', 'min' => 3, 'max' => 10, 'help' => '3 - 10 ' . lang('characters')],
-        ['title' => lang('E-mail'), 'type' => 'email', 'name' => 'email', 'value' => $data['invate']['invitation_email']],
-        ['title' => lang('password'), 'type' => 'password', 'name' => 'password', 'value' => '', 'min' => 8, 'max' => 32, 'help' => '8 - 32 ' . lang('characters')],
-        ['title' => lang('repeat the password'), 'type' => 'password', 'name' => 'password_confirm', 'value' => ''],
+        [
+          'title' => lang('nickname'),
+          'type' => 'text',
+          'name' => 'login',
+          'value' => '',
+          'min' => 3,
+          'max' => 10,
+          'help' => '3 - 10 ' . lang('characters')
+        ],
+        [
+          'title' => lang('E-mail'),
+          'type' => 'email',
+          'name' => 'email',
+          'value' => $data['invate']['invitation_email']
+        ],
+        [
+          'title' => lang('password'),
+          'type' => 'password',
+          'name' => 'password',
+          'value' => '', 
+          'min' => 8,
+          'max' => 32,
+          'help' => '8 - 32 ' . lang('characters')
+        ],
+        [
+          'title' => lang('repeat the password'),
+          'type' => 'password',
+          'name' => 'password_confirm',
+          'value' => ''
+        ],
       ]]); ?>
 
       <div class="mb20">

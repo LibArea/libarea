@@ -2,7 +2,15 @@
   <?= includeTemplate('/_block/menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-7 mb-col-12">
-  <?= breadcrumb('/', lang('home'), getUrlByName('user', ['login' => $uid['user_login']]), lang('profile'), lang('settings')); ?>
+
+  <?= breadcrumb(
+    '/',
+    lang('home'),
+    getUrlByName('user', ['login' => $uid['user_login']]),
+    lang('profile'),
+    lang('settings')
+  ); ?>
+
   <div class="bg-white flex flex-row center items-center justify-between border-box-1 br-rd5 p15 mb15">
     <p class="m0 no-mob"><?= lang($data['sheet']); ?></p>
     <?= includeTemplate('/_block/setting-nav', ['data' => $data, 'uid' => $uid]); ?>
@@ -23,11 +31,29 @@
         <span class="mr5 ml5"><?= $data['user']['user_email']; ?></span>
       </div>
 
-      <?= includeTemplate('/_block/form/field-input', ['data' => [
-        ['title' => lang('name'), 'type' => 'text', 'name' => 'name', 'value' => $data['user']['user_name'], 'min' => 3, 'max' => 11, 'help' => '3 - 11 ' . lang('characters')],
-      ]]); ?>
+      <?= includeTemplate('/_block/form/field-input', [
+        'data' => [
+          [
+            'title' => lang('name'),
+            'type' => 'text',
+            'name' => 'name',
+            'value' => $data['user']['user_name'],
+            'min' => 3,
+            'max' => 11,
+            'help' => '3 - 11 ' . lang('characters')
+          ],
+        ]
+      ]); ?>
 
-      <?php includeTemplate('/_block/editor/textarea', ['title' => lang('about me'), 'type' => 'text', 'name' => 'about', 'content' => $data['user']['user_about'], 'min' => 0, 'max' => 255, 'help' => '0 - 255 ' . lang('characters')]); ?>
+      <?php includeTemplate('/_block/editor/textarea', [
+        'title' => lang('about me'),
+        'type' => 'text',
+        'name' => 'about',
+        'content' => $data['user']['user_about'],
+        'min' => 0,
+        'max' => 255,
+        'help' => '0 - 255 ' . lang('characters')
+      ]); ?>
 
       <div id="box" class="mb20">
         <label class="block" for="post_content"><?= lang('color'); ?></label>

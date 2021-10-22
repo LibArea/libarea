@@ -28,12 +28,6 @@ class TopicController extends MainController
             $num = sprintf(lang('page-number'), $page);
         }
 
-        $result = array();
-        foreach ($topics as $ind => $row) {
-            $row['topic_cropped']   = cutWords($row['topic_description'], 9);
-            $result[$ind]           = $row;
-        }
-
         $m = [
             'og'         => false,
             'twitter'    => false,
@@ -44,7 +38,7 @@ class TopicController extends MainController
 
         $data = [
             'sheet'         => 'topics',
-            'topics'        => $result,
+            'topics'        => $topics,
             'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
             'news'          => TopicModel::getTopicNew(10),
@@ -64,12 +58,6 @@ class TopicController extends MainController
         $pagesCount = TopicModel::getTopicsAllCount($uid['user_id'], 'subscription');
         $topics     = TopicModel::getTopicsAll($page, $limit, $uid['user_id'], 'subscription');
 
-        $result = array();
-        foreach ($topics as $ind => $row) {
-            $row['topic_cropped']   = cutWords($row['topic_description'], 9);
-            $result[$ind]           = $row;
-        }
-
         $m = [
             'og'         => false,
             'twitter'    => false,
@@ -83,7 +71,7 @@ class TopicController extends MainController
             'sheet'             => 'my-topics',
             'pagesCount'        => ceil($pagesCount / $limit),
             'pNum'              => $page,
-            'topics'            => $result,
+            'topics'            => $topics,
         ];
 
         return view('/topic/topics', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
@@ -113,9 +101,6 @@ class TopicController extends MainController
         }
 
         $topic['topic_add_date']    = lang_date($topic['topic_add_date']);
-
-        $text = explode("\n", $topic['topic_description']);
-        $topic['topic_cropped']    = Content::text($text[0], 'line');
 
         $limit = 25;
         $data       = ['topic_slug' => $topic['topic_slug']];

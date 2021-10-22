@@ -95,6 +95,7 @@ return [
     'discussion'        => 'Discuţie',
     'description'       => 'Descriere',
     'meta description'  => 'Descriere meta',
+    'short description' => 'Scurta descriere',
     'translation'       => 'Traducere',
     'favorites'         => 'Marcaje',
     'long'              => 'Lung',

@@ -1,5 +1,11 @@
 <p align="center"><a href="https://agouti.ru" target="_blank"><img src="https://agouti.ru/assets/svg/agouti.svg" width="120"></a></p>
 
+<p align="center">
+<a href="https://github.com/AgoutiDev/agouti/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT%20(Free)-brightgreen.svg" alt="License: MIT"></a>
+<img src="https://img.shields.io/badge/PHP-^7.4.0-blue" alt="PHP">
+<img src="https://img.shields.io/badge/PHP-8-blue" alt="PHP">
+</p>
+
 # Agouti
 
 Discussion (forum) and Q&A platform. Community based on PHP Micro-Framework HLEB.
@@ -39,10 +45,6 @@ https://github.com/phphleb/hleb
 Routing > Controllers > Models > Page Builder > Debug Panel
 
 A distinctive feature of the micro-framework HLEB is the minimalism of the code and the speed of work.
-
-#### MIT License
-
-https://github.com/AgoutiDev/agouti/blob/main/LICENSE 
 
 ---
 

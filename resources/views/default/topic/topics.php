@@ -27,17 +27,17 @@
       <div class="flex flex-row flex-wrap grid-cols-2 mb20">
         <?php foreach ($data['topics'] as $topic) { ?>
           <div class="w-50 mb-w-100 mb20 flex flex-row">
-            <a title="<?= $topic['topic_title']; ?>" class="mt5 mr10" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
+            <a title="<?= $topic['topic_title']; ?>" class="mr10" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
               <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'w54'); ?>
             </a>
-            <div class="ml5">
+            <div class="ml5 w-100 mr20">
               <?php if ($uid['user_id']) { ?>
                 <?php if ($topic['signed_topic_id']) { ?>
-                  <div data-id="<?= $topic['topic_id']; ?>" data-type="topic" class="focus-id right inline br-rd20 gray-light-2 center mr15 pr15">
+                  <div data-id="<?= $topic['topic_id']; ?>" data-type="topic" class="focus-id right inline br-rd20 gray-light-2 center mr15">
                     <sup><?= lang('unsubscribe'); ?></sup>
                   </div>
                 <?php } else { ?>
-                  <div data-id="<?= $topic['topic_id']; ?>" data-type="topic" class="focus-id right inline br-rd20 blue center mr15 pr15">
+                  <div data-id="<?= $topic['topic_id']; ?>" data-type="topic" class="focus-id right inline br-rd20 blue center mr15">
                     <sup><i class="bi bi-plus"></i> <?= lang('read'); ?></sup>
                   </div>
                 <?php } ?>
@@ -50,7 +50,7 @@
               <?php if ($topic['topic_is_parent'] == 1 && $uid['user_trust_level'] == 5) { ?>
                 <sup class="red size-14">r</sup>
               <?php } ?>
-              <div class="size-14 pr15"><?= $topic['topic_cropped']; ?>...</div>
+              <div class="size-14 mt5 pr15 gray-light-2"><?= $topic['topic_short_description']; ?></div>
             </div>
           </div>
         <?php } ?>

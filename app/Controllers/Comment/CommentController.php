@@ -71,7 +71,6 @@ class CommentController extends MainController
         $meta = meta($m, lang('comments-n') . ' ' . $login, lang('comments-n') . ' ' . $login);
 
         $data = [
-            'h1'            => lang('comments-n') . ' ' . $login,
             'sheet'         => 'user-comments',
             'comments'      => $result
         ];

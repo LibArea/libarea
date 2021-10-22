@@ -329,6 +329,8 @@ class PostModel extends MainModel
                     topic_id,
                     topic_title,
                     topic_slug,
+                    topic_img,
+                    topic_short_description,
                     relation_topic_id,
                     relation_post_id
                         FROM topics  
@@ -337,38 +339,5 @@ class PostModel extends MainModel
 
         return DB::run($sql, ['post_id' => $post_id])->fetchAll(PDO::FETCH_ASSOC);
     }
-    
-    // Кто ответил в посте
-    // TODO: эксперемент
-    public static function getReplyUserPost($post_id)
-    {
-        // TODO: временно проверим группировку
-        // user_id, 
-        // user_login,
-        // user_avatar,
-        // LEFT JOIN users ON user_id = answer_user_id OR user_id = comment_user_id
-        $sql = "SELECT 
-                  answer_id,
-                  answer_user_id,
-                  answer_post_id,
-                  answer_is_deleted, 
-                  rel.* 
-                      FROM answers
-                      LEFT JOIN
-                        ( SELECT 
-                              MAX(comment_id),
-                              MAX(comment_user_id),
-                              MAX(comment_post_id) as comm_post_id,
-                              MAX(comment_is_deleted),
-                              comment_answer_id 
-                                FROM comments  
-                                WHERE comment_is_deleted = 0  
-                                  GROUP BY comment_answer_id
-                        ) AS rel
-                            ON rel.comment_answer_id = answer_id
- 
-                  WHERE answer_post_id = 312";
 
-        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
-    }
 }

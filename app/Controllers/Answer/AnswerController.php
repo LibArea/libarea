@@ -72,7 +72,6 @@ class AnswerController extends MainController
         $meta = meta($m, lang('answers') . ' ' . $login, lang('responses from community members') . ' ' . $login);
 
         $data = [
-            'h1'            =>  lang('answers-n') . ' ' . $login,
             'sheet'         => 'user-answers',
             'answers'       => $result
         ];

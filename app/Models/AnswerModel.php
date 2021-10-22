@@ -87,29 +87,6 @@ class AnswerModel extends MainModel
         return DB::run($sql)->rowCount();
     }
 
-    // Получаем лучший комментарий (LO)
-    public static function getAnswerLo($post_id)
-    {
-        $sql = "SELECT 
-                    answer_id,
-                    answer_post_id,
-                    answer_user_id,
-                    answer_date,
-                    answer_modified,
-                    answer_published,
-                    answer_ip,
-                    answer_order,
-                    answer_after,
-                    answer_votes,
-                    answer_content,
-                    answer_lo,
-                    answer_is_deleted
-                        FROM answers 
-                            WHERE answer_post_id = :post_id AND answer_lo > 0";
-
-        return  DB::run($sql, ['post_id' => $post_id])->fetch(PDO::FETCH_ASSOC);
-    }
-
     // Получаем ответы в посте
     public static function getAnswersPost($post_id, $user_id, $type)
     {

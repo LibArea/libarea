@@ -80,6 +80,21 @@
           <textarea class="add" rows="6" minlength="44" name="topic_description"><?= $data['topic']['topic_description']; ?></textarea>
           <div class="size-14 gray-light-2">> 44 <?= lang('characters'); ?></div>
         </div>
+        <?= includeTemplate('/_block/form/field-input', [
+          'data' => [
+            [
+              'title' => lang('short description'),
+              'type' => 'text',
+              'name' => 'topic_short_description',
+              'value' => $data['topic']['topic_short_description'],
+              'min' => 11,
+              'max' => 120,
+              'help' => '11 - 120 ' . lang('characters'),
+              'red' => 'red'
+            ],
+          ]
+        ]); ?>
+        
         <div class="mb20">
           <label for="topic_content"><?= lang('info'); ?><sup class="red">*</sup></label>
           <textarea class="add" rows="6" name="topic_info"><?= $data['topic']['topic_info']; ?></textarea>

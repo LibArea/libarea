@@ -44,18 +44,20 @@ class AddTopicController extends MainController
             redirect('/');
         }
 
-        $topic_title        = Request::getPost('topic_title');
-        $topic_description  = Request::getPost('topic_description');
-        $topic_slug         = Request::getPost('topic_slug');
-        $topic_seo_title    = Request::getPost('topic_seo_title');
-        $topic_merged_id    = Request::getPost('topic_merged_id');
-        $topic_related      = Request::getPost('topic_related');
+        $topic_title                = Request::getPost('topic_title');
+        $topic_description          = Request::getPost('topic_description');
+        $topic_short_description    = Request::getPost('topic_short_description');
+        $topic_slug                 = Request::getPost('topic_slug');
+        $topic_seo_title            = Request::getPost('topic_seo_title');
+        $topic_merged_id            = Request::getPost('topic_merged_id');
+        $topic_related              = Request::getPost('topic_related');
 
         $redirect = getUrlByName('topic.add');
 
         Validation::charset_slug($topic_slug, 'Slug (url)', $redirect);
         Validation::Limits($topic_title, lang('title'), '3', '64', $redirect);
         Validation::Limits($topic_description, lang('neta description'), '44', '225', $redirect);
+        Validation::Limits($topic_short_description, lang('short description'), '11', '160', $redirect);
         Validation::Limits($topic_slug, lang('slug'), '3', '43', $redirect);
         Validation::Limits($topic_seo_title, lang('slug'), '4', '225', $redirect);
 
@@ -65,16 +67,17 @@ class AddTopicController extends MainController
         }
 
         $data = [
-            'topic_title'       => $topic_title,
-            'topic_description' => $topic_description,
-            'topic_slug'        => $topic_slug,
-            'topic_img'         => 'topic-default.png',
-            'topic_add_date'    =>  date("Y-m-d H:i:s"),
-            'topic_seo_title'   => $topic_seo_title,
-            'topic_merged_id'   => $topic_merged_id ?? 0,
-            'topic_user_id'     => $this->uid['user_id'],
-            'topic_related'     => $topic_related ?? 0,
-            'topic_count'       => 0,
+            'topic_title'               => $topic_title,
+            'topic_description'         => $topic_description,
+            'topic_short_description'   => $topic_short_description,
+            'topic_slug'                => $topic_slug,
+            'topic_img'                 => 'topic-default.png',
+            'topic_add_date'            =>  date("Y-m-d H:i:s"),
+            'topic_seo_title'           => $topic_seo_title,
+            'topic_merged_id'           => $topic_merged_id ?? 0,
+            'topic_user_id'             => $this->uid['user_id'],
+            'topic_related'             => $topic_related ?? 0,
+            'topic_count'               => 0,
         ];
 
         $topic = TopicModel::add($data);
