@@ -127,7 +127,8 @@ function includeTemplate(string $template, array $params = [])
 
 function view(string $template, array $params = [])
 {
-    includeTemplate('/header', ['uid' => $params['uid'], 'meta' => $params['meta']]);
+    $topic =  $params['topic'] ?? [];
+    includeTemplate('/header', ['uid' => $params['uid'], 'meta' => $params['meta'], 'topic' => $topic]);
     includeTemplate($template, ['uid' => $params['uid'], 'data' => $params['data']]);
     includeTemplate('/footer');
 }

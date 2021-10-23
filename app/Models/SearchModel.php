@@ -23,7 +23,7 @@ class SearchModel extends MainModel
             LEFT JOIN ( SELECT  
                     MAX(topic_id),  
                     MAX(topic_slug),  
-                    MAX(topic_title),  
+                    MAX(topic_title),
                     MAX(relation_topic_id),  
                     MAX(relation_post_id) as p_id,  
                     GROUP_CONCAT(topic_slug, '@', topic_title SEPARATOR '@') AS topic_list  
@@ -57,15 +57,28 @@ class SearchModel extends MainModel
         return DB::run($sql, ['qa' => $query], 'mysql.sphinx-search')->fetchall(PDO::FETCH_ASSOC);
     }
     
-    public static function getSearchTagsServer($query)
+    public static function getSearchTags($query, $type)
     {
+        if ($type == 'server') {
+
+            $sql = "SELECT 
+                topic_slug, 
+                topic_count, 
+                topic_title,
+                topic_img
+                    FROM tagind WHERE MATCH(:qa) LIMIT 10";
+                    
+            return DB::run($sql, ['qa' => $query], 'mysql.sphinx-search')->fetchall(PDO::FETCH_ASSOC);
+        } 
+        
         $sql = "SELECT 
                     topic_slug, 
                     topic_count, 
-                    topic_title
-                        FROM tagind WHERE MATCH(:qa) LIMIT 10";
+                    topic_title,
+                    topic_img
+                        FROM topics WHERE topic_title LIKE :qa OR topic_slug LIKE :qa LIMIT 10";
 
-        return DB::run($sql, ['qa' => $query], 'mysql.sphinx-search')->fetchall(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['qa' => "%" . $query . "%"])->fetchall(PDO::FETCH_ASSOC);
     }
     
 }

@@ -150,7 +150,7 @@ class TopicController extends MainController
             'writers'       => $writers,
         ];
 
-        return view('/topic/topic', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+        return view('/topic/topic', ['meta' => $meta, 'uid' => $uid, 'data' => $data, 'topic'   => $topic['topic_id']]);
     }
 
     // Информация по теме

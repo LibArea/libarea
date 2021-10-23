@@ -1,23 +1,23 @@
 <div class="col-span-2 no-mob"></div>
 <main class="col-span-8 bg-white br-rd5 border-box-1 pt10 pr15 pb5 pl15">
   <div class="col-span-2 no-mob mb20">
-    <b class="size-21 mr15 inline"><?= lang('search'); ?></b>
     <?php if (!empty($data['result'])) { ?>
-      <span class="ml16">
+      <div class="ml16 size-21">
         <?= lang('you were looking for'); ?>: <b><?= $data['query']; ?></b>
         (<?= $data['count']; ?>)
-      </span>
+      </div>
     <?php } ?>
-    <div>
+    <?php if (!empty($data['tags'])) { ?>
       <?php foreach ($data['tags'] as $key => $topic) { ?>
-        <span class="max-w780 mr15 mb15 mt15">
-          <a class="bg-blue-100 bg-hover-green white-hover flex justify-center pt5 pr10 pb5 pl10 br-rd20 blue inline size-14" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
+        <div class="max-w780 mr15 mb15 mt10">
+          <a class="flex justify-center pt5 pr5 pb5 br-rd20 black inline size-14" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
+            <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'w24 mr5 border-box-1'); ?>
             <?= $topic['topic_title']; ?>
           </a>
           <sup class="gray">x<?= $topic['topic_count']; ?></sup>
-        </span>
+        </div>
       <?php } ?>
-    </div>
+    <?php } ?>
   </div>
   <?php if (!empty($data['result'])) { ?>
     <?php if (Config::get('general.search') == 0) { ?>
@@ -35,7 +35,7 @@
             </a>
             <div class="flex flex-row items-center gray size-14 lowercase">
               <i class="bi bi-heart blue mr5"></i> <?= $post['post_votes']; ?>
-              <i class="bi bi-eye mr5 ml15"></i> <?= $post['post_votes']; ?><?= $post['post_hits_count']; ?>
+              <i class="bi bi-eye mr5 ml15"></i> <?= $post['post_hits_count']; ?>
             </div>
           </div>
         </div>
@@ -55,15 +55,16 @@
             </a>
             <div class="flex flex-row items-center gray size-14 lowercase">
               <i class="bi bi-heart blue mr5"></i> <?= $post['post_votes']; ?>
-              <i class="bi bi-eye mr5 ml15"></i> <?= $post['post_votes']; ?><?= $post['post_hits_count']; ?>
+              <i class="bi bi-eye mr5 ml15"></i> <?= $post['post_hits_count']; ?>
             </div>
           </div>
         </div>
       <?php } ?>
     <?php } ?>
   <?php } else { ?>
-    <p><?= lang('the search has not given any results'); ?>
-    <p>
-    <?php } ?>
+    <div class="mb20"><b><?= lang('the search has not given any results'); ?></b></div>
+    <div class="mb20"><?= lang('too short'); ?></div>
+    <a class="mb20 block" href="/"><?= lang('to main'); ?>...</a>
+  <?php } ?>
 </main>
 <div class="col-span-2 no-mob"></div>

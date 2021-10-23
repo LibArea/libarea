@@ -73,7 +73,7 @@
       <?php } else { ?>
         <div class="col-span-4">
           <div class="flex right items-center">
-            <a href="/post/add" class="blue center p10 no-pc">
+            <a href="/post/add<?php if (!empty($topic)) { ?>/<?= $topic; ?><?php } ?>" class="blue center p10">
               <i class="bi bi-plus-lg size-18"></i>
             </a>
             <div id="toggledark" class="only-icon p10 ml20 mb-ml-10">

@@ -13,6 +13,7 @@ class SearchController extends MainController
     {
         $query  = '';
         $result = '';
+        $tags   = '';
         if (Request::getPost()) {
 
             $qa     =  Request::getPost('q');
@@ -30,10 +31,10 @@ class SearchController extends MainController
                         $result[$ind]   = $row;
                     }
                     $count  = count($qa); 
-                    $tags = [];
+                    $tags   = SearchModel::getSearchTags($query, 'mysql');
                 } else {
                     $qa     = SearchModel::getSearchPostServer($query);
-                    $tags   = SearchModel::getSearchTagsServer($query);
+                    $tags   = SearchModel::getSearchTags($query, 'server');
                     $count  = count($qa); 
                     $result = [];
                     foreach ($qa as $ind => $row) {
