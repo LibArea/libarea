@@ -106,7 +106,6 @@ class RegisterController extends MainController
             $tl = 1;
         }
 
-
         // id участника после регистрации
         $active_uid = UserModel::createUser($login, $email, $password, $reg_ip, $inv_uid, $tl);
 

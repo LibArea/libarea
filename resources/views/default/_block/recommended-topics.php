@@ -1,4 +1,8 @@
 <?php if (Request::getUri() == '/') { ?>
+  <a class="bg-blue-100 bg-hover-green white-hover flex justify-center pt5 pr10 pb5 pl10 br-rd5 p15 mb15 blue size-14" href="/topics">
+    <i class="bi bi-lightbulb middle mr5"></i>
+    <?= lang('topic-subscription'); ?>
+  </a>
   <div class="grid grid-cols-12 gap-4 pr10 pl10 justify-between">
     <?php foreach ($data['topics'] as $topic) { ?>
       <div class="col-span-6 border-box-1 p10">

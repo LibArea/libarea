@@ -22,14 +22,6 @@
     includeTemplate('/_block/tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
     ?>
   </div>
-  <?php if (Request::getUri() == '/' && $uid['user_id'] > 0 && empty($data['topics_user'])) { ?>
-    <div class="center">
-      <a class="bg-blue-100 bg-hover-green white-hover flex justify-center pt5 pr10 pb5 pl10 br-rd5 p15 mb15 blue size-14" href="/topics">
-        <i class="bi bi-lightbulb middle mr5"></i>
-        <?= lang('topic-subscription'); ?>
-      </a>
-    </div>
-  <?php } ?>
   <?= includeTemplate('/_block/post', ['data' => $data, 'uid' => $uid]); ?>
   <div class="mb15">
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], null); ?>
@@ -48,23 +40,34 @@
       <div class="uppercase gray mt5 mb5">
         <?= lang('signed'); ?>
       </div>
-      <?php 
+
+      <?php
+      $my = [];
+      $other = [];
+      foreach ($data['topics_user'] as $topic) {
+        if ($topic['topic_user_id'] == $uid['user_id']) {
+          $my[] = $topic;
+        } else {
+          $other[] = $topic;
+        }
+      }
+      $topics = array_merge($my, $other);
       $n = 0;
-      foreach ($data['topics_user'] as $key => $topic) { 
-        $n++; 
-        if($n > Config::get('topics.number_topics')) break; 
+      foreach ($topics as $key => $topic) {
+        $n++;
+        if ($n > Config::get('topics.number_topics')) break;
       ?>
         <div class="flex relative pt5 pb5 items-center justify-between hidden">
-        <a class="gray-light" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
-          <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'w24 mr5'); ?>
-          <span class="ml5"><?= $topic['topic_title']; ?></span>
-        </a>
-         <?php if ($uid['user_id'] == $topic['topic_user_id']) { ?>
-          <a class="right blue" title="<?= lang('add post'); ?>" href="/post/add/<?= $topic['topic_id']; ?>">
-            <i class="bi bi-plus-lg size-14"></i>
+          <a class="gray-light" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
+            <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'w24 mr5'); ?>
+            <span class="ml5"><?= $topic['topic_title']; ?></span>
           </a>
-        <?php } ?> 
-       </div>
+          <?php if ($uid['user_id'] == $topic['topic_user_id']) { ?>
+            <a class="right blue" title="<?= lang('add post'); ?>" href="/post/add/<?= $topic['topic_id']; ?>">
+              <i class="bi bi-plus-lg size-14"></i>
+            </a>
+          <?php } ?>
+        </div>
       <?php } ?>
       <?php if (count($data['topics_user']) > Config::get('topics.number_topics')) { ?>
         <a class="gray block mt5" title="<?= lang('topics'); ?>" href="<?= getUrlByName('topic.my'); ?>">
@@ -73,21 +76,20 @@
       <?php } ?>
     </div>
   <?php } ?>
-  
-  
-   <?php if ($uid['user_id'] == 0) { ?>
+
+  <?php if ($uid['user_id'] == 0) { ?>
     <div class="border-box-1 p15 mb15 br-rd5 bg-white size-14">
-       <div class="uppercase gray mt5 mb5">
+      <div class="uppercase gray mt5 mb5">
         <?= lang('topics'); ?>
       </div>
-        <?php foreach (Config::get('topics-default') as $key => $topic) { ?>
-           <a class="flex relative pt5 pb5 items-center hidden gray-light" href="<?= $topic['url']; ?>">
-            <img class="w24 mr5 border-box-1" src="<?= $topic['img']; ?>" alt="<?= $topic['name']; ?>">
-            <span class="ml5"><?= $topic['name']; ?></span>
-           </a>
-        <?php } ?>
-      </div>
-    <?php } ?>  
+      <?php foreach (Config::get('topics-default') as $key => $topic) { ?>
+        <a class="flex relative pt5 pb5 items-center hidden gray-light" href="<?= $topic['url']; ?>">
+          <img class="w24 mr5 border-box-1" src="<?= $topic['img']; ?>" alt="<?= $topic['name']; ?>">
+          <span class="ml5"><?= $topic['name']; ?></span>
+        </a>
+      <?php } ?>
+    </div>
+  <?php } ?>
 
   <div class="sticky top0 t-81">
     <?php if (!empty($data['latest_answers'])) { ?>

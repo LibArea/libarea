@@ -26,4 +26,10 @@
       <span class="<?= $sheet == 'favorites' ? 'blue' : ''; ?>"><?= lang('favorites'); ?></span>
     </a>
   <?php } ?>
+  <?php if ($uid['user_trust_level'] > 4) { ?>
+    <a class="pt5 pr10 pb5 pl10 black block" href="<?= getUrlByName('admin.users'); ?>">
+      <i class="bi bi-person-x middle mr5 middle size-18"></i>
+      <span><?= lang('admin'); ?></span>
+    </a>
+  <?php } ?>
 </nav>

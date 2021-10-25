@@ -18,7 +18,8 @@
           <?php } ?>
         </h1>
         <div class="size-14 gray-light-2"><?= $topic['topic_short_description']; ?></div>
-        <div class="mt15">
+
+        <div class="mt15 right">
           <?php if (!$uid['user_id']) { ?>
             <a href="<?= getUrlByName('login'); ?>">
               <div class="bg-gray-200 bg-hover-gray mazarine border-box-1 inline br-rd20 center pt5 pr15 pb5 pl15">+ <?= lang('read'); ?></div>
@@ -34,23 +35,37 @@
               </div>
             <?php } ?>
           <?php } ?>
-          <a title="<?= lang('info'); ?>" class="size-14 lowercase right mt5 gray" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>/info">
-            <i class="bi bi-info-square green"></i>
-          </a>
         </div>
+        <?php if (!empty($data['focus_users'])) { ?>
+          <div class="size-14 mt20 gray-light-2">
+            <div class="uppercase inline mr5"><?= lang('reads'); ?>:</div>
+            <?php $n = 0;
+            foreach ($data['focus_users'] as $user) {
+              $n++; ?>
+              <a class="-mr-1 bg-white" href="<?= getUrlByName('user', ['login' => $user['user_login']]); ?>">
+                <?= user_avatar_img($user['user_avatar'], 'max', $user['user_login'], 'w24 br-rd-50 box-shadow'); ?>
+              </a>
+            <?php } ?>
+            <?php if ($n > 5) { ?><span class="ml10">...</span><?php } ?>
+            <span class="ml10">
+              <?= $topic['topic_focus_count']; ?>
+            </span>
+          </div>
+        <?php } ?>
       </div>
     </div>
   </div>
-  
+
   <div class="bg-white flex flex-row items-center justify-between border-box-1 br-rd5 p15 mb15">
-  <p class="m0 size-18"><?= lang('feed'); ?></p>
-  <?php $pages = [
+    <p class="m0 size-18"><?= lang('feed'); ?></p>
+    <?php $pages = [
       ['id' => 'topic', 'url' => getUrlByName('topic', ['slug' => $topic['topic_slug']]), 'content' => lang('feed'), 'icon' => 'bi bi-sort-down'],
       ['id' => 'recommend', 'url' => getUrlByName('topic', ['slug' => $topic['topic_slug']]) . '/recommend', 'content' => lang('recommended'), 'icon' => 'bi bi-lightning'],
+      ['id' => 'info', 'url' => getUrlByName('topic.info', ['slug' => $topic['topic_slug']]), 'content' => lang('info'), 'icon' => 'bi bi-info-lg'],
     ];
     includeTemplate('/_block/tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
     ?>
-  </div>  
+  </div>
 
   <?= includeTemplate('/_block/post', ['data' => $data, 'uid' => $uid]); ?>
   <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('topic', ['slug' => $topic['topic_slug']])); ?>
@@ -65,13 +80,13 @@
       </div>
       <div class="ml15 center box-number">
         <div class="uppercase mb5 size-14 gray"><?= lang('reads'); ?></div>
-        <?= $topic['topic_focus_count']; ?>
+        <div class="focus-user blue">
+          <?= $topic['topic_focus_count']; ?>
+        </div>
       </div>
     </div>
   </div>
-
   <?= includeTemplate('/_block/topic-sidebar', ['data' => $data, 'uid' => $uid]); ?>
-
   <?php if (!empty($data['writers'])) { ?>
     <div class="sticky top0 t-81">
       <div class="border-box-1 mt15 p15 mb15 br-rd5 bg-white size-14">
@@ -88,3 +103,26 @@
 
 </aside>
 <?= includeTemplate('/_block/wide-footer'); ?>
+
+<script nonce="<?= $_SERVER['nonce']; ?>">
+  $(function() {
+    $(document).on("click", ".focus-user", function() {
+      $.post("/topic/<?= $topic['topic_slug']; ?>/followers", {
+        topic_id: "<?= $topic['topic_id']; ?>"
+      }, function(data) {
+        if (data) {
+          var html = data;
+          layer.open({
+            type: 1,
+            title: "<?= lang('reads'); ?>",
+            area: ['400px', '80%'],
+            shade: 0,
+            maxmin: true,
+            offset: 'auto',
+            content: html
+          });
+        }
+      });
+    });
+  });
+</script>

@@ -378,4 +378,20 @@ class TopicModel extends MainModel
 
         return DB::run($sql, ['user_id' => $user_id])->rowCount();
     }
+    
+   // Участники подписанные на тему
+    public static function getFocusUsers($topic_id, $limit)
+    {
+        $sql = "SELECT 
+                    signed_topic_id, 
+                    signed_user_id,
+                    user_id,
+                    user_login,
+                    user_avatar
+                      FROM topics_signed 
+                        LEFT JOIN users ON user_id = signed_user_id
+                          WHERE signed_topic_id = :topic_id LIMIT $limit";
+
+        return DB::run($sql, ['topic_id' => $topic_id])->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

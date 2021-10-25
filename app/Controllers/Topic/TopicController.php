@@ -99,7 +99,7 @@ class TopicController extends MainController
         if ($sheet == 'recommend') {
             $url =  getUrlByName('recommend', ['slug' => $topic['topic_slug']]);
             $title  = $topic['topic_seo_title'] . ' — ' .  lang('recommended posts');
-            $descr  = sprintf(lang('recommended-posts'), $topic['topic_seo_title']) . $topic['topic_description'];           
+            $descr  = sprintf(lang('recommended-posts'), $topic['topic_seo_title']) . $topic['topic_description'];
         }
 
         $m = [
@@ -119,7 +119,8 @@ class TopicController extends MainController
             'sheet'         => $sheet == 'feed' ? 'topic' : 'recommend',
             'topic'         => $topic,
             'posts'         => $result,
-            'topic_related' => TopicModel::topicRelated($topic['topic_related']),
+            'posts'         => $result,
+            'focus_users'   => TopicModel::getFocusUsers($topic['topic_id'], 5),
             'topic_signed'  => SubscriptionModel::getFocus($topic['topic_id'], $uid['user_id'], 'topic'),
             'user'          => UserModel::getUser($topic['topic_user_id'], 'id'),
             'main_topic'    => $main_topic,
@@ -176,5 +177,14 @@ class TopicController extends MainController
         ];
 
         return view('/topic/info', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+    }
+
+    // Подписаны (25)
+    public function followers()
+    {
+        $topic_id   = Request::getPostInt('topic_id');
+        $users      = TopicModel::getFocusUsers($topic_id, 25);
+
+        return includeTemplate('/topic/followers', ['users' => $users]);
     }
 }
