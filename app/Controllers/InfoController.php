@@ -7,10 +7,19 @@ use Content, Base;
 
 class InfoController extends MainController
 {
+    static protected $path  = HLEB_GLOBAL_DIRECTORY . '/resources/views/' . PR_VIEW_DIR;
+
+    private $uid;
+
+    public function __construct()
+    {
+        $this->uid  = Base::getUid();
+    }
+
     // Далее методы по названию страниц
     public function index()
     {
-        $text = file_get_contents(HLEB_GLOBAL_DIRECTORY . '/resources/views/' . PR_VIEW_DIR . '/info/md/index.md');
+        $text = file_get_contents(static::$path . '/info/md/index.md');
 
         $m = [
             'og'         => false,
@@ -18,19 +27,23 @@ class InfoController extends MainController
             'imgurl'     => false,
             'url'        => getUrlByName('info'),
         ];
-        $meta = meta($m, lang('info'), lang('info-desc'));
 
-        $data = [
-            'sheet'         => 'info',
-            'content'       => Content::text($text, 'text'),
-        ];
-
-        return view('/info/index', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
+        return view(
+            '/info/index',
+            [
+                'meta'  => meta($m, lang('info'), lang('info-desc')),
+                'uid'   => $this->uid,
+                'data'  => [
+                    'sheet'     => 'info',
+                    'content'   => Content::text($text, 'text'),
+                ]
+            ]
+        );
     }
 
     public function privacy()
     {
-        $text = file_get_contents(HLEB_GLOBAL_DIRECTORY . '/resources/views/' . PR_VIEW_DIR . '/info/md/privacy.md');
+        $text = file_get_contents(static::$path . '/info/md/privacy.md');
 
         $m = [
             'og'         => false,
@@ -38,14 +51,18 @@ class InfoController extends MainController
             'imgurl'     => false,
             'url'        => getUrlByName('info.privacy'),
         ];
-        $meta = meta($m, lang('privacy policy'), lang('privacy-desc'));
 
-        $data = [
-            'sheet'         => 'privacy',
-            'content'       => Content::text($text, 'text'),
-        ];
-
-        return view('/info/privacy', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
+        return view(
+            '/info/privacy',
+            [
+                'meta'  => meta($m, lang('privacy policy'), lang('privacy-desc')),
+                'uid'   => $this->uid,
+                'data'  => [
+                    'sheet'     => 'privacy',
+                    'content'   => Content::text($text, 'text'),
+                ]
+            ]
+        );
     }
 
     public function restriction()
@@ -56,12 +73,16 @@ class InfoController extends MainController
             'imgurl'     => false,
             'url'        => getUrlByName('info.restriction'),
         ];
-        $meta = meta($m, lang('restriction'), lang('the profile is being checked'));
 
-        $data = [
-            'sheet'       => 'restriction',
-        ];
-
-        return view('/info/restriction', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
+        return view(
+            '/info/restriction',
+            [
+                'meta'  => meta($m, lang('restriction'), lang('the profile is being checked')),
+                'uid'   => $this->uid,
+                'data'  => [
+                    'sheet'  => 'restriction',
+                ]
+            ]
+        );
     }
 }
