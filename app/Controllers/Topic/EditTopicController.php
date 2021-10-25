@@ -20,14 +20,15 @@ class EditTopicController extends MainController
     // Форма редактирования topic
     public function index()
     {
-        $tl     = Validation::validTl($this->uid['user_trust_level'], 5, 0, 1);
-        if ($tl === false) {
-            redirect('/');
-        }
 
         $topic_id   = Request::getInt('id');
         $topic      = TopicModel::getTopic($topic_id, 'id');
         Base::PageError404($topic);
+
+        // Проверка доступа 
+        if (!accessСheck($topic, 'topic', $this->uid, 0, 0)) {
+            redirect('/');
+        }
 
         Request::getResources()->addBottomStyles('/assets/css/select2.css');
         Request::getHead()->addStyles('/assets/css/image-uploader.css');
@@ -57,11 +58,9 @@ class EditTopicController extends MainController
 
     public function edit()
     {
-        $tl     = Validation::validTl($this->uid['user_trust_level'], 5, 0, 1);
-        if ($tl === false) {
-            redirect('/');
-        }
-
+        // Временно запретим участникам
+        if ($this->uid['user_trust_level'] != 5) redirect('/');
+        
         $topic_id                   = Request::getPostInt('topic_id');
         $topic_title                = Request::getPost('topic_title');
         $topic_description          = Request::getPost('topic_description');
@@ -71,12 +70,16 @@ class EditTopicController extends MainController
         $topic_seo_title            = Request::getPost('topic_seo_title');
         $topic_merged_id            = Request::getPostInt('topic_merged_id');
         $topic_is_parent            = Request::getPostInt('topic_is_parent');
-        $topic_count                = Request::getPostInt('topic_count');
         $topic_user_new             = Request::getPost('user_select');
         $topic_tl                   = Request::getPostInt('content_tl');
 
         $topic = TopicModel::getTopic($topic_id, 'id');
         Base::PageError404($topic);
+
+        // Проверка доступа 
+        if (!accessСheck($topic, 'topic', $this->uid, 0, 0)) {
+            redirect('/');
+        }
 
         // Если убираем тему из корневой, то должны очистеть те темы, которые были подтемами
         if ($topic['topic_is_parent'] == 1 && $topic_is_parent == 0) {
@@ -108,7 +111,15 @@ class EditTopicController extends MainController
                 $topic_user_id = $topic_user_new;
             }
         }
-
+        
+        $slug = TopicModel::getTopic($topic_slug, 'slug');
+        if ($slug['topic_slug'] != $topic['topic_slug']) {
+            if ($slug) {
+                addMsg(lang('url-already-exists'), 'error');
+                redirect(getUrlByName('topic', ['slug' => $topic_slug]));
+            }
+        }
+        
         $post_fields    = Request::getPost() ?? [];
         $data = [
             'topic_id'                  => $topic_id,
@@ -124,7 +135,6 @@ class EditTopicController extends MainController
             'topic_is_parent'           => $topic_is_parent,
             'topic_post_related'        => implode(',', $post_fields['post_related'] ?? ['0']),
             'topic_related'             => implode(',', $post_fields['topic_related'] ?? ['0']),
-            'topic_count'               => $topic_count,
         ];
 
         TopicModel::edit($data);

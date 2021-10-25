@@ -73,23 +73,23 @@
               <?= post_img($post['post_content_img'], $post['post_title'], 'home-img right br-rd5', 'cover'); ?>
             </a>
           </div>
-        <?php } else { ?>  
-           <?php if ($post['post_thumb_img']) { ?>
-                <div class="home-img mt15 flex-auto no-mob-max">
-            <a title="<?= $post['post_title']; ?>" href="<?= $post_url; ?>">
-              <?= post_img($post['post_thumb_img'], $post['post_title'],  'thumb no-mob br-rd5 right', 'thumbnails'); ?>
-            </a>
-          </div>
-            <?php } ?>
+        <?php } else { ?>
+          <?php if ($post['post_thumb_img']) { ?>
+            <div class="home-img mt15 flex-auto no-mob-max">
+              <a title="<?= $post['post_title']; ?>" href="<?= $post_url; ?>">
+                <?= post_img($post['post_thumb_img'], $post['post_title'],  'thumb no-mob br-rd5 right', 'thumbnails'); ?>
+              </a>
+            </div>
+          <?php } ?>
         <?php } ?>
       </div>
       <div class="flex flex-row items-center justify-between pt10">
-        <div class="flex flex-row items-center">
+        <div class="flex flex-row">
           <?= votes($uid['user_id'], $post, 'post'); ?>
           <?php if ($post['post_answers_count'] != 0) { ?>
             <a class="flex gray-light-2 ml15" href="<?= $post_url; ?>">
-                <i class="bi bi-chat-dots mr5"></i>
-                <?= $post['post_answers_count'] + $post['post_comments_count']; ?>
+              <i class="bi bi-chat-text mr5"></i>
+              <?= $post['post_answers_count'] + $post['post_comments_count']; ?>
             </a>
           <?php } ?>
         </div>

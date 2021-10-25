@@ -4,8 +4,8 @@
     <span class="<?= $sheet == 'feed' ? 'blue' : ''; ?>"><?= lang('feed'); ?></span>
   </a>
   <a class="pt5 pr10 pb5 pl10 gray block" title="<?= lang('topics'); ?>" href="<?= getUrlByName('topics'); ?>">
-    <i class="bi bi-columns-gap middle mr5<?= $sheet == 'topics' ? ' blue' : ''; ?> size-18"></i>
-    <span class="<?= $sheet == 'topics' ? 'blue' : ''; ?>"><?= lang('topics'); ?></span>
+    <i class="bi bi-columns-gap middle mr5<?= $sheet == 'topics-all' ? ' blue' : ''; ?> size-18"></i>
+    <span class="<?= $sheet == 'topics-all' ? 'blue' : ''; ?>"><?= lang('topics'); ?></span>
   </a>
   <a class="pt5 pr10 pb5 pl10 gray block" title="<?= lang('users'); ?>" href="<?= getUrlByName('users'); ?>">
     <i class="bi bi-people middle mr5<?= $sheet == 'users' ? ' blue' : ''; ?> size-18"></i>

@@ -323,7 +323,7 @@ class PostModel extends MainModel
         return $result['post_is_deleted'];
     }
 
-    public static function getPostTopic($post_id)
+    public static function getPostTopic($post_id, $user_id)
     {
         $sql = "SELECT
                     topic_id,
@@ -332,12 +332,15 @@ class PostModel extends MainModel
                     topic_img,
                     topic_short_description,
                     relation_topic_id,
-                    relation_post_id
+                    relation_post_id,
+                    signed_topic_id, 
+                    signed_user_id
                         FROM topics  
                         INNER JOIN topics_post_relation ON relation_topic_id = topic_id
+                        LEFT JOIN topics_signed ON signed_topic_id = topic_id AND signed_user_id = :user_id
                             WHERE relation_post_id  = :post_id";
 
-        return DB::run($sql, ['post_id' => $post_id])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['post_id' => $post_id, 'user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
     }
 
 }

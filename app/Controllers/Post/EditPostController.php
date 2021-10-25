@@ -39,7 +39,7 @@ class EditPostController extends MainController
             'post'          => $post,
             'post_select'   => PostModel::postRelated($post['post_related']),
             'user'          => UserModel::getUser($post['post_user_id'], 'id'),
-            'topic_select'  => PostModel::getPostTopic($post['post_id']),
+            'topic_select'  => PostModel::getPostTopic($post['post_id'], $this->uid['user_id']),
         ];
 
         return view('/post/edit', ['meta' => $meta, 'uid' => $this->uid, 'data' => $data]);

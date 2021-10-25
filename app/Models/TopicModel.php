@@ -11,9 +11,11 @@ class TopicModel extends MainModel
     // Все темы
     public static function getTopicsAll($page, $limit, $user_id, $sort)
     {
-        $signet = "";
-        if ($sort == 'subscription') {
-            $signet = "WHERE signed_user_id = :user_id";
+        $signet = "ORDER BY topic_count DESC";
+        if ($sort == 'my') {
+            $signet = "WHERE signed_user_id = :user_id ORDER BY topic_count DESC";
+        } elseif ($sort == 'new') {
+            $signet = "ORDER BY topic_id DESC";
         }
 
         $start  = ($page - 1) * $limit;
@@ -24,6 +26,7 @@ class TopicModel extends MainModel
                     topic_short_description,
                     topic_slug,
                     topic_img,
+                    topic_user_id,
                     topic_parent_id,
                     topic_is_parent,
                     topic_count,
@@ -32,7 +35,7 @@ class TopicModel extends MainModel
                         FROM topics 
                         LEFT JOIN topics_signed ON signed_topic_id = topic_id AND signed_user_id = :user_id
                         $signet
-                        ORDER BY topic_count DESC LIMIT $start, $limit";
+                        LIMIT $start, $limit";
 
         return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -87,19 +90,6 @@ class TopicModel extends MainModel
                         FROM topics WHERE $sort";
 
         return DB::run($sql, ['params' => $params])->fetch(PDO::FETCH_ASSOC);
-    }
-
-    // Новые
-    public static function getTopicNew($count)
-    {
-        $sql = "SELECT 
-                    topic_id,
-                    topic_title,
-                    topic_slug,
-                    topic_img
-                        FROM topics ORDER BY topic_id DESC LIMIT $count";
-
-        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function addPostTopics($rows, $post_id)
@@ -334,7 +324,6 @@ class TopicModel extends MainModel
             'topic_tl'                  => $data['topic_tl'],
             'topic_post_related'        => $data['topic_post_related'],
             'topic_related'             => $data['topic_related'],
-            'topic_count'               => $data['topic_count'],
             'topic_id'                  => $data['topic_id'],
         ];
 
@@ -350,8 +339,7 @@ class TopicModel extends MainModel
                     topic_tl                = :topic_tl,                    
                     topic_is_parent         = :topic_is_parent, 
                     topic_post_related      = :topic_post_related, 
-                    topic_related           = :topic_related, 
-                    topic_count             = :topic_count 
+                    topic_related           = :topic_related
                         WHERE topic_id      = :topic_id";
 
         return  DB::run($sql, $params);

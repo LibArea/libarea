@@ -10,16 +10,16 @@ use Content, Base;
 
 class TopicController extends MainController
 {
-    // Все темы
-    public function index()
+    // all / new / my
+    public function index($sheet)
     {
         $uid    = Base::getUid();
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
-        $limit = 20;
-        $pagesCount = TopicModel::getTopicsAllCount($uid['user_id'], 'all');
-        $topics     = TopicModel::getTopicsAll($page, $limit, $uid['user_id'], 'all');
+        $limit = 40;
+        $pagesCount = TopicModel::getTopicsAllCount($uid['user_id'], $sheet);
+        $topics     = TopicModel::getTopicsAll($page, $limit, $uid['user_id'], $sheet);
 
         Base::PageError404($topics);
 
@@ -28,50 +28,27 @@ class TopicController extends MainController
             $num = sprintf(lang('page-number'), $page);
         }
 
+        if ($sheet == 'all') {
+            $url = getUrlByName('topics');
+        } elseif ($sheet == 'new') {
+            $url = getUrlByName('topics.new');
+        } else {
+            $url = getUrlByName('topics.my');
+        }
+
         $m = [
             'og'         => false,
             'twitter'    => false,
             'imgurl'     => false,
-            'url'        => getUrlByName('topics'),
+            'url'        => $url,
         ];
-        $meta = meta($m, lang('all topics') . $num, lang('topic-desc') . $num);
+        $meta = meta($m, lang('topics-' . $sheet) . $num, lang('topic-desc-' . $sheet) . $num);
 
         $data = [
-            'sheet'         => 'topics',
+            'sheet'         => 'topics-' . $sheet,
             'topics'        => $topics,
             'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
-            'news'          => TopicModel::getTopicNew(10),
-        ];
-
-        return view('/topic/topics', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
-    }
-
-    // Темы участника
-    public function topicsUser()
-    {
-        $uid    = Base::getUid();
-        $page   = Request::getInt('page');
-        $page   = $page == 0 ? 1 : $page;
-        $limit  = 30;
-
-        $pagesCount = TopicModel::getTopicsAllCount($uid['user_id'], 'subscription');
-        $topics     = TopicModel::getTopicsAll($page, $limit, $uid['user_id'], 'subscription');
-
-        $m = [
-            'og'         => false,
-            'twitter'    => false,
-            'imgurl'     => false,
-            'url'        => false,
-        ];
-        $meta = meta($m, lang('Читаю темы'), $desc = '');
-
-        $data = [
-            'h1'                => lang('Читаю темы'),
-            'sheet'             => 'my-topics',
-            'pagesCount'        => ceil($pagesCount / $limit),
-            'pNum'              => $page,
-            'topics'            => $topics,
         ];
 
         return view('/topic/topics', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
@@ -192,7 +169,7 @@ class TopicController extends MainController
             'sheet'         => 'info',
             'topic'         => $topic,
             'topic_related' => TopicModel::topicRelated($topic['topic_related']),
-            'post_select'   => TopicModel::topicPostRelated($topic_select),
+            'post_related'  => TopicModel::topicPostRelated($topic_select),
             'subtopics'     => $subtopics,
             'user'          => UserModel::getUser($topic['topic_user_id'], 'id'),
             'main_topic'    => $main_topic

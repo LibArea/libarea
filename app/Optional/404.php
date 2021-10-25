@@ -8,9 +8,10 @@
   <link rel="icon" href="/favicon.ico" type="image/png">
 </head>
 
-<body class="bg-gray-000 pt0">
-  <div class="wrap max-w-460 items-center pt60 pr10 pl10">
-    <div class="left mr20">
+<body class="wrap grid grid-cols-12 gap-4 pr10 pl10 justify-between">
+  <div class="col-span-2 no-mob"></div>
+  <div class="col-span-8 mb-col-12 bg-white br-rd5 border-box-1 pt10 pr15 pb5 pl15">
+    <div class="mb20">
       <h1 class="size-31 font-semibold gray mb0">404</h1>
       <p class="gray-light"><?= lang('the page does not exist'); ?></p>
       <a class="button br-rd5 white" href="/"><?= lang('to main'); ?></a>
@@ -18,10 +19,9 @@
         <?= lang('the page has been removed'); ?>...
       </div>
     </div>
-    <div class="left ml20 right">
-      <img class="mt60" src="/assets/images/agouti_footer.gif">
-    </div>
+    <img class="right" src="/assets/images/agouti_footer.gif">
   </div>
+   
 </body>
 
 </html>

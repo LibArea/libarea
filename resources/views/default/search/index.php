@@ -1,5 +1,5 @@
 <div class="col-span-2 no-mob"></div>
-<main class="col-span-8 bg-white br-rd5 border-box-1 pt10 pr15 pb5 pl15">
+<main class="col-span-8 mb-col-12 bg-white br-rd5 border-box-1 pt10 pr15 pb5 pl15">
   <div class="col-span-2 no-mob mb20">
     <?php if (!empty($data['result'])) { ?>
       <div class="ml16 size-21">

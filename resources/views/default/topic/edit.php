@@ -1,12 +1,13 @@
 <div class="sticky col-span-2 justify-between no-mob">
   <?= includeTemplate('/_block/menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
+<?php $topic = $data['topic']; ?>
 <main class="col-span-10 mb-col-12">
-  <?= breadcrumb(getUrlByName('topics'), lang('topics'), getUrlByName('topic', ['slug' => $data['topic']['topic_slug']]), $data['topic']['topic_title'], lang('edit topic')); ?>
+  <?= breadcrumb(getUrlByName('topics'), lang('topics'), getUrlByName('topic', ['slug' => $topic['topic_slug']]), $topic['topic_title'], lang('edit topic')); ?>
 
   <div class="topic">
     <div class="box create">
-      <?= topic_logo_img($data['topic']['topic_img'], 'max', $data['topic']['topic_title'], 'img-topic-edit'); ?>
+      <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'img-topic-edit'); ?>
       <form action="/topic/edit" method="post" enctype="multipart/form-data">
         <?= csrf_field() ?>
 
@@ -16,7 +17,7 @@
           </div>
         </div>
         <div class="clear">
-          <p><?= lang('recommended size'); ?>: 240x240px (jpg, jpeg, png)</p>
+          <p class="size-14 gray-light-2"><?= lang('recommended size'); ?>: 240x240px (jpg, jpeg, png)</p>
           <p><input type="submit" class="button block br-rd5 white" value="<?= lang('download'); ?>" /></p>
         </div>
 
@@ -26,7 +27,7 @@
               'title' => lang('title'),
               'type' => 'text',
               'name' => 'topic_title',
-              'value' => $data['topic']['topic_title'],
+              'value' => $topic['topic_title'],
               'min' => 3,
               'max' => 64,
               'help' => '3 - 64 ' . lang('characters'),
@@ -35,7 +36,7 @@
               'title' => lang('title') . ' (SEO)',
               'type' => 'text',
               'name' => 'topic_seo_title',
-              'value' => $data['topic']['topic_seo_title'],
+              'value' => $topic['topic_seo_title'],
               'min' => 4,
               'max' => 225,
               'help' => '4 - 225 ' . lang('characters'),
@@ -44,23 +45,16 @@
               'title' => lang('Slug (URL)'),
               'type' => 'text',
               'name' => 'topic_slug',
-              'value' => $data['topic']['topic_slug'],
+              'value' => $topic['topic_slug'],
               'min' => 3,
               'max' => 32,
-              'help' => '3 - 32 ' . lang('characters') . ' (a-zA-Z0-9)',
+              'help' => '3 - 32 ' . lang('characters') . ' (a-z-0-9)',
               'red' => 'red'
-            ], [
-              'title' => lang('posts-m'),
-              'type' => 'text',
-              'name' => 'topic_count',
-              'value' => $data['topic']['topic_count'],
-              'min' => 0,
-              'max' => 8
             ],
           ]
         ]); ?>
-
-        <?php if ($data['topic']['topic_parent_id'] > 0) { ?>
+        <?php if ($uid['user_trust_level'] == 5) { ?>
+        <?php if ($topic['topic_parent_id'] > 0) { ?>
           <div class="mb20">
             <label for="topic_content"><?= lang('root'); ?>?</label>
             ----
@@ -68,25 +62,24 @@
         <?php } else { ?>
           <div class="mb20">
             <label for="topic_content"><?= lang('root'); ?>?</label>
-            <input type="radio" name="topic_is_parent" <?php if ($data['topic']['topic_is_parent'] == 0) { ?>checked<?php } ?> value="0"> <?= lang('no'); ?>
-            <input type="radio" name="topic_is_parent" <?php if ($data['topic']['topic_is_parent'] == 1) { ?>checked<?php } ?> value="1"> <?= lang('yes'); ?>
+            <input type="radio" name="topic_is_parent" <?php if ($topic['topic_is_parent'] == 0) { ?>checked<?php } ?> value="0"> <?= lang('no'); ?>
+            <input type="radio" name="topic_is_parent" <?php if ($topic['topic_is_parent'] == 1) { ?>checked<?php } ?> value="1"> <?= lang('yes'); ?>
             <div class="size-14 gray-light-2"><?= lang('root-help'); ?></div>
           </div>
         <?php } ?>
-        <div class="mb20">
-          <label for="topic_content">
-            <?= lang('meta description'); ?><sup class="red">*</sup>
-          </label>
-          <textarea class="add" rows="6" minlength="44" name="topic_description"><?= $data['topic']['topic_description']; ?></textarea>
-          <div class="size-14 gray-light-2">> 44 <?= lang('characters'); ?></div>
-        </div>
+        <?php } ?>
+        
+        <div for="mb5"><?= lang('meta description'); ?><sup class="red">*</sup></div>
+        <textarea class="add max-w780" rows="6" minlength="44" name="topic_description"><?= $topic['topic_description']; ?></textarea>
+        <div class="size-14 gray-light-2 mb20">> 44 <?= lang('characters'); ?></div>
+ 
         <?= includeTemplate('/_block/form/field-input', [
           'data' => [
             [
               'title' => lang('short description'),
               'type' => 'text',
               'name' => 'topic_short_description',
-              'value' => $data['topic']['topic_short_description'],
+              'value' => $topic['topic_short_description'],
               'min' => 11,
               'max' => 120,
               'help' => '11 - 120 ' . lang('characters'),
@@ -95,12 +88,12 @@
           ]
         ]); ?>
         
-        <div class="mb20">
-          <label for="topic_content"><?= lang('info'); ?><sup class="red">*</sup></label>
-          <textarea class="add" rows="6" name="topic_info"><?= $data['topic']['topic_info']; ?></textarea>
-          <div class="size-14 gray-light-2">Markdown, > 14 <?= lang('characters'); ?></div>
-        </div>
-        <?php if ($data['topic']['topic_is_parent'] != 1) { ?>
+        <div for="mb5"><?= lang('info'); ?><sup class="red">*</sup></div>
+        <textarea class="add max-w780" rows="6" name="topic_info"><?= $topic['topic_info']; ?></textarea>
+        <div class="mb20 size-14 gray-light-2">Markdown, > 14 <?= lang('characters'); ?></div>
+
+        <?php if ($uid['user_trust_level'] == 5) { ?>
+        <?php if ($topic['topic_is_parent'] != 1) { ?>
           <div class="mb20">
             <label class="block" for="topic_content"><?= lang('root'); ?></label>
             <select name="topic_parent_id[]" multiple="multiple" id='selMainLinked'>
@@ -111,6 +104,7 @@
               <?php } ?>
             </select>
           </div>
+        <?php } ?>
         <?php } ?>
         <div class="mb20">
           <label class="block" for="post_content">
@@ -200,14 +194,14 @@
         </div>
 
         <?php if ($uid['user_trust_level'] > 4) { ?>
-          <?= includeTemplate('/_block/form/select-content-tl', ['uid' => $uid, 'data' => $data['topic']['topic_tl']]); ?>
+          <?= includeTemplate('/_block/form/select-content-tl', ['uid' => $uid, 'data' => $topic['topic_tl']]); ?>
           <?= includeTemplate('/_block/form/select-content', ['type' => 'user', 'data' => $data, 'action' => 'edit', 'title' => lang('author'), 'red' => 'red']); ?>
 
         <?php } ?>
 
         <div class="mb20">
-          <input type="hidden" name="topic_id" value="<?= $data['topic']['topic_id']; ?>">
-          <input type="submit" name="submit" class="button block br-rd5 white" value="<?= lang('add'); ?>" />
+          <input type="hidden" name="topic_id" value="<?= $topic['topic_id']; ?>">
+          <input type="submit" name="submit" class="button block br-rd5 white" value="<?= lang('edit'); ?>" />
         </div>
       </form>
     </div>

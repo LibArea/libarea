@@ -66,6 +66,11 @@ class AddTopicController extends MainController
             redirect($redirect);
         }
 
+        if (preg_match('/\s/', $topic_slug) || strpos($topic_slug, ' ')) {
+            addMsg(lang('url-gaps'), 'error');
+            redirect($redirect);
+        }
+       
         $data = [
             'topic_title'               => $topic_title,
             'topic_description'         => $topic_description,

@@ -65,8 +65,8 @@ Route::before('Authorization@noAuth')->getGroup();
     
     Route::get('/u/{login}/invitations')->controller('User\InvitationsController@invitationForm')->where(['login' => '[A-Za-z0-9]+'])->name('invitations');
 
-    Route::get('/topics/my')->controller('Topic\TopicController@topicsUser')->name('topic.my');
-    Route::get('/topics/my/page/{page?}')->controller('Topic\TopicController@topicsUser')->where(['page' => '[0-9]+']);
+    Route::get('/topics/my')->controller('Topic\TopicController', ['my'])->name('topic.my');
+    Route::get('/topics/my/page/{page?}')->controller('Topic\TopicController', ['my'])->where(['page' => '[0-9]+']);
  
     Route::get('/all')->controller('HomeController', ['all']);
     Route::get('/all/page/{page?}')->controller('HomeController', ['all'])->where(['page' => '[0-9]+']);
@@ -126,8 +126,11 @@ Route::get('/comments/page/{page?}')->controller('Comment\CommentController')->w
 Route::get('/answers')->controller('Answer\AnswerController')->name('answers');
 Route::get('/answers/page/{page?}')->controller('Answer\AnswerController')->where(['page' => '[0-9]+']);
 
-Route::get('/topics')->controller('Topic\TopicController')->where(['page' => '[0-9]+'])->name('topics');
-Route::get('/topics/page/{page?}')->controller('Topic\TopicController')->where(['page' => '[0-9]+']);
+Route::get('/topics')->controller('Topic\TopicController', ['all'])->name('topics');
+Route::get('/topics/page/{page?}')->controller('Topic\TopicController', ['all'])->where(['page' => '[0-9]+']);
+Route::get('/topics/new')->controller('Topic\TopicController', ['new'])->name('topic.new');
+Route::get('/topics/new/page/{page?}')->controller('Topic\TopicController', ['new'])->where(['page' => '[0-9]+']);
+
 Route::get('/topic/{slug}')->controller('Topic\TopicController@posts', ['feed'])->where(['slug' => '[A-Za-z0-9-]+'])->name('topic');
 
 Route::get('/topic/{slug}/recommend')->controller('Topic\TopicController@posts', ['recommend'])->where(['slug' => '[A-Za-z0-9-]+'])->name('recommend');
@@ -150,6 +153,7 @@ Route::get('/top/page/{page?}')->controller('HomeController', ['top'])->where(['
 
 Route::get('/sitemap.xml')->controller('RssController');
 Route::get('/turbo-feed/topic/{slug}')->controller('RssController@turboFeed')->where(['slug' => '[A-Za-z0-9-]+']);
+Route::get('/rss-feed/topic/{slug}')->controller('RssController@rssFeed')->where(['slug' => '[A-Za-z0-9-]+']);
 
 Route::type(['get', 'post'])->get('/search')->controller('SearchController')->name('search');
 

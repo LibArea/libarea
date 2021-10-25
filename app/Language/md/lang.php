@@ -48,7 +48,6 @@ return [
     'topics no'         => 'Subiecte nu sunt',
     'parent'            => 'Părinte',
     'edit topic'        => 'Schimbați subiectul',
-    'all topics'        => 'Toate subiectele',
     'authorization'     => 'Autentificare',
     'sign in'           => 'Autentificare',
     'sign out'          => 'Ieși',
@@ -344,9 +343,6 @@ return [
     'enter'                 => 'Introduce',
     'enter your password'   => 'Introdu parola',
     'enter content'         => 'Introduceți conținut',
-    'topic-desc'            => 'O pagină cu subiecte aranjate în ordinea popularității. Totul, teme noi, teme populare',
-
-    'topic-subscription'    => 'Abonați-vă la spații și citiți-le în flux',
 
     'no account available'  => 'Nu există cont disponibil',
     'description is formed' => 'Descrierea este formată',
@@ -389,8 +385,6 @@ return [
     'code-incorrect'        => 'Codul este incorect sau a fost deja utilizat. Parcurgeți din nou procedura de recuperare.',
     'yes-email-pass'        => 'Acum puteți utiliza adresa de e-mail și parola.',
     'code-used'             => 'Codul este incorect sau a fost deja utilizat.',
-    'topic-info'            => 'O pagină cu subiecte aranjate în ordinea popularității.',
-
     'audits'                => 'Audit',
     'post-audit'            => 'Postarea dvs. a fost trimisă pentru moderare.',
     'answer-audit'          => 'Răspunsul dvs. a fost trimis pentru moderare.',
@@ -451,4 +445,12 @@ return [
     'medal for registration'            => 'Medalie pentru înregistrare',
     'responses from community members'  => 'Răspunsurile comunității',
     'minimal (experimental version)'    => 'Minimal (versiune experimentală a designului)',
+    
+    'topics-all'            => 'Toate subiectele',
+    'topics-my'             => 'Sunt abonat la subiecte',
+    'topics-new'            => 'Subiecte noi',
+    'topics-desc-all'       => 'O pagină cu subiecte aranjate în ordinea popularității. Totul, teme noi, teme populare',
+    'topics-desc-my'        => 'Pagina subiectelor pe care le urmăresc',
+    'topics-desc-new'       => 'Teme noi adăugate recent pe site. Abonați-vă la subiecte',
+    'topic-subscription'    => 'Abonați-vă la spații și citiți-le în flux',
 ];

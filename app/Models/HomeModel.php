@@ -186,11 +186,13 @@ class HomeModel extends MainModel
                     topic_id, 
                     topic_slug, 
                     topic_title,
+                    topic_user_id,
                     topic_img,
                     signed_topic_id, 
                     signed_user_id
                         FROM topics 
-                        JOIN topics_signed ON signed_topic_id = topic_id AND signed_user_id = :user_id  ORDER BY topic_id";
+                        JOIN topics_signed ON signed_topic_id = topic_id AND signed_user_id = :user_id  
+                        ORDER BY topic_id DESC";
 
         return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
     }

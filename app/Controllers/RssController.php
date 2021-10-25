@@ -21,7 +21,7 @@ class RssController extends MainController
         includeCachedTemplate('/rss/sitemap', ['data' => $data]);
     }
 
-    // Route::get('/turbo-feed/topic/{id}')
+    // Route::get('/turbo-feed/topic/{slug}')
     public function turboFeed()
     {
         $topic_slug = Request::get('slug');
@@ -31,7 +31,9 @@ class RssController extends MainController
         $posts  = RssModel::getPostsFeed($topic_slug);
         $result = array();
         foreach ($posts as $ind => $row) {
-            $row['post_content']  = Content::text($row['post_content'], 'text');
+            $text = explode("\n", $row['post_content']);
+            $row['post_content']  = Content::text($text[0], 'line');
+            // $row['post_content']  = Content::text($row['post_content'], 'text');
             $result[$ind]         = $row;
         }
 
@@ -41,5 +43,28 @@ class RssController extends MainController
         ];
 
         includeCachedTemplate('/rss/turbo-feed', ['data' => $data, 'topic' => $topic]);
+    }
+    
+    // Route::get('/rss-feed/topic/{slug}')
+    public function rssFeed()
+    {
+        $topic_slug = Request::get('slug');
+        $topic      = RssModel::getTopicSlug($topic_slug);
+        Base::PageError404($topic);
+
+        $posts  = RssModel::getPostsFeed($topic_slug);
+        $result = array();
+        foreach ($posts as $ind => $row) {
+            $text = explode("\n", $row['post_content']);
+            $row['post_content']  = Content::text($text[0], 'line');
+            $result[$ind]         = $row;
+        }
+
+        $data = [
+            'url'       => Config::get('meta.url'),
+            'posts'     => $result,
+        ];
+
+        includeCachedTemplate('/rss/rss-feed', ['data' => $data, 'topic' => $topic]);
     }
 }

@@ -45,7 +45,6 @@ return [
     'title-profile'         => '%1$s %2$s | Profile on %3$s',
     'desc-profile'          => '%1$s - profile page. %2$s Posts, comments, awards on %3$s',
     'search-desc'           => 'Site search. By title and text of posts. By spaces and participants',
-    'topic-desc'            => 'Topics of content, posts. Popular, best, global selection. Topics of the day.',
     'page-number'           => ' Page %1$s ',
 
     'domain-desc'           => 'Grouping posts by domain',
@@ -94,6 +93,14 @@ return [
     
     'recommended posts' => 'recommended posts',
     'recommended-posts' => 'Recommended posts in «%1$s» hand - selected. ',
+    
+    'topic-desc-all'        => 'Topics of content, posts. Popular, best, global selection. Topics of the day',
+    'topics-my'             => 'I am subscribed to topics',
+    'topics-new'            => 'New topics',
+    'topics-desc-all'       => 'A page of topics arranged in order of popularity. By the number of posts located',
+    'topics-desc-my'        => 'The page of topics I subscribed to',
+    'topics-desc-new'       => 'New themes added on the site recently. Subscribe to topics',
+    'topic-subscription'    => 'Subscribe to the topics and read them in the feed',
     
     'welcome-info' => '<p>Thank you for registering! Here you will find brief information on how to use this site. .</p>
     <p>This site consists of <a href="/spaces">Topics</a>.</p>

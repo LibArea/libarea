@@ -40,7 +40,6 @@
     <?= includeTemplate('/_block/login'); ?>
   <?php } ?>
 
-
   <?php if ($uid['user_id'] > 0 && !empty($data['topics_user'])) { ?>
     <div class="border-box-1 p15 mb15 br-rd5 bg-white size-14">
       <a class="right gray-light-2" title="<?= lang('topics'); ?>" href="<?= getUrlByName('topic.my'); ?>">
@@ -51,14 +50,21 @@
       </div>
       <?php 
       $n = 0;
-      foreach ($data['topics_user'] as  $topic) { 
+      foreach ($data['topics_user'] as $key => $topic) { 
         $n++; 
         if($n > Config::get('topics.number_topics')) break; 
       ?>
-        <a class="flex relative pt5 pb5 items-center hidden gray-light" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
+        <div class="flex relative pt5 pb5 items-center justify-between hidden">
+        <a class="gray-light" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
           <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'w24 mr5'); ?>
           <span class="ml5"><?= $topic['topic_title']; ?></span>
         </a>
+         <?php if ($uid['user_id'] == $topic['topic_user_id']) { ?>
+          <a class="right blue" title="<?= lang('add post'); ?>" href="/post/add/<?= $topic['topic_id']; ?>">
+            <i class="bi bi-plus-lg size-14"></i>
+          </a>
+        <?php } ?> 
+       </div>
       <?php } ?>
       <?php if (count($data['topics_user']) > Config::get('topics.number_topics')) { ?>
         <a class="gray block mt5" title="<?= lang('topics'); ?>" href="<?= getUrlByName('topic.my'); ?>">

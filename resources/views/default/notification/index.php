@@ -23,8 +23,8 @@
         <?php } ?>
 
         <?php if ($notif['notification_action_type'] == 3) { ?>
-          <i class="bi bi-journal-text middle"></i>
-          <a class="gray ml5" href="<?= getUrlByName('user', ['login' => $notif['user_login']]); ?>">@<?= $notif['user_login']; ?></a>
+          <i class="bi bi-reply middle"></i>
+          <a class="gray ml5" href="<?= getUrlByName('user', ['login' => $notif['user_login']]); ?>"><?= $notif['user_login']; ?></a>
           <a class="ntf2 lowercase" href="/notifications/read/<?= $notif['notification_id']; ?>">
             <?= lang('replied to post'); ?>
           </a>

@@ -1,6 +1,6 @@
 <?php $post = $data['post']; ?>
 <main class="col-span-9 mb-col-12">
-  <article class="post-full border-box-1 br-rd5 bg-white<?php if ($post['post_is_deleted'] == 1) { ?> bg-red-300<?php } ?> pt0 pr5 pb5 pl15">
+  <article class="post-full border-box-1 br-rd5 bg-white<?php if ($post['post_is_deleted'] == 1) { ?> bg-red-300<?php } ?> mb15 pt0 pr5 pb5 pl15">
     <?php if ($post['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
       <div class="post-body">
         <h1 class="title mb0 size-24">
@@ -87,14 +87,15 @@
           <?php } ?>
         </div>
       </div>
+
       <?php if ($post['post_thumb_img']) { ?>
         <?= post_img($post['post_thumb_img'], $post['post_title'],  'thumb right ml15', 'thumbnails'); ?>
       <?php } ?>
+
       <div class="post-body max-w780 full">
         <div class="post">
           <?= $post['post_content']; ?>
         </div>
-
         <?php if ($post['post_url_domain']) { ?>
           <div class="mb15">
             <a rel="nofollow noreferrer ugc" target="_blank" class="button br-rd5 white" href="<?= $post['post_url']; ?>">
@@ -102,7 +103,6 @@
             </a>
           </div>
         <?php } ?>
-
         <?php if ($post['post_url_domain']) { ?>
           <h3 class="uppercase mb5 mt0 font-light size-14 gray"><?= lang('website'); ?></h3>
           <div class="italic m15 mb15 p10 size-14 bg-gray-100 table gray">
@@ -114,23 +114,7 @@
             </div>
           </div>
         <?php } ?>
-        <?php if (!empty($data['post_related'])) { ?>
-          <div class="mb20">
-            <h3 class="uppercase mb5 mt0 font-light size-14 gray"><?= lang('related'); ?></h3>
-            <?php $num = 0; ?>
-            <?php foreach ($data['post_related'] as $related) { ?>
-              <div class="mb5 flex">
-                <?php $num++; ?>
-                <div class="flex justify-center bg-gray-200 w21 mr5 br-rd-50 size-15">
-                  <span class="gray-light-2"><?= $num; ?></span>
-                </div>
-                <a href="<?= getUrlByName('post', ['id' => $related['post_id'], 'slug' => $related['post_slug']]); ?>">
-                  <?= $related['post_title']; ?>
-                </a>
-              </div>
-            <?php } ?>
-          </div>
-        <?php } ?>
+        <?= includeTemplate('/_block/post-related', ['post_related' => $data['post_related']]); ?>
         <?php if (!empty($data['topics'])) { ?>
           <div class="mb20">
             <h3 class="uppercase mb5 mt0 font-light size-14 gray"><?= lang('topics'); ?>:</h3>
@@ -145,25 +129,13 @@
       <div class="border-bottom flex flex-row items-center justify-between mb5 pb5 pt10">
         <div class="flex flex-row items-center">
           <?= votes($uid['user_id'], $post, 'post'); ?>
-          <?php $cout = $post['post_answers_count'] + $post['post_comments_count']; ?>
-
-          <span class="right ml15 gray-light-2">
-            <i class="bi bi-chat-dots"></i>
-            <?php if ($cout > 0) { ?>
-              <?= $post['post_answers_count'] + $post['post_comments_count']; ?>
-            <?php } ?>
-          </span>
         </div>
         <div class="flex flex-row items-center">
           <?= favorite_post($uid['user_id'], $post['post_id'], $post['favorite_tid']); ?>
         </div>
       </div>
       <div class="hidden">
-        <?php if (!$uid['user_id']) { ?>
-          <a class="right size-14 mt5 bg-gray-200 bg-hover-gray mazarine border-box-1 br-rd20 center pt5 pr15 pb5 pl15" href="<?= getUrlByName('login'); ?>">
-            + <?= lang('read'); ?>
-          </a>
-        <?php } else { ?>
+        <?php if ($uid['user_id'] > 0) { ?>
           <?php if (is_array($data['post_signed'])) { ?>
             <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id size-14 right mt5 bg-gray-100 gray-light-2 border-box-1 br-rd20 center pt5 pr15 pb5 pl15">
               <?= lang('unsubscribe'); ?>
@@ -173,24 +145,13 @@
               + <?= lang('read'); ?>
             </div>
           <?php } ?>
-        <?php } ?>
-      </div>
-      <div>
-        <?php if ($post['post_type'] == 0 && $post['post_draft'] == 0) { ?>
-          <?php if ($uid['user_id'] > 0) { ?>
-            <?php if ($post['post_closed'] == 0) { ?>
-              <?= includeTemplate('/_block/editor/answer-create-editor', ['post_id' => $post['post_id'], 'type' => 'answer']); ?>
-            <?php } ?>
-          <?php } else { ?>
-            <textarea rows="5" class="bg-gray-000 mt15" disabled="disabled" placeholder="<?= lang('no-auth-comm'); ?>" name="answer" id="answer"></textarea>
-            <div>
-              <input type="submit" name="answit" value="<?= lang('reply'); ?>" class="button block br-rd5 white" disabled="disabled">
-            </div>
-          <?php } ?>
         <?php } else { ?>
-          <!-- draft -->
+          <a class="right size-14 mt5 bg-gray-200 bg-hover-gray mazarine border-box-1 br-rd20 center pt5 pr15 pb5 pl15" href="<?= getUrlByName('login'); ?>">
+            + <?= lang('read'); ?>
+          </a>
         <?php } ?>
       </div>
+      <?= includeTemplate('/_block/editor/answer-create-editor', ['data' => $post, 'type' => 'answer', 'user_id' => $uid['user_id']]); ?>
     <?php } else { ?>
       <div class="bg-red-300 p15 center mr10">
         <?= lang('post deleted'); ?>...
@@ -200,22 +161,28 @@
 
   <?php if ($post['post_draft'] == 0) {
     if ($post['post_type'] == 0) {
-      includeTemplate('/_block/comments-view', ['data' => $data, 'uid' => $uid]);
+      includeTemplate('/_block/comments-view', ['data' => $data, 'post' => $post, 'uid' => $uid]);
       if ($post['post_closed'] == 1) includeTemplate('/_block/no-content', ['lang' => 'the post is closed']);
     } else {
-      includeTemplate('/_block/questions-view', ['data' => $data, 'uid' => $uid]);
+      includeTemplate('/_block/questions-view', ['data' => $data, 'post' => $post, 'uid' => $uid]);
       if ($post['post_closed'] == 1) includeTemplate('/_block/no-content', ['lang' => 'the question is closed']);
     }
   } else {
     includeTemplate('/_block/no-content', ['lang' => 'this is a draft']);
   } ?>
-
 </main>
 <aside class="col-span-3 relative br-rd5 no-mob">
   <div class="border-box-1 bg-white br-rd5 mb15 p15">
     <?php if (!empty($data['topics'])) { ?>
       <h3 class="uppercase mb5 mt0 font-light size-15 gray"><?= lang('topics'); ?></h3>
       <?php foreach ($data['topics'] as $topic) { ?>
+        <?php if ($uid['user_id']) { ?>
+          <?php if (!$topic['signed_topic_id']) { ?>
+            <div data-id="<?= $topic['topic_id']; ?>" data-type="topic" class="focus-id right inline size-14 blue center mt5 mr5">
+              <i class="bi bi-plus"></i> <?= lang('read'); ?>
+            </div>
+          <?php } ?>
+        <?php } ?>
         <a class="flex justify-center pt5 pr10 pb5 black  inline size-14" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
           <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'w24 mr10 border-box-1'); ?>
           <?= $topic['topic_title']; ?>
@@ -238,7 +205,6 @@
       <a class="size-21 pl15 pr15 gray-light-2" data-id="tw"><i class="bi bi-twitter"></i></a>
     </div>
   </div>
-
   <?php if ($data['recommend']) { ?>
     <div class="border-box-1 bg-white br-rd5 mb15 post-view sticky recommend p15">
       <h3 class="uppercase mb10 mt0 font-light size-14 gray"><?= lang('recommended'); ?></h3>

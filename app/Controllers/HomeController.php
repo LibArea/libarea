@@ -17,11 +17,10 @@ class HomeController extends MainController
         $page   = $page == 0 ? 1 : $page;
  
         $limit  = 25;
-        $topics_user        = HomeModel::getSubscriptionTopics($uid['user_id']);
-        $latest_answers     = HomeModel::latestAnswers($uid);
-
-        $pagesCount = HomeModel::feedCount($topics_user, $uid, $sheet);
-        $posts      = HomeModel::feed($page, $limit, $topics_user, $uid, $sheet);
+        $latest_answers = HomeModel::latestAnswers($uid);
+        $topics_user    = HomeModel::getSubscriptionTopics($uid['user_id']);
+        $pagesCount     = HomeModel::feedCount($topics_user, $uid, $sheet);
+        $posts          = HomeModel::feed($page, $limit, $topics_user, $uid, $sheet);
 
         $result_post = array();
         foreach ($posts as $ind => $row) {

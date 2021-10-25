@@ -1,7 +1,7 @@
 <?php if (!empty($data['answers'])) { ?>
   <div class="bg-white br-rd5 border-box-1 p15">
     <h2 class="lowercase m0 size-21">
-      <?= $data['post']['post_answers_count'] ?> <?= $data['post']['num_answers'] ?>
+      <?= $post['post_answers_count'] ?> <?= $post['num_answers'] ?>
     </h2>
 
     <?php foreach ($data['answers'] as  $answer) { ?>
@@ -29,9 +29,9 @@
                 <?= votes($uid['user_id'], $answer, 'answer'); ?>
 
                 <?php if ($uid['user_trust_level'] >= Config::get('trust-levels.tl_add_comm_qa')) { ?>
-                  <?php if ($data['post']['post_closed'] == 0) { ?>
-                    <?php if ($data['post']['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
-                      <a data-post_id="<?= $data['post']['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray ml10"><?= lang('reply'); ?></a>
+                  <?php if ($post['post_closed'] == 0) { ?>
+                    <?php if ($post['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
+                      <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray ml10"><?= lang('reply'); ?></a>
                     <?php } ?>
                   <?php } ?>
                 <?php } ?>
@@ -56,19 +56,12 @@
                   </span>
                 <?php } ?>
                 <?php if ($uid['user_id'] != $answer['answer_user_id'] && $uid['user_trust_level'] > Config::get('trust-levels.tl_stop_report')) { ?>
-                  <a data-post_id="<?= $data['post']['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray ml15">
+                  <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray ml15">
                     <i title="<?= lang('report'); ?>" class="bi bi-flag"></i>
                   </a>
                 <?php } ?>
               </div>
               <div id="answer_addentry<?= $answer['answer_id']; ?>" class="reply"></div>
-            </li>
-          </ol>
-
-        <?php } else { ?>
-          <ol class="bg-red-300 answer-telo m5 list-none size-14">
-            <li class="answers_subtree" id="answer_<?= $answer['answer_id']; ?>">
-              <span class="answ-deletes">~ <?= lang('answer deleted'); ?></span>
             </li>
           </ol>
         <?php } ?>
@@ -92,9 +85,9 @@
                 </span>
 
                 <?php if ($uid['user_trust_level'] >= Config::get('trust-levels.tl_add_comm_qa')) { ?>
-                  <?php if ($data['post']['post_closed'] == 0) { ?>
-                    <?php if ($data['post']['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
-                      <a data-post_id="<?= $data['post']['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment-re gray ml5 mr5">
+                  <?php if ($post['post_closed'] == 0) { ?>
+                    <?php if ($post['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
+                      <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment-re gray ml5 mr5">
                         <?= lang('reply'); ?>
                       </a>
                     <?php } ?>
@@ -102,7 +95,7 @@
                 <?php } ?>
 
                 <?php if ($uid['user_id'] == $comment['comment_user_id'] || $uid['user_trust_level'] == 5) { ?>
-                  <a data-post_id="<?= $data['post']['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray ml10 mr5">
+                  <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray ml10 mr5">
                     <i title="<?= lang('edit'); ?>" class="bi bi-pencil-square"></i>
                   </a>
                 <?php } ?>
@@ -113,7 +106,7 @@
                   </a>
                 <?php } ?>
                 <?php if ($uid['user_id'] != $comment['comment_user_id'] && $uid['user_trust_level'] > 0) { ?>
-                  <a data-post_id="<?= $data['post']['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray ml5">
+                  <a data-post_id="<?= $post['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray ml5">
                     <?= lang('report'); ?>
                   </a>
                 <?php } ?>
@@ -121,15 +114,13 @@
               <div id="comment_addentry<?= $comment['comment_id']; ?>" class="reply"></div>
             </li>
           </ol>
-        <?php } else { ?>
-
         <?php } ?>
       <?php } ?>
 
     <?php } ?>
   </div>
 <?php } else { ?>
-  <?php if ($data['post']['post_closed'] != 1) { ?>
+  <?php if ($post['post_closed'] != 1) { ?>
     <?= includeTemplate('/_block/no-content', ['lang' => 'no answers']); ?>
   <?php } ?>
 <?php } ?>
@@ -137,11 +128,5 @@
 <?php if (!empty($otvet)) { ?>
   <?= includeTemplate('/_block/no-content', ['lang' => 'you-question-no']); ?>
 <?php } else { ?>
-  <?php if ($uid['user_id']) { ?>
-    <?php if ($data['post']['post_closed'] == 0) { ?>
-      <?= includeTemplate('/_block/editor/answer-create-editor', ['post_id' => $data['post']['post_id'], 'type' => 'answer']); ?>
-    <?php } ?>
-  <?php } else { ?>
-    <?= includeTemplate('/_block/no-content', ['lang' => 'no-auth-login']); ?>
-  <?php } ?>
+  <?= includeTemplate('/_block/editor/answer-create-editor', ['data' => $post, 'type' => 'answer', 'user_id' => $uid['user_id']]); ?>
 <?php }  ?>

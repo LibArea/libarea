@@ -6,11 +6,28 @@
 
     <?= includeTemplate('/_block/form/field-input', [
       'data' => [
-        ['title' => lang('heading'), 'type' => 'text', 'name' => 'post_title', 'value' => null, 'min' => 6, 'max' => 250, 'id' => 'title', 'help' => '6 - 250 ' . lang('characters'), 'red' => 'red']
+        [
+          'title' => lang('heading'), 
+          'type' => 'text',
+          'name' => 'post_title', 
+          'value' => null, 
+          'min' => 6,
+          'max' => 250, 
+          'id' => 'title',
+          'help' => '6 - 250 ' . lang('characters'), 
+          'red' => 'red'
+        ]
       ],
     ]); ?>
 
-    <?= includeTemplate('/_block/form/select-topic-post', ['uid' => $uid, 'data' => $data, 'action' => 'add', 'title' => lang('topics'), 'help' => lang('necessarily'), 'red' => 'red']); ?>
+    <?= includeTemplate('/_block/form/select-topic-post', [
+      'uid' => $uid,
+      'data' => $data,
+      'action' => 'add',
+      'title' => lang('topics'),
+      'help' => lang('necessarily'),
+      'red' => 'red'
+    ]); ?>
 
     <?php if ($uid['user_trust_level'] >= Config::get('trust-levels.tl_add_url')) { ?>
       <div class="mb20 max-w640">

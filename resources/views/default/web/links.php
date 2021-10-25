@@ -39,17 +39,15 @@
                 Add content...
               <?php } ?>
             </div>
-            <div class="flex flex-row gap-2 mt10 items-center">
-              <div class="w18">
-                <?= favicon_img($link['link_id'], $link['link_url_domain']); ?>
-              </div>
+            <div class="flex flex-row gap-2 mt20">
+              <?= favicon_img($link['link_id'], $link['link_url_domain']); ?>
               <div class="green size-14 mr20">
                 <?= $link['link_url_domain']; ?>
                 <div class="pt5 lowercase">
                   <?= html_topic($link['topic_list'], 'web.topic', 'gray-light mr15'); ?>
                 </div>
               </div>
-              <div class="pt10 hidden lowercase ml-auto">
+              <div class="hidden lowercase ml-auto">
                 <?= votes($uid['user_id'], $link, 'link'); ?>
               </div>
             </div>

@@ -53,7 +53,7 @@ class PostController extends MainController
         // Учитывать ли изменение в сортировки и в оповещение в будущем...
         $post['modified'] = $post['post_date'] != $post['post_modified'] ? true : false;
 
-        $topics = PostModel::getPostTopic($post['post_id']);
+        $topics = PostModel::getPostTopic($post['post_id'], $uid['user_id']);
 
         // Покажем черновик только автору
         if ($post['post_draft'] == 1 && $post['post_user_id'] != $uid['user_id']) {

@@ -1,5 +1,5 @@
 <?php
-//static $values = [];
+
 // Localization
 function lang($text)
 { 
@@ -80,11 +80,11 @@ function post_img($file, $alt, $style, $type, $attributes = '')
 function favicon_img($link_id, $alt)
 {
     if (file_exists(HLEB_PUBLIC_DIR . AG_PATH_FAVICONS . $link_id . '.png')) {
-        $img = '<img class="mr5 ц18" src="'. AG_PATH_FAVICONS . $link_id . '.png" alt="' . $alt . '">';
+        $img = '<img class="mr5 w18 h18" src="'. AG_PATH_FAVICONS . $link_id . '.png" alt="' . $alt . '">';
         return $img;
     }
 
-    $img = '<img class="mr5" src="'. AG_PATH_FAVICONS . 'no-link.png" alt="' . $alt . '">';
+    $img = '<img class="mr5 w18 h18" src="'. AG_PATH_FAVICONS . 'no-link.png" alt="' . $alt . '">';
     return $img;
 }
 
@@ -320,7 +320,7 @@ function cutWords($content, $maxlen)
     if ($maxlen < count($words)) {
         $words = array_slice($words, 0, $maxlen);
     }
-    $code_match = array('>', '*', '!', '[ADD:');
+    $code_match = array('>', '*', '!', '~', '`', '[ADD:');
     $words      = str_replace($code_match, '', $words);
     return join(' ', $words);
 }

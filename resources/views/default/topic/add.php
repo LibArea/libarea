@@ -17,13 +17,10 @@
         ['title' => lang('Slug'), 'type' => 'text', 'name' => 'topic_slug', 'value' => '', 'min' => 3, 'max' => 32, 'help' => '3 - 32 ' . lang('characters') . ' (a-zA-Z0-9)'],
       ]]); ?>
 
-      <div class="mb20">
-        <label for="post_content">
-          <?= lang('meta description'); ?><sup class="red">*</sup>
-        </label>
-        <textarea rows="6" class="add" minlength="44" name="topic_description"></textarea>
-        <div class="size-14 gray-light-2">> 44 <?= lang('characters'); ?></div>
-      </div>
+      <div for="mb5"><?= lang('meta description'); ?><sup class="red">*</sup></div>
+      <textarea rows="6" class="add max-w780" minlength="44" name="topic_description"></textarea>
+      <div class="size-14 gray-light-2 mb20">> 44 <?= lang('characters'); ?></div>
+
       <input type="submit" name="submit" class="button block br-rd5 white" value="<?= lang('add'); ?>" />
     </form>
   </div>
