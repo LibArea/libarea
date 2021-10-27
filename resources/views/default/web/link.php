@@ -9,7 +9,7 @@
       </div>
       <h1><?= $data['link']['link_title']; ?>
         <?php if ($uid['user_trust_level'] > 4) { ?>
-          <a class="size-14 ml5" title="<?= lang('edit'); ?>" href="/web/edit/<?= $data['link']['link_id']; ?>">
+          <a class="size-14 ml5" title="<?= Translate::get('edit'); ?>" href="/web/edit/<?= $data['link']['link_id']; ?>">
             <i class="bi bi-pencil size-15"></i>
           </a>
         <?php } ?>
@@ -25,7 +25,7 @@
         <span class="right"><?= $data['link']['link_count']; ?></span>
       </div>
     <?php } else { ?>
-      <h1><?= lang('domain') . ': ' . $data['domain']; ?></h1>
+      <h1><?= Translate::get('domain') . ': ' . $data['domain']; ?></h1>
     <?php } ?>
   </div>
 

@@ -5,7 +5,7 @@ namespace App\Controllers\Auth;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
-use Base, Validation;
+use Base, Validation, Translate;
 
 
 class LoginController extends MainController
@@ -24,24 +24,24 @@ class LoginController extends MainController
         $uid = UserModel::userInfo($email);
 
         if (empty($uid['user_id'])) {
-            addMsg(lang('member does not exist'), 'error');
+            addMsg(Translate::get('member does not exist'), 'error');
             redirect($redirect);
         }
 
         // Находится ли в бан- листе
         if (UserModel::isBan($uid['user_id'])) {
-            addMsg(lang('your account is under review'), 'error');
+            addMsg(Translate::get('your account is under review'), 'error');
             redirect($redirect);
         }
 
         // Активирован ли E-mail
         if (!UserModel::isActivated($uid['user_id'])) {
-            addMsg(lang('your account is not activated'), 'error');
+            addMsg(Translate::get('your account is not activated'), 'error');
             redirect($redirect);
         }
 
         if (!password_verify($password, $uid['user_password'])) {
-            addMsg(lang('e-mail or password is not correct'), 'error');
+            addMsg(Translate::get('e-mail or password is not correct'), 'error');
             redirect($redirect);
         }
 
@@ -66,7 +66,7 @@ class LoginController extends MainController
             'imgurl'     => false,
             'url'        => getUrlByName('login'),
         ];
-        $meta = meta($m, lang('sign up'), lang('info-login'));
+        $meta = meta($m, Translate::get('sign up'), Translate::get('info-login'));
 
         $data = [
             'sheet'         => 'sign up',

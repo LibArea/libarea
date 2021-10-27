@@ -1,6 +1,12 @@
 <main class="col-span-9 mb-col-12">
   <div class="bg-white pt5 pr15 pb5 pl15">
-    <?= breadcrumb('/', lang('home'), getUrlByName('user', ['login' => $uid['user_login']]), lang('profile'), lang('drafts')); ?>
+    <?= breadcrumb(
+      '/',
+      Translate::get('home'),
+      getUrlByName('user', ['login' => $uid['user_login']]),
+      Translate::get('profile'),
+      Translate::get('drafts')
+    ); ?>
   </div>
   <?php if (!empty($data['drafts'])) { ?>
     <?php foreach ($data['drafts'] as $draft) { ?>
@@ -10,12 +16,12 @@
         </a>
         <div class="mr5 size-14 gray-light lowercase">
           <?= $draft['post_date']; ?> |
-          <a href="/post/edit/<?= $draft['post_id']; ?>"><?= lang('edit'); ?></a>
+          <a href="/post/edit/<?= $draft['post_id']; ?>"><?= Translate::get('edit'); ?></a>
         </div>
       </div>
     <?php } ?>
   <?php } else { ?>
-    <?= includeTemplate('/_block/no-content', ['lang' => 'there no drafts']); ?>
+    <?= no_content(Translate::get('there no drafts'), 'bi bi-info-lg'); ?>
   <?php } ?>
 </main>
-<?= includeTemplate('/_block/aside-lang', ['lang' => lang('under development')]); ?>
+<?= includeTemplate('/_block/aside-lang', ['lang' => Translate::get('under development')]); ?>

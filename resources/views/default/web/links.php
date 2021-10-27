@@ -4,12 +4,12 @@
 <main class="col-span-10 mb-col-12">
   <div class="bg-white br-rd5 border-box-1 pt5 pr15 pb5 pl15">
     <?php if ($uid['user_trust_level'] == 5) { ?>
-      <a title="<?= lang('add'); ?>" class="right mt5" href="/web/add">
+      <a title="<?= Translate::get('add'); ?>" class="right mt5" href="/web/add">
         <i class="bi bi-plus-lg middle"></i>
       </a>
     <?php } ?>
-    <h1 class="mb5"><?= lang('domains-title'); ?></h1>
-    <div class="gray size-14 mb5"><?= lang('under development'); ?>...</div>
+    <h1 class="mb5"><?= Translate::get('domains-title'); ?></h1>
+    <div class="gray size-14 mb5"><?= Translate::get('under development'); ?>...</div>
 
     <?php if (!empty($data['links'])) { ?>
       <?php foreach ($data['links'] as $key => $link) { ?>
@@ -19,7 +19,7 @@
           </div>
           <div class="mr20 flex-auto">
             <?php if ($uid['user_trust_level'] == 5) { ?>
-              <a class="size-14 mr10 right" title="<?= lang('edit'); ?>" href="/web/edit/<?=  $link['link_id']; ?>">
+              <a class="size-14 mr10 right" title="<?= Translate::get('edit'); ?>" href="/web/edit/<?=  $link['link_id']; ?>">
                 <i class="bi bi-pencil size-15"></i>
               </a>
             <?php } ?>
@@ -39,7 +39,7 @@
                 Add content...
               <?php } ?>
             </div>
-            <div class="flex flex-row gap-2 mt20">
+            <div class="flex flex-row gap-2 items-center mt20">
               <?= favicon_img($link['link_id'], $link['link_url_domain']); ?>
               <div class="green size-14 mr20">
                 <?= $link['link_url_domain']; ?>
@@ -55,7 +55,7 @@
         </div>
       <?php } ?>
     <?php } else { ?>
-      <?= includeTemplate('/_block/no-content', ['lang' => 'no']); ?>
+      <?= no_content(Translate::get('no'), 'bi bi-info-lg'); ?>
     <?php } ?>
   </div>
   <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/domains'); ?>

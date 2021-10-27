@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
 use App\Models\{TopicModel, PostModel};
-use Base, Validation, UploadImage;
+use Base, Validation, UploadImage, Translate;
 
 class EditTopicController extends MainController
 {
@@ -43,7 +43,7 @@ class EditTopicController extends MainController
             $topic_parent_id    = TopicModel::topicMain($topic['topic_parent_id']);
         }
 
-        $meta = meta($m = [], lang('edit topic') . ' | ' . $topic['topic_title']);
+        $meta = meta($m = [], Translate::get('edit topic') . ' | ' . $topic['topic_title']);
         $data = [
             'topic'             => $topic,
             'topic_related'     => $topic_related,
@@ -89,12 +89,12 @@ class EditTopicController extends MainController
         $redirect = getUrlByName('admin.topic.edit', ['id' => $topic['topic_id']]);
 
         Validation::charset_slug($topic_slug, 'Slug (url)', $redirect);
-        Validation::Limits($topic_title, lang('title'), '3', '64', $redirect);
-        Validation::Limits($topic_slug, lang('slug'), '3', '43', $redirect);
-        Validation::Limits($topic_seo_title, lang('name SEO'), '4', '225', $redirect);
-        Validation::Limits($topic_description, lang('meta description'), '44', '225', $redirect);
-        Validation::Limits($topic_short_description, lang('short description'), '11', '160', $redirect);
-        Validation::Limits($topic_info, lang('Info'), '14', '5000', $redirect);
+        Validation::Limits($topic_title, Translate::get('title'), '3', '64', $redirect);
+        Validation::Limits($topic_slug, Translate::get('slug'), '3', '43', $redirect);
+        Validation::Limits($topic_seo_title, Translate::get('name SEO'), '4', '225', $redirect);
+        Validation::Limits($topic_description, Translate::get('meta description'), '44', '225', $redirect);
+        Validation::Limits($topic_short_description, Translate::get('short description'), '11', '160', $redirect);
+        Validation::Limits($topic_info, Translate::get('Info'), '14', '5000', $redirect);
 
         // Запишем img
         $img = $_FILES['images'];
@@ -115,12 +115,13 @@ class EditTopicController extends MainController
         $slug = TopicModel::getTopic($topic_slug, 'slug');
         if ($slug['topic_slug'] != $topic['topic_slug']) {
             if ($slug) {
-                addMsg(lang('url-already-exists'), 'error');
+                addMsg(Translate::get('url-already-exists'), 'error');
                 redirect(getUrlByName('topic', ['slug' => $topic_slug]));
             }
         }
         
         $post_fields    = Request::getPost() ?? [];
+        $topic_slug     = strtolower($topic_slug);
         $data = [
             'topic_id'                  => $topic_id,
             'topic_title'               => $topic_title,
@@ -139,7 +140,7 @@ class EditTopicController extends MainController
 
         TopicModel::edit($data);
 
-        addMsg(lang('changes saved'), 'success');
+        addMsg(Translate::get('changes saved'), 'success');
 
         redirect(getUrlByName('topic', ['slug' => $topic_slug]));
     }

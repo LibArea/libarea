@@ -1,5 +1,5 @@
 <?php
-return [
+$data = [
     'home'              => 'Acasă',
     'to the website'    => 'Pe site',
     'top'               => 'TOP',
@@ -29,7 +29,6 @@ return [
     'like'              => 'Apreciez',
     'i like comments'   => 'Apreciez comentariile',
     'i like posts'      => 'Îmi plac postările',
-    'feed'              => 'Noutati',
     'by topic'          => 'Pe această temă',
     'all comments'      => 'Toate comentariile',
     'all answers'       => 'Toate răspunsurile',
@@ -206,6 +205,14 @@ return [
     'stop word'         => 'Oprește cuvântul',
     'stop words no'     => 'Fără cuvinte oprite',
     'add a stop word'   => 'Adaugă cuvânt de oprire',
+
+    'language'              => 'Localization',
+    'ru-language'           => 'Rusă (RU)',
+    'en-language'           => 'English (EN)',
+    'de-language'           => 'Germană (DE)',
+    'fr-language'           => 'Franceză (FR)',
+    'zh-language'           => 'Chineză (ZH)',
+    'md-language'           => 'Moldovenesc (FR)',
 
     'repeat the password'   => 'Repetati parola',
     'the post is closed'    => 'Postarea este închisă',
@@ -443,7 +450,7 @@ return [
     'flag not included'                 => 'Semnalizați-l lăsat, nu îl folosiți des',
     'medal for registration'            => 'Medalie pentru înregistrare',
     'responses from community members'  => 'Răspunsurile comunității',
-    'minimal (experimental version)'    => 'Minimal (versiune experimentală a designului)',
+    'design choice'                     => 'alegerea designului',
     
     'topics-all'            => 'Toate subiectele',
     'topics-my'             => 'Sunt abonat la subiecte',
@@ -453,3 +460,5 @@ return [
     'topics-desc-new'       => 'Teme noi adăugate recent pe site. Abonați-vă la subiecte',
     'topic-subscription'    => 'Abonați-vă la spații și citiți-le în flux',
 ];
+
+return $data;

@@ -1,6 +1,6 @@
 <?php if (!empty($post_related)) { ?>
   <div class="mb20">
-    <h3 class="uppercase mb5 mt0 font-light size-14 gray"><?= lang('related'); ?></h3>
+    <h3 class="uppercase mb5 mt0 font-light size-14 gray"><?= Translate::get('related'); ?></h3>
     <?php $num = 0; ?>
     <?php foreach ($post_related as $related) { ?>
       <div class="mb5 flex">

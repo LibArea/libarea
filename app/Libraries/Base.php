@@ -17,7 +17,8 @@ class Base
         if (!empty($account['user_id'])) {
             $uid['user_id']                 = $account['user_id'];
             $uid['user_login']              = $account['user_login'];
-            $uid['user_design_is_minimal']  = $account['user_design_is_minimal'];
+            $uid['user_template']           = $account['user_template'] ?? 'default'; // after a day to remove
+            $uid['user_lang']               = $account['user_lang'] ?? 'ru'; // after a day to remove
             $uid['user_trust_level']        = $account['user_trust_level'];
             $uid['user_avatar']             = $account['user_avatar'];
             $uid['user_ban_list']           = $account['user_ban_list'];
@@ -29,7 +30,9 @@ class Base
                     hl_preliminary_exit();
                 }
             }
-
+            
+            Translate::setLang($uid['user_lang']);
+            
             Request::getResources()->addBottomScript('/assets/js/app.js');
         } else {
             self::checkCookie();
@@ -120,7 +123,8 @@ class Base
             'user_trust_level'          => $user['user_trust_level'],
             'user_ban_list'             => $user['user_ban_list'],
             'user_limiting_mode'        => $user['user_limiting_mode'],
-            'user_design_is_minimal'    => $user['user_design_is_minimal'],
+            'user_template'             => $user['user_template'],
+            'user_lang'                 => $user['user_lang'],
         ];
 
         $_SESSION['account'] = $data;

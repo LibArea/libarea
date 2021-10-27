@@ -5,10 +5,10 @@
   <div class="bg-white br-rd5 border-box-1 pt5 pr15 pb5 pl15">
     <?= breadcrumb(
       '/',
-      lang('home'),
+      Translate::get('home'),
       getUrlByName('user', ['login' => Request::get('login')]),
-      lang('profile'),
-      lang('answers-n') . ' ' . $data['user_login'],
+      Translate::get('profile'),
+      Translate::get('answers-n') . ' ' . $data['user_login'],
     ); ?>
   </div>
   <?php if (!empty($data['answers'])) { ?>
@@ -33,7 +33,7 @@
       </div>
     <?php } ?>
   <?php } else { ?>
-    <?= includeTemplate('/_block/no-content', ['lang' => 'no answers']); ?>
+    <?= no_content(Translate::get('no answers'), 'bi bi-info-lg'); ?>
   <?php } ?>
 </main>
 <aside class="col-span-3 relative no-mob">

@@ -4,11 +4,11 @@
 <?php $topic = $data['topic']; ?>
 <main class="col-span-7 mb-col-12">
   <div class="bg-white br-rd5 border-box-1 mb15 p15">
-    <div class="flex">
-      <div>
+    <div class="flex flex-row items-center justify-between">
+      <div class="no-mob">
         <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'w94 border-box-1 mt5'); ?>
       </div>
-      <div class="ml15 w-100">
+      <div class="ml15 mb-ml-0 flex-auto">
         <h1 class="mt0">
           <?= $data['topic']['topic_seo_title']; ?>
           <?php if ($uid['user_trust_level'] == 5 || $topic['topic_user_id'] == $uid['user_id']) { ?>
@@ -22,23 +22,23 @@
         <div class="mt15 right">
           <?php if (!$uid['user_id']) { ?>
             <a href="<?= getUrlByName('login'); ?>">
-              <div class="bg-gray-200 bg-hover-gray mazarine border-box-1 inline br-rd20 center pt5 pr15 pb5 pl15">+ <?= lang('read'); ?></div>
+              <div class="bg-gray-200 bg-hover-gray mazarine border-box-1 inline br-rd20 center pt5 pr15 pb5 pl15">+ <?= Translate::get('read'); ?></div>
             </a>
           <?php } else { ?>
             <?php if (is_array($data['topic_signed'])) { ?>
               <div data-id="<?= $topic['topic_id']; ?>" data-type="topic" class="focus-id bg-gray-100 gray-light-2 border-box-1 inline br-rd20 center pt5 pr15 pb5 pl15">
-                <?= lang('unsubscribe'); ?>
+                <?= Translate::get('unsubscribe'); ?>
               </div>
             <?php } else { ?>
               <div data-id="<?= $topic['topic_id']; ?>" data-type="topic" class="focus-id bg-gray-200 bg-hover-gray mazarine border-box-1 inline br-rd20 center pt5 pr15 pb5 pl15">
-                + <?= lang('read'); ?>
+                + <?= Translate::get('read'); ?>
               </div>
             <?php } ?>
           <?php } ?>
         </div>
         <?php if (!empty($data['focus_users'])) { ?>
           <div class="size-14 mt20 gray-light-2">
-            <div class="uppercase inline mr5"><?= lang('reads'); ?>:</div>
+            <div class="uppercase inline mr5"><?= Translate::get('reads'); ?>:</div>
             <?php $n = 0;
             foreach ($data['focus_users'] as $user) {
               $n++; ?>
@@ -57,11 +57,11 @@
   </div>
 
   <div class="bg-white flex flex-row items-center justify-between border-box-1 br-rd5 p15 mb15">
-    <p class="m0 size-18"><?= lang('feed'); ?></p>
+    <p class="m0 size-18 no-mob"><?= Translate::get('feed'); ?></p>
     <?php $pages = [
-      ['id' => 'topic', 'url' => getUrlByName('topic', ['slug' => $topic['topic_slug']]), 'content' => lang('feed'), 'icon' => 'bi bi-sort-down'],
-      ['id' => 'recommend', 'url' => getUrlByName('topic', ['slug' => $topic['topic_slug']]) . '/recommend', 'content' => lang('recommended'), 'icon' => 'bi bi-lightning'],
-      ['id' => 'info', 'url' => getUrlByName('topic.info', ['slug' => $topic['topic_slug']]), 'content' => lang('info'), 'icon' => 'bi bi-info-lg'],
+      ['id' => 'topic', 'url' => getUrlByName('topic', ['slug' => $topic['topic_slug']]), 'content' => Translate::get('feed'), 'icon' => 'bi bi-sort-down'],
+      ['id' => 'recommend', 'url' => getUrlByName('topic', ['slug' => $topic['topic_slug']]) . '/recommend', 'content' => Translate::get('recommended'), 'icon' => 'bi bi-lightning'],
+      ['id' => 'info', 'url' => getUrlByName('topic.info', ['slug' => $topic['topic_slug']]), 'content' => Translate::get('info'), 'icon' => 'bi bi-info-lg'],
     ];
     includeTemplate('/_block/tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
     ?>
@@ -75,11 +75,11 @@
   <div class="bg-white br-rd5 mb15 border-box-1 p15">
     <div class="flex justify-center">
       <div class="mr15 center box-number">
-        <div class="uppercase mb5 size-14 gray"><?= lang('posts-m'); ?></div>
+        <div class="uppercase mb5 size-14 gray"><?= Translate::get('posts-m'); ?></div>
         <?= $topic['topic_count']; ?>
       </div>
       <div class="ml15 center box-number">
-        <div class="uppercase mb5 size-14 gray"><?= lang('reads'); ?></div>
+        <div class="uppercase mb5 size-14 gray"><?= Translate::get('reads'); ?></div>
         <div class="focus-user blue">
           <?= $topic['topic_focus_count']; ?>
         </div>
@@ -90,7 +90,7 @@
   <?php if (!empty($data['writers'])) { ?>
     <div class="sticky top0 t-81">
       <div class="border-box-1 mt15 p15 mb15 br-rd5 bg-white size-14">
-        <div class="uppercase gray mt5 mb5"> <?= lang('writers'); ?></div>
+        <div class="uppercase gray mt5 mb5"> <?= Translate::get('writers'); ?></div>
         <?php foreach ($data['writers'] as $ind => $row) { ?>
           <a class="flex relative pt5 pb5 items-center hidden gray-light" href="<?= getUrlByName('user', ['login' => $row['user_login']]); ?>">
             <?= user_avatar_img($row['user_avatar'], 'max', $row['user_login'], 'w24 mr5 br-rd-50'); ?>
@@ -114,7 +114,7 @@
           var html = data;
           layer.open({
             type: 1,
-            title: "<?= lang('reads'); ?>",
+            title: "<?= Translate::get('reads'); ?>",
             area: ['400px', '80%'],
             shade: 0,
             maxmin: true,

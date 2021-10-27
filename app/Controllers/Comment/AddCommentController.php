@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
 use App\Models\{NotificationsModel, ActionModel, AnswerModel, CommentModel, PostModel};
-use Content, Base, Validation, SendEmail;
+use Content, Base, Validation, SendEmail, Translate;
 
 class AddCommentController extends MainController
 {
@@ -43,7 +43,7 @@ class AddCommentController extends MainController
         $redirect = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
 
         // Проверяем длину тела
-        Validation::Limits($comment_content, lang('Comments-m'), '6', '2024', $redirect);
+        Validation::Limits($comment_content, Translate::get('Comments-m'), '6', '2024', $redirect);
 
         // Ограничим добавления комментариев (в день)
         Validation::speedAdd($uid, 'comment');
@@ -54,12 +54,12 @@ class AddCommentController extends MainController
             $all_count = ActionModel::ceneralContributionCount($uid['user_id']);
             if ($all_count < 2) {
                 ActionModel::addLimitingMode($uid['user_id']);
-                addMsg(lang('limiting-mode-1'), 'error');
+                addMsg(Translate::get('limiting-mode-1'), 'error');
                 redirect('/');
             }
 
             $comment_published = 0;
-            addMsg(lang('comment-audit'), 'error');
+            addMsg(Translate::get('comment-audit'), 'error');
         }
 
         $comment_content = Content::change($comment_content);

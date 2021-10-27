@@ -1,5 +1,5 @@
 <?php if (!empty($data)) { ?>
-  <div class="uppercase mb5 mt5 size-14"><?= lang('domains'); ?></div>
+  <div class="uppercase mb5 mt5 size-14"><?= Translate::get('domains'); ?></div>
   <?php foreach ($data as  $domain) { ?>
     <a class="size-14 gray" href="<?= getUrlByName('domain', ['domain' => $domain['link_url_domain']]); ?>">
       <i class="bi bi-link-45deg middle"></i> <?= $domain['link_url_domain']; ?>
@@ -7,5 +7,5 @@
     </a><br>
   <?php } ?>
 <?php } else { ?>
-  <p><?= lang('there are no domains'); ?>...</p>
+  <p><?= Translate::get('there are no domains'); ?>...</p>
 <?php } ?>

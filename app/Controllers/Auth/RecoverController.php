@@ -5,7 +5,7 @@ namespace App\Controllers\Auth;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\{SettingModel, UserModel};
-use Config, Base, Integration, Validation, SendEmail;
+use Config, Base, Integration, Validation, SendEmail, Translate;
 
 class RecoverController extends MainController
 {
@@ -17,7 +17,7 @@ class RecoverController extends MainController
             'imgurl'     => false,
             'url'        => getUrlByName('recover'),
         ];
-        $meta = meta($m, lang('password recovery'), lang('info-recover'));
+        $meta = meta($m, Translate::get('password recovery'), Translate::get('info-recover'));
 
         $data = [
             'sheet'         => 'recover',
@@ -33,7 +33,7 @@ class RecoverController extends MainController
 
         if (Config::get('general.captcha')) {
             if (!Integration::checkCaptchaCode()) {
-                addMsg(lang('code error'), 'error');
+                addMsg(Translate::get('code error'), 'error');
                 redirect($recover_uri);
             }
         }
@@ -43,13 +43,13 @@ class RecoverController extends MainController
         $uInfo = UserModel::userInfo($email);
 
         if (empty($uInfo['user_email'])) {
-            addMsg(lang('there is no such e-mail on the site'), 'error');
+            addMsg(Translate::get('there is no such e-mail on the site'), 'error');
             redirect($recover_uri);
         }
 
         // Проверка на заблокированный аккаунт
         if ($uInfo['user_ban_list'] == 1) {
-            addMsg(lang('your account is under review'), 'error');
+            addMsg(Translate::get('your account is under review'), 'error');
             redirect($recover_uri);
         }
 
@@ -58,10 +58,10 @@ class RecoverController extends MainController
 
         // Отправка e-mail
         $newpass_link = Config::get('meta.url') . $recover_uri . '/remind/' . $code;
-        $mail_message = lang('your link to change your password') . ": \n" . $newpass_link . "\n\n";
-        SendEmail::send($email, Config::get('meta.name') . ' — ' . lang('changing your password'), $mail_message);
+        $mail_message = Translate::get('your link to change your password') . ": \n" . $newpass_link . "\n\n";
+        SendEmail::send($email, Config::get('meta.name') . ' — ' . Translate::get('changing your password'), $mail_message);
 
-        addMsg(lang('new password has been sent to e-mail'), 'success');
+        addMsg(Translate::get('new password has been sent to e-mail'), 'success');
         redirect(getUrlByName('login'));
     }
 
@@ -72,14 +72,14 @@ class RecoverController extends MainController
         $user_id    = UserModel::getPasswordActivate($code);
 
         if (!$user_id) {
-            addMsg(lang('code-incorrect'), 'error');
+            addMsg(Translate::get('code-incorrect'), 'error');
             redirect(getUrlByName('recover'));
         }
 
         $user = UserModel::getUser($user_id['activate_user_id'], 'id');
         Base::PageError404($user);
 
-        $meta = meta($m = [], lang('password recovery'), lang('info-recover'));
+        $meta = meta($m = [], Translate::get('password recovery'), Translate::get('info-recover'));
 
         $data = [
             'code'          => $code,
@@ -100,7 +100,7 @@ class RecoverController extends MainController
             return false;
         }
 
-        Validation::Limits($password, lang('password'), '8', '32', getUrlByName('recover') . '/remind/' . $code);
+        Validation::Limits($password, Translate::get('password'), '8', '32', getUrlByName('recover') . '/remind/' . $code);
 
         $newpass  = password_hash($password, PASSWORD_BCRYPT);
         $news     = SettingModel::editPassword($user_id, $newpass);
@@ -111,7 +111,7 @@ class RecoverController extends MainController
 
         UserModel::editRecoverFlag($user_id);
 
-        addMsg(lang('password changed'), 'success');
+        addMsg(Translate::get('password changed'), 'success');
         redirect(getUrlByName('login'));
     }
 
@@ -122,13 +122,13 @@ class RecoverController extends MainController
         $activate_email = UserModel::getEmailActivate($code);
 
         if (!$activate_email) {
-            addMsg(lang('code-used'), 'error');
+            addMsg(Translate::get('code-used'), 'error');
             redirect('/');
         }
 
         UserModel::EmailActivate($activate_email['user_id']);
 
-        addMsg(lang('yes-email-pass'), 'success');
+        addMsg(Translate::get('yes-email-pass'), 'success');
         redirect(getUrlByName('login'));
     }
 }

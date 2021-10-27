@@ -1,5 +1,5 @@
 <?php if ($uid['user_id'] == 0) { ?>
-  <div class="col-span-12 grid items-center grid-cols-12 mb5">
+  <div class="col-span-12 grid items-center grid-cols-12 mb15">
     <div class="col-span-12 bg-white border-box-1 br-rd5 p20 center">
       <h1 class="size-31 mt0"><?= Config::get('meta.bannertitle'); ?></h1>
       <div class="gray-light mb5"><?= Config::get('meta.bannerdesc'); ?>...</div>
@@ -13,20 +13,29 @@
 
 <main class="col-span-7 mb-col-12">
   <div class="bg-white flex flex-row items-center justify-between border-box-1 br-rd5 p15 mb15">
-    <p class="m0 size-18"><?= lang($data['sheet']); ?></p>
-    <?php $pages = [
-      ['id' => 'feed', 'url' => '/', 'content' => lang('feed'), 'icon' => 'bi bi-sort-down'],
-      ['id' => 'all', 'url' => '/all', 'content' => lang('all'), 'auth' => 'yes', 'icon' => 'bi bi-app'],
-      ['id' => 'top', 'url' => '/top', 'content' => lang('top'), 'icon' => 'bi bi-bar-chart'],
-    ];
-    includeTemplate('/_block/tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
+    <p class="m0 size-18"><?= Translate::get($data['sheet']); ?></p>
+    <?php includeTemplate(
+      '/_block/tabs_nav',
+      [
+        'pages' => [
+          ['id' => 'feed', 'url' => '/', 'content' => Translate::get('feed'), 'icon' => 'bi bi-sort-down'],
+          ['id' => 'all', 'url' => '/all', 'content' => Translate::get('all'), 'auth' => 'yes', 'icon' => 'bi bi-app'],
+          ['id' => 'top', 'url' => '/top', 'content' => Translate::get('top'), 'icon' => 'bi bi-bar-chart'],
+        ],
+        'sheet' => $data['sheet'],
+        'user_id' => $uid['user_id'],
+      ]
+    );
     ?>
   </div>
+
   <?= includeTemplate('/_block/post', ['data' => $data, 'uid' => $uid]); ?>
+
   <div class="mb15">
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], null); ?>
   </div>
 </main>
+
 <aside class="col-span-3 mb-col-12 relative no-mob">
   <?php if ($uid['user_id'] == 0) { ?>
     <?= includeTemplate('/_block/login'); ?>
@@ -34,11 +43,11 @@
 
   <?php if ($uid['user_id'] > 0 && !empty($data['topics_user'])) { ?>
     <div class="border-box-1 p15 mb15 br-rd5 bg-white size-14">
-      <a class="right gray-light-2" title="<?= lang('topics'); ?>" href="<?= getUrlByName('topic.my'); ?>">
+      <a class="right gray-light-2" title="<?= Translate::get('topics'); ?>" href="<?= getUrlByName('topic.my'); ?>">
         <i class="bi bi-chevron-right middle"></i>
       </a>
       <div class="uppercase gray mt5 mb5">
-        <?= lang('signed'); ?>
+        <?= Translate::get('signed'); ?>
       </div>
 
       <?php
@@ -63,24 +72,22 @@
             <span class="ml5"><?= $topic['topic_title']; ?></span>
           </a>
           <?php if ($uid['user_id'] == $topic['topic_user_id']) { ?>
-            <a class="right blue" title="<?= lang('add post'); ?>" href="/post/add/<?= $topic['topic_id']; ?>">
+            <a class="right blue" title="<?= Translate::get('add post'); ?>" href="/post/add/<?= $topic['topic_id']; ?>">
               <i class="bi bi-plus-lg size-14"></i>
             </a>
           <?php } ?>
         </div>
       <?php } ?>
       <?php if (count($data['topics_user']) > Config::get('topics.number_topics')) { ?>
-        <a class="gray block mt5" title="<?= lang('topics'); ?>" href="<?= getUrlByName('topic.my'); ?>">
-          <?= lang('see more'); ?> <i class="bi bi-chevron-double-right middle"></i>
+        <a class="gray block mt5" title="<?= Translate::get('topics'); ?>" href="<?= getUrlByName('topic.my'); ?>">
+          <?= Translate::get('see more'); ?> <i class="bi bi-chevron-double-right middle"></i>
         </a>
       <?php } ?>
     </div>
-  <?php } ?>
-
-  <?php if ($uid['user_id'] == 0) { ?>
+  <?php } else { ?>
     <div class="border-box-1 p15 mb15 br-rd5 bg-white size-14">
       <div class="uppercase gray mt5 mb5">
-        <?= lang('topics'); ?>
+        <?= Translate::get('topics'); ?>
       </div>
       <?php foreach (Config::get('topics-default') as $key => $topic) { ?>
         <a class="flex relative pt5 pb5 items-center hidden gray-light" href="<?= $topic['url']; ?>">

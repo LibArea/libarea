@@ -3,7 +3,7 @@
 </div>
 <?php $topic = $data['topic']; ?>
 <main class="col-span-10 mb-col-12">
-  <?= breadcrumb(getUrlByName('topics'), lang('topics'), getUrlByName('topic', ['slug' => $topic['topic_slug']]), $topic['topic_title'], lang('edit topic')); ?>
+  <?= breadcrumb(getUrlByName('topics'), Translate::get('topics'), getUrlByName('topic', ['slug' => $topic['topic_slug']]), $topic['topic_title'], Translate::get('edit topic')); ?>
 
   <div class="topic">
     <div class="box create">
@@ -17,38 +17,38 @@
           </div>
         </div>
         <div class="clear">
-          <p class="size-14 gray-light-2"><?= lang('recommended size'); ?>: 240x240px (jpg, jpeg, png)</p>
-          <p><input type="submit" class="button block br-rd5 white" value="<?= lang('download'); ?>" /></p>
+          <p class="size-14 gray-light-2"><?= Translate::get('recommended size'); ?>: 240x240px (jpg, jpeg, png)</p>
+          <p><input type="submit" class="button block br-rd5 white" value="<?= Translate::get('download'); ?>" /></p>
         </div>
 
         <?= includeTemplate('/_block/form/field-input', [
           'data' => [
             [
-              'title' => lang('title'),
+              'title' => Translate::get('title'),
               'type' => 'text',
               'name' => 'topic_title',
               'value' => $topic['topic_title'],
               'min' => 3,
               'max' => 64,
-              'help' => '3 - 64 ' . lang('characters'),
+              'help' => '3 - 64 ' . Translate::get('characters'),
               'red' => 'red'
             ], [
-              'title' => lang('title') . ' (SEO)',
+              'title' => Translate::get('title') . ' (SEO)',
               'type' => 'text',
               'name' => 'topic_seo_title',
               'value' => $topic['topic_seo_title'],
               'min' => 4,
               'max' => 225,
-              'help' => '4 - 225 ' . lang('characters'),
+              'help' => '4 - 225 ' . Translate::get('characters'),
               'red' => 'red'
             ], [
-              'title' => lang('Slug (URL)'),
+              'title' => Translate::get('Slug (URL)'),
               'type' => 'text',
               'name' => 'topic_slug',
               'value' => $topic['topic_slug'],
               'min' => 3,
               'max' => 32,
-              'help' => '3 - 32 ' . lang('characters') . ' (a-z-0-9)',
+              'help' => '3 - 32 ' . Translate::get('characters') . ' (a-z-0-9)',
               'red' => 'red'
             ],
           ]
@@ -56,46 +56,46 @@
         <?php if ($uid['user_trust_level'] == 5) { ?>
         <?php if ($topic['topic_parent_id'] > 0) { ?>
           <div class="mb20">
-            <label for="topic_content"><?= lang('root'); ?>?</label>
+            <label for="topic_content"><?= Translate::get('root'); ?>?</label>
             ----
           </div>
         <?php } else { ?>
           <div class="mb20">
-            <label for="topic_content"><?= lang('root'); ?>?</label>
-            <input type="radio" name="topic_is_parent" <?php if ($topic['topic_is_parent'] == 0) { ?>checked<?php } ?> value="0"> <?= lang('no'); ?>
-            <input type="radio" name="topic_is_parent" <?php if ($topic['topic_is_parent'] == 1) { ?>checked<?php } ?> value="1"> <?= lang('yes'); ?>
-            <div class="size-14 gray-light-2"><?= lang('root-help'); ?></div>
+            <label for="topic_content"><?= Translate::get('root'); ?>?</label>
+            <input type="radio" name="topic_is_parent" <?php if ($topic['topic_is_parent'] == 0) { ?>checked<?php } ?> value="0"> <?= Translate::get('no'); ?>
+            <input type="radio" name="topic_is_parent" <?php if ($topic['topic_is_parent'] == 1) { ?>checked<?php } ?> value="1"> <?= Translate::get('yes'); ?>
+            <div class="size-14 gray-light-2"><?= Translate::get('root-help'); ?></div>
           </div>
         <?php } ?>
         <?php } ?>
         
-        <div for="mb5"><?= lang('meta description'); ?><sup class="red">*</sup></div>
+        <div for="mb5"><?= Translate::get('meta description'); ?><sup class="red">*</sup></div>
         <textarea class="add max-w780" rows="6" minlength="44" name="topic_description"><?= $topic['topic_description']; ?></textarea>
-        <div class="size-14 gray-light-2 mb20">> 44 <?= lang('characters'); ?></div>
+        <div class="size-14 gray-light-2 mb20">> 44 <?= Translate::get('characters'); ?></div>
  
         <?= includeTemplate('/_block/form/field-input', [
           'data' => [
             [
-              'title' => lang('short description'),
+              'title' => Translate::get('short description'),
               'type' => 'text',
               'name' => 'topic_short_description',
               'value' => $topic['topic_short_description'],
               'min' => 11,
               'max' => 120,
-              'help' => '11 - 120 ' . lang('characters'),
+              'help' => '11 - 120 ' . Translate::get('characters'),
               'red' => 'red'
             ],
           ]
         ]); ?>
         
-        <div for="mb5"><?= lang('info'); ?><sup class="red">*</sup></div>
+        <div for="mb5"><?= Translate::get('info'); ?><sup class="red">*</sup></div>
         <textarea class="add max-w780" rows="6" name="topic_info"><?= $topic['topic_info']; ?></textarea>
-        <div class="mb20 size-14 gray-light-2">Markdown, > 14 <?= lang('characters'); ?></div>
+        <div class="mb20 size-14 gray-light-2">Markdown, > 14 <?= Translate::get('characters'); ?></div>
 
         <?php if ($uid['user_trust_level'] == 5) { ?>
         <?php if ($topic['topic_is_parent'] != 1) { ?>
           <div class="mb20">
-            <label class="block" for="topic_content"><?= lang('root'); ?></label>
+            <label class="block" for="topic_content"><?= Translate::get('root'); ?></label>
             <select name="topic_parent_id[]" multiple="multiple" id='selMainLinked'>
               <?php if (!empty($data['topic_parent_id'])) { ?>
                 <?php foreach ($data['topic_parent_id'] as $parent) { ?>
@@ -108,7 +108,7 @@
         <?php } ?>
         <div class="mb20">
           <label class="block" for="post_content">
-            <?= lang('related'); ?> (post)
+            <?= Translate::get('related'); ?> (post)
           </label>
           <select name="post_related[]" multiple="multiple" id='postRelated'>
             <?php foreach ($data['post_related'] as $related) { ?>
@@ -118,7 +118,7 @@
         </div>
         <div class="mb20">
           <label class="block" for="topic_content">
-            <?= lang('related'); ?> (topic)
+            <?= Translate::get('related'); ?> (topic)
           </label>
           <select name="topic_related[]" multiple="multiple" id='topicRelated'>
             <?php foreach ($data['topic_related'] as $related) { ?>
@@ -195,13 +195,13 @@
 
         <?php if ($uid['user_trust_level'] > 4) { ?>
           <?= includeTemplate('/_block/form/select-content-tl', ['uid' => $uid, 'data' => $topic['topic_tl']]); ?>
-          <?= includeTemplate('/_block/form/select-content', ['type' => 'user', 'data' => $data, 'action' => 'edit', 'title' => lang('author'), 'red' => 'red']); ?>
+          <?= includeTemplate('/_block/form/select-content', ['type' => 'user', 'data' => $data, 'action' => 'edit', 'title' => Translate::get('author'), 'red' => 'red']); ?>
 
         <?php } ?>
 
         <div class="mb20">
           <input type="hidden" name="topic_id" value="<?= $topic['topic_id']; ?>">
-          <input type="submit" name="submit" class="button block br-rd5 white" value="<?= lang('edit'); ?>" />
+          <input type="submit" name="submit" class="button block br-rd5 white" value="<?= Translate::get('edit'); ?>" />
         </div>
       </form>
     </div>

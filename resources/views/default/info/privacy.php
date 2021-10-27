@@ -2,13 +2,13 @@
 
     <?= breadcrumb(
         '/',
-        lang('home'),
+        Translate::get('home'),
         getUrlByName('info'),
-        lang('info'),
-        lang('privacy policy')
+        Translate::get('info'),
+        Translate::get('privacy policy')
     ); ?>
     
-    <h1><?= lang('privacy policy'); ?></h1>
+    <h1><?= Translate::get('privacy policy'); ?></h1>
     <?= $data['content']; ?>
 </main>
 <?= includeTemplate('/_block/info-page-menu', ['uid' => $uid, 'sheet' => $data['sheet']]); ?>

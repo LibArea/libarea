@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\{UserModel, SettingModel, BadgeModel};
 use App\Models\Admin\{BanUserModel, AgentModel};
-use Base, Validation;
+use Base, Validation, Translate;
 
 class UsersController extends MainController
 {
@@ -32,7 +32,7 @@ class UsersController extends MainController
 
         Request::getResources()->addBottomScript('/assets/js/admin.js');
 
-        $meta = meta($m = [], lang('users'));
+        $meta = meta($m = [], Translate::get('users'));
         $data = [
             'pagesCount'    => ceil($pagesCount / $limit),
             'pNum'          => $page,
@@ -60,7 +60,7 @@ class UsersController extends MainController
             $results[$ind]      = $row;
         }
 
-        $meta = meta($m = [], lang('search'));
+        $meta = meta($m = [], Translate::get('search'));
         $data = [
             'results'       => $results,
             'option'        => $option,
@@ -93,7 +93,7 @@ class UsersController extends MainController
 
         Request::getResources()->addBottomScript('/assets/js/admin.js');
 
-        $meta = meta($m = [], lang('edit user'));
+        $meta = meta($m = [], Translate::get('edit user'));
         $data = [
             'sheet'             => 'edit-user',
             'count'             => UserModel::contentCount($user_id),
@@ -111,7 +111,7 @@ class UsersController extends MainController
         if (!UserModel::getUser($user_id, 'id')) redirect(getUrlByName('admin.users'));
 
         $redirect = getUrlByName('admin.user.edit', ['id' => $user_id]);
-        Validation::Limits($login, lang('login'), '3', '11', $redirect);
+        Validation::Limits($login, Translate::get('login'), '3', '11', $redirect);
 
         $data = [
             'user_id'            => $user_id,

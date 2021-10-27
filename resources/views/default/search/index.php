@@ -3,7 +3,7 @@
   <div class="col-span-2 no-mob mb20">
     <?php if (!empty($data['result'])) { ?>
       <div class="ml16 size-21">
-        <?= lang('you were looking for'); ?>: <b><?= $data['query']; ?></b>
+        <?= Translate::get('you were looking for'); ?>: <b><?= $data['query']; ?></b>
         (<?= $data['count']; ?>)
       </div>
     <?php } ?>
@@ -62,9 +62,9 @@
       <?php } ?>
     <?php } ?>
   <?php } else { ?>
-    <div class="mb20"><b><?= lang('the search has not given any results'); ?></b></div>
-    <div class="mb20"><?= lang('too short'); ?></div>
-    <a class="mb20 block" href="/"><?= lang('to main'); ?>...</a>
+    <div class="mb20"><b><?= Translate::get('the search has not given any results'); ?></b></div>
+    <div class="mb20"><?= Translate::get('too short'); ?></div>
+    <a class="mb20 block" href="/"><?= Translate::get('to main'); ?>...</a>
   <?php } ?>
 </main>
 <div class="col-span-2 no-mob"></div>

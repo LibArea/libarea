@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{NotificationsModel, PostModel, ReportModel};
-use Base, Config;
+use Base, Config, Translate;
 
 class ReportController extends MainController
 {
@@ -42,7 +42,7 @@ class ReportController extends MainController
             'report_user_id'    => $uid['user_id'],
             'report_type'       => $content_type,
             'report_content_id' => $content_id,
-            'report_reason'     => lang('breaking the rules'),
+            'report_reason'     => Translate::get('breaking the rules'),
             'report_url'        => $url_report,
             'report_date'       => date("Y-m-d H:i:s"),
             'report_status'     => 0,

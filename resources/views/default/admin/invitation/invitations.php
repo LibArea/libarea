@@ -2,7 +2,13 @@
   <?= includeTemplate('/admin/admin-menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-10 mb-col-12">
-  <?= breadcrumb('/admin', lang('admin'), null, null, lang('invites')); ?>
+  <?= breadcrumb(
+    '/admin',
+    Translate::get('admin'),
+    null,
+    null,
+    Translate::get('invites')
+  ); ?>
 
   <div class="invitations mt15">
     <?php if (!empty($data['invitations'])) { ?>
@@ -21,7 +27,7 @@
         </div>
       <?php } ?>
     <?php } else { ?>
-      <?= includeTemplate('/_block/no-content', ['lang' => 'there are no comments']); ?>
+      <?= no_content(Translate::get('there are no comments'), 'bi bi-info-lg'); ?>
     <?php } ?>
   </div>
 </main>

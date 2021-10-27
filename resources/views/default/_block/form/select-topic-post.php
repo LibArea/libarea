@@ -1,5 +1,5 @@
 <div class="mb20 max-w640">
-  <label class="block" for="post_content"><?= lang('topics'); ?>
+  <label class="block" for="post_content"><?= Translate::get('topics'); ?>
     <?php if (!empty($red)) { ?><sup class="red">*</sup><?php } ?>
   </label>
   <?php if ($action == 'edit') { ?>

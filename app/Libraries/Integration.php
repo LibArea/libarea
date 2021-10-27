@@ -1,7 +1,7 @@
 <?php
 
 use Hleb\Constructor\Handlers\Request;
-use Config;
+use Config, Translate;
 
 class Integration
 {
@@ -72,7 +72,7 @@ class Integration
             return false;
         }
 
-        $content    = lang('Post added');
+        $content    = Translate::get('Post added');
         $color      = hexdec("3366ff");
 
         // Формируем даты

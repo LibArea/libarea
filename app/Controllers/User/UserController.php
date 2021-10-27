@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\{UserModel, BadgeModel};
 use App\Models\{TopicModel, NotificationsModel, PostModel};
-use Content, Config, Base, Validation;
+use Content, Config, Base, Validation, Translate;
 
 class UserController extends MainController
 {
@@ -28,7 +28,7 @@ class UserController extends MainController
             'imgurl'     => false,
             'url'        => getUrlByName('users'),
         ];
-        $meta = meta($m, lang('users'), lang('desc-user-all'));
+        $meta = meta($m, Translate::get('users'), Translate::get('desc-user-all'));
 
         $data = [
             'sheet'         => 'users',
@@ -50,12 +50,12 @@ class UserController extends MainController
         Base::PageError404($user);
 
         if (!$user['user_about']) {
-            $user['user_about'] = lang('riddle') . '...';
+            $user['user_about'] = Translate::get('riddle') . '...';
         }
 
         $site_name  = Config::get('meta.name');
-        $meta_title = sprintf(lang('title-profile'), $user['user_login'], $user['user_name'], $site_name);
-        $meta_desc  = sprintf(lang('desc-profile'), $user['user_login'], $user['user_about'], $site_name);
+        $meta_title = sprintf(Translate::get('title-profile'), $user['user_login'], $user['user_name'], $site_name);
+        $meta_desc  = sprintf(Translate::get('desc-profile'), $user['user_login'], $user['user_about'], $site_name);
 
         if ($user['user_ban_list'] == 1) {
             Request::getHead()->addMeta('robots', 'noindex');
@@ -126,7 +126,7 @@ class UserController extends MainController
             $result[$ind]           = $row;
         }
 
-        $meta = meta($m = [], lang('favorites'));
+        $meta = meta($m = [], Translate::get('favorites'));
         $data = [
             'sheet'     => 'favorites',
             'favorites' => $result
@@ -145,7 +145,7 @@ class UserController extends MainController
             redirect('/u/' . $uid['user_login'] . '/drafts');
         }
 
-        $meta = meta($m = [], lang('drafts'));
+        $meta = meta($m = [], Translate::get('drafts'));
         $data = [
             'drafts' => UserModel::userDraftPosts($uid['user_id']),
         ];
@@ -169,14 +169,14 @@ class UserController extends MainController
         foreach ($focus_posts as $ind => $row) {
             $text                           = explode("\n", $row['post_content']);
             $row['post_content_preview']    = Content::text($text[0], 'line');
-            $row['lang_num_answers']        = word_form($row['post_answers_count'], lang('answer'), lang('answers-m'), lang('answers'));
+            $row['lang_num_answers']        = word_form($row['post_answers_count'], Translate::get('answer'), Translate::get('answers-m'), Translate::get('answers'));
             $row['post_date']               = lang_date($row['post_date']);
             $result[$ind]                   = $row;
         }
 
-        $meta = meta($m = [], lang('subscribed'));
+        $meta = meta($m = [], Translate::get('subscribed'));
         $data = [
-            'h1'    => lang('subscribed') . ' ' . $uid['user_login'],
+            'h1'    => Translate::get('subscribed') . ' ' . $uid['user_login'],
             'sheet' => 'subscribed',
             'posts' => $result
         ];

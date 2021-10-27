@@ -8,6 +8,61 @@ declare(strict_types=1);
  * Сопоставление названий для используемых функций. При конфликте имен можно использовать другое имя.
  */
 
+/* function getProtectUrl($url)
+{
+    return hleb_ba5c9de48cba78c_getProtectUrl($url);
+}
+
+function getFullUrl($url)
+{
+    return hleb_e0b1036cd5b501_getFullUrl($url);
+}
+
+function getMainUrl()
+{
+    return hleb_e2d3aeb0253b7_getMainUrl();
+}
+
+function getMainClearUrl()
+{
+    return hleb_daa581cdd6323_getMainClearUrl();
+}
+
+function getStandardUrl(string $name)
+{
+    return hleb_a1a3b6di245ea_getStandardUrl($name);
+}
+
+function print_r2($data, $desc = null)
+{
+    hleb_a581cdd66c107015_print_r2($data, $desc);
+}
+
+function includeOwnCachedTemplate(string $template, array $params = [])
+{
+    hleb_ade9e72e1018c6_template($template, $params);
+} 
+
+function storage_path()
+{
+    return hleb_6iopl942e103te6i10600l_storage_path();
+}
+
+function public_path()
+{
+    return hleb_10p134l66o0il0e0t92e6i_public_path();
+}
+
+function view_path()
+{
+    return hleb_601e30l60p2ii1e0o469tl_view_path();
+}
+
+function getContentFromTemplate(string $template, array $params = [])
+{
+    return hleb_e0b1036c1070101_template($template, $params, true);
+} */
+
 // use App\Optional\Data; 
 
 function render($name, $data = null)
@@ -40,49 +95,9 @@ function redirect(string $url, int $code = 303)
     hleb_ad7371873a6ad40_redirect($url, $code);
 }
 
-function getProtectUrl($url)
-{
-    return hleb_ba5c9de48cba78c_getProtectUrl($url);
-}
-
-function getFullUrl($url)
-{
-    return hleb_e0b1036cd5b501_getFullUrl($url);
-}
-
-function getMainUrl()
-{
-    return hleb_e2d3aeb0253b7_getMainUrl();
-}
-
-function getMainClearUrl()
-{
-    return hleb_daa581cdd6323_getMainClearUrl();
-}
-
 function getUrlByName($name, $args = [])
 {
     return hleb_i245eaa1a3b6d_getByName($name, $args);
-}
-
-function getStandardUrl(string $name)
-{
-    return hleb_a1a3b6di245ea_getStandardUrl($name);
-}
-
-function print_r2($data, $desc = null)
-{
-    hleb_a581cdd66c107015_print_r2($data, $desc);
-}
-
-function getContentFromTemplate(string $template, array $params = [])
-{
-    return hleb_e0b1036c1070101_template($template, $params, true);
-}
-
-function includeOwnCachedTemplate(string $template, array $params = [])
-{
-    hleb_ade9e72e1018c6_template($template, $params);
 }
 
 function getRequestResources()
@@ -100,29 +115,14 @@ function getRequest()
     return hleb_e70c10c1057hn11cc8il2_get_request();
 }
 
-function storage_path()
-{
-    return hleb_6iopl942e103te6i10600l_storage_path();
-}
-
-function public_path()
-{
-    return hleb_10p134l66o0il0e0t92e6i_public_path();
-}
-
-function view_path()
-{
-    return hleb_601e30l60p2ii1e0o469tl_view_path();
-}
-
 function includeCachedTemplate(string $template, array $params = [])
 {
-    hleb_e0b1036c1070102_template(PR_VIEW_DIR . $template, $params);
+    hleb_e0b1036c1070102_template(Config::get('general.template') . $template, $params);
 }
 
 function includeTemplate(string $template, array $params = [])
 {
-    return hleb_e0b1036c1070101_template(PR_VIEW_DIR . $template, $params);
+    return hleb_e0b1036c1070101_template(Config::get('general.template') . $template, $params);
 }
 
 function view(string $template, array $params = [])
@@ -133,5 +133,5 @@ function view(string $template, array $params = [])
     includeTemplate('/footer');
 }
 
-hleb_require(HLEB_GLOBAL_DIRECTORY . '/app/Libraries/Template.php');
-hleb_require(HLEB_GLOBAL_DIRECTORY . '/app/Libraries/Meta.php');
+hleb_require(HLEB_GLOBAL_DIRECTORY . '/app/Helpers/Template.php');
+hleb_require(HLEB_GLOBAL_DIRECTORY . '/app/Helpers/Meta.php');

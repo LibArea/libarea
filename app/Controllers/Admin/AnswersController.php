@@ -5,7 +5,7 @@ namespace App\Controllers\Admin;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\AnswerModel;
-use Content, Base;
+use Content, Base, Translate;
 
 class AnswersController extends MainController
 {
@@ -26,14 +26,18 @@ class AnswersController extends MainController
             $result[$ind]   = $row;
         }
 
-        $meta = meta($m = [], $sheet == 'ban' ? lang('deleted answers') : lang('answers-n'));
-        $data = [
-            'sheet'         => $sheet == 'all' ? 'answers-n' : 'answers-ban',
-            'pagesCount'    => ceil($pagesCount / $limit),
-            'pNum'          => $page,
-            'answers'       => $result,
-        ];
-
-        return view('/admin/answer/answers', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+        return view(
+            '/admin/answer/answers',
+            [
+                'meta'  => meta($m = [], $sheet == 'ban' ? Translate::get('deleted answers') : Translate::get('answers-n')),
+                'uid'   => $uid,
+                'data'  => [
+                    'sheet'         => $sheet == 'all' ? 'answers-n' : 'answers-ban',
+                    'pagesCount'    => ceil($pagesCount / $limit),
+                    'pNum'          => $page,
+                    'answers'       => $result,
+                ]
+            ]
+        );
     }
 }

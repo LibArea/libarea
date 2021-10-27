@@ -3,10 +3,16 @@
 </div>
 <main class="col-span-10 mb-col-12">
   <div class="white-box pt5 pr15 pb5 pl15">
-    <a class="right" title="<?= lang('add'); ?>" href="/web/add">
+    <a class="right" title="<?= Translate::get('add'); ?>" href="/web/add">
       <i class="bi bi-plus-lg middle"></i>
     </a>
-    <?= breadcrumb('/admin', lang('admin'), null, null, lang('domains')); ?>
+    <?= breadcrumb(
+      '/admin',
+      Translate::get('admin'),
+      null,
+      null,
+      Translate::get('domains')
+    ); ?>
 
     <div class="domains mt20">
       <?php if (!empty($data['domains'])) { ?>
@@ -48,7 +54,7 @@
               <?php } ?>
               <span class="mr5 ml5"> &#183; </span>
               <a href="/web/edit/<?= $link['link_id']; ?>">
-                <?= lang('edit'); ?>
+                <?= Translate::get('edit'); ?>
               </a>
               <span class="right heart-link red">
                 +<?= $link['link_count']; ?>
@@ -57,7 +63,7 @@
           </div>
         <?php } ?>
       <?php } else { ?>
-        <?= includeTemplate('/_block/no-content', ['lang' => 'no']); ?>
+        <?= no_content(Translate::get('no'), 'bi bi-info-lg'); ?>
       <?php } ?>
     </div>
   </div>

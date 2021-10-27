@@ -22,7 +22,7 @@
           <?php } ?>
           <?php if ($post['post_translation'] == 1) { ?>
             <span class="pt5 pr10 pb5 pl10 gray-light bg-yellow-100 br-rd3 size-14 italic lowercase">
-              <?= lang('translation'); ?>
+              <?= Translate::get('translation'); ?>
             </span>
           <?php } ?>
           <?php if ($post['post_tl'] > 0) { ?>
@@ -44,22 +44,22 @@
           <span class="blue mr10 ml5"><i class="bi bi-mic size-14"></i></span>
           <?= $post['post_date_lang']; ?>
           <?php if ($post['modified']) { ?>
-            (<?= lang('ed'); ?>)
+            (<?= Translate::get('ed'); ?>)
           <?php } ?>
 
           <?php if ($uid['user_id']) { ?>
             <?php if ($uid['user_login'] == $post['user_login']  || $uid['user_trust_level'] == 5) { ?>
               <a class="gray-light mr10 ml10" href="/post/edit/<?= $post['post_id']; ?>">
-                <?= lang('edit'); ?>
+                <?= Translate::get('edit'); ?>
               </a>
             <?php } ?>
             <?php if ($uid['user_login'] == $post['user_login']) { ?>
               <?php if ($post['post_draft'] == 0) { ?>
                 <?php if ($post['user_my_post'] == $post['post_id']) { ?>
-                  <span class="mu_post gray-light mr10 ml10">+ <?= lang('in-the-profile'); ?></span>
+                  <span class="mu_post gray-light mr10 ml10">+ <?= Translate::get('in-the-profile'); ?></span>
                 <?php } else { ?>
                   <a class="add-post-profile gray-light mr10 ml10" data-post="<?= $post['post_id']; ?>">
-                    <span class="mu_post"><?= lang('in-the-profile'); ?></span>
+                    <span class="mu_post"><?= Translate::get('in-the-profile'); ?></span>
                   </a>
                 <?php } ?>
               <?php } ?>
@@ -99,12 +99,12 @@
         <?php if ($post['post_url_domain']) { ?>
           <div class="mb15">
             <a rel="nofollow noreferrer ugc" target="_blank" class="button br-rd5 white" href="<?= $post['post_url']; ?>">
-              <?= lang('details are here'); ?> <i class="bi bi-folder-symlink ml5"></i>
+              <?= Translate::get('details are here'); ?> <i class="bi bi-folder-symlink ml5"></i>
             </a>
           </div>
         <?php } ?>
         <?php if ($post['post_url_domain']) { ?>
-          <h3 class="uppercase mb5 mt0 font-light size-14 gray"><?= lang('website'); ?></h3>
+          <h3 class="uppercase mb5 mt0 font-light size-14 gray"><?= Translate::get('website'); ?></h3>
           <div class="italic m15 mb15 p10 size-14 bg-gray-100 table gray">
             <div>
               <i class="bi bi-link-45deg"></i>
@@ -117,7 +117,7 @@
         <?= includeTemplate('/_block/post-related', ['post_related' => $data['post_related']]); ?>
         <?php if (!empty($data['topics'])) { ?>
           <div class="mb20">
-            <h3 class="uppercase mb5 mt0 font-light size-14 gray"><?= lang('topics'); ?>:</h3>
+            <h3 class="uppercase mb5 mt0 font-light size-14 gray"><?= Translate::get('topics'); ?>:</h3>
             <?php foreach ($data['topics'] as $topic) { ?>
               <a class="bg-blue-100 bg-hover-green white-hover flex justify-center pt5 pr10 pb5 pl10 br-rd20 blue inline size-14" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
                 <?= $topic['topic_title']; ?>
@@ -138,23 +138,23 @@
         <?php if ($uid['user_id'] > 0) { ?>
           <?php if (is_array($data['post_signed'])) { ?>
             <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id size-14 right mt5 bg-gray-100 gray-light-2 border-box-1 br-rd20 center pt5 pr15 pb5 pl15">
-              <?= lang('unsubscribe'); ?>
+              <?= Translate::get('unsubscribe'); ?>
             </div>
           <?php } else { ?>
             <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id size-14 right mt5 bg-gray-200 bg-hover-gray mazarine border-box-1 br-rd20 center pt5 pr15 pb5 pl15">
-              + <?= lang('read'); ?>
+              + <?= Translate::get('read'); ?>
             </div>
           <?php } ?>
         <?php } else { ?>
           <a class="right size-14 mt5 bg-gray-200 bg-hover-gray mazarine border-box-1 br-rd20 center pt5 pr15 pb5 pl15" href="<?= getUrlByName('login'); ?>">
-            + <?= lang('read'); ?>
+            + <?= Translate::get('read'); ?>
           </a>
         <?php } ?>
       </div>
-      <?= includeTemplate('/_block/editor/answer-create-editor', ['data' => $post, 'type' => 'answer', 'user_id' => $uid['user_id']]); ?>
+      <?= includeTemplate('/_block/editor/answer-create-editor', ['data' => $post, 'lang' => $uid['user_lang'], 'type' => 'answer', 'user_id' => $uid['user_id']]); ?>
     <?php } else { ?>
       <div class="bg-red-300 p15 center mr10">
-        <?= lang('post deleted'); ?>...
+        <?= Translate::get('post deleted'); ?>...
       </div>
     <?php } ?>
   </article>
@@ -162,24 +162,24 @@
   <?php if ($post['post_draft'] == 0) {
     if ($post['post_type'] == 0) {
       includeTemplate('/_block/comments-view', ['data' => $data, 'post' => $post, 'uid' => $uid]);
-      if ($post['post_closed'] == 1) includeTemplate('/_block/no-content', ['lang' => 'the post is closed']);
+      if ($post['post_closed'] == 1) echo no_content(Translate::get('the post is closed'), 'bi bi-door-closed');
     } else {
       includeTemplate('/_block/questions-view', ['data' => $data, 'post' => $post, 'uid' => $uid]);
-      if ($post['post_closed'] == 1) includeTemplate('/_block/no-content', ['lang' => 'the question is closed']);
+      if ($post['post_closed'] == 1) echo no_content(Translate::get('the question is closed'), 'bi bi-door-closed');
     }
   } else {
-    includeTemplate('/_block/no-content', ['lang' => 'this is a draft']);
+      echo no_content(Translate::get('this is a draft'), 'bi bi-journal-medical');
   } ?>
 </main>
 <aside class="col-span-3 relative br-rd5 no-mob">
   <div class="border-box-1 bg-white br-rd5 mb15 p15">
     <?php if (!empty($data['topics'])) { ?>
-      <h3 class="uppercase mb5 mt0 font-light size-15 gray"><?= lang('topics'); ?></h3>
+      <h3 class="uppercase mb5 mt0 font-light size-15 gray"><?= Translate::get('topics'); ?></h3>
       <?php foreach ($data['topics'] as $topic) { ?>
         <?php if ($uid['user_id']) { ?>
           <?php if (!$topic['signed_topic_id']) { ?>
             <div data-id="<?= $topic['topic_id']; ?>" data-type="topic" class="focus-id right inline size-14 blue center mt5 mr5">
-              <i class="bi bi-plus"></i> <?= lang('read'); ?>
+              <i class="bi bi-plus"></i> <?= Translate::get('read'); ?>
             </div>
           <?php } ?>
         <?php } ?>
@@ -207,7 +207,7 @@
   </div>
   <?php if ($data['recommend']) { ?>
     <div class="border-box-1 bg-white br-rd5 mb15 post-view sticky recommend p15">
-      <h3 class="uppercase mb10 mt0 font-light size-14 gray"><?= lang('recommended'); ?></h3>
+      <h3 class="uppercase mb10 mt0 font-light size-14 gray"><?= Translate::get('recommended'); ?></h3>
       <?php foreach ($data['recommend'] as  $rec_post) { ?>
         <div class="mb15 hidden flex">
           <a class="gray size-15" href="<?= getUrlByName('post', ['id' => $rec_post['post_id'], 'slug' => $rec_post['post_slug']]); ?>">
@@ -237,10 +237,10 @@
       let post_id = $(this).data('post_id');
       let content_id = $(this).data('content_id');
       let type = $(this).data('type');
-      layer.confirm('<?= lang('does this violate site rules'); ?>?', {
+      layer.confirm('<?= Translate::get('does this violate site rules'); ?>?', {
         icon: 5,
-        title: '<?= lang('report'); ?>',
-        btn: ['<?= lang('yes'); ?>', '<?= lang('No'); ?>']
+        title: '<?= Translate::get('report'); ?>',
+        btn: ['<?= Translate::get('yes'); ?>', '<?= Translate::get('No'); ?>']
       }, function(index) {
         $.post('/flag/repost', {
           type,
@@ -248,13 +248,14 @@
           content_id
         }, function(str) {
           if (str == 1) {
-            layer.msg('<?= lang('flag not included'); ?>!');
+            layer.msg('<?= Translate::get('flag not included'); ?>!');
             return false;
           }
-          layer.msg('<?= lang('thanks'); ?>!');
+          layer.msg('<?= Translate::get('thanks'); ?>!');
         });
       });
     });
   });
 </script>
+</div>
 <?= includeTemplate('/_block/wide-footer'); ?>

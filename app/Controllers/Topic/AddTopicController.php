@@ -5,7 +5,7 @@ namespace App\Controllers\Topic;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\TopicModel;
-use Base, Validation, Config;
+use Base, Validation, Config, Translate;
 
 class AddTopicController extends MainController
 {
@@ -27,7 +27,7 @@ class AddTopicController extends MainController
             redirect('/');
         }
 
-        $meta = meta($m = [], lang('add topic'));
+        $meta = meta($m = [], Translate::get('add topic'));
         $data = [
             'sheet'         => 'topics',
             'count_topic'   => $count_add_topic - $count_topic,
@@ -55,22 +55,23 @@ class AddTopicController extends MainController
         $redirect = getUrlByName('topic.add');
 
         Validation::charset_slug($topic_slug, 'Slug (url)', $redirect);
-        Validation::Limits($topic_title, lang('title'), '3', '64', $redirect);
-        Validation::Limits($topic_description, lang('neta description'), '44', '225', $redirect);
-        Validation::Limits($topic_short_description, lang('short description'), '11', '160', $redirect);
-        Validation::Limits($topic_slug, lang('slug'), '3', '43', $redirect);
-        Validation::Limits($topic_seo_title, lang('slug'), '4', '225', $redirect);
+        Validation::Limits($topic_title, Translate::get('title'), '3', '64', $redirect);
+        Validation::Limits($topic_description, Translate::get('neta description'), '44', '225', $redirect);
+        Validation::Limits($topic_short_description, Translate::get('short description'), '11', '160', $redirect);
+        Validation::Limits($topic_slug, Translate::get('slug'), '3', '43', $redirect);
+        Validation::Limits($topic_seo_title, Translate::get('slug'), '4', '225', $redirect);
 
         if (TopicModel::getTopic($topic_slug, 'slug')) {
-            addMsg(lang('url-already-exists'), 'error');
+            addMsg(Translate::get('url-already-exists'), 'error');
             redirect($redirect);
         }
 
         if (preg_match('/\s/', $topic_slug) || strpos($topic_slug, ' ')) {
-            addMsg(lang('url-gaps'), 'error');
+            addMsg(Translate::get('url-gaps'), 'error');
             redirect($redirect);
         }
-       
+        
+        $topic_slug = strtolower($topic_slug);
         $data = [
             'topic_title'               => $topic_title,
             'topic_description'         => $topic_description,

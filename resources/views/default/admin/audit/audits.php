@@ -2,12 +2,18 @@
   <?= includeTemplate('/admin/admin-menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-10 mb-col-12">
-  <?= breadcrumb('/admin', lang('admin'), null, null, lang('audits')); ?>
+  <?= breadcrumb(
+    '/admin',
+    Translate::get('admin'),
+    null,
+    null,
+    Translate::get('audits')
+  ); ?>
   <div class="bg-white flex flex-row items-center justify-between border-box-1 br-rd5 p15 mb15">
-    <p class="m0"><?= lang($data['sheet']); ?></p>
+    <p class="m0"><?= Translate::get($data['sheet']); ?></p>
     <?php $pages = [
-      ['id' => 'audits', 'url' => '/admin/audits', 'content' => lang('new ones'), 'icon' => 'bi bi-vinyl'],
-      ['id' => 'approved', 'url' => '/admin/audits/approved', 'content' => lang('approved'), 'icon' => 'bi bi-vinyl-fill'],
+      ['id' => 'audits', 'url' => '/admin/audits', 'content' => Translate::get('new ones'), 'icon' => 'bi bi-vinyl'],
+      ['id' => 'approved', 'url' => '/admin/audits/approved', 'content' => Translate::get('approved'), 'icon' => 'bi bi-vinyl-fill'],
     ];
     includeTemplate('/_block/tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
     ?>
@@ -17,9 +23,9 @@
       <table>
         <thead>
           <th>Id</th>
-          <th><?= lang('info'); ?></th>
-          <th><?= lang('action'); ?></th>
-          <th><?= lang('audit'); ?></th>
+          <th><?= Translate::get('info'); ?></th>
+          <th><?= Translate::get('action'); ?></th>
+          <th><?= Translate::get('audit'); ?></th>
         </thead>
         <?php foreach ($data['audits'] as $key => $audit) { ?>
           <tr>
@@ -32,16 +38,16 @@
               </div>
 
               <a href="/admin/user/<?= $audit['content'][$audit['audit_type'] . '_user_id']; ?>/edit">
-                <?= lang('author'); ?>
+                <?= Translate::get('author'); ?>
               </a>
               (id: <?= $audit['content'][$audit['audit_type'] . '_user_id']; ?>)
               — <?= $audit['content'][$audit['audit_type'] . '_date']; ?>
 
               <span class="mr5 ml5"> &#183; </span>
 
-              <?= lang('type'); ?>: <i><?= $audit['audit_type']; ?></i>
+              <?= Translate::get('type'); ?>: <i><?= $audit['audit_type']; ?></i>
               <?php if ($audit['content'][$audit['audit_type'] . '_is_deleted'] == 1) { ?>
-                <span class="red"><?= lang('deleted'); ?> </span>
+                <span class="red"><?= Translate::get('deleted'); ?> </span>
               <?php } ?>
 
               <?php if (!empty($audit['post'])) { ?>
@@ -56,9 +62,9 @@
             <td class="center">
               <a data-id="<?= $audit['content'][$audit['audit_type'] . '_id']; ?>" data-type="<?= $audit['audit_type']; ?>" class="type-action size-13">
                 <?php if ($audit['content'][$audit['audit_type'] . '_is_deleted'] == 1) { ?>
-                  <span class="red"><?= lang('recover'); ?></span>
+                  <span class="red"><?= Translate::get('recover'); ?></span>
                 <?php } else { ?>
-                  <?= lang('remove'); ?>
+                  <?= Translate::get('remove'); ?>
                 <?php } ?>
               </a>
             </td>
@@ -70,7 +76,7 @@
                 </a>
               <?php } else { ?>
                 <a data-status="<?= $audit['audit_type']; ?>" data-id="<?= $audit['content'][$audit['audit_type'] . '_id']; ?>" class="audit-status size-13">
-                  <?= lang('to approve'); ?>
+                  <?= Translate::get('to approve'); ?>
                 </a>
               <?php } ?>
             </td>
@@ -78,7 +84,7 @@
         <?php } ?>
       </table>
     <?php } else { ?>
-      <?= includeTemplate('/_block/no-content', ['lang' => 'no']); ?>
+      <?= no_content(Translate::get('no'), 'bi bi-info-lg'); ?>
     <?php } ?>
   </div>
   <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/admin/audits'); ?>

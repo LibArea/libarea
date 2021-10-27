@@ -1,8 +1,8 @@
 <script nonce="<?= $_SERVER['nonce']; ?>">
    $(function() {
-      var path = "/assets/editor/languages/<?= LANG; ?>";
+      var path = "/assets/editor/languages/<?= $lang; ?>";
       editormd.loadScript(path, function() {
-         editor.lang = editormd.defaults.lang;
+         editor.lang = "<?= $lang; ?>";
       });
       
       var editor = editormd("markdown-view", {

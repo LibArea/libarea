@@ -52,6 +52,7 @@ img {
 .left0 { left: 0; }
 
 .ml-auto { margin-left: auto; }
+.-mr-1 { margin-right: -0.5rem; }
 .m0 { margin: 0; }
 .mt0 { margin-top: 0; }
 .mr0 { margin-right: 0; }
@@ -208,9 +209,11 @@ img {
 .z-50 { z-index: 50; }
 
 .h10 { height: 10px; }
+.h18 { height: 18px; }
 .h20 { height: 20px; }
 .h30 { height: 30px; }
 .h40 { height: 40px; }
+.h44 { height: 44px; }
 .h120 { height: 120px; }
 .h150 { height: 150px; }
 
@@ -309,6 +312,8 @@ code {
   font-size: 14px;
 }
 
+pre { white-space: pre-wrap; }
+
 pre code {
   background-color: #f0f0f0;
   padding: 2px 14px 2px 10px;
@@ -394,7 +399,7 @@ textarea:focus { border: 1px solid #9ccdf8; }
 .reply { display: none; }
 .reply.active { display: block; }
 
-.answers_subtree .answ-telo p img {
+.answ-telo p img {
   max-width: 99%;
   max-height: 500px;
   display: block;
@@ -550,10 +555,13 @@ ol.comment-telo { padding-left: 23px; }
   .mb-size-18 { font-size: 1.125rem; }
   .mb-w-100 { width: 100%; }
   .mb-w-50 { width: 50%; }
-  .mb-mt-15 { margin-top: 5px; }
   .mb-ml-10 { margin-left: 10px; }
+  .mb-mt-5 { margin-top: 5px; }
   .mb-mr-5 { margin-right: 5px; }
+  .mb-mb-5 { margin-bottom: 5px; }
   .mb-ml-0 { margin-left: 0; }
+  .mb-pl-0 { padding-left: 0; }
+  .mb-pr-0 { padding-right: 0; }
   .gap-4  { gap: 0.5rem; }
   .no-mob { display: none; }
   .no-pc { display: block; }

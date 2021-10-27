@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{FavoriteModel, PostModel, AnswerModel};
-use Base;
+use Base, Translate;
 
 class FavoriteController extends MainController
 {
@@ -24,9 +24,9 @@ class FavoriteController extends MainController
         $type_content   = $type == 'post' ? 1 : 2;
         $action = FavoriteModel::setFavorite($content_id, $uid['user_id'], $type_content);
 
-        $lang = lang('bookmark deleted');
+        $lang = Translate::get('bookmark deleted');
         if ($action == 'add') {
-            $lang = lang('bookmark added');
+            $lang = Translate::get('bookmark added');
         }
 
         return $lang;

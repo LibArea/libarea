@@ -27,7 +27,7 @@ class MainConnector implements Connector
 
             // ... or, if a specific class is added,
             // "Phphleb\Debugpan\DPanel"      => "app/ThirdParty/phphleb/debugpan/DPanel.php",
-
+            "Translate"                     => "app/Libraries/Translate.php",
             "Base"                          => "app/Libraries/Base.php",
             "Content"                       => "app/Libraries/Content.php",
             "UploadImage"                   => "app/Libraries/UploadImage.php",

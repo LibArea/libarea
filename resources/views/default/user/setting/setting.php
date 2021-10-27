@@ -5,14 +5,14 @@
 
   <?= breadcrumb(
     '/',
-    lang('home'),
+    Translate::get('home'),
     getUrlByName('user', ['login' => $uid['user_login']]),
-    lang('profile'),
-    lang('settings')
+    Translate::get('profile'),
+    Translate::get('settings')
   ); ?>
 
   <div class="bg-white flex flex-row center items-center justify-between border-box-1 br-rd5 p15 mb15">
-    <p class="m0 no-mob"><?= lang($data['sheet']); ?></p>
+    <p class="m0 no-mob"><?= Translate::get($data['sheet']); ?></p>
     <?= includeTemplate('/_block/setting-nav', ['data' => $data, 'uid' => $uid]); ?>
   </div>
 
@@ -34,38 +34,49 @@
       <?= includeTemplate('/_block/form/field-input', [
         'data' => [
           [
-            'title' => lang('name'),
+            'title' => Translate::get('name'),
             'type' => 'text',
             'name' => 'name',
             'value' => $data['user']['user_name'],
             'min' => 3,
             'max' => 11,
-            'help' => '3 - 11 ' . lang('characters')
+            'help' => '3 - 11 ' . Translate::get('characters')
           ],
         ]
       ]); ?>
 
       <?php includeTemplate('/_block/editor/textarea', [
-        'title' => lang('about me'),
+        'title' => Translate::get('about me'),
         'type' => 'text',
         'name' => 'about',
         'content' => $data['user']['user_about'],
         'min' => 0,
         'max' => 255,
-        'help' => '0 - 255 ' . lang('characters')
+        'help' => '0 - 255 ' . Translate::get('characters')
       ]); ?>
 
       <div id="box" class="mb20">
-        <label class="block" for="post_content"><?= lang('color'); ?></label>
+        <label class="block" for="post_content"><?= Translate::get('color'); ?></label>
         <input type="color" value="<?= $data['user']['user_color']; ?>" id="colorPicker">
         <input type="hidden" name="color" value="<?= $data['user']['user_color']; ?>" id="color">
       </div>
 
       <!--?= includeTemplate('/_block/form/field-radio', ['data' => [
-        ['title' => lang('minimal (experimental version)'), 'name' => 'design_is_minimal', 'checked' => $data['user']['user_design_is_minimal']],
+        ['title' => Translate::get('design choice'), 'name' => 'user_template', 'checked' => $data['user']['user_template']],
       ]]); ?-->
 
-      <h3><?= lang('contacts'); ?></h3>
+        <div class="mb20 max-w640">
+          <label class="block mb5" for="post_content"><?= Translate::get('language'); ?></label>
+          <select class="w-100 h30" name="user_lang">  
+            <?php foreach (Config::get('general.languages') as $lang) {  ?>
+              <option <?php if ($data['user']['user_lang'] == $lang) { ?>selected<?php } ?> value="<?= $lang; ?>">
+                <?= Translate::get($lang . '-language'); ?>
+              </option>
+            <?php } ?>
+          </select>
+        </div>
+
+      <h3><?= Translate::get('contacts'); ?></h3>
       <?php foreach (Config::get('fields-profile') as $block) { ?>
         <div class="mb20">
           <label class="block" for="post_title"><?= $block['lang']; ?></label>
@@ -78,8 +89,8 @@
 
       <div class="mb20">
         <input type="hidden" name="nickname" id="nickname" value="">
-        <button type="submit" class="button br-rd5 white"><?= lang('edit'); ?></button>
+        <button type="submit" class="button br-rd5 white"><?= Translate::get('edit'); ?></button>
       </div>
     </form>
 </main>
-<?= includeTemplate('/_block/aside-lang', ['lang' => lang('info-setting')]); ?>
+<?= includeTemplate('/_block/aside-lang', ['lang' => Translate::get('info-setting')]); ?>

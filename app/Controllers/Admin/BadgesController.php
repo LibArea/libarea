@@ -5,7 +5,7 @@ namespace App\Controllers\Admin;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\{UserModel, BadgeModel};
-use Base, Validation;
+use Base, Validation, Translate;
 
 class BadgesController extends MainController
 {
@@ -14,7 +14,7 @@ class BadgesController extends MainController
     {
         $badges = BadgeModel::getBadgesAll();
 
-        $meta = meta($m = [], lang('badges'));
+        $meta = meta($m = [], Translate::get('badges'));
         $data = [
             'sheet'         => $sheet == 'all' ? 'badges' : $sheet,
             'badges'        => $badges,
@@ -26,7 +26,7 @@ class BadgesController extends MainController
     // Форма добавления награды
     public function addPage()
     {
-        $meta = meta($m = [], lang('add badge'));
+        $meta = meta($m = [], Translate::get('add badge'));
         $data = [
             'sheet'         => 'badges',
         ];
@@ -45,7 +45,7 @@ class BadgesController extends MainController
             redirect('/admin/badges');
         }
 
-        $meta = meta($m = [], lang('edit badge'));
+        $meta = meta($m = [], Translate::get('edit badge'));
         $data = [
             'badge'         => $badge,
             'sheet'         => 'badges',
@@ -62,9 +62,9 @@ class BadgesController extends MainController
         $badge_icon          = $_POST['badge_icon']; // для Markdown
 
         $redirect = '/admin/badges';
-        Validation::Limits($badge_title, lang('title'), '4', '25', $redirect);
-        Validation::Limits($badge_description, lang('description'), '12', '250', $redirect);
-        Validation::Limits($badge_icon, lang('icon'), '12', '250', $redirect);
+        Validation::Limits($badge_title, Translate::get('title'), '4', '25', $redirect);
+        Validation::Limits($badge_description, Translate::get('description'), '12', '250', $redirect);
+        Validation::Limits($badge_icon, Translate::get('icon'), '12', '250', $redirect);
 
         $data = [
             'badge_title'       => $badge_title,
@@ -90,7 +90,7 @@ class BadgesController extends MainController
 
         $badges = BadgeModel::getBadgesAll();
 
-        $meta = meta($m = [], lang('reward the user'));
+        $meta = meta($m = [], Translate::get('reward the user'));
         $data = [
             'sheet'         => 'admin',
             'user'          => $user,
@@ -108,7 +108,7 @@ class BadgesController extends MainController
 
         BadgeModel::badgeUserAdd($user_id, $badge_id);
 
-        addMsg(lang('reward added'), 'success');
+        addMsg(Translate::get('reward added'), 'success');
 
         redirect('/admin/users/' . $user_id . '/edit');
     }
@@ -130,9 +130,9 @@ class BadgesController extends MainController
         $badge_description   = Request::getPost('badge_description');
         $badge_icon          = $_POST['badge_icon']; // для Markdown
 
-        Validation::Limits($badge_title, lang('title'), '4', '25', $redirect);
-        Validation::Limits($badge_description, lang('description'), '12', '250', $redirect);
-        Validation::Limits($badge_icon, lang('icon'), '12', '250', $redirect);
+        Validation::Limits($badge_title, Translate::get('title'), '4', '25', $redirect);
+        Validation::Limits($badge_description, Translate::get('description'), '12', '250', $redirect);
+        Validation::Limits($badge_icon, Translate::get('icon'), '12', '250', $redirect);
 
         $data = [
             'badge_id'          => $badge_id,

@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\NotificationsModel;
-use Base;
+use Base, Translate;
 
 class NotificationsController extends MainController
 {
@@ -29,7 +29,7 @@ class NotificationsController extends MainController
             $result[$ind]           = $row;
         }
 
-        $meta = meta($m = [], lang('notifications'));
+        $meta = meta($m = [], Translate::get('notifications'));
         $data = [
             'sheet'         => 'notifications',
             'notifications' => $result,

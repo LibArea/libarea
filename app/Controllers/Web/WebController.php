@@ -5,7 +5,7 @@ namespace App\Controllers\Web;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{WebModel, FeedModel, TopicModel};
-use Content, Base;
+use Content, Base, Translate;
 
 class WebController extends MainController
 {
@@ -26,7 +26,7 @@ class WebController extends MainController
             $result[$ind]           = $row;
         }
 
-        $num = $page > 1 ? sprintf(lang('page-number'), $page) : '';
+        $num = $page > 1 ? sprintf(Translate::get('page-number'), $page) : '';
 
         $m = [
             'og'         => false,
@@ -34,7 +34,7 @@ class WebController extends MainController
             'imgurl'     => false,
             'url'        => getUrlByName('web'),
         ];
-        $meta = meta($m, lang('domains-title'), lang('domains-title'));
+        $meta = meta($m, Translate::get('domains-title'), Translate::get('domains-title'));
 
         $data = [
             'sheet'         => 'domains',
@@ -69,7 +69,7 @@ class WebController extends MainController
             $text = explode("\n", $row['post_content']);
             $row['post_content_preview']    = Content::text($text[0], 'line');
             $row['post_date']               = lang_date($row['post_date']);
-            $row['lang_num_answers']        = word_form($row['post_answers_count'], lang('answer'), lang('answers-m'), lang('answers'));
+            $row['lang_num_answers']        = word_form($row['post_answers_count'], Translate::get('answer'), Translate::get('answers-m'), Translate::get('answers'));
             $result[$ind]                   = $row;
         }
 
@@ -79,7 +79,7 @@ class WebController extends MainController
             'imgurl'     => false,
             'url'        => getUrlByName('domain', ['domain' => $domain]),
         ];
-        $meta = meta($m, lang('domain') . ': ' . $domain, lang('domain-desc') . ': ' . $domain);
+        $meta = meta($m, Translate::get('domain') . ': ' . $domain, Translate::get('domain-desc') . ': ' . $domain);
 
         $data = [
             'sheet'         => 'domain',
@@ -119,8 +119,8 @@ class WebController extends MainController
             'imgurl'     => false,
             'url'        => getUrlByName('web.topic', ['slug' => $topic['topic_slug']]),
         ];
-        $desc  = lang('sites') . ' ' . lang('by') . ' ' . $topic['topic_title'] . '. ' . $topic['topic_description'];
-        $meta = meta($m, lang('sites') . ': ' . $topic['topic_title'], $desc);
+        $desc  = Translate::get('sites') . ' ' . Translate::get('by') . ' ' . $topic['topic_title'] . '. ' . $topic['topic_description'];
+        $meta = meta($m, Translate::get('sites') . ': ' . $topic['topic_title'], $desc);
 
         $data = [
             'sheet'         => 'sites-topic',

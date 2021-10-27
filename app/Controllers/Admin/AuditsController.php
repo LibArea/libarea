@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\Admin\AuditModel;
 use App\Models\{PostModel, AnswerModel, CommentModel};
-use Base;
+use Base, Translate;
 
 class AuditsController extends MainController
 {
@@ -37,7 +37,7 @@ class AuditsController extends MainController
 
         Request::getResources()->addBottomScript('/assets/js/admin.js');
 
-        $meta = meta($m = [], lang('audit'));
+        $meta = meta($m = [], Translate::get('audit'));
         $data = [
             'sheet'         => $sheet == 'approved' ? 'approved' : 'audits',
             'pagesCount'    => ceil($pagesCount / $limit),

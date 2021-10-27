@@ -3,10 +3,10 @@
 
   <?= breadcrumb(
     '/',
-    lang('home'),
+    Translate::get('home'),
     getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]),
     $post['post_title'],
-    lang('edit post')
+    Translate::get('edit post')
   ); ?>
 
   <form action="/post/edit" method="post" enctype="multipart/form-data">
@@ -14,13 +14,13 @@
 
     <?= includeTemplate('/_block/form/field-input', ['data' => [
       [
-        'title' => lang('heading'),
+        'title' => Translate::get('heading'),
         'type' => 'text',
         'name' => 'post_title',
         'value' => $post['post_title'],
         'min' => 6,
         'max' => 250,
-        'help' => '6 - 250 ' . lang('characters'),
+        'help' => '6 - 250 ' . Translate::get('characters'),
         'red' => 'red'
       ],
     ]]); ?>
@@ -29,8 +29,8 @@
       'uid' => $uid,
       'data' => $data,
       'action' => 'edit',
-      'title' => lang('topics'),
-      'help' => lang('necessarily'),
+      'title' => Translate::get('topics'),
+      'help' => Translate::get('necessarily'),
       'red' => 'red'
     ]); ?>
 
@@ -46,7 +46,7 @@
         <?= post_img($post['post_content_img'], $post['post_title'], 'img-post', 'cover'); ?>
         <input type="hidden" name="content_img" value="<?= $post['post_content_img']; ?>">
         <a class="img-remove size-14" href="/post/img/<?= $post['post_id']; ?>/remove">
-          <?= lang('remove'); ?>
+          <?= Translate::get('remove'); ?>
         </a>
       </div>
     <?php } ?>
@@ -61,6 +61,7 @@
 
     <?= includeTemplate('/_block/editor/post-editor', [
       'post_id' => $post['post_id'],
+      'lang' => $uid['user_lang'],
       'type' => 'post',
       'conten' => $post['post_content']
     ]); ?>
@@ -68,7 +69,7 @@
     <?php if ($data['post']['post_draft'] == 1) { ?>
       <?= includeTemplate('/_block/form/field-radio', ['data' => [
         [
-          'title' => lang('is this a draft?'),
+          'title' => Translate::get('is this a draft?'),
           'name' => 'post_draft',
           'checked' => $post['post_draft']
         ],
@@ -82,12 +83,12 @@
       ]); ?>
       <?= includeTemplate('/_block/form/field-radio', ['data' => [
         [
-          'title' => lang('format Q&A?'),
+          'title' => Translate::get('format Q&A?'),
           'name' => 'post_type',
           'checked' => $post['post_type']
         ],
         [
-          'title' => lang('to close?'),
+          'title' => Translate::get('to close?'),
           'name' => 'closed',
           'checked' => $post['post_closed']
         ],
@@ -96,7 +97,7 @@
 
     <?= includeTemplate('/_block/form/field-radio', ['data' => [
       [
-        'title' => lang('is this a translation?'),
+        'title' => Translate::get('is this a translation?'),
         'name' => 'translation',
         'checked' => $post['post_translation']
       ],
@@ -105,7 +106,7 @@
     <?php if ($uid['user_trust_level'] > 2) { ?>
       <?= includeTemplate('/_block/form/field-radio', ['data' => [
         [
-          'title' => lang('raise?'), 'name' => 'top',
+          'title' => Translate::get('raise?'), 'name' => 'top',
           'checked' => $post['post_top']
         ],
       ]]); ?>
@@ -116,7 +117,7 @@
         'type' => 'user',
         'data' => $data,
         'action' => 'edit',
-        'title' => lang('author')
+        'title' => Translate::get('author')
       ]); ?>
     <?php } ?>
 
@@ -124,7 +125,7 @@
       'type' => 'post',
       'data' => $data,
       'action' => 'edit',
-      'title' => lang('related')
+      'title' => Translate::get('related')
     ]); ?>
 
     <div class="mb20">
@@ -132,7 +133,7 @@
         <input type="hidden" name="draft" id="draft" value="1">
       <?php } ?>
       <input type="hidden" name="post_id" id="post_id" value="<?= $post['post_id']; ?>">
-      <input type="submit" class="button white br-rd5" name="submit" value="<?= lang('edit'); ?>" />
+      <input type="submit" class="button white br-rd5" name="submit" value="<?= Translate::get('edit'); ?>" />
     </div>
   </form>
 </main>

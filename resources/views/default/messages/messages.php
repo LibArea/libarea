@@ -1,6 +1,12 @@
 <main class="col-span-7 mb-col-12">
   <div class="bg-white br-rd5 border-box-1 pt5 pr15 pb5 pl15">
-    <?= breadcrumb('/', lang('home'), getUrlByName('user', ['login' => $uid['user_login']]), lang('profile'), lang('private messages')); ?>
+    <?= breadcrumb(
+      '/',
+      Translate::get('home'),
+      getUrlByName('user', ['login' => $uid['user_login']]),
+      Translate::get('profile'),
+      Translate::get('private messages')
+    ); ?>
 
     <?php if (!empty($data['messages'])) { ?>
       <?php foreach ($data['messages'] as  $msg) { ?>
@@ -26,9 +32,9 @@
           </div>
           <a class="lowercase size-14 right" href="/messages/read/<?= $msg['dialog_id']; ?>">
             <?php if ($msg['unread']) { ?>
-              <?= lang('there are'); ?> <?= $msg['count']; ?> <?= $msg['unread_num']; ?>
+              <?= Translate::get('there are'); ?> <?= $msg['count']; ?> <?= $msg['unread_num']; ?>
             <?php } else { ?>
-              <span class="red"><?= lang('view'); ?></span>
+              <span class="red"><?= Translate::get('view'); ?></span>
               <?php if ($msg['count'] != 0) { ?>
                 <?= $msg['count']; ?> <?= $msg['count_num']; ?>
               <?php } ?>
@@ -38,7 +44,7 @@
       <?php } ?>
   </div>
 <?php } else { ?>
-  <?= includeTemplate('/_block/no-content', ['lang' => 'no dialogs']); ?>
+  <?= no_content(Translate::get('no dialogs'), 'bi bi-info-lg'); ?>
 <?php } ?>
 </main>
-<?= includeTemplate('/_block/aside-lang', ['lang' => lang('personal messages with site participants')]); ?>
+<?= includeTemplate('/_block/aside-lang', ['lang' => Translate::get('personal messages with site participants')]); ?>

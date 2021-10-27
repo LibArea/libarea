@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
 use App\Models\AnswerModel;
-use Content, Base;
+use Content, Base, Translate;
 
 class AnswerController extends MainController
 {
@@ -34,7 +34,7 @@ class AnswerController extends MainController
            'imgurl'     => false,
            'url'        => getUrlByName('answers'),
         ];
-        $meta = meta($m, lang('all answers'), lang('answers-desc'));
+        $meta = meta($m, Translate::get('all answers'), Translate::get('answers-desc'));
 
         $data = [
             'pagesCount'    => ceil($pagesCount / $limit),
@@ -69,7 +69,7 @@ class AnswerController extends MainController
            'imgurl'     => false,
            'url'        => getUrlByName('answers.user', ['login' => $login]),
         ];
-        $meta = meta($m, lang('answers') . ' ' . $login, lang('responses from community members') . ' ' . $login);
+        $meta = meta($m, Translate::get('answers') . ' ' . $login, Translate::get('responses from community members') . ' ' . $login);
 
         $data = [
             'sheet'         => 'user-answers',

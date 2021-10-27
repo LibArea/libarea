@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{HomeModel, TopicModel};
-use Content, Base, Config;
+use Content, Base, Config, Translate;
 
 class HomeController extends MainController
 {
@@ -15,7 +15,7 @@ class HomeController extends MainController
         $uid    = Base::getUid();
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
- 
+
         $limit  = 25;
         $latest_answers = HomeModel::latestAnswers($uid);
         $topics_user    = HomeModel::getSubscriptionTopics($uid['user_id']);
@@ -37,13 +37,18 @@ class HomeController extends MainController
             $result_answers[$ind]       = $row;
         }
 
-        $num        = $page > 1 ? sprintf(lang('page-number'), $page) : '';
+        $num        = $page > 1 ? sprintf(Translate::get('page-number'), $page) : '';
         $meta_title = Config::get('meta.title') . $num;
         $meta_desc  = Config::get('meta.desc') . $num;
 
         if ($sheet == 'top' || $sheet == 'all') {
-            $meta_title = lang($sheet . '-title') . $num . Config::get('meta.title');
-            $meta_desc  = lang($sheet . '-desc') . $num . Config::get('meta.desc');
+            $meta_title = Translate::get($sheet . '-title') . $num . Config::get('meta.title');
+            $meta_desc  = Translate::get($sheet . '-desc') . $num . Config::get('meta.desc');
+        }
+
+        $topics = [];
+        if (count($topics_user) == 0) {
+            $topics = TopicModel::advice($uid['user_id']);
         }
 
         $m = [
@@ -52,23 +57,22 @@ class HomeController extends MainController
             'imgurl'     => '/assets/images/agouti-max.png',
             'url'        => $sheet == 'top' ? '/top' : '/',
         ];
-        $meta = meta($m, $meta_title, $meta_desc);
-        
-        $topics = [];
-        if (count($topics_user) == 0) {
-           $topics = TopicModel::advice($uid['user_id']);
-        }
-        
-        $data = [
-            'pagesCount'        => ceil($pagesCount / $limit),
-            'pNum'              => $page,
-            'sheet'             => $sheet,
-            'latest_answers'    => $result_answers,
-            'topics_user'       => $topics_user,
-            'posts'             => $result_post,
-            'topics'            => $topics,
-        ];
 
-        return view('/home', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+        return view(
+            '/home',
+            [
+                'meta'  => meta($m, $meta_title, $meta_desc),
+                'uid'   => $uid,
+                'data'  => [
+                    'pagesCount'        => ceil($pagesCount / $limit),
+                    'pNum'              => $page,
+                    'sheet'             => $sheet,
+                    'latest_answers'    => $result_answers,
+                    'topics_user'       => $topics_user,
+                    'posts'             => $result_post,
+                    'topics'            => $topics,
+                ],
+            ],
+        );
     }
 }

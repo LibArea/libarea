@@ -5,7 +5,7 @@ namespace App\Controllers\Admin;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{WebModel, TopicModel};
-use Base, Content, Validation;
+use Base, Content, Validation, Translate;
 
 class WebsController extends MainController
 {
@@ -33,7 +33,7 @@ class WebsController extends MainController
 
         Request::getResources()->addBottomScript('/assets/js/admin.js');
 
-        $meta = meta($m =[], lang('domains'));
+        $meta = meta($m =[], Translate::get('domains'));
         $data = [
             'sheet'         => $sheet == 'all' ? 'domains' : $sheet,
             'pagesCount'    => ceil($pagesCount / $limit),

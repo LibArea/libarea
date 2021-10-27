@@ -378,8 +378,8 @@ class TopicModel extends MainModel
 
         return DB::run($sql, ['user_id' => $user_id])->rowCount();
     }
-    
-   // Участники подписанные на тему
+
+    // Участники подписанные на тему
     public static function getFocusUsers($topic_id, $limit)
     {
         $sql = "SELECT 

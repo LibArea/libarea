@@ -1,15 +1,4 @@
 <?php
-
-// Localization
-function lang($text)
-{ 
-    // print_r('1');
-    if (isset(FILE_LANG[$text])) {
-        return FILE_LANG[$text];
-    }  
-    return $text;
-}
-
 // Topic for posts
 function html_topic($topic, $slug, $css)
 {
@@ -104,18 +93,18 @@ function lang_date($string)
 {
     $monn = array(
         '',
-        lang('january'),
-        lang('february'),
-        lang('martha'),
-        lang('april'),
-        lang('may'),
-        lang('june'),
-        lang('july'),
-        lang('august'),
-        lang('september'),
-        lang('october'),
-        lang('november'),
-        lang('december')
+        Translate::get('january'),
+        Translate::get('february'),
+        Translate::get('martha'),
+        Translate::get('april'),
+        Translate::get('may'),
+        Translate::get('june'),
+        Translate::get('july'),
+        Translate::get('august'),
+        Translate::get('september'),
+        Translate::get('october'),
+        Translate::get('november'),
+        Translate::get('december')
     );
     //Разбиваем дату в массив
     $a = preg_split('/[^\d]/', $string);
@@ -123,13 +112,13 @@ function lang_date($string)
     $today = date('Ymd');  //20210421
     if (($a[0] . $a[1] . $a[2]) == $today) {
         //Если сегодня
-        return (lang('today') . ' ' . $a[3] . ':' . $a[4]);
+        return (Translate::get('today') . ' ' . $a[3] . ':' . $a[4]);
     } else {
         $b = explode('-', date("Y-m-d"));
         $tom = date('Ymd', mktime(0, 0, 0, $b[1], $b[2] - 1, $b[0]));
         if (($a[0] . $a[1] . $a[2]) == $tom) {
             //Если вчера
-            return (lang('yesterday') . ' ' . $a[3] . ':' . $a[4]);
+            return (Translate::get('yesterday') . ' ' . $a[3] . ':' . $a[4]);
         } else {
             //Если позже
             $mm = intval($a[1]);
@@ -195,7 +184,7 @@ function pagination($pNum, $pagesCount, $sheet, $other)
             $html .= '...';
         }
 
-        $html .= '<a class="p5 ml5 size-15 lowercase gray-light" href="' . $page . '/page/' . ($pNum + 1) . '">' . lang('page') . ' ' . ($pNum + 1) . ' >></a>';
+        $html .= '<a class="p5 ml5 size-15 lowercase gray-light" href="' . $page . '/page/' . ($pNum + 1) . '">' . Translate::get('page') . ' ' . ($pNum + 1) . ' >></a>';
     }
 
     $html .= '</div>';
@@ -323,6 +312,16 @@ function cutWords($content, $maxlen)
     $code_match = array('>', '*', '!', '~', '`', '[ADD:');
     $words      = str_replace($code_match, '', $words);
     return join(' ', $words);
+}
+
+function no_content($text, $icon)
+{
+    $html  = '<div class="mt10 mb10 pt10 pr15 pb10 pl15 bg-yellow-100 gray">
+                <i class="'. $icon .' middle mr5"></i>
+                <span class="middle">'. $text .'...</span>
+              </div>';
+    
+    return $html;
 }
 
 function getMsg()

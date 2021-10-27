@@ -17,7 +17,7 @@
                   <div class="size-14 gray-light">
                     <?= $answer['answer_date']; ?>
                     <?php if (empty($answer['edit'])) { ?>
-                      (<?= lang('ed'); ?>.)
+                      (<?= Translate::get('ed'); ?>.)
                     <?php } ?>
                     <?= includeTemplate('/_block/show-ip', ['ip' => $answer['answer_ip'], 'user_trust_level' => $uid['user_trust_level']]); ?>
                   </div>
@@ -31,33 +31,33 @@
                 <?php if ($uid['user_trust_level'] >= Config::get('trust-levels.tl_add_comm_qa')) { ?>
                   <?php if ($post['post_closed'] == 0) { ?>
                     <?php if ($post['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
-                      <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray ml10"><?= lang('reply'); ?></a>
+                      <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray ml10"><?= Translate::get('reply'); ?></a>
                     <?php } ?>
                   <?php } ?>
                 <?php } ?>
                 <?php if ($uid['user_id'] == $answer['answer_user_id'] || $uid['user_trust_level'] == 5) { ?>
                   <a class="editansw gray ml15 mr5" href="/answer/edit/<?= $answer['answer_id']; ?>">
-                    <?= lang('edit'); ?>
+                    <?= Translate::get('edit'); ?>
                   </a>
                 <?php } ?>
                 <?php if ($uid['user_trust_level'] == 5) { ?>
                   <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray ml15 mr5">
-                    <i title="<?= lang('remove'); ?>" class="bi bi-trash"></i>
+                    <i title="<?= Translate::get('remove'); ?>" class="bi bi-trash"></i>
                   </a>
                 <?php } ?>
                 <?php if ($uid['user_id']) { ?>
                   <?php $blue = $answer['favorite_user_id'] ? 'blue' : 'gray'; ?>
                   <span id="fav-comm_<?= $answer['answer_id']; ?>" class="add-favorite gray ml15 mr5 <?= $blue; ?>" data-id="<?= $answer['answer_id']; ?>" data-type="answer">
                     <?php if ($answer['favorite_user_id']) { ?>
-                      <i title="<?= lang('remove-favorites'); ?>" class="bi bi-bookmark middle"></i>
+                      <i title="<?= Translate::get('remove-favorites'); ?>" class="bi bi-bookmark middle"></i>
                     <?php } else { ?>
-                      <i title="<?= lang('add-favorites'); ?>" class="bi bi-bookmark middle"></i>
+                      <i title="<?= Translate::get('add-favorites'); ?>" class="bi bi-bookmark middle"></i>
                     <?php } ?>
                   </span>
                 <?php } ?>
                 <?php if ($uid['user_id'] != $answer['answer_user_id'] && $uid['user_trust_level'] > Config::get('trust-levels.tl_stop_report')) { ?>
                   <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray ml15">
-                    <i title="<?= lang('report'); ?>" class="bi bi-flag"></i>
+                    <i title="<?= Translate::get('report'); ?>" class="bi bi-flag"></i>
                   </a>
                 <?php } ?>
               </div>
@@ -88,7 +88,7 @@
                   <?php if ($post['post_closed'] == 0) { ?>
                     <?php if ($post['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
                       <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment-re gray ml5 mr5">
-                        <?= lang('reply'); ?>
+                        <?= Translate::get('reply'); ?>
                       </a>
                     <?php } ?>
                   <?php } ?>
@@ -96,18 +96,18 @@
 
                 <?php if ($uid['user_id'] == $comment['comment_user_id'] || $uid['user_trust_level'] == 5) { ?>
                   <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray ml10 mr5">
-                    <i title="<?= lang('edit'); ?>" class="bi bi-pencil-square"></i>
+                    <i title="<?= Translate::get('edit'); ?>" class="bi bi-pencil-square"></i>
                   </a>
                 <?php } ?>
 
                 <?php if ($uid['user_trust_level'] == 5) { ?>
                   <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray ml10">
-                    <i title="<?= lang('remove'); ?>" class="bi bi-trash"></i>
+                    <i title="<?= Translate::get('remove'); ?>" class="bi bi-trash"></i>
                   </a>
                 <?php } ?>
                 <?php if ($uid['user_id'] != $comment['comment_user_id'] && $uid['user_trust_level'] > 0) { ?>
                   <a data-post_id="<?= $post['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray ml5">
-                    <?= lang('report'); ?>
+                    <?= Translate::get('report'); ?>
                   </a>
                 <?php } ?>
               </div>
@@ -121,12 +121,12 @@
   </div>
 <?php } else { ?>
   <?php if ($post['post_closed'] != 1) { ?>
-    <?= includeTemplate('/_block/no-content', ['lang' => 'no answers']); ?>
+    <?= no_content(Translate::get('no answers'), 'bi bi-info-lg'); ?>
   <?php } ?>
 <?php } ?>
 
 <?php if (!empty($otvet)) { ?>
-  <?= includeTemplate('/_block/no-content', ['lang' => 'you-question-no']); ?>
+  <?= no_content(Translate::get('you-question-no'), 'bi bi-info-lg'); ?>
 <?php } else { ?>
-  <?= includeTemplate('/_block/editor/answer-create-editor', ['data' => $post, 'type' => 'answer', 'user_id' => $uid['user_id']]); ?>
+  <?= includeTemplate('/_block/editor/answer-create-editor', ['data' => $post, 'lang' => $uid['user_lang'] 'type' => 'answer', 'user_id' => $uid['user_id']]); ?>
 <?php }  ?>

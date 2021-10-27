@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
 use App\Models\{PostModel, FeedModel, AnswerModel, CommentModel, SubscriptionModel};
-use Content, Base;
+use Content, Base, Translate;
 
 
 class PostController extends MainController
@@ -62,11 +62,11 @@ class PostController extends MainController
 
         $post['post_content']   = Content::text($post['post_content'], 'text');
         $post['post_date_lang'] = lang_date($post['post_date']);
-        $post['num_answers']    = word_form($post['post_answers_count'], lang('answer'), lang('answers-m'), lang('answers'));
+        $post['num_answers']    = word_form($post['post_answers_count'], Translate::get('answer'), Translate::get('answers-m'), Translate::get('answers'));
 
         // общее количество (для модели - беседа)
         $comment_n = $post['post_comments_count'] + $post['post_answers_count'];
-        $post['num_comments']   = word_form($comment_n, lang('comment'), lang('comments-m'), lang('comments'));
+        $post['num_comments']   = word_form($comment_n, Translate::get('comment'), Translate::get('comments-m'), Translate::get('comments'));
 
         // post_type: 0 - дискуссия, 1 - Q&A
         $post_answers = AnswerModel::getAnswersPost($post['post_id'], $uid['user_id'], $post['post_type']);
@@ -168,7 +168,7 @@ class PostController extends MainController
             'imgurl'     => '/uploads/users/avatars/' . $user['user_avatar'],
             'url'        => getUrlByName('posts.user', ['login' => $login]),
         ];
-        $meta = meta($m, lang('posts') . ' ' . $login, lang('participant posts') . ' ' . $login);
+        $meta = meta($m, Translate::get('posts') . ' ' . $login, Translate::get('participant posts') . ' ' . $login);
 
         $data = [
             'sheet'         => 'user-post',

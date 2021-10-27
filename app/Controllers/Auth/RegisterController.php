@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\{InvitationModel, UserModel};
 use App\Models\AuthModel;
-use Config, Base, Integration, Validation, SendEmail;
+use Config, Base, Integration, Validation, SendEmail, Translate;
 
 class RegisterController extends MainController
 {
@@ -24,7 +24,7 @@ class RegisterController extends MainController
             'imgurl'     => false,
             'url'        => getUrlByName('register'),
         ];
-        $meta = meta($m, lang('sign up'), lang('info-security'));
+        $meta = meta($m, Translate::get('sign up'), Translate::get('info-security'));
 
         $data = [
             'sheet'         => 'sign up',
@@ -48,7 +48,7 @@ class RegisterController extends MainController
         Validation::checkEmail($email, $redirect);
 
         if (is_array(AuthModel::replayEmail($email))) {
-            addMsg(lang('e-mail-replay'), 'error');
+            addMsg(Translate::get('e-mail-replay'), 'error');
             redirect($redirect);
         }
 
@@ -59,39 +59,39 @@ class RegisterController extends MainController
         }
 
         if (is_array(AuthModel::repeatIpBanRegistration($reg_ip))) {
-            addMsg(lang('multiple-accounts'), 'error');
+            addMsg(Translate::get('multiple-accounts'), 'error');
             redirect($redirect);
         }
 
-        Validation::charset_slug($login, lang('nickname'), '/register');
-        Validation::Limits($login, lang('nickname'), '3', '10', $redirect);
+        Validation::charset_slug($login, Translate::get('nickname'), '/register');
+        Validation::Limits($login, Translate::get('nickname'), '3', '10', $redirect);
 
         if (preg_match('/(\w)\1{3,}/', $login)) {
-            addMsg(lang('nickname-repeats-characters'), 'error');
+            addMsg(Translate::get('nickname-repeats-characters'), 'error');
             redirect($redirect);
         }
 
         // Запретим, хотя лучшая практика занять нужные (пр. GitHub)
         if (in_array($login, Config::get('stop-nickname'))) {
-            addMsg(lang('nickname-replay'), 'error');
+            addMsg(Translate::get('nickname-replay'), 'error');
             redirect($redirect);
         }
 
         if (is_array(AuthModel::replayLogin($login))) {
-            addMsg(lang('nickname-replay'), 'error');
+            addMsg(Translate::get('nickname-replay'), 'error');
             redirect($redirect);
         }
 
-        Validation::Limits($password, lang('password'), '8', '32', $redirect);
+        Validation::Limits($password, Translate::get('password'), '8', '32', $redirect);
         if (substr_count($password, ' ') > 0) {
-            addMsg(lang('password-spaces'), 'error');
+            addMsg(Translate::get('password-spaces'), 'error');
             redirect($redirect);
         }
 
         if (!$inv_code) {
             if (Config::get('general.captcha')) {
                 if (!Integration::checkCaptchaCode()) {
-                    addMsg(lang('code error'), 'error');
+                    addMsg(Translate::get('code error'), 'error');
                     redirect('/register');
                 }
             }
@@ -105,14 +105,33 @@ class RegisterController extends MainController
         if ($count < 50 && Config::get('general.mode') == 1) {
             $tl = 1;
         }
+        
+        $activated = 0; // Требуется активация по e-mail
+        if ($inv_uid > 0) {
+            $activated = 1;
+        }
+        
+        $params = [
+            'user_login'                => $login,
+            'user_email'                => $email,
+            'user_template'             => Config::get('general.template'),
+            'user_lang'                 => Config::get('general.lang'),
+            'user_whisper'              => '',
+            'user_password'             => password_hash($password, PASSWORD_BCRYPT),
+            'user_limiting_mode'        => 0, // Режим заморозки выключен
+            'user_activated'            => $activated,
+            'user_reg_ip'               => $reg_ip,
+            'user_trust_level'          => $tl,
+            'user_invitation_id'        => $inv_uid,
+        ];
 
         // id участника после регистрации
-        $active_uid = UserModel::createUser($login, $email, $password, $reg_ip, $inv_uid, $tl);
+        $active_uid = UserModel::createUser($params);
 
         if ($inv_uid > 0) {
             // Если регистрация по инвайту, активируем емайл
             InvitationModel::activate($inv_code, $inv_uid, $reg_ip, $active_uid);
-            addMsg(lang('successfully, log in'), 'success');
+            addMsg(Translate::get('successfully, log in'), 'success');
             redirect(getUrlByName('login'));
         }
 
@@ -122,10 +141,10 @@ class RegisterController extends MainController
 
         // Отправка e-mail
         $link = Config::get('meta.url') . '/email/activate/' . $email_code;
-        $mail_message = lang('activate e-mail') . ": \n" . $link . "\n\n";
-        SendEmail::send($email, Config::get('meta.name') . ' — ' . lang('checking e-mail'), $mail_message);
+        $mail_message = Translate::get('activate e-mail') . ": \n" . $link . "\n\n";
+        SendEmail::send($email, Config::get('meta.name') . ' — ' . Translate::get('checking e-mail'), $mail_message);
 
-        addMsg(lang('check your e-mail to activate your account'), 'success');
+        addMsg(Translate::get('check your e-mail to activate your account'), 'success');
 
         redirect(getUrlByName('login'));
     }
@@ -137,11 +156,11 @@ class RegisterController extends MainController
         $invate = InvitationModel::available($code);
 
         if (!$invate) {
-            addMsg(lang('the code is incorrect'), 'error');
+            addMsg(Translate::get('the code is incorrect'), 'error');
             redirect('/');
         }
 
-        $meta = meta($m = [], lang('registration by invite'));
+        $meta = meta($m = [], Translate::get('registration by invite'));
         $data = [
             'invate' => $invate,
         ];

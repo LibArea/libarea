@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\ActionModel;
-use Base;
+use Base, Translate;
 
 class ActionController extends MainController
 {
@@ -68,7 +68,7 @@ class ActionController extends MainController
             $result[$ind]         = $row;
         }
 
-        $meta = meta($m = [], lang('moderation log'));
+        $meta = meta($m = [], Translate::get('moderation log'));
         $data = [
             'moderations'   => $result,
             'sheet'         => 'moderations',

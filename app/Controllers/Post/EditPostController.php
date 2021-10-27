@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
 use App\Models\{TopicModel, PostModel};
-use Content, Base, UploadImage, Validation;
+use Content, Base, UploadImage, Validation, Translate;
 
 class EditPostController extends MainController
 {
@@ -33,7 +33,7 @@ class EditPostController extends MainController
         Request::getResources()->addBottomScript('/assets/editor/meditor.min.js');
         Request::getResources()->addBottomScript('/assets/js/select2.min.js');
 
-        $meta = meta($m = [], lang('edit post'));
+        $meta = meta($m = [], Translate::get('edit post'));
         $data = [
             'sheet'         => 'edit-post',
             'post'          => $post,
@@ -80,7 +80,7 @@ class EditPostController extends MainController
 
         // Получаем информацию по пространству
         if (!$topics) {
-            addMsg(lang('select topic'), 'error');
+            addMsg(Translate::get('select topic'), 'error');
             redirect($redirect);
         }
 
@@ -93,8 +93,8 @@ class EditPostController extends MainController
             } 
         } 
 
-        Validation::Limits($post_title, lang('title'), '6', '250', $redirect);
-        Validation::Limits($post_content, lang('the post'), '6', '25000', $redirect);
+        Validation::Limits($post_title, Translate::get('title'), '6', '250', $redirect);
+        Validation::Limits($post_content, Translate::get('the post'), '6', '25000', $redirect);
 
         // Проверим хакинг формы
         if ($post['post_draft'] == 0) {
@@ -162,7 +162,7 @@ class EditPostController extends MainController
         PostModel::setPostImgRemove($post['post_id']);
         unlink($path_img);
 
-        addMsg(lang('cover removed'), 'success');
+        addMsg(Translate::get('cover removed'), 'success');
         redirect('/post/edit/' . $post['post_id']);
     }
 
@@ -179,7 +179,7 @@ class EditPostController extends MainController
             $post_img = UploadImage::post_img($img);
             $response = array(
                 "url"     => $post_img,
-                "message" => lang('successful download'),
+                "message" => Translate::get('successful download'),
                 "success" => 1,
             );
 
@@ -187,7 +187,7 @@ class EditPostController extends MainController
         }
 
         $response = array(
-            "message" => lang('error in loading'),
+            "message" => Translate::get('error in loading'),
             "success" => 0,
         );
 

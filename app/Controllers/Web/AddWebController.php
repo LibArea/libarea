@@ -5,7 +5,7 @@ namespace App\Controllers\Web;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\WebModel;
-use Base, Validation;
+use Base, Validation, Translate;
 
 class AddWebController extends MainController
 {
@@ -27,7 +27,7 @@ class AddWebController extends MainController
         Request::getResources()->addBottomStyles('/assets/css/select2.css');
         Request::getResources()->addBottomScript('/assets/js/select2.min.js');
 
-        $meta = meta($m = [], lang('add a website'));
+        $meta = meta($m = [], Translate::get('add a website'));
         $data = [
             'sheet'         => 'domains',
         ];
@@ -53,12 +53,12 @@ class AddWebController extends MainController
         $redirect = getUrlByName('web');
         $link = WebModel::getLinkOne($link_url_domain, $this->uid['user_id']);
         if ($link) {
-            addMsg(lang('the site is already there'), 'error');
+            addMsg(Translate::get('the site is already there'), 'error');
             redirect($redirect);
         }
 
-        Validation::Limits($link_title, lang('title'), '24', '250', $redirect);
-        Validation::Limits($link_content, lang('description'), '24', '1500', $redirect);
+        Validation::Limits($link_title, Translate::get('title'), '24', '250', $redirect);
+        Validation::Limits($link_content, Translate::get('description'), '24', '1500', $redirect);
 
         $data = [
             'link_url'          => $link_url,

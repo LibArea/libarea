@@ -2,13 +2,13 @@
 
   <?= breadcrumb(
     '/',
-    lang('home'),
+    Translate::get('home'),
     '/info',
-    lang('info'),
-    lang('access restricted')
+    Translate::get('info'),
+    Translate::get('access restricted')
   ); ?>
 
-  <h1><?= lang('access restricted'); ?></h1>
-  <p><i><?= lang('the profile is being checked'); ?>...</i></p>
+  <h1><?= Translate::get('access restricted'); ?></h1>
+  <p><i><?= Translate::get('the profile is being checked'); ?>...</i></p>
 </main>
 <?= includeTemplate('/_block/wide-footer'); ?>

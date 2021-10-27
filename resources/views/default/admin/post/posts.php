@@ -2,12 +2,18 @@
   <?= includeTemplate('/admin/admin-menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-10 mb-col-12">
-  <?= breadcrumb('/admin', lang('admin'), null, null, lang('posts')); ?>
+  <?= breadcrumb(
+    '/admin',
+    Translate::get('admin'),
+    null,
+    null,
+    Translate::get('posts')
+  ); ?>
   <div class="bg-white flex flex-row items-center justify-between border-box-1 br-rd5 p15 mb15">
-    <p class="m0"><?= lang($data['sheet']); ?></p>
+    <p class="m0"><?= Translate::get($data['sheet']); ?></p>
     <?php $pages = [
-      ['id' => 'posts', 'url' => '/admin/posts', 'content' => lang('all'), 'icon' => 'bi bi-record-circle'],
-      ['id' => 'posts-ban', 'url' => '/admin/posts/ban', 'content' => lang('deleted posts'), 'icon' => 'bi bi-x-circle'],
+      ['id' => 'posts', 'url' => '/admin/posts', 'content' => Translate::get('all'), 'icon' => 'bi bi-record-circle'],
+      ['id' => 'posts-ban', 'url' => '/admin/posts/ban', 'content' => Translate::get('deleted posts'), 'icon' => 'bi bi-x-circle'],
     ];
     includeTemplate('/_block/tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
     ?>
@@ -46,9 +52,9 @@
             <span id="cm_dell" class="right comment_link">
               <a data-type="post" data-id="<?= $post['post_id']; ?>" class="type-action">
                 <?php if ($data['sheet'] == 'posts-ban') { ?>
-                  <?= lang('recover'); ?>
+                  <?= Translate::get('recover'); ?>
                 <?php } else { ?>
-                  <?= lang('remove'); ?>
+                  <?= Translate::get('remove'); ?>
                 <?php } ?>
               </a>
             </span>
@@ -56,7 +62,7 @@
         </div>
       <?php } ?>
     <?php } else { ?>
-      <?= includeTemplate('/_block/no-content', ['lang' => 'no']); ?>
+      <?= no_content(Translate::get('no'), 'bi bi-info-lg'); ?>
     <?php } ?>
   </div>
   <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/admin/answers'); ?>

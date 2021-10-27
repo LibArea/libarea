@@ -3,7 +3,7 @@
 </div>
 <main class="col-span-7 mb-col-12">
   <div class="bg-white br-rd5 border-box-1 pt5 pr15 pb5 pl15">
-    <?= breadcrumb('/', lang('home'), null,  null, lang('all answers')); ?>
+    <?= breadcrumb('/', Translate::get('home'), null,  null, Translate::get('all answers')); ?>
   </div>
 
   <?php if (!empty($data['answers'])) { ?>
@@ -30,7 +30,7 @@
         <?php } else { ?>
           <div class="bg-red-300">
             <div class="voters"></div>
-            ~ <?= lang('Answer deleted'); ?>
+            ~ <?= Translate::get('Answer deleted'); ?>
           </div>
         <?php } ?>
       </div>
@@ -39,7 +39,7 @@
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/answers'); ?>
 
   <?php } else { ?>
-    <?= includeTemplate('/_block/no-content', ['lang' => 'There are no comments']); ?>
+    <?= no_content(Translate::get('there are no comments'), 'bi bi-info-lg'); ?>
   <?php } ?>
 </main>
-<?= includeTemplate('/_block/aside-lang', ['lang' => lang('answers-desc')]); ?>
+<?= includeTemplate('/_block/aside-lang', ['lang' => Translate::get('answers-desc')]); ?>

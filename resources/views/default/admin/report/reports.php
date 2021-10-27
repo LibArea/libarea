@@ -2,15 +2,21 @@
   <?= includeTemplate('/admin/admin-menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-10 mb-col-12">
-  <?= breadcrumb('/admin', lang('admin'), '/admin/users', lang('users'), lang('reports')); ?>
+  <?= breadcrumb(
+    '/admin',
+    Translate::get('admin'),
+    '/admin/users',
+    Translate::get('users'),
+    Translate::get('reports')
+  ); ?>
 
   <?php if ($data['reports']) { ?>
     <table class="mt20">
       <thead>
         <th class="center">N</th>
-        <th><?= lang('avatar'); ?></th>
-        <th><?= lang('information'); ?></th>
-        <th><?= lang('saw'); ?></th>
+        <th><?= Translate::get('avatar'); ?></th>
+        <th><?= Translate::get('information'); ?></th>
+        <th><?= Translate::get('saw'); ?></th>
       </thead>
       <?php foreach ($data['reports'] as $report) {  ?>
         <tr>
@@ -42,7 +48,7 @@
       <?php } ?>
     </table>
   <?php } else { ?>
-    <?= includeTemplate('/_block/no-content', ['lang' => 'no users']); ?>
+    <?= no_content(Translate::get('no users'), 'bi bi-info-lg'); ?>
   <?php } ?>
   <?= pagination($data['pNum'], $data['pagesCount'], null, '/admin/reports'); ?>
   </div>

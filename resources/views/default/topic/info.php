@@ -4,8 +4,8 @@
 <?php $topic = $data['topic']; ?>
 <main class="col-span-7 mb-col-12">
   <div class="bg-white br-rd5 border-box-1 pt5 pr15 pb5 mb15 pl15">
-    <a class="size-14" title="<?= lang('topics-all'); ?>" href="/topics">
-      ← <?= lang('topics'); ?>
+    <a class="size-14" title="<?= Translate::get('topics-all'); ?>" href="/topics">
+      ← <?= Translate::get('topics'); ?>
     </a>
     <h1 class="topics">
       <a href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
@@ -17,7 +17,7 @@
         </a>
       <?php } ?>
     </h1>
-    <h3><?= lang('info'); ?></h3>
+    <h3><?= Translate::get('info'); ?></h3>
     <?= $topic['topic_info']; ?>
   </div>
 

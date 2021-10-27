@@ -3,18 +3,24 @@
 </div>
 <main class="col-span-10 mb-col-12">
   <div class="white-box pt5 pr15 pb5 pl15">
-    <a class="right" title="<?= lang('add'); ?>" href="/admin/badges/add">
+    <a class="right" title="<?= Translate::get('add'); ?>" href="/admin/badges/add">
       <i class="bi bi-plus-lg middle"></i>
     </a>
-    <?= breadcrumb('/admin', lang('admin'), null, null, lang('badges')); ?>
+    <?= breadcrumb(
+      '/admin',
+      Translate::get('admin'),
+      null,
+      null,
+      Translate::get('badges')
+    ); ?>
 
     <?php if (!empty($data['badges'])) { ?>
       <table class="mt20">
         <thead>
           <th>Id</th>
           <th>Icon</th>
-          <th><?= lang('title'); ?>&nbsp;/&nbsp;<?= lang('description'); ?></th>
-          <th><?= lang('action'); ?></th>
+          <th><?= Translate::get('title'); ?>&nbsp;/&nbsp;<?= Translate::get('description'); ?></th>
+          <th><?= Translate::get('action'); ?></th>
         </thead>
         <?php foreach ($data['badges'] as $key => $bg) { ?>
           <tr>
@@ -30,7 +36,7 @@
               <?= $bg['badge_description']; ?>
             </td>
             <td class="center">
-              <a title="<?= lang('edit'); ?>" href="/admin/badges/<?= $bg['badge_id']; ?>/edit">
+              <a title="<?= Translate::get('edit'); ?>" href="/admin/badges/<?= $bg['badge_id']; ?>/edit">
                 <i class="bi bi-pencil size-15"></i>
               </a>
             </td>
@@ -38,7 +44,7 @@
         <?php } ?>
       </table>
     <?php } else { ?>
-      <?= includeTemplate('/_block/no-content', ['lang' => 'no']); ?>
+      <?= no_content(Translate::get('no'), 'bi bi-info-lg'); ?>
     <?php } ?>
   </div>
 </main>

@@ -2,7 +2,7 @@
   <?= includeTemplate('/_block/menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-7 mb-col-12 bg-white br-rd5 border-box-1 pt5 mt15 pr15 pb5 pl15">
-  <h1><?= lang('moderation log'); ?></h1>
+  <h1><?= Translate::get('moderation log'); ?></h1>
   <?php if (!empty($data['moderations'])) { ?>
     <div class="mt15">
       <?php foreach ($data['moderations'] as  $mod) { ?>
@@ -28,16 +28,16 @@
           </div>
           <div class="size-14">
             <span class="gray-light">
-              <?= lang('action'); ?>:
+              <?= Translate::get('action'); ?>:
             </span>
-            <b><?= lang($mod['mod_action']); ?></b>
+            <b><?= Translate::get($mod['mod_action']); ?></b>
           </div>
         </div>
       <?php } ?>
 
     <?php } else { ?>
-      <?= includeTemplate('/_block/no-content', ['lang' => 'no moderation logs']); ?>
+      <?= no_content(Translate::get('no moderation logs'), 'bi bi-info-lg'); ?>
     <?php } ?>
     </div>
 </main>
-<?= includeTemplate('/_block/aside-lang', ['lang' => lang('meta-moderation')]); ?>
+<?= includeTemplate('/_block/aside-lang', ['lang' => Translate::get('meta-moderation')]); ?>

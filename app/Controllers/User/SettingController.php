@@ -5,7 +5,7 @@ namespace App\Controllers\User;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\{SettingModel, UserModel};
-use Base, UploadImage, Validation;
+use Base, UploadImage, Validation, Translate;
 
 class SettingController extends MainController
 {
@@ -31,7 +31,7 @@ class SettingController extends MainController
         // Если пользователь забанен
         Base::accountBan($user);
 
-        $meta = meta($m = [], lang('setting'));
+        $meta = meta($m = [], Translate::get('setting'));
         $data = [
             'sheet'         => 'settings',
             'user'          => $user,
@@ -46,19 +46,22 @@ class SettingController extends MainController
         $name               = Request::getPost('name');
         $about              = Request::getPost('about');
         $public_email       = Request::getPost('public_email');
-        $design_is_minimal  = Request::getPostInt('design_is_minimal');
+        $user_template      = Request::getPost('user_template');
+        $user_lang          = Request::getPost('user_lang');
 
         $redirect   = getUrlByName('setting', ['login' => $this->uid['user_login']]);
-        Validation::Limits($name, lang('name'), '3', '11', $redirect);
-        Validation::Limits($about, lang('about me'), '0', '255', $redirect);
+        Validation::Limits($name, Translate::get('name'), '3', '11', $redirect);
+        Validation::Limits($about, Translate::get('about me'), '0', '255', $redirect);
 
         if ($public_email) {
             Validation::checkEmail($public_email, $redirect);
         }
 
-        $_SESSION['account']['user_design_is_minimal'] = $design_is_minimal;
+        $_SESSION['account']['user_template']   = $user_template ?? 'default';
+        $_SESSION['account']['user_lang']       = $user_lang ?? 'ru';
 
         $user   = UserModel::getUser($this->uid['user_id'], 'id');
+    
         $data = [
             'user_id'                   => $this->uid['user_id'],
             'user_email'                => $user['user_email'],
@@ -70,7 +73,8 @@ class SettingController extends MainController
             'user_updated_at'           => date('Y-m-d H:i:s'),
             'user_color'                => Request::getPostString('color', '#339900'),
             'user_about'                => $about,
-            'user_design_is_minimal'    => $design_is_minimal,
+            'user_template'             => $user_template ?? 'default',
+            'user_lang'                 => $user_lang,
             'user_whisper'              => $user['user_whisper'],
             'user_website'              => Request::getPostString('website', ''),
             'user_location'             => Request::getPostString('location', ''),
@@ -83,7 +87,7 @@ class SettingController extends MainController
 
         SettingModel::editProfile($data);
 
-        addMsg(lang('changes saved'), 'success');
+        addMsg(Translate::get('changes saved'), 'success');
         redirect($redirect);
     }
 
@@ -100,7 +104,7 @@ class SettingController extends MainController
         Request::getHead()->addStyles('/assets/css/image-uploader.css');
         Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
 
-        $meta = meta($m = [], lang('change avatar'));
+        $meta = meta($m = [], Translate::get('change avatar'));
         $data = [
             'sheet' => 'avatar',
             'user'  => UserModel::getUser($this->uid['user_login'], 'slug'),
@@ -129,7 +133,7 @@ class SettingController extends MainController
             UploadImage::cover($cover, $this->uid['user_id'], 'user');
         }
 
-        addMsg(lang('change saved'), 'success');
+        addMsg(Translate::get('change saved'), 'success');
         redirect($redirect);
     }
 
@@ -142,7 +146,7 @@ class SettingController extends MainController
             redirect(getUrlByName('setting.security', ['login' => $this->uid['user_login']]));
         }
 
-        $meta = meta($m = [], lang('change password'));
+        $meta = meta($m = [], Translate::get('change password'));
         $data = [
             'password'      => '',
             'password2'     => '',
@@ -162,30 +166,30 @@ class SettingController extends MainController
 
         $redirect = getUrlByName('setting.security', ['login' => $this->uid['user_login']]);
         if ($password2 != $password3) {
-            addMsg(lang('pass-match-err'), 'error');
+            addMsg(Translate::get('pass-match-err'), 'error');
             redirect($redirect);
         }
 
         if (substr_count($password2, ' ') > 0) {
-            addMsg(lang('pass-gap-err'), 'error');
+            addMsg(Translate::get('pass-gap-err'), 'error');
             redirect($redirect);
         }
 
-        Validation::Limits($password2, lang('password'), 8, 32, $redirect);
+        Validation::Limits($password2, Translate::get('password'), 8, 32, $redirect);
 
         // Данные участника
         $account    = Request::getSession('account');
         $userInfo   = UserModel::userInfo($account['user_email']);
 
         if (!password_verify($password, $userInfo['user_password'])) {
-            addMsg(lang('old-password-err'), 'error');
+            addMsg(Translate::get('old-password-err'), 'error');
             redirect($redirect);
         }
 
         $newpass = password_hash($password2, PASSWORD_BCRYPT);
         SettingModel::editPassword($account['user_id'], $newpass);
 
-        addMsg(lang('password changed'), 'success');
+        addMsg(Translate::get('password changed'), 'success');
         redirect($redirect);
     }
 
@@ -214,7 +218,7 @@ class SettingController extends MainController
 
         $date = date('Y-m-d H:i:s');
         SettingModel::coverRemove($user['user_id'], $date);
-        addMsg(lang('cover removed'), 'success');
+        addMsg(Translate::get('cover removed'), 'success');
 
         // Если удаляет администрация
         if ($this->uid['user_trust_level'] == 5) {
@@ -240,7 +244,7 @@ class SettingController extends MainController
         $user = UserModel::getUser($this->uid['user_id'], 'id');
         Base::accountBan($user);
 
-        $meta = meta($m = [], lang('notifications'));
+        $meta = meta($m = [], Translate::get('notifications'));
         $data = [
             'sheet'     => 'notifications',
             'setting'   => SettingModel::getNotifications($user['user_id']),
@@ -258,7 +262,7 @@ class SettingController extends MainController
         ];
 
         SettingModel::setNotifications($data, $this->uid['user_id']);
-        addMsg(lang('change saved'), 'success');
+        addMsg(Translate::get('change saved'), 'success');
 
         redirect(getUrlByName('setting.notifications', ['login' => $this->uid['user_login']]));
     }

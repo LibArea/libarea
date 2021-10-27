@@ -1,19 +1,24 @@
 <main class="col-span-9 mb-col-12">
   <div class="bg-white br-rd5 border-box-1 pt5 pr15 pb10 pl15">
-    <?= breadcrumb('/', lang('home'), getUrlByName('user', ['login' => $uid['user_login']]), lang('profile'), lang('invites')); ?>
-
+    <?= breadcrumb(
+      '/',
+      Translate::get('home'),
+      getUrlByName('user', ['login' => $uid['user_login']]),
+      Translate::get('profile'),
+      Translate::get('invites')
+    ); ?>
     <?php if ($uid['user_trust_level'] > 1) { ?>
       <form method="post" action="/invitation/create">
         <?php csrf_field(); ?>
         <div class="mb20">
           <input id="link" class="w-100 h30" type="email" name="email">
-          <input class="button block br-rd5 white right mt5" type="submit" name="submit" value="<?= lang('send'); ?>">
-          <div class="size-14 gray-light-2"><?= lang('enter'); ?> E-mail</div>
+          <input class="button block br-rd5 white right mt5" type="submit" name="submit" value="<?= Translate::get('send'); ?>">
+          <div class="size-14 gray-light-2"><?= Translate::get('enter'); ?> E-mail</div>
         </div>
-        <?= lang('invitations left'); ?> <?= 5 - $data['count_invites']; ?>
+        <?= Translate::get('invitations left'); ?> <?= 5 - $data['count_invites']; ?>
       </form>
 
-      <h3><?= lang('invited guests'); ?></h3>
+      <h3><?= Translate::get('invited guests'); ?></h3>
 
       <?php if (!empty($data['invitations'])) { ?>
 
@@ -22,19 +27,19 @@
             <div class="size-14 gray">
               <?= user_avatar_img($invite['user_avatar'], 'small', $invite['user_login'], 'ava'); ?>
               <a href="<?= $invite['user_login']; ?>"><?= $invite['user_login']; ?></a>
-              - <?= lang('registered'); ?>
+              - <?= Translate::get('registered'); ?>
             </div>
 
             <?php if ($uid['user_trust_level'] == 5) { ?>
-              <?= lang('the link was used to'); ?>: <?= $invite['invitation_email']; ?> <br>
+              <?= Translate::get('the link was used to'); ?>: <?= $invite['invitation_email']; ?> <br>
               <code>
                 <?= Config::get('meta.url'); ?><?= getUrlByName('register'); ?>/invite/<?= $invite['invitation_code']; ?>
               </code>
             <?php } ?>
 
-            <span class="size-14 gray"><?= lang('link has been used'); ?></span>
+            <span class="size-14 gray"><?= Translate::get('link has been used'); ?></span>
           <?php } else { ?>
-            <?= lang('for'); ?> (<?= $invite['invitation_email']; ?>) <?= lang('can send this link'); ?>: <br>
+            <?= Translate::get('for'); ?> (<?= $invite['invitation_email']; ?>) <?= Translate::get('can send this link'); ?>: <br>
             <code>
               <?= Config::get('meta.url'); ?><?= getUrlByName('register'); ?>/invite/<?= $invite['invitation_code']; ?>
             </code>
@@ -44,12 +49,12 @@
         <?php } ?>
 
       <?php } else { ?>
-        <?= lang('no invitations'); ?>
+        <?= Translate::get('no invitations'); ?>
       <?php } ?>
 
     <?php } else { ?>
-      <?= lang('limit-tl-invitation'); ?>.
+      <?= Translate::get('limit-tl-invitation'); ?>.
     <?php } ?>
   </div>
 </main>
-<?= includeTemplate('/_block/aside-lang', ['lang' => lang('you can invite your friends')]); ?>
+<?= includeTemplate('/_block/aside-lang', ['lang' => Translate::get('you can invite your friends')]); ?>

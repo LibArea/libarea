@@ -1,22 +1,22 @@
 <main class="col-span-9 mb-col-12">
   <div class="bg-white br-rd5 border-box-1 pt5 pr15 pb5 pl15">
-    <h1><?= lang('invite'); ?></h1>
+    <h1><?= Translate::get('invite'); ?></h1>
     <form class="" action="/invite" method="post">
       <?php csrf_field(); ?>
       <div class="mb20">
-        <label class="block" for="email"><?= lang('code'); ?></label>
+        <label class="block" for="email"><?= Translate::get('code'); ?></label>
         <input class="w-100 h30" type="text" name="invite" id="invite">
       </div>
       <div class="mb20">
-        <button type="submit" class="button br-rd5 white"><?= lang('sign in'); ?></button>
+        <button type="submit" class="button br-rd5 white"><?= Translate::get('sign in'); ?></button>
         <span class="ml15 size-14"><a href="<?= getUrlByName('recover'); ?>">
-            <?= lang('forgot your password'); ?>?</a>
+            <?= Translate::get('forgot your password'); ?>?</a>
         </span>
       </div>
     </form>
     <?php if (Config::get('general.invite') == 1) { ?>
-      <?= lang('no-invate-txt'); ?>
+      <?= Translate::get('no-invate-txt'); ?>
     <?php } ?>
   </div>
 </main>
-<?= includeTemplate('/_block/aside-lang', ['lang' => lang('someone invited you from the site')]); ?>
+<?= includeTemplate('/_block/aside-lang', ['lang' => Translate::get('someone invited you from the site')]); ?>

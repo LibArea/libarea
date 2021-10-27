@@ -3,10 +3,10 @@
 </div>
 <main class="col-span-7 mb-col-12">
   <div class="bg-white br-rd5 border-box-1 p20">
-    <h1 class="mt0 mb15 size-21"><?= lang('users'); ?></h1>
-    <div class="wrap grid grid-cols-6 gap-4 justify-between">
+    <h1 class="mt0 mb15 size-21"><?= Translate::get('users'); ?></h1>
+    <div class="wrap grid grid-cols-6 gap-2 justify-between">
       <?php foreach ($data['users'] as $ind => $user) { ?>
-        <div class="center pr10 pl10 mb-col-2">
+        <div class="center inline pr10 pl10 mb20 mb-col-2">
           <a href="<?= getUrlByName('user', ['login' => $user['user_login']]); ?>">
             <?= user_avatar_img($user['user_avatar'], 'max', $user['user_login'], 'br-rd-50 w64'); ?>
           </a>
@@ -22,4 +22,4 @@
   </div>
   <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/users'); ?>
 </main>
-<?= includeTemplate('/_block/aside-lang', ['lang' => lang('info-users')]); ?>
+<?= includeTemplate('/_block/aside-lang', ['lang' => Translate::get('info-users')]); ?>

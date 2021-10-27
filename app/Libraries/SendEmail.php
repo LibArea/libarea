@@ -16,8 +16,8 @@ class SendEmail
                 if ($setting['setting_email_appealed'] == 1) {
                     $user = UserModel::getUser($user_id, 'id');
                     $link = Config::get('meta.url') . '/u/' . $user['user_login'] . '/notifications';
-                    $message = lang('You were mentioned (@), see') . ": \n" . $link . "\n\n" . Config::get('meta.url');
-                    self::send($user['user_email'], Config::get('meta.name') . ' - ' . lang('notification'), $message);
+                    $message = Translate::get('You were mentioned (@), see') . ": \n" . $link . "\n\n" . Config::get('meta.url');
+                    self::send($user['user_email'], Config::get('meta.name') . ' - ' . Translate::get('notification'), $message);
                 }
             }
         }

@@ -6,5 +6,5 @@
       <textarea id="md-redactor" name="post_content" minlength="6"></textarea>
     <?php } ?>
   </div>
-  <?= includeTemplate('/_block/editor/config-editor', ['post_id' => $post_id, 'type' => $type, 'width100' => 'yes']); ?>
+  <?= includeTemplate('/_block/editor/config-editor', ['post_id' => $post_id, 'lang' => $lang, 'type' => $type, 'width100' => 'yes']); ?>
 </div>

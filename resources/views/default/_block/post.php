@@ -4,12 +4,12 @@
     <div class="border-box-1 bg-white p20 mb15 br-rd5 article_<?= $post['post_id']; ?>">
       <?php if ($data['sheet'] == 'subscribed') { ?>
         <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id size-14 right">
-          <?= lang('unsubscribe'); ?>
+          <?= Translate::get('unsubscribe'); ?>
         </div>
       <?php } ?>
       <div class="flex mb15">
         <a class="flex black flex-center" href="<?= getUrlByName('user', ['login' => $post['user_login']]); ?>">
-          <?= user_avatar_img($post['user_avatar'], 'max', $post['user_login'], 'w44 br-rd-50 mr5'); ?>
+          <?= user_avatar_img($post['user_avatar'], 'max', $post['user_login'], 'w44 h44 br-rd-50 mr5'); ?>
           <div class="ml5">
             <?= $post['user_login']; ?>
             <div class="gray-light-2 size-14">
@@ -39,7 +39,7 @@
               <?php } ?>
               <?php if ($post['post_translation'] == 1) { ?>
                 <span class="pt5 pr10 pb5 pl10 gray-light bg-yellow-100 br-rd3 size-14 italic lowercase">
-                  <?= lang('translation'); ?>
+                  <?= Translate::get('translation'); ?>
                 </span>
               <?php } ?>
               <?php if ($post['post_tl'] > 0) { ?>
@@ -102,6 +102,6 @@
 <?php } else { ?>
   <?= includeTemplate('/_block/recommended-topics', ['data' => $data]); ?>
   <div class="mt10 mb10 pt10 pr15 pb10 center pl15 bg-yellow-100 gray">
-    <?= lang('there are no posts'); ?>...
+    <?= Translate::get('there are no posts'); ?>...
   </div>
 <?php } ?>

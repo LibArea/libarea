@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
 use App\Models\{NotificationsModel, ActionModel, AnswerModel, PostModel};
-use Content, Base, Validation, SendEmail;
+use Content, Base, Validation, SendEmail, Translate;
 
 class AddAnswerController extends MainController
 {
@@ -25,7 +25,7 @@ class AddAnswerController extends MainController
         Content::stopContentQuietМode($user);
 
         $redirect = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
-        Validation::Limits($answer_content, lang('Bodies'), '6', '5000', $redirect);
+        Validation::Limits($answer_content, Translate::get('Bodies'), '6', '5000', $redirect);
 
         // Ограничим добавления ответов (в день)
         Validation::speedAdd($uid, 'answer');
@@ -36,12 +36,12 @@ class AddAnswerController extends MainController
             $all_count = ActionModel::ceneralContributionCount($uid['user_id']);
             if ($all_count < 2) {
                 ActionModel::addLimitingMode($uid['user_id']);
-                addMsg(lang('limiting-mode-1'), 'error');
+                addMsg(Translate::get('limiting-mode-1'), 'error');
                 redirect('/');
             }
 
             $answer_published = 0;
-            addMsg(lang('answer-audit'), 'error');
+            addMsg(Translate::get('answer-audit'), 'error');
         }
 
         $answer_content = Content::change($answer_content);

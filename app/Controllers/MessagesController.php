@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
 use App\Models\MessagesModel;
-use Content, Config, Base, Validation;
+use Content, Config, Base, Validation, Translate;
 
 class MessagesController extends MainController
 {
@@ -54,13 +54,13 @@ class MessagesController extends MainController
                 $row['msg_user']    = UserModel::getUser($row['dialog_sender_id'], 'id');
                 $row['msg_to_user'] = UserModel::getUser($row['dialog_recipient_id'], 'id');
                 $row['message']     = MessagesModel::getMessageOne($row['dialog_id']);
-                $row['unread_num']  = word_form($row['unread'], lang('message'), lang('messages-m'), lang('messages'));
-                $row['count_num']   = word_form($row['count'], lang('message'), lang('messages-m'), lang('messages'));
+                $row['unread_num']  = word_form($row['unread'], Translate::get('message'), Translate::get('messages-m'), Translate::get('messages'));
+                $row['count_num']   = word_form($row['count'], Translate::get('message'), Translate::get('messages-m'), Translate::get('messages'));
                 $result[$ind]       = $row;
             }
         }
 
-        $meta = meta($m = [], lang('private messages'));
+        $meta = meta($m = [], Translate::get('private messages'));
         $data = [
             'sheet'         => 'all-mess',
             'messages'      => $result,
@@ -76,12 +76,12 @@ class MessagesController extends MainController
         $id     = Request::getInt('id');
 
         if (!$dialog = MessagesModel::getDialogById($id)) {
-            addMsg(lang('the dialog does not exist'), 'error');
+            addMsg(Translate::get('the dialog does not exist'), 'error');
             redirect(getUrlByName('messages', ['login' => $uid['user_login']]));
         }
 
         if ($dialog['dialog_recipient_id'] != $uid['user_id'] and $dialog['dialog_sender_id'] != $uid['user_id']) {
-            addMsg(lang('the topic does not exist'), 'error');
+            addMsg(Translate::get('the topic does not exist'), 'error');
             redirect(getUrlByName('messages', ['login' => $uid['user_login']]));
         }
 
@@ -109,9 +109,9 @@ class MessagesController extends MainController
             }
         }
 
-        $meta = meta($m = [], lang('dialogue'));
+        $meta = meta($m = [], Translate::get('dialogue'));
         $data = [
-            'h1'                => lang('dialogue') . ' - ' . $list[$key]['user_login'],
+            'h1'                => Translate::get('dialogue') . ' - ' . $list[$key]['user_login'],
             'sheet'             => 'dialog',
             'list'              => $list,
             'recipient_user'    => $recipient_user,
@@ -126,7 +126,7 @@ class MessagesController extends MainController
         $uid        = Base::getUid();
         $login      = Request::get('login');
         if (!$user  = UserModel::getUser($login, 'slug')) {
-            addMsg(lang('member does not exist'), 'error');
+            addMsg(Translate::get('member does not exist'), 'error');
             redirect('/');
         }
 
@@ -136,7 +136,7 @@ class MessagesController extends MainController
             redirect('/');
         }
 
-        $meta = meta($m = [], lang('send a message'));
+        $meta = meta($m = [], Translate::get('send a message'));
         $data = [
             'recipient_uid' => $user['user_id'],
         ];
@@ -159,7 +159,7 @@ class MessagesController extends MainController
 
         // Введите содержание сообщения
         if ($content == '') {
-            addMsg(lang('enter content'), 'error');
+            addMsg(Translate::get('enter content'), 'error');
             redirect(getUrlByName('messages', ['login' => $uid['user_login']]));
         }
 

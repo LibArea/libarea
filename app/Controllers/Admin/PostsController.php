@@ -5,7 +5,7 @@ namespace App\Controllers\Admin;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\Admin\PostModel;
-use Content, Base;
+use Content, Base, Translate;
 
 class PostsController extends MainController
 {
@@ -26,7 +26,7 @@ class PostsController extends MainController
             $result[$ind]   = $row;
         }
 
-        $meta = meta($m = [], $sheet == 'ban' ? lang('deleted posts') : lang('posts'));
+        $meta = meta($m = [], $sheet == 'ban' ? Translate::get('deleted posts') : Translate::get('posts'));
         $data = [
             'sheet'         => $sheet == 'all' ? 'posts' : 'posts-ban',
             'pagesCount'    => ceil($pagesCount / $limit),

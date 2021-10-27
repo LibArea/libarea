@@ -5,7 +5,7 @@ namespace App\Controllers\Web;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{WebModel, TopicModel};
-use Base, Validation;
+use Base, Validation, Translate;
 
 class EditWebController extends MainController
 {
@@ -30,7 +30,7 @@ class EditWebController extends MainController
         Request::getResources()->addBottomStyles('/assets/css/select2.css');
         Request::getResources()->addBottomScript('/assets/js/select2.min.js');
 
-        $meta = meta($m = [], lang('change the site') . ' | ' . $domain['link_url_domain']);
+        $meta = meta($m = [], Translate::get('change the site') . ' | ' . $domain['link_url_domain']);
         $data = [
             'domain'        => $domain,
             'sheet'         => 'domains',
@@ -60,8 +60,8 @@ class EditWebController extends MainController
         $post_fields    = Request::getPost() ?? [];
         $topics         = $post_fields['topic_select'] ?? [];
 
-        Validation::Limits($link_title, lang('title'), '24', '250', $redirect);
-        Validation::Limits($link_content, lang('description'), '24', '1500', $redirect);
+        Validation::Limits($link_title, Translate::get('title'), '24', '250', $redirect);
+        Validation::Limits($link_content, Translate::get('description'), '24', '1500', $redirect);
 
         $data = [
             'link_id'           => $link['link_id'],

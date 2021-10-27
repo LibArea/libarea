@@ -82,7 +82,8 @@ class UserModel extends MainModel
                     user_trust_level,
                     user_cover_art,
                     user_color,
-                    user_design_is_minimal,
+                    user_template,
+                    user_lang,
                     user_invitation_available,
                     user_about,
                     user_website,
@@ -107,29 +108,26 @@ class UserModel extends MainModel
     }
 
     // Регистрация участника
-    public static function createUser($login, $email, $password, $reg_ip, $invitation_id, $tl)
+    public static function createUser($data)
     {
-        $activated = 0; // Требуется активация по e-mail
-        if ($invitation_id > 0) {
-            $activated = 1;
-        }
-
-        $params = [
-            'user_login'                => $login,
-            'user_email'                => $email,
-            'user_design_is_minimal'    => 0, // По умолчанию, дизайн блоговый
-            'user_whisper'              => '',
-            'user_password'             => password_hash($password, PASSWORD_BCRYPT),
-            'user_limiting_mode'        => 0, // Режим заморозки выключен
-            'user_activated'            => $activated,
-            'user_reg_ip'               => $reg_ip,
-            'user_trust_level'          => $tl,
-            'user_invitation_id'        => $invitation_id,
+        $data = [
+            'user_login'                => $data['user_login'],
+            'user_email'                => $data['user_email'],
+            'user_template'             => $data['user_template'],
+            'user_lang'                 => $data['user_lang'],
+            'user_whisper'              => $data['user_whisper'],
+            'user_password'             => $data['user_password'],
+            'user_limiting_mode'        => $data['user_limiting_mode'],
+            'user_activated'            => $data['user_activated'],
+            'user_reg_ip'               => $data['user_reg_ip'],
+            'user_trust_level'          => $data['user_trust_level'],
+            'user_invitation_id'        => $data['user_invitation_id'],
         ];
 
         $sql = "INSERT INTO users(user_login, 
                                     user_email,
-                                    user_design_is_minimal,
+                                    user_template,
+                                    user_lang,
                                     user_whisper,
                                     user_password, 
                                     user_limiting_mode, 
@@ -140,7 +138,8 @@ class UserModel extends MainModel
                                     
                             VALUES(:user_login, 
                                     :user_email, 
-                                    :user_design_is_minimal,
+                                    :user_template,
+                                    :user_lang,
                                     :user_whisper,
                                     :user_password, 
                                     :user_limiting_mode, 
@@ -149,7 +148,7 @@ class UserModel extends MainModel
                                     :user_trust_level, 
                                     :user_invitation_id)";
 
-        DB::run($sql, $params);
+        DB::run($sql, $data);
 
         $sql_last_id =  DB::run("SELECT LAST_INSERT_ID() as last_id")->fetch(PDO::FETCH_ASSOC);
 
@@ -240,7 +239,8 @@ class UserModel extends MainModel
                    user_password,
                    user_login,
                    user_name,
-                   user_design_is_minimal,
+                   user_template,
+                   user_lang,
                    user_avatar,
                    user_trust_level,
                    user_ban_list,

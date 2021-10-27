@@ -4,7 +4,7 @@ namespace App\Controllers\Admin;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use App\Models\User\{InvitationModel, UserModel};
-use Base;
+use Base, Translate;
 
 class InvitationsController extends MainController
 {
@@ -19,7 +19,7 @@ class InvitationsController extends MainController
             $result[$ind]       = $row;
         }
 
-        $meta = meta($m = [], lang('invites'));
+        $meta = meta($m = [], Translate::get('invites'));
         $data = [
             'sheet'         => $sheet == 'all' ? 'invitations' : $sheet,
             'invitations'   => $result,

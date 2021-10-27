@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
 use App\Models\{FeedModel, SubscriptionModel, TopicModel};
-use Content, Base;
+use Content, Base, Translate;
 
 class TopicController extends MainController
 {
@@ -25,7 +25,7 @@ class TopicController extends MainController
 
         $num = ' ';
         if ($page > 1) {
-            $num = sprintf(lang('page-number'), $page);
+            $num = sprintf(Translate::get('page-number'), $page);
         }
 
         if ($sheet == 'all') {
@@ -42,7 +42,7 @@ class TopicController extends MainController
             'imgurl'     => false,
             'url'        => $url,
         ];
-        $meta = meta($m, lang('topics-' . $sheet) . $num, lang('topic-desc-' . $sheet) . $num);
+        $meta = meta($m, Translate::get('topics-' . $sheet) . $num, Translate::get('topic-desc-' . $sheet) . $num);
 
         $data = [
             'sheet'         => 'topics-' . $sheet,
@@ -88,18 +88,18 @@ class TopicController extends MainController
         foreach ($posts as $ind => $row) {
             $text = explode("\n", $row['post_content']);
             $row['post_content_preview']    = Content::text($text[0], 'line');
-            $row['lang_num_answers']        = word_form($row['post_answers_count'], lang('answer'), lang('answers-m'), lang('answers'));
+            $row['lang_num_answers']        = word_form($row['post_answers_count'], Translate::get('answer'), Translate::get('answers-m'), Translate::get('answers'));
             $row['post_date']               = lang_date($row['post_date']);
             $result[$ind]                   = $row;
         }
 
         $url    = getUrlByName('topic', ['slug' => $topic['topic_slug']]);
-        $title  = $topic['topic_seo_title'] . ' — ' .  lang('topic');
+        $title  = $topic['topic_seo_title'] . ' — ' .  Translate::get('topic');
         $descr  = $topic['topic_description'];
         if ($sheet == 'recommend') {
             $url =  getUrlByName('recommend', ['slug' => $topic['topic_slug']]);
-            $title  = $topic['topic_seo_title'] . ' — ' .  lang('recommended posts');
-            $descr  = sprintf(lang('recommended-posts'), $topic['topic_seo_title']) . $topic['topic_description'];
+            $title  = $topic['topic_seo_title'] . ' — ' .  Translate::get('recommended posts');
+            $descr  = sprintf(Translate::get('recommended-posts'), $topic['topic_seo_title']) . $topic['topic_description'];
         }
 
         $m = [
@@ -164,7 +164,7 @@ class TopicController extends MainController
             'imgurl'     => '/uploads/topics/logos/' . $topic['topic_img'],
             'url'        => getUrlByName('topic.info', ['slug' => $topic['topic_slug']]),
         ];
-        $meta = meta($m, $topic['topic_seo_title'] . ' — ' .  lang('topic'), $topic['topic_description']);
+        $meta = meta($m, $topic['topic_seo_title'] . ' — ' .  Translate::get('topic'), $topic['topic_description']);
 
         $data = [
             'sheet'         => 'info',

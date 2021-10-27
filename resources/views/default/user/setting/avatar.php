@@ -5,14 +5,14 @@
 
   <?= breadcrumb(
     '/',
-    lang('home'),
+    Translate::get('home'),
     getUrlByName('user', ['login' => $uid['user_login']]),
-    lang('profile'),
-    lang('change avatar')
+    Translate::get('profile'),
+    Translate::get('change avatar')
   ); ?>
 
   <div class="bg-white flex flex-row items-center justify-between border-box-1 br-rd5 p15 mb15">
-    <p class="m0 no-mob"><?= lang($data['sheet']); ?></p>
+    <p class="m0 no-mob"><?= Translate::get($data['sheet']); ?></p>
     <?= includeTemplate('/_block/setting-nav', ['data' => $data, 'uid' => $uid]); ?>
   </div>
 
@@ -28,19 +28,19 @@
       </div>
 
       <div class="clear gray size-15">
-        <p><?= lang('recommended size'); ?>: 240x240px (jpg, jpeg, png)</p>
-        <p><input type="submit" class="button block br-rd5 white" value="<?= lang('download'); ?>" /></p>
+        <p><?= Translate::get('recommended size'); ?>: 240x240px (jpg, jpeg, png)</p>
+        <p><input type="submit" class="button block br-rd5 white" value="<?= Translate::get('download'); ?>" /></p>
       </div>
 
       <?php if ($data['user']['user_cover_art'] != 'cover_art.jpeg') { ?>
         <div class="relative size-15">
           <img class="block max-w-100" src="<?= user_cover_url($data['user']['user_cover_art']); ?>">
           <a class="right size-14" href="<?= getUrlByName('user', ['login' => $uid['user_login']]); ?>/delete/cover">
-            <?= lang('remove'); ?>
+            <?= Translate::get('remove'); ?>
           </a>
         </div>
       <?php } else { ?>
-        <?= lang('no-cover'); ?>...
+        <?= Translate::get('no-cover'); ?>...
       <?php } ?>
 
       <div class="box-form-img-cover">
@@ -50,9 +50,9 @@
       </div>
 
       <div class="clear gray size-15">
-        <p><?= lang('recommended size'); ?>: 1920x240px (jpg, jpeg, png)</p>
-        <p><input type="submit" class="button white" value="<?= lang('download'); ?>" /></p>
+        <p><?= Translate::get('recommended size'); ?>: 1920x240px (jpg, jpeg, png)</p>
+        <p><input type="submit" class="button white" value="<?= Translate::get('download'); ?>" /></p>
       </div>
     </form>
 </main>
-<?= includeTemplate('/_block/aside-lang', ['lang' => lang('info-avatar')]); ?>
+<?= includeTemplate('/_block/aside-lang', ['lang' => Translate::get('info-avatar')]); ?>

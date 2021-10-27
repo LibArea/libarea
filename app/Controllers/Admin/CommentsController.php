@@ -5,7 +5,7 @@ namespace App\Controllers\Admin;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\CommentModel;
-use Content, Base;
+use Content, Base, Translate;
 
 class CommentsController extends MainController
 {
@@ -26,7 +26,7 @@ class CommentsController extends MainController
             $result[$ind]   = $row;
         }
 
-        $meta = meta($m = [], $sheet == 'ban' ? lang('deleted comments') : lang('comments-n'));
+        $meta = meta($m = [], $sheet == 'ban' ? Translate::get('deleted comments') : Translate::get('comments-n'));
         $data = [
             'sheet'         => $sheet == 'all' ? 'comments-n' : 'comments-ban',
             'pagesCount'    => ceil($pagesCount / $limit),

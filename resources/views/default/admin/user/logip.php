@@ -3,22 +3,28 @@
 </div>
 <main class="col-span-10 mb-col-12">
   <div class="white-box pt5 pr15 pb5 pl15">
-    <?= breadcrumb('/admin', lang('admin'), '/admin/users', lang('users'), lang('search')); ?>
+    <?= breadcrumb(
+      '/admin',
+      Translate::get('admin'),
+      '/admin/users',
+      Translate::get('users'),
+      Translate::get('search')
+    ); ?>
     <table>
       <thead>
         <th>N</th>
-        <th><?= lang('information'); ?></th>
+        <th><?= Translate::get('information'); ?></th>
         <th>E-mail</th>
-        <th><?= lang('sign up'); ?></th>
+        <th><?= Translate::get('sign up'); ?></th>
         <th>
           <?php if ($data['option'] == 'logs') { ?>
-            <?= lang('last'); ?>
+            <?= Translate::get('last'); ?>
           <?php } else { ?>
             IP
           <?php } ?>
         </th>
         <th>Ban</th>
-        <th><?= lang('action'); ?></th>
+        <th><?= Translate::get('action'); ?></th>
       </thead>
       <?php foreach ($data['results'] as $user) {  ?>
         <tr>
@@ -57,11 +63,11 @@
             <?php if ($user['user_trust_level'] != 5) { ?>
               <?php if ($user['isBan']) { ?>
                 <div class="type-ban" data-id="<?= $user['user_id']; ?>" data-type="user">
-                  <span class="red"><?= lang('unban'); ?></span>
+                  <span class="red"><?= Translate::get('unban'); ?></span>
                 </div>
               <?php } else { ?>
                 <div class="type-ban" data-id="<?= $user['user_id']; ?>" data-type="user">
-                  <?= lang('ban it'); ?>
+                  <?= Translate::get('ban it'); ?>
                 </div>
               <?php } ?>
             <?php } else { ?>
@@ -70,7 +76,7 @@
           </td>
           <td class="center">
             <?php if ($user['user_trust_level'] != 5) { ?>
-              <a title="<?= lang('edit'); ?>" href="/admin/user/<?= $user['user_id']; ?>/edit">
+              <a title="<?= Translate::get('edit'); ?>" href="/admin/user/<?= $user['user_id']; ?>/edit">
                 <i class="bi bi-pencil size-15"></i>
               </a>
             <?php } else { ?>

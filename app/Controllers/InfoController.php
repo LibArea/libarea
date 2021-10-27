@@ -3,11 +3,11 @@
 namespace App\Controllers;
 
 use Hleb\Scheme\App\Controllers\MainController;
-use Content, Base;
+use Content, Base, Translate, Config;
 
 class InfoController extends MainController
 {
-    static protected $path  = HLEB_GLOBAL_DIRECTORY . '/resources/views/' . PR_VIEW_DIR;
+    static protected $path  = HLEB_GLOBAL_DIRECTORY . '/resources/views/';
 
     private $uid;
 
@@ -19,7 +19,7 @@ class InfoController extends MainController
     // Далее методы по названию страниц
     public function index()
     {
-        $text = file_get_contents(static::$path . '/info/md/index.md');
+        $text = file_get_contents(static::$path . Config::get('general.template') . '/info/md/index.md');
 
         $m = [
             'og'         => false,
@@ -31,7 +31,7 @@ class InfoController extends MainController
         return view(
             '/info/index',
             [
-                'meta'  => meta($m, lang('info'), lang('info-desc')),
+                'meta'  => meta($m, Translate::get('info'), Translate::get('info-desc')),
                 'uid'   => $this->uid,
                 'data'  => [
                     'sheet'     => 'info',
@@ -43,7 +43,7 @@ class InfoController extends MainController
 
     public function privacy()
     {
-        $text = file_get_contents(static::$path . '/info/md/privacy.md');
+        $text = file_get_contents(static::$path . Config::get('general.template') . '/info/md/privacy.md');
 
         $m = [
             'og'         => false,
@@ -55,7 +55,7 @@ class InfoController extends MainController
         return view(
             '/info/privacy',
             [
-                'meta'  => meta($m, lang('privacy policy'), lang('privacy-desc')),
+                'meta'  => meta($m, Translate::get('privacy policy'), Translate::get('privacy-desc')),
                 'uid'   => $this->uid,
                 'data'  => [
                     'sheet'     => 'privacy',
@@ -77,7 +77,7 @@ class InfoController extends MainController
         return view(
             '/info/restriction',
             [
-                'meta'  => meta($m, lang('restriction'), lang('the profile is being checked')),
+                'meta'  => meta($m, Translate::get('restriction'), Translate::get('the profile is being checked')),
                 'uid'   => $this->uid,
                 'data'  => [
                     'sheet'  => 'restriction',

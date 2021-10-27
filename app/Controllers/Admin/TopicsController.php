@@ -5,7 +5,7 @@ namespace App\Controllers\Admin;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\TopicModel;
-use Base;
+use Base, Translate;
 
 class TopicsController extends MainController
 {
@@ -19,7 +19,7 @@ class TopicsController extends MainController
         $pagesCount = TopicModel::getTopicsAllCount($uid['user_id'], $sheet);
         $topics     = TopicModel::getTopicsAll($page, $limit, $uid['user_id'], $sheet);
 
-        $meta = meta($m = [], lang('topics'));
+        $meta = meta($m = [], Translate::get('topics'));
         $data = [
             'sheet'         => $sheet == 'all' ? 'topics' : $sheet,
             'pagesCount'    => ceil($pagesCount / $limit),

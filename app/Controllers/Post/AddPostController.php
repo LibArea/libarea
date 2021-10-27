@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
 use App\Models\{NotificationsModel, SubscriptionModel, ActionModel, WebModel, PostModel, TopicModel};
-use Content, Base, UploadImage, Integration, Validation, SendEmail, UrlRecord, URLScraper, Config;
+use Content, Base, UploadImage, Integration, Validation, SendEmail, UrlRecord, URLScraper, Config, Translate;
 
 class AddPostController extends MainController
 {
@@ -35,7 +35,7 @@ class AddPostController extends MainController
         $topic_id   = Request::getInt('topic_id');
         $topic      = TopicModel::getTopic($topic_id, 'id');
 
-        $meta = meta($m = [], lang('add post'));
+        $meta = meta($m = [], Translate::get('add post'));
         
         return view('/post/add', ['meta' => $meta, 'uid' => $this->uid, 'data' => ['topic' => $topic]]);
     }
@@ -70,8 +70,8 @@ class AddPostController extends MainController
         Base::PageRedirection($topics, $redirect);
 
 
-        Validation::Limits($post_title, lang('title'), '6', '250', $redirect);
-        Validation::Limits($post_content, lang('the post'), '6', '25000', $redirect);
+        Validation::Limits($post_title, Translate::get('title'), '6', '250', $redirect);
+        Validation::Limits($post_content, Translate::get('the post'), '6', '25000', $redirect);
 
         if ($post_url) {
             // Поскольку это для поста, то получим превью 
@@ -120,12 +120,12 @@ class AddPostController extends MainController
             $all_count = ActionModel::ceneralContributionCount($this->uid['user_id']);
             if ($all_count < 2) {
                 ActionModel::addLimitingMode($this->uid['user_id']);
-                addMsg(lang('limiting-mode-1'), 'error');
+                addMsg(Translate::get('limiting-mode-1'), 'error');
                 redirect('/');
             }
 
             $post_published = 0;
-            addMsg(lang('post-audit'), 'error');
+            addMsg(Translate::get('post-audit'), 'error');
         }
 
         $data = [

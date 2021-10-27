@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
 use App\Models\{AnswerModel, PostModel};
-use Content, Base, Validation;
+use Content, Base, Validation, Translate;
 
 class EditAnswerController extends MainController
 {
@@ -32,7 +32,7 @@ class EditAnswerController extends MainController
         Request::getResources()->addBottomStyles('/assets/editor/editormd.css');
         Request::getResources()->addBottomScript('/assets/editor/meditor.min.js');
  
-        $meta = meta($m =[], lang('edit answer'));
+        $meta = meta($m =[], Translate::get('edit answer'));
         $data = [
             'answer_id'         => $answer['answer_id'],
             'post_id'           => $post['post_id'],
@@ -64,7 +64,7 @@ class EditAnswerController extends MainController
         }
         
         $url = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
-        Validation::Limits($answer_content, lang('bodies'), '6', '5000', '/' . $url);
+        Validation::Limits($answer_content, Translate::get('bodies'), '6', '5000', '/' . $url);
 
         $answer_content = Content::change($answer_content);
 

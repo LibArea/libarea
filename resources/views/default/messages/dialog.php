@@ -1,13 +1,19 @@
 <main class="col-span-9 mb-col-12">
   <div class="bg-white br-rd5 border-box-1 pt5 pr15 pb5 pl15">
-    <?= breadcrumb('/', lang('home'), getUrlByName('user', ['login' => $uid['user_login']]) . '/messages', lang('all messages'), $data['h1']); ?>
+    <?= breadcrumb(
+      '/',
+      Translate::get('home'),
+      getUrlByName('user', ['login' => $uid['user_login']]) . '/messages',
+      Translate::get('all messages'),
+      $data['h1']
+    ); ?>
 
     <form action="/messages/send" method="post">
       <?= csrf_field() ?>
       <input type="hidden" name="recipient" value="<?= $data['recipient_user']['user_id']; ?>" />
-      <textarea rows="3" id="message" class="mess" placeholder="<?= lang('write'); ?>..." type="text" name="content" /></textarea>
+      <textarea rows="3" id="message" class="mess" placeholder="<?= Translate::get('write'); ?>..." type="text" name="content" /></textarea>
       <p>
-        <input type="submit" name="submit" value="<?= lang('reply'); ?>" class="button block br-rd5 white">
+        <input type="submit" name="submit" value="<?= Translate::get('reply'); ?>" class="button block br-rd5 white">
       </p>
     </form>
 
@@ -35,7 +41,7 @@
               <div class="size-14 gray mt5">
                 <?= $val['message_add_time']; ?>
                 <?php if ($val['message_receipt'] and $val['message_sender_id'] == $uid['user_id']) { ?>
-                  <?= lang('it was read'); ?> (<?= $val['message_receipt']; ?>)
+                  <?= Translate::get('it was read'); ?> (<?= $val['message_receipt']; ?>)
                 <?php } ?>
               </div>
               </div>
@@ -44,4 +50,4 @@
         <?php } ?>
         </div>
 </main>
-<?= includeTemplate('/_block/aside-lang', ['lang' => lang('under development')]); ?>
+<?= includeTemplate('/_block/aside-lang', ['lang' => Translate::get('under development')]); ?>

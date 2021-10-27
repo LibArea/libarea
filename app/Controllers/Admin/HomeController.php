@@ -5,7 +5,7 @@ namespace App\Controllers\Admin;
 use Hleb\Scheme\App\Controllers\MainController;
 use App\Models\{HomeModel, AnswerModel, CommentModel, AgentModel, WebModel, TopicModel};
 use App\Models\User\UserModel;
-use Base;
+use Base, Translate;
 
 class HomeController extends MainController
 {
@@ -15,7 +15,7 @@ class HomeController extends MainController
         $size   = disk_total_space(HLEB_GLOBAL_DIRECTORY);
         $bytes  = number_format($size / 1048576, 2) . ' MB';
 
-        $meta = meta($m = [], lang('admin'));
+        $meta = meta($m = [], Translate::get('admin'));
         $data  = [
             'topics_count'      => TopicModel::getTopicsAllCount($uid['user_id'], 'all'),
             'posts_count'       => HomeModel::feedCount([], $uid, 'all'),

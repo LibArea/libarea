@@ -5,7 +5,7 @@ namespace App\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\SearchModel;
-use Content, Config, Base, Validation;
+use Content, Config, Base, Validation, Translate;
 
 class SearchController extends MainController
 {
@@ -21,7 +21,7 @@ class SearchController extends MainController
 
             if (!empty($query)) {
 
-                Validation::Limits($query, lang('too short'), '3', '128', '/search');
+                Validation::Limits($query, Translate::get('too short'), '3', '128', '/search');
 
                 if (Config::get('general.search') == 0) {
                     $qa     =  SearchModel::getSearch($query);
@@ -43,12 +43,12 @@ class SearchController extends MainController
                     }
                 }
             } else {
-                addMsg(lang('empty request'), 'error');
+                addMsg(Translate::get('empty request'), 'error');
                 redirect(getUrlByName('search'));
             }
         }
 
-        $meta = meta($m = [], lang('search'));
+        $meta = meta($m = [], Translate::get('search'));
         $data = [
             'result'    => $result,
             'query'     => $query,

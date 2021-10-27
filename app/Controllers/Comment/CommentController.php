@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
 use App\Models\CommentModel;
-use Content, Base;
+use Content, Base, Translate;
 
 class CommentController extends MainController
 {
@@ -34,7 +34,7 @@ class CommentController extends MainController
             'imgurl'     => false,
             'url'        => getUrlByName('comments'),
         ];
-        $meta = meta($m, lang('all comments'), lang('comments-desc'));
+        $meta = meta($m, Translate::get('all comments'), Translate::get('comments-desc'));
 
         $data = [
             'pagesCount'    => ceil($pagesCount / $limit),
@@ -68,7 +68,7 @@ class CommentController extends MainController
             'imgurl'     => false,
             'url'        => getUrlByName('comments.user', ['login' => $login]),
         ];
-        $meta = meta($m, lang('comments-n') . ' ' . $login, lang('comments-n') . ' ' . $login);
+        $meta = meta($m, Translate::get('comments-n') . ' ' . $login, Translate::get('comments-n') . ' ' . $login);
 
         $data = [
             'sheet'         => 'user-comments',

@@ -2,14 +2,20 @@
   <?= includeTemplate('/admin/admin-menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-10 mb-col-12">
-  <?= breadcrumb('/admin', lang('admin'), '/admin/users', lang('users'), lang('edit user')); ?>
+  <?= breadcrumb(
+    '/admin',
+    Translate::get('admin'),
+    '/admin/users',
+    Translate::get('users'),
+    Translate::get('edit user')
+  ); ?>
 
   <div class="box badges">
     <form action="/admin/user/edit/<?= $data['user']['user_id']; ?>" method="post">
       <?= csrf_field() ?>
       <?php if ($data['user']['user_cover_art'] != 'cover_art.jpeg') { ?>
         <a class="right size-13" href="<?= getUrlByName('user', ['login' => $data['user']['user_login']]); ?>/delete/cover">
-          <?= lang('remove'); ?>
+          <?= Translate::get('remove'); ?>
         </a>
         <br>
       <?php } ?>
@@ -26,11 +32,11 @@
         <?php if ($data['user']['user_trust_level'] != 5) { ?>
           <?php if ($data['user']['isBan']) { ?>
             <span class="type-ban" data-id="<?= $data['user']['user_id']; ?>" data-type="user">
-              <span class="red"><?= lang('unban'); ?></span>
+              <span class="red"><?= Translate::get('unban'); ?></span>
             </span>
           <?php } else { ?>
             <span class="type-ban" data-id="<?= $data['user']['user_id']; ?>" data-type="user">
-              <span class="green">+ <?= lang('ban it'); ?></span>
+              <span class="green">+ <?= Translate::get('ban it'); ?></span>
             </span>
           <?php } ?>
         <?php } else { ?>
@@ -41,44 +47,44 @@
         <i class="bi bi-eye"></i> <?= $data['user']['user_hits_count']; ?>
       </div>
       <div class="mb20">
-        <label class="block" for="post_title"><?= lang('sign up'); ?></label>
+        <label class="block" for="post_title"><?= Translate::get('sign up'); ?></label>
         <?= $data['user']['user_created_at']; ?> |
         <?= $data['user']['user_reg_ip']; ?>
         <?php if ($data['user']['duplicat_ip_reg'] > 1) { ?>
           <sup class="red">(<?= $data['user']['duplicat_ip_reg']; ?>)</sup>
         <?php } ?>
-        (<?= lang('ed') ?>. <?= $data['user']['user_updated_at']; ?>)
+        (<?= Translate::get('ed') ?>. <?= $data['user']['user_updated_at']; ?>)
       </div>
       <hr>
       <div class="mb20">
         <?php if ($data['user']['user_limiting_mode'] == 1) { ?>
-          <span class="red"><?= lang('dumb mode'); ?>!</span><br>
+          <span class="red"><?= Translate::get('dumb mode'); ?>!</span><br>
         <?php } ?>
         <label class="block" for="post_content">
-          <?= lang('dumb mode'); ?>?
+          <?= Translate::get('dumb mode'); ?>?
         </label>
-        <input type="radio" name="limiting_mode" <?php if ($data['user']['user_limiting_mode'] == 0) { ?>checked<?php } ?> value="0"> <?= lang('no'); ?>
-        <input type="radio" name="limiting_mode" <?php if ($data['user']['user_limiting_mode'] == 1) { ?>checked<?php } ?> value="1"> <?= lang('yes'); ?>
+        <input type="radio" name="limiting_mode" <?php if ($data['user']['user_limiting_mode'] == 0) { ?>checked<?php } ?> value="0"> <?= Translate::get('no'); ?>
+        <input type="radio" name="limiting_mode" <?php if ($data['user']['user_limiting_mode'] == 1) { ?>checked<?php } ?> value="1"> <?= Translate::get('yes'); ?>
       </div>
       <hr>
       <div class="mb20">
         <?php if ($data['count']['count_posts'] != 0) { ?>
-          <label class="required"><?= lang('posts-m'); ?>:</label>
-          <a target="_blank" rel="noopener noreferrer" title="<?= lang('posts-m'); ?> <?= $data['user']['user_login']; ?>" href="<?= getUrlByName('posts.user', ['login' => $data['user']['user_login']]); ?>">
+          <label class="required"><?= Translate::get('posts-m'); ?>:</label>
+          <a target="_blank" rel="noopener noreferrer" title="<?= Translate::get('posts-m'); ?> <?= $data['user']['user_login']; ?>" href="<?= getUrlByName('posts.user', ['login' => $data['user']['user_login']]); ?>">
             <?= $data['count']['count_posts']; ?>
           </a> <br>
         <?php } ?>
         <?php if ($data['count']['count_answers'] != 0) { ?>
-          <label class="required"><?= lang('answers'); ?>:</label>
-          <a target="_blank" rel="noopener noreferrer" title="<?= lang('answers'); ?> <?= $data['user']['user_login']; ?>" href="<?= getUrlByName('answers.user', ['login' => $data['user']['user_login']]); ?>">
+          <label class="required"><?= Translate::get('answers'); ?>:</label>
+          <a target="_blank" rel="noopener noreferrer" title="<?= Translate::get('answers'); ?> <?= $data['user']['user_login']; ?>" href="<?= getUrlByName('answers.user', ['login' => $data['user']['user_login']]); ?>">
             <?= $data['count']['count_answers']; ?>
           </a> <br>
         <?php } else { ?>
           ---
         <?php } ?>
         <?php if ($data['count']['count_comments'] != 0) { ?>
-          <label class="required"><?= lang('comments'); ?>:</label>
-          <a target="_blank" rel="noopener noreferrer" title="<?= lang('comments'); ?> <?= $data['user']['user_login']; ?>" href="<?= getUrlByName('comments.user', ['login' => $data['user']['user_login']]); ?>">
+          <label class="required"><?= Translate::get('comments'); ?>:</label>
+          <a target="_blank" rel="noopener noreferrer" title="<?= Translate::get('comments'); ?> <?= $data['user']['user_login']; ?>" href="<?= getUrlByName('comments.user', ['login' => $data['user']['user_login']]); ?>">
             <?= $data['count']['count_comments']; ?>
           </a> <br>
         <?php } else { ?>
@@ -88,11 +94,11 @@
       <hr>
       <div class="mb20">
         <a class="size-14" href="/admin/badges/user/add/<?= $data['user']['user_id']; ?>">
-          + <?= lang('reward the user'); ?>
+          + <?= Translate::get('reward the user'); ?>
         </a>
       </div>
       <div class="mb20">
-        <label class="block" for="post_title"><?= lang('badges'); ?></label>
+        <label class="block" for="post_title"><?= Translate::get('badges'); ?></label>
         <?php if ($data['user']['badges']) { ?>
           <?php foreach ($data['user']['badges'] as $badge) { ?>
             <?= $badge['badge_icon']; ?>
@@ -102,7 +108,7 @@
         <?php } ?>
       </div>
       <div class="mb20">
-        <label class="block" for="post_title"><?= lang('whisper'); ?></label>
+        <label class="block" for="post_title"><?= Translate::get('whisper'); ?></label>
         <input class="w-100 h30" type="text" name="whisper" value="<?= $data['user']['user_whisper']; ?>">
       </div>
       <hr>
@@ -111,9 +117,9 @@
         <input class="w-100 h30" type="text" name="email" value="<?= $data['user']['user_email']; ?>" required>
       </div>
       <div class="mb20">
-        <label class="block" for="post_content"><?= lang('email activated'); ?>?</label>
-        <input type="radio" name="activated" <?php if ($data['user']['user_activated'] == 0) { ?>checked<?php } ?> value="0"> <?= lang('no'); ?>
-        <input type="radio" name="activated" <?php if ($data['user']['user_activated'] == 1) { ?>checked<?php } ?> value="1"> <?= lang('yes'); ?>
+        <label class="block" for="post_content"><?= Translate::get('email activated'); ?>?</label>
+        <input type="radio" name="activated" <?php if ($data['user']['user_activated'] == 0) { ?>checked<?php } ?> value="0"> <?= Translate::get('no'); ?>
+        <input type="radio" name="activated" <?php if ($data['user']['user_activated'] == 1) { ?>checked<?php } ?> value="1"> <?= Translate::get('yes'); ?>
       </div>
       <hr>
       <div class="mb20">
@@ -127,19 +133,19 @@
         </select>
       </div>
       <div class="mb20">
-        <label class="block" for="post_title"><?= lang('nickname'); ?>: /u/***</label>
+        <label class="block" for="post_title"><?= Translate::get('nickname'); ?>: /u/***</label>
         <input class="w-100 h30" type="text" name="login" value="<?= $data['user']['user_login']; ?>" required>
       </div>
       <div class="mb20">
-        <label class="block" for="post_title"><?= lang('name'); ?></label>
+        <label class="block" for="post_title"><?= Translate::get('name'); ?></label>
         <input class="w-100 h30" type="text" name="name" value="<?= $data['user']['user_name']; ?>">
       </div>
       <div class="mb20">
-        <label class="block" for="post_title"><?= lang('about me'); ?></label>
+        <label class="block" for="post_title"><?= Translate::get('about me'); ?></label>
         <textarea class="add" name="about"><?= $data['user']['user_about']; ?></textarea>
       </div>
 
-      <h3><?= lang('contacts'); ?></h3>
+      <h3><?= Translate::get('contacts'); ?></h3>
       <?php foreach (Config::get('fields-profile') as $block) { ?>
         <div class="mb20">
           <label class="block" for="post_title"><?= $block['lang']; ?></label>
@@ -150,7 +156,7 @@
         </div>
       <?php } ?>
 
-      <input type="submit" class="button block br-rd5 white" name="submit" value="<?= lang('edit'); ?>" />
+      <input type="submit" class="button block br-rd5 white" name="submit" value="<?= Translate::get('edit'); ?>" />
     </form>
   </div>
 </main>

@@ -2,12 +2,18 @@
   <?= includeTemplate('/admin/admin-menu', ['uid' => $uid, 'sheet' => $data['sheet']]); ?>
 </div>
 <main class="col-span-10 mb-col-12">
-  <?= breadcrumb('/admin', lang('admin'), null, null, lang('users')); ?>
+  <?= breadcrumb(
+    '/admin',
+    Translate::get('admin'),
+    null,
+    null,
+    Translate::get('users')
+  ); ?>
   <div class="bg-white flex flex-row items-center justify-between border-box-1 p15 mb15">
-    <p class="m0"><?= lang($data['sheet']); ?></p>
+    <p class="m0"><?= Translate::get($data['sheet']); ?></p>
     <?php $pages = [
-      ['id' => 'users', 'url' => '/admin/users', 'content' => lang('all'), 'icon' => 'bi bi-record-circle'],
-      ['id' => 'users-ban', 'url' => '/admin/users/ban', 'content' => lang('banned'), 'icon' => 'bi bi-x-circle'],
+      ['id' => 'users', 'url' => '/admin/users', 'content' => Translate::get('all'), 'icon' => 'bi bi-record-circle'],
+      ['id' => 'users-ban', 'url' => '/admin/users/ban', 'content' => Translate::get('banned'), 'icon' => 'bi bi-x-circle'],
     ];
     includeTemplate('/_block/tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
     ?>
@@ -18,12 +24,12 @@
       <table>
         <thead>
           <th>N</th>
-          <th><?= lang('avatar'); ?></th>
-          <th><?= lang('information'); ?></th>
-          <th>IP <?= lang('registrations'); ?></th>
-          <th><?= lang('last'); ?></th>
+          <th><?= Translate::get('avatar'); ?></th>
+          <th><?= Translate::get('information'); ?></th>
+          <th>IP <?= Translate::get('registrations'); ?></th>
+          <th><?= Translate::get('last'); ?></th>
           <th>Ban</th>
-          <th><?= lang('action'); ?></th>
+          <th><?= Translate::get('action'); ?></th>
         </thead>
         <?php foreach ($data['alluser'] as $user) {  ?>
           <tr>
@@ -48,13 +54,13 @@
               <div class="size-13">
                 <?= $user['user_email']; ?>
                 <?php if ($user['user_activated'] == 1) { ?>
-                  <div class="gray-light"><?= lang('email activated'); ?></div>
+                  <div class="gray-light"><?= Translate::get('email activated'); ?></div>
                 <?php } else { ?>
-                  <div class="red"><?= lang('not activated'); ?> e-mail</div>
+                  <div class="red"><?= Translate::get('not activated'); ?> e-mail</div>
                 <?php } ?>
               </div>
               <?php if ($user['user_limiting_mode'] == 1) { ?>
-                <div class="red"><?= lang('dumb mode'); ?></div>
+                <div class="red"><?= Translate::get('dumb mode'); ?></div>
               <?php } ?>
               <?php if (!empty($user['isBan']['banlist_int_num'])) { ?>
                 bans: <?= $user['isBan']['banlist_int_num']; ?>
@@ -85,11 +91,11 @@
               <?php if ($user['user_trust_level'] != 5) { ?>
                 <?php if ($user['isBan']) { ?>
                   <span class="type-ban" data-id="<?= $user['user_id']; ?>" data-type="user">
-                    <span class="red"><?= lang('unban'); ?></span>
+                    <span class="red"><?= Translate::get('unban'); ?></span>
                   </span>
                 <?php } else { ?>
                   <span class="type-ban" data-id="<?= $user['user_id']; ?>" data-type="user">
-                    <?= lang('ban it'); ?>
+                    <?= Translate::get('ban it'); ?>
                   </span>
                 <?php } ?>
               <?php } else { ?>
@@ -97,7 +103,7 @@
               <?php } ?>
             </td>
             <td class="center">
-              <a title="<?= lang('edit'); ?>" href="/admin/users/<?= $user['user_id']; ?>/edit">
+              <a title="<?= Translate::get('edit'); ?>" href="/admin/users/<?= $user['user_id']; ?>/edit">
                 <i class="bi bi-pencil size-15"></i>
               </a>
             </td>
@@ -105,7 +111,7 @@
         <?php } ?>
       </table>
     <?php } else { ?>
-      <?= includeTemplate('/_block/no-content', ['lang' => 'no users']); ?>
+      <?= no_content(Translate::get('no users'), 'bi bi-info-lg'); ?>
     <?php } ?>
     <?= pagination($data['pNum'], $data['pagesCount'], null, '/admin/users'); ?>
   </div>

@@ -1,5 +1,7 @@
 <?php
-return [
+$data = [
     'home'              => 'Heim',
     'city'              => 'Stadt',
 ];
+
+return $data;

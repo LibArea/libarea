@@ -3,7 +3,13 @@
 </div>
 <main class="col-span-7 mb-col-12">
   <div class="bg-white br-rd5 border-box-1 pt5 pr15 pb5 pl15">
-    <?= breadcrumb('/', lang('home'), null,  null, lang('all comments')); ?>
+    <?= breadcrumb(
+      '/',
+      Translate::get('home'),
+      null,
+      null,
+      Translate::get('all comments')
+    ); ?>
   </div>
   <?php if (!empty($data['comments'])) { ?>
     <?php foreach ($data['comments'] as $comment) { ?>
@@ -30,7 +36,7 @@
         <?php } else { ?>
           <div class="bg-red-300 mb20">
             <div class="voters"></div>
-            ~ <?= lang('comment deleted'); ?>
+            ~ <?= Translate::get('comment deleted'); ?>
           </div>
         <?php } ?>
       </div>
@@ -39,7 +45,7 @@
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/comments'); ?>
 
   <?php } else { ?>
-    <?= includeTemplate('/_block/no-content', ['lang' => 'there are no comments']); ?>
+    <?= no_content(Translate::get('there are no comments'), 'bi bi-info-lg'); ?>
   <?php } ?>
 </main>
-<?= includeTemplate('/_block/aside-lang', ['lang' => lang('comments-desc')]); ?>
+<?= includeTemplate('/_block/aside-lang', ['lang' => Translate::get('comments-desc')]); ?>

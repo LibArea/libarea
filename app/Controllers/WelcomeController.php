@@ -3,15 +3,15 @@
 namespace App\Controllers;
 
 use Hleb\Scheme\App\Controllers\MainController;
-use Content, Base;
+use Content, Base, Translate;
 
 class WelcomeController extends MainController
 {
     public function index()
     {
-        $meta = meta($m = [], lang('welcome'));
+        $meta = meta($m = [], Translate::get('welcome'));
         $data = [
-            'content'   => Content::text(lang('welcome-text'), 'text'),
+            'content'   => Content::text(Translate::get('welcome-text'), 'text'),
         ];
 
         return view('/welcome/index', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);

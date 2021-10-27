@@ -5,7 +5,7 @@ namespace App\Controllers\Admin;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\ContentModel;
-use Base;
+use Base, Translate;
 
 class WordsController extends MainController
 {
@@ -18,7 +18,7 @@ class WordsController extends MainController
 
         Request::getResources()->addBottomScript('/assets/js/admin.js');
 
-        $meta = meta($m = [], lang('stop words'));
+        $meta = meta($m = [], Translate::get('stop words'));
         $data = [
             'words'     => $words,
             'sheet'     => $sheet == 'all' ? 'words' : $sheet,
@@ -30,7 +30,7 @@ class WordsController extends MainController
     // Форма добавления стоп-слова
     public function addPage()
     {
-        $meta = meta($m = [], lang('add a stop word'));
+        $meta = meta($m = [], Translate::get('add a stop word'));
         $data = [
             'sheet'         => 'words',
         ];

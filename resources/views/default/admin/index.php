@@ -2,50 +2,56 @@
   <?= includeTemplate('/admin/admin-menu', ['uid' => $uid, 'sheet' => $data['sheet']]); ?>
 </div>
 <main class="col-span-10 mb-col-12">
-  <?= breadcrumb('/admin', lang('admin'), null, null, lang('admin')); ?>
+  <?= breadcrumb(
+    '/admin',
+    Translate::get('admin'),
+    null,
+    null,
+    Translate::get('admin')
+  ); ?>
   <div class="bg-white flex flex-row items-center justify-between border-box-1 br-rd5 p15 mb15">
-    <p class="m0"><?= lang($data['sheet']); ?></p>
+    <p class="m0"><?= Translate::get($data['sheet']); ?></p>
   </div>
 
   <div class="grid grid-cols-12 gap-4 pr10 pl10 justify-between">
     <div class="col-span-2 bg-yellow-500 p10">
-      <a class="white gray-hover size-21" title="<?= lang('posts'); ?>" rel="noreferrer gray" href="<?= getUrlByName('admin.posts'); ?>">
+      <a class="white gray-hover size-21" title="<?= Translate::get('posts'); ?>" rel="noreferrer gray" href="<?= getUrlByName('admin.posts'); ?>">
         <i class="bi bi-journal-text white right"></i>
         <?= $data['posts_count']; ?>
-        <div class="size-15"><?= lang('posts'); ?></div>
+        <div class="size-15"><?= Translate::get('posts'); ?></div>
       </a>
     </div>
     <div class="col-span-2 bg-indigo-300 p10">
-      <a class="white gray-hover size-21" title="<?= lang('answers-n'); ?>" rel="noreferrer gray" href="<?= getUrlByName('admin.answers'); ?>">
+      <a class="white gray-hover size-21" title="<?= Translate::get('answers-n'); ?>" rel="noreferrer gray" href="<?= getUrlByName('admin.answers'); ?>">
         <i class="bi bi-chat-left-text white right"></i>
         <?= $data['answers_count']; ?>
-        <div class="size-15"><?= lang('answers-n'); ?></div>
+        <div class="size-15"><?= Translate::get('answers-n'); ?></div>
       </a>
     </div>
     <div class="col-span-2 bg-green-500 p10">
-      <a class="white gray-hover size-21" title="<?= lang('users'); ?>" rel="noreferrer" href="<?= getUrlByName('admin.users'); ?>">
+      <a class="white gray-hover size-21" title="<?= Translate::get('users'); ?>" rel="noreferrer" href="<?= getUrlByName('admin.users'); ?>">
         <i class="bi bi-people white right"></i>
         <?= $data['users_count']; ?>
-        <div class="size-15"><?= lang('users'); ?></div>
+        <div class="size-15"><?= Translate::get('users'); ?></div>
       </a>
     </div>
     <div class="col-span-3 bg-blue-400 p10">
-      <a class="white gray-hover size-21" title="<?= lang('comments-n'); ?>" rel="noreferrer" href="<?= getUrlByName('admin.comments'); ?>">
+      <a class="white gray-hover size-21" title="<?= Translate::get('comments-n'); ?>" rel="noreferrer" href="<?= getUrlByName('admin.comments'); ?>">
         <i class="bi bi-chat-dots white right"></i>
         <?= $data['comments_count']; ?>
-        <div class="size-15"><?= lang('comments-n'); ?></div>
+        <div class="size-15"><?= Translate::get('comments-n'); ?></div>
       </a>
     </div>
     <div class="col-span-3 bg-gray-700 p10">
-      <a class="white gray-hover size-21" title="<?= lang('comments-n'); ?>" rel="noreferrer" href="<?= getUrlByName('admin.topics'); ?>">
+      <a class="white gray-hover size-21" title="<?= Translate::get('comments-n'); ?>" rel="noreferrer" href="<?= getUrlByName('admin.topics'); ?>">
         <i class="bi bi-columns-gap white right"></i>
         <?= $data['topics_count']; ?>
-        <div class="size-15"><?= lang('topics'); ?></div>
+        <div class="size-15"><?= Translate::get('topics'); ?></div>
       </a>
     </div>
   </div>
   <div class="white-box mt10 pt5 pr15 pb5 pl15">
-    <h4 class="mt5 mb5"><?= lang('users'); ?></h4>
+    <h4 class="mt5 mb5"><?= Translate::get('users'); ?></h4>
     <?php foreach ($data['last_visit'] as $user) { ?>
       <div class="gray size-15">
         id<?= $user['user_id']; ?>
@@ -56,7 +62,7 @@
   </div>
 
   <div class="white-box mt10 pt5 pr15 pb5 pl15">
-    <h4 class="mt5 mb5"><?= lang('useful resources'); ?></h4>
+    <h4 class="mt5 mb5"><?= Translate::get('useful resources'); ?></h4>
     <i class="bi bi-link-45deg mr5 gray-light"></i> <a rel="noreferrer" href="https://agouti.ru">Agouti.ru</a></br>
     <i class="bi bi-github mr5 gray-light"></i> <a rel="noreferrer" href="https://discord.gg/dw47aNx5nU">Discord</a></br>
     </ul>
@@ -70,7 +76,7 @@
       <?= PHP_VERSION; ?>
     </div>
     <div class="mb20">
-      <label for="name"><?= lang('freely'); ?>:</label>
+      <label for="name"><?= Translate::get('freely'); ?>:</label>
       <?= $data['bytes']; ?>
     </div>
   </div>
