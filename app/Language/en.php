@@ -223,7 +223,7 @@ $data = [
     'de-language'           => 'German (DE)',
     'fr-language'           => 'French (FR)',
     'zh-language'           => 'Chinese (ZH)',
-    'md-language'           => 'Moldovan (FR)',
+    'md-language'           => 'Moldovan (MD)',
 
     'repeat the password'   => 'Repeat password',
     'the post is closed'    => 'Post closed',
@@ -238,18 +238,8 @@ $data = [
     'no-invate-txt'         => 'Еще не пользователь? Регистрация осуществляется только по приглашению для борьбы со спамом и повышения ответственности. Если вы знаете <a href="/users">текущего пользователя</a> сайта, попросите у него приглашение.',
 
     /* Дата и время + события*/
-    'january'               => 'january',
-    'february'              => 'february',
-    'martha'                => 'martha',
-    'april'                 => 'april',
-    'may'                   => 'may',
-    'june'                  => 'june',
-    'july'                  => 'july',
-    'august'                => 'august',
-    'september'             => 'september',
-    'october'               => 'october',
-    'november'              => 'november',
-    'december'              => 'december',
+    'months' => ['', => 'january','february','martha','april','may','june','july','august','september','october','november','december'],
+    
     'today'                 => 'today',
     'yesterday'             => 'Yesterday',
 

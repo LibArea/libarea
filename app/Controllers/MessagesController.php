@@ -60,13 +60,17 @@ class MessagesController extends MainController
             }
         }
 
-        $meta = meta($m = [], Translate::get('private messages'));
-        $data = [
-            'sheet'         => 'all-mess',
-            'messages'      => $result,
-        ];
-
-        return view('/messages/messages', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+        return view(
+            '/messages/messages',
+            [
+                'meta'  => meta($m = [], Translate::get('private messages')),
+                'uid'   => $uid,
+                'data'  => [
+                    'sheet'         => 'all-mess',
+                    'messages'      => $result,
+                ]
+            ]
+        );
     }
 
     public function dialog()
@@ -109,15 +113,19 @@ class MessagesController extends MainController
             }
         }
 
-        $meta = meta($m = [], Translate::get('dialogue'));
-        $data = [
-            'h1'                => Translate::get('dialogue') . ' - ' . $list[$key]['user_login'],
-            'sheet'             => 'dialog',
-            'list'              => $list,
-            'recipient_user'    => $recipient_user,
-        ];
-
-        return view('/messages/dialog', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+        return view(
+            '/messages/dialog',
+            [
+                'meta'  => meta($m = [], Translate::get('dialogue')),
+                'uid'   => $uid,
+                'data'  => [
+                    'h1'                => Translate::get('dialogue') . ' - ' . $list[$key]['user_login'],
+                    'sheet'             => 'dialog',
+                    'list'              => $list,
+                    'recipient_user'    => $recipient_user,
+                ]
+            ]
+        );
     }
 
     // Форма отправки из профиля
@@ -136,12 +144,16 @@ class MessagesController extends MainController
             redirect('/');
         }
 
-        $meta = meta($m = [], Translate::get('send a message'));
-        $data = [
-            'recipient_uid' => $user['user_id'],
-        ];
-
-        return view('/messages/user-add-messages', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+        return view(
+            '/messages/user-add-messages',
+            [
+                'meta'  => meta($m = [], Translate::get('send a message')),
+                'uid'   => $uid,
+                'data'  => [
+                    'recipient_uid' => $user['user_id'],
+                ]
+            ]
+        );
     }
 
     // Отправка сообщения участнику

@@ -9,11 +9,15 @@ class WelcomeController extends MainController
 {
     public function index()
     {
-        $meta = meta($m = [], Translate::get('welcome'));
-        $data = [
-            'content'   => Content::text(Translate::get('welcome-text'), 'text'),
-        ];
-
-        return view('/welcome/index', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
+        return view(
+            '/welcome/index',
+            [
+                'meta'  => meta($m = [], Translate::get('welcome')),
+                'uid'   => Base::getUid(),
+                'data'  => [
+                    'content'   => Content::text(Translate::get('welcome-text'), 'text'),
+                ]
+            ]
+        );
     }
 }

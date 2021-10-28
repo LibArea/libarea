@@ -91,21 +91,8 @@ function thumbs_img($url_domain, $alt)
 // Localization of dates and events....
 function lang_date($string)
 {
-    $monn = array(
-        '',
-        Translate::get('january'),
-        Translate::get('february'),
-        Translate::get('martha'),
-        Translate::get('april'),
-        Translate::get('may'),
-        Translate::get('june'),
-        Translate::get('july'),
-        Translate::get('august'),
-        Translate::get('september'),
-        Translate::get('october'),
-        Translate::get('november'),
-        Translate::get('december')
-    );
+    $months = Translate::get('months');   
+
     //Разбиваем дату в массив
     $a = preg_split('/[^\d]/', $string);
 
@@ -122,7 +109,7 @@ function lang_date($string)
         } else {
             //Если позже
             $mm = intval($a[1]);
-            return ($a[2] . " " . $monn[$mm] . " " . $a[0] . " " . $a[3] . ":" . $a[4]);
+            return ($a[2] . " " . $months[$mm] . " " . $a[0] . " " . $a[3] . ":" . $a[4]);
         }
     }
 }

@@ -212,7 +212,7 @@ $data = [
     'de-language'           => 'Germană (DE)',
     'fr-language'           => 'Franceză (FR)',
     'zh-language'           => 'Chineză (ZH)',
-    'md-language'           => 'Moldovenesc (FR)',
+    'md-language'           => 'Moldovenesc (MD)',
 
     'repeat the password'   => 'Repetati parola',
     'the post is closed'    => 'Postarea este închisă',
@@ -227,18 +227,8 @@ $data = [
     'no-invate-txt'         => 'Nu ești încă utilizator? Înregistrarea se face doar prin invitație pentru a combate spamul și a spori responsabilitatea. Dacă cunoașteți <a href="/users"> utilizatorul actual </a> al site-ului, solicitați-i o invitație.',
 
     /* Дата и время + события*/
-    'january'               => 'ianuarie',
-    'february'              => 'februarie',
-    'martha'                => 'martie',
-    'april'                 => 'aprilie',
-    'may'                   => 'mai',
-    'june'                  => 'iunie',
-    'july'                  => 'iulie',
-    'august'                => 'august',
-    'september'             => 'septembrie',
-    'october'               => 'octombrie',
-    'november'              => 'noiembrie',
-    'december'              => 'decembrie',
+    'months' => ['', 'ianuarie','februarie','martie','aprilie','mai','iunie','iulie','august','septembrie','octombrie','noiembrie','decembrie'],
+    
     'today'                 => 'Astazi',
     'yesterday'             => 'Ieri',
 
@@ -459,6 +449,11 @@ $data = [
     'topics-desc-my'        => 'Pagina subiectelor pe care le urmăresc',
     'topics-desc-new'       => 'Teme noi adăugate recent pe site. Abonați-vă la subiecte',
     'topic-subscription'    => 'Abonați-vă la spații și citiți-le în flux',
+    
+    'welcome-info' => '<p>Multumim pentru inregistrare! Aici veți găsi informații scurte despre cum să utilizați acest site. .</p>
+    <p>Acest site este format din <a href="/topics">Subiecte</a>.</p>
+    <p><i class="icon-lightbulb red"></i> Pentru a vedea postările din feed , <b>Ai nevoie  <a href="/topics">Abonati-va </a></b> pe subiecte care vă interesează .</p>
+    <p><img alt="Agouti" class="footer-img clear no-mob block" src="/assets/images/agouti_footer.gif"></p>',
 ];
 
 return $data;

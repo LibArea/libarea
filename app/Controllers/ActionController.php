@@ -64,24 +64,28 @@ class ActionController extends MainController
 
         $result = array();
         foreach ($moderations_log as $ind => $row) {
-            $row['mod_created_at']    = lang_date($row['mod_created_at']);
-            $result[$ind]         = $row;
+            $row['mod_created_at']  = lang_date($row['mod_created_at']);
+            $result[$ind]           = $row;
         }
 
-        $meta = meta($m = [], Translate::get('moderation log'));
-        $data = [
-            'moderations'   => $result,
-            'sheet'         => 'moderations',
-        ];
-
-        return view('/moderation/index', ['data' => $data, 'meta' => $meta, 'uid' => Base::getUid()]);
+        return view(
+            '/moderation/index',
+            [
+                'data' => [
+                    'moderations'   => $result,
+                    'sheet'         => 'moderations',
+                ],
+                'meta' => meta($m = [], Translate::get('moderation log')),
+                'uid' => Base::getUid()
+            ]
+        );
     }
 
     // Связанные посты и выбор автора
     public function select()
     {
-        $type   =  Request::get('type');
-        $search =  Request::getPost('searchTerm');
+        $type   = Request::get('type');
+        $search = Request::getPost('searchTerm');
         $search = preg_replace('/[^a-zA-ZА-Яа-я0-9 ]/ui', '', $search);
 
         return ActionModel::getSearch($search, $type);

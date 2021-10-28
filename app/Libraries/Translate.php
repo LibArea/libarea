@@ -31,7 +31,7 @@ class Translate
     // Подгружает языковые файлы
     public static function load(string $lang)
     {
-        if (isset(self::$langData[$lang])) { // print_r('-');
+        if (isset(self::$langData[$lang])) {
           return self::$langData;  
         }
         require_once __DIR__ . '/../Language/' . $lang . '.php';

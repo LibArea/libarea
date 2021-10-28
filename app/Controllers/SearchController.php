@@ -30,12 +30,12 @@ class SearchController extends MainController
                         $row['post_content']  = Content::text(cutWords($row['post_content'], 32, '...'), 'text');
                         $result[$ind]   = $row;
                     }
-                    $count  = count($qa); 
+                    $count  = count($qa);
                     $tags   = SearchModel::getSearchTags($query, 'mysql');
                 } else {
                     $qa     = SearchModel::getSearchPostServer($query);
                     $tags   = SearchModel::getSearchTags($query, 'server');
-                    $count  = count($qa); 
+                    $count  = count($qa);
                     $result = [];
                     foreach ($qa as $ind => $row) {
                         $row['_content'] = Content::noMarkdown($row['_content']);
@@ -48,14 +48,18 @@ class SearchController extends MainController
             }
         }
 
-        $meta = meta($m = [], Translate::get('search'));
-        $data = [
-            'result'    => $result,
-            'query'     => $query,
-            'count'     => $count ?? 0,
-            'tags'      => $tags,
-        ];
-
-        return view('/search/index', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
+        return view(
+            '/search/index',
+            [
+                'meta'  => meta($m = [], Translate::get('search')),
+                'uid'   => Base::getUid(),
+                'data'  => [
+                    'result'    => $result,
+                    'query'     => $query,
+                    'count'     => $count ?? 0,
+                    'tags'      => $tags,
+                ]
+            ]
+        );
     }
 }

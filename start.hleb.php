@@ -21,7 +21,7 @@
  | Изначально: true
  |
  */
-define('HLEB_PROJECT_DEBUG', true);
+define('HLEB_PROJECT_DEBUG', false);
 
 /*
  |-----------------------------------------------------------------------------

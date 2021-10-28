@@ -29,13 +29,17 @@ class NotificationsController extends MainController
             $result[$ind]           = $row;
         }
 
-        $meta = meta($m = [], Translate::get('notifications'));
-        $data = [
-            'sheet'         => 'notifications',
-            'notifications' => $result,
-        ];
-
-        return view('/notification/index', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+        return view(
+            '/notification/index',
+            [
+                'meta'  => meta($m = [], Translate::get('notifications')),
+                'uid'   => $uid,
+                'data'  => [
+                    'sheet'         => 'notifications',
+                    'notifications' => $result,
+                ]
+            ]
+        );
     }
 
     // Изменяем флаг подписки прочитан или нет (переход по ссылке)
