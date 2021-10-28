@@ -8,7 +8,7 @@
         <i class="bi bi-plus-lg middle"></i>
       </a>
     <?php } ?>
-    <h1 class="mb5"><?= Translate::get('domains-title'); ?></h1>
+    <h1 class="mt5 mb10 size-24 font-normal"><?= Translate::get('domains-title'); ?></h1>
     <div class="gray size-14 mb5"><?= Translate::get('under development'); ?>...</div>
 
     <?php if (!empty($data['links'])) { ?>

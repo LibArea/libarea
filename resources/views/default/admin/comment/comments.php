@@ -7,12 +7,12 @@
     Translate::get('admin'),
     null,
     null,
-    Translate::get('comments-n')
+    Translate::get('comments')
   ); ?>
   <div class="bg-white flex flex-row items-center justify-between border-box-1 br-rd5 p15 mb15">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
     <?php $pages = [
-      ['id' => 'comments-n', 'url' => '/admin/comments', 'content' => Translate::get('all'), 'icon' => 'bi bi-record-circle'],
+      ['id' => 'comments', 'url' => '/admin/comments', 'content' => Translate::get('all'), 'icon' => 'bi bi-record-circle'],
       ['id' => 'comments-ban', 'url' => '/admin/comments/ban', 'content' => Translate::get('deleted comments'), 'icon' => 'bi bi-x-circle'],
     ];
     includeTemplate('/_block/tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);

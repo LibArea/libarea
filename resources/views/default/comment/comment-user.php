@@ -8,7 +8,7 @@
       Translate::get('home'),
       getUrlByName('user', ['login' => Request::get('login')]),
       Translate::get('profile'),
-      Translate::get('comments-n') . ' ' . $data['user_login']
+      Translate::get('comments') . ' ' . $data['user_login']
     ); ?>
   </div>
   <?php if (!empty($data['comments'])) { ?>

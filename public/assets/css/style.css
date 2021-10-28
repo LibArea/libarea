@@ -298,12 +298,6 @@ img {
 .post-view.sticky { top: 75px; }
 a:hover > img { opacity: 0.8; }
 
-h1 {
-  font-weight: 400;
-  font-size: 1.2rem;
-  margin: 5px 0 10px 0;
-}
-
 code {
   color: #9b4f5e;
   background-color: #f5f2f0;

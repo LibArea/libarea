@@ -8,13 +8,13 @@
       <i class="bi bi-journal-text middle"></i>
       <span class="middle"><?= Translate::get('posts'); ?></span>
     </a>
-    <a title="<?= Translate::get('answers-n'); ?>" class="mb5 size-15 block gray<?php if ($sheet == 'user-answers') { ?> red<?php } ?>" href="<?= getUrlByName('answers.user', ['login' => Request::get('login')]); ?>">
+    <a title="<?= Translate::get('answers'); ?>" class="mb5 size-15 block gray<?php if ($sheet == 'user-answers') { ?> red<?php } ?>" href="<?= getUrlByName('answers.user', ['login' => Request::get('login')]); ?>">
       <i class="bi bi-chat-left-text middle"></i>
-      <span class="middle"><?= Translate::get('answers-n'); ?></span>
+      <span class="middle"><?= Translate::get('answers'); ?></span>
     </a>
-    <a title="<?= Translate::get('comments-n'); ?>" class="mb5 size-15 block gray<?php if ($sheet == 'user-comments') { ?> red<?php } ?>" href="<?= getUrlByName('comments.user', ['login' => Request::get('login')]); ?>">
+    <a title="<?= Translate::get('comments'); ?>" class="mb5 size-15 block gray<?php if ($sheet == 'user-comments') { ?> red<?php } ?>" href="<?= getUrlByName('comments.user', ['login' => Request::get('login')]); ?>">
       <i class="bi bi-chat-dots middle"></i>
-      <span class="middle"><?= Translate::get('comments-n'); ?></span>
+      <span class="middle"><?= Translate::get('comments'); ?></span>
     </a>
   </div>
 </div>

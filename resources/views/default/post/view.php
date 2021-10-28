@@ -3,7 +3,7 @@
   <article class="post-full border-box-1 br-rd5 bg-white<?php if ($post['post_is_deleted'] == 1) { ?> bg-red-300<?php } ?> mb15 pt0 pr5 pb5 pl15">
     <?php if ($post['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
       <div class="post-body">
-        <h1 class="title mb0 size-24">
+        <h1 class="title mb0 mt10 size-24">
           <?= $post['post_title']; ?>
           <?php if ($post['post_is_deleted'] == 1) { ?>
             <i class="bi bi-trash blue"></i>

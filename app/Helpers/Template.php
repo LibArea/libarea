@@ -1,4 +1,7 @@
 <?php
+
+//declare(strict_types = 1);
+
 // Topic for posts
 function html_topic($topic, $slug, $css)
 {
@@ -95,8 +98,8 @@ function lang_date($string)
 
     //Разбиваем дату в массив
     $a = preg_split('/[^\d]/', $string);
-
     $today = date('Ymd');  //20210421
+
     if (($a[0] . $a[1] . $a[2]) == $today) {
         //Если сегодня
         return (Translate::get('today') . ' ' . $a[3] . ':' . $a[4]);
@@ -114,18 +117,24 @@ function lang_date($string)
     }
 }
 
-// Declensions
-function word_form($num, $form_for_1, $form_for_2, $form_for_5)
+// @param array $words: array('пост', 'поста', 'постов')
+function num_word($value, $words, $show = true) 
 {
-    $num = abs($num) % 100;
-    $num_x = $num % 10;
-    if ($num > 10 && $num < 20)   // отрезок [11;19]
-        return $form_for_5;
-    if ($num_x > 1 && $num_x < 5) //  2,3,4
-        return $form_for_2;
-    if ($num_x == 1)              // оканчивается на 1
-        return $form_for_1;
-    return $form_for_5;
+	$num = (int)$value % 100;
+	if ($num > 19) { 
+		$num = $num % 10; 
+	}
+	
+	$out = ($show) ? (int)$value . ' ' : '';
+	switch ($num) {
+		case 1:  $out .= $words[0]; break;
+		case 2: 
+		case 3: 
+		case 4:  $out .= $words[1]; break;
+		default: $out .= $words[2]; break;
+	}
+	
+	return $out;
 }
 
 function pagination($pNum, $pagesCount, $sheet, $other)
@@ -196,7 +205,6 @@ function breadcrumb($path_home, $title_home, $path_intermediate, $title_intermed
                 <span class="red">' . $title_page . '</span>
                 </li>
                 </ul>';
-            //  <h1>' . $title_page . '</h1>';
 
     return $html;
 }

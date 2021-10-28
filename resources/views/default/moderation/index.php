@@ -2,7 +2,7 @@
   <?= includeTemplate('/_block/menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-7 mb-col-12 bg-white br-rd5 border-box-1 pt5 mt15 pr15 pb5 pl15">
-  <h1><?= Translate::get('moderation log'); ?></h1>
+  <h1 class="mt0 mb10 size-24 font-normal"><?= Translate::get('moderation log'); ?></h1>
   <?php if (!empty($data['moderations'])) { ?>
     <div class="mt15">
       <?php foreach ($data['moderations'] as  $mod) { ?>

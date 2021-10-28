@@ -7,7 +7,7 @@
     <a class="size-14" title="<?= Translate::get('topics-all'); ?>" href="/topics">
       ← <?= Translate::get('topics'); ?>
     </a>
-    <h1 class="topics">
+    <h1 class="title mb0 mt10 size-24">
       <a href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
         <?= $topic['topic_seo_title']; ?>
       </a>
@@ -28,7 +28,6 @@
   <div class="bg-white br-rd5 border-box-1 p15 mb15 size-15">
     <center>
       <a title="<?= $topic['topic_title']; ?>" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
-        <div><?= $topic['topic_title']; ?></div>
         <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'topic-img'); ?>
       </a>
     </center>

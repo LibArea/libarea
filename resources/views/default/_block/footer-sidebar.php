@@ -1,7 +1,7 @@
 <div class="last-comm br-rd5 border-box-1 p15 mt15 bg-white">
   <div class="mb-3 size-14">
     <a class="mr15 inline gray-light" title="<?= Translate::get('all comments'); ?>" href="<?= getUrlByName('comments'); ?>">
-      <?= Translate::get('comments-n'); ?>
+      <?= Translate::get('comments'); ?>
     </a>
     <a class="inline gray-light" title="<?= Translate::get('info'); ?>" href="<?= getUrlByName('info'); ?>">
       <?= Translate::get('info'); ?>

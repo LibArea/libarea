@@ -50,7 +50,7 @@
         <div class="p10 ml30 mr20 no-mob w-100">
           <form class="form r" method="post" action="<?= getUrlByName('search'); ?>">
             <?= csrf_field() ?>
-            <input type="text" name="q" id="search" placeholder="<?= Translate::get('to find'); ?>..." class="h40 bg-gray-100 p5 br-rd20 size-18 gray w-100">
+            <input type="text" name="q" id="search" placeholder="<?= Translate::get('to find'); ?>..." class="h40 bg-gray-100 p15 br-rd20 size-18 gray w-100">
           </form>
         </div>
       <?php if ($uid['user_id'] == 0) { ?>
@@ -69,7 +69,7 @@
           </div>
       <?php } else { ?>
         <div class="col-span-4">
-          <div class="flex right items-center">
+          <div class="flex right ml30 items-center">
             <a title="<?= Translate::get('add post'); ?>" href="/post/add<?php if (!empty($topic)) { ?>/<?= $topic; ?><?php } ?>" class="blue center p10">
               <i class="bi bi-plus-lg size-18"></i>
             </a>
@@ -112,7 +112,7 @@
                 </a>
                 <a class="pt5 pr10 pb5 pl10 block gray bg-hover-light-blue" href="<?= getUrlByName('messages', ['login' => $uid['user_login']]); ?>">
                   <i class="bi bi-envelope middle mr5"></i>
-                  <span class="middle size-14"><?= Translate::get('messages-m'); ?></span>
+                  <span class="middle size-14"><?= Translate::get('messages'); ?></span>
                 </a>
                 <a class="pt5 pr10 pb5 pl10 block gray bg-hover-light-blue" href="<?= getUrlByName('favorites', ['login' => $uid['user_login']]); ?>">
                   <i class="bi bi-bookmark middle mr5"></i>

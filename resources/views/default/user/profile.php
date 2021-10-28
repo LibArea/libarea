@@ -49,9 +49,9 @@
           <?php if ($data['user']['user_ban_list'] == 0) { ?>
             <?php if ($data['count']['count_posts'] > 0) { ?>
               <div class="mb5 size-14">
-                <label class="required"><?= Translate::get('posts-m'); ?>:</label>
+                <label class="required"><?= Translate::get('posts'); ?>:</label>
                 <span class="right ml5">
-                  <a title="<?= Translate::get('posts-m'); ?> <?= $data['user']['user_login']; ?>" href="<?= getUrlByName('posts.user', ['login' => $data['user']['user_login']]); ?>">
+                  <a title="<?= Translate::get('posts'); ?> <?= $data['user']['user_login']; ?>" href="<?= getUrlByName('posts.user', ['login' => $data['user']['user_login']]); ?>">
                     <?= $data['count']['count_posts']; ?>
                   </a>
                 </span>

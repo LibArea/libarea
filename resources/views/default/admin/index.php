@@ -22,10 +22,10 @@
       </a>
     </div>
     <div class="col-span-2 bg-indigo-300 p10">
-      <a class="white gray-hover size-21" title="<?= Translate::get('answers-n'); ?>" rel="noreferrer gray" href="<?= getUrlByName('admin.answers'); ?>">
+      <a class="white gray-hover size-21" title="<?= Translate::get('answers'); ?>" rel="noreferrer gray" href="<?= getUrlByName('admin.answers'); ?>">
         <i class="bi bi-chat-left-text white right"></i>
         <?= $data['answers_count']; ?>
-        <div class="size-15"><?= Translate::get('answers-n'); ?></div>
+        <div class="size-15"><?= Translate::get('answers'); ?></div>
       </a>
     </div>
     <div class="col-span-2 bg-green-500 p10">
@@ -36,14 +36,14 @@
       </a>
     </div>
     <div class="col-span-3 bg-blue-400 p10">
-      <a class="white gray-hover size-21" title="<?= Translate::get('comments-n'); ?>" rel="noreferrer" href="<?= getUrlByName('admin.comments'); ?>">
+      <a class="white gray-hover size-21" title="<?= Translate::get('comments'); ?>" rel="noreferrer" href="<?= getUrlByName('admin.comments'); ?>">
         <i class="bi bi-chat-dots white right"></i>
         <?= $data['comments_count']; ?>
-        <div class="size-15"><?= Translate::get('comments-n'); ?></div>
+        <div class="size-15"><?= Translate::get('comments'); ?></div>
       </a>
     </div>
     <div class="col-span-3 bg-gray-700 p10">
-      <a class="white gray-hover size-21" title="<?= Translate::get('comments-n'); ?>" rel="noreferrer" href="<?= getUrlByName('admin.topics'); ?>">
+      <a class="white gray-hover size-21" title="<?= Translate::get('topics'); ?>" rel="noreferrer" href="<?= getUrlByName('admin.topics'); ?>">
         <i class="bi bi-columns-gap white right"></i>
         <?= $data['topics_count']; ?>
         <div class="size-15"><?= Translate::get('topics'); ?></div>

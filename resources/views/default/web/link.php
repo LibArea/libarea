@@ -7,7 +7,7 @@
       <div class="right heart-link mt5">
         <?= votes($uid['user_id'], $data['link'], 'link'); ?>
       </div>
-      <h1><?= $data['link']['link_title']; ?>
+      <h1 class="mt5 mb10 size-24 font-normal"><?= $data['link']['link_title']; ?>
         <?php if ($uid['user_trust_level'] > 4) { ?>
           <a class="size-14 ml5" title="<?= Translate::get('edit'); ?>" href="/web/edit/<?= $data['link']['link_id']; ?>">
             <i class="bi bi-pencil size-15"></i>

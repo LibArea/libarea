@@ -1,7 +1,7 @@
 <?php if (!empty($data['answers'])) { ?>
   <div class="bg-white br-rd5 border-box-1 p15">
     <h2 class="lowercase m0 size-21">
-      <?= $post['post_answers_count'] ?> <?= $post['num_answers'] ?>
+      <?= $post['amount_content'] ?>
     </h2>
 
     <?php foreach ($data['answers'] as  $answer) { ?>
@@ -128,5 +128,5 @@
 <?php if (!empty($otvet)) { ?>
   <?= no_content(Translate::get('you-question-no'), 'bi bi-info-lg'); ?>
 <?php } else { ?>
-  <?= includeTemplate('/_block/editor/answer-create-editor', ['data' => $post, 'lang' => $uid['user_lang'] 'type' => 'answer', 'user_id' => $uid['user_id']]); ?>
+  <?= includeTemplate('/_block/editor/answer-create-editor', ['data' => $post, 'lang' => $uid['user_lang'], 'type' => 'answer', 'user_id' => $uid['user_id']]); ?>
 <?php }  ?>

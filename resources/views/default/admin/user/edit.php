@@ -69,8 +69,8 @@
       <hr>
       <div class="mb20">
         <?php if ($data['count']['count_posts'] != 0) { ?>
-          <label class="required"><?= Translate::get('posts-m'); ?>:</label>
-          <a target="_blank" rel="noopener noreferrer" title="<?= Translate::get('posts-m'); ?> <?= $data['user']['user_login']; ?>" href="<?= getUrlByName('posts.user', ['login' => $data['user']['user_login']]); ?>">
+          <label class="required"><?= Translate::get('posts'); ?>:</label>
+          <a target="_blank" rel="noopener noreferrer" title="<?= Translate::get('posts'); ?> <?= $data['user']['user_login']; ?>" href="<?= getUrlByName('posts.user', ['login' => $data['user']['user_login']]); ?>">
             <?= $data['count']['count_posts']; ?>
           </a> <br>
         <?php } ?>

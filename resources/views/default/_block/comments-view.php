@@ -1,8 +1,7 @@
 <?php if (!empty($data['answers'])) { ?>
   <div class="bg-white br-rd5 border-box-1 mt15 p15">
     <h2 class="lowercase m0 mb15 size-21">
-      <?= $post['post_answers_count'] + $post['post_comments_count'] ?>
-      <?= $post['num_comments'] ?>
+      <?= $post['amount_content'] ?>
     </h2>
     <?php $n = 0;
     foreach ($data['answers'] as  $answer) {

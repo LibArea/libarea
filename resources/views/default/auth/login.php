@@ -1,6 +1,6 @@
 <div class="col-span-2 no-mob"></div>
 <main class="col-span-8 mb-col-12 bg-white br-rd5 border-box-1 pt10 pr15 pb5 pl15">
-  <h1 class="center pb15 size-24"><?= Translate::get('authorization'); ?></h1>
+  <h1 class="mt0 mb10 size-24 center font-normal"><?= Translate::get('authorization'); ?></h1>
   <form class="max-w300 mb20 block" action="<?= getUrlByName('login'); ?>" method="post">
     <?php csrf_field(); ?>
 

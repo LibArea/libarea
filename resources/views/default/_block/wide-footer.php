@@ -15,10 +15,10 @@
     <div class="text-info col-span-3 no-mob">
       <h4 class="mb5 uppercase font-light"><?= Translate::get('other'); ?></h4>
       <a class="block white mb5" title="<?= Translate::get('all answers'); ?>" href="<?= getUrlByName('answers'); ?>">
-        <?= Translate::get('answers-n'); ?>
+        <?= Translate::get('answers'); ?>
       </a>
       <a class="block white mb5" title="<?= Translate::get('all comments'); ?>" href="<?= getUrlByName('comments'); ?>">
-        <?= Translate::get('comments-n'); ?>
+        <?= Translate::get('comments'); ?>
       </a>
     </div>
     <div class="text-info col-span-3 no-mob">

@@ -75,7 +75,7 @@
   <div class="bg-white br-rd5 mb15 border-box-1 p15">
     <div class="flex justify-center">
       <div class="mr15 center box-number">
-        <div class="uppercase mb5 size-14 gray"><?= Translate::get('posts-m'); ?></div>
+        <div class="uppercase mb5 size-14 gray"><?= Translate::get('posts'); ?></div>
         <?= $topic['topic_count']; ?>
       </div>
       <div class="ml15 center box-number">

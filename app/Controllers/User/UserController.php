@@ -169,7 +169,6 @@ class UserController extends MainController
         foreach ($focus_posts as $ind => $row) {
             $text                           = explode("\n", $row['post_content']);
             $row['post_content_preview']    = Content::text($text[0], 'line');
-            $row['lang_num_answers']        = word_form($row['post_answers_count'], Translate::get('answer'), Translate::get('answers-m'), Translate::get('answers'));
             $row['post_date']               = lang_date($row['post_date']);
             $result[$ind]                   = $row;
         }

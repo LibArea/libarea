@@ -13,7 +13,7 @@
   </a>
   <a class="pt5 pr10 pb5 pl10 gray block" title="<?= Translate::get('all answers'); ?>" href="<?= getUrlByName('answers'); ?>">
     <i class="bi bi-chat-dots middle mr5<?= $sheet == 'answers' ? ' blue' : ''; ?> size-18"></i>
-    <span class="<?= $sheet == 'answers' ? 'blue' : ''; ?>"><?= Translate::get('answers-n'); ?></span>
+    <span class="<?= $sheet == 'answers' ? 'blue' : ''; ?>"><?= Translate::get('answers'); ?></span>
   </a>
   <a class="pt5 pr10 pb5 pl10 gray block" title="<?= Translate::get('domains'); ?>" href="<?= getUrlByName('web'); ?>">
     <i class="bi bi-link-45deg middle mr5<?= $sheet == 'domains' ? ' blue' : ''; ?> size-18"></i>

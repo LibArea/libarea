@@ -4,7 +4,7 @@
       <div class="flex border-bottom">
         <div class="mr15 mt10">
           <?= $writer['sum']; ?>
-          <span class="block size-15 gray lowercase"><?= Translate::get('views-n'); ?></span>
+          <span class="block size-15 gray lowercase"><?= Translate::get('views'); ?></span>
         </div>
         <div class="p15">
           <?= user_avatar_img($writer['user_avatar'], 'max', $writer['user_login'], 'w54'); ?>

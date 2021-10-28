@@ -43,7 +43,7 @@ class AddCommentController extends MainController
         $redirect = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
 
         // Проверяем длину тела
-        Validation::Limits($comment_content, Translate::get('Comments-m'), '6', '2024', $redirect);
+        Validation::Limits($comment_content, Translate::get('comments'), '6', '2024', $redirect);
 
         // Ограничим добавления комментариев (в день)
         Validation::speedAdd($uid, 'comment');

@@ -8,7 +8,7 @@
     Translate::get('info')
   ); ?>
 
-  <h1><?= Translate::get('info'); ?></h1>
+  <h1 class="mt0 mb10 size-24 font-normal"><?= Translate::get('info'); ?></h1>
   <?= $data['content']; ?>
 </main>
 <?= includeTemplate('/_block/info-page-menu', ['uid' => $uid, 'sheet' => $data['sheet']]); ?>

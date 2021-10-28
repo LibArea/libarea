@@ -49,13 +49,13 @@ return [
     ],
     [
         'url'   => getUrlByName('admin.comments'),
-        'name'  => Translate::get('comments-n'),
+        'name'  => Translate::get('comments'),
         'icon'  => 'bi bi-chat-dots',
         'item'  => 'comments-n',
     ],
     [
         'url'   => getUrlByName('admin.answers'),
-        'name'  => Translate::get('answers-n'),
+        'name'  => Translate::get('answers'),
         'icon'  => 'bi bi-chat-left-text',
         'item'  => 'answers-n',
     ],
