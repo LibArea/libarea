@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\ContentModel;
+use Translate;
 
 class Content
 {
@@ -152,7 +153,7 @@ class Content
     public static function stopContentQuietМode($uid)
     {
         if ($uid['user_limiting_mode'] == 1) {
-            addMsg(lang('limiting-mode-1'), 'error');
+            addMsg(Translate::get('limiting-mode-1'), 'error');
             redirect('/');
         }
 

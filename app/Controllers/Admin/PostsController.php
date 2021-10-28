@@ -26,14 +26,18 @@ class PostsController extends MainController
             $result[$ind]   = $row;
         }
 
-        $meta = meta($m = [], $sheet == 'ban' ? Translate::get('deleted posts') : Translate::get('posts'));
-        $data = [
-            'sheet'         => $sheet == 'all' ? 'posts' : 'posts-ban',
-            'pagesCount'    => ceil($pagesCount / $limit),
-            'pNum'          => $page,
-            'posts'         => $result,
-        ];
-
-        return view('/admin/post/posts', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
+        return view(
+            '/admin/post/posts',
+            [
+                'meta'  => meta($m = [], $sheet == 'ban' ? Translate::get('deleted posts') : Translate::get('posts')),
+                'uid'   => Base::getUid(),
+                'data'  => [
+                    'sheet'         => $sheet == 'all' ? 'posts' : 'posts-ban',
+                    'pagesCount'    => ceil($pagesCount / $limit),
+                    'pNum'          => $page,
+                    'posts'         => $result,
+                ]
+            ]
+        );
     }
 }

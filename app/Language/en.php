@@ -238,9 +238,9 @@ $data = [
     'no-invate-txt'         => 'Еще не пользователь? Регистрация осуществляется только по приглашению для борьбы со спамом и повышения ответственности. Если вы знаете <a href="/users">текущего пользователя</a> сайта, попросите у него приглашение.',
 
     /* Дата и время + события*/
-    'months'        => ['','january','february','martha','april','may','june','july','august','september','october','november','december'],
+    'months'        => ['','January','February','Martha','April','May','June','July','August','September','October','November','December'],
     
-    'today'         => 'today',
+    'today'         => 'Today',
     'yesterday'     => 'Yesterday',
 
     'num-message'   => ['Message', 'Messages', 'Messages'],

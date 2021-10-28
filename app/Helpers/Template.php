@@ -115,7 +115,7 @@ function lang_date($string)
             return ($a[2] . " " . $months[$mm] . " " . $a[0] . " " . $a[3] . ":" . $a[4]);
         }
     }
-}
+} 
 
 // @param array $words: array('пост', 'поста', 'постов')
 function num_word($value, $words, $show = true) 

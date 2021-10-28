@@ -28,15 +28,19 @@ class ReportsController extends MainController
 
         Request::getResources()->addBottomScript('/assets/js/admin.js');
 
-        $meta = meta($m = [], Translate::get('reports'));
-        $data = [
-            'pagesCount'    => ceil($pagesCount / $limit),
-            'pNum'          => $page,
-            'sheet'         => 'reports',
-            'reports'       => $result,
-        ];
-
-        return view('/admin/report/reports', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
+        return view(
+            '/admin/report/reports',
+            [
+                'meta'  => meta($m = [], Translate::get('reports')),
+                'uid'   => Base::getUid(),
+                'data'  => [
+                    'pagesCount'    => ceil($pagesCount / $limit),
+                    'pNum'          => $page,
+                    'sheet'         => 'reports',
+                    'reports'       => $result,
+                ]
+            ]
+        );
     }
 
     // Ознакомился

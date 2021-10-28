@@ -17,17 +17,19 @@ class TopicsController extends MainController
 
         $limit  = 25;
         $pagesCount = TopicModel::getTopicsAllCount($uid['user_id'], $sheet);
-        $topics     = TopicModel::getTopicsAll($page, $limit, $uid['user_id'], $sheet);
 
-        $meta = meta($m = [], Translate::get('topics'));
-        $data = [
-            'sheet'         => $sheet == 'all' ? 'topics' : $sheet,
-            'pagesCount'    => ceil($pagesCount / $limit),
-            'pNum'          => $page,
-            'topics'        => $topics,
-        ];
-
-        return view('/admin/topic/topics', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+        return view(
+            '/admin/topic/topics',
+            [
+                'meta'  => meta($m = [], Translate::get('topics')),
+                'uid'   => $uid,
+                'data'  => [
+                    'sheet'         => $sheet == 'all' ? 'topics' : $sheet,
+                    'pagesCount'    => ceil($pagesCount / $limit),
+                    'pNum'          => $page,
+                    'topics'        => TopicModel::getTopicsAll($page, $limit, $uid['user_id'], $sheet),
+                ]
+            ]
+        );
     }
-
 }

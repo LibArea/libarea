@@ -4,8 +4,8 @@ namespace App\Controllers\Admin;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\{WebModel, TopicModel};
-use Base, Content, Validation, Translate;
+use App\Models\WebModel;
+use Base, Content, Translate;
 
 class WebsController extends MainController
 {
@@ -33,15 +33,19 @@ class WebsController extends MainController
 
         Request::getResources()->addBottomScript('/assets/js/admin.js');
 
-        $meta = meta($m =[], Translate::get('domains'));
-        $data = [
-            'sheet'         => $sheet == 'all' ? 'domains' : $sheet,
-            'pagesCount'    => ceil($pagesCount / $limit),
-            'pNum'          => $page,
-            'domains'       => $result,
-        ];
-
-        return view('/admin/web/webs', ['meta' => $meta, 'uid' => $this->uid, 'data' => $data]);
+        return view(
+            '/admin/web/webs',
+            [
+                'meta'  => meta($m = [], Translate::get('domains')),
+                'uid'   => $this->uid,
+                'data'  => [
+                    'sheet'         => $sheet == 'all' ? 'domains' : $sheet,
+                    'pagesCount'    => ceil($pagesCount / $limit),
+                    'pNum'          => $page,
+                    'domains'       => $result,
+                ]
+            ]
+        );
     }
 
     public function favicon()

@@ -37,15 +37,19 @@ class AuditsController extends MainController
 
         Request::getResources()->addBottomScript('/assets/js/admin.js');
 
-        $meta = meta($m = [], Translate::get('audit'));
-        $data = [
-            'sheet'         => $sheet == 'approved' ? 'approved' : 'audits',
-            'pagesCount'    => ceil($pagesCount / $limit),
-            'pNum'          => $page,
-            'audits'        => $result,
-        ];
-
-        return view('/admin/audit/audits', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
+        return view(
+            '/admin/audit/audits',
+            [
+                'meta'  => meta($m = [], Translate::get('audit')),
+                'uid'   => Base::getUid(),
+                'data' => [
+                    'sheet'         => $sheet == 'approved' ? 'approved' : 'audits',
+                    'pagesCount'    => ceil($pagesCount / $limit),
+                    'pNum'          => $page,
+                    'audits'        => $result,
+                ]
+            ]
+        );
     }
 
     // Восстановление после аудита

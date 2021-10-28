@@ -26,14 +26,18 @@ class CommentsController extends MainController
             $result[$ind]   = $row;
         }
 
-        $meta = meta($m = [], $sheet == 'ban' ? Translate::get('deleted comments') : Translate::get('comments-n'));
-        $data = [
-            'sheet'         => $sheet == 'all' ? 'comments-n' : 'comments-ban',
-            'pagesCount'    => ceil($pagesCount / $limit),
-            'pNum'          => $page,
-            'comments'      => $result,
-        ];
-
-        return view('/admin/comment/comments', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+        return view(
+            '/admin/comment/comments',
+            [
+                'meta'  => meta($m = [], $sheet == 'ban' ? Translate::get('deleted comments') : Translate::get('comments-n')),
+                'uid'   => $uid,
+                'data'  => [
+                    'sheet'         => $sheet == 'all' ? 'comments-n' : 'comments-ban',
+                    'pagesCount'    => ceil($pagesCount / $limit),
+                    'pNum'          => $page,
+                    'comments'      => $result,
+                ]
+            ]
+        );
     }
 }

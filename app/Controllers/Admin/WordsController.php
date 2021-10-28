@@ -14,52 +14,57 @@ class WordsController extends MainController
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
-        $words = ContentModel::getStopWords();
-
         Request::getResources()->addBottomScript('/assets/js/admin.js');
 
-        $meta = meta($m = [], Translate::get('stop words'));
-        $data = [
-            'words'     => $words,
-            'sheet'     => $sheet == 'all' ? 'words' : $sheet,
-        ];
-
-        return view('/admin/word/words', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
+        return view(
+            '/admin/word/words',
+            [
+                'meta'  => meta($m = [], Translate::get('stop words')),
+                'uid'   => Base::getUid(),
+                'data'  => [
+                    'words' => ContentModel::getStopWords(),
+                    'sheet' => $sheet == 'all' ? 'words' : $sheet,
+                ]
+            ]
+        );
     }
 
     // Форма добавления стоп-слова
     public function addPage()
     {
-        $meta = meta($m = [], Translate::get('add a stop word'));
-        $data = [
-            'sheet'         => 'words',
-        ];
-
-        return view('/admin/word/add', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
+        return view(
+            '/admin/word/add',
+            [
+                'meta'  => meta($m = [], Translate::get('add a stop word')),
+                'uid'   => Base::getUid(),
+                'data'  => [
+                    'sheet' => 'words',
+                ]
+            ]
+        );
     }
 
     // Добавление стоп-слова
     public function add()
     {
-        $word = Request::getPost('word');
         $data = [
-            'stop_word'     => $word,
+            'stop_word'     => Request::getPost('word'),
             'stop_add_uid'  => 1,
             'stop_space_id' => 0, // Глобально
         ];
 
         ContentModel::setStopWord($data);
 
-        redirect('/admin/words');
+        redirect(getUrlByName('admin.words'));
     }
 
     // Удаление стоп-слова
     public function deletes()
     {
-        $word_id    = Request::getPostInt('id');
+        $word_id = Request::getPostInt('id');
 
         ContentModel::deleteStopWord($word_id);
 
-        redirect('/admin/words');
+        redirect(getUrlByName('admin.words'));
     }
 }

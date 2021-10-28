@@ -1,13 +1,14 @@
 <?php
 
 use App\Models\ContentModel;
+use Translate;
 
 class Validation
 {
     public static function checkEmail($email, $redirect)
     {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            addMsg(lang('Invalid email address'), 'error');
+            addMsg(Translate::get('Invalid email address'), 'error');
             redirect($redirect);
         }
         return true;
@@ -17,7 +18,7 @@ class Validation
     {
         if (self::getStrlen($name) < $min || self::getStrlen($name) > $max) {
 
-            $text = sprintf(lang('text-string-length'), '«' . $content . '»', $min, $max);
+            $text = sprintf(Translate::get('text-string-length'), '«' . $content . '»', $min, $max);
             addMsg($text, 'error');
             redirect($redirect);
         }
@@ -28,7 +29,7 @@ class Validation
     {
         if (!preg_match('/^[a-zA-Z0-9-]+$/u', $slug)) {
 
-            $text = sprintf(lang('text-charset-slug'), '«' . $text . '»');
+            $text = sprintf(Translate::get('text-charset-slug'), '«' . $text . '»');
             addMsg($text, 'error');
             redirect($redirect);
         }
@@ -99,7 +100,7 @@ class Validation
 
     public static function inform($tl, $content)
     {
-        $text = sprintf(lang('limit-content-day'), 'TL' . $tl, '«' . lang($content) . '»');
+        $text = sprintf(Translate::get('limit-content-day'), 'TL' . $tl, '«' . Translate::get($content) . '»');
         addMsg($text, 'error');
         redirect('/');
     }

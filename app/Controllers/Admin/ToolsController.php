@@ -9,8 +9,13 @@ class ToolsController extends MainController
 {
     public function index()
     {
-        $meta = meta($m = [], Translate::get('tools'));
-
-        return view('/admin/tools', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => []]);
+        return view(
+            '/admin/tools',
+            [
+                'meta'  => meta($m = [], Translate::get('tools')),
+                'uid'   => Base::getUid(),
+                'data'  => []
+            ]
+        );
     }
 }

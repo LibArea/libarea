@@ -12,26 +12,32 @@ class BadgesController extends MainController
     // Все награды
     public function index($sheet)
     {
-        $badges = BadgeModel::getBadgesAll();
-
-        $meta = meta($m = [], Translate::get('badges'));
-        $data = [
-            'sheet'         => $sheet == 'all' ? 'badges' : $sheet,
-            'badges'        => $badges,
-        ];
-
-        return view('/admin/badge/badges', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
+        return view(
+            '/admin/badge/badges',
+            [
+                'meta'  => meta($m = [], Translate::get('badges')),
+                'uid'   => Base::getUid(),
+                'data'  => [
+                    'sheet'         => $sheet == 'all' ? 'badges' : $sheet,
+                    'badges'        => BadgeModel::getBadgesAll(),
+                ]
+            ]
+        );
     }
 
     // Форма добавления награды
     public function addPage()
     {
-        $meta = meta($m = [], Translate::get('add badge'));
-        $data = [
-            'sheet'         => 'badges',
-        ];
-
-        return view('/admin/badge/add', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
+        return view(
+            '/admin/badge/add',
+            [
+                'meta'  => meta($m = [], Translate::get('add badge')),
+                'uid'   => Base::getUid(),
+                'data'  => [
+                    'sheet'         => 'badges',
+                ]
+            ]
+        );
     }
 
 
@@ -45,13 +51,17 @@ class BadgesController extends MainController
             redirect('/admin/badges');
         }
 
-        $meta = meta($m = [], Translate::get('edit badge'));
-        $data = [
-            'badge'         => $badge,
-            'sheet'         => 'badges',
-        ];
-
-        return view('/admin/badge/edit', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
+        return view(
+            '/admin/badge/edit',
+            [
+                'meta'  => meta($m = [], Translate::get('edit badge')),
+                'uid'   => Base::getUid(),
+                'data'  => [
+                    'badge'         => $badge,
+                    'sheet'         => 'badges',
+                ]
+            ]
+        );
     }
 
     // Добавляем награду
@@ -61,7 +71,7 @@ class BadgesController extends MainController
         $badge_description   = Request::getPost('badge_description');
         $badge_icon          = $_POST['badge_icon']; // для Markdown
 
-        $redirect = '/admin/badges';
+        $redirect = getUrlByName('admin.badges');
         Validation::Limits($badge_title, Translate::get('title'), '4', '25', $redirect);
         Validation::Limits($badge_description, Translate::get('description'), '12', '250', $redirect);
         Validation::Limits($badge_icon, Translate::get('icon'), '12', '250', $redirect);
@@ -88,16 +98,18 @@ class BadgesController extends MainController
             $user   = null;
         }
 
-        $badges = BadgeModel::getBadgesAll();
-
-        $meta = meta($m = [], Translate::get('reward the user'));
-        $data = [
-            'sheet'         => 'admin',
-            'user'          => $user,
-            'badges'        => $badges,
-        ];
-
-        return view('/admin/badge/user-add', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
+        return view(
+            '/admin/badge/user-add',
+            [
+                'meta'  => meta($m = [], Translate::get('reward the user')),
+                'uid'   => Base::getUid(),
+                'data'  => [
+                    'sheet'         => 'admin',
+                    'user'          => $user,
+                    'badges'        => BadgeModel::getBadgesAll(),
+                ]
+            ]
+        );
     }
 
     // Награждение
@@ -121,7 +133,7 @@ class BadgesController extends MainController
         $badge_id   = Request::getInt('id');
         $badge      = BadgeModel::getBadgeId($badge_id);
 
-        $redirect = '/admin/badges';
+        $redirect = getUrlByName('admin.badges');
         if (!$badge['badge_id']) {
             redirect($redirect);
         }

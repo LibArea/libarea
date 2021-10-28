@@ -19,12 +19,16 @@ class InvitationsController extends MainController
             $result[$ind]       = $row;
         }
 
-        $meta = meta($m = [], Translate::get('invites'));
-        $data = [
-            'sheet'         => $sheet == 'all' ? 'invitations' : $sheet,
-            'invitations'   => $result,
-        ];
-
-        return view('/admin/invitation/invitations', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
+        return view(
+            '/admin/invitation/invitations',
+            [
+                'meta'  => meta($m = [], Translate::get('invites')),
+                'uid'   => Base::getUid(),
+                'data'  => [
+                    'sheet'         => $sheet == 'all' ? 'invitations' : $sheet,
+                    'invitations'   => $result,
+                ]
+            ]
+        );
     }
 }

@@ -60,14 +60,18 @@ class UsersController extends MainController
             $results[$ind]      = $row;
         }
 
-        $meta = meta($m = [], Translate::get('search'));
-        $data = [
-            'results'       => $results,
-            'option'        => $option,
-            'sheet'         => 'users',
-        ];
-
-        return view('/admin/user/logip', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
+        return view(
+            '/admin/user/logip',
+            [
+                'meta'  => meta($m = [], Translate::get('search')),
+                'uid'   => Base::getUid(),
+                'data'  => [
+                    'results'       => $results,
+                    'option'        => $option,
+                    'sheet'         => 'users',
+                ]
+            ]
+        );
     }
 
     // Бан участнику
@@ -93,14 +97,18 @@ class UsersController extends MainController
 
         Request::getResources()->addBottomScript('/assets/js/admin.js');
 
-        $meta = meta($m = [], Translate::get('edit user'));
-        $data = [
-            'sheet'             => 'edit-user',
-            'count'             => UserModel::contentCount($user_id),
-            'user'              => $user,
-        ];
-
-        return view('/admin/user/edit', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
+        return view(
+            '/admin/user/edit',
+            [
+                'meta'  => meta($m = [], Translate::get('edit user')),
+                'uid'   => Base::getUid(),
+                'data'  => [
+                    'sheet'             => 'edit-user',
+                    'count'             => UserModel::contentCount($user_id),
+                    'user'              => $user,
+                ]
+            ]
+        );
     }
 
     // Редактировать участника
