@@ -11,12 +11,12 @@ use Content, Base, Validation, Translate;
 class EditAnswerController extends MainController
 {
     private $uid;
-    
-    public function __construct() 
+
+    public function __construct()
     {
         $this->uid  = Base::getUid();
     }
-    
+
     // Форма редактирования answer
     public function index()
     {
@@ -31,19 +31,23 @@ class EditAnswerController extends MainController
 
         Request::getResources()->addBottomStyles('/assets/editor/editormd.css');
         Request::getResources()->addBottomScript('/assets/editor/meditor.min.js');
- 
-        $meta = meta($m =[], Translate::get('edit answer'));
-        $data = [
-            'answer_id'         => $answer['answer_id'],
-            'post_id'           => $post['post_id'],
-            'answer_content'    => $answer['answer_content'],
-            'sheet'             => 'edit-answers',
-            'post'              => $post,
-        ];
 
-        return view('/answer/edit-form-answer', ['meta' => $meta, 'uid' => $this->uid, 'data' => $data]);
+        return view(
+            '/answer/edit-form-answer',
+            [
+                'meta'  => meta($m = [], Translate::get('edit answer')),
+                'uid'   => $this->uid,
+                'data'  => [
+                    'answer_id'         => $answer['answer_id'],
+                    'post_id'           => $post['post_id'],
+                    'answer_content'    => $answer['answer_content'],
+                    'sheet'             => 'edit-answers',
+                    'post'              => $post,
+                ]
+            ]
+        );
     }
-    
+
     public function edit()
     {
         $answer_id      = Request::getPostInt('answer_id');
@@ -62,7 +66,7 @@ class EditAnswerController extends MainController
         if (!accessСheck($answer, 'answer', $this->uid, 0, 0)) {
             redirect('/');
         }
-        
+
         $url = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
         Validation::Limits($answer_content, Translate::get('bodies'), '6', '5000', '/' . $url);
 
@@ -73,5 +77,4 @@ class EditAnswerController extends MainController
 
         redirect('/' . $url . '#answer_' . $answer_id);
     }
-
 }

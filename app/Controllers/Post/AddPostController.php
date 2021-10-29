@@ -35,9 +35,14 @@ class AddPostController extends MainController
         $topic_id   = Request::getInt('topic_id');
         $topic      = TopicModel::getTopic($topic_id, 'id');
 
-        $meta = meta($m = [], Translate::get('add post'));
-        
-        return view('/post/add', ['meta' => $meta, 'uid' => $this->uid, 'data' => ['topic' => $topic]]);
+        return view(
+            '/post/add',
+            [
+                'meta'  => meta($m = [], Translate::get('add post')),
+                'uid'   => $this->uid,
+                'data'  => ['topic' => $topic]
+            ]
+        );
     }
 
     // Добавим пост
@@ -67,8 +72,11 @@ class AddPostController extends MainController
         Base::accountBan($user);
         Content::stopContentQuietМode($user);
 
-        Base::PageRedirection($topics, $redirect);
-
+        // Если нет темы
+        if (!$topics) {
+            addMsg(Translate::get('select topic') . '!', 'error');
+            redirect($redirect);
+        }
 
         Validation::Limits($post_title, Translate::get('title'), '6', '250', $redirect);
         Validation::Limits($post_content, Translate::get('the post'), '6', '25000', $redirect);
@@ -116,11 +124,11 @@ class AddPostController extends MainController
         // Если контента меньше N и он содержит ссылку 
         // Оповещение админу
         $post_published = 1;
-        if (!Validation::stopSpam($post_content, $uid['user_id'])) {
+        if (!Validation::stopSpam($post_content, $this->uid['user_id'])) {
             addMsg(Translate::get('content-audit'), 'error');
             $post_published = 0;
         }
-        
+
         $data = [
             'post_title'            => $post_title,
             'post_content'          => Content::change($post_content),
@@ -253,7 +261,7 @@ class AddPostController extends MainController
 
         return true;
     }
-    
+
     // Рекомендовать пост
     public function recommend()
     {
@@ -264,7 +272,7 @@ class AddPostController extends MainController
         if ($tl === false) {
             redirect('/');
         }
-        
+
         $post = PostModel::getPostId($post_id);
         Base::PageError404($post);
 
@@ -272,5 +280,4 @@ class AddPostController extends MainController
 
         return true;
     }
-    
 }

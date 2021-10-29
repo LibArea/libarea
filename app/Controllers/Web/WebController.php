@@ -34,16 +34,20 @@ class WebController extends MainController
             'imgurl'     => false,
             'url'        => getUrlByName('web'),
         ];
-        $meta = meta($m, Translate::get('domains-title'), Translate::get('domains-title'));
 
-        $data = [
-            'sheet'         => 'domains',
-            'pagesCount'    => ceil($pagesCount / $limit),
-            'pNum'          => $page,
-            'links'         => $result,
-        ];
-
-        return view('/web/links', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+        return view(
+            '/web/links',
+            [
+                'meta'  => meta($m, Translate::get('domains-title'), Translate::get('domains-title')),
+                'uid'   => $uid,
+                'data'  => [
+                    'sheet'         => 'domains',
+                    'pagesCount'    => ceil($pagesCount / $limit),
+                    'pNum'          => $page,
+                    'links'         => $result,
+                ]
+            ]
+        );
     }
 
     // Посты по домену
@@ -78,18 +82,22 @@ class WebController extends MainController
             'imgurl'     => false,
             'url'        => getUrlByName('domain', ['domain' => $domain]),
         ];
-        $meta = meta($m, Translate::get('domain') . ': ' . $domain, Translate::get('domain-desc') . ': ' . $domain);
 
-        $data = [
-            'sheet'         => 'domain',
-            'pagesCount'    => ceil($pagesCount / $limit),
-            'pNum'          => $page,
-            'posts'         => $result,
-            'domains'       => WebModel::getLinksTop($domain),
-            'link'          => $link
-        ];
-
-        return view('/web/link', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+        return view(
+            '/web/link',
+            [
+                'meta'  => meta($m, Translate::get('domain') . ': ' . $domain, Translate::get('domain-desc') . ': ' . $domain),
+                'uid'   => $uid,
+                'data'  => [
+                    'sheet'         => 'domain',
+                    'pagesCount'    => ceil($pagesCount / $limit),
+                    'pNum'          => $page,
+                    'posts'         => $result,
+                    'domains'       => WebModel::getLinksTop($domain),
+                    'link'          => $link
+                ]
+            ]
+        );
     }
 
     public function sites($sheet)
@@ -119,16 +127,20 @@ class WebController extends MainController
             'url'        => getUrlByName('web.topic', ['slug' => $topic['topic_slug']]),
         ];
         $desc  = Translate::get('sites') . ' ' . Translate::get('by') . ' ' . $topic['topic_title'] . '. ' . $topic['topic_description'];
-        $meta = meta($m, Translate::get('sites') . ': ' . $topic['topic_title'], $desc);
 
-        $data = [
-            'sheet'         => 'sites-topic',
-            'pagesCount'    => ceil($pagesCount / $limit),
-            'pNum'          => $page,
-            'links'         => $result,
-            'topic'         => $topic
-        ];
-
-        return view('/web/sites', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+        return view(
+            '/web/sites',
+            [
+                'meta'  => meta($m, Translate::get('sites') . ': ' . $topic['topic_title'], $desc),
+                'uid'   => $uid,
+                'data'  => [
+                    'sheet'         => 'sites-topic',
+                    'pagesCount'    => ceil($pagesCount / $limit),
+                    'pNum'          => $page,
+                    'links'         => $result,
+                    'topic'         => $topic
+                ]
+            ]
+        );
     }
 }

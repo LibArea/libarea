@@ -44,7 +44,7 @@ class RssController extends MainController
 
         includeCachedTemplate('/rss/turbo-feed', ['data' => $data, 'topic' => $topic]);
     }
-    
+
     // Route::get('/rss-feed/topic/{slug}')
     public function rssFeed()
     {
@@ -60,11 +60,15 @@ class RssController extends MainController
             $result[$ind]         = $row;
         }
 
-        $data = [
-            'url'       => Config::get('meta.url'),
-            'posts'     => $result,
-        ];
-
-        includeCachedTemplate('/rss/rss-feed', ['data' => $data, 'topic' => $topic]);
+        includeCachedTemplate(
+            '/rss/rss-feed',
+            [
+                'data'  => [
+                    'url'       => Config::get('meta.url'),
+                    'posts'     => $result,
+                ],
+                'topic' => $topic
+            ]
+        );
     }
 }

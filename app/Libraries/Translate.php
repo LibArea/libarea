@@ -19,9 +19,9 @@ class Translate
     public static function get(string $name, $lang = null)
     {
         if (empty($lang)) $lang = self::$lang;
-        
+
         $data = self::load($lang);
-        
+
         if (!empty($data[$lang][$name])) {
             return $data[$lang][$name];
         };
@@ -32,10 +32,10 @@ class Translate
     public static function load(string $lang)
     {
         if (isset(self::$langData[$lang])) {
-          return self::$langData;  
+            return self::$langData;
         }
         require_once __DIR__ . '/../Language/' . $lang . '.php';
-        self::$langData[$lang] = $data;  
-        return self::$langData;  
+        self::$langData[$lang] = $data;
+        return self::$langData;
     }
 }

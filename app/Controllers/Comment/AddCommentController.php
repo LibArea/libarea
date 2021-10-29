@@ -13,15 +13,19 @@ class AddCommentController extends MainController
     // Покажем форму
     public function index()
     {
-        $data = [
-            'answer_id'     => Request::getPostInt('answer_id'),
-            'post_id'       => Request::getPostInt('post_id'),
-            'comment_id'    => Request::getPostInt('comment_id'),
-        ];
-
-        includeTemplate('/_block/form/add-form-answer-and-comment', ['data' => $data, 'uid' => Base::getUid()]);
+        includeTemplate(
+            '/_block/form/add-form-answer-and-comment',
+            [
+                'data'  => [
+                    'answer_id'     => Request::getPostInt('answer_id'),
+                    'post_id'       => Request::getPostInt('post_id'),
+                    'comment_id'    => Request::getPostInt('comment_id'),
+                ],
+                'uid'   => Base::getUid()
+            ]
+        );
     }
-    
+
     // Добавление комментария
     public function create()
     {
@@ -107,5 +111,4 @@ class AddCommentController extends MainController
 
         redirect($url_comment);
     }
-
 }

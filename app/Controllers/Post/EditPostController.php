@@ -33,16 +33,20 @@ class EditPostController extends MainController
         Request::getResources()->addBottomScript('/assets/editor/meditor.min.js');
         Request::getResources()->addBottomScript('/assets/js/select2.min.js');
 
-        $meta = meta($m = [], Translate::get('edit post'));
-        $data = [
-            'sheet'         => 'edit-post',
-            'post'          => $post,
-            'post_select'   => PostModel::postRelated($post['post_related']),
-            'user'          => UserModel::getUser($post['post_user_id'], 'id'),
-            'topic_select'  => PostModel::getPostTopic($post['post_id'], $this->uid['user_id']),
-        ];
-
-        return view('/post/edit', ['meta' => $meta, 'uid' => $this->uid, 'data' => $data]);
+        return view(
+            '/post/edit',
+            [
+                'meta'  => meta($m = [], Translate::get('edit post')),
+                'uid'   => $this->uid,
+                'data'  => [
+                    'sheet'         => 'edit-post',
+                    'post'          => $post,
+                    'post_select'   => PostModel::postRelated($post['post_related']),
+                    'user'          => UserModel::getUser($post['post_user_id'], 'id'),
+                    'topic_select'  => PostModel::getPostTopic($post['post_id'], $this->uid['user_id']),
+                ]
+            ]
+        );
     }
 
     public function edit()
@@ -90,8 +94,8 @@ class EditPostController extends MainController
             $post_user_id = $post['post_user_id'];
             if ($this->uid['user_trust_level'] == 5) {
                 $post_user_id = $post_user_new;
-            } 
-        } 
+            }
+        }
 
         Validation::Limits($post_title, Translate::get('title'), '6', '250', $redirect);
         Validation::Limits($post_content, Translate::get('the post'), '6', '25000', $redirect);

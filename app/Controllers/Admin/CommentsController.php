@@ -29,10 +29,10 @@ class CommentsController extends MainController
         return view(
             '/admin/comment/comments',
             [
-                'meta'  => meta($m = [], $sheet == 'ban' ? Translate::get('deleted comments') : Translate::get('comments-n')),
+                'meta'  => meta($m = [], $sheet == 'ban' ? Translate::get('deleted comments') : Translate::get('comments')),
                 'uid'   => $uid,
                 'data'  => [
-                    'sheet'         => $sheet == 'all' ? 'comments-n' : 'comments-ban',
+                    'sheet'         => $sheet == 'all' ? 'comments' : 'comments-ban',
                     'pagesCount'    => ceil($pagesCount / $limit),
                     'pNum'          => $page,
                     'comments'      => $result,

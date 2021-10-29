@@ -62,13 +62,13 @@ class PostController extends MainController
 
         $post['post_content']   = Content::text($post['post_content'], 'text');
         $post['post_date_lang'] = lang_date($post['post_date']);
-        
+
         // Q&A (post_type == 1) или Дискуссия
         if ($post['post_type'] == 1) {
             $post['amount_content'] = num_word($post['post_answers_count'], Translate::get('num-answer'), true);
         } else {
             $comment_n = $post['post_comments_count'] + $post['post_answers_count'];
-            $post['amount_content'] = num_word($comment_n, Translate::get('num-comment'), true);  
+            $post['amount_content'] = num_word($comment_n, Translate::get('num-comment'), true);
         }
 
         $post_answers = AnswerModel::getAnswersPost($post['post_id'], $uid['user_id'], $post['post_type']);
@@ -115,28 +115,33 @@ class PostController extends MainController
         if ($post['post_related']) {
             $post_related = PostModel::postRelated($post['post_related']);
         }
-        
+
         $m = [
             'og'         => true,
             'twitter'    => true,
             'imgurl'     => $content_img,
             'url'        => getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]),
         ];
-        
+
         $topic = $topics[0]['topic_title'] ?? 'agouti';
         $meta = meta($m, strip_tags($post['post_title']) . ' — ' . $topic, $desc . ' — ' . $topic, $date_article = $post['post_date']);
 
-        $data = [
-            'post'          => $post,
-            'answers'       => $answers,
-            'recommend'     => PostModel::postsSimilar($post['post_id'], $uid, 5),
-            'post_related'  => $post_related ?? '',
-            'post_signed'   => SubscriptionModel::getFocus($post['post_id'], $uid['user_id'], 'post'),
-            'topics'        => $topics,
-            'sheet'         => 'article',
-        ];
-
-        return view('/post/view', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+        return view(
+            '/post/view',
+            [
+                'meta'  => $meta,
+                'uid'   => $uid,
+                'data'  => [
+                    'post'          => $post,
+                    'answers'       => $answers,
+                    'recommend'     => PostModel::postsSimilar($post['post_id'], $uid, 5),
+                    'post_related'  => $post_related ?? '',
+                    'post_signed'   => SubscriptionModel::getFocus($post['post_id'], $uid['user_id'], 'post'),
+                    'topics'        => $topics,
+                    'sheet'         => 'article',
+                ]
+            ]
+        );
     }
 
     // Посты участника
@@ -170,15 +175,19 @@ class PostController extends MainController
             'imgurl'     => '/uploads/users/avatars/' . $user['user_avatar'],
             'url'        => getUrlByName('posts.user', ['login' => $login]),
         ];
-        $meta = meta($m, Translate::get('posts') . ' ' . $login, Translate::get('participant posts') . ' ' . $login);
 
-        $data = [
-            'sheet'         => 'user-post',
-            'posts'         => $result,
-            'user_login'    => $user['user_login'],
-        ];
-
-        return view('/post/post-user', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+        return view(
+            '/post/post-user',
+            [
+                'meta'  => meta($m, Translate::get('posts') . ' ' . $login, Translate::get('participant posts') . ' ' . $login),
+                'uid'   => $uid,
+                'data'  => [
+                    'sheet'         => 'user-post',
+                    'posts'         => $result,
+                    'user_login'    => $user['user_login'],
+                ]
+            ]
+        );
     }
 
     // Размещение своего поста у себя в профиле

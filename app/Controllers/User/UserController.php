@@ -28,16 +28,20 @@ class UserController extends MainController
             'imgurl'     => false,
             'url'        => getUrlByName('users'),
         ];
-        $meta = meta($m, Translate::get('users'), Translate::get('desc-user-all'));
 
-        $data = [
-            'sheet'         => 'users',
-            'pagesCount'    => ceil($usersCount / $limit),
-            'pNum'          => $page,
-            'users'         => $users
-        ];
-
-        return view('/user/users', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+        return view(
+            '/user/users',
+            [
+                'meta'  => meta($m, Translate::get('users'), Translate::get('desc-user-all')),
+                'uid'   => $uid,
+                'data'  => [
+                    'sheet'         => 'users',
+                    'pagesCount'    => ceil($usersCount / $limit),
+                    'pNum'          => $page,
+                    'users'         => $users
+                ]
+            ]
+        );
     }
 
     // Страница участника
@@ -84,22 +88,26 @@ class UserController extends MainController
             'imgurl'     => '/uploads/users/avatars/' . $user['user_avatar'],
             'url'        => getUrlByName('user', ['login' => $user['user_login']]),
         ];
-        $meta = meta($m, $meta_title, $meta_desc);
 
-        $data = [
-            'user_created_at'   => lang_date($user['user_created_at']),
-            'user_trust_level'  => UserModel::getUserTrust($user['user_id']),
-            'count'             => UserModel::contentCount($user['user_id']),
-            'topics'            => TopicModel::getTopicsAll(1, 10, $user['user_id'], 'subscription'),
-            'badges'            => BadgeModel::getBadgeUserAll($user['user_id']),
-            'user'              => $user,
-            'isBan'             => $isBan,
-            'participation'     => TopicModel::participation($user['user_id']),
-            'post'              => PostModel::getPostId($user['user_my_post']),
-            'button_pm'         => Validation::accessPm($uid, $user['user_id'], Config::get('general.tl_add_pm'))
-        ];
-
-        return view('/user/profile', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+        return view(
+            '/user/profile',
+            [
+                'meta'  => meta($m, $meta_title, $meta_desc),
+                'uid'   => $uid,
+                'data'  => [
+                    'user_created_at'   => lang_date($user['user_created_at']),
+                    'user_trust_level'  => UserModel::getUserTrust($user['user_id']),
+                    'count'             => UserModel::contentCount($user['user_id']),
+                    'topics'            => TopicModel::getTopicsAll(1, 10, $user['user_id'], 'subscription'),
+                    'badges'            => BadgeModel::getBadgeUserAll($user['user_id']),
+                    'user'              => $user,
+                    'isBan'             => $isBan,
+                    'participation'     => TopicModel::participation($user['user_id']),
+                    'post'              => PostModel::getPostId($user['user_my_post']),
+                    'button_pm'         => Validation::accessPm($uid, $user['user_id'], Config::get('general.tl_add_pm'))
+                ]
+            ]
+        );
     }
 
     // Страница закладок участника
@@ -126,13 +134,17 @@ class UserController extends MainController
             $result[$ind]           = $row;
         }
 
-        $meta = meta($m = [], Translate::get('favorites'));
-        $data = [
-            'sheet'     => 'favorites',
-            'favorites' => $result
-        ];
-
-        return view('/user/favorite', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+        return view(
+            '/user/favorite',
+            [
+                'meta'  => meta($m = [], Translate::get('favorites')),
+                'uid'   => $uid,
+                'data'  => [
+                    'sheet'     => 'favorites',
+                    'favorites' => $result
+                ]
+            ]
+        );
     }
 
     // Страница черновиков участника
@@ -145,12 +157,16 @@ class UserController extends MainController
             redirect('/u/' . $uid['user_login'] . '/drafts');
         }
 
-        $meta = meta($m = [], Translate::get('drafts'));
-        $data = [
-            'drafts' => UserModel::userDraftPosts($uid['user_id']),
-        ];
-
-        return view('/user/draft-post', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+        return view(
+            '/user/draft-post',
+            [
+                'meta'  => meta($m = [], Translate::get('drafts')),
+                'uid'   => $uid,
+                'data'  => [
+                    'drafts' => UserModel::userDraftPosts($uid['user_id']),
+                ]
+            ]
+        );
     }
 
     // Страница предпочтений пользователя
@@ -173,13 +189,17 @@ class UserController extends MainController
             $result[$ind]                   = $row;
         }
 
-        $meta = meta($m = [], Translate::get('subscribed'));
-        $data = [
-            'h1'    => Translate::get('subscribed') . ' ' . $uid['user_login'],
-            'sheet' => 'subscribed',
-            'posts' => $result
-        ];
-
-        return view('/user/subscribed', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+        return view(
+            '/user/subscribed',
+            [
+                'meta'  => meta($m = [], Translate::get('subscribed')),
+                'uid'   => $uid,
+                'data'  => [
+                    'h1'    => Translate::get('subscribed') . ' ' . $uid['user_login'],
+                    'sheet' => 'subscribed',
+                    'posts' => $result
+                ]
+            ]
+        );
     }
 }

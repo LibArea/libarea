@@ -103,7 +103,7 @@ class Validation
         addMsg($text, 'error');
         redirect('/');
     }
-    
+
     public static function stopSpam($content, $user_id)
     {
         // TODO: лимиты возможно в конфиг
@@ -115,7 +115,7 @@ class Validation
                 return false;
             }
         }
-       
+
         // Если в стоп листе
         if (self::stopWordsExists($content)) {
             // Если меньше 2 ответов и если контент попал в стоп лист, то заморозка
@@ -128,7 +128,7 @@ class Validation
 
         return true;
     }
-    
+
     // Для тригера URL
     public static function estimationUrl($content)
     {
@@ -138,7 +138,7 @@ class Validation
         }
         return false;
     }
-    
+
     // Аудит
     public static function stopWordsExists($content, $replace = '*')
     {
@@ -166,5 +166,4 @@ class Validation
 
         return false;
     }
-    
 }

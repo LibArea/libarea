@@ -30,9 +30,9 @@ class Base
                     hl_preliminary_exit();
                 }
             }
-            
+
             Translate::setLang($uid['user_lang']);
-            
+
             Request::getResources()->addBottomScript('/assets/js/app.js');
         } else {
             self::checkCookie();

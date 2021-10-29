@@ -43,24 +43,28 @@ class EditTopicController extends MainController
             $topic_parent_id    = TopicModel::topicMain($topic['topic_parent_id']);
         }
 
-        $meta = meta($m = [], Translate::get('edit topic') . ' | ' . $topic['topic_title']);
-        $data = [
-            'topic'             => $topic,
-            'topic_related'     => $topic_related,
-            'topic_parent_id'   => $topic_parent_id,
-            'post_related'      => $post_related,
-            'user'              => UserModel::getUser($topic['topic_user_id'], 'id'),
-            'sheet'             => 'topics',
-        ];
-
-        return view('/topic/edit', ['meta' => $meta, 'uid' => $this->uid, 'data' => $data]);
+        return view(
+            '/topic/edit',
+            [
+                'meta'  => meta($m = [], Translate::get('edit topic') . ' | ' . $topic['topic_title']),
+                'uid'   => $this->uid,
+                'data'  => [
+                    'topic'             => $topic,
+                    'topic_related'     => $topic_related,
+                    'topic_parent_id'   => $topic_parent_id,
+                    'post_related'      => $post_related,
+                    'user'              => UserModel::getUser($topic['topic_user_id'], 'id'),
+                    'sheet'             => 'topics',
+                ]
+            ]
+        );
     }
 
     public function edit()
     {
         // Временно запретим участникам
         if ($this->uid['user_trust_level'] != 5) redirect('/');
-        
+
         $topic_id                   = Request::getPostInt('topic_id');
         $topic_title                = Request::getPost('topic_title');
         $topic_description          = Request::getPost('topic_description');
@@ -111,7 +115,7 @@ class EditTopicController extends MainController
                 $topic_user_id = $topic_user_new;
             }
         }
-        
+
         $slug = TopicModel::getTopic($topic_slug, 'slug');
         if ($slug['topic_slug'] != $topic['topic_slug']) {
             if ($slug) {
@@ -119,7 +123,7 @@ class EditTopicController extends MainController
                 redirect(getUrlByName('topic', ['slug' => $topic_slug]));
             }
         }
-        
+
         $post_fields    = Request::getPost() ?? [];
         $topic_slug     = strtolower($topic_slug);
         $data = [

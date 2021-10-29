@@ -12,9 +12,14 @@ class InvitationsController extends MainController
     // Показ формы создания инвайта
     public function inviteForm()
     {
-        $meta = meta($m = [], Translate::get('invite'));
-
-        return view('/user/invite', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => []]);
+        return view(
+            '/user/invite',
+            [
+                'meta'  => meta($m = [], Translate::get('invite')),
+                'uid'   => Base::getUid(),
+                'data'  => []
+            ]
+        );
     }
 
     // Страница инвайтов пользователя
@@ -32,13 +37,17 @@ class InvitationsController extends MainController
         $user = UserModel::getUser($uid['user_id'], 'id');
         Base::accountBan($user);
 
-        $meta = meta($m = [], Translate::get('invites'));
-        $data = [
-            'invitations'   => InvitationModel::userResult($uid['user_id']),
-            'count_invites' => $user['user_invitation_available'],
-        ];
-
-        return view('/user/invitation', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+        return view(
+            '/user/invitation',
+            [
+                'meta'  => meta($m = [], Translate::get('invites')),
+                'uid'   => $uid,
+                'data'  => [
+                    'invitations'   => InvitationModel::userResult($uid['user_id']),
+                    'count_invites' => $user['user_invitation_available'],
+                ]
+            ]
+        );
     }
 
     // Создать инвайт

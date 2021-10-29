@@ -27,12 +27,16 @@ class AddWebController extends MainController
         Request::getResources()->addBottomStyles('/assets/css/select2.css');
         Request::getResources()->addBottomScript('/assets/js/select2.min.js');
 
-        $meta = meta($m = [], Translate::get('add a website'));
-        $data = [
-            'sheet'         => 'domains',
-        ];
-
-        return view('/web/add', ['meta' => $meta, 'uid' => $this->uid, 'data' => $data]);
+        return view(
+            '/web/add',
+            [
+                'meta'  => meta($m = [], Translate::get('add a website')),
+                'uid'   => $this->uid,
+                'data'  => [
+                    'sheet' => 'domains',
+                ]
+            ]
+        );
     }
 
     public function create()

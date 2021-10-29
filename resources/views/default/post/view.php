@@ -151,11 +151,16 @@
           </a>
         <?php } ?>
       </div>
-      
+
       <?php if ($post['post_type'] == 0) { ?>
-         <?= includeTemplate('/_block/editor/answer-create-editor', ['data' => $post, 'lang' => $uid['user_lang'], 'type' => 'answer', 'user_id' => $uid['user_id']]); ?>
+        <?= includeTemplate('/_block/editor/answer-create-editor', [
+          'data'    => $post,
+          'lang'    => Config::get('general.lang'),
+          'type'    => 'answer',
+          'user_id' => $uid['user_id']
+        ]); ?>
       <?php } ?>
-      
+
     <?php } else { ?>
       <div class="bg-red-300 p15 center mr10">
         <?= Translate::get('post deleted'); ?>...
@@ -172,7 +177,7 @@
       if ($post['post_closed'] == 1) echo no_content(Translate::get('the question is closed'), 'bi bi-door-closed');
     }
   } else {
-      echo no_content(Translate::get('this is a draft'), 'bi bi-journal-medical');
+    echo no_content(Translate::get('this is a draft'), 'bi bi-journal-medical');
   } ?>
 </main>
 <aside class="col-span-3 relative br-rd5 no-mob">

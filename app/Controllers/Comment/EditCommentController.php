@@ -21,13 +21,17 @@ class EditCommentController extends MainController
         $comment = CommentModel::getCommentsId($comment_id);
         if (!accessСheck($comment, 'comment', $uid, 0, 0)) return false;
 
-        $data = [
-            'comment_id'        => $comment_id,
-            'post_id'           => $post_id,
-            'comment_content'   => $comment['comment_content'],
-        ];
-
-        includeTemplate('/_block/form/edit-form-comment', ['data' => $data, 'uid' => $uid]);
+        includeTemplate(
+            '/_block/form/edit-form-comment',
+            [
+                'data'  => [
+                    'comment_id'        => $comment_id,
+                    'post_id'           => $post_id,
+                    'comment_content'   => $comment['comment_content'],
+                ],
+                'uid'   => $uid
+            ]
+        );
     }
 
     public function edit()
@@ -61,5 +65,4 @@ class EditCommentController extends MainController
         CommentModel::CommentEdit($comment['comment_id'], $comment_content);
         redirect($redirect);
     }
-
 }

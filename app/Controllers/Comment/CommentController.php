@@ -34,16 +34,20 @@ class CommentController extends MainController
             'imgurl'     => false,
             'url'        => getUrlByName('comments'),
         ];
-        $meta = meta($m, Translate::get('all comments'), Translate::get('comments-desc'));
 
-        $data = [
-            'pagesCount'    => ceil($pagesCount / $limit),
-            'pNum'          => $page,
-            'sheet'         => 'comments',
-            'comments'      => $result
-        ];
-
-        return view('/comment/comments', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+        return view(
+            '/comment/comments',
+            [
+                'meta'  => meta($m, Translate::get('all comments'), Translate::get('comments-desc')),
+                'uid'   => $uid,
+                'data'  => [
+                    'pagesCount'    => ceil($pagesCount / $limit),
+                    'pNum'          => $page,
+                    'sheet'         => 'comments',
+                    'comments'      => $result
+                ]
+            ]
+        );
     }
 
     // Комментарии участника
@@ -68,14 +72,18 @@ class CommentController extends MainController
             'imgurl'     => false,
             'url'        => getUrlByName('comments.user', ['login' => $login]),
         ];
-        $meta = meta($m, Translate::get('comments-n') . ' ' . $login, Translate::get('comments-n') . ' ' . $login);
 
-        $data = [
-            'sheet'         => 'user-comments',
-            'comments'      => $result,
-            'user_login'    => $user['user_login'],
-        ];
-
-        return view('/comment/comment-user', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
+        return view(
+            '/comment/comment-user',
+            [
+                'meta'  => meta($m, Translate::get('comments') . ' ' . $login, Translate::get('comments') . ' ' . $login),
+                'uid'   => Base::getUid(),
+                'data'  => [
+                    'sheet'         => 'user-comments',
+                    'comments'      => $result,
+                    'user_login'    => $user['user_login'],
+                ]
+            ]
+        );
     }
 }

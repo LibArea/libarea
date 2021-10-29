@@ -31,13 +31,17 @@ class SettingController extends MainController
         // Если пользователь забанен
         Base::accountBan($user);
 
-        $meta = meta($m = [], Translate::get('setting'));
-        $data = [
-            'sheet'         => 'settings',
-            'user'          => $user,
-        ];
-
-        return view('/user/setting/setting', ['meta' => $meta, 'uid' => $this->uid, 'data' => $data]);
+        return view(
+            '/user/setting/setting',
+            [
+                'meta'  => meta($m = [], Translate::get('setting')),
+                'uid'   => $this->uid,
+                'data'  => [
+                    'sheet'         => 'settings',
+                    'user'          => $user,
+                ]
+            ]
+        );
     }
 
     // Изменение профиля
@@ -61,7 +65,7 @@ class SettingController extends MainController
         $_SESSION['account']['user_lang']       = $user_lang ?? 'ru';
 
         $user   = UserModel::getUser($this->uid['user_id'], 'id');
-    
+
         $data = [
             'user_id'                   => $this->uid['user_id'],
             'user_email'                => $user['user_email'],
@@ -104,13 +108,17 @@ class SettingController extends MainController
         Request::getHead()->addStyles('/assets/css/image-uploader.css');
         Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
 
-        $meta = meta($m = [], Translate::get('change avatar'));
-        $data = [
-            'sheet' => 'avatar',
-            'user'  => UserModel::getUser($this->uid['user_login'], 'slug'),
-        ];
-
-        return view('/user/setting/avatar', ['meta' => $meta, 'uid' => $this->uid, 'data' => $data]);
+        return view(
+            '/user/setting/avatar',
+            [
+                'meta'  => meta($m = [], Translate::get('change avatar')),
+                'uid'   => $this->uid,
+                'data'  => [
+                    'sheet' => 'avatar',
+                    'user'  => UserModel::getUser($this->uid['user_login'], 'slug'),
+                ]
+            ]
+        );
     }
 
     // Изменение аватарки
@@ -146,15 +154,19 @@ class SettingController extends MainController
             redirect(getUrlByName('setting.security', ['login' => $this->uid['user_login']]));
         }
 
-        $meta = meta($m = [], Translate::get('change password'));
-        $data = [
-            'password'      => '',
-            'password2'     => '',
-            'password3'     => '',
-            'sheet'         => 'security',
-        ];
-
-        return view('/user/setting/security', ['meta' => $meta, 'uid' => $this->uid, 'data' => $data]);
+        return view(
+            '/user/setting/security',
+            [
+                'meta'  => meta($m = [], Translate::get('change password')),
+                'uid'   => $this->uid,
+                'data'  => [
+                    'password'      => '',
+                    'password2'     => '',
+                    'password3'     => '',
+                    'sheet'         => 'security',
+                ]
+            ]
+        );
     }
 
     // Изменение пароля
@@ -244,13 +256,17 @@ class SettingController extends MainController
         $user = UserModel::getUser($this->uid['user_id'], 'id');
         Base::accountBan($user);
 
-        $meta = meta($m = [], Translate::get('notifications'));
-        $data = [
-            'sheet'     => 'notifications',
-            'setting'   => SettingModel::getNotifications($user['user_id']),
-        ];
-
-        return view('/user/setting/notifications', ['meta' => $meta, 'uid' => $this->uid, 'data' => $data]);
+        return view(
+            '/user/setting/notifications',
+            [
+                'meta'  => meta($m = [], Translate::get('notifications')),
+                'uid'   => $this->uid,
+                'data'  => [
+                    'sheet'     => 'notifications',
+                    'setting'   => SettingModel::getNotifications($user['user_id']),
+                ]
+            ]
+        );
     }
 
     function notificationsEdit()

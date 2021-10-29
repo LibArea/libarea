@@ -128,5 +128,13 @@
 <?php if (!empty($otvet)) { ?>
   <?= no_content(Translate::get('you-question-no'), 'bi bi-info-lg'); ?>
 <?php } else { ?>
-  <?= includeTemplate('/_block/editor/answer-create-editor', ['data' => $post, 'lang' => $uid['user_lang'], 'type' => 'answer', 'user_id' => $uid['user_id']]); ?>
+  <?= includeTemplate(
+    '/_block/editor/answer-create-editor',
+    [
+      'data'    => $post,
+      'lang'    => $uid['user_lang'] ?? Config::get('general.lang'),
+      'type'    => 'answer',
+      'user_id' => $uid['user_id']
+    ]
+  ); ?>
 <?php }  ?>

@@ -6,7 +6,7 @@ class Content
 {
     // Работа с контентом (Parsedown)
     public static function text($content, $type)
-    { 
+    {
         $Parsedown = new MyParsedown();
         $Parsedown->setSafeMode(true); //безопасность
 
@@ -16,7 +16,7 @@ class Content
         } else {
             $text   = $Parsedown->line($content);
         }
-        
+
         return self::parseUser($text);
     }
 
