@@ -151,7 +151,11 @@
           </a>
         <?php } ?>
       </div>
-      <?= includeTemplate('/_block/editor/answer-create-editor', ['data' => $post, 'lang' => $uid['user_lang'], 'type' => 'answer', 'user_id' => $uid['user_id']]); ?>
+      
+      <?php if ($post['post_type'] == 0) { ?>
+         <?= includeTemplate('/_block/editor/answer-create-editor', ['data' => $post, 'lang' => $uid['user_lang'], 'type' => 'answer', 'user_id' => $uid['user_id']]); ?>
+      <?php } ?>
+      
     <?php } else { ?>
       <div class="bg-red-300 p15 center mr10">
         <?= Translate::get('post deleted'); ?>...

@@ -75,13 +75,14 @@ class PostModel extends MainModel
                     post_id,
                     post_title,
                     post_slug,
+                    post_draft,
                     post_is_deleted,
                     relation_post_id,
                     relation_topic_id
                         FROM posts
                             LEFT JOIN topics_post_relation on relation_post_id = post_id
                             
-                            WHERE relation_topic_id is NULL AND post_is_deleted = 0";
+                            WHERE relation_topic_id is NULL AND post_is_deleted = 0 AND post_draft = 0";
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }

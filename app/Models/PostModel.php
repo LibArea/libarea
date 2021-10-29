@@ -142,7 +142,6 @@ class PostModel extends MainModel
                         LEFT JOIN favorites ON favorite_tid = post_id AND favorite_user_id = :user_id AND favorite_type = 1 
                         LEFT JOIN votes_post ON votes_post_item_id = post_id AND votes_post_user_id = :user_id
                             WHERE post_slug = :slug AND post_tl <= :trust_level";
-
         return DB::run($sql, ['slug' => $slug, 'user_id' => $user_id, 'trust_level' => $trust_level])->fetch(PDO::FETCH_ASSOC);
     }
 
