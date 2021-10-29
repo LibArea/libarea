@@ -27,13 +27,17 @@ class AddTopicController extends MainController
             redirect('/');
         }
 
-        $meta = meta($m = [], Translate::get('add topic'));
-        $data = [
-            'sheet'         => 'topics',
-            'count_topic'   => $count_add_topic - $count_topic,
-        ];
-
-        return view('/topic/add', ['meta' => $meta, 'uid' => $this->uid, 'data' => $data]);
+        return view(
+            '/topic/add',
+            [
+                'meta'  => meta($m = [], Translate::get('add topic')),
+                'uid'   => $this->uid,
+                'data'  => [
+                    'sheet'         => 'topics',
+                    'count_topic'   => $count_add_topic - $count_topic,
+                ]
+            ]
+        );
     }
 
     // Добавим topic
@@ -70,7 +74,7 @@ class AddTopicController extends MainController
             addMsg(Translate::get('url-gaps'), 'error');
             redirect($redirect);
         }
-        
+
         $topic_slug = strtolower($topic_slug);
         $data = [
             'topic_title'               => $topic_title,

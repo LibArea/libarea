@@ -60,6 +60,19 @@
       </div>
     <?php } ?>
   </div>
+  
+ <?php if ($data['posts_no_topic']) { ?>
+ <div class="white-box mt10 pt5 pr15 pb5 pl15">
+    <h4 class="mt5 mb5"><?= Translate::get('posts'); ?> (no-topic)</h4>
+    <?php foreach ($data['posts_no_topic'] as $post) { ?>
+      <div class="gray size-15">
+        <a href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
+          <?= $post['post_title']; ?> 
+        </a>
+      </div>
+    <?php } ?>
+  </div>
+  <?php } ?>
 
   <div class="white-box mt10 pt5 pr15 pb5 pl15">
     <h4 class="mt5 mb5"><?= Translate::get('useful resources'); ?></h4>

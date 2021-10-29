@@ -2,7 +2,7 @@
    $(function() {
       var path = "/assets/editor/languages/<?= $lang; ?>";
       editormd.loadScript(path, function() {
-         editor.lang = "<?= $lang; ?>";
+         editor.lang = editormd.defaults.lang;
       });
       
       var editor = editormd("markdown-view", {

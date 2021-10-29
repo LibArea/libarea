@@ -42,16 +42,20 @@ class TopicController extends MainController
             'imgurl'     => false,
             'url'        => $url,
         ];
-        $meta = meta($m, Translate::get('topics-' . $sheet) . $num, Translate::get('topic-desc-' . $sheet) . $num);
 
-        $data = [
-            'sheet'         => 'topics-' . $sheet,
-            'topics'        => $topics,
-            'pagesCount'    => ceil($pagesCount / $limit),
-            'pNum'          => $page,
-        ];
-
-        return view('/topic/topics', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+        return view(
+            '/topic/topics',
+            [
+                'meta'  => meta($m, Translate::get('topics-' . $sheet) . $num, Translate::get('topic-desc-' . $sheet) . $num),
+                'uid'   => $uid,
+                'data'  => [
+                    'sheet'         => 'topics-' . $sheet,
+                    'topics'        => $topics,
+                    'pagesCount'    => ceil($pagesCount / $limit),
+                    'pNum'          => $page,
+                ]
+            ]
+        );
     }
 
     // Посты по теме
@@ -107,27 +111,29 @@ class TopicController extends MainController
             'imgurl'     => '/uploads/topics/logos/' . $topic['topic_img'],
             'url'        => $url,
         ];
-        $meta = meta($m, $title, $descr);
 
-
-        $writers = TopicModel::getWriters($topic['topic_id']);
-
-        $data = [
-            'pagesCount'    => ceil($pagesCount / $limit),
-            'pNum'          => $page,
-            'sheet'         => $sheet == 'feed' ? 'topic' : 'recommend',
-            'topic'         => $topic,
-            'posts'         => $result,
-            'posts'         => $result,
-            'focus_users'   => TopicModel::getFocusUsers($topic['topic_id'], 5),
-            'topic_signed'  => SubscriptionModel::getFocus($topic['topic_id'], $uid['user_id'], 'topic'),
-            'user'          => UserModel::getUser($topic['topic_user_id'], 'id'),
-            'main_topic'    => $main_topic,
-            'subtopics'     => $subtopics,
-            'writers'       => $writers,
-        ];
-
-        return view('/topic/topic', ['meta' => $meta, 'uid' => $uid, 'data' => $data, 'topic'   => $topic['topic_id']]);
+        return view(
+            '/topic/topic',
+            [
+                'meta'  => meta($m, $title, $descr),
+                'uid'   => $uid,
+                'data'  => [
+                    'pagesCount'    => ceil($pagesCount / $limit),
+                    'pNum'          => $page,
+                    'sheet'         => $sheet == 'feed' ? 'topic' : 'recommend',
+                    'topic'         => $topic,
+                    'posts'         => $result,
+                    'posts'         => $result,
+                    'focus_users'   => TopicModel::getFocusUsers($topic['topic_id'], 5),
+                    'topic_signed'  => SubscriptionModel::getFocus($topic['topic_id'], $uid['user_id'], 'topic'),
+                    'user'          => UserModel::getUser($topic['topic_user_id'], 'id'),
+                    'main_topic'    => $main_topic,
+                    'subtopics'     => $subtopics,
+                    'writers'       => TopicModel::getWriters($topic['topic_id']),
+                ],
+                'topic'   => $topic['topic_id']
+            ]
+        );
     }
 
     // Информация по теме
@@ -163,19 +169,23 @@ class TopicController extends MainController
             'imgurl'     => '/uploads/topics/logos/' . $topic['topic_img'],
             'url'        => getUrlByName('topic.info', ['slug' => $topic['topic_slug']]),
         ];
-        $meta = meta($m, $topic['topic_seo_title'] . ' — ' .  Translate::get('topic'), $topic['topic_description']);
 
-        $data = [
-            'sheet'         => 'info',
-            'topic'         => $topic,
-            'topic_related' => TopicModel::topicRelated($topic['topic_related']),
-            'post_related'  => TopicModel::topicPostRelated($topic_select),
-            'subtopics'     => $subtopics,
-            'user'          => UserModel::getUser($topic['topic_user_id'], 'id'),
-            'main_topic'    => $main_topic
-        ];
-
-        return view('/topic/info', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+        return view(
+            '/topic/info',
+            [
+                'meta'  => meta($m, $topic['topic_seo_title'] . ' — ' .  Translate::get('topic'), $topic['topic_description']),
+                'uid'   => $uid,
+                'data'  => [
+                    'sheet'         => 'info',
+                    'topic'         => $topic,
+                    'topic_related' => TopicModel::topicRelated($topic['topic_related']),
+                    'post_related'  => TopicModel::topicPostRelated($topic_select),
+                    'subtopics'     => $subtopics,
+                    'user'          => UserModel::getUser($topic['topic_user_id'], 'id'),
+                    'main_topic'    => $main_topic
+                ]
+            ]
+        );
     }
 
     // Подписаны (25)

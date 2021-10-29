@@ -1,11 +1,9 @@
 <?php
 
 use App\Models\ContentModel;
-use Translate;
 
 class Content
 {
-    
     // Работа с контентом (Parsedown)
     public static function text($content, $type)
     { 

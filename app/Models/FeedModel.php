@@ -18,7 +18,6 @@ class FeedModel extends MainModel
                 $qa         = $data['topic_slug'];
                 $string     = "WHERE topic_list LIKE :qa AND post_is_recommend = 1";
             }
-            
         } elseif ($type == 'link') {
             $selection   = $data['link_url_domain'];
             $string     = "WHERE post_url_domain  = :selection AND post_draft = 0";

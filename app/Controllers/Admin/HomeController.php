@@ -3,7 +3,7 @@
 namespace App\Controllers\Admin;
 
 use Hleb\Scheme\App\Controllers\MainController;
-use App\Models\{HomeModel, AnswerModel, CommentModel, AgentModel, WebModel, TopicModel};
+use App\Models\{HomeModel, AnswerModel, CommentModel, AgentModel, WebModel, TopicModel, Admin\PostModel};
 use App\Models\User\UserModel;
 use Base, Translate;
 
@@ -23,6 +23,7 @@ class HomeController extends MainController
                 'data'  => [
                     'topics_count'      => TopicModel::getTopicsAllCount($uid['user_id'], 'all'),
                     'posts_count'       => HomeModel::feedCount([], $uid, 'all'),
+                    'posts_no_topic'    => PostModel::getNoTopic(),
                     'users_count'       => UserModel::getUsersAllCount('all'),
                     'answers_count'     => AnswerModel::getAnswersAllCount('all'),
                     'comments_count'    => CommentModel::getCommentsAllCount('all'),

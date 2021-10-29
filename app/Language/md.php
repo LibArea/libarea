@@ -438,7 +438,7 @@ $data = [
     'does this violate site rules'      => 'Acest lucru încalcă regulile site-ului.',
     'flag not included'                 => 'Semnalizați-l lăsat, nu îl folosiți des',
     'medal for registration'            => 'Medalie pentru înregistrare',
-    'responses from community members'  => 'Răspunsurile comunității',
+    'responses-members'                 => 'Răspunsurile comunității',
     'design choice'                     => 'alegerea designului',
     
     'topics-all'            => 'Toate subiectele',

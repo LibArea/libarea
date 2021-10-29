@@ -35,7 +35,7 @@ class PostController extends MainController
         }
 
         // Редирект для слияния
-        if ($post['post_merged_id'] > 0) {
+        if ($post['post_merged_id'] > 0 && $uid['user_trust_level'] != 5) {
             redirect('/post/' . $post['post_merged_id']);
         }
 

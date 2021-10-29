@@ -24,13 +24,17 @@ class RegisterController extends MainController
             'imgurl'     => false,
             'url'        => getUrlByName('register'),
         ];
-        $meta = meta($m, Translate::get('sign up'), Translate::get('info-security'));
 
-        $data = [
-            'sheet'         => 'sign up',
-        ];
-
-        return view('/auth/register', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
+        return view(
+            '/auth/register',
+            [
+                'meta'  => meta($m, Translate::get('sign up'), Translate::get('info-security')),
+                'uid'   => Base::getUid(),
+                'data'  => [
+                    'sheet' => 'sign up',
+                ]
+            ]
+        );
     }
 
     // Отправка запроса для регистрации
@@ -105,12 +109,12 @@ class RegisterController extends MainController
         if ($count < 50 && Config::get('general.mode') == 1) {
             $tl = 1;
         }
-        
+
         $activated = 0; // Требуется активация по e-mail
         if ($inv_uid > 0) {
             $activated = 1;
         }
-        
+
         $params = [
             'user_login'                => $login,
             'user_email'                => $email,
@@ -160,11 +164,15 @@ class RegisterController extends MainController
             redirect('/');
         }
 
-        $meta = meta($m = [], Translate::get('registration by invite'));
-        $data = [
-            'invate' => $invate,
-        ];
-
-        return view('/auth/register-invate', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
+        return view(
+            '/auth/register-invate',
+            [
+                'meta'  => meta($m = [], Translate::get('registration by invite')),
+                'uid'   => Base::getUid(),
+                'data'  => [
+                    'invate' => $invate,
+                ]
+            ]
+        );
     }
 }

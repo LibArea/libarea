@@ -29,21 +29,25 @@ class AnswerController extends MainController
         }
 
         $m = [
-           'og'         => false,
-           'twitter'    => false,
-           'imgurl'     => false,
-           'url'        => getUrlByName('answers'),
-        ];
-        $meta = meta($m, Translate::get('all answers'), Translate::get('answers-desc'));
-
-        $data = [
-            'pagesCount'    => ceil($pagesCount / $limit),
-            'pNum'          => $page,
-            'sheet'         => 'answers',
-            'answers'       => $result,
+            'og'         => false,
+            'twitter'    => false,
+            'imgurl'     => false,
+            'url'        => getUrlByName('answers'),
         ];
 
-        return view('/answer/answers', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+        return view(
+            '/answer/answers',
+            [
+                'meta'  => meta($m, Translate::get('all answers'), Translate::get('answers-desc')),
+                'uid'   => $uid,
+                'data'  => [
+                    'pagesCount'    => ceil($pagesCount / $limit),
+                    'pNum'          => $page,
+                    'sheet'         => 'answers',
+                    'answers'       => $result,
+                ]
+            ]
+        );
     }
 
     // Ответы участника
@@ -64,19 +68,23 @@ class AnswerController extends MainController
         }
 
         $m = [
-           'og'         => false,
-           'twitter'    => false,
-           'imgurl'     => false,
-           'url'        => getUrlByName('answers.user', ['login' => $login]),
-        ];
-        $meta = meta($m, Translate::get('answers') . ' ' . $login, Translate::get('responses from community members') . ' ' . $login);
-
-        $data = [
-            'sheet'         => 'user-answers',
-            'answers'       => $result,
-            'user_login'    => $user['user_login'],
+            'og'         => false,
+            'twitter'    => false,
+            'imgurl'     => false,
+            'url'        => getUrlByName('answers.user', ['login' => $login]),
         ];
 
-        return view('/answer/answer-user', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
+        return view(
+            '/answer/answer-user',
+            [
+                'meta'  => meta($m, Translate::get('answers') . ' ' . $login, Translate::get('responses-members') . ' ' . $login),
+                'uid'   => Base::getUid(),
+                'data'  => [
+                    'sheet'         => 'user-answers',
+                    'answers'       => $result,
+                    'user_login'    => $user['user_login'],
+                ]
+            ]
+        );
     }
 }

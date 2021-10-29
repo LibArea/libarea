@@ -17,13 +17,17 @@ class RecoverController extends MainController
             'imgurl'     => false,
             'url'        => getUrlByName('recover'),
         ];
-        $meta = meta($m, Translate::get('password recovery'), Translate::get('info-recover'));
 
-        $data = [
-            'sheet'         => 'recover',
-        ];
-
-        return view('/auth/recover', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
+        return view(
+            '/auth/recover',
+            [
+                'meta'  => meta($m, Translate::get('password recovery'), Translate::get('info-recover')),
+                'uid'   => Base::getUid(),
+                'data'  => [
+                    'sheet' => 'recover',
+                ]
+            ]
+        );
     }
 
     public function index()
@@ -79,15 +83,18 @@ class RecoverController extends MainController
         $user = UserModel::getUser($user_id['activate_user_id'], 'id');
         Base::PageError404($user);
 
-        $meta = meta($m = [], Translate::get('password recovery'), Translate::get('info-recover'));
-
-        $data = [
-            'code'          => $code,
-            'user_id'       => $user_id['activate_user_id'],
-            'sheet'         => 'recovery',
-        ];
-
-        return view('/auth/newrecover', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
+        return view(
+            '/auth/newrecover',
+            [
+                'meta'  => meta($m = [], Translate::get('password recovery'), Translate::get('info-recover')),
+                'uid'   => Base::getUid(),
+                'data'  => [
+                    'code'      => $code,
+                    'user_id'   => $user_id['activate_user_id'],
+                    'sheet'     => 'recovery',
+                ]
+            ]
+        );
     }
 
     public function remindNew()

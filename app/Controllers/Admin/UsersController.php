@@ -32,15 +32,19 @@ class UsersController extends MainController
 
         Request::getResources()->addBottomScript('/assets/js/admin.js');
 
-        $meta = meta($m = [], Translate::get('users'));
-        $data = [
-            'pagesCount'    => ceil($pagesCount / $limit),
-            'pNum'          => $page,
-            'alluser'       => $result,
-            'sheet'         => $sheet == 'all' ? 'users' : 'users-ban',
-        ];
-
-        return view('/admin/user/users', ['meta' => $meta, 'uid' => $uid, 'data' => $data]);
+        return view(
+            '/admin/user/users',
+            [
+                'meta'  => meta($m = [], Translate::get('users')),
+                'uid'   => $uid,
+                'data'  => [
+                    'pagesCount'    => ceil($pagesCount / $limit),
+                    'pNum'          => $page,
+                    'alluser'       => $result,
+                    'sheet'         => $sheet == 'all' ? 'users' : 'users-ban',
+                ]
+            ]
+        );
     }
 
     // Повторы IP
@@ -55,7 +59,7 @@ class UsersController extends MainController
 
         $results = array();
         foreach ($user_all as $ind => $row) {
-            $row['duplicat_ip_reg']    = AgentModel::duplicatesRegistrationCount($row['user_id']);
+            $row['duplicat_ip_reg'] = AgentModel::duplicatesRegistrationCount($row['user_id']);
             $row['isBan']       = BanUserModel::isBan($row['user_id']);
             $results[$ind]      = $row;
         }
@@ -66,9 +70,9 @@ class UsersController extends MainController
                 'meta'  => meta($m = [], Translate::get('search')),
                 'uid'   => Base::getUid(),
                 'data'  => [
-                    'results'       => $results,
-                    'option'        => $option,
-                    'sheet'         => 'users',
+                    'results'   => $results,
+                    'option'    => $option,
+                    'sheet'     => 'users',
                 ]
             ]
         );
@@ -77,7 +81,7 @@ class UsersController extends MainController
     // Бан участнику
     public function banUser()
     {
-        $user_id    = Request::getPostInt('id');
+        $user_id = Request::getPostInt('id');
 
         BanUserModel::setBanUser($user_id);
 
@@ -103,9 +107,9 @@ class UsersController extends MainController
                 'meta'  => meta($m = [], Translate::get('edit user')),
                 'uid'   => Base::getUid(),
                 'data'  => [
-                    'sheet'             => 'edit-user',
-                    'count'             => UserModel::contentCount($user_id),
-                    'user'              => $user,
+                    'sheet'     => 'edit-user',
+                    'count'     => UserModel::contentCount($user_id),
+                    'user'      => $user,
                 ]
             ]
         );

@@ -17,7 +17,7 @@ class LoginController extends MainController
         $password   = Request::getPost('password');
         $rememberMe = Request::getPostInt('rememberme');
 
-        $redirect = getUrlByName('login');
+        $redirect   = getUrlByName('login');
 
         Validation::checkEmail($email, $redirect);
 
@@ -66,12 +66,16 @@ class LoginController extends MainController
             'imgurl'     => false,
             'url'        => getUrlByName('login'),
         ];
-        $meta = meta($m, Translate::get('sign up'), Translate::get('info-login'));
 
-        $data = [
-            'sheet'         => 'sign up',
-        ];
-
-        return view('/auth/login', ['meta' => $meta, 'uid' => Base::getUid(), 'data' => $data]);
+        return view(
+            '/auth/login',
+            [
+                'meta'  => meta($m, Translate::get('sign up'), Translate::get('info-login')),
+                'uid'   => Base::getUid(),
+                'data'  => [
+                    'sheet' => 'sign up',
+                ]
+            ]
+        );
     }
 }

@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\ContentModel;
-use Translate;
 
 class Validation
 {
