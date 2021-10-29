@@ -16,59 +16,8 @@ class Content
         } else {
             $text   = $Parsedown->line($content);
         }
-        $text   = self::parseUser($text);
-
-        return self::parseUrl($text);
-    }
-
-    // Аудит
-    public static function stopWordsExists($content, $replace = '*')
-    {
-        $stop_words = ContentModel::getStopWords();
-
-        foreach ($stop_words as $word) {
-
-            $word = trim($word['stop_word']);
-
-            if (!$word) {
-                continue;
-            }
-
-            if (substr($word, 0, 1) == '{' and substr($word, -1, 1) == '}') {
-
-                if (preg_match(substr($word, 1, -1), $content)) {
-                    return true;
-                }
-            } else {
-                if (strstr($content, $word)) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
-
-    // Для URL отслеживания
-    // Пока вернем (см. метод estimationUrl) 
-    public static function parseUrl($content)
-    {
-        return $content;
-    }
-
-    // Срабатывает тригер для оценки URl (используем далее, см. метод: editPostRecording)
-    // Тип публикации
-    // id публикации 
-    // url публикации
-    // Кто добавил
-    // Проверка на совпадение домена и его статус, вес домена в системе (добавить!)
-    public static function estimationUrl($content)
-    {
-        $regex = '/(?<!!!\[\]\(|"|\'|\=|\)|>)(https?:\/\/[-a-zA-Z0-9@:;%_\+.~#?\&\/\/=!]+)(?!"|\'|\)|>)/i';
-        if ($info = preg_match($regex, $content, $matches)) {
-            return  $matches[1];
-        }
-        return true;
+        
+        return self::parseUser($text);
     }
 
     public static function parseVideo($content)

@@ -30,18 +30,12 @@ class AddAnswerController extends MainController
         // Ограничим добавления ответов (в день)
         Validation::speedAdd($uid, 'answer');
 
+        // Если контента меньше N и он содержит ссылку 
+        // Оповещение админу
         $answer_published = 1;
-        if (Content::stopWordsExists($answer_content)) {
-            // Если меньше 2 ответов и если контент попал в стоп лист, то заморозка
-            $all_count = ActionModel::ceneralContributionCount($uid['user_id']);
-            if ($all_count < 2) {
-                ActionModel::addLimitingMode($uid['user_id']);
-                addMsg(Translate::get('limiting-mode-1'), 'error');
-                redirect('/');
-            }
-
+        if (!Validation::stopSpam($answer_content, $uid['user_id'])) {
+            addMsg(Translate::get('content-audit'), 'error');
             $answer_published = 0;
-            addMsg(Translate::get('answer-audit'), 'error');
         }
 
         $answer_content = Content::change($answer_content);
@@ -60,8 +54,8 @@ class AddAnswerController extends MainController
         // Оповещение админу
         if ($answer_published == 0) {
             ActionModel::addAudit('answer', $uid['user_id'], $last_id);
-            $type = 15; // Упоминания в посте  
-            $user_id  = 1;
+            $type       = 15; // Упоминания в посте  
+            $user_id    = 1;
             NotificationsModel::send($uid['user_id'], $user_id, $type, $last_id, $url_answer, 1);
         }
 

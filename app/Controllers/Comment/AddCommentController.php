@@ -48,18 +48,12 @@ class AddCommentController extends MainController
         // Ограничим добавления комментариев (в день)
         Validation::speedAdd($uid, 'comment');
 
+        // Если контента меньше N и он содержит ссылку 
+        // Оповещение админу
         $comment_published = 1;
-        if (Content::stopWordsExists($comment_content)) {
-            // Если меньше 2 комментариев и если контент попал в стоп лист, то заморозка
-            $all_count = ActionModel::ceneralContributionCount($uid['user_id']);
-            if ($all_count < 2) {
-                ActionModel::addLimitingMode($uid['user_id']);
-                addMsg(Translate::get('limiting-mode-1'), 'error');
-                redirect('/');
-            }
-
+        if (!Validation::stopSpam($comment_content, $uid['user_id'])) {
+            addMsg(Translate::get('content-audit'), 'error');
             $comment_published = 0;
-            addMsg(Translate::get('comment-audit'), 'error');
         }
 
         $comment_content = Content::change($comment_content);

@@ -113,21 +113,14 @@ class AddPostController extends MainController
         $slug           = $slugGenerator->GetSeoFriendlyName($post_title);
         $post_slug      = substr($slug, 0, 90);
 
-        // Стоп слова (и другие условия) + оповещение
+        // Если контента меньше N и он содержит ссылку 
+        // Оповещение админу
         $post_published = 1;
-        if (Content::stopWordsExists($post_content)) {
-            // Если меньше 2 постов и если контент попал в стоп лист, то заморозка
-            $all_count = ActionModel::ceneralContributionCount($this->uid['user_id']);
-            if ($all_count < 2) {
-                ActionModel::addLimitingMode($this->uid['user_id']);
-                addMsg(Translate::get('limiting-mode-1'), 'error');
-                redirect('/');
-            }
-
+        if (!Validation::stopSpam($post_content, $uid['user_id'])) {
+            addMsg(Translate::get('content-audit'), 'error');
             $post_published = 0;
-            addMsg(Translate::get('post-audit'), 'error');
         }
-
+        
         $data = [
             'post_title'            => $post_title,
             'post_content'          => Content::change($post_content),

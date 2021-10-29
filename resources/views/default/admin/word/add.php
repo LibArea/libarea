@@ -10,14 +10,12 @@
     Translate::get('add a stop word')
   ); ?>
 
-  <div class="box badges">
-    <form action="/admin/word/add" method="post">
-      <?= csrf_field() ?>
-      <div class="mb20 max-w780">
-        <label class="block" or="post_title"><?= Translate::get('stop word'); ?></label>
-        <input type="text" class="w-100 h30" name="word">
-      </div>
-      <input type="submit" class="button block br-rd5 white" name="submit" value="<?= Translate::get('add'); ?>" />
-    </form>
-  </div>
+  <form action="/admin/word/add" method="post">
+    <?= csrf_field() ?>
+    <div class="mb20 max-w780">
+      <label class="block" or="post_title"><?= Translate::get('stop word'); ?></label>
+      <input type="text" class="w-100 h30" name="word">
+    </div>
+    <input type="submit" class="button block br-rd5 mb15 white" name="submit" value="<?= Translate::get('add'); ?>" />
+  </form>
 </main>

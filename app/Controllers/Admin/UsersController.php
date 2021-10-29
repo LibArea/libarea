@@ -120,7 +120,7 @@ class UsersController extends MainController
     {
         $login      = Request::getPost('login');
         $user_id    = Request::getInt('id');
-        if (!UserModel::getUser($user_id, 'id')) redirect(getUrlByName('admin.users'));
+        if (!$user = UserModel::getUser($user_id, 'id')) redirect(getUrlByName('admin.users'));
 
         $redirect = getUrlByName('admin.user.edit', ['id' => $user_id]);
         Validation::Limits($login, Translate::get('login'), '3', '11', $redirect);
@@ -133,6 +133,7 @@ class UsersController extends MainController
             'user_name'          => Request::getPost('name', ''),
             'user_activated'     => Request::getPostInt('activated'),
             'user_limiting_mode' => Request::getPostInt('limiting_mode'),
+            'user_lang'          => $user['user_lang'],
             'user_trust_level'   => Request::getPostInt('trust_level'),
             'user_color'         => Request::getPostString('color', '#339900'),
             'user_about'         => Request::getPost('about', ''),

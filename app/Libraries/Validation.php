@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\ContentModel;
+use App\Models\{ContentModel, ActionModel};
 
 class Validation
 {
@@ -103,4 +103,68 @@ class Validation
         addMsg($text, 'error');
         redirect('/');
     }
+    
+    public static function stopSpam($content, $user_id)
+    {
+        // TODO: лимиты возможно в конфиг
+        // Если ссылка
+        if (self::estimationUrl($content)) {
+            $all_count = ActionModel::ceneralContributionCount($user_id);
+            if ($all_count < 2) {
+                ActionModel::addLimitingMode($user_id);
+                return false;
+            }
+        }
+       
+        // Если в стоп листе
+        if (self::stopWordsExists($content)) {
+            // Если меньше 2 ответов и если контент попал в стоп лист, то заморозка
+            $all_count = ActionModel::ceneralContributionCount($user_id);
+            if ($all_count < 2) {
+                ActionModel::addLimitingMode($user_id);
+                return false;
+            }
+        }
+
+        return true;
+    }
+    
+    // Для тригера URL
+    public static function estimationUrl($content)
+    {
+        $regex = '/(?<!!!\[\]\(|"|\'|\=|\)|>)(https?:\/\/[-a-zA-Z0-9@:;%_\+.~#?\&\/\/=!]+)(?!"|\'|\)|>)/i';
+        if ($info = preg_match($regex, $content, $matches)) {
+            return  $matches[1];
+        }
+        return false;
+    }
+    
+    // Аудит
+    public static function stopWordsExists($content, $replace = '*')
+    {
+        $stop_words = ContentModel::getStopWords();
+
+        foreach ($stop_words as $word) {
+
+            $word = trim($word['stop_word']);
+
+            if (!$word) {
+                continue;
+            }
+
+            if (substr($word, 0, 1) == '{' and substr($word, -1, 1) == '}') {
+
+                if (preg_match(substr($word, 1, -1), $content)) {
+                    return true;
+                }
+            } else {
+                if (strstr($content, $word)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+    
 }

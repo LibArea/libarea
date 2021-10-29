@@ -10,19 +10,17 @@
     Translate::get('reward the user') . ' ' . $data['user']['user_login']
   ); ?>
 
-  <div class="box badges">
-    <form action="/admin/badge/user/add" method="post">
-      <?= csrf_field() ?>
-      <div class="mb20">
-        <label class="block" for="post_content"><?= Translate::get('badge'); ?></label>
-        <select class="w-100 h30" name="badge_id">
-          <?php foreach ($data['badges'] as $badge) { ?>
-            <option value="<?= $badge['badge_id']; ?>"> <?= $badge['badge_title']; ?></option>
-          <?php } ?>
-        </select>
-        <input type="hidden" name="user_id" id="post_id" value="<?= $data['user']['user_id']; ?>">
-      </div>
-      <input type="submit" class="button block br-rd5 white" name="submit" value="<?= Translate::get('add'); ?>" />
-    </form>
-  </div>
+  <form action="/admin/badge/user/add" method="post">
+    <?= csrf_field() ?>
+    <div class="mb20">
+      <label class="block" for="post_content"><?= Translate::get('badge'); ?></label>
+      <select class="w-100 h30" name="badge_id">
+        <?php foreach ($data['badges'] as $badge) { ?>
+          <option value="<?= $badge['badge_id']; ?>"> <?= $badge['badge_title']; ?></option>
+        <?php } ?>
+      </select>
+      <input type="hidden" name="user_id" id="post_id" value="<?= $data['user']['user_id']; ?>">
+    </div>
+    <input type="submit" class="button block br-rd5 mb15 white" name="submit" value="<?= Translate::get('add'); ?>" />
+  </form>
 </main>
