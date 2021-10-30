@@ -33,7 +33,7 @@ class SearchModel extends MainModel
             ) AS rel ON rel.p_id = post_id  
                 LEFT JOIN users ON user_id = post_user_id 
                 WHERE post_is_deleted = 0 and post_draft = 0 and post_tl = 0 
-                        LIKE :qa1 OR post_title LIKE :qa2 ORDER BY post_id LIMIT 15";
+                     AND post_content LIKE :qa1 OR post_title LIKE :qa2 ORDER BY post_id LIMIT 15";
 
         return DB::run($sql, ['qa1' => "%" . $query . "%", 'qa2' => "%" . $query . "%"])->fetchall(PDO::FETCH_ASSOC);
     }
