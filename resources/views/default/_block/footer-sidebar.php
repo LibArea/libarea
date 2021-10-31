@@ -3,8 +3,8 @@
     <a class="mr15 inline gray-light" title="<?= Translate::get('all comments'); ?>" href="<?= getUrlByName('comments'); ?>">
       <?= Translate::get('comments'); ?>
     </a>
-    <a class="inline gray-light" title="<?= Translate::get('info'); ?>" href="<?= getUrlByName('info'); ?>">
-      <?= Translate::get('info'); ?>
+    <a class="inline gray-light" title="<?= Translate::get('help'); ?>" href="<?= getUrlByName('info'); ?>">
+      <?= Translate::get('help'); ?>
     </a>
     <a rel="nofollow noopener" class="gray-light-2 right ml10" title="DISCORD" href="https://discord.gg/dw47aNx5nU">
       <i class="bi bi-discord middle size-18"></i>

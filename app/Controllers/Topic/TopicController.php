@@ -102,7 +102,7 @@ class TopicController extends MainController
         if ($sheet == 'recommend') {
             $url =  getUrlByName('recommend', ['slug' => $topic['topic_slug']]);
             $title  = $topic['topic_seo_title'] . ' — ' .  Translate::get('recommended posts');
-            $descr  = sprintf(Translate::get('recommended-posts'), $topic['topic_seo_title']) . $topic['topic_description'];
+            $descr  = sprintf(Translate::get('recommended-posts-desc'), $topic['topic_seo_title']) . $topic['topic_description'];
         }
 
         $m = [

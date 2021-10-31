@@ -9,7 +9,7 @@
         <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'w94 border-box-1 mt5'); ?>
       </div>
       <div class="ml15 mb-ml-0 flex-auto">
-        <h1 class="mt0">
+        <h1 class="mb0 mt10 size-24">
           <?= $data['topic']['topic_seo_title']; ?>
           <?php if ($uid['user_trust_level'] == 5 || $topic['topic_user_id'] == $uid['user_id']) { ?>
             <a class="right gray-light" href="/topic/edit/<?= $topic['topic_id']; ?>">

@@ -183,7 +183,6 @@ $data = [
     'no answers'        => 'Din păcate, nu există răspunsuri. Scrie dacă știi răspunsul.',
     'comments-desc'     => 'Toate comentariile (cu privire la răspunsuri) în ordinea priorității în comunitate',
     'answers-desc'      => 'Toate răspunsurile (la postări) în ordine de prioritate în comunitate',
-    'site-banner'       => 'Comunitatea de interes',
     'site-banner-txt'   => 'Curiosii este în construcție',
     'no-auth-comm'      => 'Trebuie să fiți conectat pentru a posta un comentariu.',
     'no-auth-answ'      => 'Trebuie să fiți conectat pentru a răspunde la întrebare',
@@ -317,7 +316,6 @@ $data = [
     'password changed'      => 'Parola a fost schimbată cu succes',
     'old-password-err'      => 'Parola veche nu este corectă',
     'pass-match-err'        => 'Parola nepotrivită',
-    'pass-gap-err'          => 'Parola nu poate conține spații',
     'user-already'          => 'Utilizatorul este deja pe site',
     'invate-to-replay'      => 'Ați trimis deja o invitație acestui utilizator',
     'registration by invite'=> 'Înregistrare prin invitație',
@@ -425,7 +423,7 @@ $data = [
     'you can add more'                      => 'Puteți adăuga mai multe',
 
     'recommended posts' => 'postări recomandate ',
-    'recommended-posts' => 'Postări recomandate în  «%1$s» selectat manual. ',
+    'recommended-posts-desc' => 'Postări recomandate în  «%1$s» selectat manual. ',
 
     'new password has been sent to e-mail'          => 'Noua parolă a fost trimisă prin e-mail',
     'check your e-mail to activate your account'    => 'Verificați-vă e-mailul pentru a vă activa contul',

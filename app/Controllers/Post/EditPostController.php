@@ -113,7 +113,7 @@ class EditPostController extends MainController
         // Обложка поста
         $cover          = $_FILES['images'];
         if ($_FILES['images']['name'][0]) {
-            $post_img = UploadImage::cover_post($cover, $post, $redirect);
+            $post_img = UploadImage::cover_post($cover, $post, $redirect, $this->uid['user_id']);
         }
 
         $post_img = $post_img ?? $post['post_content_img'];
@@ -161,10 +161,8 @@ class EditPostController extends MainController
             redirect('/');
         }
 
-        $path_img = HLEB_PUBLIC_DIR . AG_PATH_POSTS_COVER . $post['post_content_img'];
-
         PostModel::setPostImgRemove($post['post_id']);
-        unlink($path_img);
+        UploadImage::cover_post_remove($post['post_content_img'], $this->uid['user_id']);
 
         addMsg(Translate::get('cover removed'), 'success');
         redirect('/post/edit/' . $post['post_id']);
@@ -180,7 +178,7 @@ class EditPostController extends MainController
         $img         = $_FILES['editormd-image-file'];
         if ($_FILES['editormd-image-file']['name']) {
 
-            $post_img = UploadImage::post_img($img);
+            $post_img = UploadImage::post_img($img, $user_id);
             $response = array(
                 "url"     => $post_img,
                 "message" => Translate::get('successful download'),

@@ -110,7 +110,7 @@ class AddPostController extends MainController
         // Обложка поста
         $cover  = $_FILES['images'];
         if ($_FILES['images']['name'][0]) {
-            $post_img = UploadImage::cover_post($cover, 0, $redirect);
+            $post_img = UploadImage::cover_post($cover, 0, $redirect, $this->uid['user_id']);
         }
 
         // Ограничим добавления постов (в день)
@@ -193,7 +193,6 @@ class AddPostController extends MainController
 
         redirect($url_post);
     }
-
 
     // Парсинг
     public function grabMeta()

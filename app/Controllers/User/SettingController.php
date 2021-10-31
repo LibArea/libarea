@@ -183,7 +183,7 @@ class SettingController extends MainController
         }
 
         if (substr_count($password2, ' ') > 0) {
-            addMsg(Translate::get('pass-gap-err'), 'error');
+            addMsg(Translate::get('password-spaces'), 'error');
             redirect($redirect);
         }
 

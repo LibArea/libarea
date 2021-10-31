@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\TopicModel;
+use App\Models\{TopicModel, FileModel};
 use App\Models\User\{UserModel, SettingModel};
 
 class UploadImage
@@ -66,7 +66,7 @@ class UploadImage
         return false;
     }
 
-    public static function post_img($img)
+    public static function post_img($img, $user_id)
     {
         $path_img   = HLEB_PUBLIC_DIR . AG_PATH_POSTS_CONTENT;
         $year       = date('Y') . '/';
@@ -78,7 +78,6 @@ class UploadImage
 
         $image = new  SimpleImage();
 
-        // Обрежем больше 850
         $width_h  = getimagesize($file);
         if ($width_h[0] > 850) {
             $image
@@ -86,16 +85,26 @@ class UploadImage
                 ->autoOrient()     // adjust orientation based on exif data
                 ->resize(850, null)
                 ->toFile($path_img . $year . $month . $filename . '.jpeg', 'image/jpeg');
-
-            return AG_PATH_POSTS_CONTENT . $year . $month . $filename . '.jpeg';
+        } else {
+            $image
+                ->fromFile($file)
+                ->autoOrient()
+                ->toFile($path_img . $year . $month . $filename . '.jpeg', 'image/jpeg');
         }
+        
+         $img_post = AG_PATH_POSTS_CONTENT . $year . $month . $filename . '.jpeg';   
+         $params = [
+            'file_path'         => $img_post,
+            'file_type'         => 'post-telo',
+            'file_content_id'   => $post['post_id'] ?? 0,
+            'file_user_id'      => $user_id,
+            'file_date'         => date('Y-m-d H:i:s'),
+            'file_is_deleted'   => 0
 
-        $image
-            ->fromFile($file)
-            ->autoOrient()
-            ->toFile($path_img . $year . $month . $filename . '.jpeg', 'image/jpeg');
+        ];
+        FileModel::set($params);
 
-        return AG_PATH_POSTS_CONTENT . $year . $month . $filename . '.jpeg';
+        return $img_post;
     }
 
     // Обложка участника
@@ -143,7 +152,7 @@ class UploadImage
     }
 
     // Обложка поста
-    public static function cover_post($cover, $post, $redirect)
+    public static function cover_post($cover, $post, $redirect, $user_id)
     {
         // Проверка ширину
         $width_h  = getimagesize($cover['tmp_name'][0]);
@@ -173,11 +182,31 @@ class UploadImage
         // Удалим если есть старая
         if ($post['post_content_img'] != $post_img) {
             @unlink($path . $post['post_content_img']);
+            FileModel::removal($post['post_content_img'], $user_id);
         }
+
+        $params = [
+            'file_path'         => $post_img,
+            'file_type'         => 'post',
+            'file_content_id'   => $post['post_id'] ?? 0,
+            'file_user_id'      => $user_id,
+            'file_date'         => date('Y-m-d H:i:s'),
+            'file_is_deleted'   => 0
+
+        ];
+        FileModel::set($params);
 
         return $post_img;
     }
-
+    
+    // Удаление обложка поста
+    public static function cover_post_remove($path_img, $user_id)
+    {
+       unlink(HLEB_PUBLIC_DIR . AG_PATH_POSTS_COVER . $path_img);
+       
+       return FileModel::removal($path_img, $user_id);
+    }
+    
     // Thumb for post
     public static function thumb_post($image)
     {

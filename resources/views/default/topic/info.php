@@ -7,7 +7,7 @@
     <a class="size-14" title="<?= Translate::get('topics-all'); ?>" href="/topics">
       ← <?= Translate::get('topics'); ?>
     </a>
-    <h1 class="title mb0 mt10 size-24">
+    <h1 class="mb0 mt10 size-24">
       <a href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
         <?= $topic['topic_seo_title']; ?>
       </a>
@@ -17,7 +17,7 @@
         </a>
       <?php } ?>
     </h1>
-    <h3><?= Translate::get('info'); ?></h3>
+    <h3 class="mt5 mb5"><?= Translate::get('info'); ?></h3>
     <?= $topic['topic_info']; ?>
   </div>
 

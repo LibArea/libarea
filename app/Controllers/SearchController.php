@@ -62,4 +62,18 @@ class SearchController extends MainController
             ]
         );
     }
+    
+    public function test()
+    {
+        return view(
+            '/test/index',
+            [
+                'meta'  => meta($m = [], Translate::get('test'), Translate::get('test')),
+                'uid'   => Base::getUid(),
+                'data'  => [
+                    'sheet' => 'test',
+                ]
+            ]
+        ); 
+    }
 }

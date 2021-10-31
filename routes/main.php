@@ -139,7 +139,6 @@ Route::get('/topic/{slug}/recommend/page/{page?}')->controller('Topic\TopicContr
 Route::get('/topic/{slug}/page/{page?}')->controller('Topic\TopicController@posts', ['feed'])->where(['slug' => '[a-z0-9-]+', 'page' => '[0-9]+']);
 Route::get('/topic/{slug}/info')->controller('Topic\TopicController@info')->where(['slug' => '[a-z0-9-]+'])->name('topic.info');
 
-
 Route::get('/web')->controller('Web\WebController')->name('web');
 Route::get('/web/page/{page?}')->controller('Web\WebController')->where(['page' => '[0-9]+']);
 Route::get('/domain/{domain}')->controller('Web\WebController@posts', ['feed'])->where(['domain' => '[A-Za-z0-9-.]+'])->name('domain');
@@ -157,5 +156,7 @@ Route::get('/turbo-feed/topic/{slug}')->controller('RssController@turboFeed')->w
 Route::get('/rss-feed/topic/{slug}')->controller('RssController@rssFeed')->where(['slug' => '[A-Za-z0-9-]+']);
 
 Route::type(['get', 'post'])->get('/search')->controller('SearchController')->name('search');
+// For Radjax
+Route::get('/test/search')->controller('SearchController@test');
 
 require 'admin.php';
