@@ -38,7 +38,7 @@ class WebController extends MainController
         return view(
             '/web/links',
             [
-                'meta'  => meta($m, Translate::get('domains-title'), Translate::get('domains-title')),
+                'meta'  => meta($m, Translate::get('domains-title'), Translate::get('domains-desc')),
                 'uid'   => $uid,
                 'data'  => [
                     'sheet'         => 'domains',

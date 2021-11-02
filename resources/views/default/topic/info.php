@@ -21,7 +21,7 @@
     <?= $topic['topic_info']; ?>
   </div>
 
- <?= includeTemplate('/_block/post-related', ['post_related' => $data['post_related']]); ?>
+  <?= includeTemplate('/_block/post-related', ['post_related' => $data['post_related']]); ?>
 
 </main>
 <aside class="col-span-3 relative no-mob">

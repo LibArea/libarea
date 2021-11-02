@@ -54,25 +54,25 @@
           ]
         ]); ?>
         <?php if ($uid['user_trust_level'] == 5) { ?>
-        <?php if ($topic['topic_parent_id'] > 0) { ?>
-          <div class="mb20">
-            <label for="topic_content"><?= Translate::get('root'); ?>?</label>
-            ----
-          </div>
-        <?php } else { ?>
-          <div class="mb20">
-            <label for="topic_content"><?= Translate::get('root'); ?>?</label>
-            <input type="radio" name="topic_is_parent" <?php if ($topic['topic_is_parent'] == 0) { ?>checked<?php } ?> value="0"> <?= Translate::get('no'); ?>
-            <input type="radio" name="topic_is_parent" <?php if ($topic['topic_is_parent'] == 1) { ?>checked<?php } ?> value="1"> <?= Translate::get('yes'); ?>
-            <div class="size-14 gray-light-2"><?= Translate::get('root-help'); ?></div>
-          </div>
+          <?php if ($topic['topic_parent_id'] > 0) { ?>
+            <div class="mb20">
+              <label for="topic_content"><?= Translate::get('root'); ?>?</label>
+              ----
+            </div>
+          <?php } else { ?>
+            <div class="mb20">
+              <label for="topic_content"><?= Translate::get('root'); ?>?</label>
+              <input type="radio" name="topic_is_parent" <?php if ($topic['topic_is_parent'] == 0) { ?>checked<?php } ?> value="0"> <?= Translate::get('no'); ?>
+              <input type="radio" name="topic_is_parent" <?php if ($topic['topic_is_parent'] == 1) { ?>checked<?php } ?> value="1"> <?= Translate::get('yes'); ?>
+              <div class="size-14 gray-light-2"><?= Translate::get('root-help'); ?></div>
+            </div>
+          <?php } ?>
         <?php } ?>
-        <?php } ?>
-        
+
         <div for="mb5"><?= Translate::get('meta description'); ?><sup class="red">*</sup></div>
         <textarea class="add max-w780" rows="6" minlength="44" name="topic_description"><?= $topic['topic_description']; ?></textarea>
         <div class="size-14 gray-light-2 mb20">> 44 <?= Translate::get('characters'); ?></div>
- 
+
         <?= includeTemplate('/_block/form/field-input', [
           'data' => [
             [
@@ -87,24 +87,24 @@
             ],
           ]
         ]); ?>
-        
+
         <div for="mb5"><?= Translate::get('info'); ?><sup class="red">*</sup></div>
         <textarea class="add max-w780" rows="6" name="topic_info"><?= $topic['topic_info']; ?></textarea>
         <div class="mb20 size-14 gray-light-2">Markdown, > 14 <?= Translate::get('characters'); ?></div>
 
         <?php if ($uid['user_trust_level'] == 5) { ?>
-        <?php if ($topic['topic_is_parent'] != 1) { ?>
-          <div class="mb20">
-            <label class="block" for="topic_content"><?= Translate::get('root'); ?></label>
-            <select name="topic_parent_id[]" multiple="multiple" id='selMainLinked'>
-              <?php if (!empty($data['topic_parent_id'])) { ?>
-                <?php foreach ($data['topic_parent_id'] as $parent) { ?>
-                  <option selected value="<?= $parent['topic_id']; ?>"><?= $parent['topic_title']; ?></option>
+          <?php if ($topic['topic_is_parent'] != 1) { ?>
+            <div class="mb20">
+              <label class="block" for="topic_content"><?= Translate::get('root'); ?></label>
+              <select name="topic_parent_id[]" multiple="multiple" id='selMainLinked'>
+                <?php if (!empty($data['topic_parent_id'])) { ?>
+                  <?php foreach ($data['topic_parent_id'] as $parent) { ?>
+                    <option selected value="<?= $parent['topic_id']; ?>"><?= $parent['topic_title']; ?></option>
+                  <?php } ?>
                 <?php } ?>
-              <?php } ?>
-            </select>
-          </div>
-        <?php } ?>
+              </select>
+            </div>
+          <?php } ?>
         <?php } ?>
         <div class="mb20">
           <label class="block" for="post_content">

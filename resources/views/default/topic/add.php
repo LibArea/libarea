@@ -11,11 +11,45 @@
     <form action="/topic/create" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
 
-      <?= includeTemplate('/_block/form/field-input', ['data' => [
-        ['title' => Translate::get('title'), 'type' => 'text', 'name' => 'topic_title', 'value' => '', 'min' => 3, 'max' => 64, 'help' => '3 - 64 ' . Translate::get('characters')],
-        ['title' => Translate::get('title') . ' (SEO)', 'type' => 'text', 'name' => 'topic_seo_title', 'value' => '', 'min' => 4, 'max' => 225, 'help' => '4 - 225 ' . Translate::get('characters')],
-        ['title' => Translate::get('Slug'), 'type' => 'text', 'name' => 'topic_slug', 'value' => '', 'min' => 3, 'max' => 32, 'help' => '3 - 32 ' . Translate::get('characters') . ' (a-zA-Z0-9)'],
-      ]]); ?>
+      <?= includeTemplate('/_block/form/field-input', [
+        'data' => [
+          [
+            'title' => Translate::get('title'),
+            'type' => 'text',
+            'name' => 'topic_title',
+            'value' => '',
+            'min' => 3, 'max' => 64,
+            'help' => '3 - 64 ' . Translate::get('characters')
+          ],
+          [
+            'title' => Translate::get('short description'),
+            'type' => 'text',
+            'name' => 'topic_short_description',
+            'value' => $topic['topic_short_description'],
+            'min' => 11,
+            'max' => 120,
+            'help' => '11 - 120 ' . Translate::get('characters'),
+            'red' => 'red'
+          ],
+          [
+            'title' => Translate::get('title') . ' (SEO)',
+            'type' => 'text',
+            'name' => 'topic_seo_title',
+            'value' => '',
+            'min' => 4, 'max' => 225,
+            'help' => '4 - 225 ' . Translate::get('characters')
+          ],
+          [
+            'title' => Translate::get('Slug'),
+            'type' => 'text',
+            'name' => 'topic_slug',
+            'value' => '',
+            'min' => 3,
+            'max' => 32,
+            'help' => '3 - 32 ' . Translate::get('characters') . ' (a-zA-Z0-9)'
+          ],
+        ]
+      ]); ?>
 
       <div for="mb5"><?= Translate::get('meta description'); ?><sup class="red">*</sup></div>
       <textarea rows="6" class="add max-w780" minlength="44" name="topic_description"></textarea>

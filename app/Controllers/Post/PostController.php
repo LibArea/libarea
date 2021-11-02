@@ -64,9 +64,8 @@ class PostController extends MainController
         $post['post_date_lang'] = lang_date($post['post_date']);
 
         // Q&A (post_type == 1) или Дискуссия
-        if ($post['post_type'] == 1) {
-            $post['amount_content'] = $post['post_answers_count'];
-        } else {
+        $post['amount_content'] = $post['post_answers_count'];
+        if ($post['post_type'] == 0) {
             $comment_n = $post['post_comments_count'] + $post['post_answers_count'];
             $post['amount_content'] = $comment_n;
         }
