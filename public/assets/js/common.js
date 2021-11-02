@@ -59,9 +59,9 @@
 
 let lateral = document.querySelector('.lateral');
 if (lateral) {
-    let menu = document.querySelector('.lateral-menu');
+    let menu = document.querySelector('.ltr-menu');
     const toggleMenu = () => {
-      menu.classList.toggle('show');
+      menu.classList.toggle('block');
     };
     lateral.addEventListener('click', e => {
       e.stopPropagation();
@@ -71,7 +71,7 @@ if (lateral) {
       let target = e.target;
       let its_menu = target == menu || menu.contains(target);
       let its_hamburger = target == lateral;
-      let menu_is_active = menu.classList.contains('show');
+      let menu_is_active = menu.classList.contains('block');
 
       if (!its_menu && !its_hamburger && menu_is_active) {
         toggleMenu();

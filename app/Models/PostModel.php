@@ -341,5 +341,24 @@ class PostModel extends MainModel
 
         return DB::run($sql, ['post_id' => $post_id, 'user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
     }
+    
+    public static function getPostLastUser($post_id)
+    {
+        $sql = "SELECT
+                    answer_id,
+                    answer_post_id,
+                    answer_user_id,
+                    answer_date,
+                    answer_id,
+                    user_id,
+                    user_login,
+                    user_avatar
+                        FROM answers 
+                        LEFT JOIN users ON user_id = answer_user_id                        
+                            WHERE answer_post_id = :post_id
+                            ORDER BY answer_date DESC";
+
+        return DB::run($sql, ['post_id' => $post_id])->fetch(PDO::FETCH_ASSOC);
+    }
 
 }

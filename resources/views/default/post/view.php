@@ -1,6 +1,6 @@
 <?php $post = $data['post']; ?>
 <main class="col-span-9 mb-col-12">
-  <article class="post-full border-box-1 br-rd5 bg-white<?php if ($post['post_is_deleted'] == 1) { ?> bg-red-300<?php } ?> mb15 pt0 pr5 pb5 pl15">
+  <article class="post-full border-box-1 br-rd5 bg-white<?php if ($post['post_is_deleted'] == 1) { ?> bg-red-300<?php } ?> mb15 pt0 pr15 pb5 pl15">
     <?php if ($post['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
       <div class="post-body">
         <h1 class="title mb0 mt10 size-24">
@@ -35,13 +35,6 @@
           <?php } ?>
         </h1>
         <div class="size-14 lowercase flex gray-light-2">
-          <a class="gray" href="<?= getUrlByName('user', ['login' => $post['user_login']]); ?>">
-            <?= user_avatar_img($post['user_avatar'], 'small', $post['user_login'], 'w18'); ?>
-            <span class="mr5 ml5">
-              <?= $post['user_login']; ?>
-            </span>
-          </a>
-          <span class="blue mr10 ml5"><i class="bi bi-mic size-14"></i></span>
           <?= $post['post_date_lang']; ?>
           <?php if ($post['modified']) { ?>
             (<?= Translate::get('ed'); ?>)
@@ -79,9 +72,6 @@
                   <i class="bi bi-lightning"></i>
                 <?php } ?>
               </a>
-              <span class="size-14 mr5 ml10">
-                <?= $post['post_hits_count']; ?>
-              </span>
             <?php } ?>
             <?= includeTemplate('/_block/show-ip', ['ip' => $post['post_ip'], 'user_trust_level' => $uid['user_trust_level']]); ?>
           <?php } ?>
@@ -116,41 +106,95 @@
         <?php } ?>
         <?= includeTemplate('/_block/post-related', ['post_related' => $data['post_related']]); ?>
         <?php if (!empty($data['topics'])) { ?>
-          <div class="mb20">
-            <h3 class="uppercase mb5 mt0 font-light size-14 gray"><?= Translate::get('topics'); ?>:</h3>
+          <div class="mb20 lowercase">
             <?php foreach ($data['topics'] as $topic) { ?>
-              <a class="bg-blue-100 bg-hover-green white-hover flex justify-center pt5 pr10 pb5 pl10 br-rd20 blue inline size-14" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
+              <a class="bg-gray-200 bg-hover-gray gray-light-hover flex justify-center pt5 pr10 pb5 pl10 br-rd20 gray-light inline size-14" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
                 <?= $topic['topic_title']; ?>
               </a>
             <?php } ?>
           </div>
         <?php } ?>
       </div>
-      <div class="border-bottom flex flex-row items-center justify-between mb5 pb5 pt10">
-        <div class="flex flex-row items-center">
-          <?= votes($uid['user_id'], $post, 'post'); ?>
+
+      <div class="border-box-1 flex items-center mb5">
+        <div class="left p10">
+          <?= votes($uid['user_id'], $post, 'post', 'size-24 middle'); ?>
         </div>
-        <div class="flex flex-row items-center">
-          <?= favorite_post($uid['user_id'], $post['post_id'], $post['favorite_tid']); ?>
-        </div>
-      </div>
-      <div class="hidden">
-        <?php if ($uid['user_id'] > 0) { ?>
-          <?php if (is_array($data['post_signed'])) { ?>
-            <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id size-14 right mt5 bg-gray-100 gray-light-2 border-box-1 br-rd20 center pt5 pr15 pb5 pl15">
-              <?= Translate::get('unsubscribe'); ?>
+
+        <ul class="list-none w-100 p0 m0 lowercase">
+          <li class="left p10">
+            <div class="size-14 gray-light-2 mb5">
+              <?= Translate::get('created by'); ?>
             </div>
+            <div class="center">
+              <a title="<?= $post['user_login']; ?>" href="<?= getUrlByName('user', ['login' => $post['user_login']]); ?>">
+                <?= user_avatar_img($post['user_avatar'], 'small', $post['user_login'], 'w34 br-rd-50'); ?>
+              </a>
+            </div>
+          </li>
+          <li class="left p10 no-mob">
+            <div class="size-14 gray-light-2 mb5">
+              <?= Translate::get('last answer'); ?>
+            </div>
+            <div class="center">
+              <?php if ($data['last_user']['answer_id']) { ?>
+                <a title="<?= $data['last_user']['user_login']; ?>" href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>#answer_<?= $data['last_user']['answer_id']; ?>">
+                  <?= user_avatar_img($data['last_user']['user_avatar'], 'small', $data['last_user']['user_login'], 'w34 br-rd-50'); ?>
+                </a>
+              <?php } else { ?>
+                <span class="gray-light-2 size-14">—</span>
+              <?php } ?>
+            </div>
+          </li>
+          <li class="left p10 no-mob">
+            <div class="size-21 gray-light center mb5">
+              <?php if ($post['post_hits_count'] == 0) { ?>
+                <span class="gray-light-2 size-14">—</span>
+              <?php } else { ?>
+                <?= $post['post_hits_count']; ?>
+              <?php } ?>
+            </div>
+            <div class="center size-14 gray-light-2">
+              <?= num_word($post['post_hits_count'], Translate::get('num-view'), false); ?>
+            </div>
+          </li>
+          <li class="left p10 no-mob">
+            <div class="size-21 gray-light center mb5">
+              <?php if ($post['amount_content'] == 0) { ?>
+                <span class="gray-light-2 size-14">—</span>
+              <?php } else { ?>
+                <?= $post['amount_content']; ?>
+              <?php } ?>
+            </div>
+            <div class="center size-14 gray-light-2">
+              <?= num_word($post['amount_content'], Translate::get('num-answer'), false); ?>
+            </div>
+          </li>
+        </ul>
+
+        <div class="mr15">
+          <?php if ($uid['user_id'] > 0) { ?>
+            <?php if (is_array($data['post_signed'])) { ?>
+              <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id size-14 right mt5 bg-gray-100 gray-light-2 border-box-1 br-rd20 center pt5 pr15 pb5 pl15">
+                <?= Translate::get('unsubscribe'); ?>
+              </div>
+            <?php } else { ?>
+              <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id size-14 right mt5 bg-gray-200 bg-hover-gray mazarine border-box-1 br-rd20 center pt5 pr15 pb5 pl15">
+                + <?= Translate::get('read'); ?>
+              </div>
+            <?php } ?>
           <?php } else { ?>
-            <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id size-14 right mt5 bg-gray-200 bg-hover-gray mazarine border-box-1 br-rd20 center pt5 pr15 pb5 pl15">
+            <a class="right size-14 mt5 bg-gray-200 bg-hover-gray mazarine border-box-1 br-rd20 center pt5 pr15 pb5 pl15" href="<?= getUrlByName('login'); ?>">
               + <?= Translate::get('read'); ?>
-            </div>
+            </a>
           <?php } ?>
-        <?php } else { ?>
-          <a class="right size-14 mt5 bg-gray-200 bg-hover-gray mazarine border-box-1 br-rd20 center pt5 pr15 pb5 pl15" href="<?= getUrlByName('login'); ?>">
-            + <?= Translate::get('read'); ?>
-          </a>
-        <?php } ?>
+        </div>
+
+        <div class="right ml15 p10">
+          <?= favorite_post($uid['user_id'], $post['post_id'], $post['favorite_tid'], 'size-21'); ?>
+        </div>
       </div>
+
 
       <?php if ($post['post_type'] == 0) { ?>
         <?= includeTemplate('/_block/editor/answer-create-editor', [
@@ -167,7 +211,7 @@
       </div>
     <?php } ?>
   </article>
-
+  <div id="comment"></div>
   <?php if ($post['post_draft'] == 0) {
     if ($post['post_type'] == 0) {
       includeTemplate('/_block/comments-view', ['data' => $data, 'post' => $post, 'uid' => $uid]);

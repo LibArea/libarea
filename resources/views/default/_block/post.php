@@ -12,7 +12,7 @@
           <?= user_avatar_img($post['user_avatar'], 'max', $post['user_login'], 'w44 h44 br-rd-50 mr5'); ?>
           <div class="ml5">
             <?= $post['user_login']; ?>
-            <div class="gray-light-2 size-14">
+            <div class="gray-light-2 lowercase size-14">
               <?= $post['post_date'] ?>
             </div>
           </div>
@@ -52,7 +52,7 @@
               <?php } ?>
             </h2>
           </a>
-          <div>
+          <div class="lowercase">
             <?= html_topic($post['topic_list'], 'topic', 'gray-light size-14 mr15'); ?>
             <?php if ($post['post_url_domain']) { ?>
               <a class="gray-light size-14 ml10" href="<?= getUrlByName('domain', ['domain' => $post['post_url_domain']]); ?>">
@@ -87,7 +87,7 @@
         <div class="flex flex-row">
           <?= votes($uid['user_id'], $post, 'post'); ?>
           <?php if ($post['post_answers_count'] != 0) { ?>
-            <a class="flex gray-light-2 ml15" href="<?= $post_url; ?>">
+            <a class="flex gray-light-2 ml15" href="<?= $post_url; ?>#comment">
               <i class="bi bi-chat-text mr5"></i>
               <?= $post['post_answers_count'] + $post['post_comments_count']; ?>
             </a>

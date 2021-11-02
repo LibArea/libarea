@@ -1,7 +1,7 @@
 <?php if (!empty($data['answers'])) { ?>
   <div class="bg-white br-rd5 border-box-1 p15">
     <h2 class="lowercase m0 size-21">
-      <?= $post['amount_content'] ?>
+      <?= num_word($post['amount_content'], Translate::get('num-answer'), true); ?>
     </h2>
 
     <?php foreach ($data['answers'] as  $answer) { ?>

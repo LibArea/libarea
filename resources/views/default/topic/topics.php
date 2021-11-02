@@ -29,7 +29,7 @@
         <?php foreach ($data['topics'] as $key => $topic) { ?>
           <div class="w-50 mb20 mb-w-100 flex flex-row<?php  if (($key + 1) % 2 == 0) { ?> pl20 mb-pl-0<?php } ?>">
             <a title="<?= $topic['topic_title']; ?>" class="mr10" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
-              <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'w54 box-shadow'); ?>
+              <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'w54 border-box-1'); ?>
             </a>
             <div class="ml5 w-100">
               <?php if ($uid['user_id']) { ?>

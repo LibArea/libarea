@@ -65,10 +65,10 @@ class PostController extends MainController
 
         // Q&A (post_type == 1) или Дискуссия
         if ($post['post_type'] == 1) {
-            $post['amount_content'] = num_word($post['post_answers_count'], Translate::get('num-answer'), true);
+            $post['amount_content'] = $post['post_answers_count'];
         } else {
             $comment_n = $post['post_comments_count'] + $post['post_answers_count'];
-            $post['amount_content'] = num_word($comment_n, Translate::get('num-comment'), true);
+            $post['amount_content'] = $comment_n;
         }
 
         $post_answers = AnswerModel::getAnswersPost($post['post_id'], $uid['user_id'], $post['post_type']);
@@ -138,6 +138,7 @@ class PostController extends MainController
                     'post_related'  => $post_related ?? '',
                     'post_signed'   => SubscriptionModel::getFocus($post['post_id'], $uid['user_id'], 'post'),
                     'topics'        => $topics,
+                    'last_user'     => PostModel::getPostLastUser($post_id),
                     'sheet'         => 'article',
                 ]
             ]

@@ -8,6 +8,12 @@
     <div class="box create">
       <form action="/web/edit" method="post">
         <?= csrf_field() ?>
+        <div class="right">
+            <?= favicon_img($data['domain']['link_id'], $data['domain']['link_url_domain']); ?>
+            <span class="add-favicon right size-13" data-id="<?= $data['domain']['link_id']; ?>">
+              + favicon
+            </span>
+        </div>
         <div class="mb20 max-w780">
           <label for="post_title">Id:</label>
           <?= $data['domain']['link_id']; ?> (<?= $data['domain']['link_url_domain']; ?>)

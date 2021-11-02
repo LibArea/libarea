@@ -9,13 +9,13 @@
       </a>
     <?php } ?>
     <a href="/web" class="size-14">← <?= Translate::get('sites'); ?></a>
-    <h1 class="mb5"><?= $data['topic']['topic_title']; ?></h1>
+    <h1 class="mt0 mb5 size-24"><?= $data['topic']['topic_title']; ?></h1>
 
     <?php if (!empty($data['links'])) { ?>
       <?php foreach ($data['links'] as $key => $link) { ?>
         <div class="pt20 pb5">
           <?php if ($uid['user_trust_level'] == 5) { ?>
-            <a class="size-14 mr10 right" title="<?= Translate::get('edit'); ?>" href="/web/edit/<?= $link['link_id']; ?>">rr
+            <a class="size-14 mr10 right" title="<?= Translate::get('edit'); ?>" href="/web/edit/<?= $link['link_id']; ?>">
               <i class="bi bi-pencil size-15"></i>
             </a>
           <?php } ?>

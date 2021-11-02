@@ -40,7 +40,8 @@
             'value' => $data['user']['user_name'],
             'min' => 3,
             'max' => 11,
-            'help' => '3 - 11 ' . Translate::get('characters')
+            'help' => '3 - 11 ' . Translate::get('characters'),
+            'red' => 'red'
           ],
         ]
       ]); ?>

@@ -156,7 +156,5 @@ Route::get('/turbo-feed/topic/{slug}')->controller('RssController@turboFeed')->w
 Route::get('/rss-feed/topic/{slug}')->controller('RssController@rssFeed')->where(['slug' => '[A-Za-z0-9-]+']);
 
 Route::type(['get', 'post'])->get('/search')->controller('SearchController')->name('search');
-// For Radjax
-Route::get('/test/search')->controller('SearchController@test');
 
 require 'admin.php';

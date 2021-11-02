@@ -209,7 +209,7 @@ function breadcrumb($path_home, $title_home, $path_intermediate, $title_intermed
     return $html;
 }
 
-function votes($user_id, $content, $type)
+function votes($user_id, $content, $type, $css = '')
 {
     $html  = '';
     $count = '';
@@ -220,21 +220,21 @@ function votes($user_id, $content, $type)
     if ($user_id > 0) {
         if ($content['votes_' . $type . '_user_id'] || $user_id == $content[$type . '_user_id']) {
             $html .= '<div class="voters active flex gray-light-2 flex-center">
-                        <div class="up-id bi bi-heart"></div>
+                        <div class="up-id bi bi-heart '. $css .'"></div>
                         <div class="score ml5">
                             ' . $count . '
                         </div></div>';
         } else {
             $num_count = empty($count) ? 0 : $count;
             $html .= '<div id="up' . $content[$type . '_id'] . '" class="voters flex flex-center gray-light-2">
-                        <div data-id="' . $content[$type . '_id'] . '" data-count="' . $num_count . '" data-type="' . $type . '" class="up-id bi bi-heart"></div>
+                        <div data-id="' . $content[$type . '_id'] . '" data-count="' . $num_count . '" data-type="' . $type . '" class="up-id bi bi-heart '. $css .'"></div>
                         <div class="score ml5">
                             ' . $count . '
                         </div></div>';
         }
     } else {
         $html .= '<div class="voters flex flex-center gray-light-2">
-                    <div class="up-id bi bi-heart click-no-auth"></div>
+                    <div class="up-id bi bi-heart '. $css .' click-no-auth"></div>
                     <div class="score ml5">
                          ' . $count . '                
                     </div></div>';
@@ -243,15 +243,16 @@ function votes($user_id, $content, $type)
     return $html;
 }
 
-function favorite_post($user_id, $post_id, $favorite_tid)
+function favorite_post($user_id, $post_id, $favorite_tid, $css = '')
 {
     $html  = '';
     if ($user_id > 0) {
         $blue = $favorite_tid ? 'blue' : '';
-        $html .= '<span id="favorite_'. $post_id .'" class="add-favorite '. $blue .' gray-light feed-icon" data-id="' . $post_id . '" data-type="post"><i class="bi bi-bookmark middle"></i></span>';
+        $my   = $favorite_tid ? 'bi bi-bookmark-dash' : 'bi-bookmark-plus';
+        $html .= '<span id="favorite_'. $post_id .'" class="add-favorite '. $blue .' '. $css .' gray-light feed-icon" data-id="' . $post_id . '" data-type="post"><i class="bi '. $my .' middle"></i></span>';
     } else {
-        $html .= '<span class="click-no-auth gray-light-2 feed-icon">
-                    <i class="bi bi-bookmark middle"></i>
+        $html .= '<span class="click-no-auth gray-light-2 feed-icon '. $css .'">
+                    <i class="bi bi-bookmark-plus middle"></i>
                         </span>'; 
     }     
 

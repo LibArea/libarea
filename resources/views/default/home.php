@@ -1,7 +1,7 @@
 <?php if ($uid['user_id'] == 0) { ?>
   <div class="col-span-12 grid items-center grid-cols-12 mb15">
     <div class="col-span-12 bg-white border-box-1 br-rd5 p20 center">
-      <h1 class="size-31 mt0"><?= Config::get('meta.bannertitle'); ?></h1>
+      <h1 class="size-31 font-normal mt0 mb5"><?= Config::get('meta.bannertitle'); ?></h1>
       <div class="gray-light mb5"><?= Config::get('meta.bannerdesc'); ?>...</div>
     </div>
   </div>

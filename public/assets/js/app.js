@@ -1,9 +1,9 @@
 $(function () {
   let hamburger = document.querySelector('.dropbtn');
   if (hamburger) {
-    let menu = document.querySelector('.dropdown-menu');
+    let menu = document.querySelector('.dr-menu');
     const toggleMenu = () => {
-      menu.classList.toggle('show');
+      menu.classList.toggle('block');
     };
     hamburger.addEventListener('click', e => {
       e.stopPropagation();
@@ -13,7 +13,7 @@ $(function () {
       let target = e.target;
       let its_menu = target == menu || menu.contains(target);
       let its_hamburger = target == hamburger;
-      let menu_is_active = menu.classList.contains('show');
+      let menu_is_active = menu.classList.contains('block');
 
       if (!its_menu && !its_hamburger && menu_is_active) {
         toggleMenu();

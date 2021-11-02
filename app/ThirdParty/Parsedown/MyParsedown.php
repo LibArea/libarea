@@ -5,10 +5,15 @@
 
 class MyParsedown extends Parsedown
 {
+    
+    private $baseImagePath;
+    
+    
     function __construct()
     {
         $this->InlineTypes['{'][]= 'ColoredText';
         $this->inlineMarkerList .= '{';
+       // $this->baseImagePath = Config::get('meta.url');
     }
     
     protected function element(array $Element)
@@ -84,5 +89,20 @@ class MyParsedown extends Parsedown
         }
     }
     
-    
+    // Добавим url домен в тело контента
+    /* protected function inlineImage($excerpt)
+    {
+        $image = parent::inlineImage($excerpt);
+
+        if (!isset($image))
+        {
+            return null;
+        }
+
+        $image['element']['attributes']['src'] = $this->baseImagePath . $image['element']['attributes']['src'];
+
+        return $image;
+    } */
+
+   
 }

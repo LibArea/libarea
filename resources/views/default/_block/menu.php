@@ -11,6 +11,10 @@
     <i class="bi bi-people middle mr5<?= $sheet == 'users' ? ' blue' : ''; ?> size-18"></i>
     <span class="<?= $sheet == 'users' ? 'blue' : ''; ?>"><?= Translate::get('users'); ?></span>
   </a>
+  <a class="pt5 pr10 pb5 pl10 gray block" title="<?= Translate::get('search'); ?>" href="<?= getUrlByName('search'); ?>">
+    <i class="bi bi-search middle mr5 size-18"></i>
+    <span><?= Translate::get('search'); ?></span>
+  </a> 
   <a class="pt5 pr10 pb5 pl10 gray block" title="<?= Translate::get('all answers'); ?>" href="<?= getUrlByName('answers'); ?>">
     <i class="bi bi-chat-dots middle mr5<?= $sheet == 'answers' ? ' blue' : ''; ?> size-18"></i>
     <span class="<?= $sheet == 'answers' ? 'blue' : ''; ?>"><?= Translate::get('answers'); ?></span>

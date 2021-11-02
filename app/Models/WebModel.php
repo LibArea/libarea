@@ -205,7 +205,11 @@ class WebModel extends MainModel
                        :link_status, 
                        :link_count)";
 
-        return  DB::run($sql, $params);
+        DB::run($sql, $params);
+        
+        $link_id =  DB::run("SELECT LAST_INSERT_ID() as link_id")->fetch(PDO::FETCH_ASSOC);
+
+        return $link_id;
     }
 
     public static function addLinkCount($domain)

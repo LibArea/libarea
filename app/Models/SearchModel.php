@@ -8,12 +8,12 @@ use PDO;
 
 class SearchModel extends MainModel
 {
-    public static function getSearch($query)
+    public static function getSearch($query, $limit)
     {
         $sql = "SELECT DISTINCT 
-                post_id, post_title, post_slug, post_type, post_translation, 
+                post_id, post_title as title, post_slug, post_type, post_translation, 
                 post_draft, post_date, post_published, post_user_id, post_votes, 
-                post_answers_count, post_comments_count, post_content, post_content_img, 
+                post_answers_count, post_comments_count, post_content as content, post_content_img, 
                 post_thumb_img, post_merged_id, post_closed, post_tl, post_lo, post_top,  
                 post_url_domain, post_is_deleted, post_hits_count, 
                 rel.*,  
@@ -33,13 +33,14 @@ class SearchModel extends MainModel
             ) AS rel ON rel.p_id = post_id  
                 LEFT JOIN users ON user_id = post_user_id 
                 WHERE post_is_deleted = 0 and post_draft = 0 and post_tl = 0 
-                     AND post_content LIKE :qa1 OR post_title LIKE :qa2 ORDER BY post_id LIMIT 15";
+                     AND post_content LIKE :qa1 
+                     OR post_title LIKE :qa2 ORDER BY post_id LIMIT $limit";
 
         return DB::run($sql, ['qa1' => "%" . $query . "%", 'qa2' => "%" . $query . "%"])->fetchall(PDO::FETCH_ASSOC);
     }
 
     // Для Sphinx 
-    public static function getSearchPostServer($query)
+    public static function getSearchPostServer($query, $limit)
     {
         $sql = "SELECT 
                     id AS post_id, 
@@ -49,10 +50,9 @@ class SearchModel extends MainModel
                     topic_list,
                     user_login,
                     user_avatar,
-                    SNIPPET(post_title, :qa) AS _title, 
-                    SNIPPET(post_content, :qa) AS _content 
-                        FROM postind WHERE MATCH(:qa) LIMIT 50"; 
-
+                    SNIPPET(post_title, :qa) AS title, 
+                    SNIPPET(post_content, :qa) AS content 
+                        FROM postind WHERE MATCH(:qa) LIMIT $limit"; 
 
         return DB::run($sql, ['qa' => $query], 'mysql.sphinx-search')->fetchall(PDO::FETCH_ASSOC);
     }

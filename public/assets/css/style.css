@@ -131,6 +131,7 @@ img {
 .mazarine  { color: #688ffb; }
 .white-hover:hover { color: #fff; }
 .gray-hover:hover { color: #ece5e5; }
+.gray-light-hover:hover { color: #333; }
 
 .bg-white { background-color: #fff; }
 .bg-red-100 { background-color: #fde7e9; }
@@ -158,14 +159,14 @@ img {
 .bg-purple-300 { background-color: #cbb2f6; }
 .bg-gray-000 { background-color: #f8f9fa; }
 .bg-gray-100 { background-color: #f5f7fa; }
-.bg-gray-200 { background-color: #e9ecef; }
+.bg-gray-200 { background-color: #f2f2f2; }
 .bg-gray-300 { background-color: #dee2e6; }
 .bg-gray-400 { background-color: #ced4da; }
 .bg-gray-700 { background-color: #495057; }
 .bg-gray-800 { background-color: #343a40; }
 .bg-gray-900 { background-color: #212529; }
 
-.box-shadow { box-shadow: 0 0 0 1px rgb(0 0 0 / 10%); }
+.box-shadow { box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);  }
 .border-box-1 { border: 1px solid #ededed; }
 .border-box-blue { border: 1px solid #3ea7e2; }
 .bg-hover-green:hover { background-color: #5fb878; }
@@ -195,6 +196,7 @@ img {
 .w160 { width: 160px; }
 .w200 { width: 200px; }
 
+.min-w165 { min-width: 165px; }
 .max-w-100 { max-width: 100%; }
 .max-w170 { max-width: 170px; }
 .max-w300 { max-width: 300px; }
@@ -211,6 +213,7 @@ img {
 .h10 { height: 10px; }
 .h18 { height: 18px; }
 .h20 { height: 20px; }
+.h24 { height: 24px; }
 .h30 { height: 30px; }
 .h40 { height: 40px; }
 .h44 { height: 44px; }
@@ -223,6 +226,7 @@ img {
 .br-rd-42 { border-radius: 42%; }
 .br-rd-50 { border-radius: 50%; }
 
+.size-13 { font-size: 0.8125rem; }
 .size-14 { font-size: 0.875rem; }
 .size-15 { font-size: 0.9375rem; }
 .size-18 { font-size: 1.125rem; }
@@ -286,6 +290,7 @@ img {
 .absolute { position: absolute; }
 .relative { position: relative; }
 .hidden { overflow: hidden; }
+.none { display: none; }
 .block { display: block; }
 .table { display: table; }
 .inline { display: inline-block; }
@@ -406,8 +411,8 @@ textarea:focus { border: 1px solid #9ccdf8; }
   -webkit-background-clip: content-box;
   background-clip: content-box;
   background-color: lightyellow;
-  margin-top: -50px;
-  padding-top: 50px;
+  margin-top: -70px;
+  padding-top: 70px;
 }
 
 ol.comment-telo { padding-left: 23px; }
@@ -431,16 +436,6 @@ ol.comment-telo { padding-left: 23px; }
   content: "/";
   padding-right: 0.4rem;
 }
-
-.dropdown-menu,
-.lateral-menu {
-  display: none;
-  min-width: 165px;
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-}
-
-.dropdown-menu.show,
-.lateral-menu.show { display: block; }
 
 .dark {
   background-color: #111;

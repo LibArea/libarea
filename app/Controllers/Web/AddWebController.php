@@ -4,7 +4,7 @@ namespace App\Controllers\Web;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\WebModel;
+use App\Models\{WebModel, TopicModel};
 use Base, Validation, Translate;
 
 class AddWebController extends MainController
@@ -64,6 +64,9 @@ class AddWebController extends MainController
         Validation::Limits($link_title, Translate::get('title'), '24', '250', $redirect);
         Validation::Limits($link_content, Translate::get('description'), '24', '1500', $redirect);
 
+        $topic_fields   = Request::getPost() ?? [];
+        $topics         = $topic_fields['topic_select'] ?? [];
+
         $data = [
             'link_url'          => $link_url,
             'link_url_domain'   => $link_url_domain,
@@ -73,8 +76,16 @@ class AddWebController extends MainController
             'link_type'         => 0,
             'link_status'       => 200,
         ];
+   
+        $link_topic = WebModel::add($data);
 
-        WebModel::add($data);
+        if (!empty($topics)) {
+            $arr = [];
+            foreach ($topics as $row) {
+                $arr[] = array($row, $link_topic['link_id']);
+            }
+            TopicModel::addLinkTopics($arr, $link_topic['link_id']);
+        }
 
         redirect($redirect);
     }

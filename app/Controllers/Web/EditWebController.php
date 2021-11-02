@@ -29,6 +29,7 @@ class EditWebController extends MainController
 
         Request::getResources()->addBottomStyles('/assets/css/select2.css');
         Request::getResources()->addBottomScript('/assets/js/select2.min.js');
+        Request::getResources()->addBottomScript('/assets/js/admin.js');
 
         return view(
             '/web/edit',

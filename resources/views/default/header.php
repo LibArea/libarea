@@ -26,7 +26,7 @@
       <div class="flex items-center">
         <div class="lateral no-pc mr10 flex items-center">
           <i class="bi bi-list gray-light-2 size-18"></i>
-          <nav class="lateral-menu bg-white br-rd3 p5 absolute justify-between mt0 ml0 pl0 sticky size-15">
+          <nav class="ltr-menu box-shadow none min-w165 bg-white br-rd3 p5 absolute justify-between mt0 ml0 pl0 sticky size-15">
             <a class="pt5 pr10 pb5 pl10 gray block bg-hover-light-blue" href="<?= getUrlByName('topics'); ?>">
               <i class="bi bi-columns-gap middle"></i>
               <span class="ml5"><?= Translate::get('topics'); ?></span>
@@ -39,6 +39,10 @@
               <i class="bi bi-link-45deg middle"></i>
               <span class="ml5"><?= Translate::get('domains'); ?></span>
             </a>
+            <a class="pt5 pr10 pb5 pl10 gray block bg-hover-light-blue" href="<?= getUrlByName('search'); ?>">
+              <i class="bi bi-search middle"></i>
+              <span class="ml5"><?= Translate::get('search'); ?></span>
+            </a>
           </nav>
         </div>
         <div class="mr20 flex items-center">
@@ -47,12 +51,15 @@
           </a>
         </div>
       </div>
-        <div class="p10 ml30 mr20 no-mob w-100">
+      <?php if (Request::getUri() != getUrlByName('search')) { ?>
+        <div class="p5 ml30 mr20 relative no-mob w-100"> 
           <form class="form r" method="post" action="<?= getUrlByName('search'); ?>">
-            <?= csrf_field() ?>
-            <input type="text" name="q" id="search" placeholder="<?= Translate::get('to find'); ?>..." class="h40 bg-gray-100 p15 br-rd20 size-18 gray w-100">
+             <input type="text" name="q" id="find" placeholder="<?= Translate::get('to find'); ?>" class="h30 bg-gray-100 p15 br-rd20 gray w-100">
+             <input name="token" value="<?= csrf_token(); ?>" type="hidden">
           </form>
+          <div class="absolute box-shadow bg-white pt10 pr15 pb5 pl15 mt5 max-w460 br-rd3 none" id="search_items"></div>
         </div>
+      <?php } ?>  
       <?php if ($uid['user_id'] == 0) { ?>
           <div class="flex right col-span-4 items-center">
             <div id="toggledark" class="header-menu-item no-mob only-icon p10 ml30 mb-ml-10">
@@ -93,7 +100,7 @@
               <a class="relative w-auto">
                 <?= user_avatar_img($uid['user_avatar'], 'small', $uid['user_login'], 'w34 br-rd-50'); ?>
               </a>
-              <div class="dropdown-menu right0 bg-white size-15 br-rd3 p5 absolute">
+              <div class="dr-menu box-shadow none min-w165 right0 bg-white size-15 br-rd3 p5 absolute">
                 <a class="pt5 pr10 pb5 pl10 block gray bg-hover-light-blue" href="<?= getUrlByName('user', ['login' => $uid['user_login']]); ?>">
                   <i class="bi bi-person middle mr5"></i>
                   <span class="middle size-14"><?= Translate::get('profile'); ?></span>
@@ -142,4 +149,5 @@
       <?php }  ?>
     </div>
   </header>
-  <div class="wrap grid grid-cols-12 gap-4 pr5 pl5 justify-between">
+  <div class="wrap grid grid-cols-12 gap-4 pr5 pl5 justify-between"> 
+ 

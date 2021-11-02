@@ -5,49 +5,39 @@ namespace App\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\SearchModel;
-use Content, Config, Base, Validation, Translate;
+use Base, Translate, Validation, Config, Content;
 
 class SearchController extends MainController
 {
     public function index()
     {
-        $query  = '';
-        $result = '';
-        $tags   = '';
+        $query  = $result = $tags   = '';
+        $qa     = Request::getPost('q');
+        $query  = preg_replace('/[^a-zA-Zа-яА-Я0-9]/ui', '', $qa);
+        $type   = Config::get('general.search') == 0 ? 'mysql' : 'server';
+
         if (Request::getPost()) {
-
-            $qa     =  Request::getPost('q');
-            $query  = preg_replace('/[^a-zA-Zа-яА-Я0-9]/ui', '', $qa);
-
-            if (!empty($query)) {
-
-                Validation::Limits($query, Translate::get('too short'), '3', '128', '/search');
-
-                if (Config::get('general.search') == 0) {
-                    $qa     =  SearchModel::getSearch($query);
-                    $result = [];
-                    foreach ($qa as $ind => $row) {
-                        $row['post_content']  = Content::text(cutWords($row['post_content'], 32, '...'), 'text');
-                        $result[$ind]   = $row;
-                    }
-                    $count  = count($qa);
-                    $tags   = SearchModel::getSearchTags($query, 'mysql');
-                } else {
-                    $qa     = SearchModel::getSearchPostServer($query);
-                    $tags   = SearchModel::getSearchTags($query, 'server');
-                    $count  = count($qa);
-                    $result = [];
-                    foreach ($qa as $ind => $row) {
-                        $row['_content'] = Content::noMarkdown($row['_content']);
-                        $result[$ind]    = $row;
-                    }
-                }
-            } else {
+            if ($query == '') {
                 addMsg(Translate::get('empty request'), 'error');
                 redirect(getUrlByName('search'));
             }
-        }
-
+            
+            Validation::Limits($query, Translate::get('too short'), '3', '128', '/search');
+            
+            $qa     = self::searchPosts($query, $type);
+            $count  = count($qa);
+            $result = [];
+            foreach ($qa as $ind => $row) {
+                
+                if ($type == 'mysql') {
+                    $row['content'] = Content::text(cutWords($row['content'], 32, '...'), 'text');
+                } else {
+                    $row['content'] = Content::noMarkdown($row['content']);
+                }
+                
+               $result[$ind]   = $row;
+            }
+        }           
         return view(
             '/search/index',
             [
@@ -57,23 +47,18 @@ class SearchController extends MainController
                     'result'    => $result,
                     'query'     => $query,
                     'count'     => $count ?? 0,
-                    'tags'      => $tags,
+                    'tags'      => SearchModel::getSearchTags($query, $type),
                 ]
             ]
         );
     }
-    
-    public function test()
+
+    public static function searchPosts($query, $type)
     {
-        return view(
-            '/test/index',
-            [
-                'meta'  => meta($m = [], Translate::get('test'), Translate::get('test')),
-                'uid'   => Base::getUid(),
-                'data'  => [
-                    'sheet' => 'test',
-                ]
-            ]
-        ); 
+        if ($type == 'mysql'){
+           return SearchModel::getSearch($query, 50);
+        }
+        
+        return SearchModel::getSearchPostServer($query, 50);
     }
 }
