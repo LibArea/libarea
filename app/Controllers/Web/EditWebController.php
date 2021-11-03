@@ -59,8 +59,9 @@ class EditWebController extends MainController
         }
 
         $link_url       = Request::getPost('link_url');
-        $link_title     = Request::getPost('link_title');
+        $link_title     = Request::getPost('link_title'); 
         $link_content   = Request::getPost('link_content');
+        $link_published = Request::getPostInt('link_published');
         $link_status    = Request::getPostInt('link_status');
         $post_fields    = Request::getPost() ?? [];
         $topics         = $post_fields['topic_select'] ?? [];
@@ -73,6 +74,7 @@ class EditWebController extends MainController
             'link_url'          => $link_url,
             'link_title'        => $link_title,
             'link_content'      => $link_content,
+            'link_published'    => $link_published,
             'link_user_id'      => $this->uid['user_id'],
             'link_type'         => 0,
             'link_status'       => $link_status,

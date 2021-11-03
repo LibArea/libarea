@@ -54,7 +54,7 @@
       <?php if (Request::getUri() != getUrlByName('search')) { ?>
         <div class="p5 ml30 mr20 relative no-mob w-100"> 
           <form class="form r" method="post" action="<?= getUrlByName('search'); ?>">
-             <input type="text" name="q" id="find" placeholder="<?= Translate::get('to find'); ?>" class="h30 bg-gray-100 p15 br-rd20 gray w-100">
+             <input type="text" autocomplete="off" name="q" id="find" placeholder="<?= Translate::get('to find'); ?>" class="h30 bg-gray-100 p15 br-rd20 gray w-100">
              <input name="token" value="<?= csrf_token(); ?>" type="hidden">
           </form>
           <div class="absolute box-shadow bg-white pt10 pr15 pb5 pl15 mt5 max-w460 br-rd3 none" id="search_items"></div>

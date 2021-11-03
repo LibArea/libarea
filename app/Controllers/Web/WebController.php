@@ -29,9 +29,9 @@ class WebController extends MainController
         $num = $page > 1 ? sprintf(Translate::get('page-number'), $page) : '';
 
         $m = [
-            'og'         => false,
-            'twitter'    => false,
-            'imgurl'     => false,
+            'og'         => true,
+            'twitter'    => true,
+            'imgurl'     => '/assets/images/agouti-web.png',
             'url'        => getUrlByName('web'),
         ];
 

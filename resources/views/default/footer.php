@@ -42,11 +42,18 @@
       success: function(response) {
         var data = JSON.parse(response);
         if (data.length > 0) {
-          var html = '';
+          var html = '<div class="flex">';
           $.each(data, function(index, data) {
-            html += '<a class="block black size-14 mb5" href="/post/' + data.post_id + '">' +
+            if (data.topic_slug) {
+              html += '<a class="blue block size-14 mb15 mr10" href="/topic/' + data.topic_slug + '">';
+              html += '<img class="w21 mr5 br-box-grey" src="<?= AG_PATH_TOPICS_LOGOS; ?>' + data.topic_img + '">';
+              html += data.topic_title + '</a>';  
+            }
+            if (data.post_id) {
+              html += '<a class="block black size-14 mb10" href="/post/' + data.post_id + '">' +
               data.title + '</a>';
-            html += '';
+            }
+             html += '</div>';
           });
         } else {
           var html = "<span class='size-14 gray'><?= Translate::get('no results'); ?></span>";

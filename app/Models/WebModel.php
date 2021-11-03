@@ -16,6 +16,7 @@ class WebModel extends MainModel
                     link_id,
                     link_title,
                     link_content,
+                    link_published,
                     link_user_id,
                     link_url,
                     link_url_domain,
@@ -64,6 +65,7 @@ class WebModel extends MainModel
                     link_id,
                     link_title,
                     link_content,
+                    link_published,
                     link_user_id,
                     link_url,
                     link_url_domain,
@@ -71,7 +73,7 @@ class WebModel extends MainModel
                     link_count,
                     link_is_deleted
                         FROM links 
-                        WHERE link_url_domain != :domain AND link_is_deleted = 0 
+                        WHERE link_url_domain != :domain AND link_published = 1 AND link_is_deleted = 0 
                         ORDER BY link_count DESC LIMIT 10";
 
         return DB::run($sql, ['domain' => $domain])->fetchAll(PDO::FETCH_ASSOC);
@@ -85,6 +87,7 @@ class WebModel extends MainModel
                     link_id,
                     link_title,
                     link_content,
+                    link_published,
                     link_user_id,
                     link_url,
                     link_url_domain,
@@ -157,6 +160,7 @@ class WebModel extends MainModel
                     link_id,
                     link_title,
                     link_content,
+                    link_published,
                     link_user_id,
                     link_url,
                     link_url_domain,
@@ -181,6 +185,7 @@ class WebModel extends MainModel
             'link_url_domain'   => $data['link_url_domain'],
             'link_title'        => $data['link_title'],
             'link_content'      => $data['link_content'],
+            'link_published'    => $data['link_published'],
             'link_user_id'      => $data['link_user_id'],
             'link_type'         => $data['link_type'],
             'link_status'       => $data['link_status'],
@@ -191,6 +196,7 @@ class WebModel extends MainModel
                             link_url_domain, 
                             link_title, 
                             link_content, 
+                            link_published,
                             link_user_id, 
                             link_type, 
                             link_status, 
@@ -200,6 +206,7 @@ class WebModel extends MainModel
                        :link_url_domain, 
                        :link_title, 
                        :link_content, 
+                       :link_published,
                        :link_user_id, 
                        :link_type, 
                        :link_status, 
@@ -225,6 +232,7 @@ class WebModel extends MainModel
             'link_url'      => $data['link_url'],
             'link_title'    => $data['link_title'],
             'link_content'  => $data['link_content'],
+            'link_published'=> $data['link_published'],
             'link_status'   => $data['link_status'],
             'link_id'       => $data['link_id'],
         ];
@@ -233,6 +241,7 @@ class WebModel extends MainModel
                     SET link_url    = :link_url,  
                     link_title      = :link_title, 
                     link_content    = :link_content,
+                    link_published  = :link_published,
                     link_status     = :link_status 
                         WHERE link_id  = :link_id";
 
@@ -246,6 +255,7 @@ class WebModel extends MainModel
                     link_id,
                     link_title,
                     link_content,
+                    link_published,
                     link_user_id,
                     link_url,
                     link_url_domain,

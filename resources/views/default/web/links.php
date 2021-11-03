@@ -13,31 +13,25 @@
 
     <?php if (!empty($data['links'])) { ?>
       <?php foreach ($data['links'] as $key => $link) { ?>
+        <?php if ($link['link_published'] == 1) { ?>
+    
         <div class="pt20 pb5 flex flex-row gap-2">
           <div class="mr20 w200 no-mob">
             <?= thumbs_img($link['link_url_domain'], $link['link_title']); ?>
           </div>
           <div class="mr20 flex-auto">
-            <?php if ($uid['user_trust_level'] == 5) { ?>
-              <a class="size-14 mr10 right" title="<?= Translate::get('edit'); ?>" href="/web/edit/<?=  $link['link_id']; ?>">
-                <i class="bi bi-pencil size-15"></i>
-              </a>
-            <?php } ?>
             <a href="<?= getUrlByName('domain', ['domain' => $link['link_url_domain']]); ?>">
               <h2 class="font-normal size-21 mt0 mb0">
-                <?php if ($link['link_title']) { ?>
-                  <?= $link['link_title']; ?>
-                <?php } else { ?>
-                  Add title...
+                <?= $link['link_title']; ?>
+                <?php if ($uid['user_trust_level'] == 5) { ?>
+                  <a class="ml15" title="<?= Translate::get('edit'); ?>" href="/web/edit/<?=  $link['link_id']; ?>">
+                    <i class="bi bi-pencil size-15"></i>
+                  </a>
                 <?php } ?>
               </h2>
             </a>
             <div class="size-15 mt5 max-w780">
-              <?php if ($link['link_content']) { ?>
                 <?= $link['link_content']; ?>
-              <?php } else { ?>
-                Add content...
-              <?php } ?>
             </div>
             <div class="flex flex-row gap-2 items-center mt20">
               <?= favicon_img($link['link_id'], $link['link_url_domain']); ?>
@@ -53,6 +47,17 @@
             </div>
           </div>
         </div>
+         <?php } else { ?>
+          <?php if ($uid['user_trust_level'] == 5) { ?>
+               <div class="mt15 mb15">
+                <i class="bi bi-link-45deg red mr5 size-18"></i>
+                <?= $link['link_title']; ?> (<?= $link['link_url_domain']; ?>)
+                <a class="ml15" title="<?= Translate::get('edit'); ?>" href="/web/edit/<?=  $link['link_id']; ?>">
+                  <i class="bi bi-pencil size-15"></i>
+                </a>
+              </div>
+            <?php } ?>
+         <?php } ?>
       <?php } ?>
     <?php } else { ?>
       <?= no_content(Translate::get('no'), 'bi bi-info-lg'); ?>

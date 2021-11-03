@@ -10,11 +10,20 @@ class SearchController
 {
     public function index()
     {
-        if (Config::get('general.search') == 0) { 
-            return json_encode (SearchModel::getSearch(Request::getPost('q'), 5), JSON_PRETTY_PRINT);
+        $type   = Config::get('general.search') == 0 ? 'mysql' : 'server';
+        $topics = SearchModel::getSearchTags(Request::getPost('q'), $type, 5);
+        
+        if ($type == 'mysql') { 
+            $posts = SearchModel::getSearch(Request::getPost('q'), 5);
+            $result = array_merge($topics, $posts);
+            
+            return json_encode ($result, JSON_PRETTY_PRINT);
         } 
+        
+        $posts = SearchModel::getSearchPostServer(Request::getPost('q'), 5);
+        $result = array_merge($topics, $posts);        
 
-        return json_encode (SearchModel::getSearchPostServer(Request::getPost('q'), 5), JSON_PRETTY_PRINT); 
+        return json_encode ($result, JSON_PRETTY_PRINT); 
     }
  
  

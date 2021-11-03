@@ -22,21 +22,12 @@
               + favicon
             </span>
             <div class="size-21">
-              <?php if ($link['link_title']) { ?>
                 <?= $link['link_title']; ?>
-              <?php } else { ?>
-                Add title...
-              <?php } ?>
             </div>
             <?= html_topic($link['topic_list'], 'web.topic', 'gray-light size-14 mr10'); ?>
             <div class="content-telo">
-              <?php if ($link['link_content']) { ?>
                 <?= $link['link_content']; ?>
-              <?php } else { ?>
-                Add content...
-              <?php } ?>
             </div>
-
             <div class="border-bottom mb15 mt5 pb5 size-13 hidden gray">
               <a class="green" rel="nofollow noreferrer" href="<?= $link['link_url']; ?>">
                 <?= favicon_img($link['link_id'], $link['link_url_domain']); ?>
@@ -45,7 +36,6 @@
               id<?= $link['link_id']; ?>
               <span class="mr5 ml5"> &#183; </span>
               <?= $link['link_url_domain']; ?>
-
               <span class="mr5 ml5"> &#183; </span>
               <?php if ($link['link_is_deleted'] == 0) { ?>
                 active
@@ -59,6 +49,9 @@
               <span class="right heart-link red">
                 +<?= $link['link_count']; ?>
               </span>
+              <?php if ($link['link_published'] == 0) { ?>
+                <span class="ml15 red"> <?= Translate::get('posted'); ?> (<?= Translate::get('no'); ?>) </span>
+              <?php } ?>
             </div>
           </div>
         <?php } ?>

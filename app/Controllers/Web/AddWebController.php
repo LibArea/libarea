@@ -72,6 +72,7 @@ class AddWebController extends MainController
             'link_url_domain'   => $link_url_domain,
             'link_title'        => $link_title,
             'link_content'      => $link_content,
+            'link_published'    => 1,
             'link_user_id'      => $this->uid['user_id'],
             'link_type'         => 0,
             'link_status'       => 200,

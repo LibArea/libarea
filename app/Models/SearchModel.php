@@ -57,7 +57,7 @@ class SearchModel extends MainModel
         return DB::run($sql, ['qa' => $query], 'mysql.sphinx-search')->fetchall(PDO::FETCH_ASSOC);
     }
     
-    public static function getSearchTags($query, $type)
+    public static function getSearchTags($query, $type, $limit)
     {
         if ($type == 'server') {
 
@@ -66,7 +66,7 @@ class SearchModel extends MainModel
                 topic_count, 
                 topic_title,
                 topic_img
-                    FROM tagind WHERE MATCH(:qa) LIMIT 10";
+                    FROM tagind WHERE MATCH(:qa) LIMIT $limit";
                     
             return DB::run($sql, ['qa' => $query], 'mysql.sphinx-search')->fetchall(PDO::FETCH_ASSOC);
         } 
@@ -76,7 +76,7 @@ class SearchModel extends MainModel
                     topic_count, 
                     topic_title,
                     topic_img
-                        FROM topics WHERE topic_title LIKE :qa OR topic_slug LIKE :qa LIMIT 10";
+                        FROM topics WHERE topic_title LIKE :qa OR topic_slug LIKE :qa LIMIT $limit";
 
         return DB::run($sql, ['qa' => "%" . $query . "%"])->fetchall(PDO::FETCH_ASSOC);
     }
