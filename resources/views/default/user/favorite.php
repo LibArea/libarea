@@ -9,7 +9,7 @@
     Translate::get('profile'),
     Translate::get('favorites')
   ); ?>
-  <div class="bg-white flex flex-row items-center justify-between border-box-1 br-rd5 p15 mb15">
+  <div class="bg-white flex flex-row items-center justify-between br-box-grey br-rd5 p15 mb15">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
     <?php $pages = [
       ['id' => 'favorites', 'url' => getUrlByName('favorites', ['login' => $uid['user_login']]), 'content' => Translate::get('favorites'), 'icon' => 'bi bi-bookmark'],
@@ -21,7 +21,7 @@
 
   <?php if (!empty($data['favorites'])) { ?>
     <?php foreach ($data['favorites'] as $content) { ?>
-      <div class="bg-white br-rd5 border-box-1 mt10 pt5 pr15 pb15 pl15">
+      <div class="bg-white br-rd5 br-box-grey mt10 pt5 pr15 pb15 pl15">
         <div class="pt5 pr15 pb0 size-14 flex">
           <?= user_avatar_img($content['post']['user_avatar'], 'small', $content['post']['user_login'], 'w18 mr10'); ?>
           <?= $content['post']['user_login']; ?>

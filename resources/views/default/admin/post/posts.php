@@ -9,7 +9,7 @@
     null,
     Translate::get('posts')
   ); ?>
-  <div class="bg-white flex flex-row items-center justify-between border-box-1 br-rd5 p15 mb15">
+  <div class="bg-white flex flex-row items-center justify-between br-box-grey br-rd5 p15 mb15">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
     <?php $pages = [
       ['id' => 'posts', 'url' => '/admin/posts', 'content' => Translate::get('all'), 'icon' => 'bi bi-record-circle'],
@@ -19,7 +19,7 @@
     ?>
   </div>
 
-  <div class="bg-white border-box-1 pt5 pr15 pb5 pl15">
+  <div class="bg-white br-box-grey pt5 pr15 pb5 pl15">
     <?php if (!empty($data['posts'])) { ?>
       <?php foreach ($data['posts'] as $post) { ?>
         <a href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">

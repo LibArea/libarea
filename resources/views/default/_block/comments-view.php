@@ -1,5 +1,5 @@
 <?php if (!empty($data['answers'])) { ?>
-  <div class="bg-white br-rd5 border-box-1 mt15 p15">
+  <div class="bg-white br-rd5 br-box-grey mt15 p15">
     <h2 class="lowercase m0 mb15 size-21">
       <?= num_word($post['amount_content'], Translate::get('num-answer'), true); ?>
     </h2>

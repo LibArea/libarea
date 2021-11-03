@@ -9,7 +9,7 @@
     var coords = document.documentElement.clientHeight;
 
     if (scrolled > coords) {
-      upDownBtn.classList.add('up_down_btn-show');
+      upDownBtn.classList.add('block');
       upDownBtn.innerHTML = '&uarr;';
       upDownBtn.setAttribute('title', 'Наверх');
       check = false;

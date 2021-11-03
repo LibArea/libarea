@@ -1,4 +1,4 @@
-<div class="last-comm br-rd5 border-box-1 p15 mt15 bg-white">
+<div class="last-comm br-rd5 br-box-grey p15 mt15 bg-white">
   <div class="mb-3 size-14">
     <a class="mr15 inline gray-light" title="<?= Translate::get('all comments'); ?>" href="<?= getUrlByName('comments'); ?>">
       <?= Translate::get('comments'); ?>

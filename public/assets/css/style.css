@@ -47,6 +47,7 @@ img {
 }
 
 .top0 { top: 0; }
+.top80 { top: 80px; }
 .right0 { right: 0; }
 .bottom0 { bottom: 0; }
 .left0 { left: 0; }
@@ -167,8 +168,15 @@ img {
 .bg-gray-900 { background-color: #212529; }
 
 .box-shadow { box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);  }
-.border-box-1 { border: 1px solid #ededed; }
-.border-box-blue { border: 1px solid #3ea7e2; }
+.br-box-grey { border: 1px solid #ededed; }
+.br-box-blue { border: 1px solid #3ea7e2; }
+
+.br-rd3 { border-radius: 3px; }
+.br-rd5 { border-radius: 5px; }
+.br-rd20 { border-radius: 20px; }
+.br-rd-42 { border-radius: 42%; }
+.br-rd-50 { border-radius: 50%; }
+
 .bg-hover-green:hover { background-color: #5fb878; }
 .bg-hover-gray:hover { background-color: #f5f7fa; }
 .bg-hover-blue:hover { background-color: #3ea7e2; }
@@ -186,6 +194,7 @@ img {
 .w18 { width: 18px; }
 .w21 { width: 21px; }
 .w24 { width: 24px; }
+.w30 { width: 30px; }
 .w34 { width: 34px; }
 .w44 { width: 44px; }
 .w54 { width: 54px; }
@@ -219,12 +228,6 @@ img {
 .h44 { height: 44px; }
 .h120 { height: 120px; }
 .h150 { height: 150px; }
-
-.br-rd3 { border-radius: 3px; }
-.br-rd5 { border-radius: 5px; }
-.br-rd20 { border-radius: 20px; }
-.br-rd-42 { border-radius: 42%; }
-.br-rd-50 { border-radius: 50%; }
 
 .size-13 { font-size: 0.8125rem; }
 .size-14 { font-size: 0.875rem; }
@@ -299,8 +302,6 @@ img {
 .border-bottom { border-bottom: 1px solid #ddd; }
 .border-bottom:last-child { border: 0; }
 
-.t-81 { top: 81px; }
-.post-view.sticky { top: 75px; }
 a:hover > img { opacity: 0.8; }
 
 code {
@@ -415,8 +416,6 @@ textarea:focus { border: 1px solid #9ccdf8; }
   padding-top: 70px;
 }
 
-ol.comment-telo { padding-left: 23px; }
-
 .comm-telo-body p:first-child,
 .answ-telo p:first-child {
   margin: 5px 0;
@@ -488,25 +487,14 @@ ol.comment-telo { padding-left: 23px; }
   position: fixed;
   bottom: 40px;
   right: 10px;
-  z-index: 9999;
-  width: 30px;
-  height: 30px;
-  text-align: center;
   line-height: 30px;
   background: #f5f5f5;
-  color: #444;
   cursor: pointer;
-  border-radius: 2px;
-  display: none;
 }
 
 .up_down_btn:hover {
   text-decoration: none;
   background: #e9ebec;
-}
-
-.up_down_btn-show {
-  display: block;
 }
 
 .up_down_btn-disabled {

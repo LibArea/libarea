@@ -2,7 +2,7 @@
   <?= includeTemplate('/_block/menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-7 mb-col-12">
-  <div class="bg-white br-rd5 border-box-1 pt5 pr15 pb5 pl15">
+  <div class="bg-white br-rd5 br-box-grey pt5 pr15 pb5 pl15">
     <?= breadcrumb(
       '/',
       Translate::get('home'),
@@ -13,7 +13,7 @@
   </div>
   <?php if (!empty($data['answers'])) { ?>
     <?php foreach ($data['answers'] as $answer) { ?>
-      <div class="bg-white br-rd5 border-box-1 pt15 pr15 pb0 pl15 ">
+      <div class="bg-white br-rd5 br-box-grey pt15 pr15 pb0 pl15 ">
         <div class="size-14">
           <a class="gray" href="<?= getUrlByName('user', ['login' => $answer['user_login']]); ?>">
             <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'w18 mr5'); ?>

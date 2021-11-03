@@ -1,5 +1,5 @@
 <main class="col-span-9 mb-col-12">
-  <div class="bg-white br-rd5 border-box-1 pt5 pr15 pb10 pl15">
+  <div class="bg-white br-rd5 br-box-grey pt5 pr15 pb10 pl15">
     <?= breadcrumb(
       '/',
       Translate::get('home'),

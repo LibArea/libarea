@@ -1,6 +1,6 @@
 <?php $post = $data['post']; ?>
 <main class="col-span-9 mb-col-12">
-  <article class="post-full border-box-1 br-rd5 bg-white<?php if ($post['post_is_deleted'] == 1) { ?> bg-red-300<?php } ?> mb15 pt0 pr15 pb5 pl15">
+  <article class="post-full br-box-grey br-rd5 bg-white<?php if ($post['post_is_deleted'] == 1) { ?> bg-red-300<?php } ?> mb15 pt0 pr15 pb5 pl15">
     <?php if ($post['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
       <div class="post-body">
         <h1 class="title mb0 mt10 size-24">
@@ -116,7 +116,7 @@
         <?php } ?>
       </div>
 
-      <div class="border-box-1 flex items-center mb5">
+      <div class="br-box-grey flex items-center mb5">
         <div class="left p10">
           <?= votes($uid['user_id'], $post, 'post', 'size-24 middle'); ?>
         </div>
@@ -175,16 +175,16 @@
         <div class="mr15">
           <?php if ($uid['user_id'] > 0) { ?>
             <?php if (is_array($data['post_signed'])) { ?>
-              <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id size-14 right mt5 bg-gray-100 gray-light-2 border-box-1 br-rd20 center pt5 pr15 pb5 pl15">
+              <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id size-14 right mt5 bg-gray-100 gray-light-2 br-box-grey br-rd20 center pt5 pr15 pb5 pl15">
                 <?= Translate::get('unsubscribe'); ?>
               </div>
             <?php } else { ?>
-              <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id size-14 right mt5 bg-gray-200 bg-hover-gray mazarine border-box-1 br-rd20 center pt5 pr15 pb5 pl15">
+              <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id size-14 right mt5 bg-gray-200 bg-hover-gray mazarine br-box-grey br-rd20 center pt5 pr15 pb5 pl15">
                 + <?= Translate::get('read'); ?>
               </div>
             <?php } ?>
           <?php } else { ?>
-            <a class="right size-14 mt5 bg-gray-200 bg-hover-gray mazarine border-box-1 br-rd20 center pt5 pr15 pb5 pl15" href="<?= getUrlByName('login'); ?>">
+            <a class="right size-14 mt5 bg-gray-200 bg-hover-gray mazarine br-box-grey br-rd20 center pt5 pr15 pb5 pl15" href="<?= getUrlByName('login'); ?>">
               + <?= Translate::get('read'); ?>
             </a>
           <?php } ?>
@@ -225,7 +225,7 @@
   } ?>
 </main>
 <aside class="col-span-3 relative br-rd5 no-mob">
-  <div class="border-box-1 bg-white br-rd5 mb15 p15">
+  <div class="br-box-grey bg-white br-rd5 mb15 p15">
     <?php if (!empty($data['topics'])) { ?>
       <h3 class="uppercase mb5 mt0 font-light size-15 gray"><?= Translate::get('topics'); ?></h3>
       <?php foreach ($data['topics'] as $topic) { ?>
@@ -237,7 +237,7 @@
           <?php } ?>
         <?php } ?>
         <a class="flex justify-center pt5 pr10 pb5 black  inline size-14" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
-          <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'w24 mr10 border-box-1'); ?>
+          <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'w24 mr10 br-box-grey'); ?>
           <?= $topic['topic_title']; ?>
           <div class="gray-light-2 size-14"><?= $topic['topic_short_description']; ?></div>
         </a>
@@ -245,13 +245,13 @@
     <?php } ?>
   </div>
   <?php if ($post['post_content_img']) { ?>
-    <div class="border-box-1 bg-white br-rd5 mb15">
+    <div class="br-box-grey bg-white br-rd5 mb15">
       <div id="layer-photos" class="layer-photos p15">
         <?= post_img($post['post_content_img'], $post['post_title'], 'w-100 br-rd5', 'cover', $post['post_content_img']); ?>
       </div>
     </div>
   <?php } ?>
-  <div class="border-box-1 bg-white br-rd5 mb15 p15">
+  <div class="br-box-grey bg-white br-rd5 mb15 p15">
     <div class="social center" data-url="<?= Config::get('meta.url') . getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>" data-title="<?= $post['post_title']; ?>">
       <a class="size-21 pl15 pr15 gray-light-2" data-id="fb"><i class="bi bi-facebook"></i></a>
       <a class="size-21 pl15 pr15 gray-light-2" data-id="vk">VK</a>
@@ -259,7 +259,7 @@
     </div>
   </div>
   <?php if ($data['recommend']) { ?>
-    <div class="border-box-1 bg-white br-rd5 mb15 post-view sticky recommend p15">
+    <div class="br-box-grey bg-white br-rd5 mb15 sticky top80 p15">
       <h3 class="uppercase mb10 mt0 font-light size-14 gray"><?= Translate::get('recommended'); ?></h3>
       <?php foreach ($data['recommend'] as  $rec_post) { ?>
         <div class="mb15 hidden flex">

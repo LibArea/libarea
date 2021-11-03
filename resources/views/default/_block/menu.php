@@ -1,4 +1,4 @@
-<nav class="justify-between mt10 ml0 pl0 t-81 sticky size-15 max-w170">
+<nav class="justify-between mt10 ml0 pl0 top80 sticky size-15 max-w170">
   <a class="pt5 pr10 pb5 pl10 gray block" title="<?= Translate::get('feed'); ?>" href="/">
     <i class="bi bi-sort-down middle mr5<?= $sheet == 'feed' ? ' blue' : ''; ?>  size-18"></i>
     <span class="<?= $sheet == 'feed' ? 'blue' : ''; ?>"><?= Translate::get('feed'); ?></span>

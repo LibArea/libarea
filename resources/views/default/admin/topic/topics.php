@@ -14,7 +14,7 @@
       Translate::get('topics')
     ); ?>
 
-    <div class="bg-white flex flex-row items-center justify-between border-box-1 br-rd5 p15 mb15">
+    <div class="bg-white flex flex-row items-center justify-between br-box-grey br-rd5 p15 mb15">
       <p class="m0"><?= Translate::get($data['sheet']); ?></p>
       <?php $pages = [
         ['id' => 'topics', 'url' => '/admin/topics', 'content' => Translate::get('all'), 'icon' => 'bi bi-record-circle'],

@@ -1,5 +1,5 @@
 <?php if (!empty($data['answers'])) { ?>
-  <div class="bg-white br-rd5 border-box-1 p15">
+  <div class="bg-white br-rd5 br-box-grey p15">
     <h2 class="lowercase m0 size-21">
       <?= num_word($post['amount_content'], Translate::get('num-answer'), true); ?>
     </h2>
@@ -12,7 +12,7 @@
           <ol class="p0 m0 list-none">
             <li class="answers_subtree" id="answer_<?= $answer['answer_id']; ?>">
               <div class="answ-telo hidden">
-                <div class="border-box-1 w130 br-rd3 right mt10 pt10 ml10 pb10 hidden center">
+                <div class="br-box-grey w130 br-rd3 right mt10 pt10 ml10 pb10 hidden center">
                   <?= user_avatar_img($answer['user_avatar'], 'max', $answer['user_login'], 'br-rd-50 w64'); ?>
                   <div class="size-14 gray-light">
                     <?= $answer['answer_date']; ?>

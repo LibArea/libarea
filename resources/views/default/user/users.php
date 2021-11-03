@@ -2,7 +2,7 @@
   <?= includeTemplate('/_block/menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-7 mb-col-12">
-  <div class="bg-white br-rd5 border-box-1 p20">
+  <div class="bg-white br-rd5 br-box-grey p20">
     <h1 class="mt0 mb15 size-21"><?= Translate::get('users'); ?></h1>
     <div class="wrap grid grid-cols-6 gap-2 justify-between">
       <?php foreach ($data['users'] as $ind => $user) { ?>

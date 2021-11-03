@@ -70,7 +70,7 @@
                 <?= Translate::get('sign up'); ?>
               </a>
             <?php } ?>
-            <a class="blue mb-mt-5 mb-mb-5 mb-ml-10 border-box-blue bg-hover-blue white-hover size-15 br-rd5 ml30 mr5 block pt5 pr10 pb5 pl10" title="<?= Translate::get('sign in'); ?>" href="<?= getUrlByName('login'); ?>">
+            <a class="blue mb-mt-5 mb-mb-5 mb-ml-10 br-box-blue bg-hover-blue white-hover size-15 br-rd5 ml30 mr5 block pt5 pr10 pb5 pl10" title="<?= Translate::get('sign in'); ?>" href="<?= getUrlByName('login'); ?>">
               <?= Translate::get('sign in'); ?>
             </a>
           </div>

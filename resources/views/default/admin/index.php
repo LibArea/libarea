@@ -9,7 +9,7 @@
     null,
     Translate::get('admin')
   ); ?>
-  <div class="bg-white flex flex-row items-center justify-between border-box-1 br-rd5 p15 mb15">
+  <div class="bg-white flex flex-row items-center justify-between br-box-grey br-rd5 p15 mb15">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
   </div>
 

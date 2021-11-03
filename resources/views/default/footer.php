@@ -1,5 +1,5 @@
 </div>
-<a class="up_down_btn" title="<?= Translate::get('up'); ?>">&uarr;</a>
+<a class="up_down_btn none w30 h30 z-50 br-rd3 center gray" title="<?= Translate::get('up'); ?>">&uarr;</a>
 
 <script async src="/assets/js/common.js"></script>
 <script src="/assets/js/layer/layer.js"></script>

@@ -11,11 +11,11 @@
     Translate::get('notifications')
   ); ?>
 
-  <div class="bg-white flex flex-row items-center justify-between border-box-1 br-rd5 p15 mb15">
+  <div class="bg-white flex flex-row items-center justify-between br-box-grey br-rd5 p15 mb15">
     <p class="m0 no-mob"><?= Translate::get($data['sheet']); ?></p>
     <?= includeTemplate('/_block/setting-nav', ['data' => $data, 'uid' => $uid]); ?>
   </div>
-  <div class="bg-white border-box-1 pt15 pr15 pb5 pl15 box">
+  <div class="bg-white br-box-grey pt15 pr15 pb5 pl15 box">
     <form action="/users/setting/notifications/edit" method="post">
       <?php csrf_field(); ?>
       <b><?= Translate::get('e-mail notification'); ?>?</b>

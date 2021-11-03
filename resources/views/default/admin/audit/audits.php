@@ -9,7 +9,7 @@
     null,
     Translate::get('audits')
   ); ?>
-  <div class="bg-white flex flex-row items-center justify-between border-box-1 br-rd5 p15 mb15">
+  <div class="bg-white flex flex-row items-center justify-between br-box-grey br-rd5 p15 mb15">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
     <?php $pages = [
       ['id' => 'audits', 'url' => '/admin/audits', 'content' => Translate::get('new ones'), 'icon' => 'bi bi-vinyl'],
@@ -18,7 +18,7 @@
     includeTemplate('/_block/tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
     ?>
   </div>
-  <div class="bg-white border-box-1 pt5 pr15 pb5 pl15">
+  <div class="bg-white br-box-grey pt5 pr15 pb5 pl15">
     <?php if (!empty($data['audits'])) { ?>
       <table>
         <thead>

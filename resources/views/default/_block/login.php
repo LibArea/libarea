@@ -1,4 +1,4 @@
-<div class="border-box-1 p15 mb15 br-rd5 bg-white size-14">
+<div class="br-box-grey p15 mb15 br-rd5 bg-white size-14">
   <form class="" action="<?= getUrlByName('login'); ?>" method="post">
     <?php csrf_field(); ?>
     <div class="mb20">

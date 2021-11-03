@@ -1,7 +1,7 @@
 <?php if (!empty($data['posts'])) { ?>
   <?php foreach ($data['posts'] as $post) { ?>
     <?php $post_url = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
-    <div class="border-box-1 bg-white p20 mb15 br-rd5 article_<?= $post['post_id']; ?>">
+    <div class="br-box-grey bg-white p20 mb15 br-rd5 article_<?= $post['post_id']; ?>">
       <?php if ($data['sheet'] == 'subscribed') { ?>
         <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id size-14 right">
           <?= Translate::get('unsubscribe'); ?>
