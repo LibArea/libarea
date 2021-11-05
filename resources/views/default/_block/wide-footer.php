@@ -32,10 +32,13 @@
     </div>
     <div class="text-info col-span-3 mb-col-12">
       <h4 class="mb5 uppercase font-light"><?= Translate::get('social networks'); ?></h4>
-      <a rel="nofollow noopener" class="white" title="DISCORD" href="https://discord.gg/dw47aNx5nU">
-        <i class="bi bi-discord size-21 mr10"></i>
+      <a rel="nofollow noopener" class="white inline mr10" title="DISCORD" href="https://discord.gg/dw47aNx5nU">
+        <i class="bi bi-discord size-21"></i>
       </a>
-      <a rel="nofollow noopener" class="white" title="GitHub" href="https://github.com/agoutiDev/agouti">
+      <a rel="nofollow noopener" class="white inline size-21" title="Vkontakte" href="https://vk.com/agouti">
+        VK
+      </a>
+      <a rel="nofollow noopener" class="white inline ml10" title="GitHub" href="https://github.com/agoutiDev/agouti">
         <i class="bi bi-github size-21"></i>
       </a>
       <div class="size-13 mt5 mb5 gray-light-2">

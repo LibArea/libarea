@@ -5,17 +5,15 @@
 <main class="col-span-10 mb-col-12">
   <?= breadcrumb(getUrlByName('topics'), Translate::get('topics'), getUrlByName('topic', ['slug' => $topic['topic_slug']]), $topic['topic_title'], Translate::get('edit topic')); ?>
 
-  <div class="topic">
-    <div class="box create">
+  <div class="br-box-grey bg-white p15">
       <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'img-topic-edit'); ?>
       <form action="/topic/edit" method="post" enctype="multipart/form-data">
         <?= csrf_field() ?>
 
-        <div class="box-form-img edit-topic">
-          <div class="mb20">
-            <div class="input-images"></div>
-          </div>
+        <div class="mb20 square">
+          <div class="input-images"></div>
         </div>
+
         <div class="clear">
           <p class="size-14 gray-light-2"><?= Translate::get('recommended size'); ?>: 240x240px (jpg, jpeg, png)</p>
           <p><input type="submit" class="button block br-rd5 white" value="<?= Translate::get('download'); ?>" /></p>
@@ -53,21 +51,55 @@
             ],
           ]
         ]); ?>
+        
+         <div class="mb20">
+              <label for="topic_content"><?= Translate::get('root'); ?>?</label>
+            <?php if ($uid['user_trust_level'] == 5) { ?>
+                  <input type="radio" name="topic_top_level" <?php if ($topic['topic_top_level'] == 0) { ?>checked<?php } ?> value="0"> <?= Translate::get('no'); ?>
+                  <input type="radio" name="topic_top_level" <?php if ($topic['topic_top_level'] == 1) { ?>checked<?php } ?> value="1"> <?= Translate::get('yes'); ?>
+                  <div class="size-14 gray-light-2"><?= Translate::get('root-help'); ?></div>
+            <?php } ?>
+  
         <?php if ($uid['user_trust_level'] == 5) { ?>
-          <?php if ($topic['topic_parent_id'] > 0) { ?>
-            <div class="mb20">
-              <label for="topic_content"><?= Translate::get('root'); ?>?</label>
-              ----
-            </div>
-          <?php } else { ?>
-            <div class="mb20">
-              <label for="topic_content"><?= Translate::get('root'); ?>?</label>
-              <input type="radio" name="topic_is_parent" <?php if ($topic['topic_is_parent'] == 0) { ?>checked<?php } ?> value="0"> <?= Translate::get('no'); ?>
-              <input type="radio" name="topic_is_parent" <?php if ($topic['topic_is_parent'] == 1) { ?>checked<?php } ?> value="1"> <?= Translate::get('yes'); ?>
-              <div class="size-14 gray-light-2"><?= Translate::get('root-help'); ?></div>
+          <?php if ($topic['topic_top_level'] != 1) { ?>
+            <div class="mt15 mb20">
+              <label class="block" for="topic_content"><?= Translate::get('upper'); ?></label>
+              <select name="topic_parent_id[]" multiple="multiple" id='selMainLinked'>
+                <?php if (!empty($data['high_lists'])) { ?>
+                  <?php foreach ($data['high_lists'] as $parent) { ?>
+                    <option selected value="<?= $parent['topic_id']; ?>"><?= $parent['topic_title']; ?></option>
+                  <?php } ?>
+                <?php } ?>
+              </select>
             </div>
           <?php } ?>
         <?php } ?>
+        
+            <?php if (!empty($data['high_lists'])) { ?>
+              <div class="bg-white br-rd5 br-box-grey p15">
+                <h3 class="uppercase mb5 mt0 font-light size-14 gray"><?= Translate::get('upper'); ?></h3>
+                <?php foreach ($data['high_lists'] as $sub) { ?>
+                  <a class="flex relative pt5 pb5 items-center hidden gray-light" href="<?= getUrlByName('topic', ['slug' => $sub['topic_slug']]); ?>">
+                    <?= topic_logo_img($sub['topic_img'], 'max', $sub['topic_title'], 'w24 mr10 br-box-grey'); ?>
+                    <?= $sub['topic_title']; ?>
+                  </a>
+                <?php } ?>
+              </div>
+            <?php } ?>
+  
+            <?php if (!empty($data['low_lists'])) { ?>
+              <div class="bg-white br-rd5 br-box-grey p15">
+                <h3 class="uppercase mb5 mt0 font-light size-14 gray"><?= Translate::get('subtopics'); ?></h3>
+                <?php foreach ($data['low_lists'] as $sub) { ?>
+                  <a class="flex relative pt5 pb5 items-center hidden gray-light" href="<?= getUrlByName('topic', ['slug' => $sub['topic_slug']]); ?>">
+                    <?= topic_logo_img($sub['topic_img'], 'max', $sub['topic_title'], 'w24 mr10 br-box-grey'); ?>
+                    <?= $sub['topic_title']; ?>
+                  </a>
+                <?php } ?>
+              </div>
+            <?php } ?>
+        
+        </div>
 
         <div for="mb5"><?= Translate::get('meta description'); ?><sup class="red">*</sup></div>
         <textarea class="add max-w780" rows="6" minlength="44" name="topic_description"><?= $topic['topic_description']; ?></textarea>
@@ -92,20 +124,6 @@
         <textarea class="add max-w780" rows="6" name="topic_info"><?= $topic['topic_info']; ?></textarea>
         <div class="mb20 size-14 gray-light-2">Markdown, > 14 <?= Translate::get('characters'); ?></div>
 
-        <?php if ($uid['user_trust_level'] == 5) { ?>
-          <?php if ($topic['topic_is_parent'] != 1) { ?>
-            <div class="mb20">
-              <label class="block" for="topic_content"><?= Translate::get('root'); ?></label>
-              <select name="topic_parent_id[]" multiple="multiple" id='selMainLinked'>
-                <?php if (!empty($data['topic_parent_id'])) { ?>
-                  <?php foreach ($data['topic_parent_id'] as $parent) { ?>
-                    <option selected value="<?= $parent['topic_id']; ?>"><?= $parent['topic_title']; ?></option>
-                  <?php } ?>
-                <?php } ?>
-              </select>
-            </div>
-          <?php } ?>
-        <?php } ?>
         <div class="mb20">
           <label class="block" for="post_content">
             <?= Translate::get('related'); ?> (post)
@@ -151,7 +169,7 @@
                 width: '70%',
                 maximumSelectionLength: 1,
                 ajax: {
-                  url: "/search/main",
+                  url: "/topic/search/" + <?= $topic['topic_id']; ?>,
                   type: "post",
                   dataType: 'json',
                   delay: 250,
@@ -204,6 +222,5 @@
           <input type="submit" name="submit" class="button block br-rd5 white" value="<?= Translate::get('edit'); ?>" />
         </div>
       </form>
-    </div>
   </div>
 </main>

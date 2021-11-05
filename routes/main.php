@@ -14,7 +14,9 @@ Route::before('Authorization@noAuth')->getGroup();
         Route::get('/favorite/post')->controller('FavoriteController', ['post']);
         Route::get('/favorite/answer')->controller('FavoriteController', ['answer']);
         Route::get('/focus/{type}')->controller('SubscriptionController')->where(['type' => '[a-z]+']);
-        // @ users | posts | topics | mains 
+        // @ topics main (выбор родителя)
+        Route::get('/topic/search/{topic_id}')->controller('Topic\EditTopicController@selectTopicParent')->where(['topic_id' => '[0-9]+']);
+        // @ users | posts | topics 
         Route::get('/search/{type}')->controller('ActionController@select')->where(['type' => '[a-z]+']);
         // @ post | answer | comment | link
         Route::get('/votes/{type}')->controller('VotesController')->where(['type' => '[a-z]+']); 
@@ -132,7 +134,9 @@ Route::get('/topics/page/{page?}')->controller('Topic\TopicController', ['all'])
 Route::get('/topics/new')->controller('Topic\TopicController', ['new'])->name('topic.new');
 Route::get('/topics/new/page/{page?}')->controller('Topic\TopicController', ['new'])->where(['page' => '[0-9]+']);
 
-Route::get('/topic/{slug}')->controller('Topic\TopicController@posts', ['feed'])->where(['slug' => '[a-z0-9-]+'])->name('topic');
+Route::get('/topic/{slug}')->controller('Topic\TopicController@posts', ['feed'])->where(['slug' => '[a-zA-Z0-9-]+'])->name('topic');
+
+Route::get('/topics/structure')->controller('Topic\TopicController@structure')->name('structure');
 
 Route::get('/topic/{slug}/recommend')->controller('Topic\TopicController@posts', ['recommend'])->where(['slug' => '[a-z0-9-]+'])->name('recommend');
 Route::get('/topic/{slug}/recommend/page/{page?}')->controller('Topic\TopicController@posts', ['recommend'])->where(['slug' => '[a-z0-9-]+', 'page' => '[0-9]+']);

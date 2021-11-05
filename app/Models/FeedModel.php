@@ -26,7 +26,6 @@ class FeedModel extends MainModel
             $string     = "WHERE post_user_id  = :selection AND post_draft = 0";
         }
 
-
         // Удаленный пост, запрещенный к показу в ленте и ограниченный по TL (trust_level)
         $display = '';
         if ($uid['user_trust_level'] != 5) {
@@ -101,7 +100,7 @@ class FeedModel extends MainModel
                         $sort LIMIT $start, $limit";
 
         if ($type == 'topic') {
-            $request = ['qa' => "%" . $qa . "%"];
+            $request = ['qa' => "%" . $qa . "@%"];
         } else {
             $request = ['selection' => $selection];
         }
@@ -114,10 +113,10 @@ class FeedModel extends MainModel
     {
         if ($type == 'topic') {
             $qa         = $data['topic_slug'];
-            $string     = "WHERE topic_list LIKE :qa";
+            $string     = "WHERE topic_slug = :qa";
             if ($sheet == 'recommend') {
                 $qa         = $data['topic_slug'];
-                $string     = "WHERE topic_list LIKE :qa AND post_is_recommend = 1";
+                $string     = "WHERE topic_slug = :qa AND post_is_recommend = 1";
             }
         } elseif ($type == 'link') {
             $selection   = $data['link_url_domain'];
@@ -140,44 +139,23 @@ class FeedModel extends MainModel
 
         $sql = "SELECT 
                     post_id,
-                    post_title,
-                    post_slug,
-                    post_type,
-                    post_draft,
-                    post_date,
                     post_published,
-                    post_user_id,
-                    post_merged_id,
                     post_closed,
                     post_tl,
-                    post_lo,
-                    post_top,
                     post_url_domain,
+                    post_user_id,
                     post_is_deleted,
-                    rel.*
+                    post_is_recommend,
+                    topic_id, topic_slug,
+                    relation_topic_id, relation_post_id
                     
-                        FROM posts
-                        LEFT JOIN
-                        (
-                            SELECT 
-                                MAX(topic_id), 
-                                MAX(topic_slug), 
-                                MAX(topic_title),
-                                MAX(relation_topic_id), 
-                                relation_post_id,
-
-                                GROUP_CONCAT(topic_slug, '@', topic_title SEPARATOR '@') AS topic_list
-                                FROM topics      
-                                LEFT JOIN topics_post_relation 
-                                    on topic_id = relation_topic_id
-                                GROUP BY relation_post_id  
-                        ) AS rel
-                            ON rel.relation_post_id = post_id 
-                    $string 
-                    $display ";
+                    FROM posts
+                        LEFT JOIN topics_post_relation on (post_id = relation_post_id)
+                        LEFT JOIN topics on (topic_id = relation_topic_id)
+                        $string $display ";
 
         if ($type == 'topic') {
-            $request = ['qa' => "%" . $qa . "%"];
+            $request = ['qa' => $qa];
         } else {
             $request = ['selection' => $selection];
         }

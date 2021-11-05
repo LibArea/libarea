@@ -27,8 +27,6 @@ class TopicModel extends MainModel
                     topic_slug,
                     topic_img,
                     topic_user_id,
-                    topic_parent_id,
-                    topic_is_parent,
                     topic_count,
                     signed_topic_id, 
                     signed_user_id
@@ -78,9 +76,8 @@ class TopicModel extends MainModel
                     topic_add_date,
                     topic_seo_title,
                     topic_merged_id,
-                    topic_parent_id,
+                    topic_top_level,
                     topic_user_id,
-                    topic_is_parent,
                     topic_tl,
                     topic_related,
                     topic_post_related,
@@ -161,20 +158,6 @@ class TopicModel extends MainModel
     {
         $sql = "SELECT post_id, post_title, post_slug FROM posts WHERE post_id IN(0, " . $topic_post_related . ") ";
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    // Выведем подтемы
-    public static function subTopics($topic_id)
-    {
-        $sql = "SELECT 
-                    topic_id, 
-                    topic_title, 
-                    topic_slug, 
-                    topic_parent_id,
-                    topic_img                    
-                        FROM topics WHERE topic_parent_id = :topic_id";
-
-        return DB::run($sql, ['topic_id' => $topic_id])->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // TOP авторов темы. Limit 10
@@ -263,7 +246,6 @@ class TopicModel extends MainModel
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 
-
     // Add / Edit
     public static function add($data)
     {
@@ -318,8 +300,7 @@ class TopicModel extends MainModel
             'topic_info'                => $data['topic_info'],
             'topic_slug'                => $data['topic_slug'],
             'topic_seo_title'           => $data['topic_seo_title'],
-            'topic_parent_id'           => $data['topic_parent_id'],
-            'topic_is_parent'           => $data['topic_is_parent'],
+            'topic_top_level'           => $data['topic_top_level'],
             'topic_user_id'             => $data['topic_user_id'],
             'topic_tl'                  => $data['topic_tl'],
             'topic_post_related'        => $data['topic_post_related'],
@@ -334,36 +315,14 @@ class TopicModel extends MainModel
                     topic_info              = :topic_info, 
                     topic_slug              = :topic_slug, 
                     topic_seo_title         = :topic_seo_title, 
-                    topic_parent_id         = :topic_parent_id,
                     topic_user_id           = :topic_user_id, 
+                    topic_top_level         = :topic_top_level, 
                     topic_tl                = :topic_tl,                    
-                    topic_is_parent         = :topic_is_parent, 
                     topic_post_related      = :topic_post_related, 
                     topic_related           = :topic_related
                         WHERE topic_id      = :topic_id";
 
         return  DB::run($sql, $params);
-    }
-
-    // Очистим привязку при изменение корневой темы
-    public static function clearBinding($topic_id)
-    {
-        $sql = "UPDATE topics SET topic_parent_id = 0 WHERE topic_parent_id = :topic_id";
-
-        return DB::run($sql, ['topic_id' => $topic_id]);
-    }
-
-    // Выбор корневой темы при редактирование (если они есть)
-    public static function topicMain($topic_id)
-    {
-        $sql = "SELECT 
-                    topic_id,
-                    topic_title,
-                    topic_slug, 
-                    topic_is_parent 
-                        FROM topics WHERE topic_id = :topic_id AND topic_is_parent = 1";
-
-        return DB::run($sql, ['topic_id' => $topic_id])->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // Количество тем созданное участником
@@ -394,4 +353,118 @@ class TopicModel extends MainModel
 
         return DB::run($sql, ['topic_id' => $topic_id])->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    // Вниз по структуре
+    public static function getLowLevelList($topic_id)
+    {
+        $sql = "SELECT 
+                    topic_id,
+                    topic_title,
+                    topic_slug,
+                    topic_img,
+                    topic_chaid_id,
+                    topic_parent_id
+                        FROM topics
+                        LEFT JOIN topics_relation on topic_id = topic_chaid_id 
+                        WHERE topic_parent_id = :topic_id";
+
+        return DB::run($sql, ['topic_id' => $topic_id])->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    // Вверх по структуре
+    public static function getHighLevelList($topic_id)
+    {
+        $sql = "SELECT 
+                    topic_id,
+                    topic_title,
+                    topic_slug,
+                    topic_img,
+                    topic_chaid_id,
+                    topic_parent_id
+                        FROM topics  
+                        LEFT JOIN topics_relation on topic_id = topic_parent_id
+                        WHERE topic_chaid_id  = :topic_id";
+
+        return DB::run($sql, ['topic_id' => $topic_id])->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Получение root уровня
+    public static function getTopLevelList()
+    {
+        $sql = "SELECT 
+                    topic_id,
+                    topic_title,
+                    topic_slug,
+                    topic_img,
+                    topic_top_level  
+                        FROM topics  
+                            WHERE topic_top_level = 0";
+
+        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Удалить привязку темы к другой теме
+    public static function deleteTopicRelation($topic_id)
+    {
+        $sql = "DELETE FROM topics_relation WHERE topic_chaid_id = :topic_id";
+
+        return DB::run($sql, ['topic_id' => $topic_id]);
+    }
+    
+    public static function addTopicRelation($rows, $topic_id)
+    {
+        
+        self::deleteTopicRelation($topic_id);
+
+        foreach ($rows as $row) {
+            $sql = "INSERT INTO topics_relation (topic_parent_id, topic_chaid_id) 
+                        VALUES ($row[0], $row[1])";
+
+            DB::run($sql);
+        }
+
+        return true;
+    }
+
+    // Дерево тем
+    public static function getStructure()
+    {
+        $sql = "SELECT 
+                topic_id,
+                topic_slug,
+                topic_img,
+                topic_title,
+                topic_sort,
+                topic_parent_id,
+                topic_chaid_id
+                    FROM topics 
+                        LEFT JOIN topics_relation on topic_id = topic_chaid_id
+                        ORDER BY topic_sort DESC";
+
+        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+   // Поиск для родительской темы
+    public static function getSearchParent($search, $topic_id)
+    {
+        $field_tl = 'topic_tl';
+        $sql = "SELECT topic_id, topic_title, topic_tl FROM topics 
+                    WHERE topic_title LIKE :topic_title AND topic_id != :topic_id
+                       ORDER BY topic_count DESC LIMIT 8";
+
+        $result = DB::run($sql, ['topic_title' => "%" . $search . "%", 'topic_id' => $topic_id]);
+        $lists  = $result->fetchall(PDO::FETCH_ASSOC);
+
+        $response = array();
+        foreach ($lists as $list) {
+            $response[] = array(
+                "id"    => $list['topic_id'],
+                "text"  => $list['topic_title'],
+                "tl"    => $list['topic_tl']
+            );
+        }
+
+        return json_encode($response);
+    }
+
 }

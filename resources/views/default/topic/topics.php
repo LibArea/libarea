@@ -18,6 +18,7 @@
       ['id' => 'topics-all', 'url' => '/topics', 'content' => Translate::get('all'), 'icon' => 'bi bi-app'],
       ['id' => 'topics-new', 'url' => '/topics/new', 'content' => Translate::get('new ones'), 'icon' => 'bi bi-sort-up'],
       ['id' => 'topics-my', 'url' => '/topics/my', 'content' => Translate::get('signed'), 'auth' => 'yes', 'icon' => 'bi bi-check2-square'],
+      ['id' => 'structure', 'url' => '/topics/structure', 'content' => Translate::get('structure'), 'icon' => 'bi bi-diagram-2'],
     ];
     includeTemplate('/_block/tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
     ?>
@@ -50,9 +51,6 @@
 
               <?php if ($uid['user_id'] == $topic['topic_user_id']) { ?>
                 <i class="bi bi-mic blue size-14"></i>
-              <?php } ?>
-              <?php if ($topic['topic_is_parent'] == 1 && $uid['user_trust_level'] == 5) { ?>
-                <sup class="red size-14">r</sup>
               <?php } ?>
               <div class="size-14 mt5 pr15 mb-pr-0 gray-light-2">
                 <?= $topic['topic_short_description']; ?>

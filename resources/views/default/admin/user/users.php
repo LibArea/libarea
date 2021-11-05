@@ -44,7 +44,7 @@
               <?php if ($user['user_name']) { ?>
                 (<?= $user['user_name']; ?>)
               <?php } ?>
-              <sup class="red">TL:<?= $user['user_trust_level']; ?></sup>
+              <sup class="gray">TL:<?= $user['user_trust_level']; ?></sup>
               <?php if ($user['user_invitation_id'] != 0) { ?><sup>+ inv. id<?= $user['user_invitation_id']; ?></sup><?php } ?>
               <?php if ($user['user_whisper']) { ?>
                 <span data-id="<?= $user['user_whisper']; ?>" class="tips size-13 gray-light">

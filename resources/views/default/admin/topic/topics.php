@@ -46,9 +46,6 @@
               </a>
               <span class="green mr5 ml5">topic/<?= $topic['topic_slug']; ?></span>
               <span class="mr5 ml5">posts: <?= $topic['topic_count']; ?></span>
-              <?php if ($topic['topic_is_parent'] == 1) { ?>
-                <span class="red mr5 ml5"><?= Translate::get('Root'); ?></span>
-              <?php } ?>
               <?php if ($topic['topic_parent_id'] != 0) { ?>
                 <span class="green mr5 ml5"><?= Translate::get('subtopic'); ?></span>
               <?php } ?>

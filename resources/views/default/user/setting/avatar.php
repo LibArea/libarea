@@ -16,15 +16,14 @@
     <?= includeTemplate('/_block/setting-nav', ['data' => $data, 'uid' => $uid]); ?>
   </div>
 
-  <div class=" bg-white br-box-grey pt15 pr15 pb5 pl15 box setting avatar">
+  <div class="bg-white br-box-grey pt15 pr15 pb5 pl15 box setting avatar">
     <form method="POST" action="/users/setting/avatar/edit" enctype="multipart/form-data">
       <?= csrf_field() ?>
 
       <?= user_avatar_img($data['user']['user_avatar'], 'max', $data['user']['user_login'], 'ava'); ?>
-      <div class="box-form-img">
-        <div class="mb20">
-          <div class="input-images"></div>
-        </div>
+
+      <div class="mb20 square">
+        <div class="input-images"></div>
       </div>
 
       <div class="clear gray size-15">

@@ -31,13 +31,19 @@
   max-height: 140px;
 }
 
-.box.setting.avatar .image-uploader,
-.box.setting.space .image-uploader,
-.telo.topic .image-uploader {
+.square .image-uploader {
   border: 1px solid #d9d9d9;
   position: relative;
   width: 145px;
   height: 141px;
+  margin-left: 150px;
+}
+
+.square .image-uploader img {
+  width: 142px;
+  padding: 8px;
+  height: 140px;
+  margin-left: 0;
 }
 
 .img-post-edit img.img-post,
@@ -93,7 +99,6 @@ a.img-remove {
 .image-uploader .upload-text i {
   display: block;
   font-size: 3rem;
-  margin-bottom: 0.5rem;
 }
 
 .image-uploader .upload-text span {
@@ -123,14 +128,6 @@ a.img-remove {
   border: 1px solid #d9d9d9;
   padding: 7px;
   width: 140px;
-}
-
-.box.setting.space .uploaded-image img,
-.box.setting.avatar .uploaded-image img,
-.telo.topic .uploaded-image img {
-  width: 142px;
-  padding: 8px;
-  height: 140px;
 }
 
 .box.setting.avatar .input-images-cover .uploaded-image img {

@@ -1,7 +1,6 @@
 <div class="col-span-2 no-mob"></div>
 <main class="col-span-8 mb-col-12 bg-white br-rd5 br-box-grey pt10 pr15 pb5 pl15">
   <div class="col-span-2 mb20">
-
     <div class="ml16 mb15 size-21">
       <?= Translate::get('you were looking for'); ?>: <b><?= $data['query']; ?></b>
       (<?= $data['count']; ?>)
@@ -19,7 +18,6 @@
       </a>
       <sup class="gray mr15">x<?= $topic['topic_count']; ?></sup>
     <?php } ?>
-
   </div>
   <?php if (!empty($data['result'])) { ?>
     <?php foreach ($data['result'] as  $post) { ?>

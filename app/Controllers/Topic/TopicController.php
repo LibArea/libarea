@@ -69,18 +69,6 @@ class TopicController extends MainController
         $topic  = TopicModel::getTopic($slug, 'slug');
         Base::PageError404($topic);
 
-        // Показываем корневую тему на странице подтемы 
-        $main_topic   = '';
-        if ($topic['topic_parent_id']  != 0) {
-            $main_topic   = TopicModel::getTopic($topic['topic_parent_id'], 'id');
-        }
-
-        // Показываем подтемы корневой темы
-        $subtopics  = '';
-        if ($topic['topic_is_parent']  == 1 || $topic['topic_parent_id']  != 0) {
-            $subtopics  = TopicModel::subTopics($topic['topic_id']);
-        }
-
         $topic['topic_add_date']    = lang_date($topic['topic_add_date']);
 
         $limit = 25;
@@ -127,8 +115,8 @@ class TopicController extends MainController
                     'focus_users'   => TopicModel::getFocusUsers($topic['topic_id'], 5),
                     'topic_signed'  => SubscriptionModel::getFocus($topic['topic_id'], $uid['user_id'], 'topic'),
                     'user'          => UserModel::getUser($topic['topic_user_id'], 'id'),
-                    'main_topic'    => $main_topic,
-                    'subtopics'     => $subtopics,
+                    'high_topics'   => TopicModel::getHighLevelList($topic['topic_id']),
+                    'low_topics'    => TopicModel::getLowLevelList($topic['topic_id']),
                     'writers'       => TopicModel::getWriters($topic['topic_id']),
                 ],
                 'topic'   => $topic['topic_id']
@@ -149,18 +137,6 @@ class TopicController extends MainController
 
         $topic['topic_info']   = Content::text($topic['topic_info'], 'text');
 
-        // Показываем корневую тему на странице подтемы  
-        $main_topic   = '';
-        if ($topic['topic_parent_id']  != 0) {
-            $main_topic   = TopicModel::getTopic($topic['topic_parent_id'], 'id');
-        }
-
-        // Показываем подтемы корневой темы
-        $subtopics  = '';
-        if ($topic['topic_is_parent']  == 1 || $topic['topic_parent_id']  != 0) {
-            $subtopics  = TopicModel::subTopics($topic['topic_id']);
-        }
-
         $topic_select = empty($topic['topic_post_related']) ? 0 : $topic['topic_post_related'];
 
         $m = [
@@ -180,7 +156,8 @@ class TopicController extends MainController
                     'topic'         => $topic,
                     'topic_related' => TopicModel::topicRelated($topic['topic_related']),
                     'post_related'  => TopicModel::topicPostRelated($topic_select),
-                    'subtopics'     => $subtopics,
+                    'high_topics'   => TopicModel::getHighLevelList($topic['topic_id']),
+                    'low_topics'    => TopicModel::getLowLevelList($topic['topic_id']),
                     'user'          => UserModel::getUser($topic['topic_user_id'], 'id'),
                     'main_topic'    => $main_topic
                 ]
@@ -196,4 +173,36 @@ class TopicController extends MainController
 
         return includeTemplate('/topic/followers', ['users' => $users]);
     }
+    
+    // Структура
+    public function structure()
+    {
+        $uid        = Base::getUid();
+        $structure  = TopicModel::getStructure();
+
+        return view(
+            '/topic/structure',
+            [
+                'meta'  => meta($m = [], Translate::get('Структура '), Translate::get('Структура темы')),
+                'uid'   => $uid,
+                'data'  => [
+                    'sheet'     => 'structure',
+                    'structure' => self::builder(0, 0, $structure),
+                ]
+            ]
+        );
+    }
+    
+    // Дерево (tree)
+    public static function builder($topic_chaid_id, $level, $structure, array $tree = []){
+        $level++;
+        foreach($structure as $topic) {
+            if ($topic['topic_parent_id'] == $topic_chaid_id) {
+                $topic['level'] = $level-1;
+                $tree[]         = $topic;
+                $tree           = self::builder($topic['topic_id'], $level, $structure, $tree);
+            }
+        }
+		return $tree;
+    } 
 }

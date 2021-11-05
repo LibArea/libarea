@@ -9,8 +9,11 @@
     <a rel="nofollow noopener" class="gray-light-2 right ml10" title="DISCORD" href="https://discord.gg/dw47aNx5nU">
       <i class="bi bi-discord middle size-18"></i>
     </a>
+    <a rel="nofollow noopener" class="gray-light-2 right ml5 mr10" title="Vkontakte" href="https://vk.com/agouti">
+      VK
+    </a>
     <a rel="nofollow noopener" class="gray-light-2 right mr10" title="GitHub" href="https://github.com/agoutiDev/agouti">
       <i class="bi bi-github middle size-18"></i>
-    </a>
+    </a> 
   </div>
 </div>

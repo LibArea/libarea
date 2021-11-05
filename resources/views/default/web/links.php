@@ -1,20 +1,32 @@
-<div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/_block/menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
-</div>
-<main class="col-span-10 mb-col-12">
-  <div class="bg-white br-rd5 br-box-grey pt5 pr15 pb5 pl15">
+<style nonce="<?= $_SERVER['nonce']; ?>">.bg-gray-100 { background-color: transparent; }</style>
+<main class="col-span-12 mb-col-12">
+  <div class="pt5 pr15 pb5 pl15">
     <?php if ($uid['user_trust_level'] == 5) { ?>
       <a title="<?= Translate::get('add'); ?>" class="right mt5" href="/web/add">
         <i class="bi bi-plus-lg middle"></i>
       </a>
     <?php } ?>
     <h1 class="mt5 mb10 size-24 font-normal"><?= Translate::get('domains-title'); ?></h1>
-    <div class="gray size-14 mb5"><?= Translate::get('under development'); ?>...</div>
+    <div class="gray size-14 mb15"><?= Translate::get('under development'); ?>...</div>
 
+    <div class="flex mb20">
+      <?php foreach (Config::get('web-root-categories') as  $cat) { ?>
+        <div class="mr60">
+          <a class="pt5 pr10 mr60 blue size-21 block" title="<?= $cat['title']; ?>" href="/web/<?= $cat['url']; ?>">
+            <?= $cat['title']; ?>
+          </a>
+          <?php foreach ($cat['sub'] as $sub) { ?>
+            <a class="pr10 pb5 size-14 black inline" title="<?= $sub['title']; ?>" href="/web/<?= $sub['url']; ?>">
+              <?= $sub['title']; ?>
+            </a>   
+          <?php } ?>
+        </div>  
+      <?php } ?>
+    </div>
+    
     <?php if (!empty($data['links'])) { ?>
       <?php foreach ($data['links'] as $key => $link) { ?>
         <?php if ($link['link_published'] == 1) { ?>
-    
         <div class="pt20 pb5 flex flex-row gap-2">
           <div class="mr20 w200 no-mob">
             <?= thumbs_img($link['link_url_domain'], $link['link_title']); ?>
@@ -30,10 +42,10 @@
                 <?php } ?>
               </h2>
             </a>
-            <div class="size-15 mt5 max-w780">
+            <div class="size-15 mt5 mb15 max-w780">
                 <?= $link['link_content']; ?>
             </div>
-            <div class="flex flex-row gap-2 items-center mt20">
+            <div class="flex flex-row gap-2 items-center max-w780">
               <?= favicon_img($link['link_id'], $link['link_url_domain']); ?>
               <div class="green size-14 mr20">
                 <?= $link['link_url_domain']; ?>

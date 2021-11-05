@@ -38,11 +38,6 @@ class EditTopicController extends MainController
         $topic_related      = TopicModel::topicRelated($topic['topic_related']);
         $post_related       = PostModel::postRelated($topic['topic_post_related']);
 
-        $topic_parent_id    = '';
-        if ($topic['topic_parent_id']  != 0) {
-            $topic_parent_id    = TopicModel::topicMain($topic['topic_parent_id']);
-        }
-
         return view(
             '/topic/edit',
             [
@@ -51,8 +46,9 @@ class EditTopicController extends MainController
                 'data'  => [
                     'topic'             => $topic,
                     'topic_related'     => $topic_related,
-                    'topic_parent_id'   => $topic_parent_id,
                     'post_related'      => $post_related,
+                    'high_lists'        => TopicModel::getHighLevelList($topic['topic_id']),
+                    'low_lists'         => TopicModel::getLowLevelList($topic['topic_id']),
                     'user'              => UserModel::getUser($topic['topic_user_id'], 'id'),
                     'sheet'             => 'topics',
                 ]
@@ -73,7 +69,7 @@ class EditTopicController extends MainController
         $topic_slug                 = Request::getPost('topic_slug');
         $topic_seo_title            = Request::getPost('topic_seo_title');
         $topic_merged_id            = Request::getPostInt('topic_merged_id');
-        $topic_is_parent            = Request::getPostInt('topic_is_parent');
+        $topic_top_level            = Request::getPostInt('topic_top_level');
         $topic_user_new             = Request::getPost('user_select');
         $topic_tl                   = Request::getPostInt('content_tl');
 
@@ -83,11 +79,6 @@ class EditTopicController extends MainController
         // Проверка доступа 
         if (!accessСheck($topic, 'topic', $this->uid, 0, 0)) {
             redirect('/');
-        }
-
-        // Если убираем тему из корневой, то должны очистеть те темы, которые были подтемами
-        if ($topic['topic_is_parent'] == 1 && $topic_is_parent == 0) {
-            TopicModel::clearBinding($topic['topic_id']);
         }
 
         $redirect = getUrlByName('admin.topic.edit', ['id' => $topic['topic_id']]);
@@ -134,18 +125,39 @@ class EditTopicController extends MainController
             'topic_info'                => $topic_info,
             'topic_slug'                => $topic_slug,
             'topic_seo_title'           => $topic_seo_title,
-            'topic_parent_id'           => implode(',', $post_fields['topic_parent_id'] ?? ['0']),
             'topic_user_id'             => $topic_user_id,
             'topic_tl'                  => $topic_tl,
-            'topic_is_parent'           => $topic_is_parent,
+            'topic_top_level'           => $topic_top_level,
             'topic_post_related'        => implode(',', $post_fields['post_related'] ?? ['0']),
             'topic_related'             => implode(',', $post_fields['topic_related'] ?? ['0']),
         ];
 
         TopicModel::edit($data);
 
+        // Тема, выбор родителя   
+        $topic_fields   = Request::getPost() ?? [];   
+        $topics         =  $topic_fields['topic_parent_id'] ?? [];
+
+        $arr = [];
+        foreach ($topics as $row) {
+            $arr[] = array($row, $topic_id);
+        }
+        TopicModel::addTopicRelation($arr, $topic_id);
+      
         addMsg(Translate::get('changes saved'), 'success');
 
         redirect(getUrlByName('topic', ['slug' => $topic_slug]));
     }
+    
+    
+    // Выбор родительской темы
+    public function selectTopicParent()
+    {
+        $topic_id = Request::getInt('topic_id');
+        $search = Request::getPost('searchTerm');
+        $search = preg_replace('/[^a-zA-ZА-Яа-я0-9 ]/ui', '', $search);
+
+        return TopicModel::getSearchParent($search, $topic_id);
+    }
+    
 }

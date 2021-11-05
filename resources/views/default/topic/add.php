@@ -2,13 +2,21 @@
   <?= includeTemplate('/_block/menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-10 mb-col-12">
-  <?= breadcrumb(getUrlByName('topics'), Translate::get('topics'), null, null, Translate::get('add topic')); ?>
-  <div class="mb20">
-    <?= Translate::get('you can add more'); ?>:
-    <span class="red"><?= $data['count_topic']; ?></span>
-  </div>
-  <div class="box create">
-    <form action="/topic/create" method="post" enctype="multipart/form-data">
+
+  <?= breadcrumb(
+    getUrlByName('topics'),
+    Translate::get('topics'),
+    null,
+    null,
+    Translate::get('add topic')
+  ); ?>
+
+  <div class="br-box-grey bg-white p15">
+    <div class="size-14 gray mb15">
+      <?= Translate::get('you can add more'); ?>:
+      <span class="red"><?= $data['count_topic']; ?></span>
+    </div>
+    <form class="" action="/topic/create" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
 
       <?= includeTemplate('/_block/form/field-input', [

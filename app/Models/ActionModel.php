@@ -119,12 +119,6 @@ class ActionModel extends MainModel
             $field_tl = 'topic_tl';
             $sql = "SELECT topic_id, topic_title, topic_tl FROM topics 
                     WHERE topic_title LIKE :topic_title ORDER BY topic_count DESC LIMIT 8";
-        } elseif ($type == 'main') {
-            $field_id   = 'topic_id';
-            $field_name = 'topic_title';
-            $field_tl = 'topic_tl';
-            $sql = "SELECT topic_id, topic_title, topic_is_parent, topic_tl FROM topics 
-                    WHERE topic_is_parent !=0 AND topic_title LIKE :topic_title ORDER BY topic_id LIMIT 8";
         } else {
             $field_tl = 'user_trust_level';
             $field_name = 'user_login';
