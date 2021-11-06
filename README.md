@@ -32,7 +32,7 @@ Demo: https://agouti.ru/
 *   Log in to your account using administrator credentials: `ss@sdf.ru` / `qwer14qwer14`
 *   Or user: `test@test.ru` / `test@test.ru`
 
-PHP 7 >= 7.4.0 required due to use of built-in [mb_str_split](https://www.php.net/manual/en/function.mb-str-split.php) function.
+PHP 7+
 
 More information (rus.): https://agouti.info/
 

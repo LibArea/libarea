@@ -137,7 +137,7 @@
               <?= Translate::get('last answer'); ?>
             </div>
             <div class="center">
-              <?php if ($data['last_user']['answer_id']) { ?>
+              <?php if (!empty($data['last_user']['answer_id'])) { ?>
                 <a title="<?= $data['last_user']['user_login']; ?>" href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>#answer_<?= $data['last_user']['answer_id']; ?>">
                   <?= user_avatar_img($data['last_user']['user_avatar'], 'small', $data['last_user']['user_login'], 'w34 br-rd-50'); ?>
                 </a>
