@@ -3,14 +3,6 @@
 </div>
 <main class="col-span-7 mb-col-12">
 
-  <?= breadcrumb(
-    '/',
-    Translate::get('home'),
-    getUrlByName('user', ['login' => $uid['user_login']]),
-    Translate::get('profile'),
-    Translate::get('settings')
-  ); ?>
-
   <div class="bg-white flex flex-row center items-center justify-between br-box-grey br-rd5 p15 mb15">
     <p class="m0 no-mob"><?= Translate::get($data['sheet']); ?></p>
     <?= includeTemplate('/_block/setting-nav', ['data' => $data, 'uid' => $uid]); ?>
@@ -23,7 +15,11 @@
 
       <div class="mb20">
         <?= user_avatar_img($data['user']['user_avatar'], 'small', $data['user']['user_login'], 'mr5 ml5 ava'); ?>
-        <span class="mr5 ml5"><?= $data['user']['user_login']; ?></span>
+        <span class="mr5 ml5">
+          <a title="<?= Translate::get('profile'); ?>" href="<?= getUrlByName('user', ['login' => $uid['user_login']]); ?>">
+            <?= $data['user']['user_login']; ?>
+          </a>
+        </span>
       </div>
 
       <div class="mb20">

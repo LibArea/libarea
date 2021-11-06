@@ -47,7 +47,7 @@
         <i class="bi bi-chevron-right middle"></i>
       </a>
       <div class="uppercase gray mt5 mb5">
-        <?= Translate::get('signed'); ?>
+        <?= Translate::get('reading'); ?>
       </div>
 
       <?php

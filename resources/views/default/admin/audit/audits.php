@@ -2,6 +2,7 @@
   <?= includeTemplate('/admin/admin-menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-10 mb-col-12">
+
   <?= breadcrumb(
     '/admin',
     Translate::get('admin'),
@@ -9,11 +10,12 @@
     null,
     Translate::get('audits')
   ); ?>
+  
   <div class="bg-white flex flex-row items-center justify-between br-box-grey br-rd5 p15 mb15">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
     <?php $pages = [
-      ['id' => 'audits', 'url' => '/admin/audits', 'content' => Translate::get('new ones'), 'icon' => 'bi bi-vinyl'],
-      ['id' => 'approved', 'url' => '/admin/audits/approved', 'content' => Translate::get('approved'), 'icon' => 'bi bi-vinyl-fill'],
+      ['id' => 'audits', 'url' => getUrlByName('admin.audits'), 'content' => Translate::get('new ones'), 'icon' => 'bi bi-vinyl'],
+      ['id' => 'approved', 'url' => getUrlByName('admin.audits.approved'), 'content' => Translate::get('approved'), 'icon' => 'bi bi-vinyl-fill'],
     ];
     includeTemplate('/_block/tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
     ?>
@@ -28,6 +30,7 @@
           <th><?= Translate::get('audit'); ?></th>
         </thead>
         <?php foreach ($data['audits'] as $key => $audit) { ?>
+          <?= $user_id = $audit['user_id']; ?>
           <tr>
             <td class="center">
               <?= $audit['audit_id']; ?>
@@ -37,12 +40,19 @@
                 <?= $audit['content'][$audit['audit_type'] . '_content']; ?>
               </div>
 
-              <a href="/admin/user/<?= $audit['content'][$audit['audit_type'] . '_user_id']; ?>/edit">
-                <?= Translate::get('author'); ?>
+              (id:<?= $user_id; ?>)
+              <a href="<?= getUrlByName('user', ['login' => $audit['user_login']]); ?>">
+                <?= $audit['user_login']; ?>
               </a>
-              (id: <?= $audit['content'][$audit['audit_type'] . '_user_id']; ?>)
-              — <?= $audit['content'][$audit['audit_type'] . '_date']; ?>
-
+              <?php if ($audit['user_limiting_mode'] == 1) { ?>
+                <span class="mr5 ml5 red"> audit </span>
+              <?php } ?>      
+              <span class="mr5 ml5"> &#183; </span>
+              <a class="mr5 ml5" href="<?= getUrlByName('admin.user.edit', ['id' => $user_id]); ?>">
+                <i class="bi bi-pencil size-15"></i>
+              </a>
+              <span class="mr5 ml5"> &#183; </span>
+              <?= $audit['content'][$audit['audit_type'] . '_date']; ?>
               <span class="mr5 ml5"> &#183; </span>
 
               <?= Translate::get('type'); ?>: <i><?= $audit['audit_type']; ?></i>
@@ -52,8 +62,7 @@
 
               <?php if (!empty($audit['post'])) { ?>
                 <?php if ($audit['post']['post_slug']) { ?>
-                  <br>
-                  <a href="/post/<?= $audit['post']['post_id']; ?>/<?= $audit['post']['post_slug']; ?>">
+                  <a class="block mt5" href="<?=  getUrlByName('post', ['id' => $audit['post']['post_id'], 'slug' => $audit['post']['post_slug']]); ?>">
                     <?= $audit['post']['post_title']; ?>
                   </a>
                 <?php } ?>
@@ -70,8 +79,8 @@
             </td>
             <td class="center">
               <?php if ($audit['audit_read_flag'] == 1) { ?>
-                id:
-                <a href="/admin/user/<?= $audit['audit_user_id']; ?>/edit">
+                id: 
+                <a href="<?= getUrlByName('admin.user.edit', ['id' => $user_id]); ?>">
                   <?= $audit['audit_user_id']; ?>
                 </a>
               <?php } else { ?>
@@ -87,5 +96,5 @@
       <?= no_content(Translate::get('no'), 'bi bi-info-lg'); ?>
     <?php } ?>
   </div>
-  <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/admin/audits'); ?>
+  <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('admin.audits')); ?>
 </main>

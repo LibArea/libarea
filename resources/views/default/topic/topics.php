@@ -17,7 +17,7 @@
     <?php $pages = [
       ['id' => 'topics-all', 'url' => '/topics', 'content' => Translate::get('all'), 'icon' => 'bi bi-app'],
       ['id' => 'topics-new', 'url' => '/topics/new', 'content' => Translate::get('new ones'), 'icon' => 'bi bi-sort-up'],
-      ['id' => 'topics-my', 'url' => '/topics/my', 'content' => Translate::get('signed'), 'auth' => 'yes', 'icon' => 'bi bi-check2-square'],
+      ['id' => 'topics-my', 'url' => '/topics/my', 'content' => Translate::get('reading'), 'auth' => 'yes', 'icon' => 'bi bi-check2-square'],
       ['id' => 'structure', 'url' => '/topics/structure', 'content' => Translate::get('structure'), 'icon' => 'bi bi-diagram-2'],
     ];
     includeTemplate('/_block/tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
@@ -45,7 +45,7 @@
                 <?php } ?>
               <?php } ?>
 
-              <a title="<?= $topic['topic_title']; ?>" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
+              <a class="black" title="<?= $topic['topic_title']; ?>" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
                 <?= $topic['topic_title']; ?>
               </a>
 

@@ -413,7 +413,6 @@ class TopicModel extends MainModel
     
     public static function addTopicRelation($rows, $topic_id)
     {
-        
         self::deleteTopicRelation($topic_id);
 
         foreach ($rows as $row) {
@@ -466,5 +465,4 @@ class TopicModel extends MainModel
 
         return json_encode($response);
     }
-
 }

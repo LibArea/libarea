@@ -27,11 +27,11 @@ Route::before('Authorization@admin')->getGroup();
     Route::get('/users/ban')->controller('Admin\UsersController', ['ban']);
     Route::get('/users/{id}/edit')->controller('Admin\UsersController@userEditPage')->where(['id' => '[0-9]+'])->name('admin.user.edit');
     Route::get('/users/page/{page?}')->controller('Admin\UsersController', ['all'])->where(['page' => '[0-9]+']);
-    Route::get('/logip/{ip}')->controller('Admin\UsersController@logsIp', ['logs'])->where(['ip' => '[0-9].+']);
-    Route::get('/regip/{ip}')->controller('Admin\UsersController@logsIp', ['reg'])->where(['ip' => '[0-9].+']);
+    Route::get('/logip/{ip}')->controller('Admin\UsersController@logsIp', ['logs'])->where(['ip' => '[0-9].+'])->name('admin.logip');
+    Route::get('/regip/{ip}')->controller('Admin\UsersController@logsIp', ['reg'])->where(['ip' => '[0-9].+'])->name('admin.regip');
     
     Route::get('/audits')->controller('Admin\AuditsController', ['all'])->name('admin.audits');
-    Route::get('/audits/approved')->controller('Admin\AuditsController', ['approved']);
+    Route::get('/audits/approved')->controller('Admin\AuditsController', ['approved'])->name('admin.audits.approved');
    
     Route::get('/topics')->controller('Admin\TopicsController', ['all'])->name('admin.topics');
     Route::get('/topics/parent')->controller('Admin\TopicsController', ['parent'])->name('admin.parent');

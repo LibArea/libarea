@@ -16,7 +16,7 @@ Route::before('Authorization@noAuth')->getGroup();
         Route::get('/focus/{type}')->controller('SubscriptionController')->where(['type' => '[a-z]+']);
         // @ topics main (выбор родителя)
         Route::get('/topic/search/{topic_id}')->controller('Topic\EditTopicController@selectTopicParent')->where(['topic_id' => '[0-9]+']);
-        // @ users | posts | topics 
+        // @ users | posts | topics
         Route::get('/search/{type}')->controller('ActionController@select')->where(['type' => '[a-z]+']);
         // @ post | answer | comment | link
         Route::get('/votes/{type}')->controller('VotesController')->where(['type' => '[a-z]+']); 

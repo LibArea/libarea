@@ -67,7 +67,7 @@
               <?php } ?>
             </td>
             <td class="size-13 align-right">
-              <a class="gray-light ml10" href="/admin/regip/<?= $user['user_reg_ip']; ?>">
+              <a class="gray-light ml10" href="<?= getUrlByName('admin.regip', ['ip' => $user['user_reg_ip']]); ?>">
                 <?= $user['user_reg_ip']; ?>
               </a>
               <?php if ($user['duplicat_ip_reg'] > 1) { ?>
@@ -78,7 +78,7 @@
             </td>
             <td class="size-13 align-right">
               <?php if (!empty($user['last_visit_logs']['latest_ip'])) { ?>
-                <a class="gray-light ml10" href="/admin/logip/<?= $user['last_visit_logs']['latest_ip']; ?>">
+                <a class="gray-light ml10" href="<?= getUrlByName('admin.logip', ['ip' => $user['last_visit_logs']['latest_ip']]); ?>">
                   <?= $user['last_visit_logs']['latest_ip']; ?>
                 </a>
                 <br>
@@ -103,7 +103,7 @@
               <?php } ?>
             </td>
             <td class="center">
-              <a title="<?= Translate::get('edit'); ?>" href="/admin/users/<?= $user['user_id']; ?>/edit">
+              <a title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('admin.user.edit', ['id' => $user['user_id']]); ?>">
                 <i class="bi bi-pencil size-15"></i>
               </a>
             </td>
@@ -113,7 +113,7 @@
     <?php } else { ?>
       <?= no_content(Translate::get('no users'), 'bi bi-info-lg'); ?>
     <?php } ?>
-    <?= pagination($data['pNum'], $data['pagesCount'], null, '/admin/users'); ?>
+    <?= pagination($data['pNum'], $data['pagesCount'], null, getUrlByName('admin.users')); ?>
   </div>
   </div>
 </main>

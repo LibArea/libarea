@@ -190,21 +190,14 @@ function pagination($pNum, $pagesCount, $sheet, $other)
 
 function breadcrumb($path_home, $title_home, $path_intermediate, $title_intermediate, $title_page)
 {
-    $html = '<ul class="breadcrumb size-14 p0 mt0 mb15">';
-    $html .= '<li class="breadcrumb-item inline m0 pt5 pr0 pn5 pl0 gray">
-                <a title="' . $title_home . '" href="' . $path_home . '">' . $title_home . '</a>
-              </li>';
-
+    $html = '<ul class="flex flex-row gap-2 list-none items-center size-13 p0 mt0 mb15">';
+    $html .= '<li><a class="gray" title="' . $title_home . '" href="' . $path_home . '">' . $title_home . '</a><li class="gray-light-2">/</li>';
+    
     if ($path_intermediate) {
-        $html .= '<li class="breadcrumb-item inline m0 pt5 pr0 pn5 pl0 gray">
-                    <a title="' . $title_intermediate . '" href="' . $path_intermediate . '">' . $title_intermediate . '</a>
-                  </li>';
+        $html .= '<li><a class="gray" title="' . $title_intermediate . '" href="' . $path_intermediate . '">' . $title_intermediate . '</a></li><li class="gray-light-2">/</li>';
     }
 
-    $html .= '<li class="breadcrumb-item inline m0 pt5 pr0 pn5 pl0 gray">
-                <span class="red">' . $title_page . '</span>
-                </li>
-                </ul>';
+    $html .= '<li><span class="red">' . $title_page . '</span></li></ul>';
 
     return $html;
 }

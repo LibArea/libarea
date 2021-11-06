@@ -3,14 +3,6 @@
 </div>
 <main class="col-span-7 mb-col-12">
 
-  <?= breadcrumb(
-    '/',
-    Translate::get('home'),
-    getUrlByName('user', ['login' => $uid['user_login']]),
-    Translate::get('profile'),
-    Translate::get('notifications')
-  ); ?>
-
   <div class="bg-white flex flex-row items-center justify-between br-box-grey br-rd5 p15 mb15">
     <p class="m0 no-mob"><?= Translate::get($data['sheet']); ?></p>
     <?= includeTemplate('/_block/setting-nav', ['data' => $data, 'uid' => $uid]); ?>
@@ -18,7 +10,7 @@
   <div class="bg-white br-box-grey pt15 pr15 pb5 pl15 box">
     <form action="/users/setting/notifications/edit" method="post">
       <?php csrf_field(); ?>
-      <b><?= Translate::get('e-mail notification'); ?>?</b>
+      <b class="mb15 block"><?= Translate::get('e-mail notification'); ?>?</b>
       <?= includeTemplate('/_block/form/field-radio', ['data' => [
         [
           'title' => Translate::get('when the message came to PM'),

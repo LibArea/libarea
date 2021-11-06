@@ -23,8 +23,11 @@ class AuditModel extends MainModel
                     audit_date,
                     audit_user_id,
                     audit_content_id,
-                    audit_read_flag
-                        FROM audits WHERE $sort ORDER BY audit_id DESC LIMIT $start, $limit";
+                    audit_read_flag,
+                    user_id, user_login, user_avatar, user_limiting_mode
+                        FROM audits 
+                        LEFT JOIN users ON user_id = audit_user_id
+                        WHERE $sort ORDER BY audit_id DESC LIMIT $start, $limit";
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }

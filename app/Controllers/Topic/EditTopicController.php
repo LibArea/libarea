@@ -143,12 +143,11 @@ class EditTopicController extends MainController
             $arr[] = array($row, $topic_id);
         }
         TopicModel::addTopicRelation($arr, $topic_id);
-      
+
         addMsg(Translate::get('changes saved'), 'success');
 
         redirect(getUrlByName('topic', ['slug' => $topic_slug]));
     }
-    
     
     // Выбор родительской темы
     public function selectTopicParent()
@@ -159,5 +158,4 @@ class EditTopicController extends MainController
 
         return TopicModel::getSearchParent($search, $topic_id);
     }
-    
 }

@@ -1,4 +1,3 @@
-<style nonce="<?= $_SERVER['nonce']; ?>">.bg-gray-100 { background-color: transparent; }</style>
 <main class="col-span-12 mb-col-12">
   <div class="pt5 pr15 pb5 pl15">
     <?php if ($uid['user_trust_level'] == 5) { ?>
@@ -12,7 +11,7 @@
     <div class="flex mb20">
       <?php foreach (Config::get('web-root-categories') as  $cat) { ?>
         <div class="mr60">
-          <a class="pt5 pr10 mr60 blue size-21 block" title="<?= $cat['title']; ?>" href="/web/<?= $cat['url']; ?>">
+          <a class="pt5 pr10 mr60 blue size-21 block black" title="<?= $cat['title']; ?>" href="/web/<?= $cat['url']; ?>">
             <?= $cat['title']; ?>
           </a>
           <?php foreach ($cat['sub'] as $sub) { ?>
@@ -32,7 +31,7 @@
             <?= thumbs_img($link['link_url_domain'], $link['link_title']); ?>
           </div>
           <div class="mr20 flex-auto">
-            <a href="<?= getUrlByName('domain', ['domain' => $link['link_url_domain']]); ?>">
+            <a class="black" href="<?= getUrlByName('domain', ['domain' => $link['link_url_domain']]); ?>">
               <h2 class="font-normal size-21 mt0 mb0">
                 <?= $link['link_title']; ?>
                 <?php if ($uid['user_trust_level'] == 5) { ?>

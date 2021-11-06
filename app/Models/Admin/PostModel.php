@@ -62,8 +62,8 @@ class PostModel extends MainModel
                         ) AS rel
                             ON rel.relation_post_id = post_id 
 
-            INNER JOIN users ON user_id = post_user_id
-            $sort ORDER BY post_top DESC, post_date DESC LIMIT $start, $limit";
+                    INNER JOIN users ON user_id = post_user_id
+                    $sort ORDER BY post_top DESC, post_date DESC LIMIT $start, $limit";
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
