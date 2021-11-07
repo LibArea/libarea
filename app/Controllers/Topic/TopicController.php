@@ -111,7 +111,6 @@ class TopicController extends MainController
                     'sheet'         => $sheet == 'feed' ? 'topic' : 'recommend',
                     'topic'         => $topic,
                     'posts'         => $result,
-                    'posts'         => $result,
                     'focus_users'   => TopicModel::getFocusUsers($topic['topic_id'], 5),
                     'topic_signed'  => SubscriptionModel::getFocus($topic['topic_id'], $uid['user_id'], 'topic'),
                     'user'          => UserModel::getUser($topic['topic_user_id'], 'id'),

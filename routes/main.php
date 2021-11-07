@@ -29,9 +29,9 @@ Route::before('Authorization@noAuth')->getGroup();
                 Route::get('/users/setting/security/edit')->controller('User\SettingController@securityEdit');
                 Route::get('/users/setting/avatar/edit')->controller('User\SettingController@avatarEdit');
                 Route::get('/users/setting/notifications/edit')->controller('User\SettingController@notificationsEdit');
-                // Add post | comment | answer| topic 
+                // Add post | comment | answer | topic 
                 Route::get('/{controller}/create')->controller('<controller>\Add<controller>Controller@create');
-                // Edit post | comment | answer| topic 
+                // Edit post | comment | answer | topic 
                 Route::get('/{controller}/edit')->controller('<controller>\Edit<controller>Controller@edit');
             Route::endProtect();
     Route::endType();

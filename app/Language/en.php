@@ -149,6 +149,7 @@ $data = [
     'save'              => 'Save',
     'website'           => 'Website',
     'related'           => 'Related',
+    'see also'          => 'See also',
     'badge'             => 'Badge',
     'badges'            => 'Badges',
     'reward the user'   => 'Reward the user',

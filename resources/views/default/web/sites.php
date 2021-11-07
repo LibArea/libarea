@@ -7,24 +7,27 @@
     <?php } ?>
     <a href="/web" class="size-14">← <?= Translate::get('sites'); ?></a>
     <h1 class="mt0 mb5 size-24"><?= $data['topic']['topic_title']; ?></h1>
-    sites.php<br><br>
 
     <div class="flex mb20">
-      <?php foreach (Config::get('web-categories') as $key => $cat) { ?>
-
-        <?php print_r($cat) ?>
-
-
-        <?php if ('/web/' . $cat['url'] == Request::getUri()) { ?>
-          <?php foreach ($cat['sub'] as $inner_key => $sub) { ?>
-            <a class="mr30 pb5 size-21 blue inline" title="<?= $sub['title']; ?>" href="/web/<?= $sub['url']; ?>">
-              <?= $sub['title']; ?>
-            </a>
-          <?php } ?>
-        <?php } ?>
-
+      <?php foreach ($data['high_topics'] as $cat) { ?>
+        <a class="inline mr20" href="/web/<?= $cat['topic_slug']; ?>"><?= $cat['topic_title']; ?></a>
       <?php } ?>
     </div>
+
+    <div class="mb20">
+      <?php foreach ($data['low_topics'] as $cat) { ?>
+        <a class="inline mr20" href="/web/<?= $cat['topic_slug']; ?>"><?= $cat['topic_title']; ?></a>
+      <?php } ?>
+    </div>
+    
+    <?php if ($data['topic_related']) { ?>
+    <div class=" mb20">
+      <div class="gray"><?= Translate::get('see also'); ?></div> 
+      <?php foreach ($data['topic_related'] as $tp) { ?>
+        <a class="inline mr20 size-14 black" href="/web/<?= $tp['topic_slug']; ?>"><?= $tp['topic_title']; ?></a>
+      <?php } ?>
+    </div>
+    <?php } ?>
 
     <?php if (!empty($data['links'])) { ?>
       <?php foreach ($data['links'] as $key => $link) { ?>

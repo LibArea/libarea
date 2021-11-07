@@ -14,9 +14,9 @@ Route::before('Authorization@admin')->getGroup();
         
         Route::getProtect();
             Route::get('/badge/user/create')->controller('Admin\BadgesController@addUser')->name('admin.user.badge.create');
-            Route::get('/badge/create')->controller('Admin\BadgesController@add')->name('admin.badge.create');
+            Route::get('/badge/create')->controller('Admin\BadgesController@create')->name('admin.badge.create');
             Route::get('/badge/edit/{id}')->controller('Admin\BadgesController@edit')->where(['id' => '[0-9]+']);
-            Route::get('/word/create')->controller('Admin\WordsController@add')->name('admin.word.create');
+            Route::get('/word/create')->controller('Admin\WordsController@create')->name('admin.word.create');
             Route::get('/user/edit/{id}')->controller('Admin\UsersController@userEdit')->where(['id' => '[0-9]+']);
         Route::endProtect();
     Route::endType();

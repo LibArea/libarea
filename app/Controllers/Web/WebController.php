@@ -138,7 +138,10 @@ class WebController extends MainController
                     'pagesCount'    => ceil($pagesCount / $limit),
                     'pNum'          => $page,
                     'links'         => $result,
-                    'topic'         => $topic
+                    'topic'         => $topic,
+                    'high_topics'   => TopicModel::getHighLevelList($topic['topic_id']),
+                    'low_topics'    => TopicModel::getLowLevelList($topic['topic_id']),
+                    'topic_related' => TopicModel::topicRelated($topic['topic_related']),
                 ]
             ]
         );

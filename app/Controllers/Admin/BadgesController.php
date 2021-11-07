@@ -40,7 +40,6 @@ class BadgesController extends MainController
         );
     }
 
-
     // Форма изменения награды
     public function editPage()
     {
@@ -65,7 +64,7 @@ class BadgesController extends MainController
     }
 
     // Добавляем награду
-    public function add()
+    public function create()
     {
         $badge_title         = Request::getPost('badge_title');
         $badge_description   = Request::getPost('badge_description');
@@ -124,8 +123,6 @@ class BadgesController extends MainController
 
         redirect('/admin/users/' . $user_id . '/edit');
     }
-
-
 
     // Измененяем награду
     public function edit()

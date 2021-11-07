@@ -144,6 +144,7 @@ $data = [
     'save'              => 'Salvați',
     'website'           => 'Website',
     'related'           => 'Similare',
+    'see also'          => 'See also',
     'badge'             => 'Recompensa',
     'badges'            => 'Recompensii',
     'reward the user'   => 'Recompensează un participant',

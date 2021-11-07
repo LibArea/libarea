@@ -45,7 +45,7 @@ class WordsController extends MainController
     }
 
     // Добавление стоп-слова
-    public function add()
+    public function create()
     {
         $data = [
             'stop_word'     => Request::getPost('word'),
