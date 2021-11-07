@@ -365,7 +365,11 @@ $data = [
     'posts-ban'             => 'Posts',
     
     /* web */
-    'News & Media' => 'News & Media',
+    'News & Media'      => 'News & Media',
+    'Social network'    => 'Social network',
+    'Internet'          => 'Internet',
+    'web-cat'           => 'Is it in the catalog',
+    'web-cat-help'      => 'Whether to show the topic in the catalog (sites)',
 
     /* Setting */
     'info-setting'          => 'Fill in your name, this will help attendees refer to you by name. <br> <br> Tell us something about yourself. You have a great opportunity to open up to please others and seem like an interesting person .',

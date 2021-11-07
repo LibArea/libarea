@@ -84,7 +84,8 @@ class TopicModel extends MainModel
                     topic_post_related,
                     topic_space_related,
                     topic_focus_count,
-                    topic_count
+                    topic_count,
+                    topic_is_web
                         FROM topics WHERE $sort";
 
         return DB::run($sql, ['params' => $params])->fetch(PDO::FETCH_ASSOC);
@@ -149,7 +150,7 @@ class TopicModel extends MainModel
             $string = "topic_id IN(0, " . $topic_related . ")";
         }
 
-        $sql = "SELECT topic_id, topic_title, topic_slug, topic_img FROM topics WHERE $string ";
+        $sql = "SELECT topic_id, topic_title, topic_slug, topic_img, topic_is_web FROM topics WHERE $string ";
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -307,6 +308,7 @@ class TopicModel extends MainModel
             'topic_post_related'        => $data['topic_post_related'],
             'topic_related'             => $data['topic_related'],
             'topic_id'                  => $data['topic_id'],
+            'topic_is_web'              => $data['topic_is_web']
         ];
 
         $sql = "UPDATE topics 
@@ -320,7 +322,8 @@ class TopicModel extends MainModel
                     topic_top_level         = :topic_top_level, 
                     topic_tl                = :topic_tl,                    
                     topic_post_related      = :topic_post_related, 
-                    topic_related           = :topic_related
+                    topic_related           = :topic_related,
+                    topic_is_web            = :topic_is_web
                         WHERE topic_id      = :topic_id";
 
         return  DB::run($sql, $params);
@@ -364,7 +367,8 @@ class TopicModel extends MainModel
                     topic_slug,
                     topic_img,
                     topic_chaid_id,
-                    topic_parent_id
+                    topic_parent_id,
+                    topic_is_web
                         FROM topics
                         LEFT JOIN topics_relation on topic_id = topic_chaid_id 
                         WHERE topic_parent_id = :topic_id";
@@ -381,7 +385,8 @@ class TopicModel extends MainModel
                     topic_slug,
                     topic_img,
                     topic_chaid_id,
-                    topic_parent_id
+                    topic_parent_id,
+                    topic_is_web
                         FROM topics  
                         LEFT JOIN topics_relation on topic_id = topic_parent_id
                         WHERE topic_chaid_id  = :topic_id";
@@ -397,7 +402,8 @@ class TopicModel extends MainModel
                     topic_title,
                     topic_slug,
                     topic_img,
-                    topic_top_level  
+                    topic_top_level,
+                    topic_is_web                    
                         FROM topics  
                             WHERE topic_top_level = 0";
 

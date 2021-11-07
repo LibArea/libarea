@@ -116,6 +116,7 @@ class TopicController extends MainController
                     'user'          => UserModel::getUser($topic['topic_user_id'], 'id'),
                     'high_topics'   => TopicModel::getHighLevelList($topic['topic_id']),
                     'low_topics'    => TopicModel::getLowLevelList($topic['topic_id']),
+                    'topic_related' => TopicModel::topicRelated($topic['topic_related']),
                     'writers'       => TopicModel::getWriters($topic['topic_id']),
                 ],
                 'topic'   => $topic['topic_id']

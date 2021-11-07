@@ -267,7 +267,11 @@ $data = [
     'restored-answer'       => 'Restaurați răspunsul',
 
     /* web */
-    'News & Media' => 'Новости и СМИ',
+    'News & Media'      => 'Știri și media',
+    'Social network'    => 'Rețea socială',
+    'Internet'          => 'Internetul',
+    'web-cat'           => 'Disponibil în catalog',
+    'web-cat-help'      => 'Dacă să afișați subiectul în catalog (site-uri)',
 
     /* Setări */
     'setting profile'       => 'Setari profil',

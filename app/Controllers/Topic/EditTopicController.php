@@ -72,6 +72,7 @@ class EditTopicController extends MainController
         $topic_top_level            = Request::getPostInt('topic_top_level');
         $topic_user_new             = Request::getPost('user_select');
         $topic_tl                   = Request::getPostInt('content_tl');
+        $topic_is_web               = Request::getPostInt('topic_is_web');
 
         $topic = TopicModel::getTopic($topic_id, 'id');
         Base::PageError404($topic);
@@ -130,6 +131,7 @@ class EditTopicController extends MainController
             'topic_top_level'           => $topic_top_level,
             'topic_post_related'        => implode(',', $post_fields['post_related'] ?? ['0']),
             'topic_related'             => implode(',', $post_fields['topic_related'] ?? ['0']),
+            'topic_is_web'              => $topic_is_web,
         ];
 
         TopicModel::edit($data);

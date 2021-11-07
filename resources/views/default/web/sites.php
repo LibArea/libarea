@@ -6,27 +6,46 @@
       </a>
     <?php } ?>
     <a href="/web" class="size-14">← <?= Translate::get('sites'); ?></a>
-    <h1 class="mt0 mb5 size-24"><?= $data['topic']['topic_title']; ?></h1>
-
-    <div class="flex mb20">
-      <?php foreach ($data['high_topics'] as $cat) { ?>
-        <a class="inline mr20" href="/web/<?= $cat['topic_slug']; ?>"><?= $cat['topic_title']; ?></a>
+    <h1 class="mt0 mb5 size-24">
+      <?= $data['topic']['topic_title']; ?>
+      <?php if ($uid['user_trust_level'] == 5) { ?>
+        <a class="size-14" href="/topic/edit/<?= $data['topic']['topic_id']; ?>">
+          <sup><i class="bi bi-pencil gray"></i></sup>
+        </a>
       <?php } ?>
-    </div>
+    </h1>
 
-    <div class="mb20">
-      <?php foreach ($data['low_topics'] as $cat) { ?>
-        <a class="inline mr20" href="/web/<?= $cat['topic_slug']; ?>"><?= $cat['topic_title']; ?></a>
-      <?php } ?>
-    </div>
-    
+    <?php if ($data['high_topics']) { ?>
+      <div class="flex mb20">
+        <?php foreach ($data['high_topics'] as $ht) { ?>
+          <?php if ($ht['topic_is_web'] == 1) { ?>
+            <a class="inline mr20" href="/web/<?= $ht['topic_slug']; ?>"><?= $ht['topic_title']; ?></a>
+          <?php } ?>
+        <?php } ?>
+      </div>
+    <?php } ?>
+
+    <?php if ($data['low_topics']) { ?>
+      <div class="mb20">
+        <?php foreach ($data['low_topics'] as $lt) { ?>
+          <?php if ($lt['topic_is_web'] == 1) { ?>
+            <a class="inline mr20" href="/web/<?= $lt['topic_slug']; ?>"><?= $lt['topic_title']; ?></a>
+          <?php } ?>
+        <?php } ?>
+      </div>
+    <?php } ?>
+
     <?php if ($data['topic_related']) { ?>
-    <div class=" mb20">
-      <div class="gray"><?= Translate::get('see also'); ?></div> 
-      <?php foreach ($data['topic_related'] as $tp) { ?>
-        <a class="inline mr20 size-14 black" href="/web/<?= $tp['topic_slug']; ?>"><?= $tp['topic_title']; ?></a>
-      <?php } ?>
-    </div>
+      <div class=" mb20">
+        <div class="gray"><?= Translate::get('see also'); ?></div>
+        <?php foreach ($data['topic_related'] as $rl) { ?>
+          <?php if ($rl['topic_is_web'] == 1) { ?>
+            <a class="inline mr20 size-14 black" href="/web/<?= $rl['topic_slug']; ?>">
+              <?= $rl['topic_title']; ?>
+            </a>
+          <?php } ?>
+        <?php } ?>
+      </div>
     <?php } ?>
 
     <?php if (!empty($data['links'])) { ?>
@@ -70,6 +89,9 @@
   </div>
   <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/domains'); ?>
 </main>
-<?= includeTemplate('/_block/aside-lang', ['lang' => $data['topic']['topic_description']]); ?>
-</div>
+<aside class="col-span-3 relative br-rd5 no-mob">
+  <div class="bg-white p15  br-box-grey">
+    <?= $data['topic']['topic_description']; ?>
+  </div>
+</aside>
 <?= includeTemplate('/_block/wide-footer'); ?>
