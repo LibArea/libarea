@@ -27,6 +27,7 @@ class TopicModel extends MainModel
                     topic_slug,
                     topic_img,
                     topic_user_id,
+                    topic_top_level,
                     topic_count,
                     signed_topic_id, 
                     signed_user_id

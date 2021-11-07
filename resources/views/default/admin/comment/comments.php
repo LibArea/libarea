@@ -3,7 +3,7 @@
 </div>
 <main class="col-span-10 mb-col-12">
   <?= breadcrumb(
-    '/admin',
+    getUrlByName('admin'),
     Translate::get('admin'),
     null,
     null,
@@ -33,7 +33,7 @@
             <span class="date mr5">
               <?= $comment['date']; ?>
             </span>
-            <a class="gray-light ml10" href="/admin/logip/<?= $comment['comment_ip']; ?>">
+            <a class="gray-light ml10" href="<?= $getUrlByName('admin.logip', ['ip' => $comment['comment_ip']]); ?>">
               <?= $comment['comment_ip']; ?>
             </a>
             <?php if ($comment['post_type'] == 1) { ?>
@@ -60,6 +60,6 @@
     <?php } else { ?>
       <?= no_content(Translate::get('there are no comments'), 'bi bi-info-lg'); ?>
     <?php } ?>
-  </div>
-  <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/admin/comments'); ?>
+  </div>t
+  <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('admin.comments')); ?>
 </main>

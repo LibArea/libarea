@@ -4,9 +4,9 @@
 <main class="col-span-10 mb-col-12">
   <div class="white-box pt5 pr15 pb5 pl15">
     <?= breadcrumb(
-      '/admin',
+      getUrlByName('admin'),
       Translate::get('admin'),
-      '/admin/users',
+      getUrlByName('admin.users'),
       Translate::get('users'),
       Translate::get('search')
     ); ?>

@@ -7,7 +7,7 @@
       <i class="bi bi-plus-lg middle"></i>
     </a>
     <?= breadcrumb(
-      '/admin',
+      getUrlByName('admin'),
       Translate::get('admin'),
       null,
       null,

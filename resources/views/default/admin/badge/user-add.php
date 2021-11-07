@@ -3,14 +3,14 @@
 </div>
 <main class="col-span-10 mb-col-12">
   <?= breadcrumb(
-    '/admin',
+    getUrlByName('admin'),
     Translate::get('admin'),
-    '/admin/badges',
+    getUrlByName('admin.badges'),
     Translate::get('badges'),
     Translate::get('reward the user') . ' ' . $data['user']['user_login']
   ); ?>
 
-  <form action="/admin/badge/user/add" method="post">
+  <form action="<?= getUrlByName('admin.user.badge.create'); ?>" method="post">
     <?= csrf_field() ?>
     <div class="mb20">
       <label class="block" for="post_content"><?= Translate::get('badge'); ?></label>

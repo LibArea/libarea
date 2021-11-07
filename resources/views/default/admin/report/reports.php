@@ -3,9 +3,9 @@
 </div>
 <main class="col-span-10 mb-col-12">
   <?= breadcrumb(
-    '/admin',
+    getUrlByName('admin'),
     Translate::get('admin'),
-    '/admin/users',
+    getUrlByName('admin.users'),
     Translate::get('users'),
     Translate::get('reports')
   ); ?>
@@ -50,6 +50,6 @@
   <?php } else { ?>
     <?= no_content(Translate::get('no users'), 'bi bi-info-lg'); ?>
   <?php } ?>
-  <?= pagination($data['pNum'], $data['pagesCount'], null, '/admin/reports'); ?>
+  <?= pagination($data['pNum'], $data['pagesCount'], null, getUrlByName('admin.reports')); ?>
   </div>
 </main>

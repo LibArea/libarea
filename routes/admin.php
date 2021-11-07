@@ -13,10 +13,10 @@ Route::before('Authorization@admin')->getGroup();
         Route::get('/reports/status')->controller('Admin\ReportsController@status');
         
         Route::getProtect();
-            Route::get('/badge/user/add')->controller('Admin\BadgesController@addUser');
-            Route::get('/badge/add')->controller('Admin\BadgesController@add');
+            Route::get('/badge/user/create')->controller('Admin\BadgesController@addUser')->name('admin.user.badge.create');
+            Route::get('/badge/create')->controller('Admin\BadgesController@add')->name('admin.badge.create');
             Route::get('/badge/edit/{id}')->controller('Admin\BadgesController@edit')->where(['id' => '[0-9]+']);
-            Route::get('/word/add')->controller('Admin\WordsController@add');
+            Route::get('/word/create')->controller('Admin\WordsController@add')->name('admin.word.create');
             Route::get('/user/edit/{id}')->controller('Admin\UsersController@userEdit')->where(['id' => '[0-9]+']);
         Route::endProtect();
     Route::endType();
@@ -55,13 +55,13 @@ Route::before('Authorization@admin')->getGroup();
     Route::get('/answers/ban')->controller('Admin\AnswersController', ['ban']); 
 
     Route::get('/badges')->controller('Admin\BadgesController', ['all'])->name('admin.badges');
-    Route::get('/badges/add')->controller('Admin\BadgesController@addPage');
-    Route::get('/badges/{id}/edit')->controller('Admin\BadgesController@editPage')->where(['id' => '[0-9]+']);
+    Route::get('/badges/add')->controller('Admin\BadgesController@addPage')->name('admin.badges.add');
+    Route::get('/badges/{id}/edit')->controller('Admin\BadgesController@editPage')->where(['id' => '[0-9]+'])->name('admin.badges.edit');
     Route::get('/badges/user/add/{id}')->controller('Admin\BadgesController@addUserPage')->where(['id' => '[0-9]+'])->name('admin.badges.user.add');
   
     Route::get('/webs')->controller('Admin\WebsController', ['all'])->name('admin.webs');
     
-    Route::get('/words/add')->controller('Admin\WordsController@addPage');
+    Route::get('/words/add')->controller('Admin\WordsController@addPage')->name('admin.words.add');
     Route::get('/words')->controller('Admin\WordsController', ['all'])->name('admin.words');
     
     Route::get('/reports')->controller('Admin\ReportsController')->name('admin.reports');

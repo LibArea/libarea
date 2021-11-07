@@ -3,9 +3,9 @@
 </div>
 <main class="col-span-10 mb-col-12">
   <?= breadcrumb(
-    '/admin',
+    getUrlByName('admin'),
     Translate::get('admin'),
-    '/admin/users',
+    getUrlByName('admin.users'),
     Translate::get('users'),
     Translate::get('edit user')
   ); ?>

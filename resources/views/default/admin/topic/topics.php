@@ -7,7 +7,7 @@
       <i class="bi bi-plus-lg middle"></i>
     </a>
     <?= breadcrumb(
-      '/admin',
+      getUrlByName('admin'),
       Translate::get('admin'),
       null,
       null,
@@ -46,7 +46,7 @@
               </a>
               <span class="green mr5 ml5">topic/<?= $topic['topic_slug']; ?></span>
               <span class="mr5 ml5">posts: <?= $topic['topic_count']; ?></span>
-              <?php if ($topic['topic_parent_id'] != 0) { ?>
+              <?php if ($topic['topic_top_level'] != 0) { ?>
                 <span class="green mr5 ml5"><?= Translate::get('subtopic'); ?></span>
               <?php } ?>
               <div class="content-telo">
@@ -65,5 +65,5 @@
       <?= no_content(Translate::get('no'), 'bi bi-info-lg'); ?>
     <?php } ?>
   </div>
-  <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/admin/topics'); ?>
+  <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('admin.topics')); ?>
 </main>

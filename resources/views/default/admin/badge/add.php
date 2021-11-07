@@ -2,14 +2,16 @@
   <?= includeTemplate('/admin/admin-menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-10 mb-col-12">
+
   <?= breadcrumb(
-    '/admin',
+    getUrlByName('admin'),
     Translate::get('admin'),
-    '/admin/badges',
+    getUrlByName('admin.badges'),
     Translate::get('badges'),
     Translate::get('add badge')
   ); ?>
-  <form action="/admin/badge/add" method="post">
+   
+  <form action="<?= getUrlByName('admin.badge.create'); ?>" method="post">
     <?= csrf_field() ?>
     <div class="mb20 max-w780">
       <label class="block" or="post_title">Title</label>

@@ -2,11 +2,11 @@
   <?= includeTemplate('/admin/admin-menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-10 mb-col-12">
-  <a class="right" title="<?= Translate::get('add'); ?>" href="/admin/words/add">
+  <a class="right" title="<?= Translate::get('add'); ?>" href="<?= getUrlByName('admin.words.add'); ?>">
     <i class="bi bi-plus-lg middle"></i>
   </a>
   <?= breadcrumb(
-    '/admin',
+    getUrlByName('admin'),
     Translate::get('admin'),
     null,
     null,

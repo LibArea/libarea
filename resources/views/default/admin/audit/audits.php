@@ -4,7 +4,7 @@
 <main class="col-span-10 mb-col-12">
 
   <?= breadcrumb(
-    '/admin',
+    getUrlByName('admin'),
     Translate::get('admin'),
     null,
     null,

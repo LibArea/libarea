@@ -3,14 +3,14 @@
 </div>
 <main class="col-span-10 mb-col-12">
   <?= breadcrumb(
-    '/admin',
+    getUrlByName('admin'),
     Translate::get('admin'),
-    '/admin/words',
+    getUrlByName('admin.words'),
     Translate::get('stop words'),
     Translate::get('add a stop word')
   ); ?>
 
-  <form action="/admin/word/add" method="post">
+  <form action="<?= getUrlByName('admin.word.create'); ?>" method="post">
     <?= csrf_field() ?>
     <div class="mb20 max-w780">
       <label class="block" or="post_title"><?= Translate::get('stop word'); ?></label>
