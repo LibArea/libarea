@@ -11,6 +11,7 @@ class HomeModel extends MainModel
     // Посты на центральной странице
     public static function feed($page, $limit, $topics_user, $uid, $type)
     {
+       
         $result = [];
         foreach ($topics_user as $ind => $row) {
            $result[$ind] = $row['signed_topic_id'];

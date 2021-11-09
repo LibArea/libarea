@@ -6,7 +6,7 @@
   <?= breadcrumb(
     getUrlByName('web'),
     Translate::get('sites'),
-    getUrlByName('web.topic', ['slug' => $data['domain']['link_url']]),
+    getUrlByName('web.website', ['slug' => $data['domain']['link_url_domain']]),
     $data['domain']['link_title'],
     Translate::get('change the site')
   ); ?>
@@ -43,7 +43,7 @@
             'type' => 'text',
             'name' => 'link_title',
             'value' => $data['domain']['link_title'],
-            'help' => '24 - 250 ' . Translate::get('characters') . ' («Газета.Ru» — интернет-газета)'
+            'help' => '14 - 250 ' . Translate::get('characters') . ' («Газета.Ru» — интернет-газета)'
           ],
         ]
       ]); ?>

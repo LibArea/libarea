@@ -142,7 +142,8 @@ $data = [
     'reply'             => 'Raspunde',
     'edit'              => 'Editati',
     'save'              => 'Salvați',
-    'website'           => 'Website',
+    'source'            => 'Sursă',
+    'website'           => 'Site web',
     'related'           => 'Similare',
     'see also'          => 'See also',
     'badge'             => 'Recompensa',
@@ -242,6 +243,7 @@ $data = [
     'num-answer'    => ['Răspuns', 'Răspunsuri', 'Răspunsuri'],
     'num-post'      => ['Postează', 'Postări', 'Postări'],
     'num-view'      => ['Vizualizare', 'Vizualizare', 'Vizualizări'],
+    'num-website'   => ['Site web', 'Site-uri', 'Site-uri'],
 
     'comment'       => 'Comentariu',
     'comments'      => 'Comentarii',

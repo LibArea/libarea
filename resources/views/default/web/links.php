@@ -11,11 +11,11 @@
     <div class="flex mb20">
       <?php foreach (Config::get('web-root-categories') as  $cat) { ?>
         <div class="mr60">
-          <a class="pt5 pr10 mr60 blue size-21 block black" title="<?= $cat['title']; ?>" href="/web/<?= $cat['url']; ?>">
+          <a class="pt5 pr10 mr60 blue size-21 block black" title="<?= $cat['title']; ?>" href="<?= getUrlByName('web.topic', ['slug' => $cat['url']]); ?>">  
             <?= $cat['title']; ?>
           </a>
           <?php foreach ($cat['sub'] as $sub) { ?>
-            <a class="pr10 pb5 size-14 black inline" title="<?= $sub['title']; ?>" href="/web/<?= $sub['url']; ?>">
+            <a class="pr10 pb5 size-14 black inline" title="<?= $sub['title']; ?>" href="<?= getUrlByName('web.topic', ['slug' => $sub['url']]); ?>">
               <?= $sub['title']; ?>
             </a>
           <?php } ?>
@@ -28,19 +28,19 @@
         <?php if ($link['link_published'] == 1) { ?>
           <div class="pt20 pb5 flex flex-row gap-2">
             <div class="mr20 w200 no-mob">
-              <?= thumbs_img($link['link_url_domain'], $link['link_title']); ?>
+              <?= thumbs_img($link['link_url_domain'], $link['link_title'], 'mr5 mt5 w200 box-shadow'); ?>
             </div>
-            <div class="mr20 flex-auto">
-              <a class="black" href="<?= getUrlByName('domain', ['domain' => $link['link_url_domain']]); ?>">
-                <h2 class="font-normal size-21 mt0 mb0">
+            <div class="mr20">
+              <a class="pt0 pr5 blue size-21 black" href="<?= getUrlByName('web.website', ['slug' => $link['link_url_domain']]); ?>">
+                <h2 class="font-normal inline size-21 mt0 mb0">
                   <?= $link['link_title']; ?>
+                </h2>
+              </a>
                   <?php if ($uid['user_trust_level'] == 5) { ?>
                     <a class="ml15" title="<?= Translate::get('edit'); ?>" href="/web/edit/<?= $link['link_id']; ?>">
                       <i class="bi bi-pencil size-15"></i>
                     </a>
                   <?php } ?>
-                </h2>
-              </a>
               <div class="size-15 mt5 mb15 max-w780">
                 <?= $link['link_content']; ?>
               </div>
@@ -53,7 +53,7 @@
                   </div>
                 </div>
                 <div class="hidden lowercase ml-auto">
-                  <?= votes($uid['user_id'], $link, 'link'); ?>
+                  <?= votes($uid['user_id'], $link, 'link', 'mr5'); ?>
                 </div>
               </div>
             </div>
@@ -74,6 +74,8 @@
       <?= no_content(Translate::get('no'), 'bi bi-info-lg'); ?>
     <?php } ?>
   </div>
-  <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/domains'); ?>
+  <div class="pl10">
+    <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('web')); ?>
+  </div>
 </main>
 <?= includeTemplate('/_block/wide-footer'); ?>

@@ -100,6 +100,7 @@ class WebController extends MainController
         );
     }
 
+    // Лист сайтов по темам (сайты по "категориям")
     public function sites($sheet)
     {
         $slug       = Request::get('slug');
@@ -110,15 +111,12 @@ class WebController extends MainController
         $topic = TopicModel::getTopic($slug, 'slug');
         Base::PageError404($topic);
 
-        $limit      = 25;
-        $links      = WebModel::feedLink($page, $limit, $uid, $sheet, $topic['topic_slug']);
-        $pagesCount = WebModel::feedLinkCount($topic['topic_slug']);
+        // Получим подтемы темы
+        $topics =  TopicModel::getLowLevelList($topic['topic_id']);
 
-        $result = array();
-        foreach ($links as $ind => $row) {
-            // + данные
-            $result[$ind]   = $row;
-        }
+        $limit      = 25;  
+        $links      = WebModel::feedLink($page, $limit, $topics, $uid, $topic['topic_id'], $sheet);
+        $pagesCount = WebModel::feedLinkCount($topics,  $topic['topic_id']);
 
         $m = [
             'og'         => false,
@@ -134,14 +132,49 @@ class WebController extends MainController
                 'meta'  => meta($m, Translate::get('sites') . ': ' . $topic['topic_title'], $desc),
                 'uid'   => $uid,
                 'data'  => [
-                    'sheet'         => 'sites-topic',
+                    'sheet'         => $sheet,
+                    'count'         => $pagesCount,
                     'pagesCount'    => ceil($pagesCount / $limit),
                     'pNum'          => $page,
-                    'links'         => $result,
+                    'links'         => $links,
                     'topic'         => $topic,
                     'high_topics'   => TopicModel::getHighLevelList($topic['topic_id']),
                     'low_topics'    => TopicModel::getLowLevelList($topic['topic_id']),
                     'topic_related' => TopicModel::topicRelated($topic['topic_related']),
+                ]
+            ]
+        );
+    }
+    
+    // Детальная страница сайта
+    public function website($sheet)
+    {
+        $slug       = Request::get('slug');
+        $uid        = Base::getUid();
+
+        $link = WebModel::getLinkOne($slug, $uid['user_id']);
+        Base::PageError404($link);
+
+        $m = [
+            'og'         => false,
+            'twitter'    => false,
+            'imgurl'     => false,
+            'url'        => getUrlByName('web.website', ['slug' => $link['link_url_domain']]),
+        ];
+        $desc       = $link['link_title'] . '. ' . $link['link_content'];
+        $topics     = WebModel::getLinkTopic($link['link_id']);
+        $high_leve  = $topics[0]['topic_id'] ?? 0;
+ 
+        return view(
+            '/web/website',
+            [
+                'meta'  => meta($m, Translate::get('sites') . ': ' . $link['link_title'], $desc),
+                'uid'   => $uid,
+                'data'  => [
+                    'sheet'     => 'sites-topic',
+                    'link'      => $link,
+                    'topics'    => $topics,
+                    'high_leve' => TopicModel::getHighLevelList($high_leve),
                 ]
             ]
         );

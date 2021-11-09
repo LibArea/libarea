@@ -147,6 +147,7 @@ $data = [
     'reply'             => 'Reply',
     'edit'              => 'Edit',
     'save'              => 'Save',
+    'source'            => 'Source',
     'website'           => 'Website',
     'related'           => 'Related',
     'see also'          => 'See also',
@@ -251,6 +252,7 @@ $data = [
     'num-answer'    => ['Answer', 'Answers', 'Answers'],
     'num-post'      => ['Post', 'Post', 'Posts'],
     'num-view'      => ['View', 'View', 'Views'],
+    'num-website'   => ['Website', 'Sites', 'Sites'],
 
     'comment'       => 'Comment',
     'comments'      => 'Comments',

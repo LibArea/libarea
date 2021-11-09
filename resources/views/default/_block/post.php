@@ -85,7 +85,7 @@
       </div>
       <div class="flex flex-row items-center justify-between pt10">
         <div class="flex flex-row">
-          <?= votes($uid['user_id'], $post, 'post'); ?>
+          <?= votes($uid['user_id'], $post, 'post', 'mr5'); ?>
           <?php if ($post['post_answers_count'] != 0) { ?>
             <a class="flex gray-light-2 ml15" href="<?= $post_url; ?>#comment">
               <i class="bi bi-chat-text mr5"></i>

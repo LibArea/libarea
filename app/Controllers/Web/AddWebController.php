@@ -61,7 +61,7 @@ class AddWebController extends MainController
             redirect($redirect);
         }
 
-        Validation::Limits($link_title, Translate::get('title'), '24', '250', $redirect);
+        Validation::Limits($link_title, Translate::get('title'), '14', '250', $redirect);
         Validation::Limits($link_content, Translate::get('description'), '24', '1500', $redirect);
 
         $topic_fields   = Request::getPost() ?? [];

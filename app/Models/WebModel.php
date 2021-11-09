@@ -80,10 +80,25 @@ class WebModel extends MainModel
     }
 
     // Получаем домены по условиям
-    public static function feedLink($page, $limit, $uid, $sheet, $slug)
+    // https://systemrequest.net/index.php/123/
+    public static function feedLink($page, $limit, $topics, $uid, $topic_id, $type)
     {
+        
+        $result = [];
+        foreach ($topics as $ind => $row) {
+           $result['9999'] = $topic_id; 
+           $result[$ind] = $row['topic_id'];
+        }   
+
+        $sort = "ORDER BY link_votes DESC";
+        if ($type == 'new') $sort = "ORDER BY link_date DESC";
+
+        $string = "relation_topic_id IN('.$topic_id.')";
+        if ($result) $string = "relation_topic_id IN(" . implode(',', $result ?? []) . ")";
+
         $start  = ($page - 1) * $limit;
-        $sql = "SELECT 
+        
+        $sql = "SELECT DISTINCT
                     link_id,
                     link_title,
                     link_content,
@@ -97,60 +112,71 @@ class WebModel extends MainModel
                     rel.*,
                     votes_link_item_id, votes_link_user_id,
                     user_id, user_login, user_avatar
-                    
-                        FROM links
-                        LEFT JOIN
-                        (
+  
+                        FROM topics_link_relation 
+                        LEFT JOIN links ON relation_link_id = link_id
+            
+                        LEFT JOIN (
                             SELECT 
                                 MAX(topic_id), 
                                 MAX(topic_slug), 
                                 MAX(topic_title),
                                 MAX(relation_topic_id), 
-                                relation_link_id,
-
+                                MAX(relation_link_id) as l_id,
                                 GROUP_CONCAT(topic_slug, '@', topic_title SEPARATOR '@') AS topic_list
-                                FROM topics      
+                                FROM topics
                                 LEFT JOIN topics_link_relation 
                                     on topic_id = relation_topic_id
-                                GROUP BY relation_link_id  
+                                    GROUP BY relation_link_id
                         ) AS rel
-                            ON rel.relation_link_id = link_id 
-                            
-                            INNER JOIN users ON user_id = link_user_id
-                            LEFT JOIN votes_link ON votes_link_item_id = link_id 
-                                AND votes_link_user_id = " . $uid['user_id'] . "
-                                WHERE topic_list LIKE :slug     
-                                LIMIT $start, $limit";
+                             ON rel.l_id = link_id
+                            LEFT JOIN users ON user_id = link_user_id
+                            LEFT JOIN votes_link 
+                                ON votes_link_item_id = link_id AND votes_link_user_id = :user_id
 
- 
-        return DB::run($sql, ['slug' => "%" . $slug . "%"])->fetchAll(PDO::FETCH_ASSOC);
+                                WHERE $string $sort LIMIT $start, $limit"; 
+
+        return DB::run($sql, ['user_id' => $uid['user_id']])->fetchAll(PDO::FETCH_ASSOC);  
     }
 
-    public static function feedLinkCount($slug)
+    public static function feedLinkCount($topics, $topic_id)
     {
-        $sql = "SELECT 
+        $result = [];
+        foreach ($topics as $ind => $row) {
+           $result['9999'] = $topic_id; 
+           $result[$ind] = $row['topic_id'];
+        }   
+
+        $string = "relation_topic_id IN('.$topic_id.')";
+        if ($result) $string = "relation_topic_id IN(" . implode(',', $result ?? []) . ")";
+
+        $sql = "SELECT DISTINCT
                     link_id,
+                    link_published,
+                    link_url,
+                    link_is_deleted,
                     rel.*
-                        FROM links
-                        LEFT JOIN
-                        (
+                        FROM topics_link_relation 
+                        LEFT JOIN links ON relation_link_id = link_id
+            
+                        LEFT JOIN (
                             SELECT 
                                 MAX(topic_id), 
                                 MAX(topic_slug), 
                                 MAX(topic_title),
                                 MAX(relation_topic_id), 
-                                relation_link_id,
-
+                                MAX(relation_link_id) as l_id,
                                 GROUP_CONCAT(topic_slug, '@', topic_title SEPARATOR '@') AS topic_list
-                                FROM topics      
+                                FROM topics
                                 LEFT JOIN topics_link_relation 
                                     on topic_id = relation_topic_id
-                                GROUP BY relation_link_id  
+                                    GROUP BY relation_link_id
                         ) AS rel
-                            ON rel.relation_link_id = link_id 
-                            WHERE topic_list LIKE :slug";
+                             ON rel.l_id = link_id
 
-         return DB::run($sql, ['slug' => "%" . $slug . "%"])->rowCount();
+                                WHERE $string";
+
+         return DB::run($sql)->rowCount();
     }
 
     // Проверим наличие домена
@@ -270,12 +296,14 @@ class WebModel extends MainModel
         return DB::run($sql, ['link_id' => $link_id])->fetch(PDO::FETCH_ASSOC);
     }
     
+    // Темы по ссылке
     public static function getLinkTopic($link_id)
     {
         $sql = "SELECT
                     topic_id,
                     topic_title,
                     topic_slug,
+                    topic_is_web,
                     relation_topic_id,
                     relation_link_id
                         FROM topics  

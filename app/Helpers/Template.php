@@ -80,10 +80,10 @@ function favicon_img($link_id, $alt)
     return $img;
 }
 
-function thumbs_img($url_domain, $alt)
+function thumbs_img($url_domain, $alt, $css)
 {
     if (file_exists(HLEB_PUBLIC_DIR . AG_PATH_THUMBS . $url_domain . '.png')) {
-        $img = '<img class="mr5 w200 box-shadow" src="'. AG_PATH_THUMBS . $url_domain . '.png" alt="' . $alt . '">';
+        $img = '<img class="' . $css . '" src="'. AG_PATH_THUMBS . $url_domain . '.png" alt="' . $alt . '">';
         return $img;
     }
 
@@ -202,7 +202,7 @@ function breadcrumb($path_home, $title_home, $path_intermediate, $title_intermed
     return $html;
 }
 
-function votes($user_id, $content, $type, $css = '')
+function votes($user_id, $content, $type, $css = '', $block = '')
 {
     $html  = '';
     $count = '';
@@ -212,23 +212,23 @@ function votes($user_id, $content, $type, $css = '')
 
     if ($user_id > 0) {
         if ($content['votes_' . $type . '_user_id'] || $user_id == $content[$type . '_user_id']) {
-            $html .= '<div class="voters active flex gray-light-2 flex-center">
+            $html .= '<div class="voters active flex '. $block .' gray-light-2 center">
                         <div class="up-id bi bi-heart '. $css .'"></div>
-                        <div class="score ml5">
+                        <div class="score">
                             ' . $count . '
                         </div></div>';
         } else {
             $num_count = empty($count) ? 0 : $count;
-            $html .= '<div id="up' . $content[$type . '_id'] . '" class="voters flex flex-center gray-light-2">
+            $html .= '<div id="up' . $content[$type . '_id'] . '" class="voters flex '. $block .' center gray-light-2">
                         <div data-id="' . $content[$type . '_id'] . '" data-count="' . $num_count . '" data-type="' . $type . '" class="up-id bi bi-heart '. $css .'"></div>
                         <div class="score ml5">
                             ' . $count . '
                         </div></div>';
         }
     } else {
-        $html .= '<div class="voters flex flex-center gray-light-2">
+        $html .= '<div class="voters flex '. $block .' center gray-light-2">
                     <div class="up-id bi bi-heart '. $css .' click-no-auth"></div>
-                    <div class="score ml5">
+                    <div class="score">
                          ' . $count . '                
                     </div></div>';
     }

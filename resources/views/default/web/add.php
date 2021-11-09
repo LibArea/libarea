@@ -28,7 +28,7 @@
             'type' => 'text',
             'name' => 'link_title',
             'value' => '',
-            'help' => '24 - 250 ' . Translate::get('characters') . ' («Газета.Ru» — интернет-газета)'
+            'help' => '14 - 250 ' . Translate::get('characters') . ' («Газета.Ru» — интернет-газета)'
           ],
         ]
       ]); ?>

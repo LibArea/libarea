@@ -1,5 +1,13 @@
 <?php $post = $data['post']; ?>
-<main class="col-span-9 mb-col-12">
+<div class="col-span-1 no-mob center">
+  <div class="sticky top80">
+     <?= votes($uid['user_id'], $post, 'post', 'size-24 middle', 'block'); ?>
+     <div class="pt20">
+       <?= favorite_post($uid['user_id'], $post['post_id'], $post['favorite_tid'], 'size-24'); ?>
+     </div>
+  </div>
+</div>
+<main class="col-span-8 mb-col-12">
   <article class="post-full br-box-grey br-rd5 bg-white<?php if ($post['post_is_deleted'] == 1) { ?> bg-red-300<?php } ?> mb15 pt0 pr15 pb5 pl15">
     <?php if ($post['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
       <div class="post-body">
@@ -94,7 +102,7 @@
           </div>
         <?php } ?>
         <?php if ($post['post_url_domain']) { ?>
-          <h3 class="uppercase mb5 mt0 font-light size-14 gray"><?= Translate::get('website'); ?></h3>
+          <h3 class="uppercase mb5 mt0 font-light size-14 gray"><?= Translate::get('source'); ?></h3>
           <div class="italic m15 mb15 p10 size-14 bg-gray-100 table gray">
             <div>
               <i class="bi bi-link-45deg"></i>
@@ -117,8 +125,8 @@
       </div>
 
       <div class="br-box-grey flex items-center mb5">
-        <div class="left p10">
-          <?= votes($uid['user_id'], $post, 'post', 'size-24 middle'); ?>
+        <div class="left p10 no-pc">
+          <?= votes($uid['user_id'], $post, 'post', 'size-24 mr5 middle'); ?>
         </div>
 
         <ul class="list-none w-100 p0 m0 lowercase">
@@ -190,7 +198,7 @@
           <?php } ?>
         </div>
 
-        <div class="right ml15 p10">
+        <div class="right ml15 p10 no-pc">
           <?= favorite_post($uid['user_id'], $post['post_id'], $post['favorite_tid'], 'size-21'); ?>
         </div>
       </div>

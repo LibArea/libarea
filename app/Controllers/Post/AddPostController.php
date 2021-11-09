@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
 use App\Models\{NotificationsModel, SubscriptionModel, ActionModel, WebModel, PostModel, TopicModel};
-use Content, Base, UploadImage, Integration, Validation, SendEmail, UrlRecord, URLScraper, Config, Translate;
+use Content, Base, UploadImage, Integration, Validation, SendEmail, Slug, URLScraper, Config, Translate;
 
 class AddPostController extends MainController
 {
@@ -118,9 +118,9 @@ class AddPostController extends MainController
         Validation::speedAdd($this->uid, 'post');
 
         // Получаем SEO поста
-        $slugGenerator  = new UrlRecord();
-        $slug           = $slugGenerator->GetSeoFriendlyName($post_title);
-        $post_slug      = substr($slug, 0, 90);
+        $slug       = new Slug();
+        $uri        = $slug->create($post_title);
+        $post_slug  = substr($uri, 0, 90);
 
         // Если контента меньше N и он содержит ссылку 
         // Оповещение админу

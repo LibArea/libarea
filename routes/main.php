@@ -143,11 +143,13 @@ Route::get('/topic/{slug}/recommend/page/{page?}')->controller('Topic\TopicContr
 Route::get('/topic/{slug}/page/{page?}')->controller('Topic\TopicController@posts', ['feed'])->where(['slug' => '[a-z0-9-]+', 'page' => '[0-9]+']);
 Route::get('/topic/{slug}/info')->controller('Topic\TopicController@info')->where(['slug' => '[a-z0-9-]+'])->name('topic.info');
 
-Route::get('/web')->controller('Web\WebController')->name('web');
-Route::get('/web/page/{page?}')->controller('Web\WebController')->where(['page' => '[0-9]+']);
+Route::get('/web')->controller('Web\WebController', ['all'])->name('web');
+Route::get('/web/page/{page?}')->controller('Web\WebController', ['all'])->where(['page' => '[0-9]+']);
+
 Route::get('/domain/{domain}')->controller('Web\WebController@posts', ['feed'])->where(['domain' => '[A-Za-z0-9-.]+'])->name('domain');
 Route::get('/domain/{domain}/page/{page?}')->controller('Web\WebController@posts', ['feed'])->where(['domain' => '[A-Za-z0-9-.]+', 'page' => '[0-9]+']);
 Route::get('/web/{slug}')->controller('Web\WebController@sites', ['feed'])->where(['slug' => '[A-Za-z0-9-]+'])->name('web.topic');
+Route::get('/web/website/{slug}')->controller('Web\WebController@website', ['feed'])->where(['slug' => '[A-Za-z0-9.-]+'])->name('web.website');
 Route::get('/web/{slug}/page/{page?}')->controller('Web\WebController@sites', ['feed'])->where(['slug' => '[A-Za-z0-9-]+', 'page' => '[0-9]+']);
 
 Route::get('/')->controller('HomeController', ['feed']);

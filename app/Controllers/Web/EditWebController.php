@@ -66,7 +66,7 @@ class EditWebController extends MainController
         $post_fields    = Request::getPost() ?? [];
         $topics         = $post_fields['topic_select'] ?? [];
 
-        Validation::Limits($link_title, Translate::get('title'), '24', '250', $redirect);
+        Validation::Limits($link_title, Translate::get('title'), '14', '250', $redirect);
         Validation::Limits($link_content, Translate::get('description'), '24', '1500', $redirect);
 
         $data = [

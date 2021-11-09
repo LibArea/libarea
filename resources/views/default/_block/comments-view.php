@@ -41,7 +41,7 @@
                 </div>
               </div>
               <div class="flex size-14">
-                <?= votes($uid['user_id'], $answer, 'answer'); ?>
+                <?= votes($uid['user_id'], $answer, 'answer', 'mr5'); ?>
 
                 <?php if ($post['post_closed'] == 0) { ?>
                   <?php if ($post['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
@@ -155,7 +155,7 @@
                   </div>
                 </div>
                 <div class="size-14 flex">
-                  <?= votes($uid['user_id'], $comment, 'comment'); ?>
+                  <?= votes($uid['user_id'], $comment, 'comment', 'mr5'); ?>
 
                   <?php if ($post['post_closed'] == 0) { ?>
                     <?php if ($post['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
