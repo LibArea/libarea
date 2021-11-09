@@ -11,7 +11,7 @@
       <div class="inline size-14 gray-light-2">
         <?php foreach ($data['high_topics'] as $ht) { ?>
           <?php if ($ht['topic_is_web'] == 1) { ?>
-            <div class="inline mr5 ml5">/</div> 
+            <div class="inline mr5 ml5">/</div>
             <a class="inline gray-light-2" href="<?= getUrlByName('web.topic', ['slug' => $ht['topic_slug']]); ?>">
               <?= $ht['topic_title']; ?>
             </a>
@@ -19,7 +19,7 @@
         <?php } ?>
       </div>
     <?php } ?>
-    
+
     <h1 class="mt0 mb5 size-24 font-normal">
       <?= $data['topic']['topic_title']; ?>
       <?php if ($uid['user_trust_level'] == 5) { ?>
@@ -30,10 +30,10 @@
     </h1>
 
     <?php if ($data['low_topics']) { ?>
-      <div class="mb20">
+      <div class="grid grid-cols-3 gap-2 justify-between mb20">
         <?php foreach ($data['low_topics'] as $lt) { ?>
-          <?php if ($lt['topic_is_web'] == 1) { ?> 
-            <a class="pt5 pr10 mr60 blue size-21 inline black" href="<?= getUrlByName('web.topic', ['slug' => $lt['topic_slug']]); ?>">
+          <?php if ($lt['topic_is_web'] == 1) { ?>
+            <a class="pt5 pr10 blue mb-col-2 mb-size-18 size-21 inline black" href="<?= getUrlByName('web.topic', ['slug' => $lt['topic_slug']]); ?>">
               <?= $lt['topic_title']; ?>
             </a>
           <?php } ?>
@@ -42,7 +42,7 @@
     <?php } ?>
 
     <?php if ($data['topic_related']) { ?>
-      <div class=" mb20">
+      <div class="mb20">
         <div class="gray"><?= Translate::get('see also'); ?></div>
         <?php foreach ($data['topic_related'] as $rl) { ?>
           <?php if ($rl['topic_is_web'] == 1) { ?>
@@ -53,12 +53,10 @@
         <?php } ?>
       </div>
     <?php } ?>
-    <div class="flex items-center">
-      <h2 class="mt0 mr5 mb0 size-21 font-normal lowercase">
-        <?= num_word($data['count'], Translate::get('num-website'), true); ?>
-      </h2>
-      <hr class="w-90">
-    </div>        
+
+    <h2 class="mt0 mr5 mb0 size-21 font-normal lowercase">
+      <?= num_word($data['count'], Translate::get('num-website'), true); ?>
+    </h2>
 
     <?php if (!empty($data['links'])) { ?>
       <?php foreach ($data['links'] as $key => $link) { ?>

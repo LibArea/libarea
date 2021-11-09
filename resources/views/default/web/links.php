@@ -11,7 +11,7 @@
     <div class="flex mb20">
       <?php foreach (Config::get('web-root-categories') as  $cat) { ?>
         <div class="mr60">
-          <a class="pt5 pr10 mr60 blue size-21 block black" title="<?= $cat['title']; ?>" href="<?= getUrlByName('web.topic', ['slug' => $cat['url']]); ?>">  
+          <a class="pt5 pr10 mr60 blue size-21 block black" title="<?= $cat['title']; ?>" href="<?= getUrlByName('web.topic', ['slug' => $cat['url']]); ?>">
             <?= $cat['title']; ?>
           </a>
           <?php foreach ($cat['sub'] as $sub) { ?>
@@ -36,11 +36,11 @@
                   <?= $link['link_title']; ?>
                 </h2>
               </a>
-                  <?php if ($uid['user_trust_level'] == 5) { ?>
-                    <a class="ml15" title="<?= Translate::get('edit'); ?>" href="/web/edit/<?= $link['link_id']; ?>">
-                      <i class="bi bi-pencil size-15"></i>
-                    </a>
-                  <?php } ?>
+              <?php if ($uid['user_trust_level'] == 5) { ?>
+                <a class="ml15" title="<?= Translate::get('edit'); ?>" href="/web/edit/<?= $link['link_id']; ?>">
+                  <i class="bi bi-pencil size-15"></i>
+                </a>
+              <?php } ?>
               <div class="size-15 mt5 mb15 max-w780">
                 <?= $link['link_content']; ?>
               </div>

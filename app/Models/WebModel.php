@@ -93,7 +93,7 @@ class WebModel extends MainModel
         $sort = "ORDER BY link_votes DESC";
         if ($type == 'new') $sort = "ORDER BY link_date DESC";
 
-        $string = "relation_topic_id IN('.$topic_id.')";
+        $string = "relation_topic_id IN($topic_id)";
         if ($result) $string = "relation_topic_id IN(" . implode(',', $result ?? []) . ")";
 
         $start  = ($page - 1) * $limit;
@@ -147,7 +147,7 @@ class WebModel extends MainModel
            $result[$ind] = $row['topic_id'];
         }   
 
-        $string = "relation_topic_id IN('.$topic_id.')";
+        $string = "relation_topic_id IN($topic_id)";
         if ($result) $string = "relation_topic_id IN(" . implode(',', $result ?? []) . ")";
 
         $sql = "SELECT DISTINCT
