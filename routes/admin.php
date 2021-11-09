@@ -24,7 +24,7 @@ Route::before('Authorization@admin')->getGroup();
     Route::get('/tools')->controller('Admin\ToolsController')->name('admin.tools');
   
     Route::get('/users')->controller('Admin\UsersController', ['all'])->name('admin.users');
-    Route::get('/users/ban')->controller('Admin\UsersController', ['ban']);
+    Route::get('/users/ban')->controller('Admin\UsersController', ['ban'])->name('admin.users.ban');
     Route::get('/users/{id}/edit')->controller('Admin\UsersController@userEditPage')->where(['id' => '[0-9]+'])->name('admin.user.edit');
     Route::get('/users/page/{page?}')->controller('Admin\UsersController', ['all'])->where(['page' => '[0-9]+']);
     Route::get('/logip/{ip}')->controller('Admin\UsersController@logsIp', ['logs'])->where(['ip' => '[0-9].+'])->name('admin.logip');
@@ -44,15 +44,15 @@ Route::before('Authorization@admin')->getGroup();
    
     Route::get('/posts')->controller('Admin\PostsController', ['all'])->name('admin.posts');
     Route::get('/posts/page/{page?}')->controller('Admin\PostsController', ['all'])->where(['page' => '[0-9]+']);
-    Route::get('/posts/ban')->controller('Admin\PostsController', ['ban']); 
+    Route::get('/posts/ban')->controller('Admin\PostsController', ['ban'])->name('admin.posts.ban'); 
 
     Route::get('/comments')->controller('Admin\CommentsController', ['all'])->name('admin.comments');
     Route::get('/comments/page/{page?}')->controller('Admin\CommentsController', ['all'])->where(['page' => '[0-9]+']);
-    Route::get('/comments/ban')->controller('Admin\CommentsController', ['ban']); 
+    Route::get('/comments/ban')->controller('Admin\CommentsController', ['ban'])->name('admin.comments.ban'); 
 
     Route::get('/answers')->controller('Admin\AnswersController', ['all'])->name('admin.answers');
     Route::get('/answers/page/{page?}')->controller('Admin\AnswersController', ['all'])->where(['page' => '[0-9]+']);
-    Route::get('/answers/ban')->controller('Admin\AnswersController', ['ban']); 
+    Route::get('/answers/ban')->controller('Admin\AnswersController', ['ban'])->name('admin.answers.ban'); 
 
     Route::get('/badges')->controller('Admin\BadgesController', ['all'])->name('admin.badges');
     Route::get('/badges/add')->controller('Admin\BadgesController@addPage')->name('admin.badges.add');

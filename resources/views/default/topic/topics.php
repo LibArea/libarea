@@ -5,7 +5,7 @@
   <div class="bg-white flex flex-row items-center justify-between br-box-grey br-rd5 p15 mb15">
     <p class="m0 size-18"><?= Translate::get('topics'); ?>
       <?php if ($uid['user_trust_level'] == 5) { ?>
-        <a class="ml15" href="/admin/topics">
+        <a class="ml15" href="<?= getUrlByName('admin.topics'); ?>">
           <i class="bi bi-pencil"></i>
         </a>
         <a class="ml15" title="<?= Translate::get('add'); ?>" href="/topic/add">
@@ -13,15 +13,41 @@
         </a>
       <?php } ?>
     </p>
+    <ul class="flex flex-row list-none m0 p0 center size-15">
 
-    <?php $pages = [
-      ['id' => 'topics-all', 'url' => '/topics', 'content' => Translate::get('all'), 'icon' => 'bi bi-app'],
-      ['id' => 'topics-new', 'url' => '/topics/new', 'content' => Translate::get('new ones'), 'icon' => 'bi bi-sort-up'],
-      ['id' => 'topics-my', 'url' => '/topics/my', 'content' => Translate::get('reading'), 'auth' => 'yes', 'icon' => 'bi bi-check2-square'],
-      ['id' => 'structure', 'url' => '/topics/structure', 'content' => Translate::get('structure'), 'icon' => 'bi bi-diagram-2'],
-    ];
-    includeTemplate('/_block/tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
-    ?>
+      <?= tabs_nav(
+        $uid['user_id'],
+        $data['sheet'],
+        $pages = [
+          [
+            'id' => 'topics-all',
+            'url' => getUrlByName('topics'),
+            'content' => Translate::get('all'),
+            'icon' => 'bi bi-app'
+          ],
+          [
+            'id' => 'topics-new',
+            'url' => getUrlByName('topic.new'),
+            'content' => Translate::get('new ones'),
+            'icon' => 'bi bi-sort-up'
+          ],
+          [
+            'id' => 'topics-my',
+            'url' => getUrlByName('topic.my'),
+            'content' => Translate::get('reading'),
+            'auth' => 'yes',
+            'icon' => 'bi bi-check2-square'
+          ],
+          [
+            'id' => 'structure',
+            'url' => getUrlByName('topic.structure'),
+            'content' => Translate::get('structure'),
+            'icon' => 'bi bi-diagram-2'
+          ],
+        ]
+      ); ?>
+
+    </ul>
   </div>
 
   <div class="bg-white p15 br-box-grey">

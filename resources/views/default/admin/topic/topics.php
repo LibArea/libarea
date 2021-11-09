@@ -16,12 +16,18 @@
 
     <div class="bg-white flex flex-row items-center justify-between br-box-grey br-rd5 p15 mb15">
       <p class="m0"><?= Translate::get($data['sheet']); ?></p>
-      <?php $pages = [
+    <ul class="flex flex-row list-none m0 p0 center size-15">
+
+      <?= tabs_nav(
+        $uid['user_id'],
+        $data['sheet'],
+        $pages = [
         ['id' => 'topics', 'url' => '/admin/topics', 'content' => Translate::get('all'), 'icon' => 'bi bi-record-circle'],
         ['id' => 'parent', 'url' => '/admin/topics/parent', 'content' => Translate::get('parent'), 'icon' => 'bi bi-x-circle'],
-      ];
-      includeTemplate('/_block/tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
-      ?>
+      ]
+      ); ?>
+
+    </ul>
     </div>
 
     <?php if (!empty($data['topics'])) { ?>

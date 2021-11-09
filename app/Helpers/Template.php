@@ -252,6 +252,30 @@ function favorite_post($user_id, $post_id, $favorite_tid, $css = '')
     return $html;
 }
 
+function tabs_nav($user_id, $sheet, array $pages = [])
+{
+    $html = '';
+    foreach ($pages as $key => $page) { 
+     if (empty($page['auth']) != false || $user_id > 0) { 
+       if ($page['id'] == $sheet) { 
+        $html .= '<li class="blue ml30 mb-mr-5 mb-ml-10">
+          <i class="'.  $page['icon'] .' mr5"></i>
+          <span class="mb-size-13">'. $page['content'] .'</span>
+          </li>';
+       } else { 
+        $html .= '<li class="ml30 mb-mr-5 mb-ml-10">
+          <a class="gray" href="'. $page['url'] .'">
+            <i class="'. $page['icon'] .' mr5"></i>
+            <span class="mb-size-13">'. $page['content'] .'</span>
+          </a>
+          </li>';
+       } 
+     } 
+   } 
+   
+   return $html;
+}
+
 // Проверка доступа
 // $content
 // $type -  post / answer / comment

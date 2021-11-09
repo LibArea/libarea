@@ -14,19 +14,34 @@
 <main class="col-span-7 mb-col-12">
   <div class="bg-white flex flex-row items-center justify-between br-box-grey br-rd5 p15 mb15">
     <p class="m0 size-18"><?= Translate::get($data['sheet']); ?></p>
-    <?php includeTemplate(
-      '/_block/tabs_nav',
-      [
-        'pages' => [
-          ['id' => 'feed', 'url' => '/', 'content' => Translate::get('feed'), 'icon' => 'bi bi-sort-down'],
-          ['id' => 'all', 'url' => '/all', 'content' => Translate::get('all'), 'auth' => 'yes', 'icon' => 'bi bi-app'],
-          ['id' => 'top', 'url' => '/top', 'content' => Translate::get('top'), 'icon' => 'bi bi-bar-chart'],
-        ],
-        'sheet' => $data['sheet'],
-        'user_id' => $uid['user_id'],
-      ]
-    );
-    ?>
+    <ul class="flex flex-row list-none m0 p0 center size-15">
+
+      <?= tabs_nav(
+        $uid['user_id'],
+        $data['sheet'],
+        $pages = [
+          [
+            'id' => 'feed',
+            'url' => '/',
+            'content' => Translate::get('feed'),
+            'icon' => 'bi bi-sort-down'
+          ],
+          [
+            'id' => 'all',
+            'url' => getUrlByName('main.all'),
+            'content' => Translate::get('all'),
+            'auth' => 'yes', 'icon' => 'bi bi-app'
+          ],
+          [
+            'id' => 'top',
+            'url' => getUrlByName('main.top'),
+            'content' => Translate::get('top'),
+            'icon' => 'bi bi-bar-chart'
+          ],
+        ]
+      ); ?>
+
+    </ul>
   </div>
 
   <?= includeTemplate('/_block/post', ['data' => $data, 'uid' => $uid]); ?>

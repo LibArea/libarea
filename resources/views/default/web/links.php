@@ -30,7 +30,7 @@
             <div class="mr20 w200 no-mob">
               <?= thumbs_img($link['link_url_domain'], $link['link_title'], 'mr5 mt5 w200 box-shadow'); ?>
             </div>
-            <div class="mr20">
+            <div class="mr20 w-100">
               <a class="pt0 pr5 blue size-21 black" href="<?= getUrlByName('web.website', ['slug' => $link['link_url_domain']]); ?>">
                 <h2 class="font-normal inline size-21 mt0 mb0">
                   <?= $link['link_title']; ?>

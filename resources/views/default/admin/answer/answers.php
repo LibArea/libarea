@@ -7,16 +7,32 @@
     Translate::get('admin'),
     null,
     null,
-    Translate::get('answers-n')
+    Translate::get('answers')
   ); ?>
   <div class="bg-white flex flex-row items-center justify-between br-box-grey br-rd5 p15 mb15">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
-    <?php $pages = [
-      ['id' => 'answers-n', 'url' => '/admin/answers', 'content' => Translate::get('all'), 'icon' => 'bi bi-record-circle'],
-      ['id' => 'answers-ban', 'url' => '/admin/answers/ban', 'content' => Translate::get('deleted answers'), 'icon' => 'bi bi-x-circle'],
-    ];
-    includeTemplate('/_block/tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
-    ?>
+    <ul class="flex flex-row list-none m0 p0 center size-15">
+
+      <?= tabs_nav(
+        $uid['user_id'],
+        $data['sheet'],
+        $pages = [
+          [
+            'id' => 'answers',
+            'url' => getUrlByName('admin.answers'),
+            'content' => Translate::get('all'),
+            'icon' => 'bi bi-record-circle'
+          ],
+          [
+            'id' => 'answers-ban',
+            'url' => getUrlByName('admin.answers.ban'),
+            'content' => Translate::get('deleted answers'),
+            'icon' => 'bi bi-x-circle'
+          ],
+        ]
+      ); ?>
+
+    </ul>
   </div>
 
   <div class="bg-white br-box-grey pt5 pr15 pb5 pl15">
@@ -34,7 +50,7 @@
             <span class="mr5">
               <?= $answer['date']; ?>
             </span>
-            <a class="gray-light ml10" href="/admin/logip/<?= $answer['answer_ip']; ?>">
+            <a class="gray-light ml10" href="<?= getUrlByName('admin.logip', ['ip' => $answer['answer_ip']]); ?>">
               <?= $answer['answer_ip']; ?>
             </a>
             <?php if ($answer['post_type'] == 1) { ?>
@@ -62,5 +78,5 @@
       <?= no_content(Translate::get('no'), 'bi bi-info-lg'); ?>
     <?php } ?>
   </div>
-  <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/admin/answers'); ?>
+  <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('admin.answers')); ?>
 </main>

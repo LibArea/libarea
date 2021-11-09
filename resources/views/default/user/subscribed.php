@@ -11,12 +11,28 @@
   ); ?>
   <div class="bg-white flex flex-row items-center justify-between br-box-grey br-rd5 p15 mb15">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
-    <?php $pages = [
-      ['id' => 'favorites', 'url' => getUrlByName('favorites', ['login' => $uid['user_login']]), 'content' => Translate::get('favorites'), 'icon' => 'bi bi-bookmark'],
-      ['id' => 'subscribed', 'url' => getUrlByName('subscribed', ['login' => $uid['user_login']]), 'content' => Translate::get('subscribed'), 'icon' => 'bi bi-bookmark-plus'],
-    ];
-    includeTemplate('/_block/tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
-    ?>
+    <ul class="flex flex-row list-none m0 p0 center size-15">
+
+      <?= tabs_nav(
+        $uid['user_id'],
+        $data['sheet'],
+        $pages = [
+          [
+            'id' => 'favorites',
+            'url' => getUrlByName('favorites', ['login' => $uid['user_login']]),
+            'content' => Translate::get('favorites'),
+            'icon' => 'bi bi-bookmark'
+          ],
+          [
+            'id' => 'subscribed',
+            'url' => getUrlByName('subscribed', ['login' => $uid['user_login']]),
+            'content' => Translate::get('subscribed'),
+            'icon' => 'bi bi-bookmark-plus'
+          ],
+        ]
+      ); ?>
+
+    </ul>
   </div>
   <div class="mt10">
     <?= includeTemplate('/_block/post', ['data' => $data, 'uid' => $uid]); ?>

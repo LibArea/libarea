@@ -10,15 +10,31 @@
     null,
     Translate::get('audits')
   ); ?>
-  
+
   <div class="bg-white flex flex-row items-center justify-between br-box-grey br-rd5 p15 mb15">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
-    <?php $pages = [
-      ['id' => 'audits', 'url' => getUrlByName('admin.audits'), 'content' => Translate::get('new ones'), 'icon' => 'bi bi-vinyl'],
-      ['id' => 'approved', 'url' => getUrlByName('admin.audits.approved'), 'content' => Translate::get('approved'), 'icon' => 'bi bi-vinyl-fill'],
-    ];
-    includeTemplate('/_block/tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
-    ?>
+    <ul class="flex flex-row list-none m0 p0 center size-15">
+
+      <?= tabs_nav(
+        $uid['user_id'],
+        $data['sheet'],
+        $pages = [
+          [
+            'id' => 'audits',
+            'url' => getUrlByName('admin.audits'),
+            'content' => Translate::get('new ones'),
+            'icon' => 'bi bi-vinyl'
+          ],
+          [
+            'id' => 'approved',
+            'url' => getUrlByName('admin.audits.approved'),
+            'content' => Translate::get('approved'),
+            'icon' => 'bi bi-vinyl-fill'
+          ],
+        ]
+      ); ?>
+
+    </ul>
   </div>
   <div class="bg-white br-box-grey pt5 pr15 pb5 pl15">
     <?php if (!empty($data['audits'])) { ?>
@@ -46,7 +62,7 @@
               </a>
               <?php if ($audit['user_limiting_mode'] == 1) { ?>
                 <span class="mr5 ml5 red"> audit </span>
-              <?php } ?>      
+              <?php } ?>
               <span class="mr5 ml5"> &#183; </span>
               <a class="mr5 ml5" href="<?= getUrlByName('admin.user.edit', ['id' => $user_id]); ?>">
                 <i class="bi bi-pencil size-15"></i>
@@ -62,7 +78,7 @@
 
               <?php if (!empty($audit['post'])) { ?>
                 <?php if ($audit['post']['post_slug']) { ?>
-                  <a class="block mt5" href="<?=  getUrlByName('post', ['id' => $audit['post']['post_id'], 'slug' => $audit['post']['post_slug']]); ?>">
+                  <a class="block mt5" href="<?= getUrlByName('post', ['id' => $audit['post']['post_id'], 'slug' => $audit['post']['post_slug']]); ?>">
                     <?= $audit['post']['post_title']; ?>
                   </a>
                 <?php } ?>
@@ -79,7 +95,7 @@
             </td>
             <td class="center">
               <?php if ($audit['audit_read_flag'] == 1) { ?>
-                id: 
+                id:
                 <a href="<?= getUrlByName('admin.user.edit', ['id' => $user_id]); ?>">
                   <?= $audit['audit_user_id']; ?>
                 </a>

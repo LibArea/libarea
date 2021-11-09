@@ -33,7 +33,7 @@
             'title' => Translate::get('short description'),
             'type' => 'text',
             'name' => 'topic_short_description',
-            'value' => $topic['topic_short_description'],
+            'value' => '',
             'min' => 11,
             'max' => 120,
             'help' => '11 - 120 ' . Translate::get('characters'),

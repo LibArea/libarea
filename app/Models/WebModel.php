@@ -83,7 +83,6 @@ class WebModel extends MainModel
     // https://systemrequest.net/index.php/123/
     public static function feedLink($page, $limit, $topics, $uid, $topic_id, $type)
     {
-        
         $result = [];
         foreach ($topics as $ind => $row) {
            $result['9999'] = $topic_id; 
@@ -97,7 +96,7 @@ class WebModel extends MainModel
         if ($result) $string = "relation_topic_id IN(" . implode(',', $result ?? []) . ")";
 
         $start  = ($page - 1) * $limit;
-        
+
         $sql = "SELECT DISTINCT
                     link_id,
                     link_title,
@@ -107,6 +106,7 @@ class WebModel extends MainModel
                     link_url,
                     link_url_domain,
                     link_votes,
+                    link_date,
                     link_count,
                     link_is_deleted,
                     rel.*,

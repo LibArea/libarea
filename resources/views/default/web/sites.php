@@ -43,10 +43,10 @@
 
     <?php if ($data['topic_related']) { ?>
       <div class="mb20">
-        <div class="gray"><?= Translate::get('see also'); ?></div>
+        <div class="gray size-14"><?= Translate::get('see also'); ?></div>
         <?php foreach ($data['topic_related'] as $rl) { ?>
           <?php if ($rl['topic_is_web'] == 1) { ?>
-            <a class="inline mr20 size-14 black" href="<?= getUrlByName('web.topic', ['slug' => $rl['topic_slug']]); ?>">
+            <a class="inline mr20 blue" href="<?= getUrlByName('web.topic', ['slug' => $rl['topic_slug']]); ?>">
               <?= $rl['topic_title']; ?>
             </a>
           <?php } ?>
@@ -54,9 +54,31 @@
       </div>
     <?php } ?>
 
-    <h2 class="mt0 mr5 mb0 size-21 font-normal lowercase">
-      <?= num_word($data['count'], Translate::get('num-website'), true); ?>
-    </h2>
+    <div class="flex flex-row items-center justify-between pl0 mb15">
+      <p class="m0 size-18 lowercase"><?= num_word($data['count'], Translate::get('num-website'), true); ?></p>
+      <ul class="flex flex-row list-none m0 p0 center size-15">
+      
+      <?= tabs_nav(
+        $uid['user_id'],
+        $data['sheet'],
+        $pages = [
+            [
+              'id' => 'all',
+              'url' => getUrlByName('web.topic', ['slug' => $data['topic']['topic_slug']]),
+              'content' => Translate::get('all'),
+              'icon' => 'bi bi-app'
+            ],
+            [
+              'id' => 'new',
+              'url' => getUrlByName('web.topic.new', ['slug' => $data['topic']['topic_slug']]),
+              'content' => Translate::get('new ones'),
+              'icon' => 'bi bi-bar-chart'
+            ],
+          ]
+      ); ?>
+    
+      </ul>
+    </div>
 
     <?php if (!empty($data['links'])) { ?>
       <?php foreach ($data['links'] as $key => $link) { ?>

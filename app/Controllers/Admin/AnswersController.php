@@ -29,10 +29,10 @@ class AnswersController extends MainController
         return view(
             '/admin/answer/answers',
             [
-                'meta'  => meta($m = [], $sheet == 'ban' ? Translate::get('deleted answers') : Translate::get('answers-n')),
+                'meta'  => meta($m = [], $sheet == 'ban' ? Translate::get('deleted answers') : Translate::get('answers')),
                 'uid'   => $uid,
                 'data'  => [
-                    'sheet'         => $sheet == 'all' ? 'answers-n' : 'answers-ban',
+                    'sheet'         => $sheet == 'all' ? 'answers' : 'answers-ban',
                     'pagesCount'    => ceil($pagesCount / $limit),
                     'pNum'          => $page,
                     'answers'       => $result,

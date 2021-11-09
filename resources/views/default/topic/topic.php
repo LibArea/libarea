@@ -58,13 +58,34 @@
 
   <div class="bg-white flex flex-row items-center justify-between br-box-grey br-rd5 p15 mb15">
     <p class="m0 size-18 no-mob"><?= Translate::get('feed'); ?></p>
-    <?php $pages = [
-      ['id' => 'topic', 'url' => getUrlByName('topic', ['slug' => $topic['topic_slug']]), 'content' => Translate::get('feed'), 'icon' => 'bi bi-sort-down'],
-      ['id' => 'recommend', 'url' => getUrlByName('topic', ['slug' => $topic['topic_slug']]) . '/recommend', 'content' => Translate::get('recommended'), 'icon' => 'bi bi-lightning'],
-      ['id' => 'info', 'url' => getUrlByName('topic.info', ['slug' => $topic['topic_slug']]), 'content' => Translate::get('info'), 'icon' => 'bi bi-info-lg'],
-    ];
-    includeTemplate('/_block/tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
-    ?>
+    <ul class="flex flex-row list-none m0 p0 center size-15">
+
+      <?= tabs_nav(
+        $uid['user_id'],
+        $data['sheet'],
+        $pages = [
+          [
+            'id' => 'topic',
+            'url' => getUrlByName('topic', ['slug' => $topic['topic_slug']]),
+            'content' => Translate::get('feed'),
+            'icon' => 'bi bi-sort-down'
+          ],
+          [
+            'id' => 'recommend',
+            'url' => getUrlByName('topic', ['slug' => $topic['topic_slug']]) . '/recommend',
+            'content' => Translate::get('recommended'),
+            'icon' => 'bi bi-lightning'
+          ],
+          [
+            'id' => 'info',
+            'url' => getUrlByName('topic.info', ['slug' => $topic['topic_slug']]),
+            'content' => Translate::get('info'),
+            'icon' => 'bi bi-info-lg'
+          ],
+        ]
+      ); ?>
+
+    </ul>
   </div>
 
   <?= includeTemplate('/_block/post', ['data' => $data, 'uid' => $uid]); ?>

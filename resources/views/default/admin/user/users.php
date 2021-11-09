@@ -11,12 +11,28 @@
   ); ?>
   <div class="bg-white flex flex-row items-center justify-between br-box-grey p15 mb15">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
-    <?php $pages = [
-      ['id' => 'users', 'url' => '/admin/users', 'content' => Translate::get('all'), 'icon' => 'bi bi-record-circle'],
-      ['id' => 'users-ban', 'url' => '/admin/users/ban', 'content' => Translate::get('banned'), 'icon' => 'bi bi-x-circle'],
-    ];
-    includeTemplate('/_block/tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
-    ?>
+    <ul class="flex flex-row list-none m0 p0 center size-15">
+
+      <?= tabs_nav(
+        $uid['user_id'],
+        $data['sheet'],
+        $pages = [
+          [
+            'id' => 'users',
+            'url' => getUrlByName('admin.users'),
+            'content' => Translate::get('all'),
+            'icon' => 'bi bi-record-circle'
+          ],
+          [
+            'id' => 'users-ban',
+            'url' => getUrlByName('admin.users.ban'),
+            'content' => Translate::get('banned'),
+            'icon' => 'bi bi-x-circle'
+          ],
+        ]
+      ); ?>
+
+    </ul>
   </div>
 
   <div class="bg-white br-box-grey pt5 pr15 pb5 pl15">

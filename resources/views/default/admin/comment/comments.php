@@ -11,12 +11,28 @@
   ); ?>
   <div class="bg-white flex flex-row items-center justify-between br-box-grey br-rd5 p15 mb15">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
-    <?php $pages = [
-      ['id' => 'comments', 'url' => '/admin/comments', 'content' => Translate::get('all'), 'icon' => 'bi bi-record-circle'],
-      ['id' => 'comments-ban', 'url' => '/admin/comments/ban', 'content' => Translate::get('deleted comments'), 'icon' => 'bi bi-x-circle'],
-    ];
-    includeTemplate('/_block/tabs_nav', ['pages' => $pages, 'sheet' => $data['sheet'], 'user_id' => $uid['user_id']]);
-    ?>
+    <ul class="flex flex-row list-none m0 p0 center size-15">
+
+      <?= tabs_nav(
+        $uid['user_id'],
+        $data['sheet'],
+        $pages = [
+          [
+            'id' => 'comments',
+            'url' => getUrlByName('admin.comments'),
+            'content' => Translate::get('all'),
+            'icon' => 'bi bi-record-circle'
+          ],
+          [
+            'id' => 'comments-ban',
+            'url' => getUrlByName('admin.comments.ban'),
+            'content' => Translate::get('deleted comments'),
+            'icon' => 'bi bi-x-circle'
+          ],
+        ]
+      ); ?>
+
+    </ul>
   </div>
   <div class="bg-white br-box-grey pt5 pr15 pb5 pl15">
     <?php if (!empty($data['comments'])) { ?>
@@ -33,7 +49,7 @@
             <span class="date mr5">
               <?= $comment['date']; ?>
             </span>
-            <a class="gray-light ml10" href="<?= $getUrlByName('admin.logip', ['ip' => $comment['comment_ip']]); ?>">
+            <a class="gray-light ml10" href="<?= getUrlByName('admin.logip', ['ip' => $comment['comment_ip']]); ?>">
               <?= $comment['comment_ip']; ?>
             </a>
             <?php if ($comment['post_type'] == 1) { ?>
@@ -60,6 +76,6 @@
     <?php } else { ?>
       <?= no_content(Translate::get('there are no comments'), 'bi bi-info-lg'); ?>
     <?php } ?>
-  </div>t
+  </div>
   <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('admin.comments')); ?>
 </main>
