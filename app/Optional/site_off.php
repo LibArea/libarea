@@ -30,9 +30,7 @@
         <input type="password" placeholder="<?= Translate::get('enter your password'); ?>" name="password" id="password" class="w-100 h30">
       </div>
       <div class="mb20">
-        <button type="submit" class="button-primary pt10 pr15 pb10 pl15 size-13 white">
-          <?= Translate::get('sign in'); ?>
-        </button>
+        <?= sumbit(Translate::get('sign in')); ?>
       </div>
     </form>
   </div>

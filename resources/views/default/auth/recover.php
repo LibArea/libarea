@@ -16,9 +16,7 @@
     <?= includeTemplate('/_block/captcha'); ?>
 
     <div class="mb20">
-      <button type="submit" class="button br-rd5 white">
-        <?= Translate::get('reset'); ?>
-      </button>
+      <?= sumbit(Translate::get('reset')); ?>
       <?php if (Config::get('general.invite')) { ?>
         <span class="mr5 ml15 size-14"><a href="<?= getUrlByName('register'); ?>"><?= Translate::get('sign up'); ?></a></span>
       <?php } ?>

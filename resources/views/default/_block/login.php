@@ -3,7 +3,7 @@
     <?php csrf_field(); ?>
     <div class="mb20">
       <label for="email" class="block mb5">Email</label>
-      <input type="email" id="email" placeholder="<?= Translate::get('enter'); ?>  e-mail" name="email" class="w-100 h30 bg-gray-100">
+      <input type="email" id="email" placeholder="<?= Translate::get('enter'); ?> e-mail" name="email" class="w-100 h30 bg-gray-100">
     </div>
     <div class="mb20">
       <label for="password" class="block mb5"><?= Translate::get('password'); ?></label>
@@ -16,9 +16,7 @@
       </label>
     </div>
     <div class="mb20">
-      <button type="submit" class="button block br-rd5 white">
-        <?= Translate::get('sign in'); ?>
-      </button>
+      <?= sumbit(Translate::get('sign in')); ?>
     </div>
     <div class="center size-14 gray-light">
       <?= Translate::get('login-use-condition'); ?>

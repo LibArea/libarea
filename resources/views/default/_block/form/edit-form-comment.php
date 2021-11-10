@@ -6,8 +6,8 @@
       <div class="mt5 mb20 max-w640">
         <input type="hidden" name="post_id" id="post_id" value="<?= $data['post_id']; ?>">
         <input type="hidden" name="comment_id" id="comment_id" value="<?= $data['comment_id']; ?>">
-        <input type="submit" class="button br-rd5 white" name="commit" value="<?= Translate::get('edit'); ?>">
-        <div id="cancel_comment" class="size-14 inline ml5 gray"><?= Translate::get('cancel'); ?></div>
+        <?= sumbit(Translate::get('edit')); ?>
+        <span id="cancel_comment" class="size-14 inline ml5 gray"><?= Translate::get('cancel'); ?></span>
       </div>
       <div class="v-otsr"></div>
     </form>

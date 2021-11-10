@@ -12,9 +12,7 @@
       <?= csrf_field() ?>
       <input type="hidden" name="recipient" value="<?= $data['recipient_user']['user_id']; ?>" />
       <textarea rows="3" id="message" class="mess" placeholder="<?= Translate::get('write'); ?>..." type="text" name="content" /></textarea>
-      <p>
-        <input type="submit" name="submit" value="<?= Translate::get('reply'); ?>" class="button block br-rd5 white">
-      </p>
+      <?= sumbit(Translate::get('reply')); ?>
     </form>
 
     <?php if ($data['list']) { ?>

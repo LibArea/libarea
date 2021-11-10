@@ -29,7 +29,6 @@
           </div>
         <?php } else { ?>
           <div class="bg-red-300">
-            <div class="voters"></div>
             ~ <?= Translate::get('Answer deleted'); ?>
           </div>
         <?php } ?>

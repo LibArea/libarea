@@ -11,7 +11,7 @@
     <div class="flex mb20">
       <?php foreach (Config::get('web-root-categories') as  $cat) { ?>
         <div class="mr60">
-          <a class="pt5 pr10 mr60 blue size-21 block black" title="<?= $cat['title']; ?>" href="<?= getUrlByName('web.topic', ['slug' => $cat['url']]); ?>">
+          <a class="pt5 pr10 mr60 underline-hover size-21 block " title="<?= $cat['title']; ?>" href="<?= getUrlByName('web.topic', ['slug' => $cat['url']]); ?>">
             <?= $cat['title']; ?>
           </a>
           <?php foreach ($cat['sub'] as $sub) { ?>
@@ -31,8 +31,8 @@
               <?= thumbs_img($link['link_url_domain'], $link['link_title'], 'mr5 mt5 w200 box-shadow'); ?>
             </div>
             <div class="mr20 w-100">
-              <a class="pt0 pr5 blue size-21 black" href="<?= getUrlByName('web.website', ['slug' => $link['link_url_domain']]); ?>">
-                <h2 class="font-normal inline size-21 mt0 mb0">
+              <a class="pt0 pr5 size-21" href="<?= getUrlByName('web.website', ['slug' => $link['link_url_domain']]); ?>">
+                <h2 class="font-normal inline underline-hover size-21 mt0 mb0">
                   <?= $link['link_title']; ?>
                 </h2>
               </a>

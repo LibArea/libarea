@@ -20,7 +20,7 @@
 
       <div class="clear gray size-15">
         <p><?= Translate::get('recommended size'); ?>: 240x240px (jpg, jpeg, png)</p>
-        <p><input type="submit" class="button block br-rd5 white" value="<?= Translate::get('download'); ?>" /></p>
+        <?= sumbit(Translate::get('download')); ?>
       </div>
 
       <?php if ($data['user']['user_cover_art'] != 'cover_art.jpeg') { ?>

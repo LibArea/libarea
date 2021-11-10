@@ -12,9 +12,7 @@
       <div class="mb20">
         <input type="hidden" name="code" id="code" value="<?= $data['code']; ?>">
         <input type="hidden" name="user_id" id="user_id" value="<?= $data['user_id']; ?>">
-        <button type="submit" class="button block br-rd5 white">
-          <?= Translate::get('reset'); ?>
-        </button>
+        <?= sumbit(Translate::get('reset')); ?>
         <?php if (Config::get('general.invite')) { ?>
           <span class="mr5 ml5 size-14"><a href="<?= getUrlByName('register'); ?>"><?= Translate::get('sign up'); ?></a></span>
         <?php } ?>

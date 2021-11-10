@@ -62,8 +62,7 @@
       <div for="mb5"><?= Translate::get('meta description'); ?><sup class="red">*</sup></div>
       <textarea rows="6" class="add max-w780" minlength="44" name="topic_description"></textarea>
       <div class="size-14 gray-light-2 mb20">> 44 <?= Translate::get('characters'); ?></div>
-
-      <input type="submit" name="submit" class="button block br-rd5 white" value="<?= Translate::get('add'); ?>" />
+      <?= sumbit(Translate::get('add')); ?>
     </form>
   </div>
 </main>

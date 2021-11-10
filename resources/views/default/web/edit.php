@@ -60,7 +60,7 @@
       <?= includeTemplate('/_block/form/select-content', ['type' => 'topic', 'data' => $data, 'action' => 'edit', 'title' => Translate::get('topics')]); ?>
 
       <input type="hidden" name="link_id" value="<?= $data['domain']['link_id']; ?>">
-      <input type="submit" class="button block br-rd5 white" name="submit" value="<?= Translate::get('edit'); ?>" />
+      <?= sumbit(Translate::get('edit')); ?>
     </form>
   </div>
 </main>

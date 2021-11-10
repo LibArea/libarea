@@ -8,7 +8,7 @@
       <?= csrf_field() ?>
       <input type="hidden" name="recipient" value="<?= $data['recipient_uid']; ?>" />
       <textarea rows="3" id="message" class="mess" placeholder="<?= Translate::get('write'); ?>..." type="text" name="content" /></textarea>
-      <input type="submit" name="submit" value="<?= Translate::get('send'); ?>" class="button block br-rd5 white">
+      <?= sumbit(Translate::get('send')); ?>
     </form>
   </div>
 </main>

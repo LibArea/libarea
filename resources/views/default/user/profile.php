@@ -33,12 +33,12 @@
           <?php if ($uid['user_id'] > 0) { ?>
             <div class="pb15 mb15">
               <?php if ($uid['user_login'] == $data['user']['user_login']) { ?>
-                <a class="button block br-rd5 white center mb15" href="<?= getUrlByName('user', ['login' => $data['user']['user_login']]); ?>/setting">
+                <a class="bg-blue-800 br-box-blue bg-hover-light-blue pt5 pr15 pb5 pl15 block br-rd5 white white-hover center size-14" href="<?= getUrlByName('user', ['login' => $data['user']['user_login']]); ?>/setting">
                   <?= Translate::get('settings'); ?>
                 </a>
               <?php } else { ?>
                 <?php if ($data['button_pm'] === true) { ?>
-                  <a class="button br-rd5 white center size-14" href="<?= getUrlByName('user', ['login' => $data['user']['user_login']]); ?>/mess">
+                  <a class="bg-blue-800 br-box-blue bg-hover-light-blue pt5 pr15 pb5 pl15 block br-rd5 white white-hover center size-14" href="<?= getUrlByName('user', ['login' => $data['user']['user_login']]); ?>/mess">
                     <?= Translate::get('write a message'); ?>
                   </a>
                 <?php } ?>

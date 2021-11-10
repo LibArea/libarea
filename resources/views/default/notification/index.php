@@ -2,9 +2,11 @@
   <?= includeTemplate('/_block/menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-7 mb-col-12 bg-white pt5 pr15 pb5 pl15">
-  <a class="right size-14 button block br-rd5 white mt5 pb15" href="/notifications/delete">
-    <?= Translate::get('i read'); ?>
-  </a>
+ 
+  <form action="<?= getUrlByName('notif.remove'); ?>" class="right">
+    <?= sumbit(Translate::get('i read')); ?> 
+  </form>
+   
   <?= breadcrumb(
     '/',
     Translate::get('home'),
@@ -19,19 +21,25 @@
       <div class="border-bottom p5<?php if ($notif['notification_read_flag'] == 0) { ?> bg-gray-200<?php } ?>">
         <?php if ($notif['notification_action_type'] == 1) { ?>
           <i class="bi bi-envelope middle"></i>
-          <a class="gray ml5" href="<?= getUrlByName('user', ['login' => $notif['user_login']]); ?>"><?= $notif['user_login']; ?></a>
+          <a class="gray ml5" href="<?= getUrlByName('user', ['login' => $notif['user_login']]); ?>">
+            <?= $notif['user_login']; ?>
+          </a>
           <?= Translate::get('wrote to you'); ?>
-          <a href="/notifications/read/<?= $notif['notification_id']; ?>"><?= Translate::get('message'); ?></a>
+          <a href="<?= getUrlByName('notif.read', ['id' => $notif['notification_id']]); ?>">
+            <?= Translate::get('message'); ?>
+          </a>
         <?php } ?>
-
+ 
         <?php if ($notif['notification_action_type'] == 2) { ?>
           <?= Translate::get('wrote a post'); ?>
         <?php } ?>
 
         <?php if ($notif['notification_action_type'] == 3) { ?>
           <i class="bi bi-reply middle"></i>
-          <a class="gray ml5" href="<?= getUrlByName('user', ['login' => $notif['user_login']]); ?>"><?= $notif['user_login']; ?></a>
-          <a class="ntf2 lowercase" href="/notifications/read/<?= $notif['notification_id']; ?>">
+          <a class="gray ml5" href="<?= getUrlByName('user', ['login' => $notif['user_login']]); ?>">
+            <?= $notif['user_login']; ?>
+          </a>
+          <a class="ntf2 lowercase" href="<?= getUrlByName('notif.read', ['id' => $notif['notification_id']]); ?>">
             <?= Translate::get('replied to post'); ?>
           </a>
         <?php } ?>
@@ -40,7 +48,7 @@
           <i class="bi bi-person middle"></i>
           <a class="gray ml5" href="<?= getUrlByName('user', ['login' => $notif['user_login']]); ?>">@<?= $notif['user_login']; ?></a>
           <?= Translate::get('appealed to you'); ?>
-          <a class="ntf2 lowercase" href="/notifications/read/<?= $notif['notification_id']; ?>">
+          <a class="ntf2 lowercase" href="<?= getUrlByName('notif.read', ['id' => $notif['notification_id']]); ?>">
             <?php if ($notif['notification_action_type'] == 10) { ?>
               <?= Translate::get('in post'); ?>
             <?php } elseif ($notif['notification_action_type'] == 11) { ?>
@@ -54,12 +62,12 @@
           <i class="bi bi-exclamation-diamond middle red"></i>
           <a class="gray ml5" href="<?= getUrlByName('user', ['login' => $notif['user_login']]); ?>"><?= $notif['user_login']; ?></a>
           <?= Translate::get('complained about'); ?>
-          <a class="ntf2 lowercase" href="/notifications/read/<?= $notif['notification_id']; ?>">
+          <a class="ntf2 lowercase" href="<?= getUrlByName('notif.read', ['id' => $notif['notification_id']]); ?>">
             <?= Translate::get('comment'); ?>
           </a>
         <?php } ?>
         <?php if ($notif['notification_action_type'] == 15) { ?>
-          <a class="ntf2 lowercase" href="/notifications/read/<?= $notif['notification_id']; ?>">
+          <a class="ntf2 lowercase" href="<?= getUrlByName('notif.read', ['id' => $notif['notification_id']]); ?>">
             <i class="bi bi-exclamation-diamond middle red"></i>
             <?= Translate::get('audit'); ?>
           </a>
@@ -77,7 +85,7 @@
             <i class="bi bi-chat-dots middle"></i>
             <a class="gray ml5" href="<?= getUrlByName('user', ['login' => $notif['user_login']]); ?>"><?= $notif['user_login']; ?></a>
             <?= Translate::get('wrote'); ?>
-            <a class="ntf2" href="/notifications/read/<?= $notif['notification_id']; ?>">
+            <a class="ntf2" href="<?= getUrlByName('notif.read', ['id' => $notif['notification_id']]); ?>">
               <?= Translate::get('comment'); ?>
             </a>
             <?= Translate::get('to your answer'); ?>

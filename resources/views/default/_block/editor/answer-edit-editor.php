@@ -6,10 +6,10 @@
     </div>
     <div id="wmd-preview" class="wmd-panel wmd-preview"></div>
   </div>
-  <div class="mb20 clear">
+  <div class="pt5 clear">
     <input type="hidden" name="post_id" id="post_id" value="<?= $post_id; ?>">
     <input type="hidden" name="answer_id" id="answer_id" value="<?= $answer_id; ?>">
-    <input type="submit" class="button br-rd5 white mt5" name="answit" value="<?= Translate::get('edit'); ?>">
+    <?= sumbit(Translate::get('edit')); ?>
   </div>
 </form>
 <?= includeTemplate('/_block/editor/config-editor', ['post_id' => $post_id,  'lang' => $lang, 'type' => 'answer', 'width100' => 'yes']); ?>

@@ -57,8 +57,8 @@ Route::before('Authorization@noAuth')->getGroup();
     Route::get('/u/{login}/mess')->controller('MessagesController@profilMessages')->where(['login' => '[A-Za-z0-9]+']); 
 
 	Route::get('/u/{login}/notifications')->controller('NotificationsController')->where(['login' => '[A-Za-z0-9]+'])->name('notifications'); 
-    Route::get('/notifications/read/{id}')->controller('NotificationsController@read')->where(['id' => '[0-9]+']);  
-    Route::get('/notifications/delete')->controller('NotificationsController@remove');  
+    Route::get('/notifications/read/{id}')->controller('NotificationsController@read')->where(['id' => '[0-9]+'])->name('notif.read');  
+    Route::get('/notifications/delete')->controller('NotificationsController@remove')->name('notif.remove');  
     
     Route::get('/u/{login}/favorites')->controller('User\UserController@userFavorites')->where(['login' => '[A-Za-z0-9]+'])->name('favorites');
     Route::get('/u/{login}/subscribed')->controller('User\UserController@subscribedPage')->where(['login' => '[A-Za-z0-9]+'])->name('subscribed');

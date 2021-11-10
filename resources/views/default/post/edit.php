@@ -134,7 +134,7 @@
           <input type="hidden" name="draft" id="draft" value="1">
         <?php } ?>
         <input type="hidden" name="post_id" id="post_id" value="<?= $post['post_id']; ?>">
-        <input type="submit" class="button white br-rd5" name="submit" value="<?= Translate::get('edit'); ?>" />
+        <?= sumbit(Translate::get('edit')); ?>
       </div>
     </form>
   </div>

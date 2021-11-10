@@ -2,6 +2,7 @@
   <?= includeTemplate('/admin/admin-menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-10 mb-col-12">
+
   <?= breadcrumb(
     getUrlByName('admin'),
     Translate::get('admin'),
@@ -21,6 +22,6 @@
       </select>
       <input type="hidden" name="user_id" id="post_id" value="<?= $data['user']['user_id']; ?>">
     </div>
-    <input type="submit" class="button block br-rd5 mb15 white" name="submit" value="<?= Translate::get('add'); ?>" />
+    <?= sumbit(Translate::get('add')); ?>
   </form>
 </main>

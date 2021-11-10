@@ -42,9 +42,7 @@
     <?= includeTemplate('/_block/captcha'); ?>
 
     <div class="mb20">
-      <button type="submit" class="button br-rd5 white">
-        <?= Translate::get('sign up'); ?>
-      </button>
+      <?= sumbit(Translate::get('sign up')); ?>
       <span class="mr5 ml15 size-14"><a href="<?= getUrlByName('login'); ?>"><?= Translate::get('sign in'); ?></a></span>
     </div>
   </form>

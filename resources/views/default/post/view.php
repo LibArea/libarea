@@ -96,7 +96,7 @@
         </div>
         <?php if ($post['post_url_domain']) { ?>
           <div class="mb15">
-            <a rel="nofollow noreferrer ugc" target="_blank" class="button br-rd5 white" href="<?= $post['post_url']; ?>">
+            <a rel="nofollow noreferrer ugc" target="_blank" class="bg-blue-800 br-box-blue bg-hover-light-blue pt5 pr15 pb5 pl15 block br-rd5 white" href="<?= $post['post_url']; ?>">
               <?= Translate::get('details are here'); ?> <i class="bi bi-folder-symlink ml5"></i>
             </a>
           </div>

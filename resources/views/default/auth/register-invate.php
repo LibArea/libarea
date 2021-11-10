@@ -40,7 +40,7 @@
       <div class="mb20">
         <input type="hidden" name="invitation_code" id="invitation_code" value="<?= $data['invate']['invitation_code']; ?>">
         <input type="hidden" name="invitation_id" id="invitation_id" value="<?= $data['invate']['uid']; ?>">
-        <button type="submit" class="button block br-rd5 white"><?= Translate::get('sign up'); ?></button>
+        <?= sumbit(Translate::get('sign up')); ?>
       </div>
     </form>
   </div>

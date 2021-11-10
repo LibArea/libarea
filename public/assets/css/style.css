@@ -38,7 +38,7 @@ a {
 a:hover,
 a:focus,
 a.active {
-  color: #3ea7e2;
+  color: #0085EE;
 }
 
 img {
@@ -129,11 +129,12 @@ img {
 .gray-light { color: #666; }
 .gray-light-2 { color: #919191; }
 .green { color: #318407; }
-.blue { color: #3ea7e2; }
+.blue { color: #0085EE; }
 .white { color: #fff; }
 .red { color: #e45735; }
 .mazarine { color: #688ffb; }
 .white-hover:hover { color: #fff; }
+.blue-hover:hover { color: #0085EE; }
 .gray-hover:hover { color: #ece5e5; }
 .gray-light-hover:hover { color: #333; }
 
@@ -157,6 +158,7 @@ img {
 .bg-blue-300 { background-color: #8bc2f8; }
 .bg-blue-400 { background-color: #5fa7f3; }
 .bg-blue-500 { background-color: #3c91ec; }
+.bg-blue-800 { background-color: #0085EE; }
 .bg-indigo-100 { background-color: #e2efff; }
 .bg-indigo-300 { background-color: #a1befa; }
 .bg-purple-100 { background-color: #f0e9fb; }
@@ -172,7 +174,7 @@ img {
 
 .box-shadow { box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);  }
 .br-box-grey { border: 1px solid #ededed; }
-.br-box-blue { border: 1px solid #3ea7e2; }
+.br-box-blue { border: 1px solid #0085EE; }
 
 .br-rd3 { border-radius: 3px; }
 .br-rd5 { border-radius: 5px; }
@@ -182,8 +184,9 @@ img {
 
 .bg-hover-green:hover { background-color: #5fb878; }
 .bg-hover-gray:hover { background-color: #f5f7fa; }
-.bg-hover-blue:hover { background-color: #3ea7e2; }
-.bg-hover-light-blue:hover { background-color: rgba(0, 154, 97, 0.08); }
+.bg-hover-blue:hover { background-color: #0085EE; }
+.bg-hover-light-blue:hover { background-color: #31A2FA; }
+.bg-hover-light:hover { background-color: rgba(0, 154, 97, 0.08); }
 
 .w-auto { width: auto; }
 .w-20 { width: 20%; }
@@ -307,6 +310,7 @@ img {
 .border-bottom:last-child { border: 0; }
 
 a:hover > img { opacity: 0.8; }
+.underline-hover:hover { text-decoration: underline; }
 
 code {
   color: #9b4f5e;
@@ -339,19 +343,6 @@ hr {
   clear: both;
   background-color: #ddd;
   height: 1px;
-}
-
-.button {
-  background-color: #3ea7e2;
-  border: 1px solid #3ea7e2;
-  padding: 5px 14px 5px 14px;
-}
-
-.button:hover,
-.button:focus {
-  background-color: #439cd3;
-  border: 1px solid #439cd3;
-  color: #fff;
 }
 
 table {
@@ -423,11 +414,6 @@ textarea:focus { border: 1px solid #9ccdf8; }
 .comm-telo-body p:first-child,
 .answ-telo p:first-child {
   margin: 5px 0;
-}
-
-.voters.active,
-.voters:hover {
-  color: #0d9fe6;
 }
 
 .dark {

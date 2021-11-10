@@ -16,6 +16,6 @@
       <label class="block" or="post_title"><?= Translate::get('stop word'); ?></label>
       <input type="text" class="w-100 h30" name="word">
     </div>
-    <input type="submit" class="button block br-rd5 mb15 white" name="submit" value="<?= Translate::get('add'); ?>" />
+    <?= sumbit(Translate::get('add')); ?>
   </form>
 </main>

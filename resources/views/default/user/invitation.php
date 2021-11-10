@@ -12,8 +12,8 @@
         <?php csrf_field(); ?>
         <div class="mb20">
           <input id="link" class="w-100 h30" type="email" name="email">
-          <input class="button block br-rd5 white right mt5" type="submit" name="submit" value="<?= Translate::get('send'); ?>">
-          <div class="size-14 gray-light-2"><?= Translate::get('enter'); ?> E-mail</div>
+          <div class="right pt5"><?= sumbit(Translate::get('send')); ?></div>
+          <div class="size-14 pt5 gray-light-2"><?= Translate::get('enter'); ?> E-mail</div>
         </div>
         <?= Translate::get('invitations left'); ?> <?= 5 - $data['count_invites']; ?>
       </form>

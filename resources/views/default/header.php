@@ -27,19 +27,19 @@
         <div class="lateral no-pc mr10 flex items-center">
           <i class="bi bi-list gray-light-2 size-18"></i>
           <nav class="ltr-menu box-shadow none min-w165 bg-white br-rd3 p5 absolute justify-between mt0 ml0 pl0 sticky size-15">
-            <a class="pt5 pr10 pb5 pl10 gray block bg-hover-light-blue" href="<?= getUrlByName('topics'); ?>">
+            <a class="pt5 pr10 pb5 pl10 gray block bg-hover-light" href="<?= getUrlByName('topics'); ?>">
               <i class="bi bi-columns-gap middle"></i>
               <span class="ml5"><?= Translate::get('topics'); ?></span>
             </a>
-            <a class="pt5 pr10 pb5 pl10 gray block bg-hover-light-blue" href="<?= getUrlByName('users'); ?>">
+            <a class="pt5 pr10 pb5 pl10 gray block bg-hover-light" href="<?= getUrlByName('users'); ?>">
               <i class="bi bi-people middle"></i>
               <span class="ml5"><?= Translate::get('users'); ?></span>
             </a>
-            <a class="pt5 pr10 pb5 pl10 gray block bg-hover-light-blue" href="<?= getUrlByName('web'); ?>">
+            <a class="pt5 pr10 pb5 pl10 gray block bg-hover-light" href="<?= getUrlByName('web'); ?>">
               <i class="bi bi-link-45deg middle"></i>
               <span class="ml5"><?= Translate::get('domains'); ?></span>
             </a>
-            <a class="pt5 pr10 pb5 pl10 gray block bg-hover-light-blue" href="<?= getUrlByName('search'); ?>">
+            <a class="pt5 pr10 pb5 pl10 gray block bg-hover-light" href="<?= getUrlByName('search'); ?>">
               <i class="bi bi-search middle"></i>
               <span class="ml5"><?= Translate::get('search'); ?></span>
             </a>
@@ -101,44 +101,44 @@
                 <?= user_avatar_img($uid['user_avatar'], 'small', $uid['user_login'], 'w34 br-rd-50'); ?>
               </a>
               <div class="dr-menu box-shadow none min-w165 right0 bg-white size-15 br-rd3 p5 absolute">
-                <a class="pt5 pr10 pb5 pl10 block gray bg-hover-light-blue" href="<?= getUrlByName('user', ['login' => $uid['user_login']]); ?>">
+                <a class="pt5 pr10 pb5 pl10 block gray bg-hover-light" href="<?= getUrlByName('user', ['login' => $uid['user_login']]); ?>">
                   <i class="bi bi-person middle mr5"></i>
                   <span class="middle size-14"><?= Translate::get('profile'); ?></span>
                 </a>
-                <a class="pt5 pr10 pb5 pl10 block gray bg-hover-light-blue" href="<?= getUrlByName('setting', ['login' => $uid['user_login']]); ?>">
+                <a class="pt5 pr10 pb5 pl10 block gray bg-hover-light" href="<?= getUrlByName('setting', ['login' => $uid['user_login']]); ?>">
                   <i class="bi bi-gear middle mr5"></i>
                   <span class="middle size-14"><?= Translate::get('settings'); ?></span>
                 </a>
-                <a class="pt5 pr10 pb5 pl10 block gray bg-hover-light-blue" href="<?= getUrlByName('drafts', ['login' => $uid['user_login']]); ?>">
+                <a class="pt5 pr10 pb5 pl10 block gray bg-hover-light" href="<?= getUrlByName('drafts', ['login' => $uid['user_login']]); ?>">
                   <i class="bi bi-pencil-square middle mr5"></i>
                   <span class="middle size-14"><?= Translate::get('drafts'); ?></span>
                 </a>
-                <a class="pt5 pr10 pb5 pl10 block gray bg-hover-light-blue" href="<?= getUrlByName('notifications', ['login' => $uid['user_login']]); ?>">
+                <a class="pt5 pr10 pb5 pl10 block gray bg-hover-light" href="<?= getUrlByName('notifications', ['login' => $uid['user_login']]); ?>">
                   <i class="bi bi-app-indicator middle mr5"></i>
                   <span class="middle size-14"><?= Translate::get('notifications'); ?></span>
                 </a>
-                <a class="pt5 pr10 pb5 pl10 block gray bg-hover-light-blue" href="<?= getUrlByName('messages', ['login' => $uid['user_login']]); ?>">
+                <a class="pt5 pr10 pb5 pl10 block gray bg-hover-light" href="<?= getUrlByName('messages', ['login' => $uid['user_login']]); ?>">
                   <i class="bi bi-envelope middle mr5"></i>
                   <span class="middle size-14"><?= Translate::get('messages'); ?></span>
                 </a>
-                <a class="pt5 pr10 pb5 pl10 block gray bg-hover-light-blue" href="<?= getUrlByName('favorites', ['login' => $uid['user_login']]); ?>">
+                <a class="pt5 pr10 pb5 pl10 block gray bg-hover-light" href="<?= getUrlByName('favorites', ['login' => $uid['user_login']]); ?>">
                   <i class="bi bi-bookmark middle mr5"></i>
                   <span class="middle size-14"><?= Translate::get('favorites'); ?></span>
                 </a>
                 <?php if ($uid['user_trust_level'] > 1) { ?>
-                  <a class="pt5 pr10 pb5 pl10 block gray bg-hover-light-blue" href="<?= getUrlByName('invitations', ['login' => $uid['user_login']]); ?>">
+                  <a class="pt5 pr10 pb5 pl10 block gray bg-hover-light" href="<?= getUrlByName('invitations', ['login' => $uid['user_login']]); ?>">
                     <i class="bi bi-person-plus middle mr5"></i>
                     <span class="middle size-14"><?= Translate::get('invites'); ?></span>
                   </a>
                 <?php } ?>
                 <?php if ($uid['user_trust_level'] == 5) { ?>
-                  <a class="pt5 pr10 pb5 pl10 block gray bg-hover-light-blue" href="<?= getUrlByName('admin'); ?>" target="_black">
+                  <a class="pt5 pr10 pb5 pl10 block gray bg-hover-light" href="<?= getUrlByName('admin'); ?>" target="_black">
                     <i class="bi bi-shield-exclamation middle mr5"></i>
                     <span class="middle size-14"><?= Translate::get('admin'); ?></span>
                   </a>
                 <?php } ?>
                 <hr>
-                <a class="pt5 pr10 pb5 pl10 block gray bg-hover-light-blue" href="<?= getUrlByName('logout'); ?>" class="logout" title="<?= Translate::get('sign out'); ?>">
+                <a class="pt5 pr10 pb5 pl10 block gray bg-hover-light" href="<?= getUrlByName('logout'); ?>" class="logout" title="<?= Translate::get('sign out'); ?>">
                   <i class="bi bi-box-arrow-right middle mr5"></i>
                   <span class="middle size-14"><?= Translate::get('sign out'); ?></span>
                 </a>

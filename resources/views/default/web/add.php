@@ -36,7 +36,7 @@
       <?php includeTemplate('/_block/editor/textarea', ['title' => Translate::get('description'), 'type' => 'text', 'name' => 'link_content', 'content' => '', 'min' => 24, 'max' => 1500, 'help' => '24 - 1500 ' . Translate::get('characters')]); ?>
 
       <?= includeTemplate('/_block/form/select-content', ['type' => 'topic', 'data' => $data, 'action' => 'add', 'title' => Translate::get('topics')]); ?>
-      <input type="submit" class="button block br-rd5 white" name="submit" value="<?= Translate::get('add'); ?>" />
+      <?= sumbit(Translate::get('add')); ?>
     </form>
   </div>
 </main>

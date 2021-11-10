@@ -26,7 +26,7 @@
 
       <div class="mb20">
         <input type="hidden" name="nickname" id="nickname" value="">
-        <button type="submit" class="button br-rd5 white"><?= Translate::get('edit'); ?></button>
+        <?= sumbit(Translate::get('edit')); ?>
       </div>
     </form>
   </div>

@@ -3,6 +3,7 @@
 </div>
 <main class="col-span-7 mb-col-12">
   <div class="bg-white br-rd5 br-box-grey pt5 pr15 pb5 pl15">
+
     <?= breadcrumb(
       '/',
       Translate::get('home'),
@@ -10,6 +11,7 @@
       null,
       Translate::get('all comments')
     ); ?>
+
   </div>
   <?php if (!empty($data['comments'])) { ?>
     <?php foreach ($data['comments'] as $comment) { ?>
@@ -35,7 +37,6 @@
           </div>
         <?php } else { ?>
           <div class="bg-red-300 mb20">
-            <div class="voters"></div>
             ~ <?= Translate::get('comment deleted'); ?>
           </div>
         <?php } ?>

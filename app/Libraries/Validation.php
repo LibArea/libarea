@@ -7,7 +7,7 @@ class Validation
     public static function checkEmail($email, $redirect)
     {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            addMsg(Translate::get('Invalid email address'), 'error');
+            addMsg(Translate::get('invalid email address'), 'error');
             redirect($redirect);
         }
         return true;

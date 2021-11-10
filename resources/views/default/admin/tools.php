@@ -11,22 +11,22 @@
   ); ?>
   <div class="mb20">
     <label class="required block pb5"><?= Translate::get('topics'); ?> / <?= Translate::get('posts'); ?></label>
-    <a class="size-14 mt5 button white" href="<?= getUrlByName('admin.count.topic'); ?>">
-      <?= Translate::get('update the data'); ?>
-    </a>
+    <form action="<?= getUrlByName('admin.count.topic'); ?>">
+      <?= sumbit(Translate::get('update the data')); ?> 
+    </form>
   </div>
   <div class="mb20">
     <label class="required block pt15 pb5"><?= Translate::get('like'); ?></label>
-    <a class="size-14 mt5 button white" href="<?= getUrlByName('admin.count.up'); ?>">
-      <?= Translate::get('update the data'); ?>
-    </a>
+    <form action="<?= getUrlByName('admin.count.up'); ?>">
+      <?= sumbit(Translate::get('update the data')); ?> 
+    </form>
   </div>
   <div class="mb20">
     <label class="required block pt15 pb5"><?= Translate::get('Email'); ?></label>
     <form action="<?= getUrlByName('admin.test.mail'); ?>" method="post">
       <input class="w-100 h30" type="mail" name="mail" value="">
-      <div class="size-14 gray-light-2"><?= Translate::get('test-email'); ?>...</div>
-      <input type="submit" class="button block mt5 br-rd5 white" name="submit" value="<?= Translate::get('send'); ?>" />
+      <div class="size-14 mt5 mb5 gray-light-2"><?= Translate::get('test-email'); ?>...</div>
+      <?= sumbit(Translate::get('send')); ?> 
     </form>
   </div>
 </main>

@@ -14,9 +14,8 @@
         <div class="input-images"></div>
       </div>
 
-      <div class="clear">
-        <p class="size-14 gray-light-2"><?= Translate::get('recommended size'); ?>: 240x240px (jpg, jpeg, png)</p>
-        <p><input type="submit" class="button block br-rd5 white" value="<?= Translate::get('download'); ?>" /></p>
+      <div class="mb20">
+        <?= sumbit(Translate::get('download')); ?>
       </div>
 
       <?= includeTemplate('/_block/form/field-input', [

@@ -8,7 +8,7 @@
         <input class="w-100 h30" type="text" name="invite" id="invite">
       </div>
       <div class="mb20">
-        <button type="submit" class="button br-rd5 white"><?= Translate::get('sign in'); ?></button>
+        <?= sumbit(Translate::get('sign in')); ?>
         <span class="ml15 size-14"><a href="<?= getUrlByName('recover'); ?>">
             <?= Translate::get('forgot your password'); ?>?</a>
         </span>

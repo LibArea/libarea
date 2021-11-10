@@ -60,8 +60,8 @@ $(function () {
       type: 'POST',
       data: { up_id: up_id },
     }).done(function (data) {
-      let new_cont = '+' + (parseInt(count) + parseInt(1));
-      $('#up' + up_id + '.voters').addClass('active');
+      let new_cont = (parseInt(count) + parseInt(1));
+      $('#up' + up_id + '.voters').addClass('blue');
       $('#up' + up_id).find('.score').html(new_cont);
     });
   });

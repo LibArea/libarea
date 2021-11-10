@@ -41,6 +41,6 @@
       <textarea class="add" minlength="12" name="badge_description" required><?= $data['badge']['badge_description']; ?></textarea>
       <div class="size-14 gray-light-2">12 - 250 <?= Translate::get('characters'); ?></div>
     </div>
-    <input type="submit" class="button block br-rd5 mb15 white" name="submit" value="<?= Translate::get('edit'); ?>" />
+    <?= sumbit(Translate::get('edit')); ?>
   </form>
 </main>

@@ -12,7 +12,7 @@
         <?php foreach ($data['high_topics'] as $ht) { ?>
           <?php if ($ht['topic_is_web'] == 1) { ?>
             <div class="inline mr5 ml5">/</div>
-            <a class="inline gray-light-2" href="<?= getUrlByName('web.topic', ['slug' => $ht['topic_slug']]); ?>">
+            <a class="inline underline-hover gray-light-2" href="<?= getUrlByName('web.topic', ['slug' => $ht['topic_slug']]); ?>">
               <?= $ht['topic_title']; ?>
             </a>
           <?php } ?>
@@ -33,7 +33,7 @@
       <div class="grid grid-cols-3 gap-2 justify-between mb20">
         <?php foreach ($data['low_topics'] as $lt) { ?>
           <?php if ($lt['topic_is_web'] == 1) { ?>
-            <a class="pt5 pr10 blue mb-col-2 mb-size-18 size-21 inline black" href="<?= getUrlByName('web.topic', ['slug' => $lt['topic_slug']]); ?>">
+            <a class="pt5 pr10 underline-hover mb-col-2 mb-size-18 size-21 inline" href="<?= getUrlByName('web.topic', ['slug' => $lt['topic_slug']]); ?>">
               <?= $lt['topic_title']; ?>
             </a>
           <?php } ?>
@@ -46,7 +46,7 @@
         <div class="gray size-14"><?= Translate::get('see also'); ?></div>
         <?php foreach ($data['topic_related'] as $rl) { ?>
           <?php if ($rl['topic_is_web'] == 1) { ?>
-            <a class="inline mr20 blue" href="<?= getUrlByName('web.topic', ['slug' => $rl['topic_slug']]); ?>">
+            <a class="inline mr20 underline-hover" href="<?= getUrlByName('web.topic', ['slug' => $rl['topic_slug']]); ?>">
               <?= $rl['topic_title']; ?>
             </a>
           <?php } ?>
@@ -88,7 +88,7 @@
           </div>
           <div class="mr20 flex-auto">
             <a href="<?= getUrlByName('web.website', ['slug' => $link['link_url_domain']]); ?>">
-              <h2 class="font-normal size-21 mt0 mb0">
+              <h2 class="font-normal underline-hover size-21 mt0 mb0">
                 <?= $link['link_title']; ?>
                 <?php if ($uid['user_trust_level'] == 5) { ?>
                   <a class="ml15" title="<?= Translate::get('edit'); ?>" href="/web/edit/<?= $link['link_id']; ?>">

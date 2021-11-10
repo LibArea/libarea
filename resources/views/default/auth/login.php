@@ -24,9 +24,7 @@
       <label class="form-check-label" for="rememberme"><?= Translate::get('remember me'); ?></label>
     </div>
     <div class="mb20">
-      <button type="submit" class="button br-rd5 white">
-        <?= Translate::get('sign in'); ?>
-      </button>
+      <?= sumbit(Translate::get('sign in')); ?>
       <?php if (Config::get('general.invite') == 0) { ?>
         <span class="mr5 ml5 size-14"><a href="<?= getUrlByName('register'); ?>"><?= Translate::get('sign up'); ?></a></span>
       <?php } ?>

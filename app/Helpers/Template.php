@@ -212,21 +212,21 @@ function votes($user_id, $content, $type, $css = '', $block = '')
 
     if ($user_id > 0) {
         if ($content['votes_' . $type . '_user_id'] || $user_id == $content[$type . '_user_id']) {
-            $html .= '<div class="voters active flex '. $block .' gray-light-2 center">
+            $html .= '<div class="voters blue flex '. $block .' gray-light-2 center">
                         <div class="up-id bi bi-heart '. $css .'"></div>
                         <div class="score">
                             ' . $count . '
                         </div></div>';
         } else {
             $num_count = empty($count) ? 0 : $count;
-            $html .= '<div id="up' . $content[$type . '_id'] . '" class="voters flex '. $block .' center gray-light-2">
+            $html .= '<div id="up' . $content[$type . '_id'] . '" class="voters blue-hover flex '. $block .' center gray-light-2">
                         <div data-id="' . $content[$type . '_id'] . '" data-count="' . $num_count . '" data-type="' . $type . '" class="up-id bi bi-heart '. $css .'"></div>
                         <div class="score ml5">
                             ' . $count . '
                         </div></div>';
         }
     } else {
-        $html .= '<div class="voters flex '. $block .' center gray-light-2">
+        $html .= '<div class="voters blue-hover flex '. $block .' center gray-light-2">
                     <div class="up-id bi bi-heart '. $css .' click-no-auth"></div>
                     <div class="score">
                          ' . $count . '                
@@ -333,6 +333,13 @@ function no_content($text, $icon)
                 <i class="'. $icon .' middle mr5"></i>
                 <span class="middle">'. $text .'...</span>
               </div>';
+    
+    return $html;
+}
+
+function sumbit($text)
+{
+    $html  = '<button type="submit" class="bg-blue-800 br-box-blue bg-hover-light-blue pt5 pr15 pb5 pl15 br-rd5 white">'. $text .'</button>';  
     
     return $html;
 }

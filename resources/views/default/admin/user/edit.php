@@ -155,6 +155,6 @@
       </div>
     <?php } ?>
 
-    <input type="submit" class="button block br-rd5 white mb15" name="submit" value="<?= Translate::get('edit'); ?>" />
+    <?= sumbit(Translate::get('edit')); ?>
   </form>
 </main>

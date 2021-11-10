@@ -78,10 +78,8 @@
       <?php } ?>
 
       <?= includeTemplate('/_block/form/select-content', ['type' => 'post', 'data' => $data, 'action' => 'add', 'title' => Translate::get('related')]); ?>
-
-      <div class="mb20">
-        <input type="submit" class="button white br-rd5" name="submit" value="<?= Translate::get('create'); ?>" />
-      </div>
+  
+      <?= sumbit(Translate::get('create')); ?>
     </form>
   </div>
 </main>
