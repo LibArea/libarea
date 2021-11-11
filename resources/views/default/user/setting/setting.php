@@ -3,14 +3,13 @@
 </div>
 <main class="col-span-7 mb-col-12">
 
-  <div class="bg-white flex flex-row center items-center justify-between br-box-grey br-rd5 p15 mb15">
+  <div class="bg-white flex flex-row center items-center justify-between br-box-gray br-rd5 p15 mb15">
     <p class="m0 no-mob"><?= Translate::get($data['sheet']); ?></p>
     <?= includeTemplate('/_block/setting-nav', ['data' => $data, 'uid' => $uid]); ?>
   </div>
 
-  <div class="bg-white br-box-grey pt15 pr15 pb5 pl15">
-
-    <form class="max-w640" action="/users/setting/edit" method="post" enctype="multipart/form-data">
+  <div class="bg-white br-box-gray pt15 pr15 pb5 pl15">
+    <form class="max-w640" action="<?= getUrlByName('setting.edit'); ?>" method="post" enctype="multipart/form-data">
       <?php csrf_field(); ?>
 
       <div class="mb20">
@@ -89,5 +88,6 @@
         <?= sumbit(Translate::get('edit')); ?>
       </div>
     </form>
+  </div>
 </main>
 <?= includeTemplate('/_block/aside-lang', ['lang' => Translate::get('info-setting')]); ?>

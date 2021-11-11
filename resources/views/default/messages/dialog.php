@@ -1,5 +1,5 @@
 <main class="col-span-9 mb-col-12">
-  <div class="bg-white br-rd5 br-box-grey pt5 pr15 pb5 pl15">
+  <div class="bg-white br-rd5 br-box-gray pt5 pr15 pb5 pl15">
     <?= breadcrumb(
       '/',
       Translate::get('home'),
@@ -8,7 +8,7 @@
       $data['h1']
     ); ?>
 
-    <form action="/messages/send" method="post">
+    <form action="<?= getUrlByName('messages.send'); ?>" method="post">
       <?= csrf_field() ?>
       <input type="hidden" name="recipient" value="<?= $data['recipient_user']['user_id']; ?>" />
       <textarea rows="3" id="message" class="mess" placeholder="<?= Translate::get('write'); ?>..." type="text" name="content" /></textarea>

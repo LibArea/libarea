@@ -2,7 +2,7 @@
   <?= includeTemplate('/_block/menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-10 mb-col-12">
-  <div class="bg-white flex flex-row items-center justify-between br-box-grey br-rd5 p15 mb15">
+  <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
     <p class="m0 size-18"><?= Translate::get('topics'); ?>
       <?php if ($uid['user_trust_level'] == 5) { ?>
         <a class="ml15" href="<?= getUrlByName('admin.topics'); ?>">
@@ -50,13 +50,13 @@
     </ul>
   </div>
 
-  <div class="bg-white p15 br-box-grey">
+  <div class="bg-white p15 br-box-gray">
     <?php if (!empty($data['topics'])) { ?>
       <div class="flex flex-row flex-wrap mb20">
         <?php foreach ($data['topics'] as $key => $topic) { ?>
           <div class="w-50 mb20 mb-w-100 flex flex-row<?php if (($key + 1) % 2 == 0) { ?> pl20 mb-pl-0<?php } ?>">
             <a title="<?= $topic['topic_title']; ?>" class="mr10" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
-              <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'w54 br-box-grey'); ?>
+              <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'w54 br-box-gray'); ?>
             </a>
             <div class="ml5 w-100">
               <?php if ($uid['user_id']) { ?>

@@ -11,7 +11,7 @@
     Translate::get('add a website')
   ); ?>
 
-  <div class="br-box-grey bg-white p15">
+  <div class="br-box-gray bg-white p15">
     <form action="/web/create" method="post">
       <?= csrf_field() ?>
 

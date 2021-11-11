@@ -1,5 +1,5 @@
 <div class="col-span-2 no-mob"></div>
-<main class="col-span-8 mb-col-12 bg-white br-rd5 br-box-grey pt10 pr15 pb5 pl15">
+<main class="col-span-8 mb-col-12 bg-white br-rd5 br-box-gray pt10 pr15 pb5 pl15">
   <h1 class="mt0 mb10 size-24 center font-normal"><?= Translate::get($data['sheet']); ?></h1>
   <form class="form max-w300" action="<?= getUrlByName('recover'); ?>/send" method="post">
     <?php csrf_field(); ?>

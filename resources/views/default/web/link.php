@@ -2,7 +2,7 @@
   <?= includeTemplate('/_block/menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-7">
-  <div class="bg-white br-rd5 br-box-grey mb15 pt5 pr15 pb5 pl15">
+  <div class="bg-white br-rd5 br-box-gray mb15 pt5 pr15 pb5 pl15">
     <?php if ($data['link']['link_title']) { ?>
       <div class="right heart-link mt5">
         <?= votes($uid['user_id'], $data['link'], 'link'); ?>
@@ -33,7 +33,7 @@
   <?= pagination($data['pNum'], $data['pagesCount'], null, getUrlByName('domain', ['domain' => $data['link']['link_url_domain']])); ?>
 </main>
 <aside class="col-span-3 relative">
-  <div class="bg-white br-rd5 br-box-grey pt5 pr15 pb10 pl15">
+  <div class="bg-white br-rd5 br-box-gray pt5 pr15 pb10 pl15">
     <?= includeTemplate('/_block/domains', ['data' => $data['domains']]); ?>
   </div>
 </aside>

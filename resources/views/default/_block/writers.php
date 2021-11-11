@@ -1,5 +1,5 @@
 <?php if ($data['writers']) { ?>
-  <div class="bg-white br-rd5 br-box-grey p15">
+  <div class="bg-white br-rd5 br-box-gray p15">
     <?php foreach ($data['writers'] as  $writer) { ?>
       <div class="flex border-bottom">
         <div class="mr15 mt10">

@@ -8,7 +8,7 @@
     Translate::get('add post')
   ); ?>
 
-  <div class="br-box-grey bg-white p15">
+  <div class="br-box-gray bg-white p15">
     <form action="/post/create" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
 

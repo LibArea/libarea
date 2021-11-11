@@ -3,7 +3,7 @@
 </div>
 <?php $topic = $data['topic']; ?>
 <main class="col-span-7 mb-col-12">
-  <div class="bg-white br-rd5 br-box-grey pt5 pr15 pb5 mb15 pl15">
+  <div class="bg-white br-rd5 br-box-gray pt5 pr15 pb5 mb15 pl15">
     <a class="size-14" title="<?= Translate::get('topics-all'); ?>" href="/topics">
       ← <?= Translate::get('topics'); ?>
     </a>
@@ -25,7 +25,7 @@
 
 </main>
 <aside class="col-span-3 relative no-mob">
-  <div class="bg-white br-rd5 br-box-grey p15 mb15 size-15">
+  <div class="bg-white br-rd5 br-box-gray p15 mb15 size-15">
     <center>
       <a title="<?= $topic['topic_title']; ?>" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
         <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'topic-img'); ?>

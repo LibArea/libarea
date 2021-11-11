@@ -9,7 +9,7 @@
     null,
     Translate::get('comments')
   ); ?>
-  <div class="bg-white flex flex-row items-center justify-between br-box-grey br-rd5 p15 mb15">
+  <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
     <ul class="flex flex-row list-none m0 p0 center size-15">
 
@@ -34,7 +34,7 @@
 
     </ul>
   </div>
-  <div class="bg-white br-box-grey pt5 pr15 pb5 pl15">
+  <div class="bg-white br-box-gray pt5 pr15 pb5 pl15">
     <?php if (!empty($data['comments'])) { ?>
       <?php foreach ($data['comments'] as $comment) { ?>
         <a href="<?= getUrlByName('post', ['id' => $comment['post_id'], 'slug' => $comment['post_slug']]); ?>">

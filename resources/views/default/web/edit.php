@@ -11,7 +11,7 @@
     Translate::get('change the site')
   ); ?>
 
-  <div class="br-box-grey bg-white p15">
+  <div class="br-box-gray bg-white p15">
     <form action="/web/edit" method="post">
       <?= csrf_field() ?>
       <div class="right">

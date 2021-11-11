@@ -1,5 +1,5 @@
 <div class="col-span-2 no-mob"></div>
-<main class="col-span-8 mb-col-12 bg-white br-rd5 br-box-grey pt10 pr15 pb5 pl15">
+<main class="col-span-8 mb-col-12 bg-white br-rd5 br-box-gray pt10 pr15 pb5 pl15">
   <div class="col-span-2 mb20">
     <div class="ml16 mb15 size-21">
       <?= Translate::get('you were looking for'); ?>: <b><?= $data['query']; ?></b>
@@ -13,7 +13,7 @@
 
     <?php foreach ($data['tags'] as $key => $topic) { ?>
       <a class="flex justify-center pt5 pr5 pb5 br-rd20 black inline size-14" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
-        <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'w24 mr5 br-box-grey'); ?>
+        <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'w24 mr5 br-box-gray'); ?>
         <?= $topic['topic_title']; ?>
       </a>
       <sup class="gray mr15">x<?= $topic['topic_count']; ?></sup>

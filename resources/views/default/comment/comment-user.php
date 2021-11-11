@@ -2,7 +2,7 @@
   <?= includeTemplate('/_block/menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-7 mb-col-12">
-  <div class="bg-white br-rd5 br-box-grey pt5 pr15 pb5 pl15">
+  <div class="bg-white br-rd5 br-box-gray pt5 pr15 pb5 pl15">
 
     <?= breadcrumb(
       '/',
@@ -15,7 +15,7 @@
   </div>
   <?php if (!empty($data['comments'])) { ?>
     <?php foreach ($data['comments'] as $comm) { ?>
-      <div class="bg-white br-rd5 mt15 br-box-grey pt15 pr15 pb0 pl15">
+      <div class="bg-white br-rd5 mt15 br-box-gray pt15 pr15 pb0 pl15">
         <div class="size-14 gray">
           <a class="gray" href="<?= getUrlByName('user', ['login' => $comm['user_login']]); ?>">
             <?= user_avatar_img($comm['user_avatar'], 'max', $comm['user_login'], 'w18 mr5'); ?>

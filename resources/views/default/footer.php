@@ -46,7 +46,7 @@
           $.each(data, function(index, data) {
             if (data.topic_slug) {
               html += '<a class="blue block size-14 mb15 mr10" href="/topic/' + data.topic_slug + '">';
-              html += '<img class="w21 mr5 br-box-grey" src="<?= AG_PATH_TOPICS_LOGOS; ?>' + data.topic_img + '">';
+              html += '<img class="w21 mr5 br-box-gray" src="<?= AG_PATH_TOPICS_LOGOS; ?>' + data.topic_img + '">';
               html += data.topic_title + '</a>';  
             }
             if (data.post_id) {

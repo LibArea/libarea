@@ -2,7 +2,7 @@
   <?= includeTemplate('/_block/menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-7 mb-col-12">
-  <div class="bg-white br-rd5 br-box-grey pt5 pr15 pb5 pl15">
+  <div class="bg-white br-rd5 br-box-gray pt5 pr15 pb5 pl15">
     <?= breadcrumb(
       '/',
       Translate::get('home'),

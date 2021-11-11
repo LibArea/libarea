@@ -20,18 +20,15 @@ Route::before('Authorization@noAuth')->getGroup();
         Route::get('/search/{type}')->controller('ActionController@select')->where(['type' => '[a-z]+']);
         // @ post | answer | comment | link
         Route::get('/votes/{type}')->controller('VotesController')->where(['type' => '[a-z]+']); 
-        
             Route::getProtect();
-                Route::get('/invitation/create')->controller('User\InvitationsController@invitationCreate');
-                Route::get('/messages/send')->controller('MessagesController@send');
-                Route::get('/users/setting/edit')->controller('User\SettingController@edit');
-                Route::get('/users/setting/avatar/edit')->controller('User\SettingController@avatarEdit');
-                Route::get('/users/setting/security/edit')->controller('User\SettingController@securityEdit');
-                Route::get('/users/setting/avatar/edit')->controller('User\SettingController@avatarEdit');
-                Route::get('/users/setting/notifications/edit')->controller('User\SettingController@notificationsEdit');
-                // Add post | comment | answer | topic 
+                Route::get('/invitation/create')->controller('User\InvitationsController@create')->name('invit.create');
+                Route::get('/messages/send')->controller('MessagesController@send')->name('messages.send');
+                Route::get('/users/setting/edit')->controller('User\SettingController@edit')->name('setting.edit');
+                Route::get('/users/setting/avatar/edit')->controller('User\SettingController@avatarEdit')->name('setting.avatar.edit');
+                Route::get('/users/setting/security/edit')->controller('User\SettingController@securityEdit')->name('setting.security.edit');
+                Route::get('/users/setting/notifications/edit')->controller('User\SettingController@notificationsEdit')->name('setting.notif.edit');
+                // Add / Edit: post | comment | answer | topic
                 Route::get('/{controller}/create')->controller('<controller>\Add<controller>Controller@create');
-                // Edit post | comment | answer | topic 
                 Route::get('/{controller}/edit')->controller('<controller>\Edit<controller>Controller@edit');
             Route::endProtect();
     Route::endType();

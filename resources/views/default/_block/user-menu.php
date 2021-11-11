@@ -1,4 +1,4 @@
-<div class="bg-white br-rd5 br-box-grey sticky p15">
+<div class="bg-white br-rd5 br-box-gray sticky p15">
   <div class="menu-info">
     <a title="<?= Translate::get('profile'); ?>" class="mb5 size-15 block gray" href="<?= getUrlByName('user', ['login' => Request::get('login')]); ?>">
       <i class="bi bi-person middle"></i>

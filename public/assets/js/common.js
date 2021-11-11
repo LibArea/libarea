@@ -87,7 +87,7 @@ document.querySelectorAll(".add-comment")
     let post_id = this.dataset.post_id;
 
     let comment = document.querySelector('#answer_addentry' + answer_id);
-    comment.classList.add("active");
+    comment.classList.add("block");
 
     fetch("/comments/addform", {
       method: "POST",
@@ -105,7 +105,7 @@ document.querySelectorAll(".add-comment")
       );
 
     $('#answer_addentry' + answer_id).on('click', '#cancel_comment', function () {
-      comment.classList.remove("active");
+      comment.classList.remove("block");
     });
 
   }));
@@ -118,8 +118,7 @@ document.querySelectorAll(".add-comment-re")
     let comment_id = this.dataset.comment_id;
 
     let comment = document.querySelector('#comment_addentry' + comment_id);
-    comment.classList.add("active");
-
+    comment.classList.add("block");
 
     fetch("/comments/addform", {
       method: "POST",
@@ -137,7 +136,7 @@ document.querySelectorAll(".add-comment-re")
       );
 
     $('#comment_addentry' + comment_id).on('click', '#cancel_comment', function () {
-      comment.classList.remove("active");
+      comment.classList.remove("block");
     });
 
   }));
@@ -149,11 +148,11 @@ document.querySelectorAll(".showpost")
     let post_id = this.dataset.post_id;
     let post = document.querySelector('.s_' + post_id);
     let article = document.querySelector('.article_' + post_id);
-    post.classList.remove("hide");
+    post.classList.remove("none");
     article.classList.add("preview");
 
     if (!e.target.classList.contains('showpost')) {
-      post.classList.add("hide");
+      post.classList.add("none");
       article.classList.remove("preview");
     }
 

@@ -11,7 +11,7 @@
     Translate::get('add topic')
   ); ?>
 
-  <div class="br-box-grey bg-white p15">
+  <div class="br-box-gray bg-white p15">
     <div class="size-14 gray mb15">
       <?= Translate::get('you can add more'); ?>:
       <span class="red"><?= $data['count_topic']; ?></span>

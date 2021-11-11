@@ -9,7 +9,7 @@
     null,
     Translate::get('posts')
   ); ?>
-  <div class="bg-white flex flex-row items-center justify-between br-box-grey br-rd5 p15 mb15">
+  <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
     <ul class="flex flex-row list-none m0 p0 center size-15">
 
@@ -35,7 +35,7 @@
     </ul>
   </div>
 
-  <div class="bg-white br-box-grey pt5 pr15 pb5 pl15">
+  <div class="bg-white br-box-gray pt5 pr15 pb5 pl15">
     <?php if (!empty($data['posts'])) { ?>
       <?php foreach ($data['posts'] as $post) { ?>
         <a href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">

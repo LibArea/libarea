@@ -5,7 +5,7 @@
 <main class="col-span-10 mb-col-12">
   <?= breadcrumb(getUrlByName('topics'), Translate::get('topics'), getUrlByName('topic', ['slug' => $topic['topic_slug']]), $topic['topic_title'], Translate::get('edit topic')); ?>
 
-  <div class="br-box-grey bg-white p15">
+  <div class="br-box-gray bg-white p15">
     <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'img-topic-edit'); ?>
     <form action="/topic/edit" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
@@ -82,11 +82,11 @@
         <?php } ?>
 
         <?php if (!empty($data['high_lists'])) { ?>
-          <div class="bg-white br-rd5 br-box-grey p15">
+          <div class="bg-white br-rd5 br-box-gray p15">
             <h3 class="uppercase mb5 mt0 font-light size-14 gray"><?= Translate::get('upper'); ?></h3>
             <?php foreach ($data['high_lists'] as $sub) { ?>
               <a class="flex relative pt5 pb5 items-center hidden gray-light" href="<?= getUrlByName('topic', ['slug' => $sub['topic_slug']]); ?>">
-                <?= topic_logo_img($sub['topic_img'], 'max', $sub['topic_title'], 'w24 mr10 br-box-grey'); ?>
+                <?= topic_logo_img($sub['topic_img'], 'max', $sub['topic_title'], 'w24 mr10 br-box-gray'); ?>
                 <?= $sub['topic_title']; ?>
               </a>
             <?php } ?>
@@ -94,11 +94,11 @@
         <?php } ?>
 
         <?php if (!empty($data['low_lists'])) { ?>
-          <div class="bg-white br-rd5 br-box-grey p15">
+          <div class="bg-white br-rd5 br-box-gray p15">
             <h3 class="uppercase mb5 mt0 font-light size-14 gray"><?= Translate::get('subtopics'); ?></h3>
             <?php foreach ($data['low_lists'] as $sub) { ?>
               <a class="flex relative pt5 pb5 items-center hidden gray-light" href="<?= getUrlByName('topic', ['slug' => $sub['topic_slug']]); ?>">
-                <?= topic_logo_img($sub['topic_img'], 'max', $sub['topic_title'], 'w24 mr10 br-box-grey'); ?>
+                <?= topic_logo_img($sub['topic_img'], 'max', $sub['topic_title'], 'w24 mr10 br-box-gray'); ?>
                 <?= $sub['topic_title']; ?>
               </a>
             <?php } ?>

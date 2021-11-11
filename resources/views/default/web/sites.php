@@ -1,6 +1,6 @@
 <main class="col-span-9 mb-col-12">
 
-  <div class="bg-white br-rd5 br-box-grey pt5 pr15 pb5 pl15">
+  <div class="bg-white br-rd5 br-box-gray pt5 pr15 pb5 pl15">
     <?php if ($uid['user_trust_level'] == 5) { ?>
       <a title="<?= Translate::get('add'); ?>" class="right mt5" href="/web/add">
         <i class="bi bi-plus-lg middle"></i>
@@ -124,7 +124,7 @@
   </div>
 </main>
 <aside class="col-span-3 relative br-rd5 no-mob">
-  <div class="bg-white p15  br-box-grey">
+  <div class="bg-white p15  br-box-gray">
     <?= $data['topic']['topic_description']; ?>
   </div>
 </aside>

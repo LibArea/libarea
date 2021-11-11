@@ -152,6 +152,7 @@ class MessagesController extends MainController
                 'uid'   => $uid,
                 'data'  => [
                     'recipient_uid' => $user['user_id'],
+                    'login'         => $user['user_login'],
                 ]
             ]
         );

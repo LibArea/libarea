@@ -9,7 +9,7 @@
     Translate::get('edit post')
   ); ?>
 
-  <div class="br-box-grey bg-white p15">
+  <div class="br-box-gray bg-white p15">
     <form action="/post/edit" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
 

@@ -51,7 +51,7 @@ class InvitationsController extends MainController
     }
 
     // Создать инвайт
-    function invitationCreate()
+    function create()
     {
         // Данные участника
         $uid    = Base::getUid();

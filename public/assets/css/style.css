@@ -173,8 +173,9 @@ img {
 .bg-gray-900 { background-color: #212529; }
 
 .box-shadow { box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);  }
-.br-box-grey { border: 1px solid #ededed; }
+.br-box-gray { border: 1px solid #ededed; }
 .br-box-blue { border: 1px solid #0085EE; }
+.br-top-dotted { border: 2px dotted #ddd; }
 
 .br-rd3 { border-radius: 3px; }
 .br-rd5 { border-radius: 5px; }
@@ -300,6 +301,7 @@ img {
 .absolute { position: absolute; }
 .relative { position: relative; }
 .hidden { overflow: hidden; }
+.no-pc { display: none; }
 .none { display: none; }
 .block { display: block; }
 .table { display: table; }
@@ -377,22 +379,15 @@ textarea:focus { border: 1px solid #9ccdf8; }
   font-size: 15px;
 }
 
-.no-pc { display: none; }
-.show_detail.hide { display: none; }
 .shown_post img { width: 100%; }
+.no-md p { margin: 2px 0; }
+.post-body.full img:hover { box-shadow: 0 1px 8px 0 rgb(0 0 0 / 20%); }
+.post-body .post-img img { margin-top: 5px; }
 
 .post-body.full img {
   max-width: 100%;
   display: block;
 }
-
-.post-body.full img:hover { box-shadow: 0 1px 8px 0 rgb(0 0 0 / 20%); }
-.post-body .post-img img { margin-top: 5px; }
-
-.no-md p { margin: 2px 0; }
-.line { border-top: 2px dotted #ddd; }
-.reply { display: none; }
-.reply.active { display: block; }
 
 .answ-telo p img {
   max-width: 99%;
@@ -409,11 +404,6 @@ textarea:focus { border: 1px solid #9ccdf8; }
   background-color: lightyellow;
   margin-top: -70px;
   padding-top: 70px;
-}
-
-.comm-telo-body p:first-child,
-.answ-telo p:first-child {
-  margin: 5px 0;
 }
 
 .dark {

@@ -1,5 +1,5 @@
 <?php if (!empty($data['answers'])) { ?>
-  <div class="bg-white br-rd5 br-box-grey mt15 p15">
+  <div class="bg-white br-rd5 br-box-gray mt15 p15">
     <h2 class="lowercase m0 mb15 size-21">
       <?= num_word($post['amount_content'], Translate::get('num-answer'), true); ?>
     </h2>
@@ -11,7 +11,7 @@
 
       <div class="block-answer">
         <?php if ($answer['answer_is_deleted'] == 0) { ?>
-          <?php if ($n != 1) { ?><div class="line mt10 mb10"></div><?php } ?>
+          <?php if ($n != 1) { ?><div class="br-top-dotted mt10 mb10"></div><?php } ?>
           <ol class="p0 m0 list-none">
             <li class="answers_subtree" id="answer_<?= $answer['answer_id']; ?>">
               <div class="answ-telo">
@@ -36,7 +36,7 @@
                   <a rel="nofollow" class="gray-light mr5 ml10" href="<?= $post_url; ?>#answer_<?= $answer['answer_id']; ?>"><i class="bi bi-hash"></i></a>
                   <?= includeTemplate('/_block/show-ip', ['ip' => $answer['answer_ip'], 'user_trust_level' => $uid['user_trust_level']]); ?>
                 </div>
-                <div class="mt0 mr0 mb5 ml0 size-15 max-w780">
+                <div class="m0 size-15 max-w780">
                   <?= $answer['answer_content'] ?>
                 </div>
               </div>
@@ -45,7 +45,7 @@
 
                 <?php if ($post['post_closed'] == 0) { ?>
                   <?php if ($post['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
-                    <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray mr5 ml15"><?= Translate::get('reply'); ?></a>
+                    <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray mr5 ml10"><?= Translate::get('reply'); ?></a>
                   <?php } ?>
                 <?php } ?>
 
@@ -79,7 +79,7 @@
                   </a>
                 <?php } ?>
               </div>
-              <div id="answer_addentry<?= $answer['answer_id']; ?>" class="reply"></div>
+              <div id="answer_addentry<?= $answer['answer_id']; ?>" class="none"></div>
             </li>
           </ol>
 
@@ -125,7 +125,7 @@
         <?php } ?>
 
         <?php if ($comment['comment_is_deleted'] == 0) { ?>
-          <ol class="pl15 list-none<?php if ($comment['comment_comment_id'] > 0) { ?> ml30<?php } ?>">
+          <ol class="pl15 pb0 mb0 list-none<?php if ($comment['comment_comment_id'] > 0) { ?> ml30<?php } ?>">
             <li class="comment_subtree" id="comment_<?= $comment['comment_id']; ?>">
               <div class="p5">
                 <div class="max-w780 size-15">
@@ -150,7 +150,7 @@
                     <a class="gray-light-2 mr5 ml5" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_id']; ?>"><i class="bi bi-hash"></i></a>
                     <?= includeTemplate('/_block/show-ip', ['ip' => $comment['comment_ip'], 'user_trust_level' => $uid['user_trust_level']]); ?>
                   </div>
-                  <div class="comm-telo-body size-15 mt5 mb5">
+                  <div class="comm-telo-body size-15 mt5 mb10">
                     <?= Content::text($comment['comment_content'], 'line'); ?>
                   </div>
                 </div>
@@ -159,7 +159,7 @@
 
                   <?php if ($post['post_closed'] == 0) { ?>
                     <?php if ($post['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
-                      <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment-re gray mr5 ml15">
+                      <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment-re gray mr5 ml10">
                         <?= Translate::get('reply'); ?>
                       </a>
                     <?php } ?>
@@ -180,7 +180,7 @@
                   <?php } ?>
                 </div>
               </div>
-              <div id="comment_addentry<?= $comment['comment_id']; ?>" class="reply"></div>
+              <div id="comment_addentry<?= $comment['comment_id']; ?>" class="none"></div>
             </li>
           </ol>
         <?php } ?>

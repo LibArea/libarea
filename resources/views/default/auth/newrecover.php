@@ -1,4 +1,4 @@
-<main class="col-span-12 mb-col-12  bg-white br-rd5 br-box-grey pt5 pr15 pb5 pl15">
+<main class="col-span-12 mb-col-12  bg-white br-rd5 br-box-gray pt5 pr15 pb5 pl15">
   <h1 class="mt0 mb10 size-24 center font-normal"><?= Translate::get('password recovery'); ?></h1>
   <div class="box wide">
     <form class="" action="<?= getUrlByName('recover'); ?>/send/pass" method="post">
