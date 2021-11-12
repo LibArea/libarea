@@ -10,6 +10,7 @@
     Translate::get('reports')
   ); ?>
 
+<div class="bg-white br-box-gray pt15 pr15 pb5 pl15">
   <?php if ($data['reports']) { ?>
     <table class="mt20">
       <thead>

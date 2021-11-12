@@ -14,7 +14,7 @@
       Translate::get('domains')
     ); ?>
 
-    <div class="domains mt20">
+    <div class="bg-white br-box-gray pt15 pr15 pb5 pl15">
       <?php if (!empty($data['domains'])) { ?>
         <?php foreach ($data['domains'] as $key => $link) { ?>
           <div class="domain-box">

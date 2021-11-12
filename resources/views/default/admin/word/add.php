@@ -10,6 +10,7 @@
     Translate::get('add a stop word')
   ); ?>
 
+  <div class="bg-white br-box-gray p15">
   <form action="<?= getUrlByName('admin.word.create'); ?>" method="post">
     <?= csrf_field() ?>
     <div class="mb20 max-w780">
@@ -18,4 +19,5 @@
     </div>
     <?= sumbit(Translate::get('add')); ?>
   </form>
+  </div>
 </main>

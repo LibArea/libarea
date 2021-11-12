@@ -118,19 +118,25 @@ class UsersController extends MainController
     // Редактировать участника
     public function userEdit()
     {
-        $login      = Request::getPost('login');
-        $user_id    = Request::getInt('id');
-        if (!$user = UserModel::getUser($user_id, 'id')) redirect(getUrlByName('admin.users'));
-
+        $login          = Request::getPost('login');
+        $user_id        = Request::getInt('id');
+        $user_whisper   = Request::getPost('whisper');
+        $user_name      = Request::getPost('name');
+        
+        if (!$user = UserModel::getUser($user_id, 'id')) {
+            redirect(getUrlByName('admin.users'));
+        }
+        
         $redirect = getUrlByName('admin.user.edit', ['id' => $user_id]);
         Validation::Limits($login, Translate::get('login'), '3', '11', $redirect);
+        Validation::Limits($name, Translate::get('name'), '3', '11', $redirect);
 
         $data = [
             'user_id'            => $user_id,
             'user_login'         => $login,
             'user_email'         => Request::getPost('email'),
-            'user_whisper'       => Request::getPost('whisper', ''),
-            'user_name'          => Request::getPost('name', ''),
+            'user_whisper'       => $user_whisper ?? '',
+            'user_name'          => $user_name ?? '',
             'user_activated'     => Request::getPostInt('activated'),
             'user_limiting_mode' => Request::getPostInt('limiting_mode'),
             'user_lang'          => $user['user_lang'],

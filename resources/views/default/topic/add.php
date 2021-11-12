@@ -27,7 +27,8 @@
             'name' => 'topic_title',
             'value' => '',
             'min' => 3, 'max' => 64,
-            'help' => '3 - 64 ' . Translate::get('characters')
+            'help' => '3 - 64 ' . Translate::get('characters'),
+            'red' => 'red'
           ],
           [
             'title' => Translate::get('short description'),
@@ -45,7 +46,8 @@
             'name' => 'topic_seo_title',
             'value' => '',
             'min' => 4, 'max' => 225,
-            'help' => '4 - 225 ' . Translate::get('characters')
+            'help' => '4 - 225 ' . Translate::get('characters'),
+            'red' => 'red'
           ],
           [
             'title' => Translate::get('Slug'),
@@ -54,7 +56,8 @@
             'value' => '',
             'min' => 3,
             'max' => 32,
-            'help' => '3 - 32 ' . Translate::get('characters') . ' (a-zA-Z0-9)'
+            'help' => '3 - 32 ' . Translate::get('characters') . ' (a-zA-Z0-9)',
+            'red' => 'red'
           ],
         ]
       ]); ?>

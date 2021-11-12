@@ -10,7 +10,7 @@
     Translate::get('invites')
   ); ?>
 
-  <div class="invitations mt15">
+  <div class="bg-white br-box-gray pt15 pr15 pb5 pl15">
     <?php if (!empty($data['invitations'])) { ?>
       <?php foreach ($data['invitations'] as $key => $inv) { ?>
         <div class="content-telo mt5">

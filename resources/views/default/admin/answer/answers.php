@@ -2,6 +2,7 @@
   <?= includeTemplate('/admin/admin-menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-10 mb-col-12">
+
   <?= breadcrumb(
     getUrlByName('admin'),
     Translate::get('admin'),
@@ -9,6 +10,7 @@
     null,
     Translate::get('answers')
   ); ?>
+
   <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
     <ul class="flex flex-row list-none m0 p0 center size-15">

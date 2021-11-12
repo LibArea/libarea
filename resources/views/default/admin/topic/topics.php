@@ -3,7 +3,7 @@
 </div>
 <main class="col-span-10 mb-col-12">
   <div class="white-box pt5 pr15 pb5 pl15">
-    <a class="right" title="<?= Translate::get('add'); ?>" href="<?= getUrlByName('topic.add'); ?>">
+    <a class="right" title="<?= Translate::get('add'); ?>" href="/topic/add">
       <i class="bi bi-plus-lg middle"></i>
     </a>
     <?= breadcrumb(
