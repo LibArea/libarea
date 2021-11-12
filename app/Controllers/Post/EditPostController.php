@@ -82,7 +82,6 @@ class EditPostController extends MainController
 
         $redirect   = '/post/edit/' . $post_id;
 
-        // Получаем информацию по пространству
         if (!$topics) {
             addMsg(Translate::get('select topic'), 'error');
             redirect($redirect);

@@ -108,7 +108,7 @@
                   <?= html_topic($link['topic_list'], 'web.topic', 'gray-light mr15'); ?>
                 </div>
               </div>
-              <div class="hidden lowercase ml-auto">
+              <div class="hidden lowercase ml-auto pr10">
                 <?= votes($uid['user_id'], $link, 'link', 'mr5'); ?>
               </div>
             </div>

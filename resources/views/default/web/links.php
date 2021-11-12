@@ -1,5 +1,5 @@
 <main class="col-span-12 mb-col-12">
-  <div class="pt5 pr15 pb5 pl15">
+  <div class="pt5 mr15 pb5 ml15">
     <?php if ($uid['user_trust_level'] == 5) { ?>
       <a title="<?= Translate::get('add'); ?>" class="right mt5" href="/web/add">
         <i class="bi bi-plus-lg middle"></i>
@@ -27,10 +27,10 @@
       <?php foreach ($data['links'] as $key => $link) { ?>
         <?php if ($link['link_published'] == 1) { ?>
           <div class="pt20 pb5 flex flex-row gap-2">
-            <div class="mr20 w200 no-mob">
+            <div class="w200 no-mob">
               <?= thumbs_img($link['link_url_domain'], $link['link_title'], 'mr5 mt5 w200 box-shadow'); ?>
             </div>
-            <div class="mr20 w-100">
+            <div class="w-100">
               <a class="pt0 pr5 size-21" href="<?= getUrlByName('web.website', ['slug' => $link['link_url_domain']]); ?>">
                 <h2 class="font-normal inline underline-hover size-21 mt0 mb0">
                   <?= $link['link_title']; ?>

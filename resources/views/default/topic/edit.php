@@ -104,7 +104,6 @@
             <?php } ?>
           </div>
         <?php } ?>
-
       </div>
 
       <div for="mb5"><?= Translate::get('meta description'); ?><sup class="red">*</sup></div>
@@ -225,7 +224,7 @@
 
       <div class="mb20">
         <input type="hidden" name="topic_id" value="<?= $topic['topic_id']; ?>">
-        <input type="submit" name="submit" class="button block br-rd5 white" value="<?= Translate::get('edit'); ?>" />
+        <?= sumbit(Translate::get('edit')); ?>
       </div>
     </form>
   </div>

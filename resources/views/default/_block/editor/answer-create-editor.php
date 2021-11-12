@@ -1,6 +1,6 @@
 <?php if ($user_id > 0) { ?>
   <?php if ($data['post_draft'] == 0 && $data['post_closed'] == 0) { ?>
-    <form id="add_answ" action="/answer/create" accept-charset="UTF-8" method="post">
+    <form id="add_answ" class="mb15" action="/answer/create" accept-charset="UTF-8" method="post">
       <?= csrf_field() ?>
       <div id="markdown-view" class="mb10">
         <textarea minlength="6" class="wmd-input h-150 w-95" rows="5" name="answer" id="wmd-input"></textarea>

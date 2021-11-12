@@ -203,7 +203,6 @@
         </div>
       </div>
 
-
       <?php if ($post['post_type'] == 0) { ?>
         <?= includeTemplate('/_block/editor/answer-create-editor', [
           'data'    => $post,
