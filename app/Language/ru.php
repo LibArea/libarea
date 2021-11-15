@@ -57,6 +57,7 @@ $data = [
     'sign in'           => 'Войти',
     'sign out'          => 'Выйти',
     'sign up'           => 'Регистрация',
+    'advertising'       => 'Реклама',
     'private messages'  => 'Личные сообщения',
     'it was read'       => 'Было прочитано',
     'all messages'      => 'Все сообщения',

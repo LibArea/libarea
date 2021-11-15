@@ -1,5 +1,5 @@
 <?php if ($uid['user_id'] == 0) { ?>
-  <div class="col-span-12 grid items-center grid-cols-12 mb15">
+  <div class="col-span-12 grid items-center grid-cols-12 mb5">
     <div class="col-span-12 bg-white br-box-gray br-rd5 p20 center">
       <h1 class="size-31 font-normal mt0 mb5"><?= Config::get('meta.bannertitle'); ?></h1>
       <div class="gray-light mb5"><?= Config::get('meta.bannerdesc'); ?>...</div>
@@ -8,7 +8,7 @@
 <?php } ?>
 
 <div class="sticky top0 col-span-2 justify-between no-mob">
-  <?= includeTemplate('/_block/menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+  <?= includeTemplate('/_block/menu/menu-user', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 
 <main class="col-span-7 mb-col-12">
@@ -84,7 +84,7 @@
         <div class="flex relative pt5 pb5 items-center justify-between hidden">
           <a class="gray-light" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
             <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'w24 mr5'); ?>
-            <span class="ml5"><?= $topic['topic_title']; ?></span>
+            <span class="ml5 middle"><?= $topic['topic_title']; ?></span>
           </a>
           <?php if ($uid['user_id'] == $topic['topic_user_id']) { ?>
             <a class="right blue" title="<?= Translate::get('add post'); ?>" href="/post/add/<?= $topic['topic_id']; ?>">
@@ -122,7 +122,7 @@
               <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'w18 br-rd-50 mr5'); ?>
               <span class="middle"><?= $answer['answer_date']; ?></span>
             </div>
-            <a class="black" href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">
+            <a class="black dark-white" href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">
               <?= $answer['answer_content']; ?>...
             </a>
           </div>
@@ -130,6 +130,6 @@
       </div>
     <?php } ?>
 
-    <?= includeTemplate('/_block/footer-sidebar'); ?>
+    <?= includeTemplate('/_block/sidebar/sidebar-footer'); ?>
   </div>
 </aside>

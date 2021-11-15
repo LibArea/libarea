@@ -8,7 +8,7 @@
   <link rel="icon" href="/favicon.ico" type="image/png">
 </head>
 
-<body class="wrap grid grid-cols-12 gap-4 pr10 pl10 justify-between">
+<body class="max-width mr-auto w-100 grid grid-cols-12 gap-4 pr10 pl10 justify-between">
   <div class="col-span-2 no-mob"></div>
   <div class="col-span-8 mb-col-12 bg-white br-rd5 br-box-gray pt10 pr15 pb5 pl15">
     <div class="mb20">

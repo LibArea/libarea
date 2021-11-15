@@ -57,4 +57,4 @@
     <?php } ?>
   </div>
 </main>
-<?= includeTemplate('/_block/aside-lang', ['lang' => Translate::get('you can invite your friends')]); ?>
+<?= includeTemplate('/_block/sidebar/sidebar-lang', ['lang' => Translate::get('you can invite your friends')]); ?>

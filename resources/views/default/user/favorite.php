@@ -1,7 +1,8 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/_block/menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+  <?= includeTemplate('/_block/menu/menu-user', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-7 mb-col-12">
+
   <?= breadcrumb(
     '/',
     Translate::get('home'),
@@ -9,6 +10,7 @@
     Translate::get('profile'),
     Translate::get('favorites')
   ); ?>
+  
   <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
     <ul class="flex flex-row list-none m0 p0 center size-15">
@@ -57,7 +59,7 @@
             <span id="fav-comm" class="add-favorite right  ml15 size-14" data-front="personal" data-id="<?= $content['answer_id']; ?>" data-type="answer">
               <i class="bi bi-trash size-21 red"></i>
             </span>
-            <a class="title" href="<?= getUrlByName('post', ['id' => $content['post']['post_id'], 'slug' => $content['post']['post_slug']]); ?>#answer_<?= $content['answer_id']; ?>">
+            <a class="black dark-white" href="<?= getUrlByName('post', ['id' => $content['post']['post_id'], 'slug' => $content['post']['post_slug']]); ?>#answer_<?= $content['answer_id']; ?>">
               <?= $content['post']['post_title']; ?>
             </a>
           <?php } ?>
@@ -71,4 +73,4 @@
     <?= no_content(Translate::get('there are no favorites'), 'bi bi-info-lg'); ?>
   <?php } ?>
 </main>
-<?= includeTemplate('/_block/aside-lang', ['lang' => Translate::get('info-favorite')]); ?>
+<?= includeTemplate('/_block/sidebar/sidebar-lang', ['lang' => Translate::get('info-favorite')]); ?>

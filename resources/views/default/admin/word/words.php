@@ -1,10 +1,12 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/admin/admin-menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+  <?= includeTemplate('/_block/menu/menu-admin', ['sheet' => $data['sheet']]); ?>
 </div>
 <main class="col-span-10 mb-col-12">
-  <a class="right" title="<?= Translate::get('add'); ?>" href="<?= getUrlByName('admin.words.add'); ?>">
+
+  <a class="right mr15" title="<?= Translate::get('add'); ?>" href="<?= getUrlByName('admin.words.add'); ?>">
     <i class="bi bi-plus-lg middle"></i>
   </a>
+
   <?= breadcrumb(
     getUrlByName('admin'),
     Translate::get('admin'),

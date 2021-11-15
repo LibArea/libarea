@@ -54,6 +54,7 @@ $data = [
     'sign in'           => 'Autentificare',
     'sign out'          => 'Ieși',
     'sign up'           => 'Inregistrare',
+    'advertising'       => 'Publicitate',
     'private messages'  => 'Mesaje private',
     'it was read'       => 'A fost citit',
     'all messages'      => 'Toate postările',

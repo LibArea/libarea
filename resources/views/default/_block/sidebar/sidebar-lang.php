@@ -2,5 +2,5 @@
   <div class="bg-white p15  br-box-gray">
     <?= $lang; ?>...
   </div>
-  <?= includeTemplate('/_block/footer-sidebar'); ?>
+  <?= includeTemplate('/_block/sidebar/sidebar-footer'); ?>
 </aside>

@@ -1,12 +1,12 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/_block/menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+  <?= includeTemplate('/_block/menu/menu-user', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-7 mb-col-12 bg-white br-rd5 br-box-gray pt5 mt15 pr15 pb5 pl15">
   <h1 class="mt0 mb10 size-24 font-normal"><?= Translate::get('moderation log'); ?></h1>
   <?php if (!empty($data['moderations'])) { ?>
     <div class="mt15">
       <?php foreach ($data['moderations'] as  $mod) { ?>
-        <div class="mb15 border-bottom p5">
+        <div class="mb15 br-bottom p5">
           <div class="size-14 lowercase">
             <a class="black" href="<?= getUrlByName('user', ['login' => $mod['user_login']]); ?>">
               <?= user_avatar_img($mod['user_avatar'], 'small', $mod['user_login'], 'w24'); ?>
@@ -40,4 +40,4 @@
     <?php } ?>
     </div>
 </main>
-<?= includeTemplate('/_block/aside-lang', ['lang' => Translate::get('meta-moderation')]); ?>
+<?= includeTemplate('/_block/sidebar/sidebar-lang', ['lang' => Translate::get('meta-moderation')]); ?>

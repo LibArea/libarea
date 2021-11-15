@@ -1,5 +1,5 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/_block/menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+  <?= includeTemplate('/_block/menu/menu-user', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-7 mb-col-12">
 
@@ -75,7 +75,7 @@
       <h3><?= Translate::get('contacts'); ?></h3>
       <?php foreach (Config::get('fields-profile') as $block) { ?>
         <div class="mb20">
-          <label class="block" for="post_title"><?= $block['lang']; ?></label>
+          <label class="block mb5" for="post_title"><?= $block['lang']; ?></label>
           <input class="w-100 h30" maxlength="150" type="text" value="<?= $data['user'][$block['title']]; ?>" name="<?= $block['name']; ?>">
           <?php if ($block['help']) { ?>
             <div class="size-14 gray-light-2"><?= $block['help']; ?></div>
@@ -90,4 +90,4 @@
     </form>
   </div>
 </main>
-<?= includeTemplate('/_block/aside-lang', ['lang' => Translate::get('info-setting')]); ?>
+<?= includeTemplate('/_block/sidebar/sidebar-lang', ['lang' => Translate::get('info-setting')]); ?>

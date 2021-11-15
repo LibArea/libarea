@@ -1,15 +1,17 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/admin/admin-menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+  <?= includeTemplate('/_block/menu/menu-admin', ['sheet' => $data['sheet']]); ?>
 </div>
 <main class="col-span-10 mb-col-12">
-  <div class="white-box pt5 pr15 pb5 pl15">
-    <?= breadcrumb(
-      getUrlByName('admin'),
-      Translate::get('admin'),
-      getUrlByName('admin.users'),
-      Translate::get('users'),
-      Translate::get('search')
-    ); ?>
+
+  <?= breadcrumb(
+    getUrlByName('admin'),
+    Translate::get('admin'),
+    getUrlByName('admin.users'),
+    Translate::get('users'),
+    Translate::get('search')
+  ); ?>
+
+  <div class="bg-white br-box-gray p15">
     <table>
       <thead>
         <th>N</th>

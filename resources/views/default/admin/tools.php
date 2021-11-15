@@ -1,5 +1,5 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/admin/admin-menu', ['sheet' => 'tools', 'uid' => $uid]); ?>
+  <?= includeTemplate('/_block/menu/menu-admin', ['sheet' => 'tools', 'uid' => $uid]); ?>
 </div>
 <main class="col-span-10 mb-col-12">
 
@@ -11,7 +11,7 @@
     Translate::get('tools')
   ); ?>
 
-  <div class="bg-white br-box-gray pt15 pr15 pb5 pl15">
+  <div class="bg-white br-box-gray p15">
     <div class="mb20">
       <label class="required block"><?= Translate::get('topics'); ?> / <?= Translate::get('posts'); ?></label>
       <form action="<?= getUrlByName('admin.count.topic'); ?>">

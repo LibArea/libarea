@@ -11,7 +11,7 @@
   <article class="post-full br-box-gray br-rd5 bg-white<?php if ($post['post_is_deleted'] == 1) { ?> bg-red-300<?php } ?> mb15 pt0 pr15 pb5 pl15">
     <?php if ($post['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
       <div class="post-body">
-        <h1 class="title mb0 mt10 size-24">
+        <h1 class="mb0 mt10 size-24">
           <?= $post['post_title']; ?>
           <?php if ($post['post_is_deleted'] == 1) { ?>
             <i class="bi bi-trash blue"></i>
@@ -116,7 +116,7 @@
         <?php if (!empty($data['topics'])) { ?>
           <div class="mb20 lowercase">
             <?php foreach ($data['topics'] as $topic) { ?>
-              <a class="bg-gray-200 bg-hover-gray gray-light-hover flex justify-center pt5 pr10 pb5 pl10 br-rd20 gray-light inline size-14" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
+              <a class="bg-blue-100 bg-hover-green white-hover pt5 pr10 pb5 pl10 mb5 br-rd20 blue inline size-14" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
                 <?= $topic['topic_title']; ?>
               </a>
             <?php } ?>
@@ -124,7 +124,7 @@
         <?php } ?>
       </div>
 
-      <div class="br-box-gray flex items-center mb5">
+      <div class="br-box-gray dark-br-black flex items-center mb5">
         <div class="left p10 no-pc">
           <?= votes($uid['user_id'], $post, 'post', 'size-24 mr5 middle'); ?>
         </div>
@@ -243,7 +243,7 @@
             </div>
           <?php } ?>
         <?php } ?>
-        <a class="flex justify-center pt5 pr10 pb5 black  inline size-14" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
+        <a class="flex justify-center pt5 pr10 pb5 black dark-white inline size-14" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
           <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'w24 mr10 br-box-gray'); ?>
           <?= $topic['topic_title']; ?>
           <div class="gray-light-2 size-14"><?= $topic['topic_short_description']; ?></div>
@@ -279,7 +279,7 @@
               <div class="p5 pr10 pb5 pl10 bg-gray-300 br-rd3 gray size-14 center mr15">0</div>
             <?php } ?>
           </a>
-          <a class="black size-14" href="<?= getUrlByName('post', ['id' => $rec_post['post_id'], 'slug' => $rec_post['post_slug']]); ?>">
+          <a class="black dark-white size-14" href="<?= getUrlByName('post', ['id' => $rec_post['post_id'], 'slug' => $rec_post['post_slug']]); ?>">
             <?= $rec_post['post_title']; ?>
           </a>
         </div>

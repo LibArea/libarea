@@ -1,5 +1,5 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/admin/admin-menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+  <?= includeTemplate('/_block/menu/menu-admin', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-10 mb-col-12">
 
@@ -37,7 +37,7 @@
     </ul>
   </div>
 
-  <div class="bg-white br-box-gray pt5 pr15 pb5 pl15">
+  <div class="bg-white br-box-gray p15">
     <?php if (!empty($data['answers'])) { ?>
       <?php foreach ($data['answers'] as $answer) { ?>
         <a href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>">
@@ -62,7 +62,7 @@
           <div class="size-15 max-w780">
             <?= $answer['content']; ?>
           </div>
-          <div class="border-bottom mb15 pb5 size-13 hidden gray">
+          <div class="br-bottom mb15 pb5 size-13 hidden gray">
             + <?= $answer['answer_votes']; ?>
             <span id="cm_dell" class="right comment_link size-13">
               <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action">

@@ -11,5 +11,5 @@
     <h1 class="mt0 mb10 size-24 font-normal"><?= Translate::get('privacy policy'); ?></h1>
     <?= $data['content']; ?>
 </main>
-<?= includeTemplate('/_block/info-page-menu', ['uid' => $uid, 'sheet' => $data['sheet']]); ?>
+<?= includeTemplate('/_block/menu/menu-page-info', ['uid' => $uid, 'sheet' => $data['sheet']]); ?>
 <?= includeTemplate('/_block/wide-footer'); ?>

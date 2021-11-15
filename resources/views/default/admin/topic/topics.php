@@ -1,35 +1,47 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/admin/admin-menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+  <?= includeTemplate('/_block/menu/menu-admin', ['sheet' => $data['sheet']]); ?>
 </div>
 <main class="col-span-10 mb-col-12">
-  <div class="white-box pt5 pr15 pb5 pl15">
-    <a class="right" title="<?= Translate::get('add'); ?>" href="/topic/add">
-      <i class="bi bi-plus-lg middle"></i>
-    </a>
-    <?= breadcrumb(
-      getUrlByName('admin'),
-      Translate::get('admin'),
-      null,
-      null,
-      Translate::get('topics')
-    ); ?>
+  <a class="right mr15" title="<?= Translate::get('add'); ?>" href="/topic/add">
+    <i class="bi bi-plus-lg middle"></i>
+  </a>
 
-    <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
-      <p class="m0"><?= Translate::get($data['sheet']); ?></p>
+  <?= breadcrumb(
+    getUrlByName('admin'),
+    Translate::get('admin'),
+    null,
+    null,
+    Translate::get('topics')
+  ); ?>
+
+
+  <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
+    <p class="m0"><?= Translate::get($data['sheet']); ?></p>
     <ul class="flex flex-row list-none m0 p0 center size-15">
 
       <?= tabs_nav(
         $uid['user_id'],
         $data['sheet'],
         $pages = [
-        ['id' => 'topics', 'url' => '/admin/topics', 'content' => Translate::get('all'), 'icon' => 'bi bi-record-circle'],
-        ['id' => 'parent', 'url' => '/admin/topics/parent', 'content' => Translate::get('parent'), 'icon' => 'bi bi-x-circle'],
-      ]
+          [
+            'id' => 'topics',
+            'url' => '/admin/topics',
+            'content' => Translate::get('all'),
+            'icon' => 'bi bi-record-circle'
+          ],
+          [
+            'id' => 'parent',
+            'url' => '/admin/topics/parent',
+            'content' => Translate::get('parent'),
+            'icon' => 'bi bi-x-circle'
+          ],
+        ]
       ); ?>
 
     </ul>
-    </div>
+  </div>
 
+  <div class="white-box pt5 pr15 pb5 pl15">
     <?php if (!empty($data['topics'])) { ?>
       <table>
         <thead>

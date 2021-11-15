@@ -19,10 +19,10 @@
     </script>
   <?php } ?>
 </head>
-<body class="black bg-gray-100<?php if (Request::getCookie('dayNight') == 'dark') { ?> dark<?php } ?>">
+<body class="p0 m0 black bg-gray-100<?php if (Request::getCookie('dayNight') == 'dark') { ?> dark<?php } ?>">
 
-  <header class="bg-white border-bottom mt0 mb15 sticky top0 z-30">
-    <div class="col-span-12 wrap pr10 pl10 grid items-center flex justify-between">
+  <header class="bg-white br-bottom mt0 mb15 sticky top0 z-30">
+    <div class="col-span-12 mr-auto max-width w-100 pr10 pl10 grid items-center flex justify-between">
       <div class="flex items-center">
         <div class="lateral no-pc mr10 flex items-center">
           <i class="bi bi-list gray-light-2 size-18"></i>
@@ -46,15 +46,15 @@
           </nav>
         </div>
         <div class="mr20 flex items-center">
-          <a title="<?= Translate::get('home'); ?>" class="size-21 mb-size-18 p5 black uppercase" href="/">
+          <a title="<?= Translate::get('home'); ?>" class="size-21 mb-size-18 p5 black dark-white uppercase" href="/">
             <?= Config::get('meta.name'); ?>
           </a>
         </div>
       </div>
       <?php if (Request::getUri() != getUrlByName('search')) { ?>
         <div class="p5 ml30 mr20 relative no-mob w-100"> 
-          <form class="form r" method="post" action="<?= getUrlByName('search'); ?>">
-             <input type="text" autocomplete="off" name="q" id="find" placeholder="<?= Translate::get('to find'); ?>" class="h30 bg-gray-100 p15 br-rd20 gray w-100">
+          <form class="form" method="post" action="<?= getUrlByName('search'); ?>">
+             <input type="text" autocomplete="off" name="q" id="find" placeholder="<?= Translate::get('to find'); ?>" class="h30 bg-gray-100 size-15 p15 br-rd20 gray w-100">
              <input name="token" value="<?= csrf_token(); ?>" type="hidden">
           </form>
           <div class="absolute box-shadow bg-white pt10 pr15 pb5 pl15 mt5 max-w460 br-rd3 none" id="search_items"></div>
@@ -149,5 +149,5 @@
       <?php }  ?>
     </div>
   </header>
-  <div class="wrap grid grid-cols-12 gap-4 pr5 pl5 justify-between"> 
+  <div class="max-width mr-auto w-100 grid grid-cols-12 gap-4 pr5 pl5 justify-between"> 
  

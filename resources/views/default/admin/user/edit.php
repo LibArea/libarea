@@ -1,5 +1,5 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/admin/admin-menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+  <?= includeTemplate('/_block/menu/menu-admin', ['sheet' => $data['sheet']]); ?>
 </div>
 <main class="col-span-10 mb-col-12">
 
@@ -11,7 +11,7 @@
     Translate::get('edit user')
   ); ?>
 
-  <div class="bg-white br-box-gray pt15 pr15 pb5 pl15">
+  <div class="bg-white br-box-gray p15">
     <form action="/admin/user/edit/<?= $data['user']['user_id']; ?>" method="post">
       <?= csrf_field() ?>
       <?php if ($data['user']['user_cover_art'] != 'cover_art.jpeg') { ?>

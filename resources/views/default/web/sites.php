@@ -33,7 +33,7 @@
       <div class="grid grid-cols-3 gap-2 justify-between mb20">
         <?php foreach ($data['low_topics'] as $lt) { ?>
           <?php if ($lt['topic_is_web'] == 1) { ?>
-            <a class="pt5 pr10 underline-hover mb-col-2 mb-size-18 size-21 inline" href="<?= getUrlByName('web.topic', ['slug' => $lt['topic_slug']]); ?>">
+            <a class="pt5 pr10 dark-white underline-hover mb-col-2 mb-size-18 size-21 inline" href="<?= getUrlByName('web.topic', ['slug' => $lt['topic_slug']]); ?>">
               <?= $lt['topic_title']; ?>
             </a>
           <?php } ?>
@@ -87,7 +87,7 @@
             <?= thumbs_img($link['link_url_domain'], $link['link_title'], 'mr5 w200 box-shadow'); ?>
           </div>
           <div class="mr20 flex-auto">
-            <a href="<?= getUrlByName('web.website', ['slug' => $link['link_url_domain']]); ?>">
+            <a class="dark-white" href="<?= getUrlByName('web.website', ['slug' => $link['link_url_domain']]); ?>">
               <h2 class="font-normal underline-hover size-21 mt0 mb0">
                 <?= $link['link_title']; ?>
                 <?php if ($uid['user_trust_level'] == 5) { ?>

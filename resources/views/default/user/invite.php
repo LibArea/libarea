@@ -19,4 +19,4 @@
     <?php } ?>
   </div>
 </main>
-<?= includeTemplate('/_block/aside-lang', ['lang' => Translate::get('someone invited you from the site')]); ?>
+<?= includeTemplate('/_block/sidebar/sidebar-lang', ['lang' => Translate::get('someone invited you from the site')]); ?>

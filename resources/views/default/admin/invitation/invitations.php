@@ -1,5 +1,5 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/admin/admin-menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+  <?= includeTemplate('/_block/menu/menu-admin', ['sheet' => $data['sheet']]); ?>
 </div>
 <main class="col-span-10 mb-col-12">
   <?= breadcrumb(
@@ -10,7 +10,7 @@
     Translate::get('invites')
   ); ?>
 
-  <div class="bg-white br-box-gray pt15 pr15 pb5 pl15">
+  <div class="bg-white br-box-gray p15">
     <?php if (!empty($data['invitations'])) { ?>
       <?php foreach ($data['invitations'] as $key => $inv) { ?>
         <div class="content-telo mt5">

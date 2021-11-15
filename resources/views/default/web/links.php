@@ -11,11 +11,11 @@
     <div class="flex mb20">
       <?php foreach (Config::get('web-root-categories') as  $cat) { ?>
         <div class="mr60">
-          <a class="pt5 pr10 mr60 underline-hover size-21 block " title="<?= $cat['title']; ?>" href="<?= getUrlByName('web.topic', ['slug' => $cat['url']]); ?>">
+          <a class="pt5 pr10 mr60 dark-white underline-hover size-21 block " title="<?= $cat['title']; ?>" href="<?= getUrlByName('web.topic', ['slug' => $cat['url']]); ?>">
             <?= $cat['title']; ?>
           </a>
           <?php foreach ($cat['sub'] as $sub) { ?>
-            <a class="pr10 pb5 size-14 black inline" title="<?= $sub['title']; ?>" href="<?= getUrlByName('web.topic', ['slug' => $sub['url']]); ?>">
+            <a class="pr10 pb5 size-14 black gray-light inline" title="<?= $sub['title']; ?>" href="<?= getUrlByName('web.topic', ['slug' => $sub['url']]); ?>">
               <?= $sub['title']; ?>
             </a>
           <?php } ?>
@@ -31,7 +31,7 @@
               <?= thumbs_img($link['link_url_domain'], $link['link_title'], 'mr5 mt5 w200 box-shadow'); ?>
             </div>
             <div class="w-100">
-              <a class="pt0 pr5 size-21" href="<?= getUrlByName('web.website', ['slug' => $link['link_url_domain']]); ?>">
+              <a class="pt0 pr5 dark-white size-21" href="<?= getUrlByName('web.website', ['slug' => $link['link_url_domain']]); ?>">
                 <h2 class="font-normal inline underline-hover size-21 mt0 mb0">
                   <?= $link['link_title']; ?>
                 </h2>

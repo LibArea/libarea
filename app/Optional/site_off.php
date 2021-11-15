@@ -8,7 +8,7 @@
 </head>
 
 <body class="bg-gray-000 pb20 mb20">
-  <div class="wrap max-w-460 items-center mt20 pt20 mb20 pb20">
+  <div class="max-width mr-auto w-100 max-w-460 items-center mt20 pt20 mb20 pb20">
     <div class="left mr20">
       <h1 class="size-31 font-semibold gray mb0">Opss</h1>
       <p class="gray-light"><?= Translate::get('site under reconstruction'); ?>...</p>
@@ -18,7 +18,7 @@
     </div>
   </div>
   <div class="block mt20 pt20 mb20 pb20"></div>
-  <div class="wrap max-w-460 items-center mt20 pt20 mb20 pb20">
+  <div class="max-width mr-auto w-100 max-w-460 items-center mt20 pt20 mb20 pb20">
     <form class="" action="/login" method="post">
       <?php csrf_field(); ?>
       <div class="mb20">

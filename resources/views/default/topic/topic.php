@@ -1,5 +1,5 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/_block/menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+  <?= includeTemplate('/_block/menu/menu-user', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <?php $topic = $data['topic']; ?>
 <main class="col-span-7 mb-col-12">
@@ -107,7 +107,7 @@
       </div>
     </div>
   </div>
-  <?= includeTemplate('/_block/topic-sidebar', ['data' => $data, 'uid' => $uid]); ?>
+  <?= includeTemplate('/_block/sidebar/sidebar-topic', ['data' => $data, 'uid' => $uid]); ?>
   <?php if (!empty($data['writers'])) { ?>
     <div class="sticky top0 top80">
       <div class="br-box-gray mt15 p15 mb15 br-rd5 bg-white size-14">

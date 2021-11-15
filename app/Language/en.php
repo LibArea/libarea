@@ -59,6 +59,7 @@ $data = [
     'sign in'           => 'Sign in',
     'sign out'          => 'Sign out',
     'sign up'           => 'Sign up',
+    'advertising'       => 'Advertising',
     'private messages'  => 'Private messages',
     'it was read'       => 'It was read',
     'all messages'      => 'All messages',
@@ -243,9 +244,8 @@ $data = [
     'info-desc'             => 'Information, help. Rules, privacy policy, site archive and technology.',
     'no-invate-txt'         => 'Not a user yet? Registration is by invitation only to combat spam and increase accountability. If you know the <a href="/users">current user</a> of the site, ask him for an invitation.',
 
-    /* Дата и время + события*/
+    /* Date and time + Events */
     'months'        => ['','January','February','Martha','April','May','June','July','August','September','October','November','December'],
-    
     'today'         => 'Today',
     'yesterday'     => 'Yesterday',
 

@@ -12,4 +12,4 @@
     </form>
   </div>
 </main>
-<?= includeTemplate('/_block/aside-lang', ['lang' => Translate::get('under development')]); ?>
+<?= includeTemplate('/_block/sidebar/sidebar-lang', ['lang' => Translate::get('under development')]); ?>

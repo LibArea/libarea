@@ -1,7 +1,8 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/admin/admin-menu', ['uid' => $uid, 'sheet' => $data['sheet']]); ?>
+  <?= includeTemplate('/_block/menu/menu-admin', ['uid' => $uid, 'sheet' => $data['sheet']]); ?>
 </div>
 <main class="col-span-10 mb-col-12">
+
   <?= breadcrumb(
     getUrlByName('admin'),
     Translate::get('admin'),
@@ -9,6 +10,7 @@
     null,
     Translate::get('admin')
   ); ?>
+
   <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
   </div>
@@ -60,18 +62,18 @@
       </div>
     <?php } ?>
   </div>
-  
- <?php if ($data['posts_no_topic']) { ?>
- <div class="white-box mt10 pt5 pr15 pb5 pl15">
-    <h4 class="mt5 mb5"><?= Translate::get('posts'); ?> (no-topic)</h4>
-    <?php foreach ($data['posts_no_topic'] as $post) { ?>
-      <div class="gray size-15">
-        <a href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
-          <?= $post['post_title']; ?> 
-        </a>
-      </div>
-    <?php } ?>
-  </div>
+
+  <?php if ($data['posts_no_topic']) { ?>
+    <div class="white-box mt10 pt5 pr15 pb5 pl15">
+      <h4 class="mt5 mb5"><?= Translate::get('posts'); ?> (no-topic)</h4>
+      <?php foreach ($data['posts_no_topic'] as $post) { ?>
+        <div class="gray size-15">
+          <a href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
+            <?= $post['post_title']; ?>
+          </a>
+        </div>
+      <?php } ?>
+    </div>
   <?php } ?>
 
   <div class="white-box mt10 pt5 pr15 pb5 pl15">

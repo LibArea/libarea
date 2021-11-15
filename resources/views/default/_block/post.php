@@ -13,7 +13,7 @@
         </div>
       <?php } ?>
       <div class="flex mb15">
-        <a class="flex black flex-center" href="<?= getUrlByName('user', ['login' => $post['user_login']]); ?>">
+        <a class="flex black dark-white flex-center" href="<?= getUrlByName('user', ['login' => $post['user_login']]); ?>">
           <?= user_avatar_img($post['user_avatar'], 'max', $post['user_login'], 'w44 h44 br-rd-50 mr5'); ?>
           <div class="ml5">
             <?= $post['user_login']; ?>
@@ -25,7 +25,7 @@
       </div>
       <div class="flex flex-row flex-auto">
         <div class="w-auto pc-mr-20">
-          <a class="black" href="<?= $post_url; ?>">
+          <a class="black dark-white" href="<?= $post_url; ?>">
             <h2 class="font-normal size-24 mt0 mb0"><?= $post['post_title']; ?>
               <?php if ($post['post_is_deleted'] == 1) { ?>
                 <i class="bi bi-trash red"></i>

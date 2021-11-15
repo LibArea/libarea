@@ -1,7 +1,8 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/admin/admin-menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+  <?= includeTemplate('/_block/menu/menu-admin', ['sheet' => $data['sheet']]); ?>
 </div>
 <main class="col-span-10 mb-col-12">
+
   <?= breadcrumb(
     getUrlByName('admin'),
     Translate::get('admin'),
@@ -9,6 +10,7 @@
     null,
     Translate::get('posts')
   ); ?>
+
   <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
     <ul class="flex flex-row list-none m0 p0 center size-15">
@@ -35,7 +37,7 @@
     </ul>
   </div>
 
-  <div class="bg-white br-box-gray pt5 pr15 pb5 pl15">
+  <div class="bg-white br-box-gray p15">
     <?php if (!empty($data['posts'])) { ?>
       <?php foreach ($data['posts'] as $post) { ?>
         <a href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
@@ -63,7 +65,7 @@
               <span class="s_<?= $post['post_id']; ?> show_detail"></span>
             </div>
           </div>
-          <div class="border-bottom mb15 mt5 pb5 size-13 hidden gray">
+          <div class="br-bottom mb15 mt5 pb5 size-13 hidden gray">
             + <?= $post['post_votes']; ?>
             <span id="cm_dell" class="right comment_link">
               <a data-type="post" data-id="<?= $post['post_id']; ?>" class="type-action">

@@ -1,5 +1,6 @@
 <main class="col-span-9 mb-col-12">
   <div class="bg-white pt5 pr15 pb5 pl15">
+  
     <?= breadcrumb(
       '/',
       Translate::get('home'),
@@ -7,12 +8,13 @@
       Translate::get('profile'),
       Translate::get('drafts')
     ); ?>
+    
   </div>
   <?php if (!empty($data['drafts'])) { ?>
     <?php foreach ($data['drafts'] as $draft) { ?>
       <div class="bg-white br-rd5 br-box-gray pt5 pb5 pl15">
         <a href="<?= getUrlByName('post', ['id' => $draft['post_id'], 'slug' => $draft['post_slug']]); ?>">
-          <h3 class="title m0 size-21"><?= $draft['post_title']; ?></h3>
+          <h3 class="m0 size-21"><?= $draft['post_title']; ?></h3>
         </a>
         <div class="mr5 size-14 gray-light lowercase">
           <?= $draft['post_date']; ?> |
@@ -24,4 +26,4 @@
     <?= no_content(Translate::get('there no drafts'), 'bi bi-info-lg'); ?>
   <?php } ?>
 </main>
-<?= includeTemplate('/_block/aside-lang', ['lang' => Translate::get('under development')]); ?>
+<?= includeTemplate('/_block/sidebar/sidebar-lang', ['lang' => Translate::get('under development')]); ?>

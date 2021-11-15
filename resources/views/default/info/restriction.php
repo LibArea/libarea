@@ -9,6 +9,6 @@
   ); ?>
 
   <h1 class="mt0 mb10 size-24 font-normal"><?= Translate::get('access restricted'); ?></h1>
-  <p><i><?= Translate::get('the profile is being checked'); ?>...</i></p>
+  <div class="italic"><?= Translate::get('the profile is being checked'); ?>...</div>
 </main>
 <?= includeTemplate('/_block/wide-footer'); ?>

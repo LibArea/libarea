@@ -1,5 +1,5 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/_block/menu', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+  <?= includeTemplate('/_block/menu/menu-user', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-7 mb-col-12 bg-white pt5 pr15 pb5 pl15">
  
@@ -18,7 +18,7 @@
   <?php if (!empty($data['notifications'])) { ?>
     <?php foreach ($data['notifications'] as  $notif) { ?>
 
-      <div class="border-bottom p5<?php if ($notif['notification_read_flag'] == 0) { ?> bg-gray-200<?php } ?>">
+      <div class="br-bottom p5<?php if ($notif['notification_read_flag'] == 0) { ?> bg-gray-200<?php } ?>">
         <?php if ($notif['notification_action_type'] == 1) { ?>
           <i class="bi bi-envelope middle"></i>
           <a class="gray ml5" href="<?= getUrlByName('user', ['login' => $notif['user_login']]); ?>">
@@ -99,4 +99,4 @@
     <?= no_content(Translate::get('no notifications yet'), 'bi bi-info-lg'); ?>
   <?php } ?>
 </main>
-<?= includeTemplate('/_block/aside-lang', ['lang' => Translate::get('info-notifications')]); ?>
+<?= includeTemplate('/_block/sidebar/sidebar-lang', ['lang' => Translate::get('info-notifications')]); ?>
