@@ -1,5 +1,5 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/_block/menu/menu-user', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+  <?= includeTemplate('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-7 mb-col-12">
 
@@ -12,35 +12,40 @@
     <form action="<?= getUrlByName('setting.security.edit'); ?>" method="post" enctype="multipart/form-data">
       <?php csrf_field(); ?>
 
-      <?= includeTemplate('/_block/form/field-input', ['data' => [
+      <?= includeTemplate(
+        '/_block/form/field-input',
         [
-          'title' => Translate::get('old'),
-          'type' => 'text',
-          'name' => 'password',
-          'value' => ''
-        ],
-        [
-          'title' => Translate::get('new'),
-          'type' => 'password',
-          'name' => 'password2',
-          'value' => '',
-          'min' => 6,
-          'max' => 32,
-          'help' => '6 - 32 ' . Translate::get('characters')
-        ],
-        [
-          'title' => Translate::get('repeat'),
-          'type' => 'password',
-          'name' => 'password3',
-          'value' => ''
-        ],
-      ]]); ?>
+          'data' => [
+            [
+              'title' => Translate::get('old'),
+              'type' => 'text',
+              'name' => 'password',
+              'value' => ''
+            ],
+            [
+              'title' => Translate::get('new'),
+              'type' => 'password',
+              'name' => 'password2',
+              'value' => '',
+              'min' => 6,
+              'max' => 32,
+              'help' => '6 - 32 ' . Translate::get('characters')
+            ],
+            [
+              'title' => Translate::get('repeat'),
+              'type' => 'password',
+              'name' => 'password3',
+              'value' => ''
+            ],
+          ]
+        ]
+      ); ?>
 
       <div class="mb20">
         <input type="hidden" name="nickname" id="nickname" value="">
         <?= sumbit(Translate::get('edit')); ?>
       </div>
     </form>
-  </div>  
+  </div>
 </main>
-<?= includeTemplate('/_block/sidebar/sidebar-lang', ['lang' => Translate::get('info-security')]); ?>
+<?= includeTemplate('/_block/sidebar/lang', ['lang' => Translate::get('info-security')]); ?>

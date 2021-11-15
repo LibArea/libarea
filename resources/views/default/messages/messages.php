@@ -47,4 +47,4 @@
   <?= no_content(Translate::get('no dialogs'), 'bi bi-info-lg'); ?>
 <?php } ?>
 </main>
-<?= includeTemplate('/_block/sidebar/sidebar-lang', ['lang' => Translate::get('personal-messages-site')]); ?>
+<?= includeTemplate('/_block/sidebar/lang', ['lang' => Translate::get('personal-messages-site')]); ?>

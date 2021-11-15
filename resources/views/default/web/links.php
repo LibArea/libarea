@@ -27,7 +27,7 @@
       <?php foreach ($data['links'] as $key => $link) { ?>
         <?php if ($link['link_published'] == 1) { ?>
           <div class="pt20 pb5 flex flex-row gap-2">
-            <div class="w200 no-mob">
+            <div class="mr20 w200 no-mob">
               <?= thumbs_img($link['link_url_domain'], $link['link_title'], 'mr5 mt5 w200 box-shadow'); ?>
             </div>
             <div class="w-100">

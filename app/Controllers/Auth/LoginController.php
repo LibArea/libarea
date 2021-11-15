@@ -70,10 +70,10 @@ class LoginController extends MainController
         return view(
             '/auth/login',
             [
-                'meta'  => meta($m, Translate::get('sign up'), Translate::get('info-login')),
+                'meta'  => meta($m, Translate::get('sign in'), Translate::get('info-login')),
                 'uid'   => Base::getUid(),
                 'data'  => [
-                    'sheet' => 'sign up',
+                    'sheet' => 'sign in',
                 ]
             ]
         );

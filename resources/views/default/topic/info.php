@@ -1,5 +1,5 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/_block/menu/menu-user', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+  <?= includeTemplate('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <?php $topic = $data['topic']; ?>
 <main class="col-span-7 mb-col-12">
@@ -38,6 +38,6 @@
     </div>
   </div>
 
-  <?= includeTemplate('/_block/sidebar/sidebar-topic', ['data' => $data, 'uid' => $uid]); ?>
+  <?= includeTemplate('/_block/sidebar/topic', ['data' => $data, 'uid' => $uid]); ?>
 </aside>
 <?= includeTemplate('/_block/wide-footer'); ?>

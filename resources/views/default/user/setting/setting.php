@@ -1,5 +1,5 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/_block/menu/menu-user', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+  <?= includeTemplate('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-7 mb-col-12">
 
@@ -26,20 +26,23 @@
         <span class="mr5 ml5"><?= $data['user']['user_email']; ?></span>
       </div>
 
-      <?= includeTemplate('/_block/form/field-input', [
-        'data' => [
-          [
-            'title' => Translate::get('name'),
-            'type' => 'text',
-            'name' => 'name',
-            'value' => $data['user']['user_name'],
-            'min' => 3,
-            'max' => 11,
-            'help' => '3 - 11 ' . Translate::get('characters'),
-            'red' => 'red'
-          ],
+      <?= includeTemplate(
+        '/_block/form/field-input',
+        [
+          'data' => [
+            [
+              'title' => Translate::get('name'),
+              'type' => 'text',
+              'name' => 'name',
+              'value' => $data['user']['user_name'],
+              'min' => 3,
+              'max' => 11,
+              'help' => '3 - 11 ' . Translate::get('characters'),
+              'red' => 'red'
+            ],
+          ]
         ]
-      ]); ?>
+      ); ?>
 
       <?php includeTemplate('/_block/editor/textarea', [
         'title' => Translate::get('about me'),
@@ -61,16 +64,16 @@
         ['title' => Translate::get('design choice'), 'name' => 'user_template', 'checked' => $data['user']['user_template']],
       ]]); ?-->
 
-        <div class="mb20 max-w640">
-          <label class="block mb5" for="post_content"><?= Translate::get('language'); ?></label>
-          <select class="w-100 h30" name="user_lang">  
-            <?php foreach (Config::get('general.languages') as $lang) {  ?>
-              <option <?php if ($data['user']['user_lang'] == $lang) { ?>selected<?php } ?> value="<?= $lang; ?>">
-                <?= Translate::get($lang . '-language'); ?>
-              </option>
-            <?php } ?>
-          </select>
-        </div>
+      <div class="mb20 max-w640">
+        <label class="block mb5" for="post_content"><?= Translate::get('language'); ?></label>
+        <select class="w-100 h30" name="user_lang">
+          <?php foreach (Config::get('general.languages') as $lang) {  ?>
+            <option <?php if ($data['user']['user_lang'] == $lang) { ?>selected<?php } ?> value="<?= $lang; ?>">
+              <?= Translate::get($lang . '-language'); ?>
+            </option>
+          <?php } ?>
+        </select>
+      </div>
 
       <h3><?= Translate::get('contacts'); ?></h3>
       <?php foreach (Config::get('fields-profile') as $block) { ?>
@@ -90,4 +93,4 @@
     </form>
   </div>
 </main>
-<?= includeTemplate('/_block/sidebar/sidebar-lang', ['lang' => Translate::get('info-setting')]); ?>
+<?= includeTemplate('/_block/sidebar/lang', ['lang' => Translate::get('info-setting')]); ?>

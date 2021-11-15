@@ -8,7 +8,7 @@
 <?php } ?>
 
 <div class="sticky top0 col-span-2 justify-between no-mob">
-  <?= includeTemplate('/_block/menu/menu-user', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+  <?= includeTemplate('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 
 <main class="col-span-7 mb-col-12">
@@ -130,6 +130,6 @@
       </div>
     <?php } ?>
 
-    <?= includeTemplate('/_block/sidebar/sidebar-footer'); ?>
+    <?= includeTemplate('/_block/sidebar/footer'); ?>
   </div>
 </aside>

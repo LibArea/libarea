@@ -26,4 +26,4 @@
     <?= no_content(Translate::get('there no drafts'), 'bi bi-info-lg'); ?>
   <?php } ?>
 </main>
-<?= includeTemplate('/_block/sidebar/sidebar-lang', ['lang' => Translate::get('under development')]); ?>
+<?= includeTemplate('/_block/sidebar/lang', ['lang' => Translate::get('under development')]); ?>

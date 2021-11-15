@@ -1,5 +1,5 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/_block/menu/menu-user', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+  <?= includeTemplate('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-7 mb-col-12 bg-white br-rd5 br-box-gray pt5 mt15 pr15 pb5 pl15">
   <h1 class="mt0 mb10 size-24 font-normal"><?= Translate::get('moderation log'); ?></h1>
@@ -40,4 +40,4 @@
     <?php } ?>
     </div>
 </main>
-<?= includeTemplate('/_block/sidebar/sidebar-lang', ['lang' => Translate::get('meta-moderation')]); ?>
+<?= includeTemplate('/_block/sidebar/lang', ['lang' => Translate::get('meta-moderation')]); ?>

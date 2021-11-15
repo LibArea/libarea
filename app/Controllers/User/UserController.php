@@ -158,7 +158,7 @@ class UserController extends MainController
         }
 
         return view(
-            '/user/draft-post',
+            '/user/draft',
             [
                 'meta'  => meta($m = [], Translate::get('drafts')),
                 'uid'   => $uid,

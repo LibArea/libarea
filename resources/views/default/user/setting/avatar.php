@@ -1,5 +1,5 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/_block/menu/menu-user', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+  <?= includeTemplate('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-7 mb-col-12">
 
@@ -43,6 +43,6 @@
         <?= sumbit(Translate::get('download')); ?>
       </div>
     </form>
-  </div>  
+  </div>
 </main>
-<?= includeTemplate('/_block/sidebar/sidebar-lang', ['lang' => Translate::get('info-avatar')]); ?>
+<?= includeTemplate('/_block/sidebar/lang', ['lang' => Translate::get('info-avatar')]); ?>

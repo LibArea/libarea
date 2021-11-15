@@ -1,5 +1,5 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/_block/menu/menu-user', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+  <?= includeTemplate('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-7 mb-col-12">
   <div class="bg-white br-rd5 br-box-gray pt5 pr15 pb5 pl15">
@@ -41,4 +41,4 @@
     <?= no_content(Translate::get('there are no comments'), 'bi bi-info-lg'); ?>
   <?php } ?>
 </main>
-<?= includeTemplate('/_block/sidebar/sidebar-lang', ['lang' => Translate::get('answers-desc')]); ?>
+<?= includeTemplate('/_block/sidebar/lang', ['lang' => Translate::get('answers-desc')]); ?>
