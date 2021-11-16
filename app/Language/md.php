@@ -45,6 +45,8 @@ $data = [
     'all domains'       => 'Toate domeniile',
     'posted'            => 'Posted',
     'posted-help'       => 'Materialul postat este vizibil pentru participanți',
+    'space'             => 'Spațiu',
+    'spaces'            => 'Spații',
     'topics'            => 'Subiecte',
     'topic'             => 'Subiect',
     'topics no'         => 'Subiecte nu sunt',
@@ -247,6 +249,7 @@ $data = [
     'num-post'      => ['Postează', 'Postări', 'Postări'],
     'num-view'      => ['Vizualizare', 'Vizualizare', 'Vizualizări'],
     'num-website'   => ['Site web', 'Site-uri', 'Site-uri'],
+    'num-space'     => ['Spațiu', 'Spații', 'Spații'],
 
     'comment'       => 'Comentariu',
     'comments'      => 'Comentarii',

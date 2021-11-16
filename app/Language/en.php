@@ -50,6 +50,8 @@ $data = [
     'posted'            => 'Posted',
     'posted-help'       => 'The posted material is visible to the participants',
     'all domains'       => 'All domains',
+    'space'             => 'Space',
+    'spaces'            => 'Spaces',
     'topics'            => 'Topics',
     'topic'             => 'Topic',
     'topics no'         => 'Topics no',
@@ -255,6 +257,7 @@ $data = [
     'num-post'      => ['Post', 'Post', 'Posts'],
     'num-view'      => ['View', 'View', 'Views'],
     'num-website'   => ['Website', 'Sites', 'Sites'],
+    'num-space'     => ['Space', 'Spaces', 'Spaces'],
 
     'comment'       => 'Comment',
     'comments'      => 'Comments',

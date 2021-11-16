@@ -129,7 +129,7 @@ class UsersController extends MainController
         
         $redirect = getUrlByName('admin.user.edit', ['id' => $user_id]);
         Validation::Limits($login, Translate::get('login'), '3', '11', $redirect);
-        Validation::Limits($name, Translate::get('name'), '3', '11', $redirect);
+        Validation::Limits($user_name, Translate::get('name'), '3', '11', $redirect);
 
         $data = [
             'user_id'            => $user_id,

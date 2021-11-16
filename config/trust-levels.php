@@ -5,11 +5,19 @@
  */
 
 return [
-    // Ограничение для TL
     // С какого уровня TL возможно создавать темы
     // Установите на 4, если вы хотите запретить участникам создавать их
+    // From what level of TL it is possible to create Topics
+    // Set to 4 if you want to prevent members from creating them 
     'tl_add_topic'      => 4,
     'count_add_topic'   => 3,
+
+    // С какого уровня TL возможно создавать пространства
+    // Установите на 4, если вы хотите запретить участникам создавать их
+    // From what level of TL is it possible to create Spaces
+    // Set to 4 if you want to prevent members from creating them 
+    'tl_add_space'      => 1,
+    'count_add_space'   => 1,
 
     // С какого уровня TL возможна отправка личных сообщений
     'tl_add_pm'         => 1,
