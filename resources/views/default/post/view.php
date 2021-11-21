@@ -264,9 +264,7 @@
   </div>
   <?php if ($post['post_content_img']) { ?>
     <div class="br-box-gray bg-white br-rd5 mb15">
-      <div id="layer-photos" class="layer-photos p15">
-        <?= post_img($post['post_content_img'], $post['post_title'], 'w-100 br-rd5', 'cover', $post['post_content_img']); ?>
-      </div>
+      <?= post_img($post['post_content_img'], $post['post_title'], 'w-100 p15 post-img br-rd5', 'cover', $post['post_content_img']); ?>
     </div>
   <?php } ?>
   <div class="br-box-gray bg-white br-rd5 mb15 p15">
@@ -300,31 +298,41 @@
 </aside>
 <script nonce="<?= $_SERVER['nonce']; ?>">
   $(document).ready(function() {
-    layer.photos({
-      photos: '#layer-photos',
-      anim: 4
+    $('.post-img').on('click', function(e) {
+      let src = $(this).attr('src');
+      if (src) {
+        let img = '<img src="' + src + '">';
+        Swal.fire({
+          width: '100%',
+          showConfirmButton: false,
+          title: img
+        })
+      }
     });
     $(document).on('click', '.msg-flag', function() {
       let post_id = $(this).data('post_id');
       let content_id = $(this).data('content_id');
       let type = $(this).data('type');
-      layer.confirm('<?= Translate::get('does this violate site rules'); ?>?', {
-        icon: 5,
+      Swal.fire({
         title: '<?= Translate::get('report'); ?>',
-        btn: ['<?= Translate::get('yes'); ?>', '<?= Translate::get('No'); ?>']
-      }, function(index) {
-        $.post('/flag/repost', {
-          type,
-          post_id,
-          content_id
-        }, function(str) {
-          if (str == 1) {
-            layer.msg('<?= Translate::get('flag not included'); ?>!');
-            return false;
-          }
-          layer.msg('<?= Translate::get('thanks'); ?>!');
-        });
-      });
+        html: '<?= Translate::get('does this violate site rules'); ?>?',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: '<?= Translate::get('yes'); ?>',
+        cancelButtonText: '<?= Translate::get('no'); ?>',
+        showCancelButton: true,
+        showLoaderOnConfirm: true,
+        preConfirm: () => {
+          $.ajax({
+            url: '/flag/repost',
+            method: 'POST',
+            data: {
+              type: type,
+              post_id: post_id,
+              content_id: content_id
+            },
+          })
+        }
+      })
     });
   });
 </script>

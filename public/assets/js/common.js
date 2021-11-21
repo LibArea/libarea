@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   var upDownBtn = document.querySelector('.up_down_btn');
@@ -59,25 +59,25 @@
 
 let lateral = document.querySelector('.lateral');
 if (lateral) {
-    let menu = document.querySelector('.ltr-menu');
-    const toggleMenu = () => {
-      menu.classList.toggle('block');
-    };
-    lateral.addEventListener('click', e => {
-      e.stopPropagation();
-      toggleMenu();
-    });
-    document.addEventListener('click', e => {
-      let target = e.target;
-      let its_menu = target == menu || menu.contains(target);
-      let its_hamburger = target == lateral;
-      let menu_is_active = menu.classList.contains('block');
+  let menu = document.querySelector('.ltr-menu');
+  const toggleMenu = () => {
+    menu.classList.toggle('block');
+  };
+  lateral.addEventListener('click', e => {
+    e.stopPropagation();
+    toggleMenu();
+  });
+  document.addEventListener('click', e => {
+    let target = e.target;
+    let its_menu = target == menu || menu.contains(target);
+    let its_hamburger = target == lateral;
+    let menu_is_active = menu.classList.contains('block');
 
-      if (!its_menu && !its_hamburger && menu_is_active) {
-        toggleMenu();
-      }
-    });
-  }
+    if (!its_menu && !its_hamburger && menu_is_active) {
+      toggleMenu();
+    }
+  });
+}
 
 // Call the form for adding a comment
 document.querySelectorAll(".add-comment")
@@ -226,15 +226,11 @@ $(document).ready(function () {
     let src = $(this).attr('src');
     if (src) {
       let img = '<img src="' + src + '">';
-      layer.open({
-        type: 1,
-        title: false,
-        closeBtn: 0,
-        area: ['auto'],
-        skin: 'layui-layer-nobg',
-        shadeClose: true,
-        content: img
-      });
+      Swal.fire({
+        width: '100%',
+        showConfirmButton: false,
+        title: img
+      })
     }
   });
 });

@@ -117,14 +117,16 @@ Route::endGroup();
 Route::getType('post');
     // Viewing a post in the feed
     Route::get('/post/shown')->controller('Post\PostController@shownPost');
+    Route::get('/msg/go')->controller('Post\AddPostController@msg');
     // Calling the Comment form
     Route::get('/comments/addform')->controller('Comment\AddCommentController');
-    Route::get('/topic/{slug}/followers')->controller('Facets\TopicFacetController@followers')->where(['slug' => '[a-z0-9-]+'])->name('topic.followers');
 Route::endType();
-
+  
+Route::get('/topic/{slug}/followers/{id}')->controller('Facets\TopicFacetController@followers')->where(['slug' => '[a-z0-9-]+', 'id' => '[0-9]+'])->name('topic.followers');  
+  
 // Other pages without authorization
-Route::get('/post/{id}')->controller('Post\PostController')->where(['id' => '[0-9-]+']);
-Route::get('/post/{id}/{slug}')->controller('Post\PostController')->where(['id' => '[0-9-]+', 'slug' => '[A-Za-z0-9-_]+'])->name('post');
+Route::get('/post/{id}')->controller('Post\PostController')->where(['id' => '[0-9]+']);
+Route::get('/post/{id}/{slug}')->controller('Post\PostController')->where(['id' => '[0-9]+', 'slug' => '[A-Za-z0-9-_]+'])->name('post');
 
 Route::get('/info')->controller('InfoController')->name('info');
 Route::get('/info/privacy')->controller('InfoController@privacy')->name('info.privacy');

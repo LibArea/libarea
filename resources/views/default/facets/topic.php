@@ -102,23 +102,14 @@
 <?= includeTemplate('/_block/wide-footer'); ?>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
-  $(function() {
-    $(document).on("click", ".focus-user", function() {
-      $.post("/topic/<?= $topic['facet_slug']; ?>/followers", {
-        topic_id: "<?= $topic['facet_id']; ?>"
-      }, function(data) {
-        if (data) {
-          var html = data;
-          layer.open({
-            type: 1,
-            title: "<?= Translate::get('reads'); ?>",
-            area: ['400px', '80%'],
-            shade: 0,
-            maxmin: true,
-            offset: 'auto',
-            content: html
-          });
-        }
+  $(document).on("click", ".focus-user", function() {
+    fetch('/topic/<?= $topic['facet_slug']; ?>/followers/<?= $topic['facet_id']; ?>').
+    then(response => response.text()).
+    then(function(data) {
+      Swal.fire({
+        title: '<?= Translate::get('reads'); ?>',
+        showConfirmButton: false,
+        html: data
       });
     });
   });

@@ -128,7 +128,8 @@ class TopicFacetController extends MainController
     // Подписаны (25)
     public function followers()
     {
-        $topic_id   = Request::getPostInt('topic_id');
+        $topic_id   = Request::getInt('id');
+   
         $users      = FacetModel::getFocusUsers($topic_id, 25);
 
         return includeTemplate('/facets/followers', ['users' => $users]);

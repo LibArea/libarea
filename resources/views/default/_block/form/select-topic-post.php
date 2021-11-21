@@ -9,7 +9,7 @@
       <?php } ?>
     </select>
   <?php } else { ?>
-    <select name="topic_select[]" value="" multiple="multiple" id='topic'></select>
+    <select name="topic_select[]" value="" multiple="multiple" id='topic' required></select>
   <?php } ?>
 </div>
 <script nonce="<?= $_SERVER['nonce']; ?>">
