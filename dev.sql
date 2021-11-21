@@ -7,7 +7,7 @@ CREATE TABLE `answers` (
   `answer_post_id` int(11) NOT NULL DEFAULT 0,
   `answer_user_id` int(11) NOT NULL DEFAULT 0,
   `answer_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `answer_modified` timestamp NOT NULL DEFAULT '2020-12-30 12:00:00',
+  `answer_modified` timestamp NOT NULL DEFAULT '2020-12-30 09:00:00',
   `answer_published` tinyint(1) NOT NULL DEFAULT 1,
   `answer_ip` varbinary(16) DEFAULT NULL,
   `answer_order` smallint(6) NOT NULL DEFAULT 0,
@@ -23,8 +23,8 @@ CREATE TABLE `answers` (
 --
 
 INSERT INTO `answers` (`answer_id`, `answer_post_id`, `answer_user_id`, `answer_date`, `answer_modified`, `answer_published`, `answer_ip`, `answer_order`, `answer_after`, `answer_votes`, `answer_content`, `answer_lo`, `answer_is_deleted`) VALUES
-(1, 3, 1, '2021-04-29 07:41:27', '2020-12-30 12:00:00', 1, 0x3132372e302e302e31, 0, 0, 0, 'Первый ответ в теме', 0, 0),
-(2, 1, 2, '2021-07-01 10:34:52', '2021-08-16 01:50:53', 1, 0x3132372e302e302e31, 0, 0, 0, 'Интересно, спасибо. Вы забыли указать, что можно задавать вопросы в чате (ссылка в footer) этого сайта.', 0, 0);
+(1, 3, 1, '2021-04-29 04:41:27', '2020-12-30 09:00:00', 1, 0x3132372e302e302e31, 0, 0, 0, 'Первый ответ в теме', 0, 0),
+(2, 1, 2, '2021-07-01 07:34:52', '2021-08-15 22:50:53', 1, 0x3132372e302e302e31, 0, 0, 0, 'Интересно, спасибо. Вы забыли указать, что можно задавать вопросы в чате (ссылка в footer) этого сайта.', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -88,7 +88,7 @@ CREATE TABLE `comments` (
   `comment_comment_id` int(11) NOT NULL DEFAULT 0,
   `comment_user_id` int(11) NOT NULL DEFAULT 0,
   `comment_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `comment_modified` timestamp NOT NULL DEFAULT '2020-12-30 12:00:00',
+  `comment_modified` timestamp NOT NULL DEFAULT '2020-12-30 09:00:00',
   `comment_published` tinyint(1) NOT NULL DEFAULT 1,
   `comment_ip` varbinary(16) DEFAULT NULL,
   `comment_after` smallint(6) NOT NULL DEFAULT 0,
@@ -96,6 +96,137 @@ CREATE TABLE `comments` (
   `comment_content` text NOT NULL,
   `comment_is_deleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `facets`
+--
+
+CREATE TABLE `facets` (
+  `facet_id` int(11) NOT NULL,
+  `facet_title` varchar(64) DEFAULT NULL,
+  `facet_description` varchar(255) DEFAULT NULL,
+  `facet_short_description` varchar(160) DEFAULT NULL,
+  `facet_info` text DEFAULT NULL,
+  `facet_slug` varchar(32) DEFAULT NULL,
+  `facet_img` varchar(255) DEFAULT 'facet-default.png',
+  `facet_cover_art` varchar(255) DEFAULT 'cover_art.jpeg',
+  `facet_add_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `facet_seo_title` varchar(255) DEFAULT NULL,
+  `facet_merged_id` int(11) DEFAULT 0 COMMENT 'с кем слита',
+  `facet_top_level` tinyint(1) NOT NULL DEFAULT 0,
+  `facet_user_id` int(11) NOT NULL DEFAULT 1,
+  `facet_tl` tinyint(1) DEFAULT 0,
+  `facet_related` varchar(255) DEFAULT NULL,
+  `facet_post_related` varchar(255) DEFAULT NULL,
+  `facet_the_day` tinyint(1) NOT NULL DEFAULT 0,
+  `facet_focus_count` int(11) DEFAULT 0,
+  `facet_count` int(11) DEFAULT 0,
+  `facet_sort` int(11) NOT NULL DEFAULT 0,
+  `facet_type` varchar(32) NOT NULL DEFAULT 'topic' COMMENT 'Topic or Blog...',
+  `facet_is_web` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Show or not in the site catalog',
+  `facet_is_deleted` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Дамп данных таблицы `facets`
+--
+
+INSERT INTO `facets` (`facet_id`, `facet_title`, `facet_description`, `facet_short_description`, `facet_info`, `facet_slug`, `facet_img`, `facet_cover_art`, `facet_add_date`, `facet_seo_title`, `facet_merged_id`, `facet_top_level`, `facet_user_id`, `facet_tl`, `facet_related`, `facet_post_related`, `facet_the_day`, `facet_focus_count`, `facet_count`, `facet_sort`, `facet_type`, `facet_is_web`, `facet_is_deleted`) VALUES
+(1, 'SEO', 'Поисковая оптимизация — это комплекс мер по внутренней и внешней оптимизации для поднятия позиций сайта в результатах выдачи поисковых систем.', 'Краткое описание темы...', 'Комплекс мер по внутренней и внешней оптимизации для поднятия позиций сайта в результатах выдачи поисковых систем по определённым запросам пользователей.\r\n\r\n**Поисковая оптимизация** — это способ использования правил поиска поисковых систем для улучшения текущего естественного ранжирования веб-сайтов в соответствующих поисковых системах. \r\n\r\nЦелью SEO является предоставление экологического решения для саморекламы для веб-сайта, позволяющего веб-сайту занимать лидирующие позиции в отрасли, чтобы получить преимущества бренда. \r\n\r\nSEO включает как внешнее, так и внутреннее SEO. \r\n\r\nSEO средства получить от поисковых систем больше бесплатного трафика, разумное планирование с точки зрения структуры веб-сайта, плана построения контента, взаимодействия с пользователем и общения, страниц и т.д., чтобы сделать веб-сайт более подходящим для принципов индексации поисковых систем. \r\n\r\nПовышение пригодности веб-сайтов для поисковых систем также называется Оптимизацией для поисковых систем, может не только улучшить эффект SEO, но и сделать информацию, относящуюся к веб-сайту, отображаемую в поисковой системе, более привлекательной для пользователей.', 'seo', 't-1-1625149922.jpeg', 'cover_art.jpeg', '2021-06-28 09:29:20', 'Поисковая оптимизация (SEO)', 0, 0, 1, 0, '0', '0', 0, 1, 1, 0, 'topic', 0, 0),
+(2, 'Интересные сайты', 'Интересные сайты в Интернете. Обзоры, интересные материалы, переводы. Статьи.', 'Краткое описание темы...', 'Интересные сайты в Интернете. Обзоры, интересные материалы, переводы. Статьи.\r\n\r\nПросто вводная страница... В разработке...', 'sites', 't-2-1625149821.jpeg', 'cover_art.jpeg', '2021-06-28 09:29:20', 'Интересные сайты', 0, 0, 1, 0, '1', '3', 0, 1, 1, 0, 'topic', 0, 0),
+(3, 'Веб-разработка', 'Веб-разработка — это работа, связанная с разработкой веб-сайта для Интернета (World Wide Web) или интрасети (частной сети).', 'Веб-разработка', 'Веб-разработка — это работа, связанная с разработкой веб-сайта для Интернета (World Wide Web) или интрасети (частной сети). Веб-разработка может варьироваться от разработки простой статической страницы с открытым текстом до сложных веб-приложений, электронного бизнеса и социальных сетей.', 'web-development', 'topic-default.png', 'cover_art.jpeg', '2021-11-05 11:04:41', 'Веб-разработка', 0, 0, 1, 0, '0', '0', 0, 0, 0, 0, 'topic', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `facets_links_relation`
+--
+
+CREATE TABLE `facets_links_relation` (
+  `relation_facet_id` int(11) DEFAULT 0,
+  `relation_link_id` int(11) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Дамп данных таблицы `facets_links_relation`
+--
+
+INSERT INTO `facets_links_relation` (`relation_facet_id`, `relation_link_id`) VALUES
+(3, 1),
+(2, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `facets_merge`
+--
+
+CREATE TABLE `facets_merge` (
+  `merge_id` int(11) NOT NULL,
+  `merge_add_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `merge_source_id` int(11) NOT NULL DEFAULT 0,
+  `merge_target_id` int(11) NOT NULL DEFAULT 0,
+  `merge_user_id` int(11) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `facets_posts_relation`
+--
+
+CREATE TABLE `facets_posts_relation` (
+  `relation_facet_id` int(11) DEFAULT 0,
+  `relation_post_id` int(11) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Дамп данных таблицы `facets_posts_relation`
+--
+
+INSERT INTO `facets_posts_relation` (`relation_facet_id`, `relation_post_id`) VALUES
+(1, 1),
+(2, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `facets_relation`
+--
+
+CREATE TABLE `facets_relation` (
+  `facet_parent_id` int(11) DEFAULT NULL,
+  `facet_chaid_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Дамп данных таблицы `facets_relation`
+--
+
+INSERT INTO `facets_relation` (`facet_parent_id`, `facet_chaid_id`) VALUES
+(3, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `facets_signed`
+--
+
+CREATE TABLE `facets_signed` (
+  `signed_id` int(11) NOT NULL,
+  `signed_facet_id` int(11) NOT NULL,
+  `signed_user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Дамп данных таблицы `facets_signed`
+--
+
+INSERT INTO `facets_signed` (`signed_id`, `signed_facet_id`, `signed_user_id`) VALUES
+(1, 1, 1),
+(2, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -293,9 +424,9 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`post_id`, `post_title`, `post_slug`, `post_type`, `post_translation`, `post_draft`, `post_date`, `post_modified`, `post_published`, `post_user_id`, `post_ip`, `post_after`, `post_votes`, `post_karma`, `post_answers_count`, `post_comments_count`, `post_hits_count`, `post_content`, `post_content_img`, `post_thumb_img`, `post_related`, `post_merged_id`, `post_is_recommend`, `post_closed`, `post_tl`, `post_lo`, `post_top`, `post_url`, `post_url_domain`, `post_focus_count`, `post_is_deleted`) VALUES
-(1, 'Ответы на некоторые вопросы (FAQ)', 'answer-qa', 0, 0, 0, '2021-02-27 15:08:09', '2021-10-27 03:26:06', 1, 1, 0x3132372e302e302e31, 0, 0, 0, 1, 0, 6, 'Превью поста на главной странице сайта формируется из первого абзаца текста. Мы забираем первый абзац и делаем превью. Сайт испольлзует MVC модель, если кто знаком с ней, то не особо трудно будет разобраться.\r\n\r\n### Где находятся конфиг сайта?\r\n\r\nЕсть 3 основополагающих файла конфигурации (There are 3 configuration files):\r\n\r\n* *dbase.config.php* — подключение к базе данных (connecting to the database)\r\n\r\n* *config.ini* — основные настройки (basic settings)\r\n\r\n* *start.hleb.php* — константы (constants)\r\n\r\n### Где находятся шаблоны сайта?\r\n\r\n```\r\n/resources/views/default\r\n```\r\n\r\n### Как мне изменить страницы с документацией?\r\n\r\nСлужебные страницы на этом сайте находятся: [/info](/info)\r\n\r\nА сам текст в Markdown разметке:\r\n\r\n```txt\r\n/resources/views/default/info/md/index.md\r\n```\r\n\r\n### Как мне поменять язык сайта?\r\n\r\nПо умолчанию на сайте используется русский язык.\r\n\r\nПереводы находится в папке:  `/app/Language/`\r\n\r\nВы можете переключать языки, в файле: `general.php` \r\n\r\nНайти:\r\n```php\r\n\'lang\' => \'ru\',\r\n```\r\n\r\n---\r\n\r\nBy default, the site uses Russian.\r\n\r\nThe translations are located in the folder: `general.php` find:\r\n\r\n```php\r\n\'lang\' => \'ru\',\r\n```\r\n\r\nThe transfers themselves are stored: `/app/Language/`', '', NULL, '2', 0, 0, 0, 0, 0, 0, NULL, NULL, 0, 0),
-(2, 'Где можно почитать документацию?', 'docs-post', 0, 0, 0, '2021-02-27 15:15:58', '2021-11-05 14:26:31', 1, 2, 0x3132372e302e302e31, 0, 1, 0, 0, 0, 7, 'Страница документации Agouti находится в стадии разработки... \r\n\r\n[https://agouti.info/](https://agouti.info/)\r\n\r\nКак она будет завершена, об этом будет сообщено дополнительно. Сам сайт создан на PHP Микрофреймворк HLEB. Все основные настройки,  можно найти на этом сайте:\r\n\r\n[https://phphleb.ru/ru/v1/](https://phphleb.ru/ru/v1/)\r\n\r\n', '', NULL, '1', 0, 0, 0, 0, 0, 0, NULL, NULL, 0, 0),
-(3, 'Medium — платформа для создания контента', 'medium-where-good-ideas-find-you', 0, 0, 0, '2021-04-29 07:35:13', '2021-04-29 07:35:13', 1, 1, 0x3132372e302e302e31, 0, 0, 0, 1, 0, 1, 'Medium — это платформа для создания контента, основанная соучредителем Blogger и Twitter Эван Уильямсом. Многие компании используют Medium в качестве платформы для публикации...', '2021/c-1624954734.webp', NULL, NULL, 0, 0, 0, 0, 0, 0, NULL, NULL, 0, 0);
+(1, 'Ответы на некоторые вопросы (FAQ)', 'answer-qa', 0, 0, 0, '2021-02-27 12:08:09', '2021-10-27 00:26:06', 1, 1, 0x3132372e302e302e31, 0, 0, 0, 1, 0, 6, 'Превью поста на главной странице сайта формируется из первого абзаца текста. Мы забираем первый абзац и делаем превью. Сайт испольлзует MVC модель, если кто знаком с ней, то не особо трудно будет разобраться.\r\n\r\n### Где находятся конфиг сайта?\r\n\r\nЕсть 3 основополагающих файла конфигурации (There are 3 configuration files):\r\n\r\n* *dbase.config.php* — подключение к базе данных (connecting to the database)\r\n\r\n* *config.ini* — основные настройки (basic settings)\r\n\r\n* *start.hleb.php* — константы (constants)\r\n\r\n### Где находятся шаблоны сайта?\r\n\r\n```\r\n/resources/views/default\r\n```\r\n\r\n### Как мне изменить страницы с документацией?\r\n\r\nСлужебные страницы на этом сайте находятся: [/info](/info)\r\n\r\nА сам текст в Markdown разметке:\r\n\r\n```txt\r\n/resources/views/default/info/md/index.md\r\n```\r\n\r\n### Как мне поменять язык сайта?\r\n\r\nПо умолчанию на сайте используется русский язык.\r\n\r\nПереводы находится в папке:  `/app/Language/`\r\n\r\nВы можете переключать языки, в файле: `general.php` \r\n\r\nНайти:\r\n```php\r\n\'lang\' => \'ru\',\r\n```\r\n\r\n---\r\n\r\nBy default, the site uses Russian.\r\n\r\nThe translations are located in the folder: `general.php` find:\r\n\r\n```php\r\n\'lang\' => \'ru\',\r\n```\r\n\r\nThe transfers themselves are stored: `/app/Language/`', '', NULL, '2', 0, 0, 0, 0, 0, 0, NULL, NULL, 0, 0),
+(2, 'Где можно почитать документацию?', 'docs-post', 0, 0, 0, '2021-02-27 12:15:58', '2021-11-05 11:26:31', 1, 2, 0x3132372e302e302e31, 0, 1, 0, 0, 0, 7, 'Страница документации Agouti находится в стадии разработки... \r\n\r\n[https://agouti.info/](https://agouti.info/)\r\n\r\nКак она будет завершена, об этом будет сообщено дополнительно. Сам сайт создан на PHP Микрофреймворк HLEB. Все основные настройки,  можно найти на этом сайте:\r\n\r\n[https://phphleb.ru/ru/v1/](https://phphleb.ru/ru/v1/)\r\n\r\n', '', NULL, '1', 0, 0, 0, 0, 0, 0, NULL, NULL, 0, 0),
+(3, 'Medium — платформа для создания контента', 'medium-where-good-ideas-find-you', 0, 0, 0, '2021-04-29 04:35:13', '2021-04-29 04:35:13', 1, 1, 0x3132372e302e302e31, 0, 0, 0, 1, 0, 1, 'Medium — это платформа для создания контента, основанная соучредителем Blogger и Twitter Эван Уильямсом. Многие компании используют Medium в качестве платформы для публикации...', '2021/c-1624954734.webp', NULL, NULL, 0, 0, 0, 0, 0, 0, NULL, NULL, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -339,137 +470,6 @@ CREATE TABLE `stop_words` (
   `stop_space_id` int(11) NOT NULL DEFAULT 0 COMMENT '0 - глобально',
   `stop_date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `topics`
---
-
-CREATE TABLE `topics` (
-  `topic_id` int(11) NOT NULL,
-  `topic_title` varchar(64) DEFAULT NULL,
-  `topic_description` varchar(255) DEFAULT NULL,
-  `topic_short_description` varchar(160) DEFAULT NULL,
-  `topic_info` text DEFAULT NULL,
-  `topic_slug` varchar(32) DEFAULT NULL,
-  `topic_img` varchar(255) DEFAULT 'topic-default.png',
-  `topic_add_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `topic_seo_title` varchar(255) DEFAULT NULL,
-  `topic_merged_id` int(11) DEFAULT 0 COMMENT 'с кем слита',
-  `topic_top_level` tinyint(1) NOT NULL DEFAULT 0,
-  `topic_user_id` int(11) NOT NULL DEFAULT 1,
-  `topic_tl` tinyint(1) DEFAULT 0,
-  `topic_related` varchar(255) DEFAULT NULL,
-  `topic_post_related` varchar(255) DEFAULT NULL,
-  `topic_space_related` varchar(255) DEFAULT NULL,
-  `topic_the_day` tinyint(1) NOT NULL DEFAULT 0,
-  `topic_focus_count` int(11) DEFAULT 0,
-  `topic_count` int(11) DEFAULT 0,
-  `topic_sort` int(11) NOT NULL DEFAULT 0,
-  `topic_type` varchar(32) NOT NULL DEFAULT 'topic' COMMENT 'Topic or Space...',
-  `topic_is_web` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Show or not in the site catalog',
-  `topic_is_deleted` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Дамп данных таблицы `topics`
---
-
-INSERT INTO `topics` (`topic_id`, `topic_title`, `topic_description`, `topic_short_description`, `topic_info`, `topic_slug`, `topic_img`, `topic_add_date`, `topic_seo_title`, `topic_merged_id`, `topic_top_level`, `topic_user_id`, `topic_tl`, `topic_related`, `topic_post_related`, `topic_space_related`, `topic_the_day`, `topic_focus_count`, `topic_count`, `topic_sort`, `topic_type`, `topic_is_web`, `topic_is_deleted`) VALUES
-(1, 'SEO', 'Поисковая оптимизация — это комплекс мер по внутренней и внешней оптимизации для поднятия позиций сайта в результатах выдачи поисковых систем.', 'Краткое описание темы...', 'Комплекс мер по внутренней и внешней оптимизации для поднятия позиций сайта в результатах выдачи поисковых систем по определённым запросам пользователей.\r\n\r\n**Поисковая оптимизация** — это способ использования правил поиска поисковых систем для улучшения текущего естественного ранжирования веб-сайтов в соответствующих поисковых системах. \r\n\r\nЦелью SEO является предоставление экологического решения для саморекламы для веб-сайта, позволяющего веб-сайту занимать лидирующие позиции в отрасли, чтобы получить преимущества бренда. \r\n\r\nSEO включает как внешнее, так и внутреннее SEO. \r\n\r\nSEO средства получить от поисковых систем больше бесплатного трафика, разумное планирование с точки зрения структуры веб-сайта, плана построения контента, взаимодействия с пользователем и общения, страниц и т.д., чтобы сделать веб-сайт более подходящим для принципов индексации поисковых систем. \r\n\r\nПовышение пригодности веб-сайтов для поисковых систем также называется Оптимизацией для поисковых систем, может не только улучшить эффект SEO, но и сделать информацию, относящуюся к веб-сайту, отображаемую в поисковой системе, более привлекательной для пользователей.', 'seo', 't-1-1625149922.jpeg', '2021-06-28 12:29:20', 'Поисковая оптимизация (SEO)', 0, 0, 1, 0, '0', '0', NULL, 0, 1, 1, 0, 'topic', 0, 0),
-(2, 'Интересные сайты', 'Интересные сайты в Интернете. Обзоры, интересные материалы, переводы. Статьи.', 'Краткое описание темы...', 'Интересные сайты в Интернете. Обзоры, интересные материалы, переводы. Статьи.\r\n\r\nПросто вводная страница... В разработке...', 'sites', 't-2-1625149821.jpeg', '2021-06-28 12:29:20', 'Интересные сайты', 0, 0, 1, 0, '1', '3', NULL, 0, 1, 1, 0, 'topic', 0, 0),
-(3, 'Веб-разработка', 'Веб-разработка — это работа, связанная с разработкой веб-сайта для Интернета (World Wide Web) или интрасети (частной сети).', 'Веб-разработка', 'Веб-разработка — это работа, связанная с разработкой веб-сайта для Интернета (World Wide Web) или интрасети (частной сети). Веб-разработка может варьироваться от разработки простой статической страницы с открытым текстом до сложных веб-приложений, электронного бизнеса и социальных сетей.', 'web-development', 'topic-default.png', '2021-11-05 14:04:41', 'Веб-разработка', 0, 0, 1, 0, '0', '0', NULL, 0, 0, 0, 0, 'topic', 0, 0);
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `topics_link_relation`
---
-
-CREATE TABLE `topics_link_relation` (
-  `relation_topic_id` int(11) DEFAULT 0,
-  `relation_link_id` int(11) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Дамп данных таблицы `topics_link_relation`
---
-
-INSERT INTO `topics_link_relation` (`relation_topic_id`, `relation_link_id`) VALUES
-(3, 1),
-(2, 2);
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `topics_merge`
---
-
-CREATE TABLE `topics_merge` (
-  `merge_id` int(11) NOT NULL,
-  `merge_add_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `merge_source_id` int(11) NOT NULL DEFAULT 0,
-  `merge_target_id` int(11) NOT NULL DEFAULT 0,
-  `merge_user_id` int(11) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `topics_post_relation`
---
-
-CREATE TABLE `topics_post_relation` (
-  `relation_topic_id` int(11) DEFAULT 0,
-  `relation_post_id` int(11) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Дамп данных таблицы `topics_post_relation`
---
-
-INSERT INTO `topics_post_relation` (`relation_topic_id`, `relation_post_id`) VALUES
-(1, 1),
-(2, 2);
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `topics_relation`
---
-
-CREATE TABLE `topics_relation` (
-  `topic_parent_id` int(11) DEFAULT NULL,
-  `topic_chaid_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Дамп данных таблицы `topics_relation`
---
-
-INSERT INTO `topics_relation` (`topic_parent_id`, `topic_chaid_id`) VALUES
-(3, 1);
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `topics_signed`
---
-
-CREATE TABLE `topics_signed` (
-  `signed_id` int(11) NOT NULL,
-  `signed_topic_id` int(11) NOT NULL,
-  `signed_user_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Дамп данных таблицы `topics_signed`
---
-
-INSERT INTO `topics_signed` (`signed_id`, `signed_topic_id`, `signed_user_id`) VALUES
-(1, 1, 1),
-(2, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -555,11 +555,11 @@ CREATE TABLE `users_agent_logs` (
 --
 
 INSERT INTO `users_agent_logs` (`log_id`, `log_date`, `log_user_id`, `log_user_browser`, `log_user_os`, `log_user_ip`) VALUES
-(1, '2021-09-21 04:09:38', 1, 'Firefox 92.0', 'Windows', '127.0.0.1'),
-(2, '2021-09-21 04:57:57', 2, 'Chrome 93.0.4577.82', 'Windows', '127.0.0.1'),
-(3, '2021-10-18 22:43:05', 1, 'Firefox 93.0', 'Windows', '127.0.0.1'),
-(4, '2021-10-27 03:24:03', 1, 'Firefox 93.0', 'Windows', '127.0.0.1'),
-(5, '2021-11-05 14:01:34', 1, 'Firefox 94.0', 'Windows', '127.0.0.1');
+(1, '2021-09-21 01:09:38', 1, 'Firefox 92.0', 'Windows', '127.0.0.1'),
+(2, '2021-09-21 01:57:57', 2, 'Chrome 93.0.4577.82', 'Windows', '127.0.0.1'),
+(3, '2021-10-18 19:43:05', 1, 'Firefox 93.0', 'Windows', '127.0.0.1'),
+(4, '2021-10-27 00:24:03', 1, 'Firefox 93.0', 'Windows', '127.0.0.1'),
+(5, '2021-11-05 11:01:34', 1, 'Firefox 94.0', 'Windows', '127.0.0.1');
 
 -- --------------------------------------------------------
 
@@ -761,6 +761,50 @@ ALTER TABLE `comments`
   ADD KEY `comment_user_id` (`comment_user_id`,`comment_date`);
 
 --
+-- Индексы таблицы `facets`
+--
+ALTER TABLE `facets`
+  ADD PRIMARY KEY (`facet_id`),
+  ADD KEY `facet_slug` (`facet_slug`),
+  ADD KEY `facet_merged_id` (`facet_merged_id`),
+  ADD KEY `facet_type` (`facet_type`);
+
+--
+-- Индексы таблицы `facets_links_relation`
+--
+ALTER TABLE `facets_links_relation`
+  ADD KEY `relation_facet_id` (`relation_facet_id`),
+  ADD KEY `relation_content_id` (`relation_link_id`);
+
+--
+-- Индексы таблицы `facets_merge`
+--
+ALTER TABLE `facets_merge`
+  ADD PRIMARY KEY (`merge_id`),
+  ADD KEY `merge_source_id` (`merge_source_id`),
+  ADD KEY `merge_target_id` (`merge_target_id`),
+  ADD KEY `merge_user_id` (`merge_user_id`);
+
+--
+-- Индексы таблицы `facets_posts_relation`
+--
+ALTER TABLE `facets_posts_relation`
+  ADD KEY `relation_facet_id` (`relation_facet_id`),
+  ADD KEY `relation_content_id` (`relation_post_id`);
+
+--
+-- Индексы таблицы `facets_relation`
+--
+ALTER TABLE `facets_relation`
+  ADD UNIQUE KEY `facet_parent_id` (`facet_parent_id`,`facet_chaid_id`);
+
+--
+-- Индексы таблицы `facets_signed`
+--
+ALTER TABLE `facets_signed`
+  ADD PRIMARY KEY (`signed_id`);
+
+--
 -- Индексы таблицы `favorites`
 --
 ALTER TABLE `favorites`
@@ -859,44 +903,6 @@ ALTER TABLE `stop_words`
   ADD PRIMARY KEY (`stop_id`);
 
 --
--- Индексы таблицы `topics`
---
-ALTER TABLE `topics`
-  ADD PRIMARY KEY (`topic_id`),
-  ADD KEY `topic_slug` (`topic_slug`),
-  ADD KEY `topic_merged_id` (`topic_merged_id`),
-  ADD KEY `topic_type` (`topic_type`);
-
---
--- Индексы таблицы `topics_link_relation`
---
-ALTER TABLE `topics_link_relation`
-  ADD KEY `relation_topic_id` (`relation_topic_id`),
-  ADD KEY `relation_content_id` (`relation_link_id`);
-
---
--- Индексы таблицы `topics_merge`
---
-ALTER TABLE `topics_merge`
-  ADD PRIMARY KEY (`merge_id`),
-  ADD KEY `merge_source_id` (`merge_source_id`),
-  ADD KEY `merge_target_id` (`merge_target_id`),
-  ADD KEY `merge_user_id` (`merge_user_id`);
-
---
--- Индексы таблицы `topics_post_relation`
---
-ALTER TABLE `topics_post_relation`
-  ADD KEY `relation_topic_id` (`relation_topic_id`),
-  ADD KEY `relation_content_id` (`relation_post_id`);
-
---
--- Индексы таблицы `topics_signed`
---
-ALTER TABLE `topics_signed`
-  ADD PRIMARY KEY (`signed_id`);
-
---
 -- Индексы таблицы `users`
 --
 ALTER TABLE `users`
@@ -983,12 +989,6 @@ ALTER TABLE `votes_post`
   ADD KEY `votes_post_item_id` (`votes_post_item_id`,`votes_post_user_id`),
   ADD KEY `votes_post_ip` (`votes_post_item_id`,`votes_post_ip`),
   ADD KEY `votes_post_user_id` (`votes_post_user_id`);
-  
-  
---
--- Индексы таблицы `topics_relation`
---  
-ALTER TABLE `topics_relation` ADD UNIQUE(`topic_parent_id`, `topic_chaid_id`);    
 
 --
 -- AUTO_INCREMENT для сохранённых таблиц
@@ -1023,6 +1023,24 @@ ALTER TABLE `badges_user`
 --
 ALTER TABLE `comments`
   MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `facets`
+--
+ALTER TABLE `facets`
+  MODIFY `facet_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT для таблицы `facets_merge`
+--
+ALTER TABLE `facets_merge`
+  MODIFY `merge_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `facets_signed`
+--
+ALTER TABLE `facets_signed`
+  MODIFY `signed_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `favorites`
@@ -1097,24 +1115,6 @@ ALTER TABLE `stop_words`
   MODIFY `stop_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `topics`
---
-ALTER TABLE `topics`
-  MODIFY `topic_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT для таблицы `topics_merge`
---
-ALTER TABLE `topics_merge`
-  MODIFY `merge_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT для таблицы `topics_signed`
---
-ALTER TABLE `topics_signed`
-  MODIFY `signed_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
@@ -1179,4 +1179,3 @@ ALTER TABLE `votes_link`
 --
 ALTER TABLE `votes_post`
   MODIFY `votes_post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
- 

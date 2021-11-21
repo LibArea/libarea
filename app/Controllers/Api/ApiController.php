@@ -3,7 +3,7 @@
 namespace App\Controllers\Api;
 
 use Hleb\Scheme\App\Controllers\MainController;
-use App\Models\{TopicModel, WebModel};
+use App\Models\{FacetModel, WebModel};
 
 class ApiController extends MainController
 {
@@ -14,7 +14,7 @@ class ApiController extends MainController
     
     public function topics()
     {
-       $data = TopicModel::getTopicsAll(1, 25, 0, 'all');
+       $data = FacetModel::getFacetsAll(1, 25, 0, 'all');
        
        header('Content-Type: application/json');
 

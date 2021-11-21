@@ -21,15 +21,15 @@ class RssModel extends MainModel
     // Все пространства для Sitemap
     public static function getTopicsSitemap()
     {
-        $sql = "SELECT topic_slug FROM topics";
+        $sql = "SELECT facet_slug FROM facets";
 
         return  DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // Посты по id пространства для rss
-    public static function getPostsFeed($topic_slug)
+    public static function getPostsFeed($facet_slug)
     {
-         $sql = "SELECT 
+        $sql = "SELECT 
                     post_id,
                     post_title,
                     post_slug,
@@ -58,37 +58,37 @@ class RssModel extends MainModel
                         LEFT JOIN
                         (
                             SELECT 
-                                MAX(topic_id), 
-                                MAX(topic_slug), 
-                                MAX(topic_title),
-                                MAX(relation_topic_id), 
+                                MAX(facet_id), 
+                                MAX(facet_slug), 
+                                MAX(facet_title),
+                                MAX(relation_facet_id), 
                                 relation_post_id,
-                                GROUP_CONCAT(topic_slug, '@', topic_title SEPARATOR '@') AS topic_list
-                                FROM topics      
-                                LEFT JOIN topics_post_relation 
-                                    on topic_id = relation_topic_id
+                                GROUP_CONCAT(facet_slug, '@', facet_title SEPARATOR '@') AS facet_list
+                                FROM facets      
+                                LEFT JOIN facets_posts_relation 
+                                    on facet_id = relation_facet_id
                                 GROUP BY relation_post_id  
                         ) AS rel
                             ON rel.relation_post_id = post_id 
                             INNER JOIN users ON user_id = post_user_id
-                                WHERE topic_list LIKE :qa
+                                WHERE facet_list LIKE :qa
                                 AND post_is_deleted = 0 AND post_tl = 0 AND post_draft != 1 
                                 ORDER BY post_top DESC, post_date DESC LIMIT 1000";
 
-        return DB::run($sql, ['qa' => "%" . $topic_slug . "%"])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['qa' => "%" . $facet_slug . "%"])->fetchAll(PDO::FETCH_ASSOC);
     }
 
 
-    public static function getTopicSlug($topic_slug)
+    public static function getTopicSlug($facet_slug)
     {
         $sql = "SELECT 
-                    topic_id,
-                    topic_title,
-                    topic_description,
-                    topic_slug,
-                    topic_img
-                        FROM topics WHERE topic_slug = :topic_slug";
+                    facet_id,
+                    facet_title,
+                    facet_description,
+                    facet_slug,
+                    facet_img
+                        FROM facets WHERE facet_slug = :facet_slug";
 
-        return DB::run($sql, ['topic_slug' => $topic_slug])->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['facet_slug' => $facet_slug])->fetch(PDO::FETCH_ASSOC);
     }
 }

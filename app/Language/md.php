@@ -45,11 +45,12 @@ $data = [
     'all domains'       => 'Toate domeniile',
     'posted'            => 'Posted',
     'posted-help'       => 'Materialul postat este vizibil pentru participanți',
-    'space'             => 'Spațiu',
-    'spaces'            => 'Spații',
+    'blog'              => 'Blog',
+    'blogs'             => 'Bloguri',
     'topics'            => 'Subiecte',
     'topic'             => 'Subiect',
-    'topics no'         => 'Subiecte nu sunt',
+    'topics-no'         => 'Subiecte nu sunt',
+    'blogs-no'          => 'Nu există încă bloguri',
     'parent'            => 'Părinte',
     'edit topic'        => 'Schimbați subiectul',
     'authorization'     => 'Autentificare',
@@ -173,6 +174,7 @@ $data = [
     'on'                => 'pe',
     'by'                => 'mod',
     'for'               => 'Pentru',
+    'my'                => 'My',
     'by default'        => 'Mod implicit',
     'just me'           => 'Doar eu',
     'publications'      => 'Publicații',
@@ -240,8 +242,8 @@ $data = [
     /* Дата и время + события*/
     'months' => ['','ianuarie','februarie','martie','aprilie','mai','iunie','iulie','august','septembrie','octombrie','noiembrie','decembrie'],
     
-    'today'                 => 'Astazi',
-    'yesterday'             => 'Ieri',
+    'today'         => 'Astazi',
+    'yesterday'     => 'Ieri',
 
     'num-message'   => ['Mesaj', 'Mesaje', 'Mesaje'],
     'num-comment'   => ['Comentariu', 'Comentarii', 'Comentarii'],
@@ -249,7 +251,7 @@ $data = [
     'num-post'      => ['Postează', 'Postări', 'Postări'],
     'num-view'      => ['Vizualizare', 'Vizualizare', 'Vizualizări'],
     'num-website'   => ['Site web', 'Site-uri', 'Site-uri'],
-    'num-space'     => ['Spațiu', 'Spații', 'Spații'],
+    'num-blog'      => ['Blog', 'Bloguri', 'Bloguri'],
 
     'comment'       => 'Comentariu',
     'comments'      => 'Comentarii',
@@ -279,7 +281,7 @@ $data = [
     'Social network'    => 'Rețea socială',
     'Internet'          => 'Internetul',
     'web-cat'           => 'Disponibil în catalog',
-    'web-cat-help'      => 'Dacă să afișați subiectul în catalog (site-uri)',
+    'web-cat-help'      => 'În catalogul site - ului, va fi o categorie (va deveni vizibil)',
 
     /* Setări */
     'setting profile'       => 'Setari profil',
@@ -456,18 +458,21 @@ $data = [
     'responses-members'                 => 'Răspunsurile comunității',
     'design choice'                     => 'alegerea designului',
     
-    'topics-all'            => 'Toate subiectele',
-    'topics-my'             => 'Sunt abonat la subiecte',
-    'topics-new'            => 'Subiecte noi',
-    'topics-desc-all'       => 'O pagină cu subiecte aranjate în ordinea popularității. Totul, teme noi, teme populare',
-    'topics-desc-my'        => 'Pagina subiectelor pe care le urmăresc',
-    'topics-desc-new'       => 'Teme noi adăugate recent pe site. Abonați-vă la subiecte',
+    'blog-add-info'         => 'Pagina blog creat de mine',
+    'topics.all'            => 'Toate subiectele',
+    'topics.my'             => 'Sunt abonat la subiecte',
+    'topics.new'            => 'Subiecte noi',
+    'topics.all-desc'       => 'O pagină cu subiecte aranjate în ordinea popularității. Totul, teme noi, teme populare',
+    'topics.my-desc'        => 'Pagina subiectelor pe care le urmăresc',
+    'topics.new-desc'       => 'Teme noi adăugate recent pe site. Abonați-vă la subiecte',
+    'structure-desc'        => 'Subiecte reprezentate de diferiți arbori, structura subiectelor și relația lor',
+    'blogs.all'             => 'Bloguri personale',
+    'blogs.my'              => 'Blogurile mele',
+    'blogs.new'             => 'Bloguri noi',
+    'blogs.all-desc'        => 'Toate blogurile personale ale participanților de pe site recent. Sortate în ordinea popularității',
+    'blogs.my-desc'         => 'Blogurile mele de pe site',
+    'blogs.new-desc'        => 'Bloguri pe site adăugate recent. Blogurile personale ale membrilor',
     'topic-subscription'    => 'Abonați-vă la spații și citiți-le în flux',
-    
-    'welcome-info' => '<p>Multumim pentru inregistrare! Aici veți găsi informații scurte despre cum să utilizați acest site. .</p>
-    <p>Acest site este format din <a href="/topics">Subiecte</a>.</p>
-    <p><i class="icon-lightbulb red"></i> Pentru a vedea postările din feed , <b>Ai nevoie  <a href="/topics">Abonati-va </a></b> pe subiecte care vă interesează .</p>
-    <p><img alt="Agouti" class="footer-img clear no-mob block" src="/assets/images/agouti_footer.gif"></p>',
 ];
 
 return $data;

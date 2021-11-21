@@ -23,7 +23,7 @@ class SettingModel extends MainModel
             'user_avatar'       => $new_img,
             'user_updated_at'   => $date,
         ];
-        
+
         $sql = "UPDATE users 
                     SET user_avatar = :user_avatar, user_updated_at = :user_updated_at 
                     WHERE user_id = :user_id";
@@ -38,14 +38,14 @@ class SettingModel extends MainModel
             'user_cover_art'    => $new_cover,
             'user_updated_at'   => $date,
         ];
-        
+
         $sql = "UPDATE users 
                     SET user_cover_art = :user_cover_art, user_updated_at = :user_updated_at 
                     WHERE user_id = :user_id";
 
         return  DB::run($sql, $params);
     }
-    
+
     // Редактирование профиля
     public static function editProfile($data)
     {
@@ -101,7 +101,7 @@ class SettingModel extends MainModel
             'user_id'           => $user_id,
             'user_updated_at'   => $date,
         ];
-        
+
         $sql = "UPDATE users 
                     SET user_cover_art = 'cover_art.jpeg', user_updated_at = :user_updated_at 
                     WHERE user_id = :user_id";
@@ -112,15 +112,14 @@ class SettingModel extends MainModel
     // Есть или нет записи в личных настройках
     public static function countNotifications($user_id)
     {
-                $sql = "SELECT 
+        $sql = "SELECT 
                             setting_id, 
                             setting_user_id
                                 FROM users_setting WHERE setting_user_id = :user_id";
 
         return DB::run($sql, ['user_id' => $user_id])->rowCount();
-
     }
-    
+
     // Записываем личные настройки уведомлений, если их нет. Или обновляем.
     public static function setNotifications($data, $user_id)
     {
@@ -133,7 +132,7 @@ class SettingModel extends MainModel
             'setting_email_answer'      => 0,
             'setting_email_comment'     => 0,
         ];
-       
+
         if (!self::countNotifications($user_id)) {
             $sql = "INSERT INTO users_setting(setting_user_id, 
                             setting_email_pm, 
@@ -149,7 +148,6 @@ class SettingModel extends MainModel
                                     :setting_email_comment)";
 
             DB::run($sql, $params);
-            
         } else {
             $sql = "UPDATE users_setting SET 
                             setting_email_pm        = :setting_email_pm,
@@ -175,8 +173,6 @@ class SettingModel extends MainModel
                     setting_email_appealed
                         FROM users_setting WHERE setting_user_id = :user_id";
 
-        return DB::run($sql, ['user_id' => $user_id])->fetch(PDO::FETCH_ASSOC); 
-       
+        return DB::run($sql, ['user_id' => $user_id])->fetch(PDO::FETCH_ASSOC);
     }
-
 }

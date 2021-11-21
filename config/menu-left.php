@@ -6,16 +6,22 @@
 
 return [
     [
-        'url'   => getUrlByName('feed'),
+        'url'   => '/',
         'name'  => Translate::get('feed'),
         'icon'  => 'bi bi-sort-down',
         'item'  => 'feed',
     ],
     [
-        'url'   => getUrlByName('topics'),
+        'url'   => getUrlByName('topics.all'),
         'name'  => Translate::get('topics'),
         'icon'  => 'bi bi-columns-gap',
-        'item'  => 'topics-all',
+        'item'  => 'topics.all',
+    ],
+    [
+        'url'   => getUrlByName('blogs.all'),
+        'name'  => Translate::get('blogs'),
+        'icon'  => 'bi bi-journal-text',
+        'item'  => 'blogs.all',
     ],
     [
         'url'   => getUrlByName('users'),

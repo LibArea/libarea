@@ -12,9 +12,9 @@
   <div class="bg-white br-rd5 mb15 br-box-gray p15">
     <h3 class="uppercase mb5 mt0 font-light size-14 gray"><?= Translate::get('upper'); ?></h3>
     <?php foreach ($data['high_topics'] as $sub) { ?>
-      <a class="flex relative pt5 pb5 items-center hidden gray-light" href="<?= getUrlByName('topic', ['slug' => $sub['topic_slug']]); ?>">
-        <?= topic_logo_img($sub['topic_img'], 'max', $sub['topic_title'], 'w24 mr10 br-box-gray'); ?>
-        <?= $sub['topic_title']; ?>
+      <a class="flex relative pt5 pb5 items-center hidden gray-light" href="<?= getUrlByName('topic', ['slug' => $sub['facet_slug']]); ?>">
+        <?= facet_logo_img($sub['facet_img'], 'max', $sub['facet_title'], 'w24 mr10 br-box-gray'); ?>
+        <?= $sub['facet_title']; ?>
       </a>
     <?php } ?>
   </div>
@@ -24,21 +24,21 @@
   <div class="bg-white br-rd5 mb15 br-box-gray p15">
     <h3 class="uppercase mb5 mt0 font-light size-14 gray"><?= Translate::get('subtopics'); ?></h3>
     <?php foreach ($data['low_topics'] as $sub) { ?>
-      <a class="flex relative pt5 pb5 items-center hidden gray-light" href="<?= getUrlByName('topic', ['slug' => $sub['topic_slug']]); ?>">
-        <?= topic_logo_img($sub['topic_img'], 'max', $sub['topic_title'], 'w24 mr10 br-box-gray'); ?>
-        <?= $sub['topic_title']; ?>
+      <a class="flex relative pt5 pb5 items-center hidden gray-light" href="<?= getUrlByName('topic', ['slug' => $sub['facet_slug']]); ?>">
+        <?= facet_logo_img($sub['facet_img'], 'max', $sub['facet_title'], 'w24 mr10 br-box-gray'); ?>
+        <?= $sub['facet_title']; ?>
       </a>
     <?php } ?>
   </div>
 <?php } ?>
 
-<?php if (!empty($data['topic_related'])) { ?>
+<?php if (!empty($data['facet_related'])) { ?>
   <div class="bg-white br-rd5 mb15 br-box-gray p15">
     <h3 class="uppercase mb5 mt0 font-light size-14 gray"><?= Translate::get('related'); ?></h3>
-    <?php foreach ($data['topic_related'] as $related) { ?>
-      <a class="flex relative pt5 pb5 items-center hidden gray-light" href="<?= getUrlByName('topic', ['slug' => $related['topic_slug']]); ?>">
-        <?= topic_logo_img($related['topic_img'], 'max', $related['topic_title'], 'w24 mr10 br-box-gray'); ?>
-        <?= $related['topic_title']; ?>
+    <?php foreach ($data['facet_related'] as $related) { ?>
+      <a class="flex relative pt5 pb5 items-center hidden gray-light" href="<?= getUrlByName('topic', ['slug' => $related['facet_slug']]); ?>">
+        <?= facet_logo_img($related['facet_img'], 'max', $related['facet_title'], 'w24 mr10 br-box-gray'); ?>
+        <?= $related['facet_title']; ?>
       </a>
     <?php } ?>
   </div>

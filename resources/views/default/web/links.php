@@ -1,7 +1,7 @@
 <main class="col-span-12 mb-col-12">
   <div class="pt5 mr15 pb5 ml15">
     <?php if ($uid['user_trust_level'] == 5) { ?>
-      <a title="<?= Translate::get('add'); ?>" class="right mt5" href="/web/add">
+      <a title="<?= Translate::get('add'); ?>" class="right mt5" href="<?= getUrlByName('web.add'); ?>">
         <i class="bi bi-plus-lg middle"></i>
       </a>
     <?php } ?>
@@ -14,10 +14,12 @@
           <a class="pt5 pr10 mr60 dark-white underline-hover size-21 block " title="<?= $cat['title']; ?>" href="<?= getUrlByName('web.topic', ['slug' => $cat['url']]); ?>">
             <?= $cat['title']; ?>
           </a>
-          <?php foreach ($cat['sub'] as $sub) { ?>
-            <a class="pr10 pb5 size-14 black gray-light inline" title="<?= $sub['title']; ?>" href="<?= getUrlByName('web.topic', ['slug' => $sub['url']]); ?>">
-              <?= $sub['title']; ?>
-            </a>
+          <?php if (!empty($cat['sub'])) { ?>
+            <?php foreach ($cat['sub'] as $sub) { ?>
+              <a class="pr10 pb5 size-14 black gray-light inline" title="<?= $sub['title']; ?>" href="<?= getUrlByName('web.topic', ['slug' => $sub['url']]); ?>">
+                <?= $sub['title']; ?>
+              </a>
+            <?php } ?>
           <?php } ?>
         </div>
       <?php } ?>
@@ -37,7 +39,7 @@
                 </h2>
               </a>
               <?php if ($uid['user_trust_level'] == 5) { ?>
-                <a class="ml15" title="<?= Translate::get('edit'); ?>" href="/web/edit/<?= $link['link_id']; ?>">
+                <a class="ml15" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('web.edit', ['id' => $link['link_id']]); ?>">
                   <i class="bi bi-pencil size-15"></i>
                 </a>
               <?php } ?>
@@ -49,7 +51,7 @@
                 <div class="green size-14 mr20">
                   <?= $link['link_url_domain']; ?>
                   <div class="pt5 lowercase">
-                    <?= html_topic($link['topic_list'], 'web.topic', 'gray-light mr15'); ?>
+                    <?= html_topic($link['facet_list'], 'web.topic', 'gray-light mr15'); ?>
                   </div>
                 </div>
                 <div class="hidden lowercase ml-auto">
@@ -63,7 +65,7 @@
             <div class="mt15 mb15">
               <i class="bi bi-link-45deg red mr5 size-18"></i>
               <?= $link['link_title']; ?> (<?= $link['link_url_domain']; ?>)
-              <a class="ml15" title="<?= Translate::get('edit'); ?>" href="/web/edit/<?= $link['link_id']; ?>">
+              <a class="ml15" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('web.edit', ['id' => $link['link_id']]); ?>">
                 <i class="bi bi-pencil size-15"></i>
               </a>
             </div>

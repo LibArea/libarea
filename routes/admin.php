@@ -11,6 +11,7 @@ Route::before('Authorization@admin')->getGroup();
         Route::get('/word/ban')->controller('Admin\WordsController@deletes');
         Route::get('/audit/status')->controller('Admin\AuditsController@status');
         Route::get('/reports/status')->controller('Admin\ReportsController@status');
+        Route::get('/topic/ban')->controller('Admin\TopicsController@deletes');
         
         Route::getProtect();
             Route::get('/badge/user/create')->controller('Admin\BadgesController@addUser')->name('admin.user.badge.create');
@@ -36,6 +37,9 @@ Route::before('Authorization@admin')->getGroup();
     Route::get('/topics')->controller('Admin\TopicsController', ['all'])->name('admin.topics');
     Route::get('/topics/parent')->controller('Admin\TopicsController', ['parent'])->name('admin.parent');
     Route::get('/topics/page/{page?}')->controller('Admin\TopicsController', ['all'])->where(['page' => '[0-9]+']);
+     
+    Route::get('/blogs')->controller('Admin\BlogsController', ['admin.blogs.all'])->name('admin.blogs');
+    Route::get('/blogs/ban')->controller('Admin\BlogsController', ['admin.blogs.ban.all'])->name('admin.blogs.ban');
      
     Route::get('/update/count/topic')->controller('Admin\СonsoleController@updateCountPostTopic')->name('admin.count.topic'); 
     Route::get('/update/count/up')->controller('Admin\СonsoleController@updateCountUp')->name('admin.count.up');

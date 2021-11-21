@@ -53,7 +53,8 @@ class PostController extends MainController
         // Учитывать ли изменение в сортировки и в оповещение в будущем...
         $post['modified'] = $post['post_date'] != $post['post_modified'] ? true : false;
 
-        $topics = PostModel::getPostTopic($post['post_id'], $uid['user_id']);
+        $facets = PostModel::getPostTopic($post['post_id'], $uid['user_id'], 'topic');
+        $blog   = PostModel::getPostTopic($post['post_id'], $uid['user_id'], 'blog');
 
         // Покажем черновик только автору
         if ($post['post_draft'] == 1 && $post['post_user_id'] != $uid['user_id']) {
@@ -112,7 +113,7 @@ class PostController extends MainController
         }
 
         if ($post['post_related']) {
-            $post_related = PostModel::postRelated($post['post_related']);
+            $related_posts = PostModel::postRelated($post['post_related']);
         }
 
         $m = [
@@ -121,8 +122,12 @@ class PostController extends MainController
             'imgurl'     => $content_img,
             'url'        => getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]),
         ];
-
-        $topic = $topics[0]['topic_title'] ?? 'agouti';
+        
+        $topic = $facets[0]['facet_title'] ?? 'agouti';
+        if ($blog) {
+            $topic = $blog[0]['facet_title'];
+        }
+        
         $meta = meta($m, strip_tags($post['post_title']) . ' — ' . $topic, $desc . ' — ' . $topic, $date_article = $post['post_date']);
 
         return view(
@@ -134,9 +139,10 @@ class PostController extends MainController
                     'post'          => $post,
                     'answers'       => $answers,
                     'recommend'     => PostModel::postsSimilar($post['post_id'], $uid, 5),
-                    'post_related'  => $post_related ?? '',
+                    'related_posts' => $related_posts ?? '',
                     'post_signed'   => SubscriptionModel::getFocus($post['post_id'], $uid['user_id'], 'post'),
-                    'topics'        => $topics,
+                    'facets'        => $facets,
+                    'blog'          => $blog ?? null,
                     'last_user'     => PostModel::getPostLastUser($post_id),
                     'sheet'         => 'article',
                 ]

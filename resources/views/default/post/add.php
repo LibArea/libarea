@@ -9,7 +9,7 @@
   ); ?>
 
   <div class="br-box-gray bg-white p15">
-    <form action="/post/create" method="post" enctype="multipart/form-data">
+    <form action="<?= getUrlByName('post.create'); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
 
       <?= includeTemplate('/_block/form/field-input', [
@@ -28,11 +28,21 @@
         ],
       ]); ?>
 
+      <?php if (!empty($data['user_blog'])) { ?>
+        <?= includeTemplate('/_block/form/select-blog-post', [
+          'uid' => $uid,
+          'data' => $data['facets'],
+          'action' => 'edit',
+          'title' => Translate::get('blogs'),
+          'help' => '...',
+        ]); ?>
+      <?php } ?>
+
       <?= includeTemplate('/_block/form/select-topic-post', [
         'uid' => $uid,
-        'data' => $data,
+        'data' => $data['facets'],
         'action' => 'add',
-        'title' => Translate::get('topics'),
+        'title' => Translate::get('facets'),
         'help' => Translate::get('necessarily'),
         'red' => 'red'
       ]); ?>
@@ -42,7 +52,6 @@
           <label class="block" for="post_title">URL</label>
           <input id="link" class="w-100 h30" type="text" name="post_url" />
           <input id="graburl" readonly="readonly" class="right center mt15 mb15" type="submit_url" name="submit_url" value="<?= Translate::get('to extract'); ?>" />
-          <br>
         </div>
       <?php } ?>
 
@@ -51,34 +60,73 @@
         <div class="size-14 gray-light-2"><?= Translate::get('format-cover-post'); ?>.</div>
       </div>
 
-      <?= includeTemplate('/_block/editor/post-editor', ['post_id' => null, 'lang' => $uid['user_lang'], 'type' => 'post']); ?>
+      <?= includeTemplate('/_block/editor/post-editor', [
+        'post_id' => null,
+        'lang' => $uid['user_lang'],
+        'type' => 'post'
+      ]); ?>
 
-      <?= includeTemplate('/_block/form/field-radio', [
+      <?= includeTemplate('/_block/form/field-radio',  [
         'data' => [
-          ['title' => Translate::get('is this a draft?'), 'name' => 'post_draft', 'checked' => 0]
+          [
+            'title' => Translate::get('is this a draft?'),
+            'name' => 'post_draft',
+            'checked' => 0
+          ]
         ],
       ]); ?>
 
       <?php if ($uid['user_trust_level'] > 0) { ?>
-        <?= includeTemplate('/_block/form/select-content-tl', ['uid' => $uid, 'data' => null]); ?>
-        <?= includeTemplate('/_block/form/field-radio', ['data' => [
-          ['title' => Translate::get('format Q&A?'), 'name' => 'post_type', 'checked' => 0],
-          ['title' => Translate::get('to close?'), 'name' => 'closed', 'checked' => 0],
-        ]]); ?>
+        <?= includeTemplate('/_block/form/select-content-tl', [
+          'uid' => $uid,
+          'data' => null
+        ]); ?>
+
+        <?= includeTemplate('/_block/form/field-radio', [
+          'data' => [
+            [
+              'title' => Translate::get('format Q&A?'),
+              'name' => 'post_type',
+              'checked' => 0
+            ],
+            [
+              'title' => Translate::get('to close?'),
+              'name' => 'closed',
+              'checked' => 0
+            ],
+          ]
+        ]); ?>
       <?php } ?>
 
-      <?= includeTemplate('/_block/form/field-radio', ['data' => [
-        ['title' => Translate::get('is this a translation?'), 'name' => 'translation', 'checked' => 0],
-      ]]); ?>
+      <?= includeTemplate('/_block/form/field-radio',  [
+        'data' => [
+          [
+            'title' => Translate::get('is this a translation?'),
+            'name' => 'translation',
+            'checked' => 0
+          ],
+        ]
+      ]); ?>
 
       <?php if ($uid['user_trust_level'] > 2) { ?>
-        <?= includeTemplate('/_block/form/field-radio', ['data' => [
-          ['title' => Translate::get('raise?'), 'name' => 'top', 'checked' => 0],
-        ]]); ?>
+        <?= includeTemplate('/_block/form/field-radio', [
+          'data' => [
+            [
+              'title' => Translate::get('raise?'),
+              'name' => 'top',
+              'checked' => 0
+            ],
+          ]
+        ]); ?>
       <?php } ?>
 
-      <?= includeTemplate('/_block/form/select-content', ['type' => 'post', 'data' => $data, 'action' => 'add', 'title' => Translate::get('related')]); ?>
-  
+      <?= includeTemplate('/_block/form/select-content', [
+        'type' => 'post',
+        'data' => $data,
+        'action' => 'add',
+        'title' => Translate::get('related')
+      ]); ?>
+
       <?= sumbit(Translate::get('create')); ?>
     </form>
   </div>

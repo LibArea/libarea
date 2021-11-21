@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\{TopicModel, FileModel};
+use App\Models\{FacetModel, FileModel};
 use App\Models\User\{UserModel, SettingModel};
 
 class UploadImage
@@ -10,8 +10,8 @@ class UploadImage
     {
         switch ($type) {
             case 'topic':
-                $path_img       = HLEB_PUBLIC_DIR . AG_PATH_TOPICS_LOGOS;
-                $path_img_small = HLEB_PUBLIC_DIR . AG_PATH_TOPICS_SMALL_LOGOS;
+                $path_img       = HLEB_PUBLIC_DIR . AG_PATH_FACETS_LOGOS;
+                $path_img_small = HLEB_PUBLIC_DIR . AG_PATH_FACETS_SMALL_LOGOS;
                 $pref = 't-';
                 $default_img = 'topic-default.png';
                 break;
@@ -40,7 +40,7 @@ class UploadImage
             $new_img    = $filename . '.jpeg';
 
             if ($type == 'topic') {
-                $images     = TopicModel::getTopic($content_id, 'id');
+                $images     = FacetModel::getFacet($content_id, 'id');
                 $foto       = $images['topic_img'];
             } else {
                 $images     = UserModel::getUser($content_id, 'id');
@@ -54,7 +54,7 @@ class UploadImage
             }
 
             if ($type == 'topic') {
-                TopicModel::setImg($content_id, $new_img);
+                FacetModel::setImg($content_id, $new_img);
             } else {
                 $date = date('Y-m-d H:i:s');
                 SettingModel::setImg($content_id, $new_img, $date);

@@ -58,7 +58,8 @@
             </h2>
           </a>
           <div class="lowercase">
-            <?= html_topic($post['topic_list'], 'topic', 'gray-light size-14 mr15'); ?>
+            <?= html_blog($post['facet_list'], 'blog', 'gray-light size-14 mr15'); ?>
+            <?= html_topic($post['facet_list'], 'topic', 'gray-light size-14 mr15'); ?>
             <?php if ($post['post_url_domain']) { ?>
               <a class="gray-light size-14 ml10" href="<?= getUrlByName('domain', ['domain' => $post['post_url_domain']]); ?>">
                 <i class="bi bi-link-45deg middle"></i> <?= $post['post_url_domain']; ?>

@@ -16,8 +16,8 @@ return [
     // Установите на 4, если вы хотите запретить участникам создавать их
     // From what level of TL is it possible to create Spaces
     // Set to 4 if you want to prevent members from creating them 
-    'tl_add_space'      => 1,
-    'count_add_space'   => 1,
+    'tl_add_blog'       => 1,
+    'count_add_blog'    => 1,
 
     // С какого уровня TL возможна отправка личных сообщений
     'tl_add_pm'         => 1,

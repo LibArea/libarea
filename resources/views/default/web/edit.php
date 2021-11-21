@@ -12,7 +12,7 @@
   ); ?>
 
   <div class="br-box-gray bg-white p15">
-    <form action="/web/edit" method="post">
+    <form action="<?= getUrlByName('web.edit.pr'); ?>" method="post">
       <?= csrf_field() ?>
       <div class="right">
         <?= favicon_img($data['domain']['link_id'], $data['domain']['link_url_domain']); ?>

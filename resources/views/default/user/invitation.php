@@ -1,5 +1,6 @@
 <main class="col-span-9 mb-col-12">
   <div class="bg-white br-rd5 br-box-gray pt5 pr15 pb10 pl15">
+
     <?= breadcrumb(
       '/',
       Translate::get('home'),
@@ -7,6 +8,7 @@
       Translate::get('profile'),
       Translate::get('invites')
     ); ?>
+
     <?php if ($uid['user_trust_level'] > 1) { ?>
       <form method="post" action="<?= getUrlByName('invit.create'); ?>">
         <?php csrf_field(); ?>

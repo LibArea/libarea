@@ -201,7 +201,7 @@ class MessagesModel extends MainModel
             'message_content'   => $message_content,
             'message_sender_id' => $dialog_sender_id,
         ];
-     
+
         $sql = "INSERT INTO messages(message_dialog_id, message_content, message_sender_id)
                             VALUES(:message_dialog_id, :message_content, :message_sender_id)";
 

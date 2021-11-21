@@ -4,7 +4,7 @@ namespace App\Controllers\Web;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\{WebModel, TopicModel};
+use App\Models\{WebModel, FacetModel};
 use Base, Validation, Translate;
 
 class AddWebController extends MainController
@@ -85,7 +85,7 @@ class AddWebController extends MainController
             foreach ($topics as $row) {
                 $arr[] = array($row, $link_topic['link_id']);
             }
-            TopicModel::addLinkTopics($arr, $link_topic['link_id']);
+            FacetModel::addLinkFacets($arr, $link_topic['link_id']);
         }
 
         redirect($redirect);

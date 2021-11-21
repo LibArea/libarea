@@ -5,6 +5,7 @@ namespace App\Models;
 use Hleb\Scheme\App\Models\MainModel;
 use DB;
 use PDO;
+use Base;
 
 class ActionModel extends MainModel
 {
@@ -111,18 +112,31 @@ class ActionModel extends MainModel
     public static function getSearch($search, $type)
     {
         $field_id   = $type . '_id';
-        $field_name = $type . '_title';
         if ($type == 'post') {
             $field_tl = 'post_tl';
+            $field_name = 'post_title';
             $sql = "SELECT post_id, post_title, post_is_deleted, post_tl FROM posts WHERE post_title LIKE :post_title AND post_is_deleted = 0 AND post_tl = 0 ORDER BY post_id LIMIT 8";
-        } elseif ($type == 'topic') {
-            $field_tl = 'topic_tl';
-            $sql = "SELECT topic_id, topic_title, topic_tl FROM topics 
-                    WHERE topic_title LIKE :topic_title ORDER BY topic_count DESC LIMIT 8";
-        } else {
+        } elseif ($type == 'user') {
             $field_tl = 'user_trust_level';
             $field_name = 'user_login';
             $sql = "SELECT user_id, user_login, user_trust_level FROM users WHERE user_login LIKE :user_login";
+               
+        } else {
+            $uid    = Base::getUid();
+            $id     = $uid['user_id'];
+            
+            $condition = '';
+            if ($uid['user_trust_level'] != 5) { 
+                if ($type == 'blog') { 
+                    $condition = 'AND facet_user_id = $id';
+                } 
+            }                
+            
+            $field_id = 'facet_id';
+            $field_tl = 'facet_tl';
+            $field_name = 'facet_title';
+            $sql = "SELECT facet_id, facet_title, facet_tl, facet_type FROM facets 
+                    WHERE facet_title LIKE :facet_title AND facet_type = '$type' $condition ORDER BY facet_count DESC LIMIT 8";
         }
 
         $result = DB::run($sql, [$field_name => "%" . $search . "%"]);

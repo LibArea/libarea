@@ -18,17 +18,17 @@ class SearchModel extends MainModel
                 post_url_domain, post_is_deleted, post_hits_count, 
                 rel.*,  
                 user_id, user_login, user_avatar 
-            FROM topics_post_relation  
+            FROM facets_posts_relation  
             LEFT JOIN posts ON relation_post_id = post_id 
             LEFT JOIN ( SELECT  
-                    MAX(topic_id),  
-                    MAX(topic_slug),  
-                    MAX(topic_title),
-                    MAX(relation_topic_id),  
+                    MAX(facet_id),  
+                    MAX(facet_slug),  
+                    MAX(facet_title),
+                    MAX(relation_facet_id),  
                     MAX(relation_post_id) as p_id,  
-                    GROUP_CONCAT(topic_slug, '@', topic_title SEPARATOR '@') AS topic_list  
-                    FROM topics  
-                    LEFT JOIN topics_post_relation on topic_id = relation_topic_id  
+                    GROUP_CONCAT(facet_slug, '@', facet_title SEPARATOR '@') AS facet_list  
+                    FROM facets  
+                    LEFT JOIN facets_posts_relation on facet_id = relation_facet_id  
                         GROUP BY relation_post_id  
             ) AS rel ON rel.p_id = post_id  
                 LEFT JOIN users ON user_id = post_user_id 
@@ -47,38 +47,37 @@ class SearchModel extends MainModel
                     post_slug, 
                     post_votes, 
                     post_hits_count,
-                    topic_list,
+                    facet_list,
                     user_login,
                     user_avatar,
                     SNIPPET(post_title, :qa) AS title, 
                     SNIPPET(post_content, :qa) AS content 
-                        FROM postind WHERE MATCH(:qa) LIMIT $limit"; 
+                        FROM postind WHERE MATCH(:qa) LIMIT $limit";
 
         return DB::run($sql, ['qa' => $query], 'mysql.sphinx-search')->fetchall(PDO::FETCH_ASSOC);
     }
-    
+
     public static function getSearchTags($query, $type, $limit)
     {
         if ($type == 'server') {
 
             $sql = "SELECT 
-                topic_slug, 
-                topic_count, 
-                topic_title,
-                topic_img
+                facet_slug, 
+                facet_count, 
+                facet_title,
+                facet_img
                     FROM tagind WHERE MATCH(:qa) LIMIT $limit";
-                    
+
             return DB::run($sql, ['qa' => $query], 'mysql.sphinx-search')->fetchall(PDO::FETCH_ASSOC);
-        } 
-        
+        }
+
         $sql = "SELECT 
-                    topic_slug, 
-                    topic_count, 
-                    topic_title,
-                    topic_img
-                        FROM topics WHERE topic_title LIKE :qa OR topic_slug LIKE :qa LIMIT $limit";
+                    facet_slug, 
+                    facet_count, 
+                    facet_title,
+                    facet_img
+                        FROM facets WHERE facet_title LIKE :qa OR facet_slug LIKE :qa LIMIT $limit";
 
         return DB::run($sql, ['qa' => "%" . $query . "%"])->fetchall(PDO::FETCH_ASSOC);
     }
-    
 }

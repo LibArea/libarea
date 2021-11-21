@@ -19,7 +19,7 @@ class UserModel extends MainModel
             $string = "WHERE user_is_deleted != 1 and user_ban_list != 1
                         ORDER BY user_id = $user_id DESC, user_trust_level DESC LIMIT";
         }
-        
+
         $start  = ($page - 1) * $limit;
         $sql = "SELECT  
                     user_id,
@@ -52,7 +52,7 @@ class UserModel extends MainModel
         if ($sheet == 'all') {
             $string = "";
         }
-        
+
         $sql = "SELECT 
                     user_id,
                     user_is_deleted
@@ -206,6 +206,29 @@ class UserModel extends MainModel
         return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
     }
 
+
+    // Страница закладок участника (комментарии и посты)
+    public static function blogs($user_id)
+    {
+        $sql = "SELECT 
+                    facet_id,
+                    facet_title,
+                    facet_description,
+                    facet_short_description,
+                    facet_info,
+                    facet_slug,
+                    facet_img,
+                    facet_add_date,
+                    facet_seo_title,
+                    facet_user_id,
+                    facet_count,
+                    facet_type
+                        FROM facets
+                        WHERE facet_user_id = :user_id AND facet_type = 'blog'";
+
+        return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     // Страница черновиков
     public static function userDraftPosts($user_id)
     {
@@ -269,7 +292,7 @@ class UserModel extends MainModel
                         FROM comments 
                         WHERE comment_user_id = :user_id and comment_is_deleted = 0) 
                             AS count_comments";
-        
+
         return DB::run($sql, ['user_id' => $user_id])->fetch(PDO::FETCH_ASSOC);
     }
 

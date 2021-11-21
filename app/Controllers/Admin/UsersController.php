@@ -10,15 +10,21 @@ use Base, Validation, Translate;
 
 class UsersController extends MainController
 {
+    private $uid;
+
+    public function __construct()
+    {
+        $this->uid  = Base::getUid();
+    }
+    
     public function index($sheet)
     {
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
-        $uid    = Base::getUid();
 
         $limit = 50;
         $pagesCount = UserModel::getUsersAllCount($sheet);
-        $user_all   = UserModel::getUsersAll($page, $limit, $uid['user_id'], $sheet);
+        $user_all   = UserModel::getUsersAll($page, $limit, $this->uid['user_id'], $sheet);
 
         $result = array();
         foreach ($user_all as $ind => $row) {
@@ -36,7 +42,7 @@ class UsersController extends MainController
             '/admin/user/users',
             [
                 'meta'  => meta($m = [], Translate::get('users')),
-                'uid'   => $uid,
+                'uid'   => $this->uid,
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $limit),
                     'pNum'          => $page,
@@ -68,7 +74,7 @@ class UsersController extends MainController
             '/admin/user/logip',
             [
                 'meta'  => meta($m = [], Translate::get('search')),
-                'uid'   => Base::getUid(),
+                'uid'   => $this->uid,
                 'data'  => [
                     'results'   => $results,
                     'option'    => $option,
@@ -105,7 +111,7 @@ class UsersController extends MainController
             '/admin/user/edit',
             [
                 'meta'  => meta($m = [], Translate::get('edit user')),
-                'uid'   => Base::getUid(),
+                'uid'   => $this->uid,
                 'data'  => [
                     'sheet'     => 'edit-user',
                     'count'     => UserModel::contentCount($user_id),
@@ -129,8 +135,11 @@ class UsersController extends MainController
         
         $redirect = getUrlByName('admin.user.edit', ['id' => $user_id]);
         Validation::Limits($login, Translate::get('login'), '3', '11', $redirect);
-        Validation::Limits($user_name, Translate::get('name'), '3', '11', $redirect);
-
+        
+        if ($this->uid['user_trust_level'] != 5) {
+            Validation::Limits($user_name, Translate::get('name'), '3', '11', $redirect);
+        }
+        
         $data = [
             'user_id'            => $user_id,
             'user_login'         => $login,

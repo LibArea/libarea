@@ -8,24 +8,48 @@ function html_topic($topic, $slug, $css)
     if (!$topic) {
         return '';
     }
-
+ 
     if (!is_array($topic)) {
         $topic = preg_split('/(@)/', $topic);
     }
 
     $result = array();
-    foreach (array_chunk($topic, 2) as $ind => $row) {
-        $result[] = '<a class="' . $css . '" href="' . getUrlByName($slug, ['slug' => $row[0]]) . '">' . $row[1] . '</a>';
+    foreach (array_chunk($topic, 3) as $ind => $row) {
+        if ($row[0] == 'topic') {
+             $result[] = '<a class="' . $css . '" href="' . getUrlByName($slug, ['slug' => $row[1]]) . '">' . $row[2] . '</a>';
+        }
+    }
+    
+    return implode($result);
+}
+
+function html_blog($topic, $slug, $css)
+{
+    if (!$topic) {
+        return '';
+    }
+ 
+    if (!is_array($topic)) {
+        $topic = preg_split('/(@)/', $topic);
+    }
+
+    $result = array();
+    foreach (array_chunk($topic, 3) as $ind => $row) {
+
+        if ($row[0] == 'blog') {
+            $result[] = '<a class="' . $css . ' blue" href="' . getUrlByName('blog', ['slug' => $row[1]]) . '">' . $row[2] . '</a>';
+        } 
+        
     }
     return implode($result);
 }
 
-// Topic logo img
-function topic_logo_img($file, $size, $alt, $style)
+// Topic or Blog logo img
+function facet_logo_img($file, $size, $alt, $style)
 {
-    $src = AG_PATH_TOPICS_LOGOS . $file;
+    $src = AG_PATH_FACETS_LOGOS . $file;
     if ($size == 'small') {
-        $src = AG_PATH_TOPICS_SMALL_LOGOS . $file;
+        $src = AG_PATH_FACETS_SMALL_LOGOS . $file;
     }
 
     $img = '<img class="' . $style . '" src="' . $src . '" alt="' . $alt . '">';
@@ -164,7 +188,7 @@ function pagination($pNum, $pagesCount, $sheet, $other)
     }
 
     if ($pagesCount > $pNum) {
-        $html .= '<span class="bg-red-700 pt5 pr10 pb5 pl10 white ml5 mr5 size-15">' . ($pNum) . '</span>';
+        $html .= '<span class="bg-red-500 pt5 pr10 pb5 pl10 white ml5 mr5 size-15">' . ($pNum) . '</span>';
     }
 
     if ($pagesCount > $pNum) {
@@ -326,6 +350,19 @@ function cutWords($content, $maxlen)
     $words      = str_replace($code_match, '', $words);
     return join(' ', $words);
 }
+
+function fragment($content, $maxlen = '20')
+{
+    $text = explode("\n", $content);
+    $words = preg_split('#[\s\r\n]+#um', $text[0]);
+    
+    if ($maxlen < count($words)) {
+        $words = array_slice($words, 0, $maxlen);
+        return join(' ', $words) . '...';
+    }
+
+    return $text[0];
+} 
 
 function no_content($text, $icon)
 {

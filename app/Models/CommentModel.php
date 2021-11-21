@@ -130,7 +130,7 @@ class CommentModel extends MainModel
                 $sort = "WHERE comment_is_deleted = 1";
             }
         }
-        
+
         $sql = "SELECT comment_id, comment_is_deleted FROM comments $sort";
 
         return DB::run($sql)->rowCount();
@@ -218,5 +218,4 @@ class CommentModel extends MainModel
 
         return DB::run($sql, ['comment_id' => $comment_id, 'comment' => $comment, 'data' => date("Y-m-d H:i:s")]);
     }
-
 }

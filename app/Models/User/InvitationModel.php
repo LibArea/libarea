@@ -22,7 +22,7 @@ class InvitationModel extends MainModel
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
-    
+
     // Создадим инвайт для участника
     public static function create($user_id, $invitation_code, $invitation_email, $add_time, $add_ip)
     {
@@ -113,5 +113,4 @@ class InvitationModel extends MainModel
 
         DB::run($sql, $params);
     }
-
 }

@@ -4,7 +4,7 @@ namespace App\Controllers\Web;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\{WebModel, FeedModel, TopicModel};
+use App\Models\{WebModel, FeedModel, FacetModel};
 use Content, Base, Translate;
 
 class WebController extends MainController
@@ -108,28 +108,28 @@ class WebController extends MainController
         $page       = Request::getInt('page');
         $page       = $page == 0 ? 1 : $page;
 
-        $topic = TopicModel::getTopic($slug, 'slug');
+        $topic = FacetModel::getFacet($slug, 'slug');
         Base::PageError404($topic);
 
         // Получим подтемы темы
-        $topics =  TopicModel::getLowLevelList($topic['topic_id']);
+        $topics =  FacetModel::getLowLevelList($topic['facet_id']);
 
         $limit      = 25;  
-        $links      = WebModel::feedLink($page, $limit, $topics, $uid, $topic['topic_id'], $sheet);
-        $pagesCount = WebModel::feedLinkCount($topics,  $topic['topic_id']);
+        $links      = WebModel::feedLink($page, $limit, $topics, $uid, $topic['facet_id'], $sheet);
+        $pagesCount = WebModel::feedLinkCount($topics,  $topic['facet_id']);
 
         $m = [
             'og'         => false,
             'twitter'    => false,
             'imgurl'     => false,
-            'url'        => getUrlByName('web.topic', ['slug' => $topic['topic_slug']]),
+            'url'        => getUrlByName('web.topic', ['slug' => $topic['facet_slug']]),
         ];
-        $desc  = Translate::get('sites') . ' ' . Translate::get('by') . ' ' . $topic['topic_title'] . '. ' . $topic['topic_description'];
+        $desc  = Translate::get('sites') . ' ' . Translate::get('by') . ' ' . $topic['facet_title'] . '. ' . $topic['facet_description'];
 
         return view(
             '/web/sites',
             [
-                'meta'  => meta($m, Translate::get('sites') . ': ' . $topic['topic_title'], $desc),
+                'meta'  => meta($m, Translate::get('sites') . ': ' . $topic['facet_title'], $desc),
                 'uid'   => $uid,
                 'data'  => [
                     'sheet'         => $sheet,
@@ -138,9 +138,9 @@ class WebController extends MainController
                     'pNum'          => $page,
                     'links'         => $links,
                     'topic'         => $topic,
-                    'high_topics'   => TopicModel::getHighLevelList($topic['topic_id']),
-                    'low_topics'    => TopicModel::getLowLevelList($topic['topic_id']),
-                    'topic_related' => TopicModel::topicRelated($topic['topic_related']),
+                    'high_topics'   => FacetModel::getHighLevelList($topic['facet_id']),
+                    'low_topics'    => FacetModel::getLowLevelList($topic['facet_id']),
+                    'topic_related' => FacetModel::facetRelated($topic['facet_related']),
                 ]
             ]
         );
@@ -174,7 +174,7 @@ class WebController extends MainController
                     'sheet'     => 'sites-topic',
                     'link'      => $link,
                     'topics'    => $topics,
-                    'high_leve' => TopicModel::getHighLevelList($high_leve),
+                    'high_leve' => FacetModel::getHighLevelList($high_leve),
                 ]
             ]
         );

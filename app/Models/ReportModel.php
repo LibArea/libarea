@@ -39,7 +39,7 @@ class ReportModel extends MainModel
 
         return  DB::run($sql, ['report_id' => $report_id]);
     }
-    
+
     // Записываем флаг
     public static function send($data)
     {
@@ -70,7 +70,7 @@ class ReportModel extends MainModel
                                     :report_status)";
         return DB::run($sql, $params);
     }
-    
+
     // Частота размещения флагов
     public static function getSpeed($user_id)
     {

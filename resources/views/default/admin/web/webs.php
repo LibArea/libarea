@@ -3,7 +3,7 @@
 </div>
 <main class="col-span-10 mb-col-12">
 
-  <a class="right mr15" title="<?= Translate::get('add'); ?>" href="/web/add">
+  <a class="right mr15" title="<?= Translate::get('add'); ?>" href="<?= getUrlByName('web.add'); ?>">
     <i class="bi bi-plus-lg middle"></i>
   </a>
 
@@ -25,7 +25,7 @@
           <div class="size-21">
             <?= $link['link_title']; ?>
           </div>
-          <?= html_topic($link['topic_list'], 'web.topic', 'gray-light size-14 mr10'); ?>
+          <?= html_topic($link['facet_list'], 'web.topic', 'gray-light size-14 mr10'); ?>
           <div class="content-telo">
             <?= $link['link_content']; ?>
           </div>
@@ -44,7 +44,7 @@
               <span class="red">Ban</span>
             <?php } ?>
             <span class="mr5 ml5"> &#183; </span>
-            <a href="/web/edit/<?= $link['link_id']; ?>">
+            <a href="<?= getUrlByName('web.edit', ['id' => $link['link_id']]); ?>">
               <?= Translate::get('edit'); ?>
             </a>
             <span class="right heart-link red">

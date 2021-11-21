@@ -5,7 +5,7 @@ namespace App\Controllers\Post;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
-use App\Models\{NotificationsModel, SubscriptionModel, ActionModel, WebModel, PostModel, TopicModel};
+use App\Models\{NotificationsModel, SubscriptionModel, ActionModel, WebModel, PostModel, FacetModel};
 use Content, Base, UploadImage, Integration, Validation, SendEmail, Slug, URLScraper, Config, Translate;
 
 class AddPostController extends MainController
@@ -33,14 +33,25 @@ class AddPostController extends MainController
 
         // Добавление со странице темы
         $topic_id   = Request::getInt('topic_id');
-        $topic      = TopicModel::getTopic($topic_id, 'id');
+        $topic      = FacetModel::getFacet($topic_id, 'id');
+
+        $facets = ['topic' => $topic];
+        if ($topic) {
+            if ($topic['facet_type'] == 'blog') {
+                $facets  = ['blog' => $topic];
+                if ($topic['facet_user_id'] != $this->uid['user_id']) redirect('/');
+            }
+       }
 
         return view(
             '/post/add',
             [
-                'meta'  => meta($m = [], Translate::get('add post')),
-                'uid'   => $this->uid,
-                'data'  => ['topic' => $topic]
+                'meta'      => meta($m = [], Translate::get('add post')),
+                'uid'       => $this->uid,
+                'data'  => [
+                    'facets'     => $facets,
+                    'user_blog'  => FacetModel::getFacetsUser($this->uid['user_id'], 'blog'),
+                ]
             ]
         );
     }
@@ -59,13 +70,17 @@ class AddPostController extends MainController
         $post_translation       = Request::getPostInt('translation');
         $post_merged_id         = Request::getPostInt('post_merged_id');
         $post_tl                = Request::getPostInt('post_tl');
-
+        $blog_id               = Request::getPostInt('blog_id');
+        
         $post_fields    = Request::getPost() ?? [];
         $post_related   = implode(',', $post_fields['post_select'] ?? []);
         $topics         = $post_fields['topic_select'] ?? [];
 
         // Используем для возврата
-        $redirect = '/post/add';
+        $redirect = getUrlByName('post.add');
+        if ($blog_id > 0) {
+           $redirect = getUrlByName('post.add') . '/' . $blog_id; 
+        }
 
         // Если пользователь забанен / заморожен
         $user = UserModel::getUser($this->uid['user_id'], 'id');
@@ -162,13 +177,16 @@ class AddPostController extends MainController
             NotificationsModel::send($this->uid['user_id'], $user_id, $type, $last_post_id, $url_post, 1);
         }
 
-        if (!empty($topics)) {
-            $arr = [];
-            foreach ($topics as $row) {
-                $arr[] = array($row, $last_post_id);
-            }
-            TopicModel::addPostTopics($arr, $last_post_id);
+        if ($blog_id != 0) {
+          $topics = array_merge(['0' => $blog_id], $topics);
+        }  
+  
+        $arr = [];
+        foreach ($topics as $row) {
+            $arr[] = array($row, $last_post_id);
         }
+        FacetModel::addPostFacets($arr, $last_post_id);
+     
 
         // Уведомление (@login)
         if ($message = Content::parseUser($post_content, true, true)) {

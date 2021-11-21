@@ -107,7 +107,7 @@ class MessagesController extends MainController
                 } else if ($dialog['dialog_sender_id'] != $uid['user_id'] and $val['message_recipient_remove']) {
                     unset($list[$key]);
                 } else {
-                    $list[$key]['message_content']  =  $val['message_content'];
+                    $list[$key]['message_content']  =  Content::text($val['message_content'], 'line');
                     $list[$key]['user_login']   = $recipient_user['user_login'];
                     $list[$key]['user_avatar']  = $recipient_user['user_avatar'];
                 }
@@ -130,7 +130,7 @@ class MessagesController extends MainController
     }
 
     // Форма отправки из профиля
-    public function  profilMessages()
+    public function messages()
     {
         $uid        = Base::getUid();
         $login      = Request::get('login');

@@ -1,10 +1,10 @@
 <?php $post = $data['post']; ?>
 <div class="col-span-1 no-mob center">
   <div class="sticky top80">
-     <?= votes($uid['user_id'], $post, 'post', 'size-24 middle', 'block'); ?>
-     <div class="pt20">
-       <?= favorite_post($uid['user_id'], $post['post_id'], $post['favorite_tid'], 'size-24'); ?>
-     </div>
+    <?= votes($uid['user_id'], $post, 'post', 'size-24 middle', 'block'); ?>
+    <div class="pt20">
+      <?= favorite_post($uid['user_id'], $post['post_id'], $post['favorite_tid'], 'size-24'); ?>
+    </div>
   </div>
 </div>
 <main class="col-span-8 mb-col-12">
@@ -50,7 +50,7 @@
 
           <?php if ($uid['user_id']) { ?>
             <?php if ($uid['user_login'] == $post['user_login']  || $uid['user_trust_level'] == 5) { ?>
-              <a class="gray-light mr10 ml10" href="/post/edit/<?= $post['post_id']; ?>">
+              <a class="gray-light mr10 ml10" href="<?= getUrlByName('post.edit', ['id' => $post['post_id']]); ?>">
                 <?= Translate::get('edit'); ?>
               </a>
             <?php } ?>
@@ -112,16 +112,27 @@
             </div>
           </div>
         <?php } ?>
-        <?= includeTemplate('/_block/post-related', ['post_related' => $data['post_related']]); ?>
-        <?php if (!empty($data['topics'])) { ?>
-          <div class="mb20 lowercase">
-            <?php foreach ($data['topics'] as $topic) { ?>
-              <a class="bg-blue-100 bg-hover-green white-hover pt5 pr10 pb5 pl10 mb5 br-rd20 blue inline size-14" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
-                <?= $topic['topic_title']; ?>
-              </a>
-            <?php } ?>
-          </div>
-        <?php } ?>
+        <?= includeTemplate('/_block/related-posts', ['related_posts' => $data['related_posts']]); ?>
+
+        <div class="flex flex-row items-center mb20">
+          <?php if (!empty($data['blog'])) { ?>
+            <a title="<?= $data['blog'][0]['facet_title']; ?>" class="mr10 gray inline size-14" href="/blog/<?= $data['blog'][0]['facet_slug']; ?>">
+              <span class="bg-gray-200 pt5 pr10 pb5 pl10 br-rd5">
+                <?= $data['blog'][0]['facet_title']; ?>
+              </span>
+            </a>
+          <?php } ?>
+
+          <?php if (!empty($data['facets'])) { ?>
+            <div class="lowercase">
+              <?php foreach ($data['facets'] as $topic) { ?>
+                <a class="bg-blue-100 bg-hover-green white-hover pt5 pr10 pb5 pl10 br-rd20 blue inline size-14" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>">
+                  <?= $topic['facet_title']; ?>
+                </a>
+              <?php } ?>
+            </div>
+          <?php } ?>
+        </div>
       </div>
 
       <div class="br-box-gray dark-br-black flex items-center mb5">
@@ -237,16 +248,16 @@
       <h3 class="uppercase mb5 mt0 font-light size-15 gray"><?= Translate::get('topics'); ?></h3>
       <?php foreach ($data['topics'] as $topic) { ?>
         <?php if ($uid['user_id']) { ?>
-          <?php if (!$topic['signed_topic_id']) { ?>
-            <div data-id="<?= $topic['topic_id']; ?>" data-type="topic" class="focus-id right inline size-14 blue center mt5 mr5">
+          <?php if (!$topic['signed_facet_id']) { ?>
+            <div data-id="<?= $topic['facet_id']; ?>" data-type="topic" class="focus-id right inline size-14 blue center mt5 mr5">
               <i class="bi bi-plus"></i> <?= Translate::get('read'); ?>
             </div>
           <?php } ?>
         <?php } ?>
-        <a class="flex justify-center pt5 pr10 pb5 black dark-white inline size-14" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
-          <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'w24 mr10 br-box-gray'); ?>
-          <?= $topic['topic_title']; ?>
-          <div class="gray-light-2 size-14"><?= $topic['topic_short_description']; ?></div>
+        <a class="flex justify-center pt5 pr10 pb5 black dark-white inline size-14" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>">
+          <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'w24 mr10 br-box-gray'); ?>
+          <?= $topic['facet_title']; ?>
+          <div class="gray-light-2 size-14"><?= $topic['facet_short_description']; ?></div>
         </a>
       <?php } ?>
     <?php } ?>

@@ -271,7 +271,7 @@ class PostModel extends MainModel
         if ($post_related) {
             $string = "post_id IN(0, " . $post_related . ") AND";
         }
-        
+
         $sql = "SELECT 
                     post_id, 
                     post_title, 
@@ -322,26 +322,34 @@ class PostModel extends MainModel
         return $result['post_is_deleted'];
     }
 
-    public static function getPostTopic($post_id, $user_id)
+    public static function getPostTopic($post_id, $user_id, $type)
     {
+        $condition  = "topic";
+        if ($type == 'blog') {
+            $condition  = "blog";
+        }
+
         $sql = "SELECT
-                    topic_id,
-                    topic_title,
-                    topic_slug,
-                    topic_img,
-                    topic_short_description,
-                    relation_topic_id,
+                    facet_id,
+                    facet_title,
+                    facet_slug,
+                    facet_img,
+                    facet_type,
+                    facet_short_description,
+                    relation_facet_id,
                     relation_post_id,
-                    signed_topic_id, 
+                    signed_facet_id, 
                     signed_user_id
-                        FROM topics  
-                        INNER JOIN topics_post_relation ON relation_topic_id = topic_id
-                        LEFT JOIN topics_signed ON signed_topic_id = topic_id AND signed_user_id = :user_id
-                            WHERE relation_post_id  = :post_id";
+                        FROM facets  
+                        INNER JOIN facets_posts_relation ON relation_facet_id = facet_id
+                        LEFT JOIN facets_signed ON signed_facet_id = facet_id AND signed_user_id = :user_id
+                            WHERE relation_post_id  = :post_id AND facet_type = '$condition'";
 
         return DB::run($sql, ['post_id' => $post_id, 'user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
     }
-    
+
+
+
     public static function getPostLastUser($post_id)
     {
         $sql = "SELECT
@@ -360,5 +368,4 @@ class PostModel extends MainModel
 
         return DB::run($sql, ['post_id' => $post_id])->fetch(PDO::FETCH_ASSOC);
     }
-
 }

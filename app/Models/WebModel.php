@@ -30,16 +30,17 @@ class WebModel extends MainModel
                         LEFT JOIN
                         (
                             SELECT 
-                                MAX(topic_id), 
-                                MAX(topic_slug), 
-                                MAX(topic_title),
-                                MAX(relation_topic_id), 
+                                MAX(facet_id), 
+                                MAX(facet_slug), 
+                                MAX(facet_title),
+                                MAX(facet_type),
+                                MAX(relation_facet_id), 
                                 relation_link_id,
 
-                                GROUP_CONCAT(topic_slug, '@', topic_title SEPARATOR '@') AS topic_list
-                                FROM topics  
-                                LEFT JOIN topics_link_relation 
-                                    on topic_id = relation_topic_id
+                                GROUP_CONCAT(facet_type, '@', facet_slug, '@', facet_title SEPARATOR '@') AS facet_list
+                                FROM facets  
+                                LEFT JOIN facets_links_relation 
+                                    on facet_id = relation_facet_id
                                 GROUP BY relation_link_id
                         ) AS rel
                             ON rel.relation_link_id = link_id 
@@ -81,19 +82,19 @@ class WebModel extends MainModel
 
     // Получаем домены по условиям
     // https://systemrequest.net/index.php/123/
-    public static function feedLink($page, $limit, $topics, $uid, $topic_id, $type)
+    public static function feedLink($page, $limit, $facets, $uid, $topic_id, $type)
     {
         $result = [];
-        foreach ($topics as $ind => $row) {
-           $result['9999'] = $topic_id; 
-           $result[$ind] = $row['topic_id'];
-        }   
+        foreach ($facets as $ind => $row) {
+            $result['9999'] = $topic_id;
+            $result[$ind] = $row['facet_id'];
+        }
 
         $sort = "ORDER BY link_votes DESC";
         if ($type == 'new') $sort = "ORDER BY link_date DESC";
 
-        $string = "relation_topic_id IN($topic_id)";
-        if ($result) $string = "relation_topic_id IN(" . implode(',', $result ?? []) . ")";
+        $string = "relation_facet_id IN($topic_id)";
+        if ($result) $string = "relation_facet_id IN(" . implode(',', $result ?? []) . ")";
 
         $start  = ($page - 1) * $limit;
 
@@ -113,20 +114,20 @@ class WebModel extends MainModel
                     votes_link_item_id, votes_link_user_id,
                     user_id, user_login, user_avatar
   
-                        FROM topics_link_relation 
+                        FROM facets_links_relation 
                         LEFT JOIN links ON relation_link_id = link_id
             
                         LEFT JOIN (
                             SELECT 
-                                MAX(topic_id), 
-                                MAX(topic_slug), 
-                                MAX(topic_title),
-                                MAX(relation_topic_id), 
+                                MAX(facet_id), 
+                                MAX(facet_slug), 
+                                MAX(facet_title),
+                                MAX(relation_facet_id), 
                                 MAX(relation_link_id) as l_id,
-                                GROUP_CONCAT(topic_slug, '@', topic_title SEPARATOR '@') AS topic_list
-                                FROM topics
-                                LEFT JOIN topics_link_relation 
-                                    on topic_id = relation_topic_id
+                                GROUP_CONCAT(facet_slug, '@', facet_title SEPARATOR '@') AS facet_list
+                                FROM facets
+                                LEFT JOIN facets_links_relation 
+                                    on facet_id = relation_facet_id
                                     GROUP BY relation_link_id
                         ) AS rel
                              ON rel.l_id = link_id
@@ -134,21 +135,21 @@ class WebModel extends MainModel
                             LEFT JOIN votes_link 
                                 ON votes_link_item_id = link_id AND votes_link_user_id = :user_id
 
-                                WHERE $string $sort LIMIT $start, $limit"; 
+                                WHERE $string $sort LIMIT $start, $limit";
 
-        return DB::run($sql, ['user_id' => $uid['user_id']])->fetchAll(PDO::FETCH_ASSOC);  
+        return DB::run($sql, ['user_id' => $uid['user_id']])->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function feedLinkCount($topics, $topic_id)
+    public static function feedLinkCount($facets, $topic_id)
     {
         $result = [];
-        foreach ($topics as $ind => $row) {
-           $result['9999'] = $topic_id; 
-           $result[$ind] = $row['topic_id'];
-        }   
+        foreach ($facets as $ind => $row) {
+            $result['9999'] = $topic_id;
+            $result[$ind] = $row['facet_id'];
+        }
 
-        $string = "relation_topic_id IN($topic_id)";
-        if ($result) $string = "relation_topic_id IN(" . implode(',', $result ?? []) . ")";
+        $string = "relation_facet_id IN($topic_id)";
+        if ($result) $string = "relation_facet_id IN(" . implode(',', $result ?? []) . ")";
 
         $sql = "SELECT DISTINCT
                     link_id,
@@ -156,27 +157,27 @@ class WebModel extends MainModel
                     link_url,
                     link_is_deleted,
                     rel.*
-                        FROM topics_link_relation 
+                        FROM facets_links_relation 
                         LEFT JOIN links ON relation_link_id = link_id
             
                         LEFT JOIN (
                             SELECT 
-                                MAX(topic_id), 
-                                MAX(topic_slug), 
-                                MAX(topic_title),
-                                MAX(relation_topic_id), 
+                                MAX(facet_id), 
+                                MAX(facet_slug), 
+                                MAX(facet_title),
+                                MAX(relation_facet_id), 
                                 MAX(relation_link_id) as l_id,
-                                GROUP_CONCAT(topic_slug, '@', topic_title SEPARATOR '@') AS topic_list
-                                FROM topics
-                                LEFT JOIN topics_link_relation 
-                                    on topic_id = relation_topic_id
+                                GROUP_CONCAT(facet_slug, '@', facet_title SEPARATOR '@') AS facet_list
+                                FROM facets
+                                LEFT JOIN facets_links_relation 
+                                    on facet_id = relation_facet_id
                                     GROUP BY relation_link_id
                         ) AS rel
                              ON rel.l_id = link_id
 
                                 WHERE $string";
 
-         return DB::run($sql)->rowCount();
+        return DB::run($sql)->rowCount();
     }
 
     // Проверим наличие домена
@@ -239,7 +240,7 @@ class WebModel extends MainModel
                        :link_count)";
 
         DB::run($sql, $params);
-        
+
         $link_id =  DB::run("SELECT LAST_INSERT_ID() as link_id")->fetch(PDO::FETCH_ASSOC);
 
         return $link_id;
@@ -250,7 +251,7 @@ class WebModel extends MainModel
         $sql = "UPDATE links SET link_count = (link_count + 1) WHERE link_url_domain = :domain";
         DB::run($sql, ['domain' => $domain]);
     }
-    
+
     // Изменим домен
     public static function editLink($data)
     {
@@ -258,7 +259,7 @@ class WebModel extends MainModel
             'link_url'      => $data['link_url'],
             'link_title'    => $data['link_title'],
             'link_content'  => $data['link_content'],
-            'link_published'=> $data['link_published'],
+            'link_published' => $data['link_published'],
             'link_status'   => $data['link_status'],
             'link_id'       => $data['link_id'],
         ];
@@ -273,7 +274,7 @@ class WebModel extends MainModel
 
         return  DB::run($sql, $params);
     }
-    
+
     // Данные по id
     public static function getLinkId($link_id)
     {
@@ -295,22 +296,21 @@ class WebModel extends MainModel
 
         return DB::run($sql, ['link_id' => $link_id])->fetch(PDO::FETCH_ASSOC);
     }
-    
+
     // Темы по ссылке
     public static function getLinkTopic($link_id)
     {
         $sql = "SELECT
-                    topic_id,
-                    topic_title,
-                    topic_slug,
-                    topic_is_web,
-                    relation_topic_id,
+                    facet_id,
+                    facet_title,
+                    facet_slug,
+                    facet_is_web,
+                    relation_facet_id,
                     relation_link_id
-                        FROM topics  
-                        INNER JOIN topics_link_relation ON relation_topic_id = topic_id
+                        FROM facets  
+                        INNER JOIN facets_links_relation ON relation_facet_id = facet_id
                             WHERE relation_link_id  = :link_id";
 
         return DB::run($sql, ['link_id' => $link_id])->fetchAll(PDO::FETCH_ASSOC);
     }
-
 }

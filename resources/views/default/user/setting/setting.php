@@ -79,7 +79,7 @@
       <?php foreach (Config::get('fields-profile') as $block) { ?>
         <div class="mb20">
           <label class="block mb5" for="post_title"><?= $block['lang']; ?></label>
-          <input class="w-100 h30" maxlength="150" type="text" value="<?= $data['user'][$block['title']]; ?>" name="<?= $block['name']; ?>">
+          <input class="w-100 h30 pl5" maxlength="150" type="text" value="<?= $data['user'][$block['title']]; ?>" name="<?= $block['name']; ?>">
           <?php if ($block['help']) { ?>
             <div class="size-14 gray-light-2"><?= $block['help']; ?></div>
           <?php } ?>

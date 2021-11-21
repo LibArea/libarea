@@ -8,7 +8,7 @@
         <a class="ml15" href="<?= getUrlByName('admin.topics'); ?>">
           <i class="bi bi-pencil"></i>
         </a>
-        <a class="ml15" title="<?= Translate::get('add'); ?>" href="/topic/add">
+        <a class="ml15" title="<?= Translate::get('add'); ?>" href="<?= getUrlByName('topic.add'); ?>">
           <i class="bi bi-plus-lg middle"></i>
         </a>
       <?php } ?>
@@ -21,21 +21,21 @@
         $data['sheet'],
         $pages = [
           [
-            'id' => 'topics-all',
-            'url' => getUrlByName('topics'),
+            'id' => 'topics.all',
+            'url' => getUrlByName('topics.all'),
             'content' => Translate::get('all'),
             'icon' => 'bi bi-app'
           ],
           [
-            'id' => 'topics-new',
-            'url' => getUrlByName('topic.new'),
+            'id' => 'topics.new',
+            'url' => getUrlByName('topics.new'),
             'content' => Translate::get('new ones'),
             'icon' => 'bi bi-sort-up'
           ],
           [
-            'id' => 'topics-my', 
-            'url' => getUrlByName('topic.my'),
-            'content' => Translate::get('subscribed'),
+            'id' => 'topics.my',
+            'url' => getUrlByName('topics.my'),
+            'content' => Translate::get('reading'),
             'auth' => 'yes',
             'icon' => 'bi bi-check2-square'
           ],
@@ -60,11 +60,11 @@
               <?php $color = true; ?>
               <i class="bi bi-arrow-return-right gray ml<?= $topic['level'] * 15; ?>"></i>
             <?php } ?>
-            <a class="<?php if ($topic['level'] == 0) { ?>flex relative pt5 size-18 items-center hidden<?php } ?> <?php if ($topic['level'] > 0) { ?> black<?php } ?>" href="/topic/<?= $topic['topic_slug']; ?>">
+            <a class="<?php if ($topic['level'] == 0) { ?>flex relative pt5 size-18 items-center hidden<?php } ?> <?php if ($topic['level'] > 0) { ?> black<?php } ?>" href="/topic/<?= $topic['facet_slug']; ?>">
               <?php if ($topic['level'] == 0) { ?>
-                <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'w21 h21 mr5 br-box-gray'); ?>
+                <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'w21 h21 mr5 br-box-gray'); ?>
               <?php } ?>
-              <?= $topic['topic_title']; ?>
+              <?= $topic['facet_title']; ?>
             </a>
           </div>
         <?php } ?>

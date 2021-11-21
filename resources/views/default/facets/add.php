@@ -16,7 +16,7 @@
       <?= Translate::get('you can add more'); ?>:
       <span class="red"><?= $data['count_topic']; ?></span>
     </div>
-    <form class="" action="/topic/create" method="post" enctype="multipart/form-data">
+    <form class="" action="<?= getUrlByName('topic.create'); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
 
       <?= includeTemplate('/_block/form/field-input', [
@@ -24,7 +24,7 @@
           [
             'title' => Translate::get('title'),
             'type' => 'text',
-            'name' => 'topic_title',
+            'name' => 'facet_title',
             'value' => '',
             'min' => 3, 'max' => 64,
             'help' => '3 - 64 ' . Translate::get('characters'),
@@ -33,7 +33,7 @@
           [
             'title' => Translate::get('short description'),
             'type' => 'text',
-            'name' => 'topic_short_description',
+            'name' => 'facet_short_description',
             'value' => '',
             'min' => 11,
             'max' => 120,
@@ -43,7 +43,7 @@
           [
             'title' => Translate::get('title') . ' (SEO)',
             'type' => 'text',
-            'name' => 'topic_seo_title',
+            'name' => 'facet_seo_title',
             'value' => '',
             'min' => 4, 'max' => 225,
             'help' => '4 - 225 ' . Translate::get('characters'),
@@ -52,7 +52,7 @@
           [
             'title' => Translate::get('Slug'),
             'type' => 'text',
-            'name' => 'topic_slug',
+            'name' => 'facet_slug',
             'value' => '',
             'min' => 3,
             'max' => 32,
@@ -62,8 +62,12 @@
         ]
       ]); ?>
 
+      <?= includeTemplate('/_block/form/blog-or-topic', [
+        'uid'     => $uid,
+      ]); ?>
+
       <div for="mb5"><?= Translate::get('meta description'); ?><sup class="red">*</sup></div>
-      <textarea rows="6" class="add max-w780" minlength="44" name="topic_description"></textarea>
+      <textarea rows="6" class="add max-w780" minlength="44" name="facet_description"></textarea>
       <div class="size-14 gray-light-2 mb20">> 44 <?= Translate::get('characters'); ?></div>
       <?= sumbit(Translate::get('add')); ?>
     </form>

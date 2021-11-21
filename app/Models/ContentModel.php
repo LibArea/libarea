@@ -27,21 +27,21 @@ class ContentModel extends MainModel
 
         return $result->fetch(PDO::FETCH_ASSOC);
     }
-    
+
     // Частота размещения контента участника 
     public static function getSpeed($user_id, $type)
     {
         $sql = "SELECT 
-                    ". $type ."_id, 
-                    ". $type ."_user_id, 
-                    ". $type ."_date
-                    FROM ". $type ."s 
-                        WHERE ". $type ."_user_id = :user_id
-                        AND ". $type ."_date >= DATE_SUB(NOW(), INTERVAL 1 DAY)";
+                    " . $type . "_id, 
+                    " . $type . "_user_id, 
+                    " . $type . "_date
+                    FROM " . $type . "s 
+                        WHERE " . $type . "_user_id = :user_id
+                        AND " . $type . "_date >= DATE_SUB(NOW(), INTERVAL 1 DAY)";
 
         return  DB::run($sql, ['user_id' => $user_id])->rowCount();
     }
-    
+
     // Получим список запрещенных стоп-слов
     public static function getStopWords()
     {
@@ -55,7 +55,7 @@ class ContentModel extends MainModel
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
-    
+
     // Добавить стоп-слово
     public static function setStopWord($data)
     {
@@ -78,5 +78,4 @@ class ContentModel extends MainModel
 
         return DB::run($sql, ['word_id' => $word_id]);
     }
-    
 }

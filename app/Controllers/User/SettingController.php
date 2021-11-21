@@ -54,6 +54,7 @@ class SettingController extends MainController
         $user_lang          = Request::getPost('user_lang');
 
         $redirect   = getUrlByName('setting', ['login' => $this->uid['user_login']]);
+
         Validation::Limits($name, Translate::get('name'), '3', '11', $redirect);
         Validation::Limits($about, Translate::get('about me'), '0', '255', $redirect);
 

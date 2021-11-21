@@ -5,21 +5,27 @@ namespace App\Controllers\User;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\{UserModel, BadgeModel};
-use App\Models\{TopicModel, NotificationsModel, PostModel};
+use App\Models\{FacetModel, NotificationsModel, PostModel};
 use Content, Config, Base, Validation, Translate;
 
 class UserController extends MainController
 {
+    private $uid;
+
+    public function __construct()
+    {
+        $this->uid  = Base::getUid();
+    }
+    
     // Все пользователи
     function index()
     {
-        $uid    = Base::getUid();
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
         $limit = 42;
         $usersCount = UserModel::getUsersAllCount('all');
-        $users      = UserModel::getUsersAll($page, $limit, $uid['user_id'], 'noban');
+        $users      = UserModel::getUsersAll($page, $limit, $this->uid['user_id'], 'noban');
         Base::PageError404($users);
 
         $m = [
@@ -33,7 +39,7 @@ class UserController extends MainController
             '/user/users',
             [
                 'meta'  => meta($m, Translate::get('users'), Translate::get('desc-user-all')),
-                'uid'   => $uid,
+                'uid'   => $this->uid,
                 'data'  => [
                     'sheet'         => 'users',
                     'pagesCount'    => ceil($usersCount / $limit),
@@ -75,9 +81,8 @@ class UserController extends MainController
             $_SESSION['usernumbers'][$user['user_id']] = $user['user_id'];
         }
 
-        $uid = Base::getUid();
         $isBan = '';
-        if ($uid['user_trust_level'] > 4) {
+        if ($this->uid['user_trust_level'] > 4) {
             Request::getResources()->addBottomScript('/assets/js/admin.js');
             $isBan = UserModel::isBan($user['user_id']);
         }
@@ -93,34 +98,32 @@ class UserController extends MainController
             '/user/profile',
             [
                 'meta'  => meta($m, $meta_title, $meta_desc),
-                'uid'   => $uid,
+                'uid'   => $this->uid,
                 'data'  => [
                     'user_created_at'   => lang_date($user['user_created_at']),
                     'user_trust_level'  => UserModel::getUserTrust($user['user_id']),
                     'count'             => UserModel::contentCount($user['user_id']),
-                    'topics'            => TopicModel::getTopicsAll(1, 10, $user['user_id'], 'subscription'),
+                    'topics'            => FacetModel::getFacetsAll(1, 10, $user['user_id'], 'my'),
                     'badges'            => BadgeModel::getBadgeUserAll($user['user_id']),
                     'user'              => $user,
                     'isBan'             => $isBan,
-                    'participation'     => TopicModel::participation($user['user_id']),
+                    'participation'     => FacetModel::participation($user['user_id']),
                     'post'              => PostModel::getPostId($user['user_my_post']),
-                    'button_pm'         => Validation::accessPm($uid, $user['user_id'], Config::get('general.tl_add_pm'))
+                    'button_pm'         => Validation::accessPm($this->uid, $user['user_id'], Config::get('general.tl_add_pm'))
                 ]
             ]
         );
     }
 
     // Страница закладок участника
-    function userFavorites()
+    function favorites()
     {
-        $uid    = Base::getUid();
         $login  = Request::get('login');
-
-        if ($login != $uid['user_login']) {
-            redirect(getUrlByName('favorites', ['login' => $uid['user_login']]));
+        if ($login != $this->uid['user_login']) {
+            redirect(getUrlByName('favorites', ['login' => $this->uid['user_login']]));
         }
 
-        $favorites = UserModel::userFavorite($uid['user_id']);
+        $favorites = UserModel::userFavorite($this->uid['user_id']);
 
         $result = array();
         foreach ($favorites as $ind => $row) {
@@ -138,7 +141,7 @@ class UserController extends MainController
             '/user/favorite',
             [
                 'meta'  => meta($m = [], Translate::get('favorites')),
-                'uid'   => $uid,
+                'uid'   => $this->uid,
                 'data'  => [
                     'sheet'     => 'favorites',
                     'favorites' => $result
@@ -148,38 +151,35 @@ class UserController extends MainController
     }
 
     // Страница черновиков участника
-    function userDrafts()
+    function drafts()
     {
-        $uid    = Base::getUid();
         $login  = Request::get('login');
-
-        if ($login != $uid['user_login']) {
-            redirect('/u/' . $uid['user_login'] . '/drafts');
+        if ($login != $this->uid['user_login']) {
+            redirect(getUrlByName('user.drafts', ['login' => $this->uid['user_login']]));
         }
 
         return view(
             '/user/draft',
             [
                 'meta'  => meta($m = [], Translate::get('drafts')),
-                'uid'   => $uid,
+                'uid'   => $this->uid,
                 'data'  => [
-                    'drafts' => UserModel::userDraftPosts($uid['user_id']),
+                    'drafts'    => UserModel::userDraftPosts($this->uid['user_id']),
+                    'sheet'     => 'drafts',
                 ]
             ]
         );
     }
 
     // Страница предпочтений пользователя
-    public function subscribedPage()
+    public function subscribed()
     {
-        $uid    = Base::getUid();
         $login  = Request::get('login');
-
-        if ($login != $uid['user_login']) {
-            redirect(getUrlByName('subscribed', ['login' => $uid['user_login']]));
+        if ($login != $this->uid['user_login']) {
+            redirect(getUrlByName('subscribed', ['login' => $this->uid['user_login']]));
         }
 
-        $focus_posts = NotificationsModel::getFocusPostsListUser($uid['user_id']);
+        $focus_posts = NotificationsModel::getFocusPostsListUser($this->uid['user_id']);
 
         $result = array();
         foreach ($focus_posts as $ind => $row) {
@@ -193,9 +193,9 @@ class UserController extends MainController
             '/user/subscribed',
             [
                 'meta'  => meta($m = [], Translate::get('subscribed')),
-                'uid'   => $uid,
+                'uid'   => $this->uid,
                 'data'  => [
-                    'h1'    => Translate::get('subscribed') . ' ' . $uid['user_login'],
+                    'h1'    => Translate::get('subscribed') . ' ' . $this->uid['user_login'],
                     'sheet' => 'subscribed',
                     'posts' => $result
                 ]

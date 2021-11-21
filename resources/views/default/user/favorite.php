@@ -10,7 +10,7 @@
     Translate::get('profile'),
     Translate::get('favorites')
   ); ?>
-  
+
   <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
     <ul class="flex flex-row list-none m0 p0 center size-15">
@@ -27,7 +27,7 @@
           ],
           [
             'id' => 'subscribed',
-            'url' => getUrlByName('subscribed', ['login' => $uid['user_login']]),
+            'url' => getUrlByName('user.subscribed', ['login' => $uid['user_login']]),
             'content' => Translate::get('subscribed'),
             'icon' => 'bi bi-bookmark-plus'
           ],

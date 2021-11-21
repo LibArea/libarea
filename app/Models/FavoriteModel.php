@@ -18,7 +18,7 @@ class FavoriteModel extends MainModel
             $sql = "DELETE FROM favorites WHERE favorite_tid =  :content_id AND favorite_user_id = :user_id";
 
             DB::run($sql, ['content_id' => $content_id, 'user_id' => $user_id]);
-            
+
             return 'del';
         }
 
@@ -32,7 +32,7 @@ class FavoriteModel extends MainModel
                        VALUES(:favorite_tid, :favorite_user_id, :favorite_type)";
 
         DB::run($sql, $params);
-        
+
         return 'add';
     }
 

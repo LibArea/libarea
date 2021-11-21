@@ -36,6 +36,12 @@ return [
         'item'  => 'topics',
     ],
     [
+        'url'   => getUrlByName('admin.blogs'),
+        'name'  => Translate::get('blogs'),
+        'icon'  => 'bi bi-journal-text',
+        'item'  => 'blogs',
+    ],
+    [
         'url'   => getUrlByName('admin.invitations'),
         'name'  => Translate::get('invites'),
         'icon'  => 'bi bi-person-plus',

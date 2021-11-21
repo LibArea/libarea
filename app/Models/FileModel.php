@@ -37,7 +37,7 @@ class FileModel extends MainModel
 
         return DB::run($sql, $params);
     }
-    
+
     public static function get($file_id, $user_id, $type)
     {
         $sql = "SELECT 
@@ -54,7 +54,7 @@ class FileModel extends MainModel
 
         return  DB::run($sql, ['file_id' => $file_id, 'user_id' => $user_id, 'type' => $type])->fetch(PDO::FETCH_ASSOC);
     }
-    
+
     public static function removal($file_path, $user_id)
     {
         $sql = "UPDATE files SET file_is_deleted = 1 WHERE file_path = :file_path AND file_user_id = :user_id";

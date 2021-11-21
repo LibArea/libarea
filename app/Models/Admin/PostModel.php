@@ -48,16 +48,16 @@ class PostModel extends MainModel
                         LEFT JOIN
                         (
                             SELECT 
-                                MAX(topic_id), 
-                                MAX(topic_slug), 
-                                MAX(topic_title),
-                                MAX(relation_topic_id), 
+                                MAX(facet_id), 
+                                MAX(facet_slug), 
+                                MAX(facet_title),
+                                MAX(relation_facet_id), 
                                 relation_post_id,
 
-                                GROUP_CONCAT(topic_slug, '@', topic_title SEPARATOR '@') AS topic_list
-                                FROM topics  
-                                LEFT JOIN topics_post_relation 
-                                    on topic_id = relation_topic_id
+                                GROUP_CONCAT(facet_slug, '@', facet_title SEPARATOR '@') AS facet_list
+                                FROM facets  
+                                LEFT JOIN facets_posts_relation 
+                                    on facet_id = relation_facet_id
                                 GROUP BY relation_post_id
                         ) AS rel
                             ON rel.relation_post_id = post_id 
@@ -78,11 +78,11 @@ class PostModel extends MainModel
                     post_draft,
                     post_is_deleted,
                     relation_post_id,
-                    relation_topic_id
+                    relation_facet_id
                         FROM posts
-                            LEFT JOIN topics_post_relation on relation_post_id = post_id
+                            LEFT JOIN facets_posts_relation on relation_post_id = post_id
                             
-                            WHERE relation_topic_id is NULL AND post_is_deleted = 0 AND post_draft = 0";
+                            WHERE relation_facet_id is NULL AND post_is_deleted = 0 AND post_draft = 0";
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }

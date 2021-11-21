@@ -3,7 +3,7 @@
 namespace App\Controllers\Admin;
 
 use Hleb\Scheme\App\Controllers\MainController;
-use App\Models\{HomeModel, AnswerModel, CommentModel, AgentModel, WebModel, TopicModel, Admin\PostModel};
+use App\Models\{HomeModel, AnswerModel, CommentModel, AgentModel, WebModel, FacetModel, Admin\PostModel};
 use App\Models\User\UserModel;
 use Base, Translate;
 
@@ -21,7 +21,7 @@ class HomeController extends MainController
                 'meta'  => meta($m = [], Translate::get('admin')),
                 'uid'   => $uid,
                 'data'  => [
-                    'topics_count'      => TopicModel::getTopicsAllCount($uid['user_id'], 'all'),
+                    'topics_count'      => FacetModel::getFacetsAllCount($uid['user_id'], 'all'),
                     'posts_count'       => HomeModel::feedCount([], $uid, 'all'),
                     'posts_no_topic'    => PostModel::getNoTopic(),
                     'users_count'       => UserModel::getUsersAllCount('all'),

@@ -15,7 +15,7 @@
 
     <h1 class="mt5 mb10 size-24 font-normal"><?= $data['link']['link_title']; ?>
       <?php if ($uid['user_trust_level'] > 4) { ?>
-        <a class="size-14 ml5" title="<?= Translate::get('edit'); ?>" href="/web/edit/<?= $data['link']['link_id']; ?>">
+        <a class="size-14 ml5" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('web.edit', ['id' => $data['link']['link_id']]); ?>">
           <i class="bi bi-pencil size-15"></i>
         </a>
       <?php } ?>
@@ -36,9 +36,9 @@
         <?php if (!empty($data['topics'])) { ?>
           <div class="mt20 mb20 lowercase">
             <?php foreach ($data['topics'] as $topic) { ?>
-              <?php if ($topic['topic_is_web'] == 1) { ?>
-                <a class="pt5 pr20 pb5 blue block size-18" href="<?= getUrlByName('web.topic', ['slug' => $topic['topic_slug']]); ?>">
-                  <?= $topic['topic_title']; ?>
+              <?php if ($topic['facet_is_web'] == 1) { ?>
+                <a class="pt5 pr20 pb5 blue block size-18" href="<?= getUrlByName('web.topic', ['slug' => $topic['facet_slug']]); ?>">
+                  <?= $topic['facet_title']; ?>
                 </a>
               <?php } ?>
             <?php } ?>
@@ -54,9 +54,9 @@
     <?php if ($data['high_leve']) { ?>
       <div class="gray"><?= Translate::get('see also'); ?></div>
       <?php foreach ($data['high_leve'] as $rl) { ?>
-        <?php if ($rl['topic_is_web'] == 1) { ?>
-          <a class="inline mr20 size-14 black" href="<?= getUrlByName('web.topic', ['slug' => $rl['topic_slug']]); ?>">
-            <?= $rl['topic_title']; ?>
+        <?php if ($rl['facet_is_web'] == 1) { ?>
+          <a class="inline mr20 size-14 black" href="<?= getUrlByName('web.topic', ['slug' => $rl['facet_slug']]); ?>">
+            <?= $rl['facet_title']; ?>
           </a>
         <?php } ?>
       <?php } ?>

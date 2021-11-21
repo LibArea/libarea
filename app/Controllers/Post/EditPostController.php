@@ -5,7 +5,7 @@ namespace App\Controllers\Post;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
-use App\Models\{TopicModel, PostModel};
+use App\Models\{FacetModel, PostModel};
 use Content, Base, UploadImage, Validation, Translate;
 
 class EditPostController extends MainController
@@ -41,9 +41,10 @@ class EditPostController extends MainController
                 'data'  => [
                     'sheet'         => 'edit-post',
                     'post'          => $post,
-                    'post_select'   => PostModel::postRelated($post['post_related']),
+                    'related_posts' => PostModel::postRelated($post['post_related']),
                     'user'          => UserModel::getUser($post['post_user_id'], 'id'),
-                    'topic_select'  => PostModel::getPostTopic($post['post_id'], $this->uid['user_id']),
+                    'topic_select'  => PostModel::getPostTopic($post['post_id'], $this->uid['user_id'], 'topic'),
+                    'topic_blog'    => PostModel::getPostTopic($post['post_id'], $this->uid['user_id'], 'blog'),
                 ]
             ]
         );
@@ -63,6 +64,7 @@ class EditPostController extends MainController
         $post_user_new          = Request::getPost('user_select');
         $post_merged_id         = Request::getPostInt('post_merged_id');
         $post_tl                = Request::getPostInt('content_tl');
+        $blog_id               = Request::getPostInt('blog_id');
 
         // Связанные посты и темы
         $post_fields    = Request::getPost() ?? [];
@@ -80,7 +82,7 @@ class EditPostController extends MainController
         Base::accountBan($user);
         Content::stopContentQuietМode($user);
 
-        $redirect   = '/post/edit/' . $post_id;
+        $redirect   = getUrlByName('post.edit', ['id' =>$post_id]);
 
         if (!$topics) {
             addMsg(Translate::get('select topic'), 'error');
@@ -139,14 +141,25 @@ class EditPostController extends MainController
 
         // Перезапишем пост
         PostModel::editPost($data);
+        
+        if ($blog_id != 0) {
+          $topics = array_merge(['0' => $blog_id], $topics);
+        }  
+  
+        $arr = [];
+        foreach ($topics as $row) {
+            $arr[] = array($row, $post_id);
+        }
+        FacetModel::addPostFacets($arr, $post_id);
+        
 
-        if (!empty($topics)) {
+      /*  if (!empty($topics)) {
             $arr = [];
             foreach ($topics as $row) {
                 $arr[] = array($row, $post_id);
             }
-            TopicModel::addPostTopics($arr, $post_id);
-        }
+            FacetModel::addPostFacets($arr, $post_id);
+        } */
 
         redirect(getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]));
     }
@@ -164,7 +177,7 @@ class EditPostController extends MainController
         UploadImage::cover_post_remove($post['post_content_img'], $this->uid['user_id']);
 
         addMsg(Translate::get('cover removed'), 'success');
-        redirect('/post/edit/' . $post['post_id']);
+        redirect(getUrlByName('post.edit', ['id' =>$post['post_id']]));
     }
 
     public function uploadContentImage()

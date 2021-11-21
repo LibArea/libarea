@@ -21,23 +21,23 @@ class SearchController extends MainController
                 addMsg(Translate::get('empty request'), 'error');
                 redirect(getUrlByName('search'));
             }
-            
+
             Validation::Limits($query, Translate::get('too short'), '3', '128', '/search');
-            
+
             $qa     = self::searchPosts($query, $type);
             $count  = count($qa);
             $result = [];
             foreach ($qa as $ind => $row) {
-                
+
                 if ($type == 'mysql') {
                     $row['content'] = Content::text(cutWords($row['content'], 32, '...'), 'text');
                 } else {
                     $row['content'] = Content::noMarkdown($row['content']);
                 }
-                
-               $result[$ind]   = $row;
+
+                $result[$ind]   = $row;
             }
-        }           
+        }
         return view(
             '/search/index',
             [
@@ -55,10 +55,10 @@ class SearchController extends MainController
 
     public static function searchPosts($query, $type)
     {
-        if ($type == 'mysql'){
-           return SearchModel::getSearch($query, 50);
+        if ($type == 'mysql') {
+            return SearchModel::getSearch($query, 50);
         }
-        
+
         return SearchModel::getSearchPostServer($query, 50);
     }
 }

@@ -25,7 +25,7 @@
           ],
           [
             'id' => 'subscribed',
-            'url' => getUrlByName('subscribed', ['login' => $uid['user_login']]),
+            'url' => getUrlByName('user.subscribed', ['login' => $uid['user_login']]),
             'content' => Translate::get('subscribed'),
             'icon' => 'bi bi-bookmark-plus'
           ],

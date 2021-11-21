@@ -10,7 +10,7 @@
   ); ?>
 
   <div class="br-box-gray bg-white p15">
-    <form action="/post/edit" method="post" enctype="multipart/form-data">
+    <form action="<?= getUrlByName('post.edit.pr'); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
 
       <?= includeTemplate('/_block/form/field-input', ['data' => [
@@ -26,6 +26,16 @@
         ],
       ]]); ?>
 
+      <?php if (!empty($data['topic_blog'])) { ?>
+        <?= includeTemplate('/_block/form/select-blog-post', [
+          'uid' => $uid,
+          'data' => $data,
+          'action' => 'edit',
+          'title' => Translate::get('blogs'),
+          'help' => '...',
+        ]); ?>
+      <?php } ?>
+
       <?= includeTemplate('/_block/form/select-topic-post', [
         'uid' => $uid,
         'data' => $data,
@@ -37,7 +47,7 @@
 
       <?php if ($post['post_url']) { ?>
         <div class="mb20">
-          <label class="block" for="post_title">URL:</label>
+          <label class="block mb5" for="post_title">URL:</label>
           <a target="_blank" rel="noreferrer ugc" href="<?= $post['post_url']; ?>" class="size-14"><?= $data['post']['post_url']; ?></a>
         </div>
       <?php } ?>
@@ -68,13 +78,15 @@
       ]); ?>
 
       <?php if ($data['post']['post_draft'] == 1) { ?>
-        <?= includeTemplate('/_block/form/field-radio', ['data' => [
-          [
-            'title' => Translate::get('is this a draft?'),
-            'name' => 'post_draft',
-            'checked' => $post['post_draft']
-          ],
-        ]]); ?>
+        <?= includeTemplate('/_block/form/field-radio', [
+          'data' => [
+            [
+              'title' => Translate::get('is this a draft?'),
+              'name' => 'post_draft',
+              'checked' => $post['post_draft']
+            ],
+          ]
+        ]); ?>
       <?php } ?>
 
       <?php if ($uid['user_trust_level'] > 0) { ?>
@@ -82,35 +94,42 @@
           'uid' => $uid,
           'data' => $post['post_tl']
         ]); ?>
-        <?= includeTemplate('/_block/form/field-radio', ['data' => [
-          [
-            'title' => Translate::get('format Q&A?'),
-            'name' => 'post_type',
-            'checked' => $post['post_type']
-          ],
-          [
-            'title' => Translate::get('to close?'),
-            'name' => 'closed',
-            'checked' => $post['post_closed']
-          ],
-        ]]); ?>
+
+        <?= includeTemplate('/_block/form/field-radio', [
+          'data' => [
+            [
+              'title' => Translate::get('format Q&A?'),
+              'name' => 'post_type',
+              'checked' => $post['post_type']
+            ],
+            [
+              'title' => Translate::get('to close?'),
+              'name' => 'closed',
+              'checked' => $post['post_closed']
+            ],
+          ]
+        ]); ?>
       <?php } ?>
 
-      <?= includeTemplate('/_block/form/field-radio', ['data' => [
-        [
-          'title' => Translate::get('is this a translation?'),
-          'name' => 'translation',
-          'checked' => $post['post_translation']
-        ],
-      ]]); ?>
+      <?= includeTemplate('/_block/form/field-radio', [
+        'data' => [
+          [
+            'title' => Translate::get('is this a translation?'),
+            'name' => 'translation',
+            'checked' => $post['post_translation']
+          ],
+        ]
+      ]); ?>
 
       <?php if ($uid['user_trust_level'] > 2) { ?>
-        <?= includeTemplate('/_block/form/field-radio', ['data' => [
-          [
-            'title' => Translate::get('raise?'), 'name' => 'top',
-            'checked' => $post['post_top']
-          ],
-        ]]); ?>
+        <?= includeTemplate('/_block/form/field-radio', [
+          'data' => [
+            [
+              'title' => Translate::get('raise?'), 'name' => 'top',
+              'checked' => $post['post_top']
+            ],
+          ]
+        ]); ?>
       <?php } ?>
 
       <?php if ($uid['user_trust_level'] > 4) { ?>

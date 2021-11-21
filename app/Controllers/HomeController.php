@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\{HomeModel, TopicModel};
+use App\Models\{HomeModel, FacetModel};
 use Content, Base, Config, Translate;
 
 class HomeController extends MainController
@@ -24,8 +24,8 @@ class HomeController extends MainController
 
         $result_post = array();
         foreach ($posts as $ind => $row) {
-            $text = explode("\n", $row['post_content']);
-            $row['post_content_preview']    = Content::text($text[0], 'line');
+            $text = fragment($row['post_content']);
+            $row['post_content_preview']    = Content::text($text, 'line');
             $row['post_date']               = lang_date($row['post_date']);
             $result_post[$ind]              = $row;
         }
@@ -48,7 +48,7 @@ class HomeController extends MainController
 
         $topics = [];
         if (count($topics_user) == 0) {
-            $topics = TopicModel::advice($uid['user_id']);
+            $topics = FacetModel::advice($uid['user_id']);
         }
 
         $m = [

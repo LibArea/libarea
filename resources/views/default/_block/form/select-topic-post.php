@@ -4,8 +4,8 @@
   </label>
   <?php if ($action == 'edit') { ?>
     <select name="topic_select[]" multiple="multiple" id='topic'>
-      <?php foreach ($data['topic_select'] as $value) { ?> <?php print_r($value); ?>
-        <option selected value="<?= $value['topic_id']; ?>"><?= $value['topic_title']; ?></option>
+      <?php foreach ($data['topic_select'] as $value) { ?>  
+        <option selected value="<?= $value['facet_id']; ?>"><?= $value['facet_title']; ?></option>
       <?php } ?>
     </select>
   <?php } else { ?>
@@ -54,9 +54,9 @@
       return $state;
     };
 
-    <?php if (!empty($data['topic']['topic_id'])) { ?>
-      let intValueOfFruit = "<?= $data['topic']['topic_id']; ?>";
-      let selectOption = new Option("<?= $data['topic']['topic_title']; ?>", intValueOfFruit, true, true);
+    <?php if (!empty($data['topic']['facet_id'])) { ?>
+      let intValueOfFruit = "<?= $data['topic']['facet_id']; ?>";
+      let selectOption = new Option("<?= $data['topic']['facet_title']; ?>", intValueOfFruit, true, true);
       $('#topic').append(selectOption).trigger('change');
     <?php } ?>
   });

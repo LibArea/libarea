@@ -26,6 +26,7 @@
       fetch_search();
     });
   });
+
   function fetch_search() {
     var val = document.getElementById("find").value;
     var token = $('input[name="token"]').attr('value');
@@ -45,15 +46,15 @@
           var html = '<div class="flex">';
           $.each(data, function(index, data) {
             if (data.topic_slug) {
-              html += '<a class="blue block size-14 mb15 mr10" href="/topic/' + data.topic_slug + '">';
-              html += '<img class="w21 mr5 br-box-gray" src="<?= AG_PATH_TOPICS_LOGOS; ?>' + data.topic_img + '">';
-              html += data.topic_title + '</a>';  
+              html += '<a class="blue block size-14 mb15 mr10" href="/topic/' + data.facet_slug + '">';
+              html += '<img class="w21 mr5 br-box-gray" src="<?= AG_PATH_FACETS_LOGOS; ?>' + data.facet_img + '">';
+              html += data.facet_title + '</a>';
             }
             if (data.post_id) {
               html += '<a class="block black size-14 mb10" href="/post/' + data.post_id + '">' +
-              data.title + '</a>';
+                data.title + '</a>';
             }
-             html += '</div>';
+            html += '</div>';
           });
         } else {
           var html = "<span class='size-14 gray'><?= Translate::get('no results'); ?></span>";

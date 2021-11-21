@@ -12,7 +12,7 @@
   ); ?>
 
   <div class="br-box-gray bg-white p15">
-    <form action="/web/create" method="post">
+    <form action="<?= getUrlByName('web.create'); ?>" method="post">
       <?= csrf_field() ?>
 
       <?= includeTemplate('/_block/form/field-input', [

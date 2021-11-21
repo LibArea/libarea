@@ -169,16 +169,16 @@ class NotificationsModel extends MainModel
                         LEFT JOIN
                         (
                             SELECT 
-                                MAX(topic_id), 
-                                MAX(topic_slug), 
-                                MAX(topic_title),
-                                MAX(relation_topic_id), 
+                                MAX(facet_id), 
+                                MAX(facet_slug), 
+                                MAX(facet_title),
+                                MAX(relation_facet_id), 
                                 relation_post_id,
 
-                                GROUP_CONCAT(topic_slug, '@', topic_title SEPARATOR '@') AS topic_list
-                                FROM topics  
-                                LEFT JOIN topics_post_relation 
-                                    on topic_id = relation_topic_id
+                                GROUP_CONCAT(facet_slug, '@', facet_title SEPARATOR '@') AS facet_list
+                                FROM facets  
+                                LEFT JOIN facets_posts_relation 
+                                    on facet_id = relation_facet_id
                                 GROUP BY relation_post_id
                         ) AS rel
                             ON rel.relation_post_id = post_id 
@@ -224,5 +224,4 @@ class NotificationsModel extends MainModel
 
         return DB::run($sql, ['user_id' => $user_id]);
     }
-    
 }

@@ -58,9 +58,6 @@
 
   <?php if ($uid['user_id'] > 0 && !empty($data['topics_user'])) { ?>
     <div class="br-box-gray p15 mb15 br-rd5 bg-white size-14">
-      <a class="right gray-light-2" title="<?= Translate::get('topics'); ?>" href="<?= getUrlByName('topic.my'); ?>">
-        <i class="bi bi-chevron-right middle"></i>
-      </a>
       <div class="uppercase gray mt5 mb5">
         <?= Translate::get('reading'); ?>
       </div>
@@ -69,7 +66,7 @@
       $my = [];
       $other = [];
       foreach ($data['topics_user'] as $topic) {
-        if ($topic['topic_user_id'] == $uid['user_id']) {
+        if ($topic['facet_user_id'] == $uid['user_id']) {
           $my[] = $topic;
         } else {
           $other[] = $topic;
@@ -80,21 +77,27 @@
       foreach ($topics as $key => $topic) {
         $n++;
         if ($n > Config::get('topics.number_topics')) break;
+        $url = getUrlByName('topic', ['slug' => $topic['facet_slug']]);
+        $blog = '';
+        if ($topic['facet_type'] == 'blog') {
+          $blog = '<sup class="red">blog</span>';
+          $url = getUrlByName('blog', ['slug' => $topic['facet_slug']]);
+        }
       ?>
         <div class="flex relative pt5 pb5 items-center justify-between hidden">
-          <a class="gray-light" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
-            <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'w24 mr5'); ?>
-            <span class="ml5 middle"><?= $topic['topic_title']; ?></span>
+          <a class="gray-light" href="<?= $url; ?>">
+            <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'w24 mr5'); ?>
+            <span class="ml5 middle"><?= $topic['facet_title']; ?> <?= $blog; ?></span>
           </a>
-          <?php if ($uid['user_id'] == $topic['topic_user_id']) { ?>
-            <a class="right blue" title="<?= Translate::get('add post'); ?>" href="/post/add/<?= $topic['topic_id']; ?>">
+          <?php if ($uid['user_id'] == $topic['facet_user_id']) { ?>
+            <a class="right blue" title="<?= Translate::get('add post'); ?>" href="<?= getUrlByName('post.add'); ?>/<?= $topic['facet_id']; ?>">
               <i class="bi bi-plus-lg size-14"></i>
             </a>
           <?php } ?>
         </div>
       <?php } ?>
       <?php if (count($data['topics_user']) > Config::get('topics.number_topics')) { ?>
-        <a class="gray block mt5" title="<?= Translate::get('topics'); ?>" href="<?= getUrlByName('topic.my'); ?>">
+        <a class="gray block mt5" title="<?= Translate::get('topics'); ?>" href="<?= getUrlByName('topics.my'); ?>">
           <?= Translate::get('see more'); ?> <i class="bi bi-chevron-double-right middle"></i>
         </a>
       <?php } ?>

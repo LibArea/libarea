@@ -37,11 +37,11 @@ class AnswerModel extends MainModel
             if ($uid['user_trust_level']) {
                 $sort = 'WHERE answer_is_deleted = 0 AND post_is_deleted = 0 AND post_tl <= ' . $uid['user_trust_level'] . '';
             }
-        } else {  
+        } else {
             $sort = "WHERE answer_is_deleted = 0 AND post_is_deleted = 0";
             if ($sheet == 'ban') {
                 $sort = "WHERE answer_is_deleted = 1 OR post_is_deleted = 1";
-            }        
+            }
         }
 
         $start  = ($page - 1) * $limit;
@@ -78,7 +78,7 @@ class AnswerModel extends MainModel
         if ($sheet == 'ban') {
             $sort = "WHERE answer_is_deleted = 1";
         }
-        
+
         $sql = "SELECT 
                     answer_id, 
                     answer_is_deleted 

@@ -2,7 +2,7 @@
   <?= includeTemplate('/_block/menu/admin', ['sheet' => $data['sheet']]); ?>
 </div>
 <main class="col-span-10 mb-col-12">
-  <a class="right mr15" title="<?= Translate::get('add'); ?>" href="/topic/add">
+  <a class="right mr15" title="<?= Translate::get('add'); ?>" href="<?= getUrlByName('topic.add'); ?>">
     <i class="bi bi-plus-lg middle"></i>
   </a>
 
@@ -53,26 +53,26 @@
         <?php foreach ($data['topics'] as $key => $topic) { ?>
           <tr>
             <td class="center">
-              <?= $topic['topic_id']; ?>
+              <?= $topic['facet_id']; ?>
             </td>
             <td class="center">
-              <?= topic_logo_img($topic['topic_img'], 'max', $topic['topic_title'], 'w64'); ?>
+              <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'w64'); ?>
             </td>
             <td>
-              <a class="size-21" rel="nofollow noreferrer" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>">
-                <?= $topic['topic_title']; ?>
+              <a class="size-21" rel="nofollow noreferrer" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>">
+                <?= $topic['facet_title']; ?>
               </a>
-              <span class="green mr5 ml5">topic/<?= $topic['topic_slug']; ?></span>
-              <span class="mr5 ml5">posts: <?= $topic['topic_count']; ?></span>
-              <?php if ($topic['topic_top_level'] != 0) { ?>
+              <span class="green mr5 ml5">topic/<?= $topic['facet_slug']; ?></span>
+              <span class="mr5 ml5">posts: <?= $topic['facet_count']; ?></span>
+              <?php if ($topic['facet_top_level'] != 0) { ?>
                 <span class="green mr5 ml5"><?= Translate::get('subtopic'); ?></span>
               <?php } ?>
               <div class="content-telo">
-                <?= $topic['topic_description']; ?>
+                <?= $topic['facet_description']; ?>
               </div>
             </td>
             <td class="center">
-              <a title="<?= Translate::get('edit'); ?>" href="/topic/edit/<?= $topic['topic_id']; ?>">
+              <a title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('topic.edit', ['id' => $topic['facet_id']]); ?>">
                 <i class="bi bi-pencil size-15"></i>
               </a>
             </td>

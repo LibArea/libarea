@@ -50,11 +50,12 @@ $data = [
     'posted'            => 'Posted',
     'posted-help'       => 'The posted material is visible to the participants',
     'all domains'       => 'All domains',
-    'space'             => 'Space',
-    'spaces'            => 'Spaces',
+    'blog'              => 'Blog',
+    'blogs'             => 'Blogs',
     'topics'            => 'Topics',
     'topic'             => 'Topic',
-    'topics no'         => 'Topics no',
+    'topics-no'         => 'There are no topics yet',
+    'blogs-no'          => 'There are no blogs yet',
     'parent'            => 'Parent',
     'edit topic'        => 'Edit topic',
     'authorization'     => 'Authorization',
@@ -178,6 +179,7 @@ $data = [
     'in'                => 'in',
     'on'                => 'on',
     'for'               => 'for',
+    'my'                => 'My',
     'by default'        => 'By default',
     'just me'           => 'Just me',
     'publications'      => 'Publications',
@@ -257,7 +259,7 @@ $data = [
     'num-post'      => ['Post', 'Post', 'Posts'],
     'num-view'      => ['View', 'View', 'Views'],
     'num-website'   => ['Website', 'Sites', 'Sites'],
-    'num-space'     => ['Space', 'Spaces', 'Spaces'],
+    'num-blog'      => ['Blog', 'Blogs', 'Blogs'],
 
     'comment'       => 'Comment',
     'comments'      => 'Comments',
@@ -319,7 +321,7 @@ $data = [
     'titles'                => 'Titles',
     'descriptions'          => 'Descriptions',
     'url-already-exists'    => 'This topic URL already exists',
-    'url-gaps'              => 'Spaces are not allowed in the URL',
+    'url-gaps'              => 'Blog are not allowed in the URL',
     'select topic'          => 'Choose a topic',
     'you-question-no'       => 'You have already answered this question',
     'you need to log in'    => 'Login required',
@@ -376,7 +378,7 @@ $data = [
     'Social network'    => 'Social network',
     'Internet'          => 'Internet',
     'web-cat'           => 'Is it in the catalog',
-    'web-cat-help'      => 'Whether to show the topic in the catalog (sites)',
+    'web-cat-help'      => 'In the site catalog, will be a Category (will become visible)',
 
     /* Setting */
     'info-setting'          => 'Fill in your name, this will help attendees refer to you by name. <br> <br> Tell us something about yourself. You have a great opportunity to open up to please others and seem like an interesting person .',
@@ -470,20 +472,21 @@ $data = [
     'recommended posts' => 'recommended posts',
     'recommended-posts-desc' => 'Recommended posts in «%1$s» hand - selected. ',
     
-    'topic-desc-all'        => 'Topics of content, posts. Popular, best, global selection. Topics of the day',
-    'topics-my'             => 'I am subscribed to topics',
-    'topics-new'            => 'New topics',
-    'topics-desc-all'       => 'A page of topics arranged in order of popularity. By the number of posts located',
-    'topics-desc-my'        => 'The page of topics I subscribed to',
-    'topics-desc-new'       => 'New themes added on the site recently. Subscribe to topics',
-    'topic-subscription'    => 'Subscribe to the topics and read them in the feed',
-    
-    'welcome-info' => '<p>Thank you for registering! Here you will find brief information on how to use this site. .</p>
-    <p>This site consists of <a href="/spaces">Topics</a>.</p>
-    <p><i class="icon-lightbulb red"></i> To see other posts from other spaces in the feed, <b>you need <a href="/topics">subscribe</a></b> to those of interest to you. </p>
-    <p><b>By the way... </b></p>
-    <p>Once you done some digging around the site, feel free to check out a more  <a href="https://agouti.info">detailed explanation</a> of how things work here.</p>
-    <p><img alt="Agouti" class="footer-img clear no-mob block" src="/assets/images/agouti_footer.gif"></p>',
+    'blog-add-info'         => 'Blog page created by me',
+    'topics.all'            => 'All topics',
+    'topics.my'             => 'I am subscribed to topics',
+    'topics.new'            => 'New Topics',
+    'topics.all-desc'       => 'A page of topics arranged in order of popularity. By the number of posts located',
+    'topics.my-desc'        => 'Topics page I follow',
+    'topics.new-desc'       => 'New themes added to the site recently. Subscribe to topics',
+    'structure-desc'        => 'Topics represented by different trees, structure of topics and their relationship',
+    'blogs.all'             => 'Personal blogs',
+    'blogs.my'              => 'My blogs',
+    'blogs.new'             => 'New blogs',
+    'blogs.all-desc'        => 'All personal blogs of the participants on the site recently. Sorted in order of popularity',
+    'blogs.my-desc'         => 'My blogs on the site',
+    'blogs.new-desc'        => 'Blogs on the site added recently. Members personal blogs',
+    'topic-subscription'    => 'Subscribe to topics and read them in the feed',
     
 ];
 

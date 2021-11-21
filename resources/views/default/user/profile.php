@@ -93,9 +93,9 @@
               <span class="d">
                 <?php foreach ($data['topics'] as  $topic) { ?>
                   <div class="mt5 mb5">
-                    <a class="flex relative pt5 pb5 hidden gray" href="<?= getUrlByName('topic', ['slug' => $topic['topic_slug']]); ?>" title="<?= $topic['topic_title']; ?>">
-                      <?= topic_logo_img($topic['topic_img'], 'small', $topic['topic_title'], 'w18 mr10'); ?>
-                      <span class="bar-name size-14"><?= $topic['topic_title']; ?></span>
+                    <a class="flex relative pt5 pb5 hidden gray" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>" title="<?= $topic['facet_title']; ?>">
+                      <?= facet_logo_img($topic['facet_img'], 'small', $topic['facet_title'], 'w18 mr10'); ?>
+                      <span class="bar-name size-14"><?= $topic['facet_title']; ?></span>
                     </a>
                   </div>
                 <?php } ?>
@@ -130,27 +130,27 @@
           <h2 class="mb5 uppercase pt15 font-normal size-14">
             <?= Translate::get('contacts'); ?>
           </h2>
-        <?php foreach (Config::get('fields-profile') as $block) { ?>
+          <?php foreach (Config::get('fields-profile') as $block) { ?>
             <?php if ($data['user'][$block['title']]) { ?>
-                <div class="mb20">
-                  <label for="name"><?= $block['lang']; ?>:</label>
-                <?php if ($block['url']) { ?>  
+              <div class="mb20">
+                <label for="name"><?= $block['lang']; ?>:</label>
+                <?php if ($block['url']) { ?>
                   <a href="<?php if ($block['addition']) { ?><?= $block['addition']; ?><?php } ?><?= $data['user'][$block['url']]; ?>" rel="noopener nofollow ugc">
                     <span class="mr5 ml5"><?= $data['user'][$block['title']]; ?></span>
                   </a>
-                <?php } else { ?>        
-                   <span class="mr5 ml5"><?= $data['user'][$block['title']]; ?></span>
+                <?php } else { ?>
+                  <span class="mr5 ml5"><?= $data['user'][$block['title']]; ?></span>
                 <?php } ?>
-                </div>
-             <?php } else { ?>
-                <?php if ('user_location' == $block['title']) { ?>
+              </div>
+            <?php } else { ?>
+              <?php if ('user_location' == $block['title']) { ?>
                 <div class="mb20">
                   <label for="name"><?= $block['lang']; ?>:</label>
                   ...
                 </div>
-                <?php } ?>
-             <?php } ?>
-        <?php } ?>
+              <?php } ?>
+            <?php } ?>
+          <?php } ?>
           <div class="relative mt15 pt5 pr15 pb5">
             <h3 class="mt0 mb5 uppercase pt5 font-normal size-14">
               <?= Translate::get('badges'); ?>
@@ -195,15 +195,15 @@
               </div>
             </div>
           <?php } ?>
-          
-          <?php if (!empty($data['participation'][0]['topic_id'])) { ?>
-             <h3 class="mb5 uppercase pt10 font-normal size-14">
+
+          <?php if (!empty($data['participation'][0]['facet_id'])) { ?>
+            <h3 class="mb5 uppercase pt10 font-normal size-14">
               <?= Translate::get('understands'); ?>
             </h3>
             <?php foreach ($data['participation'] as $part) { ?>
-               <a class="bg-blue-100 bg-hover-green white-hover pt5 pr10 pb5 pl10 mb5 br-rd20 blue inline size-14" href="<?= getUrlByName('topic', ['slug' => $part['topic_slug']]); ?>">
-                <?= $part['topic_title']; ?>
-                </a>
+              <a class="bg-blue-100 bg-hover-green white-hover pt5 pr10 pb5 pl10 mb5 br-rd20 blue inline size-14" href="<?= getUrlByName('topic', ['slug' => $part['facet_slug']]); ?>">
+                <?= $part['facet_title']; ?>
+              </a>
             <?php } ?>
           <?php } ?>
 
@@ -212,17 +212,17 @@
               <h3 class="mt0 mb10 uppercase pt10 size-14"><?= Translate::get('admin'); ?></h3>
               <div class="mb5">
                 <?php if ($uid['user_trust_level'] != 5) { ?>
-                <?php if ($data['isBan']) { ?>
-                  <span class="type-ban gray size-15 mb5 block" data-id="<?= $data['user']['user_id']; ?>" data-type="user">
-                    <i class="bi bi-person-x-fill red middle mr5"></i>
-                    <span class="red size-14"><?= Translate::get('unban'); ?></span>
-                  </span>
-                <?php } else { ?>
-                  <span class="type-ban size-14 gray size-15 mb5 block" data-id="<?= $data['user']['user_id']; ?>" data-type="user">
-                    <i class="bi bi-person-x middle mr5"></i>
-                    <?= Translate::get('ban it'); ?>
-                  </span>
-                <?php } ?>
+                  <?php if ($data['isBan']) { ?>
+                    <span class="type-ban gray size-15 mb5 block" data-id="<?= $data['user']['user_id']; ?>" data-type="user">
+                      <i class="bi bi-person-x-fill red middle mr5"></i>
+                      <span class="red size-14"><?= Translate::get('unban'); ?></span>
+                    </span>
+                  <?php } else { ?>
+                    <span class="type-ban size-14 gray size-15 mb5 block" data-id="<?= $data['user']['user_id']; ?>" data-type="user">
+                      <i class="bi bi-person-x middle mr5"></i>
+                      <?= Translate::get('ban it'); ?>
+                    </span>
+                  <?php } ?>
                 <?php } ?>
                 <a class="gray size-15 mb5 block" href="<?= getUrlByName('admin.user.edit', ['id' => $data['user']['user_id']]); ?>">
                   <i class="bi bi-gear middle mr5"></i>

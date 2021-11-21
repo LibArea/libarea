@@ -217,8 +217,8 @@ define('AG_PATH_USERS_SMALL_COVER', '/uploads/users/cover/small/');
 define('AG_PATH_USERS_AVATARS', '/uploads/users/avatars/');
 define('AG_PATH_USERS_SMALL_AVATARS', '/uploads/users/avatars/small/');
 
-define('AG_PATH_TOPICS_LOGOS', '/uploads/topics/logos/');
-define('AG_PATH_TOPICS_SMALL_LOGOS', '/uploads/topics/logos/small/');
+define('AG_PATH_FACETS_LOGOS', '/uploads/facets/logos/');
+define('AG_PATH_FACETS_SMALL_LOGOS', '/uploads/facets/logos/small/');
 
 define('AG_PATH_POSTS_CONTENT', '/uploads/posts/content/');
 define('AG_PATH_POSTS_COVER', '/uploads/posts/cover/');

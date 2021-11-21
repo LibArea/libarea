@@ -5,11 +5,11 @@
   <div class="bg-white br-rd5 br-box-gray mb15 pt5 pr15 pb5 pl15">
     <?php if ($data['link']['link_title']) { ?>
       <div class="right heart-link mt5">
-        <?= votes($uid['user_id'], $data['link'], 'link'); ?>
+        <?= votes($uid['user_id'], $data['link'], 'link', 'mr5'); ?>
       </div>
       <h1 class="mt5 mb10 size-24 font-normal"><?= $data['link']['link_title']; ?>
         <?php if ($uid['user_trust_level'] > 4) { ?>
-          <a class="size-14 ml5" title="<?= Translate::get('edit'); ?>" href="/web/edit/<?= $data['link']['link_id']; ?>">
+          <a class="size-14 ml5" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('web.edit', ['id' => $data['link']['link_id']]); ?>">
             <i class="bi bi-pencil size-15"></i>
           </a>
         <?php } ?>

@@ -9,7 +9,7 @@
   <!-- Sitemap -->
   <?php foreach ($data['topics'] as $topic) { ?>
     <url>
-      <loc><?= $data['url']; ?>/topic/<?= $topic['topic_slug']; ?></loc>
+      <loc><?= $data['url']; ?>/topic/<?= $topic['facet_slug']; ?></loc>
       <priority>0.5</priority>
       <changefreq>daily</changefreq>
     </url>

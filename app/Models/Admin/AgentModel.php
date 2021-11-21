@@ -18,7 +18,7 @@ class AgentModel extends MainModel
 
         return DB::run($sql, ['ip' => $ip])->rowCount();
     }
-    
+
     // По логам
     public static function lastVisitLogs($user_id)
     {
@@ -45,12 +45,12 @@ class AgentModel extends MainModel
                     user_invitation_id,
                     user_trust_level
                         FROM users WHERE user_reg_ip = :ip";
-       return DB::run($sql, ['ip' => $ip])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['ip' => $ip])->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // ip для логов
     public static function getUserLogsId($ip)
-    {  
+    {
         $sql = "SELECT 
                     user_id,
                     user_login,
@@ -73,5 +73,4 @@ class AgentModel extends MainModel
                         ON latest_date.log_user_id = user_id";
         return DB::run($sql, ['ip' => $ip])->fetchAll(PDO::FETCH_ASSOC);
     }
-
 }

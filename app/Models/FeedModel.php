@@ -12,17 +12,17 @@ class FeedModel extends MainModel
     public static function feed($page, $limit, $uid, $sheet, $type, $data)
     {
         if ($type == 'topic') {
-            $qa         = $data['topic_slug'];
-            $string     = "WHERE topic_list LIKE :qa";
+            $qa         = $data['facet_slug'];
+            $string     = "WHERE facet_list LIKE :qa";
             if ($sheet == 'recommend') {
-                $qa         = $data['topic_slug'];
-                $string     = "WHERE topic_list LIKE :qa AND post_is_recommend = 1";
+                $qa         = $data['facet_slug'];
+                $string     = "WHERE facet_list LIKE :qa AND post_is_recommend = 1";
             }
         } elseif ($type == 'link') {
-            $selection   = $data['link_url_domain'];
+            $selection  = $data['link_url_domain'];
             $string     = "WHERE post_url_domain  = :selection AND post_draft = 0";
         } else {
-            $selection   = $data['post_user_id'];
+            $selection  = $data['post_user_id'];
             $string     = "WHERE post_user_id  = :selection AND post_draft = 0";
         }
 
@@ -76,16 +76,17 @@ class FeedModel extends MainModel
                         LEFT JOIN
                         (
                             SELECT 
-                                MAX(topic_id), 
-                                MAX(topic_slug), 
-                                MAX(topic_title),
-                                MAX(relation_topic_id), 
+                                MAX(facet_id), 
+                                MAX(facet_slug), 
+                                MAX(facet_title),
+                                MAX(facet_type),
+                                MAX(relation_facet_id), 
                                 relation_post_id,
 
-                                GROUP_CONCAT(topic_slug, '@', topic_title SEPARATOR '@') AS topic_list
-                                FROM topics      
-                                LEFT JOIN topics_post_relation 
-                                    on topic_id = relation_topic_id
+                                GROUP_CONCAT(facet_type, '@', facet_slug, '@', facet_title SEPARATOR '@') AS facet_list
+                                FROM facets      
+                                LEFT JOIN facets_posts_relation 
+                                    on facet_id = relation_facet_id
                                 GROUP BY relation_post_id  
                         ) AS rel
                             ON rel.relation_post_id = post_id 
@@ -112,11 +113,11 @@ class FeedModel extends MainModel
     public static function feedCount($uid, $sheet, $type, $data)
     {
         if ($type == 'topic') {
-            $qa         = $data['topic_slug'];
-            $string     = "WHERE topic_slug = :qa";
+            $qa         = $data['facet_slug'];
+            $string     = "WHERE facet_slug = :qa";
             if ($sheet == 'recommend') {
-                $qa         = $data['topic_slug'];
-                $string     = "WHERE topic_slug = :qa AND post_is_recommend = 1";
+                $qa         = $data['facet_slug'];
+                $string     = "WHERE facet_slug = :qa AND post_is_recommend = 1";
             }
         } elseif ($type == 'link') {
             $selection   = $data['link_url_domain'];
@@ -146,12 +147,12 @@ class FeedModel extends MainModel
                     post_user_id,
                     post_is_deleted,
                     post_is_recommend,
-                    topic_id, topic_slug,
-                    relation_topic_id, relation_post_id
+                    facet_id, facet_slug,
+                    relation_facet_id, relation_post_id
                     
                     FROM posts
-                        LEFT JOIN topics_post_relation on (post_id = relation_post_id)
-                        LEFT JOIN topics on (topic_id = relation_topic_id)
+                        LEFT JOIN facets_posts_relation on (post_id = relation_post_id)
+                        LEFT JOIN facets on (facet_id = relation_facet_id)
                         $string $display ";
 
         if ($type == 'topic') {
