@@ -27,28 +27,36 @@
       ]]); ?>
 
       <?php if (!empty($data['topic_blog'])) { ?>
-        <?= includeTemplate('/_block/form/select-blog-post', [
-          'uid' => $uid,
-          'data' => $data,
-          'action' => 'edit',
-          'title' => Translate::get('blogs'),
-          'help' => '...',
+        <?= includeTemplate('/_block/form/select-facet-post', [
+          'uid'         => $uid,
+          'data'        => $data,
+          'action'      => 'edit',
+          'type'        => 'blog',
+          'maximum'     => 1,
+          'title'       => Translate::get('blogs'),
+          'required'    => false,
+          'help'        => '...',
         ]); ?>
       <?php } ?>
 
-      <?= includeTemplate('/_block/form/select-topic-post', [
-        'uid' => $uid,
-        'data' => $data,
-        'action' => 'edit',
-        'title' => Translate::get('topics'),
-        'help' => Translate::get('necessarily'),
-        'red' => 'red'
+      <?= includeTemplate('/_block/form/select-facet-post', [
+        'uid'           => $uid,
+        'data'          => $data,
+        'action'        => 'edit',
+        'type'          => 'topic',
+        'title'         => Translate::get('topics'),
+        'required'      => false,
+        'maximum'       => 3,
+        'help'          => Translate::get('necessarily'),
+        'red'           => 'red'
       ]); ?>
 
       <?php if ($post['post_url']) { ?>
         <div class="mb20">
           <label class="block mb5" for="post_title">URL:</label>
-          <a target="_blank" rel="noreferrer ugc" href="<?= $post['post_url']; ?>" class="size-14"><?= $data['post']['post_url']; ?></a>
+          <a target="_blank" rel="noreferrer ugc" href="<?= $post['post_url']; ?>" class="size-14">
+            <?= $data['post']['post_url']; ?>
+          </a>
         </div>
       <?php } ?>
 

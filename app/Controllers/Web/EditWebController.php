@@ -39,7 +39,7 @@ class EditWebController extends MainController
                 'data'  => [
                     'domain'        => $domain,
                     'sheet'         => 'domains',
-                    'topic_select'  => WebModel::getLinkTopic($domain['link_id']),
+                    'facet_select'  => WebModel::getLinkTopic($domain['link_id']),
                 ]
             ]
         );
@@ -64,7 +64,7 @@ class EditWebController extends MainController
         $link_published = Request::getPostInt('link_published');
         $link_status    = Request::getPostInt('link_status');
         $post_fields    = Request::getPost() ?? [];
-        $topics         = $post_fields['topic_select'] ?? [];
+        $topics         = $post_fields['facet_select'] ?? [];
 
         Validation::Limits($link_title, Translate::get('title'), '14', '250', $redirect);
         Validation::Limits($link_content, Translate::get('description'), '24', '1500', $redirect);

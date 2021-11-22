@@ -487,6 +487,7 @@ $data = [
     'blogs.my-desc'         => 'My blogs on the site',
     'blogs.new-desc'        => 'Blogs on the site added recently. Members personal blogs',
     'topic-subscription'    => 'Subscribe to topics and read them in the feed',
+    'stop-blog'             => 'This blog URL is reserved',
     
 ];
 

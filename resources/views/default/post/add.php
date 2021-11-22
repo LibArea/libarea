@@ -16,35 +16,41 @@
         'data' => [
           [
             'title' => Translate::get('heading'),
-            'type' => 'text',
-            'name' => 'post_title',
+            'type'  => 'text',
+            'name'  => 'post_title',
             'value' => null,
-            'min' => 6,
-            'max' => 250,
-            'id' => 'title',
-            'help' => '6 - 250 ' . Translate::get('characters'),
-            'red' => 'red'
+            'min'   => 6,
+            'max'   => 250,
+            'id'    => 'title',
+            'help'  => '6 - 250 ' . Translate::get('characters'),
+            'red'   => 'red'
           ]
         ],
       ]); ?>
 
       <?php if (!empty($data['user_blog'])) { ?>
-        <?= includeTemplate('/_block/form/select-blog-post', [
-          'uid' => $uid,
-          'data' => $data['facets'],
-          'action' => 'edit',
-          'title' => Translate::get('blogs'),
-          'help' => '...',
+        <?= includeTemplate('/_block/form/select-facet-post', [
+          'uid'         => $uid,
+          'data'        => $data['facets'],
+          'type'        => 'blog',
+          'maximum'     => 1,
+          'action'      => 'add',
+          'title'       => Translate::get('blogs'),
+          'required'    => false,
+          'help'        => '...',
         ]); ?>
       <?php } ?>
 
-      <?= includeTemplate('/_block/form/select-topic-post', [
-        'uid' => $uid,
-        'data' => $data['facets'],
-        'action' => 'add',
-        'title' => Translate::get('facets'),
-        'help' => Translate::get('necessarily'),
-        'red' => 'red'
+      <?= includeTemplate('/_block/form/select-facet-post', [
+        'uid'           => $uid,
+        'data'          => $data['facets'],
+        'type'          => 'topic',
+        'maximum'       => 3,
+        'action'        => 'add',
+        'title'         => Translate::get('facets'),
+        'required'      => true,
+        'help'          => Translate::get('necessarily'),
+        'red'           => 'red'
       ]); ?>
 
       <?php if ($uid['user_trust_level'] >= Config::get('trust-levels.tl_add_url')) { ?>

@@ -61,7 +61,13 @@ class AddFacetController extends MainController
 
         $redirect = getUrlByName('topic.add');
         if ($type == 'blog') {
-            $redirect = getUrlByName('user.blog', ['login' => $this->uid['user_login']]);
+            $redirect = getUrlByName('blogs.my', ['login' => $this->uid['user_login']]);
+            if ($this->uid['user_trust_level'] != 5) {
+                if (in_array($facet_slug, Config::get('stop-blog'))) {
+                    addMsg(Translate::get('stop-blog'), 'error');
+                    redirect($redirect);
+                }
+            }
         }
 
         Validation::charset_slug($facet_slug, 'Slug (url)', $redirect);

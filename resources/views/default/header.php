@@ -28,7 +28,7 @@
         })
 
         Toast.fire({
-          icon: 'success',
+          icon: 'warning',
           title: '<?= Translate::get('you need to log in'); ?>'
         })
 

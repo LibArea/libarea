@@ -400,6 +400,6 @@ function clearMsg()
 
 function addMsg($msg, $class)
 {
-    $class = ($class == 'error') ? 2 : 1;
+    $class = ($class == 'error') ? 'error' : 'success';
     $_SESSION['msg'][] = array($msg, $class);
 }

@@ -65,7 +65,7 @@ class AddWebController extends MainController
         Validation::Limits($link_content, Translate::get('description'), '24', '1500', $redirect);
 
         $topic_fields   = Request::getPost() ?? [];
-        $topics         = $topic_fields['topic_select'] ?? [];
+        $topics         = $topic_fields['facet_select'] ?? [];
 
         $data = [
             'link_url'          => $link_url,

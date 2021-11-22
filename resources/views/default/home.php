@@ -76,11 +76,11 @@
       $n = 0;
       foreach ($topics as $key => $topic) {
         $n++;
-        if ($n > Config::get('topics.number_topics')) break;
+        if ($n > Config::get('facets.quantity_home')) break;
         $url = getUrlByName('topic', ['slug' => $topic['facet_slug']]);
         $blog = '';
         if ($topic['facet_type'] == 'blog') {
-          $blog = '<sup class="red">blog</span>';
+          $blog = '<sup class="red">b</span>';
           $url = getUrlByName('blog', ['slug' => $topic['facet_slug']]);
         }
       ?>
@@ -96,7 +96,7 @@
           <?php } ?>
         </div>
       <?php } ?>
-      <?php if (count($data['topics_user']) > Config::get('topics.number_topics')) { ?>
+      <?php if (count($data['topics_user']) > Config::get('facets.quantity_home')) { ?>
         <a class="gray block mt5" title="<?= Translate::get('topics'); ?>" href="<?= getUrlByName('topics.my'); ?>">
           <?= Translate::get('see more'); ?> <i class="bi bi-chevron-double-right middle"></i>
         </a>
@@ -107,7 +107,7 @@
       <div class="uppercase gray mt5 mb5">
         <?= Translate::get('topics'); ?>
       </div>
-      <?php foreach (Config::get('topics-default') as $key => $topic) { ?>
+      <?php foreach (Config::get('facets-default') as $key => $topic) { ?>
         <a class="flex relative pt5 pb5 items-center hidden gray-light" href="<?= $topic['url']; ?>">
           <img class="w24 mr5 br-box-gray" src="<?= $topic['img']; ?>" alt="<?= $topic['name']; ?>">
           <span class="ml5"><?= $topic['name']; ?></span>

@@ -473,6 +473,7 @@ $data = [
     'blogs.my-desc'         => 'Blogurile mele de pe site',
     'blogs.new-desc'        => 'Bloguri pe site adăugate recent. Blogurile personale ale membrilor',
     'topic-subscription'    => 'Abonați-vă la spații și citiți-le în flux',
+    'stop-blog'             => 'URL-ul acestui blog este rezervat',
 ];
 
 return $data;

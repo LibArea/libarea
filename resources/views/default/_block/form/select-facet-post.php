@@ -1,30 +1,31 @@
 <div class="mb20 max-w640">
-  <label class="block"><?= Translate::get('blog'); ?>
-    <?php if (!empty($red)) { ?><sup class="red">*</sup><?php } ?>
+  <label class="block">
+    <?= Translate::get($type); ?>
+    <?php if (!empty($red)) { ?><sup class="red">*</sup><?php } ?>  
   </label>
   <?php if ($action == 'edit') { ?>
-    <select name="topic_select[]" multiple="multiple" id='blog'>
+    <select name="facet_select[]" multiple="multiple" id='<?= $type; ?>'>
       <?php foreach ($data['topic_blog'] as $value) { ?>  
         <option selected value="<?= $value['facet_id']; ?>"><?= $value['facet_title']; ?></option>
       <?php } ?>
     </select>
   <?php } else { ?>
-    <select name="topic_select[]" value="" multiple="multiple" id='blog'></select>
+    <select name="facet_select[]" multiple="multiple" value="" id='<?= $type; ?>' <?php if ($required) { ?>required<?php } ?>></select>
   <?php } ?>
 </div>
 <script nonce="<?= $_SERVER['nonce']; ?>">
   <?php if (!empty($help)) { ?>
-    let blog = '<?= $help; ?>';
+    let <?= $type; ?> = '<?= $help; ?>';
   <?php } ?>
 
   $(document).ready(function() {
-    $("#blog").select2({
+    $("#<?= $type; ?>").select2({
       width: '100%',
-      maximumSelectionLength: 1,
-      placeholder: blog,
+      maximumSelectionLength: <?= $maximum; ?>,
+      placeholder: <?= $type; ?>,
       // allowClear: true,
       ajax: {
-        url: "/search/blog",
+        url: "/search/<?= $type; ?>",
         type: "post",
         dataType: 'json',
         delay: 250,
@@ -54,10 +55,10 @@
       return $state;
     };
 
-    <?php if (!empty($data['blog']['facet_id'])) { ?>
-      let intValueOfFruit = "<?= $data['blog']['facet_id']; ?>";
-      let selectOption = new Option("<?= $data['blog']['facet_title']; ?>", intValueOfFruit, true, true);
-      $('#blog').append(selectOption).trigger('change');
+    <?php if (!empty($data[$type]['facet_id'])) { ?>
+      let intValueOfFruit = "<?= $data[$type]['facet_id']; ?>";
+      let selectOption = new Option("<?= $data[$type]['facet_title']; ?>", intValueOfFruit, true, true);
+      $('#<?= $type; ?>').append(selectOption).trigger('change');
     <?php } ?>
   });
 </script>

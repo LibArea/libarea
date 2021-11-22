@@ -43,7 +43,7 @@ class EditPostController extends MainController
                     'post'          => $post,
                     'related_posts' => PostModel::postRelated($post['post_related']),
                     'user'          => UserModel::getUser($post['post_user_id'], 'id'),
-                    'topic_select'  => PostModel::getPostTopic($post['post_id'], $this->uid['user_id'], 'topic'),
+                    'facet_select'  => PostModel::getPostTopic($post['post_id'], $this->uid['user_id'], 'topic'),
                     'topic_blog'    => PostModel::getPostTopic($post['post_id'], $this->uid['user_id'], 'blog'),
                 ]
             ]
@@ -69,7 +69,7 @@ class EditPostController extends MainController
         // Связанные посты и темы
         $post_fields    = Request::getPost() ?? [];
         $post_related   = implode(',', $post_fields['post_select'] ?? []);
-        $topics         = $post_fields['topic_select'] ?? [];
+        $topics         = $post_fields['facet_select'] ?? [];
 
         // Проверка доступа 
         $post   = PostModel::getPostId($post_id);

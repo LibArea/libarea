@@ -70,11 +70,11 @@ class AddPostController extends MainController
         $post_translation       = Request::getPostInt('translation');
         $post_merged_id         = Request::getPostInt('post_merged_id');
         $post_tl                = Request::getPostInt('post_tl');
-        $blog_id               = Request::getPostInt('blog_id');
+        $blog_id                = Request::getPostInt('blog_id');
         
         $post_fields    = Request::getPost() ?? [];
         $post_related   = implode(',', $post_fields['post_select'] ?? []);
-        $topics         = $post_fields['topic_select'] ?? [];
+        $topics         = $post_fields['facet_select'] ?? [];
 
         // Используем для возврата
         $redirect = getUrlByName('post.add');
@@ -92,7 +92,7 @@ class AddPostController extends MainController
             addMsg(Translate::get('select topic') . '!', 'error');
             redirect($redirect);
         }
-
+ 
         Validation::Limits($post_title, Translate::get('title'), '6', '250', $redirect);
         Validation::Limits($post_content, Translate::get('the post'), '6', '25000', $redirect);
 
