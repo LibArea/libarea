@@ -132,6 +132,7 @@ class FacetModel extends MainModel
                     facet_count,
                     facet_type,
                     facet_is_web,
+                    facet_is_soft,
                     facet_is_deleted
                         FROM facets WHERE $sort";
 
@@ -344,6 +345,7 @@ class FacetModel extends MainModel
             'facet_related'             => $data['facet_related'],
             'facet_id'                  => $data['facet_id'],
             'facet_is_web'              => $data['facet_is_web'],
+            'facet_is_soft'             => $data['facet_is_soft'],
             'facet_type'                => $data['facet_type'],
         ];
 
@@ -360,6 +362,7 @@ class FacetModel extends MainModel
                     facet_post_related      = :facet_post_related, 
                     facet_related           = :facet_related,
                     facet_is_web            = :facet_is_web,
+                    facet_is_soft           = :facet_is_soft,
                     facet_type              = :facet_type
                         WHERE facet_id      = :facet_id";
 

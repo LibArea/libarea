@@ -61,20 +61,31 @@
 
       <?php if ($fs['facet_type'] == 'topic') { ?>
         <?php if ($uid['user_trust_level'] == 5) { ?>
-          <div class="mt15 mb20">
-            <label for="topic_content"><?= Translate::get('web-cat'); ?>?</label>
-            <input type="radio" name="facet_is_web" <?php if ($fs['facet_is_web'] == 0) { ?>checked<?php } ?> value="0"> <?= Translate::get('no'); ?>
-            <input type="radio" name="facet_is_web" <?php if ($fs['facet_is_web'] == 1) { ?>checked<?php } ?> value="1"> <?= Translate::get('yes'); ?>
-            <div class="size-14 gray-light-2"><?= Translate::get('web-cat-help'); ?></div>
-          </div>
 
-          <div class="mb20">
-            <label for="topic_content"><?= Translate::get('root'); ?>?</label>
-            <input type="radio" name="facet_top_level" <?php if ($fs['facet_top_level'] == 0) { ?>checked<?php } ?> value="0"> <?= Translate::get('no'); ?>
-            <input type="radio" name="facet_top_level" <?php if ($fs['facet_top_level'] == 1) { ?>checked<?php } ?> value="1"> <?= Translate::get('yes'); ?>
-            <div class="size-14 gray-light-2"><?= Translate::get('root-help'); ?></div>
+            <?= includeTemplate('/_block/form/field-radio', [
+              'data' => [
+                [
+                  'title' => Translate::get('web-cat'),
+                  'name' => 'facet_is_web',
+                  'checked' => $fs['facet_is_web'],
+                  'help' => Translate::get('web-cat-help')
+                ],
+                [
+                  'title' => Translate::get('soft-cat'),
+                  'name' => 'facet_is_soft',
+                  'checked' => $fs['facet_is_soft'],
+                  'help' => Translate::get('soft-cat-help')
+                ],
+                [
+                  'title' => Translate::get('root'),
+                  'name' => 'facet_top_level',
+                  'checked' => $fs['facet_top_level'],
+                  'help' => Translate::get('root-help')
+                ],
+              ]
+            ]); ?>
 
-            <?php if ($fs['facet_top_level'] != 1) { ?>
+             <?php if ($fs['facet_top_level'] != 1) { ?>
               <div class="mt15 mb20">
                 <label class="block"><?= Translate::get('upper'); ?></label>
                 <select name="facet_parent_id[]" multiple="multiple" id='selMainLinked'>
@@ -86,9 +97,8 @@
                 </select>
               </div>
             <?php } ?>
-          </div>
+           
         <?php } ?>
-
       <?php } ?>
 
       <?php if (!empty($data['high_lists'])) { ?>

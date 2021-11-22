@@ -75,6 +75,7 @@ class EditFacetController extends MainController
         $facet_user_new             = Request::getPost('user_select');
         $facet_tl                   = Request::getPostInt('content_tl');
         $facet_is_web               = Request::getPostInt('facet_is_web');
+        $facet_is_soft              = Request::getPostInt('facet_is_soft');
         $facet_type                 = Request::getPost('facet_type');
 
         //print_r(Request::getPost());
@@ -148,6 +149,7 @@ class EditFacetController extends MainController
             'facet_post_related'        => implode(',', $post_fields['post_related'] ?? ['0']),
             'facet_related'             => implode(',', $post_fields['facet_related'] ?? ['0']),
             'facet_is_web'              => $facet_is_web,
+            'facet_is_soft'             => $facet_is_soft,
             'facet_type'                => $type,
         ];
 

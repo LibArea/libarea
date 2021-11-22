@@ -280,8 +280,12 @@ $data = [
     'News & Media'      => 'Știri și media',
     'Social network'    => 'Rețea socială',
     'Internet'          => 'Internetul',
-    'web-cat'           => 'Disponibil în catalog',
+    'web-cat'           => 'Disponibil în directorul site-ului?',
     'web-cat-help'      => 'În catalogul site - ului, va fi o categorie (va deveni vizibil)',
+    
+    /* soft */
+    'soft-cat'           => 'Există programe în catalog?',
+    'soft-cat-help'      => 'În directorul programului, va fi Categoria (va deveni vizibilă)',
 
     /* Setări */
     'setting profile'       => 'Setari profil',
