@@ -26,18 +26,16 @@
         ],
       ]]); ?>
 
-      <?php if (!empty($data['topic_blog'])) { ?>
-        <?= includeTemplate('/_block/form/select-facet-post', [
-          'uid'         => $uid,
-          'data'        => $data,
-          'action'      => 'edit',
-          'type'        => 'blog',
-          'maximum'     => 1,
-          'title'       => Translate::get('blogs'),
-          'required'    => false,
-          'help'        => '...',
-        ]); ?>
-      <?php } ?>
+      <?= includeTemplate('/_block/form/select-facet-post', [
+        'uid'         => $uid,
+        'data'        => $data,
+        'action'      => 'edit',
+        'type'        => 'blog',
+        'maximum'     => 1,
+        'title'       => Translate::get('blogs'),
+        'required'    => false,
+        'help'        => '...',
+      ]); ?>
 
       <?= includeTemplate('/_block/form/select-facet-post', [
         'uid'           => $uid,

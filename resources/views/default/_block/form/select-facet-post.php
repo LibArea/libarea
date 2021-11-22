@@ -5,7 +5,7 @@
   </label>
   <?php if ($action == 'edit') { ?>
     <select name="facet_select[]" multiple="multiple" id='<?= $type; ?>'>
-      <?php foreach ($data['topic_blog'] as $value) { ?>  
+      <?php foreach ($data[$type . '_arr'] as $value) { ?>  
         <option selected value="<?= $value['facet_id']; ?>"><?= $value['facet_title']; ?></option>
       <?php } ?>
     </select>

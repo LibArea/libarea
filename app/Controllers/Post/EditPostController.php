@@ -43,8 +43,8 @@ class EditPostController extends MainController
                     'post'          => $post,
                     'related_posts' => PostModel::postRelated($post['post_related']),
                     'user'          => UserModel::getUser($post['post_user_id'], 'id'),
-                    'facet_select'  => PostModel::getPostTopic($post['post_id'], $this->uid['user_id'], 'topic'),
-                    'topic_blog'    => PostModel::getPostTopic($post['post_id'], $this->uid['user_id'], 'blog'),
+                    'topic_arr'     => PostModel::getPostTopic($post['post_id'], $this->uid['user_id'], 'topic'),
+                    'blog_arr'      => PostModel::getPostTopic($post['post_id'], $this->uid['user_id'], 'blog'),
                 ]
             ]
         );

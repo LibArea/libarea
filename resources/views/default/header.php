@@ -11,30 +11,6 @@
   <link rel="stylesheet" href="/assets/css/style.css">
   <link rel="icon" sizes="16x16" href="/favicon.ico" type="image/x-icon">
   <link rel="icon" sizes="120x120" href="/favicon-120.ico" type="image/x-icon">
-
-  <?php if ($uid['user_id'] == 0) { ?>
-    <script nonce="<?= $_SERVER['nonce']; ?>">
-      $(document).on('click', '.click-no-auth', function() {
-        const Toast = Swal.mixin({
-          toast: true,
-          position: 'center',
-          showConfirmButton: false,
-          timer: 3000,
-          timerProgressBar: true,
-          didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-          }
-        })
-
-        Toast.fire({
-          icon: 'warning',
-          title: '<?= Translate::get('you need to log in'); ?>'
-        })
-
-      });
-    </script>
-  <?php } ?>
 </head>
 
 <body class="p0 m0 black bg-gray-100<?php if (Request::getCookie('dayNight') == 'dark') { ?> dark<?php } ?>">

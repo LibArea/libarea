@@ -11,6 +11,26 @@
 <?= getRequestResources()->getBottomScripts(); ?>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
+  <?php if ($uid['user_id'] == 0) { ?>
+      $(document).on('click', '.click-no-auth', function() {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'center',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+        Toast.fire({
+          icon: 'warning',
+          title: '<?= Translate::get('you need to log in'); ?>'
+        })
+      });
+  <?php } ?>
+
   <?php if ($msg = getMsg()) { ?>
     <?php foreach ($msg as $message) { ?>
       const Toast = Swal.mixin({
@@ -24,7 +44,6 @@
           toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
       })
-
       Toast.fire({
         icon: '<?= $message[1]; ?>',
         title: '<?= $message[0]; ?>'

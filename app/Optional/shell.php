@@ -130,7 +130,7 @@ function view(string $template, array $params = [])
     $facet =  $params['facet'] ?? [];
     includeTemplate('/header', ['uid' => $params['uid'], 'meta' => $params['meta'], 'facet' => $facet]);
     includeTemplate($template, ['uid' => $params['uid'], 'data' => $params['data']]);
-    includeTemplate('/footer');
+    includeTemplate('/footer', ['uid' => $params['uid']]);
 }
 
 hleb_require(HLEB_GLOBAL_DIRECTORY . '/app/Helpers/Template.php');
