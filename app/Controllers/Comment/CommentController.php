@@ -21,7 +21,7 @@ class CommentController extends MainController
         $pagesCount = CommentModel::getCommentsAllCount('user');
         $comments   = CommentModel::getCommentsAll($page, $limit, $uid, 'user');
 
-        $result = array();
+        $result = [];
         foreach ($comments  as $ind => $row) {
             $row['date']                = lang_date($row['comment_date']);
             $row['comment_content']     = Content::text($row['comment_content'], 'line');
@@ -55,11 +55,11 @@ class CommentController extends MainController
     {
         $login  = Request::get('login');
         $user   = UserModel::getUser($login, 'slug');
-        Base::PageError404($user);
+        pageError404($user);
 
         $comments  = CommentModel::userComments($login);
 
-        $result = array();
+        $result = [];
         foreach ($comments as $ind => $row) {
             $row['comment_content'] = Content::text($row['comment_content'], 'line');
             $row['date']            = lang_date($row['comment_date']);

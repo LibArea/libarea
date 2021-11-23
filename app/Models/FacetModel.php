@@ -518,7 +518,7 @@ class FacetModel extends MainModel
         $result = DB::run($sql, ['facet_title' => "%" . $search . "%", 'facet_id' => $facet_id]);
         $lists  = $result->fetchall(PDO::FETCH_ASSOC);
 
-        $response = array();
+        $response = [];
         foreach ($lists as $list) {
             $response[] = array(
                 "id"    => $list['facet_id'],

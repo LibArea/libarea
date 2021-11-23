@@ -26,7 +26,7 @@ class UserController extends MainController
         $limit = 42;
         $usersCount = UserModel::getUsersAllCount('all');
         $users      = UserModel::getUsersAll($page, $limit, $this->uid['user_id'], 'noban');
-        Base::PageError404($users);
+        pageError404($users);
 
         $m = [
             'og'         => false,
@@ -57,7 +57,7 @@ class UserController extends MainController
         $user  = UserModel::getUser($login, 'slug');
 
         // Покажем 404
-        Base::PageError404($user);
+        pageError404($user);
 
         if (!$user['user_about']) {
             $user['user_about'] = Translate::get('riddle') . '...';
@@ -73,7 +73,7 @@ class UserController extends MainController
 
         // Просмотры профиля
         if (!isset($_SESSION['usernumbers'])) {
-            $_SESSION['usernumbers'] = array();
+            $_SESSION['usernumbers'] = [];
         }
 
         if (!isset($_SESSION['usernumbers'][$user['user_id']])) {
@@ -125,7 +125,7 @@ class UserController extends MainController
 
         $favorites = UserModel::userFavorite($this->uid['user_id']);
 
-        $result = array();
+        $result = [];
         foreach ($favorites as $ind => $row) {
 
             if ($row['favorite_type'] == 1) {
@@ -181,7 +181,7 @@ class UserController extends MainController
 
         $focus_posts = NotificationsModel::getFocusPostsListUser($this->uid['user_id']);
 
-        $result = array();
+        $result = [];
         foreach ($focus_posts as $ind => $row) {
             $text                           = explode("\n", $row['post_content']);
             $row['post_content_preview']    = Content::text($text[0], 'line');
@@ -202,4 +202,5 @@ class UserController extends MainController
             ]
         );
     }
+   
 }

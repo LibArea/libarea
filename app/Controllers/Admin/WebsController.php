@@ -25,7 +25,7 @@ class WebsController extends MainController
         $pagesCount = WebModel::getLinksAllCount();
         $domains    = WebModel::getLinksAll($page, $limit, $this->uid['user_id']);
 
-        $result = array();
+        $result = [];
         foreach ($domains as $ind => $row) {
             $row['link_content']    = Content::text($row['link_content'], 'line');
             $result[$ind]           = $row;
@@ -52,7 +52,7 @@ class WebsController extends MainController
     {
         $link_id    = Request::getPostInt('id');
         $link       = WebModel::getLinkId($link_id);
-        Base::PageError404($link);
+        pageError404($link);
 
         $puth = HLEB_PUBLIC_DIR . AG_PATH_FAVICONS . $link["link_id"] . '.png';
         $dirF = HLEB_PUBLIC_DIR . AG_PATH_FAVICONS;

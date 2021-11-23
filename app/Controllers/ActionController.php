@@ -62,7 +62,7 @@ class ActionController extends MainController
     {
         $moderations_log    = ActionModel::getModerations();
 
-        $result = array();
+        $result = [];
         foreach ($moderations_log as $ind => $row) {
             $row['mod_created_at']  = lang_date($row['mod_created_at']);
             $result[$ind]           = $row;

@@ -29,7 +29,7 @@ class AddPostController extends MainController
 
         // Если пользователь забанен / заморожен
         $user = UserModel::getUser($this->uid['user_id'], 'id');
-        Base::accountBan($user);
+        (new \App\Controllers\Auth\BanController())->getBan($user);
 
         // Добавление со странице темы
         $topic_id   = Request::getInt('topic_id');
@@ -84,7 +84,7 @@ class AddPostController extends MainController
 
         // Если пользователь забанен / заморожен
         $user = UserModel::getUser($this->uid['user_id'], 'id');
-        Base::accountBan($user);
+        (new \App\Controllers\Auth\BanController())->getBan($user);
         Content::stopContentQuietМode($user);
 
         // Если нет темы
@@ -292,7 +292,7 @@ class AddPostController extends MainController
         }
 
         $post = PostModel::getPostId($post_id);
-        Base::PageError404($post);
+        pageError404($post);
 
         ActionModel::setRecommend($post_id, $post['post_is_recommend']);
 

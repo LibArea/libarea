@@ -43,7 +43,7 @@ class EditCommentController extends MainController
 
         // Получим относительный url поста для возрата
         $post       = PostModel::getPostId($post_id);
-        Base::PageRedirection($post, '/');
+        pageRedirection($post, '/');
 
         // Проверка доступа 
         $comment = CommentModel::getCommentsId($comment_id);
@@ -53,7 +53,7 @@ class EditCommentController extends MainController
 
         // Если пользователь забанен / заморожен
         $user = UserModel::getUser($uid['user_id'], 'id');
-        Base::accountBan($user);
+        (new \App\Controllers\Auth\BanController())->getBan($user);
         Content::stopContentQuietМode($user);
 
         $slug = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);

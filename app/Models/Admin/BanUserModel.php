@@ -33,7 +33,7 @@ class BanUserModel extends MainModel
 
         if ($num != 0) {
 
-            $result = array();
+            $result = [];
             foreach ($sample as $row) {
                 $status = $row['banlist_status'];
             }

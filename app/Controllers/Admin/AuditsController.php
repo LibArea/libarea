@@ -19,7 +19,7 @@ class AuditsController extends MainController
         $pagesCount = AuditModel::getAuditsAllCount($sheet);
         $audits     = AuditModel::getAuditsAll($page, $limit, $sheet);
 
-        $result = array();
+        $result = [];
         foreach ($audits  as $ind => $row) {
 
             if ($row['audit_type'] == 'post') {

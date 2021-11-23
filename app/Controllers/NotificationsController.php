@@ -23,7 +23,7 @@ class NotificationsController extends MainController
         // Данные участника и список уведомлений
         $list = NotificationsModel::listNotification($uid['user_id']);
 
-        $result = array();
+        $result = [];
         foreach ($list as $ind => $row) {
             $row['add_time']        = lang_date($row['notification_add_time']);
             $result[$ind]           = $row;

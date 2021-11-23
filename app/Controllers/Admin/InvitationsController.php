@@ -12,7 +12,7 @@ class InvitationsController extends MainController
     {
         $invite = InvitationModel::get();
 
-        $result = array();
+        $result = [];
         foreach ($invite  as $ind => $row) {
             $row['uid']         = UserModel::getUser($row['uid'], 'id');
             $row['active_time'] = $row['active_time'];

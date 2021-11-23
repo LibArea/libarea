@@ -26,7 +26,7 @@ class UsersController extends MainController
         $pagesCount = UserModel::getUsersAllCount($sheet);
         $user_all   = UserModel::getUsersAll($page, $limit, $this->uid['user_id'], $sheet);
 
-        $result = array();
+        $result = [];
         foreach ($user_all as $ind => $row) {
             $row['duplicat_ip_reg'] = AgentModel::duplicatesRegistrationCount($row['user_reg_ip']);
             $row['isBan']           = UserModel::isBan($row['user_id']);
@@ -63,7 +63,7 @@ class UsersController extends MainController
             $user_all   = AgentModel::getUserRegsId($user_ip);
         }
 
-        $results = array();
+        $results = [];
         foreach ($user_all as $ind => $row) {
             $row['duplicat_ip_reg'] = AgentModel::duplicatesRegistrationCount($row['user_id']);
             $row['isBan']       = BanUserModel::isBan($row['user_id']);

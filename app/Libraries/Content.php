@@ -44,8 +44,7 @@ class Content
         preg_match_all('/@([^@,:\s,]+)/i', strip_tags($content), $matchs);
 
         if (is_array($matchs[1])) {
-            $match_name = array();
-
+            $match_name = [];
             foreach ($matchs[1] as $key => $login) {
                 if (in_array($login, $match_name)) {
                     continue;
@@ -58,7 +57,7 @@ class Content
 
             arsort($match_name);
 
-            $all_users = array();
+            $all_users = [];
 
             $content_uid = $content;
 

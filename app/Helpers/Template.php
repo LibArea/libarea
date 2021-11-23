@@ -13,7 +13,7 @@ function html_topic($topic, $slug, $css)
         $topic = preg_split('/(@)/', $topic);
     }
 
-    $result = array();
+    $result = [];
     foreach (array_chunk($topic, 3) as $ind => $row) {
         if ($row[0] == 'topic') {
              $result[] = '<a class="' . $css . '" href="' . getUrlByName($slug, ['slug' => $row[1]]) . '">' . $row[2] . '</a>';
@@ -33,7 +33,7 @@ function html_blog($topic, $slug, $css)
         $topic = preg_split('/(@)/', $topic);
     }
 
-    $result = array();
+    $result = [];
     foreach (array_chunk($topic, 3) as $ind => $row) {
 
         if ($row[0] == 'blog') {
@@ -402,4 +402,33 @@ function addMsg($msg, $class)
 {
     $class = ($class == 'error') ? 'error' : 'success';
     $_SESSION['msg'][] = array($msg, $class);
+}
+
+
+function pageError404($variable)
+{
+    if (!$variable) {
+        include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
+        hl_preliminary_exit();
+    }
+    return true;
+}
+
+function pageRedirection($variable, $redirect)
+{
+    if (!$variable) {
+        redirect($redirect);
+    }
+    return true;
+}
+
+// Создать случайную строку
+function randomString($type, int $len = 8)
+{
+    if ($type = 'crypto') {
+        return bin2hex(random_bytes($len / 2));
+    }
+
+    // sha1
+    return sha1(uniqid((string) mt_rand(), true));
 }

@@ -126,7 +126,7 @@ class NotificationsModel extends MainModel
     {
         $focus_posts = self::getFocusPostUser($user_id);
 
-        $result = array();
+        $result = [];
         foreach ($focus_posts as $ind => $row) {
             $result[$ind] = $row['signed_post_id'];
         }

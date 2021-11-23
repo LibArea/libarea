@@ -140,7 +140,7 @@ class RegisterController extends MainController
         }
 
         // Активация e-mail
-        $email_code = Base::randomString('crypto', 20);
+        $email_code = randomString('crypto', 20);
         UserModel::sendActivateEmail($active_uid, $email_code);
 
         // Отправка e-mail

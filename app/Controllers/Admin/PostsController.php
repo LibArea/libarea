@@ -18,7 +18,7 @@ class PostsController extends MainController
         $pagesCount = PostModel::getPostsAllCount($sheet);
         $posts      = PostModel::getPostsAll($page, $limit, $sheet);
 
-        $result = array();
+        $result = [];
         foreach ($posts  as $ind => $row) {
             $text = explode("\n", $row['post_content']);
             $row['post_content_preview'] = Content::text($text[0], 'line');

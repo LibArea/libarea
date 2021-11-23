@@ -29,7 +29,7 @@ class SettingController extends MainController
         }
 
         // Если пользователь забанен
-        Base::accountBan($user);
+        (new \App\Controllers\Auth\BanController())->getBan($user);
 
         return view(
             '/user/setting/setting',
@@ -255,7 +255,7 @@ class SettingController extends MainController
 
         // Если пользователь забанен
         $user = UserModel::getUser($this->uid['user_id'], 'id');
-        Base::accountBan($user);
+        (new \App\Controllers\Auth\BanController())->getBan($user);
 
         return view(
             '/user/setting/notifications',

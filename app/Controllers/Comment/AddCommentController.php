@@ -37,11 +37,11 @@ class AddCommentController extends MainController
         $uid        = Base::getUid();
         $ip         = Request::getRemoteAddress();
         $post       = PostModel::getPostId($post_id);
-        Base::PageError404($post);
+        pageError404($post);
 
         // Если пользователь забанен / заморожен
         $user = UserModel::getUser($uid['user_id'], 'id');
-        Base::accountBan($user);
+        (new \App\Controllers\Auth\BanController())->getBan($user);
         Content::stopContentQuietМode($user);
 
         $redirect = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);

@@ -5,14 +5,16 @@
  */
 
 return [
-    'url'           => 'https://agouti.ru',
-    'name'          => 'Agouti',
-    'title'         => 'Agouti — сообщество (темы по интересам)',
-    'desc'          => 'Темы по интересам, лента. Беседы, вопросы и ответы, интересные факты. Скрипты CMS и социальных сетей, Фреймворки.',
-    'ingurl'        => 'https://agouti.ru/assets/images/agouti.webp',
+    'url'               => 'https://agouti.ru',
+    'name'              => 'Agouti',
+    'title'             => 'Агути — сообщество (темы по интересам)',
+    'desc'              => 'Темы по интересам, лента. Беседы, вопросы и ответы, интересные факты. Скрипты CMS и социальных сетей, Фреймворки. Скрипт агути.',
+    'img_url'           => 'https://agouti.ru/assets/images/agouti.webp',
+    'img_footer_url'    => 'https://agouti.ru/assets/images/agouti_footer.gif',
     
     // Для главной - заголовок и текст баннера
     // For the main page - the banner title and text 
-    'bannertitle'   => 'Agouti — сообщество',
-    'bannerdesc'    => 'Темы по интересам. Беседы, вопросы и ответы, комментарии',
+    'banner_title'      => 'Агути — сообщество',
+    'banner_desc'       => 'Темы по интересам. Беседы, вопросы и ответы, комментарии',
+
 ]; 

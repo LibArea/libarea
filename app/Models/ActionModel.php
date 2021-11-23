@@ -142,7 +142,7 @@ class ActionModel extends MainModel
         $result = DB::run($sql, [$field_name => "%" . $search . "%"]);
         $lists  = $result->fetchall(PDO::FETCH_ASSOC);
 
-        $response = array();
+        $response = [];
         foreach ($lists as $list) {
             $response[] = array(
                 "id"    => $list[$field_id],

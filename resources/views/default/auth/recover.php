@@ -25,5 +25,5 @@
   </form>
   <div class="pt20 mb5 gray-light"><?= Translate::get('login-use-condition'); ?>.</div>
   <div class="pt20 mb20 gray-light"><?= Translate::get('info-recover'); ?></div>
-  <img class="right" alt="<?= Config::get('meta.name'); ?>" src="/assets/images/agouti_footer.gif">
+  <img class="right" alt="<?= Config::get('meta.name'); ?>" src="<?= Config::get('meta.img_footer_url'); ?>">
 </main>

@@ -19,7 +19,7 @@ class CommentsController extends MainController
         $pagesCount = CommentModel::getCommentsAllCount($sheet);
         $comments   = CommentModel::getCommentsAll($page, $limit, $uid, $sheet);
 
-        $result = array();
+        $result = [];
         foreach ($comments  as $ind => $row) {
             $row['content'] = Content::text($row['comment_content'], 'text');
             $row['date']    = lang_date($row['comment_date']);

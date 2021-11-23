@@ -22,7 +22,7 @@ class HomeController extends MainController
         $pagesCount     = HomeModel::feedCount($topics_user, $uid, $sheet);
         $posts          = HomeModel::feed($page, $limit, $topics_user, $uid, $sheet);
 
-        $result_post = array();
+        $result_post = [];
         foreach ($posts as $ind => $row) {
             $text = fragment($row['post_content']);
             $row['post_content_preview']    = Content::text($text, 'line');
@@ -30,7 +30,7 @@ class HomeController extends MainController
             $result_post[$ind]              = $row;
         }
 
-        $result_answers = array();
+        $result_answers = [];
         foreach ($latest_answers as $ind => $row) {
             $row['answer_content']      = cutWords($row['answer_content'], 8);
             $row['answer_date']         = lang_date($row['answer_date']);

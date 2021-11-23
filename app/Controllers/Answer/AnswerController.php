@@ -21,7 +21,7 @@ class AnswerController extends MainController
         $pagesCount = AnswerModel::getAnswersAllCount('user');
         $answ       = AnswerModel::getAnswersAll($page, $limit, $uid, 'user');
 
-        $result = array();
+        $result = [];
         foreach ($answ  as $ind => $row) {
             $row['answer_content']  = Content::text($row['answer_content'], 'text');
             $row['date']            = lang_date($row['answer_date']);
@@ -56,11 +56,11 @@ class AnswerController extends MainController
         $login  = Request::get('login');
         $user   = UserModel::getUser($login, 'slug');
 
-        Base::PageError404($user);
+        pageError404($user);
 
         $answers  = AnswerModel::userAnswers($login);
 
-        $result = array();
+        $result = [];
         foreach ($answers as $ind => $row) {
             $row['content'] = Content::text($row['answer_content'], 'text');
             $row['date']    = lang_date($row['answer_date']);

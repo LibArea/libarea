@@ -37,7 +37,7 @@ class MessagesController extends MainController
         $result = [];
         if ($messages_dialog) {
 
-            $result = array();
+            $result = [];
             foreach ($messages_dialog as $ind => $row) {
 
                 // Принимающий  AND $row['dialog_recipient_count']
@@ -168,7 +168,7 @@ class MessagesController extends MainController
 
         // Если пользователь забанен / заморожен
         $user = UserModel::getUser($uid['user_id'], 'id');
-        Base::accountBan($user);
+        (new \App\Controllers\Auth\BanController())->getBan($user);
         Content::stopContentQuietМode($user);
 
         // Введите содержание сообщения
@@ -179,7 +179,7 @@ class MessagesController extends MainController
 
         // Этого пользователь не существует
         $user  = UserModel::getUser($uid['user_id'], 'id');
-        Base::PageRedirection($user, getUrlByName('messages', ['login' => $uid['user_login']]));
+        pageRedirection($user, getUrlByName('messages', ['login' => $uid['user_login']]));
 
         // Участник с нулевым уровнем доверия должен быть ограничен в добавлении ЛС
         $add_pm  = Validation::accessPm($uid, $recipient_id, Config::get('general.tl_add_pm'));

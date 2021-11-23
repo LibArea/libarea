@@ -19,7 +19,7 @@ class ReportsController extends MainController
         $pagesCount = ReportModel::getCount();
         $reports    = ReportModel::get($page, $limit);
 
-        $result = array();
+        $result = [];
         foreach ($reports as $ind => $row) {
             $row['user']    = UserModel::getUser($row['report_user_id'], 'id');
             $row['date']    = lang_date($row['report_date']);

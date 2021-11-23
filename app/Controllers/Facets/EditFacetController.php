@@ -22,7 +22,7 @@ class EditFacetController extends MainController
     {
         $facet_id   = Request::getInt('id');
         $facet      = FacetModel::getFacet($facet_id, 'id');
-        Base::PageError404($facet);
+        pageError404($facet);
 
         // Доступ получает только автор и админ
         if ($facet['facet_user_id'] != $this->uid['user_id'] && $this->uid['user_trust_level'] != 5) {
@@ -81,7 +81,7 @@ class EditFacetController extends MainController
         //print_r(Request::getPost());
         //exit;
         $facet = FacetModel::getFacet($facet_id, 'id');
-        Base::PageError404($facet);
+        pageError404($facet);
 
         // Доступ получает только автор и админ
         if ($facet['facet_user_id'] != $this->uid['user_id'] && $this->uid['user_trust_level'] != 5) {

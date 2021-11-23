@@ -19,7 +19,7 @@ class WebController extends MainController
         $pagesCount = WebModel::getLinksAllCount();
         $links      = WebModel::getLinksAll($page, $limit, $uid['user_id']);
 
-        $result = array();
+        $result = [];
         foreach ($links as $ind => $row) {
             $text = explode("\n", $row['link_content']);
             $row['link_content']    = Content::text($text[0], 'line');
@@ -59,7 +59,7 @@ class WebController extends MainController
         $page       = $page == 0 ? 1 : $page;
 
         $link       = WebModel::getLinkOne($domain, $uid['user_id']);
-        Base::PageError404($link);
+        pageError404($link);
 
         $link['link_content'] = Content::text($link['link_content'], 'line');
 
@@ -68,7 +68,7 @@ class WebController extends MainController
         $posts      = FeedModel::feed($page, $limit, $uid, $sheet, 'link', $data);
         $pagesCount = FeedModel::feedCount($uid, $sheet, 'link', $data);
 
-        $result = array();
+        $result = [];
         foreach ($posts as $ind => $row) {
             $text = explode("\n", $row['post_content']);
             $row['post_content_preview']    = Content::text($text[0], 'line');
@@ -109,7 +109,7 @@ class WebController extends MainController
         $page       = $page == 0 ? 1 : $page;
 
         $topic = FacetModel::getFacet($slug, 'slug');
-        Base::PageError404($topic);
+        pageError404($topic);
 
         // Получим подтемы темы
         $topics =  FacetModel::getLowLevelList($topic['facet_id']);
@@ -153,7 +153,7 @@ class WebController extends MainController
         $uid        = Base::getUid();
 
         $link = WebModel::getLinkOne($slug, $uid['user_id']);
-        Base::PageError404($link);
+        pageError404($link);
 
         $m = [
             'og'         => false,

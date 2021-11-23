@@ -14,14 +14,14 @@ class AddAnswerController extends MainController
     { 
         $post_id = Request::getPostInt('post_id');
         $post    = PostModel::getPostId($post_id);
-        Base::PageError404($post);
+        pageError404($post);
 
         $answer_content = $_POST['answer']; // для Markdown
         $uid            = Base::getUid();
 
         // Если пользователь забанен / заморожен
         $user = UserModel::getUser($uid['user_id'], 'id');
-        Base::accountBan($user);
+        (new \App\Controllers\Auth\BanController())->getBan($user);
         Content::stopContentQuietМode($user);
 
         $redirect = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);

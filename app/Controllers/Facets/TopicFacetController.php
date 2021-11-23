@@ -25,7 +25,7 @@ class TopicFacetController extends MainController
 
         $slug   = Request::get('slug');
         $facet  = FacetModel::getFacet($slug, 'slug');
-        Base::PageError404($facet);
+        pageError404($facet);
 
         if ($facet['facet_type'] == 'blog') {
             include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
@@ -39,7 +39,7 @@ class TopicFacetController extends MainController
         $posts      = FeedModel::feed($page, $limit, $this->uid, $sheet, 'topic', $data);
         $pagesCount = FeedModel::feedCount($this->uid, $sheet, 'topic', $data);
 
-        $result = array();
+        $result = [];
         foreach ($posts as $ind => $row) {
             $text = fragment($row['post_content']);
             $row['post_content_preview']    = Content::text($text, 'line');
@@ -92,7 +92,7 @@ class TopicFacetController extends MainController
     {
         $slug   = Request::get('slug');
         $facet  = FacetModel::getFacet($slug, 'slug');
-        Base::PageError404($facet);
+        pageError404($facet);
 
         $facet['facet_add_date']    = lang_date($facet['facet_add_date']);
 

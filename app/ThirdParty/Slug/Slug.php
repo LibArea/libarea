@@ -10,7 +10,7 @@
 
 class Slug 
 {
-	public function create($str, $options = array()) {
+	public function create($str, $options = []) {
 
 		$str = mb_convert_encoding((string)$str, 'UTF-8', mb_list_encodings());
 
@@ -22,7 +22,7 @@ class Slug
 			'delimiter' => '-',
 			'limit' => null,
 			'lowercase' => true,
-			'replacements' => array(),
+			'replacements' => [],
 			'transliterate' => true
 		);
 		

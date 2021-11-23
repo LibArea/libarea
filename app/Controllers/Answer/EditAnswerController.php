@@ -27,7 +27,7 @@ class EditAnswerController extends MainController
         }
 
         $post = PostModel::getPostId($answer['answer_post_id']);
-        Base::PageError404($post);
+        pageError404($post);
 
         Request::getResources()->addBottomStyles('/assets/editor/editormd.css');
         Request::getResources()->addBottomScript('/assets/editor/meditor.min.js');
@@ -57,7 +57,7 @@ class EditAnswerController extends MainController
 
         // Если кто редактирует забанен / заморожен
         $user   = UserModel::getUser($this->uid['user_id'], 'id');
-        Base::accountBan($user);
+        (new \App\Controllers\Auth\BanController())->getBan($user);
         Content::stopContentQuietМode($user);
 
         $answer = AnswerModel::getAnswerId($answer_id);

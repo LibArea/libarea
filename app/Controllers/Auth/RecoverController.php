@@ -57,7 +57,7 @@ class RecoverController extends MainController
             redirect($recover_uri);
         }
 
-        $code = $uInfo['user_id'] . '-' . Base::randomString('crypto', 25);
+        $code = $uInfo['user_id'] . '-' . randomString('crypto', 25);
         UserModel::initRecover($uInfo['user_id'], $code);
 
         // Отправка e-mail
@@ -81,7 +81,7 @@ class RecoverController extends MainController
         }
 
         $user = UserModel::getUser($user_id['activate_user_id'], 'id');
-        Base::PageError404($user);
+        pageError404($user);
 
         return view(
             '/auth/newrecover',

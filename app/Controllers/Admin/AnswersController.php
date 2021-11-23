@@ -19,7 +19,7 @@ class AnswersController extends MainController
         $pagesCount = AnswerModel::getAnswersAllCount($sheet);
         $answers    = AnswerModel::getAnswersAll($page, $limit, $uid, $sheet);
 
-        $result = array();
+        $result = [];
         foreach ($answers  as $ind => $row) {
             $row['content'] = Content::text($row['answer_content'], 'text');
             $row['date']    = lang_date($row['answer_date']);

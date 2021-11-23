@@ -23,7 +23,7 @@ class ReportController extends MainController
         if ($num_report > Config::get('trust-levels.all_stop_report')) return 1;
 
         $post   = PostModel::getPostId($post_id);
-        Base::PageError404($post);
+        pageError404($post);
 
         $type_id = 'comment_' . $content_id;
         if ($content_type == 'answer') {

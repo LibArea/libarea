@@ -35,7 +35,7 @@ class InvitationsController extends MainController
 
         // Если пользователь забанен
         $user = UserModel::getUser($uid['user_id'], 'id');
-        Base::accountBan($user);
+        (new \App\Controllers\Auth\BanController())->getBan($user);
 
         return view(
             '/user/invitation',
@@ -80,7 +80,7 @@ class InvitationsController extends MainController
 
         // + Повторная отправка
         $add_time           = date('Y-m-d H:i:s');
-        $invitation_code    = Base::randomString('crypto', 25);
+        $invitation_code    = randomString('crypto', 25);
         $add_ip             = Request::getRemoteAddress();
 
         InvitationModel::create($uid['user_id'], $invitation_code, $invitation_email, $add_time, $add_ip);

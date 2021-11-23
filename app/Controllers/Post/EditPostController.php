@@ -79,7 +79,7 @@ class EditPostController extends MainController
 
         // Если пользователь забанен / заморожен
         $user = UserModel::getUser($this->uid['user_id'], 'id');
-        Base::accountBan($user);
+        (new \App\Controllers\Auth\BanController())->getBan($user);
         Content::stopContentQuietМode($user);
 
         $redirect   = getUrlByName('post.edit', ['id' =>$post_id]);

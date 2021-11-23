@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
 use App\Models\{PostModel, FeedModel, AnswerModel, CommentModel, SubscriptionModel};
-use Content, Base, Translate;
+use Content, Base, Translate, Config;
 
 
 class PostController extends MainController
@@ -20,18 +20,18 @@ class PostController extends MainController
 
         // Проверим (user_id, user_slug)
         $post_new   = PostModel::getPostId($post_id);
-        Base::PageError404($post_new);
+        pageError404($post_new);
         if ($slug != $post_new['post_slug']) {
             redirect(getUrlByName('post', ['id' => $post_new['post_id'], 'slug' => $post_new['post_slug']]));
         }
 
         $post = PostModel::getPostSlug($slug, $uid['user_id'], $uid['user_trust_level']);
-        Base::PageError404($post);
+        pageError404($post);
 
         // Если пользователь забанен
         if ($uid['user_id'] > 0) {
             $user   = UserModel::getUser($uid['user_id'], 'id');
-            Base::accountBan($user);
+            (new \App\Controllers\Auth\BanController())->getBan($user);
         }
 
         // Редирект для слияния
@@ -41,7 +41,7 @@ class PostController extends MainController
 
         // Просмотры поста
         if (!isset($_SESSION['pagenumbers'])) {
-            $_SESSION['pagenumbers'] = array();
+            $_SESSION['pagenumbers'] = [];
         }
 
         if (!isset($_SESSION['pagenumbers'][$post['post_id']])) {
@@ -73,7 +73,7 @@ class PostController extends MainController
 
         $post_answers = AnswerModel::getAnswersPost($post['post_id'], $uid['user_id'], $post['post_type']);
 
-        $answers = array();
+        $answers = [];
         foreach ($post_answers as $ind => $row) {
 
             if (strtotime($row['answer_modified']) < strtotime($row['answer_date'])) {
@@ -86,7 +86,7 @@ class PostController extends MainController
             $answers[$ind]          = $row;
         }
 
-        $content_img  = false;
+        $content_img  = Config::get('meta.img_url');
         if ($post['post_content_img']) {
             $content_img  = AG_PATH_POSTS_COVER . $post['post_content_img'];
         } elseif ($post['post_thumb_img']) {
@@ -160,14 +160,14 @@ class PostController extends MainController
 
         // Если нет такого пользователя 
         $user   = UserModel::getUser($login, 'slug');
-        Base::PageError404($user);
+        pageError404($user);
 
         $limit = 100;
         $data       = ['post_user_id' => $user['user_id']];
         $posts      = FeedModel::feed($page, $limit, $uid, $sheet, 'user', $data);
         $pagesCount = FeedModel::feedCount($uid, $sheet, 'user', $data);
 
-        $result = array();
+        $result = [];
         foreach ($posts as $ind => $row) {
             $text                           = explode("\n", $row['post_content']);
             $row['post_content_preview']    = Content::text($text[0], 'line');

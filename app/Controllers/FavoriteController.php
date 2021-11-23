@@ -18,7 +18,7 @@ class FavoriteController extends MainController
             $content    = AnswerModel::getAnswerId($content_id);
         }
 
-        Base::PageRedirection($content, '/');
+        pageRedirection($content, '/');
 
         $uid            = Base::getUid();
         $type_content   = $type == 'post' ? 1 : 2;
