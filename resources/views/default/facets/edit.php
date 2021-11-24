@@ -241,7 +241,18 @@
 
       <?php if ($uid['user_trust_level'] == 5) { ?>
         <?= includeTemplate('/_block/form/select-content-tl', ['uid' => $uid, 'data' => $fs['facet_tl']]); ?>
-        <?= includeTemplate('/_block/form/select-content', ['type' => 'user', 'data' => $data, 'action' => 'edit', 'title' => Translate::get('author'), 'red' => 'red']); ?>
+        
+         <?= includeTemplate('/_block/form/select', [
+            'uid'           => $uid,
+            'data'          => $data['user'],
+            'action'        => 'edit',
+            'type'          => 'user',
+            'title'         => Translate::get('author'),
+            'required'      => false,
+            'maximum'       => 1,
+            'help'          => Translate::get('necessarily'),
+            'red'           => 'red'
+          ]); ?>
       <?php } ?>
 
       <div class="mb20">

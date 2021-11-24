@@ -26,7 +26,7 @@
         ],
       ]]); ?>
 
-      <?= includeTemplate('/_block/form/select-facet-post', [
+      <?= includeTemplate('/_block/form/select', [
         'uid'         => $uid,
         'data'        => $data,
         'action'      => 'edit',
@@ -37,7 +37,7 @@
         'help'        => '...',
       ]); ?>
 
-      <?= includeTemplate('/_block/form/select-facet-post', [
+      <?= includeTemplate('/_block/form/select', [
         'uid'           => $uid,
         'data'          => $data,
         'action'        => 'edit',
@@ -139,20 +139,30 @@
       <?php } ?>
 
       <?php if ($uid['user_trust_level'] > 4) { ?>
-        <?= includeTemplate('/_block/form/select-content', [
-          'type' => 'user',
-          'data' => $data,
-          'action' => 'edit',
-          'title' => Translate::get('author')
+        <?= includeTemplate('/_block/form/select', [
+          'uid'           => $uid,
+          'data'          => $data['user'],
+          'action'        => 'edit',
+          'type'          => 'user',
+          'title'         => Translate::get('author'),
+          'required'      => false,
+          'maximum'       => 1,
+          'help'          => Translate::get('necessarily'),
+          'red'           => 'red'
         ]); ?>
       <?php } ?>
 
-      <?= includeTemplate('/_block/form/select-content', [
-        'type' => 'post',
-        'data' => $data,
-        'action' => 'edit',
-        'title' => Translate::get('related')
+      <?= includeTemplate('/_block/form/select', [
+        'uid'           => $uid,
+        'data'          => $data,
+        'action'        => 'edit',
+        'type'          => 'post',
+        'title'         => Translate::get('related'),
+        'required'      => false,
+        'maximum'       => 3,
+        'help'          => Translate::get('necessarily'),
       ]); ?>
+
 
       <div class="mb20">
         <?php if ($post['post_draft'] == 1) { ?>

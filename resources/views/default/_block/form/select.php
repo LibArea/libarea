@@ -1,16 +1,32 @@
 <div class="mb20 max-w640">
   <label class="block">
     <?= Translate::get($type); ?>
-    <?php if (!empty($red)) { ?><sup class="red">*</sup><?php } ?>  
+    <?php if (!empty($red)) { ?><sup class="red">*</sup><?php } ?>
   </label>
-  <?php if ($action == 'edit') { ?>
-    <select name="facet_select[]" multiple="multiple" id='<?= $type; ?>'>
-      <?php foreach ($data[$type . '_arr'] as $value) { ?>  
-        <option selected value="<?= $value['facet_id']; ?>"><?= $value['facet_title']; ?></option>
-      <?php } ?>
-    </select>
+
+  <?php if ($type == 'topic' || $type == 'blog' || $type == 'post') { ?>
+
+    <?php
+    $name = 'facet';
+    if ($type == 'post') {
+      $name = 'post';
+    }
+    ?>
+
+    <?php if ($action == 'edit') { ?>
+      <select name="<?= $name; ?>_select[]" multiple="multiple" id='<?= $type; ?>'>
+        <?php foreach ($data[$type . '_arr'] as $value) { ?>
+          <option selected value="<?= $value[$name . '_id']; ?>"><?= $value[$name . '_title']; ?></option>
+        <?php } ?>
+      </select>
+    <?php } else { ?>
+      <select name="<?= $name; ?>_select[]" multiple="multiple" value="" id='<?= $type; ?>' <?php if ($required) { ?>required<?php } ?>></select>
+    <?php } ?>
+
   <?php } else { ?>
-    <select name="facet_select[]" multiple="multiple" value="" id='<?= $type; ?>' <?php if ($required) { ?>required<?php } ?>></select>
+    <select name="user_select" multiple="multiple" id='<?= $type; ?>'>
+      <option selected value="<?= $data['user_id']; ?>"><?= $data['user_login']; ?></option>
+    </select>
   <?php } ?>
 </div>
 <script nonce="<?= $_SERVER['nonce']; ?>">

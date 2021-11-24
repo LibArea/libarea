@@ -29,7 +29,7 @@
       ]); ?>
 
       <?php if (!empty($data['user_blog'])) { ?>
-        <?= includeTemplate('/_block/form/select-facet-post', [
+        <?= includeTemplate('/_block/form/select', [
           'uid'         => $uid,
           'data'        => $data['facets'],
           'type'        => 'blog',
@@ -41,7 +41,7 @@
         ]); ?>
       <?php } ?>
 
-      <?= includeTemplate('/_block/form/select-facet-post', [
+      <?= includeTemplate('/_block/form/select', [
         'uid'           => $uid,
         'data'          => $data['facets'],
         'type'          => 'topic',
@@ -126,11 +126,15 @@
         ]); ?>
       <?php } ?>
 
-      <?= includeTemplate('/_block/form/select-content', [
-        'type' => 'post',
-        'data' => $data,
-        'action' => 'add',
-        'title' => Translate::get('related')
+      <?= includeTemplate('/_block/form/select', [
+        'uid'           => $uid,
+        'data'          => [],
+        'action'        => 'add',
+        'type'          => 'post',
+        'title'         => Translate::get('related'),
+        'required'      => false,
+        'maximum'       => 3,
+        'help'          => Translate::get('necessarily'),
       ]); ?>
 
       <?= sumbit(Translate::get('create')); ?>

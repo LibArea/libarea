@@ -43,7 +43,7 @@
         'help' => '24 - 1500 ' . Translate::get('characters')
       ]); ?>
 
-      <?= includeTemplate('/_block/form/select-facet-post', [
+      <?= includeTemplate('/_block/form/select', [
         'uid'           => $uid,
         'data'          => [],
         'type'          => 'topic',
