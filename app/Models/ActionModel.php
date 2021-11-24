@@ -122,6 +122,7 @@ class ActionModel extends MainModel
             $sql = "SELECT user_id, user_login, user_trust_level FROM users WHERE user_login LIKE :user_login";
                
         } else {
+            // $type: topic | blog
             $uid    = Base::getUid();
             $id     = $uid['user_id'];
             
@@ -141,7 +142,7 @@ class ActionModel extends MainModel
 
         $result = DB::run($sql, [$field_name => "%" . $search . "%"]);
         $lists  = $result->fetchall(PDO::FETCH_ASSOC);
-
+ 
         $response = [];
         foreach ($lists as $list) {
             $response[] = array(

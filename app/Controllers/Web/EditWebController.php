@@ -30,16 +30,16 @@ class EditWebController extends MainController
         Request::getResources()->addBottomStyles('/assets/css/select2.css');
         Request::getResources()->addBottomScript('/assets/js/select2.min.js');
         Request::getResources()->addBottomScript('/assets/js/admin.js');
-
+ 
         return view(
             '/web/edit',
             [
                 'meta'  => meta($m = [], Translate::get('change the site') . ' | ' . $domain['link_url_domain']),
                 'uid'   => $this->uid,
                 'data'  => [
-                    'domain'        => $domain,
-                    'sheet'         => 'domains',
-                    'facet_select'  => WebModel::getLinkTopic($domain['link_id']),
+                    'domain'    => $domain,
+                    'sheet'     => 'domains',
+                    'topic_arr' => WebModel::getLinkTopic($domain['link_id']),
                 ]
             ]
         );

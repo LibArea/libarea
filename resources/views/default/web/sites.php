@@ -1,6 +1,5 @@
-<main class="col-span-9 mb-col-12">
-
-  <div class="bg-white br-rd5 br-box-gray pt5 pr15 pb5 pl15">
+<main class="col-span-12 mb-col-12">
+  <div class="pt5 mr15 pb5 ml15">
     <?php if ($uid['user_trust_level'] == 5) { ?>
       <a title="<?= Translate::get('add'); ?>" class="right mt5" href="<?= getUrlByName('web.add'); ?>">
         <i class="bi bi-plus-lg middle"></i>
@@ -28,7 +27,9 @@
         </a>
       <?php } ?>
     </h1>
+  </div>
 
+  <div class="mb20 pt10 pr15 pb10 pl15 bg-green-200">
     <?php if ($data['low_topics']) { ?>
       <div class="grid grid-cols-3 gap-2 justify-between mb20">
         <?php foreach ($data['low_topics'] as $lt) { ?>
@@ -42,7 +43,7 @@
     <?php } ?>
 
     <?php if ($data['topic_related']) { ?>
-      <div class="mb20">
+      <div class="mb10">
         <div class="gray size-14"><?= Translate::get('see also'); ?></div>
         <?php foreach ($data['topic_related'] as $rl) { ?>
           <?php if ($rl['facet_is_web'] == 1) { ?>
@@ -53,33 +54,34 @@
         <?php } ?>
       </div>
     <?php } ?>
+  </div>
 
-    <div class="flex flex-row items-center justify-between pl0 mb15">
-      <p class="m0 size-18 lowercase"><?= num_word($data['count'], Translate::get('num-website'), true); ?></p>
-      <ul class="flex flex-row list-none m0 p0 center size-15">
-      
+  <div class="flex flex-row items-center justify-between pt5 mr15 pb5 ml15 w-90">
+    <p class="m0 size-18 lowercase"><?= num_word($data['count'], Translate::get('num-website'), true); ?></p>
+    <ul class="flex flex-row list-none m0 p0 center size-15">
+
       <?= tabs_nav(
         $uid['user_id'],
         $data['sheet'],
         $pages = [
-            [
-              'id' => 'all',
-              'url' => getUrlByName('web.topic', ['slug' => $data['topic']['facet_slug']]),
-              'content' => Translate::get('all'),
-              'icon' => 'bi bi-app'
-            ],
-            [
-              'id' => 'new',
-              'url' => getUrlByName('web.topic.new', ['slug' => $data['topic']['facet_slug']]),
-              'content' => Translate::get('new ones'),
-              'icon' => 'bi bi-bar-chart'
-            ],
-          ]
+          [
+            'id' => 'all',
+            'url' => getUrlByName('web.topic', ['slug' => $data['topic']['facet_slug']]),
+            'content' => Translate::get('all'),
+            'icon' => 'bi bi-app'
+          ],
+          [
+            'id' => 'new',
+            'url' => getUrlByName('web.topic.new', ['slug' => $data['topic']['facet_slug']]),
+            'content' => Translate::get('new ones'),
+            'icon' => 'bi bi-bar-chart'
+          ],
+        ]
       ); ?>
-    
-      </ul>
-    </div>
 
+    </ul>
+  </div>
+  <div class="pt5 mr15 pb5 ml15">
     <?php if (!empty($data['links'])) { ?>
       <?php foreach ($data['links'] as $key => $link) { ?>
         <div class="pt20 pb5 flex flex-row gap-2">
@@ -118,14 +120,13 @@
     <?php } else { ?>
       <?= no_content(Translate::get('no'), 'bi bi-info-lg'); ?>
     <?php } ?>
-  </div>
-  <div class="pl10">
+
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('web')); ?>
   </div>
 </main>
-<aside class="col-span-3 relative br-rd5 no-mob">
-  <div class="bg-white p15  br-box-gray">
-    <?= $data['topic']['facet_description']; ?>
-  </div>
-</aside>
+</div>
+<div class="bg-white p15 no-mob br-box-gray">
+  <?= $data['topic']['facet_description']; ?>
+</div>
+
 <?= includeTemplate('/_block/wide-footer'); ?>

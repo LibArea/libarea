@@ -2,7 +2,7 @@
   <label class="block" for="post_content"><?= $title; ?>
     <?php if (!empty($red)) { ?><sup class="red">*</sup><?php } ?>
   </label>
-  <?php if ($type == 'topic' || $type == 'post') { ?>
+  <?php if ($type == 'post') { ?>
     <?php if ($action == 'edit') { ?>
       <select name="<?= $type; ?>_select[]" multiple="multiple" id='<?= $type; ?>'>
         <?php foreach ($data[$type . '_select'] as $value) { ?>
@@ -13,12 +13,10 @@
       <select name="<?= $type; ?>_select[]" multiple="multiple" id='<?= $type; ?>'></select>
     <?php } ?>
     <?php if (!empty($help)) { ?><div class="size-14 gray-light-2"><?= $help; ?></div> <?php } ?>
-  <?php } elseif ($type == 'user') { ?>
+  <?php } else { ?>
     <select name="user_select" id='<?= $type; ?>'>
       <option value="<?= $data['user']['user_id']; ?>"><?= $data['user']['user_login']; ?></option>
     </select>
-  <?php } else { ?>
-    <!-- Related topics for web? -->
   <?php } ?>
 </div>
 <script nonce="<?= $_SERVER['nonce']; ?>">

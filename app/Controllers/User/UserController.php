@@ -202,5 +202,15 @@ class UserController extends MainController
             ]
         );
     }
+    
+    public function card()
+    {
+        $user_id    = Request::getPostInt('user_id');
+        $user       = UserModel::getUser($user_id, 'id');
+        $post       = PostModel::getPostId($user['user_my_post']);
+        $badges     = BadgeModel::getBadgeUserAll($user_id);
+
+        includeTemplate('/user/card', ['user' => $user, 'uid' => $this->uid, 'post' => $post, 'badges' => $badges]);  
+    }
    
 }

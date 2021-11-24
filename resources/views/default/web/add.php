@@ -33,9 +33,28 @@
         ]
       ]); ?>
 
-      <?php includeTemplate('/_block/editor/textarea', ['title' => Translate::get('description'), 'type' => 'text', 'name' => 'link_content', 'content' => '', 'min' => 24, 'max' => 1500, 'help' => '24 - 1500 ' . Translate::get('characters')]); ?>
+      <?php includeTemplate('/_block/editor/textarea', [
+        'title' => Translate::get('description'),
+        'type' => 'text',
+        'name' => 'link_content',
+        'content' => '',
+        'min' => 24,
+        'max' => 1500,
+        'help' => '24 - 1500 ' . Translate::get('characters')
+      ]); ?>
 
-      <?= includeTemplate('/_block/form/select-content', ['type' => 'topic', 'data' => $data, 'action' => 'add', 'title' => Translate::get('topics')]); ?>
+      <?= includeTemplate('/_block/form/select-facet-post', [
+        'uid'           => $uid,
+        'data'          => [],
+        'type'          => 'topic',
+        'maximum'       => 3,
+        'action'        => 'add',
+        'title'         => Translate::get('facets'),
+        'required'      => true,
+        'help'          => Translate::get('necessarily'),
+        'red'           => 'red'
+      ]); ?>
+
       <?= sumbit(Translate::get('add')); ?>
     </form>
   </div>

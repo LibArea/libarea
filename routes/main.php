@@ -68,7 +68,7 @@ Route::before('Authorization@noAuth')->getGroup();
 
     Route::get('/u/{login}/messages')->controller('MessagesController')->where(['login' => '[A-Za-z0-9]+'])->name('user.messages');   
     Route::get('/messages/read/{id}')->controller('MessagesController@dialog')->where(['id' => '[0-9]+']); 
-    Route::get('/u/{login}/mess')->controller('MessagesController@messages')->where(['login' => '[A-Za-z0-9]+']); 
+    Route::get('/u/{login}/mess')->controller('MessagesController@messages')->where(['login' => '[A-Za-z0-9]+'])->name('user.send.messages'); 
 
 	Route::get('/u/{login}/notifications')->controller('NotificationsController')->where(['login' => '[A-Za-z0-9]+'])->name('user.notifications'); 
     Route::get('/notifications/read/{id}')->controller('NotificationsController@read')->where(['id' => '[0-9]+'])->name('notif.read');  
@@ -117,6 +117,7 @@ Route::endGroup();
 Route::getType('post');
     // Viewing a post in the feed
     Route::get('/post/shown')->controller('Post\PostController@shownPost');
+    Route::get('/user/card')->controller('User\UserController@card');
     Route::get('/msg/go')->controller('Post\AddPostController@msg');
     // Calling the Comment form
     Route::get('/comments/addform')->controller('Comment\AddCommentController');

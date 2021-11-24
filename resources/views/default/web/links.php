@@ -7,24 +7,24 @@
     <?php } ?>
     <h1 class="mt5 mb10 size-24 font-normal"><?= Translate::get('domains-title'); ?></h1>
     <div class="gray size-14 mb15"><?= Translate::get('under development'); ?>...</div>
-
-    <div class="flex mb20">
-      <?php foreach (Config::get('web-root-categories') as  $cat) { ?>
-        <div class="mr60">
-          <a class="pt5 pr10 mr60 dark-white underline-hover size-21 block " title="<?= $cat['title']; ?>" href="<?= getUrlByName('web.topic', ['slug' => $cat['url']]); ?>">
-            <?= $cat['title']; ?>
-          </a>
-          <?php if (!empty($cat['sub'])) { ?>
-            <?php foreach ($cat['sub'] as $sub) { ?>
-              <a class="pr10 pb5 size-14 black gray-light inline" title="<?= $sub['title']; ?>" href="<?= getUrlByName('web.topic', ['slug' => $sub['url']]); ?>">
-                <?= $sub['title']; ?>
-              </a>
-            <?php } ?>
+  </div>
+  <div class="flex mb20 pt10 pr15 pb10 pl15 bg-green-200">
+    <?php foreach (Config::get('web-root-categories') as  $cat) { ?>
+      <div class="mr60">
+        <a class="pt5 pr10 mr60 dark-white underline-hover size-21 block " title="<?= $cat['title']; ?>" href="<?= getUrlByName('web.topic', ['slug' => $cat['url']]); ?>">
+          <?= $cat['title']; ?>
+        </a>
+        <?php if (!empty($cat['sub'])) { ?>
+          <?php foreach ($cat['sub'] as $sub) { ?>
+            <a class="pr10 pb5 size-14 black gray-light inline" title="<?= $sub['title']; ?>" href="<?= getUrlByName('web.topic', ['slug' => $sub['url']]); ?>">
+              <?= $sub['title']; ?>
+            </a>
           <?php } ?>
-        </div>
-      <?php } ?>
-    </div>
-
+        <?php } ?>
+      </div>
+    <?php } ?>
+  </div>
+  <div class="pt5 mr15 pb5 ml15">
     <?php if (!empty($data['links'])) { ?>
       <?php foreach ($data['links'] as $key => $link) { ?>
         <?php if ($link['link_published'] == 1) { ?>

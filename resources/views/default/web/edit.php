@@ -55,9 +55,27 @@
         <div class="size-14 gray-light-2"><?= Translate::get('posted-help'); ?></div>
       </div>
 
-      <?php includeTemplate('/_block/editor/textarea', ['title' => Translate::get('description'), 'type' => 'text', 'name' => 'link_content', 'content' => $data['domain']['link_content'], 'min' => 24, 'max' => 1500, 'help' => '24 - 1500 ' . Translate::get('characters')]); ?>
+      <?php includeTemplate('/_block/editor/textarea', [
+        'title' => Translate::get('description'),
+        'type' => 'text',
+        'name' => 'link_content',
+        'content' => $data['domain']['link_content'],
+        'min' => 24,
+        'max' => 1500,
+        'help' => '24 - 1500 ' . Translate::get('characters')
+      ]); ?>
 
-      <?= includeTemplate('/_block/form/select-content', ['type' => 'topic', 'data' => $data, 'action' => 'edit', 'title' => Translate::get('topics')]); ?>
+      <?= includeTemplate('/_block/form/select-facet-post', [
+        'uid'           => $uid,
+        'data'          => $data,
+        'action'        => 'edit',
+        'type'          => 'topic',
+        'title'         => Translate::get('topics'),
+        'required'      => false,
+        'maximum'       => 3,
+        'help'          => Translate::get('necessarily'),
+        'red'           => 'red'
+      ]); ?>
 
       <input type="hidden" name="link_id" value="<?= $data['domain']['link_id']; ?>">
       <?= sumbit(Translate::get('edit')); ?>

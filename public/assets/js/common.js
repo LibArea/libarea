@@ -172,6 +172,38 @@ document.querySelectorAll(".showpost")
       );
   }));
 
+// User card
+document.querySelectorAll("#user-card")
+  .forEach(el => el.addEventListener("click", function (e) {
+    let user_id = this.dataset.user_id;
+    let content_id = this.dataset.content_id;
+    let content = document.querySelector('.content_' + content_id);
+    let div = $("#content_" + content_id);
+    div[0].classList.remove("none");
+
+    fetch("/user/card", {
+      method: "POST",
+      body: "user_id=" + user_id,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    })
+      .then(
+        response => {
+          return response.text();
+        }
+      ).then(
+        text => {
+          content.innerHTML = text;
+        }
+      );
+
+    $(document).mouseup(function (e) {
+      if (!div.is(e.target)
+        && div.has(e.target).length === 0) {
+        div[0].classList.add("none");
+      }
+    });
+  }));
+
 // Toggle dark mode
 let toggledark = document.querySelector('#toggledark');
 if (toggledark) {

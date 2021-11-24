@@ -154,6 +154,10 @@ class WebController extends MainController
 
         $link = WebModel::getLinkOne($slug, $uid['user_id']);
         pageError404($link);
+        
+        if ($link['link_published'] == 0) {
+            pageError404([]);
+        }
 
         $m = [
             'og'         => false,
