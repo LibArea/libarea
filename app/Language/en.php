@@ -25,6 +25,7 @@ $data = [
     'whisper'           => 'Whisper',
     'report'            => 'Report',
     'reports'           => 'Reports',
+    'build'             => 'Build',
     'complained about'  => 'complained about ',
     'freely'            => 'Free',
     'useful resources'  => 'Useful Resources',

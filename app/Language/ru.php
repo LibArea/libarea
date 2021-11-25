@@ -26,6 +26,7 @@ $data = [
     'whisper'           => 'Шёпот',
     'report'            => 'Флаг',
     'reports'           => 'Флаги',
+    'build'             => 'Собрать',
     'complained about'  => 'пожаловался на',
     'freely'            => 'Свободно',
     'useful resources'  => 'Полезные ресурсы',

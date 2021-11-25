@@ -13,6 +13,7 @@ $data = [
     'whisper'           => 'șoaptă',
     'report'            => 'Steag',
     'reports'           => 'Steaguri',
+    'build'             => 'Construiește',
     'complained about'  => 'S-a plâns',
     'understands'       => 'Înțelege',
     'freely'            => 'Liber',

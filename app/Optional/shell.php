@@ -48,20 +48,20 @@ function storage_path()
     return hleb_6iopl942e103te6i10600l_storage_path();
 }
 
-function public_path()
-{
+function public_path() {
     return hleb_10p134l66o0il0e0t92e6i_public_path();
 }
 
-function view_path()
-{
+function view_path() {
     return hleb_601e30l60p2ii1e0o469tl_view_path();
 }
 
 function getContentFromTemplate(string $template, array $params = [])
 {
     return hleb_e0b1036c1070101_template($template, $params, true);
-} */
+} 
+
+*/
 
 // use App\Optional\Data; 
 
@@ -129,7 +129,7 @@ function view(string $template, array $params = [])
 {
     $facet =  $params['facet'] ?? [];
     includeTemplate('/header', ['uid' => $params['uid'], 'meta' => $params['meta'], 'facet' => $facet]);
-    includeTemplate($template, ['uid' => $params['uid'], 'data' => $params['data']]);
+    includeTemplate('/content' . $template, ['uid' => $params['uid'], 'data' => $params['data']]);
     includeTemplate('/footer', ['uid' => $params['uid']]);
 }
 

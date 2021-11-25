@@ -5,7 +5,7 @@ namespace App\Controllers\Admin;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\Admin\СonsoleModel;
-use SendEmail, Translate;
+use SendEmail, Translate, Sass;
 
 class СonsoleController extends MainController
 {
@@ -42,5 +42,12 @@ class СonsoleController extends MainController
             redirect(getUrlByName('admin.tools'));
         }
         return true;
+    }  
+    
+    public static function buildCss()
+    {
+        Sass::collect();
+
+        self::consoleRedirect();
     }
 }
