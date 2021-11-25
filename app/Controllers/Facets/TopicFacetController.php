@@ -132,6 +132,6 @@ class TopicFacetController extends MainController
    
         $users      = FacetModel::getFocusUsers($topic_id, 25);
 
-        return includeTemplate('/facets/followers', ['users' => $users]);
+        return includeTemplate('/content/facets/followers', ['users' => $users]);
     }
 }

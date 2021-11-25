@@ -210,7 +210,7 @@ class UserController extends MainController
         $post       = PostModel::getPostId($user['user_my_post']);
         $badges     = BadgeModel::getBadgeUserAll($user_id);
 
-        includeTemplate('/user/card', ['user' => $user, 'uid' => $this->uid, 'post' => $post, 'badges' => $badges]);  
+        includeTemplate('/content/user/card', ['user' => $user, 'uid' => $this->uid, 'post' => $post, 'badges' => $badges]);  
     }
    
 }

@@ -243,6 +243,6 @@ class PostController extends MainController
 
         $post['post_content'] = Content::text($post['post_content'], 'text');
 
-        includeTemplate('/post/postcode', ['post' => $post]);
+        includeTemplate('/content/post/postcode', ['post' => $post]);
     }
 }
