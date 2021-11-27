@@ -23,6 +23,7 @@
         initialEditType: 'markdown',
         previewStyle: '<?= $preview; ?>',
         autofocus: false,
+        hideModeSwitch: true, 
         initialValue: initialValue,
         theme: '<?= Request::getCookie('dayNight'); ?>',
         language: '<?= $lang; ?>',

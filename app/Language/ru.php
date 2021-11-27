@@ -277,7 +277,7 @@ $data = [
     'ru-language'           => 'Русский (RU)',
     'en-language'           => 'Английский (EN)',
     'de-language'           => 'Немецкий (DE)',
-    'fr-language'           => 'Французкий (FR)',
+    'fr-language'           => 'Французский (FR)',
     'zh-language'           => 'Китайский (ZH)',
     'md-language'           => 'Молдавский (MD)',
 
