@@ -66,10 +66,11 @@
         <div class="size-14 gray-light-2"><?= Translate::get('format-cover-post'); ?>.</div>
       </div>
 
-      <?= includeTemplate('/_block/editor/post-editor', [
-        'post_id' => null,
-        'lang' => $uid['user_lang'],
-        'type' => 'post'
+      <?= includeTemplate('/_block/editor/editor', [
+        'type'      => 'post',
+        'height'    => '350px',
+        'preview'   => 'vertical',
+        'lang'      => $uid['user_lang'],
       ]); ?>
 
       <?= includeTemplate('/_block/form/field-radio',  [

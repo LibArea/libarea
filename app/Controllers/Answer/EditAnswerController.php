@@ -29,8 +29,9 @@ class EditAnswerController extends MainController
         $post = PostModel::getPostId($answer['answer_post_id']);
         pageError404($post);
 
-        Request::getResources()->addBottomStyles('/assets/editor/editormd.css');
-        Request::getResources()->addBottomScript('/assets/editor/meditor.min.js');
+        Request::getResources()->addBottomStyles('/assets/js/editor/toastui-editor.min.css');
+        Request::getResources()->addBottomScript('/assets/js/editor/toastui-editor-all.min.js');
+        Request::getResources()->addBottomStyles('/assets/js/editor/dark.css');
 
         return view(
             '/answer/edit-form-answer',
@@ -40,7 +41,7 @@ class EditAnswerController extends MainController
                 'data'  => [
                     'answer_id'         => $answer['answer_id'],
                     'post_id'           => $post['post_id'],
-                    'answer_content'    => $answer['answer_content'],
+                    'content'           => $answer['answer_content'],
                     'sheet'             => 'edit-answers',
                     'post'              => $post,
                 ]
@@ -52,7 +53,7 @@ class EditAnswerController extends MainController
     {
         $answer_id      = Request::getPostInt('answer_id');
         $post_id        = Request::getPostInt('post_id');
-        $answer_content = $_POST['answer']; // для Markdown
+        $answer_content = $_POST['content']; // для Markdown
         $post           = PostModel::getPostId($post_id);
 
         // Если кто редактирует забанен / заморожен

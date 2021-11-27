@@ -108,8 +108,9 @@ class PostController extends MainController
         Request::getResources()->addBottomStyles('/assets/css/prism.css');
 
         if ($uid['user_id'] > 0 && $post['post_closed'] == 0) {
-            Request::getResources()->addBottomStyles('/assets/editor/editormd.css');
-            Request::getResources()->addBottomScript('/assets/editor/meditor.min.js');
+            Request::getResources()->addBottomStyles('/assets/js/editor/toastui-editor.min.css');
+            Request::getResources()->addBottomStyles('/assets/js/editor/dark.css');
+            Request::getResources()->addBottomScript('/assets/js/editor/toastui-editor-all.min.js');
         }
 
         if ($post['post_related']) {

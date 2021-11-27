@@ -29,10 +29,11 @@ class EditPostController extends MainController
         Request::getHead()->addStyles('/assets/css/image-uploader.css');
         Request::getResources()->addBottomStyles('/assets/css/select2.css');
         Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
-        Request::getResources()->addBottomStyles('/assets/editor/editormd.css');
-        Request::getResources()->addBottomScript('/assets/editor/meditor.min.js');
         Request::getResources()->addBottomScript('/assets/js/select2.min.js');
-
+        Request::getResources()->addBottomStyles('/assets/js/editor/toastui-editor.min.css');
+        Request::getResources()->addBottomStyles('/assets/js/editor/dark.css');
+        Request::getResources()->addBottomScript('/assets/js/editor/toastui-editor-all.min.js');
+        
         return view(
             '/post/edit',
             [
@@ -54,7 +55,7 @@ class EditPostController extends MainController
     {
         $post_id                = Request::getPostInt('post_id');
         $post_title             = Request::getPost('post_title');
-        $post_content           = $_POST['post_content']; // для Markdown
+        $post_content           = $_POST['content']; // для Markdown
         $post_type              = Request::getPostInt('post_type');
         $post_translation       = Request::getPostInt('translation');
         $post_draft             = Request::getPostInt('post_draft');
@@ -152,15 +153,6 @@ class EditPostController extends MainController
         }
         FacetModel::addPostFacets($arr, $post_id);
         
-
-      /*  if (!empty($topics)) {
-            $arr = [];
-            foreach ($topics as $row) {
-                $arr[] = array($row, $post_id);
-            }
-            FacetModel::addPostFacets($arr, $post_id);
-        } */
-
         redirect(getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]));
     }
 
@@ -187,24 +179,11 @@ class EditPostController extends MainController
         $post_id    = Request::getGet('post_id');
 
         // Фотографии в тело контента
-        $img         = $_FILES['editormd-image-file'];
-        if ($_FILES['editormd-image-file']['name']) {
-
-            $post_img = UploadImage::post_img($img, $user_id);
-            $response = array(
-                "url"     => $post_img,
-                "message" => Translate::get('successful download'),
-                "success" => 1,
-            );
-
-            return json_encode($response);
+        $img        = $_FILES['file'];
+        if ($_FILES['file']['name']) {
+            return UploadImage::post_img($img, $user_id);
         }
 
-        $response = array(
-            "message" => Translate::get('error in loading'),
-            "success" => 0,
-        );
-
-        return json_encode($response);
+        return false;
     }
 }

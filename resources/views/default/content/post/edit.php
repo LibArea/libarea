@@ -76,11 +76,12 @@
         <div class="input-images"></div>
       </div>
 
-      <?= includeTemplate('/_block/editor/post-editor', [
-        'post_id' => $post['post_id'],
-        'lang' => $uid['user_lang'],
-        'type' => 'post',
-        'conten' => $post['post_content']
+      <?= includeTemplate('/_block/editor/editor', [
+        'type'      => 'post',
+        'height'    => '300px',
+        'preview'   => 'vertical',
+        'lang'      => $uid['user_lang'],
+        'content'   => $post['post_content'],
       ]); ?>
 
       <?php if ($data['post']['post_draft'] == 1) { ?>

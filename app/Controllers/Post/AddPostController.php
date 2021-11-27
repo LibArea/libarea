@@ -22,10 +22,11 @@ class AddPostController extends MainController
     {
         Request::getHead()->addStyles('/assets/css/image-uploader.css');
         Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
-        Request::getResources()->addBottomStyles('/assets/editor/editormd.css');
-        Request::getResources()->addBottomScript('/assets/editor/meditor.min.js');
         Request::getResources()->addBottomStyles('/assets/css/select2.css');
         Request::getResources()->addBottomScript('/assets/js/select2.min.js');
+        Request::getResources()->addBottomStyles('/assets/js/editor/toastui-editor.min.css');
+        Request::getResources()->addBottomStyles('/assets/js/editor/dark.css');
+        Request::getResources()->addBottomScript('/assets/js/editor/toastui-editor-all.min.js');
 
         // Если пользователь забанен / заморожен
         $user = UserModel::getUser($this->uid['user_id'], 'id');
@@ -61,7 +62,7 @@ class AddPostController extends MainController
     {
         // Получаем title и содержание
         $post_title             = Request::getPost('post_title');
-        $post_content           = $_POST['post_content']; // для Markdown
+        $post_content           = $_POST['content']; // для Markdown
         $post_url               = Request::getPost('post_url');
         $post_closed            = Request::getPostInt('closed');
         $post_draft             = Request::getPostInt('post_draft');

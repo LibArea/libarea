@@ -109,7 +109,10 @@ textarea:focus { border: 1px solid #9ccdf8; }
 }
 
 .dark .dark-br-black { border: 1px solid #111; }
-.dark .dark-bg-black { background-color: #000; }
+
+.dark .dark-bg-black,
+.dark .answers_subtree:target { background-color: #000; }
+
 .dark .gray-light { color: #ccc; }
 .dark .dark-white { color: #fff; }
 

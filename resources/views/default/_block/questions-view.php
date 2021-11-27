@@ -128,13 +128,24 @@
 <?php if (!empty($otvet)) { ?>
   <?= no_content(Translate::get('you-question-no'), 'bi bi-info-lg'); ?>
 <?php } else { ?>
-  <?= includeTemplate(
-    '/_block/editor/answer-create-editor',
-    [
-      'data'    => $post,
-      'lang'    => $uid['user_lang'] ?? Config::get('general.lang'),
-      'type'    => 'answer',
-      'user_id' => $uid['user_id']
-    ]
-  ); ?>
+  <?php if ($uid['user_id'] > 0) { ?>
+    <?php if ($post['post_type'] == 1 && $post['post_draft'] == 0 && $post['post_closed'] == 0) { ?>
+
+      <form class="mb15" action="<?= getUrlByName('answer.create'); ?>" accept-charset="UTF-8" method="post">
+        <?= csrf_field() ?>
+        <?= includeTemplate('/_block/editor/editor', [
+          'height'    => '250px',
+          'preview'   => '',
+          'lang'      => $uid['user_lang'],
+        ]); ?>
+
+        <div class="clear pt5">
+          <input type="hidden" name="post_id" value="<?= $post['post_id']; ?>">
+          <input type="hidden" name="answer_id" value="0">
+          <?= sumbit(Translate::get('reply')); ?>
+        </div>
+      </form>
+
+    <?php } ?>
+  <?php } ?>
 <?php }  ?>

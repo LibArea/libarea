@@ -16,7 +16,7 @@ class AddAnswerController extends MainController
         $post    = PostModel::getPostId($post_id);
         pageError404($post);
 
-        $answer_content = $_POST['answer']; // для Markdown
+        $answer_content = $_POST['content']; // для Markdown
         $uid            = Base::getUid();
 
         // Если пользователь забанен / заморожен
@@ -25,7 +25,7 @@ class AddAnswerController extends MainController
         Content::stopContentQuietМode($user);
 
         $redirect = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
-        Validation::Limits($answer_content, Translate::get('Bodies'), '6', '5000', $redirect);
+        Validation::Limits($answer_content, Translate::get('bodies'), '6', '5000', $redirect);
 
         // Ограничим добавления ответов (в день)
         Validation::speedAdd($uid, 'answer');
