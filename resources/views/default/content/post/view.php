@@ -222,7 +222,7 @@
 
             <?= includeTemplate('/_block/editor/editor', [
               'height'    => '250px',
-              'preview'   => '',
+              'preview'   => 'tab',
               'lang'      => $uid['user_lang'],
             ]); ?>
 
@@ -280,12 +280,10 @@
       <?= post_img($post['post_content_img'], $post['post_title'], 'w-100 p15 post-img br-rd5', 'cover', $post['post_content_img']); ?>
     </div>
   <?php } ?>
-  <div class="br-box-gray bg-white br-rd5 mb15 p15">
-    <div class="social center" data-url="<?= Config::get('meta.url') . getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>" data-title="<?= $post['post_title']; ?>">
-      <a class="size-21 pl15 pr15 gray-light-2" data-id="fb"><i class="bi bi-facebook"></i></a>
-      <a class="size-21 pl15 pr15 gray-light-2" data-id="vk">VK</a>
-      <a class="size-21 pl15 pr15 gray-light-2" data-id="tw"><i class="bi bi-twitter"></i></a>
-    </div>
+  <div class="share-btn br-box-gray bg-white br-rd5 mb15 p15 gray-light-2 size-21 center">
+    <a class="pl15 pr15" data-id="fb"><i class="bi bi-facebook"></i></a>
+    <a class="pl15 pr15" data-id="vk">VK</a>
+    <a class="pl15 pr15" data-id="tw"><i class="bi bi-twitter"></i></a>
   </div>
   <?php if ($data['recommend']) { ?>
     <div class="br-box-gray bg-white br-rd5 mb15 sticky top80 p15">
@@ -310,18 +308,20 @@
   <?php } ?>
 </aside>
 <script nonce="<?= $_SERVER['nonce']; ?>">
-  $(document).ready(function() {
-    $('.post-img').on('click', function(e) {
-      let src = $(this).attr('src');
-      if (src) {
-        let img = '<img src="' + src + '">';
-        Swal.fire({
-          width: '100%',
-          showConfirmButton: false,
-          title: img
-        })
-      }
-    });
+  document.querySelectorAll(".post-img")
+  .forEach(el => el.addEventListener("click", function (e) {
+    let post_img = document.querySelectorAll('img.post-img');
+    if (post_img[0].src) {
+      let img = '<img src="' + post_img[0].src + '">';
+      Swal.fire({
+        width: '100%',
+        showConfirmButton: false,
+        title: img
+      })
+    }
+  }));
+
+    <?php if ($uid['user_id'] > 0) { ?>
     $(document).on('click', '.msg-flag', function() {
       let post_id = $(this).data('post_id');
       let content_id = $(this).data('content_id');
@@ -347,7 +347,8 @@
         }
       })
     });
-  });
+    <?php } ?>
+ 
 </script>
 </div>
 <?= includeTemplate('/_block/wide-footer'); ?>

@@ -135,7 +135,7 @@
         <?= csrf_field() ?>
         <?= includeTemplate('/_block/editor/editor', [
           'height'    => '250px',
-          'preview'   => '',
+          'preview'   => 'tab',
           'lang'      => $uid['user_lang'],
         ]); ?>
 

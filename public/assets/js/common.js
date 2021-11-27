@@ -253,16 +253,68 @@ function getCookie(cname) {
 }
 
 // Modal windows for photos in a post
-$(document).ready(function () {
-  $('.post-body.full .post img').on('click', function (e) {
-    let src = $(this).attr('src');
-    if (src) {
-      let img = '<img src="' + src + '">';
+document.querySelectorAll(".post-body.full .post img")
+  .forEach(el => el.addEventListener("click", function (e) {
+    if (el.src) {
+      let img = '<img src="' + el.src + '">';
       Swal.fire({
         width: '100%',
         showConfirmButton: false,
         title: img
       })
     }
-  });
+  }));
+
+// search
+document.getElementById('find').addEventListener('keydown', function () {
+  fetch_search();
 });
+
+function fetch_search() {
+  let val = document.getElementById("find").value;
+  let token = document.querySelector('input[name="token"]').value;
+
+  if (val.length < 3) {
+    return;
+  }
+
+  fetch("/api-search", {
+    method: "POST",
+    body: "q=" + val + "&_token=" + token,
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+  })
+    .then(
+      response => {
+        return response.text();
+      }
+    ).then(
+      text => {
+        let obj = JSON.parse(text);
+        var html = '<div class="flex">';
+        for (var key in obj) {
+          if (obj[key].topic_slug) {
+            html += '<a class="blue block size-14 mb15 mr10" href="/topic/' + obj[key].facet_slug + '">';
+            html += '<img class="w21 mr5 br-box-gray" src="<?= AG_PATH_FACETS_LOGOS; ?>' + obj[key].facet_img + '">';
+            html += obj[key].facet_title + '</a>';
+          }
+          if (obj[key].post_id) {
+            html += '<a class="block black size-14 mb10" href="/post/' + obj[key].post_id + '">' +
+              obj[key].title + '</a>';
+          }
+          html += '</div>';
+        }
+
+        let items = document.getElementById("search_items");
+        items.classList.add("block");
+        items.innerHTML = html;
+        var menu = document.querySelector('.none.block');
+        if (menu) {
+          document.onclick = function (e) {
+            if (event.target.className != '.none.block') {
+              items.classList.remove("block");
+            };
+          };
+        }
+      }
+    );
+}
