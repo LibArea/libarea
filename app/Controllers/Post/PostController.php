@@ -86,7 +86,7 @@ class PostController extends MainController
             $answers[$ind]          = $row;
         }
 
-        $content_img  = Config::get('meta.img_url');
+        $content_img  = Config::get('meta.img_path');
         if ($post['post_content_img']) {
             $content_img  = AG_PATH_POSTS_COVER . $post['post_content_img'];
         } elseif ($post['post_thumb_img']) {

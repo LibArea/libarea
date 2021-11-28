@@ -1,7 +1,7 @@
-$(function () {
-  // Я читал флаг
-  $(document).on('click', '.report-status', function () {
-    let report_id = $(this).data('id');
+// I have read the complaint
+document.querySelectorAll(".report-status")
+  .forEach(el => el.addEventListener("click", function (e) {
+    let report_id = el.dataset.id;
     fetch("/admin/reports/status", {
       method: "POST",
       body: "id=" + report_id,
@@ -10,10 +10,12 @@ $(function () {
       .then((response) => {
         location.reload();
       })
-  });
-  // Запишем Favicon
-  $(document).on('click', '.add-favicon', function () {
-    let link_id = $(this).data('id');
+  }));
+
+// Write down a Favicon
+document.querySelectorAll(".add-favicon")
+  .forEach(el => el.addEventListener("click", function (e) {
+    let link_id = el.dataset.id;
     fetch("/admin/favicon/add", {
       method: "POST",
       body: "id=" + link_id,
@@ -22,11 +24,13 @@ $(function () {
       .then((response) => {
         location.reload();
       })
-  });
-  // Забанить / разбанить: user / word 
-  $(document).on('click', '.type-ban', function () {
-    let type_id = $(this).data('id');
-    let type = $(this).data('type');
+  }));
+
+// Ban / unban: user / word 
+document.querySelectorAll(".type-ban")
+  .forEach(el => el.addEventListener("click", function (e) {
+    let type_id = el.dataset.id;
+    let type = el.dataset.type;
     fetch("/admin/" + type + "/ban", {
       method: "POST",
       body: "id=" + type_id,
@@ -35,11 +39,13 @@ $(function () {
       .then((response) => {
         location.reload();
       })
-  });
-  // Восстановление контента
-  $(document).on('click', '.audit-status', function () {
-    let status_id = $(this).data('id');
-    let status_type = $(this).data('status');
+  }));
+
+// Content Recovery
+document.querySelectorAll(".audit-status")
+  .forEach(el => el.addEventListener("click", function (e) {
+    let status_id = el.dataset.id;
+    let status_type = el.dataset.status;
     fetch("/admin/audit/status", {
       method: "POST",
       body: "status=" + status_id + "@" + status_type,
@@ -48,5 +54,4 @@ $(function () {
       .then((response) => {
         location.reload();
       })
-  });
-});
+  }));

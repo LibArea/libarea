@@ -2,9 +2,10 @@
 // MIT License
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = global || self, global.ShareButtons = factory());
-}(this, function () { 'use strict';
+        typeof define === 'function' && define.amd ? define(factory) :
+            (global = global || self, global.ShareButtons = factory());
+}(this, function () {
+    'use strict';
 
     var w = window;
     var d = w.document;
@@ -181,11 +182,11 @@
          */
         var listenersCache = {};
 
-       /**
-        * Method for detaching event to the element
-        * @param {HTMLElement} el
-        * @param {string} eventName
-        */
+        /**
+         * Method for detaching event to the element
+         * @param {HTMLElement} el
+         * @param {string} eventName
+         */
         var removeEventListener = function (el, eventName) {
             var cachedRef = el.getAttribute('data-sharebtn-ref');
 
@@ -193,17 +194,17 @@
                 if (el.removeEventListener) {
                     el.removeEventListener(eventName, listenersCache[cachedRef]);
                 } else {
-                    el.detachEvent('on' + eventName, listenersCache[cachedRef+'ie']);
+                    el.detachEvent('on' + eventName, listenersCache[cachedRef + 'ie']);
                 }
             }
         };
 
-       /**
-        * Method for attaching event to the element
-        * @param {HTMLElement} el
-        * @param {string} eventName
-        * @param {Object} opt
-        */
+        /**
+         * Method for attaching event to the element
+         * @param {HTMLElement} el
+         * @param {string} eventName
+         * @param {Object} opt
+         */
         var addEventListener = function (el, eventName, opt) {
             var handler = function () {
                 share(opt.id, opt.url, opt.title, opt.desc);
@@ -219,7 +220,7 @@
             }
 
             listenersCache[cachedRef] = handler;
-            listenersCache[cachedRef+'ie'] = iehandler;
+            listenersCache[cachedRef + 'ie'] = iehandler;
 
             if (el.addEventListener) {
                 el.addEventListener(eventName, handler);
@@ -267,166 +268,166 @@
                 text = title || desc || '';
 
             switch (id) {
-            case FB_CLASS_NAME:
-                popupCenter(
-                    stringFormat(FB_LINK_FORMAT, [url, title]),
-                    titleDef);
-                break;
+                case FB_CLASS_NAME:
+                    popupCenter(
+                        stringFormat(FB_LINK_FORMAT, [url, title]),
+                        titleDef);
+                    break;
 
-            case VK_CLASS_NAME:
-                popupCenter(
-                    stringFormat(VK_LINK_FORMAT, [
-                        url,
-                        mergeForTitle([title, desc])
-                    ]),
-                    titleDef);
-                break;
+                case VK_CLASS_NAME:
+                    popupCenter(
+                        stringFormat(VK_LINK_FORMAT, [
+                            url,
+                            mergeForTitle([title, desc])
+                        ]),
+                        titleDef);
+                    break;
 
-            case TW_CLASS_NAME:
-                popupCenter(
-                    stringFormat(TW_LINK_FORMAT, [
-                        url,
-                        mergeForTitle([title, desc])
-                    ]),
-                    titleDef);
-                break;
+                case TW_CLASS_NAME:
+                    popupCenter(
+                        stringFormat(TW_LINK_FORMAT, [
+                            url,
+                            mergeForTitle([title, desc])
+                        ]),
+                        titleDef);
+                    break;
 
-            case TG_CLASS_NAME:
-                popupCenter(
-                    stringFormat(TG_LINK_FORMAT, [
-                        url,
-                        mergeForTitle([title, desc])
-                    ]),
-                    titleDef);
-                break;
+                case TG_CLASS_NAME:
+                    popupCenter(
+                        stringFormat(TG_LINK_FORMAT, [
+                            url,
+                            mergeForTitle([title, desc])
+                        ]),
+                        titleDef);
+                    break;
 
-            case PK_CLASS_NAME:
-                popupCenter(
-                    stringFormat(POCKET_LINK_FORMAT, [
-                        url,
-                        mergeForTitle([title, desc])
-                    ]),
-                    titleDef);
-                break;
+                case PK_CLASS_NAME:
+                    popupCenter(
+                        stringFormat(POCKET_LINK_FORMAT, [
+                            url,
+                            mergeForTitle([title, desc])
+                        ]),
+                        titleDef);
+                    break;
 
-            case RE_CLASS_NAME:
-                popupCenter(
-                    stringFormat(RE_LINK_FORMAT, [url, title]),
-                    titleDef);
-                break;
+                case RE_CLASS_NAME:
+                    popupCenter(
+                        stringFormat(RE_LINK_FORMAT, [url, title]),
+                        titleDef);
+                    break;
 
-            case EV_CLASS_NAME:
-                popupCenter(
-                    stringFormat(EV_LINK_FORMAT, [url, title]),
-                    titleDef);
-                break;
+                case EV_CLASS_NAME:
+                    popupCenter(
+                        stringFormat(EV_LINK_FORMAT, [url, title]),
+                        titleDef);
+                    break;
 
-            case IN_CLASS_NAME:
-                popupCenter(
-                    stringFormat(IN_LINK_FORMAT, [
-                        url,
-                        title,
-                        mergeForTitle([title, desc])
-                    ]),
-                    titleDef);
-                break;
+                case IN_CLASS_NAME:
+                    popupCenter(
+                        stringFormat(IN_LINK_FORMAT, [
+                            url,
+                            title,
+                            mergeForTitle([title, desc])
+                        ]),
+                        titleDef);
+                    break;
 
-            case PI_CLASS_NAME:
-                popupCenter(
-                    stringFormat(PI_LINK_FORMAT, [
-                        url,
-                        mergeForTitle([title, desc])
-                    ]),
-                    titleDef);
-                break;
+                case PI_CLASS_NAME:
+                    popupCenter(
+                        stringFormat(PI_LINK_FORMAT, [
+                            url,
+                            mergeForTitle([title, desc])
+                        ]),
+                        titleDef);
+                    break;
 
-            case SK_CLASS_NAME:
-                popupCenter(
-                    stringFormat(SK_LINK_FORMAT, [
-                        url,
-                        mergeForTitle([title, desc])
-                    ]),
-                    titleDef);
-                break;
+                case SK_CLASS_NAME:
+                    popupCenter(
+                        stringFormat(SK_LINK_FORMAT, [
+                            url,
+                            mergeForTitle([title, desc])
+                        ]),
+                        titleDef);
+                    break;
 
-            case WA_CLASS_NAME:
-                popupCenter(
-                    stringFormat(WA_LINK_FORMAT, [
-                        mergeForTitle([title, desc]),
-                        url
-                    ]),
-                    titleDef);
-                break;
+                case WA_CLASS_NAME:
+                    popupCenter(
+                        stringFormat(WA_LINK_FORMAT, [
+                            mergeForTitle([title, desc]),
+                            url
+                        ]),
+                        titleDef);
+                    break;
 
-            case OK_CLASS_NAME:
-                popupCenter(
-                    stringFormat(OK_LINK_FORMAT, [ url ]),
-                    titleDef);
-                break;
+                case OK_CLASS_NAME:
+                    popupCenter(
+                        stringFormat(OK_LINK_FORMAT, [url]),
+                        titleDef);
+                    break;
 
-            case TU_CLASS_NAME:
-                popupCenter(
-                    stringFormat(TU_LINK_FORMAT, [
-                        mergeForTitle([title, desc]),
-                        url
-                    ]),
-                    titleDef);
-                break;
+                case TU_CLASS_NAME:
+                    popupCenter(
+                        stringFormat(TU_LINK_FORMAT, [
+                            mergeForTitle([title, desc]),
+                            url
+                        ]),
+                        titleDef);
+                    break;
 
-            case HN_CLASS_NAME:
-                popupCenter(
-                    stringFormat(HN_LINK_FORMAT, [
-                        mergeForTitle([title, desc]),
-                        url
-                    ]),
-                    titleDef);
-                break;
+                case HN_CLASS_NAME:
+                    popupCenter(
+                        stringFormat(HN_LINK_FORMAT, [
+                            mergeForTitle([title, desc]),
+                            url
+                        ]),
+                        titleDef);
+                    break;
 
-            case XI_CLASS_NAME:
-                popupCenter(
-                    stringFormat(XI_LINK_FORMAT, [
-                        url,
-                        mergeForTitle([title, desc])
-                    ]),
-                    titleDef);
-                break;
+                case XI_CLASS_NAME:
+                    popupCenter(
+                        stringFormat(XI_LINK_FORMAT, [
+                            url,
+                            mergeForTitle([title, desc])
+                        ]),
+                        titleDef);
+                    break;
 
-            case MAIL_CLASS_NAME:
-                if (title.length > 0 && desc.length > 0) {
-                    text = mergeForTitle([title, desc]);
-                }
-                if (url.length > 0) {
-                    text = text + ' / ' + url;
-                }
+                case MAIL_CLASS_NAME:
+                    if (title.length > 0 && desc.length > 0) {
+                        text = mergeForTitle([title, desc]);
+                    }
+                    if (url.length > 0) {
+                        text = text + ' / ' + url;
+                    }
 
-                w.location.href = stringFormat(MAIL_LINK_FORMAT, [title, text]);
-                break;
+                    w.location.href = stringFormat(MAIL_LINK_FORMAT, [title, text]);
+                    break;
 
-            case PRINT_CLASS_NAME:
-                w.print();
-                break;
+                case PRINT_CLASS_NAME:
+                    w.print();
+                    break;
 
-            case COPY_CLASS_NAME:
-                w.navigator.clipboard.writeText(decode(url));
-                break;
+                case COPY_CLASS_NAME:
+                    w.navigator.clipboard.writeText(decode(url));
+                    break;
 
-            case SHARE_CLASS_NAME:
-                text = decode(mergeForTitle([title, desc]));
-                var shareData = {
-                    title: text,
-                    text: text,
-                    url: decode(url),
-                };
+                case SHARE_CLASS_NAME:
+                    text = decode(mergeForTitle([title, desc]));
+                    var shareData = {
+                        title: text,
+                        text: text,
+                        url: decode(url),
+                    };
 
-                w.navigator.share(shareData)
-                    .then(function () {})
-                    .catch(function (err) {
-                        log(SHARE_LOG_TAG + 'Error', err);
-                    });
-                break;
+                    w.navigator.share(shareData)
+                        .then(function () { })
+                        .catch(function (err) {
+                            log(SHARE_LOG_TAG + 'Error', err);
+                        });
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
             }
         };
 
@@ -463,4 +464,3 @@
     };
 
 }));
- 

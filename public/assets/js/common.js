@@ -178,8 +178,9 @@ document.querySelectorAll("#user-card")
     let user_id = this.dataset.user_id;
     let content_id = this.dataset.content_id;
     let content = document.querySelector('.content_' + content_id);
-    let div = $("#content_" + content_id);
-    div[0].classList.remove("none");
+    let div = document.querySelector("#content_" + content_id);
+
+    div.classList.remove("none");
 
     fetch("/user/card", {
       method: "POST",
@@ -196,11 +197,8 @@ document.querySelectorAll("#user-card")
         }
       );
 
-    $(document).mouseup(function (e) {
-      if (!div.is(e.target)
-        && div.has(e.target).length === 0) {
-        div[0].classList.add("none");
-      }
+    window.addEventListener('mouseup', e => {   
+      div.classList.add("none");
     });
   }));
 

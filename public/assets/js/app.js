@@ -1,129 +1,162 @@
-$(function () {
-  let hamburger = document.querySelector('.dropbtn');
-  if (hamburger) {
-    let menu = document.querySelector('.dr-menu');
-    const toggleMenu = () => {
-      menu.classList.toggle('block');
-    };
-    hamburger.addEventListener('click', e => {
-      e.stopPropagation();
+let hamburger = document.querySelector('.dropbtn');
+if (hamburger) {
+  let menu = document.querySelector('.dr-menu');
+  const toggleMenu = () => {
+    menu.classList.toggle('block');
+  };
+  hamburger.addEventListener('click', e => {
+    e.stopPropagation();
+    toggleMenu();
+  });
+  document.addEventListener('click', e => {
+    let target = e.target;
+    let its_menu = target == menu || menu.contains(target);
+    let its_hamburger = target == hamburger;
+    let menu_is_active = menu.classList.contains('block');
+
+    if (!its_menu && !its_hamburger && menu_is_active) {
       toggleMenu();
-    });
-    document.addEventListener('click', e => {
-      let target = e.target;
-      let its_menu = target == menu || menu.contains(target);
-      let its_hamburger = target == hamburger;
-      let menu_is_active = menu.classList.contains('block');
-
-      if (!its_menu && !its_hamburger && menu_is_active) {
-        toggleMenu();
-      }
-    });
-  }
-  
-  // Цвет обложки для профиля
-  let colorPicker = document.getElementById("colorPicker");
-  if (colorPicker) {
-    let box = document.getElementById("box");
-    let color = document.getElementById("color");
-
-    box.style.borderColor = colorPicker.value;
-
-    colorPicker.addEventListener("input", function (event) {
-      box.style.borderColor = event.target.value;
-    }, false);
-
-    colorPicker.addEventListener("change", function (event) {
-      color.value = colorPicker.value;
-    }, false);
-  }
-
-  // Subscribe to a topic / post
-  $(document).on("click", ".focus-id", function () {
-    let content_id = $(this).data('id');
-    let type_content = $(this).data('type');
-    $.ajax({
-      url: '/focus/' + type_content,
-      type: 'POST',
-      data: { content_id: content_id },
-    }).done(function (data) {
-      location.reload();
-    });
+    }
   });
-  // Up
-  $(document).on('click', '.up-id', function () {
-    let up_id = $(this).data('id');
-    let type_content = $(this).data('type');
-    let count = $(this).data('count');
-    $.ajax({
-      url: '/votes/' + type_content,
-      type: 'POST',
-      data: { up_id: up_id },
-    }).done(function (data) {
-      let new_cont = (parseInt(count) + parseInt(1));
-      $('#up' + up_id + '.voters').addClass('blue');
-      $('#up' + up_id).find('.score').html(new_cont);
-    });
-  });
-  // Add a post to your profile
-  $(document).on("click", ".add-post-profile", function () {
-    let post_id = $(this).data('post');
-    $.ajax({
-      url: '/post/add/profile',
-      type: 'POST',
-      data: { post_id: post_id },
-    }).done(function (data) {
-      $('.add-post-profile').find('.mu_post').html('+ в профиле');
-    });
-  });
-  // Delete a post from your profile
-  $(document).on("click", ".del-post-profile", function () {
-    let post_id = $(this).data('post');
-    $.ajax({
-      url: '/post/delete/profile',
-      type: 'POST',
-      data: { post_id: post_id },
-    }).done(function (data) {
-      location.reload();
-    });
-  });
-  // Recommend a post
-  $(document).on("click", ".post-recommend", function () {
-    let post_id = $(this).data('id');
-    $.ajax({
-      url: '/post/recommend',
-      type: 'POST',
-      data: { post_id: post_id },
-    }).done(function (data) {
-      location.reload();
-    });
-  });
-  // Add / Remove from favorites
-  $(document).on("click", ".add-favorite", function () {
-    let content_id = $(this).data('id');
-    let content_type = $(this).data('type');
-    let front = $(this).data('front');
-    $.ajax({
-      url: '/favorite/' + content_type,
-      type: 'POST',
-      data: { content_id: content_id },
-    }).done(function (data) {
-      if (front == 'personal') {
+}
+
+// Цвет обложки для профиля
+let colorPicker = document.getElementById("colorPicker");
+if (colorPicker) {
+  let box = document.getElementById("box");
+  let color = document.getElementById("color");
+
+  box.style.borderColor = colorPicker.value;
+
+  colorPicker.addEventListener("input", function (event) {
+    box.style.borderColor = event.target.value;
+  }, false);
+
+  colorPicker.addEventListener("change", function (event) {
+    color.value = colorPicker.value;
+  }, false);
+}
+
+// Subscribe to a topic / post
+document.querySelectorAll(".focus-id")
+  .forEach(el => el.addEventListener("click", function (e) {
+    let content_id = el.dataset.id;
+    let type_content = el.dataset.type;
+
+    fetch("/focus/" + type_content, {
+      method: "POST",
+      body: "content_id=" + content_id,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    })
+      .then((response) => {
+        return;
+      }).then((text) => {
         location.reload();
-      } else {
-        if (content_type == 'post') {
-          document.getElementById("favorite_" + content_id).classList.toggle("blue");
+      });
+  }));
+
+// Up
+document.querySelectorAll(".up-id")
+  .forEach(el => el.addEventListener("click", function (e) {
+    let up_id = el.dataset.id;
+    let type_content = el.dataset.type;
+    let count = el.dataset.count;
+    fetch("/votes/" + type_content, {
+      method: "POST",
+      body: "up_id=" + up_id,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    })
+      .then((response) => {
+        return;
+      }).then((text) => {
+        let new_cont = (parseInt(count) + parseInt(1));
+        let upVot = document.querySelector('#up' + up_id + '.voters');
+        let upScr = document.querySelector('#up' + up_id).querySelector('.score');
+        upVot.classList.add('blue');
+        upScr.replaceWith(new_cont);
+      });
+  }));
+
+// Add a post to your profile
+document.querySelectorAll(".add-post-profile")
+  .forEach(el => el.addEventListener("click", function (e) {
+    let post_id = el.dataset.post;
+    fetch("/post/add/profile", {
+      method: "POST",
+      body: "post_id=" + post_id,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    })
+      .then((response) => {
+        return;
+      }).then((text) => {
+        let mPost = document.querySelector('.add-post-profile').querySelector('.mu_post');
+        mPost.replaceWith('+++');
+      });
+  }));
+
+// Delete a post from your profile
+document.querySelectorAll(".del-post-profile")
+  .forEach(el => el.addEventListener("click", function (e) {
+    let post_id = el.dataset.post;
+    fetch("/post/delete/profile", {
+      method: "POST",
+      body: "post_id=" + post_id,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    })
+      .then((response) => {
+        return;
+      }).then((text) => {
+        location.reload();
+      });
+  }));
+
+// Recommend a post
+document.querySelectorAll(".post-recommend")
+  .forEach(el => el.addEventListener("click", function (e) {
+    let post_id = el.dataset.id;
+    fetch("/post/recommend", {
+      method: "POST",
+      body: "post_id=" + post_id,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    })
+      .then((response) => {
+        return;
+      }).then((text) => {
+        location.reload();
+      });
+  }));
+
+// Add / Remove from favorites
+document.querySelectorAll(".add-favorite")
+  .forEach(el => el.addEventListener("click", function (e) {
+    let content_id = el.dataset.id;
+    let content_type = el.dataset.type;
+    let front = el.dataset.front;
+    fetch("/favorite/" + content_type, {
+      method: "POST",
+      body: "content_id=" + content_id,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    })
+      .then((response) => {
+        return;
+      }).then((text) => {
+        if (front == 'personal') {
+          location.reload();
         } else {
-          document.getElementById("fav-comm_" + content_id).classList.toggle("blue");
+          if (content_type == 'post') {
+            document.getElementById("favorite_" + content_id).classList.toggle("blue");
+          } else {
+            document.getElementById("fav-comm_" + content_id).classList.toggle("blue");
+          }
         }
-      }
-      layer.msg(data);
-    });
-  });
-  // Deleting / restoring content
-  $(document).on('click', '.type-action', function () {
-    let content_id = $(this).data('id');
-    let content_type = $(this).data('type');
+      });
+  }));
+
+// Deleting / restoring content
+document.querySelectorAll(".type-action")
+  .forEach(el => el.addEventListener("click", function (e) {
+    let content_id = el.dataset.id;
+    let content_type = el.dataset.type;
     fetch("/status/action", {
       method: "POST",
       body: "info=" + content_id + "@" + content_type,
@@ -132,48 +165,63 @@ $(function () {
       .then((response) => {
         location.reload();
       })
-  });
-  // Parsing the title from the site for > TL1
-  $(document).on('click', '#graburl', function (e) {
-    const uri = document.getElementById('link').value;
+  }));
 
+// Parsing the title from the site for > TL1
+document.querySelectorAll("#graburl")
+  .forEach(el => el.addEventListener("click", function (e) {
+    let uri = document.getElementById('link').value;
     if (uri === '') {
       return;
     }
-    $.ajax({
-      url: '/post/grabtitle',
-      type: 'POST',
-      data: { uri: uri },
-    }).done(function (data) {
-      let review = JSON.parse(data);
-      document.getElementById('title').value = review.title
-      document.getElementById('md-redactor').value = review.description
-    });
-  });
-  // Edit comment
-  $(document).on("click", ".editcomm", function () {
-    let comment_id = $(this).data('comment_id');
-    let post_id = $(this).data('post_id');
 
-    $('.comment_addentry').remove();
-    $('.comment_add_link').show();
-    $link_span = $('#comment_add_link' + comment_id);
-    old_html = $link_span.html();
+    fetch("/post/grabtitle", {
+      method: "POST",
+      body: "uri=" + uri,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    })
+      .then(function (response) {
+        if (!response.ok) {
+          // Сервер вернул код ответа за границами диапазона [200, 299]
+          return Promise.reject(new Error(
+            'Response failed: ' + response.status + ' (' + response.statusText + ')'
+          ));
+        }
+        return response.json();
+      }).then(function (data) {
+        document.getElementById('title').value = data.title
+        document.getElementById('ag-redactor') = data.description
+      }).catch(function (error) {
+        // error
+      })
+  }));
 
-    $.post('/comment/editform', { comment_id: comment_id, post_id: post_id }, function (data) {
-      if (data) {
-        $('#comment_' + comment_id).addClass('edit');
-        $("#comment_addentry" + comment_id).html(data).fadeIn();
-        $('#content').focus();
-        $link_span.html(old_html).hide();
-        $('#submit_comm').click(function (data) {
-          $('#submit_comm').prop('disabled', true);
-          $('.submit_comm').append('...');
-        });
-      }
-    });
-  });
-  $(document).on("click", "#cancel_comment", function () {
-    $('.cm_addentry').remove();
-  });
-});
+// Edit comment
+document.querySelectorAll(".editcomm")
+  .forEach(el => el.addEventListener("click", function (e) {
+    let comment_id = el.dataset.comment_id;
+    let post_id = el.dataset.post_id;
+    let comment = document.getElementById("comment_addentry" + comment_id);
+
+    fetch("/comment/editform", {
+      method: "POST",
+      body: "comment_id=" + comment_id + "&post_id=" + post_id,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    })
+      .then(
+        response => {
+          return response.text();
+        }
+      ).then(
+        text => {
+          document.getElementById("comment_" + comment_id).classList.add("edit");
+          comment.classList.add("block");
+          comment.innerHTML = text;
+
+          document.querySelectorAll("#cancel_comment")
+            .forEach(el => el.addEventListener("click", function (e) {
+              comment.classList.remove("block");
+            }));
+        }
+      );
+  }));
