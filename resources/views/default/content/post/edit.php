@@ -164,7 +164,6 @@
         'help'          => Translate::get('necessarily'),
       ]); ?>
 
-
       <div class="mb20">
         <?php if ($post['post_draft'] == 1) { ?>
           <input type="hidden" name="draft" id="draft" value="1">

@@ -222,7 +222,7 @@
 
             <?= includeTemplate('/_block/editor/editor', [
               'height'    => '250px',
-              'preview'   => 'tab',
+              'preview'   => 'vertical',
               'lang'      => $uid['user_lang'],
             ]); ?>
 
@@ -280,26 +280,26 @@
       <?= post_img($post['post_content_img'], $post['post_title'], 'w-100 p15 post-img br-rd5', 'cover', $post['post_content_img']); ?>
     </div>
   <?php } ?>
-  <div class="share-btn br-box-gray bg-white br-rd5 mb15 p15 gray-light-2 size-21 center">
-    <a class="pl15 pr15" data-id="fb"><i class="bi bi-facebook"></i></a>
-    <a class="pl15 pr15" data-id="vk">VK</a>
-    <a class="pl15 pr15" data-id="tw"><i class="bi bi-twitter"></i></a>
+  <div class="share-btn br-box-gray bg-white br-rd5 mb15 p15 size-21 center">
+    <a class="p15 gray-light-2" data-id="fb"><i class="bi bi-facebook"></i></a>
+    <a class="p15 gray-light-2" data-id="vk">VK</a>
+    <a class="p15 gray-light-2" data-id="tw"><i class="bi bi-twitter"></i></a>
   </div>
   <?php if ($data['recommend']) { ?>
     <div class="br-box-gray bg-white br-rd5 mb15 sticky top80 p15">
       <h3 class="uppercase mb10 mt0 font-light size-14 gray"><?= Translate::get('recommended'); ?></h3>
       <?php foreach ($data['recommend'] as  $rec_post) { ?>
-        <div class="mb15 hidden flex">
-          <a class="gray size-15" href="<?= getUrlByName('post', ['id' => $rec_post['post_id'], 'slug' => $rec_post['post_slug']]); ?>">
+        <div class="mb15 hidden flex size-14">
+          <a class="gray" href="<?= getUrlByName('post', ['id' => $rec_post['post_id'], 'slug' => $rec_post['post_slug']]); ?>">
             <?php if ($rec_post['post_answers_count'] > 0) { ?>
-              <div class="p5 pr10 pb5 pl10 bg-green-400 br-rd3 white size-14 center mr15">
+              <div class="p5 pr10 pb5 pl10 bg-green-400 br-rd3 white center mr15">
                 <?= $rec_post['post_answers_count'] ?>
               </div>
             <?php } else { ?>
-              <div class="p5 pr10 pb5 pl10 bg-gray-300 br-rd3 gray size-14 center mr15">0</div>
+              <div class="p5 pr10 pb5 pl10 bg-gray-300 br-rd3 gray center mr15">0</div>
             <?php } ?>
           </a>
-          <a class="black dark-white size-14" href="<?= getUrlByName('post', ['id' => $rec_post['post_id'], 'slug' => $rec_post['post_slug']]); ?>">
+          <a class="black dark-white" href="<?= getUrlByName('post', ['id' => $rec_post['post_id'], 'slug' => $rec_post['post_slug']]); ?>">
             <?= $rec_post['post_title']; ?>
           </a>
         </div>
@@ -321,11 +321,12 @@
     }
   }));
 
-    <?php if ($uid['user_id'] > 0) { ?>
-    $(document).on('click', '.msg-flag', function() {
-      let post_id = $(this).data('post_id');
-      let content_id = $(this).data('content_id');
-      let type = $(this).data('type');
+  <?php if ($uid['user_id'] > 0) { ?>
+    document.querySelectorAll(".msg-flag")
+      .forEach(el => el.addEventListener("click", function (e) {    
+        let post_id = el.dataset.post_id;
+        let content_id = el.dataset.content_id;
+        let type = el.dataset.type;
       Swal.fire({
         title: '<?= Translate::get('report'); ?>',
         html: '<?= Translate::get('does this violate site rules'); ?>?',
@@ -335,19 +336,19 @@
         showCancelButton: true,
         showLoaderOnConfirm: true,
         preConfirm: () => {
-          $.ajax({
-            url: '/flag/repost',
-            method: 'POST',
-            data: {
-              type: type,
-              post_id: post_id,
-              content_id: content_id
-            },
-          })
+          fetch("/flag/repost", {
+              method: "POST",
+              body: "type=" + type + "&post_id=" + post_id + "&content_id=" + content_id,
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            })
+            .then((response) => {
+                  return;
+                }).then((text) => {
+               });  
         }
       })
-    });
-    <?php } ?>
+     }));
+  <?php } ?>
  
 </script>
 </div>
