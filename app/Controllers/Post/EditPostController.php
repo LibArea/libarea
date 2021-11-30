@@ -26,14 +26,13 @@ class EditPostController extends MainController
             redirect('/');
         }
 
-        Request::getHead()->addStyles('/assets/css/image-uploader.css');
+        Request::getResources()->addBottomScript('/assets/js/uploads.js');
         Request::getResources()->addBottomStyles('/assets/css/select2.css');
-        Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
         Request::getResources()->addBottomScript('/assets/js/select2.min.js');
         Request::getResources()->addBottomStyles('/assets/js/editor/toastui-editor.min.css');
         Request::getResources()->addBottomStyles('/assets/js/editor/dark.css');
         Request::getResources()->addBottomScript('/assets/js/editor/toastui-editor-all.min.js');
-        
+
         return view(
             '/post/edit',
             [
@@ -65,7 +64,7 @@ class EditPostController extends MainController
         $post_user_new          = Request::getPost('user_select');
         $post_merged_id         = Request::getPostInt('post_merged_id');
         $post_tl                = Request::getPostInt('content_tl');
-        $blog_id               = Request::getPostInt('blog_id');
+        $blog_id                = Request::getPostInt('blog_id');
 
         // Связанные посты и темы
         $post_fields    = Request::getPost() ?? [];
@@ -100,6 +99,10 @@ class EditPostController extends MainController
         }
 
         Validation::Limits($post_title, Translate::get('title'), '6', '250', $redirect);
+        
+        if ($post_content == '') {
+            $post_content = $post['post_content'];
+        }
         Validation::Limits($post_content, Translate::get('the post'), '6', '25000', $redirect);
 
         // Проверим хакинг формы
@@ -114,12 +117,12 @@ class EditPostController extends MainController
 
         // Обложка поста
         $cover          = $_FILES['images'];
-        if ($_FILES['images']['name'][0]) {
+        if ($_FILES['images']['name']) {
             $post_img = UploadImage::cover_post($cover, $post, $redirect, $this->uid['user_id']);
         }
 
         $post_img = $post_img ?? $post['post_content_img'];
-
+        
         $data = [
             'post_id'               => $post_id,
             'post_title'            => $post_title,

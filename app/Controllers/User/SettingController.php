@@ -106,8 +106,7 @@ class SettingController extends MainController
             redirect(getUrlByName('setting.avatar', ['login' => $this->uid['user_login']]));
         }
 
-        Request::getHead()->addStyles('/assets/css/image-uploader.css');
-        Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
+        Request::getResources()->addBottomScript('/assets/js/uploads.js');
 
         return view(
             '/user/setting/avatar',
@@ -129,7 +128,7 @@ class SettingController extends MainController
 
         // Запишем img
         $img        = $_FILES['images'];
-        $check_img  = $_FILES['images']['name'][0];
+        $check_img  = $_FILES['images']['name'];
         if ($check_img) {
             $new_img = UploadImage::img($img, $this->uid['user_id'], 'user');
             $_SESSION['account']['user_avatar'] = $new_img;
@@ -137,7 +136,7 @@ class SettingController extends MainController
 
         // Баннер
         $cover          = $_FILES['cover'];
-        $check_cover    = $_FILES['cover']['name'][0];
+        $check_cover    = $_FILES['cover']['name'];
         if ($check_cover) {
             UploadImage::cover($cover, $this->uid['user_id'], 'user');
         }

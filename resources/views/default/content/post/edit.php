@@ -58,23 +58,34 @@
         </div>
       <?php } ?>
 
-      <?php if ($post['post_content_img']) { ?>
-        <div class="img-post-edit">
-          <?= post_img($post['post_content_img'], $post['post_title'], 'img-post', 'cover'); ?>
-          <input type="hidden" name="content_img" value="<?= $post['post_content_img']; ?>">
-          <a class="img-remove size-14" href="/post/img/<?= $post['post_id']; ?>/remove">
-            <?= Translate::get('remove'); ?>
-          </a>
+      <div class="file-upload mb20" id="file-drag">
+        <div class="flex">
+             <?php if ($post['post_content_img']) { ?>
+            <div class="img-post-edit">
+              <?= post_img($post['post_content_img'], $post['post_title'], 'img-post', 'cover'); ?>
+              <input type="hidden" name="images" value="<?= $post['post_content_img']; ?>">
+              <a class="img-remove size-14" href="/post/img/<?= $post['post_id']; ?>/remove">
+                <?= Translate::get('remove'); ?>
+              </a>
+            </div>
+          <?php } ?>
+       
+          <img id="file-image" src="#" alt=" " class="mr20 w200 br-box-gray">
+            <div id="start">
+              <input id="file-upload" type="file" name="images" accept="image/*" />
+              <i class="fa fa-download" aria-hidden="true"></i>
+              <div id="notimage" class="none">Please select an image</div>
+            </div>
         </div>
-      <?php } ?>
-
+        <div id="response" class="hidden">
+          <div id="messages"></div>
+        </div>
+      </div>
+      
+      
       <?php if ($post['post_thumb_img']) { ?>
         <?= post_img($post['post_thumb_img'], $post['post_title'], 'thumb right', 'thumbnails'); ?>
       <?php } ?>
-
-      <div class="mb20 post">
-        <div class="input-images"></div>
-      </div>
 
       <?= includeTemplate('/_block/editor/editor', [
         'type'      => 'post',
@@ -163,6 +174,7 @@
         'maximum'       => 3,
         'help'          => Translate::get('necessarily'),
       ]); ?>
+
 
       <div class="mb20">
         <?php if ($post['post_draft'] == 1) { ?>

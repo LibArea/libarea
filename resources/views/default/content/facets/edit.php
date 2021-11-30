@@ -9,12 +9,21 @@
   <?= $data['breadcrumb']; ?>
 
   <div class="br-box-gray bg-white p15">
-    <?= facet_logo_img($fs['facet_img'], 'max', $fs['facet_title'], 'img-topic-edit'); ?>
     <form action="<?= getUrlByName($fs['facet_type'] . '.edit.pr'); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
 
-      <div class="mb20 square">
-        <div class="input-images"></div>
+      <div class="file-upload mb10" id="file-drag">
+        <div class="flex">
+          <?= facet_logo_img($fs['facet_img'], 'max', $fs['facet_title'], 'w94 h94 mr15'); ?>
+          <img id="file-image" src="/assets/images/1px.jpg" alt="" class="mr20 w94 h94 br-box-gray">
+            <div id="start" class="mt15">
+              <input id="file-upload" type="file" name="images" accept="image/*" />
+              <div id="notimage" class="none">Please select an image</div>
+            </div>
+        </div>
+        <div id="response" class="hidden">
+          <div id="messages"></div>
+        </div>
       </div>
 
       <div class="mb20">

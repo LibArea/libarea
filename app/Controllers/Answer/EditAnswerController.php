@@ -31,7 +31,6 @@ class EditAnswerController extends MainController
 
         Request::getResources()->addBottomStyles('/assets/js/editor/toastui-editor.min.css');
         Request::getResources()->addBottomScript('/assets/js/editor/toastui-editor-all.min.js');
-        Request::getResources()->addBottomStyles('/assets/js/editor/dark.css');
 
         return view(
             '/answer/edit-form-answer',

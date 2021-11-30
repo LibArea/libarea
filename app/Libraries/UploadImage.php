@@ -22,11 +22,11 @@ class UploadImage
                 $default_img = 'noavatar.png';
         }
 
-        $name = $img['name'][0];
+        $name = $img['name'];
 
         if ($name) {
             $filename =  $pref . $content_id . '-' . time();
-            $file = $img['tmp_name'][0];
+            $file = $img['tmp_name'];
 
             $image = new  SimpleImage();
             $image
@@ -73,7 +73,8 @@ class UploadImage
         $month      = date('n') . '/';
         $file       = $img['tmp_name'];
         $filename   = 'post-' . time();
-
+        
+ 
         self::createDir($path_img . $year . $month);
 
         $image = new  SimpleImage();
@@ -119,7 +120,7 @@ class UploadImage
         if ($cover) {
 
             $filename =  $pref . $content_id . '-' . time();
-            $file_cover = $cover['tmp_name'][0];
+            $file_cover = $cover['tmp_name'];
 
             $image = new  SimpleImage();
             $image
@@ -155,8 +156,8 @@ class UploadImage
     public static function cover_post($cover, $post, $redirect, $user_id)
     {
         // Проверка ширину
-        $width_h  = getimagesize($cover['tmp_name'][0]);
-        if ($width_h['0'] < 500) {
+        $width_h  = getimagesize($cover['tmp_name']);
+        if ($width_h < 500) {
             $valid = false;
             addMsg('Ширина меньше 500 пикселей', 'error');
             redirect($redirect);
@@ -165,7 +166,7 @@ class UploadImage
         $image = new  SimpleImage();
         $path = HLEB_PUBLIC_DIR . AG_PATH_POSTS_COVER;
         $year = date('Y') . '/';
-        $file = $cover['tmp_name'][0];
+        $file = $cover['tmp_name'];
         $filename = 'c-' . time();
 
         self::createDir($path . $year);

@@ -341,10 +341,13 @@
               body: "type=" + type + "&post_id=" + post_id + "&content_id=" + content_id,
               headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
             })
-            .then((response) => {
+            .then(
+                response => {
                   return;
-                }).then((text) => {
-               });  
+                }
+              ).then(
+                text => {  }
+              );  
         }
       })
      }));

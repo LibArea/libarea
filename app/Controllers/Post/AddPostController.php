@@ -20,8 +20,7 @@ class AddPostController extends MainController
     // Форма добавление поста
     public function index()
     {
-        Request::getHead()->addStyles('/assets/css/image-uploader.css');
-        Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
+        Request::getResources()->addBottomScript('/assets/js/uploads.js');
         Request::getResources()->addBottomStyles('/assets/css/select2.css');
         Request::getResources()->addBottomScript('/assets/js/select2.min.js');
         Request::getResources()->addBottomStyles('/assets/js/editor/toastui-editor.min.css');
@@ -126,7 +125,7 @@ class AddPostController extends MainController
 
         // Обложка поста
         $cover  = $_FILES['images'];
-        if ($_FILES['images']['name'][0]) {
+        if ($_FILES['images']['name']) {
             $post_img = UploadImage::cover_post($cover, 0, $redirect, $this->uid['user_id']);
         }
 

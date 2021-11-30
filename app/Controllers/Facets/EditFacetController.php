@@ -38,8 +38,7 @@ class EditFacetController extends MainController
         );
 
         Request::getResources()->addBottomStyles('/assets/css/select2.css');
-        Request::getHead()->addStyles('/assets/css/image-uploader.css');
-        Request::getResources()->addBottomScript('/assets/js/image-uploader.js');
+        Request::getResources()->addBottomScript('/assets/js/uploads.js');
         Request::getResources()->addBottomScript('/assets/js/select2.min.js');
 
         return view(
@@ -111,7 +110,7 @@ class EditFacetController extends MainController
 
         // Запишем img
         $img = $_FILES['images'];
-        $check_img  = $_FILES['images']['name'][0];
+        $check_img  = $_FILES['images']['name'];
         if ($check_img) {
             UploadImage::img($img, $facet['facet_id'], 'topic');
         }
