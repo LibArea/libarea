@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use Hleb\Constructor\Handlers\Request;
 use Hleb\Scheme\App\Controllers\MainController;
 use Content, Base, Translate, Config;
 
@@ -19,7 +20,7 @@ class InfoController extends MainController
     // Далее методы по названию страниц
     public function index()
     {
-        $text = file_get_contents(static::$path . Config::get('general.template') . '/info/md/index.md');
+        $text = file_get_contents(static::$path . Config::get('general.template') . '/content/info/md/index.md');
 
         $m = [
             'og'         => false,
@@ -43,7 +44,7 @@ class InfoController extends MainController
 
     public function privacy()
     {
-        $text = file_get_contents(static::$path . Config::get('general.template') . '/info/md/privacy.md');
+        $text = file_get_contents(static::$path . Config::get('general.template') . '/content/info/md/privacy.md');
 
         $m = [
             'og'         => false,
@@ -85,4 +86,5 @@ class InfoController extends MainController
             ]
         );
     }
+    
 }
