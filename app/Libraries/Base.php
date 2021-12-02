@@ -29,6 +29,9 @@ class Base
             (new \App\Controllers\Auth\LoginController())->check();
             $uid['user_id']             = 0;
             $uid['user_trust_level']    = 0;
+            
+            Translate::setLang(Config::get('general.lang'));
+            
         }
         
         // Сайт отключен, кроме Tl5 (The site is disabled, except Tl5)
