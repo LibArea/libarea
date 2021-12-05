@@ -715,6 +715,20 @@ CREATE TABLE `votes_post` (
 INSERT INTO `votes_post` (`votes_post_id`, `votes_post_item_id`, `votes_post_points`, `votes_post_ip`, `votes_post_user_id`, `votes_post_date`) VALUES
 (1, 2, 1, '127.0.0.1', 1, '2021-08-16 16:29:32');
 
+
+--
+-- Дамп данных таблицы `facets_matching` (и индексы)
+--
+
+CREATE TABLE `facets_matching` (
+  `matching_parent_id` int(11) DEFAULT NULL,
+  `matching_chaid_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+ALTER TABLE `facets_matching`
+  ADD UNIQUE KEY `matching_parent_id` (`matching_parent_id`,`matching_chaid_id`);
+
 --
 -- Индексы сохранённых таблиц
 --
