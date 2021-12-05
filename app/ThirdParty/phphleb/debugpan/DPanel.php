@@ -163,7 +163,6 @@ class DPanel extends BaseSingleton
             foreach ($data as $key => $value) {
                 echo "<div style='border: 1px solid #bfbfbf; padding: 10px;'><pre>";
                 echo "#" . ($key + 1) . ($value[1] != null ? " description: " . $value[1] . PHP_EOL : " ");
-                var_dump($value[0]);
                 echo "</pre></div>";
             }
             echo "</div></noindex>" . PHP_EOL;
