@@ -66,11 +66,9 @@
               <?php } ?>
               <?= $topic['facet_title']; ?>
             </a>
-            <?php foreach ($topic['subs'] as $sub) { ?>
-               <i class="bi bi-arrow-right gray-light-2 size-13"></i> 
-               <a class="size-13 gray-light-2" href="/topic/<?= $topic['facet_slug']; ?>">
-                  <?= $sub['facet_title']; ?>
-               </a>
+            <?php if ($topic['matching_list']) { ?><div class="ml<?= $topic['level'] * 10; ?>">
+              <i class="bi bi-bezier2 gray-light size-13 mr5 ml5"></i>
+              <?= html_topic($topic['matching_list'], 'topic', 'gray-light size-13 mr15'); ?> </div>
             <?php } ?>
           </div>
         <?php } ?>

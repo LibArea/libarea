@@ -353,6 +353,9 @@ $data = [
     'registration by invite' => 'Registration by invite',
     'details are here'      => 'Details here',
     'breaking the rules'    => 'Breaking the rules',
+    
+    'tl content'            => 'Trust level (TL)',
+    'tl info content'       => 'If set > 0, then only members with this TL (and higher) will be able to see the content',
 
     /* Meta - desc */
     'desc-user-all'         => 'List of all participants sorted by date of registration on the site',

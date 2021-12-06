@@ -353,6 +353,9 @@ $data = [
     'registration by invite'=> 'Înregistrare prin invitație',
     'breaking the rules'    => 'Încălcând regulile',
     
+    'tl content'            => 'Nivel de încredere (TL)',
+    'tl info content'       => 'Dacă setați > 0, atunci numai membrii cu acest TL (și mai mare) vor putea vedea conținutul',
+    
     /* Meta - desc */
     'desc-user-all'         => 'Lista tuturor utilizatorilor sortată după data înregistrării pe site',
     'title-profile'         => '%1$s %2$s | Titlu profil  %3$s',

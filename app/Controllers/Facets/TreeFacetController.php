@@ -17,15 +17,6 @@ class TreeFacetController extends MainController
 
     public function index()
     {
-       // $structure  = FacetModel::getStructure();
-         $structures  = self::builder(0, 0, FacetModel::getStructure());
-        
-        $result = [];
-        foreach ($structures as $ind => $row) {
-            $row['subs']    = FacetModel::getLowMatching($row['facet_id']);
-            $result[$ind]   = $row;
-        }
-        
         return view(
             '/facets/structure',
             [
@@ -33,7 +24,7 @@ class TreeFacetController extends MainController
                 'uid'   => $this->uid,
                 'data'  => [
                     'sheet'     => 'structure',
-                    'structure' => $result,
+                    'structure' => self::builder(0, 0, FacetModel::getStructure()),
                 ]
             ]
         );
