@@ -8,7 +8,7 @@
         <div class="flex justify-center bg-gray-200 w21 mr5 br-rd-50 size-15">
           <span class="gray-light-2"><?= $num; ?></span>
         </div>
-        <a href="<?= getUrlByName('post', ['id' => $related['post_id'], 'slug' => $related['post_slug']]); ?>">
+        <a href="<?= getUrlByName('post', ['id' => $related['value'], 'slug' => $related['post_slug']]); ?>">
           <?= $related['post_title']; ?>
         </a>
       </div>

@@ -26,18 +26,15 @@
         ],
       ]]); ?>
 
-      <?= includeTemplate('/_block/form/select', [
+      <?= includeTemplate('/_block/form/select/blog', [
         'uid'         => $uid,
         'data'        => $data,
         'action'      => 'edit',
         'type'        => 'blog',
-        'maximum'     => 1,
         'title'       => Translate::get('blogs'),
-        'required'    => false,
-        'help'        => '...',
       ]); ?>
 
-      <?= includeTemplate('/_block/form/select', [
+      <?= includeTemplate('/_block/form/select/select', [
         'uid'           => $uid,
         'data'          => $data,
         'action'        => 'edit',
@@ -49,43 +46,42 @@
         'red'           => 'red'
       ]); ?>
 
+
       <?php if ($post['post_url']) { ?>
-        <div class="mb20">
-          <label class="block mb5" for="post_title">URL:</label>
-          <a target="_blank" rel="noreferrer ugc" href="<?= $post['post_url']; ?>" class="size-14">
-            <?= $data['post']['post_url']; ?>
-          </a>
+        <div class="mb20 2flex">
+          <div class="mb5" for="post_title">URL:
+            <a target="_blank" rel="noreferrer ugc" href="<?= $post['post_url']; ?>" class="size-14">
+              <?= $post['post_url']; ?>
+            </a>
+          </div>
+          <?php if ($post['post_thumb_img']) { ?>
+            <?= post_img($post['post_thumb_img'], $post['post_title'], 'w94', 'thumbnails'); ?>
+          <?php } ?>
         </div>
       <?php } ?>
 
       <div class="file-upload mb20" id="file-drag">
         <div class="flex">
-             <?php if ($post['post_content_img']) { ?>
-            <div class="img-post-edit">
-              <?= post_img($post['post_content_img'], $post['post_title'], 'img-post', 'cover'); ?>
+          <?php if ($post['post_content_img']) { ?>
+            <div class="mr20">
+              <?= post_img($post['post_content_img'], $post['post_title'], 'w160', 'cover'); ?>
               <input type="hidden" name="images" value="<?= $post['post_content_img']; ?>">
               <a class="img-remove size-14" href="/post/img/<?= $post['post_id']; ?>/remove">
                 <?= Translate::get('remove'); ?>
               </a>
             </div>
           <?php } ?>
-       
-          <img id="file-image" src="#" alt=" " class="mr20 w200 br-box-gray">
-            <div id="start">
-              <input id="file-upload" type="file" name="images" accept="image/*" />
-              <i class="fa fa-download" aria-hidden="true"></i>
-              <div id="notimage" class="none">Please select an image</div>
-            </div>
+
+          <img id="file-image" src="/assets/images/1px.jpg" alt="" class="mr20 w94 h94 br-box-gray">
+          <div id="start">
+            <input id="file-upload" type="file" name="images" accept="image/*" />
+            <div id="notimage" class="none">Please select an image</div>
+          </div>
         </div>
         <div id="response" class="hidden">
           <div id="messages"></div>
         </div>
       </div>
-      
-      
-      <?php if ($post['post_thumb_img']) { ?>
-        <?= post_img($post['post_thumb_img'], $post['post_title'], 'thumb right', 'thumbnails'); ?>
-      <?php } ?>
 
       <?= includeTemplate('/_block/editor/editor', [
         'type'      => 'post',
@@ -95,8 +91,8 @@
         'content'   => $post['post_content'],
       ]); ?>
 
-      <?php if ($data['post']['post_draft'] == 1) { ?>
-        <?= includeTemplate('/_block/form/field-radio', [
+      <?php if ($post['post_draft'] == 1) { ?>
+        <?= includeTemplate('/_block/form/radio/radio', [
           'data' => [
             [
               'title' => Translate::get('is this a draft?'),
@@ -108,12 +104,12 @@
       <?php } ?>
 
       <?php if ($uid['user_trust_level'] > 0) { ?>
-        <?= includeTemplate('/_block/form/select-content-tl', [
+        <?= includeTemplate('/_block/form/select/content-tl', [
           'uid' => $uid,
           'data' => $post['post_tl']
         ]); ?>
 
-        <?= includeTemplate('/_block/form/field-radio', [
+        <?= includeTemplate('/_block/form/radio/radio', [
           'data' => [
             [
               'title' => Translate::get('format Q&A?'),
@@ -129,7 +125,7 @@
         ]); ?>
       <?php } ?>
 
-      <?= includeTemplate('/_block/form/field-radio', [
+      <?= includeTemplate('/_block/form/radio/radio', [
         'data' => [
           [
             'title' => Translate::get('is this a translation?'),
@@ -140,7 +136,7 @@
       ]); ?>
 
       <?php if ($uid['user_trust_level'] > 2) { ?>
-        <?= includeTemplate('/_block/form/field-radio', [
+        <?= includeTemplate('/_block/form/radio/radio', [
           'data' => [
             [
               'title' => Translate::get('raise?'), 'name' => 'top',
@@ -150,31 +146,23 @@
         ]); ?>
       <?php } ?>
 
-      <?php if ($uid['user_trust_level'] > 4) { ?>
-        <?= includeTemplate('/_block/form/select', [
-          'uid'           => $uid,
-          'data'          => $data['user'],
-          'action'        => 'edit',
-          'type'          => 'user',
-          'title'         => Translate::get('author'),
-          'required'      => false,
-          'maximum'       => 1,
-          'help'          => Translate::get('necessarily'),
-          'red'           => 'red'
-        ]); ?>
-      <?php } ?>
+      <?= includeTemplate('/_block/form/select/user', [
+        'uid'           => $uid,
+        'user'          => $data['user'],
+        'action'        => 'user',
+        'type'          => 'user',
+        'title'         => Translate::get('author'),
+        'help'          => Translate::get('necessarily'),
+      ]); ?>
 
-      <?= includeTemplate('/_block/form/select', [
+      <?= includeTemplate('/_block/form/select/related-posts', [
         'uid'           => $uid,
         'data'          => $data,
         'action'        => 'edit',
         'type'          => 'post',
-        'title'         => Translate::get('related'),
-        'required'      => false,
-        'maximum'       => 3,
+        'title'         => Translate::get('related posts'),
         'help'          => Translate::get('necessarily'),
       ]); ?>
-
 
       <div class="mb20">
         <?php if ($post['post_draft'] == 1) { ?>

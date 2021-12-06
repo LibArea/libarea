@@ -4,7 +4,7 @@
 </body>
 
 <script async src="/assets/js/common.js"></script>
-<script src="/assets/js/sweetalert2.all.min.js"></script>
+<script src="/assets/js/sweetalert/sweetalert2.all.min.js"></script>
 
 <?= getRequestResources()->getBottomStyles(); ?>
 <?= getRequestResources()->getBottomScripts(); ?>

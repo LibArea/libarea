@@ -267,21 +267,26 @@ class PostModel extends MainModel
     // Связанные посты
     public static function postRelated($post_related)
     {
-        $string = "post_id IN(0) AND";
-        if ($post_related) {
-            $string = "post_id IN(0, " . $post_related . ") AND";
-        }
-
+        $sql = "SELECT 
+                    post_id as value, 
+                    post_title, 
+                    post_slug 
+                        FROM posts 
+                            WHERE post_id IN(0, " . $post_related . ") AND post_is_deleted = 0 AND post_tl = 0";
+                            
+        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    
+    // Связанные посты All
+    public static function postRelatedAll()
+    {
         $sql = "SELECT 
                     post_id, 
                     post_title, 
-                    post_slug, 
-                    post_type, 
-                    post_draft, 
-                    post_related, 
-                    post_is_deleted
+                    post_slug as slug
                         FROM posts 
-                            WHERE $string post_is_deleted = 0 AND post_tl = 0";
+                            WHERE post_is_deleted = 0 AND post_tl = 0";
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -348,6 +353,19 @@ class PostModel extends MainModel
         return DB::run($sql, ['post_id' => $post_id, 'user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
     }
 
+ 
+    
+    public static function getPostFacet($post_id, $type)
+    {
+        $sql = "SELECT
+                    facet_id as value,
+                    facet_title 
+                        FROM facets  
+                        INNER JOIN facets_posts_relation ON relation_facet_id = facet_id
+                            WHERE relation_post_id  = :post_id AND facet_type = :type";
+
+        return DB::run($sql, ['post_id' => $post_id, 'type' => $type])->fetchAll(PDO::FETCH_ASSOC);
+    }
 
 
     public static function getPostLastUser($post_id)

@@ -6,24 +6,15 @@
       </a>
     <?php } ?>
     <a href="<?= getUrlByName('web'); ?>" class="size-14 gray-light-2"><?= Translate::get('sites'); ?></a>
-    <?php if ($data['high_topics']) { ?>
-      <div class="inline size-14 gray-light-2">
-        <?php foreach ($data['high_topics'] as $ht) { ?>
-          <?php if ($ht['facet_is_web'] == 1) { ?>
-            <div class="inline mr5 ml5">/</div>
-            <a class="inline underline-hover gray-light-2" href="<?= getUrlByName('web.topic', ['slug' => $ht['facet_slug']]); ?>">
-              <?= $ht['facet_title']; ?>
-            </a>
-          <?php } ?>
-        <?php } ?>
-      </div>
-    <?php } ?>
 
     <h1 class="mt0 mb5 size-24 font-normal">
       <?= $data['topic']['facet_title']; ?>
       <?php if ($uid['user_trust_level'] == 5) { ?>
-        <a class="size-14" href="<?= getUrlByName('topic.edit', ['id' => $data['topic']['facet_id']]); ?>">
+        <a class="size-14 ml5" href="<?= getUrlByName('topic.edit', ['id' => $data['topic']['facet_id']]); ?>">
           <sup><i class="bi bi-pencil gray"></i></sup>
+        </a>
+        <a class="size-14 ml15" href="<?= getUrlByName('topic', ['slug' => $data['topic']['facet_slug']]); ?>">
+          <sup><i class="bi bi-columns-gap gray"></i></sup>
         </a>
       <?php } ?>
     </h1>
@@ -34,22 +25,35 @@
       <div class="grid grid-cols-3 gap-2 justify-between mb20">
         <?php foreach ($data['low_topics'] as $lt) { ?>
           <?php if ($lt['facet_is_web'] == 1) { ?>
+            <div>
             <a class="pt5 pr10 dark-white underline-hover mb-col-2 mb-size-18 size-21 inline" href="<?= getUrlByName('web.topic', ['slug' => $lt['facet_slug']]); ?>">
               <?= $lt['facet_title']; ?>
             </a>
+            <?php if ($uid['user_trust_level'] == 5) { ?>
+              <a class="size-14" href="<?= getUrlByName('topic.edit', ['id' => $lt['value']]); ?>">
+                <sup><i class="bi bi-pencil gray"></i></sup>
+              </a>
+            <?php } ?>
+            </div>
           <?php } ?>
         <?php } ?>
       </div>
     <?php } ?>
-
-    <?php if ($data['topic_related']) { ?>
+    <?php if ($data['low_matching']) { ?>
       <div class="mb10">
-        <div class="gray size-14"><?= Translate::get('see also'); ?></div>
-        <?php foreach ($data['topic_related'] as $rl) { ?>
+        <div class="gray size-14"><?= Translate::get('see more'); ?></div>
+        <?php foreach ($data['low_matching'] as $rl) { ?>
           <?php if ($rl['facet_is_web'] == 1) { ?>
-            <a class="inline mr20 underline-hover" href="<?= getUrlByName('web.topic', ['slug' => $rl['facet_slug']]); ?>">
+            <div class="inline mr20">
+            <a class="underline-hover" href="<?= getUrlByName('web.topic', ['slug' => $rl['facet_slug']]); ?>">
               <?= $rl['facet_title']; ?>
-            </a>
+            </a> 
+            <?php if ($uid['user_trust_level'] == 5) { ?>
+              <a class="size-14 ml5" href="<?= getUrlByName('topic.edit', ['id' => $rl['value']]); ?>">
+                <sup><i class="bi bi-pencil gray"></i></sup>
+              </a>
+            <?php } ?>
+            </div>
           <?php } ?>
         <?php } ?>
       </div>

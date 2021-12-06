@@ -21,8 +21,8 @@ class AddPostController extends MainController
     public function index()
     {
         Request::getResources()->addBottomScript('/assets/js/uploads.js');
-        Request::getResources()->addBottomStyles('/assets/css/select2.css');
-        Request::getResources()->addBottomScript('/assets/js/select2.min.js');
+        Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
+        Request::getResources()->addBottomScript('/assets/js/tag/tagify.min.js');
         Request::getResources()->addBottomStyles('/assets/js/editor/toastui-editor.min.css');
         Request::getResources()->addBottomStyles('/assets/js/editor/dark.css');
         Request::getResources()->addBottomScript('/assets/js/editor/toastui-editor-all.min.js');
@@ -41,7 +41,7 @@ class AddPostController extends MainController
                 $facets  = ['blog' => $topic];
                 if ($topic['facet_user_id'] != $this->uid['user_id']) redirect('/');
             }
-       }
+       } 
 
         return view(
             '/post/add',
@@ -51,6 +51,7 @@ class AddPostController extends MainController
                 'data'  => [
                     'facets'     => $facets,
                     'user_blog'  => FacetModel::getFacetsUser($this->uid['user_id'], 'blog'),
+                    'post_arr'   => PostModel::postRelatedAll(),
                 ]
             ]
         );
@@ -73,8 +74,21 @@ class AddPostController extends MainController
         $blog_id                = Request::getPostInt('blog_id');
         
         $post_fields    = Request::getPost() ?? [];
-        $post_related   = implode(',', $post_fields['post_select'] ?? []);
-        $topics         = $post_fields['facet_select'] ?? [];
+
+        // Связанные посты
+        $json_post  = $post_fields['post_select'] ?? [];
+        $arr_post   = json_decode($json_post[0], true);
+        if ($arr_post) {  
+            foreach ($arr_post as $value) {
+               $id[]   = $value['id'];
+            }
+        }
+        $post_related = implode(',', $id ?? []);
+
+
+        // Темы для поста
+        $facet_post     = $post_fields['facet_select'] ?? [];
+        $topics         = json_decode($facet_post[0], true);
 
         // Используем для возврата
         $redirect = getUrlByName('post.add');
@@ -152,7 +166,7 @@ class AddPostController extends MainController
             'post_thumb_img'        => $og_img ?? '',
             'post_related'          => $post_related,
             'post_merged_id'        => $post_merged_id,
-            'post_tl'               => $post_tl,
+            'post_tl'               => $post_tl ?? 0,
             'post_slug'             => $post_slug,
             'post_type'             => $post_type,
             'post_translation'      => $post_translation,
@@ -177,13 +191,19 @@ class AddPostController extends MainController
             NotificationsModel::send($this->uid['user_id'], $user_id, $type, $last_post_id, $url_post, 1);
         }
 
-        if ($blog_id != 0) {
-          $topics = array_merge(['0' => $blog_id], $topics);
+        // Получим id блога с формы выбора
+        $blog_post  = $post_fields['blog_select'] ?? [];
+        $blog       = json_decode($blog_post, true); // <- Array ([0]=> Array ([id]=> 53 [value]=> Блог [tl]=> 0)) 
+        $form_id    = $blog[0]['id'];
+
+        if ($blog) {
+            $topics = array_merge($blog, $topics);
         }  
   
+        // Запишем темы и блог
         $arr = [];
-        foreach ($topics as $row) {
-            $arr[] = array($row, $last_post_id);
+        foreach ($topics as $ket => $row) {
+           $arr[] = $row;
         }
         FacetModel::addPostFacets($arr, $last_post_id);
      

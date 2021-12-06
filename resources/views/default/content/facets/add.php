@@ -62,7 +62,7 @@
         ]
       ]); ?>
 
-      <?= includeTemplate('/_block/form/blog-or-topic', [
+      <?= includeTemplate('/_block/form/radio/blog-or-topic', [
         'uid'     => $uid,
       ]); ?>
 

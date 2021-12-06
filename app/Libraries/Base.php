@@ -5,6 +5,14 @@ use App\Models\NotificationsModel;
 
 class Base
 {
+    // Initial level of trust
+    // Начальные уровень домерия
+    const ELEMENTARY_USER = 0;
+    
+    // Administrator (TL 5)
+    // Администратор (уровень доверия 5)
+    const REGISTERED_ADMIN = 5;
+    
     public static function getUid()
     {
         $account = Request::getSession('account') ?? [];
@@ -27,15 +35,15 @@ class Base
         } else {
 
             (new \App\Controllers\Auth\LoginController())->check();
-            $uid['user_id']             = 0;
-            $uid['user_trust_level']    = 0;
+            $uid['user_id']             = self::ELEMENTARY_USER;
+            $uid['user_trust_level']    = self::ELEMENTARY_USER;
             
             Translate::setLang(Config::get('general.lang'));
             
         }
         
         // Сайт отключен, кроме Tl5 (The site is disabled, except Tl5)
-        if (FALSE && $uid['user_trust_level'] != 5) {
+        if (FALSE && $uid['user_trust_level'] != self::REGISTERED_ADMIN) {
             include HLEB_GLOBAL_DIRECTORY . '/app/Optional/site_off.php';
             hl_preliminary_exit();
         }

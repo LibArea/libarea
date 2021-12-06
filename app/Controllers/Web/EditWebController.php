@@ -27,8 +27,8 @@ class EditWebController extends MainController
         $domain_id  = Request::getInt('id');
         $domain     = WebModel::getLinkId($domain_id);
 
-        Request::getResources()->addBottomStyles('/assets/css/select2.css');
-        Request::getResources()->addBottomScript('/assets/js/select2.min.js');
+        Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
+        Request::getResources()->addBottomScript('/assets/js/tag/tagify.min.js');
         Request::getResources()->addBottomScript('/assets/js/admin.js');
  
         return view(
@@ -63,9 +63,7 @@ class EditWebController extends MainController
         $link_content   = Request::getPost('link_content');
         $link_published = Request::getPostInt('link_published');
         $link_status    = Request::getPostInt('link_status');
-        $post_fields    = Request::getPost() ?? [];
-        $topics         = $post_fields['facet_select'] ?? [];
-
+        
         Validation::Limits($link_title, Translate::get('title'), '14', '250', $redirect);
         Validation::Limits($link_content, Translate::get('description'), '24', '1500', $redirect);
 
@@ -82,10 +80,15 @@ class EditWebController extends MainController
 
         WebModel::editLink($data);
 
+        // Фасеты для сайте
+        $post_fields    = Request::getPost() ?? [];
+        $facet_post     = $post_fields['facet_select'] ?? [];
+        $topics         = json_decode($facet_post[0], true);
+
         if (!empty($topics)) {
             $arr = [];
-            foreach ($topics as $row) {
-                $arr[] = array($row, $link['link_id']);
+            foreach ($topics as $ket => $row) {
+               $arr[] = $row;
             }
             FacetModel::addLinkFacets($arr, $link['link_id']);
         }

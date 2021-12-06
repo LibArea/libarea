@@ -60,7 +60,7 @@
         <input type="hidden" name="color" value="<?= $data['user']['user_color']; ?>" id="color">
       </div>
 
-      <!--?= includeTemplate('/_block/form/field-radio', ['data' => [
+      <!--?= includeTemplate('/_block/form/radio/radio', ['data' => [
         ['title' => Translate::get('design choice'), 'name' => 'user_template', 'checked' => $data['user']['user_template']],
       ]]); ?-->
 

@@ -28,27 +28,23 @@
         ],
       ]); ?>
 
+
       <?php if (!empty($data['user_blog'])) { ?>
-        <?= includeTemplate('/_block/form/select', [
+        <?= includeTemplate('/_block/form/select/blog', [
           'uid'         => $uid,
-          'data'        => $data['facets'],
-          'type'        => 'blog',
-          'maximum'     => 1,
+          'data'        => $data,
           'action'      => 'add',
+          'type'        => 'blog',
           'title'       => Translate::get('blogs'),
-          'required'    => false,
-          'help'        => '...',
         ]); ?>
       <?php } ?>
 
-      <?= includeTemplate('/_block/form/select', [
+      <?= includeTemplate('/_block/form/select/select', [
         'uid'           => $uid,
         'data'          => $data['facets'],
         'type'          => 'topic',
-        'maximum'       => 3,
         'action'        => 'add',
         'title'         => Translate::get('facets'),
-        'required'      => true,
         'help'          => Translate::get('necessarily'),
         'red'           => 'red'
       ]); ?>
@@ -64,12 +60,12 @@
 
       <div class="file-upload mb20" id="file-drag">
         <div class="flex">
-          <img id="file-image" src="#" alt=" " class="mr20 w200 br-box-gray">
-            <div id="start">
-              <input id="file-upload" type="file" name="images" accept="image/*" />
-              <i class="fa fa-download" aria-hidden="true"></i>
-              <div id="notimage" class="none">Please select an image</div>
-            </div>
+          <img id="file-image" src="/assets/images/1px.jpg" alt="" class="mr20 w94 h94 br-box-gray">
+          <div id="start">
+            <input id="file-upload" type="file" name="images" accept="image/*" />
+            <i class="fa fa-download" aria-hidden="true"></i>
+            <div id="notimage" class="none">Please select an image</div>
+          </div>
         </div>
         <div id="response" class="hidden">
           <div id="messages"></div>
@@ -77,7 +73,7 @@
         <div class="size-14 gray mt5">
           <?= Translate::get('format-cover-post'); ?>.
         </div>
-      </div> 
+      </div>
 
       <?= includeTemplate('/_block/editor/editor', [
         'type'      => 'post',
@@ -86,7 +82,7 @@
         'lang'      => $uid['user_lang'],
       ]); ?>
 
-      <?= includeTemplate('/_block/form/field-radio',  [
+      <?= includeTemplate('/_block/form/radio/radio',  [
         'data' => [
           [
             'title' => Translate::get('is this a draft?'),
@@ -97,12 +93,12 @@
       ]); ?>
 
       <?php if ($uid['user_trust_level'] > 0) { ?>
-        <?= includeTemplate('/_block/form/select-content-tl', [
+        <?= includeTemplate('/_block/form/select/content-tl', [
           'uid' => $uid,
           'data' => null
         ]); ?>
 
-        <?= includeTemplate('/_block/form/field-radio', [
+        <?= includeTemplate('/_block/form/radio/radio', [
           'data' => [
             [
               'title' => Translate::get('format Q&A?'),
@@ -118,7 +114,7 @@
         ]); ?>
       <?php } ?>
 
-      <?= includeTemplate('/_block/form/field-radio',  [
+      <?= includeTemplate('/_block/form/radio/radio',  [
         'data' => [
           [
             'title' => Translate::get('is this a translation?'),
@@ -129,7 +125,7 @@
       ]); ?>
 
       <?php if ($uid['user_trust_level'] > 2) { ?>
-        <?= includeTemplate('/_block/form/field-radio', [
+        <?= includeTemplate('/_block/form/radio/radio', [
           'data' => [
             [
               'title' => Translate::get('raise?'),
@@ -140,14 +136,12 @@
         ]); ?>
       <?php } ?>
 
-      <?= includeTemplate('/_block/form/select', [
+      <?= includeTemplate('/_block/form/select/related-posts', [
         'uid'           => $uid,
         'data'          => [],
         'action'        => 'add',
         'type'          => 'post',
         'title'         => Translate::get('related'),
-        'required'      => false,
-        'maximum'       => 3,
         'help'          => Translate::get('necessarily'),
       ]); ?>
 

@@ -24,8 +24,8 @@ class AddWebController extends MainController
             redirect('/');
         }
 
-        Request::getResources()->addBottomStyles('/assets/css/select2.css');
-        Request::getResources()->addBottomScript('/assets/js/select2.min.js');
+        Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
+        Request::getResources()->addBottomScript('/assets/js/tag/tagify.min.js');
 
         return view(
             '/web/add',
@@ -64,9 +64,6 @@ class AddWebController extends MainController
         Validation::Limits($link_title, Translate::get('title'), '14', '250', $redirect);
         Validation::Limits($link_content, Translate::get('description'), '24', '1500', $redirect);
 
-        $topic_fields   = Request::getPost() ?? [];
-        $topics         = $topic_fields['facet_select'] ?? [];
-
         $data = [
             'link_url'          => $link_url,
             'link_url_domain'   => $link_url_domain,
@@ -80,10 +77,15 @@ class AddWebController extends MainController
    
         $link_topic = WebModel::add($data);
 
+        // Фасеты для сайте
+        $post_fields    = Request::getPost() ?? [];
+        $facet_post     = $post_fields['facet_select'] ?? [];
+        $topics         = json_decode($facet_post[0], true);
+
         if (!empty($topics)) {
             $arr = [];
-            foreach ($topics as $row) {
-                $arr[] = array($row, $link_topic['link_id']);
+            foreach ($topics as $ket => $row) {
+               $arr[] = $row;
             }
             FacetModel::addLinkFacets($arr, $link_topic['link_id']);
         }

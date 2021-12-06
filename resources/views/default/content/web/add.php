@@ -43,14 +43,12 @@
         'help' => '24 - 1500 ' . Translate::get('characters')
       ]); ?>
 
-      <?= includeTemplate('/_block/form/select', [
+      <?= includeTemplate('/_block/form/select/select', [
         'uid'           => $uid,
         'data'          => [],
         'type'          => 'topic',
-        'maximum'       => 3,
         'action'        => 'add',
         'title'         => Translate::get('facets'),
-        'required'      => true,
         'help'          => Translate::get('necessarily'),
         'red'           => 'red'
       ]); ?>

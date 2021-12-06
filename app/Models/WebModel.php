@@ -87,7 +87,7 @@ class WebModel extends MainModel
         $result = [];
         foreach ($facets as $ind => $row) {
             $result['9999'] = $topic_id;
-            $result[$ind] = $row['facet_id'];
+            $result[$ind] = $row['value'];
         }
 
         $sort = "ORDER BY link_votes DESC";
@@ -145,7 +145,7 @@ class WebModel extends MainModel
         $result = [];
         foreach ($facets as $ind => $row) {
             $result['9999'] = $topic_id;
-            $result[$ind] = $row['facet_id'];
+            $result[$ind] = $row['value'];
         }
 
         $string = "relation_facet_id IN($topic_id)";
@@ -301,7 +301,7 @@ class WebModel extends MainModel
     public static function getLinkTopic($link_id)
     {
         $sql = "SELECT
-                    facet_id,
+                    facet_id as value,
                     facet_title,
                     facet_slug,
                     facet_is_web,

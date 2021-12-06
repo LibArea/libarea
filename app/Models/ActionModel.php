@@ -110,18 +110,17 @@ class ActionModel extends MainModel
 
     // Поиск контента для форм
     public static function getSearch($search, $type)
-    {
+    {  
         $field_id   = $type . '_id';
         if ($type == 'post') {
             $field_tl = 'post_tl';
             $field_name = 'post_title';
-            $sql = "SELECT post_id, post_title, post_is_deleted, post_tl FROM posts WHERE post_title LIKE :post_title AND post_is_deleted = 0 AND post_tl = 0 ORDER BY post_id LIMIT 8";
+            $sql = "SELECT post_id, post_title, post_is_deleted, post_tl FROM posts WHERE post_title LIKE :post_title AND post_is_deleted = 0 AND post_tl = 0 ORDER BY post_id LIMIT 200";
         } elseif ($type == 'user') {
             $field_tl = 'user_trust_level';
             $field_name = 'user_login';
-            $sql = "SELECT user_id, user_login, user_trust_level FROM users WHERE user_login LIKE :user_login";
-               
-        } else {
+            $sql = "SELECT user_id, user_login, user_trust_level, user_activated FROM users WHERE user_activated = 1 AND user_login LIKE :user_login";
+        } else { 
             // $type: topic | blog
             $uid    = Base::getUid();
             $id     = $uid['user_id'];
@@ -132,22 +131,22 @@ class ActionModel extends MainModel
                     $condition = 'AND facet_user_id = $id';
                 } 
             }                
-            
+      
             $field_id = 'facet_id';
             $field_tl = 'facet_tl';
             $field_name = 'facet_title';
             $sql = "SELECT facet_id, facet_title, facet_tl, facet_type FROM facets 
-                    WHERE facet_title LIKE :facet_title AND facet_type = '$type' $condition ORDER BY facet_count DESC LIMIT 8";
+                    WHERE facet_title LIKE :facet_title AND facet_type = '$type' $condition ORDER BY facet_count DESC LIMIT 200";
         }
 
         $result = DB::run($sql, [$field_name => "%" . $search . "%"]);
         $lists  = $result->fetchall(PDO::FETCH_ASSOC);
- 
+    
         $response = [];
         foreach ($lists as $list) {
             $response[] = array(
                 "id"    => $list[$field_id],
-                "text"  => $list[$field_name],
+                "value" => $list[$field_name],
                 "tl"    => $list[$field_tl]
             );
         }

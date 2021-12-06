@@ -140,7 +140,7 @@ class WebController extends MainController
                     'topic'         => $topic,
                     'high_topics'   => FacetModel::getHighLevelList($topic['facet_id']),
                     'low_topics'    => FacetModel::getLowLevelList($topic['facet_id']),
-                    'topic_related' => FacetModel::facetRelated($topic['facet_related']),
+                    'low_matching'  => FacetModel::getLowMatching($topic['facet_id']),
                 ]
             ]
         );

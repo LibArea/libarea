@@ -52,7 +52,7 @@
 <aside class="col-span-3 relative">
   <div class="bg-white br-rd5 br-box-gray pt5 pr15 pb10 pl15">
     <?php if ($data['high_leve']) { ?>
-      <div class="gray"><?= Translate::get('see also'); ?></div>
+      <div class="gray"><?= Translate::get('see more'); ?></div>
       <?php foreach ($data['high_leve'] as $rl) { ?>
         <?php if ($rl['facet_is_web'] == 1) { ?>
           <a class="inline mr20 size-14 black" href="<?= getUrlByName('web.topic', ['slug' => $rl['facet_slug']]); ?>">

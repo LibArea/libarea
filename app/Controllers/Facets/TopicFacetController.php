@@ -5,7 +5,7 @@ namespace App\Controllers\Facets;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
-use App\Models\{FeedModel, SubscriptionModel, FacetModel};
+use App\Models\{FeedModel, SubscriptionModel, FacetModel, PostModel};
 use Content, Base, Translate;
 
 class TopicFacetController extends MainController
@@ -79,7 +79,7 @@ class TopicFacetController extends MainController
                     'user'          => UserModel::getUser($facet['facet_user_id'], 'id'),
                     'high_topics'   => FacetModel::getHighLevelList($facet['facet_id']),
                     'low_topics'    => FacetModel::getLowLevelList($facet['facet_id']),
-                    'facet_related' => FacetModel::facetRelated($facet['facet_related']),
+                    'low_matching'  => FacetModel::getLowMatching($facet['facet_id']),
                     'writers'       => FacetModel::getWriters($facet['facet_id']),
                 ],
                 'facet'   => ['facet_id' => $facet['facet_id'], 'facet_type' => $facet['facet_type'], 'facet_user_id' => $facet['facet_user_id']],
@@ -115,8 +115,7 @@ class TopicFacetController extends MainController
                 'data'  => [
                     'sheet'         => 'info',
                     'facet'         => $facet,
-                    'facet_related' => FacetModel::facetRelated($facet['facet_related']),
-                    'related_posts' => FacetModel::relatedPosts($facet_related),
+                    'related_posts' => PostModel::postRelated($facet_related),
                     'high_topics'   => FacetModel::getHighLevelList($facet['facet_id']),
                     'low_topics'    => FacetModel::getLowLevelList($facet['facet_id']),
                     'user'          => UserModel::getUser($facet['facet_user_id'], 'id'),

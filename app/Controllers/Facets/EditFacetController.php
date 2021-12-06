@@ -30,17 +30,17 @@ class EditFacetController extends MainController
         }
 
         $breadcrumb = breadcrumb(
-            getUrlByName($facet['facet_type'] . 's'),
+            '/' . $facet['facet_type'] . 's',
             Translate::get($facet['facet_type'] . 's'),
             getUrlByName($facet['facet_type'], ['slug' => $facet['facet_slug']]),
             $facet['facet_title'],
             Translate::get('edit') . ' | ' . $facet['facet_title'],
         );
 
-        Request::getResources()->addBottomStyles('/assets/css/select2.css');
         Request::getResources()->addBottomScript('/assets/js/uploads.js');
-        Request::getResources()->addBottomScript('/assets/js/select2.min.js');
-
+        Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
+        Request::getResources()->addBottomScript('/assets/js/tag/tagify.min.js');
+        
         return view(
             '/facets/edit',
             [
@@ -49,10 +49,11 @@ class EditFacetController extends MainController
                 'data'  => [
                     'facet'             => $facet,
                     'breadcrumb'        => $breadcrumb,
-                    'facet_related'     => FacetModel::facetRelated($facet['facet_related']),
-                    'related_posts'     => PostModel::postRelated($facet['facet_post_related']),
-                    'high_lists'        => FacetModel::getHighLevelList($facet['facet_id']),
-                    'low_lists'         => FacetModel::getLowLevelList($facet['facet_id']),
+                    'low_matching'      => FacetModel::getLowMatching($facet['facet_id']),
+                    'high_matching'     => FacetModel::getHighMatching($facet['facet_id']),
+                    'post_arr'          => PostModel::postRelated($facet['facet_post_related']), // cltkfk
+                    'high_arr'          => FacetModel::getHighLevelList($facet['facet_id']),
+                    'low_arr'           => FacetModel::getLowLevelList($facet['facet_id']),
                     'user'              => UserModel::getUser($facet['facet_user_id'], 'id'),
                     'sheet'             => 'topics',
                 ]
@@ -71,7 +72,6 @@ class EditFacetController extends MainController
         $facet_seo_title            = Request::getPost('facet_seo_title');
         $facet_merged_id            = Request::getPostInt('facet_merged_id');
         $facet_top_level            = Request::getPostInt('facet_top_level');
-        $facet_user_new             = Request::getPost('user_select');
         $facet_tl                   = Request::getPostInt('content_tl');
         $facet_is_web               = Request::getPostInt('facet_is_web');
         $facet_is_soft              = Request::getPostInt('facet_is_soft');
@@ -105,7 +105,7 @@ class EditFacetController extends MainController
         Validation::Limits($facet_slug, Translate::get('slug'), '3', '43', $redirect);
         Validation::Limits($facet_seo_title, Translate::get('name SEO'), '4', '225', $redirect);
         Validation::Limits($facet_description, Translate::get('meta description'), '44', '225', $redirect);
-        // Validation::Limits($facet_short_description, Translate::get('short description'), '11', '160', $redirect);
+        Validation::Limits($facet_short_description, Translate::get('short description'), '11', '160', $redirect);
         Validation::Limits($facet_info, Translate::get('Info'), '14', '5000', $redirect);
 
         // Запишем img
@@ -115,12 +115,13 @@ class EditFacetController extends MainController
             UploadImage::img($img, $facet['facet_id'], 'topic');
         }
 
-        // Если есть смена topic_user_id и это TL5
+        // Если есть смена post_user_id и это TL5
+        $user_new  = Request::getPost('user_id');
+        $facet_user_new = json_decode($user_new, true);
         $facet_user_id = $facet['facet_user_id'];
-        if ($facet['facet_user_id'] != $facet_user_new) {
-            $facet_user_id = $facet['facet_user_id'];
+        if ($facet['facet_user_id'] != $facet_user_new[0]['id']) {
             if ($this->uid['user_trust_level'] == 5) {
-                $facet_user_id = $facet_user_new;
+                $facet_user_id = $facet_user_new[0]['id'];
             }
         }
 
@@ -132,21 +133,31 @@ class EditFacetController extends MainController
             }
         }
 
-        $post_fields    = Request::getPost() ?? [];
+        $fields     = Request::getPost() ?? [];
+
+        // Связанные посты
+        $json_post  = $fields['post_select'] ?? [];
+        $arr_post   = json_decode($json_post[0], true);
+        if ($arr_post) {  
+            foreach ($arr_post as $value) {
+               $id[]   = $value['id'];
+            }
+        }
+        $post_related = implode(',', $id ?? []);
+
         $facet_slug     = strtolower($facet_slug);
         $data = [
             'facet_id'                  => $facet_id,
             'facet_title'               => $facet_title,
             'facet_description'         => $facet_description,
-            'facet_short_description'   => $facet_short_description ?? '',
+            'facet_short_description'   => $facet_short_description,
             'facet_info'                => $facet_info,
             'facet_slug'                => $facet_slug,
             'facet_seo_title'           => $facet_seo_title,
-            'facet_user_id'             => $facet_user_id,
+            'facet_user_id'             => $facet_user_id ?? 1,
             'facet_tl'                  => $facet_tl,
             'facet_top_level'           => $facet_top_level,
-            'facet_post_related'        => implode(',', $post_fields['post_related'] ?? ['0']),
-            'facet_related'             => implode(',', $post_fields['facet_related'] ?? ['0']),
+            'facet_post_related'        => $post_related,
             'facet_is_web'              => $facet_is_web,
             'facet_is_soft'             => $facet_is_soft,
             'facet_type'                => $type,
@@ -154,29 +165,28 @@ class EditFacetController extends MainController
 
         FacetModel::edit($data);
 
-        // Тема, выбор родителя   
-        $facet_fields   = Request::getPost() ?? [];
-        $facets         = $facet_fields['facet_parent_id'] ?? [];
-
+        // Тема, выбор детей в дереве
+        $highs      = $fields['high_facet_id'] ?? [];
+        $high_facet = json_decode($highs, true);
+        $high_facet = $high_facet ?? [];
         $arr = [];
-        foreach ($facets as $row) {
-            $arr[] = array($row, $facet_id);
+        foreach ($high_facet as $ket => $row) {
+           $arr[] = $row;
         }
-
-        FacetModel::addFacetRelation($arr, $facet_id);
-
+        FacetModel::addLowFacetRelation($arr, $facet_id);
+        
+        // Связанные темы, дети 
+        $matching       = $fields['facet_matching'] ?? [];
+        $match_facet    = json_decode($matching[0], true);
+        $match_facet    = $match_facet ?? [];
+        $arr_mc = [];
+        foreach ($match_facet as $ket => $row) {
+           $arr_mc[] = $row;
+        }
+        FacetModel::addLowFacetMatching($arr_mc, $facet_id);  
         addMsg(Translate::get('changes saved'), 'success');
 
         redirect(getUrlByName($type, ['slug' => $facet_slug]));
     }
 
-    // Выбор родительской темы
-    public function selectTopicParent()
-    {
-        $facet_id = Request::getInt('topic_id');
-        $search = Request::getPost('searchTerm');
-        $search = preg_replace('/[^a-zA-ZА-Яа-я0-9 ]/ui', '', $search);
-
-        return FacetModel::getSearchParent($search, $facet_id);
-    }
 }

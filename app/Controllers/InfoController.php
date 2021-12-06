@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use Hleb\Constructor\Handlers\Request;
 use Hleb\Scheme\App\Controllers\MainController;
 use Content, Base, Translate, Config;
 

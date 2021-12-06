@@ -14,8 +14,6 @@ Route::before('Authorization@noAuth')->getGroup();
         Route::get('/favorite/post')->controller('FavoriteController', ['post']);
         Route::get('/favorite/answer')->controller('FavoriteController', ['answer']);
         Route::get('/focus/{type}')->controller('SubscriptionController')->where(['type' => '[a-z]+']);
-        // @ topics main (выбор родителя)
-        Route::get('/topic/search/{topic_id}')->controller('Facets\EditFacetController@selectTopicParent')->where(['topic_id' => '[0-9]+']);
         // @ users | posts | topics
         Route::get('/search/{type}')->controller('ActionController@select')->where(['type' => '[a-z]+']);
         // @ post | answer | comment | link
@@ -188,5 +186,9 @@ Route::get('/turbo-feed/topic/{slug}')->controller('RssController@turboFeed')->w
 Route::get('/rss-feed/topic/{slug}')->controller('RssController@rssFeed')->where(['slug' => '[A-Za-z0-9-]+']);
 
 Route::type(['get', 'post'])->get('/search')->controller('SearchController')->name('search');
+
+Route::getType('post');
+    Route::get('/test/{type}')->controller('ActionController@select')->where(['type' => '[a-z]+']);
+Route::endType();
 
 require 'admin.php';

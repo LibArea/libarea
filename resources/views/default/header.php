@@ -7,9 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <?= $meta; ?>
   <?php getRequestHead()->output(); ?>
-  <?php if ($uid['user_id'] > 0) { ?>
-    <script src="/assets/js/jquery-3.6.0.min.js"></script>
-  <?php } ?>
   <link rel="stylesheet" href="/assets/css/style.css">
   <link rel="icon" sizes="16x16" href="/favicon.ico" type="image/x-icon">
   <link rel="icon" sizes="120x120" href="/favicon-120.ico" type="image/x-icon">

@@ -8,7 +8,7 @@
         <a class="ml15" href="<?= getUrlByName('admin.' . $data['type']); ?>">
           <i class="bi bi-pencil"></i>
         </a>
-        <a class="ml15" title="<?= Translate::get('add'); ?>" href="<?= getUrlByName($data['type'] . '.add'); ?>">
+        <a class="ml15" title="<?= Translate::get('add'); ?>" href="<?= getUrlByName('topic.add'); ?>">
           <i class="bi bi-plus-lg middle"></i>
         </a>
       <?php } ?>

@@ -27,11 +27,11 @@ class EditPostController extends MainController
         }
 
         Request::getResources()->addBottomScript('/assets/js/uploads.js');
-        Request::getResources()->addBottomStyles('/assets/css/select2.css');
-        Request::getResources()->addBottomScript('/assets/js/select2.min.js');
         Request::getResources()->addBottomStyles('/assets/js/editor/toastui-editor.min.css');
         Request::getResources()->addBottomStyles('/assets/js/editor/dark.css');
         Request::getResources()->addBottomScript('/assets/js/editor/toastui-editor-all.min.js');
+        Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
+        Request::getResources()->addBottomScript('/assets/js/tag/tagify.min.js');
 
         return view(
             '/post/edit',
@@ -41,10 +41,10 @@ class EditPostController extends MainController
                 'data'  => [
                     'sheet'         => 'edit-post',
                     'post'          => $post,
-                    'post_arr'      => PostModel::postRelated($post['post_related']),
                     'user'          => UserModel::getUser($post['post_user_id'], 'id'),
-                    'topic_arr'     => PostModel::getPostTopic($post['post_id'], $this->uid['user_id'], 'topic'),
-                    'blog_arr'      => PostModel::getPostTopic($post['post_id'], $this->uid['user_id'], 'blog'),
+                    'post_arr'      => PostModel::postRelated($post['post_related']),
+                    'topic_arr'     => PostModel::getPostFacet($post['post_id'], 'topic'),
+                    'blog_arr'      => PostModel::getPostFacet($post['post_id'], 'blog'),
                 ]
             ]
         );
@@ -61,16 +61,24 @@ class EditPostController extends MainController
         $post_closed            = Request::getPostInt('closed');
         $post_top               = Request::getPostInt('top');
         $draft                  = Request::getPost('draft');
-        $post_user_new          = Request::getPost('user_select');
         $post_merged_id         = Request::getPostInt('post_merged_id');
-        $post_tl                = Request::getPostInt('content_tl');
-        $blog_id                = Request::getPostInt('blog_id');
 
         // Связанные посты и темы
         $post_fields    = Request::getPost() ?? [];
-        $post_related   = implode(',', $post_fields['post_select'] ?? []);
-        $topics         = $post_fields['facet_select'] ?? [];
-
+        
+        $json_post  = $post_fields['post_select'] ?? [];
+        $arr_post   = json_decode($json_post[0], true);
+        if ($arr_post) {  
+            foreach ($arr_post as $value) {
+               $id[]   = $value['id'];
+            }
+        }
+        $post_related = implode(',', $id ?? []);
+      
+        // Темы для поста
+        $facet_post     = $post_fields['facet_select'] ?? [];
+        $topics         = json_decode($facet_post[0], true);
+        
         // Проверка доступа 
         $post   = PostModel::getPostId($post_id);
         if (!accessСheck($post, 'post', $this->uid, 0, 0)) {
@@ -83,18 +91,18 @@ class EditPostController extends MainController
         Content::stopContentQuietМode($user);
 
         $redirect   = getUrlByName('post.edit', ['id' =>$post_id]);
-
         if (!$topics) {
             addMsg(Translate::get('select topic'), 'error');
             redirect($redirect);
         }
 
         // Если есть смена post_user_id и это TL5
+        $user_new  = Request::getPost('user_id');
+        $post_user_new = json_decode($user_new, true);
         $post_user_id = $post['post_user_id'];
-        if ($post['post_user_id'] != $post_user_new) {
-            $post_user_id = $post['post_user_id'];
+        if ($post['post_user_id'] != $post_user_new[0]['id']) {
             if ($this->uid['user_trust_level'] == 5) {
-                $post_user_id = $post_user_new;
+                $post_user_id = $post_user_new[0]['id'];
             }
         }
 
@@ -120,7 +128,6 @@ class EditPostController extends MainController
         if ($_FILES['images']['name']) {
             $post_img = UploadImage::cover_post($cover, $post, $redirect, $this->uid['user_id']);
         }
-
         $post_img = $post_img ?? $post['post_content_img'];
         
         $data = [
@@ -129,13 +136,13 @@ class EditPostController extends MainController
             'post_type'             => $post_type,
             'post_translation'      => $post_translation,
             'post_date'             => $post_date,
-            'post_user_id'          => $post_user_id,
+            'post_user_id'          => $post_user_id ?? 1,
             'post_draft'            => $post_draft,
             'post_content'          => Content::change($post_content),
             'post_content_img'      => $post_img ?? '',
             'post_related'          => $post_related,
             'post_merged_id'        => $post_merged_id,
-            'post_tl'               => $post_tl,
+            'post_tl'               => Request::getPostInt('content_tl'),
             'post_closed'           => $post_closed,
             'post_top'              => $post_top,
         ];
@@ -146,13 +153,22 @@ class EditPostController extends MainController
         // Перезапишем пост
         PostModel::editPost($data);
         
-        if ($blog_id != 0) {
-          $topics = array_merge(['0' => $blog_id], $topics);
+        // Получаем id существующего блога (использовать потом)
+        $blog_id    = Request::getPostInt('blog_id');
+        
+        // Получим id блога с формы выбора
+        $blog_post  = $post_fields['blog_select'] ?? [];
+        $blog       = json_decode($blog_post, true); // <- Array ([0]=> Array ([id]=> 53 [value]=> Блог [tl]=> 0)) 
+        $form_id    = $blog[0]['id'];
+
+        if ($blog) {
+            $topics = array_merge($blog, $topics);
         }  
-  
+
+        // Запишем темы и блог
         $arr = [];
-        foreach ($topics as $row) {
-            $arr[] = array($row, $post_id);
+        foreach ($topics as $ket => $row) {
+           $arr[] = $row;
         }
         FacetModel::addPostFacets($arr, $post_id);
         
