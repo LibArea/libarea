@@ -53,25 +53,30 @@
 
   <div class="bg-white p15 br-box-gray">
     <?php if (!empty($data['structure'])) { ?>
-      <div class=" mb20">
+      <div class="mb20">
         <?php foreach ($data['structure'] as $topic) { ?>
           <div class="w-50 mb5">
             <?php if ($topic['level'] > 0) { ?>
               <?php $color = true; ?>
-              <i class="bi bi-arrow-return-right gray ml<?= $topic['level'] * 15; ?>"></i>
+              <i class="bi bi-arrow-return-right gray ml<?= $topic['level'] * 10; ?>"></i>
             <?php } ?>
-            <a class="<?php if ($topic['level'] == 0) { ?>flex relative pt5 size-18 items-center hidden<?php } ?> <?php if ($topic['level'] > 0) { ?> black<?php } ?>" href="/topic/<?= $topic['facet_slug']; ?>">
+            <a class="<?php if ($topic['level'] == 0) { ?>relative pt5 size-18 items-center hidden<?php } ?> <?php if ($topic['level'] > 0) { ?> black<?php } ?>" href="/topic/<?= $topic['facet_slug']; ?>">
               <?php if ($topic['level'] == 0) { ?>
                 <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'w21 h21 mr5 br-box-gray'); ?>
               <?php } ?>
               <?= $topic['facet_title']; ?>
             </a>
+            <?php foreach ($topic['subs'] as $sub) { ?>
+               <i class="bi bi-arrow-right gray-light-2 size-13"></i> 
+               <a class="size-13 gray-light-2" href="/topic/<?= $topic['facet_slug']; ?>">
+                  <?= $sub['facet_title']; ?>
+               </a>
+            <?php } ?>
           </div>
         <?php } ?>
       </div>
     <?php } else { ?>
       <?= no_content(Translate::get('topics no'), 'bi bi-info-lg'); ?>
     <?php } ?>
-
   </div>
 </main>

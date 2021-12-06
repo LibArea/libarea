@@ -51,7 +51,7 @@ class EditFacetController extends MainController
                     'breadcrumb'        => $breadcrumb,
                     'low_matching'      => FacetModel::getLowMatching($facet['facet_id']),
                     'high_matching'     => FacetModel::getHighMatching($facet['facet_id']),
-                    'post_arr'          => PostModel::postRelated($facet['facet_post_related']), // cltkfk
+                    'post_arr'          => PostModel::postRelated($facet['facet_post_related']),
                     'high_arr'          => FacetModel::getHighLevelList($facet['facet_id']),
                     'low_arr'           => FacetModel::getLowLevelList($facet['facet_id']),
                     'user'              => UserModel::getUser($facet['facet_user_id'], 'id'),

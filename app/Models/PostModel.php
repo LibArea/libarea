@@ -267,13 +267,18 @@ class PostModel extends MainModel
     // Связанные посты
     public static function postRelated($post_related)
     {
+        $in = "";
+        if ($post_related) {
+            $in = "post_id IN(0, ". $post_related .") AND";
+        }
+        
         $sql = "SELECT 
                     post_id as value, 
                     post_title, 
                     post_slug 
                         FROM posts 
-                            WHERE post_id IN(0, " . $post_related . ") AND post_is_deleted = 0 AND post_tl = 0";
-                            
+                           WHERE $in post_is_deleted = 0 AND post_tl = 0";
+                      
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
     

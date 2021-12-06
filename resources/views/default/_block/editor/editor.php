@@ -31,7 +31,7 @@
       height: height,
       initialEditType: '<?= Config::get('editor.initialEditType'); ?>', // wysiwyg | markdown
       previewStyle: previewStyle,
-      hideModeSwitch: <?= Config::get('editor.hideModeSwitch'); ?>,   // true | false
+      hideModeSwitch: '<?= Config::get('editor.hideModeSwitch'); ?>',   // true | false
       initialValue: body,
       theme: '<?= Request::getCookie('dayNight'); ?>',
       language: '<?= $lang; ?>',

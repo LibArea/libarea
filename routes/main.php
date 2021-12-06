@@ -187,8 +187,4 @@ Route::get('/rss-feed/topic/{slug}')->controller('RssController@rssFeed')->where
 
 Route::type(['get', 'post'])->get('/search')->controller('SearchController')->name('search');
 
-Route::getType('post');
-    Route::get('/test/{type}')->controller('ActionController@select')->where(['type' => '[a-z]+']);
-Route::endType();
-
 require 'admin.php';

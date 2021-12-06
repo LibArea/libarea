@@ -1,12 +1,19 @@
 <main class="col-span-12 mb-col-12">
-  <div class="pt5 mr15 pb5 ml15">
+  <div class="pt5 mr15 pb5 ml15 size-13">
     <?php if ($uid['user_trust_level'] == 5) { ?>
       <a title="<?= Translate::get('add'); ?>" class="right mt5" href="<?= getUrlByName('web.add'); ?>">
         <i class="bi bi-plus-lg middle"></i>
       </a>
     <?php } ?>
-    <a href="<?= getUrlByName('web'); ?>" class="size-14 gray-light-2"><?= Translate::get('sites'); ?></a>
+    <a class="gray" href="<?= getUrlByName('web'); ?>" class="size-14 gray-light-2"><?= Translate::get('sites'); ?></a>
 
+    <?php if (!empty($data['high_topics'][0])) { 
+          $site = $data['high_topics'][0];   ?>
+            <span class="gray mr5 ml5">/</span>
+            <a class="" href="<?= getUrlByName('web.topic', ['slug' => $site['facet_slug']]); ?>" title="<?= $site['facet_title']; ?>">
+            <?= $site['facet_title']; ?>
+        </a>
+    <?php } ?>
     <h1 class="mt0 mb5 size-24 font-normal">
       <?= $data['topic']['facet_title']; ?>
       <?php if ($uid['user_trust_level'] == 5) { ?>
@@ -19,10 +26,10 @@
       <?php } ?>
     </h1>
   </div>
-
-  <div class="mb20 pt10 pr15 pb10 pl15 bg-green-200">
+  
+ <div class="mb20 pt10 pr15 pb10 pl15 bg-green-200">
     <?php if ($data['low_topics']) { ?>
-      <div class="grid grid-cols-3 gap-2 justify-between mb20">
+      <div class="grid grid-cols-3 gap-2 justify-between mb10">
         <?php foreach ($data['low_topics'] as $lt) { ?>
           <?php if ($lt['facet_is_web'] == 1) { ?>
             <div>
@@ -40,7 +47,7 @@
       </div>
     <?php } ?>
     <?php if ($data['low_matching']) { ?>
-      <div class="mb10">
+      <div class="mt15 mb10">
         <div class="gray size-14"><?= Translate::get('see more'); ?></div>
         <?php foreach ($data['low_matching'] as $rl) { ?>
           <?php if ($rl['facet_is_web'] == 1) { ?>
