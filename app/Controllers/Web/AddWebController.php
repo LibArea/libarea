@@ -46,36 +46,36 @@ class AddWebController extends MainController
             redirect('/');
         }
 
-        $link_url           = Request::getPost('link_url');
-        $link_title         = Request::getPost('link_title');
-        $link_content       = Request::getPost('link_content');
+        $item_url           = Request::getPost('item_url');
+        $item_title_url     = Request::getPost('item_title_url');
+        $item_content_url   = Request::getPost('item_content_url');
 
-        $parse              = parse_url($link_url);
-        $link_url_domain    = $parse['host'];
-        $link_url           = $parse['scheme'] . '://' . $parse['host'];
+        $parse              = parse_url($item_url);
+        $item_url_domain    = $parse['host'];
+        $item_url           = $parse['scheme'] . '://' . $parse['host'];
 
         $redirect = getUrlByName('web');
-        $link = WebModel::getLinkOne($link_url_domain, $this->uid['user_id']);
-        if ($link) {
+        $item = WebModel::getItemOne($item_url_domain, $this->uid['user_id']);
+        if ($item) {
             addMsg(Translate::get('the site is already there'), 'error');
             redirect($redirect);
         }
 
-        Validation::Limits($link_title, Translate::get('title'), '14', '250', $redirect);
-        Validation::Limits($link_content, Translate::get('description'), '24', '1500', $redirect);
+        Validation::Limits($item_title_url, Translate::get('title'), '14', '250', $redirect);
+        Validation::Limits($item_content_url, Translate::get('description'), '24', '1500', $redirect);
 
         $data = [
-            'link_url'          => $link_url,
-            'link_url_domain'   => $link_url_domain,
-            'link_title'        => $link_title,
-            'link_content'      => $link_content,
-            'link_published'    => 1,
-            'link_user_id'      => $this->uid['user_id'],
-            'link_type'         => 0,
-            'link_status'       => 200,
+            'item_url'          => $item_url,
+            'item_url_domain'   => $item_url_domain,
+            'item_title_url'    => $item_title_url,
+            'item_content_url'  => $item_content_url,
+            'item_published'    => 1,
+            'item_user_id'      => $this->uid['user_id'],
+            'item_type_url'     => 0,
+            'item_status_url'   => 200,
         ];
    
-        $link_topic = WebModel::add($data);
+        $item_topic = WebModel::add($data);
 
         // Фасеты для сайте
         $post_fields    = Request::getPost() ?? [];
@@ -87,7 +87,7 @@ class AddWebController extends MainController
             foreach ($topics as $ket => $row) {
                $arr[] = $row;
             }
-            FacetModel::addLinkFacets($arr, $link_topic['link_id']);
+            FacetModel::addItemFacets($arr, $item_topic['item_id']);
         }
 
         redirect($redirect);

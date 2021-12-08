@@ -154,14 +154,14 @@ class FacetModel extends MainModel
         return true;
     }
 
-    public static function addLinkFacets($rows, $link_id)
+    public static function addItemFacets($rows, $item_id)
     {
-        self::deleteRelation($link_id, 'link');
+        self::deleteRelation($item_id, 'item');
 
         foreach ($rows as $row) {
             $facet_id   = $row['id'];
-            $sql = "INSERT INTO facets_links_relation (relation_facet_id, relation_link_id) 
-                        VALUES ($facet_id, $link_id)";
+            $sql = "INSERT INTO facets_items_relation (relation_facet_id, relation_item_id) 
+                        VALUES ($facet_id, $item_id)";
 
             DB::run($sql);
         }
@@ -187,7 +187,6 @@ class FacetModel extends MainModel
     }
 
     // Перекрестные связи
-    // Cross-links
     public static function addLowFacetMatching($rows, $topic_id)
     {
         self::deleteRelation($topic_id, 'matching');
@@ -205,7 +204,7 @@ class FacetModel extends MainModel
 
     public static function deleteRelation($id, $type)
     {
-        $sql = "DELETE FROM facets_links_relation WHERE relation_link_id = $id";
+        $sql = "DELETE FROM facets_items_relation WHERE relation_item_id = $id";
         if ($type == 'post') {
             $sql = "DELETE FROM facets_posts_relation WHERE relation_post_id = $id";
         } elseif ($type == 'topic') {
@@ -474,7 +473,7 @@ class FacetModel extends MainModel
     }
 
     // Вниз по структуре связанных деревьев (ДЕТИ)
-    // Down the structure of linked trees (CHILDREN)
+    // Down the structure  (CHILDREN)
     /**
      * @param  int $facet_id
      * @return

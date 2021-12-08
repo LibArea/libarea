@@ -27,7 +27,7 @@ class HomeController extends MainController
                     'users_count'       => UserModel::getUsersAllCount('all'),
                     'answers_count'     => AnswerModel::getAnswersAllCount('all'),
                     'comments_count'    => CommentModel::getCommentsAllCount('all'),
-                    'links_count'       => WebModel::getLinksAllCount(),
+                    'items_count'       => WebModel::getItemsAllCount(),
                     'last_visit'        => AgentModel::getLastVisit(),
                     'bytes'             => $bytes,
                     'sheet'             => 'admin',

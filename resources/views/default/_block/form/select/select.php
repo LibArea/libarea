@@ -40,10 +40,10 @@
 
   document.addEventListener("DOMContentLoaded", async () => {
 
-    var search = await focus_search();
-    var input = document.querySelector('#topic_id');
+    let search = await focus_search();
+    let input = document.querySelector('#topic_id');
 
-    var options = {
+    let options = {
       tagTextProp: "facet_title", // <- чтобы не переопределять title в запросах
       // userInput: false,        // <- отключим пользовательский ввод
       skipInvalid: true, // <- не добавлять повтороно не допускаемые теги
@@ -61,7 +61,7 @@
       whitelist: search,
     };
 
-    var tagify = new Tagify(input, options);
+    let tagify = new Tagify(input, options);
 
     <?php if ($action == 'edit') { ?>
       // tagify.addTags([{id:'20', value:'Веб-разработка'},{id:'43', value:'Новости и СМИ'},])

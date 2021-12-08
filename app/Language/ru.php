@@ -355,8 +355,10 @@ $data = [
     'details are here'      => 'Подробности здесь',
     'breaking the rules'    => 'Нарушение правил',
 
-    'tl content'            => 'Уровень доверия (TL)',
-    'tl info content'       => 'Если установить > 0, то только участники с данным TL (и выше) смогут видеть контент',
+    'soft'                  => 'Софт',
+    'there is a program'    => 'Есть программа?',
+    'hosted on github'      => 'Она размещена на GitHub?',
+    'url address github'    => 'URL адрес репозитория на GitHub',
 
     /* Meta - desc */
     'desc-user-all'         => 'Список всех участников отсортированных по дате регистрации на сайте',

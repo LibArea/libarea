@@ -21,9 +21,9 @@ class ApiController extends MainController
        echo json_encode($data,JSON_UNESCAPED_UNICODE);
     }
     
-    public function links()
+    public function items()
     {   
-       $data = WebModel::getLinksAll(1, 25, 0);
+       $data = WebModel::getItemsAll(1, 25, 0);
        
        header('Content-Type: application/json');
 

@@ -9,80 +9,77 @@ use PDO;
 class WebModel extends MainModel
 {
     // Все сайты
-    public static function getLinksAll($page, $limit, $user_id)
+    public static function getItemsAll($page, $limit, $user_id)
     {
         $start  = ($page - 1) * $limit;
         $sql = "SELECT
-                    link_id,
-                    link_title,
-                    link_content,
-                    link_published,
-                    link_user_id,
-                    link_url,
-                    link_url_domain,
-                    link_votes,
-                    link_count,
-                    link_is_deleted,
+                    item_id, 
+                    item_title_url,
+                    item_content_url,
+                    item_published,
+                    item_user_id,
+                    item_url,
+                    item_url_domain,
+                    item_votes,
+                    item_count,
+                    item_title_soft,
+                    item_github_url,
+                    item_is_deleted,
                     rel.*,
-                    votes_link_user_id, 
-                    votes_link_item_id
-                        FROM links
+                    votes_item_user_id, 
+                    votes_item_item_id
+                        FROM items
                         LEFT JOIN
                         (
                             SELECT 
-                                MAX(facet_id), 
-                                MAX(facet_slug), 
-                                MAX(facet_title),
-                                MAX(facet_type),
-                                MAX(relation_facet_id), 
-                                relation_link_id,
-
+                                relation_item_id,
                                 GROUP_CONCAT(facet_type, '@', facet_slug, '@', facet_title SEPARATOR '@') AS facet_list
                                 FROM facets  
-                                LEFT JOIN facets_links_relation 
+                                LEFT JOIN facets_items_relation 
                                     on facet_id = relation_facet_id
-                                GROUP BY relation_link_id
+                                    WHERE facet_is_web = 1
+                                        GROUP BY relation_item_id
                         ) AS rel
-                            ON rel.relation_link_id = link_id 
+                            ON rel.relation_item_id = item_id 
 
-                        LEFT JOIN votes_link ON votes_link_item_id = link_id AND  votes_link_user_id = $user_id
-                        WHERE link_is_deleted = 0
-                        ORDER BY link_id DESC LIMIT $start, $limit ";
+                        LEFT JOIN votes_item ON votes_item_item_id = item_id AND  votes_item_user_id = $user_id
+                        WHERE item_is_deleted = 0
+                        ORDER BY item_id DESC LIMIT $start, $limit ";
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function getLinksAllCount()
+    public static function getItemsAllCount()
     {
-        $sql = "SELECT link_id, link_is_deleted FROM links WHERE link_is_deleted = 0";
+        $sql = "SELECT item_id, item_is_deleted FROM items WHERE item_is_deleted = 0";
 
         return DB::run($sql)->rowCount();
     }
 
     // 5 популярных доменов
-    public static function getLinksTop($domain)
+    public static function getItemsTop($domain)
     {
         $sql = "SELECT
-                    link_id,
-                    link_title,
-                    link_content,
-                    link_published,
-                    link_user_id,
-                    link_url,
-                    link_url_domain,
-                    link_votes,
-                    link_count,
-                    link_is_deleted
-                        FROM links 
-                        WHERE link_url_domain != :domain AND link_published = 1 AND link_is_deleted = 0 
-                        ORDER BY link_count DESC LIMIT 10";
+                    item_id,
+                    item_title_url,
+                    item_content,
+                    item_published,
+                    item_user_id,
+                    item_url,
+                    item_url_domain,
+                    item_votes,
+                    item_count,
+                    item_is_deleted
+                        FROM items 
+                        WHERE item_url_domain != :domain AND item_published = 1 AND item_is_deleted = 0
+                        ORDER BY item_count DESC LIMIT 10";
 
         return DB::run($sql, ['domain' => $domain])->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // Получаем домены по условиям
     // https://systemrequest.net/index.php/123/
-    public static function feedLink($page, $limit, $facets, $uid, $topic_id, $type)
+    public static function feedItem($page, $limit, $facets, $uid, $topic_id, $type)
     {
         $result = [];
         foreach ($facets as $ind => $row) {
@@ -90,8 +87,8 @@ class WebModel extends MainModel
             $result[$ind] = $row['value'];
         }
 
-        $sort = "ORDER BY link_votes DESC";
-        if ($type == 'new') $sort = "ORDER BY link_date DESC";
+        $sort = "ORDER BY item_votes DESC";
+        if ($type == 'new') $sort = "ORDER BY item_date DESC";
 
         $string = "relation_facet_id IN($topic_id)";
         if ($result) $string = "relation_facet_id IN(" . implode(',', $result ?? []) . ")";
@@ -99,48 +96,46 @@ class WebModel extends MainModel
         $start  = ($page - 1) * $limit;
 
         $sql = "SELECT DISTINCT
-                    link_id,
-                    link_title,
-                    link_content,
-                    link_published,
-                    link_user_id,
-                    link_url,
-                    link_url_domain,
-                    link_votes,
-                    link_date,
-                    link_count,
-                    link_is_deleted,
+                    item_id,
+                    item_title_url,
+                    item_content_url,
+                    item_published,
+                    item_user_id,
+                    item_url,
+                    item_url_domain,
+                    item_votes,
+                    item_date,
+                    item_count,
+                    item_title_soft,
+                    item_github_url,
+                    item_is_deleted,
                     rel.*,
-                    votes_link_item_id, votes_link_user_id,
+                    votes_item_item_id, votes_item_user_id,
                     user_id, user_login, user_avatar
   
-                        FROM facets_links_relation 
-                        LEFT JOIN links ON relation_link_id = link_id
-            
+                        FROM facets_items_relation 
+                        LEFT JOIN items ON relation_item_id = item_id
                         LEFT JOIN (
                             SELECT 
-                                MAX(facet_id), 
-                                MAX(facet_slug), 
-                                MAX(facet_title),
-                                MAX(relation_facet_id), 
-                                MAX(relation_link_id) as l_id,
-                                GROUP_CONCAT(facet_slug, '@', facet_title SEPARATOR '@') AS facet_list
+                                relation_item_id,
+                                GROUP_CONCAT(facet_type, '@', facet_slug, '@', facet_title SEPARATOR '@') AS facet_list
                                 FROM facets
-                                LEFT JOIN facets_links_relation 
+                                LEFT JOIN facets_items_relation 
                                     on facet_id = relation_facet_id
-                                    GROUP BY relation_link_id
+                                    WHERE facet_is_web = 1
+                                    GROUP BY relation_item_id
                         ) AS rel
-                             ON rel.l_id = link_id
-                            LEFT JOIN users ON user_id = link_user_id
-                            LEFT JOIN votes_link 
-                                ON votes_link_item_id = link_id AND votes_link_user_id = :user_id
+                             ON rel.relation_item_id = item_id
+                            LEFT JOIN users ON user_id = item_user_id
+                            LEFT JOIN votes_item 
+                                ON votes_item_item_id = item_id AND votes_item_user_id = :user_id
 
                                 WHERE $string $sort LIMIT $start, $limit";
 
         return DB::run($sql, ['user_id' => $uid['user_id']])->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function feedLinkCount($facets, $topic_id)
+    public static function feedItemCount($facets, $topic_id)
     {
         $result = [];
         foreach ($facets as $ind => $row) {
@@ -152,28 +147,25 @@ class WebModel extends MainModel
         if ($result) $string = "relation_facet_id IN(" . implode(',', $result ?? []) . ")";
 
         $sql = "SELECT DISTINCT
-                    link_id,
-                    link_published,
-                    link_url,
-                    link_is_deleted,
+                    item_id,
+                    item_published,
+                    item_url,
+                    item_is_deleted,
                     rel.*
-                        FROM facets_links_relation 
-                        LEFT JOIN links ON relation_link_id = link_id
+                        FROM facets_items_relation 
+                        LEFT JOIN items ON relation_item_id = item_id
             
                         LEFT JOIN (
                             SELECT 
-                                MAX(facet_id), 
-                                MAX(facet_slug), 
-                                MAX(facet_title),
-                                MAX(relation_facet_id), 
-                                MAX(relation_link_id) as l_id,
-                                GROUP_CONCAT(facet_slug, '@', facet_title SEPARATOR '@') AS facet_list
+                                relation_item_id,
+                                GROUP_CONCAT(facet_type, '@', facet_slug, '@', facet_title SEPARATOR '@') AS facet_list
                                 FROM facets
-                                LEFT JOIN facets_links_relation 
+                                LEFT JOIN facets_items_relation 
                                     on facet_id = relation_facet_id
-                                    GROUP BY relation_link_id
+                                    WHERE facet_is_web = 1
+                                    GROUP BY relation_item_id
                         ) AS rel
-                             ON rel.l_id = link_id
+                             ON rel.relation_item_id = item_id
 
                                 WHERE $string";
 
@@ -181,24 +173,30 @@ class WebModel extends MainModel
     }
 
     // Проверим наличие домена
-    public static function getLinkOne($domain, $user_id)
+    public static function getItemOne($domain, $user_id)
     {
         $sql = "SELECT
-                    link_id,
-                    link_title,
-                    link_content,
-                    link_published,
-                    link_user_id,
-                    link_url,
-                    link_url_domain,
-                    link_votes,
-                    link_count,
-                    link_is_deleted,
-                    votes_link_user_id, 
-                    votes_link_item_id
-                        FROM links 
-                        LEFT JOIN votes_link ON votes_link_item_id = link_id AND  votes_link_user_id = :user_id
-                        WHERE link_url_domain = :domain AND link_is_deleted = 0";
+                    item_id,
+                    item_title_url,
+                    item_content_url,
+                    item_title_soft,
+                    item_content_soft,
+                    item_published,
+                    item_user_id,
+                    item_url,
+                    item_url_domain,
+                    item_votes,
+                    item_count,
+                    item_is_soft,
+                    item_is_github,
+                    item_github_url,
+                    item_post_related,
+                    item_is_deleted,
+                    votes_item_user_id, 
+                    votes_item_item_id
+                        FROM items 
+                        LEFT JOIN votes_item ON votes_item_item_id = item_id AND  votes_item_user_id = :user_id
+                        WHERE item_url_domain = :domain AND item_is_deleted = 0";
 
 
         return DB::run($sql, ['domain' => $domain, 'user_id' => $user_id])->fetch(PDO::FETCH_ASSOC);
@@ -208,97 +206,115 @@ class WebModel extends MainModel
     public static function add($data)
     {
         $params = [
-            'link_url'          => $data['link_url'],
-            'link_url_domain'   => $data['link_url_domain'],
-            'link_title'        => $data['link_title'],
-            'link_content'      => $data['link_content'],
-            'link_published'    => $data['link_published'],
-            'link_user_id'      => $data['link_user_id'],
-            'link_type'         => $data['link_type'],
-            'link_status'       => $data['link_status'],
-            'link_count'        => 1,
+            'item_url'          => $data['item_url'],
+            'item_url_domain'   => $data['item_url_domain'],
+            'item_title_url'    => $data['item_title_url'],
+            'item_content_url'  => $data['item_content_url'],
+            'item_published'    => $data['item_published'],
+            'item_user_id'      => $data['item_user_id'],
+            'item_type_url'     => $data['item_type_url'],
+            'item_status_url'   => $data['item_status_url'],
+            'item_count'        => 1,
         ];
 
-        $sql = "INSERT INTO links(link_url, 
-                            link_url_domain, 
-                            link_title, 
-                            link_content, 
-                            link_published,
-                            link_user_id, 
-                            link_type, 
-                            link_status, 
-                            link_count) 
+        $sql = "INSERT INTO items(item_url, 
+                            item_url_domain, 
+                            item_title_url, 
+                            item_content_url, 
+                            item_published,
+                            item_user_id, 
+                            item_type_url, 
+                            item_status_url, 
+                            item_count) 
                             
-                       VALUES(:link_url, 
-                       :link_url_domain, 
-                       :link_title, 
-                       :link_content, 
-                       :link_published,
-                       :link_user_id, 
-                       :link_type, 
-                       :link_status, 
-                       :link_count)";
+                       VALUES(:item_url, 
+                       :item_url_domain, 
+                       :item_title_url, 
+                       :item_content_url, 
+                       :item_published,
+                       :item_user_id, 
+                       :item_type_url, 
+                       :item_status_url, 
+                       :item_count)";
 
         DB::run($sql, $params);
 
-        $link_id =  DB::run("SELECT LAST_INSERT_ID() as link_id")->fetch(PDO::FETCH_ASSOC);
+        $item_id =  DB::run("SELECT LAST_INSERT_ID() as item_id")->fetch(PDO::FETCH_ASSOC);
 
-        return $link_id;
+        return $item_id;
     }
 
-    public static function addLinkCount($domain)
+    public static function addItemCount($domain)
     {
-        $sql = "UPDATE links SET link_count = (link_count + 1) WHERE link_url_domain = :domain";
+        $sql = "UPDATE items SET item_count = (item_count + 1) WHERE item_url_domain = :domain";
         DB::run($sql, ['domain' => $domain]);
     }
 
-    // Изменим домен
-    public static function editLink($data)
+    public static function edit($data)
     {
         $params = [
-            'link_url'      => $data['link_url'],
-            'link_title'    => $data['link_title'],
-            'link_content'  => $data['link_content'],
-            'link_published' => $data['link_published'],
-            'link_status'   => $data['link_status'],
-            'link_id'       => $data['link_id'],
+            'item_url'          => $data['item_url'],
+            'item_title_url'    => $data['item_title_url'],
+            'item_content_url'  => $data['item_content_url'],
+            'item_title_soft'   => $data['item_title_soft'],
+            'item_content_soft' => $data['item_content_soft'],
+            'item_published'    => $data['item_published'],
+            'item_status_url'   => $data['item_status_url'],
+            'item_is_soft'      => $data['item_is_soft'],
+            'item_is_github'    => $data['item_is_github'],
+            'item_github_url'   => $data['item_github_url'],
+            'item_post_related' => $data['item_post_related'], 
+            'item_id'           => $data['item_id'],
         ];
 
-        $sql = "UPDATE links 
-                    SET link_url    = :link_url,  
-                    link_title      = :link_title, 
-                    link_content    = :link_content,
-                    link_published  = :link_published,
-                    link_status     = :link_status 
-                        WHERE link_id  = :link_id";
+        $sql = "UPDATE items 
+                    SET item_url        = :item_url,  
+                    item_title_url      = :item_title_url, 
+                    item_content_url    = :item_content_url,
+                    item_title_soft     = :item_title_soft, 
+                    item_content_soft   = :item_content_soft,
+                    item_published      = :item_published,
+                    item_status_url     = :item_status_url,
+                    item_is_soft        = :item_is_soft,
+                    item_is_github      = :item_is_github,
+                    item_github_url     = :item_github_url,
+                    item_post_related   = :item_post_related
+
+                        WHERE item_id   = :item_id";
 
         return  DB::run($sql, $params);
     }
 
     // Данные по id
-    public static function getLinkId($link_id)
+    public static function getItemId($item_id)
     {
         $sql = "SELECT
-                    link_id,
-                    link_title,
-                    link_content,
-                    link_published,
-                    link_user_id,
-                    link_url,
-                    link_url_domain,
-                    link_votes,
-                    link_count,
-                    link_status,
-                    link_is_deleted
-                        FROM links 
-                        WHERE link_id = :link_id AND link_is_deleted = 0";
+                    item_id,
+                    item_title_url,
+                    item_content_url,
+                    item_title_soft,
+                    item_content_soft,
+                    item_published,
+                    item_user_id,
+                    item_url,
+                    item_url_domain,
+                    item_votes,
+                    item_count,
+                    item_status_url,
+                    item_is_soft,
+                    item_is_github,
+                    item_github_url,
+                    item_post_related,
+                    item_is_deleted
+                        FROM items 
+                        WHERE item_id = :item_id AND item_is_deleted = 0";
 
 
-        return DB::run($sql, ['link_id' => $link_id])->fetch(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['item_id' => $item_id])->fetch(PDO::FETCH_ASSOC);
     }
 
     // Темы по ссылке
-    public static function getLinkTopic($link_id)
+    public static function getItemTopic($item_id)
     {
         $sql = "SELECT
                     facet_id as value,
@@ -306,11 +322,11 @@ class WebModel extends MainModel
                     facet_slug,
                     facet_is_web,
                     relation_facet_id,
-                    relation_link_id
+                    relation_item_id
                         FROM facets  
-                        INNER JOIN facets_links_relation ON relation_facet_id = facet_id
-                            WHERE relation_link_id  = :link_id";
+                        INNER JOIN facets_items_relation ON relation_facet_id = facet_id
+                            WHERE relation_item_id  = :item_id";
 
-        return DB::run($sql, ['link_id' => $link_id])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['item_id' => $item_id])->fetchAll(PDO::FETCH_ASSOC);
     }
 }

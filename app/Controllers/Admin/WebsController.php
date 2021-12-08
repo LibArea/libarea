@@ -22,12 +22,12 @@ class WebsController extends MainController
         $page   = $page == 0 ? 1 : $page;
 
         $limit      = 25;
-        $pagesCount = WebModel::getLinksAllCount();
-        $domains    = WebModel::getLinksAll($page, $limit, $this->uid['user_id']);
+        $pagesCount = WebModel::getItemsAllCount();
+        $domains    = WebModel::getItemsAll($page, $limit, $this->uid['user_id']);
 
         $result = [];
         foreach ($domains as $ind => $row) {
-            $row['link_content']    = Content::text($row['link_content'], 'line');
+            $row['item_content']    = Content::text($row['item_content'], 'line');
             $result[$ind]           = $row;
         }
 
@@ -50,15 +50,15 @@ class WebsController extends MainController
 
     public function favicon()
     {
-        $link_id    = Request::getPostInt('id');
-        $link       = WebModel::getLinkId($link_id);
-        pageError404($link);
+        $item_id    = Request::getPostInt('id');
+        $item       = WebModel::getItemId($item_id);
+        pageError404($item);
 
-        $puth = HLEB_PUBLIC_DIR . AG_PATH_FAVICONS . $link["link_id"] . '.png';
+        $puth = HLEB_PUBLIC_DIR . AG_PATH_FAVICONS . $item["item_id"] . '.png';
         $dirF = HLEB_PUBLIC_DIR . AG_PATH_FAVICONS;
 
         if (!file_exists($puth)) {
-            $urls = self::getFavicon($link['link_url_domain']);
+            $urls = self::getFavicon($item['item_url_domain']);
             copy($urls, $puth);
         }
 

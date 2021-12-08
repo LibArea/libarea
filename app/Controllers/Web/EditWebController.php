@@ -4,7 +4,7 @@ namespace App\Controllers\Web;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\{WebModel, FacetModel};
+use App\Models\{WebModel, FacetModel, PostModel};
 use Base, Validation, Translate;
 
 class EditWebController extends MainController
@@ -25,21 +25,27 @@ class EditWebController extends MainController
         }
 
         $domain_id  = Request::getInt('id');
-        $domain     = WebModel::getLinkId($domain_id);
+        $domain     = WebModel::getItemId($domain_id);
 
         Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
         Request::getResources()->addBottomScript('/assets/js/tag/tagify.min.js');
         Request::getResources()->addBottomScript('/assets/js/admin.js');
  
+        $item_post_related = [];
+        if ($domain['item_post_related']) {
+            $item_post_related = PostModel::postRelated($domain['item_post_related']);
+        }
+
         return view(
-            '/web/edit',
+            '/item/edit',
             [
-                'meta'  => meta($m = [], Translate::get('change the site') . ' | ' . $domain['link_url_domain']),
+                'meta'  => meta($m = [], Translate::get('change the site') . ' | ' . $domain['item_url_domain']),
                 'uid'   => $this->uid,
                 'data'  => [
                     'domain'    => $domain,
                     'sheet'     => 'domains',
-                    'topic_arr' => WebModel::getLinkTopic($domain['link_id']),
+                    'topic_arr' => WebModel::getItemTopic($domain['item_id']),
+                    'post_arr'  => $item_post_related,
                 ]
             ]
         );
@@ -53,32 +59,54 @@ class EditWebController extends MainController
         }
 
         $redirect   = getUrlByName('web');
-        $link_id    = Request::getPostInt('link_id');
-        if (!$link  = WebModel::getLinkId($link_id)) {
+        $item_id    = Request::getPostInt('item_id');
+        if (!$item  = WebModel::getItemId($item_id)) {
             redirect($redirect);
         }
 
-        $link_url       = Request::getPost('link_url');
-        $link_title     = Request::getPost('link_title'); 
-        $link_content   = Request::getPost('link_content');
-        $link_published = Request::getPostInt('link_published');
-        $link_status    = Request::getPostInt('link_status');
+        $item_url           = Request::getPost('item_url');
+        $item_title_url     = Request::getPost('item_title_url'); 
+        $item_content_url   = Request::getPost('item_content_url');
+        $item_title_soft    = Request::getPost('item_title_soft'); 
+        $item_content_soft  = Request::getPost('item_content_soft');
+        $item_published     = Request::getPostInt('item_published');
+        $item_status_url    = Request::getPostInt('item_status_url');
+        $item_is_soft       = Request::getPostInt('item_is_soft');
+        $item_is_github     = Request::getPostInt('item_is_github');
+        $item_github_url    = Request::getPost('item_github_url');
         
-        Validation::Limits($link_title, Translate::get('title'), '14', '250', $redirect);
-        Validation::Limits($link_content, Translate::get('description'), '24', '1500', $redirect);
+        Validation::Limits($item_title_url, Translate::get('title'), '14', '250', $redirect);
+        Validation::Limits($item_content_url, Translate::get('description'), '24', '1500', $redirect);
+
+        // Связанные посты
+        $post_fields    = Request::getPost() ?? [];
+        $json_post  = $post_fields['post_select'] ?? [];
+        $arr_post   = json_decode($json_post[0], true);
+        if ($arr_post) {  
+            foreach ($arr_post as $value) {
+               $id[]   = $value['id'];
+            }
+        }
+        $post_related = implode(',', $id ?? []);
 
         $data = [
-            'link_id'           => $link['link_id'],
-            'link_url'          => $link_url,
-            'link_title'        => $link_title,
-            'link_content'      => $link_content,
-            'link_published'    => $link_published,
-            'link_user_id'      => $this->uid['user_id'],
-            'link_type'         => 0,
-            'link_status'       => $link_status,
+            'item_id'           => $item['item_id'],
+            'item_url'          => $item_url,
+            'item_title_url'    => $item_title_url,
+            'item_content_url'  => $item_content_url,
+            'item_title_soft'   => $item_title_soft ?? '',
+            'item_content_soft' => $item_content_soft ?? '',
+            'item_published'    => $item_published,
+            'item_user_id'      => $this->uid['user_id'],
+            'item_type_url'     => 0,
+            'item_status_url'   => $item_status_url,
+            'item_is_soft'      => $item_is_soft,
+            'item_is_github'    => $item_is_github,
+            'item_post_related' => $post_related,
+            'item_github_url'   => $item_github_url ?? '',
         ];
 
-        WebModel::editLink($data);
+        WebModel::edit($data);
 
         // Фасеты для сайте
         $post_fields    = Request::getPost() ?? [];
@@ -90,7 +118,7 @@ class EditWebController extends MainController
             foreach ($topics as $ket => $row) {
                $arr[] = $row;
             }
-            FacetModel::addLinkFacets($arr, $link['link_id']);
+            FacetModel::addItemFacets($arr, $item['item_id']);
         }
 
         redirect($redirect);

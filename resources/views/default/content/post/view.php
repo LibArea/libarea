@@ -39,7 +39,7 @@
             </span>
           <?php } ?>
           <?php if ($post['post_merged_id'] > 0) { ?>
-            <i class="link-link-ext blue"></i>
+            <i class="bi bi-bezier2 blue"></i>
           <?php } ?>
         </h1>
         <div class="size-14 lowercase flex gray-light-2">
@@ -112,7 +112,7 @@
             </div>
           </div>
         <?php } ?>
-        <?= includeTemplate('/_block/related-posts', ['related_posts' => $data['related_posts']]); ?>
+        <?= includeTemplate('/_block/related-posts', ['related_posts' => $data['related_posts'], 'number' => 'yes']); ?>
 
         <div class="flex flex-row items-center mb20">
           <?php if (!empty($data['blog'])) { ?>

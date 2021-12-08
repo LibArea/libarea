@@ -33,6 +33,11 @@ class EditPostController extends MainController
         Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
         Request::getResources()->addBottomScript('/assets/js/tag/tagify.min.js');
 
+        $post_related = [];
+        if ($post['post_related']) {
+            $post_related = PostModel::postRelated($post['post_related']);
+        }
+
         return view(
             '/post/edit',
             [
@@ -42,7 +47,7 @@ class EditPostController extends MainController
                     'sheet'         => 'edit-post',
                     'post'          => $post,
                     'user'          => UserModel::getUser($post['post_user_id'], 'id'),
-                    'post_arr'      => PostModel::postRelated($post['post_related']),
+                    'post_arr'      => $post_related,
                     'topic_arr'     => PostModel::getPostFacet($post['post_id'], 'topic'),
                     'blog_arr'      => PostModel::getPostFacet($post['post_id'], 'blog'),
                 ]

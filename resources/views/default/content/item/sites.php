@@ -26,7 +26,7 @@
       <?php } ?>
     </h1>
   </div>
-  
+
  <div class="mb20 pt10 pr15 pb10 pl15 bg-green-200">
     <?php if ($data['low_topics']) { ?>
       <div class="grid grid-cols-3 gap-2 justify-between mb10">
@@ -93,36 +93,42 @@
     </ul>
   </div>
   <div class="pt5 mr15 pb5 ml15">
-    <?php if (!empty($data['links'])) { ?>
-      <?php foreach ($data['links'] as $key => $link) { ?>
+    <?php if (!empty($data['items'])) { ?>
+      <?php foreach ($data['items'] as $key => $item) { ?>
         <div class="pt20 pb5 flex flex-row gap-2">
           <div class="mr20 w200 no-mob">
-            <?= thumbs_img($link['link_url_domain'], $link['link_title'], 'mr5 w200 box-shadow'); ?>
+            <?= thumbs_img($item['item_url_domain'], $item['item_title_url'], 'mr5 w200 box-shadow'); ?>
           </div>
           <div class="mr20 flex-auto">
-            <a class="dark-white" href="<?= getUrlByName('web.website', ['slug' => $link['link_url_domain']]); ?>">
+            <a class="dark-white" href="<?= getUrlByName('web.website', ['slug' => $item['item_url_domain']]); ?>">
               <h2 class="font-normal underline-hover size-21 mt0 mb0">
-                <?= $link['link_title']; ?>
+                <?= $item['item_title_url']; ?>
                 <?php if ($uid['user_trust_level'] == 5) { ?>
-                  <a class="ml15" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('web.edit', ['id' => $link['link_id']]); ?>">
+                  <a class="ml15" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('web.edit', ['id' => $item['item_id']]); ?>">
                     <i class="bi bi-pencil size-15"></i>
                   </a>
                 <?php } ?>
               </h2>
             </a>
             <div class="size-15 mt5 mb15 max-w780">
-              <?= $link['link_content']; ?>
+              <?= $item['item_content_url']; ?>
             </div>
             <div class="flex flex-row gap-2 items-center max-w780">
-              <?= favicon_img($link['link_id'], $link['link_url_domain']); ?>
-              <div class="green size-14 mr20">
-                <?= $link['link_url_domain']; ?>
-                <div class="pt5 lowercase">
-                  <?= html_topic($link['facet_list'], 'web.topic', 'gray-light mr15'); ?>
-                </div>
+              <?= favicon_img($item['item_id'], $item['item_url_domain']); ?>
+              <div class="green size-140 size-14"> 
+                <?php if ($item['item_github_url']) { ?>
+                  <a class="block gray-light" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_github_url']; ?>">
+                     <i class="bi bi-github size-13 mr5"></i>
+                     <?= $item['item_title_soft']; ?>   <?= Translate::get('on'); ?> GitHub
+                  </a>
+                <?php } ?>
+                <?= $item['item_url_domain']; ?>
+                <div class="lowercase">
+                  <?= html_topic($item['facet_list'], 'web.topic', 'gray-light mr15'); ?>
+                 </div>
               </div>
               <div class="hidden lowercase ml-auto pr10">
-                <?= votes($uid['user_id'], $link, 'link', 'mr5'); ?>
+                <?= votes($uid['user_id'], $item, 'item', 'mr5'); ?>
               </div>
             </div>
           </div>

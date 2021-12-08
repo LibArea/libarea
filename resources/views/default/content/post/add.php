@@ -28,7 +28,6 @@
         ],
       ]); ?>
 
-
       <?php if (!empty($data['user_blog'])) { ?>
         <?= includeTemplate('/_block/form/select/blog', [
           'uid'         => $uid,
@@ -52,7 +51,7 @@
       <?php if ($uid['user_trust_level'] >= Config::get('trust-levels.tl_add_url')) { ?>
         <div class="flex flex-row items-center justify-between mb20 max-w640">
           <div class="flex-auto mr15">
-            <input id="link" placeholder="URL" class="w-100 h30" type="text" name="post_url" />
+            <input id="link" placeholder="URL" class="post_url w-100 h30" type="text" name="post_url" />
           </div>
           <input id="graburl" readonly="readonly" class="blog center pt5 pr15 pb5 pl15 br-rd5" name="submit_url" value="<?= Translate::get('to extract'); ?>" />
         </div>

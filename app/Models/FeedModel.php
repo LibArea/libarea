@@ -18,8 +18,8 @@ class FeedModel extends MainModel
                 $qa         = $data['facet_slug'];
                 $string     = "WHERE facet_list LIKE :qa AND post_is_recommend = 1";
             }
-        } elseif ($type == 'link') {
-            $selection  = $data['link_url_domain'];
+        } elseif ($type == 'item') {
+            $selection  = $data['item_url_domain'];
             $string     = "WHERE post_url_domain  = :selection AND post_draft = 0";
         } else {
             $selection  = $data['post_user_id'];
@@ -119,8 +119,8 @@ class FeedModel extends MainModel
                 $qa         = $data['facet_slug'];
                 $string     = "WHERE facet_slug = :qa AND post_is_recommend = 1";
             }
-        } elseif ($type == 'link') {
-            $selection   = $data['link_url_domain'];
+        } elseif ($type == 'item') {
+            $selection   = $data['item_url_domain'];
             $string     = "WHERE post_url_domain  = :selection";
         } else {
             $selection   = $data['post_user_id'];

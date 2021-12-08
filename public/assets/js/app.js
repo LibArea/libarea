@@ -171,6 +171,7 @@ document.querySelectorAll(".type-action")
 document.querySelectorAll("#graburl")
   .forEach(el => el.addEventListener("click", function (e) {
     let uri = document.getElementById('link').value;
+    console.log(uri);
     if (uri === '') {
       return;
     }
@@ -189,8 +190,8 @@ document.querySelectorAll("#graburl")
         }
         return response.json();
       }).then(function (data) {
-        document.getElementById('title').value = data.title
-        document.getElementById('ag-redactor') = data.description
+        document.querySelector('input[name=post_title]').value = data.title
+        document.querySelector('.editorSection') = data.description
       }).catch(function (error) {
         // error
       })

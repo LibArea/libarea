@@ -13,7 +13,7 @@
       <form method="post" action="<?= getUrlByName('invit.create'); ?>">
         <?php csrf_field(); ?>
         <div class="mb20">
-          <input id="link" class="w-100 h30" type="email" name="email">
+          <input class="w-100 h30" type="email" name="email">
           <div class="right pt5"><?= sumbit(Translate::get('send')); ?></div>
           <div class="size-14 pt5 gray-light-2"><?= Translate::get('enter'); ?> E-mail</div>
         </div>

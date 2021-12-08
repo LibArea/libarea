@@ -102,7 +102,8 @@
 <?= includeTemplate('/_block/wide-footer'); ?>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
-  $(document).on("click", ".focus-user", function() {
+  document.querySelectorAll(".focus-user")
+  .forEach(el => el.addEventListener("click", function (e) {    
     fetch('/topic/<?= $topic['facet_slug']; ?>/followers/<?= $topic['facet_id']; ?>').
     then(response => response.text()).
     then(function(data) {
@@ -112,5 +113,5 @@
         html: data
       });
     });
-  });
+  }));
 </script>

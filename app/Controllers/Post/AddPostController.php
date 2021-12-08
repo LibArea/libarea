@@ -115,25 +115,25 @@ class AddPostController extends MainController
             $og_img             = self::grabOgImg($post_url);
             $parse              = parse_url($post_url);
             $post_url_domain    = $parse['host'];
-            $link_url           = $parse['scheme'] . '://' . $parse['host'];
+            $item_url           = $parse['scheme'] . '://' . $parse['host'];
 
             // Если домена нет, то добавим его
-            $link = WebModel::getLinkOne($post_url_domain, $this->uid['user_id']);
-            if (!$link) {
+            $item = WebModel::getItemOne($post_url_domain, $this->uid['user_id']);
+            if (!$item) {
                 // Запишем минимальные данный
                 $data = [
-                    'link_url'          => $link_url,
-                    'link_url_domain'   => $post_url_domain,
-                    'link_title'        => $post_title,
-                    'link_content'      => Translate::get('description is formed'),
-                    'link_published'    => 0,
-                    'link_user_id'      => $this->uid['user_id'],
-                    'link_type'         => 0,
-                    'link_status'       => 200,
+                    'item_url'          => $item_url,
+                    'item_url_domain'   => $post_url_domain,
+                    'item_title_url'    => $post_title,
+                    'item_content_url'  => Translate::get('description is formed'),
+                    'item_published'    => 0,
+                    'item_user_id'      => $this->uid['user_id'],
+                    'item_type_url'     => 0,
+                    'item_status_url'   => 200,
                 ];
                 WebModel::add($data);
             } else {
-                WebModel::addLinkCount($post_url_domain);
+                WebModel::addItemCount($post_url_domain);
             }
         }
 
@@ -238,6 +238,7 @@ class AddPostController extends MainController
     {
         $url    = Request::getPost('uri');
         $meta   = new URLScraper($url);
+        
         $meta->parse();
         $metaData = $meta->finalize();
 

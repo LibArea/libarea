@@ -11,7 +11,7 @@ class VotesModel extends MainModel
     // Информация по контенту
     public static function authorId($content_id, $type)
     {
-        // $type = post / comment / answer / link
+        // $type = post / comment / answer / item
         $sql = "SELECT " . $type . "_id, " . $type . "_user_id FROM " . $type . "s WHERE " . $type . "_id = :content_id";
 
         $result = DB::run($sql, ['content_id' => $content_id])->fetch(PDO::FETCH_ASSOC);

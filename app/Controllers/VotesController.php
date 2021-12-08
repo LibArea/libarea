@@ -17,7 +17,7 @@ class VotesController extends MainController
         $up_id  = Request::getPostInt('up_id');
         $type   = Request::get('type');
 
-        $allowed = ['post', 'comment', 'answer', 'link'];
+        $allowed = ['post', 'comment', 'answer', 'item'];
         if (!in_array($type, $allowed)) {
             return false;
         }
@@ -26,7 +26,7 @@ class VotesController extends MainController
             return false;
         }
         // Получаем id автора контента и проверяем, чтобы участник не голосовал за свой контент
-        // $type = post / answer / comment / link
+        // $type = post / answer / comment / item
         $author_id = VotesModel::authorId($up_id, $type);
         if ($user_id == $author_id) {
             return false;
