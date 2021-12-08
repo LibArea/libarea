@@ -26,7 +26,7 @@
   </div>
   <div class="pt5 mr15 pb5 ml15">
     <?php if (!empty($data['items'])) { ?>
-      <?php foreach ($data['items'] as $key => $item) { ?> 
+      <?php foreach ($data['items'] as $key => $item) { ?>
         <?php if ($item['item_published'] == 1) { ?>
           <div class="pt20 pb5 flex flex-row gap-2">
             <div class="mr20 w200 no-mob">
@@ -49,15 +49,15 @@
               <div class="flex flex-row gap-2 items-center max-w780">
                 <?= favicon_img($item['item_id'], $item['item_url_domain']); ?>
                 <div class="green size-14">
-                    <?php if ($item['item_github_url']) { ?>
-                        <a class="block gray-light" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_github_url']; ?>">
-                           <i class="bi bi-github size-13 mr5"></i>
-                           <?= $item['item_title_soft']; ?>   на GitHub
-                        </a>
-                    <?php } ?>
+                  <?php if ($item['item_github_url']) { ?>
+                    <a class="block gray-light" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_github_url']; ?>">
+                      <i class="bi bi-github size-13 mr5"></i>
+                      <?= $item['item_title_soft']; ?> на GitHub
+                    </a>
+                  <?php } ?>
                   <?= $item['item_url_domain']; ?>
                   <div class="lowercase">
-                     <?= html_topic($item['facet_list'], 'web.topic', 'gray-light mr15'); ?>
+                    <?= html_topic($item['facet_list'], 'web.topic', 'gray-light mr15'); ?>
                   </div>
                 </div>
                 <div class="hidden lowercase ml-auto">

@@ -6,24 +6,24 @@
 <script src="/assets/js/editor/i18n/<?= $lang; ?>.js" charset="utf-8"></script>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
-  document.addEventListener('DOMContentLoaded', function() { 
+  document.addEventListener('DOMContentLoaded', function() {
 
     toastui.Editor.setLanguage(['<?= $lang; ?>'], LANG);
 
-    let dark        = document.querySelector('.bg-gray-100.dark');
-    let viewerEl    = document.querySelector('.editorSection');
-    let body        = viewerEl.innerHTML;
-    
+    let dark = document.querySelector('.bg-gray-100.dark');
+    let viewerEl = document.querySelector('.editorSection');
+    let body = viewerEl.innerHTML;
+
     if (viewerEl == null) {
       return;
     }
 
-    let previewStyle    = '<?= $preview; ?>';
-    let height          = '<?= $height; ?>';
+    let previewStyle = '<?= $preview; ?>';
+    let height = '<?= $height; ?>';
     if (window.innerWidth < 721) {
-       previewStyle = 'tab';
-       height       = '200px';
-	}
+      previewStyle = 'tab';
+      height = '200px';
+    }
 
     const editor = new toastui.Editor({
       el: viewerEl,
@@ -31,7 +31,7 @@
       height: height,
       initialEditType: '<?= Config::get('editor.initialEditType'); ?>', // wysiwyg | markdown
       previewStyle: previewStyle,
-      hideModeSwitch: '<?= Config::get('editor.hideModeSwitch'); ?>',   // true | false
+      hideModeSwitch: '<?= Config::get('editor.hideModeSwitch'); ?>', // true | false
       initialValue: body,
       theme: '<?= Request::getCookie('dayNight'); ?>',
       language: '<?= $lang; ?>',

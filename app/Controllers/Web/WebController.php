@@ -61,7 +61,7 @@ class WebController extends MainController
         $item       = WebModel::getItemOne($domain, $uid['user_id']);
         pageError404($item);
 
-        $item['item_content'] = Content::text($item['item_content'], 'line');
+        $item['item_content'] = Content::text($item['item_content_url'], 'line');
 
         $limit      = 25;
         $data       = ['item_url_domain' => $item['item_url_domain']];
@@ -84,7 +84,7 @@ class WebController extends MainController
         ];
 
         return view(
-            '/item/item',
+            '/item/link',
             [
                 'meta'  => meta($m, Translate::get('domain') . ': ' . $domain, Translate::get('domain-desc') . ': ' . $domain),
                 'uid'   => $uid,

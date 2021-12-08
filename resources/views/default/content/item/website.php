@@ -48,17 +48,17 @@
       </div>
     </div>
     <?php if ($data['item']['item_is_soft'] == 1) { ?>
-       <h2 class="mb5 mb-mt-5 font-normal"><?= Translate::get('soft'); ?></h2> 
-       <h3 class="mt5 mb10 font-normal"><?= $data['item']['item_title_soft']; ?></h3> 
-       <div class="gray-light">
-         <?= $data['item']['item_content_soft']; ?>
-       </div>
-       <div class="mb5">
-         <i class="bi bi-github mr5"></i>
-         <a target="_blank" rel="nofollow noreferrer ugc" href="<?= $data['item']['item_github_url']; ?>">
-           <?= $data['item']['item_github_url']; ?>
-         </a>    
-        </div>
+      <h2 class="mb5 mb-mt-5 font-normal"><?= Translate::get('soft'); ?></h2>
+      <h3 class="mt5 mb10 font-normal"><?= $data['item']['item_title_soft']; ?></h3>
+      <div class="gray-light">
+        <?= $data['item']['item_content_soft']; ?>
+      </div>
+      <div class="mb5">
+        <i class="bi bi-github mr5"></i>
+        <a target="_blank" rel="nofollow noreferrer ugc" href="<?= $data['item']['item_github_url']; ?>">
+          <?= $data['item']['item_github_url']; ?>
+        </a>
+      </div>
     <?php } ?>
   </div>
 </main>
@@ -80,6 +80,6 @@
   <?php if ($data['related_posts']) { ?>
     <div class="bg-white br-rd5 br-box-gray pt15 pl15 size-14">
       <?= includeTemplate('/_block/related-posts', ['related_posts' => $data['related_posts'], 'number' => 'no']); ?>
-    </div>  
+    </div>
   <?php } ?>
 </aside>

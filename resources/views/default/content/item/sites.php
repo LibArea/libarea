@@ -7,12 +7,12 @@
     <?php } ?>
     <a class="gray" href="<?= getUrlByName('web'); ?>" class="size-14 gray-light-2"><?= Translate::get('sites'); ?></a>
 
-    <?php if (!empty($data['high_topics'][0])) { 
-          $site = $data['high_topics'][0];   ?>
-            <span class="gray mr5 ml5">/</span>
-            <a class="" href="<?= getUrlByName('web.topic', ['slug' => $site['facet_slug']]); ?>" title="<?= $site['facet_title']; ?>">
-            <?= $site['facet_title']; ?>
-        </a>
+    <?php if (!empty($data['high_topics'][0])) {
+      $site = $data['high_topics'][0];   ?>
+      <span class="gray mr5 ml5">/</span>
+      <a class="" href="<?= getUrlByName('web.topic', ['slug' => $site['facet_slug']]); ?>" title="<?= $site['facet_title']; ?>">
+        <?= $site['facet_title']; ?>
+      </a>
     <?php } ?>
     <h1 class="mt0 mb5 size-24 font-normal">
       <?= $data['topic']['facet_title']; ?>
@@ -27,20 +27,20 @@
     </h1>
   </div>
 
- <div class="mb20 pt10 pr15 pb10 pl15 bg-green-200">
+  <div class="mb20 pt10 pr15 pb10 pl15 bg-green-200">
     <?php if ($data['low_topics']) { ?>
       <div class="grid grid-cols-3 gap-2 justify-between mb10">
         <?php foreach ($data['low_topics'] as $lt) { ?>
           <?php if ($lt['facet_is_web'] == 1) { ?>
             <div>
-            <a class="pt5 pr10 dark-white underline-hover mb-col-2 mb-size-18 size-21 inline" href="<?= getUrlByName('web.topic', ['slug' => $lt['facet_slug']]); ?>">
-              <?= $lt['facet_title']; ?>
-            </a>
-            <?php if ($uid['user_trust_level'] == 5) { ?>
-              <a class="size-14" href="<?= getUrlByName('topic.edit', ['id' => $lt['value']]); ?>">
-                <sup><i class="bi bi-pencil gray"></i></sup>
+              <a class="pt5 pr10 dark-white underline-hover mb-col-2 mb-size-18 size-21 inline" href="<?= getUrlByName('web.topic', ['slug' => $lt['facet_slug']]); ?>">
+                <?= $lt['facet_title']; ?>
               </a>
-            <?php } ?>
+              <?php if ($uid['user_trust_level'] == 5) { ?>
+                <a class="size-14" href="<?= getUrlByName('topic.edit', ['id' => $lt['value']]); ?>">
+                  <sup><i class="bi bi-pencil gray"></i></sup>
+                </a>
+              <?php } ?>
             </div>
           <?php } ?>
         <?php } ?>
@@ -52,14 +52,14 @@
         <?php foreach ($data['low_matching'] as $rl) { ?>
           <?php if ($rl['facet_is_web'] == 1) { ?>
             <div class="inline mr20">
-            <a class="underline-hover" href="<?= getUrlByName('web.topic', ['slug' => $rl['facet_slug']]); ?>">
-              <?= $rl['facet_title']; ?>
-            </a> 
-            <?php if ($uid['user_trust_level'] == 5) { ?>
-              <a class="size-14 ml5" href="<?= getUrlByName('topic.edit', ['id' => $rl['value']]); ?>">
-                <sup><i class="bi bi-pencil gray"></i></sup>
+              <a class="underline-hover" href="<?= getUrlByName('web.topic', ['slug' => $rl['facet_slug']]); ?>">
+                <?= $rl['facet_title']; ?>
               </a>
-            <?php } ?>
+              <?php if ($uid['user_trust_level'] == 5) { ?>
+                <a class="size-14 ml5" href="<?= getUrlByName('topic.edit', ['id' => $rl['value']]); ?>">
+                  <sup><i class="bi bi-pencil gray"></i></sup>
+                </a>
+              <?php } ?>
             </div>
           <?php } ?>
         <?php } ?>
@@ -115,17 +115,17 @@
             </div>
             <div class="flex flex-row gap-2 items-center max-w780">
               <?= favicon_img($item['item_id'], $item['item_url_domain']); ?>
-              <div class="green size-140 size-14"> 
+              <div class="green size-140 size-14">
                 <?php if ($item['item_github_url']) { ?>
                   <a class="block gray-light" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_github_url']; ?>">
-                     <i class="bi bi-github size-13 mr5"></i>
-                     <?= $item['item_title_soft']; ?>   <?= Translate::get('on'); ?> GitHub
+                    <i class="bi bi-github size-13 mr5"></i>
+                    <?= $item['item_title_soft']; ?> <?= Translate::get('on'); ?> GitHub
                   </a>
                 <?php } ?>
                 <?= $item['item_url_domain']; ?>
                 <div class="lowercase">
                   <?= html_topic($item['facet_list'], 'web.topic', 'gray-light mr15'); ?>
-                 </div>
+                </div>
               </div>
               <div class="hidden lowercase ml-auto pr10">
                 <?= votes($uid['user_id'], $item, 'item', 'mr5'); ?>

@@ -62,7 +62,7 @@ class WebModel extends MainModel
         $sql = "SELECT
                     item_id,
                     item_title_url,
-                    item_content,
+                    item_content_url,
                     item_published,
                     item_user_id,
                     item_url,
