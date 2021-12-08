@@ -43,6 +43,7 @@ class MainConnector implements Connector
             "URLScraper"                    => "app/ThirdParty/URLScraper.php",
             "JacksonJeans\MailException"    => "app/ThirdParty/php-mail/MailException.class.php",
             "JacksonJeans\Mail"             => "app/ThirdParty/php-mail/Mail.class.php",
+            "Domains"                       => "app/ThirdParty/Domains/Domains.php",
         ];
     }
 }

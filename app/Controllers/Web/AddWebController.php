@@ -5,7 +5,7 @@ namespace App\Controllers\Web;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{WebModel, FacetModel};
-use Base, Validation, Translate;
+use Base, Validation, Translate, Domains;
 
 class AddWebController extends MainController
 {
@@ -51,7 +51,9 @@ class AddWebController extends MainController
         $item_content_url   = Request::getPost('item_content_url');
 
         $parse              = parse_url($item_url);
-        $item_url_domain    = $parse['host'];
+        $url_domain         = $parse['host'];
+        $domain             = new Domains($url_domain);
+        $item_url_domain    = $domain->getRegisterable();
         $item_url           = $parse['scheme'] . '://' . $parse['host'];
 
         $redirect = getUrlByName('web');

@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\User\UserModel;
 use App\Models\{NotificationsModel, SubscriptionModel, ActionModel, WebModel, PostModel, FacetModel};
-use Content, Base, UploadImage, Integration, Validation, SendEmail, Slug, URLScraper, Config, Translate;
+use Content, Base, UploadImage, Integration, Validation, SendEmail, Slug, URLScraper, Config, Translate, Domains;
 
 class AddPostController extends MainController
 {
@@ -112,13 +112,12 @@ class AddPostController extends MainController
 
         if ($post_url) {
             
-            // TODO: Мы не можем полагаться на parse_url(), пример адреса ниже:
-            // $post_url = 'https://games.mail.ru/pc/news/2021-12-08/inzhener-vossozdal-glados-v-kachestve-sobstvennogo-golosovogo-assistenta/?from=informer';
-
-            // Поскольку это для поста, то получим превью 
+            // Поскольку это для поста, то получим превью и разбор домена...
             $og_img             = self::grabOgImg($post_url);
             $parse              = parse_url($post_url);
-            $post_url_domain    = $parse['host'];
+            $url_domain         = $parse['host'];
+            $domain             = new Domains($url_domain);
+            $post_url_domain    = $domain->getRegisterable();
             $item_url           = $parse['scheme'] . '://' . $parse['host'];
 
             // Если домена нет, то добавим его
