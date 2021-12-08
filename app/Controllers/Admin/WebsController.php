@@ -27,7 +27,7 @@ class WebsController extends MainController
 
         $result = [];
         foreach ($domains as $ind => $row) {
-            $row['item_content']    = Content::text($row['item_content'], 'line');
+            $row['item_content']    = Content::text($row['item_content_url'], 'line');
             $result[$ind]           = $row;
         }
 

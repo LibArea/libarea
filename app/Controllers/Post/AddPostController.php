@@ -111,6 +111,10 @@ class AddPostController extends MainController
         Validation::Limits($post_content, Translate::get('the post'), '6', '25000', $redirect);
 
         if ($post_url) {
+            
+            // TODO: Мы не можем полагаться на parse_url(), пример адреса ниже:
+            // $post_url = 'https://games.mail.ru/pc/news/2021-12-08/inzhener-vossozdal-glados-v-kachestve-sobstvennogo-golosovogo-assistenta/?from=informer';
+
             // Поскольку это для поста, то получим превью 
             $og_img             = self::grabOgImg($post_url);
             $parse              = parse_url($post_url);

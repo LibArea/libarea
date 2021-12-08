@@ -214,9 +214,12 @@ class WebModel extends MainModel
             'item_user_id'      => $data['item_user_id'],
             'item_type_url'     => $data['item_type_url'],
             'item_status_url'   => $data['item_status_url'],
+            'item_is_soft'      => 0,
+            'item_is_github'    => 0,
+            'item_votes'        => 0,
             'item_count'        => 1,
         ];
-
+        
         $sql = "INSERT INTO items(item_url, 
                             item_url_domain, 
                             item_title_url, 
@@ -225,6 +228,9 @@ class WebModel extends MainModel
                             item_user_id, 
                             item_type_url, 
                             item_status_url, 
+                            item_is_soft,
+                            item_is_github,
+                            item_votes,
                             item_count) 
                             
                        VALUES(:item_url, 
@@ -235,6 +241,9 @@ class WebModel extends MainModel
                        :item_user_id, 
                        :item_type_url, 
                        :item_status_url, 
+                       :item_is_soft,
+                       :item_is_github,
+                       :item_votes,
                        :item_count)";
 
         DB::run($sql, $params);

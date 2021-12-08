@@ -45,7 +45,7 @@
 
       <?= includeTemplate('/_block/form/select/select', [
         'uid'           => $uid,
-        'data'          => [],
+        'data'          => ['topic' => false],
         'type'          => 'topic',
         'action'        => 'add',
         'title'         => Translate::get('facets'),
