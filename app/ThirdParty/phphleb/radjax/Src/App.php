@@ -95,7 +95,6 @@ class App
                         \Hleb\Constructor\Handlers\Request::add($key, $value);
                     }
                 }
-                \Hleb\Constructor\Handlers\Request::close();
             }
 
             if (count($data["before"])) {
