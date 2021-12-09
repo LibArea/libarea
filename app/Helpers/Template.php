@@ -392,7 +392,7 @@ function no_content($text, $icon)
 
 function sumbit($text)
 {
-    $html  = '<button type="submit" class="bg-blue-800 br-box-blue bg-hover-light-blue pt5 pr15 pb5 pl15 br-rd5 white">'. $text .'</button>';  
+    $html  = '<button type="submit" class="btn btn-primary">'. $text .'</button>';  
     
     return $html;
 }

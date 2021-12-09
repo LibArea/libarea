@@ -14,7 +14,7 @@
     <div class="mb20">
       <h1 class="size-31 font-semibold gray mb0">404</h1>
       <p class="gray-light"><?= Translate::get('the page does not exist'); ?></p>
-      <a class="bg-blue-800 br-box-blue bg-hover-light-blue pt5 pr15 pb5 pl15 br-rd5 white white-hover" href="/">
+      <a class="btn btn-primary" href="/">
         <?= Translate::get('to main'); ?>
       </a>
       <div class="mt15 size-14 gray-light-2">
