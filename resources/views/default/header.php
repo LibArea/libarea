@@ -17,29 +17,15 @@
   <header class="bg-white br-bottom mt0 mb15 sticky top0 z-30">
     <div class="col-span-12 mr-auto max-width w-100 pr10 pl10 grid items-center flex justify-between">
       <div class="flex items-center">
-        <div class="lateral no-pc mr10 flex items-center">
+        <div class="lateral no-pc mr10 flex items-center size-15">
           <i class="bi bi-list gray-light-2 size-18"></i>
-          <nav class="ltr-menu box-shadow none min-w165 bg-white br-rd3 p5 absolute justify-between mt0 ml0 pl0 sticky size-15">
-            <a class="pt5 pr10 pb5 pl10 gray block bg-hover-light" href="<?= getUrlByName('topics.all'); ?>">
-              <i class="bi bi-columns-gap middle"></i>
-              <span class="ml5"><?= Translate::get('topics'); ?></span>
-            </a>
-            <a class="pt5 pr10 pb5 pl10 gray block bg-hover-light" href="<?= getUrlByName('blogs.all'); ?>">
-              <i class="bi bi-journal-text middle"></i>
-              <span class="ml5"><?= Translate::get('blogs'); ?></span>
-            </a>
-            <a class="pt5 pr10 pb5 pl10 gray block bg-hover-light" href="<?= getUrlByName('users'); ?>">
-              <i class="bi bi-people middle"></i>
-              <span class="ml5"><?= Translate::get('users'); ?></span>
-            </a>
-            <a class="pt5 pr10 pb5 pl10 gray block bg-hover-light" href="<?= getUrlByName('web'); ?>">
-              <i class="bi bi-link-45deg middle"></i>
-              <span class="ml5"><?= Translate::get('domains'); ?></span>
-            </a>
-            <a class="pt5 pr10 pb5 pl10 gray block bg-hover-light" href="<?= getUrlByName('search'); ?>">
-              <i class="bi bi-search middle"></i>
-              <span class="ml5"><?= Translate::get('search'); ?></span>
-            </a>
+          <nav class="ltr-menu box-shadow none min-w165 bg-white br-rd3 p5 absolute justify-between mt0 ml0 pl0 sticky">
+            <?php foreach (Config::get('menu-header-user-mobile') as $menu) { ?>
+              <a class="pt5 pr10 pb5 pl10 gray block bg-hover-light" href="<?= getUrlByName($menu['url']); ?>">
+                <i class="<?= $menu['icon']; ?> middle"></i>
+                <span class="ml5"><?= $menu['name']; ?></span>
+              </a>
+            <?php } ?>
           </nav>
         </div>
         <div class="mr20 flex items-center">
@@ -75,86 +61,38 @@
         <div class="col-span-4">
           <div class="flex right ml30 items-center">
 
-            <?php if (!empty($facet)) { ?>
-              <?php if ($facet['facet_type'] == 'topic') { ?>
-                <a title="<?= Translate::get('add post'); ?>" href="<?= getUrlByName('post.add'); ?>/<?= $facet['facet_id']; ?>" class="blue center p10">
-                  <i class="bi bi-plus-lg size-18"></i>
-                </a>
-              <?php } else { ?>
-                <?php if ($facet['facet_user_id'] == $uid['user_id']) { ?>
-                  <a title="<?= Translate::get('add post'); ?>" href="<?= getUrlByName('post.add'); ?>/<?= $facet['facet_id']; ?>" class="blue center p10">
-                    <i class="bi bi-plus-lg size-18"></i>
-                  </a>
-                <?php } ?>
-              <?php } ?>
-            <?php } else { ?>
-              <a title="<?= Translate::get('add post'); ?>" href="<?= getUrlByName('post.add'); ?>" class="blue center p10">
-                <i class="bi bi-plus-lg size-18"></i>
-              </a>
-            <?php } ?>
+            <?= add_post($facet, $uid['user_id']); ?>
 
             <div id="toggledark" class="only-icon p10 ml20 mb-ml-10">
               <i class="bi bi-brightness-high gray-light-2 size-18"></i>
             </div>
-            <?php if ($uid['user_id'] > 0) { ?>
-              <a class="gray-light-2 p10 ml20 mb-ml-10" href="<?= getUrlByName('user.notifications', ['login' => $uid['user_login']]); ?>">
-                <?php if ($uid['notif']) { ?>
-                  <?php if ($uid['notif']['notification_action_type'] == 1) { ?>
-                    <i class="bi bi-envelope size-18 red"></i>
-                  <?php } else { ?>
-                    <i class="bi bi-bell-fill size-18 red"></i>
-                  <?php } ?>
+
+            <a class="gray-light-2 p10 ml20 mb-ml-10" href="<?= getUrlByName('user.notifications', ['login' => $uid['user_login']]); ?>">
+              <?php if ($uid['notif']) { ?>
+                <?php if ($uid['notif']['notification_action_type'] == 1) { ?>
+                  <i class="bi bi-envelope size-18 red"></i>
                 <?php } else { ?>
-                  <i class="bi bi-bell mb-size-18 size-18"></i>
+                  <i class="bi bi-bell-fill size-18 red"></i>
                 <?php } ?>
-              </a>
-            <?php } ?>
+              <?php } else { ?>
+                <i class="bi bi-bell mb-size-18 size-18"></i>
+              <?php } ?>
+            </a>
+
             <div class="dropbtn relative p10 ml20 mb-ml-10">
               <a class="relative w-auto">
                 <?= user_avatar_img($uid['user_avatar'], 'small', $uid['user_login'], 'w34 br-rd-50'); ?>
               </a>
               <div class="dr-menu box-shadow none min-w165 right0 bg-white size-15 br-rd3 p5 absolute">
-                <a class="pt5 pr10 pb5 pl10 block gray bg-hover-light" href="<?= getUrlByName('user', ['login' => $uid['user_login']]); ?>">
-                  <i class="bi bi-person middle mr5"></i>
-                  <span class="middle size-14"><?= Translate::get('profile'); ?></span>
-                </a>
-                <a class="pt5 pr10 pb5 pl10 block gray bg-hover-light" href="<?= getUrlByName('setting', ['login' => $uid['user_login']]); ?>">
-                  <i class="bi bi-gear middle mr5"></i>
-                  <span class="middle size-14"><?= Translate::get('settings'); ?></span>
-                </a>
-                <a class="pt5 pr10 pb5 pl10 block gray bg-hover-light" href="<?= getUrlByName('user.drafts', ['login' => $uid['user_login']]); ?>">
-                  <i class="bi bi-pencil-square middle mr5"></i>
-                  <span class="middle size-14"><?= Translate::get('drafts'); ?></span>
-                </a>
-                <a class="pt5 pr10 pb5 pl10 block gray bg-hover-light" href="<?= getUrlByName('user.notifications', ['login' => $uid['user_login']]); ?>">
-                  <i class="bi bi-app-indicator middle mr5"></i>
-                  <span class="middle size-14"><?= Translate::get('notifications'); ?></span>
-                </a>
-                <a class="pt5 pr10 pb5 pl10 block gray bg-hover-light" href="<?= getUrlByName('user.messages', ['login' => $uid['user_login']]); ?>">
-                  <i class="bi bi-envelope middle mr5"></i>
-                  <span class="middle size-14"><?= Translate::get('messages'); ?></span>
-                </a>
-                <a class="pt5 pr10 pb5 pl10 block gray bg-hover-light" href="<?= getUrlByName('user.favorites', ['login' => $uid['user_login']]); ?>">
-                  <i class="bi bi-bookmark middle mr5"></i>
-                  <span class="middle size-14"><?= Translate::get('favorites'); ?></span>
-                </a>
-                <?php if ($uid['user_trust_level'] > 1) { ?>
-                  <a class="pt5 pr10 pb5 pl10 block gray bg-hover-light" href="<?= getUrlByName('user.invitations', ['login' => $uid['user_login']]); ?>">
-                    <i class="bi bi-person-plus middle mr5"></i>
-                    <span class="middle size-14"><?= Translate::get('invites'); ?></span>
-                  </a>
+                <?php foreach (Config::get('menu-header-user') as $menu) { ?>
+                  <?= $menu['hr'] ?? ''; ?>
+                  <?php if ($uid['user_trust_level'] >= $menu['tl']) { ?>
+                    <a class="pt5 pr10 pb5 pl10 block gray bg-hover-light" href="<?= getUrlByName($menu['url'], ['login' => $uid['user_login']]); ?>">
+                      <i class="<?= $menu['icon']; ?> middle mr5"></i>
+                      <span class="middle size-14"><?= $menu['name']; ?></span>
+                    </a>
+                  <?php } ?>
                 <?php } ?>
-                <?php if ($uid['user_trust_level'] == 5) { ?>
-                  <a class="pt5 pr10 pb5 pl10 block gray bg-hover-light" href="<?= getUrlByName('admin'); ?>" target="_black">
-                    <i class="bi bi-shield-exclamation middle mr5"></i>
-                    <span class="middle size-14"><?= Translate::get('admin'); ?></span>
-                  </a>
-                <?php } ?>
-                <hr>
-                <a class="pt5 pr10 pb5 pl10 block gray bg-hover-light" href="<?= getUrlByName('logout'); ?>" class="logout" title="<?= Translate::get('sign out'); ?>">
-                  <i class="bi bi-box-arrow-right middle mr5"></i>
-                  <span class="middle size-14"><?= Translate::get('sign out'); ?></span>
-                </a>
               </div>
             </div>
           </div>

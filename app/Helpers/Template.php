@@ -339,6 +339,22 @@ function accessСheck($content, $type, $uid, $after, $stop_time)
     return true;
 }
 
+function add_post($facet, $user_id)
+{ 
+    $url_add = getUrlByName('post.add');
+    if (!empty($facet)) {
+        if ($facet['facet_user_id'] == $user_id) {
+            $url_add = $url_add . '/' . $facet['facet_id'];
+        }
+    }
+    
+    $html  = '<a title="' . Translate::get('add post') . '" href="' . $url_add . '" class="blue center p10">
+                <i class="bi bi-plus-lg size-18"></i>
+              </a>';
+    
+    return $html;
+}
+
 // Обрезка текста по словам
 function cutWords($content, $maxlen)
 {
