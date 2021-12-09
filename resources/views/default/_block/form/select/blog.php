@@ -3,9 +3,6 @@
     <?= Translate::get('blog'); ?>
   </label>
   <input name="blog_select" id="blog_id">
-  <?php if (!empty($data['blog_arr'][0]['id'])) { ?>
-    <input type="hidden" name="blog_id" value="<?= $data['blog_arr'][0]['id']; ?>">
-  <?php }  ?>
 </div>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
@@ -51,7 +48,17 @@
         tagify.addTags(JSON.parse('<?= json_encode($data['blog_arr']) ?>'))
       <?php } ?>
     <?php } else { ?>
-      tagify.addTags([])
+      <?php if (!empty($data['facets']['blog'])) {  ?>
+        <?php $id = $data['facets']['blog']['facet_id'];
+        $title = $data['facets']['blog']['facet_title'];
+        ?>
+        tagify.addTags([{
+          value: '<?= $id; ?>',
+          facet_title: '<?= $title; ?>'
+        }])
+      <?php } else { ?>
+        tagify.addTags([])
+      <?php }  ?>
     <?php }  ?>
   });
 </script>

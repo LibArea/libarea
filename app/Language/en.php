@@ -387,11 +387,12 @@ $data = [
     'posts-ban'             => 'Posts',
     
     /* web */
-    'News & Media'      => 'News & Media',
-    'Social network'    => 'Social network',
-    'Internet'          => 'Internet',
+    'news & media'      => 'News & Media',
+    'social network'    => 'Social network',
+    'internet'          => 'Internet',
     'web-cat'           => 'Are there in the site directory?',
     'web-cat-help'      => 'In the site catalog, will be a Category (will become visible)',
+    'software'          => 'Software',
     
     /* soft */
     'soft-cat'           => 'Are there programs in the catalog?',

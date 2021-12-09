@@ -285,11 +285,12 @@ $data = [
     'restored-answer'       => 'Restaurați răspunsul',
 
     /* web */
-    'News & Media'      => 'Știri și media',
-    'Social network'    => 'Rețea socială',
-    'Internet'          => 'Internetul',
+    'news & media'      => 'Știri și media',
+    'social network'    => 'Rețea socială',
+    'internet'          => 'Internetul',
     'web-cat'           => 'Disponibil în directorul site-ului?',
     'web-cat-help'      => 'În catalogul site - ului, va fi o categorie (va deveni vizibil)',
+    'software'          => 'Software',
     
     /* soft */
     'soft-cat'           => 'Există programe în catalog?',

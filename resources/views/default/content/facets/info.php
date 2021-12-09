@@ -21,7 +21,13 @@
     <?= $facet['facet_info']; ?>
   </div>
 
-  <?= includeTemplate('/_block/related-posts', ['related_posts' => $data['related_posts'], 'number' => 'yes']); ?>
+  <?= includeTemplate(
+    '/_block/related-posts',
+    [
+      'related_posts' => $data['related_posts'],
+      'number' => 'yes'
+    ]
+  ); ?>
 
 </main>
 <aside class="col-span-3 relative no-mob">

@@ -48,16 +48,16 @@
         ]
       ]); ?>
 
-       <?= includeTemplate('/_block/form/radio/radio', [
-          'data' => [
-            [
-              'title'   => Translate::get('posted') .'?',
-              'name'    => 'item_published',
-              'checked' => $data['domain']['item_published'],
-              'help'    => Translate::get('posted-help'),
-            ],
-          ]
-        ]); ?>
+      <?= includeTemplate('/_block/form/radio/radio', [
+        'data' => [
+          [
+            'title'   => Translate::get('posted') . '?',
+            'name'    => 'item_published',
+            'checked' => $data['domain']['item_published'],
+            'help'    => Translate::get('posted-help'),
+          ],
+        ]
+      ]); ?>
 
       <?php includeTemplate('/_block/editor/textarea', [
         'title' => Translate::get('description'),
@@ -68,7 +68,7 @@
         'max' => 1500,
         'help' => '24 - 1500 ' . Translate::get('characters')
       ]); ?>
- 
+
 
       <?= includeTemplate('/_block/form/select/select', [
         'uid'           => $uid,
@@ -80,21 +80,21 @@
         'red'           => 'red'
       ]); ?>
 
-       <h3 class="mb5"><?= Translate::get('soft'); ?></h3> 
-       <?= includeTemplate('/_block/form/radio/radio', [
-          'data' => [
-            [
-              'title'   => Translate::get('there is a program'),
-              'name'    => 'item_is_soft',
-              'checked' => $data['domain']['item_is_soft'],
-            ],
-            [
-              'title'   => Translate::get('hosted on github'),
-              'name'    => 'item_is_github',
-              'checked' => $data['domain']['item_is_github'],
-            ],
-          ]
-        ]); ?>
+      <h3 class="mb5"><?= Translate::get('soft'); ?></h3>
+      <?= includeTemplate('/_block/form/radio/radio', [
+        'data' => [
+          [
+            'title'   => Translate::get('there is a program'),
+            'name'    => 'item_is_soft',
+            'checked' => $data['domain']['item_is_soft'],
+          ],
+          [
+            'title'   => Translate::get('hosted on github'),
+            'name'    => 'item_is_github',
+            'checked' => $data['domain']['item_is_github'],
+          ],
+        ]
+      ]); ?>
 
       <?= includeTemplate('/_block/form/field-input', [
         'data' => [

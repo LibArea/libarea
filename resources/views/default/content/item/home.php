@@ -16,10 +16,13 @@
         </a>
         <?php if (!empty($cat['sub'])) { ?>
           <?php foreach ($cat['sub'] as $sub) { ?>
-            <a class="pr10 pb5 size-14 black gray-light inline" title="<?= $sub['title']; ?>" href="<?= getUrlByName('web.topic', ['slug' => $sub['url']]); ?>">
+            <a class="pr10 pb5 size-14 black inline" title="<?= $sub['title']; ?>" href="<?= getUrlByName('web.topic', ['slug' => $sub['url']]); ?>">
               <?= $sub['title']; ?>
             </a>
           <?php } ?>
+        <?php } ?>
+        <?php if (!empty($cat['help'])) { ?>
+          <div class="size-13 gray-light-2 mt5"><?= $cat['help']; ?>...</div>
         <?php } ?>
       </div>
     <?php } ?>

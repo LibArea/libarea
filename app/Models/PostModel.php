@@ -267,7 +267,7 @@ class PostModel extends MainModel
     // Связанные посты
     public static function postRelated($post_related)
     {
-        $in = "";
+        $in = "post_id IN(0) AND";
         if ($post_related) {
             $in = "post_id IN(0, ". $post_related .") AND";
         }

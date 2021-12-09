@@ -2,7 +2,7 @@
   <?= includeTemplate('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 
-<?php $fs = $data['facet']; ?> 
+<?php $fs = $data['facet']; ?>
 
 <main class="col-span-10 mb-col-12">
 
@@ -68,48 +68,44 @@
         ]
       ]); ?>
 
-      <?php if ($fs['facet_type'] == 'topic') { ?>
-        <?php if ($uid['user_trust_level'] == 5) { ?>
+      <?php if ($fs['facet_type'] == 'topic' && $uid['user_trust_level'] == 5) { ?>
 
-          <?= includeTemplate('/_block/form/radio/radio', [
-            'data' => [
-              [
-                'title' => Translate::get('web-cat'),
-                'name' => 'facet_is_web',
-                'checked' => $fs['facet_is_web'],
-                'help' => Translate::get('web-cat-help')
-              ],
-              [
-                'title' => Translate::get('soft-cat'),
-                'name' => 'facet_is_soft',
-                'checked' => $fs['facet_is_soft'],
-                'help' => Translate::get('soft-cat-help')
-              ],
-              [
-                'title' => Translate::get('root'),
-                'name' => 'facet_top_level',
-                'checked' => $fs['facet_top_level'],
-                'help' => Translate::get('root-help')
-              ],
-            ]
-          ]); ?>
+        <?= includeTemplate('/_block/form/radio/radio', [
+          'data' => [
+            [
+              'title' => Translate::get('web-cat'),
+              'name' => 'facet_is_web',
+              'checked' => $fs['facet_is_web'],
+              'help' => Translate::get('web-cat-help')
+            ],
+            [
+              'title' => Translate::get('soft-cat'),
+              'name' => 'facet_is_soft',
+              'checked' => $fs['facet_is_soft'],
+              'help' => Translate::get('soft-cat-help')
+            ],
+            [
+              'title' => Translate::get('root'),
+              'name' => 'facet_top_level',
+              'checked' => $fs['facet_top_level'],
+              'help' => Translate::get('root-help')
+            ],
+          ]
+        ]); ?>
 
-          <?php if ($fs['facet_top_level'] != 1) { ?>
-            <?= includeTemplate('/_block/form/select/low-facets', [
-              'uid'           => $uid,
-              'data'          => $data,
-              'action'        => 'edit',
-              'type'          => 'topic',
-              'title'         => Translate::get('children'),
-              'help'          => Translate::get('necessarily'),
-              'red'           => 'red'
-            ]); ?>
-          <?php } ?>
+        <?= includeTemplate('/_block/form/select/low-facets', [
+          'uid'           => $uid,
+          'data'          => $data,
+          'action'        => 'edit',
+          'type'          => 'topic',
+          'title'         => Translate::get('children'),
+          'help'          => Translate::get('necessarily'),
+          'red'           => 'red'
+        ]); ?>
 
-        <?php } ?>
       <?php } ?>
-     
-      <?php if (!empty($data['high_arr'])) { ?> 
+
+      <?php if (!empty($data['high_arr'])) { ?>
         <div class="bg-white br-rd5 br-box-gray p15">
           <h3 class="uppercase mb5 mt0 font-light size-14 gray"><?= Translate::get('parents'); ?></h3>
           <?php foreach ($data['high_arr'] as $high) { ?>
@@ -120,7 +116,7 @@
           <?php } ?>
         </div>
       <?php } ?>
- 
+
       <?php if (!empty($data['low_arr'])) { ?>
         <div class="bg-white br-rd5 br-box-gray p15">
           <h3 class="uppercase mb5 mt0 font-light size-14 gray"><?= Translate::get('children'); ?></h3>
@@ -166,7 +162,7 @@
           'help'          => Translate::get('necessarily'),
         ]); ?>
 
-      <?= includeTemplate('/_block/form/select/low-matching-facets', [
+        <?= includeTemplate('/_block/form/select/low-matching-facets', [
           'uid'           => $uid,
           'data'          => $data,
           'action'        => 'edit',
@@ -176,17 +172,17 @@
           'red'           => 'red'
         ]); ?>
 
-          <?php if (!empty($data['high_matching'])) { ?>
-            <div class="bg-white br-rd5 br-box-gray max-w780 p15 mb15">
-              <h3 class="uppercase mb5 mt0 font-light size-14 gray"><?= Translate::get('bound (parents)'); ?></h3>
-              <?php foreach ($data['high_matching'] as $low_mat) { ?>
-                <a class="flex relative pt5 pb5 items-center hidden gray-light" href="<?= getUrlByName('topic', ['slug' => $low_mat['facet_slug']]); ?>">
-                  <?= facet_logo_img($low_mat['facet_img'], 'max', $low_mat['facet_title'], 'w24 mr10 br-box-gray'); ?>
-                  <?= $low_mat['facet_title']; ?>
-                </a>
-              <?php } ?>
-            </div>
-          <?php } ?>
+        <?php if (!empty($data['high_matching'])) { ?>
+          <div class="bg-white br-rd5 br-box-gray max-w780 p15 mb15">
+            <h3 class="uppercase mb5 mt0 font-light size-14 gray"><?= Translate::get('bound (parents)'); ?></h3>
+            <?php foreach ($data['high_matching'] as $low_mat) { ?>
+              <a class="flex relative pt5 pb5 items-center hidden gray-light" href="<?= getUrlByName('topic', ['slug' => $low_mat['facet_slug']]); ?>">
+                <?= facet_logo_img($low_mat['facet_img'], 'max', $low_mat['facet_title'], 'w24 mr10 br-box-gray'); ?>
+                <?= $low_mat['facet_title']; ?>
+              </a>
+            <?php } ?>
+          </div>
+        <?php } ?>
       <?php } ?>
 
       <?php if ($uid['user_trust_level'] == 5) { ?>

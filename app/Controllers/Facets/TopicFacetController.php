@@ -98,7 +98,7 @@ class TopicFacetController extends MainController
 
         $facet['facet_info']   = Content::text($facet['facet_info'], 'text');
 
-        $facet_related = empty($facet['facet_post_related']) ? 0 : $facet['facet_post_related'];
+        $facet_related = $facet['facet_post_related']) ?? null;
 
         $m = [
             'og'         => true,

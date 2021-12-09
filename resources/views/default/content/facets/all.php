@@ -46,7 +46,7 @@
   </div>
 
   <div class="bg-white p15 br-box-gray">
- 
+
     <?php if (!empty($data['facets'])) { ?>
       <?php if ($data['type'] == 'blogs') { ?>
         <?= includeTemplate('/_block/facet/blog-list-all', ['facets' => $data['facets'], 'uid' => $uid]); ?>

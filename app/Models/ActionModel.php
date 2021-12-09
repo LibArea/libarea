@@ -121,14 +121,13 @@ class ActionModel extends MainModel
             $field_name = 'user_login';
             $sql = "SELECT user_id, user_login, user_trust_level, user_activated FROM users WHERE user_activated = 1 AND user_login LIKE :user_login";
         } else { 
-            // $type: topic | blog
             $uid    = Base::getUid();
             $id     = $uid['user_id'];
             
             $condition = '';
             if ($uid['user_trust_level'] != 5) { 
                 if ($type == 'blog') { 
-                    $condition = 'AND facet_user_id = $id';
+                    $condition = 'AND facet_user_id = ' . $id;
                 } 
             }                
       

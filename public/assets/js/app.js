@@ -191,7 +191,7 @@ document.querySelectorAll("#graburl")
         return response.json();
       }).then(function (data) {
         document.querySelector('input[name=post_title]').value = data.title
-        document.querySelector('.editorSection') = data.description
+        document.querySelector('.ProseMirror').insertAdjacentHTML('afterBegin', data.description);
       }).catch(function (error) {
         // error
       })

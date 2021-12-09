@@ -43,7 +43,7 @@ class AddPostController extends MainController
             }
        } 
 
-        return view(
+       return view(
             '/post/add',
             [
                 'meta'      => meta($m = [], Translate::get('add post')),
