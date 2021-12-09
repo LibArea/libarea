@@ -46,9 +46,12 @@ class AddWebController extends MainController
             redirect('/');
         }
 
-        $item_url           = Request::getPost('item_url');
-        $item_title_url     = Request::getPost('item_title_url');
-        $item_content_url   = Request::getPost('item_content_url');
+        $item_url           = Request::getPost('url');
+        $item_title_url     = Request::getPost('title_url');
+        $item_content_url   = Request::getPost('content_url');
+
+        $redirect = getUrlByName('web.add');
+        Validation::checkUrl($item_url, 'URL', $redirect);
 
         $parse              = parse_url($item_url);
         $url_domain         = $parse['host'];
@@ -56,7 +59,6 @@ class AddWebController extends MainController
         $item_url_domain    = $domain->getRegisterable();
         $item_url           = $parse['scheme'] . '://' . $parse['host'];
 
-        $redirect = getUrlByName('web');
         $item = WebModel::getItemOne($item_url_domain, $this->uid['user_id']);
         if ($item) {
             addMsg(Translate::get('the site is already there'), 'error');
@@ -92,6 +94,6 @@ class AddWebController extends MainController
             FacetModel::addItemFacets($arr, $item_topic['item_id']);
         }
 
-        redirect($redirect);
+        redirect(getUrlByName('web'));
     }
 }

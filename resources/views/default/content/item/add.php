@@ -20,14 +20,12 @@
           [
             'title' => Translate::get('URL'),
             'type' => 'text',
-            'name' => 'item_url',
-            'value' => ''
+            'name' => 'url',
           ],
           [
             'title' => Translate::get('title'),
             'type' => 'text',
-            'name' => 'item_title_url',
-            'value' => '',
+            'name' => 'title_url',
             'help' => '14 - 250 ' . Translate::get('characters') . ' («Газета.Ru» — интернет-газета)'
           ],
         ]
@@ -36,8 +34,7 @@
       <?php includeTemplate('/_block/editor/textarea', [
         'title' => Translate::get('description'),
         'type' => 'text',
-        'name' => 'item_content_url',
-        'content' => '',
+        'name' => 'content_url',
         'min' => 24,
         'max' => 1500,
         'help' => '24 - 1500 ' . Translate::get('characters')

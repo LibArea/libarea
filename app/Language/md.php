@@ -288,9 +288,12 @@ $data = [
     'news & media'      => 'Știri și media',
     'social network'    => 'Rețea socială',
     'internet'          => 'Internetul',
+    'software'          => 'Software',
+    'reference info'    => 'Informații de referință',
+    'related sites'     => 'Site-uri conexe',
     'web-cat'           => 'Disponibil în directorul site-ului?',
     'web-cat-help'      => 'În catalogul site - ului, va fi o categorie (va deveni vizibil)',
-    'software'          => 'Software',
+
     
     /* soft */
     'soft-cat'           => 'Există programe în catalog?',
@@ -330,6 +333,7 @@ $data = [
     /* MSG */
     'text-string-length'    => 'Lungimea %1$s trebuie să aibă între %2$s și %3$s caractere',
     'text-charset-slug'     => '%1$s trebuie să conțină doar litere latine, cifre',
+    'text-check-url'        => 'Adresa %1$s nu este corectă',
     'titles'                => 'titluri',
     'descriptions'          => 'descrieri',
     'url-already-exists'    => 'Această adresă URL de spațiu există deja.',

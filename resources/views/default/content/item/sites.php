@@ -27,17 +27,17 @@
     </h1>
   </div>
 
-  <div class="mb20 pt10 pr15 pb10 pl15 bg-green-200">
+  <div class="mb20 pt10 pr15 pb10 pl15 bg-green-200 dark-bg-black">
     <?php if ($data['low_topics']) { ?>
       <div class="grid grid-cols-3 gap-2 justify-between mb10">
         <?php foreach ($data['low_topics'] as $lt) { ?>
           <?php if ($lt['facet_is_web'] == 1) { ?>
             <div>
-              <a class="pt5 pr10 dark-white underline-hover mb-col-2 mb-size-18 size-21 inline" href="<?= getUrlByName('web.topic', ['slug' => $lt['facet_slug']]); ?>">
+              <a class="pt5 pr10 underline-hover mb-col-2 mb-size-18 size-21 inline" href="<?= getUrlByName('web.topic', ['slug' => $lt['facet_slug']]); ?>">
                 <?= $lt['facet_title']; ?>
               </a>
               <?php if ($uid['user_trust_level'] == 5) { ?>
-                <a class="size-14" href="<?= getUrlByName('topic.edit', ['id' => $lt['value']]); ?>">
+                <a class="size-14 " href="<?= getUrlByName('topic.edit', ['id' => $lt['value']]); ?>">
                   <sup><i class="bi bi-pencil gray"></i></sup>
                 </a>
               <?php } ?>
@@ -103,11 +103,6 @@
             <a class="dark-white" href="<?= getUrlByName('web.website', ['slug' => $item['item_url_domain']]); ?>">
               <h2 class="font-normal underline-hover size-21 mt0 mb0">
                 <?= $item['item_title_url']; ?>
-                <?php if ($uid['user_trust_level'] == 5) { ?>
-                  <a class="ml15" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('web.edit', ['id' => $item['item_id']]); ?>">
-                    <i class="bi bi-pencil size-15"></i>
-                  </a>
-                <?php } ?>
               </h2>
             </a>
             <div class="size-15 mt5 mb15 max-w780">
@@ -116,13 +111,18 @@
             <div class="flex flex-row gap-2 items-center max-w780">
               <?= favicon_img($item['item_id'], $item['item_url_domain']); ?>
               <div class="green size-140 size-14">
+                <?= $item['item_url_domain']; ?>
                 <?php if ($item['item_github_url']) { ?>
-                  <a class="block gray-light" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_github_url']; ?>">
+                  <a class="ml15 gray-light" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_github_url']; ?>">
                     <i class="bi bi-github size-13 mr5"></i>
                     <?= $item['item_title_soft']; ?> <?= Translate::get('on'); ?> GitHub
                   </a>
                 <?php } ?>
-                <?= $item['item_url_domain']; ?>
+                <?php if ($uid['user_trust_level'] == 5) { ?>
+                  <a class="ml15 inline" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('web.edit', ['id' => $item['item_id']]); ?>">
+                    <i class="bi bi-pencil size-13"></i>
+                  </a>
+                <?php } ?>
                 <div class="lowercase">
                   <?= html_topic($item['facet_list'], 'web.topic', 'gray-light mr15'); ?>
                 </div>

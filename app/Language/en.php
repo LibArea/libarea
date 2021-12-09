@@ -326,6 +326,7 @@ $data = [
     /* MSG */
     'text-string-length'    => 'Length %1$s should be from  %2$s -> %3$s characters ',
     'text-charset-slug'     => '%1$s should contain only Latin letters, numbers',
+    'text-check-url'        => '%1$s address is not correct',
     'titles'                => 'Titles',
     'descriptions'          => 'Descriptions',
     'url-already-exists'    => 'This topic URL already exists',
@@ -390,10 +391,12 @@ $data = [
     'news & media'      => 'News & Media',
     'social network'    => 'Social network',
     'internet'          => 'Internet',
+    'software'          => 'Software',
+    'reference info'    => 'Reference Information',
+    'related sites'     => 'Related Sites',
     'web-cat'           => 'Are there in the site directory?',
     'web-cat-help'      => 'In the site catalog, will be a Category (will become visible)',
-    'software'          => 'Software',
-    
+
     /* soft */
     'soft-cat'           => 'Are there programs in the catalog?',
     'soft-cat-help'      => 'In the program directory, will be Category (will become visible)',

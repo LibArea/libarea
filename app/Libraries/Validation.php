@@ -24,6 +24,17 @@ class Validation
         return true;
     }
 
+    public static function checkUrl($url, $text, $redirect)
+    {
+        if (!filter_var($url, FILTER_VALIDATE_URL)) {
+
+            $text = sprintf(Translate::get('text-check-url'), '«' . $url . '»');
+            addMsg($text, 'error');
+            redirect($redirect);
+        }
+        return true;  
+    }
+
     public static function charset_slug($slug, $text, $redirect)
     {
         if (!preg_match('/^[a-zA-Z0-9-]+$/u', $slug)) {
