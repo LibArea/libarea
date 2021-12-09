@@ -171,7 +171,7 @@ document.querySelectorAll(".type-action")
 document.querySelectorAll("#graburl")
   .forEach(el => el.addEventListener("click", function (e) {
     let uri = document.getElementById('link').value;
-    console.log(uri);
+
     if (uri === '') {
       return;
     }

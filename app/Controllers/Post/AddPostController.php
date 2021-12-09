@@ -210,7 +210,6 @@ class AddPostController extends MainController
         }
         FacetModel::addPostFacets($arr, $last_post_id);
      
-
         // Уведомление (@login)
         if ($message = Content::parseUser($post_content, true, true)) {
             foreach ($message as $user_id) {

@@ -4,20 +4,27 @@ namespace App\Controllers\Admin;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\Admin\PostModel;
+use App\Models\FeedModel;
 use Content, Base, Translate;
 
 class PostsController extends MainController
 {
+    private $uid;
+
+    public function __construct()
+    {
+        $this->uid  = Base::getUid();
+    }
+    
     public function index($sheet)
     {
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
         $limit  = 100;
-
-        $pagesCount = PostModel::getPostsAllCount($sheet);
-        $posts      = PostModel::getPostsAll($page, $limit, $sheet);
-
+ 
+        $pagesCount = FeedModel::feedCount($this->uid, $sheet, 'admin', 'post');
+        $posts      = FeedModel::feed($page, $limit, $this->uid, $sheet, 'admin', 'post');
+ 
         $result = [];
         foreach ($posts  as $ind => $row) {
             $text = explode("\n", $row['post_content']);
@@ -30,7 +37,7 @@ class PostsController extends MainController
             '/admin/post/posts',
             [
                 'meta'  => meta($m = [], $sheet == 'ban' ? Translate::get('deleted posts') : Translate::get('posts')),
-                'uid'   => Base::getUid(),
+                'uid'   => $this->uid,
                 'data'  => [
                     'sheet'         => $sheet == 'all' ? 'posts' : 'posts-ban',
                     'pagesCount'    => ceil($pagesCount / $limit),

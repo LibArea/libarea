@@ -18,6 +18,12 @@ class FeedModel extends MainModel
                 $qa         = $data['facet_slug'];
                 $string     = "WHERE facet_list LIKE :qa AND post_is_recommend = 1";
             }
+        } elseif ($type == 'admin') {
+            $selection  = "";
+            $string     = "";
+             if ($sheet == 'ban') {
+                $string     = "WHERE post_is_deleted = 1";
+            }
         } elseif ($type == 'item') {
             $selection  = $data['item_url_domain'];
             $string     = "WHERE post_url_domain  = :selection AND post_draft = 0";
@@ -63,6 +69,7 @@ class FeedModel extends MainModel
                     post_merged_id,
                     post_closed,
                     post_tl,
+                    post_ip,
                     post_lo,
                     post_top,
                     post_url_domain,
@@ -76,13 +83,7 @@ class FeedModel extends MainModel
                         LEFT JOIN
                         (
                             SELECT 
-                                MAX(facet_id), 
-                                MAX(facet_slug), 
-                                MAX(facet_title),
-                                MAX(facet_type),
-                                MAX(relation_facet_id), 
                                 relation_post_id,
-
                                 GROUP_CONCAT(facet_type, '@', facet_slug, '@', facet_title SEPARATOR '@') AS facet_list
                                 FROM facets      
                                 LEFT JOIN facets_posts_relation 
@@ -116,14 +117,20 @@ class FeedModel extends MainModel
             $qa         = $data['facet_slug'];
             $string     = "WHERE facet_slug = :qa";
             if ($sheet == 'recommend') {
-                $qa         = $data['facet_slug'];
-                $string     = "WHERE facet_slug = :qa AND post_is_recommend = 1";
+                $qa     = $data['facet_slug'];
+                $string = "WHERE facet_slug = :qa AND post_is_recommend = 1";
+            }
+        } elseif ($type == 'admin') {
+            $selection  = "";
+            $string     = "";
+             if ($sheet == 'ban') {
+                $string     = "WHERE post_is_deleted = 1";
             }
         } elseif ($type == 'item') {
-            $selection   = $data['item_url_domain'];
+            $selection  = $data['item_url_domain'];
             $string     = "WHERE post_url_domain  = :selection";
         } else {
-            $selection   = $data['post_user_id'];
+            $selection  = $data['post_user_id'];
             $string     = "WHERE post_user_id  = :selection";
         }
 
@@ -149,11 +156,10 @@ class FeedModel extends MainModel
                     post_is_recommend,
                     facet_id, facet_slug,
                     relation_facet_id, relation_post_id
-                    
-                    FROM posts
-                        LEFT JOIN facets_posts_relation on (post_id = relation_post_id)
-                        LEFT JOIN facets on (facet_id = relation_facet_id)
-                        $string $display ";
+                        FROM posts
+                            LEFT JOIN facets_posts_relation on (post_id = relation_post_id)
+                            LEFT JOIN facets on (facet_id = relation_facet_id)
+                            $string $display ";
 
         if ($type == 'topic') {
             $request = ['qa' => $qa];
