@@ -9,13 +9,11 @@
         'title' => Translate::get('E-mail'),
         'type' => 'email',
         'name' => 'email',
-        'value' => ''
       ],
       [
         'title' => Translate::get('password'),
         'type' => 'password',
         'name' => 'password',
-        'value' => ''
       ],
     ]]); ?>
 

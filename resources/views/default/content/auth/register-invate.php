@@ -9,7 +9,6 @@
           'title' => Translate::get('nickname'),
           'type' => 'text',
           'name' => 'login',
-          'value' => '',
           'min' => 3,
           'max' => 10,
           'help' => '3 - 10 ' . Translate::get('characters')
@@ -24,7 +23,6 @@
           'title' => Translate::get('password'),
           'type' => 'password',
           'name' => 'password',
-          'value' => '', 
           'min' => 8,
           'max' => 32,
           'help' => '8 - 32 ' . Translate::get('characters')
@@ -33,7 +31,6 @@
           'title' => Translate::get('repeat the password'),
           'type' => 'password',
           'name' => 'password_confirm',
-          'value' => ''
         ],
       ]]); ?>
 

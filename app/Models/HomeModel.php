@@ -195,7 +195,7 @@ class HomeModel extends MainModel
                     signed_user_id                    
                         FROM facets 
                         JOIN facets_signed ON signed_facet_id = facet_id AND signed_user_id = :user_id  
-                        ORDER BY facet_id DESC";
+                            WHERE  facet_type = 'topic' ORDER BY facet_id DESC";
 
         return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
     }

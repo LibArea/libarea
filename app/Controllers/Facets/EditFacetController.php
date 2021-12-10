@@ -164,26 +164,31 @@ class EditFacetController extends MainController
         ];
 
         FacetModel::edit($data);
-
+ 
         // Тема, выбор детей в дереве
-        $highs      = $fields['high_facet_id'] ?? [];
-        $high_facet = json_decode($highs, true);
-        $high_facet = $high_facet ?? [];
-        $arr = [];
-        foreach ($high_facet as $ket => $row) {
-           $arr[] = $row;
+        $highs  = $fields['high_facet_id'] ?? [];
+        if ($highs) {
+            $high_facet = json_decode($highs, true);
+            $high_facet = $high_facet ?? [];
+            $arr = [];
+            foreach ($high_facet as $ket => $row) {
+               $arr[] = $row;
+            }
+            FacetModel::addLowFacetRelation($arr, $facet_id);
         }
-        FacetModel::addLowFacetRelation($arr, $facet_id);
         
         // Связанные темы, дети 
-        $matching       = $fields['facet_matching'] ?? [];
-        $match_facet    = json_decode($matching[0], true);
-        $match_facet    = $match_facet ?? [];
-        $arr_mc = [];
-        foreach ($match_facet as $ket => $row) {
-           $arr_mc[] = $row;
+        $matching   = $fields['facet_matching'] ?? [];
+        if ($matching) {
+            $match_facet    = json_decode($matching[0], true);
+            $match_facet    = $match_facet ?? [];
+            $arr_mc = [];
+            foreach ($match_facet as $ket => $row) {
+               $arr_mc[] = $row;
+            }
+            FacetModel::addLowFacetMatching($arr_mc, $facet_id);  
         }
-        FacetModel::addLowFacetMatching($arr_mc, $facet_id);  
+        
         addMsg(Translate::get('changes saved'), 'success');
 
         redirect(getUrlByName($type, ['slug' => $facet_slug]));

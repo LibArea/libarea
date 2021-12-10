@@ -20,13 +20,11 @@
               'title' => Translate::get('old'),
               'type' => 'text',
               'name' => 'password',
-              'value' => ''
             ],
             [
               'title' => Translate::get('new'),
               'type' => 'password',
               'name' => 'password2',
-              'value' => '',
               'min' => 6,
               'max' => 32,
               'help' => '6 - 32 ' . Translate::get('characters')
@@ -35,7 +33,6 @@
               'title' => Translate::get('repeat'),
               'type' => 'password',
               'name' => 'password3',
-              'value' => ''
             ],
           ]
         ]

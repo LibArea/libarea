@@ -18,7 +18,6 @@
             'title' => Translate::get('heading'),
             'type'  => 'text',
             'name'  => 'post_title',
-            'value' => null,
             'min'   => 6,
             'max'   => 250,
             'id'    => 'title',
@@ -86,7 +85,6 @@
           [
             'title' => Translate::get('is this a draft?'),
             'name' => 'post_draft',
-            'checked' => 0
           ]
         ],
       ]); ?>
@@ -102,12 +100,10 @@
             [
               'title' => Translate::get('format Q&A?'),
               'name' => 'post_type',
-              'checked' => 0
             ],
             [
               'title' => Translate::get('to close?'),
               'name' => 'closed',
-              'checked' => 0
             ],
           ]
         ]); ?>
@@ -118,7 +114,6 @@
           [
             'title' => Translate::get('is this a translation?'),
             'name' => 'translation',
-            'checked' => 0
           ],
         ]
       ]); ?>
@@ -127,9 +122,8 @@
         <?= includeTemplate('/_block/form/radio/radio', [
           'data' => [
             [
-              'title' => Translate::get('raise?'),
-              'name' => 'top',
-              'checked' => 0
+              'title'   => Translate::get('raise?'),
+              'name'    => 'top',
             ],
           ]
         ]); ?>
