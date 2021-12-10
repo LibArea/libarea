@@ -11,7 +11,7 @@ Route::before('Authorization@admin')->getGroup();
         Route::get('/word/ban')->controller('Admin\WordsController@deletes');
         Route::get('/audit/status')->controller('Admin\AuditsController@status');
         Route::get('/reports/status')->controller('Admin\ReportsController@status');
-        Route::get('/topic/ban')->controller('Admin\TopicsController@deletes');
+        Route::get('/topic/ban')->controller('Admin\FacetsController@deletes');
         
         Route::getProtect();
             Route::get('/badge/user/create')->controller('Admin\BadgesController@addUser')->name('admin.user.badge.create');
@@ -34,12 +34,12 @@ Route::before('Authorization@admin')->getGroup();
     Route::get('/audits')->controller('Admin\AuditsController', ['all'])->name('admin.audits');
     Route::get('/audits/approved')->controller('Admin\AuditsController', ['approved'])->name('admin.audits.approved');
    
-    Route::get('/topics')->controller('Admin\TopicsController', ['all'])->name('admin.topics');
-    Route::get('/topics/parent')->controller('Admin\TopicsController', ['parent'])->name('admin.parent');
-    Route::get('/topics/page/{page?}')->controller('Admin\TopicsController', ['all'])->where(['page' => '[0-9]+']);
+    Route::get('/topics')->controller('Admin\FacetsController', ['admin.topics.all', 'topic'])->name('admin.topics');
+    Route::get('/topics/ban')->controller('Admin\FacetsController', ['admin.topics.ban', 'topic'])->name('admin.topics.ban');
+    Route::get('/topics/page/{page?}')->controller('Admin\FacetsController', ['all'])->where(['page' => '[0-9]+']);
      
-    Route::get('/blogs')->controller('Admin\BlogsController', ['admin.blogs.all'])->name('admin.blogs');
-    Route::get('/blogs/ban')->controller('Admin\BlogsController', ['admin.blogs.ban.all'])->name('admin.blogs.ban');
+    Route::get('/blogs')->controller('Admin\FacetsController', ['admin.blogs.all', 'blog'])->name('admin.blogs');
+    Route::get('/blogs/ban')->controller('Admin\FacetsController', ['admin.blogs.ban', 'blog'])->name('admin.blogs.ban');
      
     Route::get('/update/count/topic')->controller('Admin\СonsoleController@updateCountPostTopic')->name('admin.count.topic'); 
     Route::get('/update/count/up')->controller('Admin\СonsoleController@updateCountUp')->name('admin.count.up');

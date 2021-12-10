@@ -3,6 +3,7 @@
 </div>
 <?php $topic = $data['facet']; ?>
 <main class="col-span-7 mb-col-12">
+  <?php if ($topic['facet_is_deleted'] == 0) { ?>
   <div class="bg-white flex flex-row items-center justify-between br-rd5 br-box-gray mb15 p15">
     <div class="no-mob">
       <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'w94 br-box-gray mt5'); ?>
@@ -69,8 +70,16 @@
   <?= includeTemplate('/_block/post', ['data' => $data, 'uid' => $uid]); ?>
   <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('topic', ['slug' => $topic['facet_slug']])); ?>
 
+
+  <?php } else { ?>
+    <div class="center">
+      <i class="bi bi-x-octagon size-110"></i>
+      <div class="mt5 gray"><?= Translate::get('deleted'); ?></div>
+    </div>
+  <?php } ?>
 </main>
 <aside class="col-span-3 relative no-mob">
+  <?php if ($topic['facet_is_deleted'] == 0) { ?>
   <div class="bg-white flex justify-center br-rd5 mb15 br-box-gray p15">
     <div class="mr15 center box-number">
       <div class="uppercase mb5 size-14 gray"><?= Translate::get('posts'); ?></div>
@@ -96,6 +105,7 @@
         <?php } ?>
       </div>
     </div>
+  <?php } ?>
   <?php } ?>
 </aside>
 

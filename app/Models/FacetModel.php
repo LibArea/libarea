@@ -31,8 +31,14 @@ class FacetModel extends MainModel
             case 'admin.blogs.all':
                 $signet = "WHERE facet_type = 'blog' ORDER BY facet_id DESC";
                 break;
-            case 'admin.blogs.ban.all':
+            case 'admin.blogs.ban':
                 $signet = "WHERE facet_type = 'blog' AND facet_is_deleted = 1 ORDER BY facet_id DESC";
+                break;
+            case 'admin.topics.all':
+                $signet = "WHERE facet_type = 'topic' ORDER BY facet_id DESC";
+                break;
+            case 'admin.topics.ban':
+                $signet = "WHERE facet_type = 'topic' AND facet_is_deleted = 1 ORDER BY facet_id DESC";
                 break;
             default:
                 $signet = "WHERE facet_type = 'topic' ORDER BY facet_count DESC";
@@ -64,8 +70,8 @@ class FacetModel extends MainModel
     }
 
     public static function getFacetsAllCount($user_id, $sort)
-    {
-        switch ($sort) {
+    { 
+        switch ($sort) { 
             case 'topics.my':
                 $signet = "WHERE facet_type = 'topic' AND signed_user_id = :user_id ORDER BY facet_count DESC";
                 break;
@@ -84,8 +90,14 @@ class FacetModel extends MainModel
             case 'admin.blogs.all':
                 $signet = "WHERE facet_type = 'blog' ORDER BY facet_id DESC";
                 break;
-            case 'admin.blogs.ban.all':
-                $signet = "WHERE facet_type = 'blog' AND facet_is_deleted = 1 ORDER BY facet_id DESC";
+            case 'admin.blogs.ban':
+                $signet = "WHERE facet_type = 'blog' AND facet_is_deleted = 21 ORDER BY facet_id DESC";
+                break;
+            case 'admin.topics.all':
+                $signet = "WHERE facet_type = 'topic' ORDER BY facet_id DESC";
+                break;
+            case 'admin.topics.ban':
+                $signet = "WHERE facet_type = 'topic' AND facet_is_deleted = 1 ORDER BY facet_id DESC";
                 break;
             default:
                 $signet = "WHERE facet_type = 'topic' ORDER BY facet_count DESC";
@@ -96,7 +108,8 @@ class FacetModel extends MainModel
                     facet_id,
                     facet_type,
                     signed_facet_id, 
-                    signed_user_id
+                    signed_user_id,
+                    facet_is_deleted
                         FROM facets 
                         LEFT JOIN facets_signed ON signed_facet_id = facet_id AND signed_user_id = :user_id
                         $signet";

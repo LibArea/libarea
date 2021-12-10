@@ -8,27 +8,32 @@ use App\Models\Admin\BanTopicModel;
 use App\Models\FacetModel;
 use Base, Translate;
 
-class TopicsController extends MainController
+class FacetsController extends MainController
 {
-    public function index($sheet)
+    public function index($sheet, $type)
     {
+       //  print_r($sheet);  
+        
         $uid    = Base::getUid();
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
         $limit  = 25;
         $pagesCount = FacetModel::getFacetsAllCount($uid['user_id'], $sheet);
+        
+        Request::getResources()->addBottomScript('/assets/js/admin.js');
 
         return view(
-            '/admin/topic/topics',
+            '/admin/facet/facets',
             [
                 'meta'  => meta($m = [], Translate::get('topics')),
                 'uid'   => $uid,
                 'data'  => [
-                    'sheet'         => $sheet == 'all' ? 'topics' : $sheet,
+                    'sheet'         => $sheet,
+                    'type'          => $type,
                     'pagesCount'    => ceil($pagesCount / $limit),
                     'pNum'          => $page,
-                    'topics'        => FacetModel::getFacetsAll($page, $limit, $uid['user_id'], $sheet),
+                    'facets'        => FacetModel::getFacetsAll($page, $limit, $uid['user_id'], $sheet),
                 ]
             ]
         );
