@@ -29,20 +29,22 @@ Route::before('Authorization@noAuth')->getGroup();
                 Route::get('/post/create')->controller('Post\AddPostController@create')->name('post.create');
                 Route::get('/comment/create')->controller('Comment\AddCommentController@create')->name('comment.create');
                 Route::get('/answer/create')->controller('Answer\AddAnswerController@create')->name('answer.create');
-                Route::get('/topic/create')->controller('Facets\AddFacetController@create')->name('topic.create');
                 Route::get('/web/create')->controller('Web\AddWebController@create')->name('web.create');
+                Route::get('/topic/create')->controller('Facets\AddFacetController@create', ['topic'])->name('topic.create');
+                Route::get('/blog/create')->controller('Facets\AddFacetController@create', ['blog'])->name('blog.create');
                 Route::get('/post/edit')->controller('Post\EditPostController@edit')->name('post.edit.pr');
                 Route::get('/comment/edit')->controller('Comment\EditCommentController@edit')->name('comment.edit.pr');
                 Route::get('/answer/edit')->controller('Answer\EditAnswerController@edit')->name('answer.edit.pr');
-                Route::get('/topic/edit')->controller('Facets\EditFacetController@edit')->name('topic.edit.pr');
                 Route::get('/web/edit')->controller('Web\EditWebController@edit')->name('web.edit.pr');
-                Route::get('/blog/edit')->controller('Facets\EditFacetController@edit')->name('blog.edit.pr');
+                Route::get('/topic/edit')->controller('Facets\EditFacetController@edit', ['topic'])->name('topic.edit.pr');
+                Route::get('/blog/edit')->controller('Facets\EditFacetController@edit', ['blog'])->name('blog.edit.pr');
             Route::endProtect();
     Route::endType();
 
     // The form of adding and changing: post | topic |  web
     Route::get('/post/add')->controller('Post\AddPostController')->name('post.add');
-    Route::get('/topic/add')->controller('Facets\AddFacetController')->name('topic.add');
+    Route::get('/topic/add')->controller('Facets\AddFacetController', ['topic'])->name('topic.add');
+    Route::get('/blog/add')->controller('Facets\AddFacetController', ['blog'])->name('blog.add');
     Route::get('/web/add')->controller('Web\AddWebController')->name('web.add');
     
     Route::get('/post/edit/{id}')->controller('Post\EditPostController')->where(['id' => '[0-9]+'])->name('post.edit');
@@ -79,10 +81,10 @@ Route::before('Authorization@noAuth')->getGroup();
     
     Route::get('/u/{login}/invitations')->controller('User\InvitationsController@invitationForm')->where(['login' => '[A-Za-z0-9]+'])->name('user.invitations');
 
-    Route::get('/topics/my')->controller('Facets\AllFacetController', ['topics.my', 'topics'])->name('topics.my');
-    Route::get('/topics/my/page/{page?}')->controller('Facets\AllFacetController', ['topics.my', 'topics'])->where(['page' => '[0-9]+']); 
+    Route::get('/topics/my')->controller('Facets\AllFacetController', ['topics.my', 'topic'])->name('topics.my');
+    Route::get('/topics/my/page/{page?}')->controller('Facets\AllFacetController', ['topics.my', 'topic'])->where(['page' => '[0-9]+']); 
  
-    Route::get('/blogs/my')->controller('Facets\AllFacetController', ['blogs.my', 'blogs'])->name('blogs.my');
+    Route::get('/blogs/my')->controller('Facets\AllFacetController', ['blogs.my', 'blog'])->name('blogs.my');
  
     Route::get('/all')->controller('HomeController', ['all'])->name('main.all');
     Route::get('/all/page/{page?}')->controller('HomeController', ['all'])->where(['page' => '[0-9]+']);
@@ -144,10 +146,10 @@ Route::get('/comments/page/{page?}')->controller('Comment\CommentController')->w
 Route::get('/answers')->controller('Answer\AnswerController')->name('answers');
 Route::get('/answers/page/{page?}')->controller('Answer\AnswerController')->where(['page' => '[0-9]+']);
 
-Route::get('/topics')->controller('Facets\AllFacetController', ['topics.all', 'topics'])->name('topics.all');
+Route::get('/topics')->controller('Facets\AllFacetController', ['topics.all', 'topic'])->name('topics.all');
 Route::get('/topics/page/{page?}')->controller('Facets\AllFacetController', ['topics.all', 'topics'])->where(['page' => '[0-9]+']);
-Route::get('/topics/new')->controller('Facets\AllFacetController', ['topics.new', 'topics'])->name('topics.new');
-Route::get('/topics/new/page/{page?}')->controller('Facets\AllFacetController', ['topics.new', 'topics'])->where(['page' => '[0-9]+']);
+Route::get('/topics/new')->controller('Facets\AllFacetController', ['topics.new', 'topic'])->name('topics.new');
+Route::get('/topics/new/page/{page?}')->controller('Facets\AllFacetController', ['topics.new', 'topic'])->where(['page' => '[0-9]+']);
 
 Route::get('/topic/{slug}')->controller('Facets\TopicFacetController', ['feed'])->where(['slug' => '[a-zA-Z0-9-]+'])->name('topic');
 Route::get('/topics/structure')->controller('Facets\TreeFacetController')->name('topic.structure');
@@ -156,10 +158,10 @@ Route::get('/topic/{slug}/recommend/page/{page?}')->controller('Facets\TopicFace
 Route::get('/topic/{slug}/page/{page?}')->controller('Facets\TopicFacetController', ['feed'])->where(['slug' => '[a-z0-9-]+', 'page' => '[0-9]+']);
 Route::get('/topic/{slug}/info')->controller('Facets\TopicFacetController@info')->where(['slug' => '[a-z0-9-]+'])->name('topic.info');
 
-Route::get('/blogs')->controller('Facets\AllFacetController', ['blogs.all', 'blogs'])->name('blogs.all');
-Route::get('/blogs/page/{page?}')->controller('Facets\AllFacetController', ['topics.all', 'blogs'])->where(['page' => '[0-9]+']);
-Route::get('/blogs/new')->controller('Facets\AllFacetController', ['blogs.new', 'blogs'])->name('blogs.new');
-Route::get('/blogs/new/page/{page?}')->controller('Facets\AllFacetController', ['blogs.new', 'blogs'])->where(['page' => '[0-9]+']);
+Route::get('/blogs')->controller('Facets\AllFacetController', ['blogs.all', 'blog'])->name('blogs.all');
+Route::get('/blogs/page/{page?}')->controller('Facets\AllFacetController', ['topics.all', 'blog'])->where(['page' => '[0-9]+']);
+Route::get('/blogs/new')->controller('Facets\AllFacetController', ['blogs.new', 'blog'])->name('blogs.new');
+Route::get('/blogs/new/page/{page?}')->controller('Facets\AllFacetController', ['blogs.new', 'blog'])->where(['page' => '[0-9]+']);
 
 Route::get('/blog/{slug}')->controller('Facets\BlogFacetController', ['feed'])->where(['slug' => '[a-zA-Z0-9-]+'])->name('blog');
 Route::get('/blog/{slug}/page/{page?}')->controller('Facets\BlogFacetController', ['feed'])->where(['slug' => '[a-z0-9-]+', 'page' => '[0-9]+']);

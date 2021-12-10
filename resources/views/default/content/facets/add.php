@@ -4,19 +4,20 @@
 <main class="col-span-10 mb-col-12">
 
   <?= breadcrumb(
-    getUrlByName('topics'),
-    Translate::get('topics'),
+    getUrlByName($data['sheet'] . 's.all'),
+    Translate::get($data['sheet'] . 's'),
     null,
     null,
-    Translate::get('add topic')
+    Translate::get('add ' . $data['sheet'])
   ); ?>
-
+  
+<?php if ($uid['user_trust_level'] >= Config::get('trust-levels.tl_add_blog')) { ?>
   <div class="br-box-gray bg-white p15">
     <div class="size-14 gray mb15">
       <?= Translate::get('you can add more'); ?>:
-      <span class="red"><?= $data['count_topic']; ?></span>
+      <span class="red"><?= $data['count_facet']; ?></span>
     </div>
-    <form class="" action="<?= getUrlByName('topic.create'); ?>" method="post" enctype="multipart/form-data">
+    <form class="" action="<?= getUrlByName($data['sheet'] . '.create'); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
 
       <?= includeTemplate('/_block/form/field-input', [
@@ -59,14 +60,15 @@
         ]
       ]); ?>
 
-      <?= includeTemplate('/_block/form/radio/blog-or-topic', [
-        'uid'     => $uid,
-      ]); ?>
-
       <div for="mb5"><?= Translate::get('meta description'); ?><sup class="red">*</sup></div>
       <textarea rows="6" class="add max-w780" minlength="44" name="facet_description"></textarea>
       <div class="size-14 gray-light-2 mb20">> 44 <?= Translate::get('characters'); ?></div>
+      
+      <input type="hidden" name="facet_type" value="<?= $data['sheet']; ?>">
       <?= sumbit(Translate::get('add')); ?>
     </form>
   </div>
+  <?php } else { ?>
+    <?= Translate::get('limit-add-content-no'); ?>
+  <?php } ?>  
 </main>

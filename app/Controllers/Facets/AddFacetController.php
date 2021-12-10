@@ -18,15 +18,12 @@ class AddFacetController extends MainController
     }
 
     // Add form topic
-    public function index()
-    {
-        $count_topic        = FacetModel::countFacetsUser($this->uid['user_id'], 'topic');
-        $count_add_topic    = $this->uid['user_trust_level'] == 5 ? 999 : Config::get('trust-levels.count_add_topic');
-
-        $valid = Validation::validTl($this->uid['user_trust_level'], Config::get('trust-levels.tl_add_topic'), $count_topic, $count_add_topic);
-        if ($valid === false) {
-            redirect('/');
-        }
+    public function index($type)
+    { 
+        $count      = FacetModel::countFacetsUser($this->uid['user_id'], $type);
+        $count_add  = $this->uid['user_trust_level'] == 5 ? 999 : Config::get('trust-levels.count_add_' . $type);
+ 
+        $in_total = self::limitFacer($type, $count, $count_add);
 
         return view(
             '/facets/add',
@@ -34,24 +31,19 @@ class AddFacetController extends MainController
                 'meta'  => meta($m = [], Translate::get('add topic')),
                 'uid'   => $this->uid,
                 'data'  => [
-                    'sheet'         => 'topics',
-                    'count_topic'   => $count_add_topic - $count_topic,
+                    'sheet'         => $type,
+                    'count_facet'   => $in_total,
                 ]
             ]
         );
     }
 
-    // Add topic
-    public function create()
+    // Add topic / blog
+    public function create($type)
     {
-        $facet  = UserModel::blogs($this->uid['user_id']);
-
-        // Topic or Sapce
-        $type   = Request::getPost('facet_type');
-        $tl     = Validation::validTl($this->uid['user_trust_level'], Config::get('trust-levels.tl_add_' . $type), count($facet), Config::get('trust-levels.count_add_' . $type));
-        if ($tl === false) {
-            redirect('/');
-        }
+ 
+ 
+        self::limitFacer($type, $count, $count_add);
 
         $facet_title                = Request::getPost('facet_title');
         $facet_description          = Request::getPost('facet_description');
@@ -106,5 +98,24 @@ class AddFacetController extends MainController
         SubscriptionModel::focus($new_facet_id['facet_id'], $this->uid['user_id'], 'topic');
 
         redirect(getUrlByName($type, ['slug' => $facet_slug]));
+    }
+    
+    public function limitFacer($type)
+    {
+        
+        $count      = FacetModel::countFacetsUser($this->uid['user_id'], $type);
+        $count_add  = $this->uid['user_trust_level'] == 5 ? 999 : Config::get('trust-levels.count_add_' . $type);
+        $valid      = Validation::validTl($this->uid['user_trust_level'], Config::get('trust-levels.tl_add_' . $type), $count, $count_add);
+  
+        if ($valid === false) {
+            redirect('/');
+        }
+
+        $in_total   = $count_add - $count;
+        if (!$in_total > 0) {
+            redirect('/');
+        }
+        
+        return $in_total;
     }
 }
