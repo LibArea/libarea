@@ -1,5 +1,5 @@
 <main class="col-span-9 mb-col-12">
-  <div class="bg-white br-rd5 br-box-gray pt5 pr15 pb5 pl15">
+  <div class="ml10 mb15 mb-ml-0 hidden">
     <?= breadcrumb(
       '/',
       Translate::get('home'),
@@ -7,45 +7,67 @@
       Translate::get('all messages'),
       $data['h1']
     ); ?>
-
     <form action="<?= getUrlByName('messages.send'); ?>" method="post">
       <?= csrf_field() ?>
       <input type="hidden" name="recipient" value="<?= $data['recipient_user']['user_id']; ?>" />
       <textarea rows="3" id="message" class="mess" placeholder="<?= Translate::get('write'); ?>..." type="text" name="content" /></textarea>
-      <?= sumbit(Translate::get('reply')); ?>
+      <span class="right"><?= sumbit(Translate::get('reply')); ?></span>
     </form>
+  </div>
 
+  <div class="bg-white br-rd5 br-box-gray ml10 mb-ml-0 p15">
     <?php if ($data['list']) { ?>
       <?php foreach ($data['list'] as $key => $val) { ?>
-        <div class="hidden w-100 mb15">
-          <?php if ($val['message_sender_id'] == $uid['user_id']) { ?>
-            <div class="w-20">
-              <?= user_avatar_img($uid['user_avatar'], 'max', $uid['user_login'], 'br-rd-50 w44 mt15 left'); ?>
+        <div class="hidden">
+          <?php
+          $login  = $val['user_login'];
+          $ava    = $val['user_avatar'];
+          $id     = $val['message_sender_id'];
+          if ($val['message_sender_id'] == $uid['user_id']) {
+            $login  = $uid['user_login'];
+            $ava    = $uid['user_avatar'];
+            $id     = $uid['user_id'];
+          }
+          ?>
+          <div class="flex relative">
+            <div id="user-card" data-content_id="<?= $key; ?>" data-user_id="<?= $id; ?>">
+              <?= user_avatar_img($ava, 'max', $login, 'br-rd-50 w44 mr5'); ?>
+              <div id="content_<?= $key; ?>" class="content_<?= $key; ?>"></div>
             </div>
-            <div class="p15 br-rd5 w-70 relative bg-gray-100 black left">
-            <?php } else { ?>
-              <a class="right" href="<?= getUrlByName('user', ['login' => $val['user_login']]); ?>">
-                <?= user_avatar_img($val['user_avatar'], 'max', $val['user_login'], 'br-rd-50 w44 right'); ?>
-              </a>
-
-              <div class="p15 br-rd5 w-70 relative right black bg-yellow-100">
-                <a class="left" href="<?= getUrlByName('user', ['login' => $val['user_login']]); ?>">
-                  <?= $val['user_login']; ?>: &nbsp;
-                </a>
-              <?php } ?>
-
-              <?= $val['message_content']; ?>
-
-              <div class="size-14 gray mt5">
-                <?= $val['message_add_time']; ?>
-                <?php if ($val['message_receipt'] and $val['message_sender_id'] == $uid['user_id']) { ?>
-                  <?= Translate::get('it was read'); ?> (<?= $val['message_receipt']; ?>)
-                <?php } ?>
+            <a class="flex black dark-white flex-center" href="<?= getUrlByName('user', ['login' => $login]); ?>">
+              <div class="ml5">
+                <?= $login; ?>
+                <div class="gray-light-2 lowercase size-13">
+                  <?= lang_date($val['message_add_time']); ?>
+                </div>
               </div>
-              </div>
+            </a>
+          </div>
+          <div class="max-w780 ">
+            <?= $val['message_content']; ?>
+          </div>
+          <?php if ($val['message_receipt'] and $val['message_sender_id'] == $uid['user_id']) { ?>
+            <div class="right gray-light-2 lowercase size-13 hidden mb5 pb5">
+              <?= Translate::get('it was read'); ?> (<?= lang_date($val['message_receipt']); ?>)
             </div>
           <?php } ?>
-        <?php } ?>
         </div>
+        <div class="br-bottom mb15"></div>
+      <?php } ?>
+    <?php } ?>
+  </div>
 </main>
-<?= includeTemplate('/_block/sidebar/lang', ['lang' => Translate::get('under development')]); ?>
+
+<aside class="col-span-3 relative br-rd5 no-mob">
+  <div class="br-box-gray p15 mb15 br-rd5 bg-white size-14">
+    <div class="uppercase gray mt5 mb5"><?= Translate::get('dialogues'); ?></div>
+    <?php foreach ($data['dialog'] as $key => $val) { ?>
+      <?php if ($val['user_id'] != $uid['user_id']) { ?>
+        <div class="flex relative pt5 pb5 items-center hidden">
+          <?= user_avatar_img($val['user_avatar'], 'max', $val['user_login'], 'br-rd-50 w44 mr15'); ?>
+          <a href="<?= getUrlByName('user.dialogues', ['id' => $val['dialog_id']]); ?>"><?= $val['user_login']; ?></a>
+        </div> 
+      <?php } ?>
+    <?php } ?>
+  </div>  
+</aside>

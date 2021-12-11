@@ -107,7 +107,7 @@ class MessagesController extends MainController
                 } else if ($dialog['dialog_sender_id'] != $uid['user_id'] and $val['message_recipient_remove']) {
                     unset($list[$key]);
                 } else {
-                    $list[$key]['message_content']  =  Content::text($val['message_content'], 'line');
+                    $list[$key]['message_content']  =  Content::text($val['message_content'], 'text');
                     $list[$key]['user_login']   = $recipient_user['user_login'];
                     $list[$key]['user_avatar']  = $recipient_user['user_avatar'];
                 }
@@ -124,6 +124,7 @@ class MessagesController extends MainController
                     'sheet'             => 'dialog',
                     'list'              => $list,
                     'recipient_user'    => $recipient_user,
+                    'dialog'            => MessagesModel::lastBranches($uid['user_id']),
                 ]
             ]
         );

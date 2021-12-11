@@ -1,5 +1,5 @@
 <main class="col-span-9 mb-col-12">
-  <div class="bg-white br-rd5 br-box-gray pt5 pr15 pb5 pl15">
+  <div class="ml10 mb-ml-0 hidden">
     <?= breadcrumb(
       '/',
       Translate::get('home'),
@@ -7,7 +7,8 @@
       Translate::get('profile'),
       Translate::get('private messages')
     ); ?>
-
+  </div>
+  <div class="bg-white br-rd5 br-box-gray p15">
     <?php if (!empty($data['messages'])) { ?>
       <?php foreach ($data['messages'] as  $msg) { ?>
         <div class="hidden mt15 mb15<?php if (!$msg['unread'] > 0) { ?> bg-yellow-100<?php } ?>">
@@ -30,7 +31,7 @@
           <div class="p15 br-rd5 mt5 relative bg-blue-100<?php if (!$msg['unread'] > 0) { ?> bg-purple-100<?php } ?> gray">
             <?= $msg['message']['message_content']; ?>
           </div>
-          <a class="lowercase size-14 right" href="/messages/read/<?= $msg['dialog_id']; ?>">
+          <a class="lowercase size-14 right" href="<?= getUrlByName('user.dialogues', ['id' => $msg['dialog_id']]); ?>">
             <?php if ($msg['unread']) { ?>
               <?= Translate::get('there are'); ?> <?= $msg['count']; ?> <?= $msg['unread_num']; ?>
             <?php } else { ?>

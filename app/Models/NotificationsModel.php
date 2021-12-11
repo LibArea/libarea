@@ -169,10 +169,6 @@ class NotificationsModel extends MainModel
                         LEFT JOIN
                         (
                             SELECT 
-                                MAX(facet_id), 
-                                MAX(facet_slug), 
-                                MAX(facet_title),
-                                MAX(relation_facet_id), 
                                 relation_post_id,
 
                                 GROUP_CONCAT(facet_slug, '@', facet_title SEPARATOR '@') AS facet_list

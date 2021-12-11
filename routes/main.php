@@ -67,7 +67,7 @@ Route::before('Authorization@noAuth')->getGroup();
     Route::get('/logout')->controller('Auth\LogoutController')->name('logout');
 
     Route::get('/u/{login}/messages')->controller('MessagesController')->where(['login' => '[A-Za-z0-9]+'])->name('user.messages');   
-    Route::get('/messages/read/{id}')->controller('MessagesController@dialog')->where(['id' => '[0-9]+']); 
+    Route::get('/messages/read/{id}')->controller('MessagesController@dialog')->where(['id' => '[0-9]+'])->name('user.dialogues'); 
     Route::get('/u/{login}/mess')->controller('MessagesController@messages')->where(['login' => '[A-Za-z0-9]+'])->name('user.send.messages'); 
 
 	Route::get('/u/{login}/notifications')->controller('NotificationsController')->where(['login' => '[A-Za-z0-9]+'])->name('user.notifications'); 

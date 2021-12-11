@@ -68,6 +68,7 @@ $data = [
     'it was read'       => 'It was read',
     'all messages'      => 'All messages',
     'send a message'    => 'Send a message',
+    'dialogues'         => 'Dialogues',
     'dialogue'          => 'Dialogue',
     'write a message'   => 'Write a message',
     'send'              => 'Send',

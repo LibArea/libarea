@@ -63,6 +63,7 @@ $data = [
     'it was read'       => 'A fost citit',
     'all messages'      => 'Toate postările',
     'send a message'    => 'Dialog',
+    'dialogues'         => 'Dialogs',
     'dialogue'          => 'Trimite un mesaj',
     'send'              => 'Trimite',
     'to share'          => 'Distribuie',

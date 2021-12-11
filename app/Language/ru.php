@@ -67,6 +67,7 @@ $data = [
     'it was read'       => 'Было прочитано',
     'all messages'      => 'Все сообщения',
     'send a message'    => 'Диалог',
+    'dialogues'         => 'Диалоги',
     'dialogue'          => 'Отправить сообщение',
     'write a message'   => 'Написать сообщение',
     'send'              => 'Отправить',

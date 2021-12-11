@@ -23,11 +23,30 @@ class MessagesModel extends MainModel
                     dialog_sender_count,
                     dialog_recipient_count
                         FROM messages_dialog 
-                            WHERE dialog_sender_id = :user_id OR dialog_recipient_id = :user_id
+                          WHERE dialog_sender_id = :user_id OR dialog_recipient_id = :user_id
                             ORDER BY dialog_update_time DESC";
 
         return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
     }
+    
+    public static function lastBranches($user_id)
+    {
+        $sql = "SELECT  
+                    dialog_id,
+                    dialog_recipient_unread,
+                    dialog_add_time,
+                    dialog_sender_count,
+                    dialog_recipient_count,
+                    user_id,
+                    user_login,
+                    user_avatar
+                        FROM messages_dialog 
+                        LEFT JOIN users ON dialog_sender_id = user_id OR dialog_recipient_id = user_id
+                          WHERE dialog_sender_id = :user_id OR dialog_recipient_id = :user_id
+                            ORDER BY dialog_update_time DESC LIMIT 15";
+
+        return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
+    }   
 
     // Получаем диалог по id
     public static function getDialogById($dialog_id)
