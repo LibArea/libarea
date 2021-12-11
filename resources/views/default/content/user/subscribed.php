@@ -19,7 +19,7 @@
         $pages = [
           [
             'id' => 'favorites',
-            'url' => getUrlByName('favorites', ['login' => $uid['user_login']]),
+            'url' => getUrlByName('user.favorites', ['login' => $uid['user_login']]),
             'content' => Translate::get('favorites'),
             'icon' => 'bi bi-bookmark'
           ],

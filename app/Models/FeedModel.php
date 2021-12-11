@@ -19,8 +19,8 @@ class FeedModel extends MainModel
                 $string     = "WHERE facet_list LIKE :qa AND post_is_recommend = 1";
             }
         } elseif ($type == 'admin') {
-            $selection  = "";
-            $string     = "";
+            $selection  = 0;
+            $string     = "WHERE post_user_id != :selection";
              if ($sheet == 'ban') {
                 $string     = "WHERE post_is_deleted = 1";
             }
@@ -121,8 +121,8 @@ class FeedModel extends MainModel
                 $string = "WHERE facet_slug = :qa AND post_is_recommend = 1";
             }
         } elseif ($type == 'admin') {
-            $selection  = "";
-            $string     = "";
+            $selection  = 0;
+            $string     = "WHERE post_user_id != :selection";
              if ($sheet == 'ban') {
                 $string     = "WHERE post_is_deleted = 1";
             }
