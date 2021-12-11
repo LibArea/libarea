@@ -29,12 +29,12 @@ return [
         'url'   => getUrlByName('admin.topics'),
         'name'  => Translate::get('topics'),
         'icon'  => 'bi bi-columns-gap',
-        'item'  => 'topics',
+        'item'  => 'topic',
     ], [
         'url'   => getUrlByName('admin.blogs'),
         'name'  => Translate::get('blogs'),
         'icon'  => 'bi bi-journal-text',
-        'item'  => 'blogs',
+        'item'  => 'blog',
     ], [
         'url'   => getUrlByName('admin.invitations'),
         'name'  => Translate::get('invites'),

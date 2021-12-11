@@ -4,7 +4,6 @@ namespace App\Controllers\Admin;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\Admin\BanTopicModel;
 use App\Models\FacetModel;
 use Base, Translate;
 
@@ -45,7 +44,7 @@ class FacetsController extends MainController
         $id = Request::getPostInt('id');
 
         $topic = FacetModel::getFacet($id, 'id');
-        BanTopicModel::setBan($id, $topic['facet_is_deleted']);
+        FacetModel::ban($id, $topic['facet_is_deleted']);
 
         return true;
     }

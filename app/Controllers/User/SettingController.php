@@ -19,12 +19,9 @@ class SettingController extends MainController
     // Форма настройки профиля
     function settingForm()
     {
-        // Данные участника
-        $login  = Request::get('login');
-        $user   = UserModel::getUser($this->uid['user_login'], 'slug');
-
         // Ошибочный Slug в Url
-        if ($login != $user['user_login']) {
+        $user   = UserModel::getUser($this->uid['user_login'], 'slug');
+        if (Request::get('login') != $user['user_login']) {
             redirect(getUrlByName('setting', ['login' => $user['user_login']]));
         }
 
@@ -99,10 +96,8 @@ class SettingController extends MainController
     // Форма загрузки аватарки
     function avatarForm()
     {
-        $login  = Request::get('login');
-
         // Ошибочный Slug в Url
-        if ($login != $this->uid['user_login']) {
+        if (Request::get('login') != $this->uid['user_login']) {
             redirect(getUrlByName('setting.avatar', ['login' => $this->uid['user_login']]));
         }
 
@@ -148,9 +143,7 @@ class SettingController extends MainController
     // Форма изменение пароля
     function securityForm()
     {
-        $login  = Request::get('login');
-
-        if ($login != $this->uid['user_login']) {
+        if (Request::get('login') != $this->uid['user_login']) {
             redirect(getUrlByName('setting.security', ['login' => $this->uid['user_login']]));
         }
 
@@ -208,10 +201,8 @@ class SettingController extends MainController
     // Удаление обложки
     function coverRemove()
     {
-        $login      = Request::get('login');
         $redirect   = getUrlByName('setting.avatar', ['login' => $this->uid['user_login']]);
-
-        if ($login != $this->uid['user_login']) {
+        if (Request::get('login') != $this->uid['user_login']) {
             redirect($redirect);
         }
 
@@ -243,13 +234,9 @@ class SettingController extends MainController
     // Форма настройки предпочтений участника
     function notificationsForm()
     {
-        // Данные участника
-        $login  = Request::get('login');
-        $user   = UserModel::getUser($this->uid['user_login'], 'slug');
-
         // Ошибочный Slug в Url
-        if ($login != $user['user_login']) {
-            redirect(getUrlByName('setting.notifications', ['login' => $user['user_login']]));
+        if (Request::get('login') != $this->uid['user_login']) {
+            redirect(getUrlByName('setting.notifications', ['login' => $this->uid['user_login']]));
         }
 
         // Если пользователь забанен

@@ -118,9 +118,8 @@ class UserController extends MainController
     // Страница закладок участника
     function favorites()
     {
-        $login  = Request::get('login');
-        if ($login != $this->uid['user_login']) {
-            redirect(getUrlByName('favorites', ['login' => $this->uid['user_login']]));
+        if (Request::get('login') != $this->uid['user_login']) {
+            redirect(getUrlByName('user.favorites', ['login' => $this->uid['user_login']]));
         }
 
         $favorites = UserModel::userFavorite($this->uid['user_id']);
@@ -153,8 +152,7 @@ class UserController extends MainController
     // Страница черновиков участника
     function drafts()
     {
-        $login  = Request::get('login');
-        if ($login != $this->uid['user_login']) {
+        if (Request::get('login') != $this->uid['user_login']) {
             redirect(getUrlByName('user.drafts', ['login' => $this->uid['user_login']]));
         }
 
@@ -174,9 +172,8 @@ class UserController extends MainController
     // Страница предпочтений пользователя
     public function subscribed()
     {
-        $login  = Request::get('login');
-        if ($login != $this->uid['user_login']) {
-            redirect(getUrlByName('subscribed', ['login' => $this->uid['user_login']]));
+        if (Request::get('login') != $this->uid['user_login']) {
+            redirect(getUrlByName('user.subscribed', ['login' => $this->uid['user_login']]));
         }
 
         $focus_posts = NotificationsModel::getFocusPostsListUser($this->uid['user_id']);

@@ -343,7 +343,7 @@ function add_post($facet, $user_id)
 { 
     $url_add = getUrlByName('post.add');
     if (!empty($facet)) {
-        if ($facet['facet_user_id'] == $user_id) {
+        if ($facet['facet_user_id'] == $user_id || $facet['facet_type'] == 'topic') {
             $url_add = $url_add . '/' . $facet['facet_id'];
         }
     }
