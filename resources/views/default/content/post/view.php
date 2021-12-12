@@ -277,8 +277,8 @@
     <?php } ?>
   </div>
   <?php if ($post['post_content_img']) { ?>
-    <div class="br-box-gray bg-white br-rd5 mb15">
-      <?= post_img($post['post_content_img'], $post['post_title'], 'w-100 p15 post-img br-rd5', 'cover', $post['post_content_img']); ?>
+    <div class="br-box-gray bg-white br-rd5 mb15 post-img">
+      <?= post_img($post['post_content_img'], $post['post_title'], 'w-100 p15 br-rd5', 'cover', $post['post_content_img']); ?>
     </div>
   <?php } ?>
   <div class="share-btn br-box-gray bg-white br-rd5 mb15 p15 size-21 center">
@@ -309,11 +309,11 @@
   <?php } ?>
 </aside>
 <script nonce="<?= $_SERVER['nonce']; ?>">
-  document.querySelectorAll(".post-img")
+// Modal windows for photos in a post
+document.querySelectorAll(".post-body.full .post img, .post-img img, .answ-telo p img")
   .forEach(el => el.addEventListener("click", function (e) {
-    let post_img = document.querySelectorAll('img.post-img');
-    if (post_img[0].src) {
-      let img = '<img src="' + post_img[0].src + '">';
+    if (el.src) {
+      let img = '<img src="' + el.src + '">';
       Swal.fire({
         width: '100%',
         showConfirmButton: false,

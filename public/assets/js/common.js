@@ -250,20 +250,6 @@ function getCookie(cname) {
   return "";
 }
 
-// Modal windows for photos in a post
-document.querySelectorAll(".post-body.full .post img")
-  .forEach(el => el.addEventListener("click", function (e) {
-    if (el.src) {
-      let img = '<img src="' + el.src + '">';
-      Swal.fire({
-        width: '100%',
-        showConfirmButton: false,
-        showCloseButton: true,
-        title: img
-      })
-    }
-  }));
-
 // search
 document.getElementById('find').addEventListener('keydown', function () {
   fetch_search();
