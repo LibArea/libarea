@@ -35,7 +35,7 @@
         <div class="flex">
            <?php if ($data['user']['user_cover_art'] != 'cover_art.jpeg') { ?>
             <div class="relative size-15 mr15">
-              <img class="block br-box-gray max-w-100" src="<?= user_cover_url($data['user']['user_cover_art']); ?>">
+              <img class="block br-box-gray max-w-100" src="<?= cover_url($data['user']['user_cover_art'], 'user'); ?>">
               <a class="right size-14" href="<?= getUrlByName('user', ['login' => $uid['user_login']]); ?>/delete/cover">
                 <?= Translate::get('remove'); ?>
               </a>

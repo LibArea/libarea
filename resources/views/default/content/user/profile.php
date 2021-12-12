@@ -20,7 +20,7 @@
   </style>
 
   <?php if ($user['user_cover_art'] != 'cover_art.jpeg') { ?>
-    <div class="profile-box-cover relative" style="background-image: url(<?= user_cover_url($user['user_cover_art']); ?>); background-position: 50% 50%;">
+    <div class="profile-box-cover relative" style="background-image: url(<?= cover_url($user['user_cover_art'], 'user'); ?>); background-position: 50% 50%;">
     <?php } else { ?>
       <div class="profile-box relative">
       <?php } ?>

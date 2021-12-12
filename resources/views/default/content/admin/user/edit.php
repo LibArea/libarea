@@ -20,7 +20,7 @@
         </a>
         <br>
       <?php } ?>
-      <img width="325" class="right" src="<?= user_cover_url($data['user']['user_cover_art']); ?>">
+      <img width="325" class="right" src="<?= cover_url($data['user']['user_cover_art'], 'user'); ?>">
       <?= user_avatar_img($data['user']['user_avatar'], 'max', $data['user']['user_login'], 'avatar'); ?>
 
       <div class="mb20">

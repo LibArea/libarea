@@ -1,5 +1,5 @@
 <div class="br-rd5 bg-gray-100 box-shadow-all absolute ml45 user-card z-40">
-  <div <?php if ($user['user_cover_art'] != 'cover_art.jpeg') { ?> style="background-image: linear-gradient(0.25turn, #fefefe, #f3f3f369), url(<?= user_cover_url($user['user_cover_art']); ?>); background-position: 50% 50%;" <?php } ?> class="p10">
+  <div <?php if ($user['user_cover_art'] != 'cover_art.jpeg') { ?> style="background-image: linear-gradient(0.25turn, #fefefe, #f3f3f369), url(<?= cover_url($user['user_cover_art'], 'user'); ?>); background-position: 50% 50%;" <?php } ?> class="p10">
 
     <div class="flex ">
       <div class="-mt50">

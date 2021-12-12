@@ -70,9 +70,13 @@ function user_avatar_img($file, $size, $alt, $style)
     return $img;
 }
 
-// User's Cover art
-function user_cover_url($file)
+// Cover of users, blog 
+function cover_url($file, $type)
 {
+    if ($type == 'blog') {
+        return AG_PATH_BLOGS_COVER . $file;
+    }
+    
     return AG_PATH_USERS_COVER . $file;
 }
 

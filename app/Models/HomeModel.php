@@ -68,19 +68,14 @@ class HomeModel extends MainModel
             
             LEFT JOIN (
                 SELECT 
-                    MAX(facet_id), 
-                    MAX(facet_slug), 
-                    MAX(facet_title),
-                    MAX(facet_type),
-                    MAX(relation_facet_id), 
-                    MAX(relation_post_id) as p_id,
+                    relation_post_id,
                     GROUP_CONCAT(facet_type, '@', facet_slug, '@', facet_title SEPARATOR '@') AS facet_list
                     FROM facets
                     LEFT JOIN facets_posts_relation 
                         on facet_id = relation_facet_id
                         GROUP BY relation_post_id
             ) AS rel
-                 ON rel.p_id = post_id
+                 ON rel.relation_post_id= post_id
                 LEFT JOIN users ON user_id = post_user_id
                 LEFT JOIN favorites ON favorite_tid = post_id 
                     AND favorite_user_id = :user_id AND favorite_type = 1  
@@ -105,8 +100,8 @@ class HomeModel extends MainModel
             if ($uid['user_id'] == 0) {
                 $string = "";
             } else {
-                $string = "AND t_1 IN(0)";
-                if ($result) $string = "AND t_1 IN(" . implode(',', $result ?? []) . ")";
+                $string = "AND f_id IN(0)";
+                if ($result) $string = "AND f_id IN(" . implode(',', $result ?? []) . ")";
             }
         }
 
@@ -126,10 +121,7 @@ class HomeModel extends MainModel
                         LEFT JOIN
                         (
                             SELECT 
-                                MAX(facet_id) as t_1, 
-                                MAX(facet_slug), 
-                                MAX(facet_title),
-                                MAX(relation_facet_id), 
+                            MAX(facet_id) as f_id,
                                 relation_post_id
                                 FROM facets  
                                 LEFT JOIN facets_posts_relation 
@@ -182,7 +174,7 @@ class HomeModel extends MainModel
     }
 
     // Темы все / подписан
-    public static function getSubscriptionTopics($user_id)
+    public static function subscription($user_id)
     {
         $sql = "SELECT 
                     facet_id, 
@@ -195,7 +187,7 @@ class HomeModel extends MainModel
                     signed_user_id                    
                         FROM facets 
                         JOIN facets_signed ON signed_facet_id = facet_id AND signed_user_id = :user_id  
-                            WHERE  facet_type = 'topic' ORDER BY facet_id DESC";
+                            ORDER BY facet_id DESC";
 
         return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
     }

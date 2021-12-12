@@ -18,7 +18,7 @@ class HomeController extends MainController
 
         $limit  = 25;
         $latest_answers = HomeModel::latestAnswers($uid);
-        $topics_user    = HomeModel::getSubscriptionTopics($uid['user_id']);
+        $topics_user    = HomeModel::subscription($uid['user_id']);
         $pagesCount     = HomeModel::feedCount($topics_user, $uid, $sheet);
         $posts          = HomeModel::feed($page, $limit, $topics_user, $uid, $sheet);
 

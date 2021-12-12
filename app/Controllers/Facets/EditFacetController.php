@@ -115,6 +115,13 @@ class EditFacetController extends MainController
             UploadImage::img($img, $facet['facet_id'], 'topic');
         }
 
+        // Баннер
+        $cover          = $_FILES['cover'];
+        $check_cover    = $_FILES['cover']['name'];
+        if ($check_cover) {
+            UploadImage::cover($cover, $facet['facet_id'], 'blog');
+        }
+
         // Если есть смена post_user_id и это TL5
         $user_new  = Request::getPost('user_id');
         $facet_user_new = json_decode($user_new, true);

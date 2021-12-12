@@ -134,6 +134,7 @@ class FacetModel extends MainModel
                     facet_info,
                     facet_slug,
                     facet_img,
+                    facet_cover_art,
                     facet_add_date,
                     facet_seo_title,
                     facet_merged_id,
@@ -631,5 +632,19 @@ class FacetModel extends MainModel
         }
 
         DB::run($sql, ['id' => $id]);
+    }
+    
+    public static function setCover($content_id, $new_cover)
+    {
+        $params = [
+            'facet_id'          => $content_id,
+            'facet_cover_art'   => $new_cover,
+        ];
+
+        $sql = "UPDATE facets 
+                    SET facet_cover_art = :facet_cover_art
+                    WHERE facet_id = :facet_id";
+
+        return  DB::run($sql, $params);
     }
 }

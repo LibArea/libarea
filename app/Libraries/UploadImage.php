@@ -111,9 +111,17 @@ class UploadImage
     // Обложка участника
     public static function cover($cover, $content_id, $type)
     {
-        // 1920px / 350px
-        $path_cover_img     = HLEB_PUBLIC_DIR . AG_PATH_USERS_COVER;
-        $path_cover_small   = HLEB_PUBLIC_DIR . AG_PATH_USERS_SMALL_COVER;
+        switch ($type) {
+            case 'user':
+                // 1920px / 350px
+                $path_cover_img     = HLEB_PUBLIC_DIR . AG_PATH_USERS_COVER;
+                $path_cover_small   = HLEB_PUBLIC_DIR . AG_PATH_USERS_SMALL_COVER;
+                break;
+            default:
+                $path_cover_img     = HLEB_PUBLIC_DIR . AG_PATH_BLOGS_COVER;
+                $path_cover_small   = HLEB_PUBLIC_DIR . AG_PATH_BLOGS_SMALL_COVER;
+        }
+
         $pref = 'cover-';
         $default_img = 'cover_art.jpeg';
 
@@ -126,17 +134,22 @@ class UploadImage
             $image
                 ->fromFile($file_cover)  // load image.jpg
                 ->autoOrient()     // adjust orientation based on exif data
-                ->resize(1920, 350)
+                ->resize(1720, 350)
                 ->toFile($path_cover_img . $filename . '.jpeg', 'image/jpeg')
                 ->resize(390, 124)
                 ->toFile($path_cover_small . $filename . '.jpeg', 'image/jpeg');
 
             $new_cover  = $filename . '.jpeg';
+            
+            if ($type == 'user') {
+                $user       = UserModel::getUser($content_id, 'id');
+                $cover_art  = $user['user_cover_art'];
+            } else {
+                $facet      = FacetModel::getFacet($content_id, 'id');
+                $cover_art  = $facet['facet_cover_art'];
+            }
 
-            $user      = UserModel::getUser($content_id, 'id');
-            $cover_art  = $user['user_cover_art'];
-
-            // Удалим старую аватарку, кроме дефолтной
+            // Удалим старую, кроме дефолтной
             if ($cover_art != $default_img && $cover_art != $new_cover) {
                 @unlink($path_cover_img . $cover_art);
                 @unlink($path_cover_small . $cover_art);
@@ -144,7 +157,11 @@ class UploadImage
 
             // Запишем обложку 
             $date = date('Y-m-d H:i:s');
-            SettingModel::setCover($content_id, $new_cover, $date);
+            if ($type == 'user') {
+                SettingModel::setCover($content_id, $new_cover, $date);
+            } else {
+                FacetModel::setCover($content_id, $new_cover);
+            }
 
             return true;
         }

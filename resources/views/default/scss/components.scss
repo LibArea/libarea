@@ -194,6 +194,11 @@ textarea:focus { border: 1px solid #9ccdf8; }
   border-color: #0085EE;
 }
 
+.fon-rgba {
+  background: rgba(0,0,0,.3);
+  padding: 1px 6px;
+}
+
 /* Tags */
 .tags-look .tagify__dropdown__item{
   display: inline-block;
