@@ -317,6 +317,7 @@
       Swal.fire({
         width: '100%',
         showConfirmButton: false,
+        showCloseButton: true,
         title: img
       })
     }

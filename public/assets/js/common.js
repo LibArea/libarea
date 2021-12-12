@@ -258,6 +258,7 @@ document.querySelectorAll(".post-body.full .post img")
       Swal.fire({
         width: '100%',
         showConfirmButton: false,
+        showCloseButton: true,
         title: img
       })
     }
