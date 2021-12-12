@@ -13,7 +13,7 @@
     let dark = document.querySelector('.bg-gray-100.dark');
     let viewerEl = document.querySelector('.editorSection');
     let body = viewerEl.innerHTML;
-
+ 
     if (viewerEl == null) {
       return;
     }
@@ -55,14 +55,14 @@
 
           const formData = new FormData()
           formData.append('file', file, file.name)
-
+          let alt_text = document.getElementById("toastuiAltTextInput").value;
           const ajax = new XMLHttpRequest()
           ajax.open('POST', '/backend/upload/image', true)
           ajax.send(formData)
           ajax.onreadystatechange = function() {
             if (ajax.readyState === 4) {
               if ((ajax.status >= 200 && ajax.status < 300) || ajax.status === 304) {
-                callback(ajax.responseText, 'alt_text');
+                callback(ajax.responseText, alt_text);
               }
             }
           }

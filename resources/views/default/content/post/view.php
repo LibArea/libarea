@@ -257,8 +257,9 @@
   } ?>
 </main>
 <aside class="col-span-3 relative br-rd5 no-mob">
-  <div class="br-box-gray bg-white br-rd5 mb15 p15">
-    <?php if (!empty($data['topics'])) { ?>
+   
+  <?php if (!empty($data['topics'])) { ?>
+    <div class="br-box-gray bg-white br-rd5 mb15 p15">
       <h3 class="uppercase mb5 mt0 font-light size-15 gray"><?= Translate::get('topics'); ?></h3>
       <?php foreach ($data['topics'] as $topic) { ?>
         <?php if ($uid['user_id']) { ?>
@@ -274,8 +275,9 @@
           <div class="gray-light-2 size-14"><?= $topic['facet_short_description']; ?></div>
         </a>
       <?php } ?>
-    <?php } ?>
-  </div>
+    </div>
+  <?php } ?>
+ 
   <?php if ($post['post_content_img']) { ?>
     <div class="br-box-gray bg-white br-rd5 mb15 post-img">
       <?= post_img($post['post_content_img'], $post['post_title'], 'w-100 p15 br-rd5', 'cover', $post['post_content_img']); ?>
