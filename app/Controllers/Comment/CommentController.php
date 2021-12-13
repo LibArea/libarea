@@ -10,16 +10,23 @@ use Content, Base, Translate;
 
 class CommentController extends MainController
 {
+    private $uid;
+    
+    protected $limit = 25;
+
+    public function __construct()
+    {
+        $this->uid  = Base::getUid();
+    }
+    
     // Все комментарии
     public function index()
     {
-        $uid    = Base::getUid();
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
-        $limit  = 25;
         $pagesCount = CommentModel::getCommentsAllCount('user');
-        $comments   = CommentModel::getCommentsAll($page, $limit, $uid, 'user');
+        $comments   = CommentModel::getCommentsAll($page, $this->limit, $this->uid, 'user');
 
         $result = [];
         foreach ($comments  as $ind => $row) {
@@ -39,9 +46,9 @@ class CommentController extends MainController
             '/comment/comments',
             [
                 'meta'  => meta($m, Translate::get('all comments'), Translate::get('comments-desc')),
-                'uid'   => $uid,
+                'uid'   => $this->uid,
                 'data'  => [
-                    'pagesCount'    => ceil($pagesCount / $limit),
+                    'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
                     'sheet'         => 'comments',
                     'comments'      => $result
@@ -77,7 +84,7 @@ class CommentController extends MainController
             '/comment/comment-user',
             [
                 'meta'  => meta($m, Translate::get('comments') . ' ' . $login, Translate::get('comments') . ' ' . $login),
-                'uid'   => Base::getUid(),
+                'uid'   => $this->uid,
                 'data'  => [
                     'sheet'         => 'user-comments',
                     'comments'      => $result,

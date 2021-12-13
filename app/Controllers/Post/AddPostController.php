@@ -309,10 +309,7 @@ class AddPostController extends MainController
         $post_id = Request::getPostInt('post_id');
 
         // Проверка доступа 
-        $tl     = Validation::validTl($this->uid['user_trust_level'], 5, 0, 1);
-        if ($tl === false) {
-            redirect('/');
-        }
+        Validation::validTl($this->uid['user_trust_level'], Base::USER_LEVEL_ADMIN, 0, 1);
 
         $post = PostModel::getPostId($post_id);
         pageError404($post);

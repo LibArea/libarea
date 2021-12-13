@@ -9,16 +9,21 @@ use Base, Translate;
 
 class FacetsController extends MainController
 {
+    private $uid;
+    
+    protected $limit = 25;
+
+    public function __construct()
+    {
+        $this->uid  = Base::getUid();
+    }
+    
     public function index($sheet, $type)
     {
-       //  print_r($sheet);  
-        
-        $uid    = Base::getUid();
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
-        $limit  = 25;
-        $pagesCount = FacetModel::getFacetsAllCount($uid['user_id'], $sheet);
+        $pagesCount = FacetModel::getFacetsAllCount($this->uid['user_id'], $sheet);
         
         Request::getResources()->addBottomScript('/assets/js/admin.js');
 
@@ -26,13 +31,13 @@ class FacetsController extends MainController
             '/admin/facet/facets',
             [
                 'meta'  => meta($m = [], Translate::get('topics')),
-                'uid'   => $uid,
+                'uid'   => $this->uid,
                 'data'  => [
                     'sheet'         => $sheet,
                     'type'          => $type,
-                    'pagesCount'    => ceil($pagesCount / $limit),
+                    'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
-                    'facets'        => FacetModel::getFacetsAll($page, $limit, $uid['user_id'], $sheet),
+                    'facets'        => FacetModel::getFacetsAll($page, $this->limit, $this->uid['user_id'], $sheet),
                 ]
             ]
         );

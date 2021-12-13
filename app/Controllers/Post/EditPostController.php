@@ -106,7 +106,7 @@ class EditPostController extends MainController
         $post_user_new = json_decode($user_new, true);
         $post_user_id = $post['post_user_id'];
         if ($post['post_user_id'] != $post_user_new[0]['id']) {
-            if ($this->uid['user_trust_level'] == 5) {
+            if ($this->uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) {
                 $post_user_id = $post_user_new[0]['id'];
             }
         }

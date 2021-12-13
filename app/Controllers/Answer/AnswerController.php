@@ -10,16 +10,23 @@ use Content, Base, Translate;
 
 class AnswerController extends MainController
 {
+    private $uid;
+    
+    protected $limit = 25;
+
+    public function __construct()
+    {
+        $this->uid  = Base::getUid();
+    }
+    
     // Все ответы
     public function index()
     {
-        $uid    = Base::getUid();
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
-        $limit  = 25;
         $pagesCount = AnswerModel::getAnswersAllCount('user');
-        $answ       = AnswerModel::getAnswersAll($page, $limit, $uid, 'user');
+        $answ       = AnswerModel::getAnswersAll($page, $this->limit, $this->uid, 'user');
 
         $result = [];
         foreach ($answ  as $ind => $row) {
@@ -39,9 +46,9 @@ class AnswerController extends MainController
             '/answer/answers',
             [
                 'meta'  => meta($m, Translate::get('all answers'), Translate::get('answers-desc')),
-                'uid'   => $uid,
+                'uid'   => $this->uid,
                 'data'  => [
-                    'pagesCount'    => ceil($pagesCount / $limit),
+                    'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
                     'sheet'         => 'answers',
                     'answers'       => $result,
@@ -78,7 +85,7 @@ class AnswerController extends MainController
             '/answer/answer-user',
             [
                 'meta'  => meta($m, Translate::get('answers') . ' ' . $login, Translate::get('responses-members') . ' ' . $login),
-                'uid'   => Base::getUid(),
+                'uid'   => $this->uid,
                 'data'  => [
                     'sheet'         => 'user-answers',
                     'answers'       => $result,

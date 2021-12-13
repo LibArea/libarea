@@ -10,6 +10,8 @@ use Content, Base, Translate;
 class PostsController extends MainController
 {
     private $uid;
+    
+    protected $limit = 100;
 
     public function __construct()
     {
@@ -20,10 +22,9 @@ class PostsController extends MainController
     {
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
-        $limit  = 100;
  
         $pagesCount = FeedModel::feedCount($this->uid, $sheet, 'admin', 'post');
-        $posts      = FeedModel::feed($page, $limit, $this->uid, $sheet, 'admin', 'post');
+        $posts      = FeedModel::feed($page, $this->limit, $this->uid, $sheet, 'admin', 'post');
  
         $result = [];
         foreach ($posts  as $ind => $row) {
@@ -40,7 +41,7 @@ class PostsController extends MainController
                 'uid'   => $this->uid,
                 'data'  => [
                     'sheet'         => $sheet == 'all' ? 'posts' : 'posts-ban',
-                    'pagesCount'    => ceil($pagesCount / $limit),
+                    'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
                     'posts'         => $result,
                 ]

@@ -10,14 +10,15 @@ use Base, Translate;
 
 class ReportsController extends MainController
 {
+    protected $limit = 25;
+    
     public function index()
     {
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
-        $limit = 50;
         $pagesCount = ReportModel::getCount();
-        $reports    = ReportModel::get($page, $limit);
+        $reports    = ReportModel::get($page, $this->limit);
 
         $result = [];
         foreach ($reports as $ind => $row) {
@@ -34,7 +35,7 @@ class ReportsController extends MainController
                 'meta'  => meta($m = [], Translate::get('reports')),
                 'uid'   => Base::getUid(),
                 'data'  => [
-                    'pagesCount'    => ceil($pagesCount / $limit),
+                    'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
                     'sheet'         => 'reports',
                     'reports'       => $result,

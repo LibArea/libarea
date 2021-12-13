@@ -11,6 +11,8 @@ use Content, Config, Base, Validation, Translate;
 class UserController extends MainController
 {
     private $uid;
+    
+    protected $limit = 42;
 
     public function __construct()
     {
@@ -23,9 +25,8 @@ class UserController extends MainController
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
-        $limit = 42;
         $usersCount = UserModel::getUsersAllCount('all');
-        $users      = UserModel::getUsersAll($page, $limit, $this->uid['user_id'], 'noban');
+        $users      = UserModel::getUsersAll($page, $this->limit, $this->uid['user_id'], 'noban');
         pageError404($users);
 
         $m = [
@@ -42,7 +43,7 @@ class UserController extends MainController
                 'uid'   => $this->uid,
                 'data'  => [
                     'sheet'         => 'users',
-                    'pagesCount'    => ceil($usersCount / $limit),
+                    'pagesCount'    => ceil($usersCount / $this->limit),
                     'pNum'          => $page,
                     'users'         => $users
                 ]
@@ -82,7 +83,7 @@ class UserController extends MainController
         }
 
         $isBan = '';
-        if ($this->uid['user_trust_level'] > 4) {
+        if ($this->uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) {
             Request::getResources()->addBottomScript('/assets/js/admin.js');
             $isBan = UserModel::isBan($user['user_id']);
         }

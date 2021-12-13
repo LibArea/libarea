@@ -10,14 +10,15 @@ use Base, Translate;
 
 class AuditsController extends MainController
 {
+    protected $limit = 55;
+    
     public function index($sheet)
     {
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
-        $limit  = 55;
         $pagesCount = AuditModel::getAuditsAllCount($sheet);
-        $audits     = AuditModel::getAuditsAll($page, $limit, $sheet);
+        $audits     = AuditModel::getAuditsAll($page, $this->limit, $sheet);
 
         $result = [];
         foreach ($audits  as $ind => $row) {
@@ -44,7 +45,7 @@ class AuditsController extends MainController
                 'uid'   => Base::getUid(),
                 'data' => [
                     'sheet'         => $sheet == 'approved' ? 'approved' : 'audits',
-                    'pagesCount'    => ceil($pagesCount / $limit),
+                    'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
                     'audits'        => $result,
                 ]

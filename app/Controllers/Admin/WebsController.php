@@ -10,6 +10,8 @@ use Base, Content, Translate;
 class WebsController extends MainController
 {
     private $uid;
+    
+    protected $limit = 25;
 
     public function __construct()
     {
@@ -21,9 +23,8 @@ class WebsController extends MainController
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
-        $limit      = 25;
         $pagesCount = WebModel::getItemsAllCount();
-        $domains    = WebModel::getItemsAll($page, $limit, $this->uid['user_id']);
+        $domains    = WebModel::getItemsAll($page, $this->limit, $this->uid['user_id']);
 
         $result = [];
         foreach ($domains as $ind => $row) {
@@ -40,7 +41,7 @@ class WebsController extends MainController
                 'uid'   => $this->uid,
                 'data'  => [
                     'sheet'         => $sheet == 'all' ? 'domains' : $sheet,
-                    'pagesCount'    => ceil($pagesCount / $limit),
+                    'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
                     'domains'       => $result,
                 ]

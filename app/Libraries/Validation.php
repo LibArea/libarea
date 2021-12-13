@@ -60,11 +60,11 @@ class Validation
     public static function validTl($trust_level, $allowed_tl, $count_content, $count_total)
     {
         if ($trust_level < $allowed_tl) {
-            return false;
+            redirect('/');
         }
 
         if ($count_content >= $count_total) {
-            return false;
+            redirect('/');
         }
 
         return true;

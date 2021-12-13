@@ -9,9 +9,29 @@ class Base
     // Начальные уровень домерия
     const ELEMENTARY_USER = 0;
     
-    // Administrator (TL 5)
+    // User (level of trust 0)
+    // Пользователь (уровень доверия 0)
+    const USER_ZERO_LEVEL = 0;
+    
+    // User (level of trust 1)
+    // Пользователь (уровень доверия 1)
+    const USER_FIRST_LEVEL = 1;
+   
+    // User (level of trust 2)
+    // Пользователь (уровень доверия 2)
+    const USER_SECOND_LEVEL = 2;
+    
+    // User (level of trust 3)
+    // Пользователь (уровень доверия 3)
+    const USER_THIRD_LEVEL = 3;
+   
+    // User (level of trust 4)
+    // Пользователь (уровень доверия 4)
+    const USER_FOURTH_LEVEL = 4;
+   
+    // Administrator (level of trust 5)
     // Администратор (уровень доверия 5)
-    const REGISTERED_ADMIN = 5;
+    const USER_LEVEL_ADMIN = 5;
     
     public static function getUid()
     {
@@ -43,7 +63,7 @@ class Base
         }
         
         // Сайт отключен, кроме Tl5 (The site is disabled, except Tl5)
-        if (FALSE && $uid['user_trust_level'] != self::REGISTERED_ADMIN) {
+        if (FALSE && $uid['user_trust_level'] != self::USER_LEVEL_ADMIN) {
             include HLEB_GLOBAL_DIRECTORY . '/app/Optional/site_off.php';
             hl_preliminary_exit();
         }

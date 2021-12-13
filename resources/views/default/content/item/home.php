@@ -6,7 +6,6 @@
       </a>
     <?php } ?>
     <h1 class="mt5 mb10 size-24 font-normal"><?= Translate::get('domains-title'); ?></h1>
-    <div class="gray size-14 mb15"><?= Translate::get('under development'); ?>...</div>
   </div>
   <div class="flex mb20 pt10 pr15 pb10 pl15 bg-green-200 flex-auto">
     <?php foreach (Config::get('web-root-categories') as  $cat) { ?>

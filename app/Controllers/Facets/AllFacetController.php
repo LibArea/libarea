@@ -10,6 +10,8 @@ use Base, Config, Translate;
 class AllFacetController extends MainController
 {
     private $uid;
+    
+    protected $limit = 40;
 
     public function __construct()
     {
@@ -21,9 +23,8 @@ class AllFacetController extends MainController
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
  
-        $limit = 40;
         $pagesCount = FacetModel::getFacetsAllCount($this->uid['user_id'], $sheet);
-        $facets     = FacetModel::getFacetsAll($page, $limit, $this->uid['user_id'], $sheet);
+        $facets     = FacetModel::getFacetsAll($page, $this->limit, $this->uid['user_id'], $sheet);
 
         $num = ' ';
         if ($page > 1) {
@@ -33,7 +34,7 @@ class AllFacetController extends MainController
         $url = self::names($sheet);
 
         $count      = FacetModel::countFacetsUser($this->uid['user_id'], $type);
-        $count_add  = $this->uid['user_trust_level'] == 5 ? 999 : Config::get('trust-levels.count_add_' . $type);
+        $count_add  = $this->uid['user_trust_level'] == Base::USER_LEVEL_ADMIN ? 999 : Config::get('trust-levels.count_add_' . $type);
         $in_total   = $count_add - $count;
 
         $m = [
@@ -52,7 +53,7 @@ class AllFacetController extends MainController
                     'sheet'         => $sheet,
                     'type'          => $type,
                     'facets'        => $facets,
-                    'pagesCount'    => ceil($pagesCount / $limit),
+                    'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
                     'count_facet'   => $in_total ?? 0,
                 ]

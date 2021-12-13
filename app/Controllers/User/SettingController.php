@@ -209,7 +209,7 @@ class SettingController extends MainController
         $user = UserModel::getUser($this->uid['user_login'], 'slug');
 
         // Удалять может только автор и админ
-        if ($user['user_id'] != $this->uid['user_id'] && $this->uid['user_trust_level'] != 5) {
+        if ($user['user_id'] != $this->uid['user_id'] && $this->uid['user_trust_level'] != Base::USER_LEVEL_ADMIN) {
             redirect('/');
         }
 
@@ -224,7 +224,7 @@ class SettingController extends MainController
         addMsg(Translate::get('cover removed'), 'success');
 
         // Если удаляет администрация
-        if ($this->uid['user_trust_level'] == 5) {
+        if ($this->uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) {
             redirect('/admin/users/' . $user['user_id'] . '/edit');
         }
 

@@ -21,7 +21,7 @@ class AddFacetController extends MainController
     public function index($type)
     { 
         $count      = FacetModel::countFacetsUser($this->uid['user_id'], $type);
-        $count_add  = $this->uid['user_trust_level'] == 5 ? 999 : Config::get('trust-levels.count_add_' . $type);
+        $count_add  = $this->uid['user_trust_level'] == Base::USER_LEVEL_ADMIN ? 999 : Config::get('trust-levels.count_add_' . $type);
  
         $in_total = self::limitFacer($type, $count, $count_add);
 
@@ -41,9 +41,7 @@ class AddFacetController extends MainController
     // Add topic / blog
     public function create($type)
     {
- 
- 
-        self::limitFacer($type, $count, $count_add);
+        self::limitFacer($type);
 
         $facet_title                = Request::getPost('facet_title');
         $facet_description          = Request::getPost('facet_description');
@@ -54,7 +52,7 @@ class AddFacetController extends MainController
         $redirect = getUrlByName('topic.add');
         if ($type == 'blog') {
             $redirect = getUrlByName('blogs.my', ['login' => $this->uid['user_login']]);
-            if ($this->uid['user_trust_level'] != 5) {
+            if ($this->uid['user_trust_level'] != Base::USER_LEVEL_ADMIN) {
                 if (in_array($facet_slug, Config::get('stop-blog'))) {
                     addMsg(Translate::get('stop-blog'), 'error');
                     redirect($redirect);
@@ -104,12 +102,8 @@ class AddFacetController extends MainController
     {
         
         $count      = FacetModel::countFacetsUser($this->uid['user_id'], $type);
-        $count_add  = $this->uid['user_trust_level'] == 5 ? 999 : Config::get('trust-levels.count_add_' . $type);
-        $valid      = Validation::validTl($this->uid['user_trust_level'], Config::get('trust-levels.tl_add_' . $type), $count, $count_add);
-  
-        if ($valid === false) {
-            redirect('/');
-        }
+        $count_add  = $this->uid['user_trust_level'] == Base::USER_LEVEL_ADMIN ? 999 : Config::get('trust-levels.count_add_' . $type);
+        Validation::validTl($this->uid['user_trust_level'], Config::get('trust-levels.tl_add_' . $type), $count, $count_add);
 
         $in_total   = $count_add - $count;
         if (!$in_total > 0) {

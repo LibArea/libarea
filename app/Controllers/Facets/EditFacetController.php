@@ -83,13 +83,13 @@ class EditFacetController extends MainController
         pageError404($facet);
 
         // Доступ получает только автор и админ
-        if ($facet['facet_user_id'] != $this->uid['user_id'] && $this->uid['user_trust_level'] != 5) {
+        if ($facet['facet_user_id'] != $this->uid['user_id'] && $this->uid['user_trust_level'] != Base::USER_LEVEL_ADMIN) {
             redirect('/');
         }
 
         // Изменять тип темы может только персонал
         $facet_new_type = $facet['facet_type'];
-        if ($this->uid['user_trust_level'] == 5) {
+        if ($this->uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) {
             $facet_new_type = $facet_type;
         }
 
@@ -127,7 +127,7 @@ class EditFacetController extends MainController
         $facet_user_new = json_decode($user_new, true);
         $facet_user_id = $facet['facet_user_id'];
         if ($facet['facet_user_id'] != $facet_user_new[0]['id']) {
-            if ($this->uid['user_trust_level'] == 5) {
+            if ($this->uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) {
                 $facet_user_id = $facet_user_new[0]['id'];
             }
         }
