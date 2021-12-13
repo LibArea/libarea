@@ -30,7 +30,7 @@ class HomeModel extends MainModel
         $display = "AND post_is_deleted = 0 AND post_tl <= " . $uid['user_trust_level'];
         if ($uid['user_trust_level'] == 5) $display = "";
 
-        $sort = "ORDER BY post_votes DESC";
+        $sort = "ORDER BY post_votes and post_date > CURDATE()-INTERVAL 3 WEEK DESC";
         if ($type == 'feed' || $type == 'all') $sort = "ORDER BY post_top DESC, post_date DESC";
 
         $start  = ($page - 1) * $limit;

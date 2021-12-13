@@ -109,7 +109,7 @@
       </div>
       <?php foreach (Config::get('facets-default') as $key => $topic) { ?>
         <a class="flex relative pt5 pb5 items-center hidden gray-light" href="<?= $topic['url']; ?>">
-          <img class="w24 mr5 br-box-gray" src="<?= $topic['img']; ?>" alt="<?= $topic['name']; ?>">
+          <img class="w24 h24 mr5 br-box-gray" src="<?= $topic['img']; ?>" alt="<?= $topic['name']; ?>">
           <span class="ml5"><?= $topic['name']; ?></span>
         </a>
       <?php } ?>
@@ -122,7 +122,7 @@
         <?php foreach ($data['latest_answers'] as $answer) { ?>
           <div class="mt15 mr0 mb15 ml0">
             <div class="size-14 gray-light-2">
-              <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'w18 br-rd-50 mr5'); ?>
+              <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'w18 h18 br-rd-50 mr5'); ?>
               <span class="middle"><?= $answer['answer_date']; ?></span>
             </div>
             <a class="black dark-white" href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">

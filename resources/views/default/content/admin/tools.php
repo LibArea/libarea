@@ -28,6 +28,12 @@
       <label class="required block mb5"><?= Translate::get('like'); ?></label>
       <form action="<?= getUrlByName('admin.count.up'); ?>">
         <?= sumbit(Translate::get('update the data')); ?>
+      </form> 
+    </div>
+    <div class="mb20">
+      <label class="required block mb5"><?= Translate::get('trust level'); ?></label>
+      <form action="<?= getUrlByName('admin.users.tl'); ?>">
+        <?= sumbit(Translate::get('update the data')); ?>
       </form>
     </div>
     <div class="mb20">

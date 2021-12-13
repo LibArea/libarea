@@ -207,7 +207,6 @@ $data = [
     'answers-desc'      => 'Toate răspunsurile (la postări) în ordine de prioritate în comunitate',
     'site-banner-txt'   => 'Curiosii este în construcție',
     'no-auth-comm'      => 'Trebuie să fiți conectat pentru a posta un comentariu.',
-    'no-auth-answ'      => 'Trebuie să fiți conectat pentru a răspunde la întrebare',
     'write-something'   => 'Suportă Markdown',
     'write-response'    => 'Scrie un răspuns la întrebare',
     'Write'             => 'Scrie',

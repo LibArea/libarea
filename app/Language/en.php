@@ -213,7 +213,6 @@ $data = [
     'comments-desc'     => 'All comments (on answers) are in order of priority in the community',
     'answers-desc'      => 'All responses (to posts) are in order of priority in the community',
     'no-auth-comm'      => 'You must be logged in to post a comment',
-    'no-auth-answ'      => 'You must be logged in to answer the question',
     'write-something'   => 'Supports Markdown',
     'write-response'    => 'Write an answer to the question',
     'write'             => 'Write',

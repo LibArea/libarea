@@ -43,6 +43,7 @@ Route::before('Authorization@admin')->getGroup();
      
     Route::get('/update/count/topic')->controller('Admin\СonsoleController@updateCountPostTopic')->name('admin.count.topic'); 
     Route::get('/update/count/up')->controller('Admin\СonsoleController@updateCountUp')->name('admin.count.up');
+    Route::get('/update/user/tl')->controller('Admin\СonsoleController@updateUsersTl')->name('admin.users.tl');
    
     Route::get('/update/build/css')->controller('Admin\СonsoleController@buildCss')->name('admin.build.css');    
    

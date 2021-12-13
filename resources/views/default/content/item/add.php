@@ -18,15 +18,14 @@
       <?= includeTemplate('/_block/form/field-input', [
         'data' => [
           [
-            'title' => Translate::get('URL'),
-            'type' => 'text',
-            'name' => 'url',
-          ],
-          [
             'title' => Translate::get('title'),
             'type' => 'text',
             'name' => 'title_url',
             'help' => '14 - 250 ' . Translate::get('characters') . ' («Газета.Ru» — интернет-газета)'
+          ], [
+            'title' => Translate::get('URL'),
+            'type' => 'text',
+            'name' => 'url',
           ],
         ]
       ]); ?>
