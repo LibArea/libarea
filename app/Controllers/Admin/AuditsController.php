@@ -11,7 +11,7 @@ use Base, Translate;
 class AuditsController extends MainController
 {
     protected $limit = 55;
-    
+
     public function index($sheet)
     {
         $page   = Request::getInt('page');

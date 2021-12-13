@@ -86,7 +86,8 @@ class DB
      |
      |--------------------------------------------------------------------------------------
     */
-    public static function run($sql, $args = [], $config_key = null) {
+    public static function run($sql, $args = [], $config_key = null)
+    {
         return \Hleb\Main\DB::run($sql, $args, $config_key);
     }
 
@@ -115,9 +116,8 @@ class DB
      |
      |--------------------------------------------------------------------------------------
     */
-    public static function db_query($sql, $config_key = null) {
+    public static function db_query($sql, $config_key = null)
+    {
         return \Hleb\Main\DB::db_query($sql, $config_key);
     }
 }
-
-

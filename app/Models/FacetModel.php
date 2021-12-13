@@ -70,8 +70,8 @@ class FacetModel extends MainModel
     }
 
     public static function getFacetsAllCount($user_id, $sort)
-    { 
-        switch ($sort) { 
+    {
+        switch ($sort) {
             case 'topics.my':
                 $signet = "WHERE facet_type = 'topic' AND signed_user_id = :user_id ORDER BY facet_count DESC";
                 break;
@@ -603,7 +603,7 @@ class FacetModel extends MainModel
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
-    
+
     // Посты где нет тем
     public static function getNoTopic()
     {
@@ -622,8 +622,8 @@ class FacetModel extends MainModel
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
-    
-    
+
+
     public static function ban($id, $status)
     {
         $sql = "UPDATE facets SET facet_is_deleted = 1 where facet_id = :id";
@@ -633,7 +633,7 @@ class FacetModel extends MainModel
 
         DB::run($sql, ['id' => $id]);
     }
-    
+
     public static function setCover($content_id, $new_cover)
     {
         $params = [

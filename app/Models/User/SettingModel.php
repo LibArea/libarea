@@ -3,7 +3,8 @@
 namespace App\Models\User;
 
 use Hleb\Scheme\App\Models\MainModel;
-use DB, PDO;
+use DB;
+use PDO;
 
 class SettingModel extends MainModel
 {

@@ -41,9 +41,9 @@ class AddPostController extends MainController
                 $facets  = ['blog' => $topic];
                 if ($topic['facet_user_id'] != $this->uid['user_id']) redirect('/');
             }
-       } 
+        }
 
-       return view(
+        return view(
             '/post/add',
             [
                 'meta'      => meta($m = [], Translate::get('add post')),
@@ -72,15 +72,15 @@ class AddPostController extends MainController
         $post_merged_id         = Request::getPostInt('post_merged_id');
         $post_tl                = Request::getPostInt('post_tl');
         $blog_id                = Request::getPostInt('blog_id');
-        
+
         $post_fields    = Request::getPost() ?? [];
 
         // Связанные посты
         $json_post  = $post_fields['post_select'] ?? [];
         $arr_post   = json_decode($json_post[0], true);
-        if ($arr_post) {  
+        if ($arr_post) {
             foreach ($arr_post as $value) {
-               $id[]   = $value['id'];
+                $id[]   = $value['id'];
             }
         }
         $post_related = implode(',', $id ?? []);
@@ -93,7 +93,7 @@ class AddPostController extends MainController
         // Используем для возврата
         $redirect = getUrlByName('post.add');
         if ($blog_id > 0) {
-           $redirect = getUrlByName('post.add') . '/' . $blog_id; 
+            $redirect = getUrlByName('post.add') . '/' . $blog_id;
         }
 
         // Если пользователь забанен / заморожен
@@ -106,12 +106,12 @@ class AddPostController extends MainController
             addMsg(Translate::get('select topic') . '!', 'error');
             redirect($redirect);
         }
- 
+
         Validation::Limits($post_title, Translate::get('title'), '6', '250', $redirect);
         Validation::Limits($post_content, Translate::get('the post'), '6', '25000', $redirect);
 
         if ($post_url) {
-            
+
             // Поскольку это для поста, то получим превью и разбор домена...
             $og_img             = self::grabOgImg($post_url);
             $parse              = parse_url($post_url);
@@ -201,15 +201,15 @@ class AddPostController extends MainController
 
         if ($blog) {
             $topics = array_merge($blog, $topics);
-        }  
-  
+        }
+
         // Запишем темы и блог
         $arr = [];
         foreach ($topics as $ket => $row) {
-           $arr[] = $row;
+            $arr[] = $row;
         }
         FacetModel::addPostFacets($arr, $last_post_id);
-     
+
         // Уведомление (@login)
         if ($message = Content::parseUser($post_content, true, true)) {
             foreach ($message as $user_id) {
@@ -240,7 +240,7 @@ class AddPostController extends MainController
     {
         $url    = Request::getPost('uri');
         $meta   = new URLScraper($url);
-        
+
         $meta->parse();
         $metaData = $meta->finalize();
 

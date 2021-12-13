@@ -26,7 +26,7 @@ class СonsoleController extends MainController
 
         self::consoleRedirect();
     }
-    
+
     // Если пользователь имеет нулевой уровень доверия (tl) но ему UP >=3, то повышаем до 1
     // If the user has a zero level of trust (tl) but he has UP >=3, then we raise it to 1
     public static function updateUsersTl()
@@ -56,8 +56,8 @@ class СonsoleController extends MainController
             redirect(getUrlByName('admin.tools'));
         }
         return true;
-    }  
-    
+    }
+
     public static function buildCss()
     {
         Sass::collect();

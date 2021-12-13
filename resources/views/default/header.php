@@ -15,7 +15,7 @@
 <body class="p0 m0 black bg-gray-100<?php if (Request::getCookie('dayNight') == 'dark') { ?> dark<?php } ?>">
 
   <header class="bg-white br-bottom mt0 mb15 sticky top0 z-30">
-    <div class="col-span-12 mr-auto max-width w-100 pr10 pl10 grid items-center flex justify-between">
+    <div class="col-span-12 mr-auto max-width w-100 pr10 pl10 h44 grid items-center flex justify-between">
       <div class="flex items-center">
         <div class="lateral no-pc mr10 flex items-center size-15">
           <i class="bi bi-list gray-light-2 size-18"></i>

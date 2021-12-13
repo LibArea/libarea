@@ -10,14 +10,14 @@ use Content, Base, Translate;
 class WebController extends MainController
 {
     private $uid;
-    
+
     protected $limit = 25;
 
     public function __construct()
     {
         $this->uid  = Base::getUid();
     }
-    
+
     public function index()
     {
         $uid    = Base::getUid();
@@ -149,7 +149,7 @@ class WebController extends MainController
             ]
         );
     }
-    
+
     // Детальная страница сайта
     public function website($sheet)
     {
@@ -166,7 +166,7 @@ class WebController extends MainController
             $item['item_content_soft'] = Content::text($item['item_content_soft'], 'text');
         }
 
-         $content_img = AG_PATH_THUMBS . 'default.png';
+        $content_img = AG_PATH_THUMBS . 'default.png';
         if (file_exists(HLEB_PUBLIC_DIR . AG_PATH_THUMBS . $item['item_url_domain'] . '.png')) {
             $content_img =  AG_PATH_THUMBS . $item['item_url_domain'] . '.png';
         }
@@ -180,7 +180,7 @@ class WebController extends MainController
         $desc       = $item['item_title_url'] . '. ' . $item['item_content_url'];
         $topics     = WebModel::getItemTopic($item['item_id']);
         $high_leve  = $topics[0]['value'] ?? 0;
- 
+
         if ($item['item_post_related']) {
             $related_posts = PostModel::postRelated($item['item_post_related']);
         }

@@ -10,21 +10,21 @@ use Base, Translate;
 class FacetsController extends MainController
 {
     private $uid;
-    
+
     protected $limit = 25;
 
     public function __construct()
     {
         $this->uid  = Base::getUid();
     }
-    
+
     public function index($sheet, $type)
     {
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
         $pagesCount = FacetModel::getFacetsAllCount($this->uid['user_id'], $sheet);
-        
+
         Request::getResources()->addBottomScript('/assets/js/admin.js');
 
         return view(

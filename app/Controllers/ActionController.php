@@ -83,8 +83,8 @@ class ActionController extends MainController
 
     // Связанные посты и выбор автора
     public function select()
-    { 
-    
+    {
+
         $type   = Request::get('type');
         $search = Request::get('q');
 

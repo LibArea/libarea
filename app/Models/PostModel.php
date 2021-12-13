@@ -269,20 +269,20 @@ class PostModel extends MainModel
     {
         $in = "post_id IN(0) AND";
         if ($post_related) {
-            $in = "post_id IN(0, ". $post_related .") AND";
+            $in = "post_id IN(0, " . $post_related . ") AND";
         }
-        
+
         $sql = "SELECT 
                     post_id as value, 
                     post_title, 
                     post_slug 
                         FROM posts 
                            WHERE $in post_is_deleted = 0 AND post_tl = 0";
-                      
+
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
-    
-    
+
+
     // Связанные посты All
     public static function postRelatedAll()
     {
@@ -358,8 +358,8 @@ class PostModel extends MainModel
         return DB::run($sql, ['post_id' => $post_id, 'user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
     }
 
- 
-    
+
+
     public static function getPostFacet($post_id, $type)
     {
         $sql = "SELECT

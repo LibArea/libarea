@@ -16,7 +16,7 @@ class UsersController extends MainController
     {
         $this->uid  = Base::getUid();
     }
-    
+
     public function index($sheet)
     {
         $page   = Request::getInt('page');
@@ -128,18 +128,18 @@ class UsersController extends MainController
         $user_id        = Request::getInt('id');
         $user_whisper   = Request::getPost('whisper');
         $user_name      = Request::getPost('name');
-        
+
         if (!$user = UserModel::getUser($user_id, 'id')) {
             redirect(getUrlByName('admin.users'));
         }
-        
+
         $redirect = getUrlByName('admin.user.edit', ['id' => $user_id]);
         Validation::Limits($login, Translate::get('login'), '3', '11', $redirect);
-        
+
         if ($this->uid['user_trust_level'] != 5) {
             Validation::Limits($user_name, Translate::get('name'), '3', '11', $redirect);
         }
-        
+
         $data = [
             'user_id'            => $user_id,
             'user_login'         => $login,

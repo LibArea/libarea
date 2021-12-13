@@ -4,7 +4,6 @@ namespace App\Controllers\Facets;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\User\UserModel;
 use App\Models\{FacetModel, SubscriptionModel};
 use Base, Validation, Config, Translate;
 
@@ -19,10 +18,10 @@ class AddFacetController extends MainController
 
     // Add form topic
     public function index($type)
-    { 
+    {
         $count      = FacetModel::countFacetsUser($this->uid['user_id'], $type);
         $count_add  = $this->uid['user_trust_level'] == Base::USER_LEVEL_ADMIN ? 999 : Config::get('trust-levels.count_add_' . $type);
- 
+
         $in_total = self::limitFacer($type, $count, $count_add);
 
         return view(
@@ -97,10 +96,9 @@ class AddFacetController extends MainController
 
         redirect(getUrlByName($type, ['slug' => $facet_slug]));
     }
-    
+
     public function limitFacer($type)
     {
-        
         $count      = FacetModel::countFacetsUser($this->uid['user_id'], $type);
         $count_add  = $this->uid['user_trust_level'] == Base::USER_LEVEL_ADMIN ? 999 : Config::get('trust-levels.count_add_' . $type);
         Validation::validTl($this->uid['user_trust_level'], Config::get('trust-levels.tl_add_' . $type), $count, $count_add);
@@ -109,7 +107,7 @@ class AddFacetController extends MainController
         if (!$in_total > 0) {
             redirect('/');
         }
-        
+
         return $in_total;
     }
 }

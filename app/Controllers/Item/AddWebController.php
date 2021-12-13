@@ -72,7 +72,7 @@ class AddWebController extends MainController
             'item_type_url'     => 0,
             'item_status_url'   => 200,
         ];
-   
+
         $item_topic = WebModel::add($data);
 
         // Фасеты для сайте
@@ -83,7 +83,7 @@ class AddWebController extends MainController
         if (!empty($topics)) {
             $arr = [];
             foreach ($topics as $ket => $row) {
-               $arr[] = $row;
+                $arr[] = $row;
             }
             FacetModel::addItemFacets($arr, $item_topic['item_id']);
         }

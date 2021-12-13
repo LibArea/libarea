@@ -249,8 +249,8 @@ $data = [
     'no-invate-txt'         => 'Nu ești încă utilizator? Înregistrarea se face doar prin invitație pentru a combate spamul și a spori responsabilitatea. Dacă cunoașteți <a href="/users"> utilizatorul actual </a> al site-ului, solicitați-i o invitație.',
 
     /* Дата и время + события*/
-    'months' => ['','ianuarie','februarie','martie','aprilie','mai','iunie','iulie','august','septembrie','octombrie','noiembrie','decembrie'],
-    
+    'months' => ['', 'ianuarie', 'februarie', 'martie', 'aprilie', 'mai', 'iunie', 'iulie', 'august', 'septembrie', 'octombrie', 'noiembrie', 'decembrie'],
+
     'today'         => 'Astazi',
     'yesterday'     => 'Ieri',
 
@@ -295,7 +295,7 @@ $data = [
     'web-cat'           => 'Disponibil în directorul site-ului?',
     'web-cat-help'      => 'În catalogul site - ului, va fi o categorie (va deveni vizibil)',
 
-    
+
     /* soft */
     'soft-cat'           => 'Există programe în catalog?',
     'soft-cat-help'      => 'În directorul programului, va fi Categoria (va deveni vizibilă)',
@@ -356,9 +356,9 @@ $data = [
     'pass-match-err'        => 'Parola nepotrivită',
     'user-already'          => 'Utilizatorul este deja pe site',
     'invate-to-replay'      => 'Ați trimis deja o invitație acestui utilizator',
-    'registration by invite'=> 'Înregistrare prin invitație',
+    'registration by invite' => 'Înregistrare prin invitație',
     'breaking the rules'    => 'Încălcând regulile',
-    
+
     'soft'                  => 'Software',
     'there is a program'    => 'Ai vreun program?',
     'hosted on github'      => 'Este găzduit pe GitHub?',
@@ -399,10 +399,10 @@ $data = [
 
     'info-favorite'         => 'Postări, comentarii și întrebări pe care le urmăriți',
     'info-preferences'      => 'Postări la care sunteți abonat. Veți fi informat cu privire la toate răspunsurile noi',
-    
+
     'e-mail notification'    => 'Notificați prin e-mail',
     'info-notifications'    => 'Vă puteți dezabona de la toate notificările prin e-mail în această secțiune',
-    
+
     'when the message came to PM'       => 'Când mesajul a venit la PM',
     'when you contacted me via @'       => 'Când m-ați contactat prin @',
     'you were mentioned (@), see'       => 'Menționat (@), vezi',
@@ -411,7 +411,7 @@ $data = [
     'activate e-mail'                   => 'Link pentru activarea e-mailului',
     'checking e-mail'                   => 'verifica e-mail',
     'site under reconstruction'         => 'Site în reconstrucție',
-    
+
     'there are no domains'  => 'Fără domenii',
     'change the site'       => 'Schimbați site-ul',
     'add a website'         => 'Adăugați un site',
@@ -424,7 +424,7 @@ $data = [
     'code-used'             => 'Codul este incorect sau a fost deja utilizat.',
     'audits'                => 'Audit',
     'content-audit'         => 'Mesajul dvs. a fost trimis spre examinare.',
-    'limit-content-day'     => 'Pentru %1$s ați atins limita de %1$s pentru astăzi.', 
+    'limit-content-day'     => 'Pentru %1$s ați atins limita de %1$s pentru astăzi.',
     'limit-add-content-no'  => 'Ați atins limita de adăugare setată pe site',
     'no invitations'        => 'Nu există încă invitații',
     'limit-tl-invitation'   => 'Nivelul dvs. de încredere nu permite încă utilizarea invitațiilor',
@@ -481,7 +481,7 @@ $data = [
     'medal for registration'            => 'Medalie pentru înregistrare',
     'responses-members'                 => 'Răspunsurile comunității',
     'design choice'                     => 'alegerea designului',
-    
+
     'blog-add-info'         => 'Pagina blog creat de mine',
     'topics.all'            => 'Toate subiectele',
     'topics.my'             => 'Sunt abonat la subiecte',

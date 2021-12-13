@@ -85,5 +85,4 @@ class InfoController extends MainController
             ]
         );
     }
-    
 }

@@ -11,14 +11,14 @@ use Content, Base, Translate;
 class CommentController extends MainController
 {
     private $uid;
-    
+
     protected $limit = 25;
 
     public function __construct()
     {
         $this->uid  = Base::getUid();
     }
-    
+
     // Все комментарии
     public function index()
     {

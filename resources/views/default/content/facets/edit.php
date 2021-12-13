@@ -26,23 +26,23 @@
         </div>
       </div>
       <?php if ($fs['facet_type'] == 'blog') { ?>
-      <div class="file-upload mb20" id="file-drag">
-        <div class="flex">
-          <?php if ($fs['facet_cover_art']) { ?>
-            <div class="mr20">
-              <img src="<?= cover_url($fs['facet_cover_art'], 'blog'); ?>" class="w160 h94 br-box-gray">
-              <input type="hidden" name="cover" value="<?= $fs['facet_cover_art']; ?>">
+        <div class="file-upload mb20" id="file-drag">
+          <div class="flex">
+            <?php if ($fs['facet_cover_art']) { ?>
+              <div class="mr20">
+                <img src="<?= cover_url($fs['facet_cover_art'], 'blog'); ?>" class="w160 h94 br-box-gray">
+                <input type="hidden" name="cover" value="<?= $fs['facet_cover_art']; ?>">
+              </div>
+            <?php } ?>
+            <div id="start">
+              <input id="file-upload" type="file" name="cover" accept="image/*" />
+              <div id="notimage" class="none">Please select an image</div>
             </div>
-          <?php } ?>
-          <div id="start">
-            <input id="file-upload" type="file" name="cover" accept="image/*" />
-            <div id="notimage" class="none">Please select an image</div>
+          </div>
+          <div id="response" class="hidden">
+            <div id="messages"></div>
           </div>
         </div>
-        <div id="response" class="hidden">
-          <div id="messages"></div>
-        </div>
-      </div>
       <?php } ?>
       <div class="mb20">
         <?= sumbit(Translate::get('download')); ?>

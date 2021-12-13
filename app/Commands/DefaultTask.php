@@ -23,14 +23,12 @@ class DefaultTask extends \Hleb\Scheme\App\Commands\MainTask
     /**
      * @param string|int|null $arg - argument description
      */
-    protected function execute($arg = null) {
+    protected function execute($arg = null)
+    {
 
         // Your code here.
         // Разместите здесь свой код.
 
         echo PHP_EOL . __CLASS__ . " done." . PHP_EOL;
     }
-
 }
-
-

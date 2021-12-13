@@ -27,7 +27,7 @@ class EditWebController extends MainController
         Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
         Request::getResources()->addBottomScript('/assets/js/tag/tagify.min.js');
         Request::getResources()->addBottomScript('/assets/js/admin.js');
- 
+
         $item_post_related = [];
         if ($domain['item_post_related']) {
             $item_post_related = PostModel::postRelated($domain['item_post_related']);
@@ -59,16 +59,16 @@ class EditWebController extends MainController
         }
 
         $item_url           = Request::getPost('item_url');
-        $item_title_url     = Request::getPost('item_title_url'); 
+        $item_title_url     = Request::getPost('item_title_url');
         $item_content_url   = Request::getPost('item_content_url');
-        $item_title_soft    = Request::getPost('item_title_soft'); 
+        $item_title_soft    = Request::getPost('item_title_soft');
         $item_content_soft  = Request::getPost('item_content_soft');
         $item_published     = Request::getPostInt('item_published');
         $item_status_url    = Request::getPostInt('item_status_url');
         $item_is_soft       = Request::getPostInt('item_is_soft');
         $item_is_github     = Request::getPostInt('item_is_github');
         $item_github_url    = Request::getPost('item_github_url');
-        
+
         Validation::Limits($item_title_url, Translate::get('title'), '14', '250', $redirect);
         Validation::Limits($item_content_url, Translate::get('description'), '24', '1500', $redirect);
 
@@ -76,9 +76,9 @@ class EditWebController extends MainController
         $post_fields    = Request::getPost() ?? [];
         $json_post  = $post_fields['post_select'] ?? [];
         $arr_post   = json_decode($json_post[0], true);
-        if ($arr_post) {  
+        if ($arr_post) {
             foreach ($arr_post as $value) {
-               $id[]   = $value['id'];
+                $id[]   = $value['id'];
             }
         }
         $post_related = implode(',', $id ?? []);
@@ -110,7 +110,7 @@ class EditWebController extends MainController
         if (!empty($topics)) {
             $arr = [];
             foreach ($topics as $ket => $row) {
-               $arr[] = $row;
+                $arr[] = $row;
             }
             FacetModel::addItemFacets($arr, $item['item_id']);
         }

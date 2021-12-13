@@ -5,18 +5,9 @@
       background: <?= $user['user_color']; ?>;
       min-height: 90px;
     }
-
-    .profile-box-cover {
-      min-height: 310px;
-    }
-
-    .profile-box .w160 {
-      width: 64px;
-    }
-
-    .bottom-20 {
-      bottom: -20px;
-    }
+    .profile-box-cover { min-height: 310px; }
+    .profile-box .w160 { width: 64px; }
+    .bottom-20 { bottom: -20px; }
   </style>
 
   <?php if ($user['user_cover_art'] != 'cover_art.jpeg') { ?>

@@ -258,7 +258,7 @@ $data = [
     'no-invate-txt'         => 'Not a user yet? Registration is by invitation only to combat spam and increase accountability. If you know the <a href="/users">current user</a> of the site, ask him for an invitation.',
 
     /* Date and time + Events */
-    'months'        => ['','January','February','Martha','April','May','June','July','August','September','October','November','December'],
+    'months'        => ['', 'January', 'February', 'Martha', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
     'today'         => 'Today',
     'yesterday'     => 'Yesterday',
 
@@ -278,7 +278,7 @@ $data = [
     'messages'      => 'Messages',
     'post'          => 'Post',
     'posts'         => 'Posts',
-    
+
     'answered'              => 'Answered',
     'translation'           => 'Translation',
     'is this a translation?' => 'Is this a translation?',
@@ -388,7 +388,7 @@ $data = [
     'there are no favorites' => 'No bookmarks',
     'users-ban'             => 'Users',
     'posts-ban'             => 'Posts',
-    
+
     /* web */
     'news & media'      => 'News & Media',
     'social network'    => 'Social network',
@@ -491,10 +491,10 @@ $data = [
     'the page has been removed'                     => 'The page has been removed',
     'the command is executed'                       => 'Command executed',
     'you can add more'                              => 'You can add more',
-  
+
     'recommended posts' => 'recommended posts',
     'recommended-posts-desc' => 'Recommended posts in «%1$s» hand - selected. ',
-    
+
     'blog-add-info'         => 'Blog page created by me',
     'topics.all'            => 'All topics',
     'topics.my'             => 'I am subscribed to topics',
@@ -511,7 +511,7 @@ $data = [
     'blogs.new-desc'        => 'Blogs on the site added recently. Members personal blogs',
     'topic-subscription'    => 'Subscribe to topics and read them in the feed',
     'stop-blog'             => 'This blog URL is reserved',
-    
+
 ];
 
 return $data;

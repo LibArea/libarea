@@ -70,20 +70,20 @@ class EditPostController extends MainController
 
         // Связанные посты и темы
         $post_fields    = Request::getPost() ?? [];
-        
+
         $json_post  = $post_fields['post_select'] ?? [];
         $arr_post   = json_decode($json_post[0], true);
-        if ($arr_post) {  
+        if ($arr_post) {
             foreach ($arr_post as $value) {
-               $id[]   = $value['id'];
+                $id[]   = $value['id'];
             }
         }
         $post_related = implode(',', $id ?? []);
-      
+
         // Темы для поста
         $facet_post     = $post_fields['facet_select'] ?? [];
         $topics         = json_decode($facet_post[0], true);
-        
+
         // Проверка доступа 
         $post   = PostModel::getPostId($post_id);
         if (!accessСheck($post, 'post', $this->uid, 0, 0)) {
@@ -95,7 +95,7 @@ class EditPostController extends MainController
         (new \App\Controllers\Auth\BanController())->getBan($user);
         Content::stopContentQuietМode($user);
 
-        $redirect   = getUrlByName('post.edit', ['id' =>$post_id]);
+        $redirect   = getUrlByName('post.edit', ['id' => $post_id]);
         if (!$topics) {
             addMsg(Translate::get('select topic'), 'error');
             redirect($redirect);
@@ -112,7 +112,7 @@ class EditPostController extends MainController
         }
 
         Validation::Limits($post_title, Translate::get('title'), '6', '250', $redirect);
-        
+
         if ($post_content == '') {
             $post_content = $post['post_content'];
         }
@@ -134,7 +134,7 @@ class EditPostController extends MainController
             $post_img = UploadImage::cover_post($cover, $post, $redirect, $this->uid['user_id']);
         }
         $post_img = $post_img ?? $post['post_content_img'];
-        
+
         $data = [
             'post_id'               => $post_id,
             'post_title'            => $post_title,
@@ -157,10 +157,10 @@ class EditPostController extends MainController
 
         // Перезапишем пост
         PostModel::editPost($data);
-        
+
         // Получаем id существующего блога (использовать потом)
         $blog_id    = Request::getPostInt('blog_id');
-        
+
         // Получим id блога с формы выбора
         $blog_post  = $post_fields['blog_select'] ?? [];
         $blog       = json_decode($blog_post, true); // <- Array ([0]=> Array ([id]=> 53 [value]=> Блог [tl]=> 0)) 
@@ -168,15 +168,15 @@ class EditPostController extends MainController
 
         if ($blog) {
             $topics = array_merge($blog, $topics);
-        }  
+        }
 
         // Запишем темы и блог
         $arr = [];
         foreach ($topics as $ket => $row) {
-           $arr[] = $row;
+            $arr[] = $row;
         }
         FacetModel::addPostFacets($arr, $post_id);
-        
+
         redirect(getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]));
     }
 
@@ -193,7 +193,7 @@ class EditPostController extends MainController
         UploadImage::cover_post_remove($post['post_content_img'], $this->uid['user_id']);
 
         addMsg(Translate::get('cover removed'), 'success');
-        redirect(getUrlByName('post.edit', ['id' =>$post['post_id']]));
+        redirect(getUrlByName('post.edit', ['id' => $post['post_id']]));
     }
 
     public function uploadContentImage()

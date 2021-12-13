@@ -123,12 +123,12 @@ class PostController extends MainController
             'imgurl'     => $content_img,
             'url'        => getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]),
         ];
-        
+
         $topic = $facets[0]['facet_title'] ?? 'agouti';
         if ($blog) {
             $topic = $blog[0]['facet_title'];
         }
-        
+
         $meta = meta($m, strip_tags($post['post_title']) . ' — ' . $topic, $desc . ' — ' . $topic, $date_article = $post['post_date']);
 
         return view(

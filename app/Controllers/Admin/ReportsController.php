@@ -11,7 +11,7 @@ use Base, Translate;
 class ReportsController extends MainController
 {
     protected $limit = 25;
-    
+
     public function index()
     {
         $page   = Request::getInt('page');

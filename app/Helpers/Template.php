@@ -8,7 +8,7 @@ function html_topic($topic, $slug, $css)
     if (!$topic) {
         return '';
     }
- 
+
     if (!is_array($topic)) {
         $topic = preg_split('/(@)/', $topic);
     }
@@ -16,10 +16,10 @@ function html_topic($topic, $slug, $css)
     $result = [];
     foreach (array_chunk($topic, 3) as $ind => $row) {
         if ($row[0] == 'topic') {
-             $result[] = '<a class="' . $css . '" href="' . getUrlByName($slug, ['slug' => $row[1]]) . '">' . $row[2] . '</a>';
+            $result[] = '<a class="' . $css . '" href="' . getUrlByName($slug, ['slug' => $row[1]]) . '">' . $row[2] . '</a>';
         }
     }
-    
+
     return implode($result);
 }
 
@@ -28,7 +28,7 @@ function html_blog($topic, $slug, $css)
     if (!$topic) {
         return '';
     }
- 
+
     if (!is_array($topic)) {
         $topic = preg_split('/(@)/', $topic);
     }
@@ -38,8 +38,7 @@ function html_blog($topic, $slug, $css)
 
         if ($row[0] == 'blog') {
             $result[] = '<a class="' . $css . ' blue" href="' . getUrlByName('blog', ['slug' => $row[1]]) . '">' . $row[2] . '</a>';
-        } 
-        
+        }
     }
     return implode($result);
 }
@@ -76,7 +75,7 @@ function cover_url($file, $type)
     if ($type == 'blog') {
         return AG_PATH_BLOGS_COVER . $file;
     }
-    
+
     return AG_PATH_USERS_COVER . $file;
 }
 
@@ -100,29 +99,29 @@ function post_img($file, $alt, $style, $type, $attributes = '')
 function favicon_img($link_id, $alt)
 {
     if (file_exists(HLEB_PUBLIC_DIR . AG_PATH_FAVICONS . $link_id . '.png')) {
-        $img = '<img class="mr5 w18 h18" src="'. AG_PATH_FAVICONS . $link_id . '.png" alt="' . $alt . '">';
+        $img = '<img class="mr5 w18 h18" src="' . AG_PATH_FAVICONS . $link_id . '.png" alt="' . $alt . '">';
         return $img;
     }
 
-    $img = '<img class="mr5 w18 h18" src="'. AG_PATH_FAVICONS . 'no-link.png" alt="' . $alt . '">';
+    $img = '<img class="mr5 w18 h18" src="' . AG_PATH_FAVICONS . 'no-link.png" alt="' . $alt . '">';
     return $img;
 }
 
 function thumbs_img($url_domain, $alt, $css)
 {
     if (file_exists(HLEB_PUBLIC_DIR . AG_PATH_THUMBS . $url_domain . '.png')) {
-        $img = '<img class="' . $css . '" src="'. AG_PATH_THUMBS . $url_domain . '.png" alt="' . $alt . '">';
+        $img = '<img class="' . $css . '" src="' . AG_PATH_THUMBS . $url_domain . '.png" alt="' . $alt . '">';
         return $img;
     }
 
-    $img = '<img class="mr5 w200" src="'. AG_PATH_THUMBS . 'default.png" alt="' . $alt . '">';
+    $img = '<img class="mr5 w200" src="' . AG_PATH_THUMBS . 'default.png" alt="' . $alt . '">';
     return $img;
 }
 
 // Localization of dates and events....
 function lang_date($string)
 {
-    $months = Translate::get('months');   
+    $months = Translate::get('months');
 
     //Разбиваем дату в массив
     $a = preg_split('/[^\d]/', $string);
@@ -143,26 +142,32 @@ function lang_date($string)
             return ($a[2] . " " . $months[$mm] . " " . $a[0] . " " . $a[3] . ":" . $a[4]);
         }
     }
-} 
+}
 
 // @param array $words: array('пост', 'поста', 'постов')
-function num_word($value, $words, $show = true) 
+function num_word($value, $words, $show = true)
 {
-	$num = (int)$value % 100;
-	if ($num > 19) { 
-		$num = $num % 10; 
-	}
-	
-	$out = ($show) ? (int)$value . ' ' : '';
-	switch ($num) {
-		case 1:  $out .= $words[0]; break;
-		case 2: 
-		case 3: 
-		case 4:  $out .= $words[1]; break;
-		default: $out .= $words[2]; break;
-	}
-	
-	return $out;
+    $num = (int)$value % 100;
+    if ($num > 19) {
+        $num = $num % 10;
+    }
+
+    $out = ($show) ? (int)$value . ' ' : '';
+    switch ($num) {
+        case 1:
+            $out .= $words[0];
+            break;
+        case 2:
+        case 3:
+        case 4:
+            $out .= $words[1];
+            break;
+        default:
+            $out .= $words[2];
+            break;
+    }
+
+    return $out;
 }
 
 function pagination($pNum, $pagesCount, $sheet, $other)
@@ -220,7 +225,7 @@ function breadcrumb($path_home, $title_home, $path_intermediate, $title_intermed
 {
     $html = '<ul class="flex flex-row gap-2 list-none items-center size-13 p0 mt0 mb15">';
     $html .= '<li><a class="gray" title="' . $title_home . '" href="' . $path_home . '">' . $title_home . '</a><li class="gray-light-2">/</li>';
-    
+
     if ($path_intermediate) {
         $html .= '<li><a class="gray" title="' . $title_intermediate . '" href="' . $path_intermediate . '">' . $title_intermediate . '</a></li><li class="gray-light-2">/</li>';
     }
@@ -240,22 +245,22 @@ function votes($user_id, $content, $type, $css = '', $block = '')
 
     if ($user_id > 0) {
         if ($content['votes_' . $type . '_user_id'] || $user_id == $content[$type . '_user_id']) {
-            $html .= '<div class="voters blue flex '. $block .' gray-light-2 center">
-                        <div class="up-id bi bi-heart '. $css .'"></div>
+            $html .= '<div class="voters blue flex ' . $block . ' gray-light-2 center">
+                        <div class="up-id bi bi-heart ' . $css . '"></div>
                         <div class="score">
                             ' . $count . '
                         </div></div>';
         } else {
             $num_count = empty($count) ? 0 : $count;
-            $html .= '<div id="up' . $content[$type . '_id'] . '" class="voters blue-hover flex '. $block .' center gray-light-2">
-                        <div data-id="' . $content[$type . '_id'] . '" data-count="' . $num_count . '" data-type="' . $type . '" class="up-id bi bi-heart '. $css .'"></div>
+            $html .= '<div id="up' . $content[$type . '_id'] . '" class="voters blue-hover flex ' . $block . ' center gray-light-2">
+                        <div data-id="' . $content[$type . '_id'] . '" data-count="' . $num_count . '" data-type="' . $type . '" class="up-id bi bi-heart ' . $css . '"></div>
                         <div class="score ml5">
                             ' . $count . '
                         </div></div>';
         }
     } else {
-        $html .= '<div class="voters blue-hover flex '. $block .' center gray-light-2">
-                    <div class="up-id bi bi-heart '. $css .' click-no-auth"></div>
+        $html .= '<div class="voters blue-hover flex ' . $block . ' center gray-light-2">
+                    <div class="up-id bi bi-heart ' . $css . ' click-no-auth"></div>
                     <div class="score">
                          ' . $count . '                
                     </div></div>';
@@ -270,12 +275,12 @@ function favorite_post($user_id, $post_id, $favorite_tid, $css = '')
     if ($user_id > 0) {
         $blue = $favorite_tid ? 'blue' : '';
         $my   = $favorite_tid ? 'bi bi-bookmark-dash' : 'bi-bookmark-plus';
-        $html .= '<span id="favorite_'. $post_id .'" class="add-favorite '. $blue .' '. $css .' gray-light feed-icon" data-id="' . $post_id . '" data-type="post"><i class="bi '. $my .' middle"></i></span>';
+        $html .= '<span id="favorite_' . $post_id . '" class="add-favorite ' . $blue . ' ' . $css . ' gray-light feed-icon" data-id="' . $post_id . '" data-type="post"><i class="bi ' . $my . ' middle"></i></span>';
     } else {
-        $html .= '<span class="click-no-auth gray-light-2 feed-icon '. $css .'">
+        $html .= '<span class="click-no-auth gray-light-2 feed-icon ' . $css . '">
                     <i class="bi bi-bookmark-plus middle"></i>
-                        </span>'; 
-    }     
+                        </span>';
+    }
 
     return $html;
 }
@@ -283,25 +288,25 @@ function favorite_post($user_id, $post_id, $favorite_tid, $css = '')
 function tabs_nav($user_id, $sheet, array $pages = [])
 {
     $html = '';
-    foreach ($pages as $key => $page) { 
-     if (empty($page['auth']) != false || $user_id > 0) { 
-       if ($page['id'] == $sheet) { 
-        $html .= '<li class="blue ml30 mb-mr-5 mb-ml-10">
-          <i class="'.  $page['icon'] .' mr5"></i>
-          <span class="mb-size-13">'. $page['content'] .'</span>
+    foreach ($pages as $key => $page) {
+        if (empty($page['auth']) != false || $user_id > 0) {
+            if ($page['id'] == $sheet) {
+                $html .= '<li class="blue ml30 mb-mr-5 mb-ml-10">
+          <i class="' .  $page['icon'] . ' mr5"></i>
+          <span class="mb-size-13">' . $page['content'] . '</span>
           </li>';
-       } else { 
-        $html .= '<li class="ml30 mb-mr-5 mb-ml-10">
-          <a class="gray" href="'. $page['url'] .'">
-            <i class="'. $page['icon'] .' mr5"></i>
-            <span class="mb-size-13">'. $page['content'] .'</span>
+            } else {
+                $html .= '<li class="ml30 mb-mr-5 mb-ml-10">
+          <a class="gray" href="' . $page['url'] . '">
+            <i class="' . $page['icon'] . ' mr5"></i>
+            <span class="mb-size-13">' . $page['content'] . '</span>
           </a>
           </li>';
-       } 
-     } 
-   } 
-   
-   return $html;
+            }
+        }
+    }
+
+    return $html;
 }
 
 // Проверка доступа
@@ -344,18 +349,18 @@ function accessСheck($content, $type, $uid, $after, $stop_time)
 }
 
 function add_post($facet, $user_id)
-{ 
+{
     $url_add = getUrlByName('post.add');
     if (!empty($facet)) {
         if ($facet['facet_user_id'] == $user_id || $facet['facet_type'] == 'topic') {
             $url_add = $url_add . '/' . $facet['facet_id'];
         }
     }
-    
+
     $html  = '<a title="' . Translate::get('add post') . '" href="' . $url_add . '" class="blue center p10">
                 <i class="bi bi-plus-lg size-18"></i>
               </a>';
-    
+
     return $html;
 }
 
@@ -375,29 +380,29 @@ function fragment($content, $maxlen = '20')
 {
     $text = explode("\n", $content);
     $words = preg_split('#[\s\r\n]+#um', $text[0]);
-    
+
     if ($maxlen < count($words)) {
         $words = array_slice($words, 0, $maxlen);
         return join(' ', $words) . '...';
     }
 
     return $text[0];
-} 
+}
 
 function no_content($text, $icon)
 {
     $html  = '<div class="mt10 mb10 pt10 pr15 pb10 pl15 bg-yellow-100 gray">
-                <i class="'. $icon .' middle mr5"></i>
-                <span class="middle">'. $text .'...</span>
+                <i class="' . $icon . ' middle mr5"></i>
+                <span class="middle">' . $text . '...</span>
               </div>';
-    
+
     return $html;
 }
 
 function sumbit($text)
 {
-    $html  = '<button type="submit" class="btn btn-primary">'. $text .'</button>';  
-    
+    $html  = '<button type="submit" class="btn btn-primary">' . $text . '</button>';
+
     return $html;
 }
 

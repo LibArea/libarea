@@ -23,7 +23,7 @@
     </div>
     <img class="right" src="/assets/images/agouti_footer.gif">
   </div>
-   
+
 </body>
 
 </html>

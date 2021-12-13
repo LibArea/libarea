@@ -219,7 +219,7 @@ class WebModel extends MainModel
             'item_votes'        => 0,
             'item_count'        => 1,
         ];
-        
+
         $sql = "INSERT INTO items(item_url, 
                             item_url_domain, 
                             item_title_url, 
@@ -272,7 +272,7 @@ class WebModel extends MainModel
             'item_is_soft'      => $data['item_is_soft'],
             'item_is_github'    => $data['item_is_github'],
             'item_github_url'   => $data['item_github_url'],
-            'item_post_related' => $data['item_post_related'], 
+            'item_post_related' => $data['item_post_related'],
             'item_id'           => $data['item_id'],
         ];
 

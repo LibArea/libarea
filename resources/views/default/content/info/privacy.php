@@ -7,7 +7,7 @@
         Translate::get('info'),
         Translate::get('privacy policy')
     ); ?>
-    
+
     <h1 class="mt0 mb10 size-24 font-normal"><?= Translate::get('privacy policy'); ?></h1>
     <?= $data['content']; ?>
 </main>

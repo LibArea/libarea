@@ -41,7 +41,7 @@ class СonsoleModel extends MainModel
 
         return DB::run($sql, ['user_id' => $user_id, 'count' => $count]);
     }
-    
+
     // Users Trust Level
     public static function getTrustLevel($tl)
     {
@@ -49,12 +49,11 @@ class СonsoleModel extends MainModel
 
         return DB::run($sql, ['tl' => $tl])->fetchAll(PDO::FETCH_ASSOC);
     }
-    
+
     public static function setTrustLevel($user_id, $tl)
     {
         $sql = "UPDATE users SET user_trust_level = :tl WHERE user_id = :user_id";
 
         return DB::run($sql, ['user_id' => $user_id, 'tl' => $tl]);
     }
-    
 }

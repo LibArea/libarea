@@ -2,7 +2,7 @@
 $data = [
     'home'              => 'Domicile',
     'city'              => 'Ville',
-    
+
     'language'          => 'Localisation',
     'ru-language'       => 'Russe (RU)',
     'en-language'       => 'Anglais (EN)',

@@ -11,7 +11,6 @@ class AgentController extends MainController
 {
     public function index()
     {
-        $uid        = Base::getUid();
         $limit      = 100;
         $ua_info    = AgentModel::getAll($limit);
 

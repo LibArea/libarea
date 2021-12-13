@@ -97,7 +97,7 @@
         <?php if ($post['post_url_domain']) { ?>
           <div class="mb15">
             <a rel="nofollow noreferrer ugc" target="_blank" class="btn btn-primary" href="<?= $post['post_url']; ?>">
-              <?= Translate::get('details are here'); ?> 
+              <?= Translate::get('details are here'); ?>
               <i class="bi bi-folder-symlink middle ml5"></i>
             </a>
           </div>
@@ -257,7 +257,7 @@
   } ?>
 </main>
 <aside class="col-span-3 relative br-rd5 no-mob">
-   
+
   <?php if (!empty($data['topics'])) { ?>
     <div class="br-box-gray bg-white br-rd5 mb15 p15">
       <h3 class="uppercase mb5 mt0 font-light size-15 gray"><?= Translate::get('topics'); ?></h3>
@@ -277,7 +277,7 @@
       <?php } ?>
     </div>
   <?php } ?>
- 
+
   <?php if ($post['post_content_img']) { ?>
     <div class="br-box-gray bg-white br-rd5 mb15 post-img">
       <?= post_img($post['post_content_img'], $post['post_title'], 'w-100 p15 br-rd5', 'cover', $post['post_content_img']); ?>
@@ -311,52 +311,53 @@
   <?php } ?>
 </aside>
 <script nonce="<?= $_SERVER['nonce']; ?>">
-// Modal windows for photos in a post
-document.querySelectorAll(".post-body.full .post img, .post-img img, .answ-telo p img")
-  .forEach(el => el.addEventListener("click", function (e) {
-    if (el.src) {
-      let img = '<img src="' + el.src + '">';
-      Swal.fire({
-        width: '100%',
-        showConfirmButton: false,
-        showCloseButton: true,
-        title: img
-      })
-    }
-  }));
+  // Modal windows for photos in a post
+  document.querySelectorAll(".post-body.full .post img, .post-img img, .answ-telo p img")
+    .forEach(el => el.addEventListener("click", function(e) {
+      if (el.src) {
+        let img = '<img src="' + el.src + '">';
+        Swal.fire({
+          width: '100%',
+          showConfirmButton: false,
+          showCloseButton: true,
+          title: img
+        })
+      }
+    }));
 
   <?php if ($uid['user_id'] > 0) { ?>
     document.querySelectorAll(".msg-flag")
-      .forEach(el => el.addEventListener("click", function (e) {    
+      .forEach(el => el.addEventListener("click", function(e) {
         let post_id = el.dataset.post_id;
         let content_id = el.dataset.content_id;
         let type = el.dataset.type;
-      Swal.fire({
-        title: '<?= Translate::get('report'); ?>',
-        html: '<?= Translate::get('does this violate site rules'); ?>?',
-        confirmButtonColor: '#3085d6',
-        confirmButtonText: '<?= Translate::get('yes'); ?>',
-        cancelButtonText: '<?= Translate::get('no'); ?>',
-        showCancelButton: true,
-        showLoaderOnConfirm: true,
-        preConfirm: () => {
-          fetch("/flag/repost", {
-              method: "POST",
-              body: "type=" + type + "&post_id=" + post_id + "&content_id=" + content_id,
-              headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-            })
-            .then(
+        Swal.fire({
+          title: '<?= Translate::get('report'); ?>',
+          html: '<?= Translate::get('does this violate site rules'); ?>?',
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: '<?= Translate::get('yes'); ?>',
+          cancelButtonText: '<?= Translate::get('no'); ?>',
+          showCancelButton: true,
+          showLoaderOnConfirm: true,
+          preConfirm: () => {
+            fetch("/flag/repost", {
+                method: "POST",
+                body: "type=" + type + "&post_id=" + post_id + "&content_id=" + content_id,
+                headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded'
+                }
+              })
+              .then(
                 response => {
                   return;
                 }
               ).then(
-                text => {  }
-              );  
-        }
-      })
-     }));
+                text => {}
+              );
+          }
+        })
+      }));
   <?php } ?>
- 
 </script>
 </div>
 <?= includeTemplate('/_block/wide-footer'); ?>

@@ -10,7 +10,7 @@ use Base, Content, Translate;
 class WebsController extends MainController
 {
     private $uid;
-    
+
     protected $limit = 25;
 
     public function __construct()

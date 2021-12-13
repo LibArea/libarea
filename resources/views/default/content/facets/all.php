@@ -3,24 +3,24 @@
 </div>
 <main class="col-span-10 mb-col-12">
   <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
-  
+
     <p class="m0 size-18"><?= Translate::get($data['type'] . 's'); ?>
       <?php if ($uid['user_trust_level'] == 5) { ?>
         <a class="ml15" href="<?= getUrlByName('admin.' . $data['type'] . 's'); ?>">
           <i class="bi bi-pencil"></i>
         </a>
-      <?php } ?>  
+      <?php } ?>
 
-    <?php if ($uid['user_trust_level'] > 0) { ?> 
+      <?php if ($uid['user_trust_level'] > 0) { ?>
         <?php if ($uid['user_trust_level'] >= Config::get('trust-levels.tl_add_' . $data['type'])) { ?>
-         <?php if ($data['count_facet'] > 0) { ?>
-        <a class="ml15" title="<?= Translate::get('add'); ?>" href="<?= getUrlByName($data['type'] . '.add'); ?>">
-          <i class="bi bi-plus-lg middle"></i>
-        </a>
+          <?php if ($data['count_facet'] > 0) { ?>
+            <a class="ml15" title="<?= Translate::get('add'); ?>" href="<?= getUrlByName($data['type'] . '.add'); ?>">
+              <i class="bi bi-plus-lg middle"></i>
+            </a>
+          <?php } ?>
         <?php } ?>
-        <?php } ?> 
-    <?php } ?> 
-    
+      <?php } ?>
+
     <ul class="flex flex-row list-none m0 p0 center size-15">
 
       <?= tabs_nav(

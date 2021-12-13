@@ -11,14 +11,14 @@ use Content, Config, Base, Validation, Translate;
 class UserController extends MainController
 {
     private $uid;
-    
+
     protected $limit = 42;
 
     public function __construct()
     {
         $this->uid  = Base::getUid();
     }
-    
+
     // Все пользователи
     function index()
     {
@@ -200,7 +200,7 @@ class UserController extends MainController
             ]
         );
     }
-    
+
     public function card()
     {
         $user_id    = Request::getPostInt('user_id');
@@ -208,7 +208,6 @@ class UserController extends MainController
         $post       = PostModel::getPostId($user['user_my_post']);
         $badges     = BadgeModel::getBadgeUserAll($user_id);
 
-        includeTemplate('/content/user/card', ['user' => $user, 'uid' => $this->uid, 'post' => $post, 'badges' => $badges]);  
+        includeTemplate('/content/user/card', ['user' => $user, 'uid' => $this->uid, 'post' => $post, 'badges' => $badges]);
     }
-   
 }

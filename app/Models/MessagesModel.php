@@ -28,7 +28,7 @@ class MessagesModel extends MainModel
 
         return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
     }
-    
+
     public static function lastBranches($user_id)
     {
         $sql = "SELECT  
@@ -46,7 +46,7 @@ class MessagesModel extends MainModel
                             ORDER BY dialog_update_time DESC LIMIT 15";
 
         return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
-    }   
+    }
 
     // Получаем диалог по id
     public static function getDialogById($dialog_id)

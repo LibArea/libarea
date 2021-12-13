@@ -15,14 +15,14 @@ class FeedModel extends MainModel
             $qa         = $data['facet_slug'];
             $string     = "WHERE facet_list LIKE :qa";
             if ($sheet == 'recommend') {
-                $qa         = $data['facet_slug'];
-                $string     = "WHERE facet_list LIKE :qa AND post_is_recommend = 1";
+                $qa     = $data['facet_slug'];
+                $string = "WHERE facet_list LIKE :qa AND post_is_recommend = 1";
             }
         } elseif ($type == 'admin') {
             $selection  = 0;
             $string     = "WHERE post_user_id != :selection";
-             if ($sheet == 'ban') {
-                $string     = "WHERE post_is_deleted = 1";
+            if ($sheet == 'ban') {
+                $string = "WHERE post_is_deleted = 1";
             }
         } elseif ($type == 'item') {
             $selection  = $data['item_url_domain'];
@@ -123,7 +123,7 @@ class FeedModel extends MainModel
         } elseif ($type == 'admin') {
             $selection  = 0;
             $string     = "WHERE post_user_id != :selection";
-             if ($sheet == 'ban') {
+            if ($sheet == 'ban') {
                 $string     = "WHERE post_is_deleted = 1";
             }
         } elseif ($type == 'item') {

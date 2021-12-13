@@ -67,8 +67,9 @@
               <?= $topic['facet_title']; ?>
             </a>
             <?php if ($topic['matching_list']) { ?><div class="ml<?= $topic['level'] * 10; ?>">
-              <i class="bi bi-bezier2 gray-light size-13 mr5 ml5"></i>
-              <?= html_topic($topic['matching_list'], 'topic', 'gray-light size-13 mr15'); ?> </div>
+                <i class="bi bi-bezier2 gray-light size-13 mr5 ml5"></i>
+                <?= html_topic($topic['matching_list'], 'topic', 'gray-light size-13 mr15'); ?>
+              </div>
             <?php } ?>
           </div>
         <?php } ?>
