@@ -135,6 +135,7 @@ $data = [
     'read'              => 'Read',
     'reads'             => 'Reads',
     'reading'           => 'I read',
+    'is reading'        => 'Is reading',
     'subscribed'        => 'Subscribed',
     'unsubscribed'      => 'Unsubscribed',
     'unsubscribe'       => 'Unsubscribe',

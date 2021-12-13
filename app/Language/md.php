@@ -130,6 +130,7 @@ $data = [
     'read'              => 'Pentru a citi',
     'reads'             => 'Citit',
     'reading'           => 'Citesc',
+    'is reading'        => 'Citeste',
     'subscribed'        => 'Abonat',
     'unsubscribed'      => 'Dezabonat',
     'unsubscribe'       => 'Sunteți abonat',

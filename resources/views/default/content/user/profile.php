@@ -80,7 +80,7 @@
             <?php }  ?>
 
             <?php if ($data['topics']) { ?>
-              <div class="uppercase mb5 mt15 size-14"><?= Translate::get('reads'); ?></div>
+              <div class="uppercase mb5 mt15 size-14"><?= Translate::get('is reading'); ?></div>
               <span class="d">
                 <?php foreach ($data['topics'] as  $topic) { ?>
                   <div class="mt5 mb5">

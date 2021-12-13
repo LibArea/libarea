@@ -271,10 +271,7 @@ class FacetModel extends MainModel
     public static function participation($user_id)
     {
         $sql = " SELECT 
-                    MAX(post_id), 
-                    MAX(post_user_id),
-                    MAX(post_is_deleted),
-                    SUM(relation_facet_id) as count,
+                    relation_facet_id as count,
                     rel.*
                     FROM posts
                     LEFT JOIN facets_posts_relation ON relation_post_id = post_id
@@ -282,13 +279,14 @@ class FacetModel extends MainModel
                         ( SELECT 
                             facet_id,
                             facet_slug,
+                            facet_type,
                             facet_title
-                            FROM facets
+                                FROM facets
                         ) AS rel
                             ON rel.facet_id = relation_facet_id
-                               WHERE post_user_id = :user_id
-                               GROUP BY relation_facet_id 
-                               ORDER BY count DESC LIMIT 5";
+                                WHERE post_user_id = :user_id AND facet_type = 'topic'
+                                    GROUP BY relation_facet_id 
+                                        ORDER BY count DESC LIMIT 5";
 
         return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
     }
