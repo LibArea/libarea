@@ -6,7 +6,7 @@
 
     <p class="m0 size-18"><?= Translate::get($data['type']); ?>
       <?php if ($uid['user_trust_level'] == 5) { ?>
-        <a class="ml15" href="<?= getUrlByName('admin.' . $data['type'] . 's'); ?>">
+        <a class="ml15" href="<?= getUrlByName('admin.' . $data['type']); ?>">
           <i class="bi bi-pencil"></i>
         </a>
       <?php } ?>

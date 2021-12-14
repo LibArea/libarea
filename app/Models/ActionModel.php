@@ -115,7 +115,7 @@ class ActionModel extends MainModel
         if ($type == 'post') {
             $field_tl = 'post_tl';
             $field_name = 'post_title';
-            $sql = "SELECT post_id, post_title, post_is_deleted, post_tl FROM posts WHERE post_title LIKE :post_title AND post_is_deleted = 0 AND post_tl = 0 ORDER BY post_id DESC LIMIT 200";
+            $sql = "SELECT post_id, post_title, post_is_deleted, post_tl FROM posts WHERE post_title LIKE :post_title AND post_is_deleted = 0 AND post_tl = 0 ORDER BY post_id DESC LIMIT 6";
         } elseif ($type == 'user') {
             $field_tl = 'user_trust_level';
             $field_name = 'user_login';

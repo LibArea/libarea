@@ -177,7 +177,6 @@ $data = [
     'for example'       => 'Exemplu',
     'ed'                => 'ed',
     'add'               => 'Adaugă',
-    'view'              => 'Vezi',
     'there are'         => 'Există',
     'yes'               => 'Da',
     'no'                => 'Nu',

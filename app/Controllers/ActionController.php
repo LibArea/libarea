@@ -84,10 +84,8 @@ class ActionController extends MainController
     // Связанные посты и выбор автора
     public function select()
     {
-
         $type   = Request::get('type');
         $search = Request::get('q');
-
         $search = preg_replace('/[^a-zA-ZА-Яа-я0-9 ]/ui', '', $search);
 
         return ActionModel::getSearch($search, $type);

@@ -41,10 +41,12 @@ Route::before('Authorization@noAuth')->getGroup();
             Route::endProtect();
     Route::endType();
 
+    Route::get('/search/{type}/{q}')->controller('ActionController@select')->where(['type' => '[a-z]+', 'q' => '[a-zA-Zа-яА-Я0-8 ]+']);
+
     // The form of adding and changing: post | topic |  web
     Route::get('/post/add')->controller('Post\AddPostController')->name('post.add');
-    Route::get('/topic/add')->controller('Facets\AddFacetController', ['topic'])->name('topic.add');
-    Route::get('/blog/add')->controller('Facets\AddFacetController', ['blog'])->name('blog.add');
+    Route::get('/topic/add')->controller('Facets\AddFacetController', ['topic'])->name('topics.add');
+    Route::get('/blog/add')->controller('Facets\AddFacetController', ['blog'])->name('blogs.add');
     Route::get('/web/add')->controller('Item\AddWebController')->name('web.add');
     
     Route::get('/post/edit/{id}')->controller('Post\EditPostController')->where(['id' => '[0-9]+'])->name('post.edit');
