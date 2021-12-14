@@ -4,7 +4,7 @@
 <main class="col-span-10 mb-col-12">
   <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
 
-    <p class="m0 size-18"><?= Translate::get($data['type'] . 's'); ?>
+    <p class="m0 size-18"><?= Translate::get($data['type']); ?>
       <?php if ($uid['user_trust_level'] == 5) { ?>
         <a class="ml15" href="<?= getUrlByName('admin.' . $data['type'] . 's'); ?>">
           <i class="bi bi-pencil"></i>
@@ -28,20 +28,20 @@
         $data['sheet'],
         $pages = [
           [
-            'id' => $data['type'] . 's.all',
-            'url' => getUrlByName($data['type'] . 's.all'),
+            'id' => $data['type'] . '.all',
+            'url' => getUrlByName($data['type'] . '.all'),
             'content' => Translate::get('all'),
             'icon' => 'bi bi-app'
           ],
           [
-            'id' => $data['type'] . 's.new',
-            'url' => getUrlByName($data['type'] . 's.new'),
+            'id' => $data['type'] . '.new',
+            'url' => getUrlByName($data['type'] . '.new'),
             'content' => Translate::get('new ones'),
             'icon' => 'bi bi-sort-up'
           ],
           [
-            'id' => $data['type'] . 's.my',
-            'url' => getUrlByName($data['type'] . 's.my'),
+            'id' => $data['type'] . '.my',
+            'url' => getUrlByName($data['type'] . '.my'),
             'content' => Translate::get('reading'),
             'auth' => 'yes',
             'icon' => 'bi bi-check2-square'
