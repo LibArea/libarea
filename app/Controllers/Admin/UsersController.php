@@ -10,6 +10,8 @@ use Base, Validation, Translate;
 
 class UsersController extends MainController
 {
+    protected $limit = 50;
+    
     private $uid;
 
     public function __construct()
@@ -17,14 +19,13 @@ class UsersController extends MainController
         $this->uid  = Base::getUid();
     }
 
-    public function index($sheet)
+    public function index($sheet, $type)
     {
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
-        $limit = 50;
         $pagesCount = UserModel::getUsersAllCount($sheet);
-        $user_all   = UserModel::getUsersAll($page, $limit, $this->uid['user_id'], $sheet);
+        $user_all   = UserModel::getUsersAll($page, $this->limit, $this->uid['user_id'], $sheet);
 
         $result = [];
         foreach ($user_all as $ind => $row) {
@@ -44,10 +45,11 @@ class UsersController extends MainController
                 'meta'  => meta($m = [], Translate::get('users')),
                 'uid'   => $this->uid,
                 'data'  => [
-                    'pagesCount'    => ceil($pagesCount / $limit),
+                    'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
                     'alluser'       => $result,
-                    'sheet'         => $sheet == 'all' ? 'users' : 'users-ban',
+                    'sheet'         => $sheet,
+                    'type'          => $type,
                 ]
             ]
         );
@@ -78,7 +80,7 @@ class UsersController extends MainController
                 'data'  => [
                     'results'   => $results,
                     'option'    => $option,
-                    'sheet'     => 'users',
+                    'type'      => 'users',
                 ]
             ]
         );
@@ -113,7 +115,7 @@ class UsersController extends MainController
                 'meta'  => meta($m = [], Translate::get('edit user')),
                 'uid'   => $this->uid,
                 'data'  => [
-                    'sheet'     => 'edit-user',
+                    'type'      => 'users',
                     'count'     => UserModel::contentCount($user_id),
                     'user'      => $user,
                 ]

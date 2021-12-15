@@ -1,5 +1,5 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/_block/menu/admin', ['sheet' => 'tools', 'uid' => $uid]); ?>
+  <?= includeTemplate('/_block/menu/admin', ['type' => 'tools', 'uid' => $uid]); ?>
 </div>
 <main class="col-span-10 mb-col-12">
 

@@ -1,8 +1,8 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/_block/menu/admin', ['sheet' => $data['type']]); ?>
+  <?= includeTemplate('/_block/menu/admin', ['type' => $data['type']]); ?>
 </div>
 <main class="col-span-10 mb-col-12">
-  <a class="right mr15" title="<?= Translate::get('add'); ?>" href="<?= getUrlByName('topic.add'); ?>">
+  <a class="right mr15" title="<?= Translate::get('add'); ?>" href="<?= getUrlByName($data['type'] .'.add'); ?>">
     <i class="bi bi-plus-lg middle"></i>
   </a>
 
@@ -14,31 +14,14 @@
     Translate::get('topics')
   ); ?>
 
-  <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
-    <p class="m0"><?= Translate::get($data['type'] . 's'); ?></p>
-    <ul class="flex flex-row list-none m0 p0 center size-15">
-
-      <?= tabs_nav(
-        $uid['user_id'],
-        $data['sheet'],
-        $pages = [
-          [
-            'id'        => 'admin.' . $data['type'] . 's.all',
-            'url'       => getUrlByName('admin.' . $data['type'] . 's'),
-            'content'   => Translate::get('all'),
-            'icon'      => 'bi bi-record-circle'
-          ],
-          [
-            'id'        => 'admin.' . $data['type'] . 's.ban',
-            'url'       => getUrlByName('admin.' . $data['type'] . 's.ban'),
-            'content'   => Translate::get('banned'),
-            'icon'      => 'bi bi-x-circle'
-          ],
-        ]
-      ); ?>
-
-    </ul>
-  </div>
+  <?= includeTemplate(
+    '/_block/tabs-nav-admin',
+    [
+      'type'     => $data['type'],
+      'sheet'    => $data['sheet'],
+      'user_id'  => $uid['user_id']
+    ]
+  ); ?>
 
   <div class="white-box pt5 pr15 pb5 pl15">
     <?php if (!empty($data['facets'])) { ?>
@@ -50,7 +33,12 @@
           <th>Ban</th>
           <th><?= Translate::get('action'); ?></th>
         </thead>
-        <?php foreach ($data['facets'] as $key => $fc) { ?>
+        <?php foreach ($data['facets'] as $key => $fc) { 
+            $url = 'topic';
+            if ($data['type'] == 'blogs') {
+                $url = 'blog';
+            }
+        ?>
           <tr>
             <td class="center">
               <?= $fc['facet_id']; ?>
@@ -59,7 +47,7 @@
               <?= facet_logo_img($fc['facet_img'], 'max', $fc['facet_title'], 'w64'); ?>
             </td>
             <td>
-              <a class="size-21" rel="nofollow noreferrer" href="<?= getUrlByName($data['type'], ['slug' => $fc['facet_slug']]); ?>">
+              <a class="size-21" rel="nofollow noreferrer" href="<?= getUrlByName($url, ['slug' => $fc['facet_slug']]); ?>">
                 <?= $fc['facet_title']; ?>
               </a>
               <span class="green mr5 ml5"><?= $data['type']; ?>/<?= $fc['facet_slug']; ?></span>

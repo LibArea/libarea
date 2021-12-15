@@ -29,12 +29,12 @@ return [
         'url'   => getUrlByName('admin.topics'),
         'name'  => Translate::get('topics'),
         'icon'  => 'bi bi-columns-gap',
-        'item'  => 'topic',
+        'item'  => 'topics',
     ], [
         'url'   => getUrlByName('admin.blogs'),
         'name'  => Translate::get('blogs'),
         'icon'  => 'bi bi-journal-text',
-        'item'  => 'blog',
+        'item'  => 'blogs',
     ], [
         'url'   => getUrlByName('admin.invitations'),
         'name'  => Translate::get('invites'),
@@ -49,12 +49,12 @@ return [
         'url'   => getUrlByName('admin.comments'),
         'name'  => Translate::get('comments'),
         'icon'  => 'bi bi-chat-dots',
-        'item'  => 'comments-n',
+        'item'  => 'comments',
     ], [
         'url'   => getUrlByName('admin.answers'),
         'name'  => Translate::get('answers'),
         'icon'  => 'bi bi-chat-left-text',
-        'item'  => 'answers-n',
+        'item'  => 'answers',
     ], [
         'url'   => getUrlByName('admin.badges'),
         'name'  => Translate::get('badges'),

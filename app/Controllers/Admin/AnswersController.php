@@ -9,15 +9,22 @@ use Content, Base, Translate;
 
 class AnswersController extends MainController
 {
-    public function index($sheet)
+    private $uid;
+
+    protected $limit = 100;
+
+    public function __construct()
     {
-        $uid    = Base::getUid();
+        $this->uid  = Base::getUid();
+    }
+    
+    public function index($sheet, $type)
+    {
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
-        $limit = 100;
         $pagesCount = AnswerModel::getAnswersAllCount($sheet);
-        $answers    = AnswerModel::getAnswersAll($page, $limit, $uid, $sheet);
+        $answers    = AnswerModel::getAnswersAll($page, $this->limit, $this->uid, $sheet);
 
         $result = [];
         foreach ($answers  as $ind => $row) {
@@ -30,10 +37,11 @@ class AnswersController extends MainController
             '/admin/answer/answers',
             [
                 'meta'  => meta($m = [], $sheet == 'ban' ? Translate::get('deleted answers') : Translate::get('answers')),
-                'uid'   => $uid,
+                'uid'   => $this->uid,
                 'data'  => [
-                    'sheet'         => $sheet == 'all' ? 'answers' : 'answers-ban',
-                    'pagesCount'    => ceil($pagesCount / $limit),
+                    'sheet'         => $sheet,
+                    'type'          => $type,
+                    'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
                     'answers'       => $result,
                 ]

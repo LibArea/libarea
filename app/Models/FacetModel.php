@@ -19,6 +19,12 @@ class FacetModel extends MainModel
             case 'topics.new':
                 $signet = "WHERE facet_type = 'topic' ORDER BY facet_id DESC";
                 break;
+            case 'topics.all':
+                $signet = "WHERE facet_type = 'topic' ORDER BY facet_id DESC";
+                break;
+            case 'topics.ban':
+                $signet = "WHERE facet_type = 'topic' AND facet_is_deleted = 1 ORDER BY facet_id DESC";
+                break;
             case 'blogs.all':
                 $signet = "WHERE facet_type = 'blog' ORDER BY facet_count DESC";
                 break;
@@ -28,17 +34,8 @@ class FacetModel extends MainModel
             case 'blogs.my':
                 $signet = "WHERE facet_type = 'blog' AND signed_user_id = :user_id ORDER BY facet_count DESC";
                 break;
-            case 'admin.blogs.all':
-                $signet = "WHERE facet_type = 'blog' ORDER BY facet_id DESC";
-                break;
-            case 'admin.blogs.ban':
+            case 'blogs.ban':
                 $signet = "WHERE facet_type = 'blog' AND facet_is_deleted = 1 ORDER BY facet_id DESC";
-                break;
-            case 'admin.topics.all':
-                $signet = "WHERE facet_type = 'topic' ORDER BY facet_id DESC";
-                break;
-            case 'admin.topics.ban':
-                $signet = "WHERE facet_type = 'topic' AND facet_is_deleted = 1 ORDER BY facet_id DESC";
                 break;
             default:
                 $signet = "WHERE facet_type = 'topic' ORDER BY facet_count DESC";
@@ -78,6 +75,12 @@ class FacetModel extends MainModel
             case 'topics.new':
                 $signet = "WHERE facet_type = 'topic' ORDER BY facet_id DESC";
                 break;
+            case 'topics.all':
+                $signet = "WHERE facet_type = 'topic' ORDER BY facet_id DESC";
+                break;
+            case 'topics.ban':
+                $signet = "WHERE facet_type = 'topic' AND facet_is_deleted = 1 ORDER BY facet_id DESC";
+                break;
             case 'blogs.all':
                 $signet = "WHERE facet_type = 'blog' ORDER BY facet_count DESC";
                 break;
@@ -87,17 +90,8 @@ class FacetModel extends MainModel
             case 'blogs.my':
                 $signet = "WHERE facet_type = 'blog' AND signed_user_id = :user_id ORDER BY facet_count DESC";
                 break;
-            case 'admin.blogs.all':
-                $signet = "WHERE facet_type = 'blog' ORDER BY facet_id DESC";
-                break;
-            case 'admin.blogs.ban':
-                $signet = "WHERE facet_type = 'blog' AND facet_is_deleted = 21 ORDER BY facet_id DESC";
-                break;
-            case 'admin.topics.all':
-                $signet = "WHERE facet_type = 'topic' ORDER BY facet_id DESC";
-                break;
-            case 'admin.topics.ban':
-                $signet = "WHERE facet_type = 'topic' AND facet_is_deleted = 1 ORDER BY facet_id DESC";
+            case 'blogs.ban':
+                $signet = "WHERE facet_type = 'blog' AND facet_is_deleted = 1 ORDER BY facet_id DESC";
                 break;
             default:
                 $signet = "WHERE facet_type = 'topic' ORDER BY facet_count DESC";

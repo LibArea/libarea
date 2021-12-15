@@ -37,7 +37,7 @@ class ReportsController extends MainController
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
-                    'sheet'         => 'reports',
+                    'type'         => 'reports',
                     'reports'       => $result,
                 ]
             ]

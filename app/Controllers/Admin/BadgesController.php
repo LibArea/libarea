@@ -18,7 +18,7 @@ class BadgesController extends MainController
                 'meta'  => meta($m = [], Translate::get('badges')),
                 'uid'   => Base::getUid(),
                 'data'  => [
-                    'sheet'     => $sheet == 'all' ? 'badges' : $sheet,
+                    'type'     => 'badges',
                     'badges'    => BadgeModel::getBadgesAll(),
                 ]
             ]
@@ -34,7 +34,7 @@ class BadgesController extends MainController
                 'meta'  => meta($m = [], Translate::get('add badge')),
                 'uid'   => Base::getUid(),
                 'data'  => [
-                    'sheet' => 'badges',
+                    'type' => 'badges',
                 ]
             ]
         );
@@ -57,7 +57,7 @@ class BadgesController extends MainController
                 'uid'   => Base::getUid(),
                 'data'  => [
                     'badge'     => $badge,
-                    'sheet'     => 'badges',
+                    'type'     => 'badges',
                 ]
             ]
         );

@@ -1,5 +1,5 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/_block/menu/admin', ['sheet' => $data['sheet']]); ?>
+  <?= includeTemplate('/_block/menu/admin', ['type' => $data['type']]); ?>
 </div>
 <main class="col-span-10 mb-col-12">
 
@@ -12,7 +12,7 @@
   ); ?>
 
   <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
-    <p class="m0"><?= Translate::get($data['sheet']); ?></p>
+    <p class="m0"><?= Translate::get($data['type']); ?></p>
     <ul class="flex flex-row list-none m0 p0 center size-15">
 
       <?= tabs_nav(
@@ -20,16 +20,16 @@
         $data['sheet'],
         $pages = [
           [
-            'id' => 'audits',
-            'url' => getUrlByName('admin.audits'),
-            'content' => Translate::get('new ones'),
-            'icon' => 'bi bi-vinyl'
+            'id'        => $data['type'] . '.new',
+            'url'       => getUrlByName('admin.' . $data['type']),
+            'content'   => Translate::get('new ones'),
+            'icon'      => 'bi bi-vinyl'
           ],
           [
-            'id' => 'approved',
-            'url' => getUrlByName('admin.audits.approved'),
-            'content' => Translate::get('approved'),
-            'icon' => 'bi bi-vinyl-fill'
+            'id'        => $data['type'] . '.approved',
+            'url'       => getUrlByName('admin.' . $data['type'] . '.approved'),
+            'content'   => Translate::get('approved'),
+            'icon'      => 'bi bi-vinyl-fill'
           ],
         ]
       ); ?>

@@ -38,8 +38,8 @@ class AnswerModel extends MainModel
                 $sort = 'WHERE answer_is_deleted = 0 AND post_is_deleted = 0 AND post_tl <= ' . $uid['user_trust_level'] . '';
             }
         } else {
-            $sort = "WHERE answer_is_deleted = 0 AND post_is_deleted = 0";
-            if ($sheet == 'ban') {
+            $sort = "WHERE answer_is_deleted = 0 AND post_is_deleted = 0"; 
+            if ($sheet == 'answers.ban') {
                 $sort = "WHERE answer_is_deleted = 1 OR post_is_deleted = 1";
             }
         }
@@ -75,7 +75,7 @@ class AnswerModel extends MainModel
     public static function getAnswersAllCount($sheet)
     {
         $sort = "WHERE answer_is_deleted = 0";
-        if ($sheet == 'ban') {
+        if ($sheet == 'answers.ban') {
             $sort = "WHERE answer_is_deleted = 1";
         }
 

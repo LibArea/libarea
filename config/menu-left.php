@@ -14,12 +14,12 @@ return [
         'url'   => getUrlByName('topics.all'),
         'name'  => Translate::get('topics'),
         'icon'  => 'bi bi-columns-gap',
-        'item'  => 'topic',
+        'item'  => 'topics',
     ], [
         'url'   => getUrlByName('blogs.all'),
         'name'  => Translate::get('blogs'),
         'icon'  => 'bi bi-journal-text',
-        'item'  => 'blog',
+        'item'  => 'blogs',
     ], [
         'url'   => getUrlByName('users'),
         'name'  => Translate::get('users'),

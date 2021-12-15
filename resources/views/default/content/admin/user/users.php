@@ -1,5 +1,5 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/_block/menu/admin', ['sheet' => $data['sheet']]); ?>
+  <?= includeTemplate('/_block/menu/admin', ['type' => $data['type']]); ?>
 </div>
 <main class="col-span-10 mb-col-12">
 
@@ -11,31 +11,14 @@
     Translate::get('users')
   ); ?>
 
-  <div class="bg-white flex flex-row items-center justify-between br-box-gray p15 mb15">
-    <p class="m0"><?= Translate::get($data['sheet']); ?></p>
-    <ul class="flex flex-row list-none m0 p0 center size-15">
-
-      <?= tabs_nav(
-        $uid['user_id'],
-        $data['sheet'],
-        $pages = [
-          [
-            'id' => 'users',
-            'url' => getUrlByName('admin.users'),
-            'content' => Translate::get('all'),
-            'icon' => 'bi bi-record-circle'
-          ],
-          [
-            'id' => 'users-ban',
-            'url' => getUrlByName('admin.users.ban'),
-            'content' => Translate::get('banned'),
-            'icon' => 'bi bi-x-circle'
-          ],
-        ]
-      ); ?>
-
-    </ul>
-  </div>
+  <?= includeTemplate(
+    '/_block/tabs-nav-admin',
+    [
+      'type'     => $data['type'],
+      'sheet'    => $data['sheet'],
+      'user_id'  => $uid['user_id']
+    ]
+  ); ?>
 
   <div class="bg-white br-box-gray pt5 pr15 pb5 pl15">
     <?php if ($data['alluser']) {  ?>

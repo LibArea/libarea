@@ -1,5 +1,5 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/_block/menu/admin', ['uid' => $uid, 'sheet' => $data['sheet']]); ?>
+  <?= includeTemplate('/_block/menu/admin', ['uid' => $uid, 'type' => $data['type']]); ?>
 </div>
 <main class="col-span-10 mb-col-12">
 
@@ -12,7 +12,7 @@
   ); ?>
 
   <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
-    <p class="m0"><?= Translate::get($data['sheet']); ?></p>
+    <p class="m0"><?= Translate::get('admin'); ?></p>
   </div>
 
   <div class="grid grid-cols-12 gap-4 pr10 pl10 justify-between">

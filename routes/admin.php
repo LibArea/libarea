@@ -24,22 +24,22 @@ Route::before('Authorization@admin')->getGroup();
   
     Route::get('/tools')->controller('Admin\ToolsController')->name('admin.tools');
   
-    Route::get('/users')->controller('Admin\UsersController', ['all'])->name('admin.users');
-    Route::get('/users/ban')->controller('Admin\UsersController', ['ban'])->name('admin.users.ban');
+    Route::get('/users')->controller('Admin\UsersController', ['users.all', 'users'])->name('admin.users');
+    Route::get('/users/ban')->controller('Admin\UsersController', ['users.ban', 'users'])->name('admin.users.ban');
     Route::get('/users/{id}/edit')->controller('Admin\UsersController@userEditPage')->where(['id' => '[0-9]+'])->name('admin.user.edit');
-    Route::get('/users/page/{page?}')->controller('Admin\UsersController', ['all'])->where(['page' => '[0-9]+']);
-    Route::get('/logip/{ip}')->controller('Admin\UsersController@logsIp', ['logs'])->where(['ip' => '[0-9].+'])->name('admin.logip');
-    Route::get('/regip/{ip}')->controller('Admin\UsersController@logsIp', ['reg'])->where(['ip' => '[0-9].+'])->name('admin.regip');
+    Route::get('/users/page/{page?}')->controller('Admin\UsersController', ['users.all', 'users'])->where(['page' => '[0-9]+']);
+    Route::get('/logip/{ip}')->controller('Admin\UsersController@logsIp', ['users.logip', 'users'])->where(['ip' => '[0-9].+'])->name('admin.logip');
+    Route::get('/regip/{ip}')->controller('Admin\UsersController@logsIp', ['users.regip', 'users'])->where(['ip' => '[0-9].+'])->name('admin.regip');
     
-    Route::get('/audits')->controller('Admin\AuditsController', ['all'])->name('admin.audits');
-    Route::get('/audits/approved')->controller('Admin\AuditsController', ['approved'])->name('admin.audits.approved');
+    Route::get('/audits')->controller('Admin\AuditsController', ['audits.new', 'audits'])->name('admin.audits');
+    Route::get('/audits/approved')->controller('Admin\AuditsController', ['audits.approved', 'audits'])->name('admin.audits.approved');
    
-    Route::get('/topics')->controller('Admin\FacetsController', ['admin.topics.all', 'topic'])->name('admin.topics');
-    Route::get('/topics/ban')->controller('Admin\FacetsController', ['admin.topics.ban', 'topic'])->name('admin.topics.ban');
-    Route::get('/topics/page/{page?}')->controller('Admin\FacetsController', ['all'])->where(['page' => '[0-9]+']);
+    Route::get('/topics')->controller('Admin\FacetsController', ['topics.all', 'topics'])->name('admin.topics');
+    Route::get('/topics/ban')->controller('Admin\FacetsController', ['topics.ban', 'topics'])->name('admin.topics.ban');
+    Route::get('/topics/page/{page?}')->controller('Admin\FacetsController', ['topics.all', 'topics'])->where(['page' => '[0-9]+']);
      
-    Route::get('/blogs')->controller('Admin\FacetsController', ['admin.blogs.all', 'blog'])->name('admin.blogs');
-    Route::get('/blogs/ban')->controller('Admin\FacetsController', ['admin.blogs.ban', 'blog'])->name('admin.blogs.ban');
+    Route::get('/blogs')->controller('Admin\FacetsController', ['blogs.all', 'blogs'])->name('admin.blogs');
+    Route::get('/blogs/ban')->controller('Admin\FacetsController', ['blogs.ban', 'blogs'])->name('admin.blogs.ban');
      
     Route::get('/update/count/topic')->controller('Admin\СonsoleController@updateCountPostTopic')->name('admin.count.topic'); 
     Route::get('/update/count/up')->controller('Admin\СonsoleController@updateCountUp')->name('admin.count.up');
@@ -49,17 +49,17 @@ Route::before('Authorization@admin')->getGroup();
    
     Route::get('/invitations')->controller('Admin\InvitationsController', ['all'])->name('admin.invitations');
    
-    Route::get('/posts')->controller('Admin\PostsController', ['all'])->name('admin.posts');
-    Route::get('/posts/page/{page?}')->controller('Admin\PostsController', ['all'])->where(['page' => '[0-9]+']);
-    Route::get('/posts/ban')->controller('Admin\PostsController', ['ban'])->name('admin.posts.ban'); 
+    Route::get('/posts')->controller('Admin\PostsController', ['posts.all', 'posts'])->name('admin.posts');
+    Route::get('/posts/page/{page?}')->controller('Admin\PostsController', ['posts.all', 'posts'])->where(['page' => '[0-9]+']);
+    Route::get('/posts/ban')->controller('Admin\PostsController', ['posts.ban', 'posts'])->name('admin.posts.ban'); 
 
-    Route::get('/comments')->controller('Admin\CommentsController', ['all'])->name('admin.comments');
-    Route::get('/comments/page/{page?}')->controller('Admin\CommentsController', ['all'])->where(['page' => '[0-9]+']);
-    Route::get('/comments/ban')->controller('Admin\CommentsController', ['ban'])->name('admin.comments.ban'); 
+    Route::get('/comments')->controller('Admin\CommentsController', ['comments.all', 'comments'])->name('admin.comments');
+    Route::get('/comments/page/{page?}')->controller('Admin\CommentsController', ['comments.all', 'comments'])->where(['page' => '[0-9]+']);
+    Route::get('/comments/ban')->controller('Admin\CommentsController', ['comments.ban', 'comments'])->name('admin.comments.ban'); 
 
-    Route::get('/answers')->controller('Admin\AnswersController', ['all'])->name('admin.answers');
-    Route::get('/answers/page/{page?}')->controller('Admin\AnswersController', ['all'])->where(['page' => '[0-9]+']);
-    Route::get('/answers/ban')->controller('Admin\AnswersController', ['ban'])->name('admin.answers.ban'); 
+    Route::get('/answers')->controller('Admin\AnswersController', ['answers.all', 'answers'])->name('admin.answers');
+    Route::get('/answers/page/{page?}')->controller('Admin\AnswersController', ['answers.all', 'answers'])->where(['page' => '[0-9]+']);
+    Route::get('/answers/ban')->controller('Admin\AnswersController', ['answers.ban', 'answers'])->name('admin.answers.ban'); 
 
     Route::get('/badges')->controller('Admin\BadgesController', ['all'])->name('admin.badges');
     Route::get('/badges/add')->controller('Admin\BadgesController@addPage')->name('admin.badges.add');

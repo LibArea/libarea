@@ -63,9 +63,9 @@ if ($blog['facet_is_deleted'] == 0) { ?>
     </div>
   </div>
 <?php } else { ?>
-  <div class="center">
+  <div class="center col-span-10">
     <i class="bi bi-x-octagon size-110"></i>
-    <div class="mt5 gray"><?= Translate::get('deleted'); ?></div>
+    <div class="mt5 gray"><?= Translate::get('remote'); ?></div>
   </div>
 <?php } ?>
 

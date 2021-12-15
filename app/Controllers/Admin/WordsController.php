@@ -23,7 +23,8 @@ class WordsController extends MainController
                 'uid'   => Base::getUid(),
                 'data'  => [
                     'words' => ContentModel::getStopWords(),
-                    'sheet' => $sheet == 'all' ? 'words' : $sheet,
+                    'sheet' => $sheet,
+                    'type'  => 'words',
                 ]
             ]
         );
@@ -38,7 +39,7 @@ class WordsController extends MainController
                 'meta'  => meta($m = [], Translate::get('add a stop word')),
                 'uid'   => Base::getUid(),
                 'data'  => [
-                    'sheet' => 'words',
+                    'type' => 'words',
                 ]
             ]
         );

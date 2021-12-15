@@ -1,5 +1,5 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/_block/menu/admin', ['sheet' => $data['sheet']]); ?>
+  <?= includeTemplate('/_block/menu/admin', ['type' => $data['type']]); ?>
 </div>
 <main class="col-span-10 mb-col-12">
 
@@ -11,31 +11,15 @@
     Translate::get('comments')
   ); ?>
 
-  <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
-    <p class="m0"><?= Translate::get($data['sheet']); ?></p>
-    <ul class="flex flex-row list-none m0 p0 center size-15">
+  <?= includeTemplate(
+    '/_block/tabs-nav-admin',
+    [
+      'type'     => $data['type'],
+      'sheet'    => $data['sheet'],
+      'user_id'  => $uid['user_id']
+    ]
+  ); ?>
 
-      <?= tabs_nav(
-        $uid['user_id'],
-        $data['sheet'],
-        $pages = [
-          [
-            'id' => 'comments',
-            'url' => getUrlByName('admin.comments'),
-            'content' => Translate::get('all'),
-            'icon' => 'bi bi-record-circle'
-          ],
-          [
-            'id' => 'comments-ban',
-            'url' => getUrlByName('admin.comments.ban'),
-            'content' => Translate::get('deleted comments'),
-            'icon' => 'bi bi-x-circle'
-          ],
-        ]
-      ); ?>
-
-    </ul>
-  </div>
   <div class="bg-white br-box-gray p15">
     <?php if (!empty($data['comments'])) { ?>
       <?php foreach ($data['comments'] as $comment) { ?>
@@ -65,7 +49,7 @@
             + <?= $comment['comment_votes']; ?>
             <span id="cm_dell" class="right comment_link size-13">
               <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action">
-                <?php if ($data['sheet'] == 'comments-ban') { ?>
+                <?php if ($data['sheet'] == 'comments.ban') { ?>
                   <?= Translate::get('recover'); ?>
                 <?php } else { ?>
                   <?= Translate::get('remove'); ?>

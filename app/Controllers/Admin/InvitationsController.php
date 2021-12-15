@@ -25,7 +25,7 @@ class InvitationsController extends MainController
                 'meta'  => meta($m = [], Translate::get('invites')),
                 'uid'   => Base::getUid(),
                 'data'  => [
-                    'sheet'         => $sheet == 'all' ? 'invitations' : $sheet,
+                    'type'          => 'invitations',
                     'invitations'   => $result,
                 ]
             ]

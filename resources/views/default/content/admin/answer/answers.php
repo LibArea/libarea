@@ -1,5 +1,5 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/_block/menu/admin', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+  <?= includeTemplate('/_block/menu/admin', ['type' => $data['type'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-10 mb-col-12">
 
@@ -11,31 +11,14 @@
     Translate::get('answers')
   ); ?>
 
-  <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
-    <p class="m0"><?= Translate::get($data['sheet']); ?></p>
-    <ul class="flex flex-row list-none m0 p0 center size-15">
-
-      <?= tabs_nav(
-        $uid['user_id'],
-        $data['sheet'],
-        $pages = [
-          [
-            'id' => 'answers',
-            'url' => getUrlByName('admin.answers'),
-            'content' => Translate::get('all'),
-            'icon' => 'bi bi-record-circle'
-          ],
-          [
-            'id' => 'answers-ban',
-            'url' => getUrlByName('admin.answers.ban'),
-            'content' => Translate::get('deleted answers'),
-            'icon' => 'bi bi-x-circle'
-          ],
-        ]
-      ); ?>
-
-    </ul>
-  </div>
+  <?= includeTemplate(
+    '/_block/tabs-nav-admin',
+    [
+      'type'     => $data['type'],
+      'sheet'    => $data['sheet'],
+      'user_id'  => $uid['user_id']
+    ]
+  ); ?>
 
   <div class="bg-white br-box-gray p15">
     <?php if (!empty($data['answers'])) { ?>
@@ -66,7 +49,7 @@
             + <?= $answer['answer_votes']; ?>
             <span id="cm_dell" class="right comment_link size-13">
               <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action">
-                <?php if ($data['sheet'] == 'answers-ban') { ?>
+                <?php if ($data['sheet'] == 'answers.ban') { ?>
                   <?= Translate::get('recover'); ?>
                 <?php } else { ?>
                   <?= Translate::get('remove'); ?>

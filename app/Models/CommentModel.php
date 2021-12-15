@@ -85,7 +85,7 @@ class CommentModel extends MainModel
             $sort = '';
         } else {
             $sort = "WHERE comment_is_deleted = 0 AND post_is_deleted = 0";
-            if ($sheet == 'ban') {
+            if ($sheet == 'comments.ban') {
                 $sort = "WHERE comment_is_deleted = 1 OR post_is_deleted = 1";
             }
             $tl = '';
@@ -126,7 +126,7 @@ class CommentModel extends MainModel
             $sort = "WHERE comment_is_deleted = 0";
         } else {
             $sort = "WHERE comment_is_deleted = 0";
-            if ($sheet == 'ban') {
+            if ($sheet == 'comments.ban') {
                 $sort = "WHERE comment_is_deleted = 1";
             }
         }

@@ -1,5 +1,5 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/_block/menu/admin', ['sheet' => $data['sheet']]); ?>
+  <?= includeTemplate('/_block/menu/admin', ['type' => $data['type']]); ?>
 </div>
 <main class="col-span-10 mb-col-12">
 
@@ -26,7 +26,7 @@
             <?= $item['item_title_url']; ?>
           </div>
           <?= html_topic($item['facet_list'], 'web.topic', 'gray-light size-14 mr10'); ?>
-          <div class="content-telo">
+          <div class="max-w780">
             <?= $item['item_content_url']; ?>
           </div>
           <div class="br-bottom mb15 mt5 pb5 size-13 hidden gray">

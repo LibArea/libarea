@@ -9,15 +9,23 @@ use Content, Base, Translate;
 
 class CommentsController extends MainController
 {
-    public function index($sheet)
+    private $uid;
+
+    protected $limit = 100;
+
+    public function __construct()
     {
-        $uid    = Base::getUid();
+        $this->uid  = Base::getUid();
+    }
+    
+    public function index($sheet, $type)
+    {
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
         $limit      = 100;
         $pagesCount = CommentModel::getCommentsAllCount($sheet);
-        $comments   = CommentModel::getCommentsAll($page, $limit, $uid, $sheet);
+        $comments   = CommentModel::getCommentsAll($page, $this->limit, $this->uid, $sheet);
 
         $result = [];
         foreach ($comments  as $ind => $row) {
@@ -30,10 +38,11 @@ class CommentsController extends MainController
             '/admin/comment/comments',
             [
                 'meta'  => meta($m = [], $sheet == 'ban' ? Translate::get('deleted comments') : Translate::get('comments')),
-                'uid'   => $uid,
+                'uid'   => $this->uid,
                 'data'  => [
-                    'sheet'         => $sheet == 'all' ? 'comments' : 'comments-ban',
-                    'pagesCount'    => ceil($pagesCount / $limit),
+                    'sheet'         => $sheet,
+                    'type'          => $type,
+                    'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
                     'comments'      => $result,
                 ]

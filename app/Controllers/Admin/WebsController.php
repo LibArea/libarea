@@ -41,6 +41,7 @@ class WebsController extends MainController
                 'uid'   => $this->uid,
                 'data'  => [
                     'sheet'         => $sheet == 'all' ? 'domains' : $sheet,
+                    'type'          => 'domains',
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
                     'domains'       => $result,

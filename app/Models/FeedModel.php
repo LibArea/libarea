@@ -21,7 +21,7 @@ class FeedModel extends MainModel
         } elseif ($type == 'admin') {
             $selection  = 0;
             $string     = "WHERE post_user_id != :selection";
-            if ($sheet == 'ban') {
+            if ($sheet == 'posts.ban') {
                 $string = "WHERE post_is_deleted = 1";
             }
         } elseif ($type == 'item') {
@@ -123,7 +123,7 @@ class FeedModel extends MainModel
         } elseif ($type == 'admin') {
             $selection  = 0;
             $string     = "WHERE post_user_id != :selection";
-            if ($sheet == 'ban') {
+            if ($sheet == 'posts.ban') {
                 $string     = "WHERE post_is_deleted = 1";
             }
         } elseif ($type == 'item') {

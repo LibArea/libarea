@@ -18,7 +18,7 @@ class PostsController extends MainController
         $this->uid  = Base::getUid();
     }
 
-    public function index($sheet)
+    public function index($sheet, $type)
     {
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
@@ -40,7 +40,8 @@ class PostsController extends MainController
                 'meta'  => meta($m = [], $sheet == 'ban' ? Translate::get('deleted posts') : Translate::get('posts')),
                 'uid'   => $this->uid,
                 'data'  => [
-                    'sheet'         => $sheet == 'all' ? 'posts' : 'posts-ban',
+                    'sheet'         => $sheet,
+                    'type'          => $type,
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
                     'posts'         => $result,

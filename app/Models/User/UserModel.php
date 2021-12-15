@@ -11,9 +11,9 @@ class UserModel extends MainModel
     // Страница участников
     public static function getUsersAll($page, $limit, $user_id, $sheet)
     {
-        if ($sheet == 'all') {
+        if ($sheet == 'users.all') {
             $string = "ORDER BY user_id DESC LIMIT";
-        } elseif ($sheet == 'ban') {
+        } elseif ($sheet == 'users.ban') {
             $string = "WHERE user_ban_list > 0 ORDER BY user_id DESC LIMIT";
         } else {
             $string = "WHERE user_is_deleted != 1 and user_ban_list != 1
@@ -48,9 +48,9 @@ class UserModel extends MainModel
     // Количество
     public static function getUsersAllCount($sheet)
     {
-        $string = "WHERE user_ban_list > 0";
-        if ($sheet == 'all') {
-            $string = "";
+        $string = "";
+        if ($sheet == 'users.ban') {
+            $string = "WHERE user_ban_list > 0";
         }
 
         $sql = "SELECT 

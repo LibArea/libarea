@@ -12,7 +12,7 @@ class AuditsController extends MainController
 {
     protected $limit = 55;
 
-    public function index($sheet)
+    public function index($sheet, $type)
     {
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
@@ -44,7 +44,9 @@ class AuditsController extends MainController
                 'meta'  => meta($m = [], Translate::get('audit')),
                 'uid'   => Base::getUid(),
                 'data' => [
-                    'sheet'         => $sheet == 'approved' ? 'approved' : 'audits',
+                    'sheet'         => $sheet,
+                    'type'          => $type,
+                    'type'          => 'audits',
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
                     'audits'        => $result,
