@@ -12,8 +12,9 @@
 
     let dark = document.querySelector('.bg-gray-100.dark');
     let viewerEl = document.querySelector('.editorSection');
-    let body = viewerEl.innerHTML;
- 
+    let body = viewerEl.innerHTML.trim();
+    body = body.replace(/&gt;/gi, ">");
+
     if (viewerEl == null) {
       return;
     }
@@ -39,9 +40,10 @@
       toolbarItems: [
         ['heading', 'bold', 'italic', 'strike'],
         ['hr', 'quote'],
-        ['ul', 'ol'],
+        ['ul'],
         ['table', 'image', 'link'],
         ['code', 'codeblock'],
+
       ],
       events: {
         change: function() {
@@ -71,6 +73,5 @@
     });
 
     editor.getMarkdown();
-
   });
 </script>

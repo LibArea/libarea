@@ -5,17 +5,15 @@
 
 class MyParsedown extends Parsedown
 {
-    
-    private $baseImagePath;
-    
-    
+
     function __construct()
     {
-        $this->InlineTypes['{'][]= 'ColoredText';
+        $this->InlineTypes['{'][] = 'ColoredText';
         $this->inlineMarkerList .= '{';
-       // $this->baseImagePath = Config::get('meta.url');
+        // $this->baseImagePath = Config::get('meta.url');
+        $this->InlineTypes[':'][] = 'Emoji';
     }
-    
+
     protected function element(array $Element)
     {
         if ($this->safeMode) {
@@ -28,8 +26,8 @@ class MyParsedown extends Parsedown
             $server_host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : null;
             $href_host = isset($Element['attributes']['href']) ? parse_url($Element['attributes']['href'], PHP_URL_HOST) : null;
 
-        // Add a list of allowed urls to the config?
-        if ($server_host != $href_host) {
+            // Add a list of allowed urls to the config?
+            if ($server_host != $href_host) {
                 $Element['attributes']['target'] = '_blank';
                 $Element['attributes']['rel'] = 'noopener nofollow ugc';
             }
@@ -54,29 +52,26 @@ class MyParsedown extends Parsedown
 
             if (isset($Element['handler'])) {
                 $markup .= $this->{$Element['handler']}($Element['text'], $Element['nonNestables']);
-            }
-            else {
+            } else {
                 $markup .= self::escape($Element['text'], true);
             }
 
             $markup .= '</' . $Element['name'] . '>';
-        }
-        else {
+        } else {
             $markup .= ' />';
         }
 
         return $markup;
-    } 
-    
+    }
+
     protected function inlineColoredText($excerpt)
     {
-        if (preg_match('/^{c:([#\w]\w+)}(.*?){\/c}/', $excerpt['text'], $matches))
-        {
+        if (preg_match('/^{c:([#\w]\w+)}(.*?){\/c}/', $excerpt['text'], $matches)) {
             return array(
 
                 // How many characters to advance the Parsedown's
                 // cursor after being done processing this tag.
-                'extent' => strlen($matches[0]), 
+                'extent' => strlen($matches[0]),
                 'element' => array(
                     'name' => 'span',
                     'text' => $matches[2],
@@ -88,8 +83,35 @@ class MyParsedown extends Parsedown
             );
         }
     }
-    
-    // Добавим url домен в тело контента
+
+    protected function inlineEmoji($Excerpt)
+    {
+        if (preg_match('/\:(\w+)\:/mUs', $Excerpt['text'], $matches)) {
+            $path =  HLEB_PUBLIC_DIR . "/assets/images/emoji/" . $matches[1];
+            $file_ext = "";
+            if (file_exists($path . ".png"))
+                $file_ext = ".png";
+            else if (file_exists($path . ".gif"))
+                $file_ext = ".gif";
+            if ($file_ext === "")
+                return;
+            return [
+                'extent' => strlen($matches[0]),
+                'element' => [
+                    'name' => 'img',
+                    'handler' => 'line',
+                    'attributes' => [
+                        'class' => 'w18 h18 inline',
+                        'src' => '/assets/images/emoji/' . $matches[1] . $file_ext,
+                        'alt' => ':' . $matches[1] . ':',
+                        'title' => ':' . $matches[1] . ':'
+                    ],
+                ]
+            ];
+        }
+    }
+
+    // Добавим url домена в тело контента
     /* protected function inlineImage($excerpt)
     {
         $image = parent::inlineImage($excerpt);
@@ -103,6 +125,4 @@ class MyParsedown extends Parsedown
 
         return $image;
     } */
-
-   
 }

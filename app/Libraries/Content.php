@@ -13,6 +13,7 @@ class Content
         if ($type  == 'text') {
             $text   = $Parsedown->text($content);
             $text   = self::parseVideo($text);
+            $text   = self::parseSpoiler($text);
         } else {
             $text   = $Parsedown->line($content);
         }
@@ -38,6 +39,16 @@ class Content
         return  $content;
     }
 
+    public static function parseSpoiler($content)
+    {
+        $regexp = '/\{spoiler(?!.*\{spoiler)(\s?)(?(1)(.*?))\}(.*?)\{\/spoiler\}/is';
+		while (preg_match($regexp, $content)) {
+			$content = preg_replace($regexp, "<details><summary>" . Translate::get('see more') . "</summary>$2$3</details>", $content);
+		}
+
+        return $content;
+    }
+    
     // Парсинг user login / uid
     public static function parseUser($content, $with_user = false, $to_uid = false)
     {

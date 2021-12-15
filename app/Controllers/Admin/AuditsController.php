@@ -45,7 +45,6 @@ class AuditsController extends MainController
                 'uid'   => Base::getUid(),
                 'data' => [
                     'sheet'         => $sheet,
-                    'type'          => $type,
                     'type'          => 'audits',
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
