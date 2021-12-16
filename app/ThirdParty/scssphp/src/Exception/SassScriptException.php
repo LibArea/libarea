@@ -10,7 +10,7 @@ namespace ScssPhp\ScssPhp\Exception;
  * and replace it with a SassException reporting the location of the
  * error.
  */
-class SassScriptException extends \Exception
+final class SassScriptException extends \Exception
 {
     /**
      * Creates a SassScriptException with support for an argument name.
@@ -23,7 +23,7 @@ class SassScriptException extends \Exception
      *
      * @return SassScriptException
      */
-    public static function forArgument($message, $name = null)
+    public static function forArgument(string $message, ?string $name = null): SassScriptException
     {
         $varDisplay = !\is_null($name) ? "\${$name}: " : '';
 
