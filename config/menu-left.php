@@ -31,6 +31,11 @@ return [
         'icon'  => 'bi bi-chat-dots',
         'item'  => 'answers',
     ], [
+        'url'   => getUrlByName('comments'),
+        'name'  => Translate::get('comments'),
+        'icon'  => 'bi bi-chat-quote',
+        'item'  => 'comments',
+    ], [
         'url'   => getUrlByName('web'),
         'name'  => Translate::get('domains'),
         'icon'  => 'bi bi-link-45deg',

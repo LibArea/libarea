@@ -81,6 +81,7 @@ class UsersController extends MainController
                     'results'   => $results,
                     'option'    => $option,
                     'type'      => 'users',
+                    'sheet'     => ''
                 ]
             ]
         );
@@ -97,7 +98,7 @@ class UsersController extends MainController
     }
 
     // Страница редактиорование участника
-    public function userEditPage()
+    public function userEditPage($sheet, $type)
     {
         $user_id    = Request::getInt('id');
         if (!$user = UserModel::getUser($user_id, 'id')) redirect(getUrlByName('admin'));
@@ -115,7 +116,8 @@ class UsersController extends MainController
                 'meta'  => meta($m = [], Translate::get('edit user')),
                 'uid'   => $this->uid,
                 'data'  => [
-                    'type'      => 'users',
+                    'type'      => $type,
+                    'sheet'     => $sheet,
                     'count'     => UserModel::contentCount($user_id),
                     'user'      => $user,
                 ]
@@ -124,7 +126,7 @@ class UsersController extends MainController
     }
 
     // Редактировать участника
-    public function userEdit()
+    public function edit()
     {
         $login          = Request::getPost('login');
         $user_id        = Request::getInt('id');

@@ -9,14 +9,14 @@ use SendEmail, Translate, Sass;
 
 class СonsoleController extends MainController
 {
-    public static function updateCountPostTopic()
+    public static function topic()
     {
         СonsoleModel::recalculateTopic();
 
         self::consoleRedirect();
     }
 
-    public static function updateCountUp()
+    public static function up()
     {
         $users_id = СonsoleModel::allUsers();
         foreach ($users_id as $ind => $row) {
@@ -29,7 +29,7 @@ class СonsoleController extends MainController
 
     // Если пользователь имеет нулевой уровень доверия (tl) но ему UP >=3, то повышаем до 1
     // If the user has a zero level of trust (tl) but he has UP >=3, then we raise it to 1
-    public static function updateUsersTl()
+    public static function tl()
     {
         $users = СonsoleModel::getTrustLevel(0);
         foreach ($users as $ind => $row) {
@@ -49,6 +49,13 @@ class СonsoleController extends MainController
         self::consoleRedirect();
     }
 
+    public static function css()
+    {
+        Sass::collect();
+
+        self::consoleRedirect();
+    }
+
     public static function consoleRedirect()
     {
         if (PHP_SAPI != 'cli') {
@@ -56,12 +63,5 @@ class СonsoleController extends MainController
             redirect(getUrlByName('admin.tools'));
         }
         return true;
-    }
-
-    public static function buildCss()
-    {
-        Sass::collect();
-
-        self::consoleRedirect();
     }
 }

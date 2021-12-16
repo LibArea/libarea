@@ -88,6 +88,7 @@ class AnswerController extends MainController
                 'uid'   => $this->uid,
                 'data'  => [
                     'sheet'         => 'user-answers',
+                    'type'          => Translate::get('answers') . ' ' . $login,
                     'answers'       => $result,
                     'user_login'    => $user['user_login'],
                 ]

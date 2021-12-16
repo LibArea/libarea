@@ -47,7 +47,7 @@ Route::before('Authorization@noAuth')->getGroup();
     Route::get('/post/add')->controller('Post\AddPostController')->name('post.add');
     Route::get('/topic/add')->controller('Facets\AddFacetController', ['topic'])->name('topics.add');
     Route::get('/blog/add')->controller('Facets\AddFacetController', ['blog'])->name('blogs.add');
-    Route::get('/web/add')->controller('Item\AddWebController')->name('web.add');
+    Route::get('/web/add')->controller('Item\AddWebController', ['add', 'sites'])->name('sites.add');
     
     Route::get('/post/edit/{id}')->controller('Post\EditPostController')->where(['id' => '[0-9]+'])->name('post.edit');
     Route::get('/answer/edit/{id}')->controller('Answer\EditAnswerController')->where(['id' => '[0-9]+'])->name('answer.edit');

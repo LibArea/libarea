@@ -285,25 +285,34 @@ function favorite_post($user_id, $post_id, $favorite_tid, $css = '')
     return $html;
 }
 
-function tabs_nav($user_id, $sheet, array $pages = [])
+function tabs_nav($user_id, $sheet, $add, array $pages = [])
 {
     $html = '';
     foreach ($pages as $key => $page) {
         if (empty($page['auth']) != false || $user_id > 0) {
             if ($page['id'] == $sheet) {
                 $html .= '<li class="blue ml30 mb-mr-5 mb-ml-10">
-          <i class="' .  $page['icon'] . ' mr5"></i>
-          <span class="mb-size-13">' . $page['content'] . '</span>
-          </li>';
+                    <i class="' .  $page['icon'] . ' mr5"></i>
+                    <span class="mb-size-13">' . $page['content'] . '</span></li>';
             } else {
                 $html .= '<li class="ml30 mb-mr-5 mb-ml-10">
-          <a class="gray" href="' . $page['url'] . '">
-            <i class="' . $page['icon'] . ' mr5"></i>
-            <span class="mb-size-13">' . $page['content'] . '</span>
-          </a>
-          </li>';
+                    <a class="gray" href="' . $page['url'] . '">
+                    <i class="' . $page['icon'] . ' mr5"></i>
+                    <span class="mb-size-13">' . $page['content'] . '</span></a></li>';
             }
         }
+    }
+
+    if ($add == true) {
+       if ($add['id'] == $sheet) {
+           $html .= '<li class="blue ml30 mb-mr-5 mb-ml-10">
+                    <i class="' . $add['icon'] . ' mr5"></i>
+                    <span class="mb-size-13 no-mob">' . $add['content'] . '</span></li>';
+       } else {
+        $html .= '<li class="ml30 mb-mr-5 mb-ml-10"><a class="gray" href="' . $add['url'] . '">
+                <i class="' . $add['icon'] . ' mr5"></i>
+                <span class="mb-size-13 no-mob">' . $add['content'] . '</span></a></li>';
+       }
     }
 
     return $html;

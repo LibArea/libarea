@@ -1,7 +1,7 @@
 <main class="col-span-12 mb-col-12">
   <div class="pt5 mr15 pb5 ml15 size-13">
     <?php if ($uid['user_trust_level'] == 5) { ?>
-      <a title="<?= Translate::get('add'); ?>" class="right mt5" href="<?= getUrlByName('web.add'); ?>">
+      <a title="<?= Translate::get('add'); ?>" class="right mt5" href="<?= getUrlByName('sites.add'); ?>">
         <i class="bi bi-plus-lg middle"></i>
       </a>
     <?php } ?>

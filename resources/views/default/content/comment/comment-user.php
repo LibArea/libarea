@@ -2,16 +2,8 @@
   <?= includeTemplate('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-7 mb-col-12">
-  <div class="bg-white br-rd5 br-box-gray pt5 pr15 pb5 pl15">
-
-    <?= breadcrumb(
-      '/',
-      Translate::get('home'),
-      getUrlByName('user', ['login' => Request::get('login')]),
-      Translate::get('profile'),
-      Translate::get('comments') . ' ' . $data['user_login']
-    ); ?>
-
+  <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
+    <p class="m0"><?= Translate::get($data['type']); ?></p>
   </div>
   <?php if (!empty($data['comments'])) { ?>
     <?php foreach ($data['comments'] as $comm) { ?>

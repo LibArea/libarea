@@ -7,14 +7,17 @@ use Base, Translate;
 
 class ToolsController extends MainController
 {
-    public function index()
+    public function index($sheet, $type)
     {
         return view(
-            '/admin/tools',
+            '/admin/tools/tools',
             [
                 'meta'  => meta($m = [], Translate::get('tools')),
                 'uid'   => Base::getUid(),
-                'data'  => []
+                'data'  => [
+                    'type'      => $type,
+                    'sheet'     => $sheet,
+                ]
             ]
         );
     }

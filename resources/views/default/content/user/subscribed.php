@@ -2,13 +2,6 @@
   <?= includeTemplate('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-7 mb-col-12">
-  <?= breadcrumb(
-    '/',
-    Translate::get('home'),
-    getUrlByName('user', ['login' => $uid['user_login']]),
-    Translate::get('profile'),
-    Translate::get('favorites')
-  ); ?>
   <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
     <ul class="flex flex-row list-none m0 p0 center size-15">
@@ -16,6 +9,7 @@
       <?= tabs_nav(
         $uid['user_id'],
         $data['sheet'],
+        false,
         $pages = [
           [
             'id' => 'favorites',

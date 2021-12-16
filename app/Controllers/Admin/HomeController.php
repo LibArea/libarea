@@ -36,7 +36,8 @@ class HomeController extends MainController
                     'items_count'       => WebModel::getItemsAllCount(),
                     'last_visit'        => AgentModel::getLastVisit(),
                     'bytes'             => $bytes,
-                    'type'             => 'admin',
+                    'type'              => 'admin',
+                    'sheet'             => 'admin',
                 ]
             ]
         );

@@ -2,20 +2,12 @@
   <?= includeTemplate('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-7 mb-col-12">
-  <div class="bg-white br-rd5 br-box-gray pt5 pr15 pb5 pl15">
-
-    <?= breadcrumb(
-      '/',
-      Translate::get('home'),
-      null,
-      null,
-      Translate::get('all comments')
-    ); ?>
-
+  <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
+    <p class="m0"><?= Translate::get($data['sheet']); ?></p>
   </div>
   <?php if (!empty($data['comments'])) { ?>
     <?php foreach ($data['comments'] as $comment) { ?>
-      <div class="bg-white br-rd5 mt15 br-box-gray pt5 pr15 pb5 pl15">
+      <div class="bg-white br-rd5 mt15 br-box-gray p15">
         <?php if ($comment['comment_is_deleted'] == 0) { ?>
           <div class="size-14">
             <a class="gray" href="<?= getUrlByName('user', ['login' => $comment['user_login']]); ?>">

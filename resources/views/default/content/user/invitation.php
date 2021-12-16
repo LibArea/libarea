@@ -1,14 +1,11 @@
-<main class="col-span-9 mb-col-12">
-  <div class="bg-white br-rd5 br-box-gray pt5 pr15 pb10 pl15">
-
-    <?= breadcrumb(
-      '/',
-      Translate::get('home'),
-      getUrlByName('user', ['login' => $uid['user_login']]),
-      Translate::get('profile'),
-      Translate::get('invites')
-    ); ?>
-
+<div class="sticky col-span-2 justify-between no-mob">
+  <?= includeTemplate('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+</div>
+<main class="col-span-7 mb-col-12">
+  <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
+    <p class="m0"><?= Translate::get($data['sheet']); ?></p>
+  </div>
+  <div class="bg-white br-rd5 br-box-gray p15">
     <?php if ($uid['user_trust_level'] > 1) { ?>
       <form method="post" action="<?= getUrlByName('invit.create'); ?>">
         <?php csrf_field(); ?>

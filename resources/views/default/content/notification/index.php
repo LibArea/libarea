@@ -1,19 +1,13 @@
 <div class="sticky col-span-2 justify-between no-mob">
   <?= includeTemplate('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
-<main class="col-span-7 mb-col-12 bg-white pt5 pr15 pb5 pl15">
- 
-  <form action="<?= getUrlByName('notif.remove'); ?>" class="right">
-    <?= sumbit(Translate::get('i read')); ?> 
-  </form>
-   
-  <?= breadcrumb(
-    '/',
-    Translate::get('home'),
-    getUrlByName('user', ['login' => $uid['user_login']]),
-    Translate::get('profile'),
-    Translate::get('notifications')
-  ); ?>
+<main class="col-span-7 mb-col-12">
+  <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
+    <p class="m0"><?= Translate::get($data['sheet']); ?></p>
+    <form action="<?= getUrlByName('notif.remove'); ?>" class="right">
+      <?= sumbit(Translate::get('i read')); ?> 
+    </form>
+  </div>
 
   <?php if (!empty($data['notifications'])) { ?>
     <?php foreach ($data['notifications'] as  $notif) { ?>

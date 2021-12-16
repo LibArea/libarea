@@ -20,7 +20,7 @@ class FacetModel extends MainModel
                 $signet = "WHERE facet_type = 'topic' ORDER BY facet_id DESC";
                 break;
             case 'topics.all':
-                $signet = "WHERE facet_type = 'topic' ORDER BY facet_id DESC";
+                $signet = "WHERE facet_type = 'topic' ORDER BY facet_count DESC";
                 break;
             case 'topics.ban':
                 $signet = "WHERE facet_type = 'topic' AND facet_is_deleted = 1 ORDER BY facet_id DESC";

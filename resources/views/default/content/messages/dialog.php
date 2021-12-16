@@ -1,12 +1,11 @@
-<main class="col-span-9 mb-col-12">
-  <div class="ml10 mb15 mb-ml-0 hidden">
-    <?= breadcrumb(
-      '/',
-      Translate::get('home'),
-      getUrlByName('user', ['login' => $uid['user_login']]) . '/messages',
-      Translate::get('all messages'),
-      $data['h1']
-    ); ?>
+<div class="sticky col-span-2 justify-between no-mob">
+  <?= includeTemplate('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+</div>
+<main class="col-span-7 mb-col-12">
+  <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
+    <p class="m0"><?= Translate::get($data['sheet']); ?></p>
+  </div>
+  <div class="mb15 mb-ml-0 hidden">
     <form action="<?= getUrlByName('messages.send'); ?>" method="post">
       <?= csrf_field() ?>
       <input type="hidden" name="recipient" value="<?= $data['recipient_user']['user_id']; ?>" />

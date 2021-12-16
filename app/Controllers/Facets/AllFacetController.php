@@ -22,7 +22,7 @@ class AllFacetController extends MainController
     {
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
- 
+
         $pagesCount = FacetModel::getFacetsAllCount($this->uid['user_id'], $sheet);
         $facets     = FacetModel::getFacetsAll($page, $this->limit, $this->uid['user_id'], $sheet);
 

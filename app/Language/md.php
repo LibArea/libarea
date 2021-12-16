@@ -152,6 +152,7 @@ $data = [
     'save'              => 'Salvați',
     'source'            => 'Sursă',
     'website'           => 'Site web',
+    'sites'             => 'Sites',
     'related'           => 'Legate de',
     'related posts'     => 'Postări asemănatoare',
     'related topics'    => 'Subiecte asemănătoare',
@@ -220,8 +221,8 @@ $data = [
     'edit tag'          => 'Schimbați eticheta',
     'registrations'     => 'înregistrare',
     'no dialogs'        => 'Fără dialoguri',
-    'stop words'        => 'Oprește cuvintele',
-    'stop word'         => 'Oprește cuvântul',
+    'words'             => 'Oprește cuvintele',
+    'word'              => 'Oprește cuvântul',
     'stop words no'     => 'Fără cuvinte oprite',
     'add a stop word'   => 'Adaugă cuvânt de oprire',
 
@@ -434,7 +435,6 @@ $data = [
     'users-ban'             => 'Utilizatori',
     'posts-ban'             => 'Postări',
 
-    'sites'                 => 'Sites',
     'limiting-mode-1'       => 'Nu puteți posta conținut, contul dvs. este verificat',
     'the dialog does not exist'             => 'Caseta de dialog specificată nu există',
     'the topic does not exist'              => 'Subiectul specificat nu există',

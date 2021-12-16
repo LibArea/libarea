@@ -77,8 +77,6 @@ class EditFacetController extends MainController
         $facet_is_soft              = Request::getPostInt('facet_is_soft');
         $facet_type                 = Request::getPost('facet_type');
 
-        //print_r(Request::getPost());
-        //exit;
         $facet = FacetModel::getFacet($facet_id, 'id');
         pageError404($facet);
 

@@ -24,7 +24,9 @@ class InvitationsController extends MainController
             [
                 'meta'  => meta($m = [], Translate::get('invite')),
                 'uid'   => $this->uid,
-                'data'  => []
+                'data'  => [
+                    'sheet' => 'invite'
+                ]
             ]
         );
     }
@@ -48,6 +50,7 @@ class InvitationsController extends MainController
                 'data'  => [
                     'invitations'   => InvitationModel::userResult($this->uid['user_id']),
                     'count_invites' => $user['user_invitation_available'],
+                    'sheet' => 'invites'
                 ]
             ]
         );

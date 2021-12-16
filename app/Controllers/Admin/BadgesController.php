@@ -10,7 +10,7 @@ use Base, Validation, Translate;
 class BadgesController extends MainController
 {
     // Все награды
-    public function index($sheet)
+    public function index($sheet, $type)
     {
         return view(
             '/admin/badge/badges',
@@ -18,7 +18,8 @@ class BadgesController extends MainController
                 'meta'  => meta($m = [], Translate::get('badges')),
                 'uid'   => Base::getUid(),
                 'data'  => [
-                    'type'     => 'badges',
+                    'type'      => $type,
+                    'sheet'     => $sheet,
                     'badges'    => BadgeModel::getBadgesAll(),
                 ]
             ]
@@ -26,7 +27,7 @@ class BadgesController extends MainController
     }
 
     // Форма добавления награды
-    public function addPage()
+    public function addPage($sheet, $type)
     {
         return view(
             '/admin/badge/add',
@@ -34,14 +35,15 @@ class BadgesController extends MainController
                 'meta'  => meta($m = [], Translate::get('add badge')),
                 'uid'   => Base::getUid(),
                 'data'  => [
-                    'type' => 'badges',
+                    'type'  => $type,
+                    'sheet' => $sheet,
                 ]
             ]
         );
     }
 
     // Форма изменения награды
-    public function editPage()
+    public function editPage($sheet, $type)
     {
         $badge_id   = Request::getInt('id');
         $badge      = BadgeModel::getBadgeId($badge_id);
@@ -56,8 +58,9 @@ class BadgesController extends MainController
                 'meta'  => meta($m = [], Translate::get('edit badge')),
                 'uid'   => Base::getUid(),
                 'data'  => [
-                    'badge'     => $badge,
-                    'type'     => 'badges',
+                    'badge' => $badge,
+                    'sheet' => $sheet,
+                    'type'  => $type,
                 ]
             ]
         );

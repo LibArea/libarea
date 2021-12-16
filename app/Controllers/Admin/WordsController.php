@@ -9,7 +9,7 @@ use Base, Translate;
 
 class WordsController extends MainController
 {
-    public function index($sheet)
+    public function index($sheet, $type)
     {
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
@@ -19,19 +19,19 @@ class WordsController extends MainController
         return view(
             '/admin/word/words',
             [
-                'meta'  => meta($m = [], Translate::get('stop words')),
+                'meta'  => meta($m = [], Translate::get('words')),
                 'uid'   => Base::getUid(),
                 'data'  => [
                     'words' => ContentModel::getStopWords(),
                     'sheet' => $sheet,
-                    'type'  => 'words',
+                    'type'  => $type,
                 ]
             ]
         );
     }
 
     // Форма добавления стоп-слова
-    public function addPage()
+    public function addPage($sheet, $type)
     {
         return view(
             '/admin/word/add',
@@ -39,7 +39,8 @@ class WordsController extends MainController
                 'meta'  => meta($m = [], Translate::get('add a stop word')),
                 'uid'   => Base::getUid(),
                 'data'  => [
-                    'type' => 'words',
+                    'type'  => $type,
+                    'sheet' => $sheet,
                 ]
             ]
         );

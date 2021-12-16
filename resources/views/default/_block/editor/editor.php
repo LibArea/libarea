@@ -43,7 +43,6 @@
         ['ul'],
         ['table', 'image', 'link'],
         ['code', 'codeblock'],
-
       ],
       events: {
         change: function() {
@@ -54,7 +53,6 @@
       },
       hooks: {
         addImageBlobHook: function(file, callback) {
-
           const formData = new FormData()
           formData.append('file', file, file.name)
           let alt_text = document.getElementById("toastuiAltTextInput").value;
@@ -71,7 +69,6 @@
         }
       }
     });
-
     editor.getMarkdown();
   });
 </script>

@@ -17,7 +17,7 @@ class AddWebController extends MainController
     }
 
     // Форма добавление домена
-    public function index()
+    public function index($sheet, $type)
     {
         Validation::validTl($this->uid['user_trust_level'], Base::USER_LEVEL_ADMIN, 0, 1);
 
@@ -30,7 +30,8 @@ class AddWebController extends MainController
                 'meta'  => meta($m = [], Translate::get('add a website')),
                 'uid'   => $this->uid,
                 'data'  => [
-                    'sheet' => 'domains',
+                    'sheet' => $sheet,
+                    'type'  => $type,
                 ]
             ]
         );
@@ -44,7 +45,7 @@ class AddWebController extends MainController
         $item_title_url     = Request::getPost('title_url');
         $item_content_url   = Request::getPost('content_url');
 
-        $redirect = getUrlByName('web.add');
+        $redirect = getUrlByName('sites.add');
         Validation::checkUrl($item_url, 'URL', $redirect);
 
         $parse              = parse_url($item_url);

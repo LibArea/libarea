@@ -39,7 +39,7 @@ return [
         'url'   => getUrlByName('admin.invitations'),
         'name'  => Translate::get('invites'),
         'icon'  => 'bi bi-person-plus',
-        'item'  => 'invitations',
+        'item'  => 'invites',
     ], [
         'url'   => getUrlByName('admin.posts'),
         'name'  => Translate::get('posts'),
@@ -61,13 +61,13 @@ return [
         'icon'  => 'bi bi-award',
         'item'  => 'badges',
     ], [
-        'url'   => getUrlByName('admin.webs'),
-        'name'  => Translate::get('domains'),
+        'url'   => getUrlByName('admin.sites'),
+        'name'  => Translate::get('sites'),
         'icon'  => 'bi bi-link-45deg',
-        'item'  => 'domains',
+        'item'  => 'sites',
     ], [
         'url'   => getUrlByName('admin.words'),
-        'name'  => Translate::get('stop words'),
+        'name'  => Translate::get('words'),
         'icon'  => 'bi bi-badge-ad',
         'item'  => 'words',
     ], [

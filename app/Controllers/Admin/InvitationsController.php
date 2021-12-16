@@ -8,7 +8,7 @@ use Base, Translate;
 
 class InvitationsController extends MainController
 {
-    public function index($sheet)
+    public function index()
     {
         $invite = InvitationModel::get();
 
@@ -25,7 +25,8 @@ class InvitationsController extends MainController
                 'meta'  => meta($m = [], Translate::get('invites')),
                 'uid'   => Base::getUid(),
                 'data'  => [
-                    'type'          => 'invitations',
+                    'type'          => 'invites',
+                    'sheet'         => 'all',
                     'invitations'   => $result,
                 ]
             ]

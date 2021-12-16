@@ -9,11 +9,11 @@
       <span class="middle"><?= Translate::get('posts'); ?></span>
     </a>
     <a title="<?= Translate::get('answers'); ?>" class="mb10 block gray<?php if ($sheet == 'user-answers') { ?> red<?php } ?>" href="<?= getUrlByName('answers.user', ['login' => Request::get('login')]); ?>">
-      <i class="bi bi-chat-left-text middle mr5 size-18"></i>
+      <i class="bi bi-chat-dots middle mr5 size-18"></i>
       <span class="middle"><?= Translate::get('answers'); ?></span>
     </a>
     <a title="<?= Translate::get('comments'); ?>" class="mb10 block gray<?php if ($sheet == 'user-comments') { ?> red<?php } ?>" href="<?= getUrlByName('comments.user', ['login' => Request::get('login')]); ?>">
-      <i class="bi bi-chat-dots middle mr5 size-18"></i>
+      <i class="bi bi-chat-quote middle mr5 size-18"></i>
       <span class="middle"><?= Translate::get('comments'); ?></span>
     </a>
   </div>

@@ -18,7 +18,7 @@ class WebsController extends MainController
         $this->uid  = Base::getUid();
     }
 
-    public function index($sheet)
+    public function index($sheet, $type)
     {
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
@@ -40,8 +40,8 @@ class WebsController extends MainController
                 'meta'  => meta($m = [], Translate::get('domains')),
                 'uid'   => $this->uid,
                 'data'  => [
-                    'sheet'         => $sheet == 'all' ? 'domains' : $sheet,
-                    'type'          => 'domains',
+                    'sheet'         => $sheet,
+                    'type'          => $type,
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
                     'domains'       => $result,

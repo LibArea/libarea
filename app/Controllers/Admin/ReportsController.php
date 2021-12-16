@@ -12,7 +12,7 @@ class ReportsController extends MainController
 {
     protected $limit = 25;
 
-    public function index()
+    public function index($sheet, $type)
     {
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
@@ -37,7 +37,8 @@ class ReportsController extends MainController
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
-                    'type'         => 'reports',
+                    'type'          => $type,
+                    'sheet'         => $sheet,
                     'reports'       => $result,
                 ]
             ]

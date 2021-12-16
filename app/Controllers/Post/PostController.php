@@ -190,6 +190,7 @@ class PostController extends MainController
                 'uid'   => $uid,
                 'data'  => [
                     'sheet'         => 'user-post',
+                    'type'          => Translate::get('posts') . ' ' . $login,
                     'posts'         => $result,
                     'user_login'    => $user['user_login'],
                 ]

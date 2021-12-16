@@ -87,6 +87,7 @@ class CommentController extends MainController
                 'uid'   => $this->uid,
                 'data'  => [
                     'sheet'         => 'user-comments',
+                    'type'          => Translate::get('comments') . ' ' . $login,
                     'comments'      => $result,
                     'user_login'    => $user['user_login'],
                 ]

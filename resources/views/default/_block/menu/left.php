@@ -1,4 +1,4 @@
-<nav class="justify-between mt10 ml0 pl0 top80 sticky size-15 max-w200">
+<nav class="justify-between mt10 ml0 pl0 top70 sticky size-15 max-w200">
   <?php foreach (Config::get('menu-left') as  $menu) { ?>
     <a class="pt5 pr10 pb5 pl10 block gray bg-hover-light<?= $sheet == $menu['item'] ? ' blue' : ''; ?>" 
       <?= $sheet == $menu['item'] ? ' aria-current="page" ' : ''; ?>
