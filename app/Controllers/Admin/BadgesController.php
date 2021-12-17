@@ -9,6 +9,13 @@ use Base, Validation, Translate;
 
 class BadgesController extends MainController
 {
+    private $uid;
+
+    public function __construct()
+    {
+        $this->uid  = Base::getUid();
+    }
+    
     // Все награды
     public function index($sheet, $type)
     {
@@ -16,7 +23,7 @@ class BadgesController extends MainController
             '/admin/badge/badges',
             [
                 'meta'  => meta($m = [], Translate::get('badges')),
-                'uid'   => Base::getUid(),
+                'uid'   => $this->uid,
                 'data'  => [
                     'type'      => $type,
                     'sheet'     => $sheet,
@@ -33,7 +40,7 @@ class BadgesController extends MainController
             '/admin/badge/add',
             [
                 'meta'  => meta($m = [], Translate::get('add badge')),
-                'uid'   => Base::getUid(),
+                'uid'   => $this->uid,
                 'data'  => [
                     'type'  => $type,
                     'sheet' => $sheet,
@@ -56,7 +63,7 @@ class BadgesController extends MainController
             '/admin/badge/edit',
             [
                 'meta'  => meta($m = [], Translate::get('edit badge')),
-                'uid'   => Base::getUid(),
+                'uid'   => $this->uid,
                 'data'  => [
                     'badge' => $badge,
                     'sheet' => $sheet,
@@ -91,7 +98,7 @@ class BadgesController extends MainController
     }
 
     // Форма награждения участинка
-    public function addUserPage()
+    public function addUserPage($sheet, $type)
     {
         $user_id    = Request::getInt('id');
         if ($user_id > 0) {
@@ -104,9 +111,10 @@ class BadgesController extends MainController
             '/admin/badge/user-add',
             [
                 'meta'  => meta($m = [], Translate::get('reward the user')),
-                'uid'   => Base::getUid(),
+                'uid'   => $this->uid,
                 'data'  => [
-                    'sheet'     => 'admin',
+                    'type'      => $type,
+                    'sheet'     => $sheet,
                     'user'      => $user,
                     'badges'    => BadgeModel::getBadgesAll(),
                 ]

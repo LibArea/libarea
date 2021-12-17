@@ -63,7 +63,7 @@ Route::before('Authorization@admin')->getGroup();
     Route::get('/badges')->controller('Admin\BadgesController', ['badges.all', 'badges'])->name('admin.badges');
     Route::get('/badges/add')->controller('Admin\BadgesController@addPage', ['add', 'badges'])->name('badges.add');
     Route::get('/badges/{id}/edit')->controller('Admin\BadgesController@editPage', ['badges.edit', 'badges'])->where(['id' => '[0-9]+'])->name('admin.badges.edit');
-    Route::get('/badges/user/add/{id}')->controller('Admin\BadgesController@addUserPage')->where(['id' => '[0-9]+'])->name('admin.badges.user.add');
+    Route::get('/badges/user/add/{id}')->controller('Admin\BadgesController@addUserPage', ['add', 'badges'])->where(['id' => '[0-9]+'])->name('admin.badges.user.add');
   
     Route::get('/webs')->controller('Admin\WebsController', ['sites.all', 'sites'])->name('admin.sites');
     

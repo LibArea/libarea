@@ -1,21 +1,22 @@
-<div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/_block/menu/admin', ['type' => $data['type']]); ?>
-</div>
-<main class="col-span-10 mb-col-12">
-
-  <?= breadcrumb(
-    getUrlByName('admin'),
-    Translate::get('admin'),
-    getUrlByName('admin.badges'),
-    Translate::get('badges'),
-    Translate::get('reward the user') . ' ' . $data['user']['user_login']
-  ); ?>
+<?= includeTemplate(
+  '/content/admin/menu',
+  [
+    'type'     => $data['type'],
+    'sheet'    => $data['sheet'],
+    'user_id'  => $uid['user_id'],
+    'add'     => false,
+    'pages'   => false
+  ]
+); ?>
 
   <div class="bg-white br-box-gray p15">
     <form action="<?= getUrlByName('admin.user.badge.create'); ?>" method="post">
       <?= csrf_field() ?>
-      <div class="mb20">
-        <label class="block" for="post_content"><?= Translate::get('badge'); ?></label>
+      <div class="mb20"> 
+        <label class="block mb5" for="post_content">
+          <?= Translate::get('badge'); ?>:
+          <span class="red"><?= $data['user']['user_login']; ?></span>
+        </label>
         <select class="w-100 h30" name="badge_id">
           <?php foreach ($data['badges'] as $badge) { ?>
             <option value="<?= $badge['badge_id']; ?>"> <?= $badge['badge_title']; ?></option>
