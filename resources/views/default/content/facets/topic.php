@@ -95,7 +95,7 @@
     </div>
     <?= includeTemplate('/_block/sidebar/topic', ['data' => $data, 'uid' => $uid]); ?>
     <?php if (!empty($data['writers'])) { ?>
-      <div class="sticky top0 top80">
+      <div class="sticky top0 top70">
         <div class="br-box-gray mt15 p15 mb15 br-rd5 bg-white size-14">
           <div class="uppercase gray mt5 mb5"> <?= Translate::get('writers'); ?></div>
           <?php foreach ($data['writers'] as $ind => $row) { ?>

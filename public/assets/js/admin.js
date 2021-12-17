@@ -41,6 +41,21 @@ document.querySelectorAll(".type-ban")
       })
   }));
 
+// Remove reward
+document.querySelectorAll(".remove-badge")
+  .forEach(el => el.addEventListener("click", function (e) {
+    let id = el.dataset.id;
+    let uid = el.dataset.uid;
+    fetch("/admin/badge/remove", {
+      method: "POST",
+      body: "id=" + id + "&uid=" + uid,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    })
+      .then((response) => {
+        location.reload();
+      })
+  }));
+
 // Content Recovery
 document.querySelectorAll(".audit-status")
   .forEach(el => el.addEventListener("click", function (e) {

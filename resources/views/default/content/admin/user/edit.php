@@ -99,9 +99,16 @@
     <div class="mb20">
       <label class="block" for="post_title"><?= Translate::get('badges'); ?></label>
       <?php if ($data['user']['badges']) { ?>
-        <?php foreach ($data['user']['badges'] as $badge) { ?>
-          <?= $badge['badge_icon']; ?>
-        <?php } ?>
+        <div class="size-24">
+          <?php foreach ($data['user']['badges'] as $badge) { ?>
+            <div class="mb5">
+              <?= $badge['badge_icon']; ?>
+                <span class="remove-badge size-13 lowercase" data-id="<?= $badge['bu_id']; ?>" data-uid="<?= $data['user']['user_id']; ?>">
+                 - <?= Translate::get('remove'); ?>
+                </span>  
+            </div>            
+          <?php } ?>
+        </div>
       <?php } else { ?>
         ---
       <?php } ?>

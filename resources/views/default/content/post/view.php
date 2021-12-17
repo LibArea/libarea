@@ -1,6 +1,6 @@
 <?php $post = $data['post']; ?>
 <div class="col-span-1 no-mob center">
-  <div class="sticky top80">
+  <div class="sticky top70">
     <?= votes($uid['user_id'], $post, 'post', 'size-24 middle', 'block'); ?>
     <div class="pt20">
       <?= favorite_post($uid['user_id'], $post['post_id'], $post['favorite_tid'], 'size-24'); ?>
@@ -289,7 +289,7 @@
     <a class="p15 gray-light-2" data-id="tw"><i class="bi bi-twitter"></i></a>
   </div>
   <?php if ($data['recommend']) { ?>
-    <div class="br-box-gray bg-white br-rd5 mb15 sticky top80 p15">
+    <div class="br-box-gray bg-white br-rd5 mb15 sticky top70 p15">
       <h3 class="uppercase mb10 mt0 font-light size-14 gray"><?= Translate::get('recommended'); ?></h3>
       <?php foreach ($data['recommend'] as  $rec_post) { ?>
         <div class="mb15 hidden flex size-14">

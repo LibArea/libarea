@@ -33,7 +33,7 @@
   <?= pagination($data['pNum'], $data['pagesCount'], null, getUrlByName('domain', ['domain' => $data['item']['item_url_domain']])); ?>
 </main>
 <aside class="col-span-3 relative">
-  <div class="sticky top80">
+  <div class="sticky top70">
     <div class="bg-white br-rd5 br-box-gray pt5 pr15 pb10 pl15">
       <?= includeTemplate('/_block/domains', ['data' => $data['domains']]); ?>
     </div>

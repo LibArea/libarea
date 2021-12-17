@@ -163,5 +163,18 @@ class BadgesController extends MainController
 
         BadgeModel::edit($data);
         redirect($redirect);
+    } 
+    
+    public function remove()
+    {
+        $id     = Request::getPostInt('id');
+        $uid    = Request::getPostInt('uid');
+        
+        BadgeModel::remove($id, $uid);
+
+        addMsg(Translate::get('the command is executed'), 'success');
+
+        redirect('/admin/users/' . $uid . '/edit');
+    
     }
 }
