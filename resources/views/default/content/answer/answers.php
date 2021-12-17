@@ -1,7 +1,7 @@
 <div class="sticky col-span-2 justify-between no-mob">
   <?= includeTemplate('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
-<main class="col-span-7 mb-col-12">
+<main class="col-span-7 mb-col-12 mb10">
   <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
   </div>
@@ -10,22 +10,22 @@
     <?php foreach ($data['answers'] as $answer) { ?>
       <div class="bg-white br-rd5 mt15 br-box-gray p15">
         <?php if ($answer['answer_is_deleted'] == 0) { ?>
-          <div class="flex size-14">
+          <div class="flex size-14 mb5">
             <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'w18'); ?>
             <a class="gray mr5 ml5" href="<?= getUrlByName('user', ['login' => $answer['user_login']]); ?>">
               <?= $answer['user_login']; ?>
             </a>
-            <span class="gray lowercase"><?= $answer['date']; ?></span>
+            <span class="gray-light-2 lowercase"><?= $answer['date']; ?></span>
           </div>
           <a href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">
             <?= $answer['post_title']; ?>
           </a>
-          <div class="answ-telo">
+          <div class="size-15">
             <?= $answer['answer_content']; ?>
           </div>
 
           <div class="hidden gray">
-            + <?= $answer['answer_votes']; ?>
+            <?= votes($uid['user_id'], $answer, 'answer', 'mr5'); ?>
           </div>
         <?php } else { ?>
           <div class="bg-red-300">

@@ -1,5 +1,5 @@
-<div class="bg-white br-rd5 br-box-gray sticky p15 size-15">
-  <div class="menu-info">
+<div class="sticky top60">
+  <div class="bg-white br-rd5 br-box-gray p15 size-15">
     <a title="<?= Translate::get('profile'); ?>" class="mb10 block gray" href="<?= getUrlByName('user', ['login' => Request::get('login')]); ?>">
       <i class="bi bi-person middle mr5 size-18"></i>
       <span class="middle"><?= Translate::get('profile'); ?></span>
@@ -17,4 +17,6 @@
       <span class="middle"><?= Translate::get('comments'); ?></span>
     </a>
   </div>
+<?= includeTemplate('/_block/sidebar/footer'); ?>
 </div>
+ 

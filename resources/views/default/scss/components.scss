@@ -57,8 +57,10 @@ textarea {
 }
 
 input { border: 1px solid #e2e6ed; }
+
 input:focus,
 textarea:focus { border: 1px solid #9ccdf8; }
+
 ::placeholder { color: #919191; }
 
 .shown_post img { width: 100%; }
@@ -170,14 +172,14 @@ textarea:focus { border: 1px solid #9ccdf8; }
 
 .btn-primary {
   color: #fff;
-  background: #0085EE;
-  border-color: #0085EE;
+  background: #0085ee;
+  border-color: #0085ee;
 }
 
 .btn-outline-primary {
-  color: #0085EE;
+  color: #0085ee;
   background: #fff;
-  border-color: #0085EE;
+  border-color: #0085ee;
 }
 
 .btn-primary:hover,
@@ -189,8 +191,8 @@ textarea:focus { border: 1px solid #9ccdf8; }
 .btn-outline-primary:hover,
 .btn-outline-primary:focus {
   color: #fff;
-  background: #0085EE;
-  border-color: #0085EE;
+  background: #0085ee;
+  border-color: #0085ee;
 }
 
 .fon-rgba {
@@ -202,11 +204,11 @@ textarea:focus { border: 1px solid #9ccdf8; }
 .tags-look .tagify__dropdown__item {
   display: inline-block;
   border-radius: 3px;
-  padding: .3em .5em;
-  border: 1px solid #CCC;
-  background: #F3F3F3;
-  margin: .2em;
-  font-size: .85em;
+  padding: 0.3em 0.5em;
+  border: 1px solid #ccc;
+  background: #f3f3f3;
+  margin: 0.2em;
+  font-size: 0.85em;
   color: black;
   transition: 0s;
 }
@@ -218,7 +220,7 @@ textarea:focus { border: 1px solid #9ccdf8; }
 .tags-look .tagify__dropdown__item:hover {
   background: lightyellow;
   border-color: gold;
-} 
+}
 
 details {
   border-radius: 0 0 3px 3px;
@@ -228,7 +230,7 @@ details {
   box-shadow: 3px 3px 4px #eee;
 }
 
-summary { 
+summary {
   background-color: #f5f5fa;
   color: #666;
   font-size: 14px;

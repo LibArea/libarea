@@ -11,10 +11,18 @@ use Content, Base, Translate, Config;
 
 class PostController extends MainController
 {
+    private $uid;
+
+    protected $limit = 25;
+
+    public function __construct()
+    {
+        $this->uid  = Base::getUid();
+    }
+    
     // Полный пост
     public function index()
     {
-        $uid        = Base::getUid();
         $slug       = Request::get('slug');
         $post_id    = Request::getInt('id');
 
@@ -25,17 +33,17 @@ class PostController extends MainController
             redirect(getUrlByName('post', ['id' => $post_new['post_id'], 'slug' => $post_new['post_slug']]));
         }
 
-        $post = PostModel::getPostSlug($slug, $uid['user_id'], $uid['user_trust_level']);
+        $post = PostModel::getPostSlug($slug, $this->uid['user_id'], $this->uid['user_trust_level']);
         pageError404($post);
 
         // Если пользователь забанен
-        if ($uid['user_id'] > 0) {
-            $user   = UserModel::getUser($uid['user_id'], 'id');
+        if ($this->uid['user_id'] > 0) {
+            $user   = UserModel::getUser($this->uid['user_id'], 'id');
             (new \App\Controllers\Auth\BanController())->getBan($user);
         }
 
         // Редирект для слияния
-        if ($post['post_merged_id'] > 0 && $uid['user_trust_level'] != 5) {
+        if ($post['post_merged_id'] > 0 && $this->uid['user_trust_level'] != 5) {
             redirect('/post/' . $post['post_merged_id']);
         }
 
@@ -53,11 +61,11 @@ class PostController extends MainController
         // Учитывать ли изменение в сортировки и в оповещение в будущем...
         $post['modified'] = $post['post_date'] != $post['post_modified'] ? true : false;
 
-        $facets = PostModel::getPostTopic($post['post_id'], $uid['user_id'], 'topic');
-        $blog   = PostModel::getPostTopic($post['post_id'], $uid['user_id'], 'blog');
+        $facets = PostModel::getPostTopic($post['post_id'], $this->uid['user_id'], 'topic');
+        $blog   = PostModel::getPostTopic($post['post_id'], $this->uid['user_id'], 'blog');
 
         // Покажем черновик только автору
-        if ($post['post_draft'] == 1 && $post['post_user_id'] != $uid['user_id']) {
+        if ($post['post_draft'] == 1 && $post['post_user_id'] != $this->uid['user_id']) {
             redirect('/');
         }
 
@@ -71,7 +79,7 @@ class PostController extends MainController
             $post['amount_content'] = $comment_n;
         }
 
-        $post_answers = AnswerModel::getAnswersPost($post['post_id'], $uid['user_id'], $post['post_type']);
+        $post_answers = AnswerModel::getAnswersPost($post['post_id'], $this->uid['user_id'], $post['post_type']);
 
         $answers = [];
         foreach ($post_answers as $ind => $row) {
@@ -80,7 +88,7 @@ class PostController extends MainController
                 $row['edit'] = 1;
             }
             // TODO: N+1 см. AnswerModel()
-            $row['comm']            = CommentModel::getComments($row['answer_id'], $uid['user_id']);
+            $row['comm']            = CommentModel::getComments($row['answer_id'], $this->uid['user_id']);
             $row['answer_content']  = Content::text($row['answer_content'], 'text');
             $row['answer_date']     = lang_date($row['answer_date']);
             $answers[$ind]          = $row;
@@ -107,7 +115,7 @@ class PostController extends MainController
         Request::getResources()->addBottomStyles('/assets/js/prism/prism.css');
         Request::getResources()->addBottomScript('/assets/js/prism/prism.js');
 
-        if ($uid['user_id'] > 0 && $post['post_closed'] == 0) {
+        if ($this->uid['user_id'] > 0 && $post['post_closed'] == 0) {
             Request::getResources()->addBottomStyles('/assets/js/editor/toastui-editor.min.css');
             Request::getResources()->addBottomStyles('/assets/js/editor/dark.css');
             Request::getResources()->addBottomScript('/assets/js/editor/toastui-editor-all.min.js');
@@ -135,13 +143,13 @@ class PostController extends MainController
             '/post/view',
             [
                 'meta'  => $meta,
-                'uid'   => $uid,
+                'uid'   => $this->uid,
                 'data'  => [
                     'post'          => $post,
                     'answers'       => $answers,
-                    'recommend'     => PostModel::postsSimilar($post['post_id'], $uid, 5),
+                    'recommend'     => PostModel::postsSimilar($post['post_id'], $this->uid, 5),
                     'related_posts' => $related_posts ?? '',
-                    'post_signed'   => SubscriptionModel::getFocus($post['post_id'], $uid['user_id'], 'post'),
+                    'post_signed'   => SubscriptionModel::getFocus($post['post_id'], $this->uid['user_id'], 'post'),
                     'facets'        => $facets,
                     'blog'          => $blog ?? null,
                     'last_user'     => PostModel::getPostLastUser($post_id),
@@ -154,19 +162,16 @@ class PostController extends MainController
     // Посты участника
     public function posts($sheet)
     {
-        $uid    = Base::getUid();
-        $login  = Request::get('login');
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
-
-        // Если нет такого пользователя 
+        
+        $login  = Request::get('login');
         $user   = UserModel::getUser($login, 'slug');
         pageError404($user);
 
-        $limit = 100;
         $data       = ['post_user_id' => $user['user_id']];
-        $posts      = FeedModel::feed($page, $limit, $uid, $sheet, 'user', $data);
-        $pagesCount = FeedModel::feedCount($uid, $sheet, 'user', $data);
+        $posts      = FeedModel::feed($page, $this->limit, $this->uid, $sheet, 'user', $data);
+        $pagesCount = FeedModel::feedCount($this->uid, $sheet, 'user', $data);
 
         $result = [];
         foreach ($posts as $ind => $row) {
@@ -187,8 +192,10 @@ class PostController extends MainController
             '/post/post-user',
             [
                 'meta'  => meta($m, Translate::get('posts') . ' ' . $login, Translate::get('participant posts') . ' ' . $login),
-                'uid'   => $uid,
+                'uid'   => $this->uid,
                 'data'  => [
+                    'pagesCount'    => ceil($pagesCount / $this->limit),
+                    'pNum'          => $page,
                     'sheet'         => 'user-post',
                     'type'          => Translate::get('posts') . ' ' . $login,
                     'posts'         => $result,
@@ -205,8 +212,7 @@ class PostController extends MainController
         $post       = PostModel::getPostId($post_id);
 
         // Проверка доступа
-        $uid     = Base::getUid();
-        if (!accessСheck($post, 'post', $uid, 0, 0)) {
+        if (!accessСheck($post, 'post', $this->uid, 0, 0)) {
             redirect('/');
         }
 
@@ -215,7 +221,7 @@ class PostController extends MainController
             return false;
         }
 
-        PostModel::addPostProfile($post_id, $uid['user_id']);
+        PostModel::addPostProfile($post_id, $this->uid['user_id']);
 
         return true;
     }
@@ -227,12 +233,11 @@ class PostController extends MainController
         $post       = PostModel::getPostId($post_id);
 
         // Проверка доступа
-        $uid     = Base::getUid();
-        if (!accessСheck($post, 'post', $uid, 0, 0)) {
+        if (!accessСheck($post, 'post', $this->uid, 0, 0)) {
             redirect('/');
         }
 
-        PostModel::deletePostProfile($post_id, $uid['user_id']);
+        PostModel::deletePostProfile($post_id, $this->uid['user_id']);
 
         return true;
     }

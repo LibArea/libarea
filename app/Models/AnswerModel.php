@@ -59,16 +59,20 @@ class AnswerModel extends MainModel
                     answer_post_id,
                     answer_votes,
                     answer_is_deleted,
+                    votes_answer_item_id, 
+                    votes_answer_user_id,
                     user_id, 
                     user_login, 
                     user_avatar
                         FROM answers
                         INNER JOIN users ON user_id = answer_user_id
                         INNER JOIN posts ON answer_post_id = post_id 
+                        LEFT JOIN votes_answer ON votes_answer_item_id = answer_id
+                            AND votes_answer_user_id = :user_id
                         $sort
                         ORDER BY answer_id DESC LIMIT $start, $limit ";
 
-        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['user_id' => $uid['user_id']])->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // Количество ответов
@@ -135,8 +139,9 @@ class AnswerModel extends MainModel
     }
 
     // Страница ответов участника
-    public static function userAnswers($slug)
+    public static function userAnswers($page, $limit, $user_id, $uid_id)
     {
+        $start  = ($page - 1) * $limit;
         $sql = "SELECT 
                     answer_id,
                     answer_user_id,
@@ -148,6 +153,8 @@ class AnswerModel extends MainModel
                     answer_votes,
                     answer_after,
                     answer_is_deleted,
+                    votes_answer_item_id, 
+                    votes_answer_user_id,
                     post_id,
                     post_title,
                     post_slug,
@@ -158,11 +165,26 @@ class AnswerModel extends MainModel
                         FROM answers
                         LEFT JOIN users ON user_id = answer_user_id
                         LEFT JOIN posts ON answer_post_id = post_id
-                        WHERE user_login = :slug
+                        LEFT JOIN votes_answer ON votes_answer_item_id = answer_id
+                            AND votes_answer_user_id = :uid_id
+                        WHERE answer_user_id = :user_id
                         AND answer_is_deleted = 0 AND post_is_deleted = 0 AND post_tl = 0 AND post_tl = 0
-                        ORDER BY answer_id DESC";
+                        ORDER BY answer_id DESC LIMIT $start, $limit ";
 
-        return DB::run($sql, ['slug' => $slug])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['user_id' => $user_id, 'uid_id' => $uid_id])->fetchAll(PDO::FETCH_ASSOC);
+    }  
+
+    // Количество ответов участника
+    public static function userAnswersCount($user_id)
+    {
+        $sql = "SELECT 
+                    answer_id
+                        FROM answers
+                        LEFT JOIN posts ON answer_post_id = post_id
+                            WHERE answer_user_id = :user_id AND answer_is_deleted = 0 
+                                AND post_is_deleted = 0 AND post_tl = 0 AND post_tl = 0";
+
+        return DB::run($sql, ['user_id' => $user_id])->rowCount();
     }
 
     // Информацию по id ответа

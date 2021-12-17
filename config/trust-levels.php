@@ -12,9 +12,9 @@ return [
     'tl_add_topic'      => 4,
     'count_add_topic'   => 3,
 
-    // С какого уровня TL возможно создавать пространства
+    // С какого уровня TL возможно создавать блоги
     // Установите на 4, если вы хотите запретить участникам создавать их
-    // From what level of TL is it possible to create Spaces
+    // From what level of TL is it possible to create Blogs
     // Set to 4 if you want to prevent members from creating them 
     'tl_add_blog'       => 1,
     'count_add_blog'    => 1,

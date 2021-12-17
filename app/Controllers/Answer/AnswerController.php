@@ -60,12 +60,15 @@ class AnswerController extends MainController
     // Ответы участника
     public function userAnswers()
     {
+        $page   = Request::getInt('page');
+        $page   = $page == 0 ? 1 : $page;
+
         $login  = Request::get('login');
         $user   = UserModel::getUser($login, 'slug');
-
         pageError404($user);
 
-        $answers  = AnswerModel::userAnswers($login);
+        $answers    = AnswerModel::userAnswers($page, $this->limit, $user['user_id'], $this->uid['user_id']);
+        $pagesCount = AnswerModel::userAnswersCount($user['user_id']);
 
         $result = [];
         foreach ($answers as $ind => $row) {
@@ -78,17 +81,19 @@ class AnswerController extends MainController
             'og'         => false,
             'twitter'    => false,
             'imgurl'     => false,
-            'url'        => getUrlByName('answers.user', ['login' => $login]),
+            'url'        => getUrlByName('answers.user', ['login' => $user['user_login']]),
         ];
 
         return view(
             '/answer/answer-user',
             [
-                'meta'  => meta($m, Translate::get('answers') . ' ' . $login, Translate::get('responses-members') . ' ' . $login),
+                'meta'  => meta($m, Translate::get('answers') . ' ' . $user['user_login'], Translate::get('responses-members') . ' ' . $user['user_login']),
                 'uid'   => $this->uid,
                 'data'  => [
+                    'pagesCount'    => ceil($pagesCount / $this->limit),
+                    'pNum'          => $page,
                     'sheet'         => 'user-answers',
-                    'type'          => Translate::get('answers') . ' ' . $login,
+                    'type'          => Translate::get('answers') . ' ' . $user['user_login'],
                     'answers'       => $result,
                     'user_login'    => $user['user_login'],
                 ]

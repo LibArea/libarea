@@ -107,16 +107,20 @@ class CommentModel extends MainModel
                     comment_user_id,
                     comment_votes,
                     comment_is_deleted,
+                    votes_comment_item_id, 
+                    votes_comment_user_id,
                     user_id, 
                     user_login, 
                     user_avatar
                         FROM comments 
                         JOIN users ON user_id = comment_user_id
                         JOIN posts ON comment_post_id = post_id " . $tl . "
+                        LEFT JOIN votes_comment ON votes_comment_item_id = comment_id
+                            AND votes_comment_user_id = :user_id
                         $sort
                         ORDER BY comment_id DESC LIMIT $start, $limit ";
 
-        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['user_id' => $uid['user_id']])->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // Количество комментариев 
@@ -158,15 +162,16 @@ class CommentModel extends MainModel
                         FROM comments 
                         LEFT JOIN users  ON user_id = comment_user_id
                         LEFT JOIN votes_comment  ON votes_comment_item_id = comment_id 
-                        AND votes_comment_user_id = $user_id
+                        AND votes_comment_user_id = :user_id
                         WHERE comment_answer_id = " . $answer_id;
 
-        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // Страница комментариев участника
-    public static function userComments($slug)
+    public static function userComments($page, $limit, $user_id, $uid_id)
     {
+        $start  = ($page - 1) * $limit;
         $sql = "SELECT 
                     comment_id,
                     comment_user_id,                
@@ -178,6 +183,8 @@ class CommentModel extends MainModel
                     comment_ip,
                     comment_after,
                     comment_is_deleted,
+                    votes_comment_item_id, 
+                    votes_comment_user_id,
                     post_id, 
                     post_slug,
                     post_title,
@@ -188,12 +195,28 @@ class CommentModel extends MainModel
                         FROM comments 
                         LEFT JOIN users  ON user_id = comment_user_id
                         LEFT JOIN posts  ON comment_post_id = post_id 
-                        WHERE user_login = :slug AND comment_is_deleted = 0 AND post_is_deleted = 0 AND post_tl = 0
-                        ORDER BY comment_id DESC LIMIT 100";
+                        LEFT JOIN votes_comment  ON votes_comment_item_id = comment_id
+                        AND votes_comment_user_id = :uid_id
+                            WHERE comment_user_id = :user_id AND comment_is_deleted = 0 
+                                AND post_is_deleted = 0 AND post_tl = 0
+                                    ORDER BY comment_id DESC LIMIT $start, $limit";
 
-        return DB::run($sql, ['slug' => $slug])->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['user_id' => $user_id, 'uid_id' => $uid_id])->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // Количество комментариев участника
+    public static function userCommentsCount($user_id)
+    {
+        $sql = "SELECT 
+                    comment_id
+                        FROM comments 
+                        LEFT JOIN posts  ON comment_post_id = post_id 
+                            WHERE comment_user_id = :user_id AND comment_is_deleted = 0 
+                                AND post_is_deleted = 0 AND post_tl = 0";
+
+        return DB::run($sql, ['user_id' => $user_id])->rowCount();
+    }
+    
     // Получаем комментарий по id комментария
     public static function getCommentsId($comment_id)
     {

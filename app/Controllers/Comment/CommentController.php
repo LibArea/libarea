@@ -31,7 +31,7 @@ class CommentController extends MainController
         $result = [];
         foreach ($comments  as $ind => $row) {
             $row['date']                = lang_date($row['comment_date']);
-            $row['comment_content']     = Content::text($row['comment_content'], 'line');
+            $row['comment_content']     = Content::text($row['comment_content'], 'text');
             $result[$ind]   = $row;
         }
 
@@ -60,15 +60,19 @@ class CommentController extends MainController
     // Комментарии участника
     public function userComments()
     {
+        $page   = Request::getInt('page');
+        $page   = $page == 0 ? 1 : $page;
+        
         $login  = Request::get('login');
         $user   = UserModel::getUser($login, 'slug');
         pageError404($user);
 
-        $comments  = CommentModel::userComments($login);
+        $comments   = CommentModel::userComments($page, $this->limit, $user['user_id'], $this->uid['user_id']);
+        $pagesCount = CommentModel::userCommentsCount($user['user_id']);
 
         $result = [];
         foreach ($comments as $ind => $row) {
-            $row['comment_content'] = Content::text($row['comment_content'], 'line');
+            $row['comment_content'] = Content::text($row['comment_content'], 'text');
             $row['date']            = lang_date($row['comment_date']);
             $result[$ind]           = $row;
         }
@@ -77,17 +81,19 @@ class CommentController extends MainController
             'og'         => false,
             'twitter'    => false,
             'imgurl'     => false,
-            'url'        => getUrlByName('comments.user', ['login' => $login]),
+            'url'        => getUrlByName('comments.user', ['login' => $user['user_login']]),
         ];
 
         return view(
             '/comment/comment-user',
             [
-                'meta'  => meta($m, Translate::get('comments') . ' ' . $login, Translate::get('comments') . ' ' . $login),
+                'meta'  => meta($m, Translate::get('comments') . ' ' . $user['user_login'], Translate::get('comments') . ' ' . $user['user_login']),
                 'uid'   => $this->uid,
                 'data'  => [
+                    'pagesCount'    => ceil($pagesCount / $this->limit),
+                    'pNum'          => $page,
                     'sheet'         => 'user-comments',
-                    'type'          => Translate::get('comments') . ' ' . $login,
+                    'type'          => Translate::get('comments') . ' ' . $user['user_login'],
                     'comments'      => $result,
                     'user_login'    => $user['user_login'],
                 ]

@@ -33,9 +33,10 @@ class AllFacetController extends MainController
 
         $url = self::names($sheet);
 
-        $count      = FacetModel::countFacetsUser($this->uid['user_id'], $type);
-        $count_add  = $this->uid['user_trust_level'] == Base::USER_LEVEL_ADMIN ? 999 : Config::get('trust-levels.count_add_' . $type);
-        $in_total   = $count_add - $count;
+        $type_content   = $type == 'blogs' ? 'blog' : 'topic';
+        $count          = FacetModel::countFacetsUser($this->uid['user_id'], $type_content);
+        $count_add      = $this->uid['user_trust_level'] == Base::USER_LEVEL_ADMIN ? 999 : Config::get('trust-levels.count_add_' . $type_content);
+        $in_total       = $count_add - $count;
 
         $m = [
             'og'         => false,
@@ -55,7 +56,7 @@ class AllFacetController extends MainController
                     'facets'        => $facets,
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
-                    'count_facet'   => $in_total ?? 0,
+                    'count_facet'   => $in_total,
                 ]
             ]
         );
