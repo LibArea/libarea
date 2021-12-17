@@ -13,6 +13,7 @@ Route::before('Authorization@admin')->getGroup();
         Route::get('/audit/status')->controller('Admin\AuditsController@status');
         Route::get('/reports/status')->controller('Admin\ReportsController@status');
         Route::get('/topic/ban')->controller('Admin\FacetsController@deletes');
+        Route::get('/badge/remove')->controller('Admin\BadgesController@remove');
         
         Route::getProtect();
             Route::get('/badge/user/create')->controller('Admin\BadgesController@addUser')->name('admin.user.badge.create');
