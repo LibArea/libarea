@@ -60,10 +60,19 @@
         <input type="hidden" name="color" value="<?= $data['user']['user_color']; ?>" id="color">
       </div>
 
-      <!--?= includeTemplate('/_block/form/radio/radio', ['data' => [
-        ['title' => Translate::get('design choice'), 'name' => 'user_template', 'checked' => $data['user']['user_template']],
-      ]]); ?-->
-
+      <div class="mb20 max-w640">
+        <label class="block mb5" for="template">
+          <?= Translate::get('template'); ?>
+        </label>
+        <select class="w-100 h30" name="user_template">
+          <?php foreach (Config::get('general.templates') as $tpl) { ?> 
+            <option <?php if ($data['user']['user_template'] == $tpl) { ?>selected<?php } ?> value="<?= $tpl; ?>">
+              <?= $tpl; ?>
+            </option>
+          <?php } ?>
+        </select>
+      </div>
+         
       <div class="mb20 max-w640">
         <label class="block mb5" for="post_content"><?= Translate::get('language'); ?></label>
         <select class="w-100 h30" name="user_lang">

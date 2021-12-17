@@ -4,6 +4,7 @@ $data = [
     'to the website'    => 'Pe site',
     'top'               => 'TOP',
     'tools'             => 'Instrumente',
+    'template'          => 'Șablon',
     'create post'       => 'Scrie o postare',
     'create'            => 'Scrie un mesaj',
     'saw'               => 'A văzut',

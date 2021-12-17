@@ -7,6 +7,7 @@ $data = [
     'top'               => 'TOP',
     'admin'             => 'Admin panel',
     'tools'             => 'Tools',
+    'template'          => 'Template',
     'settings'          => 'Settings',
     'security'          => 'Security',
     'avatar'            => 'Profile photo',

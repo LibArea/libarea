@@ -57,6 +57,7 @@ class Base
             (new \App\Controllers\Auth\LoginController())->check();
             $uid['user_id']             = self::ELEMENTARY_USER;
             $uid['user_trust_level']    = self::ELEMENTARY_USER;
+            $uid['user_template']       = Config::get('general.template');
             
             Translate::setLang(Config::get('general.lang'));
             

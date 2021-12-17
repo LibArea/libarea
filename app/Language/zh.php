@@ -7,6 +7,7 @@ $data = [
     'top'               => '最佳',
     'admin'             => '管理面板',
     'tools'             => '工具',
+    'template'          => '模板',
     'settings'          => '设置',
     'security'          => '安全',
     'avatar'            => '头像照片',

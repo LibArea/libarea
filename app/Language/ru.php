@@ -7,6 +7,7 @@ $data = [
     'top'               => 'TOP',
     'admin'             => 'Админка',
     'tools'             => 'Инструменты',
+    'template'          => 'Шаблон',
     'settings'          => 'Настройки',
     'security'          => 'Пароль',
     'avatar'            => 'Аватарка',

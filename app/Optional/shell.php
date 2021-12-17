@@ -117,17 +117,25 @@ function getRequest()
 
 function includeCachedTemplate(string $template, array $params = [])
 {
-    hleb_e0b1036c1070102_template(Config::get('general.template') . $template, $params);
+    $tpl_puth = $params['uid']['user_template'] ?? Config::get('general.template');
+     
+    hleb_e0b1036c1070102_template($tpl_puth . $template, $params);
 }
 
 function includeTemplate(string $template, array $params = [])
 {
-    return hleb_e0b1036c1070101_template(Config::get('general.template') . $template, $params);
+    $tpl_puth = $params['uid']['user_template'] ?? Config::get('general.template');
+    if (!file_exists(HLEB_GLOBAL_DIRECTORY . '/resources/views/' . $tpl_puth . $template . '.php')) {
+        $tpl_puth = Config::get('general.template');
+    }
+
+    return hleb_e0b1036c1070101_template($tpl_puth . $template, $params);
 }
 
 function view(string $template, array $params = [])
-{
+{  
     $facet =  $params['facet'] ?? [];
+    
     includeTemplate('/header', ['uid' => $params['uid'], 'meta' => $params['meta'], 'facet' => $facet]);
     includeTemplate('/content' . $template, ['uid' => $params['uid'], 'data' => $params['data']]);
     includeTemplate('/footer', ['uid' => $params['uid']]);
