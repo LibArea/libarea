@@ -42,7 +42,7 @@ class AnswerController extends MainController
             'url'        => getUrlByName('answers'),
         ];
 
-        return render(
+        return agRender(
             '/answer/answers',
             [
                 'meta'  => meta($m, Translate::get('all answers'), Translate::get('answers-desc')),
@@ -84,7 +84,7 @@ class AnswerController extends MainController
             'url'        => getUrlByName('answers.user', ['login' => $user['user_login']]),
         ];
 
-        return render(
+        return agRender(
             '/answer/answer-user',
             [
                 'meta'  => meta($m, Translate::get('answers') . ' ' . $user['user_login'], Translate::get('responses-members') . ' ' . $user['user_login']),

@@ -68,7 +68,7 @@ class ActionController extends MainController
             $result[$ind]           = $row;
         }
 
-        return render(
+        return agRender(
             '/moderation/index',
             [
                 'data' => [

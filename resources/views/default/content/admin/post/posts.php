@@ -37,8 +37,10 @@
             <span class="s_<?= $post['post_id']; ?> show_detail"></span>
           </div>
         </div>
-        <div class="br-bottom mb15 mt5 pb5 size-13 hidden gray">
-          + <?= $post['post_votes']; ?>
+        <div class="br-bottom mb15 mt5 pb10 size-13 hidden gray">
+          <span class="left mt5">
+            <?= votes($uid['user_id'], $post, 'post', 'mr5'); ?>
+          </span>
           <span id="cm_dell" class="right comment_link">
             <a data-type="post" data-id="<?= $post['post_id']; ?>" class="type-action">
               <?php if ($data['sheet'] == 'posts.ban') { ?>

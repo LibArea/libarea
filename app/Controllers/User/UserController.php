@@ -36,7 +36,7 @@ class UserController extends MainController
             'url'        => getUrlByName('users'),
         ];
 
-        return render(
+        return agRender(
             '/user/users',
             [
                 'meta'  => meta($m, Translate::get('users'), Translate::get('desc-user-all')),
@@ -95,7 +95,7 @@ class UserController extends MainController
             'url'        => getUrlByName('user', ['login' => $user['user_login']]),
         ];
 
-        return render(
+        return agRender(
             '/user/profile',
             [
                 'meta'  => meta($m, $meta_title, $meta_desc),
@@ -137,7 +137,7 @@ class UserController extends MainController
             $result[$ind]           = $row;
         }
 
-        return render(
+        return agRender(
             '/user/favorite',
             [
                 'meta'  => meta($m = [], Translate::get('favorites')),
@@ -157,7 +157,7 @@ class UserController extends MainController
             redirect(getUrlByName('user.drafts', ['login' => $this->uid['user_login']]));
         }
 
-        return render(
+        return agRender(
             '/user/draft',
             [
                 'meta'  => meta($m = [], Translate::get('drafts')),
@@ -187,7 +187,7 @@ class UserController extends MainController
             $result[$ind]                   = $row;
         }
 
-        return render(
+        return agRender(
             '/user/subscribed',
             [
                 'meta'  => meta($m = [], Translate::get('subscribed')),
@@ -208,6 +208,14 @@ class UserController extends MainController
         $post       = PostModel::getPostId($user['user_my_post']);
         $badges     = BadgeModel::getBadgeUserAll($user_id);
 
-        includeTemplate('/content/user/card', ['user' => $user, 'uid' => $this->uid, 'post' => $post, 'badges' => $badges]);
+        agIncludeTemplate(
+        '/content/user/card', 
+        [
+        'user' => $user, 
+        'uid' => $this->uid, 
+        'post' => $post, 
+        'badges' => $badges
+        ]
+        );
     }
 }

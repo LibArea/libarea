@@ -19,7 +19,7 @@ class BadgesController extends MainController
     // Все награды
     public function index($sheet, $type)
     {
-        return render(
+        return agRender(
             '/admin/badge/badges',
             [
                 'meta'  => meta($m = [], Translate::get('badges')),
@@ -36,7 +36,7 @@ class BadgesController extends MainController
     // Форма добавления награды
     public function addPage($sheet, $type)
     {
-        return render(
+        return agRender(
             '/admin/badge/add',
             [
                 'meta'  => meta($m = [], Translate::get('add badge')),
@@ -59,7 +59,7 @@ class BadgesController extends MainController
             redirect('/admin/badges');
         }
 
-        return render(
+        return agRender(
             '/admin/badge/edit',
             [
                 'meta'  => meta($m = [], Translate::get('edit badge')),
@@ -107,7 +107,7 @@ class BadgesController extends MainController
             $user   = null;
         }
 
-        return render(
+        return agRender(
             '/admin/badge/user-add',
             [
                 'meta'  => meta($m = [], Translate::get('reward the user')),

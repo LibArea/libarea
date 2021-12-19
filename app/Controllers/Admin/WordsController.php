@@ -16,7 +16,7 @@ class WordsController extends MainController
 
         Request::getResources()->addBottomScript('/assets/js/admin.js');
 
-        return render(
+        return agRender(
             '/admin/word/words',
             [
                 'meta'  => meta($m = [], Translate::get('words')),
@@ -33,7 +33,7 @@ class WordsController extends MainController
     // Форма добавления стоп-слова
     public function addPage($sheet, $type)
     {
-        return render(
+        return agRender(
             '/admin/word/add',
             [
                 'meta'  => meta($m = [], Translate::get('add a stop word')),

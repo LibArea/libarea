@@ -19,7 +19,7 @@ class InvitationsController extends MainController
     // Показ формы создания инвайта
     public function inviteForm()
     {
-        return render(
+        return agRender(
             '/user/invite',
             [
                 'meta'  => meta($m = [], Translate::get('invite')),
@@ -42,7 +42,7 @@ class InvitationsController extends MainController
         $user = UserModel::getUser($this->uid['user_id'], 'id');
         (new \App\Controllers\Auth\BanController())->getBan($user);
 
-        return render(
+        return agRender(
             '/user/invitation',
             [
                 'meta'  => meta($m = [], Translate::get('invites')),

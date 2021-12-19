@@ -63,8 +63,6 @@ function getContentFromTemplate(string $template, array $params = [])
 
 */
 
-// use App\Optional\Data; 
-
 function data()
 {
     return hleb_to0me1cd6vo7gd_data();
@@ -110,43 +108,64 @@ function getRequest()
     return hleb_e70c10c1057hn11cc8il2_get_request();
 }
 
-function theme($user_theme, $file)
+function view($to, $data = null)
 {
-    $tpl_puth = $user_theme . $file;
-    if (!file_exists(TEMPLATES . DIRECTORY_SEPARATOR . $user_theme . $file . '.php')) {
-       $tpl_puth = Config::get('general.template') .  $file;
-    }
-    
-    return $tpl_puth;
+    return hleb_v5ds34hop4nm1d_page_view($to, $data);
 }
 
 function render($name, $data = null)
 {
+    return hleb_v10s20hdp8nm7c_render($name, $data);
+}
+
+function includeTemplate(string $template, array $params = [])
+{
+    return hleb_e0b1036c1070101_template($template, $params);
+}
+
+function includeCachedTemplate(string $template, array $params = [])
+{
+    hleb_e0b1036c1070102_template($template, $params);
+}
+
+/*
+ |
+ | Working with a project template, template caching, etc. 
+ | Работа с шаблона проекта, кэширование шаблонов и т.д.
+ |
+ */
+
+function agTheme($user_theme, $file)
+{
+    $tpl_puth = $user_theme . $file;
+    if (!file_exists(TEMPLATES . DIRECTORY_SEPARATOR . $user_theme . $file . '.php')) {
+        $tpl_puth = Config::get('general.template') . $file;
+    }
+
+    return $tpl_puth;
+}
+
+function agRender($name, $data = null)
+{
     return hleb_v10s20hdp8nm7c_render(
         [
-            theme($data['uid']['user_template'], '/header'),
-            theme($data['uid']['user_template'], '/content' . $name),
-            theme($data['uid']['user_template'], '/footer')
+            agTheme($data['uid']['user_template'], '/header'),
+            agTheme($data['uid']['user_template'], '/content' . $name),
+            agTheme($data['uid']['user_template'], '/footer')
         ],
         $data
     );
 }
 
-function includeCachedTemplate(string $template, array $params = [])
+function agIncludeCachedTemplate(string $template, array $params = [])
 {
-    hleb_e0b1036c1070102_template(theme($params['uid']['user_template'], $template), $params);
+    hleb_e0b1036c1070102_template(agTheme($params['uid']['user_template'], $template), $params);
 }
 
-function includeTemplate(string $template, array $params = [])
+function agIncludeTemplate(string $template, array $params = [])
 {
-    return hleb_e0b1036c1070101_template(theme($params['uid']['user_template'], $template), $params);
+    return hleb_e0b1036c1070101_template(agTheme($params['uid']['user_template'], $template), $params);
 }
-
-function view($to, $data = null)
-{
-   return hleb_v5ds34hop4nm1d_page_view(theme($data['uid']['user_template'], $to), $data);  
-}
-
 
 hleb_require(HLEB_GLOBAL_DIRECTORY . '/app/Helpers/Template.php');
 hleb_require(HLEB_GLOBAL_DIRECTORY . '/app/Helpers/Meta.php');

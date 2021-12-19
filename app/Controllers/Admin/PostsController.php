@@ -34,7 +34,7 @@ class PostsController extends MainController
             $result[$ind]   = $row;
         }
 
-        return render(
+        return agRender(
             '/admin/post/posts',
             [
                 'meta'  => meta($m = [], $sheet == 'ban' ? Translate::get('deleted posts') : Translate::get('posts')),

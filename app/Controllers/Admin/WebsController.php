@@ -34,7 +34,7 @@ class WebsController extends MainController
 
         Request::getResources()->addBottomScript('/assets/js/admin.js');
 
-        return render(
+        return agRender(
             '/admin/web/webs',
             [
                 'meta'  => meta($m = [], Translate::get('domains')),

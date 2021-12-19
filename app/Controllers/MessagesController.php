@@ -61,7 +61,7 @@ class MessagesController extends MainController
             }
         }
 
-        return render(
+        return agRender(
             '/messages/messages',
             [
                 'meta'  => meta($m = [], Translate::get('private messages')),
@@ -115,7 +115,7 @@ class MessagesController extends MainController
             }
         }
 
-        return render(
+        return agRender(
             '/messages/dialog',
             [
                 'meta'  => meta($m = [], Translate::get('dialogue')),
@@ -147,7 +147,7 @@ class MessagesController extends MainController
             redirect('/');
         }
 
-        return render(
+        return agRender(
             '/messages/user-add-messages',
             [
                 'meta'  => meta($m = [], Translate::get('send a message')),

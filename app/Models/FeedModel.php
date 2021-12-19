@@ -47,6 +47,8 @@ class FeedModel extends MainModel
         $sort = "ORDER BY post_answers_count DESC";
         if ($sheet == 'feed' || $sheet == 'all') {
             $sort = "ORDER BY post_top DESC, post_date DESC";
+        } elseif ($type == 'admin') {
+            $sort = "ORDER BY post_date DESC";
         }
 
         $start  = ($page - 1) * $limit;

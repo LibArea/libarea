@@ -25,7 +25,7 @@ class RssController extends MainController
             'posts'     => RssModel::getPostsSitemap(),
         ];
 
-        includeCachedTemplate('/rss/sitemap', ['data' => $data, 'uid' => $this->uid]);
+        agIncludeCachedTemplate('/rss/sitemap', ['data' => $data, 'uid' => $this->uid]);
     }
 
     // Route::get('/turbo-feed/topic/{slug}')
@@ -40,7 +40,6 @@ class RssController extends MainController
         foreach ($posts as $ind => $row) {
             $text = explode("\n", $row['post_content']);
             $row['post_content']  = Content::text($text[0], 'line');
-            // $row['post_content']  = Content::text($row['post_content'], 'text');
             $result[$ind]         = $row;
         }
 
@@ -49,7 +48,14 @@ class RssController extends MainController
             'posts' => $result,
         ];
 
-        includeCachedTemplate('/rss/turbo-feed', ['data' => $data, 'topic' => $topic, 'uid' => $this->uid]);
+        agIncludeCachedTemplate(
+            '/content/rss/turbo-feed',
+            [
+                'data' => $data,
+                'topic' => $topic,
+                'uid' => $this->uid
+            ]
+        );
     }
 
     // Route::get('/rss-feed/topic/{slug}')
@@ -67,8 +73,8 @@ class RssController extends MainController
             $result[$ind]         = $row;
         }
 
-        includeCachedTemplate(
-            '/rss/rss-feed',
+        agIncludeCachedTemplate(
+            '/content/rss/rss-feed',
             [
                 'data'  => [
                     'url'       => Config::get('meta.url'),

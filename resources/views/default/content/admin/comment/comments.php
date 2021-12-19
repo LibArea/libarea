@@ -34,8 +34,10 @@
         <div class="comm-telo-body">
           <?= $comment['content']; ?>
         </div>
-        <div class="br-bottom mb15 mt5 pb5 size-13 hidden gray">
-          + <?= $comment['comment_votes']; ?>
+        <div class="br-bottom mb15 mt5 pb10 size-13 hidden gray">
+          <span class="left mt5">
+            <?= votes($uid['user_id'], $comment, 'comment', 'mr5'); ?>
+          </span>
           <span id="cm_dell" class="right comment_link size-13">
             <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action">
               <?php if ($data['sheet'] == 'comments.ban') { ?>

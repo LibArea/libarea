@@ -33,7 +33,7 @@ class EditAnswerController extends MainController
         Request::getResources()->addBottomStyles('/assets/js/editor/dark.css');
         Request::getResources()->addBottomScript('/assets/js/editor/toastui-editor-all.min.js');
 
-        return render(
+        return agRender(
             '/answer/edit-form-answer',
             [
                 'meta'  => meta($m = [], Translate::get('edit answer')),

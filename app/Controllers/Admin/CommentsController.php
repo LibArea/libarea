@@ -23,7 +23,6 @@ class CommentsController extends MainController
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
-        $limit      = 100;
         $pagesCount = CommentModel::getCommentsAllCount($sheet);
         $comments   = CommentModel::getCommentsAll($page, $this->limit, $this->uid, $sheet);
 
@@ -34,7 +33,7 @@ class CommentsController extends MainController
             $result[$ind]   = $row;
         }
 
-        return render(
+        return agRender(
             '/admin/comment/comments',
             [
                 'meta'  => meta($m = [], $sheet == 'ban' ? Translate::get('deleted comments') : Translate::get('comments')),

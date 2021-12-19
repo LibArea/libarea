@@ -25,7 +25,7 @@ class RegisterController extends MainController
             'url'        => getUrlByName('register'),
         ];
 
-        return render(
+        return agRender(
             '/auth/register',
             [
                 'meta'  => meta($m, Translate::get('sign up'), Translate::get('info-security')),
@@ -164,7 +164,7 @@ class RegisterController extends MainController
             redirect('/');
         }
 
-        return render(
+        return agRender(
             '/auth/register-invate',
             [
                 'meta'  => meta($m = [], Translate::get('registration by invite')),

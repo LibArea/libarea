@@ -6,7 +6,7 @@ function import($template, array $params = [])
     $uid = Base::getUid();
     extract($params, EXTR_SKIP);
     
-    include TEMPLATES . DIRECTORY_SEPARATOR . theme($uid['user_template'], $template) . '.php';
+    include TEMPLATES . DIRECTORY_SEPARATOR . agTheme($uid['user_template'], $template) . '.php';
   
 }
 

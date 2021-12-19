@@ -27,7 +27,7 @@ class EditCommentController extends MainController
         $comment = CommentModel::getCommentsId($comment_id);
         if (!accessСheck($comment, 'comment', $this->uid, 0, 0)) return false;
 
-        includeTemplate(
+        agIncludeTemplate(
             '/_block/form/edit-form-comment',
             [
                 'data'  => [

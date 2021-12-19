@@ -63,7 +63,7 @@ class TopicFacetController extends MainController
             'url'        => $url,
         ];
 
-        return render(
+        return agRender(
             '/facets/topic',
             [
                 'meta'  => meta($m, $title, $descr),
@@ -107,7 +107,7 @@ class TopicFacetController extends MainController
             'url'        => getUrlByName('topic.info', ['slug' => $facet['facet_slug']]),
         ];
 
-        return render(
+        return agRender(
             '/facets/info',
             [
                 'meta'  => meta($m, $facet['facet_seo_title'] . ' — ' .  Translate::get('topic'), $facet['facet_description']),
@@ -131,6 +131,6 @@ class TopicFacetController extends MainController
 
         $users      = FacetModel::getFocusUsers($topic_id, 25);
 
-        return includeTemplate('/content/facets/followers', ['users' => $users, 'uid'   => $this->uid]);
+        return agIncludeTemplate('/content/facets/followers', ['users' => $users, 'uid'   => $this->uid]);
     }
 }

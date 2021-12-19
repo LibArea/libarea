@@ -43,7 +43,7 @@ class AddPostController extends MainController
             }
         }
 
-        return render(
+        return agRender(
             '/post/add',
             [
                 'meta'      => meta($m = [], Translate::get('add post')),

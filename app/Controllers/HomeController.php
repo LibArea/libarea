@@ -64,7 +64,7 @@ class HomeController extends MainController
             'url'        => $sheet == 'top' ? '/top' : '/',
         ];
 
-        return render(
+        return agRender(
             '/home',
             [
                 'meta'  => meta($m, $meta_title, $meta_desc),

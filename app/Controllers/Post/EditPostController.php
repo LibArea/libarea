@@ -38,7 +38,7 @@ class EditPostController extends MainController
             $post_related = PostModel::postRelated($post['post_related']);
         }
 
-        return render(
+        return agRender(
             '/post/edit',
             [
                 'meta'  => meta($m = [], Translate::get('edit post')),

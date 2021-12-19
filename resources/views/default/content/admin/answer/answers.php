@@ -34,8 +34,10 @@
         <div class="size-15 max-w780">
           <?= $answer['content']; ?>
         </div>
-        <div class="br-bottom mb15 pb5 size-13 hidden gray">
-          + <?= $answer['answer_votes']; ?>
+        <div class="br-bottom mb15 pb10 size-13 hidden gray">
+          <span class="left mt5">
+            <?= votes($uid['user_id'], $answer, 'answer', 'mr5'); ?>
+          </span>
           <span id="cm_dell" class="right comment_link size-13">
             <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action">
               <?php if ($data['sheet'] == 'answers.ban') { ?>

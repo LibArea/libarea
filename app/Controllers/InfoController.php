@@ -32,7 +32,7 @@ class InfoController extends MainController
             'url'        => getUrlByName('info'),
         ];
 
-        return render(
+        return agRender(
             '/info/index',
             [
                 'meta'  => meta($m, Translate::get('info'), Translate::get('info-desc')),
@@ -56,7 +56,7 @@ class InfoController extends MainController
             'url'        => getUrlByName('info.privacy'),
         ];
 
-        return render(
+        return agRender(
             '/info/privacy',
             [
                 'meta'  => meta($m, Translate::get('privacy policy'), Translate::get('privacy-desc')),
@@ -78,7 +78,7 @@ class InfoController extends MainController
             'url'        => getUrlByName('info.restriction'),
         ];
 
-        return render(
+        return agRender(
             '/info/restriction',
             [
                 'meta'  => meta($m, Translate::get('restriction'), Translate::get('the profile is being checked')),

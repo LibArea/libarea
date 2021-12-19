@@ -58,7 +58,7 @@ class BlogFacetController extends MainController
             'url'        => $url,
         ];
 
-        return render(
+        return agRender(
             '/facets/blog',
             [
                 'meta'  => meta($m, $title, $descr),

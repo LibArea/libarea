@@ -38,7 +38,7 @@ class UsersController extends MainController
 
         Request::getResources()->addBottomScript('/assets/js/admin.js');
 
-        return render(
+        return agRender(
             '/admin/user/users',
             [
                 'meta'  => meta($m = [], Translate::get('users')),
@@ -70,7 +70,7 @@ class UsersController extends MainController
             $results[$ind]      = $row;
         }
 
-        return render(
+        return agRender(
             '/admin/user/logip',
             [
                 'meta'  => meta($m = [], Translate::get('search')),
@@ -95,7 +95,7 @@ class UsersController extends MainController
         return true;
     }
 
-    // Страница редактиорование участника
+    // Страница редактирование участника
     public function userEditPage($sheet, $type)
     {
         $user_id    = Request::getInt('id');
@@ -108,7 +108,7 @@ class UsersController extends MainController
 
         Request::getResources()->addBottomScript('/assets/js/admin.js');
 
-        return render(
+        return agRender(
             '/admin/user/edit',
             [
                 'meta'  => meta($m = [], Translate::get('edit user')),

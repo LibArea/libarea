@@ -34,7 +34,7 @@ class NotificationsController extends MainController
             $result[$ind]           = $row;
         }
 
-        return render(
+        return agRender(
             '/notification/index',
             [
                 'meta'  => meta($m = [], Translate::get('notifications')),

@@ -20,7 +20,7 @@ class AddCommentController extends MainController
     // Покажем форму
     public function index()
     {
-        includeTemplate(
+        agIncludeTemplate(
             '/_block/form/add-form-answer-and-comment',
             [
                 'data'  => [

@@ -139,7 +139,7 @@ class PostController extends MainController
 
         $meta = meta($m, strip_tags($post['post_title']) . ' — ' . $topic, $desc . ' — ' . $topic, $date_article = $post['post_date']);
 
-        return render(
+        return agRender(
             '/post/view',
             [
                 'meta'  => $meta,
@@ -188,7 +188,7 @@ class PostController extends MainController
             'url'        => getUrlByName('posts.user', ['login' => $login]),
         ];
 
-        return render(
+        return agRender(
             '/post/post-user',
             [
                 'meta'  => meta($m, Translate::get('posts') . ' ' . $login, Translate::get('participant posts') . ' ' . $login),
@@ -250,6 +250,6 @@ class PostController extends MainController
 
         $post['post_content'] = Content::text($post['post_content'], 'text');
 
-        includeTemplate('/content/post/postcode', ['post' => $post, 'uid'   => $this->uid]);
+        agIncludeTemplate('/content/post/postcode', ['post' => $post, 'uid'   => $this->uid]);
     }
 }

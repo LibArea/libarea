@@ -69,7 +69,7 @@ class LoginController extends MainController
             'url'        => getUrlByName('login'),
         ];
 
-        return render(
+        return agRender(
             '/auth/login',
             [
                 'meta'  => meta($m, Translate::get('sign in'), Translate::get('info-login')),

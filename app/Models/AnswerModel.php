@@ -38,7 +38,7 @@ class AnswerModel extends MainModel
                 $sort = 'WHERE answer_is_deleted = 0 AND post_is_deleted = 0 AND post_tl <= ' . $uid['user_trust_level'] . '';
             }
         } else {
-            $sort = "WHERE answer_is_deleted = 0 AND post_is_deleted = 0"; 
+            $sort = "WHERE answer_is_deleted = 0 AND post_is_deleted = 0";
             if ($sheet == 'answers.ban') {
                 $sort = "WHERE answer_is_deleted = 1 OR post_is_deleted = 1";
             }
@@ -172,7 +172,7 @@ class AnswerModel extends MainModel
                         ORDER BY answer_id DESC LIMIT $start, $limit ";
 
         return DB::run($sql, ['user_id' => $user_id, 'uid_id' => $uid_id])->fetchAll(PDO::FETCH_ASSOC);
-    }  
+    }
 
     // Количество ответов участника
     public static function userAnswersCount($user_id)

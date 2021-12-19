@@ -28,7 +28,7 @@ class SettingController extends MainController
         // Если пользователь забанен
         (new \App\Controllers\Auth\BanController())->getBan($user);
 
-        return render(
+        return agRender(
             '/user/setting/setting',
             [
                 'meta'  => meta($m = [], Translate::get('setting')),
@@ -103,7 +103,7 @@ class SettingController extends MainController
 
         Request::getResources()->addBottomScript('/assets/js/uploads.js');
 
-        return render(
+        return agRender(
             '/user/setting/avatar',
             [
                 'meta'  => meta($m = [], Translate::get('change avatar')),
@@ -147,7 +147,7 @@ class SettingController extends MainController
             redirect(getUrlByName('setting.security', ['login' => $this->uid['user_login']]));
         }
 
-        return render(
+        return agRender(
             '/user/setting/security',
             [
                 'meta'  => meta($m = [], Translate::get('change password')),
@@ -243,7 +243,7 @@ class SettingController extends MainController
         $user = UserModel::getUser($this->uid['user_id'], 'id');
         (new \App\Controllers\Auth\BanController())->getBan($user);
 
-        return render(
+        return agRender(
             '/user/setting/notifications',
             [
                 'meta'  => meta($m = [], Translate::get('notifications')),

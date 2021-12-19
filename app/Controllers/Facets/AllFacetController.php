@@ -45,7 +45,7 @@ class AllFacetController extends MainController
             'url'        => getUrlByName($url),
         ];
 
-        return render(
+        return agRender(
             '/facets/all',
             [
                 'meta'  => meta($m, Translate::get($sheet) . $num, Translate::get($sheet . '-desc') . $num),

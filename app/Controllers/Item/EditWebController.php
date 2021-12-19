@@ -33,7 +33,7 @@ class EditWebController extends MainController
             $item_post_related = PostModel::postRelated($domain['item_post_related']);
         }
 
-        return render(
+        return agRender(
             '/item/edit',
             [
                 'meta'  => meta($m = [], Translate::get('change the site') . ' | ' . $domain['item_url_domain']),

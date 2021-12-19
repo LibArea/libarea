@@ -216,7 +216,7 @@ class CommentModel extends MainModel
 
         return DB::run($sql, ['user_id' => $user_id])->rowCount();
     }
-    
+
     // Получаем комментарий по id комментария
     public static function getCommentsId($comment_id)
     {

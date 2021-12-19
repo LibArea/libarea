@@ -8,7 +8,7 @@ use PDO;
 
 class FacetModel extends MainModel
 {
-    // Все фасеты
+    // All facets
     // Все фасеты
     public static function getFacetsAll($page, $limit, $user_id, $sort)
     {
@@ -32,7 +32,7 @@ class FacetModel extends MainModel
                 $signet = "WHERE facet_type = 'blog' ORDER BY facet_id DESC";
                 break;
             case 'blogs.my':
-                $signet = "WHERE facet_type = 'blog' AND signed_user_id = :user_id ORDER BY facet_count DESC";
+                $signet = "WHERE facet_type = 'blog' AND signed_user_id = :user_id ORDER BY facet_user_id = :user_id DESC, facet_count DESC";
                 break;
             case 'blogs.ban':
                 $signet = "WHERE facet_type = 'blog' AND facet_is_deleted = 1 ORDER BY facet_id DESC";
@@ -111,8 +111,8 @@ class FacetModel extends MainModel
         return DB::run($sql, ['user_id' => $user_id])->rowCount();
     }
 
-    // Информация по фасету (id, slug)
     // Cell information (id, slug) 
+    // Информация по фасету (id, slug)
     public static function getFacet($params, $name)
     {
         $sort = "facet_id = :params";
@@ -177,8 +177,8 @@ class FacetModel extends MainModel
         return true;
     }
 
-    // Основные деревья
     // Main trees
+    // Основные деревья
     public static function addLowFacetRelation($rows, $topic_id)
     {
         self::deleteRelation($topic_id, 'topic');
@@ -194,6 +194,7 @@ class FacetModel extends MainModel
         return true;
     }
 
+    // Cross -links
     // Перекрестные связи
     public static function addLowFacetMatching($rows, $topic_id)
     {
@@ -224,8 +225,8 @@ class FacetModel extends MainModel
         return DB::run($sql);
     }
 
-    // Изменение img
     // Changing img
+    // Изменение img
     public static function setImg($facet_id, $img)
     {
         $sql = "UPDATE facets SET facet_img = :img WHERE facet_id = :facet_id";
@@ -233,8 +234,8 @@ class FacetModel extends MainModel
         return DB::run($sql, ['facet_id' => $facet_id, 'img' => $img]);
     }
 
-    // TOP авторов фасета. Limit 10
     // TOP of facet authors. Limit 10 
+    // TOP авторов фасета. Limit 10
     public static function getWriters($facet_id)
     {
         $sql = "SELECT MAX(relation_facet_id), 
@@ -260,8 +261,8 @@ class FacetModel extends MainModel
         return DB::run($sql, ['facet_id' => $facet_id])->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Вклад участника
     // Participant contribution
+    // Вклад участника
     public static function participation($user_id)
     {
         $sql = " SELECT 
@@ -396,8 +397,8 @@ class FacetModel extends MainModel
         return  DB::run($sql, $params);
     }
 
+    // Faces created by the participant 
     // Грани созданные участником
-    // Faces created by the participant  
     /** 
      * @param  int $user_id
      * @param  string $type (topic | blog)
@@ -415,8 +416,8 @@ class FacetModel extends MainModel
         return DB::run($sql, ['user_id' => $user_id, 'type' => $type])->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // Number of faces created by the contributor
     // Количество граней созданное участником
-    // Number of faces created by the contributor 
     /** 
      * @param  int $user_id
      * @param  string $type (topic | blog)
@@ -434,8 +435,8 @@ class FacetModel extends MainModel
         return DB::run($sql, ['user_id' => $user_id, 'type' => $type])->rowCount();
     }
 
-    // Участники подписанные на тему
     // Participants subscribed to the topic
+    // Участники подписанные на тему
     /** 
      * @param  int $facet_id
      * @param  int $limit
@@ -455,8 +456,8 @@ class FacetModel extends MainModel
         return DB::run($sql, ['facet_id' => $facet_id])->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Вверх по структуре связанные деревья (РОДИТЕЛИ)
     // Up the structure of connected trees (PARENTS)
+    // Вверх по структуре связанные деревья (РОДИТЕЛИ)
     /**
      * @param  int $facet_id
      * @return Response
@@ -478,8 +479,8 @@ class FacetModel extends MainModel
         return DB::run($sql, ['facet_id' => $facet_id])->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Вниз по структуре связанных деревьев (ДЕТИ)
     // Down the structure  (CHILDREN)
+    // Вниз по структуре связанных деревьев (ДЕТИ)
     /**
      * @param  int $facet_id
      * @return
@@ -501,8 +502,8 @@ class FacetModel extends MainModel
         return DB::run($sql, ['facet_id' => $facet_id])->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Вверх по структуре основных деревьев (РОДИТЕЛИ)
     // Up the structure of the main trees (PARENTS)
+    // Вверх по структуре основных деревьев (РОДИТЕЛИ)
     /**
      * @param  int $facet_id
      * @return
@@ -524,8 +525,8 @@ class FacetModel extends MainModel
         return DB::run($sql, ['facet_id' => $facet_id])->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Вниз по структуре основных деревьев (ДЕТИ)
     // Down the structure of the main trees (CHILDREN)
+    // Вниз по структуре основных деревьев (ДЕТИ)
     /**
      * @param  int $facet_id
      * @internal
@@ -547,8 +548,8 @@ class FacetModel extends MainModel
         return DB::run($sql, ['facet_id' => $facet_id])->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Получение root уровня
     // Getting root level 
+    // Получение root уровня
     public static function getTopLevelList()
     {
         $sql = "SELECT 
@@ -564,8 +565,8 @@ class FacetModel extends MainModel
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Дерево тем
     // Theme Tree
+    // Дерево тем
     public static function getStructure()
     {
         $sql = "SELECT
@@ -596,6 +597,7 @@ class FacetModel extends MainModel
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // Posts where there are no topics
     // Посты где нет тем
     public static function getNoTopic()
     {

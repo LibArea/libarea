@@ -42,7 +42,7 @@ class CommentController extends MainController
             'url'        => getUrlByName('comments'),
         ];
 
-        return render(
+        return agRender(
             '/comment/comments',
             [
                 'meta'  => meta($m, Translate::get('all comments'), Translate::get('comments-desc')),
@@ -84,7 +84,7 @@ class CommentController extends MainController
             'url'        => getUrlByName('comments.user', ['login' => $user['user_login']]),
         ];
 
-        return render(
+        return agRender(
             '/comment/comment-user',
             [
                 'meta'  => meta($m, Translate::get('comments') . ' ' . $user['user_login'], Translate::get('comments') . ' ' . $user['user_login']),

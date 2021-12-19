@@ -21,7 +21,7 @@ class HomeController extends MainController
         $size   = disk_total_space(HLEB_GLOBAL_DIRECTORY);
         $bytes  = number_format($size / 1048576, 2) . ' MB';
 
-        return render(
+        return agRender(
             '/admin/index',
             [
                 'meta'  => meta($m = [], Translate::get('admin')),

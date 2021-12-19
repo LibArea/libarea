@@ -19,7 +19,7 @@ class InvitationsController extends MainController
             $result[$ind]       = $row;
         }
 
-        return render(
+        return agRender(
             '/admin/invitation/invitations',
             [
                 'meta'  => meta($m = [], Translate::get('invites')),

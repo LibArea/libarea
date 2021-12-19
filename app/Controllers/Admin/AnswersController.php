@@ -33,7 +33,7 @@ class AnswersController extends MainController
             $result[$ind]   = $row;
         }
 
-        return render(
+        return agRender(
             '/admin/answer/answers',
             [
                 'meta'  => meta($m = [], $sheet == 'ban' ? Translate::get('deleted answers') : Translate::get('answers')),
