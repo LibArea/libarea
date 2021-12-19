@@ -58,7 +58,7 @@ class UsersController extends MainController
     public function logsIp($option)
     {
         $user_ip    = Request::get('ip');
-        if ($option == 'logs') {
+        if ($option == 'users.logip') {
             $user_all   = UserModel::getUserLogsId($user_ip);
         } else {
             $user_all   = UserModel::getUserRegsId($user_ip);
@@ -67,7 +67,6 @@ class UsersController extends MainController
         $results = [];
         foreach ($user_all as $ind => $row) {
             $row['duplicat_ip_reg'] = UserModel::duplicatesRegistrationCount($row['user_id']);
-            $row['isBan']       = BanUserModel::isBan($row['user_id']);
             $results[$ind]      = $row;
         }
 

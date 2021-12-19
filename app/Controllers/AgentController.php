@@ -9,11 +9,6 @@ use Base;
 
 class AgentController extends MainController
 {
-    public function index()
-    {
-        return UserModel::getLogAll(100);
-    }
-
     public function set()
     {
         // https://github.com/donatj/PhpUserAgent

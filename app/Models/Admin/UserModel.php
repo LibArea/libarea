@@ -164,8 +164,10 @@ class UserModel extends MainModel
                     user_created_at,
                     user_reg_ip,
                     user_invitation_id,
-                    user_trust_level
+                    user_trust_level,
+                    user_ban_list
                         FROM users WHERE user_reg_ip = :ip";
+                            
         return DB::run($sql, ['ip' => $ip])->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -182,6 +184,7 @@ class UserModel extends MainModel
                     user_reg_ip,
                     user_invitation_id,
                     user_trust_level,
+                    user_ban_list,
                     latest_date
                         FROM users
                         JOIN 
@@ -248,18 +251,5 @@ class UserModel extends MainModel
                                 :log_user_ip)";
 
         return DB::run($sql, $params);
-    }
-    
-    public static function getLogAll($limit)
-    {
-        $sql = "SELECT log_id,
-                        log_date, 
-                        log_user_id, 
-                        log_user_browser, 
-                        log_user_os, 
-                        log_user_ip
-                            FROM users_agent_logs ORDER BY log_id DESC LIMIT :limit";
-
-        return  DB::run($sql, ['limit' => $limit])->fetchAll(PDO::FETCH_ASSOC);
     }
 }
