@@ -79,7 +79,7 @@
   </div>
   <?php if ($data['related_posts']) { ?>
     <div class="bg-white br-rd5 br-box-gray pt15 pl15 size-14">
-      <?= includeTemplate('/_block/related-posts', ['related_posts' => $data['related_posts'], 'number' => 'no']); ?>
+      <?= import('/_block/related-posts', ['related_posts' => $data['related_posts'], 'number' => 'no']); ?>
     </div>
   <?php } ?>
 </aside>

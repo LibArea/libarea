@@ -46,19 +46,13 @@ class NotificationsModel extends MainModel
         return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Уведомление
-    public static function usersNotification($user_id)
+    // Уведомления
+    public static function bell($user_id)
     {
         $sql = "SELECT
-                    notification_id,
-                    notification_sender_id,
                     notification_recipient_id,
                     notification_action_type,
-                    notification_connection_type,
-                    notification_url,
-                    notification_add_time,
-                    notification_read_flag,
-                    notification_is_deleted
+                    notification_read_flag
                         FROM notifications
                         WHERE notification_recipient_id = :user_id
                         AND notification_read_flag = 0";

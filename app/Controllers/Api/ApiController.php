@@ -11,23 +11,22 @@ class ApiController extends MainController
     {
         return true;
     }
-    
+
     public function topics()
     {
-       $data = FacetModel::getFacetsAll(1, 25, 0, 'all');
-       
-       header('Content-Type: application/json');
+        $data = FacetModel::getFacetsAll(1, 25, 0, 'all');
 
-       echo json_encode($data,JSON_UNESCAPED_UNICODE);
+        header('Content-Type: application/json');
+
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
     }
-    
+
     public function items()
-    {   
-       $data = WebModel::getItemsAll(1, 25, 0);
-       
-       header('Content-Type: application/json');
+    {
+        $data = WebModel::getItemsAll(1, 25, 0);
 
-       echo json_encode($data,JSON_UNESCAPED_UNICODE);
+        header('Content-Type: application/json');
+
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
     }
-
 }

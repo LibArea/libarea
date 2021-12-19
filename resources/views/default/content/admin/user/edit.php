@@ -1,4 +1,4 @@
-<?= includeTemplate(
+<?= import(
   '/content/admin/menu',
   [
     'type'    => $data['type'],
@@ -29,7 +29,7 @@
         </a>
       </label>
       <?php if ($data['user']['user_trust_level'] != 5) { ?>
-        <?php if ($data['user']['isBan']) { ?>
+        <?php if ($data['user']['user_ban_list']) { ?>
           <span class="type-ban" data-id="<?= $data['user']['user_id']; ?>" data-type="user">
             <span class="red"><?= Translate::get('unban'); ?></span>
           </span>

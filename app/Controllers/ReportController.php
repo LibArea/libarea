@@ -34,6 +34,7 @@ class ReportController extends MainController
         $url_report   = $slug . '#' . $type_id;
 
         // Оповещение админу
+        // Admin notification 
         $type = 20;     // Система флагов  
         $user_id  = 1;  // админу        
         NotificationsModel::send($uid['user_id'], $user_id, $type, $post_id, $url_report, 1);

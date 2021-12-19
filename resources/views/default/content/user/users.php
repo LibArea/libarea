@@ -1,5 +1,5 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+  <?= import('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-7 mb-col-12">
   <div class="bg-white br-rd5 br-box-gray p20">
@@ -22,4 +22,4 @@
   </div>
   <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/users'); ?>
 </main>
-<?= includeTemplate('/_block/sidebar/lang', ['lang' => Translate::get('info-users')]); ?>
+<?= import('/_block/sidebar/lang', ['lang' => Translate::get('info-users')]); ?>

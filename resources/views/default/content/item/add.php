@@ -1,5 +1,5 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+  <?= import('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-10 mb-col-12">
 
@@ -15,7 +15,7 @@
     <form action="<?= getUrlByName('web.create'); ?>" method="post">
       <?= csrf_field() ?>
 
-      <?= includeTemplate('/_block/form/field-input', [
+      <?= import('/_block/form/field-input', [
         'data' => [
           [
             'title' => Translate::get('title'),
@@ -30,7 +30,7 @@
         ]
       ]); ?>
 
-      <?php includeTemplate('/_block/editor/textarea', [
+      <?php import('/_block/editor/textarea', [
         'title' => Translate::get('description'),
         'type' => 'text',
         'name' => 'content_url',
@@ -39,7 +39,7 @@
         'help' => '24 - 1500 ' . Translate::get('characters')
       ]); ?>
 
-      <?= includeTemplate('/_block/form/select/select', [
+      <?= import('/_block/form/select/select', [
         'uid'           => $uid,
         'data'          => ['topic' => false],
         'type'          => 'topic',

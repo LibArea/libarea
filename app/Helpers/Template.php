@@ -1,6 +1,14 @@
 <?php
 
 //declare(strict_types = 1);
+function import($template, array $params = [])
+{  
+    $uid = Base::getUid();
+    extract($params, EXTR_SKIP);
+    
+    include TEMPLATES . DIRECTORY_SEPARATOR . theme($uid['user_template'], $template) . '.php';
+  
+}
 
 // Topic for posts
 function html_topic($topic, $slug, $css)

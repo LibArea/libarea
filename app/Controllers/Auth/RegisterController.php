@@ -25,7 +25,7 @@ class RegisterController extends MainController
             'url'        => getUrlByName('register'),
         ];
 
-        return view(
+        return render(
             '/auth/register',
             [
                 'meta'  => meta($m, Translate::get('sign up'), Translate::get('info-security')),
@@ -103,7 +103,7 @@ class RegisterController extends MainController
             $inv_uid = 0;
         }
 
-        $count =  UserModel::getUsersAllCount('all');
+        $count =  UserModel::getUsersAllCount();
         // Для "режима запуска" первые 50 участников получают trust_level = 1 
         $tl = 0;
         if ($count < 50 && Config::get('general.mode') == 1) {
@@ -164,7 +164,7 @@ class RegisterController extends MainController
             redirect('/');
         }
 
-        return view(
+        return render(
             '/auth/register-invate',
             [
                 'meta'  => meta($m = [], Translate::get('registration by invite')),

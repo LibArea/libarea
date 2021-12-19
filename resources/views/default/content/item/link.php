@@ -1,5 +1,5 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+  <?= import('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-7">
   <div class="bg-white br-rd5 br-box-gray mb15 pt5 pr15 pb5 pl15">
@@ -29,13 +29,13 @@
     <?php } ?>
   </div>
 
-  <?= includeTemplate('/_block/post', ['data' => $data, 'uid' => $uid]); ?>
+  <?= import('/_block/post', ['data' => $data, 'uid' => $uid]); ?>
   <?= pagination($data['pNum'], $data['pagesCount'], null, getUrlByName('domain', ['domain' => $data['item']['item_url_domain']])); ?>
 </main>
 <aside class="col-span-3 relative">
   <div class="sticky top70">
     <div class="bg-white br-rd5 br-box-gray pt5 pr15 pb10 pl15">
-      <?= includeTemplate('/_block/domains', ['data' => $data['domains']]); ?>
+      <?= import('/_block/domains', ['data' => $data['domains']]); ?>
     </div>
   </div>  
 </aside>

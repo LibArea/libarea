@@ -27,7 +27,7 @@ class FacetsController extends MainController
 
         Request::getResources()->addBottomScript('/assets/js/admin.js');
 
-        return view(
+        return render(
             '/admin/facet/facets',
             [
                 'meta'  => meta($m = [], Translate::get('topics')),

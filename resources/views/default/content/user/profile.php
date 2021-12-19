@@ -239,4 +239,4 @@
       </div>
 </main>
 </div>
-<?= includeTemplate('/_block/wide-footer'); ?>
+<?= import('/_block/wide-footer'); ?>

@@ -10,7 +10,7 @@ use Base, Config, Translate;
 class AllFacetController extends MainController
 {
     private $uid;
-    
+
     protected $limit = 40;
 
     public function __construct()
@@ -45,7 +45,7 @@ class AllFacetController extends MainController
             'url'        => getUrlByName($url),
         ];
 
-        return view(
+        return render(
             '/facets/all',
             [
                 'meta'  => meta($m, Translate::get($sheet) . $num, Translate::get($sheet . '-desc') . $num),

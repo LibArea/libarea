@@ -38,7 +38,7 @@ class AuditsController extends MainController
 
         Request::getResources()->addBottomScript('/assets/js/admin.js');
 
-        return view(
+        return render(
             '/admin/audit/audits',
             [
                 'meta'  => meta($m = [], Translate::get('audit')),

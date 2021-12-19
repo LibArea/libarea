@@ -10,16 +10,22 @@ use Content, Base;
 
 class EditCommentController extends MainController
 {
+    private $uid;
+
+    public function __construct()
+    {
+        $this->uid  = Base::getUid();
+    }
+
     // Форма редактирования comment
     public function index()
     {
         $comment_id     = Request::getPostInt('comment_id');
         $post_id        = Request::getPostInt('post_id');
-        $uid            = Base::getUid();
 
         // Проверка доступа 
         $comment = CommentModel::getCommentsId($comment_id);
-        if (!accessСheck($comment, 'comment', $uid, 0, 0)) return false;
+        if (!accessСheck($comment, 'comment', $this->uid, 0, 0)) return false;
 
         includeTemplate(
             '/_block/form/edit-form-comment',
@@ -29,14 +35,13 @@ class EditCommentController extends MainController
                     'post_id'           => $post_id,
                     'comment_content'   => $comment['comment_content'],
                 ],
-                'uid'   => $uid
+                'uid'   => $this->uid
             ]
         );
     }
 
     public function edit()
     {
-        $uid                = Base::getUid();
         $comment_id         = Request::getPostInt('comment_id');
         $post_id            = Request::getPostInt('post_id');
         $comment_content    = Request::getPost('comment');
@@ -47,12 +52,12 @@ class EditCommentController extends MainController
 
         // Проверка доступа 
         $comment = CommentModel::getCommentsId($comment_id);
-        if (!accessСheck($comment, 'comment', $uid, 0, 0)) {
+        if (!accessСheck($comment, 'comment', $this->uid, 0, 0)) {
             redirect('/');
         }
 
         // Если пользователь забанен / заморожен
-        $user = UserModel::getUser($uid['user_id'], 'id');
+        $user = UserModel::getUser($this->uid['user_id'], 'id');
         (new \App\Controllers\Auth\BanController())->getBan($user);
         Content::stopContentQuietМode($user);
 

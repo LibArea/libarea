@@ -5,12 +5,19 @@ namespace App\Controllers;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\{SubscriptionModel, PostModel, FacetModel};
+use Base;
 
 class SubscriptionController extends MainController
 {
+    private $uid;
+
+    public function __construct()
+    {
+        $this->uid = Base::getUid();
+    }
+
     public function index()
     {
-        $account    = Request::getSession('account');
         $content_id = Request::getPostInt('content_id');
         $type       = Request::get('type');
 
@@ -24,10 +31,11 @@ class SubscriptionController extends MainController
         } else {
             $content =  FacetModel::getFacet($content_id, 'id');
             // Запретим владельцу отписываться от созданного фасета
-            if ($content['facet_user_id'] == $account['user_id']) return false;
+            // Prevent the owner from unsubscribing from the created facet 
+            if ($content['facet_user_id'] == $this->uid['user_id']) return false;
         }
 
-        SubscriptionModel::focus($content_id, $account['user_id'], $type);
+        SubscriptionModel::focus($content_id, $this->uid['user_id'], $type);
 
         return true;
     }

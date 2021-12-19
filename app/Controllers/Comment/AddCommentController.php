@@ -10,6 +10,13 @@ use Content, Base, Validation, SendEmail, Translate;
 
 class AddCommentController extends MainController
 {
+    private $uid;
+
+    public function __construct()
+    {
+        $this->uid  = Base::getUid();
+    }
+
     // Покажем форму
     public function index()
     {
@@ -21,7 +28,7 @@ class AddCommentController extends MainController
                     'post_id'       => Request::getPostInt('post_id'),
                     'comment_id'    => Request::getPostInt('comment_id'),
                 ],
-                'uid'   => Base::getUid()
+                'uid'   => $this->uid
             ]
         );
     }
@@ -34,13 +41,12 @@ class AddCommentController extends MainController
         $answer_id          = Request::getPostInt('answer_id');   // на какой ответ
         $comment_id         = Request::getPostInt('comment_id');   // на какой комментарий
 
-        $uid        = Base::getUid();
         $ip         = Request::getRemoteAddress();
         $post       = PostModel::getPostId($post_id);
         pageError404($post);
 
         // Если пользователь забанен / заморожен
-        $user = UserModel::getUser($uid['user_id'], 'id');
+        $user = UserModel::getUser($this->uid['user_id'], 'id');
         (new \App\Controllers\Auth\BanController())->getBan($user);
         Content::stopContentQuietМode($user);
 
@@ -50,12 +56,12 @@ class AddCommentController extends MainController
         Validation::Limits($comment_content, Translate::get('comments'), '6', '2024', $redirect);
 
         // Ограничим добавления комментариев (в день)
-        Validation::speedAdd($uid, 'comment');
+        Validation::speedAdd($this->uid, 'comment');
 
         // Если контента меньше N и он содержит ссылку 
         // Оповещение админу
         $comment_published = 1;
-        if (!Validation::stopSpam($comment_content, $uid['user_id'])) {
+        if (!Validation::stopSpam($comment_content, $this->uid['user_id'])) {
             addMsg(Translate::get('content-audit'), 'error');
             $comment_published = 0;
         }
@@ -69,18 +75,18 @@ class AddCommentController extends MainController
             'comment_content'       => $comment_content,
             'comment_published'     => $comment_published,
             'comment_ip'            => $ip,
-            'comment_user_id'       => $uid['user_id'],
+            'comment_user_id'       => $this->uid['user_id'],
         ];
 
         $last_comment_id    = CommentModel::addComment($data);
         $url_comment        = $redirect . '#comment_' . $last_comment_id;
 
         if ($comment_published == 0) {
-            ActionModel::addAudit('comment', $uid['user_id'], $last_comment_id);
+            ActionModel::addAudit('comment', $this->uid['user_id'], $last_comment_id);
             // Оповещение админу
             $type       = 15; // Упоминания в посте  
             $user_id    = 1;  // админу
-            NotificationsModel::send($uid['user_id'], $user_id, $type, $last_comment_id, $url_comment, 1);
+            NotificationsModel::send($this->uid['user_id'], $user_id, $type, $last_comment_id, $url_comment, 1);
         }
 
         // Пересчитываем количество комментариев для поста + 1
@@ -90,9 +96,9 @@ class AddCommentController extends MainController
         if ($answer_id) {
             // Себе не записываем
             $answ = AnswerModel::getAnswerId($answer_id);
-            if ($uid['user_id'] != $answ['answer_user_id']) {
+            if ($this->uid['user_id'] != $answ['answer_user_id']) {
                 $type = 4; // Ответ на пост        
-                NotificationsModel::send($uid['user_id'], $answ['answer_user_id'], $type, $last_comment_id, $url_comment, 1);
+                NotificationsModel::send($this->uid['user_id'], $answ['answer_user_id'], $type, $last_comment_id, $url_comment, 1);
             }
         }
 
@@ -100,11 +106,11 @@ class AddCommentController extends MainController
         if ($message = Content::parseUser($comment_content, true, true)) {
             foreach ($message as $user_id) {
                 // Запретим отправку себе и автору ответа (оповщение ему выше)
-                if ($user_id == $uid['user_id'] || $user_id == $answ['answer_user_id']) {
+                if ($user_id == $this->uid['user_id'] || $user_id == $answ['answer_user_id']) {
                     continue;
                 }
                 $type = 12; // Упоминания в комментарии      
-                NotificationsModel::send($uid['user_id'], $user_id, $type, $last_comment_id, $url_comment, 1);
+                NotificationsModel::send($this->uid['user_id'], $user_id, $type, $last_comment_id, $url_comment, 1);
                 SendEmail::mailText($user_id, 'appealed');
             }
         }

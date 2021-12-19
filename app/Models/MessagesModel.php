@@ -251,7 +251,8 @@ class MessagesModel extends MainModel
         $sql = "SELECT  
                     dialog_id,
                     dialog_sender_count,
-                    dialog_recipient_count
+                    dialog_recipient_count,
+                    dialog_recipient_unread
                         FROM messages_dialog
                         WHERE dialog_id = :dialog_id";
 
@@ -279,14 +280,13 @@ class MessagesModel extends MainModel
         if ($inbox_dialog['dialog_sender_id'] == $user_id) {
 
             $recipient_unread = 0;
-
             $sql = "UPDATE messages_dialog SET dialog_recipient_unread = :recipient 
                                 WHERE dialog_id = :dialog_id";
 
             return  DB::run($sql, ['recipient' => $recipient_unread, 'dialog_id' => $dialog_id]);
         } else {
-            $sender_unread = 0;
 
+            $sender_unread = 0;
             $sql = "UPDATE messages_dialog SET dialog_sender_unread = :sender 
                                 WHERE dialog_id = :dialog_id";
 

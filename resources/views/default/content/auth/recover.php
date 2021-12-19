@@ -4,7 +4,7 @@
   <form class="form max-w300" action="<?= getUrlByName('recover'); ?>/send" method="post">
     <?php csrf_field(); ?>
 
-    <?= includeTemplate('/_block/form/field-input', ['data' => [
+    <?= import('/_block/form/field-input', ['data' => [
       [
         'title' => Translate::get('E-mail'),
         'type' => 'email',
@@ -13,7 +13,7 @@
       ],
     ]]); ?>
 
-    <?= includeTemplate('/_block/captcha'); ?>
+    <?= import('/_block/captcha'); ?>
 
     <div class="mb20">
       <?= sumbit(Translate::get('reset')); ?>

@@ -17,6 +17,6 @@
       <span class="middle"><?= Translate::get('comments'); ?></span>
     </a>
   </div>
-<?= includeTemplate('/_block/sidebar/footer'); ?>
+<?= import('/_block/sidebar/footer'); ?>
 </div>
  

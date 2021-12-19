@@ -61,7 +61,7 @@ class MessagesController extends MainController
             }
         }
 
-        return view(
+        return render(
             '/messages/messages',
             [
                 'meta'  => meta($m = [], Translate::get('private messages')),
@@ -92,7 +92,7 @@ class MessagesController extends MainController
 
         // обновляем просмотры и т.д.
         MessagesModel::setMessageRead($id, $uid['user_id']);
-
+        // dialog_recipient_unread
         if ($list = MessagesModel::getMessageByDialogId($id)) {
 
             if ($dialog['dialog_sender_id'] != $uid['user_id']) {
@@ -110,11 +110,12 @@ class MessagesController extends MainController
                     $list[$key]['message_content']  =  Content::text($val['message_content'], 'text');
                     $list[$key]['user_login']   = $recipient_user['user_login'];
                     $list[$key]['user_avatar']  = $recipient_user['user_avatar'];
+                    $list[$key]['unread']       = $dialog['dialog_recipient_unread'];
                 }
             }
         }
 
-        return view(
+        return render(
             '/messages/dialog',
             [
                 'meta'  => meta($m = [], Translate::get('dialogue')),
@@ -146,7 +147,7 @@ class MessagesController extends MainController
             redirect('/');
         }
 
-        return view(
+        return render(
             '/messages/user-add-messages',
             [
                 'meta'  => meta($m = [], Translate::get('send a message')),

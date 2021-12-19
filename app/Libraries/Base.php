@@ -1,7 +1,6 @@
 <?php
 
 use Hleb\Constructor\Handlers\Request;
-use App\Models\NotificationsModel;
 
 class Base
 {
@@ -46,8 +45,7 @@ class Base
             $uid['user_trust_level']        = $account['user_trust_level'];
             $uid['user_avatar']             = $account['user_avatar'];
             $uid['user_ban_list']           = $account['user_ban_list'];
-            $uid['notif']                   = NotificationsModel::usersNotification($account['user_id']);
-
+            
             Translate::setLang($uid['user_lang']);
             
             Request::getResources()->addBottomScript('/assets/js/app.js');

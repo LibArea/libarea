@@ -1,5 +1,5 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+  <?= import('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-10 mb-col-12">
 
@@ -25,7 +25,7 @@
         <?= $data['domain']['item_id']; ?> (<?= $data['domain']['item_url_domain']; ?>)
       </div>
 
-      <?= includeTemplate('/_block/form/field-input', [
+      <?= import('/_block/form/field-input', [
         'data' => [
           [
             'title' => Translate::get('URL'),
@@ -48,7 +48,7 @@
         ]
       ]); ?>
 
-      <?= includeTemplate('/_block/form/radio/radio', [
+      <?= import('/_block/form/radio/radio', [
         'data' => [
           [
             'title'   => Translate::get('posted') . '?',
@@ -59,7 +59,7 @@
         ]
       ]); ?>
 
-      <?php includeTemplate('/_block/editor/textarea', [
+      <?php import('/_block/editor/textarea', [
         'title' => Translate::get('description'),
         'type' => 'text',
         'name' => 'item_content_url',
@@ -70,7 +70,7 @@
       ]); ?>
 
 
-      <?= includeTemplate('/_block/form/select/select', [
+      <?= import('/_block/form/select/select', [
         'uid'           => $uid,
         'data'          => $data,
         'action'        => 'edit',
@@ -81,7 +81,7 @@
       ]); ?>
 
       <h3 class="mb5"><?= Translate::get('soft'); ?></h3>
-      <?= includeTemplate('/_block/form/radio/radio', [
+      <?= import('/_block/form/radio/radio', [
         'data' => [
           [
             'title'   => Translate::get('there is a program'),
@@ -96,7 +96,7 @@
         ]
       ]); ?>
 
-      <?= includeTemplate('/_block/form/field-input', [
+      <?= import('/_block/form/field-input', [
         'data' => [
           [
             'title' => Translate::get('url address github'),
@@ -113,7 +113,7 @@
         ]
       ]); ?>
 
-      <?php includeTemplate('/_block/editor/textarea', [
+      <?php import('/_block/editor/textarea', [
         'title' => Translate::get('description'),
         'type' => 'text',
         'name' => 'item_content_soft',
@@ -123,7 +123,7 @@
         'help' => '24 - 1500 ' . Translate::get('characters')
       ]); ?>
 
-      <?= includeTemplate('/_block/form/select/related-posts', [
+      <?= import('/_block/form/select/related-posts', [
         'uid'           => $uid,
         'data'          => $data,
         'action'        => 'edit',

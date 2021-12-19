@@ -9,7 +9,7 @@ class ToolsController extends MainController
 {
     public function index($sheet, $type)
     {
-        return view(
+        return render(
             '/admin/tools/tools',
             [
                 'meta'  => meta($m = [], Translate::get('tools')),

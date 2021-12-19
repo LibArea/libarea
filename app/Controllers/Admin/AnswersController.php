@@ -11,13 +11,13 @@ class AnswersController extends MainController
 {
     private $uid;
 
-    protected $limit = 100;
+    protected $limit = 50;
 
     public function __construct()
     {
         $this->uid  = Base::getUid();
     }
-    
+
     public function index($sheet, $type)
     {
         $page   = Request::getInt('page');
@@ -33,7 +33,7 @@ class AnswersController extends MainController
             $result[$ind]   = $row;
         }
 
-        return view(
+        return render(
             '/admin/answer/answers',
             [
                 'meta'  => meta($m = [], $sheet == 'ban' ? Translate::get('deleted answers') : Translate::get('answers')),

@@ -1,5 +1,5 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+  <?= import('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <?php $facet = $data['facet']; ?>
 <main class="col-span-7 mb-col-12">
@@ -21,7 +21,7 @@
     <?= $facet['facet_info']; ?>
   </div>
 
-  <?= includeTemplate(
+  <?= import(
     '/_block/related-posts',
     [
       'related_posts' => $data['related_posts'],
@@ -44,6 +44,6 @@
     </div>
   </div>
 
-  <?= includeTemplate('/_block/sidebar/topic', ['data' => $data, 'uid' => $uid]); ?>
+  <?= import('/_block/sidebar/topic', ['data' => $data, 'uid' => $uid]); ?>
 </aside>
-<?= includeTemplate('/_block/wide-footer'); ?>
+<?= import('/_block/wide-footer'); ?>

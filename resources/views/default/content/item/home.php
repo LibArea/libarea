@@ -91,4 +91,4 @@
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('web')); ?>
   </div>
 </main>
-<?= includeTemplate('/_block/wide-footer'); ?>
+<?= import('/_block/wide-footer'); ?>

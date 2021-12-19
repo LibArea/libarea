@@ -18,7 +18,7 @@ class RecoverController extends MainController
             'url'        => getUrlByName('recover'),
         ];
 
-        return view(
+        return render(
             '/auth/recover',
             [
                 'meta'  => meta($m, Translate::get('password recovery'), Translate::get('info-recover')),
@@ -83,7 +83,7 @@ class RecoverController extends MainController
         $user = UserModel::getUser($user_id['activate_user_id'], 'id');
         pageError404($user);
 
-        return view(
+        return render(
             '/auth/newrecover',
             [
                 'meta'  => meta($m = [], Translate::get('password recovery'), Translate::get('info-recover')),

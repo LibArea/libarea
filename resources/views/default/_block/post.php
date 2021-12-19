@@ -3,7 +3,7 @@
   foreach ($data['posts'] as $post) { 
   $n++; ?>
   <?php if ($uid['user_id'] == 0 && $n == 6) { ?>
-     <?= includeTemplate('/_block/no-login-screensaver'); ?>
+     <?= import('/_block/no-login-screensaver'); ?>
   <?php } ?>
     <?php $post_url = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
     <div class="br-box-gray bg-white p20 mb15 br-rd5 article_<?= $post['post_id']; ?>">
@@ -110,7 +110,7 @@
     </div>
   <?php } ?>
 <?php } else { ?>
-  <?= includeTemplate('/_block/recommended-topics', ['data' => $data]); ?>
+  <?= import('/_block/recommended-topics', ['data' => $data, 'uid' => $uid]); ?>
   <div class="mt10 mb10 pt10 pr15 pb10 center pl15 bg-yellow-100 gray">
     <?= Translate::get('there are no posts'); ?>...
   </div>

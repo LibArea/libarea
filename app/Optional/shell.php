@@ -65,11 +65,6 @@ function getContentFromTemplate(string $template, array $params = [])
 
 // use App\Optional\Data; 
 
-function render($name, $data = null)
-{
-    return hleb_v10s20hdp8nm7c_render($name, $data);
-}
-
 function data()
 {
     return hleb_to0me1cd6vo7gd_data();
@@ -115,31 +110,43 @@ function getRequest()
     return hleb_e70c10c1057hn11cc8il2_get_request();
 }
 
+function theme($user_theme, $file)
+{
+    $tpl_puth = $user_theme . $file;
+    if (!file_exists(TEMPLATES . DIRECTORY_SEPARATOR . $user_theme . $file . '.php')) {
+       $tpl_puth = Config::get('general.template') .  $file;
+    }
+    
+    return $tpl_puth;
+}
+
+function render($name, $data = null)
+{
+    return hleb_v10s20hdp8nm7c_render(
+        [
+            theme($data['uid']['user_template'], '/header'),
+            theme($data['uid']['user_template'], '/content' . $name),
+            theme($data['uid']['user_template'], '/footer')
+        ],
+        $data
+    );
+}
+
 function includeCachedTemplate(string $template, array $params = [])
 {
-    $tpl_puth = $params['uid']['user_template'] ?? Config::get('general.template');
-     
-    hleb_e0b1036c1070102_template($tpl_puth . $template, $params);
+    hleb_e0b1036c1070102_template(theme($params['uid']['user_template'], $template), $params);
 }
 
 function includeTemplate(string $template, array $params = [])
 {
-    $tpl_puth = $params['uid']['user_template'] ?? Config::get('general.template');
-    if (!file_exists(HLEB_GLOBAL_DIRECTORY . '/resources/views/' . $tpl_puth . $template . '.php')) {
-        $tpl_puth = Config::get('general.template');
-    }
-
-    return hleb_e0b1036c1070101_template($tpl_puth . $template, $params);
+    return hleb_e0b1036c1070101_template(theme($params['uid']['user_template'], $template), $params);
 }
 
-function view(string $template, array $params = [])
-{  
-    $facet =  $params['facet'] ?? [];
-    
-    includeTemplate('/header', ['uid' => $params['uid'], 'meta' => $params['meta'], 'facet' => $facet]);
-    includeTemplate('/content' . $template, ['uid' => $params['uid'], 'data' => $params['data']]);
-    includeTemplate('/footer', ['uid' => $params['uid']]);
+function view($to, $data = null)
+{
+   return hleb_v5ds34hop4nm1d_page_view(theme($data['uid']['user_template'], $to), $data);  
 }
+
 
 hleb_require(HLEB_GLOBAL_DIRECTORY . '/app/Helpers/Template.php');
 hleb_require(HLEB_GLOBAL_DIRECTORY . '/app/Helpers/Meta.php');

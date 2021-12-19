@@ -1,5 +1,5 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/_block/menu/left', ['sheet' => $data['type'], 'uid' => $uid]); ?>
+  <?= import('/_block/menu/left', ['sheet' => $data['type'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-10 mb-col-12">
   <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
@@ -60,9 +60,9 @@
 
     <?php if (!empty($data['facets'])) { ?>
       <?php if ($data['type'] == 'blogs') { ?>
-        <?= includeTemplate('/_block/facet/blog-list-all', ['facets' => $data['facets'], 'uid' => $uid]); ?>
+        <?= import('/_block/facet/blog-list-all', ['facets' => $data['facets'], 'uid' => $uid]); ?>
       <?php } else { ?>
-        <?= includeTemplate('/_block/facet/topic-list-all', ['facets' => $data['facets'], 'uid' => $uid]); ?>
+        <?= import('/_block/facet/topic-list-all', ['facets' => $data['facets'], 'uid' => $uid]); ?>
       <?php } ?>
     <?php } else { ?>
       <?= no_content(Translate::get($data['type'] . '-no'), 'bi bi-info-lg'); ?>
@@ -72,4 +72,4 @@
   </div>
 
 </main>
-<?= includeTemplate('/_block/wide-footer'); ?>
+<?= import('/_block/wide-footer'); ?>

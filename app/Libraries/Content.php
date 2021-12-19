@@ -74,7 +74,6 @@ class Content
 
             foreach ($match_name as $key => $login) {
 
-                // Добавим по id, нужна будет для notif
                 if (preg_match('/^[0-9]+$/', $login)) {
                     $user_info = ContentModel::getUsers($login, 'id');
                 } else {

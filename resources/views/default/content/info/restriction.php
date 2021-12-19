@@ -11,4 +11,4 @@
   <h1 class="mt0 mb10 size-24 font-normal"><?= Translate::get('access restricted'); ?></h1>
   <div class="italic"><?= Translate::get('the profile is being checked'); ?>...</div>
 </main>
-<?= includeTemplate('/_block/wide-footer'); ?>
+<?= import('/_block/wide-footer'); ?>

@@ -1,5 +1,5 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+  <?= import('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <?php $topic = $data['facet']; ?>
 <main class="col-span-7 mb-col-12">
@@ -20,14 +20,14 @@
         <div class="size-14 gray-light-2"><?= $topic['facet_short_description']; ?></div>
 
         <div class="mt15 right">
-          <?= includeTemplate('/_block/facet/signed', [
+          <?= import('/_block/facet/signed', [
             'user_id'        => $uid['user_id'],
             'topic'          => $topic,
             'topic_signed'   => is_array($data['facet_signed']),
           ]); ?>
         </div>
 
-        <?= includeTemplate('/_block/facet/focus-users', [
+        <?= import('/_block/facet/focus-users', [
           'topic_focus_count' => $topic['facet_focus_count'],
           'focus_users'       => $data['focus_users'] ?? '',
         ]); ?>
@@ -68,7 +68,7 @@
       </ul>
     </div>
 
-    <?= includeTemplate('/_block/post', ['data' => $data, 'uid' => $uid]); ?>
+    <?= import('/_block/post', ['data' => $data, 'uid' => $uid]); ?>
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('topic', ['slug' => $topic['facet_slug']])); ?>
 
 
@@ -93,7 +93,7 @@
         </div>
       </div>
     </div>
-    <?= includeTemplate('/_block/sidebar/topic', ['data' => $data, 'uid' => $uid]); ?>
+    <?= import('/_block/sidebar/topic', ['data' => $data, 'uid' => $uid]); ?>
     <?php if (!empty($data['writers'])) { ?>
       <div class="sticky top0 top70">
         <div class="br-box-gray mt15 p15 mb15 br-rd5 bg-white size-14">
@@ -110,7 +110,7 @@
   <?php } ?>
 </aside>
 
-<?= includeTemplate('/_block/wide-footer'); ?>
+<?= import('/_block/wide-footer'); ?>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
   document.querySelectorAll(".focus-user")

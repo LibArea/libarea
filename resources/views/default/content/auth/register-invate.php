@@ -4,7 +4,7 @@
     <form class="max-w300" action="<?= getUrlByName('register'); ?>/add" method="post">
       <?php csrf_field(); ?>
 
-      <?= includeTemplate('/_block/form/field-input', ['data' => [
+      <?= import('/_block/form/field-input', ['data' => [
         [
           'title' => Translate::get('nickname'),
           'type' => 'text',

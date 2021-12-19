@@ -1,4 +1,4 @@
-<?= includeTemplate(
+<?= import(
   '/content/admin/menu',
   [
     'type'     => $data['type'],

@@ -81,7 +81,7 @@
                 <?php } ?>
               </a>
             <?php } ?>
-            <?= includeTemplate('/_block/show-ip', ['ip' => $post['post_ip'], 'user_trust_level' => $uid['user_trust_level']]); ?>
+            <?= import('/_block/show-ip', ['ip' => $post['post_ip'], 'user_trust_level' => $uid['user_trust_level']]); ?>
           <?php } ?>
         </div>
       </div>
@@ -113,7 +113,7 @@
             </div>
           </div>
         <?php } ?>
-        <?= includeTemplate('/_block/related-posts', ['related_posts' => $data['related_posts'], 'number' => 'yes']); ?>
+        <?= import('/_block/related-posts', ['related_posts' => $data['related_posts'], 'number' => 'yes']); ?>
 
         <div class="flex flex-row items-center mb20">
           <?php if (!empty($data['blog'])) { ?>
@@ -221,7 +221,7 @@
           <form class="mb15" action="<?= getUrlByName('answer.create'); ?>" accept-charset="UTF-8" method="post">
             <?= csrf_field() ?>
 
-            <?= includeTemplate('/_block/editor/editor', [
+            <?= import('/_block/editor/editor', [
               'height'    => '250px',
               'preview'   => 'vertical',
               'lang'      => $uid['user_lang'],
@@ -246,10 +246,10 @@
   <div id="comment"></div>
   <?php if ($post['post_draft'] == 0) {
     if ($post['post_type'] == 0) {
-      includeTemplate('/_block/comments-view', ['data' => $data, 'post' => $post, 'uid' => $uid]);
+      import('/_block/comments-view', ['data' => $data, 'post' => $post, 'uid' => $uid]);
       if ($post['post_closed'] == 1) echo no_content(Translate::get('the post is closed'), 'bi bi-door-closed');
     } else {
-      includeTemplate('/_block/questions-view', ['data' => $data, 'post' => $post, 'uid' => $uid]);
+      import('/_block/questions-view', ['data' => $data, 'post' => $post, 'uid' => $uid]);
       if ($post['post_closed'] == 1) echo no_content(Translate::get('the question is closed'), 'bi bi-door-closed');
     }
   } else {
@@ -360,4 +360,4 @@
   <?php } ?>
 </script>
 </div>
-<?= includeTemplate('/_block/wide-footer'); ?>
+<?= import('/_block/wide-footer'); ?>

@@ -9,19 +9,24 @@ use Base, Translate;
 
 class NotificationsController extends MainController
 {
+    private $uid;
+
+    public function __construct()
+    {
+        $this->uid = Base::getUid();
+    }
+
     // Страница уведомлений участника
     public function index()
     {
-        $login  = Request::get('login');
-        $uid    = Base::getUid();
-
         // Если страница закладок не участника
-        if ($login != $uid['user_login']) {
-            redirect(getUrlByName('notifications', ['login' => $uid['user_login']]));
+        $login  = Request::get('login');
+        if ($login != $this->uid['user_login']) {
+            redirect(getUrlByName('notifications', ['login' => $this->uid['user_login']]));
         }
 
         // Данные участника и список уведомлений
-        $list = NotificationsModel::listNotification($uid['user_id']);
+        $list = NotificationsModel::listNotification($this->uid['user_id']);
 
         $result = [];
         foreach ($list as $ind => $row) {
@@ -29,11 +34,11 @@ class NotificationsController extends MainController
             $result[$ind]           = $row;
         }
 
-        return view(
+        return render(
             '/notification/index',
             [
                 'meta'  => meta($m = [], Translate::get('notifications')),
-                'uid'   => $uid,
+                'uid'   => $this->uid,
                 'data'  => [
                     'sheet'         => 'notifications',
                     'notifications' => $result,
@@ -45,11 +50,10 @@ class NotificationsController extends MainController
     // Изменяем флаг подписки прочитан или нет (переход по ссылке)
     public function read()
     {
-        $uid        = Base::getUid();
         $notif_id   = Request::getInt('id');
         $info       = NotificationsModel::getNotification($notif_id);
 
-        if ($uid['user_id'] != $info['notification_recipient_id']) {
+        if ($this->uid['user_id'] != $info['notification_recipient_id']) {
             return false;
         }
 
@@ -58,16 +62,20 @@ class NotificationsController extends MainController
             $info['notification_url'] = 'messages/read/' . $info['notification_connection_type'];
         }
 
-        NotificationsModel::updateMessagesUnread($uid['user_id'], $notif_id);
+        NotificationsModel::updateMessagesUnread($this->uid['user_id'], $notif_id);
 
         redirect('/' .  $info['notification_url']);
     }
 
-    // Удаляем уведомления
     public function remove()
     {
-        $uid    = Base::getUid();
-        NotificationsModel::setRemove($uid['user_id']);
-        redirect(getUrlByName('notifications', ['login' => $uid['user_login']]));
+        NotificationsModel::setRemove($this->uid['user_id']);
+
+        redirect(getUrlByName('notifications', ['login' => $this->uid['user_login']]));
+    }
+
+    public static function setBell($user_id)
+    {
+        return NotificationsModel::bell($user_id);
     }
 }

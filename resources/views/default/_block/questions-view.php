@@ -19,7 +19,7 @@
                     <?php if (empty($answer['edit'])) { ?>
                       (<?= Translate::get('ed'); ?>.)
                     <?php } ?>
-                    <?= includeTemplate('/_block/show-ip', ['ip' => $answer['answer_ip'], 'user_trust_level' => $uid['user_trust_level']]); ?>
+                    <?= import('/_block/show-ip', ['ip' => $answer['answer_ip'], 'user_trust_level' => $uid['user_trust_level']]); ?>
                   </div>
                   <a class="qa-login size-15" href="<?= getUrlByName('user', ['login' => $answer['user_login']]); ?>"><?= $answer['user_login']; ?></a>
                 </div>
@@ -81,7 +81,7 @@
                   <span class="lowercase gray">
                     &nbsp; <?= lang_date($comment['comment_date']); ?>
                   </span>
-                  <?= includeTemplate('/_block/show-ip', ['ip' => $comment['comment_ip'], 'user_trust_level' => $uid['user_trust_level']]); ?>
+                  <?= import('/_block/show-ip', ['ip' => $comment['comment_ip'], 'user_trust_level' => $uid['user_trust_level']]); ?>
                 </span>
 
                 <?php if ($uid['user_trust_level'] >= Config::get('trust-levels.tl_add_comm_qa')) { ?>
@@ -133,7 +133,7 @@
 
       <form class="mb15" action="<?= getUrlByName('answer.create'); ?>" accept-charset="UTF-8" method="post">
         <?= csrf_field() ?>
-        <?= includeTemplate('/_block/editor/editor', [
+        <?= import('/_block/editor/editor', [
           'height'    => '250px',
           'preview'   => 'tab',
           'lang'      => $uid['user_lang'],

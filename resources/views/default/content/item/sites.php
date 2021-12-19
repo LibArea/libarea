@@ -74,6 +74,7 @@
       <?= tabs_nav(
         $uid['user_id'],
         $data['sheet'],
+        false,
         $pages = [
           [
             'id' => 'all',
@@ -146,4 +147,4 @@
   <?= $data['topic']['facet_description']; ?>
 </div>
 
-<?= includeTemplate('/_block/wide-footer'); ?>
+<?= import('/_block/wide-footer'); ?>

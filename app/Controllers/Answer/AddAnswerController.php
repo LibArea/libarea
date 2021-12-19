@@ -11,7 +11,7 @@ use Content, Base, Validation, SendEmail, Translate;
 class AddAnswerController extends MainController
 {
     public function create()
-    { 
+    {
         $post_id = Request::getPostInt('post_id');
         $post    = PostModel::getPostId($post_id);
         pageError404($post);

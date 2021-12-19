@@ -18,13 +18,13 @@
 <?php } ?>
 
 <?php if (!empty($data['high_topics'])) { ?>
-  <?= includeTemplate('/_block/sidebar/topic_block', ['data' => $data['high_topics'], 'lang' => 'upper']); ?>
+  <?= import('/_block/sidebar/topic_block', ['data' => $data['high_topics'], 'lang' => 'upper']); ?>
 <?php } ?>
 
 <?php if (!empty($data['low_topics'])) { ?>
-  <?= includeTemplate('/_block/sidebar/topic_block', ['data' => $data['low_topics'], 'lang' => 'subtopics']); ?>
+  <?= import('/_block/sidebar/topic_block', ['data' => $data['low_topics'], 'lang' => 'subtopics']); ?>
 <?php } ?>
 
 <?php if (!empty($data['low_matching'])) { ?>
-  <?= includeTemplate('/_block/sidebar/topic_block', ['data' => $data['low_matching'], 'lang' => 'related']); ?>
+  <?= import('/_block/sidebar/topic_block', ['data' => $data['low_matching'], 'lang' => 'related']); ?>
 <?php } ?>

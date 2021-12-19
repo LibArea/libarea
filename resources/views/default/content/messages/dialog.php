@@ -1,5 +1,5 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+  <?= import('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-7 mb-col-12">
   <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
@@ -45,7 +45,7 @@
           <div class="max-w780 ">
             <?= $val['message_content']; ?>
           </div>
-          <?php if ($val['message_receipt'] and $val['message_sender_id'] == $uid['user_id']) { ?>
+          <?php if ($val['unread'] == 1 and $val['message_sender_id'] == $uid['user_id']) { ?>
             <div class="right gray-light-2 lowercase size-13 hidden mb5 pb5">
               <?= Translate::get('it was read'); ?> (<?= lang_date($val['message_receipt']); ?>)
             </div>

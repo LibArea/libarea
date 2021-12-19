@@ -1,5 +1,5 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+  <?= import('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-7 mb-col-12">
   <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
@@ -45,4 +45,4 @@
   <?= no_content(Translate::get('no dialogs'), 'bi bi-info-lg'); ?>
 <?php } ?>
 </main>
-<?= includeTemplate('/_block/sidebar/lang', ['lang' => Translate::get('personal-messages-site')]); ?>
+<?= import('/_block/sidebar/lang', ['lang' => Translate::get('personal-messages-site')]); ?>

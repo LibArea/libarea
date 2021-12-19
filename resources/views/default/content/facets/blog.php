@@ -1,5 +1,5 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+  <?= import('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <?php $blog = $data['facet'];
 if ($blog['facet_is_deleted'] == 0) { ?>
@@ -21,14 +21,14 @@ if ($blog['facet_is_deleted'] == 0) { ?>
         <div class="size-14"><?= $blog['facet_short_description']; ?></div>
 
         <div class="mt15 right">
-          <?= includeTemplate('/_block/facet/signed', [
+          <?= import('/_block/facet/signed', [
             'user_id'        => $uid['user_id'],
             'topic'          => $blog,
             'topic_signed'   => is_array($data['facet_signed']),
           ]); ?>
         </div>
 
-        <?= includeTemplate('/_block/facet/focus-users', [
+        <?= import('/_block/facet/focus-users', [
           'topic_focus_count' => $blog['facet_focus_count'],
           'focus_users'       => $data['focus_users'] ?? '',
         ]); ?>
@@ -37,7 +37,7 @@ if ($blog['facet_is_deleted'] == 0) { ?>
 
     <div class="grid grid-cols-12 gap-4">
       <main class="col-span-9 mb-col-12">
-        <?= includeTemplate('/_block/post', ['data' => $data, 'uid' => $uid]); ?>
+        <?= import('/_block/post', ['data' => $data, 'uid' => $uid]); ?>
         <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('blog', ['slug' => $blog['facet_slug']])); ?>
       </main>
       <aside class="col-span-3 relative no-mob">
@@ -69,7 +69,7 @@ if ($blog['facet_is_deleted'] == 0) { ?>
   </div>
 <?php } ?>
 
-<?= includeTemplate('/_block/wide-footer'); ?>
+<?= import('/_block/wide-footer'); ?>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
   document.querySelectorAll(".focus-user")

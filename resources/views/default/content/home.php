@@ -8,7 +8,7 @@
 <?php } ?>
 
 <div class="sticky top0 col-span-2 justify-between no-mob">
-  <?= includeTemplate('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+  <?= import('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 
 <main class="col-span-7 mb-col-12">
@@ -45,7 +45,7 @@
     </ul>
   </div>
 
-  <?= includeTemplate('/_block/post', ['data' => $data, 'uid' => $uid]); ?>
+  <?= import('/_block/post', ['data' => $data, 'uid' => $uid]); ?>
 
   <div class="mb15">
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], null); ?>
@@ -54,7 +54,7 @@
 
 <aside class="col-span-3 mb-col-12 relative no-mob">
   <?php if ($uid['user_id'] == 0) { ?>
-    <?= includeTemplate('/_block/login'); ?>
+    <?= import('/_block/login'); ?>
   <?php } ?>
 
   <?php if ($uid['user_id'] > 0 && !empty($data['topics_user'])) { ?>
@@ -134,6 +134,6 @@
       </div>
     <?php } ?>
 
-    <?= includeTemplate('/_block/sidebar/footer'); ?>
+    <?= import('/_block/sidebar/footer'); ?>
   </div>
 </aside>

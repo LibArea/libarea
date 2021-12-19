@@ -38,7 +38,7 @@ class SearchController extends MainController
                 $result[$ind]   = $row;
             }
         }
-        return view(
+        return render(
             '/search/index',
             [
                 'meta'  => meta($m = [], Translate::get('search')),

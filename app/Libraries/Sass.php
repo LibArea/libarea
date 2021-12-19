@@ -10,7 +10,7 @@ class Sass
 
         $compiler->setOutputStyle(ScssPhp\ScssPhp\OutputStyle::COMPRESSED);
         
-        $putch = HLEB_GLOBAL_DIRECTORY . '/resources/views/' . Config::get('general.template') . '/scss/';
+        $putch = TEMPLATES . DIRECTORY_SEPARATOR . Config::get('general.template') . '/scss/';
         
         $compiler->setImportPaths($putch);
 

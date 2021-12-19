@@ -11,14 +11,14 @@ use Content, Base, Translate;
 class AnswerController extends MainController
 {
     private $uid;
-    
+
     protected $limit = 25;
 
     public function __construct()
     {
         $this->uid  = Base::getUid();
     }
-    
+
     // Все ответы
     public function index()
     {
@@ -42,7 +42,7 @@ class AnswerController extends MainController
             'url'        => getUrlByName('answers'),
         ];
 
-        return view(
+        return render(
             '/answer/answers',
             [
                 'meta'  => meta($m, Translate::get('all answers'), Translate::get('answers-desc')),
@@ -84,7 +84,7 @@ class AnswerController extends MainController
             'url'        => getUrlByName('answers.user', ['login' => $user['user_login']]),
         ];
 
-        return view(
+        return render(
             '/answer/answer-user',
             [
                 'meta'  => meta($m, Translate::get('answers') . ' ' . $user['user_login'], Translate::get('responses-members') . ' ' . $user['user_login']),

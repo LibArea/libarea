@@ -43,7 +43,7 @@ class WebController extends MainController
             'url'        => getUrlByName('web'),
         ];
 
-        return view(
+        return render(
             '/item/home',
             [
                 'meta'  => meta($m, Translate::get('domains-title'), Translate::get('domains-desc')),
@@ -89,7 +89,7 @@ class WebController extends MainController
             'url'        => getUrlByName('domain', ['domain' => $domain]),
         ];
 
-        return view(
+        return render(
             '/item/link',
             [
                 'meta'  => meta($m, Translate::get('domain') . ': ' . $domain, Translate::get('domain-desc') . ': ' . $domain),
@@ -130,7 +130,7 @@ class WebController extends MainController
         ];
         $desc  = Translate::get('sites') . ' ' . Translate::get('by') . ' ' . $topic['facet_title'] . '. ' . $topic['facet_description'];
 
-        return view(
+        return render(
             '/item/sites',
             [
                 'meta'  => meta($m, Translate::get('sites') . ': ' . $topic['facet_title'], $desc),
@@ -185,7 +185,7 @@ class WebController extends MainController
             $related_posts = PostModel::postRelated($item['item_post_related']);
         }
 
-        return view(
+        return render(
             '/item/website',
             [
                 'meta'  => meta($m, Translate::get('website') . ': ' . $item['item_title_url'], $desc),

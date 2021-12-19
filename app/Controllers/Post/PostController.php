@@ -19,7 +19,7 @@ class PostController extends MainController
     {
         $this->uid  = Base::getUid();
     }
-    
+
     // Полный пост
     public function index()
     {
@@ -139,7 +139,7 @@ class PostController extends MainController
 
         $meta = meta($m, strip_tags($post['post_title']) . ' — ' . $topic, $desc . ' — ' . $topic, $date_article = $post['post_date']);
 
-        return view(
+        return render(
             '/post/view',
             [
                 'meta'  => $meta,
@@ -164,7 +164,7 @@ class PostController extends MainController
     {
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
-        
+
         $login  = Request::get('login');
         $user   = UserModel::getUser($login, 'slug');
         pageError404($user);
@@ -188,7 +188,7 @@ class PostController extends MainController
             'url'        => getUrlByName('posts.user', ['login' => $login]),
         ];
 
-        return view(
+        return render(
             '/post/post-user',
             [
                 'meta'  => meta($m, Translate::get('posts') . ' ' . $login, Translate::get('participant posts') . ' ' . $login),
@@ -250,6 +250,6 @@ class PostController extends MainController
 
         $post['post_content'] = Content::text($post['post_content'], 'text');
 
-        includeTemplate('/content/post/postcode', ['post' => $post]);
+        includeTemplate('/content/post/postcode', ['post' => $post, 'uid'   => $this->uid]);
     }
 }

@@ -9,17 +9,8 @@ use PDO;
 class UserModel extends MainModel
 {
     // Страница участников
-    public static function getUsersAll($page, $limit, $user_id, $sheet)
+    public static function getUsersAll($page, $limit, $user_id)
     {
-        if ($sheet == 'users.all') {
-            $string = "ORDER BY user_id DESC LIMIT";
-        } elseif ($sheet == 'users.ban') {
-            $string = "WHERE user_ban_list > 0 ORDER BY user_id DESC LIMIT";
-        } else {
-            $string = "WHERE user_is_deleted != 1 and user_ban_list != 1
-                        ORDER BY user_id = $user_id DESC, user_trust_level DESC LIMIT";
-        }
-
         $start  = ($page - 1) * $limit;
         $sql = "SELECT  
                     user_id,
@@ -39,24 +30,20 @@ class UserModel extends MainModel
                     user_ban_list,
                     user_is_deleted
                         FROM users 
-                        $string
-                        $start, $limit";
+                        WHERE user_is_deleted != 1 and user_ban_list != 1
+                            ORDER BY user_id = :user_id DESC, user_trust_level DESC
+                            LIMIT $start, $limit";
 
-        return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
+        return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // Количество
-    public static function getUsersAllCount($sheet)
+    public static function getUsersAllCount()
     {
-        $string = "";
-        if ($sheet == 'users.ban') {
-            $string = "WHERE user_ban_list > 0";
-        }
-
         $sql = "SELECT 
                     user_id,
                     user_is_deleted
-                        FROM users $string";
+                        FROM users WHERE user_ban_list > 0";
 
         return  DB::run($sql)->rowCount();
     }

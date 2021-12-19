@@ -1,5 +1,5 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+  <?= import('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 
 <?php $fs = $data['facet']; ?>
@@ -48,12 +48,12 @@
         <?= sumbit(Translate::get('download')); ?>
       </div>
 
-      <?= includeTemplate('/_block/form/radio/blog-or-topic', [
+      <?= import('/_block/form/radio/blog-or-topic', [
         'uid'     => $uid,
         'data'    => $fs,
       ]); ?>
 
-      <?= includeTemplate('/_block/form/field-input', [
+      <?= import('/_block/form/field-input', [
         'data' => [
           [
             'title' => Translate::get('title'),
@@ -88,7 +88,7 @@
 
       <?php if ($fs['facet_type'] == 'topic' && $uid['user_trust_level'] == 5) { ?>
 
-        <?= includeTemplate('/_block/form/radio/radio', [
+        <?= import('/_block/form/radio/radio', [
           'data' => [
             [
               'title' => Translate::get('web-cat'),
@@ -111,7 +111,7 @@
           ]
         ]); ?>
 
-        <?= includeTemplate('/_block/form/select/low-facets', [
+        <?= import('/_block/form/select/low-facets', [
           'uid'           => $uid,
           'data'          => $data,
           'action'        => 'edit',
@@ -151,7 +151,7 @@
       <textarea class="add max-w780" rows="6" minlength="44" name="facet_description"><?= $fs['facet_description']; ?></textarea>
       <div class="size-14 gray-light-2 mb20">> 44 <?= Translate::get('characters'); ?></div>
 
-      <?= includeTemplate('/_block/form/field-input', [
+      <?= import('/_block/form/field-input', [
         'data' => [
           [
             'title' => Translate::get('short description'),
@@ -171,7 +171,7 @@
       <div class="mb20 size-14 gray-light-2">Markdown, > 14 <?= Translate::get('characters'); ?></div>
 
       <?php if ($fs['facet_type'] == 'topic') { ?>
-        <?= includeTemplate('/_block/form/select/related-posts', [
+        <?= import('/_block/form/select/related-posts', [
           'uid'           => $uid,
           'data'          => $data,
           'action'        => 'edit',
@@ -180,7 +180,7 @@
           'help'          => Translate::get('necessarily'),
         ]); ?>
 
-        <?= includeTemplate('/_block/form/select/low-matching-facets', [
+        <?= import('/_block/form/select/low-matching-facets', [
           'uid'           => $uid,
           'data'          => $data,
           'action'        => 'edit',
@@ -204,8 +204,8 @@
       <?php } ?>
 
       <?php if ($uid['user_trust_level'] == 5) { ?>
-        <?= includeTemplate('/_block/form/select/content-tl', ['uid' => $uid, 'data' => $fs['facet_tl']]); ?>
-        <?= includeTemplate('/_block/form/select/user', [
+        <?= import('/_block/form/select/content-tl', ['uid' => $uid, 'data' => $fs['facet_tl']]); ?>
+        <?= import('/_block/form/select/user', [
           'uid'     => $uid,
           'user'    => $data['user'],
           'action'  => 'user',

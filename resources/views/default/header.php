@@ -60,16 +60,17 @@
       <?php } else { ?>
         <div class="col-span-4">
           <div class="flex right ml30 items-center">
-
-            <?= add_post($facet, $uid['user_id']); ?>
-
+        
+            <?= add_post($facet ?? null, $uid['user_id']); ?>
+      
             <div id="toggledark" class="only-icon p10 ml20 mb-ml-10">
               <i class="bi bi-brightness-high gray-light-2 size-18"></i>
             </div>
 
             <a class="gray-light-2 p10 ml20 mb-ml-10" href="<?= getUrlByName('user.notifications', ['login' => $uid['user_login']]); ?>">
-              <?php if ($uid['notif']) { ?>
-                <?php if ($uid['notif']['notification_action_type'] == 1) { ?>
+              <?php $notif = \App\Controllers\NotificationsController::setBell($uid['user_id']); ?> 
+              <?php if (!empty($notif)) { ?>
+                <?php if ($notif['notification_action_type'] == 1) { ?>
                   <i class="bi bi-envelope size-18 red"></i>
                 <?php } else { ?>
                   <i class="bi bi-bell-fill size-18 red"></i>

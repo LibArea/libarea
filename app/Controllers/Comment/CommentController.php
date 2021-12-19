@@ -42,7 +42,7 @@ class CommentController extends MainController
             'url'        => getUrlByName('comments'),
         ];
 
-        return view(
+        return render(
             '/comment/comments',
             [
                 'meta'  => meta($m, Translate::get('all comments'), Translate::get('comments-desc')),
@@ -62,7 +62,7 @@ class CommentController extends MainController
     {
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
-        
+
         $login  = Request::get('login');
         $user   = UserModel::getUser($login, 'slug');
         pageError404($user);
@@ -84,7 +84,7 @@ class CommentController extends MainController
             'url'        => getUrlByName('comments.user', ['login' => $user['user_login']]),
         ];
 
-        return view(
+        return render(
             '/comment/comment-user',
             [
                 'meta'  => meta($m, Translate::get('comments') . ' ' . $user['user_login'], Translate::get('comments') . ' ' . $user['user_login']),

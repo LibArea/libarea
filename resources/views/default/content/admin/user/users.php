@@ -1,4 +1,4 @@
-<?= includeTemplate(
+<?= import(
   '/content/admin/menu',
   [
     'type'    => $data['type'],
@@ -37,7 +37,7 @@
             <sup class="gray">TL:<?= $user['user_trust_level']; ?></sup>
             <?php if ($user['user_invitation_id'] != 0) { ?><sup>+ inv. id<?= $user['user_invitation_id']; ?></sup><?php } ?>
             <?php if ($user['user_whisper']) { ?>
-              <span data-id="<?= $user['user_whisper']; ?>" class="tips size-13 gray-light">
+              <span title="<?= $user['user_whisper']; ?>" class="tips size-13 gray-light">
                 <i class="bi bi-info-square green"></i>
               </span>
             <?php } ?>
@@ -51,9 +51,9 @@
             </div>
             <?php if ($user['user_limiting_mode'] == 1) { ?>
               <div class="red"><?= Translate::get('dumb mode'); ?></div>
-            <?php } ?>
-            <?php if (!empty($user['isBan']['banlist_int_num'])) { ?>
-              bans: <?= $user['isBan']['banlist_int_num']; ?>
+            <?php } ?> 
+            <?php if (!empty($user['banlist_int_num'])) { ?>
+              <div class="red">bans: <?= $user['banlist_int_num']; ?></div>
             <?php } ?>
           </td>
           <td class="size-13 align-right">
@@ -79,7 +79,7 @@
           </td>
           <td class="center">
             <?php if ($user['user_trust_level'] != 5) { ?>
-              <?php if ($user['isBan']) { ?>
+              <?php if ($user['user_ban_list']) { ?>
                 <span class="type-ban" data-id="<?= $user['user_id']; ?>" data-type="user">
                   <span class="red"><?= Translate::get('unban'); ?></span>
                 </span>

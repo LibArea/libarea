@@ -1,11 +1,11 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= includeTemplate('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+  <?= import('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
 </div>
 <main class="col-span-7 mb-col-12">
 
   <div class="bg-white flex flex-row center items-center justify-between br-box-gray br-rd5 p15 mb15">
     <p class="m0 no-mob"><?= Translate::get($data['sheet']); ?></p>
-    <?= includeTemplate('/_block/setting-nav', ['data' => $data, 'uid' => $uid]); ?>
+    <?= import('/_block/setting-nav', ['data' => $data, 'uid' => $uid]); ?>
   </div>
 
   <div class="bg-white br-box-gray pt15 pr15 pb5 pl15">
@@ -26,32 +26,35 @@
         <span class="mr5 ml5"><?= $data['user']['user_email']; ?></span>
       </div>
 
-      <?= includeTemplate(
+      <?= import(
         '/_block/form/field-input',
         [
+          'uid'  => $uid,
           'data' => [
             [
-              'title' => Translate::get('name'),
-              'type' => 'text',
-              'name' => 'name',
-              'value' => $data['user']['user_name'],
-              'min' => 3,
-              'max' => 11,
-              'help' => '3 - 11 ' . Translate::get('characters'),
-              'red' => 'red'
+              'title'   => Translate::get('name'),
+              'type'    => 'text',
+              'name'    => 'name',
+              'value'   => $data['user']['user_name'],
+              'min'     => 3,
+              'max'     => 11,
+              'help'    => '3 - 11 ' . Translate::get('characters'),
+              'red'     => 'red',
+              
             ],
           ]
         ]
       ); ?>
 
-      <?php includeTemplate('/_block/editor/textarea', [
-        'title' => Translate::get('about me'),
-        'type' => 'text',
-        'name' => 'about',
-        'content' => $data['user']['user_about'],
-        'min' => 0,
-        'max' => 255,
-        'help' => '0 - 255 ' . Translate::get('characters')
+      <?php import('/_block/editor/textarea', [
+        'title'     => Translate::get('about me'),
+        'type'      => 'text',
+        'name'      => 'about',
+        'content'   => $data['user']['user_about'],
+        'min'       => 0,
+        'max'       => 255,
+        'help'      => '0 - 255 ' . Translate::get('characters'),
+        'uid'       => $uid
       ]); ?>
 
       <div id="box" class="mb20">
@@ -102,4 +105,4 @@
     </form>
   </div>
 </main>
-<?= includeTemplate('/_block/sidebar/lang', ['lang' => Translate::get('info-setting')]); ?>
+<?= import('/_block/sidebar/lang', ['lang' => Translate::get('info-setting'), 'uid' => $uid]); ?>

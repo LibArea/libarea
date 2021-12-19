@@ -29,7 +29,7 @@ class ReportsController extends MainController
 
         Request::getResources()->addBottomScript('/assets/js/admin.js');
 
-        return view(
+        return render(
             '/admin/report/reports',
             [
                 'meta'  => meta($m = [], Translate::get('reports')),

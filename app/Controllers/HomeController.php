@@ -4,23 +4,29 @@ namespace App\Controllers;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\{HomeModel, FacetModel};
+use App\Models\HomeModel;
 use Content, Base, Config, Translate;
 
 class HomeController extends MainController
 {
-    // Главная страница
+    private $uid;
+
+    protected $limit = 25;
+
+    public function __construct()
+    {
+        $this->uid  = Base::getUid();
+    }
+
     public function index($sheet)
     {
-        $uid    = Base::getUid();
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
-        $limit  = 25;
-        $latest_answers = HomeModel::latestAnswers($uid);
-        $topics_user    = HomeModel::subscription($uid['user_id']);
-        $pagesCount     = HomeModel::feedCount($topics_user, $uid, $sheet);
-        $posts          = HomeModel::feed($page, $limit, $topics_user, $uid, $sheet);
+        $latest_answers = HomeModel::latestAnswers($this->uid);
+        $topics_user    = HomeModel::subscription($this->uid['user_id']);
+        $pagesCount     = HomeModel::feedCount($topics_user, $this->uid, $sheet);
+        $posts          = HomeModel::feed($page, $this->limit, $topics_user, $this->uid, $sheet);
 
         $result_post = [];
         foreach ($posts as $ind => $row) {
@@ -48,7 +54,7 @@ class HomeController extends MainController
 
         $topics = [];
         if (count($topics_user) == 0) {
-            $topics = FacetModel::advice($uid['user_id']);
+            $topics = \App\Models\FacetModel::advice($this->uid['user_id']);
         }
 
         $m = [
@@ -58,13 +64,13 @@ class HomeController extends MainController
             'url'        => $sheet == 'top' ? '/top' : '/',
         ];
 
-        return view(
+        return render(
             '/home',
             [
                 'meta'  => meta($m, $meta_title, $meta_desc),
-                'uid'   => $uid,
+                'uid'   => $this->uid,
                 'data'  => [
-                    'pagesCount'        => ceil($pagesCount / $limit),
+                    'pagesCount'        => ceil($pagesCount / $this->limit),
                     'pNum'              => $page,
                     'sheet'             => $sheet,
                     'latest_answers'    => $result_answers,

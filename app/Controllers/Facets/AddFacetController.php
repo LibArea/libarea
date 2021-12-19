@@ -24,7 +24,7 @@ class AddFacetController extends MainController
 
         $in_total = self::limitFacer($type, $count, $count_add);
 
-        return view(
+        return render(
             '/facets/add',
             [
                 'meta'  => meta($m = [], Translate::get('add topic')),

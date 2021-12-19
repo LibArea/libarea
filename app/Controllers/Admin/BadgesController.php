@@ -15,11 +15,11 @@ class BadgesController extends MainController
     {
         $this->uid  = Base::getUid();
     }
-    
+
     // Все награды
     public function index($sheet, $type)
     {
-        return view(
+        return render(
             '/admin/badge/badges',
             [
                 'meta'  => meta($m = [], Translate::get('badges')),
@@ -36,7 +36,7 @@ class BadgesController extends MainController
     // Форма добавления награды
     public function addPage($sheet, $type)
     {
-        return view(
+        return render(
             '/admin/badge/add',
             [
                 'meta'  => meta($m = [], Translate::get('add badge')),
@@ -59,7 +59,7 @@ class BadgesController extends MainController
             redirect('/admin/badges');
         }
 
-        return view(
+        return render(
             '/admin/badge/edit',
             [
                 'meta'  => meta($m = [], Translate::get('edit badge')),
@@ -107,7 +107,7 @@ class BadgesController extends MainController
             $user   = null;
         }
 
-        return view(
+        return render(
             '/admin/badge/user-add',
             [
                 'meta'  => meta($m = [], Translate::get('reward the user')),
@@ -163,18 +163,17 @@ class BadgesController extends MainController
 
         BadgeModel::edit($data);
         redirect($redirect);
-    } 
-    
+    }
+
     public function remove()
     {
         $id     = Request::getPostInt('id');
         $uid    = Request::getPostInt('uid');
-        
+
         BadgeModel::remove($id, $uid);
 
         addMsg(Translate::get('the command is executed'), 'success');
 
         redirect('/admin/users/' . $uid . '/edit');
-    
     }
 }

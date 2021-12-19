@@ -13,7 +13,7 @@
     <form action="<?= getUrlByName('post.edit.pr'); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
 
-      <?= includeTemplate('/_block/form/field-input', ['data' => [
+      <?= import('/_block/form/field-input', ['data' => [
         [
           'title' => Translate::get('heading'),
           'type' => 'text',
@@ -26,7 +26,7 @@
         ],
       ]]); ?>
 
-      <?= includeTemplate('/_block/form/select/blog', [
+      <?= import('/_block/form/select/blog', [
         'uid'         => $uid,
         'data'        => $data,
         'action'      => 'edit',
@@ -34,7 +34,7 @@
         'title'       => Translate::get('blogs'),
       ]); ?>
 
-      <?= includeTemplate('/_block/form/select/select', [
+      <?= import('/_block/form/select/select', [
         'uid'           => $uid,
         'data'          => $data,
         'action'        => 'edit',
@@ -83,7 +83,7 @@
         </div>
       </div>
 
-      <?= includeTemplate('/_block/editor/editor', [
+      <?= import('/_block/editor/editor', [
         'type'      => 'post',
         'height'    => '300px',
         'preview'   => 'vertical',
@@ -92,7 +92,7 @@
       ]); ?>
 
       <?php if ($post['post_draft'] == 1) { ?>
-        <?= includeTemplate('/_block/form/radio/radio', [
+        <?= import('/_block/form/radio/radio', [
           'data' => [
             [
               'title' => Translate::get('is this a draft?'),
@@ -104,12 +104,12 @@
       <?php } ?>
 
       <?php if ($uid['user_trust_level'] > 0) { ?>
-        <?= includeTemplate('/_block/form/select/content-tl', [
+        <?= import('/_block/form/select/content-tl', [
           'uid' => $uid,
           'data' => $post['post_tl']
         ]); ?>
 
-        <?= includeTemplate('/_block/form/radio/radio', [
+        <?= import('/_block/form/radio/radio', [
           'data' => [
             [
               'title' => Translate::get('format Q&A?'),
@@ -125,7 +125,7 @@
         ]); ?>
       <?php } ?>
 
-      <?= includeTemplate('/_block/form/radio/radio', [
+      <?= import('/_block/form/radio/radio', [
         'data' => [
           [
             'title' => Translate::get('is this a translation?'),
@@ -136,7 +136,7 @@
       ]); ?>
 
       <?php if ($uid['user_trust_level'] > 2) { ?>
-        <?= includeTemplate('/_block/form/radio/radio', [
+        <?= import('/_block/form/radio/radio', [
           'data' => [
             [
               'title' => Translate::get('raise?'), 'name' => 'top',
@@ -146,7 +146,7 @@
         ]); ?>
       <?php } ?>
 
-      <?= includeTemplate('/_block/form/select/user', [
+      <?= import('/_block/form/select/user', [
         'uid'           => $uid,
         'user'          => $data['user'],
         'action'        => 'user',
@@ -155,7 +155,7 @@
         'help'          => Translate::get('necessarily'),
       ]); ?>
 
-      <?= includeTemplate('/_block/form/select/related-posts', [
+      <?= import('/_block/form/select/related-posts', [
         'uid'           => $uid,
         'data'          => $data,
         'action'        => 'edit',

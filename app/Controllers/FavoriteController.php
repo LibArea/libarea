@@ -25,9 +25,7 @@ class FavoriteController extends MainController
         $action = FavoriteModel::setFavorite($content_id, $uid['user_id'], $type_content);
 
         $lang = Translate::get('bookmark deleted');
-        if ($action == 'add') {
-            $lang = Translate::get('bookmark added');
-        }
+        if ($action == 'add') $lang = Translate::get('bookmark added');
 
         return $lang;
     }

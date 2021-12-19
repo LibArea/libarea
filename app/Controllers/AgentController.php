@@ -4,17 +4,14 @@ namespace App\Controllers;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\AgentModel;
+use App\Models\Admin\UserModel;
 use Base;
 
 class AgentController extends MainController
 {
     public function index()
     {
-        $limit      = 100;
-        $ua_info    = AgentModel::getAll($limit);
-
-        return $ua_info;
+        return UserModel::getLogAll(100);
     }
 
     public function set()
@@ -32,6 +29,6 @@ class AgentController extends MainController
             'log_user_ip'       => Request::getRemoteAddress(),
         ];
 
-        AgentModel::setLog($data);
+        UserModel::setLog($data);
     }
 }

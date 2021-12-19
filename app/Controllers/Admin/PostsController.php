@@ -11,7 +11,7 @@ class PostsController extends MainController
 {
     private $uid;
 
-    protected $limit = 100;
+    protected $limit = 50;
 
     public function __construct()
     {
@@ -34,7 +34,7 @@ class PostsController extends MainController
             $result[$ind]   = $row;
         }
 
-        return view(
+        return render(
             '/admin/post/posts',
             [
                 'meta'  => meta($m = [], $sheet == 'ban' ? Translate::get('deleted posts') : Translate::get('posts')),

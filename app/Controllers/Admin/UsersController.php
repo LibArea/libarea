@@ -4,14 +4,14 @@ namespace App\Controllers\Admin;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\User\{UserModel, SettingModel, BadgeModel};
-use App\Models\Admin\{BanUserModel, AgentModel};
+use App\Models\User\{SettingModel, BadgeModel};
+use App\Models\Admin\{BanUserModel, UserModel};
 use Base, Validation, Translate;
 
 class UsersController extends MainController
 {
     protected $limit = 50;
-    
+
     private $uid;
 
     public function __construct()
@@ -24,14 +24,13 @@ class UsersController extends MainController
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
-        $pagesCount = UserModel::getUsersAllCount($sheet);
-        $user_all   = UserModel::getUsersAll($page, $this->limit, $this->uid['user_id'], $sheet);
+        $pagesCount = UserModel::getUsersCount($sheet);
+        $user_all   = UserModel::getUsers($page, $this->limit, $sheet);
 
         $result = [];
         foreach ($user_all as $ind => $row) {
-            $row['duplicat_ip_reg'] = AgentModel::duplicatesRegistrationCount($row['user_reg_ip']);
-            $row['isBan']           = UserModel::isBan($row['user_id']);
-            $row['last_visit_logs'] = AgentModel::lastVisitLogs($row['user_id']);
+            $row['duplicat_ip_reg'] = UserModel::duplicatesRegistrationCount($row['user_reg_ip']);
+            $row['last_visit_logs'] = UserModel::lastVisitLogs($row['user_id']);
             $row['created_at']      = lang_date($row['user_created_at']);
             $row['user_updated_at'] = lang_date($row['user_updated_at']);
             $result[$ind]           = $row;
@@ -39,7 +38,7 @@ class UsersController extends MainController
 
         Request::getResources()->addBottomScript('/assets/js/admin.js');
 
-        return view(
+        return render(
             '/admin/user/users',
             [
                 'meta'  => meta($m = [], Translate::get('users')),
@@ -60,19 +59,19 @@ class UsersController extends MainController
     {
         $user_ip    = Request::get('ip');
         if ($option == 'logs') {
-            $user_all   = AgentModel::getUserLogsId($user_ip);
+            $user_all   = UserModel::getUserLogsId($user_ip);
         } else {
-            $user_all   = AgentModel::getUserRegsId($user_ip);
+            $user_all   = UserModel::getUserRegsId($user_ip);
         }
 
         $results = [];
         foreach ($user_all as $ind => $row) {
-            $row['duplicat_ip_reg'] = AgentModel::duplicatesRegistrationCount($row['user_id']);
+            $row['duplicat_ip_reg'] = UserModel::duplicatesRegistrationCount($row['user_id']);
             $row['isBan']       = BanUserModel::isBan($row['user_id']);
             $results[$ind]      = $row;
         }
 
-        return view(
+        return render(
             '/admin/user/logip',
             [
                 'meta'  => meta($m = [], Translate::get('search')),
@@ -104,13 +103,13 @@ class UsersController extends MainController
         if (!$user = UserModel::getUser($user_id, 'id')) redirect(getUrlByName('admin'));
 
         $user['isBan']              = BanUserModel::isBan($user_id);
-        $user['duplicat_ip_reg']    = AgentModel::duplicatesRegistrationCount($user_id);
-        $user['last_visit_logs']    = AgentModel::lastVisitLogs($user_id);
+        $user['duplicat_ip_reg']    = UserModel::duplicatesRegistrationCount($user_id);
+        $user['last_visit_logs']    = UserModel::lastVisitLogs($user_id);
         $user['badges']             = BadgeModel::getBadgeUserAll($user_id);
 
         Request::getResources()->addBottomScript('/assets/js/admin.js');
 
-        return view(
+        return render(
             '/admin/user/edit',
             [
                 'meta'  => meta($m = [], Translate::get('edit user')),
@@ -152,6 +151,7 @@ class UsersController extends MainController
             'user_name'          => $user_name ?? '',
             'user_activated'     => Request::getPostInt('activated'),
             'user_limiting_mode' => Request::getPostInt('limiting_mode'),
+            'user_template'      => $user['user_template'],
             'user_lang'          => $user['user_lang'],
             'user_trust_level'   => Request::getPostInt('trust_level'),
             'user_color'         => Request::getPostString('color', '#339900'),

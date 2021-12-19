@@ -40,8 +40,8 @@ class EditFacetController extends MainController
         Request::getResources()->addBottomScript('/assets/js/uploads.js');
         Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
         Request::getResources()->addBottomScript('/assets/js/tag/tagify.min.js');
-        
-        return view(
+
+        return render(
             '/facets/edit',
             [
                 'meta'  => meta($m = [], Translate::get('edit') . ' | ' . $facet['facet_title']),
@@ -143,9 +143,9 @@ class EditFacetController extends MainController
         // Связанные посты
         $json_post  = $fields['post_select'] ?? [];
         $arr_post   = json_decode($json_post[0], true);
-        if ($arr_post) {  
+        if ($arr_post) {
             foreach ($arr_post as $value) {
-               $id[]   = $value['id'];
+                $id[]   = $value['id'];
             }
         }
         $post_related = implode(',', $id ?? []);
@@ -169,7 +169,7 @@ class EditFacetController extends MainController
         ];
 
         FacetModel::edit($data);
- 
+
         // Тема, выбор детей в дереве
         $highs  = $fields['high_facet_id'] ?? [];
         if ($highs) {
@@ -177,11 +177,11 @@ class EditFacetController extends MainController
             $high_facet = $high_facet ?? [];
             $arr = [];
             foreach ($high_facet as $ket => $row) {
-               $arr[] = $row;
+                $arr[] = $row;
             }
             FacetModel::addLowFacetRelation($arr, $facet_id);
         }
-        
+
         // Связанные темы, дети 
         $matching   = $fields['facet_matching'] ?? [];
         if ($matching) {
@@ -189,14 +189,13 @@ class EditFacetController extends MainController
             $match_facet    = $match_facet ?? [];
             $arr_mc = [];
             foreach ($match_facet as $ket => $row) {
-               $arr_mc[] = $row;
+                $arr_mc[] = $row;
             }
-            FacetModel::addLowFacetMatching($arr_mc, $facet_id);  
+            FacetModel::addLowFacetMatching($arr_mc, $facet_id);
         }
-        
+
         addMsg(Translate::get('changes saved'), 'success');
 
         redirect(getUrlByName($type, ['slug' => $facet_slug]));
     }
-
 }

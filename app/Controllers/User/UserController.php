@@ -25,8 +25,8 @@ class UserController extends MainController
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
-        $usersCount = UserModel::getUsersAllCount('all');
-        $users      = UserModel::getUsersAll($page, $this->limit, $this->uid['user_id'], 'noban');
+        $usersCount = UserModel::getUsersAllCount();
+        $users      = UserModel::getUsersAll($page, $this->limit, $this->uid['user_id']);
         pageError404($users);
 
         $m = [
@@ -36,7 +36,7 @@ class UserController extends MainController
             'url'        => getUrlByName('users'),
         ];
 
-        return view(
+        return render(
             '/user/users',
             [
                 'meta'  => meta($m, Translate::get('users'), Translate::get('desc-user-all')),
@@ -95,7 +95,7 @@ class UserController extends MainController
             'url'        => getUrlByName('user', ['login' => $user['user_login']]),
         ];
 
-        return view(
+        return render(
             '/user/profile',
             [
                 'meta'  => meta($m, $meta_title, $meta_desc),
@@ -137,7 +137,7 @@ class UserController extends MainController
             $result[$ind]           = $row;
         }
 
-        return view(
+        return render(
             '/user/favorite',
             [
                 'meta'  => meta($m = [], Translate::get('favorites')),
@@ -157,7 +157,7 @@ class UserController extends MainController
             redirect(getUrlByName('user.drafts', ['login' => $this->uid['user_login']]));
         }
 
-        return view(
+        return render(
             '/user/draft',
             [
                 'meta'  => meta($m = [], Translate::get('drafts')),
@@ -187,7 +187,7 @@ class UserController extends MainController
             $result[$ind]                   = $row;
         }
 
-        return view(
+        return render(
             '/user/subscribed',
             [
                 'meta'  => meta($m = [], Translate::get('subscribed')),

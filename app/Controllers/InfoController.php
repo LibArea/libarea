@@ -11,15 +11,19 @@ class InfoController extends MainController
 
     private $uid;
 
+    private $tpl;
+
     public function __construct()
     {
         $this->uid  = Base::getUid();
+        $this->tpl  = Config::get('general.template');
     }
 
     // Далее методы по названию страниц
+    // Further methods by page name
     public function index()
     {
-        $text = file_get_contents(static::$path . Config::get('general.template') . '/content/info/md/index.md');
+        $text = file_get_contents(static::$path . $this->tpl . '/content/info/md/index.md');
 
         $m = [
             'og'         => false,
@@ -28,7 +32,7 @@ class InfoController extends MainController
             'url'        => getUrlByName('info'),
         ];
 
-        return view(
+        return render(
             '/info/index',
             [
                 'meta'  => meta($m, Translate::get('info'), Translate::get('info-desc')),
@@ -43,7 +47,7 @@ class InfoController extends MainController
 
     public function privacy()
     {
-        $text = file_get_contents(static::$path . Config::get('general.template') . '/content/info/md/privacy.md');
+        $text = file_get_contents(static::$path . $this->tpl . '/content/info/md/privacy.md');
 
         $m = [
             'og'         => false,
@@ -52,7 +56,7 @@ class InfoController extends MainController
             'url'        => getUrlByName('info.privacy'),
         ];
 
-        return view(
+        return render(
             '/info/privacy',
             [
                 'meta'  => meta($m, Translate::get('privacy policy'), Translate::get('privacy-desc')),
@@ -74,7 +78,7 @@ class InfoController extends MainController
             'url'        => getUrlByName('info.restriction'),
         ];
 
-        return view(
+        return render(
             '/info/restriction',
             [
                 'meta'  => meta($m, Translate::get('restriction'), Translate::get('the profile is being checked')),

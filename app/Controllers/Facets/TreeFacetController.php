@@ -17,7 +17,7 @@ class TreeFacetController extends MainController
 
     public function index()
     {
-        return view(
+        return render(
             '/facets/structure',
             [
                 'meta'  => meta($m = [], Translate::get('structure'), Translate::get('structure-desc')),

@@ -68,15 +68,15 @@ class ActionController extends MainController
             $result[$ind]           = $row;
         }
 
-        return view(
+        return render(
             '/moderation/index',
             [
                 'data' => [
                     'moderations'   => $result,
                     'sheet'         => 'moderations',
                 ],
-                'meta' => meta($m = [], Translate::get('moderation log')),
-                'uid' => Base::getUid()
+                'meta'  => meta($m = [], Translate::get('moderation log')),
+                'uid'   => Base::getUid(),
             ]
         );
     }

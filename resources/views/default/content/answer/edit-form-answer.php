@@ -15,7 +15,7 @@
   <form action="<?= getUrlByName('answer.edit.pr'); ?>" accept-charset="UTF-8" method="post">
     <?= csrf_field() ?>
 
-    <?= includeTemplate('/_block/editor/editor', [
+    <?= import('/_block/editor/editor', [
       'height'    => '350px',
       'preview'   => 'vertical',
       'lang'      => $uid['user_lang'],

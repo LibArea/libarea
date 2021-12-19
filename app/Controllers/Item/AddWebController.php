@@ -24,7 +24,7 @@ class AddWebController extends MainController
         Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
         Request::getResources()->addBottomScript('/assets/js/tag/tagify.min.js');
 
-        return view(
+        return render(
             '/item/add',
             [
                 'meta'  => meta($m = [], Translate::get('add a website')),
