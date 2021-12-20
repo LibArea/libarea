@@ -25,7 +25,7 @@ class RssController extends MainController
             'posts'     => RssModel::getPostsSitemap(),
         ];
 
-        agIncludeCachedTemplate('/rss/sitemap', ['data' => $data, 'uid' => $this->uid]);
+        agIncludeCachedTemplate('/content/rss/sitemap', ['data' => $data, 'uid' => $this->uid]);
     }
 
     // Route::get('/turbo-feed/topic/{slug}')

@@ -496,6 +496,7 @@ $data = [
     'blogs.new-desc'        => 'Bloguri pe site adăugate recent. Blogurile personale ale membrilor',
     'topic-subscription'    => 'Abonați-vă la spații și citiți-le în flux',
     'stop-blog'             => 'URL-ul acestui blog este rezervat',
+    'blogs-info'            => 'Blogurile sunt o modalitate excelentă de a vă organiza conținutul. <br><br> Creați și mențineți un blog, împărtășiți idei și comunicați',
 ];
 
 return $data;

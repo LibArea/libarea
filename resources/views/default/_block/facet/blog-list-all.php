@@ -46,6 +46,6 @@
       <?php } ?>
     </div>
     <div class="col-span-3 relative pl20 no-mob">
-      В стадии разработки...
+      <?= Translate::get('blogs-info'); ?>!
     </div>
   </div>

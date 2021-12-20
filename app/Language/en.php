@@ -402,10 +402,10 @@ $data = [
     'soft-cat-help'      => 'In the program directory, will be Category (will become visible)',
 
     /* Setting */
-    'info-setting'          => 'Fill in your name, this will help attendees refer to you by name. <br> <br> Tell us something about yourself. You have a great opportunity to open up to please others and seem like an interesting person .',
+    'info-setting'          => 'Fill in your name, this will help attendees refer to you by name. <br> <br> Tell us something about yourself. You have a great opportunity to open up to please others and seem like an interesting person.',
     'info-avatar'           => 'Upload an avatar and cover for your profile. <br> <br> When each user has a unique avatar, it becomes much easier to follow the discussions! ',
     'info-security'         => 'Make sure all your passwords are 8 characters or more, ideally a lot more. <br> <br> Passwords must contain Large letters, small, numbers, specials. symbols.',
-    'info-users'            => 'List of participants sorted in order of activity on the site .',
+    'info-users'            => 'List of participants sorted in order of activity on the site.',
     'info-search'           => 'To refine your search, try to find a more precise query.',
     'info-login'            => 'Authorization gives you the ability to publish posts, reply, comment. <br><br> You can vote for other publications, fill out and edit the profile.',
     'info-recover'          => 'After clicking the "Reset" button, check your email...',
@@ -508,7 +508,7 @@ $data = [
     'blogs.new-desc'        => 'Blogs on the site added recently. Members personal blogs',
     'topic-subscription'    => 'Subscribe to topics and read them in the feed',
     'stop-blog'             => 'This blog URL is reserved',
-
+    'blogs-info'            => 'Blogs are a great way to organize your content. <br> <br> Create and maintain a blog, share ideas and communicate',
 ];
 
 return $data;
