@@ -1,11 +1,17 @@
 <?= import(
   '/content/admin/menu',
   [
-    'type'     => $data['type'],
-    'sheet'    => $data['sheet'],
-    'user_id'  => $uid['user_id'],
-    'add'     => true,
-    'pages'   => false
+    'type'    => $data['type'],
+    'sheet'   => $data['sheet'],
+    'user_id' => $uid['user_id'],
+    'pages'   => [
+      [
+        'id' => 'add',
+        'url' => getUrlByName($data['type'] . '.add'),
+        'name' => Translate::get('add'),
+        'icon' => 'bi bi-plus-lg'
+      ]
+    ]
   ]
 ); ?>
 

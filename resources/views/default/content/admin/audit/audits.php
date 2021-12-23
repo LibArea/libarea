@@ -4,8 +4,19 @@
     'type'    => $data['type'],
     'sheet'   => $data['sheet'],
     'user_id' => $uid['user_id'],
-    'add'     => false,
-    'pages'   => true
+    'pages'   => [
+      [
+        'id' => $data['type'] . '.all',
+        'url' => getUrlByName('admin.' . $data['type']),
+        'name' => Translate::get('all'),
+        'icon' => 'bi bi-record-circle'
+      ], [
+        'id' => $data['type'] . '.ban',
+        'url' => getUrlByName('admin.' . $data['type'] . '.ban'),
+        'name' => Translate::get('deleted'),
+        'icon' => 'bi bi-x-circle'
+      ]
+    ]
   ]
 ); ?>
 

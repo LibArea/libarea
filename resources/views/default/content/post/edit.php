@@ -4,8 +4,8 @@
   <?= breadcrumb(
     '/',
     Translate::get('home'),
-    getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]),
-    $post['post_title'],
+    false,
+    false,
     Translate::get('edit post')
   ); ?>
 
@@ -45,7 +45,6 @@
         'help'          => Translate::get('necessarily'),
         'red'           => 'red'
       ]); ?>
-
 
       <?php if ($post['post_url']) { ?>
         <div class="mb20 2flex">
@@ -92,7 +91,7 @@
       ]); ?>
 
       <?php if ($post['post_draft'] == 1) { ?>
-        <?= import('/_block/form/radio/radio', [
+        <?= import('/_block/form/radio', [
           'data' => [
             [
               'title' => Translate::get('is this a draft?'),
@@ -103,18 +102,18 @@
         ]); ?>
       <?php } ?>
 
-      <?php if ($uid['user_trust_level'] > 0) { ?>
+      <?php if ($uid['user_trust_level'] > Base::USER_ZERO_LEVEL) { ?>
         <?= import('/_block/form/select/content-tl', [
           'uid' => $uid,
           'data' => $post['post_tl']
         ]); ?>
 
-        <?= import('/_block/form/radio/radio', [
+        <?= import('/_block/form/radio', [
           'data' => [
             [
               'title' => Translate::get('format Q&A?'),
-              'name' => 'post_type',
-              'checked' => $post['post_type']
+              'name' => 'post_feature',
+              'checked' => $post['post_feature']
             ],
             [
               'title' => Translate::get('to close?'),
@@ -125,7 +124,7 @@
         ]); ?>
       <?php } ?>
 
-      <?= import('/_block/form/radio/radio', [
+      <?= import('/_block/form/radio', [
         'data' => [
           [
             'title' => Translate::get('is this a translation?'),
@@ -135,8 +134,8 @@
         ]
       ]); ?>
 
-      <?php if ($uid['user_trust_level'] > 2) { ?>
-        <?= import('/_block/form/radio/radio', [
+      <?php if ($uid['user_trust_level'] > Base::USER_SECOND_LEVEL) { ?>
+        <?= import('/_block/form/radio', [
           'data' => [
             [
               'title' => Translate::get('raise?'), 'name' => 'top',

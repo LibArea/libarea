@@ -4,8 +4,19 @@
     'type'    => $data['type'],
     'sheet'   => $data['sheet'],
     'user_id' => $uid['user_id'],
-    'add'     => true,
-    'pages'   => true
+    'pages'   => [
+      [
+        'id' => $data['type'] . '.all',
+        'url' => getUrlByName('admin.' . $data['type']),
+        'name' => Translate::get('all'),
+        'icon' => 'bi bi-record-circle'
+      ], [
+        'id' => $data['type'] . '.ban',
+        'url' => getUrlByName('admin.' . $data['type'] . '.ban'),
+        'name' => Translate::get('deleted'),
+        'icon' => 'bi bi-x-circle'
+      ]
+    ]
   ]
 ); ?>
 
@@ -37,7 +48,7 @@
               <?= $fc['facet_title']; ?>
             </a>
             <span class="green mr5 ml5"><?= $data['type']; ?>/<?= $fc['facet_slug']; ?></span>
-            <span class="mr5 ml5">posts: <?= $fc['facet_count']; ?></span>
+            <span class="mr5 ml5 gray-light-2"><?= Translate::get('posts'); ?> <?= $fc['facet_count']; ?></span>
             <?php if ($fc['facet_top_level'] != 0) { ?>
               <span class="green mr5 ml5"><?= Translate::get('subtopic'); ?></span>
             <?php } ?>
@@ -69,4 +80,35 @@
   <?php } ?>
 </div>
 <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('admin.topics')); ?>
+
+<?php if ($fc['facet_type'] == 'section') { ?>
+  <div class="uppercase gray mt5 mb5">
+    <?= Translate::get('pages'); ?>
+    <a class="mr15 right" title="<?= Translate::get('add'); ?>" href="<?= getUrlByName('page.add'); ?>">
+      <i class="bi bi-plus-lg size-18"></i>
+    </a>
+  </div>
+  <?php if ($data['pages']) { ?>
+    <?php foreach ($data['pages'] as $page) { ?>
+      <div class="mb5">
+        <a class="size-21" href="<?= getUrlByName('page', ['facet' => 'info', 'slug' => $page['post_slug']]); ?>">
+          <i class="bi bi-info-square middle mr5"></i>  <?= $page['post_title']; ?>
+        </a>
+        <a class="size-14 gray-light-2" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('page.edit', ['id' => $page['post_id']]); ?>">
+          <i class="bi bi-pencil"></i>
+        </a>
+        <a data-type="post" data-id="<?= $page['post_id']; ?>" class="type-action gray-light mr10 ml10">
+            <?php if ($page['post_is_deleted'] == 1) { ?>
+              <i class="bi bi-trash red"></i>
+            <?php } else { ?>
+              <i class="bi bi-trash"></i>
+            <?php } ?>
+       </a>
+        
+      </div>
+    <?php } ?>
+  <?php } else { ?>
+    <?= no_content(Translate::get('no'), 'bi bi-info-lg'); ?>
+  <?php } ?>
+<?php } ?>
 </main>

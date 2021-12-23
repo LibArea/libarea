@@ -10,10 +10,10 @@
           <i class="bi bi-pencil"></i>
         </a>
       <?php } ?>
- 
-      <?php if ($uid['user_trust_level'] > 0) { 
-          $type = $data['type'] == 'blogs' ? 'blog' : 'topic';
-        ?> 
+
+      <?php if ($uid['user_trust_level'] > 0) {
+        $type = $data['type'] == 'blogs' ? 'blog' : 'topic';
+      ?>
         <?php if ($uid['user_trust_level'] >= Config::get('trust-levels.tl_add_' . $type)) { ?>
           <?php if ($data['count_facet'] > 0) { ?>
             <a class="ml15" title="<?= Translate::get('add'); ?>" href="<?= getUrlByName($data['type'] . '.add'); ?>">
@@ -28,7 +28,6 @@
       <?= tabs_nav(
         $uid['user_id'],
         $data['sheet'],
-        false,
         $pages = [
           [
             'id' => $data['type'] . '.all',

@@ -22,7 +22,7 @@
             <a href="<?= getUrlByName('post', ['id' => $mod['post_id'], 'slug' => $mod['post_slug']]); ?>">
               <?= $mod['post_title']; ?>
             </a>
-            <?php if ($mod['post_type'] == 1) { ?>
+            <?php if ($mod['post_feature'] == 1) { ?>
               <i class="bi bi-question-lg green"></i>
             <?php } ?>
           </div>

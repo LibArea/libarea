@@ -42,7 +42,6 @@
         <?= tabs_nav(
           $uid['user_id'],
           $data['sheet'],
-          false,
           $pages = [
             [
               'id' => 'topic',
@@ -93,6 +92,20 @@
         </div>
       </div>
     </div>
+
+    <?php if (!empty($data['pages'])) { ?>
+      <div class="sticky top0 top70">
+        <div class="br-box-gray mt15 p15 mb15 br-rd5 bg-white size-14">
+          <div class="uppercase gray mt5 mb5"> <?= Translate::get('pages'); ?></div>
+          <?php foreach ($data['pages'] as $ind => $row) { ?>
+            <a class="flex relative pt5 pb5 items-center hidden gray-light" href="">
+              <?= $row['post_title']; ?>
+            </a>
+          <?php } ?>
+        </div>
+      </div>
+    <?php } ?>
+
     <?= import('/_block/sidebar/topic', ['data' => $data, 'uid' => $uid]); ?>
     <?php if (!empty($data['writers'])) { ?>
       <div class="sticky top0 top70">
@@ -107,6 +120,7 @@
         </div>
       </div>
     <?php } ?>
+
   <?php } ?>
 </aside>
 

@@ -29,14 +29,6 @@ class EditFacetController extends MainController
             redirect('/');
         }
 
-        $breadcrumb = breadcrumb(
-            '/' . $facet['facet_type'] . 's',
-            Translate::get($facet['facet_type'] . 's'),
-            getUrlByName($facet['facet_type'], ['slug' => $facet['facet_slug']]),
-            $facet['facet_title'],
-            Translate::get('edit') . ' | ' . $facet['facet_title'],
-        );
-
         Request::getResources()->addBottomScript('/assets/js/uploads.js');
         Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
         Request::getResources()->addBottomScript('/assets/js/tag/tagify.min.js');
@@ -48,14 +40,13 @@ class EditFacetController extends MainController
                 'uid'   => $this->uid,
                 'data'  => [
                     'facet'             => $facet,
-                    'breadcrumb'        => $breadcrumb,
                     'low_matching'      => FacetModel::getLowMatching($facet['facet_id']),
                     'high_matching'     => FacetModel::getHighMatching($facet['facet_id']),
                     'post_arr'          => PostModel::postRelated($facet['facet_post_related']),
                     'high_arr'          => FacetModel::getHighLevelList($facet['facet_id']),
                     'low_arr'           => FacetModel::getLowLevelList($facet['facet_id']),
                     'user'              => UserModel::getUser($facet['facet_user_id'], 'id'),
-                    'sheet'             => 'topics',
+                    'sheet'             => $facet['facet_type'] . 's',
                 ]
             ]
         );
@@ -80,6 +71,9 @@ class EditFacetController extends MainController
         $facet = FacetModel::getFacet($facet_id, 'id');
         pageError404($facet);
 
+ 
+
+
         // Доступ получает только автор и админ
         if ($facet['facet_user_id'] != $this->uid['user_id'] && $this->uid['user_trust_level'] != Base::USER_LEVEL_ADMIN) {
             redirect('/');
@@ -96,6 +90,9 @@ class EditFacetController extends MainController
         if ($facet_new_type == 'blog') {
             $redirect   = getUrlByName('blog.edit', ['id' => $facet['facet_id']]);
             $type       = 'blog';
+        } elseif ($facet_new_type == 'section') {
+            $redirect   = getUrlByName('admin.sections');
+            $type       = 'section';
         }
 
         Validation::charset_slug($facet_slug, 'Slug (url)', $redirect);
@@ -195,7 +192,36 @@ class EditFacetController extends MainController
         }
 
         addMsg(Translate::get('changes saved'), 'success');
-
+        
+        if ($type == 'section') redirect(getUrlByName('admin.sections'));
         redirect(getUrlByName($type, ['slug' => $facet_slug]));
+        
     }
+    
+    public function pages()
+    {
+        $facet_id   = Request::getInt('id');
+        $facet      = FacetModel::getFacet($facet_id, 'id');
+        pageError404($facet);
+
+        // Доступ получает только автор и админ
+        if ($facet['facet_user_id'] != $this->uid['user_id'] && $this->uid['user_trust_level'] != 5) {
+            redirect('/');
+        }
+
+        return agRender(
+            '/facets/edit-pages',
+            [
+                'meta'  => meta($m = [], Translate::get('edit') . ' | ' . $facet['facet_title']),
+                'uid'   => $this->uid,
+                'data'  => [
+                    'facet'         => $facet,
+                    'pages'  => (new \App\Controllers\PageController())->last($facet['facet_id']),
+                    'sheet'         => $facet['facet_type'] . 's',
+                ]
+            ]
+        );
+    }
+    
+    
 }

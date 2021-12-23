@@ -11,7 +11,7 @@
       <?php csrf_field(); ?>
       <b class="mb15 block"><?= Translate::get('e-mail notification'); ?>?</b>
       <?= import(
-        '/_block/form/radio/radio',
+        '/_block/form/radio',
         [
           'data' => [
             [

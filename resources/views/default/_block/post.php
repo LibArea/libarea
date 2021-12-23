@@ -43,7 +43,7 @@
               <?php if ($post['post_lo'] > 0) { ?>
                 <i class="bi bi-award blue"></i>
               <?php } ?>
-              <?php if ($post['post_type'] == 1) { ?>
+              <?php if ($post['post_feature'] == 1) { ?>
                 <i class="bi bi-patch-question green"></i>
               <?php } ?>
               <?php if ($post['post_translation'] == 1) { ?>

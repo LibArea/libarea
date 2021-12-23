@@ -13,10 +13,10 @@ class FeedModel extends MainModel
     {
         if ($type == 'topic') {
             $qa         = $data['facet_slug'];
-            $string     = "WHERE facet_list LIKE :qa";
+            $string     = "WHERE facet_list LIKE :qa AND post_type != 'page'";
             if ($sheet == 'recommend') {
                 $qa     = $data['facet_slug'];
-                $string = "WHERE facet_list LIKE :qa AND post_is_recommend = 1";
+                $string = "WHERE facet_list LIKE :qa AND post_is_recommend = 1 AND post_type != 'page'";
             }
         } elseif ($type == 'admin') {
             $selection  = 0;
@@ -56,7 +56,7 @@ class FeedModel extends MainModel
                     post_id,
                     post_title,
                     post_slug,
-                    post_type,
+                    post_feature,
                     post_translation,
                     post_draft,
                     post_date,
@@ -89,7 +89,7 @@ class FeedModel extends MainModel
                                 GROUP_CONCAT(facet_type, '@', facet_slug, '@', facet_title SEPARATOR '@') AS facet_list
                                 FROM facets      
                                 LEFT JOIN facets_posts_relation 
-                                    on facet_id = relation_facet_id
+                                    on facet_id = relation_facet_id 
                                 GROUP BY relation_post_id  
                         ) AS rel
                             ON rel.relation_post_id = post_id 

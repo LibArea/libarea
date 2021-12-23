@@ -4,8 +4,7 @@
     'type'    => $data['type'],
     'sheet'   => $data['sheet'],
     'user_id' => $uid['user_id'],
-    'add'     => false,
-    'pages'   => false
+    'pages'   => []
   ]
 ); ?>
 
@@ -103,10 +102,10 @@
           <?php foreach ($data['user']['badges'] as $badge) { ?>
             <div class="mb5">
               <?= $badge['badge_icon']; ?>
-                <span class="remove-badge size-13 lowercase" data-id="<?= $badge['bu_id']; ?>" data-uid="<?= $data['user']['user_id']; ?>">
-                 - <?= Translate::get('remove'); ?>
-                </span>  
-            </div>            
+              <span class="remove-badge size-13 lowercase" data-id="<?= $badge['bu_id']; ?>" data-uid="<?= $data['user']['user_id']; ?>">
+                - <?= Translate::get('remove'); ?>
+              </span>
+            </div>
           <?php } ?>
         </div>
       <?php } else { ?>

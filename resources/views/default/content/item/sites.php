@@ -74,7 +74,6 @@
       <?= tabs_nav(
         $uid['user_id'],
         $data['sheet'],
-        false,
         $pages = [
           [
             'id' => 'all',

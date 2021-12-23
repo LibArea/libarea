@@ -1,11 +1,22 @@
 <?= import(
   '/content/admin/menu',
   [
-    'type'     => $data['type'],
-    'sheet'    => $data['sheet'],
-    'user_id'  => $uid['user_id'],
-    'add'     => false,
-    'pages'   => true
+    'type'    => $data['type'],
+    'sheet'   => $data['sheet'],
+    'user_id' => $uid['user_id'],
+    'pages'   => [
+      [
+        'id' => $data['type'] . '.all',
+        'url' => getUrlByName('admin.' . $data['type']),
+        'name' => Translate::get('all'),
+        'icon' => 'bi bi-record-circle'
+      ], [
+        'id' => $data['type'] . '.ban',
+        'url' => getUrlByName('admin.' . $data['type'] . '.ban'),
+        'name' => Translate::get('deleted'),
+        'icon' => 'bi bi-x-circle'
+      ]
+    ]
   ]
 ); ?>
 
@@ -27,7 +38,7 @@
           <a class="gray-light ml10" href="<?= getUrlByName('admin.logip', ['ip' => $post['post_ip']]); ?>">
             <?= $post['post_ip']; ?>
           </a>
-          <?php if ($post['post_type'] == 1) { ?>
+          <?php if ($post['post_feature'] == 1) { ?>
             <i class="bi bi-question-lg green"></i>
           <?php } ?>
         </div>

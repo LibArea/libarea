@@ -1,12 +1,12 @@
 <?
 // Связанные посты
 // Related posts
-?> 
+?>
 <div class="mb20 max-w640">
   <label class="block mb5">
     <?= $title; ?>
   </label>
-  <input name="post_select[]"  id="post_id">
+  <input name="post_select[]" id="post_id">
 </div>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
@@ -14,12 +14,11 @@
   var input = document.querySelector('#post_id');   
   let tagify_post = new Tagify(input, {
     pattern: /.{3,}/,
-    tagTextProp: "post_title",
    // userInput: false, // <- отключим пользовательский ввод
     skipInvalid: true, // <- не добавлять повтороно не допускаемые теги
     enforceWhitelist: true, // <- добавлять только из белого списка
     <?php if ($action == 'edit') { ?>
-    whitelist: JSON.parse('<?= json_encode($data['post_arr']) ?>'),
+    whitelist: JSON.parse('<?= json_encode($data['post_arr']); ?>'),
     <?php } ?>
     maxTags: 3, // <- ограничим выбор фасетов
    });
@@ -41,8 +40,8 @@
       })
   });
 
-  <?php if ($action == 'edit') {   ?>
-    tagify_post.addTags(JSON.parse('<?= json_encode($data['post_arr']) ?>'))
+  <?php if ($action == 'edit') { ?>
+    tagify_post.addTags(JSON.parse('<?= json_encode($data['post_arr']) ?>'));
   <?php } ?>
 
   });

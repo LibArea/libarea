@@ -1,10 +1,7 @@
-<div class="sticky col-span-2 justify-between no-mob">
-  <?= import('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
-</div>
 <?php $blog = $data['facet'];
 if ($blog['facet_is_deleted'] == 0) { ?>
 
-  <div class="col-span-10 mb-col-12">
+  <div class="col-span-12 mb-col-12">
     <div class="bg-white flex flex-row items-center box-shadow justify-between br-rd5 mb15 p15" style="background-image: linear-gradient(to right, white 0%, transparent 60%), url(<?= cover_url($blog['facet_cover_art'], 'blog'); ?>); background-position: 50% 50%;">
       <div class="no-mob">
         <?= facet_logo_img($blog['facet_img'], 'max', $blog['facet_title'], 'w94 br-box-gray mt5'); ?>
@@ -56,6 +53,26 @@ if ($blog['facet_is_deleted'] == 0) { ?>
           <?php if ($data['info']) { ?>
             <div class="br-box-gray pt0 pr15 pb0 pl15 mb15 br-rd5 bg-white size-14 shown_post">
               <?= $data['info']; ?>
+            </div>
+          <?php } ?>
+
+          <?php if (!empty($data['pages'])) { ?>
+            <div class="sticky top0 top70">
+              <div class="br-box-gray mt15 p15 mb15 br-rd5 bg-white size-14">
+                <div class="uppercase gray mt5 mb5"> <?= Translate::get('pages'); ?></div>
+                <?php foreach ($data['pages'] as $ind => $row) { ?>
+                  <div class="mb5">
+                    <a class="relative pt5 pb5 hidden" href="<?= getUrlByName('page', ['facet' => $blog['facet_slug'], 'slug' => $row['post_slug']]); ?>">
+                      <?= $row['post_title']; ?>
+                    </a>
+                    <?php if ($uid['user_trust_level'] == 5 || $blog['facet_user_id'] == $uid['user_id']) { ?>
+                      <a class="size-14 gray-light-2" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('page.edit', ['id' => $row['post_id']]); ?>">
+                        <i class="bi bi-pencil"></i>
+                      </a>
+                    <?php } ?>
+                  </div>
+                <?php } ?>
+              </div>
             </div>
           <?php } ?>
         <?php } ?>

@@ -129,7 +129,7 @@
   <?= no_content(Translate::get('you-question-no'), 'bi bi-info-lg'); ?>
 <?php } else { ?>
   <?php if ($uid['user_id'] > 0) { ?>
-    <?php if ($post['post_type'] == 1 && $post['post_draft'] == 0 && $post['post_closed'] == 0) { ?>
+    <?php if ($post['post_feature'] == 1 && $post['post_draft'] == 0 && $post['post_closed'] == 0) { ?>
 
       <form class="mb15" action="<?= getUrlByName('answer.create'); ?>" accept-charset="UTF-8" method="post">
         <?= csrf_field() ?>

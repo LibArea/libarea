@@ -37,6 +37,9 @@ class FacetModel extends MainModel
             case 'blogs.ban':
                 $signet = "WHERE facet_type = 'blog' AND facet_is_deleted = 1 ORDER BY facet_id DESC";
                 break;
+            case 'sections.all':
+                $signet = "WHERE facet_type = 'section' ORDER BY facet_count DESC";
+                break;
             default:
                 $signet = "WHERE facet_type = 'topic' ORDER BY facet_count DESC";
                 break;
@@ -93,6 +96,9 @@ class FacetModel extends MainModel
             case 'blogs.ban':
                 $signet = "WHERE facet_type = 'blog' AND facet_is_deleted = 1 ORDER BY facet_id DESC";
                 break;
+            case 'sections.all':
+                $signet = "WHERE facet_type = 'section' ORDER BY facet_count DESC";
+                break;
             default:
                 $signet = "WHERE facet_type = 'topic' ORDER BY facet_count DESC";
                 break;
@@ -125,6 +131,7 @@ class FacetModel extends MainModel
                     facet_title,
                     facet_description,
                     facet_short_description,
+                    facet_type,
                     facet_info,
                     facet_slug,
                     facet_img,
@@ -238,11 +245,7 @@ class FacetModel extends MainModel
     // TOP авторов фасета. Limit 10
     public static function getWriters($facet_id)
     {
-        $sql = "SELECT MAX(relation_facet_id), 
-                    MAX(relation_post_id), 
-                    MAX(post_id), 
-                    SUM(post_hits_count) as hits_count, 
-                    post_user_id,
+        $sql = "SELECT SUM(post_hits_count) as hits_count, 
                     rel.*
                         FROM facets_posts_relation 
                         LEFT JOIN posts ON relation_post_id = post_id 

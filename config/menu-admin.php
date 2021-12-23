@@ -28,13 +28,18 @@ return [
     ], [
         'url'   => getUrlByName('admin.topics'),
         'name'  => Translate::get('topics'),
-        'icon'  => 'bi bi-columns-gap',
+        'icon'  => 'bi bi-columns-gap brown',
         'item'  => 'topics',
     ], [
         'url'   => getUrlByName('admin.blogs'),
         'name'  => Translate::get('blogs'),
-        'icon'  => 'bi bi-journal-text',
+        'icon'  => 'bi bi-journal-text brown',
         'item'  => 'blogs',
+    ], [
+        'url'   => getUrlByName('admin.sections'),
+        'name'  => Translate::get('sections'),
+        'icon'  => 'bi bi-intersect brown',
+        'item'  => 'sections',
     ], [
         'url'   => getUrlByName('admin.invitations'),
         'name'  => Translate::get('invites'),

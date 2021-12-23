@@ -49,7 +49,7 @@ class AnswerModel extends MainModel
                     post_id,
                     post_title,
                     post_slug,
-                    post_type,
+                    post_feature,
                     post_is_deleted,
                     answer_id,
                     answer_content,

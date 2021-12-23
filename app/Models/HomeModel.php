@@ -39,7 +39,7 @@ class HomeModel extends MainModel
                 post_id,
                 post_title,
                 post_slug,
-                post_type,
+                post_feature,
                 post_translation,
                 post_draft,
                 post_date,
@@ -82,7 +82,7 @@ class HomeModel extends MainModel
                 LEFT JOIN votes_post 
                     ON votes_post_item_id = post_id AND votes_post_user_id = :user_id
 
-                WHERE post_draft = 0 $string $display $sort LIMIT $start, $limit";
+                WHERE post_type != 'page' AND post_draft = 0 $string $display $sort LIMIT $start, $limit";
 
         return DB::run($sql, ['user_id' => $uid['user_id']])->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -187,7 +187,8 @@ class HomeModel extends MainModel
                     signed_user_id                    
                         FROM facets 
                         JOIN facets_signed ON signed_facet_id = facet_id AND signed_user_id = :user_id  
-                            ORDER BY facet_id DESC";
+                            AND facet_type != 'section' 
+                                ORDER BY facet_id DESC";
 
         return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
     }

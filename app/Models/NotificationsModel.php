@@ -135,7 +135,7 @@ class NotificationsModel extends MainModel
                     post_id,
                     post_title,
                     post_slug,
-                    post_type,
+                    post_feature,
                     post_translation,
                     post_draft,
                     post_date,

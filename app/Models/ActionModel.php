@@ -69,7 +69,7 @@ class ActionModel extends MainModel
                     post_id,
                     post_title,
                     post_slug,
-                    post_type
+                    post_feature
                         FROM moderations
                         LEFT JOIN users ON user_id = mod_moderates_user_id
                         LEFT JOIN posts ON post_id = mod_post_id
@@ -111,19 +111,26 @@ class ActionModel extends MainModel
     // Поиск контента для форм
     public static function getSearch($search, $type)
     {
+        $uid    = Base::getUid();
+        $id     = $uid['user_id'];
+        
         $field_id   = $type . '_id';
         if ($type == 'post') {
             $field_tl = 'post_tl';
             $field_name = 'post_title';
-            $sql = "SELECT post_id, post_title, post_is_deleted, post_tl FROM posts WHERE post_title LIKE :post_title AND post_is_deleted = 0 AND post_tl = 0 ORDER BY post_id DESC LIMIT 6";
+            $sql = "SELECT post_id, post_title, post_tl FROM posts WHERE post_title LIKE :post_title AND post_is_deleted = 0 AND post_tl = 0 ORDER BY post_id DESC LIMIT 100";
         } elseif ($type == 'user') {
             $field_tl = 'user_trust_level';
             $field_name = 'user_login';
             $sql = "SELECT user_id, user_login, user_trust_level, user_activated FROM users WHERE user_activated = 1 AND user_login LIKE :user_login";
+        } elseif ($type == 'section') { 
+            $field_id = 'facet_id';
+            $field_tl = 'facet_tl';
+            $field_name = 'facet_title';
+            $condition = 'AND facet_user_id = ' . $id;
+            $sql = "SELECT facet_id, facet_title, facet_tl, facet_type FROM facets 
+                    WHERE facet_title LIKE :facet_title AND facet_type = 'section' $condition ORDER BY facet_count DESC LIMIT 100";
         } else {
-            $uid    = Base::getUid();
-            $id     = $uid['user_id'];
-
             $condition = '';
             if ($uid['user_trust_level'] != 5) {
                 if ($type == 'blog') {

@@ -240,3 +240,14 @@ details[open] > summary {
   padding: 0 0 10px 0;
   color: #666;
 }
+
+.page {
+  margin-left: auto;
+  margin-right: auto;
+  color: #111;
+  max-width: 65ch;
+  font-size: 1.25rem;
+  padding: 0 10px;
+}
+
+.page p img { max-width: 100%; }

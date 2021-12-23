@@ -23,37 +23,19 @@
       <span class="red"><?= Translate::get($type); ?></span>
     </p>
     <ul class="flex flex-row list-none m0 p0 center">
-
-      <?php
-      $arr_add = [
-        'id'        => 'add',
-        'url'       => getUrlByName($type . '.add'),
-        'content'   => Translate::get('add'),
-        'icon'      => 'bi bi-plus-lg'
-      ];
-
-      $arr_pages = [
-        [
-          'id'        => $type . '.all',
-          'url'       => getUrlByName('admin.' . $type),
-          'content'   => Translate::get('all'),
-          'icon'      => 'bi bi-record-circle'
-        ],
-        [
-          'id'        => $type . '.ban',
-          'url'       => getUrlByName('admin.' . $type . '.ban'),
-          'content'   => Translate::get('deleted'),
-          'icon'      => 'bi bi-x-circle'
-        ],
-      ];
-      ?>
-
-      <?= tabs_nav(
-        $user_id,
-        $sheet,
-        $add      = $add === true ? $arr_add : [],
-        $pages    = $pages === true ? $arr_pages : [],
-      ); ?>
-
+      <?php foreach ($pages as $menu) { ?>
+        <?php if ($menu['id'] == $sheet) { ?>
+          <li class="blue ml30 mb-mr-5 mb-ml-10">
+            <i class="<?= $menu['icon']; ?> mr5"></i>
+            <span class="mb-size-13"><?= $menu['name']; ?></span>
+          </li>
+        <?php  } else { ?>
+          <li class="ml30 mb-mr-5 mb-ml-10">
+            <a class="gray" href="<?= $menu['url']; ?>">
+              <i class="<?= $menu['icon']; ?> mr5"></i>
+              <span class="mb-size-13"><?= $menu['name']; ?></span></a>
+          </li>
+        <?php  } ?>
+      <?php } ?>
     </ul>
   </div>

@@ -1,6 +1,6 @@
 <div class="last-comm br-rd5 br-box-gray p15 mt15 bg-white">
   <div class="mb-3 size-14">
-    <a class="inline gray-light" title="<?= Translate::get('help'); ?>" href="<?= getUrlByName('info'); ?>">
+    <a class="inline gray-light" title="<?= Translate::get('help'); ?>" href="/info/<?= Config::get('facets.page-one'); ?>">
       <?= Translate::get('help'); ?>
     </a>
     <a rel="nofollow noopener" class="gray-light-2 right" title="DISCORD" href="https://discord.gg/dw47aNx5nU">

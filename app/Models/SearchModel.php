@@ -11,7 +11,7 @@ class SearchModel extends MainModel
     public static function getSearch($query, $limit)
     {
         $sql = "SELECT DISTINCT 
-                post_id, post_title as title, post_slug, post_type, post_translation, 
+                post_id, post_title as title, post_slug, post_feature, post_translation, 
                 post_draft, post_date, post_published, post_user_id, post_votes, 
                 post_answers_count, post_comments_count, post_content as content, post_content_img, 
                 post_thumb_img, post_merged_id, post_closed, post_tl, post_lo, post_top,  

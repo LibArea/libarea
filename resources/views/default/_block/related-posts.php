@@ -10,8 +10,8 @@
             <span class="gray-light-2"><?= $num; ?></span>
           </div>
         <?php } ?>
-        <a href="<?= getUrlByName('post', ['id' => $related['value'], 'slug' => $related['post_slug']]); ?>">
-          <?= $related['post_title']; ?>
+        <a href="<?= getUrlByName('post', ['id' => $related['id'], 'slug' => $related['post_slug']]); ?>">
+          <?= $related['value']; ?>
         </a>
       </div>
     <?php } ?>

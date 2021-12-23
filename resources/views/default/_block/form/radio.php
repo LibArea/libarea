@@ -1,6 +1,6 @@
-<?php foreach ($data as $value) { 
-     $checked = $value['checked'] ?? 0;
-  ?>
+<?php foreach ($data as $value) {
+  $checked = $value['checked'] ?? 0;
+?>
   <div class="mb20 max-w640">
     <label class="block"><?= $value['title']; ?></label>
     <input type="radio" name="<?= $value['name']; ?>" <?php if ($checked == 0) { ?>checked<?php } ?> value="0"> <?= Translate::get('no'); ?>

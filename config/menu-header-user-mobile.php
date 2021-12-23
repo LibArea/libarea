@@ -6,24 +6,28 @@
 
 return [
     [
-        'url'   => 'topics.all',
+        'url'   => '/topics',
         'name'  => Translate::get('topics'),
         'icon'  => 'bi bi-columns-gap',
     ], [
-        'url'   => 'blogs.all',
+        'url'   => '/blogs',
         'name'  => Translate::get('blogs'),
         'icon'  => 'bi bi-journal-text',
     ], [
-        'url'   => 'users',
+        'url'   => '/users',
         'name'  => Translate::get('users'),
         'icon'  => 'bi bi-people',
     ], [
-        'url'   => 'web',
+        'url'   => '/web',
         'name'  => Translate::get('domains'),
         'icon'  => 'bi bi-link-45deg',
     ], [
-        'url'   => 'search',
+        'url'   => '/search',
         'name'  => Translate::get('search'),
         'icon'  => 'bi bi-search',
+    ], [
+        'url'   => '/info/information',
+        'name'  => Translate::get('help'),
+        'icon'  => 'bi bi-info-square',
     ],
 ];

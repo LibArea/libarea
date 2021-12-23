@@ -6,7 +6,35 @@
 
 <main class="col-span-10 mb-col-12">
 
-  <?= $data['breadcrumb']; ?>
+  <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
+    <p class="m0 size-18"><?= Translate::get($fs['facet_type']); ?></p>
+    <ul class="flex flex-row list-none m0 p0 center size-15">
+
+      <?= tabs_nav(
+        $uid['user_id'],
+        $data['sheet'],
+        $pages = [
+          [
+            'id'        => $data['sheet'],
+            'url'       => '',
+            'content'   => Translate::get('settings'),
+            'icon'      => 'bi bi-gear'
+          ], [
+            'id'        => '',
+            'url'       => getUrlByName($fs['facet_type'] . '.edit.pages', ['id' => $fs['facet_id']]),
+            'content'   => Translate::get('pages'),
+            'icon'      => 'bi bi-app'
+          ], [
+            'id'        => 'all',
+            'url'       => getUrlByName($fs['facet_type'], ['slug' => $fs['facet_slug']]),
+            'content'   => Translate::get('go to'),
+            'icon'      => 'bi bi-arrow-up-right-square'
+          ]
+        ]
+      ); ?>
+
+    </ul>
+  </div>
 
   <div class="br-box-gray bg-white p15">
     <form action="<?= getUrlByName($fs['facet_type'] . '.edit.pr'); ?>" method="post" enctype="multipart/form-data">
@@ -48,7 +76,7 @@
         <?= sumbit(Translate::get('download')); ?>
       </div>
 
-      <?= import('/_block/form/radio/blog-or-topic', [
+      <?= import('/_block/facet/facet-type', [
         'uid'     => $uid,
         'data'    => $fs,
       ]); ?>
@@ -88,7 +116,7 @@
 
       <?php if ($fs['facet_type'] == 'topic' && $uid['user_trust_level'] == 5) { ?>
 
-        <?= import('/_block/form/radio/radio', [
+        <?= import('/_block/form/radio', [
           'data' => [
             [
               'title' => Translate::get('web-cat'),

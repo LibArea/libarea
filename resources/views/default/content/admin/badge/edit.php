@@ -1,11 +1,10 @@
 <?= import(
   '/content/admin/menu',
   [
-    'type'     => $data['type'],
-    'sheet'    => $data['sheet'],
-    'user_id'  => $uid['user_id'],
-    'add'     => false,
-    'pages'   => false
+    'type'    => $data['type'],
+    'sheet'   => $data['sheet'],
+    'user_id' => $uid['user_id'],
+    'pages'   => []
   ]
 ); ?>
 

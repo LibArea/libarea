@@ -126,6 +126,7 @@ $data = [
     'social networks'   => 'Social Networks',
     'official'          => 'Official',
     'community'         => 'Community',
+    'works on'          => 'Works on',
     'trust level'       => 'Trust Level',
     'search'            => 'Search',
     'to find'           => 'To find',
@@ -252,8 +253,6 @@ $data = [
     'rules'                 => 'Site rules',
     'privacy policy'        => 'Privacy Policy',
     'restriction'           => 'Restrictions',
-    'privacy-desc'          => 'Site privacy policy. Site rules.',
-    'info-desc'             => 'Information, help. Rules, privacy policy, site archive and technology.',
     'no-invate-txt'         => 'Not a user yet? Registration is by invitation only to combat spam and increase accountability. If you know the <a href="/users">current user</a> of the site, ask him for an invitation.',
 
     /* Date and time + Events */
@@ -360,6 +359,17 @@ $data = [
     'there is a program'    => 'There is a program?',
     'hosted on github'      => 'Is the program on GitHub?',
     'url address github'    => 'Repository URL on GitHub',
+
+    'sections'              => 'Sections',
+    'section'               => 'Section',
+    'pages'                 => 'Pages',
+    'edit page'             => 'Edit page',
+    'add page'              => 'Add page',
+    'go to'                 => 'Go to',
+    'frameworks'            => 'Frameworks',
+    'interesting sites'     => 'Interesting sites',
+    'facts'                 => 'Facts',
+    'psychology'            => 'Psychology',
 
     /* Meta - desc */
     'desc-user-all'         => 'List of all participants sorted by date of registration on the site',

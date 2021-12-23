@@ -51,16 +51,16 @@
               <div class="flex flex-row gap-2 items-center max-w780">
                 <?= favicon_img($item['item_id'], $item['item_url_domain']); ?>
                 <div class="green size-14">
-                 
+
                   <?= $item['item_url_domain']; ?>
-                  
-  <?php if ($item['item_github_url']) { ?>
+
+                  <?php if ($item['item_github_url']) { ?>
                     <a class="ml15 gray-light" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_github_url']; ?>">
                       <i class="bi bi-github size-13 mr5"></i>
                       <?= $item['item_title_soft']; ?> на GitHub
                     </a>
                   <?php } ?>
-                  
+
                   <div class="lowercase">
                     <?= html_topic($item['facet_list'], 'web.topic', 'gray-light mr15'); ?>
                   </div>

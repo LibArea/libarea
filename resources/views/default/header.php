@@ -12,16 +12,19 @@
   <link rel="icon" sizes="120x120" href="/favicon-120.ico" type="image/x-icon">
 </head>
 
+<?php $type  = $data['type'] ?? false;
+      $facet = $data['facet'] ?? false; ?>
+
 <body class="p0 m0 black bg-gray-100<?php if (Request::getCookie('dayNight') == 'dark') { ?> dark<?php } ?>">
 
-  <header class="bg-white br-bottom mt0 mb15 sticky top0 z-30">
+  <header class="bg-white br-bottom mt0 mb15 <?php if ($type != 'page') { ?>sticky top0<?php } ?> z-30">
     <div class="col-span-12 mr-auto max-width w-100 pr10 pl10 h44 grid items-center flex justify-between">
       <div class="flex items-center">
-        <div class="lateral no-pc mr10 flex items-center size-15">
+        <div class="lateral no-pc mr10 flex size-15">
           <i class="bi bi-list gray-light-2 size-18"></i>
-          <nav class="ltr-menu box-shadow none min-w165 bg-white br-rd3 p5 absolute justify-between mt0 ml0 pl0 sticky">
+          <nav class="ltr-menu box-shadow none min-w165 bg-white br-rd3 absolute pl0 sticky">
             <?php foreach (Config::get('menu-header-user-mobile') as $menu) { ?>
-              <a class="pt5 pr10 pb5 pl10 gray block bg-hover-light" href="<?= getUrlByName($menu['url']); ?>">
+              <a class="pt5 pr10 pb5 pl10 gray block bg-hover-light" href="<?= $menu['url']; ?>">
                 <i class="<?= $menu['icon']; ?> middle"></i>
                 <span class="ml5"><?= $menu['name']; ?></span>
               </a>
@@ -43,62 +46,8 @@
           <div class="absolute box-shadow bg-white pt10 pr15 pb5 pl15 mt5 max-w460 br-rd3 none" id="search_items"></div>
         </div>
       <?php } ?>
-      <?php if ($uid['user_id'] == 0) { ?>
-        <div class="flex right col-span-4 items-center">
-          <div id="toggledark" class="header-menu-item no-mob only-icon p10 ml30 mb-ml-10">
-            <i class="bi bi-brightness-high gray-light-2 size-18"></i>
-          </div>
-          <?php if (Config::get('general.invite') == 0) { ?>
-            <a class="register gray size-15 ml30 mr15 block" title="<?= Translate::get('sign up'); ?>" href="<?= getUrlByName('register'); ?>">
-              <?= Translate::get('sign up'); ?>
-            </a>
-          <?php } ?>
-          <a class="btn btn-outline-primary ml20" title="<?= Translate::get('sign in'); ?>" href="<?= getUrlByName('login'); ?>">
-            <?= Translate::get('sign in'); ?>
-          </a>
-        </div>
-      <?php } else { ?>
-        <div class="col-span-4">
-          <div class="flex right ml30 items-center">
-        
-            <?= add_post($facet ?? null, $uid['user_id']); ?>
-      
-            <div id="toggledark" class="only-icon p10 ml20 mb-ml-10">
-              <i class="bi bi-brightness-high gray-light-2 size-18"></i>
-            </div>
-
-            <a class="gray-light-2 p10 ml20 mb-ml-10" href="<?= getUrlByName('user.notifications', ['login' => $uid['user_login']]); ?>">
-              <?php $notif = \App\Controllers\NotificationsController::setBell($uid['user_id']); ?> 
-              <?php if (!empty($notif)) { ?>
-                <?php if ($notif['notification_action_type'] == 1) { ?>
-                  <i class="bi bi-envelope size-18 red"></i>
-                <?php } else { ?>
-                  <i class="bi bi-bell-fill size-18 red"></i>
-                <?php } ?>
-              <?php } else { ?>
-                <i class="bi bi-bell mb-size-18 size-18"></i>
-              <?php } ?>
-            </a>
-
-            <div class="dropbtn relative p10 ml20 mb-ml-10">
-              <a class="relative w-auto">
-                <?= user_avatar_img($uid['user_avatar'], 'small', $uid['user_login'], 'w34 br-rd-50'); ?>
-              </a>
-              <div class="dr-menu box-shadow none min-w165 right0 bg-white size-15 br-rd3 p5 absolute">
-                <?php foreach (Config::get('menu-header-user') as $menu) { ?>
-                  <?= $menu['hr'] ?? ''; ?>
-                  <?php if ($uid['user_trust_level'] >= $menu['tl']) { ?>
-                    <a class="pt5 pr10 pb5 pl10 block gray bg-hover-light" href="<?= getUrlByName($menu['url'], ['login' => $uid['user_login']]); ?>">
-                      <i class="<?= $menu['icon']; ?> middle mr5"></i>
-                      <span class="middle size-14"><?= $menu['name']; ?></span>
-                    </a>
-                  <?php } ?>
-                <?php } ?>
-              </div>
-            </div>
-          </div>
-        </div>
-      <?php }  ?>
+      <?= import('/_block/menu/header-user-menu', ['uid' => $uid, 'facet' => $facet ?? null]); ?>
     </div>
   </header>
   <div class="max-width mr-auto w-100 grid grid-cols-12 gap-4 pr5 pl5 justify-between">
+  

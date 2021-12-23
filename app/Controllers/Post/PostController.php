@@ -69,17 +69,26 @@ class PostController extends MainController
             redirect('/');
         }
 
+        // If the post type is a page, then depending on the conditions we make a redirect
+        // Если тип поста страница, то в зависимости от условий делаем редирект
+        if ($post['post_type'] == 'page') {
+            if ($blog) {
+                redirect(getUrlByName('page', ['facet' => $blog[0]['facet_slug'], 'slug' => $post['post_slug']]));
+            } 
+            redirect(getUrlByName('page', ['facet' => 'info', 'slug' => $post['post_slug']])); 
+        }
+
         $post['post_content']   = Content::text($post['post_content'], 'text');
         $post['post_date_lang'] = lang_date($post['post_date']);
 
-        // Q&A (post_type == 1) или Дискуссия
+        // Q&A (post_feature == 1) или Дискуссия
         $post['amount_content'] = $post['post_answers_count'];
-        if ($post['post_type'] == 0) {
+        if ($post['post_feature'] == 0) {
             $comment_n = $post['post_comments_count'] + $post['post_answers_count'];
             $post['amount_content'] = $comment_n;
         }
 
-        $post_answers = AnswerModel::getAnswersPost($post['post_id'], $this->uid['user_id'], $post['post_type']);
+        $post_answers = AnswerModel::getAnswersPost($post['post_id'], $this->uid['user_id'], $post['post_feature']);
 
         $answers = [];
         foreach ($post_answers as $ind => $row) {

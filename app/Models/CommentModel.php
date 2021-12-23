@@ -97,7 +97,7 @@ class CommentModel extends MainModel
                     post_title,
                     post_slug,
                     post_tl,
-                    post_type,
+                    post_feature,
                     post_is_deleted,
                     comment_id,
                     comment_ip,

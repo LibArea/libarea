@@ -48,7 +48,7 @@
         ]
       ]); ?>
 
-      <?= import('/_block/form/radio/radio', [
+      <?= import('/_block/form/radio', [
         'data' => [
           [
             'title'   => Translate::get('posted') . '?',
@@ -81,7 +81,7 @@
       ]); ?>
 
       <h3 class="mb5"><?= Translate::get('soft'); ?></h3>
-      <?= import('/_block/form/radio/radio', [
+      <?= import('/_block/form/radio', [
         'data' => [
           [
             'title'   => Translate::get('there is a program'),

@@ -1,14 +1,6 @@
 <?php
 
 //declare(strict_types = 1);
-function import($template, array $params = [])
-{  
-    $uid = Base::getUid();
-    extract($params, EXTR_SKIP);
-    
-    include TEMPLATES . DIRECTORY_SEPARATOR . agTheme($uid['user_template'], $template) . '.php';
-  
-}
 
 // Topic for posts
 function html_topic($topic, $slug, $css)
@@ -262,7 +254,7 @@ function votes($user_id, $content, $type, $css = '', $block = '')
             $num_count = empty($count) ? 0 : $count;
             $html .= '<div id="up' . $content[$type . '_id'] . '" class="voters blue-hover flex ' . $block . ' center gray-light-2">
                         <div data-id="' . $content[$type . '_id'] . '" data-count="' . $num_count . '" data-type="' . $type . '" class="up-id bi bi-heart ' . $css . '"></div>
-                        <div class="score ml5">
+                        <div class="score">
                             ' . $count . '
                         </div></div>';
         }
@@ -293,7 +285,7 @@ function favorite_post($user_id, $post_id, $favorite_tid, $css = '')
     return $html;
 }
 
-function tabs_nav($user_id, $sheet, $add, array $pages = [])
+function tabs_nav($user_id, $sheet, array $pages = [])
 {
     $html = '';
     foreach ($pages as $key => $page) {
@@ -309,18 +301,6 @@ function tabs_nav($user_id, $sheet, $add, array $pages = [])
                     <span class="mb-size-13">' . $page['content'] . '</span></a></li>';
             }
         }
-    }
-
-    if ($add == true) {
-       if ($add['id'] == $sheet) {
-           $html .= '<li class="blue ml30 mb-mr-5 mb-ml-10">
-                    <i class="' . $add['icon'] . ' mr5"></i>
-                    <span class="mb-size-13 no-mob">' . $add['content'] . '</span></li>';
-       } else {
-        $html .= '<li class="ml30 mb-mr-5 mb-ml-10"><a class="gray" href="' . $add['url'] . '">
-                <i class="' . $add['icon'] . ' mr5"></i>
-                <span class="mb-size-13 no-mob">' . $add['content'] . '</span></a></li>';
-       }
     }
 
     return $html;

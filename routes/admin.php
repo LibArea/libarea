@@ -40,6 +40,8 @@ Route::before('Authorization@admin')->getGroup();
     Route::get('/topics/ban')->controller('Admin\FacetsController', ['topics.ban', 'topics'])->name('admin.topics.ban');
     Route::get('/topics/page/{page?}')->controller('Admin\FacetsController', ['topics.all', 'topics'])->where(['page' => '[0-9]+']);
      
+    Route::get('/sections')->controller('Admin\FacetsController', ['sections.all', 'sections'])->name('admin.sections');     
+     
     Route::get('/blogs')->controller('Admin\FacetsController', ['blogs.all', 'blogs'])->name('admin.blogs');
     Route::get('/blogs/ban')->controller('Admin\FacetsController', ['blogs.ban', 'blogs'])->name('admin.blogs.ban');
      

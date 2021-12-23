@@ -26,7 +26,10 @@ class EditPostController extends MainController
             redirect('/');
         }
 
-        Request::getResources()->addBottomScript('/assets/js/uploads.js');
+        if ($post['post_type'] == 'post') {
+            Request::getResources()->addBottomScript('/assets/js/uploads.js');
+        }
+        
         Request::getResources()->addBottomStyles('/assets/js/editor/toastui-editor.min.css');
         Request::getResources()->addBottomStyles('/assets/js/editor/dark.css');
         Request::getResources()->addBottomScript('/assets/js/editor/toastui-editor-all.min.js');
@@ -38,8 +41,11 @@ class EditPostController extends MainController
             $post_related = PostModel::postRelated($post['post_related']);
         }
 
+        $puth = '/post/edit';
+        if ($post['post_type'] == 'page') $puth = '/page/edit';
+
         return agRender(
-            '/post/edit',
+            $puth,
             [
                 'meta'  => meta($m = [], Translate::get('edit post')),
                 'uid'   => $this->uid,
@@ -50,6 +56,7 @@ class EditPostController extends MainController
                     'post_arr'      => $post_related,
                     'topic_arr'     => PostModel::getPostFacet($post['post_id'], 'topic'),
                     'blog_arr'      => PostModel::getPostFacet($post['post_id'], 'blog'),
+                    'section_arr'   => PostModel::getPostFacet($post['post_id'], 'section'),
                 ]
             ]
         );
@@ -60,7 +67,7 @@ class EditPostController extends MainController
         $post_id                = Request::getPostInt('post_id');
         $post_title             = Request::getPost('post_title');
         $post_content           = $_POST['content']; // для Markdown
-        $post_type              = Request::getPostInt('post_type');
+        $post_feature           = Request::getPostInt('post_feature');
         $post_translation       = Request::getPostInt('translation');
         $post_draft             = Request::getPostInt('post_draft');
         $post_closed            = Request::getPostInt('closed');
@@ -138,7 +145,9 @@ class EditPostController extends MainController
         $data = [
             'post_id'               => $post_id,
             'post_title'            => $post_title,
-            'post_type'             => $post_type,
+            'post_slug'             => $post['post_slug'],
+            'post_feature'          => $post_feature,
+            'post_type'             => 'post',
             'post_translation'      => $post_translation,
             'post_date'             => $post_date,
             'post_user_id'          => $post_user_id ?? 1,
@@ -178,6 +187,98 @@ class EditPostController extends MainController
         FacetModel::addPostFacets($arr, $post_id);
 
         redirect(getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]));
+    }
+
+    public function editPage()
+    {
+        $post_id                = Request::getPostInt('post_id');
+        $post_title             = Request::getPost('post_title');
+        $post_slug              = Request::getPost('post_slug');
+        $post_content           = $_POST['content']; // для Markdown
+
+        // Связанные темы
+        $post_fields    = Request::getPost() ?? [];
+        $facet_post     = $post_fields['section_select'] ?? [];
+        if ($facet_post) {
+            $topics     = json_decode($facet_post, true);
+        }
+        
+        $blog_post  = $post_fields['blog_select'] ?? false;
+        if ($blog_post) {
+            $blog   = json_decode($blog_post, true); 
+            $topics = array_merge($blog, $topics ?? []);
+        }
+
+        // Проверка доступа 
+        $post   = PostModel::getPostId($post_id);
+        if (!accessСheck($post, 'post', $this->uid, 0, 0)) {
+            redirect('/');
+        }
+
+        // Если пользователь забанен / заморожен
+        $user = UserModel::getUser($this->uid['user_id'], 'id');
+        (new \App\Controllers\Auth\BanController())->getBan($user);
+        Content::stopContentQuietМode($user);
+
+        $redirect   = getUrlByName('post.edit', ['id' => $post_id]);
+        if (!$topics) {
+            addMsg(Translate::get('select topic'), 'error');
+            redirect($redirect);
+        }
+
+        // Если есть смена post_user_id и это TL5
+        $user_new  = Request::getPost('user_id');
+        $post_user_new = json_decode($user_new, true);
+        $post_user_id = $post['post_user_id'];
+        if ($post['post_user_id'] != $post_user_new[0]['id']) {
+            if ($this->uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) {
+                $post_user_id = $post_user_new[0]['id'];
+            }
+        }
+
+        Validation::Limits($post_title, Translate::get('title'), '6', '250', $redirect);
+
+        if ($post_content == '') {
+            $post_content = $post['post_content'];
+        }
+        Validation::Limits($post_content, Translate::get('the post'), '6', '25000', $redirect);
+
+        if ($post_slug == '') {
+            $post_slug = $post['post_slug'];
+        }
+        Validation::Limits($post_slug, Translate::get('the post'), '6', '25000', $redirect);
+
+        $data = [
+            'post_id'               => $post['post_id'],
+            'post_title'            => $post_title,
+            'post_slug'             => $post_slug,
+            'post_feature'          => 0,
+            'post_type'             => 'page',
+            'post_translation'      => 0,
+            'post_date'             => $post['post_date'],
+            'post_user_id'          => $post_user_id ?? 1,
+            'post_draft'            => 0,
+            'post_content'          => Content::change($post_content),
+            'post_content_img'      => '',
+            'post_related'          => '',
+            'post_merged_id'        => 0,
+            'post_tl'               => 0,
+            'post_closed'           => 0,
+            'post_top'              => 0,
+        ];
+
+        // Перезапишем пост
+        PostModel::editPost($data);
+
+        // Запишем темы
+        $arr = [];
+        foreach ($topics as $ket => $row) {
+            $arr[] = $row;
+        }
+        FacetModel::addPostFacets($arr, $post_id);
+
+        $facet = FacetModel::getFacet($topics[0]['id'], 'id');
+        redirect(getUrlByName('page', ['facet' => $facet['facet_slug'], 'slug' => $post_slug]));
     }
 
     // Удаление обложки

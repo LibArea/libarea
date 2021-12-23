@@ -126,6 +126,7 @@ $data = [
     'social networks'   => '社交網絡',
     'official'          => '官方的',
     'community'         => '社區',
+    'works on'          => '工程',
     'trust level'       => '信任級別',
     'search'            => '搜索',
     'to find'           => '尋找',
@@ -252,8 +253,6 @@ $data = [
     'rules'                 => '網站規則',
     'privacy policy'        => '隱私政策',
     'restriction'           => '限制',
-    'privacy-desc'          => '網站隱私政策。 網站規則。',
-    'info-desc'             => '信息，幫助。 規則、隱私政策、站點存檔和技術。',
     'no-invate-txt'         => '還不是用戶？ 邀請註冊僅用於打擊垃圾郵件和增加問責制。 如果您知道該網站的<a href="/users">當前用戶</a>，請向他發出邀請。',
 
     /* 日期和時間 + 事件 */
@@ -360,6 +359,17 @@ $data = [
     'there is a program'    => '有程序嗎？',
     'hosted on github'      => '程序在 GitHub 上嗎？',
     'url address github'    => 'GitHub 上的存儲庫 URL ',
+
+    'sections'              => '節',
+    'section'               => '節',
+    'pages'                 => '頁面',
+    'edit page'             => '編輯頁面',
+    'add page'              => '添加頁面',
+    'go to'                 => '前往',
+    'frameworks'            => '框架',
+    'interesting sites'     => '有趣的網站',
+    'facts'                 => '事實',
+    'psychology'            => '心理學',
 
     /* 元描述  */
     'desc-user-all'         => '所有參與者的名單按網站上的註冊日期排序',

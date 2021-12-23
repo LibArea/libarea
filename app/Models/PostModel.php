@@ -25,6 +25,7 @@ class PostModel extends MainModel
             'post_merged_id'    =>  $data['post_merged_id'],
             'post_tl'           =>  $data['post_tl'],
             'post_slug'         =>  $data['post_slug'],
+            'post_feature'      =>  $data['post_feature'],
             'post_type'         =>  $data['post_type'],
             'post_translation'  =>  $data['post_translation'],
             'post_draft'        =>  $data['post_draft'],
@@ -45,6 +46,7 @@ class PostModel extends MainModel
                                     post_merged_id,
                                     post_tl,
                                     post_slug,
+                                    post_feature,
                                     post_type,
                                     post_translation,
                                     post_draft,
@@ -64,6 +66,7 @@ class PostModel extends MainModel
                                     :post_merged_id,
                                     :post_tl,
                                     :post_slug,
+                                    :post_feature,
                                     :post_type,
                                     :post_translation,
                                     :post_draft,
@@ -103,8 +106,9 @@ class PostModel extends MainModel
                     post_id,
                     post_title,
                     post_slug,
-                    post_type,
+                    post_feature,
                     post_translation,
+                    post_type,
                     post_draft,
                     post_date,
                     post_published,
@@ -152,6 +156,7 @@ class PostModel extends MainModel
                     post_id,
                     post_title,
                     post_slug,
+                    post_feature,
                     post_type,
                     post_translation,
                     post_draft,
@@ -197,9 +202,10 @@ class PostModel extends MainModel
                     post_id,
                     post_title,
                     post_slug,
-                    post_type,
+                    post_feature,
                     post_tl,
                     post_answers_count,
+                    post_type,
                     post_draft,
                     post_user_id,
                     post_is_deleted
@@ -228,6 +234,8 @@ class PostModel extends MainModel
     {
         $params = [
             'post_title'            => $data['post_title'],
+            'post_slug'             => $data['post_slug'],
+            'post_feature'          => $data['post_feature'],
             'post_type'             => $data['post_type'],
             'post_translation'      => $data['post_translation'],
             'post_date'             => $data['post_date'],
@@ -246,6 +254,8 @@ class PostModel extends MainModel
 
         $sql = "UPDATE posts SET 
                     post_title            = :post_title,
+                    post_slug             = :post_slug,
+                    post_feature          = :post_feature,
                     post_type             = :post_type,
                     post_translation      = :post_translation,
                     post_date             = :post_date,
@@ -273,9 +283,9 @@ class PostModel extends MainModel
         }
 
         $sql = "SELECT 
-                    post_id as value, 
-                    post_title, 
-                    post_slug 
+                    post_id as id, 
+                    post_title as value,
+                    post_slug
                         FROM posts 
                            WHERE $in post_is_deleted = 0 AND post_tl = 0";
 
@@ -337,7 +347,7 @@ class PostModel extends MainModel
         $condition  = "topic";
         if ($type == 'blog') {
             $condition  = "blog";
-        }
+        } 
 
         $sql = "SELECT
                     facet_id,

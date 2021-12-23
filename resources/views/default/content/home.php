@@ -15,11 +15,10 @@
   <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
     <p class="m0 size-18"><?= Translate::get($data['sheet']); ?></p>
     <ul class="flex flex-row list-none m0 p0 center size-15">
-
-      <?= tabs_nav(
+     
+     <?= tabs_nav(
         $uid['user_id'],
         $data['sheet'],
-        false,
         $pages = [
           [
             'id' => 'feed',
@@ -108,7 +107,7 @@
       <div class="uppercase gray mt5 mb5">
         <?= Translate::get('topics'); ?>
       </div>
-      <?php foreach (Config::get('facets-default') as $key => $topic) { ?>
+      <?php foreach (Config::get('facets.default') as $key => $topic) { ?>
         <a class="flex relative pt5 pb5 items-center hidden gray-light" href="<?= $topic['url']; ?>">
           <img class="w24 h24 mr5 br-box-gray" src="<?= $topic['img']; ?>" alt="<?= $topic['name']; ?>">
           <span class="ml5"><?= $topic['name']; ?></span>

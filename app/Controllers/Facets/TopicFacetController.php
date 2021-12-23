@@ -27,7 +27,7 @@ class TopicFacetController extends MainController
         $facet  = FacetModel::getFacet($slug, 'slug');
         pageError404($facet);
 
-        if ($facet['facet_type'] == 'blog') {
+        if ($facet['facet_type'] == 'blog' || $facet['facet_type'] == 'section') {
             include HLEB_GLOBAL_DIRECTORY . '/app/Optional/404.php';
             hl_preliminary_exit();
         }
@@ -81,6 +81,7 @@ class TopicFacetController extends MainController
                     'low_topics'    => FacetModel::getLowLevelList($facet['facet_id']),
                     'low_matching'  => FacetModel::getLowMatching($facet['facet_id']),
                     'writers'       => FacetModel::getWriters($facet['facet_id']),
+                    'pages'         => (new \App\Controllers\PageController())->last($facet['facet_id']),
                 ],
                 'facet'   => ['facet_id' => $facet['facet_id'], 'facet_type' => $facet['facet_type'], 'facet_user_id' => $facet['facet_user_id']],
             ]

@@ -22,10 +22,10 @@
     </div>
     <div class="text-info col-span-3 no-mob">
       <h4 class="mt5 mb5 uppercase font-light white"><?= Translate::get('help'); ?></h4>
-      <a class="table white gray-hover size-14 mb5" title="<?= Translate::get('info'); ?>" href="<?= getUrlByName('info'); ?>">
+      <a class="table white gray-hover size-14 mb5" title="<?= Translate::get('info'); ?>" href="/info/<?= Config::get('facets.page-one'); ?>">
         <?= Translate::get('info'); ?>
       </a>
-      <a class="table white gray-hover size-14 no-mob" title="<?= Translate::get('privacy'); ?>" href="<?= getUrlByName('info.privacy'); ?>">
+      <a class="table white gray-hover size-14 no-mob" title="<?= Translate::get('privacy'); ?>" href="/info/<?= Config::get('facets.page-two'); ?>">
         <?= Translate::get('privacy'); ?>
       </a>
     </div>

@@ -5,7 +5,7 @@
   <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
     <form action="<?= getUrlByName('notif.remove'); ?>" class="right">
-      <?= sumbit(Translate::get('i read')); ?> 
+      <?= sumbit(Translate::get('i read')); ?>
     </form>
   </div>
 
@@ -23,7 +23,7 @@
             <?= Translate::get('message'); ?>
           </a>
         <?php } ?>
- 
+
         <?php if ($notif['notification_action_type'] == 2) { ?>
           <?= Translate::get('wrote a post'); ?>
         <?php } ?>

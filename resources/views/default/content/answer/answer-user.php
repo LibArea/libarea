@@ -30,7 +30,7 @@
     <?php } ?>
 
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('user', ['login' => $answer['user_login']]) . '/answers'); ?>
-    
+
   <?php } else { ?>
     <?= no_content(Translate::get('no answers'), 'bi bi-info-lg'); ?>
   <?php } ?>

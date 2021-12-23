@@ -121,6 +121,7 @@ $data = [
     'social networks'   => 'Retele sociale',
     'official'          => 'oficial',
     'community'         => 'comunitate',
+    'works on'          => 'Funcționează pe',
     'trust level'       => 'Nivel de încredere',
     'search'            => 'Căutare',
     'user'              => 'Utilizator',
@@ -243,8 +244,6 @@ $data = [
     'rules'                 => 'Regulile site-ului',
     'privacy policy'        => 'Politica de confidențialitate',
     'restriction'           => 'Restricții',
-    'privacy-desc'          => 'Politica de confidențialitate a site-ului. Regulile site-ului.',
-    'info-desc'             => 'Informații, ajutor. Reguli, politica de confidențialitate, arhiva site-ului și tehnologia.',
     'no-invate-txt'         => 'Nu ești încă utilizator? Înregistrarea se face doar prin invitație pentru a combate spamul și a spori responsabilitatea. Dacă cunoașteți <a href="/users"> utilizatorul actual </a> al site-ului, solicitați-i o invitație.',
 
     /* Дата и время + события*/
@@ -362,6 +361,17 @@ $data = [
     'there is a program'    => 'Ai vreun program?',
     'hosted on github'      => 'Este găzduit pe GitHub?',
     'url address github'    => 'Adresa URL a depozitului GitHub',
+
+    'sections'              => 'Sectiuni',
+    'section'               => 'Sectiune',
+    'pages'                 => 'Pagini',
+    'edit page'             => 'Editează pagina',
+    'add page'              => 'Adăugați o pagină',
+    'go to'                 => 'Mergi la',
+    'frameworks'            => 'cadre',
+    'interesting sites'     => 'Site-uri interesante',
+    'facts'                 => 'Fapte',
+    'psychology'            => 'Psihologie',
 
     /* Meta - desc */
     'desc-user-all'         => 'Lista tuturor utilizatorilor sortată după data înregistrării pe site',

@@ -25,7 +25,7 @@
           <?php if ($post['post_lo'] > 0) { ?>
             <i class="bi bi-award blue"></i>
           <?php } ?>
-          <?php if ($post['post_type'] == 1) { ?>
+          <?php if ($post['post_feature'] == 1) { ?>
             <i class="bi bi-patch-question green"></i>
           <?php } ?>
           <?php if ($post['post_translation'] == 1) { ?>
@@ -216,7 +216,7 @@
       </div>
 
       <?php if ($uid['user_id'] > 0) { ?>
-        <?php if ($post['post_type'] == 0 && $post['post_draft'] == 0 && $post['post_closed'] == 0) { ?>
+        <?php if ($post['post_feature'] == 0 && $post['post_draft'] == 0 && $post['post_closed'] == 0) { ?>
 
           <form class="mb15" action="<?= getUrlByName('answer.create'); ?>" accept-charset="UTF-8" method="post">
             <?= csrf_field() ?>
@@ -245,7 +245,7 @@
   </article>
   <div id="comment"></div>
   <?php if ($post['post_draft'] == 0) {
-    if ($post['post_type'] == 0) {
+    if ($post['post_feature'] == 0) {
       import('/_block/comments-view', ['data' => $data, 'post' => $post, 'uid' => $uid]);
       if ($post['post_closed'] == 1) echo no_content(Translate::get('the post is closed'), 'bi bi-door-closed');
     } else {
@@ -292,16 +292,20 @@
     <div class="br-box-gray bg-white br-rd5 mb15 sticky top70 p15">
       <h3 class="uppercase mb10 mt0 font-light size-14 gray"><?= Translate::get('recommended'); ?></h3>
       <?php foreach ($data['recommend'] as  $rec_post) { ?>
-        <div class="mb15 hidden flex size-14">
-          <a class="gray" href="<?= getUrlByName('post', ['id' => $rec_post['post_id'], 'slug' => $rec_post['post_slug']]); ?>">
-            <?php if ($rec_post['post_answers_count'] > 0) { ?>
-              <div class="p5 pr10 pb5 pl10 bg-green-400 br-rd3 white center mr15">
-                <?= $rec_post['post_answers_count'] ?>
-              </div>
-            <?php } else { ?>
-              <div class="p5 pr10 pb5 pl10 bg-gray-300 br-rd3 gray center mr15">0</div>
-            <?php } ?>
-          </a>
+        <div class="mb15 hidden flex size-14"> 
+          <?php if ($rec_post['post_type'] == 'post') { ?>
+            <a class="gray" href="<?= getUrlByName('post', ['id' => $rec_post['post_id'], 'slug' => $rec_post['post_slug']]); ?>">
+              <?php if ($rec_post['post_answers_count'] > 0) { ?>
+                <div class="p5 pr10 pb5 pl10 bg-green-400 br-rd3 white center mr15">
+                  <?= $rec_post['post_answers_count'] ?>
+                </div>
+              <?php } else { ?>
+                <div class="p5 pr10 pb5 pl10 bg-gray-300 br-rd3 gray center mr15">0</div>
+              <?php } ?>
+            </a>
+          <?php } else { ?>
+            <i class="bi bi-intersect gray-light-2 middle mr15 size-24"></i>
+          <?php } ?>          
           <a class="black dark-white" href="<?= getUrlByName('post', ['id' => $rec_post['post_id'], 'slug' => $rec_post['post_slug']]); ?>">
             <?= $rec_post['post_title']; ?>
           </a>

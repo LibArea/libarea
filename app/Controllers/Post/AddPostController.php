@@ -18,9 +18,17 @@ class AddPostController extends MainController
     }
 
     // Форма добавление поста
-    public function index()
+    public function index($type_content)
     {
-        Request::getResources()->addBottomScript('/assets/js/uploads.js');
+        if ($type_content == 'post') {
+            Request::getResources()->addBottomScript('/assets/js/uploads.js');
+        } else {
+            if ($this->uid['user_trust_level'] < Base::USER_LEVEL_ADMIN) {
+                $count  = FacetModel::countFacetsUser($this->uid['user_id'], 'blog');
+                if(!$count) redirect('/');
+            }
+        }
+        
         Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
         Request::getResources()->addBottomScript('/assets/js/tag/tagify.min.js');
         Request::getResources()->addBottomStyles('/assets/js/editor/toastui-editor.min.css');
@@ -34,17 +42,20 @@ class AddPostController extends MainController
         // Добавление со странице темы
         $topic_id   = Request::getInt('topic_id');
         $topic      = FacetModel::getFacet($topic_id, 'id');
-
+ 
         $facets = ['topic' => $topic];
         if ($topic) {
             if ($topic['facet_type'] == 'blog') {
-                $facets  = ['blog' => $topic];
+                $facets  = ['blog' => $topic]; 
                 if ($topic['facet_user_id'] != $this->uid['user_id']) redirect('/');
             }
         }
 
+        $puth = '/post/add';
+        if ($type_content == 'page') $puth = '/page/add';
+        
         return agRender(
-            '/post/add',
+            $puth,
             [
                 'meta'      => meta($m = [], Translate::get('add post')),
                 'uid'       => $this->uid,
@@ -67,7 +78,7 @@ class AddPostController extends MainController
         $post_closed            = Request::getPostInt('closed');
         $post_draft             = Request::getPostInt('post_draft');
         $post_top               = Request::getPostInt('top');
-        $post_type              = Request::getPostInt('post_type');
+        $post_feature           = Request::getPostInt('post_feature');
         $post_translation       = Request::getPostInt('translation');
         $post_merged_id         = Request::getPostInt('post_merged_id');
         $post_tl                = Request::getPostInt('post_tl');
@@ -171,7 +182,8 @@ class AddPostController extends MainController
             'post_merged_id'        => $post_merged_id,
             'post_tl'               => $post_tl ?? 0,
             'post_slug'             => $post_slug,
-            'post_type'             => $post_type,
+            'post_feature'          => $post_feature,
+            'post_type'             => 'post',
             'post_translation'      => $post_translation,
             'post_draft'            => $post_draft,
             'post_ip'               => Request::getRemoteAddress(),
@@ -195,11 +207,9 @@ class AddPostController extends MainController
         }
 
         // Получим id блога с формы выбора
-        $blog_post  = $post_fields['blog_select'] ?? [];
-        $blog       = json_decode($blog_post, true); // <- Array ([0]=> Array ([id]=> 53 [value]=> Блог [tl]=> 0)) 
-        $form_id    = $blog[0]['id'];
-
-        if ($blog) {
+        $blog_post  = $post_fields['blog_select'] ?? false;
+        if ($blog_post) {
+            $blog       = json_decode($blog_post, true); 
             $topics = array_merge($blog, $topics);
         }
 
@@ -234,6 +244,99 @@ class AddPostController extends MainController
 
         redirect($url_post);
     }
+
+
+    // Добавим пост
+    public function createPage()
+    {
+        // Получаем title и содержание
+        $post_title             = Request::getPost('post_title');
+        $post_content           = $_POST['content']; // для Markdown
+        $post_url               = Request::getPost('post_url');
+        $blog_id                = Request::getPostInt('blog_id');
+
+        // Получим id Блога с формы выбора или Раздел с фасета
+        $post_fields    = Request::getPost() ?? [];
+        $facet_post     = $post_fields['section_select'] ?? [];
+        if ($facet_post) {
+            $topics     = json_decode($facet_post, true);
+        }
+        
+        $blog_post  = $post_fields['blog_select'] ?? false;
+        if ($blog_post) {
+            $blog   = json_decode($blog_post, true); 
+            $topics = array_merge($blog, $topics ?? []);
+        }
+ 
+        // Используем для возврата
+        $redirect = getUrlByName('page.add');
+        if ($blog_id > 0) {
+            $redirect = getUrlByName('page.add') . '/' . $blog_id;
+        }
+
+        // Если пользователь забанен / заморожен
+        $user = UserModel::getUser($this->uid['user_id'], 'id');
+        (new \App\Controllers\Auth\BanController())->getBan($user);
+        Content::stopContentQuietМode($user);
+
+        if ($this->uid['user_trust_level'] < Base::USER_LEVEL_ADMIN) {
+            $count  = FacetModel::countFacetsUser($this->uid['user_id'], 'blog');
+            if(!$count) redirect('/');
+        }
+        
+        // Если нет темы
+        if (!$topics) {
+            addMsg(Translate::get('select topic') . '!', 'error');
+            redirect($redirect);
+        }
+
+        Validation::Limits($post_title, Translate::get('title'), '6', '250', $redirect);
+        Validation::Limits($post_content, Translate::get('the post'), '6', '25000', $redirect);
+
+        // Ограничим добавления постов (в день)
+        Validation::speedAdd($this->uid, 'post');
+
+        // Получаем SEO поста
+        $slug       = new Slug();
+        $uri        = $slug->create($post_title);
+        $post_slug  = substr($uri, 0, 90);
+
+        $data = [
+            'post_title'            => $post_title,
+            'post_content'          => Content::change($post_content),
+            'post_content_img'      => '',
+            'post_thumb_img'        => '',
+            'post_related'          => '',
+            'post_merged_id'        => 0,
+            'post_tl'               => 0,
+            'post_slug'             => $post_slug,
+            'post_feature'          => 0,
+            'post_type'             => 'page',
+            'post_translation'      => 0,
+            'post_draft'            => 0,
+            'post_ip'               => Request::getRemoteAddress(),
+            'post_published'        => 1,
+            'post_user_id'          => $this->uid['user_id'],
+            'post_url'              => '',
+            'post_url_domain'       => '',
+            'post_closed'           => 0,
+            'post_top'              => 0,
+        ];
+        
+        $last_post_id   = PostModel::AddPost($data);
+        $facet = FacetModel::getFacet($topics[0]['id'], 'id');
+        $url_post       = getUrlByName('page', ['facet' => $facet['facet_slug'], 'slug' => $post_slug]);
+
+        // Запишем темы и блог
+        $arr = [];
+        foreach ($topics as $ket => $row) {
+            $arr[] = $row;
+        }
+        FacetModel::addPostFacets($arr, $last_post_id);
+
+        redirect($url_post);
+    }
+
 
     // Парсинг
     public function grabMeta()
