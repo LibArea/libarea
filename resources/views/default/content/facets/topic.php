@@ -1,5 +1,10 @@
-<div class="sticky col-span-2 justify-between no-mob">
-  <?= import('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+<div class="sticky top0 col-span-2 justify-between no-mob">
+  <?= tabs_nav(
+        'menu',
+        $data['type'],
+        $uid,
+        $pages = Config::get('menu.left'),
+      ); ?>
 </div>
 <?php $topic = $data['facet']; ?>
 <main class="col-span-7 mb-col-12">
@@ -40,26 +45,27 @@
       <ul class="flex flex-row list-none m0 p0 center size-15">
 
         <?= tabs_nav(
-          $uid['user_id'],
-          $data['sheet'],
+          'nav',
+          $data['type'],
+          $uid,
           $pages = [
             [
-              'id' => 'topic',
-              'url' => getUrlByName('topic', ['slug' => $topic['facet_slug']]),
-              'content' => Translate::get('feed'),
-              'icon' => 'bi bi-sort-down'
+              'id'      => 'topic',
+              'url'     => getUrlByName('topic', ['slug' => $topic['facet_slug']]),
+              'title'   => Translate::get('feed'),
+              'icon'    => 'bi bi-sort-down'
             ],
             [
-              'id' => 'recommend',
-              'url' => getUrlByName('topic', ['slug' => $topic['facet_slug']]) . '/recommend',
-              'content' => Translate::get('recommended'),
-              'icon' => 'bi bi-lightning'
+              'id'      => 'recommend',
+              'url'     => getUrlByName('topic', ['slug' => $topic['facet_slug']]) . '/recommend',
+              'title'   => Translate::get('recommended'),
+              'icon'    => 'bi bi-lightning'
             ],
             [
-              'id' => 'info',
-              'url' => getUrlByName('topic.info', ['slug' => $topic['facet_slug']]),
-              'content' => Translate::get('info'),
-              'icon' => 'bi bi-info-lg'
+              'id'      => 'info',
+              'url'     => getUrlByName('topic.info', ['slug' => $topic['facet_slug']]),
+              'title'   => Translate::get('info'),
+              'icon'    => 'bi bi-info-lg'
             ],
           ]
         ); ?>

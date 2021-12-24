@@ -47,6 +47,7 @@ class EditFacetController extends MainController
                     'low_arr'           => FacetModel::getLowLevelList($facet['facet_id']),
                     'user'              => UserModel::getUser($facet['facet_user_id'], 'id'),
                     'sheet'             => $facet['facet_type'] . 's',
+                    'type'              => 'edit',
                 ]
             ]
         );
@@ -215,9 +216,10 @@ class EditFacetController extends MainController
                 'meta'  => meta($m = [], Translate::get('edit') . ' | ' . $facet['facet_title']),
                 'uid'   => $this->uid,
                 'data'  => [
-                    'facet'         => $facet,
-                    'pages'  => (new \App\Controllers\PageController())->last($facet['facet_id']),
-                    'sheet'         => $facet['facet_type'] . 's',
+                    'facet' => $facet,
+                    'pages' => (new \App\Controllers\PageController())->last($facet['facet_id']),
+                    'sheet' => $facet['facet_type'] . 's',
+                    'type'  => 'pages',
                 ]
             ]
         );

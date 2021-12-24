@@ -1,5 +1,10 @@
-<div class="sticky col-span-2 justify-between no-mob">
-  <?= import('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+<div class="sticky top0 col-span-2 justify-between no-mob">
+  <?= tabs_nav(
+        'menu',
+        $data['type'],
+        $uid,
+        $pages = Config::get('menu.left'),
+      ); ?>
 </div>
 
 <?php $fs = $data['facet']; ?>
@@ -11,23 +16,24 @@
     <ul class="flex flex-row list-none m0 p0 center size-15">
 
       <?= tabs_nav(
-        $uid['user_id'],
-        $data['sheet'],
+        'nav',
+        $data['type'],
+        $uid,
         $pages = [
           [
-            'id'        => '',
+            'id'        => 'edit',
             'url'       => getUrlByName($fs['facet_type'] . '.edit', ['id' => $fs['facet_id']]),
-            'content'   => Translate::get('settings'),
+            'title'     => Translate::get('settings'),
             'icon'      => 'bi bi-gear'
           ], [
-            'id'        => $data['sheet'],
+            'id'        => 'pages',
             'url'       => '',
-            'content'   => Translate::get('pages'),
+            'title'     => Translate::get('pages'),
             'icon'      => 'bi bi-app'
           ], [
             'id'        => 'all',
             'url'       => getUrlByName($fs['facet_type'], ['slug' => $fs['facet_slug']]),
-            'content'   => Translate::get('go to'),
+            'title'     => Translate::get('go to'),
             'icon'      => 'bi bi-arrow-up-right-square'
           ]
         ]

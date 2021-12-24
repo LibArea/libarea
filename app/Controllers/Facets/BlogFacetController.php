@@ -16,8 +16,9 @@ class BlogFacetController extends MainController
     {
         $this->uid  = Base::getUid();
     }
-
-    // Посты по теме
+    
+    // Blog posts
+    // Посты в блоге
     public function index($sheet)
     {
         $page   = Request::getInt('page');
@@ -48,7 +49,7 @@ class BlogFacetController extends MainController
         }
 
         $url    = getUrlByName('blog', ['slug' => $facet['facet_slug']]);
-        $title  = $facet['facet_seo_title'] . ' — ' .  Translate::get('topic');
+        $title  = $facet['facet_seo_title'] . ' — ' .  Translate::get('blog');
         $descr  = $facet['facet_description'];
 
         $m = [
@@ -67,6 +68,7 @@ class BlogFacetController extends MainController
                     'pagesCount'    => ceil($pagesCount / $limit),
                     'pNum'          => $page,
                     'sheet'         => $sheet,
+                    'type'          => 'blog',
                     'facet'         => $facet,
                     'posts'         => $result,
                     'user'          => UserModel::getUser($facet['facet_user_id'], 'id'),

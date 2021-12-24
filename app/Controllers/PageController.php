@@ -97,7 +97,8 @@ class PageController extends MainController
                 'meta'  => meta($m, Translate::get('restriction'), Translate::get('the profile is being checked')),
                 'uid'   => $this->uid,
                 'data'  => [
-                    'sheet'  => 'restriction',
+                    'sheet' => 'restriction',
+                    'type'  => 'page',
                 ]
             ]
         );

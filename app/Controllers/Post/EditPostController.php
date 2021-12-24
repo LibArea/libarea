@@ -51,6 +51,7 @@ class EditPostController extends MainController
                 'uid'   => $this->uid,
                 'data'  => [
                     'sheet'         => 'edit-post',
+                    'type'          => 'edit',
                     'post'          => $post,
                     'user'          => UserModel::getUser($post['post_user_id'], 'id'),
                     'post_arr'      => $post_related,

@@ -18,7 +18,7 @@ class HomeController extends MainController
         $this->uid  = Base::getUid();
     }
 
-    public function index($sheet)
+    public function index($sheet, $type)
     {
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
@@ -73,6 +73,7 @@ class HomeController extends MainController
                     'pagesCount'        => ceil($pagesCount / $this->limit),
                     'pNum'              => $page,
                     'sheet'             => $sheet,
+                    'type'              => $type,
                     'latest_answers'    => $result_answers,
                     'topics_user'       => $topics_user,
                     'posts'             => $result_post,

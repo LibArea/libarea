@@ -20,7 +20,7 @@ class AnswerController extends MainController
     }
 
     // Все ответы
-    public function index()
+    public function index($type)
     {
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
@@ -51,6 +51,7 @@ class AnswerController extends MainController
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
                     'sheet'         => 'answers',
+                    'type'          => $type,
                     'answers'       => $result,
                 ]
             ]
@@ -93,7 +94,7 @@ class AnswerController extends MainController
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
                     'sheet'         => 'user-answers',
-                    'type'          => Translate::get('answers') . ' ' . $user['user_login'],
+                    'type'          => 'answers.user',
                     'answers'       => $result,
                     'user_login'    => $user['user_login'],
                 ]

@@ -1,5 +1,10 @@
-<div class="sticky col-span-2 justify-between no-mob">
-  <?= import('/_block/menu/left', ['sheet' => $data['type'], 'uid' => $uid]); ?>
+<div class="sticky mt5 top0 col-span-2 justify-between no-mob">
+  <?= tabs_nav(
+        'menu',
+        $data['type'],
+        $uid,
+        $pages = Config::get('menu.left'),
+      ); ?>
 </div>
 <main class="col-span-10 mb-col-12">
   <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
@@ -26,27 +31,29 @@
     <ul class="flex flex-row list-none m0 p0 center size-15">
 
       <?= tabs_nav(
-        $uid['user_id'],
+        'nav',
         $data['sheet'],
+        $uid,
         $pages = [
           [
-            'id' => $data['type'] . '.all',
-            'url' => getUrlByName($data['type'] . '.all'),
-            'content' => Translate::get('all'),
-            'icon' => 'bi bi-app'
+            'id'    => $data['type'] . '.all',
+            'url'   => getUrlByName($data['type'] . '.all'),
+            'title' => Translate::get('all'),
+            'icon'  => 'bi bi-app'
           ],
           [
-            'id' => $data['type'] . '.new',
-            'url' => getUrlByName($data['type'] . '.new'),
-            'content' => Translate::get('new ones'),
-            'icon' => 'bi bi-sort-up'
+            'id'    => $data['type'] . '.new',
+            'url'   => getUrlByName($data['type'] . '.new'),
+            'title' => Translate::get('new ones'),
+            'icon'  => 'bi bi-sort-up'
           ],
           [
-            'id' => $data['type'] . '.my',
-            'url' => getUrlByName($data['type'] . '.my'),
-            'content' => Translate::get('reading'),
-            'auth' => 'yes',
-            'icon' => 'bi bi-check2-square'
+            'auth'  => true,
+            'tl'    => 0,
+            'id'    => $data['type'] . '.my',
+            'url'   => getUrlByName($data['type'] . '.my'),
+            'title' => Translate::get('reading'),
+            'icon'  => 'bi bi-check2-square'
           ],
         ]
       );

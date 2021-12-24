@@ -24,6 +24,7 @@ class TreeFacetController extends MainController
                 'uid'   => $this->uid,
                 'data'  => [
                     'sheet'     => 'structure',
+                    'type'      => 'topic',
                     'structure' => self::builder(0, 0, FacetModel::getStructure()),
                 ]
             ]

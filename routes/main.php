@@ -99,8 +99,8 @@ Route::before('Authorization@noAuth')->getGroup();
  
     Route::get('/blogs/my')->controller('Facets\AllFacetController', ['blogs.my', 'blogs'])->name('blogs.my');
  
-    Route::get('/all')->controller('HomeController', ['all'])->name('main.all');
-    Route::get('/all/page/{page?}')->controller('HomeController', ['all'])->where(['page' => '[0-9]+']);
+    Route::get('/all')->controller('HomeController', ['main.all', 'main'])->name('main.all');
+    Route::get('/all/page/{page?}')->controller('HomeController', ['main.all', 'main'])->where(['page' => '[0-9]+']);
     
     Route::get('/moderations')->controller('ActionController@moderation')->name('moderation');
 Route::endGroup();
@@ -142,7 +142,7 @@ Route::get('/topic/{slug}/followers/{id}')->controller('Facets\TopicFacetControl
 Route::get('/post/{id}')->controller('Post\PostController')->where(['id' => '[0-9]+']);
 Route::get('/post/{id}/{slug}')->controller('Post\PostController')->where(['id' => '[0-9]+', 'slug' => '[A-Za-z0-9-_]+'])->name('post');
 
-Route::get('/users')->controller('User\UserController')->name('users');
+Route::get('/users')->controller('User\UserController', ['users'])->name('users');
 Route::get('/users/page/{page?}')->controller('User\UserController')->where(['page' => '[0-9]+']);
 
 Route::get('/u/{login}')->controller('User\UserController@profile')->where(['login' => '[A-Za-z0-9]+'])->name('user');
@@ -156,10 +156,10 @@ Route::get('/u/{login}/answers/page/{page?}')->controller('Answer\AnswerControll
 Route::get('/u/{login}/comments')->controller('Comment\CommentController@userComments')->where(['login' => '[A-Za-z0-9]+'])->name('comments.user');
 Route::get('/u/{login}/comments/page/{page?}')->controller('Comment\CommentController@userComments')->where(['page' => '[0-9]+', 'login' => '[A-Za-z0-9]+']);
 
-Route::get('/comments')->controller('Comment\CommentController')->name('comments');
-Route::get('/comments/page/{page?}')->controller('Comment\CommentController')->where(['page' => '[0-9]+']);
-Route::get('/answers')->controller('Answer\AnswerController')->name('answers');
-Route::get('/answers/page/{page?}')->controller('Answer\AnswerController')->where(['page' => '[0-9]+']);
+Route::get('/comments')->controller('Comment\CommentController', ['comments'])->name('comments');
+Route::get('/comments/page/{page?}')->controller('Comment\CommentController', ['comments'])->where(['page' => '[0-9]+']);
+Route::get('/answers')->controller('Answer\AnswerController', ['answers'])->name('answers');
+Route::get('/answers/page/{page?}')->controller('Answer\AnswerController', ['answers'])->where(['page' => '[0-9]+']);
 
 Route::get('/topics')->controller('Facets\AllFacetController', ['topics.all', 'topics'])->name('topics.all');
 Route::get('/topics/page/{page?}')->controller('Facets\AllFacetController', ['topics.all', 'topics'])->where(['page' => '[0-9]+']);
@@ -193,10 +193,10 @@ Route::get('/web/{slug}/new')->controller('Item\WebController@sites', ['new'])->
 Route::get('/web/website/{slug}')->controller('Item\WebController@website', ['feed'])->where(['slug' => '[A-Za-z0-9.-]+'])->name('web.website');
 Route::get('/web/{slug}/page/{page?}')->controller('Item\WebController@sites', ['feed'])->where(['slug' => '[A-Za-z0-9-]+', 'page' => '[0-9]+']);
 
-Route::get('/')->controller('HomeController', ['feed']);
-Route::get('/page/{page?}')->controller('HomeController', ['feed'])->where(['page' => '[0-9]+']);
-Route::get('/top')->controller('HomeController', ['top'])->name('main.top');
-Route::get('/top/page/{page?}')->controller('HomeController', ['top'])->where(['page' => '[0-9]+']);
+Route::get('/')->controller('HomeController', ['main.feed', 'main']);
+Route::get('/page/{page?}')->controller('HomeController', ['main.feed', 'main'])->where(['page' => '[0-9]+']);
+Route::get('/top')->controller('HomeController', ['main.top', 'main'])->name('main.top');
+Route::get('/top/page/{page?}')->controller('HomeController', ['main.top', 'main'])->where(['page' => '[0-9]+']);
 
 Route::get('/sitemap.xml')->controller('RssController');
 Route::get('/turbo-feed/topic/{slug}')->controller('RssController@turboFeed')->where(['slug' => '[A-Za-z0-9-]+']);
@@ -206,6 +206,8 @@ Route::type(['get', 'post'])->get('/search')->controller('SearchController')->na
 
 require 'admin.php';
 
+ 
 Route::get('/info/restriction')->controller('PageController@restriction')->name('info.restriction');
 Route::get('/{facet}/{slug}')->controller('PageController')->where(['facet' => '[A-Za-z0-9-_]+', 'slug' => '[A-Za-z0-9-_]+'])->name('page');
 Route::get('/info')->controller('PageController@redirectPage');
+Route::get('/info/information')->controller('PageController@restriction')->name('info.information');

@@ -53,6 +53,7 @@ class WebController extends MainController
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
                     'items'         => $result,
+                    'type'          => 'web',
                 ]
             ]
         );
@@ -100,7 +101,8 @@ class WebController extends MainController
                     'pNum'          => $page,
                     'posts'         => $result,
                     'domains'       => WebModel::getItemsTop($domain),
-                    'item'          => $item
+                    'item'          => $item,
+                    'type'          => 'web',
                 ]
             ]
         );
@@ -137,6 +139,7 @@ class WebController extends MainController
                 'uid'   => $this->uid,
                 'data'  => [
                     'sheet'         => $sheet,
+                    'type'          => 'web',
                     'count'         => $pagesCount,
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
@@ -192,6 +195,7 @@ class WebController extends MainController
                 'uid'   => $this->uid,
                 'data'  => [
                     'sheet'         => 'sites-topic',
+                    'type'          => 'web',
                     'item'          => $item,
                     'topics'        => $topics,
                     'high_leve'     => FacetModel::getHighLevelList($high_leve),

@@ -1,5 +1,10 @@
 <div class="sticky col-span-2 justify-between no-mob">
-  <?= import('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+  <?= tabs_nav(
+        'menu',
+        $data['type'],
+        $uid,
+        $pages = Config::get('menu.left'),
+      ); ?>
 </div>
 <main class="col-span-7 mb-col-12 mb10">
   <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">

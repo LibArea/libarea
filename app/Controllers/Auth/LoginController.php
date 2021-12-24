@@ -76,6 +76,7 @@ class LoginController extends MainController
                 'uid'   => Base::getUid(),
                 'data'  => [
                     'sheet' => 'sign in',
+                    'type'  => 'login',
                 ]
             ]
         );

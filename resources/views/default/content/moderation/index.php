@@ -1,5 +1,10 @@
-<div class="sticky col-span-2 justify-between no-mob">
-  <?= import('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+<div class="sticky top0 col-span-2 justify-between no-mob">
+  <?= tabs_nav(
+        'menu',
+        $data['type'],
+        $uid,
+        $pages = Config::get('menu.left'),
+      ); ?>
 </div>
 <main class="col-span-7 mb-col-12 bg-white br-rd5 br-box-gray pt5 mt15 pr15 pb5 pl15">
   <h1 class="mt0 mb10 size-24 font-normal"><?= Translate::get('moderation log'); ?></h1>

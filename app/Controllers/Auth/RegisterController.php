@@ -32,6 +32,7 @@ class RegisterController extends MainController
                 'uid'   => Base::getUid(),
                 'data'  => [
                     'sheet' => 'sign up',
+                    'type'  => 'register'
                 ]
             ]
         );
@@ -171,6 +172,7 @@ class RegisterController extends MainController
                 'uid'   => Base::getUid(),
                 'data'  => [
                     'invate' => $invate,
+                    'type'  => 'invite'
                 ]
             ]
         );

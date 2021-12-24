@@ -41,6 +41,7 @@ class EditWebController extends MainController
                 'data'  => [
                     'domain'    => $domain,
                     'sheet'     => 'domains',
+                    'type'      => 'web',
                     'topic_arr' => WebModel::getItemTopic($domain['item_id']),
                     'post_arr'  => $item_post_related,
                 ]

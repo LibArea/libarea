@@ -35,6 +35,7 @@ class SettingController extends MainController
                 'uid'   => $this->uid,
                 'data'  => [
                     'sheet'         => 'settings',
+                    'type'          => 'user',
                     'user'          => $user,
                 ]
             ]
@@ -110,6 +111,7 @@ class SettingController extends MainController
                 'uid'   => $this->uid,
                 'data'  => [
                     'sheet' => 'avatar',
+                    'type'  => 'user',
                     'user'  => UserModel::getUser($this->uid['user_login'], 'slug'),
                 ]
             ]
@@ -157,6 +159,7 @@ class SettingController extends MainController
                     'password2'     => '',
                     'password3'     => '',
                     'sheet'         => 'security',
+                    'type'          => 'user',
                 ]
             ]
         );
@@ -250,6 +253,7 @@ class SettingController extends MainController
                 'uid'   => $this->uid,
                 'data'  => [
                     'sheet'     => 'notifications',
+                    'type'      => 'user',
                     'setting'   => SettingModel::getNotifications($user['user_id']),
                 ]
             ]

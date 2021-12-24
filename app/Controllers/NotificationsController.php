@@ -41,6 +41,7 @@ class NotificationsController extends MainController
                 'uid'   => $this->uid,
                 'data'  => [
                     'sheet'         => 'notifications',
+                    'type'          => 'notifications',
                     'notifications' => $result,
                 ]
             ]

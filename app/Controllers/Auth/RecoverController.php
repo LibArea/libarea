@@ -25,6 +25,7 @@ class RecoverController extends MainController
                 'uid'   => Base::getUid(),
                 'data'  => [
                     'sheet' => 'recover',
+                    'type'  => 'recover',
                 ]
             ]
         );
@@ -92,6 +93,7 @@ class RecoverController extends MainController
                     'code'      => $code,
                     'user_id'   => $user_id['activate_user_id'],
                     'sheet'     => 'recovery',
+                    'type'      => 'newrecover',
                 ]
             ]
         );

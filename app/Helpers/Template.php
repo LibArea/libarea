@@ -285,23 +285,41 @@ function favorite_post($user_id, $post_id, $favorite_tid, $css = '')
     return $html;
 }
 
-function tabs_nav($user_id, $sheet, array $pages = [])
+function tabs_nav($name, $item, $uid, array $pages = [])
 {
     $html = '';
-    foreach ($pages as $key => $page) {
-        if (empty($page['auth']) != false || $user_id > 0) {
-            if ($page['id'] == $sheet) {
-                $html .= '<li class="blue ml30 mb-mr-5 mb-ml-10">
-                    <i class="' .  $page['icon'] . ' mr5"></i>
-                    <span class="mb-size-13">' . $page['content'] . '</span></li>';
-            } else {
-                $html .= '<li class="ml30 mb-mr-5 mb-ml-10">
-                    <a class="gray" href="' . $page['url'] . '">
-                    <i class="' . $page['icon'] . ' mr5"></i>
-                    <span class="mb-size-13">' . $page['content'] . '</span></a></li>';
+    if ($name == 'nav') {
+        foreach ($pages as $key => $page) {  
+            if (empty($page['auth']) || $uid['user_trust_level'] >= $page['tl']) {
+                $classes    = 'ml30 mb-mr-5 mb-ml-10 gray';
+                $isActive   = $page['id'] == $item ? $classes . ' blue' : $classes;
+                
+                $html .= '<a class="' . $isActive . '" href="' . $page['url'] . '">
+                            <i class="' . $page['icon'] . ' mr5"></i>
+                                <span class="mb-size-13">' . $page['title'] . '</span></a>';
             }
         }
-    }
+        
+    } else { 
+    
+        foreach ($pages as $key => $page) {
+            
+            if (!empty($page['hr'])) { 
+                if ($uid['user_id'] > 0) $html .= '<hr>'; 
+            } else {
+            
+                if (empty($page['auth'])  || $uid['user_trust_level'] > $page['tl']) {
+                    $classes    = 'pt5 pb5 pl10 flex flex-row items-center gray';
+                    $isActive   = $page['id'] == $item ? $classes . ' blue' : $classes;
+                    
+                    $html .= '<a class="' . $isActive . '" href="' . $page['url'] . '">
+                                <i class="' . $page['icon'] . ' mr10 size-21"></i>
+                                    <span class="mb-size-13">' . $page['title'] . '</span></a>';
+                                        
+                }
+            }    
+        }
+    }    
 
     return $html;
 }

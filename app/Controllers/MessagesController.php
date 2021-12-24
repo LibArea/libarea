@@ -67,8 +67,9 @@ class MessagesController extends MainController
                 'meta'  => meta($m = [], Translate::get('private messages')),
                 'uid'   => $uid,
                 'data'  => [
-                    'sheet'         => 'messages',
-                    'messages'      => $result,
+                    'sheet'     => 'messages',
+                    'type'      => 'messages',
+                    'messages'  => $result,
                 ]
             ]
         );
@@ -123,6 +124,7 @@ class MessagesController extends MainController
                 'data'  => [
                     'h1'                => Translate::get('dialogue') . ' - ' . $list[$key]['user_login'],
                     'sheet'             => Translate::get('dialogue') . ' - ' . $list[$key]['user_login'],
+                    'type'              => 'type',
                     'list'              => $list,
                     'recipient_user'    => $recipient_user,
                     'dialog'            => MessagesModel::lastBranches($uid['user_id']),
@@ -155,6 +157,7 @@ class MessagesController extends MainController
                 'data'  => [
                     'recipient_uid' => $user['user_id'],
                     'login'         => $user['user_login'],
+                    'type'          => 'type',
                 ]
             ]
         );

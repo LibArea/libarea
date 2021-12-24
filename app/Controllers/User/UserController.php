@@ -20,7 +20,7 @@ class UserController extends MainController
     }
 
     // Все пользователи
-    function index()
+    function index($type)
     {
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
@@ -43,6 +43,7 @@ class UserController extends MainController
                 'uid'   => $this->uid,
                 'data'  => [
                     'sheet'         => 'users',
+                    'type'         =>  $type,
                     'pagesCount'    => ceil($usersCount / $this->limit),
                     'pNum'          => $page,
                     'users'         => $users
@@ -108,6 +109,7 @@ class UserController extends MainController
                     'badges'            => BadgeModel::getBadgeUserAll($user['user_id']),
                     'user'              => $user,
                     'isBan'             => $isBan,
+                    'type'              => 'profile',
                     'participation'     => FacetModel::participation($user['user_id']),
                     'post'              => PostModel::getPostId($user['user_my_post']),
                     'button_pm'         => Validation::accessPm($this->uid, $user['user_id'], Config::get('general.tl_add_pm'))
@@ -144,6 +146,7 @@ class UserController extends MainController
                 'uid'   => $this->uid,
                 'data'  => [
                     'sheet'     => 'favorites',
+                    'type'      => 'favorites',
                     'favorites' => $result
                 ]
             ]
@@ -165,6 +168,7 @@ class UserController extends MainController
                 'data'  => [
                     'drafts'    => UserModel::userDraftPosts($this->uid['user_id']),
                     'sheet'     => 'drafts',
+                    'type'      => 'drafts',
                 ]
             ]
         );
@@ -195,6 +199,7 @@ class UserController extends MainController
                 'data'  => [
                     'h1'    => Translate::get('subscribed') . ' ' . $this->uid['user_login'],
                     'sheet' => 'subscribed',
+                    'type'  => 'subscribed',
                     'posts' => $result
                 ]
             ]

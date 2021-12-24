@@ -47,6 +47,7 @@ class SearchController extends MainController
                     'result'    => $result,
                     'query'     => $query,
                     'count'     => $count ?? 0,
+                    'type'      => 'search',
                     'tags'      => SearchModel::getSearchTags($query, $type, 10),
                 ]
             ]

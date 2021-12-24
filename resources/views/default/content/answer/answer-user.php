@@ -1,9 +1,14 @@
-<div class="sticky col-span-2 justify-between no-mob">
-  <?= import('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+<div class="sticky top0 col-span-2 justify-between no-mob">
+  <?= tabs_nav(
+    'menu',
+    $data['type'],
+    $uid,
+    $pages = Config::get('menu.left'),
+  ); ?>
 </div>
 <main class="col-span-7 mb-col-12 mb10">
   <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
-    <p class="m0"><?= Translate::get($data['type']); ?></p>
+    <p class="m0"><?= Translate::get('answers'); ?> <b><?= $data['user_login']; ?></b></p>
   </div>
   <?php if (!empty($data['answers'])) { ?>
     <?php foreach ($data['answers'] as $answer) { ?>
@@ -36,5 +41,37 @@
   <?php } ?>
 </main>
 <aside class="col-span-3 relative no-mob">
-  <?= import('/_block/menu/content', ['uid' => $uid, 'sheet' => $data['sheet']]); ?>
+  <div class="sticky top60">
+    <div class="bg-white br-rd5 br-box-gray p15 size-15">
+      <?= tabs_nav(
+        'menu',
+        $data['type'],
+        $uid,
+        $pages = [
+          [
+            'url'   => getUrlByName('user', ['login' => $data['user_login']]),
+            'title'  => Translate::get('profile'),
+            'icon'  => 'bi bi-person middle',
+            'id'    => '',
+          ], [
+            'url'   => getUrlByName('posts.user', ['login' => $data['user_login']]),
+            'title'  => Translate::get('posts'),
+            'icon'  => 'bi bi-journal-text',
+            'id'    => 'posts.user',
+          ], [
+            'url'   => getUrlByName('answers.user', ['login' => $data['user_login']]),
+            'title'  => Translate::get('answers'),
+            'icon'  => 'bi bi-chat-dots',
+            'id'    => 'answers.user',
+          ], [
+            'url'   => getUrlByName('comments.user', ['login' => $data['user_login']]),
+            'title'  => Translate::get('comments'),
+            'icon'  => 'bi bi-chat-quote',
+            'id'    => 'comments.user',
+          ],
+        ],
+      ); ?>
+    </div>
+    <?= import('/_block/sidebar/footer'); ?>
+  </div>
 </aside>

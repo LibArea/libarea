@@ -63,6 +63,7 @@ class AddPostController extends MainController
                     'facets'     => $facets,
                     'user_blog'  => FacetModel::getFacetsUser($this->uid['user_id'], 'blog'),
                     'post_arr'   => PostModel::postRelatedAll(),
+                    'type'       => 'add',
                 ]
             ]
         );

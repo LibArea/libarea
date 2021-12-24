@@ -39,11 +39,12 @@ class EditAnswerController extends MainController
                 'meta'  => meta($m = [], Translate::get('edit answer')),
                 'uid'   => $this->uid,
                 'data'  => [
-                    'answer_id'         => $answer['answer_id'],
-                    'post_id'           => $post['post_id'],
-                    'content'           => $answer['answer_content'],
-                    'sheet'             => 'edit-answers',
-                    'post'              => $post,
+                    'answer_id' => $answer['answer_id'],
+                    'post_id'   => $post['post_id'],
+                    'content'   => $answer['answer_content'],
+                    'sheet'     => 'edit-answers',
+                    'post'      => $post,
+                    'type'      => 'answer',
                 ]
             ]
         );

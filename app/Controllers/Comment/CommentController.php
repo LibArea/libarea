@@ -20,7 +20,7 @@ class CommentController extends MainController
     }
 
     // Все комментарии
-    public function index()
+    public function index($type)
     {
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
@@ -51,6 +51,7 @@ class CommentController extends MainController
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
                     'sheet'         => 'comments',
+                    'type'          => $type,
                     'comments'      => $result
                 ]
             ]
@@ -93,7 +94,7 @@ class CommentController extends MainController
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
                     'sheet'         => 'user-comments',
-                    'type'          => Translate::get('comments') . ' ' . $user['user_login'],
+                    'type'          => 'comments.user',
                     'comments'      => $result,
                     'user_login'    => $user['user_login'],
                 ]

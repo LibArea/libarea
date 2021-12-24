@@ -18,7 +18,7 @@ class HomeModel extends MainModel
         }
 
         $string = "";
-        if ($type != 'all' && $type != 'top') {
+        if ($type != 'main.all' && $type != 'main.top') {
             if ($uid['user_id'] == 0) {
                 $string = "";
             } else {
@@ -31,7 +31,7 @@ class HomeModel extends MainModel
         if ($uid['user_trust_level'] == 5) $display = "";
 
         $sort = "ORDER BY post_votes and post_date > CURDATE()-INTERVAL 3 WEEK DESC";
-        if ($type == 'feed' || $type == 'all') $sort = "ORDER BY post_top DESC, post_date DESC";
+        if ($type == 'main.feed' || $type == 'main.all') $sort = "ORDER BY post_top DESC, post_date DESC";
 
         $start  = ($page - 1) * $limit;
 

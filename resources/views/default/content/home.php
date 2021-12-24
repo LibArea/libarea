@@ -8,35 +8,43 @@
 <?php } ?>
 
 <div class="sticky top0 col-span-2 justify-between no-mob">
-  <?= import('/_block/menu/left', ['sheet' => $data['sheet'], 'uid' => $uid]); ?>
+  <?= tabs_nav(
+        'menu',
+        $data['type'],
+        $uid,
+        $pages = Config::get('menu.left'),
+      ); ?>
 </div>
 
 <main class="col-span-7 mb-col-12">
   <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
-    <p class="m0 size-18"><?= Translate::get($data['sheet']); ?></p>
+    <p class="m0 size-18"><?= Translate::get('feed'); ?></p>
     <ul class="flex flex-row list-none m0 p0 center size-15">
-     
+
      <?= tabs_nav(
-        $uid['user_id'],
+        'nav',
         $data['sheet'],
+        $uid,
         $pages = [
           [
-            'id' => 'feed',
-            'url' => '/',
-            'content' => Translate::get('feed'),
-            'icon' => 'bi bi-sort-down'
+            'id'    => $data['type'] . '.feed',
+            'url'   => '/',
+            'title' => Translate::get('feed'),
+            'icon'  => 'bi bi-sort-down'
           ],
           [
-            'id' => 'all',
-            'url' => getUrlByName('main.all'),
-            'content' => Translate::get('all'),
-            'auth' => 'yes', 'icon' => 'bi bi-app'
+            'auth'  => true,
+            'tl'    => 0,
+            'id'    => $data['type'] . '.all',
+            'url'   => getUrlByName('main.all'),
+            'title' => Translate::get('all'),
+            'icon'  => 'bi bi-app'
           ],
           [
-            'id' => 'top',
-            'url' => getUrlByName('main.top'),
-            'content' => Translate::get('top'),
-            'icon' => 'bi bi-bar-chart'
+            'id'    => $data['type'] . '.top',
+            'url'   => getUrlByName('main.top'),
+            'title' => Translate::get('top'),
+            'icon'  => 'bi bi-bar-chart'
           ],
         ]
       ); ?>
@@ -53,7 +61,7 @@
 
 <aside class="col-span-3 mb-col-12 relative no-mob">
   <?php if ($uid['user_id'] == 0) { ?>
-    <?= import('/_block/login'); ?>
+    <?= import('/_block/sidebar/login'); ?>
   <?php } ?>
 
   <?php if ($uid['user_id'] > 0 && !empty($data['topics_user'])) { ?>

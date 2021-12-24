@@ -31,6 +31,7 @@ class AddFacetController extends MainController
                 'uid'   => $this->uid,
                 'data'  => [
                     'sheet'         => $type,
+                    'type'          => 'topic',
                     'count_facet'   => $in_total,
                 ]
             ]

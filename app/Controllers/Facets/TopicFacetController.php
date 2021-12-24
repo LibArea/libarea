@@ -17,6 +17,7 @@ class TopicFacetController extends MainController
         $this->uid = Base::getUid();
     }
 
+    // Posts in the topic 
     // Посты по теме
     public function index($sheet)
     {
@@ -72,6 +73,7 @@ class TopicFacetController extends MainController
                     'pagesCount'    => ceil($pagesCount / $limit),
                     'pNum'          => $page,
                     'sheet'         => $sheet == 'feed' ? 'topic' : 'recommend',
+                    'type'          => 'topic',
                     'facet'         => $facet,
                     'posts'         => $result,
                     'focus_users'   => FacetModel::getFocusUsers($facet['facet_id'], 5),
@@ -88,6 +90,7 @@ class TopicFacetController extends MainController
         );
     }
 
+    // Information on the topic 
     // Информация по теме
     public function info()
     {
@@ -115,6 +118,7 @@ class TopicFacetController extends MainController
                 'uid'   => $this->uid,
                 'data'  => [
                     'sheet'         => 'info',
+                    'type'          => 'info',
                     'facet'         => $facet,
                     'related_posts' => PostModel::postRelated($facet_related),
                     'high_topics'   => FacetModel::getHighLevelList($facet['facet_id']),
@@ -125,6 +129,7 @@ class TopicFacetController extends MainController
         );
     }
 
+    // Subscribed (25) 
     // Подписаны (25)
     public function followers()
     {

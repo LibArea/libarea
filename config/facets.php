@@ -10,9 +10,9 @@ return [
     'quantity_home' => 10,
 
     // Pages with information about the site (link in the footer of the site) 
-    // The URL must match the SLUG of the posts attached to the Info facet (slug - info)
+    // The URL must match the SLUG of the posts attached to the Info facet
     // Страницы с информацией про сайт (ссылка в подвале сайта)
-    // URL должен совпадать с SLUG постов прикрепленного с фасету Информация (slug - info)
+    // URL должен совпадать с SLUG постов прикрепленного с фасету Информация
     'page-one'      => 'information',
     'page-two'      => 'privacy',
 

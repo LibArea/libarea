@@ -163,6 +163,7 @@ class PostController extends MainController
                     'blog'          => $blog ?? null,
                     'last_user'     => PostModel::getPostLastUser($post_id),
                     'sheet'         => 'article',
+                    'type'          => 'post',
                 ]
             ]
         );
@@ -206,7 +207,7 @@ class PostController extends MainController
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
                     'sheet'         => 'user-post',
-                    'type'          => Translate::get('posts') . ' ' . $login,
+                    'type'          => 'posts.user',
                     'posts'         => $result,
                     'user_login'    => $user['user_login'],
                 ]
