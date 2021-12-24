@@ -10,11 +10,11 @@ class UserModel extends MainModel
 {
     // Страница участников
     public static function getUsers($page, $limit, $sheet)
-    {  
+    {
         $string = "ORDER BY user_id DESC LIMIT";
         if ($sheet == 'users.ban') {
             $string = "WHERE user_ban_list > 0 ORDER BY user_id DESC LIMIT";
-        } 
+        }
 
         $start  = ($page - 1) * $limit;
         $sql = "SELECT  
@@ -60,7 +60,7 @@ class UserModel extends MainModel
 
         return  DB::run($sql)->rowCount();
     }
-    
+
     // Информация по участнику (id, slug)
     public static function getUser($params, $name)
     {
@@ -106,7 +106,7 @@ class UserModel extends MainModel
 
         return $result->fetch(PDO::FETCH_ASSOC);
     }
-    
+
     // Количество контента участника
     public static function contentCount($user_id)
     {
@@ -128,7 +128,7 @@ class UserModel extends MainModel
 
         return DB::run($sql, ['user_id' => $user_id])->fetch(PDO::FETCH_ASSOC);
     }
-    
+
     // Количество дублей IP по полю user_reg_ip
     public static function duplicatesRegistrationCount($ip)
     {
@@ -139,7 +139,7 @@ class UserModel extends MainModel
 
         return DB::run($sql, ['ip' => $ip])->rowCount();
     }
-    
+
     // По логам
     public static function lastVisitLogs($user_id)
     {
@@ -152,7 +152,7 @@ class UserModel extends MainModel
 
         return DB::run($sql, ['user_id' => $user_id])->fetch(PDO::FETCH_ASSOC);
     }
-    
+
     public static function getUserRegsId($ip)
     {
         $sql = "SELECT 
@@ -167,7 +167,7 @@ class UserModel extends MainModel
                     user_trust_level,
                     user_ban_list
                         FROM users WHERE user_reg_ip = :ip";
-                            
+
         return DB::run($sql, ['ip' => $ip])->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -197,7 +197,7 @@ class UserModel extends MainModel
                         ON latest_date.log_user_id = user_id";
         return DB::run($sql, ['ip' => $ip])->fetchAll(PDO::FETCH_ASSOC);
     }
-    
+
     // Последние визиты
     public static function getLastVisit()
     {
@@ -227,7 +227,7 @@ class UserModel extends MainModel
 
         return DB::run($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
-    
+
     public static function setLog($data)
     {
         $params = [
