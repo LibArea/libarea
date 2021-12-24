@@ -4,6 +4,7 @@ Route::prefix('/admin');
 Route::before('Authorization@admin')->getGroup();
 
     Route::get('/')->controller('Admin\HomeController')->name('admin');
+    Route::get('/css')->controller('Admin\HomeController@css')->name('admin.сss');
 
     Route::getType('post');
         Route::get('/test/mail')->controller('Admin\СonsoleController@testMail')->name('admin.test.mail');

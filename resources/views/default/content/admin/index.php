@@ -93,6 +93,10 @@
   </div>
 <?php } ?>
 
+<div class="mt10  pl15">
+  <?= Translate::get('see more'); ?>: <a title="css" class="p5 pr15 pl15 white white-hover bg-red-500" href="<?= getUrlByName('admin.сss'); ?>">CSS</a>
+</div>
+
 <div class="white-box mt10 pt5 pr15 pb5 pl15">
   <h4 class="mt5 mb5"><?= Translate::get('useful resources'); ?></h4>
   <i class="bi bi-link-45deg mr5 gray-light"></i> <a rel="noreferrer" href="https://agouti.ru">Agouti.ru</a></br>

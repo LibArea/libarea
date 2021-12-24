@@ -38,4 +38,19 @@ class HomeController extends MainController
             ]
         );
     }
+    
+    public function css()
+    {
+        return agRender(
+            '/admin/css',
+            [
+                'meta'  => meta($m = [], Translate::get('admin')),
+                'uid'   => $this->uid,
+                'data'  => [
+                    'type'              => 'Css',
+                    'sheet'             => 'Css',
+                ]
+            ]
+        );
+    }
 }

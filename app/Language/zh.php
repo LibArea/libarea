@@ -233,7 +233,6 @@ $data = [
     'word'              => '停用詞',
     'stop words no'     => '停止詞沒有',
     'add a stop word'   => '添加停用詞',
-    'see more'          => '查看更多',
     'bookmark added'    => '添加書籤',
     'bookmark deleted'  => '書籤已刪除',
 

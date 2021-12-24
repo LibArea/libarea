@@ -233,7 +233,6 @@ $data = [
     'word'              => 'Stop word',
     'stop words no'     => 'Stop word no',
     'add a stop word'   => 'Add a stop word',
-    'see more'          => 'See more',
     'bookmark added'    => 'Bookmark added',
     'bookmark deleted'  => 'Bookmark deleted',
 

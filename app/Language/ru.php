@@ -234,7 +234,6 @@ $data = [
     'word'              => 'Стоп-слово',
     'stop words no'     => 'Стоп-слов нет',
     'add a stop word'   => 'Добавить стоп-слово',
-    'see more'          => 'См. ещё',
     'bookmark added'    => 'Закладка добавлена',
     'bookmark deleted'  => 'Закладка удалена',
 
