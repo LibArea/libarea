@@ -293,8 +293,9 @@ function tabs_nav($name, $item, $uid, array $pages = [])
             if (empty($page['auth']) || $uid['user_trust_level'] >= $page['tl']) {
                 $classes    = 'ml30 mb-mr-5 mb-ml-10 gray';
                 $isActive   = $page['id'] == $item ? $classes . ' blue' : $classes;
+                $isAria     = $page['id'] == $item ? ' aria-current="page"' : '';
                 
-                $html .= '<a class="' . $isActive . '" href="' . $page['url'] . '">
+                $html .= '<a ' . $isAria . ' class="' . $isActive . '" href="' . $page['url'] . '">
                             <i class="' . $page['icon'] . ' mr5"></i>
                                 <span class="mb-size-13">' . $page['title'] . '</span></a>';
             }
@@ -311,8 +312,9 @@ function tabs_nav($name, $item, $uid, array $pages = [])
                 if (empty($page['auth'])  || $uid['user_trust_level'] > $page['tl']) {
                     $classes    = 'pt5 pb5 pl10 flex flex-row items-center gray';
                     $isActive   = $page['id'] == $item ? $classes . ' blue' : $classes;
+                    $isAria     = $page['id'] == $item ? ' aria-current="page"' : '';
                     
-                    $html .= '<a class="' . $isActive . '" href="' . $page['url'] . '">
+                    $html .= '<a ' . $isAria . ' class="' . $isActive . '" href="' . $page['url'] . '">
                                 <i class="' . $page['icon'] . ' mr10 size-21"></i>
                                     <span class="mb-size-13">' . $page['title'] . '</span></a>';
                                         

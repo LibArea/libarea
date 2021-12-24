@@ -27,11 +27,6 @@ class FacetsController extends MainController
 
         Request::getResources()->addBottomScript('/assets/js/admin.js');
 
-        $pages = [];
-        if ($type == 'sections') {
-            $pages =  (new \App\Controllers\PageController())->lastAll();   
-        }
-
         return agRender(
             '/admin/facet/facets',
             [
@@ -43,6 +38,32 @@ class FacetsController extends MainController
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
                     'facets'        => FacetModel::getFacetsAll($page, $this->limit, $this->uid['user_id'], $sheet),
+                ]
+            ]
+        );
+    }
+    
+    public function pages($sheet, $type)
+    {
+        $page   = Request::getInt('page');
+        $page   = $page == 0 ? 1 : $page;
+
+        $pagesCount = 0;
+
+        Request::getResources()->addBottomScript('/assets/js/admin.js');
+
+        $pages =  (new \App\Controllers\PageController())->lastAll();   
+
+        return agRender(
+            '/admin/page/pages',
+            [
+                'meta'  => meta($m = [], Translate::get('topics')),
+                'uid'   => $this->uid,
+                'data'  => [
+                    'sheet'         => $sheet,
+                    'type'          => $type,
+                    'pagesCount'    => ceil($pagesCount / $this->limit),
+                    'pNum'          => $page,
                     'pages'         => $pages,
                 ]
             ]

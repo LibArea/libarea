@@ -44,6 +44,8 @@ Route::before('Authorization@admin')->getGroup();
      
     Route::get('/blogs')->controller('Admin\FacetsController', ['blogs.all', 'blogs'])->name('admin.blogs');
     Route::get('/blogs/ban')->controller('Admin\FacetsController', ['blogs.ban', 'blogs'])->name('admin.blogs.ban');
+    
+    Route::get('/pages')->controller('Admin\FacetsController@pages', ['pages.all', 'pages'])->name('admin.pages');
      
     Route::get('/update/count/topic')->controller('Admin\СonsoleController@topic')->name('admin.count.topic'); 
     Route::get('/update/count/up')->controller('Admin\СonsoleController@up')->name('admin.count.up');

@@ -8,18 +8,11 @@
     </p>
     <ul class="flex flex-row list-none m0 p0 center">
       <?php foreach ($pages as $menu) { ?>
-        <?php if ($menu['id'] == $sheet) { ?>
-          <li class="blue ml30 mb-mr-5 mb-ml-10">
-            <i class="<?= $menu['icon']; ?> mr5"></i>
-            <span class="mb-size-13"><?= $menu['name']; ?></span>
-          </li>
-        <?php  } else { ?>
-          <li class="ml30 mb-mr-5 mb-ml-10">
-            <a class="gray" href="<?= $menu['url']; ?>">
+        <a class="ml30 mb-mr-5 mb-ml-10 gray<?php if ($menu['id'] == $sheet) { ?> blue<?php } ?>" 
+            href="<?= $menu['url']; ?>" <?php if ($menu['id'] == $sheet) { ?> aria-current="page"<?php } ?>>
               <i class="<?= $menu['icon']; ?> mr5"></i>
-              <span class="mb-size-13"><?= $menu['name']; ?></span></a>
-          </li>
-        <?php  } ?>
+              <span class="mb-size-13"><?= $menu['name']; ?></span>
+        </a>
       <?php } ?>
     </ul>
   </div>

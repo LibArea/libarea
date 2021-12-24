@@ -22,7 +22,7 @@ return [
         ], [
             'url'   => getUrlByName('blogs.all'),
             'title' => Translate::get('blogs'),
-            'icon'  => 'bi bi-journal-text',
+            'icon'  => 'bi bi-journals',
             'id'    => 'blogs',
         ], [
             'url'   => getUrlByName('users'),
@@ -94,13 +94,18 @@ return [
         ], [
             'url'   => getUrlByName('admin.blogs'),
             'title'  => Translate::get('blogs'),
-            'icon'  => 'bi bi-journal-text brown',
+            'icon'  => 'bi bi-journals brown',
             'id'  => 'blogs',
         ], [
             'url'   => getUrlByName('admin.sections'),
             'title'  => Translate::get('sections'),
             'icon'  => 'bi bi-intersect brown',
             'id'  => 'sections',
+        ], [            
+            'url'   => getUrlByName('admin.pages'),
+            'title'  => Translate::get('pages'),
+            'icon'  => 'bi bi-journal-richtext brown',
+            'id'  => 'pages',
         ], [
             'url'   => getUrlByName('admin.invitations'),
             'title'  => Translate::get('invites'),
