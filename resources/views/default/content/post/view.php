@@ -8,25 +8,25 @@
   </div>
 </div>
 <main class="col-span-8 mb-col-12">
-  <article class="post-full br-box-gray br-rd5 bg-white<?php if ($post['post_is_deleted'] == 1) { ?> bg-red-300<?php } ?> mb15 pt0 pr15 pb5 pl15">
+  <article class="post-full br-box-gray br-rd5 bg-white<?php if ($post['post_is_deleted'] == 1) { ?> bg-red-200<?php } ?> mb15 pt0 pr15 pb5 pl15">
     <?php if ($post['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
       <div class="post-body">
         <h1 class="mb0 mt10 size-24">
           <?= $post['post_title']; ?>
           <?php if ($post['post_is_deleted'] == 1) { ?>
-            <i class="bi bi-trash blue"></i>
+            <i class="bi bi-trash sky-500"></i>
           <?php } ?>
           <?php if ($post['post_closed'] == 1) { ?>
             <i class="bi bi-lock gray"></i>
           <?php } ?>
           <?php if ($post['post_top'] == 1) { ?>
-            <i class="bi bi-pin-angle blue"></i>
+            <i class="bi bi-pin-angle sky-500"></i>
           <?php } ?>
           <?php if ($post['post_lo'] > 0) { ?>
-            <i class="bi bi-award blue"></i>
+            <i class="bi bi-award sky-500"></i>
           <?php } ?>
           <?php if ($post['post_feature'] == 1) { ?>
-            <i class="bi bi-patch-question green"></i>
+            <i class="bi bi-patch-question green-600"></i>
           <?php } ?>
           <?php if ($post['post_translation'] == 1) { ?>
             <span class="pt5 pr10 pb5 pl10 gray-light bg-yellow-100 br-rd3 size-14 italic lowercase">
@@ -39,7 +39,7 @@
             </span>
           <?php } ?>
           <?php if ($post['post_merged_id'] > 0) { ?>
-            <i class="bi bi-bezier2 blue"></i>
+            <i class="bi bi-bezier2 sky-500"></i>
           <?php } ?>
         </h1>
         <div class="size-14 lowercase flex gray-light-2">
@@ -68,14 +68,14 @@
             <?php if ($uid['user_trust_level'] == 5) { ?>
               <a data-type="post" data-id="<?= $post['post_id']; ?>" class="type-action gray-light mr10 ml10">
                 <?php if ($post['post_is_deleted'] == 1) { ?>
-                  <i class="bi bi-trash red"></i>
+                  <i class="bi bi-trash red-500"></i>
                 <?php } else { ?>
                   <i class="bi bi-trash"></i>
                 <?php } ?>
               </a>
               <a data-id="<?= $post['post_id']; ?>" class="post-recommend gray-light mr10 ml10">
                 <?php if ($post['post_is_recommend'] == 1) { ?>
-                  <i class="bi bi-lightning blue"></i>
+                  <i class="bi bi-lightning sky-500"></i>
                 <?php } else { ?>
                   <i class="bi bi-lightning"></i>
                 <?php } ?>
@@ -127,7 +127,7 @@
           <?php if (!empty($data['facets'])) { ?>
             <div class="lowercase">
               <?php foreach ($data['facets'] as $topic) { ?>
-                <a class="bg-blue-100 bg-hover-green white-hover pt5 pr10 pb5 pl10 br-rd20 blue inline size-14" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>">
+                <a class="bg-blue-100 bg-hover-green white-hover pt5 pr10 pb5 pl10 br-rd20 sky-500 inline size-14" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>">
                   <?= $topic['facet_title']; ?>
                 </a>
               <?php } ?>
@@ -195,16 +195,16 @@
         <div class="mr15">
           <?php if ($uid['user_id'] > 0) { ?>
             <?php if (is_array($data['post_signed'])) { ?>
-              <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id size-14 right mt5 bg-gray-100 gray-light-2 br-box-gray br-rd20 center pt5 pr15 pb5 pl15">
+              <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id size-14 right mt5 bg-gray-100 gray-light-2 br-gray-200 br-rd20 center pt5 pr15 pb5 pl15">
                 <?= Translate::get('unsubscribe'); ?>
               </div>
             <?php } else { ?>
-              <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id size-14 right mt5 bg-gray-200 bg-hover-gray mazarine br-box-gray br-rd20 center pt5 pr15 pb5 pl15">
+              <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id size-14 right mt5 bg-sky-50 bg-hover-gray sky-500 br-sky-100 br-rd20 center pt5 pr15 pb5 pl15">
                 + <?= Translate::get('read'); ?>
               </div>
             <?php } ?>
           <?php } else { ?>
-            <a class="right size-14 mt5 bg-gray-200 bg-hover-gray mazarine br-box-gray br-rd20 center pt5 pr15 pb5 pl15" href="<?= getUrlByName('login'); ?>">
+            <a class="right size-14 mt5 bg-sky-50 sky-500 bg-hover-gray br-sky-100 br-rd20 center pt5 pr15 pb5 pl15" href="<?= getUrlByName('login'); ?>">
               + <?= Translate::get('read'); ?>
             </a>
           <?php } ?>
@@ -264,7 +264,7 @@
       <?php foreach ($data['topics'] as $topic) { ?>
         <?php if ($uid['user_id']) { ?>
           <?php if (!$topic['signed_facet_id']) { ?>
-            <div data-id="<?= $topic['facet_id']; ?>" data-type="topic" class="focus-id right inline size-14 blue center mt5 mr5">
+            <div data-id="<?= $topic['facet_id']; ?>" data-type="topic" class="focus-id right inline size-14 sky-500 center mt5 mr5">
               <i class="bi bi-plus"></i> <?= Translate::get('read'); ?>
             </div>
           <?php } ?>
@@ -296,7 +296,7 @@
           <?php if ($rec_post['post_type'] == 'post') { ?>
             <a class="gray" href="<?= getUrlByName('post', ['id' => $rec_post['post_id'], 'slug' => $rec_post['post_slug']]); ?>">
               <?php if ($rec_post['post_answers_count'] > 0) { ?>
-                <div class="p5 pr10 pb5 pl10 bg-green-400 br-rd3 white center mr15">
+                <div class="p5 pr10 pb5 pl10 bg-green-600 br-rd3 white center mr15">
                   <?= $rec_post['post_answers_count'] ?>
                 </div>
               <?php } else { ?>

@@ -20,7 +20,7 @@
     <div class="br-box-gray bg-white p15">
       <div class="size-14 gray mb15">
         <?= Translate::get('you can add more'); ?>:
-        <span class="red"><?= $data['count_facet']; ?></span>
+        <span class="red-500"><?= $data['count_facet']; ?></span>
       </div>
       <form class="" action="<?= getUrlByName($data['sheet'] . '.create'); ?>" method="post" enctype="multipart/form-data">
         <?= csrf_field() ?>
@@ -65,7 +65,7 @@
           ]
         ]); ?>
 
-        <div for="mb5"><?= Translate::get('meta description'); ?><sup class="red">*</sup></div>
+        <div for="mb5"><?= Translate::get('meta description'); ?><sup class="red-500">*</sup></div>
         <textarea rows="6" class="add max-w780" minlength="44" name="facet_description"></textarea>
         <div class="size-14 gray-light-2 mb20">> 44 <?= Translate::get('characters'); ?></div>
 

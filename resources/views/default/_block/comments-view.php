@@ -23,7 +23,7 @@
                     </span>
                   </a>
                   <?php if ($post['post_user_id'] == $answer['answer_user_id']) { ?>
-                    <span class="blue mr5 ml0"><i class="bi bi-mic size-14"></i></span>
+                    <span class="sky-500 mr5 ml0"><i class="bi bi-mic size-14"></i></span>
                   <?php } ?>
                   <span class="mr5 ml5 gray-light lowercase">
                     <?= $answer['answer_date']; ?>
@@ -63,7 +63,7 @@
                 <?php } ?>
 
                 <?php if ($uid['user_id']) { ?>
-                  <?php $blue = $answer['favorite_user_id'] ? 'blue' : 'gray'; ?>
+                  <?php $blue = $answer['favorite_user_id'] ? 'sky-500' : 'gray'; ?>
                   <a id="fav-comm_<?= $answer['answer_id']; ?>" class="add-favorite mr5 ml15 gray <?= $blue; ?>" data-id="<?= $answer['answer_id']; ?>" data-type="answer">
                     <?php if ($answer['favorite_user_id']) { ?>
                       <i title="<?= Translate::get('remove-favorites'); ?>" class="bi bi-bookmark"></i>
@@ -86,7 +86,7 @@
         <?php } else { ?>
 
           <?php if ($uid['user_trust_level'] == 5) { ?>
-            <ol class="bg-red-300 size-14 pr5 list-none">
+            <ol class="bg-red-200 size-14 pr5 list-none">
               <li class="comments_subtree" id="comment_<?= $answer['answer_id']; ?>">
                 <span class="comm-deletes nick">
                   <?= $answer['answer_content']; ?>
@@ -110,7 +110,7 @@
 
         <?php if ($comment['comment_is_deleted'] == 1) { ?>
           <?php if (accessСheck($comment, 'comment', $uid, 1, 30) === true) { ?>
-            <ol class="bg-red-300 size-14 list-none max-w780 size-15<?php if ($comment['comment_comment_id'] > 0) { ?> ml30<?php } ?>">
+            <ol class="bg-red-200 size-14 list-none max-w780 size-15<?php if ($comment['comment_comment_id'] > 0) { ?> ml30<?php } ?>">
               <li class="pr5" id="comment_<?= $comment['comment_id']; ?>">
                 <span class="comm-deletes gray">
                   <?= Content::text($comment['comment_content'], 'line'); ?>
@@ -137,7 +137,7 @@
                       </span>
                     </a>
                     <?php if ($post['post_user_id'] == $comment['comment_user_id']) { ?>
-                      <span class="blue mr5"><i class="bi bi-mic size-14"></i></span>
+                      <span class="sky-500 mr5"><i class="bi bi-mic size-14"></i></span>
                     <?php } ?>
                     <span class="mr5 ml5 gray-light-2 lowercase">
                       <?= lang_date($comment['comment_date']); ?>

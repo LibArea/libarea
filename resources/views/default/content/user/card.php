@@ -51,9 +51,9 @@
         <i class="bi bi-eye middle mr5 ml5"></i>
         <span class="size-14 mr15"> <?= $user['user_hits_count']; ?></span>
       <?php } ?>
-      <i title="<?= Translate::get('medal for registration'); ?>" class="bi bi-gift right mr5 ml5 blue"></i>
+      <i title="<?= Translate::get('medal for registration'); ?>" class="bi bi-gift right mr5 ml5 sky-500"></i>
       <?php if ($user['user_id'] < 50) { ?>
-        <i title="<?= Translate::get('joined in the early days'); ?>" class="bi bi-award right mr5 ml5 green"></i>
+        <i title="<?= Translate::get('joined in the early days'); ?>" class="bi bi-award right mr5 ml5 green-600"></i>
       <?php } ?>
       <?php foreach ($badges as $badge) { ?>
         <?= $badge['badge_icon']; ?>

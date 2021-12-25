@@ -47,7 +47,7 @@
             <?= $post['post_ip']; ?>
           </a>
           <?php if ($post['post_feature'] == 1) { ?>
-            <i class="bi bi-question-lg green"></i>
+            <i class="bi bi-question-lg green-600"></i>
           <?php } ?>
         </div>
         <div class="show_add_<?= $post['post_id']; ?>">

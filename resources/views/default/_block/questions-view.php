@@ -46,7 +46,7 @@
                   </a>
                 <?php } ?>
                 <?php if ($uid['user_id']) { ?>
-                  <?php $blue = $answer['favorite_user_id'] ? 'blue' : 'gray'; ?>
+                  <?php $blue = $answer['favorite_user_id'] ? 'sky-500' : 'gray'; ?>
                   <span id="fav-comm_<?= $answer['answer_id']; ?>" class="add-favorite gray ml15 mr5 <?= $blue; ?>" data-id="<?= $answer['answer_id']; ?>" data-type="answer">
                     <?php if ($answer['favorite_user_id']) { ?>
                       <i title="<?= Translate::get('remove-favorites'); ?>" class="bi bi-bookmark middle"></i>

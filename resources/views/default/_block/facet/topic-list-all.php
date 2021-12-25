@@ -13,7 +13,7 @@
                  <sup><?= Translate::get('unsubscribe'); ?></sup>
                </div>
              <?php } else { ?>
-               <div data-id="<?= $facet['facet_id']; ?>" data-type="topic" class="focus-id right inline br-rd20 blue center mr15">
+               <div data-id="<?= $facet['facet_id']; ?>" data-type="topic" class="focus-id right inline br-rd20 sky-500 center mr15">
                  <sup><i class="bi bi-plus"></i> <?= Translate::get('read'); ?></sup>
                </div>
              <?php } ?>
@@ -25,7 +25,7 @@
          </a>
 
          <?php if ($uid['user_id'] == $facet['facet_user_id']) { ?>
-           <i class="bi bi-mic blue size-14"></i>
+           <i class="bi bi-mic sky-500 size-14"></i>
          <?php } ?>
          <div class="size-14 mt5 pr15 mb-pr-0 gray-light-2">
            <?= $facet['facet_short_description']; ?>

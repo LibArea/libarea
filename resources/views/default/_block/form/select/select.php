@@ -5,7 +5,7 @@
 
 <div class="mb20 max-w640">
   <label class="block mb5">
-    <?= Translate::get($type); ?> <?php if (!empty($red)) { ?><sup class="red">*</sup><?php } ?>
+    <?= Translate::get($type); ?> <?php if (!empty($red)) { ?><sup class="red-500">*</sup><?php } ?>
   </label>
 
   <?php if ($action == 'edit' || $action == 'add') { ?>

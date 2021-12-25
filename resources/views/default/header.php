@@ -74,9 +74,9 @@ $facet = $data['facet'] ?? false; ?>
               <?php $notif = \App\Controllers\NotificationsController::setBell($uid['user_id']); ?>
               <?php if (!empty($notif)) { ?>
                 <?php if ($notif['notification_action_type'] == 1) { ?>
-                  <i class="bi bi-envelope size-18 red"></i>
+                  <i class="bi bi-envelope size-18 red-500"></i>
                 <?php } else { ?>
-                  <i class="bi bi-bell-fill size-18 red"></i>
+                  <i class="bi bi-bell-fill size-18 red-500"></i>
                 <?php } ?>
               <?php } else { ?>
                 <i class="bi bi-bell mb-size-18 size-18"></i>

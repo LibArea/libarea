@@ -88,7 +88,7 @@
         $url = getUrlByName('topic', ['slug' => $topic['facet_slug']]);
         $blog = '';
         if ($topic['facet_type'] == 'blog') {
-          $blog = '<sup class="red">b</span>';
+          $blog = '<sup class="red-500">b</span>';
           $url = getUrlByName('blog', ['slug' => $topic['facet_slug']]);
         }
       ?>
@@ -98,7 +98,7 @@
             <span class="ml5 middle"><?= $topic['facet_title']; ?> <?= $blog; ?></span>
           </a>
           <?php if ($uid['user_id'] == $topic['facet_user_id']) { ?>
-            <a class="right blue" title="<?= Translate::get('add post'); ?>" href="<?= getUrlByName('post.add'); ?>/<?= $topic['facet_id']; ?>">
+            <a class="right sky-500" title="<?= Translate::get('add post'); ?>" href="<?= getUrlByName('post.add'); ?>/<?= $topic['facet_id']; ?>">
               <i class="bi bi-plus-lg size-14"></i>
             </a>
           <?php } ?>

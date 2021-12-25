@@ -10,20 +10,31 @@ class Sass
 
         $compiler->setOutputStyle(ScssPhp\ScssPhp\OutputStyle::COMPRESSED);
         
-        $putch = TEMPLATES . DIRECTORY_SEPARATOR . Config::get('general.template') . '/scss/';
+        $putch = TEMPLATES . DIRECTORY_SEPARATOR . Config::get('general.template') . '/css/scss/';
         
         $compiler->setImportPaths($putch);
 
-        $scssIn = file_get_contents($putch . 'theme.scss');
-
-        $file = $compiler->compileString($scssIn)->getCss();
-  
-        self::build($file);
+        self::build($compiler, $putch);
+        
+        self::buildForCSSHelp($compiler, $putch);
     }
     
-    public static function build($file)
+    public static function build($compiler, $putch)
     {
+        $scssIn = file_get_contents($putch . 'build.scss');
+
+        $file = $compiler->compileString($scssIn)->getCss();
+        
         file_put_contents( HLEB_GLOBAL_DIRECTORY . '/public/assets/css/style.css', $file);
+    }
+    
+    public static function buildForCSSHelp($compiler, $putch)
+    {
+        $scssIn = file_get_contents($putch . '/help/build-help.scss');
+
+        $file = $compiler->compileString($scssIn)->getCss();
+        
+        file_put_contents( HLEB_GLOBAL_DIRECTORY . '/public/assets/css/color-help.css', $file);
     }
     
 }

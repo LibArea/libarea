@@ -58,7 +58,7 @@
           </a>
         <?php } ?>
         <?php if ($notif['notification_action_type'] == 20) { ?>
-          <i class="bi bi-exclamation-diamond middle red"></i>
+          <i class="bi bi-exclamation-diamond middle red-500"></i>
           <a class="gray ml5" href="<?= getUrlByName('user', ['login' => $notif['user_login']]); ?>"><?= $notif['user_login']; ?></a>
           <?= Translate::get('complained about'); ?>
           <a class="ntf2 lowercase" href="<?= getUrlByName('notif.read', ['id' => $notif['notification_id']]); ?>">
@@ -67,7 +67,7 @@
         <?php } ?>
         <?php if ($notif['notification_action_type'] == 15) { ?>
           <a class="ntf2 lowercase" href="<?= getUrlByName('notif.read', ['id' => $notif['notification_id']]); ?>">
-            <i class="bi bi-exclamation-diamond middle red"></i>
+            <i class="bi bi-exclamation-diamond middle red-500"></i>
             <?= Translate::get('audit'); ?>
           </a>
           |
@@ -91,7 +91,7 @@
           <?php } ?>
         </span>
         <span class="size-14 gray"> — <?= $notif['notification_add_time']; ?></span>
-        <?php if ($notif['notification_read_flag'] == 0) { ?>&nbsp;<sup class="red">✔</sup><?php } ?>
+        <?php if ($notif['notification_read_flag'] == 0) { ?>&nbsp;<sup class="red-500">✔</sup><?php } ?>
       </div>
     <?php } ?>
   <?php } else { ?>

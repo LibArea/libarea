@@ -27,7 +27,7 @@
         <?= $data['item']['item_content_url']; ?>
 
         <div class="gray mt20 mb5">
-          <a class="green" target="_blank" rel="nofollow noreferrer ugc" href="<?= $data['item']['item_url']; ?>">
+          <a class="green-600" target="_blank" rel="nofollow noreferrer ugc" href="<?= $data['item']['item_url']; ?>">
             <?= favicon_img($data['item']['item_id'], $data['item']['item_url_domain']); ?>
             <?= $data['item']['item_url']; ?>
           </a>
@@ -37,7 +37,7 @@
           <div class="mt20 mb20 mb-mb-5 lowercase">
             <?php foreach ($data['topics'] as $topic) { ?>
               <?php if ($topic['facet_is_web'] == 1) { ?>
-                <a class="pt5 pr20 pb5 blue block size-18" href="<?= getUrlByName('web.topic', ['slug' => $topic['facet_slug']]); ?>">
+                <a class="pt5 pr20 pb5 sky-500 block size-18" href="<?= getUrlByName('web.topic', ['slug' => $topic['facet_slug']]); ?>">
                   <?= $topic['facet_title']; ?>
                 </a>
               <?php } ?>

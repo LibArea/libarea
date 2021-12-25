@@ -38,11 +38,11 @@
       <?php if ($data['user']['user_trust_level'] != 5) { ?>
         <?php if ($data['user']['user_ban_list']) { ?>
           <span class="type-ban" data-id="<?= $data['user']['user_id']; ?>" data-type="user">
-            <span class="red"><?= Translate::get('unban'); ?></span>
+            <span class="red-500"><?= Translate::get('unban'); ?></span>
           </span>
         <?php } else { ?>
           <span class="type-ban" data-id="<?= $data['user']['user_id']; ?>" data-type="user">
-            <span class="green">+ <?= Translate::get('ban it'); ?></span>
+            <span class="green-600">+ <?= Translate::get('ban it'); ?></span>
           </span>
         <?php } ?>
       <?php } else { ?>
@@ -57,14 +57,14 @@
       <?= $data['user']['user_created_at']; ?> |
       <?= $data['user']['user_reg_ip']; ?>
       <?php if ($data['user']['duplicat_ip_reg'] > 1) { ?>
-        <sup class="red">(<?= $data['user']['duplicat_ip_reg']; ?>)</sup>
+        <sup class="red-500">(<?= $data['user']['duplicat_ip_reg']; ?>)</sup>
       <?php } ?>
       (<?= Translate::get('ed') ?>. <?= $data['user']['user_updated_at']; ?>)
     </div>
     <hr>
     <div class="mb20">
       <?php if ($data['user']['user_limiting_mode'] == 1) { ?>
-        <span class="red"><?= Translate::get('dumb mode'); ?>!</span><br>
+        <span class="red-500"><?= Translate::get('dumb mode'); ?>!</span><br>
       <?php } ?>
       <label class="block" for="post_content">
         <?= Translate::get('dumb mode'); ?>?

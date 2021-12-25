@@ -32,19 +32,19 @@
           <a class="black dark-white" href="<?= $post_url; ?>">
             <h2 class="font-normal size-24 mt0 mb0"><?= $post['post_title']; ?>
               <?php if ($post['post_is_deleted'] == 1) { ?>
-                <i class="bi bi-trash red"></i>
+                <i class="bi bi-trash red-500"></i>
               <?php } ?>
               <?php if ($post['post_closed'] == 1) { ?>
                 <i class="bi bi-lock gray"></i>
               <?php } ?>
               <?php if ($post['post_top'] == 1) { ?>
-                <i class="bi bi-pin-angle blue"></i>
+                <i class="bi bi-pin-angle sky-500"></i>
               <?php } ?>
               <?php if ($post['post_lo'] > 0) { ?>
-                <i class="bi bi-award blue"></i>
+                <i class="bi bi-award sky-500"></i>
               <?php } ?>
               <?php if ($post['post_feature'] == 1) { ?>
-                <i class="bi bi-patch-question green"></i>
+                <i class="bi bi-patch-question green-600"></i>
               <?php } ?>
               <?php if ($post['post_translation'] == 1) { ?>
                 <span class="pt5 pr10 pb5 pl10 gray-light bg-yellow-100 br-rd3 size-14 italic lowercase">
@@ -57,7 +57,7 @@
                 </span>
               <?php } ?>
               <?php if ($post['post_merged_id'] > 0) { ?>
-                <i class="bi bi-link-45deg blue"></i>
+                <i class="bi bi-link-45deg sky-500"></i>
               <?php } ?>
             </h2>
           </a>

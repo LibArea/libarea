@@ -48,8 +48,8 @@
           <span class="inline mr5">
             <?= votes($uid['user_id'], $item, 'item', 'mr5'); ?>
           </span>
-          <a class="green" rel="nofollow noreferrer" href="<?= $item['item_url']; ?>">
-            <span class="green"><?= $item['item_url']; ?></span>
+          <a class="green-600" rel="nofollow noreferrer" href="<?= $item['item_url']; ?>">
+            <span class="green-600"><?= $item['item_url']; ?></span>
           </a> |
           id<?= $item['item_id']; ?>
           <span class="mr5 ml5"> &#183; </span>
@@ -58,7 +58,7 @@
           <?php if ($item['item_is_deleted'] == 0) { ?>
             active
           <?php } else { ?>
-            <span class="red">Ban</span>
+            <span class="red-500">Ban</span>
           <?php } ?>
           <span class="mr5 ml5"> &#183; </span>
           <a href="<?= getUrlByName('web.edit', ['id' => $item['item_id']]); ?>">
@@ -68,7 +68,7 @@
             <?= favicon_img($item['item_id'], $item['item_url_domain']); ?>
           </span>
           <?php if ($item['item_published'] == 0) { ?>
-            <span class="ml15 red"> <?= Translate::get('posted'); ?> (<?= Translate::get('no'); ?>) </span>
+            <span class="ml15 red-500"> <?= Translate::get('posted'); ?> (<?= Translate::get('no'); ?>) </span>
           <?php } ?>
         </div>
       </div>

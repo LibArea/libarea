@@ -10,7 +10,7 @@
 
 <?php if ($data['facet']['facet_is_web'] == 1) { ?>
   <div class="bg-white br-rd5 mb15 br-box-gray p15">
-    <a class="green" href="<?= getUrlByName('web.topic', ['slug' => $data['facet']['facet_slug']]); ?>">
+    <a class="green-600" href="<?= getUrlByName('web.topic', ['slug' => $data['facet']['facet_slug']]); ?>">
       <i class="bi bi-link-45deg size-21 middle"></i>
       <?= Translate::get('related sites'); ?>
     </a>

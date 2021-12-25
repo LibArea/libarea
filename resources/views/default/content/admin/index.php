@@ -38,13 +38,13 @@
       'title' => 'comments',
       'count' => $data['count']['count_comments'],
     ], [
-      'bg'    => 'bg-green-500',
+      'bg'    => 'bg-green-600',
       'icon'  => 'bi-people',
       'url'   => 'admin.users',
       'title' => 'users',
       'count' => $data['users_count'],
     ], [
-      'bg'    => 'bg-gray-700',
+      'bg'    => 'bg-gray-500',
       'icon'  => 'bi-journals',
       'url'   => 'admin.blogs',
       'title' => 'blogs',

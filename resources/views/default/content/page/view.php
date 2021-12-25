@@ -1,6 +1,6 @@
 <?php $page = $data['page']; ?>
 </div>
-<article class="page<?php if ($page['post_is_deleted'] == 1) { ?> bg-red-300<?php } ?>">
+<article class="page<?php if ($page['post_is_deleted'] == 1) { ?> bg-red-200<?php } ?>">
   <?php if ($page['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
     <h1 class="size-31 font-normal mt5">
       <?= $page['post_title']; ?>
@@ -17,7 +17,7 @@
       <?php } ?>
     </div>
   <?php } else { ?>
-    <div class="bg-red-300 p15 center mr10">
+    <div class="bg-red-200 p15 center mr10">
       <?= Translate::get('post deleted'); ?>...
     </div>
   <?php } ?>

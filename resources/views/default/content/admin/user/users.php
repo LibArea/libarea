@@ -57,7 +57,7 @@
             <?php if ($user['user_invitation_id'] != 0) { ?><sup>+ inv. id<?= $user['user_invitation_id']; ?></sup><?php } ?>
             <?php if ($user['user_whisper']) { ?>
               <span title="<?= $user['user_whisper']; ?>" class="tips size-13 gray-light">
-                <i class="bi bi-info-square green"></i>
+                <i class="bi bi-info-square green-600"></i>
               </span>
             <?php } ?>
             <div class="size-13">
@@ -65,14 +65,14 @@
               <?php if ($user['user_activated'] == 1) { ?>
                 <div class="gray-light"><?= Translate::get('email activated'); ?></div>
               <?php } else { ?>
-                <div class="red"><?= Translate::get('not activated'); ?> e-mail</div>
+                <div class="red-500"><?= Translate::get('not activated'); ?> e-mail</div>
               <?php } ?>
             </div>
             <?php if ($user['user_limiting_mode'] == 1) { ?>
-              <div class="red"><?= Translate::get('dumb mode'); ?></div>
+              <div class="red-500"><?= Translate::get('dumb mode'); ?></div>
             <?php } ?>
             <?php if (!empty($user['banlist_int_num'])) { ?>
-              <div class="red">bans: <?= $user['banlist_int_num']; ?></div>
+              <div class="red-500">bans: <?= $user['banlist_int_num']; ?></div>
             <?php } ?>
           </td>
           <td class="size-13 align-right">
@@ -80,7 +80,7 @@
               <?= $user['user_reg_ip']; ?>
             </a>
             <?php if ($user['duplicat_ip_reg'] > 1) { ?>
-              <sup class="red">(<?= $user['duplicat_ip_reg']; ?>)</sup>
+              <sup class="red-500">(<?= $user['duplicat_ip_reg']; ?>)</sup>
             <?php } ?>
             <br>
             <?= $user['created_at']; ?>
@@ -100,7 +100,7 @@
             <?php if ($user['user_trust_level'] != 5) { ?>
               <?php if ($user['user_ban_list']) { ?>
                 <span class="type-ban" data-id="<?= $user['user_id']; ?>" data-type="user">
-                  <span class="red"><?= Translate::get('unban'); ?></span>
+                  <span class="red-500"><?= Translate::get('unban'); ?></span>
                 </span>
               <?php } else { ?>
                 <span class="type-ban" data-id="<?= $user['user_id']; ?>" data-type="user">

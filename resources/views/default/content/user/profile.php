@@ -24,12 +24,12 @@
           <?php if ($uid['user_id'] > 0) { ?>
             <div class="pb15 mb15">
               <?php if ($uid['user_login'] == $user['user_login']) { ?>
-                <a class="bg-blue-800 br-box-blue bg-hover-light-blue pt5 pr15 pb5 pl15 block br-rd5 white white-hover center size-14" href="<?= getUrlByName('user', ['login' => $user['user_login']]); ?>/setting">
+                <a class="btn btn-primary" href="<?= getUrlByName('user', ['login' => $user['user_login']]); ?>/setting">
                   <?= Translate::get('settings'); ?>
                 </a>
               <?php } else { ?>
                 <?php if ($data['button_pm'] === true) { ?>
-                  <a class="bg-blue-800 br-box-blue bg-hover-light-blue pt5 pr15 pb5 pl15 block br-rd5 white white-hover center size-14" href="<?= getUrlByName('user.send.messages', ['login' => $user['user_login']]); ?>">
+                  <a class="btn btn-primary" href="<?= getUrlByName('user.send.messages', ['login' => $user['user_login']]); ?>">
                     <?= Translate::get('write a message'); ?>
                   </a>
                 <?php } ?>
@@ -103,7 +103,7 @@
             <?php if ($user['user_name']) { ?> / <?= $user['user_name']; ?><?php } ?>
               <?php if ($user['user_up_count'] > 0) { ?>
                 <div class="flex">
-                  <div class="up-id bi bi-heart red mr10 ml20 size-14"></div>
+                  <div class="up-id bi bi-heart red-500 mr10 ml20 size-14"></div>
                   <div class="size-14 gray-light"><?= $user['user_up_count']; ?></div>
                 </div>
               <?php } ?>
@@ -147,9 +147,9 @@
               <?= Translate::get('badges'); ?>
             </h3>
             <div class="m0 size-31">
-              <i title="<?= Translate::get('medal for registration'); ?>" class="bi bi-gift blue"></i>
+              <i title="<?= Translate::get('medal for registration'); ?>" class="bi bi-gift sky-500"></i>
               <?php if ($user['user_id'] < 50) { ?>
-                <i title="<?= Translate::get('joined in the early days'); ?>" class="bi bi-award green"></i>
+                <i title="<?= Translate::get('joined in the early days'); ?>" class="bi bi-award green-600"></i>
               <?php } ?>
               <?php foreach ($data['badges'] as $badge) { ?>
                 <?= $badge['badge_icon']; ?>
@@ -168,7 +168,7 @@
               <?php if ($uid['user_id'] > 0) { ?>
                 <?php if ($uid['user_login'] == $user['user_login']) { ?>
                   <a class="del-post-profile ml10" data-post="<?= $post['post_id']; ?>">
-                    <i class="bi bi-trash red"></i>
+                    <i class="bi bi-trash red-500"></i>
                   </a>
                 <?php } ?>
               <?php } ?>
@@ -193,7 +193,7 @@
               <?= Translate::get('understands'); ?>
             </h3>
             <?php foreach ($data['participation'] as $part) { ?>
-              <a class="bg-blue-100 bg-hover-green white-hover pt5 pr10 pb5 pl10 mb5 br-rd20 blue inline size-14" href="<?= getUrlByName('topic', ['slug' => $part['facet_slug']]); ?>">
+              <a class="bg-blue-100 bg-hover-green white-hover pt5 pr10 pb5 pl10 mb5 br-rd20 sky-500 inline size-14" href="<?= getUrlByName('topic', ['slug' => $part['facet_slug']]); ?>">
                 <?= $part['facet_title']; ?>
               </a>
             <?php } ?>
@@ -206,8 +206,8 @@
                 <?php if ($uid['user_trust_level'] != 5) { ?>
                   <?php if ($data['isBan']) { ?>
                     <span class="type-ban gray size-15 mb5 block" data-id="<?= $user['user_id']; ?>" data-type="user">
-                      <i class="bi bi-person-x-fill red middle mr5"></i>
-                      <span class="red size-14"><?= Translate::get('unban'); ?></span>
+                      <i class="bi bi-person-x-fill red-500 middle mr5"></i>
+                      <span class="red-500 size-14"><?= Translate::get('unban'); ?></span>
                     </span>
                   <?php } else { ?>
                     <span class="type-ban size-14 gray size-15 mb5 block" data-id="<?= $user['user_id']; ?>" data-type="user">
@@ -226,7 +226,7 @@
                 </a>
                 <?php if ($user['user_whisper']) { ?>
                   <div class="tips size-14 pt15 pb10 gray-light">
-                    <i class="bi bi-info-square green mr5"></i>
+                    <i class="bi bi-info-square green-600 mr5"></i>
                     <?= $user['user_whisper']; ?>
                   </div>
                 <?php } ?>

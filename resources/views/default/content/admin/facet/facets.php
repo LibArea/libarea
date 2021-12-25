@@ -55,10 +55,10 @@
             <a class="size-21" rel="nofollow noreferrer" href="<?= getUrlByName($url, ['slug' => $fc['facet_slug']]); ?>">
               <?= $fc['facet_title']; ?>
             </a>
-            <span class="green mr5 ml5"><?= $data['type']; ?>/<?= $fc['facet_slug']; ?></span>
+            <span class="green-600 mr5 ml5"><?= $data['type']; ?>/<?= $fc['facet_slug']; ?></span>
             <span class="mr5 ml5 gray-light-2"><?= Translate::get('posts'); ?> <?= $fc['facet_count']; ?></span>
             <?php if ($fc['facet_top_level'] != 0) { ?>
-              <span class="green mr5 ml5"><?= Translate::get('subtopic'); ?></span>
+              <span class="green-600 mr5 ml5"><?= Translate::get('subtopic'); ?></span>
             <?php } ?>
             <div class="content-telo">
               <?= $fc['facet_description']; ?>
@@ -67,7 +67,7 @@
           <td class="center">
             <?php if ($fc['facet_is_deleted'] == 1) { ?>
               <span class="type-ban" data-id="<?= $fc['facet_id']; ?>" data-type="topic">
-                <span class="red"><?= Translate::get('unban'); ?></span>
+                <span class="red-500"><?= Translate::get('unban'); ?></span>
               </span>
             <?php } else { ?>
               <span class="type-ban" data-id="<?= $fc['facet_id']; ?>" data-type="topic">

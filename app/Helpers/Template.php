@@ -37,7 +37,7 @@ function html_blog($topic, $slug, $css)
     foreach (array_chunk($topic, 3) as $ind => $row) {
 
         if ($row[0] == 'blog') {
-            $result[] = '<a class="' . $css . ' blue" href="' . getUrlByName('blog', ['slug' => $row[1]]) . '">' . $row[2] . '</a>';
+            $result[] = '<a class="' . $css . ' sky-500" href="' . getUrlByName('blog', ['slug' => $row[1]]) . '">' . $row[2] . '</a>';
         }
     }
     return implode($result);
@@ -245,21 +245,21 @@ function votes($user_id, $content, $type, $css = '', $block = '')
 
     if ($user_id > 0) {
         if ($content['votes_' . $type . '_user_id'] || $user_id == $content[$type . '_user_id']) {
-            $html .= '<div class="voters blue flex ' . $block . ' gray-light-2 center">
+            $html .= '<div class="voters sky-500 flex ' . $block . ' gray-light-2 center">
                         <div class="up-id bi bi-heart ' . $css . '"></div>
                         <div class="score">
                             ' . $count . '
                         </div></div>';
         } else {
             $num_count = empty($count) ? 0 : $count;
-            $html .= '<div id="up' . $content[$type . '_id'] . '" class="voters blue-hover flex ' . $block . ' center gray-light-2">
+            $html .= '<div id="up' . $content[$type . '_id'] . '" class="voters sky-600-hover flex ' . $block . ' center gray-light-2">
                         <div data-id="' . $content[$type . '_id'] . '" data-count="' . $num_count . '" data-type="' . $type . '" class="up-id bi bi-heart ' . $css . '"></div>
                         <div class="score">
                             ' . $count . '
                         </div></div>';
         }
     } else {
-        $html .= '<div class="voters blue-hover flex ' . $block . ' center gray-light-2">
+        $html .= '<div class="voters sky-600-hover flex ' . $block . ' center gray-light-2">
                     <div class="up-id bi bi-heart ' . $css . ' click-no-auth"></div>
                     <div class="score">
                          ' . $count . '                
@@ -273,7 +273,7 @@ function favorite_post($user_id, $post_id, $favorite_tid, $css = '')
 {
     $html  = '';
     if ($user_id > 0) {
-        $blue = $favorite_tid ? 'blue' : '';
+        $blue = $favorite_tid ? 'sky-500' : '';
         $my   = $favorite_tid ? 'bi bi-bookmark-dash' : 'bi-bookmark-plus';
         $html .= '<span id="favorite_' . $post_id . '" class="add-favorite ' . $blue . ' ' . $css . ' gray-light feed-icon" data-id="' . $post_id . '" data-type="post"><i class="bi ' . $my . ' middle"></i></span>';
     } else {
@@ -292,7 +292,7 @@ function tabs_nav($name, $item, $uid, array $pages = [])
         foreach ($pages as $key => $page) {  
             if (empty($page['auth']) || $uid['user_trust_level'] >= $page['tl']) {
                 $classes    = 'ml30 mb-mr-5 mb-ml-10 gray';
-                $isActive   = $page['id'] == $item ? $classes . ' blue' : $classes;
+                $isActive   = $page['id'] == $item ? $classes . ' sky-500 ' : $classes;
                 $isAria     = $page['id'] == $item ? ' aria-current="page"' : '';
                 
                 $html .= '<a ' . $isAria . ' class="' . $isActive . '" href="' . $page['url'] . '">
@@ -311,7 +311,7 @@ function tabs_nav($name, $item, $uid, array $pages = [])
             
                 if (empty($page['auth'])  || $uid['user_trust_level'] > $page['tl']) {
                     $classes    = 'pt5 pb5 pl10 flex flex-row items-center gray';
-                    $isActive   = $page['id'] == $item ? $classes . ' blue' : $classes;
+                    $isActive   = $page['id'] == $item ? $classes . ' sky-500 ' : $classes;
                     $isAria     = $page['id'] == $item ? ' aria-current="page"' : '';
                     
                     $html .= '<a ' . $isAria . ' class="' . $isActive . '" href="' . $page['url'] . '">
@@ -374,7 +374,7 @@ function add_post($facet, $user_id)
         }
     }
 
-    $html  = '<a title="' . Translate::get('add post') . '" href="' . $url_add . '" class="blue center p10">
+    $html  = '<a title="' . Translate::get('add post') . '" href="' . $url_add . '" class="sky-500 center p10">
                 <i class="bi bi-plus-lg size-18"></i>
               </a>';
 

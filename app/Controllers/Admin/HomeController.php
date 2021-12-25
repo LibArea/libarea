@@ -3,9 +3,10 @@
 namespace App\Controllers\Admin;
 
 use Hleb\Scheme\App\Controllers\MainController;
+use Hleb\Constructor\Handlers\Request;
 use App\Models\FacetModel;
 use App\Models\Admin\{UserModel, StatsModel};
-use Base, Translate;
+use Base, Translate, Config;
 
 class HomeController extends MainController
 {
@@ -41,14 +42,21 @@ class HomeController extends MainController
     
     public function css()
     {
+        Request::getResources()->addBottomStyles('/assets/css/color-help.css');
+        
+        $bg_file = HLEB_GLOBAL_DIRECTORY . '/public/assets/css/color-help.css';
+        $bg_array = file_get_contents($bg_file); 
+        preg_match_all('/\.([\w\d\.-]+)[^{}]*{[^}]*}/', $bg_array, $matches);
+  
         return agRender(
             '/admin/css',
             [
                 'meta'  => meta($m = [], Translate::get('admin')),
                 'uid'   => $this->uid,
                 'data'  => [
-                    'type'              => 'Css',
-                    'sheet'             => 'Css',
+                    'type'  => 'Css',
+                    'sheet' => 'Css',
+                    'bg'    => $matches[1],
                 ]
             ]
         );

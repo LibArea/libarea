@@ -110,7 +110,7 @@
             </div>
             <div class="flex flex-row gap-2 items-center max-w780">
               <?= favicon_img($item['item_id'], $item['item_url_domain']); ?>
-              <div class="green size-140 size-14">
+              <div class="green-600 size-140 size-14">
                 <?= $item['item_url_domain']; ?>
                 <?php if ($item['item_github_url']) { ?>
                   <a class="ml15 gray-light" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_github_url']; ?>">

@@ -93,7 +93,7 @@
       </div>
       <div class="ml15 center box-number">
         <div class="uppercase mb5 size-14 gray"><?= Translate::get('reads'); ?></div>
-        <div class="focus-user blue">
+        <div class="focus-user sky-500">
           <?= $topic['facet_focus_count']; ?>
         </div>
       </div>

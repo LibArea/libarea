@@ -47,14 +47,14 @@
         <h3 class="size-24 mt0 mr15 mb0">
           <?php if ($content['favorite_type'] == 1) {  ?>
             <span id="favorite" class="add-favorite size-14 ml15 right" data-front="personal" data-id="<?= $content['post_id']; ?>" data-type="post">
-              <i class="bi bi-trash size-21 red"></i>
+              <i class="bi bi-trash size-21 red-500"></i>
             </span>
             <a class="font-normal black size-24 mt0 mb0" href="<?= getUrlByName('post', ['id' => $content['post_id'], 'slug' => $content['post_slug']]); ?>">
               <?= $content['post_title']; ?>
             </a>
           <?php } else { ?>
             <span id="fav-comm" class="add-favorite right  ml15 size-14" data-front="personal" data-id="<?= $content['answer_id']; ?>" data-type="answer">
-              <i class="bi bi-trash size-21 red"></i>
+              <i class="bi bi-trash size-21 red-500"></i>
             </span>
             <a class="black dark-white" href="<?= getUrlByName('post', ['id' => $content['post']['post_id'], 'slug' => $content['post']['post_slug']]); ?>#answer_<?= $content['answer_id']; ?>">
               <?= $content['post']['post_title']; ?>

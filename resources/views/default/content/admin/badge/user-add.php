@@ -22,7 +22,7 @@
     <div class="mb20">
       <label class="block mb5" for="post_content">
         <?= Translate::get('badge'); ?>:
-        <span class="red"><?= $data['user']['user_login']; ?></span>
+        <span class="red-500"><?= $data['user']['user_login']; ?></span>
       </label>
       <select class="w-100 h30" name="badge_id">
         <?php foreach ($data['badges'] as $badge) { ?>

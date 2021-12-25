@@ -33,7 +33,7 @@
             <?= $post['user_login']; ?>
           </a>
           <div class="flex flex-row items-center gray size-14 lowercase">
-            <i class="bi bi-heart blue mr5"></i> <?= $post['post_votes']; ?>
+            <i class="bi bi-heart sky-500 mr5"></i> <?= $post['post_votes']; ?>
             <i class="bi bi-eye mr5 ml15"></i> <?= $post['post_hits_count']; ?>
           </div>
         </div>

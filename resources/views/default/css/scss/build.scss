@@ -1,0 +1,17 @@
+/*
+ * List of resources to build
+ *
+ * Перечень ресурсов для сборки
+ */
+ 
+/* Basic color variables (full set) */ 
+@import "basic-color-variables.scss";
+
+/* Resources used for Agouti design */
+@import "basic.scss";
+@import "background.scss";
+@import "color.scss";
+@import "components.scss";
+@import "media.scss";
+@import "icons.scss";
+@import "../custom.scss";

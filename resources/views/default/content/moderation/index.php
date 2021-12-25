@@ -28,7 +28,7 @@
               <?= $mod['post_title']; ?>
             </a>
             <?php if ($mod['post_feature'] == 1) { ?>
-              <i class="bi bi-question-lg green"></i>
+              <i class="bi bi-question-lg green-600"></i>
             <?php } ?>
           </div>
           <div class="size-14">

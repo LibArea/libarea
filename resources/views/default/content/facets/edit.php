@@ -181,7 +181,7 @@
         </div>
       <?php } ?>
 
-      <div for="mb5"><?= Translate::get('meta description'); ?><sup class="red">*</sup></div>
+      <div for="mb5"><?= Translate::get('meta description'); ?><sup class="red-500">*</sup></div>
       <textarea class="add max-w780" rows="6" minlength="44" name="facet_description"><?= $fs['facet_description']; ?></textarea>
       <div class="size-14 gray-light-2 mb20">> 44 <?= Translate::get('characters'); ?></div>
 
@@ -200,7 +200,7 @@
         ]
       ]); ?>
 
-      <div for="mb5"><?= Translate::get('info'); ?><sup class="red">*</sup></div>
+      <div for="mb5"><?= Translate::get('info'); ?><sup class="red-500">*</sup></div>
       <textarea class="add max-w780" rows="6" name="facet_info"><?= $fs['facet_info']; ?></textarea>
       <div class="mb20 size-14 gray-light-2">Markdown, > 14 <?= Translate::get('characters'); ?></div>
 

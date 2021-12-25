@@ -4,11 +4,11 @@
       <?php if ($type != 'admin') { ?>
         <a href="<?= getUrlByName('admin'); ?>"><?= Translate::get('admin'); ?></a> /
       <?php } ?>
-      <span class="red"><?= Translate::get($type); ?></span>
+      <span class="red-500"><?= Translate::get($type); ?></span>
     </p>
     <ul class="flex flex-row list-none m0 p0 center">
       <?php foreach ($pages as $menu) { ?>
-        <a class="ml30 mb-mr-5 mb-ml-10 gray<?php if ($menu['id'] == $sheet) { ?> blue<?php } ?>" 
+        <a class="ml30 mb-mr-5 mb-ml-10 gray<?php if ($menu['id'] == $sheet) { ?> sky-500<?php } ?>" 
             href="<?= $menu['url']; ?>" <?php if ($menu['id'] == $sheet) { ?> aria-current="page"<?php } ?>>
               <i class="<?= $menu['icon']; ?> mr5"></i>
               <span class="mb-size-13"><?= $menu['name']; ?></span>

@@ -1,0 +1,37 @@
+/*
+ * Background color used in the Agouti project
+ *
+ * Цвет фона, использованный в проекте Агути
+ */
+
+.bg-black { background-color: $black; }
+.bg-white { background-color: $white; }
+
+.bg-green-600 { background-color: $green-600; }
+
+.bg-gray-100 { background-color: $gray-100; }
+.bg-gray-500 { background-color: $gray-500; }
+.bg-gray-700 { background-color: $gray-700; }
+.bg-gray-800 { background-color: $gray-800; }
+
+.bg-yellow-100 { background-color: $yellow-100; }
+.bg-yellow-500 { background-color: $yellow-500; }
+
+.bg-purple-100 { background-color: $purple-100; }
+
+.bg-indigo-300 { background-color: $indigo-300; }
+
+.bg-blue-100 { background-color: $blue-100; }
+.bg-blue-400 { background-color: $blue-400; }
+
+.bg-sky-50 { background-color: $sky-50; }
+
+.bg-red-200 { background-color: $red-200; }
+.bg-red-300 { background-color: $red-300; }
+.bg-red-500 { background-color: $red-500; }
+
+.bg-hover-green:hover { background-color: #5fb878; }
+.bg-hover-gray:hover { background-color: #f5f7fa; }
+.bg-hover-blue:hover { background-color: #0085EE; }
+.bg-hover-light-blue:hover { background-color: #31A2FA; }
+.bg-hover-light:hover { background-color: rgba(0, 154, 97, 0.08); }

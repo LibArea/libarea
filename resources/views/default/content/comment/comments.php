@@ -33,7 +33,7 @@
             <?= votes($uid['user_id'], $comment, 'comment', 'mr5'); ?>
           </div>
         <?php } else { ?>
-          <div class="bg-red-300 mb20">
+          <div class="bg-red-200 mb20">
             ~ <?= Translate::get('comment deleted'); ?>
           </div>
         <?php } ?>

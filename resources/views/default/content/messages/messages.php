@@ -37,7 +37,7 @@
             <?php if ($msg['unread']) { ?>
               <?= Translate::get('there are'); ?> <?= $msg['count']; ?> <?= $msg['unread_num']; ?>
             <?php } else { ?>
-              <span class="red"><?= Translate::get('view'); ?></span>
+              <span class="red-500"><?= Translate::get('view'); ?></span>
               <?php if ($msg['count'] != 0) { ?>
                 <?= $msg['count']; ?> <?= $msg['count_num']; ?>
               <?php } ?>

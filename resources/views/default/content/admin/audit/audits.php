@@ -53,7 +53,7 @@
               <?= $audit['user_login']; ?>
             </a>
             <?php if ($audit['user_limiting_mode'] == 1) { ?>
-              <span class="mr5 ml5 red"> audit </span>
+              <span class="mr5 ml5 red-500"> audit </span>
             <?php } ?>
             <span class="mr5 ml5"> &#183; </span>
             <a class="mr5 ml5" href="<?= getUrlByName('admin.user.edit', ['id' => $user_id]); ?>">
@@ -65,7 +65,7 @@
 
             <?= Translate::get('type'); ?>: <i><?= $audit['audit_type']; ?></i>
             <?php if ($audit['content'][$audit['audit_type'] . '_is_deleted'] == 1) { ?>
-              <span class="red"><?= Translate::get('deleted'); ?> </span>
+              <span class="red-500"><?= Translate::get('deleted'); ?> </span>
             <?php } ?>
 
             <?php if (!empty($audit['post'])) { ?>
@@ -79,7 +79,7 @@
           <td class="center">
             <a data-id="<?= $audit['content'][$audit['audit_type'] . '_id']; ?>" data-type="<?= $audit['audit_type']; ?>" class="type-action size-13">
               <?php if ($audit['content'][$audit['audit_type'] . '_is_deleted'] == 1) { ?>
-                <span class="red"><?= Translate::get('recover'); ?></span>
+                <span class="red-500"><?= Translate::get('recover'); ?></span>
               <?php } else { ?>
                 <?= Translate::get('remove'); ?>
               <?php } ?>

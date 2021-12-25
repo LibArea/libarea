@@ -23,7 +23,7 @@
         <?= $data['item']['item_content_url']; ?>
       </div>
       <div class="gray mt5 mb5">
-        <a class="green" rel="nofollow noreferrer ugc" href="<?= $data['item']['item_url']; ?>">
+        <a class="green-600" rel="nofollow noreferrer ugc" href="<?= $data['item']['item_url']; ?>">
           <?= favicon_img($data['item']['item_id'], $data['item']['item_url_domain']); ?>
           <?= $data['item']['item_url']; ?>
         </a>
