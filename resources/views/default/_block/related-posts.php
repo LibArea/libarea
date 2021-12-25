@@ -7,7 +7,7 @@
         <?php if ($number == 'yes') { ?>
           <?php $num++; ?>
           <div class="flex justify-center bg-gray-200 w21 mr5 br-rd-50 size-15">
-            <span class="gray-light-2"><?= $num; ?></span>
+            <span class="gray-400"><?= $num; ?></span>
           </div>
         <?php } ?>
         <a href="<?= getUrlByName('post', ['id' => $related['id'], 'slug' => $related['post_slug']]); ?>">

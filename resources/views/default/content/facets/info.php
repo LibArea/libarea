@@ -17,7 +17,7 @@
         <?= $facet['facet_seo_title']; ?>
       </a>
       <?php if ($uid['user_trust_level'] == 5) { ?>
-        <a class="right gray-light" href="<?= getUrlByName('topic.edit', ['id' => $facet['facet_id']]); ?>">
+        <a class="right gray-600" href="<?= getUrlByName('topic.edit', ['id' => $facet['facet_id']]); ?>">
           <i class="bi bi-pencil size-15"></i>
         </a>
       <?php } ?>
@@ -43,7 +43,7 @@
       </a>
     </center>
     <hr>
-    <div class="gray-light">
+    <div class="gray-600">
       <i class="bi bi-calendar-week mr5 middle"></i>
       <span class="middle"><?= $facet['facet_add_date']; ?></span>
     </div>

@@ -56,7 +56,7 @@
               <?= $fc['facet_title']; ?>
             </a>
             <span class="green-600 mr5 ml5"><?= $data['type']; ?>/<?= $fc['facet_slug']; ?></span>
-            <span class="mr5 ml5 gray-light-2"><?= Translate::get('posts'); ?> <?= $fc['facet_count']; ?></span>
+            <span class="mr5 ml5 gray-400"><?= Translate::get('posts'); ?> <?= $fc['facet_count']; ?></span>
             <?php if ($fc['facet_top_level'] != 0) { ?>
               <span class="green-600 mr5 ml5"><?= Translate::get('subtopic'); ?></span>
             <?php } ?>

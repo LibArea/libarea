@@ -59,7 +59,7 @@
           </a>
 
           <?php if ($uid['user_trust_level'] == 5 || $fs['facet_user_id'] == $uid['user_id']) { ?>
-            <a class="size-14 gray-light-2" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('page.edit', ['id' => $row['post_id']]); ?>">
+            <a class="size-14 gray-400" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('page.edit', ['id' => $row['post_id']]); ?>">
               <i class="bi bi-pencil"></i>
             </a>
           <?php } ?>

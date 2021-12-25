@@ -29,12 +29,12 @@
             <i class="bi bi-patch-question green-600"></i>
           <?php } ?>
           <?php if ($post['post_translation'] == 1) { ?>
-            <span class="pt5 pr10 pb5 pl10 gray-light bg-yellow-100 br-rd3 size-14 italic lowercase">
+            <span class="pt5 pr10 pb5 pl10 gray-600 bg-yellow-100 br-rd3 size-14 italic lowercase">
               <?= Translate::get('translation'); ?>
             </span>
           <?php } ?>
           <?php if ($post['post_tl'] > 0) { ?>
-            <span class="pt5 pr10 pb5 pl10 gray-light bg-orange-100 br-rd3 italic size-14">
+            <span class="pt5 pr10 pb5 pl10 gray-600 bg-orange-100 br-rd3 italic size-14">
               tl<?= $post['post_tl']; ?>
             </span>
           <?php } ?>
@@ -42,7 +42,7 @@
             <i class="bi bi-bezier2 sky-500"></i>
           <?php } ?>
         </h1>
-        <div class="size-14 lowercase flex gray-light-2">
+        <div class="size-14 lowercase flex gray-400">
           <?= $post['post_date_lang']; ?>
           <?php if ($post['modified']) { ?>
             (<?= Translate::get('ed'); ?>)
@@ -50,30 +50,30 @@
 
           <?php if ($uid['user_id']) { ?>
             <?php if ($uid['user_login'] == $post['user_login']  || $uid['user_trust_level'] == 5) { ?>
-              <a class="gray-light mr10 ml10" href="<?= getUrlByName('post.edit', ['id' => $post['post_id']]); ?>">
+              <a class="gray-600 mr10 ml10" href="<?= getUrlByName('post.edit', ['id' => $post['post_id']]); ?>">
                 <?= Translate::get('edit'); ?>
               </a>
             <?php } ?>
             <?php if ($uid['user_login'] == $post['user_login']) { ?>
               <?php if ($post['post_draft'] == 0) { ?>
                 <?php if ($post['user_my_post'] == $post['post_id']) { ?>
-                  <span class="mu_post gray-light mr10 ml10">+ <?= Translate::get('in-the-profile'); ?></span>
+                  <span class="mu_post gray-600 mr10 ml10">+ <?= Translate::get('in-the-profile'); ?></span>
                 <?php } else { ?>
-                  <a class="add-post-profile gray-light mr10 ml10" data-post="<?= $post['post_id']; ?>">
+                  <a class="add-post-profile gray-600 mr10 ml10" data-post="<?= $post['post_id']; ?>">
                     <span class="mu_post"><?= Translate::get('in-the-profile'); ?></span>
                   </a>
                 <?php } ?>
               <?php } ?>
             <?php } ?>
             <?php if ($uid['user_trust_level'] == 5) { ?>
-              <a data-type="post" data-id="<?= $post['post_id']; ?>" class="type-action gray-light mr10 ml10">
+              <a data-type="post" data-id="<?= $post['post_id']; ?>" class="type-action gray-600 mr10 ml10">
                 <?php if ($post['post_is_deleted'] == 1) { ?>
                   <i class="bi bi-trash red-500"></i>
                 <?php } else { ?>
                   <i class="bi bi-trash"></i>
                 <?php } ?>
               </a>
-              <a data-id="<?= $post['post_id']; ?>" class="post-recommend gray-light mr10 ml10">
+              <a data-id="<?= $post['post_id']; ?>" class="post-recommend gray-600 mr10 ml10">
                 <?php if ($post['post_is_recommend'] == 1) { ?>
                   <i class="bi bi-lightning sky-500"></i>
                 <?php } else { ?>
@@ -143,7 +143,7 @@
 
         <ul class="list-none w-100 p0 m0 lowercase">
           <li class="left p10">
-            <div class="size-14 gray-light-2 mb5">
+            <div class="size-14 gray-400 mb5">
               <?= Translate::get('created by'); ?>
             </div>
             <div class="center">
@@ -153,7 +153,7 @@
             </div>
           </li>
           <li class="left p10 no-mob">
-            <div class="size-14 gray-light-2 mb5">
+            <div class="size-14 gray-400 mb5">
               <?= Translate::get('last answer'); ?>
             </div>
             <div class="center">
@@ -162,31 +162,31 @@
                   <?= user_avatar_img($data['last_user']['user_avatar'], 'small', $data['last_user']['user_login'], 'w34 br-rd-50'); ?>
                 </a>
               <?php } else { ?>
-                <span class="gray-light-2 size-14">—</span>
+                <span class="gray-400 size-14">—</span>
               <?php } ?>
             </div>
           </li>
           <li class="left p10 no-mob">
-            <div class="size-21 gray-light center mb5">
+            <div class="size-21 gray-600 center mb5">
               <?php if ($post['post_hits_count'] == 0) { ?>
-                <span class="gray-light-2 size-14">—</span>
+                <span class="gray-400 size-14">—</span>
               <?php } else { ?>
                 <?= $post['post_hits_count']; ?>
               <?php } ?>
             </div>
-            <div class="center size-14 gray-light-2">
+            <div class="center size-14 gray-400">
               <?= num_word($post['post_hits_count'], Translate::get('num-view'), false); ?>
             </div>
           </li>
           <li class="left p10 no-mob">
-            <div class="size-21 gray-light center mb5">
+            <div class="size-21 gray-600 center mb5">
               <?php if ($post['amount_content'] == 0) { ?>
-                <span class="gray-light-2 size-14">—</span>
+                <span class="gray-400 size-14">—</span>
               <?php } else { ?>
                 <?= $post['amount_content']; ?>
               <?php } ?>
             </div>
-            <div class="center size-14 gray-light-2">
+            <div class="center size-14 gray-400">
               <?= num_word($post['amount_content'], Translate::get('num-answer'), false); ?>
             </div>
           </li>
@@ -195,7 +195,7 @@
         <div class="mr15">
           <?php if ($uid['user_id'] > 0) { ?>
             <?php if (is_array($data['post_signed'])) { ?>
-              <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id size-14 right mt5 bg-gray-100 gray-light-2 br-gray-200 br-rd20 center pt5 pr15 pb5 pl15">
+              <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id size-14 right mt5 bg-gray-100 gray-400 br-gray-200 br-rd20 center pt5 pr15 pb5 pl15">
                 <?= Translate::get('unsubscribe'); ?>
               </div>
             <?php } else { ?>
@@ -272,7 +272,7 @@
         <a class="flex justify-center pt5 pr10 pb5 black dark-white inline size-14" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>">
           <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'w24 mr10 br-box-gray'); ?>
           <?= $topic['facet_title']; ?>
-          <div class="gray-light-2 size-14"><?= $topic['facet_short_description']; ?></div>
+          <div class="gray-400 size-14"><?= $topic['facet_short_description']; ?></div>
         </a>
       <?php } ?>
     </div>
@@ -284,9 +284,9 @@
     </div>
   <?php } ?>
   <div class="share-btn br-box-gray bg-white br-rd5 mb15 p15 size-21 center">
-    <a class="p15 gray-light-2" data-id="fb"><i class="bi bi-facebook"></i></a>
-    <a class="p15 gray-light-2" data-id="vk">VK</a>
-    <a class="p15 gray-light-2" data-id="tw"><i class="bi bi-twitter"></i></a>
+    <a class="p15 gray-400" data-id="fb"><i class="bi bi-facebook"></i></a>
+    <a class="p15 gray-400" data-id="vk">VK</a>
+    <a class="p15 gray-400" data-id="tw"><i class="bi bi-twitter"></i></a>
   </div>
   <?php if ($data['recommend']) { ?>
     <div class="br-box-gray bg-white br-rd5 mb15 sticky top70 p15">
@@ -304,7 +304,7 @@
               <?php } ?>
             </a>
           <?php } else { ?>
-            <i class="bi bi-intersect gray-light-2 middle mr15 size-24"></i>
+            <i class="bi bi-intersect gray-400 middle mr15 size-24"></i>
           <?php } ?>          
           <a class="black dark-white" href="<?= getUrlByName('post', ['id' => $rec_post['post_id'], 'slug' => $rec_post['post_slug']]); ?>">
             <?= $rec_post['post_title']; ?>

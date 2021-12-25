@@ -39,7 +39,7 @@
         <a href="<?= getUrlByName('post', ['id' => $draft['post_id'], 'slug' => $draft['post_slug']]); ?>">
           <h3 class="m0 size-21"><?= $draft['post_title']; ?></h3>
         </a>
-        <div class="mr5 size-14 gray-light lowercase">
+        <div class="mr5 size-14 gray-600 lowercase">
           <?= $draft['post_date']; ?> |
           <a href="<?= getUrlByName('post.edit', ['id' => $draft['post_id']]); ?>"><?= Translate::get('edit'); ?></a>
         </div>

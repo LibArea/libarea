@@ -8,10 +8,10 @@
     <div class="post-body max-w780">
       <?= $page['post_content']; ?>
     </div>
-    <div class="gray-light-2 size-14 italic mb15">
+    <div class="gray-400 size-14 italic mb15">
       <?= $page['post_modified']; ?>
       <?php if ($uid['user_trust_level'] == 5 || $page['post_user_id'] == $uid['user_id']) { ?>
-        <a class="size-14 gray-light-2 ml5" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('page.edit', ['id' => $page['post_id']]); ?>">
+        <a class="size-14 gray-400 ml5" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('page.edit', ['id' => $page['post_id']]); ?>">
           <i class="bi bi-pencil"></i>
         </a>
       <?php } ?>

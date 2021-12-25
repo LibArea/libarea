@@ -12,7 +12,7 @@
             <?php if ($uid['user_id']) { ?>
               <?php if ($facet['facet_user_id'] != $uid['user_id']) { ?>
                 <?php if ($facet['signed_facet_id']) { ?>
-                  <div data-id="<?= $facet['facet_id']; ?>" data-type="topic" class="focus-id right inline br-rd20 gray-light-2 center mr15">
+                  <div data-id="<?= $facet['facet_id']; ?>" data-type="topic" class="focus-id right inline br-rd20 gray-400 center mr15">
                     <sup><?= Translate::get('unsubscribe'); ?></sup>
                   </div>
                 <?php } else { ?>
@@ -30,7 +30,7 @@
             <?php if ($uid['user_id'] == $facet['facet_user_id']) { ?>
               <i class="bi bi-mic sky-500 size-14"></i>
             <?php } ?>
-            <div class="size-14 pr15 mb-pr-0 gray-light-2">
+            <div class="size-14 pr15 mb-pr-0 gray-400">
               <?= $facet['facet_short_description']; ?>
               <div class="flex mt5 size-14">
                 <i class="bi bi-journal mr5"></i>

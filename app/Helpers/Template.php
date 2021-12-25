@@ -213,7 +213,7 @@ function pagination($pNum, $pagesCount, $sheet, $other)
             $html .= '...';
         }
 
-        $html .= '<a class="p5 ml5 size-15 lowercase gray-light" href="' . $page . '/page/' . ($pNum + 1) . '">' . Translate::get('page') . ' ' . ($pNum + 1) . ' >></a>';
+        $html .= '<a class="p5 ml5 size-15 lowercase gray-600" href="' . $page . '/page/' . ($pNum + 1) . '">' . Translate::get('page') . ' ' . ($pNum + 1) . ' >></a>';
     }
 
     $html .= '</div>';
@@ -224,10 +224,10 @@ function pagination($pNum, $pagesCount, $sheet, $other)
 function breadcrumb($path_home, $title_home, $path_intermediate, $title_intermediate, $title_page)
 {
     $html = '<ul class="flex flex-row gap-2 list-none items-center size-13 p0 mt0 mb15">';
-    $html .= '<li><a class="gray" title="' . $title_home . '" href="' . $path_home . '">' . $title_home . '</a><li class="gray-light-2">/</li>';
+    $html .= '<li><a class="gray" title="' . $title_home . '" href="' . $path_home . '">' . $title_home . '</a><li class="gray-400">/</li>';
 
     if ($path_intermediate) {
-        $html .= '<li><a class="gray" title="' . $title_intermediate . '" href="' . $path_intermediate . '">' . $title_intermediate . '</a></li><li class="gray-light-2">/</li>';
+        $html .= '<li><a class="gray" title="' . $title_intermediate . '" href="' . $path_intermediate . '">' . $title_intermediate . '</a></li><li class="gray-400">/</li>';
     }
 
     $html .= '<li><span class="red">' . $title_page . '</span></li></ul>';
@@ -245,21 +245,21 @@ function votes($user_id, $content, $type, $css = '', $block = '')
 
     if ($user_id > 0) {
         if ($content['votes_' . $type . '_user_id'] || $user_id == $content[$type . '_user_id']) {
-            $html .= '<div class="voters sky-500 flex ' . $block . ' gray-light-2 center">
+            $html .= '<div class="voters sky-500 flex ' . $block . ' gray-400 center">
                         <div class="up-id bi bi-heart ' . $css . '"></div>
                         <div class="score">
                             ' . $count . '
                         </div></div>';
         } else {
             $num_count = empty($count) ? 0 : $count;
-            $html .= '<div id="up' . $content[$type . '_id'] . '" class="voters sky-600-hover flex ' . $block . ' center gray-light-2">
+            $html .= '<div id="up' . $content[$type . '_id'] . '" class="voters sky-600-hover flex ' . $block . ' center gray-400">
                         <div data-id="' . $content[$type . '_id'] . '" data-count="' . $num_count . '" data-type="' . $type . '" class="up-id bi bi-heart ' . $css . '"></div>
                         <div class="score">
                             ' . $count . '
                         </div></div>';
         }
     } else {
-        $html .= '<div class="voters sky-600-hover flex ' . $block . ' center gray-light-2">
+        $html .= '<div class="voters sky-600-hover flex ' . $block . ' center gray-400">
                     <div class="up-id bi bi-heart ' . $css . ' click-no-auth"></div>
                     <div class="score">
                          ' . $count . '                
@@ -275,9 +275,9 @@ function favorite_post($user_id, $post_id, $favorite_tid, $css = '')
     if ($user_id > 0) {
         $blue = $favorite_tid ? 'sky-500' : '';
         $my   = $favorite_tid ? 'bi bi-bookmark-dash' : 'bi-bookmark-plus';
-        $html .= '<span id="favorite_' . $post_id . '" class="add-favorite ' . $blue . ' ' . $css . ' gray-light feed-icon" data-id="' . $post_id . '" data-type="post"><i class="bi ' . $my . ' middle"></i></span>';
+        $html .= '<span id="favorite_' . $post_id . '" class="add-favorite ' . $blue . ' ' . $css . ' gray-600 feed-icon" data-id="' . $post_id . '" data-type="post"><i class="' . $my . ' middle"></i></span>';
     } else {
-        $html .= '<span class="click-no-auth gray-light-2 feed-icon ' . $css . '">
+        $html .= '<span class="click-no-auth gray-400 feed-icon ' . $css . '">
                     <i class="bi bi-bookmark-plus middle"></i>
                         </span>';
     }

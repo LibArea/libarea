@@ -40,7 +40,7 @@
       <a rel="nofollow noopener" class="white inline ml10" title="GitHub" href="https://github.com/agoutiDev/agouti">
         <i class="bi bi-github size-21"></i>
       </a>
-      <div class="size-13 mt5 mb5 gray-light-2">
+      <div class="size-13 mt5 mb5 gray-400">
         Agouti &copy; <?= date('Y'); ?> — <?= Translate::get('community'); ?>
       </div>
     </div>

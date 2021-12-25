@@ -35,7 +35,7 @@
           <span class="mr5">
             <?= $answer['date']; ?>
           </span>
-          <a class="gray-light ml10" href="<?= getUrlByName('admin.logip', ['ip' => $answer['answer_ip']]); ?>">
+          <a class="gray-600 ml10" href="<?= getUrlByName('admin.logip', ['ip' => $answer['answer_ip']]); ?>">
             <?= $answer['answer_ip']; ?>
           </a>
           <?php if ($answer['post_feature'] == 1) { ?>

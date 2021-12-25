@@ -45,7 +45,7 @@
     <label class="required block mb5"><?= Translate::get('Email'); ?></label>
     <form action="<?= getUrlByName('admin.test.mail'); ?>" method="post">
       <input class="w-100 h30" type="mail" name="mail" value="">
-      <div class="size-14 mt5 mb5 gray-light-2"><?= Translate::get('test-email'); ?>...</div>
+      <div class="size-14 mt5 mb5 gray-400"><?= Translate::get('test-email'); ?>...</div>
       <?= sumbit(Translate::get('send')); ?>
     </form>
   </div>

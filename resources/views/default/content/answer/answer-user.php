@@ -18,7 +18,7 @@
             <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'w18 mr5'); ?>
             <?= $answer['user_login']; ?>
           </a>
-          <span class="mr5 ml5 gray-light-2 lowercase">
+          <span class="mr5 ml5 gray-400 lowercase">
             <?= $answer['date']; ?>
           </span>
         </div>

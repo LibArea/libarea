@@ -43,7 +43,7 @@
           <span class="mr55">
             <?= $post['date']; ?>
           </span>
-          <a class="gray-light ml10" href="<?= getUrlByName('admin.logip', ['ip' => $post['post_ip']]); ?>">
+          <a class="gray-600 ml10" href="<?= getUrlByName('admin.logip', ['ip' => $post['post_ip']]); ?>">
             <?= $post['post_ip']; ?>
           </a>
           <?php if ($post['post_feature'] == 1) { ?>

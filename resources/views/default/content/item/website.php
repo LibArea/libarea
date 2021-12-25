@@ -50,7 +50,7 @@
     <?php if ($data['item']['item_is_soft'] == 1) { ?>
       <h2 class="mb5 mb-mt-5 font-normal"><?= Translate::get('soft'); ?></h2>
       <h3 class="mt5 mb10 font-normal"><?= $data['item']['item_title_soft']; ?></h3>
-      <div class="gray-light">
+      <div class="gray-600">
         <?= $data['item']['item_content_soft']; ?>
       </div>
       <div class="mb5">

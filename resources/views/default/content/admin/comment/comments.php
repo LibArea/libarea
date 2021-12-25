@@ -43,7 +43,7 @@
           <span class="date mr5">
             <?= $comment['date']; ?>
           </span>
-          <a class="gray-light ml10" href="<?= getUrlByName('admin.logip', ['ip' => $comment['comment_ip']]); ?>">
+          <a class="gray-600 ml10" href="<?= getUrlByName('admin.logip', ['ip' => $comment['comment_ip']]); ?>">
             <?= $comment['comment_ip']; ?>
           </a>
           <?php if ($comment['post_feature'] == 1) { ?>

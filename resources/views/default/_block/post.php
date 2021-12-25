@@ -21,7 +21,7 @@
            
           <div class="ml5">
             <?= $post['user_login']; ?>
-            <div class="gray-light-2 lowercase size-14">
+            <div class="gray-400 lowercase size-14">
               <?= $post['post_date'] ?>
             </div>
           </div>
@@ -47,12 +47,12 @@
                 <i class="bi bi-patch-question green-600"></i>
               <?php } ?>
               <?php if ($post['post_translation'] == 1) { ?>
-                <span class="pt5 pr10 pb5 pl10 gray-light bg-yellow-100 br-rd3 size-14 italic lowercase">
+                <span class="pt5 pr10 pb5 pl10 gray-600 bg-yellow-100 br-rd3 size-14 italic lowercase">
                   <?= Translate::get('translation'); ?>
                 </span>
               <?php } ?>
               <?php if ($post['post_tl'] > 0) { ?>
-                <span class="pt5 pr10 pb5 pl10 gray-light bg-orange-100 br-rd3 italic size-14">
+                <span class="pt5 pr10 pb5 pl10 gray-600 bg-orange-100 br-rd3 italic size-14">
                   tl<?= $post['post_tl']; ?>
                 </span>
               <?php } ?>
@@ -62,16 +62,16 @@
             </h2>
           </a>
           <div class="lowercase">
-            <?= html_blog($post['facet_list'], 'blog', 'gray-light size-14 mr15'); ?>
-            <?= html_topic($post['facet_list'], 'topic', 'gray-light size-14 mr15'); ?>
+            <?= html_blog($post['facet_list'], 'blog', 'gray-600 size-14 mr15'); ?>
+            <?= html_topic($post['facet_list'], 'topic', 'gray-600 size-14 mr15'); ?>
             <?php if ($post['post_url_domain']) { ?>
-              <a class="gray-light size-14 ml10" href="<?= getUrlByName('domain', ['domain' => $post['post_url_domain']]); ?>">
+              <a class="gray-600 size-14 ml10" href="<?= getUrlByName('domain', ['domain' => $post['post_url_domain']]); ?>">
                 <i class="bi bi-link-45deg middle"></i> <?= $post['post_url_domain']; ?>
               </a>
             <?php } ?>
           </div>
           <div class="show_add_<?= $post['post_id']; ?>">
-            <div data-post_id="<?= $post['post_id']; ?>" class="showpost mt10 mb5 gray-light">
+            <div data-post_id="<?= $post['post_id']; ?>" class="showpost mt10 mb5 gray-600">
               <?= $post['post_content_preview']; ?>
               <span class="s_<?= $post['post_id']; ?> show_detail"></span>
             </div>
@@ -97,7 +97,7 @@
         <div class="flex flex-row">
           <?= votes($uid['user_id'], $post, 'post', 'mr5'); ?>
           <?php if ($post['post_answers_count'] != 0) { ?>
-            <a class="flex gray-light-2 ml15" href="<?= $post_url; ?>#comment">
+            <a class="flex gray-400 ml15" href="<?= $post_url; ?>#comment">
               <i class="bi bi-chat-text mr5"></i>
               <?= $post['post_answers_count'] + $post['post_comments_count']; ?>
             </a>

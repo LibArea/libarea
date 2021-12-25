@@ -19,7 +19,7 @@
                 <?= $mod['user_login']; ?>
               </span>
             </a>
-            <span class="ml5 gray-light">
+            <span class="ml5 gray-600">
               <?= $mod['mod_created_at']; ?>
             </span>
           </div>
@@ -32,7 +32,7 @@
             <?php } ?>
           </div>
           <div class="size-14">
-            <span class="gray-light">
+            <span class="gray-600">
               <?= Translate::get('action'); ?>:
             </span>
             <b><?= Translate::get($mod['mod_action']); ?></b>

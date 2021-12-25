@@ -17,7 +17,7 @@
         <div class="mb20">
           <input class="w-100 h30" type="email" name="email">
           <div class="right pt5"><?= sumbit(Translate::get('send')); ?></div>
-          <div class="size-14 pt5 gray-light-2"><?= Translate::get('enter'); ?> E-mail</div>
+          <div class="size-14 pt5 gray-400"><?= Translate::get('enter'); ?> E-mail</div>
         </div>
         <?= Translate::get('invitations left'); ?> <?= 5 - $data['count_invites']; ?>
       </form>

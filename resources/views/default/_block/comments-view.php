@@ -16,7 +16,7 @@
             <li class="answers_subtree" id="answer_<?= $answer['answer_id']; ?>">
               <div class="answ-telo">
                 <div class="flex size-14">
-                  <a class="gray-light" href="<?= getUrlByName('user', ['login' => $answer['user_login']]); ?>">
+                  <a class="gray-600" href="<?= getUrlByName('user', ['login' => $answer['user_login']]); ?>">
                     <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'w18'); ?>
                     <span class="mr5 ml5">
                       <?= $answer['user_login']; ?>
@@ -25,15 +25,15 @@
                   <?php if ($post['post_user_id'] == $answer['answer_user_id']) { ?>
                     <span class="sky-500 mr5 ml0"><i class="bi bi-mic size-14"></i></span>
                   <?php } ?>
-                  <span class="mr5 ml5 gray-light lowercase">
+                  <span class="mr5 ml5 gray-600 lowercase">
                     <?= $answer['answer_date']; ?>
                   </span>
                   <?php if (empty($answer['edit'])) { ?>
-                    <span class="mr5 ml10 gray-light">
+                    <span class="mr5 ml10 gray-600">
                       (<?= Translate::get('ed'); ?>.)
                     </span>
                   <?php } ?>
-                  <a rel="nofollow" class="gray-light mr5 ml10" href="<?= $post_url; ?>#answer_<?= $answer['answer_id']; ?>"><i class="bi bi-hash"></i></a>
+                  <a rel="nofollow" class="gray-600 mr5 ml10" href="<?= $post_url; ?>#answer_<?= $answer['answer_id']; ?>"><i class="bi bi-hash"></i></a>
                   <?= import('/_block/show-ip', ['ip' => $answer['answer_ip'], 'user_trust_level' => $uid['user_trust_level']]); ?>
                 </div>
                 <div class="m0 size-15 max-w780">
@@ -130,7 +130,7 @@
               <div class="p5">
                 <div class="max-w780 size-15">
                   <div class="size-14 flex">
-                    <a class="gray-light" href="<?= getUrlByName('user', ['login' => $comment['user_login']]); ?>">
+                    <a class="gray-600" href="<?= getUrlByName('user', ['login' => $comment['user_login']]); ?>">
                       <?= user_avatar_img($comment['user_avatar'], 'small', $comment['user_login'], 'w18'); ?>
                       <span class="mr5 ml5">
                         <?= $comment['user_login']; ?>
@@ -139,15 +139,15 @@
                     <?php if ($post['post_user_id'] == $comment['comment_user_id']) { ?>
                       <span class="sky-500 mr5"><i class="bi bi-mic size-14"></i></span>
                     <?php } ?>
-                    <span class="mr5 ml5 gray-light-2 lowercase">
+                    <span class="mr5 ml5 gray-400 lowercase">
                       <?= lang_date($comment['comment_date']); ?>
                     </span>
                     <?php if ($comment['comment_comment_id'] > 0) { ?>
-                      <a class="gray-light-2 mr10 ml10" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_comment_id']; ?>"><i class="bi bi-arrow-up"></i></a>
+                      <a class="gray-400 mr10 ml10" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_comment_id']; ?>"><i class="bi bi-arrow-up"></i></a>
                     <?php } else { ?>
-                      <a class="gray-light-2 mr10 ml10" rel="nofollow" href="<?= $post_url; ?>#answer_<?= $comment['comment_answer_id']; ?>"><i class="bi bi-arrow-up"></i></a>
+                      <a class="gray-400 mr10 ml10" rel="nofollow" href="<?= $post_url; ?>#answer_<?= $comment['comment_answer_id']; ?>"><i class="bi bi-arrow-up"></i></a>
                     <?php } ?>
-                    <a class="gray-light-2 mr5 ml5" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_id']; ?>"><i class="bi bi-hash"></i></a>
+                    <a class="gray-400 mr5 ml5" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_id']; ?>"><i class="bi bi-hash"></i></a>
                     <?= import('/_block/show-ip', ['ip' => $comment['comment_ip'], 'user_trust_level' => $uid['user_trust_level']]); ?>
                   </div>
                   <div class="comm-telo-body size-15 mt5 mb10">

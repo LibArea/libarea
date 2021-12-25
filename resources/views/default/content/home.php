@@ -2,7 +2,7 @@
   <div class="col-span-12 grid items-center grid-cols-12 mb5">
     <div class="col-span-12 bg-white br-box-gray br-rd5 p20 center">
       <h1 class="size-31 font-normal mt0 mb5"><?= Config::get('meta.banner_title'); ?></h1>
-      <div class="gray-light mb5"><?= Config::get('meta.banner_desc'); ?>...</div>
+      <div class="gray-600 mb5"><?= Config::get('meta.banner_desc'); ?>...</div>
     </div>
   </div>
 <?php } ?>
@@ -93,7 +93,7 @@
         }
       ?>
         <div class="flex relative pt5 pb5 items-center justify-between hidden">
-          <a class="gray-light" href="<?= $url; ?>">
+          <a class="gray-600" href="<?= $url; ?>">
             <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'w24 mr5'); ?>
             <span class="ml5 middle"><?= $topic['facet_title']; ?> <?= $blog; ?></span>
           </a>
@@ -116,7 +116,7 @@
         <?= Translate::get('topics'); ?>
       </div>
       <?php foreach (Config::get('facets.default') as $key => $topic) { ?>
-        <a class="flex relative pt5 pb5 items-center hidden gray-light" href="<?= $topic['url']; ?>">
+        <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= $topic['url']; ?>">
           <img class="w24 h24 mr5 br-box-gray" src="<?= $topic['img']; ?>" alt="<?= $topic['name']; ?>">
           <span class="ml5"><?= $topic['name']; ?></span>
         </a>
@@ -129,7 +129,7 @@
       <div class="last-comm br-box-gray p5 pr15 pb5 pl15 bg-white br-rd5">
         <?php foreach ($data['latest_answers'] as $answer) { ?>
           <div class="mt15 mr0 mb15 ml0">
-            <div class="size-14 gray-light-2">
+            <div class="size-14 gray-400">
               <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'w18 h18 br-rd-50 mr5'); ?>
               <span class="middle"><?= $answer['answer_date']; ?></span>
             </div>

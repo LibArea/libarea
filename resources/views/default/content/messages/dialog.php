@@ -41,7 +41,7 @@
             <a class="flex black dark-white flex-center" href="<?= getUrlByName('user', ['login' => $login]); ?>">
               <div class="ml5">
                 <?= $login; ?>
-                <div class="gray-light-2 lowercase size-13">
+                <div class="gray-400 lowercase size-13">
                   <?= lang_date($val['message_add_time']); ?>
                 </div>
               </div>
@@ -51,7 +51,7 @@
             <?= $val['message_content']; ?>
           </div>
           <?php if ($val['unread'] == 1 and $val['message_sender_id'] == $uid['user_id']) { ?>
-            <div class="right gray-light-2 lowercase size-13 hidden mb5 pb5">
+            <div class="right gray-400 lowercase size-13 hidden mb5 pb5">
               <?= Translate::get('it was read'); ?> (<?= lang_date($val['message_receipt']); ?>)
             </div>
           <?php } ?>

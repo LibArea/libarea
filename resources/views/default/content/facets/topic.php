@@ -17,12 +17,12 @@
         <h1 class="mb0 mt10 size-24">
           <?= $topic['facet_seo_title']; ?>
           <?php if ($uid['user_trust_level'] == 5 || $topic['facet_user_id'] == $uid['user_id']) { ?>
-            <a class="right gray-light" href="<?= getUrlByName('topic.edit', ['id' => $topic['facet_id']]); ?>">
+            <a class="right gray-600" href="<?= getUrlByName('topic.edit', ['id' => $topic['facet_id']]); ?>">
               <i class="bi bi-pencil size-15"></i>
             </a>
           <?php } ?>
         </h1>
-        <div class="size-14 gray-light-2"><?= $topic['facet_short_description']; ?></div>
+        <div class="size-14 gray-400"><?= $topic['facet_short_description']; ?></div>
 
         <div class="mt15 right">
           <?= import('/_block/facet/signed', [
@@ -104,7 +104,7 @@
         <div class="br-box-gray mt15 p15 mb15 br-rd5 bg-white size-14">
           <div class="uppercase gray mt5 mb5"> <?= Translate::get('pages'); ?></div>
           <?php foreach ($data['pages'] as $ind => $row) { ?>
-            <a class="flex relative pt5 pb5 items-center hidden gray-light" href="">
+            <a class="flex relative pt5 pb5 items-center hidden gray-600" href="">
               <?= $row['post_title']; ?>
             </a>
           <?php } ?>
@@ -118,7 +118,7 @@
         <div class="br-box-gray mt15 p15 mb15 br-rd5 bg-white size-14">
           <div class="uppercase gray mt5 mb5"> <?= Translate::get('writers'); ?></div>
           <?php foreach ($data['writers'] as $ind => $row) { ?>
-            <a class="flex relative pt5 pb5 items-center hidden gray-light" href="<?= getUrlByName('user', ['login' => $row['user_login']]); ?>">
+            <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('user', ['login' => $row['user_login']]); ?>">
               <?= user_avatar_img($row['user_avatar'], 'max', $row['user_login'], 'w24 mr5 br-rd-50'); ?>
               <span class="ml5"><?= $row['user_login']; ?> (<?= $row['hits_count']; ?>) </span>
             </a>

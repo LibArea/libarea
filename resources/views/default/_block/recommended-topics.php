@@ -13,7 +13,7 @@
           <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'w24 mr5'); ?>
           <?= $topic['facet_title']; ?>
         </a>
-        <div class="mt5 size-14 gray-light">
+        <div class="mt5 size-14 gray-600">
           <?= $topic['facet_description']; ?>
         </div>
       </div>

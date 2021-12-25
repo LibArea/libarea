@@ -21,7 +21,7 @@
           <?php } ?>
         <?php } ?>
         <?php if (!empty($cat['help'])) { ?>
-          <div class="size-13 gray-light-2 mt5"><?= $cat['help']; ?>...</div>
+          <div class="size-13 gray-400 mt5"><?= $cat['help']; ?>...</div>
         <?php } ?>
       </div>
     <?php } ?>
@@ -55,14 +55,14 @@
                   <?= $item['item_url_domain']; ?>
 
                   <?php if ($item['item_github_url']) { ?>
-                    <a class="ml15 gray-light" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_github_url']; ?>">
+                    <a class="ml15 gray-600" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_github_url']; ?>">
                       <i class="bi bi-github size-13 mr5"></i>
                       <?= $item['item_title_soft']; ?> на GitHub
                     </a>
                   <?php } ?>
 
                   <div class="lowercase">
-                    <?= html_topic($item['facet_list'], 'web.topic', 'gray-light mr15'); ?>
+                    <?= html_topic($item['facet_list'], 'web.topic', 'gray-600 mr15'); ?>
                   </div>
                 </div>
                 <div class="hidden lowercase ml-auto">

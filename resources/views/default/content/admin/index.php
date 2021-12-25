@@ -106,8 +106,8 @@
 
 <div class="white-box mt10 pt5 pr15 pb5 pl15">
   <h4 class="mt5 mb5"><?= Translate::get('useful resources'); ?></h4>
-  <i class="bi bi-link-45deg mr5 gray-light"></i> <a rel="noreferrer" href="https://agouti.ru">Agouti.ru</a></br>
-  <i class="bi bi-github mr5 gray-light"></i> <a rel="noreferrer" href="https://discord.gg/dw47aNx5nU">Discord</a></br>
+  <i class="bi bi-link-45deg mr5 gray-600"></i> <a rel="noreferrer" href="https://agouti.ru">Agouti.ru</a></br>
+  <i class="bi bi-github mr5 gray-600"></i> <a rel="noreferrer" href="https://discord.gg/dw47aNx5nU">Discord</a></br>
   </ul>
   <hr>
   <div class="mb20">

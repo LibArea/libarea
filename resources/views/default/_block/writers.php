@@ -11,7 +11,7 @@
         </div>
         <div class="mt10">
           <a href="<?= getUrlByName('user', ['login' => $writer['user_login']]); ?>"><?= $writer['user_login']; ?></a>
-          <div class="mr13 gray-light size-15 mr15">
+          <div class="mr13 gray-600 size-15 mr15">
             <?php if ($writer['user_about']) { ?>
               <?= $writer['user_about']; ?>
             <?php } else { ?>

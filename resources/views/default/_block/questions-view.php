@@ -14,7 +14,7 @@
               <div class="answ-telo hidden">
                 <div class="br-box-gray w130 br-rd3 right mt10 pt10 ml10 pb10 hidden center">
                   <?= user_avatar_img($answer['user_avatar'], 'max', $answer['user_login'], 'br-rd-50 w64'); ?>
-                  <div class="size-14 gray-light">
+                  <div class="size-14 gray-600">
                     <?= $answer['answer_date']; ?>
                     <?php if (empty($answer['edit'])) { ?>
                       (<?= Translate::get('ed'); ?>.)

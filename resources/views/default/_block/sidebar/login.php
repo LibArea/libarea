@@ -12,17 +12,17 @@
     <div class="mb20 mb20 flex">
       <input type="checkbox" id="rememberme" class="left mr5" name="rememberme" value="1">
       <label id="rem-text" class="form-check-label size-15" for="rememberme">
-        <span class="gray-light"><?= Translate::get('remember me'); ?></span>
+        <span class="gray-600"><?= Translate::get('remember me'); ?></span>
       </label>
     </div>
     <div class="mb20">
       <?= sumbit(Translate::get('sign in')); ?>
     </div>
-    <div class="center size-14 gray-light">
+    <div class="center size-14 gray-600">
       <?= Translate::get('login-use-condition'); ?>
     </div>
     <div class="mt15 center size-14">
-      <a class="gray-light" href="<?= getUrlByName('recover'); ?>"><?= Translate::get('forgot your password'); ?>?</a>
+      <a class="gray-600" href="<?= getUrlByName('recover'); ?>"><?= Translate::get('forgot your password'); ?>?</a>
     </div>
   </form>
 </div>

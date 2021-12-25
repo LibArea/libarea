@@ -67,7 +67,7 @@
 
         <div for="mb5"><?= Translate::get('meta description'); ?><sup class="red-500">*</sup></div>
         <textarea rows="6" class="add max-w780" minlength="44" name="facet_description"></textarea>
-        <div class="size-14 gray-light-2 mb20">> 44 <?= Translate::get('characters'); ?></div>
+        <div class="size-14 gray-400 mb20">> 44 <?= Translate::get('characters'); ?></div>
 
         <input type="hidden" name="facet_type" value="<?= $data['sheet']; ?>">
         <?= sumbit(Translate::get('add')); ?>

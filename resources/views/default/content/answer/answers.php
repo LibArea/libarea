@@ -20,7 +20,7 @@
             <a class="gray mr5 ml5" href="<?= getUrlByName('user', ['login' => $answer['user_login']]); ?>">
               <?= $answer['user_login']; ?>
             </a>
-            <span class="gray-light-2 lowercase"><?= $answer['date']; ?></span>
+            <span class="gray-400 lowercase"><?= $answer['date']; ?></span>
           </div>
           <a href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">
             <?= $answer['post_title']; ?>

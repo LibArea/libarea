@@ -40,7 +40,7 @@
             <?= $item['item_title_url']; ?>
           </a>
         </div>
-        <?= html_topic($item['facet_list'], 'web.topic', 'gray-light size-14 mr10'); ?>
+        <?= html_topic($item['facet_list'], 'web.topic', 'gray-600 size-14 mr10'); ?>
         <div class="max-w780">
           <?= $item['item_content_url']; ?>
         </div>

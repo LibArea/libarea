@@ -41,11 +41,11 @@ if ($blog['facet_is_deleted'] == 0) { ?>
         <?php if ($blog['facet_is_deleted'] == 0) { ?>
           <div class="br-box-gray p15 mb15 br-rd5 bg-white size-14">
             <div class="uppercase gray mb5"> <?= Translate::get('created by'); ?></div>
-            <a class="flex relative pt5 pb5 items-center hidden gray-light" href="<?= getUrlByName('user', ['login' => $data['user']['user_login']]); ?>">
+            <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('user', ['login' => $data['user']['user_login']]); ?>">
               <?= user_avatar_img($data['user']['user_avatar'], 'max', $data['user']['user_login'], 'w30 mr5 br-rd-50'); ?>
               <span class="ml5"><?= $data['user']['user_login']; ?></span>
             </a>
-            <div class="gray-light-2 size-14 mt5">
+            <div class="gray-400 size-14 mt5">
               <i class="bi bi-calendar-week mr5 ml5 middle"></i>
               <span class="middle lowercase"><?= $blog['facet_add_date']; ?></span>
             </div>
@@ -66,7 +66,7 @@ if ($blog['facet_is_deleted'] == 0) { ?>
                       <?= $row['post_title']; ?>
                     </a>
                     <?php if ($uid['user_trust_level'] == 5 || $blog['facet_user_id'] == $uid['user_id']) { ?>
-                      <a class="size-14 gray-light-2" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('page.edit', ['id' => $row['post_id']]); ?>">
+                      <a class="size-14 gray-400" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('page.edit', ['id' => $row['post_id']]); ?>">
                         <i class="bi bi-pencil"></i>
                       </a>
                     <?php } ?>

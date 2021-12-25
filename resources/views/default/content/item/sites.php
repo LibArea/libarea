@@ -5,7 +5,7 @@
         <i class="bi bi-plus-lg middle"></i>
       </a>
     <?php } ?>
-    <a class="gray" href="<?= getUrlByName('web'); ?>" class="size-14 gray-light-2"><?= Translate::get('sites'); ?></a>
+    <a class="gray" href="<?= getUrlByName('web'); ?>" class="size-14 gray-400"><?= Translate::get('sites'); ?></a>
 
     <?php if (!empty($data['high_topics'][0])) {
       $site = $data['high_topics'][0];   ?>
@@ -113,7 +113,7 @@
               <div class="green-600 size-140 size-14">
                 <?= $item['item_url_domain']; ?>
                 <?php if ($item['item_github_url']) { ?>
-                  <a class="ml15 gray-light" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_github_url']; ?>">
+                  <a class="ml15 gray-600" target="_blank" rel="nofollow noreferrer ugc" href="<?= $item['item_github_url']; ?>">
                     <i class="bi bi-github size-13 mr5"></i>
                     <?= $item['item_title_soft']; ?> <?= Translate::get('on'); ?> GitHub
                   </a>
@@ -124,7 +124,7 @@
                   </a>
                 <?php } ?>
                 <div class="lowercase">
-                  <?= html_topic($item['facet_list'], 'web.topic', 'gray-light mr15'); ?>
+                  <?= html_topic($item['facet_list'], 'web.topic', 'gray-600 mr15'); ?>
                 </div>
               </div>
               <div class="hidden lowercase ml-auto pr10">

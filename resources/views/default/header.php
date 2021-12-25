@@ -21,7 +21,7 @@ $facet = $data['facet'] ?? false; ?>
     <div class="col-span-12 mr-auto max-width w-100 pr10 pl10 h44 grid items-center flex justify-between">
       <div class="flex items-center">
         <div class="lateral no-pc mr10 flex size-15">
-          <i class="bi bi-list gray-light-2 size-18"></i>
+          <i class="bi bi-list gray-400 size-18"></i>
           <nav class="ltr-menu box-shadow none min-w165 bg-white br-rd3 absolute pl0 sticky">
             <?= tabs_nav(
               'menu',
@@ -49,7 +49,7 @@ $facet = $data['facet'] ?? false; ?>
       <?php if ($uid['user_id'] == 0) { ?>
         <div class="flex right col-span-4 items-center">
           <div id="toggledark" class="header-menu-item no-mob only-icon p10 ml30 mb-ml-10">
-            <i class="bi bi-brightness-high gray-light-2 size-18"></i>
+            <i class="bi bi-brightness-high gray-400 size-18"></i>
           </div>
           <?php if (Config::get('general.invite') == 0) { ?>
             <a class="register gray size-15 ml30 mr15 block" title="<?= Translate::get('sign up'); ?>" href="<?= getUrlByName('register'); ?>">
@@ -67,10 +67,10 @@ $facet = $data['facet'] ?? false; ?>
             <?= add_post($facet, $uid['user_id']); ?>
 
             <div id="toggledark" class="only-icon p10 ml20 mb-ml-10">
-              <i class="bi bi-brightness-high gray-light-2 size-18"></i>
+              <i class="bi bi-brightness-high gray-400 size-18"></i>
             </div>
 
-            <a class="gray-light-2 p10 ml20 mb-ml-10" href="<?= getUrlByName('user.notifications', ['login' => $uid['user_login']]); ?>">
+            <a class="gray-400 p10 ml20 mb-ml-10" href="<?= getUrlByName('user.notifications', ['login' => $uid['user_login']]); ?>">
               <?php $notif = \App\Controllers\NotificationsController::setBell($uid['user_id']); ?>
               <?php if (!empty($notif)) { ?>
                 <?php if ($notif['notification_action_type'] == 1) { ?>

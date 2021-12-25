@@ -18,7 +18,7 @@
             <?= user_avatar_img($comm['user_avatar'], 'max', $comm['user_login'], 'w18 mr5'); ?>
             <?= $comm['user_login']; ?>
           </a>
-          <span class="mr5 ml5 gray-light-2 lowercase">
+          <span class="mr5 ml5 gray-400 lowercase">
             <?= $comm['date']; ?>
           </span>
         </div>

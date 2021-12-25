@@ -104,7 +104,7 @@
               <?php if ($user['user_up_count'] > 0) { ?>
                 <div class="flex">
                   <div class="up-id bi bi-heart red-500 mr10 ml20 size-14"></div>
-                  <div class="size-14 gray-light"><?= $user['user_up_count']; ?></div>
+                  <div class="size-14 gray-600"><?= $user['user_up_count']; ?></div>
                 </div>
               <?php } ?>
           </h1>
@@ -225,7 +225,7 @@
                   <span class="middle"><?= Translate::get('reward the user'); ?></span>
                 </a>
                 <?php if ($user['user_whisper']) { ?>
-                  <div class="tips size-14 pt15 pb10 gray-light">
+                  <div class="tips size-14 pt15 pb10 gray-600">
                     <i class="bi bi-info-square green-600 mr5"></i>
                     <?= $user['user_whisper']; ?>
                   </div>

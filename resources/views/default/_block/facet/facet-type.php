@@ -13,6 +13,6 @@
       <input type="radio" name="facet_type" value="blog"> <?= Translate::get('blog'); ?>
       <input type="radio" name="facet_type" value="section"> <?= Translate::get('section'); ?>
     <?php } ?>
-    <?php if (!empty($fl['help'])) { ?><div class="size-14 gray-light-2"><?= $fl['help']; ?></div><?php } ?>
+    <?php if (!empty($fl['help'])) { ?><div class="size-14 gray-400"><?= $fl['help']; ?></div><?php } ?>
   </div>
 <?php } ?>

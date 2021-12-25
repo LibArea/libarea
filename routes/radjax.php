@@ -4,4 +4,4 @@ Radjax\Route::get("/api-search/{?query}", ["post"], "App\Controllers\Api\SearchC
 
 Radjax\Route::get("/topics.json", ["get"], "App\Controllers\Api\ApiController@topics", ["protected"=>false, "session_saved" => false]);
 
-Radjax\Route::get("/links.json", ["get"], "App\Controllers\Api\ApiController@links", ["protected"=>false, "session_saved" => false]);
+Radjax\Route::get("/links.json", ["get"], "App\Controllers\Api\ApiController@items", ["protected"=>false, "session_saved" => false]);

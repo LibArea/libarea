@@ -278,7 +278,7 @@ function fetch_search() {
         var html = '<div class="flex">';
         for (var key in obj) {
           if (obj[key].topic_slug) {
-            html += '<a class="blue block size-14 mb15 mr10" href="/topic/' + obj[key].facet_slug + '">';
+            html += '<a class="sky-500 block size-14 mb15 mr10" href="/topic/' + obj[key].facet_slug + '">';
             html += '<img class="w21 mr5 br-box-gray" src="<?= AG_PATH_FACETS_LOGOS; ?>' + obj[key].facet_img + '">';
             html += obj[key].facet_title + '</a>';
           }

@@ -161,7 +161,7 @@
         <div class="bg-white br-rd5 br-box-gray p15">
           <h3 class="uppercase mb5 mt0 font-light size-14 gray"><?= Translate::get('parents'); ?></h3>
           <?php foreach ($data['high_arr'] as $high) { ?>
-            <a class="flex relative pt5 pb5 items-center hidden gray-light" href="<?= getUrlByName('topic', ['slug' => $high['facet_slug']]); ?>">
+            <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('topic', ['slug' => $high['facet_slug']]); ?>">
               <?= facet_logo_img($high['facet_img'], 'max', $high['facet_title'], 'w24 mr10 br-box-gray'); ?>
               <?= $high['facet_title']; ?>
             </a>
@@ -173,7 +173,7 @@
         <div class="bg-white br-rd5 br-box-gray p15">
           <h3 class="uppercase mb5 mt0 font-light size-14 gray"><?= Translate::get('children'); ?></h3>
           <?php foreach ($data['low_arr'] as $sub) { ?>
-            <a class="flex relative pt5 pb5 items-center hidden gray-light" href="<?= getUrlByName('topic', ['slug' => $sub['facet_slug']]); ?>">
+            <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('topic', ['slug' => $sub['facet_slug']]); ?>">
               <?= facet_logo_img($sub['facet_img'], 'max', $sub['facet_title'], 'w24 mr10 br-box-gray'); ?>
               <?= $sub['facet_title']; ?>
             </a>
@@ -183,7 +183,7 @@
 
       <div for="mb5"><?= Translate::get('meta description'); ?><sup class="red-500">*</sup></div>
       <textarea class="add max-w780" rows="6" minlength="44" name="facet_description"><?= $fs['facet_description']; ?></textarea>
-      <div class="size-14 gray-light-2 mb20">> 44 <?= Translate::get('characters'); ?></div>
+      <div class="size-14 gray-400 mb20">> 44 <?= Translate::get('characters'); ?></div>
 
       <?= import('/_block/form/field-input', [
         'data' => [
@@ -202,7 +202,7 @@
 
       <div for="mb5"><?= Translate::get('info'); ?><sup class="red-500">*</sup></div>
       <textarea class="add max-w780" rows="6" name="facet_info"><?= $fs['facet_info']; ?></textarea>
-      <div class="mb20 size-14 gray-light-2">Markdown, > 14 <?= Translate::get('characters'); ?></div>
+      <div class="mb20 size-14 gray-400">Markdown, > 14 <?= Translate::get('characters'); ?></div>
 
       <?php if ($fs['facet_type'] == 'topic') { ?>
         <?= import('/_block/form/select/related-posts', [
@@ -228,7 +228,7 @@
           <div class="bg-white br-rd5 br-box-gray max-w780 p15 mb15">
             <h3 class="uppercase mb5 mt0 font-light size-14 gray"><?= Translate::get('bound (parents)'); ?></h3>
             <?php foreach ($data['high_matching'] as $low_mat) { ?>
-              <a class="flex relative pt5 pb5 items-center hidden gray-light" href="<?= getUrlByName('topic', ['slug' => $low_mat['facet_slug']]); ?>">
+              <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('topic', ['slug' => $low_mat['facet_slug']]); ?>">
                 <?= facet_logo_img($low_mat['facet_img'], 'max', $low_mat['facet_title'], 'w24 mr10 br-box-gray'); ?>
                 <?= $low_mat['facet_title']; ?>
               </a>

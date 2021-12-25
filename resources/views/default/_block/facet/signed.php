@@ -7,7 +7,7 @@
 <?php } else { ?>
   <?php if ($topic['facet_user_id'] != $user_id) { ?>
     <?php if ($topic_signed) { ?>
-      <div data-id="<?= $topic['facet_id']; ?>" data-type="topic" class="focus-id bg-gray-100 gray-light-2 br-gray-200 inline br-rd20 center pt5 pr15 pb5 pl15">
+      <div data-id="<?= $topic['facet_id']; ?>" data-type="topic" class="focus-id bg-gray-100 gray-400 br-gray-200 inline br-rd20 center pt5 pr15 pb5 pl15">
         <?= Translate::get('unsubscribe'); ?>
       </div>
     <?php } else { ?>

@@ -72,7 +72,7 @@ document.querySelectorAll(".up-id")
         let new_cont = (parseInt(count) + parseInt(1));
         let upVot = document.querySelector('#up' + up_id + '.voters');
         let upScr = document.querySelector('#up' + up_id).querySelector('.score');
-        upVot.classList.add('blue');
+        upVot.classList.add('sky-500');
         upScr.replaceWith(new_cont);
       });
   }));
@@ -144,9 +144,9 @@ document.querySelectorAll(".add-favorite")
           location.reload();
         } else {
           if (content_type == 'post') {
-            document.getElementById("favorite_" + content_id).classList.toggle("blue");
+            document.getElementById("favorite_" + content_id).classList.toggle("sky-500");
           } else {
-            document.getElementById("fav-comm_" + content_id).classList.toggle("blue");
+            document.getElementById("fav-comm_" + content_id).classList.toggle("sky-500");
           }
         }
       });

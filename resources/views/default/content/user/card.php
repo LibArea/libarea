@@ -26,7 +26,7 @@
       <?= $user['user_about']; ?>
     </div>
     <?php if (!empty($post['post_id'])) { ?>
-      <div class="gray-light size-15 mt5">
+      <div class="gray-600 size-15 mt5">
         <?= Translate::get('post'); ?>:
         <a class="black dark-white" href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
           <?= $post['post_title']; ?>
@@ -34,7 +34,7 @@
       </div>
     <?php } ?>
     <?php if ($user['user_website']) { ?>
-      <div class="gray-light size-15 mt5">
+      <div class="gray-600 size-15 mt5">
         <?= Translate::get('website'); ?>:
         <a class="black dark-white" rel="noopener nofollow ugc" href="<?= $user['user_website']; ?>">
           <?= $user['user_website']; ?>

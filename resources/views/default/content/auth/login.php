@@ -32,8 +32,8 @@
   <?php if (Config::get('general.invite') == 1) { ?>
     <?= Translate::get('no-invate-txt'); ?>
   <?php } ?>
-  <div class="pt20 mb5 gray-light"><?= Translate::get('login-use-condition'); ?>.</div>
-  <div class="pt20 mb20 gray-light"><?= Translate::get('info-login'); ?></div>
+  <div class="pt20 mb5 gray-600"><?= Translate::get('login-use-condition'); ?>.</div>
+  <div class="pt20 mb20 gray-600"><?= Translate::get('info-login'); ?></div>
     <img class="right" alt="<?= Config::get('meta.name'); ?>" src="<?= Config::get('meta.img_footer_url'); ?>">
 </main>
  
