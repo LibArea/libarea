@@ -186,6 +186,7 @@ $data = [
     'you'               => 'Tu',
     'from'              => 'Din',
     'in'                => 'In',
+    'and'               => 'și',
     'on'                => 'pe',
     'by'                => 'mod',
     'for'               => 'Pentru',

@@ -141,11 +141,6 @@ return [
             'title'  => Translate::get('words'),
             'icon'  => 'bi bi-badge-ad',
             'id'  => 'words',
-        ], [
-            'url'   => getUrlByName('admin.tools'),
-            'title'  => Translate::get('tools'),
-            'icon'  => 'bi bi-tools',
-            'id'  => 'tools',
         ],
     ],
 

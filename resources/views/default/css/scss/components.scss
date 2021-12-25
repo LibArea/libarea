@@ -1,4 +1,8 @@
-/* Components based on the basic style of Agouti */
+/*
+ * Components based on the basic style of Agouti
+ *
+ * Компоненты, основанные на базовом стиле Агути
+ */
 
 code {
   color: #9b4f5e;
@@ -9,14 +13,6 @@ code {
 }
 
 pre { white-space: pre-wrap; }
-
-pre code {
-  background-color: #f0f0f0;
-  padding: 2px 14px 2px 10px;
-  border-radius: 3px;
-  display: inline-block;
-  max-width: 100%;
-}
 
 blockquote {
   margin-left: 15px;
@@ -90,14 +86,14 @@ textarea:focus { border: 1px solid #9ccdf8; }
 }
 
 .dark {
-  background-color: #111;
+  background-color: $neutral-900;
   color: #ccc;
 }
 
 .dark .bg-yellow-100,
 .dark .bg-white {
   background-color: #232626;
-  color: #fff;
+  color: $white;
   border: 1px solid #232626;
 }
 
@@ -105,18 +101,18 @@ textarea:focus { border: 1px solid #9ccdf8; }
 .dark textarea,
 .dark blockquote,
 .dark table tr:nth-of-type(2n) {
-  background-color: #111;
-  color: #fff;
-  border: 1px solid #000;
+  background-color: $neutral-900;
+  color: $white;
+  border: 1px solid $black;
 }
 
-.dark .dark-br-black { border: 1px solid #111; }
+.dark .dark-br-black { border: 1px solid $neutral-900; }
 
 .dark .dark-bg-black,
-.dark .answers_subtree:target { background-color: #000; }
+.dark .answers_subtree:target { background-color: $black; }
 
 .dark .gray-light { color: #ccc; }
-.dark .dark-white { color: #fff; }
+.dark .dark-white { color: $white; }
 
 .video-object {
   width: 640px;
@@ -171,26 +167,26 @@ textarea:focus { border: 1px solid #9ccdf8; }
 }
 
 .btn-primary {
-  color: #fff;
+  color: $white;
   background: #0085ee;
   border-color: #0085ee;
 }
 
 .btn-outline-primary {
   color: #0085ee;
-  background: #fff;
+  background: $white;
   border-color: #0085ee;
 }
 
 .btn-primary:hover,
 .btn-primary:focus {
-  color: #fff;
+  color: $white;
   opacity: 0.8;
 }
 
 .btn-outline-primary:hover,
 .btn-outline-primary:focus {
-  color: #fff;
+  color: $white;
   background: #0085ee;
   border-color: #0085ee;
 }
