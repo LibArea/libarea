@@ -8,8 +8,8 @@
 </div>
 <main class="col-span-10 mb-col-12">
   <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
-    <p class="m0 size-18"><?= Translate::get('structure'); ?>
-      <?php if ($uid['user_trust_level'] == 5) { ?>
+    <p class="m0 text-xl"><?= Translate::get('structure'); ?>
+      <?php if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
         <a class="ml15" href="<?= getUrlByName('admin.topics'); ?>">
           <i class="bi bi-pencil"></i>
         </a>
@@ -19,7 +19,7 @@
       <?php } ?>
     </p>
 
-    <ul class="flex flex-row list-none m0 p0 center size-15">
+    <ul class="flex flex-row list-none m0 p0 center">
 
       <?= tabs_nav(
         $uid['user_id'],
@@ -65,15 +65,15 @@
               <?php $color = true; ?>
               <i class="bi bi-arrow-return-right gray ml<?= $topic['level'] * 10; ?>"></i>
             <?php } ?>
-            <a class="<?php if ($topic['level'] == 0) { ?>relative pt5 size-18 items-center hidden<?php } ?> <?php if ($topic['level'] > 0) { ?> black<?php } ?>" href="/topic/<?= $topic['facet_slug']; ?>">
+            <a class="<?php if ($topic['level'] == 0) { ?>relative pt5 text-xl items-center hidden<?php } ?> <?php if ($topic['level'] > 0) { ?> black<?php } ?>" href="/topic/<?= $topic['facet_slug']; ?>">
               <?php if ($topic['level'] == 0) { ?>
                 <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'w21 h21 mr5 br-box-gray'); ?>
               <?php } ?>
               <?= $topic['facet_title']; ?>
             </a>
             <?php if ($topic['matching_list']) { ?><div class="ml<?= $topic['level'] * 10; ?>">
-                <i class="bi bi-bezier2 gray-600 size-13 mr5 ml5"></i>
-                <?= html_topic($topic['matching_list'], 'topic', 'gray-600 size-13 mr15'); ?>
+                <i class="bi bi-bezier2 gray-600 text-sm mr5 ml5"></i>
+                <?= html_topic($topic['matching_list'], 'topic', 'gray-600 text-sm mr15'); ?>
               </div>
             <?php } ?>
           </div>

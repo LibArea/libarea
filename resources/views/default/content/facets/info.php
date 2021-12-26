@@ -9,16 +9,16 @@
 <?php $facet = $data['facet']; ?>
 <main class="col-span-7 mb-col-12">
   <div class="bg-white br-rd5 br-box-gray pt5 pr15 pb5 mb15 pl15">
-    <a class="size-14" title="<?= Translate::get('topics-all'); ?>" href="/topics">
+    <a class="text-sm" title="<?= Translate::get('topics-all'); ?>" href="/topics">
       ← <?= Translate::get('topics'); ?>
     </a>
-    <h1 class="mb0 mt10 size-24">
+    <h1 class="mb0 mt10 text-2xl">
       <a href="<?= getUrlByName('topic', ['slug' => $facet['facet_slug']]); ?>">
         <?= $facet['facet_seo_title']; ?>
       </a>
-      <?php if ($uid['user_trust_level'] == 5) { ?>
+      <?php if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
         <a class="right gray-600" href="<?= getUrlByName('topic.edit', ['id' => $facet['facet_id']]); ?>">
-          <i class="bi bi-pencil size-15"></i>
+          <i class="bi bi-pencil"></i>
         </a>
       <?php } ?>
     </h1>
@@ -36,7 +36,7 @@
 
 </main>
 <aside class="col-span-3 relative no-mob">
-  <div class="bg-white br-rd5 br-box-gray p15 mb15 size-15">
+  <div class="bg-white br-rd5 br-box-gray p15 mb15">
     <center>
       <a title="<?= $facet['facet_title']; ?>" href="<?= getUrlByName('topic', ['slug' => $facet['facet_slug']]); ?>">
         <?= facet_logo_img($facet['facet_img'], 'max', $facet['facet_title'], 'topic-img'); ?>

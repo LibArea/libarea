@@ -1,4 +1,4 @@
-<?php if ($uid['user_trust_level'] == 5) { ?>
+<?php if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
   <div class="mt15 mb20">
     <label class="block mb5"><?= Translate::get('topic'); ?> / <?= Translate::get('blog'); ?>?</label>
     <?php if (!empty($data['facet_type'])) { ?>
@@ -13,6 +13,6 @@
       <input type="radio" name="facet_type" value="blog"> <?= Translate::get('blog'); ?>
       <input type="radio" name="facet_type" value="section"> <?= Translate::get('section'); ?>
     <?php } ?>
-    <?php if (!empty($fl['help'])) { ?><div class="size-14 gray-400"><?= $fl['help']; ?></div><?php } ?>
+    <?php if (!empty($fl['help'])) { ?><div class="text-sm gray-400"><?= $fl['help']; ?></div><?php } ?>
   </div>
 <?php } ?>

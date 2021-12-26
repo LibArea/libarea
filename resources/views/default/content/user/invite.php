@@ -1,6 +1,6 @@
 <main class="col-span-9 mb-col-12">
   <div class="bg-white br-rd5 br-box-gray pt5 pr15 pb5 pl15">
-    <h1 class="mt0 mb10 size-24 font-normal"><?= Translate::get('invite'); ?></h1>
+    <h1 class="mt0 mb10 text-2xl font-normal"><?= Translate::get('invite'); ?></h1>
     <form class="" action="/invite" method="post">
       <?php csrf_field(); ?>
       <div class="mb20">
@@ -9,7 +9,7 @@
       </div>
       <div class="mb20">
         <?= sumbit(Translate::get('sign in')); ?>
-        <span class="ml15 size-14"><a href="<?= getUrlByName('recover'); ?>">
+        <span class="ml15 text-sm"><a href="<?= getUrlByName('recover'); ?>">
             <?= Translate::get('forgot your password'); ?>?</a>
         </span>
       </div>

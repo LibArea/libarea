@@ -12,12 +12,12 @@
   <div class="col-span-2 no-mob"></div>
   <div class="col-span-8 mb-col-12 bg-white br-rd5 br-box-gray pt10 pr15 pb5 pl15">
     <div class="mb20">
-      <h1 class="size-31 font-semibold gray mb0">404</h1>
+      <h1 class="text-3xl font-semibold gray mb0">404</h1>
       <p class="gray-600"><?= Translate::get('the page does not exist'); ?></p>
       <a class="btn btn-primary" href="/">
         <?= Translate::get('to main'); ?>
       </a>
-      <div class="mt15 size-14 gray-400">
+      <div class="mt15 text-sm gray-400">
         <?= Translate::get('the page has been removed'); ?>...
       </div>
     </div>

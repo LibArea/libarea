@@ -7,15 +7,15 @@ if ($blog['facet_is_deleted'] == 0) { ?>
         <?= facet_logo_img($blog['facet_img'], 'max', $blog['facet_title'], 'w94 br-box-gray mt5'); ?>
       </div>
       <div class="ml15 mb-ml-0 flex-auto">
-        <h1 class="mb0 mt10 size-24">
+        <h1 class="mb0 mt10 text-2xl">
           <?= $blog['facet_seo_title']; ?>
-          <?php if ($uid['user_trust_level'] == 5 || $blog['facet_user_id'] == $uid['user_id']) { ?>
+          <?php if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN || $blog['facet_user_id'] == $uid['user_id']) { ?>
             <a class="right white gray-hover fon-rgba -mt20" href="<?= getUrlByName('blog.edit', ['id' => $blog['facet_id']]); ?>">
-              <i class="bi bi-pencil size-24 bold"></i>
+              <i class="bi bi-pencil bold"></i>
             </a>
           <?php } ?>
         </h1>
-        <div class="size-14"><?= $blog['facet_short_description']; ?></div>
+        <div class="text-sm"><?= $blog['facet_short_description']; ?></div>
 
         <div class="mt15 right">
           <?= import('/_block/facet/signed', [
@@ -39,34 +39,34 @@ if ($blog['facet_is_deleted'] == 0) { ?>
       </main>
       <aside class="col-span-3 relative no-mob">
         <?php if ($blog['facet_is_deleted'] == 0) { ?>
-          <div class="br-box-gray p15 mb15 br-rd5 bg-white size-14">
+          <div class="br-box-gray p15 mb15 br-rd5 bg-white text-sm">
             <div class="uppercase gray mb5"> <?= Translate::get('created by'); ?></div>
             <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('user', ['login' => $data['user']['user_login']]); ?>">
               <?= user_avatar_img($data['user']['user_avatar'], 'max', $data['user']['user_login'], 'w30 mr5 br-rd-50'); ?>
               <span class="ml5"><?= $data['user']['user_login']; ?></span>
             </a>
-            <div class="gray-400 size-14 mt5">
+            <div class="gray-400 text-sm mt5">
               <i class="bi bi-calendar-week mr5 ml5 middle"></i>
               <span class="middle lowercase"><?= $blog['facet_add_date']; ?></span>
             </div>
           </div>
           <?php if ($data['info']) { ?>
-            <div class="br-box-gray pt0 pr15 pb0 pl15 mb15 br-rd5 bg-white size-14 shown_post">
+            <div class="br-box-gray pt0 pr15 pb0 pl15 mb15 br-rd5 bg-white text-sm shown_post">
               <?= $data['info']; ?>
             </div>
           <?php } ?>
 
           <?php if (!empty($data['pages'])) { ?>
             <div class="sticky top0 top70">
-              <div class="br-box-gray mt15 p15 mb15 br-rd5 bg-white size-14">
+              <div class="br-box-gray mt15 p15 mb15 br-rd5 bg-white text-sm">
                 <div class="uppercase gray mt5 mb5"> <?= Translate::get('pages'); ?></div>
                 <?php foreach ($data['pages'] as $ind => $row) { ?>
                   <div class="mb5">
                     <a class="relative pt5 pb5 hidden" href="<?= getUrlByName('page', ['facet' => $blog['facet_slug'], 'slug' => $row['post_slug']]); ?>">
                       <?= $row['post_title']; ?>
                     </a>
-                    <?php if ($uid['user_trust_level'] == 5 || $blog['facet_user_id'] == $uid['user_id']) { ?>
-                      <a class="size-14 gray-400" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('page.edit', ['id' => $row['post_id']]); ?>">
+                    <?php if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN || $blog['facet_user_id'] == $uid['user_id']) { ?>
+                      <a class="text-sm gray-400" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('page.edit', ['id' => $row['post_id']]); ?>">
                         <i class="bi bi-pencil"></i>
                       </a>
                     <?php } ?>
@@ -81,7 +81,7 @@ if ($blog['facet_is_deleted'] == 0) { ?>
   </div>
 <?php } else { ?>
   <div class="center col-span-10">
-    <i class="bi bi-x-octagon size-110"></i>
+    <i class="bi bi-x-octagon text-8xl"></i>
     <div class="mt5 gray"><?= Translate::get('remote'); ?></div>
   </div>
 <?php } ?>

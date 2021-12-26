@@ -15,7 +15,7 @@
     <?php foreach ($data['answers'] as $answer) { ?>
       <div class="bg-white br-rd5 mt15 br-box-gray p15">
         <?php if ($answer['answer_is_deleted'] == 0) { ?>
-          <div class="flex size-14 mb5">
+          <div class="flex text-sm mb5">
             <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'w18'); ?>
             <a class="gray mr5 ml5" href="<?= getUrlByName('user', ['login' => $answer['user_login']]); ?>">
               <?= $answer['user_login']; ?>
@@ -25,7 +25,7 @@
           <a href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">
             <?= $answer['post_title']; ?>
           </a>
-          <div class="size-15">
+          <div>
             <?= $answer['answer_content']; ?>
           </div>
 

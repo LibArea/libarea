@@ -52,7 +52,7 @@
             <?= facet_logo_img($fc['facet_img'], 'max', $fc['facet_title'], 'w64'); ?>
           </td>
           <td>
-            <a class="size-21" rel="nofollow noreferrer" href="<?= getUrlByName($url, ['slug' => $fc['facet_slug']]); ?>">
+            <a class="text-2xl" rel="nofollow noreferrer" href="<?= getUrlByName($url, ['slug' => $fc['facet_slug']]); ?>">
               <?= $fc['facet_title']; ?>
             </a>
             <span class="green-600 mr5 ml5"><?= $data['type']; ?>/<?= $fc['facet_slug']; ?></span>
@@ -77,7 +77,7 @@
           </td>
           <td class="center">
             <a title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('topic.edit', ['id' => $fc['facet_id']]); ?>">
-              <i class="bi bi-pencil size-15"></i>
+              <i class="bi bi-pencil"></i>
             </a>
           </td>
         </tr>

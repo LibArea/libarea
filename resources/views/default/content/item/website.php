@@ -10,13 +10,13 @@
     ); ?>
 
     <div class="right">
-      <?= votes($uid['user_id'], $data['item'], 'item', 'size-21', 'block'); ?>
+      <?= votes($uid['user_id'], $data['item'], 'item', 'text-2xl', 'block'); ?>
     </div>
 
-    <h1 class="mt5 mb10 size-24 font-normal"><?= $data['item']['item_title_url']; ?>
+    <h1 class="mt5 mb10 text-2xl font-normal"><?= $data['item']['item_title_url']; ?>
       <?php if ($uid['user_trust_level'] > 4) { ?>
-        <a class="size-14 ml5" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('web.edit', ['id' => $data['item']['item_id']]); ?>">
-          <i class="bi bi-pencil size-15"></i>
+        <a class="text-sm ml5" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('web.edit', ['id' => $data['item']['item_id']]); ?>">
+          <i class="bi bi-pencil"></i>
         </a>
       <?php } ?>
     </h1>
@@ -37,7 +37,7 @@
           <div class="mt20 mb20 mb-mb-5 lowercase">
             <?php foreach ($data['topics'] as $topic) { ?>
               <?php if ($topic['facet_is_web'] == 1) { ?>
-                <a class="pt5 pr20 pb5 sky-500 block size-18" href="<?= getUrlByName('web.topic', ['slug' => $topic['facet_slug']]); ?>">
+                <a class="pt5 pr20 pb5 sky-500 block text-xl" href="<?= getUrlByName('web.topic', ['slug' => $topic['facet_slug']]); ?>">
                   <?= $topic['facet_title']; ?>
                 </a>
               <?php } ?>
@@ -68,7 +68,7 @@
       <div class="gray"><?= Translate::get('see more'); ?></div>
       <?php foreach ($data['high_leve'] as $rl) { ?>
         <?php if ($rl['facet_is_web'] == 1) { ?>
-          <a class="inline mr20 size-14 black" href="<?= getUrlByName('web.topic', ['slug' => $rl['facet_slug']]); ?>">
+          <a class="inline mr20 text-sm black" href="<?= getUrlByName('web.topic', ['slug' => $rl['facet_slug']]); ?>">
             <?= $rl['facet_title']; ?>
           </a>
         <?php } ?>
@@ -78,7 +78,7 @@
     <?php } ?>
   </div>
   <?php if ($data['related_posts']) { ?>
-    <div class="bg-white br-rd5 br-box-gray pt15 pl15 size-14">
+    <div class="bg-white br-rd5 br-box-gray pt15 pl15 text-sm">
       <?= import('/_block/related-posts', ['related_posts' => $data['related_posts'], 'number' => 'no']); ?>
     </div>
   <?php } ?>

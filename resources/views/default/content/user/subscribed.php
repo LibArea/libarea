@@ -9,7 +9,7 @@
 <main class="col-span-7 mb-col-12">
   <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
-    <ul class="flex flex-row list-none m0 p0 center size-15">
+    <ul class="flex flex-row list-none m0 p0 center">
 
       <?= tabs_nav(
         'nav',

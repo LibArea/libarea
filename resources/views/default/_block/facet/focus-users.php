@@ -1,5 +1,5 @@
 <?php if ($focus_users) { ?>
-  <div class="size-14 mt20 gray-600">
+  <div class="text-sm mt20 gray-600">
     <div class="uppercase inline mr5"><?= Translate::get('reads'); ?>:</div>
     <?php $n = 0;
     foreach ($focus_users as $user) {

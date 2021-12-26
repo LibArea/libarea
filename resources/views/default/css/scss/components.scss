@@ -85,16 +85,17 @@ textarea:focus { border: 1px solid #9ccdf8; }
   padding-top: 70px;
 }
 
-.dark {
+.dark,
+.dark.bg-gray-100 {
   background-color: $neutral-900;
   color: #ccc;
 }
 
 .dark .bg-yellow-100,
 .dark .bg-white {
-  background-color: #232626;
+  background-color: $zinc-800;
   color: $white;
-  border: 1px solid #232626;
+  border: 1px solid $zinc-800;
 }
 
 .dark input,
@@ -111,7 +112,7 @@ textarea:focus { border: 1px solid #9ccdf8; }
 .dark .dark-bg-black,
 .dark .answers_subtree:target { background-color: $black; }
 
-.dark .gray-600 { color: #ccc; }
+.dark .dark-gray-200 { color: $gray-200; }
 .dark .dark-white { color: $white; }
 
 .video-object {

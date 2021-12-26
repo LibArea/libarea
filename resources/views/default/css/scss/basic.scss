@@ -125,9 +125,6 @@ img {
 .pb20 { padding-bottom: 20px; }
 .pl20 { padding-left: 20px; }
 
-.pt60 { padding-top: 60px; }
-.pt160 { padding-top: 160px; }
-
 .box-shadow { box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);  }
 .box-shadow-all { box-shadow: 0 4px 14px rgba(0,0,0,0.15); ;  }
 
@@ -197,15 +194,12 @@ img {
 .h120 { height: 120px; }
 .h150 { height: 150px; }
 
-.size-13 { font-size: 0.8125rem; }
-.size-14 { font-size: 0.875rem; }
-.size-15 { font-size: 0.9375rem; }
-.size-18 { font-size: 1.125rem; }
-.size-21 { font-size: 1.3125rem; }
-.size-24 { font-size: 1.5rem; }
-.size-26 { font-size: 1.625rem; }
-.size-31 { font-size: 1.9375rem; }
-.size-110 { font-size: 6.875rem; }
+.text-sm { font-size: $fontSize-sm; }
+.text-lg { font-size: $fontSize-lg; }
+.text-xl { font-size: $fontSize-xl; }
+.text-2xl { font-size: $fontSize-2xl; }
+.text-3xl { font-size: $fontSize-3xl; }
+.text-8xl { font-size: $fontSize-8xl; }
 
 .font-light { font-weight: 300; }
 .font-normal { font-weight: 400; }

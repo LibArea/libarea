@@ -1,7 +1,7 @@
 <?php if ($uid['user_id'] == 0) { ?>
   <div class="col-span-12 grid items-center grid-cols-12 mb5">
     <div class="col-span-12 bg-white br-box-gray br-rd5 p20 center">
-      <h1 class="size-31 font-normal mt0 mb5"><?= Config::get('meta.banner_title'); ?></h1>
+      <h1 class="text-3xl font-normal mt0 mb5"><?= Config::get('meta.banner_title'); ?></h1>
       <div class="gray-600 mb5"><?= Config::get('meta.banner_desc'); ?>...</div>
     </div>
   </div>
@@ -18,8 +18,8 @@
 
 <main class="col-span-7 mb-col-12">
   <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
-    <p class="m0 size-18"><?= Translate::get('feed'); ?></p>
-    <ul class="flex flex-row list-none m0 p0 center size-15">
+    <p class="m0 text-xl"><?= Translate::get('feed'); ?></p>
+    <ul class="flex flex-row list-none m0 p0 center">
 
      <?= tabs_nav(
         'nav',
@@ -65,8 +65,8 @@
   <?php } ?>
 
   <?php if ($uid['user_id'] > 0 && !empty($data['topics_user'])) { ?>
-    <div class="br-box-gray p15 mb15 br-rd5 bg-white size-14">
-      <div class="uppercase gray mt5 mb5">
+    <div class="br-box-gray p15 mb15 br-rd5 bg-white text-sm">
+      <div class="uppercase gray mt5 mb5 dark-gray-200">
         <?= Translate::get('reading'); ?>
       </div>
 
@@ -95,23 +95,23 @@
         <div class="flex relative pt5 pb5 items-center justify-between hidden">
           <a class="gray-600" href="<?= $url; ?>">
             <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'w24 mr5'); ?>
-            <span class="ml5 middle"><?= $topic['facet_title']; ?> <?= $blog; ?></span>
+            <span class="ml5 middle dark-gray-200"><?= $topic['facet_title']; ?> <?= $blog; ?></span>
           </a>
           <?php if ($uid['user_id'] == $topic['facet_user_id']) { ?>
             <a class="right sky-500" title="<?= Translate::get('add post'); ?>" href="<?= getUrlByName('post.add'); ?>/<?= $topic['facet_id']; ?>">
-              <i class="bi bi-plus-lg size-14"></i>
+              <i class="bi bi-plus-lg text-sm"></i>
             </a>
           <?php } ?>
         </div>
       <?php } ?>
       <?php if (count($data['topics_user']) > Config::get('facets.quantity_home')) { ?>
-        <a class="gray block mt5" title="<?= Translate::get('topics'); ?>" href="<?= getUrlByName('topics.my'); ?>">
+        <a class="gray block dark-gray-200 mt5" title="<?= Translate::get('topics'); ?>" href="<?= getUrlByName('topics.my'); ?>">
           <?= Translate::get('see more'); ?> <i class="bi bi-chevron-double-right middle"></i>
         </a>
       <?php } ?>
     </div>
   <?php } else { ?>
-    <div class="br-box-gray p15 mb15 br-rd5 bg-white size-14">
+    <div class="br-box-gray p15 mb15 br-rd5 bg-white text-sm">
       <div class="uppercase gray mt5 mb5">
         <?= Translate::get('topics'); ?>
       </div>
@@ -129,7 +129,7 @@
       <div class="last-comm br-box-gray p5 pr15 pb5 pl15 bg-white br-rd5">
         <?php foreach ($data['latest_answers'] as $answer) { ?>
           <div class="mt15 mr0 mb15 ml0">
-            <div class="size-14 gray-400">
+            <div class="text-sm gray-400">
               <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'w18 h18 br-rd-50 mr5'); ?>
               <span class="middle"><?= $answer['answer_date']; ?></span>
             </div>

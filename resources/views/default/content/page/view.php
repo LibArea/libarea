@@ -1,17 +1,17 @@
 <?php $page = $data['page']; ?>
 </div>
 <article class="page<?php if ($page['post_is_deleted'] == 1) { ?> bg-red-200<?php } ?>">
-  <?php if ($page['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
-    <h1 class="size-31 font-normal mt5">
+  <?php if ($page['post_is_deleted'] == 0 || $uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
+    <h1 class="text-3xl font-normal mt5">
       <?= $page['post_title']; ?>
     </h1>
     <div class="post-body max-w780">
       <?= $page['post_content']; ?>
     </div>
-    <div class="gray-400 size-14 italic mb15">
+    <div class="gray-400 text-sm italic mb15">
       <?= $page['post_modified']; ?>
-      <?php if ($uid['user_trust_level'] == 5 || $page['post_user_id'] == $uid['user_id']) { ?>
-        <a class="size-14 gray-400 ml5" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('page.edit', ['id' => $page['post_id']]); ?>">
+      <?php if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN || $page['post_user_id'] == $uid['user_id']) { ?>
+        <a class="text-sm gray-400 ml5" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('page.edit', ['id' => $page['post_id']]); ?>">
           <i class="bi bi-pencil"></i>
         </a>
       <?php } ?>
@@ -23,7 +23,7 @@
   <?php } ?>
 </article>
 <div class="p15 m15 hidden">
-  <?= votes($uid['user_id'], $page, 'post', 'size-24 middle', 'block'); ?>
+  <?= votes($uid['user_id'], $page, 'post', 'text-2xl middle', 'block'); ?>
 <div>
 <footer class="bg-gray-200 p60 hidden mt15">
   <div class="m15 pb15">
@@ -38,7 +38,7 @@
           </a>
         <?php } ?>
         <?php foreach ($data['pages'] as $ind => $row) { ?>
-          <a class="block pt5 pb5 size-15 gray" href="<?= getUrlByName('page', ['facet' => $data['facet']['facet_slug'], 'slug' => $row['post_slug']]); ?>">
+          <a class="block pt5 pb5 gray" href="<?= getUrlByName('page', ['facet' => $data['facet']['facet_slug'], 'slug' => $row['post_slug']]); ?>">
             <i class="bi bi-info-square middle mr5"></i> <?= $row['post_title']; ?>
           </a>
         <?php } ?>

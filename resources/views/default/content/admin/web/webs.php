@@ -32,19 +32,19 @@
   <?php if (!empty($data['domains'])) { ?>
     <?php foreach ($data['domains'] as $key => $item) { ?>
       <div class="domain-box">
-        <span class="add-favicon right size-13" data-id="<?= $item['item_id']; ?>">
+        <span class="add-favicon right text-sm" data-id="<?= $item['item_id']; ?>">
           + favicon
         </span>
-        <div class="size-21">
+        <div class="text-2xl">
           <a href="<?= getUrlByName('web.website', ['slug' => $item['item_url_domain']]); ?>">
             <?= $item['item_title_url']; ?>
           </a>
         </div>
-        <?= html_topic($item['facet_list'], 'web.topic', 'gray-600 size-14 mr10'); ?>
+        <?= html_topic($item['facet_list'], 'web.topic', 'gray-600 text-sm mr10'); ?>
         <div class="max-w780">
           <?= $item['item_content_url']; ?>
         </div>
-        <div class="br-bottom mb15 mt5 pb10 size-13 hidden gray">
+        <div class="br-bottom mb15 mt5 pb10 text-sm hidden gray">
           <span class="inline mr5">
             <?= votes($uid['user_id'], $item, 'item', 'mr5'); ?>
           </span>

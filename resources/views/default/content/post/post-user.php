@@ -17,7 +17,7 @@
 </main>
 <aside class="col-span-3 relative no-mob">
   <div class="sticky top60">
-    <div class="bg-white br-rd5 br-box-gray p15 size-15">
+    <div class="bg-white br-rd5 br-box-gray p15">
       <?= tabs_nav(
         'menu',
         $data['type'],

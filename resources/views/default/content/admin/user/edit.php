@@ -20,7 +20,7 @@
   <form action="/admin/user/edit/<?= $data['user']['user_id']; ?>" method="post">
     <?= csrf_field() ?>
     <?php if ($data['user']['user_cover_art'] != 'cover_art.jpeg') { ?>
-      <a class="right size-13" href="<?= getUrlByName('user', ['login' => $data['user']['user_login']]); ?>/delete/cover">
+      <a class="right text-sm" href="<?= getUrlByName('user', ['login' => $data['user']['user_login']]); ?>/delete/cover">
         <?= Translate::get('remove'); ?>
       </a>
       <br>
@@ -99,18 +99,18 @@
     </div>
     <hr>
     <div class="mb20">
-      <a class="size-14" href="/admin/badges/user/add/<?= $data['user']['user_id']; ?>">
+      <a class="text-sm" href="/admin/badges/user/add/<?= $data['user']['user_id']; ?>">
         + <?= Translate::get('reward the user'); ?>
       </a>
     </div>
     <div class="mb20">
       <label class="block" for="post_title"><?= Translate::get('badges'); ?></label>
       <?php if ($data['user']['badges']) { ?>
-        <div class="size-24">
+        <div class="text-2xl">
           <?php foreach ($data['user']['badges'] as $badge) { ?>
             <div class="mb5">
               <?= $badge['badge_icon']; ?>
-              <span class="remove-badge size-13 lowercase" data-id="<?= $badge['bu_id']; ?>" data-uid="<?= $data['user']['user_id']; ?>">
+              <span class="remove-badge text-sm lowercase" data-id="<?= $badge['bu_id']; ?>" data-uid="<?= $data['user']['user_id']; ?>">
                 - <?= Translate::get('remove'); ?>
               </span>
             </div>
@@ -164,7 +164,7 @@
         <label class="block" for="post_title"><?= $block['lang']; ?></label>
         <input class="w-100 h30" maxlength="150" type="text" value="<?= $data['user'][$block['title']]; ?>" name="<?= $block['name']; ?>">
         <?php if ($block['help']) { ?>
-          <div class="size-14 gray-400"><?= $block['help']; ?></div>
+          <div class="text-sm gray-400"><?= $block['help']; ?></div>
         <?php } ?>
       </div>
     <?php } ?>

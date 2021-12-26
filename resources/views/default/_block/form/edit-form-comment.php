@@ -7,7 +7,7 @@
         <input type="hidden" name="post_id" id="post_id" value="<?= $data['post_id']; ?>">
         <input type="hidden" name="comment_id" id="comment_id" value="<?= $data['comment_id']; ?>">
         <?= sumbit(Translate::get('edit')); ?>
-        <span id="cancel_comment" class="size-14 inline ml5 gray"><?= Translate::get('cancel'); ?></span>
+        <span id="cancel_comment" class="text-sm inline ml5 gray"><?= Translate::get('cancel'); ?></span>
       </div>
       <div class="v-otsr"></div>
     </form>

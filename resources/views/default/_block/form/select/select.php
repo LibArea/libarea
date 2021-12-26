@@ -12,7 +12,7 @@
     <input name="facet_select[]" id="topic_id" required>
   <?php } ?>
 
-  <?php if (!empty($help)) { ?><div class="gray size-14"><?= $help; ?>...</div><?php } ?>
+  <?php if (!empty($help)) { ?><div class="gray text-sm"><?= $help; ?>...</div><?php } ?>
 </div>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">

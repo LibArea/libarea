@@ -90,7 +90,7 @@
             <?= Translate::get('to your answer'); ?>
           <?php } ?>
         </span>
-        <span class="size-14 gray"> — <?= $notif['notification_add_time']; ?></span>
+        <span class="text-sm gray"> — <?= $notif['notification_add_time']; ?></span>
         <?php if ($notif['notification_read_flag'] == 0) { ?>&nbsp;<sup class="red-500">✔</sup><?php } ?>
       </div>
     <?php } ?>

@@ -5,9 +5,11 @@ namespace App\Models;
 use Hleb\Scheme\App\Models\MainModel;
 use DB;
 use PDO;
+use Base;
 
 class HomeModel extends MainModel
 {
+    // Posts on the central page
     // Посты на центральной странице
     public static function feed($page, $limit, $topics_user, $uid, $type)
     {
@@ -28,7 +30,7 @@ class HomeModel extends MainModel
         }
 
         $display = "AND post_is_deleted = 0 AND post_tl <= " . $uid['user_trust_level'];
-        if ($uid['user_trust_level'] == 5) $display = "";
+        if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) $display = "";
 
         $sort = "ORDER BY post_votes and post_date > CURDATE()-INTERVAL 3 WEEK DESC";
         if ($type == 'main.feed' || $type == 'main.all') $sort = "ORDER BY post_top DESC, post_date DESC";
@@ -87,7 +89,6 @@ class HomeModel extends MainModel
         return DB::run($sql, ['user_id' => $uid['user_id']])->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Количество постов
     public static function feedCount($topics_user, $uid, $type)
     {
         $result = [];
@@ -106,7 +107,7 @@ class HomeModel extends MainModel
         }
 
         $display = "AND post_is_deleted = 0 AND post_tl <= " . $uid['user_trust_level'];
-        if ($uid['user_trust_level'] == 5) $display = "";
+        if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) $display = "";
 
         $sql = "SELECT 
                     post_id,
@@ -137,6 +138,7 @@ class HomeModel extends MainModel
         return DB::run($sql)->rowCount();
     }
 
+    // The last 5 responses on the main page
     // Последние 5 ответа на главной
     public static function latestAnswers($uid)
     {
@@ -173,7 +175,8 @@ class HomeModel extends MainModel
         return DB::run($sql, ['id' => $uid['user_id'], 'zero' => 0])->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Темы все / подписан
+    // Facets (themes, blogs) all / subscribed
+    // Фасеты (темы, блоги) все / подписан
     public static function subscription($user_id)
     {
         $sql = "SELECT 

@@ -22,7 +22,7 @@
   <?php $i=0; foreach ($data['bg'] as $bg) { ?>
     <?php if($i % 10 == 0) echo "</div><div class=\"mb30 hidden\">"; ?> 
     <div class="br-box-gray relative br-rd3 w160 h80 center inline <?= $bg; ?> pb0 mb15">
-      <div class="mt15 w-100 bottom0 pt5 pb5 absolute bg-stone-500 size-14 white">
+      <div class="mt15 w-100 bottom0 pt5 pb5 absolute bg-stone-500 text-sm white">
          <?= $bg; ?> 
       </div>
     </div>

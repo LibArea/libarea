@@ -9,7 +9,7 @@
 <main class="col-span-7 mb-col-12">
   <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
-    <ul class="flex flex-row list-none m0 p0 center size-15">
+    <ul class="flex flex-row list-none m0 p0 center">
 
       <?= tabs_nav(
         $uid['user_id'],
@@ -37,9 +37,9 @@
       <?php foreach ($data['drafts'] as $draft) { ?>
 
         <a href="<?= getUrlByName('post', ['id' => $draft['post_id'], 'slug' => $draft['post_slug']]); ?>">
-          <h3 class="m0 size-21"><?= $draft['post_title']; ?></h3>
+          <h3 class="m0 text-2xl"><?= $draft['post_title']; ?></h3>
         </a>
-        <div class="mr5 size-14 gray-600 lowercase">
+        <div class="mr5 text-sm gray-600 lowercase">
           <?= $draft['post_date']; ?> |
           <a href="<?= getUrlByName('post.edit', ['id' => $draft['post_id']]); ?>"><?= Translate::get('edit'); ?></a>
         </div>

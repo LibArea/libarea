@@ -29,7 +29,7 @@
           <?= $inv['user_login']; ?>
         </a>
         <sup>id<?= $inv['active_uid']; ?></sup>
-        <span class="size-13"> - <?= $inv['active_time']; ?></span>
+        <span class="text-sm"> - <?= $inv['active_time']; ?></span>
       </div>
     <?php } ?>
   <?php } else { ?>

@@ -60,10 +60,10 @@
 
   foreach ($sections as $section) { ?>
     <div class="col-span-2 <?= $section['bg']; ?> p10">
-      <a class="white gray-hover size-21" href="<?= getUrlByName($section['url']); ?>">
+      <a class="white gray-hover text-2xl" href="<?= getUrlByName($section['url']); ?>">
         <i class="bi <?= $section['icon']; ?> white right"></i>
         <?= $section['count']; ?>
-        <div class="size-15"><?= Translate::get($section['title']); ?></div>
+        <div><?= Translate::get($section['title']); ?></div>
       </a>
     </div>
   <?php } ?>
@@ -72,10 +72,10 @@
 <div class="white-box mt10 pt5 pr15 pb5 pl15">
   <h4 class="mt5 mb5"><?= Translate::get('users'); ?></h4>
   <?php foreach ($data['last_visit'] as $user) { ?>
-    <div class="gray size-15">
+    <div class="gray">
       id<?= $user['user_id']; ?>
       <a href="<?= getUrlByName('user', ['login' => $user['user_login']]); ?>"><?= $user['user_login']; ?></a>
-      <span class="size-13"> — <?= lang_date($user['latest_date']); ?> (<?= $user['os']; ?>)</span>
+      <span class="text-sm"> — <?= lang_date($user['latest_date']); ?> (<?= $user['os']; ?>)</span>
     </div>
   <?php } ?>
 </div>
@@ -84,7 +84,7 @@
   <div class="white-box mt10 pt5 pr15 pb5 pl15">
     <h4 class="mt5 mb5"><?= Translate::get('posts'); ?> (no-topic)</h4>
     <?php foreach ($data['posts_no_topic'] as $post) { ?>
-      <div class="gray size-15">
+      <div class="gray">
         <a href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
           <?= $post['post_title']; ?>
         </a>

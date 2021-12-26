@@ -11,7 +11,7 @@
   <div class="max-width mr-auto w-100 grid grid-cols-12 gap-4 pr5 pl5 justify-between">
     <div class="col-span-2 no-mob"></div>
     <main class="col-span-8 mb-col-12 bg-white br-rd5 br-box-gray p15">
-      <h1 class="size-31 font-normal gray m0">Opss</h1>
+      <h1 class="text-3xl font-normal gray m0">Opss</h1>
       <p class="gray-600"><?= Translate::get('site under reconstruction'); ?>...</p>
 
       <form class="mb20" action="/login" method="post">

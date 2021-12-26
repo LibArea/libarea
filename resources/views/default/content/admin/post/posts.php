@@ -35,7 +35,7 @@
         <b><?= $post['post_title']; ?></b>
       </a>
       <div id="post_<?= $post['post_id']; ?>">
-        <div class="size-13 gray">
+        <div class="text-sm gray">
           <?= user_avatar_img($post['user_avatar'], 'small', $post['user_login'], 'w18 mr5'); ?>
           <a class="date mr5" href="<?= getUrlByName('user', ['login' => $post['user_login']]); ?>">
             <?= $post['user_login']; ?>
@@ -56,7 +56,7 @@
             <span class="s_<?= $post['post_id']; ?> show_detail"></span>
           </div>
         </div>
-        <div class="br-bottom mb15 mt5 pb10 size-13 hidden gray">
+        <div class="br-bottom mb15 mt5 pb10 text-sm hidden gray">
           <span class="left mt5">
             <?= votes($uid['user_id'], $post, 'post', 'mr5'); ?>
           </span>

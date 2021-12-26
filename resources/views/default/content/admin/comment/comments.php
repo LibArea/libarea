@@ -35,7 +35,7 @@
         <b><?= $comment['post_title']; ?></b>
       </a>
       <div id="comment_<?= $comment['comment_id']; ?>">
-        <div class="size-13 gray">
+        <div class="text-sm gray">
           <?= user_avatar_img($comment['user_avatar'], 'small', $comment['user_login'], 'w18 mr5'); ?>
           <a class="date mr5" href="<?= getUrlByName('user', ['login' => $comment['user_login']]); ?>">
             <?= $comment['user_login']; ?>
@@ -50,14 +50,14 @@
             <i class="bi bi-chat-dots middle"></i>
           <?php } ?>
         </div>
-        <div class="comm-telo-body">
+        <div>
           <?= $comment['content']; ?>
         </div>
-        <div class="br-bottom mb15 mt5 pb10 size-13 hidden gray">
+        <div class="br-bottom mb15 mt5 pb10 text-sm hidden gray">
           <span class="left mt5">
             <?= votes($uid['user_id'], $comment, 'comment', 'mr5'); ?>
           </span>
-          <span id="cm_dell" class="right comment_link size-13">
+          <span id="cm_dell" class="right comment_link text-sm">
             <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action">
               <?php if ($data['sheet'] == 'comments.ban') { ?>
                 <?= Translate::get('recover'); ?>

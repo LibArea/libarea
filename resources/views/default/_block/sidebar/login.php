@@ -1,4 +1,4 @@
-<div class="br-box-gray p15 mb15 br-rd5 bg-white size-14">
+<div class="br-box-gray p15 mb15 br-rd5 bg-white text-sm">
   <form class="" action="<?= getUrlByName('login'); ?>" method="post">
     <?php csrf_field(); ?>
     <div class="mb20">
@@ -11,17 +11,17 @@
     </div>
     <div class="mb20 mb20 flex">
       <input type="checkbox" id="rememberme" class="left mr5" name="rememberme" value="1">
-      <label id="rem-text" class="form-check-label size-15" for="rememberme">
+      <label id="rem-text" class="form-check-label" for="rememberme">
         <span class="gray-600"><?= Translate::get('remember me'); ?></span>
       </label>
     </div>
     <div class="mb20">
       <?= sumbit(Translate::get('sign in')); ?>
     </div>
-    <div class="center size-14 gray-600">
+    <div class="center gray-600">
       <?= Translate::get('login-use-condition'); ?>
     </div>
-    <div class="mt15 center size-14">
+    <div class="mt15 center">
       <a class="gray-600" href="<?= getUrlByName('recover'); ?>"><?= Translate::get('forgot your password'); ?>?</a>
     </div>
   </form>

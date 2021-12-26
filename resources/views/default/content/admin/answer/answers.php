@@ -1,3 +1,12 @@
+<div class="sticky mt5 top0 col-span-2 justify-between no-mob">
+  <?= tabs_nav(
+        'menu',
+        $data['type'],
+        $uid,
+        $pages = Config::get('menu.admin'),
+      ); ?>
+</div>
+
 <?= import(
   '/content/admin/menu',
   [
@@ -27,7 +36,7 @@
         <b><?= $answer['post_title']; ?></b>
       </a>
       <div id="answer_<?= $answer['answer_id']; ?>">
-        <div class="size-13 gray">
+        <div class="text-sm gray">
           <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'w18 mr5'); ?>
           <a class="date mr5" href="<?= getUrlByName('user', ['login' => $answer['user_login']]); ?>">
             <?= $answer['user_login']; ?>
@@ -42,14 +51,14 @@
             <i class="bi bi-question-lg green-600"></i>
           <?php } ?>
         </div>
-        <div class="size-15 max-w780">
+        <div class="max-w780">
           <?= $answer['content']; ?>
         </div>
-        <div class="br-bottom mb15 pb10 size-13 hidden gray">
+        <div class="br-bottom mb15 pb10 text-sm hidden gray">
           <span class="left mt5">
             <?= votes($uid['user_id'], $answer, 'answer', 'mr5'); ?>
           </span>
-          <span id="cm_dell" class="right comment_link size-13">
+          <span id="cm_dell" class="right comment_link text-sm">
             <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action">
               <?php if ($data['sheet'] == 'answers.ban') { ?>
                 <?= Translate::get('recover'); ?>

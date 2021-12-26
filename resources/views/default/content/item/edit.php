@@ -21,7 +21,7 @@
       <?= csrf_field() ?>
       <div class="right">
         <?= favicon_img($data['domain']['item_id'], $data['domain']['item_url_domain']); ?>
-        <span class="add-favicon right size-13" data-id="<?= $data['domain']['item_id']; ?>">
+        <span class="add-favicon right text-sm" data-id="<?= $data['domain']['item_id']; ?>">
           + favicon
         </span>
       </div>

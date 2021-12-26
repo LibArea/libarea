@@ -37,7 +37,7 @@
             </a>
           </td>
           <td>
-            <div class="size-13 gray lowercase">
+            <div class="text-sm gray lowercase">
               <?= $report['report_type']; ?>
               <span class="mr5 ml5"> &#183; </span>
               <?= $report['date']; ?>
@@ -48,7 +48,7 @@
           </td>
           <td class="center<?php if ($report['report_status'] == 0) { ?> bg-red-100<?php } ?>">
             <span class="report-status" data-id="<?= $report['report_id']; ?>">
-              <i class="bi bi-record-circle gray size-21"></i>
+              <i class="bi bi-record-circle gray text-2xl"></i>
             </span>
           </td>
         </tr>

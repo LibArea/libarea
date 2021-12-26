@@ -47,7 +47,7 @@
           </td>
           <td class="center">
             <a title="<?= Translate::get('edit'); ?>" href="/admin/badges/<?= $bg['badge_id']; ?>/edit">
-              <i class="bi bi-pencil size-15"></i>
+              <i class="bi bi-pencil"></i>
             </a>
           </td>
         </tr>

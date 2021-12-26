@@ -7,12 +7,12 @@
       ); ?>
 </div>
 <main class="col-span-7 mb-col-12 bg-white br-rd5 br-box-gray pt5 mt15 pr15 pb5 pl15">
-  <h1 class="mt0 mb10 size-24 font-normal"><?= Translate::get('moderation log'); ?></h1>
+  <h1 class="mt0 mb10 text-2xl font-normal"><?= Translate::get('moderation log'); ?></h1>
   <?php if (!empty($data['moderations'])) { ?>
     <div class="mt15">
       <?php foreach ($data['moderations'] as  $mod) { ?>
         <div class="mb15 br-bottom p5">
-          <div class="size-14 lowercase">
+          <div class="text-sm lowercase">
             <a class="black" href="<?= getUrlByName('user', ['login' => $mod['user_login']]); ?>">
               <?= user_avatar_img($mod['user_avatar'], 'small', $mod['user_login'], 'w24'); ?>
               <span class="mr5 ml5">
@@ -31,7 +31,7 @@
               <i class="bi bi-question-lg green-600"></i>
             <?php } ?>
           </div>
-          <div class="size-14">
+          <div class="text-sm">
             <span class="gray-600">
               <?= Translate::get('action'); ?>:
             </span>

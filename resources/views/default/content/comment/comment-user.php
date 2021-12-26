@@ -13,7 +13,7 @@
   <?php if (!empty($data['comments'])) { ?>
     <?php foreach ($data['comments'] as $comm) { ?>
       <div class="bg-white br-rd5 mt15 br-box-gray p15">
-        <div class="size-14 gray mb5">
+        <div class="text-sm gray mb5">
           <a class="gray" href="<?= getUrlByName('user', ['login' => $comm['user_login']]); ?>">
             <?= user_avatar_img($comm['user_avatar'], 'max', $comm['user_login'], 'w18 mr5'); ?>
             <?= $comm['user_login']; ?>
@@ -25,7 +25,7 @@
         <a class="mr5 mb5 block" href="<?= getUrlByName('post', ['id' => $comm['post_id'], 'slug' => $comm['post_slug']]); ?>">
           <?= $comm['post_title']; ?>
         </a>
-        <div class="size-15">
+        <div>
           <?= $comm['comment_content']; ?>
         </div>
         <div class="hidden gray">
@@ -42,7 +42,7 @@
 </main>
 <aside class="col-span-3 relative no-mob">
   <div class="sticky top60">
-    <div class="bg-white br-rd5 br-box-gray p15 size-15">
+    <div class="bg-white br-rd5 br-box-gray p15">
       <?= tabs_nav(
         'menu',
         $data['type'],

@@ -49,7 +49,7 @@
       <?php if ($post['post_url']) { ?>
         <div class="mb20 2flex">
           <div class="mb5" for="post_title">URL:
-            <a target="_blank" rel="noreferrer ugc" href="<?= $post['post_url']; ?>" class="size-14">
+            <a target="_blank" rel="noreferrer ugc" href="<?= $post['post_url']; ?>" class="text-sm">
               <?= $post['post_url']; ?>
             </a>
           </div>
@@ -65,7 +65,7 @@
             <div class="mr20">
               <?= post_img($post['post_content_img'], $post['post_title'], 'w160', 'cover'); ?>
               <input type="hidden" name="images" value="<?= $post['post_content_img']; ?>">
-              <a class="img-remove size-14" href="/post/img/<?= $post['post_id']; ?>/remove">
+              <a class="img-remove text-sm" href="/post/img/<?= $post['post_id']; ?>/remove">
                 <?= Translate::get('remove'); ?>
               </a>
             </div>

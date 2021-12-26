@@ -8,7 +8,7 @@
 </div>
 <main class="col-span-7 mb-col-12">
   <div class="bg-white br-rd5 br-box-gray p20">
-    <h1 class="mt0 mb15 size-21"><?= Translate::get('users'); ?></h1>
+    <h1 class="mt0 mb15 text-2xl"><?= Translate::get('users'); ?></h1>
     <div class="max-width mr-auto w-100 grid grid-cols-6 gap-2 justify-between">
       <?php foreach ($data['users'] as $ind => $user) { ?>
         <div class="center inline pr10 pl10 mb20 mb-col-2">
@@ -19,7 +19,7 @@
             <?= $user['user_login']; ?>
           </a>
           <?php if ($user['user_name']) { ?>
-            <span class="gray size-14"><?= $user['user_name']; ?></span>
+            <span class="gray text-sm"><?= $user['user_name']; ?></span>
           <?php } ?>
         </div>
       <?php } ?>

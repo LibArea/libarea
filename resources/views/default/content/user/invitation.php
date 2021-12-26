@@ -17,7 +17,7 @@
         <div class="mb20">
           <input class="w-100 h30" type="email" name="email">
           <div class="right pt5"><?= sumbit(Translate::get('send')); ?></div>
-          <div class="size-14 pt5 gray-400"><?= Translate::get('enter'); ?> E-mail</div>
+          <div class="text-sm pt5 gray-400"><?= Translate::get('enter'); ?> E-mail</div>
         </div>
         <?= Translate::get('invitations left'); ?> <?= 5 - $data['count_invites']; ?>
       </form>
@@ -28,20 +28,20 @@
 
         <?php foreach ($data['invitations'] as $invite) { ?>
           <?php if ($invite['active_status'] == 1) { ?>
-            <div class="size-14 gray">
+            <div class="text-sm gray">
               <?= user_avatar_img($invite['user_avatar'], 'small', $invite['user_login'], 'ava'); ?>
               <a href="<?= $invite['user_login']; ?>"><?= $invite['user_login']; ?></a>
               - <?= Translate::get('registered'); ?>
             </div>
 
-            <?php if ($uid['user_trust_level'] == 5) { ?>
+            <?php if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
               <?= Translate::get('the link was used to'); ?>: <?= $invite['invitation_email']; ?> <br>
               <code>
                 <?= Config::get('meta.url'); ?><?= getUrlByName('register'); ?>/invite/<?= $invite['invitation_code']; ?>
               </code>
             <?php } ?>
 
-            <span class="size-14 gray"><?= Translate::get('link has been used'); ?></span>
+            <span class="text-sm gray"><?= Translate::get('link has been used'); ?></span>
           <?php } else { ?>
             <?= Translate::get('for'); ?> (<?= $invite['invitation_email']; ?>) <?= Translate::get('can send this link'); ?>: <br>
             <code>

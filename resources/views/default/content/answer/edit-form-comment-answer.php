@@ -8,7 +8,7 @@
         <input type="hidden" name="answer_id" id="answer_id" value="<?= $data['answer_id']; ?>">
         <div class="mt5 mb20">
           <?= sumbit(Translate::get('edit')); ?>
-          <span id="cancel_answ" class="size-14 inline ml5 gray"><?= Translate::get('cancel'); ?></span>
+          <span id="cancel_answ" class="text-sm inline ml5 gray"><?= Translate::get('cancel'); ?></span>
         </div>
       </div>
     </form>

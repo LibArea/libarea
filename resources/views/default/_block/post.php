@@ -8,7 +8,7 @@
     <?php $post_url = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
     <div class="br-box-gray bg-white p20 mb15 br-rd5 article_<?= $post['post_id']; ?>">
       <?php if ($data['sheet'] == 'subscribed') { ?>
-        <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id size-14 right">
+        <div data-id="<?= $post['post_id']; ?>" data-type="post" class="focus-id text-sm right">
           <?= Translate::get('unsubscribe'); ?>
         </div>
       <?php } ?>
@@ -21,7 +21,7 @@
            
           <div class="ml5">
             <?= $post['user_login']; ?>
-            <div class="gray-400 lowercase size-14">
+            <div class="gray-400 lowercase text-sm">
               <?= $post['post_date'] ?>
             </div>
           </div>
@@ -30,7 +30,7 @@
       <div class="flex flex-row flex-auto">
         <div class="w-auto pc-mr-20">
           <a class="black dark-white" href="<?= $post_url; ?>">
-            <h2 class="font-normal size-24 mt0 mb0"><?= $post['post_title']; ?>
+            <h2 class="font-normal text-2xl mt0 mb0"><?= $post['post_title']; ?>
               <?php if ($post['post_is_deleted'] == 1) { ?>
                 <i class="bi bi-trash red-500"></i>
               <?php } ?>
@@ -47,12 +47,12 @@
                 <i class="bi bi-patch-question green-600"></i>
               <?php } ?>
               <?php if ($post['post_translation'] == 1) { ?>
-                <span class="pt5 pr10 pb5 pl10 gray-600 bg-yellow-100 br-rd3 size-14 italic lowercase">
+                <span class="pt5 pr10 pb5 pl10 gray-600 bg-yellow-100 br-rd3 text-sm italic lowercase">
                   <?= Translate::get('translation'); ?>
                 </span>
               <?php } ?>
               <?php if ($post['post_tl'] > 0) { ?>
-                <span class="pt5 pr10 pb5 pl10 gray-600 bg-orange-100 br-rd3 italic size-14">
+                <span class="pt5 pr10 pb5 pl10 gray-600 bg-orange-100 br-rd3 italic text-sm">
                   tl<?= $post['post_tl']; ?>
                 </span>
               <?php } ?>
@@ -62,16 +62,16 @@
             </h2>
           </a>
           <div class="lowercase">
-            <?= html_blog($post['facet_list'], 'blog', 'gray-600 size-14 mr15'); ?>
-            <?= html_topic($post['facet_list'], 'topic', 'gray-600 size-14 mr15'); ?>
+            <?= html_blog($post['facet_list'], 'blog', 'gray-400 text-sm mr15'); ?>
+            <?= html_topic($post['facet_list'], 'topic', 'gray-400 text-sm mr15'); ?>
             <?php if ($post['post_url_domain']) { ?>
-              <a class="gray-600 size-14 ml10" href="<?= getUrlByName('domain', ['domain' => $post['post_url_domain']]); ?>">
+              <a class="gray-600 text-sm ml10" href="<?= getUrlByName('domain', ['domain' => $post['post_url_domain']]); ?>">
                 <i class="bi bi-link-45deg middle"></i> <?= $post['post_url_domain']; ?>
               </a>
             <?php } ?>
           </div>
           <div class="show_add_<?= $post['post_id']; ?>">
-            <div data-post_id="<?= $post['post_id']; ?>" class="showpost mt10 mb5 gray-600">
+            <div data-post_id="<?= $post['post_id']; ?>" class="showpost mt10 mb5 gray-600 dark-gray-200">
               <?= $post['post_content_preview']; ?>
               <span class="s_<?= $post['post_id']; ?> show_detail"></span>
             </div>

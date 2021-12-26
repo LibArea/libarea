@@ -28,11 +28,11 @@
             </a>
 
             <?php if ($uid['user_id'] == $facet['facet_user_id']) { ?>
-              <i class="bi bi-mic sky-500 size-14"></i>
+              <i class="bi bi-mic sky-500 text-sm"></i>
             <?php } ?>
-            <div class="size-14 pr15 mb-pr-0 gray-400">
+            <div class="text-sm pr15 mb-pr-0 gray-400">
               <?= $facet['facet_short_description']; ?>
-              <div class="flex mt5 size-14">
+              <div class="flex mt5 text-sm">
                 <i class="bi bi-journal mr5"></i>
                 <?= $facet['facet_count']; ?>
                 <?php if ($facet['facet_focus_count'] > 0) { ?>

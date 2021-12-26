@@ -18,7 +18,7 @@
 
   <?php if ($uid['user_trust_level'] >= Config::get('trust-levels.tl_add_blog')) { ?>
     <div class="br-box-gray bg-white p15">
-      <div class="size-14 gray mb15">
+      <div class="text-sm gray mb15">
         <?= Translate::get('you can add more'); ?>:
         <span class="red-500"><?= $data['count_facet']; ?></span>
       </div>
@@ -67,7 +67,7 @@
 
         <div for="mb5"><?= Translate::get('meta description'); ?><sup class="red-500">*</sup></div>
         <textarea rows="6" class="add max-w780" minlength="44" name="facet_description"></textarea>
-        <div class="size-14 gray-400 mb20">> 44 <?= Translate::get('characters'); ?></div>
+        <div class="text-sm gray-400 mb20">> 44 <?= Translate::get('characters'); ?></div>
 
         <input type="hidden" name="facet_type" value="<?= $data['sheet']; ?>">
         <?= sumbit(Translate::get('add')); ?>

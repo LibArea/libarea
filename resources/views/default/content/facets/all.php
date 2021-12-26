@@ -9,8 +9,8 @@
 <main class="col-span-10 mb-col-12">
   <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
 
-    <p class="m0 size-18"><?= Translate::get($data['type']); ?>
-      <?php if ($uid['user_trust_level'] == 5) { ?>
+    <p class="m0 text-xl"><?= Translate::get($data['type']); ?>
+      <?php if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
         <a class="ml15" href="<?= getUrlByName('admin.' . $data['type']); ?>">
           <i class="bi bi-pencil"></i>
         </a>
@@ -28,7 +28,7 @@
         <?php } ?>
       <?php } ?>
 
-    <ul class="flex flex-row list-none m0 p0 center size-15">
+    <ul class="flex flex-row list-none m0 p0 center">
 
       <?= tabs_nav(
         'nav',

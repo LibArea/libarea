@@ -68,7 +68,7 @@
         <div id="response" class="hidden">
           <div id="messages"></div>
         </div>
-        <div class="size-14 gray mt5">
+        <div class="text-sm gray mt5">
           <?= Translate::get('format-cover-post'); ?>.
         </div>
       </div>

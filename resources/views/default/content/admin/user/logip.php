@@ -84,7 +84,7 @@
         <td class="center">
           <?php if ($user['user_trust_level'] != 5) { ?>
             <a title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('admin.user.edit', ['id' => $user['user_id']]); ?>">
-              <i class="bi bi-pencil size-15"></i>
+              <i class="bi bi-pencil"></i>
             </a>
           <?php } else { ?>
             ---

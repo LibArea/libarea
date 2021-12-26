@@ -14,7 +14,7 @@
     <?php foreach ($data['comments'] as $comment) { ?>
       <div class="bg-white br-rd5 mt15 br-box-gray p15">
         <?php if ($comment['comment_is_deleted'] == 0) { ?>
-          <div class="size-14 mb5">
+          <div class="text-sm mb5">
             <a class="gray" href="<?= getUrlByName('user', ['login' => $comment['user_login']]); ?>">
               <?= user_avatar_img($comment['user_avatar'], 'small', $comment['user_login'], 'w18'); ?>
               <span class="mr5 ml5">
@@ -26,7 +26,7 @@
           <a href="<?= getUrlByName('post', ['id' => $comment['post_id'], 'slug' => $comment['post_slug']]); ?>#comment_<?= $comment['comment_id']; ?>">
             <?= $comment['post_title']; ?>
           </a>
-          <div class="size-15">
+          <div>
             <?= $comment['comment_content']; ?>
           </div>
           <div class="hidden gray">

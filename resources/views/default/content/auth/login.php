@@ -1,6 +1,6 @@
 <div class="col-span-2 no-mob"></div>
 <main class="col-span-8 mb-col-12 bg-white br-rd5 br-box-gray pt10 pr15 pb5 pl15">
-  <h1 class="mt0 mb10 size-24 center font-normal"><?= Translate::get('authorization'); ?></h1>
+  <h1 class="mt0 mb10 text-2xl center font-normal"><?= Translate::get('authorization'); ?></h1>
   <form class="max-w300 mb20 block" action="<?= getUrlByName('login'); ?>" method="post">
     <?php csrf_field(); ?>
 
@@ -24,9 +24,9 @@
     <div class="mb20">
       <?= sumbit(Translate::get('sign in')); ?>
       <?php if (Config::get('general.invite') == 0) { ?>
-        <span class="mr5 ml5 size-14"><a href="<?= getUrlByName('register'); ?>"><?= Translate::get('sign up'); ?></a></span>
+        <span class="mr5 ml5 text-sm"><a href="<?= getUrlByName('register'); ?>"><?= Translate::get('sign up'); ?></a></span>
       <?php } ?>
-      <span class="mr5 ml5 size-14"><a href="<?= getUrlByName('recover'); ?>"><?= Translate::get('forgot your password'); ?>?</a></span>
+      <span class="mr5 ml5 text-sm"><a href="<?= getUrlByName('recover'); ?>"><?= Translate::get('forgot your password'); ?>?</a></span>
     </div>
   </form>
   <?php if (Config::get('general.invite') == 1) { ?>

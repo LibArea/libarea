@@ -31,22 +31,22 @@
         </div>
       </div>
 
-      <div class="clear gray mb10 size-15">
-        <div class="mb5 size-14"><?= Translate::get('recommended size'); ?>: 240x240px (jpg, jpeg, png)</div>
+      <div class="clear gray mb10">
+        <div class="mb5 text-sm"><?= Translate::get('recommended size'); ?>: 240x240px (jpg, jpeg, png)</div>
         <?= sumbit(Translate::get('download')); ?>
       </div>
 
       <div class="file-upload mt20 mb10" id="file-drag">
         <div class="flex">
           <?php if ($data['user']['user_cover_art'] != 'cover_art.jpeg') { ?>
-            <div class="relative size-15 mr15">
+            <div class="relative mr15">
               <img class="block br-box-gray max-w-100" src="<?= cover_url($data['user']['user_cover_art'], 'user'); ?>">
-              <a class="right size-14" href="<?= getUrlByName('user', ['login' => $uid['user_login']]); ?>/delete/cover">
+              <a class="right text-sm" href="<?= getUrlByName('user', ['login' => $uid['user_login']]); ?>/delete/cover">
                 <?= Translate::get('remove'); ?>
               </a>
             </div>
           <?php } else { ?>
-            <div class="block br-box-gray max-w-100 size-14 gray p20 mr15">
+            <div class="block br-box-gray max-w-100 text-sm gray p20 mr15">
               <?= Translate::get('no-cover'); ?>...
             </div>
           <?php } ?>
@@ -62,8 +62,8 @@
         </div>
       </div>
 
-      <div class="clear gray mb10 size-15">
-        <div class="mb5 size-14"><?= Translate::get('recommended size'); ?>: 1920x240px (jpg, jpeg, png)</div>
+      <div class="clear gray mb10">
+        <div class="mb5 text-sm"><?= Translate::get('recommended size'); ?>: 1920x240px (jpg, jpeg, png)</div>
         <?= sumbit(Translate::get('download')); ?>
       </div>
     </form>

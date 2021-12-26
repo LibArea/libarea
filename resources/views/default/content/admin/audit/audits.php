@@ -43,7 +43,7 @@
           <td class="center">
             <?= $audit['audit_id']; ?>
           </td>
-          <td class="size-13">
+          <td class="text-sm">
             <div class="content-telo">
               <?= $audit['content'][$audit['audit_type'] . '_content']; ?>
             </div>
@@ -57,7 +57,7 @@
             <?php } ?>
             <span class="mr5 ml5"> &#183; </span>
             <a class="mr5 ml5" href="<?= getUrlByName('admin.user.edit', ['id' => $user_id]); ?>">
-              <i class="bi bi-pencil size-15"></i>
+              <i class="bi bi-pencil"></i>
             </a>
             <span class="mr5 ml5"> &#183; </span>
             <?= $audit['content'][$audit['audit_type'] . '_date']; ?>
@@ -77,7 +77,7 @@
             <?php } ?>
           </td>
           <td class="center">
-            <a data-id="<?= $audit['content'][$audit['audit_type'] . '_id']; ?>" data-type="<?= $audit['audit_type']; ?>" class="type-action size-13">
+            <a data-id="<?= $audit['content'][$audit['audit_type'] . '_id']; ?>" data-type="<?= $audit['audit_type']; ?>" class="type-action text-sm">
               <?php if ($audit['content'][$audit['audit_type'] . '_is_deleted'] == 1) { ?>
                 <span class="red-500"><?= Translate::get('recover'); ?></span>
               <?php } else { ?>
@@ -92,7 +92,7 @@
                 <?= $audit['audit_user_id']; ?>
               </a>
             <?php } else { ?>
-              <a data-status="<?= $audit['audit_type']; ?>" data-id="<?= $audit['content'][$audit['audit_type'] . '_id']; ?>" class="audit-status size-13">
+              <a data-status="<?= $audit['audit_type']; ?>" data-id="<?= $audit['content'][$audit['audit_type'] . '_id']; ?>" class="audit-status text-sm">
                 <?= Translate::get('to approve'); ?>
               </a>
             <?php } ?>

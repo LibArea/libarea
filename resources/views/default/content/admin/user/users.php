@@ -56,11 +56,11 @@
             <sup class="gray">TL:<?= $user['user_trust_level']; ?></sup>
             <?php if ($user['user_invitation_id'] != 0) { ?><sup>+ inv. id<?= $user['user_invitation_id']; ?></sup><?php } ?>
             <?php if ($user['user_whisper']) { ?>
-              <span title="<?= $user['user_whisper']; ?>" class="tips size-13 gray-600">
+              <span title="<?= $user['user_whisper']; ?>" class="tips text-sm gray-600">
                 <i class="bi bi-info-square green-600"></i>
               </span>
             <?php } ?>
-            <div class="size-13">
+            <div class="text-sm">
               <?= $user['user_email']; ?>
               <?php if ($user['user_activated'] == 1) { ?>
                 <div class="gray-600"><?= Translate::get('email activated'); ?></div>
@@ -75,7 +75,7 @@
               <div class="red-500">bans: <?= $user['banlist_int_num']; ?></div>
             <?php } ?>
           </td>
-          <td class="size-13 align-right">
+          <td class="text-sm align-right">
             <a class="gray-600 ml10" href="<?= getUrlByName('admin.regip', ['ip' => $user['user_reg_ip']]); ?>">
               <?= $user['user_reg_ip']; ?>
             </a>
@@ -85,7 +85,7 @@
             <br>
             <?= $user['created_at']; ?>
           </td>
-          <td class="size-13 align-right">
+          <td class="text-sm align-right">
             <?php if (!empty($user['last_visit_logs']['latest_ip'])) { ?>
               <a class="gray-600 ml10" href="<?= getUrlByName('admin.logip', ['ip' => $user['last_visit_logs']['latest_ip']]); ?>">
                 <?= $user['last_visit_logs']['latest_ip']; ?>
@@ -113,7 +113,7 @@
           </td>
           <td class="center">
             <a title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('admin.user.edit', ['id' => $user['user_id']]); ?>">
-              <i class="bi bi-pencil size-15"></i>
+              <i class="bi bi-pencil"></i>
             </a>
           </td>
         </tr>

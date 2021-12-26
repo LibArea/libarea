@@ -1,5 +1,5 @@
 <main class="col-span-12 mb-col-12 bg-white br-rd5 br-box-gray pt5 pr15 pb5 pl15">
-  <h1 class="mt0 mb10 size-24 font-normal"><?= Translate::get('registration by invite'); ?></h1>
+  <h1 class="mt0 mb10 text-2xl font-normal"><?= Translate::get('registration by invite'); ?></h1>
   <div class="form">
     <form class="max-w300" action="<?= getUrlByName('register'); ?>/add" method="post">
       <?php csrf_field(); ?>

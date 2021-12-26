@@ -278,12 +278,12 @@ function fetch_search() {
         var html = '<div class="flex">';
         for (var key in obj) {
           if (obj[key].topic_slug) {
-            html += '<a class="sky-500 block size-14 mb15 mr10" href="/topic/' + obj[key].facet_slug + '">';
+            html += '<a class="sky-500 block text-sm mb15 mr10" href="/topic/' + obj[key].facet_slug + '">';
             html += '<img class="w21 mr5 br-box-gray" src="<?= AG_PATH_FACETS_LOGOS; ?>' + obj[key].facet_img + '">';
             html += obj[key].facet_title + '</a>';
           }
           if (obj[key].post_id) {
-            html += '<a class="block black size-14 mb10" href="/post/' + obj[key].post_id + '">' +
+            html += '<a class="block black text-sm mb10" href="/post/' + obj[key].post_id + '">' +
               obj[key].title + '</a>';
           }
           html += '</div>';

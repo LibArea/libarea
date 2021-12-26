@@ -197,7 +197,7 @@ function pagination($pNum, $pagesCount, $sheet, $other)
     }
 
     if ($pagesCount > $pNum) {
-        $html .= '<span class="bg-red-500 pt5 pr10 pb5 pl10 white ml5 mr5 size-15">' . ($pNum) . '</span>';
+        $html .= '<span class="bg-red-500 pt5 pr10 pb5 pl10 white ml5 mr5">' . ($pNum) . '</span>';
     }
 
     if ($pagesCount > $pNum) {
@@ -213,7 +213,7 @@ function pagination($pNum, $pagesCount, $sheet, $other)
             $html .= '...';
         }
 
-        $html .= '<a class="p5 ml5 size-15 lowercase gray-600" href="' . $page . '/page/' . ($pNum + 1) . '">' . Translate::get('page') . ' ' . ($pNum + 1) . ' >></a>';
+        $html .= '<a class="p5 ml5 lowercase gray-600" href="' . $page . '/page/' . ($pNum + 1) . '">' . Translate::get('page') . ' ' . ($pNum + 1) . ' >></a>';
     }
 
     $html .= '</div>';
@@ -223,7 +223,7 @@ function pagination($pNum, $pagesCount, $sheet, $other)
 
 function breadcrumb($path_home, $title_home, $path_intermediate, $title_intermediate, $title_page)
 {
-    $html = '<ul class="flex flex-row gap-2 list-none items-center size-13 p0 mt0 mb15">';
+    $html = '<ul class="flex flex-row gap-2 list-none items-center text-sm p0 mt0 mb15">';
     $html .= '<li><a class="gray" title="' . $title_home . '" href="' . $path_home . '">' . $title_home . '</a><li class="gray-400">/</li>';
 
     if ($path_intermediate) {
@@ -291,13 +291,13 @@ function tabs_nav($name, $item, $uid, array $pages = [])
     if ($name == 'nav') {
         foreach ($pages as $key => $page) {  
             if (empty($page['auth']) || $uid['user_trust_level'] >= $page['tl']) {
-                $classes    = 'ml30 mb-mr-5 mb-ml-10 gray';
+                $classes    = 'ml30 mb-mr-5 mb-ml-10 gray dark-gray-200';
                 $isActive   = $page['id'] == $item ? $classes . ' sky-500 ' : $classes;
                 $isAria     = $page['id'] == $item ? ' aria-current="page"' : '';
                 
                 $html .= '<a ' . $isAria . ' class="' . $isActive . '" href="' . $page['url'] . '">
                             <i class="' . $page['icon'] . ' mr5"></i>
-                                <span class="mb-size-13">' . $page['title'] . '</span></a>';
+                                <span>' . $page['title'] . '</span></a>';
             }
         }
         
@@ -310,13 +310,13 @@ function tabs_nav($name, $item, $uid, array $pages = [])
             } else {
             
                 if (empty($page['auth'])  || $uid['user_trust_level'] > $page['tl']) {
-                    $classes    = 'pt5 pb5 pl10 flex flex-row items-center gray';
+                    $classes    = 'pt5 pb5 pl10 flex flex-row items-center gray dark-gray-200';
                     $isActive   = $page['id'] == $item ? $classes . ' sky-500 ' : $classes;
                     $isAria     = $page['id'] == $item ? ' aria-current="page"' : '';
                     
                     $html .= '<a ' . $isAria . ' class="' . $isActive . '" href="' . $page['url'] . '">
-                                <i class="' . $page['icon'] . ' mr10 size-21"></i>
-                                    <span class="mb-size-13">' . $page['title'] . '</span></a>';
+                                <i class="' . $page['icon'] . ' mr10 text-2xl"></i>
+                                    <span>' . $page['title'] . '</span></a>';
                                         
                 }
             }    
@@ -375,7 +375,7 @@ function add_post($facet, $user_id)
     }
 
     $html  = '<a title="' . Translate::get('add post') . '" href="' . $url_add . '" class="sky-500 center p10">
-                <i class="bi bi-plus-lg size-18"></i>
+                <i class="bi bi-plus-lg text-xl"></i>
               </a>';
 
     return $html;

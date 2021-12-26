@@ -1,5 +1,5 @@
 <?php if (Request::getUri() == '/') { ?>
-  <a class="bg-blue-100 bg-hover-green white-hover flex justify-center pt5 pr10 pb5 pl10 br-rd5 p15 mb15 sky-500 size-14" href="/topics">
+  <a class="bg-blue-100 bg-hover-green white-hover flex justify-center pt5 pr10 pb5 pl10 br-rd5 p15 mb15 sky-500 text-sm" href="/topics">
     <i class="bi bi-lightbulb middle mr5"></i>
     <?= Translate::get('topic-subscription'); ?>
   </a>
@@ -13,7 +13,7 @@
           <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'w24 mr5'); ?>
           <?= $topic['facet_title']; ?>
         </a>
-        <div class="mt5 size-14 gray-600">
+        <div class="mt5 text-sm gray-600">
           <?= $topic['facet_description']; ?>
         </div>
       </div>

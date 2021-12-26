@@ -1,4 +1,4 @@
-<ul class="flex flex-row list-none m0 p0 center size-15">
+<ul class="flex flex-row list-none m0 p0 center">
 
   <?= tabs_nav(
         'nav',

@@ -1,6 +1,6 @@
 <?php if (!empty($data['answers'])) { ?>
   <div class="bg-white br-rd5 br-box-gray mt15 mb15 p15">
-    <h2 class="lowercase m0 mb15 size-21">
+    <h2 class="lowercase m0 mb15 text-2xl">
       <?= num_word($post['amount_content'], Translate::get('num-answer'), true); ?>
     </h2>
     <?php $n = 0;
@@ -15,7 +15,7 @@
           <ol class="p0 m0 list-none">
             <li class="answers_subtree" id="answer_<?= $answer['answer_id']; ?>">
               <div class="answ-telo">
-                <div class="flex size-14">
+                <div class="flex text-sm">
                   <a class="gray-600" href="<?= getUrlByName('user', ['login' => $answer['user_login']]); ?>">
                     <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'w18'); ?>
                     <span class="mr5 ml5">
@@ -23,7 +23,7 @@
                     </span>
                   </a>
                   <?php if ($post['post_user_id'] == $answer['answer_user_id']) { ?>
-                    <span class="sky-500 mr5 ml0"><i class="bi bi-mic size-14"></i></span>
+                    <span class="sky-500 mr5 ml0"><i class="bi bi-mic text-sm"></i></span>
                   <?php } ?>
                   <span class="mr5 ml5 gray-600 lowercase">
                     <?= $answer['answer_date']; ?>
@@ -36,27 +36,27 @@
                   <a rel="nofollow" class="gray-600 mr5 ml10" href="<?= $post_url; ?>#answer_<?= $answer['answer_id']; ?>"><i class="bi bi-hash"></i></a>
                   <?= import('/_block/show-ip', ['ip' => $answer['answer_ip'], 'user_trust_level' => $uid['user_trust_level']]); ?>
                 </div>
-                <div class="m0 size-15 max-w780">
+                <div class="m0 max-w780">
                   <?= $answer['answer_content'] ?>
                 </div>
               </div>
-              <div class="flex size-14">
+              <div class="flex text-sm">
                 <?= votes($uid['user_id'], $answer, 'answer', 'mr5'); ?>
 
                 <?php if ($post['post_closed'] == 0) { ?>
-                  <?php if ($post['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
+                  <?php if ($post['post_is_deleted'] == 0 || $uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
                     <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray mr5 ml10"><?= Translate::get('reply'); ?></a>
                   <?php } ?>
                 <?php } ?>
 
-                <?php if ($uid['user_id'] == $answer['answer_user_id'] || $uid['user_trust_level'] == 5) { ?>
-                  <?php if ($answer['answer_after'] == 0 || $uid['user_trust_level'] == 5) { ?>
+                <?php if ($uid['user_id'] == $answer['answer_user_id'] || $uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
+                  <?php if ($answer['answer_after'] == 0 || $uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
                     <a class="editansw gray mr10 ml10" href="/answer/edit/<?= $answer['answer_id']; ?>"> <?= Translate::get('edit'); ?>
                     </a>
                   <?php } ?>
                 <?php } ?>
 
-                <?php if ($uid['user_trust_level'] == 5) { ?>
+                <?php if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
                   <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray ml10 mr5">
                     <i title="<?= Translate::get('remove'); ?>" class="bi bi-trash"></i>
                   </a>
@@ -85,8 +85,8 @@
 
         <?php } else { ?>
 
-          <?php if ($uid['user_trust_level'] == 5) { ?>
-            <ol class="bg-red-200 size-14 pr5 list-none">
+          <?php if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
+            <ol class="bg-red-200 text-sm pr5 list-none">
               <li class="comments_subtree" id="comment_<?= $answer['answer_id']; ?>">
                 <span class="comm-deletes nick">
                   <?= $answer['answer_content']; ?>
@@ -98,7 +98,7 @@
               </li>
             </ol>
           <?php } else { ?>
-            <div class="gray m5 p5 size-14">
+            <div class="gray m5 p5 text-sm">
               <span class="answ-deletes">~ <?= Translate::get('comment deleted'); ?></span>
             </div>
           <?php } ?>
@@ -110,12 +110,12 @@
 
         <?php if ($comment['comment_is_deleted'] == 1) { ?>
           <?php if (accessСheck($comment, 'comment', $uid, 1, 30) === true) { ?>
-            <ol class="bg-red-200 size-14 list-none max-w780 size-15<?php if ($comment['comment_comment_id'] > 0) { ?> ml30<?php } ?>">
+            <ol class="bg-red-200 text-sm list-none max-w780 <?php if ($comment['comment_comment_id'] > 0) { ?> ml30<?php } ?>">
               <li class="pr5" id="comment_<?= $comment['comment_id']; ?>">
                 <span class="comm-deletes gray">
                   <?= Content::text($comment['comment_content'], 'line'); ?>
                   — <?= $comment['user_login']; ?>
-                  <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action right size-14">
+                  <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action right text-sm">
                     <?= Translate::get('recover'); ?>
                   </a>
                 </span>
@@ -128,8 +128,8 @@
           <ol class="pl15 pb0 mb0 list-none<?php if ($comment['comment_comment_id'] > 0) { ?> ml30<?php } ?>">
             <li class="comment_subtree" id="comment_<?= $comment['comment_id']; ?>">
               <div class="p5">
-                <div class="max-w780 size-15">
-                  <div class="size-14 flex">
+                <div class="max-w780">
+                  <div class="text-sm flex">
                     <a class="gray-600" href="<?= getUrlByName('user', ['login' => $comment['user_login']]); ?>">
                       <?= user_avatar_img($comment['user_avatar'], 'small', $comment['user_login'], 'w18'); ?>
                       <span class="mr5 ml5">
@@ -137,7 +137,7 @@
                       </span>
                     </a>
                     <?php if ($post['post_user_id'] == $comment['comment_user_id']) { ?>
-                      <span class="sky-500 mr5"><i class="bi bi-mic size-14"></i></span>
+                      <span class="sky-500 mr5"><i class="bi bi-mic text-sm"></i></span>
                     <?php } ?>
                     <span class="mr5 ml5 gray-400 lowercase">
                       <?= lang_date($comment['comment_date']); ?>
@@ -150,15 +150,15 @@
                     <a class="gray-400 mr5 ml5" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_id']; ?>"><i class="bi bi-hash"></i></a>
                     <?= import('/_block/show-ip', ['ip' => $comment['comment_ip'], 'user_trust_level' => $uid['user_trust_level']]); ?>
                   </div>
-                  <div class="comm-telo-body size-15 mt5 mb10">
+                  <div class="mt5 mb10">
                     <?= Content::text($comment['comment_content'], 'line'); ?>
                   </div>
                 </div>
-                <div class="size-14 flex">
+                <div class="text-sm flex">
                   <?= votes($uid['user_id'], $comment, 'comment', 'mr5'); ?>
 
                   <?php if ($post['post_closed'] == 0) { ?>
-                    <?php if ($post['post_is_deleted'] == 0 || $uid['user_trust_level'] == 5) { ?>
+                    <?php if ($post['post_is_deleted'] == 0 || $uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
                       <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment-re gray mr5 ml10">
                         <?= Translate::get('reply'); ?>
                       </a>

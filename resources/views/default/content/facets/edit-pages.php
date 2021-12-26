@@ -12,8 +12,8 @@
 <main class="col-span-10 mb-col-12">
 
   <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
-    <p class="m0 size-18"><?= Translate::get($fs['facet_type']); ?></p>
-    <ul class="flex flex-row list-none m0 p0 center size-15">
+    <p class="m0 text-xl"><?= Translate::get($fs['facet_type']); ?></p>
+    <ul class="flex flex-row list-none m0 p0 center">
 
       <?= tabs_nav(
         'nav',
@@ -47,7 +47,7 @@
     <div class="uppercase gray mt5 mb5">
       <?= Translate::get('pages'); ?>
       <a class="mr15 right" title="<?= Translate::get('add'); ?>" href="<?= getUrlByName('page.add'); ?>">
-        <i class="bi bi-plus-lg size-18"></i>
+        <i class="bi bi-plus-lg text-xl"></i>
       </a>
     </div>
     <?php if ($data['pages']) { ?>
@@ -58,8 +58,8 @@
             <?= $row['post_title']; ?>
           </a>
 
-          <?php if ($uid['user_trust_level'] == 5 || $fs['facet_user_id'] == $uid['user_id']) { ?>
-            <a class="size-14 gray-400" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('page.edit', ['id' => $row['post_id']]); ?>">
+          <?php if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN || $fs['facet_user_id'] == $uid['user_id']) { ?>
+            <a class="text-sm gray-400" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('page.edit', ['id' => $row['post_id']]); ?>">
               <i class="bi bi-pencil"></i>
             </a>
           <?php } ?>

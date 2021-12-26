@@ -12,8 +12,8 @@
 <main class="col-span-10 mb-col-12">
 
   <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
-    <p class="m0 size-18"><?= Translate::get($fs['facet_type']); ?></p>
-    <ul class="flex flex-row list-none m0 p0 center size-15">
+    <p class="m0 text-xl"><?= Translate::get($fs['facet_type']); ?></p>
+    <ul class="flex flex-row list-none m0 p0 center">
 
       <?= tabs_nav(
         'nav',
@@ -120,7 +120,7 @@
         ]
       ]); ?>
 
-      <?php if ($fs['facet_type'] == 'topic' && $uid['user_trust_level'] == 5) { ?>
+      <?php if ($fs['facet_type'] == 'topic' && $uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
 
         <?= import('/_block/form/radio', [
           'data' => [
@@ -159,7 +159,7 @@
 
       <?php if (!empty($data['high_arr'])) { ?>
         <div class="bg-white br-rd5 br-box-gray p15">
-          <h3 class="uppercase mb5 mt0 font-light size-14 gray"><?= Translate::get('parents'); ?></h3>
+          <h3 class="uppercase mb5 mt0 font-light text-sm gray"><?= Translate::get('parents'); ?></h3>
           <?php foreach ($data['high_arr'] as $high) { ?>
             <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('topic', ['slug' => $high['facet_slug']]); ?>">
               <?= facet_logo_img($high['facet_img'], 'max', $high['facet_title'], 'w24 mr10 br-box-gray'); ?>
@@ -171,7 +171,7 @@
 
       <?php if (!empty($data['low_arr'])) { ?>
         <div class="bg-white br-rd5 br-box-gray p15">
-          <h3 class="uppercase mb5 mt0 font-light size-14 gray"><?= Translate::get('children'); ?></h3>
+          <h3 class="uppercase mb5 mt0 font-light text-sm gray"><?= Translate::get('children'); ?></h3>
           <?php foreach ($data['low_arr'] as $sub) { ?>
             <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('topic', ['slug' => $sub['facet_slug']]); ?>">
               <?= facet_logo_img($sub['facet_img'], 'max', $sub['facet_title'], 'w24 mr10 br-box-gray'); ?>
@@ -183,7 +183,7 @@
 
       <div for="mb5"><?= Translate::get('meta description'); ?><sup class="red-500">*</sup></div>
       <textarea class="add max-w780" rows="6" minlength="44" name="facet_description"><?= $fs['facet_description']; ?></textarea>
-      <div class="size-14 gray-400 mb20">> 44 <?= Translate::get('characters'); ?></div>
+      <div class="text-sm gray-400 mb20">> 44 <?= Translate::get('characters'); ?></div>
 
       <?= import('/_block/form/field-input', [
         'data' => [
@@ -202,7 +202,7 @@
 
       <div for="mb5"><?= Translate::get('info'); ?><sup class="red-500">*</sup></div>
       <textarea class="add max-w780" rows="6" name="facet_info"><?= $fs['facet_info']; ?></textarea>
-      <div class="mb20 size-14 gray-400">Markdown, > 14 <?= Translate::get('characters'); ?></div>
+      <div class="mb20 text-sm gray-400">Markdown, > 14 <?= Translate::get('characters'); ?></div>
 
       <?php if ($fs['facet_type'] == 'topic') { ?>
         <?= import('/_block/form/select/related-posts', [
@@ -226,7 +226,7 @@
 
         <?php if (!empty($data['high_matching'])) { ?>
           <div class="bg-white br-rd5 br-box-gray max-w780 p15 mb15">
-            <h3 class="uppercase mb5 mt0 font-light size-14 gray"><?= Translate::get('bound (parents)'); ?></h3>
+            <h3 class="uppercase mb5 mt0 font-light text-sm gray"><?= Translate::get('bound (parents)'); ?></h3>
             <?php foreach ($data['high_matching'] as $low_mat) { ?>
               <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('topic', ['slug' => $low_mat['facet_slug']]); ?>">
                 <?= facet_logo_img($low_mat['facet_img'], 'max', $low_mat['facet_title'], 'w24 mr10 br-box-gray'); ?>
@@ -237,7 +237,7 @@
         <?php } ?>
       <?php } ?>
 
-      <?php if ($uid['user_trust_level'] == 5) { ?>
+      <?php if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
         <?= import('/_block/form/select/content-tl', ['uid' => $uid, 'data' => $fs['facet_tl']]); ?>
         <?= import('/_block/form/select/user', [
           'uid'     => $uid,

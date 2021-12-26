@@ -13,7 +13,7 @@
   <?php if (!empty($data['answers'])) { ?>
     <?php foreach ($data['answers'] as $answer) { ?>
       <div class="bg-white br-rd5 br-box-gray p15">
-        <div class="size-14 mb5">
+        <div class="text-sm mb5">
           <a class="gray" href="<?= getUrlByName('user', ['login' => $answer['user_login']]); ?>">
             <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'w18 mr5'); ?>
             <?= $answer['user_login']; ?>
@@ -25,7 +25,7 @@
         <a class="mr5 block" href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>">
           <?= $answer['post_title']; ?>
         </a>
-        <div class="size-15">
+        <div>
           <?= $answer['content']; ?>
         </div>
         <div class="hidden gray">
@@ -42,7 +42,7 @@
 </main>
 <aside class="col-span-3 relative no-mob">
   <div class="sticky top60">
-    <div class="bg-white br-rd5 br-box-gray p15 size-15">
+    <div class="bg-white br-rd5 br-box-gray p15">
       <?= tabs_nav(
         'menu',
         $data['type'],
