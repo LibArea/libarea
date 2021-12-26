@@ -11,7 +11,7 @@
   <article class="post-full br-box-gray br-rd5 bg-white<?php if ($post['post_is_deleted'] == 1) { ?> bg-red-200<?php } ?> mb15 pt0 pr15 pb5 pl15">
     <?php if ($post['post_is_deleted'] == 0 || $uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
       <div class="post-body">
-        <h1 class="mb0 mt10 text-2xl">
+        <h1 class="mb0 mt10 font-normal text-2xl">
           <?= $post['post_title']; ?>
           <?php if ($post['post_is_deleted'] == 1) { ?>
             <i class="bi bi-trash sky-500"></i>
@@ -50,30 +50,30 @@
 
           <?php if ($uid['user_id']) { ?>
             <?php if ($uid['user_login'] == $post['user_login']  || $uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
-              <a class="gray-600 mr10 ml10" href="<?= getUrlByName('post.edit', ['id' => $post['post_id']]); ?>">
+              <a class="gray-400 mr10 ml10" href="<?= getUrlByName('post.edit', ['id' => $post['post_id']]); ?>">
                 <?= Translate::get('edit'); ?>
               </a>
             <?php } ?>
             <?php if ($uid['user_login'] == $post['user_login']) { ?>
               <?php if ($post['post_draft'] == 0) { ?>
                 <?php if ($post['user_my_post'] == $post['post_id']) { ?>
-                  <span class="mu_post gray-600 mr10 ml10">+ <?= Translate::get('in-the-profile'); ?></span>
+                  <span class="mu_post gray-400 mr10 ml10">+ <?= Translate::get('in-the-profile'); ?></span>
                 <?php } else { ?>
-                  <a class="add-post-profile gray-600 mr10 ml10" data-post="<?= $post['post_id']; ?>">
+                  <a class="add-post-profile gray-400 mr10 ml10" data-post="<?= $post['post_id']; ?>">
                     <span class="mu_post"><?= Translate::get('in-the-profile'); ?></span>
                   </a>
                 <?php } ?>
               <?php } ?>
             <?php } ?>
             <?php if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
-              <a data-type="post" data-id="<?= $post['post_id']; ?>" class="type-action gray-600 mr10 ml10">
+              <a data-type="post" data-id="<?= $post['post_id']; ?>" class="type-action gray-400 mr10 ml10">
                 <?php if ($post['post_is_deleted'] == 1) { ?>
                   <i class="bi bi-trash red-500"></i>
                 <?php } else { ?>
                   <i class="bi bi-trash"></i>
                 <?php } ?>
               </a>
-              <a data-id="<?= $post['post_id']; ?>" class="post-recommend gray-600 mr10 ml10">
+              <a data-id="<?= $post['post_id']; ?>" class="post-recommend gray-400 mr10 ml10">
                 <?php if ($post['post_is_recommend'] == 1) { ?>
                   <i class="bi bi-lightning sky-500"></i>
                 <?php } else { ?>

@@ -25,15 +25,15 @@
                   <?php if ($post['post_user_id'] == $answer['answer_user_id']) { ?>
                     <span class="sky-500 mr5 ml0"><i class="bi bi-mic text-sm"></i></span>
                   <?php } ?>
-                  <span class="mr5 ml5 gray-600 lowercase">
+                  <span class="mr5 ml5 gray-400 lowercase">
                     <?= $answer['answer_date']; ?>
                   </span>
                   <?php if (empty($answer['edit'])) { ?>
-                    <span class="mr5 ml10 gray-600">
+                    <span class="mr5 ml10 gray-400">
                       (<?= Translate::get('ed'); ?>.)
                     </span>
                   <?php } ?>
-                  <a rel="nofollow" class="gray-600 mr5 ml10" href="<?= $post_url; ?>#answer_<?= $answer['answer_id']; ?>"><i class="bi bi-hash"></i></a>
+                  <a rel="nofollow" class="gray-400 mr5 ml10" href="<?= $post_url; ?>#answer_<?= $answer['answer_id']; ?>"><i class="bi bi-hash"></i></a>
                   <?= import('/_block/show-ip', ['ip' => $answer['answer_ip'], 'user_trust_level' => $uid['user_trust_level']]); ?>
                 </div>
                 <div class="m0 max-w780">
@@ -45,26 +45,26 @@
 
                 <?php if ($post['post_closed'] == 0) { ?>
                   <?php if ($post['post_is_deleted'] == 0 || $uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
-                    <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray mr5 ml10"><?= Translate::get('reply'); ?></a>
+                    <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray-500 mr5 ml10"><?= Translate::get('reply'); ?></a>
                   <?php } ?>
                 <?php } ?>
 
                 <?php if ($uid['user_id'] == $answer['answer_user_id'] || $uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
                   <?php if ($answer['answer_after'] == 0 || $uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
-                    <a class="editansw gray mr10 ml10" href="/answer/edit/<?= $answer['answer_id']; ?>"> <?= Translate::get('edit'); ?>
+                    <a class="editansw gray-500 mr10 ml10" href="/answer/edit/<?= $answer['answer_id']; ?>"> <?= Translate::get('edit'); ?>
                     </a>
                   <?php } ?>
                 <?php } ?>
 
                 <?php if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
-                  <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray ml10 mr5">
+                  <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray-500 ml10 mr5">
                     <i title="<?= Translate::get('remove'); ?>" class="bi bi-trash"></i>
                   </a>
                 <?php } ?>
 
                 <?php if ($uid['user_id']) { ?>
                   <?php $blue = $answer['favorite_user_id'] ? 'sky-500' : 'gray'; ?>
-                  <a id="fav-comm_<?= $answer['answer_id']; ?>" class="add-favorite mr5 ml15 gray <?= $blue; ?>" data-id="<?= $answer['answer_id']; ?>" data-type="answer">
+                  <a id="fav-comm_<?= $answer['answer_id']; ?>" class="add-favorite mr5 ml15 gray-500 <?= $blue; ?>" data-id="<?= $answer['answer_id']; ?>" data-type="answer">
                     <?php if ($answer['favorite_user_id']) { ?>
                       <i title="<?= Translate::get('remove-favorites'); ?>" class="bi bi-bookmark"></i>
                     <?php } else { ?>
@@ -74,7 +74,7 @@
                 <?php } ?>
 
                 <?php if ($uid['user_id'] != $answer['answer_user_id'] && $uid['user_trust_level'] > Config::get('trust-levels.tl_stop_report')) { ?>
-                  <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray ml15">
+                  <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray-500 ml15">
                     <i title="<?= Translate::get('report'); ?>" class="bi bi-flag"></i>
                   </a>
                 <?php } ?>

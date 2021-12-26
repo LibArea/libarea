@@ -49,10 +49,11 @@ textarea {
   width: 100%;
   font-size: 16px;
   padding: 1px 6px;
-  border: 1px solid #ebebeb;
+  border: 1px solid $slate-300;
 }
 
-input { border: 1px solid #e2e6ed; }
+input, select { border: 1px solid $slate-300; }
+select { background-color: #fff; }
 
 input:focus,
 textarea:focus { border: 1px solid #9ccdf8; }
@@ -99,6 +100,7 @@ textarea:focus { border: 1px solid #9ccdf8; }
 }
 
 .dark input,
+.dark select,
 .dark textarea,
 .dark blockquote,
 .dark table tr:nth-of-type(2n) {
@@ -247,4 +249,7 @@ details[open] > summary {
   padding: 0 10px;
 }
 
-.page p img { max-width: 100%; }
+.page p img { max-width: $width-one-hundred; }
+a:hover > img { opacity: 0.8; }
+.underline-hover:hover { text-decoration: underline; }
+.answ-telo p:first-child {margin-top: $px-five;}

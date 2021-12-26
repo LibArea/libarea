@@ -12,10 +12,13 @@
   <link rel="icon" sizes="120x120" href="/favicon-120.ico" type="image/x-icon">
 </head>
 
-<?php $type  = $data['type'] ?? false;
-$facet = $data['facet'] ?? false; ?>
+<?php  
+  $dark = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
+  $css = $data['type'] == 'web' || $data['type'] == 'page'  ? 'p0 m0 black' : 'p0 m0 black bg-gray-100';
+  $type  = $data['type'] ?? false;
+  $facet = $data['facet'] ?? false; ?>
 
-<body class="p0 m0 black bg-gray-100<?php if (Request::getCookie('dayNight') == 'dark') { ?> dark<?php } ?>">
+<body class="<?= $css; ?><?php if (Request::getCookie('dayNight') == 'dark') { ?> dark<?php } ?>">
 
   <header class="bg-white br-bottom mt0 mb15 <?php if ($type != 'page') { ?>sticky top0<?php } ?> z-30">
     <div class="col-span-12 mr-auto max-width w-100 pr10 pl10 h44 grid items-center flex justify-between">
@@ -32,7 +35,7 @@ $facet = $data['facet'] ?? false; ?>
           </nav>
         </div>
         <div class="mr20 flex items-center">
-          <a title="<?= Translate::get('home'); ?>" class="text-2xl mb-text-xl p5 black dark-white uppercase" href="/">
+          <a title="<?= Translate::get('home'); ?>" class="text-2xl mb-text-xl sky-500-hover p5 black dark-white uppercase" href="/">
             <?= Config::get('meta.name'); ?>
           </a>
         </div>
@@ -101,4 +104,4 @@ $facet = $data['facet'] ?? false; ?>
       <?php }  ?>
     </div>
   </header>
-  <div class="max-width mr-auto w-100 grid grid-cols-12 gap-4 pr5 pl5 justify-between">
+  <div class="max-width mr-auto grid grid-cols-12 gap-4 pr5 pl5">
