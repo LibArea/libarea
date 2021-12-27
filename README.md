@@ -22,6 +22,10 @@ We are trying to study this.
 
 ![Agouti topics](https://raw.githubusercontent.com/AgoutiDev/agouti/main/public/assets/images/agouti3.jpg)
 
+Second design (Q&A) in the system: 
+
+![Agouti Q&A](https://raw.githubusercontent.com/AgoutiDev/agouti/main/public/assets/images/agouti4.jpg)
+
 Demo: https://agouti.ru/
 
 ### For testing
