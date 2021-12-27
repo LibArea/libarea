@@ -27,9 +27,11 @@
   .mb-col-12 { grid-column: span 12 / span 12; }
   .mb-w-100 { width: $width-one-hundred; }
   .mb-ml-10 { margin-left: $px-ten; }
+  .mb-mr-10 { margin-right: $px-ten; }
   .mb-mt-5 { margin-top: $px-five; }
   .mb-mr-5 { margin-right: $px-five; }
   .mb-mb-5 { margin-bottom: $px-five; }
+  .mb-ml-5 { margin-left: $px-five; }
   .mb-ml-0 { margin-left: $px-zero; }
   .mb-pl-0 { padding-left: $px-zero; }
   .mb-pr-0 { padding-right: $px-zero; }

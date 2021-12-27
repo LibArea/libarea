@@ -40,5 +40,23 @@ return [
             'name'  => Translate::get('psychology'),
             'url'   => '/topic/psychology',
         ]
-    ]
+    ],
+    
+    // Types of faces
+    // Типы граней
+    'facet_type' => [
+      [
+        'title' => Translate::get('topic'),
+        'value' => 'topic',
+      ],
+      [
+        'title' => Translate::get('blog'),
+        'value' => 'blog',
+      ],
+      [
+        'title' => Translate::get('section'),
+        'value' => 'section',
+      ]
+    ],
+    
 ];

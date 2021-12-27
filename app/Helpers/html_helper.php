@@ -1,7 +1,5 @@
 <?php
 
-//declare(strict_types = 1);
-
 // Topic for posts
 function html_topic($topic, $slug, $css)
 {
@@ -416,12 +414,6 @@ function no_content($text, $icon)
     return $html;
 }
 
-function sumbit($text)
-{
-    $html  = '<button type="submit" class="btn btn-primary">' . $text . '</button>';
-
-    return $html;
-}
 
 function getMsg()
 {

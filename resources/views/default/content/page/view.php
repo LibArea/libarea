@@ -24,10 +24,10 @@
 </article>
 <div class="p15 m15 hidden">
   <?= votes($uid['user_id'], $page, 'post', 'text-2xl middle', 'block'); ?>
-<div>
-<footer class="bg-gray-200 p60 hidden mt15">
+</div>
+<footer class="bg-gray-100 p60 hidden mt15 mb-pl-0 mb-pr-0">
   <div class="m15 pb15">
-    <div class="p15 mr-auto bg-white hidden br-box-gray br-rd5 max-w640">
+    <div class="p15 mr-auto bg-white hidden br-box-gray br-rd5 max-w640 mb-mr-10 mb-ml-10">
         <?php if ($data['facet']['facet_type'] == 'section') { ?>
           <h3 class="mt0 mb5 font-normal">
             <?= $data['facet']['facet_title']; ?>

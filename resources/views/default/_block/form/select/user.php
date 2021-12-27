@@ -1,6 +1,6 @@
 <?php if ($uid['user_trust_level'] > 4) { ?>
     <div class="mb20 max-w640">
-        <?= Translate::get('author'); ?>: <span class="gray"><?= $user['user_login']; ?></span>
+        <?= Translate::get('author'); ?>
         <input name='user_id' id="user_id">
     </div>
 

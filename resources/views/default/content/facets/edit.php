@@ -82,11 +82,6 @@
         <?= sumbit(Translate::get('download')); ?>
       </div>
 
-      <?= import('/_block/facet/facet-type', [
-        'uid'     => $uid,
-        'data'    => $fs,
-      ]); ?>
-
       <?= import('/_block/form/field-input', [
         'data' => [
           [
@@ -247,8 +242,12 @@
           'title'   => Translate::get('author'),
           'help'    => Translate::get('necessarily'),
         ]); ?>
+ 
+        <?= import('/_block/facet/facet-type', [
+          'uid'   => $uid,
+          'type'  => $fs['facet_type'],
+        ]); ?>
       <?php } ?>
-
       <div class="mb20">
         <input type="hidden" name="facet_id" value="<?= $fs['facet_id']; ?>">
         <?= sumbit(Translate::get('edit')); ?>
