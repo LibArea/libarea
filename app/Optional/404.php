@@ -6,13 +6,14 @@
   <title>Error 404</title>
   <link href="/assets/css/style.css" rel="stylesheet" type="text/css">
   <link rel="icon" href="/favicon.ico" type="image/png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 </head>
 
 <body class="max-width mr-auto w-100 grid grid-cols-12 gap-4 pr10 pl10 justify-between">
   <div class="col-span-2 no-mob"></div>
-  <div class="col-span-8 mb-col-12 bg-white br-rd5 br-box-gray pt10 pr15 pb5 pl15">
-    <div class="mb20">
-      <h1 class="text-3xl font-semibold gray mb0">404</h1>
+  <div class="col-span-8 mb-col-12 bg-white br-rd5 br-box-gray hidden p15 mt15">
+    <div class="mb0">
+      <h1 class="text-3xl font-semibold gray mt0 mb0">404</h1>
       <p class="gray-600"><?= Translate::get('the page does not exist'); ?></p>
       <a class="btn btn-primary" href="/">
         <?= Translate::get('to main'); ?>

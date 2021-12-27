@@ -25,7 +25,7 @@ return [
             'icon'  => 'bi bi-journals',
             'id'    => 'blogs',
         ], [
-            'url'   => getUrlByName('users'),
+            'url'   => getUrlByName('users.all'),
             'title' => Translate::get('users'),
             'icon'  => 'bi bi-people',
             'id'    => 'users',
@@ -203,18 +203,18 @@ return [
     // Левое выпадающее меню для мобильных устройств в шапке сайта
     'mobile' => [
         [
-            'url'   => getUrlByName('topics'),
-            'title'  => Translate::get('topics'),
+            'url'   => getUrlByName('topics.all'),
+            'title' => Translate::get('topics'),
             'icon'  => 'bi bi-columns-gap',
             'id'    => '',
         ], [
-            'url'   => getUrlByName('blogs'),
-            'title'  => Translate::get('blogs'),
+            'url'   => getUrlByName('blogs.all'),
+            'title' => Translate::get('blogs'),
             'icon'  => 'bi bi-journal-text',
             'id'    => '',
         ], [
-            'url'   => getUrlByName('users'),
-            'title'  => Translate::get('users'),
+            'url'   => getUrlByName('users.all'),
+            'title' => Translate::get('users'),
             'icon'  => 'bi bi-people',
             'id'    => '',
         ], [

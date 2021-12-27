@@ -55,7 +55,7 @@
             <i class="bi bi-brightness-high gray-400 text-xl"></i>
           </div>
           <?php if (Config::get('general.invite') == 0) { ?>
-            <a class="register gray ml30 mr15 block" title="<?= Translate::get('sign up'); ?>" href="<?= getUrlByName('register'); ?>">
+            <a class="register gray ml30 mr15 mb-ml-10 mb-mr-5 block" title="<?= Translate::get('sign up'); ?>" href="<?= getUrlByName('register'); ?>">
               <?= Translate::get('sign up'); ?>
             </a>
           <?php } ?>

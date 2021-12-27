@@ -7,7 +7,7 @@
       <a class="table white gray-hover text-sm mb5" title="<?= Translate::get('topics'); ?>" href="<?= getUrlByName('topics'); ?>">
         <?= Translate::get('topics'); ?>
       </a>
-      <a class="table white gray-hover text-sm" title="<?= Translate::get('users'); ?>" href="<?= getUrlByName('users'); ?>">
+      <a class="table white gray-hover text-sm" title="<?= Translate::get('users'); ?>" href="<?= getUrlByName('users.all'); ?>">
         <?= Translate::get('users'); ?>
       </a>
     </div>

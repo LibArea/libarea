@@ -128,11 +128,9 @@ Route::before('Authorization@yesAuth')->getGroup();
 Route::endGroup();
 
 Route::getType('post');
-    // Viewing a post in the feed
     Route::get('/post/shown')->controller('Post\PostController@shownPost');
     Route::get('/user/card')->controller('User\UserController@card');
     Route::get('/msg/go')->controller('Post\AddPostController@msg');
-    // Calling the Comment form
     Route::get('/comments/addform')->controller('Comment\AddCommentController');
 Route::endType();
   
@@ -142,7 +140,7 @@ Route::get('/topic/{slug}/followers/{id}')->controller('Facets\TopicFacetControl
 Route::get('/post/{id}')->controller('Post\PostController')->where(['id' => '[0-9]+']);
 Route::get('/post/{id}/{slug}')->controller('Post\PostController')->where(['id' => '[0-9]+', 'slug' => '[A-Za-z0-9-_]+'])->name('post');
 
-Route::get('/users')->controller('User\UserController', ['users'])->name('users');
+Route::get('/users')->controller('User\UserController', ['users'])->name('users.all');
 Route::get('/users/page/{page?}')->controller('User\UserController')->where(['page' => '[0-9]+']);
 
 Route::get('/u/{login}')->controller('User\UserController@profile')->where(['login' => '[A-Za-z0-9]+'])->name('user');

@@ -33,7 +33,7 @@ class UserController extends MainController
             'og'         => false,
             'twitter'    => false,
             'imgurl'     => false,
-            'url'        => getUrlByName('users'),
+            'url'        => getUrlByName('users.all'),
         ];
 
         return agRender(
