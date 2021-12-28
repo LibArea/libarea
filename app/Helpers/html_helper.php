@@ -1,7 +1,7 @@
 <?php
 
 // Blog or topics
-function html_facet($facet, $slug, $css)
+function html_facet($facet, $type, $css)
 {
     if (!$facet) {
         return '';
@@ -13,8 +13,8 @@ function html_facet($facet, $slug, $css)
 
     $result = [];
     foreach (array_chunk($facet, 3) as $ind => $row) {
-        if ($row[0] == 'topic') {
-            $result[] = '<a class="' . $css . '" href="' . getUrlByName($slug, ['slug' => $row[1]]) . '">' . $row[2] . '</a>';
+        if ($row[0] == $type) {
+            $result[] = '<a class="' . $css . '" href="' . getUrlByName($type, ['slug' => $row[1]]) . '">' . $row[2] . '</a>';
         }
     }
 
