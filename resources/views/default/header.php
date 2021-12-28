@@ -65,7 +65,7 @@
         </div>
       <?php } else { ?>
         <div class="col-span-4">
-          <div class="flex right ml30 items-center">
+          <div class="flex right ml30 mb-ml-10 items-center">
 
             <?= add_post($facet, $uid['user_id']); ?>
 

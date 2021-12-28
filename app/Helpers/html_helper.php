@@ -35,7 +35,7 @@ function html_blog($topic, $slug, $css)
     foreach (array_chunk($topic, 3) as $ind => $row) {
 
         if ($row[0] == 'blog') {
-            $result[] = '<a class="' . $css . ' sky-500" href="' . getUrlByName('blog', ['slug' => $row[1]]) . '">' . $row[2] . '</a>';
+            $result[] = '<a class="' . $css . '" href="' . getUrlByName('blog', ['slug' => $row[1]]) . '">' . $row[2] . '</a>';
         }
     }
     return implode($result);
@@ -233,7 +233,7 @@ function breadcrumb($path_home, $title_home, $path_intermediate, $title_intermed
     return $html;
 }
 
-function votes($user_id, $content, $type, $css = '', $block = '')
+function votes($user_id, $content, $type, $ind, $css = '', $block = '')
 {
     $html  = '';
     $count = '';
@@ -250,8 +250,8 @@ function votes($user_id, $content, $type, $css = '', $block = '')
                         </div></div>';
         } else {
             $num_count = empty($count) ? 0 : $count;
-            $html .= '<div id="up' . $content[$type . '_id'] . '" class="voters sky-600-hover flex ' . $block . ' center gray-400">
-                        <div data-id="' . $content[$type . '_id'] . '" data-count="' . $num_count . '" data-type="' . $type . '" class="up-id bi bi-heart ' . $css . '"></div>
+            $html .= '<div id="up' . $content[$type . '_id'] . '" class="voters-' . $ind . ' sky-600-hover flex ' . $block . ' center gray-400">
+                        <div data-ind="' . $ind . '" data-id="' . $content[$type . '_id'] . '" data-count="' . $num_count . '" data-type="' . $type . '" class="up-id bi bi-heart ' . $css . '"></div>
                         <div class="score">
                             ' . $count . '
                         </div></div>';
@@ -267,15 +267,16 @@ function votes($user_id, $content, $type, $css = '', $block = '')
     return $html;
 }
 
-function favorite_post($user_id, $post_id, $favorite_tid, $css = '')
+// function votes($user_id, $content, $type, $ind, $css = '', $block = '')
+function favorite($user_id, $content_id, $type, $favorite_tid, $ind, $css = '')
 {
     $html  = '';
     if ($user_id > 0) {
         $blue = $favorite_tid ? 'sky-500' : '';
         $my   = $favorite_tid ? 'bi bi-bookmark-dash' : 'bi-bookmark-plus';
-        $html .= '<span id="favorite_' . $post_id . '" class="add-favorite ' . $blue . ' ' . $css . ' gray-600 feed-icon" data-id="' . $post_id . '" data-type="post"><i class="' . $my . ' middle"></i></span>';
+        $html .= '<span id="favorite_' . $content_id . '" class="add-favorite fav-' . $ind . ' ' . $blue . ' ' . $css . ' gray-600" data-ind="' . $ind . '" data-id="' . $content_id . '" data-type="' . $type . '"><i class="' . $my . ' middle"></i></span>';
     } else {
-        $html .= '<span class="click-no-auth gray-400 feed-icon ' . $css . '">
+        $html .= '<span class="click-no-auth gray-400 ' . $css . '">
                     <i class="bi bi-bookmark-plus middle"></i>
                         </span>';
     }

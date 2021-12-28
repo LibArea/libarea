@@ -1,0 +1,1 @@
+<div class="shown_post pt5 pr15 pb15 pl15 bg-gray-100 black"><?= $post['post_content']; ?></div>

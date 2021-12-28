@@ -28,7 +28,7 @@ body {
 }
 
 a {
-  color: $sky-500;
+  color: #4183c4;
   cursor: pointer;
   text-decoration: none;
 }
@@ -36,7 +36,7 @@ a {
 a:hover,
 a:focus,
 a.active {
-  color: $sky-600;
+  color: #1e70bf;
 }
 
 img {
@@ -45,6 +45,7 @@ img {
 }
 
 .top0 { top: $px-zero; }
+.top20 { top: $px-twenty; }
 .top60 { top: $px-sixty; }
 .top70 { top: $px-seventy; }
 .right0 { right: $px-zero; }
@@ -125,8 +126,83 @@ img {
 .pb20 { padding-bottom: 20px; }
 .pl20 { padding-left: 20px; }
 
-.box-shadow { box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);  }
-.box-shadow-all { box-shadow: 0 4px 14px rgba(0,0,0,0.15); ;  }
+
+/*
+ * Colors used in the Agouti project
+ *
+ * Используемые цвета в проекте Агути
+ */
+.black { color: $black; }
+.white { color: $white; }
+.white-hover:hover { color: $white; }
+.gray { color: $gray-700; }
+.green-600 { color: $green-600; }
+.red-500 { color: $red-500; }
+.gray-400 { color: $gray-400; }
+.gray-500 { color: $gray-500; }
+.gray-600 { color: $gray-600; }
+.gray-hover:hover { color: $slate-300; }
+.gray-light-hover:hover { color: $slate-200; }
+.sky-500, .sky-500-hover:hover { color: $sky-500; }
+.sky-600-hover:hover { color: $blue-500; }
+
+
+/*
+ * Background color used in the Agouti project
+ *
+ * Цвет фона, использованный в проекте Агути
+ */
+
+.bg-black { background-color: $black; }
+.bg-white { background-color: $white; }
+
+.bg-green-600 { background-color: $green-600; }
+.bg-green-700 { background-color: $green-700; }
+
+.bg-gray-100 { background-color: $gray-100; }
+.bg-gray-500 { background-color: $gray-500; }
+.bg-gray-700 { background-color: $gray-700; }
+
+.bg-zinc-800 { background-color: $zinc-800; }
+
+.bg-yellow-100 { background-color: $yellow-100; }
+.bg-yellow-500 { background-color: $yellow-500; }
+
+.bg-purple-100 { background-color: $purple-100; }
+
+.bg-indigo-300 { background-color: $indigo-300; }
+
+.bg-orange-500 { background-color: $orange-500; }
+
+.bg-blue-100 { background-color: $blue-100; }
+.bg-blue-400 { background-color: $blue-400; }
+.bg-blue-500 { background-color: $blue-500; }
+
+.bg-sky-50 { background-color: $sky-50; }
+
+.bg-red-200 { background-color: $red-200; }
+.bg-red-300 { background-color: $red-300; }
+.bg-red-500 { background-color: $red-500; }
+
+.bg-pink-800  { background-color: $pink-800; }
+
+.bg-orange-800 { background-color: $orange-800; }
+
+.bg-hover-green:hover { background-color: #5fb878; }
+.bg-hover-gray:hover { background-color: #f5f7fa; }
+.bg-hover-blue:hover { background-color: #0085EE; }
+.bg-hover-light-blue:hover { background-color: #31A2FA; }
+.bg-hover-light:hover { background-color: rgba(0, 154, 97, 0.08); }
+
+
+/*
+ * Other
+ *
+ * Другое
+ */
+
+.box-shadow { box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2); }
+.box-shadow-all { box-shadow: 0 4px 14px rgba(0,0,0,0.15); }
 
 .br-box-gray { border: 1px solid #ededed; }
 .br-box-blue { border: 1px solid #0085EE; }
@@ -171,7 +247,7 @@ img {
 .max-w460 { max-width: 460px; }
 .max-w640 { max-width: 640px; }
 .max-w780 { max-width: 780px; }
-.max-w1140 { max-width: 1140px; }
+.max-w1240 { max-width: 1240px; }
 .max-width { max-width: 1636px; }
 
 .z-10 { z-index: 10; }
@@ -189,6 +265,7 @@ img {
 .h44 { height: 44px; }
 .h80 { height: 80px; }
 
+.text-xs { font-size: $fontSize-xs; }
 .text-sm { font-size: $fontSize-sm; }
 .text-lg { font-size: $fontSize-lg; }
 .text-xl { font-size: $fontSize-xl; }

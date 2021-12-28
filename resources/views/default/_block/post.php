@@ -95,7 +95,7 @@
       </div>
       <div class="flex flex-row items-center justify-between pt10">
         <div class="flex flex-row">
-          <?= votes($uid['user_id'], $post, 'post', 'mr5'); ?>
+          <?= votes($uid['user_id'], $post, 'post', 'ps', 'mr5'); ?>
           <?php if ($post['post_answers_count'] != 0) { ?>
             <a class="flex gray-400 ml15" href="<?= $post_url; ?>#comment">
               <i class="bi bi-chat-text mr5"></i>
@@ -104,7 +104,7 @@
           <?php } ?>
         </div>
         <div class="flex flex-row items-center">
-          <?= favorite_post($uid['user_id'], $post['post_id'], $post['favorite_tid']); ?>
+          <?= favorite($uid['user_id'], $post['post_id'], 'post', $post['favorite_tid'], 'ps', ''); ?>
         </div>
       </div>
     </div>

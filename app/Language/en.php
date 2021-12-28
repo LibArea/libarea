@@ -4,6 +4,7 @@ $data = [
     'to the website'    => 'To the website',
     'feed'              => 'Feed',
     'hi'                => 'Hi',
+    'news'              => 'News',
     'top'               => 'TOP',
     'admin'             => 'Admin panel',
     'tools'             => 'Tools',
@@ -266,6 +267,7 @@ $data = [
     'num-view'      => ['View', 'View', 'Views'],
     'num-website'   => ['Website', 'Sites', 'Sites'],
     'num-blog'      => ['Blog', 'Blogs', 'Blogs'],
+    'num-up'        => ['Vote', 'Votes', 'Votes'],
 
     'comment'       => 'Comment',
     'comments'      => 'Comments',
@@ -283,7 +285,8 @@ $data = [
     'format Q&A?'           => 'Format Q&A?',
     'raise?'                => 'Raise?',
     'is this a draft?'      => 'Is this a draft?',
-
+    'default'               => 'Ddefault',
+    'qa'                    => 'Q&A',
     'moderation log'        => 'Moderation log',
     'no moderation logs'    => 'No logs found in the moderation log',
     'meta-moderation'       => 'Actions of members and moderators to remove and restore content in the community.',

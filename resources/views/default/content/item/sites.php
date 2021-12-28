@@ -128,7 +128,7 @@
                 </div>
               </div>
               <div class="hidden lowercase ml-auto pr10">
-                <?= votes($uid['user_id'], $item, 'item', 'mr5'); ?>
+                <?= votes($uid['user_id'], $item, 'item', 'ps', 'mr5'); ?>
               </div>
             </div>
           </div>
@@ -145,5 +145,5 @@
 <div class="bg-white p15 no-mob br-box-gray">
   <?= $data['topic']['facet_description']; ?>
 </div>
-
+</div>
 <?= import('/_block/wide-footer'); ?>

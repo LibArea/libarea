@@ -78,4 +78,5 @@
   </div>
 
 </main>
+</div>
 <?= import('/_block/wide-footer'); ?>

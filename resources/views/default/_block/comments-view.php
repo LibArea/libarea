@@ -41,7 +41,7 @@
                 </div>
               </div>
               <div class="flex text-sm">
-                <?= votes($uid['user_id'], $answer, 'answer', 'mr5'); ?>
+                <?= votes($uid['user_id'], $answer, 'answer', 'ps', 'mr5'); ?>
 
                 <?php if ($post['post_closed'] == 0) { ?>
                   <?php if ($post['post_is_deleted'] == 0 || $uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
@@ -62,16 +62,7 @@
                   </a>
                 <?php } ?>
 
-                <?php if ($uid['user_id']) { ?>
-                  <?php $blue = $answer['favorite_user_id'] ? 'sky-500' : 'gray'; ?>
-                  <a id="fav-comm_<?= $answer['answer_id']; ?>" class="add-favorite mr5 ml15 gray-500 <?= $blue; ?>" data-id="<?= $answer['answer_id']; ?>" data-type="answer">
-                    <?php if ($answer['favorite_user_id']) { ?>
-                      <i title="<?= Translate::get('remove-favorites'); ?>" class="bi bi-bookmark"></i>
-                    <?php } else { ?>
-                      <i title="<?= Translate::get('add-favorites'); ?>" class="bi bi-bookmark"></i>
-                    <?php } ?>
-                  </a>
-                <?php } ?>
+                <?= favorite($uid['user_id'], $answer['answer_id'], 'answer', $answer['favorite_tid'], 'ps', 'ml5'); ?>
 
                 <?php if ($uid['user_id'] != $answer['answer_user_id'] && $uid['user_trust_level'] > Config::get('trust-levels.tl_stop_report')) { ?>
                   <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray-500 ml15">
@@ -155,7 +146,7 @@
                   </div>
                 </div>
                 <div class="text-sm flex">
-                  <?= votes($uid['user_id'], $comment, 'comment', 'mr5'); ?>
+                  <?= votes($uid['user_id'], $comment, 'comment', 'ps', 'mr5'); ?>
 
                   <?php if ($post['post_closed'] == 0) { ?>
                     <?php if ($post['post_is_deleted'] == 0 || $uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>

@@ -4,6 +4,7 @@ $data = [
     'to the website'    => '到网站',
     'feed'              => '饲料',
     'hi'                => '你好',
+    'news'              => '新闻',
     'top'               => '最佳',
     'admin'             => '管理面板',
     'tools'             => '工具',
@@ -267,6 +268,7 @@ $data = [
     'num-view'      => ['視圖', '視圖', '視圖'],
     'num-website'   => ['網站', '站點', '站點'],
     'num-blog'      => ['博客', '博客', '博客'],
+    'num-up'        => ['声音', '声音', '声音'],
 
     'comment'       => '評論',
     'comments'      => '評論',
@@ -284,7 +286,8 @@ $data = [
     'format Q&A?'           => '格式問答？',
     'raise?'                => '加註？',
     'is this a draft?'      => '這是草稿嗎？',
-
+    'default'               => '默認',
+    'qa'                    => '問題與解答',
     'moderation log'        => '審核日誌',
     'no moderation logs'    => '在審核日誌中找不到日誌',
     'meta-moderation'       => '成員和版主刪除和恢復社區內容的操作。',

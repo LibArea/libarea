@@ -66,7 +66,7 @@
                   </div>
                 </div>
                 <div class="hidden lowercase ml-auto">
-                  <?= votes($uid['user_id'], $item, 'item', 'mr5'); ?>
+                  <?= votes($uid['user_id'], $item, 'item', 'ps', 'mr5'); ?>
                 </div>
               </div>
             </div>
@@ -91,4 +91,5 @@
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('web')); ?>
   </div>
 </main>
+</div>
 <?= import('/_block/wide-footer'); ?>

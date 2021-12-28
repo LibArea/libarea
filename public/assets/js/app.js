@@ -61,6 +61,8 @@ document.querySelectorAll(".up-id")
     let up_id = el.dataset.id;
     let type_content = el.dataset.type;
     let count = el.dataset.count;
+    let ind = el.dataset.ind;
+
     fetch("/votes/" + type_content, {
       method: "POST",
       body: "up_id=" + up_id,
@@ -70,10 +72,34 @@ document.querySelectorAll(".up-id")
         return;
       }).then((text) => {
         let new_cont = (parseInt(count) + parseInt(1));
-        let upVot = document.querySelector('#up' + up_id + '.voters');
-        let upScr = document.querySelector('#up' + up_id).querySelector('.score');
+        let upVot = document.querySelector('#up' + up_id + '.voters-' + ind);
+        let upScr = upVot.querySelector('.score');
         upVot.classList.add('sky-500');
         upScr.replaceWith(new_cont);
+      });
+  }));
+  
+// Add / Remove from favorites
+document.querySelectorAll(".add-favorite")
+  .forEach(el => el.addEventListener("click", function (e) {
+    let content_id = el.dataset.id;
+    let content_type = el.dataset.type;
+    let front = el.dataset.front;
+    let ind = el.dataset.ind;
+    fetch("/favorite/" + content_type, {
+      method: "POST",
+      body: "content_id=" + content_id,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    })
+      .then((response) => {
+        return;
+      }).then((text) => {
+        if (front == 'personal') {
+          location.reload();
+        } else {
+            let dom = document.querySelector("#favorite_" + content_id + '.fav-' + ind);
+            dom.classList.toggle("sky-500");
+        }
       });
   }));
 
@@ -123,32 +149,6 @@ document.querySelectorAll(".post-recommend")
         return;
       }).then((text) => {
         location.reload();
-      });
-  }));
-
-// Add / Remove from favorites
-document.querySelectorAll(".add-favorite")
-  .forEach(el => el.addEventListener("click", function (e) {
-    let content_id = el.dataset.id;
-    let content_type = el.dataset.type;
-    let front = el.dataset.front;
-    fetch("/favorite/" + content_type, {
-      method: "POST",
-      body: "content_id=" + content_id,
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-    })
-      .then((response) => {
-        return;
-      }).then((text) => {
-        if (front == 'personal') {
-          location.reload();
-        } else {
-          if (content_type == 'post') {
-            document.getElementById("favorite_" + content_id).classList.toggle("sky-500");
-          } else {
-            document.getElementById("fav-comm_" + content_id).classList.toggle("sky-500");
-          }
-        }
       });
   }));
 

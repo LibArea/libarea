@@ -1,9 +1,9 @@
 <?php $post = $data['post']; ?>
 <div class="col-span-1 no-mob center">
   <div class="sticky top70">
-    <?= votes($uid['user_id'], $post, 'post', 'text-2xl middle', 'block'); ?>
+    <?= votes($uid['user_id'], $post, 'post', 'ps', 'text-2xl middle', 'block'); ?>
     <div class="pt20">
-      <?= favorite_post($uid['user_id'], $post['post_id'], $post['favorite_tid'], 'text-2xl'); ?>
+      <?= favorite($uid['user_id'], $post['post_id'], 'post', $post['favorite_tid'], 'ps', 'text-2xl'); ?>
     </div>
   </div>
 </div>
@@ -138,7 +138,7 @@
 
       <div class="br-box-gray dark-br-black flex items-center mb5">
         <div class="left p10 no-pc">
-          <?= votes($uid['user_id'], $post, 'post', 'text-2xl mr5 middle'); ?>
+          <?= votes($uid['user_id'], $post, 'post', 'mob', 'text-2xl mr5 middle'); ?>
         </div>
 
         <ul class="list-none w-100 p0 m0 lowercase">
@@ -211,7 +211,7 @@
         </div>
 
         <div class="right ml15 p10 no-pc">
-          <?= favorite_post($uid['user_id'], $post['post_id'], $post['favorite_tid'], 'text-2xl'); ?>
+          <?= favorite($uid['user_id'], $post['post_id'], 'post', $post['favorite_tid'], 'mob', 'text-2xl'); ?>
         </div>
       </div>
 

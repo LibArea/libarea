@@ -3,3 +3,18 @@
  *
  * Дополнительные стили
  */
+ 
+.tags-xs {
+  margin-right: 5px;
+  padding: 2px 6px 2px 6px;
+  border-bottom: 1px solid #bbbbbb;
+  background-color: #ececec;
+  color: #6b3e4a;
+  border-radius: 3px;
+  font-size: $fontSize-xs;
+}
+
+.tags-xs:hover {
+  color: #444;
+  background-color: #fff;
+}

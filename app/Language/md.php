@@ -3,6 +3,7 @@ $data = [
     'home'              => 'Acasă',
     'to the website'    => 'Pe site',
     'top'               => 'TOP',
+    'news'              => 'Știri',
     'tools'             => 'Instrumente',
     'template'          => 'Șablon',
     'create post'       => 'Scrie o postare',
@@ -260,6 +261,7 @@ $data = [
     'num-view'      => ['Vizualizare', 'Vizualizare', 'Vizualizări'],
     'num-website'   => ['Site web', 'Site-uri', 'Site-uri'],
     'num-blog'      => ['Blog', 'Bloguri', 'Bloguri'],
+    'num-up'        => ['Vot', 'Voturi', 'Voturi'],
 
     'comment'       => 'Comentariu',
     'comments'      => 'Comentarii',
@@ -273,7 +275,8 @@ $data = [
     'to close'              => 'Închide',
     'format'                => 'Format',
     'raise'                 => 'Ridica',
-
+    'default'               => 'Mod implicit',
+    'qa'                    => 'Intrebari si raspunsuri',
     'moderation log'        => 'Jurnal de moderare',
     'no moderation logs'    => 'Nu s-au găsit jurnale în jurnalul de moderare',
     'meta-moderation'       => 'Acțiuni ale membrilor și moderatorilor pentru eliminarea și restabilirea conținutului din comunitate.',

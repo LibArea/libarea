@@ -40,6 +40,6 @@ function agIncludeTemplate(string $template, array $params = [])
 
 function import($template, array $params = [])
 {
-    $uid = Base::getUid();
+    $uid = \Base::getUid();
     insertTemplate($uid['user_template'] . $template, $params);
 }

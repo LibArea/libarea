@@ -26,7 +26,7 @@
                 <?= $answer['answer_content'] ?>
               </div>
               <div class="flex text-sm">
-                <?= votes($uid['user_id'], $answer, 'answer', 'mr5'); ?>
+                <?= votes($uid['user_id'], $answer, 'answer', 'ps', 'mr5'); ?>
 
                 <?php if ($uid['user_trust_level'] >= Config::get('trust-levels.tl_add_comm_qa')) { ?>
                   <?php if ($post['post_closed'] == 0) { ?>
@@ -45,16 +45,9 @@
                     <i title="<?= Translate::get('remove'); ?>" class="bi bi-trash"></i>
                   </a>
                 <?php } ?>
-                <?php if ($uid['user_id']) { ?>
-                  <?php $blue = $answer['favorite_user_id'] ? 'sky-500' : 'gray'; ?>
-                  <span id="fav-comm_<?= $answer['answer_id']; ?>" class="add-favorite gray ml15 mr5 <?= $blue; ?>" data-id="<?= $answer['answer_id']; ?>" data-type="answer">
-                    <?php if ($answer['favorite_user_id']) { ?>
-                      <i title="<?= Translate::get('remove-favorites'); ?>" class="bi bi-bookmark middle"></i>
-                    <?php } else { ?>
-                      <i title="<?= Translate::get('add-favorites'); ?>" class="bi bi-bookmark middle"></i>
-                    <?php } ?>
-                  </span>
-                <?php } ?>
+               
+               <?= favorite($uid['user_id'], $answer['answer_id'], 'answer', $answer['favorite_tid'], 'ps', 'ml5'); ?>
+               
                 <?php if ($uid['user_id'] != $answer['answer_user_id'] && $uid['user_trust_level'] > Config::get('trust-levels.tl_stop_report')) { ?>
                   <a data-post_id="<?= $post['post_id']; ?>" data-type="answer" data-content_id="<?= $answer['answer_id']; ?>" class="msg-flag gray ml15">
                     <i title="<?= Translate::get('report'); ?>" class="bi bi-flag"></i>
