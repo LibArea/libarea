@@ -73,7 +73,7 @@
             </a>
             <?php if ($topic['matching_list']) { ?><div class="ml<?= $topic['level'] * 10; ?>">
                 <i class="bi bi-bezier2 gray-600 text-sm mr5 ml5"></i>
-                <?= html_topic($topic['matching_list'], 'topic', 'gray-600 text-sm mr15'); ?>
+                <?= html_facet($topic['matching_list'], 'topic', 'gray-600 text-sm mr15'); ?>
               </div>
             <?php } ?>
           </div>

@@ -1,43 +1,23 @@
 <?php
 
-// Topic for posts
-function html_topic($topic, $slug, $css)
+// Blog or topics
+function html_facet($facet, $slug, $css)
 {
-    if (!$topic) {
+    if (!$facet) {
         return '';
     }
 
-    if (!is_array($topic)) {
-        $topic = preg_split('/(@)/', $topic);
+    if (!is_array($facet)) {
+        $facet = preg_split('/(@)/', $facet);
     }
 
     $result = [];
-    foreach (array_chunk($topic, 3) as $ind => $row) {
+    foreach (array_chunk($facet, 3) as $ind => $row) {
         if ($row[0] == 'topic') {
             $result[] = '<a class="' . $css . '" href="' . getUrlByName($slug, ['slug' => $row[1]]) . '">' . $row[2] . '</a>';
         }
     }
 
-    return implode($result);
-}
-
-function html_blog($topic, $slug, $css)
-{
-    if (!$topic) {
-        return '';
-    }
-
-    if (!is_array($topic)) {
-        $topic = preg_split('/(@)/', $topic);
-    }
-
-    $result = [];
-    foreach (array_chunk($topic, 3) as $ind => $row) {
-
-        if ($row[0] == 'blog') {
-            $result[] = '<a class="' . $css . '" href="' . getUrlByName('blog', ['slug' => $row[1]]) . '">' . $row[2] . '</a>';
-        }
-    }
     return implode($result);
 }
 

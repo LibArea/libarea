@@ -25,7 +25,7 @@
         <a class="text-2xl block" href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
           <?= $post['title']; ?>
         </a>
-        <?= html_topic($post['facet_list'], 'topic', 'black mr15 inline text-sm'); ?>
+        <?= html_facet($post['facet_list'], 'topic', 'black mr15 inline text-sm'); ?>
         <div class="gray"><?= $post['content']; ?>...</div>
         <div class="flex flex-row items-center justify-between mt10 text-sm gray">
           <a class="flex flex-row items-center black mr15 gray" href="<?= getUrlByName('user', ['login' => $post['user_login']]); ?>">

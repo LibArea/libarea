@@ -62,7 +62,7 @@
                   <?php } ?>
 
                   <div class="lowercase">
-                    <?= html_topic($item['facet_list'], 'web.topic', 'gray-600 mr15'); ?>
+                    <?= html_facet($item['facet_list'], 'web.topic', 'gray-600 mr15'); ?>
                   </div>
                 </div>
                 <div class="hidden lowercase ml-auto">

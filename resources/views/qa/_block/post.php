@@ -60,8 +60,8 @@
         </div>
         <div class="flex flex-row flex-auto items-center justify-between lowercase">
           <div class="flex-auto">
-            <?= html_blog($post['facet_list'], 'blog', 'gray text-xs mr15'); ?>
-            <?= html_topic($post['facet_list'], 'topic', 'tags-xs'); ?>
+            <?= html_facet($post['facet_list'], 'blog', 'gray text-xs mr15'); ?>
+            <?= html_facet($post['facet_list'], 'topic', 'tags-xs'); ?>
             <?php if ($post['post_url_domain']) { ?>
               <a class="gray-600 text-sm ml10" href="<?= getUrlByName('domain', ['domain' => $post['post_url_domain']]); ?>">
                 <i class="bi bi-link-45deg middle"></i> <?= $post['post_url_domain']; ?>
