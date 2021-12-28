@@ -72,6 +72,7 @@ Route::before('Authorization@admin')->getGroup();
     Route::get('/badges/user/add/{id}')->controller('Admin\BadgesController@addUserPage', ['add', 'badges'])->where(['id' => '[0-9]+'])->name('admin.badges.user.add');
   
     Route::get('/webs')->controller('Admin\WebsController', ['sites.all', 'sites'])->name('admin.sites');
+    Route::get('/webs/page/{page?}')->controller('Admin\WebsController', ['sites.all', 'sites'])->where(['page' => '[0-9]+']);
     
     Route::get('/words/add')->controller('Admin\WordsController@addPage', ['add', 'words'])->name('words.add');
     Route::get('/words')->controller('Admin\WordsController', ['words.all', 'words'])->name('admin.words');

@@ -32,7 +32,7 @@
         <?php if ($item['item_published'] == 1) { ?>
           <div class="pt20 pb5 flex flex-row gap-2">
             <div class="mr20 w200 no-mob">
-              <?= thumbs_img($item['item_url_domain'], $item['item_title_url'], 'mr5 mt5 w200 box-shadow'); ?>
+              <?= website_img($item['item_url_domain'], 'thumbs', $item['item_url_domain'], 'mr5 mt5 w200 box-shadow'); ?>
             </div>
             <div class="w-100">
               <a class="pt0 pr5 dark-white text-2xl" href="<?= getUrlByName('web.website', ['slug' => $item['item_url_domain']]); ?>">
@@ -49,7 +49,7 @@
                 <?= $item['item_content_url']; ?>
               </div>
               <div class="flex flex-row gap-2 items-center max-w780">
-                <?= favicon_img($item['item_id'], $item['item_url_domain']); ?>
+                <?= website_img($item['item_url_domain'], 'favicon', $item['item_url_domain'], 'mr5 w18 h18'); ?>
                 <div class="green-600 text-sm">
 
                   <?= $item['item_url_domain']; ?>
@@ -91,4 +91,5 @@
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('web')); ?>
   </div>
 </main>
+</div>
 <?= import('/_block/wide-footer'); ?>

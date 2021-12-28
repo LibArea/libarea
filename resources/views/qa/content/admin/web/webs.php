@@ -65,7 +65,7 @@
             <?= Translate::get('edit'); ?>
           </a>
           <span class="right mr5">
-            <?= favicon_img($item['item_id'], $item['item_url_domain']); ?>
+            <?= website_img($item['item_url_domain'], 'favicon', $item['item_url_domain'], 'mr5 w18 h18'); ?>
           </span>
           <?php if ($item['item_published'] == 0) { ?>
             <span class="ml15 red-500"> <?= Translate::get('posted'); ?> (<?= Translate::get('no'); ?>) </span>
@@ -76,6 +76,8 @@
   <?php } else { ?>
     <?= no_content(Translate::get('no'), 'bi bi-info-lg'); ?>
   <?php } ?>
+  
+  <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('admin.sites')); ?>
 </div>
-
+ 
 </main>

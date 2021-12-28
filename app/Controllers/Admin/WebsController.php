@@ -56,7 +56,7 @@ class WebsController extends MainController
         $item       = WebModel::getItemId($item_id);
         pageError404($item);
 
-        $puth = HLEB_PUBLIC_DIR . AG_PATH_FAVICONS . $item["item_id"] . '.png';
+        $puth = HLEB_PUBLIC_DIR . AG_PATH_FAVICONS . $item["item_url_domain"] . '.png';
         $dirF = HLEB_PUBLIC_DIR . AG_PATH_FAVICONS;
 
         if (!file_exists($puth)) {

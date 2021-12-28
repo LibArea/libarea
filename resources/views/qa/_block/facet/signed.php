@@ -1,6 +1,6 @@
 <?php if (!$user_id) { ?>
   <a href="<?= getUrlByName('login'); ?>">
-    <div class="bg-sky-50 sky-500 bg-hover-gray br-sky-100 inline br-rd20 center pt5 pr15 pb5 pl15">
+    <div class="bg-sky-50 sky-500 bg-hover-gray box-shadow-all br-sky-100 inline br-rd20 center pt5 pr15 pb5 pl15">
       + <?= Translate::get('read'); ?>
     </div>
   </a>

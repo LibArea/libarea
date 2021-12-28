@@ -1,7 +1,7 @@
 <?php $topic = $data['facet']; ?>
 <main class="col-span-9 mb-col-12">
   <?php if ($topic['facet_is_deleted'] == 0) { ?>
-    <div class="bg-white flex flex-row items-center justify-between br-rd5 br-box-gray mb15 p15">
+    <div class="bg-white flex flex-row items-center justify-between br-rd5 br-box-gray box-shadow-all mb15 p15">
       <div class="no-mob">
         <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'w94 br-box-gray mt5'); ?>
       </div>
@@ -32,7 +32,7 @@
       </div>
     </div>
 
-    <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
+    <div class="bg-white flex flex-row items-center justify-between br-box-gray box-shadow-all br-rd5 p15 mb15">
       <p class="m0 text-xl no-mob"><?= Translate::get('feed'); ?></p>
       <ul class="flex flex-row list-none m0 p0 center">
 
@@ -80,7 +80,7 @@
 </main>
 <aside class="col-span-3 relative no-mob">
   <?php if ($topic['facet_is_deleted'] == 0) { ?>
-    <div class="bg-white flex justify-center br-rd5 mb15 br-box-gray p15">
+    <div class="bg-white flex justify-center br-rd5 mb15 br-box-gray box-shadow-all p15">
       <div class="mr15 center box-number">
         <div class="uppercase mb5 text-sm gray"><?= Translate::get('posts'); ?></div>
         <?= $topic['facet_count']; ?>
@@ -95,7 +95,7 @@
 
     <?php if (!empty($data['pages'])) { ?>
       <div class="sticky top0 top20">
-        <div class="br-box-gray mt15 p15 mb15 br-rd5 bg-white text-sm">
+        <div class="br-box-gray box-shadow-all mt15 p15 mb15 br-rd5 bg-white text-sm">
           <div class="uppercase gray mt5 mb5"> <?= Translate::get('pages'); ?></div>
           <?php foreach ($data['pages'] as $ind => $row) { ?>
             <a class="flex relative pt5 pb5 items-center hidden gray-600" href="">
@@ -109,7 +109,7 @@
     <?= import('/_block/sidebar/topic', ['data' => $data, 'uid' => $uid]); ?>
     <?php if (!empty($data['writers'])) { ?>
       <div class="sticky top0 top20">
-        <div class="br-box-gray mt15 p15 mb15 br-rd5 bg-white text-sm">
+        <div class="br-box-gray box-shadow-all mt15 p15 mb15 br-rd5 bg-white text-sm">
           <div class="uppercase gray mt5 mb5"> <?= Translate::get('writers'); ?></div>
           <?php foreach ($data['writers'] as $ind => $row) { ?>
             <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('user', ['login' => $row['user_login']]); ?>">

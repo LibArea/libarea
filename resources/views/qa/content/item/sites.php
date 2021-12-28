@@ -97,7 +97,7 @@
       <?php foreach ($data['items'] as $key => $item) { ?>
         <div class="pt20 pb5 flex flex-row gap-2">
           <div class="mr20 w200 no-mob">
-            <?= thumbs_img($item['item_url_domain'], $item['item_title_url'], 'mr5 w200 box-shadow'); ?>
+            <?= website_img($item['item_url_domain'], 'thumbs', $item['item_title_url'], 'mr5 w200 box-shadow'); ?>
           </div>
           <div class="mr20 flex-auto">
             <a class="dark-white" href="<?= getUrlByName('web.website', ['slug' => $item['item_url_domain']]); ?>">
@@ -109,7 +109,7 @@
               <?= $item['item_content_url']; ?>
             </div>
             <div class="flex flex-row gap-2 items-center max-w780">
-              <?= favicon_img($item['item_id'], $item['item_url_domain']); ?>
+              <?= website_img($item['item_url_domain'], 'favicon', $item['item_url_domain'], 'mr5 w18 h18'); ?>
               <div class="green-600 text-sm">
                 <?= $item['item_url_domain']; ?>
                 <?php if ($item['item_github_url']) { ?>

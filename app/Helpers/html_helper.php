@@ -74,25 +74,18 @@ function post_img($file, $alt, $style, $type, $attributes = '')
     return $img;
 }
 
-function favicon_img($link_id, $alt)
+function website_img($domain, $type, $alt, $css = '')
 {
-    if (file_exists(HLEB_PUBLIC_DIR . AG_PATH_FAVICONS . $link_id . '.png')) {
-        $img = '<img class="mr5 w18 h18" src="' . AG_PATH_FAVICONS . $link_id . '.png" alt="' . $alt . '">';
+    $path = AG_PATH_FAVICONS;
+    if ($type == 'thumbs') $path = AG_PATH_THUMBS;
+
+    if (file_exists(HLEB_PUBLIC_DIR . $path . $domain . '.png')) {
+        $img = '<img class="' . $css . '" src="' . $path . $domain . '.png" alt="' . $alt . '">';
         return $img;
     }
 
-    $img = '<img class="mr5 w18 h18" src="' . AG_PATH_FAVICONS . 'no-link.png" alt="' . $alt . '">';
-    return $img;
-}
-
-function thumbs_img($url_domain, $alt, $css)
-{
-    if (file_exists(HLEB_PUBLIC_DIR . AG_PATH_THUMBS . $url_domain . '.png')) {
-        $img = '<img class="' . $css . '" src="' . AG_PATH_THUMBS . $url_domain . '.png" alt="' . $alt . '">';
-        return $img;
-    }
-
-    $img = '<img class="mr5 w200" src="' . AG_PATH_THUMBS . 'default.png" alt="' . $alt . '">';
+    $img = '<img class="mr5 w18 h18" src="' . $path . 'no-link.png" alt="' . $alt . '">';
+    
     return $img;
 }
 

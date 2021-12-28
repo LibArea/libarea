@@ -22,13 +22,13 @@
     </h1>
 
     <div class="flex flex-auto">
-      <?= thumbs_img($data['item']['item_url_domain'], $data['item']['item_title_url'], 'mr5 mt5 w400 mb-w-100 box-shadow'); ?>
+      <?= website_img($data['item']['item_url_domain'], 'thumbs', $data['item']['item_title_url'], 'mr5 mt5 w400 mb-w-100 box-shadow'); ?>
       <div class="ml60 mt15 mb-ml-0">
         <?= $data['item']['item_content_url']; ?>
 
         <div class="gray mt20 mb5">
           <a class="green-600" target="_blank" rel="nofollow noreferrer ugc" href="<?= $data['item']['item_url']; ?>">
-            <?= favicon_img($data['item']['item_id'], $data['item']['item_url_domain']); ?>
+            <?= website_img($data['item']['item_id'], 'favicon', $data['item']['item_url_domain'], 'mr5 w18 h18'); ?>
             <?= $data['item']['item_url']; ?>
           </a>
         </div>
