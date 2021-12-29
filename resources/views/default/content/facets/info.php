@@ -1,11 +1,10 @@
-<div class="sticky top0 col-span-2 justify-between no-mob">
-  <?= tabs_nav(
-        'menu',
-        $data['type'],
-        $uid,
-        $pages = Config::get('menu.left'),
-      ); ?>
-</div>
+<?= tabs_nav(
+      'menu',
+      $data['type'],
+      $uid,
+      $pages = Config::get('menu.left'),
+    ); ?>
+
 <?php $facet = $data['facet']; ?>
 <main class="col-span-7 mb-col-12">
   <div class="bg-white br-rd5 br-box-gray pt5 pr15 pb5 mb15 pl15">
@@ -29,8 +28,9 @@
   <?= import(
     '/_block/related-posts',
     [
-      'related_posts' => $data['related_posts'],
-      'number' => 'yes'
+      'uid'             => $uid,
+      'related_posts'   => $data['related_posts'],
+      'number'          => 'yes'
     ]
   ); ?>
 
@@ -51,4 +51,5 @@
 
   <?= import('/_block/sidebar/topic', ['data' => $data, 'uid' => $uid]); ?>
 </aside>
-<?= import('/_block/wide-footer'); ?>
+</div>
+<?= import('/_block/wide-footer', ['uid' => $uid]); ?>

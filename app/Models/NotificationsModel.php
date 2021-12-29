@@ -142,6 +142,7 @@ class NotificationsModel extends MainModel
                     post_published,
                     post_user_id,
                     post_votes,
+                    post_hits_count,
                     post_answers_count,
                     post_comments_count,
                     post_content,

@@ -1,15 +1,6 @@
-<?php if ($uid['user_id'] == 0) { ?>
-  <div class="col-span-12 grid items-center grid-cols-12 mb5">
-    <div class="col-span-12 bg-white br-box-gray br-rd5 p20 center">
-      <h1 class="text-3xl mb-text-xl font-normal mt0 mb5"><?= Config::get('meta.banner_title'); ?></h1>
-      <div class="gray-600 mb5"><?= Config::get('meta.banner_desc'); ?>...</div>
-    </div>
-  </div>
-<?php } ?>
-
 <main class="col-span-9 mb-col-12">
   <div class="bg-white flex flex-row items-center justify-between br-rd5 p15 mb15">
-    <p class="m0 text-xl"><?= Translate::get('feed'); ?></p>
+    <p class="m0 text-xl"><!--?= Translate::get('feed'); ?--></p>
     <ul class="flex flex-row list-none m0 p0 center">
 
      <?= tabs_nav(
@@ -51,7 +42,7 @@
 
 <aside class="col-span-3 mb-col-12 relative no-mob">
   <?php if ($uid['user_id'] == 0) { ?>
-    <?= import('/_block/sidebar/login'); ?>
+    <?= import('/_block/sidebar/login', ['uid' => $uid]); ?>
   <?php } ?>
 
   <?php if ($uid['user_id'] > 0 && !empty($data['topics_user'])) { ?>
@@ -131,6 +122,6 @@
       </div>
     <?php } ?>
 
-    <?= import('/_block/sidebar/footer'); ?>
+    <?= import('/_block/sidebar/lang', ['lang' => [], 'uid' => $uid]); ?>
   </div>
 </aside>

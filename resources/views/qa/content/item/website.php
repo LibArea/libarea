@@ -79,7 +79,7 @@
   </div>
   <?php if ($data['related_posts']) { ?>
     <div class="bg-white br-rd5 br-box-gray pt15 pl15 text-sm">
-      <?= import('/_block/related-posts', ['related_posts' => $data['related_posts'], 'number' => 'no']); ?>
+      <?= import('/_block/related-posts', ['related_posts' => $data['related_posts'], 'number' => 'no', 'uid' => $uid]); ?>
     </div>
   <?php } ?>
 </aside>

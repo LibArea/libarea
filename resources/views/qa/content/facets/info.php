@@ -1,6 +1,6 @@
 <?php $facet = $data['facet']; ?>
 <main class="col-span-9 mb-col-12">
-  <div class="bg-white br-rd5 br-box-gray pt5 pr15 pb5 mb15 pl15">
+  <div class="bg-white br-rd5 pt5 pr15 pb5 mb15 pl15 max-w780">
     <a class="text-sm" title="<?= Translate::get('topics-all'); ?>" href="/topics">
       ← <?= Translate::get('topics'); ?>
     </a>
@@ -9,7 +9,7 @@
         <?= $facet['facet_seo_title']; ?>
       </a>
       <?php if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
-        <a class="right gray-600" href="<?= getUrlByName('topic.edit', ['id' => $facet['facet_id']]); ?>">
+        <a class="ml5 gray-600" href="<?= getUrlByName('topic.edit', ['id' => $facet['facet_id']]); ?>">
           <i class="bi bi-pencil"></i>
         </a>
       <?php } ?>
@@ -21,8 +21,9 @@
   <?= import(
     '/_block/related-posts',
     [
-      'related_posts' => $data['related_posts'],
-      'number' => 'yes'
+      'uid'             => $uid,
+      'related_posts'   => $data['related_posts'],
+      'number'          => 'yes'
     ]
   ); ?>
 
@@ -44,4 +45,4 @@
   <?= import('/_block/sidebar/topic', ['data' => $data, 'uid' => $uid]); ?>
 </aside>
 </div>
-<?= import('/_block/wide-footer'); ?>
+<?= import('/_block/wide-footer', ['uid' => $uid]); ?>

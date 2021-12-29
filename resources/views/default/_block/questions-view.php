@@ -19,7 +19,7 @@
                     <?php if (empty($answer['edit'])) { ?>
                       (<?= Translate::get('ed'); ?>.)
                     <?php } ?>
-                    <?= import('/_block/show-ip', ['ip' => $answer['answer_ip'], 'user_trust_level' => $uid['user_trust_level']]); ?>
+                    <?= import('/_block/show-ip', ['ip' => $answer['answer_ip'], 'uid' => $uid]); ?>
                   </div>
                   <a class="qa-login" href="<?= getUrlByName('user', ['login' => $answer['user_login']]); ?>"><?= $answer['user_login']; ?></a>
                 </div>
@@ -74,7 +74,7 @@
                   <span class="lowercase gray">
                     &nbsp; <?= lang_date($comment['comment_date']); ?>
                   </span>
-                  <?= import('/_block/show-ip', ['ip' => $comment['comment_ip'], 'user_trust_level' => $uid['user_trust_level']]); ?>
+                  <?= import('/_block/show-ip', ['ip' => $comment['comment_ip'], 'uid' => $uid]); ?>
                 </span>
 
                 <?php if ($uid['user_trust_level'] >= Config::get('trust-levels.tl_add_comm_qa')) { ?>
@@ -129,7 +129,7 @@
         <?= import('/_block/editor/editor', [
           'height'    => '250px',
           'preview'   => 'tab',
-          'lang'      => $uid['user_lang'],
+          'uid'       => $uid,
         ]); ?>
 
         <div class="clear pt5">

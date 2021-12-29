@@ -1,11 +1,10 @@
-<div class="sticky top0 col-span-2 justify-between no-mob">
-  <?= tabs_nav(
-        'menu',
-        $data['type'],
-        $uid,
-        $pages = Config::get('menu.left'),
-      ); ?>
-</div>
+<?= tabs_nav(
+      'menu',
+      $data['type'],
+      $uid,
+      $pages = Config::get('menu.left'),
+    ); ?>
+
 <main class="col-span-7 mb-col-12">
 
   <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
@@ -20,6 +19,7 @@
       <?= import(
         '/_block/form/field-input',
         [
+          'uid'  => $uid,
           'data' => [
             [
               'title' => Translate::get('old'),
@@ -50,4 +50,4 @@
     </form>
   </div>
 </main>
-<?= import('/_block/sidebar/lang', ['lang' => Translate::get('info-security')]); ?>
+<?= import('/_block/sidebar/lang', ['lang' => Translate::get('info-security'), 'uid' => $uid]); ?>

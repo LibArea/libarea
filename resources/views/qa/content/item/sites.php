@@ -27,7 +27,7 @@
     </h1>
   </div>
 
-  <div class="mb20 pt10 pr15 pb10 pl15 bg-green-200 dark-bg-black">
+  <div class="mb20 pt10 pr15 pb10 pl15 bg-yellow-50 dark-bg-black">
     <?php if ($data['low_topics']) { ?>
       <div class="grid grid-cols-3 gap-2 justify-between mb10">
         <?php foreach ($data['low_topics'] as $lt) { ?>
@@ -146,4 +146,4 @@
   <?= $data['topic']['facet_description']; ?>
 </div>
 
-<?= import('/_block/wide-footer'); ?>
+<?= import('/_block/wide-footer', ['uid' => $uid]); ?>

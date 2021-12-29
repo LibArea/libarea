@@ -13,7 +13,9 @@
     <form action="<?= getUrlByName('post.edit.pr'); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
 
-      <?= import('/_block/form/field-input', ['data' => [
+      <?= import('/_block/form/field-input', [
+        'uid'  => $uid,
+        'data' => [
         [
           'title' => Translate::get('heading'),
           'type' => 'text',
@@ -83,15 +85,17 @@
       </div>
 
       <?= import('/_block/editor/editor', [
+        'uid'       => $uid,
         'type'      => 'post',
         'height'    => '300px',
         'preview'   => 'vertical',
-        'lang'      => $uid['user_lang'],
+        'uid'       => $uid,
         'content'   => $post['post_content'],
       ]); ?>
 
       <?php if ($post['post_draft'] == 1) { ?>
         <?= import('/_block/form/radio', [
+          'uid'  => $uid,
           'data' => [
             [
               'title' => Translate::get('is this a draft?'),
@@ -109,6 +113,7 @@
         ]); ?>
 
         <?= import('/_block/form/radio', [
+          'uid'  => $uid,
           'data' => [
             [
               'title' => Translate::get('format Q&A?'),
@@ -125,6 +130,7 @@
       <?php } ?>
 
       <?= import('/_block/form/radio', [
+        'uid'  => $uid,
         'data' => [
           [
             'title' => Translate::get('is this a translation?'),
@@ -136,6 +142,7 @@
 
       <?php if ($uid['user_trust_level'] > Base::USER_SECOND_LEVEL) { ?>
         <?= import('/_block/form/radio', [
+          'uid'  => $uid,
           'data' => [
             [
               'title' => Translate::get('raise?'), 'name' => 'top',

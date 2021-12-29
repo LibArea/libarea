@@ -37,4 +37,4 @@
     <?= import('/_block/post', ['data' => $data, 'uid' => $uid]); ?>
   </div>
 </main>
-<?= import('/_block/sidebar/lang', ['lang' => Translate::get('info-preferences')]); ?>
+<?= import('/_block/sidebar/lang', ['lang' => Translate::get('info-preferences'), 'uid' => $uid]); ?>

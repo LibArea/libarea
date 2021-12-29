@@ -210,7 +210,7 @@ return [
         ], [
             'url'   => getUrlByName('blogs.all'),
             'title' => Translate::get('blogs'),
-            'icon'  => 'bi bi-journal-text',
+            'icon'  => 'bi bi-journals',
             'id'    => '',
         ], [
             'url'   => getUrlByName('users.all'),
@@ -226,11 +226,6 @@ return [
             'url'   => getUrlByName('search'),
             'title'  => Translate::get('search'),
             'icon'  => 'bi bi-search',
-            'id'    => '',
-        ], [
-            'url'   => getUrlByName('info.information'),
-            'title'  => Translate::get('help'),
-            'icon'  => 'bi bi-info-square',
             'id'    => '',
         ],
     ],

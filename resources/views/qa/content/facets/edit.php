@@ -1,11 +1,9 @@
-<div class="sticky top0 col-span-2 justify-between no-mob">
-  <?= tabs_nav(
-        'menu',
-        $data['type'],
-        $uid,
-        $pages = Config::get('menu.left'),
-      ); ?>
-</div>
+<?= tabs_nav(
+      'menu',
+      $data['type'],
+      $uid,
+      $pages = Config::get('menu.left'),
+    ); ?>
 
 <?php $fs = $data['facet']; ?>
 
@@ -83,6 +81,7 @@
       </div>
 
       <?= import('/_block/form/field-input', [
+        'uid' => $uid,
         'data' => [
           [
             'title' => Translate::get('title'),
@@ -118,6 +117,7 @@
       <?php if ($fs['facet_type'] == 'topic' && $uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
 
         <?= import('/_block/form/radio', [
+          'uid' => $uid,
           'data' => [
             [
               'title' => Translate::get('web-cat'),
@@ -181,6 +181,7 @@
       <div class="text-sm gray-400 mb20">> 44 <?= Translate::get('characters'); ?></div>
 
       <?= import('/_block/form/field-input', [
+        'uid'           => $uid,
         'data' => [
           [
             'title' => Translate::get('short description'),

@@ -239,4 +239,4 @@
       </div>
 </main>
 </div>
-<?= import('/_block/wide-footer'); ?>
+<?= import('/_block/wide-footer', ['uid' => $uid]); ?>

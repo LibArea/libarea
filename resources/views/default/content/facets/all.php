@@ -1,11 +1,10 @@
-<div class="sticky mt5 top0 col-span-2 justify-between no-mob">
-  <?= tabs_nav(
-        'menu',
-        $data['type'],
-        $uid,
-        $pages = Config::get('menu.left'),
-      ); ?>
-</div>
+<?= tabs_nav(
+      'menu',
+      $data['type'],
+      $uid,
+      $pages = Config::get('menu.left'),
+    ); ?>
+
 <main class="col-span-10 mb-col-12">
   <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
 
@@ -79,4 +78,4 @@
 
 </main>
 </div>
-<?= import('/_block/wide-footer'); ?>
+<?= import('/_block/wide-footer', ['uid' => $uid]); ?>

@@ -20,35 +20,36 @@ $facet = $data['facet'] ?? false; ?>
 <body class="p0 m0 black<?php if (Request::getCookie('dayNight') == 'dark') { ?> dark<?php } ?>">
 
   <header class="bg-white mt0 mb15">
+    <div class="br-bottom mr-auto max-w1240 w-100 pr10 pl10 h24 mb10 no-mob items-center flex">
+      <?php foreach (Config::get('menu.mobile') as $key => $topic) { ?>
+        <a class="mr20 black text-xs" href="<?= $topic['url']; ?>">
+          <i class="<?= $topic['icon']; ?> mr5"></i>
+          <span><?= $topic['title']; ?> </span>
+        </a>
+      <?php } ?>
+    </div>
+
     <div class="col-span-12 mr-auto max-w1240 w-100 pr10 pl10 h44 grid items-center flex justify-between">
       <div class="flex items-center" id="find">
-        <div class="lateral no-pc mr10 flex">
-          <i class="bi bi-list gray-400 text-xl"></i>
-          <nav class="ltr-menu box-shadow none min-w165 bg-white br-rd3 absolute pl0 sticky">
+        <ag-menu class="pl0 pr10 no-pc">
+          <div slot="trigger" ord="left-mob" class="relative w-auto">
+            <i class="bi bi-list gray-400 text-xl"></i>
+          </div>
+          <div class="box-shadow min-w165 z-40 bg-white br-rd3" slot="items">
             <?= tabs_nav(
               'menu',
               $type,
               $uid,
               $pages = Config::get('menu.mobile'),
             ); ?>
-          </nav>
-        </div>
+          </div>
+        </ag-menu>
         <div class="mr20 flex items-center">
           <a title="<?= Translate::get('home'); ?>" class="text-2xl mb-text-xl sky-500-hover p5 uppercase" href="/">
             <?= Config::get('meta.name'); ?>
           </a>
         </div>
       </div>
-
-      <?php if (Request::getUri() != getUrlByName('search')) { ?>
-        <div class="p5 ml30 mr20 relative no-mob w-100">
-          <form class="form" method="post" action="<?= getUrlByName('search'); ?>">
-            <input type="text" autocomplete="off" name="q" id="find" placeholder="<?= Translate::get('to find'); ?>" class="h30 bg-gray-100 p15 br-rd5 gray w-100">
-            <input name="token" value="<?= csrf_token(); ?>" type="hidden">
-          </form>
-          <div class="absolute box-shadow bg-white pt10 pr15 pb5 pl15 mt5 max-w460 br-rd3 none" id="search_items"></div>
-        </div>
-      <?php } ?>
 
       <?php if ($uid['user_id'] == 0) { ?>
         <div class="flex right col-span-4 items-center">
@@ -87,11 +88,11 @@ $facet = $data['facet'] ?? false; ?>
               <?php } ?>
             </a>
 
-            <div class="dropbtn relative p10 ml20 mb-ml-10">
-              <a class="relative w-auto">
+            <ag-menu class="p10 ml20 mb-ml-10">
+              <div slot="trigger" ord="primary" class="relative w-auto">
                 <?= user_avatar_img($uid['user_avatar'], 'small', $uid['user_login'], 'w34 br-rd-50'); ?>
-              </a>
-              <div class="dr-menu box-shadow none min-w165 z-40 right0 bg-white br-rd3 p5 absolute">
+              </div>
+              <div class="box-shadow min-w165 z-40 right0 bg-white br-rd3" slot="items">
                 <?= tabs_nav(
                   'menu',
                   $type,
@@ -99,7 +100,7 @@ $facet = $data['facet'] ?? false; ?>
                   $pages = Config::get('menu.user'),
                 ); ?>
               </div>
-            </div>
+            </ag-menu>
           </div>
         </div>
       <?php }  ?>

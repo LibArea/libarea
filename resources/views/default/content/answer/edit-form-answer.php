@@ -18,7 +18,7 @@
     <?= import('/_block/editor/editor', [
       'height'    => '350px',
       'preview'   => 'vertical',
-      'lang'      => $uid['user_lang'],
+      'uid'       => $uid,
       'content'   => $data['content'],
     ]); ?>
 

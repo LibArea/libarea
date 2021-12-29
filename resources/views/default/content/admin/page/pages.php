@@ -1,18 +1,9 @@
-<div class="sticky mt5 top0 col-span-2 justify-between no-mob">
-  <?= tabs_nav(
-        'menu',
-        $data['type'],
-        $uid,
-        $pages = Config::get('menu.admin'),
-      ); ?>
-</div>
-
 <?= import(
   '/content/admin/menu',
   [
-    'type'      => $data['type'],
-    'sheet'     => $data['sheet'],
-    'pages'     => [
+    'data'  => $data,
+    'uid'   => $uid,
+    'menus' => [
       [
         'id'    => $data['type'] . '.all',
         'url'   => getUrlByName('admin.' . $data['type']),

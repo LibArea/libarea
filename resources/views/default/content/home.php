@@ -6,16 +6,14 @@
     </div>
   </div>
 <?php } ?>
-
-<div class="sticky mt5 top0 col-span-2 justify-between no-mob">
-  <?= tabs_nav(
-        'menu',
-        $data['type'],
-        $uid,
-        $pages = Config::get('menu.left'),
-      ); ?>
-</div>
-
+ 
+<?= tabs_nav(
+      'menu',
+      $data['type'],
+      $uid,
+      $pages = Config::get('menu.left'),
+    ); ?>
+ 
 <main class="col-span-7 mb-col-12">
   <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
     <p class="m0 text-xl"><?= Translate::get('feed'); ?></p>
@@ -60,7 +58,7 @@
 
 <aside class="col-span-3 mb-col-12 relative no-mob">
   <?php if ($uid['user_id'] == 0) { ?>
-    <?= import('/_block/sidebar/login'); ?>
+    <?= import('/_block/sidebar/login', ['uid' => $uid]); ?>
   <?php } ?>
 
   <?php if ($uid['user_id'] > 0 && !empty($data['topics_user'])) { ?>
@@ -140,6 +138,6 @@
       </div>
     <?php } ?>
 
-    <?= import('/_block/sidebar/footer'); ?>
+    <?= import('/_block/sidebar/lang', ['lang' => [], 'uid' => $uid]); ?>
   </div>
 </aside>

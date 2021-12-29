@@ -1,11 +1,10 @@
-<div class="sticky top0 col-span-2 justify-between no-mob">
-  <?= tabs_nav(
-        'menu',
-        $data['type'],
-        $uid,
-        $pages = Config::get('menu.left'),
-      ); ?>
-</div>
+<?= tabs_nav(
+      'menu',
+      $data['type'],
+      $uid,
+      $pages = Config::get('menu.left'),
+    ); ?>
+
 <main class="col-span-10 mb-col-12">
 
   <?= breadcrumb(
@@ -20,7 +19,7 @@
     <form action="<?= getUrlByName('web.edit.pr'); ?>" method="post">
       <?= csrf_field() ?>
       <div class="right">
-        <?= website_img($data['domain']['item_id'], 'favicon', $data['domain']['item_url_domain'], 'mr5 w18 h18'); ?>
+        <?= website_img($data['domain']['item_url_domain'], 'favicon', $data['domain']['item_url_domain'], 'mr5 w18 h18'); ?>
         <span class="add-favicon right text-sm" data-id="<?= $data['domain']['item_id']; ?>">
           + favicon
         </span>
@@ -31,6 +30,7 @@
       </div>
 
       <?= import('/_block/form/field-input', [
+        'uid'  => $uid,
         'data' => [
           [
             'title' => Translate::get('URL'),
@@ -54,6 +54,7 @@
       ]); ?>
 
       <?= import('/_block/form/radio', [
+        'uid'  => $uid,
         'data' => [
           [
             'title'   => Translate::get('posted') . '?',
@@ -65,13 +66,14 @@
       ]); ?>
 
       <?php import('/_block/editor/textarea', [
+        'uid'   => $uid,
         'title' => Translate::get('description'),
-        'type' => 'text',
-        'name' => 'item_content_url',
+        'type'  => 'text',
+        'name'  => 'item_content_url',
         'content' => $data['domain']['item_content_url'],
-        'min' => 24,
-        'max' => 1500,
-        'help' => '24 - 1500 ' . Translate::get('characters')
+        'min'   => 24,
+        'max'   => 1500,
+        'help'  => '24 - 1500 ' . Translate::get('characters')
       ]); ?>
 
 
@@ -87,6 +89,7 @@
 
       <h3 class="mb5"><?= Translate::get('soft'); ?></h3>
       <?= import('/_block/form/radio', [
+        'uid'  => $uid,
         'data' => [
           [
             'title'   => Translate::get('there is a program'),
@@ -102,6 +105,7 @@
       ]); ?>
 
       <?= import('/_block/form/field-input', [
+        'uid'  => $uid,
         'data' => [
           [
             'title' => Translate::get('url address github'),
@@ -119,13 +123,14 @@
       ]); ?>
 
       <?php import('/_block/editor/textarea', [
+        'uid'   => $uid,
         'title' => Translate::get('description'),
-        'type' => 'text',
-        'name' => 'item_content_soft',
+        'type'  => 'text',
+        'name'  => 'item_content_soft',
         'content' => $data['domain']['item_content_soft'],
-        'min' => 24,
-        'max' => 1500,
-        'help' => '24 - 1500 ' . Translate::get('characters')
+        'min'   => 24,
+        'max'   => 1500,
+        'help'  => '24 - 1500 ' . Translate::get('characters')
       ]); ?>
 
       <?= import('/_block/form/select/related-posts', [

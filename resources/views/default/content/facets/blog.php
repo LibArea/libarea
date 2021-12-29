@@ -19,13 +19,14 @@ if ($blog['facet_is_deleted'] == 0) { ?>
 
         <div class="mt15 right">
           <?= import('/_block/facet/signed', [
-            'user_id'        => $uid['user_id'],
-            'topic'          => $blog,
-            'topic_signed'   => is_array($data['facet_signed']),
+            'uid'           => $uid,
+            'topic'         => $blog,
+            'topic_signed'  => is_array($data['facet_signed']),
           ]); ?>
         </div>
 
         <?= import('/_block/facet/focus-users', [
+          'uid'               => $uid,
           'topic_focus_count' => $blog['facet_focus_count'],
           'focus_users'       => $data['focus_users'] ?? '',
         ]); ?>
@@ -85,8 +86,8 @@ if ($blog['facet_is_deleted'] == 0) { ?>
     <div class="mt5 gray"><?= Translate::get('remote'); ?></div>
   </div>
 <?php } ?>
-
-<?= import('/_block/wide-footer'); ?>
+</div>
+<?= import('/_block/wide-footer', ['uid' => $uid]); ?>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
   document.querySelectorAll(".focus-user")

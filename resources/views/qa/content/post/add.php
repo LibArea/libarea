@@ -13,6 +13,7 @@
       <?= csrf_field() ?>
 
       <?= import('/_block/form/field-input', [
+        'uid'  => $uid,
         'data' => [
           [
             'title' => Translate::get('heading'),
@@ -52,7 +53,7 @@
           <div class="flex-auto mr15">
             <input id="link" placeholder="URL" class="post_url w-100 h30" type="text" name="post_url" />
           </div>
-          <input id="graburl" readonly="readonly" class="blog center w94 pt5 pr15 pb5 pl15 br-rd5" name="submit_url" value="<?= Translate::get('to extract'); ?>" />
+          <input id="graburl" readonly="readonly" class="blog center pt5 pr15 pb5 pl15 w94 br-rd5" name="submit_url" value="<?= Translate::get('to extract'); ?>" />
         </div>
       <?php } ?>
 
@@ -77,14 +78,15 @@
         'type'      => 'post',
         'height'    => '350px',
         'preview'   => 'vertical',
-        'lang'      => $uid['user_lang'],
+        'uid'       => $uid,
       ]); ?>
 
       <?= import('/_block/form/radio',  [
+        'uid'  => $uid,
         'data' => [
           [
             'title' => Translate::get('is this a draft?'),
-            'name' => 'post_draft',
+            'name'  => 'post_draft',
           ]
         ],
       ]); ?>
@@ -96,6 +98,7 @@
         ]); ?>
 
         <?= import('/_block/form/radio', [
+          'uid'  => $uid,
           'data' => [
             [
               'title' => Translate::get('format Q&A?'),
@@ -110,6 +113,7 @@
       <?php } ?>
 
       <?= import('/_block/form/radio',  [
+        'uid'  => $uid,
         'data' => [
           [
             'title' => Translate::get('is this a translation?'),
@@ -120,6 +124,7 @@
 
       <?php if ($uid['user_trust_level'] > 2) { ?>
         <?= import('/_block/form/radio', [
+          'uid'  => $uid,
           'data' => [
             [
               'title'   => Translate::get('raise?'),

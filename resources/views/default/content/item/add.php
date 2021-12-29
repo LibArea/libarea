@@ -1,11 +1,10 @@
-<div class="sticky top0 col-span-2 justify-between no-mob">
-  <?= tabs_nav(
-        'menu',
-        $data['type'],
-        $uid,
-        $pages = Config::get('menu.left'),
-      ); ?>
-</div>
+<?= tabs_nav(
+      'menu',
+      $data['type'],
+      $uid,
+      $pages = Config::get('menu.left'),
+    ); ?>
+
 <main class="col-span-10 mb-col-12">
 
   <?= breadcrumb(
@@ -21,6 +20,7 @@
       <?= csrf_field() ?>
 
       <?= import('/_block/form/field-input', [
+        'uid'  => $uid,
         'data' => [
           [
             'title' => Translate::get('title'),
@@ -36,22 +36,23 @@
       ]); ?>
 
       <?php import('/_block/editor/textarea', [
+        'uid'   => $uid,
         'title' => Translate::get('description'),
-        'type' => 'text',
-        'name' => 'content_url',
-        'min' => 24,
-        'max' => 1500,
-        'help' => '24 - 1500 ' . Translate::get('characters')
+        'type'  => 'text',
+        'name'  => 'content_url',
+        'min'   => 24,
+        'max'   => 1500,
+        'help'  => '24 - 1500 ' . Translate::get('characters')
       ]); ?>
 
       <?= import('/_block/form/select/select', [
-        'uid'           => $uid,
-        'data'          => ['topic' => false],
-        'type'          => 'topic',
-        'action'        => 'add',
-        'title'         => Translate::get('facets'),
-        'help'          => Translate::get('necessarily'),
-        'red'           => 'red'
+        'uid'       => $uid,
+        'data'      => ['topic' => false],
+        'type'      => 'topic',
+        'action'    => 'add',
+        'title'     => Translate::get('facets'),
+        'help'      => Translate::get('necessarily'),
+        'red'       => 'red'
       ]); ?>
 
       <?= sumbit(Translate::get('add')); ?>

@@ -19,13 +19,14 @@ if ($blog['facet_is_deleted'] == 0) { ?>
 
         <div class="mt15 right">
           <?= import('/_block/facet/signed', [
-            'user_id'        => $uid['user_id'],
-            'topic'          => $blog,
-            'topic_signed'   => is_array($data['facet_signed']),
+            'uid'           => $uid,
+            'topic'         => $blog,
+            'topic_signed'  => is_array($data['facet_signed']),
           ]); ?>
         </div>
 
         <?= import('/_block/facet/focus-users', [
+          'uid'               => $uid,
           'topic_focus_count' => $blog['facet_focus_count'],
           'focus_users'       => $data['focus_users'] ?? '',
         ]); ?>
@@ -39,7 +40,7 @@ if ($blog['facet_is_deleted'] == 0) { ?>
       </main>
       <aside class="col-span-3 relative no-mob">
         <?php if ($blog['facet_is_deleted'] == 0) { ?>
-          <div class="br-box-gray box-shadow-all p15 mb15 br-rd5 bg-white text-sm">
+          <div class="br-box-gray p15 mb15 br-rd5 bg-white text-sm">
             <div class="uppercase gray mb5"> <?= Translate::get('created by'); ?></div>
             <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('user', ['login' => $data['user']['user_login']]); ?>">
               <?= user_avatar_img($data['user']['user_avatar'], 'max', $data['user']['user_login'], 'w30 mr5 br-rd-50'); ?>
@@ -51,14 +52,14 @@ if ($blog['facet_is_deleted'] == 0) { ?>
             </div>
           </div>
           <?php if ($data['info']) { ?>
-            <div class="br-box-gray box-shadow-all pt0 pr15 pb0 pl15 mb15 br-rd5 bg-white text-sm shown_post">
+            <div class="br-box-gray pt0 pr15 pb0 pl15 mb15 br-rd5 bg-white text-sm shown_post">
               <?= $data['info']; ?>
             </div>
           <?php } ?>
 
           <?php if (!empty($data['pages'])) { ?>
-            <div class="sticky top0 top20">
-              <div class="br-box-gray box-shadow-all mt15 p15 mb15 br-rd5 bg-white text-sm">
+            <div class="sticky top0 top70">
+              <div class="br-box-gray mt15 p15 mb15 br-rd5 bg-white text-sm">
                 <div class="uppercase gray mt5 mb5"> <?= Translate::get('pages'); ?></div>
                 <?php foreach ($data['pages'] as $ind => $row) { ?>
                   <div class="mb5">
@@ -86,7 +87,7 @@ if ($blog['facet_is_deleted'] == 0) { ?>
   </div>
 <?php } ?>
 </div>
-<?= import('/_block/wide-footer'); ?>
+<?= import('/_block/wide-footer', ['uid' => $uid]); ?>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
   document.querySelectorAll(".focus-user")

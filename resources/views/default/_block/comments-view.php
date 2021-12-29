@@ -34,7 +34,7 @@
                     </span>
                   <?php } ?>
                   <a rel="nofollow" class="gray-400 mr5 ml10" href="<?= $post_url; ?>#answer_<?= $answer['answer_id']; ?>"><i class="bi bi-hash"></i></a>
-                  <?= import('/_block/show-ip', ['ip' => $answer['answer_ip'], 'user_trust_level' => $uid['user_trust_level']]); ?>
+                  <?= import('/_block/show-ip', ['ip' => $answer['answer_ip'], 'uid' => $uid]); ?>
                 </div>
                 <div class="m0 max-w780">
                   <?= $answer['answer_content'] ?>
@@ -139,7 +139,7 @@
                       <a class="gray-400 mr10 ml10" rel="nofollow" href="<?= $post_url; ?>#answer_<?= $comment['comment_answer_id']; ?>"><i class="bi bi-arrow-up"></i></a>
                     <?php } ?>
                     <a class="gray-400 mr5 ml5" rel="nofollow" href="<?= $post_url; ?>#comment_<?= $comment['comment_id']; ?>"><i class="bi bi-hash"></i></a>
-                    <?= import('/_block/show-ip', ['ip' => $comment['comment_ip'], 'user_trust_level' => $uid['user_trust_level']]); ?>
+                    <?= import('/_block/show-ip', ['ip' => $comment['comment_ip'], 'uid' => $uid]); ?>
                   </div>
                   <div class="mt5 mb10">
                     <?= Content::text($comment['comment_content'], 'line'); ?>

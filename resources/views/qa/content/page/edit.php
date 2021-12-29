@@ -16,6 +16,7 @@
       <?= import(
         '/_block/form/field-input',
         [
+          'uid' => $uid,
           'data' => [
             [
               'title' => Translate::get('heading'),
@@ -67,7 +68,7 @@
         'type'      => 'post',
         'height'    => '300px',
         'preview'   => 'vertical',
-        'lang'      => $uid['user_lang'],
+        'uid'       => $uid,
         'content'   => $post['post_content'],
       ]); ?>
 

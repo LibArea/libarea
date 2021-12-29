@@ -4,7 +4,9 @@
   <form class="max-w300 mb20 block" action="<?= getUrlByName('login'); ?>" method="post">
     <?php csrf_field(); ?>
 
-    <?= import('/_block/form/field-input', ['data' =>  [
+    <?= import('/_block/form/field-input', [
+      'uid'  => $uid,
+      'data' =>  [
       [
         'title' => Translate::get('E-mail'),
         'type' => 'email',

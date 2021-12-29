@@ -1,21 +1,12 @@
-<div class="sticky mt5 top0 col-span-2 justify-between no-mob">
-  <?= tabs_nav(
-    'menu',
-    $data['type'],
-    $uid,
-    $pages = Config::get('menu.admin'),
-  ); ?>
-</div>
-
 <?= import(
   '/content/admin/menu',
   [
-    'type'    => $data['type'],
-    'sheet'   => $data['sheet'],
-    'pages'   => []
+    'data'  => $data,
+    'uid'   => $uid,
+    'menus' => [],
   ]
 ); ?>
- 
+
 <div class="bg-white p15 br-box-gray justify-between">
   <h4 class="mt5 mb5"><?= Translate::get('color'); ?>:</h4>
   <div class="mb30 hidden">

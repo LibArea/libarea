@@ -7,7 +7,7 @@
     <?php } ?>
     <h1 class="mt5 mb10 text-3xl font-normal"><?= Translate::get('domains-title'); ?></h1>
   </div>
-  <div class="flex mb20 pt10 pr15 pb10 pl15 bg-green-200 flex-auto">
+  <div class="flex mb20 pt10 pr15 pb10 pl15 bg-yellow-50 flex-auto">
     <?php foreach (Config::get('web-root-categories') as  $cat) { ?>
       <div class="mr60">
         <a class="pt5 pr10 mr60 dark-white underline-hover text-2xl block " title="<?= $cat['title']; ?>" href="<?= getUrlByName('web.topic', ['slug' => $cat['url']]); ?>">
@@ -92,4 +92,4 @@
   </div>
 </main>
 </div>
-<?= import('/_block/wide-footer'); ?>
+<?= import('/_block/wide-footer', ['uid' => $uid]); ?>

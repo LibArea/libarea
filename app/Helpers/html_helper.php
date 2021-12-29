@@ -201,7 +201,7 @@ function breadcrumb($path_home, $title_home, $path_intermediate, $title_intermed
         $html .= '<li><a class="gray" title="' . $title_intermediate . '" href="' . $path_intermediate . '">' . $title_intermediate . '</a></li><li class="gray-400">/</li>';
     }
 
-    $html .= '<li><span class="red">' . $title_page . '</span></li></ul>';
+    $html .= '<li><span class="red-500">' . $title_page . '</span></li></ul>';
 
     return $html;
 }
@@ -259,11 +259,11 @@ function favorite($user_id, $content_id, $type, $favorite_tid, $ind, $css = '')
 
 function tabs_nav($name, $item, $uid, array $pages = [])
 {
-    $html = '';
     if ($name == 'nav') {
+        $html = '';
         foreach ($pages as $key => $page) {  
         if (empty($page['auth']) || $uid['user_id'] > 0) {
-                $classes    = 'ml30 mb-mr-5 mb-ml-10 gray-500 sky-500-hover dark-gray-200';
+                $classes    = 'ml30 mb-mr-5 mb-ml-10 gray-500 sky-500-hover';
                 $isActive   = $page['id'] == $item ? $classes . ' sky-500 ' : $classes;
                 $isAria     = $page['id'] == $item ? ' aria-current="page"' : '';
                 
@@ -274,7 +274,8 @@ function tabs_nav($name, $item, $uid, array $pages = [])
         }
         
     } else { 
-    
+        $html  = '<div class="col-span-2 justify-between no-mob">';
+        $html  .= '<nav class="sticky top60">';
         foreach ($pages as $key => $page) {
             
             if (!empty($page['hr'])) { 
@@ -282,7 +283,7 @@ function tabs_nav($name, $item, $uid, array $pages = [])
             } else {
             
                 if (empty($page['auth'])  || $uid['user_trust_level'] > $page['tl']) {
-                    $classes    = 'pt5 pb5 pl10 flex flex-row items-center gray-500 sky-500-hover dark-gray-200';
+                    $classes    = 'sky-500-hover dark-gray-200';
                     $isActive   = $page['id'] == $item ? $classes . ' sky-500 ' : $classes;
                     $isAria     = $page['id'] == $item ? ' aria-current="page"' : '';
                     
@@ -293,6 +294,9 @@ function tabs_nav($name, $item, $uid, array $pages = [])
                 }
             }    
         }
+        
+        $html .= '</nav></div>';
+        
     }    
 
     return $html;

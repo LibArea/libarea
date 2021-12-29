@@ -336,3 +336,29 @@ a:hover > img { opacity: 0.8; }
   width: 54px;
   text-align: center;
 }
+
+/* Drop-down menu and left nav */
+ag-menu {
+  display: inline-block;
+  position: relative;
+}
+
+ag-menu > [slot=items] {
+  display: none;
+  position: absolute;
+}
+
+nav > a,
+ag-menu > [slot=items] > a {
+  color: #6b7280;
+  padding: 3px 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+ag-menu[open] > [slot=items] {
+  display: block;
+}
+
+ag-menu > [slot="trigger"] { cursor: pointer; }

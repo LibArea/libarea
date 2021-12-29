@@ -1,11 +1,10 @@
-<div class="sticky top0 col-span-2 justify-between no-mob">
-  <?= tabs_nav(
-        'menu',
-        $data['type'],
-        $uid,
-        $pages = Config::get('menu.left'),
-      ); ?>
-</div>
+<?= tabs_nav(
+      'menu',
+      $data['type'],
+      $uid,
+      $pages = Config::get('menu.left'),
+    ); ?>
+
 <main class="col-span-7">
   <div class="bg-white br-rd5 br-box-gray mb15 pt5 pr15 pb5 pl15">
     <?php if ($data['item']['item_title_url']) { ?>
@@ -24,7 +23,7 @@
       </div>
       <div class="gray mt5 mb5">
         <a class="green-600" rel="nofollow noreferrer ugc" href="<?= $data['item']['item_url']; ?>">
-          <?= website_img($item['item']['item_id'], 'favicon', $item['item']['item_url_domain'], 'mr5 w18 h18'); ?>
+          <?= website_img($data['item']['item_id'], 'favicon', $data['item']['item_url_domain'], 'mr5 w18 h18'); ?>
           <?= $data['item']['item_url']; ?>
         </a>
         <span class="right"><?= $data['item']['item_count']; ?></span>
@@ -40,7 +39,7 @@
 <aside class="col-span-3 relative">
   <div class="sticky top60">
     <div class="bg-white br-rd5 br-box-gray pt5 pr15 pb10 pl15">
-      <?= import('/_block/domains', ['data' => $data['domains']]); ?>
+      <?= import('/_block/domains', ['data' => $data['domains'], 'uid' => $uid]); ?>
     </div>
   </div>  
 </aside>

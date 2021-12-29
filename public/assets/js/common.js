@@ -57,28 +57,6 @@
   upDownBtn.addEventListener('click', backToTop);
 })();
 
-let lateral = document.querySelector('.lateral');
-if (lateral) {
-  let menu = document.querySelector('.ltr-menu');
-  const toggleMenu = () => {
-    menu.classList.toggle('block');
-  };
-  lateral.addEventListener('click', e => {
-    e.stopPropagation();
-    toggleMenu();
-  });
-  document.addEventListener('click', e => {
-    let target = e.target;
-    let its_menu = target == menu || menu.contains(target);
-    let its_hamburger = target == lateral;
-    let menu_is_active = menu.classList.contains('block');
-
-    if (!its_menu && !its_hamburger && menu_is_active) {
-      toggleMenu();
-    }
-  });
-}
-
 // Call the form for adding a comment
 document.querySelectorAll(".add-comment")
   .forEach(el => el.addEventListener("click", function (e) {
@@ -303,3 +281,48 @@ function fetch_search() {
       }
     );
 }
+
+
+customElements.define('ag-menu', class extends HTMLElement {
+  constructor() {
+    super();
+    this._boundClose = this.close.bind(this)
+  }
+
+  connectedCallback() {
+    // Can expose later if desired
+    const trigger = this.querySelector('[slot="trigger"]');
+    if (trigger) {
+      trigger.addEventListener('click', e => this.open = !this.open);
+    }
+
+    // Close menu if user clicks outside of a menu or navigates away
+    document.body.addEventListener('click', this._boundClose);
+    window.addEventListener('popstate', this._boundClose); // TODO popstate is ineffective if the link was a child of the menu
+  }
+
+  disconnectedCallback() {
+    document.body.removeEventListener('click', this._boundClose);
+    window.removeEventListener('popstate', this._boundClose);
+  }
+
+  close(e) {
+    if (e && e.type === 'popstate' || !this.contains(e.target)) {
+      this.open = false
+    }
+  }
+
+  static get observedAttributes() { return ['open']; }
+
+  attributeChangedCallback(name, oldVal, newVal) {
+    if (name === 'open') this.dispatchEvent(new CustomEvent('toggle'));
+  }
+
+  get open() {
+    return this.hasAttribute('open');
+  }
+
+  set open(isOpen) {
+    isOpen ? this.setAttribute('open', '') : this.removeAttribute('open');
+  }
+});

@@ -1,11 +1,10 @@
-<div class="sticky mt5 top0 col-span-2 justify-between no-mob">
-  <?= tabs_nav(
-        'menu',
-        $data['type'],
-        $uid,
-        $pages = Config::get('menu.left'),
-      ); ?>
-</div>
+<?= tabs_nav(
+      'menu',
+      $data['type'],
+      $uid,
+      $pages = Config::get('menu.left'),
+    ); ?>
+
 <main class="col-span-7 mb-col-12">
   <div class="bg-white br-rd5 br-box-gray p20">
     <h1 class="mt0 mb15 text-2xl"><?= Translate::get('users'); ?></h1>
@@ -27,4 +26,4 @@
   </div>
   <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/users'); ?>
 </main>
-<?= import('/_block/sidebar/lang', ['lang' => Translate::get('info-users')]); ?>
+<?= import('/_block/sidebar/lang', ['lang' => Translate::get('info-users'), 'uid' => $uid]); ?>

@@ -8,7 +8,7 @@
   </div>
 </div>
 <main class="col-span-8 mb-col-12">
-  <article class="post-full br-box-gray br-rd5 bg-white<?php if ($post['post_is_deleted'] == 1) { ?> bg-red-200<?php } ?> mb15 pt0 pr15 pb5 pl15">
+  <article class="post-full bg-white<?php if ($post['post_is_deleted'] == 1) { ?> bg-red-200<?php } ?> mb15 pt0 pr15 pb5 pl15">
     <?php if ($post['post_is_deleted'] == 0 || $uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
       <div class="post-body">
         <h1 class="mb0 mt10 font-normal text-2xl">
@@ -81,7 +81,7 @@
                 <?php } ?>
               </a>
             <?php } ?>
-            <?= import('/_block/show-ip', ['ip' => $post['post_ip'], 'user_trust_level' => $uid['user_trust_level']]); ?>
+            <?= import('/_block/show-ip', ['ip' => $post['post_ip'], 'uid' => $uid]); ?>
           <?php } ?>
         </div>
       </div>
@@ -113,7 +113,7 @@
             </div>
           </div>
         <?php } ?>
-        <?= import('/_block/related-posts', ['related_posts' => $data['related_posts'], 'number' => 'yes']); ?>
+        <?= import('/_block/related-posts', ['related_posts' => $data['related_posts'], 'number' => 'yes', 'uid' => $uid]); ?>
 
         <div class="flex flex-row items-center mb20">
           <?php if (!empty($data['blog'])) { ?>
@@ -222,9 +222,9 @@
             <?= csrf_field() ?>
 
             <?= import('/_block/editor/editor', [
+              'uid'       => $uid,
               'height'    => '250px',
               'preview'   => 'vertical',
-              'lang'      => $uid['user_lang'],
             ]); ?>
 
             <div class="clear pt5">
@@ -259,7 +259,7 @@
 <aside class="col-span-3 relative br-rd5 no-mob">
 
   <?php if (!empty($data['topics'])) { ?>
-    <div class="br-box-gray bg-white br-rd5 mb15 p15">
+    <div class="br-box-gray box-shadow-all bg-white br-rd5 mb15 p15">
       <h3 class="uppercase mb5 mt0 font-light gray"><?= Translate::get('topics'); ?></h3>
       <?php foreach ($data['topics'] as $topic) { ?>
         <?php if ($uid['user_id']) { ?>
@@ -279,11 +279,11 @@
   <?php } ?>
 
   <?php if ($post['post_content_img']) { ?>
-    <div class="br-box-gray bg-white br-rd5 mb15 post-img">
+    <div class="br-box-gray box-shadow-all bg-white br-rd5 mb15 post-img">
       <?= post_img($post['post_content_img'], $post['post_title'], 'w-100 p15 br-rd5', 'cover', $post['post_content_img']); ?>
     </div>
   <?php } ?>
-  <div class="share-btn br-box-gray bg-white br-rd5 mb15 p15 text-2xl center">
+  <div class="share-btn br-box-gray box-shadow-all bg-white br-rd5 mb15 p15 text-2xl center">
     <a class="p15 gray-400" data-id="fb"><i class="bi bi-facebook"></i></a>
     <a class="p15 gray-400" data-id="vk">VK</a>
     <a class="p15 gray-400" data-id="tw"><i class="bi bi-twitter"></i></a>
@@ -364,4 +364,4 @@
   <?php } ?>
 </script>
 </div>
-<?= import('/_block/wide-footer'); ?>
+<?= import('/_block/wide-footer', ['uid' => $uid]); ?>

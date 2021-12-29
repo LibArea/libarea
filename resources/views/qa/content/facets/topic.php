@@ -18,13 +18,14 @@
 
         <div class="mt15 right">
           <?= import('/_block/facet/signed', [
-            'user_id'        => $uid['user_id'],
+            'uid'            => $uid,
             'topic'          => $topic,
             'topic_signed'   => is_array($data['facet_signed']),
           ]); ?>
         </div>
 
         <?= import('/_block/facet/focus-users', [
+          'uid'               => $uid,
           'topic_focus_count' => $topic['facet_focus_count'],
           'focus_users'       => $data['focus_users'] ?? '',
         ]); ?>
@@ -32,7 +33,7 @@
       </div>
     </div>
 
-    <div class="bg-white flex flex-row items-center justify-between br-box-gray box-shadow-all br-rd5 p15 mb15">
+    <div class="bg-white flex flex-row items-center justify-between p15 mb5">
       <p class="m0 text-xl no-mob"><?= Translate::get('feed'); ?></p>
       <ul class="flex flex-row list-none m0 p0 center">
 
@@ -66,10 +67,8 @@
     </div>
 
     <?= import('/_block/post', ['data' => $data, 'uid' => $uid]); ?>
-    
-    <div class="mt10 mb15">
-       <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('topic', ['slug' => $topic['facet_slug']])); ?>
-    </div>
+    <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('topic', ['slug' => $topic['facet_slug']])); ?>
+
 
   <?php } else { ?>
     <div class="center col-span-10">
@@ -94,7 +93,7 @@
     </div>
 
     <?php if (!empty($data['pages'])) { ?>
-      <div class="sticky top0 top20">
+      <div class="sticky top0 top70">
         <div class="br-box-gray box-shadow-all mt15 p15 mb15 br-rd5 bg-white text-sm">
           <div class="uppercase gray mt5 mb5"> <?= Translate::get('pages'); ?></div>
           <?php foreach ($data['pages'] as $ind => $row) { ?>
@@ -124,7 +123,7 @@
   <?php } ?>
 </aside>
 </div>
-<?= import('/_block/wide-footer'); ?>
+<?= import('/_block/wide-footer', ['uid' => $uid]); ?>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
   document.querySelectorAll(".focus-user")

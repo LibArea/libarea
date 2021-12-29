@@ -19,4 +19,4 @@
     <?php } ?>
   </div>
 </main>
-<?= import('/_block/sidebar/lang', ['lang' => Translate::get('someone invited you from the site')]); ?>
+<?= import('/_block/sidebar/lang', ['lang' => Translate::get('someone invited you from the site'), 'uid' => $uid]); ?>

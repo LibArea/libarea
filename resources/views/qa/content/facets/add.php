@@ -1,11 +1,10 @@
-<div class="sticky top0 col-span-2 justify-between no-mob">
-  <?= tabs_nav(
-        'menu',
-        $data['type'],
-        $uid,
-        $pages = Config::get('menu.left'),
-      ); ?>
-</div>
+<?= tabs_nav(
+      'menu',
+      $data['type'],
+      $uid,
+      $pages = Config::get('menu.left'),
+    ); ?>
+
 <main class="col-span-10 mb-col-12">
 
   <?= breadcrumb(
@@ -26,6 +25,7 @@
         <?= csrf_field() ?>
 
         <?= import('/_block/form/field-input', [
+          'uid'  => $uid,
           'data' => [
             [
               'title' => Translate::get('title'),

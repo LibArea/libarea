@@ -1,11 +1,10 @@
-<div class="sticky top0 col-span-2 justify-between no-mob">
-  <?= tabs_nav(
-        'menu',
-        $data['type'],
-        $uid,
-        $pages = Config::get('menu.left'),
-      ); ?>
-</div>
+<?= tabs_nav(
+      'menu',
+      $data['type'],
+      $uid,
+      $pages = Config::get('menu.left'),
+    ); ?>
+
 <?php $topic = $data['facet']; ?>
 <main class="col-span-7 mb-col-12">
   <?php if ($topic['facet_is_deleted'] == 0) { ?>
@@ -26,13 +25,14 @@
 
         <div class="mt15 right">
           <?= import('/_block/facet/signed', [
-            'user_id'        => $uid['user_id'],
+            'uid'            => $uid,
             'topic'          => $topic,
             'topic_signed'   => is_array($data['facet_signed']),
           ]); ?>
         </div>
 
         <?= import('/_block/facet/focus-users', [
+          'uid'               => $uid,
           'topic_focus_count' => $topic['facet_focus_count'],
           'focus_users'       => $data['focus_users'] ?? '',
         ]); ?>
@@ -129,8 +129,8 @@
 
   <?php } ?>
 </aside>
-
-<?= import('/_block/wide-footer'); ?>
+</div>
+<?= import('/_block/wide-footer', ['uid' => $uid]); ?>
 
 <script nonce="<?= $_SERVER['nonce']; ?>">
   document.querySelectorAll(".focus-user")

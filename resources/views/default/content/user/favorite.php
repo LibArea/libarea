@@ -70,4 +70,4 @@
     <?= no_content(Translate::get('there are no favorites'), 'bi bi-info-lg'); ?>
   <?php } ?>
 </main>
-<?= import('/_block/sidebar/lang', ['lang' => Translate::get('info-favorite')]); ?>
+<?= import('/_block/sidebar/lang', ['lang' => Translate::get('info-favorite'), 'uid' => $uid]); ?>

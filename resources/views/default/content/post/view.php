@@ -81,7 +81,7 @@
                 <?php } ?>
               </a>
             <?php } ?>
-            <?= import('/_block/show-ip', ['ip' => $post['post_ip'], 'user_trust_level' => $uid['user_trust_level']]); ?>
+            <?= import('/_block/show-ip', ['ip' => $post['post_ip'], 'uid' => $uid]); ?>
           <?php } ?>
         </div>
       </div>
@@ -113,7 +113,7 @@
             </div>
           </div>
         <?php } ?>
-        <?= import('/_block/related-posts', ['related_posts' => $data['related_posts'], 'number' => 'yes']); ?>
+        <?= import('/_block/related-posts', ['related_posts' => $data['related_posts'], 'number' => 'yes', 'uid' => $uid]); ?>
 
         <div class="flex flex-row items-center mb20">
           <?php if (!empty($data['blog'])) { ?>
@@ -222,9 +222,9 @@
             <?= csrf_field() ?>
 
             <?= import('/_block/editor/editor', [
+              'uid'       => $uid,
               'height'    => '250px',
               'preview'   => 'vertical',
-              'lang'      => $uid['user_lang'],
             ]); ?>
 
             <div class="clear pt5">
@@ -364,4 +364,4 @@
   <?php } ?>
 </script>
 </div>
-<?= import('/_block/wide-footer'); ?>
+<?= import('/_block/wide-footer', ['uid' => $uid]); ?>

@@ -1,11 +1,10 @@
-<div class="sticky top0 col-span-2 justify-between no-mob">
-  <?= tabs_nav(
-        'menu',
-        $data['type'],
-        $uid,
-        $pages = Config::get('menu.left'),
-      ); ?>
-</div>
+<?= tabs_nav(
+      'menu',
+      $data['type'],
+      $uid,
+      $pages = Config::get('menu.left'),
+    ); ?>
+
 <main class="col-span-7 mb-col-12">
   <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
     <p class="m0"><?= Translate::get($data['sheet']); ?></p>
@@ -98,4 +97,4 @@
     <?= no_content(Translate::get('no notifications yet'), 'bi bi-info-lg'); ?>
   <?php } ?>
 </main>
-<?= import('/_block/sidebar/lang', ['lang' => Translate::get('info-notifications')]); ?>
+<?= import('/_block/sidebar/lang', ['lang' => Translate::get('info-notifications'), 'uid' => $uid]); ?>

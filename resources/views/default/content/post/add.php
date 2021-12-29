@@ -13,6 +13,7 @@
       <?= csrf_field() ?>
 
       <?= import('/_block/form/field-input', [
+        'uid'  => $uid,
         'data' => [
           [
             'title' => Translate::get('heading'),
@@ -77,14 +78,15 @@
         'type'      => 'post',
         'height'    => '350px',
         'preview'   => 'vertical',
-        'lang'      => $uid['user_lang'],
+        'uid'       => $uid,
       ]); ?>
 
       <?= import('/_block/form/radio',  [
+        'uid'  => $uid,
         'data' => [
           [
             'title' => Translate::get('is this a draft?'),
-            'name' => 'post_draft',
+            'name'  => 'post_draft',
           ]
         ],
       ]); ?>
@@ -96,6 +98,7 @@
         ]); ?>
 
         <?= import('/_block/form/radio', [
+          'uid'  => $uid,
           'data' => [
             [
               'title' => Translate::get('format Q&A?'),
@@ -110,6 +113,7 @@
       <?php } ?>
 
       <?= import('/_block/form/radio',  [
+        'uid'  => $uid,
         'data' => [
           [
             'title' => Translate::get('is this a translation?'),
@@ -120,6 +124,7 @@
 
       <?php if ($uid['user_trust_level'] > 2) { ?>
         <?= import('/_block/form/radio', [
+          'uid'  => $uid,
           'data' => [
             [
               'title'   => Translate::get('raise?'),

@@ -1,20 +1,11 @@
-<div class="sticky mt5 top0 col-span-2 justify-between no-mob">
-  <?= tabs_nav(
-    'menu',
-    $data['type'],
-    $uid,
-    $pages = Config::get('menu.admin'),
-  ); ?>
-</div>
-
 <?= import(
   '/content/admin/menu',
   [
-    'type'    => $data['type'],
-    'sheet'   => $data['sheet'],
-    'pages'   => [],
+    'data'  => $data,
+    'uid'   => $uid,
+    'menus' => [],
   ]
-); ?>
+  ); ?>
 
 <div class="grid grid-cols-12 gap-4 pr10 pl10 justify-between">
   <?php
@@ -59,8 +50,8 @@
   ];
 
   foreach ($sections as $section) { ?>
-    <div class="col-span-2 <?= $section['bg']; ?> p10">
-      <a class="white gray-hover text-2xl" href="<?= getUrlByName($section['url']); ?>">
+    <div class="col-span-2 mb-col-12  <?= $section['bg']; ?> p10">
+      <a class="white gray-hover text-xl" href="<?= getUrlByName($section['url']); ?>">
         <i class="bi <?= $section['icon']; ?> white right"></i>
         <?= $section['count']; ?>
         <div><?= Translate::get($section['title']); ?></div>

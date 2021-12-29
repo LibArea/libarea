@@ -23,17 +23,19 @@
   <header class="bg-white br-bottom mt0 mb15 <?php if ($type != 'page') { ?>sticky top0<?php } ?> z-30">
     <div class="col-span-12 mr-auto max-width w-100 pr10 pl10 h44 grid items-center flex justify-between">
       <div class="flex items-center">
-        <div class="lateral no-pc mr10 flex">
-          <i class="bi bi-list gray-400 text-xl"></i>
-          <nav class="ltr-menu box-shadow none min-w165 bg-white br-rd3 absolute pl0 sticky">
+        <ag-menu class="pl0 pr10 no-pc">
+          <div slot="trigger" ord="left-mob" class="relative w-auto">
+            <i class="bi bi-list gray-400 text-xl"></i>
+          </div>
+          <div class="box-shadow min-w165 z-40 bg-white br-rd3" slot="items">
             <?= tabs_nav(
               'menu',
               $type,
               $uid,
               $pages = Config::get('menu.mobile'),
             ); ?>
-          </nav>
-        </div>
+          </div>
+        </ag-menu>
         <div class="mr20 flex items-center">
           <a title="<?= Translate::get('home'); ?>" class="text-2xl mb-text-xl sky-500-hover p5 black dark-white uppercase" href="/">
             <?= Config::get('meta.name'); ?>
@@ -86,11 +88,11 @@
               <?php } ?>
             </a>
 
-            <div class="dropbtn relative p10 ml20 mb-ml-10">
-              <a class="relative w-auto">
+            <ag-menu class="p10 ml20 mb-ml-10">
+              <div slot="trigger" ord="primary" class="relative w-auto">
                 <?= user_avatar_img($uid['user_avatar'], 'small', $uid['user_login'], 'w34 br-rd-50'); ?>
-              </a>
-              <div class="dr-menu box-shadow none min-w165 right0 bg-white br-rd3 p5 absolute">
+              </div>
+              <div class="box-shadow min-w165 z-40 right0 bg-white br-rd3" slot="items">
                 <?= tabs_nav(
                   'menu',
                   $type,
@@ -98,7 +100,7 @@
                   $pages = Config::get('menu.user'),
                 ); ?>
               </div>
-            </div>
+            </ag-menu>
           </div>
         </div>
       <?php }  ?>

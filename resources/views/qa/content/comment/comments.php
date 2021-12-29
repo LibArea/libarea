@@ -46,4 +46,4 @@
     <?= no_content(Translate::get('there are no comments'), 'bi bi-info-lg'); ?>
   <?php } ?>
 </main>
-<?= import('/_block/sidebar/lang', ['lang' => Translate::get('comments-desc')]); ?>
+<?= import('/_block/sidebar/lang', ['lang' => Translate::get('comments-desc'), 'uid' => $uid]); ?>

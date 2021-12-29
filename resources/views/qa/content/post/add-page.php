@@ -77,7 +77,7 @@
         'type'      => 'post',
         'height'    => '350px',
         'preview'   => 'vertical',
-        'lang'      => $uid['user_lang'],
+        'uid'       => $uid,
       ]); ?>
 
       <?= import('/_block/form/radio',  [
