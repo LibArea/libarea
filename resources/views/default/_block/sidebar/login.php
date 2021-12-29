@@ -5,12 +5,13 @@
       <label for="email" class="block mb5">Email</label>
       <input type="email" id="email" placeholder="<?= Translate::get('enter'); ?> e-mail" name="email" class="w-100 h30 pl5">
     </div>
-    <div class="mb20">
+    <div class="inputs relative mb20">
       <label for="password" class="block mb5"><?= Translate::get('password'); ?></label>
-      <input type="password" id="password" placeholder="<?= Translate::get('enter your password'); ?>" name="password" class="w-100 h30 pl5">
+      <input type="password" placeholder="<?= Translate::get('enter your password'); ?>" name="password" class="password w-100 h30 pl5">
+      <span class="showPassword absolute gray-400 right5 text-xl"><i class="bi bi-eye"></i></span>
     </div>
     <div class="mb20 mb20 flex">
-      <input type="checkbox" id="rememberme" class="left mr5" name="rememberme" value="1">
+      <input type="checkbox" class="left mr5" name="rememberme" value="1">
       <label id="rem-text" class="form-check-label" for="rememberme">
         <span class="gray-600"><?= Translate::get('remember me'); ?></span>
       </label>

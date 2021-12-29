@@ -87,12 +87,16 @@
 <div class="mt10  pl15">
   <?= Translate::get('see more'); ?>: 
   <a class="ml10 p5 pr15 pl15 mr10 white white-hover bg-red-500" href="<?= getUrlByName('admin.сss'); ?>">CSS</a>
+  -
+  <a class="ml10 p5 pr15 pl15 mr10 white white-hover bg-orange-500" href="<?= getUrlByName('admin.tools'); ?>">
+  <i class="bi bi-tools"></i>
+  <?= Translate::get('tools'); ?></a>
   
   <?= Translate::get('and'); ?>
   
-  <a class="ml10 p5 pr15 pl15 white white-hover bg-orange-500" href="<?= getUrlByName('admin.tools'); ?>">
-  <i class="bi bi-tools"></i>
-  <?= Translate::get('tools'); ?></a>
+  <a class="ml10 p5 pr15 pl15 white white-hover bg-green-700" href="<?= getUrlByName('admin.words'); ?>">
+  <i class="bi bi-badge-ad"></i>
+  <?= Translate::get('words'); ?></a>
 </div>
 
 <div class="white-box mt10 pt5 pr15 pb5 pl15">

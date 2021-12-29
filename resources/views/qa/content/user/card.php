@@ -12,7 +12,7 @@
             <?= Translate::get('message'); ?>
           </a>
         <?php } ?>
-        <a class="block text-2xl black" href="<?= getUrlByName('user', ['login' => $user['user_login']]); ?>">
+        <a class="block text-2xl" href="<?= getUrlByName('user', ['login' => $user['user_login']]); ?>">
           <?= $user['user_login']; ?>
         </a>
         <?php if ($user['user_name']) { ?>
@@ -28,7 +28,7 @@
     <?php if (!empty($post['post_id'])) { ?>
       <div class="gray-600 mt5">
         <?= Translate::get('post'); ?>:
-        <a class="black dark-white" href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
+        <a href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
           <?= $post['post_title']; ?>
         </a>
       </div>
@@ -36,7 +36,7 @@
     <?php if ($user['user_website']) { ?>
       <div class="gray-600 mt5">
         <?= Translate::get('website'); ?>:
-        <a class="black dark-white" rel="noopener nofollow ugc" href="<?= $user['user_website']; ?>">
+        <a rel="noopener nofollow ugc" href="<?= $user['user_website']; ?>">
           <?= $user['user_website']; ?>
         </a>
       </div>
@@ -56,7 +56,7 @@
         <i title="<?= Translate::get('joined in the early days'); ?>" class="bi bi-award right mr5 ml5 green-600"></i>
       <?php } ?>
       <?php foreach ($badges as $badge) { ?>
-        <?= $badge['badge_icon']; ?>
+        <span class="ml15"><?= $badge['badge_icon']; ?></span>
       <?php } ?>
     </div>
 

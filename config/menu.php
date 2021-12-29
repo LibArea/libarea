@@ -136,11 +136,6 @@ return [
             'title'  => Translate::get('sites'),
             'icon'  => 'bi bi-link-45deg',
             'id'  => 'sites',
-        ], [
-            'url'   => getUrlByName('admin.words'),
-            'title'  => Translate::get('words'),
-            'icon'  => 'bi bi-badge-ad',
-            'id'  => 'words',
         ],
     ],
 

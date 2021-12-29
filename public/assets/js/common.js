@@ -282,7 +282,6 @@ function fetch_search() {
     );
 }
 
-
 customElements.define('ag-menu', class extends HTMLElement {
   constructor() {
     super();
@@ -326,3 +325,23 @@ customElements.define('ag-menu', class extends HTMLElement {
     isOpen ? this.setAttribute('open', '') : this.removeAttribute('open');
   }
 });
+
+// Show / hide password 
+let showPassword = document.querySelectorAll('.showPassword');
+showPassword.forEach(item =>
+  item.addEventListener('click', toggleType)
+);
+
+function toggleType() {
+  let input = this.closest('.inputs').querySelector('.password');
+  let icon = this.querySelector('i');
+  if (icon.classList.contains('bi-eye')) {
+    icon.classList.remove('bi-eye');
+    icon.classList.add('bi-eye-slash');
+    input.type = 'text';
+  } else {
+    icon.classList.remove('bi-eye-slash');
+    icon.classList.add('bi-eye');
+    input.type = 'password';
+  }
+}

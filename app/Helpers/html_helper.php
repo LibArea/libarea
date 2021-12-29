@@ -274,8 +274,7 @@ function tabs_nav($name, $item, $uid, array $pages = [])
         }
         
     } else { 
-        $html  = '<div class="col-span-2 justify-between no-mob">';
-        $html  .= '<nav class="sticky top60">';
+        $html  = '<nav class="sticky top60">';
         foreach ($pages as $key => $page) {
             
             if (!empty($page['hr'])) { 
@@ -295,7 +294,7 @@ function tabs_nav($name, $item, $uid, array $pages = [])
             }    
         }
         
-        $html .= '</nav></div>';
+        $html .= '</nav>';
         
     }    
 

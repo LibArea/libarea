@@ -25,7 +25,7 @@
           <a href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">
             <?= $answer['post_title']; ?>
           </a>
-          <div>
+          <div class="answ-telo">
             <?= $answer['answer_content']; ?>
           </div>
 

@@ -1,12 +1,4 @@
-<div class="sticky mt5 top0 col-span-2 justify-between no-mob">
-  <?= tabs_nav(
-        'menu',
-        $data['type'],
-        $uid,
-        $pages = Config::get('menu.left'),
-      ); ?>
-</div>
-<main class="col-span-7 mb-col-12">
+<main class="col-span-9 mb-col-12">
   <div class="bg-white br-rd5 br-box-gray p20">
     <h1 class="mt0 mb15 text-2xl"><?= Translate::get('users'); ?></h1>
     <div class="max-width mr-auto w-100 grid grid-cols-6 gap-2 justify-between">

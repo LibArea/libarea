@@ -1,9 +1,11 @@
-<?= tabs_nav(
+<div class="col-span-2 justify-between no-mob">
+  <?= tabs_nav(
       'menu',
       $data['type'],
       $uid,
       $pages = Config::get('menu.admin'),
     ); ?>
+</div>    
 
 <main class="col-span-10 mb-col-12">
   <div class="bg-white flex flex-row items-center justify-between br-box-gray p15 mb15">

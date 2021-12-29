@@ -1,9 +1,11 @@
-<?= tabs_nav(
+<div class="col-span-2 justify-between no-mob">
+  <?= tabs_nav(
       'menu',
       $data['type'],
       $uid,
       $pages = Config::get('menu.left'),
     ); ?>
+</div>
 
 <main class="col-span-7 mb-col-12">
 
