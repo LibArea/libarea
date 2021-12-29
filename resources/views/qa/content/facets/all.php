@@ -55,7 +55,6 @@
   </div>
 
   <div class="bg-white p15 br-box-gray">
-
     <?php if (!empty($data['facets'])) { ?>
       <?php if ($data['type'] == 'blogs') { ?>
         <?= import('/_block/facet/blog-list-all', ['facets' => $data['facets'], 'uid' => $uid]); ?>

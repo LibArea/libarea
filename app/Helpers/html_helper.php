@@ -267,18 +267,18 @@ function tabs_nav($name, $item, $uid, array $pages = [])
                 $isActive   = $page['id'] == $item ? $classes . ' sky-500 ' : $classes;
                 $isAria     = $page['id'] == $item ? ' aria-current="page"' : '';
                 
-                $html .= '<a ' . $isAria . ' class="' . $isActive . '" href="' . $page['url'] . '">
+                $html .= '<li><a ' . $isAria . ' class="' . $isActive . '" href="' . $page['url'] . '">
                             <i class="' . $page['icon'] . ' mr5"></i>
-                                <span>' . $page['title'] . '</span></a>';
+                                <span>' . $page['title'] . '</span></a></li>';
             }
         }
         
     } else { 
-        $html  = '<nav class="sticky top60">';
+        $html  = '<nav class="sticky top60"><ul class="p0 mt10 list-none">';
         foreach ($pages as $key => $page) {
             
             if (!empty($page['hr'])) { 
-                if ($uid['user_id'] > 0) $html .= '<hr>'; 
+                if ($uid['user_id'] > 0) $html .= '<li><hr></li>'; 
             } else {
             
                 if (empty($page['auth'])  || $uid['user_trust_level'] > $page['tl']) {
@@ -286,15 +286,15 @@ function tabs_nav($name, $item, $uid, array $pages = [])
                     $isActive   = $page['id'] == $item ? $classes . ' sky-500 ' : $classes;
                     $isAria     = $page['id'] == $item ? ' aria-current="page"' : '';
                     
-                    $html .= '<a ' . $isAria . ' class="' . $isActive . '" href="' . $page['url'] . '">
+                    $html .= '<li><a ' . $isAria . ' class="' . $isActive . '" href="' . $page['url'] . '">
                                 <i class="' . $page['icon'] . ' mr10 text-2xl"></i>
-                                    <span>' . $page['title'] . '</span></a>';
+                                    <span>' . $page['title'] . '</span></a></li>';
                                         
                 }
             }    
         }
         
-        $html .= '</nav>';
+        $html .= '</ul></nav>';
         
     }    
 

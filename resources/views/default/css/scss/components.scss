@@ -83,7 +83,6 @@ textarea:focus { border: 1px solid #9ccdf8; }
 .comment_subtree.edit,
 .answers_subtree:target,
 .answers_subtree.edit {
-  -webkit-background-clip: content-box;
   background-clip: content-box;
   background-color: lightyellow;
   margin-top: -70px;
@@ -153,7 +152,6 @@ textarea:focus { border: 1px solid #9ccdf8; }
 }
 
 .up_down_btn-disabled {
-  pointer-events: none;
   cursor: default;
   opacity: 0;
 }
@@ -211,9 +209,6 @@ textarea:focus { border: 1px solid #9ccdf8; }
   margin-bottom: 12px;
   cursor: pointer;
   font-size: 18px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
@@ -348,7 +343,7 @@ ag-menu > [slot=items] {
   position: absolute;
 }
 
-nav > a,
+nav > ul > li > a,
 ag-menu > [slot=items] > a {
   color: #6b7280;
   padding: 3px 10px;

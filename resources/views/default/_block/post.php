@@ -13,7 +13,7 @@
         </div>
       <?php } ?>
       <div class="flex mb15 relative">
-        <div id="user-card" data-content_id="<?= $post['post_id']; ?>" data-user_id="<?= $post['user_id']; ?>">
+        <div class="user-card" data-content_id="<?= $post['post_id']; ?>" data-user_id="<?= $post['user_id']; ?>">
           <?= user_avatar_img($post['user_avatar'], 'max', $post['user_login'], 'w44 h44 br-rd-50 mr5'); ?>
           <div id="content_<?= $post['post_id']; ?>" class="content_<?= $post['post_id']; ?>"></div>
         </div>

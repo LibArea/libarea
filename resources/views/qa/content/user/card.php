@@ -1,13 +1,13 @@
-<div class="br-rd5 bg-gray-100 box-shadow-all absolute ml45 user-card z-40">
+<div class="br-rd5 bg-gray-100 w400 box-shadow-all absolute ml45 user-card z-40">
   <div <?php if ($user['user_cover_art'] != 'cover_art.jpeg') { ?> style="background-image: linear-gradient(0.25turn, #fefefe, #f3f3f369), url(<?= cover_url($user['user_cover_art'], 'user'); ?>); background-position: 50% 50%;" <?php } ?> class="p10">
 
-    <div class="flex ">
+    <div class="flex">
       <div class="-mt50">
         <?= user_avatar_img($user['user_avatar'], 'max', $user['user_login'], 'w94 br-rd-50 mr15'); ?>
       </div>
-      <div class="w-100 w400">
+      <div class="w-100">
         <?php if ($uid['user_id'] > 0 && $uid['user_login'] != $user['user_login']) { ?>
-          <a class="right bg-blue-800 br-box-blue bg-hover-light-blue pt5 pr15 pb5 pl15 block br-rd5 white white-hover center text-sm" href="<?= getUrlByName('user.send.messages', ['login' => $user['user_login']]); ?>">
+          <a class="right btn btn-primary block" href="<?= getUrlByName('user.send.messages', ['login' => $user['user_login']]); ?>">
             <i class="bi bi-envelope middle mr5"></i>
             <?= Translate::get('message'); ?>
           </a>

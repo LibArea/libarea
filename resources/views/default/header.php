@@ -24,7 +24,7 @@
     <div class="col-span-12 mr-auto max-width w-100 pr10 pl10 h44 grid items-center flex justify-between">
       <div class="flex items-center">
         <ag-menu class="pl0 pr10 no-pc">
-          <div slot="trigger" ord="left-mob" class="relative w-auto">
+          <div slot="trigger" data-ord="left-mob" class="relative w-auto">
             <i class="bi bi-list gray-400 text-xl"></i>
           </div>
           <div class="box-shadow min-w165 z-40 bg-white br-rd3" slot="items">
@@ -89,7 +89,7 @@
             </a>
 
             <ag-menu class="p10 ml20 mb-ml-10">
-              <div slot="trigger" ord="primary" class="relative w-auto">
+              <div slot="trigger" data-ord="primary" class="relative w-auto">
                 <?= user_avatar_img($uid['user_avatar'], 'small', $uid['user_login'], 'w34 br-rd-50'); ?>
               </div>
               <div class="box-shadow min-w165 z-40 right0 bg-white br-rd3" slot="items">
