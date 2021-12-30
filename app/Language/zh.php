@@ -35,7 +35,7 @@ $data = [
     'post deleted'      => '帖子已刪除',
     'answer deleted'    => '答案已刪除',
     'deleted'           => '已刪除',
-    'remote'            => '偏僻的'
+    'remote'            => '偏僻的',
     'email activated'   => '電子郵件已激活',
     'not activated'     => '未激活',
     'like'              => '喜歡',
@@ -375,14 +375,13 @@ $data = [
     'psychology'            => '心理學',
 
     /* 元描述  */
-    'desc-user-all'         => '所有參與者的名單按網站上的註冊日期排序',
     'title-profile'         => '%1$s %2$s | 簡介  %3$s',
     'desc-profile'          => '%1$s - 會員資料頁面。 %2$s 帖子、評論、獎勵 %3$s',
     'page-number'           => ' 頁 %1$s. ',
-    'top-title'             => '熱門帖子。 ',
-    'top-desc'              => '社區提要中的熱門帖子列表（按回複數量）。 感興趣的話題。 對話、問答、評論。 ',
-    'all-title'             => '所有帖子。 ',
-    'all-desc'              => '社區提要中所有帖子的列表（按回複數量）。 對話、問答、評論。 ',
+    'main.top.title'        => '熱門帖子。 ',
+    'main.top.desc'         => '社區提要中的熱門帖子列表（按回複數量）。 感興趣的話題。 對話、問答、評論。 ',
+    'main.all.title'        => '所有帖子。 ',
+    'main.all.desc'         => '社區提要中所有帖子的列表（按回複數量）。 對話、問答、評論。 ',
     'edit answer'           => '改變答案',
     'no results'            => '沒結果',
     'no search results'     => '搜索沒有給出任何結果。<br>太短/太長的搜索詞。',
@@ -418,7 +417,6 @@ $data = [
     'info-setting'          => '填寫您的姓名，這將有助於與會者通過姓名來稱呼您。 <br> <br> 告訴我們一些關於你自己的事情。 你有一個很好的機會敞開心扉取悅他人，並且看起來是一個有趣的人。',
     'info-avatar'           => '為您的個人資料上傳頭像和封面。 <br> <br> 當每個用戶都有一個獨特的頭像時，關注討論會變得更容易！',
     'info-security'         => '確保您的所有密碼都是 8 個字符或更多，最好是更多。 <br> <br> 密碼必須包含大寫字母、小寫字母、數字、特殊字符。 符號。',
-    'info-users'            => '參與者名單按網站上的活動順序排列。',
     'info-search'           => '要優化搜索，請嘗試查找更精確的查詢。',
     'info-login'            => '授權使您能夠發布帖子、回复、評論。 <br> <br> 您可以為其他出版物投票，填寫和編輯個人資料。',
     'info-recover'          => '單擊“重置”按鈕後，檢查您的電子郵件...',
@@ -502,26 +500,41 @@ $data = [
     'the command is executed'                       => '命令執行',
     'you can add more'                              => '你可以添加更多',
 
-    'recommended posts' => '推薦帖子',
-    'recommended-posts-desc' => '推薦的帖子 «%1$s» 手選. ',
+    'recommended posts'         => '推薦帖子',
+    'recommended.posts.desc'    => '推薦的帖子 «%1$s» 手選.',
 
-    'blog-add-info'         => '我創建的博客頁面',
-    'topics.all'            => '所有主題',
-    'topics.my'             => '我訂閱了主題',
-    'topics.new'            => '新話題',
-    'topics.all-desc'       => '按受歡迎程度排列的主題頁面。 按定位的帖子數量',
-    'topics.my-desc'        => '我關注的主題頁面',
-    'topics.new-desc'       => '最近添加到網站的新主題。 訂閱主題',
-    'structure-desc'        => '不同樹代表的主題、主題的結構及其關係',
-    'blogs.all'             => '個人博客',
-    'blogs.my'              => '我的博客',
-    'blogs.new'             => '新博客',
-    'blogs.all-desc'        => '最近網站上所有參與者的個人博客。 按受歡迎程度排序',
-    'blogs.my-desc'         => '我在網站上的博客',
-    'blogs.new-desc'        => '最近添加了網站上的博客。 會員個人博客',
-    'topic-subscription'    => '訂閱主題並在提要中閱讀它們',
-    'stop-blog'             => '此博客網址已保留',
-    'blogs-info'            => '博客是組織內容的好方法。 <br><br> 創建和維護博客、分享想法和交流',
+    'structure-desc'            => '不同樹代表的主題、主題的結構及其關係',
+    'topic-subscription'        => '訂閱主題並在提要中閱讀它們',
+    'stop-blog'                 => '此博客網址已保留。',
+    
+    'users.all'                 => '參賽者名單',
+    'users.all.info'            => '參與者名單按他們在網站上的活動順序排列',
+    'users.all.desc'            => '照他們在網站上的活動順序排列。',
+    
+    'blogs.all'                 => '所有博客',
+    'blogs.all.info'            => '貢獻者創建的博客',
+    'blogs.all.desc'            => '博客按照他們在網站上的註冊順序，能夠查看創建的博客，訂閱它們，查看統計信息',
+
+    'blogs.new'                 => '新博客',
+    'blogs.new.info'            => '最近在網站上添加的博客',
+    'blogs.new.desc'            => '最近添加了網站上的博客。 參與者的個人博客，能夠訂閱有趣的博客', 
+    
+    'blogs.my'                  => '我的博客',
+    'blogs.my.info'             => '我關注或創建的博客',
+    'blogs.my.desc'             => '我閱讀或創建的博客',
+    
+    'topics.all'                => '所有主題',
+    'topics.all.info'           => '網站上的所有主題按受歡迎程度排序',
+    'topics.all.desc'           => '按受歡迎程度排列的主題頁面。 通過定位的帖子數量，訂閱博客的能力',
+    
+    'topics.new'                => '新話題',    
+    'topics.new.info'           => '新主題，最近添加的主題',
+    'topics.new.desc'           => '最近添加到網站的新主題。 主題統計和訂閱主題的能力',
+    
+    'topics.my'                 => '我讀',
+    'topics.my.info'            => '我關注的話題，我閱讀',
+    'topics.my.desc'            => '我閱讀或創建的主題',
+
 ];
 
 return $data;

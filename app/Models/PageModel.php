@@ -8,7 +8,6 @@ use PDO;
 
 class PageModel extends MainModel
 {
-    
     // Информация по странице  (id, slug)
     public static function getPage($params, $user_id, $name)
     {
@@ -40,15 +39,15 @@ class PageModel extends MainModel
         $result = DB::run($sql, ['params' => $params, 'user_id' =>  $user_id]);
 
         return $result->fetch(PDO::FETCH_ASSOC);
-    } 
-    
-    
-  // Последние 5 страниц по фасету
+    }
+
+
+    // Последние 5 страниц по фасету
     public static function recentPosts($facet_id, $post_id)
     {
         $and = '';
         if ($post_id > 0) $and = 'AND post_id != ' . $post_id;
-        
+
         $sql = "SELECT 
                     post_id,
                     post_slug,
@@ -61,8 +60,8 @@ class PageModel extends MainModel
 
         return DB::run($sql, ['facet_id' => $facet_id])->fetchAll(PDO::FETCH_ASSOC);
     }
-    
-  // Последние 5 страниц по фасету
+
+    // Последние 5 страниц по фасету
     public static function recentPostsAll()
     {
         $sql = "SELECT 

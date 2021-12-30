@@ -1,15 +1,42 @@
-<div class="col-span-2 justify-between no-mob"> 
+<div class="col-span-2 justify-between no-mob">
   <?= tabs_nav(
-      'menu',
-      $data['type'],
-      $uid,
-      $pages = Config::get('menu.left'),
-    ); ?>
-</div>     
+    'menu',
+    $data['type'],
+    $uid,
+    $pages = Config::get('menu.left'),
+  ); ?>
+</div>
 
-<main class="col-span-7 mb-col-12">
+<main class="col-span-10 mb-col-12">
+  <div class="bg-white   center justify-between br-box-gray br-rd5 p15 mb15">
+    <h1 class="m0 text-xl font-normal"><?= Translate::get($data['sheet']); ?></h1>
+    <span class="text-sm gray-500">
+      <?= Translate::get($data['sheet'] . '.info'); ?>.
+    </span>
+  </div>
+
+  <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
+    <ul class="flex flex-row list-none m0 p0 center text-sm">
+
+      <?= tabs_nav(
+        'nav',
+        $data['sheet'],
+        $uid,
+        $pages = [
+          [
+            'id'    => $data['type'] . '.all',
+            'url'   => getUrlByName($data['type'] . '.all'),
+            'title' => Translate::get('all'),
+            'icon'  => 'bi bi-app'
+          ],
+        ]
+      );
+      ?>
+
+    </ul>
+  </div>
+
   <div class="bg-white br-rd5 br-box-gray p20">
-    <h1 class="mt0 mb15 text-2xl"><?= Translate::get('users'); ?></h1>
     <div class="max-width mr-auto w-100 grid grid-cols-6 gap-2 justify-between">
       <?php foreach ($data['users'] as $ind => $user) { ?>
         <div class="center inline pr10 pl10 mb20 mb-col-2">
@@ -28,4 +55,5 @@
   </div>
   <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/users'); ?>
 </main>
-<?= import('/_block/sidebar/lang', ['lang' => Translate::get('info-users'), 'uid' => $uid]); ?>
+</div>
+<?= import('/_block/wide-footer', ['uid' => $uid]); ?>

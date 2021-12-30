@@ -19,4 +19,5 @@
   </div>
   <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/users'); ?>
 </main>
-<?= import('/_block/sidebar/lang', ['lang' => Translate::get('info-users'), 'uid' => $uid]); ?>
+</div>
+<?= import('/_block/wide-footer', ['uid' => $uid]); ?>

@@ -12,11 +12,11 @@
   <link rel="icon" sizes="120x120" href="/favicon-120.ico" type="image/x-icon">
 </head>
 
-<?php  
-  $dark = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
-  $css = $data['type'] == 'web' || $data['type'] == 'page'  ? 'p0 m0 black' : 'p0 m0 black bg-gray-100';
-  $type  = $data['type'] ?? false;
-  $facet = $data['facet'] ?? false; ?>
+<?php
+$dark = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
+$css = $data['type'] == 'web' || $data['type'] == 'page'  ? 'p0 m0 black' : 'p0 m0 black bg-gray-100';
+$type  = $data['type'] ?? false;
+$facet = $data['facet'] ?? false; ?>
 
 <body class="<?= $css; ?><?php if (Request::getCookie('dayNight') == 'dark') { ?> dark<?php } ?>">
 

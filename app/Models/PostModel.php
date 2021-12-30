@@ -347,7 +347,7 @@ class PostModel extends MainModel
         $condition  = "topic";
         if ($type == 'blog') {
             $condition  = "blog";
-        } 
+        }
 
         $sql = "SELECT
                     facet_id,

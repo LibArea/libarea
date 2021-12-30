@@ -1,6 +1,4 @@
-  <div class="mt5 mr0 mb5 ml0 grid grid-cols-12 gap-4 justify-betwee">
-
-    <div class="col-span-9 mb-col-12 mt5 mr0 mb5 ml0">
+  <div class="mt5 mr0 mb5 ml0 justify-betwee">
       <?php foreach ($facets as $key => $facet) { ?>
 
         <div class="w-100 mb20 mb-w-100 flex flex-row">
@@ -44,8 +42,4 @@
           </div>
         </div>
       <?php } ?>
-    </div>
-    <div class="col-span-3 relative pl20 no-mob">
-      <?= Translate::get('blogs-info'); ?>!
-    </div>
   </div>

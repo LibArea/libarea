@@ -58,18 +58,14 @@ function cover_url($file, $type)
 }
 
 // User's Cover art or thumbnails
-function post_img($file, $alt, $style, $type, $attributes = '')
+function post_img($file, $alt, $style, $type)
 {
     $src = AG_PATH_POSTS_COVER . $file;
     if ($type == 'thumbnails') {
         $src = AG_PATH_POSTS_THUMB . $file;
     }
 
-    if ($attributes) {
-        $attributes = 'layer-src="' . $src . '"';
-    }
-
-    $img = '<img class="' . $style . '" ' . $attributes . ' src="' . $src . '" alt="' . $alt . '">';
+    $img = '<img class="' . $style . '" src="' . $src . '" alt="' . $alt . '">';
 
     return $img;
 }
@@ -263,7 +259,7 @@ function tabs_nav($name, $item, $uid, array $pages = [])
         $html = '';
         foreach ($pages as $key => $page) {  
         if (empty($page['auth']) || $uid['user_id'] > 0) {
-                $classes    = 'ml30 mb-mr-5 mb-ml-10 gray-500 sky-500-hover';
+                $classes    = 'mr15 gray-500 sky-500-hover';
                 $isActive   = $page['id'] == $item ? $classes . ' sky-500 ' : $classes;
                 $isAria     = $page['id'] == $item ? ' aria-current="page"' : '';
                 
@@ -274,7 +270,7 @@ function tabs_nav($name, $item, $uid, array $pages = [])
         }
         
     } else { 
-        $html  = '<nav class="sticky top60"><ul class="p0 mt10 list-none">';
+        $html  = '<nav class="sticky top70"><ul class="p0 mt10 list-none text-sm">';
         foreach ($pages as $key => $page) {
             
             if (!empty($page['hr'])) { 

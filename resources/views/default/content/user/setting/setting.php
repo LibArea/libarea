@@ -1,10 +1,10 @@
-<div class="col-span-2 justify-between no-mob"> 
+<div class="col-span-2 justify-between no-mob">
   <?= tabs_nav(
-      'menu',
-      $data['type'],
-      $uid,
-      $pages = Config::get('menu.left'),
-    ); ?>
+    'menu',
+    $data['type'],
+    $uid,
+    $pages = Config::get('menu.left'),
+  ); ?>
 </div>
 
 <main class="col-span-7 mb-col-12">
@@ -46,7 +46,7 @@
               'max'     => 11,
               'help'    => '3 - 11 ' . Translate::get('characters'),
               'red'     => 'red',
-              
+
             ],
           ]
         ]
@@ -74,14 +74,14 @@
           <?= Translate::get('template'); ?>
         </label>
         <select class="w-100 h30" name="user_template">
-          <?php foreach (Config::get('general.templates') as $tpl) { ?> 
+          <?php foreach (Config::get('general.templates') as $tpl) { ?>
             <option <?php if ($data['user']['user_template'] == $tpl) { ?>selected<?php } ?> value="<?= $tpl; ?>">
               <?= Translate::get($tpl); ?>
             </option>
           <?php } ?>
         </select>
       </div>
-         
+
       <div class="mb20 max-w640">
         <label class="block mb5" for="post_content"><?= Translate::get('language'); ?></label>
         <select class="w-100 h30" name="user_lang">

@@ -1,4 +1,5 @@
 <div class="mb10 mt15">
+  <?php if (!empty($title)) { ?><div class="mb5"><?= $title; ?><sup class="red-500">*</sup></div><?php } ?>
   <div id="ag-redactor" class="editorSection"><?php if (!empty($content)) { ?><?= $content; ?><?php } ?></div>
   <input type="hidden" name="content" class="text">
 </div>

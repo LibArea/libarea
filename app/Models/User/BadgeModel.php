@@ -117,12 +117,12 @@ class BadgeModel extends MainModel
 
         return DB::run($sql, ['user_id' => $user_id])->fetchAll(PDO::FETCH_ASSOC);
     }
-    
+
     // Удалить награду участника
     public static function remove($id, $uid)
     {
         $sql = "DELETE FROM badges_user WHERE bu_id = :id AND bu_user_id = :uid";
-        
+
         return DB::run($sql, ['id' => $id, 'uid' => $uid]);
     }
 }

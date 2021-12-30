@@ -1,9 +1,11 @@
 <main class="col-span-9 mb-col-12">
   <div class="bg-white flex flex-row items-center justify-between br-rd5 p15 mb15">
-    <p class="m0 text-xl"><!--?= Translate::get('feed'); ?--></p>
+    <p class="m0 text-xl">
+      <!--?= Translate::get('feed'); ?-->
+    </p>
     <ul class="flex flex-row list-none m0 p0 center">
 
-     <?= tabs_nav(
+      <?= tabs_nav(
         'nav',
         $data['sheet'],
         $uid,
@@ -125,3 +127,4 @@
     <?= import('/_block/sidebar/lang', ['lang' => [], 'uid' => $uid]); ?>
   </div>
 </aside>
+</div>

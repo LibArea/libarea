@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Models\FacetModel;
 use App\Models\Admin\{UserModel, StatsModel};
-use Base, Translate, Config;
+use Base, Translate;
 
 class HomeController extends MainController
 {
@@ -39,15 +39,15 @@ class HomeController extends MainController
             ]
         );
     }
-    
+
     public function css()
     {
         Request::getResources()->addBottomStyles('/assets/css/color-help.css');
-        
+
         $bg_file = HLEB_GLOBAL_DIRECTORY . '/public/assets/css/color-help.css';
-        $bg_array = file_get_contents($bg_file); 
+        $bg_array = file_get_contents($bg_file);
         preg_match_all('/\.([\w\d\.-]+)[^{}]*{[^}]*}/', $bg_array, $matches);
-  
+
         return agRender(
             '/admin/css',
             [

@@ -1,9 +1,9 @@
 <?= tabs_nav(
-      'menu',
-      $data['type'],
-      $uid,
-      $pages = Config::get('menu.left'),
-    ); ?>
+  'menu',
+  $data['type'],
+  $uid,
+  $pages = Config::get('menu.left'),
+); ?>
 
 <main class="col-span-7">
   <div class="bg-white br-rd5 br-box-gray mb15 pt5 pr15 pb5 pl15">
@@ -41,5 +41,5 @@
     <div class="bg-white br-rd5 br-box-gray pt5 pr15 pb10 pl15">
       <?= import('/_block/domains', ['data' => $data['domains'], 'uid' => $uid]); ?>
     </div>
-  </div>  
+  </div>
 </aside>

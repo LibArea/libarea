@@ -1,10 +1,10 @@
 <div class="col-span-2 justify-between no-mob">
   <?= tabs_nav(
-      'menu',
-      $data['type'],
-      $uid,
-      $pages = Config::get('menu.left'),
-    ); ?>
+    'menu',
+    $data['type'],
+    $uid,
+    $pages = Config::get('menu.left'),
+  ); ?>
 </div>
 
 <main class="col-span-10 mb-col-12">
@@ -30,45 +30,50 @@
           'uid'  => $uid,
           'data' => [
             [
-              'title' => Translate::get('title'),
-              'type' => 'text',
-              'name' => 'facet_title',
-              'min' => 3, 'max' => 64,
-              'help' => '3 - 64 ' . Translate::get('characters'),
-              'red' => 'red'
+              'title'       => Translate::get('title'),
+              'type'        => 'text',
+              'name'        => 'facet_title',
+              'required'    => true,
+              'min'         => 3,
+              'max'         => 64,
+              'help'        => '3 - 64 ' . Translate::get('characters'),
+              'red'         => 'red'
             ],
             [
-              'title' => Translate::get('short description'),
-              'type' => 'text',
-              'name' => 'facet_short_description',
-              'min' => 11,
-              'max' => 120,
-              'help' => '11 - 120 ' . Translate::get('characters'),
-              'red' => 'red'
+              'title'       => Translate::get('short description'),
+              'type'        => 'text',
+              'name'        => 'facet_short_description',
+              'required'    => true,
+              'min'         => 11,
+              'max'         => 120,
+              'help'        => '11 - 120 ' . Translate::get('characters'),
+              'red'         => 'red'
             ],
             [
-              'title' => Translate::get('title') . ' (SEO)',
-              'type' => 'text',
-              'name' => 'facet_seo_title',
-              'min' => 4,
-              'max' => 225,
-              'help' => '4 - 225 ' . Translate::get('characters'),
-              'red' => 'red'
+              'title'       => Translate::get('title') . ' (SEO)',
+              'type'        => 'text',
+              'name'        => 'facet_seo_title',
+              'required'    => true,
+              'min'         => 4,
+              'max'         => 225,
+              'help'        => '4 - 225 ' . Translate::get('characters'),
+              'red'         => 'red'
             ],
             [
-              'title' => Translate::get('Slug'),
-              'type' => 'text',
-              'name' => 'facet_slug',
-              'min' => 3,
-              'max' => 32,
-              'help' => '3 - 32 ' . Translate::get('characters') . ' (a-zA-Z0-9)',
-              'red' => 'red'
+              'title'       => Translate::get('Slug'),
+              'type'        => 'text',
+              'name'        => 'facet_slug',
+              'required'    => true,
+              'min'         => 3,
+              'max'         => 32,
+              'help'        => '3 - 32 ' . Translate::get('characters') . ' (a-zA-Z0-9)',
+              'red'         => 'red'
             ],
           ]
         ]); ?>
 
         <div for="mb5"><?= Translate::get('meta description'); ?><sup class="red-500">*</sup></div>
-        <textarea rows="6" class="add max-w780" minlength="44" name="facet_description"></textarea>
+        <textarea rows="6" class="add max-w780" required minlength="44" name="facet_description"></textarea>
         <div class="text-sm gray-400 mb20">> 44 <?= Translate::get('characters'); ?></div>
 
         <input type="hidden" name="facet_type" value="<?= $data['sheet']; ?>">

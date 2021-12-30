@@ -72,9 +72,6 @@ class EditFacetController extends MainController
         $facet = FacetModel::getFacet($facet_id, 'id');
         pageError404($facet);
 
- 
-
-
         // Доступ получает только автор и админ
         if ($facet['facet_user_id'] != $this->uid['user_id'] && $this->uid['user_trust_level'] != Base::USER_LEVEL_ADMIN) {
             redirect('/');
@@ -193,12 +190,11 @@ class EditFacetController extends MainController
         }
 
         addMsg(Translate::get('changes saved'), 'success');
-        
+
         if ($type == 'section') redirect(getUrlByName('admin.sections'));
         redirect(getUrlByName($type, ['slug' => $facet_slug]));
-        
     }
-    
+
     public function pages()
     {
         $facet_id   = Request::getInt('id');
@@ -224,6 +220,4 @@ class EditFacetController extends MainController
             ]
         );
     }
-    
-    
 }

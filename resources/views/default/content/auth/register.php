@@ -5,37 +5,38 @@
     <?php csrf_field(); ?>
 
     <?= import('/_block/form/field-input', [
-    'uid'  => $uid,
-    'data' => [
-      [
-        'title' => Translate::get('nickname'),
-        'type' => 'text',
-        'name' => 'login',
-        'min' => 3,
-        'max' => 32,
-        'help' => '>= 3 ' . Translate::get('characters') . ' (' . Translate::get('english') . ')'
-      ],
-      [
-        'title' => Translate::get('E-mail'),
-        'type' => 'email',
-        'name' => 'email',
-        'help' => Translate::get('work e-mail (to activate your account)')
-      ],
-      [
-        'title' => Translate::get('password'),
-        'type' => 'password',
-        'name' => 'password',
-        'min' => 8,
-        'max' => 32
-      ],
-      [
-        'title' => Translate::get('repeat the password'),
-        'type' => 'password',
-        'name' => 'password_confirm',
-        'min' => 8,
-        'max' => 32
-      ],
-    ]]); ?>
+      'uid'  => $uid,
+      'data' => [
+        [
+          'title' => Translate::get('nickname'),
+          'type' => 'text',
+          'name' => 'login',
+          'min' => 3,
+          'max' => 32,
+          'help' => '>= 3 ' . Translate::get('characters') . ' (' . Translate::get('english') . ')'
+        ],
+        [
+          'title' => Translate::get('E-mail'),
+          'type' => 'email',
+          'name' => 'email',
+          'help' => Translate::get('work e-mail (to activate your account)')
+        ],
+        [
+          'title' => Translate::get('password'),
+          'type' => 'password',
+          'name' => 'password',
+          'min' => 8,
+          'max' => 32
+        ],
+        [
+          'title' => Translate::get('repeat the password'),
+          'type' => 'password',
+          'name' => 'password_confirm',
+          'min' => 8,
+          'max' => 32
+        ],
+      ]
+    ]); ?>
 
     <?= import('/_block/captcha', ['uid'  => $uid]); ?>
 
@@ -46,5 +47,5 @@
   </form>
   <div class="pt20 mb5 gray-600"><?= Translate::get('login-use-condition'); ?>.</div>
   <div class="pt20 mb20 gray-600"><?= Translate::get('info-security'); ?></div>
-    <img class="right" alt="<?= Config::get('meta.name'); ?>" src="<?= Config::get('meta.img_footer_url'); ?>">
+  <img class="right" alt="<?= Config::get('meta.name'); ?>" src="<?= Config::get('meta.img_footer_url'); ?>">
 </main>

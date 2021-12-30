@@ -42,7 +42,7 @@ class FacetsController extends MainController
             ]
         );
     }
-    
+
     public function pages($sheet, $type)
     {
         $page   = Request::getInt('page');
@@ -52,7 +52,7 @@ class FacetsController extends MainController
 
         Request::getResources()->addBottomScript('/assets/js/admin.js');
 
-        $pages =  (new \App\Controllers\PageController())->lastAll();   
+        $pages =  (new \App\Controllers\PageController())->lastAll();
 
         return agRender(
             '/admin/page/pages',

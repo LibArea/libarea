@@ -16,14 +16,15 @@
         'uid'  => $uid,
         'data' => [
           [
-            'title' => Translate::get('heading'),
-            'type'  => 'text',
-            'name'  => 'post_title',
-            'min'   => 6,
-            'max'   => 250,
-            'id'    => 'title',
-            'help'  => '6 - 250 ' . Translate::get('characters'),
-            'red'   => 'red'
+            'title'     => Translate::get('heading'),
+            'type'      => 'text',
+            'name'      => 'post_title',
+            'required'  => true,
+            'min'       => 6,
+            'max'       => 250,
+            'id'        => 'title',
+            'help'      => '6 - 250 ' . Translate::get('characters'),
+            'red'       => 'red'
           ]
         ],
       ]); ?>
@@ -62,6 +63,9 @@
           <img id="file-image" src="/assets/images/1px.jpg" alt="" class="mr20 w94 h94 br-box-gray">
           <div id="start">
             <input id="file-upload" type="file" name="images" accept="image/*" />
+            <div class="text-sm gray mt5">
+              <?= Translate::get('format-cover-post'); ?>.
+            </div>
             <i class="fa fa-download" aria-hidden="true"></i>
             <div id="notimage" class="none">Please select an image</div>
           </div>
@@ -69,12 +73,10 @@
         <div id="response" class="hidden">
           <div id="messages"></div>
         </div>
-        <div class="text-sm gray mt5">
-          <?= Translate::get('format-cover-post'); ?>.
-        </div>
-      </div>
+       </div>
 
       <?= import('/_block/editor/editor', [
+        'title'     => Translate::get('text'),
         'type'      => 'post',
         'height'    => '350px',
         'preview'   => 'vertical',

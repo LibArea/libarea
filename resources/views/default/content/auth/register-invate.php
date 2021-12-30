@@ -5,36 +5,37 @@
       <?php csrf_field(); ?>
 
       <?= import('/_block/form/field-input', [
-      'uid'  => $uid,
-      'data' => [
-        [
-          'title' => Translate::get('nickname'),
-          'type' => 'text',
-          'name' => 'login',
-          'min' => 3,
-          'max' => 10,
-          'help' => '3 - 10 ' . Translate::get('characters')
-        ],
-        [
-          'title' => Translate::get('E-mail'),
-          'type' => 'email',
-          'name' => 'email',
-          'value' => $data['invate']['invitation_email']
-        ],
-        [
-          'title' => Translate::get('password'),
-          'type' => 'password',
-          'name' => 'password',
-          'min' => 8,
-          'max' => 32,
-          'help' => '8 - 32 ' . Translate::get('characters')
-        ],
-        [
-          'title' => Translate::get('repeat the password'),
-          'type' => 'password',
-          'name' => 'password_confirm',
-        ],
-      ]]); ?>
+        'uid'  => $uid,
+        'data' => [
+          [
+            'title' => Translate::get('nickname'),
+            'type' => 'text',
+            'name' => 'login',
+            'min' => 3,
+            'max' => 10,
+            'help' => '3 - 10 ' . Translate::get('characters')
+          ],
+          [
+            'title' => Translate::get('E-mail'),
+            'type' => 'email',
+            'name' => 'email',
+            'value' => $data['invate']['invitation_email']
+          ],
+          [
+            'title' => Translate::get('password'),
+            'type' => 'password',
+            'name' => 'password',
+            'min' => 8,
+            'max' => 32,
+            'help' => '8 - 32 ' . Translate::get('characters')
+          ],
+          [
+            'title' => Translate::get('repeat the password'),
+            'type' => 'password',
+            'name' => 'password_confirm',
+          ],
+        ]
+      ]); ?>
 
       <div class="mb20">
         <input type="hidden" name="invitation_code" id="invitation_code" value="<?= $data['invate']['invitation_code']; ?>">

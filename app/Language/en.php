@@ -374,14 +374,13 @@ $data = [
     'psychology'            => 'Psychology',
 
     /* Meta - desc */
-    'desc-user-all'         => 'List of all participants sorted by date of registration on the site',
     'title-profile'         => '%1$s %2$s | Profile on %3$s',
     'desc-profile'          => '%1$s - member profile page. %2$s Posts, comments, awards on %3$s',
     'page-number'           => ' Page %1$s. ',
-    'top-title'             => 'Popular posts. ',
-    'top-desc'              => 'List of popular posts in the community feed (by the number of replies). Topics of interest. Conversations, questions and answers, comments. ',
-    'all-title'             => 'All posts. ',
-    'all-desc'              => 'List of all posts in the community feed (by number of replies). Conversations, questions and answers, comments. ',
+    'main.top.title'        => 'Popular posts. ',
+    'main.top.desc'         => 'List of popular posts in the community feed (by the number of replies). Topics of interest. Conversations, questions and answers, comments. ',
+    'main.all.title'        => 'All posts. ',
+    'main.all.desc'         => 'List of all posts in the community feed (by number of replies). Conversations, questions and answers, comments. ',
     'edit answer'           => 'Change the answer',
     'no results'            => 'No results',
     'no search results'     => 'The search has not given any results.<br>Too short / long search term.',
@@ -417,7 +416,6 @@ $data = [
     'info-setting'          => 'Fill in your name, this will help attendees refer to you by name. <br> <br> Tell us something about yourself. You have a great opportunity to open up to please others and seem like an interesting person.',
     'info-avatar'           => 'Upload an avatar and cover for your profile. <br> <br> When each user has a unique avatar, it becomes much easier to follow the discussions! ',
     'info-security'         => 'Make sure all your passwords are 8 characters or more, ideally a lot more. <br> <br> Passwords must contain Large letters, small, numbers, specials. symbols.',
-    'info-users'            => 'List of participants sorted in order of activity on the site.',
     'info-search'           => 'To refine your search, try to find a more precise query.',
     'info-login'            => 'Authorization gives you the ability to publish posts, reply, comment. <br><br> You can vote for other publications, fill out and edit the profile.',
     'info-recover'          => 'After clicking the "Reset" button, check your email...',
@@ -501,26 +499,41 @@ $data = [
     'the command is executed'                       => 'Command executed',
     'you can add more'                              => 'You can add more',
 
-    'recommended posts' => 'recommended posts',
-    'recommended-posts-desc' => 'Recommended posts in «%1$s» hand - selected. ',
+    'recommended posts'         => 'recommended posts',
+    'recommended.posts.desc'    => 'Recommended posts in «%1$s» hand - selected. ',
 
-    'blog-add-info'         => 'Blog page created by me',
-    'topics.all'            => 'All topics',
-    'topics.my'             => 'I am subscribed to topics',
-    'topics.new'            => 'New Topics',
-    'topics.all-desc'       => 'A page of topics arranged in order of popularity. By the number of posts located',
-    'topics.my-desc'        => 'Topics page I follow',
-    'topics.new-desc'       => 'New themes added to the site recently. Subscribe to topics',
-    'structure-desc'        => 'Topics represented by different trees, structure of topics and their relationship',
-    'blogs.all'             => 'Personal blogs',
-    'blogs.my'              => 'My blogs',
-    'blogs.new'             => 'New blogs',
-    'blogs.all-desc'        => 'All personal blogs of the participants on the site recently. Sorted in order of popularity',
-    'blogs.my-desc'         => 'My blogs on the site',
-    'blogs.new-desc'        => 'Blogs on the site added recently. Members personal blogs',
-    'topic-subscription'    => 'Subscribe to topics and read them in the feed',
-    'stop-blog'             => 'This blog URL is reserved',
-    'blogs-info'            => 'Blogs are a great way to organize your content. <br> <br> Create and maintain a blog, share ideas and communicate',
+    'structure-desc'            => 'Topics represented by different trees, structure of topics and their relationship ',
+    'topic-subscription'        => 'Subscribe to topics and read them in the feed',
+    'stop-blog'                 => 'This blog URL is reserved',
+    
+    'users.all'                 => 'List of participants',
+    'users.all.info'            => 'List of participants in the order of their activity on the site',
+    'users.all.desc'            => 'Participants in the order of their activity on the site. Ability to view profile data',
+    
+    'blogs.all'                 => 'All blogs ',
+    'blogs.all.info'            => 'Blogs created by contributors',
+    'blogs.all.desc'            => 'Blogs in the order of their registration on the site, the ability to view the created blogs, subscribe to them, view statistics',
+
+    'blogs.new'                 => 'New blogs',
+    'blogs.new.info'            => 'Recently added blogs on the site',
+    'blogs.new.desc'            => 'Blogs on the site added recently. Personal blogs of participants, the ability to subscribe to interesting blogs', 
+    
+    'blogs.my'                  => 'My blogs',
+    'blogs.my.info'             => 'Blogs I follow or have created',
+    'blogs.my.desc'             => 'Blogs I Read or Have Created',
+    
+    'topics.all'                => 'All topics',
+    'topics.all.info'           => 'All topics on the site in order of their popularit',
+    'topics.all.desc'           => 'A page of topics arranged in order of popularity. By the number of posts located, the ability to subscribe to blogs ',
+    
+    'topics.new'                => 'New Topics',    
+    'topics.new.info'           => 'New themes, themes added recently',
+    'topics.new.desc'           => 'New themes added to the site recently. Topic statistics and the ability to subscribe to topics',
+    
+    'topics.my'                 => 'I read ',
+    'topics.my.info'            => 'Topics I follow, I read',
+    'topics.my.desc'            => 'Topics that I read or have created',
+
 ];
 
 return $data;

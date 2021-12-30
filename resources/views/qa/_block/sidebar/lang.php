@@ -12,7 +12,7 @@
       <a rel="nofollow noopener" class="gray-400 right" title="DISCORD" href="https://discord.gg/dw47aNx5nU">
         <i class="bi bi-discord middle text-xl"></i>
       </a>
-      <a rel="nofollow noopener" class="gray-400 right ml15 mr15" title="Vkontakte" href="https://vk.com/agouti">
+      <a rel="nofollow noopener" class="gray-400 text-xl right ml15 mr15" title="Vkontakte" href="https://vk.com/agouti">
         VK
       </a>
       <a rel="nofollow noopener" class="gray-400 right" title="GitHub" href="https://github.com/agoutiDev/agouti">

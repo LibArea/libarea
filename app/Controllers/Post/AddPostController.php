@@ -25,10 +25,10 @@ class AddPostController extends MainController
         } else {
             if ($this->uid['user_trust_level'] < Base::USER_LEVEL_ADMIN) {
                 $count  = FacetModel::countFacetsUser($this->uid['user_id'], 'blog');
-                if(!$count) redirect('/');
+                if (!$count) redirect('/');
             }
         }
-        
+
         Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
         Request::getResources()->addBottomScript('/assets/js/tag/tagify.min.js');
         Request::getResources()->addBottomStyles('/assets/js/editor/toastui-editor.min.css');
@@ -42,18 +42,18 @@ class AddPostController extends MainController
         // Добавление со странице темы
         $topic_id   = Request::getInt('topic_id');
         $topic      = FacetModel::getFacet($topic_id, 'id');
- 
+
         $facets = ['topic' => $topic];
         if ($topic) {
             if ($topic['facet_type'] == 'blog') {
-                $facets  = ['blog' => $topic]; 
+                $facets  = ['blog' => $topic];
                 if ($topic['facet_user_id'] != $this->uid['user_id']) redirect('/');
             }
         }
 
         $puth = '/post/add';
         if ($type_content == 'page') $puth = '/page/add';
-        
+
         return agRender(
             $puth,
             [
@@ -210,7 +210,7 @@ class AddPostController extends MainController
         // Получим id блога с формы выбора
         $blog_post  = $post_fields['blog_select'] ?? false;
         if ($blog_post) {
-            $blog       = json_decode($blog_post, true); 
+            $blog       = json_decode($blog_post, true);
             $topics = array_merge($blog, $topics);
         }
 
@@ -262,13 +262,13 @@ class AddPostController extends MainController
         if ($facet_post) {
             $topics     = json_decode($facet_post, true);
         }
-        
+
         $blog_post  = $post_fields['blog_select'] ?? false;
         if ($blog_post) {
-            $blog   = json_decode($blog_post, true); 
+            $blog   = json_decode($blog_post, true);
             $topics = array_merge($blog, $topics ?? []);
         }
- 
+
         // Используем для возврата
         $redirect = getUrlByName('page.add');
         if ($blog_id > 0) {
@@ -282,9 +282,9 @@ class AddPostController extends MainController
 
         if ($this->uid['user_trust_level'] < Base::USER_LEVEL_ADMIN) {
             $count  = FacetModel::countFacetsUser($this->uid['user_id'], 'blog');
-            if(!$count) redirect('/');
+            if (!$count) redirect('/');
         }
-        
+
         // Если нет темы
         if (!$topics) {
             addMsg(Translate::get('select topic') . '!', 'error');
@@ -323,7 +323,7 @@ class AddPostController extends MainController
             'post_closed'           => 0,
             'post_top'              => 0,
         ];
-        
+
         $last_post_id   = PostModel::AddPost($data);
         $facet = FacetModel::getFacet($topics[0]['id'], 'id');
         $url_post       = getUrlByName('page', ['facet' => $facet['facet_slug'], 'slug' => $post_slug]);

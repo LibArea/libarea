@@ -47,9 +47,9 @@ class HomeController extends MainController
         $meta_title = Config::get('meta.title') . $num;
         $meta_desc  = Config::get('meta.desc') . $num;
 
-        if ($sheet == 'top' || $sheet == 'all') {
-            $meta_title = Translate::get($sheet . '-title') . $num . Config::get('meta.title');
-            $meta_desc  = Translate::get($sheet . '-desc') . $num . Config::get('meta.desc');
+        if ($sheet == 'main.top' || $sheet == 'main.all') {
+            $meta_title = Translate::get($sheet . '.title') . $num . Config::get('meta.title');
+            $meta_desc  = Translate::get($sheet . '.desc') . $num . Config::get('meta.desc');
         }
 
         $topics = [];

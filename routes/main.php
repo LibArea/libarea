@@ -140,7 +140,7 @@ Route::get('/topic/{slug}/followers/{id}')->controller('Facets\TopicFacetControl
 Route::get('/post/{id}')->controller('Post\PostController')->where(['id' => '[0-9]+']);
 Route::get('/post/{id}/{slug}')->controller('Post\PostController')->where(['id' => '[0-9]+', 'slug' => '[A-Za-z0-9-_]+'])->name('post');
 
-Route::get('/users')->controller('User\UserController', ['users'])->name('users.all');
+Route::get('/users')->controller('User\UserController', ['users.all', 'users'])->name('users.all');
 Route::get('/users/page/{page?}')->controller('User\UserController')->where(['page' => '[0-9]+']);
 
 Route::get('/u/{login}')->controller('User\UserController@profile')->where(['login' => '[A-Za-z0-9]+'])->name('user');

@@ -113,7 +113,7 @@ class ActionModel extends MainModel
     {
         $uid    = Base::getUid();
         $id     = $uid['user_id'];
-        
+
         $field_id   = $type . '_id';
         if ($type == 'post') {
             $field_tl = 'post_tl';
@@ -123,7 +123,7 @@ class ActionModel extends MainModel
             $field_tl = 'user_trust_level';
             $field_name = 'user_login';
             $sql = "SELECT user_id, user_login, user_trust_level, user_activated FROM users WHERE user_activated = 1 AND user_login LIKE :user_login";
-        } elseif ($type == 'section') { 
+        } elseif ($type == 'section') {
             $field_id = 'facet_id';
             $field_tl = 'facet_tl';
             $field_name = 'facet_title';

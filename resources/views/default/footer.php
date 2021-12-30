@@ -1,4 +1,3 @@
-</div>
 <a class="up_down_btn fixed bg-gray-100 none w30 h30 z-50 br-rd3 center gray" title="<?= Translate::get('up'); ?>">&uarr;</a>
 
 <script src="/assets/js/common.js"></script>

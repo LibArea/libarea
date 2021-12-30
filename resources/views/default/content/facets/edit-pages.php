@@ -1,9 +1,9 @@
 <?= tabs_nav(
-      'menu',
-      $data['type'],
-      $uid,
-      $pages = Config::get('menu.left'),
-    ); ?>
+  'menu',
+  $data['type'],
+  $uid,
+  $pages = Config::get('menu.left'),
+); ?>
 
 <?php $fs = $data['facet']; ?>
 

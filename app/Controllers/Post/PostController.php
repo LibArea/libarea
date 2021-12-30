@@ -74,8 +74,8 @@ class PostController extends MainController
         if ($post['post_type'] == 'page') {
             if ($blog) {
                 redirect(getUrlByName('page', ['facet' => $blog[0]['facet_slug'], 'slug' => $post['post_slug']]));
-            } 
-            redirect(getUrlByName('page', ['facet' => 'info', 'slug' => $post['post_slug']])); 
+            }
+            redirect(getUrlByName('page', ['facet' => 'info', 'slug' => $post['post_slug']]));
         }
 
         $post['post_content']   = Content::text($post['post_content'], 'text');

@@ -45,5 +45,5 @@
         Agouti &copy; <?= date('Y'); ?> — <?= Translate::get('community'); ?>
       </div>
     </div>
-  </div>  
+  </div>
 </footer>

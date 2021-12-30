@@ -378,12 +378,13 @@ $data = [
     'psychology'            => 'Psihologie',
 
     /* Meta - desc */
-    'desc-user-all'         => 'Lista tuturor utilizatorilor sortată după data înregistrării pe site',
     'title-profile'         => '%1$s %2$s | Titlu profil  %3$s',
     'desc-profile'          => '%1$s - pagina profilului. %2$s Postări, comentarii, premii pe %3$s',
     'page-number'           => ' — pagina %1$s ',
-    'home-desc'             => 'Pagina principală a comunității, forum, postări',
-    'top-desc'              => 'Lista postărilor populare din comunitate (după numărul de răspunsuri)',
+    'main.top.title'        => 'Posturi populare. ',
+    'main.top.desc'         => 'O listă de postări populare din feedul comunității (după numărul de răspunsuri). Subiecte de interes. Conversații, întrebări și Răspunsuri, Comentarii. ',
+    'main.all.title'        => 'Toate mesajele. ',
+    'main.all.desc'         => 'O listă a tuturor postărilor din feedul comunității (după numărul de răspunsuri). Conversații, întrebări și Răspunsuri, Comentarii. ',
     'seleted comments'      => 'Comentarii șterse',
     'edit answer'           => 'Schimbați răspunsul',
     'no results'            => 'Niciun rezultat',
@@ -404,7 +405,6 @@ $data = [
     'info-setting'          => 'Completați numele dvs., acest lucru va ajuta participanții să vă facă referire după nume. <br> <br> Spune-ne ceva despre tine. Aveți o mare oportunitate de a vă deschide pentru a mulțumi pe alții și a părea o persoană interesantă.',
     'info-avatar'           => 'Încărcați un avatar și o acoperire pentru profilul dvs. <br> <br> Când fiecare utilizator are un avatar unic, devine mult mai ușor să urmărești discuțiile!',
     'info-security'         => 'Asigurați-vă că toate parolele dvs. au 8 sau mai multe caractere, în mod ideal mult mai multe. <br> <br> Parolele trebuie să conțină litere mari, mici, cifre, simboluri.',
-    'info-users'            => 'Lista membrilor ordonată în ordine de activitate pe site.',
     'info-search'           => 'Pentru a rafina căutarea, încercați să găsiți o interogare mai precisă.',
     'info-notifications'    => 'Puteți marca toate anunțurile ca citite făcând clic pe linkul: „Am citit”.',
     'info-login'            => 'Autorizarea vă permite să publicați postări, să răspundeți, să comentați. <br> <br> Puteți vota pentru alte publicații, completați și editați profilul.',
@@ -479,9 +479,6 @@ $data = [
     'the command is executed'               => 'Comanda este executată',
     'you can add more'                      => 'Puteți adăuga mai multe',
 
-    'recommended posts' => 'postări recomandate ',
-    'recommended-posts-desc' => 'Postări recomandate în  «%1$s» selectat manual. ',
-
     'new password has been sent to e-mail'          => 'Noua parolă a fost trimisă prin e-mail',
     'check your e-mail to activate your account'    => 'Verificați-vă e-mailul pentru a vă activa contul',
     'tl-limitation'                                 => 'Nivelul dvs. de încredere (TL) nu permite această acțiune',
@@ -494,23 +491,40 @@ $data = [
     'responses-members'                 => 'Răspunsurile comunității',
     'design choice'                     => 'alegerea designului',
 
-    'blog-add-info'         => 'Pagina blog creat de mine',
-    'topics.all'            => 'Toate subiectele',
-    'topics.my'             => 'Sunt abonat la subiecte',
-    'topics.new'            => 'Subiecte noi',
-    'topics.all-desc'       => 'O pagină cu subiecte aranjate în ordinea popularității. Totul, teme noi, teme populare',
-    'topics.my-desc'        => 'Pagina subiectelor pe care le urmăresc',
-    'topics.new-desc'       => 'Teme noi adăugate recent pe site. Abonați-vă la subiecte',
-    'structure-desc'        => 'Subiecte reprezentate de diferiți arbori, structura subiectelor și relația lor',
-    'blogs.all'             => 'Bloguri personale',
-    'blogs.my'              => 'Blogurile mele',
-    'blogs.new'             => 'Bloguri noi',
-    'blogs.all-desc'        => 'Toate blogurile personale ale participanților de pe site recent. Sortate în ordinea popularității',
-    'blogs.my-desc'         => 'Blogurile mele de pe site',
-    'blogs.new-desc'        => 'Bloguri pe site adăugate recent. Blogurile personale ale membrilor',
-    'topic-subscription'    => 'Abonați-vă la spații și citiți-le în flux',
-    'stop-blog'             => 'URL-ul acestui blog este rezervat',
-    'blogs-info'            => 'Blogurile sunt o modalitate excelentă de a vă organiza conținutul. <br><br> Creați și mențineți un blog, împărtășiți idei și comunicați',
+    'recommended posts' => 'postări recomandate ',
+    'recommended.posts.desc' => 'Postări recomandate în  «%1$s» selectat manual. ',
+    
+    'structure-desc'            => 'Subiecte reprezentate de diferiți arbori, structura subiectelor și relația lor',
+    'topic-subscription'        => 'Abonați-vă la subiecte și citiți-le în feed',
+    'stop-blog'                 => 'URL-ul acestui blog este rezervat',
+    
+    'users.all'                 => 'Lista participanților',
+    'users.all.info'            => 'Lista participanților în ordinea activității lor pe site',
+    'users.all.desc'            => 'Participanții în ordinea activității lor pe site. Posibilitatea de a vizualiza datele de profil ',
+    
+    'blogs.all'                 => 'Toate blogurile ',
+    'blogs.all.info'            => 'Bloguri create de colaboratori',
+    'blogs.all.desc'            => 'Bloguri în ordinea înregistrării lor pe site, posibilitatea de a vizualiza blogurile create, de a vă abona la ele, de a vizualiza statistici',
+
+    'blogs.new'                 => 'Bloguri noi',
+    'blogs.new.info'            => 'Bloguri adăugate recent pe site',
+    'blogs.new.desc'            => 'Bloguri pe site adăugate recent. Bloguri personale ale participanților, posibilitatea de a vă abona la bloguri interesante', 
+    
+    'blogs.my'                  => 'Blogurile mele',
+    'blogs.my.info'             => 'Bloguri pe care le urmăresc sau le-am creat',
+    'blogs.my.desc'             => 'Bloguri pe care le-am citit sau pe care le-am creat',
+    
+    'topics.all'                => 'Toate subiectele',
+    'topics.all.info'           => 'Toate subiectele de pe site în ordinea popularității lor',
+    'topics.all.desc'           => 'O pagină cu subiecte aranjate în ordinea popularității. După numărul de postări localizate, capacitatea de a te abona la bloguri',
+    
+    'topics.new'                => 'Subiecte noi',    
+    'topics.new.info'           => 'Teme noi, teme adăugate recent',
+    'topics.new.desc'           => 'Teme noi adăugate recent pe site. Statisticile subiectelor și capacitatea de a te abona la subiecte',
+    
+    'topics.my'                 => 'Citesc',
+    'topics.my.info'            => 'Subiecte pe care le urmăresc, le citesc',
+    'topics.my.desc'            => 'Subiecte pe care le-am citit sau pe care le-am creat',
 ];
 
 return $data;

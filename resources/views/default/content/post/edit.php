@@ -16,17 +16,18 @@
       <?= import('/_block/form/field-input', [
         'uid'  => $uid,
         'data' => [
-        [
-          'title' => Translate::get('heading'),
-          'type' => 'text',
-          'name' => 'post_title',
-          'value' => $post['post_title'],
-          'min' => 6,
-          'max' => 250,
-          'help' => '6 - 250 ' . Translate::get('characters'),
-          'red' => 'red'
-        ],
-      ]]); ?>
+          [
+            'title' => Translate::get('heading'),
+            'type' => 'text',
+            'name' => 'post_title',
+            'value' => $post['post_title'],
+            'min' => 6,
+            'max' => 250,
+            'help' => '6 - 250 ' . Translate::get('characters'),
+            'red' => 'red'
+          ],
+        ]
+      ]); ?>
 
       <?= import('/_block/form/select/blog', [
         'uid'         => $uid,

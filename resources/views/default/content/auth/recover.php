@@ -5,15 +5,16 @@
     <?php csrf_field(); ?>
 
     <?= import('/_block/form/field-input', [
-    'uid'  => $uid,
-    'data' => [
-      [
-        'title' => Translate::get('E-mail'),
-        'type' => 'email',
-        'name' => 'email',
-        'value' => ''
-      ],
-    ]]); ?>
+      'uid'  => $uid,
+      'data' => [
+        [
+          'title' => Translate::get('E-mail'),
+          'type' => 'email',
+          'name' => 'email',
+          'value' => ''
+        ],
+      ]
+    ]); ?>
 
     <?= import('/_block/captcha', ['uid'  => $uid]); ?>
 

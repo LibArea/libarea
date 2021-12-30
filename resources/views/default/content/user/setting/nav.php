@@ -1,9 +1,9 @@
 <ul class="flex flex-row list-none m0 p0 center">
 
   <?= tabs_nav(
-        'nav',
-        $data['sheet'],
-        $uid,
+    'nav',
+    $data['sheet'],
+    $uid,
     $pages = [
       [
         'id' => 'settings',

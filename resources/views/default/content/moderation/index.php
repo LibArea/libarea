@@ -1,9 +1,9 @@
 <?= tabs_nav(
-      'menu',
-      $data['type'],
-      $uid,
-      $pages = Config::get('menu.left'),
-    ); ?>
+  'menu',
+  $data['type'],
+  $uid,
+  $pages = Config::get('menu.left'),
+); ?>
 
 <main class="col-span-7 mb-col-12 bg-white br-rd5 br-box-gray pt5 mt15 pr15 pb5 pl15">
   <h1 class="mt0 mb10 text-2xl font-normal"><?= Translate::get('moderation log'); ?></h1>

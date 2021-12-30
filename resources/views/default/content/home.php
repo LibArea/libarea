@@ -6,22 +6,21 @@
     </div>
   </div>
 <?php } ?>
- 
-<div class="col-span-2 justify-between no-mob"> 
+
+<div class="col-span-2 justify-between no-mob">
   <?= tabs_nav(
-      'menu',
-      $data['type'],
-      $uid,
-      $pages = Config::get('menu.left'),
-    ); ?>
-</div>    
- 
+    'menu',
+    $data['type'],
+    $uid,
+    $pages = Config::get('menu.left'),
+  ); ?>
+</div>
+
 <main class="col-span-7 mb-col-12">
   <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
-    <p class="m0 text-xl"><?= Translate::get('feed'); ?></p>
     <ul class="flex flex-row list-none m0 p0 center">
 
-     <?= tabs_nav(
+      <?= tabs_nav(
         'nav',
         $data['sheet'],
         $uid,
@@ -127,10 +126,10 @@
     <?php if (!empty($data['latest_answers'])) { ?>
       <div class="last-comm br-box-gray p5 pr15 pb5 pl15 bg-white br-rd5">
         <?php foreach ($data['latest_answers'] as $answer) { ?>
-          <div class="mt15 mr0 mb15 ml0">
-            <div class="text-sm gray-400">
+          <div class="mt15 mr0 mb15 ml0 text-sm">
+            <div class="gray-400">
               <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'w18 h18 br-rd-50 mr5'); ?>
-              <span class="middle"><?= $answer['answer_date']; ?></span>
+              <span class="middle lowercase"><?= $answer['answer_date']; ?></span>
             </div>
             <a class="black dark-white" href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">
               <?= $answer['answer_content']; ?>...
@@ -143,3 +142,4 @@
     <?= import('/_block/sidebar/lang', ['lang' => [], 'uid' => $uid]); ?>
   </div>
 </aside>
+</div>

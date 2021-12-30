@@ -1,10 +1,10 @@
 <div class="col-span-2 justify-between no-mob">
   <?= tabs_nav(
-      'menu',
-      $data['type'],
-      $uid,
-      $pages = Config::get('menu.left'),
-    ); ?>
+    'menu',
+    $data['type'],
+    $uid,
+    $pages = Config::get('menu.left'),
+  ); ?>
 </div>
 
 <main class="col-span-7 mb-col-12">
@@ -71,8 +71,8 @@
         <div class="flex relative pt5 pb5 items-center hidden">
           <?= user_avatar_img($val['user_avatar'], 'max', $val['user_login'], 'br-rd-50 w44 mr15'); ?>
           <a href="<?= getUrlByName('user.dialogues', ['id' => $val['dialog_id']]); ?>"><?= $val['user_login']; ?></a>
-        </div> 
+        </div>
       <?php } ?>
     <?php } ?>
-  </div>  
+  </div>
 </aside>

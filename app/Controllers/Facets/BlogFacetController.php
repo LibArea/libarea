@@ -16,7 +16,7 @@ class BlogFacetController extends MainController
     {
         $this->uid  = Base::getUid();
     }
-    
+
     // Blog posts
     // Посты в блоге
     public function index($sheet)

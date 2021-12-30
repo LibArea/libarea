@@ -5,7 +5,7 @@
         <i class="bi bi-plus-lg middle"></i>
       </a>
     <?php } ?>
-    <h1 class="mt5 mb10 text-3xl font-normal"><?= Translate::get('domains-title'); ?></h1>
+    <h1 class="mt0 mb10 text-2xl font-normal"><?= Translate::get('domains-title'); ?></h1>
   </div>
   <div class="flex mb20 pt10 pr15 pb10 pl15 bg-yellow-50 flex-auto">
     <?php foreach (Config::get('web-root-categories') as  $cat) { ?>

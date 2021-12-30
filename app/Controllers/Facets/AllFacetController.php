@@ -48,7 +48,7 @@ class AllFacetController extends MainController
         return agRender(
             '/facets/all',
             [
-                'meta'  => meta($m, Translate::get($sheet) . $num, Translate::get($sheet . '-desc') . $num),
+                'meta'  => meta($m, Translate::get($sheet) . $num, Translate::get($sheet . '.desc') . $num),
                 'uid'   => $this->uid,
                 'data'  => [
                     'sheet'         => $sheet,

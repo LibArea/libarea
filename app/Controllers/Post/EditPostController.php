@@ -29,7 +29,7 @@ class EditPostController extends MainController
         if ($post['post_type'] == 'post') {
             Request::getResources()->addBottomScript('/assets/js/uploads.js');
         }
-        
+
         Request::getResources()->addBottomStyles('/assets/js/editor/toastui-editor.min.css');
         Request::getResources()->addBottomStyles('/assets/js/editor/dark.css');
         Request::getResources()->addBottomScript('/assets/js/editor/toastui-editor-all.min.js');
@@ -203,10 +203,10 @@ class EditPostController extends MainController
         if ($facet_post) {
             $topics     = json_decode($facet_post, true);
         }
-        
+
         $blog_post  = $post_fields['blog_select'] ?? false;
         if ($blog_post) {
-            $blog   = json_decode($blog_post, true); 
+            $blog   = json_decode($blog_post, true);
             $topics = array_merge($blog, $topics ?? []);
         }
 

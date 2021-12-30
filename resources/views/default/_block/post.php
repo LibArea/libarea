@@ -1,10 +1,10 @@
 <?php if (!empty($data['posts'])) { ?>
   <?php $n = 0;
-  foreach ($data['posts'] as $post) { 
-  $n++; ?>
-  <?php if ($uid['user_id'] == 0 && $n == 6) { ?>
-     <?= import('/_block/no-login-screensaver', ['uid' => $uid]); ?>
-  <?php } ?>
+  foreach ($data['posts'] as $post) {
+    $n++; ?>
+    <?php if ($uid['user_id'] == 0 && $n == 6) { ?>
+      <?= import('/_block/no-login-screensaver', ['uid' => $uid]); ?>
+    <?php } ?>
     <?php $post_url = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>
     <div class="br-box-gray bg-white p20 mb15 br-rd5 article_<?= $post['post_id']; ?>">
       <?php if ($data['sheet'] == 'subscribed') { ?>
@@ -18,7 +18,7 @@
           <div id="content_<?= $post['post_id']; ?>" class="content_<?= $post['post_id']; ?>"></div>
         </div>
         <a class="flex black dark-white flex-center" href="<?= getUrlByName('user', ['login' => $post['user_login']]); ?>">
-           
+
           <div class="ml5">
             <?= $post['user_login']; ?>
             <div class="gray-400 lowercase text-sm">

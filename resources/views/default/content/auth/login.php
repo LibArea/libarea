@@ -7,12 +7,13 @@
     <?= import('/_block/form/field-input', [
       'uid'  => $uid,
       'data' =>  [
-      [
-        'title' => Translate::get('E-mail'),
-        'type' => 'email',
-        'name' => 'email',
+        [
+          'title' => Translate::get('E-mail'),
+          'type' => 'email',
+          'name' => 'email',
+        ]
       ]
-    ]]); ?>
+    ]); ?>
 
     <div class="inputs relative mb20">
       <label for="password" class="block mb5"><?= Translate::get('password'); ?></label>
@@ -38,6 +39,5 @@
   <?php } ?>
   <div class="pt20 mb5 gray-600"><?= Translate::get('login-use-condition'); ?>.</div>
   <div class="pt20 mb20 gray-600"><?= Translate::get('info-login'); ?></div>
-    <img class="right" alt="<?= Config::get('meta.name'); ?>" src="<?= Config::get('meta.img_footer_url'); ?>">
+  <img class="right" alt="<?= Config::get('meta.name'); ?>" src="<?= Config::get('meta.img_footer_url'); ?>">
 </main>
- 

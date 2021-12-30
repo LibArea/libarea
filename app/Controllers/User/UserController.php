@@ -19,8 +19,9 @@ class UserController extends MainController
         $this->uid  = Base::getUid();
     }
 
+    // All users
     // Все пользователи
-    function index($type)
+    function index($sheet, $type)
     {
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
@@ -39,11 +40,11 @@ class UserController extends MainController
         return agRender(
             '/user/users',
             [
-                'meta'  => meta($m, Translate::get('users'), Translate::get('desc-user-all')),
+                'meta'  => meta($m, Translate::get('users'), Translate::get($sheet . '.desc')),
                 'uid'   => $this->uid,
                 'data'  => [
-                    'sheet'         => 'users',
-                    'type'         =>  $type,
+                    'sheet'         => $sheet,
+                    'type'          => $type,
                     'pagesCount'    => ceil($usersCount / $this->limit),
                     'pNum'          => $page,
                     'users'         => $users
@@ -52,13 +53,12 @@ class UserController extends MainController
         );
     }
 
-    // Страница участника
+    // Member page (profile) 
+    // Страница участника (профиль)
     function profile()
     {
         $login = Request::get('login');
         $user  = UserModel::getUser($login, 'slug');
-
-        // Покажем 404
         pageError404($user);
 
         if (!$user['user_about']) {
@@ -73,7 +73,7 @@ class UserController extends MainController
             Request::getHead()->addMeta('robots', 'noindex');
         }
 
-        // Просмотры профиля
+        // Profile Views (просмотры профиля)
         if (!isset($_SESSION['usernumbers'])) {
             $_SESSION['usernumbers'] = [];
         }
@@ -118,6 +118,7 @@ class UserController extends MainController
         );
     }
 
+    // Member bookmarks page
     // Страница закладок участника
     function favorites()
     {
@@ -153,6 +154,7 @@ class UserController extends MainController
         );
     }
 
+    // Member Draft Page
     // Страница черновиков участника
     function drafts()
     {
@@ -174,6 +176,7 @@ class UserController extends MainController
         );
     }
 
+    // User preferences page
     // Страница предпочтений пользователя
     public function subscribed()
     {
@@ -199,7 +202,7 @@ class UserController extends MainController
                 'data'  => [
                     'h1'    => Translate::get('subscribed') . ' ' . $this->uid['user_login'],
                     'sheet' => 'subscribed',
-                    'type'  => 'subscribed',
+                    'type'  => 'favorites',
                     'posts' => $result
                 ]
             ]
@@ -214,13 +217,13 @@ class UserController extends MainController
         $badges     = BadgeModel::getBadgeUserAll($user_id);
 
         agIncludeTemplate(
-        '/content/user/card', 
-        [
-        'user' => $user, 
-        'uid' => $this->uid, 
-        'post' => $post, 
-        'badges' => $badges
-        ]
+            '/content/user/card',
+            [
+                'user' => $user,
+                'uid' => $this->uid,
+                'post' => $post,
+                'badges' => $badges
+            ]
         );
     }
 }

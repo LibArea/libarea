@@ -99,7 +99,6 @@ textarea:focus { border: 1px solid #9ccdf8; }
 .dark .bg-white {
   background-color: $zinc-800;
   color: $white;
-  border: 1px solid $zinc-800;
 }
 
 .dark input,
@@ -173,13 +172,13 @@ textarea:focus { border: 1px solid #9ccdf8; }
 
 .btn-primary {
   color: $white;
-  background: #0085ee;
-  border-color: #0085ee;
+  background-color: #0085ee;
+  border-color: #0379d7;
 }
 
 .btn-outline-primary {
   color: #0085ee;
-  background: $white;
+  background-color: $white;
   border-color: #0085ee;
 }
 
@@ -192,12 +191,12 @@ textarea:focus { border: 1px solid #9ccdf8; }
 .btn-outline-primary:hover,
 .btn-outline-primary:focus {
   color: $white;
-  background: #0085ee;
-  border-color: #0085ee;
+  background-color: #0085ee;
+  border-color: #0379d7;
 }
 
 .fon-rgba {
-  background: rgba(0,0,0,.3);
+  background-color: rgba(0,0,0,.3);
   padding: 1px 6px;
 }
 
@@ -251,7 +250,7 @@ textarea:focus { border: 1px solid #9ccdf8; }
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: white;
+  background-color: white;
 }
 
 /* Tags */
@@ -260,7 +259,7 @@ textarea:focus { border: 1px solid #9ccdf8; }
   border-radius: 3px;
   padding: 0.3em 0.5em;
   border: 1px solid #ccc;
-  background: #f3f3f3;
+  background-color: #f3f3f3;
   margin: 0.2em;
   font-size: 0.85em;
   color: black;
@@ -272,7 +271,7 @@ textarea:focus { border: 1px solid #9ccdf8; }
 }
 
 .tags-look .tagify__dropdown__item:hover {
-  background: lightyellow;
+  background-color: lightyellow;
   border-color: gold;
 }
 
