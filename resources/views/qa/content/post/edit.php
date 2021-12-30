@@ -1,32 +1,28 @@
 <?php $post = $data['post']; ?>
-<main class="col-span-12 mb-col-12 pt5 pr15 pb20 pl15 edit-post">
+<main class="col-span-12 mb-col-12 edit-post">
+  <div class="bg-white items-center justify-between br-box-gray br-rd5 p15 mb15">
 
-  <?= breadcrumb(
-    '/',
-    Translate::get('home'),
-    false,
-    false,
-    Translate::get('edit post')
-  ); ?>
-
-  <div class="br-box-gray bg-white p15">
+    <a href="/"><?= Translate::get('home'); ?></a> /
+    <span class="red-500"><?= Translate::get('edit post'); ?></span>
+    
     <form action="<?= getUrlByName('post.edit.pr'); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
 
       <?= import('/_block/form/field-input', [
         'uid'  => $uid,
         'data' => [
-        [
-          'title' => Translate::get('heading'),
-          'type' => 'text',
-          'name' => 'post_title',
-          'value' => $post['post_title'],
-          'min' => 6,
-          'max' => 250,
-          'help' => '6 - 250 ' . Translate::get('characters'),
-          'red' => 'red'
-        ],
-      ]]); ?>
+          [
+            'title' => Translate::get('heading'),
+            'type' => 'text',
+            'name' => 'post_title',
+            'value' => $post['post_title'],
+            'min' => 6,
+            'max' => 250,
+            'help' => '6 - 250 ' . Translate::get('characters'),
+            'red' => 'red'
+          ],
+        ]
+      ]); ?>
 
       <?= import('/_block/form/select/blog', [
         'uid'         => $uid,

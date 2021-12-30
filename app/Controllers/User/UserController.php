@@ -38,7 +38,7 @@ class UserController extends MainController
         ];
 
         return agRender(
-            '/user/users',
+            '/user/all',
             [
                 'meta'  => meta($m, Translate::get('users'), Translate::get($sheet . '.desc')),
                 'uid'   => $this->uid,

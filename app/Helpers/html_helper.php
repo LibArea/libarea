@@ -188,20 +188,6 @@ function pagination($pNum, $pagesCount, $sheet, $other)
     return $html;
 }
 
-function breadcrumb($path_home, $title_home, $path_intermediate, $title_intermediate, $title_page)
-{
-    $html = '<ul class="flex flex-row gap-2 list-none items-center text-sm p0 mt0 mb15">';
-    $html .= '<li><a class="gray" title="' . $title_home . '" href="' . $path_home . '">' . $title_home . '</a><li class="gray-400">/</li>';
-
-    if ($path_intermediate) {
-        $html .= '<li><a class="gray" title="' . $title_intermediate . '" href="' . $path_intermediate . '">' . $title_intermediate . '</a></li><li class="gray-400">/</li>';
-    }
-
-    $html .= '<li><span class="red-500">' . $title_page . '</span></li></ul>';
-
-    return $html;
-}
-
 function votes($user_id, $content, $type, $ind, $css = '', $block = '')
 {
     $html  = '';
@@ -259,12 +245,12 @@ function tabs_nav($name, $item, $uid, array $pages = [])
         $html = '';
         foreach ($pages as $key => $page) {  
         if (empty($page['auth']) || $uid['user_id'] > 0) {
-                $classes    = 'mr15 gray-500 sky-500-hover';
+                $classes    = 'mr20 gray-500 sky-500-hover';
                 $isActive   = $page['id'] == $item ? $classes . ' sky-500 ' : $classes;
                 $isAria     = $page['id'] == $item ? ' aria-current="page"' : '';
                 
                 $html .= '<li><a ' . $isAria . ' class="' . $isActive . '" href="' . $page['url'] . '">
-                            <i class="' . $page['icon'] . ' mr5"></i>
+                            <i class="' . $page['icon'] . '"></i>
                                 <span>' . $page['title'] . '</span></a></li>';
             }
         }

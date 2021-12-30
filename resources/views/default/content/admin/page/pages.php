@@ -9,6 +9,11 @@
         'url'   => getUrlByName('admin.' . $data['type']),
         'name'  => Translate::get('all'),
         'icon'  => 'bi bi-record-circle'
+      ],  [
+        'id'    => 'add',
+        'url'   => getUrlByName('page.add'),
+        'name'  => Translate::get('add page'),
+        'icon'  => 'bi bi-plus-lg'
       ],
     ]
   ]

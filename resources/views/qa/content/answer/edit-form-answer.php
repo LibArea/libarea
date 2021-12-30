@@ -1,12 +1,8 @@
-<main class="col-span-12 mb-col-12 bg-white br-rd5 br-box-gray pt5 pr15 pb5 pl15">
+<main class="col-span-12 mb-col-12 edit-post">
+  <div class="bg-white items-center justify-between br-box-gray br-rd5 p15 mb15">
 
-  <?= breadcrumb(
-    '/',
-    Translate::get('home'),
-    null,
-    null,
-    Translate::get('edit answer')
-  ); ?>
+    <a href="/"><?= Translate::get('home'); ?></a> /
+    <span class="red-500"><?= Translate::get('edit answer'); ?></span>
 
   <a class="mb5 block" href="<?= getUrlByName('post', ['id' => $data['post']['post_id'], 'slug' => $data['post']['post_slug']]); ?>">
     <?= $data['post']['post_title']; ?>
@@ -28,5 +24,4 @@
       <?= sumbit(Translate::get('edit')); ?>
     </div>
   </form>
-
 </main>

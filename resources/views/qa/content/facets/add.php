@@ -1,24 +1,10 @@
-<div class="col-span-2 justify-between no-mob">
-  <?= tabs_nav(
-      'menu',
-      $data['type'],
-      $uid,
-      $pages = Config::get('menu.left'),
-    ); ?>
-</div>
+<main class="col-span-12 mb-col-12 edit-post">
+  <div class="bg-white items-center justify-between br-box-gray br-rd5 p15 mb15">
 
-<main class="col-span-10 mb-col-12">
-
-  <?= breadcrumb(
-    getUrlByName($data['sheet'] . 's.all'),
-    Translate::get($data['sheet'] . 's'),
-    null,
-    null,
-    Translate::get('add ' . $data['sheet'])
-  ); ?>
-
+    <a href="/"><?= Translate::get('home'); ?></a> /
+    <span class="red-500"><?= Translate::get('add ' . $data['sheet']); ?></span>
+    
   <?php if ($uid['user_trust_level'] >= Config::get('trust-levels.tl_add_blog')) { ?>
-    <div class="br-box-gray bg-white p15">
       <div class="text-sm gray mb15">
         <?= Translate::get('you can add more'); ?>:
         <span class="red-500"><?= $data['count_facet']; ?></span>
@@ -34,7 +20,7 @@
               'type'        => 'text',
               'name'        => 'facet_title',
               'required'    => true,
-              'min'         => 3, 
+              'min'         => 3,
               'max'         => 64,
               'help'        => '3 - 64 ' . Translate::get('characters'),
               'red'         => 'red'
@@ -79,7 +65,6 @@
         <input type="hidden" name="facet_type" value="<?= $data['sheet']; ?>">
         <?= sumbit(Translate::get('add')); ?>
       </form>
-    </div>
   <?php } else { ?>
     <?= Translate::get('limit-add-content-no'); ?>
   <?php } ?>

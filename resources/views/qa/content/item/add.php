@@ -1,21 +1,9 @@
-<?= tabs_nav(
-      'menu',
-      $data['type'],
-      $uid,
-      $pages = Config::get('menu.left'),
-    ); ?>
+<main class="col-span-12 mb-col-12">
+  <div class="bg-white items-center justify-between p15">
 
-<main class="col-span-10 mb-col-12">
+    <a href="/"><?= Translate::get('home'); ?></a> /
+    <span class="red-500"><?= Translate::get('add a website'); ?></span>
 
-  <?= breadcrumb(
-    getUrlByName('web'),
-    Translate::get('sites'),
-    getUrlByName('webs'),
-    Translate::get('domains'),
-    Translate::get('add a website')
-  ); ?>
-
-  <div class="br-box-gray bg-white p15">
     <form action="<?= getUrlByName('web.create'); ?>" method="post">
       <?= csrf_field() ?>
 

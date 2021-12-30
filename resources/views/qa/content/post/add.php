@@ -1,14 +1,9 @@
-<main class="col-span-12 mb-col-12 bg-white pt5 pr15 pb5 pl15 create">
+<main class="col-span-12 mb-col-12">
+  <div class="bg-white items-center justify-between br-box-gray br-rd5 p15 mb15">
 
-  <?= breadcrumb(
-    '/',
-    Translate::get('home'),
-    null,
-    null,
-    Translate::get('add post')
-  ); ?>
+    <a href="/"><?= Translate::get('home'); ?></a> /
+    <span class="red-500"><?= Translate::get($data['type']); ?></span>
 
-  <div class="br-box-gray bg-white p15">
     <form action="<?= getUrlByName('post.create'); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
 
@@ -73,7 +68,7 @@
         <div id="response" class="hidden">
           <div id="messages"></div>
         </div>
-       </div>
+      </div>
 
       <?= import('/_block/editor/editor', [
         'title'     => Translate::get('text'),
@@ -147,5 +142,5 @@
 
       <?= sumbit(Translate::get('create')); ?>
     </form>
-  </div>
+  </div>  
 </main>

@@ -1,13 +1,8 @@
 <main class="col-span-9 mb-col-12">
-  <div class="bg-white br-rd5 br-box-gray mb15 pt5 pr15 pb15 pl15">
+  <div class="bg-white items-center justify-between ml5 pr15 mb15">
 
-    <?= breadcrumb(
-      getUrlByName('web'),
-      Translate::get('sites'),
-      null,
-      null,
-      Translate::get('website')
-    ); ?>
+    <a href="<?= getUrlByName('web'); ?>"><?= Translate::get('sites'); ?></a> /
+    <span class="red-500"><?= Translate::get('website'); ?></span>
 
     <div class="right">
       <?= votes($uid['user_id'], $data['item'], 'item', 'ps', 'text-2xl', 'block'); ?>
@@ -63,7 +58,7 @@
   </div>
 </main>
 <aside class="col-span-3 relative no-mob">
-  <div class="bg-white br-rd5 br-box-gray p15 mb15">
+  <div class="bg-white br-rd5 br-box-gray box-shadow-all p15 mb15">
     <?php if ($data['high_leve']) { ?>
       <div class="gray"><?= Translate::get('see more'); ?></div>
       <?php foreach ($data['high_leve'] as $rl) { ?>

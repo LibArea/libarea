@@ -1,20 +1,11 @@
-<div class="col-span-2 justify-between no-mob">
-  <?= tabs_nav(
-      'menu',
-      $data['type'],
-      $uid,
-      $pages = Config::get('menu.left'),
-    ); ?>
-</div>
+<main class="col-span-9 mb-col-12">
 
-<main class="col-span-7 mb-col-12">
-
-  <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
+  <div class="bg-white flex flex-row items-center justify-between box-shadow-all br-rd5 p15 mb15">
     <p class="m0 no-mob"><?= Translate::get($data['sheet']); ?></p>
     <?= import('/content/user/setting/nav', ['data' => $data, 'uid' => $uid]); ?>
   </div>
 
-  <div class="bg-white br-box-gray pt15 pr15 pb5 pl15 box setting avatar">
+  <div class="bg-white pt15 pr15 pb5 pl15 box setting avatar">
     <form method="POST" action="<?= getUrlByName('setting.avatar.edit'); ?>" enctype="multipart/form-data">
       <?= csrf_field() ?>
 

@@ -1,6 +1,33 @@
-<main class="col-span-9 mb-col-12">
+<main class="col-span-12 mb-col-12">
+  <div class="bg-white   center justify-between br-box-gray br-rd5 p15 mb15">
+    <h1 class="m0 text-xl font-normal"><?= Translate::get($data['sheet']); ?></h1>
+    <span class="text-sm gray-500">
+      <?= Translate::get($data['sheet'] . '.info'); ?>.
+    </span>
+  </div>
+
+  <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
+    <ul class="flex flex-row list-none m0 p0 center text-sm">
+
+      <?= tabs_nav(
+        'nav',
+        $data['sheet'],
+        $uid,
+        $pages = [
+          [
+            'id'    => $data['type'] . '.all',
+            'url'   => getUrlByName($data['type'] . '.all'),
+            'title' => Translate::get('all'),
+            'icon'  => 'bi bi-app'
+          ],
+        ]
+      );
+      ?>
+
+    </ul>
+  </div>
+
   <div class="bg-white br-rd5 br-box-gray p20">
-    <h1 class="mt0 mb15 text-2xl"><?= Translate::get('users'); ?></h1>
     <div class="max-width mr-auto w-100 grid grid-cols-6 gap-2 justify-between">
       <?php foreach ($data['users'] as $ind => $user) { ?>
         <div class="center inline pr10 pl10 mb20 mb-col-2">

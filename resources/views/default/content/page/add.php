@@ -1,18 +1,14 @@
-<main class="col-span-12 mb-col-12 bg-white pt5 pr15 pb5 pl15 create">
+<main class="col-span-12 mb-col-12 edit-post">
+  <div class="bg-white items-center justify-between br-box-gray br-rd5 p15 mb15">
 
-  <?= breadcrumb(
-    '/',
-    Translate::get('home'),
-    null,
-    null,
-    Translate::get('add page')
-  ); ?>
-
-  <div class="br-box-gray bg-white p15">
+    <a href="/"><?= Translate::get('home'); ?></a> /
+    <span class="red-500"><?= Translate::get('add page'); ?></span>
+    
     <form action="<?= getUrlByName('page.create'); ?>" method="post">
       <?= csrf_field() ?>
 
       <?= import('/_block/form/field-input', [
+        'uid'  => $uid,
         'data' => [
           [
             'title' => Translate::get('heading'),

@@ -45,7 +45,7 @@ $facet = $data['facet'] ?? false; ?>
           </div>
         </ag-menu>
         <div class="mr20 flex items-center">
-          <a title="<?= Translate::get('home'); ?>" class="text-2xl mb-text-xl sky-500-hover p5 uppercase" href="/">
+          <a title="<?= Translate::get('home'); ?>" class="text-2xl mb-text-xl sky-500-hover uppercase" href="/">
             <?= Config::get('meta.name'); ?>
           </a>
         </div>

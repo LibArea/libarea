@@ -1,21 +1,9 @@
-<?= tabs_nav(
-  'menu',
-  $data['type'],
-  $uid,
-  $pages = Config::get('menu.left'),
-); ?>
+<main class="col-span-12 mb-col-12">
+  <div class="bg-white items-center justify-between p15">
 
-<main class="col-span-10 mb-col-12">
+    <a href="<?= getUrlByName('web.website', ['slug' => $data['domain']['item_url_domain']]); ?>"><?= $data['domain']['item_title_url']; ?></a> /
+    <span class="red-500"><?= Translate::get('change the site'); ?></span>
 
-  <?= breadcrumb(
-    getUrlByName('web'),
-    Translate::get('sites'),
-    getUrlByName('web.website', ['slug' => $data['domain']['item_url_domain']]),
-    $data['domain']['item_title_url'],
-    Translate::get('change the site')
-  ); ?>
-
-  <div class="br-box-gray bg-white p15">
     <form action="<?= getUrlByName('web.edit.pr'); ?>" method="post">
       <?= csrf_field() ?>
       <div class="right">
