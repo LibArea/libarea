@@ -1,11 +1,15 @@
-<?= tabs_nav(
-  'menu',
-  $data['type'],
-  $uid,
-  $pages = Config::get('menu.left'),
-); ?>
+<div class="col-span-2 justify-between no-mob">
+  <nav class="sticky top70">
+  <?= tabs_nav(
+    'menu',
+    $data['type'],
+    $uid,
+    $pages = Config::get('menu.left'),
+  ); ?>
+  </nav>
+</div>
 
-<main class="col-span-10 mb-col-12">
+<main class="col-span-7 mb-col-12">
   <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
     <p class="m0 text-xl"><?= Translate::get('structure'); ?>
       <?php if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>

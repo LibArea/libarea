@@ -50,11 +50,11 @@
       ); ?>
 
     </ul>
-    <div id="tippy" data-template="feed" class="gray-400">
+    <div data-template="feed" class="tippy gray-400">
        <i class="bi bi-info-square"></i>
     </div>
     <div id="feed" style="display: none;">
-      <div class="text-xm gray-500 p5 dark-white center"><?= Translate::get($data['sheet'] . '.info'); ?></div>
+      <div class="text-xm gray-500 p5 dark-gray-300 center"><?= Translate::get($data['sheet'] . '.info'); ?></div>
     </div>
   </div>
 
@@ -72,7 +72,7 @@
 
   <?php if ($uid['user_id'] > 0 && !empty($data['topics_user'])) { ?>
     <div class="br-box-gray p15 mb15 br-rd5 bg-white text-sm">
-      <div class="uppercase gray mt5 mb5 dark-gray-200">
+      <div class="uppercase gray mt5 mb5 dark-gray-300">
         <?= Translate::get('reading'); ?>
       </div>
 
@@ -101,7 +101,7 @@
         <div class="flex relative pt5 pb5 items-center justify-between hidden">
           <a class="gray-600" href="<?= $url; ?>">
             <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'w24 mr5'); ?>
-            <span class="ml5 middle dark-gray-200"><?= $topic['facet_title']; ?> <?= $blog; ?></span>
+            <span class="ml5 middle dark-gray-300"><?= $topic['facet_title']; ?> <?= $blog; ?></span>
           </a>
           <?php if ($uid['user_id'] == $topic['facet_user_id']) { ?>
             <a class="right sky-500" title="<?= Translate::get('add post'); ?>" href="<?= getUrlByName('post.add'); ?>/<?= $topic['facet_id']; ?>">
@@ -111,7 +111,7 @@
         </div>
       <?php } ?>
       <?php if (count($data['topics_user']) > Config::get('facets.quantity_home')) { ?>
-        <a class="gray block dark-gray-200 mt5" title="<?= Translate::get('topics'); ?>" href="<?= getUrlByName('topics.my'); ?>">
+        <a class="gray-400 block mt5" title="<?= Translate::get('topics'); ?>" href="<?= getUrlByName('topics.my'); ?>">
           <?= Translate::get('see more'); ?> <i class="bi bi-chevron-double-right middle"></i>
         </a>
       <?php } ?>
@@ -139,7 +139,7 @@
               <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'w18 h18 br-rd-50 mr5'); ?>
               <span class="middle lowercase"><?= $answer['answer_date']; ?></span>
             </div>
-            <a class="black dark-white" href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">
+            <a class="black dark-gray-300" href="<?= getUrlByName('post', ['id' => $answer['post_id'], 'slug' => $answer['post_slug']]); ?>#answer_<?= $answer['answer_id']; ?>">
               <?= $answer['answer_content']; ?>...
             </a>
           </div>

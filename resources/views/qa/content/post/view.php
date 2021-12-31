@@ -269,7 +269,7 @@
             </div>
           <?php } ?>
         <?php } ?>
-        <a class="flex justify-center pt5 pr10 pb5 black dark-white inline text-sm" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>">
+        <a class="flex justify-center pt5 pr10 pb5 black dark-gray-300 inline text-sm" href="<?= getUrlByName('topic', ['slug' => $topic['facet_slug']]); ?>">
           <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'w24 mr10 br-box-gray'); ?>
           <?= $topic['facet_title']; ?>
           <div class="gray-400 text-sm"><?= $topic['facet_short_description']; ?></div>
@@ -290,7 +290,7 @@
   </div>
   <?php if ($data['recommend']) { ?>
     <div class="br-box-gray bg-white box-shadow-all br-rd5 mb15 sticky top20 p15">
-      <h3 class="uppercase mb10 mt0 font-light text-sm gray dark-gray-200"><?= Translate::get('recommended'); ?></h3>
+      <h3 class="uppercase mb10 mt0 font-light text-sm gray dark-gray-300"><?= Translate::get('recommended'); ?></h3>
       <?php foreach ($data['recommend'] as  $rec_post) { ?>
         <div class="mb15 hidden flex text-sm"> 
           <?php if ($rec_post['post_type'] == 'post') { ?>
@@ -306,7 +306,7 @@
           <?php } else { ?>
             <i class="bi bi-intersect gray-400 middle mr15 text-2xl"></i>
           <?php } ?>          
-          <a class="black dark-white" href="<?= getUrlByName('post', ['id' => $rec_post['post_id'], 'slug' => $rec_post['post_slug']]); ?>">
+          <a class="black dark-gray-300" href="<?= getUrlByName('post', ['id' => $rec_post['post_id'], 'slug' => $rec_post['post_slug']]); ?>">
             <?= $rec_post['post_title']; ?>
           </a>
         </div>

@@ -171,7 +171,7 @@
               <?= Translate::get('selected post'); ?>
             </h3>
             <div class="post-body mb15">
-              <a class="black dark-white" href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
+              <a class="black dark-gray-300" href="<?= getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>">
                 <?= $post['post_title']; ?>
               </a>
               <?php if ($uid['user_id'] > 0) { ?>

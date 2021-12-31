@@ -45,11 +45,11 @@
           <a href="<?= getUrlByName('user', ['login' => $user['user_login']]); ?>">
             <?= user_avatar_img($user['user_avatar'], 'max', $user['user_login'], 'br-rd-50 w64'); ?>
           </a>
-          <a class="block dark-gray-200 black mt5" href="<?= getUrlByName('user', ['login' => $user['user_login']]); ?>">
+          <a class="block dark-gray-300 black mt5" href="<?= getUrlByName('user', ['login' => $user['user_login']]); ?>">
             <?= $user['user_login']; ?>
           </a>
           <?php if ($user['user_name']) { ?>
-            <span class="gray dark-gray-200 text-sm"><?= $user['user_name']; ?></span>
+            <span class="gray dark-gray-300 text-sm"><?= $user['user_name']; ?></span>
           <?php } ?>
         </div>
       <?php } ?>

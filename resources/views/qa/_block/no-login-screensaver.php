@@ -1,4 +1,4 @@
-<div class="br-box-gray bg-blue-100 dark-bg-black dark-br-black gray dark-white p20 mb15 mt15 relative center br-rd5">
+<div class="br-box-gray bg-blue-100 dark-bg-black dark-br-black gray dark-gray-300 p20 mb15 mt15 relative center br-rd5">
   <?= Translate::get('not registered'); ?>? 
   <form action="<?= getUrlByName('register'); ?>" class="mt15 mb15 block">
     <?= sumbit(Translate::get('create account')); ?> 

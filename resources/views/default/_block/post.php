@@ -17,7 +17,7 @@
           <?= user_avatar_img($post['user_avatar'], 'max', $post['user_login'], 'w44 h44 br-rd-50 mr5'); ?>
           <div id="content_<?= $post['post_id']; ?>" class="content_<?= $post['post_id']; ?>"></div>
         </div>
-        <a class="flex black dark-white flex-center" href="<?= getUrlByName('user', ['login' => $post['user_login']]); ?>">
+        <a class="flex black dark-gray-300 flex-center" href="<?= getUrlByName('user', ['login' => $post['user_login']]); ?>">
 
           <div class="ml5">
             <?= $post['user_login']; ?>
@@ -29,7 +29,7 @@
       </div>
       <div class="flex flex-row flex-auto">
         <div class="w-auto pc-mr-20">
-          <a class="black dark-white" href="<?= $post_url; ?>">
+          <a class="black dark-gray-300" href="<?= $post_url; ?>">
             <h2 class="font-normal text-2xl mt0 mb0"><?= $post['post_title']; ?>
               <?php if ($post['post_is_deleted'] == 1) { ?>
                 <i class="bi bi-trash red-500"></i>
@@ -71,7 +71,7 @@
             <?php } ?>
           </div>
           <div class="show_add_<?= $post['post_id']; ?>">
-            <div data-post_id="<?= $post['post_id']; ?>" class="showpost mt10 mb5 gray-600 dark-gray-200">
+            <div data-post_id="<?= $post['post_id']; ?>" class="showpost mt10 mb5 gray-600 dark-gray-300">
               <?= $post['post_content_preview']; ?>
               <span class="s_<?= $post['post_id']; ?> show_detail"></span>
             </div>

@@ -1,14 +1,16 @@
 <aside class="col-span-3 relative br-rd5 no-mob">
   <?php if (!empty($lang)) { ?>
-    <div class="bg-white p15 br-box-gray">
+    <div class="bg-white p15 br-box-gray box-shadow-all">
       <?= $lang; ?>...
     </div>
   <?php } ?>
-  <div class="last-comm br-rd5 br-box-gray p15 mt15 bg-white">
-    <div class="mb-3 text-sm">
-      <a class="inline gray-600" title="<?= Translate::get('help'); ?>" href="/info/<?= Config::get('facets.page-one'); ?>">
+  <div class="flex flex-row items-center justify-between bg-white br-rd5 br-box-gray p15 mt15 box-shadow-all">
+    <div class="text-sm">
+      <a class="inline gray-400" title="<?= Translate::get('help'); ?>" href="/info/<?= Config::get('facets.page-one'); ?>">
         <?= Translate::get('help'); ?>
       </a>
+     </div>
+    <div class="text-sm">
       <a rel="nofollow noopener" class="gray-400 right" title="DISCORD" href="https://discord.gg/dw47aNx5nU">
         <i class="bi bi-discord middle text-xl"></i>
       </a>

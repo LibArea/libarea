@@ -73,14 +73,18 @@ function post_img($file, $alt, $style, $type)
 function website_img($domain, $type, $alt, $css = '')
 {
     $path = AG_PATH_FAVICONS;
-    if ($type == 'thumbs') $path = AG_PATH_THUMBS;
+    $width = 'w18';
+    if ($type == 'thumbs') {
+        $path  = AG_PATH_THUMBS;
+        $width = 'w200';
+    }    
 
     if (file_exists(HLEB_PUBLIC_DIR . $path . $domain . '.png')) {
         $img = '<img class="' . $css . '" src="' . $path . $domain . '.png" alt="' . $alt . '">';
         return $img;
     }
 
-    $img = '<img class="mr5 w18 h18" src="' . $path . 'no-link.png" alt="' . $alt . '">';
+    $img = '<img class="mr5 ' . $width . '" src="' . $path . 'no-link.png" alt="' . $alt . '">';
     
     return $img;
 }

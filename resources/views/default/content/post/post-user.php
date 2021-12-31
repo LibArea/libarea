@@ -1,10 +1,12 @@
 <div class="col-span-2 justify-between no-mob">
+  <nav class="sticky top70">
   <?= tabs_nav(
     'menu',
     $data['type'],
     $uid,
     $pages = Config::get('menu.left'),
   ); ?>
+  </nav>
 </div>
 
 <main class="col-span-7 mb-col-12 mb10">
@@ -17,8 +19,8 @@
   <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('user', ['login' => $data['user_login']]) . '/posts'); ?>
 </main>
 <aside class="col-span-3 relative no-mob">
-  <div class="sticky top60">
     <div class="bg-white br-rd5 br-box-gray p15">
+      <nav class="sticky top70">
       <?= tabs_nav(
         'menu',
         $data['type'],
@@ -47,7 +49,7 @@
           ],
         ],
       ); ?>
+      </nav>
     </div>
     <?= import('/_block/sidebar/lang', ['lang' => [], 'uid' => $uid]); ?>
-  </div>
 </aside>

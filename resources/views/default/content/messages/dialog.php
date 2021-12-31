@@ -41,7 +41,7 @@
               <?= user_avatar_img($ava, 'max', $login, 'br-rd-50 w44 mr5'); ?>
               <div id="content_<?= $key; ?>" class="content_<?= $key; ?>"></div>
             </div>
-            <a class="flex black dark-white flex-center" href="<?= getUrlByName('user', ['login' => $login]); ?>">
+            <a class="flex black dark-gray-300 flex-center" href="<?= getUrlByName('user', ['login' => $login]); ?>">
               <div class="ml5">
                 <?= $login; ?>
                 <div class="gray-400 lowercase text-sm">

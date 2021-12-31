@@ -20,10 +20,10 @@ $facet = $data['facet'] ?? false; ?>
 
 <body class="<?= $css; ?><?php if (Request::getCookie('dayNight') == 'dark') { ?> dark<?php } ?>">
 
-  <header class="bg-white br-bottom br-bottom-black mt0 mb15 <?php if ($type != 'page') { ?>sticky top0<?php } ?> z-30">
+  <header class="bg-white box-shadow mt0 mb15 <?php if ($type != 'page') { ?>sticky top0<?php } ?> z-30">
     <div class="col-span-12 mr-auto max-width w-100 pr10 pl10 h44 grid items-center flex justify-between">
       <div class="flex items-center">
-        <ag-menu id="tippy" data-template="one" class="pl0 pr10 no-pc">
+        <ag-menu data-template="one" class="tippy pl0 pr10 no-pc">
           <div class="relative w-auto">
             <i class="bi bi-list gray-400 text-xl"></i>
           </div>
@@ -36,11 +36,11 @@ $facet = $data['facet'] ?? false; ?>
                 $uid,
                 $pages = Config::get('menu.mobile'),
               ); ?>
-            <nav>
+            </nav>
           </div>
          
         <div class="mr20 flex items-center">
-          <a title="<?= Translate::get('home'); ?>" class="text-2xl mb-text-xl sky-500-hover p5 black dark-white uppercase" href="/">
+          <a title="<?= Translate::get('home'); ?>" class="text-2xl mb-text-xl sky-500-hover p5 black dark-gray-300 uppercase" href="/">
             <?= Config::get('meta.name'); ?>
           </a>
         </div>
@@ -91,13 +91,13 @@ $facet = $data['facet'] ?? false; ?>
               <?php } ?>
             </a>
 
-            <ag-menu id="tippy" data-template="two" class="pr10 pl10 ml20 mb-ml-10">
+            <ag-menu data-template="two" class="tippy pr10 pl0 ml20 mb-ml-10">
               <div class="relative w-auto">
                 <?= user_avatar_img($uid['user_avatar'], 'small', $uid['user_login'], 'w34 br-rd-50'); ?>
               </div>
             </ag-menu>  
             <div id="two" style="display: none;" class="bg-white br-rd3">
-              <nav class="pt0 pr10 pb0 pl10 mb0">
+              <nav class="p0 pr20 m0">
                 <?= tabs_nav(
                   'menu',
                   $type,

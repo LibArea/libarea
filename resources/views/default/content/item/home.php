@@ -10,7 +10,7 @@
   <div class="flex mb20 pt10 pr15 pb10 pl15 bg-yellow-50 flex-auto">
     <?php foreach (Config::get('web-root-categories') as  $cat) { ?>
       <div class="mr60">
-        <a class="pt5 pr10 mr60 dark-white underline-hover text-2xl block " title="<?= $cat['title']; ?>" href="<?= getUrlByName('web.topic', ['slug' => $cat['url']]); ?>">
+        <a class="pt5 pr10 mr60 dark-gray-300 underline-hover text-2xl block " title="<?= $cat['title']; ?>" href="<?= getUrlByName('web.topic', ['slug' => $cat['url']]); ?>">
           <?= $cat['title']; ?>
         </a>
         <?php if (!empty($cat['sub'])) { ?>
@@ -35,7 +35,7 @@
               <?= website_img($item['item_url_domain'], 'thumbs', $item['item_url_domain'], 'mr5 mt5 w200 box-shadow'); ?>
             </div>
             <div class="w-100">
-              <a class="pt0 pr5 dark-white text-2xl" href="<?= getUrlByName('web.website', ['slug' => $item['item_url_domain']]); ?>">
+              <a class="pt0 pr5 dark-gray-300 text-2xl" href="<?= getUrlByName('web.website', ['slug' => $item['item_url_domain']]); ?>">
                 <h2 class="font-normal inline underline-hover text-2xl mt0 mb0">
                   <?= $item['item_title_url']; ?>
                 </h2>
