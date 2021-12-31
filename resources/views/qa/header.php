@@ -22,7 +22,7 @@ $facet = $data['facet'] ?? false; ?>
   <header class="bg-white mt0 mb15">
     <div class="br-bottom mr-auto max-w1240 w-100 pr10 pl10 h24 mb10 no-mob items-center flex">
       <?php foreach (Config::get('menu.mobile') as $key => $topic) { ?>
-        <a class="mr20 black text-xs" href="<?= $topic['url']; ?>">
+        <a class="mr20 black dark-gray-200 text-xs" href="<?= $topic['url']; ?>">
           <i class="<?= $topic['icon']; ?> mr5"></i>
           <span><?= $topic['title']; ?> </span>
         </a>
@@ -31,19 +31,21 @@ $facet = $data['facet'] ?? false; ?>
 
     <div class="col-span-12 mr-auto max-w1240 w-100 pr10 pl10 h44 grid items-center flex justify-between">
       <div class="flex items-center" id="find">
-        <ag-menu class="pl0 pr10 no-pc">
-          <div slot="trigger" ord="left-mob" class="relative w-auto">
+        <ag-menu id="tippy" data-template="one" class="pl0 pr10 no-pc">
+          <div class="relative w-auto">
             <i class="bi bi-list gray-400 text-xl"></i>
           </div>
-          <div class="box-shadow min-w165 z-40 bg-white br-rd3" slot="items">
-            <?= tabs_nav(
-              'menu',
-              $type,
-              $uid,
-              $pages = Config::get('menu.mobile'),
-            ); ?>
+         </ag-menu> 
+          <div id="one" style="display: none;" class="box-shadow2 min-w165 z-40 bg-white br-rd3">
+            <nav>
+              <?= tabs_nav(
+                'menu',
+                $type,
+                $uid,
+                $pages = Config::get('menu.mobile'),
+              ); ?>
+            <nav>
           </div>
-        </ag-menu>
         <div class="mr20 flex items-center">
           <a title="<?= Translate::get('home'); ?>" class="text-2xl mb-text-xl sky-500-hover uppercase" href="/">
             <?= Config::get('meta.name'); ?>
@@ -88,19 +90,22 @@ $facet = $data['facet'] ?? false; ?>
               <?php } ?>
             </a>
 
-            <ag-menu class="p10 ml20 mb-ml-10">
-              <div slot="trigger" ord="primary" class="relative w-auto">
+            <ag-menu id="tippy" data-template="two" class="pr10 pl10 ml20 mb-ml-10">
+              <div class="relative w-auto">
                 <?= user_avatar_img($uid['user_avatar'], 'small', $uid['user_login'], 'w34 br-rd-50'); ?>
               </div>
-              <div class="box-shadow min-w165 z-40 right0 bg-white br-rd3" slot="items">
+            </ag-menu>  
+            <div id="two" style="display: none;" class="bg-white br-rd3">
+              <nav class="pt0 pr10 pb0 pl10 mb0">
                 <?= tabs_nav(
                   'menu',
                   $type,
                   $uid,
                   $pages = Config::get('menu.user'),
                 ); ?>
-              </div>
-            </ag-menu>
+              </nav>
+            </div>
+            
           </div>
         </div>
       <?php }  ?>

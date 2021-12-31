@@ -534,6 +534,10 @@ $data = [
     'topics.my'                 => '我讀',
     'topics.my.info'            => '我關注的話題，我閱讀',
     'topics.my.desc'            => '我閱讀或創建的主題',
+    
+    'main.feed.info'            => '按時間順序發帖...',
+    'main.all.info'             => '社區提要中的所有帖子...',
+    'main.top.info'             => '最近的活躍帖子...',
 
 ];
 

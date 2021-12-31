@@ -533,6 +533,10 @@ $data = [
     'topics.my'                 => 'I read ',
     'topics.my.info'            => 'Topics I follow, I read',
     'topics.my.desc'            => 'Topics that I read or have created',
+    
+    'main.feed.info'            => 'Posts in chronological order...',
+    'main.all.info'             => 'All posts in the community feed...',
+    'main.top.info'             => 'Recent active posts...',
 
 ];
 

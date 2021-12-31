@@ -1,8 +1,5 @@
 <main class="col-span-9 mb-col-12">
   <div class="bg-white flex flex-row items-center justify-between br-rd5 p15 mb15">
-    <p class="m0 text-xl">
-      <!--?= Translate::get('feed'); ?-->
-    </p>
     <ul class="flex flex-row list-none m0 p0 center">
 
       <?= tabs_nav(
@@ -33,6 +30,12 @@
       ); ?>
 
     </ul>
+    <div id="tippy" data-template="feed" class="gray-400">
+       <i class="bi bi-info-square"></i>
+    </div>
+    <div id="feed" style="display: none;">
+      <div class="text-xm gray-500 p5 dark-white center"><?= Translate::get($data['sheet'] . '.info'); ?></div>
+    </div>
   </div>
 
   <?= import('/_block/post', ['data' => $data, 'uid' => $uid]); ?>

@@ -525,6 +525,10 @@ $data = [
     'topics.my'                 => 'Citesc',
     'topics.my.info'            => 'Subiecte pe care le urmăresc, le citesc',
     'topics.my.desc'            => 'Subiecte pe care le-am citit sau pe care le-am creat',
+    
+    'main.feed.info'            => 'Postări în ordine cronologică...',
+    'main.all.info'             => 'Toate postările din fluxul comunității...',
+    'main.top.info'             => 'Postări active recente...',
 ];
 
 return $data;

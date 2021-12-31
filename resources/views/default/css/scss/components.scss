@@ -111,11 +111,12 @@ textarea:focus { border: 1px solid #9ccdf8; }
   border: 1px solid $black;
 }
 
-.dark .dark-br-black { border: 1px solid $neutral-900; }
-
 .dark .dark-bg-black,
 .dark .answers_subtree:target { background-color: $black; }
 
+.dark .br-box-gray { border: 1px solid $black; }
+.dark .dark-br-black { border: 1px solid $neutral-900; }
+.dark .br-bottom-black { border-bottom: 1px solid $black; }
 .dark .dark-gray-200 { color: $gray-200; }
 .dark .dark-white { color: $white; }
 
@@ -332,18 +333,7 @@ a:hover > img { opacity: 0.8; }
 }
 
 /* Drop-down menu and left nav */
-ag-menu {
-  display: inline-block;
-  position: relative;
-}
-
-ag-menu > [slot=items] {
-  display: none;
-  position: absolute;
-}
-
-nav > ul > li > a,
-ag-menu > [slot=items] > a {
+nav > ul > li > a {
   color: #6b7280;
   padding: 3px 10px;
   display: flex;
@@ -351,8 +341,13 @@ ag-menu > [slot=items] > a {
   align-items: center;
 }
 
-ag-menu[open] > [slot=items] {
-  display: block;
-}
+/* Tippy.js - theme: light, */
+.dark .tippy-box[data-theme~="light"] { background-color: $black; }
+.dark .tippy-box[data-theme~="light"] { color: $black; }
+.dark .tippy-box[data-theme~="light"][data-placement^="top"] > .tippy-arrow::before  { border-top-color: $black; }
+.dark .tippy-box[data-theme~="light"][data-placement^="bottom"] > .tippy-arrow::before,
+.dark .tippy-box[data-theme~="light"][data-placement^="top"] > .tippy-arrow::before { border-bottom-color: $black; }
+ 
 
-ag-menu > [slot="trigger"] { cursor: pointer; }
+.tippy-box[data-theme~=light]{color:#26323d;box-shadow:0 0 20px 4px rgba(154,161,177,.15),0 4px 80px -8px rgba(36,40,47,.25),0 4px 4px -2px rgba(91,94,105,.15);
+background-color:#fff}.tippy-box[data-theme~=light][data-placement^=top]>.tippy-arrow:before{border-top-color:#fff}.tippy-box[data-theme~=light][data-placement^=bottom]>.tippy-arrow:before{border-bottom-color:#fff}.tippy-box[data-theme~=light][data-placement^=left]>.tippy-arrow:before{border-left-color:#fff}.tippy-box[data-theme~=light][data-placement^=right]>.tippy-arrow:before{border-right-color:#fff}.tippy-box[data-theme~=light]>.tippy-backdrop{background-color:#fff}.tippy-box[data-theme~=light]>.tippy-svg-arrow{fill:#fff} 

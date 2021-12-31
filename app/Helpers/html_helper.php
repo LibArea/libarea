@@ -256,7 +256,7 @@ function tabs_nav($name, $item, $uid, array $pages = [])
         }
         
     } else { 
-        $html  = '<nav class="sticky top70"><ul class="p0 mt10 list-none text-sm">';
+        $html  = '<ul class="p0 mt10 list-none text-sm">';
         foreach ($pages as $key => $page) {
             
             if (!empty($page['hr'])) { 
@@ -276,7 +276,7 @@ function tabs_nav($name, $item, $uid, array $pages = [])
             }    
         }
         
-        $html .= '</ul></nav>';
+        $html .= '</ul>';
         
     }    
 

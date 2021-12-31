@@ -151,7 +151,7 @@ document.querySelectorAll(".showpost")
   }));
 
 // User card
-document.querySelectorAll("#user-card")
+document.querySelectorAll(".user-card")
   .forEach(el => el.addEventListener("click", function (e) {
     let user_id = this.dataset.user_id;
     let content_id = this.dataset.content_id;
@@ -282,50 +282,6 @@ function fetch_search() {
     );
 }
 
-customElements.define('ag-menu', class extends HTMLElement {
-  constructor() {
-    super();
-    this._boundClose = this.close.bind(this)
-  }
-
-  connectedCallback() {
-    // Can expose later if desired
-    const trigger = this.querySelector('[slot="trigger"]');
-    if (trigger) {
-      trigger.addEventListener('click', e => this.open = !this.open);
-    }
-
-    // Close menu if user clicks outside of a menu or navigates away
-    document.body.addEventListener('click', this._boundClose);
-    window.addEventListener('popstate', this._boundClose); // TODO popstate is ineffective if the link was a child of the menu
-  }
-
-  disconnectedCallback() {
-    document.body.removeEventListener('click', this._boundClose);
-    window.removeEventListener('popstate', this._boundClose);
-  }
-
-  close(e) {
-    if (e && e.type === 'popstate' || !this.contains(e.target)) {
-      this.open = false
-    }
-  }
-
-  static get observedAttributes() { return ['open']; }
-
-  attributeChangedCallback(name, oldVal, newVal) {
-    if (name === 'open') this.dispatchEvent(new CustomEvent('toggle'));
-  }
-
-  get open() {
-    return this.hasAttribute('open');
-  }
-
-  set open(isOpen) {
-    isOpen ? this.setAttribute('open', '') : this.removeAttribute('open');
-  }
-});
-
 // Show / hide password 
 let showPassword = document.querySelectorAll('.showPassword');
 showPassword.forEach(item =>
@@ -345,3 +301,4 @@ function toggleType() {
     input.type = 'password';
   }
 }
+ 

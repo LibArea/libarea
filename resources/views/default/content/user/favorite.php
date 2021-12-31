@@ -1,10 +1,12 @@
 <div class="col-span-2 justify-between no-mob">
+  <nav class="sticky top70">
   <?= tabs_nav(
     'menu',
     $data['type'],
     $uid,
     $pages = Config::get('menu.left'),
   ); ?>
+  </nav>
 </div>
 
 <main class="col-span-7 mb-col-12">
@@ -50,7 +52,7 @@
             <span id="favorite" class="add-favorite text-sm ml15 right" data-front="personal" data-id="<?= $content['post_id']; ?>" data-type="post">
               <i class="bi bi-trash text-2xl red-500"></i>
             </span>
-            <a class="font-normal black text-2xl mt0 mb0" href="<?= getUrlByName('post', ['id' => $content['post_id'], 'slug' => $content['post_slug']]); ?>">
+            <a class="font-normal black dark-white text-2xl mt0 mb0" href="<?= getUrlByName('post', ['id' => $content['post_id'], 'slug' => $content['post_slug']]); ?>">
               <?= $content['post_title']; ?>
             </a>
           <?php } else { ?>

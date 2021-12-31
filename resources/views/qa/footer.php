@@ -2,6 +2,8 @@
 
 <script src="/assets/js/common.js"></script>
 <script src="/assets/js/sweetalert/sweetalert2.all.min.js"></script>
+<script src="/assets/js/tippy/popper.min.js"></script>
+<script src="/assets/js/tippy/tippy-bundle.umd.min.js"></script>
 
 <?= getRequestResources()->getBottomStyles(); ?>
 <?= getRequestResources()->getBottomScripts(); ?>
@@ -47,6 +49,18 @@
       })
     <?php } ?>
   <?php } ?>
+  
+  tippy('#tippy', {
+    content(reference) {
+      const id = reference.getAttribute('data-template');
+      const template = document.getElementById(id);
+      return template.innerHTML;
+    },
+    allowHTML: true,
+    trigger: 'click',
+    interactive: 'true',
+    theme: 'light',
+  });
 </script>
 
 </body>
