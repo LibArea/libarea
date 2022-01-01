@@ -24,12 +24,12 @@
           'uid'  => $uid,
           'data' => [
             [
-              'title'   => Translate::get('when the message came to PM'),
+              'title'   => Translate::get('message to PM'),
               'name'    => 'setting_email_pm',
               'checked' => $data['setting']['setting_email_pm'] ?? 0,
             ],
             [
-              'title'   => Translate::get('when you contacted me via @'),
+              'title'   => Translate::get('contacted via @'),
               'name'    => 'setting_email_appealed',
               'checked' => $data['setting']['setting_email_appealed'] ?? 0,
             ],

@@ -1,5 +1,5 @@
 <main class="col-span-12 mb-col-12 edit-post">
-  <div class="bg-white items-center justify-between br-box-gray br-rd5 p15 mb15">
+  <div class="bg-white items-center justify-between p15 mb15">
 
     <a href="/"><?= Translate::get('home'); ?></a> /
     <span class="red-500"><?= Translate::get('add page'); ?></span>

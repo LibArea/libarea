@@ -1,13 +1,6 @@
-<?= tabs_nav(
-      'menu',
-      $data['type'],
-      $uid,
-      $pages = Config::get('menu.left'),
-    ); ?>
-
 <?php $fs = $data['facet']; ?>
 
-<main class="col-span-10 mb-col-12">
+<main class="col-span-12 mb-col-12">
 
   <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
     <p class="m0 text-xl"><?= Translate::get($fs['facet_type']); ?></p>
@@ -40,7 +33,7 @@
     </ul>
   </div>
 
-  <div class="br-box-gray bg-white p15">
+  <div class="bg-white p15">
     <form action="<?= getUrlByName($fs['facet_type'] . '.edit.pr'); ?>" method="post" enctype="multipart/form-data">
       <?= csrf_field() ?>
 

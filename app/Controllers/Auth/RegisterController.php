@@ -149,7 +149,7 @@ class RegisterController extends MainController
         $mail_message = Translate::get('activate e-mail') . ": \n" . $link . "\n\n";
         SendEmail::send($email, Config::get('meta.name') . ' — ' . Translate::get('checking e-mail'), $mail_message);
 
-        addMsg(Translate::get('check your e-mail to activate your account'), 'success');
+        addMsg(Translate::get('check your email'), 'success');
 
         redirect(getUrlByName('login'));
     }

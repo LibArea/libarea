@@ -19,7 +19,7 @@
         'title' => Translate::get('E-mail'),
         'type' => 'email',
         'name' => 'email',
-        'help' => Translate::get('work e-mail (to activate your account)')
+        'help' => Translate::get('work email')
       ],
       [
         'title' => Translate::get('password'),

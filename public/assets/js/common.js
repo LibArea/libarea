@@ -236,6 +236,7 @@ document.getElementById('find').addEventListener('keydown', function () {
 function fetch_search() {
   let val = document.getElementById("find").value;
   let token = document.querySelector('input[name="token"]').value;
+  let url  = document.querySelector('input[name="url"]').value;
 
   if (val.length < 3) {
     return;
@@ -255,18 +256,17 @@ function fetch_search() {
         let obj = JSON.parse(text);
         var html = '<div class="flex">';
         for (var key in obj) {
-          if (obj[key].topic_slug) {
+          if (obj[key].facet_slug) {
             html += '<a class="sky-500 block text-sm mb15 mr10" href="/topic/' + obj[key].facet_slug + '">';
-            html += '<img class="w21 mr5 br-box-gray" src="<?= AG_PATH_FACETS_LOGOS; ?>' + obj[key].facet_img + '">';
+            html += '<img class="w21 mr5 br-box-gray" src="' + url + obj[key].facet_img + '">';
             html += obj[key].facet_title + '</a>';
           }
           if (obj[key].post_id) {
-            html += '<a class="block black text-sm mb10" href="/post/' + obj[key].post_id + '">' +
-              obj[key].title + '</a>';
+            html += '<a class="block black text-sm mb10" href="/post/' + obj[key].post_id + '">' + obj[key].title + '</a>';
           }
           html += '</div>';
         }
-
+ 
         let items = document.getElementById("search_items");
         items.classList.add("block");
         items.innerHTML = html;
@@ -277,7 +277,7 @@ function fetch_search() {
               items.classList.remove("block");
             };
           };
-        }
+        } 
       }
     );
 }

@@ -63,10 +63,10 @@ class RecoverController extends MainController
 
         // Отправка e-mail
         $newpass_link = Config::get('meta.url') . $recover_uri . '/remind/' . $code;
-        $mail_message = Translate::get('your link to change your password') . ": \n" . $newpass_link . "\n\n";
-        SendEmail::send($email, Config::get('meta.name') . ' — ' . Translate::get('changing your password'), $mail_message);
+        $mail_message = Translate::get('linkchange password') . ": \n" . $newpass_link . "\n\n";
+        SendEmail::send($email, Config::get('meta.name') . ' — ' . Translate::get('changing password'), $mail_message);
 
-        addMsg(Translate::get('new password has been sent to e-mail'), 'success');
+        addMsg(Translate::get('new password email'), 'success');
         redirect(getUrlByName('login'));
     }
 

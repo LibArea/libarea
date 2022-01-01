@@ -50,8 +50,9 @@ $facet = $data['facet'] ?? false; ?>
           <form class="form" method="post" action="<?= getUrlByName('search'); ?>">
             <input type="text" autocomplete="off" name="q" id="find" placeholder="<?= Translate::get('to find'); ?>" class="h30 bg-gray-100 p15 br-rd20 gray w-100">
             <input name="token" value="<?= csrf_token(); ?>" type="hidden">
+            <input name="url" value="<?= AG_PATH_FACETS_LOGOS; ?>" type="hidden">
           </form>
-          <div class="absolute box-shadow bg-white pt10 pr15 pb5 pl15 mt5 max-w460 br-rd3 none" id="search_items"></div>
+          <div class="absolute box-shadow bg-white p15 pt0 mt5 max-w460 br-rd3 none" id="search_items"></div>
         </div>
       <?php } ?>
       <?php if ($uid['user_id'] == 0) { ?>
