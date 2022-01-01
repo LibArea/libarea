@@ -34,13 +34,13 @@ class UserController extends MainController
             'og'         => false,
             'twitter'    => false,
             'imgurl'     => false,
-            'url'        => getUrlByName('users.all'),
+            'url'        => getUrlByName($sheet),
         ];
 
         return agRender(
             '/user/all',
             [
-                'meta'  => meta($m, Translate::get('users'), Translate::get($sheet . '.desc')),
+                'meta'  => meta($m, Translate::get($type . 's'), Translate::get($sheet . '.desc')),
                 'uid'   => $this->uid,
                 'data'  => [
                     'sheet'         => $sheet,

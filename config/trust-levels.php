@@ -10,11 +10,11 @@ return [
     // From what level of TL it is possible to create Topics
     // Set to 4 if you want to prevent members from creating them 
     'tl_add_topic'      => 4,
-    'count_add_topic'   => 3,
+    'count_add_topic'   => 0,
 
     // С какого уровня TL возможно создавать блоги
     // Установите на 4, если вы хотите запретить участникам создавать их
-    // From what level of TL is it possible to create Blogs
+    // From what level of TL is it possible to create blogs
     // Set to 4 if you want to prevent members from creating them 
     'tl_add_blog'       => 1,
     'count_add_blog'    => 1,
@@ -50,8 +50,8 @@ return [
 
     // Уровень TL, до которого (включая) отправка жалоб невозможна
     // TL level, up to which (including) sending complaints is not possible
-    'tl_stop_report'  => 0,
+    'tl_stop_report'    => 0,
     // Общее количество жалоб в сутки (общие ограничения)
     // Total number of complaints per day (general restrictions)
-    'all_stop_report'  => 3,
+    'all_stop_report'   => 3,
 ];

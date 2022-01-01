@@ -18,17 +18,17 @@ return [
             'url'   => getUrlByName('topics.all'),
             'title' => Translate::get('topics'),
             'icon'  => 'bi bi-columns-gap',
-            'id'    => 'topics',
+            'id'    => 'topic',
         ], [
             'url'   => getUrlByName('blogs.all'),
             'title' => Translate::get('blogs'),
             'icon'  => 'bi bi-journals',
-            'id'    => 'blogs',
+            'id'    => 'blog',
         ], [
             'url'   => getUrlByName('users.all'),
             'title' => Translate::get('users'),
             'icon'  => 'bi bi-people',
-            'id'    => 'users',
+            'id'    => 'user',
         ], [
             'url'   => getUrlByName('answers'),
             'title' => Translate::get('answers'),

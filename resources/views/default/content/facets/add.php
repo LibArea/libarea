@@ -1,4 +1,15 @@
-<main class="col-span-12 mb-col-12 edit-post">
+<div class="col-span-2 justify-between no-mob">
+  <nav class="sticky top70">
+  <?= tabs_nav(
+    'menu',
+    $data['type'],
+    $uid,
+    $pages = Config::get('menu.left'),
+  ); ?>
+  </nav>
+</div>
+
+<main class="col-span-10 mb-col-12 edit-post">
   <div class="bg-white items-center justify-between br-box-gray br-rd5 p15 mb15">
 
     <a href="/"><?= Translate::get('home'); ?></a> /

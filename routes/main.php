@@ -49,9 +49,9 @@ Route::before('Authorization@noAuth')->getGroup();
     // The form of adding and changing: post | topic |  web
     Route::get('/post/add')->controller('Post\AddPostController', ['post'])->name('post.add');
     Route::get('/page/add')->controller('Post\AddPostController', ['page'])->name('page.add');
-    Route::get('/topic/add')->controller('Facets\AddFacetController', ['topic'])->name('topics.add');
-    Route::get('/blog/add')->controller('Facets\AddFacetController', ['blog'])->name('blogs.add');
-    Route::get('/web/add')->controller('Item\AddWebController', ['add', 'sites'])->name('sites.add');
+    Route::get('/topic/add')->controller('Facets\AddFacetController', ['topic'])->name('topic.add');
+    Route::get('/blog/add')->controller('Facets\AddFacetController', ['blog'])->name('blog.add');
+    Route::get('/web/add')->controller('Item\AddWebController', ['add', 'sites'])->name('site.add');
     
     Route::get('/post/edit/{id}')->controller('Post\EditPostController')->where(['id' => '[0-9]+'])->name('post.edit');
     
@@ -94,10 +94,10 @@ Route::before('Authorization@noAuth')->getGroup();
     
     Route::get('/u/{login}/invitations')->controller('User\InvitationsController@invitationForm')->where(['login' => '[A-Za-z0-9]+'])->name('user.invitations');
 
-    Route::get('/topics/my')->controller('Facets\AllFacetController', ['topics.my', 'topics'])->name('topics.my');
-    Route::get('/topics/my/page/{page?}')->controller('Facets\AllFacetController', ['topics.my', 'topics'])->where(['page' => '[0-9]+']); 
+    Route::get('/topics/my')->controller('Facets\AllFacetController', ['topics.my', 'topic'])->name('topics.my');
+    Route::get('/topics/my/page/{page?}')->controller('Facets\AllFacetController', ['topics.my', 'topic'])->where(['page' => '[0-9]+']); 
  
-    Route::get('/blogs/my')->controller('Facets\AllFacetController', ['blogs.my', 'blogs'])->name('blogs.my');
+    Route::get('/blogs/my')->controller('Facets\AllFacetController', ['blogs.my', 'blog'])->name('blogs.my');
  
     Route::get('/all')->controller('HomeController', ['main.all', 'main'])->name('main.all');
     Route::get('/all/page/{page?}')->controller('HomeController', ['main.all', 'main'])->where(['page' => '[0-9]+']);
@@ -140,7 +140,7 @@ Route::get('/topic/{slug}/followers/{id}')->controller('Facets\TopicFacetControl
 Route::get('/post/{id}')->controller('Post\PostController')->where(['id' => '[0-9]+']);
 Route::get('/post/{id}/{slug}')->controller('Post\PostController')->where(['id' => '[0-9]+', 'slug' => '[A-Za-z0-9-_]+'])->name('post');
 
-Route::get('/users')->controller('User\UserController', ['users.all', 'users'])->name('users.all');
+Route::get('/users')->controller('User\UserController', ['users.all', 'user'])->name('users.all');
 Route::get('/users/page/{page?}')->controller('User\UserController')->where(['page' => '[0-9]+']);
 
 Route::get('/u/{login}')->controller('User\UserController@profile')->where(['login' => '[A-Za-z0-9]+'])->name('user');
@@ -159,10 +159,10 @@ Route::get('/comments/page/{page?}')->controller('Comment\CommentController', ['
 Route::get('/answers')->controller('Answer\AnswerController', ['answers'])->name('answers');
 Route::get('/answers/page/{page?}')->controller('Answer\AnswerController', ['answers'])->where(['page' => '[0-9]+']);
 
-Route::get('/topics')->controller('Facets\AllFacetController', ['topics.all', 'topics'])->name('topics.all');
-Route::get('/topics/page/{page?}')->controller('Facets\AllFacetController', ['topics.all', 'topics'])->where(['page' => '[0-9]+']);
-Route::get('/topics/new')->controller('Facets\AllFacetController', ['topics.new', 'topics'])->name('topics.new');
-Route::get('/topics/new/page/{page?}')->controller('Facets\AllFacetController', ['topics.new', 'topics'])->where(['page' => '[0-9]+']);
+Route::get('/topics')->controller('Facets\AllFacetController', ['topics.all', 'topic'])->name('topics.all');
+Route::get('/topics/page/{page?}')->controller('Facets\AllFacetController', ['topics.all', 'topic'])->where(['page' => '[0-9]+']);
+Route::get('/topics/new')->controller('Facets\AllFacetController', ['topics.new', 'topic'])->name('topics.new');
+Route::get('/topics/new/page/{page?}')->controller('Facets\AllFacetController', ['topics.new', 'topic'])->where(['page' => '[0-9]+']);
 
 Route::get('/topic/{slug}')->controller('Facets\TopicFacetController', ['feed'])->where(['slug' => '[a-zA-Z0-9-]+'])->name('topic');
 Route::get('/topics/structure')->controller('Facets\TreeFacetController')->name('topic.structure');
@@ -171,10 +171,10 @@ Route::get('/topic/{slug}/recommend/page/{page?}')->controller('Facets\TopicFace
 Route::get('/topic/{slug}/page/{page?}')->controller('Facets\TopicFacetController', ['feed'])->where(['slug' => '[a-z0-9-]+', 'page' => '[0-9]+']);
 Route::get('/topic/{slug}/info')->controller('Facets\TopicFacetController@info')->where(['slug' => '[a-z0-9-]+'])->name('topic.info');
 
-Route::get('/blogs')->controller('Facets\AllFacetController', ['blogs.all', 'blogs'])->name('blogs.all');
-Route::get('/blogs/page/{page?}')->controller('Facets\AllFacetController', ['topics.all', 'blogs'])->where(['page' => '[0-9]+']);
-Route::get('/blogs/new')->controller('Facets\AllFacetController', ['blogs.new', 'blogs'])->name('blogs.new');
-Route::get('/blogs/new/page/{page?}')->controller('Facets\AllFacetController', ['blogs.new', 'blogs'])->where(['page' => '[0-9]+']);
+Route::get('/blogs')->controller('Facets\AllFacetController', ['blogs.all', 'blog'])->name('blogs.all');
+Route::get('/blogs/page/{page?}')->controller('Facets\AllFacetController', ['topics.all', 'blog'])->where(['page' => '[0-9]+']);
+Route::get('/blogs/new')->controller('Facets\AllFacetController', ['blogs.new', 'blog'])->name('blogs.new');
+Route::get('/blogs/new/page/{page?}')->controller('Facets\AllFacetController', ['blogs.new', 'blog'])->where(['page' => '[0-9]+']);
 
 Route::get('/blog/{slug}')->controller('Facets\BlogFacetController', ['feed'])->where(['slug' => '[a-zA-Z0-9-]+'])->name('blog');
 Route::get('/blog/{slug}/page/{page?}')->controller('Facets\BlogFacetController', ['feed'])->where(['slug' => '[a-z0-9-]+', 'page' => '[0-9]+']);

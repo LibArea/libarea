@@ -26,22 +26,22 @@
         $uid,
         $pages = [
           [
-            'id'    => $data['type'] . '.all',
-            'url'   => getUrlByName($data['type'] . '.all'),
-            'title' => Translate::get($data['type']),
+            'id'    => $data['type'] . 's.all',
+            'url'   => getUrlByName($data['type'] . 's.all'),
+            'title' => Translate::get('all'),
             'icon'  => 'bi bi-app'
           ],
           [
-            'id'    => $data['type'] . '.new',
-            'url'   => getUrlByName($data['type'] . '.new'),
+            'id'    => $data['type'] . 's.new',
+            'url'   => getUrlByName($data['type'] . 's.new'),
             'title' => Translate::get('new ones'),
             'icon'  => 'bi bi-sort-up'
           ],
           [
             'auth'  => true,
             'tl'    => 0,
-            'id'    => $data['type'] . '.my',
-            'url'   => getUrlByName($data['type'] . '.my'),
+            'id'    => $data['type'] . 's.my',
+            'url'   => getUrlByName($data['type'] . 's.my'),
             'title' => Translate::get('reading'),
             'icon'  => 'bi bi-check2-square'
           ],
@@ -56,25 +56,19 @@
           <i class="bi bi-pencil"></i>
         </a>
       <?php } ?>
-
-      <?php if ($uid['user_trust_level'] > 0) {
-        $type = $data['type'] == 'blogs' ? 'blog' : 'topic';
-      ?>
-        <?php if ($uid['user_trust_level'] >= Config::get('trust-levels.tl_add_' . $type)) { ?>
-          <?php if ($data['count_facet'] > 0) { ?>
-            <a class="ml15" title="<?= Translate::get('add'); ?>" href="<?= getUrlByName($data['type'] . '.add'); ?>">
-              <i class="bi bi-plus-lg middle"></i>
-            </a>
-          <?php } ?>
-        <?php } ?>
-      <?php } ?>
+      
+      <?php if ($data['limit'] && $uid['user_id'] > 0) { ?>
+        <a class="ml15" title="<?= Translate::get('add'); ?>" href="<?= getUrlByName($data['type'] . '.add'); ?>">
+          <i class="bi bi-plus-lg middle"></i>
+        </a>
+     <?php } ?>
     </p>
   </div>
 
   <div class="bg-white p15 br-box-gray">
 
     <?php if (!empty($data['facets'])) { ?>
-      <?php if ($data['type'] == 'blogs') { ?>
+      <?php if ($data['type'] == 'blog') { ?>
         <?= import('/_block/facet/blog-list-all', ['facets' => $data['facets'], 'uid' => $uid]); ?>
       <?php } else { ?>
         <?= import('/_block/facet/topic-list-all', ['facets' => $data['facets'], 'uid' => $uid]); ?>
@@ -83,7 +77,7 @@
       <?= no_content(Translate::get($data['type'] . '-no'), 'bi bi-info-lg'); ?>
     <?php } ?>
 
-    <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/' . $data['type']); ?>
+    <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/' . $data['type'] . 's'); ?>
   </div>
 
 </main>

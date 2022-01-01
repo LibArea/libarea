@@ -17,12 +17,9 @@ class AddFacetController extends MainController
     }
 
     // Add form topic
-    public function index($type)
-    {
-        $count      = FacetModel::countFacetsUser($this->uid['user_id'], $type);
-        $count_add  = $this->uid['user_trust_level'] == Base::USER_LEVEL_ADMIN ? 999 : Config::get('trust-levels.count_add_' . $type);
-
-        $in_total = self::limitFacer($type, $count, $count_add);
+    public function index($sheet)
+    {  
+        $limit   = self::limitFacer($sheet, 'redirect');
 
         return agRender(
             '/facets/add',
@@ -30,9 +27,9 @@ class AddFacetController extends MainController
                 'meta'  => meta($m = [], Translate::get('add topic')),
                 'uid'   => $this->uid,
                 'data'  => [
-                    'sheet'         => $type,
-                    'type'          => 'topic',
-                    'count_facet'   => $in_total,
+                    'sheet'         => $sheet,
+                    'type'          => $sheet,
+                    'count_facet'   => $limit,
                 ]
             ]
         );
@@ -40,8 +37,8 @@ class AddFacetController extends MainController
 
     // Add topic / blog
     public function create($type)
-    {
-        self::limitFacer($type);
+    {   
+        self::limitFacer($type, 'redirect');
 
         $facet_title                = Request::getPost('facet_title');
         $facet_description          = Request::getPost('facet_description');
@@ -98,13 +95,20 @@ class AddFacetController extends MainController
         redirect(getUrlByName($type, ['slug' => $facet_slug]));
     }
 
-    public function limitFacer($type)
-    {
+    public function limitFacer($type, $action)
+    { 
         $count      = FacetModel::countFacetsUser($this->uid['user_id'], $type);
+        
         $count_add  = $this->uid['user_trust_level'] == Base::USER_LEVEL_ADMIN ? 999 : Config::get('trust-levels.count_add_' . $type);
-        Validation::validTl($this->uid['user_trust_level'], Config::get('trust-levels.tl_add_' . $type), $count, $count_add);
-
+        
         $in_total   = $count_add - $count;
+        
+        if ($action == 'no.redirect') {
+           return $in_total; 
+        }
+        
+        Validation::validTl($this->uid['user_trust_level'], Config::get('trust-levels.tl_add_' . $type), $count, $count_add);
+        
         if (!$in_total > 0) {
             redirect('/');
         }
