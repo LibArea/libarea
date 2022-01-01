@@ -10,6 +10,8 @@ use Content, Base, Translate;
 
 class TopicFacetController extends MainController
 {
+    protected $limit = 25;
+    
     private $uid;
 
     public function __construct()
@@ -19,7 +21,7 @@ class TopicFacetController extends MainController
 
     // Posts in the topic 
     // Посты по теме
-    public function index($sheet)
+    public function index($sheet, $type)
     {
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
@@ -35,10 +37,8 @@ class TopicFacetController extends MainController
 
         $facet['facet_add_date']    = lang_date($facet['facet_add_date']);
 
-        $limit = 25;
-        $data       = ['facet_slug' => $facet['facet_slug']];
-        $posts      = FeedModel::feed($page, $limit, $this->uid, $sheet, 'topic', $data);
-        $pagesCount = FeedModel::feedCount($this->uid, $sheet, 'topic', $data);
+        $posts      = FeedModel::feed($page, $this->limit, $this->uid, $sheet, $facet['facet_slug']);
+        $pagesCount = FeedModel::feedCount($this->uid, $sheet, $facet['facet_slug']);
 
         $result = [];
         foreach ($posts as $ind => $row) {
@@ -50,11 +50,11 @@ class TopicFacetController extends MainController
 
         $url    = getUrlByName('topic', ['slug' => $facet['facet_slug']]);
         $title  = $facet['facet_seo_title'] . ' — ' .  Translate::get('topic');
-        $descr  = $facet['facet_description'];
-        if ($sheet == 'recommend') {
-            $url =  getUrlByName('recommend', ['slug' => $facet['facet_slug']]);
+        $desc   = $facet['facet_description'];
+        if ($sheet == 'facet.recommend') {
+            $url    =  getUrlByName('recommend', ['slug' => $facet['facet_slug']]);
             $title  = $facet['facet_seo_title'] . ' — ' .  Translate::get('recommended posts');
-            $descr  = sprintf(Translate::get('recommended.posts.desc'), $facet['facet_seo_title']) . $facet['facet_description'];
+            $desc   = sprintf(Translate::get('recommended.posts.desc'), $facet['facet_seo_title']) . $facet['facet_description'];
         }
 
         $m = [
@@ -67,13 +67,13 @@ class TopicFacetController extends MainController
         return agRender(
             '/facets/topic',
             [
-                'meta'  => meta($m, $title, $descr),
+                'meta'  => meta($m, $title, $desc),
                 'uid'   => $this->uid,
                 'data'  => [
-                    'pagesCount'    => ceil($pagesCount / $limit),
+                    'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
-                    'sheet'         => $sheet == 'feed' ? 'topic' : 'recommend',
-                    'type'          => 'topic',
+                    'sheet'         => $sheet,
+                    'type'          => $type,
                     'facet'         => $facet,
                     'posts'         => $result,
                     'focus_users'   => FacetModel::getFocusUsers($facet['facet_id'], 5),

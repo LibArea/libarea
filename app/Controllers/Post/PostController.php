@@ -170,7 +170,7 @@ class PostController extends MainController
     }
 
     // Посты участника
-    public function posts($sheet)
+    public function posts($sheet, $type)
     {
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
@@ -179,9 +179,8 @@ class PostController extends MainController
         $user   = UserModel::getUser($login, 'slug');
         pageError404($user);
 
-        $data       = ['post_user_id' => $user['user_id']];
-        $posts      = FeedModel::feed($page, $this->limit, $this->uid, $sheet, 'user', $data);
-        $pagesCount = FeedModel::feedCount($this->uid, $sheet, 'user', $data);
+        $posts      = FeedModel::feed($page, $this->limit, $this->uid, $sheet, $user['user_id']);
+        $pagesCount = FeedModel::feedCount($this->uid, $sheet, $user['user_id']);
 
         $result = [];
         foreach ($posts as $ind => $row) {

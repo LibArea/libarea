@@ -9,29 +9,29 @@ use PDO;
 class FeedModel extends MainModel
 {
     // Получаем посты по условиям
-    public static function feed($page, $limit, $uid, $sheet, $type, $data)
-    {
-        if ($type == 'topic') {
-            $qa         = $data['facet_slug'];
-            $string     = "WHERE facet_list LIKE :qa AND post_type != 'page'";
-            if ($sheet == 'recommend') {
-                $qa     = $data['facet_slug'];
-                $string = "WHERE facet_list LIKE :qa AND post_is_recommend = 1 AND post_type != 'page'";
-            }
-        } elseif ($type == 'admin') {
-            $selection  = 0;
-            $string     = "WHERE post_user_id != :selection";
-            if ($sheet == 'posts.ban') {
-                $string = "WHERE post_is_deleted = 1";
-            }
-        } elseif ($type == 'item') {
-            $selection  = $data['item_url_domain'];
-            $string     = "WHERE post_url_domain  = :selection AND post_draft = 0";
-        } else {
-            $selection  = $data['post_user_id'];
-            $string     = "WHERE post_user_id  = :selection AND post_draft = 0";
+    public static function feed($page, $limit, $uid, $sheet, $slug)
+    {   
+        switch ($sheet) {
+            case 'facet.feed':
+                $string     = "WHERE facet_list LIKE :qa AND post_type != 'page'";
+                break;
+            case 'facet.recommend':
+                $string     = "WHERE facet_list LIKE :qa AND post_is_recommend = 1 AND post_type != 'page'";
+                break;
+            case 'web.feed':
+                $string     = "WHERE post_url_domain = :qa AND post_draft = 0";
+                break;
+            case 'admin.posts.all':
+                $string     = "WHERE post_user_id != :qa AND post_is_deleted = 0 AND post_type != 'page'";
+                break;
+            case 'admin.posts.ban':
+                $string     = "WHERE post_is_deleted = :qa AND post_type != 'page'";
+                break;
+            case 'user.posts.all':
+                $string     = "WHERE post_user_id  = :qa AND post_draft = 0";
+                break;     
         }
-
+      
         // Удаленный пост, запрещенный к показу в ленте и ограниченный по TL (trust_level)
         $display = '';
         if ($uid['user_trust_level'] != 5) {
@@ -45,9 +45,9 @@ class FeedModel extends MainModel
 
         // По времени или по количеству ответов 
         $sort = "ORDER BY post_answers_count DESC";
-        if ($sheet == 'feed' || $sheet == 'all') {
+        if ($sheet == 'facet.feed') {
             $sort = "ORDER BY post_top DESC, post_date DESC";
-        } elseif ($type == 'admin') {
+        } elseif ($sheet == 'admin.posts.all' || $sheet == 'admin.posts.ban') {
             $sort = "ORDER BY post_date DESC";
         }
 
@@ -104,37 +104,37 @@ class FeedModel extends MainModel
                         $display 
                         $sort LIMIT $start, $limit";
 
-        if ($type == 'topic') {
-            $request = ['qa' => "%" . $qa . "@%"];
-        } else {
-            $request = ['selection' => $selection];
-        }
 
+        $request = ['qa' => $slug];
+        if ($sheet == 'facet.feed' || $sheet == 'facet.recommend') {   
+           $request = ['qa' => "%" . $slug . "@%"];
+        }  
+ 
         return DB::run($sql, $request)->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // Количество постов
-    public static function feedCount($uid, $sheet, $type, $data)
+    public static function feedCount($uid, $sheet, $slug)
     {
-        if ($type == 'topic') {
-            $qa         = $data['facet_slug'];
-            $string     = "WHERE facet_slug = :qa";
-            if ($sheet == 'recommend') {
-                $qa     = $data['facet_slug'];
-                $string = "WHERE facet_slug = :qa AND post_is_recommend = 1";
-            }
-        } elseif ($type == 'admin') {
-            $selection  = 0;
-            $string     = "WHERE post_user_id != :selection";
-            if ($sheet == 'posts.ban') {
-                $string     = "WHERE post_is_deleted = 1";
-            }
-        } elseif ($type == 'item') {
-            $selection  = $data['item_url_domain'];
-            $string     = "WHERE post_url_domain  = :selection";
-        } else {
-            $selection  = $data['post_user_id'];
-            $string     = "WHERE post_user_id  = :selection";
+        switch ($sheet) {
+            case 'facet.feed':
+                $string     = "WHERE facet_list LIKE :qa AND post_type != 'page'";
+                break;
+            case 'facet.recommend':
+                $string     = "WHERE facet_list LIKE :qa AND post_is_recommend = 1 AND post_type != 'page'";
+                break;
+            case 'web.feed':
+                $string     = "WHERE post_url_domain = :qa AND post_draft = 0";
+                break;
+            case 'admin.posts.all':
+                $string     = "WHERE post_user_id != :qa";
+                break;
+            case 'admin.posts.ban':
+                $string     = "WHERE post_is_deleted = :qa";
+                break;
+            case 'user.posts.all':
+                $string     = "WHERE post_user_id  = :qa AND post_draft = 0";
+                break;     
         }
 
         // Удаленный пост, запрещенный к показу в ленте и ограниченный по TL (trust_level)
@@ -164,10 +164,9 @@ class FeedModel extends MainModel
                             LEFT JOIN facets on (facet_id = relation_facet_id)
                             $string $display ";
 
-        if ($type == 'topic') {
-            $request = ['qa' => $qa];
-        } else {
-            $request = ['selection' => $selection];
+        $request = ['qa' => $slug];
+        if ($sheet == 'facet.feed' || $sheet == 'facet.recommend') {   
+           $request = ['qa' => "%" . $slug . "@%"];
         }
 
         return DB::run($sql, $request)->rowCount();

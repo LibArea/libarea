@@ -23,8 +23,9 @@ class PostsController extends MainController
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 
-        $pagesCount = FeedModel::feedCount($this->uid, $sheet, 'admin', 'post');
-        $posts      = FeedModel::feed($page, $this->limit, $this->uid, $sheet, 'admin', 'post');
+        $sort       = $sheet == 'admin.posts.all' ? 0 : 1;
+        $pagesCount = FeedModel::feedCount($this->uid, $sheet, $sort);
+        $posts      = FeedModel::feed($page, $this->limit, $this->uid, $sheet, $sort);
 
         $result = [];
         foreach ($posts  as $ind => $row) {

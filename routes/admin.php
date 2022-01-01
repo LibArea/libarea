@@ -54,9 +54,9 @@ Route::before('Authorization@admin')->getGroup();
     Route::get('/update/build/css')->controller('Admin\СonsoleController@css')->name('admin.build.css');    
     Route::get('/invitations')->controller('Admin\InvitationsController')->name('admin.invitations');
    
-    Route::get('/posts')->controller('Admin\PostsController', ['posts.all', 'posts'])->name('admin.posts');
-    Route::get('/posts/page/{page?}')->controller('Admin\PostsController', ['posts.all', 'posts'])->where(['page' => '[0-9]+']);
-    Route::get('/posts/ban')->controller('Admin\PostsController', ['posts.ban', 'posts'])->name('admin.posts.ban'); 
+    Route::get('/posts')->controller('Admin\PostsController', ['admin.posts.all', 'posts'])->name('admin.posts');
+    Route::get('/posts/page/{page?}')->controller('Admin\PostsController', ['admin.posts.all', 'posts'])->where(['page' => '[0-9]+']);
+    Route::get('/posts/ban')->controller('Admin\PostsController', ['admin.posts.ban', 'posts'])->name('admin.posts.ban'); 
 
     Route::get('/comments')->controller('Admin\CommentsController', ['comments.all', 'comments'])->name('admin.comments');
     Route::get('/comments/page/{page?}')->controller('Admin\CommentsController', ['comments.all', 'comments'])->where(['page' => '[0-9]+']);

@@ -12,35 +12,7 @@
     <?php if ($post['post_is_deleted'] == 0 || $uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
       <div class="post-body">
         <h1 class="mb0 mt10 font-normal text-2xl">
-          <?= $post['post_title']; ?>
-          <?php if ($post['post_is_deleted'] == 1) { ?>
-            <i class="bi bi-trash sky-500"></i>
-          <?php } ?>
-          <?php if ($post['post_closed'] == 1) { ?>
-            <i class="bi bi-lock gray"></i>
-          <?php } ?>
-          <?php if ($post['post_top'] == 1) { ?>
-            <i class="bi bi-pin-angle sky-500"></i>
-          <?php } ?>
-          <?php if ($post['post_lo'] > 0) { ?>
-            <i class="bi bi-award sky-500"></i>
-          <?php } ?>
-          <?php if ($post['post_feature'] == 1) { ?>
-            <i class="bi bi-patch-question green-600"></i>
-          <?php } ?>
-          <?php if ($post['post_translation'] == 1) { ?>
-            <span class="pt5 pr10 pb5 pl10 gray-600 bg-yellow-100 br-rd3 text-sm italic lowercase">
-              <?= Translate::get('translation'); ?>
-            </span>
-          <?php } ?>
-          <?php if ($post['post_tl'] > 0) { ?>
-            <span class="pt5 pr10 pb5 pl10 gray-600 bg-orange-100 br-rd3 italic text-sm">
-              tl<?= $post['post_tl']; ?>
-            </span>
-          <?php } ?>
-          <?php if ($post['post_merged_id'] > 0) { ?>
-            <i class="bi bi-bezier2 sky-500"></i>
-          <?php } ?>
+          <?= import('/_block/post-title', ['post' => $post, 'uid' => $uid]); ?>
         </h1>
         <div class="text-sm lowercase flex gray-400">
           <?= $post['post_date_lang']; ?>

@@ -15,8 +15,8 @@
         $uid,
         $pages = [
           [
-            'id'    => $data['type'] . '.all',
-            'url'   => getUrlByName($data['type'] . '.all'),
+            'id'    => $data['type'] . 's.all',
+            'url'   => getUrlByName($data['type'] . 's.all'),
             'title' => Translate::get('all'),
             'icon'  => 'bi bi-app'
           ],

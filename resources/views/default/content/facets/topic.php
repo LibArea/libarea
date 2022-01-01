@@ -50,17 +50,17 @@
 
         <?= tabs_nav(
           'nav',
-          $data['type'],
+          $data['sheet'],
           $uid,
           $pages = [
             [
-              'id'      => 'topic',
+              'id'      => 'facet.feed',
               'url'     => getUrlByName('topic', ['slug' => $topic['facet_slug']]),
               'title'   => Translate::get('feed'),
               'icon'    => 'bi bi-sort-down'
             ],
             [
-              'id'      => 'recommend',
+              'id'      => 'facet.recommend',
               'url'     => getUrlByName('topic', ['slug' => $topic['facet_slug']]) . '/recommend',
               'title'   => Translate::get('recommended'),
               'icon'    => 'bi bi-lightning'

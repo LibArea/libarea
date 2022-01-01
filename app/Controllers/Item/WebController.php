@@ -60,7 +60,7 @@ class WebController extends MainController
     }
 
     // Посты по домену
-    public function posts($sheet)
+    public function posts($sheet, $type)
     {
         $domain     = Request::get('domain');
         $page       = Request::getInt('page');
@@ -70,10 +70,9 @@ class WebController extends MainController
         pageError404($item);
 
         $item['item_content'] = Content::text($item['item_content_url'], 'line');
-
-        $data       = ['item_url_domain' => $item['item_url_domain']];
-        $posts      = FeedModel::feed($page, $this->limit, $this->uid, $sheet, 'item', $data);
-        $pagesCount = FeedModel::feedCount($this->uid, $sheet, 'item', $data);
+ 
+        $posts      = FeedModel::feed($page, $this->limit, $this->uid, $sheet, $item['item_url_domain']);
+        $pagesCount = FeedModel::feedCount($this->uid, $sheet, $item['item_url_domain']);
 
         $result = [];
         foreach ($posts as $ind => $row) {

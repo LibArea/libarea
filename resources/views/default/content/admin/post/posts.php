@@ -5,12 +5,12 @@
     'uid'   => $uid,
     'menus' => [
       [
-        'id' => $data['type'] . '.all',
+        'id' => 'admin.' . $data['type'] . '.all',
         'url' => getUrlByName('admin.' . $data['type']),
         'name' => Translate::get('all'),
         'icon' => 'bi bi-record-circle'
       ], [
-        'id' => $data['type'] . '.ban',
+        'id' => 'admin.' . $data['type'] . '.ban',
         'url' => getUrlByName('admin.' . $data['type'] . '.ban'),
         'name' => Translate::get('deleted'),
         'icon' => 'bi bi-x-circle'
@@ -53,7 +53,7 @@
           </span>
           <span id="cm_dell" class="right comment_link">
             <a data-type="post" data-id="<?= $post['post_id']; ?>" class="type-action">
-              <?php if ($data['sheet'] == 'posts.ban') { ?>
+              <?php if ($data['sheet'] == 'admin.posts.ban') { ?>
                 <?= Translate::get('recover'); ?>
               <?php } else { ?>
                 <?= Translate::get('remove'); ?>

@@ -10,6 +10,8 @@ use Content, Base, Translate;
 
 class BlogFacetController extends MainController
 {
+    protected $limit = 25;
+    
     private $uid;
 
     public function __construct()
@@ -19,7 +21,7 @@ class BlogFacetController extends MainController
 
     // Blog posts
     // Посты в блоге
-    public function index($sheet)
+    public function index($sheet, $type)
     {
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
@@ -34,11 +36,9 @@ class BlogFacetController extends MainController
         }
 
         $facet['facet_add_date']    = lang_date($facet['facet_add_date']);
-
-        $limit = 25;
-        $data       = ['facet_slug' => $facet['facet_slug']];
-        $posts      = FeedModel::feed($page, $limit, $this->uid, $sheet, 'topic', $data);
-        $pagesCount = FeedModel::feedCount($this->uid, $sheet, 'topic', $data);
+ 
+        $posts      = FeedModel::feed($page, $this->limit, $this->uid, $sheet, $facet['facet_slug']);
+        $pagesCount = FeedModel::feedCount($this->uid, $sheet, $facet['facet_slug']);
 
         $result = [];
         foreach ($posts as $ind => $row) {
@@ -65,7 +65,7 @@ class BlogFacetController extends MainController
                 'meta'  => meta($m, $title, $descr),
                 'uid'   => $this->uid,
                 'data'  => [
-                    'pagesCount'    => ceil($pagesCount / $limit),
+                    'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,
                     'sheet'         => $sheet,
                     'type'          => 'blog',
