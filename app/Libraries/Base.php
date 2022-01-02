@@ -4,9 +4,9 @@ use Hleb\Constructor\Handlers\Request;
 
 class Base
 {
-    // Initial level of trust
-    // Начальные уровень домерия
-    const ELEMENTARY_USER = 0;
+    // Unregistered user
+    // Незарегистрированный пользователь
+    const UNREGISTERED_USER = 0;
     
     // User (level of trust 0)
     // Пользователь (уровень доверия 0)
@@ -53,8 +53,8 @@ class Base
         } else {
 
             (new \App\Controllers\Auth\LoginController())->check();
-            $uid['user_id']             = self::ELEMENTARY_USER;
-            $uid['user_trust_level']    = self::ELEMENTARY_USER;
+            $uid['user_id']             = self::UNREGISTERED_USER;
+            $uid['user_trust_level']    = self::UNREGISTERED_USER;
             $uid['user_template']       = Config::get('general.template');
             
             Translate::setLang(Config::get('general.lang'));

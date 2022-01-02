@@ -118,10 +118,10 @@ class FeedModel extends MainModel
     {
         switch ($sheet) {
             case 'facet.feed':
-                $string     = "WHERE facet_list LIKE :qa AND post_type != 'page'";
+                $string     = "WHERE facet_slug = :qa AND post_type != 'page'";
                 break;
             case 'facet.recommend':
-                $string     = "WHERE facet_list LIKE :qa AND post_is_recommend = 1 AND post_type != 'page'";
+                $string     = "WHERE facet_slug = :qa AND post_is_recommend = 1 AND post_type != 'page'";
                 break;
             case 'web.feed':
                 $string     = "WHERE post_url_domain = :qa AND post_draft = 0";
@@ -165,9 +165,6 @@ class FeedModel extends MainModel
                             $string $display ";
 
         $request = ['qa' => $slug];
-        if ($sheet == 'facet.feed' || $sheet == 'facet.recommend') {   
-           $request = ['qa' => "%" . $slug . "@%"];
-        }
 
         return DB::run($sql, $request)->rowCount();
     }

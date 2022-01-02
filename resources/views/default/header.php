@@ -1,3 +1,10 @@
+<?php
+  $dark     = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
+  $css      = $data['type'] == 'web' || $data['type'] == 'page'  ? 'p0 m0 black' : 'p0 m0 black bg-gray-100';
+  $type     = $data['type'] ?? false;
+  $facet    = $data['facet'] ?? false; 
+?>
+
 <!DOCTYPE html>
 <html lang="<?= Translate::getLang(); ?>" prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
 
@@ -12,13 +19,7 @@
   <link rel="icon" sizes="120x120" href="/favicon-120.ico" type="image/x-icon">
 </head>
 
-<?php
-$dark = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
-$css = $data['type'] == 'web' || $data['type'] == 'page'  ? 'p0 m0 black' : 'p0 m0 black bg-gray-100';
-$type  = $data['type'] ?? false;
-$facet = $data['facet'] ?? false; ?>
-
-<body class="<?= $css; ?><?php if (Request::getCookie('dayNight') == 'dark') { ?> dark<?php } ?>">
+<body class="<?= $css; ?><?php if ($dark == 'dark') { ?> dark<?php } ?>">
 
   <header class="bg-white box-shadow mt0 mb15 <?php if ($type != 'page') { ?>sticky top0<?php } ?> z-30">
     <div class="col-span-12 mr-auto max-width w-100 pr10 pl10 h44 grid items-center flex justify-between">

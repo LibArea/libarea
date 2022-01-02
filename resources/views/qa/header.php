@@ -1,3 +1,10 @@
+<?php
+  $dark     = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
+  $css      = $data['type'] == 'web' || $data['type'] == 'page'  ? 'p0 m0 black' : 'p0 m0 black bg-gray-100';
+  $type     = $data['type'] ?? false;
+  $facet    = $data['facet'] ?? false; 
+?>
+
 <!DOCTYPE html>
 <html lang="<?= Translate::getLang(); ?>" prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
 
@@ -17,7 +24,7 @@ $dark = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
 $type  = $data['type'] ?? false;
 $facet = $data['facet'] ?? false; ?>
 
-<body class="p0 m0 black<?php if (Request::getCookie('dayNight') == 'dark') { ?> dark<?php } ?>">
+<body class="p0 m0 black<?php if ($dark == 'dark') { ?> dark<?php } ?>">
 
   <header class="bg-white mt0 mb15">
     <div class="br-bottom mr-auto max-w1240 w-100 pr10 pl10 h24 mb10 no-mob items-center flex">

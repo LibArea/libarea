@@ -63,7 +63,7 @@
         <?= import('/_block/facet/topic-list-all', ['facets' => $data['facets'], 'uid' => $uid]); ?>
       <?php } ?>
     <?php } else { ?>
-      <?= no_content(Translate::get($data['type'] . '-no'), 'bi bi-info-lg'); ?>
+      <?= no_content(Translate::get($data['type'] . 's.no'), 'bi bi-info-lg'); ?>
     <?php } ?>
 
     <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], '/' . $data['type'] . 's'); ?>
