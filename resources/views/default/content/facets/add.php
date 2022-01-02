@@ -41,9 +41,9 @@
               'type'        => 'text',
               'name'        => 'facet_short_description',
               'required'    => true,
-              'min'         => 11,
+              'min'         => 9,
               'max'         => 120,
-              'help'        => '11 - 120 ' . Translate::get('characters'),
+              'help'        => '9 - 120 ' . Translate::get('characters'),
               'red'         => 'red'
             ],
             [
@@ -70,8 +70,8 @@
         ]); ?>
 
         <div for="mb5"><?= Translate::get('meta description'); ?><sup class="red-500">*</sup></div>
-        <textarea rows="6" class="add max-w780" required minlength="44" name="facet_description"></textarea>
-        <div class="text-sm gray-400 mb20">> 44 <?= Translate::get('characters'); ?></div>
+        <textarea rows="6" class="add max-w780" required minlength="34" name="facet_description"></textarea>
+        <div class="text-sm gray-400 mb20">> 34 <?= Translate::get('characters'); ?></div>
 
         <input type="hidden" name="facet_type" value="<?= $data['sheet']; ?>">
         <?= sumbit(Translate::get('add')); ?>

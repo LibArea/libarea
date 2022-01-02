@@ -181,8 +181,8 @@
       <?php } ?>
 
       <div for="mb5"><?= Translate::get('meta description'); ?><sup class="red-500">*</sup></div>
-      <textarea class="add max-w780" rows="6" minlength="44" name="facet_description"><?= $fs['facet_description']; ?></textarea>
-      <div class="text-sm gray-400 mb20">> 44 <?= Translate::get('characters'); ?></div>
+      <textarea class="add max-w780" rows="6" minlength="34" name="facet_description"><?= $fs['facet_description']; ?></textarea>
+      <div class="text-sm gray-400 mb20">> 34 <?= Translate::get('characters'); ?></div>
 
       <?= import('/_block/form/field-input', [
         'uid'           => $uid,
@@ -192,9 +192,9 @@
             'type' => 'text',
             'name' => 'facet_short_description',
             'value' => $fs['facet_short_description'],
-            'min' => 11,
+            'min' => 9,
             'max' => 120,
-            'help' => '11 - 120 ' . Translate::get('characters'),
+            'help' => '9 - 120 ' . Translate::get('characters'),
             'red' => 'red'
           ],
         ]
