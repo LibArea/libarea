@@ -4,9 +4,9 @@ namespace App\Controllers\Comment;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\User\UserModel;
+use App\Middleware\Before\UserData;
 use App\Models\{CommentModel, PostModel};
-use Content, Base;
+use Content;
 
 class EditCommentController extends MainController
 {
@@ -14,7 +14,7 @@ class EditCommentController extends MainController
 
     public function __construct()
     {
-        $this->uid  = Base::getUid();
+        $this->uid  = UserData::getUid();
     }
 
     // Форма редактирования comment
@@ -47,7 +47,7 @@ class EditCommentController extends MainController
         $comment_content    = Request::getPost('comment');
 
         // Получим относительный url поста для возрата
-        $post       = PostModel::getPostId($post_id);
+        $post       = PostModel::getPost($post_id, 'id', $this->uid);
         pageRedirection($post, '/');
 
         // Проверка доступа 
@@ -56,10 +56,8 @@ class EditCommentController extends MainController
             redirect('/');
         }
 
-        // Если пользователь забанен / заморожен
-        $user = UserModel::getUser($this->uid['user_id'], 'id');
-        (new \App\Controllers\Auth\BanController())->getBan($user);
-        Content::stopContentQuietМode($user);
+        // Если пользователь заморожен
+        Content::stopContentQuietМode($this->uid['user_limiting_mode']);
 
         $slug = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
         $redirect   = $slug . '#comment_' . $comment['comment_id'];

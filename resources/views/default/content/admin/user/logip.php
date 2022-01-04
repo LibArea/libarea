@@ -58,7 +58,7 @@
           <?php } ?>
         </td>
         <td class="center">
-          <?php if ($user['user_trust_level'] != 5) { ?>
+          <?php if ($user['user_trust_level'] != UserData::REGISTERED_ADMIN) { ?>
             <?php if ($user['user_ban_list']) { ?>
               <div class="type-ban" data-id="<?= $user['user_id']; ?>" data-type="user">
                 <span class="red-500"><?= Translate::get('unban'); ?></span>
@@ -73,7 +73,7 @@
           <?php } ?>
         </td>
         <td class="center">
-          <?php if ($user['user_trust_level'] != 5) { ?>
+          <?php if ($user['user_trust_level'] != UserData::REGISTERED_ADMIN) { ?>
             <a title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('admin.user.edit', ['id' => $user['user_id']]); ?>">
               <i class="bi bi-pencil"></i>
             </a>

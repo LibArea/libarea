@@ -19,7 +19,7 @@
       <div class="ml15 mb-ml-0 flex-auto">
         <h1 class="mb0 mt10 text-2xl">
           <?= $topic['facet_seo_title']; ?>
-          <?php if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN || $topic['facet_user_id'] == $uid['user_id']) { ?>
+          <?php if (UserData::checkAdmin() || $topic['facet_user_id'] == $uid['user_id']) { ?>
             <a class="right gray-600" href="<?= getUrlByName('topic.edit', ['id' => $topic['facet_id']]); ?>">
               <i class="bi bi-pencil"></i>
             </a>

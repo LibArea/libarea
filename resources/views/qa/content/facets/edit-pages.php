@@ -49,7 +49,7 @@
             <?= $row['post_title']; ?>
           </a>
 
-          <?php if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN || $fs['facet_user_id'] == $uid['user_id']) { ?>
+          <?php if (UserData::checkAdmin() || $fs['facet_user_id'] == $uid['user_id']) { ?>
             <a class="text-sm gray-400" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('page.edit', ['id' => $row['post_id']]); ?>">
               <i class="bi bi-pencil"></i>
             </a>

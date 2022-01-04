@@ -4,25 +4,32 @@ namespace App\Controllers;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Middleware\Before\UserData;
 use App\Models\{NotificationsModel, PostModel, ReportModel};
-use Base, Config, Translate;
+use Config, Translate;
 
 class ReportController extends MainController
 {
+    private $uid;
+
+    public function __construct()
+    {
+        $this->uid = UserData::getUid();
+    }
+
     public function index()
     {
-        $uid            = Base::getUid();
         $content_type   = Request::getPost('type');
         $post_id        = Request::getPostInt('post_id');
         $content_id     = Request::getPostInt('content_id');
 
         // Ограничим флаги
-        if ($uid['user_trust_level'] == Config::get('trust-levels.tl_stop_report')) return 1;
+        if ($this->uid['user_trust_level'] == Config::get('trust-levels.tl_stop_report')) return 1;
 
-        $num_report =  ReportModel::getSpeed($uid['user_id']);
+        $num_report =  ReportModel::getSpeed($this->uid['user_id']);
         if ($num_report > Config::get('trust-levels.all_stop_report')) return 1;
 
-        $post   = PostModel::getPostId($post_id);
+        $post   = PostModel::getPost($post_id, 'id', $this->uid);
         pageError404($post);
 
         $type_id = 'comment_' . $content_id;
@@ -37,10 +44,10 @@ class ReportController extends MainController
         // Admin notification 
         $type = 20;     // Система флагов  
         $user_id  = 1;  // админу        
-        NotificationsModel::send($uid['user_id'], $user_id, $type, $post_id, $url_report, 1);
+        NotificationsModel::send($this->uid['user_id'], $user_id, $type, $post_id, $url_report, 1);
 
         $data = [
-            'report_user_id'    => $uid['user_id'],
+            'report_user_id'    => $this->uid['user_id'],
             'report_type'       => $content_type,
             'report_content_id' => $content_id,
             'report_reason'     => Translate::get('breaking the rules'),

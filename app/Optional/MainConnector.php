@@ -29,7 +29,6 @@ class MainConnector implements Connector
             // "Phphleb\Debugpan\DPanel"      => "app/ThirdParty/phphleb/debugpan/DPanel.php",
             "Sass"                          => "app/Libraries/Sass.php",
             "Translate"                     => "app/Libraries/Translate.php",
-            "Base"                          => "app/Libraries/Base.php",
             "Content"                       => "app/Libraries/Content.php",
             "UploadImage"                   => "app/Libraries/UploadImage.php",
             "Integration"                   => "app/Libraries/Integration.php",

@@ -1,4 +1,5 @@
 <?php
+  Translate::setLang($uid['user_lang']);
   $dark     = Request::getCookie('dayNight') == 'dark' ? 'dark' : '';
   $css      = $data['type'] == 'web' || $data['type'] == 'page'  ? 'p0 m0 black' : 'p0 m0 black bg-gray-100';
   $type     = $data['type'] ?? false;
@@ -56,12 +57,12 @@
           <div class="absolute box-shadow bg-white p15 pt0 mt5 max-w460 br-rd3 none" id="search_items"></div>
         </div>
       <?php } ?>
-      <?php if ($uid['user_id'] == 0) { ?>
+      <?php if (!UserData::checkActiveUser()) { ?>
         <div class="flex right col-span-4 items-center">
           <div id="toggledark" class="header-menu-item no-mob only-icon p10 ml30 mb-ml-10">
             <i class="bi bi-brightness-high gray-400 text-xl"></i>
           </div>
-          <?php if (Config::get('general.invite') == 0) { ?>
+          <?php if (Config::get('general.invite') == false) { ?>
             <a class="register gray ml30 mr15 mb-ml-10 mb-mr-5 block" title="<?= Translate::get('sign up'); ?>" href="<?= getUrlByName('register'); ?>">
               <?= Translate::get('sign up'); ?>
             </a>
@@ -115,3 +116,4 @@
     </div>
   </header>
   <div class="max-width mr-auto grid grid-cols-12 gap-4 pr5 pl5">
+ 

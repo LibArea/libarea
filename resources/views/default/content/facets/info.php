@@ -19,7 +19,7 @@
       <a href="<?= getUrlByName('topic', ['slug' => $facet['facet_slug']]); ?>">
         <?= $facet['facet_seo_title']; ?>
       </a>
-      <?php if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
+      <?php if (UserData::checkAdmin()) { ?>
         <a class="right gray-600" href="<?= getUrlByName('topic.edit', ['id' => $facet['facet_id']]); ?>">
           <i class="bi bi-pencil"></i>
         </a>

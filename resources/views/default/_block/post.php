@@ -2,7 +2,7 @@
   <?php $n = 0;
   foreach ($data['posts'] as $post) {
     $n++; ?>
-    <?php if ($uid['user_id'] == 0 && $n == 6) { ?>
+    <?php if (!UserData::checkActiveUser() && $n == 6) { ?>
       <?= import('/_block/no-login-screensaver', ['uid' => $uid]); ?>
     <?php } ?>
     <?php $post_url = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]); ?>

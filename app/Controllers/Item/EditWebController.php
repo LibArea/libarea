@@ -4,8 +4,9 @@ namespace App\Controllers\Item;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Middleware\Before\UserData;
 use App\Models\{WebModel, FacetModel, PostModel};
-use Base, Validation, Translate;
+use Validation, Translate;
 
 class EditWebController extends MainController
 {
@@ -13,13 +14,13 @@ class EditWebController extends MainController
 
     public function __construct()
     {
-        $this->uid  = Base::getUid();
+        $this->uid  = UserData::getUid();
     }
 
     // Форма редактирование домена
     public function index()
     {
-        Validation::validTl($this->uid['user_trust_level'], Base::USER_LEVEL_ADMIN, 0, 1);
+        Validation::validTl($this->uid['user_trust_level'], UserData::REGISTERED_ADMIN, 0, 1);
 
         $domain_id  = Request::getInt('id');
         $domain     = WebModel::getItemId($domain_id);
@@ -51,7 +52,7 @@ class EditWebController extends MainController
 
     public function edit()
     {
-        Validation::validTl($this->uid['user_trust_level'], Base::USER_LEVEL_ADMIN, 0, 1);
+        Validation::validTl($this->uid['user_trust_level'], UserData::REGISTERED_ADMIN, 0, 1);
 
         $redirect   = getUrlByName('web');
         $item_id    = Request::getPostInt('item_id');

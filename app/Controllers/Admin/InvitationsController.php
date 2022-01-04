@@ -4,10 +4,18 @@ namespace App\Controllers\Admin;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use App\Models\User\{InvitationModel, UserModel};
-use Base, Translate;
+use App\Middleware\Before\UserData;
+use Translate;
 
 class InvitationsController extends MainController
 {
+    private $uid;
+
+    public function __construct()
+    {
+        $this->uid  = UserData::getUid();
+    }
+
     public function index()
     {
         $invite = InvitationModel::get();
@@ -23,7 +31,7 @@ class InvitationsController extends MainController
             '/admin/invitation/invitations',
             [
                 'meta'  => meta($m = [], Translate::get('invites')),
-                'uid'   => Base::getUid(),
+                'uid'   => $this->uid,
                 'data'  => [
                     'type'          => 'invites',
                     'sheet'         => 'all',

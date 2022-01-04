@@ -9,7 +9,7 @@ if ($blog['facet_is_deleted'] == 0) { ?>
       <div class="ml15 mb-ml-0 flex-auto">
         <h1 class="mb0 mt10 text-2xl">
           <?= $blog['facet_seo_title']; ?>
-          <?php if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN || $blog['facet_user_id'] == $uid['user_id']) { ?>
+          <?php if (UserData::checkAdmin() || $blog['facet_user_id'] == $uid['user_id']) { ?>
             <a class="right white gray-hover fon-rgba -mt20" href="<?= getUrlByName('blog.edit', ['id' => $blog['facet_id']]); ?>">
               <i class="bi bi-pencil bold"></i>
             </a>
@@ -66,7 +66,7 @@ if ($blog['facet_is_deleted'] == 0) { ?>
                     <a class="relative pt5 pb5 hidden" href="<?= getUrlByName('page', ['facet' => $blog['facet_slug'], 'slug' => $row['post_slug']]); ?>">
                       <?= $row['post_title']; ?>
                     </a>
-                    <?php if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN || $blog['facet_user_id'] == $uid['user_id']) { ?>
+                    <?php if (UserData::checkAdmin() || $blog['facet_user_id'] == $uid['user_id']) { ?>
                       <a class="text-sm gray-400" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('page.edit', ['id' => $row['post_id']]); ?>">
                         <i class="bi bi-pencil"></i>
                       </a>

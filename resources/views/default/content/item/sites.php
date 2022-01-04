@@ -1,6 +1,6 @@
 <main class="col-span-12 mb-col-12">
   <div class="pt5 mr15 pb5 ml15 text-sm">
-    <?php if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
+    <?php if (UserData::checkAdmin()) { ?>
       <a title="<?= Translate::get('add'); ?>" class="right mt5" href="<?= getUrlByName('sites.add'); ?>">
         <i class="bi bi-plus-lg middle"></i>
       </a>
@@ -16,7 +16,7 @@
     <?php } ?>
     <h1 class="mt0 mb5 text-2xl font-normal">
       <?= $data['topic']['facet_title']; ?>
-      <?php if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
+      <?php if (UserData::checkAdmin()) { ?>
         <a class="text-sm ml5" href="<?= getUrlByName('topic.edit', ['id' => $data['topic']['facet_id']]); ?>">
           <sup><i class="bi bi-pencil gray"></i></sup>
         </a>
@@ -36,7 +36,7 @@
               <a class="pt5 pr10 underline-hover mb-col-2 mb-text-xl text-2xl inline" href="<?= getUrlByName('web.topic', ['slug' => $lt['facet_slug']]); ?>">
                 <?= $lt['facet_title']; ?>
               </a>
-              <?php if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
+              <?php if (UserData::checkAdmin()) { ?>
                 <a class="text-sm" href="<?= getUrlByName('topic.edit', ['id' => $lt['value']]); ?>">
                   <sup><i class="bi bi-pencil gray"></i></sup>
                 </a>
@@ -55,7 +55,7 @@
               <a class="underline-hover" href="<?= getUrlByName('web.topic', ['slug' => $rl['facet_slug']]); ?>">
                 <?= $rl['facet_title']; ?>
               </a>
-              <?php if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
+              <?php if (UserData::checkAdmin()) { ?>
                 <a class="text-sm ml5" href="<?= getUrlByName('topic.edit', ['id' => $rl['value']]); ?>">
                   <sup><i class="bi bi-pencil gray"></i></sup>
                 </a>
@@ -118,7 +118,7 @@
                     <?= $item['item_title_soft']; ?> <?= Translate::get('on'); ?> GitHub
                   </a>
                 <?php } ?>
-                <?php if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
+                <?php if (UserData::checkAdmin()) { ?>
                   <a class="ml15 inline" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('web.edit', ['id' => $item['item_id']]); ?>">
                     <i class="bi bi-pencil text-sm"></i>
                   </a>

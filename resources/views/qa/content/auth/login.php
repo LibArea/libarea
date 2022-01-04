@@ -27,7 +27,7 @@
 
     <div class="mb20">
       <?= sumbit(Translate::get('sign in')); ?>
-      <?php if (Config::get('general.invite') == 0) { ?>
+      <?php if (Config::get('general.invite') == false) { ?>
         <span class="mr5 ml5 text-sm"><a href="<?= getUrlByName('register'); ?>"><?= Translate::get('sign up'); ?></a></span>
       <?php } ?>
       <span class="mr5 ml5 text-sm"><a href="<?= getUrlByName('recover'); ?>"><?= Translate::get('forgot your password'); ?>?</a></span>

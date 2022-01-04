@@ -4,8 +4,9 @@ namespace App\Controllers;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Middleware\Before\UserData;
 use App\Models\RssModel;
-use Content, Config, Base;
+use Content, Config;
 
 class RssController extends MainController
 {
@@ -13,7 +14,7 @@ class RssController extends MainController
 
     public function __construct()
     {
-        $this->uid = Base::getUid();
+        $this->uid = UserData::getUid();
     }
 
     // Route::get('/sitemap.xml')

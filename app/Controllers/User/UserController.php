@@ -4,9 +4,10 @@ namespace App\Controllers\User;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Middleware\Before\UserData;
 use App\Models\User\{UserModel, BadgeModel};
 use App\Models\{FacetModel, NotificationsModel, PostModel};
-use Content, Config, Base, Validation, Translate;
+use Content, Config, Validation, Translate;
 
 class UserController extends MainController
 {
@@ -16,7 +17,7 @@ class UserController extends MainController
 
     public function __construct()
     {
-        $this->uid  = Base::getUid();
+        $this->uid  = UserData::getUid();
     }
 
     // All users
@@ -84,7 +85,7 @@ class UserController extends MainController
         }
 
         $isBan = '';
-        if ($this->uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) {
+        if (UserData::checkAdmin()) {
             Request::getResources()->addBottomScript('/assets/js/admin.js');
             $isBan = UserModel::isBan($user['user_id']);
         }
@@ -103,7 +104,6 @@ class UserController extends MainController
                 'uid'   => $this->uid,
                 'data'  => [
                     'user_created_at'   => lang_date($user['user_created_at']),
-                    'user_trust_level'  => UserModel::getUserTrust($user['user_id']),
                     'count'             => UserModel::contentCount($user['user_id']),
                     'topics'            => FacetModel::getFacetsAll(1, 10, $user['user_id'], 'my'),
                     'badges'            => BadgeModel::getBadgeUserAll($user['user_id']),
@@ -111,7 +111,7 @@ class UserController extends MainController
                     'isBan'             => $isBan,
                     'type'              => 'profile',
                     'participation'     => FacetModel::participation($user['user_id']),
-                    'post'              => PostModel::getPostId($user['user_my_post']),
+                    'post'              => PostModel::getPost($user['user_my_post'], 'id', $this->uid),
                     'button_pm'         => Validation::accessPm($this->uid, $user['user_id'], Config::get('general.tl_add_pm'))
                 ]
             ]
@@ -136,7 +136,7 @@ class UserController extends MainController
             }
 
             $row['answer_content']  = Content::text($row['answer_content'], 'text');
-            $row['post']            = PostModel::getPostId($row['answer_post_id']);
+            $row['post']            = PostModel::getPost($row['answer_post_id'], 'id', $this->uid);
             $result[$ind]           = $row;
         }
 
@@ -213,7 +213,7 @@ class UserController extends MainController
     {
         $user_id    = Request::getPostInt('user_id');
         $user       = UserModel::getUser($user_id, 'id');
-        $post       = PostModel::getPostId($user['user_my_post']);
+        $post       = PostModel::getPost($user['user_my_post'], 'id', $this->uid);
         $badges     = BadgeModel::getBadgeUserAll($user_id);
 
         agIncludeTemplate(

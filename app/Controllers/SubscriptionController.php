@@ -4,8 +4,8 @@ namespace App\Controllers;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Middleware\Before\UserData;
 use App\Models\{SubscriptionModel, PostModel, FacetModel};
-use Base;
 
 class SubscriptionController extends MainController
 {
@@ -13,7 +13,7 @@ class SubscriptionController extends MainController
 
     public function __construct()
     {
-        $this->uid = Base::getUid();
+        $this->uid = UserData::getUid();
     }
 
     public function index()
@@ -27,7 +27,7 @@ class SubscriptionController extends MainController
         if ($content_id <= 0) return false;
 
         if ($type == 'post') {
-            $content = PostModel::getPostId($content_id);
+            $content = PostModel::getPost($content_id, 'id', $this->uid);
         } else {
             $content =  FacetModel::getFacet($content_id, 'id');
             // Запретим владельцу отписываться от созданного фасета

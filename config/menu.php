@@ -3,7 +3,7 @@
  * Файл конфигурации меню
  * Menu configuration file
  */
-$account = Request::getSession('account') ?? [];
+$account = \UserData::getUid();
 return [
 
     // Left general menu

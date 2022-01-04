@@ -65,7 +65,7 @@ $facet = $data['facet'] ?? false; ?>
           <div id="toggledark" class="header-menu-item no-mob only-icon p10 ml30 mb-ml-10">
             <i class="bi bi-brightness-high gray-400 text-xl"></i>
           </div>
-          <?php if (Config::get('general.invite') == 0) { ?>
+          <?php if (Config::get('general.invite') == false) { ?>
             <a class="register gray ml30 mr15 mb-ml-10 mb-mr-5 block" title="<?= Translate::get('sign up'); ?>" href="<?= getUrlByName('register'); ?>">
               <?= Translate::get('sign up'); ?>
             </a>

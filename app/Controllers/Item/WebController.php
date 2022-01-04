@@ -4,8 +4,9 @@ namespace App\Controllers\Item;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Middleware\Before\UserData;
 use App\Models\{WebModel, FeedModel, FacetModel, PostModel};
-use Content, Base, Translate;
+use Content, Translate;
 
 class WebController extends MainController
 {
@@ -15,12 +16,11 @@ class WebController extends MainController
 
     public function __construct()
     {
-        $this->uid  = Base::getUid();
+        $this->uid  = UserData::getUid();
     }
 
     public function index()
     {
-        $uid    = Base::getUid();
         $page   = Request::getInt('page');
         $page   = $page == 0 ? 1 : $page;
 

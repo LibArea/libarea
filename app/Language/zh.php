@@ -535,7 +535,13 @@ $data = [
     'main.feed.info'            => '按時間順序發帖...',
     'main.all.info'             => '社區提要中的所有帖子...',
     'main.top.info'             => '最近的活躍帖子...',
-
+    
+    'tl0.title'                 => '客人',
+    'tl1.title'                 => '用戶',
+    'tl2.title'                 => '會員',
+    'tl3.title'                 => '居民',
+    'tl4.title'                 => '領袖',
+    'tl5.title'                 => '員工',
 ];
 
 return $data;

@@ -4,8 +4,9 @@ namespace App\Controllers;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Middleware\Before\UserData;
 use App\Models\NotificationsModel;
-use Base, Translate;
+use Translate;
 
 class NotificationsController extends MainController
 {
@@ -13,7 +14,7 @@ class NotificationsController extends MainController
 
     public function __construct()
     {
-        $this->uid = Base::getUid();
+        $this->uid = UserData::getUid();
     }
 
     // Страница уведомлений участника

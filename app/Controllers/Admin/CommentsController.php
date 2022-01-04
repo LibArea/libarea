@@ -4,8 +4,9 @@ namespace App\Controllers\Admin;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Middleware\Before\UserData;
 use App\Models\CommentModel;
-use Content, Base, Translate;
+use Content, Translate;
 
 class CommentsController extends MainController
 {
@@ -15,7 +16,7 @@ class CommentsController extends MainController
 
     public function __construct()
     {
-        $this->uid  = Base::getUid();
+        $this->uid  = UserData::getUid();
     }
 
     public function index($sheet, $type)

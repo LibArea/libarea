@@ -1,9 +1,12 @@
 <a class="up_down_btn fixed bg-gray-100 none w30 h30 z-50 br-rd3 center gray" title="<?= Translate::get('up'); ?>">&uarr;</a>
-
+ 
 <script src="/assets/js/sweetalert/sweetalert2.all.min.js"></script>
 <script src="/assets/js/tippy/popper.min.js"></script>
 <script src="/assets/js/tippy/tippy-bundle.umd.min.js"></script>
 <script src="/assets/js/common.js"></script>
+
+<?php if ($uid['user_id'] > 0) { ?><script src="/assets/js/app.js"></script><?php } ?>
+ 
 
 <?= getRequestResources()->getBottomStyles(); ?>
 <?= getRequestResources()->getBottomScripts(); ?>

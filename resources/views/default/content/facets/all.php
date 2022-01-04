@@ -51,12 +51,6 @@
 
     </ul>
     <p class="m0 text-xl">
-      <?php if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
-        <a class="ml15" href="<?= getUrlByName('admin.' . $data['type']); ?>">
-          <i class="bi bi-pencil"></i>
-        </a>
-      <?php } ?>
-      
       <?php if ($data['limit'] && $uid['user_id'] > 0) { ?>
         <a class="ml15" title="<?= Translate::get('add'); ?>" href="<?= getUrlByName($data['type'] . '.add'); ?>">
           <i class="bi bi-plus-lg middle"></i>

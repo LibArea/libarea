@@ -10,7 +10,7 @@ class SearchController
 {
     public function index()
     {
-        $type   = Config::get('general.search') == 0 ? 'mysql' : 'server';
+        $type   = Config::get('general.search') == false ? 'mysql' : 'server';
         $topics = SearchModel::getSearchTags(Request::getPost('q'), $type, 5);
 
         if ($type == 'mysql') {

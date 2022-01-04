@@ -697,30 +697,6 @@ CREATE TABLE `users_setting` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `users_trust_level`
---
-
-CREATE TABLE `users_trust_level` (
-  `trust_id` int(11) NOT NULL,
-  `trust_name` varchar(85) NOT NULL,
-  `trust_count` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Дамп данных таблицы `users_trust_level`
---
-
-INSERT INTO `users_trust_level` (`trust_id`, `trust_name`, `trust_count`) VALUES
-(0, 'Посетитель', 0),
-(1, 'Пользователь', 0),
-(2, 'Участник', 0),
-(3, 'Постоялец', 0),
-(4, 'Лидер', 0),
-(5, 'Персонал', 1);
-
--- --------------------------------------------------------
-
---
 -- Структура таблицы `votes_answer`
 --
 
@@ -1024,12 +1000,6 @@ ALTER TABLE `users_email_activate`
 ALTER TABLE `users_setting`
   ADD PRIMARY KEY (`setting_id`),
   ADD KEY `setting_user_id` (`setting_user_id`);
-
---
--- Индексы таблицы `users_trust_level`
---
-ALTER TABLE `users_trust_level`
-  ADD PRIMARY KEY (`trust_id`);
 
 --
 -- Индексы таблицы `votes_answer`

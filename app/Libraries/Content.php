@@ -42,13 +42,13 @@ class Content
     public static function parseSpoiler($content)
     {
         $regexp = '/\{spoiler(?!.*\{spoiler)(\s?)(?(1)(.*?))\}(.*?)\{\/spoiler\}/is';
-		while (preg_match($regexp, $content)) {
-			$content = preg_replace($regexp, "<details><summary>" . Translate::get('see more') . "</summary>$2$3</details>", $content);
-		}
+        while (preg_match($regexp, $content)) {
+            $content = preg_replace($regexp, "<details><summary>" . Translate::get('see more') . "</summary>$2$3</details>", $content);
+        }
 
         return $content;
     }
-    
+
     // Парсинг user login / uid
     public static function parseUser($content, $with_user = false, $to_uid = false)
     {
@@ -106,9 +106,9 @@ class Content
     }
 
     // Остановим изменение (добавление) контента
-    public static function stopContentQuietМode($uid)
+    public static function stopContentQuietМode($user_limiting_mode)
     {
-        if ($uid['user_limiting_mode'] == 1) {
+        if ($user_limiting_mode == 1) {
             addMsg(Translate::get('limiting-mode-1'), 'error');
             redirect('/');
         }

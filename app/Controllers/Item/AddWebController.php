@@ -4,8 +4,9 @@ namespace App\Controllers\Item;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Middleware\Before\UserData;
 use App\Models\{WebModel, FacetModel};
-use Base, Validation, Translate, Domains;
+use Validation, Translate, Domains;
 
 class AddWebController extends MainController
 {
@@ -13,13 +14,13 @@ class AddWebController extends MainController
 
     public function __construct()
     {
-        $this->uid  = Base::getUid();
+        $this->uid  = UserData::getUid();
     }
 
     // Форма добавление домена
     public function index($sheet, $type)
     {
-        Validation::validTl($this->uid['user_trust_level'], Base::USER_LEVEL_ADMIN, 0, 1);
+        Validation::validTl($this->uid['user_trust_level'], UserData::REGISTERED_ADMIN, 0, 1);
 
         Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
         Request::getResources()->addBottomScript('/assets/js/tag/tagify.min.js');
@@ -39,7 +40,7 @@ class AddWebController extends MainController
 
     public function create()
     {
-        Validation::validTl($this->uid['user_trust_level'], Base::USER_LEVEL_ADMIN, 0, 1);
+        Validation::validTl($this->uid['user_trust_level'], UserData::REGISTERED_ADMIN, 0, 1);
 
         $item_url           = Request::getPost('url');
         $item_title_url     = Request::getPost('title_url');

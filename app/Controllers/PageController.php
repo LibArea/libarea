@@ -4,8 +4,9 @@ namespace App\Controllers;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Middleware\Before\UserData;
 use App\Models\{PageModel, FacetModel};
-use Base, Translate, Content, Config;
+use Translate, Content, Config;
 
 class PageController extends MainController
 {
@@ -13,7 +14,7 @@ class PageController extends MainController
 
     public function __construct()
     {
-        $this->uid  = Base::getUid();
+        $this->uid  = UserData::getUid();
     }
 
     public function index()

@@ -4,8 +4,9 @@ namespace App\Controllers\User;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Middleware\Before\UserData;
 use App\Models\User\{SettingModel, UserModel};
-use Base, UploadImage, Validation, Translate;
+use UploadImage, Validation, Translate;
 
 class SettingController extends MainController
 {
@@ -13,7 +14,7 @@ class SettingController extends MainController
 
     public function __construct()
     {
-        $this->uid  = Base::getUid();
+        $this->uid  = UserData::getUid();
     }
 
     // Форма настройки профиля
@@ -24,9 +25,6 @@ class SettingController extends MainController
         if (Request::get('login') != $user['user_login']) {
             redirect(getUrlByName('setting', ['login' => $user['user_login']]));
         }
-
-        // Если пользователь забанен
-        (new \App\Controllers\Auth\BanController())->getBan($user);
 
         return agRender(
             '/user/setting/setting',
@@ -59,9 +57,6 @@ class SettingController extends MainController
         if ($public_email) {
             Validation::checkEmail($public_email, $redirect);
         }
-
-        $_SESSION['account']['user_template']   = $user_template ?? 'default';
-        $_SESSION['account']['user_lang']       = $user_lang ?? 'ru';
 
         $user   = UserModel::getUser($this->uid['user_id'], 'id');
 
@@ -127,8 +122,7 @@ class SettingController extends MainController
         $img        = $_FILES['images'];
         $check_img  = $_FILES['images']['name'];
         if ($check_img) {
-            $new_img = UploadImage::img($img, $this->uid['user_id'], 'user');
-            $_SESSION['account']['user_avatar'] = $new_img;
+            UploadImage::img($img, $this->uid['user_id'], 'user');
         }
 
         // Баннер
@@ -212,7 +206,7 @@ class SettingController extends MainController
         $user = UserModel::getUser($this->uid['user_login'], 'slug');
 
         // Удалять может только автор и админ
-        if ($user['user_id'] != $this->uid['user_id'] && $this->uid['user_trust_level'] != Base::USER_LEVEL_ADMIN) {
+        if ($user['user_id'] != $this->uid['user_id'] && UserData::checkAdmin()) {
             redirect('/');
         }
 
@@ -227,7 +221,7 @@ class SettingController extends MainController
         addMsg(Translate::get('cover removed'), 'success');
 
         // Если удаляет администрация
-        if ($this->uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) {
+        if (UserData::checkAdmin()) {
             redirect('/admin/users/' . $user['user_id'] . '/edit');
         }
 
@@ -242,10 +236,6 @@ class SettingController extends MainController
             redirect(getUrlByName('setting.notifications', ['login' => $this->uid['user_login']]));
         }
 
-        // Если пользователь забанен
-        $user = UserModel::getUser($this->uid['user_id'], 'id');
-        (new \App\Controllers\Auth\BanController())->getBan($user);
-
         return agRender(
             '/user/setting/notifications',
             [
@@ -254,7 +244,7 @@ class SettingController extends MainController
                 'data'  => [
                     'sheet'     => 'notifications',
                     'type'      => 'user',
-                    'setting'   => SettingModel::getNotifications($user['user_id']),
+                    'setting'   => SettingModel::getNotifications($this->uid['user_id']),
                 ]
             ]
         );

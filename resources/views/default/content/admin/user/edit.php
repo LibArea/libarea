@@ -26,7 +26,7 @@
           <?= $data['user']['user_login']; ?>
         </a>
       </label>
-      <?php if ($data['user']['user_trust_level'] != 5) { ?>
+      <?php if ($data['user']['user_trust_level'] != UserData::REGISTERED_ADMIN) { ?>
         <?php if ($data['user']['user_ban_list']) { ?>
           <span class="type-ban" data-id="<?= $data['user']['user_id']; ?>" data-type="user">
             <span class="red-500"><?= Translate::get('unban'); ?></span>

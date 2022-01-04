@@ -150,21 +150,6 @@ class UserModel extends MainModel
         return  DB::run($sql, ['user_id' => $user_id]);
     }
 
-    // TL - название
-    public static function getUserTrust($user_id)
-    {
-        $sql = "SELECT 
-                    user_id,
-                    user_trust_level, 
-                    trust_id,
-                    trust_name                    
-                        FROM users_trust_level
-                        LEFT JOIN users ON user_trust_level = trust_id
-                        WHERE user_id = :user_id";
-
-        return DB::run($sql, ['user_id' => $user_id])->fetch(PDO::FETCH_ASSOC);
-    }
-
     // Страница закладок участника (комментарии и посты)
     public static function userFavorite($user_id)
     {

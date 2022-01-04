@@ -1,7 +1,6 @@
 <?php
 // https://phphleb.ru/ru/v1/groups/
-
-Route::before('Authorization@noAuth')->getGroup();
+Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
     Route::getType('post');
         Route::get('/flag/repost')->controller('ReportController');
         Route::get('/backend/upload/image')->controller('Post\EditPostController@uploadContentImage');
@@ -57,7 +56,6 @@ Route::before('Authorization@noAuth')->getGroup();
     
     Route::get('/page/edit/{id}')->controller('Post\EditPostController')->where(['id' => '[0-9]+'])->name('page.edit');
     
-    
     Route::get('/answer/edit/{id}')->controller('Answer\EditAnswerController')->where(['id' => '[0-9]+'])->name('answer.edit');
     Route::get('/topic/edit/{id}')->controller('Facets\EditFacetController')->where(['id' => '[0-9]+'])->name('topic.edit');
     Route::get('/topic/edit/{id}/pages')->controller('Facets\EditFacetController@pages')->where(['id' => '[0-9]+'])->name('topic.edit.pages');
@@ -105,7 +103,7 @@ Route::before('Authorization@noAuth')->getGroup();
     Route::get('/moderations')->controller('ActionController@moderation')->name('moderation');
 Route::endGroup();
 
-Route::before('Authorization@yesAuth')->getGroup();
+Route::before('Designator', [UserData::USER_ZERO_LEVEL, '='])->getGroup();
     Route::getType('post');
         Route::getProtect();
             Route::get('/recover/send')->controller('Auth\RecoverController'); 
@@ -204,8 +202,8 @@ Route::type(['get', 'post'])->get('/search')->controller('SearchController')->na
 
 require 'admin.php';
 
- 
 Route::get('/info/restriction')->controller('PageController@restriction')->name('info.restriction');
 Route::get('/{facet}/{slug}')->controller('PageController')->where(['facet' => '[A-Za-z0-9-_]+', 'slug' => '[A-Za-z0-9-_]+'])->name('page');
 Route::get('/info')->controller('PageController@redirectPage');
 Route::get('/info/information')->controller('PageController@restriction')->name('info.information');
+ 

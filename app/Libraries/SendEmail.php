@@ -27,7 +27,7 @@ class SendEmail
 
     public static function send($email, $subject = '', $message = '')
     {
-        if (Config::get('general.smtp') == 1) {
+        if (Config::get('general.smtp')) {
             $mail = new Mail('smtp', [
                 'host'      => 'ssl://' . Config::get('general.smtphost'),
                 'port'      => Config::get('general.smtpport'),

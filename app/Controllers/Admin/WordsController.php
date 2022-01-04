@@ -4,11 +4,19 @@ namespace App\Controllers\Admin;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Middleware\Before\UserData;
 use App\Models\ContentModel;
-use Base, Translate;
+use Translate;
 
 class WordsController extends MainController
 {
+    private $uid;
+
+    public function __construct()
+    {
+        $this->uid  = UserData::getUid();
+    }
+
     public function index($sheet, $type)
     {
         $page   = Request::getInt('page');
@@ -20,7 +28,7 @@ class WordsController extends MainController
             '/admin/word/words',
             [
                 'meta'  => meta($m = [], Translate::get('words')),
-                'uid'   => Base::getUid(),
+                'uid'   => $this->uid,
                 'data'  => [
                     'words' => ContentModel::getStopWords(),
                     'sheet' => $sheet,
@@ -37,7 +45,7 @@ class WordsController extends MainController
             '/admin/word/add',
             [
                 'meta'  => meta($m = [], Translate::get('add a stop word')),
-                'uid'   => Base::getUid(),
+                'uid'   => $this->uid,
                 'data'  => [
                     'type'  => $type,
                     'sheet' => $sheet,

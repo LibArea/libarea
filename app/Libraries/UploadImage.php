@@ -73,8 +73,8 @@ class UploadImage
         $month      = date('n') . '/';
         $file       = $img['tmp_name'];
         $filename   = 'post-' . time();
-        
- 
+
+
         self::createDir($path_img . $year . $month);
 
         $image = new  SimpleImage();
@@ -92,9 +92,9 @@ class UploadImage
                 ->autoOrient()
                 ->toFile($path_img . $year . $month . $filename . '.jpeg', 'image/jpeg');
         }
-        
-         $img_post = AG_PATH_POSTS_CONTENT . $year . $month . $filename . '.jpeg';   
-         $params = [
+
+        $img_post = AG_PATH_POSTS_CONTENT . $year . $month . $filename . '.jpeg';
+        $params = [
             'file_path'         => $img_post,
             'file_type'         => 'post-telo',
             'file_content_id'   => $post['post_id'] ?? 0,
@@ -140,7 +140,7 @@ class UploadImage
                 ->toFile($path_cover_small . $filename . '.jpeg', 'image/jpeg');
 
             $new_cover  = $filename . '.jpeg';
-            
+
             if ($type == 'user') {
                 $user       = UserModel::getUser($content_id, 'id');
                 $cover_art  = $user['user_cover_art'];
@@ -216,15 +216,15 @@ class UploadImage
 
         return $post_img;
     }
-    
+
     // Удаление обложка поста
     public static function cover_post_remove($path_img, $user_id)
     {
-       unlink(HLEB_PUBLIC_DIR . AG_PATH_POSTS_COVER . $path_img);
-       
-       return FileModel::removal($path_img, $user_id);
+        unlink(HLEB_PUBLIC_DIR . AG_PATH_POSTS_COVER . $path_img);
+
+        return FileModel::removal($path_img, $user_id);
     }
-    
+
     // Thumb for post
     public static function thumb_post($image)
     {

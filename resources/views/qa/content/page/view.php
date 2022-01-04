@@ -1,7 +1,7 @@
 <?php $page = $data['page']; ?>
 </div>
 <article class="page<?php if ($page['post_is_deleted'] == 1) { ?> bg-red-200<?php } ?>">
-  <?php if ($page['post_is_deleted'] == 0 || $uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
+  <?php if ($page['post_is_deleted'] == 0 || UserData::checkAdmin()) { ?>
     <h1 class="text-3xl font-normal mt5">
       <?= $page['post_title']; ?>
     </h1>
@@ -10,7 +10,7 @@
     </div>
     <div class="gray-400 text-sm italic mb15">
       <?= $page['post_modified']; ?>
-      <?php if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN || $page['post_user_id'] == $uid['user_id']) { ?>
+      <?php if (UserData::checkAdmin() || $page['post_user_id'] == $uid['user_id']) { ?>
         <a class="text-sm gray-400 ml5" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('page.edit', ['id' => $page['post_id']]); ?>">
           <i class="bi bi-pencil"></i>
         </a>

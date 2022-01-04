@@ -88,7 +88,7 @@
         ],
       ]); ?>
 
-      <?php if ($uid['user_trust_level'] > 0) { ?>
+      <?php if ($uid['user_trust_level'] > 1) { ?>
         <?= import('/_block/form/select/content-tl', [
           'uid' => $uid,
           'data' => null

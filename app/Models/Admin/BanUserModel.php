@@ -40,9 +40,8 @@ class BanUserModel extends MainModel
 
             if ($status == 0) {
                 // Забанить повторно
-                // Проставляем в banlist_int_num 2, что пока означет: возможно > 2
                 $sql = "UPDATE users_banlist
-                            SET banlist_int_num = 2, banlist_status = 1
+                            SET banlist_int_num = (banlist_int_num + 1), banlist_status = 1
                                 WHERE banlist_user_id = :user_id";
 
                 DB::run($sql, ['user_id' => $user_id]);

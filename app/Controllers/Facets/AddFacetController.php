@@ -4,8 +4,9 @@ namespace App\Controllers\Facets;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Middleware\Before\UserData;
 use App\Models\{FacetModel, SubscriptionModel};
-use Base, Validation, Config, Translate;
+use Validation, Config, Translate;
 
 class AddFacetController extends MainController
 {
@@ -13,7 +14,7 @@ class AddFacetController extends MainController
 
     public function __construct()
     {
-        $this->uid  = Base::getUid();
+        $this->uid  = UserData::getUid();
     }
 
     // Add form topic
@@ -49,7 +50,7 @@ class AddFacetController extends MainController
         $redirect = getUrlByName('topic.add');
         if ($type == 'blog') {
             $redirect = getUrlByName('blogs.my', ['login' => $this->uid['user_login']]);
-            if ($this->uid['user_trust_level'] != Base::USER_LEVEL_ADMIN) {
+            if ($this->uid['user_trust_level'] != UserData::REGISTERED_ADMIN) {
                 if (in_array($facet_slug, Config::get('stop-blog'))) {
                     addMsg(Translate::get('stop-blog'), 'error');
                     redirect($redirect);
@@ -99,7 +100,7 @@ class AddFacetController extends MainController
     { 
         $count      = FacetModel::countFacetsUser($this->uid['user_id'], $type);
         
-        $count_add  = $this->uid['user_trust_level'] == Base::USER_LEVEL_ADMIN ? 999 : Config::get('trust-levels.count_add_' . $type);
+        $count_add  = UserData::checkAdmin() ? 999 : Config::get('trust-levels.count_add_' . $type);
         
         $in_total   = $count_add - $count;
         

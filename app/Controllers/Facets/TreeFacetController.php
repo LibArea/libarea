@@ -3,8 +3,9 @@
 namespace App\Controllers\Facets;
 
 use Hleb\Scheme\App\Controllers\MainController;
+use App\Middleware\Before\UserData;
 use App\Models\FacetModel;
-use Base, Translate;
+use Translate;
 
 class TreeFacetController extends MainController
 {
@@ -12,7 +13,7 @@ class TreeFacetController extends MainController
 
     public function __construct()
     {
-        $this->uid = Base::getUid();
+        $this->uid = UserData::getUid();
     }
 
     public function index()

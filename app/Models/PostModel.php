@@ -95,13 +95,13 @@ class PostModel extends MainModel
     }
 
     // Полная версия поста  
-    public static function getPostSlug($slug, $user_id, $trust_level)
+    public static function getPost($params, $name, $uid)
     {
-        // Ограничение по TL
-        if ($user_id == 0) {
-            $trust_level = 0;
+        $sort = "post_id = :params";
+        if ($name == 'slug') {
+            $sort = "post_slug = :params";
         }
-
+        
         $sql = "SELECT 
                     post_id,
                     post_title,
@@ -145,48 +145,11 @@ class PostModel extends MainModel
                         LEFT JOIN users ON user_id = post_user_id
                         LEFT JOIN favorites ON favorite_tid = post_id AND favorite_user_id = :user_id AND favorite_type = 1 
                         LEFT JOIN votes_post ON votes_post_item_id = post_id AND votes_post_user_id = :user_id
-                            WHERE post_slug = :slug AND post_tl <= :trust_level";
-        return DB::run($sql, ['slug' => $slug, 'user_id' => $user_id, 'trust_level' => $trust_level])->fetch(PDO::FETCH_ASSOC);
-    }
-
-    // Получаем пост по id
-    public static function getPostId($post_id)
-    {
-        $sql = "SELECT 
-                    post_id,
-                    post_title,
-                    post_slug,
-                    post_feature,
-                    post_type,
-                    post_translation,
-                    post_draft,
-                    post_date,
-                    post_published,
-                    post_user_id,
-                    post_votes,
-                    post_answers_count,
-                    post_comments_count,
-                    post_content,
-                    post_content_img,
-                    post_thumb_img,
-                    post_closed,
-                    post_tl,
-                    post_lo,
-                    post_top,
-                    post_url,
-                    post_related,
-                    post_merged_id,
-                    post_is_recommend,
-                    post_url_domain,
-                    post_is_deleted,
-                    user_id,
-                    user_login,
-                    user_avatar
-                        FROM posts
-                        LEFT JOIN users ON user_id = post_user_id
-                            WHERE post_id = :post_id";
-
-        return DB::run($sql, ['post_id' => $post_id])->fetch(PDO::FETCH_ASSOC);
+                            WHERE $sort AND post_tl <= :trust_level";
+                            
+        $data = ['params' => $params, 'user_id' => $uid['user_id'], 'trust_level' => $uid['user_trust_level']];
+        
+        return DB::run($sql, $data)->fetch(PDO::FETCH_ASSOC);
     }
 
     // Рекомендованные посты

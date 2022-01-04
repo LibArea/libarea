@@ -26,7 +26,7 @@
                     <span class="sky-500 mr5 ml0"><i class="bi bi-mic text-sm"></i></span>
                   <?php } ?>
                   <span class="mr5 ml5 gray-400 lowercase">
-                    <?= $answer['answer_date']; ?>
+                    <?= lang_date($answer['answer_date']); ?>
                   </span>
                   <?php if (empty($answer['edit'])) { ?>
                     <span class="mr5 ml10 gray-400">
@@ -44,19 +44,20 @@
                 <?= votes($uid['user_id'], $answer, 'answer', 'ps', 'mr5'); ?>
 
                 <?php if ($post['post_closed'] == 0) { ?>
-                  <?php if ($post['post_is_deleted'] == 0 || $uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
+                  <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) { ?>
                     <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray-500 mr5 ml10"><?= Translate::get('reply'); ?></a>
                   <?php } ?>
                 <?php } ?>
 
-                <?php if ($uid['user_id'] == $answer['answer_user_id'] || $uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
-                  <?php if ($answer['answer_after'] == 0 || $uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
-                    <a class="editansw gray-500 mr10 ml10" href="/answer/edit/<?= $answer['answer_id']; ?>"> <?= Translate::get('edit'); ?>
+                <?php if (accessСheck($answer, 'answer', $uid, 1, 30) === true) { ?>
+                  <?php if ($answer['answer_after'] == 0 || UserData::checkAdmin()) { ?>
+                    <a class="editansw gray-500 mr10 ml10" href="/answer/edit/<?= $answer['answer_id']; ?>"> 
+                      <?= Translate::get('edit'); ?>
                     </a>
                   <?php } ?>
                 <?php } ?>
 
-                <?php if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
+                <?php if ($uid['user_trust_level'] == UserData::REGISTERED_ADMIN) { ?>
                   <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray-500 ml10 mr5">
                     <i title="<?= Translate::get('remove'); ?>" class="bi bi-trash"></i>
                   </a>
@@ -76,7 +77,7 @@
 
         <?php } else { ?>
 
-          <?php if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
+          <?php if ($uid['user_trust_level'] == UserData::REGISTERED_ADMIN) { ?>
             <ol class="bg-red-200 text-sm pr5 list-none">
               <li class="comments_subtree" id="comment_<?= $answer['answer_id']; ?>">
                 <span class="comm-deletes nick">
@@ -149,7 +150,7 @@
                   <?= votes($uid['user_id'], $comment, 'comment', 'ps', 'mr5'); ?>
 
                   <?php if ($post['post_closed'] == 0) { ?>
-                    <?php if ($post['post_is_deleted'] == 0 || $uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
+                    <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) { ?>
                       <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment-re gray mr5 ml10">
                         <?= Translate::get('reply'); ?>
                       </a>
@@ -164,6 +165,7 @@
                       <?= Translate::get('remove'); ?>
                     </a>
                   <?php } ?>
+
                   <?php if ($uid['user_id'] != $comment['comment_user_id'] && $uid['user_trust_level'] > 0) { ?>
                     <a data-post_id="<?= $post['post_id']; ?>" data-type="comment" data-content_id="<?= $comment['comment_id']; ?>" class="msg-flag gray ml15">
                       <i title="<?= Translate::get('report'); ?>" class="bi bi-flag"></i>

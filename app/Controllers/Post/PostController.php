@@ -4,9 +4,10 @@ namespace App\Controllers\Post;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Middleware\Before\UserData;
 use App\Models\User\UserModel;
 use App\Models\{PostModel, FeedModel, AnswerModel, CommentModel, SubscriptionModel};
-use Content, Base, Translate, Config;
+use Content, Translate, Config;
 
 
 class PostController extends MainController
@@ -17,7 +18,7 @@ class PostController extends MainController
 
     public function __construct()
     {
-        $this->uid  = Base::getUid();
+        $this->uid  = UserData::getUid();
     }
 
     // Полный пост
@@ -26,24 +27,16 @@ class PostController extends MainController
         $slug       = Request::get('slug');
         $post_id    = Request::getInt('id');
 
-        // Проверим (user_id, user_slug)
-        $post_new   = PostModel::getPostId($post_id);
-        pageError404($post_new);
-        if ($slug != $post_new['post_slug']) {
-            redirect(getUrlByName('post', ['id' => $post_new['post_id'], 'slug' => $post_new['post_slug']]));
-        }
-
-        $post = PostModel::getPostSlug($slug, $this->uid['user_id'], $this->uid['user_trust_level']);
+        // Проверим (id, slug поста)
+        $post = PostModel::getPost($post_id, 'id', $this->uid);
         pageError404($post);
-
-        // Если пользователь забанен
-        if ($this->uid['user_id'] > 0) {
-            $user   = UserModel::getUser($this->uid['user_id'], 'id');
-            (new \App\Controllers\Auth\BanController())->getBan($user);
+        
+        if ($slug != $post['post_slug']) {
+            redirect(getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]));
         }
 
         // Редирект для слияния
-        if ($post['post_merged_id'] > 0 && $this->uid['user_trust_level'] != 5) {
+        if ($post['post_merged_id'] > 0 && !UserData::checkAdmin()) {
             redirect('/post/' . $post['post_merged_id']);
         }
 
@@ -99,7 +92,6 @@ class PostController extends MainController
             // TODO: N+1 см. AnswerModel()
             $row['comm']            = CommentModel::getComments($row['answer_id'], $this->uid['user_id']);
             $row['answer_content']  = Content::text($row['answer_content'], 'text');
-            $row['answer_date']     = lang_date($row['answer_date']);
             $answers[$ind]          = $row;
         }
 
@@ -218,7 +210,7 @@ class PostController extends MainController
     public function addPostProfile()
     {
         $post_id    = Request::getPostInt('post_id');
-        $post       = PostModel::getPostId($post_id);
+        $post       = PostModel::getPost($post_id, 'id', $this->uid);
 
         // Проверка доступа
         if (!accessСheck($post, 'post', $this->uid, 0, 0)) {
@@ -239,7 +231,7 @@ class PostController extends MainController
     public function deletePostProfile()
     {
         $post_id    = Request::getPostInt('post_id');
-        $post       = PostModel::getPostId($post_id);
+        $post       = PostModel::getPost($post_id, 'id', $this->uid);
 
         // Проверка доступа
         if (!accessСheck($post, 'post', $this->uid, 0, 0)) {
@@ -255,7 +247,7 @@ class PostController extends MainController
     public function shownPost()
     {
         $post_id = Request::getPostInt('post_id');
-        $post    = PostModel::getPostId($post_id);
+        $post    = PostModel::getPost($post_id, 'id', $this->uid);
 
         $post['post_content'] = Content::text($post['post_content'], 'text');
 

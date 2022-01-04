@@ -4,17 +4,25 @@ namespace App\Controllers;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Middleware\Before\UserData;
 use App\Models\SearchModel;
-use Base, Translate, Validation, Config, Content;
+use Translate, Validation, Config, Content;
 
 class SearchController extends MainController
 {
+    private $uid;
+
+    public function __construct()
+    {
+        $this->uid  = UserData::getUid();
+    }
+    
     public function index()
     {
         $query  = $result = $tags   = '';
         $qa     = Request::getPost('q');
         $query  = preg_replace('/[^a-zA-Zа-яА-Я0-9]/ui', '', $qa);
-        $type   = Config::get('general.search') == 0 ? 'mysql' : 'server';
+        $type   = Config::get('general.search') == false ? 'mysql' : 'server';
 
         if (Request::getPost()) {
             if ($query == '') {
@@ -42,7 +50,7 @@ class SearchController extends MainController
             '/search/index',
             [
                 'meta'  => meta($m = [], Translate::get('search')),
-                'uid'   => Base::getUid(),
+                'uid'   => $this->uid,
                 'data'  => [
                     'result'    => $result,
                     'query'     => $query,

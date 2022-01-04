@@ -4,9 +4,10 @@ namespace App\Controllers\Comment;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Middleware\Before\UserData;
 use App\Models\User\UserModel;
 use App\Models\CommentModel;
-use Content, Base, Translate;
+use Content, Translate;
 
 class CommentController extends MainController
 {
@@ -16,7 +17,7 @@ class CommentController extends MainController
 
     public function __construct()
     {
-        $this->uid  = Base::getUid();
+        $this->uid  = UserData::getUid();
     }
 
     // Все комментарии

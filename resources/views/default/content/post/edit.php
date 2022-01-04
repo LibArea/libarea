@@ -102,7 +102,7 @@
         ]); ?>
       <?php } ?>
 
-      <?php if ($uid['user_trust_level'] > Base::USER_ZERO_LEVEL) { ?>
+      <?php if ($uid['user_trust_level'] > 2) { ?>
         <?= import('/_block/form/select/content-tl', [
           'uid' => $uid,
           'data' => $post['post_tl']
@@ -136,7 +136,7 @@
         ]
       ]); ?>
 
-      <?php if ($uid['user_trust_level'] > Base::USER_SECOND_LEVEL) { ?>
+      <?php if ($uid['user_trust_level'] > 2) { ?>
         <?= import('/_block/form/radio', [
           'uid'  => $uid,
           'data' => [

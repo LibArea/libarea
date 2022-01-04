@@ -4,13 +4,21 @@ namespace App\Controllers\Admin;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Middleware\Before\UserData;
 use App\Models\User\UserModel;
 use App\Models\ReportModel;
-use Base, Translate;
+use Translate;
 
 class ReportsController extends MainController
 {
     protected $limit = 25;
+
+    private $uid;
+
+    public function __construct()
+    {
+        $this->uid  = UserData::getUid();
+    }
 
     public function index($sheet, $type)
     {
@@ -33,7 +41,7 @@ class ReportsController extends MainController
             '/admin/report/reports',
             [
                 'meta'  => meta($m = [], Translate::get('reports')),
-                'uid'   => Base::getUid(),
+                'uid'   => $this->uid,
                 'data'  => [
                     'pagesCount'    => ceil($pagesCount / $this->limit),
                     'pNum'          => $page,

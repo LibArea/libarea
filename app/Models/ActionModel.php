@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use Hleb\Scheme\App\Models\MainModel;
+use App\Middleware\Before\UserData;
 use DB;
 use PDO;
-use Base;
 
 class ActionModel extends MainModel
 {
@@ -111,9 +111,7 @@ class ActionModel extends MainModel
     // Поиск контента для форм
     public static function getSearch($search, $type)
     {
-        $uid    = Base::getUid();
-        $id     = $uid['user_id'];
-
+        $uid = UserData::getUid();
         $field_id   = $type . '_id';
         if ($type == 'post') {
             $field_tl = 'post_tl';
@@ -127,14 +125,14 @@ class ActionModel extends MainModel
             $field_id = 'facet_id';
             $field_tl = 'facet_tl';
             $field_name = 'facet_title';
-            $condition = 'AND facet_user_id = ' . $id;
+            $condition = 'AND facet_user_id = ' . $uid['user_id'];
             $sql = "SELECT facet_id, facet_title, facet_tl, facet_type FROM facets 
                     WHERE facet_title LIKE :facet_title AND facet_type = 'section' $condition ORDER BY facet_count DESC LIMIT 100";
         } else {
             $condition = '';
-            if ($uid['user_trust_level'] != 5) {
+            if ($uid['user_trust_level'] != UserData::REGISTERED_ADMIN) {
                 if ($type == 'blog') {
-                    $condition = 'AND facet_user_id = ' . $id;
+                    $condition = 'AND facet_user_id = ' . $uid['user_id'];
                 }
             }
 

@@ -4,8 +4,8 @@ namespace App\Controllers;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Middleware\Before\UserData;
 use App\Models\VotesModel;
-use Base;
 
 class VotesController extends MainController
 {
@@ -13,7 +13,7 @@ class VotesController extends MainController
 
     public function __construct()
     {
-        $this->uid = Base::getUid();
+        $this->uid = UserData::getUid();
     }
 
     public function index()

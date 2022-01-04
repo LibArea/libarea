@@ -4,8 +4,9 @@ namespace App\Controllers\Admin;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Middleware\Before\UserData;
 use App\Models\User\{UserModel, BadgeModel};
-use Base, Validation, Translate;
+use Validation, Translate;
 
 class BadgesController extends MainController
 {
@@ -13,7 +14,7 @@ class BadgesController extends MainController
 
     public function __construct()
     {
-        $this->uid  = Base::getUid();
+        $this->uid  = UserData::getUid();
     }
 
     // Все награды

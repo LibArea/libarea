@@ -1,6 +1,6 @@
 <main class="col-span-12 mb-col-12">
   <div class="pt5 mr15 pb5 ml15">
-    <?php if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
+    <?php if (UserData::checkAdmin()) { ?>
       <a title="<?= Translate::get('add'); ?>" class="right mt5" href="<?= getUrlByName('sites.add'); ?>">
         <i class="bi bi-plus-lg middle"></i>
       </a>
@@ -40,7 +40,7 @@
                   <?= $item['item_title_url']; ?>
                 </h2>
               </a>
-              <?php if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
+              <?php if (UserData::checkAdmin()) { ?>
                 <a class="ml15" title="<?= Translate::get('edit'); ?>" href="<?= getUrlByName('web.edit', ['id' => $item['item_id']]); ?>">
                   <i class="bi bi-pencil"></i>
                 </a>
@@ -72,7 +72,7 @@
             </div>
           </div>
         <?php } else { ?>
-          <?php if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
+          <?php if (UserData::checkAdmin()) { ?>
             <div class="mt15 mb15">
               <i class="bi bi-link-45deg red mr5 text-2xl"></i>
               <?= $item['item_title_url']; ?> (<?= $item['item_url_domain']; ?>)

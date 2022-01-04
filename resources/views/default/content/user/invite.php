@@ -14,7 +14,7 @@
         </span>
       </div>
     </form>
-    <?php if (Config::get('general.invite') == 1) { ?>
+    <?php if (Config::get('general.invite') == true) { ?>
       <?= Translate::get('no-invate-txt'); ?>
     <?php } ?>
   </div>

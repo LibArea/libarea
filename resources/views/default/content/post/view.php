@@ -9,7 +9,7 @@
 </div>
 <main class="col-span-8 mb-col-12">
   <article class="post-full br-box-gray br-rd5 bg-white<?php if ($post['post_is_deleted'] == 1) { ?> bg-red-200<?php } ?> mb15 pt0 pr15 pb5 pl15">
-    <?php if ($post['post_is_deleted'] == 0 || $uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
+    <?php if ($post['post_is_deleted'] == 0 || $uid['user_trust_level'] == UserData::REGISTERED_ADMIN) { ?>
       <div class="post-body">
         <h1 class="mb0 mt10 font-normal text-2xl">
           <?= import('/_block/post-title', ['post' => $post, 'uid' => $uid]); ?>
@@ -21,7 +21,7 @@
           <?php } ?>
 
           <?php if ($uid['user_id']) { ?>
-            <?php if ($uid['user_login'] == $post['user_login']  || $uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
+            <?php if ($uid['user_login'] == $post['user_login']  || UserData::checkAdmin()) { ?>
               <a class="gray-400 mr10 ml10" href="<?= getUrlByName('post.edit', ['id' => $post['post_id']]); ?>">
                 <?= Translate::get('edit'); ?>
               </a>
@@ -37,7 +37,7 @@
                 <?php } ?>
               <?php } ?>
             <?php } ?>
-            <?php if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
+            <?php if (UserData::checkAdmin()) { ?>
               <a data-type="post" data-id="<?= $post['post_id']; ?>" class="type-action gray-400 mr10 ml10">
                 <?php if ($post['post_is_deleted'] == 1) { ?>
                   <i class="bi bi-trash red-500"></i>

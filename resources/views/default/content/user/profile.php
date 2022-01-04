@@ -120,11 +120,12 @@
           <blockquote class="mb20">
             <?= $user['user_about']; ?>...
           </blockquote>
-          <div class="mb20">
+          <div class="mb20 gray-400">
             <i class="bi bi-calendar-week middle"></i>
-            <span class="middle">
-              <span class="ts"><?= $user['user_created_at']; ?></span> —
-              <?= $data['user_trust_level']['trust_name']; ?> <sup class="date">TL<?= $user['user_trust_level']; ?></sup>
+            <span class="middle lowercase text-sm">
+              <?= $user['user_created_at']; ?> —
+              <?= Translate::get('tl' . $user['user_trust_level'] . '.title'); ?> 
+              <sup class="date">TL<?= $user['user_trust_level']; ?></sup>
             </span>
           </div>
           <h2 class="mb5 uppercase pt15 font-normal text-sm">
@@ -208,11 +209,11 @@
             <?php } ?>
           <?php } ?>
 
-          <?php if ($uid['user_trust_level'] > 4) { ?>
+          <?php if (UserData::checkAdmin()) { ?>
             <div class="pt5 pr15 pb5">
               <h3 class="mt0 mb10 uppercase pt10 text-sm"><?= Translate::get('admin'); ?></h3>
               <div class="mb5">
-                <?php if ($uid['user_trust_level'] != 5) { ?>
+                <?php if ($user['user_trust_level'] != UserData::REGISTERED_ADMIN) { ?>
                   <?php if ($data['isBan']) { ?>
                     <span class="type-ban gray mb5 block" data-id="<?= $user['user_id']; ?>" data-type="user">
                       <i class="bi bi-person-x-fill red-500 middle mr5"></i>
@@ -225,6 +226,7 @@
                     </span>
                   <?php } ?>
                 <?php } ?>
+                
                 <a class="gray mb5 block" href="<?= getUrlByName('admin.user.edit', ['id' => $user['user_id']]); ?>">
                   <i class="bi bi-gear middle mr5"></i>
                   <span class="middle"><?= Translate::get('edit'); ?></span>

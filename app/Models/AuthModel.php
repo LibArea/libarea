@@ -91,13 +91,6 @@ class AuthModel extends MainModel
         return DB::run($sql, $params);
     }
 
-    public static function deleteTokenByUserId($user_id)
-    {
-        $sql = "DELETE FROM users_auth_tokens WHERE auth_user_id = :user_id";
-
-        return DB::run($sql, ['user_id' => $user_id]);
-    }
-
     // Получаем токен аутентификации по селектору
     public static function getAuthTokenBySelector($selector)
     {
@@ -126,5 +119,12 @@ class AuthModel extends MainModel
                         WHERE auth_selector = :auth_selector";
 
         return DB::run($sql, $params);
+    }
+    
+    public static function deleteTokenByUserId($user_id)
+    {
+        $sql = "DELETE FROM users_auth_tokens WHERE auth_user_id = :user_id";
+
+        return DB::run($sql, ['user_id' => $user_id]);
     }
 }

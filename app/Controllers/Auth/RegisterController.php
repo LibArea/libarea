@@ -4,17 +4,25 @@ namespace App\Controllers\Auth;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Middleware\Before\UserData;
 use App\Models\User\{InvitationModel, UserModel};
 use App\Models\AuthModel;
-use Config, Base, Integration, Validation, SendEmail, Translate;
+use Config, Integration, Validation, SendEmail, Translate;
 
 class RegisterController extends MainController
 {
+    private $uid;
+
+    public function __construct()
+    {
+        $this->uid = UserData::getUid();
+    }
+
     // Показ формы регистрации
     public function showRegisterForm()
     {
         // Если включена инвайт система
-        if (Config::get('general.invite') == 1) {
+        if (Config::get('general.invite') == true) {
             redirect('/invite');
         }
 
@@ -29,7 +37,7 @@ class RegisterController extends MainController
             '/auth/register',
             [
                 'meta'  => meta($m, Translate::get('sign up'), Translate::get('info-security')),
-                'uid'   => Base::getUid(),
+                'uid'   => $this->uid,
                 'data'  => [
                     'sheet' => 'sign up',
                     'type'  => 'register'
@@ -106,14 +114,9 @@ class RegisterController extends MainController
 
         $count =  UserModel::getUsersAllCount();
         // Для "режима запуска" первые 50 участников получают trust_level = 1 
-        $tl = 0;
-        if ($count < 50 && Config::get('general.mode') == 1) {
-            $tl = 1;
-        }
-
-        $activated = 0; // Требуется активация по e-mail
-        if ($inv_uid > 0) {
-            $activated = 1;
+        $tl = UserData::USER_ZERO_LEVEL;
+        if ($count < 50 && Config::get('general.mode') == true) {
+            $tl = UserData::USER_FIRST_LEVEL;
         }
 
         $params = [
@@ -124,7 +127,7 @@ class RegisterController extends MainController
             'user_whisper'              => '',
             'user_password'             => password_hash($password, PASSWORD_BCRYPT),
             'user_limiting_mode'        => 0, // Режим заморозки выключен
-            'user_activated'            => $activated,
+            'user_activated'            => $inv_uid > 0 ? 1 : 0, // если инвайта нет, то активация
             'user_reg_ip'               => $reg_ip,
             'user_trust_level'          => $tl,
             'user_invitation_id'        => $inv_uid,
@@ -169,7 +172,7 @@ class RegisterController extends MainController
             '/auth/register-invate',
             [
                 'meta'  => meta($m = [], Translate::get('registration by invite')),
-                'uid'   => Base::getUid(),
+                'uid'   => $this->uid,
                 'data'  => [
                     'invate' => $invate,
                     'type'  => 'invite'

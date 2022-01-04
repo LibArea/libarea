@@ -1,7 +1,7 @@
 <?php
 
 Route::prefix('/admin');
-Route::before('Authorization@admin')->getGroup();
+Route::before('Designator', [UserData::REGISTERED_ADMIN, '='])->getGroup();
 
     Route::get('/')->controller('Admin\HomeController')->name('admin');
     Route::get('/css')->controller('Admin\HomeController@css')->name('admin.сss');

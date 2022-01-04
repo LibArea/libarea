@@ -4,9 +4,10 @@ namespace App\Controllers\Facets;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Middleware\Before\UserData;
 use App\Models\User\UserModel;
 use App\Models\{FacetModel, PostModel};
-use Base, Validation, UploadImage, Translate;
+use Validation, UploadImage, Translate;
 
 class EditFacetController extends MainController
 {
@@ -14,7 +15,7 @@ class EditFacetController extends MainController
 
     public function __construct()
     {
-        $this->uid  = Base::getUid();
+        $this->uid  = UserData::getUid();
     }
 
     // Форма редактирования Topic or Blog
@@ -25,7 +26,7 @@ class EditFacetController extends MainController
         pageError404($facet);
 
         // Доступ получает только автор и админ
-        if ($facet['facet_user_id'] != $this->uid['user_id'] && $this->uid['user_trust_level'] != 5) {
+        if ($facet['facet_user_id'] != $this->uid['user_id'] && !UserData::checkAdmin()) {
             redirect('/');
         }
 
@@ -73,13 +74,13 @@ class EditFacetController extends MainController
         pageError404($facet);
 
         // Доступ получает только автор и админ
-        if ($facet['facet_user_id'] != $this->uid['user_id'] && $this->uid['user_trust_level'] != Base::USER_LEVEL_ADMIN) {
+        if ($facet['facet_user_id'] != $this->uid['user_id'] && !UserData::checkAdmin()) {
             redirect('/');
         }
 
         // Изменять тип темы может только персонал
         $facet_new_type = $facet['facet_type'];
-        if ($this->uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) {
+        if (UserData::checkAdmin()) {
             $facet_new_type = $facet_type;
         }
 
@@ -120,7 +121,7 @@ class EditFacetController extends MainController
         $facet_user_new = json_decode($user_new, true);
         $facet_user_id = $facet['facet_user_id'];
         if ($facet['facet_user_id'] != $facet_user_new[0]['id']) {
-            if ($this->uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) {
+            if (UserData::checkAdmin()) {
                 $facet_user_id = $facet_user_new[0]['id'];
             }
         }
@@ -202,7 +203,7 @@ class EditFacetController extends MainController
         pageError404($facet);
 
         // Доступ получает только автор и админ
-        if ($facet['facet_user_id'] != $this->uid['user_id'] && $this->uid['user_trust_level'] != 5) {
+        if ($facet['facet_user_id'] != $this->uid['user_id'] && !UserData::checkAdmin()) {
             redirect('/');
         }
 

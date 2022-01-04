@@ -4,9 +4,10 @@ namespace App\Controllers\Post;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Middleware\Before\UserData;
 use App\Models\User\UserModel;
 use App\Models\{FacetModel, PostModel};
-use Content, Base, UploadImage, Validation, Translate;
+use Content, UploadImage, Validation, Translate;
 
 class EditPostController extends MainController
 {
@@ -14,14 +15,14 @@ class EditPostController extends MainController
 
     public function __construct()
     {
-        $this->uid  = Base::getUid();
+        $this->uid  = UserData::getUid();
     }
 
     // Форма редактирования post
     public function index()
     {
         $post_id    = Request::getInt('id');
-        $post       = PostModel::getPostId($post_id);
+        $post       = PostModel::getPost($post_id, 'id', $this->uid);
         if (!accessСheck($post, 'post', $this->uid, 0, 0)) {
             redirect('/');
         }
@@ -93,15 +94,13 @@ class EditPostController extends MainController
         $topics         = json_decode($facet_post[0], true);
 
         // Проверка доступа 
-        $post   = PostModel::getPostId($post_id);
+        $post   = PostModel::getPost($post_id, 'id', $this->uid);
         if (!accessСheck($post, 'post', $this->uid, 0, 0)) {
             redirect('/');
         }
 
-        // Если пользователь забанен / заморожен
-        $user = UserModel::getUser($this->uid['user_id'], 'id');
-        (new \App\Controllers\Auth\BanController())->getBan($user);
-        Content::stopContentQuietМode($user);
+        // Если пользователь заморожен
+        Content::stopContentQuietМode($this->uid['user_limiting_mode']);
 
         $redirect   = getUrlByName('post.edit', ['id' => $post_id]);
         if (!$topics) {
@@ -114,7 +113,7 @@ class EditPostController extends MainController
         $post_user_new = json_decode($user_new, true);
         $post_user_id = $post['post_user_id'];
         if ($post['post_user_id'] != $post_user_new[0]['id']) {
-            if ($this->uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) {
+            if (UserData::checkAdmin()) {
                 $post_user_id = $post_user_new[0]['id'];
             }
         }
@@ -162,9 +161,6 @@ class EditPostController extends MainController
             'post_top'              => $post_top,
         ];
 
-        // Think through the method 
-        // $url = Base::estimationUrl($post_content);
-
         // Перезапишем пост
         PostModel::editPost($data);
 
@@ -211,15 +207,13 @@ class EditPostController extends MainController
         }
 
         // Проверка доступа 
-        $post   = PostModel::getPostId($post_id);
+        $post   = PostModel::getPost($post_id, 'id', $this->uid);
         if (!accessСheck($post, 'post', $this->uid, 0, 0)) {
             redirect('/');
         }
 
-        // Если пользователь забанен / заморожен
-        $user = UserModel::getUser($this->uid['user_id'], 'id');
-        (new \App\Controllers\Auth\BanController())->getBan($user);
-        Content::stopContentQuietМode($user);
+        // Если пользователь заморожен
+        Content::stopContentQuietМode($this->uid['user_limiting_mode']);
 
         $redirect   = getUrlByName('post.edit', ['id' => $post_id]);
         if (!$topics) {
@@ -232,7 +226,7 @@ class EditPostController extends MainController
         $post_user_new = json_decode($user_new, true);
         $post_user_id = $post['post_user_id'];
         if ($post['post_user_id'] != $post_user_new[0]['id']) {
-            if ($this->uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) {
+            if (UserData::checkAdmin()) {
                 $post_user_id = $post_user_new[0]['id'];
             }
         }
@@ -286,7 +280,7 @@ class EditPostController extends MainController
     function imgPostRemove()
     {
         $post_id    = Request::getInt('id');
-        $post = PostModel::getPostId($post_id);
+        $post = PostModel::getPost($post_id, 'id', $this->uid);
         if (!accessСheck($post, 'post', $this->uid, 0, 0)) {
             redirect('/');
         }

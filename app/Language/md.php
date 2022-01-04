@@ -529,6 +529,13 @@ $data = [
     'main.feed.info'            => 'Postări în ordine cronologică...',
     'main.all.info'             => 'Toate postările din fluxul comunității...',
     'main.top.info'             => 'Postări active recente...',
+    
+    'tl0.title'                 => 'Invitat',
+    'tl1.title'                 => 'Utilizator',
+    'tl2.title'                 => 'Membru',
+    'tl3.title'                 => 'Rezident',
+    'tl4.title'                 => 'Lider',
+    'tl5.title'                 => 'Personal',
 ];
 
 return $data;

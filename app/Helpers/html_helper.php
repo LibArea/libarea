@@ -77,7 +77,7 @@ function website_img($domain, $type, $alt, $css = '')
     if ($type == 'thumbs') {
         $path  = AG_PATH_THUMBS;
         $width = 'w200';
-    }    
+    }
 
     if (file_exists(HLEB_PUBLIC_DIR . $path . $domain . '.png')) {
         $img = '<img class="' . $css . '" src="' . $path . $domain . '.png" alt="' . $alt . '">';
@@ -85,7 +85,7 @@ function website_img($domain, $type, $alt, $css = '')
     }
 
     $img = '<img class="mr5 ' . $width . '" src="' . $path . 'no-link.png" alt="' . $alt . '">';
-    
+
     return $img;
 }
 
@@ -247,42 +247,39 @@ function tabs_nav($name, $item, $uid, array $pages = [])
 {
     if ($name == 'nav') {
         $html = '';
-        foreach ($pages as $key => $page) {  
-        if (empty($page['auth']) || $uid['user_id'] > 0) {
+        foreach ($pages as $key => $page) {
+            if (empty($page['auth']) || $uid['user_id'] > 0) {
                 $classes    = 'mr20 gray-500 sky-500-hover';
                 $isActive   = $page['id'] == $item ? $classes . ' sky-500 ' : $classes;
                 $isAria     = $page['id'] == $item ? ' aria-current="page"' : '';
-                
+
                 $html .= '<li><a ' . $isAria . ' class="' . $isActive . '" href="' . $page['url'] . '">
                             <i class="' . $page['icon'] . '"></i>
                                 <span>' . $page['title'] . '</span></a></li>';
             }
         }
-        
-    } else { 
+    } else {
         $html  = '<ul class="p0 mt10 list-none text-sm">';
         foreach ($pages as $key => $page) {
-            
-            if (!empty($page['hr'])) { 
-                if ($uid['user_id'] > 0) $html .= '<li><hr></li>'; 
+
+            if (!empty($page['hr'])) {
+                if ($uid['user_id'] > 0) $html .= '<li><hr></li>';
             } else {
-            
+
                 if (empty($page['auth'])  || $uid['user_trust_level'] > $page['tl']) {
                     $classes    = 'sky-500-hover dark-gray-200';
                     $isActive   = $page['id'] == $item ? $classes . ' sky-500 ' : $classes;
                     $isAria     = $page['id'] == $item ? ' aria-current="page"' : '';
-                    
+
                     $html .= '<li><a ' . $isAria . ' class="' . $isActive . '" href="' . $page['url'] . '">
                                 <i class="' . $page['icon'] . ' mr10 text-2xl"></i>
                                     <span>' . $page['title'] . '</span></a></li>';
-                                        
                 }
-            }    
+            }
         }
-        
+
         $html .= '</ul>';
-        
-    }    
+    }
 
     return $html;
 }
@@ -299,13 +296,13 @@ function accessСheck($content, $type, $uid, $after, $stop_time)
     }
 
     // Доступ получает только автор и админ
-    if ($content[$type . '_user_id'] != $uid['user_id'] && $uid['user_trust_level'] != 5) {
+    if ($content[$type . '_user_id'] != $uid['user_id'] && !UserData::checkAdmin()) {
         return false;
     }
 
     // Запретим удаление если есть ответ
     // И если прошло 30 минут
-    if ($uid['user_trust_level'] != 5) {
+    if (!UserData::checkAdmin()) {
 
         if ($after > 0) {
             if ($content[$type . '_after'] > 0) {

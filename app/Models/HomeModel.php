@@ -5,7 +5,6 @@ namespace App\Models;
 use Hleb\Scheme\App\Models\MainModel;
 use DB;
 use PDO;
-use Base;
 
 class HomeModel extends MainModel
 {
@@ -13,7 +12,6 @@ class HomeModel extends MainModel
     // Посты на центральной странице
     public static function feed($page, $limit, $topics_user, $uid, $type)
     {
-
         $result = [];
         foreach ($topics_user as $ind => $row) {
             $result[$ind] = $row['signed_facet_id'];
@@ -21,7 +19,7 @@ class HomeModel extends MainModel
 
         $string = "";
         if ($type != 'main.all' && $type != 'main.top') {
-            if ($uid['user_id'] == 0) {
+            if (!$uid['user_id']) {
                 $string = "";
             } else {
                 $string = "AND relation_facet_id IN(0)";
@@ -30,7 +28,7 @@ class HomeModel extends MainModel
         }
 
         $display = "AND post_is_deleted = 0 AND post_tl <= " . $uid['user_trust_level'];
-        if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) $display = "";
+        if ($uid['user_trust_level'] == 5) $display = "";
 
         $sort = "ORDER BY post_votes and post_date > CURDATE()-INTERVAL 3 WEEK DESC";
         if ($type == 'main.feed' || $type == 'main.all') $sort = "ORDER BY post_top DESC, post_date DESC";
@@ -99,7 +97,7 @@ class HomeModel extends MainModel
 
         $string = "";
         if ($type != 'all' && $type != 'top') {
-            if ($uid['user_id'] == 0) {
+            if (!$uid['user_id']) {
                 $string = "";
             } else {
                 $string = "AND f_id IN(0)";
@@ -107,8 +105,8 @@ class HomeModel extends MainModel
             }
         }
 
-        $display = "AND post_is_deleted = 0 AND post_tl <= " . $uid['user_trust_level'];
-        if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) $display = "";
+        $display = "AND post_is_deleted = 0 AND post_tl <= " . $uid['user_trust_level'] ?? 0;
+        if ($uid['user_trust_level'] == 5) $display = "";
 
         $sql = "SELECT 
                     post_id,

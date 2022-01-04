@@ -4,8 +4,9 @@ namespace App\Controllers\User;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Middleware\Before\UserData;
 use App\Models\User\{InvitationModel, UserModel};
-use Base, Validation, Translate;
+use Validation, Translate;
 
 class InvitationsController extends MainController
 {
@@ -13,7 +14,7 @@ class InvitationsController extends MainController
 
     public function __construct()
     {
-        $this->uid  = Base::getUid();
+        $this->uid  = UserData::getUid();
     }
 
     // Показ формы создания инвайта
@@ -36,12 +37,8 @@ class InvitationsController extends MainController
     function invitationForm()
     {
         if (Request::get('login') != $this->uid['user_login']) {
-            redirect(getUrlByName('invitations', ['login' => $this->uid['user_login']]));
+            redirect(getUrlByName('user.invitations', ['login' => $this->uid['user_login']]));
         }
-
-        // Если пользователь забанен
-        $user = UserModel::getUser($this->uid['user_id'], 'id');
-        (new \App\Controllers\Auth\BanController())->getBan($user);
 
         return agRender(
             '/user/invitation',
@@ -50,7 +47,7 @@ class InvitationsController extends MainController
                 'uid'   => $this->uid,
                 'data'  => [
                     'invitations'   => InvitationModel::userResult($this->uid['user_id']),
-                    'count_invites' => $user['user_invitation_available'],
+                    'count_invites' => $this->uid['user_invitation_available'],
                     'sheet' => 'invites',
                     'type'  => 'user',
                 ]
@@ -63,7 +60,7 @@ class InvitationsController extends MainController
     {
         $invitation_email = Request::getPost('email');
 
-        $redirect = getUrlByName('invitations', ['login' => $this->uid['user_login']]);
+        $redirect = getUrlByName('user.invitations', ['login' => $this->uid['user_login']]);
 
         Validation::checkEmail($invitation_email, $redirect);
 

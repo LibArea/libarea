@@ -4,9 +4,10 @@ namespace App\Controllers\Facets;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Middleware\Before\UserData;
 use App\Models\User\UserModel;
 use App\Models\{FeedModel, SubscriptionModel, FacetModel, PostModel};
-use Content, Base, Translate;
+use Content, Translate;
 
 class TopicFacetController extends MainController
 {
@@ -16,7 +17,7 @@ class TopicFacetController extends MainController
 
     public function __construct()
     {
-        $this->uid = Base::getUid();
+        $this->uid = UserData::getUid();
     }
 
     // Posts in the topic 

@@ -118,7 +118,7 @@
         ]
       ]); ?>
 
-      <?php if ($fs['facet_type'] == 'topic' && $uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
+      <?php if ($fs['facet_type'] == 'topic' && UserData::checkAdmin()) { ?>
 
         <?= import('/_block/form/radio', [
           'uid' => $uid,
@@ -237,7 +237,7 @@
         <?php } ?>
       <?php } ?>
 
-      <?php if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
+      <?php if (UserData::checkAdmin()) { ?>
         <?= import('/_block/form/select/content-tl', ['uid' => $uid, 'data' => $fs['facet_tl']]); ?>
         <?= import('/_block/form/select/user', [
           'uid'     => $uid,

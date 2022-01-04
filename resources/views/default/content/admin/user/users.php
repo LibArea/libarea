@@ -88,7 +88,7 @@
             <?php } ?>
           </td>
           <td class="center">
-            <?php if ($user['user_trust_level'] != 5) { ?>
+            <?php if ($user['user_trust_level'] != UserData::REGISTERED_ADMIN) { ?>
               <?php if ($user['user_ban_list']) { ?>
                 <span class="type-ban" data-id="<?= $user['user_id']; ?>" data-type="user">
                   <span class="red-500"><?= Translate::get('unban'); ?></span>

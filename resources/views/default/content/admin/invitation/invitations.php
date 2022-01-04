@@ -16,15 +16,27 @@
         </a>
         <sup>id<?= $inv['uid']['user_id']; ?></sup>
         =>
-        <a href="<?= getUrlByName('user', ['login' => $inv['user_login']]); ?>">
-          <?= $inv['user_login']; ?>
-        </a>
-        <sup>id<?= $inv['active_uid']; ?></sup>
-        <span class="text-sm"> - <?= $inv['active_time']; ?></span>
+        <?php if ($inv['user_login']) { ?>
+          <a href="<?= getUrlByName('user', ['login' => $inv['user_login']]); ?>">
+            <?= $inv['user_login']; ?>
+          </a>
+          <span class="lowercase text-sm">
+            <?= $inv['invitation_email']; ?>
+          </span>
+          <sup>id<?= $inv['active_uid']; ?></sup>
+          <span class="text-sm"> - <?= lang_date($inv['active_time']); ?>
+        <?php } else { ?>
+          <span class="gray-400 lowercase text-sm">
+            <?= $inv['invitation_email']; ?> &nbsp; <?= lang_date($inv['add_time']); ?>
+          </span>
+        <?php } ?>
+        
+        
+        </span>
       </div>
     <?php } ?>
   <?php } else { ?>
-    <?= no_content(Translate::get('there are no comments'), 'bi bi-info-lg'); ?>
+    <?= no_content(Translate::get('no'), 'bi bi-info-lg'); ?>
   <?php } ?>
 </div>
 </main>

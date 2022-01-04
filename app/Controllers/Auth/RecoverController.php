@@ -4,11 +4,19 @@ namespace App\Controllers\Auth;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Middleware\Before\UserData;
 use App\Models\User\{SettingModel, UserModel};
-use Config, Base, Integration, Validation, SendEmail, Translate;
+use Config, Integration, Validation, SendEmail, Translate;
 
 class RecoverController extends MainController
 {
+    private $uid;
+
+    public function __construct()
+    {
+        $this->uid = UserData::getUid();
+    }
+
     public function showPasswordForm()
     {
         $m = [
@@ -22,7 +30,7 @@ class RecoverController extends MainController
             '/auth/recover',
             [
                 'meta'  => meta($m, Translate::get('password recovery'), Translate::get('info-recover')),
-                'uid'   => Base::getUid(),
+                'uid'   => $this->uid,
                 'data'  => [
                     'sheet' => 'recover',
                     'type'  => 'recover',
@@ -88,7 +96,7 @@ class RecoverController extends MainController
             '/auth/newrecover',
             [
                 'meta'  => meta($m = [], Translate::get('password recovery'), Translate::get('info-recover')),
-                'uid'   => Base::getUid(),
+                'uid'   => $this->uid,
                 'data'  => [
                     'code'      => $code,
                     'user_id'   => $user_id['activate_user_id'],

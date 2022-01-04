@@ -4,9 +4,10 @@ namespace App\Controllers\Admin;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Middleware\Before\UserData;
 use App\Models\User\{SettingModel, BadgeModel};
 use App\Models\Admin\{BanUserModel, UserModel};
-use Base, Validation, Translate;
+use Validation, Translate;
 
 class UsersController extends MainController
 {
@@ -16,7 +17,7 @@ class UsersController extends MainController
 
     public function __construct()
     {
-        $this->uid  = Base::getUid();
+        $this->uid  = UserData::getUid();
     }
 
     public function index($sheet, $type)
@@ -137,10 +138,7 @@ class UsersController extends MainController
 
         $redirect = getUrlByName('admin.user.edit', ['id' => $user_id]);
         Validation::Limits($login, Translate::get('login'), '3', '11', $redirect);
-
-        if ($this->uid['user_trust_level'] != 5) {
-            Validation::Limits($user_name, Translate::get('name'), '3', '11', $redirect);
-        }
+        Validation::Limits($user_name, Translate::get('name'), '3', '11', $redirect);
 
         $data = [
             'user_id'            => $user_id,

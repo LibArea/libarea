@@ -5,6 +5,8 @@
 <script src="/assets/js/tippy/tippy-bundle.umd.min.js"></script>
 <script src="/assets/js/common.js"></script>
 
+<?php if ($uid['user_id']) { ?><script src="/assets/js/app.js"></script><?php } ?>
+
 <?= getRequestResources()->getBottomStyles(); ?>
 <?= getRequestResources()->getBottomScripts(); ?>
 

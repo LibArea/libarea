@@ -4,9 +4,9 @@ namespace App\Controllers\Answer;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\User\UserModel;
+use App\Middleware\Before\UserData;
 use App\Models\{AnswerModel, PostModel};
-use Content, Base, Validation, Translate;
+use Content, Validation, Translate;
 
 class EditAnswerController extends MainController
 {
@@ -14,7 +14,7 @@ class EditAnswerController extends MainController
 
     public function __construct()
     {
-        $this->uid  = Base::getUid();
+        $this->uid  = UserData::getUid();
     }
 
     // Форма редактирования answer
@@ -26,7 +26,7 @@ class EditAnswerController extends MainController
             redirect('/');
         }
 
-        $post = PostModel::getPostId($answer['answer_post_id']);
+        $post = PostModel::getPost($answer['answer_post_id'], 'id', $this->uid);
         pageError404($post);
 
         Request::getResources()->addBottomStyles('/assets/js/editor/toastui-editor.min.css');
@@ -55,12 +55,10 @@ class EditAnswerController extends MainController
         $answer_id      = Request::getPostInt('answer_id');
         $post_id        = Request::getPostInt('post_id');
         $answer_content = $_POST['content']; // для Markdown
-        $post           = PostModel::getPostId($post_id);
+        $post           = PostModel::getPost($post_id, 'id', $this->uid);
 
-        // Если кто редактирует забанен / заморожен
-        $user   = UserModel::getUser($this->uid['user_id'], 'id');
-        (new \App\Controllers\Auth\BanController())->getBan($user);
-        Content::stopContentQuietМode($user);
+        // Если пользователь заморожен
+        Content::stopContentQuietМode($this->uid['user_limiting_mode']);
 
         $answer = AnswerModel::getAnswerId($answer_id);
 

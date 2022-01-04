@@ -4,15 +4,22 @@ namespace App\Controllers;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Middleware\Before\UserData;
 use App\Models\ActionModel;
-use Base, Translate;
+use Translate;
 
 class ActionController extends MainController
 {
+    private $uid;
+
+    public function __construct()
+    {
+        $this->uid  = UserData::getUid();
+    }
+
     // Удаление и восстановление контента
     public function deletingAndRestoring()
     {
-        $uid        = Base::getUid();
         $info       = Request::getPost('info');
         $status     = preg_split('/(@)/', $info);
         $type_id    = (int)$status[0]; // id конткнта
@@ -25,7 +32,7 @@ class ActionController extends MainController
 
         // Проверка доступа 
         $info_type = ActionModel::getInfoTypeContent($type_id, $type);
-        if (!accessСheck($info_type, $type, $uid, 1, 30)) {
+        if (!accessСheck($info_type, $type, $this->uid, 1, 30)) {
             redirect('/');
         }
 
@@ -43,8 +50,8 @@ class ActionController extends MainController
         }
 
         $data = [
-            'user_id'       => $uid['user_id'],
-            'user_tl'       => $uid['user_trust_level'],
+            'user_id'       => $this->uid['user_id'],
+            'user_tl'       => $this->uid['user_trust_level'],
             'created_at'    => date("Y-m-d H:i:s"),
             'post_id'       => $info_post_id,
             'content_id'    => $info_type[$type . '_id'],
@@ -76,7 +83,7 @@ class ActionController extends MainController
                     'sheet'         => 'moderations',
                 ],
                 'meta'  => meta($m = [], Translate::get('moderation log')),
-                'uid'   => Base::getUid(),
+                'uid'   => $this->uid,
             ]
         );
     }

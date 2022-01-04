@@ -45,7 +45,7 @@
         'title'       => Translate::get('blogs'),
       ]); ?>
 
-      <?php if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
+      <?php if (UserData::checkAdmin()) { ?>
         <?= import('/_block/form/select/section', [
           'uid'           => $uid,
           'data'          => $data,

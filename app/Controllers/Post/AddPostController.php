@@ -4,9 +4,9 @@ namespace App\Controllers\Post;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\User\UserModel;
+use App\Middleware\Before\UserData;
 use App\Models\{NotificationsModel, SubscriptionModel, ActionModel, WebModel, PostModel, FacetModel};
-use Content, Base, UploadImage, Integration, Validation, SendEmail, Slug, URLScraper, Config, Translate, Domains;
+use Content, UploadImage, Integration, Validation, SendEmail, Slug, URLScraper, Config, Translate, Domains;
 
 class AddPostController extends MainController
 {
@@ -14,7 +14,7 @@ class AddPostController extends MainController
 
     public function __construct()
     {
-        $this->uid  = Base::getUid();
+        $this->uid  = UserData::getUid();
     }
 
     // Форма добавление поста
@@ -23,21 +23,18 @@ class AddPostController extends MainController
         if ($type_content == 'post') {
             Request::getResources()->addBottomScript('/assets/js/uploads.js');
         } else {
-            if ($this->uid['user_trust_level'] < Base::USER_LEVEL_ADMIN) {
+            if (UserData::checkAdmin()) {
                 $count  = FacetModel::countFacetsUser($this->uid['user_id'], 'blog');
                 if (!$count) redirect('/');
             }
         }
 
+        // https://phphleb.ru/ru/v1/examples/#exampleE10
         Request::getResources()->addBottomStyles('/assets/js/tag/tagify.css');
         Request::getResources()->addBottomScript('/assets/js/tag/tagify.min.js');
         Request::getResources()->addBottomStyles('/assets/js/editor/toastui-editor.min.css');
         Request::getResources()->addBottomStyles('/assets/js/editor/dark.css');
         Request::getResources()->addBottomScript('/assets/js/editor/toastui-editor-all.min.js');
-
-        // Если пользователь забанен / заморожен
-        $user = UserModel::getUser($this->uid['user_id'], 'id');
-        (new \App\Controllers\Auth\BanController())->getBan($user);
 
         // Добавление со странице темы
         $topic_id   = Request::getInt('topic_id');
@@ -97,7 +94,6 @@ class AddPostController extends MainController
         }
         $post_related = implode(',', $id ?? []);
 
-
         // Темы для поста
         $facet_post     = $post_fields['facet_select'] ?? [];
         $topics         = json_decode($facet_post[0], true);
@@ -108,10 +104,8 @@ class AddPostController extends MainController
             $redirect = getUrlByName('post.add') . '/' . $blog_id;
         }
 
-        // Если пользователь забанен / заморожен
-        $user = UserModel::getUser($this->uid['user_id'], 'id');
-        (new \App\Controllers\Auth\BanController())->getBan($user);
-        Content::stopContentQuietМode($user);
+        // Если пользователь заморожен
+        Content::stopContentQuietМode($this->uid['user_limiting_mode']);
 
         // Если нет темы
         if (!$topics) {
@@ -235,7 +229,7 @@ class AddPostController extends MainController
         }
 
         // Отправим в Discord
-        if (Config::get('general.discord') == 1) {
+        if (Config::get('general.discord')) {
             if ($post_tl == 0 && $post_draft == 0) {
                 Integration::AddWebhook($post_content, $post_title, $url_post);
             }
@@ -275,12 +269,10 @@ class AddPostController extends MainController
             $redirect = getUrlByName('page.add') . '/' . $blog_id;
         }
 
-        // Если пользователь забанен / заморожен
-        $user = UserModel::getUser($this->uid['user_id'], 'id');
-        (new \App\Controllers\Auth\BanController())->getBan($user);
-        Content::stopContentQuietМode($user);
+        // Если пользователь заморожен
+        Content::stopContentQuietМode($this->uid['user_limiting_mode']);
 
-        if ($this->uid['user_trust_level'] < Base::USER_LEVEL_ADMIN) {
+        if ($this->uid['user_trust_level'] < UserData::REGISTERED_ADMIN) {
             $count  = FacetModel::countFacetsUser($this->uid['user_id'], 'blog');
             if (!$count) redirect('/');
         }
@@ -413,9 +405,9 @@ class AddPostController extends MainController
         $post_id = Request::getPostInt('post_id');
 
         // Проверка доступа 
-        Validation::validTl($this->uid['user_trust_level'], Base::USER_LEVEL_ADMIN, 0, 1);
+        Validation::validTl($this->uid['user_trust_level'], UserData::REGISTERED_ADMIN, 0, 1);
 
-        $post = PostModel::getPostId($post_id);
+        $post = PostModel::getPost($post_id, 'id', $this->uid);
         pageError404($post);
 
         ActionModel::setRecommend($post_id, $post['post_is_recommend']);

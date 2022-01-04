@@ -15,6 +15,8 @@ class InvitationModel extends MainModel
                     user_login,
                     user_avatar,
                     uid,
+                    invitation_email,
+                    add_time,
                     active_uid,
                     active_time
                         FROM invitations 

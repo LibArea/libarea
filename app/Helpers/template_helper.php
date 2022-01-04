@@ -18,6 +18,11 @@ function agTheme($user_theme, $file)
 
 function agRender($name, $data = null)
 {
+    if (Config::get('general.site_disabled')  && !UserData::checkAdmin()) {
+        include HLEB_GLOBAL_DIRECTORY . '/app/Optional/site_off.php';
+        hl_preliminary_exit();
+    }
+    
     return render(
         [
             agTheme($data['uid']['user_template'], '/header'),

@@ -26,7 +26,7 @@
               - <?= Translate::get('registered'); ?>
             </div>
 
-            <?php if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
+            <?php if (UserData::checkAdmin()) { ?>
               <?= Translate::get('the link was used to'); ?>: <?= $invite['invitation_email']; ?> <br>
               <code>
                 <?= Config::get('meta.url'); ?><?= getUrlByName('register'); ?>/invite/<?= $invite['invitation_code']; ?>

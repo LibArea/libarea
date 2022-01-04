@@ -287,7 +287,7 @@ $data = [
     'format Q&A?'           => 'Format Q&A?',
     'raise?'                => 'Raise?',
     'is this a draft?'      => 'Is this a draft?',
-    'default'               => 'Ddefault',
+    'default'               => 'Default',
     'qa'                    => 'Q&A',
     'moderation log'        => 'Moderation log',
     'no moderation logs'    => 'No logs found in the moderation log',
@@ -537,7 +537,14 @@ $data = [
     'main.feed.info'            => 'Posts in chronological order...',
     'main.all.info'             => 'All posts in the community feed...',
     'main.top.info'             => 'Recent active posts...',
-
+    
+    'tl0.title'                 => 'Invité',
+    'tl1.title'                 => 'Utilisateur',
+    'tl2.title'                 => 'Membre',
+    'tl3.title'                 => 'Résident',
+    'tl4.title'                 => 'Leader',
+    'tl5.title'                 => 'Personnel',
+    
 ];
 
 return $data;

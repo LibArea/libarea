@@ -4,18 +4,19 @@ namespace App\Controllers;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
+use App\Middleware\Before\UserData;
 use App\Models\HomeModel;
-use Content, Base, Config, Translate;
+use Content, Config, Translate;
 
 class HomeController extends MainController
 {
-    private $uid;
-
     protected $limit = 25;
+
+    private $uid;
 
     public function __construct()
     {
-        $this->uid  = Base::getUid();
+        $this->uid  = UserData::getUid();
     }
 
     public function index($sheet, $type)

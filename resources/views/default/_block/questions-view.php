@@ -15,7 +15,7 @@
                 <div class="br-box-gray w130 br-rd3 right mt10 pt10 ml10 pb10 hidden center">
                   <?= user_avatar_img($answer['user_avatar'], 'max', $answer['user_login'], 'br-rd-50 w64'); ?>
                   <div class="text-sm gray-600">
-                    <?= $answer['answer_date']; ?>
+                    <?= lang_date($answer['answer_date']); ?>
                     <?php if (empty($answer['edit'])) { ?>
                       (<?= Translate::get('ed'); ?>.)
                     <?php } ?>
@@ -30,17 +30,21 @@
 
                 <?php if ($uid['user_trust_level'] >= Config::get('trust-levels.tl_add_comm_qa')) { ?>
                   <?php if ($post['post_closed'] == 0) { ?>
-                    <?php if ($post['post_is_deleted'] == 0 || $uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
+                    <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) { ?>
                       <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" class="add-comment gray ml10"><?= Translate::get('reply'); ?></a>
                     <?php } ?>
                   <?php } ?>
                 <?php } ?>
-                <?php if ($uid['user_id'] == $answer['answer_user_id'] || $uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
-                  <a class="editansw gray ml15 mr5" href="/answer/edit/<?= $answer['answer_id']; ?>">
-                    <?= Translate::get('edit'); ?>
-                  </a>
+                
+                <?php if (accessСheck($answer, 'answer', $uid, 1, 30) === true) { ?>
+                  <?php if ($uid['user_id'] == $answer['answer_user_id'] || UserData::checkAdmin()) { ?>
+                    <a class="editansw gray ml15 mr5" href="/answer/edit/<?= $answer['answer_id']; ?>">
+                      <?= Translate::get('edit'); ?>
+                    </a>
+                  <?php } ?>
                 <?php } ?>
-                <?php if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
+                
+                <?php if (UserData::checkAdmin()) { ?>
                   <a data-type="answer" data-id="<?= $answer['answer_id']; ?>" class="type-action gray ml15 mr5">
                     <i title="<?= Translate::get('remove'); ?>" class="bi bi-trash"></i>
                   </a>
@@ -79,7 +83,7 @@
 
                 <?php if ($uid['user_trust_level'] >= Config::get('trust-levels.tl_add_comm_qa')) { ?>
                   <?php if ($post['post_closed'] == 0) { ?>
-                    <?php if ($post['post_is_deleted'] == 0 || $uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
+                    <?php if ($post['post_is_deleted'] == 0 || UserData::checkAdmin()) { ?>
                       <a data-post_id="<?= $post['post_id']; ?>" data-answer_id="<?= $answer['answer_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="add-comment-re gray ml5 mr5">
                         <?= Translate::get('reply'); ?>
                       </a>
@@ -87,13 +91,15 @@
                   <?php } ?>
                 <?php } ?>
 
-                <?php if ($uid['user_id'] == $comment['comment_user_id'] || $uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
-                  <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray ml10 mr5">
-                    <i title="<?= Translate::get('edit'); ?>" class="bi bi-pencil-square"></i>
-                  </a>
+                <?php if (accessСheck($comment, 'comment', $uid, 1, 30) === true) { ?>
+                  <?php if ($uid['user_id'] == $comment['comment_user_id'] || UserData::checkAdmin()) { ?>
+                    <a data-post_id="<?= $post['post_id']; ?>" data-comment_id="<?= $comment['comment_id']; ?>" class="editcomm gray ml10 mr5">
+                      <i title="<?= Translate::get('edit'); ?>" class="bi bi-pencil-square"></i>
+                    </a>
+                  <?php } ?>
                 <?php } ?>
 
-                <?php if ($uid['user_trust_level'] == Base::USER_LEVEL_ADMIN) { ?>
+                <?php if (UserData::checkAdmin()) { ?>
                   <a data-type="comment" data-id="<?= $comment['comment_id']; ?>" class="type-action gray ml10">
                     <i title="<?= Translate::get('remove'); ?>" class="bi bi-trash"></i>
                   </a>

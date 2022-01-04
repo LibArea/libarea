@@ -4,9 +4,9 @@ namespace App\Controllers\Comment;
 
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
-use App\Models\User\UserModel;
+use App\Middleware\Before\UserData;
 use App\Models\{NotificationsModel, ActionModel, AnswerModel, CommentModel, PostModel};
-use Content, Base, Validation, SendEmail, Translate;
+use Content, Validation, SendEmail, Translate;
 
 class AddCommentController extends MainController
 {
@@ -14,7 +14,7 @@ class AddCommentController extends MainController
 
     public function __construct()
     {
-        $this->uid  = Base::getUid();
+        $this->uid  = UserData::getUid();
     }
 
     // Покажем форму
@@ -42,13 +42,11 @@ class AddCommentController extends MainController
         $comment_id         = Request::getPostInt('comment_id');   // на какой комментарий
 
         $ip         = Request::getRemoteAddress();
-        $post       = PostModel::getPostId($post_id);
+        $post       = PostModel::getPost($post_id, 'id', $this->uid);
         pageError404($post);
 
-        // Если пользователь забанен / заморожен
-        $user = UserModel::getUser($this->uid['user_id'], 'id');
-        (new \App\Controllers\Auth\BanController())->getBan($user);
-        Content::stopContentQuietМode($user);
+        // Если пользователь заморожен
+        Content::stopContentQuietМode($this->uid['user_limiting_mode']);
 
         $redirect = getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]);
 
