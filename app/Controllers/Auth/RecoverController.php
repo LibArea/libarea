@@ -61,7 +61,7 @@ class RecoverController extends MainController
         }
 
         // Проверка на заблокированный аккаунт
-        if ($uInfo['user_ban_list'] == 1) {
+        if ($uInfo['user_ban_list'] == UserData::BANNED_USER) {
             addMsg(Translate::get('your account is under review'), 'error');
             redirect($recover_uri);
         }

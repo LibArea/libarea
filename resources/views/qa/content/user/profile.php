@@ -80,7 +80,7 @@
             <?php }  ?>
 
             <?php if ($data['topics']) { ?>
-              <div class="uppercase mb5 mt15 text-sm"><?= Translate::get('is reading'); ?></div>
+              <div class="uppercase gray mb5 mt15 text-sm"><?= Translate::get('is reading'); ?></div>
               <span class="d">
                 <?php foreach ($data['topics'] as  $topic) { ?>
                   <div class="mt5 mb5">
@@ -119,7 +119,7 @@
               <sup class="date">TL<?= $user['user_trust_level']; ?></sup>
             </span>
           </div>
-          <h2 class="mb5 uppercase pt15 font-normal text-sm">
+          <h2 class="mb5 uppercase gray pt15 font-normal text-sm">
             <?= Translate::get('contacts'); ?>
           </h2>
           <?php foreach (Config::get('fields-profile') as $block) { ?>
@@ -144,7 +144,7 @@
             <?php } ?>
           <?php } ?>
           <div class="relative mt15 pt5 pr15 pb5">
-            <h3 class="mt0 mb5 uppercase pt5 font-normal text-sm">
+            <h3 class="mt0 mb5 uppercase gray pt5 font-normal text-sm">
               <?= Translate::get('badges'); ?>
             </h3>
             <div class="m0 text-3xl">
@@ -159,7 +159,7 @@
           </div>
           <?php if ($user['user_my_post'] != 0) { ?>
             <?php $post = $data['post']; ?>
-            <h3 class="mb5 uppercase pt10 font-normal text-sm">
+            <h3 class="mb5 uppercase gray pt10 font-normal text-sm">
               <?= Translate::get('selected post'); ?>
             </h3>
             <div class="post-body mb15">
@@ -190,7 +190,7 @@
           <?php } ?>
 
           <?php if (!empty($data['participation'][0]['facet_id'])) { ?>
-            <h3 class="mb5 uppercase pt10 font-normal text-sm">
+            <h3 class="mb5 uppercase gray pt10 font-normal text-sm">
               <?= Translate::get('understands'); ?>
             </h3>
             <?php foreach ($data['participation'] as $part) { ?>
@@ -202,8 +202,9 @@
 
           <?php if (UserData::checkAdmin()) { ?>
             <div class="pt5 pr15 pb5">
-              <h3 class="mt0 mb10 uppercase pt10 text-sm"><?= Translate::get('admin'); ?></h3>
+              <h3 class="mt0 mb10 uppercase gray font-normal pt10 text-sm"><?= Translate::get('admin'); ?></h3>
               <div class="mb5">
+                <?php if ($user['user_trust_level'] != UserData::REGISTERED_ADMIN) { ?>
                   <?php if ($data['isBan']) { ?>
                     <span class="type-ban gray mb5 block" data-id="<?= $user['user_id']; ?>" data-type="user">
                       <i class="bi bi-person-x-fill red-500 middle mr5"></i>
@@ -215,6 +216,8 @@
                       <?= Translate::get('ban it'); ?>
                     </span>
                   <?php } ?>
+                <?php } ?>
+                
                 <a class="gray mb5 block" href="<?= getUrlByName('admin.user.edit', ['id' => $user['user_id']]); ?>">
                   <i class="bi bi-gear middle mr5"></i>
                   <span class="middle"><?= Translate::get('edit'); ?></span>

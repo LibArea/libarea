@@ -41,10 +41,10 @@ class UploadImage
 
             if ($type == 'topic') {
                 $images     = FacetModel::getFacet($content_id, 'id');
-                $foto       = $images['topic_img'];
+                $foto       = $images['topic_img'] ?? false;
             } else {
                 $images     = UserModel::getUser($content_id, 'id');
-                $foto       = $images['user_avatar'];
+                $foto       = $images['user_avatar'] ?? false;
             }
 
             // Удалим старую аватарку, кроме дефолтной

@@ -103,16 +103,16 @@ class EditFacetController extends MainController
         Validation::Limits($facet_info, Translate::get('Info'), '14', '5000', $redirect);
 
         // Запишем img
-        $img = $_FILES['images'];
-        $check_img  = $_FILES['images']['name'];
+        $check_img  = $_FILES['images']['name'] ?? null;
         if ($check_img) {
+            $img = $_FILES['images'];
             UploadImage::img($img, $facet['facet_id'], 'topic');
         }
 
         // Баннер
-        $cover          = $_FILES['cover'];
-        $check_cover    = $_FILES['cover']['name'];
+        $check_cover    = $_FILES['cover']['name'] ?? null;
         if ($check_cover) {
+            $cover      = $_FILES['cover'];
             UploadImage::cover($cover, $facet['facet_id'], 'blog');
         }
 
@@ -138,8 +138,8 @@ class EditFacetController extends MainController
 
         // Связанные посты
         $json_post  = $fields['post_select'] ?? [];
-        $arr_post   = json_decode($json_post[0], true);
-        if ($arr_post) {
+        if (!empty($arr_post)) {
+            $arr_post   = json_decode($json_post[0], true);
             foreach ($arr_post as $value) {
                 $id[]   = $value['id'];
             }

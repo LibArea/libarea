@@ -5,18 +5,9 @@
       background: <?= $user['user_color']; ?>;
       min-height: 90px;
     }
-
-    .profile-box-cover {
-      min-height: 310px;
-    }
-
-    .profile-box .w160 {
-      width: 64px;
-    }
-
-    .bottom-20 {
-      bottom: -20px;
-    }
+    .profile-box-cover { min-height: 310px; }
+    .profile-box .w160 { width: 64px; }
+    .bottom-20 { bottom: -20px; }
   </style>
 
   <?php if ($user['user_cover_art'] != 'cover_art.jpeg') { ?>
@@ -89,7 +80,7 @@
             <?php }  ?>
 
             <?php if ($data['topics']) { ?>
-              <div class="uppercase mb5 mt15 text-sm"><?= Translate::get('is reading'); ?></div>
+              <div class="uppercase gray mb5 mt15 text-sm"><?= Translate::get('is reading'); ?></div>
               <span class="d">
                 <?php foreach ($data['topics'] as  $topic) { ?>
                   <div class="mt5 mb5">
@@ -128,7 +119,7 @@
               <sup class="date">TL<?= $user['user_trust_level']; ?></sup>
             </span>
           </div>
-          <h2 class="mb5 uppercase pt15 font-normal text-sm">
+          <h2 class="mb5 uppercase gray pt15 font-normal text-sm">
             <?= Translate::get('contacts'); ?>
           </h2>
           <?php foreach (Config::get('fields-profile') as $block) { ?>
@@ -153,7 +144,7 @@
             <?php } ?>
           <?php } ?>
           <div class="relative mt15 pt5 pr15 pb5">
-            <h3 class="mt0 mb5 uppercase pt5 font-normal text-sm">
+            <h3 class="mt0 mb5 uppercase gray pt5 font-normal text-sm">
               <?= Translate::get('badges'); ?>
             </h3>
             <div class="m0 text-3xl">
@@ -168,7 +159,7 @@
           </div>
           <?php if ($user['user_my_post'] != 0) { ?>
             <?php $post = $data['post']; ?>
-            <h3 class="mb5 uppercase pt10 font-normal text-sm">
+            <h3 class="mb5 uppercase gray pt10 font-normal text-sm">
               <?= Translate::get('selected post'); ?>
             </h3>
             <div class="post-body mb15">
@@ -199,7 +190,7 @@
           <?php } ?>
 
           <?php if (!empty($data['participation'][0]['facet_id'])) { ?>
-            <h3 class="mb5 uppercase pt10 font-normal text-sm">
+            <h3 class="mb5 uppercase gray pt10 font-normal text-sm">
               <?= Translate::get('understands'); ?>
             </h3>
             <?php foreach ($data['participation'] as $part) { ?>
@@ -211,7 +202,7 @@
 
           <?php if (UserData::checkAdmin()) { ?>
             <div class="pt5 pr15 pb5">
-              <h3 class="mt0 mb10 uppercase pt10 text-sm"><?= Translate::get('admin'); ?></h3>
+              <h3 class="mt0 mb10 uppercase gray font-normal pt10 text-sm"><?= Translate::get('admin'); ?></h3>
               <div class="mb5">
                 <?php if ($user['user_trust_level'] != UserData::REGISTERED_ADMIN) { ?>
                   <?php if ($data['isBan']) { ?>

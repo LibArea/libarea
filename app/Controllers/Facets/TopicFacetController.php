@@ -115,7 +115,7 @@ class TopicFacetController extends MainController
         return agRender(
             '/facets/info',
             [
-                'meta'  => meta($m, $facet['facet_seo_title'] . ' — ' .  Translate::get('topic'), $facet['facet_description']),
+                'meta'  => meta($m, $facet['facet_seo_title'] . ' — ' .  Translate::get('info'), $facet['facet_description']),
                 'uid'   => $this->uid,
                 'data'  => [
                     'sheet'         => 'info',
