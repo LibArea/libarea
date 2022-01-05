@@ -27,17 +27,19 @@
             </div>
 
             <?php if (UserData::checkAdmin()) { ?>
-              <?= Translate::get('the link was used to'); ?>: <?= $invite['invitation_email']; ?> <br>
-              <code>
-                <?= Config::get('meta.url'); ?><?= getUrlByName('register'); ?>/invite/<?= $invite['invitation_code']; ?>
+              <?= Translate::get('the link was used to'); ?>: 
+              <?= $invite['invitation_email']; ?>
+              <code class="block">
+                <?= Config::get('meta.url'); ?><?= getUrlByName('invite.reg', ['code' => $invite['invitation_code']]); ?>
               </code>
             <?php } ?>
 
             <span class="text-sm gray"><?= Translate::get('link has been used'); ?></span>
           <?php } else { ?>
-            <?= Translate::get('for'); ?> (<?= $invite['invitation_email']; ?>) <?= Translate::get('can send this link'); ?>: <br>
-            <code>
-              <?= Config::get('meta.url'); ?><?= getUrlByName('register'); ?>/invite/<?= $invite['invitation_code']; ?>
+            <?= Translate::get('for'); ?> (<?= $invite['invitation_email']; ?>) 
+            <?= Translate::get('can send this link'); ?>:
+            <code class="block">
+              <?= Config::get('meta.url'); ?><?= getUrlByName('invite.reg', ['code' => $invite['invitation_code']]); ?>
             </code>
           <?php } ?>
 

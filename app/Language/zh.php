@@ -427,11 +427,8 @@ $data = [
 
     'message to PM'         => '當消息來到 PM',
     'contacted via @'       => '當他們通過@聯繫我時 ',
-    'you mentioned (@)'     => '你被提及（@），看',
     'linkchange password'   => '您更改密碼的鏈接',
     'changing password'     => '更改密碼',
-    'activate e-mail'       => '激活鏈接電子郵件',
-    'checking e-mail'       => '考試郵箱 ',
     'there are no domains'  => '沒有域',
     'change the site'       => '更改站點',
     'add a website'         => '添加站點',

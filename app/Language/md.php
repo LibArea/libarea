@@ -417,11 +417,8 @@ $data = [
 
     'message to PM'         => 'Când mesajul a venit la PM',
     'contacted via @'       => 'Când m-ați contactat prin @',
-    'you mentioned (@)'     => 'Menționat (@), vezi',
     'linkchange password'   => 'Link-ul dvs. pentru a vă schimba parola',
     'changing password'     => 'schimbați parola',
-    'activate e-mail'       => 'Link pentru activarea e-mailului',
-    'checking e-mail'       => 'verifica e-mail',
     'site under reconstruction' => 'Site în reconstrucție',
 
     'there are no domains'  => 'Fără domenii',

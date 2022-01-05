@@ -148,9 +148,7 @@ class RegisterController extends MainController
         UserModel::sendActivateEmail($active_uid, $email_code);
 
         // Отправка e-mail
-        $link = Config::get('meta.url') . '/email/activate/' . $email_code;
-        $mail_message = Translate::get('activate e-mail') . ": \n" . $link . "\n\n";
-        SendEmail::send($email, Config::get('meta.name') . ' — ' . Translate::get('checking e-mail'), $mail_message);
+        SendEmail::mailText($active_uid, 'activate.email', ['link' => '/email/activate/' . $email_code]);
 
         addMsg(Translate::get('check your email'), 'success');
 

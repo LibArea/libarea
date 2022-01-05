@@ -70,10 +70,8 @@ class RecoverController extends MainController
         UserModel::initRecover($uInfo['user_id'], $code);
 
         // Отправка e-mail
-        $newpass_link = Config::get('meta.url') . $recover_uri . '/remind/' . $code;
-        $mail_message = Translate::get('linkchange password') . ": \n" . $newpass_link . "\n\n";
-        SendEmail::send($email, Config::get('meta.name') . ' — ' . Translate::get('changing password'), $mail_message);
-
+        SendEmail::mailText($uInfo['user_id'], 'changing.password', ['newpass_link' => $recover_uri . '/remind/' . $code]);
+        
         addMsg(Translate::get('new password email'), 'success');
         redirect(getUrlByName('login'));
     }

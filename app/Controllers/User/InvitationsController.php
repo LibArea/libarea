@@ -6,7 +6,7 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use App\Models\User\{InvitationModel, UserModel};
-use Validation, Translate;
+use Validation, Translate, Config, SendEmail;
 
 class InvitationsController extends MainController
 {
@@ -86,6 +86,10 @@ class InvitationsController extends MainController
         $add_ip             = Request::getRemoteAddress();
 
         InvitationModel::create($this->uid['user_id'], $invitation_code, $invitation_email, $add_time, $add_ip);
+
+        // Отправка e-mail
+        $link = getUrlByName('invite.reg', ['code' => $invitation_code]);
+        SendEmail::mailText($this->uid['user_id'], 'invite.reg', ['link' => $link, 'invitation_email' => $invitation_email]);
 
         addMsg(Translate::get('invite created'), 'success');
         redirect($redirect);

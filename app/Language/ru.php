@@ -434,11 +434,8 @@ $data = [
 
     'message to PM'         => 'Когда пришло сообщение на PM',
     'contacted via @'       => 'Когда обратились ко мне через @',
-    'you mentioned (@)'     => 'Вас упомянули (@), посмотреть',
     'linkchange password'   => 'Ваша ссылка для изменения пароля',
     'changing password'     => 'изменение пароля',
-    'activate e-mail'       => 'Ссылка для активации E-mail',
-    'checking e-mail'       => 'проверка e-mail',
     'there are no domains'  => 'Доменов нет',
     'change the site'       => 'Изменить сайт',
     'add a website'         => 'Добавить сайт',

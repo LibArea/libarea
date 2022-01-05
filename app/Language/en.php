@@ -426,11 +426,8 @@ $data = [
 
     'message to PM'         => 'When the message came to PM',
     'contacted via @'       => 'When they reached out to me through @',
-    'you mentioned (@)'     => 'You were mentioned  (@), look',
     'linkchange password'   => 'Your link to change your password',
     'changing password'     => 'Change Password',
-    'activate e-mail'       => 'Activation link Email',
-    'checking e-mail'       => 'Examination  Email',
     'there are no domains'  => 'No domains',
     'change the site'       => 'Change site',
     'add a website'         => 'Add site',

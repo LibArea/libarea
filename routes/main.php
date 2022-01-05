@@ -117,7 +117,7 @@ Route::before('Designator', [UserData::USER_ZERO_LEVEL, '='])->getGroup();
 	Route::get('/register')->controller('Auth\RegisterController@showRegisterForm')->name('register');
     
     Route::getType('get');
-        Route::get('/register/invite/{code}')->controller('Auth\RegisterController@showInviteForm')->where(['code' => '[a-z0-9-]+']);
+        Route::get('/register/invite/{code}')->controller('Auth\RegisterController@showInviteForm')->where(['code' => '[a-z0-9-]+'])->name('invite.reg');
         Route::get('/recover')->controller('Auth\RecoverController@showPasswordForm')->name('recover');  
         Route::get('/recover/remind/{code}')->controller('Auth\RecoverController@showRemindForm')->where(['code' => '[A-Za-z0-9-]+']);
         Route::get('/email/activate/{code}')->controller('Auth\RecoverController@ActivateEmail')->where(['code' => '[A-Za-z0-9-]+']);
