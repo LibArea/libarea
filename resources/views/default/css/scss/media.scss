@@ -26,6 +26,10 @@
   .mb-col-2 { grid-column: span 2 / span 2; }
   .mb-col-12 { grid-column: span 12 / span 12; }
   .mb-w-100 { width: $width-one-hundred; }
+  .mb-h-100 { height: $width-one-hundred; }
+  .mb-w100 { width: $px-one-hundred; }
+  .mb-h100 { height: $px-one-hundred; }
+  .mb-min-h100 { min-height: $px-one-hundred; }
   .mb-ml-10 { margin-left: $px-ten; }
   .mb-mr-10 { margin-right: $px-ten; }
   .mb-mt-5 { margin-top: $px-five; }
@@ -39,7 +43,9 @@
   .mb-inline { display: inline; }
   .gap-4  { gap: 0.5rem; }
   .no-mob { display: none; }
-  .no-pc { display: block; }
+  .no-pc,
+  .mb-block { display: block; }
+  .mb-absolute { position: absolute; }
 
   .video-object {
     width: 320px;
