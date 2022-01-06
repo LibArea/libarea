@@ -28,7 +28,7 @@
         </a>
       </div>
       <div class="flex flex-row flex-auto">
-        <div class="w-auto pc-mr-20">
+        <div class="w-auto mr20 mb-mr-5">
           <a class="black dark-gray-300" href="<?= $post_url; ?>">
             <h2 class="font-normal text-2xl mt0 mb0">
               <?= import('/_block/post-title', ['post' => $post, 'uid' => $uid]); ?>
@@ -58,9 +58,9 @@
           </div>
         <?php } else { ?>
           <?php if ($post['post_thumb_img']) { ?>
-            <div class="home-img mt15 flex-auto no-mob-max">
+            <div class="home-img mt15 flex-auto mb-none">
               <a title="<?= $post['post_title']; ?>" href="<?= $post_url; ?>">
-                <?= post_img($post['post_thumb_img'], $post['post_title'],  'thumb no-mob br-rd5 right', 'thumbnails'); ?>
+                <?= post_img($post['post_thumb_img'], $post['post_title'],  'thumb br-rd5 right', 'thumbnails'); ?>
               </a>
             </div>
           <?php } ?>

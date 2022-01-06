@@ -1,4 +1,4 @@
-<div class="col-span-2 justify-between no-mob">
+<div class="col-span-2 justify-between mb-none">
   <nav class="sticky top70">
   <?= tabs_nav(
     'menu',

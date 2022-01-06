@@ -32,7 +32,7 @@
     <?= no_content(Translate::get('there are no comments'), 'bi bi-info-lg'); ?>
   <?php } ?>
 </main>
-<aside class="col-span-3 relative no-mob">
+<aside class="col-span-3 relative mb-none">
   <div class="sticky top60">
     <div class="bg-white br-rd5 br-box-gray p15">
       <?= tabs_nav(

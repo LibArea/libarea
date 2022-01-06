@@ -45,7 +45,7 @@
   </div>
 </main>
 
-<aside class="col-span-3 mb-col-12 relative no-mob">
+<aside class="col-span-3 mb-col-12 relative mb-none">
   <?php if ($uid['user_id'] == 0) { ?>
     <?= import('/_block/sidebar/login', ['uid' => $uid]); ?>
   <?php } ?>

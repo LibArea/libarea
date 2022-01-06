@@ -1,7 +1,7 @@
 <main class="col-span-9 mb-col-12">
 
   <div class="bg-white flex flex-row center items-center justify-between box-shadow-all br-rd5 p15 mb15">
-    <p class="m0 no-mob"><?= Translate::get($data['sheet']); ?></p>
+    <p class="m0 mb-none"><?= Translate::get($data['sheet']); ?></p>
     <?= import('/content/user/setting/nav', ['data' => $data, 'uid' => $uid]); ?>
   </div>
 

@@ -1,4 +1,4 @@
-<aside class="col-span-3 relative br-rd5 no-mob">
+<aside class="col-span-3 relative br-rd5 mb-none">
   <?php if (!empty($lang)) { ?>
     <div class="bg-white p15 br-box-gray box-shadow-all">
       <?= $lang; ?>...

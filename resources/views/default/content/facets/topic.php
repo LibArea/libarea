@@ -1,4 +1,4 @@
-<div class="col-span-2 justify-between no-mob">
+<div class="col-span-2 justify-between mb-none">
   <nav class="sticky top70">
   <?= tabs_nav(
     'menu',
@@ -13,7 +13,7 @@
 <main class="col-span-7 mb-col-12">
   <?php if ($topic['facet_is_deleted'] == 0) { ?>
     <div class="bg-white flex flex-row items-center justify-between br-rd5 br-box-gray mb15 p15">
-      <div class="no-mob">
+      <div class="mb-none">
         <?= facet_logo_img($topic['facet_img'], 'max', $topic['facet_title'], 'w94 br-box-gray mt5'); ?>
       </div>
       <div class="ml15 mb-ml-0 flex-auto">
@@ -45,7 +45,7 @@
     </div>
 
     <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
-      <p class="m0 text-xl no-mob"><?= Translate::get('feed'); ?></p>
+      <p class="m0 text-xl mb-none"><?= Translate::get('feed'); ?></p>
       <ul class="flex flex-row list-none m0 p0 center">
 
         <?= tabs_nav(
@@ -88,7 +88,7 @@
     </div>
   <?php } ?>
 </main>
-<aside class="col-span-3 relative no-mob">
+<aside class="col-span-3 relative mb-none">
   <?php if ($topic['facet_is_deleted'] == 0) { ?>
     <div class="bg-white flex justify-center br-rd5 mb15 br-box-gray p15">
       <div class="mr15 center box-number">

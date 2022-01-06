@@ -1,4 +1,4 @@
-<div class="col-span-2 justify-between no-mob">
+<div class="col-span-2 justify-between mb-none">
   <nav class="sticky top70">
   <?= tabs_nav(
     'menu',
@@ -65,7 +65,7 @@
   </div>
 </main>
 
-<aside class="col-span-3 relative br-rd5 no-mob">
+<aside class="col-span-3 relative br-rd5 mb-none">
   <div class="br-box-gray p15 mb15 br-rd5 bg-white text-sm">
     <div class="uppercase gray mt5 mb5"><?= Translate::get('dialogues'); ?></div>
     <?php foreach ($data['dialog'] as $key => $val) { ?>

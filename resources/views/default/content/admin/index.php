@@ -7,7 +7,7 @@
   ]
 ); ?>
 
-<div class="grid grid-cols-12 gap-4 pr10 pl10 justify-between">
+<div class="grid grid-cols-12 gap-4 mb-gap-05 pr10 pl10 justify-between">
   <?php
   $sections = [
     [

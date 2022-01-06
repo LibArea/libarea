@@ -3,7 +3,7 @@
     <i class="bi bi-lightbulb middle mr5"></i>
     <?= Translate::get('topic-subscription'); ?>
   </a>
-  <div class="grid grid-cols-12 gap-4 pr10 pl10 justify-between">
+  <div class="grid grid-cols-12 gap-4 mb-gap-05 pr10 pl10 justify-between">
     <?php foreach ($data['topics'] as $topic) { ?>
       <div class="col-span-6 br-box-gray p10">
         <div data-id="<?= $topic['facet_id']; ?>" data-type="topic" class="focus-id right inline br-rd20 sky-500 center mr5">

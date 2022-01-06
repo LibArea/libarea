@@ -96,7 +96,7 @@
     <?php if (!empty($data['items'])) { ?>
       <?php foreach ($data['items'] as $key => $item) { ?>
         <div class="pt20 pb5 flex flex-row gap-2">
-          <div class="mr20 w200 no-mob">
+          <div class="mr20 w200 mb-none">
             <?= website_img($item['item_url_domain'], 'thumbs', $item['item_title_url'], 'mr5 w200 box-shadow'); ?>
           </div>
           <div class="mr20 flex-auto">
@@ -142,7 +142,7 @@
   </div>
 </main>
 </div>
-<div class="bg-white p15 no-mob br-box-gray">
+<div class="bg-white p15 mb-none br-box-gray">
   <?= $data['topic']['facet_description']; ?>
 </div>
 

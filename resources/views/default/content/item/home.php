@@ -31,7 +31,7 @@
       <?php foreach ($data['items'] as $key => $item) { ?>
         <?php if ($item['item_published'] == 1) { ?>
           <div class="pt20 pb5 flex flex-row gap-2">
-            <div class="mr20 w200 no-mob">
+            <div class="mr20 w200 mb-none">
               <?= website_img($item['item_url_domain'], 'thumbs', $item['item_url_domain'], 'mr5 mt5 w200 box-shadow'); ?>
             </div>
             <div class="w-100">

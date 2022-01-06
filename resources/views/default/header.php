@@ -25,7 +25,7 @@
   <header class="bg-white box-shadow mt0 mb15 <?php if ($type != 'page') { ?>sticky top0<?php } ?> z-30">
     <div class="col-span-12 mr-auto max-width w-100 pr10 pl10 h44 grid items-center flex justify-between">
       <div class="flex items-center">
-        <ag-menu data-template="one" class="tippy pl0 pr10 no-pc">
+        <ag-menu data-template="one" class="tippy pl0 pr10 none mb-block">
           <div class="relative w-auto">
             <i class="bi bi-list gray-400 text-xl"></i>
           </div>
@@ -48,7 +48,7 @@
         </div>
       </div>
       <?php if (Request::getUri() != getUrlByName('search')) { ?>
-        <div class="p5 ml30 mr20 relative no-mob w-100">
+        <div class="p5 ml30 mr20 relative mb-none w-100">
           <form class="form" method="post" action="<?= getUrlByName('search'); ?>">
             <input type="text" autocomplete="off" name="q" id="find" placeholder="<?= Translate::get('to find'); ?>" class="h30 bg-gray-100 p15 br-rd20 gray w-100">
             <input name="token" value="<?= csrf_token(); ?>" type="hidden">
@@ -59,7 +59,7 @@
       <?php } ?>
       <?php if (!UserData::checkActiveUser()) { ?>
         <div class="flex right col-span-4 items-center">
-          <div id="toggledark" class="header-menu-item no-mob only-icon p10 ml30 mb-ml-10">
+          <div id="toggledark" class="header-menu-item mb-none only-icon p10 ml30 mb-ml-10">
             <i class="bi bi-brightness-high gray-400 text-xl"></i>
           </div>
           <?php if (Config::get('general.invite') == false) { ?>
@@ -115,5 +115,5 @@
       <?php }  ?>
     </div>
   </header>
-  <div class="max-width mr-auto grid grid-cols-12 gap-4 pr5 pl5">
+  <div class="max-width mr-auto grid grid-cols-12 gap-4 mb-gap-05 pr5 pl5">
  

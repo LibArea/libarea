@@ -57,7 +57,7 @@
     <?php } ?>
   </div>
 </main>
-<aside class="col-span-3 relative no-mob">
+<aside class="col-span-3 relative mb-none">
   <div class="bg-white br-rd5 br-box-gray box-shadow-all p15 mb15">
     <?php if ($data['high_leve']) { ?>
       <div class="gray"><?= Translate::get('see more'); ?></div>

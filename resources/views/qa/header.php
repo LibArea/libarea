@@ -27,7 +27,7 @@ $facet = $data['facet'] ?? false; ?>
 <body class="p0 m0 black<?php if ($dark == 'dark') { ?> dark<?php } ?>">
 
   <header class="bg-white mt0 mb15">
-    <div class="br-bottom mr-auto max-w1240 w-100 pr10 pl10 h24 mb10 no-mob items-center flex">
+    <div class="br-bottom mr-auto max-w1240 w-100 pr10 pl10 h24 mb10 mb-none items-center flex">
       <?php foreach (Config::get('menu.mobile') as $key => $topic) { ?>
         <a class="mr20 black dark-gray-300 text-xs" href="<?= $topic['url']; ?>">
           <i class="<?= $topic['icon']; ?> mr5"></i>
@@ -38,7 +38,7 @@ $facet = $data['facet'] ?? false; ?>
 
     <div class="col-span-12 mr-auto max-w1240 w-100 pr10 pl10 h44 grid items-center flex justify-between">
       <div class="flex items-center" id="find">
-        <ag-menu data-template="one" class="tippy pl0 pr10 no-pc">
+        <ag-menu data-template="one" class="tippy pl0 pr10 none mb-block">
           <div class="relative w-auto">
             <i class="bi bi-list gray-400 text-xl"></i>
           </div>
@@ -62,7 +62,7 @@ $facet = $data['facet'] ?? false; ?>
 
       <?php if ($uid['user_id'] == 0) { ?>
         <div class="flex right col-span-4 items-center">
-          <div id="toggledark" class="header-menu-item no-mob only-icon p10 ml30 mb-ml-10">
+          <div id="toggledark" class="header-menu-item mb-none only-icon p10 ml30 mb-ml-10">
             <i class="bi bi-brightness-high gray-400 text-xl"></i>
           </div>
           <?php if (Config::get('general.invite') == false) { ?>
@@ -118,4 +118,4 @@ $facet = $data['facet'] ?? false; ?>
       <?php }  ?>
     </div>
   </header>
-  <div class="max-w1240 mr-auto grid grid-cols-12 gap-4 pr5 pl5">
+  <div class="max-w1240 mr-auto grid grid-cols-12 gap-4 mb-gap-05 pr5 pl5">

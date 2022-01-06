@@ -33,8 +33,8 @@ if ($user['user_cover_art'] != 'cover_art.jpeg') {
   </div>
 </div>
 
-<div class="col-span-2 justify-between no-mob">
-  <div class="no-mob mt20 ml15 stats">
+<div class="col-span-2 justify-between mb-none">
+  <div class="mb-none mt20 ml15 stats">
 
     <?php if ($uid['user_id'] > 0) { ?>
       <div class="pb15 mb15">
@@ -231,7 +231,7 @@ if ($user['user_cover_art'] != 'cover_art.jpeg') {
   <?php } ?>
 </main>
 
-<div class="col-span-2 mb-col-12 no-mob">
+<div class="col-span-2 mb-col-12 mb-none">
   <?php if ($data['topics']) { ?>
     <div class="uppercase gray mb5 mt15 text-sm"><?= Translate::get('is reading'); ?></div>
     <span class="d">

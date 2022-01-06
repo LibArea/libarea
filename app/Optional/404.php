@@ -9,9 +9,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 </head>
 
-<body class="max-width mr-auto w-100 grid grid-cols-12 gap-4 pr10 pl10 justify-between">
-  <div class="col-span-2 no-mob"></div>
-  <div class="col-span-8 mb-col-12 bg-white br-rd5 br-box-gray hidden p15 mt15">
+<body class="max-width mr-auto w-100 grid grid-cols-12 justify-between">
+  <div class="col-span-2 mb-none"></div>
+  <div class="col-span-8 mb-col-12 bg-white br-rd5 br-box-gray hidden p20 mt15">
     <div class="mb0">
       <h1 class="text-3xl font-semibold gray mt0 mb0">404</h1>
       <p class="gray-600"><?= Translate::get('the page does not exist'); ?></p>

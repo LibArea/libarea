@@ -4,10 +4,6 @@
  * Медиа-запросы
  */
 
-@media (min-width: 910px) {
-  .pc-mr-20 { margin-right: $px-twenty; }
-}
-
 @media (max-width: 1150px) {
   .home-img {
     width: $width-one-hundred;
@@ -18,8 +14,6 @@
     flex-wrap: wrap;
     flex: 1 1 auto;
   }
-
-  .no-mob-max { display: none; }
 }
 
 @media (max-width: 910px) {
@@ -41,18 +35,12 @@
   .mb-pr-0 { padding-right: $px-zero; }
   .mb-text-xl { font-size: $fontSize-xl; }
   .mb-inline { display: inline; }
-  .gap-4  { gap: 0.5rem; }
-  .no-mob { display: none; }
-  .no-pc,
+  .mb-gap-05  { gap: 0.5rem; }
+  .mb-none { display: none; }
   .mb-block { display: block; }
   .mb-absolute { position: absolute; }
 
   .video-object {
-    width: 320px;
-    height: 210px;
-  }
-
-  .answ-telo .video-object {
     width: 280px;
     height: 155px;
   }

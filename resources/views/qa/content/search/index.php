@@ -1,4 +1,4 @@
-<div class="col-span-2 no-mob"></div>
+<div class="col-span-2 mb-none"></div>
 <main class="col-span-8 mb-col-12 bg-white br-rd5 br-box-gray pt10 pr15 pb5 pl15">
   <div class="col-span-2 mb20">
     <div class="ml16 mb15 text-2xl">
@@ -44,4 +44,4 @@
     <a class="mb20 block" href="/"><?= Translate::get('to main'); ?>...</a>
   <?php } ?>
 </main>
-<div class="col-span-2 no-mob"></div>
+<div class="col-span-2 mb-none"></div>

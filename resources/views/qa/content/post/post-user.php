@@ -7,7 +7,7 @@
   </div>
   <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('user', ['login' => $data['user_login']]) . '/posts'); ?>
 </main>
-<aside class="col-span-3 relative no-mob">
+<aside class="col-span-3 relative mb-none">
   <div class="sticky top60">
     <div class="bg-white br-rd5 br-box-gray p15">
       <?= tabs_nav(

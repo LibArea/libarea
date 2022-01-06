@@ -1,5 +1,5 @@
 <?php $post = $data['post']; ?>
-<div class="col-span-1 no-mob center">
+<div class="col-span-1 mb-none center">
   <div class="sticky top20">
     <?= votes($uid['user_id'], $post, 'post', 'ps', 'text-2xl middle', 'block'); ?>
     <div class="pt20">
@@ -109,7 +109,7 @@
       </div>
 
       <div class="br-box-gray dark-br-black flex items-center mb5">
-        <div class="left p10 no-pc">
+        <div class="left p10 none mb-block">
           <?= votes($uid['user_id'], $post, 'post', 'mob', 'text-2xl mr5 middle'); ?>
         </div>
 
@@ -124,7 +124,7 @@
               </a>
             </div>
           </li>
-          <li class="left p10 no-mob">
+          <li class="left p10 mb-none">
             <div class="text-sm gray-400 mb5">
               <?= Translate::get('last answer'); ?>
             </div>
@@ -138,7 +138,7 @@
               <?php } ?>
             </div>
           </li>
-          <li class="left p10 no-mob">
+          <li class="left p10 mb-none">
             <div class="text-2xl gray-600 center mb5">
               <?php if ($post['post_hits_count'] == 0) { ?>
                 <span class="gray-400 text-sm">—</span>
@@ -150,7 +150,7 @@
               <?= num_word($post['post_hits_count'], Translate::get('num-view'), false); ?>
             </div>
           </li>
-          <li class="left p10 no-mob">
+          <li class="left p10 mb-none">
             <div class="text-2xl gray-600 center mb5">
               <?php if ($post['amount_content'] == 0) { ?>
                 <span class="gray-400 text-sm">—</span>
@@ -182,7 +182,7 @@
           <?php } ?>
         </div>
 
-        <div class="right ml15 p10 no-pc">
+        <div class="right ml15 p10 none mb-block">
           <?= favorite($uid['user_id'], $post['post_id'], 'post', $post['favorite_tid'], 'mob', 'text-2xl'); ?>
         </div>
       </div>
@@ -228,7 +228,7 @@
     echo no_content(Translate::get('this is a draft'), 'bi bi-journal-medical');
   } ?>
 </main>
-<aside class="col-span-3 relative br-rd5 no-mob">
+<aside class="col-span-3 relative br-rd5 mb-none">
 
   <?php if (!empty($data['topics'])) { ?>
     <div class="br-box-gray box-shadow-all bg-white br-rd5 mb15 p15">

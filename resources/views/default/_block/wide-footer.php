@@ -1,6 +1,6 @@
 <footer class="w-100 mt15 p15 bg-zinc-800 clear">
   <div class="col-span-12 max-width grid grid-cols-12 mr-auto">
-    <div class="text-info col-span-3 left no-mob ml10">
+    <div class="text-info col-span-3 left mb-none ml10">
       <h4 class="mt5 mb5 uppercase font-light white"><?= Translate::get('info'); ?></h4>
       <a class="table white gray-hover text-sm mb5" title="<?= Translate::get('all domains'); ?>" href="<?= getUrlByName('web'); ?>">
         <?= Translate::get('domains'); ?>
@@ -12,7 +12,7 @@
         <?= Translate::get('users'); ?>
       </a>
     </div>
-    <div class="text-info col-span-3 no-mob">
+    <div class="text-info col-span-3 mb-none">
       <h4 class="mt5 mb5 uppercase font-light white"><?= Translate::get('other'); ?></h4>
       <a class="table white gray-hover text-sm mb5" title="<?= Translate::get('all answers'); ?>" href="<?= getUrlByName('answers'); ?>">
         <?= Translate::get('answers'); ?>
@@ -21,12 +21,12 @@
         <?= Translate::get('comments'); ?>
       </a>
     </div>
-    <div class="text-info col-span-3 no-mob">
+    <div class="text-info col-span-3 mb-none">
       <h4 class="mt5 mb5 uppercase font-light white"><?= Translate::get('help'); ?></h4>
       <a class="table white gray-hover text-sm mb5" title="<?= Translate::get('info'); ?>" href="/info/<?= Config::get('facets.page-one'); ?>">
         <?= Translate::get('info'); ?>
       </a>
-      <a class="table white gray-hover text-sm no-mob" title="<?= Translate::get('privacy'); ?>" href="/info/<?= Config::get('facets.page-two'); ?>">
+      <a class="table white gray-hover text-sm mb-none" title="<?= Translate::get('privacy'); ?>" href="/info/<?= Config::get('facets.page-two'); ?>">
         <?= Translate::get('privacy'); ?>
       </a>
     </div>

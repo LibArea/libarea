@@ -1,4 +1,4 @@
-<div class="sticky mt5 top0 col-span-2 justify-between no-mob">
+<div class="sticky mt5 top0 col-span-2 justify-between mb-none">
   <?= tabs_nav(
         'menu',
         $data['type'],

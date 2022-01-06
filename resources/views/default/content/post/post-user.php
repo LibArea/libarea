@@ -1,4 +1,4 @@
-<div class="col-span-2 justify-between no-mob">
+<div class="col-span-2 justify-between mb-none">
   <nav class="sticky top70">
   <?= tabs_nav(
     'menu',
@@ -18,7 +18,7 @@
   </div>
   <?= pagination($data['pNum'], $data['pagesCount'], $data['sheet'], getUrlByName('user', ['login' => $data['user_login']]) . '/posts'); ?>
 </main>
-<aside class="col-span-3 relative no-mob">
+<aside class="col-span-3 relative mb-none">
     <div class="bg-white br-rd5 br-box-gray p15">
       <nav class="sticky top70">
       <?= tabs_nav(

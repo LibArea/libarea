@@ -7,7 +7,7 @@
   </div>
 <?php } ?>
 
-<div class="col-span-2 justify-between no-mob">
+<div class="col-span-2 justify-between mb-none">
   <nav class="sticky top70">
   <?= tabs_nav(
     'menu',
@@ -65,7 +65,7 @@
   </div>
 </main>
 
-<aside class="col-span-3 mb-col-12 relative no-mob">
+<aside class="col-span-3 mb-col-12 relative mb-none">
   <?php if ($uid['user_id'] == 0) { ?>
     <?= import('/_block/sidebar/login', ['uid' => $uid]); ?>
   <?php } ?>

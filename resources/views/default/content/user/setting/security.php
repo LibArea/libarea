@@ -1,4 +1,4 @@
-<div class="col-span-2 justify-between no-mob">
+<div class="col-span-2 justify-between mb-none">
   <nav class="sticky top70">
   <?= tabs_nav(
     'menu',
@@ -12,7 +12,7 @@
 <main class="col-span-7 mb-col-12">
 
   <div class="bg-white flex flex-row items-center justify-between br-box-gray br-rd5 p15 mb15">
-    <p class="m0 no-mob"><?= Translate::get($data['sheet']); ?></p>
+    <p class="m0 mb-none"><?= Translate::get($data['sheet']); ?></p>
     <?= import('/content/user/setting/nav', ['data' => $data, 'uid' => $uid]); ?>
   </div>
 

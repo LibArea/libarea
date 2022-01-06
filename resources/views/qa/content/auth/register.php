@@ -1,4 +1,4 @@
-<div class="col-span-2 no-mob"></div>
+<div class="col-span-2 mb-none"></div>
 <main class="col-span-8 mb-col-12 bg-white br-rd5 br-box-gray hidden p15">
   <h1 class="mt0 mb10 text-2xl center font-normal"><?= Translate::get($data['sheet']); ?></h1>
   <form class="form max-w300 mb20 block" action="<?= getUrlByName('register'); ?>/add" method="post">
