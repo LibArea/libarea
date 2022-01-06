@@ -20,7 +20,7 @@
         <?php if ($answer['answer_is_deleted'] == 0) { ?>
           <div class="flex text-sm mb5">
             <?= user_avatar_img($answer['user_avatar'], 'small', $answer['user_login'], 'w18'); ?>
-            <a class="gray mr5 ml5" href="<?= getUrlByName('user', ['login' => $answer['user_login']]); ?>">
+            <a class="gray mr5 ml5" href="<?= getUrlByName('profile', ['login' => $answer['user_login']]); ?>">
               <?= $answer['user_login']; ?>
             </a>
             <span class="gray-400 lowercase"><?= $answer['date']; ?></span>

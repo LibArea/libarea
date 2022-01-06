@@ -67,30 +67,26 @@ Route::before('Designator', [UserData::USER_FIRST_LEVEL, '>='])->getGroup();
     Route::get('/post/add/{topic_id}')->controller('Post\AddPostController', ['post'])->where(['topic_id' => '[0-9]+']);
     Route::get('/page/add/{topic_id}')->controller('Post\AddPostController', ['page'])->where(['topic_id' => '[0-9]+']);
 
-    Route::get('/u/{login}/setting')->controller('User\SettingController@settingForm')->where(['login' => '[A-Za-z0-9]+'])->name('setting'); 
-    Route::get('/u/{login}/setting/avatar')->controller('User\SettingController@avatarForm')->where(['login' => '[A-Za-z0-9]+'])->name('setting.avatar');
-    Route::get('/u/{login}/setting/security')->controller('User\SettingController@securityForm')->where(['login' => '[A-Za-z0-9]+'])->name('setting.security');
-    Route::get('/u/{login}/setting/notifications')->controller('User\SettingController@notificationsForm')->where(['login' => '[A-Za-z0-9]+'])->name('setting.notifications');
-
     Route::get('/post/img/{id}/remove')->controller('Post\EditPostController@imgPostRemove')->where(['id' => '[0-9]+']);
     Route::get('/u/{login}/delete/cover')->controller('User\SettingController@coverRemove')->where(['login' => '[A-Za-z0-9]+']); 
+    Route::get('/u/{login}/messages/mess')->controller('MessagesController@messages')->where(['login' => '[A-Za-z0-9]+'])->name('send.messages');
+
+
+    Route::get('/setting')->controller('User\SettingController@settingForm')->name('setting'); 
+    Route::get('/setting/avatar')->controller('User\SettingController@avatarForm')->name('setting.avatar');
+    Route::get('/setting/security')->controller('User\SettingController@securityForm')->name('setting.security');
+    Route::get('/setting/notifications')->controller('User\SettingController@notificationsForm')->name('setting.notifications');
+    Route::get('/messages')->controller('MessagesController')->name('messages');   
+    Route::get('/messages/{id}')->controller('MessagesController@dialog')->where(['id' => '[0-9]+'])->name('dialogues'); 
+	Route::get('/notifications')->controller('NotificationsController')->name('notifications'); 
+    Route::get('/notifications/{id}')->controller('NotificationsController@read')->where(['id' => '[0-9]+'])->name('notif.read');  
+    Route::get('/notifications/delete')->controller('NotificationsController@remove')->name('notif.remove');  
+    Route::get('/favorites')->controller('User\UserController@favorites')->name('favorites');
+    Route::get('/subscribed')->controller('User\UserController@subscribed')->name('subscribed');
+    Route::get('/drafts')->controller('User\UserController@drafts')->name('drafts');
+    Route::get('/invitations')->controller('User\InvitationsController@invitationForm')->name('invitations');
 
     Route::get('/logout')->controller('Auth\LogoutController')->name('logout');
-
-    Route::get('/u/{login}/messages')->controller('MessagesController')->where(['login' => '[A-Za-z0-9]+'])->name('user.messages');   
-    Route::get('/messages/read/{id}')->controller('MessagesController@dialog')->where(['id' => '[0-9]+'])->name('user.dialogues'); 
-    Route::get('/u/{login}/mess')->controller('MessagesController@messages')->where(['login' => '[A-Za-z0-9]+'])->name('user.send.messages'); 
-
-	Route::get('/u/{login}/notifications')->controller('NotificationsController')->where(['login' => '[A-Za-z0-9]+'])->name('user.notifications'); 
-    Route::get('/notifications/read/{id}')->controller('NotificationsController@read')->where(['id' => '[0-9]+'])->name('notif.read');  
-    Route::get('/notifications/delete')->controller('NotificationsController@remove')->name('notif.remove');  
-    
-    Route::get('/u/{login}/favorites')->controller('User\UserController@favorites')->where(['login' => '[A-Za-z0-9]+'])->name('user.favorites');
-    Route::get('/u/{login}/subscribed')->controller('User\UserController@subscribed')->where(['login' => '[A-Za-z0-9]+'])->name('user.subscribed');
-
-    Route::get('/u/{login}/drafts')->controller('User\UserController@drafts')->where(['login' => '[A-Za-z0-9]+'])->name('user.drafts');
-    
-    Route::get('/u/{login}/invitations')->controller('User\InvitationsController@invitationForm')->where(['login' => '[A-Za-z0-9]+'])->name('user.invitations');
 
     Route::get('/topics/my')->controller('Facets\AllFacetController', ['topics.my', 'topic'])->name('topics.my');
     Route::get('/topics/my/page/{page?}')->controller('Facets\AllFacetController', ['topics.my', 'topic'])->where(['page' => '[0-9]+']); 
@@ -141,16 +137,13 @@ Route::get('/post/{id}/{slug}')->controller('Post\PostController')->where(['id' 
 Route::get('/users')->controller('User\UserController', ['users.all', 'user'])->name('users.all');
 Route::get('/users/page/{page?}')->controller('User\UserController')->where(['page' => '[0-9]+']);
 
-Route::get('/u/{login}')->controller('User\UserController@profile')->where(['login' => '[A-Za-z0-9]+'])->name('user');
-
-Route::get('/u/{login}/posts')->controller('Post\PostController@posts', ['user.posts.all', 'user'])->where(['login' => '[A-Za-z0-9]+'])->name('posts.user');
-Route::get('/u/{login}/posts/page/{page?}')->controller('Post\PostController@posts', ['user.posts.all', 'user'])->where(['page' => '[0-9]+', 'login' => '[A-Za-z0-9]+']);
-
-Route::get('/u/{login}/answers')->controller('Answer\AnswerController@userAnswers')->where(['login' => '[A-Za-z0-9]+'])->name('answers.user');
-Route::get('/u/{login}/answers/page/{page?}')->controller('Answer\AnswerController@userAnswers')->where(['page' => '[0-9]+', 'login' => '[A-Za-z0-9]+']);
-
-Route::get('/u/{login}/comments')->controller('Comment\CommentController@userComments')->where(['login' => '[A-Za-z0-9]+'])->name('comments.user');
-Route::get('/u/{login}/comments/page/{page?}')->controller('Comment\CommentController@userComments')->where(['page' => '[0-9]+', 'login' => '[A-Za-z0-9]+']);
+Route::get('/u/{login}')->controller('User\ProfileController', ['profile.posts', 'user'])->where(['login' => '[A-Za-z0-9]+'])->name('profile');
+Route::get('/u/{login}/posts')->controller('User\ProfileController@posts', ['profile.posts', 'user'])->where(['login' => '[A-Za-z0-9]+'])->name('profile.posts');
+Route::get('/u/{login}/posts/page/{page?}')->controller('User\ProfileController@posts', ['profile.posts', 'user'])->where(['page' => '[0-9]+', 'login' => '[A-Za-z0-9]+']);
+Route::get('/u/{login}/answers')->controller('User\ProfileController@answers')->where(['login' => '[A-Za-z0-9]+'])->name('profile.answers');
+Route::get('/u/{login}/answers/page/{page?}')->controller('User\ProfileController@answers')->where(['page' => '[0-9]+', 'login' => '[A-Za-z0-9]+']);
+Route::get('/u/{login}/comments')->controller('User\ProfileController@comments')->where(['login' => '[A-Za-z0-9]+'])->name('profile.comments');
+Route::get('/u/{login}/comments/page/{page?}')->controller('User\ProfileController@comments')->where(['page' => '[0-9]+', 'login' => '[A-Za-z0-9]+']);
 
 Route::get('/comments')->controller('Comment\CommentController', ['comments'])->name('comments');
 Route::get('/comments/page/{page?}')->controller('Comment\CommentController', ['comments'])->where(['page' => '[0-9]+']);

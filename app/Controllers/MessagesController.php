@@ -20,11 +20,6 @@ class MessagesController extends MainController
 
     public function index()
     {
-        $login  = Request::get('login');
-        if ($login != $this->uid['user_login']) {
-            redirect(getUrlByName('user.messages', ['login' => $this->uid['user_login']]));
-        }
-
         if ($messages_dialog = MessagesModel::getMessages($this->uid['user_id'])) {
 
             // $messages_total_rows = MessagesModel::getMessagesTotal($this->uid['user_id']);
@@ -194,6 +189,6 @@ class MessagesController extends MainController
 
         MessagesModel::sendMessage($this->uid['user_id'], $recipient_id, $content);
 
-        redirect(getUrlByName('user.messages', ['login' => $this->uid['user_login']]));
+        redirect(getUrlByName('messages'));
     }
 }

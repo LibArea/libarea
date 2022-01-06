@@ -42,10 +42,10 @@
     <div class="max-width mr-auto w-100 grid grid-cols-6 gap-2 justify-between">
       <?php foreach ($data['users'] as $ind => $user) { ?>
         <div class="center inline pr10 pl10 mb20 mb-col-2">
-          <a href="<?= getUrlByName('user', ['login' => $user['user_login']]); ?>">
+          <a href="<?= getUrlByName('profile', ['login' => $user['user_login']]); ?>">
             <?= user_avatar_img($user['user_avatar'], 'max', $user['user_login'], 'br-rd-50 w64'); ?>
           </a>
-          <a class="block dark-gray-300 black mt5" href="<?= getUrlByName('user', ['login' => $user['user_login']]); ?>">
+          <a class="block dark-gray-300 black mt5" href="<?= getUrlByName('profile', ['login' => $user['user_login']]); ?>">
             <?= $user['user_login']; ?>
           </a>
           <?php if ($user['user_name']) { ?>

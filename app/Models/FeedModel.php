@@ -27,7 +27,7 @@ class FeedModel extends MainModel
             case 'admin.posts.ban':
                 $string     = "WHERE post_is_deleted = :qa AND post_type != 'page'";
                 break;
-            case 'user.posts.all':
+            case 'profile.posts':
                 $string     = "WHERE post_user_id  = :qa AND post_draft = 0";
                 break;     
         }
@@ -47,7 +47,7 @@ class FeedModel extends MainModel
         $sort = "ORDER BY post_answers_count DESC";
         if ($sheet == 'facet.feed') {
             $sort = "ORDER BY post_top DESC, post_date DESC";
-        } elseif ($sheet == 'admin.posts.all' || $sheet == 'admin.posts.ban') {
+        } elseif ($sheet == 'admin.posts.all' || $sheet == 'admin.posts.ban' || $sheet == 'profile.posts') {
             $sort = "ORDER BY post_date DESC";
         }
 
@@ -132,7 +132,7 @@ class FeedModel extends MainModel
             case 'admin.posts.ban':
                 $string     = "WHERE post_is_deleted = :qa";
                 break;
-            case 'user.posts.all':
+            case 'profile.posts':
                 $string     = "WHERE post_user_id  = :qa AND post_draft = 0";
                 break;     
         }

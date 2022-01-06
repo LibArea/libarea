@@ -33,7 +33,7 @@
           <?php if ($data['user']['user_cover_art'] != 'cover_art.jpeg') { ?>
             <div class="relative mr15">
               <img class="block br-box-gray max-w-100" src="<?= cover_url($data['user']['user_cover_art'], 'user'); ?>">
-              <a class="right text-sm" href="<?= getUrlByName('user', ['login' => $uid['user_login']]); ?>/delete/cover">
+              <a class="right text-sm" href="<?= getUrlByName('profile', ['login' => $uid['user_login']]); ?>/delete/cover">
                 <?= Translate::get('remove'); ?>
               </a>
             </div>

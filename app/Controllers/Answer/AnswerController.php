@@ -5,7 +5,6 @@ namespace App\Controllers\Answer;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
-use App\Models\User\UserModel;
 use App\Models\AnswerModel;
 use Content, Translate;
 
@@ -54,50 +53,6 @@ class AnswerController extends MainController
                     'sheet'         => 'answers',
                     'type'          => $type,
                     'answers'       => $result,
-                ]
-            ]
-        );
-    }
-
-    // Ответы участника
-    public function userAnswers()
-    {
-        $page   = Request::getInt('page');
-        $page   = $page == 0 ? 1 : $page;
-
-        $login  = Request::get('login');
-        $user   = UserModel::getUser($login, 'slug');
-        pageError404($user);
-
-        $answers    = AnswerModel::userAnswers($page, $this->limit, $user['user_id'], $this->uid['user_id']);
-        $pagesCount = AnswerModel::userAnswersCount($user['user_id']);
-
-        $result = [];
-        foreach ($answers as $ind => $row) {
-            $row['content'] = Content::text($row['answer_content'], 'text');
-            $row['date']    = lang_date($row['answer_date']);
-            $result[$ind]   = $row;
-        }
-
-        $m = [
-            'og'         => false,
-            'twitter'    => false,
-            'imgurl'     => false,
-            'url'        => getUrlByName('answers.user', ['login' => $user['user_login']]),
-        ];
-
-        return agRender(
-            '/answer/answer-user',
-            [
-                'meta'  => meta($m, Translate::get('answers') . ' ' . $user['user_login'], Translate::get('responses-members') . ' ' . $user['user_login']),
-                'uid'   => $this->uid,
-                'data'  => [
-                    'pagesCount'    => ceil($pagesCount / $this->limit),
-                    'pNum'          => $page,
-                    'sheet'         => 'user-answers',
-                    'type'          => 'answers.user',
-                    'answers'       => $result,
-                    'user_login'    => $user['user_login'],
                 ]
             ]
         );

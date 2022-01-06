@@ -20,11 +20,7 @@ class SettingController extends MainController
     // Форма настройки профиля
     function settingForm()
     {
-        // Ошибочный Slug в Url
         $user   = UserModel::getUser($this->uid['user_login'], 'slug');
-        if (Request::get('login') != $user['user_login']) {
-            redirect(getUrlByName('setting', ['login' => $user['user_login']]));
-        }
 
         return agRender(
             '/user/setting/setting',
@@ -92,11 +88,6 @@ class SettingController extends MainController
     // Форма загрузки аватарки
     function avatarForm()
     {
-        // Ошибочный Slug в Url
-        if (Request::get('login') != $this->uid['user_login']) {
-            redirect(getUrlByName('setting.avatar', ['login' => $this->uid['user_login']]));
-        }
-
         Request::getResources()->addBottomScript('/assets/js/uploads.js');
 
         return agRender(
@@ -139,10 +130,6 @@ class SettingController extends MainController
     // Форма изменение пароля
     function securityForm()
     {
-        if (Request::get('login') != $this->uid['user_login']) {
-            redirect(getUrlByName('setting.security', ['login' => $this->uid['user_login']]));
-        }
-
         return agRender(
             '/user/setting/security',
             [
@@ -199,9 +186,6 @@ class SettingController extends MainController
     function coverRemove()
     {
         $redirect   = getUrlByName('setting.avatar', ['login' => $this->uid['user_login']]);
-        if (Request::get('login') != $this->uid['user_login']) {
-            redirect($redirect);
-        }
 
         $user = UserModel::getUser($this->uid['user_login'], 'slug');
 
@@ -231,11 +215,6 @@ class SettingController extends MainController
     // Форма настройки предпочтений участника
     function notificationsForm()
     {
-        // Ошибочный Slug в Url
-        if (Request::get('login') != $this->uid['user_login']) {
-            redirect(getUrlByName('setting.notifications', ['login' => $this->uid['user_login']]));
-        }
-
         return agRender(
             '/user/setting/notifications',
             [

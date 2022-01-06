@@ -6,8 +6,8 @@ use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
 use App\Models\User\{UserModel, BadgeModel};
-use App\Models\{FacetModel, NotificationsModel, PostModel};
-use Content, Config, Validation, Translate;
+use App\Models\{NotificationsModel, PostModel};
+use Content, Translate;
 
 class UserController extends MainController
 {
@@ -54,79 +54,10 @@ class UserController extends MainController
         );
     }
 
-    // Member page (profile) 
-    // Страница участника (профиль)
-    function profile()
-    {
-        $login = Request::get('login');
-        $user  = UserModel::getUser($login, 'slug');
-        pageError404($user);
-
-        if (!$user['user_about']) {
-            $user['user_about'] = Translate::get('riddle') . '...';
-        }
-
-        $site_name  = Config::get('meta.name');
-        $meta_title = sprintf(Translate::get('title-profile'), $user['user_login'], $user['user_name'], $site_name);
-        $meta_desc  = sprintf(Translate::get('desc-profile'), $user['user_login'], $user['user_about'], $site_name);
-
-        if ($user['user_ban_list'] == 1) {
-            Request::getHead()->addMeta('robots', 'noindex');
-        }
-
-        // Profile Views (просмотры профиля)
-        if (!isset($_SESSION['usernumbers'])) {
-            $_SESSION['usernumbers'] = [];
-        }
-
-        if (!isset($_SESSION['usernumbers'][$user['user_id']])) {
-            UserModel::userHits($user['user_id']);
-            $_SESSION['usernumbers'][$user['user_id']] = $user['user_id'];
-        }
-
-        $isBan = '';
-        if (UserData::checkAdmin()) {
-            Request::getResources()->addBottomScript('/assets/js/admin.js');
-            $isBan = UserModel::isBan($user['user_id']);
-        }
-
-        $m = [
-            'og'         => true,
-            'twitter'    => true,
-            'imgurl'     => '/uploads/users/avatars/' . $user['user_avatar'],
-            'url'        => getUrlByName('user', ['login' => $user['user_login']]),
-        ];
-
-        return agRender(
-            '/user/profile',
-            [
-                'meta'  => meta($m, $meta_title, $meta_desc),
-                'uid'   => $this->uid,
-                'data'  => [
-                    'user_created_at'   => lang_date($user['user_created_at']),
-                    'count'             => UserModel::contentCount($user['user_id']),
-                    'topics'            => FacetModel::getFacetsAll(1, 10, $user['user_id'], 'topics.my'),
-                    'blogs'             => FacetModel::getOwnerFacet($user['user_id'], 'blog'),
-                    'badges'            => BadgeModel::getBadgeUserAll($user['user_id']),
-                    'user'              => $user,
-                    'isBan'             => $isBan,
-                    'type'              => 'profile',
-                    'participation'     => FacetModel::participation($user['user_id']),
-                    'post'              => PostModel::getPost($user['user_my_post'], 'id', $this->uid),
-                    'button_pm'         => Validation::accessPm($this->uid, $user['user_id'], Config::get('general.tl_add_pm'))
-                ]
-            ]
-        );
-    }
-
     // Member bookmarks page
     // Страница закладок участника
     function favorites()
     {
-        if (Request::get('login') != $this->uid['user_login']) {
-            redirect(getUrlByName('user.favorites', ['login' => $this->uid['user_login']]));
-        }
-
         $favorites = UserModel::userFavorite($this->uid['user_id']);
 
         $result = [];
@@ -159,10 +90,6 @@ class UserController extends MainController
     // Страница черновиков участника
     function drafts()
     {
-        if (Request::get('login') != $this->uid['user_login']) {
-            redirect(getUrlByName('user.drafts', ['login' => $this->uid['user_login']]));
-        }
-
         return agRender(
             '/user/draft',
             [
@@ -181,10 +108,6 @@ class UserController extends MainController
     // Страница предпочтений пользователя
     public function subscribed()
     {
-        if (Request::get('login') != $this->uid['user_login']) {
-            redirect(getUrlByName('user.subscribed', ['login' => $this->uid['user_login']]));
-        }
-
         $focus_posts = NotificationsModel::getFocusPostsListUser($this->uid['user_id']);
 
         $result = [];

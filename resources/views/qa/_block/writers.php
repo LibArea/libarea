@@ -10,7 +10,7 @@
           <?= user_avatar_img($writer['user_avatar'], 'max', $writer['user_login'], 'w54'); ?>
         </div>
         <div class="mt10">
-          <a href="<?= getUrlByName('user', ['login' => $writer['user_login']]); ?>"><?= $writer['user_login']; ?></a>
+          <a href="<?= getUrlByName('profile', ['login' => $writer['user_login']]); ?>"><?= $writer['user_login']; ?></a>
           <div class="mr13 gray-600 mr15">
             <?php if ($writer['user_about']) { ?>
               <?= $writer['user_about']; ?>

@@ -42,7 +42,7 @@ if ($blog['facet_is_deleted'] == 0) { ?>
         <?php if ($blog['facet_is_deleted'] == 0) { ?>
           <div class="br-box-gray p15 mb15 br-rd5 bg-white text-sm">
             <div class="uppercase gray mb5"> <?= Translate::get('created by'); ?></div>
-            <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('user', ['login' => $data['user']['user_login']]); ?>">
+            <a class="flex relative pt5 pb5 items-center hidden gray-600" href="<?= getUrlByName('profile', ['login' => $data['user']['user_login']]); ?>">
               <?= user_avatar_img($data['user']['user_avatar'], 'max', $data['user']['user_login'], 'w30 mr5 br-rd-50'); ?>
               <span class="ml5"><?= $data['user']['user_login']; ?></span>
             </a>

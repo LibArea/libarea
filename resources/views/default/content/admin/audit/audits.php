@@ -40,7 +40,7 @@
             </div>
 
             (id:<?= $user_id; ?>)
-            <a href="<?= getUrlByName('user', ['login' => $audit['user_login']]); ?>">
+            <a href="<?= getUrlByName('profile', ['login' => $audit['user_login']]); ?>">
               <?= $audit['user_login']; ?>
             </a>
             <?php if ($audit['user_limiting_mode'] == 1) { ?>

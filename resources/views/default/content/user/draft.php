@@ -20,13 +20,13 @@
         $pages = [
           [
             'id' => 'favorites',
-            'url' => getUrlByName('favorites', ['login' => $uid['user_login']]),
+            'url' => getUrlByName('favorites'),
             'content' => Translate::get('favorites'),
             'icon' => 'bi bi-bookmark'
           ],
           [
             'id' => 'subscribed',
-            'url' => getUrlByName('user.subscribed', ['login' => $uid['user_login']]),
+            'url' => getUrlByName('subscribed'),
             'content' => Translate::get('subscribed'),
             'icon' => 'bi bi-bookmark-plus'
           ],

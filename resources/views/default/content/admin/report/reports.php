@@ -22,7 +22,7 @@
             <?= $report['report_id']; ?>
             </span>
           <td>
-            <a class="gray" href="<?= getUrlByName('user', ['login' => $report['user']['user_login']]); ?>">
+            <a class="gray" href="<?= getUrlByName('profile', ['login' => $report['user']['user_login']]); ?>">
               <?= user_avatar_img($report['user']['user_avatar'], 'max', $report['user']['user_login'], 'w24 mr5'); ?>
               <?= $report['user']['user_login']; ?>
             </a>

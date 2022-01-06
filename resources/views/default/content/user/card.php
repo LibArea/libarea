@@ -7,12 +7,12 @@
       </div>
       <div class="w-100">
         <?php if ($uid['user_id'] > 0 && $uid['user_login'] != $user['user_login']) { ?>
-          <a class="right btn btn-primary block" href="<?= getUrlByName('user.send.messages', ['login' => $user['user_login']]); ?>">
+          <a class="right btn btn-primary block" href="<?= getUrlByName('send.messages', ['login' => $user['user_login']]); ?>">
             <i class="bi bi-envelope middle mr5"></i>
             <?= Translate::get('message'); ?>
           </a>
         <?php } ?>
-        <a class="block text-2xl" href="<?= getUrlByName('user', ['login' => $user['user_login']]); ?>">
+        <a class="block text-2xl" href="<?= getUrlByName('profile', ['login' => $user['user_login']]); ?>">
           <?= $user['user_login']; ?>
         </a>
         <?php if ($user['user_name']) { ?>

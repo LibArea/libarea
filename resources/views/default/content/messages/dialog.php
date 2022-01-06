@@ -41,7 +41,7 @@
               <?= user_avatar_img($ava, 'max', $login, 'br-rd-50 w44 mr5'); ?>
               <div id="content_<?= $key; ?>" class="content_<?= $key; ?>"></div>
             </div>
-            <a class="flex black dark-gray-300 flex-center" href="<?= getUrlByName('user', ['login' => $login]); ?>">
+            <a class="flex black dark-gray-300 flex-center" href="<?= getUrlByName('profile', ['login' => $login]); ?>">
               <div class="ml5">
                 <?= $login; ?>
                 <div class="gray-400 lowercase text-sm">
@@ -72,7 +72,7 @@
       <?php if ($val['user_id'] != $uid['user_id']) { ?>
         <div class="flex relative pt5 pb5 items-center hidden">
           <?= user_avatar_img($val['user_avatar'], 'max', $val['user_login'], 'br-rd-50 w44 mr15'); ?>
-          <a href="<?= getUrlByName('user.dialogues', ['id' => $val['dialog_id']]); ?>"><?= $val['user_login']; ?></a>
+          <a href="<?= getUrlByName('dialogues', ['id' => $val['dialog_id']]); ?>"><?= $val['user_login']; ?></a>
         </div>
       <?php } ?>
     <?php } ?>

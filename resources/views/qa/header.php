@@ -84,7 +84,7 @@ $facet = $data['facet'] ?? false; ?>
               <i class="bi bi-brightness-high gray-400 text-xl"></i>
             </div>
 
-            <a class="gray-400 p10 text-xl ml20 mb-ml-10" href="<?= getUrlByName('user.notifications', ['login' => $uid['user_login']]); ?>">
+            <a class="gray-400 p10 text-xl ml20 mb-ml-10" href="<?= getUrlByName('notifications'); ?>">
               <?php $notif = \App\Controllers\NotificationsController::setBell($uid['user_id']); ?>
               <?php if (!empty($notif)) { ?>
                 <?php if ($notif['notification_action_type'] == 1) { ?>

@@ -19,7 +19,7 @@ class EditWebController extends MainController
 
     // Форма редактирование домена
     public function index()
-    {
+    {  
         Validation::validTl($this->uid['user_trust_level'], UserData::REGISTERED_ADMIN, 0, 1);
 
         $domain_id  = Request::getInt('id');

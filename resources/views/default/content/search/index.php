@@ -28,7 +28,7 @@
         <?= html_facet($post['facet_list'], 'topic', 'black mr15 inline text-sm'); ?>
         <div class="gray"><?= $post['content']; ?>...</div>
         <div class="flex flex-row items-center justify-between mt10 text-sm gray">
-          <a class="flex flex-row items-center black mr15 gray" href="<?= getUrlByName('user', ['login' => $post['user_login']]); ?>">
+          <a class="flex flex-row items-center black mr15 gray" href="<?= getUrlByName('profile', ['login' => $post['user_login']]); ?>">
             <?= user_avatar_img($post['user_avatar'], 'max', $post['user_login'], 'w21 mr10'); ?>
             <?= $post['user_login']; ?>
           </a>

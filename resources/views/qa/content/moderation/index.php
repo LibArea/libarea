@@ -12,7 +12,7 @@
       <?php foreach ($data['moderations'] as  $mod) { ?>
         <div class="mb15 br-bottom p5">
           <div class="text-sm lowercase">
-            <a class="black" href="<?= getUrlByName('user', ['login' => $mod['user_login']]); ?>">
+            <a class="black" href="<?= getUrlByName('profile', ['login' => $mod['user_login']]); ?>">
               <?= user_avatar_img($mod['user_avatar'], 'small', $mod['user_login'], 'w24'); ?>
               <span class="mr5 ml5">
                 <?= $mod['user_login']; ?>

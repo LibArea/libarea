@@ -20,13 +20,6 @@ class NotificationsController extends MainController
     // Страница уведомлений участника
     public function index()
     {
-        // Если страница закладок не участника
-        $login  = Request::get('login');
-        if ($login != $this->uid['user_login']) {
-            redirect(getUrlByName('user.notifications', ['login' => $this->uid['user_login']]));
-        }
-
-        // Данные участника и список уведомлений
         $list = NotificationsModel::listNotification($this->uid['user_id']);
 
         $result = [];
@@ -73,7 +66,7 @@ class NotificationsController extends MainController
     {
         NotificationsModel::setRemove($this->uid['user_id']);
 
-        redirect(getUrlByName('user.notifications', ['login' => $this->uid['user_login']]));
+        redirect(getUrlByName('notifications'));
     }
 
     public static function setBell($user_id)

@@ -21,7 +21,7 @@
                     <?php } ?>
                     <?= import('/_block/show-ip', ['ip' => $answer['answer_ip'], 'uid' => $uid]); ?>
                   </div>
-                  <a class="qa-login" href="<?= getUrlByName('user', ['login' => $answer['user_login']]); ?>"><?= $answer['user_login']; ?></a>
+                  <a class="qa-login" href="<?= getUrlByName('profile', ['login' => $answer['user_login']]); ?>"><?= $answer['user_login']; ?></a>
                 </div>
                 <?= $answer['answer_content'] ?>
               </div>
@@ -74,7 +74,7 @@
               <div class="text-sm pt5 pr5 pb5 pl5">
                 <?= $comment['comment_content'] ?>
                 <span class="gray">
-                  — <a class="gray" href="<?= getUrlByName('user', ['login' => $comment['user_login']]); ?>"><?= $comment['user_login']; ?></a>
+                  — <a class="gray" href="<?= getUrlByName('profile', ['login' => $comment['user_login']]); ?>"><?= $comment['user_login']; ?></a>
                   <span class="lowercase gray">
                     &nbsp; <?= lang_date($comment['comment_date']); ?>
                   </span>

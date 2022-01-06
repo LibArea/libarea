@@ -37,7 +37,7 @@ class SendEmail
                 break;
             case 'appealed':
                 $subject    = sprintf($data['appealed.subject'], Config::get('meta.name'));
-                $message    = sprintf($data['appealed.message'], $url . getUrlByName('user.notifications', ['login' => $user['user_login']]));
+                $message    = sprintf($data['appealed.message'], $url . getUrlByName('notifications'));
                 break;
             case 'activate.email':
                 $subject    = sprintf($data['activate.email.subject'], Config::get('meta.name'));

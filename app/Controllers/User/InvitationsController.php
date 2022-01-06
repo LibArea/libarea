@@ -36,10 +36,6 @@ class InvitationsController extends MainController
     // Страница инвайтов пользователя
     function invitationForm()
     {
-        if (Request::get('login') != $this->uid['user_login']) {
-            redirect(getUrlByName('user.invitations', ['login' => $this->uid['user_login']]));
-        }
-
         return agRender(
             '/user/invitation',
             [
@@ -60,7 +56,7 @@ class InvitationsController extends MainController
     {
         $invitation_email = Request::getPost('email');
 
-        $redirect = getUrlByName('user.invitations', ['login' => $this->uid['user_login']]);
+        $redirect = getUrlByName('invitations');
 
         Validation::checkEmail($invitation_email, $redirect);
 

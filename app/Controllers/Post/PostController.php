@@ -5,10 +5,8 @@ namespace App\Controllers\Post;
 use Hleb\Scheme\App\Controllers\MainController;
 use Hleb\Constructor\Handlers\Request;
 use App\Middleware\Before\UserData;
-use App\Models\User\UserModel;
-use App\Models\{PostModel, FeedModel, AnswerModel, CommentModel, SubscriptionModel};
-use Content, Translate, Config;
-
+use App\Models\{PostModel, AnswerModel, CommentModel, SubscriptionModel};
+use Content, Config;
 
 class PostController extends MainController
 {
@@ -30,7 +28,7 @@ class PostController extends MainController
         // Проверим (id, slug поста)
         $post = PostModel::getPost($post_id, 'id', $this->uid);
         pageError404($post);
-        
+
         if ($slug != $post['post_slug']) {
             redirect(getUrlByName('post', ['id' => $post['post_id'], 'slug' => $post['post_slug']]));
         }
@@ -156,51 +154,6 @@ class PostController extends MainController
                     'last_user'     => PostModel::getPostLastUser($post_id),
                     'sheet'         => 'article',
                     'type'          => 'post',
-                ]
-            ]
-        );
-    }
-
-    // Посты участника
-    public function posts($sheet, $type)
-    {
-        $page   = Request::getInt('page');
-        $page   = $page == 0 ? 1 : $page;
-
-        $login  = Request::get('login');
-        $user   = UserModel::getUser($login, 'slug');
-        pageError404($user);
-
-        $posts      = FeedModel::feed($page, $this->limit, $this->uid, $sheet, $user['user_id']);
-        $pagesCount = FeedModel::feedCount($this->uid, $sheet, $user['user_id']);
-
-        $result = [];
-        foreach ($posts as $ind => $row) {
-            $text                           = explode("\n", $row['post_content']);
-            $row['post_content_preview']    = Content::text($text[0], 'line');
-            $row['post_date']               = lang_date($row['post_date']);
-            $result[$ind]                   = $row;
-        }
-
-        $m = [
-            'og'         => true,
-            'twitter'    => true,
-            'imgurl'     => '/uploads/users/avatars/' . $user['user_avatar'],
-            'url'        => getUrlByName('posts.user', ['login' => $login]),
-        ];
-
-        return agRender(
-            '/post/post-user',
-            [
-                'meta'  => meta($m, Translate::get('posts') . ' ' . $login, Translate::get('participant posts') . ' ' . $login),
-                'uid'   => $this->uid,
-                'data'  => [
-                    'pagesCount'    => ceil($pagesCount / $this->limit),
-                    'pNum'          => $page,
-                    'sheet'         => 'user-post',
-                    'type'          => 'posts.user',
-                    'posts'         => $result,
-                    'user_login'    => $user['user_login'],
                 ]
             ]
         );

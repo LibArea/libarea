@@ -49,7 +49,7 @@ return [
         ], [
             'auth'  => true,
             'tl'    => 0,
-            'url'   => getUrlByName('user.favorites', ['login' => $account['user_login'] ?? 'none']),
+            'url'   => getUrlByName('favorites'),
             'title' => Translate::get('favorites'),
             'icon'  => 'bi bi-bookmark',
             'id'    => 'favorites',
@@ -143,37 +143,37 @@ return [
     // Правое выпадающее меню в шапке сайта
     'user' => [
         [
-            'url'   => getUrlByName('user', ['login' => $account['user_login'] ?? 'none']),
+            'url'   => getUrlByName('profile', ['login' => $account['user_login'] ?? 'none']),
             'title'  => Translate::get('profile'),
             'icon'  => 'bi bi-person',
             'id'    => '',
         ], [
-            'url'   => getUrlByName('setting', ['login' => $account['user_login'] ?? 'none']),
+            'url'   => getUrlByName('setting'),
             'title'  => Translate::get('settings'),
             'icon'  => 'bi bi-gear',
             'id'    => '',
         ], [
-            'url'   => getUrlByName('user.drafts', ['login' => $account['user_login'] ?? 'none']),
+            'url'   => getUrlByName('drafts'),
             'title'  => Translate::get('drafts'),
             'icon'  => 'bi bi-pencil-square',
             'id'    => '',
         ], [
-            'url'   => getUrlByName('user.notifications', ['login' => $account['user_login'] ?? 'none']),
+            'url'   => getUrlByName('notifications'),
             'title'  => Translate::get('notifications'),
             'icon'  => 'bi bi-app-indicator',
             'id'  => '',
         ], [
-            'url'   => getUrlByName('user.messages', ['login' => $account['user_login'] ?? 'none']),
+            'url'   => getUrlByName('messages'),
             'title'  => Translate::get('messages'),
             'icon'  => 'bi bi-envelope',
             'id'    => '',
         ], [
-            'url'   => getUrlByName('user.favorites', ['login' => $account['user_login'] ?? 'none']),
+            'url'   => getUrlByName('favorites'),
             'title'  => Translate::get('favorites'),
             'icon'  => 'bi bi-bookmark',
             'id'    => '',
         ], [
-            'url'   => getUrlByName('user.invitations', ['login' => $account['user_login'] ?? 'none']),
+            'url'   => getUrlByName('invitations'),
             'title'  => Translate::get('invites'),
             'icon'  => 'bi bi-person-plus',
             'id'    => '',

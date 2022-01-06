@@ -12,7 +12,7 @@
       <div class="mb20">
         <?= user_avatar_img($data['user']['user_avatar'], 'small', $data['user']['user_login'], 'mr5 ml5 ava'); ?>
         <span class="mr5 ml5">
-          <a title="<?= Translate::get('profile'); ?>" href="<?= getUrlByName('user', ['login' => $uid['user_login']]); ?>">
+          <a title="<?= Translate::get('profile'); ?>" href="<?= getUrlByName('profile', ['login' => $uid['user_login']]); ?>">
             <?= $data['user']['user_login']; ?>
           </a>
         </span>
