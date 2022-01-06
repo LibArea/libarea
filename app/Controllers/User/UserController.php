@@ -105,7 +105,8 @@ class UserController extends MainController
                 'data'  => [
                     'user_created_at'   => lang_date($user['user_created_at']),
                     'count'             => UserModel::contentCount($user['user_id']),
-                    'topics'            => FacetModel::getFacetsAll(1, 10, $user['user_id'], 'my'),
+                    'topics'            => FacetModel::getFacetsAll(1, 10, $user['user_id'], 'topics.my'),
+                    'blogs'             => FacetModel::getOwnerFacet($user['user_id'], 'blog'),
                     'badges'            => BadgeModel::getBadgeUserAll($user['user_id']),
                     'user'              => $user,
                     'isBan'             => $isBan,

@@ -145,13 +145,44 @@ class FacetModel extends MainModel
                     facet_post_related,
                     facet_focus_count,
                     facet_count,
-                    facet_type,
                     facet_is_web,
                     facet_is_soft,
                     facet_is_deleted
                         FROM facets WHERE $sort";
 
         return DB::run($sql, ['params' => $params])->fetch(PDO::FETCH_ASSOC);
+    }
+
+    // Facet owner 
+    // Собственник фасета
+    public static function getOwnerFacet($user_id, $type)
+    {
+        $sql = "SELECT 
+                    facet_id,
+                    facet_title,
+                    facet_description,
+                    facet_short_description,
+                    facet_type,
+                    facet_info,
+                    facet_slug,
+                    facet_img,
+                    facet_cover_art,
+                    facet_add_date,
+                    facet_seo_title,
+                    facet_merged_id,
+                    facet_top_level,
+                    facet_user_id,
+                    facet_tl,
+                    facet_post_related,
+                    facet_focus_count,
+                    facet_count,
+                    facet_is_web,
+                    facet_is_soft,
+                    facet_is_deleted
+                        FROM facets 
+                            WHERE facet_type = :type AND facet_user_id = :user_id AND facet_is_deleted = 0";
+
+        return DB::run($sql, ['user_id' => $user_id, 'type' => $type])->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function addPostFacets($rows, $post_id)

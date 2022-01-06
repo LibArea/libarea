@@ -30,7 +30,7 @@ class Content
             $url = "https://www.youtube.com/embed/" . basename($id);
             $bodyvideo =
                 "<div class='video'>" .
-                "<object class='video-object' data='$url'></object>" .
+                "<object class='video-object mb-video-object' data='$url'></object>" .
                 "</div>";
 
             return str_replace($matches[0], $bodyvideo, $content);

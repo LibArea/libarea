@@ -1,13 +1,12 @@
 <?php
-
 $user = $data['user'];
 
 $css = 'w110 h110 mb-w100 mb-h100 ml15 z-10 -mt80 br-rd5';
 if ($user['user_cover_art'] != 'cover_art.jpeg') {
   $css = 'w160 h160 mb-w100 mb-h100 ml15 z-10 -mt80 br-rd5';
 }
-
 ?>
+
 <div class="col-span-12 justify-between">
   <div>
     <?php if ($user['user_cover_art'] != 'cover_art.jpeg') { ?>
@@ -17,7 +16,7 @@ if ($user['user_cover_art'] != 'cover_art.jpeg') {
     <?php } ?>
     <div class="flex">
       <div class="z-10 mb-absolute">
-      <?= user_avatar_img($user['user_avatar'], 'max', $user['user_login'], $css); ?>
+        <?= user_avatar_img($user['user_avatar'], 'max', $user['user_login'], $css); ?>
       </div>
       <h1 class="text-2xl5 font-normal mb-block mb20 ml20 mb-col-12 flex justify-between">
         <?= $user['user_login']; ?>
@@ -111,6 +110,36 @@ if ($user['user_cover_art'] != 'cover_art.jpeg') {
       <sup class="date">TL<?= $user['user_trust_level']; ?></sup>
     </span>
   </div>
+
+  <?php if ($data['blogs']) { ?>
+    <h2 class="mb5 uppercase gray pt15 font-normal text-sm">
+      <?= Translate::get('created by'); ?>
+    </h2>
+    <?php foreach ($data['blogs'] as $blog) { ?>
+      <div class="w-100 mb20 mb-w-100 flex flex-row">
+        <a title="<?= $blog['facet_title']; ?>" class="mr10" href="<?= getUrlByName($blog['facet_type'], ['slug' => $blog['facet_slug']]); ?>">
+          <?= facet_logo_img($blog['facet_img'], 'max', $blog['facet_title'], 'w64 br-box-gray br-rd-50'); ?>
+        </a>
+        <div class="ml5 w-100">
+          <a class="black" title="<?= $blog['facet_title']; ?>" href="<?= getUrlByName($blog['facet_type'], ['slug' => $blog['facet_slug']]); ?>">
+            <?= $blog['facet_title']; ?>
+          </a>
+          <div class="text-sm pr15 mb-pr-0 gray-400">
+            <?= $blog['facet_short_description']; ?>
+            <div class="flex mt5 text-sm">
+              <i class="bi bi-journal mr5"></i>
+              <?= $blog['facet_count']; ?>
+              <?php if ($blog['facet_focus_count'] > 0) { ?>
+                <i class="bi bi-people ml15 mr5"></i>
+                <?= $blog['facet_focus_count']; ?>
+              <?php } ?>
+            </div>
+          </div>
+        </div>
+      </div>
+    <?php } ?>
+  <?php } ?>
+
   <h2 class="mb5 uppercase gray pt15 font-normal text-sm">
     <?= Translate::get('contacts'); ?>
   </h2>

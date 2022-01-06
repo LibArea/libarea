@@ -341,8 +341,11 @@ nav > ul > li > a {
 }
 
 /* Tippy.js - theme: light, */
-.dark .tippy-box[data-theme~="light"] { background-color: $black; }
-.dark .tippy-box[data-theme~="light"] { color: $neutral-900; }
+.dark .tippy-box[data-theme~="light"] {
+  background-color: $black;
+  color: $neutral-900;
+}
+
 .dark .tippy-box[data-theme~="light"][data-placement^="top"] > .tippy-arrow::before  { border-top-color: $black; }
 .dark .tippy-box[data-theme~="light"][data-placement^="bottom"] > .tippy-arrow::before,
 .dark .tippy-box[data-theme~="light"][data-placement^="top"] > .tippy-arrow::before { border-bottom-color: $black; }
